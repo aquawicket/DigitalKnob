@@ -205,6 +205,20 @@ void DKWindow::Minimize()
 	}
 }
 
+////////////////////////
+void DKWindow::Restore()
+{
+	if(DKClass::HasFunc("DKSDLWindow::Restore")){
+		DKClass::CallFunc("DKSDLWindow::Restore");
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::Restore")){
+		DKClass::CallFunc("DKOSGWindow::Restore");
+	}
+	else{
+		DKLog("DKWindow::Restore(): No function available \n", DKERROR);
+	}
+}
+
 /////////////////////////
 int DKWindow::GetMouseX()
 {

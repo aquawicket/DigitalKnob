@@ -3,9 +3,10 @@
 #include "DKWindow.h"
 
 
-//////////////////////
+///////////////////////
 void DKWindowJS::Init()
 {
+	DKCreate("DKWindowJS");
 	//DKLog("DKWindowJS::Init() \n", DKDEBUG);
 
 	DKDuktape::AttachFunction("DKWindow_GetX", DKWindowJS::GetX, 0);
@@ -20,6 +21,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize, 0);
+	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Minimize, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseY", DKWindowJS::GetMouseY, 0);
 }
@@ -113,6 +115,13 @@ int DKWindowJS::Windowed(duk_context* ctx)
 int DKWindowJS::Minimize(duk_context* ctx)
 {
 	DKWindow::Minimize();
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKWindowJS::Restore(duk_context* ctx)
+{
+	DKWindow::Restore();
 	return 1;
 }
 
