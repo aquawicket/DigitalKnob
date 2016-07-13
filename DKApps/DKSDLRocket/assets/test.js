@@ -1,5 +1,5 @@
 DKCreate("DKWidgetJS");
-DKCreate("DKWidget,test.html");
+DKCreate("test.html");
 
 ////////////////////
 function test_Init()
