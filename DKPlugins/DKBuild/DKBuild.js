@@ -44,7 +44,7 @@ function DKBuild_Init()
 		CMAKE = "/usr/bin/cmake";
 	}
 
-	if(DKAvailable("DKWidgetJS")){
+	if(DKAvailable("DKWidget")){
 		DKCreate("DKBuild/DKBuildGUI.js");
 	}
 	else{

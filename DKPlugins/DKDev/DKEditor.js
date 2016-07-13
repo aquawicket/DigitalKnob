@@ -822,7 +822,6 @@ function DKEditor_OpenImage(path)
 /////////////////////////////////
 function DKEditor_OpenModel(path)
 {
-	//DKCreate("DKOSGModelJS");
 	DKCreate("DKOSGManipulator,,DKOSGWindow");
 	DKCreate("DKOSGModel,,DKWindow,"+path);
 }
@@ -835,11 +834,9 @@ function DKEditor_OpenAudio(path)
 	DKCreate("DKAudio");
 	DKAudio_Play(path);
 	
-	//DKCreate("DKOSGAudioJS");
 	//DKCreate("DKOSGAudio,"+file+",DKOSGWindow,"+path);
 	//DKOSGAudio_Play("DKOSGAudio,"+file);
 	
-	//DKCreate("DKSDLAudioJS");
 	//DKCreate("DKSDLAudio,"+file+",DKSDLWindow,"+path);
 	//DKSDLAudio_Play("DKSDLAudio,"+file);
 }

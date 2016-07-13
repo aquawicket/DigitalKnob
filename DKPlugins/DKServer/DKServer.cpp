@@ -6,7 +6,8 @@
 /////////////////////
 void DKServer::Init()
 {
-	DKLog("DKServer::Init() \n", DKDEBUG);
+	//DKLog("DKServer::Init() \n", DKDEBUG);
+	//DKCreate("DKServerJS");
 	thread = new DKThread();
 
     s = new server(thread->io_service, 8087);
