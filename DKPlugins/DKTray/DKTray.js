@@ -2,7 +2,6 @@
 function DKTray_Init()
 {
 	DKCreate("DKTray");
-	DKCreate("DKTrayJS");
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
 	DKAddEvent("DKTray", "Restore", DKTray_OnEvent);

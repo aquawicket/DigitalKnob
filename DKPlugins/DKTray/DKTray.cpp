@@ -11,7 +11,7 @@ DKString DKTray::icon;
 ///////////////////
 void DKTray::Init()
 {
-
+	DKCreate("DKTrayJS");
 #ifdef WIN32
 	HWND hwnd = NULL;
 
