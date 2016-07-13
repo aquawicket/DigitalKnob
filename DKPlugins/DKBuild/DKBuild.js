@@ -15,7 +15,7 @@ var APP_LIST = [];
 function DKBuild_Init()
 {
 	//DKLog("DKBuild_Init() \n");
-	
+	DKCreate("DKThreadPool");
 	DKCreate("DKCurl");
 
 	//DKLog(DK_GetOS()+"\n");
