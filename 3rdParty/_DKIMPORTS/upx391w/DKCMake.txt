@@ -8,3 +8,5 @@ IF(NOT EXISTS ${3RDPARTY}/upx391w)
 	DKDOWNLOAD(http://digitalknob.com/Download/Tools/upx391w.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/upx391w.zip ${3RDPARTY})
 ENDIF()
+
+DKSET(UPX ${3RDPARTY}/upx391w)
