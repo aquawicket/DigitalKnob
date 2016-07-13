@@ -38,7 +38,6 @@ function DKMenuRightWeb_Update()
 /////////////////////////////////
 function DKMenuRightWeb_Connect()
 {
-	DKCreate("DKCurlJS");
 	var url = DKWidget_GetValue("ServerBox") + DKWidget_GetValue("PathBox");
 	if(DKCurl_FtpConnect(url, DKWidget_GetValue("NameBox"), DKWidget_GetValue("PassBox"), "81")){
 		DKLog("FTP: successfully connected. \n");
@@ -61,7 +60,6 @@ function DKMenuRightWeb_Connect()
 function DKMenuRightWeb_Upload(folder)
 {
 	DKLog("Uploading Web App ..... \n");
-	DKCreate("DKCurlJS");
 	var datapath = DKAssets_GetDataPath()+"/";
 	var files = DKFile_DirectoryContents(datapath+folder);
 	var arry = files.split(",");

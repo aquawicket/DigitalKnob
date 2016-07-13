@@ -56,7 +56,6 @@ function DKBuild_Init()
 function DKBuild_InstallSvn()
 {
 	DKLog("Installing Svn \n");
-	DKCreate("DKCurlJS");
 	var datapath = DKAssets_GetDataPath();
 	
 	if(DK_GetOS() == "WIN32"){
@@ -97,7 +96,6 @@ function DKBuild_ValidateSvn()
 function DKBuild_InstallCmake()
 {
 	DKLog("Installing CMake \n");
-	DKCreate("DKCurlJS");
 	var datapath = DKAssets_GetDataPath();
 	
 	if(DK_GetOS() == "WIN32"){
@@ -138,7 +136,6 @@ function DKBuild_ValidateCmake()
 function DKBuild_InstallVC2015()
 {
 	DKLog("Installing Visual Studio 2015 \n");
-	DKCreate("DKCurlJS");
 	var datapath = DKAssets_GetDataPath();
 	
 	if(DK_GetOS() == "WIN32"){

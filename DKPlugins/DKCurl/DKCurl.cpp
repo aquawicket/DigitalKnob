@@ -3,15 +3,12 @@
 #include "DKFile.h"
 #include <sys/stat.h>
 
-//CURL* DKCurl::curl;
-//DKString DKCurl::ftpServer;
-//DKString DKCurl::ftpName;
-//DKString DKCurl::ftpPass;
-//DKString DKCurl::ftpPort;
 
 ///////////////////
 void DKCurl::Init()
 {
+	DKCreate("DKCurlJS");
+	
 	//Curl inits are NOT thread safe. we must init within the given thread
 	/*
 	curl_global_init(CURL_GLOBAL_ALL);
