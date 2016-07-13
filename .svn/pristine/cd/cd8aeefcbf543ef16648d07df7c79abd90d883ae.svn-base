@@ -1,5 +1,0 @@
-DKDEPEND(DKArchive)
-DKDEPEND(DKDuktape)
-
-DKPLUGIN(DKAssets)
-DKASSETS(DKAssets)

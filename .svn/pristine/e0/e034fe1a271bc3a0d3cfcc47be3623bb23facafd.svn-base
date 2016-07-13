@@ -1,2 +1,0 @@
-*** The DigitalKnob Plugins ***
- //todo

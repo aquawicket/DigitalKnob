@@ -1,7 +1,0 @@
-<div id="DKFileDialog.html" style="position:absolute;width:400rem;height:330rem;">
-	<img id="DKFileDialogUp" src="DKFile/up.png" style="position:absolute;top:2rem;left:7rem;width:19rem;"></img>
-	<input id="DKFileDialogPath" type="text" style="position:absolute;top:2rem;left:30rem;width:361rem;height:18rem;"></input>
-	<div id="DKFileDialogMenu" style="position:absolute;top:22rem;left:3rem;width:150rem;height:250rem;overflow-x:auto;overflow-y:scroll;border-width:1rem;background-color:rgb(255,255,255);"></div>
-	<div id="DKFileDialogMenu2" style="position:absolute;top:22rem;left:160rem;width:230rem;height:250rem;overflow-x:auto;overflow-y:scroll;border-width:1rem;background-color:rgb(255,255,255);"></div>
-	<button id="DKFileDialogOK" style="position:absolute;right:20px;bottom:30px;width:50rem;">OK</button>
-</div>

@@ -1,6 +1,0 @@
-DKDEPEND(libRocket-master)
-DKDEPEND(DKFile)
-DKDEPEND(DKWindow)
-
-DKPLUGIN(DKRocket)
-DKASSETS(DKRocket)

@@ -1,9 +1,0 @@
-<div id="DKLogin.html" style="position:absolute;width:260rem;height:200rem;">
-	<img id="DKLoginFacebook" src="DKLogin/facebook.png" style="position:absolute;top:30rem;left:70rem;"></img>
-	<div id="DKLogin_name" style="position:absolute;top:58rem;left:6rem;width:60rem;">username</div>
-	<input type="text" id="DKLoginUsername" style="position:absolute;top:57rem;left:69rem;width:150rem;height:20rem;"></input>
-	<div id="DKLogin_password" style="position:absolute;top:83rem;left:6rem;width:60rem;">password</div>
-	<input type="text" id="DKLoginPassword" style="position:absolute;top:80rem;left:70rem;width:150rem;height:20rem;"></input>
-	<button id="DKLoginButton" style="position:absolute;top:112rem;left:145rem;width:60rem;height:24rem;">Login</button>
-	<div id="DKLoginStatus" style="position:absolute;top:150rem;left:50rem;width:200rem;">Login Failed.</div>
-</div>

@@ -1,6 +1,0 @@
-<div id="DKMidiDialog.html" style="position:absolute;width:420rem;height:200rem;">
-	<div id="DKMidiDialogInputs" style="position:absolute;top:39rem;left:4rem;width:200rem;height:150rem;overflow-x:auto;overflow-y:scroll;border-width:1rem;background-color:rgb(255,255,255);">
-	</div>
-	<div id="DKMidiDialogOutputs" style="position:absolute;top:39rem;left:212rem;width:200rem;height:150rem;overflow-x:auto;overflow-y:scroll;border-width:1rem;background-color:rgb(255,255,255);">
-	</div>
-</div>

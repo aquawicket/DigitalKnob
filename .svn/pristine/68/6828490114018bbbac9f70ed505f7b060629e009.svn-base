@@ -1,8 +1,0 @@
-IF(NOT APPLE)
-	DKDEPEND(libarchive-master)
-ELSE()
-	DKDEPEND(libarchive-2.8.5)
-ENDIF()
-
-LIST(APPEND WIN_LIBS AdvAPI32.lib)
-DKPLUGIN(DKArchive)

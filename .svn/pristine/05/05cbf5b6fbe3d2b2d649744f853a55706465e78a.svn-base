@@ -1,6 +1,0 @@
-<div nosave="1" id="DKConsole.html" style="z-index:1;position:absolute;width:100%;bottom:38rem;height:21rem;color:rgb(255,255,255);">
-	<input type="text" id="DKConsoleInput" style="position:absolute;width:100%;height:100%;border-width:1rem;border-color:rgb(128,128,128);border-style:solid;background-color:rgb(0,0,0);color:rgb(255,255,255);">
-	</input>
-	<img id="DKConsoleClose" src="DKFrame/close.png" style="position:absolute;bottom:0rem;right:1rem;width:20rem;">
-	</img>
-</div>
