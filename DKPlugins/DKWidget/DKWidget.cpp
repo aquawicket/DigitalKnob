@@ -11,6 +11,7 @@ DKRocket* DKWidget::dkRocket;
 void DKWidget::Init()
 {
 	DKCreate("DKWidgetJS");
+	DKCreate("DKWidgetMySqlJS");
 	root = NULL;
 
 	//link objects
