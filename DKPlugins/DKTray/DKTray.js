@@ -5,7 +5,6 @@ function DKTray_Init()
 	DKCreate("DKTrayJS");
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
-	DKAddEvent("DKTray", "click", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Restore", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Minimize", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Exit", DKTray_OnEvent);
@@ -18,17 +17,14 @@ function DKTray_Init()
 function DKTray_OnEvent(event)
 {
 	DKLog("DKTray_OnEvent("+event+") \n");
-	if(DK_Type(event, "click")){
-		DKTray_ToggleIcon();
-	}
-}
-
-////////////////////////////
-function DKTray_ToggleIcon()
-{
-	DKLog("DKTray_ToggleIcon() \n", DKDEBUG);
-	var icon = DKTray_GetIcon();
-	var file = DKFile_GetFilename(icon);
-	DKLog(file+"\n");
 	
+	if(DK_Type(event, "Restore")){
+		DKLog("DKTray_Restore \n", DKDEBUG);
+	}
+	if(DK_Type(event, "Minimize")){
+		DKLog("DKTray_Minimize \n", DKDEBUG);
+	}
+	if(DK_Type(event, "Exit")){
+		DKLog("DKTray_Exit \n", DKDEBUG);	
+	}
 }
