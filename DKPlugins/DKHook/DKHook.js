@@ -1,24 +1,25 @@
-///////////////////////
-function DKHooks_Init()
-{
-	DKCreate("DKHook/DKHooks.html");
-	DKAddEvent("getvalue", "click", DKHooks_OnEvent);
-	DKAddEvent("setvalue", "click", DKHooks_OnEvent);
-	DKAddEvent("doclick", "click", DKHooks_OnEvent);
-	DKAddEvent("Prev", "click", DKHooks_OnEvent);
-	DKAddEvent("Next", "click", DKHooks_OnEvent);
-	DKAddEvent("Highlight", "click", DKHooks_OnEvent);
-	DKHooks_UpdateWindowList();
-}
-
 //////////////////////
-function DKHooks_End()
+function DKHook_Init()
 {
-	DKClose("DKHooks.html");
+	DKCreate("DKHook");
+	DKCreate("DKHook/DKHook.html");
+	DKAddEvent("getvalue", "click", DKHook_OnEvent);
+	DKAddEvent("setvalue", "click", DKHook_OnEvent);
+	DKAddEvent("doclick", "click", DKHook_OnEvent);
+	DKAddEvent("Prev", "click", DKHook_OnEvent);
+	DKAddEvent("Next", "click", DKHook_OnEvent);
+	DKAddEvent("Highlight", "click", DKHook_OnEvent);
+	DKHook_UpdateWindowList();
 }
 
-///////////////////////////////
-function DKHooks_OnEvent(event)
+/////////////////////
+function DKHook_End()
+{
+	DKClose("DKHook/DKHook.html");
+}
+
+//////////////////////////////
+function DKHook_OnEvent(event)
 {
 	if(DK_Id(event, "getvalue")){
 		var value = DKHook_GetValue();
@@ -47,8 +48,8 @@ function DKHooks_OnEvent(event)
 	DKWidget_SetValue("currentHandle", DKHook_CurrentHandle());
 }
 
-///////////////////////////////////
-function DKHooks_UpdateWindowList()
+//////////////////////////////////
+function DKHook_UpdateWindowList()
 {
 	var str = DKHook_GetWindows();
 	if(!str){ return; }
@@ -60,7 +61,7 @@ function DKHooks_UpdateWindowList()
 		var element = DKWidget_CreateElement("windows", "option", "wintitle");
 		DKWidget_SetAttribute(element, "value", arry[i]);
 		DKWidget_SetProperty(element, "white-space", "nowrap");
-		DKAddEvent(element, "click", DKHooks_OnEvent);
+		DKAddEvent(element, "click", DKHook_OnEvent);
 		DKWidget_SetInnerHtml(element,arry[i]);
 	}
 }
