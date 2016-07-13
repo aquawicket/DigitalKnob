@@ -20,6 +20,19 @@ DKDEPEND(DKWindow)
 DKDEPEND(upx391w)
 
 DKPLUGIN(DKCef)
+DKASSETS(DKCef)
+
+
+##TODO: double check this
+DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
+DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef TRUE)
+DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)
+FILE(REMOVE ${DKPLUGINS}/DKCef/cef_sandbox.lib)
+FILE(REMOVE ${DKPLUGINS}/DKCef/libcef.lib)
+FILE(REMOVE ${DKPLUGINS}/DKCef/wow_helper.exe)
+LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:libcef.dll)
+LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:libcef.dll)
+
 
 IF(WIN_32)
 	DKCOPY(${DKPLUGINS}/DKCef/win32/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)

@@ -24,18 +24,6 @@ WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll/Release/libcef_dll_wrapper.lib)
 #WIN32_DEBUG_LIB(${CEF}/Debug/cef_sandbox.lib)
 #WIN32_RELEASE_LIB(${CEF}/Release/cef_sandbox.lib)
 
-##TODO: move this into DKPlugins/DKCef/DKCMake.txt
-IF(DKAPP)
-	DKCOPY(${CEF}/Release/ ${DKPROJECT}/assets/DKCef TRUE)
-	DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef TRUE)
-	DKCOPY(${CEF}/Resources/ ${DKPROJECT}/assets/DKCef TRUE)
-	FILE(REMOVE ${DKPROJECT}/assets/DKCef/cef_sandbox.lib)
-	FILE(REMOVE ${DKPROJECT}/assets/DKCef/libcef.lib)
-	FILE(REMOVE ${DKPROJECT}/assets/DKCef/wow_helper.exe)
-	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:libcef.dll)
-	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:libcef.dll)
-ENDIF()
-
 
 ### COMPILE ###
 DKSETPATH(${CEF}/${OS})
