@@ -7,7 +7,6 @@ var parent = "";
 function DKBrowser_Init()
 {
 	//DKCreate("DKCef");
-	DKCreate("DKCefJS");
 	DKCreate("DKBrowser/DKBrowser.html");
 
 	DKAddEvent("GLOBAL", "keydown", DKBrowser_OnEvent);

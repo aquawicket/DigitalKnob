@@ -17,6 +17,7 @@ CefClient* DKCef::cefHandler = NULL;
 //////////////////
 void DKCef::Init()
 {
+	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+") \n", DKDEBUG);
 	if(data.size() > 4){
