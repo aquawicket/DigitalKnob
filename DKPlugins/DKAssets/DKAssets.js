@@ -1,7 +1,7 @@
 //BROWSER
 
 var href = document.location.href;
-href = href.replace("/index.html","");
+href = href.replace("index.html","");
 local_assets = href;
 
 var hostname = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
