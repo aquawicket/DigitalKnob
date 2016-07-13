@@ -114,10 +114,10 @@ function DKDev_DevModeOn()
 {
 	DKLog("DKDev_DevModeOn() \n", DKDEBUG);
 	DKWidget_Show("DKDev.html");
-	//DKCreate("DKJavascript,DKTriggers/DKTriggers.js");
-	DKCreate("DKJavascript,DKDev/DKMenuRight.js");
+	//DKCreate("DKTriggers/DKTriggers.js");
+	DKCreate("DKDev/DKMenuRight.js");
 	DKWidget_Show("DKMenuRight.html");
-	//DKCreate("DKJavascript,DKDev/DKAutomate.js");
+	//DKCreate("DKDev/DKAutomate.js");
 	DKCreate("DKOSGStats");
 }
 
@@ -139,7 +139,7 @@ function DKDev_EditModeOn()
 {
 	DKLog("DKDev_EditModeOn() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/redbutton.png");
-	DKCreate("DKJavascript,DKDev/DKEditor.js");
+	DKCreate("DKDev/DKEditor.js");
 	DKEditor_On();
 	DKSendEvent("GLOBAL", "ToggleTriggers", "OFF");
 }
@@ -149,7 +149,7 @@ function DKDev_EditModeOff()
 {
 	DKLog("DKDev_EditModeOff() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/greenbutton.png");
-	DKCreate("DKJavascript,DKDev/DKEditor.js");
+	DKCreate("DKDev/DKEditor.js");
 	DKEditor_Off();
 	DKSendEvent("GLOBAL", "ToggleTriggers", "ON");
 }

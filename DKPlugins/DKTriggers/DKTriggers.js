@@ -320,7 +320,7 @@ function DKTrigger_FireTrigger(trigger)
 			continue;
 		}
 		if(command == "Message"){
-			DKCreate("DKJavascript,DKMessage/DKMessage.js");
+			DKCreate("DKMessage/DKMessage.js");
 			DKMessageBox("", "ShowMessage", var1);
 			continue;
 		}

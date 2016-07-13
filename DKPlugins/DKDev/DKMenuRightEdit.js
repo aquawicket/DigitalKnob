@@ -125,12 +125,12 @@ function DKMenuRightEdit_OnEvent(event)
 		DKMenuRightEdit_SetOverflow("auto");
 	}
 	if(DK_Id(event,"DKBGColor")){
-		DKCreate("DKJavascript,DKColorPicker/DKColorPicker.js");
+		DKCreate("DKColorPicker/DKColorPicker.js");
 		DKWidget_Show("DKColorPicker.html");
 		DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,background_color");
 	}
 	if(DK_Id(event,"DKFGColor")){
-		DKCreate("DKJavascript,DKColorPicker/DKColorPicker.js");
+		DKCreate("DKColorPicker/DKColorPicker.js");
 		DKWidget_Show("DKColorPicker.html");
 		DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,foreground_color");
 	}

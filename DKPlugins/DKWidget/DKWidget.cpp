@@ -65,7 +65,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	GetElements(id, elements);
 	for(unsigned int i = elements.size(); i-- > 0;){
 		RemoveAllEventListeners(elements[i]);
-		if(has(elements[i],".html")){ DKClose("DKWidget,"+elements[i]); }
+		if(has(elements[i],".html")){ DKClose(elements[i]); }
 	}
 
 	if(DKApp::active){
@@ -650,7 +650,7 @@ bool DKWidget::RemoveElement(const DKString& id)
 	elements.push_back(id);
 	for(unsigned int i = elements.size(); i-- > 0;){
 		if(has(elements[i],".html")){
-			DKClose("DKWidget,"+elements[i]);
+			DKClose(elements[i]);
 			continue;
 		}
 		RemoveAllEventListeners(elements[i]);

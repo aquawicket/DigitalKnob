@@ -31,8 +31,8 @@ function DKConsole_OnEvent(event)
 	*/
 	
 	if(DK_Id(event, "DKConsoleClose")){
-		DKClose("DKWidget,DKConsole/DKConsole.html");
-		DKClose("DKJavascript,DKConsole/DKConsole.js");
+		DKClose("DKConsole/DKConsole.html");
+		DKClose("DKConsole/DKConsole.js");
 	}
 	
 	if(DK_Type(event, "DKNotify")){

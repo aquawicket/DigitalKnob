@@ -322,7 +322,7 @@ function DKEditor_SelectElement(element)
 	}
 
 	//DKLog("stored_element: "+stored_element+"\n", DKDEBUG);
-	DKCreate("DKJavascript,DKDev/DKMenuRightEdit.js");
+	DKCreate("DKDev/DKMenuRightEdit.js");
 	DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
 	DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");	
 }
@@ -487,7 +487,7 @@ function DKEditor_NewPage()
 	
 	var id = DKWidget_GetAvailableId("NewFrame.html");
 	
-	DKCreate("DKWidget,"+id+","+stored_element);
+	DKCreate(id+","+stored_element);
 	DKEditor_AddDragHandles(id);
 	DKEditor_SelectElement(id);
 	return true;
@@ -756,7 +756,7 @@ function DKEditor_OpenHtml(path)
 {
 	//DKLog("DKEditor_OpenHtml("+path+") \n", DKDEBUG);
 	var id = DKFile_GetFilename(path);
-	DKCreate("DKWidget,"+path);
+	DKCreate(path);
 	DKEditor_AddDragHandles(id);
 	DKEditor_SelectElement(id);
 	return;
@@ -802,14 +802,14 @@ function DKEditor_OpenHtml(path)
 function DKEditor_OpenJS(path)
 {
 	var id = DKFile_GetFilename(path);
-	DKCreate("DKJavascript,"+path);
+	DKCreate(path);
 }
 
 ////////////////////////////////
 function DKEditor_OpenText(path)
 {
 	DKWidget_Toggle("DKNotepad.html");
-	DKCreate("DKJavascript,DKNotepad/DKNotepad.js");
+	DKCreate("DKNotepad/DKNotepad.js");
 	DKNotepad_LoadFile(path);
 }
 

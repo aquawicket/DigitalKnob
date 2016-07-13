@@ -126,7 +126,7 @@ bool DKRocket::LoadGui(const DKString& file)
 	LoadFonts();
 #endif
 	DKLog("Loading GUI...\n", DKINFO);
-	//DKCreate("DKJavascript, DKLoading.js");
+	//DKCreate("DKLoading.js");
 	return true;
 }
 

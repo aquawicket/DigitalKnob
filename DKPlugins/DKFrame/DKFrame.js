@@ -262,10 +262,10 @@ function DKFrame_CloseButton(id)
 			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+" \n");
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
-			DKClose("DKWidget,"+file);
+			DKClose(file);
 			var jsfile = file.replace(".html", ".js");
 			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+" \n");
-			DKClose("DKJavascript,"+jsfile);
+			DKClose(jsfile);
 		}
 	}
 	
@@ -279,10 +279,10 @@ function DKFrame_Close(id)
 	var frame = DKWidget_GetParent(id);
 	//DKLog("DKFrame_Close("+id+"): frame="+frame+" \n");
 	var file = DKWidget_GetFile(id);
-	DKClose("DKWidget,"+file);
+	DKClose(file);
 	var jsfile = file.replace(".html", ".js");
 	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+" \n");
-	DKClose("DKJavascript,"+jsfile);
+	DKClose(jsfile);
 	DKWidget_RemoveElement(frame);
 }
 

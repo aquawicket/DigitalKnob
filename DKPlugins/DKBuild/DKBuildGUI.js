@@ -103,7 +103,7 @@ function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
 	if(DKWidget_GetValue("AppList") == "NEW APP"){
-		DKCreate("DKJavascript,DKMessage/DKMessage.js");
+		DKCreate("DKMessage/DKMessage.js");
 		DKSendEvent("DKMessage.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
 		return;
 	}

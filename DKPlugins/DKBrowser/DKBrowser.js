@@ -180,7 +180,7 @@ function DKBrowser_OnEvent(event)
 		}
 	}
 	if(DK_Id(event,"Settings")){
-		DKCreate("DKJavascript,DKBrowser/Settings.js");
+		DKCreate("DKBrowser/Settings.js");
 		DKFrame_Widget("Settings.html");
 	}
 }
@@ -268,8 +268,8 @@ function DKBrowser_CloseTab(num)
 {
 	if(DKCef_GetBrowsers() == 1){
 		DKFrame_Close("DKBrowser.html");
-		DKClose("DKWidget,DKBrowser/DKBrowser.html");
-		DKClose("DKJavascript,DKBrowser/DKBrowser.js");
+		DKClose("DKBrowser/DKBrowser.html");
+		DKClose("DKBrowser/DKBrowser.js");
 		//DK_Exit(); 
 		return;
 	}

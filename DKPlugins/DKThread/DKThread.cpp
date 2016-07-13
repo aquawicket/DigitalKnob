@@ -4,7 +4,7 @@
 /////////////////////////
 void DKThreadPool::Init()
 {
-	DKCreate("DKJavascript,DKThread/DKThreadPoolDlg.js");
+	DKCreate("DKThread/DKThreadPoolDlg.js");
 	active = true;//false;
 
 	dkThreadPool = new boost::threadpool::pool(1);

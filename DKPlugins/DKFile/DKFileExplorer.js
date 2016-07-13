@@ -31,7 +31,7 @@ function DKFileExplorer_End()
 function DKFileExplorer_OnEvent(event)
 {	
 	if(DK_Id(event, "DKFileExplorerClose")){
-		//DKClose("DKWidget,DKFileExplorer.html");
+		//DKClose("DKFileExplorer.html");
 		DKWidget_Hide("DKFileExplorer.html");
 		return;
 	}
