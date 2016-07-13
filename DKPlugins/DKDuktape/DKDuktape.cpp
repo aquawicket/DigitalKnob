@@ -116,7 +116,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
 	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
-		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKERROR);
+		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
 	}
 	else {
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
@@ -138,7 +138,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
 	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
-		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKERROR);
+		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
 	}
 	else {
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
