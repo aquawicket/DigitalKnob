@@ -404,7 +404,9 @@ function DKBuild_DoResults()
 		
 		//upx compress exe
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx391w/upx.exe")){
-			DKLog("DKBuild_DoResults(): UPX exists \n", DKDEBUG);
+			DKLog("DKBuild_DoResults(): UPX exists, compressing... \n", DKDEBUG);
+			DKLog("DK_Execute("+DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release"+APP+"2.exe) \n");
+			DK_Execute(DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release"+APP+"2.exe");
 		}
 		else{
 			DKLog("DKBuild_DoResults(): UPX does not exists \n", DKWARN);
