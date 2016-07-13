@@ -29,7 +29,6 @@ var trigger_events;
 //////////////////////////
 function DKTriggers_Init()
 {
-	DKCreate("DKAssetsJS");
 	current_trigger;
 	triggers = [];
 	Cause = makeStruct("trigger command var1 var2 var3");
@@ -365,7 +364,6 @@ function DKTrigger_FireTrigger(trigger)
 function DKTrigger_LoadTriggers(file)
 {
 	DKLog("DKTrigger_LoadTriggers("+file+") \n");
-	DKCreate("DKFileJS");
 	
 	var datapath = DKAssets_GetDataPath();
 	if(!DKFile_Exists(datapath+file)){

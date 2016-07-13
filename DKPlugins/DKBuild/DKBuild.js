@@ -16,8 +16,6 @@ function DKBuild_Init()
 {
 	//DKLog("DKBuild_Init() \n");
 	
-	DKCreate("DKFileJS");
-	DKCreate("DKAssetsJS");
 	DKCreate("DKCurl");
 
 	//DKLog(DK_GetOS()+"\n");

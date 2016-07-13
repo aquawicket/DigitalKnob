@@ -75,9 +75,9 @@ int main(int argc, char **argv)
 	DKCreate("DKAssets");
 	DKLog(GetOSInfo()+"\n", DKINFO);
 	DKLog(DKUtil::GetDate()+" "+DKUtil::GetTime()+"\n", DKINFO);
+	DKCreate("DKDuktape");
 	DKCreate("DKDebug");
 	DKApp dkapp;
-	DKCreate("DKDuktape");
 	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
 	dkapp.Loop();

@@ -2,8 +2,6 @@
 function DKMenuRightApp_Init()
 {
 	DKCreate("DKDev/DKMenuRightApp.html,DKMenuRight.html");
-	DKCreate("DKFileJS");
-	DKCreate("DKAssetsJS");
 	DKAddEvent("SaveUserFile", "click", DKMenuRightApp_OnEvent);
 	DKAddEvent("DKMenuRightApp.html", "Update", DKMenuRightApp_OnEvent);
 	

@@ -9,7 +9,6 @@ var rPath;
 function DKFileDialog_Init()
 {	
 	DKCreate("DKFile/DKFileDialog.html");
-	DKCreate("DKFileJS");
 	DKAddEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);

@@ -3,7 +3,6 @@ var browser = DK_GetBrowser();
 /////////////////////////
 function DKInput_Init()
 {
-	DKCreate("DKFileJS");
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");
 	DKCreate("DKInputTest/DKInput.html");

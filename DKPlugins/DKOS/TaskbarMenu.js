@@ -1,8 +1,6 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DKCreate("DKAssetsJS");
-	DKCreate("DKFileJS");
 	DKCreate("DKOS/TaskbarMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 	//DKAddEvent("GLOBAL", "OpenFile", TaskbarMenu_OnEvent);

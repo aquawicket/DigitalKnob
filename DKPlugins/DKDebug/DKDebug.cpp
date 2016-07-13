@@ -203,7 +203,8 @@ void handler(int signum)
 void DKDebug::Init()
 {
 	//DKLog("DKDebug::Init() \n", DKDEBUG);
-
+	DKCreate("DKDebugJS");
+	
 #ifdef WIN32
 	//Copy PDB file if it exists
 	DKString exename;

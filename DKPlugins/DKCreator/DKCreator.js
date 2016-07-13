@@ -4,7 +4,6 @@ DKCreate("DKFile/DKFile.js");
 /////////////////////////
 function DKCreator_Init()
 {
-	DKCreate("DKFileJS");
 	DKAddEvent("body", "mousedown", DKCreator_OnEvent);
 	DKAddEvent("logo", "click", DKCreator_OnEvent);
 	DKAddEvent("logo", "mouseover", DKCreator_OnEvent);

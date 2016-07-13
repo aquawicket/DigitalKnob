@@ -1,7 +1,6 @@
 //////////////////////////
 function DKDatabase_Init()
 {
-	DKCreate("DKAssetsJS");
 	DKCreate("DKMySqlJS");
 	DKCreate("DKWidgetMySqlJS");
 	DKCreate("DKMySql/DKMySql.js");

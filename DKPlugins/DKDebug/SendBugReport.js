@@ -2,9 +2,6 @@
 ////////////////////////////
 function SendBugReport_Init()
 {
-	DKCreate("DKAssetsJS");
-	DKCreate("DKFileJS");
-	DKCreate("DKDebugJS");
 	DKCreate("DKDebug/SendBugReport.html");
 	DKAddEvent("SendBugReport_Button", "click", SendBugReport_OnEvent);
 }

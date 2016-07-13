@@ -11,6 +11,8 @@
 /////////////////
 void DKJS::Init()
 {
+	DKCreate("DKFileJS");
+	DKCreate("DKAssetsJS");
 	//DKLog("DKJS::Init() \n", DKDEBUG);
 
 	DKString errors = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]");

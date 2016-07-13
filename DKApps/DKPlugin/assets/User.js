@@ -1,4 +1,3 @@
-DKCreate("DKAssetsJS");
 var datapath = DKAssets_GetDataPath();
 DKLog("datapath: "+datapath+"\n");
 DKLoadPlugin(datapath+"DKPlugin1/DKPlugin1.dll");
