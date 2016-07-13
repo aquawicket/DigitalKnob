@@ -1,0 +1,8 @@
+<VERIFY> ${DKLIBS}/pugixml-1.6 </VERIFY>
+<PATH> ${DKLIBS}/pugixml-1.6 </PATH>
+
+<INSTALL>
+	<download url="https://s3.amazonaws.com/github-cloud/releases/4923301/41504f9a-dfc3-11e4-8b44-01e44f2062a9.zip?response-content-disposition=attachment%3B%20filename%3Dpugixml-1.6.zip&response-content-type=application/octet-stream&AWSAccessKeyId=AKIAISTNZFOVBIJMK3TQ&Expires=1439583308&Signature=jmQ%2BAWE%2FGJs0DD4rPDwtwsMTX8w%3D" url2="http://digitalknob.com/Download/Libs/pugixml-1.6.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/pugixml-1.6.zip" path="${DKLIBS}"/>
+</INSTALL>
+

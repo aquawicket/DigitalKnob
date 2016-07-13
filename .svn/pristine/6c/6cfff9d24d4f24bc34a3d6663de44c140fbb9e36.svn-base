@@ -1,0 +1,45 @@
+IF(NOT ANDROID)
+	RETURN()
+ENDIF()
+
+DKDEPEND(android-ndk)
+
+### INSTALL ###
+DKINSTALL(http://digitalknob.com/Download/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
+DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
+
+### LINK ###
+ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53)
+
+IF(Boost_Chrono)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_53.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_53.a)
+ENDIF()
+
+IF(Boost_DateTime)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_53.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_53.a)
+ENDIF()
+
+IF(Boost_Filesystem)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_53.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_53.a)
+ENDIF()
+
+IF(Boost_System)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_53.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_53.a)
+ENDIF()
+
+IF(Boost_Thread)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_53.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_53.a)
+ENDIF()
+
+
+### COMPILE ###
+ANDROID_BASH("#!/bin/bash
+cd ${BOOST}
+export PATH=/c/mingw/mingw32/bin:$PATH
+export PATH=/c/mingw/msys/bin:$PATH
+./build-android.sh --boost=1.53.0 ${ANDROID_NDK}")

@@ -1,0 +1,19 @@
+<VERIFY> C:/android-ndk-r10d/ndk-build.cmd </VERIFY>
+<PATH> C:/android-ndk-r10d </PATH>
+<EXE> C:/android-ndk-r10d/ndk-build.cmd </EXE>
+
+<WIN32>
+	<INSTALL>
+		<download url="http://dl.google.com/android/ndk/android-ndk-r10d-windows-x86.exe" url2="http://digitalknob.com/Download/Tools/android-ndk-r10d-windows-x86.exe" path="${DKDL}"/>
+		<setPATH> C:/ </setPATH>
+		<execute> ${DKDL}/android-ndk-r10d-windows-x86.exe </execute>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url="http://dl.google.com/android/ndk/android-ndk-r10d-windows-x86_64.exe" url2="http://digitalknob.com/Download/Tools/android-ndk-r10d-windows-x86_64.exe" path="${DKDL}"/>
+		<setPATH> C:/ </setPATH>
+		<execute> ${DKDL}/android-ndk-r10d-windows-x86_64.exe </execute>
+	</INSTALL>
+</WIN64>

@@ -1,0 +1,14 @@
+<INSTALL>
+		<download url="http://hivelocity.dl.sourceforge.net/project/gnuwin32/make/3.81/make-3.81.exe" url2="http://digitalknob.com/Download/Tools/make-3.81.exe" path="${DKDL}" />
+		<execute> ${DKDL}/make-3.81.exe /s </execute>
+</INSTALL>
+	
+<WIN32>
+	<VERIFY> C:/Program Files/GnuWin32/bin/make.exe </VERIFY>
+	<EXE> C:/Program Files/GnuWin32/bin/make.exe </EXE>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/GnuWin32/bin/make.exe </VERIFY>
+	<EXE> C:/Program Files (x86)/GnuWin32/bin/make.exe </EXE>
+</WIN64>

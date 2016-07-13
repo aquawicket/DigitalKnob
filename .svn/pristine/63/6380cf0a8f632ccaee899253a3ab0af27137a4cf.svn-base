@@ -1,0 +1,54 @@
+<VERIFY> ${DKLIBS}/boost_1_57_0 </VERIFY>
+<PATH> ${DKLIBS}/boost_1_57_0 </PATH>
+
+<INSTALL>
+	<download url2="http://sourceforge.net/projects/boost/files/boost/1.57.0/boost_1_57_0.zip" url="http://digitalknob.com/Download/Libs/boost_1_57_0.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/boost_1_57_0.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+<WIN32>
+	<setpath> ${BOOSTBUILD} </setpath>
+	<cmd> b2 install toolset=msvc-12.0 --prefix=${BOOSTBUILD} </cmd>
+	<setpath> ${DKLIBS}/boost_1_57_0 </setpath>
+	<cmd> ${BOOSTBUILD}/bin/bjam toolset=msvc-12.0 link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${DKLIBS}/boost_1_57_0/win32 </cmd>
+	<cmd> ${BOOSTBUILD}/bin/bjam toolset=msvc-12.0 link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${DKLIBS}/boost_1_57_0/win32 </cmd>
+</WIN32>
+
+<WIN64>
+
+<clipboard>
+cd ${BOOSTBUILD} & 
+b2 install toolset=msvc-12.0 address-model=64 --prefix=C:/boost-build & 
+cd ${DKLIBS}/boost_1_57_0 & 
+${BOOSTBUILD}/bin/bjam toolset=msvc-12.0 link=static address-model=64 variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${DKLIBS}/boost_1_57_0/win64 & 
+${BOOSTBUILD}/bin/bjam toolset=msvc-12.0 link=static address-model=64 variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${DKLIBS}/boost_1_57_0/win64 & exit
+</clipboard>
+	
+	<message>*********************************************************************</message>
+	<message>***** AT THE PROMPT, PLEASE PASTE THE CLIPBOARD AND PRESS ENTER *****</message>
+	<message>*********************************************************************</message>
+	
+	<cmd>
+	call C:\Windows\System32\cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}"
+	</cmd>
+</WIN64>
+
+<LINUX>
+	<setpath> ${DKLIBS}/boost_1_57_0 </setpath>
+	<terminal> bjam toolset=gcc link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/linux/Debug </terminal>
+	<terminal> bjam toolset=gcc link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/linux/Release </terminal>
+</LINUX>
+
+<MAC>
+	<setpath> ${DKLIBS}/boost_1_57_0 </setpath>
+	<terminal> sudo ./bootstrap.sh </terminal>
+	<terminal> sudo ./bjam --toolset=darwin link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/mac/Debug </terminal>
+	<terminal> sudo ./bjam --toolset=darwin link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/mac/Release </terminal>
+</MAC>
+
+<IOSSIMULATOR>
+	<setpath> ${DKLIBS}/boost_1_57_0 </setpath>
+	<terminal> sudo ./bootstrap.sh </terminal>
+	<terminal> sudo ./bjam macosx-version=iphonesim-3.2 --toolset=darwin target-os=iphone architecture=x86 link=static variant=debug  runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/ios-simulator/Debug </terminal>
+	<terminal> sudo ./bjam macosx-version=iphonesim-6.1 --toolset=darwin target-os=iphone architecture=x86 link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --stagedir=${DKLIBS}/boost_1_57_0/ios-simulator/Release </terminal>
+</IOSSIMULATOR>

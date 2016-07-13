@@ -1,0 +1,31 @@
+
+<WIN32>
+	<VERIFY> C:/Program Files/CMake/bin/cmake.exe </VERIFY>
+	<INSTALL>
+		<download url2="http://www.cmake.org/files/v3.3/cmake-3.3.2-win32-x86.exe" url="http://digitalknob.com/Download/Tools/cmake-3.3.2-win32-x86.exe" path="${DKDL}" />
+		<execute> ${DKDL}/cmake-3.3.2-win32-x86.exe </execute>
+	</INSTALL>
+	<EXE> C:/Program Files/CMake/bin/cmake.exe </EXE>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/CMake/bin/cmake.exe </VERIFY>
+	<INSTALL>
+		<download url2="http://www.cmake.org/files/v3.3/cmake-3.3.2-win32-x86.exe" url="http://digitalknob.com/Download/Tools/cmake-3.3.2-win32-x86.exe" path="${DKDL}" />
+		<execute> ${DKDL}/cmake-3.3.2-win32-x86.exe </execute>
+	</INSTALL>
+	<EXE> C:/Program Files (x86)/CMake/bin/cmake.exe </EXE>
+</WIN64>
+
+<MAC>
+	<VERIFY> /Users </VERIFY>
+	<EXE> cmake </EXE>
+</MAC>
+
+<LINUX>
+	<VERIFY> /usr/bin/cmake </VERIFY>
+	<EXE> cmake </EXE>
+	<INSTALL>
+	<terminal> sudo apt-get install cmake </terminal>
+	</INSTALL>
+</LINUX>

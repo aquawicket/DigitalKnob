@@ -1,0 +1,168 @@
+<VERIFY> ${DKLIBS}/freetype-2.5.5 </VERIFY>
+<PATH> ${DKLIBS}/freetype-2.5.5 </PATH>
+
+<INSTALL>
+	<download url="http://savannah.spinellicreations.com//freetype/freetype-2.5.5.tar.gz" url2="http://digitalknob.com/Download/Libs/freetype-2.5.5.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/freetype-2.5.5.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${DKLIBS}" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	${DKLIBS}/freetype-2.5.5
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freetype-2.5.5/win32/freetype.sln /t:freetype /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freetype-2.5.5/win32/freetype.sln /t:freetype /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	${DKLIBS}/freetype-2.5.5
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freetype-2.5.5/win64/freetype.sln /t:freetype /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freetype-2.5.5/win64/freetype.sln /t:freetype /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	${DKLIBS}/freetype-2.5.5
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	${DKLIBS}/freetype-2.5.5
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKLIBS}/freetype-2.5.5
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target freetype -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/freetype-2.5.5/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/freetype-2.5.5/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/freetype-2.5.5/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	${DKLIBS}/freetype-2.5.5
+	</terminal>
+
+	<terminal>
+	make freetype
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/freetype-2.5.5/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	${DKLIBS}/freetype-2.5.5
+	</terminal>
+
+	<terminal>
+	make freetype
+	</terminal>
+	</RELEASE>
+</LINUX>

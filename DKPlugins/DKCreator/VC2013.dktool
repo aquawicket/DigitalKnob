@@ -1,0 +1,16 @@
+<INSTALL> 
+	<download url="http://DigitalKnob.com/Download/Tools/VS2013.5.exe" path="${DKDL}" />
+	<execute> ${DKDL}/VS2013.5.exe </execute>
+</INSTALL>
+
+<PATH> C:/Program Files (x86)/Microsoft Visual Studio 12.0 </PATH>
+<EXE> C:/Program Files (x86)/MSBuild/12.0/Bin/MSBuild.exe </EXE>
+
+
+<WIN32>
+	<VERIFY> C:/Program Files (x86)/Microsoft Visual Studio 12.0 </VERIFY>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/Microsoft Visual Studio 12.0 </VERIFY>
+</WIN64>

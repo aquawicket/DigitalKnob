@@ -1,0 +1,190 @@
+<VERIFY> ${DKLIBS}/bullet-2.82-r2704 </VERIFY>
+<PATH> ${DKLIBS}/bullet-2.82-r2704 </PATH>
+
+<INSTALL>
+	<download url="http://bullet.googlecode.com/files/bullet-2.82-r2704.zip" url2="http://digitalknob.com/Download/Libs/bullet-2.82-r2704.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/bullet-2.82-r2704.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF
+	${DKLIBS}/bullet-2.82-r2704
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/bullet-2.82-r2704/win32/BULLET_PHYSICS.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/bullet-2.82-r2704/win32/BULLET_PHYSICS.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF
+	${DKLIBS}/bullet-2.82-r2704
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/bullet-2.82-r2704/win64/BULLET_PHYSICS.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/bullet-2.82-r2704/win64/BULLET_PHYSICS.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF 
+	${DKLIBS}/bullet-2.82-r2704
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF
+	${DKLIBS}/bullet-2.82-r2704
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF
+	${DKLIBS}/bullet-2.82-r2704
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/bullet-2.82-r2704/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/bullet-2.82-r2704/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/bullet-2.82-r2704/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF 
+	${DKLIBS}/bullet-2.82-r2704
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/bullet-2.82-r2704/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DBUILD_DEMOS=OFF 
+	-DBUILD_EXTRAS=OFF 
+	-DUSE_GLUT=OFF 
+	${DKLIBS}/bullet-2.82-r2704
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

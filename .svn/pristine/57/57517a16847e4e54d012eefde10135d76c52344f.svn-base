@@ -1,0 +1,17 @@
+<WIN32>
+	<VERIFY> ${DKLIBS}/openssl-1.0.2d-vs2008 </VERIFY>
+	<PATH> ${DKLIBS}/openssl-1.0.2d-vs2008 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/openssl-1.0.2d-vs2008.7z" path="${DKDL}"/>
+		<extract file="${DKDL}/openssl-1.0.2d-vs2008.7z" path="${DKLIBS}"/>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<VERIFY> ${DKLIBS}/openssl-1.0.2d-vs2008/dk </VERIFY>
+	<PATH> ${DKLIBS}/openssl-1.0.2d-vs2008 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/openssl-1.0.2d-vs2008.7z" path="${DKDL}"/>
+		<extract file="${DKDL}/openssl-1.0.2d-vs2008.7z" path="${DKLIBS}"/>
+	</INSTALL>
+</WIN64>

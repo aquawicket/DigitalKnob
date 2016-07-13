@@ -1,0 +1,8 @@
+<VERIFY> ${DKLIBS}/cal3d </VERIFY>
+<PATH> ${DKLIBS}/cal3d </PATH>
+
+<INSTALL>
+	<download url="http://download.gna.org/cal3d/sources/cal3d-0.11.0.tar.gz" url2="http://digitalknob.com/Download/Libs/cal3d-0.11.0.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/cal3d-0.11.0.tar.gz" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/cal3d-0.11.0" output="cal3d" />
+</INSTALL>

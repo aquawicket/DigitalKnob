@@ -1,0 +1,367 @@
+<VERIFY> ${DKLIBS}/libarchive-master </VERIFY>
+<PATH> ${DKLIBS}/libarchive-master </PATH>
+
+<WIN32>
+	<INSTALL>
+		<download url2="http://www.libarchive.org/downloads/libarchive-master.zip" url="http://digitalknob.com/Download/Libs/libarchive-master.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-master.zip" path="${DKLIBS}"/>
+	</INSTALL>
+
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/win32 /DLZMA_API_STATIC" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_TESTING=OFF 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win32/Release/zlibstatic.lib
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/win32/Release/src/liblzma/.libs/liblzma.lib
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/win32/libbz2.lib
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/win32/libbz2.lib
+	-DLIBGCC_LIBRARY=${BZIP2}/win32/libgcc.lib
+	${DKLIBS}/libarchive-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libarchive-master/win32/libarchive.sln /t:archive_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libarchive-master/win32/libarchive.sln /t:archive_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url2="http://www.libarchive.org/downloads/libarchive-master.zip" url="http://digitalknob.com/Download/Libs/libarchive-master.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-master.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/win64 /DLZMA_API_STATIC /wd4267 /wd4244" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_TESTING=OFF 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win64/Release/zlibstatic.lib
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/win64/Release/src/liblzma/.libs/liblzma.lib
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/win64/libbz2.lib
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/win64/libbz2.lib
+	-DLIBGCC_LIBRARY=${BZIP2}/win64/libgcc.lib
+	${DKLIBS}/libarchive-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libarchive-master/win64/libarchive.sln /t:archive_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libarchive-master/win64/libarchive.sln /t:archive_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/libarchive-2.8.5.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-2.8.5.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<terminal>
+	${CMAKE_EXE} 
+	-G "Xcode" 
+	-DCMAKE_C_FLAGS="-I${ZLIB}/mac" 
+	-DBUILD_TESTING=OFF 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE=""
+	-DLZO2_INCLUDE_DIR=""
+	-DLZO2_LIBRARY=""
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/mac/Release/libz.a 
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/mac/Release/src/liblzma/.libs/liblzma.a
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/mac/libbz2.a
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/mac/libbz2.a
+	${DKLIBS}/libarchive-2.8.5
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/libarchive-2.8.5.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-2.8.5.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<terminal>
+	${CMAKE_EXE} 
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios"
+	-DBUILD_TESTING=OFF 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DBZIP2_INCLUDE_DIR="" 
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios/Release-iphoneos/libz.a
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/Release-iphoneos/src/liblzma/.libs/liblzma.a
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/ios/libbz2.a
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/ios/libbz2.a
+	${DKLIBS}/libarchive-2.8.5
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/libarchive-2.8.5.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-2.8.5.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<terminal>
+	${CMAKE_EXE} 
+	-G "Xcode"
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios-simulator"
+	-DBUILD_TESTING=OFF 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DBZIP2_INCLUDE_DIR="" 
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB}
+	-DZLIB_LIBRARY=${ZLIB}/ios-simulator/Release-iphonesimulator/libz.a
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/Release-iphonesimulator/src/liblzma/.libs/liblzma.a
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/ios-simulator/libbz2.a
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/ios-simulator/libbz2.a
+	${DKLIBS}/libarchive-2.8.5
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target archive_static -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<INSTALL>
+		<download url2="http://www.libarchive.org/downloads/libarchive-master.zip" url="http://digitalknob.com/Download/Libs/libarchive-master.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-master.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<DEBUG>
+	<setPATH> ${DKLIBS}/libarchive-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/libarchive-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<INSTALL>
+		<download url2="http://www.libarchive.org/downloads/libarchive-master.zip" url="http://digitalknob.com/Download/Libs/libarchive-master.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libarchive-master.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<DEBUG>
+	<setPATH> ${DKLIBS}/libarchive-master/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE} 
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="Release"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Debug" 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Debug/libz.a
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/linux/Debug/src/liblzma/.libs/liblzma.a
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/linux/libbz2.a
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/linux/libbz2.a
+	${DKLIBS}/libarchive-master
+	</terminal>
+
+	<terminal>
+	make archive_static
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/libarchive-master/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE} 
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="Release"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Release" 
+	-DENABLE_TEST=OFF
+	-DENABLE_ACL=OFF
+	-DENABLE_CPIO=OFF
+	-DENABLE_CNG=OFF
+	-DENABLE_ICONV=OFF
+	-DENABLE_NETTLE=OFF
+	-DENABLE_OPENSSL=OFF
+	-DENABLE_TAR=ON
+	-DENABLE_XATTR=OFF
+	-DLIBXML2_INCLUDE_DIR="" 
+	-DLIBXML2_LIBRARIES="" 
+	-DLIBXML2_XMLLINT_EXECUTABLE="" 
+	-DEXPAT_INCLUDE_DIR="" 
+	-DEXPAT_LIBRARY="" 
+	-DICONV_INCLUDE_DIR=""
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Release/libz.a
+	-DLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api
+	-DLZMA_LIBRARY=${XZ}/linux/Release/src/liblzma/.libs/liblzma.a
+	-DBZIP2_INCLUDE_DIR=${BZIP2}
+	-DBZIP2_LIBRARY_DEBUG=${BZIP2}/linux/libbz2.a
+	-DBZIP2_LIBRARY_RELEASE=${BZIP2}/linux/libbz2.a
+	${DKLIBS}/libarchive-master
+	</terminal>
+
+	<terminal>
+	make archive_static
+	</terminal>
+	</RELEASE>
+</LINUX>

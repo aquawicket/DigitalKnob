@@ -1,0 +1,17 @@
+
+<INSTALL> 
+	<download url="http://digitalknob.com/Download/Tools/VCExpress.zip" path="${DKDL}" />
+	<extract file="${DKDL}/VCExpress.zip" path="${DKDL}" />
+	<execute> ${DKDL}/VCExpress/setup.exe </execute>
+</INSTALL>
+
+<EXE> C:/Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe </EXE>
+
+
+<WIN32>
+	<VERIFY> C:/Program Files/Microsoft Visual Studio 9.0/VC/bin/cl.exe </VERIFY>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/Microsoft Visual Studio 9.0/VC/bin/cl.exe </VERIFY>
+</WIN64>

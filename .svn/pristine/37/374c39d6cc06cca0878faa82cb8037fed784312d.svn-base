@@ -1,0 +1,6 @@
+<VERIFY> C:/mingw/mingw64 </VERIFY>
+
+<INSTALL>
+<download url="http://iweb.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z" url2="http://digitalknob.com/Download/Tools/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z" path="${DKDL}" />
+<extract file="${DKDL}/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z" path="C:/mingw" />
+</INSTALL>

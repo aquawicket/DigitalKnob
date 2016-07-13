@@ -1,0 +1,172 @@
+<VERIFY> ${DKLIBS}/giflib-5.1.1 </VERIFY>
+<PATH> ${DKLIBS}/giflib-5.1.1 </PATH>
+
+<INSTALL>
+	<download url="http://iweb.dl.sourceforge.net/project/giflib/giflib-5.1.1.tar.gz" url2="http://digitalknob.com/Download/Libs/giflib-5.1.1.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/giflib-5.1.1.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<DEBUG>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/giflib-5.1.1/win32/Debug;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/giflib-5.1.1/win32/Debug/lib/.libs/libgif.a" to="${DKLIBS}/giflib-5.1.1/win32/Debug/lib/.libs/libgif.lib" />
+	</DEBUG>
+	
+	<RELEASE>
+	<bash>
+	#!/bin/bash;         
+	cd ${DKLIBS}/giflib-5.1.1/win32/Release;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/giflib-5.1.1/win32/Release/lib/.libs/libgif.a" to="${DKLIBS}/giflib-5.1.1/win32/Release/lib/.libs/libgif.lib" />
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<DEBUG>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/giflib-5.1.1/win64/Debug;
+	export PATH=/c/mingw/mingw64/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/giflib-5.1.1/win64/Debug/lib/.libs/libgif.a" to="${DKLIBS}/giflib-5.1.1/win64/Debug/lib/.libs/libgif.lib" />
+	</DEBUG>
+	
+	<RELEASE>
+	<bash>
+	#!/bin/bash;         
+	cd ${DKLIBS}/giflib-5.1.1/win64/Release;
+	export PATH=/c/mingw/mingw64/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/giflib-5.1.1/win64/Release/lib/.libs/libgif.a" to="${DKLIBS}/giflib-5.1.1/win64/Release/lib/.libs/libgif.lib" />
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/mac/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/mac/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/ios/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/ios/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/ios-simulator/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/ios-simulator/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE} NDK_DEBUG=1 NDK_LOG=1
+	</cmd>
+	</DEBUG>
+	
+	<setPATH> ${DKLIBS}/giflib-5.1.1/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE} NDK_DEBUG=0 NDK_LOG=1
+	</cmd>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/giflib-5.1.1/linux/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<setPATH> ${DKLIBS}/giflib-5.1.1/linux/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>

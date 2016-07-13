@@ -1,0 +1,3 @@
+DKDEPEND(DKOSGWindow)
+
+DKPLUGIN(DKOSGPicker)

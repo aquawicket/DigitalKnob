@@ -1,0 +1,70 @@
+<VERIFY> ${DKLIBS}/bzip2-1.0.6 </VERIFY>
+<PATH> ${DKLIBS}/bzip2-1.0.6 </PATH>
+
+<INSTALL>
+	<download url="http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz" url2="http://digitalknob.com/Download/Libs/bzip2-1.0.6.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/bzip2-1.0.6.tar.gz" path="${DKLIBS}"/>
+	<copy path="${DKLIBS}/bzip2-1.0.6" to="${DKLIBS}/bzip2-1.0.6/win32" />
+	<copy path="${DKLIBS}/bzip2-1.0.6" to="${DKLIBS}/bzip2-1.0.6/win64" />
+</INSTALL>
+
+
+<WIN32>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/bzip2-1.0.6/win32;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	make CFLAGS='-static-libgcc';
+	exit;
+	</bash>
+	
+	<copy path="${DKLIBS}/bzip2-1.0.6/win32/libbz2.a" to="${DKLIBS}/bzip2-1.0.6/win32/libbz2.lib" />
+	<copy path="C:/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a" to="${DKLIBS}/bzip2-1.0.6/win32/libgcc.lib" />
+</WIN32>
+
+<WIN64>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/bzip2-1.0.6/win64;
+	export PATH=/c/mingw/mingw64/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	make CFLAGS='-static-libgcc';
+	exit;
+	</bash>
+	
+	<copy path="${DKLIBS}/bzip2-1.0.6/win64/libbz2.a" to="${DKLIBS}/bzip2-1.0.6/win64/libbz2.lib" />
+	<copy path="C:/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a" to="${DKLIBS}/bzip2-1.0.6/win64/libgcc.lib" />
+</WIN64>
+
+<MAC>
+	<copy path="${DKLIBS}/bzip2-1.0.6" to="${DKLIBS}/bzip2-1.0.6/mac/" />
+	<setPATH> ${DKLIBS}/bzip2-1.0.6 </setPATH>
+	<terminal>
+	make
+	</terminal>
+</MAC>
+
+<IOS>
+	<setPATH> ${DKLIBS}/bzip2-1.0.6 </setPATH>
+	<terminal>
+	make
+	</terminal>
+	<copy path="${DKLIBS}/bzip2-1.0.6/libbz2.a" to="${DKLIBS}/bzip2-1.0.6/ios/libbz2.a" />
+</IOS>
+
+<IOSSIMULATOR>
+	<setPATH> ${DKLIBS}/bzip2-1.0.6 </setPATH>
+	<terminal>
+	make
+	</terminal>
+	<copy path="${DKLIBS}/bzip2-1.0.6/libbz2.a" to="${DKLIBS}/bzip2-1.0.6/ios-simulator/libbz2.a" />
+</IOSSIMULATOR>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/bzip2-1.0.6 </setPATH>
+	<terminal>
+	make
+	</terminal>
+	<copy path="${DKLIBS}/bzip2-1.0.6/libbz2.a" to="${DKLIBS}/bzip2-1.0.6/linux/libbz2.a" />
+</LINUX>

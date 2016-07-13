@@ -1,0 +1,210 @@
+<VERIFY> ${DKLIBS}/SDL2_image-2.0.1 </VERIFY>
+<PATH> ${DKLIBS}/SDL2_image-2.0.1 </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/SDL2_image-2.0.1.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/SDL2_image-2.0.1.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY=${SDL}/win32/Release/SDL2.lib
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win32/Release/zlibstatic.lib
+	-DSDLIMAGE_SUPPORT_WEBP=OFF
+	-DPNG_SHARED=OFF
+	-DPNG_TESTS=OFF
+	-DWIN_32=ON
+	${DKLIBS}/SDL2_image-2.0.1
+	</cmd>
+	
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/SDL2_image-2.0.1/win32/SDLIMAGE.sln /t:SDLIMAGE /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/SDL2_image-2.0.1/win32/SDLIMAGE.sln /t:SDLIMAGE /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY=${SDL}/win64/Release/SDL2.lib
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win64/Release/zlibstatic.lib
+	-DSDLIMAGE_SUPPORT_WEBP=OFF
+	-DPNG_SHARED=OFF
+	-DPNG_TESTS=OFF
+	-DWIN_64=ON
+	${DKLIBS}/SDL2_image-2.0.1
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/SDL2_image-2.0.1/win64/SDLIMAGE.sln /t:SDLIMAGE /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/SDL2_image-2.0.1/win64/SDLIMAGE.sln /t:SDLIMAGE /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	${DKLIBS}/SDL2_image-2.0.1
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	${DKLIBS}/SDL2_image-2.0.1
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKLIBS}/SDL2_image-2.0.1
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target SDLIMAGE -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<mkdir> ${DKLIBS}/SDL2_image-2.0.1/android/Debug/armeabi-v7a </mkdir>
+	<setPATH> ${DKLIBS}/SDL2_image-2.0.1/android/Debug/armeabi-v7a </setPATH>
+	<cmd>
+	${CMAKE_EXE}
+	-G "MinGW Makefiles"
+	-DANDROID=ON
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DDIRECTX=OFF
+	-DRENDER_D3D=OFF
+	-DCMAKE_TOOLCHAIN_FILE=${DKLIBS}/OpenSceneGraph/PlatformSpecifics/Android/android.toolchain.cmake
+	${DKLIBS}/SDL2_image-2.0.1
+	</cmd>
+	
+	<cmd>
+	${GNUMAKE_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<mkdir> ${DKLIBS}/SDL2_image-2.0.1/android/Release/armeabi-v7a </mkdir>
+	<setPATH> ${DKLIBS}/SDL2_image-2.0.1/android/Release/armeabi-v7a </setPATH>
+	<cmd>
+	${CMAKE_EXE}
+	-G "MinGW Makefiles"
+	-DANDROID=ON
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DDIRECTX=OFF
+	-DRENDER_D3D=OFF
+	-DCMAKE_TOOLCHAIN_FILE=${DKLIBS}/OpenSceneGraph/PlatformSpecifics/Android/android.toolchain.cmake
+	${DKLIBS}/SDL2_image-2.0.1
+	</cmd>
+	
+	<cmd>
+	${GNUMAKE_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/SDL2_image-2.0.1/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	${DKLIBS}/SDL2_image-2.0.1
+	</terminal>
+
+	<terminal>
+	make SDLIMAGE
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/SDL2_image-2.0.1/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	${DKLIBS}/SDL2_image-2.0.1
+	</terminal>
+
+	<terminal>
+	make SDLIMAGE
+	</terminal>
+	</RELEASE>
+</LINUX>

@@ -1,0 +1,30 @@
+<VERIFY> ${DKLIBS}/sigar </VERIFY>
+<PATH> ${DKLIBS}/sigar </PATH>
+
+<INSTALL>
+	<download url="https://codeload.github.com/hyperic/sigar/zip/master" url2="http://digitalknob.com/Download/Libs/sigar-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/sigar-master.zip" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/sigar-master" output="sigar" />
+</INSTALL>
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_TESTING=OFF 
+	${DKLIBS}/sigar
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/sigar/win32/sigar.sln /t:sigar /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/sigar/win32/sigar.sln /t:sigar /p:Configuration=Release
+	</cmd>
+</WIN32>

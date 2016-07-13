@@ -1,0 +1,22 @@
+
+<ANDROID>
+	<VERIFY> ${DKLIBS}/Boost-for-Android-master </VERIFY>
+	<PATH> ${DKLIBS}/Boost-for-Android-master </PATH>
+
+	<INSTALL>
+		<download url2="https://codeload.github.com/MysticTreeGames/Boost-for-Android/zip/master" url="http://digitalknob.com/Download/Libs/Boost-for-Android-master.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/Boost-for-Android-master.zip" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<bash> 
+	#!/bin/bash;
+	cd ${DKLIBS}/Boost-for-Android-master;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	./build-android.sh --boost=1.53.0 ${ANDROID_NDK};
+	</bash>
+</ANDROID>
+
+<note>
+	export PATH="/c/Program Files (x86)/Microsoft Visual Studio 12.0/VC/bin":$PATH;
+</note>

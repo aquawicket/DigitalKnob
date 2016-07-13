@@ -1,0 +1,58 @@
+<div id="DKTetris.html" style="position:absolute;top:0rem;left:0rem;width:424rem;height:536rem;">
+	<form name="ScoreForm">
+	<DIV ALIGN=center>
+	<table noborder><tr><td>
+	
+	<script language="JavaScript">
+		document.open("text/plain");
+		document.writeln("<table border=4 cellpadding=4 cellspacing=6 bgcolor=#C0B0A0><tr><td>");
+		for (j=0; j < MaxY; j++){
+			document.writeln("<NOBR>");
+			for (i=0; i < MaxX; i++)
+			document.write("<IMG src=\"DKTetris/tetris_0.gif\" border=0>");
+			document.writeln("</NOBR><BR>");
+		}
+		document.writeln("</td></tr></table>");
+
+		if (navigator.appName == "Konqueror"){
+			document.write("</td><td>");
+			document.write("<input width=0 height=0 style=\"width:0; height:0\" name=\"KeyCatch\" onBlur=\"KeyCatchFocus()\" onKeyUp=\"KeyCatchChange()\">");
+			KeyCatchFocus();
+			IsHideFocus=false;
+		}
+		function KeyCatchFocus()
+		{ 
+			setTimeout("document.forms[0].KeyCatch.focus()",100);
+		}
+		function KeyCatchChange()
+		{ 
+			var vv=""+document.forms[0].KeyCatch.value;
+			if (vv=="") return;
+			KeyDown(vv.charCodeAt(0));
+			document.forms[0].KeyCatch.value="";
+		}
+
+		document.close();
+	</script>
+</td>
+<td>&nbsp;&nbsp;&nbsp;</td>
+<td valign=top>
+	<table border=4 cellpadding=4 cellspacing=6  bgcolor=#C0B0A0><tr><td>
+	<table noborder cellpadding=2 cellspacing=2>
+	<tr><td align=center><input type=button width="70" style="width:70;" value="Pause" onClick="Pause()"></td></tr>
+	<tr><td>&nbsp;</td></tr>
+	<tr><td align=center><input type=button width="70" style="width:70;" value="New" onClick="New()"></td></tr>
+	<tr><td>&nbsp;</td></tr>
+	<tr><td align=center>Score:</td></tr>
+	<tr><td align=center><input type=button width="70" style="width:70; background-color:#ffffff" name="Score" onClick="HideFocus()"></td></tr>
+	<tr><td align=center>Level:</td></tr>
+	<tr><td align=center><input type=button width="70" style="width:70; background-color:#ffffff" name="Level" onClick="HideFocus()"></td></tr>
+	<tr><td align=center>Lines:</td></tr>
+	<tr><td align=center><input type=button width="70" style="width:70; background-color:#ffffff" name="Lines" onClick="HideFocus()"></td></tr>
+	<tr><td align=center><input type="checkbox" onClick="IsPreview=this.checked; HideFocus();">Preview</td></tr>
+	<tr><td align=center><table border=2 cellpadding=0 cellspacing=3><tr><td><img src="DKTetris/tetrisp0.gif" border=0></td></tr></table></td></tr>
+	</table></td></tr></table>
+</td></tr></table>
+</DIV>
+</form>
+</div>

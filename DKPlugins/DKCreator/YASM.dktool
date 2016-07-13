@@ -1,0 +1,17 @@
+<VERIFY> C:/mingw/mingw32/bin/yasm.exe </VERIFY>
+
+<WIN32>
+	<INSTALL>
+		<download url="http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win32.exe" url2="http://digitalknob.com/Download/Tools/yasm-1.3.0-win32.exe" path="${DKDL}"/>
+		<copy path="${DKDL}/yasm-1.3.0-win32.exe" to="C:/mingw/mingw32/bin/yasm.exe" />
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url="http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win32.exe" url2="http://digitalknob.com/Download/Tools/yasm-1.3.0-win32.exe" path="${DKDL}"/>
+		<copy path="${DKDL}/yasm-1.3.0-win32.exe" to="C:/mingw/mingw32/bin/yasm.exe" />
+		<download url="http://www.tortall.net/projects/yasm/releases/yasm-1.3.0-win64.exe" url2="http://digitalknob.com/Download/Tools/yasm-1.3.0-win64.exe" path="${DKDL}"/>
+		<copy path="${DKDL}/yasm-1.3.0-win64.exe" to="C:/mingw/mingw64/bin/yasm.exe" />
+	</INSTALL>
+</WIN64>

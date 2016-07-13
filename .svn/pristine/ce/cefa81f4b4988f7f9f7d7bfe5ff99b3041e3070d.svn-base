@@ -1,0 +1,138 @@
+<div id="DKInput.html" style="position:absolute;width:940rem;height:350rem;overflow:hidden;">
+	<div id="keyboarddiv" style="position:absolute;top:10rem;left:10rem;width:781rem;height:285rem;">
+	<img id="keyboard" src="DKInputTest/keyboard.png" style="position:absolute;top:1rem;left:1rem;width:781rem;"></img>
+	<div id="esc" style="position:absolute;top:9rem;left:6rem;width:36rem;height:35rem;"></div>
+	<div id="f1" style="position:absolute;top:9rem;left:58rem;width:33rem;height:35rem;"></div>
+	<div id="f2" style="position:absolute;top:9rem;left:92rem;width:33rem;height:35rem;"></div>
+	<div id="f3" style="position:absolute;top:9rem;left:126rem;width:33rem;height:35rem;"></div>
+	<div id="f4" style="position:absolute;top:9rem;left:160rem;width:33rem;height:35rem;"></div>
+	<div id="f5" style="position:absolute;top:9rem;left:209rem;width:33rem;height:35rem;"></div>
+	<div id="f6" style="position:absolute;top:9rem;left:243rem;width:33rem;height:35rem;"></div>
+	<div id="f7" style="position:absolute;top:9rem;left:277rem;width:33rem;height:35rem;"></div>
+	<div id="f8" style="position:absolute;top:9rem;left:311rem;width:33rem;height:35rem;"></div>
+	<div id="f9" style="position:absolute;top:9rem;left:360rem;width:33rem;height:35rem;"></div>
+	<div id="f10" style="position:absolute;top:9rem;left:394rem;width:33rem;height:35rem;"></div>
+	<div id="f11" style="position:absolute;top:9rem;left:428rem;width:33rem;height:35rem;"></div>
+	<div id="f12" style="position:absolute;top:9rem;left:462rem;width:33rem;height:35rem;"></div>
+	<div id="printscreen" style="position:absolute;top:9rem;left:506rem;width:35rem;height:35rem;"></div>
+	<div id="scrolllock" style="position:absolute;top:9rem;left:542rem;width:37rem;height:35rem;"></div>
+	<div id="pause" style="position:absolute;top:9rem;left:580rem;width:37rem;height:35rem;"></div>
+	
+	<div id="tilde" style="position:absolute;top:54rem;left:6rem;width:35rem;height:35rem;"></div>
+	<div id="1" style="position:absolute;top:54rem;left:41rem;width:35rem;height:35rem;"></div>
+	<div id="2" style="position:absolute;top:54rem;left:75rem;width:35rem;height:35rem;"></div>
+	<div id="3" style="position:absolute;top:54rem;left:109rem;width:35rem;height:35rem;"></div>
+	<div id="4" style="position:absolute;top:54rem;left:143rem;width:35rem;height:35rem;"></div>
+	<div id="5" style="position:absolute;top:54rem;left:177rem;width:35rem;height:35rem;"></div>
+	<div id="6" style="position:absolute;top:54rem;left:211rem;width:35rem;height:35rem;"></div>
+	<div id="7" style="position:absolute;top:54rem;left:245rem;width:35rem;height:35rem;"></div>
+	<div id="8" style="position:absolute;top:54rem;left:279rem;width:35rem;height:35rem;"></div>
+	<div id="9" style="position:absolute;top:54rem;left:313rem;width:35rem;height:35rem;"></div>
+	<div id="0" style="position:absolute;top:54rem;left:347rem;width:35rem;height:35rem;"></div>
+	<div id="minus" style="position:absolute;top:54rem;left:381rem;width:35rem;height:35rem;"></div>
+	<div id="equal" style="position:absolute;top:54rem;left:415rem;width:35rem;height:35rem;"></div>
+	<div id="backspace" style="position:absolute;top:54rem;left:450rem;width:45rem;height:35rem;"></div>
+	<div id="insert" style="position:absolute;top:54rem;left:504rem;width:37rem;height:35rem;"></div>
+	<div id="home" style="position:absolute;top:54rem;left:542rem;width:37rem;height:35rem;"></div>
+	<div id="pageup" style="position:absolute;top:54rem;left:580rem;width:37rem;height:35rem;"></div>
+	<div id="numlock" style="position:absolute;top:54rem;left:626rem;width:37rem;height:35rem;"></div>
+	<div id="kp_slash" style="position:absolute;top:54rem;left:664rem;width:37rem;height:35rem;"></div>
+	<div id="kp_multiply" style="position:absolute;top:54rem;left:702rem;width:37rem;height:35rem;"></div>
+	<div id="kp_minus" style="position:absolute;top:54rem;left:740rem;width:37rem;height:35rem;"></div>
+	
+	<div id="tab" style="position:absolute;top:89rem;left:6rem;width:35rem;height:35rem;"></div>
+	<div id="q" style="position:absolute;top:89rem;left:41rem;width:35rem;height:35rem;"></div>
+	<div id="w" style="position:absolute;top:89rem;left:75rem;width:35rem;height:35rem;"></div>
+	<div id="e" style="position:absolute;top:89rem;left:109rem;width:35rem;height:35rem;"></div>
+	<div id="r" style="position:absolute;top:89rem;left:143rem;width:35rem;height:35rem;"></div>
+	<div id="t" style="position:absolute;top:89rem;left:177rem;width:35rem;height:35rem;"></div>
+	<div id="y" style="position:absolute;top:89rem;left:211rem;width:35rem;height:35rem;"></div>
+	<div id="u" style="position:absolute;top:89rem;left:245rem;width:35rem;height:35rem;"></div>
+	<div id="i" style="position:absolute;top:89rem;left:279rem;width:35rem;height:35rem;"></div>
+	<div id="o" style="position:absolute;top:89rem;left:313rem;width:35rem;height:35rem;"></div>
+	<div id="p" style="position:absolute;top:89rem;left:347rem;width:35rem;height:35rem;"></div>
+	<div id="leftbracket" style="position:absolute;top:89rem;left:381rem;width:35rem;height:35rem;"></div>
+	<div id="rightbracket" style="position:absolute;top:89rem;left:415rem;width:35rem;height:35rem;"></div>
+	<div id="enter" style="position:absolute;top:89rem;left:449rem;width:45rem;height:70rem;"></div>
+	<div id="delete" style="position:absolute;top:89rem;left:504rem;width:37rem;height:35rem;"></div>
+	<div id="end" style="position:absolute;top:89rem;left:542rem;width:37rem;height:35rem;"></div>
+	<div id="pagedown" style="position:absolute;top:89rem;left:579rem;width:37rem;height:35rem;"></div>
+	<div id="kp_7" style="position:absolute;top:89rem;left:626rem;width:37rem;height:35rem;"></div>
+	<div id="kp_8" style="position:absolute;top:89rem;left:664rem;width:37rem;height:35rem;"></div>
+	<div id="kp_9" style="position:absolute;top:89rem;left:702rem;width:37rem;height:35rem;"></div>
+	<div id="kp_plus" style="position:absolute;top:89rem;left:740rem;width:37rem;height:70rem;"></div>
+	
+	<div id="capslock" style="position:absolute;top:123rem;left:6rem;width:35rem;height:35rem;"></div>
+	<div id="a" style="position:absolute;top:123rem;left:41rem;width:35rem;height:35rem;"></div>
+	<div id="s" style="position:absolute;top:123rem;left:75rem;width:35rem;height:35rem;"></div>
+	<div id="d" style="position:absolute;top:123rem;left:109rem;width:35rem;height:35rem;"></div>
+	<div id="f" style="position:absolute;top:123rem;left:143rem;width:35rem;height:35rem;"></div>
+	<div id="g" style="position:absolute;top:123rem;left:177rem;width:35rem;height:35rem;"></div>
+	<div id="h" style="position:absolute;top:123rem;left:211rem;width:35rem;height:35rem;"></div>
+	<div id="j" style="position:absolute;top:123rem;left:245rem;width:35rem;height:35rem;"></div>
+	<div id="k" style="position:absolute;top:123rem;left:279rem;width:35rem;height:35rem;"></div>
+	<div id="l" style="position:absolute;top:123rem;left:313rem;width:35rem;height:35rem;"></div>
+	<div id="semicolon" style="position:absolute;top:123rem;left:347rem;width:35rem;height:35rem;"></div>
+	<div id="quote" style="position:absolute;top:123rem;left:381rem;width:35rem;height:35rem;"></div>
+	<div id="backslash" style="position:absolute;top:123rem;left:415rem;width:35rem;height:35rem;"></div>
+	<div id="kp_4" style="position:absolute;top:123rem;left:627rem;width:35rem;height:35rem;"></div>
+	<div id="kp_5" style="position:absolute;top:123rem;left:664rem;width:37rem;height:35rem;"></div>
+	<div id="kp_6" style="position:absolute;top:123rem;left:702rem;width:37rem;height:35rem;"></div>
+	
+	<div id="leftshift" style="position:absolute;top:158rem;left:6rem;width:69rem;height:35rem;"></div>
+	<div id="z" style="position:absolute;top:158rem;left:76rem;width:34rem;height:35rem;"></div>
+	<div id="x" style="position:absolute;top:158rem;left:110rem;width:34rem;height:35rem;"></div>
+	<div id="c" style="position:absolute;top:158rem;left:144rem;width:34rem;height:35rem;"></div>
+	<div id="v" style="position:absolute;top:158rem;left:178rem;width:34rem;height:35rem;"></div>
+	<div id="b" style="position:absolute;top:158rem;left:212rem;width:34rem;height:35rem;"></div>
+	<div id="n" style="position:absolute;top:158rem;left:246rem;width:34rem;height:35rem;"></div>
+	<div id="m" style="position:absolute;top:158rem;left:280rem;width:34rem;height:35rem;"></div>
+	<div id="comma" style="position:absolute;top:158rem;left:314rem;width:34rem;height:35rem;"></div>
+	<div id="period" style="position:absolute;top:158rem;left:348rem;width:34rem;height:35rem;"></div>
+	<div id="slash" style="position:absolute;top:158rem;left:382rem;width:34rem;height:35rem;"></div>
+	<div id="rightshift" style="position:absolute;top:158rem;left:416rem;width:78rem;height:35rem;"></div>
+	<div id="up" style="position:absolute;top:158rem;left:542rem;width:37rem;height:35rem;"></div>
+	<div id="kp_1" style="position:absolute;top:158rem;left:626rem;width:37rem;height:35rem;"></div>
+	<div id="kp_2" style="position:absolute;top:158rem;left:663rem;width:37rem;height:35rem;"></div>
+	<div id="kp_3" style="position:absolute;top:158rem;left:701rem;width:37rem;height:35rem;"></div>
+	<div id="kp_enter" style="position:absolute;top:158rem;left:739rem;width:37rem;height:70rem;"></div>
+	
+	<div id="leftctrl" style="position:absolute;top:193rem;left:6rem;width:50rem;height:35rem;"></div>
+	<div id="leftwinkey" style="position:absolute;top:193rem;left:56rem;width:53rem;height:35rem;"></div>
+	<div id="leftalt" style="position:absolute;top:193rem;left:109rem;width:51rem;height:35rem;"></div>
+	<div id="space" style="position:absolute;top:193rem;left:160rem;width:130rem;height:35rem;"></div>
+	<div id="rightalt" style="position:absolute;top:193rem;left:290rem;width:50rem;height:35rem;"></div>
+	<div id="rightwinkey" style="position:absolute;top:193rem;left:342rem;width:53rem;height:35rem;"></div>
+	<div id="menu" style="position:absolute;top:193rem;left:395rem;width:50rem;height:35rem;"></div>
+	<div id="rightctrl" style="position:absolute;top:193rem;left:445rem;width:50rem;height:35rem;"></div>
+	<div id="left" style="position:absolute;top:193rem;left:505rem;width:36rem;height:35rem;"></div>
+	<div id="down" style="position:absolute;top:193rem;left:542rem;width:36rem;height:35rem;"></div>
+	<div id="right" style="position:absolute;top:193rem;left:580rem;width:37rem;height:35rem;"></div>
+	<div id="kp_0" style="position:absolute;top:193rem;left:626rem;width:74rem;height:35rem;"></div>
+	<div id="kp_period" style="position:absolute;top:193rem;left:702rem;width:36rem;height:35rem;"></div>
+	</div>
+	
+	<div id="mousediv" style="position:absolute;top:10rem;left:805rem;width:128rem;height:216rem;">
+		<img id="mouse" src="DKInputTest/mouse.png" style="position:absolute;top:0rem;left:0rem;width:128rem;"></img>
+		<img id="1button" src="DKInputTest/1.png" style="display:none;position:absolute;top:20rem;left:20rem;"></img>
+		<img id="2button" src="DKInputTest/2.png" style="display:none;position:absolute;top:30rem;left:51rem;"></img>
+		<img id="3button" src="DKInputTest/3.png" style="display:none;position:absolute;top:20rem;left:83rem;"></img>
+		<img id="4button" src="DKInputTest/4.png" style="display:none;position:absolute;top:40rem;left:0rem;"></img>
+		<img id="5button" src="DKInputTest/5.png" style="display:none;position:absolute;top:70rem;left:0rem;"></img>
+		<img id="6button" src="DKInputTest/6.png" style="display:none;position:absolute;top:40rem;left:104rem;"></img>
+		<img id="7button" src="DKInputTest/7.png" style="display:none;position:absolute;top:70rem;left:104rem;"></img>
+	</div>
+	
+	<textarea id="textarea" style="position:absolute;top:250rem;left:11rem;width:520rem;height:60rem;background-color:rgb(255,255,255);color:rgb(0,0,0);"></textarea>
+	
+	<div id="charcode" style="position:absolute;top:250rem;left:550rem;"> Unicode CHARACTER code:</div>
+	<div id="keycode" style="position:absolute;top:270rem;left:550rem;"> Unicode KEY code:</div>
+
+	<div id="mousex" style="position:absolute;top:250rem;left:825rem;"> Mouse X:</div>
+	<div id="mousey" style="position:absolute;top:270rem;left:825rem;"> Mouse Y:</div>
+	<div id="screenx" style="position:absolute;top:290rem;left:825rem;"> Screen X:</div>
+	<div id="screeny" style="position:absolute;top:310rem;left:825rem;"> Screen Y:</div>
+	<div id="wheeldelta" style="position:absolute;top:330rem;left:825rem;"> Wheel Delta:</div>
+	
+	<div id="lastevent" style="position:absolute;top:320rem;left:100rem;"> Last Event:</div>
+</div>

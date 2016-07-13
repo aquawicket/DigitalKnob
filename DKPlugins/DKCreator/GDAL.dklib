@@ -1,0 +1,125 @@
+<VERIFY> ${DKLIBS}/gdal </VERIFY>
+<PATH> ${DKLIBS}/gdal </PATH>
+
+<INSTALL>
+	<download url="ftp://ftp.remotesensing.org/gdal/1.11.1/gdal1111.zip" url2="http://digitalknob.com/Download/Libs/gdal1111.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/gdal1111.zip" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/gdal-1.11.1" output="gdal" />
+</INSTALL>
+
+
+<WIN32>
+	<msys>
+	cd ${DKLIBS}/gdal/win32/Debug; export PATH=/c/mingw/mingw32/bin:$PATH; ../../configure --disable-shared --enable-static; make; exit
+	</msys>
+	<waitforkey />
+
+	<msys>
+	cd ${DKLIBS}/gdal/win32/Release; export PATH=/c/mingw/mingw32/bin:$PATH; ../../configure --disable-shared --enable-static; make; exit
+	</msys>
+	<waitforkey />
+</WIN32>
+
+<WIN64>
+	<msys>
+	cd ${DKLIBS}/gdal/win64/Debug; export PATH=/c/mingw/mingw64/bin:$PATH; ../../configure --disable-shared --enable-static; make; exit
+	</msys>
+	<waitforkey />
+	
+	<msys>
+	cd ${DKLIBS}/gdal/win64/Release; export PATH=/c/mingw/mingw64/bin:$PATH; ../../configure --disable-shared --enable-static; make; exit
+	</msys>
+	<waitforkey />
+</WIN64>
+
+<MAC>
+	<setPATH> ${DKLIBS}/gdal/mac/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/gdal/mac/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+</MAC>
+
+<IOS>
+	<setPATH> ${DKLIBS}/gdal/ios/Debug </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/gdal/ios/Release </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOS>
+
+<IOSSIMULATOR>
+	<setPATH> ${DKLIBS}/gdal/ios-simulator/Debug </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/gdal/ios-simulator/Release </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/gdal/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	
+	<setPATH> ${DKLIBS}/gdal/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+</ANDROID>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/gdal/linux/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/gdal/linux/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>

@@ -1,0 +1,9 @@
+IF(ANDROID)
+	RETURN()
+ENDIF()
+
+DKDEPEND(OpenSceneGraph-3.4.0 osgdb_ffmpeg)
+DKDEPEND(DKOSGWindow)
+
+DKPLUGIN(DKOSGVideo)
+DKASSETS(DKOSGVideo)

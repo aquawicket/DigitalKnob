@@ -1,0 +1,8 @@
+<div style="position:absolute;top:0px;left:-1px;width:100%;height:100%;overflow-x:visible;overflow-y:visible;background-color:rgb(230,230,230);color:rgb(0,0,0);" id="Panel1.html">
+	<a href="https://github.com/aquawicket/DigitalKnob">
+	<div style="position:absolute;top:0px;left:0px;width:100%;height:150px;overflow-x:visible;overflow-y:visible;background-color:rgb(1,1,1);color:rgb(0,0,0);" id="Div"></div>
+	<img style="position:absolute;top:0px;color:rgb(0,0,0);" src="logo.png" id="Image"></img>
+	<img style="position:absolute;top:109px;left:156px;overflow-x:visible;overflow-y:visible;color:rgb(0,0,0);" src="slogan.png" id="Image0"></img>
+	<img style="position:absolute;top:155px;left:5px;overflow-x:visible;overflow-y:visible;color:rgb(0,0,0);" src="crossPlatform.png" id="Image1"></img>
+	</a>	
+</div>

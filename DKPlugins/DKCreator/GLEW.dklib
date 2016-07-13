@@ -1,0 +1,168 @@
+<VERIFY> ${DKLIBS}/glew-master </VERIFY>
+<PATH> ${DKLIBS}/glew-master </PATH>
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/glew-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/glew-master.zip" path="${DKLIBS}"/>
+</INSTALL>
+	
+<WIN32>
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013"
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo"
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG"
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	${DKLIBS}/glew-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/glew-master/win32/glew.sln /t:glew /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/glew-master/win32/glew.sln /t:glew /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013 Win64"
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo"
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG"
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	${DKLIBS}/glew-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/glew-master/win64/glew.sln /t:glew /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/glew-master/win64/glew.sln /t:glew /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	${DKLIBS}/glew-master
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	${DKLIBS}/glew-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKLIBS}/glew-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target glew -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/glew-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/glew-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/glew-master/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DCMAKE_C_FLAGS="-fPIC" 
+	${DKLIBS}/glew-master
+	</terminal>
+
+	<terminal>
+	make glew
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/glew-master/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DCMAKE_C_FLAGS="-fPIC" 
+	${DKLIBS}/glew-master
+	</terminal>
+
+	<terminal>
+	make glew
+	</terminal>
+	</RELEASE>
+</LINUX>

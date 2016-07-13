@@ -1,0 +1,2 @@
+DKDEPEND(DKAssets)
+DKASSETS(DKTriggers)

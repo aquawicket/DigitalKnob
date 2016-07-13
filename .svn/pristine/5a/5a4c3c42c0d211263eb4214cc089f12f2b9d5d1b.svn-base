@@ -1,0 +1,23 @@
+
+<WIN32>
+	<mkdir> ${APPPATH}+"/win32" </mkdir>
+	<setpath> ${APPPATH}+"/win32" </setpath>
+		
+	<cmd>
+	${CMAKE_EXE}
+	-G \"Visual Studio 12 2013\"
+	-DWIN_32bit=ON 
+	-DCMAKE_SKIP_RPATH=ON
+	${APPPATH}
+	</cmd>
+	
+	<cmd>
+	${VC2008_EXE}
+	${APPPATH}/win32/${APPNAME}.sln /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2008_EXE}
+	${APPPATH}/win32/${APPNAME}.sln /p:Configuration=Release
+	</cmd>
+</WIN32>

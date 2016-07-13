@@ -1,0 +1,46 @@
+IF(NOT LINUX)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+DKINSTALL(http://digitalknob.com/Download/Libs/cef_binary_3.2623.1396.g0451528_linux64.7z cef_binary_3.2623.1396.g0451528_linux64)
+DKSET(CEF ${3RDPARTY}/cef_binary_3.2623.1396.g0451528_linux64)
+
+
+### LINK ###
+DKSET(CEF ${3RDPARTY}/cef_binary_3.2623.1396.g0451528_linux64)
+DKDEFINE(__STDC_CONSTANT_MACROS)
+DKDEFINE(__STDC_FORMAT_MACROS)
+DKDEFINE(PSAPI_VERSION=1)
+DKDEFINE(NOMINMAX)
+DKDEFINE(CEF_SANDBOX)
+DKDEFINE(CEF_ATL)
+
+LINUX_INCLUDE(${CEF})
+LINUX_DEBUG_LIB(${CEF}/Debug/libcef.so)
+LINUX_RELEASE_LIB(${CEF}/Release/libcef.so)
+LINUX_DEBUG_LIB(${CEF}/${OS}/Debug/libcef_dll/libcef_dll_wrapper.a)
+LINUX_RELEASE_LIB(${CEF}/${OS}/Release/libcef_dll/libcef_dll_wrapper.a)
+#LINUX_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
+#LINUX_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
+
+IF(DKAPP)
+	DKCOPY(${CEF}/Release ${DKPROJECT}/assets/DKCef TRUE)
+	DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef TRUE)
+	DKCOPY(${CEF}/Resources ${DKPROJECT}/assets/DKCef TRUE)
+	DKCOPY(${CEF}/Release ${DKPROJECT}/linux64/Release TRUE)
+	DKCOPY(${CEF}/Resources ${DKPROJECT}/linux64/Release TRUE)
+	FILE(REMOVE ${DKPROJECT}/assets/DKCef/cef_sandbox.a)
+	FILE(REMOVE ${DKPROJECT}/assets/DKCef/libcef.a)
+	FILE(REMOVE ${DKPROJECT}/assets/DKCef/wow_helper.exe)
+ENDIF()
+
+
+### COMPILE ###
+DKSETPATH(${CEF}/${OS}/Debug)
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${CEF})
+LINUX_DEBUG_COMMAND(make libcef_dll_wrapper)
+
+DKSETPATH(${CEF}/${OS}/Release)
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${CEF})
+LINUX_RELEASE_COMMAND(make libcef_dll_wrapper)

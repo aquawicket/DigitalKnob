@@ -1,0 +1,79 @@
+DKDEPEND(freetype-2.5.5)
+
+### INSTALL ###
+DKINSTALL(http://digitalknob.com/Download/Libs/libRocket-master.zip libRocket-master)
+DKSET(ROCKET ${3RDPARTY}/libRocket-master)
+
+
+### LINK ###
+DKDEFINE(ROCKET_STATIC_LIB)
+DKINCLUDE(${ROCKET}/Include)
+DKINCLUDE(${ROCKET}/Source)
+
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketDebugger_d.lib)
+WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketDebugger.lib)
+APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketDebugger_d.a)
+APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketDebugger.a)
+LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketDebugger_d.a)
+LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketDebugger.a)
+ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketDebugger.a)
+ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketDebugger.a)
+
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketControls_d.lib)
+WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketControls.lib)
+APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketControls_d.a)
+APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketControls.a)
+LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketControls_d.a)
+LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketControls.a)
+ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketControls.a)
+ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketControls.a)
+
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketCore_d.lib)
+WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketCore.lib)
+APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketCore_d.a)
+APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketCore.a)
+LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketCore_d.a)
+LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketCore.a)
+ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketCore.a)
+ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketCore.a)
+
+
+
+
+### COMPILE ###
+DKSETPATH(${ROCKET}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ROCKET}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${ROCKET})
+WIN32_VS_DEBUG(libRocket-master libRocket.sln)
+WIN32_VS_RELEASE(libRocket-master libRocket.sln)
+
+DKSETPATH(${ROCKET}/${OS})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ROCKET}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${ROCKET})
+WIN64_VS_DEBUG(libRocket-master libRocket.sln)
+WIN64_VS_RELEASE(libRocket-master libRocket.sln)
+
+DKSETPATH(${ROCKET}/${OS})
+MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/mac/Release/libfreetype.a ${ROCKET})
+MAC_XCODE_DEBUG(libRocket-master)
+MAC_XCODE_RELEASE(libRocket-master)
+
+DKSETPATH(${ROCKET}/${OS})
+IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/${RELEASE}/libfreetype.a ${ROCKET})
+IOS_XCODE_DEBUG(libRocket-master)
+IOS_XCODE_RELEASE(libRocket-master)
+
+DKSETPATH(${ROCKET}/${OS})
+IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/${RELEASE}/libfreetype.a ${ROCKET})
+IOSSIM_XCODE_DEBUG(libRocket-master)
+IOSSIM_XCODE_RELEASE(libRocket-master)
+
+
+DKSETPATH(${ROCKET}/${OS}/Debug)
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=DEBUG -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Debug/libfreetype.a ${ROCKET})
+LINUX_DEBUG_COMMAND(make)
+
+DKSETPATH(${ROCKET}/${OS}/Release)
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=RELEASE -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/libfreetype.a ${ROCKET})
+LINUX_RELEASE_COMMAND(make)
+
+ANDROID_NDK_DEBUG(libRocket-master)
+ANDROID_NDK_RELEASE(libRocket-master)

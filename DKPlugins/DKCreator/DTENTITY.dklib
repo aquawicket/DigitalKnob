@@ -1,0 +1,510 @@
+<VERIFY> ${DKLIBS}/dtentity </VERIFY>
+<PATH> ${DKLIBS}/dtentity </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/dtentity.zip" url2="http://digitalknob.com/Download/Libs/dtentity.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/dtentity.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /EHsc /DOSG_LIBRARY_STATIC /I${OSG}/win32/include /I${OSG}/include" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=ON
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/win32/lib/OpenThreads.lib
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/win32/lib/OpenThreadsd.lib
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/win32/lib/osgAnimation.lib
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/win32/lib/osgAnimationd.lib"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/win32/lib/osgDB.lib
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/win32/lib/osgDBd.lib
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/win32/lib/osgGA.lib
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/win32/lib/osgGAd.lib
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/win32/lib/osgManipulator.lib
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/win32/lib/osgManipulatord.lib
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/win32/lib/osgParticle.lib
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/win32/lib/osgParticled.lib
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/win32/lib/osgShadow.lib
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/win32/lib/osgShadowd.lib
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/win32/lib/osgSim.lib
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/win32/lib/osgSimd.lib
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/win32/lib/osgText.lib
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/win32/lib/osgTextd.lib
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/win32/lib/osgUtil.lib
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/win32/lib/osgUtild.lib
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/win32/lib/osgViewer.lib
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/win32/lib/osgViewerd.lib
+	-DOSG_INCLUDE_DIR=${OSG}/include/win32/include
+	-DOSG_LIBRARY=${OSG}/win32/lib/osg.lib
+	-DOSG_LIBRARY_DEBUG=${OSG}/win32/lib/osgd.lib
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	{DKLIBS}/dtentity/win32/dtEntity.sln /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/dtentity/win32/dtEntity.sln /p:Configuration=Releasee
+	</cmd>
+</WIN32>
+
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /EHsc /DOSG_LIBRARY_STATIC /I${OSG}/win64/include /I${OSG}/include" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/win64/lib/OpenThreads.lib
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/win64/lib/OpenThreadsd.lib
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/win64/lib/osgAnimation.lib
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/win64/lib/osgAnimationd.lib"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/win64/lib/osgDB.lib
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/win64/lib/osgDBd.lib
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/win64/lib/osgGA.lib
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/win64/lib/osgGAd.lib
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/win64/lib/osgManipulator.lib
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/win64/lib/osgManipulatord.lib
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/win64/lib/osgParticle.lib
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/win64/lib/osgParticled.lib
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/win64/lib/osgShadow.lib
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/win64/lib/osgShadowd.lib
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/win64/lib/osgSim.lib
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/win64/lib/osgSimd.lib
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/win64/lib/osgText.lib
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/win64/lib/osgTextd.lib
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/win64/lib/osgUtil.lib
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/win64/lib/osgUtild.lib
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/win64/lib/osgViewer.lib
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/win64/lib/osgViewerd.lib
+	-DOSG_INCLUDE_DIR=${OSG}/include/win64/include
+	-DOSG_LIBRARY=${OSG}/win64/lib/osg.lib
+	-DOSG_LIBRARY_DEBUG=${OSG}/win64/lib/osgd.lib
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</cmd>
+	
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/dtentity/win64/dtEntity.sln /p:Configuration=Debug
+	</cmd>
+	
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/dtentity/win64/dtEntity.sln /p:Configuration=Release
+	</cmd>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_CXX_FLAGS="-I${OSG}/mac/include -I${OSG}/include" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/mac/lib/OpenThreads.a
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/mac/lib/OpenThreadsd.a
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/mac/lib/osgAnimation.a
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/mac/lib/osgAnimationd.a"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/mac/lib/osgDB.a
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/mac/lib/osgDBd.a
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/mac/lib/osgGA.a
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/mac/lib/osgGAd.a
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/mac/lib/osgManipulator.a
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/mac/lib/osgManipulatord.a
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/mac/lib/osgParticle.a
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/mac/lib/osgParticled.a
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/mac/lib/osgShadow.a
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/mac/lib/osgShadowd.a
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/mac/lib/osgSim.a
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/mac/lib/osgSimd.a
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/mac/lib/osgText.a
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/mac/lib/osgTextd.a
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/mac/lib/osgUtil.a
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/mac/lib/osgUtild.a
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/mac/lib/osgViewer.a
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/mac/lib/osgViewerd.a
+	-DOSG_INCLUDE_DIR=${OSG}/include/mac/include
+	-DOSG_LIBRARY=${OSG}/mac/lib/osg.a
+	-DOSG_LIBRARY_DEBUG=${OSG}/mac/lib/osgd.a
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</terminal>
+	
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DCMAKE_CXX_FLAGS="-I${OSG}/ios/include -I${OSG}/include" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/ios/lib/OpenThreads.a
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/ios/lib/OpenThreadsd.a
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/ios/lib/osgAnimation.a
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/ios/lib/osgAnimationd.a"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/ios/lib/osgDB.a
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/ios/lib/osgDBd.a
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/ios/lib/osgGA.a
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/ios/lib/osgGAd.a
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/ios/lib/osgManipulator.a
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/ios/lib/osgManipulatord.a
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/ios/lib/osgParticle.a
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/ios/lib/osgParticled.a
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/ios/lib/osgShadow.a
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/ios/lib/osgShadowd.a
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/ios/lib/osgSim.a
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/ios/lib/osgSimd.a
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/ios/lib/osgText.a
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/ios/lib/osgTextd.a
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/ios/lib/osgUtil.a
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/ios/lib/osgUtild.a
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/ios/lib/osgViewer.a
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/ios/lib/osgViewerd.a
+	-DOSG_INCLUDE_DIR=${OSG}/include/ios/include
+	-DOSG_LIBRARY=${OSG}/ios/lib/osg.a
+	-DOSG_LIBRARY_DEBUG=${OSG}/ios/lib/osgd.a
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+</IOS>
+	
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DCMAKE_CXX_FLAGS="-I${OSG}/ios-simulator/include -I${OSG}/include" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/ios-simulator/lib/OpenThreads.a
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/OpenThreadsd.a
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/ios-simulator/lib/osgAnimation.a
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/ios-simulator/lib/osgAnimationd.a"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/ios-simulator/lib/osgDB.a
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgDBd.a
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/ios-simulator/lib/osgGA.a
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgGAd.a
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/ios-simulator/lib/osgManipulator.a
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgManipulatord.a
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/ios-simulator/lib/osgParticle.a
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgParticled.a
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/ios-simulator/lib/osgShadow.a
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgShadowd.a
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/ios-simulator/lib/osgSim.a
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgSimd.a
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/ios-simulator/lib/osgText.a
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgTextd.a
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/ios-simulator/lib/osgUtil.a
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgUtild.a
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/ios-simulator/lib/osgViewer.a
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgViewerd.a
+	-DOSG_INCLUDE_DIR=${OSG}/include/ios-simulator/include
+	-DOSG_LIBRARY=${OSG}/ios-simulator/lib/osg.a
+	-DOSG_LIBRARY_DEBUG=${OSG}/ios-simulator/lib/osgd.a
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	
+	<terminal>
+	${XCODE_EXE} -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+</IOSSIMULATOR>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/dtentity/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DCMAKE_CXX_FLAGS="-I${OSG}/linux/include -I${OSG}/include" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/linux/lib/OpenThreads.a
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/linux/lib/OpenThreadsd.a
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/linux/lib/osgAnimation.a
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/linux/lib/osgAnimationd.a"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/linux/lib/osgDB.a
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/linux/lib/osgDBd.a
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/linux/lib/osgGA.a
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/linux/lib/osgGAd.a
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/linux/lib/osgManipulator.a
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/linux/lib/osgManipulatord.a
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/linux/lib/osgParticle.a
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/linux/lib/osgParticled.a
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/linux/lib/osgShadow.a
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/linux/lib/osgShadowd.a
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/linux/lib/osgSim.a
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/linux/lib/osgSimd.a
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/linux/lib/osgText.a
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/linux/lib/osgTextd.a
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/linux/lib/osgUtil.a
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/linux/lib/osgUtild.a
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/linux/lib/osgViewer.a
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/linux/lib/osgViewerd.a
+	-DOSG_INCLUDE_DIR=${OSG}/include/linux/include
+	-DOSG_LIBRARY=${OSG}/linux/lib/osg.a
+	-DOSG_LIBRARY_DEBUG=${OSG}/linux/lib/osgd.a
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+
+	<setPATH> ${DKLIBS}/dtentity/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DCMAKE_CXX_FLAGS="-I${OSG}/linux/include -I${OSG}/include" 
+	-DDTENTITY_EXT_DEP_DIR="null"
+	-DBUILD_CLOUDS=OFF 
+	-DBUILD_EXAMPLES=OFF 
+	-DBUILD_JAVASCRIPT_WRAPPERS=OFF 
+	-DBUILD_LIBROCKET=OFF
+	-DBUILD_OPENAL=OFF
+	-DBUILD_OSG_COMPONENTS=ON
+	-DBUILD_QT=OFF
+	-DBUILD_TESTS=OFF
+	-DDTENTITY_LIBRARY_STATIC=ON
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/linux/lib/OpenThreads.a
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/linux/lib/OpenThreadsd.a
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/linux/lib/osgAnimation.a
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/linux/lib/osgAnimationd.a"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/linux/lib/osgDB.a
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/linux/lib/osgDBd.a
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/linux/lib/osgGA.a
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/linux/lib/osgGAd.a
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/linux/lib/osgManipulator.a
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/linux/lib/osgManipulatord.a
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/linux/lib/osgParticle.a
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/linux/lib/osgParticled.a
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/linux/lib/osgShadow.a
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/linux/lib/osgShadowd.a
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/linux/lib/osgSim.a
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/linux/lib/osgSimd.a
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/linux/lib/osgText.a
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/linux/lib/osgTextd.a
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/linux/lib/osgUtil.a
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/linux/lib/osgUtild.a
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/linux/lib/osgViewer.a
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/linux/lib/osgViewerd.a
+	-DOSG_INCLUDE_DIR=${OSG}/include/linux/include
+	-DOSG_LIBRARY=${OSG}/linux/lib/osg.a
+	-DOSG_LIBRARY_DEBUG=${OSG}/linux/lib/osgd.a
+	-DCEGUI_INCLUDE_DIR=""
+	-DENET_INCLUDE_DIR=""
+	-DLIBROCKET_INCLUDE_DIR=""
+	-DOSGEPHEMERIS_INCLUDE_DIR=""
+	-DPROTOBUF_INCLUDE_DIR=""
+	-DV8_INCLUDE_DIR=""
+	${DKLIBS}/dtentity
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/dtentity/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	
+	<setPATH> ${DKLIBS}/dtentity/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+</ANDROID>

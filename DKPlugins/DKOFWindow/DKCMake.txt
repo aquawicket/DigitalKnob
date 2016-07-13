@@ -1,0 +1,4 @@
+DKDEPEND(openFrameworks-master)
+DKDEPEND(DKWindow)
+
+DKPLUGIN(DKOFWindow)

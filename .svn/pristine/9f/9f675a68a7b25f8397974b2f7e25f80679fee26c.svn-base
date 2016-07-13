@@ -1,0 +1,108 @@
+
+IMO, things aren't sooo bad. ;-)
+
+W.r.t. the value of a variable, CMake knows scopes and the cache. A new
+scope is entered by ADD_SUBDIRECTORY() or a function's invocation. When
+referring to a variable's value by the "${}" operator you get the value
+from the current scope. At the start of a CMake run, the variables are
+initialized with the values from the cache, provided the latter exists
+and is appropriately populated. The SET() command - that is the actual
+source of confusion along with OPTION() - basically has four flavours:
+
+(1) SET(VAR "xyz") sets the value of VAR in the current scope to "xyz",
+    i.e. "${VAR}" yields "xyz" until the value of VAR is changed anew.
+(2) SET(VAR "xyz" PARENT_SCOPE) sets the value of VAR in the parent's
+    scope to "xyz", but doesn't affect the current scope or the cache.
+(3) SET(VAR "xyz" CACHE STRING "..." FORCE) sets VAR's value in the
+    current scope and in the cache to "xyz" regardless if there's
+    already a cached value or VAR is defined in the current scope.
+(4) SET(VAR "xyz" CACHE STRING "...") sets VAR's value in the cache
+    to "xyz" unless there's already a cached value for VAR, and the
+    latter's value in the current scope is set from the cache if
+    (a) the SET() writes to the cache, or
+    (b) VAR is undefined in the current scope, or
+    (c) the type of VAR in the cache is UNINITIALIZED.
+
+While (4a,b) are quite reasonable, (4c) is somewhat strange as it
+yields different results for apparently equivalent invocations:
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8 FATAL_ERROR)
+PROJECT(VARS NONE)
+MESSAGE("VAR{1,2}[CACHE]: ${VAR1},${VAR2}")
+SET(VAR1 "abc")
+SET(VAR2 "abc")
+MESSAGE("VAR{1,2}[LOCAL]: ${VAR1},${VAR2}")
+UNSET(VAR2)
+SET(VAR1 "xyz" CACHE STRING "")
+SET(VAR2 "xyz" CACHE STRING "")
+MESSAGE("VAR{1,2}[FINAL]: ${VAR1},${VAR2}")
+
+Cmaking from a clean build directory yields, as expected, (4a):
+
+VAR{1,2}[CACHE]: ,
+VAR{1,2}[LOCAL]: abc,abc
+VAR{1,2}[FINAL]: xyz,xyz
+
+Afterwards, "cmake -DVAR1:STRING=pqr -DVAR2:STRING=pqr ." yields:
+
+VAR{1,2}[CACHE]: pqr,pqr
+VAR{1,2}[LOCAL]: abc,abc
+VAR{1,2}[FINAL]: abc,pqr
+
+So, VAR1 is finally not set from the cache, but VAR2 is as it's
+undefined in the current scope at that moment; this proves (4b).
+
+Now, "cmake -DVAR1=pqr -DVAR2=pqr ." reveals (4c):
+
+VAR{1,2}[CACHE]: pqr,pqr
+VAR{1,2}[LOCAL]: abc,abc
+VAR{1,2}[FINAL]: pqr,pqr
+
+The parameter "-DVAR1=pqr", i.e. without a type, supplies the cache
+with "VAR1:UNINITIALIZED=pqr" for VAR1, and the subsequent command
+SET(VAR1 "xyz" CACHE STRING "") changes VAR1's type to STRING, but
+does not touch the cached value; though, the latter is written to
+VAR1 in the current scope. Here, I'm in doubt if this behaviour is
+really intended.
+
+To summarize: If none of (4a-c) holds, i.e. an already cached value
+for VAR with a type other than UNINITIALIZED and VAR defined in the
+current scope, SET(VAR "xyz" CACHE STRING "...") just does nothing.
+
+It's that (4a-c) which causes the confusion in regard to a variable's
+value in the cache and the current scope, and as OPTION(VAR "..." ON)
+is, AFAIK, quite the same as SET(VAR ON CACHE BOOL "..."), the above-
+mentioned considerations apply accordingly. So, the rule of thumb is
+to differentiate cleanly between variables to be used with the cache
+and variables to be used as usual, or in other words: If one wants a
+variable to be set to a cached value one shouldn't use it afore, i.e.
+saying SET(VAR "xyz" CACHE STRING "...") with VAR being undefined at
+that moment behaves as desired: If there's already a cached value it
+gets written to VAR, otherwise "xyz" is written to VAR and the cache
+and, thus, serves as a fallback value. In short: Go the (4b) way. ;)
+
+Regards,
+
+Michael
+
+P.S.: There has been several discussions of this issue, and it
+      has even been considered to introduce a related policy:
+
+<http://www.mail-archive.com/cmake@cmake.org/msg20930.html>
+<http://www.mail-archive.com/cmake@cmake.org/msg21394.html>
+<http://public.kitware.com/Bug/view.php?id=9008> - ongoing!
+
+
+
+
+# http://stackoverflow.com/questions/1192200/problems-with-a-simple-dependency-algorithm
+#function ExamineField(Field F)
+#{
+#    if(F.already_in_list){
+#        return
+#	}
+#    foreach C child of F{
+#        call ExamineField(C)
+#    }
+#    AddToList(F)
+#}

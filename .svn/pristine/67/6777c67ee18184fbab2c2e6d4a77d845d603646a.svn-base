@@ -1,0 +1,33 @@
+<VERIFY> C:/chromium </VERIFY>
+<PATH> C:/chromium </PATH>
+
+<WIN32>
+	<INSTALL>
+		<mkdir> C:/chromium </mkdir>
+		<setPATH> C:/chromium </setPATH>
+		<cmd> fetch --nohooks --no-history chromium </cmd>
+	</INSTALL>
+	
+	<setPATH> C:/chromium/src </setPATH>
+	<cmd> set DEPOT_TOOLS_WIN_TOOLCHAIN=0 </cmd>
+	<cmd> gclient runhooks </cmd>
+	<cmd> gclient sync </cmd>
+	<cmd> ninja -C out\Debug chrome </cmd>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<mkdir> C:/chromium </mkdir>
+		<setPATH> C:/chromium </setPATH>
+		<cmd> fetch --nohooks --no-history chromium </cmd>
+	</INSTALL>
+	
+	<setPATH> C:/chromium/src </setPATH>
+	<cmd> set DEPOT_TOOLS_WIN_TOOLCHAIN=0 </cmd>
+	<cmd> set GYP_GENERATORS=ninja,msvs-ninja </cmd>
+	<cmd> set GYP_DEFINES=component=shared_library </cmd>
+	<cmd> set GYP_MSVS_VERSION=2013 </cmd>
+	<cmd> set GYP_DEFINES target_arch=x64 </cmd>
+	<cmd> gclient runhooks </cmd>
+	<cmd> gclient sync </cmd>
+</WIN64>

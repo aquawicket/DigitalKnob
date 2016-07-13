@@ -1,0 +1,25 @@
+<VERIFY> ${DKLIBS}/ode </VERIFY>
+<PATH> ${DKLIBS}/ode </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/ode-0.13.tar" url2="http://digitalknob.com/Download/Libs/ode-0.13.tar" path="${DKDL}"/>
+	<extract file="${DKDL}/ode-0.13.tar" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/ode-0.13" output="ode"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${DKLIBS}/ode/build/premake4.exe vs2013
+	</cmd>
+
+	<cmd>
+	${VC2008_EXE}
+	${DKLIBS}/ode/build/vs2013/ode.sln /t:ode /p:Configuration=DebugSingleLib
+	</cmd>
+
+	<cmd>
+	${VC2008_EXE}
+	${DKLIBS}/ode/build/vs2013/ode.sln /t:ode /p:Configuration=ReleaseSingleLib
+	</cmd>
+</WIN32>

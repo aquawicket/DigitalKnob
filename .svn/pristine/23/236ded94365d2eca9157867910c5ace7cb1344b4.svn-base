@@ -1,0 +1,10 @@
+<WIN32>
+	<VERIFY> ${DKLIBS}/stackwalker/stackwalker </VERIFY>
+	<PATH> ${DKLIBS}/stackwalker/stackwalker </PATH>
+
+	<INSTALL>
+		<download url="http://DigitalKnob.com/Download/Libs/stackwalker-2014-12-28.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/stackwalker-2014-12-28.zip" path="${DKLIBS}"/>
+		<rename path="${DKLIBS}/Main" output="stackwalker" />
+	</INSTALL>
+</WIN32>

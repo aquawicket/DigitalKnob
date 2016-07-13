@@ -1,0 +1,8 @@
+
+<LINUX>
+	<VERIFY> /usr/bin/cmake </VERIFY>
+	<INSTALL>
+	<terminal> sudo apt-get update </terminal>
+	<terminal> sudo apt-get install build-essential </terminal>
+	</INSTALL>
+</LINUX>

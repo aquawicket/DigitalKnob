@@ -1,0 +1,5 @@
+DKDEPEND(DK)
+DKDEPEND(DKArchive)
+DKDEPEND(DKAssets)
+DKDEPEND(DKDuktape)
+

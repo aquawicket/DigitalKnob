@@ -1,0 +1,34 @@
+
+<WIN32>
+	<VERIFY> C:/boost-build/bin/bjam.exe </VERIFY>
+	<PATH> C:/boost-build </PATH>
+	<EXE> C:/boost-build/bin/bjam.exe </EXE>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Tools/boost-build-2014-10.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/boost-build-2014-10.zip" path="C:/"/>
+
+		<setPATH> C:/boost-build </setPATH>
+		<cmd> bootstrap.bat vc12 </cmd>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/boost-build/bin/bjam.exe </VERIFY>
+	<PATH> C:/boost-build </PATH>
+	<EXE> C:/boost-build/bin/bjam.exe </EXE>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Tools/boost-build-2014-10.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/boost-build-2014-10.zip" path="C:/"/>
+		
+		<setPATH> C:/boost-build </setPATH>
+		<cmd> bootstrap.bat vc12 </cmd>
+	</INSTALL>
+</WIN64>
+
+<LINUX>
+	<VERIFY> /usr/bin/bjam </VERIFY>
+	<EXE> bjam </EXE>
+	<INSTALL>
+		<terminal> sudo apt-get install libboost1.55-tools-dev </terminal>
+	</INSTALL>
+</LINUX>

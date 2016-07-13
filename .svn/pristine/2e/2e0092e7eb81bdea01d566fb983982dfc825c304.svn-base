@@ -1,0 +1,17 @@
+
+<VERIFY> C:/Program Files/Java/jdk1.8.0_25 </VERIFY>
+<PATH> C:/Program Files/Java/jdk1.8.0_25 </PATH>
+
+<WIN32>
+	<INSTALL>
+		<download url2="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-i586.exe" url="http://digitalknob.com/Download/Tools/jdk-8u25-windows-i586.exe" path="${DKDL}"/>
+		<execute> ${DKDL}/jdk-8u25-windows-i586.exe </execute>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url2="http://download.oracle.com/otn-pub/java/jdk/8u25-b18/jdk-8u25-windows-x64.exe" url="http://digitalknob.com/Download/Tools/jdk-8u25-windows-x64.exe" path="${DKDL}"/>
+		<execute> ${DKDL}/jdk-8u25-windows-x64.exe </execute>
+	</INSTALL>
+</WIN64>

@@ -1,0 +1,169 @@
+<VERIFY> ${DKLIBS}/tiff-4.0.3 </VERIFY>
+<PATH> ${DKLIBS}/tiff-4.0.3 </PATH>
+
+<INSTALL>
+	<download url="http://download.osgeo.org/libtiff/tiff-4.0.3.zip" url2="http://digitalknob.com/Download/Libs/tiff-4.0.3.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/tiff-4.0.3.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	${DKLIBS}/tiff-4.0.3
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/tiff-4.0.3/win32/tiff.sln /t:tiff-static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/tiff-4.0.3/win32/tiff.sln /t:tiff-static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ZLIB} /I${ZLIB}/win64" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	${DKLIBS}/tiff-4.0.3
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/tiff-4.0.3/win64/tiff.sln /t:tiff-static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/tiff-4.0.3/win64/tiff.sln /t:tiff-static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	${DKLIBS}/tiff-4.0.3
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKLIBS}/tiff-4.0.3
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target tiff-static -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/tiff-4.0.3/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/tiff-4.0.3/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/tiff-4.0.3/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DCMAKE_C_FLAGS="-I${ZLIB} -I${ZLIB}/linux/Debug"
+	${DKLIBS}/tiff-4.0.3
+	</terminal>
+
+	<terminal>
+	make tiff-static
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/tiff-4.0.3/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DCMAKE_C_FLAGS="-I${ZLIB} -I${ZLIB}/linux/Release"
+	${DKLIBS}/tiff-4.0.3
+	</terminal>
+
+	<terminal>
+	make tiff-static
+	</terminal>
+	</RELEASE>
+</LINUX>

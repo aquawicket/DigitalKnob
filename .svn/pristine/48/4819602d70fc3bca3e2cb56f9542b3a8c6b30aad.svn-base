@@ -1,0 +1,176 @@
+<VERIFY> ${DKLIBS}/xz-5.2.0 </VERIFY>
+<PATH> ${DKLIBS}/xz-5.2.0 </PATH>
+
+<INSTALL>
+	<download url="http://tukaani.org/xz/xz-5.2.0.tar.gz" url2="http://digitalknob.com/Download/Libs/xz-5.2.0.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/xz-5.2.0.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<DEBUG>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/xz-5.2.0/win32/Debug;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/xz-5.2.0/win32/Debug/src/liblzma/.libs/liblzma.a" to="${DKLIBS}/xz-5.2.0/win32/Debug/src/liblzma/.libs/liblzma.lib" />
+	</DEBUG>
+
+	<RELEASE>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/xz-5.2.0/win32/Release;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/xz-5.2.0/win32/Release/src/liblzma/.libs/liblzma.a" to="${DKLIBS}/xz-5.2.0/win32/Release/src/liblzma/.libs/liblzma.lib" />
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<DEBUG>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/xz-5.2.0/win64/Debug;
+	export PATH=/c/mingw/mingw64/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/xz-5.2.0/win64/Debug/src/liblzma/.libs/liblzma.a" to="${DKLIBS}/xz-5.2.0/win64/Debug/src/liblzma/.libs/liblzma.lib" />
+	</DEBUG>
+	
+	<RELEASE>
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/xz-5.2.0/win64/Release;
+	export PATH=/c/mingw/mingw64/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32;
+	make;
+	exit;
+	</bash>
+	<copy path="${DKLIBS}/xz-5.2.0/win64/Release/src/liblzma/.libs/liblzma.a" to="${DKLIBS}/xz-5.2.0/win64/Release/src/liblzma/.libs/liblzma.lib" />
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/xz-5.2.0/mac/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/xz-5.2.0/mac/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/xz-5.2.0/ios/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/xz-5.2.0/ios/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/xz-5.2.0/ios-simulator/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/xz-5.2.0/ios-simulator/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/xz-5.2.0/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/xz-5.2.0/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/xz-5.2.0/linux/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/xz-5.2.0/linux/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

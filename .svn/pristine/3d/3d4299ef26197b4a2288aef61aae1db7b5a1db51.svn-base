@@ -1,0 +1,47 @@
+<div id="DKDatabase.html" style="position:absolute;width:760rem;height:500rem;">
+	<div id="Text1" style="position:absolute;top:2rem;left:16rem;width:50rem;font-weight:bold;">
+		Server:
+	</div>
+	<input type="text" id="ServerBox" style="position:absolute;top:4rem;left:70rem;width:150rem;height:18rem;">
+	</input>
+	<div id="Text2" style="position:absolute;top:2rem;left:237rem;width:39rem;height:22rem;font-weight:bold;">
+		Port:
+	</div>
+	<input type="text" id="PortBox" style="position:absolute;top:4rem;left:273rem;width:50rem;height:18rem;">
+	</input>
+	<div id="Text3" style="position:absolute;top:2rem;left:339rem;width:50rem;font-weight:bold;">
+		Name:
+	</div>
+	<input type="text" id="NameBox" style="position:absolute;top:4rem;left:388rem;width:120rem;height:18rem;">
+	</input>
+	<div id="Text4" style="position:absolute;top:2rem;left:520rem;width:50rem;font-weight:bold;">
+		Pass:
+	</div>
+	<input type="text" id="PassBox" style="position:absolute;top:4rem;left:560rem;width:120rem;height:18rem;">
+	</input>
+		<button id="DatabaseConnect" style="position:absolute;top:3rem;left:695rem;width:57rem;height:22rem;font-weight:bold;">
+		Connect
+	</button>
+	<div id="Text5" style="position:absolute;top:32rem;left:17rem;width:71rem;height:23rem;font-weight:bold;">
+		Database:
+	</div>
+	<select id="DatabaseDrop" style="position:absolute;top:35rem;left:97rem;width:150rem;height:18rem;">
+	</select>
+	<div id="Text6" style="position:absolute;top:34rem;left:279rem;width:50rem;font-weight:bold;">
+		Table:
+	</div>
+	<select id="TableDrop" style="position:absolute;top:35rem;left:331rem;width:150rem;height:18rem;">
+	</select>
+	<button id="AddDatabase" style="position:absolute;top:35rem;left:254rem;width:14rem;height:20rem;">+</button>
+	<button id="AddTable" style="position:absolute;top:35rem;left:489rem;width:14rem;height:20rem;">+</button>
+	<div id="Records" style="position:absolute;top:60rem;left:20rem;bottom:20rem;right:20rem;overflow-x:auto;overflow-y:auto;background-color:rgb(181,181,181);">
+	</div>
+	<button id="SaveButton" style="position:absolute;bottom:30rem;right:30rem;width:43rem;height:22rem;">
+		Save
+	</button>
+	<button id="CancelButton" style="position:absolute;bottom:30rem;right:90rem;width:50rem;">
+		Cancel
+	</button>
+	<img id="Success" src="check.png" style="display:none;position:absolute;top:69rem;left:706rem;">
+	</img>
+</div>

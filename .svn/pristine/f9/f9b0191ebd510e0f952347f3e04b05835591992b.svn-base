@@ -1,0 +1,15 @@
+<WIN32>
+<VERIFY> C:/Python27/python.exe </VERIFY>
+<INSTALL> 
+	<download url="https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi" url2="http://digitalknob.com/Download/Tools/python-2.7.10.msi" path="${DKDL}" />
+	<execute> ${DKDL}/python-2.7.10.msi </execute>
+</INSTALL>
+</WIN32>
+
+<WIN64>
+<VERIFY> C:/Python27/python.exe </VERIFY>
+<INSTALL> 
+	<download url="https://www.python.org/ftp/python/2.7.10/python-2.7.10.msi" url2="http://digitalknob.com/Download/Tools/python-2.7.10.msi" path="${DKDL}" />
+	<execute> ${DKDL}/python-2.7.10.msi </execute>
+</INSTALL>
+</WIN64>

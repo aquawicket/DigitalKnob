@@ -1,0 +1,70 @@
+<div id="DKBuildGUI.html" style="position:absolute;width:600rem;height:40rem;background-color:rgb(64,64,64);">
+	<img tooltip="Powered by DigitalKnob" id="logo" src="DKBuild/logo.png" style="position:absolute;top:1rem;left:1rem;overflow-x:visible;overflow-y:visible;width:139rem;">
+	</img>
+	<select id="AppList" style="position:absolute;top:5rem;left:140rem;width:120rem;height:22rem;">
+
+	</select>
+	<select id="OSList" style="position:absolute;top:5rem;left:263rem;width:100rem;height:22rem;">
+		<option id="win32" style="display:inline;" value="win32">
+			win32
+		</option>
+		<option id="win64" value="win64">
+			win64
+		</option>
+		<option id="mac32" value="mac32">
+			mac32
+		</option>
+		<option id="mac64" value="mac64">
+			mac64
+		</option>
+		<option id="linux32" value="linux32">
+			linux32
+		</option>
+		<option id="linux64" value="linux64">
+			linux64
+		</option>
+		<option id="android32" value="android32">
+			android32
+		</option>
+		<option id="android64" value="android64">
+			android64
+		</option>
+		<option id="ios32" value="ios32">
+			ios32
+		</option>
+		<option id="ios64" value="ios64">
+			ios64
+		</option>
+		<option id="iossim32" value="iossim32">
+			iossim32
+		</option>
+		<option id="iossim64" value="iossim64">
+			iossim64
+		</option>
+	</select>
+	<select id="BuildType" style="position:absolute;top:5rem;left:366rem;width:70rem;height:22rem;">
+		<option id="All1" style="display:inline;" value="ALL">
+			ALL
+		</option>
+		<option id="Debug" value="Debug">
+			Debug
+		</option>
+		<option id="Release" value="Release" selected="Release">
+			Release
+		</option>
+	</select>
+	<select id="LinkType" style="position:absolute;top:5rem;left:439rem;width:70rem;height:22rem;">
+		<option id="Static" value="Static" selected="Static" style="display:inline;" >
+			Static
+		</option>
+		<option id="Dynamic" value="Dynamic">
+			Dynamic
+		</option>
+	</select>
+	<img id="svn" src="DKBuild/sync.png" style="position:absolute;top:5rem;left:513rem;width:24rem;">
+	</img>
+	<img id="libraries" src="DKBuild/libraries.png" style="position:absolute;top:4rem;left:540rem;width:25rem;">
+	</img>
+	<img id="build" src="DKBuild/play.png" style="position:absolute;top:3rem;left:570rem;width:25rem;">
+	</img>
+</div>

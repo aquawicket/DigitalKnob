@@ -1,0 +1,20 @@
+
+<WIN32>
+<VERIFY> ${DKLIBS}/v8/third_party/cygwin </VERIFY>
+<PATH> ${DKLIBS}/v8/third_party/cygwin </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/v8-cygwin.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/v8-cygwin.zip" path="${DKLIBS}/v8/third_party"/>
+</INSTALL>
+</WIN32>
+
+<WIN64>
+<VERIFY> ${DKLIBS}/v8/third_party/cygwin/dk </VERIFY>
+<PATH> ${DKLIBS}/v8/third_party/cygwin </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/v8-cygwin.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/v8-cygwin.zip" path="${DKLIBS}/v8/third_party"/>
+</INSTALL>
+</WIN64>

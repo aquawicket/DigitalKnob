@@ -1,0 +1,30 @@
+<WIN32>
+	<VERIFY> C:/Program Files/Git/bin/git.exe </VERIFY>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Tools/Git-1.9.4-preview20140611.exe" path="${DKDL}" />
+		<execute> ${DKDL}/Git-1.9.4-preview20140611.exe </execute>
+	</INSTALL>
+	<EXE> C:/Program Files/Git/bin/git.exe </EXE>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/Git/bin/git.exe </VERIFY>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Tools/Git-1.9.4-preview20140611.exe" path="${DKDL}" />
+		<execute> ${DKDL}/Git-1.9.4-preview20140611.exe </execute>
+	</INSTALL>
+	<EXE> C:/Program Files (x86)/Git/bin/git.exe </EXE>
+</WIN64>
+
+<MAC>
+	<VERIFY> /Users </VERIFY>
+	<EXE> git </EXE>
+</MAC>
+
+<LINUX>
+	<VERIFY> /usr/bin/git </VERIFY>
+	<EXE> git </EXE>
+	<INSTALL>
+	<terminal> sudo apt-get install git </terminal>
+	</INSTALL>
+</LINUX>

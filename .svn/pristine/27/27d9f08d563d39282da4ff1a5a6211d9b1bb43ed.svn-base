@@ -1,0 +1,7 @@
+<VERIFY> ${DKLIBS}/msinttypes-r26 </VERIFY>
+<PATH> ${DKLIBS}/msinttypes-r26 </PATH>
+
+<INSTALL>
+	<download url="http://msinttypes.googlecode.com/files/msinttypes-r26.zip" url2="http://digitalknob.com/Download/Libs/msinttypes-r26.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/msinttypes-r26.zip" path="${DKLIBS}/msinttypes-r26"/>
+</INSTALL>

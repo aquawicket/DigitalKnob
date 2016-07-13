@@ -1,0 +1,7 @@
+
+<LINUX>
+	<VERIFY> /usr/bin/cmake </VERIFY>
+	<INSTALL>
+	<terminal> sudo apt-get install freeglut3-dev </terminal>
+	</INSTALL>
+</LINUX>

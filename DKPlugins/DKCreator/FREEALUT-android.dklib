@@ -1,0 +1,25 @@
+<VERIFY> ${DKLIBS}/freealut-master </VERIFY>
+<PATH> ${DKLIBS}/freealut-master </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/freealut-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/freealut-master.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/freealut-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/freealut-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>

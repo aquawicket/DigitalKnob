@@ -1,0 +1,2 @@
+MESSAGE(STATUS "DKApp DKCMake.txt file")
+DKDEPEND(DK)

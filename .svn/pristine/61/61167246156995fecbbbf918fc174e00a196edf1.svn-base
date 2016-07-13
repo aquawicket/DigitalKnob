@@ -1,0 +1,172 @@
+<VERIFY> ${DKPLUGINS} </VERIFY>
+<PATH> ${DKPLUGINS} </PATH>
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DWIN_32=ON
+	${DKPLUGINS}
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKPLUGINS}/win32/DigitalKnob.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKPLUGINS}/win32/DigitalKnob.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DWIN_64=ON
+	${DKPLUGINS}
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKPLUGINS}/win64/DigitalKnob.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKPLUGINS}/win64/DigitalKnob.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DMAC=ON
+	${DKPLUGINS}
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	${DKPLUGINS}
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKPLUGINS}
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+
+<ANDROID>
+	<delete> ${DKPLUGINS}/android/CMakeFiles </delete>
+	<delete> ${DKPLUGINS}/android/cmake_install.cmake </delete>
+	<delete> ${DKPLUGINS}/android/CMakeCache.txt </delete>
+	<delete> ${DKPLUGINS}/android/Makefile </delete>
+
+	<cmd>
+	${CMAKE_EXE}
+	-G "MinGW Makefiles" 
+	-DANDROID=ON
+	${DKPLUGINS}
+	</cmd>
+	
+	<DEBUG>
+	<setpath> ${DKPLUGINS}/android/Debug </setpath>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setpath> ${DKPLUGINS}/android/Release </setpath>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setpath> ${DKPLUGINS}/linux/Debug </setpath>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	${DKPLUGINS}
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setpath> ${DKPLUGINS}/linux/Release </setpath>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	${DKPLUGINS}
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

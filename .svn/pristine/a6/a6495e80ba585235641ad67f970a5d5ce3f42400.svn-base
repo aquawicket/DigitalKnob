@@ -1,0 +1,286 @@
+<VERIFY> ${DKLIBS}/osgworks-master </VERIFY>
+<PATH> ${DKLIBS}/osgworks-master </PATH>
+
+<INSTALL>
+	<download url="https://drive.google.com/file/d/0B2kjcsFgFhsONkpvZklsM0F4ODQ/edit?usp=sharing%20osgworks-master.zip" url2="http://digitalknob.com/Download/Libs/osgworks-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/osgworks-master.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/win32" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGWORKS_BUILD_APPS=OFF 
+	-DOSGWORKS_INSTALL_DATA=OFF 
+	-DDIRECTINPUT_ARCH_x64=OFF
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgworks-master/win32/osgWorks.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgworks-master/win32/osgWorks.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/win64" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGWORKS_BUILD_APPS=OFF 
+	-DOSGWORKS_INSTALL_DATA=OFF 
+	-DDIRECTINPUT_ARCH_x64=ON
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgworks-master/win64/osgWorks.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgworks-master/win64/osgWorks.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DOSGInstallType="Source And Build Tree"
+	-DOSGBuildRoot="${OSG}/mac"
+	-DOSGSourceRoot="${OSG}"
+	-DBUILD_SHARED_LIBS=OFF
+	-DOSGWORKS_BUILD_APPS=OFF
+	-DOSGWORKS_INSTALL_DATA=OFF
+	-DDIRECTINPUT_ARCH_x64=OFF
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/ios" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGWORKS_BUILD_APPS=OFF 
+	-DOSGWORKS_INSTALL_DATA=OFF 
+	-DDIRECTINPUT_ARCH_x64=OFF 
+	-DBoost_INCLUDE_DIR=""
+	-DOSG_BUILD_PLATFORM_IPHONE=ON
+	${DKLIBS}/osgworks-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target osgwControls -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwMx -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwTools -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgobjects -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgwTools -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_skeleton -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target osgwControls -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwMx -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwTools -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgobjects -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgwTools -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_skeleton -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/ios-simulator" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGWORKS_BUILD_APPS=OFF 
+	-DOSGWORKS_INSTALL_DATA=OFF 
+	-DDIRECTINPUT_ARCH_x64=OFF 
+	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR=ON
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target osgwControls -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwMx -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwTools -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgobjects -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgwTools -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_skeleton -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target osgwControls -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwMx -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgwTools -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgobjects -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_osgwTools -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	<terminal>
+	${XCODE_EXE} -target osgdb_skeleton -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgworks-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgworks-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgworks-master/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DOSGInstallType="Source And Build Tree"
+	-DOSGBuildRoot="${OSG}/linux/Release"
+	-DOSGSourceRoot="${OSG}"
+	-DBUILD_SHARED_LIBS=OFF
+	-DOSGWORKS_BUILD_APPS=OFF
+	-DOSGWORKS_INSTALL_DATA=OFF
+	-DDIRECTINPUT_ARCH_x64=OFF
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgworks-master/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DOSGInstallType="Source And Build Tree"
+	-DOSGBuildRoot="${OSG}/linux/Release"
+	-DOSGSourceRoot="${OSG}"
+	-DBUILD_SHARED_LIBS=OFF
+	-DOSGWORKS_BUILD_APPS=OFF
+	-DOSGWORKS_INSTALL_DATA=OFF
+	-DDIRECTINPUT_ARCH_x64=OFF
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/osgworks-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

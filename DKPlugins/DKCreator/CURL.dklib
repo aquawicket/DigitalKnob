@@ -1,0 +1,230 @@
+<VERIFY> ${DKLIBS}/curl-7.34.0 </VERIFY>
+<PATH> ${DKLIBS}/curl-7.34.0 </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/curl-7.34.0.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/curl-7.34.0.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/win32" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DCMAKE_USE_OPENSSL=ON
+	-DOPENSSL_INCLUDE_DIR=${OPENSSL}/include
+	-DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib
+	-DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib
+	-DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib
+	-DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCURL_STATICLIB=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win32/Release/zlibstatic.lib
+	${DKLIBS}/curl-7.34.0
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/curl-7.34.0/win32/CURL.sln /t:libcurl /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/curl-7.34.0/win32/CURL.sln /t:libcurl /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/win64" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=ON
+	-DOPENSSL_INCLUDE_DIR=${OPENSSL}/include
+	-DLIB_EAY_DEBUG=${OPENSSL}/lib64/libeay32MTd.lib
+	-DLIB_EAY_RELEASE=${OPENSSL}/lib64/libeay32MT.lib
+	-DSSL_EAY_DEBUG=${OPENSSL}/lib64/ssleay32MTd.lib
+	-DSSL_EAY_RELEASE=${OPENSSL}/lib64/ssleay32MT.lib
+	-DCURL_STATICLIB=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win64/Release/zlibstatic.lib
+	${DKLIBS}/curl-7.34.0
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/curl-7.34.0/win64/CURL.sln /t:libcurl /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/curl-7.34.0/win64/CURL.sln /t:libcurl /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_C_FLAGS="-I${ZLIB}/mac" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=OFF 
+	-DCURL_STATICLIB=ON 
+	-DCURL_DISABLE_LDAP=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/mac/Release/libz.a 
+	${DKLIBS}/curl-7.34.0
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=OFF 
+	-DCURL_STATICLIB=ON 
+	-DCURL_DISABLE_LDAP=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios/Release-iphoneos/libz.a 
+	${DKLIBS}/curl-7.34.0
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios-simulator" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=OFF 
+	-DCURL_STATICLIB=ON 
+	-DCURL_DISABLE_LDAP=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios-simulator/Release-iphonesimulator/libz.a 
+	${DKLIBS}/curl-7.34.0
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target libcurl -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/curl-7.34.0/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/curl-7.34.0/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/curl-7.34.0/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Debug" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=OFF 
+	-DCURL_STATICLIB=ON 
+	-DCURL_DISABLE_LDAP=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Debug/libz.a 
+	${DKLIBS}/curl-7.34.0
+	</terminal>
+
+	<terminal>
+	make libcurl
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/curl-7.34.0/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Release" 
+	-DBUILD_CURL_EXE=OFF 
+	-DBUILD_CURL_TESTS=OFF 
+	-DCMAKE_USE_OPENSSL=OFF 
+	-DCURL_STATICLIB=ON 
+	-DCURL_DISABLE_LDAP=ON 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Release/libz.a 
+	${DKLIBS}/curl-7.34.0
+	</terminal>
+
+	<terminal>
+	make libcurl
+	</terminal>
+	</RELEASE>
+</LINUX>

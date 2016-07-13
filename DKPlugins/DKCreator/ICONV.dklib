@@ -1,0 +1,162 @@
+<VERIFY> ${DKLIBS}/libiconv-1.14 </VERIFY>
+<PATH> ${DKLIBS}/libiconv-1.14 </PATH>
+
+<INSTALL>
+	<download url="http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz" url2="http://digitalknob.com/Download/Libs/libiconv-1.14.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/libiconv-1.14.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	${DKLIBS}/libiconv-1.14
+	</cmd>
+	
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libiconv-1.14/win32/libiconv.sln /t:iconv /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libiconv-1.14/win32/libiconv.sln /t:iconv /p:Configuration=Release
+	</cmd>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	${DKLIBS}/libiconv-1.14
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libiconv-1.14/win64/libiconv.sln /t:iconv /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libiconv-1.14/win64/libiconv.sln /t:iconv /p:Configuration=Release
+	</cmd>
+</WIN64>
+
+<MAC>
+	<setPATH> ${DKLIBS}/libiconv-1.14/mac/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/mac/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+</MAC>
+
+<IOS>
+	<setPATH> ${DKLIBS}/libiconv-1.14/ios/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/ios/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOS>
+
+<IOSSIMULATOR>
+	<setPATH> ${DKLIBS}/libiconv-1.14/ios-simulator/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/ios-simulator/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/libiconv-1.14/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+</ANDROID>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/libiconv-1.14/linux/Debug </setPATH>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/linux/Release </setPATH>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+</LINUX>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/libiconv-1.14/linux/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libiconv-1.14/linux/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>

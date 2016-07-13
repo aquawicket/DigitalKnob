@@ -1,0 +1,16 @@
+<INSTALL> 
+	<download url="http://DigitalKnob.com/Download/Tools/vs_community_ENU.exe" path="${DKDL}" />
+	<execute> ${DKDL}/vs_community_ENU.exe </execute>
+</INSTALL>
+
+<PATH> C:/Program Files (x86)/Microsoft Visual Studio 14.0 </PATH>
+<EXE> C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe </EXE>
+
+
+<WIN32>
+	<VERIFY> C:/Program Files (x86)/Microsoft Visual Studio 14.0 </VERIFY>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/Microsoft Visual Studio 14.0 </VERIFY>
+</WIN64>

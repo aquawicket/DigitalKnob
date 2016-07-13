@@ -1,0 +1,129 @@
+<VERIFY> ${DKLIBS}/libxml2 </VERIFY>
+<PATH> ${DKLIBS}/libxml2 </PATH>
+
+<INSTALL>
+	<download url="ftp://xmlsoft.org/libxml2/libxml2-2.9.2.tar.gz" url2="http://digitalknob.com/Download/Libs/libxml2-2.9.2.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/libxml2-2.9.2.tar.gz" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/libxml2-2.9.2" output="libxml2"/>
+</INSTALL>
+
+
+<WIN32>
+	<msys>
+	cd ${DKLIBS}/libxml2/win32/Debug; export PATH=/c/mingw/mingw32/bin:$PATH; ../configure --disable-shared --without-python --without-iconv --without-zlib; make; exit
+	</msys>
+	<waitforkey/>
+	<copy path="${DKLIBS}/libxml2/win32/Debug/.libs/libxml2.a" to="${DKLIBS}/libxml2/win32/Debug/.libs/libxml2.lib" />
+	
+	<msys>
+	cd ${DKLIBS}/libxml2/win32/Release; export PATH=/c/mingw/mingw32/bin:$PATH; ../configure --disable-shared --without-python --without-iconv --without-zlib; make; exit
+	</msys>
+	<waitforkey/>
+	<copy path="${DKLIBS}/libxml2/win32/Release/.libs/libxml2.a" to="${DKLIBS}/libxml2/win32/Release/.libs/libxml2.lib" />
+</WIN32>
+
+<WIN64>
+	<msys>
+	cd ${DKLIBS}/libxml2/win64/Debug; export PATH=/c/mingw/mingw64/bin:$PATH; ../configure --disable-shared --without-python --without-iconv --without-zlib; make; exit
+	</msys>
+	<waitforkey/>
+	<copy path="${DKLIBS}/libxml2/win64/Debug/.libs/libxml2.a" to="${DKLIBS}/libxml2/win64/Debug/.libs/libxml2.lib" />
+	
+	<msys>
+	cd ${DKLIBS}/libxml2/win64/Release; export PATH=/c/mingw/mingw64/bin:$PATH; ../configure --disable-shared --without-python --without-iconv --without-zlib; make; exit
+	</msys>
+	<waitforkey/>
+	<copy path="${DKLIBS}/libxml2/win64/Release/.libs/libxml2.a" to="${DKLIBS}/libxml2/win64/Release/.libs/libxml2.lib" />
+</WIN64>
+
+<MAC>
+	<setPATH> ${DKLIBS}/libxml2/mac/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --without-python
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libxml2/mac/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --without-python
+	</terminal>
+	
+	<terminal>
+	make
+	</terminal>
+</MAC>
+
+<IOS>
+	<setPATH> ${DKLIBS}/libxml2/ios/Debug </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --without-python --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libxml2/ios/Release </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --without-python --arch-"armv7 armv7s"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOS>
+
+<IOSSIMULATOR>
+	<setPATH> ${DKLIBS}/libxml2/ios-simulator/Debug </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --without-python --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libxml2/ios-simulator/Release </setPATH>
+	<terminal>
+	../configure --disable-shared --enable-static --without-python --arch-"i386"
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/libxml2/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	
+	<setPATH> ${DKLIBS}/libxml2/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+</ANDROID>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/libxml2/linux/Debug </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --without-python
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/libxml2/linux/Release </setPATH>
+	<terminal>
+	../../configure --disable-shared --enable-static --without-python
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>

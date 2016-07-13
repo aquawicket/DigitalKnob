@@ -1,0 +1,36 @@
+
+<WIN32>
+	<VERIFY> ${DKLIBS}/mysql-5.6.16-win32 </VERIFY>
+	<PATH> ${DKLIBS}/mysql-5.6.16-win32 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/mysql-5.6.16-win32.zip" url2="http://digitalknob.com/Download/Libs/mysql-5.6.16-win32.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/mysql-5.6.16-win32.zip" path="${DKLIBS}"/>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<VERIFY> ${DKLIBS}/mysql-5.6.16-winx64 </VERIFY>
+	<PATH> ${DKLIBS}/mysql-5.6.16-winx64 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/mysql-5.6.16-winx64.zip" url2="http://digitalknob.com/Download/Libs/mysql-5.6.16-winx64.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/mysql-5.6.16-winx64.zip" path="${DKLIBS}"/>
+	</INSTALL>
+</WIN64>
+
+<MAC>
+	<VERIFY> ${DKLIBS}/mysql-5.6.16-osx10.7-x86_64 </VERIFY>
+	<PATH> ${DKLIBS}/mysql-5.6.16-osx10.7-x86_64 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/mysql-5.6.16-osx10.7-x86_64.zip" url2="http://digitalknob.com/Download/Libs/mysql-5.6.16-osx10.7-x86_64.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/mysql-5.6.16-osx10.7-x86_64.zip" path="${DKLIBS}"/>
+	</INSTALL>
+</MAC>
+
+<LINUX>
+	<VERIFY> ${DKLIBS}/libmysqlclient-dev_5.5.40-1_amd64 </VERIFY>
+	<PATH> ${DKLIBS}/libmysqlclient-dev_5.5.40-1_amd64 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/libmysqlclient-dev_5.5.40-1_amd64.zip" url2="http://digitalknob.com/Download/Libs/libmysqlclient-dev_5.5.40-1_amd64.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/libmysqlclient-dev_5.5.40-1_amd64.zip" path="${DKLIBS}"/>
+	</INSTALL>
+</LINUX>

@@ -1,0 +1,202 @@
+<VERIFY> ${DKLIBS}/libpng-1.7.0beta34/dk </VERIFY>
+<PATH> ${DKLIBS}/libpng-1.7.0beta34 </PATH>
+
+<INSTALL>
+	<download url2="http://tcpdiag.dl.sourceforge.net/project/libpng/libpng17/1.7.0beta46/libpng-1.7.0beta34.tar.gz" url="http://digitalknob.com/Download/Libs/libpng-1.7.0beta34.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/libpng-1.7.0beta34.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/win32" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win32/Release/zlibstatic.lib
+	${DKLIBS}/libpng-1.7.0beta34
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libpng-1.7.0beta34/win32/libpng.sln /t:png17_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libpng-1.7.0beta34/win32/libpng.sln /t:png17_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /I${ZLIB}/win64" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win64/Release/zlibstatic.lib
+	${DKLIBS}/libpng-1.7.0beta34
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libpng-1.7.0beta34/win64/libpng.sln /t:png17_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/libpng-1.7.0beta34/win64/libpng.sln /t:png17_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_C_FLAGS="-I${ZLIB}/mac" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/mac/Release/libz.a 
+	${DKLIBS}/libpng-1.7.0beta34
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios/Release-iphoneos/libz.a 
+	${DKLIBS}/libpng-1.7.0beta34
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/ios-simulator" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios-simulator/Release-iphonesimulator/libz.a 
+	${DKLIBS}/libpng-1.7.0beta34
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target png17_static -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/libpng-1.7.0beta34/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/libpng-1.7.0beta34/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/libpng-1.7.0beta34/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Debug" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Debug/libz.a 
+	${DKLIBS}/libpng-1.7.0beta34
+	</terminal>
+
+	<terminal>
+	make png17_static
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/libpng-1.7.0beta34/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DCMAKE_C_FLAGS="-I${ZLIB}/linux/Release" 
+	-DPNG_SHARED=OFF 
+	-DPNG_TESTS=OFF 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/linux/Release/libz.a 
+	${DKLIBS}/libpng-1.7.0beta34
+	</terminal>
+
+	<terminal>
+	make png17_static
+	</terminal>
+	</RELEASE>
+</LINUX>

@@ -1,0 +1,7 @@
+<VERIFY> ${DKLIBS}/threadpool-0_2_5-src </VERIFY>
+<PATH> ${DKLIBS}/threadpool-0_2_5-src </PATH>
+
+<INSTALL>
+	<download url2="http://www.server.com/threadpool-0_2_5-src.zip" url="http://digitalknob.com/Download/Libs/threadpool-0_2_5-src.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/threadpool-0_2_5-src.zip" path="${DKLIBS}"/>
+</INSTALL>

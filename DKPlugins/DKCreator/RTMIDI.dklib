@@ -1,0 +1,152 @@
+<VERIFY> ${DKLIBS}/rtmidi-2.1.0 </VERIFY>
+<PATH> ${DKLIBS}/rtmidi-2.1.0 </PATH>
+
+<INSTALL>
+	<download url="http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz" url2="http://digitalknob.com/Download/Libs/rtmidi-2.1.0.tar.gz" path="${DKDL}"/>
+	<extract file="${DKDL}/rtmidi-2.1.0.tar.gz" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /D__WINDOWS_MM__" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	${DKLIBS}/rtmidi-2.1.0
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/rtmidi-2.1.0/win32/Project.sln /t:RtMidi /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/rtmidi-2.1.0/win32/Project.sln /t:RtMidi /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /D__WINDOWS_MM__" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	${DKLIBS}/rtmidi-2.1.0
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/rtmidi-2.1.0/win64/Project.sln /t:RtMidi /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/rtmidi-2.1.0/win64/Project.sln /t:RtMidi /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	${DKLIBS}/rtmidi-2.1.0
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	${DKLIBS}/rtmidi-2.1.0
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	${DKLIBS}/rtmidi-2.1.0
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target RtMidi -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/rtmidi-2.1.0/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-G "Unix Makefiles" 
+	${DKLIBS}/rtmidi-2.1.0
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/rtmidi-2.1.0/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-G "Unix Makefiles" 
+	${DKLIBS}/rtmidi-2.1.0
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

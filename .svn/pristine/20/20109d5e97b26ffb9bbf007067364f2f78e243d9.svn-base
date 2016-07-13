@@ -1,0 +1,176 @@
+<VERIFY> ${DKLIBS}/openal </VERIFY>
+<PATH> ${DKLIBS}/openal </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/openal-1.15.1.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/openal-1.15.1.zip" path="${DKLIBS}"/>
+	<download url="http://msinttypes.googlecode.com/files/msinttypes-r26.zip" url2="http://digitalknob.com/Download/Libs/msinttypes-r26.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/msinttypes-r26.zip" path="${DKLIBS}/openal/include/AL"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /DAL_LIBTYPE_STATIC"
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	-DFORCE_STATIC_VCRT=ON
+	${DKLIBS}/openal
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/openal/win32/OpenAL.sln /t:OpenAL32 /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/openal/win32/OpenAL.sln /t:OpenAL32 /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /DAL_LIBTYPE_STATIC" 
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	-DFORCE_STATIC_VCRT=ON 
+	${DKLIBS}/openal
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/openal/win64/OpenAL.sln /t:OpenAL32 /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/openal/win64/OpenAL.sln /t:OpenAL32 /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_ARCHITECTURES="x86_64"
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	-DFORCE_STATIC_VCRT=ON
+	${DKLIBS}/openal
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	-DFORCE_STATIC_VCRT=ON
+	${DKLIBS}/openal
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	-DFORCE_STATIC_VCRT=ON
+	${DKLIBS}/openal
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -target openal -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/openal/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_C_FLAGS="-fPIC"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	${DKLIBS}/openal
+	</terminal>
+
+	<terminal>
+	make openal
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/openal/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_C_FLAGS="-fPIC"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DLIBTYPE=STATIC 
+	-DEXAMPLES=OFF 
+	${DKLIBS}/openal
+	</terminal>
+
+	<terminal>
+	make openal
+	</terminal>
+	</RELEASE>
+</LINUX>

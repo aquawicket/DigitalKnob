@@ -1,0 +1,3 @@
+DKDEPEND(DKOSGViewer)
+
+DKPLUGIN(DKOSGNotify)

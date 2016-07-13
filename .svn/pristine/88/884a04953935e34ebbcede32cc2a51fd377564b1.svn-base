@@ -1,0 +1,35 @@
+<VERIFY> ${DKLIBS}/v8 </VERIFY>
+<PATH> ${DKLIBS}/v8 </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/v8-trunk.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/v8-trunk.zip" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/v8-trunk" output="v8"/>
+</INSTALL>
+
+
+<WIN32>
+	<execute> ${DKLIBS}/v8/third_party/cygwin/setup_mount.bat </execute>
+	<execute> ${DKLIBS}/v8/third_party/cygwin/setup_env.bat </execute>
+	
+	<bash>
+	#!/bin/bash;
+	cd ${DKLIBS}/v8;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	export PATH=${DKLIBS}/v8:$PATH;
+	${DKLIBS}/v8/tools/mingw-generate-makefiles.sh;
+	make ia32.release;
+	</bash>
+
+</WIN32>
+
+<WIN64>
+	<execute> ${DKLIBS}/v8/third_party/cygwin/setup_mount.bat </execute>
+	<execute> ${DKLIBS}/v8/third_party/cygwin/setup_env.bat </execute>
+	<cmd>
+	python ${DKLIBS}/v8/build/gyp_v8 -Dtarget_arch=x64
+	</cmd>
+	
+
+</WIN64>

@@ -1,0 +1,9 @@
+#FIXME
+
+RETURN()
+
+DKDEPEND(DKAudio)
+DKDEPEND(DKOSGWindow)
+DKDEPEND(osgaudio-master)
+
+DKPLUGIN(DKOSGAudio)

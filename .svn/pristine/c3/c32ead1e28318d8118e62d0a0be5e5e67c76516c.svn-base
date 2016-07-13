@@ -1,0 +1,7 @@
+<VERIFY> ${DKLIBS}/bin2c-1.0 </VERIFY>
+<PATH> ${DKLIBS}/bin2c-1.0 </PATH>
+
+<INSTALL>
+	<download url="http://softlayer-dal.dl.sourceforge.net/project/bin2c/bin2c-1.0.zip" url2="http://digitalknob.com/Download/Libs/bin2c-1.0.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/bin2c-1.0.zip" path="${DKLIBS}"/>
+</INSTALL>

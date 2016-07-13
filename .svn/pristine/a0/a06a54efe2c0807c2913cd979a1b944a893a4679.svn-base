@@ -1,0 +1,65 @@
+<WIN32>
+	<VERIFY> ${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev </VERIFY>
+	<PATH> ${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev </PATH>
+
+	<INSTALL>
+	<download url="http://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-20150905-git-a87ada5-win32-dev.7z" url2="http://digitalknob.com/Download/Libs/ffmpeg-20150905-git-a87ada5-win32-dev.7z" path="${DKDL}"/>
+	<extract file="${DKDL}/ffmpeg-20150905-git-a87ada5-win32-dev.7z" path="${DKLIBS}"/>
+	<download url="http://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-20150905-git-a87ada5-win32-shared.7z" url2="http://digitalknob.com/Download/Libs/ffmpeg-20150905-git-a87ada5-win32-shared.7z" path="${DKDL}"/>
+	<extract file="${DKDL}/ffmpeg-20150905-git-a87ada5-win32-shared.7z" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/include/libavutil/time.h" output="${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/include/libavutil/time.h.EXCLUDE"/>
+	</INSTALL>
+	
+<clipboard> 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avcodec-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avcodec.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avdevice-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avdevice.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avfilter-5.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avfilter.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avformat-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avformat.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avutil-54.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/avutil.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/postproc-53.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/postproc.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/swresample-1.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/swresample.lib & 
+${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/swscale-3.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win32-dev/lib/swscale.lib & exit
+</clipboard>
+	
+	<message>*********************************************************************</message>
+	<message>***** AT THE PROMPT, PLEASE PASTE THE CLIPBOARD AND PRESS ENTER *****</message>
+	<message>*********************************************************************</message>
+	
+	<cmd>
+	call C:\Windows\System32\cmd.exe /K "${VC2013}/VC/vcvarsall.bat" amd64
+	</cmd>
+
+</WIN32>
+
+
+<WIN64>
+	<VERIFY> ${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev </VERIFY>
+	<PATH> ${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev </PATH>
+
+	<INSTALL>
+	<download url="http://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-20150905-git-a87ada5-win64-dev.7z" url2="http://digitalknob.com/Download/Libs/ffmpeg-20150905-git-a87ada5-win64-dev.7z" path="${DKDL}"/>
+	<extract file="${DKDL}/ffmpeg-20150905-git-a87ada5-win64-dev.7z" path="${DKLIBS}"/>
+	<download url="http://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20150905-git-a87ada5-win64-shared.7z" url2="http://digitalknob.com/Download/Libs/ffmpeg-20150905-git-a87ada5-win64-shared.7z" path="${DKDL}"/>
+	<extract file="${DKDL}/ffmpeg-20150905-git-a87ada5-win64-shared.7z" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/include/libavutil/time.h" output="${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/include/libavutil/time.h.EXCLUDE"/>
+	</INSTALL>
+	
+<clipboard> 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avcodec-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avcodec.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avdevice-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avdevice.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avfilter-5.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avfilter.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avformat-56.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avformat.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avutil-54.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/avutil.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/postproc-53.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/postproc.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/swresample-1.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/swresample.lib & 
+${VC2013}/VC/bin/amd64/lib.exe /machine:X64 /def:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/swscale-3.def /out:${DKLIBS}/ffmpeg-20150905-git-a87ada5-win64-dev/lib/swscale.lib & exit
+</clipboard>
+	
+	<message>*********************************************************************</message>
+	<message>***** AT THE PROMPT, PLEASE PASTE THE CLIPBOARD AND PRESS ENTER *****</message>
+	<message>*********************************************************************</message>
+	
+	<cmd>
+	call C:\Windows\System32\cmd.exe /K "${VC2013}/VC/vcvarsall.bat" amd64
+	</cmd>
+</WIN64>

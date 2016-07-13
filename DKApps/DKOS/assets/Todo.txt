@@ -1,0 +1,11 @@
+**** The TODO List  ***
+
+***   Make the save button pop up a comfrimation message. 
+***   Create a DKPlugin for svn and Git interaction.
+***   Create live on/off switces for DKLog message levels. 
+***   Convert to Git  
+***   
+
+
+
+

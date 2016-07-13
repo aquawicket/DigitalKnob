@@ -1,0 +1,20 @@
+<VERIFY> C:/depot_tools </VERIFY>
+<PATH> C:/depot_tools </PATH>
+
+<WIN32>
+	<INSTALL>
+		<download url="https://src.chromium.org/svn/trunk/tools/depot_tools.zip" url2="http://digitalknob.com/Download/Tools/depot_tools.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/depot_tools.zip" path="C:/" />
+		<cmd> setx /M path "%path%;C:\depot_tools" </cmd>
+		<cmd> gclient </cmd>
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url="https://src.chromium.org/svn/trunk/tools/depot_tools.zip" url2="http://digitalknob.com/Download/Tools/depot_tools.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/depot_tools.zip" path="C:/" />
+		<cmd> setx /M path "%path%;C:\depot_tools" </cmd>
+		<cmd> gclient </cmd>
+	</INSTALL>
+</WIN64>

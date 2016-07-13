@@ -1,0 +1,118 @@
+<VERIFY> ${DKLIBS}/lib/dk </VERIFY>
+<PATH> ${DKLIBS}/lib </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/lib.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/lib.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+
+	</cmd>
+
+	<cmd>
+
+	</cmd>
+
+	<cmd>
+
+	</cmd>
+</WIN32>
+
+<WIN64>
+	<cmd>
+
+	</cmd>
+
+	<cmd>
+
+	</cmd>
+
+	<cmd>
+
+	</cmd>
+</WIN64>
+
+<MAC>
+	<terminal>
+
+	</terminal>
+	
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+</MAC>
+
+<IOS>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+	
+	<terminal>
+
+	</terminal>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/lib/android/Debug </setPATH>
+	<cmd>
+
+	</cmd>
+	
+	<cmd>
+
+	</cmd>
+	
+	<setPATH> ${DKLIBS}/lib/android/Release </setPATH>
+	<cmd>
+
+	</cmd>
+	
+	<cmd>
+
+	</cmd>
+</ANDROID>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/lib/linux/Debug </setPATH>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/lib/linux/Release </setPATH>
+	<terminal>
+
+	</terminal>
+
+	<terminal>
+
+	</terminal>
+</LINUX>

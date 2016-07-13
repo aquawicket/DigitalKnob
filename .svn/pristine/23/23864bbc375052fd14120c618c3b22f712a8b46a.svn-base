@@ -1,0 +1,8 @@
+<VERIFY> C:/mingw/msys/msys.bat </VERIFY>
+
+<INSTALL>
+	<download url="http://hivelocity.dl.sourceforge.net/project/mingw-w64/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip" url2="http://digitalknob.com/Download/Tools/MSYS-20111123.zip" path="${DKDL}" />
+	<extract file="${DKDL}/MSYS-20111123.zip" path="C:/mingw" />
+</INSTALL>
+
+<EXE> C:/mingw/msys/msys.bat </EXE>

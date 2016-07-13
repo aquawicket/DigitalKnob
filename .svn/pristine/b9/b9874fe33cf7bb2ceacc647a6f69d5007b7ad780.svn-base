@@ -1,0 +1,24 @@
+
+<ANDROID>
+<VERIFY> ${DKLIBS}/OpenAL-android </VERIFY>
+<PATH> ${DKLIBS}/OpenAL-android </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/OpenAL-android.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/OpenAL-android.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+	<DEBUG>
+	<setPATH> ${DKLIBS}/OpenAL-android/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/OpenAL-android/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>

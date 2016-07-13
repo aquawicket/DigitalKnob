@@ -1,0 +1,8 @@
+<VERIFY> ${DKDL}/WIN8_1SDK.zip </VERIFY>
+
+<WIN32>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Tools/WIN8_1SDK.zip" path="${DKDL}" />
+		<extract file="${DKDL}/WIN8_1SDK.zip" path="${DKDL}" />
+	</INSTALL>
+</WIN32>

@@ -1,0 +1,43 @@
+<div id="DKBrowser.html" style="position:absolute;width:100%;height:100%;">
+	<div id="Tabs" style="white-space:nowrap;top:0rem;left:0rem;width:100%;height:21rem;background-color:rgb(150,150,150);">
+		<div id="Tab0" style="display:inline-block;white-space:normal;top:1rem;left:0rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(230,230,230);">
+			<div id="Tab0Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab0Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="Tab1" style="display:none;white-space:normal;top:1rem;margin-left:2rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(180,180,180);">
+			<div id="Tab1Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab1Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="Tab2" style="display:none;white-space:normal;top:1rem;margin-left:2rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(180,180,180);">
+			<div id="Tab2Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab2Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="Tab3" style="display:none;white-space:normal;top:1rem;margin-left:2rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(180,180,180);">
+			<div id="Tab3Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab3Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="Tab4" style="display:none;white-space:normal;top:1rem;margin-left:2rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(180,180,180);">
+			<div id="Tab4Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab4Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="Tab5" style="display:none;white-space:normal;top:1rem;margin-left:2rem;width:150rem;height:21rem;overflow-x:hidden;overflow-y:hidden;background-color:rgb(180,180,180);">
+			<div id="Tab5Text" style="padding-left:5rem;width:125rem;overflow:hidden;">DKBrowser</div>
+			<img id="Tab5Close" src="DKBrowser/closetab.png" style="position:absolute;top:5rem;right:4rem;width:12rem;"></img>
+		</div>
+		<div id="NewTab" style="display:inline-block;padding-left:10rem;top:1rem;margin-left:2rem;width:20rem;height:21rem;background-color:rgb(180,180,180);"> +
+		</div>
+	</div>
+	<div id="Menu" style="position:absolute;top:21rem;left:0rem;width:100%;height:23rem;background-color:rgb(230,230,230);">
+		<img id="BackButton" src="DKBrowser/back.png" style="position:absolute;top:2rem;left:4rem;width:18rem;"></img>
+		<img id="ForwardButton" src="DKBrowser/forward.png" style="position:absolute;top:2rem;left:27rem;width:18rem;"></img>
+		<img id="StopButton" src="DKBrowser/stop.png" style="position:absolute;top:2rem;left:50rem;width:18rem;"></img>
+		<img id="RefreshButton" src="DKBrowser/refresh.png" style="position:absolute;top:1rem;left:72rem;width:16rem;"></img>
+		<img id="HomeButton" src="DKBrowser/home.png" style="position:absolute;top:1rem;left:95rem;width:16rem;"></img>
+		<div id="textdiv" style="position:absolute;top:1rem;left:120rem;right:50rem;height:20rem;overflow:hidden;">
+			<input type="text" value="" style="tab-index:none;position:absolute;width:100%;height:20rem;overflow:hidden;background-color:rgb(255,255,255);color:rgb(60,60,60);" id="Textbox"></input>
+		</div>
+		<img id="GoButton" src="DKBrowser/go.png" style="position:absolute;top:1rem;right:30rem;width:12rem;"></img>
+		<img id="Settings" src="DKBrowser/gear.png" style="position:absolute;top:0rem;right:4rem;width:21rem;"></img>
+	</div>	
+	<iframe id="DKCefFrame" style="position:absolute;top:44rem;left:0rem;width:100%;bottom:0rem;" width="100%" height="100%" src="http://http://www.w3schools.com"></iframe>
+</div>

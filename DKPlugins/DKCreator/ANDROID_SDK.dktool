@@ -1,0 +1,25 @@
+
+<WIN32>
+	<VERIFY> C:/android-sdk-windows/tools/android.bat </VERIFY>
+	<PATH> C:/android-sdk-windows </PATH>
+	
+	<INSTALL>
+		<download url="http://dl.google.com/android/android-sdk_r24.0.2-windows.zip" url2="http://digitalknob.com/Download/Tools/android-sdk_r24.0.2-windows.zip" path="${DKDL}" />
+		<extract file="${DKDL}/android-sdk_r24.0.2-windows.zip" path="C:/" />
+		<message> Please open the SDK Manager and install Android 4.0.3 (API 15).  Then... </message>
+		<waitforkey />
+	</INSTALL>
+</WIN32>
+
+
+<WIN64>
+	<VERIFY> C:/android-sdk-windows/tools/android.bat </VERIFY>
+	<PATH> C:/android-sdk-windows </PATH>
+	
+	<INSTALL>
+		<download url="http://dl.google.com/android/android-sdk_r24.0.2-windows.zip" url2="http://digitalknob.com/Download/Tools/android-sdk_r24.0.2-windows.zip" path="${DKDL}" />
+		<extract file="${DKDL}/android-sdk_r24.0.2-windows.zip" path="C:/" />
+		<message> Please open the SDK Manager and install Android 4.0.3 (API 15).  Then... </message>
+		<waitforkey />
+	</INSTALL>
+</WIN64>

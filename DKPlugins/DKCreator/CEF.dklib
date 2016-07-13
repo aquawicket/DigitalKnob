@@ -1,0 +1,95 @@
+
+<WIN32>
+	<VERIFY> ${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows32/dk </VERIFY>
+	<PATH> ${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows32 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/cef_binary_3.2556.1368.g535c4fb_windows32.7z" path="${DKDL}"/>
+		<extract file="${DKDL}/cef_binary_3.2556.1368.g535c4fb_windows32.7z" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013"
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows32
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows32/win32/cef.sln /t:libcef_dll_wrapper /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows32/win32/cef.sln /t:libcef_dll_wrapper /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<VERIFY> ${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows64/dk </VERIFY>
+	<PATH> ${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows64 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/cef_binary_3.2556.1368.g535c4fb_windows64.7z" path="${DKDL}"/>
+		<extract file="${DKDL}/cef_binary_3.2556.1368.g535c4fb_windows64.7z" path="${DKLIBS}"/>
+	</INSTALL>
+	
+	<cmd>
+	${CMAKE_EXE} 
+	-G "Visual Studio 12 2013 Win64"
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows64
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows64/win64/cef.sln /t:libcef_dll_wrapper /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/cef_binary_3.2556.1368.g535c4fb_windows64/win64/cef.sln /t:libcef_dll_wrapper /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<LINUX>
+	<VERIFY> ${DKLIBS}/cef_binary_3.2556.1350.g694b457_linux32/dk </VERIFY>
+	<PATH> ${DKLIBS}/cef_binary_3.2556.1350.g694b457_linux32 </PATH>
+	<INSTALL>
+		<download url="http://digitalknob.com/Download/Libs/cef_binary_3.2556.1350.g694b457_linux32.7z" path="${DKDL}"/>
+		<extract file="${DKDL}/cef_binary_3.2556.1350.g694b457_linux32.7z" path="${DKLIBS}"/>
+	</INSTALL>
+
+	<DEBUG>
+	<setPATH> ${DKLIBS}/cef_linux32/linux/Debug </setPATH>
+	<terminal>
+		${CMAKE_EXE}
+		-G "Unix Makefiles"
+		-DCMAKE_BUILD_TYPE="DEBUG"
+		${DKLIBS}/cef_binary_3.2556.1350.g694b457_linux32
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<setPATH> ${DKLIBS}/cef_linux32/linux/Release </setPATH>
+	<terminal>
+		${CMAKE_EXE}
+		-G "Unix Makefiles"
+		-DCMAKE_BUILD_TYPE="RELEASE"
+		${DKLIBS}/cef_binary_3.2556.1350.g694b457_linux32
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

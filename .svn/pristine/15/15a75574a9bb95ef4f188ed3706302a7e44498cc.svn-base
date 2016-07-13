@@ -1,0 +1,278 @@
+<VERIFY> ${DKLIBS}/osgaudio-master </VERIFY>
+<PATH> ${DKLIBS}/osgaudio-master </PATH>
+
+<INSTALL>
+	<download url="https://codeload.github.com/mccdo/osgaudio/zip/master" url2="http://digitalknob.com/Download/Libs/osgaudio-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/osgaudio-master.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DAL_LIBTYPE_STATIC /I${OPENAL}/include" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot=${OSG}/win32
+	-DOSGSourceRoot=${OSG}
+	-DALUT_INCLUDE_DIR=${FREEALUT}/include
+	-DALUT_LIBRARY=${FREEALUT}/win32/Release/alut_static.lib
+	-DALUT_LIBRARY_DEBUG=${FREEALUT}/win32/Debug/alut_static.lib
+	-D0_BUILD_EXAMPLES_OALPP=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF
+	-D0_ENABLE_SUBSYSTEM_OPENAL=ON
+	-D0_ENABLE_SUBSYSTEM_FMOD=OFF
+	-DFMOD_INCLUDE_DIR=""
+	-DFMOD_LIBRARY=""
+	-DOSGAUDIO_INSTALL_DATA=OFF
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include/AL
+	-DOPENAL_LIBRARY=${OPENAL}/win32/Release/OpenAL32.lib
+	-DOGG_INCLUDE_DIR=${OGG}/include
+	-DOGG_LIBRARY=${OGG}/win32/Release/src/.libs/libogg.lib
+	-DOGG_LIBRARY_DEBUG=${OGG}/win32/Debug/src/.libs/libogg.lib
+	-DVORBIS_INCLUDE_DIR=${VORBIS}/include
+	-DVORBIS_LIBRARY=${VORBIS}/win32/Release/lib/.libs/libvorbis.lib
+	-DVORBIS_LIBRARY_DEBUG=${VORBIS}/win32/Debug/lib/.libs/libvorbis.lib
+	-DVORBISFILE_INCLUDE_DIR=${VORBIS}/include
+	-DVORBISFILE_LIBRARY=${VORBIS}/win32/Release/lib/.libs/libvorbisfile.lib
+	-DVORBISFILE_LIBRARY_DEBUG=${VORBIS}/win32/Debug/lib/.libs/libvorbisfile.lib
+	${DKLIBS}/osgaudio-master
+	</cmd>
+
+	<copy path="${DKLIBS}/_patches_/osgaudio-master/win32/" to="${DKLIBS}/osgaudio-master/win32/" />
+	
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:openalpp /p:Configuration=Debug
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:osgAudio /p:Configuration=Debug
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:osgdb_osgAudio /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:openalpp /p:Configuration=Release
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:osgAudio /p:Configuration=Release
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win32/osgAudio.sln /t:osgdb_osgAudio /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DAL_LIBTYPE_STATIC /I${OPENAL}/include" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot=${OSG}/win64 
+	-DOSGSourceRoot=${OSG}
+	-DALUT_INCLUDE_DIR=${FREEALUT}/include
+	-DALUT_LIBRARY=${FREEALUT}/win64/Release/alut_static.lib
+	-DALUT_LIBRARY_DEBUG=${FREEALUT}/win64/Debug/alut_static.lib
+	-D0_BUILD_EXAMPLES_OALPP=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF
+	-D0_ENABLE_SUBSYSTEM_FMOD=OFF
+	-D0_ENABLE_SUBSYSTEM_OPENAL=ON
+	-DFMOD_INCLUDE_DIR=""
+	-DFMOD_LIBRARY=""
+	-DOSGAUDIO_INSTALL_DATA=OFF
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include/AL
+	-DOPENAL_LIBRARY=${OPENAL}/win64/Release/OpenAL32.lib
+	-DOGG_INCLUDE_DIR=${OGG}/include
+	-DOGG_LIBRARY=${OGG}/win64/Release/src/.libs/libogg.lib
+	-DOGG_LIBRARY_DEBUG=${OGG}/win64/Debug/src/.libs/libogg.lib
+	-DVORBIS_INCLUDE_DIR=${VORBIS}/include
+	-DVORBIS_LIBRARY=${VORBIS}/win64/Release/lib/.libs/libvorbis.lib
+	-DVORBIS_LIBRARY_DEBUG=${VORBIS}/win64/Debug/lib/.libs/libvorbis.lib
+	-DVORBISFILE_INCLUDE_DIR=${VORBIS}/include
+	-DVORBISFILE_LIBRARY=${VORBIS}/win64/Release/lib/.libs/libvorbisfile.lib
+	-DVORBISFILE_LIBRARY_DEBUG=${VORBIS}/win64/Debug/lib/.libs/libvorbisfile.lib
+	${DKLIBS}/osgaudio-master
+	</cmd>
+
+	<copy path="${DKLIBS}/_patches_/osgaudio-master/win64/" to="${DKLIBS}/osgaudio-master/win64/" />
+	
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:openalpp /p:Configuration=Debug
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:osgAudio /p:Configuration=Debug
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:osgdb_osgAudio /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:openalpp /p:Configuration=Release
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:osgAudio /p:Configuration=Release
+	</cmd>
+	<cmd>
+	${VC2013_EXE} ${DKLIBS}/osgaudio-master/win64/osgAudio.sln /t:osgdb_osgAudio /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DCMAKE_CXX_FLAGS="-I${OPENAL}/include -I${FREEALUT}/include" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot=${OSG}/mac
+	-DOSGSourceRoot=${OSG}
+	-DALUT_INCLUDE_DIR=${FREEALUT}/include
+	-DALUT_LIBRARY=${FREEALUT}/mac/Release/libalut_static.a
+	-DALUT_LIBRARY_DEBUG=${FREEALUT}/mac/Debug/libalut_static.a
+	-D0_BUILD_EXAMPLES_OALPP=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF
+	-D0_ENABLE_SUBSYSTEM_OPENAL=ON
+	-D0_ENABLE_SUBSYSTEM_FMOD=OFF
+	-DFMOD_INCLUDE_DIR=""
+	-DFMOD_LIBRARY=""
+	-DOSGAUDIO_INSTALL_DATA=OFF
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include/AL
+	-DOPENAL_LIBRARY=${OPENAL}/mac/Release/libopenal.a
+	-DOGG_INCLUDE_DIR=${OGG}/include
+	-DOGG_LIBRARY=${OGG}/mac/Release/src/.libs/libogg.a
+	-DOGG_LIBRARY_DEBUG=${OGG}/mac/Debug/src/.libs/libogg.a
+	-DVORBIS_INCLUDE_DIR=${VORBIS}/include
+	-DVORBIS_LIBRARY=${VORBIS}/mac/Release/lib/.libs/libvorbis.a
+	-DVORBIS_LIBRARY_DEBUG=${VORBIS}/mac/Debug/lib/.libs/libvorbis.a
+	-DVORBISFILE_INCLUDE_DIR=${VORBIS}/include
+	-DVORBISFILE_LIBRARY=${VORBIS}/mac/Release/lib/.libs/libvorbisfile.a
+	-DVORBISFILE_LIBRARY_DEBUG=${VORBIS}/mac/Debug/lib/.libs/libvorbisfile.a
+	${DKLIBS}/osgaudio-master
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgaudio-master/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_CXX_FLAGS="-fPIC -I${OPENAL}/include/AL"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DOSGInstallType="Source And Build Tree"
+	-DOSGBuildRoot="${OSG}/linux/Release"
+	-DOSGSourceRoot="${OSG}"
+	-DALUT_INCLUDE_DIR=${FREEALUT}/include
+	-DALUT_LIBRARY=${FREEALUT}/linux/Release/libalut_static.a
+	-DALUT_LIBRARY_DEBUG=${FREEALUT}/linux/Debug/libalut_static.a
+	-D0_BUILD_EXAMPLES_OALPP=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF
+	-D0_ENABLE_SUBSYSTEM_OPENAL=ON
+	-D0_ENABLE_SUBSYSTEM_FMOD=OFF
+	-DFMOD_INCLUDE_DIR=""
+	-DFMOD_LIBRARY=""
+	-DOSGAUDIO_INSTALL_DATA=OFF
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIBRARY=${OPENAL}/linux/Release/libopenal.a
+	-DOGG_INCLUDE_DIR=${OGG}/include
+	-DOGG_LIBRARY=${OGG}/linux/Release/src/.libs/libogg.a
+	-DOGG_LIBRARY_DEBUG=${OGG}/linux/Debug/src/.libs/libogg.a
+	-DVORBIS_INCLUDE_DIR=${VORBIS}/include
+	-DVORBIS_LIBRARY=${VORBIS}/linux/Release/lib/.libs/libvorbis.a
+	-DVORBIS_LIBRARY_DEBUG=${VORBIS}/linux/Debug/lib/.libs/libvorbis.a
+	-DVORBISFILE_INCLUDE_DIR=${VORBIS}/include
+	-DVORBISFILE_LIBRARY=${VORBIS}/linux/Release/lib/.libs/libvorbisfile.a
+	-DVORBISFILE_LIBRARY_DEBUG=${VORBIS}/linux/Debug/lib/.libs/libvorbisfile.a
+	${DKLIBS}/osgaudio-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgaudio-master/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_CXX_FLAGS="-fPIC -I${OPENAL}/include/AL"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DOSGInstallType="Source And Build Tree"
+	-DOSGBuildRoot="${OSG}/linux/Release"
+	-DOSGSourceRoot="${OSG}"
+	-DALUT_INCLUDE_DIR=${FREEALUT}/include
+	-DALUT_LIBRARY=${FREEALUT}/linux/Release/libalut_static.a
+	-DALUT_LIBRARY_DEBUG=${FREEALUT}/linux/Debug/libalut_static.a
+	-D0_BUILD_EXAMPLES_OALPP=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO=OFF
+	-D0_BUILD_EXAMPLES_OSGAUDIO_LOWLEVEL=OFF
+	-D0_ENABLE_SUBSYSTEM_OPENAL=ON
+	-D0_ENABLE_SUBSYSTEM_FMOD=OFF
+	-DFMOD_INCLUDE_DIR=""
+	-DFMOD_LIBRARY=""
+	-DOSGAUDIO_INSTALL_DATA=OFF
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIBRARY=${OPENAL}/linux/Release/libopenal.a
+	-DOGG_INCLUDE_DIR=${OGG}/include
+	-DOGG_LIBRARY=${OGG}/linux/Release/src/.libs/libogg.a
+	-DOGG_LIBRARY_DEBUG=${OGG}/linux/Debug/src/.libs/libogg.a
+	-DVORBIS_INCLUDE_DIR=${VORBIS}/include
+	-DVORBIS_LIBRARY=${VORBIS}/linux/Release/lib/.libs/libvorbis.a
+	-DVORBIS_LIBRARY_DEBUG=${VORBIS}/linux/Debug/lib/.libs/libvorbis.a
+	-DVORBISFILE_INCLUDE_DIR=${VORBIS}/include
+	-DVORBISFILE_LIBRARY=${VORBIS}/linux/Release/lib/.libs/libvorbisfile.a
+	-DVORBISFILE_LIBRARY_DEBUG=${VORBIS}/linux/Debug/lib/.libs/libvorbisfile.a
+	${DKLIBS}/osgaudio-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>
+
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgaudio-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgaudio-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>

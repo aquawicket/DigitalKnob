@@ -1,0 +1,120 @@
+<VERIFY> ${DKLIBS}/freealut-1.1.0-src </VERIFY>
+<PATH> ${DKLIBS}/freealut-1.1.0-src </PATH>
+
+<INSTALL>
+	<download url="http://www.dei.isep.ipp.pt/~jpp/cg/openal/freealut-1.1.0-src.zip" url2="http://digitalknob.com/Download/Libs/freealut-1.1.0-src.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/freealut-1.1.0-src.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${STDINT} /DAL_LIBTYPE_STATIC"
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIB_DIR=${OPENAL}/win32/Release
+	${DKLIBS}/freealut-1.1.0-src
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freealut-1.1.0-src/win32/Alut.sln /t:alut_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freealut-1.1.0-src/win32/Alut.sln /t:alut_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_C_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${STDINT} /DAL_LIBTYPE_STATIC"
+	-DCMAKE_C_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_C_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG"
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIB_DIR=${OPENAL}/win64/Release
+	${DKLIBS}/freealut-1.1.0-src
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freealut-1.1.0-src/win64/Alut.sln /t:alut_static /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/freealut-1.1.0-src/win64/Alut.sln /t:alut_static /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode"
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIB_DIR=${OPENAL}/mac/Release
+	${DKLIBS}/freealut-1.1.0-src
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/freealut-1.1.0-src/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_C_FLAGS="-fPIC"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIB_DIR=${OPENAL}/linux/Release
+	${DKLIBS}/freealut-1.1.0-src
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/freealut-1.1.0-src/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles"
+	-DCMAKE_C_FLAGS="-fPIC"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIB_DIR=${OPENAL}/linux/Release
+	${DKLIBS}/freealut-1.1.0-src
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

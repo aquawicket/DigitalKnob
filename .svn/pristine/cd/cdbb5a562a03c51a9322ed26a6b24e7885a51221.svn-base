@@ -1,0 +1,30 @@
+<WIN32>
+	<VERIFY> C:/Program Files/Subversion/bin/svn.exe </VERIFY>
+	<INSTALL>
+		<download url="http://superb-dca2.dl.sourceforge.net/project/win32svn/1.8.10/Setup-Subversion-1.8.10.msi" url2="http://digitalknob.com/Download/Tools/Setup-Subversion-1.8.10.msi" path="${DKDL}" />
+		<execute> ${DKDL}/Setup-Subversion-1.8.10.msi </execute>
+	</INSTALL>
+	<EXE> C:/Program Files/Subversion/bin/svn.exe </EXE>
+</WIN32>
+
+<WIN64>
+	<VERIFY> C:/Program Files (x86)/Subversion/bin/svn.exe </VERIFY>
+	<INSTALL>
+		<download url="http://superb-dca2.dl.sourceforge.net/project/win32svn/1.8.10/Setup-Subversion-1.8.10.msi" url2="http://digitalknob.com/Download/Tools/Setup-Subversion-1.8.10.msi" path="${DKDL}" />
+		<execute> ${DKDL}/Setup-Subversion-1.8.10.msi </execute>
+	</INSTALL>
+	<EXE> C:/Program Files (x86)/Subversion/bin/svn.exe </EXE>
+</WIN64>
+
+<MAC>
+	<VERIFY> /Users </VERIFY>
+	<EXE> svn </EXE>
+</MAC>
+
+<LINUX>
+	<VERIFY> /usr/bin/svn </VERIFY>
+	<EXE> svn </EXE>
+	<INSTALL>
+	<terminal> sudo apt-get install subversion </terminal>
+	</INSTALL>
+</LINUX>

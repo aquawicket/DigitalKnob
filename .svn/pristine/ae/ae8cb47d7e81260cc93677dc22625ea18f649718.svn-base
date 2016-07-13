@@ -1,0 +1,20 @@
+
+<WIN32>
+<VERIFY> ${DKLIBS}/v8/gyp </VERIFY>
+<PATH> ${DKLIBS}/v8/gyp </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/v8-gyp.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/v8-gyp.zip" path="${DKLIBS}/v8"/>
+</INSTALL>
+</WIN32>
+
+<WIN64>
+<VERIFY> ${DKLIBS}/v8/gyp/dk </VERIFY>
+<PATH> ${DKLIBS}/v8/gyp </PATH>
+
+<INSTALL>
+	<download url="http://DigitalKnob.com/Download/Libs/v8-gyp.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/v8-gyp.zip" path="${DKLIBS}/v8"/>
+</INSTALL>
+</WIN64>

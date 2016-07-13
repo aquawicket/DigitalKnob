@@ -1,0 +1,479 @@
+<VERIFY> ${DKLIBS}/OpenSceneGraph-GL2 </VERIFY>
+<PATH> ${DKLIBS}/OpenSceneGraph-GL2 </PATH>
+
+<INSTALL>
+	<download url="http://trac.openscenegraph.org/downloads/developer_releases/OpenSceneGraph-3.3.0.zip" url2="http://digitalknob.com/Download/Libs/OpenSceneGraph-3.3.0.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/OpenSceneGraph-3.3.0.zip" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/OpenSceneGraph-3.3.0" output="OpenSceneGraph-GL2" />
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /D__STDC_CONSTANT_MACROS /W3 /nologo /GR /EHsc /I${ZLIB}/win32 /I${PNG}/win32 /I${TIFF}/win32 /I${JPEG}/win32"
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=ON 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF 
+	-DCURL_INCLUDE_DIR=${CURL}/include 
+	-DCURL_LIBRARY=${CURL}/win32/lib/Release/libcurl.lib 
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include 
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include 
+	-DFREETYPE_LIBRARY=${FREETYPE}/win32/Release/freetype.lib 
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/win32/Release/jpeg-static.lib
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/win32/Release/lib/.libs/libgif.lib 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff
+	-DTIFF_LIBRARY=${TIFF}/win32/Release/tiff-static.lib
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win32/Release/zlibstatic.lib 
+	-DPNG_LIBRARY=${PNG}/win32/Release/libpng17_static.lib 
+	-DPNG_LIBRARY_DEBUG=${PNG}/win32/Debug/libpng17_staticd.lib 
+	-DPNG_PNG_INCLUDE_DIR=${PNG}
+	-DBOOST_INCLUDE_DIR="${BOOST}"
+	${DKLIBS}/OpenSceneGraph-GL2
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph-GL2/win32/OpenSceneGraph.sln /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph-GL2/win32/OpenSceneGraph.sln /p:Configuration=Release
+	</cmd>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ZLIB}/win64 /I${PNG}/win64 /I${TIFF}/win64 /I${JPEG}/win64"
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=ON 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF 
+	-DCURL_INCLUDE_DIR=${CURL}/include 
+	-DCURL_LIBRARY=${CURL}/win64/lib/Release/libcurl.lib 
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include 
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include 
+	-DFREETYPE_LIBRARY=${FREETYPE}/win64/Release/freetype.lib 
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/win64/Release/jpeg-static.lib 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/win64/Release/lib/.libs/libgif.lib 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff
+	-DTIFF_LIBRARY=${TIFF}/win64/Release/tiff-static.lib
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/win64/Release/zlibstatic.lib 
+	-DPNG_LIBRARY=${PNG}/win64/Release/libpng16_static.lib 
+	-DPNG_LIBRARY_DEBUG=${PNG}/win64/Debug/libpng16_staticd.lib 
+	-DPNG_PNG_INCLUDE_DIR=${PNG}
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph-GL2/win64/OpenSceneGraph.sln /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph-GL2/win64/OpenSceneGraph.sln /p:Configuration=Release
+	</cmd>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_CXX_FLAGS="-I${ZLIB}/mac -I${PNG}/mac -I${TIFF}/mac -I${JPEG}/mac"
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=ON 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF
+	-DCURL_INCLUDE_DIR=${CURL}/include
+	-DCURL_LIBRARY=${CURL}/mac/lib/Release/libcurl.a
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include
+	-DFREETYPE_LIBRARY=${FREETYPE}/mac/Release/libfreetype.a
+	-DJPEG_INCLUDE_DIR=${JPEG}
+	-DJPEG_LIBRARY=${JPEG}/mac/Release/libjpeg-static.a
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff
+	-DTIFF_LIBRARY=${TIFF}/mac/Release/libtiff-static.a
+	-DZLIB_INCLUDE_DIR=${ZLIB}
+	-DZLIB_LIBRARY=${ZLIB}/mac/Release/libz.a
+	-DPNG_LIBRARY=${PNG}/mac/Release/libpng17.a
+	-DPNG_LIBRARY_DEBUG=${PNG}/mac/Debug/libpng17d.a
+	-DPNG_PNG_INCLUDE_DIR=${PNG}
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/mac/Release/lib/.libs/libgif.lib
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</terminal>
+	
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DCMAKE_CXX_FLAGS="-I${ZLIB}/ios -I${PNG}/ios -I${TIFF}/ios -I${JPEG}/ios -I${FREETYPE}/ios/include" 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF 
+	-DOSG_GL2_AVAILABLE=OFF 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF 
+	-DCURL_INCLUDE_DIR=${CURL}/include 
+	-DCURL_LIBRARY=${CURL}/ios/lib/Release-iphoneos/libcurl.a 
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include 
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include 
+	-DFREETYPE_LIBRARY=${FREETYPE}/ios/Release-iphoneos/libfreetype.a 
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/ios/Release-iphoneos/libjpeg-static.a 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff 
+	-DTIFF_LIBRARY=${TIFF}/ios/Release-iphoneos/libtiff-static.a 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios/Release-iphoneos/libz.a 
+	-DPNG_LIBRARY=${PNG}/ios/Release-iphoneos/libpng16.a 
+	-DPNG_LIBRARY_DEBUG=${PNG}/ios/Debug-iphoneos/libpng16d.a 
+	-DPNG_PNG_INCLUDE_DIR=${PNG} 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/ios/Release/lib/.libs/libgif.lib 
+	-DOSG_BUILD_PLATFORM_IPHONE=ON
+	-DAV_FOUNDATION_INCLUDE_DIR=""
+	-DAV_FOUNDATION_LIBRARY=""
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	
+	<terminal>
+	${XCODE_EXE} -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos"
+	-DCMAKE_OSX_ARCHITECTURES="i386" 
+	-DCMAKE_CXX_FLAGS="-I${ZLIB}/ios-simulator -I${PNG}/ios-simulator -I${TIFF}/ios-simulator -I${JPEG}/ios-simulator -I${FREETYPE}/ios-simulator/include" 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF 
+	-DOSG_GL2_AVAILABLE=OFF 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF 
+	-DCURL_INCLUDE_DIR=${CURL}/include 
+	-DCURL_LIBRARY=${CURL}/ios-simulator/lib/Release-iphonesimulator/libcurl.a 
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include 
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include 
+	-DFREETYPE_LIBRARY=${FREETYPE}/ios-simulator/Release-iphonesimulator/libfreetype.a 
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/ios-simulator/Release-iphonesimulator/libjpeg-static.a 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff 
+	-DTIFF_LIBRARY=${TIFF}/ios-simulator/Release-iphonesimulator/libtiff-static.a 
+	-DZLIB_INCLUDE_DIR=${ZLIB} 
+	-DZLIB_LIBRARY=${ZLIB}/ios-simulator/Release-iphonesimulator/libz.a 
+	-DPNG_LIBRARY=${PNG}/ios-simulator/Release-iphonesimulator/libpng16.a 
+	-DPNG_LIBRARY_DEBUG=${PNG}/ios-simulator/Debug-iphonesimulator/libpng16d.a 
+	-DPNG_PNG_INCLUDE_DIR=${PNG} 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/ios-simulator/Release/lib/.libs/libgif.lib 
+	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR=ON
+	-DAV_FOUNDATION_INCLUDE_DIR=""
+	-DAV_FOUNDATION_LIBRARY=""
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+
+	<terminal>
+	${XCODE_EXE} -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<setPATH> ${DKLIBS}/OpenSceneGraph-GL2/android/Debug </setPATH>
+	<cmd>
+	${CMAKE_EXE}
+	-G "MinGW Makefiles"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DOSG_BUILD_PLATFORM_ANDROID=ON 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF 
+	-DOSG_GL2_AVAILABLE=OFF 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DCMAKE_INSTALL_PREFIX=${DKLIBS}/OpenSceneGraph-GL2/android/Debug/install 
+	-DANDROID_NDK=${ANDROID_NDK}
+	-DANDROID_STL="gnustl_static" 
+	-DANDROID_PLATFORM="android-10" 
+	-DANDROID_ABI="armeabi armeabi-v7a" 
+	-DANDROID_OPTIM_NEON=OFF 
+	-DANDROID_OPTIM_ARM32=OFF 
+	-DFREETYPE_DIR=${FREETYPE} 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DJPEG_INCLUDE_DIR=${JPEG};${JPEG}/android/Debug/jni
+	-DPNG_INCLUDE_DIR=${PNG};${PNG}/android/Debug/jni
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff;${TIFF}/android/Debug/jni
+	-DCURL_DIR=${CURL}
+	-DZLIB_INCLUDE_DIR=${ZLIB};${ZLIB}/android/Debug/jni 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DOSG_USE_QT=OFF
+	-DBoost_INCLUDE_DIR=""
+	-DJ=4 
+	-DANDROID_DEBUG=ON
+	${DKLIBS}/OpenSceneGraph-GL2
+	</cmd>
+	
+	<cmd>
+	${GNUMAKE_EXE}
+	</cmd>
+	
+	<copy path="${ANDROID_NDK}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi/libgnustl_static.a" to="${DKLIBS}/OpenSceneGraph-GL2/android/Debug/obj/local/armeabi/libgnustl_static.a" />
+	<copy path="${ANDROID_NDK}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/libgnustl_static.a" to="${DKLIBS}/OpenSceneGraph-GL2/android/Debug/obj/local/armeabi-v7a/libgnustl_static.a" />
+	
+	<setPATH> ${DKLIBS}/OpenSceneGraph-GL2/android/Release </setPATH>
+	<cmd>
+	${CMAKE_EXE}
+	-G "MinGW Makefiles"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DOSG_BUILD_PLATFORM_ANDROID=ON 
+	-DDYNAMIC_OPENTHREADS=OFF 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=ON 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF 
+	-DOSG_GL2_AVAILABLE=OFF 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=ON 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DCMAKE_INSTALL_PREFIX=${DKLIBS}/OpenSceneGraph-GL2/android/Release/install 
+	-DANDROID_NDK=${ANDROID_NDK}
+	-DANDROID_STL="gnustl_static" 
+	-DANDROID_PLATFORM="android-10" 
+	-DANDROID_ABI="armeabi armeabi-v7a" 
+	-DANDROID_OPTIM_NEON=OFF 
+	-DANDROID_OPTIM_ARM32=OFF 
+	-DFREETYPE_DIR=${FREETYPE} 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DJPEG_INCLUDE_DIR=${JPEG};${JPEG}/android/Release/jni
+	-DPNG_INCLUDE_DIR=${PNG};${PNG}/android/Release/jni
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff;${TIFF}/android/Release/jni
+	-DCURL_DIR=${CURL}
+	-DZLIB_INCLUDE_DIR=${ZLIB};${ZLIB}/android/Release/jni 
+	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DOSG_USE_QT=OFF
+	-DBoost_INCLUDE_DIR=""
+	-DJ=4 
+	-DANDROID_DEBUG=OFF
+	${DKLIBS}/OpenSceneGraph-GL2
+	</cmd>
+	
+	<cmd>
+	${GNUMAKE_EXE}
+	</cmd>
+	
+	<copy path="${ANDROID_NDK}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi/libgnustl_static.a" to="${DKLIBS}/OpenSceneGraph-GL2/android/Release/obj/local/armeabi/libgnustl_static.a"/>
+	<copy path="${ANDROID_NDK}/sources/cxx-stl/gnu-libstdc++/4.6/libs/armeabi-v7a/libgnustl_static.a" to="${DKLIBS}/OpenSceneGraph-GL2/android/Release/obj/local/armeabi-v7a/libgnustl_static.a"/>
+
+</ANDROID>
+
+<LINUX>
+	<setPATH> ${DKLIBS}/OpenSceneGraph-GL2/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_CXX_FLAGS="-I${ZLIB}/linux/Debug -I${PNG}/linux/Debug -I${TIFF}/linux/Debug -I${JPEG}/linux/Debug"
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=ON 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF
+	-DCURL_INCLUDE_DIR=${CURL}/include
+	-DCURL_LIBRARY=${CURL}/linux/Debug/lib/libcurl.a
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include
+	-DFREETYPE_LIBRARY=${FREETYPE}/linux/Debug/libfreetype.a
+	-DZLIB_INCLUDE_DIR=${ZLIB}
+	-DZLIB_LIBRARY=${ZLIB}/linux/Debug/libz.a
+	-DPNG_LIBRARY=${PNG}/linux/Debug/libpng17.a
+	-DPNG_LIBRARY_DEBUG=${PNG}/linux/Debug/libpng17.a
+	-DPNG_PNG_INCLUDE_DIR=${PNG}
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/linux/Debug/libjpeg-static.a 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff 
+	-DTIFF_LIBRARY=${TIFF}/linux/Debug/libtiff-static.a 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/linux/Release/lib/.libs/libgif.lib 
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	
+	<setPATH> ${DKLIBS}/OpenSceneGraph-GL2/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_CXX_FLAGS="-I${ZLIB}/linux/Release -I${PNG}/linux/Release -I${TIFF}/linux/Release -I${JPEG}/linux/Release"
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
+	-DOSG_GL_MATRICES_AVAILABLE=OFF 
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=ON 
+	-DOSG_GL3_AVAILABLE=OFF 
+	-DOSG_GLES1_AVAILABLE=OFF 
+	-DOSG_GLES2_AVAILABLE=OFF 
+	-DOSG_GL_LIBRARY_STATIC=OFF 
+	-DOSG_MSVC_VERSIONED_DLL=OFF 
+	-DOSG_USE_QT=OFF
+	-DCURL_INCLUDE_DIR=${CURL}/include
+	-DCURL_LIBRARY=${CURL}/linux/Release/lib/libcurl.a
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include
+	-DFREETYPE_LIBRARY=${FREETYPE}/linux/Release/libfreetype.a
+	-DZLIB_INCLUDE_DIR=${ZLIB}
+	-DZLIB_LIBRARY=${ZLIB}/linux/Release/libz.a
+	-DPNG_LIBRARY=${PNG}/linux/Release/libpng17.a
+	-DPNG_LIBRARY_DEBUG=${PNG}/linux/Release/libpng17.a
+	-DPNG_PNG_INCLUDE_DIR=${PNG}
+	-DJPEG_INCLUDE_DIR=${JPEG} 
+	-DJPEG_LIBRARY=${JPEG}/linux/Release/libjpeg-static.a 
+	-DTIFF_INCLUDE_DIR=${TIFF}/libtiff 
+	-DTIFF_LIBRARY=${TIFF}/linux/Release/libtiff-static.a 
+	-DGIFLIB_INCLUDE_DIR=${GIF}/lib
+	-DGIFLIB_LIBRARY=${GIF}/linux/Release/lib/.libs/libgif.lib
+	-DBoost_INCLUDE_DIR=""
+	${DKLIBS}/OpenSceneGraph-GL2
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+</LINUX>

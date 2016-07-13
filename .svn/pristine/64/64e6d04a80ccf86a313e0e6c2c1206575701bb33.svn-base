@@ -1,0 +1,21 @@
+<VERIFY> ${DKLIBS}/xerces </VERIFY>
+<PATH> ${DKLIBS}/xerces </PATH>
+
+<INSTALL>
+	<download url="http://mirror.olnevhost.net/pub/apache//xerces/c/3/sources/xerces-c-3.1.1.zip" url2="http://digitalknob.com/Download/Libs/xerces-c-3.1.1.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/xerces-c-3.1.1.zip" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/xerces-c-3.1.1" output="xerces" />
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/xerces/projects/Win32/VC12/xerces-all/xerces-all.sln /t:XercesLib /p:Configuration=Static Debug
+	</cmd>
+	
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/xerces/projects/Win32/VC12/xerces-all/xerces-all.sln /t:XercesLib /p:Configuration=Static Release
+	</cmd>
+</WIN32>

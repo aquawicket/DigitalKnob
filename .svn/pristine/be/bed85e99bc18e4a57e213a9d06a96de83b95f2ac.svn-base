@@ -1,0 +1,21 @@
+
+<VERIFY> C:/eclipse </VERIFY>
+<PATH> C:/eclipse </PATH>
+
+<WIN32>
+	<INSTALL>
+		<download url2="http://www.gtlib.gatech.edu/pub/eclipse/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-win32.zip" url="http://digitalknob.com/Download/Tools/eclipse-java-luna-SR1a-win32.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/eclipse-java-luna-SR1a-win32.zip" path="C:/" />
+		<message> Open eclipse. Help -> Install New Software. Add https://dl-ssl.google.com/android/eclipse/ </message>
+		<waitforkey />
+	</INSTALL>
+</WIN32>
+
+<WIN64>
+	<INSTALL>
+		<download url2="http://mirrors.ibiblio.org/eclipse/technology/epp/downloads/release/luna/SR1a/eclipse-java-luna-SR1a-win32-x86_64.zip" url="http://digitalknob.com/Download/Tools/eclipse-java-luna-SR1a-win32-x86_64.zip" path="${DKDL}"/>
+		<extract file="${DKDL}/eclipse-java-luna-SR1a-win32-x86_64.zip" path="C:/" />
+		<message> Open eclipse. Help -> Install New Software. Add https://dl-ssl.google.com/android/eclipse/ </message>
+		<waitforkey />
+	</INSTALL>
+</WIN64>

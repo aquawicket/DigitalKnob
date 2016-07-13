@@ -1,0 +1,247 @@
+<VERIFY> ${DKLIBS}/osgbullet-master </VERIFY>
+<PATH> ${DKLIBS}/osgbullet-master </PATH>
+
+<INSTALL>
+	<download url="https://drive.google.com/file/d/0B2kjcsFgFhsONjQxalpyN2NJbW8/edit?usp=sharing%20osgbullet-master.zip" url2="http://digitalknob.com/Download/Libs/osgbullet-master.zip" path="${DKDL}"/>
+	<extract file="${DKDL}/osgbullet-master.zip" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DOSGWORKS_STATIC" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/win32" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/win32" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/win32/lib" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	${DKLIBS}/osgbullet-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgbullet-master/win32/osgBullet.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgbullet-master/win32/osgBullet.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN32>
+
+<WIN64>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013 Win64" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /DOSG_LIBRARY_STATIC /DOSGWORKS_STATIC" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/MT /O2 /Ob2 /DNDEBUG" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/win64" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/win64" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/win64/lib" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	${DKLIBS}/osgbullet-master
+	</cmd>
+
+	<DEBUG>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgbullet-master/win64/osgBullet.sln /p:Configuration=Debug
+	</cmd>
+	</DEBUG>
+
+	<RELEASE>
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/osgbullet-master/win64/osgBullet.sln /p:Configuration=Release
+	</cmd>
+	</RELEASE>
+</WIN64>
+
+<MAC>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/mac" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/mac" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/mac/lib" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	${DKLIBS}/osgbullet-master
+	</terminal>
+	
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build
+	</terminal>
+	</RELEASE>
+</MAC>
+
+<IOS>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="armv7 armv7s"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/ios" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/ios" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/ios/lib" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF 
+	-DOSG_BUILD_PLATFORM_IPHONE=ON
+	${DKLIBS}/osgbullet-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -arch "armv7 armv7s"
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -arch "armv7 armv7s"
+	</terminal>
+	</RELEASE>
+</IOS>
+
+<IOSSIMULATOR>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Xcode" 
+	-DCMAKE_OSX_SYSROOT="iphoneos" 
+	-DCMAKE_OSX_ARCHITECTURES="i386"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/ios-simulator" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/ios-simulator" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/ios-simulator/lib" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR=ON
+	${DKLIBS}/osgbullet-master
+	</terminal>
+
+	<DEBUG>
+	<terminal>
+	${XCODE_EXE} -configuration Debug build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</DEBUG>
+
+	<RELEASE>
+	<terminal>
+	${XCODE_EXE} -configuration Release build -sdk iphonesimulator6.1 -arch i386
+	</terminal>
+	</RELEASE>
+</IOSSIMULATOR>
+
+<ANDROID>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgbullet-master/android/Debug </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgbullet-master/android/Release </setPATH>
+	<cmd>
+	${ANDROID_NDK_EXE}
+	</cmd>
+	</RELEASE>
+</ANDROID>
+
+<LINUX>
+	<DEBUG>
+	<setPATH> ${DKLIBS}/osgbullet-master/linux/Debug </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="DEBUG"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/linux/Release" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/linux/Debug" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/linux/Debug/lib/x86_64-linux-gnu" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	${DKLIBS}/osgbullet-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</DEBUG>
+	
+	<RELEASE>
+	<setPATH> ${DKLIBS}/osgbullet-master/linux/Release </setPATH>
+	<terminal>
+	${CMAKE_EXE}
+	-G "Unix Makefiles" 
+	-DCMAKE_BUILD_TYPE="RELEASE"
+	-DOSGInstallType="Source And Build Tree" 
+	-DOSGBuildRoot="${OSG}/linux/Release" 
+	-DOSGSourceRoot="${OSG}" 
+	-DBulletInstallType="Source And Build Tree" 
+	-DBulletBuildRoot="${BULLET}/linux/Release" 
+	-DBulletSourceRoot="${BULLET}" 
+	-DosgWorks_DIR="${OSGWORKS}/linux/Release/lib/x86_64-linux-gnu" 
+	-DBUILD_SHARED_LIBS=OFF 
+	-DOSGBULLET_BUILD_APPLICATIONS=OFF 
+	-DOSGBULLET_BUILD_EXAMPLES=OFF 
+	-DOSGBULLET_INSTALL_DATA=OFF
+	${DKLIBS}/osgbullet-master
+	</terminal>
+
+	<terminal>
+	make
+	</terminal>
+	</RELEASE>
+</LINUX>

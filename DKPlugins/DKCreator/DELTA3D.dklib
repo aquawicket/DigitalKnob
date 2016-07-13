@@ -1,0 +1,82 @@
+<VERIFY> ${DKLIBS}/delta3d </VERIFY>
+<PATH> ${DKLIBS}/delta3d </PATH>
+
+<INSTALL>
+	<download url="http://iweb.dl.sourceforge.net/project/delta3d/delta3d/2.8.0/delta3d-2.8.0rc-source.7z" url2="http://digitalknob.com/Download/Libs/delta3d-2.8.0rc-source.7z" path="${DKDL}"/>
+	<extract file="${DKDL}/delta3d-2.8.0rc-source.7z" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/delta3d-2.8.0rc-source" output="delta3d" />
+</INSTALL>
+
+
+<WIN32>
+	<cmd>
+	${CMAKE_EXE}
+	-G "Visual Studio 12 2013" 
+	-DCMAKE_CXX_FLAGS="/DWIN32 /D_WINDOWS /W3 /nologo /EHsc /DOSG_LIBRARY_STATIC /DXERCES_STATIC_LIBRARY /I${OSG}/win32/include /I${OSG}/include /I${XERCES}/win32/src /I${DKLIBS}/stdint" 
+	-DCMAKE_CXX_FLAGS_DEBUG="/DDEBUG /D_DEBUG" 
+	-DCMAKE_CXX_FLAGS_RELEASE="/DNDEBUG" 
+	-DOPENTHREADS_INCLUDE_DIR=${OSG}/include
+	-DOPENTHREADS_LIBRARY=${OSG}/win32/lib/OpenThreads.lib
+	-DOPENTHREADS_LIBRARY_DEBUG=${OSG}/win32/lib/OpenThreadsd.lib
+	-DOSGANIMATION_INCLUDE_DIR=${OSG}/include
+	-DOSGANIMATION_LIBRARY=${OSG}/win32/lib/osgAnimation.lib
+	-DOSGANIMATION_LIBRARY_DEBUG="${OSG}/win32/lib/osgAnimationd.lib"
+	-DOSGDB_INCLUDE_DIR=${OSG}/include
+	-DOSGDB_LIBRARY=${OSG}/win32/lib/osgDB.lib
+	-DOSGDB_LIBRARY_DEBUG=${OSG}/win32/lib/osgDBd.lib
+	-DOSGGA_INCLUDE_DIR=${OSG}/include
+	-DOSGGA_LIBRARY=${OSG}/win32/lib/osgGA.lib
+	-DOSGGA_LIBRARY_DEBUG=${OSG}/win32/lib/osgGAd.lib
+	-DOSGMANIPULATOR_INCLUDE_DIR=${OSG}/include
+	-DOSGMANIPULATOR_LIBRARY=${OSG}/win32/lib/osgManipulator.lib
+	-DOSGMANIPULATOR_LIBRARY_DEBUG=${OSG}/win32/lib/osgManipulatord.lib
+	-DOSGPARTICLE_INCLUDE_DIR=${OSG}/include
+	-DOSGPARTICLE_LIBRARY=${OSG}/win32/lib/osgParticle.lib
+	-DOSGPARTICLE_LIBRARY_DEBUG=${OSG}/win32/lib/osgParticled.lib
+	-DOSGSHADOW_INCLUDE_DIR=${OSG}/include
+	-DOSGSHADOW_LIBRARY=${OSG}/win32/lib/osgShadow.lib
+	-DOSGSHADOW_LIBRARY_DEBUG=${OSG}/win32/lib/osgShadowd.lib
+	-DOSGSIM_INCLUDE_DIR=${OSG}/include
+	-DOSGSIM_LIBRARY=${OSG}/win32/lib/osgSim.lib
+	-DOSGSIM_LIBRARY_DEBUG=${OSG}/win32/lib/osgSimd.lib
+	-DOSGTEXT_INCLUDE_DIR=${OSG}/include
+	-DOSGTEXT_LIBRARY=${OSG}/win32/lib/osgText.lib
+	-DOSGTEXT_LIBRARY_DEBUG=${OSG}/win32/lib/osgTextd.lib
+	-DOSGUTIL_INCLUDE_DIR=${OSG}/include
+	-DOSGUTIL_LIBRARY=${OSG}/win32/lib/osgUtil.lib
+	-DOSGUTIL_LIBRARY_DEBUG=${OSG}/win32/lib/osgUtild.lib
+	-DOSGVIEWER_INCLUDE_DIR=${OSG}/include
+	-DOSGVIEWER_LIBRARY=${OSG}/win32/lib/osgViewer.lib
+	-DOSGVIEWER_LIBRARY_DEBUG=${OSG}/win32/lib/osgViewerd.lib
+	-DOSG_INCLUDE_DIR=${OSG}/include/win32/include
+	-DOSG_LIBRARY=${OSG}/win32/lib/osg.lib
+	-DOSG_LIBRARY_DEBUG=${OSG}/win32/lib/osgd.lib
+	-DODE_INCLUDE_DIR=${ODE}/include
+	-DODE_LIBRARY=${ODE}/lib/ReleaseSingleLib/ode_single.lib
+	-DODE_LIBRARY_DEBUG=${ODE}/lib/DebugSingleLib/ode_singled.lib
+	-DOPENAL_INCLUDE_DIR=${OPENAL}/include
+	-DOPENAL_LIBRARY=${OPENAL}/win32/Release/OpenAL32.lib
+	-DCAL3D_INCLUDE_DIR=${CAL3D}/src
+	-DCAL3D_LIBRARY=${CAL3D}/bin/Debug/Cal3D.lib
+	-DCAL3D_LIBRARY_DEBUG=${CAL3D}/bin/Release/Cal3D.lib
+	-DXERCES_INCLUDE_DIR=${XERCES}/src
+	-DXERCES_LIBRARY="${XERCES}/Build/Win32/VC9/Static Release/xerces-c_static_3.lib"
+	-DXERCES_LIBRARY_DEBUG="${XERCES}/Build/Win32/VC9/Static Debug/xerces-c_static_3D.lib"
+	-DBUILD_AUDIO=OFF
+	-DBUILD_DIS=OFF
+	-DBUILD_GUI=OFF
+	-DBUILD_TERRAIN=OFF
+	-DBUILD_TESTS=OFF
+	${DKLIBS}/delta3d
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph/win32/delta3d.sln /p:Configuration=Debug
+	</cmd>
+
+	<cmd>
+	${VC2013_EXE}
+	${DKLIBS}/OpenSceneGraph/win32/delta3d.sln /p:Configuration=Release
+	</cmd>
+</WIN32>

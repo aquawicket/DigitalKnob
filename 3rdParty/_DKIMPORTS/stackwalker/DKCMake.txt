@@ -1,0 +1,22 @@
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+IF(EXISTS ${3RDPARTY}/stackwalker)
+	###
+ELSE()
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://DigitalKnob.com/Download/Libs/stackwalker-2014-12-28.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/stackwalker-2014-12-28.zip ${3RDPARTY})
+	DKRENAME(${3RDPARTY}/Main ${3RDPARTY}/stackwalker)
+	DKCOPY(${DKIMPORTS}/stackwalker ${3RDPARTY}/stackwalker TRUE)
+ENDIF()
+
+
+### LINK ###
+#DKINCLUDE(${STACKWALKER})
+
+
+### COMPILE ###
+DKSET(STACKWALKER ${3RDPARTY}/stackwalker)

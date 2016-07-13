@@ -1,0 +1,6 @@
+<VERIFY> C:/mingw/mingw32 </VERIFY>
+
+<INSTALL>
+<download url="http://hivelocity.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z" url2="http://digitalknob.com/Download/Tools/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z" path="${DKDL}" />
+<extract file="${DKDL}/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z" path="C:/mingw" />
+</INSTALL>

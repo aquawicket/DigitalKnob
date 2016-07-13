@@ -1,0 +1,19 @@
+<VERIFY> ${DKLIBS}/duktape-1.2.2 </VERIFY>
+<PATH> ${DKLIBS}/duktape-1.2.2 </PATH>
+
+<INSTALL>
+	<download url="http://duktape.org/duktape-1.2.2.tar" url2="http://digitalknob.com/Download/Libs/duktape-1.2.2.tar" path="${DKDL}"/>
+	<extract file="${DKDL}/duktape-1.2.2.tar" path="${DKLIBS}"/>
+</INSTALL>
+
+
+<WIN32>
+	<bash>
+	#!/bin/bash;
+	cd C:/digitalknob/Libs/duktape-1.2.2;
+	export PATH=/c/mingw/mingw32/bin:$PATH;
+	export PATH=/c/mingw/msys/bin:$PATH;
+	make -f Makefile.cmdline;
+	exit;
+	</bash>
+</WIN32>

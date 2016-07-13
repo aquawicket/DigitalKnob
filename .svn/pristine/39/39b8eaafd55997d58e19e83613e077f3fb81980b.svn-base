@@ -1,0 +1,3 @@
+<div id="DKTooltip.html" style="position:absolute;width:100rem;height:50rem;">
+	<div id="DKTooltipText" style="position:absolute;top:5rem;left:5rem;">Tooltip</div>
+</div>

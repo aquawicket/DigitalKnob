@@ -1,0 +1,9 @@
+<VERIFY> ${DKLIBS}/cdio </VERIFY>
+<PATH> ${DKLIBS}/cdio </PATH>
+
+<INSTALL>
+	<download url="http://digitalknob.com/Download/Libs/libcdio-ed55ba4.tar.gz" url2="http://git.savannah.gnu.org/gitweb/?p=libcdio.git;a=snapshot;h=ed55ba4f77733313a179a8bdb2e3f675ba0906bd;sf=tgz" path="${DKDL}"/>
+	<extract file="${DKDL}/libcdio-ed55ba4.tar.gz" path="${DKLIBS}"/>
+	<rename path="${DKLIBS}/libcdio-ed55ba4" output="cdio" />
+</INSTALL>
+
