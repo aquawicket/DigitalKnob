@@ -833,7 +833,6 @@ function DKEditor_OpenAudio(path)
 	DKLog("DKEditor_OpenAudio("+path+") \n");
 	//var file = DKFile_GetFilename(path);
 	DKCreate("DKAudio");
-	DKCreate("DKAudioJS");
 	DKAudio_Play(path);
 	
 	//DKCreate("DKOSGAudioJS");

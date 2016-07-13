@@ -8,6 +8,7 @@ class DKAudio : public DKObjectT<DKAudio>
 {
 public:
 	void Init(){
+		DKCreate("DKAudioJS");
 		DKCreate("DKOSGAudio");
 		DKCreate("DKSDLAudio");
 	};
