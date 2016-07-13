@@ -103,9 +103,9 @@ public:
 	/////////////////////////////////////
 	static void Close(const DKString& id)
 	{
-		if(id.empty()){ return; }
+		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
-			if(same(id, instances[i]->data[1])){
+			if(id.empty() || same(id, instances[i]->data[1])){
 				//DKLog("Closing "+id+"\n", DKINFO);
 				DKLog("Closing "+instances[i]->data[1]+"\n", DKINFO);
 				instances[i]->End();
