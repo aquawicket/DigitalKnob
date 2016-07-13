@@ -15,7 +15,6 @@ function DKThreadPoolDlg_End()
 function DKThreadPoolDlg_OnEvent(event)
 {
 	if(DK_Type(event, "Update")){
-		DKCreate("DKThreadJS");
 		DKThreadPoolDlg_OnUpdate();
 	}
 }

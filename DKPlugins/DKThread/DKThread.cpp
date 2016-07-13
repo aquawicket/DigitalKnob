@@ -4,6 +4,7 @@
 /////////////////////////
 void DKThreadPool::Init()
 {
+	DKCreate("DKThreadJS");
 	DKCreate("DKThread/DKThreadPoolDlg.js");
 	active = true;//false;
 
