@@ -2,7 +2,6 @@
 function DKHooks_Init()
 {
 	DKCreate("DKHook/DKHooks.html");
-	DKCreate("DKHookJS");
 	DKAddEvent("getvalue", "click", DKHooks_OnEvent);
 	DKAddEvent("setvalue", "click", DKHooks_OnEvent);
 	DKAddEvent("doclick", "click", DKHooks_OnEvent);

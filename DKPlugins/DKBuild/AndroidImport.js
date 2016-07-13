@@ -4,7 +4,6 @@ var ANDROIDSTUDIO = "C:/Program Files/Android/Android Studio/bin/studio64.exe"
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DKCreate("DKHookJS");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
 	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
