@@ -4,6 +4,7 @@
 /////////////////////
 void DKWindow::Init()
 {
+	DKCreate("DKWindowJS");
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
 		DKCreate("DKSDLWindow");

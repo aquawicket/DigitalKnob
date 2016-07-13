@@ -1,5 +1,4 @@
 DKCreate("DKWindow");
-DKCreate("DKWindowJS");
 DKCreate("DKRocket");
 DKCreate("DKWidgetJS");
 //DKCreate("test2.js");

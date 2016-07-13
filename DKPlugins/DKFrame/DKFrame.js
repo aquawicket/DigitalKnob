@@ -1,4 +1,3 @@
-DKCreate("DKWindowJS");
 DKCreate("DKCefJS");
 //DKCreate("DKCef/DKCef.js");
 var sizes = [];

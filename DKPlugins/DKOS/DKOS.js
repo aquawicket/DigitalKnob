@@ -1,7 +1,6 @@
 DKCreate("DKTray/DKTray.js");
 DKCreate("DKRocket/DKBrowser.css");
 DKCreate("DKWindow");
-DKCreate("DKWindowJS");
 DKCreate("DKRocket");
 DKCreate("DKWidgetJS");
 var OS = DK_GetOS();

@@ -5,7 +5,6 @@ function DKTray_Init()
 	DKCreate("DKTrayJS");
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
-	DKCreate("DKWindowJS");
 	DKAddEvent("DKTray", "Restore", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Minimize", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Exit", DKTray_OnEvent);
