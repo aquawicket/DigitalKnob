@@ -117,7 +117,6 @@ function TaskbarMenu_OnEvent(event)
 		DKFrame_Iframe("Superball","http://wiredtron.com/games/games/3dsuperball.swf",800,600);
 	}
 	if(DK_Id(event, "OpenDebug")){
-		DKCreate("DKRocketJS");
 		DKRocket_ToggleDebugger();
 	}
 	if(DK_Id(event, "PushDKFiles")){

@@ -6,7 +6,6 @@ function DKInput_Init()
 	DKCreate("DKFileJS");
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");
-	DKCreate("DKRocketJS");
 	DKCreate("DKInputTest/DKInput.html");
 	DKAddEvent("GLOBAL", "keypress", DKInput_OnEvent);
 	DKAddEvent("GLOBAL", "keydown", DKInput_OnEvent);
