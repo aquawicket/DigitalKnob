@@ -2,6 +2,7 @@
 #include "DKUtil.h"
 #include "DKLog.h"
 #include "DKFile.h"
+#include <iostream>
 
 #ifdef WIN32
 	#include "DKWindows.h"
@@ -475,4 +476,10 @@ bool DKUtil::InMainThread()
 int DKUtil::Round(double number)
 {
     return (int)(number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5));
+}
+
+///////////////////
+void DKUtil::Beep()
+{
+    std::cout << '\a' << std::flush;
 }

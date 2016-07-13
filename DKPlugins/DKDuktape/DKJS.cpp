@@ -93,6 +93,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_StrokeKey", DKJS::StrokeKey, 1);
 	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit, 0);
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername, 0);
+	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep, 0);
 }
 
 /////////////////////////////////////
@@ -758,6 +759,13 @@ int DKJS::GetUsername(duk_context* ctx)
 int DKJS::DoFrame(duk_context* ctx)
 {
 	DKApp::DoFrame();
+	return 1;
+}
+
+////////////////////////////////
+int DKJS::Beep(duk_context* ctx)
+{
+	DKUtil::Beep();
 	return 1;
 }
 

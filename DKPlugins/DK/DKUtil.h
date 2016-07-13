@@ -44,6 +44,7 @@ public:
 	static DKString Execute(const DKString& command);
 	static bool InMainThread();
 	static int Round(double number);
+	static void Beep();
 
 #ifdef MAC
 	static pthread_t mainThreadId;
