@@ -24,7 +24,7 @@ DKASSETS(DKCef)
 
 
 ##TODO: double check this
-DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
+DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef FALSE)
 DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef TRUE)
 DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)
 FILE(REMOVE ${DKPLUGINS}/DKCef/cef_sandbox.lib)
@@ -32,6 +32,8 @@ FILE(REMOVE ${DKPLUGINS}/DKCef/libcef.lib)
 FILE(REMOVE ${DKPLUGINS}/DKCef/wow_helper.exe)
 LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:libcef.dll)
 LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:libcef.dll)
+
+UPX_COMPRESS(${DKPLUGINS}/DKCef/libcef.dll)
 
 
 IF(WIN_32)

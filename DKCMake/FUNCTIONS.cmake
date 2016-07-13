@@ -2,7 +2,7 @@
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
 
-SET(UPX "${3RDPARTY}/upx391w/upx.exe" CACHE INTERNAL "")
+SET(UPX "${3RDPARTY}/upx391w" CACHE INTERNAL "")
 
 #############################
 #### DKSET Command  #########
@@ -112,7 +112,9 @@ ENDFUNCTION()
 FUNCTION(UPX_COMPRESS file)
 	IF(WIN32)
 	IF(EXISTS "${UPX}")
-		EXECUTE_PROCESS(COMMAND cmd /c "${UPX} -9 -v ${file}") #WORKING_DIRECTORY ${CURRENT_DIR})
+		MESSAGE("UPX compressing ${file}...")
+		MESSAGE("Please wait...")
+		EXECUTE_PROCESS(COMMAND cmd /c "${UPX}/upx.exe -9 -v ${file}") #WORKING_DIRECTORY ${CURRENT_DIR})
 	ENDIF()
 	ENDIF()
 ENDFUNCTION()
