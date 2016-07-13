@@ -49,7 +49,7 @@ function DKEditor_Init()
 	ignorelist += "DKMessage.html,";
 	ignorelist += "DKAutomate.html,";
 	ignorelist += "DKAutomate2.html,";
-	ignorelist += "DKHooks.html,";
+	ignorelist += "DKHook.html,";
 	ignorelist += "DKBuildGUI.html,";
 	ignorelist += "DKConsole.html,";
 	ignorelist += "DKThreadPoolDlg.html,";

@@ -126,7 +126,7 @@ function DKDev_DevModeOff()
 	DKDev_EditModeOff();
 	DKWidget_Hide("DKMenuRight.html");
 	DKWidget_Hide("DKAutomate.html");
-	DKWidget_Hide("DKHooks.html");
+	DKWidget_Hide("DKHook.html");
 	DKWidget_Hide("fps_box");
 	DKClose("DKOSGStats");
 	DKWidget_Hide("DKDev.html");

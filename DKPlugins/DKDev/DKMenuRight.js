@@ -46,8 +46,8 @@ function DKMenuRight_OnEvent(event)
 		DKFrame_Widget("DKAutomate.html");
 	}
 	if(DK_Id(event, "HookImage")){
-		DKCreate("DKHook/DKHooks.js");
-		DKFrame_Widget("DKHooks.html");
+		DKCreate("DKHook/DKHook.js");
+		DKFrame_Widget("DKHook.html");
 	}
 	if(DK_Id(event, "DevModeButton")){
 		DKMenuRight_ToggleEditMode();
