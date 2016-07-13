@@ -1,7 +1,6 @@
 ////////////////////////////
 function DKMidiDialog_Init()
 {
-	DKCreate("DKMidiJS");
 	DKCreate("DKMidi/DKMidiDialog.html");
 	DKMidiDialog_UpdatePorts();
 }

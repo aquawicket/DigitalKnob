@@ -6,6 +6,7 @@
 ///////////////////
 void DKMidi::Init()
 {
+	DKCreate("DKMidiJS");
 	midiin = new RtMidiIn();
 	midiout = new RtMidiOut();
 	ToggleInput(DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIIN]"));
