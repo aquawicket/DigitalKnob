@@ -8,6 +8,15 @@ DKDEPEND(android-ndk)
 DKINSTALL(http://digitalknob.com/Download/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
+##FIXME: this get's overwritten
+#IF(EXISTS ${BOOST}/boost_1_53_0)
+	###
+#ELSE()
+	#DKSETPATH(${DIGITALKNOB}/Download)
+	#DKDOWNLOAD(http://DigitalKnob.com/Download/Libs/boost_1_53_0.tar.bz2)
+	#DKEXTRACT(${DIGITALKNOB}/Download/boost_1_53_0.tar.bz2 ${BOOST})
+#ENDIF()
+
 ### LINK ###
 ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53)
 
