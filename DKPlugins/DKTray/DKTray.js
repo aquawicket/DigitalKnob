@@ -5,6 +5,7 @@ function DKTray_Init()
 	DKCreate("DKTrayJS");
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
+	DKCreate("DKWindowJS");
 	DKAddEvent("DKTray", "Restore", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Minimize", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Exit", DKTray_OnEvent);
@@ -20,11 +21,13 @@ function DKTray_OnEvent(event)
 	
 	if(DK_Type(event, "Restore")){
 		DKLog("DKTray_Restore \n", DKDEBUG);
+		DKWindow_Restore();
 	}
 	if(DK_Type(event, "Minimize")){
 		DKLog("DKTray_Minimize \n", DKDEBUG);
+		DKWindow_Minimize();
 	}
 	if(DK_Type(event, "Exit")){
-		DKLog("DKTray_Exit \n", DKDEBUG);	
+		DKLog("DKTray_Exit \n", DKDEBUG);
 	}
 }
