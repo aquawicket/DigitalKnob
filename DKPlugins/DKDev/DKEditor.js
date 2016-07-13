@@ -847,7 +847,6 @@ function DKEditor_OpenAudio(path)
 /////////////////////////////////
 function DKEditor_OpenVideo(path)
 {
-	DKCreate("DKOSGVideoJS");
 	DKCreate("DKOSGManipulator,,DKOSGWindow");
 	DKOSGVideo_Play(path);
 	//DKCreate("DKOSGVideo,,DKOSGWindow,"+path);

@@ -104,7 +104,7 @@ void DKOSGVideo::unloaddlls()
 ///////////////////////
 void DKOSGVideo::Init()
 {
-
+	DKCreate("DKOSGVideoJS");
 }
 
 //////////////////////

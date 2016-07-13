@@ -1,4 +1,4 @@
 DKCreate("DKWindow");
-DKCreate("DKOSGVideoJS");
+DKCreate("DKOSGVideo");
 DKCreate("DKOSGManipulator,,DKOSGWindow");
 DKOSGVideo_Play("video.avi");
