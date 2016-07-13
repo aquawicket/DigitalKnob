@@ -1,8 +1,8 @@
 //////////////////////////
 function DKAutomate_Init()
 {
-	DKCreate("DKDev/DKAutomate.html");
-	DKCreate("DKDev/DKAutomate2.js");
+	DKCreate("DKTriggers/DKAutomate.html");
+	DKCreate("DKTriggers/DKAutomate2.js");
 	DKAddEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
 	//DKAddEvent("GLOBAL", "midi", DKAutomate_OnEvent);
 	//DKAddEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
@@ -21,7 +21,7 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
-	DKClose("DKAutomate.html");
+	DKClose("DKTriggers/DKAutomate.html");
 }
 
 //////////////////////////////////

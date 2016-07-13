@@ -117,7 +117,7 @@ function DKDev_DevModeOn()
 	//DKCreate("DKTriggers/DKTriggers.js");
 	DKCreate("DKDev/DKMenuRight.js");
 	DKWidget_Show("DKMenuRight.html");
-	//DKCreate("DKDev/DKAutomate.js");
+	//DKCreate("DKTriggers/DKAutomate.js");
 	DKCreate("DKOSGStats");
 }
 

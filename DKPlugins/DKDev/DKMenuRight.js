@@ -42,7 +42,7 @@ function DKMenuRight_OnEvent(event)
 		DKMenuRight_SetPanel("Web");
 	}
 	if(DK_Id(event, "TriggerImage")){
-		DKCreate("DKDev/DKAutomate.js");
+		DKCreate("DKTriggers/DKAutomate.js");
 		DKFrame_Widget("DKAutomate.html");
 	}
 	if(DK_Id(event, "HookImage")){

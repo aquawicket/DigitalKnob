@@ -104,6 +104,8 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 		sub.LoadDocumentFromString(str.c_str());
 		sub.RemoveNodes("//*/*[contains(@id,'.html')]"); //remove inner nodes with id's containing ".html"
 		DKString file = node.node().attribute("id").value();
+		
+		//FIXME - these should not be hard coded.  
 		if(same(file,"DKDev.html")){ continue; }
 		if(same(file,"DKEditor.html")){ continue; }
 		if(same(file,"DKMenuRight.html")){ continue; }

@@ -39,7 +39,8 @@ function DKTriggers_Init()
 	effects = [];
 	trigger_events = true;
 
-	DKTrigger_LoadTriggers("triggers.txt");
+	local_assets = DKAssets_GetDataPath();
+	DKTrigger_LoadTriggers(local_assets+"triggers.txt");
 	DKAddEvent("GLOBAL", "gui", DKTrigger_OnEvent); //C++
 	DKAddEvent("GLOBAL", "midi", DKTrigger_OnEvent); //C++
 	DKAddEvent("GLOBAL", "keydown", DKTrigger_OnEvent);
