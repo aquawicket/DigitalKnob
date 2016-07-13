@@ -1,4 +1,3 @@
-DKCreate("DKWidgetJS");
 DKCreate("DKWidget,test.html");
 
 ////////////////////

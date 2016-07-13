@@ -4,7 +4,6 @@ function DKBuildGUI_Init()
 	//DKLog("DKBuildGUI_Init() \n");
 	DKCreate("DKThreadJS");
 	DKCreate("DKRocketJS");
-	DKCreate("DKWidgetJS");
 	DKCreate("DKFileJS");
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");

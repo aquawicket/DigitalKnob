@@ -30,7 +30,6 @@ var trigger_events;
 function DKTriggers_Init()
 {
 	DKCreate("DKAssetsJS");
-	DKCreate("DKWidgetJS");
 	current_trigger;
 	triggers = [];
 	Cause = makeStruct("trigger command var1 var2 var3");

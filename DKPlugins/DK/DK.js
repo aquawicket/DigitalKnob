@@ -90,7 +90,7 @@ function DKAvailable(name)
 	if(name == "DKWidget"){
 		return true; 
 	}
-	if(name == "DKWidgetJS"){
+	if(name == "DKWidgetJS"){  //FIXME: is this needed?
 		return true; 
 	}
 	return false;

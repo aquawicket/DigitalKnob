@@ -5,7 +5,6 @@ var key_history = [];
 function DKDev_Init()
 {
 	DKCreate("DKRocketJS");
-	DKCreate("DKWidgetJS");
 	DKCreate("DKDev/DKDev.html");
 	DKCreate("DKDev/DKEditor.js");
 

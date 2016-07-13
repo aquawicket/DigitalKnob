@@ -2,7 +2,6 @@ DKCreate("DKTray/DKTray.js");
 DKCreate("DKRocket/DKBrowser.css");
 DKCreate("DKWindow");
 DKCreate("DKRocket");
-DKCreate("DKWidgetJS");
 var OS = DK_GetOS();
 DKLog("OS="+OS+"\n");
 if(OS != "IOS" && OS != "ANDROID"){

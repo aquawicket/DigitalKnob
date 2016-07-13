@@ -10,6 +10,7 @@ DKRocket* DKWidget::dkRocket;
 /////////////////////
 void DKWidget::Init()
 {
+	DKCreate("DKWidgetJS");
 	root = NULL;
 
 	//link objects
