@@ -1,6 +1,7 @@
 //////////////////////////
 function DKAutomate_Init()
 {
+	DKCreate("DKAssets");
 	DKCreate("DKTriggers/DKAutomate.html");
 	DKCreate("DKTriggers/DKAutomate2.js");
 	DKAddEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
@@ -63,7 +64,8 @@ function DKAutomate_OnEvent(event)
 	if(DK_Id(event, "SaveButton")){
 		//var value = MessageBox(event, "Confirm", "Save Triggers?");
 		//if(!value){ return; }
-		DKTrigger_SaveTriggers("triggers.txt");
+		//var local_assets = DKAssets_GetDataPath();
+		DKTrigger_SaveTriggers("USER/triggers.txt");
 	}
 	
 	if(DK_Id(event, "MidiDevices")){
