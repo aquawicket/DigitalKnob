@@ -29,7 +29,7 @@ function DKMessage_OnEvent(event)
 	DKLog("DKMessage_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Id(event, "DKMessageOk")){
 		//DKLog("DKMessageOk \n", DKDEBUG)
-		DKWidget_Hide("DKMessage.html");
+		//DKWidget_Hide("DKMessage.html");
 		event_data = "OK";
 		if(DKWidget_Visible("DKMessageInput")){
 			event_data = DKWidget_GetValue("DKMessageInput");
@@ -46,10 +46,11 @@ function DKMessage_OnEvent(event)
 		
 		DKMessage_ClearData();
 		DKFrame_Close("DKMessage.html");
+		return;
 	}
 	
 	if(DK_Id(event, "DKMessageCancel")){
-		DKWidget_Hide("DKMessage.html");
+		//DKWidget_Hide("DKMessage.html");
 		event_data = "CANCEL";
 		
 		//DKLog("event_return_type: "+event_return_type+"\n", DKDEBUG);
@@ -61,6 +62,7 @@ function DKMessage_OnEvent(event)
 		
 		DKMessage_ClearData();
 		DKFrame_Close("DKMessage.html");
+		return;
 	}
 	
 	if(DK_Type(event, "GetInput")){

@@ -27,14 +27,16 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	DKLog("DKAutomate_OnEvent("+event+") \n", DKDEBUG);
+	//DKLog("DKAutomate_OnEvent("+event+") \n", DKDEBUG);
 	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+") \n", DKDEBUG);
 	if(DK_Type(event, "keydown")){
 		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
 	}
 	
 	if(DK_Id(event, "DKA-NewButton")){
-		DKLog("DKA-NewButton \n", DKDEBUG);
+		//DKLog("DKA-NewButton \n", DKDEBUG);
+		DKCreate("DKMessage/DKMessage.js");
+		DKFrame_Widget("DKMessage.html");
 		var value = DKMessageBox(event, "GetInput", "New Trigger");
 		if(!value){ return; }
 		DKAutomate_NewTrigger(value);
@@ -78,7 +80,7 @@ function DKAutomate_OnEvent(event)
 ////////////////////////////////////
 function DKAutomate_NewTrigger(name)
 {
-	DKLog("DKAutomate_NewTrigger(value); \n", DKDEBUG)
+	DKLog("DKAutomate_NewTrigger("+name+") \n", DKDEBUG)
 	DKTrigger_AddTrigger(name);
 	DKAutomate_UpdateValues();
 	DKAutomate_SelectValue(name);
