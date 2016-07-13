@@ -377,3 +377,8 @@ scrollbarhorizontal sliderarrowinc:active
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 102px 51px 119px;
 }
+
+scrollbarcorner
+{
+	background-color: rgb(220,220,220);
+}
