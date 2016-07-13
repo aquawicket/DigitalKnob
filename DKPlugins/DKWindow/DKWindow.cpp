@@ -192,6 +192,20 @@ void DKWindow::Windowed()
 }
 
 /////////////////////////
+void DKWindow::Minimize()
+{
+	if(DKClass::HasFunc("DKSDLWindow::Minimize")){
+		DKClass::CallFunc("DKSDLWindow::Minimize");
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::Minimize")){
+		DKClass::CallFunc("DKOSGWindow::Minimize");
+	}
+	else{
+		DKLog("DKWindow::Minimize(): No function available \n", DKERROR);
+	}
+}
+
+/////////////////////////
 int DKWindow::GetMouseX()
 {
 	int* ptr = NULL;

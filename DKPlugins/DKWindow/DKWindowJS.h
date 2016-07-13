@@ -21,6 +21,7 @@ public:
 	static int IsFullscreen(duk_context* ctx);
 	static int Fullscreen(duk_context* ctx);
 	static int Windowed(duk_context* ctx);
+	static int Minimize(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);
 	static int GetMouseY(duk_context* ctx);
 };

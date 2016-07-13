@@ -25,6 +25,7 @@ public:
 	static bool IsFullscreen();
 	static void Fullscreen();
 	static void Windowed();
+	static void Minimize();
 	static int GetMouseX();
 	static int GetMouseY();
 
