@@ -8,7 +8,7 @@
 ////////////////////
 void DKMySql::Init()
 {
-	//DKCurl::Instance("DKCurl,DKCurl0")
+	DKCreate("DKMySqlJS");
 	DKCreate("DKCurl");
 #ifdef USE_mysql
 	if(mysql_init(&mysql)==NULL){
