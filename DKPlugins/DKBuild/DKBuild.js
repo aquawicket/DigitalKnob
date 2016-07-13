@@ -402,11 +402,10 @@ function DKBuild_DoResults()
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
-		//upx compress exe
+		//upx compress the exe file
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx391w/upx.exe")){
-			DKLog("DKBuild_DoResults(): UPX exists, compressing... \n", DKDEBUG);
-			DKLog("DK_Execute("+DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release"+APP+"2.exe) \n");
-			DK_Execute(DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release"+APP+"2.exe");
+			//DKLog("DKBuild_DoResults(): UPX exists, compressing... \n", DKDEBUG);
+			DK_Execute(DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release/"+APP+".exe");
 		}
 		else{
 			DKLog("DKBuild_DoResults(): UPX does not exists \n", DKWARN);
@@ -433,9 +432,10 @@ function DKBuild_DoResults()
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
-		//upx compress exe
+		//upx compress the exe file
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx391w/upx.exe")){
-			DKLog("DKBuild_DoResults(): UPX exists \n", DKDEBUG);
+			//DKLog("DKBuild_DoResults(): UPX exists, compressing... \n", DKDEBUG);
+			DK_Execute(DKPATH+"/3rdParty/upx391w/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win64/Release/"+APP+".exe");
 		}
 		else{
 			DKLog("DKBuild_DoResults(): UPX does not exists \n", DKWARN);
