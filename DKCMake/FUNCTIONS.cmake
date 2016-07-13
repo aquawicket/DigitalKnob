@@ -2,6 +2,8 @@
 ###################         DKFUNCTIONS()         ###################
 #####################################################################
 
+SET(UPX "${3RDPARTY}/upx391w/upx.exe" CACHE INTERNAL "")
+
 #############################
 #### DKSET Command  #########
 FUNCTION(DKSET arg arg2)
@@ -104,6 +106,15 @@ ENDFUNCTION()
 FUNCTION(DKENABLE arg)
 	DKSET(${arg} ON)
 	DKDEFINE(USE_${arg})
+ENDFUNCTION()
+
+###########################
+FUNCTION(UPX_COMPRESS file)
+	IF(WIN32)
+	IF(EXISTS "${UPX}")
+		EXECUTE_PROCESS(COMMAND cmd /c "${UPX} -9 -v ${file}") #WORKING_DIRECTORY ${CURRENT_DIR})
+	ENDIF()
+	ENDIF()
 ENDFUNCTION()
 
 ######################
