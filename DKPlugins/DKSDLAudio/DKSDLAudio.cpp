@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "DKSDLAudio.h"
-#include "DKAssets.h"
+#include "DKFile.h"
 
 Uint8* DKSDLAudio::audio_pos; // global pointer to the audio buffer to be played
 Uint32 DKSDLAudio::audio_len; // remaining length of the sample we have to play
@@ -29,7 +29,7 @@ void DKSDLAudio::End()
 void* DKSDLAudio::Play(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	if(!DKAssets::VerifyPath(path)){ return 0; }
+	if(!DKFile::VerifyPath(path)){ return 0; }
 
 	DKLog("Playng file: "+path+"\n", DKINFO);
 	// Load the WAV
@@ -62,6 +62,7 @@ void* DKSDLAudio::Play(void* data)
 	// shut everything down
 	SDL_CloseAudio();
 	SDL_FreeWAV(wav_buffer);
+	return NULL;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -69,7 +70,7 @@ void DKSDLAudio::Callback(void *userdata, Uint8 *stream, int len)
 {
 	if(audio_len ==0){ return; }
 
-	len = ( len > audio_len ? audio_len : len );
+	len = ((unsigned int)len > audio_len ? audio_len : (unsigned int)len );
 	//SDL_memcpy (stream, audio_pos, len); 					// simply copy from one buffer into the other
 	SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);// mix from one buffer into another
 	audio_pos += len;
