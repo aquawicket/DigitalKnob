@@ -1,3 +1,10 @@
+### Debug ###
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Debug/DKSDLBrowser.app/Contents/Frameworks/DKSDLBrowser Helper.app/Contents/MacOS/DKSDLBrowser Helper"
+
+install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Debug/DKSDLBrowser.app/Contents/MacOS/DKSDLBrowser"
+
+
+### Release ###
 install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Release/DKSDLBrowser.app/Contents/Frameworks/DKSDLBrowser Helper.app/Contents/MacOS/DKSDLBrowser Helper"
 
 install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Release/DKSDLBrowser.app/Contents/MacOS/DKSDLBrowser"
