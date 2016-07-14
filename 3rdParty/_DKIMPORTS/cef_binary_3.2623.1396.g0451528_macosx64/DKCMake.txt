@@ -24,15 +24,6 @@ MAC_RELEASE_LIB(${CEF}/${OS}/libcef_dll/${RELEASE}/libcef_dll_wrapper.a)
 #MAC_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
 #MAC_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
 
-IF(DKAPP)
-	#DKCOPY(${CEF}/Release ${DKPROJECT}/assets/DKCef TRUE)
-	FILE(MAKE_DIRECTORY ${DKPROJECT}/mac64/Release/DKSDLBrowser.app/Contents/Frameworks)
-	DKCOPY(${CEF}/Release ${DKPROJECT}/mac64/Release/DKSDLBrowser.app/Contents/Frameworks TRUE)
-	#FIND_LIBRARY(AK AppKit)
-	#LIST(APPEND DEBUG_LIBS ${AK})
-	#LIST(APPEND RELEASE_LIBS ${AK})
-ENDIF()
-
 
 ### COMPILE ###
 DKSETPATH(${CEF}/${OS})
