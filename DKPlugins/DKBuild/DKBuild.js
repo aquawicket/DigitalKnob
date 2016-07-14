@@ -495,8 +495,12 @@ function DKBuild_DoResults()
 			info_plist = info_plist.replace("<dict>", "<dict><key>CFBundleIconFile</key><string>logo</string>");
 			DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist")
 			
-			//update install_name_tool if cef present
 			//TODO
+			//update install_name_tool if cef present
+			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
+				//DKLog("USING CHROMIUM EMBEDDED FRAMEWORK \n", DKDEBUG);
+				DK_Execute("install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/MacOS/"+APP+"\"");
+			}
 		}
 	}
 	
