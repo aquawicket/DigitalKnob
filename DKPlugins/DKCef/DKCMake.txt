@@ -40,11 +40,9 @@ UPX_COMPRESS(${DKPLUGINS}/DKCef/libcef.dll)
 
 
 IF(WIN_32)
-	#DKCOPY(${DKPLUGINS}/DKCef/win32/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
 	DKCOPY(${DKPLUGINS}/DKCef/win32/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
 ENDIF()
 IF(WIN_64)
-	#DKCOPY(${DKPLUGINS}/DKCef/win64/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
 	DKCOPY(${DKPLUGINS}/DKCef/win64/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
 ENDIF()
 IF(MAC_64)
