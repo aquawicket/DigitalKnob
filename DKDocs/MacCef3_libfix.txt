@@ -8,14 +8,3 @@ install_name_tool -change "@executable_path/Chromium Embedded Framework" "@execu
 install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Release/DKSDLBrowser.app/Contents/Frameworks/DKSDLBrowser Helper.app/Contents/MacOS/DKSDLBrowser Helper"
 
 install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLBrowser/mac64/Release/DKSDLBrowser.app/Contents/MacOS/DKSDLBrowser"
-
-
-
-
-
-
-
-
-"install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \"${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper\""
-
-install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \"${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/MacOS/${AppName}\"
