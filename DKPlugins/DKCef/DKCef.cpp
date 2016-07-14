@@ -81,14 +81,21 @@ void DKCef::Init()
 
 #ifdef WIN32
 	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
-#else
-	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 #endif
+#ifdef MAC
+	DKString exepath;
+	DKFile::GetExePath(exepath);
+	DKString exename;
+	DKFile::GetExeName(exename);
+	DKString ep = exepath+"Contents/Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+	DKSDLBrowser.app/Contents/Frameworks/DKSDLBrowser Helper.app/Contents/MacOS/DKSDLBrowser Helper
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+
     if(!DKFile::PathExists(ep)){
         DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-		DKString exepath;
-		DKFile::GetExePath(exepath);
-		DKLog("DKFile::GetExePath() = "+exepath+"\n", DKERROR);
         return;
     }
     
