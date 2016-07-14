@@ -468,6 +468,8 @@ IF(MAC)
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_PLIST(${AppName}) #this may need to be run at post build
+
+	MESSAGE("AppName = ${AppName}")
 ENDIF()
 
 #######
