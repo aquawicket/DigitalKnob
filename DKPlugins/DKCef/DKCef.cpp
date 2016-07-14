@@ -88,7 +88,6 @@ void DKCef::Init()
 	DKString exename;
 	DKFile::GetExeName(exename);
 	DKString ep = exepath+"Contents/Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
-	DKSDLBrowser.app/Contents/Frameworks/DKSDLBrowser Helper.app/Contents/MacOS/DKSDLBrowser Helper
 #endif
 #ifdef LINUX
 	//TODO
