@@ -85,9 +85,10 @@ void DKCef::Init()
 #ifdef MAC
 	DKString exepath;
 	DKFile::GetExePath(exepath);
+	DKLog("exepath="+exepath+" \n", DKDEBUG)
 	DKString exename;
 	DKFile::GetExeName(exename);
-	DKString ep = exepath+"Contents/Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
 #endif
 #ifdef LINUX
 	//TODO
