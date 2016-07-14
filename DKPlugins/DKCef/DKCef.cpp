@@ -70,6 +70,7 @@ void DKCef::Init()
 	// CefString(&settings.log_file).FromASCII("");
 	// settings.log_severity = LOGSEVERITY_DEFAULT;
 		
+#ifdef WIN32
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
 
@@ -79,13 +80,12 @@ void DKCef::Init()
 	DKString cp = DKFile::local_assets + "USER";
 	CefString(&settings.cache_path) = cp.c_str();
 
-#ifdef WIN32
 	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
 #endif
 #ifdef MAC
 	DKString exepath;
 	DKFile::GetExePath(exepath);
-	DKLog("exepath="+exepath+" \n", DKDEBUG)
+	DKLog("exepath="+exepath+" \n", DKDEBUG);
 	DKString exename;
 	DKFile::GetExeName(exename);
 	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
