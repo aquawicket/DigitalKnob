@@ -40,6 +40,14 @@ MESSAGE("**********************************************")
 MESSAGE("**************  DigitalKnob  *****************")
 MESSAGE("**********************************************\n")
 
+############################################################################################
+############################   ADD EXECUTABLE  #############################################
+############################################################################################
+### Set the project name to the App folder name
+GET_FILENAME_COMPONENT(AppName ${DKPROJECT} NAME)
+STRING(REPLACE " " "_" AppName ${AppName})
+PROJECT(${AppName})
+
 
 #### EXTRA VARIABLES ###############
 DKSET(DKAPP ON)
@@ -283,14 +291,6 @@ ENDIF()
 
 
 
-############################################################################################
-############################   ADD EXECUTABLE  #############################################
-############################################################################################
-### Set the project name to the App folder name
-GET_FILENAME_COMPONENT(AppName ${DKPROJECT} NAME)
-STRING(REPLACE " " "_" AppName ${AppName})
-PROJECT(${AppName})
-
 MESSAGE("\n")
 MESSAGE("***************************************")
 MESSAGE("********** Creating ${AppName} **********")
@@ -468,8 +468,6 @@ IF(MAC)
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
 	
 	DKUPDATE_INFO_PLIST(${AppName}) #this may need to be run at post build
-
-	MESSAGE("AppName = ${AppName}")
 ENDIF()
 
 #######
