@@ -57,9 +57,13 @@ IF(WIN_64)
 ENDIF()
 IF(MAC_64)
 	DKCOPY(${DKPLUGINS}/DKCef/mac64/Debug/cefchild.app ${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/cefchild.app TRUE)
+	DKRENAME(${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
 	DKRENAME(${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
 	DKCOPY(${DKPLUGINS}/DKCef/mac64/Release/cefchild.app ${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app TRUE)
+	DKRENAME(${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
 	DKRENAME(${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
+
+	#TODO: add install_name_tool commands here.  See DKDocs/MacCef3_libfix.txt
 ENDIF()
 IF(LINUX_64)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/cefchild)
