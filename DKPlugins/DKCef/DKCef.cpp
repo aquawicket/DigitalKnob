@@ -82,7 +82,7 @@ void DKCef::Init()
 #ifdef WIN32
 	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
 #else
-	DKString ep = DKApp::datapath + "DKCef/cefchild";
+	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 #endif
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 
