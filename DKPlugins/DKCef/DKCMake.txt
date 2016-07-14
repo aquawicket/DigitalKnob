@@ -63,9 +63,9 @@ IF(MAC_64)
 	DKRENAME(${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/cefchild "${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app/Contents/MacOS/${AppName} Helper")
 	DKRENAME(${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/cefchild.app "${DKPROJECT}/mac64/Release/${AppName}.app/Contents/Frameworks/${AppName} Helper.app")
 
-	#TODO: add install_name_tool commands here.  See DKDocs/MacCef3_libfix.txt
 	MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/Frameworks/${AppName} Helper.app/Contents/MacOS/${AppName} Helper")
 	
+	#FIXME - command does not work because app does not exist yet
 	MAC_COMMAND(install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "${DKPROJECT}/mac64/Debug/${AppName}.app/Contents/MacOS/${AppName}")
 ENDIF()
 IF(LINUX_64)
