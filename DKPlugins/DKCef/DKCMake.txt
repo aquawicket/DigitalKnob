@@ -24,7 +24,7 @@ DKASSETS(DKCef)
 
 
 ##TODO: double check this
-DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef FALSE)
+DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
 DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef TRUE)
 DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)
 FILE(REMOVE ${DKPLUGINS}/DKCef/cef_sandbox.lib)
