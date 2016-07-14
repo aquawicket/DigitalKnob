@@ -84,6 +84,11 @@ void DKCef::Init()
 #else
 	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 #endif
+    if(!DKFile::PathExists(ep)){
+        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+        return;
+    }
+    
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 
 	//DKLog("CefInitialize \n", DKINFO);
