@@ -86,6 +86,9 @@ void DKCef::Init()
 #endif
     if(!DKFile::PathExists(ep)){
         DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+		DKString exepath;
+		DKFile::GetExePath(exepath);
+		DKLog("DKFile::GetExePath() = "+exepath+"\n", DKERROR);
         return;
     }
     
