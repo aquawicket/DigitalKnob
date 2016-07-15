@@ -107,6 +107,7 @@ public:
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//DKLog("Closing "+id+"\n", DKINFO);
+				if(instances.size() == 0) { return; }
 				DKLog("Closing "+instances[i]->data[1]+"\n", DKINFO);
 				instances[i]->End();
 				instances[i] = NULL;
