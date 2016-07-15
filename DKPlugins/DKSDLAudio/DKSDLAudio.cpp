@@ -38,13 +38,14 @@ void* DKSDLAudio::Play(void* data)
 		DKLog("SDL_LoadWAV() filed to load file. \n", DKERROR);
 		return 0;
 	}
-	// set the callback function
-	wav_spec.callback = DKSDLAudio::Callback;
-	wav_spec.userdata = NULL;
+	
 	// set our global static variables
 	audio_pos = wav_buffer; // copy sound buffer
 	audio_len = wav_length; // copy file length
 	
+	// set the callback function
+	wav_spec.callback = DKSDLAudio::Callback;
+	wav_spec.userdata = NULL;
 	// Open the audio device
 	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 ){
 	  fprintf(stderr, "Couldn't open audio: %s\n", SDL_GetError());
