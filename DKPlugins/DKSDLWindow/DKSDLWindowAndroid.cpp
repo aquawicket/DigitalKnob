@@ -1,7 +1,7 @@
 #ifdef ANDROID
 #include "stdafx.h"
 #include "DKSDLWindowAndroid.h"
-#include "DKAndroid"
+#include "DKAndroid.h"
 #include "SDL.h"
 #include "SDL_main.h"
 
