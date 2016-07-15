@@ -166,15 +166,14 @@ void DKApp::Exit()
 {
 	DKLog("DKApp::Exit() \n", DKDEBUG);
 	//DKEvent::SendEvent("GLOBAL", "close_window", "true");
-	DKClass::CloseAll();
 	
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
-#else
-	DKLog("Calling exit(0)\n", DKINFO);
-	exit(0);
 #endif
-	DKUtil::GetKey();
+
+	DKClass::CloseAll();
+	//DKLog("Calling exit(0)\n", DKINFO);
+	exit(0);
 }
 
 /////////////////////////
