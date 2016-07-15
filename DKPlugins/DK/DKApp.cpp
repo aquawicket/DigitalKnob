@@ -197,7 +197,7 @@ bool WINAPI DKApp::ConsoleHandler(DWORD type)
 	switch (type){
 		case CTRL_CLOSE_EVENT:
 			active = false;
-			DKClass::CloseAll();
+			//DKClass::CloseAll();
 			return(true);
 	}
 	return false;
