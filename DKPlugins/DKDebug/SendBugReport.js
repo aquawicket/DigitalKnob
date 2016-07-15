@@ -46,6 +46,10 @@ function SendBugReport_CreateReport()
 function SendBugReport_SendReport()
 {
 	DKLog("SendBugReport_SendReport() \n", DKDEBUG);
+	DKWidget_Show("SendBugReport_Image");
+	DKWidget_Show("SendBugReport_Sending");
+	DK_DoFrame();
+	
 	var num = Math.floor((Math.random() * 99999999) + 1);
 	DKDebug_SendBugReport(num.toString());
 }
