@@ -1,9 +1,6 @@
 IF(LINUX)
-	RETURN()
+###RETURN()
 ENDIF()
-#IF(ANDROID)
-	#RETURN()
-#ENDIF()
 
 
 DKDEPEND(DKAudio)
