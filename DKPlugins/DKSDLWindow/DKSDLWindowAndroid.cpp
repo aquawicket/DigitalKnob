@@ -6,6 +6,7 @@
 #include "SDL_main.h"
 
 extern "C" {
+	extern JavaVM* thejvm;
 	extern jint JNICALL JNI_OnLoad2(JavaVM* vm, void* reserved);
 	extern void SDL_Android_Init(JNIEnv* env, jclass cls);
 	extern void Java_org_libsdl_app_SDLActivity_onNativeDropFile(JNIEnv* env, jclass jcls, jstring filename);
@@ -84,7 +85,7 @@ void* DKSDLWindowAndroid::onInitSDL(void* data)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 	
     /* This interface could expand with ABI negotiation, callbacks, etc. */
-	JNI_OnLoad2(thejvm, null);
+	//JNI_OnLoad2(thejvm, NULL);
     SDL_Android_Init(jd.env, jd.cls);
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
     SDL_SetMainReady();
