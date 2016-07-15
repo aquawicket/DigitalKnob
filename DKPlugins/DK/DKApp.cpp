@@ -117,13 +117,9 @@ void DKApp::Init()
 void DKApp::Loop()
 {
 	DKLog("DKApp::Loop() \n", DKDEBUG);
-	
-//#ifdef DESKTOP
 	while(active){
 		DoFrame();
 	}
-//#endif 	
-
 	Exit();
 }
 
@@ -165,14 +161,10 @@ void DKApp::DoFrame()
 void DKApp::Exit()
 {
 	DKLog("DKApp::Exit() \n", DKDEBUG);
-	//DKEvent::SendEvent("GLOBAL", "close_window", "true");
-	
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
-
 	DKClass::CloseAll();
-	//DKLog("Calling exit(0)\n", DKINFO);
 	exit(0);
 }
 
@@ -197,7 +189,6 @@ bool WINAPI DKApp::ConsoleHandler(DWORD type)
 	switch (type){
 		case CTRL_CLOSE_EVENT:
 			active = false;
-			//DKClass::CloseAll();
 			return(true);
 	}
 	return false;
