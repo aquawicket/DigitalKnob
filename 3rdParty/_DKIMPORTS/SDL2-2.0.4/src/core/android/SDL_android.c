@@ -86,8 +86,7 @@ static SDL_bool bHasNewData;
 *******************************************************************************/
 
 /* Library init */
-/*
-JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
+JNIEXPORT jint JNICALL JNI_OnLoad2(JavaVM* vm, void* reserved)
 {
     JNIEnv *env;
     mJavaVM = vm;
@@ -107,7 +106,6 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 
     return JNI_VERSION_1_4;
 }
-*/
 
 /* Called before SDL_main() to initialize JNI bindings */
 JNIEXPORT void JNICALL SDL_Android_Init(JNIEnv* mEnv, jclass cls)
