@@ -86,10 +86,11 @@ static SDL_bool bHasNewData;
 *******************************************************************************/
 
 /* Library init */
-JNIEXPORT jint JNICALL JNI_OnLoad2(JavaVM* vm, void* reserved)
+JNIEXPORT jint JNICALL JNI_OnLoad2(JNIEnv* mEnv)
 {
     JNIEnv *env;
-    mJavaVM = vm;
+    //mJavaVM = vm;
+	(*mEnv)->GetJavaVM(mEnv,&mJavaVM); //added
     LOGI("JNI_OnLoad called");
     if ((*mJavaVM)->GetEnv(mJavaVM, (void**) &env, JNI_VERSION_1_4) != JNI_OK) {
         LOGE("Failed to get the environment using GetEnv()");
