@@ -120,7 +120,6 @@ void DKApp::Loop()
 	while(active){
 		DoFrame();
 	}
-	//DKApp::Exit();
 }
 
 /////////////////////
@@ -189,7 +188,6 @@ bool WINAPI DKApp::ConsoleHandler(DWORD type)
 	//DKLog("Console Message \n");
 	switch (type){
 		case CTRL_CLOSE_EVENT:
-			//active = false;
 			DKApp::Exit();
 			return(true);
 	}

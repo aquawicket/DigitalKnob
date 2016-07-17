@@ -20,14 +20,11 @@ public:
 	static bool paused;
 	static int argc;
 	static char** argv;
-
 	static double now;
 	static double lastFrame;
 	static double lastSecond;
 	static double _fps;
 	
-
-//#ifdef USE_Boost
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////
 	static void AddLoopFunc(const DKString& type, void (T::*func)(), T* _this)
@@ -88,7 +85,6 @@ public:
 	static std::vector<boost::function<void()> > event_funcs;
 	static std::vector<boost::function<void()> > update_funcs;
 	static std::vector<boost::function<void()> > render_funcs;
-//#endif
 	
 #ifdef WIN32
 	static HINSTANCE hInstance; //posibbly move to DKWindows
