@@ -145,7 +145,9 @@ function TaskbarMenu_OnEvent(event)
 		DK_Reload();
 	}
 	if(DK_Id(event, "CloseDKOS")){
+		DKClose("DKOS/TaskbarMenu.js")
 		DK_Exit();
+		return;
 	}
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DKWidget_GetValue(event);
