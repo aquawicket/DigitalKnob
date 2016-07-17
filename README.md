@@ -41,7 +41,6 @@ Internet Explorer (9.0+) <br>
 [Ffmpeg](https://github.com/FFmpeg/FFmpeg) <br>
 [Freealut](https://github.com/vancegroup/freealut) <br>
 [Freetype](https://github.com/vinniefalco/FreeType) <br>
-[Glew] (https://github.com/LuaDist/glew) <br>
 [Gif](http://sourceforge.net/projects/giflib/files/) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
 [Ogg](https://github.com/gcp/libogg) <br>
