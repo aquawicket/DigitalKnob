@@ -8,54 +8,18 @@ var storedMouseY;
 function DKEditor_Init()
 {
 	DKCreate("DKDev/DKEditor.html");
-	DKEditor_CreateBox();
-	DKEditor_HideBox();
 
-	//DKAddEvent("body", "mousedown", DKEditor_OnEvent);
 	DKAddEvent("body", "contextmenu", DKEditor_OnEvent);
 	DKAddEvent("body", "click", DKEditor_OnEvent);
-	//DKAddEvent("GLOBAL", "keydown", DKEditor_OnEvent);
-	//DKAddEvent("body", "window_resize", DKEditor_OnEvent);
-	//DKAddEvent("body", "Clear", DKEditor_OnEvent);
 	DKAddEvent("GLOBAL", "SaveHtmlFiles", DKEditor_OnEvent);
 	DKAddEvent("GLOBAL", "OpenFile", DKEditor_OnEvent);
 	DKAddEvent("GLOBAL", "FileChoice", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewFrame", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewFrame2", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-OpenFile", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-OpenFile2", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewImage", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewText", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewDiv", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewButton", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewTextbox", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewTextarea", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewDropdown", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewCheckbox", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewRadioButton", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewiFrame", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewVSlider", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-NewHSlider", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-MoveToFront", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-Delete", "click", DKEditor_OnEvent);
-	DKAddEvent("DKC-Cut", "click", DKEditor_OnEvent);	
-	DKAddEvent("DKC-Copy", "click", DKEditor_OnEvent);	
-	DKAddEvent("DKC-Paste", "click", DKEditor_OnEvent);
 	
 	ignorelist += "DKEditor.html,";
-	//ignorelist += "DKDev.html,";
-	//ignorelist += "fps_box,";
 	ignorelist += "DKMenuRight.html,";
-	//ignorelist += "DKMessage.html,";
-	//ignorelist += "DKAutomate.html,";
-	//ignorelist += "DKAutomate2.html,";
-	//ignorelist += "DKHook.html,";
-	//ignorelist += "DKBuildGUI.html,";
-	//ignorelist += "DKConsole.html,";
-	//ignorelist += "DKThreadPoolDlg.html,";
-	//ignorelist += "DKColorPicker.html,";
-	//ignorelist += "DKFileDialog.html,";
-	//ignorelist += "DKNotepad.html";
+	
+	DKEditor_CreateBox();
+	DKEditor_HideBox();	
 }
 
 ///////////////////////
@@ -66,7 +30,7 @@ function DKEditor_End()
 	DKRemoveEvent("GLOBAL", "SaveHtmlFiles", DKEditor_OnEvent);
 	DKRemoveEvent("GLOBAL", "OpenFile", DKEditor_OnEvent);
 	DKRemoveEvent("GLOBAL", "FileChoice", DKEditor_OnEvent);
-	DKClose("DKEditor.html");
+	DKClose("DKDev/DKEditor.html");
 }
 
 //////////////////////
@@ -136,112 +100,6 @@ function DKEditor_OnEvent(event)
 		DKWidget_SetProperty("DKC-EditorMenu", "top", String(mouseY)+"px");
 		DKWidget_SetProperty("DKC-EditorMenu", "left", String(mouseX)+"px");
 		DKWidget_Show("DKC-EditorMenu");
-		return;
-	}
-	
-	DKWidget_Hide("DKC-EditorRootMenu");
-	DKWidget_Hide("DKC-EditorMenu");
-
-/*
-	if(DK_Type(event, "keydown")){
-		if(!stored_element || stored_element == "body"){return;}
-		var key = GetKeyNum();
-		if(key == 90){//left
-			//DKWidget_SetProperty(stored_element, "left", String(stored_element->GetOffsetLeft()-1)+"px");
-		}
-		if(key == 91){//up
-			//DKWidget_SetProperty(stored_element, "top", String(stored_element->GetOffsetTop()-1)+"px");
-		}
-		if(key == 92){//right
-			//DKWidget_SetProperty(stored_element, "left", String(stored_element->GetOffsetLeft()+1)+"px");
-		}
-		if(key == 93){//down
-			//DKWidget_SetProperty(stored_element, "top", String(stored_element->GetOffsetTop()+1)+"px");
-		}
-	}
-*/
-	if(DK_Id(event, "DKC-NewFrame") || DK_Id(event, "DKC-NewFrame2")){
-		//DKLog("DKC-NewFrame\n", DKDEBUG);
-		DKEditor_NewPage(stored_element);
-		return;
-	}
-	if(DK_Id(event, "DKC-NewDiv")){
-		DKEditor_NewDiv(stored_element);
-		return;
-	}
-	if(DK_Id(event, "DKC-OpenFile") || DK_Id(event, "DKC-OpenFile2")){
-		//DKLog("DKC-OpenFile", DKDEBUG);
-		DKCreate("DKFile/DKFileDialog.js");
-		DKFrame_Widget("DKFileDialog.html");
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
-		return;
-	}
-	if(DK_Id(event, "DKC-NewImage")){
-		DKCreate("DKFile/DKFileDialog.js");
-		DKFrame_Widget("DKFileDialog.html");
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
-		return;
-	}
-	if(DK_Id(event, "DKC-NewText")){
-		DKEditor_NewText();
-		return;
-	}	
-	if(DK_Id(event, "DKC-NewButton")){
-		DKEditor_NewButton();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewTextbox")){
-		DKEditor_NewTextbox();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewTextarea")){
-		DKEditor_NewTextarea();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewDropdown")){
-		DKEditor_NewDropdown();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewCheckbox")){
-		DKEditor_NewCheckbox();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewRadioButton")){
-		DKEditor_NewRadioButton();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewiFrame")){
-		DKEditor_NewiFrame();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewVSlider")){
-		DKEditor_NewVSlider();
-		return;
-	}
-	if(DK_Id(event, "DKC-NewHSlider")){
-		DKEditor_NewHSlider();
-		return;
-	}
-	if(DK_Id(event, "DKC-Delete")){
-		DKWidget_PrependChild("body", "DKC-DKEditorBox");
-		DKWidget_RemoveElement(stored_element);
-		stored_element = "body";
-		return;
-	}
-	if(DK_Id(event, "DKC-MoveToFront")){
-		//DKWidget_MoveToFront(stored_element);
-		return;
-	}
-	if(DK_Id(event, "DKC-Cut")){
-		DKEditor_Cut();
-		return;
-	}
-	if(DK_Id(event, "DKC-Copy")){
-		DKEditor_Copy();
-		return;
-	}
-	if(DK_Id(event, "DKC-Paste")){
-		DKEditor_Paste();
 		return;
 	}
 	if(DK_Type(event, "Clear")){
