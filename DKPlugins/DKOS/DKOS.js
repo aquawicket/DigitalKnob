@@ -16,8 +16,7 @@ if(OS != "IOS" && OS != "ANDROID"){
 DKCreate("DKFrame/DKFrame.js")
 DKCreate("DKOS/Desktop.js");
 DKCreate("DKOS/Taskbar.js");
-//DKCreate("DKDom");
 
 if(OS == "IOS" || OS == "ANDROID"){
-	DKWidget_SetScale(2);
+	//DKWidget_SetScale(2);   FIXME
 }
