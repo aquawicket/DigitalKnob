@@ -1,3 +1,4 @@
+/*
 var key_history = [];
 //var osg_fps = 0;
 
@@ -151,3 +152,4 @@ function DKDev_EditModeOff()
 	DKEditor_Off();
 	DKSendEvent("GLOBAL", "ToggleTriggers", "ON");
 }
+*/

@@ -107,7 +107,7 @@ function CreateWidget(url, parent)
 	if(!string){ 
 		//DKLog("file not found \n", DKERROR); 
 		var file = DKFile_GetFilename(url);
-		string  = "<div id=\""+file+"\" style=\"position:absolute;top:200px;left:200px;width:200px;height:200px;background-color:rgb(230,230,230);\"></div>";
+		string  = "<div id=\""+file+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 
 	var temp = document.createElement("temp");
