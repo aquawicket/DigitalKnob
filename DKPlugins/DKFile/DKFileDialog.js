@@ -12,6 +12,7 @@ function DKFileDialog_Init()
 	DKAddEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
+	DKAddEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -56,6 +57,11 @@ function DKFileDialog_OnEvent(event)
 		else{
 			//DKLog("DKFileDialog::ProcessEvent(): return_path_type incorrect. \n", DKERROR);
 		}
+		DKFrame_Close("DKFileDialog.html")
+		return;
+	}
+	
+	if(DK_Id(event, "DKFileDialogCancel")){
 		DKFrame_Close("DKFileDialog.html")
 		return;
 	}
