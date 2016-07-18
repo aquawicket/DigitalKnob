@@ -43,19 +43,19 @@ function DKEditor_Init()
 	DKAddEvent("DKC-Paste", "click", DKEditor_OnEvent);
 	
 	ignorelist += "DKEditor.html,";
-	ignorelist += "DKDev.html,";
-	ignorelist += "fps_box,";
+	//ignorelist += "DKDev.html,";
+	//ignorelist += "fps_box,";
 	ignorelist += "DKMenuRight.html,";
-	ignorelist += "DKMessage.html,";
-	ignorelist += "DKAutomate.html,";
-	ignorelist += "DKAutomate2.html,";
-	ignorelist += "DKHook.html,";
-	ignorelist += "DKBuildGUI.html,";
-	ignorelist += "DKConsole.html,";
-	ignorelist += "DKThreadPoolDlg.html,";
-	ignorelist += "DKColorPicker.html,";
-	ignorelist += "DKFileDialog.html,";
-	ignorelist += "DKNotepad.html";
+	//ignorelist += "DKMessage.html,";
+	//ignorelist += "DKAutomate.html,";
+	//ignorelist += "DKAutomate2.html,";
+	//ignorelist += "DKHook.html,";
+	//ignorelist += "DKBuildGUI.html,";
+	//ignorelist += "DKConsole.html,";
+	//ignorelist += "DKThreadPoolDlg.html,";
+	//ignorelist += "DKColorPicker.html,";
+	//ignorelist += "DKFileDialog.html,";
+	//ignorelist += "DKNotepad.html";
 }
 
 ///////////////////////
