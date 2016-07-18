@@ -107,8 +107,8 @@ function DKMenuRight_EditModeOn()
 {
 	DKLog("DKMenuRight_EditModeOn() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/redbutton.png");
-	DKCreate("DKDev/DKEditor.js");
-	DKEditor_On();
+	DKCreate("DKDev/DKDev.js");
+	DKDev_On();
 	DKSendEvent("GLOBAL", "ToggleTriggers", "OFF");
 }
 
@@ -117,7 +117,7 @@ function DKMenuRight_EditModeOff()
 {
 	DKLog("DKMenuRight_EditModeOff() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/greenbutton.png");
-	DKCreate("DKDev/DKEditor.js");
-	DKEditor_Off();
+	DKCreate("DKDev/DKDev.js");
+	DKDev_Off();
 	DKSendEvent("GLOBAL", "ToggleTriggers", "ON");
 }
