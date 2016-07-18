@@ -27,6 +27,7 @@ Internet Explorer (9.0+) <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [openFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
+[SMFL](https://github.com/SFML/SFML) "coming soon" <br>
 
 ###Supported Libraries
 [Archive](https://github.com/libarchive/libarchive) <br>
