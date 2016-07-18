@@ -95,7 +95,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 	}
 	else{
 		//blank widget
-		string  = "<div id=\""+id+"\" style=\"position:absolute;top:200px;left:200px;width:200px;height:200px;background-color:rgb(230,230,230);\"></div>";
+		string  = "<div id=\""+id+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 
 	//Prep the string into rocket compatible code
@@ -433,7 +433,7 @@ DKElement* DKWidget::CreateElement(const DKString& tag)
 {
 	DKElement* element = dkRocket->GetDocument()->CreateElement(tag.c_str());
 	element->SetAttribute("nosave","1");
-	element->SetAttribute("style","top:0px;"); //we do this just to initialze an active style string
+	element->SetAttribute("style","top:0rem;"); //we do this just to initialze an active style string
 	return element;
 }
 
@@ -1446,8 +1446,8 @@ bool DKWidget::ValidateSize(DKString &value)
 		return false;
 	}
 
-	DKString ext = "px";
-	replace(value, "px", "");
+	DKString ext = "rem";
+	replace(value, "rem", "");
 	replace(value, "p", "");
 	if(has(value,"%")){
 		replace(value,"%","");
@@ -1465,7 +1465,7 @@ bool DKWidget::ValidateSize(DKString &value)
 		return true;
 	}
 
-	value = "5px";
+	value = "5rem";
 	return false;
 }
 
@@ -1477,8 +1477,8 @@ bool DKWidget::ValidatePosition(DKString &value)
 		return false;
 	}
 
-	DKString ext = "px";
-	replace(value, "px", "");
+	DKString ext = "rem";
+	replace(value, "rem", "");
 	replace(value, "p", "");
 	if(has(value,"%")){
 		replace(value,"%","");
@@ -1496,7 +1496,7 @@ bool DKWidget::ValidatePosition(DKString &value)
 		return true;
 	}
 
-	value = "0px";
+	value = "0rem";
 	return false;
 }
 
@@ -1627,8 +1627,8 @@ bool DKWidget::AttachDrags()
 			SetAttribute(handle, "id", file + "DKResize");
 			SetAttribute(handle, "size_target", elements[i]->GetAttribute("resize")->Get<DKCString>().CString());
 			SetProperty(handle, "position", "absolute");
-			SetProperty(handle, "top", "0px");
-			SetProperty(handle, "left", "0px");
+			SetProperty(handle, "top", "0rem");
+			SetProperty(handle, "left", "0rem");
 			SetProperty(handle, "width", "100%");
 			SetProperty(handle, "height", "100%");
 			elements[i]->AppendChild(handle);
@@ -1658,8 +1658,8 @@ bool DKWidget::AddDragHandle(const DKString& id, const DKString& drag)
 
 	SetAttribute(handle, "move_target", drag);
 	SetProperty(handle, "position", "absolute");
-	SetProperty(handle, "top", "0px");
-	SetProperty(handle, "left", "0px");
+	SetProperty(handle, "top", "0rem");
+	SetProperty(handle, "left", "0rem");
 	SetProperty(handle, "width", "100%");
 	SetProperty(handle, "height", "100%");
 	return true;
@@ -1698,8 +1698,8 @@ bool DKWidget::AddResizeHandle(const DKString& id, const DKString& resize)
 
 	SetAttribute(handle, "size_target", resize);
 	SetProperty(handle, "position", "absolute");
-	SetProperty(handle, "top", "0px");
-	SetProperty(handle, "left", "0px");
+	SetProperty(handle, "top", "0rem");
+	SetProperty(handle, "left", "0rem");
 	SetProperty(handle, "width", "100%");
 	SetProperty(handle, "height", "100%");
 	return true;

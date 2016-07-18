@@ -586,7 +586,7 @@ int DKWidgetJS::GetScale(duk_context* ctx)
 {
 	DKString scale;
 	DKWidget::GetProperty("html","font-size",scale);
-	replace(scale, "px", "");
+	replace(scale, "rem", "");
 	//DKLog("DKWidgetJS::GetScale() = "+scale+" \n", DKDEBUG);
 	duk_push_number(ctx, toFloat(scale));
 	return 1;
@@ -597,7 +597,7 @@ int DKWidgetJS::SetScale(duk_context* ctx)
 {
 	double scale = duk_require_number(ctx, 0);
 	//DKLog("DKWidgetJS::SetScale("+toString(scale)+") \n", DKDEBUG);
-	DKWidget::SetProperty("html","font-size",toString(scale)+"px");
+	DKWidget::SetProperty("html","font-size",toString(scale)+"rem");
 	DKWidget::SetProperty("body","font-size",toString(scale)+"em");
 	return 1;
 }
