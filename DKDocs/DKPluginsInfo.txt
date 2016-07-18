@@ -1,8 +1,8 @@
 "A DKPlugin"
 
-A DKPlugins is a folder, it's contents compaitble with DigitalKnob.  DKPlugins/MyPlugin
+A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  DKPlugins/MyPlugin
 A DKPlugin can be anything from c++ files, to html, javascript, or just file assets.
-Every Plugin shall include a DKCMake.txt file to descripbe it's roll.
+Every Plugin shall include a DKCMake.txt file to run.
 Every Plugin shall be located in the digitalknob/DKPlugins folder
 
 
