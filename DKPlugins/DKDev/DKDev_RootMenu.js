@@ -13,6 +13,7 @@ function DKDev_RootMenu_Init()
 /////////////////////////////
 function DKDev_RootMenu_End()
 {
+	DKRemoveEvent("GLOBAL", "mousedown", DKDev_RootMenu_OnEvent);
 	DKClose("DKDev/DKDev_RootMenu.html");
 }
 
@@ -21,13 +22,11 @@ function DKDev_RootMenu_OnEvent(event)
 {
 	if(DK_Id(event, "DKDev_RootMenu_NewFrame")){
 		DKDev_NewPage(stored_element);
-		return;
 	}
 	if(DK_Id(event, "DKDev_RootMenu_OpenFile")){
 		DKCreate("DKFile/DKFileDialog.js");
 		DKFrame_Widget("DKFileDialog.html");
 		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
-		return;
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
