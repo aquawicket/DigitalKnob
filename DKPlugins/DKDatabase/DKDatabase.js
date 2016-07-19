@@ -30,7 +30,7 @@ function DKDatabase_Init()
 /////////////////////////
 function DKDatabase_End()
 {
-	DKClose("DKDatabase.html");
+	DKClose("DKDatabase/DKDatabase.html");
 }
 
 //////////////////////////////////
@@ -118,6 +118,7 @@ function DKDatabase_Connect()
 	//DKMySql_Database("DKData");
 
 	DKWidget_Show("Success");
+	var local_assets = DKAssets_GetDataPath();
 	DKFile_SetSetting(local_assets+"USER/database.txt", "[SERVER]", server);
 	DKFile_SetSetting(local_assets+"USER/database.txt", "[USERNAME]", username);
 	DKFile_SetSetting(local_assets+"USER/database.txt", "[PASSWORD]", password);
