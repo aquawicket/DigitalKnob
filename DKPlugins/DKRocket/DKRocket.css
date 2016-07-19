@@ -1,6 +1,11 @@
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
+html
+{
+	visibility:hidden;
+}
+
 div, option, img, select, dataselect, input, textarea, button
 {
 	display: block;
