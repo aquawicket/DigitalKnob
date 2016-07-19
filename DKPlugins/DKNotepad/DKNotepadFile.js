@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadFile_Init()
 {
-	DKCreate("DKNotepad/DKNotepadFile.html");
+	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
 	
 	DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);

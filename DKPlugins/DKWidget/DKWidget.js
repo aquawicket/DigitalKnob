@@ -84,7 +84,7 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	//DKLog("DKWidget("+url+", "+parent+") \n", DKDEBUG);
+	DKLog("DKWidget("+url+", "+parent+") \n", DKDEBUG);
 	
 	//if(filesloaded.indexOf(url) != -1){
 		//DKLog(url+" already loaded \n", DKWARN);

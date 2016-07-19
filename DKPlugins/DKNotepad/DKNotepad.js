@@ -30,7 +30,7 @@ function DKNotepad_OnEvent(event)
 	}
 	if(DK_Id(event,"DKNotepad_File")){
 		DKCreate("DKNotepad/DKNotepadFile.js");
-		DKWidget_AppendChild("DKNotepad.html","DKNotepadFile.html")
+		//DKWidget_AppendChild("DKNotepad.html","DKNotepadFile.html");
 	}
 }
 
