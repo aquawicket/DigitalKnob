@@ -15,7 +15,10 @@ void DKAssets::Init()
 	if(DKAssets::CheckAssetsPath(datapath)){
 		DKFile::MakeDir(DKFile::local_assets+"USER");
 	}
-	DKLog("Datapath set to: "+DKFile::local_assets+"\n", DKINFO);
+	DKLog("local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
+
+	DKFile::online_assets = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]");
+	DKLog("online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
 
 #ifdef WIN32
 	DKString console = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CONSOLE]");
