@@ -1,7 +1,7 @@
 ///////////////////////////////
 function DKThreadPoolDlg_Init()
 {
-	DKCreate("DKThread");
+	DKCreate("DKThreadPool");
 	DKCreate("DKThread/DKThreadPoolDlg.html"); 
 	DKAddEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
 }
