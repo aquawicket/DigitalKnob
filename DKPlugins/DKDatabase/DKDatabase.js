@@ -1,6 +1,7 @@
 //////////////////////////
 function DKDatabase_Init()
 {
+	DKCreate("DKMySql");
 	DKCreate("DKMySql/DKMySql.js");
 	DKCreate("DKDatabase/DKDatabase.html");
 	DKAddEvent("DKDatabase.html", "AddDatabase", DKDatabase_OnEvent);
