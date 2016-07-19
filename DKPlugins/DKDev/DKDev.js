@@ -73,16 +73,16 @@ function DKDev_OnEvent(event)
 	
 	if(DK_Type(event, "mousedown")){
 		var target = DK_GetId(event);
-		if(DKWidget_IsChildOf(target, "DKC-EditorRootMenu")){return;}
-		if(DKWidget_IsChildOf(target, "DKC-EditorMenu")){return;}
+		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
+		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		DKDev_SelectElement(target);
 		return;
 	}
 
 	if(DK_Type(event, "contextmenu")){
 		var target = DK_GetId(event);
-		if(DKWidget_IsChildOf(target, "DKC-EditorMenu")){return;}
-		if(DKWidget_IsChildOf(target, "DKC-EditorRootMenu")){return;}
+		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
+		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
 		if(target == "DevModeButton"){return;}
 		//DKDev_SelectElement(target);
 		mouseX = DKWidget_GetMouseWindowX();
@@ -91,15 +91,11 @@ function DKDev_OnEvent(event)
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
 		if(target == "body"){
-			DKWidget_SetProperty("DKC-EditorRootMenu", "top", String(mouseY)+"px");
-			DKWidget_SetProperty("DKC-EditorRootMenu", "left", String(mouseX)+"px");
-			DKWidget_Show("DKC-EditorRootMenu");
+			DKCreate("DKDev/DKDev_RootMenu.js");
 			return;
 		}
 
-		DKWidget_SetProperty("DKC-EditorMenu", "top", String(mouseY)+"px");
-		DKWidget_SetProperty("DKC-EditorMenu", "left", String(mouseX)+"px");
-		DKWidget_Show("DKC-EditorMenu");
+		DKCreate("DKDev/DKDev_Menu.js");
 		return;
 	}
 	if(DK_Type(event, "Clear")){

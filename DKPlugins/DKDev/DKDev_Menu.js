@@ -3,6 +3,9 @@
 function DKDev_Menu_Init()
 {
 	DKCreate("DKDev/DKDev_Menu.html");
+	DKWidget_SetProperty("DKDev_Menu.html","top",DKWindow_GetMouseY()+"px");
+	DKWidget_SetProperty("DKDev_Menu.html","left",DKWindow_GetMouseX()+"px");
+	DKAddEvent("GLOBAL", "mousedown", DKDev_Menu_OnEvent);
 	DKAddEvent("DKDev_Menu_NewFrame", "click", DKDev_OnEvent);
 	DKAddEvent("DKDev_Menu_NewFrame2", "click", DKDev_OnEvent);
 	DKAddEvent("DKDev_Menu_OpenFile", "click", DKDev_OnEvent);
@@ -117,4 +120,11 @@ function DKDev_Menu_OnEvent(event)
 		DKDev_Paste();
 		return;
 	}
+	
+	if(DK_Id(event, "GLOBAL")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKDev_Menu.html")){
+			return;
+		}
+	}
+	DKClose("DKDev/DKDev_Menu.js");
 }
