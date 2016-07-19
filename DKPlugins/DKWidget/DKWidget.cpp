@@ -1264,6 +1264,14 @@ bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
 ////////////////////////////////////////////////////////////////////
 bool DKWidget::IsChildOf(const DKString& id, const DKString& parent)
 {
+	if(id.empty()){
+		DKLog("DKWidget::IsChildOf(): id empty \n", DKERROR);
+		return false;
+	}
+	if(parent.empty()){
+		DKLog("DKWidget::IsChildOf(): parent empty \n", DKERROR);
+		return false;
+	}
 	if(!IsChildOf(GetElementById(id), GetElementById(parent))){ return false; }
 	return true;
 }

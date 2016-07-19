@@ -57,6 +57,7 @@ function DKDev_Ignore(id)
 	//DKLog("DKDev_Ignore("+id+") \n", DKDEBUG);
 	var arry = ignorelist.split(",");
 	for(var i=0; i<arry.length; i++){
+		if(!arry[i]){ continue; }
 		if(DKWidget_IsChildOf(id, arry[i])){return true;}
 	}
 	return false;
@@ -118,9 +119,9 @@ function DKDev_OnEvent(event)
 //////////////////////////
 function DKDev_CreateBox()
 {
-	if(DKWidget_ElementExists("DKC-DKDevBox")){ return; }
+	if(DKWidget_ElementExists("DKDev_Box")){ return; }
 	//Control box
-	var box = DKWidget_CreateElement("body", "div", "DKC-DKDevBox");
+	var box = DKWidget_CreateElement("body", "div", "DKDev_Box");
 	DKWidget_SetProperty(box, "position", "absolute");
 	DKWidget_SetProperty(box, "top", "-1px"); //-1 for border
 	DKWidget_SetProperty(box, "left", "-1px"); //-1 for border
@@ -147,15 +148,15 @@ function DKDev_CreateBox()
 ////////////////////////
 function DKDev_HideBox()
 {
-	DKWidget_PrependChild("body", "DKC-DKDevBox");
-	DKWidget_SetProperty("DKC-DKDevBox", "visibility", "hidden");
+	DKWidget_PrependChild("body", "DKDev_Box");
+	DKWidget_SetProperty("DKDev_Box", "visibility", "hidden");
 }
 
 ///////////////////////////
 function DKDev_ApplyBox(id)
 {
-	DKWidget_PrependChild(id, "DKC-DKDevBox");
-	DKWidget_SetProperty("DKC-DKDevBox", "visibility", "visible");
+	DKWidget_PrependChild(id, "DKDev_Box");
+	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
 }
 
 /////////////////////////////////////
@@ -181,7 +182,7 @@ function DKDev_SelectElement(element)
 	DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");	
 }
 
-////////////////////////////////
+/////////////////////////////////
 function DKDev_AddDragHandles(id)
 {
 	//DKLog("DKDev_AddDragHandles("+id+") \n", DKDEBUG);
@@ -194,9 +195,9 @@ function DKDev_AddDragHandles(id)
 	for(var t=0; t<list.length; t++){
 		if(!list[t]){ continue; }
 		if(list[t] == "body"){ continue; }
-		if(DKWidget_IsChildOf(list[t], "DKC-DKDevBox")){ continue; }
-		if(DKWidget_IsChildOf(list[t], "DKC-EditorRootMenu")){ continue; }
-		if(DKWidget_IsChildOf(list[t], "DKC-EditorMenu")){ continue; }
+		if(DKWidget_IsChildOf(list[t], "DKDev_Box")){ continue; }
+		if(DKWidget_IsChildOf(list[t], "DKDev_RootMenu.html")){ continue; }
+		if(DKWidget_IsChildOf(list[t], "DKDev_Menu.html")){ continue; }
 		if(DKDev_Ignore(list[t])){ continue; }	
 		
 		if(DKWidget_AddDragHandle(list[t], list[t])){
@@ -252,7 +253,7 @@ function DKDev_Cut()
 {
 	DKLog("DKDev::Cut() \n", DKDEBUG);
 	DKDev_HideBox();   //FIXME: HideBox() will cause a crash when we later Remove an element
-	//PrependChild("body", "DKC-DKDevBox");
+	//PrependChild("body", "DKDev_Box");
 
 	//var temp_ele = stored_element;
 	var el = DKWidget_GetElements(stored_element);
