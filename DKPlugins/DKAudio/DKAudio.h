@@ -7,18 +7,9 @@
 class DKAudio : public DKObjectT<DKAudio>
 {
 public:
-	void Init(){
-		DKCreate("DKAudioJS");
-		DKCreate("DKOSGAudio");
-		DKCreate("DKSDLAudio");
-	};
+	void Init();
 	void End(){};
-
-	//////////////////
-	static void Play(DKString& file){
-		DKClass::CallFunc("DKOSGAudio::Play", static_cast<void*>(&file));
-		DKClass::CallFunc("DKSDLAudio::Play", static_cast<void*>(&file));
-	}
+	static void Play(DKString& file);
 };
 
 REGISTER_OBJECT(DKAudio, true);
