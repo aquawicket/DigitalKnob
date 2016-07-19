@@ -42,6 +42,7 @@ function DKColorPicker_OnEvent(event)
 			var color = DKWidget_GetProperty("DKColorSelected", "background-color");
 			DKSendEvent(event_id, event_type, color);
 		}
+		DKFrame_Close("DKColorPicker.html");
 		DKClose("DKColorPicker/DKColorPicker.js")
 	}
 }
