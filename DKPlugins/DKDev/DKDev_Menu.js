@@ -6,27 +6,27 @@ function DKDev_Menu_Init()
 	DKWidget_SetProperty("DKDev_Menu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKDev_Menu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKDev_Menu_OnEvent);
-	DKAddEvent("DKDev_Menu_NewFrame", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewFrame2", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_OpenFile", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_OpenFile2", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewImage", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewText", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewDiv", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewButton", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewTextbox", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewTextarea", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewDropdown", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewCheckbox", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewRadioButton", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewiFrame", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewVSlider", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_NewHSlider", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_MoveToFront", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_Delete", "click", DKDev_OnEvent);
-	DKAddEvent("DKDev_Menu_Cut", "click", DKDev_OnEvent);	
-	DKAddEvent("DKDev_Menu_Copy", "click", DKDev_OnEvent);	
-	DKAddEvent("DKDev_Menu_Paste", "click", DKDev_OnEvent);
+	DKAddEvent("DKDev_Menu_NewFrame", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewFrame2", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_OpenFile", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_OpenFile2", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewImage", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewText", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewDiv", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewButton", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewTextbox", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewTextarea", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewDropdown", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewCheckbox", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewRadioButton", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewiFrame", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewVSlider", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_NewHSlider", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_MoveToFront", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_Delete", "click", DKDev_Menu_OnEvent);
+	DKAddEvent("DKDev_Menu_Cut", "click", DKDev_Menu_OnEvent);	
+	DKAddEvent("DKDev_Menu_Copy", "click", DKDev_Menu_OnEvent);	
+	DKAddEvent("DKDev_Menu_Paste", "click", DKDev_Menu_OnEvent);
 }
 
 /////////////////////////

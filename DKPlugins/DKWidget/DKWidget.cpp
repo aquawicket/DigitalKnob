@@ -735,7 +735,10 @@ bool DKWidget::GetProperty(const DKString& id, const DKString& name, DKString& v
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetProperty(const DKString& id, const DKString& name, const DKString& value)
 {
-	if(!SetProperty(GetElementById(id), name, value)){ return false; }
+	if(!SetProperty(GetElementById(id), name, value)){
+		DKLog("DKWidget::SetProperty("+id+","+name+","+value+"): failed\n", DKERROR);
+		return false; 
+	}		
 	return true;
 }
 
