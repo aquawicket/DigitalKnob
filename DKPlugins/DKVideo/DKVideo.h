@@ -7,17 +7,9 @@
 class DKVideo : public DKObjectT<DKVideo>
 {
 public:
-	void Init(){
-		DKCreate("DKOSGVideo");
-		DKCreate("DKSDLVideo");
-	};
+	void Init();
 	void End(){};
-
-	//////////////////
-	static void Play(DKString& file){
-		DKClass::CallFunc("DKOSGVideo::Play", static_cast<void*>(&file));
-		DKClass::CallFunc("DKSDLVideo::Play", static_cast<void*>(&file));
-	}
+	static void Play(DKString& file);
 };
 
 REGISTER_OBJECT(DKVideo, true);

@@ -21,6 +21,7 @@ function TaskbarMenu_Init()
 	DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenSuperball", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("TestSound", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("TestVideo", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
 	//DKWidget_SetFocus("TaskbarMenu_Run");
 }
@@ -118,6 +119,10 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "TestSound")){
 		DKCreate("DKAudio");
 		DKAudio_Play("tada.wav");
+	}
+	if(DK_Id(event, "TestVideo")){
+		DKCreate("DKVideo");
+		DKVideo_Play("test.avi");
 	}
 	if(DK_Id(event, "OpenDebug")){
 		DKRocket_ToggleDebugger();
