@@ -52,7 +52,7 @@ function TaskbarMenu_End()
 function TaskbarMenu_OnEvent(event)
 {
 	//DKLog("TaskbarMenu_OnEvent("+event+") \n", DKDEBUG);
-	DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+") \n", DKDEBUG);
+	//DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+") \n", DKDEBUG);
 	
 	if(DK_Id(event, "FileExplorer")){
 		TaskbarMenu_OpenFileInFrame("DKFile/DKFileDialog.js");
@@ -226,6 +226,10 @@ function TaskbarMenu_OpenFileInFrame(file)
 function TaskbarMenu_Run(command)
 {
 	if(command.indexOf("http://") > -1){
+		DKFrame_Iframe(command,command,800,600);
+		return;
+	}
+	if(command.indexOf("https://") > -1){
 		DKFrame_Iframe(command,command,800,600);
 		return;
 	}
