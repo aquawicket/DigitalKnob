@@ -4,7 +4,7 @@
 #ifndef DKSDLVideo_H
 #define DKSDLVideo_H
 #include "DK.h"
-
+#include "ffplay.h"
 
 ///////////////////////////////////////////////
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
