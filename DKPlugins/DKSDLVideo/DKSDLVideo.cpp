@@ -1,22 +1,24 @@
 #include "stdafx.h"
 #include "DKSDLVideo.h"
-#include "DKFile.h"
-#include "DKAssets.h"
-#include "DKSDLWindow.h"
-#ifdef WIN32
-#include <delayimp.h>
-#endif
 
 
 ////////////////////
 void DKSDLVideo::Init()
 {
-
+	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 }
 
 ///////////////////
 void DKSDLVideo::End()
 {
 
+}
+
+//////////////////////////////////
+void* DKSDLVideo::Play(void* data)
+{
+	//TODO
+	DKLog("DKSDLVideo::Play(): not implemented yet. \n", DKERROR);
+	return NULL;
 }
 

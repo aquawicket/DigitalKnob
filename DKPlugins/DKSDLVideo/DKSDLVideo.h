@@ -12,6 +12,7 @@ class DKSDLVideo : public DKObjectT<DKSDLVideo>
 public:
 	void Init();
 	void End();
+	void* Play(void* data);
 };
 
 REGISTER_OBJECT(DKSDLVideo, true)
