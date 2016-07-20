@@ -936,8 +936,7 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	parent->AppendChild(element); //restore the element
 	
 	//TODO: fix input text elements from disapearing
-	dkRocket->document->DirtyLayout();
-	dkRocket->document->UpdateLayout();
+
 
 	return true;
 }
