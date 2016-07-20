@@ -5,7 +5,6 @@
 #ifndef DKSDLVideo_H
 #define DKSDLVideo_H
 #include "DK.h"
-#include "player.h"
 
 ///////////////////////////////////////////////
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
