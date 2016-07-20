@@ -931,14 +931,12 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	}
 	
 	//remove the element from the previous owner first
-	DKElement* ele = element;
 	DKElement* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
-
 	parent->AppendChild(element); //restore the element
 	
-	//TODO: fix input text elements from disapearing 
-	
+	//TODO: fix input text elements from disapearing
+	//dkRocket->document->DirtyLayout();
 
 	return true;
 }
