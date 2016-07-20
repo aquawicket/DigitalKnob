@@ -935,8 +935,11 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	DKElement* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
 
+	parent->AppendChild(element); //restore the element
 	
-	parent->AppendChild(ele); //restore the element
+	//TODO: fix input text elements from disapearing 
+	
+
 	return true;
 }
 
