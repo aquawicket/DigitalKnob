@@ -41,7 +41,12 @@ function AndroidImport_Import()
 	DKLog("Window is ready. \n", DKDEBUG);
 	
 	//Get app path
-	path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Release";
+	if(TYPE == "Debug"){
+		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Debug";
+	}
+	else{
+		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Release";
+	}
 	//DKLog(path+"\n");
 	DK_SetClipboard(path);	
 	DK_PressKey(17); //press ctrl
@@ -84,7 +89,7 @@ function AndroidImport_Import()
 	DK_Sleep(500);
 	DK_StrokeKey(13) //stroke enter
 	
-	//update C:/AndroidStudio/Release/app/build.gradle
+	//update C:/AndroidStudio/"APP"/app/build.gradle
 	var gradle = DKFile_FileToString(WORKSPACE+"/"+APP+"/app/build.gradle");
 
 	//replace buildTypes with 
@@ -96,7 +101,12 @@ function AndroidImport_Import()
 	//copy shared libs
 	DKFile_MkDir(WORKSPACE+"/"+APP+"/app/src/main/jniLibs");
 	DKFile_MkDir(WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a");
-	DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a", true);
+	if(TYPE == "Debug"){
+		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug/libs/armeabi-v7a", WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a", true);
+	}
+	else{
+		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a", true);
+	}
 	
 	DKLog("Import finished\n", DKINFO);
 }
