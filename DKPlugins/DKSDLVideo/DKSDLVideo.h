@@ -5,6 +5,7 @@
 #ifndef DKSDLVideo_H
 #define DKSDLVideo_H
 #include "DK.h"
+#include "WAAVE.h"
 
 ///////////////////////////////////////////////
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
@@ -13,6 +14,9 @@ public:
 	void Init();
 	void End();
 	void* Play(void* data);
+
+	WVStream* stream;
+	WVStreamingObject* streamObj;
 };
 
 REGISTER_OBJECT(DKSDLVideo, true)
