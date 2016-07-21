@@ -396,6 +396,7 @@ void Element::SetContentBox(const Vector2f& _content_offset, const Vector2f& _co
 		DirtyOffset();
 	}
 
+	/*
 	//TEMPORARY FIX
 	for(int i=0; i<GetNumChildren(); ++i){
 		Rocket::Core::Element* child = GetChild(i);
@@ -416,6 +417,7 @@ void Element::SetContentBox(const Vector2f& _content_offset, const Vector2f& _co
 	if(overflow_y == 2 && content_box.y > GetBox().GetSize().y){
 		GetElementScroll()->EnableScrollbar(ElementScroll::VERTICAL, GetBox().GetSize().y);
 	}
+	*/
 }
 
 // Sets the box describing the size of the element.
