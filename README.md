@@ -38,6 +38,7 @@ Internet Explorer (9.0+) <br>
 [Bzip2](https://github.com/asimonov-im/bzip2) <br>
 [Cef3](https://bitbucket.org/chromiumembedded/cef) <br>
 [Curl](https://github.com/bagder/curl) <br>
+[Crosswalk](https://github.com/crosswalk-project/crosswalk) "coming soon" <br>
 [Duktape](https://github.com/svaarala/duktape) <br>
 [Ffmpeg](https://github.com/FFmpeg/FFmpeg) <br>
 [Freealut](https://github.com/vancegroup/freealut) <br>
