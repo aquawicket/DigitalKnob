@@ -1,4 +1,6 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
+#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
+
 
 /* Define if have decode_audio4/libswresample */
 #define HAVE_AUDIO_DECODE_RESAMPLE 1
@@ -49,7 +51,7 @@
 #define HAVE_AV_GET_BYTES_PER_SAMPLE 1
 
 /* Define if av_opt_ptr exist in libavutil */
-#define HAVE_AV_OPT_PTR 1
+#undef HAVE_AV_OPT_PTR
 
 /* Define if AVFrame.best_effort_timestamp exist in libavcodec */
 #define HAVE_BEST_EFFORT_TIMESTAMP 1
@@ -58,7 +60,7 @@
 #define HAVE_DLFCN_H 1
 
 /* Define to 1 if the system has the type `enum AVMediaType'. */
-#undef HAVE_ENUM_AVMEDIATYPE 1
+#define HAVE_ENUM_AVMEDIATYPE 1
 
 /* Define to 1 if the system has the type `enum AVSampleFormat'. */
 #define HAVE_ENUM_AVSAMPLEFORMAT 1
