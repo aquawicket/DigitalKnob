@@ -257,7 +257,9 @@ function DKBuild_SvnUpdate()
 	}
 	
 	DKCreate("DKAudio");
-	DKAudio_Play("DKBuild/ding.wav");
+	if(DKValid("DKAudioJS,DKAudioJS0")){
+		DKAudio_Play("DKBuild/ding.wav");
+	}
 }
 
 //////////////////////////////
@@ -275,7 +277,9 @@ function DKBuild_SvnCommit()
 	}
 	
 	DKCreate("DKAudio");
-	DKAudio_Play("DKBuild/ding.wav");
+	if(DKValid("DKAudioJS,DKAudioJS0")){
+		DKAudio_Play("DKBuild/ding.wav");
+	}
 }
 
 /////////////////////////////////////
@@ -668,5 +672,7 @@ function DKBuild_DoResults()
 	}
 	
 	DKCreate("DKAudio");
-	DKAudio_Play("DKBuild/ding.wav");
+	if(DKValid("DKAudioJS,DKAudioJS0")){
+		DKAudio_Play("DKBuild/ding.wav");
+	}
 }
