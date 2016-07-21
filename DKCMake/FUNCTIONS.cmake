@@ -1844,28 +1844,28 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 	STRING(REPLACE "\"dkapp\"" "\"${arg}\"" android_H "${android_H}")
 	FILE(WRITE ${DKPROJECT}/Android.h "${android_H}")
 
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
-	STRING(REPLACE "dkapp" "${arg}" androidManifest "${androidManifest}")
-	IF(SDL)
-		STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
-	ENDIF()
-	
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/values/strings.xml stringsxml)
-	STRING(REPLACE "dkapp" "${arg}" stringsxml "${stringsxml}")
-	
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/layout/ui_layout_gles.xml ui_layout_gles)
-	STRING(REPLACE "dkapp" "${arg}" ui_layout_gles "${ui_layout_gles}")
-
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/SDLActivity.java sdlactivity)
-	STRING(REPLACE "dkapp" "${arg}" sdlactivity "${sdlactivity}")
-	
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/DKMain.java dkmain)
-	STRING(REPLACE "dkapp" "${arg}" dkmain "${dkmain}")
-	
-	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/EGLview.java eglview)
-	STRING(REPLACE "dkapp" "${arg}" eglview "${eglview}")
-	
 	IF(ANDROID AND DEBUG)
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
+		STRING(REPLACE "dkapp" "${arg}" androidManifest "${androidManifest}")
+		IF(SDL)
+			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+		ENDIF()
+	
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/res/values/strings.xml stringsxml)
+		STRING(REPLACE "dkapp" "${arg}" stringsxml "${stringsxml}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/res/layout/ui_layout_gles.xml ui_layout_gles)
+		STRING(REPLACE "dkapp" "${arg}" ui_layout_gles "${ui_layout_gles}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/SDLActivity.java sdlactivity)
+		STRING(REPLACE "dkapp" "${arg}" sdlactivity "${sdlactivity}")
+		
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/DKMain.java dkmain)
+		STRING(REPLACE "dkapp" "${arg}" dkmain "${dkmain}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/EGLview.java eglview)
+		STRING(REPLACE "dkapp" "${arg}" eglview "${eglview}")
+		
 		FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
 		FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/res/values/strings.xml "${stringsxml}")
 		FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/res/layout/ui_layout_gles.xml "${ui_layout_gles}")
@@ -1876,6 +1876,27 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/${arg})
 	ENDIF()
 	IF(ANDROID AND RELEASE)
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
+		STRING(REPLACE "dkapp" "${arg}" androidManifest "${androidManifest}")
+		IF(SDL)
+			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+		ENDIF()
+	
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/values/strings.xml stringsxml)
+		STRING(REPLACE "dkapp" "${arg}" stringsxml "${stringsxml}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/layout/ui_layout_gles.xml ui_layout_gles)
+		STRING(REPLACE "dkapp" "${arg}" ui_layout_gles "${ui_layout_gles}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/SDLActivity.java sdlactivity)
+		STRING(REPLACE "dkapp" "${arg}" sdlactivity "${sdlactivity}")
+		
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/DKMain.java dkmain)
+		STRING(REPLACE "dkapp" "${arg}" dkmain "${dkmain}")
+	
+		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/EGLview.java eglview)
+		STRING(REPLACE "dkapp" "${arg}" eglview "${eglview}")
+	
 		FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
 		FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/res/values/strings.xml "${stringsxml}")
 		FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/res/layout/ui_layout_gles.xml "${ui_layout_gles}")
