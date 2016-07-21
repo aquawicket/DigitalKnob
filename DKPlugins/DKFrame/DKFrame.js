@@ -1,4 +1,3 @@
-//DKCreate("DKCef/DKCef.js");
 var sizes = [];
 
 DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);
@@ -6,7 +5,7 @@ DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);
 ///////////////////////
 function DKFrame_Init()
 {
-	
+
 }
 
 ///////////////////////////////
@@ -195,7 +194,6 @@ function DKFrame_CreateResize(frame)
 ///////////////////////////////
 function DKFrame_BringToFront()
 {
-	//FIXME - This causes textbox text to disapear 
 	//return;
 	
 	//DKLog("DKFrame_BringToFront()\n");
