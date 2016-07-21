@@ -23,7 +23,7 @@ function DKThreadPoolDlg_OnEvent(event)
 ///////////////////////////////////
 function DKThreadPoolDlg_OnUpdate()
 {
-	if(!DKValid("DKWidget")){ return; }
+	if(!DKValid("DKWidget0")){ return; }
 	DKLog("Update DKThreadPool \n");
 	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
 
