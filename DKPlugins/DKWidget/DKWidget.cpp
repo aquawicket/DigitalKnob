@@ -936,7 +936,36 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	//remove the element from the previous owner first
 	DKElement* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
+
+	//save scroll positions
+	std::map<DKString,float> x_scrolls;
+	std::map<DKString,float> y_scrolls;
+	DKElementList elements;
+	DKWidget::GetElements(element, elements);
+	for(unsigned int i=0; i<elements.size(); i++){
+		int x;
+		int y;
+		elements[i]->GetOverflow(&x, &y);
+		if(x){
+			x_scrolls[elements[i]->GetId().CString()] = elements[i]->GetScrollLeft();
+		}
+		if(y){
+			y_scrolls[elements[i]->GetId().CString()] = elements[i]->GetScrollTop();
+		}
+	}
+
 	parent->AppendChild(element); //restore the element
+
+	//restore scroll positions
+	std::map<DKString,float>::iterator it;
+	for(it = x_scrolls.begin(); it != x_scrolls.end(); it++){
+		if(it->first.empty()){ continue; }
+		GetElementById(it->first)->SetScrollLeft(it->second);
+	}
+	for(it = y_scrolls.begin(); it != y_scrolls.end(); it++){
+		if(it->first.empty()){ continue; }
+		GetElementById(it->first)->SetScrollTop(it->second);
+	}
 	
 	//Fix input text elements from disapearing
 	Rocket::Core::ElementList inputs;
