@@ -1,31 +1,31 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define if have decode_audio4/libswresample */
-#define HAVE_AUDIO_DECODE_RESAMPLE
+#define HAVE_AUDIO_DECODE_RESAMPLE 1
 
 /* Define if avcodec_decode_audio3 exist in libavcodec */
 #define HAVE_AVCODEC_DECODE_AUDIO_THREE
 
 /* Define if avcodec_decode_video2 exist in libavcodec */
-#define HAVE_AVCODEC_DECODE_VIDEO_TWO
+#define HAVE_AVCODEC_DECODE_VIDEO_TWO 1
 
 /* Define if avcodec_get_frame_class exist in libavcodec */
-#define HAVE_AVCODEC_GET_FRAME_CLASS
+#define HAVE_AVCODEC_GET_FRAME_CLASS 1
 
 /* Define if avcodec_open2 exist in libavcodec */
-#define HAVE_AVCODEC_OPEN_TWO
+#define HAVE_AVCODEC_OPEN_TWO 1
 
 /* Define if avformat_close_input exist in libavformat */
-#define HAVE_AVFORMAT_CLOSE_INPUT
+#define HAVE_AVFORMAT_CLOSE_INPUT 1
 
 /* Define if avformat_find_stream_info exist in libavformat */
-#define HAVE_AVFORMAT_FIND_STREAM_INFO
+#define HAVE_AVFORMAT_FIND_STREAM_INFO 1
 
 /* Define if avformat_free_context exist in libavformat */
-#define HAVE_AVFORMAT_FREE_CONTEXT
+#define HAVE_AVFORMAT_FREE_CONTEXT 1
 
 /* Define if avformat_open_input exist in libavformat */
-#define HAVE_AVFORMAT_OPEN_INPUT
+#define HAVE_AVFORMAT_OPEN_INPUT 1
 
 /* Define to 1 if `best_effort_timestamp' is a member of `AVFrame'. */
 #define HAVE_AVFRAME_BEST_EFFORT_TIMESTAMP 1
@@ -40,19 +40,19 @@
 #define HAVE_AVFRAME_NB_SAMPLES 1
 
 /* Define if av_dump_format exist in libavformat */
-#define HAVE_AV_DUMP_FORMAT
+#define HAVE_AV_DUMP_FORMAT 1
 
 /* Define if av_find_best_stream exist in libavformat */
-#define HAVE_AV_FIND_BEST_STREAM
+#define HAVE_AV_FIND_BEST_STREAM 1
 
 /* Define if av_get_bytes_per_sample exist in libavcodec */
-#define HAVE_AV_GET_BYTES_PER_SAMPLE
+#define HAVE_AV_GET_BYTES_PER_SAMPLE 1
 
 /* Define if av_opt_ptr exist in libavutil */
-#define HAVE_AV_OPT_PTR
+#define HAVE_AV_OPT_PTR 1
 
 /* Define if AVFrame.best_effort_timestamp exist in libavcodec */
-#define HAVE_BEST_EFFORT_TIMESTAMP
+#define HAVE_BEST_EFFORT_TIMESTAMP 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
@@ -64,19 +64,19 @@
 #define HAVE_ENUM_AVSAMPLEFORMAT 1
 
 /* Define if AVFrame.nb_samples exist in libavcodec */
-#define HAVE_FRAME_CHANNELS
+#define HAVE_FRAME_CHANNELS 1
 
 /* Define if AVFrame.format exist in libavcodec */
-#define HAVE_FRAME_FORMAT
+#define HAVE_FRAME_FORMAT 1
 
 /* Define if AVFrame.nb_samples exist in libavcodec */
-#define HAVE_FRAME_NB_SAMPLES
+#define HAVE_FRAME_NB_SAMPLES 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the <libavcodec/audioconvert.h> header file. */
-#define HAVE_LIBAVCODEC_AUDIOCONVERT_H 1
+#undef HAVE_LIBAVCODEC_AUDIOCONVERT_H
 
 /* Define to 1 if you have the <libavcodec/avcodec.h> header file. */
 #define HAVE_LIBAVCODEC_AVCODEC_H 1
@@ -116,7 +116,7 @@
 #define HAVE_STDLIB_H 1
 
 /* Define to 1 if you have the <strings.h> header file. */
-#define HAVE_STRINGS_H 1
+#undef HAVE_STRINGS_H
 
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
@@ -193,23 +193,23 @@
 
 /* Define to the type of a signed integer type of width exactly 16 bits if
    such a type exists and the standard includes do not define it. */
-#define int16_t
+//#define int16_t
 
 /* Define to the type of a signed integer type of width exactly 64 bits if
    such a type exists and the standard includes do not define it. */
-#define int64_t
+//#define int64_t
 
 /* Define to rpl_malloc if the replacement function should be used. */
-#undef malloc
+//#undef malloc
 
 /* Define to the type of an unsigned integer type of width exactly 32 bits if
    such a type exists and the standard includes do not define it. */
-#define uint32_t
+//#define uint32_t
 
 /* Define to the type of an unsigned integer type of width exactly 64 bits if
    such a type exists and the standard includes do not define it. */
-#define uint64_t
+//#define uint64_t
 
 /* Define to the type of an unsigned integer type of width exactly 8 bits if
    such a type exists and the standard includes do not define it. */
-#define uint8_t
+//#define uint8_t
