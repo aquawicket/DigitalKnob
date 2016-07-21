@@ -938,10 +938,10 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	if(par){ par->RemoveChild(element); }
 	parent->AppendChild(element); //restore the element
 	
-	//TODO: fix input text elements from disapearing
+	//Fix input text elements from disapearing
 	Rocket::Core::ElementList inputs;
 	element->GetElementsByTagName(inputs,"input");
-	for(int i=0; i<inputs.size(); i++){
+	for(unsigned int i=0; i<inputs.size(); i++){
 		Rocket::Controls::ElementTextSelection* ele = static_cast<Rocket::Controls::ElementTextSelection*>(inputs[i]);
 		Rocket::Core::ElementText* ti = static_cast<Rocket::Core::ElementText*>(ele->widget->selected_text_element);
 		Rocket::Controls::WidgetTextInput* widget = reinterpret_cast<Rocket::Controls::WidgetTextInput*>(ti);
