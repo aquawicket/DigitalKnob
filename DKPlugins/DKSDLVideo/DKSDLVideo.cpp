@@ -9,10 +9,11 @@ void DKSDLVideo::Init()
 {
 	stream = NULL;
 	streamObj = NULL;
+	DKSDLWindow::AddEventFunc(&DKSDLVideo::handle, this);
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 }
 
-///////////////////
+//////////////////////
 void DKSDLVideo::End()
 {
 	if (stream)
@@ -56,5 +57,18 @@ void* DKSDLVideo::Play(void* data)
 	WV_playStream(stream);
 	//DKLog("DKSDLVideo::Play(): not implemented yet. \n", DKERROR);
 	return NULL;
+}
+
+/////////////////////////////////////////
+bool DKSDLVideo::handle(SDL_Event *event)
+{
+	if (event->type == WV_REFRESH_EVENT){
+		WV_refreshVideoFrame(event);
+	}
+	else if (event->type == WV_EOF_EVENT){
+		//closePlayer();
+	}
+
+	return false;
 }
 
