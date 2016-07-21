@@ -51,7 +51,8 @@ function AndroidImport_Import()
 	DK_SetClipboard(path);	
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
-	DK_ReleaseKey(17); //release ctrl
+	DK_ReleaseKey(17); //release ctrl	
+	DK_Sleep(2000);
 	DK_StrokeKey(13) //stroke enter
 	
 	DKHook_WaitForWindow("Import Project from ADT (Eclipse Android)", 30); //Check for 30 seconds
@@ -61,6 +62,7 @@ function AndroidImport_Import()
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
 	DK_ReleaseKey(17); //release ctrl
+	DK_Sleep(2000);
 	DK_StrokeKey(13) //stroke enter
 	DK_Sleep(3000);
 	DK_StrokeKey(13) //stroke enter
