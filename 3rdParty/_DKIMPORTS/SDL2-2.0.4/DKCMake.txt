@@ -13,8 +13,8 @@ APPLE_DEBUG_LIB(${SDL}/${OS}/${DEBUG}/libSDL2.a)
 APPLE_RELEASE_LIB(${SDL}/${OS}/${RELEASE}/libSDL2.a)
 LINUX_DEBUG_LIB(${SDL}/${OS}/Debug/libSDL2.a)
 LINUX_RELEASE_LIB(${SDL}/${OS}/Release/libSDL2.a)
-ANDROID_DEBUG_LIB(${SDL}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libSDL2.so)
-ANDROID_RELEASE_LIB(${SDL}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libSDL2.so)
+ANDROID_DEBUG_LIB(${SDL}/${OS}/Debug/obj/local/armeabi-v7a/libSDL2.so)
+ANDROID_RELEASE_LIB(${SDL}/${OS}/Release/obj/local/armeabi-v7a/libSDL2.so)
 
 
 LIST(APPEND WIN_LIBS winmm.lib)
