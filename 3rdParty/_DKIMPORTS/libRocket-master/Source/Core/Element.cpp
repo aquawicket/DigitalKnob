@@ -379,36 +379,24 @@ Box::Area Element::GetClientArea() const
 // Sets the dimensions of the element's internal content.
 void Element::SetContentBox(const Vector2f& _content_offset, const Vector2f& _content_box)
 {
-	Vector2f stored_offset = scroll_offset; //TEMPORARY FIX
+	int overflow_x;
+	int overflow_y;
+	GetOverflow(&overflow_x, &overflow_y);
+	if(!overflow_x && !overflow_x){ return; }
+	
+	// Seems to be jittering a wee bit; might need to be looked at.
+	//scroll_offset.x += (content_offset.x - _content_offset.x);
+	//scroll_offset.y += (content_offset.y - _content_offset.y);
 
-	if (content_offset != _content_offset ||
-		content_box != _content_box)
-	{
-		// Seems to be jittering a wee bit; might need to be looked at.
-		scroll_offset.x += (content_offset.x - _content_offset.x);
-		scroll_offset.y += (content_offset.y - _content_offset.y);
+	content_offset = _content_offset;
+	content_box = _content_box;
 
-		content_offset = _content_offset;
-		content_box = _content_box;
-
-		scroll_offset.x = Math::Min(scroll_offset.x, GetScrollWidth() - GetClientWidth());
-		scroll_offset.y = Math::Min(scroll_offset.y, GetScrollHeight() - GetClientHeight());
-		DirtyOffset();
-	}
-
-	//TEMPORARY FIX
+	//Grow the content_box around any children that it may have.
 	for(int i=0; i<GetNumChildren(); ++i){
 		Rocket::Core::Element* child = GetChild(i);
 		content_box.x = Math::Max(content_box.x, child->GetOffsetLeft() + child->GetOffsetWidth());
 		content_box.y = Math::Max(content_box.y, child->GetOffsetTop() + child->GetOffsetHeight());
 	}
-	scroll_offset.x = Math::Min(stored_offset.x, GetScrollWidth() - GetClientWidth());
-	scroll_offset.y = Math::Min(stored_offset.y, GetScrollHeight() - GetClientHeight());
-	DirtyOffset();
-
-	int overflow_x;
-	int overflow_y;
-	GetOverflow(&overflow_x, &overflow_y);
 
 	if(overflow_x == 2 && content_box.x > GetBox().GetSize().x){
 		GetElementScroll()->EnableScrollbar(ElementScroll::HORIZONTAL, GetBox().GetSize().x);
@@ -416,6 +404,12 @@ void Element::SetContentBox(const Vector2f& _content_offset, const Vector2f& _co
 	if(overflow_y == 2 && content_box.y > GetBox().GetSize().y){
 		GetElementScroll()->EnableScrollbar(ElementScroll::VERTICAL, GetBox().GetSize().y);
 	}
+
+	float scrollbar_width = GetElementScroll()->GetScrollbarSize(Rocket::Core::ElementScroll::VERTICAL);
+	float scrollbar_height = GetElementScroll()->GetScrollbarSize(Rocket::Core::ElementScroll::HORIZONTAL);
+	scroll_offset.x = Math::Min(scroll_offset.x, GetScrollWidth() - GetClientWidth() + scrollbar_width);
+	scroll_offset.y = Math::Min(scroll_offset.y, GetScrollHeight() - GetClientHeight() + scrollbar_height);
+	DirtyOffset();
 }
 
 // Sets the box describing the size of the element.
