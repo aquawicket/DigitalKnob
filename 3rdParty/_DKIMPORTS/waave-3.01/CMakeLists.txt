@@ -5,10 +5,7 @@ FILE(GLOB waave_SRC
 	src/*.h
 	src/*.c)
 
-add_definitions("-DHAVE_LIBAVCODEC_AVCODEC_H")
-add_definitions("-DHAVE_LIBAVFORMAT_AVFORMAT_H")
-add_definitions("-DHAVE_LIBSWSCALE_SWSCALE_H")
-add_definitions("-DHAVE_LIBSWRESAMPLE_SWRESAMPLE_H")
+add_definitions("-Ddummy")
 
 include_directories(${FFMPEG_INCLUDE_DIR})
 include_directories(${SDL2_INCLUDE_DIR})
