@@ -39,7 +39,7 @@ void* DKSDLVideo::Play(void* data)
 	int streamType = WV_getStreamType(stream);
 
 	if (streamType == WV_STREAM_TYPE_VIDEO || streamType == WV_STREAM_TYPE_AUDIOVIDEO) {
-		SDL_RenderClear(DKSDLWindow::Get("")->sdlren);
+		//SDL_RenderClear(DKSDLWindow::Get("")->sdlren);
 		streamObj = WV_getStreamRendererObj(DKSDLWindow::Get("")->sdlren, NULL, NULL);
 		WV_setStreamingMethod(stream, streamObj);
 	}
@@ -55,7 +55,6 @@ void* DKSDLVideo::Play(void* data)
 	}
 
 	WV_playStream(stream);
-	//DKLog("DKSDLVideo::Play(): not implemented yet. \n", DKERROR);
 	return NULL;
 }
 
