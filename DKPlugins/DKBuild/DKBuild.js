@@ -255,6 +255,9 @@ function DKBuild_SvnUpdate()
 		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
 		DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
 	}
+	
+	DKCreate("DKAudio");
+	DKAudio_Play("DKBuild/ding.wav");
 }
 
 //////////////////////////////
@@ -270,6 +273,9 @@ function DKBuild_SvnCommit()
 		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");
 		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
 	}
+	
+	DKCreate("DKAudio");
+	DKAudio_Play("DKBuild/ding.wav");
 }
 
 /////////////////////////////////////
@@ -660,4 +666,7 @@ function DKBuild_DoResults()
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
+	
+	DKCreate("DKAudio");
+	DKAudio_Play("DKBuild/ding.wav");
 }

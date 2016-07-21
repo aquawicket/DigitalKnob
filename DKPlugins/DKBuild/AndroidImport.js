@@ -111,4 +111,7 @@ function AndroidImport_Import()
 	}
 	
 	DKLog("Import finished\n", DKINFO);
+	
+	DKCreate("DKAudio");
+	DKAudio_Play("DKBuild/ding.wav");
 }
