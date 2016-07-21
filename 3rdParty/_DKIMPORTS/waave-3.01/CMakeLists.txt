@@ -7,6 +7,8 @@ FILE(GLOB waave_SRC
 
 add_definitions("-DHAVE_CONFIG_H")
 
+include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${FFMPEG_INCLUDE_DIR})
 include_directories(${SDL2_INCLUDE_DIR})
+include_directories(/src)
 add_library(waave STATIC ${waave_SRC})
