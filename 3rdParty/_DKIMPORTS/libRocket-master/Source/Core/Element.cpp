@@ -399,8 +399,8 @@ void Element::SetContentBox(const Vector2f& _content_offset, const Vector2f& _co
 	//TEMPORARY FIX
 	for(int i=0; i<GetNumChildren(); ++i){
 		Rocket::Core::Element* child = GetChild(i);
-		content_box.x = Math::Max(content_box.x, child->GetAbsoluteLeft() + child->GetOffsetWidth() - GetOffsetLeft());
-		content_box.y = Math::Max(content_box.y, child->GetAbsoluteTop() + child->GetOffsetHeight() - GetOffsetTop());
+		content_box.x = Math::Max(content_box.x, child->GetOffsetLeft() + child->GetOffsetWidth());
+		content_box.y = Math::Max(content_box.y, child->GetOffsetTop() + child->GetOffsetHeight());
 	}
 	scroll_offset.x = Math::Min(stored_offset.x, GetScrollWidth() - GetClientWidth());
 	scroll_offset.y = Math::Min(stored_offset.y, GetScrollHeight() - GetClientHeight());
