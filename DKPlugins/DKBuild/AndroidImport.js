@@ -28,8 +28,8 @@ function AndroidImport_Import()
 		DKLog("AndroidImport_Import(): cannot locate appdir. \n", DKINFO);
 	}
 	
-	DKFile_Delete(WORKSPACE);
-	DKFile_MkDir(WORKSPACE);
+	DKFile_Delete(WORKSPACE+"/"+APP+"_"+TYPE);
+	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
 	DK_Run(ANDROIDSTUDIO);
 	
 	DKHook_WaitForWindow("Welcome to Android Studio", 30); //Check for 30 seconds
@@ -57,7 +57,7 @@ function AndroidImport_Import()
 	
 	DKHook_WaitForWindow("Import Project from ADT (Eclipse Android)", 30); //Check for 30 seconds
 	DKLog("Window is ready. \n", DKDEBUG);
-	path = WORKSPACE+"/"+APP;
+	path = WORKSPACE+"/"+APP+"_"+TYPE;
 	DK_SetClipboard(path);
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
@@ -92,22 +92,22 @@ function AndroidImport_Import()
 	DK_StrokeKey(13) //stroke enter
 	
 	//update C:/AndroidStudio/"APP"/app/build.gradle
-	var gradle = DKFile_FileToString(WORKSPACE+"/"+APP+"/app/build.gradle");
+	var gradle = DKFile_FileToString(WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 
 	//replace buildTypes with 
 	gradle = gradle.replace("buildTypes", "sourceSets { main { jni.srcDirs = [] } } \n buildTypes");
 	
 	//write file
-	DKFile_StringToFile(gradle, WORKSPACE+"/"+APP+"/app/build.gradle");
+	DKFile_StringToFile(gradle, WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 	
 	//copy shared libs
-	DKFile_MkDir(WORKSPACE+"/"+APP+"/app/src/main/jniLibs");
-	DKFile_MkDir(WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a");
+	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs");
+	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a");
 	if(TYPE == "Debug"){
-		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug/libs/armeabi-v7a", WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a", true);
+		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
 	else{
-		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"/app/src/main/jniLibs/armeabi-v7a", true);
+		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
 	
 	DKLog("Import finished\n", DKINFO);
