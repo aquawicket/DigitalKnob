@@ -1,2 +1,2 @@
-DKCreate("DKUpdate");
 DKCreate("DKBuild/DKBuild.js");
+DKCreate("DKUpdate");
