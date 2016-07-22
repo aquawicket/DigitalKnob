@@ -52,6 +52,9 @@ DKObject* DKClass::_Get(const DKString& data)
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
+		if(arry.size() < 2){
+			DKLog("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance. \n",DKDEBUG);
+		}
 		return (*classes)[arry[0]]->Get(arry[1]);
 	}
 
@@ -66,6 +69,9 @@ bool DKClass::_Valid(const DKString& data)
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
+		if(arry.size() < 2){
+			DKLog("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance. \n",DKDEBUG);
+		}
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 
@@ -80,6 +86,9 @@ bool DKClass::_Available(const DKString& data)
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
+		if(arry.size() < 2){
+			DKLog("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance. \n",DKDEBUG);
+		}
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
 			DKLog("DKClass: "+arry[0]+","+arry[1]+" - id is already in use.\n", DKWARN);
 			return false;
