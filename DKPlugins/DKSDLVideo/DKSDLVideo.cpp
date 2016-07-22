@@ -63,9 +63,19 @@ bool DKSDLVideo::handle(SDL_Event *event)
 {
 	if (event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
+		return true;
 	}
 	else if (event->type == WV_EOF_EVENT){
 		//closePlayer();
+		DKLog("DKSDLVideo::handle(): end of file\n", DKDEBUG);
+		if (stream){
+			WV_closeStream(stream);
+		}
+
+		if (streamObj){ //close the streaming object
+			WV_freeStreamRendererObj(streamObj);
+		}
+		return true;
 	}
 
 	return false;
