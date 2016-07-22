@@ -6,14 +6,23 @@
 //////////////////////
 void DKAudioJS::Init()
 {
-	DKDuktape::AttachFunction("DKAudio_Play", DKAudioJS::Play, 1);
+	DKDuktape::AttachFunction("DKAudio_PlaySound", DKAudioJS::PlaySound, 1);
+	DKDuktape::AttachFunction("DKAudio_PlayMusic", DKAudioJS::PlayMusic, 1);
 }
 
-/////////////////////////////////////
-int DKAudioJS::Play(duk_context* ctx)
+//////////////////////////////////////////
+int DKAudioJS::PlaySound(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::Play(data);
+	DKAudio::PlaySound(data);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKAudioJS::PlayMusic(duk_context* ctx)
+{
+	DKString data = duk_require_string(ctx, 0);
+	DKAudio::PlayMusic(data);
 	return 1;
 }
 

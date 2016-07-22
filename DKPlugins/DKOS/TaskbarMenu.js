@@ -118,7 +118,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "TestSound")){
 		DKCreate("DKAudio");
-		DKAudio_Play("tada.wav");
+		DKAudio_PlaySound("tada.wav");
 	}
 	if(DK_Id(event, "TestVideo")){
 		DKCreate("DKVideo");

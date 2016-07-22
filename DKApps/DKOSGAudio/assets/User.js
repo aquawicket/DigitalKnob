@@ -1,3 +1,3 @@
 DKCreate("DKWindow");
 DKCreate("DKAudio");
-DKAudio_Play("tada.wav");
+DKAudio_PlaySound("tada.wav");

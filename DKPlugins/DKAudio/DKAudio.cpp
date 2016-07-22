@@ -16,16 +16,30 @@ void DKAudio::Init()
 	DKLog("DKAudio::Init(): No audio interface available \n", DKERROR);
 }
 
-//////////////////////////////////
-void DKAudio::Play(DKString& file)
+///////////////////////////////////////
+void DKAudio::PlaySound(DKString& file)
 {
-	if(DKClass::HasFunc("DKSDLAudio::Play")){
-		DKClass::CallFunc("DKSDLAudio::Play", static_cast<void*>(&file));
+	if(DKClass::HasFunc("DKSDLAudio::PlaySound")){
+		DKClass::CallFunc("DKSDLAudio::PlaySound", static_cast<void*>(&file));
 		return;
 	}
-	if (DKClass::HasFunc("DKOSGAudio::Play")) {
-		DKClass::CallFunc("DKOSGAudio::Play", static_cast<void*>(&file));
+	if (DKClass::HasFunc("DKOSGAudio::PlaySound")) {
+		DKClass::CallFunc("DKOSGAudio::PlaySound", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::Play(): No play funtion available \n", DKERROR);
+	DKLog("DKAudio::PlaySound(): No play funtion available \n", DKERROR);
+}
+
+///////////////////////////////////////
+void DKAudio::PlayMusic(DKString& file)
+{
+	if(DKClass::HasFunc("DKSDLAudio::PlayMusic")){
+		DKClass::CallFunc("DKSDLAudio::PlayMusic", static_cast<void*>(&file));
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::PlayMusic")) {
+		DKClass::CallFunc("DKOSGAudio::PlayMusic", static_cast<void*>(&file));
+		return;
+	}
+	DKLog("DKAudio::PlayMusic(): No play funtion available \n", DKERROR);
 }

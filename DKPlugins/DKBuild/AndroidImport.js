@@ -114,6 +114,6 @@ function AndroidImport_Import()
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_Play("DKBuild/ding.wav");
+		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }

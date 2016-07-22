@@ -15,7 +15,8 @@ void DKOSGAudio::Init()
 
 	Create();
 
-	DKClass::RegisterFunc("DKOSGAudio::Play", &DKOSGAudio::Play, this);
+	DKClass::RegisterFunc("DKOSGAudio::PlaySound", &DKOSGAudio::PlaySound, this);
+	DKClass::RegisterFunc("DKOSGAudio::PlayMusic", &DKOSGAudio::PlayMusic, this);
 }
 
 //////////////////////
@@ -67,9 +68,24 @@ bool DKOSGAudio::Create()
 	return true;
 }
 
-//////////////////////////////////
-void* DKOSGAudio::Play(void* data)
+///////////////////////////////////////
+void* DKOSGAudio::PlaySound(void* data)
 {
+	DKString path = *static_cast<DKString*>(data);
+	if(!DKAssets::VerifyPath(path)){
+		DKLog("Could not find "+path+"\n",DKERROR);
+		return false; 
+	}
+
+	sample = new osgAudio::Sample(path);
+	musicSoundState->setSample( sample );
+	musicSoundState->setPlay( true );
+}
+
+///////////////////////////////////////
+void* DKOSGAudio::PlayMusic(void* data)
+{
+	//TODO - the sample sound be preloaded for music or somehting..   IDK...  read how SDL does it different
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKAssets::VerifyPath(path)){
 		DKLog("Could not find "+path+"\n",DKERROR);

@@ -9,7 +9,8 @@ class DKAudio : public DKObjectT<DKAudio>
 public:
 	void Init();
 	void End(){};
-	static void Play(DKString& file);
+	static void PlaySound(DKString& file);
+	static void PlayMusic(DKString& file);
 };
 
 REGISTER_OBJECT(DKAudio, true);

@@ -17,7 +17,8 @@ public:
 	void End();
 	bool Create();
 
-	void* Play(void* data);
+	void* PlaySound(void* data);
+	void* PlayMusic(void* data);
 
 	osg::ref_ptr<osgAudio::SoundNode> sound_node;
 	osg::ref_ptr<osgAudio::SoundState> musicSoundState;

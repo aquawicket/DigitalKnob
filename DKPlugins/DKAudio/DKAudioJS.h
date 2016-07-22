@@ -10,7 +10,8 @@ class DKAudioJS : public DKObjectT<DKAudioJS>
 {
 public:
 	void Init();
-	static int Play(duk_context* ctx);
+	static int PlaySound(duk_context* ctx);
+	static int PlayMusic(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKAudioJS, true)

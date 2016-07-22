@@ -687,7 +687,7 @@ function DKDev_OpenAudio(path)
 	DKLog("DKDev_OpenAudio("+path+") \n");
 	//var file = DKFile_GetFilename(path);
 	DKCreate("DKAudio");
-	DKAudio_Play(path);
+	DKAudio_PlaySound(path);
 	
 	//DKCreate("DKOSGAudio,"+file+",DKOSGWindow,"+path);
 	//DKOSGAudio_Play("DKOSGAudio,"+file);
