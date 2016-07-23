@@ -12,7 +12,7 @@ void DKSDLAudio::Init()
 	}	
 
 	//Initialize SDL_mixer 
-	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1){
 		DKLog("DKSDLAudio::Init(): could not load mixer \n",DKERROR);
 	}
 
