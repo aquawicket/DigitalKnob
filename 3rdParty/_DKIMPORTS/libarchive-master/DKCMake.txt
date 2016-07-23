@@ -10,7 +10,7 @@ IF(NOT WIN_64)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/libarchive-master.zip libarchive-master)
+DKINSTALL(${DKDOWNLOAD}/Libs/libarchive-master.zip libarchive-master)
 DKSET(ARCHIVE ${3RDPARTY}/libarchive-master)
 
 

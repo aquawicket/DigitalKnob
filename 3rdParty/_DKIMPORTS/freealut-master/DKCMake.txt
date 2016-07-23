@@ -3,7 +3,7 @@ IF(NOT ANDROID)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/freealut-master.zip freealut-master)
+DKINSTALL(${DKDOWNLOAD}/Libs/freealut-master.zip freealut-master)
 DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 

@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/jpegsr6b.zip jpeg-6b)
+DKINSTALL(${DKDOWNLOAD}/Libs/jpegsr6b.zip jpeg-6b)
 DKSET(JPEG ${3RDPARTY}/jpeg-6b)
 
 

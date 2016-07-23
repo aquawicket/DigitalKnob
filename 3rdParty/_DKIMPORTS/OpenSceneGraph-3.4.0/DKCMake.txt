@@ -2,7 +2,7 @@ DKDEPEND(msinttypes-r26)
 DKDEPEND(zlib-1.2.8)
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/OpenSceneGraph-3.4.0.zip OpenSceneGraph-3.4.0)
+DKINSTALL(${DKDOWNLOAD}/Libs/OpenSceneGraph-3.4.0.zip OpenSceneGraph-3.4.0)
 DKSET(OSG ${3RDPARTY}/OpenSceneGraph-3.4.0)
 DKSET(OSG_GL2 ${3RDPARTY}/OpenSceneGraph-3.4.0-GL2)
 DKSET(OSG_PLUGINS osgPlugins-3.4.0)

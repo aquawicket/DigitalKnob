@@ -1,7 +1,7 @@
 DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/libRocket-master.zip libRocket-master)
+DKINSTALL(${DKDOWNLOAD}/Libs/libRocket-master.zip libRocket-master)
 DKSET(ROCKET ${3RDPARTY}/libRocket-master)
 
 

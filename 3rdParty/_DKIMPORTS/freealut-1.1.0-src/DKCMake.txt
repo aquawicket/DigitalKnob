@@ -6,7 +6,7 @@ DKDEPEND(msinttypes-r26)
 DKDEPEND(openal)
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/freealut-1.1.0-src.zip freealut-1.1.0-src)
+DKINSTALL(${DKDOWNLOAD}/Libs/freealut-1.1.0-src.zip freealut-1.1.0-src)
 DKSET(FREEALUT ${3RDPARTY}/freealut-1.1.0-src)
 
 

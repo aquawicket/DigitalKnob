@@ -14,7 +14,7 @@ IF(WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/boost-build/bin/bjam.exe)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)
-		DKDOWNLOAD(http://digitalknob.com/Download/Tools/boost-build-2014-10.zip)
+		DKDOWNLOAD(${DKDOWNDLOAD}/Tools/boost-build-2014-10.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/boost-build-2014-10.zip ${3RDPARTY})
 		DKSETPATH(${3RDPARTY}/boost-build)
 		EXECUTE_PROCESS(COMMAND cmd /c bootstrap.bat vc14 WORKING_DIRECTORY ${CURRENT_DIR})
@@ -22,7 +22,7 @@ IF(WIN32)
 	DKSET(BOOSTBUILD ${3RDPARTY}/boost-build)
 ENDIF()
 
-DKINSTALL(http://digitalknob.com/Download/Libs/boost_1_57_0.zip boost_1_57_0)
+DKINSTALL(${DKDOWNLOAD}/Libs/boost_1_57_0.zip boost_1_57_0)
 DKSET(BOOST ${3RDPARTY}/boost_1_57_0)
 
 ### LINK ###
