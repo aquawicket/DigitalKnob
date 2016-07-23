@@ -282,10 +282,10 @@ function DKBuild_SvnCommit()
 	}
 }
 
-/////////////////////////////////////
+///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
-	DKLog("Resetting Apps and Plugins... \n");
+	DKLog("Deleting Apps and Plugins... \n");
 	
 	// Delete everything in DKApps except DKBuild
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
@@ -307,7 +307,7 @@ function DKBuild_ResetAppsPlugins()
 function DKBuild_Reset3rdParty()
 {
 	//TODO
-	DKLog("Resetting 3rdParty... \n");
+	DKLog("Deleting 3rdParty... \n");
 	DKLog("Please wait. \n");
 	DKFile_Delete(DKPATH+"/3rdParty");
 }
