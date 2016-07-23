@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := SDL2
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(SDL)/android32/Debug/libs/armeabi-v7a/libSDL2.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(SDL)/android32/Release/libs/armeabi-v7a/libSDL2.so
 include $(PREBUILT_SHARED_LIBRARY)
 		
 include $(CLEAR_VARS)
