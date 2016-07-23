@@ -1,4 +1,5 @@
 DKDEPEND(SDL2-2.0.4)
+DKDEPEND(smpeg2-2.0.0)
 
 ### INSTALL ###
 DKINSTALL(http://DigitalKnob.com/Download/Libs/SDL2_mixer-2.0.1.zip SDL2_mixer-2.0.1)
