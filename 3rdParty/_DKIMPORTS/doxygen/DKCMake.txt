@@ -1,7 +1,8 @@
-## TODO - make this work
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
 
-##IF(NOT EXISTS C:/doxygen)
-##	DKSETPATH(${DIGITALKNOB}/Download)
-##	DKDOWNLOAD(http://digitalknob.com/Download/Tools/doxygen.zip)
-##	DKEXTRACT(${DIGITALKNOB}/Download/doxygen.zip C:/doxygen)
-##ENDIF()
+IF(NOT EXISTS C:/doxygen)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://digitalknob.com/Download/Tools/doxygen-1.8.11-setup.exe)
+ENDIF()
