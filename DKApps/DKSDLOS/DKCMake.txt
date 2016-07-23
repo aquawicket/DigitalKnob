@@ -1,4 +1,4 @@
-DKDEPEND(doxygen)
+DKDEPEND(doxygen-1.8.11)
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
 DKDEPEND(DKAssets)
