@@ -404,7 +404,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
-		DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
@@ -434,7 +436,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
-		DK_Execute(CMAKE+" -G \"Visual Studio 14 2015 Win64\" "+cmake_string+DKPATH);	
+		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015 Win64\" "+cmake_string+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
@@ -459,7 +463,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
-		DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			
@@ -488,7 +494,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
-		DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			
@@ -522,7 +530,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
-		DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
 		}
@@ -538,7 +548,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
-		DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
 		}
@@ -554,7 +566,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
-		DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch i386 -sdk iphonesimulator6.1");
 		}
@@ -570,7 +584,9 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
-		DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH);
+		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+		
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch x86_64 -sdk iphonesimulator6.1");
 		}
@@ -588,7 +604,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
-			DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute("make "+APP);
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
@@ -597,7 +615,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
-			DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute("make "+APP);
 		}
 	}
@@ -611,7 +631,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
-			DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute("make "+APP);
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
@@ -620,7 +642,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
-			DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute("make "+APP);
 		}
 	}
@@ -634,7 +658,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
-			DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
@@ -643,7 +669,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-			DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
@@ -657,7 +685,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
-			DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
@@ -666,7 +696,9 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
-			DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"MinGW Makefiles\" "+cmake_string+DKPATH);
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
