@@ -13,8 +13,8 @@ APPLE_DEBUG_LIB(${SMPEG2}/${OS}/lib/${DEBUG}/libsmpeg2.a)
 APPLE_RELEASE_LIB(${SMPEG2}/${OS}/lib/${RELEASE}/libsmpeg2.a)
 LINUX_DEBUG_LIB(${SMPEG2}/${OS}/lib/Debug/libsmpeg2.a)
 LINUX_RELEASE_LIB(${SMPEG2}/${OS}/lib/Release/libsmpeg2.a)
-ANDROID_DEBUG_LIB(${SMPEG2}/${OS}/Debug/obj/local/armeabi-v7a/libsmpeg2.a)
-ANDROID_RELEASE_LIB(${SMPEG2}/${OS}/Release/obj/local/armeabi-v7a/libsmpeg2.a)
+ANDROID_DEBUG_LIB(${SMPEG2}/${OS}/Debug/obj/local/armeabi-v7a/libSMPEG.a)
+ANDROID_RELEASE_LIB(${SMPEG2}/${OS}/Release/obj/local/armeabi-v7a/libSMPEG.a)
 
 
 ### COMPILE ###
