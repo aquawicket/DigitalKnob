@@ -18,7 +18,7 @@ void DKSDLAudio::Init()
 
 	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLAudio::PlayMusic", &DKSDLAudio::PlayMusic, this);
-	DKApp::AddLoopFunc("RENDER", &DKSDLAudio::Process, this);
+	//DKApp::AddLoopFunc("RENDER", &DKSDLAudio::Process, this);
 }
 
 //////////////////////
@@ -67,5 +67,5 @@ void* DKSDLAudio::PlayMusic(void* data)
 //////////////////////////
 void DKSDLAudio::Process()
 {
-	Mix_PlayingMusic();
+	//Mix_PlayingMusic();
 }
