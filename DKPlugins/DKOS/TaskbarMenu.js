@@ -63,6 +63,8 @@ function TaskbarMenu_OnEvent(event)
 		//return;
 	}
 	if(DK_Type(event, "OpenFile")){
+		
+		//TODO: we need to talk to DKFileAssociation, it shall call the appropriate app acording to file extention. 
 		DKLog("OpenFile: "+event+"\n");
 		
 		var file = DKWidget_GetValue(event);
