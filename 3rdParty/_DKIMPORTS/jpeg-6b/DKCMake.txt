@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKDOWNLOAD}/Libs/jpegsr6b.zip jpeg-6b)
+DKINSTALL(${DKONLINE}/Libs/jpegsr6b.zip jpeg-6b)
 DKSET(JPEG ${3RDPARTY}/jpeg-6b)
 
 
