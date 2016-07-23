@@ -12,7 +12,7 @@ void DKOSGViewer::Init()
 	DKCreate("DKOSGNotify");
 	DKCreate("DKGLInfo");
 	viewer = new osgViewer::CompositeViewer;
-	DKApp::AddLoopFunc("RENDER", &DKOSGViewer::DoFrame, this);
+	DKApp::AppendLoopFunc(&DKOSGViewer::DoFrame, this);
 	//viewer->setRunMaxFrameRate(60.00);
 	//viewer->setRunFrameScheme(osgViewer::ViewerBase::ON_DEMAND);
 	viewer->setRunFrameScheme(osgViewer::ViewerBase::CONTINUOUS);
