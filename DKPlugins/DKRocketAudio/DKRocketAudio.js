@@ -42,36 +42,58 @@ function DKRocketAudio_OnEvent(event)
 //////////////////////////////////
 function DKRocketAudio_playpause()
 {
-	DKLog("DKRocketAudio_playpause() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_playpause() \n",DKDEBUG);
+	
+	//toggle play/pause
+	var src = DKWidget_GetAttribute("DKRocketAudio_playpause", "src");
+	//DKLog("DKRocketAudio_playpause(): src="+src+"\n", DKDEBUG);
+	
+	if(src.indexOf("play.png") != -1){
+		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/pause.png");
+	}
+	else{
+		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/play.png");
+	}
 }
 
 /////////////////////////////////
 function DKRocketAudio_position()
 {
-	DKLog("DKRocketAudio_position() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_position() \n",DKDEBUG);
 }
 
 //////////////////////////////////////
 function DKRocketAudio_positiontrack()
 {
-	DKLog("DKRocketAudio_positiontrack() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_positiontrack() \n",DKDEBUG);
 }
 
 ////////////////////////////////
 function DKRocketAudio_speaker()
 {
-	DKLog("DKRocketAudio_speaker() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_speaker() \n",DKDEBUG);
+	
+	//toggle volume/mute
+	var src = DKWidget_GetAttribute("DKRocketAudio_speaker", "src");
+	DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
+	
+	if(src.indexOf("mute.png") != -1){
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume3.png");
+	}
+	else{
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/mute.png");
+	}
 }
 
 ///////////////////////////////
 function DKRocketAudio_volume()
 {
-	DKLog("DKRocketAudio_volume() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_volume() \n",DKDEBUG);
 }
 
 ////////////////////////////////////
 function DKRocketAudio_volumetrack()
 {
-	DKLog("DKRocketAudio_volumetrack() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_volumetrack() \n",DKDEBUG);
 }
 
