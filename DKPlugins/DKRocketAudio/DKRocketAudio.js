@@ -5,6 +5,7 @@ function DKRocketAudio_Init()
 	DKAddEvent("DKRocketAudio_playpause", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_positiontrack", "click", DKRocketAudio_OnEvent);
+	DKAddEvent("DKRocketAudio_speaker", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_volume", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_volumetrack", "click", DKRocketAudio_OnEvent);
 }
@@ -19,18 +20,58 @@ function DKRocketAudio_End()
 function DKRocketAudio_OnEvent(event)
 {
 	if(DK_Id(event, "DKRocketAudio_playpause")){
-		DKLog("DKRocketAudio_OnEvent(): DKRocketAudio_playpause\n",DKDEBUG);
+		DKRocketAudio_playpause();
 	}
 	if(DK_Id(event, "DKRocketAudio_position")){
-		DKLog("DKRocketAudio_OnEvent(): DKRocketAudio_position\n",DKDEBUG);
+		DKRocketAudio_position();
 	}
 	if(DK_Id(event, "DKRocketAudio_positiontrack")){
-		DKLog("DKRocketAudio_OnEvent(): DKRocketAudio_positiontrack\n",DKDEBUG);
+		DKRocketAudio_positiontrack();
+	}
+	if(DK_Id(event, "DKRocketAudio_speaker", "click")){
+		DKRocketAudio_speaker();
 	}
 	if(DK_Id(event, "DKRocketAudio_volume", "click")){
-		DKLog("DKRocketAudio_OnEvent(): DKRocketAudio_volume\n",DKDEBUG);
+		DKRocketAudio_volume();
 	}
 	if(DK_Id(event, "DKRocketAudio_volumetrack", "click")){
-		DKLog("DKRocketAudio_OnEvent(): DKRocketAudio_volumetrack\n",DKDEBUG);
+		DKRocketAudio_volumetrack();
 	}
 }
+
+//////////////////////////////////
+function DKRocketAudio_playpause()
+{
+	DKLog("DKRocketAudio_playpause() \n",DKDEBUG);
+}
+
+/////////////////////////////////
+function DKRocketAudio_position()
+{
+	DKLog("DKRocketAudio_position() \n",DKDEBUG);
+}
+
+//////////////////////////////////////
+function DKRocketAudio_positiontrack()
+{
+	DKLog("DKRocketAudio_positiontrack() \n",DKDEBUG);
+}
+
+////////////////////////////////
+function DKRocketAudio_speaker()
+{
+	DKLog("DKRocketAudio_speaker() \n",DKDEBUG);
+}
+
+///////////////////////////////
+function DKRocketAudio_volume()
+{
+	DKLog("DKRocketAudio_volume() \n",DKDEBUG);
+}
+
+////////////////////////////////////
+function DKRocketAudio_volumetrack()
+{
+	DKLog("DKRocketAudio_volumetrack() \n",DKDEBUG);
+}
+
