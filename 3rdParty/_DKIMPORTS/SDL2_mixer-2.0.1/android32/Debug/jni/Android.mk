@@ -15,8 +15,33 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SDL)/include
 
 LOCAL_CFLAGS := -DWAV_MUSIC 
 LOCAL_CFLAGS += -DMP3_MUSIC
-LOCAL_SRC_FILES := $(notdir $(filter-out %/playmus.c %/playwave.c, $(wildcard $(LOCAL_PATH)/../../../*.c))) \
 
+LOCAL_SRC_FILES:= \
+	../../../dynamic_flac.c \
+	../../../dynamic_fluidsynth.c \
+	../../../dynamic_mod.c \
+	../../../dynamic_modplug.c \
+	../../../dynamic_mp3.c \
+	../../../dynamic_ogg.c \
+	../../../effect_position.c \
+	../../../effect_stereoreverse.c \
+	../../../effects_internal.c \
+	../../../fluidsynth.c \
+	../../../load_aiff.c \
+	../../../load_flac.c \
+	../../../load_mp3.c \
+	../../../load_ogg.c \
+	../../../load_voc.c \
+	../../../mixer.c \
+	../../../music.c \
+	../../../music_cmd.c \
+	../../../music_flac.c \
+	../../../music_mad.c \
+	../../../music_mod.c \
+	../../../music_modplug.c \
+	../../../music_ogg.c \
+	../../../wavestream.c
+	
 LOCAL_LDLIBS :=
 LOCAL_STATIC_LIBRARIES :=
 LOCAL_SHARED_LIBRARIES := SDL2

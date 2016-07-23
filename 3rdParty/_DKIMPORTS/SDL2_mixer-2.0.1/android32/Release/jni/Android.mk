@@ -1,51 +1,53 @@
 SDL := SDL2-2.0.4
-LOCAL_PATH := $(call my-dir)
-
-
-include $(CLEAR_VARS)
-
+SMPEG := smpeg2-2.0.0
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := SDL2
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(SDL)/android32/Debug/libs/armeabi-v7a/libSDL2.so
+include $(PREBUILT_SHARED_LIBRARY)
 
+include $(CLEAR_VARS)
 LOCAL_MODULE := SDL2_mixer
 
-# Enable this if you want to support loading MOD music via modplug
-# The library path should be a relative path to this directory.
-#SUPPORT_MOD_MODPLUG ?= true
-MODPLUG_LIBRARY_PATH := external/libmodplug-0.8.8.4
-
-# Enable this if you want to support loading MOD music via mikmod
-# The library path should be a relative path to this directory.
-#SUPPORT_MOD_MIKMOD ?= true
-MIKMOD_LIBRARY_PATH := external/libmikmod-3.1.12
-
-# Enable this if you want to support loading MP3 music via SMPEG
-# The library path should be a relative path to this directory.
-#SUPPORT_MP3_SMPEG ?= true
-SMPEG_LIBRARY_PATH := external/smpeg2-2.0.0
-
-# Enable this if you want to support loading OGG Vorbis music via Tremor
-# The library path should be a relative path to this directory.
-#SUPPORT_OGG ?= true
-OGG_LIBRARY_PATH := external/libogg-1.3.1
-VORBIS_LIBRARY_PATH := external/libvorbisidec-1.2.1
-
-
-# Enable this if you want to support TiMidity
-SUPPORT_TIMIDITY ?= true
-
 LOCAL_C_INCLUDES := $(LOCAL_PATH) 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SDL)/include
+
 LOCAL_CFLAGS := -DWAV_MUSIC 
+LOCAL_CFLAGS += -DMP3_MUSIC
 
-LOCAL_SRC_FILES := $(notdir $(filter-out %/playmus.c %/playwave.c, $(wildcard $(LOCAL_PATH)/../../*.c))) \
-
-
+LOCAL_SRC_FILES:= \
+	../../../dynamic_flac.c \
+	../../../dynamic_fluidsynth.c \
+	../../../dynamic_mod.c \
+	../../../dynamic_modplug.c \
+	../../../dynamic_mp3.c \
+	../../../dynamic_ogg.c \
+	../../../effect_position.c \
+	../../../effect_stereoreverse.c \
+	../../../effects_internal.c \
+	../../../fluidsynth.c \
+	../../../load_aiff.c \
+	../../../load_flac.c \
+	../../../load_mp3.c \
+	../../../load_ogg.c \
+	../../../load_voc.c \
+	../../../mixer.c \
+	../../../music.c \
+	../../../music_cmd.c \
+	../../../music_flac.c \
+	../../../music_mad.c \
+	../../../music_mod.c \
+	../../../music_modplug.c \
+	../../../music_ogg.c \
+	../../../wavestream.c
+	
 LOCAL_LDLIBS :=
 LOCAL_STATIC_LIBRARIES :=
 LOCAL_SHARED_LIBRARIES := SDL2
 
-ifeq ($(SUPPORT_TIMIDITY),true)
+#TIMIDITY := true
+ifeq ($(TIMIDITY),true)
 	LOCAL_C_INCLUDES += $(LOCAL_PATH)/timidity
 	LOCAL_CFLAGS += -DMID_MUSIC -DUSE_TIMIDITY_MIDI
 	LOCAL_SRC_FILES += $(subst $(LOCAL_PATH)/../../,,$(wildcard $(LOCAL_PATH)/../../timidity/*.c))
@@ -95,12 +97,6 @@ ifeq ($(SUPPORT_MOD_MIKMOD),true)
     LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(MIKMOD_LIBRARY_PATH)/include
     LOCAL_CFLAGS += -DMOD_MUSIC
     LOCAL_SHARED_LIBRARIES += mikmod
-endif
-
-ifeq ($(SUPPORT_MP3_SMPEG),true)
-    LOCAL_C_INCLUDES += $(LOCAL_PATH)/$(SMPEG_LIBRARY_PATH)
-    LOCAL_CFLAGS += -DMP3_MUSIC
-    LOCAL_SHARED_LIBRARIES += smpeg2
 endif
 
 ifeq ($(SUPPORT_OGG),true)
