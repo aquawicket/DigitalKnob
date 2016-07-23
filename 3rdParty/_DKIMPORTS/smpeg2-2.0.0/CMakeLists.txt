@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.1.0)
 
 project (SMPEG)
-list(APPEND CMAKE_MODULE_PATH "${SDLMIXER_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${SMPEG_SOURCE_DIR}/cmake")
 
 include(CheckLibraryExists)
 include(CheckIncludeFiles)
