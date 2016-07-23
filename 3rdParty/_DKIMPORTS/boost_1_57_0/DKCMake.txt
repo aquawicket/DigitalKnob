@@ -14,6 +14,7 @@ IF(WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/boost-build/bin/bjam.exe)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)
+		SET(DKDOWNDLOAD "http://digitalknob.com/Download") ## WHY DO WE NEED THIS
 		DKDOWNLOAD(${DKDOWNDLOAD}/Tools/boost-build-2014-10.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/boost-build-2014-10.zip ${3RDPARTY})
 		DKSETPATH(${3RDPARTY}/boost-build)
@@ -22,7 +23,7 @@ IF(WIN32)
 	DKSET(BOOSTBUILD ${3RDPARTY}/boost-build)
 ENDIF()
 
-DKINSTALL(${DKDOWNLOAD}/Libs/boost_1_57_0.zip boost_1_57_0)
+DKINSTALL(${DKDOWNDLOAD}/Libs/boost_1_57_0.zip boost_1_57_0)
 DKSET(BOOST ${3RDPARTY}/boost_1_57_0)
 
 ### LINK ###
