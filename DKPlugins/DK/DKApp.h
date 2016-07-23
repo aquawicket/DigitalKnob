@@ -32,6 +32,7 @@ public:
 		loop_funcs.push_back(boost::bind(func, _this));
 	}
 	
+	/*
 	template<class T>
 	////////////////////////////////////////////////////////
 	static void PrependLoopFunc(void (T::*func)(), T* _this)
@@ -45,6 +46,7 @@ public:
 	{
 		loop_funcs.insert(loop_funcs.begin() + position, boost::bind(func, _this));
 	}
+	*/
 
 	template<class T>
 	///////////////////////////////////////////////////////
