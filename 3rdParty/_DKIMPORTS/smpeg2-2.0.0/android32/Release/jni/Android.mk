@@ -39,6 +39,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../..
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SDL)/include
 	
 LOCAL_CFLAGS := -DANDROID
+LOCAL_CFLAGS += -DNOCONTROLS
 LOCAL_CFLAGS += -O3 -fstrict-aliasing -fprefetch-loop-arrays
 
 #LOCAL_STATIC_LIBRARIES := stl
