@@ -9,6 +9,10 @@ void DKAudio::Init()
 		DKCreate("DKSDLAudio");
 		return;
 	}
+	if(DKAvailable("DKSDLWav")){
+		DKCreate("DKSDLWav");
+		return;
+	}
 	if(DKAvailable("DKOSGAudio")){
 		DKCreate("DKOSGAudio");
 		return;
@@ -23,6 +27,10 @@ void DKAudio::PlaySound(DKString& file)
 		DKClass::CallFunc("DKSDLAudio::PlaySound", static_cast<void*>(&file));
 		return;
 	}
+	if(DKClass::HasFunc("DKSDLWav::PlaySound")){
+		DKClass::CallFunc("DKSDLWav::PlaySound", static_cast<void*>(&file));
+		return;
+	}
 	if (DKClass::HasFunc("DKOSGAudio::PlaySound")) {
 		DKClass::CallFunc("DKOSGAudio::PlaySound", static_cast<void*>(&file));
 		return;
@@ -35,6 +43,10 @@ void DKAudio::PlayMusic(DKString& file)
 {
 	if(DKClass::HasFunc("DKSDLAudio::PlayMusic")){
 		DKClass::CallFunc("DKSDLAudio::PlayMusic", static_cast<void*>(&file));
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::PlayMusic")){
+		DKClass::CallFunc("DKSDLWav::PlayMusic", static_cast<void*>(&file));
 		return;
 	}
 	if (DKClass::HasFunc("DKOSGAudio::PlayMusic")) {

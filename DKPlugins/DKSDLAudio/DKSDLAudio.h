@@ -14,8 +14,6 @@ public:
 	void Init();
 	void End();
 
-	void initAudio();
-	void endAudio();
 	void playSound(const char * filename, int volume);
 	void playMusic(const char * filename, int volume);
 
