@@ -26,7 +26,7 @@ Internet Explorer (9.0+) <br>
 ###Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-[openFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
+[OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [SFML](https://github.com/SFML/SFML) "coming soon" <br>
 
 ###Supported Libraries
@@ -47,6 +47,7 @@ Internet Explorer (9.0+) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
 [Ogg](https://github.com/gcp/libogg) <br>
 [OpenAL](https://github.com/apportable/openal-soft) [2](https://github.com/JogAmp/openal-soft) <br>
+[OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
 [OsgAudio](https://github.com/mccdo/osgaudio) <br>
@@ -57,11 +58,12 @@ Internet Explorer (9.0+) <br>
 [Rocket](https://github.com/libRocket/libRocket) <br>
 [RtMidi](https://github.com/thestk/rtmidi) <br>
 [SDL2] (https://www.libsdl.org/) <br>
-[SDL2Gif] (http://themealena.fr/html/SDL_GIFlib.php) <br>
-[SDL_image] (https://www.libsdl.org/projects/SDL_image/) <br>
-[SDL_mixer] (https://github.com/aduros/SDL_mixer) <br>
-[Smpeg] (https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
-[StackWalker] (https://stackwalker.codeplex.com/) <br>
+[SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
+[SDL_image](https://www.libsdl.org/projects/SDL_image/) <br>
+[SDL_mixer](https://github.com/aduros/SDL_mixer) <br>
+[SFML](https://github.com/SFML/SFML) "coming soon" <br>
+[Smpeg](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
+[StackWalker](https://stackwalker.codeplex.com/) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
 [ThreadPool](http://threadpool.sourceforge.net/) <br>
 [Tiff](https://github.com/LuaDist/libtiff) <br>
