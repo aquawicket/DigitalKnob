@@ -8,9 +8,7 @@ char** DKApp::argv;
 bool DKApp::active = false;
 bool DKApp::loaded = false;
 bool DKApp::paused = false;
-std::vector<boost::function<void()> > DKApp::event_funcs;
-std::vector<boost::function<void()> > DKApp::update_funcs;
-std::vector<boost::function<void()> > DKApp::render_funcs;
+std::vector<boost::function<void()> > DKApp::loop_funcs;
 double DKApp::now;
 double DKApp::lastFrame = DKUtil::GetTicks();
 double DKApp::lastSecond = DKUtil::GetTicks();
@@ -134,19 +132,9 @@ void DKApp::DoFrame()
 	}
 
 	if(paused){ return; }
-	for(unsigned int i = 0; i < event_funcs.size(); ++i){
+	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){
-			event_funcs[i](); //Call event functions
-		}
-	}
-	for (unsigned int i = 0; i < update_funcs.size(); ++i){
-		if (active){
-			update_funcs[i](); //Call update functions
-		}
-	}
-	for (unsigned int i = 0; i < render_funcs.size(); ++i){
-		if (active){
-			render_funcs[i](); //Call render functions
+			loop_funcs[i](); //Call loop functions
 		}
 	}
 

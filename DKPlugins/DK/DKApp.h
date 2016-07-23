@@ -26,65 +26,38 @@ public:
 	static double _fps;
 	
 	template<class T>
-	//////////////////////////////////////////////////////////////////////////
-	static void AddLoopFunc(const DKString& type, void (T::*func)(), T* _this)
+	///////////////////////////////////////////////////////
+	static void AppendLoopFunc(void (T::*func)(), T* _this)
 	{
-		if(same(type, "EVENT")){
-			event_funcs.push_back(boost::bind(func, _this));
-		}
-		else if(same(type, "UPDATE")){
-			update_funcs.push_back(boost::bind(func, _this));
-		}
-		else if (same(type, "RENDER")){
-			render_funcs.push_back(boost::bind(func, _this));
-		}
-		else{
-			DKLog("AddLoopFunc(): type "+type+" invalid.\n", DKERROR);
-		}
+		loop_funcs.push_back(boost::bind(func, _this));
 	}
-
+	
 	template<class T>
-	///////////////////////////////////////////////////////////////////////////////
-	static void AddLoopFuncFirst(const DKString& type, void (T::*func)(), T* _this)
+	////////////////////////////////////////////////////////
+	static void PrependLoopFunc(void (T::*func)(), T* _this)
 	{
-		if (same(type, "EVENT")){
-			event_funcs.insert(event_funcs.begin(), boost::bind(func, _this));
-		}
-		else if (same(type, "UPDATE")){
-			update_funcs.insert(update_funcs.begin(), boost::bind(func, _this));
-		}
-		else if (same(type, "RENDER")){
-			render_funcs.insert(render_funcs.begin(), boost::bind(func, _this));
-		}
-		else{
-			DKLog("AddLoopFunc(): type " + type + " invalid.\n", DKERROR);
-		}
+		loop_funcs.insert(loop_funcs.begin(), boost::bind(func, _this));
+	}
+	
+	template<class T>
+	/////////////////////////////////////////////////////////////////////
+	static void InsertLoopFunc(void (T::*func)(), T* _this, int position)
+	{
+		loop_funcs.insert(loop_funcs.begin() + position, boost::bind(func, _this));
 	}
 
 	template<class T>
 	///////////////////////////////////////////////////////
 	static void RemoveLoopFunc(void (T::*func)(), T* _this)
 	{
-		for(unsigned int i=0; i<event_funcs.size(); ++i){
-			if(event_funcs[i].contains(boost::bind(func, _this))){
-				event_funcs.erase(event_funcs.begin() +i );
-			}
-		}
-		for(unsigned int i=0; i<update_funcs.size(); ++i){
-			if(update_funcs[i].contains(boost::bind(func, _this))){
-				update_funcs.erase(update_funcs.begin() +i );
-			}
-		}
-		for(unsigned int i=0; i<render_funcs.size(); ++i){
-			if(render_funcs[i].contains(boost::bind(func, _this))){
-				render_funcs.erase(render_funcs.begin() +i );
+		for(unsigned int i=0; i<loop_funcs.size(); ++i){
+			if(loop_funcs[i].contains(boost::bind(func, _this))){
+				loop_funcs.erase(event_funcs.begin() +i );
 			}
 		}
 	}
 
-	static std::vector<boost::function<void()> > event_funcs;
-	static std::vector<boost::function<void()> > update_funcs;
-	static std::vector<boost::function<void()> > render_funcs;
+	static std::vector<boost::function<void()> > loop_funcs;
 	
 #ifdef WIN32
 	static HINSTANCE hInstance; //posibbly move to DKWindows
