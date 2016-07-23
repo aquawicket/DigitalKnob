@@ -63,7 +63,7 @@ endif()
 
 include_directories("${SMPEG_SOURCE_DIR}")
 
-add_library(SMPEG SHARED
+add_library(SMPEG STATIC
 	${SMPEG_SOURCES}
 )
 
