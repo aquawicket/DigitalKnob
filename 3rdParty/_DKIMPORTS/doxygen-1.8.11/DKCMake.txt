@@ -2,7 +2,7 @@ IF(NOT WIN32)
 	RETURN()
 ENDIF()
 
-IF(NOT EXISTS C:/doxygen)
+IF(NOT EXISTS C:/Program Files/doxygen/bin/doxygen.exe)
 	DKSETPATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(http://digitalknob.com/Download/Tools/doxygen-1.8.11-setup.exe)
 ENDIF()
