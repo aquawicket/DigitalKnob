@@ -14,11 +14,9 @@ public:
 	void Init();
 	void End();
 
-	void playSound(const char * filename, int volume);
-	void playMusic(const char * filename, int volume);
-
 	void* PlaySound(void* data);
 	void* PlayMusic(void* data);
+	void Process();
 };
 
 
