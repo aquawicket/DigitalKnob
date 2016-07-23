@@ -72,31 +72,6 @@ Internet Explorer (9.0+) <br>
 [Xz](https://github.com/nobled/xz) <br>
 [Zlib](https://github.com/madler/zlib) <br>
 
-### Required Tools
-####Windows
-[CMake](https://cmake.org/download/) - 3.0+ <br>
-[Visual Studio 2015 Update 2](https://www.visualstudio.com/news/vs2015-update2-vs) <br>
-[MinGW x32 - i686-4.9.2-release-posix-dwarf-rt_v3-rev1](http://sourceforge.net/projects/mingw-w64/files/) <br>
-[MinGW x32 - x86_64-4.9.2-release-posix-seh-rt_v3-rev1](http://sourceforge.net/projects/mingw-w64/files/) <br>
-[MSYS](http://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20(Win64%20hosted)/MSYS%20(32-bit)/) <br>
-
-####Mac
-[CMake](https://cmake.org/download/) - 3.0+ <br>
-[Xcode](https://developer.apple.com/xcode/) - 4.6.3+ <br>
-
-####Linux
-[CMake](https://cmake.org/download/) - 3.0+ <br>
-[Eclipse](https://eclipse.org/downloads/?osType=linux) <br>
-
-####Android
-[CMake](https://cmake.org/download/) - 3.0+ <br>
-[Android NDK r10d](https://developer.android.com/tools/sdk/ndk/index.html) <br>
-[Android Studio 2.1.1](https://developer.android.com/studio/index.html) <br>
-
-####iOS
-[CMake](https://cmake.org/download/) - 3.0+ <br>
-[Xcode](https://developer.apple.com/xcode/) - 4.6.3+ <br>
-
 
 ###How to compile 
 #[DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
