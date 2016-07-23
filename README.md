@@ -40,7 +40,7 @@ Internet Explorer (9.0+) <br>
 [Curl](https://github.com/bagder/curl) <br>
 [Crosswalk](https://github.com/crosswalk-project/crosswalk) "coming soon" <br>
 [Duktape](https://github.com/svaarala/duktape) <br>
-[Ffmpeg](https://github.com/FFmpeg/FFmpeg) <br>
+[FFmpeg](https://github.com/FFmpeg/FFmpeg) <br>
 [Freealut](https://github.com/vancegroup/freealut) <br>
 [Freetype](https://github.com/vinniefalco/FreeType) <br>
 [Gif](http://sourceforge.net/projects/giflib/files/) <br>
@@ -59,6 +59,7 @@ Internet Explorer (9.0+) <br>
 [SDL2] (https://www.libsdl.org/) <br>
 [SDL2Gif] (http://themealena.fr/html/SDL_GIFlib.php) <br>
 [SDL2Image] (https://www.libsdl.org/projects/SDL_image/) <br>
+[Smpeg] (https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
 [StackWalker] (https://stackwalker.codeplex.com/) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
 [ThreadPool](http://threadpool.sourceforge.net/) <br>
