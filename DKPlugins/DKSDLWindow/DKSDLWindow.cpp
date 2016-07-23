@@ -151,7 +151,7 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
-	DKApp::AddLoopFunc("RENDER", &DKSDLWindow::Process, this);
+	DKApp::AppendLoopFunc(&DKSDLWindow::Process, this);
 	DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
 
 	MapInputs();

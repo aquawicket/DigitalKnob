@@ -93,7 +93,7 @@ void DKSDLCef::SetupCef()
 	cefHandler->dkSdlCef = this;
 	dkCef->cefHandler = cefHandler;
 	dkCef->NewBrowser();
-	DKApp::AddLoopFunc("EVENT", &DKSDLCefHandler::DoFrame, cefHandler);
+	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
 }
 
 ///////////////////////////////////////////////////////////////////////

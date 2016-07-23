@@ -52,7 +52,7 @@ public:
 	{
 		for(unsigned int i=0; i<loop_funcs.size(); ++i){
 			if(loop_funcs[i].contains(boost::bind(func, _this))){
-				loop_funcs.erase(event_funcs.begin() +i );
+				loop_funcs.erase(loop_funcs.begin() +i );
 			}
 		}
 	}

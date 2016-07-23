@@ -10,7 +10,7 @@ void DKThreadPool::Init()
 
 	dkThreadPool = new boost::threadpool::pool(1);
 
-	DKApp::AddLoopFunc("UPDATE", &DKThreadPool::Process, this);
+	DKApp::AppendLoopFunc(&DKThreadPool::Process, this);
 }
 
 ////////////////////////

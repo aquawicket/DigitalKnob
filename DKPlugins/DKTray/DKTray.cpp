@@ -41,7 +41,7 @@ void DKTray::Init()
 		CSystemTray::MinimiseToTray(hwnd);
 	}
 	
-	DKApp::AddLoopFunc("EVENT", &DKTray::Process, this);
+	DKApp::AppendLoopFunc(&DKTray::Process, this);
 	return;
 #endif
 
