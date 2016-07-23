@@ -45,8 +45,9 @@ Internet Explorer (9.0+) <br>
 [Freetype](https://github.com/vinniefalco/FreeType) <br>
 [Gif](http://sourceforge.net/projects/giflib/files/) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
+[Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
-[OpenAL](https://github.com/apportable/openal-soft) [2](https://github.com/JogAmp/openal-soft) <br>
+[OpenAL](https://github.com/apportable/openal-soft](https://github.com/JogAmp/openal-soft) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
@@ -57,7 +58,7 @@ Internet Explorer (9.0+) <br>
 [Pugixml](https://github.com/zeux/pugixml) <br>
 [Rocket](https://github.com/libRocket/libRocket) <br>
 [RtMidi](https://github.com/thestk/rtmidi) <br>
-[SDL2] (https://www.libsdl.org/) <br>
+[SDL2](https://www.libsdl.org/) <br>
 [SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
 [SDL_image](https://www.libsdl.org/projects/SDL_image/) <br>
 [SDL_mixer](https://github.com/aduros/SDL_mixer) <br>
