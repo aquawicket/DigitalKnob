@@ -1,3 +1,4 @@
+DKDEPEND(doxygen)
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
 DKDEPEND(DKAssets)
