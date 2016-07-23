@@ -3,7 +3,7 @@ IF(NOT MAC)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(${DKDOWNLOAD}/Libs/cef_binary_3.2623.1396.g0451528_macosx64.7z cef_binary_3.2623.1396.g0451528_macosx64)
+DKINSTALL(${DKONLINE}/Libs/cef_binary_3.2623.1396.g0451528_macosx64.7z cef_binary_3.2623.1396.g0451528_macosx64)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.2623.1396.g0451528_macosx64)
 
 

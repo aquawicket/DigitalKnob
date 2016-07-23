@@ -4,5 +4,5 @@ ENDIF()
 
 IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKDOWNLOAD}/Tools/doxygen-1.8.11-setup.exe)
+	DKDOWNLOAD(${DKONLINE}/Tools/doxygen-1.8.11-setup.exe)
 ENDIF()

@@ -3,7 +3,7 @@ IF(NOT ANDROID)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(${DKDOWNLOAD}/Libs/OpenAL-android.zip OpenAL-android)
+DKINSTALL(${DKONLINE}/Libs/OpenAL-android.zip OpenAL-android)
 
 
 ### LINK ###

@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKDOWNLOAD}/Libs/bullet-2.82-r2704.zip bullet-2.82-r2704)
+DKINSTALL(${DKONLINE}/Libs/bullet-2.82-r2704.zip bullet-2.82-r2704)
 DKSET(BULLET ${3RDPARTY}/bullet-2.82-r2704)
 
 
