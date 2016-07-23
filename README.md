@@ -58,7 +58,8 @@ Internet Explorer (9.0+) <br>
 [RtMidi](https://github.com/thestk/rtmidi) <br>
 [SDL2] (https://www.libsdl.org/) <br>
 [SDL2Gif] (http://themealena.fr/html/SDL_GIFlib.php) <br>
-[SDL2Image] (https://www.libsdl.org/projects/SDL_image/) <br>
+[SDL_image] (https://www.libsdl.org/projects/SDL_image/) <br>
+[SDL_mixer] (https://github.com/aduros/SDL_mixer) <br>
 [Smpeg] (https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
 [StackWalker] (https://stackwalker.codeplex.com/) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
