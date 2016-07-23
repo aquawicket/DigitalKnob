@@ -303,6 +303,7 @@ FOREACH(plugin ${DKPLUGS})
 	FOREACH(the_lib ${LIBLIST})
 		IF(NOT EXISTS ${the_lib})
 			MESSAGE(FATAL_ERROR "\n\n\n********************************************\nFAILED to find: ${the_lib} \n********************************************")
+			MESSAGE(FATAL_ERROR " ")
 		ENDIF()
 	ENDFOREACH()
 	DKSET(CMAKE_FILE "") ##Linux cache file fix
