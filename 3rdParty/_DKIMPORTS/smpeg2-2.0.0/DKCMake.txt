@@ -1,3 +1,4 @@
+DKDEPEND(SDL2-2.0.4)
 
 ### INSTALL ###
 DKINSTALL(http://digitalknob.com/Download/Libs/smpeg2-2.0.0.tar smpeg2-2.0.0)

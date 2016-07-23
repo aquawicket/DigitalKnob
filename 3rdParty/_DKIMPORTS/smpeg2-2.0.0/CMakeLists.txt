@@ -1,14 +1,16 @@
 cmake_minimum_required (VERSION 3.1.0)
 
 project (SMPEG)
+list(APPEND CMAKE_MODULE_PATH "${SDLMIXER_SOURCE_DIR}/cmake")
 
 include(CheckLibraryExists)
 include(CheckIncludeFiles)
 include(CheckIncludeFile)
 
-set(CMAKE_MODULE_PATH "${SMPEG_SOURCE_DIR}/cmake")
-
 find_package(SDL2 REQUIRED)
+
+set(SDL2_LIBRARIES "${SDL2_LIBRARY}")
+set(SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIR}")
 
 include_directories(${SDL2_INCLUDE_DIR})
 
