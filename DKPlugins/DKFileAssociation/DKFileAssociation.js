@@ -19,5 +19,22 @@ function DKFileAssociation_OnEvent(event)
 
 function DKFileAssociation_Open(file)
 {
-	//TODO
+	if(file.indexOf(".js") > -1){
+		DKCreate(file);
+		var file = file.replace(".js",".html");
+		file = DKFile_GetFilename(file);
+		DKFrame_Widget(file);
+		return;
+	}
+	if(file.indexOf(".html") > -1){
+		DKCreate(file);
+		file = DKFile_GetFilename(file);
+		DKFrame_Widget(file);
+		return;
+	}
+	else{
+		TaskbarMenu_OpenFileInFrame("DKNotepad/DKNotepad.js");		
+		var local_assets = DKAssets_GetDataPath();			
+		DKSendEvent("DKNotepad.html", "SetFile", local_assets+file);
+	}
 }

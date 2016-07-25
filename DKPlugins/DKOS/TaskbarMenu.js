@@ -55,31 +55,17 @@ function TaskbarMenu_OnEvent(event)
 	//DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+") \n", DKDEBUG);
 	
 	if(DK_Id(event, "FileExplorer")){
-		TaskbarMenu_OpenFileInFrame("DKFile/DKFileDialog.js");
-		//DKFrame_Widget("DKFileDialog.html");
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKFileAssociation_Open("DKFile/DKFileDialog.js");
 		var local_assets = DKAssets_GetDataPath();
 		DKAddEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
 		DKSendEvent("DKFileDialog.html", "GetFile", "TaskbarMenu,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
 		//return;
 	}
 	if(DK_Type(event, "OpenFile")){
-		
-		//TODO: we need to talk to DKFileAssociation, it shall call the appropriate app acording to file extention. 
-		DKLog("OpenFile: "+event+"\n");
-		
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
 		var file = DKWidget_GetValue(event);
-		if(file.indexOf(".js") > -1){
-			TaskbarMenu_OpenFileInFrame(file);
-		}
-		else if(file.indexOf(".html") > -1){
-			TaskbarMenu_OpenFileInFrame(file);
-		}
-		else{
-			TaskbarMenu_OpenFileInFrame("DKNotepad/DKNotepad.js");		
-			var local_assets = DKAssets_GetDataPath();			
-			DKSendEvent("DKNotepad.html", "SetFile", local_assets+file);
-		}
-		
+		DKFileAssociation_Open(file);		
 		DKRemoveEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
 	}
 	if(DK_Id(event, "OpenConsole")){
@@ -92,25 +78,29 @@ function TaskbarMenu_OnEvent(event)
 		DKWidget_SetProperty(frame, "left", "20px");
 	}
 	if(DK_Id(event, "OpenDev")){
-		TaskbarMenu_OpenFileInFrame("DKDev/DKMenuRight.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKFileAssociation_Open("DKDev/DKMenuRight.js");
 	}
 	if(DK_Id(event, "OpenNotepad")){
-		TaskbarMenu_OpenFileInFrame("DKNotepad/DKNotepad.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKFileAssociation_Open("DKNotepad/DKNotepad.js");
 	}
 	if(DK_Id(event, "InputTest")){
-		TaskbarMenu_OpenFileInFrame("DKInputTest/DKInput.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKFileAssociation_Open("DKInputTest/DKInput.js");
 	}
 	if(DK_Id(event, "OpenBrowser")){
-		TaskbarMenu_OpenFileInFrame("DKBrowser/DKBrowser.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKFileAssociation_Open("DKBrowser/DKBrowser.js");
 	}
 	if(DK_Id(event, "OpenMessage")){
-		//TaskbarMenu_OpenFileInFrame("DKMessage/DKMessage.js");
+		//DKFileAssociation_Open("DKMessage/DKMessage.js");
 		DKCreate("DKMessage/DKMessage.js");
 		DKFrame_Widget("DKMessage.html");
 		DKMessageBox("", "ShowMessage", "test message");
 	}
 	if(DK_Id(event, "OpenTetris")){
-		//TaskbarMenu_OpenFileInFrame("DKTetris/DKTetris.js");
+		//DKFileAssociation_Open("DKTetris/DKTetris.js");
 		//DKCreate("DKTetris/DKTetris.js");
 		//DKFrame_Widget("DKTetris.html");
 		DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
@@ -202,25 +192,6 @@ function TaskbarMenu_PushDKFiles()
 			DKLog("Pushing to: "+DKPlugins2+"/"+folders[i]+"\n");
 			DKFile_CopyFolder(dkpath+"/"+folders[i], DKPlugins2+"/"+folders[i], true, true);
 		}
-	}
-}
-
-//////////////////////////////////////////
-function TaskbarMenu_OpenFileInFrame(file)
-{
-	DKLog("TaskbarMenu_OpenFileInFrame("+file+") \n");
-	if(file.indexOf(".js") > -1){
-		DKCreate(file);
-		var file = file.replace(".js",".html");
-		file = DKFile_GetFilename(file);
-		DKFrame_Widget(file);
-		return;
-	}
-	if(file.indexOf(".html") > -1){
-		DKCreate(file);
-		file = DKFile_GetFilename(file);
-		DKFrame_Widget(file);
-		return;
 	}
 }
 
