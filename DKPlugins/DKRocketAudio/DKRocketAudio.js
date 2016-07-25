@@ -39,6 +39,14 @@ function DKRocketAudio_OnEvent(event)
 	}
 }
 
+/////////////////////////////////
+function DKRocketAudio_Open(file)
+{
+	DKCreate("DKAudio");
+	//DKAudio_PlaySound(file);
+	DKAudio_PlayMusic(file);
+}
+
 //////////////////////////////////
 function DKRocketAudio_playpause()
 {
@@ -50,9 +58,11 @@ function DKRocketAudio_playpause()
 	
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/pause.png");
+		DKAudio_Resume(file);
 	}
 	else{
 		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/play.png");
+		DKAudio_Pause(file);
 	}
 }
 

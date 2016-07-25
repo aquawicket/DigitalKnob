@@ -40,9 +40,9 @@ function DKFileAssociation_Open(file)
 		return;
 	}
 	if(file.indexOf(".wav") > -1 || file.indexOf(".mp3") > -1){
-		DKCreate("DKAudio");
-		//DKAudio_PlaySound(file);
-		DKAudio_PlayMusic(file);
+		DKCreate("DKRocketAudio/DKRocketAudio.js");
+		DKFrame_Widget("DKRocketAudio.html");
+		DKRocketAudio_Open(file);
 		return;
 	}
 	else{
