@@ -2,13 +2,14 @@
 ///////////////////////
 function DKForum_Init()
 {
-	//DKLog("DKBlog_Init() \n");
+	//DKLog("DKForum_Init() \n");
+	DKCreate("DKForum/DKForum.html");
 }
 
 //////////////////////
 function DKForum_End()
 {
-	
+	DKClose("DKForum/DKForum.html");
 }
 
 ///////////////////////////////
