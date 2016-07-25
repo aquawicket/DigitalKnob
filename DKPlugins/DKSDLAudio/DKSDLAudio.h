@@ -16,6 +16,8 @@ public:
 
 	void* PlaySound(void* data);
 	void* PlayMusic(void* data);
+	void* Pause(void* data);
+	void* Resume(void* data);
 	void Process();
 };
 

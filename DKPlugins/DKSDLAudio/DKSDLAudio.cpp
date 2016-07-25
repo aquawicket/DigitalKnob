@@ -18,6 +18,8 @@ void DKSDLAudio::Init()
 
 	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLAudio::PlayMusic", &DKSDLAudio::PlayMusic, this);
+	DKClass::RegisterFunc("DKSDLAudio::Pause", &DKSDLAudio::Pause, this);
+	DKClass::RegisterFunc("DKSDLAudio::Resume", &DKSDLAudio::Resume, this);
 	//DKApp::AddLoopFunc("RENDER", &DKSDLAudio::Process, this);
 }
 
@@ -61,6 +63,22 @@ void* DKSDLAudio::PlayMusic(void* data)
 		DKLog("DKSDLAudio::PlayMusic(): error playing file \n", DKERROR);
 	}
 
+	return NULL;
+}
+
+///////////////////////////////////
+void* DKSDLAudio::Pause(void* data)
+{
+	DKString path = *static_cast<DKString*>(data);
+	DKLog("DKSDLAudio::Pause(): not implemnted.",DKERROR);
+	return NULL;
+}
+
+////////////////////////////////////
+void* DKSDLAudio::Resume(void* data)
+{
+	DKString path = *static_cast<DKString*>(data);
+	DKLog("DKSDLAudio::Resume(): not implemnted.",DKERROR);
 	return NULL;
 }
 

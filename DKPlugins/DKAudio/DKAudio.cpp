@@ -35,7 +35,7 @@ void DKAudio::PlaySound(DKString& file)
 		DKClass::CallFunc("DKOSGAudio::PlaySound", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::PlaySound(): No play funtion available \n", DKERROR);
+	DKLog("DKAudio::PlaySound(): No PlaySound funtion available \n", DKERROR);
 }
 
 ///////////////////////////////////////
@@ -53,7 +53,7 @@ void DKAudio::PlayMusic(DKString& file)
 		DKClass::CallFunc("DKOSGAudio::PlayMusic", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::PlayMusic(): No play funtion available \n", DKERROR);
+	DKLog("DKAudio::PlayMusic(): No PlayMusic funtion available \n", DKERROR);
 }
 
 ///////////////////////////////////
@@ -71,7 +71,7 @@ void DKAudio::Pause(DKString& file)
 		DKClass::CallFunc("DKOSGAudio::Pause", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::Pause(): No play funtion available \n", DKERROR);
+	DKLog("DKAudio::Pause(): No Pause funtion available \n", DKERROR);
 }
 
 ////////////////////////////////////
@@ -89,5 +89,5 @@ void DKAudio::Resume(DKString& file)
 		DKClass::CallFunc("DKOSGAudio::Resume", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::Resume(): No play funtion available \n", DKERROR);
+	DKLog("DKAudio::Resume(): No Resume funtion available \n", DKERROR);
 }
