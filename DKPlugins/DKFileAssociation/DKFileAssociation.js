@@ -32,16 +32,23 @@ function DKFileAssociation_Open(file)
 		DKFrame_Widget(file);
 		return;
 	}
-	if(file.indexOf(".png") > -1){
+	if(file.indexOf(".png") > -1 || file.indexOf(".jpeg") > -1 || file.indexOf(".tif") > -1 || file.indexOf(".gif") > -1 || file.indexOf(".jpg") > -1 || file.indexOf(".tiff") > -1 || file.indexOf(".bmp") > -1){
 		DKCreate("DKPaint/DKPaint.js");
 		DKFrame_Widget("DKPaint.html");
 		var local_assets = DKAssets_GetDataPath();
 		DKPaint_Open(local_assets+file);
+		return;
+	}
+	if(file.indexOf(".wav") > -1 || file.indexOf(".mp3") > -1){
+		DKCreate("DKAudio");
+		DKAudio_PlaySound(file);
+		return;
 	}
 	else{
 		DKCreate("DKNotepad/DKNotepad.js");
 		DKFrame_Widget("DKNotepad.html");
 		var local_assets = DKAssets_GetDataPath();
 		DKNotepad_Open(local_assets+file);
+		return;
 	}
 }
