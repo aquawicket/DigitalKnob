@@ -41,7 +41,8 @@ function DKFileAssociation_Open(file)
 	}
 	if(file.indexOf(".wav") > -1 || file.indexOf(".mp3") > -1){
 		DKCreate("DKAudio");
-		DKAudio_PlaySound(file);
+		//DKAudio_PlaySound(file);
+		DKAudio_PlayMusic(file);
 		return;
 	}
 	else{
