@@ -16,3 +16,8 @@ function DKFileAssociation_OnEvent(event)
 {
 	//if(DK_Id(event,"DKFileAssociation_item")){ }	
 }
+
+function DKFileAssociation_Open(file)
+{
+	//TODO
+}
