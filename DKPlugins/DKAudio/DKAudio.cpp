@@ -55,3 +55,39 @@ void DKAudio::PlayMusic(DKString& file)
 	}
 	DKLog("DKAudio::PlayMusic(): No play funtion available \n", DKERROR);
 }
+
+///////////////////////////////////
+void DKAudio::Pause(DKString& file)
+{
+	if(DKClass::HasFunc("DKSDLAudio::Pause")){
+		DKClass::CallFunc("DKSDLAudio::Pause", static_cast<void*>(&file));
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::Pause")){
+		DKClass::CallFunc("DKSDLWav::Pause", static_cast<void*>(&file));
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::Pause")) {
+		DKClass::CallFunc("DKOSGAudio::Pause", static_cast<void*>(&file));
+		return;
+	}
+	DKLog("DKAudio::Pause(): No play funtion available \n", DKERROR);
+}
+
+////////////////////////////////////
+void DKAudio::Resume(DKString& file)
+{
+	if(DKClass::HasFunc("DKSDLAudio::Resume")){
+		DKClass::CallFunc("DKSDLAudio::Resume", static_cast<void*>(&file));
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::Resume")){
+		DKClass::CallFunc("DKSDLWav::Resume", static_cast<void*>(&file));
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::Resume")) {
+		DKClass::CallFunc("DKOSGAudio::Resume", static_cast<void*>(&file));
+		return;
+	}
+	DKLog("DKAudio::Resume(): No play funtion available \n", DKERROR);
+}

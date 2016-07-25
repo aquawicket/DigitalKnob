@@ -11,6 +11,8 @@ public:
 	void End(){};
 	static void PlaySound(DKString& file);
 	static void PlayMusic(DKString& file);
+	static void Pause(DKString& file);
+	static void Resume(DKString& file);
 };
 
 REGISTER_OBJECT(DKAudio, true);
