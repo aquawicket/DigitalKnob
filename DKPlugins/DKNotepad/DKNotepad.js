@@ -4,7 +4,7 @@ var currentFile;
 function DKNotepad_Init()
 {
 	DKCreate("DKNotepad/DKNotepad.html");
-	DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_Save", "click", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_File", "click", DKNotepad_OnEvent);
@@ -25,9 +25,9 @@ function DKNotepad_OnEvent(event)
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js");
 	}
-	if(DK_Type(event,"SetFile")){
-		DKNotepad_LoadFile(DKWidget_GetValue(event));
-	}
+	//if(DK_Type(event,"SetFile")){
+	//	DKNotepad_Open(DKWidget_GetValue(event));
+	//}
 	if(DK_Id(event,"DKNotepad_File")){
 		DKCreate("DKNotepad/DKNotepadFile.js");
 	}
@@ -43,14 +43,16 @@ function DKNotepad_Save()
 	DKMessageBox("", "ShowMessage", "Saved File");
 }
 
-/////////////////////////////////
-function DKNotepad_LoadFile(file)
+/////////////////////////////
+function DKNotepad_Open(file)
 {
-	DKLog("DKNotepad_LoadFile("+file+") \n");
 	//TODO - only open files under 5mb
+	
+	//DKLog("DKNotepad_Open("+file+") \n");
+	
 	currentFile = file;
 	//var loacl_assets = DKAssets_GetDataPath();
 	var text = DKFile_FileToString(file);
-	DKLog("DKNotepad_LoadFile("+file+"): text="+text+" \n");
+	//DKLog("DKNotepad_Open("+file+"): text="+text+" \n");
 	DKWidget_SetAttribute("DKNotepad_Text", "value", text);
 }

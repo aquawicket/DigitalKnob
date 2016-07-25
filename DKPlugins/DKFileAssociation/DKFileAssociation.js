@@ -32,10 +32,16 @@ function DKFileAssociation_Open(file)
 		DKFrame_Widget(file);
 		return;
 	}
+	if(file.indexOf(".png") > -1){
+		DKCreate("DKPaint/DKPaint.js");
+		DKFrame_Widget("DKPaint.html");
+		var local_assets = DKAssets_GetDataPath();
+		DKPaint_Open(local_assets+file);
+	}
 	else{
 		DKCreate("DKNotepad/DKNotepad.js");
 		DKFrame_Widget("DKNotepad.html");
-		var local_assets = DKAssets_GetDataPath();			
-		DKSendEvent("DKNotepad.html", "SetFile", local_assets+file);
+		var local_assets = DKAssets_GetDataPath();
+		DKNotepad_Open(local_assets+file);
 	}
 }
