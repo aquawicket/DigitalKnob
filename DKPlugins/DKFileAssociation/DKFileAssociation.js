@@ -33,7 +33,8 @@ function DKFileAssociation_Open(file)
 		return;
 	}
 	else{
-		TaskbarMenu_OpenFileInFrame("DKNotepad/DKNotepad.js");		
+		DKCreate("DKNotepad/DKNotepad.js");
+		DKFrame_Widget("DKNotepad.html");
 		var local_assets = DKAssets_GetDataPath();			
 		DKSendEvent("DKNotepad.html", "SetFile", local_assets+file);
 	}
