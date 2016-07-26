@@ -5,7 +5,13 @@
 #define DKSDLAudio_H
 #include "DK.h"
 #include "SDL.h"
+#include "SDL_mixer.h"
 
+struct track{
+	DKString file;
+	Mix_Music* snd;
+	int position;
+};
 
 ///////////////////////////////////////////////
 class DKSDLAudio : public DKObjectT<DKSDLAudio>
@@ -19,6 +25,8 @@ public:
 	void* Pause(void* data);
 	void* Resume(void* data);
 	void Process();
+
+	std::vector<track> tracks;
 };
 
 

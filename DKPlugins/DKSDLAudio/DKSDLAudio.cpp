@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DKSDLAudio.h"
 #include "DKFile.h"
-#include "SDL_mixer.h"
+
 
 ///////////////////////
 void DKSDLAudio::Init()
@@ -54,12 +54,18 @@ void* DKSDLAudio::PlayMusic(void* data)
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKFile::VerifyPath(path)){ return 0; }
 	
-	Mix_Music *snd = Mix_LoadMUS(path.c_str());
-	if(!snd){
+	track trk;
+	trk.file = path;
+	trk.snd = Mix_LoadMUS(path.c_str());
+	trk.position = 0;
+	tracks.push_back(trk);
+
+	//Mix_Music *snd = Mix_LoadMUS(path.c_str());
+	if(!trk.snd){
 		DKLog("DKSDLAudio::PlayMusic(): could not load file \n", DKERROR);
 	}
 
-	if(Mix_PlayMusic(snd, -1) == -1){
+	if(Mix_PlayMusic(trk.snd, -1) == -1){
 		DKLog("DKSDLAudio::PlayMusic(): error playing file \n", DKERROR);
 	}
 
@@ -70,7 +76,7 @@ void* DKSDLAudio::PlayMusic(void* data)
 void* DKSDLAudio::Pause(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	DKLog("DKSDLAudio::Pause(): not implemnted.",DKERROR);
+	DKLog("DKSDLAudio::Pause(): not implemnted. \n",DKERROR);
 	return NULL;
 }
 
@@ -78,7 +84,7 @@ void* DKSDLAudio::Pause(void* data)
 void* DKSDLAudio::Resume(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	DKLog("DKSDLAudio::Resume(): not implemnted.",DKERROR);
+	DKLog("DKSDLAudio::Resume(): not implemnted. \n",DKERROR);
 	return NULL;
 }
 
