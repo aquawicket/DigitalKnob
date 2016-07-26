@@ -58,7 +58,7 @@ int DKAudioJS::Mute(duk_context* ctx)
 ///////////////////////////////////////
 int DKAudioJS::UnMute(duk_context* ctx)
 {
-	DKAudio::Mute();
+	DKAudio::UnMute();
 	return 1;
 }
 
