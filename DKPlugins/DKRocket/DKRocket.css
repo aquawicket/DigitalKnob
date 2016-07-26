@@ -141,6 +141,31 @@ input.range sliderbar
 }
 
 
+/* Volume Ranges */
+input.range.volume
+{
+	width:44rem;
+	height:14rem;
+}
+
+input.range.volume slidertrack
+{
+	height:8rem;
+	width:44rem;
+	margin-top:3rem;
+	background-decorator: image;
+	background-image: ../DKRocketAudio/volume_track.png 0px 0px 44px 8px;
+}
+
+input.range.volume sliderbar
+{
+	width:14rem;
+	height:14rem;
+	background-decorator: image;
+	background-image: ../DKRocketAudio/volume.png 0px 0px 14px 14px;
+}
+
+
 /* Text Inputs */
 input.text
 {
