@@ -76,7 +76,8 @@ void* DKSDLAudio::PlayMusic(void* data)
 void* DKSDLAudio::Pause(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	DKLog("DKSDLAudio::Pause(): not implemnted. \n",DKERROR);
+	//DKLog("DKSDLAudio::Pause(): not implemnted. \n",DKERROR);
+	Mix_PauseMusic();
 	return NULL;
 }
 
@@ -84,7 +85,8 @@ void* DKSDLAudio::Pause(void* data)
 void* DKSDLAudio::Resume(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	DKLog("DKSDLAudio::Resume(): not implemnted. \n",DKERROR);
+	//DKLog("DKSDLAudio::Resume(): not implemnted. \n",DKERROR);
+	Mix_ResumeMusic();
 	return NULL;
 }
 
