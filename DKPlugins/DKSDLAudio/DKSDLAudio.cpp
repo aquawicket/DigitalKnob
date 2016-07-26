@@ -71,7 +71,7 @@ void* DKSDLAudio::PlayMusic(void* data)
 		DKLog("DKSDLAudio::PlayMusic(): could not load file \n", DKERROR);
 	}
 
-	if(Mix_PlayMusic(trk.snd, -1) == -1){
+	if(Mix_PlayMusic(trk.snd, 0) == -1){
 		DKLog("DKSDLAudio::PlayMusic(): error playing file \n", DKERROR);
 	}
 
@@ -100,6 +100,7 @@ void* DKSDLAudio::Resume(void* data)
 void* DKSDLAudio::Mute(void* data)
 {
 	Mix_VolumeMusic(0);
+	//Mix_Volume(-1,0);
 	return NULL;
 }
 
@@ -107,6 +108,7 @@ void* DKSDLAudio::Mute(void* data)
 void* DKSDLAudio::UnMute(void* data)
 {
 	Mix_VolumeMusic(volume);
+	//Mix_Volume(-1,volume);
 	return NULL;
 }
 
