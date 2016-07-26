@@ -92,7 +92,7 @@ function DKRocketAudio_speaker()
 /////////////////////////////////////
 function DKRocketAudio_volume(volume)
 {
-	//DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
+	DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
 	DKAudio_SetVolume(parseInt(volume));
 }
 
