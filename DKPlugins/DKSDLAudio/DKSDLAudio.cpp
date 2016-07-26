@@ -122,7 +122,7 @@ void* DKSDLAudio::GetVolume(void* data)
 ///////////////////////////////////////
 void* DKSDLAudio::SetVolume(void* data)
 {
-	int path = *static_cast<int*>(data);
+	volume = *static_cast<int*>(data);
 	Mix_VolumeMusic(volume);
 	return NULL;
 }
