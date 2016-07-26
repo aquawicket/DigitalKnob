@@ -79,6 +79,7 @@ function DKRocketAudio_speaker()
 	//DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
 	
 	if(src.indexOf("mute.png") != -1){
+		//DKRocketAudio_volume(DKAudio_GetVolume());
 		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume3.png");
 		DKAudio_UnMute();
 	}
