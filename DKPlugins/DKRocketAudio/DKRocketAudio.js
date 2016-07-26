@@ -74,16 +74,13 @@ function DKRocketAudio_position()
 ////////////////////////////////
 function DKRocketAudio_speaker()
 {
-	//DKLog("DKRocketAudio_speaker() \n",DKDEBUG);
-	
-	//toggle volume/mute
+	//DKLog("DKRocketAudio_speaker() \n",DKDEBUG);	
 	var src = DKWidget_GetAttribute("DKRocketAudio_speaker", "src");
 	//DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
 	
 	if(src.indexOf("mute.png") != -1){
-		//DKRocketAudio_volume(DKAudio_GetVolume());
-		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume3.png");
 		DKAudio_UnMute();
+		DKRocketAudio_volume(DKAudio_GetVolume());
 	}
 	else{
 		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/mute.png");
@@ -94,8 +91,21 @@ function DKRocketAudio_speaker()
 /////////////////////////////////////
 function DKRocketAudio_volume(volume)
 {
-	DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
-	DKAudio_SetVolume(parseInt(volume));
+	//DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
+	var num = parseInt(volume);
+	DKAudio_SetVolume(num);
+	if(num < 1){
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/mute.png");
+	}
+	if(num > 0 && num < 42){
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume1.png");
+	}
+	if(num > 42 && num < 84){
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume2.png");
+	}
+	if(num > 84){
+		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume3.png");
+	}
 }
 
 
