@@ -1,0 +1,389 @@
+/* http://www.w3schools.com/css/css_syntax.asp */
+/* http://librocket.com/wiki/documentation/RCSS/Selectors */
+
+html
+{
+	visibility:hidden;
+}
+
+div, option, img, select, dataselect, input, textarea, button
+{
+	display: block;
+}
+
+
+option:hover
+{
+	background-color: rgb(123,157,212);
+	color:white;
+}
+
+
+/**********************************/
+/******  libRocket elements  ******/
+/**********************************/
+dataselect,
+dataselect selectvalue,
+dataselect selectbox option
+{
+	background-color:white;
+	color:black;
+}
+
+
+/* Buttons */
+button{
+	color: black;
+	width: 21rem;
+	height: 20rem;
+	padding-top:2rem;
+	text-align: center;
+	
+	background-decorator: tiled-horizontal;
+	background-left-image: buttons.png 0px 0px 1px 21px;
+	background-center-image: buttons.png 1px 0px 20px 21px;
+	background-right-image: buttons.png 20px 0px 21px 21px;
+}
+
+button:hover{
+	background-left-image: buttons.png 21px 0px 22px 21px;
+	background-center-image: buttons.png 22px 0px 41px 21px;
+	background-right-image: buttons.png 41px 0px 42px 21px;
+}
+
+button:active{
+	background-left-image: buttons.png 42px 0px 43px 21px;
+	background-center-image: buttons.png 43px 0px 62px 21px;
+	background-right-image: buttons.png 62px 0px 63px 21px;
+}
+
+
+/* Checkboxes */
+input.checkbox
+{
+	width:12rem;
+	height:12rem;
+	icon-decorator: image;
+	icon-image: checkboxes.png 0px 0px 12px 12px;
+}
+
+input.checkbox:active
+{
+	icon-image: checkboxes.png 12px 0px 24px 12px;
+}
+
+input.checkbox:checked
+{
+	icon-image: checkboxes.png 24px 0px 36px 12px;
+}
+
+
+/* Passwords */
+input.password
+{
+	width: 100rem;
+	height: 22rem;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1rem;
+	border-color: rgb(167,167,167);
+}
+
+input.password:focus
+{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Radio Buttons */
+input.radio
+{
+	width:12rem;
+	height:12rem;
+	icon-decorator: image;
+	icon-image: radios.png 0px 0px 12px 12px;
+}
+
+input.radio:hover
+{
+	icon-image: radios.png 12px 0px 24px 12px;
+}
+
+input.radio:checked
+{
+	icon-image: radios.png 24px 0px 36px 12px;
+}
+
+
+/* Ranges */
+input.range
+{
+	width:150rem;
+	height:150rem;
+}
+
+input.range slidertrack
+{
+	height:4rem;
+	width:4rem;
+	margin-top:9rem;
+	background-decorator: image;
+	background-image: rangetrack.png 0px 0px 4px 4px;
+}
+
+input.range sliderbar
+{
+	width:11rem;
+	height:21rem;
+	background-decorator: image;
+	background-image: rangebar.png 0px 0px 11px 21px;
+}
+
+
+/* Text Inputs */
+input.text
+{
+	width: 100rem;
+	height: 21rem;
+	min-height: 19px;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1rem;
+	border-color: rgb(167,167,167);
+}
+
+input.text:focus
+{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Textareas */
+textarea
+{
+	width: 180rem;
+	height: 50rem;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1rem;
+	border-color: rgb(167,167,167);
+	resize: none;
+}
+
+textarea:focus
+{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Selects */
+select
+{
+	background-color:white;
+	color:black;
+	width:80rem;
+	height:20rem;
+	border-style: solid;
+    border-width: 1rem;
+	border-color: rgb(167,167,167);
+}
+
+select:hover
+{
+	border-color: rgb(120,120,120);
+}
+
+select:focus
+{
+	border-color: rgb(123,157,212);
+}
+
+select selectvalue
+{
+	padding-left: 3rem;
+}
+
+select selectarrow
+{
+	width: 6rem;
+	height: 6rem;
+	margin-top: 6rem;
+	margin-right: 6rem;
+	icon-decorator: image;
+	icon-image: select.png 0px 0px 6px 6px;
+}
+
+select selectbox
+{
+	border-style: solid;
+    border-left-width: 1rem;
+	border-right-width: 1rem;
+	border-bottom-width: 1rem;
+	border-color: rgb(123,157,212);
+}
+
+select selectbox option
+{
+	/*z-index: 100;*/
+	padding-left: 3rem;
+	background-color:white;
+}
+
+select selectbox option:hover
+{
+	background-color: rgb(123,157,212);
+	color:white;
+}
+
+
+/* Scrollbars */
+scrollbarvertical
+{
+	width: 17rem;
+	/*z-index: 100;*/
+}
+
+scrollbarvertical slidertrack
+{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 51px 68px 68px;
+}
+
+scrollbarvertical sliderbar
+{
+	min-height: 17rem;
+	background-decorator: image;
+	background-image: scrollbars.png 0px 17px 17px 34px;
+}
+
+scrollbarvertical sliderbar:hover
+{
+	background-decorator: image;
+	background-image: scrollbars.png 34px 17px 51px 34px;
+}
+
+scrollbarvertical sliderbar:active
+{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 17px 68px 34px;
+}
+
+scrollbarvertical sliderarrowdec
+{
+	height: 17rem;
+	width: 17rem;
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 0px 34px 17px;
+}
+
+scrollbarvertical sliderarrowdec:hover
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 0px 51px 17px;
+}
+
+scrollbarvertical sliderarrowdec:active
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 0px 68px 17px;
+}
+
+scrollbarvertical sliderarrowinc
+{
+	height: 17rem;
+	width: 17rem;
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 34px 34px 51px;
+}
+
+scrollbarvertical sliderarrowinc:hover
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 34px 51px 51px;
+}
+
+scrollbarvertical sliderarrowinc:active
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 34px 68px 51px;
+}
+
+
+scrollbarhorizontal
+{
+	height: 17rem;
+	/*z-index: 100;*/
+}
+
+scrollbarhorizontal slidertrack
+{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 51px 51px 68px;
+}
+
+scrollbarhorizontal sliderbar
+{
+	min-width: 17rem;
+	background-decorator: image;
+	background-image: scrollbars.png 17px 51px 34px 68px;
+}
+
+scrollbarhorizontal sliderbar:hover
+{
+	background-decorator: image;
+	background-image: scrollbars.png 17px 85px 34px 102px;
+}
+
+scrollbarhorizontal sliderbar:active
+{
+	background-decorator: image;
+	background-image: scrollbars.png 17px 102px 34px 119px;
+}
+
+scrollbarhorizontal sliderarrowdec
+{
+	height: 17rem;
+	width: 17rem;
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 68px 17px 85px;
+}
+
+scrollbarhorizontal sliderarrowdec:hover
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 85px 17px 102px;
+}
+
+scrollbarhorizontal sliderarrowdec:active
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 102px 17px 119px;
+}
+
+scrollbarhorizontal sliderarrowinc
+{
+	height: 17rem;
+	width: 17rem;
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 68px 51px 85px;
+}
+
+scrollbarhorizontal sliderarrowinc:hover
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 85px 51px 102px;
+}
+
+scrollbarhorizontal sliderarrowinc:active
+{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 102px 51px 119px;
+}
+
+scrollbarcorner
+{
+	background-color: rgb(220,220,220);
+}
