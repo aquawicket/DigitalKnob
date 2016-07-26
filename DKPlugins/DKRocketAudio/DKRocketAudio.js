@@ -88,13 +88,15 @@ function DKRocketAudio_speaker()
 	
 	//toggle volume/mute
 	var src = DKWidget_GetAttribute("DKRocketAudio_speaker", "src");
-	DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
+	//DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
 	
 	if(src.indexOf("mute.png") != -1){
 		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/volume3.png");
+		DKAudio_UnMute();
 	}
 	else{
 		DKWidget_SetAttribute("DKRocketAudio_speaker", "src", "DKRocketAudio/mute.png");
+		DKAudio_Mute();
 	}
 }
 
