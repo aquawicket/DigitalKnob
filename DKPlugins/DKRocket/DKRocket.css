@@ -140,6 +140,29 @@ input.range sliderbar
 	background-image: rangebar.png 0px 0px 11px 21px;
 }
 
+/* Position Ranges */
+input.range.position
+{
+	width:107rem;
+	height:14rem;
+}
+
+input.range.position slidertrack
+{
+	height:8rem;
+	width:107rem;
+	margin-top:3rem;
+	background-decorator: image;
+	background-image: ../DKRocketAudio/position_track.png 0px 0px 107px 8px;
+}
+
+input.range.position sliderbar
+{
+	width:22rem;
+	height:14rem;
+	background-decorator: image;
+	background-image: ../DKRocketAudio/position.png 0px 0px 22px 14px;
+}
 
 /* Volume Ranges */
 input.range.volume
