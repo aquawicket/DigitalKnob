@@ -1243,10 +1243,17 @@ bool DKWidget::GetValue(DKElement* element, DKString& value)
 	
 	//Only try to get the form element of certain tags
 	if(samei(element->GetTagName().CString(), "select")){
-		//DKElementFormControl* ele = static_cast<DKElementFormControl*>(element);
 		DKElementFormControlSelect* ele = static_cast<DKElementFormControlSelect*>(element);
 		value = ele->GetValue().CString();
 		return true;
+	}
+
+	if(samei(element->GetTagName().CString(), "input")){
+		if(samei(element->GetAttribute("type")->Get<DKCString>().CString(), "range")){
+			DKElementFormControlInput* ele = static_cast<DKElementFormControlInput*>(element);
+			value = ele->GetValue().CString();
+			return true;
+		}	
 	}
 
 	if(GetAttribute(element, "value", value)){ return true; }

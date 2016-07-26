@@ -11,6 +11,7 @@ typedef Rocket::Core::Property DKProperty;
 typedef Rocket::Core::ElementList DKElementList;
 typedef Rocket::Controls::ElementFormControl DKElementFormControl;
 typedef Rocket::Controls::ElementFormControlSelect DKElementFormControlSelect;
+typedef Rocket::Controls::ElementFormControlInput DKElementFormControlInput;
 typedef Rocket::Core::String DKCString;
 
 ///////////////////////////////////////////
