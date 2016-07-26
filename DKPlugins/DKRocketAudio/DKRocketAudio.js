@@ -8,6 +8,8 @@ function DKRocketAudio_Init()
 	DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_speaker", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_volume", "change", DKRocketAudio_OnEvent);
+	
+	DKWidget_SetValue("DKRocketAudio_volume","128");
 }
 
 ////////////////////////////
