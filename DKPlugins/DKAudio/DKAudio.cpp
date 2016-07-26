@@ -91,3 +91,74 @@ void DKAudio::Resume(DKString& file)
 	}
 	DKLog("DKAudio::Resume(): No Resume funtion available \n", DKERROR);
 }
+
+/////////////////////
+void DKAudio::Mute()
+{
+	if(DKClass::HasFunc("DKSDLAudio::Mute")){
+		DKClass::CallFunc("DKSDLAudio::Mute");
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::Mute")){
+		DKClass::CallFunc("DKSDLWav::Mute");
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::Mute")){
+		DKClass::CallFunc("DKOSGAudio::Mute");
+		return;
+	}
+	DKLog("DKAudio::Mute(): No Mute funtion available \n", DKERROR);
+}
+
+//////////////////////
+void DKAudio::UnMute()
+{
+	if(DKClass::HasFunc("DKSDLAudio::UnMute")){
+		DKClass::CallFunc("DKSDLAudio::UnMute");
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::UnMute")){
+		DKClass::CallFunc("DKSDLWav::UnMute");
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::UnMute")){
+		DKClass::CallFunc("DKOSGAudio::UnMute");
+		return;
+	}
+	DKLog("DKAudio::UnMute(): No UnMute funtion available \n", DKERROR);
+}
+
+////////////////////////
+int DKAudio::GetVolume()
+{
+	if(DKClass::HasFunc("DKSDLAudio::GetVolume")){
+		return *static_cast<int*>(DKClass::CallFunc("DKSDLAudio::GetVolume"));
+	}
+	if(DKClass::HasFunc("DKSDLWav::GetVolume")){
+		return *static_cast<int*>(DKClass::CallFunc("DKSDLWav::GetVolume"));
+	}
+	if (DKClass::HasFunc("DKOSGAudio::GetVolume")) {
+		return *static_cast<int*>(DKClass::CallFunc("DKOSGAudio::GetVolume"));
+	}
+
+	DKLog("DKAudio::GetVolume(): No GetVolume funtion available \n", DKERROR);
+	return NULL;
+}
+
+////////////////////////////////////
+void DKAudio::SetVolume(int& volume)
+{
+	if(DKClass::HasFunc("DKSDLAudio::SetVolume")){
+		DKClass::CallFunc("DKSDLAudio::SetVolume", static_cast<void*>(&volume));
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::SetVolume")){
+		DKClass::CallFunc("DKSDLWav::SetVolume", static_cast<void*>(&volume));
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::SetVolume")) {
+		DKClass::CallFunc("DKOSGAudio::SetVolume", static_cast<void*>(&volume));
+		return;
+	}
+	DKLog("DKAudio::SetVolume(): No SetVolume funtion available \n", DKERROR);
+}

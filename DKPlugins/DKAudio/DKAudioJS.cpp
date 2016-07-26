@@ -10,6 +10,10 @@ void DKAudioJS::Init()
 	DKDuktape::AttachFunction("DKAudio_PlayMusic", DKAudioJS::PlayMusic, 1);
 	DKDuktape::AttachFunction("DKAudio_Pause", DKAudioJS::Pause, 1);
 	DKDuktape::AttachFunction("DKAudio_Resume", DKAudioJS::Resume, 1);
+	DKDuktape::AttachFunction("DKAudio_Mute", DKAudioJS::Mute, 0);
+	DKDuktape::AttachFunction("DKAudio_UnMute", DKAudioJS::UnMute, 0);
+	DKDuktape::AttachFunction("DKAudio_GetVolume", DKAudioJS::GetVolume, 0);
+	DKDuktape::AttachFunction("DKAudio_SetVolume", DKAudioJS::SetVolume, 1);
 }
 
 //////////////////////////////////////////
@@ -44,5 +48,34 @@ int DKAudioJS::Resume(duk_context* ctx)
 	return 1;
 }
 
+/////////////////////////////////////
+int DKAudioJS::Mute(duk_context* ctx)
+{
+	DKAudio::Mute();
+	return 1;
+}
+
+///////////////////////////////////////
+int DKAudioJS::UnMute(duk_context* ctx)
+{
+	DKAudio::Mute();
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKAudioJS::GetVolume(duk_context* ctx)
+{
+	int volume = DKAudio::GetVolume();
+	duk_push_int(ctx, volume);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKAudioJS::SetVolume(duk_context* ctx)
+{
+	int volume = duk_require_int(ctx, 0);
+	DKAudio::SetVolume(volume);
+	return 1;
+}
 
 #endif //USE_DKDuktape

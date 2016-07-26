@@ -15,12 +15,17 @@ void DKSDLAudio::Init()
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
 		DKLog("DKSDLAudio::Init(): could not load mixer \n",DKERROR);
 	}
+	volume = 128;
 
 	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLAudio::PlayMusic", &DKSDLAudio::PlayMusic, this);
 	DKClass::RegisterFunc("DKSDLAudio::Pause", &DKSDLAudio::Pause, this);
 	DKClass::RegisterFunc("DKSDLAudio::Resume", &DKSDLAudio::Resume, this);
-	//DKApp::AddLoopFunc("RENDER", &DKSDLAudio::Process, this);
+	DKClass::RegisterFunc("DKSDLAudio::Mute", &DKSDLAudio::Mute, this);
+	DKClass::RegisterFunc("DKSDLAudio::UnMute", &DKSDLAudio::UnMute, this);
+	DKClass::RegisterFunc("DKSDLAudio::GetVolume", &DKSDLAudio::GetVolume, this);
+	DKClass::RegisterFunc("DKSDLAudio::SetVolume", &DKSDLAudio::SetVolume, this);
+	DKApp::AppendLoopFunc(&DKSDLAudio::Process, this);
 }
 
 //////////////////////
@@ -58,8 +63,9 @@ void* DKSDLAudio::PlayMusic(void* data)
 	trk.file = path;
 	trk.snd = Mix_LoadMUS(path.c_str());
 	trk.position = 0;
-	tracks.push_back(trk);
+	lastTime = SDL_GetTicks();
 
+	//tracks.push_back(trk);
 	//Mix_Music *snd = Mix_LoadMUS(path.c_str());
 	if(!trk.snd){
 		DKLog("DKSDLAudio::PlayMusic(): could not load file \n", DKERROR);
@@ -90,8 +96,42 @@ void* DKSDLAudio::Resume(void* data)
 	return NULL;
 }
 
+//////////////////////////////////
+void* DKSDLAudio::Mute(void* data)
+{
+	Mix_VolumeMusic(0);
+	return NULL;
+}
+
+////////////////////////////////////
+void* DKSDLAudio::UnMute(void* data)
+{
+	Mix_VolumeMusic(volume);
+	return NULL;
+}
+
+///////////////////////////////////////
+void* DKSDLAudio::GetVolume(void* data)
+{
+	int val = Mix_VolumeMusic(-1);
+	return static_cast<void*>(new int(val));
+}
+
+///////////////////////////////////////
+void* DKSDLAudio::SetVolume(void* data)
+{
+	int path = *static_cast<int*>(data);
+	Mix_VolumeMusic(volume);
+	return NULL;
+}
+
 //////////////////////////
 void DKSDLAudio::Process()
 {
-	//Mix_PlayingMusic();
+	if(Mix_PlayingMusic()){
+		if(SDL_GetTicks() - lastTime > 1000){
+			trk.position = SDL_GetTicks() - lastTime;
+			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
+		}
+	}
 }

@@ -14,6 +14,10 @@ public:
 	static int PlayMusic(duk_context* ctx);
 	static int Pause(duk_context* ctx);
 	static int Resume(duk_context* ctx);
+	static int Mute(duk_context* ctx);
+	static int UnMute(duk_context* ctx);
+	static int GetVolume(duk_context* ctx);
+	static int SetVolume(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKAudioJS, true)

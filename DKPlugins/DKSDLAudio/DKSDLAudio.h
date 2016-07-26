@@ -24,9 +24,15 @@ public:
 	void* PlayMusic(void* data);
 	void* Pause(void* data);
 	void* Resume(void* data);
+	void* Mute(void* data);
+	void* UnMute(void* data);
+	void* GetVolume(void* data);
+	void* SetVolume(void* data);
 	void Process();
 
-	std::vector<track> tracks;
+	int volume;
+	track trk;
+	unsigned int lastTime;
 };
 
 
