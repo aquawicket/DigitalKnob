@@ -16,6 +16,7 @@ function DKRocketAudio_Init()
 function DKRocketAudio_End()
 {
 	DKClose("DKRocketAudio/DKRocketAudio.html");
+	DKClose("DKAudio");
 }
 
 /////////////////////////////////////

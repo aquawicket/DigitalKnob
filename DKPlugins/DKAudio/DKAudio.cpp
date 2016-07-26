@@ -20,6 +20,15 @@ void DKAudio::Init()
 	DKLog("DKAudio::Init(): No audio interface available \n", DKERROR);
 }
 
+///////////////////
+void DKAudio::End()
+{
+	DKClose("DKAudioJS");
+	DKClose("DKSDLAudio");
+	DKClose("DKSDLWav");
+	DKClose("DKOSGAudio");
+}
+
 ///////////////////////////////////////
 void DKAudio::PlaySound(DKString& file)
 {

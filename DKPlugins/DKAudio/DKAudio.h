@@ -8,7 +8,7 @@ class DKAudio : public DKObjectT<DKAudio>
 {
 public:
 	void Init();
-	void End(){};
+	void End();
 	static void PlaySound(DKString& file);
 	static void PlayMusic(DKString& file);
 	static void Pause(DKString& file);
