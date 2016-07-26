@@ -5,11 +5,9 @@ function DKRocketAudio_Init()
 {
 	DKCreate("DKRocketAudio/DKRocketAudio.html");
 	DKAddEvent("DKRocketAudio_playpause", "click", DKRocketAudio_OnEvent);
-	//DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
-	//DKAddEvent("DKRocketAudio_positiontrack", "click", DKRocketAudio_OnEvent);
+	DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_speaker", "click", DKRocketAudio_OnEvent);
-	//DKAddEvent("DKRocketAudio_volume", "click", DKRocketAudio_OnEvent);
-	//DKAddEvent("DKRocketAudio_volumetrack", "click", DKRocketAudio_OnEvent);
+	DKAddEvent("DKRocketAudio_volume", "change", DKRocketAudio_OnEvent);
 }
 
 ////////////////////////////
@@ -28,11 +26,12 @@ function DKRocketAudio_OnEvent(event)
 	if(DK_Id(event, "DKRocketAudio_position")){
 		DKRocketAudio_position();
 	}
-	if(DK_Id(event, "DKRocketAudio_speaker", "click")){
+	if(DK_Id(event, "DKRocketAudio_speaker")){
 		DKRocketAudio_speaker();
 	}
-	if(DK_Id(event, "DKRocketAudio_volume", "click")){
-		DKRocketAudio_volume();
+	if(DK_Id(event, "DKRocketAudio_volume")){
+		var volume = DKWidget_GetValue("DKRocketAudio_volume");
+		DKRocketAudio_volume(volume);
 	}
 }
 
@@ -67,13 +66,7 @@ function DKRocketAudio_playpause()
 /////////////////////////////////
 function DKRocketAudio_position()
 {
-	//DKLog("DKRocketAudio_position() \n",DKDEBUG);
-}
-
-//////////////////////////////////////
-function DKRocketAudio_positiontrack()
-{
-	//DKLog("DKRocketAudio_positiontrack() \n",DKDEBUG);
+	DKLog("DKRocketAudio_position() \n",DKDEBUG);
 }
 
 ////////////////////////////////
@@ -95,15 +88,10 @@ function DKRocketAudio_speaker()
 	}
 }
 
-///////////////////////////////
-function DKRocketAudio_volume()
+/////////////////////////////////////
+function DKRocketAudio_volume(volume)
 {
-	//DKLog("DKRocketAudio_volume() \n",DKDEBUG);
+	DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
 }
 
-////////////////////////////////////
-function DKRocketAudio_volumetrack()
-{
-	//DKLog("DKRocketAudio_volumetrack() \n",DKDEBUG);
-}
 
