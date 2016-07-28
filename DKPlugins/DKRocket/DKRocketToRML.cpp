@@ -68,6 +68,7 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	DKLog(rml+"\n",DKINFO);
 	DKLog("\n##############################################\n\n",DKINFO);
 
+	//TODO - this needs to exsist in the DOM, so post process it after it's added.
 	/*
 	Rocket::Core::ElementList aElements;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, doc, "a");
