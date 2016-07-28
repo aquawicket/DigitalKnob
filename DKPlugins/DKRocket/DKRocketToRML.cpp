@@ -7,36 +7,22 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
+	if(!has(rml,"html")){ rml = "<html>\n"+rml+"</html>"; }
+	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
 	xml.RemoveNodes("//meta");  //Rocket doesn't like <meta> tags
-
-	if(!xml.FindNode("//head")){
-		DKLog("No head tag\n", DKERROR);
-	}
-	if(!xml.FindNode("//body")){
-		DKLog("No body tag\n", DKERROR);
-	}
+	if(!xml.FindNode("//head")){ DKLog("No head tag\n", DKERROR); }
+	if(!xml.FindNode("//body")){ DKLog("No body tag\n", DKERROR); }
 
 	xml.PrependNode("/head","link");
 	xml.SetAttributes("/head/link[1]","rel","stylesheet");
-	xml.SetAttributes("/head/link[1]","type","text/css");
+	xml.SetAttributes("/head/link[1]","type","text/rcss");
 	xml.SetAttributes("/head/link[1]","href","DKRocket/DKRocket.css");
 
-	//xml.AppendNode("/head","link");
-	//xml.SetAttributes("/head/link[last()]","rel","stylesheet");
-	//xml.SetAttributes("/head/link[last()]","type","text/css");
-	//xml.SetAttributes("/head/link[last()]","href","DKRocket/DK.css");
-
 	xml.SaveDocumentToString(rml);
-
-	if(!has(rml,"html")){
-		rml = "<html>\n"+rml+"</html>";
-	}
-
-	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
 
 	HtmlToRml(rml, rml);
 	return true;
