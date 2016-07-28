@@ -12,6 +12,10 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	//Rocket doesn't like <meta> tags
 	replace(rml, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");
 
+	//if(!has(rml,"html")){
+	//	rml = "<html>"+rml+"</html>";
+	//}
+
 	//Add DKRocket.css
 	replace(rml, "<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>",
 					"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>\n"
@@ -22,6 +26,9 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 
 	HtmlToRml(rml, rml);
 
+	DKLog("\n#################### HTML ####################\n",DKINFO);
+	DKLog(rml+"\n",DKINFO);
+	DKLog("\n##############################################\n\n",DKINFO);
 	return true;
 }
 
