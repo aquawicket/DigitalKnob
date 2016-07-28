@@ -1,12 +1,20 @@
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
-html
+/*html
 {
 	visibility:hidden;
 }
+*/
 
-div, option, img, select, dataselect, input, textarea, button
+body{
+	font-family: "Times New Roman";
+	color: black;
+	margin: 8px;
+	font-size: 16px;
+}
+
+html, body, div, option, img, select, dataselect, input, textarea, button
 {
 	display: block;
 }

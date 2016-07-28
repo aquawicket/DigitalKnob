@@ -14,8 +14,9 @@ body{
 	margin: 0px;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	color: black;
+	/*color: black;
 	display: block;
+	*/
 }
 textarea
 {
