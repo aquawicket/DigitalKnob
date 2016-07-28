@@ -390,7 +390,7 @@ bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
 		//TODO - rebuild options string for <select> elements
 	}
 
-	string = xml.GetFullNode("//*[@id=\""+id+"\"]");
+	if(!xml.GetFullNode("//*[@id=\""+id+"\"]", string)){ return false; } 
 	return true;
 }
 
