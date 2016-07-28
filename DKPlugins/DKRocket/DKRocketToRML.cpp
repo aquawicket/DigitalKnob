@@ -14,8 +14,14 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
 	//xml.RemoveNodes("//meta");  //Rocket doesn't like <meta> tags
-	if(!xml.FindNode("//head")){ DKLog("No head tag\n", DKERROR); }
-	if(!xml.FindNode("//body")){ DKLog("No body tag\n", DKERROR); }
+	if(!xml.FindNode("//head")){
+		xml.PrependNode("//html", "head");
+	}
+	if (!xml.FindNode("//body")) {
+		DKLog("No body tag\n", DKERROR);
+		xml.PrependNode("//html", "body");
+		//todo, we need to move the rest of the content into the body node.
+	}
 
 	xml.PrependNode("//head","link");
 	xml.SetAttributes("//head/link[1]","rel","stylesheet");
