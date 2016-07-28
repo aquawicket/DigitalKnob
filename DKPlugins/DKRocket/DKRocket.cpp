@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DKRocket.h"
+#include "DKRocketToRML.h"
 #include "DKWindow.h"
 #include <Rocket/Debugger/Debugger.h>
 
@@ -11,7 +12,6 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 void DKRocket::Init()
 {
 	DKCreate("DKRocketJS");
-	//initialized = false;
 	document = NULL;
 
 	if(!dkRocketFile){ 
@@ -90,27 +90,28 @@ bool DKRocket::LoadGui(const DKString& file)
 	//// Prepair the document for rocket
 	DKString filename;
 	DKFile::GetFileName(path,filename);
-	DKString filedata;
-	DKFile::FileToString(path, filedata);
+	DKString html;
+	DKFile::FileToString(path, html);
 
+	DKString rml;
+	DKRocketToRML::toRml(html, rml);
 	//Rocket doesn't like <!DOCTYPE html> tags
-	replace(filedata, "<!DOCTYPE html>", "");
-	replace(filedata, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");
+	//replace(rml, "<!DOCTYPE html>", "");
+	//replace(rml, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");
 	
 	//Add DKRocket.css
-	replace(filedata, "<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>",
-					"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>\n"
-					"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DKRocket.css\"></link>");
+	//replace(rml, "<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>",
+	//				"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>\n"
+	//				"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DKRocket.css\"></link>");
 	
 	//Convert style sheets to rcss
-	replace(filedata, "type=\"text/css\"", "type=\"text/rcss\""); 
+	//replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); 
 
 	//Rocket needs <rml> tags
 	DKString newdata = "<rml>\n";
-	newdata += filedata;
+	newdata += rml;
 	newdata += "\n</rml>";
 
-	//newdata = "<rml><head><link rel=\"stylesheet\" type=\"text/rcss\" href=\"DKRocket/DK.css\"></link><link rel=\"stylesheet\" type=\"text/rcss\" href=\"DKRocket/DKRocket.css\"></link></head><body id=\"body\"></body></rml>";
 	// Finnish loading the document
 	document = context->LoadDocumentFromMemory(newdata.c_str());
 	if(!document){
