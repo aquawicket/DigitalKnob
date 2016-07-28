@@ -292,7 +292,12 @@ bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
 {
 	pugi::xml_node parent = doc.select_single_node(xpath.c_str()).node();
-	parent.insert_child_before(type.c_str(), parent.first_child());
+	if(parent.first_child().empty()){
+		parent.append_child(type.c_str());
+	}
+	else{
+		parent.insert_child_before(type.c_str(), parent.first_child());
+	}
 	return true;
 }
 
