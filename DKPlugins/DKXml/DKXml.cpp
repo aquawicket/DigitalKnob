@@ -78,7 +78,7 @@ bool DKXml::SaveDocument(DKString& file)
 bool DKXml::SaveDocumentToString(DKString& string)
 {
 	std::ostringstream ss; 
-	doc.save(ss); 
+	doc.save(ss, "\t", pugi::format_default | pugi::format_no_declaration | pugi::format_no_escapes); 
 	string = ss.str();
 	return true;
 }
@@ -106,15 +106,15 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 		DKString file = node.node().attribute("id").value();
 		
 		//FIXME - these should not be hard coded.  
-		if(same(file,"DKDev.html")){ continue; }
-		if(same(file,"DKEditor.html")){ continue; }
-		if(same(file,"DKMenuRight.html")){ continue; }
-		if(same(file,"DKMenuRightApp.html")){ continue; }
-		if(same(file,"DKMenuRightEdit.html")){ continue; }
-		if(same(file,"DKMenuRightTree.html")){ continue; }
-		if(same(file,"DKMenuRightWeb.html")){ continue; }
-		if(same(file,"DKAutomate.html")){ continue; }
-		if(same(file,"DKAutomate2.html")){ continue; }
+		//if(same(file,"DKDev.html")){ continue; }
+		//if(same(file,"DKEditor.html")){ continue; }
+		//if(same(file,"DKMenuRight.html")){ continue; }
+		//if(same(file,"DKMenuRightApp.html")){ continue; }
+		//if(same(file,"DKMenuRightEdit.html")){ continue; }
+		//if(same(file,"DKMenuRightTree.html")){ continue; }
+		//if(same(file,"DKMenuRightWeb.html")){ continue; }
+		//if(same(file,"DKAutomate.html")){ continue; }
+		//if(same(file,"DKAutomate2.html")){ continue; }
 
 		DKString filepath = path+"/"+file;
 		sub.SaveDocument(filepath);

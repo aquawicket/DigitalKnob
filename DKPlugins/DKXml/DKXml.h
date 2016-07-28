@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKXml_H
 #define DKXml_H
-
+#include "DKClass.h"
 #include "pugixml.hpp"
 
 /////////////////////////////////////

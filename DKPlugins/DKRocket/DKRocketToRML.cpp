@@ -1,20 +1,26 @@
 #include "DKRockettoRML.h"
+#include "DKXml.h"
 #include "DKLog.h"
 
 ///////////////////////////////////////////////////////////////////
 bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
+	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
-	//Rocket doesn't like <!DOCTYPE html> tags
-	replace(rml, "<!DOCTYPE html>", "");
+	DKXml xml;
+	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
-	//Rocket doesn't like <meta> tags
-	replace(rml, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");
+	xml.RemoveNodes("meta");  //Rocket doesn't like <meta> tags
 
-	//if(!has(rml,"html")){
-	//	rml = "<html>"+rml+"</html>";
-	//}
+	xml.SaveDocumentToString(rml);
+
+	if(!has(rml,"body")){
+		rml = "<body>\n"+rml+"</body>";
+	}
+	if(!has(rml,"html")){
+		rml = "<html>\n"+rml+"</html>";
+	}
 
 	//Add DKRocket.css
 	replace(rml, "<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>",
@@ -25,10 +31,6 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); 
 
 	HtmlToRml(rml, rml);
-
-	DKLog("\n#################### HTML ####################\n",DKINFO);
-	DKLog(rml+"\n",DKINFO);
-	DKLog("\n##############################################\n\n",DKINFO);
 	return true;
 }
 
@@ -60,5 +62,9 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 		DKLog("Error: in HtmlToRml()\n", DKERROR);
 		return false;
 	}
+
+	DKLog("\n##################### RML ####################\n",DKINFO);
+	DKLog(rml+"\n",DKINFO);
+	DKLog("\n##############################################\n\n",DKINFO);
 	return true;
 }
