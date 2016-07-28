@@ -28,6 +28,7 @@ public:
 	bool GetChildAttribute(const DKString& xpath, int num, const DKString& attrib, DKString& string);
 	
 	bool AppendNode(const DKString& xpath, const DKString& type);
+	bool PrependNode(const DKString& xpath, const DKString& type);
 	bool RemoveNodes(const DKString& xpath);
 	bool RemoveAttributes(const DKString& xpath, const DKString& attrib);
 	bool RemoveInners(const DKString& xpath);

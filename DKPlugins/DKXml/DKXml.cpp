@@ -283,9 +283,16 @@ bool DKXml::SetAttributes(const DKString& xpath, const DKString& attrib, const D
 ///////////////////////////////////////////////////////////////////
 bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 {
-	//TODO
 	pugi::xml_node parent = doc.select_single_node(xpath.c_str()).node();
 	parent.append_child(type.c_str());
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////
+bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
+{
+	pugi::xml_node parent = doc.select_single_node(xpath.c_str()).node();
+	parent.insert_child_before(type.c_str(), parent.first_child());
 	return true;
 }
 

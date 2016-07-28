@@ -20,10 +20,10 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 		DKLog("No body tag\n", DKERROR);
 	}
 
-	xml.AppendNode("/head","link");
-	xml.SetAttributes("/head/link[last()]","rel","stylesheet");
-	xml.SetAttributes("/head/link[last()]","type","text/css");
-	xml.SetAttributes("/head/link[last()]","href","DKRocket/DKRocket.css");
+	xml.PrependNode("/head","link");
+	xml.SetAttributes("/head/link[1]","rel","stylesheet");
+	xml.SetAttributes("/head/link[1]","type","text/css");
+	xml.SetAttributes("/head/link[1]","href","DKRocket/DKRocket.css");
 
 	//xml.AppendNode("/head","link");
 	//xml.SetAttributes("/head/link[last()]","rel","stylesheet");
