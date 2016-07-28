@@ -1,1 +1,1 @@
-DKCreate("DKSDLRocket");
+DKCreate("DKRocket");
