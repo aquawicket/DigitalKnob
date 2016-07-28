@@ -1,8 +1,8 @@
 #include "DKRockettoRML.h"
 #include "DKLog.h"
 
-//////////////////////////////////////////////////////////////
-bool DKRocketToRML::toRml(const DKString& html, DKString& rml)
+///////////////////////////////////////////////////////////////////
+bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
 
@@ -19,6 +19,16 @@ bool DKRocketToRML::toRml(const DKString& html, DKString& rml)
 
 	//Convert style sheets to rcss
 	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); 
+
+	HtmlToRml(rml, rml);
+
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////
+bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
+{
+	rml = html;
 
 	// :rgba(r,g,b,a)  <- convert a to 0-255
 	size_t end = 0;

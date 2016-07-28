@@ -104,7 +104,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 
 	//Prep the string into rocket compatible code
 	DKString rml;
-	if(!DKRocketToRML::toRml(html, rml)){
+	if(!DKRocketToRML::HtmlToRml(html, rml)){
 		return false;
 	}
 
