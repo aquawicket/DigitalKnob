@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DKWidget.h"
+#include "DKRocketToRML.h"
 #include "DKThread.h"
 #include "DKFile.h"
 #include "DKEvent.h"
@@ -89,20 +90,23 @@ bool DKWidget::CreateWidget(const DKString& file)
 	DKString id;
 	DKFile::GetFileName(file, id);
 	DKString path = file;
-	DKString string;
+	DKString html;
 	if(DKFile::VerifyPath(path)){ 
 		DKString file_path;
 		DKFile::GetFilePath(path, file_path);
-		DKFile::FileToString(path, string); //Convert file to a string
+		DKFile::FileToString(path, html); //Convert file to a string
 		//DKAssets::AppendDataPath(file_path); //If this file's path is not in the datapath list, add it
 	}
 	else{
 		//blank widget
-		string  = "<div id=\""+id+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
+		html = "<div id=\""+id+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 
 	//Prep the string into rocket compatible code
-	if(!HtmlToRml(string)){ return false; }
+	DKString rml;
+	if(!DKRocketToRML::toRml(html, rml)){
+		return false;
+	}
 
 	//Parse the sting into an element
 	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
@@ -115,7 +119,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 		DKLog("DKWidget::CreateWidget("+file+"): could not find firstChild \n", DKERROR);
 		return false;
 	}
-	SetInnerHtml(temp, string);
+	SetInnerHtml(temp, rml);
 
 	DKElement* firstChild = temp->GetFirstChild();
 	if(!firstChild){
@@ -212,46 +216,6 @@ void DKWidget::Hyperlink(DKEvent* event)
 	GetAttribute(aElement, "href", value);
 	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
 	DKUtil::Run(value);
-}
-
-////////////////////////////////////////////
-bool DKWidget::HtmlToRml(DKString& filedata)
-{
-	//We have the html file in a string, lets make adjustments for rml
-    
-	//If we have a body, get the inside of the body (strip the outside)
-	//TODO - convert the body into a div
-	int body_open = filedata.find("<body>",0);
-	if(body_open > -1){
-		int body_close = filedata.find("</body>",0);
-		filedata = filedata.substr(body_open+6, body_close - (body_open+6));
-	}
-
-	// :rgba(r,g,b,a)  <- convert a to 0-255
-	size_t end = 0;
-	while(has(filedata,":rgba(")){
-		size_t temp = filedata.find(":rgba(",end);
-        if(temp == std::string::npos){return true;}
-		size_t start = filedata.find(",",temp);
-		start = filedata.find(",",start+1);
-		start = filedata.find(",",start+1);
-		end = filedata.find(")",start);
-		if(end == std::string::npos){end = filedata.size();}
-
-		DKString out = filedata.substr(start+1, end-start-1);
-		float var = toFloat(out);
-
-		if(var){
-			int final = (int)(var * 255);
-			filedata.replace(start+1,end-start-1,toString(final));   
-			//return true;
-			continue;
-		}
-		DKLog("Error: in HtmlToRml()\n", DKERROR);
-		return false;
-	}
-
-	return true;
 }
 
 /////////////////////////////

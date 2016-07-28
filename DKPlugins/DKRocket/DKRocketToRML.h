@@ -7,7 +7,7 @@
 class DKRocketToRML
 {
 public:
-	static void toRml(const DKString& html, DKString& rml);
+	static bool toRml(const DKString& html, DKString& rml);
 };
 
 #endif //DKRocketToRML_H

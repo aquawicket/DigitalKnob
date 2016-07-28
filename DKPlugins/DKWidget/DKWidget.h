@@ -31,7 +31,6 @@ protected:
 	
 	///////////  Helper functions  //////////////////
 public:
-	static bool HtmlToRml(DKString& filedata);
 	void ResizeIframe(DKEvent* event);
 	void Hyperlink(DKEvent* event);
 	
