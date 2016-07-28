@@ -335,7 +335,6 @@ MESSAGE("Copying DKPlugins/DKApp/ to App...")
 
 ## copy recursivly without overwrite
 DKCOPY(${DKPLUGINS}/DKApp ${DKPROJECT} FALSE)
-DKCOPY(${DKPLUGINS}/DKApp/assets/index.html ${DKPROJECT}/assets/index.html TRUE)
 
 ### Include all source files from the app folder
 FILE(GLOB App_SRC 
