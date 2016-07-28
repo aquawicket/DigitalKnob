@@ -94,7 +94,8 @@ bool DKRocket::LoadGui(const DKString& file)
 	DKFile::FileToString(path, html);
 
 	DKString rml;
-	DKRocketToRML::IndexToRml(html, rml);
+	DKRocketToRML dkRocketToRml;
+	dkRocketToRml.IndexToRml(html, rml);
 	//Rocket doesn't like <!DOCTYPE html> tags
 	//replace(rml, "<!DOCTYPE html>", "");
 	//replace(rml, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");

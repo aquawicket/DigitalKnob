@@ -1,4 +1,5 @@
 #include "DKRockettoRML.h"
+#include "DKRocket.h"
 #include "DKXml.h"
 #include "DKLog.h"
 
@@ -66,5 +67,34 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	DKLog("\n##################### RML ####################\n",DKINFO);
 	DKLog(rml+"\n",DKINFO);
 	DKLog("\n##############################################\n\n",DKINFO);
+
+	/*
+	Rocket::Core::ElementList aElements;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, doc, "a");
+	for (unsigned int i = 0; i<aElements.size(); ++i) {
+		DKString id = aElements[i]->GetId().CString();
+		DKString value;
+		GetAttribute(aElements[i], "href", value);
+		if (!value.empty()) {
+			SetProperty(aElements[i], "color", "rgb(0,0,255)");
+			SetProperty(aElements[i], "text-decoration", "underline");
+			AddEvent(id, "click", &DKWidget::Hyperlink, this);
+		}
+	}
+	*/
+
 	return true;
+}
+
+/////////////////////////////////////////////
+void DKRocketToRML::Hyperlink(DKEvent* event)
+{
+	DKString id = event->GetId();
+	DKRocket* dkRocket = DKRocket::Get("");
+	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
+
+	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
+	DKLog("DKWidget::Hyperlink: " + value + "\n", DKINFO);
+	DKUtil::Run(value);
 }
