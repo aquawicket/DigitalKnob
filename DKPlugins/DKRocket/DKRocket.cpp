@@ -96,17 +96,6 @@ bool DKRocket::LoadGui(const DKString& file)
 	DKString rml;
 	DKRocketToRML dkRocketToRml;
 	dkRocketToRml.IndexToRml(html, rml);
-	//Rocket doesn't like <!DOCTYPE html> tags
-	//replace(rml, "<!DOCTYPE html>", "");
-	//replace(rml, "<meta name=\"referrer\" content=\"no-referrer\"></meta>", "");
-	
-	//Add DKRocket.css
-	//replace(rml, "<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>",
-	//				"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DK.css\"></link>\n"
-	//				"<link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DKRocket.css\"></link>");
-	
-	//Convert style sheets to rcss
-	//replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); 
 
 	//Rocket needs <rml> tags
 	DKString newdata = "<rml>\n";
@@ -120,7 +109,7 @@ bool DKRocket::LoadGui(const DKString& file)
 		DKLog("Could not load "+path,DKERROR);
 	}
 
-	document->SetAttribute("id","body");
+	//document->SetAttribute("id","body");
 	document->Show();
 	document->RemoveReference();
 
