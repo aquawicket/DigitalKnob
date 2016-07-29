@@ -10,12 +10,10 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 	replace(rml, "<html>", "");
 	replace(rml, "</html>", "");
-	//replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
-	//xml.RemoveNodes("//meta");  //Rocket doesn't like <meta> tags
 	if(!xml.FindNode("//head")){
 		xml.PrependNode("/", "head");
 	}
