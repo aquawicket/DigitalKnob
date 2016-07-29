@@ -80,25 +80,13 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 			DKLog("value="+value+"\n", DKINFO);
 			DKString string = "color:rgb(0,0,255);text-decoration:underline;";
 			xml.SetAttribute(nodes[i].node(),"style",string);
+			
+			//TODO - this needs to exist in the DOM, so post process it after it's added.
+			//AddEvent(id, "click", &DKWidget::Hyperlink, this);
 		}
 	}
 	xml.SaveDocumentToString(rml);
-
-	//TODO - this needs to exsist in the DOM, so post process it after it's added.
-	/*
-	Rocket::Core::ElementList aElements;
-	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, doc, "a");
-	for (unsigned int i = 0; i<aElements.size(); ++i) {
-		DKString id = aElements[i]->GetId().CString();
-		DKString value;
-		GetAttribute(aElements[i], "href", value);
-		if (!value.empty()) {
-			SetProperty(aElements[i], "color", "rgb(0,0,255)");
-			SetProperty(aElements[i], "text-decoration", "underline");
-			AddEvent(id, "click", &DKWidget::Hyperlink, this);
-		}
-	}
-	*/
+	//////////////////////////////////////////////////////
 
 	DKLog("\n##################### RML ####################\n",DKINFO);
 	DKLog(rml+"\n",DKINFO);
