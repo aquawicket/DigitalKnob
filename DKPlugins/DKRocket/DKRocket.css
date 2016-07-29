@@ -1,6 +1,10 @@
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
+html{
+	height:100%;
+	font-size: 1.0px;
+}
 
 body{
 	font-family: "Times New Roman";
