@@ -4,7 +4,11 @@
 top.document.body.style.backgroundColor = "rgb(200,200,200)";
 document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
-document.body.style.fontSize = "13rem";
+document.body.id = "body";
+document.body.style.fontSize = "13em";
+document.documentElement.id = "html";
+document.documentElement.style.fontSize = "1.0px";
+
 
 var mouseX;
 var mouseY;
