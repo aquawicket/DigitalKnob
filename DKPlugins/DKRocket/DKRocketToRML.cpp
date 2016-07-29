@@ -10,7 +10,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 	replace(rml, "<html>", "");
 	replace(rml, "</html>", "");
-	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
+	//replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
@@ -27,7 +27,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 
 	xml.PrependNode("//head","link");
 	xml.SetAttributes("//head/link[1]","rel","stylesheet");
-	xml.SetAttributes("//head/link[1]","type","text/rcss");
+	xml.SetAttributes("//head/link[1]","type","text/css");
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
 
 	xml.PrependNode("//body", "html");
