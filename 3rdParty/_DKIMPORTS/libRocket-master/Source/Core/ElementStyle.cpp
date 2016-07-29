@@ -357,9 +357,10 @@ float ElementStyle::ResolveProperty(const Property* property, float base_value)
 		else if (property->unit & Property::EM)
 			return property->value.Get< float >() * ElementUtilities::GetFontSize(element);
 		else if (property->unit & Property::REM){
-			Rocket::Core::Element* html = element->GetElementById("html");
-			if(html){
-				return property->value.Get< float >() * ElementUtilities::GetFontSize(html);
+			Rocket::Core::ElementList elements;
+			element->GetOwnerDocument()->GetElementsByTagName(elements,"html");
+			if(elements.size()){
+				return property->value.Get< float >() * ElementUtilities::GetFontSize(elements[0]); //html node
 			}
 			else{
 				return property->value.Get< float >() * ElementUtilities::GetFontSize(element->GetOwnerDocument());
@@ -451,9 +452,10 @@ float ElementStyle::ResolveProperty(const String& name, float base_value)
 			if (name == FONT_SIZE)
 				return property->value.Get< float >() * base_value;
 			else{
-				Rocket::Core::Element* html = element->GetElementById("html");
-				if(html){
-					return property->value.Get< float >() * ElementUtilities::GetFontSize(html);
+				Rocket::Core::ElementList elements;
+				element->GetOwnerDocument()->GetElementsByTagName(elements,"html");
+				if(elements.size()){
+					return property->value.Get< float >() * ElementUtilities::GetFontSize(elements[0]); //html node
 				}
 				else{
 					return property->value.Get< float >() * ElementUtilities::GetFontSize(element->GetOwnerDocument());
