@@ -65,7 +65,7 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	}
 
 	
-
+	/*
 	////////////////////////////////////////////////////////
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
@@ -87,6 +87,7 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	}
 	xml.SaveDocumentToString(rml);
 	//////////////////////////////////////////////////////
+	*/
 
 	DKLog("\n##################### RML ####################\n",DKINFO);
 	DKLog(rml+"\n",DKINFO);
