@@ -30,7 +30,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	//Rocket cannot read nodes outside of the body, so add an html node we can work with.
 	xml.PrependNode("//body", "html"); 
 
-	//xml.SetAttributes("//body","id","body");
+	xml.SetAttributes("//body","id","body");
 	xml.SetAttributes("//html","id","html");
 
 	xml.SaveDocumentToString(rml);
