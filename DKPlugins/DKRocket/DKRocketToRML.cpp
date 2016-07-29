@@ -64,9 +64,25 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 		return false;
 	}
 
-	DKLog("\n##################### RML ####################\n",DKINFO);
-	DKLog(rml+"\n",DKINFO);
-	DKLog("\n##############################################\n\n",DKINFO);
+	
+
+	////////////////////////////////////////////////////////
+	DKXml xml;
+	if(!xml.LoadDocumentFromString(rml)){ return false; }
+	
+	DKXmlNodes nodes;
+	xml.GetNodes("//a", nodes);
+	for(unsigned int i = 0; i<nodes.size(); ++i){
+		DKLog(DKString(nodes[i].node().name())+"\n", DKINFO);
+		DKString value;
+		xml.GetAttribute(nodes[i].node(),"href",value);
+		if(!value.empty()){
+			DKLog("value="+value+"\n", DKINFO);
+			DKString string = "color:rgb(0,0,255);text-decoration:underline;";
+			xml.SetAttribute(nodes[i].node(),"style",string);
+		}
+	}
+	xml.SaveDocumentToString(rml);
 
 	//TODO - this needs to exsist in the DOM, so post process it after it's added.
 	/*
@@ -84,6 +100,9 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	}
 	*/
 
+	DKLog("\n##################### RML ####################\n",DKINFO);
+	DKLog(rml+"\n",DKINFO);
+	DKLog("\n##############################################\n\n",DKINFO);
 	return true;
 }
 

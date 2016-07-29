@@ -86,13 +86,13 @@ bool DKXml::SaveDocumentToString(DKString& string)
 //////////////////////////////////////////////////////////////////
 bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	for(pugi::xpath_node_set::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
+	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
         pugi::xpath_node node = *it;
 
 		//TODO - removed nested .html nodes
@@ -128,25 +128,46 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 ///////////////////////////////////////////
 bool DKXml::FindNode(const DKString& xpath)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
+	return true;
+}
 
+///////////////////////////////////////////////////////////
+bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
+{
+	node = doc.select_single_node(xpath.c_str()).node();
+	if(node.empty()){
+		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		return false;
+	}
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
+{
+	nodes = doc.select_nodes(xpath.c_str());
+	if(nodes.empty()){
+		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		return false;
+	}
 	return true;
 }
 
 ////////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	for(pugi::xpath_node_set::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
+	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
         pugi::xpath_node node = *it;
 		arry.push_back(node.node().name());
     }
@@ -156,13 +177,13 @@ bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 //////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttributeValues(const DKString& xpath, const DKString& attrib, DKStringArray& arry)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	for(pugi::xpath_node_set::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
+	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
         pugi::xpath_node node = *it;
 		arry.push_back(node.node().attribute(attrib.c_str()).value());
     }
@@ -172,7 +193,7 @@ bool DKXml::GetAttributeValues(const DKString& xpath, const DKString& attrib, DK
 ////////////////////////////////////////////////////////////////
 bool DKXml::GetFullNode(const DKString& xpath, DKString& string)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
@@ -190,7 +211,7 @@ bool DKXml::GetFullNode(const DKString& xpath, DKString& string)
 /////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
@@ -206,7 +227,7 @@ bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
 ///////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetChildNodeValue(const DKString& xpath, int num, DKString& string)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
@@ -229,7 +250,7 @@ bool DKXml::GetChildNodeValue(const DKString& xpath, int num, DKString& string)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetChildAttribute(const DKString& xpath, int num, const DKString& attrib, DKString& string)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
@@ -248,29 +269,45 @@ bool DKXml::GetChildAttribute(const DKString& xpath, int num, const DKString& at
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
+bool DKXml::GetAttribute(const DKXmlNode& node, const DKString& attrib, DKString& string)
+{
+	string = node.attribute(attrib.c_str()).value();
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttribute(const DKString& xpath, const DKString& attrib, DKString& string)
 {
-	pugi::xml_node node = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	DKString value;
-	value = node.attribute(attrib.c_str()).value();
+	string = node.attribute(attrib.c_str()).value();
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+bool DKXml::SetAttribute(DKXmlNode& node, const DKString& attrib, const DKString& value)
+{
+	if(!node.attribute(attrib.c_str()).as_bool()){
+		node.append_attribute(attrib.c_str());
+	}
+	node.attribute(attrib.c_str()).set_value(value.c_str());
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::SetAttributes(const DKString& xpath, const DKString& attrib, const DKString& value)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	for(pugi::xpath_node_set::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
+	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
         pugi::xpath_node node = *it;
 		if(!node.node().attribute(attrib.c_str()).as_bool()){
 			node.node().append_attribute(attrib.c_str());
@@ -283,7 +320,7 @@ bool DKXml::SetAttributes(const DKString& xpath, const DKString& attrib, const D
 ///////////////////////////////////////////////////////////////////
 bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 {
-	pugi::xml_node parent = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode parent = doc.select_single_node(xpath.c_str()).node();
 	parent.append_child(type.c_str());
 	return true;
 }
@@ -291,7 +328,7 @@ bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 ////////////////////////////////////////////////////////////////////
 bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
 {
-	pugi::xml_node parent = doc.select_single_node(xpath.c_str()).node();
+	DKXmlNode parent = doc.select_single_node(xpath.c_str()).node();
 	if(parent.first_child().empty()){
 		parent.append_child(type.c_str());
 	}
@@ -304,14 +341,14 @@ bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
 //////////////////////////////////////////////
 bool DKXml::RemoveNodes(const DKString& xpath)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
 	while(nodes.size()){
-		pugi::xpath_node_set::const_iterator it = nodes.begin();
+		DKXmlNodes::const_iterator it = nodes.begin();
 		pugi::xpath_node node = *it;
 		node.node().parent().remove_child(node.node());
 		nodes = doc.select_nodes(xpath.c_str());
@@ -322,13 +359,13 @@ bool DKXml::RemoveNodes(const DKString& xpath)
 ///////////////////////////////////////////////////////////////////////////
 bool DKXml::RemoveAttributes(const DKString& xpath, const DKString& attrib)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
 	}
 
-	for(pugi::xpath_node_set::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
+	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
         pugi::xpath_node node = *it;
 		node.node().remove_attribute(attrib.c_str());
     }
@@ -338,7 +375,7 @@ bool DKXml::RemoveAttributes(const DKString& xpath, const DKString& attrib)
 ///////////////////////////////////////////////
 bool DKXml::RemoveInners(const DKString& xpath)
 {
-	pugi::xpath_node_set nodes = doc.select_nodes(xpath.c_str());
+	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
 		return false;
@@ -348,7 +385,7 @@ bool DKXml::RemoveInners(const DKString& xpath)
 	return false;
 
 	while(nodes.size()){
-		pugi::xpath_node_set::const_iterator it = nodes.begin();
+		DKXmlNodes::const_iterator it = nodes.begin();
 		pugi::xpath_node node = *it;
 		//node.node().remove_child(???);
 		nodes = doc.select_nodes(xpath.c_str());
