@@ -8,7 +8,8 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
-	if(!has(rml,"html")){ rml = "<html>\n"+rml+"</html>"; }
+	replace(rml, "<html>", "");
+	replace(rml, "</html>", "");
 	replace(rml, "type=\"text/css\"", "type=\"text/rcss\""); //Convert style sheets to rcss
 
 	DKXml xml;
@@ -16,7 +17,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 
 	//xml.RemoveNodes("//meta");  //Rocket doesn't like <meta> tags
 	if(!xml.FindNode("//head")){
-		xml.PrependNode("//html", "head");
+		xml.PrependNode("/", "head");
 	}
 	if (!xml.FindNode("//body")) {
 		DKLog("No body tag\n", DKERROR);
@@ -28,6 +29,8 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	xml.SetAttributes("//head/link[1]","rel","stylesheet");
 	xml.SetAttributes("//head/link[1]","type","text/rcss");
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
+
+	xml.PrependNode("//body", "html");
 
 	xml.SaveDocumentToString(rml);
 
