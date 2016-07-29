@@ -109,7 +109,6 @@ bool DKRocket::LoadGui(const DKString& file)
 		DKLog("Could not load "+path,DKERROR);
 	}
 
-	//document->SetAttribute("id","body");
 	document->Show();
 	document->RemoveReference();
 
