@@ -8,8 +8,6 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
-	replace(rml, "<html>", "");
-	replace(rml, "</html>", "");
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }

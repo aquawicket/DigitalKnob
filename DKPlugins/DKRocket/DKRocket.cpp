@@ -97,13 +97,13 @@ bool DKRocket::LoadGui(const DKString& file)
 	DKRocketToRML dkRocketToRml;
 	dkRocketToRml.IndexToRml(html, rml);
 
-	//Rocket needs <rml> tags
-	DKString newdata = "<rml>\n";
-	newdata += rml;
-	newdata += "\n</rml>";
+	//Rocket needs root tags
+	//DKString newdata = "<RML>\n";
+	//newdata += rml;
+	//newdata += "\n</RML>";
 
 	// Finnish loading the document
-	document = context->LoadDocumentFromMemory(newdata.c_str());
+	document = context->LoadDocumentFromMemory(rml.c_str());
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
 		DKLog("Could not load "+path,DKERROR);
