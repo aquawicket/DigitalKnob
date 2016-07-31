@@ -5,12 +5,13 @@ DKINSTALL(${DKONLINE}/Libs/libRocket-master.zip libRocket-master)
 DKSET(ROCKET ${3RDPARTY}/libRocket-master)
 
 
+
 ### LINK ###
 DKDEFINE(ROCKET_STATIC_LIB)
 DKINCLUDE(${ROCKET}/Include)
 DKINCLUDE(${ROCKET}/Source)
 
-WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketDebugger_d.lib)
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketDebugger.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketDebugger.lib)
 APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketDebugger_d.a)
 APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketDebugger.a)
@@ -19,7 +20,7 @@ LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketDebugger.a)
 ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketDebugger.a)
 ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketDebugger.a)
 
-WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketControls_d.lib)
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketControls.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketControls.lib)
 APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketControls_d.a)
 APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketControls.a)
@@ -28,7 +29,7 @@ LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketControls.a)
 ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketControls.a)
 ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketControls.a)
 
-WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketCore_d.lib)
+WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketCore.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketCore.lib)
 APPLE_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketCore_d.a)
 APPLE_RELEASE_LIB(${ROCKET}/${OS}/${RELEASE}/libRocketCore.a)
@@ -39,10 +40,9 @@ ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketCore.
 
 
 
-
 ### COMPILE ###
 DKSETPATH(${ROCKET}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ROCKET}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${ROCKET})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${ROCKET}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${ROCKET}/Build)
 WIN32_VS_DEBUG(libRocket-master libRocket.sln)
 WIN32_VS_RELEASE(libRocket-master libRocket.sln)
 
