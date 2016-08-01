@@ -145,44 +145,6 @@ bool DKWidget::CreateWidget(const DKString& file)
 		AppendChild(data[2], temp->GetChild(0));
 	}
 
-	//// Load customs
-	/*
-	Rocket::Core::ElementList iframes;
-	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, doc, "iframe");
-	for(unsigned int i=0; i<iframes.size(); ++i){
-		DKString id = iframes[i]->GetId().CString();
-		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
-		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
-		DKString iWidth = toString(iframes[i]->GetClientWidth());
-		DKString iHeight = toString(iframes[i]->GetClientHeight());
-		//DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
-		DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
-		AddEvent(id, "resize", &DKWidget::ResizeIframe, this);
-		AddEvent(id, "mouseover", &DKWidget::ResizeIframe, this);
-
-		DKElement* cef_texture = dkRocket->document->CreateElement("img");
-		DKString cef_id = "iframe_"+id;
-		cef_texture->SetAttribute("id", cef_id.c_str());
-		cef_texture->SetAttribute("src", cef_id.c_str());
-		cef_texture->SetProperty("width", "100%");
-		cef_texture->SetProperty("height", "100%");
-		iframes[i]->AppendChild(cef_texture);
-	}
-
-	Rocket::Core::ElementList aElements;
-	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, doc, "a");
-	for(unsigned int i=0; i<aElements.size(); ++i){
-		DKString id = aElements[i]->GetId().CString();
-		DKString value;
-		GetAttribute(aElements[i], "href", value);
-		if(!value.empty()){
-			SetProperty(aElements[i], "color", "rgb(0,0,255)");
-			SetProperty(aElements[i], "text-decoration", "underline");
-			AddEvent(id, "click", &DKWidget::Hyperlink, this);
-		}
-	}
-	*/
-
 	//Set the root element of this widget
 	Trim(id);
 	root = dkRocket->GetDocument()->GetElementById(id.c_str());
@@ -197,33 +159,6 @@ bool DKWidget::CreateWidget(const DKString& file)
 
 	return true;
 }
-
-/*
-///////////////////////////////////////////
-void DKWidget::ResizeIframe(DKEvent* event)
-{
-	//DKLog("DKWidget::ResizeIframe",DKDEBUG);
-	Rocket::Core::Element* iframe = GetElement(event);
-	DKString id = GetId(iframe);
-	DKString iTop = toString(iframe->GetAbsoluteTop());
-	DKString iLeft = toString(iframe->GetAbsoluteLeft());
-	DKString iWidth = toString(iframe->GetClientWidth());
-	DKString iHeight = toString(iframe->GetClientHeight());
-	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc(id+"::OnResize", static_cast<void*>(&data)); //call OnResize in DKCef window handler
-}
-
-////////////////////////////////////////
-void DKWidget::Hyperlink(DKEvent* event)
-{
-	Rocket::Core::Element* aElement = GetElement(event);
-	//DKString id = GetId(aElement);
-	DKString value;
-	GetAttribute(aElement, "href", value);
-	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
-	DKUtil::Run(value);
-}
-*/
 
 /////////////////////////////
 bool DKWidget::AttachEvents()
@@ -425,42 +360,6 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 
 	DKRocketToRML dkRocketToRML;
 	dkRocketToRML.PostProcess(element);
-	/*
-	//// Load customs
-	if(same(tag,"iframe")){
-		DKString iTop = toString(element->GetAbsoluteTop());
-		DKString iLeft = toString(element->GetAbsoluteLeft());
-		DKString iWidth = toString(element->GetClientWidth());
-		DKString iHeight = toString(element->GetClientHeight());
-		DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
-		DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
-		AddEvent(ele_id, "resize", &DKWidget::ResizeIframe, DKWidget::Get(""));
-		AddEvent(ele_id, "mouseover", &DKWidget::ResizeIframe, DKWidget::Get(""));
-
-		DKElement* cef_texture = dkRocket->document->CreateElement("img");
-		DKString cef_id = "iframe_"+ele_id;
-		cef_texture->SetAttribute("id", cef_id.c_str());
-		cef_texture->SetAttribute("src", cef_id.c_str());
-		cef_texture->SetProperty("width", "100%");
-		cef_texture->SetProperty("height", "100%");
-		element->AppendChild(cef_texture);
-	}
-
-	//FIXME: this is very bad way to do this. 
-	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
-	Rocket::Core::ElementList aElements;
-	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, doc, "a");
-	for(unsigned int i=0; i<aElements.size(); ++i){
-		DKString theid = aElements[i]->GetId().CString();
-		DKString value;
-		GetAttribute(aElements[i], "href", value);
-		if(!value.empty()){
-			SetProperty(aElements[i], "color", "rgb(0,0,255)");
-			SetProperty(aElements[i], "text-decoration", "underline");
-			AddEvent(theid, "click", &DKWidget::Hyperlink, DKWidget::Get(""));
-		}
-	}
-	*/
 
 	return ele_id;
 }
@@ -476,6 +375,10 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 	DKWidget::SetAttribute(element, "id", ele_id);
 	element->SetAttribute("nosave","1");
 	DKWidget::PrependChild(GetElementById(parent), element);
+
+	DKRocketToRML dkRocketToRML;
+	dkRocketToRML.PostProcess(element);
+
 	return ele_id;
 }
 
@@ -491,6 +394,10 @@ DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& 
 	DKWidget::SetAttribute(ele, "id", ele_id);
 	ele->SetAttribute("nosave","1");
 	DKWidget::InsertBefore(element, ele);
+
+	DKRocketToRML dkRocketToRML;
+	dkRocketToRML.PostProcess(ele);
+
 	return ele_id;
 }
 
