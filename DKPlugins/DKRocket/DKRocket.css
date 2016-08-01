@@ -13,11 +13,17 @@ body{
 	font-size: 16px;
 }
 
+/*
 body, div, option, img, select, dataselect, input, textarea, button
 {
-	/*display: block;*/
+	display: block;
 }
+*/
 
+body, option, div
+{
+	display: block;
+}
 
 option:hover
 {

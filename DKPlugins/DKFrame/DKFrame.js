@@ -134,6 +134,7 @@ function DKFrame_CreateFrame(title, width, height)
 	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+" \n");
 	
 	var titlebar = DKWidget_CreateElement(frame, "div", "titlebar");
+	DKWidget_SetProperty(titlebar, "position", "absolute");
 	DKWidget_SetProperty(titlebar, "width", "100%");
 	DKWidget_SetProperty(titlebar, "height", "21rem");
 	DKWidget_SetProperty(titlebar, "background-color", "rgb(200,200,200)");
