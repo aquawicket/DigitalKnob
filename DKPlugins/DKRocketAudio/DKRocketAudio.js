@@ -9,6 +9,8 @@ function DKRocketAudio_Init()
 	DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_speaker", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_volume", "change", DKRocketAudio_OnEvent);
+	DKAddEvent("DKAudio", "finnished", DKRocketAudio_OnEvent);
+	DKAddEvent("DKAudio", "position", DKRocketAudio_OnEvent);
 	
 	DKWidget_SetValue("DKRocketAudio_volume","128");
 }
@@ -35,6 +37,12 @@ function DKRocketAudio_OnEvent(event)
 	if(DK_Id(event, "DKRocketAudio_volume")){
 		var volume = DKWidget_GetValue("DKRocketAudio_volume");
 		DKRocketAudio_volume(volume);
+	}
+	if(DK_Type(event, "finnished")){
+		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/play.png");
+	}
+	if(DK_Type(event, "position")){
+		DKLog("position = "+DKWidget_GetValue(event)+"\n");
 	}
 }
 

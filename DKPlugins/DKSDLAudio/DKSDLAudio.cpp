@@ -90,6 +90,8 @@ void* DKSDLAudio::Pause(void* data)
 void* DKSDLAudio::Resume(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
+	trk.position = 0;
+	lastTime = SDL_GetTicks();
 	Mix_ResumeMusic();
 	return NULL;
 }
@@ -127,19 +129,19 @@ void* DKSDLAudio::SetVolume(void* data)
 void DKSDLAudio::Process()
 {
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
-		if(SDL_GetTicks() - lastTime > 1000){
+		if(SDL_GetTicks() - lastTime > 100){
 			trk.position = SDL_GetTicks() - lastTime;
 			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
+			DKEvent::SendEvent("DKAudio", "position", toString(trk.position));
 		}
 	}
 	else if(!Mix_PlayingMusic()){
-		//DKLog("Mix_RewindMusic\n", DKDEBUG);
+		DKLog("!Mix_PlayingMusic()\n", DKDEBUG);
 		Mix_RewindMusic();
 		Mix_PlayMusic(trk.snd, 0);
 		Mix_PauseMusic();
+		trk.position = 0;
+		lastTime = SDL_GetTicks();
 		DKEvent::SendEvent("DKAudio", "finnished", trk.file);
 	}
-	//else{
-		//DKLog("NOT Mix_PlayingMusic\n", DKDEBUG);
-	//}
 }
