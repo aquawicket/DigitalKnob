@@ -139,6 +139,7 @@ void DKSDLAudio::Process()
 	else if(!Mix_PlayingMusic()){
 		DKLog("!Mix_PlayingMusic()\n", DKDEBUG);
 		Mix_RewindMusic();
+		if(trk.file.empty()){ return; }
 		Mix_PlayMusic(trk.snd, 0);
 		Mix_PauseMusic();
 		trk.position = 0;
