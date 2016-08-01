@@ -340,12 +340,13 @@ void DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 {
 	if(id.empty()){ return; }
 	if(type.empty()){ return; }
+	if(!document){ return; }
 	
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());
-	if(element){
-		Rocket::Core::Dictionary parameters;
-		parameters.Set("msg0", value.c_str());
-		element->DispatchEvent(type.c_str(), parameters, false);
-		return; //return true;
-	}
+	if(!element){ return; }
+	
+	Rocket::Core::Dictionary parameters;
+	parameters.Set("msg0", value.c_str());
+	element->DispatchEvent(type.c_str(), parameters, false);
+	return; //return true;
 }

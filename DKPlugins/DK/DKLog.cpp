@@ -10,7 +10,7 @@ extern bool log_debug = true;
 extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
-extern bool log_gui_console = false;
+extern bool log_gui_console = true;
 
 //void DKLog(const DKString& text){ DKLog(text,DKINFO); }
 //void DKLog(const int text){ DKLog(toString(text),DKINFO); }
@@ -77,7 +77,7 @@ void DKLog(const DKString& text, const int lvl)
 	printf("%s",text.c_str());
 	
 	if(log_gui_console && DKUtil::InMainThread()){
-		SendEvent("DKConsole.html", "DKNotify", text);
+		SendEvent("DKLog", "notify", text);
 	}
 
 #ifdef WIN32

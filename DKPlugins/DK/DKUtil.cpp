@@ -454,11 +454,11 @@ DKString DKUtil::Execute(const DKString& command)
 bool DKUtil::InMainThread()
 {
 	DKString pid = "mainThreadId: "+toString(mainThreadId)+"\n";
-	DKLog(pid, DKINFO);
+	//DKLog(pid, DKINFO); DO NOT DO THIS!
 
 #ifdef WIN32
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
-	DKLog(tid, DKINFO);
+	//DKLog(tid, DKINFO); DO NOT DO THIS!
 	return mainThreadId == GetCurrentThreadId();
 #endif
 #if defined(MAC)
@@ -466,7 +466,7 @@ bool DKUtil::InMainThread()
 #endif
 #if defined (IOS) || defined (ANDROID) //|| defined(LINUX)
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)pthread_self())+"\n";
-	DKLog(tid, DKINFO);
+	//DKLog(tid, DKINFO); DO NOT DO THIS!
 	return mainThreadId == (int)pthread_self();
 #endif
 	return false;
