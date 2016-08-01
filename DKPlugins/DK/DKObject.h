@@ -81,9 +81,8 @@ public:
 			}
 			arry[1] = arry[1]+toString(num);
 		}
-		//DKString final_data = toString(arry);
-		DKString final_data;
-		ArrayToString(arry, final_data, ",");
+		DKString final_data = toString(arry,",");
+		//ArrayToString(arry, final_data, ",");
 
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(arry[1], instances[i]->data[1])){
