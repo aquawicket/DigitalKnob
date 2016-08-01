@@ -115,7 +115,6 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
 		AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
 
-		//Rocket::Core::Element* cef_texture = dkRocket->document->CreateElement("img");
 		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
@@ -129,10 +128,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	Rocket::Core::ElementList aElements;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, element, "a");
 	for(unsigned int i=0; i<aElements.size(); ++i){
-		DKString id = aElements[i]->GetId().CString();
 		if(aElements[i]->HasAttribute("href")){
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
+			DKString id = aElements[i]->GetId().CString();
 			AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
 		}
 	}
