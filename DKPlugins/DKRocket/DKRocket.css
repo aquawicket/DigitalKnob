@@ -341,7 +341,7 @@ scrollbarvertical{
 
 scrollbarvertical slidertrack{
 	background-decorator: image;
-	background-image: scrollbars.png 51px 51px 68px 68px;
+	background-image: scrollbars.png 51px 52px 68px 68px;
 }
 
 scrollbarvertical sliderbar{
