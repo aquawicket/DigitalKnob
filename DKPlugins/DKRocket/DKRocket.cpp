@@ -53,10 +53,11 @@ void DKRocket::Init()
 		}
 	}
 
-	LoadGui("index.html");
 	DKEvent::RegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::UnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::RegisterSendFunc(&DKRocket::SendEvent, this);
+
+	LoadGui("index.html");
 }
 
 ////////////////////
@@ -93,8 +94,9 @@ bool DKRocket::LoadGui(const DKString& file)
 	DKString html;
 	DKFile::FileToString(path, html);
 	DKString rml;
-	DKRocketToRML dkRocketToRml;
-	dkRocketToRml.IndexToRml(html, rml);
+
+	DKRocketToRML* dkRocketToRml = new DKRocketToRML();
+	dkRocketToRml->IndexToRml(html, rml);
 
 	// Finnish loading the document
 	document = context->LoadDocumentFromMemory(rml.c_str());
@@ -106,7 +108,7 @@ bool DKRocket::LoadGui(const DKString& file)
 	document->Show();
 	document->RemoveReference();
 
-	dkRocketToRml.PostProcess(document);
+	dkRocketToRml->PostProcess(document);
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
