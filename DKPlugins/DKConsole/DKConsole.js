@@ -3,6 +3,11 @@ function DKConsole_Init()
 {
 	DKCreate("DKConsole/DKConsole.html");
 	DKAddEvent("DKConsoleClose", "click", DKConsole_OnEvent);
+	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
+	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
+	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
+	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
+	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
 }
 
 ////////////////////////
