@@ -130,7 +130,10 @@ void DKCef::End()
 		browsers[i]	= NULL;
 	}
 	cefHandler = NULL;
-	CefShutdown();
+
+	if(instance_count == 1){
+		CefShutdown();
+	}
 }
 
 ////////////////////////
