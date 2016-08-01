@@ -42,7 +42,8 @@ function DKRocketAudio_OnEvent(event)
 		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/play.png");
 	}
 	if(DK_Type(event, "position")){
-		DKLog("position = "+DKWidget_GetValue(event)+"\n");
+		//DKLog("position = "+DKWidget_GetValue(event)+"\n");
+		DKWidget_SetValue("DKRocketAudio_time", DKWidget_GetValue(event));
 	}
 }
 
