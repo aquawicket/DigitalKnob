@@ -359,7 +359,7 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 	DKWidget::AppendChild(parent, element);
 
 	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(element);
+	dkRocketToRML.PostProcess(GetElementById(parent));
 
 	return ele_id;
 }
@@ -377,7 +377,7 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 	DKWidget::PrependChild(GetElementById(parent), element);
 
 	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(element);
+	dkRocketToRML.PostProcess(GetElementById(parent));
 
 	return ele_id;
 }
@@ -396,7 +396,7 @@ DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& 
 	DKWidget::InsertBefore(element, ele);
 
 	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(ele);
+	dkRocketToRML.PostProcess(ele->GetParentNode());
 
 	return ele_id;
 }
