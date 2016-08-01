@@ -76,7 +76,7 @@ void DKLog(const DKString& text, const int lvl)
 
 	printf("%s",text.c_str());
 	
-	if(log_gui_console && DKUtil::InMainThread()){
+	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
 		SendEvent("DKLog", "notify", text);
 	}
 
