@@ -31,8 +31,8 @@ protected:
 	
 	///////////  Helper functions  //////////////////
 public:
-	void ResizeIframe(DKEvent* event);
-	void Hyperlink(DKEvent* event);
+	//void ResizeIframe(DKEvent* event);
+	//void Hyperlink(DKEvent* event);
 	
 	//by event
 	static bool Type(DKEvent* event, const DKString& type);

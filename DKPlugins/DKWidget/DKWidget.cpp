@@ -146,6 +146,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 	}
 
 	//// Load customs
+	/*
 	Rocket::Core::ElementList iframes;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, doc, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
@@ -180,10 +181,13 @@ bool DKWidget::CreateWidget(const DKString& file)
 			AddEvent(id, "click", &DKWidget::Hyperlink, this);
 		}
 	}
+	*/
 
 	//Set the root element of this widget
 	Trim(id);
 	root = dkRocket->GetDocument()->GetElementById(id.c_str());
+
+	dkRocketToRML.PostProcess(root);
 
 	AttachEvents();
 	AttachDrags();
@@ -194,6 +198,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 	return true;
 }
 
+/*
 ///////////////////////////////////////////
 void DKWidget::ResizeIframe(DKEvent* event)
 {
@@ -218,6 +223,7 @@ void DKWidget::Hyperlink(DKEvent* event)
 	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
 	DKUtil::Run(value);
 }
+*/
 
 /////////////////////////////
 bool DKWidget::AttachEvents()
@@ -417,6 +423,9 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 	element->SetAttribute("nosave","1");
 	DKWidget::AppendChild(parent, element);
 
+	DKRocketToRML dkRocketToRML;
+	dkRocketToRML.PostProcess(element);
+	/*
 	//// Load customs
 	if(same(tag,"iframe")){
 		DKString iTop = toString(element->GetAbsoluteTop());
@@ -451,6 +460,7 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 			AddEvent(theid, "click", &DKWidget::Hyperlink, DKWidget::Get(""));
 		}
 	}
+	*/
 
 	return ele_id;
 }

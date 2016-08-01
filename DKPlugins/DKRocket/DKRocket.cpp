@@ -106,6 +106,8 @@ bool DKRocket::LoadGui(const DKString& file)
 	document->Show();
 	document->RemoveReference();
 
+	dkRocketToRml.PostProcess(document);
+
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();

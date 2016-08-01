@@ -1,5 +1,4 @@
 #include "DKRocketToRML.h"
-#include "DKRocket.h"
 #include "DKXml.h"
 #include "DKLog.h"
 
@@ -99,6 +98,47 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
+///////////////////////////////////////////////////////////////
+bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
+{
+	// iframe tags
+	Rocket::Core::ElementList iframes;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
+	for(unsigned int i=0; i<iframes.size(); ++i){
+		DKString id = iframes[i]->GetId().CString();
+		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
+		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
+		DKString iWidth = toString(iframes[i]->GetClientWidth());
+		DKString iHeight = toString(iframes[i]->GetClientHeight());
+		//DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
+		DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
+		AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
+		AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
+
+		//Rocket::Core::Element* cef_texture = dkRocket->document->CreateElement("img");
+		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
+		DKString cef_id = "iframe_"+id;
+		cef_texture->SetAttribute("id", cef_id.c_str());
+		cef_texture->SetAttribute("src", cef_id.c_str());
+		cef_texture->SetProperty("width", "100%");
+		cef_texture->SetProperty("height", "100%");
+		iframes[i]->AppendChild(cef_texture);
+	}
+
+	// a tags with href attribute
+	Rocket::Core::ElementList aElements;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, element, "a");
+	for(unsigned int i=0; i<aElements.size(); ++i){
+		DKString id = aElements[i]->GetId().CString();
+		if(aElements[i]->HasAttribute("href")){
+			aElements[i]->SetProperty("color", "rgb(0,0,255)");
+			aElements[i]->SetProperty("text-decoration", "underline");
+			AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
+		}
+	}
+	return true;
+}
+
 /////////////////////////////////////////////
 void DKRocketToRML::Hyperlink(DKEvent* event)
 {
@@ -110,4 +150,21 @@ void DKRocketToRML::Hyperlink(DKEvent* event)
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
 	DKLog("DKWidget::Hyperlink: " + value + "\n", DKINFO);
 	DKUtil::Run(value);
+}
+
+////////////////////////////////////////////////
+void DKRocketToRML::ResizeIframe(DKEvent* event)
+{
+	//DKLog("DKWidget::ResizeIframe",DKDEBUG);
+	DKString id = event->GetId();
+	DKRocket* dkRocket = DKRocket::Get("");
+	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
+
+	DKString iTop = toString(iframe->GetAbsoluteTop());
+	DKString iLeft = toString(iframe->GetAbsoluteLeft());
+	DKString iWidth = toString(iframe->GetClientWidth());
+	DKString iHeight = toString(iframe->GetClientHeight());
+	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc(id+"::OnResize", static_cast<void*>(&data)); //call OnResize in DKCef window handler
 }
