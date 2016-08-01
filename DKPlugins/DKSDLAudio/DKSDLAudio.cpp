@@ -59,7 +59,6 @@ void* DKSDLAudio::PlayMusic(void* data)
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKFile::VerifyPath(path)){ return 0; }
 	
-	track trk;
 	trk.file = path;
 	trk.snd = Mix_LoadMUS(path.c_str());
 	trk.position = 0;
@@ -74,6 +73,7 @@ void* DKSDLAudio::PlayMusic(void* data)
 	if(Mix_PlayMusic(trk.snd, 0) == -1){
 		DKLog("DKSDLAudio::PlayMusic(): error playing file \n", DKERROR);
 	}
+	Mix_PauseMusic();
 
 	return NULL;
 }
@@ -82,7 +82,6 @@ void* DKSDLAudio::PlayMusic(void* data)
 void* DKSDLAudio::Pause(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	//DKLog("DKSDLAudio::Pause(): not implemnted. \n",DKERROR);
 	Mix_PauseMusic();
 	return NULL;
 }
@@ -91,7 +90,6 @@ void* DKSDLAudio::Pause(void* data)
 void* DKSDLAudio::Resume(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
-	//DKLog("DKSDLAudio::Resume(): not implemnted. \n",DKERROR);
 	Mix_ResumeMusic();
 	return NULL;
 }
@@ -100,7 +98,6 @@ void* DKSDLAudio::Resume(void* data)
 void* DKSDLAudio::Mute(void* data)
 {
 	Mix_VolumeMusic(0);
-	//Mix_Volume(-1,0);
 	return NULL;
 }
 
@@ -108,7 +105,6 @@ void* DKSDLAudio::Mute(void* data)
 void* DKSDLAudio::UnMute(void* data)
 {
 	Mix_VolumeMusic(volume);
-	//Mix_Volume(-1,volume);
 	return NULL;
 }
 
@@ -130,10 +126,19 @@ void* DKSDLAudio::SetVolume(void* data)
 //////////////////////////
 void DKSDLAudio::Process()
 {
-	if(Mix_PlayingMusic()){
+	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(SDL_GetTicks() - lastTime > 1000){
 			trk.position = SDL_GetTicks() - lastTime;
-			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
+			DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
 		}
+	}
+	else if(!Mix_PlayingMusic()){
+		DKLog("Mix_RewindMusic\n", DKDEBUG);
+		Mix_RewindMusic();
+		Mix_PlayMusic(trk.snd, 0);
+		Mix_PauseMusic();
+	}
+	else{
+		//DKLog("NOT Mix_PlayingMusic\n", DKDEBUG);
 	}
 }
