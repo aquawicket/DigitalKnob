@@ -18,7 +18,7 @@ void DKSDLAudio::Init()
 	volume = 128;
 
 	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
-	DKClass::RegisterFunc("DKSDLAudio::PlayMusic", &DKSDLAudio::PlayMusic, this);
+	DKClass::RegisterFunc("DKSDLAudio::OpenMusic", &DKSDLAudio::OpenMusic, this);
 	DKClass::RegisterFunc("DKSDLAudio::Pause", &DKSDLAudio::Pause, this);
 	DKClass::RegisterFunc("DKSDLAudio::Resume", &DKSDLAudio::Resume, this);
 	DKClass::RegisterFunc("DKSDLAudio::Mute", &DKSDLAudio::Mute, this);
@@ -54,7 +54,7 @@ void* DKSDLAudio::PlaySound(void* data)
 }
 
 ///////////////////////////////////////
-void* DKSDLAudio::PlayMusic(void* data)
+void* DKSDLAudio::OpenMusic(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKFile::VerifyPath(path)){ return 0; }
@@ -64,8 +64,6 @@ void* DKSDLAudio::PlayMusic(void* data)
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
 
-	//tracks.push_back(trk);
-	//Mix_Music *snd = Mix_LoadMUS(path.c_str());
 	if(!trk.snd){
 		DKLog("DKSDLAudio::PlayMusic(): could not load file \n", DKERROR);
 	}
@@ -73,7 +71,7 @@ void* DKSDLAudio::PlayMusic(void* data)
 	if(Mix_PlayMusic(trk.snd, 0) == -1){
 		DKLog("DKSDLAudio::PlayMusic(): error playing file \n", DKERROR);
 	}
-	Mix_PauseMusic();
+	Mix_PauseMusic(); //pause 
 
 	return NULL;
 }

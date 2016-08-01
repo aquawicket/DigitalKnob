@@ -11,7 +11,7 @@ class DKAudioJS : public DKObjectT<DKAudioJS>
 public:
 	void Init();
 	static int PlaySound(duk_context* ctx);
-	static int PlayMusic(duk_context* ctx);
+	static int OpenMusic(duk_context* ctx);
 	static int Pause(duk_context* ctx);
 	static int Resume(duk_context* ctx);
 	static int Mute(duk_context* ctx);

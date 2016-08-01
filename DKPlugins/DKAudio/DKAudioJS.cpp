@@ -7,7 +7,7 @@
 void DKAudioJS::Init()
 {
 	DKDuktape::AttachFunction("DKAudio_PlaySound", DKAudioJS::PlaySound, 1);
-	DKDuktape::AttachFunction("DKAudio_PlayMusic", DKAudioJS::PlayMusic, 1);
+	DKDuktape::AttachFunction("DKAudio_OpenMusic", DKAudioJS::OpenMusic, 1);
 	DKDuktape::AttachFunction("DKAudio_Pause", DKAudioJS::Pause, 1);
 	DKDuktape::AttachFunction("DKAudio_Resume", DKAudioJS::Resume, 1);
 	DKDuktape::AttachFunction("DKAudio_Mute", DKAudioJS::Mute, 0);
@@ -25,10 +25,10 @@ int DKAudioJS::PlaySound(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKAudioJS::PlayMusic(duk_context* ctx)
+int DKAudioJS::OpenMusic(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::PlayMusic(data);
+	DKAudio::OpenMusic(data);
 	return 1;
 }
 

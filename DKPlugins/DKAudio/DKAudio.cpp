@@ -48,21 +48,21 @@ void DKAudio::PlaySound(DKString& file)
 }
 
 ///////////////////////////////////////
-void DKAudio::PlayMusic(DKString& file)
+void DKAudio::OpenMusic(DKString& file)
 {
-	if(DKClass::HasFunc("DKSDLAudio::PlayMusic")){
-		DKClass::CallFunc("DKSDLAudio::PlayMusic", static_cast<void*>(&file));
+	if(DKClass::HasFunc("DKSDLAudio::OpenMusic")){
+		DKClass::CallFunc("DKSDLAudio::OpenMusic", static_cast<void*>(&file));
 		return;
 	}
-	if(DKClass::HasFunc("DKSDLWav::PlayMusic")){
-		DKClass::CallFunc("DKSDLWav::PlayMusic", static_cast<void*>(&file));
+	if(DKClass::HasFunc("DKSDLWav::OpenMusic")){
+		DKClass::CallFunc("DKSDLWav::OpenMusic", static_cast<void*>(&file));
 		return;
 	}
-	if (DKClass::HasFunc("DKOSGAudio::PlayMusic")) {
-		DKClass::CallFunc("DKOSGAudio::PlayMusic", static_cast<void*>(&file));
+	if (DKClass::HasFunc("DKOSGAudio::OpenMusic")) {
+		DKClass::CallFunc("DKOSGAudio::OpenMusic", static_cast<void*>(&file));
 		return;
 	}
-	DKLog("DKAudio::PlayMusic(): No PlayMusic funtion available \n", DKERROR);
+	DKLog("DKAudio::OpenMusic(): No OpenMusic funtion available \n", DKERROR);
 }
 
 ///////////////////////////////////

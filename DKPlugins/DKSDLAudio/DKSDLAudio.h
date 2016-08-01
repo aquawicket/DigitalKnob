@@ -20,8 +20,9 @@ public:
 	void Init();
 	void End();
 
-	void* PlaySound(void* data);
-	void* PlayMusic(void* data);
+	void* PlaySound(void* data); //One Shot
+
+	void* OpenMusic(void* data);
 	void* Pause(void* data);
 	void* Resume(void* data);
 	void* Mute(void* data);
