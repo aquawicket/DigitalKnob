@@ -17,10 +17,10 @@ public:
 	void initAudio();
 	void endAudio();
 	void playSound(const char * filename, int volume);
-	void playMusic(const char * filename, int volume);
+	void OpenMusic(const char * filename, int volume);
 
 	void* PlaySound(void* data);
-	void* PlayMusic(void* data);
+	void* OpenMusic(void* data);
 };
 
 

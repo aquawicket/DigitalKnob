@@ -16,7 +16,7 @@ void DKOSGAudio::Init()
 	Create();
 
 	DKClass::RegisterFunc("DKOSGAudio::PlaySound", &DKOSGAudio::PlaySound, this);
-	DKClass::RegisterFunc("DKOSGAudio::PlayMusic", &DKOSGAudio::PlayMusic, this);
+	DKClass::RegisterFunc("DKOSGAudio::OpenMusic", &DKOSGAudio::OpenMusic, this);
 }
 
 //////////////////////
@@ -83,7 +83,7 @@ void* DKOSGAudio::PlaySound(void* data)
 }
 
 ///////////////////////////////////////
-void* DKOSGAudio::PlayMusic(void* data)
+void* DKOSGAudio::OpenMusic(void* data)
 {
 	//TODO - the sample sound be preloaded for music or somehting..   IDK...  read how SDL does it different
 	DKString path = *static_cast<DKString*>(data);

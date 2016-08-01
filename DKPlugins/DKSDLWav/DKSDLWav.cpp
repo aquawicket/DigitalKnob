@@ -49,7 +49,7 @@ void DKSDLWav::Init()
 
 	initAudio();
 	DKClass::RegisterFunc("DKSDLWav::PlaySound", &DKSDLWav::PlaySound, this);
-	DKClass::RegisterFunc("DKSDLWav::PlayMusic", &DKSDLWav::PlayMusic, this);
+	DKClass::RegisterFunc("DKSDLWav::OpenMusic", &DKSDLWav::OpenMusic, this);
 }
 
 ////////////////////
@@ -148,7 +148,7 @@ void DKSDLWav::playSound(const char * filename, int volume)
 }
 
 ///////////////////////////////////////////////////////////
-void DKSDLWav::playMusic(const char * filename, int volume)
+void DKSDLWav::OpenMusic(const char * filename, int volume)
 {
     Sound * global;
     Sound * snd;
@@ -198,11 +198,11 @@ void* DKSDLWav::PlaySound(void* data)
 }
 
 /////////////////////////////////////
-void* DKSDLWav::PlayMusic(void* data)
+void* DKSDLWav::OpenMusic(void* data)
 {
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKFile::VerifyPath(path)){ return 0; }
-	playMusic(path.c_str(), SDL_MIX_MAXVOLUME);
+	OpenMusic(path.c_str(), SDL_MIX_MAXVOLUME);
 	return NULL;
 }
 

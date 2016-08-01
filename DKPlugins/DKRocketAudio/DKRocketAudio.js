@@ -54,7 +54,7 @@ function DKRocketAudio_Open(file)
 {
 	//DKAudio_PlaySound(file);
 	DKRocketAudio_file = file;
-	DKAudio_PlayMusic(file);
+	DKAudio_OpenMusic(file);
 }
 
 //////////////////////////////////
