@@ -17,6 +17,7 @@ public:
 	static void AttachFunction(const DKString& name, duk_c_function func, int nargs);
 	static void Reload();
 	static void OnEvent(DKEvent* event);
+	static void RunJavascript(const DKString& code);
 
 	static duk_context* ctx;
 	static DKStringArray filelist;

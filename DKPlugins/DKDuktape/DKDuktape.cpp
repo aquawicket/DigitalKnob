@@ -226,7 +226,12 @@ void DKDuktape::OnEvent(DKEvent* event)
     duk_pop(ctx);  /* pop result/error */
 }
 
-
+///////////////////////////////////////////////////
+void DKDuktape::RunJavascript(const DKString& code)
+{
+	DKLog("RunJavascript("+code+") \n", DKDEBUG);
+	duk_eval_string(DKDuktape::ctx, code.c_str());
+}
 
 //////////////////////////////////////////////////////////////////
 ////////////// eventloop stuff  //////////////////////////////////

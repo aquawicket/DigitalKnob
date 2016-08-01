@@ -41,7 +41,6 @@ function DKRocketAudio_OnEvent(event)
 /////////////////////////////////
 function DKRocketAudio_Open(file)
 {
-	DKCreate("DKAudio");
 	//DKAudio_PlaySound(file);
 	DKRocketAudio_file = file;
 	DKAudio_PlayMusic(file);

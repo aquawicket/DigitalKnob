@@ -1,6 +1,7 @@
 #include "DKRocketToRML.h"
 #include "DKXml.h"
 #include "DKLog.h"
+#include "DKDuktape.h"
 
 ///////////////////////////////////////////////////////////////////
 bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
@@ -144,7 +145,8 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		Rocket::Core::ElementList sources;
 		Rocket::Core::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
 		for(unsigned int s=0; s<sources.size(); ++s){
-			//TODO
+			DKString file = sources[s]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+			DKDuktape::RunJavascript("DKRocketAudio_Open(\""+file+"\");");
 		}
 	}
 
