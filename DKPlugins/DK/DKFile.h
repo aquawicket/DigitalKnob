@@ -47,7 +47,7 @@ public:
 	static bool GetLocalModifiedDate(const DKString& path, DKString& filedate);
 	static bool GetSetting(const DKString& file, const DKString& setting, DKString& value);
 	static bool SetSetting(const DKString& file, const DKString& setting, const DKString& value);
-	static DKStringArray GetSettings(const DKString& file, const DKString& setting);
+	static bool GetSettings(const DKString& file, const DKString& setting, DKStringArray& arry);
 	static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);
 };
 

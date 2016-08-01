@@ -867,16 +867,18 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-DKStringArray DKFile::GetSettings(const DKString& file, const DKString& setting)
+////////////////////////////////////////////////////////////////////////////////////////////
+bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKStringArray& arry)
 {
 	//DKLog("DKFile::GetSettings("+file+","+setting+") \n", DKDEBUG);
-	if(!PathExists(file)){ 	return DKStringArray(0); }
+	if(!PathExists(file)){ 	return false; }
 
 	DKString filestring;
 	if(!FileToString(file, filestring)){
 		DKLog("DKFile::FileToString failed! \n", DKERROR);
+		return false;
 	}
 
-	return getSettingsFromString(filestring, setting);
+	arry = getSettingsFromString(filestring, setting);
+	return true;
 }
