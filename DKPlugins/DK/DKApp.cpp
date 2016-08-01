@@ -71,7 +71,9 @@ int main(int argc, char **argv)
 #endif
 
 	DKCreate("DKAssets");
-	DKLog(GetOSInfo()+"\n", DKINFO);
+	DKString info;
+	GetOSInfo(info);
+	DKLog(info+"\n", DKINFO);
 	DKLog(DKUtil::GetDate()+" "+DKUtil::GetTime()+"\n", DKINFO);
 	DKCreate("DKDuktape");
 	DKCreate("DKDebug");

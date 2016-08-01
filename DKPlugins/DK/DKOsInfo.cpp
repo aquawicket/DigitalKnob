@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "DKOsInfo.h"
 
-////////////////////
-DKString GetOSInfo()
+//////////////////////////////
+bool GetOSInfo(DKString& info)
 {
 	DKString oscompany;
 	GetOSCompany(oscompany);
@@ -16,7 +16,8 @@ DKString GetOSInfo()
 	GetOSBuild(osbuild);
 	DKString osarchitecture;
 	GetOSArchitecture(osarchitecture);
-	return (oscompany+" "+osname+" "+osversion+" "+osservicepack+" "+osbuild+" "+osarchitecture);
+	info = (oscompany+" "+osname+" "+osversion+" "+osservicepack+" "+osbuild+" "+osarchitecture);
+	return true;
 
 	//DKString computername;
 	//getComputerName(computername);

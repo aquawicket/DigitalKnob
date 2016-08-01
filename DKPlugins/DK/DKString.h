@@ -43,6 +43,8 @@ DKString toString(const double& num);
 DKString toString(unsigned char* str);
 DKString toString(void* ptr);
 DKString toString(bool _bool);
+DKString toString(const DKStringArray& arry, const char* seperator);
+
 long toLong(const DKString& string);
 unsigned long long int toULongLong(const DKString& str);
 int toInt(const DKString& string);
@@ -57,7 +59,7 @@ bool Pad(int num, char character, DKString& string);
 DKString toString(const std::wstring& ws);
 std::wstring toWString(const std::string& s);
 #endif
-DKString toString(const DKStringArray& arry, const char* seperator);
+
 //bool ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator);
 bool RemoveDuplicates(DKStringArray& arry);
 bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value);

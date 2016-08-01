@@ -13,7 +13,7 @@ typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
 #define VER_SUITE_WH_SERVER	0x00008000
 #endif //WIN32
 
-DKString GetOSInfo();
+bool GetOSInfo(DKString& info);
 bool GetSystemOS(DKString& os);
 bool GetOSCompany(DKString& oscompany);
 bool GetOSName(DKString& osname);
