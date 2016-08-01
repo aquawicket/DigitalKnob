@@ -1215,17 +1215,17 @@ bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
 //////////////////////////////////////////////
 bool DKWidget::ScrollToTop(DKElement* element)
 {
-	//TODO
-	DKLog("DKWidget::ScrollToTop(): not implemented\n",DKERROR);
-	return false;
+	//DKLog("DKWidget::ScrollToTop(): not implemented\n",DKERROR);
+	element->SetScrollTop(0);
+	return true;
 }
 
 /////////////////////////////////////////////////
 bool DKWidget::ScrollToBottom(DKElement* element)
 {
-	//TODO
-	DKLog("DKWidget::ScrollToBottom(): not implemented\n",DKERROR);
-	return false;
+	//DKLog("DKWidget::ScrollToBottom(): not implemented\n",DKERROR);
+	element->SetScrollTop(element->GetScrollHeight());
+	return true;
 }
 
 
