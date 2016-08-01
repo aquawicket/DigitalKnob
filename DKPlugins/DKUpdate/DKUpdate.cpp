@@ -34,46 +34,45 @@ void DKUpdate::Init()
 	
 	DKString update;
 #ifdef WIN32
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]", update);
 	if(update.empty()){ update = url+app; }
 #endif
 #ifdef WIN64
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", update);
 	if(update.empty()){ update = url+app; }
 #endif
 #ifdef MAC32
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", update);
 	if(update.empty()){ update = url+app+"_mac32.zip"; }
 #endif
 #ifdef MAC64
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", update);
 	if(update.empty()){ update = url+app+"_mac64.zip"; }
 #endif
 #ifdef LINUX32
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]", update);
 	if(update.empty()){ update = url+app+"_linux32.zip"; }
 #endif
 #ifdef LINUX64
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", update);
 	if(update.empty()){ update = url+app+"_linux64.zip"; }
 #endif
 #ifdef IOS32
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]", update);
 	if(update.empty()){ update = url+app+"_ios32.zip"; }
 #endif
 #ifdef IOS64
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", update);
 	if(update.empty()){ update = url+app+"_ios64.zip"; }
 #endif
 #ifdef ANDROID32
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID32]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID32]", update);
 	if(update.empty()){ update = url+app+".apk"; }
 #endif
 #ifdef ANDROID64
-	update = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]", update);
 	if(update.empty()){ update = url+app+".apk"; }
 #endif
-
 
 	if(update.empty()){
 		DKLog("DKUpdate::Init(): update url did not get set. ",DKERROR);

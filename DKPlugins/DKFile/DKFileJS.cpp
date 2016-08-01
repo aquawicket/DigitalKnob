@@ -182,7 +182,8 @@ int DKFileJS::getSetting(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	DKString param = duk_require_string(ctx, 1);
-	DKString value = DKFile::GetSetting(file, param);
+	DKString value;
+	DKFile::GetSetting(file, param, value);
 	duk_push_string(ctx, value.c_str());
 	return 1;
 }

@@ -30,7 +30,7 @@ void DKCef::Init()
 	fullscreen = false;
 	queue_new_browser = "";
 
-	homepage = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]");
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
 	if(homepage.empty()){ homepage = "http://www.google.com"; }
 
 #ifdef WIN32

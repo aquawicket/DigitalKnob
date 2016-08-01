@@ -17,11 +17,12 @@ void DKAssets::Init()
 	}
 	DKLog("local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
 
-	DKFile::online_assets = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]");
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	DKLog("online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
 
 #ifdef WIN32
-	DKString console = DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CONSOLE]");
+	DKString console;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CONSOLE]", console);
 	if (same(console, "OFF")){
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	}

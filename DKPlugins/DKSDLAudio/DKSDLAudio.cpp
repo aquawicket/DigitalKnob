@@ -68,7 +68,7 @@ void* DKSDLAudio::OpenMusic(void* data)
 		DKLog("DKSDLAudio::OpenMusic(): could not load file \n", DKERROR);
 	}
 
-	if(Mix_OpenMusic(trk.snd, 0) == -1){
+	if(Mix_PlayMusic(trk.snd, 0) == -1){
 		DKLog("DKSDLAudio::OpenMusic(): error playing file \n", DKERROR);
 	}
 	Mix_PauseMusic(); //pause 
@@ -128,7 +128,7 @@ void* DKSDLAudio::SetVolume(void* data)
 void DKSDLAudio::Process()
 {
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
-		if(((SDL_GetTicks() - lastTime) / 1000) > trk.position){
+		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
 			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
 			DKEvent::SendEvent("DKAudio", "position", toString(trk.position));
@@ -139,7 +139,7 @@ void DKSDLAudio::Process()
 		//DKLog("!Mix_PlayingMusic()\n", DKDEBUG);
 		Mix_RewindMusic();
 		if(trk.file.empty()){ return; }
-		Mix_OpenMusic(trk.snd, 0);
+		Mix_PlayMusic(trk.snd, 0);
 		Mix_PauseMusic();
 		trk.position = 0;
 		lastTime = SDL_GetTicks();

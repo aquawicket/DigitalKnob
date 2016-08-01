@@ -15,11 +15,16 @@ void DKJS::Init()
 	DKCreate("DKAssetsJS");
 	//DKLog("DKJS::Init() \n", DKDEBUG);
 
-	DKString errors = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]");
-	DKString warnings = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]");
-	DKString info = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]");
-	DKString debug = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]");
-	DKString file = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]");
+	DKString errors;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
+	DKString warnings;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
+	DKString info;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
+	DKString debug;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
+	DKString file;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILE]", file);
 	if(same(errors,"OFF")){ log_errors = false; }
 	if(same(warnings,"OFF")){ log_warnings = false; }
 	if(same(info,"OFF")){ log_info = false; }

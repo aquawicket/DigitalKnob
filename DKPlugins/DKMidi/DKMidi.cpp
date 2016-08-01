@@ -9,8 +9,12 @@ void DKMidi::Init()
 	DKCreate("DKMidiJS");
 	midiin = new RtMidiIn();
 	midiout = new RtMidiOut();
-	ToggleInput(DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIIN]"));
-	ToggleOutput(DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIOUT]"));
+	DKString inputs;
+	DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIIN]", inputs);
+	ToggleInput(inputs);
+	DKString outputs;
+	DKFile::GetSetting(DKFile::local_assets+"USER/midi.txt", "[MIDIOUT]", outputs);
+	ToggleOutput(outputs);
 
 	midiin->setCallback(&DKMidi::midiCallback,(void *)this);
 }

@@ -36,7 +36,8 @@ void DKTray::Init()
 	setCallback(&OnTrayNotification);
 	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
 
-	DKString minimized = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]");
+	DKString minimized;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", minimized);
 	if(same(minimized,"ON")){
 		CSystemTray::MinimiseToTray(hwnd);
 	}
