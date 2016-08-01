@@ -94,9 +94,9 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	//////////////////////////////////////////////////////
 	*/
 
-	DKLog("\n##################### RML ####################\n",DKINFO);
-	DKLog(rml+"\n",DKINFO);
-	DKLog("\n##############################################\n\n",DKINFO);
+	//DKLog("\n##################### RML ####################\n",DKDEBUG);
+	//DKLog(rml+"\n",DKDEBUG);
+	//DKLog("\n##############################################\n\n",DKDEBUG);
 	return true;
 }
 
