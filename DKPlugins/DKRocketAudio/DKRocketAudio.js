@@ -43,7 +43,9 @@ function DKRocketAudio_OnEvent(event)
 	}
 	if(DK_Type(event, "position")){
 		//DKLog("position = "+DKWidget_GetValue(event)+"\n");
-		DKWidget_SetValue("DKRocketAudio_time", DKWidget_GetValue(event));
+		var minute = "0:";
+		var second = ("0" + DKWidget_GetValue(event)).slice (-2);
+		DKWidget_SetValue("DKRocketAudio_time", minute+second);
 	}
 }
 
