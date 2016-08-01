@@ -3,13 +3,25 @@ function DKConsole_Init()
 {
 	DKCreate("DKConsole/DKConsole.html");
 	DKAddEvent("DKConsoleClose", "click", DKConsole_OnEvent);
-	DKAddEvent("GLOBAL", "notify", DKConsole_OnEvent);
+	DKAddEvent("DKLog", "notify", DKConsole_OnEvent);
 	
-	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
-	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
-	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
-	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
-	DKWidget_CreateElement("DKConsole.html", "a", "TODO");
+	/*
+	DKConsole_Notify("1");
+	DKConsole_Notify("2");
+	DKConsole_Notify("3");
+	DKConsole_Notify("4");
+	DKConsole_Notify("5");
+	DKConsole_Notify("6");
+	DKConsole_Notify("7");
+	DKConsole_Notify("8");
+	DKConsole_Notify("9");
+	DKConsole_Notify("10");
+	DKConsole_Notify("11");
+	DKConsole_Notify("12");
+	DKConsole_Notify("13");
+	DKConsole_Notify("14");
+	DKConsole_Notify("15");
+	*/
 }
 
 ////////////////////////
@@ -34,7 +46,7 @@ function DKConsole_OnEvent(event)
 /////////////////////////////////
 function DKConsole_Notify(string)
 {
-	//string = string.replace("\n", "");
-	//DKWidget_SetAttribute("DKConsoleText", "value", DKWidget_GetAttribute("DKConsoleText", "value")+string+"\n");
-	//DKWidget_SetAttribute("DKConsoleText", "scrollTop", DKWidget_GetAttribute("DKConsoleText", "scrollHeight"));
+	var line = DKWidget_CreateElement("DKConsole.html", "a", "DKConsole_line");
+	DKWidget_SetProperty(line,"display","block");
+	DKWidget_SetInnerHtml(line, string);
 }
