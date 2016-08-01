@@ -28,7 +28,7 @@ bool DKXml::LoadDocument(const DKString& file)
 		DKString description = result.description();
 		DKString offset = toString((int)result.offset);
 		DKLog("DKXml::LoadDocument("+file+"): "+description+" @ character: "+offset+" \n", DKERROR);
-		DKFile::StringToFile(filedata, DKFile::local_assets+"USER/XMLlog.txt");
+		DKFile::StringToFile(filedata, DKFile::local_assets+"XMLlog.txt");
 		DKLog("Saved string to XMLlog.txt \n", DKINFO);
 		return false;
 	}
@@ -47,17 +47,10 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 
 	pugi::xml_parse_result result = doc.load(temp.c_str());
 	if(!result){
-		/*
-		DKString description = result.description();
-		DKString offset = toString((int)result.offset);
-		DKLog("DKXml::LoadDocumentFromString(): "+description+" @ character: "+offset+" \n", DKERROR);
-		DKFile::StringToFile(temp, DKFile::local_assets+"USER/XMLlog.txt");
-		DKLog("Saved string to XMLlog.txt \n", DKINFO);
-		*/
 		std::cout << "XML parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
 		std::cout << "Error description: " << result.description() << "\n";
 		std::cout << "Error offset: " << result.offset << " (error at [..." << (temp.c_str() + result.offset) << "]\n\n";
-		DKFile::StringToFile(temp, DKFile::local_assets+"USER/XMLlog.txt");
+		DKFile::StringToFile(temp, DKFile::local_assets+"XMLlog.txt");
 		DKLog("Saved string to XMLlog.txt \n", DKINFO);
 		return false;
 	}
