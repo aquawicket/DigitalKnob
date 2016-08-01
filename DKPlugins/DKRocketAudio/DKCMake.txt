@@ -1,3 +1,4 @@
 DKDEPEND(DKRocket)
 DKDEPEND(DKAudio)
+DKDEPEND(DKWidget)
 DKASSETS(DKRocketAudio)

@@ -101,7 +101,7 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 ///////////////////////////////////////////////////////////////
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
-	// iframe tags
+	// <iframe> tags
 	Rocket::Core::ElementList iframes;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
@@ -124,7 +124,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		iframes[i]->AppendChild(cef_texture);
 	}
 
-	// a tags with href attribute
+	// <a> tags with href attribute
 	Rocket::Core::ElementList aElements;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(aElements, element, "a");
 	for(unsigned int i=0; i<aElements.size(); ++i){
@@ -135,6 +135,19 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
 		}
 	}
+
+	// <audio> tags
+	Rocket::Core::ElementList audios;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(audios, element, "audio");
+	for(unsigned int i=0; i<audios.size(); ++i){
+		DKCreate("DKRocketAudio/DKRocketAudio.js");
+		Rocket::Core::ElementList sources;
+		Rocket::Core::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
+		for(unsigned int s=0; s<sources.size(); ++s){
+			//TODO
+		}
+	}
+
 	return true;
 }
 

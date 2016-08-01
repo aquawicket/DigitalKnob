@@ -3,6 +3,7 @@ var DKRocketAudio_file = "";
 /////////////////////////////
 function DKRocketAudio_Init()
 {
+	DKCreate("DKAudio");
 	DKCreate("DKRocketAudio/DKRocketAudio.html");
 	DKAddEvent("DKRocketAudio_playpause", "click", DKRocketAudio_OnEvent);
 	DKAddEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
