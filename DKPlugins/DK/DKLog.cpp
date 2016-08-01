@@ -77,6 +77,13 @@ void DKLog(const DKString& text, const int lvl)
 	printf("%s",text.c_str());
 	
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
+		DKString clr = "black"; //default
+		if(lvl == DKERROR){ clr = "red"; }
+		if(lvl == DKWARN){ clr = "yellow"; }
+		if(lvl == DKSUCCESS){ clr = "green"; }
+		//if(lvl == DKINFO){ clr = "black"; }
+		if(lvl == DKDEBUG){ clr = "blue"; }
+		SendEvent("DKLog", "color", clr);
 		SendEvent("DKLog", "notify", text);
 	}
 
