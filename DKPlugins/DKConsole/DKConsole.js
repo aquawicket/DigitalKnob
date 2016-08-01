@@ -49,4 +49,5 @@ function DKConsole_Notify(string)
 	var line = DKWidget_CreateElement("DKConsole.html", "a", "DKConsole_line");
 	DKWidget_SetProperty(line,"display","block");
 	DKWidget_SetInnerHtml(line, string);
+	//DKWidget_ScrollBottom(line); //TODO
 }
