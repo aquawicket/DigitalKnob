@@ -145,8 +145,9 @@ DKString toString(const DKStringArray& arry, const char* seperator)
 	return string;
 }
 
+/*
 //////////////////////////////////////////////////////////////////////////////////////
-void ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator)
+bool ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator)
 {
 	string = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
@@ -155,7 +156,9 @@ void ArrayToString(const DKStringArray& arry, DKString& string, const char* sepe
 			string += seperator;
 		}
 	}
+	return true;
 }
+*/
 
 ///////////////////////////////////////////////////////////////////////////
 bool replace(DKString& str, const DKString& oldStr, const DKString& newStr)
@@ -248,14 +251,14 @@ bool RemoveDuplicates(DKStringArray& arry)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-DKString getSettingFromString(const DKString& filestring, const DKString& setting)
+///////////////////////////////////////////////////////////////////////////////////////////////
+bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value)
 {
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
 	if(has(setting,"[") && has(setting,"]")){
 		size_t temp = filestring.find(setting,0);
-        if(temp == std::string::npos){return "";}
+        if(temp == std::string::npos){return false;}
 		size_t start = filestring.find("]",temp);
 		size_t end = filestring.find("[",start);
 		if(end == std::string::npos){end = filestring.size();}
@@ -265,7 +268,8 @@ DKString getSettingFromString(const DKString& filestring, const DKString& settin
 		replace(out,"\r","");
 		replace(out,"\n"," ");
 		Trim(out);
-		return out;
+		value = out;
+		return true;
 	}
 
 	//If the variable looks like this:  VARIABLE 
@@ -273,7 +277,7 @@ DKString getSettingFromString(const DKString& filestring, const DKString& settin
 	DKString string = setting + " ";
 
 	size_t temp = filestring.find(string,0);
-    if(temp == std::string::npos){return "";}
+    if(temp == std::string::npos){return false;}
 	size_t start = filestring.find(" ",temp);
 	size_t end = filestring.find("\n",start);
 
@@ -281,9 +285,11 @@ DKString getSettingFromString(const DKString& filestring, const DKString& settin
 	replace(out,"\r","");
 	replace(out,"\n","");
 	Trim(out);
-	return out;
+	value = out;
+	return true;
 }
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////
 DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting)
 {
@@ -326,6 +332,7 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 		return temp;
 #endif
 }
+*/
 
 ///////////////////////////
 bool Trim(DKString& string)

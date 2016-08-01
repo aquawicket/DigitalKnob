@@ -380,7 +380,10 @@ bool DKFile::GetFilePath(const DKString& file, DKString& path)
 bool DKFile::FileToString(const DKString& file, DKString& string)
 {
 	//DKLog("DKFile::FileToString("+file+","+string+") \n", DKDEBUG);
-	if(!PathExists(file)){ return false; }
+	if(!PathExists(file)){
+		DKLog("DKFile::FileToString failed! \n", DKERROR);
+		return false; 
+	}
 
 	//TODO: error control
 	std::ifstream t(file.c_str());
@@ -806,11 +809,8 @@ bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString&
 	//DKLog("DKFile::GetSetting("+file+","+setting+") \n", DKDEBUG);
 	if(!PathExists(file)){ return false; }
 	DKString filestring;
-	if(!FileToString(file, filestring)){
-		DKLog("DKFile::FileToString failed! \n", DKERROR);
-		return false;
-	}
-	value = getSettingFromString(filestring, setting);
+	if(!FileToString(file, filestring)){ return false; }
+	if(!getSettingFromString(filestring, setting, value)){ return false; }
 	return true;
 }
 
@@ -819,9 +819,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 {
 	//DKLog("DKFile::SetSetting("+file+","+setting+","+value+") \n", DKDEBUG);
 	DKString filestring;
-	if(!FileToString(file,filestring)){
-		DKLog("DKFile::FileToString failed! \n", DKERROR);
-	}
+	if(!FileToString(file,filestring)){ return false; }
 
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
@@ -867,6 +865,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	return true;
 }
 
+/*
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKStringArray& arry)
 {
@@ -882,3 +881,4 @@ bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKString
 	arry = getSettingsFromString(filestring, setting);
 	return true;
 }
+*/

@@ -58,11 +58,11 @@ DKString toString(const std::wstring& ws);
 std::wstring toWString(const std::string& s);
 #endif
 DKString toString(const DKStringArray& arry, const char* seperator);
-void ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator);
+//bool ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator);
 bool RemoveDuplicates(DKStringArray& arry);
-DKString getSettingFromString(const DKString& filestring, const DKString& setting);
-DKStringArray getSettings(const DKString& file, const DKString& setting);
-DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
+bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value);
+//DKStringArray getSettings(const DKString& file, const DKString& setting);
+//DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
 bool toStringArray(DKStringArray& output, const DKString& string, const DKString& seperator);
 DKString toLower(const DKString& input);
 #endif //DKString_H
