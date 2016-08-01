@@ -258,7 +258,8 @@ function DKBuild_SvnUpdate()
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_PlayMusic("DKBuild/ding.wav");
+		DKAudio_OpenMusic("DKBuild/ding.wav");
+		DKAudio_Resume();
 	}
 }
 
@@ -278,7 +279,8 @@ function DKBuild_SvnCommit()
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_PlayMusic("DKBuild/ding.wav");
+		DKAudio_OpenMusic("DKBuild/ding.wav");
+		DKAudio_Resume();
 	}
 }
 
@@ -705,6 +707,7 @@ function DKBuild_DoResults()
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_PlayMusic("DKBuild/ding.wav");
+		DKAudio_OpenMusic("DKBuild/ding.wav");
+		DKAudio_Resume();
 	}
 }
