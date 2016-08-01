@@ -129,16 +129,17 @@ void DKSDLAudio::Process()
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(SDL_GetTicks() - lastTime > 1000){
 			trk.position = SDL_GetTicks() - lastTime;
-			DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
+			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
 		}
 	}
 	else if(!Mix_PlayingMusic()){
-		DKLog("Mix_RewindMusic\n", DKDEBUG);
+		//DKLog("Mix_RewindMusic\n", DKDEBUG);
 		Mix_RewindMusic();
 		Mix_PlayMusic(trk.snd, 0);
 		Mix_PauseMusic();
+		DKEvent::SendEvent("DKAudio", "finnished", trk.file);
 	}
-	else{
+	//else{
 		//DKLog("NOT Mix_PlayingMusic\n", DKDEBUG);
-	}
+	//}
 }
