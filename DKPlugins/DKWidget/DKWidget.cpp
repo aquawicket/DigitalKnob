@@ -1224,7 +1224,7 @@ bool DKWidget::ScrollToTop(DKElement* element)
 bool DKWidget::ScrollToBottom(DKElement* element)
 {
 	//DKLog("DKWidget::ScrollToBottom(): not implemented\n",DKERROR);
-	element->SetScrollTop(element->GetScrollHeight());
+	element->GetLastChild()->ScrollIntoView();
 	return true;
 }
 
