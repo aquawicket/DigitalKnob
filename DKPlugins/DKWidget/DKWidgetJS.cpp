@@ -65,6 +65,9 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_Cut", DKWidgetJS::Cut, 1);
 	DKDuktape::AttachFunction("DKWidget_Copy", DKWidgetJS::Copy, 1);
 	DKDuktape::AttachFunction("DKWidget_Paste", DKWidgetJS::Paste, 1);
+	DKDuktape::AttachFunction("DKWidget_ScrollToTop", DKWidgetJS::ScrollToTop, 1);
+	DKDuktape::AttachFunction("DKWidget_ScrollToBottom", DKWidgetJS::ScrollToBottom, 1);
+
 }
 
 ///////////////////////////////////////////
@@ -550,7 +553,7 @@ int DKWidgetJS::GetOption(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	//DKLog("DKWidgetJS::GetOption("+id+") \n");
-	int n;
+	int n = 0;
 	if(!DKWidget::GetOption(id,n)){
 		return 0;
 	}
@@ -678,6 +681,26 @@ int DKWidgetJS::Paste(duk_context* ctx)
 	widget->UpdateRelativeCursor();
 	widget->ShowCursor(true,true);
 	element->Focus();
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKWidgetJS::ScrollToTop(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	if(!DKWidget::ScrollToTop(id)){
+		return 0;
+	}
+	return 1;
+}
+
+////////////////////////////////////////////////
+int DKWidgetJS::ScrollToBottom(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	if(!DKWidget::ScrollToBottom(id)){
+		return 0;
+	}
 	return 1;
 }
 

@@ -88,6 +88,8 @@ public:
 	static bool GetValue(const DKString& id, int& value);
 	static bool SetValue(const DKString& id, const int& value);
 	static bool SetValue(const DKString& id, const DKProperty* value);
+	static bool ScrollToTop(const DKString& id);
+	static bool ScrollToBottom(const DKString& id);
 	
 	//by element
 	static bool GetFile(DKElement* element, DKString& file);
@@ -115,6 +117,8 @@ public:
 	static bool GetValue(DKElement* element, int& value);
 	static bool SetValue(DKElement* element, const int& value);
 	static bool SetValue(DKElement* element, const DKProperty* prop);
+	static bool ScrollToTop(DKElement* element);
+	static bool ScrollToBottom(DKElement* element);
 
 	//extra
 	static bool IsChildOf(const DKString& id, const DKString& parent);

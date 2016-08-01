@@ -690,6 +690,25 @@ bool DKWidget::SetValue(const DKString& id, const DKProperty* value)
 	return true;
 }
 
+//////////////////////////////////////////////
+bool DKWidget::ScrollToTop(const DKString& id)
+{
+	if(!ScrollToTop(GetElementById(id))){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////
+bool DKWidget::ScrollToBottom(const DKString& id)
+{
+	if(!ScrollToBottom(GetElementById(id))){ return false; }
+	return true;
+}
+
+
+
+
+
+
 //by element
 //////////////////////////////////////////////////////////
 bool DKWidget::GetFile(DKElement* element, DKString& file)
@@ -1192,6 +1211,23 @@ bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
 	}
 	return false;
 }
+
+//////////////////////////////////////////////
+bool DKWidget::ScrollToTop(DKElement* element)
+{
+	//TODO
+	DKLog("DKWidget::ScrollToTop(): not implemented\n",DKERROR);
+	return false;
+}
+
+/////////////////////////////////////////////////
+bool DKWidget::ScrollToBottom(DKElement* element)
+{
+	//TODO
+	DKLog("DKWidget::ScrollToBottom(): not implemented\n",DKERROR);
+	return false;
+}
+
 
 //extra
 ////////////////////////////////////////////////////////////////////

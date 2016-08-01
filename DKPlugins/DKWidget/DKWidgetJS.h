@@ -68,6 +68,8 @@ public:
 	static int Cut(duk_context* ctx);
 	static int Copy(duk_context* ctx);
 	static int Paste(duk_context* ctx);
+	static int ScrollToTop(duk_context* ctx);
+	static int ScrollToBottom(duk_context* ctx);
 };
 
 
