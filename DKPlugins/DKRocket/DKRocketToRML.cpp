@@ -7,13 +7,14 @@
 bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	rml = html;
+	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
 	if(!xml.FindNode("//head")){
-		xml.PrependNode("/", "head");
+		xml.PrependNode("//rml", "head");
 	}
 	if (!xml.FindNode("//body")) {
 		DKLog("No body tag\n", DKERROR);
