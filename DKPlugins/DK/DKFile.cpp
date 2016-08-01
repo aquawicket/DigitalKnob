@@ -800,17 +800,18 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate)
 }
 
 
-//////////////////////////////////////////////////////////////////////////
-DKString DKFile::GetSetting(const DKString& file, const DKString& setting)
+///////////////////////////////////////////////////////////////////////////////////////
+bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value)
 {
 	//DKLog("DKFile::GetSetting("+file+","+setting+") \n", DKDEBUG);
-	if(!PathExists(file)){ return ""; }
+	if(!PathExists(file)){ return false; }
 	DKString filestring;
 	if(!FileToString(file, filestring)){
 		DKLog("DKFile::FileToString failed! \n", DKERROR);
-		return "";
+		return false;
 	}
-	return getSettingFromString(filestring, setting);
+	value = getSettingFromString(filestring, setting);
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
