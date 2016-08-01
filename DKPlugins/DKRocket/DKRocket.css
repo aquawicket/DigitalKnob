@@ -11,7 +11,9 @@ html{
 body{
 	font-family: "Times New Roman";
 	color: black;
-	margin: 8px;
+	height:100%;
+	padding-left: 8px;
+	padding-right: 8px;
 	font-size: 16px;
 	display: block;
 }
