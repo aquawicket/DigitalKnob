@@ -453,7 +453,7 @@ DKString DKUtil::Execute(const DKString& command)
 ///////////////////////////
 bool DKUtil::InMainThread()
 {
-	DKString pid = "mainThreadId: "+toString(mainThreadId)+"\n";
+	//DKString pid = "mainThreadId: "+toString(mainThreadId)+"\n";
 	//DKLog(pid, DKINFO); DO NOT DO THIS!
 
 #ifdef WIN32
