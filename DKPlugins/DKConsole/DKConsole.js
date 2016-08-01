@@ -4,7 +4,8 @@ var DKConsole_color = "black";
 function DKConsole_Init()
 {
 	DKCreate("DKConsole/DKConsole.html");
-	DKAddEvent("DKConsoleClose", "click", DKConsole_OnEvent);
+	DKAddEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
+	DKAddEvent("DKConsole_Close", "click", DKConsole_OnEvent);
 	DKAddEvent("DKLog", "color", DKConsole_OnEvent);
 	DKAddEvent("DKLog", "notify", DKConsole_OnEvent);
 }
@@ -18,7 +19,10 @@ function DKConsole_End()
 /////////////////////////////////
 function DKConsole_OnEvent(event)
 {	
-	if(DK_Id(event, "DKConsoleClose")){
+	if(DK_Id(event, "DKConsole_Clear")){
+		DKWidget_SetInnerHtml("DKConsole_Content","");
+	}
+	if(DK_Id(event, "DKConsole_Close")){
 		DKClose("DKConsole/DKConsole.js");
 	}
 	
@@ -35,7 +39,7 @@ function DKConsole_OnEvent(event)
 /////////////////////////////////
 function DKConsole_Notify(string)
 {
-	var line = DKWidget_CreateElement("DKConsole.html", "a", "DKConsole_line");
+	var line = DKWidget_CreateElement("DKConsole_Content", "a", "DKConsole_line");
 	DKWidget_SetProperty(line,"display","block");
 	DKWidget_SetProperty(line,"color",DKConsole_color);
 	DKWidget_SetInnerHtml(line, string);
