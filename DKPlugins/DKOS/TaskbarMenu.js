@@ -128,14 +128,17 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "Info")){
 		DKLog("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
-		var list = objects.replace(/,/g, '\n');
-		list += "\n\n";
-		DKLog(list);
+		var arry = objects.split(",");
+		for(var i=0; i<arry.length; i++){
+			DKLog(arry[i]+"\n");
+		}
 		
 		DKLog("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
-		var list2 = events.replace(/,/g, '\n');
-		DKLog(list2);
+		var arry = events.split(",");
+		for(var i=0; i<arry.length; i++){
+			DKLog(arry[i]+"\n");
+		}
 	}
 	if(DK_Id(event, "Reload")){
 		DKFrame_CloseAll();
