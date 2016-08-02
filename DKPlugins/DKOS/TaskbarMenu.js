@@ -3,7 +3,7 @@ function TaskbarMenu_Init()
 {
 	DKCreate("DKOS/TaskbarMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
-	//DKAddEvent("GLOBAL", "OpenFile", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
@@ -30,7 +30,8 @@ function TaskbarMenu_Init()
 function TaskbarMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
-	//DKRemoveEvent("GLOBAL", "OpenFile", TaskbarMenu_OnEvent);
+	DKRemoveEvent("OpenSource", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
 	DKRemoveEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
 	DKRemoveEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
 	DKRemoveEvent("Info", "click", TaskbarMenu_OnEvent);
@@ -44,7 +45,11 @@ function TaskbarMenu_End()
 	DKRemoveEvent("InputTest", "click", TaskbarMenu_OnEvent);
 	DKRemoveEvent("OpenBrowser", "click", TaskbarMenu_OnEvent);
 	DKRemoveEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
-	DKRemoveEvent("OpenSupertball", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("OpenSuperball", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("TestSound", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("TestVideo", "click", TaskbarMenu_OnEvent);
+	DKRemoveEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
 	DKClose("DKOS/TaskbarMenu.html");
 }
 
@@ -115,6 +120,9 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "TestVideo")){
 		DKCreate("DKVideo");
 		DKVideo_Play("test.avi");
+	}
+	if(DK_Id(event, "OpenSource")){
+		DKLog("OpenSource \n");
 	}
 	if(DK_Id(event, "OpenDebug")){
 		DKRocket_ToggleDebugger();
