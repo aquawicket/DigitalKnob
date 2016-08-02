@@ -324,6 +324,7 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	if(same(id,"GLOBAL")){ return false; }
+	if(!DKValid("DKRocket0")){ return false; }
 
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());
 	if(!element){ return false; } //no element
