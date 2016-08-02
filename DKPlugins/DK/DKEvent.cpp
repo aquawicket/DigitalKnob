@@ -30,6 +30,7 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 	event->id = id;
 	event->type = type;
 	event->jsreturn = jsreturn;
+	replace(event->jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
 	event->object = object;
 	event->event_func = func;
 
@@ -221,34 +222,6 @@ int DKEvent::GetKeyNum()
 	if(data.size() < 1){ return 0; }
 	return toInt(data[0]);
 }
-
-
-/*
-/////////////////////////////
-int DKEvent::GetMouseButton()
-{
-	if(!rEvent){return 0;}
-	return rEvent->GetParameter<int>("button", 0);
-}
-*/
-
-/*
-////////////////////////
-int DKEvent::GetMouseX()
-{
-	if(!rEvent){return 0;}
-	return (rEvent->GetParameter<int>("mouse_x", 0));
-}
-*/
-
-/*
-////////////////////////
-int DKEvent::GetMouseY()
-{
-	if(!rEvent){return 0;}
-	return (rEvent->GetParameter<int>("mouse_y", 0));
-}
-*/
 
 /////////////////////////////////////////////////////////////////////////
 void DKEvent::RenameEventId(const DKString& oldID, const DKString& newID)

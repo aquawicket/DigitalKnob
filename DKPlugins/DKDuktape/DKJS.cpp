@@ -169,7 +169,7 @@ int DKJS::_DKAddEvent(duk_context* ctx)
 	if(duk_to_string(ctx, 2)){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
-		replace(jsreturn, "() {/* ecmascript */}", "");
+		//replace(jsreturn, "() {/* ecmascript */}", "");
 	}
 
 	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get("DKDuktape0"));
@@ -185,7 +185,7 @@ int DKJS::_DKRemoveEvent(duk_context* ctx)
 	if(duk_to_string(ctx, 2)){
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
-		replace(jsreturn, "() {/* ecmascript */}", "");
+		//replace(jsreturn, "() {/* ecmascript */}", "");
 	}
 
 	DKEvent::RemoveEvent(id, type, jsreturn);

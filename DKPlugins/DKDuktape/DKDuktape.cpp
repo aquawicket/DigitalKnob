@@ -197,7 +197,7 @@ void DKDuktape::OnEvent(DKEvent* event)
 	if(type.empty()){ return; } //we need a type
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
-	replace(jsreturn, "() {\"ecmascript\"}", "");
+	//replace(jsreturn, "() {\"ecmascript\"}", "");
 	if(jsreturn.empty() || same(jsreturn,"0")){
 		DKLog("DKDuktape::OnEvent: jsreturn variable invalid. \n", DKERROR);
 		return;
