@@ -130,6 +130,7 @@ function TaskbarMenu_OnEvent(event)
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
 		for(var i=0; i<arry.length; i++){
+			if(!arry[i]){ continue; }
 			DKLog(arry[i]+"\n");
 		}
 		
@@ -137,6 +138,7 @@ function TaskbarMenu_OnEvent(event)
 		var events = DK_GetEvents();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
+			if(!arry[i]){ continue; }
 			DKLog(arry[i]+"\n");
 		}
 	}

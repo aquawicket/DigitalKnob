@@ -171,55 +171,15 @@ DKString DKEvent::GetId()
 ////////////////////////////
 DKString DKEvent::GetValue()
 {
-	/*
-	DKString value;
-	if(rEvent){
-		value = rEvent->GetParameter<DKCString>("msg0", "").CString(); //custom widget event?
-		if(!value.empty()){ return value; }
-	
-		DKElement* element = rEvent->GetCurrentElement();
-
-		if(DKWidget::GetAttribute(element, "value", value)){ return value; }
-
-		if(element){	
-			if(element->GetTagName() == "select"){ //select element value?
-				DKElementFormControl* ele = static_cast<DKElementFormControl*>(element);
-				if(!ele){ return value; }
-				value = ele->GetValue().CString();
-				if(!value.empty()){ return value; }
-			}
-
-			if(element->HasAttribute("value")){ //element value attribue ?
-				DKCString temp;
-				temp = element->GetAttribute("value")->Get<DKCString>();
-				value = temp.CString();
-				if(!value.empty()){ return value; }
-			}
-		}
-	}
-
-	if(data.size()){
-		return data[0];
-	}
-
-	return "";
-	*/
 	DKString value = toString(data, ",");
 	return value;
 }
 
-
-
 /////////////////////////////////
 DKString DKEvent::GetValue(int n)
 {
-	//if(!rEvent){return "";}
-	//DKString var = "msg"+toString(n);
-	//DKString value = rEvent->GetParameter<DKCString>(var.c_str(), "").CString();
-	//return value;
 	return data[n];
 }
-
 
 ////////////////////////
 int DKEvent::GetKeyNum()

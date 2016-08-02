@@ -79,7 +79,7 @@ void DKLog(const DKString& text, const int lvl)
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
 		DKString clr = "black"; //default
 		if(lvl == DKERROR){ clr = "red"; }
-		if(lvl == DKWARN){ clr = "yellow"; }
+		if(lvl == DKWARN){ clr = "orange"; }
 		if(lvl == DKSUCCESS){ clr = "green"; }
 		//if(lvl == DKINFO){ clr = "black"; }
 		if(lvl == DKDEBUG){ clr = "blue"; }
