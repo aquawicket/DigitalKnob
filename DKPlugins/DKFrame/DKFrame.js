@@ -80,7 +80,7 @@ function DKFrame_Iframe(title, url, width, height)
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 
-	var iframe = DKWidget_CreateElement(frame, "iframe", "DKCefFrame");
+	var iframe = DKWidget_CreateElement(frame, "iframe", title);
 	DKWidget_SetAttribute(iframe, "src", url);
 	
 	DKWidget_SetAttribute(iframe, "width", "100%");

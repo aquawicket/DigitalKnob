@@ -138,7 +138,7 @@ bool RocketSDL2Renderer::LoadTexture(Rocket::Core::TextureHandle& texture_handle
 {
 	//CEF Texture
 	if(has(source.CString(),"iframe_")){
-		texture_handle = (Rocket::Core::TextureHandle)toString(source.CString()).c_str();
+		texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(&source);
 		texture_name[texture_handle] = source.CString();
 		return true;
 	}
