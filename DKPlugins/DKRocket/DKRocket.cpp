@@ -53,9 +53,9 @@ void DKRocket::Init()
 		}
 	}
 
-	DKEvent::RegisterEventFunc(&DKRocket::RegisterEvent, this);
-	DKEvent::UnegisterEventFunc(&DKRocket::UnregisterEvent, this);
-	DKEvent::RegisterSendFunc(&DKRocket::SendEvent, this);
+	DKEvent::AddRegisterEventFunc(&DKRocket::RegisterEvent, this);
+	DKEvent::AddUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
+	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
 
 	LoadGui("index.html");
 }
@@ -63,6 +63,9 @@ void DKRocket::Init()
 ////////////////////
 void DKRocket::End()
 {
+	DKEvent::RemoveRegisterEventFunc(&DKRocket::RegisterEvent, this);
+	DKEvent::RemoveUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
+	DKEvent::RemoveSendEventFunc(&DKRocket::SendEvent, this);
 	//if(document){ 
 	//	Rocket::Core::Factory::ClearStyleSheetCache();
 	//	document->Close(); 

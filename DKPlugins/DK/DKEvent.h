@@ -47,6 +47,17 @@ public:
 	{
 		reg_funcs.push_back(boost::bind(func, _this, _1, _2));
 	}
+
+	template<class T>
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	static void RemoveRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
+	{
+		for(unsigned int i=0; i<reg_funcs.size(); ++i){
+			if(reg_funcs[i] == boost::bind(func, _this, _1, _2)){
+				reg_funcs.erase(reg_funcs.begin() + i);
+			}
+		}
+	}
 	
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,13 +65,34 @@ public:
 	{
 		unreg_funcs.push_back(boost::bind(func, _this, _1, _2));
 	}
-	
 
 	template<class T>
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	static void AddSendFunc(void (T::*func)(const DKString&, const DKString&, const DKString&), T* _this)
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	static void RemoveUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
+	{
+		for(unsigned int i=0; i<unreg_funcs.size(); ++i){
+			if(unreg_funcs[i] == boost::bind(func, _this, _1, _2)){
+				unreg_funcs.erase(unreg_funcs.begin() + i);
+			}
+		}
+	}
+	
+	template<class T>
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	static void AddSendEventFunc(void (T::*func)(const DKString&, const DKString&, const DKString&), T* _this)
 	{
 		send_funcs.push_back(boost::bind(func, _this, _1, _2, _3));
+	}
+
+	template<class T>
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	static void RemoveSendEventFunc(void (T::*func)(const DKString&, const DKString&, const DKString&), T* _this)
+	{
+		for(unsigned int i=0; i<send_funcs.size(); ++i){
+			if(send_funcs[i] == boost::bind(func, _this, _1, _2, _3)){
+				send_funcs.erase(send_funcs.begin() + i);
+			}
+		}
 	}
 
 	static std::vector<boost::function<bool (const DKString&, const DKString&)> > reg_funcs;
