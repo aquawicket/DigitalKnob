@@ -25,8 +25,12 @@ body, div, option, img, select, dataselect, input, textarea, button
 }
 */
 
-option, div{
+option, div, tr{
 	display:block;
+}
+
+th{
+	font-weight: bold;
 }
 
 p{
