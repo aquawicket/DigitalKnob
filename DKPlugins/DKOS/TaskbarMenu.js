@@ -123,6 +123,14 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "OpenSource")){
 		DKLog("OpenSource \n");
+		DKCreate("DKWidgetJS");
+		var source = DKWidget_GetOuterHtml("body");
+		var local_assets = DKAssets_GetDataPath();
+		DKFile_StringToFile(source, local_assets+"source.html");
+		DKCreate("DKNotepad/DKNotepad.js");
+		DKFrame_Widget("DKNotepad.html");
+		DKNotepad_Open(local_assets+"source.html");
+		//DKLog(source);
 	}
 	if(DK_Id(event, "OpenDebug")){
 		DKRocket_ToggleDebugger();
