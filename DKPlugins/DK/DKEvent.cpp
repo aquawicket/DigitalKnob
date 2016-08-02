@@ -16,27 +16,29 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<void (DKEvent*)> func, DKObject* object)
 {
+	DKString _jsreturn = jsreturn;
+	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+
 	//DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+") \n");
 	if(id.empty()){
-		DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+"): No Id Specified \n",DKERROR);
+		DKLog("DKEvent::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified \n",DKERROR);
 		return false;
 	}
 	if(type.empty()){
-		DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+"): No Type Specified \n",DKERROR);
+		DKLog("DKEvent::AddEvent("+id+","+type+","+_jsreturn+"): No Type Specified \n",DKERROR);
 		return false;
 	}
 	
 	DKEvent* event = new DKEvent;
 	event->id = id;
 	event->type = type;
-	event->jsreturn = jsreturn;
-	replace(event->jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+	event->jsreturn = _jsreturn;
 	event->object = object;
 	event->event_func = func;
 
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(event == events[i]){
-			DKLog("DKEvent::AddEvent(): Event Exists, Reregistering. ("+id+" : "+type+" : "+jsreturn+") \n.", DKWARN);
+			DKLog("DKEvent::AddEvent(): Event Exists, Reregistering. ("+id+" : "+type+" : "+_jsreturn+") \n.", DKWARN);
 			events[i] = event;
 			//External Reg Functions
 			for(unsigned int i=0; i<reg_func.size(); ++i){
@@ -93,8 +95,11 @@ bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString
 /////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn)
 {
+	DKString _jsreturn = jsreturn;
+	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+
 	for(unsigned int i = 0; i < events.size(); ++i){
-		if(same(events[i]->id,id) && same(events[i]->type,type) && same(events[i]->jsreturn,jsreturn)){
+		if(same(events[i]->id, id) && same(events[i]->type, type) && same(events[i]->jsreturn, _jsreturn)){
 			events.erase(events.begin()+i);
 			//i--;
 			return true; //This event should not exist twice.
