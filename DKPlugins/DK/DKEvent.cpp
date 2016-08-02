@@ -3,9 +3,9 @@
 #include "DKClass.h"
 
 std::vector<DKEvent*> DKEvent::events;
-std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::reg_func;
-std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::unreg_func;
-std::vector<boost::function<void (const DKString&, const DKString&, const DKString&)> > DKEvent::send_func;
+std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::reg_funcs;
+std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::unreg_funcs;
+std::vector<boost::function<void (const DKString&, const DKString&, const DKString&)> > DKEvent::send_funcs;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function<void (DKEvent*)> func, DKObject* object)
@@ -41,8 +41,8 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 			DKLog("DKEvent::AddEvent(): Event Exists, Reregistering. ("+id+" : "+type+" : "+_jsreturn+") \n.", DKWARN);
 			events[i] = event;
 			//External Reg Functions
-			for(unsigned int i=0; i<reg_func.size(); ++i){
-				reg_func[i](id, type);
+			for(unsigned int i=0; i<reg_funcs.size(); ++i){
+				reg_funcs[i](id, type);
 			}
 			return true;
 		}
@@ -51,8 +51,8 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 	events.push_back(event);
 
 	//External Reg Functions
-	for(unsigned int i=0; i<reg_func.size(); ++i){
-		reg_func[i](id, type);
+	for(unsigned int i=0; i<reg_funcs.size(); ++i){
+		reg_funcs[i](id, type);
 	}
 
 	return true;
@@ -85,8 +85,8 @@ bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString
 	}
 
 	//External Send Functions
-	for(unsigned int i=0; i<send_func.size(); ++i){
-		send_func[i](id, type, value); //returns bool
+	for(unsigned int i=0; i<send_funcs.size(); ++i){
+		send_funcs[i](id, type, value); //returns bool
 	}
 
 	return false;
@@ -107,8 +107,8 @@ bool DKEvent::RemoveEvent(const DKString& id, const DKString& type, const DKStri
 	}
 
 	//External Reg Functions
-	for(unsigned int i=0; i<unreg_func.size(); ++i){
-		unreg_func[i](id, type); //returns bool
+	for(unsigned int i=0; i<unreg_funcs.size(); ++i){
+		unreg_funcs[i](id, type); //returns bool
 	}
 	return true;
 }

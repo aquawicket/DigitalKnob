@@ -20,7 +20,6 @@ public:
 	static bool RemoveEvents(const DKString& id);
 	static bool RemoveEvents(DKObject* obj);
 	static bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-	//static void ProcessGlobalEvents(const DKString& type);
 	static void RenameEventId(const DKString& oldID, const DKString& newID);
 	DKString GetId();
 	DKString GetType();
@@ -28,11 +27,8 @@ public:
 	DKString GetValue();
 	DKString GetValue(int n);
 	int GetKeyNum();
-	//int GetMouseButton();
-	//int GetMouseX();
-	//int GetMouseY();
-
 	static std::vector<DKEvent*> events;
+
 private:
 	DKEvent(){};
 	DKString id;
@@ -46,28 +42,30 @@ public:
 
 
 	template<class T>
-	//////////////////////////////////////////////////////////////////////////////////////////
-	static void RegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	static void AddRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
 	{
-		reg_func.push_back(boost::bind(func, _this, _1, _2));
+		reg_funcs.push_back(boost::bind(func, _this, _1, _2));
 	}
-	static std::vector<boost::function<bool (const DKString&, const DKString&)> > reg_func;
+	
+	template<class T>
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	static void AddUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
+	{
+		unreg_funcs.push_back(boost::bind(func, _this, _1, _2));
+	}
+	
 
 	template<class T>
-	//////////////////////////////////////////////////////////////////////////////////////////
-	static void UnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this)
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	static void AddSendFunc(void (T::*func)(const DKString&, const DKString&, const DKString&), T* _this)
 	{
-		unreg_func.push_back(boost::bind(func, _this, _1, _2));
+		send_funcs.push_back(boost::bind(func, _this, _1, _2, _3));
 	}
-	static std::vector<boost::function<bool (const DKString&, const DKString&)> > unreg_func;
 
-	template<class T>
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	static void RegisterSendFunc(void (T::*func)(const DKString&, const DKString&, const DKString&), T* _this)
-	{
-		send_func.push_back(boost::bind(func, _this, _1, _2, _3));
-	}
-	static std::vector<boost::function<void (const DKString&, const DKString&, const DKString&)> > send_func;
+	static std::vector<boost::function<bool (const DKString&, const DKString&)> > reg_funcs;
+	static std::vector<boost::function<bool (const DKString&, const DKString&)> > unreg_funcs;
+	static std::vector<boost::function<void (const DKString&, const DKString&, const DKString&)> > send_funcs;
 };
 
 
