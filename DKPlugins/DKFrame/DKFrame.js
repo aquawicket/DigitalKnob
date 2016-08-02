@@ -93,10 +93,10 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
 	
-	var currentBrowser = DKCef_GetCurrentBrowser();
-	DKCef_SetUrl(url, currentBrowser);
+	var currentBrowser = DKCef_GetCurrentBrowser(iframe);
+	DKCef_SetUrl(iframe, url, currentBrowser);
 	DKFrame_CreateResize(frame);
-	DKCef_SetFocus();
+	DKCef_SetFocus(iframe);
 	return iframe;
 }
 

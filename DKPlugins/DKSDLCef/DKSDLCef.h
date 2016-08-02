@@ -167,6 +167,6 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLCef, true);
+REGISTER_OBJECT(DKSDLCef, false);
 
 #endif //DKSDLCef_H

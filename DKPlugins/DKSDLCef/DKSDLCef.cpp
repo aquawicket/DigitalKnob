@@ -17,13 +17,13 @@ void DKSDLCef::Init()
 {
 	cef_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	dkCef = DKCef::Get("DKCefFrame");
+	id = data[1];
+	dkCef = DKCef::Get(id);
 	if(!dkSdlWindow || !dkCef){
 		DKLog("DKOSGRocket::Init(): INVALID OBJECTS \n", DKERROR);
 		return;
 	}
 
-	id = data[1];
 	SetupCef();
 	_mouseLMBdown = false;
 	_scrollFactor = 70.0f;
