@@ -135,7 +135,7 @@ function DKBrowser_OnEvent(event)
 	}
 	if(DK_Id(event, "GoButton")){
 		var url = DKWidget_GetValue("Textbox");
-		DKCef_SetUrl("DKBrowser_cef", url, DKCef_GetCurrentBrowser());
+		DKCef_SetUrl("DKBrowser_cef", url, DKCef_GetCurrentBrowser("DKBrowser_cef"));
 	}
 	if(DK_Type(event, "DKCef_OnLoadingStateChange")){
 		var num = parseInt(DKWidget_GetValue(event));
@@ -148,7 +148,7 @@ function DKBrowser_OnEvent(event)
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){
 		DKLog("DKCef_OnQueueNewBrowser \n");
 		DKBrowser_NewTab();
-		DKCef_SetUrl("DKBrowser_cef", DKWidget_GetValue(event), DKCef_GetCurrentBrowser());
+		DKCef_SetUrl("DKBrowser_cef", DKWidget_GetValue(event), DKCef_GetCurrentBrowser("DKBrowser_cef"));
 		return;
 	}
 	if(DK_Type(event, "DKCef_ContextMenu")){
@@ -191,7 +191,7 @@ function DKBrowser_OnLoadError(error)
 		var url = DKWidget_GetValue("Textbox");
 		url = url.replace(" ", "%20");
 		var search = "https://www.google.com/?gws_rd=ssl#q=" + url;
-		DKCef_SetUrl("DKBrowser_cef", search, DKCef_GetCurrentBrowser());
+		DKCef_SetUrl("DKBrowser_cef", search, DKCef_GetCurrentBrowser("DKBrowser_cef"));
 	}
 }
 
