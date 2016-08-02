@@ -107,6 +107,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	Rocket::Core::ElementList iframes;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
+		if(iframes[i]->HasChildNodes()){ continue; }
 		DKString id = iframes[i]->GetId().CString();
 		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
