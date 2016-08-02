@@ -353,7 +353,6 @@ function DKDev_NewPage()
 function DKDev_NewDiv()
 {
 	var element = DKWidget_CreateElement(stored_element, "div", "Div");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -369,7 +368,6 @@ function DKDev_NewDiv()
 function DKDev_NewText()
 {
 	var element = DKWidget_CreateElement(stored_element, "div", "Text");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -385,7 +383,6 @@ function DKDev_NewText()
 function DKDev_NewButton()
 {
 	var element = DKWidget_CreateElement(stored_element, "button", "Button");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -402,7 +399,6 @@ function DKDev_NewImage(file)
 {
 	DKLog("DKDev_NewImage("+file+") \n", DKDEBUG);
 	var element = DKWidget_CreateElement(stored_element, "img", "Image");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "src", file);
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
@@ -416,7 +412,6 @@ function DKDev_NewImage(file)
 function DKDev_NewTextbox()
 {
 	var element = DKWidget_CreateElement(stored_element, "input", "Textbox");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "type", "text");
 	DKWidget_SetAttribute(element, "value", "test");
 	DKWidget_SetProperty(element, "position", "absolute");
@@ -431,7 +426,6 @@ function DKDev_NewTextbox()
 function DKDev_NewTextarea()
 {
 	var element = DKWidget_CreateElement(stored_element, "textarea", "Textarea");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -444,7 +438,6 @@ function DKDev_NewTextarea()
 function DKDev_NewDropdown()
 {
 	var element = DKWidget_CreateElement(stored_element, "select", "Dropdown");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -457,7 +450,6 @@ function DKDev_NewDropdown()
 function DKDev_NewCheckbox()
 {
 	var element = DKWidget_CreateElement(stored_element, "input", "Checkbox");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "type", "checkbox");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
@@ -471,7 +463,6 @@ function DKDev_NewCheckbox()
 function DKDev_NewRadioButton()
 {
 	var element = DKWidget_CreateElement(stored_element, "input", "RadioButton");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "type", "radio");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
@@ -485,7 +476,6 @@ function DKDev_NewRadioButton()
 function DKDev_NewiFrame()
 {
 	var element = DKWidget_CreateElement(stored_element, "iframe", "DKCefFrame");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
 	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
@@ -501,7 +491,6 @@ function DKDev_NewiFrame()
 function DKDev_NewVSlider()
 {
 	var element = DKWidget_CreateElement(stored_element, "input", "VSlider");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "type", "range");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
@@ -515,7 +504,6 @@ function DKDev_NewVSlider()
 function DKDev_NewHSlider()
 {
 	var element = DKWidget_CreateElement(stored_element, "input", "HSlider");
-	DKWidget_RemoveAttribute(element, "nosave");
 	DKWidget_SetAttribute(element, "type", "range");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
@@ -543,10 +531,7 @@ function DKDev_SaveHtmlFile(id)
 	arry2.unshift(file);
 	for(var b=0; b<arry2.length; b++){
 		DKLog("DKDev_SaveHtmlFile("+id+"), Processing element("+arry2[b]+"). \n", DKINFO);
-		if(DKWidget_GetAttribute(arry2[b], "nosave")){
-			DKWidget_RemoveElement(arry2[b]); //remove nosave nodes
-			continue;
-		}
+
 		if(DKWidget_GetAttribute(arry2[b], "nosave_value")){
 			DKLog("DKDev_SaveHtmlFile("+id+"), nosave_value detected. \n", DKINFO);
 			DKWidget_RemoveAttribute(arry2[b], "value"); //remove value attributes

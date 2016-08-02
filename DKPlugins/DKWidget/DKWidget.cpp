@@ -341,7 +341,6 @@ bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
 DKElement* DKWidget::CreateElement(const DKString& tag)
 {
 	DKElement* element = dkRocket->GetDocument()->CreateElement(tag.c_str());
-	element->SetAttribute("nosave","1");
 	element->SetAttribute("style","top:0rem;"); //we do this just to initialze an active style string
 	return element;
 }
@@ -355,7 +354,6 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 	GetAvailableId(id, ele_id);
 
 	DKWidget::SetAttribute(element, "id", ele_id);
-	element->SetAttribute("nosave","1");
 	DKWidget::AppendChild(parent, element);
 
 	DKRocketToRML dkRocketToRML;
@@ -373,7 +371,6 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 	GetAvailableId(id, ele_id);
 
 	DKWidget::SetAttribute(element, "id", ele_id);
-	element->SetAttribute("nosave","1");
 	DKWidget::PrependChild(GetElementById(parent), element);
 
 	DKRocketToRML dkRocketToRML;
@@ -392,7 +389,6 @@ DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& 
 	GetAvailableId(id, ele_id);
 
 	DKWidget::SetAttribute(ele, "id", ele_id);
-	ele->SetAttribute("nosave","1");
 	DKWidget::InsertBefore(element, ele);
 
 	DKRocketToRML dkRocketToRML;
@@ -1827,19 +1823,6 @@ bool DKWidget::BuildOptionsString(const DKString& id, DKString &options)
 	DKElement* selectbox = element->GetChild(1);
 
 	GetInnerHtml(selectbox, options);
-
-	/*
-	int num = selectbox->GetNumChildren();
-	for(int i=0; i < num; ++i){
-		DKElement* option = selectbox->GetChild(i);
-
-		if(option->HasAttribute("nosave")){ //Does not work :(
-			DKLog("nosave\n");
-		}
-
-		//DKString inner = option->GetInnerRML().CString();
-	}
-	*/
 
 	replace(options,"<option />","");
 	if(!has(options,"<option>")){
