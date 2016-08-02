@@ -31,7 +31,7 @@ void DKSDLCef::Init()
 	DKSDLWindow::AddEventFunc(&DKSDLCef::handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc(id+"::OnResize", &DKSDLCef::OnResize, this);
-	DKClass::RegisterFunc("DKSDLCef::GetTexture", &DKSDLCef::GetTexture, this);
+	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
 }
 
 ////////////////////
