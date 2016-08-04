@@ -1,0 +1,10 @@
+### INSTALL ###
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+#IF(NOT EXISTS C:/android-ndk-r10d/ndk-build.cmd)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(${DKONLINE}/Tools/node-v4.4.7-x64.msi)
+	ANDROID_COMMAND(${DIGITALKNOB}/Download/node-v4.4.7-x64.msi)
+#ENDIF()

@@ -1,3 +1,4 @@
 DKDEPEND(jdk)
 DKDEPEND(apache-ant-1.9.7)
+DKDEPEND(nodeJS)
 #DKDEPEND(DK)
