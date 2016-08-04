@@ -1,10 +1,10 @@
 #pragma once
 #ifndef DKRocketIframe_H
 #define DKRocketIframe_H
-
+#include "DKRocket.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-class DKRocketIframe : public Rocket::Core::EventListener, public DKObjectT<DKRocketIframe>
+class DKRocketIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<DKRocketIframe>
 {
 public:
 	void Init();
