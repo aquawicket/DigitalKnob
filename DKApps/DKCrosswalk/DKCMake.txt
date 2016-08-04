@@ -1,2 +1,3 @@
 DKDEPEND(jdk)
-DKDEPEND(DK)
+DKDEPEND(apache-ant-1.9.7)
+#DKDEPEND(DK)

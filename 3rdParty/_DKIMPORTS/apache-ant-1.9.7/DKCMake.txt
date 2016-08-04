@@ -1,0 +1,10 @@
+### INSTALL ###
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+IF(NOT EXISTS C:/apache-ant-1.9.7)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(${DKONLINE}/Tools/apache-ant-1.9.7-bin.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/apache-ant-1.9.7-bin.zip C:/)
+ENDIF()
