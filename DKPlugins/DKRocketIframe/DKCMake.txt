@@ -1,3 +1,5 @@
 DKDEPEND(DKRocket)
 DKDEPEND(DKCef)
+
+DKPLUGIN(DKRocketIframe)
 DKASSETS(DKRocketIframe)
