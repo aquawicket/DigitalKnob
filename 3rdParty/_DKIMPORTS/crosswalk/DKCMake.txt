@@ -3,4 +3,4 @@ IF(NOT WIN32)
 	RETURN()
 ENDIF()
 
-ANDROID_COMMAND("npm install -g crosswalk-app-tools")
+WIN32_COMMAND("npm install -g crosswalk-app-tools")
