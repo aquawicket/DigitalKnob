@@ -1,4 +1,5 @@
-package digitalknob.dkwebview;
+// AUTO-GENERATED FILE. "dkapp" is renamed.
+package digitalknob.dkapp;
 
 import android.app.Activity;
 import android.os.Bundle;
