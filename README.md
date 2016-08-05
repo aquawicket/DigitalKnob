@@ -62,7 +62,6 @@ Internet Explorer (9.0+) <br>
 [SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
 [SDL_image](https://www.libsdl.org/projects/SDL_image/) <br>
 [SDL_mixer](https://github.com/aduros/SDL_mixer) <br>
-[SFML](https://github.com/SFML/SFML) "coming soon" <br>
 [Smpeg](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
 [StackWalker](https://stackwalker.codeplex.com/) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
