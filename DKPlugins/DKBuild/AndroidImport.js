@@ -70,6 +70,7 @@ function AndroidImport_Import()
 	DK_WaitForImage(datapath+"DKBuild/enableNdk.bmp", 30); //Check for 30 seconds
 	DK_ClickImage(datapath+"DKBuild/enableNdk.bmp");
 	
+	/*
 	DK_WaitForImage(datapath+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
 	DK_ClickImage(datapath+"DKBuild/selectNdk.bmp");
 	
@@ -90,11 +91,13 @@ function AndroidImport_Import()
 	DK_ReleaseKey(17); //release ctrl
 	DK_Sleep(500);
 	DK_StrokeKey(13) //stroke enter
+	*/
 	
 	//update C:/AndroidStudio/"APP"/app/build.gradle
 	var gradle = DKFile_FileToString(WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 
 	//replace buildTypes with 
+	gradle = gradle.replace("compileSdkVersion 23", "compileSdkVersion 19");
 	gradle = gradle.replace("buildTypes", "sourceSets { main { jni.srcDirs = [] } } \n buildTypes");
 	
 	//write file
