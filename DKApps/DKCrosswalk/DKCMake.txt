@@ -1,3 +1,8 @@
+IF(NOT ANDROID)
+	MESSAGE(FATAL_ERROR "This is an Android only application")
+	RETURN()
+ENDIF()
+
 DKDEPEND(jdk)
 DKDEPEND(apache-ant-1.9.7)
 DKDEPEND(nodeJS)

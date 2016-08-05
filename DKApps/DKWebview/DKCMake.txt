@@ -1,1 +1,6 @@
+IF(NOT ANDROID)
+	MESSAGE(FATAL_ERROR "This is an Android only application")
+	RETURN()
+ENDIF()
+
 #DKDEPEND(DK)
