@@ -6,6 +6,7 @@ ENDIF()
 IF(ANDROID)
 	DKDEPEND(Boost-for-Android-master Boost_System)
 	DKDEPEND(Boost-for-Android-master Boost_Filesystem)
+	DKDEPEND(android-studio)
 ENDIF()
 
 IF(IOS OR IOSSIM)
