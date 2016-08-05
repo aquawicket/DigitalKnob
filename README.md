@@ -70,6 +70,7 @@ Internet Explorer (9.0+) <br>
 [Tiff](https://github.com/LuaDist/libtiff) <br>
 [Vorbis](https://github.com/soundcloud/vorbis) <br>
 [Waave](https://github.com/grepwood/waave) <br>
+[WebView](https://developer.android.com/reference/android/webkit/WebView.html) "coming soon" <br>
 [Xz](https://github.com/nobled/xz) <br>
 [Zlib](https://github.com/madler/zlib) <br>
 
