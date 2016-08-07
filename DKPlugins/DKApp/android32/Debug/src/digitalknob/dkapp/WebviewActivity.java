@@ -3,12 +3,15 @@ package digitalknob.dkapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class WebviewActivity extends Activity {
 
+    String homepage = "http://www.google.com";
     private WebView mWebView;
 
     @Override
@@ -39,6 +42,32 @@ public class WebviewActivity extends Activity {
         mWebView.getSettings().setAppCacheEnabled(false);
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        mWebView.loadUrl("http://digitalknob.com/DKSDLOS");
+        mWebView.loadUrl(homepage);
+    }
+
+    boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        String webUrl = mWebView.getUrl();
+        //Toast.makeText(this, webUrl, Toast.LENGTH_SHORT).show();
+        if (mWebView.canGoBack() && !webUrl.contains(homepage)){
+            mWebView.goBack();
+        }else {
+            mWebView.scrollTo(0,0);
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
     }
 }
