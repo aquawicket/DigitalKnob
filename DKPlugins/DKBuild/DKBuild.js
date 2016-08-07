@@ -139,12 +139,12 @@ function DKBuild_InstallVC2015()
 	var datapath = DKAssets_GetDataPath();
 	
 	if(DK_GetOS() == "WIN32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU.exe", datapath);
-		DK_System(datapath+"/vs_community_ENU.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
+		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
 	}
 	else if(DK_GetOS() == "WIN64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU.exe", datapath);
-		DK_System(datapath+"/vs_community_ENU.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
+		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
 	}
 }
 
