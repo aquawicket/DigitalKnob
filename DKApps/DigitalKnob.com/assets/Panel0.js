@@ -2,6 +2,7 @@
 function Panel0_Init()
 {
 	DKCreate("Panel0.html");
+	DKCreate("Content.html,Panel0_content");
 }
 
 /////////////////////
