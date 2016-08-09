@@ -1845,14 +1845,14 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 	FILE(WRITE ${DKPROJECT}/Android.h "${android_H}")
 
 	IF(ANDROID AND DEBUG)
-		FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
-		#STRING(REPLACE "dkapp" "${arg}" androidManifest "${androidManifest}")
+		## If SDL, adjust the Activity entry point
 		IF(SDL)
+			FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
 			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+			FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
 		ENDIF()
-		FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
 	
-		## update all files recursivley
+		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${DEBUG}/" "${DKPROJECT}/${OS}/${DEBUG}/*.xml" "${DKPROJECT}/${OS}/${DEBUG}/*.java")
 		FOREACH(each_file ${allfiles})
 			SET(thefile "${DKPROJECT}/${OS}/${DEBUG}/${each_file}")
@@ -1861,39 +1861,18 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 			FILE(WRITE ${thefile} "${filestring}")
 		ENDFOREACH()
 		
-		#FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/res/values/strings.xml stringsxml)
-		#STRING(REPLACE "dkapp" "${arg}" stringsxml "${stringsxml}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/res/layout/ui_layout_gles.xml ui_layout_gles)
-		#STRING(REPLACE "dkapp" "${arg}" ui_layout_gles "${ui_layout_gles}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/SDLActivity.java sdlactivity)
-		#STRING(REPLACE "dkapp" "${arg}" sdlactivity "${sdlactivity}")
-		
-		#FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/DKMain.java dkmain)
-		#STRING(REPLACE "dkapp" "${arg}" dkmain "${dkmain}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/EGLview.java eglview)
-		#STRING(REPLACE "dkapp" "${arg}" eglview "${eglview}")
-		
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/res/values/strings.xml "${stringsxml}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/res/layout/ui_layout_gles.xml "${ui_layout_gles}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/SDLActivity.java "${sdlactivity}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/DKMain.java "${dkmain}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp/EGLview.java "${eglview}")
 		DKREMOVE(${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/${arg})
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/${arg})
 	ENDIF()
 	IF(ANDROID AND RELEASE)
-		FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
-		#STRING(REPLACE "dkapp" "${arg}" androidManifest "${androidManifest}")
+		## If SDL, adjust the Activity entry point
 		IF(SDL)
+			FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
 			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+			FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
 		ENDIF()
-		FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
-	
-		## update all files recursivley
+		
+		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${RELEASE}/" "${DKPROJECT}/${OS}/${RELEASE}/*.xml" "${DKPROJECT}/${OS}/${RELEASE}/*.java")
 		FOREACH(each_file ${allfiles})
 			SET(thefile "${DKPROJECT}/${OS}/${RELEASE}/${each_file}")
@@ -1903,27 +1882,6 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 			FILE(WRITE ${thefile} "${filestring}")
 		ENDFOREACH()
 		
-		#FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/values/strings.xml stringsxml)
-		#STRING(REPLACE "dkapp" "${arg}" stringsxml "${stringsxml}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/res/layout/ui_layout_gles.xml ui_layout_gles)
-		#STRING(REPLACE "dkapp" "${arg}" ui_layout_gles "${ui_layout_gles}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/SDLActivity.java sdlactivity)
-		#STRING(REPLACE "dkapp" "${arg}" sdlactivity "${sdlactivity}")
-		
-		#FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/DKMain.java dkmain)
-		#STRING(REPLACE "dkapp" "${arg}" dkmain "${dkmain}")
-	
-		#FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/EGLview.java eglview)
-		#STRING(REPLACE "dkapp" "${arg}" eglview "${eglview}")
-	
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/res/values/strings.xml "${stringsxml}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/res/layout/ui_layout_gles.xml "${ui_layout_gles}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/SDLActivity.java "${sdlactivity}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/DKMain.java "${dkmain}")
-		#FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp/EGLview.java "${eglview}")
 		DKREMOVE(${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/${arg})
 		DKRENAME(${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/dkapp ${DKPROJECT}/${OS}/${RELEASE}/src/digitalknob/${arg})
 	ENDIF()
