@@ -1,3 +1,3 @@
 DKCreate("DKWindow");
 DKCreate("DKRocket")
-DKCreate("Panel0.html");
+DKCreate("Panel0.js");
