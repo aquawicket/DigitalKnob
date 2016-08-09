@@ -2,6 +2,7 @@
 function OsInfo_Init()
 {
 	DKCreate("OsInfo.html,Panel0_content");
+	DKWidget_SetInnerHtml("OsInfo_OS", "OS: "+DK_GetOS());
 }
 
 /////////////////////
