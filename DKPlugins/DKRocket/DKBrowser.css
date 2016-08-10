@@ -1,15 +1,4 @@
 
-html{
-	height:100%;
-	font-size: 1.0px;
-}
-
 button{
 	font-size: 13rem;
-}
-
-option:hover
-{
-	background-color: rgb(123,157,212);
-	color:white;
 }

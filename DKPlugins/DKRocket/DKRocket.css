@@ -3,10 +3,6 @@
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
-html{
-	height:100%;
-	font-size: 1.0px;
-}
 
 body{
 	font-family: "Times New Roman";
@@ -14,7 +10,6 @@ body{
 	height:100%;
 	padding-left: 8px;
 	padding-right: 8px;
-	font-size: 16px;
 	display: block;
 }
 
@@ -93,10 +88,6 @@ h6{
 	margin-bottom: 2.33em;
 }
 
-option:hover{
-	background-color: rgb(123,157,212);
-	color:white;
-}
 
 
 /**********************************/
