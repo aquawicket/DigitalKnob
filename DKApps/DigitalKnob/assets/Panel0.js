@@ -19,6 +19,7 @@ function Panel0_OnEvent(event)
 {
 	//DKLog("Panel0_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Id(event, "AppsMenu")){
-		DKLog("AppsMenu"); //TODO
+		//DKLog("AppsMenu"); //TODO
+		DKCreate("AppsMenu.js");
 	}
 }
