@@ -644,7 +644,6 @@ IF(ANDROID)
 	MESSAGE("\n")
 
 	#copy android files from DKPlugins/DKApp
-	##DKCOPY(${DKPLUGINS}/DKApp/${OS} ${DKPROJECT}/)
 	DKREMOVE(${DKPROJECT}/android32/Debug/CMakeCache.txt)
 	DKREMOVE(${DKPROJECT}/android32/Release/CMakeCache.txt)
 	DKREMOVE(${DKPROJECT}/android64/Debug/CMakeCache.txt)
