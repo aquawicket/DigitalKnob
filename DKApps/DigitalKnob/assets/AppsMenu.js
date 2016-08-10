@@ -17,13 +17,14 @@ function AppsMenu_End()
 ////////////////////////////////
 function AppsMenu_OnEvent(event)
 {
-	//Process selection here
+	//TODO - Panel0_content needs it's own .js
+	
 	if(DK_Id(event, "DKFacebook")){
-		//DKLog("DKFacebook \n");
+		DKWidget_SetInnerHtml("Panel0_content","");
 		DKCreate("DKFacebook.js");
 	}
 	if(DK_Id(event, "DKYoutube")){
-		//DKLog("DKYoutube \n");
+		DKWidget_SetInnerHtml("Panel0_content","");
 		DKCreate("DKYoutube.js");
 	}
 	

@@ -62,8 +62,10 @@ function LoadJS(url)
 		DKLog("LoadJS("+url+"): file invalid\n", DKERROR);
 		return; 
 	}
+	
+	//already loaded, remove it first
 	if(document.getElementById(url) || document.getElementById(file)){
-		return; //already loaded
+		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
 	}
 	
 	// Adding the script tag to the head as suggested before
