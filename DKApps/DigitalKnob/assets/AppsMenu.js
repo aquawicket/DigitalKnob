@@ -19,10 +19,12 @@ function AppsMenu_OnEvent(event)
 {
 	//Process selection here
 	if(DK_Id(event, "DKFacebook")){
-		DKLog("DKFacebook \n");
+		//DKLog("DKFacebook \n");
+		DKCreate("DKFacebook.js");
 	}
 	if(DK_Id(event, "DKYoutube")){
-		DKLog("DKYoutube \n");
+		//DKLog("DKYoutube \n");
+		DKCreate("DKYoutube.js");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
