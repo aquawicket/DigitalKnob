@@ -20,7 +20,7 @@ function DKWindow_GetWidth()
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	DKLog("DKWindow_GetWidth(): = "+x.toString());
+	//DKLog("DKWindow_GetWidth(): = "+x.toString());
 	return x;
 }
 
@@ -33,7 +33,7 @@ function DKWindow_GetHeight()
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	DKLog("DKWindow_GetHeight(): = "+y.toString());
+	//DKLog("DKWindow_GetHeight(): = "+y.toString());
 	return y;
 }
 
