@@ -25,4 +25,5 @@
     <string name="uiDialogTextAddress">Write file address</string>
     <string name="uiDialogOk">Accept</string>
     <string name="uiDialogCancel">Cancel</string>
+	<color name="darkBlue">#303F9F</color>
 </resources>
