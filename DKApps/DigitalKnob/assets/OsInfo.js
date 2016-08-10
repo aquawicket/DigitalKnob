@@ -1,7 +1,7 @@
 //////////////////////
 function OsInfo_Init()
 {
-	DKCreate("OsInfo.html,Panel0_content");
+	DKCreate("OsInfo.html,Panel0.html");
 	DKWidget_SetInnerHtml("OsInfo_OS", "OS: "+DK_GetOS());
 	OsInfo_Resize();
 	
