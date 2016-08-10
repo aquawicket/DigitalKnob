@@ -6,6 +6,7 @@ function Panel0_Init()
 	DKCreate("Home.js");
 	DKCreate("OsInfo.js");
 	
+	DKAddEvent("Image", "click", Panel0_OnEvent);
 	DKAddEvent("AppsMenu", "click", Panel0_OnEvent);
 }
 
@@ -19,8 +20,10 @@ function Panel0_End()
 function Panel0_OnEvent(event)
 {
 	//DKLog("Panel0_OnEvent("+event+") \n", DKDEBUG);
+	if(DK_Id(event, "Image")){
+		DKCreate("Home.js");
+	}
 	if(DK_Id(event, "AppsMenu")){
-		//DKLog("AppsMenu"); //TODO
 		DKCreate("AppsMenu.js");
 	}
 }
