@@ -18,6 +18,7 @@ public:
 	static int SetY(duk_context* ctx);
 	static int SetWidth(duk_context* ctx);
 	static int SetHeight(duk_context* ctx);
+	static int GetPixelRatio(duk_context* ctx);
 	static int IsFullscreen(duk_context* ctx);
 	static int Fullscreen(duk_context* ctx);
 	static int Windowed(duk_context* ctx);

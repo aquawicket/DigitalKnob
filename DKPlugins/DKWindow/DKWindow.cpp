@@ -147,6 +147,13 @@ void DKWindow::SetHeight(int h)
 	}
 }
 
+///////////////////////////////
+float DKWindow::GetPixelRatio()
+{
+	//TODO
+	return 1.0f;
+}
+
 /////////////////////////////
 bool DKWindow::IsFullscreen()
 {

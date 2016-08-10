@@ -22,6 +22,7 @@ public:
 	static void SetY(int y);
 	static void SetWidth(int w);
 	static void SetHeight(int h);
+	static float GetPixelRatio();
 	static bool IsFullscreen();
 	static void Fullscreen();
 	static void Windowed();

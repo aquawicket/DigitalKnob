@@ -16,6 +16,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY, 1);
 	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth, 1);
 	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight, 1);
+	DKDuktape::AttachFunction("DKWindow_GetPixelRatio", DKWindowJS::GetPixelRatio, 1);
 	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
@@ -82,6 +83,13 @@ int DKWindowJS::SetHeight(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	DKWindow::SetHeight(toInt(data));
+	return 1;
+}
+
+///////////////////////////////////////////////
+int DKWindowJS::GetPixelRatio(duk_context* ctx)
+{
+	duk_push_number(ctx, DKWindow::GetPixelRatio());
 	return 1;
 }
 
