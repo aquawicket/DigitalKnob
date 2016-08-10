@@ -1,8 +1,6 @@
 INCLUDE(DKCMake/FUNCTIONS.cmake)
 INCLUDE(DKCMake/OPTIONS.cmake)
 
-DKREMOVE(${DKPROJECT}/android32)
-
 MESSAGE("##########################")
 MESSAGE("#####   VARIABLES    #####")
 MESSAGE("##########################")
