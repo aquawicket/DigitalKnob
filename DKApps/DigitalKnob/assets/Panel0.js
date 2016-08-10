@@ -21,6 +21,7 @@ function Panel0_OnEvent(event)
 {
 	//DKLog("Panel0_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Id(event, "Image")){
+		DKWidget_SetInnerHtml("Panel0_content","");
 		DKCreate("Home.js");
 	}
 	if(DK_Id(event, "AppsMenu")){
