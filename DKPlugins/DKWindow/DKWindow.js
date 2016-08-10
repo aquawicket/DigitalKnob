@@ -48,3 +48,9 @@ function DKWindow_GetMouseY()
 {
 	return mouseY;
 }
+
+/////////////////////////////////
+function DKWindow_GetPixelRatio()
+{
+	return window.devicePixelRatio;
+}
