@@ -26,4 +26,7 @@
     <string name="uiDialogOk">Accept</string>
     <string name="uiDialogCancel">Cancel</string>
 	<color name="darkBlue">#303F9F</color>
+	<style name="SplashTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
 </resources>
