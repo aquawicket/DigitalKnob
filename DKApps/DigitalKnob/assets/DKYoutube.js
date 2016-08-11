@@ -17,6 +17,6 @@ function DKYoutube_End()
 function DKYoutube_OnEvent(event)
 {
 	if(DK_Id(event, "DKYoutube_download")){
-		window.location = "http://Digitalknob.com/Download/DKYoutube.apk";  //FIXME - We need a DKWindow command for this
+		window.location = "http://digitalknob.com/Download/DKYoutube.apk";  //FIXME - We need a DKWindow command for this
 	}
 }
