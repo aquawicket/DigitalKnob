@@ -25,6 +25,7 @@
     <string name="uiDialogTextAddress">Write file address</string>
     <string name="uiDialogOk">Accept</string>
     <string name="uiDialogCancel">Cancel</string>
+	<color name="black">#000000</color>
 	<color name="darkBlue">#303F9F</color>
 	<style name="SplashTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/background_splash</item>
