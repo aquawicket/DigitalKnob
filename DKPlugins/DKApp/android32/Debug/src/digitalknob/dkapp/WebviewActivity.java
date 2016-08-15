@@ -22,7 +22,10 @@ public class WebviewActivity extends Activity {
         setContentView(R.layout.webview);
 
         mWebView=(WebView)findViewById(R.id.webview_webview);
-
+		
+		if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)){
+            mWebView.setWebContentsDebuggingEnabled(true); //Debuggable in Chrome
+        }
         mWebView.setInitialScale(1);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
