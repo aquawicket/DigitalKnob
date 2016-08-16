@@ -48,10 +48,33 @@ public class WebviewActivity extends Activity {
         mWebView.getSettings().setAppCacheEnabled(false);
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-		//Location
+		//Open links in WebView
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
                 callback.invoke(origin, true, false);
+            }
+        });
+
+        //Download in WebView
+        mWebView.setDownloadListener(new DownloadListener() {
+            public void onDownloadStart(String url, String userAgent,
+                                        String contentDisposition, String mimetype,
+                                        long contentLength) {
+                DownloadManager.Request request = new DownloadManager.Request(
+                        Uri.parse(url));
+
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); //Notify client once download is completed!
+                String fileName = url.substring(url.lastIndexOf('/') + 1);
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+                DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                dm.enqueue(request);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT); //This is important!
+                intent.addCategory(Intent.CATEGORY_OPENABLE); //CATEGORY.OPENABLE
+                intent.setType("*/*");//any application,any extension
+                Toast.makeText(getApplicationContext(), "Downloading File", //To notify the Client that the file is being downloaded
+                        Toast.LENGTH_LONG).show();
+
             }
         });
 		
