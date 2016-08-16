@@ -2,6 +2,7 @@
 package digitalknob.dkapp;
 
 import android.app.Activity;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.webkit.GeolocationPermissions;
