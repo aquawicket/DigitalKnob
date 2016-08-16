@@ -143,8 +143,6 @@ public class WebviewActivity extends Activity {
             super.onBackPressed();
             return;
         }
-        String webUrl = mWebView.getUrl();
-        //Toast.makeText(this, webUrl, Toast.LENGTH_SHORT).show();
         if (mWebView.canGoBack()){
             mWebView.goBack();
         }else {
