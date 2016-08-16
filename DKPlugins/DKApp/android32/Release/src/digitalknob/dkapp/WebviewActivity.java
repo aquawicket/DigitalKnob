@@ -145,7 +145,7 @@ public class WebviewActivity extends Activity {
         }
         String webUrl = mWebView.getUrl();
         //Toast.makeText(this, webUrl, Toast.LENGTH_SHORT).show();
-        if (mWebView.canGoBack() && !webUrl.contains(homepage)){
+        if (mWebView.canGoBack()){
             mWebView.goBack();
         }else {
             mWebView.scrollTo(0,0);
