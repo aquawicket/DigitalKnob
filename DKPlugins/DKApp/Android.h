@@ -7,6 +7,17 @@
 
 extern "C" {
 
+	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_initJNIBridge(JNIEnv *env, jobject jobj){
+		DKFile::appfilename = "dkapp";
+		initJNIBridge(env, jobj);
+	}
+	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_exitJNIBridge(JNIEnv *env, jobject jobj){
+		exitJNIBridge(env, jobj);
+	}
+	JNIEXPORT jstring JNICALL Java_digitalknob_dkapp_DK_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
+		return CallCppFunction(env, cls, data);
+	}
+	
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DKMain_initJNIBridge(JNIEnv *env, jobject jobj){
 		DKFile::appfilename = "dkapp";
 		initJNIBridge(env, jobj);
