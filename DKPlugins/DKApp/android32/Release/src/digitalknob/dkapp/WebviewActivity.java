@@ -3,7 +3,10 @@ package digitalknob.dkapp;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -101,20 +104,38 @@ public class WebviewActivity extends Activity {
             public void onDownloadStart(String url, String userAgent,
                                         String contentDisposition, String mimetype,
                                         long contentLength) {
-                DownloadManager.Request request = new DownloadManager.Request(
-                        Uri.parse(url));
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); //Notify client once download is completed!
-                String fileName = url.substring(url.lastIndexOf('/') + 1);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-                DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                dm.enqueue(request);
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT); //This is important!
-                intent.addCategory(Intent.CATEGORY_OPENABLE); //CATEGORY.OPENABLE
-                intent.setType("*/*");//any application,any extension
-                Toast.makeText(getApplicationContext(), "Downloading File", //To notify the Client that the file is being downloaded
-                        Toast.LENGTH_LONG).show();
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); //Notify client once download is completed!
+            final String fileName = url.substring(url.lastIndexOf('/') + 1);
+            String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" +fileName;
+            final Uri uri = Uri.parse("file://" + destination);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+            final DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            final long downloadId = dm.enqueue(request);
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT); //This is important!
+            intent.addCategory(Intent.CATEGORY_OPENABLE); //CATEGORY.OPENABLE
+            intent.setType("*/*");//any application,any extension
+            Toast.makeText(getApplicationContext(), "Downloading File", Toast.LENGTH_LONG).show();
+
+            BroadcastReceiver onComplete = new BroadcastReceiver() {
+                public void onReceive(Context ctxt, Intent intent) {
+                    Intent install = new Intent(Intent.ACTION_VIEW);
+                    install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    if(fileName.contains(".apk")) {
+                        install.setDataAndType(uri, "application/vnd.android.package-archive");
+                    }
+                    else{
+                        install.setDataAndType(uri, dm.getMimeTypeForDownloadedFile(downloadId));
+                    }
+                    startActivity(install);
+                    unregisterReceiver(this);
+                    finish();
+                }
+            };
+
+            registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
             }
         });
