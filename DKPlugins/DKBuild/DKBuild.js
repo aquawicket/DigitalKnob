@@ -681,7 +681,7 @@ function DKBuild_DoResults()
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64");
 		if(TYPE == "Debug" || TYPE == "ALL"){
 			if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
-				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug/CMakeCache.txt");
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
@@ -692,7 +692,7 @@ function DKBuild_DoResults()
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
 			if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
-				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/android64/Release/CMakeCache.txt");
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
