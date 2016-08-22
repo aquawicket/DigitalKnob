@@ -39,9 +39,11 @@ extern "C" {
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_initSDL(JNIEnv* env, jclass cls, jobject array){
 		initSDL(env,cls,array);
 	}
+	/*
 	JNIEXPORT jstring JNICALL Java_digitalknob_dkapp_SDLActivity_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
 		return CallCppFunction(env, cls, data);
 	}
+	*/
 	
 } //extern "C"
 
