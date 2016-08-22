@@ -15,14 +15,13 @@
 				android:debuggable="true"
     			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity android:name=".DK"
-                  android:theme="@style/SplashTheme"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".SplashActivity" android:theme="@style/SplashTheme" />
         <activity android:name=".DKMain" />
         <activity android:name=".SDLActivity" />
         <activity android:name=".WebviewActivity" />
