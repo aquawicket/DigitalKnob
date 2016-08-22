@@ -48,7 +48,7 @@ public class DK extends Activity
 
 	protected void OpenActivity(String name) {
 		Intent intent = new Intent();
-		intent.setClassName("digitalknob.dkwebview", "digitalknob.dkwebview."+name);
+		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
 		startActivity(intent);
 	}
 }
