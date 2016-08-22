@@ -11,67 +11,44 @@ import android.util.Log;
 ////////////////////////////////
 public class DK extends Activity
 {
-	static {
-		System.loadLibrary("DKAndroid");
-	}
-
-	public native void initJNIBridge();
+	public static native void initJNIBridge();
 	public static native void exitJNIBridge();
 	public static native void CallCppFunction(String data);
-	
-	//Main Android Activity life cycle
+
+	static {
+		System.loadLibrary("DKAndroid");
+		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
+	}
+
 	@Override
 	protected void onCreate(Bundle app) {
-		Log.e("dkapp", "onCreate");
+		Log.e("dkwebview", "onCreate");
 		super.onCreate(app);
-		//initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
 
-		Intent splashActivity;
-		splashActivity = new Intent(this, SplashActivity.class);
-		startActivity(splashActivity);
+		OpenActivity("SplashActivity");
 
-		/*
-		final Intent webviewActivity;
-		webviewActivity = new Intent(this, WebviewActivity.class);
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run(){
-				startActivity(webviewActivity);
-				finish();
-			}
-		}, 2000);
-		*/
-
-		final Intent sdlActivity;
-		sdlActivity = new Intent(this, SDLActivity.class);
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run(){
-				startActivity(sdlActivity);
-				finish();
+				OpenActivity("WebviewActivity");
+				//OpenActivity("SDLActivity");
 			}
 		}, 2000);
 	}
 
-	////////////////////////////////////
 	@Override
-	protected void onDestroy() {
-		Log.e("dkapp", "onDestroy");
+	protected void onDestroy(){
+		Log.e("dkwebview", "onDestroy");
 		//exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");
 		System.exit(0);
 		super.onDestroy();
 	}
 
-	/*
-	//////////////////
-	public void Exit() {
-		Log.e("dkapp", "Exit()");
-		exitJNIBridge();
-		System.exit(0);
-		super.onDestroy();
+	protected void OpenActivity(String name) {
+		Intent intent = new Intent();
+		intent.setClassName("digitalknob.dkwebview", "digitalknob.dkwebview."+name);
+		startActivity(intent);
 	}
-	*/
 }
