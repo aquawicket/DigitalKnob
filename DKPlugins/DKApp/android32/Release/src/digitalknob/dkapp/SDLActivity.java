@@ -45,8 +45,6 @@ public class SDLActivity extends Activity implements Runnable
 	public native void initJNIBridge();
 	public static native void exitJNIBridge();
 	public static native int initSDL(Object arguments);
-	
-    private static final String TAG = "SDL";
 
     // Keep track of the paused state
     public static boolean mIsPaused, mIsSurfaceReady, mHasFocus;
@@ -80,8 +78,15 @@ public class SDLActivity extends Activity implements Runnable
     public static float refresh;
     
 	/// Entry Point
+	// Load the .so
+    public void loadLibraries() {
+	   System.loadLibrary("SDL2");
+    }
+	
     @Override
-    public void run() {
+    public void run(){
+		initJNIBridge();
+        initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");
     	DK.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height)+","+Integer.toString(format)+","+Float.toString(refresh));
     	DK.CallCppFunction("DKAndroid_loop");
@@ -90,19 +95,12 @@ public class SDLActivity extends Activity implements Runnable
 	
 	//////////////////
     public void Exit(){
-    	Log.e(TAG,"Exit()");
+    	Log.e("SDLActivity","Exit()");
     	exitJNIBridge();
     	System.exit(0);
     	super.onDestroy();
     }
     
-    // Load the .so
-    public void loadLibraries() {
-	   System.loadLibrary("SDL2");
-       initJNIBridge();
-       initSDL(mSingleton.getArguments());
-    }
-
     /**
      * This method is called by SDL before starting the native application thread.
      * It can be overridden to provide the arguments after the application name.
@@ -133,9 +131,9 @@ public class SDLActivity extends Activity implements Runnable
     // Setup
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v(TAG, "Device: " + android.os.Build.DEVICE);
-        Log.v(TAG, "Model: " + android.os.Build.MODEL);
-        Log.v(TAG, "onCreate(): " + mSingleton);
+        Log.v("SDLActivity", "Device: " + android.os.Build.DEVICE);
+        Log.v("SDLActivity", "Model: " + android.os.Build.MODEL);
+        Log.v("SDLActivity", "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
 
         SDLActivity.initialize();
@@ -199,7 +197,7 @@ public class SDLActivity extends Activity implements Runnable
         if (intent != null && intent.getData() != null) {
             String filename = intent.getData().getPath();
             if (filename != null) {
-                Log.v(TAG, "Got filename: " + filename);
+                Log.v("SDLActivity", "Got filename: " + filename);
                 DK.CallCppFunction("DKAndroid_onDropFile,"+filename);
             }
         }
@@ -208,7 +206,7 @@ public class SDLActivity extends Activity implements Runnable
     // Events
     @Override
     protected void onPause() {
-        Log.v(TAG, "onPause()");
+        Log.v("SDLActivity", "onPause()");
         super.onPause();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -223,7 +221,7 @@ public class SDLActivity extends Activity implements Runnable
 
     @Override
     protected void onResume() {
-        Log.v(TAG, "onResume()");
+        Log.v("SDLActivity", "onResume()");
         super.onResume();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -237,7 +235,7 @@ public class SDLActivity extends Activity implements Runnable
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        Log.v(TAG, "onWindowFocusChanged(): " + hasFocus);
+        Log.v("SDLActivity", "onWindowFocusChanged(): " + hasFocus);
 
         if (SDLActivity.mBrokenLibraries) {
            return;
@@ -251,7 +249,7 @@ public class SDLActivity extends Activity implements Runnable
 
     @Override
     public void onLowMemory() {
-        Log.v(TAG, "onLowMemory()");
+        Log.v("SDLActivity", "onLowMemory()");
         super.onLowMemory();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -262,7 +260,7 @@ public class SDLActivity extends Activity implements Runnable
 
     @Override
     protected void onDestroy() {
-        Log.v(TAG, "onDestroy()");
+        Log.v("SDLActivity", "onDestroy()");
 
         if (SDLActivity.mBrokenLibraries) {
            super.onDestroy();
@@ -280,11 +278,11 @@ public class SDLActivity extends Activity implements Runnable
             try {
                 SDLActivity.mSDLThread.join();
             } catch(Exception e) {
-                Log.v(TAG, "Problem stopping thread: " + e);
+                Log.v("SDLActivity", "Problem stopping thread: " + e);
             }
             SDLActivity.mSDLThread = null;
 
-            //Log.v(TAG, "Finished waiting for SDL thread");
+            //Log.v("SDLActivity", "Finished waiting for SDL thread");
         }
 
         super.onDestroy();
@@ -373,7 +371,7 @@ public class SDLActivity extends Activity implements Runnable
         public void handleMessage(Message msg) {
             Context context = getContext();
             if (context == null) {
-                Log.e(TAG, "error handling message, getContext() returned null");
+                Log.e("SDLActivity", "error handling message, getContext() returned null");
                 return;
             }
             switch (msg.arg1) {
@@ -381,7 +379,7 @@ public class SDLActivity extends Activity implements Runnable
                 if (context instanceof Activity) {
                     ((Activity) context).setTitle((String)msg.obj);
                 } else {
-                    Log.e(TAG, "error handling message, getContext() returned no Activity");
+                    Log.e("SDLActivity", "error handling message, getContext() returned no Activity");
                 }
                 break;
             case COMMAND_TEXTEDIT_HIDE:
@@ -406,7 +404,7 @@ public class SDLActivity extends Activity implements Runnable
             }
             default:
                 if ((context instanceof SDLActivity) && !((SDLActivity) context).onUnhandledMessage(msg.arg1, msg.obj)) {
-                    Log.e(TAG, "error handling message, command is " + msg.arg1);
+                    Log.e("SDLActivity", "error handling message, command is " + msg.arg1);
                 }
             }
         }
@@ -537,7 +535,7 @@ public class SDLActivity extends Activity implements Runnable
         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
 
-        Log.v(TAG, "SDL audio: wanted " + (isStereo ? "stereo" : "mono") + " " + (is16Bit ? "16-bit" : "8-bit") + " " + (sampleRate / 1000f) + "kHz, " + desiredFrames + " frames buffer");
+        Log.v("SDLActivity", "SDL audio: wanted " + (isStereo ? "stereo" : "mono") + " " + (is16Bit ? "16-bit" : "8-bit") + " " + (sampleRate / 1000f) + "kHz, " + desiredFrames + " frames buffer");
 
         // Let the user pick a larger buffer if they really want -- but ye
         // gods they probably shouldn't, the minimums are horrifyingly high
@@ -553,7 +551,7 @@ public class SDLActivity extends Activity implements Runnable
             // Ref: http://developer.android.com/reference/android/media/AudioTrack.html#getState()
 
             if (mAudioTrack.getState() != AudioTrack.STATE_INITIALIZED) {
-                Log.e(TAG, "Failed during initialization of Audio Track");
+                Log.e("SDLActivity", "Failed during initialization of Audio Track");
                 mAudioTrack = null;
                 return -1;
             }
@@ -561,7 +559,7 @@ public class SDLActivity extends Activity implements Runnable
             mAudioTrack.play();
         }
 
-        Log.v(TAG, "SDL audio: got " + ((mAudioTrack.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioTrack.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioTrack.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");
+        Log.v("SDLActivity", "SDL audio: got " + ((mAudioTrack.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioTrack.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioTrack.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");
 
         return 0;
     }
@@ -581,7 +579,7 @@ public class SDLActivity extends Activity implements Runnable
                     // Nom nom
                 }
             } else {
-                Log.w(TAG, "SDL audio: error return from write(short)");
+                Log.w("SDLActivity", "SDL audio: error return from write(short)");
                 return;
             }
         }
@@ -602,7 +600,7 @@ public class SDLActivity extends Activity implements Runnable
                     // Nom nom
                 }
             } else {
-                Log.w(TAG, "SDL audio: error return from write(byte)");
+                Log.w("SDLActivity", "SDL audio: error return from write(byte)");
                 return;
             }
         }
@@ -938,7 +936,7 @@ public class SDLActivity extends Activity implements Runnable
 ////////////////////////////
 public void toggleKeyboard()
 {
-Log.e(TAG,"toggleKeyborad()");
+Log.e("SDLActivity","toggleKeyborad()");
 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 if(imm != null){
@@ -949,19 +947,19 @@ imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 /////////////////////////
 private void copyAssets() 
 {
-Log.e(TAG,"Copying assets to storage . . .");
+Log.e("SDLActivity","Copying assets to storage . . .");
 Context context = mSingleton.getApplicationContext();
 int stringId = context.getApplicationInfo().labelRes;
 String appdir = "/mnt/sdcard/"+context.getString(stringId);
 File checkfile = new File(appdir+"/ASSETS");
 
 if(checkfile.exists()){ 
-Log.e(TAG,"Remove "+appdir+"/ASSETS file from the device to reload assets.");
+Log.e("SDLActivity","Remove "+appdir+"/ASSETS file from the device to reload assets.");
 //copyFileOrDir("null", false);
 return;
 }
 else{
-Log.e(TAG,"Reloading Assets . . .");
+Log.e("SDLActivity","Reloading Assets . . .");
 copyFileOrDir("null", true);
 }
 }
@@ -969,14 +967,14 @@ copyFileOrDir("null", true);
 ///////////////////////////////////
 private void copyAsset(String path) 
 {
-Log.e(TAG,"Copying "+path+" to storage . . .");
+Log.e("SDLActivity","Copying "+path+" to storage . . .");
 copyFile(path, true);
 }
 
 ///////////////////////////////////////////////////////////
 private void copyFileOrDir(String path, boolean overwrite){
 if(path.equals("null")){ path = ""; }
-//Log.e(TAG, "copyAssets2("+path+")");
+//Log.e("SDLActivity", "copyAssets2("+path+")");
 Context context = mSingleton.getApplicationContext();
 int stringId = context.getApplicationInfo().labelRes;
 
@@ -985,18 +983,18 @@ String assets[] = null;
 try{
 assets = assetManager.list(path);
 if(assets.length == 0){
-//Log.e(TAG, path+" assets.length == 0");
+//Log.e("SDLActivity", path+" assets.length == 0");
 copyFile(path, overwrite);
 }
 else{
-//Log.e(TAG, path+" assets.length > 0");
+//Log.e("SDLActivity", path+" assets.length > 0");
 String fullPath = "/mnt/sdcard/"+context.getString(stringId) + "/" + path;
-//Log.e(TAG,"fullpath: "+fullPath);
+//Log.e("SDLActivity","fullpath: "+fullPath);
 File dir = new File(fullPath);
 if(!dir.exists()){
-//Log.e(TAG,"!dir.exists()");
+//Log.e("SDLActivity","!dir.exists()");
 dir.mkdir();
-//Log.e(TAG,"makedir: "+fullPath);
+//Log.e("SDLActivity","makedir: "+fullPath);
 }
 for(int i = 0; i < assets.length; ++i){
 if(path.equals("")){
@@ -1009,14 +1007,14 @@ else{
 }
 }
 catch(IOException ex){
-Log.e(TAG, "I/O Exception", ex);
+Log.e("SDLActivity", "I/O Exception", ex);
 }
 }
 
 /////////////////////////////////////////////////////////
 private void copyFile(String filename, boolean overwrite)
 {
-//Log.e(TAG,"copyFile2("+filename+")");
+//Log.e("SDLActivity","copyFile2("+filename+")");
 Context context = mSingleton.getApplicationContext();
 int stringId = context.getApplicationInfo().labelRes;
 
@@ -1026,7 +1024,7 @@ OutputStream out = null;
 try{
 in = assetManager.open(filename);
 String newFileName = "/mnt/sdcard/"+context.getString(stringId) + "/" + filename;
-//Log.e(TAG,"newFileNam: "+newFileName);
+//Log.e("SDLActivity","newFileNam: "+newFileName);
 out = new FileOutputStream(newFileName);
 
 File file = new File(newFileName);
@@ -1044,7 +1042,7 @@ out.close();
 out = null;
 }
 catch(Exception e){
-Log.e(TAG, "copyFile2 ERROR: "+e.getMessage());
+Log.e("SDLActivity", "copyFile2 ERROR: "+e.getMessage());
 }
 }
 }
