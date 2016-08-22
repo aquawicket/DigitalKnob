@@ -1845,13 +1845,6 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 	FILE(WRITE ${DKPROJECT}/Android.h "${android_H}")
 
 	IF(ANDROID AND DEBUG)
-		## If SDL, adjust the Activity entry point
-		##IF(SDL)
-		##	FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
-		##	STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
-		##	FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
-		##ENDIF()
-	
 		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${DEBUG}/" "${DKPROJECT}/${OS}/${DEBUG}/*.xml" "${DKPROJECT}/${OS}/${DEBUG}/*.java")
 		FOREACH(each_file ${allfiles})
@@ -1865,13 +1858,6 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 		DKRENAME(${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/dkapp ${DKPROJECT}/${OS}/${DEBUG}/src/digitalknob/${arg})
 	ENDIF()
 	IF(ANDROID AND RELEASE)
-		## If SDL, adjust the Activity entry point
-		##IF(SDL)
-		##	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
-		##	STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
-		##	FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
-		##ENDIF()
-		
 		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${RELEASE}/" "${DKPROJECT}/${OS}/${RELEASE}/*.xml" "${DKPROJECT}/${OS}/${RELEASE}/*.java")
 		FOREACH(each_file ${allfiles})
