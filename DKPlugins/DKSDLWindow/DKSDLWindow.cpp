@@ -14,9 +14,10 @@ std::map<int,int> DKSDLWindow::sdlShiftCharCode;
 void DKSDLWindow::Init()
 {
 #ifdef ANDROID
-	DKCreate("DKSDLWindowAndroid");
-	CallJavaFunction("OpenActivity","SDLActivity"):
+	//DKCreate("DKSDLWindowAndroid");
+	//CallJavaFunction("OpenActivity","SDLActivity"):
 #endif
+
 	SDL_SetMainReady();
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKLog("SDL_Init Error: "+DKString(SDL_GetError()), DKERROR);
