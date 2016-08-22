@@ -1846,11 +1846,11 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 
 	IF(ANDROID AND DEBUG)
 		## If SDL, adjust the Activity entry point
-		IF(SDL)
-			FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
-			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
-			FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
-		ENDIF()
+		##IF(SDL)
+		##	FILE(READ ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml androidManifest)
+		##	STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+		##	FILE(WRITE ${DKPROJECT}/${OS}/${DEBUG}/AndroidManifest.xml "${androidManifest}")
+		##ENDIF()
 	
 		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${DEBUG}/" "${DKPROJECT}/${OS}/${DEBUG}/*.xml" "${DKPROJECT}/${OS}/${DEBUG}/*.java")
@@ -1866,11 +1866,11 @@ FUNCTION(DKUPDATE_ANDROID_NAME arg)
 	ENDIF()
 	IF(ANDROID AND RELEASE)
 		## If SDL, adjust the Activity entry point
-		IF(SDL)
-			FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
-			STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
-			FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
-		ENDIF()
+		##IF(SDL)
+		##	FILE(READ ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml androidManifest)
+		##	STRING(REPLACE ".DKMain" ".SDLActivity" androidManifest "${androidManifest}")
+		##	FILE(WRITE ${DKPROJECT}/${OS}/${RELEASE}/AndroidManifest.xml "${androidManifest}")
+		##ENDIF()
 		
 		## update all .xml and .java files recursivley
 		FILE(GLOB_RECURSE allfiles RELATIVE "${DKPROJECT}/${OS}/${RELEASE}/" "${DKPROJECT}/${OS}/${RELEASE}/*.xml" "${DKPROJECT}/${OS}/${RELEASE}/*.java")
