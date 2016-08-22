@@ -18,7 +18,7 @@ import java.io.OutputStream;
 ////////////////////////////////
 public class DK extends Activity
 {
-	public static native void initJNIBridge();
+	public native void initJNIBridge();
 	public static native void exitJNIBridge();
 	public static native void CallCppFunction(String data);
 

@@ -2,6 +2,7 @@
 #include "DKSDLWindow.h"
 #include "DKFile.h"
 #include "SDL_syswm.h"
+#include "DKAndroid.h"
 
 std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
 std::vector<boost::function<void()> > DKSDLWindow::draw_funcs;
@@ -12,6 +13,9 @@ std::map<int,int> DKSDLWindow::sdlShiftCharCode;
 ////////////////////////
 void DKSDLWindow::Init()
 {
+#ifdef ANDROID
+	CallJavaFunction("OpenActivity","SDLActivity"):
+#endif
 	SDL_SetMainReady();
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKLog("SDL_Init Error: "+DKString(SDL_GetError()), DKERROR);
