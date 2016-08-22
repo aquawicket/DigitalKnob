@@ -40,7 +40,7 @@ public class DK extends Activity
 				startActivity(webviewActivity);
 				finish();
 			}
-		}, 0);
+		}, 2000);
 		*/
 
 		final Intent sdlActivity;
@@ -52,7 +52,7 @@ public class DK extends Activity
 				startActivity(sdlActivity);
 				finish();
 			}
-		}, 0);
+		}, 2000);
 	}
 
 	////////////////////////////////////
