@@ -138,7 +138,13 @@ function DK_GetOS()
         return "iOS";
     }
 
-    return navigator.platform;
+	var os_value = navigator.platform;
+	
+	if (navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1 ){
+		os_value = os_value.replace("32", "64");
+	}
+	
+	return os_value;
 }
 
 ////////////////////////
