@@ -27,11 +27,14 @@ void DKCef::Init()
 		width = toInt(data[4]);
 		height = toInt(data[5]);
 	}
+	if(data.size() > 5){
+		homepage = data[6];
+	}
 	fullscreen = false;
 	queue_new_browser = "";
 
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
-	if(homepage.empty()){ homepage = "http://www.google.com"; }
+	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
+	//if(homepage.empty()){ homepage = "http://www.google.com"; }
 
 #ifdef WIN32
 	//delay loading the DLL to move it's locations 
