@@ -1,6 +1,6 @@
 var os = DK_GetOS();
-var win32_download = "";
-var win64_download = "";
+var win32_download = "http://digitalknob.com/Download/DKFacebook.exe";
+var win64_download = "http://digitalknob.com/Download/DKFacebook_64.exe";
 var mac_download = "";
 var linux_download = "";
 var ios_download = "";
@@ -36,10 +36,11 @@ function DKFacebook_Init()
 		DKWidget_RemoveElement("DKFacebook_download");
 		var id = DKWidget_CreateElement("DKFacebook.html","div","notavailable");
 		DKWidget_SetProperty(id, "position", "absolute");
-		DKWidget_SetProperty(id, "top", "60rem");
+		DKWidget_SetProperty(id, "top", "90rem");
 		DKWidget_SetProperty(id, "left", "170rem");
-		DKWidget_SetProperty(id, "width", "200rem");
+		DKWidget_SetProperty(id, "width", "250rem");
 		DKWidget_SetProperty(id, "color", "red");
+		DKWidget_SetProperty(id, "font-size", "20rem");
 		DKWidget_SetInnerHtml(id, "Not available for "+os);
 	}
 }
