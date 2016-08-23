@@ -32,8 +32,10 @@ function OsInfo_Resize()
 	DKWidget_SetInnerHtml("OsInfo_pixelratio", "pixel_ratio: "+DKWindow_GetPixelRatio());
 	
 	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
-		DKWidget_SetProperty("html", "font-size", DKWindow_GetPixelRatio()+"px");
-		DKWidget_SetInnerHtml("OsInfo_scale", "scale: "+DKWindow_GetPixelRatio()+"px");
+		var pixel_ratio = DKWindow_GetPixelRatio();
+		pixel_ratio = Math.min(2, pixel_ratio);
+		DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
+		DKWidget_SetInnerHtml("OsInfo_scale", "scale: "+pixel_ratio+"px");
 	}
 	else{
 		DKWidget_SetProperty("html", "font-size", "1px");

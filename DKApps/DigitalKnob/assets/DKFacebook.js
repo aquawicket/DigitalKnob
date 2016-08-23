@@ -20,13 +20,16 @@ function DKFacebook_Init()
 	else if(os.indexOf("Win64") != -1 && win32_download){
 		DKWidget_SetInnerHtml("DKFacebook_download", "Download for Windows 64");
 	}
+	else if(os.indexOf("Mac") != -1 && mac_download){
+		DKWidget_SetInnerHtml("DKFacebook_download", "Download for Mac");
+	}
+	else if(os.indexOf("Linux") != -1 && linux_download){
+		DKWidget_SetInnerHtml("DKFacebook_download", "Download for Linux");
+	}
 	else if(os.indexOf("Android") != -1 && android_download){
 		DKWidget_SetInnerHtml("DKFacebook_download", "Download for Android");
 	}
-	else if(os.indexOf("Mac") != -1){
-		DKWidget_SetInnerHtml("DKFacebook_download", "Download for Mac");
-	}
-	else if(os.indexOf("iOS") != -1){
+	else if(os.indexOf("iOS") != -1 && ios_download){
 		DKWidget_SetInnerHtml("DKFacebook_download", "Download for iOS");
 	}
 	else{
