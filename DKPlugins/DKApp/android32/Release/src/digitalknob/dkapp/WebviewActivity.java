@@ -162,11 +162,14 @@ public class WebviewActivity extends Activity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+			finishAffinity();
+            System.exit(0);
             return;
         }
         if (mWebView.canGoBack()){
             mWebView.goBack();
-        }else {
+        }
+		else {
             mWebView.scrollTo(0,0);
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
