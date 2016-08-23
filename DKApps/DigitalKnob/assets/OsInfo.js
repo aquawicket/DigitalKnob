@@ -3,6 +3,7 @@ function OsInfo_Init()
 {
 	DKCreate("OsInfo.html,Panel0.html");
 	DKWidget_SetInnerHtml("OsInfo_OS", "OS: "+DK_GetOS());
+	DKWidget_SetInnerHtml("OsInfo_Browser", "Browser: "+DK_GetBrowser());
 	OsInfo_Resize();
 	
 	DKAddEvent("GLOBAL", "resize", OsInfo_OnEvent);
