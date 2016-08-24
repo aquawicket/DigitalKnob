@@ -98,6 +98,8 @@ function DKApp_UpdateApp(name)
 		});
 	}
 	
+	DKApp_UpdateScreenshots();
+	
 	DKWidget_RemoveElement("loading");
 	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
 }
@@ -147,4 +149,20 @@ function DKApp_UpdateDescription(string)
 {
 	//DKLog(string);
 	DKWidget_SetInnerHtml("DKApp_description", string);
+}
+
+//////////////////////////////////
+function DKApp_UpdateScreenshots()
+{
+	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
+	DKWidget_SetAttribute(id, "src", app+"_screenshot01.png");
+	DKWidget_SetProperty(id, "height", "300rem");
+	
+	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
+	DKWidget_SetAttribute(id, "src", app+"_screenshot02.png");
+	DKWidget_SetProperty(id, "height", "300rem");
+	
+	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
+	DKWidget_SetAttribute(id, "src", app+"_screenshot03.png");
+	DKWidget_SetProperty(id, "height", "300rem");
 }
