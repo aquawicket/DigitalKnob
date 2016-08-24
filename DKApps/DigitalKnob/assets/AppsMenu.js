@@ -21,9 +21,19 @@ function AppsMenu_OnEvent(event)
 	
 	if(DK_Id(event, "DKFacebook")){
 		DKWidget_SetInnerHtml("Panel0_content","");
-		DKCreate("DKApp.js");
-		//DKApp_UpdateApp("DKFacebook");
+		
+		function OpenJs(callback){
+			DKCreate("DKApp.js");
+			callback(); // if callback exist execute it
+		}
+ 
+		OpenJs(function(){
+			setTimeout(function(){
+				DKApp_UpdateApp("DKFacebook");
+			}, 10);
+		});
 	}
+
 	if(DK_Id(event, "DKYoutube")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		DKCreate("DKYoutube.js");

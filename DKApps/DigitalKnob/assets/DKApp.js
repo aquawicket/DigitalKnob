@@ -15,7 +15,7 @@ function DKApp_Init()
 	DKCreate("DKApp.html,Panel0_content");
 	DKAddEvent("DKApp_download", "click", DKApp_OnEvent);
 	
-	DKApp_UpdateApp("DKFacebook");
+	//DKApp_UpdateApp("DKFacebook");
 }
 
 ////////////////////
