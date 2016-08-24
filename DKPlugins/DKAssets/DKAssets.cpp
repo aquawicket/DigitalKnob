@@ -23,7 +23,7 @@ void DKAssets::Init()
 #ifdef WIN32
 	DKString console;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CONSOLE]", console);
-	if (same(console, "OFF")){
+	if(!same(console, "ON")){
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	}
 #endif
