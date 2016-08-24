@@ -32,13 +32,13 @@ function AppsMenu_OnEvent(event)
 		
 		DKCreate("DKApp.js", function(){ 
 			DKApp_UpdateApp("DKYoutube");
-			DKApp_UpdateDescription("Introducing, DKYoutube for Android. \
-Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. \
-* Super small file size \
-* Faster speeds than the youtube app \
-* More secure with less data and location sharing \
-* Turn off your screen, and the music keeps playing \
-* Small, Fast, simple and free");
+			DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
+Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. <br /> \
+* Super small file size <br /> \
+* Faster speeds than the youtube app <br /> \
+* More secure with less data and location sharing <br /> \
+* Turn off your screen, and the music keeps playing <br /> \
+* Small, Fast, simple and free <br />");
 		});
 	}
 	
