@@ -60,6 +60,8 @@ function DKApp_UpdateApp(name)
 	//Adjust title
 	DKWidget_SetInnerHtml("DKApp_title", app);
 	
+	DKApp_UpdateScreenshots();
+	
 	//Adjust Download Link
 	if(os.indexOf("Win32") != -1){
 		DKFile_Exists(win32_download, function(rval){
@@ -98,7 +100,7 @@ function DKApp_UpdateApp(name)
 		});
 	}
 	
-	DKApp_UpdateScreenshots();
+	
 	
 	DKWidget_RemoveElement("loading");
 	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
@@ -157,12 +159,15 @@ function DKApp_UpdateScreenshots()
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
 	DKWidget_SetAttribute(id, "src", app+"_screenshot01.png");
 	DKWidget_SetProperty(id, "height", "300rem");
+	DKWidget_SetProperty(id, "padding-right", "5rem");
 	
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
 	DKWidget_SetAttribute(id, "src", app+"_screenshot02.png");
 	DKWidget_SetProperty(id, "height", "300rem");
+	DKWidget_SetProperty(id, "padding-right", "5rem");
 	
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
 	DKWidget_SetAttribute(id, "src", app+"_screenshot03.png");
 	DKWidget_SetProperty(id, "height", "300rem");
+	DKWidget_SetProperty(id, "padding-right", "5rem");
 }
