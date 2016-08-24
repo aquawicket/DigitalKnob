@@ -3,8 +3,8 @@
 function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for javascript", DKERROR); return color; }
 function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for javascript", DKERROR); }
 
-////////////////////////
-function DKCreate(data)
+/////////////////////////////////
+function DKCreate(data, callback)
 {
 	DKLog("DKCreate("+data+")", DKDEBUG);
 	var arry = data.split(",");
@@ -22,14 +22,23 @@ function DKCreate(data)
 	
 	if(arry[0] == "DKJavascript"){
 		LoadJS(arry[1]);
+		setTimeout(function(){
+			callback && callback();
+		}, 10);
 		return true;
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
+		setTimeout(function(){
+			callback && callback();
+		}, 10);
 		return true;
 	}
 	if(arry[0] == "DKCss"){
 		LoadCSS(arry[1]);
+		setTimeout(function(){
+			callback && callback();
+		}, 10);
 		return true;
 	}
 

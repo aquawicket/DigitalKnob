@@ -22,15 +22,8 @@ function AppsMenu_OnEvent(event)
 	if(DK_Id(event, "DKFacebook")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
-		function OpenJs(callback){
-			DKCreate("DKApp.js");
-			callback(); // if callback exist execute it
-		}
- 
-		OpenJs(function(){
-			setTimeout(function(){
-				DKApp_UpdateApp("DKFacebook");
-			}, 10);
+		DKCreate("DKApp.js", function(){ 
+			DKApp_UpdateApp("DKFacebook"); 
 		});
 	}
 
