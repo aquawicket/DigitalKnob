@@ -8,6 +8,8 @@ var linux_download = "";
 var ios_download = "";
 var android_download = "";
 
+var download_link = "";
+
 
 /////////////////////
 function DKApp_Init()
@@ -34,7 +36,7 @@ function DKApp_End()
 function DKApp_OnEvent(event)
 {
 	if(DK_Id(event, "DKApp_download")){
-		window.location = android_download;  //FIXME - We need a DKWindow command for this
+		window.location = download_link;  //FIXME - We need a DKWindow command for this
 	}
 }
 
@@ -59,23 +61,73 @@ function DKApp_UpdateApp(name)
 	DKWidget_SetInnerHtml("DKApp_title", app);
 	
 	//Adjust Download Link
-	if(os.indexOf("Win32") != -1 && DKFile_Exists(win32_download)){
+	if(os.indexOf("Win32") != -1){
+		DKFile_Exists(win32_download, function(rval){
+			if(rval){DKApp_SetDownload("Win32");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	else if(os.indexOf("Win64") != -1){
+		DKFile_Exists(win64_download, function(rval){
+			if(rval){DKApp_SetDownload("Win64");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	else if(os.indexOf("Mac") != -1){
+		DKFile_Exists(mac_download, function(rval){
+			if(rval){DKApp_SetDownload("Mac");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	else if(os.indexOf("Linux") != -1){
+		DKFile_Exists(linux_download, function(rval){
+			if(rval){DKApp_SetDownload("Linux");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	else if(os.indexOf("Android") != -1){
+		DKFile_Exists(android_download, function(rval){
+			if(rval){DKApp_SetDownload("Android");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	else if(os.indexOf("iOS") != -1){
+		DKFile_Exists(ios_download, function(rval){
+			if(rval){DKApp_SetDownload("iOS");}
+			else{DKApp_SetDownload("none");}
+		});
+	}
+	
+	DKWidget_RemoveElement("loading");
+	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
+}
+
+////////////////////////////////
+function DKApp_SetDownload(name)
+{
+	if(name.indexOf("Win32") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Windows 32");
+		download_link = win32_download;
 	}
-	else if(os.indexOf("Win64") != -1 && DKFile_Exists(win32_download)){
+	else if(name.indexOf("Win64") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Windows 64");
+		download_link = win64_download;
 	}
-	else if(os.indexOf("Mac") != -1 && DKFile_Exists(mac_download)){
+	else if(name.indexOf("Mac") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Mac");
+		download_link = mac_download;
 	}
-	else if(os.indexOf("Linux") != -1 && DKFile_Exists(linux_download)){
+	else if(name.indexOf("Linux") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Linux");
+		download_link = linux_download;
 	}
-	else if(os.indexOf("Android") != -1 && DKFile_Exists(android_download)){
+	else if(name.indexOf("Android") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Android");
+		download_link = android_download;
 	}
-	else if(os.indexOf("iOS") != -1 && DKFile_Exists(ios_download)){
+	else if(name.indexOf("iOS") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for iOS");
+		download_link = ios_download;
 	}
 	else{
 		DKWidget_RemoveElement("DKApp_download");
@@ -88,7 +140,4 @@ function DKApp_UpdateApp(name)
 		DKWidget_SetProperty(id, "font-size", "20rem");
 		DKWidget_SetInnerHtml(id, "Not available for "+os);
 	}
-	
-	DKWidget_RemoveElement("loading");
-	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
 }

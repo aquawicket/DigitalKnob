@@ -18,8 +18,8 @@ function DKFile_Init()
 	
 }
 
-///////////////////////
-function UrlExists(url)
+///////////////////////////
+function UrlExists(url, fn)
 {
 	//url = "file:///"+url;
 	//DKLog("UrlExists("+url+") \n", DKDEBUG);
@@ -46,7 +46,7 @@ function UrlExists(url)
     }catch(e){}
 	if(!request){
 		DKLog("AJAX ERROR: Error creating request object", DKERROR);
-		return false;
+		return;// false;
 	}
 
 	request.onreadystatechange=function(){
@@ -54,45 +54,38 @@ function UrlExists(url)
 			if(request.status==200 || request.status==0){
 				//output.value = request.responseText;
 				//DKDebug("AJAX RETURN: "+output.value);
-				return true;
+				fn && fn(true);
+				return;// true;
 			}
 			else{
 				DKLog("AJAX ERROR: "+request.statusText, DKERROR); //report error
 				DKLog("status: "+request.status, DKERROR);
-				return false;
+				fn && fn(false);
+				return;// false;
 			}
 		}
 	}
 	
 	try{ 
-		request.open("HEAD",url,false); 
+		request.open("HEAD",url); 
 		request.send(); 
 	}
 	catch(err){
 		//output.value = "";
-		return false;
+		return;// false;
 	}
-	return true;
+	return;// true;
 }
 
-////////////////////////////
-function DKFile_Exists(path)
+////////////////////////////////
+function DKFile_Exists(path, fn)
 {
 	DKLog("DKFile_Exists("+path+") \n", DKDEBUG);
 	if(!path){ return false; }
-	//var result = ajaxGetUrl(datapath+"/DKFile/DKFile.php?PathExists="+path);
-	var result = UrlExists(path);
-
-	DKLog(result+"\n");
-	if(!result){
-		DKLog("DKFile_Exists("+path+"): Path does not exist. \n", DKWARN);
-		return false; 
-	}
-	if(result == "HTTP/1.0 404 Not Found"){ 
-		DKLog("DKFile_Exists("+path+"): Path does not exist. \n", DKWARN);
-		return false; 
-	}
-	return true;
+	
+	UrlExists(path, function(rval){
+		fn && fn(rval);
+	});
 }
 
 ////////////////////////////////
