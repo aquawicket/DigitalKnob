@@ -15,7 +15,13 @@ function DKApp_Init()
 	DKCreate("DKApp.html,Panel0_content");
 	DKAddEvent("DKApp_download", "click", DKApp_OnEvent);
 	
-	//DKApp_UpdateApp("DKFacebook");
+	var id = DKWidget_CreateElement("Panel0_content","div","loading");
+	DKWidget_SetProperty(id, "position", "absolute");
+	DKWidget_SetProperty(id, "top", "25rem");
+	DKWidget_SetProperty(id, "width", "100%");
+	DKWidget_SetProperty(id, "text-align", "center");
+	DKWidget_SetProperty(id, "font-size", "20rem");
+	DKWidget_SetInnerHtml(id, "Loading...");
 }
 
 ////////////////////
@@ -53,22 +59,22 @@ function DKApp_UpdateApp(name)
 	DKWidget_SetInnerHtml("DKApp_title", app);
 	
 	//Adjust Download Link
-	if(os.indexOf("Win32") != -1 && win32_download){
+	if(os.indexOf("Win32") != -1 && DKFile_Exists(win32_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Windows 32");
 	}
-	else if(os.indexOf("Win64") != -1 && win32_download){
+	else if(os.indexOf("Win64") != -1 && DKFile_Exists(win32_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Windows 64");
 	}
-	else if(os.indexOf("Mac") != -1 && mac_download){
+	else if(os.indexOf("Mac") != -1 && DKFile_Exists(mac_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Mac");
 	}
-	else if(os.indexOf("Linux") != -1 && linux_download){
+	else if(os.indexOf("Linux") != -1 && DKFile_Exists(linux_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Linux");
 	}
-	else if(os.indexOf("Android") != -1 && android_download){
+	else if(os.indexOf("Android") != -1 && DKFile_Exists(android_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for Android");
 	}
-	else if(os.indexOf("iOS") != -1 && ios_download){
+	else if(os.indexOf("iOS") != -1 && DKFile_Exists(ios_download)){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for iOS");
 	}
 	else{
@@ -82,4 +88,7 @@ function DKApp_UpdateApp(name)
 		DKWidget_SetProperty(id, "font-size", "20rem");
 		DKWidget_SetInnerHtml(id, "Not available for "+os);
 	}
+	
+	DKWidget_RemoveElement("loading");
+	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
 }
