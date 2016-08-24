@@ -29,7 +29,10 @@ function AppsMenu_OnEvent(event)
 
 	if(DK_Id(event, "DKYoutube")){
 		DKWidget_SetInnerHtml("Panel0_content","");
-		DKCreate("DKYoutube.js");
+		
+		DKCreate("DKApp.js", function(){ 
+			DKApp_UpdateApp("DKYoutube"); 
+		});
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
