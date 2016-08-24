@@ -24,21 +24,21 @@ function DKCreate(data, callback)
 		LoadJS(arry[1]);
 		setTimeout(function(){
 			callback && callback();
-		}, 10);
+		}, 100);
 		return true;
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
 		setTimeout(function(){
 			callback && callback();
-		}, 10);
+		}, 100);
 		return true;
 	}
 	if(arry[0] == "DKCss"){
 		LoadCSS(arry[1]);
 		setTimeout(function(){
 			callback && callback();
-		}, 10);
+		}, 100);
 		return true;
 	}
 
