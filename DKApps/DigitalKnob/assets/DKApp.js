@@ -45,11 +45,11 @@ function DKApp_UpdateApp(name)
 	app = name;
 	icon = app+"_icon.png";
 	//os = DK_GetOS();
-	win32_download = "";
-	win64_download = "";
-	mac_download = "";
-	linux_download = "";
-	ios_download = "";
+	win32_download = "http://digitalknob.com/Download/"+app+".exe";
+	win64_download = "http://digitalknob.com/Download/"+app+"_64.exe";
+	mac_download = "http://digitalknob.com/Download/"+app+"_mac64.zip";
+	linux_download = "http://digitalknob.com/Download/"+app+"_linux64.zip";
+	ios_download = "http://digitalknob.com/Download/"+app+"_ios.zip";
 	android_download = "http://digitalknob.com/Download/"+app+".apk";
 	
 	//Adjust icon
