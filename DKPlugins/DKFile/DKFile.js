@@ -79,7 +79,7 @@ function UrlExists(url)
 function DKFile_Exists(path)
 {
 	DKLog("DKFile_Exists("+path+") \n", DKDEBUG);
-	
+	if(!path){ return false; }
 	//var result = ajaxGetUrl(datapath+"/DKFile/DKFile.php?PathExists="+path);
 	var result = UrlExists(path);
 
