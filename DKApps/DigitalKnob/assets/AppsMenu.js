@@ -23,7 +23,7 @@ function AppsMenu_OnEvent(event)
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
 		DKCreate("DKApp.js", function(){ 
-			DKApp_UpdateApp("DKFacebook"); 
+			DKApp_UpdateApp("DKFacebook");
 		});
 	}
 
@@ -31,7 +31,14 @@ function AppsMenu_OnEvent(event)
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
 		DKCreate("DKApp.js", function(){ 
-			DKApp_UpdateApp("DKYoutube"); 
+			DKApp_UpdateApp("DKYoutube");
+			DKApp_UpdateDescription("Introducing, DKYoutube for Android. \
+Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. \
+* Super small file size \
+* Faster speeds than the youtube app \
+* More secure with less data and location sharing \
+* Turn off your screen, and the music keeps playing \
+* Small, Fast, simple and free");
 		});
 	}
 	

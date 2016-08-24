@@ -141,3 +141,10 @@ function DKApp_SetDownload(name)
 		DKWidget_SetInnerHtml(id, "Not available for "+os);
 	}
 }
+
+////////////////////////////////////////
+function DKApp_UpdateDescription(string)
+{
+	//DKLog(string);
+	DKWidget_SetInnerHtml("DKApp_description", string);
+}
