@@ -26,3 +26,9 @@ option:hover
 	background-color: rgb(123,157,212);
 	color:white;
 }
+
+div.option:hover
+{
+	background-color: rgb(123,157,212);
+	color:white;
+}
