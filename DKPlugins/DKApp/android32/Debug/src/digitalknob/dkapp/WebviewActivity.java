@@ -263,6 +263,7 @@ public class WebviewActivity extends Activity {
                 return;
             }
             this.mCustomView = view;
+			this.mCustomView.setBackgroundColor(Color.BLACK);
             this.mOriginalSystemUiVisibility = WebviewActivity.this.getWindow().getDecorView().getSystemUiVisibility();
             this.mOriginalOrientation = WebviewActivity.this.getRequestedOrientation();
             this.mCustomViewCallback = callback;
