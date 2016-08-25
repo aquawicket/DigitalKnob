@@ -10,10 +10,13 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;
 import android.webkit.ValueCallback;
@@ -21,6 +24,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class WebviewActivity extends Activity {
@@ -43,6 +47,8 @@ public class WebviewActivity extends Activity {
         mWebView.setInitialScale(1);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
+        //mWebView.setBackgroundColor(0);
+        //mWebView.setBackgroundColor(Color.parseColor("#000000"));
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
@@ -249,17 +255,17 @@ public class WebviewActivity extends Activity {
             this.mCustomViewCallback = null;
         }
 
-        public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback)
+        public void onShowCustomView(View view, WebChromeClient.CustomViewCallback callback)
         {
             if (this.mCustomView != null)
             {
                 onHideCustomView();
                 return;
             }
-            this.mCustomView = paramView;
+            this.mCustomView = view;
             this.mOriginalSystemUiVisibility = WebviewActivity.this.getWindow().getDecorView().getSystemUiVisibility();
             this.mOriginalOrientation = WebviewActivity.this.getRequestedOrientation();
-            this.mCustomViewCallback = paramCustomViewCallback;
+            this.mCustomViewCallback = callback;
             ((FrameLayout)WebviewActivity.this.getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
             WebviewActivity.this.getWindow().getDecorView().setSystemUiVisibility(3846);
         }
