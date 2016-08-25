@@ -30,7 +30,7 @@ function AppsMenu_OnEvent(event)
 * No data sharing <br /> \
 * No location sharing <br /> \
 * No running processes <br /> \
-* Small, Fast, simple and free <br />");
+* Small, Fast, simple and free <br /><br />");
 		});
 	}
 
@@ -45,7 +45,7 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 * Faster speeds than the youtube app <br /> \
 * More secure with less data and location sharing <br /> \
 * Turn off your screen, and the music keeps playing <br /> \
-* Small, Fast, simple and free <br />");
+* Small, Fast, simple and free <br /><br />");
 		});
 	}
 	
