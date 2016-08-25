@@ -2,11 +2,9 @@
 function OsInfo_Init()
 {
 	DKCreate("OsInfo.html,Panel0.html");
-	DKWidget_SetInnerHtml("OsInfo_OS", "OS: "+DK_GetOS());
-	DKWidget_SetInnerHtml("OsInfo_Browser", "Browser: "+DK_GetBrowser());
-	OsInfo_Resize();
-	
 	DKAddEvent("GLOBAL", "resize", OsInfo_OnEvent);
+	
+	OsInfo_Resize();
 }
 
 /////////////////////
@@ -27,6 +25,8 @@ function OsInfo_OnEvent(event)
 ////////////////////////
 function OsInfo_Resize()
 {
+	DKWidget_SetInnerHtml("OsInfo_OS", "OS: "+DK_GetOS());
+	DKWidget_SetInnerHtml("OsInfo_Browser", "Browser: "+DK_GetBrowser());
 	DKWidget_SetInnerHtml("OsInfo_width", "width: "+DKWindow_GetWidth());
 	DKWidget_SetInnerHtml("OsInfo_height", "height: "+DKWindow_GetHeight());
 	DKWidget_SetInnerHtml("OsInfo_pixelratio", "pixel_ratio: "+DKWindow_GetPixelRatio());
