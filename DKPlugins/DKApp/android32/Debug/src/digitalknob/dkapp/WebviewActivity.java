@@ -62,7 +62,7 @@ public class WebviewActivity extends Activity {
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 
 		//Open links in WebView
-        mWebView.setWebChromeClient(new WebChromeClient() {
+        mWebView.setWebChromeClient(new myWebChromeClient() {
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
                 callback.invoke(origin, true, false);
             }
@@ -162,11 +162,14 @@ public class WebviewActivity extends Activity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+			finishAffinity();
+            System.exit(0);
             return;
         }
         if (mWebView.canGoBack()){
             mWebView.goBack();
-        }else {
+        }
+		else {
             mWebView.scrollTo(0,0);
             this.doubleBackToExitPressedOnce = true;
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
@@ -213,6 +216,52 @@ public class WebviewActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+        }
+    }
+
+    public class myWebChromeClient extends WebChromeClient
+    {
+        private View mCustomView;
+        private WebChromeClient.CustomViewCallback mCustomViewCallback;
+        protected FrameLayout mFullscreenContainer;
+        private int mOriginalOrientation;
+        private int mOriginalSystemUiVisibility;
+
+        public myWebChromeClient(){}
+
+        /*
+        public Bitmap getDefaultVideoPoster()
+        {
+            if (WebviewActivity.this == null) {
+                return null;
+            }
+            return BitmapFactory.decodeResource(WebviewActivity.this.getApplicationContext().getResources(), 2130837573);
+        }
+        */
+
+        public void onHideCustomView()
+        {
+            ((FrameLayout)WebviewActivity.this.getWindow().getDecorView()).removeView(this.mCustomView);
+            this.mCustomView = null;
+            WebviewActivity.this.getWindow().getDecorView().setSystemUiVisibility(this.mOriginalSystemUiVisibility);
+            WebviewActivity.this.setRequestedOrientation(this.mOriginalOrientation);
+            this.mCustomViewCallback.onCustomViewHidden();
+            this.mCustomViewCallback = null;
+        }
+
+        public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback)
+        {
+            if (this.mCustomView != null)
+            {
+                onHideCustomView();
+                return;
+            }
+            this.mCustomView = paramView;
+            this.mOriginalSystemUiVisibility = WebviewActivity.this.getWindow().getDecorView().getSystemUiVisibility();
+            this.mOriginalOrientation = WebviewActivity.this.getRequestedOrientation();
+            this.mCustomViewCallback = paramCustomViewCallback;
+            ((FrameLayout)WebviewActivity.this.getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
+            WebviewActivity.this.getWindow().getDecorView().setSystemUiVisibility(3846);
         }
     }
 }
