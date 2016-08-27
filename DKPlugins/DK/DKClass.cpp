@@ -118,7 +118,7 @@ void DKClass::_Close(const DKString& data)
 		return;
 	}
 	
-	if(has("/", arry[1])){
+	if(has(arry[1], "/")){
 		DKLog("DKClass::_Close("+data+"): Should not contain / \n", DKERROR);
 	}
 
