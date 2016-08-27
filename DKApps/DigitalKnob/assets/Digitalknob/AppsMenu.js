@@ -17,8 +17,6 @@ function AppsMenu_End()
 ////////////////////////////////
 function AppsMenu_OnEvent(event)
 {
-	//TODO - Panel0_content needs it's own .js
-	
 	if(DK_Id(event, "DKFacebook")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
@@ -49,10 +47,10 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 		});
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "AppsMenu.html")){
-			return;
-		}
-	}
+	//if(DK_Id(event, "GLOBAL")){
+	//	if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "AppsMenu.html")){
+			//return;
+	//	}
+	//}
 	DKClose("AppsMenu.js");
 }
