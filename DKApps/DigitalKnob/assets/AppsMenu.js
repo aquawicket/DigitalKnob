@@ -22,15 +22,16 @@ function AppsMenu_OnEvent(event)
 	if(DK_Id(event, "DKFacebook")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
-		DKCreate("DKApp.js", function(){ 
+		DKCreate("DKApp.js", function(){
+			DKLog("FUNCTION CALLED!");
 			DKApp_UpdateApp("DKFacebook");
-			/*DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
+			DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
 * Super fast <br /> \
 * No notifications <br /> \
 * No data sharing <br /> \
 * No location sharing <br /> \
 * No running processes <br /> \
-* Small, Fast, simple and free <br /><br />");*/
+* Small, Fast, simple and free <br /><br />");
 		});
 	}
 
@@ -54,5 +55,5 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 			return;
 		}
 	}
-	DKClose("DKOS/AppsMenu.js");
+	DKClose("AppsMenu.js");
 }
