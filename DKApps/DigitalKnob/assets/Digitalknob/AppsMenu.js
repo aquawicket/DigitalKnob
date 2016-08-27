@@ -11,7 +11,7 @@ function AppsMenu_Init()
 function AppsMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
-	DKClose("DigitalKnob/AppsMenu.html");
+	DKClose("AppsMenu.html");
 }
 
 ////////////////////////////////
