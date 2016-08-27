@@ -18,6 +18,8 @@ function AppsMenu_End()
 function AppsMenu_OnEvent(event)
 {
 	DKLog("AppsMenu_OnEvent("+event+"):\n");
+	DKLog("AppsMenu_OnEvent("+DK_GetId(event)+"):\n");
+	
 	if(DK_Id(event, "DKFacebook")){
 		DKLog("AppsMenu_OnEvent(): DKFacebook \n");
 		DKWidget_SetInnerHtml("Digitalknob_content","");
@@ -51,7 +53,7 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 	
 	if(DK_Id(event, "GLOBAL")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "AppsMenu.html")){
-			//return;
+			return;
 		}
 	}
 	DKClose("Digitalknob/AppsMenu.js");
