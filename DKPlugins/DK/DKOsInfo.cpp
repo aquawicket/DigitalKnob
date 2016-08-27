@@ -30,23 +30,23 @@ bool GetSystemOS(DKString& os)
 	DKString arch;
 	GetOSArchitecture(arch);
 	if (same(arch, "32-bit")){
-		os = "WIN32";
+		os = "Win32";
 	}
 	else if (same(arch, "64-bit")){
-		os = "WIN64";
+		os = "Win64";
 	}
 #endif
 #if defined(MAC)
-	os = "MAC";
+	os = "Mac";
 #endif
 #if defined(IOS)
-	os = "IOS";
+	os = "iOS";
 #endif
 #if defined(LINUX)
-	os = "LINUX";
+	os = "Linux";
 #endif
 #if defined(ANDROID)
-	os = "ANDROID";
+	os = "Android";
 #endif
 	if(os.empty()){
 		DKLog("ERROR GetSystemOS() cound not get the OS \n", DKERROR);
