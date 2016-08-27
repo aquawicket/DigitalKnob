@@ -109,6 +109,8 @@ function LoadJS(url)
 //////////////////////////////////
 function CreateWidget(url, parent)
 {
+	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
+	
 	var string = DK_FileToString(url);
 	if(!string){ 
 		//DKLog("file not found \n", DKERROR); 
