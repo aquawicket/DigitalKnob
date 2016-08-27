@@ -79,25 +79,25 @@ function DKClose(data)
 		else{
 			DKLog(name+" is not callable \n", DKERROR);
 		}
-		var script = document.getElementById(file);
+		var script = document.getElementById(arry[1]);
 		if(!script){
-			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
 			return;
 		}
 		script.parentNode.removeChild(script);
 	}
 	if(arry[0] == "DKWidget"){
-		var element = document.getElementById(file);
+		var element = document.getElementById(arry[1]);
 		if(!element){ 
-			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
 			return; 
 		}
 		element.parentNode.removeChild(element);
 	}
 	if(arry[0] == "DKCss"){
-		var css = document.getElementById(file);
+		var css = document.getElementById(arry[1]);
 		if(!css){ 
-			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
 			return; 
 		}
 		css.parentNode.removeChild(css);
