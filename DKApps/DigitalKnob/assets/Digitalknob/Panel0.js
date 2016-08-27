@@ -12,7 +12,7 @@ function Panel0_Init()
 /////////////////////
 function Panel0_End()
 {
-	DKClose("Panel0.html");
+	DKClose("DigitalKnob/Panel0.html");
 }
 
 //////////////////////////////

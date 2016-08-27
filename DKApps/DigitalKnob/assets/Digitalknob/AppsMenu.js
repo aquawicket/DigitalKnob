@@ -11,7 +11,7 @@ function AppsMenu_Init()
 function AppsMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
-	DKClose("AppsMenu.html");
+	DKClose("DigitalKnob/AppsMenu.html");
 }
 
 ////////////////////////////////
@@ -54,5 +54,5 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 			return;
 		}
 	}
-	DKClose("AppsMenu.js");
+	DKClose("DigitalKnob/AppsMenu.js");
 }
