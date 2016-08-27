@@ -22,7 +22,7 @@ function AppsMenu_OnEvent(event)
 	if(DK_Id(event, "DKFacebook")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
-		DKCreate("DKApp.js", function(){
+		DKCreate("Digitalknob/DKApp.js", function(){
 			DKApp_UpdateApp("DKFacebook");
 			DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
 * Super fast <br /> \
@@ -37,7 +37,7 @@ function AppsMenu_OnEvent(event)
 	if(DK_Id(event, "DKYoutube")){
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
-		DKCreate("DKApp.js", function(){ 
+		DKCreate("Digitalknob/DKApp.js", function(){ 
 			DKApp_UpdateApp("DKYoutube");
 			DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
 Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. <br /> \
@@ -54,5 +54,5 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 			return;
 		}
 	}
-	DKClose("AppsMenu.js");
+	DKClose("Digitalknob/AppsMenu.js");
 }

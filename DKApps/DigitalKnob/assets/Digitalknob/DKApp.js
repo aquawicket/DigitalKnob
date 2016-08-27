@@ -14,7 +14,7 @@ var download_link = "";
 /////////////////////
 function DKApp_Init()
 {
-	DKCreate("DKApp.html,Panel0_content");
+	DKCreate("Digitalknob/DKApp.html,Panel0_content");
 	DKAddEvent("DKApp_download", "click", DKApp_OnEvent);
 	
 	var id = DKWidget_CreateElement("Panel0_content","div","loading");
@@ -29,7 +29,7 @@ function DKApp_Init()
 ////////////////////
 function DKApp_End()
 {
-	DKClose("DKApp.html");
+	DKClose("Digitalknob/DKApp.html");
 }
 
 /////////////////////////////
@@ -45,7 +45,7 @@ function DKApp_UpdateApp(name)
 {
 	DKLog("DKApp_UpdateApp("+name+") \n");
 	app = name;
-	icon = app+"_icon.png";
+	icon = "Digitalknob/"+app+"_icon.png";
 	//os = DK_GetOS();
 	win32_download = "http://digitalknob.com/Download/"+app+".exe";
 	win64_download = "http://digitalknob.com/Download/"+app+"_64.exe";
@@ -157,17 +157,17 @@ function DKApp_UpdateDescription(string)
 function DKApp_UpdateScreenshots()
 {
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", app+"_screenshot01.png");
+	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot01.png");
 	DKWidget_SetProperty(id, "height", "300rem");
 	DKWidget_SetProperty(id, "padding-right", "5rem");
 	
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", app+"_screenshot02.png");
+	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot02.png");
 	DKWidget_SetProperty(id, "height", "300rem");
 	DKWidget_SetProperty(id, "padding-right", "5rem");
 	
 	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", app+"_screenshot03.png");
+	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot03.png");
 	DKWidget_SetProperty(id, "height", "300rem");
 	DKWidget_SetProperty(id, "padding-right", "5rem");
 }

@@ -1,7 +1,7 @@
 ////////////////////
 function Home_Init()
 {
-	DKCreate("Home.html,Panel0_content");
+	DKCreate("Digitalknob/Home.html,Panel0_content");
 	//DKAddEvent("GLOBAL", "mousedown", Home_OnEvent);
 }
 

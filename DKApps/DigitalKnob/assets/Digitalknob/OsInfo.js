@@ -1,7 +1,7 @@
 //////////////////////
 function OsInfo_Init()
 {
-	DKCreate("OsInfo.html,Panel0.html");
+	DKCreate("Digitalknob/OsInfo.html,Panel0.html");
 	DKAddEvent("GLOBAL", "resize", OsInfo_OnEvent);
 	
 	OsInfo_Resize();
@@ -10,7 +10,7 @@ function OsInfo_Init()
 /////////////////////
 function OsInfo_End()
 {
-	DKClose("OsInfo.html");
+	DKClose("Digitalknob/OsInfo.html");
 }
 
 //////////////////////////////
