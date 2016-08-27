@@ -1,3 +1,3 @@
 DKCreate("DKWindow");
 DKCreate("DKRocket")
-DKCreate("Digitalknob/Panel0.js");
+DKCreate("Digitalknob/Digitalknob.js");

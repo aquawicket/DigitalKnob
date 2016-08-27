@@ -14,10 +14,10 @@ var download_link = "";
 /////////////////////
 function DKApp_Init()
 {
-	DKCreate("Digitalknob/DKApp.html,Panel0_content");
+	DKCreate("Digitalknob/DKApp.html,Digitalknob_content");
 	DKAddEvent("DKApp_download", "click", DKApp_OnEvent);
 	
-	var id = DKWidget_CreateElement("Panel0_content","div","loading");
+	var id = DKWidget_CreateElement("Digitalknob_content","div","loading");
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "top", "25rem");
 	DKWidget_SetProperty(id, "width", "100%");

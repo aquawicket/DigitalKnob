@@ -18,7 +18,7 @@ function AppsMenu_End()
 function AppsMenu_OnEvent(event)
 {
 	if(DK_Id(event, "DKFacebook")){
-		DKWidget_SetInnerHtml("Panel0_content","");
+		DKWidget_SetInnerHtml("Digitalknob_content","");
 		
 		DKCreate("Digitalknob/DKApp.js", function(){
 			DKApp_UpdateApp("DKFacebook");
@@ -33,7 +33,7 @@ function AppsMenu_OnEvent(event)
 	}
 
 	if(DK_Id(event, "DKYoutube")){
-		DKWidget_SetInnerHtml("Panel0_content","");
+		DKWidget_SetInnerHtml("Digitalknob_content","");
 		
 		DKCreate("Digitalknob/DKApp.js", function(){ 
 			DKApp_UpdateApp("DKYoutube");
