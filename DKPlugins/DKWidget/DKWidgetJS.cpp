@@ -601,7 +601,7 @@ int DKWidgetJS::SetScale(duk_context* ctx)
 	double scale = duk_require_number(ctx, 0);
 	//DKLog("DKWidgetJS::SetScale("+toString(scale)+") \n", DKDEBUG);
 	DKWidget::SetProperty("html","font-size",toString(scale)+"px");
-	DKWidget::SetProperty("body","font-size",toString(scale)+"em");
+	DKWidget::SetProperty("body","font-size",toString(scale)+"px");
 	return 1;
 }
 

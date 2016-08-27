@@ -6,6 +6,7 @@
 
 body{
 	font-family: "Times New Roman";
+	font-size: 1.0px;
 	color: black;
 	height: 100%;
 	padding-left: 8px;
@@ -22,6 +23,7 @@ body, div, option, img, select, dataselect, input, textarea, button
 
 option, div, tr{
 	display:block;
+	font-size: 13rem;
 }
 
 th{

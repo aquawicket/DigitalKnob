@@ -1,6 +1,7 @@
 //////////////////////
 function Panel0_Init()
 {
+	//DKWidget_SetProperty("body", "font-size", "1px");
 	DKCreate("Panel0.html");
 	//DKCreate("Content.html,Panel0_content");
 	DKCreate("Home.js");
