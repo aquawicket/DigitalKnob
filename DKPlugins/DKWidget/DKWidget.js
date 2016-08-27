@@ -66,9 +66,6 @@ function DKClose(data)
 		DKLog("DKClose("+data+"): file invalid \n", DKERROR);
 		return; 
 	}
-	if(file.indexOf("/") != -1){
-		DKLog("DKClose("+data+"): should not contain a / \n", DKERROR);
-	}
 	
 	if(arry[0] == "DKJavascript"){
 		// Call the js end function
