@@ -29,7 +29,7 @@ function DKApp_Init()
 ////////////////////
 function DKApp_End()
 {
-	DKClose("Digitalknob/DKApp.html");
+	DKClose("DKApp.html");
 }
 
 /////////////////////////////
@@ -99,8 +99,6 @@ function DKApp_UpdateApp(name)
 			else{DKApp_SetDownload("none");}
 		});
 	}
-	
-	
 	
 	DKWidget_RemoveElement("loading");
 	DKWidget_SetProperty("DKApp.html", "visibility", "visible");

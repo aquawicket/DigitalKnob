@@ -1,7 +1,6 @@
 //////////////////////
 function Panel0_Init()
 {
-	//DKWidget_SetProperty("body", "font-size", "1px");
 	DKCreate("Digitalknob/Panel0.html");
 	DKCreate("Digitalknob/Home.js");
 	DKCreate("Digitalknob/OsInfo.js");
@@ -13,7 +12,7 @@ function Panel0_Init()
 /////////////////////
 function Panel0_End()
 {
-	DKClose("Digitalknob/Panel0.html");
+	DKClose("Panel0.html");
 }
 
 //////////////////////////////
