@@ -87,9 +87,10 @@ function DKClose(data)
 		script.parentNode.removeChild(script);
 	}
 	if(arry[0] == "DKWidget"){
-		var element = document.getElementById(arry[1]);
+		var file = DKFile_GetFilename(arry[1]);
+		var element = document.getElementById(file);
 		if(!element){ 
-			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
 			return; 
 		}
 		element.parentNode.removeChild(element);
