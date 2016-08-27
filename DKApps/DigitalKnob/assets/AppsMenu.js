@@ -23,7 +23,6 @@ function AppsMenu_OnEvent(event)
 		DKWidget_SetInnerHtml("Panel0_content","");
 		
 		DKCreate("DKApp.js", function(){
-			DKLog("FUNCTION CALLED!");
 			DKApp_UpdateApp("DKFacebook");
 			DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
 * Super fast <br /> \
