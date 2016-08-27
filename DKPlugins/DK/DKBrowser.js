@@ -45,7 +45,7 @@ function LoadCSS(url)
 ////////////////////
 function LoadJS(url)
 {
-	DKLog("LoadJS("+url+") \n", DKDEBUG);
+	//DKLog("LoadJS("+url+") \n", DKDEBUG);
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return; 
@@ -64,12 +64,8 @@ function LoadJS(url)
 	}
 	
 	//already loaded, remove it first
-	if(document.getElementById(file)){
-		var parent = document.getElementById(file).parentNode;
-		if(!parent){
-			DKLog("LoadJS("+file+"): parent invalid \n", DKERROR);
-		}
-		parent.removeChild(document.getElementById(file));
+	if(document.getElementById(url) || document.getElementById(file)){
+		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
 	}
 	
 	// Adding the script tag to the head as suggested before
