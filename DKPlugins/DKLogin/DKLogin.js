@@ -17,6 +17,7 @@ function DKLogin_OnEvent(event)
 {
 	if(DK_Id(event, "DKLoginFacebook")){
 		DKLog("DKLogin_OnEvent(): DKLoginFacebook \n");
+		DKFacebookLogin(DKLogin_FBconnect);
 		/*
 		DKFacebook_Login();
 		DKFacebook_Query('/me', "id", DKLogin_fbresponse);
@@ -39,4 +40,10 @@ function DKLogin_fbresponse(param, response)
 	
 	DKLog("Facebook response: "+response, DKDEBUG);
 	*/
+}
+
+////////////////////////////
+function DKLogin_FBconnect()
+{
+	DKLog("DKLogin_FBconnect() \n");
 }
