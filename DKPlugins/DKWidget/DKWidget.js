@@ -49,6 +49,7 @@ function DKCreate(data, callback)
 function DKClose(data)
 {
 	DKLog("DKClose("+data+")", DKDEBUG);
+	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
@@ -65,6 +66,10 @@ function DKClose(data)
 		DKLog("DKClose("+data+"): file invalid \n", DKERROR);
 		return; 
 	}
+	if(file.indexOf("/") != -1){
+		DKLog("DKClose("+data+"): should not contain a / \n", DKERROR);
+	}
+	
 	if(arry[0] == "DKJavascript"){
 		// Call the js end function
 		var name = file.replace(".js", "");
