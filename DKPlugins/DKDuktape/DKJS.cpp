@@ -110,13 +110,14 @@ int DKJS::_DKCreate(duk_context* ctx)
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-        DKLog("DKJS::_DKCreate(): Callback found in DKCreate :D \n", DKSUCCESS);
+        DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
 		callback_found = true;
 	}
 
 	DKObject* obj = DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
+		DKLog("DKJS::_DKCreate(): obj invalid \n", DKERROR);
 		return 1;
 	}
 
