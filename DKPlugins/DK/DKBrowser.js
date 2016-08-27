@@ -64,8 +64,8 @@ function LoadJS(url)
 	}
 	
 	//already loaded, remove it first
-	if(document.getElementById(url) || document.getElementById(file)){
-		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
+	if(document.getElementById(file)){
+		document.getElementById(file).parentNode.removeChild(document.getElementById(file));
 	}
 	
 	// Adding the script tag to the head as suggested before
