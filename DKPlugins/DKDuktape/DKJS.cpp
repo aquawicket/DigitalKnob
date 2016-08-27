@@ -37,7 +37,7 @@ void DKJS::Init()
 	duk_eval_string(DKDuktape::ctx, "var DKINFO = 3;");
 	duk_eval_string(DKDuktape::ctx, "var DKDEBUG = 4;");
 
-	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate, 1);
+	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate, 2);
 	DKDuktape::AttachFunction("DKValid", DKJS::_DKValid, 1);
 	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable, 1);
 	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose, 1);
@@ -107,6 +107,11 @@ void DKJS::Init()
 int DKJS::_DKCreate(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
+	
+	if (duk_is_function(ctx, -1)) {
+        printf("Callback found in DKCreate :D \n");
+    }
+
 	DKObject* obj = DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
