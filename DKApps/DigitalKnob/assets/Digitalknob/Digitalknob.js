@@ -12,7 +12,7 @@ function Digitalknob_Init()
 /////////////////////
 function Digitalknob_End()
 {
-	DKClose("Digitalknob.html");
+	DKClose("Digitalknob/Digitalknob.html");
 }
 
 //////////////////////////////

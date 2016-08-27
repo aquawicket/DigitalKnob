@@ -29,7 +29,7 @@ function DKApp_Init()
 ////////////////////
 function DKApp_End()
 {
-	DKClose("DKApp.html");
+	DKClose("Digitalknob/DKApp.html");
 }
 
 /////////////////////////////
