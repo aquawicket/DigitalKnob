@@ -10,7 +10,7 @@ function OsInfo_Init()
 /////////////////////
 function OsInfo_End()
 {
-	DKClose("Digitalknob/OsInfo.html");
+	DKClose("OsInfo.html");
 }
 
 //////////////////////////////
