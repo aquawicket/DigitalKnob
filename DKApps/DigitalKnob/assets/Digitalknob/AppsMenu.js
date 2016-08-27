@@ -17,7 +17,9 @@ function AppsMenu_End()
 ////////////////////////////////
 function AppsMenu_OnEvent(event)
 {
+	DKLog("AppsMenu_OnEvent("+event+"):\n");
 	if(DK_Id(event, "DKFacebook")){
+		DKLog("AppsMenu_OnEvent(): DKFacebook \n");
 		DKWidget_SetInnerHtml("Digitalknob_content","");
 		
 		DKCreate("Digitalknob/DKApp.js", function(){
@@ -47,10 +49,10 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 		});
 	}
 	
-	//if(DK_Id(event, "GLOBAL")){
-	//	if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "AppsMenu.html")){
+	if(DK_Id(event, "GLOBAL")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "AppsMenu.html")){
 			//return;
-	//	}
-	//}
+		}
+	}
 	DKClose("Digitalknob/AppsMenu.js");
 }
