@@ -64,15 +64,15 @@ function LoadJS(url)
 	}
 	
 	//already loaded, remove it first
-	if(document.getElementById(url)){
-		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
+	if(document.getElementById(file)){
+		document.getElementById(file).parentNode.removeChild(document.getElementById(file));
 	}
 	
 	// Adding the script tag to the head as suggested before
 	var head = document.getElementsByTagName('head')[0];
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
-	script.id = url;
+	script.id = file;
 	script.src = url;
 	script.async = true; // optionally
 	
