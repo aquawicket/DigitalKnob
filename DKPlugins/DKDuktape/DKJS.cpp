@@ -108,21 +108,28 @@ int DKJS::_DKCreate(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	
+	bool callback_found = false;
+	if (duk_is_function(ctx, -1)) {
+        DKLog("DKJS::_DKCreate(): Callback found in DKCreate :D \n", DKSUCCESS);
+		callback_found = true;
+	}
+
 	DKObject* obj = DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
 		return 1;
 	}
-	duk_push_string(ctx, obj->data[1].c_str());
+
+	//duk_push_string(ctx, obj->data[1].c_str());
 
 	//Look for a callback function, and call it if one exists.
-	if (duk_is_function(ctx, -1)) {
-        DKLog("DKJS::_DKCreate(): Callback found in DKCreate :D \n", DKSUCCESS);
+	if(callback_found){
 		if (duk_pcall(ctx, 1) != 0) { // JsFunc call failed
 			DKLog("DKJS::_DKCreate(): JsFunc call failed :( \n", DKERROR);
 		}
     }
 
+	duk_push_string(ctx, obj->data[1].c_str());
 	return 1;
 }
 
