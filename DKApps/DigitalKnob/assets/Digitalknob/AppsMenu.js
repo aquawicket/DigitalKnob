@@ -54,5 +54,5 @@ Don't you just hate how youtube music stops playing when you turn off your scree
 			return;
 		}
 	}
-	DKClose("DigitalKnob/AppsMenu.js");
+	DKClose("AppsMenu.js");
 }
