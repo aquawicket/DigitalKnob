@@ -113,10 +113,13 @@ void DKClass::_Close(const DKString& data)
 	else if(has(arry[0],".js")){
 		arry.insert(arry.begin(),"DKJavascript");
 	}
-	//TODO
 	else if(has(arry[0],".css")){
-		//arry.insert(arry.begin(),"DKCss");
+		arry.insert(arry.begin(),"DKCss");
 		return;
+	}
+	
+	if(has("/", arry[1])){
+		DKLog("DKClass::_Close("+data+"): Should not contain / \n", DKERROR);
 	}
 
 	if((*classes)[arry[0]]){
