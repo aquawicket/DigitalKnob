@@ -36,7 +36,7 @@ function DKApp_End()
 function DKApp_OnEvent(event)
 {
 	if(DK_Id(event, "DKApp_download")){
-		window.location = download_link;  //FIXME - We need a DKWindow command for this
+		DKWidget_OpenLink(download_link);
 	}
 }
 

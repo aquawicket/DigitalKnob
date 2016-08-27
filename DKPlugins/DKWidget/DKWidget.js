@@ -824,3 +824,10 @@ function DKWidget_SetScale(scale)
 	//DKLog("DKWidget_SetScale("+scale+")\n");
 	DKWidget_SetProperty("html", "font-size", scale+"px");
 }
+
+/////////////////////////////////////////
+function DKWidget_OpenLink(download_link)
+{
+	//Open link same window
+	window.location = download_link;  //FIXME - We need a DKWindow command for this
+}
