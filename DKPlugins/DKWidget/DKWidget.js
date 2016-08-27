@@ -78,15 +78,27 @@ function DKClose(data)
 			DKLog(name+" is not callable \n", DKERROR);
 		}
 		var script = document.getElementById(file);
+		if(!script){
+			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			return;
+		}
 		script.parentNode.removeChild(script);
 	}
 	if(arry[0] == "DKWidget"){
 		var element = document.getElementById(file);
-		if(!element){ return; }
+		if(!element){ 
+			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			return; 
+		}
 		element.parentNode.removeChild(element);
 	}
 	if(arry[0] == "DKCss"){
-
+		var css = document.getElementById(file);
+		if(!css){ 
+			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			return; 
+		}
+		css.parentNode.removeChild(css);
 	}
 }
 
