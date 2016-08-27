@@ -70,6 +70,7 @@ public:
 	static int Paste(duk_context* ctx);
 	static int ScrollToTop(duk_context* ctx);
 	static int ScrollToBottom(duk_context* ctx);
+	static int OpenLink(duk_context* ctx);
 };
 
 

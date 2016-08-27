@@ -67,6 +67,7 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_Paste", DKWidgetJS::Paste, 1);
 	DKDuktape::AttachFunction("DKWidget_ScrollToTop", DKWidgetJS::ScrollToTop, 1);
 	DKDuktape::AttachFunction("DKWidget_ScrollToBottom", DKWidgetJS::ScrollToBottom, 1);
+	DKDuktape::AttachFunction("DKWidget_OpenLink", DKWidgetJS::OpenLink, 1);
 
 }
 
@@ -701,6 +702,14 @@ int DKWidgetJS::ScrollToBottom(duk_context* ctx)
 	if(!DKWidget::ScrollToBottom(id)){
 		return 0;
 	}
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWidgetJS::OpenLink(duk_context* ctx)
+{
+	DKString url = duk_require_string(ctx, 0);
+	DKUtil::Run(url); 
 	return 1;
 }
 
