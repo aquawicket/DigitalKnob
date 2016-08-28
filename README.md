@@ -77,9 +77,3 @@ Internet Explorer (9.0+) <br>
 ###How to compile 
 #[DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
 
-
-
-
-
-
-
