@@ -201,7 +201,7 @@ function DKBuildConsole_Process()
 	}
 	DKLog("\n ** Current APP "+APP+"\n");
 
-	if(DK_GetOS() == "LINUX" || OS == "android32" || OS == "android64"){
+	if(DK_GetOS() == "Linux" || OS == "android32" || OS == "android64"){
 		TYPE = "Release";
 	}
 	else{

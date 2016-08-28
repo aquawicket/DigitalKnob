@@ -20,24 +20,24 @@ function DKBuildGUI_Init()
 	DKBuild_ValidateCmake();
 	DKBuild_ValidateVC2015();
 
-	if(DK_GetOS() == "WIN32" ||  DK_GetOS() == "WIN64"){
+	if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
 		DKWidget_SetValue("OSList", "win32");
 	}
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		DKWidget_SetValue("OSList", "mac64");
 	}
-	if(DK_GetOS() == "LINUX"){
+	if(DK_GetOS() == "Linux"){
 		DKWidget_SetValue("OSList", "linux64");
 	}
 
-	if(DK_GetOS() == "LINUX"){
+	if(DK_GetOS() == "Linux"){
 		DKWidget_SetValue("BuildType", "Release");
 	}
 	else{
 		DKWidget_SetValue("BuildType", "ALL");
 	}
 	
-	if(DK_GetOS() == "ANDROID"){ return; } //FIXME - android not ready
+	if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
 	DKBuildGUI_UpdateApps();
 }
 

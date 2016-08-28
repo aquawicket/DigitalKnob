@@ -19,26 +19,26 @@ function DKBuild_Init()
 	DKCreate("DKCurl");
 
 	//DKLog(DK_GetOS()+"\n");
-	if(DK_GetOS() == "WIN32" || DK_GetOS() == "Win32"){
+	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 	}
-	if(DK_GetOS() == "WIN64"){
+	if(DK_GetOS() == "Win64"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 	}
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 	}
-	if(DK_GetOS() == "LINUX"){
+	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aquawicket/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
 		CMAKE = "/usr/bin/cmake";
@@ -58,18 +58,18 @@ function DKBuild_InstallSvn()
 	DKLog("Installing Svn \n");
 	var datapath = DKAssets_GetDataPath();
 	
-	if(DK_GetOS() == "WIN32"){
+	if(DK_GetOS() == "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", datapath);
 		DK_System(datapath+"/Setup-Subversion-1.8.10.msi");
 	}
-	else if(DK_GetOS() == "WIN64"){
+	else if(DK_GetOS() == "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", datapath);
 		DK_System(datapath+"/Setup-Subversion-1.8.10.msi");
 	}
-	else if(DK_GetOS() == "MAC"){
+	else if(DK_GetOS() == "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "LINUX"){
+	else if(DK_GetOS() == "Linux"){
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{
@@ -87,7 +87,7 @@ function DKBuild_ValidateSvn()
 		DKBuild_InstallSvn();
 	}
 	DKLog("Found SVN \n");
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
 	}
 }
@@ -98,18 +98,18 @@ function DKBuild_InstallCmake()
 	DKLog("Installing CMake \n");
 	var datapath = DKAssets_GetDataPath();
 	
-	if(DK_GetOS() == "WIN32"){
+	if(DK_GetOS() == "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.3.2-win32-x86.exe", datapath);
 		DK_System(datapath+"/cmake-3.3.2-win32-x86.exe");
 	}
-	else if(DK_GetOS() == "WIN64"){
+	else if(DK_GetOS() == "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.3.2-win32-x86.exe", datapath);
 		DK_System(datapath+"/cmake-3.3.2-win32-x86.exe");
 	}
-	else if(DK_GetOS() == "MAC"){
+	else if(DK_GetOS() == "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "LINUX"){
+	else if(DK_GetOS() == "Linux"){
 		DK_Execute("sudo apt-get install cmake");
 	}
 	else{
@@ -127,7 +127,7 @@ function DKBuild_ValidateCmake()
 		DKBuild_InstallCmake();
 	}
 	DKLog("Found CMake \n");
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		CMAKE = "cmake";
 	}
 }
@@ -138,11 +138,11 @@ function DKBuild_InstallVC2015()
 	DKLog("Installing Visual Studio 2015 \n");
 	var datapath = DKAssets_GetDataPath();
 	
-	if(DK_GetOS() == "WIN32"){
+	if(DK_GetOS() == "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
 		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
 	}
-	else if(DK_GetOS() == "WIN64"){
+	else if(DK_GetOS() == "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
 		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
 	}
@@ -151,7 +151,7 @@ function DKBuild_InstallVC2015()
 ///////////////////////////////////
 function DKBuild_ValidateVC2015()
 {
-	if(DK_GetOS() != "WIN32" && DK_GetOS() != "WIN64"){
+	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
 	DKLog("Looking for Visual Studio 2015 \n");
@@ -165,7 +165,7 @@ function DKBuild_ValidateVC2015()
 ////////////////////////////
 function DKBuild_OsCheck()
 {
-	if(DK_GetOS() == "WIN32"){
+	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
 			DKLog(OS+" can only be build from a WIN64 machine.\n"); return false;
 		}
@@ -182,7 +182,7 @@ function DKBuild_OsCheck()
 			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
 		}
 	}
-	if(DK_GetOS() == "WIN64"){
+	if(DK_GetOS() == "Win64"){
 		if(OS == "mac"){
 			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
@@ -196,7 +196,7 @@ function DKBuild_OsCheck()
 			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
 		}
 	}
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		if(OS == "win32"){
 			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
@@ -210,7 +210,7 @@ function DKBuild_OsCheck()
 			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 	}
-	if(DK_GetOS() == "LINUX"){
+	if(DK_GetOS() == "Linux"){
 		if(OS == "win32"){
 			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
@@ -230,13 +230,10 @@ function DKBuild_OsCheck()
 			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 	}
-	if(DK_GetOS() == "ANDROID"){
+	if(DK_GetOS() == "Android"){
 		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
 	}
-	if(DK_GetOS() == "IOS"){
-		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
-	}
-	if(DK_GetOS() == "IOS-SIMULATOR"){
+	if(DK_GetOS() == "iOS"){
 		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
 	}
 	return true;

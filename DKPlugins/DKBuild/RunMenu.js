@@ -52,7 +52,7 @@ function RunMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "Run App")){
 		OS = DKWidget_GetValue("OSList");
-		if(DK_GetOS() == "WIN32" || DK_GetOS() == "WIN64"){
+		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			if(OS == "win32"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
@@ -65,7 +65,7 @@ function RunMenu_OnEvent(event)
 				DKLog("TODO: Run android from Windows \n");
 			}
 		}
-		if(DK_GetOS() == "MAC"){
+		if(DK_GetOS() == "Mac"){
 			if(OS == "mac"){
 				DKLog("TODO: Run mac apps from OSX \n");
 			}
@@ -76,7 +76,7 @@ function RunMenu_OnEvent(event)
 				DKLog("TODO: Run iOS-simulator apps from OSX \n");
 			}
 		}
-		if(DK_GetOS() == "LINUX"){
+		if(DK_GetOS() == "Linux"){
 			if(OS = "linux"){
 				DKLog("TODO: Run linux apps from Linux \n");
 			}

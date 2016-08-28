@@ -31,19 +31,19 @@ function DKCreator_Init()
 	var version = DKFile_GetModifiedTime(exename);
 	DKWidget_SetInnerHtml("version", version);
 	
-	if(DK_GetOS() == "WIN32" ||  DK_GetOS() == "WIN64"){
+	if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
 		DKWidget_SetValue("OSList", "WIN32");
 	}
-	if(DK_GetOS() == "MAC"){
+	if(DK_GetOS() == "Mac"){
 		DKWidget_SetValue("OSList", "MAC");
 	}
-	if(DK_GetOS() == "IOS"){
+	if(DK_GetOS() == "iOS"){
 		DKWidget_SetValue("OSList", "IOS");
 	}
-	if(DK_GetOS() == "LINUX"){
+	if(DK_GetOS() == "Linux"){
 		DKWidget_SetValue("OSList", "LINUX");
 	}
-	if(DK_GetOS() == "ANDROID"){
+	if(DK_GetOS() == "Android"){
 		DKWidget_SetValue("OSList", "ANDROID");
 	}
 	

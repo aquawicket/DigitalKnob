@@ -4,7 +4,7 @@ DKCreate("DKWindow");
 DKCreate("DKRocket");
 var OS = DK_GetOS();
 DKLog("OS="+OS+"\n");
-if(OS != "IOS" && OS != "ANDROID"){
+if(OS != "iOS" && OS != "Android"){
 	var screenwidth = DK_GetScreenWidth();
 	var screenheight = DK_GetScreenHeight();
 	var newwidth = parseInt(screenwidth)-100;
@@ -17,6 +17,6 @@ DKCreate("DKFrame/DKFrame.js")
 DKCreate("DKOS/Desktop.js");
 DKCreate("DKOS/Taskbar.js");
 
-if(OS == "IOS" || OS == "ANDROID"){
+if(OS == "iOS" || OS == "Android"){
 	//DKWidget_SetScale(2);   FIXME
 }

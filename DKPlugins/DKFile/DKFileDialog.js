@@ -95,7 +95,7 @@ function DKFileDialog_OpenFolder(path)
 function DKFileDialog_OpenFile(path)
 {
 	DKLog("DKFileDialog_OpenFile("+path+") \n", DKINFO);
-	if(DK_GetOS() == "ANDROID"){
+	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
@@ -114,7 +114,7 @@ function DKFileDialog_UpdatePath(path)
 {
 	//if(!path){ return false; }
 	DKLog("DKFileDialog_UpdatePath("+path+") \n", DKDEBUG);
-	if(DK_GetOS() == "ANDROID"){
+	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
