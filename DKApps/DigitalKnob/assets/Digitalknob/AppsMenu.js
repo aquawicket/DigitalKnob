@@ -25,6 +25,7 @@ function AppsMenu_OnEvent(event)
 		DKLog("AppsMenu_OnEvent(): DKFacebook \n");
 		DKWidget_SetInnerHtml("Digitalknob_content","");
 		
+		DKClose("Digitalknob/DKApp.js");
 		DKCreate("Digitalknob/DKApp.js", function(){
 			DKApp_UpdateApp("DKFacebook");
 			DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
@@ -40,6 +41,7 @@ function AppsMenu_OnEvent(event)
 	if(DK_Id(event, "DKYoutube")){
 		DKWidget_SetInnerHtml("Digitalknob_content","");
 		
+		DKClose("Digitalknob/DKApp.js");
 		DKCreate("Digitalknob/DKApp.js", function(){ 
 			DKApp_UpdateApp("DKYoutube");
 			DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
