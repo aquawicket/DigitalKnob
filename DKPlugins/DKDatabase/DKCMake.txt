@@ -1,1 +1,2 @@
+DKDEPEND(DKRocket)
 DKASSETS(DKDatabase)
