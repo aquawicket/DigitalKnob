@@ -7,6 +7,7 @@ var mac_download = "";
 var linux_download = "";
 var ios_download = "";
 var android_download = "";
+var web_app = "";
 
 var download_link = "";
 
@@ -53,6 +54,7 @@ function DKApp_UpdateApp(name)
 	linux_download = "http://digitalknob.com/Download/"+app+"_linux64.zip";
 	ios_download = "http://digitalknob.com/Download/"+app+"_ios.zip";
 	android_download = "http://digitalknob.com/Download/"+app+".apk";
+	web_app = "http://digitalknob.com/"+app;
 	
 	//Adjust icon
 	DKWidget_SetAttribute("DKApp_icon", "src", icon);
@@ -100,6 +102,13 @@ function DKApp_UpdateApp(name)
 		});
 	}
 	
+	//Overwrite the download button if a webapp exists
+	DKLog("Looking for... "+web_app+"\n");
+	DKFile_Exists(web_app, function(rval){
+		if(rval){DKApp_SetDownload("WebApp");}
+		DKApp_SetDownload("WebApp");
+	});
+	
 	DKWidget_RemoveElement("loading");
 	DKWidget_SetProperty("DKApp.html", "visibility", "visible");
 }
@@ -130,6 +139,10 @@ function DKApp_SetDownload(name)
 	else if(name.indexOf("iOS") != -1){
 		DKWidget_SetInnerHtml("DKApp_download", "Download for iOS");
 		download_link = ios_download;
+	}
+	else if(name.indexOf("WebApp") != -1){
+		DKWidget_SetInnerHtml("DKApp_download", "Goto WebApp");
+		download_link = web_app;
 	}
 	else{
 		DKWidget_RemoveElement("DKApp_download");
