@@ -83,7 +83,12 @@ function DKApp_UpdateApp(name)
 	else if(os.indexOf("Win64") != -1){
 		DKFile_Exists(win64_download, function(rval){
 			if(rval){DKApp_SetDownload("Win64");}
-			else{DKApp_SetDownload("none");}
+			else{
+				DKFile_Exists(win32_download, function(rval2){
+					if(rval2){DKApp_SetDownload("Win32");}
+					else{DKApp_SetDownload("none");}
+				});
+			}
 		});
 	}
 	else if(os.indexOf("Mac") != -1){
