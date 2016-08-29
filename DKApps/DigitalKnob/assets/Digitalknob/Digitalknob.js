@@ -9,7 +9,7 @@ function Digitalknob_Init()
 	DKAddEvent("AppsMenu", "click", Digitalknob_OnEvent);
 }
 
-/////////////////////
+//////////////////////////
 function Digitalknob_End()
 {
 	DKClose("Digitalknob/Digitalknob.html");
@@ -21,6 +21,7 @@ function Digitalknob_OnEvent(event)
 	//DKLog("Digitalknob_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Id(event, "Image")){
 		DKWidget_SetInnerHtml("Digitalknob_content","");
+		DKClose("Digitalknob/Home.js");
 		DKCreate("Digitalknob/Home.js");
 	}
 	if(DK_Id(event, "AppsMenu")){
