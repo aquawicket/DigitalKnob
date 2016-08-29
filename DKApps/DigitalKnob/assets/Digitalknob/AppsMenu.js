@@ -31,12 +31,21 @@ function AppsMenu_AddApp(name)
 ////////////////////////////////
 function AppsMenu_OnEvent(event)
 {
-	DKLog("AppsMenu_OnEvent("+event+"):\n");
-	DKLog("AppsMenu_OnEvent("+DK_GetId(event)+"):\n");
+	//DKLog("AppsMenu_OnEvent("+event+") \n");
+	//DKLog("AppsMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+") \n");
+	
+	DKWidget_SetInnerHtml("Digitalknob_content",""); //clear the content
+	
+	if(DK_Type(event, "click")){
+		DKLog("!!!!!!!!!!!!!!!!!!!!!!!");
+		var id = DK_GetId(event);
+		DKLog("val = "+id);
+		
+		
+	}
 	
 	if(DK_Id(event, "DKFacebook")){
-		DKLog("AppsMenu_OnEvent(): DKFacebook \n");
-		DKWidget_SetInnerHtml("Digitalknob_content","");
+		
 		
 		DKClose("Digitalknob/DKApp.js");
 		DKCreate("Digitalknob/DKApp.js", function(){
