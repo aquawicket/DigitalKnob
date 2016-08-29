@@ -1,4 +1,4 @@
-![](http://digitalknob.com/Digitalknob/logo.png)
+![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
 # DigitalKnob
 
 Digitalknob is C++ Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br><br>
