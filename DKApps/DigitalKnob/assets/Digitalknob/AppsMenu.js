@@ -52,6 +52,9 @@ function AppsMenu_OnEvent(event)
 * No running processes <br /> \
 * Small, Fast, simple and free <br /><br />");
 			}
+			if(id == "DKSDLOS"){
+				DKApp_UpdateDescription("experimental");
+			}
 			if(id == "DKYoutube"){
 				DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
 Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. <br /> \
