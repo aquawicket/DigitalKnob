@@ -37,43 +37,33 @@ function AppsMenu_OnEvent(event)
 	DKWidget_SetInnerHtml("Digitalknob_content",""); //clear the content
 	
 	if(DK_Type(event, "click")){
-		DKLog("!!!!!!!!!!!!!!!!!!!!!!!");
 		var id = DK_GetId(event);
-		DKLog("val = "+id);
-		
-		
-	}
-	
-	if(DK_Id(event, "DKFacebook")){
-		
-		
 		DKClose("Digitalknob/DKApp.js");
 		DKCreate("Digitalknob/DKApp.js", function(){
-			DKApp_UpdateApp("DKFacebook");
-			DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
+			DKApp_UpdateApp(id);
+			
+			////////DKApp_UpdateDescription() /////////////
+			if(id == "DKFacebook"){
+				DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
 * Super fast <br /> \
 * No notifications <br /> \
 * No data sharing <br /> \
 * No location sharing <br /> \
 * No running processes <br /> \
 * Small, Fast, simple and free <br /><br />");
-		});
-	}
-
-	if(DK_Id(event, "DKYoutube")){
-		DKWidget_SetInnerHtml("Digitalknob_content","");
-		
-		DKClose("Digitalknob/DKApp.js");
-		DKCreate("Digitalknob/DKApp.js", function(){ 
-			DKApp_UpdateApp("DKYoutube");
-			DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
+			}
+			if(id == "DKYoutube"){
+				DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
 Don't you just hate how youtube music stops playing when you turn off your screen. You want to listen to music on youtube, but you want to turn my screen off to save battery!. Try DKYoutube. <br /> \
 * Super small file size <br /> \
 * Faster speeds than the youtube app <br /> \
 * More secure with less data and location sharing <br /> \
 * Turn off your screen, and the music keeps playing <br /> \
 * Small, Fast, simple and free <br /><br />");
+			}
+			//////////////////////////////////////////////	
 		});
+		
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
