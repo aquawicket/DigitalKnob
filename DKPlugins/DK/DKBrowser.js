@@ -42,8 +42,8 @@ function LoadCSS(url)
 	document.getElementsByTagName('head')[0].appendChild(link);
 }
 
-////////////////////
-function LoadJS(url)
+//////////////////////////////
+function LoadJS(url, callback)
 {
 	//DKLog("LoadJS("+url+") \n", DKDEBUG);
 	if(!url){ 
@@ -102,6 +102,7 @@ function LoadJS(url)
 			
 			//filesloaded += url+","; //add file to loaded list
 			done = true;
+			callback && callback();
 		}
 	};
 }

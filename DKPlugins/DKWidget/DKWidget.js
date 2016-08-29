@@ -21,10 +21,11 @@ function DKCreate(data, callback)
 	
 	
 	if(arry[0] == "DKJavascript"){
-		LoadJS(arry[1]);
-		setTimeout(function(){
-			callback && callback();
-		}, 500);
+		LoadJS(arry[1], function(){
+			//setTimeout(function(){
+				callback && callback();
+			//}, 500);
+		});
 		return true;
 	}
 	if(arry[0] == "DKWidget"){
