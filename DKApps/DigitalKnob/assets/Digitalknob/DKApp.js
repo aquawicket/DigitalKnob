@@ -103,10 +103,13 @@ function DKApp_UpdateApp(name)
 	}
 	
 	//Overwrite the download button if a webapp exists
-	DKLog("Looking for... "+web_app+"\n");
-	DKFile_Exists(web_app, function(rval){
-		if(rval){DKApp_SetDownload("WebApp");}
-		DKApp_SetDownload("WebApp");
+	DKLog("Looking for... "+web_app+"/index.html \n");
+	var rval;
+	DKFile_Exists(web_app+"/index.html", function(rval){
+		if(rval){
+			DKLog("It EXISTS!!!!\n");
+			DKApp_SetDownload("WebApp");
+		}
 	});
 	
 	DKWidget_RemoveElement("loading");
