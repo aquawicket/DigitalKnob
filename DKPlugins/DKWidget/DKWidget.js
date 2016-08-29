@@ -409,7 +409,12 @@ function DKWidget_SetAttribute(variable, parameter, value)
 	if(!variable){ DKLog("variable not set \n", DKERROR); return false; }
 	if(typeof variable == "object"){
 		//variable.setAttribute(parameter, value);
-		variable[parameter] = value;
+		if(parameter == "class"){
+			variable.className = value;
+		}
+		else{
+			variable[parameter] = value;
+		}
 		return true;
 	}
 	if(typeof variable == "string"){
@@ -419,7 +424,12 @@ function DKWidget_SetAttribute(variable, parameter, value)
 			return false;
 		}
 		//element.setAttribute(parameter, value);
-		element[parameter] = value;
+		if(parameter == "class"){
+			element.className = value;
+		}
+		else{
+			element[parameter] = value;
+		}
 		return true;
 	}
 	DKLog("DKWidget_SetAttribute(): unknown type", DKERROR);
