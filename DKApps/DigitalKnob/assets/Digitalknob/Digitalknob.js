@@ -1,12 +1,14 @@
 //////////////////////
 function Digitalknob_Init()
 {
+	DKCreate("DKFrame/DKFrame.js");
 	DKCreate("Digitalknob/Digitalknob.html");
 	DKCreate("Digitalknob/Home.js");
 	DKCreate("Digitalknob/OsInfo.js");
 	
 	DKAddEvent("Image", "click", Digitalknob_OnEvent);
 	DKAddEvent("AppsMenu", "click", Digitalknob_OnEvent);
+	DKAddEvent("Digitalknob_login", "click", Digitalknob_OnEvent);
 }
 
 //////////////////////////
@@ -26,5 +28,10 @@ function Digitalknob_OnEvent(event)
 	}
 	if(DK_Id(event, "AppsMenu")){
 		DKCreate("Digitalknob/AppsMenu.js");
+	}
+	if(DK_Id(event, "Digitalknob_login")){
+		DKCreate("DKLogin/DKLogin.js", function(){
+			DKFrame_Widget("DKLogin.html");
+		});
 	}
 }
