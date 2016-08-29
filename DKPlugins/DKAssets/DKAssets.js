@@ -36,3 +36,9 @@ function DKAssets_Init()
 {
 
 }
+
+///////////////////////////////
+function DKAssets_GetDataPath()
+{
+	return local_assets;
+}
