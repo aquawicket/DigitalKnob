@@ -3,8 +3,9 @@ function AppsMenu_Init()
 {
 	DKCreate("Digitalknob/AppsMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
-	DKAddEvent("DKFacebook", "click", AppsMenu_OnEvent);
-	DKAddEvent("DKYoutube", "click", AppsMenu_OnEvent);
+	
+	AppsMenu_AddApp("DKFacebook");
+	AppsMenu_AddApp("DKYoutube");
 }
 
 ///////////////////////
@@ -13,6 +14,17 @@ function AppsMenu_End()
 	DKLog("AppsMenu_End():\n");
 	DKRemoveEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
 	DKClose("Digitalknob/AppsMenu.html");
+}
+
+//////////////////////////////
+function AppsMenu_AddApp(name)
+{
+	var id = DKWidget_CreateElement("AppsMenu.html", "div", name)
+	DKWidget_SetAttribute(id, "class", "option");
+	DKWidget_SetProperty(id, "height", "40rem");
+	DKWidget_SetProperty(id, "font-size", "30rem");
+	DKWidget_SetInnerHtml(id, name);
+	DKAddEvent(name, "click", AppsMenu_OnEvent);
 }
 
 ////////////////////////////////
