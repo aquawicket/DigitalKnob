@@ -65,50 +65,45 @@ function DKApp_UpdateApp(name)
 	DKApp_UpdateScreenshots();
 	
 	//Adjust Download Link
-	if(os.indexOf("Win32") != -1){
-		DKFile_Exists(win32_download, function(rval){
-			if(rval){DKApp_SetDownload("Win32");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	else if(os.indexOf("Win64") != -1){
-		DKFile_Exists(win64_download, function(rval){
-			if(rval){DKApp_SetDownload("Win64");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	else if(os.indexOf("Mac") != -1){
-		DKFile_Exists(mac_download, function(rval){
-			if(rval){DKApp_SetDownload("Mac");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	else if(os.indexOf("Linux") != -1){
-		DKFile_Exists(linux_download, function(rval){
-			if(rval){DKApp_SetDownload("Linux");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	else if(os.indexOf("Android") != -1){
-		DKFile_Exists(android_download, function(rval){
-			if(rval){DKApp_SetDownload("Android");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	else if(os.indexOf("iOS") != -1){
-		DKFile_Exists(ios_download, function(rval){
-			if(rval){DKApp_SetDownload("iOS");}
-			else{DKApp_SetDownload("none");}
-		});
-	}
-	
-	//Overwrite the download button if a webapp exists
-	DKLog("Looking for... "+web_app+"/index.html \n");
-	var rval;
-	DKFile_Exists(web_app+"/index.html", function(rval){
+	DKFile_Exists(web_app+"/index.html", function(rval){ //check for the WebApp first
 		if(rval){
-			DKLog("It EXISTS!!!!\n");
 			DKApp_SetDownload("WebApp");
+		}
+		else if(os.indexOf("Win32") != -1){
+			DKFile_Exists(win32_download, function(rval){
+				if(rval){DKApp_SetDownload("Win32");}
+				else{DKApp_SetDownload("none");}
+			});
+		}
+		else if(os.indexOf("Win64") != -1){
+			DKFile_Exists(win64_download, function(rval){
+				if(rval){DKApp_SetDownload("Win64");}
+				else{DKApp_SetDownload("none");}
+			});
+		}
+		else if(os.indexOf("Mac") != -1){
+			DKFile_Exists(mac_download, function(rval){
+				if(rval){DKApp_SetDownload("Mac");}
+				else{DKApp_SetDownload("none");}
+			});
+		}
+		else if(os.indexOf("Linux") != -1){
+			DKFile_Exists(linux_download, function(rval){
+				if(rval){DKApp_SetDownload("Linux");}
+				else{DKApp_SetDownload("none");}
+			});
+		}
+		else if(os.indexOf("Android") != -1){
+			DKFile_Exists(android_download, function(rval){
+				if(rval){DKApp_SetDownload("Android");}
+				else{DKApp_SetDownload("none");}
+			});
+		}
+		else if(os.indexOf("iOS") != -1){
+			DKFile_Exists(ios_download, function(rval){
+				if(rval){DKApp_SetDownload("iOS");}
+				else{DKApp_SetDownload("none");}
+			});
 		}
 	});
 	
@@ -144,7 +139,7 @@ function DKApp_SetDownload(name)
 		download_link = ios_download;
 	}
 	else if(name.indexOf("WebApp") != -1){
-		DKWidget_SetInnerHtml("DKApp_download", "Goto WebApp");
+		DKWidget_SetInnerHtml("DKApp_download", "Run WebApp");
 		download_link = web_app;
 	}
 	else{
