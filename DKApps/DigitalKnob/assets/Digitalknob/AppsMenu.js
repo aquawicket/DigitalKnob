@@ -4,6 +4,7 @@ function AppsMenu_Init()
 	DKCreate("Digitalknob/AppsMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
 	
+	AppsMenu_AddApp("DKDatabase");
 	AppsMenu_AddApp("DKFacebook");
 	AppsMenu_AddApp("DKYoutube");
 }
