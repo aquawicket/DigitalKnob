@@ -12,7 +12,7 @@ function AppsMenu_Init()
 ///////////////////////
 function AppsMenu_End()
 {
-	DKLog("AppsMenu_End():\n");
+	//DKLog("AppsMenu_End():\n");
 	DKRemoveEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
 	DKClose("Digitalknob/AppsMenu.html");
 }
