@@ -19,12 +19,13 @@ function DKFileAssociation_OnEvent(event)
 
 function DKFileAssociation_Open(file)
 {
+	var file2 = file;
 	if(file.indexOf(".js") > -1){
-		DKCreate(file);//, function(file){
-			var file = file.replace(".js",".html");
-			file = DKFile_GetFilename(file);
-			DKFrame_Widget(file);
-		//});
+		DKCreate(file, function(){
+			file2 = file2.replace(".js",".html");
+			file2 = DKFile_GetFilename(file2);
+			DKFrame_Widget(file2);
+		});
 		return;
 	}
 	if(file.indexOf(".html") > -1){
