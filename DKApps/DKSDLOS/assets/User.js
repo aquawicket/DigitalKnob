@@ -1,2 +1,2 @@
-DKCreate("DKOS/DKOS.js");
+DKCreate("DKOS/DKOS.js", function(){});
 DKCreate("DKUpdate");

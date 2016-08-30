@@ -1,4 +1,4 @@
-DKCreate("DKTray/DKTray.js");
+DKCreate("DKTray/DKTray.js", function(){});
 DKCreate("DKRocket/DKBrowser.css");
 DKCreate("DKWindow");
 DKCreate("DKRocket");
@@ -13,10 +13,14 @@ if(OS != "iOS" && OS != "Android"){
 	DKWindow_SetHeight(newheight.toString()+"px");
 }
 
-DKCreate("DKFrame/DKFrame.js")
-DKCreate("DKOS/Desktop.js");
-DKCreate("DKOS/Taskbar.js");
+DKCreate("DKFrame/DKFrame.js", function(){
+	DKCreate("DKOS/Desktop.js", function(){
+		DKCreate("DKOS/Taskbar.js", function(){
+			if(OS == "iOS" || OS == "Android"){
+				//DKWidget_SetScale(2);   FIXME
+			}
+		});
+	});
+});
 
-if(OS == "iOS" || OS == "Android"){
-	//DKWidget_SetScale(2);   FIXME
-}
+

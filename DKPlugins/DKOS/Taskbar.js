@@ -4,10 +4,10 @@ var animation;
 function Taskbar_Init()
 {
 	DKCreate("DKOS/Taskbar.html");
-	DKCreate("DKOS/scale.js");
-	DKCreate("DKOS/Clock.js");
+	DKCreate("DKOS/scale.js", function(){});
+	DKCreate("DKOS/Clock.js", function(){});
 	if(DK_GetBrowser() == "DigitalKnob"){
-		DKCreate("DKDebug/BugReport.js");
+		DKCreate("DKDebug/BugReport.js", function(){});
 		DKWidget_AppendChild("Taskbar.html","BugReport.html"); //reparent
 	}
 	DKAddEvent("start", "click", Taskbar_OnEvent);
@@ -29,7 +29,7 @@ function Taskbar_OnEvent(event)
 	//DKLog("Taskbar_OnEvent("+event+") \n", DKDEBUG);
 	
 	if(DK_Id(event, "start")){
-		DKCreate("DKOS/TaskbarMenu.js");
+		DKCreate("DKOS/TaskbarMenu.js", function(){});
 	}
 	if(DK_Id(event, "test_animate")){
 		//DKLog("Taskbar_OnEvent(): animate \n", DKDEBUG);

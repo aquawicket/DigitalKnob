@@ -88,8 +88,9 @@ function TaskbarMenu_OnEvent(event)
 		DKFileAssociation_Open("DKDev/DKMenuRight.js");
 	}
 	if(DK_Id(event, "OpenNotepad")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
-		DKFileAssociation_Open("DKNotepad/DKNotepad.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			DKFileAssociation_Open("DKNotepad/DKNotepad.js");
+		});
 	}
 	if(DK_Id(event, "InputTest")){
 		DKCreate("DKFileAssociation/DKFileAssociation.js");

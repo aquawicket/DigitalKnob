@@ -20,10 +20,11 @@ function DKFileAssociation_OnEvent(event)
 function DKFileAssociation_Open(file)
 {
 	if(file.indexOf(".js") > -1){
-		DKCreate(file);
-		var file = file.replace(".js",".html");
-		file = DKFile_GetFilename(file);
-		DKFrame_Widget(file);
+		DKCreate(file);//, function(file){
+			var file = file.replace(".js",".html");
+			file = DKFile_GetFilename(file);
+			DKFrame_Widget(file);
+		//});
 		return;
 	}
 	if(file.indexOf(".html") > -1){
