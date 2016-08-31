@@ -2,29 +2,30 @@
 function DKDatabase_Init()
 {
 	DKCreate("DKMySql");
-	DKCreate("DKMySql/DKMySql.js");
-	DKCreate("DKDatabase/DKDatabase.html");
-	DKAddEvent("DKDatabase.html", "AddDatabase", DKDatabase_OnEvent);
-	DKAddEvent("DKDatabase.html", "AddTable", DKDatabase_OnEvent);
-	DKAddEvent("DKDatabase.html", "AddColumn", DKDatabase_OnEvent);
-	DKAddEvent("DatabaseDrop", "change",DKDatabase_OnEvent);
-	DKAddEvent("TableDrop", "change", DKDatabase_OnEvent);
-	DKAddEvent("DatabaseConnect", "click", DKDatabase_OnEvent);
-	DKAddEvent("AddDatabase", "click", DKDatabase_OnEvent);
-	DKAddEvent("AddTable", "click", DKDatabase_OnEvent);
-	DKAddEvent("AddColumn", "click", DKDatabase_OnEvent);
-	DKAddEvent("CancelButton", "click", DKDatabase_OnEvent);
-	DKAddEvent("SaveButton", "click", DKDatabase_OnEvent);
+	DKCreate("DKMySql/DKMySql.js", function(){
+		DKCreate("DKDatabase/DKDatabase.html");
+		DKAddEvent("DKDatabase.html", "AddDatabase", DKDatabase_OnEvent);
+		DKAddEvent("DKDatabase.html", "AddTable", DKDatabase_OnEvent);
+		DKAddEvent("DKDatabase.html", "AddColumn", DKDatabase_OnEvent);
+		DKAddEvent("DatabaseDrop", "change",DKDatabase_OnEvent);
+		DKAddEvent("TableDrop", "change", DKDatabase_OnEvent);
+		DKAddEvent("DatabaseConnect", "click", DKDatabase_OnEvent);
+		DKAddEvent("AddDatabase", "click", DKDatabase_OnEvent);
+		DKAddEvent("AddTable", "click", DKDatabase_OnEvent);
+		DKAddEvent("AddColumn", "click", DKDatabase_OnEvent);
+		DKAddEvent("CancelButton", "click", DKDatabase_OnEvent);
+		DKAddEvent("SaveButton", "click", DKDatabase_OnEvent);
 	
-	var local_assets = DKAssets_GetDataPath();
-	var server = DKFile_GetSetting(local_assets+"USER/database.txt", "[SERVER]");
-	var name = DKFile_GetSetting(local_assets+"USER/database.txt", "[USERNAME]");
-	var pass = DKFile_GetSetting(local_assets+"USER/database.txt", "[PASSWORD]");
-	var port = DKFile_GetSetting(local_assets+"USER/database.txt", "[PORT]");
-	DKWidget_SetValue("ServerBox", server);
-	DKWidget_SetValue("NameBox", name);
-	DKWidget_SetValue("PassBox", pass);
-	DKWidget_SetValue("PortBox", port);
+		var local_assets = DKAssets_GetDataPath();
+		var server = DKFile_GetSetting(local_assets+"USER/database.txt", "[SERVER]");
+		var name = DKFile_GetSetting(local_assets+"USER/database.txt", "[USERNAME]");
+		var pass = DKFile_GetSetting(local_assets+"USER/database.txt", "[PASSWORD]");
+		var port = DKFile_GetSetting(local_assets+"USER/database.txt", "[PORT]");
+		DKWidget_SetValue("ServerBox", server);
+		DKWidget_SetValue("NameBox", name);
+		DKWidget_SetValue("PassBox", pass);
+		DKWidget_SetValue("PortBox", port);
+	});
 }
 
 /////////////////////////
