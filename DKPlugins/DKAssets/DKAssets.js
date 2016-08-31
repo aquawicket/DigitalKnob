@@ -10,7 +10,7 @@ if(!hostname){ hostname = "digitalknob.com"; }
 
 var pathname = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
 if(!pathname){ pathname = document.location.pathname; }
-if(pathname.indexOf("/index.html") > -1){ pathname = "/digitalknob.com/"; }
+if(pathname.indexOf("/index.html") > -1){ pathname = "/Digitalknob/"; }
 
 var protocol = document.location.protocol;
 online_assets = "http://"+hostname+pathname;
