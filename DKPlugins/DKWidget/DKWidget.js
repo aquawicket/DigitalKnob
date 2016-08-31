@@ -32,27 +32,23 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
-		setTimeout(function(){
-			if(callback){
-				//DKLog("DKCreate("+data+"): has callback \n");
-				callback();
-			}
-			else{
-				//DKLog("DKCreate("+data+"): does not have a callback \n");
-			}
-		}, 500);
+		if(callback){
+			callback();
+		}
+		else{
+			//DKLog("DKCreate("+data+"): does not have a callback \n");
+			//alert("DKCreate("+data+"): does not have a callback \n");
+		}
 	}
 	if(arry[0] == "DKCss"){
 		LoadCSS(arry[1]);
-		setTimeout(function(){
-			if(callback){
-				//DKLog("DKCreate("+data+"): has callback \n");
-				callback();
-			}
-			else{
-				//DKLog("DKCreate("+data+"): does not have a callback \n");
-			}
-		}, 500);
+		if(callback){
+			callback();
+		}
+		else{
+			//DKLog("DKCreate("+data+"): does not have a callback \n");
+			//alert("DKCreate("+data+"): does not have a callback \n");
+		}
 	}
 
 	return;

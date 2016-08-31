@@ -79,9 +79,11 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "OpenBuilder")){
 		DKCreate("DKBuild/DKBuild.js", function(){
+			DKCreate("DKBuild/DKBuildGui.js", function(){
 			var frame = DKFrame_Widget("DKBuildGUI.html");
 			DKWidget_SetProperty(frame, "top", "20px");
 			DKWidget_SetProperty(frame, "left", "20px");
+			});
 		});
 	}
 	if(DK_Id(event, "OpenDev")){
