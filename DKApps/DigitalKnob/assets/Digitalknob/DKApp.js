@@ -41,7 +41,7 @@ function DKApp_OnEvent(event)
 		DKWidget_OpenLink(web_app);
 	}
 	if(DK_Id(event, "DKApp_download")){
-		DKWidget_OpenLink(download_link);
+		DKWidget_OpenLink(download_link, "_blank");
 	}
 }
 

@@ -859,8 +859,9 @@ function DKWidget_SetScale(scale)
 	DKWidget_SetProperty("html", "font-size", scale+"px");
 }
 
-///////////////////////////////
-function DKWidget_OpenLink(url)
+///////////////////////////////////////
+function DKWidget_OpenLink(url, target)
 {
-	window.location = url;
+	//window.location = url;
+	window.open(url, target);
 }
