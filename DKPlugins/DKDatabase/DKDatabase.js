@@ -187,6 +187,7 @@ function DKDatabase_UpdateHeader(table)
 	var step = Number(records[0]);
 	var id = DKWidget_CreateElement("Records", "div", "RecordsDiv");
 	DKWidget_SetProperty(id, "display", "inline-block");
+	DKWidget_SetProperty(id, "width", "100%");
 
 	for(var i=1; i<records.length-1; i+=step){
 		var id = DKWidget_CreateElement("RecordsDiv", "input", "ColumnName"+i);
@@ -236,6 +237,7 @@ function DKDatabase_UpdateRecords(table)
 	
 		var id = DKWidget_CreateElement("Records", "div", "RecordDiv"+String(r));
 		DKWidget_SetProperty(id, "display", "inline-block");
+		DKWidget_SetProperty(id, "width", "100%");
 		//DKWidget_SetProperty(record, "width", "100px");
 		//DKWidget_SetProperty(record, "overflow", "hidden");
 
