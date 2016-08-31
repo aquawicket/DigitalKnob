@@ -109,6 +109,7 @@ function DKDatabase_OnEvent(event)
 	if(DK_Type(event, "AddColumn")){
 		var query ="ALTER TABLE "+DKWidget_GetValue("TableDrop")+" ADD "+DKWidget_GetValue(event)+" VARCHAR(60) NOT NULL";
 		DKMySql_Query(query);
+		DKDatabase_UpdateRecords(DKWidget_GetValue("TableDrop"));
 	}
 	if(DK_Id(event, "AddRecord")){
 		DKDatabase_AddRecord();
