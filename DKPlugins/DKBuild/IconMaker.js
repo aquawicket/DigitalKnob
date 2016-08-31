@@ -17,18 +17,20 @@ function IconMaker_Create(AppPath)
 	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
 	
 	//Create Mac Icons
-	DKFile_MkDir(AppPath+"/icons/mac");
-	DK_Execute("sips -z 16 16 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_16x16.png");
-	DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_16x16@2x.png");
-	DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_32x32.png");
-	DK_Execute("sips -z 64 64 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_32x32@2x.png");
-	DK_Execute("sips -z 128 128 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_128x128.png");
-	DK_Execute("sips -z 256 256 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_128x128@2x.png");
-	DK_Execute("sips -z 256 256 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_256x256.png");
-	DK_Execute("sips -z 512 512 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_256x256@2x.png");
-	DK_Execute("sips -z 512 512 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_512x512.png");
-	DK_Execute("sips -z 1024 1024 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_512x512@2x.png");
-	DK_Execute("iconutil -c icns "+AppPath+"/icons/mac");
+	if(DK_GetOS == "Mac"){}
+		DKFile_MkDir(AppPath+"/icons/mac");
+		DK_Execute("sips -z 16 16 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_16x16.png");
+		DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_16x16@2x.png");
+		DK_Execute("sips -z 32 32 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_32x32.png");
+		DK_Execute("sips -z 64 64 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_32x32@2x.png");
+		DK_Execute("sips -z 128 128 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_128x128.png");
+		DK_Execute("sips -z 256 256 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_128x128@2x.png");
+		DK_Execute("sips -z 256 256 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_256x256.png");
+		DK_Execute("sips -z 512 512 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_256x256@2x.png");
+		DK_Execute("sips -z 512 512 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_512x512.png");
+		DK_Execute("sips -z 1024 1024 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icon_512x512@2x.png");
+		DK_Execute("iconutil -c icns "+AppPath+"/icons/mac");
+	}
 	
 	//Create Linux Icons
 	//DKFile_MkDir(AppPath+"/icons/linux");
