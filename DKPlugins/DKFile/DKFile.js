@@ -272,7 +272,7 @@ function DKFile_FileToString(url)
 	DKLog("DKFile_FileToString("+url+") \n");
 	var path = DKFile_VerifyPath(url);
 	if(!path){ return; }
-	if(url.indexOf("http") > -1){
+	if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
 		return ajaxGetUrl("http://cors.io/?u="+url);
 	}
 	return ajaxGetUrl(url);
