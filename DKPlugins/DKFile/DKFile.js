@@ -238,7 +238,7 @@ function DKFile_SetSetting(file, param, value)
 			var out = " "+value+"\n";
 			var oldstr = filestring.substr(start+1, end-start-1);
 			filestring = replace(filestring, oldstr, out); 
-			StringToFile(filestring,path);
+			DKFile_StringToFile(filestring,path);
 			DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKSUCCESS);
 			return true;
 		}
@@ -250,7 +250,7 @@ function DKFile_SetSetting(file, param, value)
 		var begin = filestring.indexOf(string,0);
 		if(temp == -1){
 			filestring = filestring.concat("\n" + setting + " " + value); //create entry
-			StringToFile(filestring,file);
+			DKFile_StringToFile(filestring,file);
 			DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKSUCCESS);
 			return true;
 		}
@@ -259,7 +259,7 @@ function DKFile_SetSetting(file, param, value)
 
 		var oldstr = filestring.substr(start+1, end-start-1);
 		filestring.replace(filestring, oldstr, value); 
-		StringToFile(filestring,file);
+		DKFile_StringToFile(filestring,file);
 	
 		DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKSUCCESS);
 		return true;
