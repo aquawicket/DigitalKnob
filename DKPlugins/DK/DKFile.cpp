@@ -819,6 +819,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 {
 	//DKLog("DKFile::SetSetting("+file+","+setting+","+value+") \n", DKDEBUG);
 	DKString filestring;
+	CreateFile(file);
 	if(!FileToString(file,filestring)){ return false; }
 
 	//If the variable looks like this: [VARIABLE]
