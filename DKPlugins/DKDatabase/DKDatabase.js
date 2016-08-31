@@ -42,34 +42,37 @@ function DKDatabase_OnEvent(event)
 		DKDatabase_UpdateDatabases();
 	}
 	if(DK_Id(event, "AddDatabase")){
-		DKCreate("DKMessage/DKMessage.js");
-		//var params = [];
-		//params.push("AddDatabase"); //event_type
-		//params.push("DKDatabase.html"); //event_id
-		SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddDatabase"); // To -> DKMessageBox
+		DKCreate("DKMessage/DKMessage.js", function(){
+			//var params = [];
+			//params.push("AddDatabase"); //event_type
+			//params.push("DKDatabase.html"); //event_id
+			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddDatabase"); // To -> DKMessageBox
+		});
 	}
 	if(DK_Id(event, "AddTable")){
-		DKCreate("DKMessage/DKMessage.js");
-		//var params = [];
-		//params.push("AddTable"); //event_type
-		//params.push("DKDatabase.html"); //event_id
-		SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
+		DKCreate("DKMessage/DKMessage.js", function(){
+			//var params = [];
+			//params.push("AddTable"); //event_type
+			//params.push("DKDatabase.html"); //event_id
+			SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
+		});
 	}
 	if(DK_Id(event, "AddColumn")){
-		DKCreate("DKMessage/DKMessage.js");
-		//var params = [];
-		//params.push("AddColumn"); //event_type
-		//params.push("DKDatabase.html"); //event_id
-		SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddColumn"); // To -> DKMessageBox
+		DKCreate("DKMessage/DKMessage.js", function(){
+			//var params = [];
+			//params.push("AddColumn"); //event_type
+			//params.push("DKDatabase.html"); //event_id
+			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddColumn"); // To -> DKMessageBox
+		});
 	}
 	
 	if(DK_IdLike(event, "DeleteRecord")){
 		//TODO - need confirmation 
-		var id = DKWidget_GetAttribute(GetId(event), "row");
+		var id = DKWidget_GetAttribute(DK_GetId(event), "row");
 		DKLog("Delete Record "+id+"\n");
 		var query = "DELETE FROM "+DKWidget_GetValue("TableDrop")+" WHERE ID="+id
 		DKMySql_Query(query);
-		DKDatabase_UpdateRecords(GetValue("TableDrop"));
+		DKDatabase_UpdateRecords(DKWidget_GetValue("TableDrop"));
 	}
 	if(DK_Id(event, "CancelButton")){
 		DKDatabase_Cancel();
