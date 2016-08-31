@@ -217,7 +217,8 @@ function DKFile_SetSetting(file, param, value)
 		var path = file;
 		//if(!DKAssets::VerifyPath(path)){ return false;}
 
-		var filestring = FileToString(path);
+		var filestring = DKFile_FileToString(path);
+		if(!filestring){ return false; }
 
 		//If the variable looks like this: [VARIABLE]
 		//then we return everything up to the next [VARIABLE] or to the end of the file.
