@@ -91,6 +91,7 @@ function DKFile_Exists(path, fn)
 ////////////////////////////////
 function DKFile_VerifyPath(path)
 {
+	return true;
 	DKLog("DKFile_VerifyPath("+path+")\n", DKDEBUG);
 	if(!path){ return false; }
 	
@@ -114,7 +115,7 @@ function DKFile_VerifyPath(path)
 ////////////////////////////
 function DKFile_PrintFiles()
 {
-	return ajaxGetUrl(serverpath+"/DKFile/DKFile.php?PrintFiles=1");
+	return ajaxGetUrl(online_assets+"/DKFile/DKFile.php?PrintFiles=1");
 }
 
 /////////////////////////////////
@@ -138,11 +139,11 @@ function DKFile_SaveFile(path, data)
 		//path = realpath+path;
 	//}
 	//path = path.replace(datapath, realpath);
-	//path = path.replace(serverpath, realpath);
-	path = realpath+path;
+	//path = path.replace(online_assets, realpath);
+	//path = realpath+path;
 	
 	//DKLog("DKFile_SaveFile: "+path+"\n");
-	send = serverpath+"/DKFile/DKFile.php?SaveFile=";
+	send = online_assets+"/DKFile/DKFile.php?SaveFile=";
 	send += path;
 	send += "&data="
 	send += data;
@@ -226,7 +227,7 @@ function DKFile_SetSetting(file, param, value)
 			var begin = filestring.indexOf(param);
 			if(begin == -1){
 				filestring = filestring.concat("\n" + param + " " + value); //create entry
-				StringToFile(filestring, path);
+				DKFile_StringToFile(filestring, path);
 				DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKSUCCESS);
 				return true;
 			}
@@ -336,7 +337,7 @@ function DKFile_GetRelativePath(apath, datapath)
 	//if(!url){ url = "/"; }
 	DKLog("DKFile_GetRelativePath("+apath+","+datapath+") \n", DKDEBUG);
 	//apath = apath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
-	//send = serverpath+"/DKFile/DKFile.php?GetRelativePath="+url;
+	//send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
 	//var result = ajaxGetUrl(send);
 	//DKLog("DKFile_GetRelativePath("+url+") -> "+result+"\n", DKDEBUG);
 	return apath;
@@ -364,7 +365,7 @@ function DKFile_GetExtention(url)
 function DKFile_Delete(url)
 {
 	DKLog("Deleting: "+url+"\n");
-	send = serverpath+"/DKFile/DKFile.php?Delete="+url;
+	send = online_assets+"/DKFile/DKFile.php?Delete="+url;
 	var result = ajaxGetUrl(send);
 	return result;
 }
