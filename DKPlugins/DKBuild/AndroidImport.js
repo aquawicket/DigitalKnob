@@ -67,12 +67,12 @@ function AndroidImport_Import()
 	DK_Sleep(3000);
 	DK_StrokeKey(13) //stroke enter
 	
-	DK_WaitForImage(datapath+"DKBuild/enableNdk.bmp", 30); //Check for 30 seconds
-	DK_ClickImage(datapath+"DKBuild/enableNdk.bmp");
+	DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 30); //Check for 30 seconds
+	DK_ClickImage(assets+"DKBuild/enableNdk.bmp");
 	
 	/*
-	DK_WaitForImage(datapath+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
-	DK_ClickImage(datapath+"DKBuild/selectNdk.bmp");
+	DK_WaitForImage(assets+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
+	DK_ClickImage(assets+"DKBuild/selectNdk.bmp");
 	
 	//tab tab tab, space, tab, paste
 	DK_StrokeKey(9) //stroke tab
