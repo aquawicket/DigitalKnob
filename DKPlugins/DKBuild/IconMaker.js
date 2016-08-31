@@ -12,6 +12,16 @@ function IconMaker_Create(AppPath)
 {
 	DKLog("IconMaker_Create("+AppPath+"+) \n", DKINFO);
 	
+	//Create Windows Icon
+	DKFile_MkDir(AppPath+"/icons/windows");
+	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
+	
+	//Create Mac Icons
+	//DKFile_MkDir(AppPath+"/icons/mac");
+	
+	//Create Linux Icons
+	//DKFile_MkDir(AppPath+"/icons/linux");
+	
 	//Create Android Icons
 	DKFile_MkDir(AppPath+"/icons/android");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-hdpi");
@@ -25,7 +35,9 @@ function IconMaker_Create(AppPath)
 	DKFile_MkDir(AppPath+"/icons/android/drawable-xxhdpi");
 	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
 	
-	//Create Windows Icon
-	DKFile_MkDir(AppPath+"/icons/windows");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
+	//Create iOS Icons
+	//DKFile_MkDir(AppPath+"/icons/ios");
+	
+	//Create iOS 7 Icons
+	//DKFile_MkDir(AppPath+"/icons/ios7");
 }
