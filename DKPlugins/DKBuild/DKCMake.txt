@@ -1,2 +1,2 @@
-DKASSETS(ImageMagick-7.0.2-10-portable-Q16-x86)
+DKDEPEND(ImageMagick-7.0.2-10-portable-Q16-x86)
 DKASSETS(DKBuild)
