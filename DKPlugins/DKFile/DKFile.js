@@ -101,11 +101,11 @@ function DKFile_VerifyPath(path)
 		return path;
 	}
 	
-	datapath = DKAssets_GetDataPath();
-	DKLog("DKFile_VerifyPath("+path+"): checking "+datapath+path+"\n", DKDEBUG);
-	if(DKFile_Exists(datapath+path)){
-		DKLog("DKFile_VerifyPath("+path+"): Found "+datapath+path+"\n", DKSUCCESS);
-		return datapath+path;
+	var assets = DKAssets_LocalAssets();
+	DKLog("DKFile_VerifyPath("+path+"): checking "+assets+path+"\n", DKDEBUG);
+	if(DKFile_Exists(assets+path)){
+		DKLog("DKFile_VerifyPath("+path+"): Found "+assets+path+"\n", DKSUCCESS);
+		return assets+path;
 	}	
 	
 	DKLog("DKFile_VerifyPath("+path+") Cannot find "+path+" \n", DKERROR);
@@ -308,8 +308,8 @@ function DKFile_DirectoryContents(url)
 		DKLog("DKFile_DirectoryContents(url): online_assets not set!\n", DKERROR)
 	}
 	DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
-	//var datapath = DKAssets_GetDataPath();
-	//url = url.replace(datapath, online_assets);
+	//var assets = DKAssets_LocalAssets();
+	//url = url.replace(assets, online_assets);
 	//var path = DKFile_VerifyPath(url);
 	//if(!path){ return 0; }
 	send = online_assets+"/DKFile/DKFile.php?DirectoryContents="+url;

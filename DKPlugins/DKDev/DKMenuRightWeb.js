@@ -28,11 +28,11 @@ function DKMenuRightWeb_OnEvent(event)
 ////////////////////////////////
 function DKMenuRightWeb_Update()
 {
-	var datapath = DKAssets_GetDataPath();
-	DKWidget_SetAttribute("ServerBox", "value", DKFile_GetSetting(datapath+"USER/Ftp.txt", "[FTP_SERVER]") );
-	DKWidget_SetAttribute("NameBox", "value", DKFile_GetSetting(datapath+"USER/Ftp.txt", "[FTP_NAME]") );
-	DKWidget_SetAttribute("PassBox", "value", DKFile_GetSetting(datapath+"USER/Ftp.txt", "[FTP_PASS]") );
-	DKWidget_SetAttribute("PathBox", "value", DKFile_GetSetting(datapath+"USER/Ftp.txt", "[FTP_PATH]") );
+	var assets = DKAssets_LocalAssets();
+	DKWidget_SetAttribute("ServerBox", "value", DKFile_GetSetting(assets+"USER/Ftp.txt", "[FTP_SERVER]") );
+	DKWidget_SetAttribute("NameBox", "value", DKFile_GetSetting(assets+"USER/Ftp.txt", "[FTP_NAME]") );
+	DKWidget_SetAttribute("PassBox", "value", DKFile_GetSetting(assets+"USER/Ftp.txt", "[FTP_PASS]") );
+	DKWidget_SetAttribute("PathBox", "value", DKFile_GetSetting(assets+"USER/Ftp.txt", "[FTP_PATH]") );
 }
 
 /////////////////////////////////
@@ -44,12 +44,12 @@ function DKMenuRightWeb_Connect()
 		DKWidget_Show("ftpcheck");
 		
 		// Save FTP setting to project file for app
-		var datapath = DKAssets_GetDataPath();
-		DKFile_SetSetting(datapath+"USER/Ftp.txt", "[FTP_SERVER]", DKWidget_GetValue("ServerBox"));
-		DKFile_SetSetting(datapath+"USER/Ftp.txt", "[FTP_NAME]", DKWidget_GetValue("NameBox"));
-		DKFile_SetSetting(datapath+"USER/Ftp.txt", "[FTP_PASS]", DKWidget_GetValue("PassBox"));
-		DKFile_SetSetting(datapath+"USER/Ftp.txt", "[FTP_PATH]", DKWidget_GetValue("PathBox"));
-		DKFile_SetSetting(datapath+"USER/Ftp.txt", "[FTP_PORT]", ""); //TODO
+		var assets = DKAssets_LocalAssets();
+		DKFile_SetSetting(assets+"USER/Ftp.txt", "[FTP_SERVER]", DKWidget_GetValue("ServerBox"));
+		DKFile_SetSetting(assets+"USER/Ftp.txt", "[FTP_NAME]", DKWidget_GetValue("NameBox"));
+		DKFile_SetSetting(assets+"USER/Ftp.txt", "[FTP_PASS]", DKWidget_GetValue("PassBox"));
+		DKFile_SetSetting(assets+"USER/Ftp.txt", "[FTP_PATH]", DKWidget_GetValue("PathBox"));
+		DKFile_SetSetting(assets+"USER/Ftp.txt", "[FTP_PORT]", ""); //TODO
 		return;
 	}
 	DKWidget_Hide("ftpcheck");
@@ -60,24 +60,24 @@ function DKMenuRightWeb_Connect()
 function DKMenuRightWeb_Upload(folder)
 {
 	DKLog("Uploading Web App ..... \n");
-	var datapath = DKAssets_GetDataPath()+"/";
-	var files = DKFile_DirectoryContents(datapath+folder);
+	var assets = DKAssets_LocalAssets()+"/";
+	var files = DKFile_DirectoryContents(assets+folder);
 	var arry = files.split(",");
 	for(var i=0; i<arry.length; i++){
-		if(DKFile_IsDirectory(datapath+folder+arry[i])){
+		if(DKFile_IsDirectory(assets+folder+arry[i])){
 			//DKLog("Uploading folders not supported yet \n");
 			//DKLog("Folder: "+arry[i]+"\n")
 			DKMenuRightWeb_Upload(folder+arry[i]+"/");
 			continue;
 		}
-		var ctime = DKFile_GetLocalCreationDate(datapath+folder+arry[i]);
-		var mtime = DKFile_GetLocalModifiedDate(datapath+folder+arry[i]);
+		var ctime = DKFile_GetLocalCreationDate(assets+folder+arry[i]);
+		var mtime = DKFile_GetLocalModifiedDate(assets+folder+arry[i]);
 		var htmlurl = DKWidget_GetValue("ServerBox")+DKWidget_GetValue("PathBox")+folder+arry[i];
 		var rtime = DKCurl_FileDate(htmlurl);
 		//DKLog(arry[i]+": ctime:"+String(ctime)+" mtime:"+String(mtime)+"\n");
 		//DKLog(htmlurl+": "+String(rtime)+"\n");
 		if(!rtime){
-			DKCurl_FtpUpload(datapath+folder+arry[i], htmlurl);
+			DKCurl_FtpUpload(assets+folder+arry[i], htmlurl);
 			continue;
 		}
 		
@@ -87,7 +87,7 @@ function DKMenuRightWeb_Upload(folder)
 		//DKLog("local_time:"+String(time)+" server_time:"+String(rtime)+"\n"); 
 
 		if(ctime > rtime || mtime > rtime){
-			DKCurl_FtpUpload(datapath+folder+arry[i], htmlurl);
+			DKCurl_FtpUpload(assets+folder+arry[i], htmlurl);
 			continue;
 		}
 		

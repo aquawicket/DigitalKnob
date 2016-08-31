@@ -38,7 +38,13 @@ function DKAssets_Init()
 }
 
 ///////////////////////////////
-function DKAssets_GetDataPath()
+function DKAssets_LocalAssets()
 {
 	return local_assets;
+}
+
+////////////////////////////////
+function DKAssets_OnlineAssets()
+{
+	return online_assets;
 }

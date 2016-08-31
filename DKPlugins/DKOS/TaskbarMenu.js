@@ -62,9 +62,9 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "FileExplorer")){
 		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
 		DKFileAssociation_Open("DKFile/DKFileDialog.js");
-			var local_assets = DKAssets_GetDataPath();
+			var assets = DKAssets_LocalAssets();
 			DKAddEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
-			DKSendEvent("DKFileDialog.html", "GetFile", "TaskbarMenu,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
+			DKSendEvent("DKFileDialog.html", "GetFile", "TaskbarMenu,OpenFile,"+assets+",relative"); // To -> DKFileDialog
 		});
 	}
 	if(DK_Type(event, "OpenFile")){
@@ -130,11 +130,11 @@ function TaskbarMenu_OnEvent(event)
 		DKLog("OpenSource \n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
-		var local_assets = DKAssets_GetDataPath();
-		DKFile_StringToFile(source, local_assets+"source.html");
+		var assets = DKAssets_LocalAssets();
+		DKFile_StringToFile(source, assets+"source.html");
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad.html");
-			DKNotepad_Open(local_assets+"source.html");
+			DKNotepad_Open(assets+"source.html");
 			//DKLog(source);
 		});
 	}
@@ -194,10 +194,10 @@ function TaskbarMenu_PushDKFiles()
 	//Here, we push any altered DKPulgin files to the appropriate DKPlugin folder.
 	
 	//DKLog("DKMenuRightApp_PushDKFiles() \n");
-	var dkpath = DKAssets_GetDataPath();
+	var assets = DKAssets_LocalAssets();
 	
-	var DKPlugins = DKAssets_GetDataPath()+"/../../../DKPlugins";
-	var DKPlugins2 = DKAssets_GetDataPath()+"/../../../../DKPlugins";
+	var DKPlugins = assets+"/../../../DKPlugins";
+	var DKPlugins2 = assets+"/../../../../DKPlugins";
 	
 	if(DKFile_Exists(DKPlugins)){
 		DKPlugins = DKFile_GetAbsolutePath(DKPlugins);

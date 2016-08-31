@@ -101,7 +101,7 @@ function DKCreator_OnEvent(event)
 	if(DK_Id(event,"toggleNotepad")){
 		//DKWidget_Toggle("DKNotepad.html");
 		DKCreate("DKNotepad/DKNotepad.js");
-		//var dkpath = DKAssets_GetDataPath();
+		//var assets = DKAssets_LocalAssets();
 		var dkpath = "/../../../Docs/TODO.txt";
 		DKNotepad_LoadFile(dkpath);
 	}

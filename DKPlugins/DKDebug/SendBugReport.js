@@ -27,19 +27,19 @@ function SendBugReport_CreateReport()
 	var str = DKWidget_GetValue("SendBugReport_Textarea");
 	DKLog(str+"\n", DKDEBUG);
 	
-	var local_assets = DKAssets_GetDataPath();
-	var log = DKFile_FileToString(local_assets+"log.txt");
-	DKFile_StringToFile(str+"\n\n"+log, local_assets+"log.txt");
+	var assets = DKAssets_LocalAssets();
+	var log = DKFile_FileToString(assets+"log.txt");
+	DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
 	SendBugReport_SendReport();
 	
 	DKWidget_Hide("SendBugReport.html");
 	//TODO: say thank you here
-	DKCreate("DKMessage/DKMessage.js");
-	DKFrame_Widget("DKMessage.html");
-	DKMessageBox("", "ShowMessage", "Thank You :)");
-	
-	DKFrame_Close("SendBugReport.html");
-	//DKClose("DKDebug/SendBugReport.js");
+	DKCreate("DKMessage/DKMessage.js", function(){
+		DKFrame_Widget("DKMessage.html");
+		DKMessageBox("", "ShowMessage", "Thank You :)");	
+		DKFrame_Close("SendBugReport.html");
+		//DKClose("DKDebug/SendBugReport.js");
+	});
 }
 
 ///////////////////////////////////

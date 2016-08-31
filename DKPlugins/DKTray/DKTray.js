@@ -6,8 +6,8 @@ function DKTray_Init()
 	DKAddEvent("DKTray", "Minimize", DKTray_OnEvent);
 	DKAddEvent("DKTray", "Exit", DKTray_OnEvent);
 	
-	//var datapath = DKAssets_GetDataPath();
-	//DKTray_SetIcon(datapath+"icon.ico");
+	//var assets = DKAssets_LocalAssets();
+	//DKTray_SetIcon(assets+"icon.ico");
 }
 
 //////////////////////////////

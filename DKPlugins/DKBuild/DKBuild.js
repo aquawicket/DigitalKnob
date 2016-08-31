@@ -57,15 +57,15 @@ function DKBuild_InstallSvn()
 {
 	if(DK_GetBrowser() != "Digitalknob"){ return; }
 	DKLog("Installing Svn \n");
-	var datapath = DKAssets_GetDataPath();
+	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", datapath);
-		DK_System(datapath+"/Setup-Subversion-1.8.10.msi");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
+		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
 	else if(DK_GetOS() == "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", datapath);
-		DK_System(datapath+"/Setup-Subversion-1.8.10.msi");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
+		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
 	else if(DK_GetOS() == "Mac"){
 		//TODO
@@ -98,7 +98,7 @@ function DKBuild_ValidateSvn()
 function DKBuild_InstallCmake()
 {
 	DKLog("Installing CMake \n");
-	var datapath = DKAssets_GetDataPath();
+	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.3.2-win32-x86.exe", datapath);
@@ -139,7 +139,7 @@ function DKBuild_ValidateCmake()
 function DKBuild_InstallVC2015()
 {
 	DKLog("Installing Visual Studio 2015 \n");
-	var datapath = DKAssets_GetDataPath();
+	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
@@ -250,7 +250,7 @@ function DKBuild_SvnUpdate()
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
-	var mysvn = DKAssets_GetDataPath()+"USER/mysvn.txt";
+	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
 	if(DKFile_Exists(mysvn)){
 		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
@@ -270,7 +270,7 @@ function DKBuild_SvnCommit()
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
-	var mysvn = DKAssets_GetDataPath()+"USER/mysvn.txt";
+	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
 	if(DKFile_Exists(mysvn)){
 		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");

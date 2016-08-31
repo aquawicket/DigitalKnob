@@ -37,7 +37,7 @@ function DKTriggers_Init()
 	effects = [];
 	trigger_events = true;
 
-	//local_assets = DKAssets_GetDataPath();
+	//assets = DKAssets_LocalAssets();
 	DKTrigger_LoadTriggers("USER/triggers.txt");
 	DKAddEvent("GLOBAL", "gui", DKTrigger_OnEvent); //C++
 	DKAddEvent("GLOBAL", "midi", DKTrigger_OnEvent); //C++
@@ -365,41 +365,41 @@ function DKTrigger_LoadTriggers(file)
 {
 	DKLog("DKTrigger_LoadTriggers("+file+") \n");
 	
-	var datapath = DKAssets_GetDataPath();
-	if(!DKFile_Exists(datapath+file)){
-		DKLog("DKTrigger_LoadTriggers("+datapath+file+"): Cannot find file. \n");
+	var assets = DKAssets_LocalAssets();
+	if(!DKFile_Exists(assets+file)){
+		DKLog("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file. \n");
 		return;
 	}
 	
 	triggers = [];
 	causes = [];
 	effects = [];
-	var num_triggers = DKFile_GetSetting(datapath+file, "[TRIGGERS]");
-	var num_causes = DKFile_GetSetting(datapath+file, "[CAUSES]");
-	var num_effects = DKFile_GetSetting(datapath+file, "[EFFECTS]");
+	var num_triggers = DKFile_GetSetting(assets+file, "[TRIGGERS]");
+	var num_causes = DKFile_GetSetting(assets+file, "[CAUSES]");
+	var num_effects = DKFile_GetSetting(assets+file, "[EFFECTS]");
 	
 	for(var t = 0; t < Number(num_triggers); t++){
-		var trigger = DKFile_GetSetting(datapath+file, "[TRIGGER_"+String(t)+"]");
+		var trigger = DKFile_GetSetting(assets+file, "[TRIGGER_"+String(t)+"]");
 		DKTrigger_AddTrigger(trigger);
 	}
 	
 	for(var c = 0; c < Number(num_causes); c++){
-		var trigger = DKFile_GetSetting(datapath+file, "[CAUSE_"+String(c)+"_TRIGGER]");
-		var command = DKFile_GetSetting(datapath+file, "[CAUSE_"+String(c)+"_COMMAND]");
-		var var1 = DKFile_GetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR1]");
-		var var2 = DKFile_GetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR2]");
-		var var3 = DKFile_GetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR3]");
+		var trigger = DKFile_GetSetting(assets+file, "[CAUSE_"+String(c)+"_TRIGGER]");
+		var command = DKFile_GetSetting(assets+file, "[CAUSE_"+String(c)+"_COMMAND]");
+		var var1 = DKFile_GetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR1]");
+		var var2 = DKFile_GetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR2]");
+		var var3 = DKFile_GetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR3]");
 	
 		var cause = new Cause(trigger, command, var1, var2, var3);
 		causes.push(cause);
 	}
 	
 	for(var e = 0; e < Number(num_effects); e++){
-		var trigger = DKFile_GetSetting(datapath+file, "[EFFECT_"+String(e)+"_TRIGGER]");
-		var command = DKFile_GetSetting(datapath+file, "[EFFECT_"+String(e)+"_COMMAND]");
-		var var1 = DKFile_GetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR1]");
-		var var2 = DKFile_GetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR2]");
-		var var3 = DKFile_GetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR3]");
+		var trigger = DKFile_GetSetting(assets+file, "[EFFECT_"+String(e)+"_TRIGGER]");
+		var command = DKFile_GetSetting(assets+file, "[EFFECT_"+String(e)+"_COMMAND]");
+		var var1 = DKFile_GetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR1]");
+		var var2 = DKFile_GetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR2]");
+		var var3 = DKFile_GetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR3]");
 		
 		var effect = new Effect(trigger, command, var1, var2, var3);
 		effects.push(effect);
@@ -411,32 +411,32 @@ function DKTrigger_LoadTriggers(file)
 /////////////////////////////////////
 function DKTrigger_SaveTriggers(file)
 {
-	DKLog("DKTrigger_SaveTriggers("+datapath+file+") \n");
-	var datapath = DKAssets_GetDataPath();
-	DKFile_StringToFile(" ", datapath+file); //clear file
+	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n");
+	var assets = DKAssets_LocalAssets();
+	DKFile_StringToFile(" ", assets+file); //clear file
 	
-	DKFile_SetSetting(datapath+file, "[TRIGGERS]", String(triggers.length));
-	DKFile_SetSetting(datapath+file, "[CAUSES]", String(causes.length));
-	DKFile_SetSetting(datapath+file, "[EFFECTS]", String(effects.length));
+	DKFile_SetSetting(assets+file, "[TRIGGERS]", String(triggers.length));
+	DKFile_SetSetting(assets+file, "[CAUSES]", String(causes.length));
+	DKFile_SetSetting(assets+file, "[EFFECTS]", String(effects.length));
 	
 	for(var t = 0; t < triggers.length; t++){
-		DKFile_SetSetting(datapath+file, "[TRIGGER_"+String(t)+"]", triggers[t]);
+		DKFile_SetSetting(assets+file, "[TRIGGER_"+String(t)+"]", triggers[t]);
 	}
 	
 	for(var c = 0; c < causes.length; c++){
-		DKFile_SetSetting(datapath+file, "[CAUSE_"+String(c)+"_TRIGGER]", causes[c].trigger);
-		DKFile_SetSetting(datapath+file, "[CAUSE_"+String(c)+"_COMMAND]", causes[c].command);
-		DKFile_SetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR1]", causes[c].var1);
-		DKFile_SetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR2]", causes[c].var2);
-		DKFile_SetSetting(datapath+file, "[CAUSE_"+String(c)+"_VAR3]", causes[c].var3);
+		DKFile_SetSetting(assets+file, "[CAUSE_"+String(c)+"_TRIGGER]", causes[c].trigger);
+		DKFile_SetSetting(assets+file, "[CAUSE_"+String(c)+"_COMMAND]", causes[c].command);
+		DKFile_SetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR1]", causes[c].var1);
+		DKFile_SetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR2]", causes[c].var2);
+		DKFile_SetSetting(assets+file, "[CAUSE_"+String(c)+"_VAR3]", causes[c].var3);
 	}
 	
 	for(var e = 0; e < effects.length; e++){
-		DKFile_SetSetting(datapath+file, "[EFFECT_"+String(e)+"_TRIGGER]", effects[e].trigger);
-		DKFile_SetSetting(datapath+file, "[EFFECT_"+String(e)+"_COMMAND]", effects[e].command);
-		DKFile_SetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR1]", effects[e].var1);
-		DKFile_SetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR2]", effects[e].var2);
-		DKFile_SetSetting(datapath+file, "[EFFECT_"+String(e)+"_VAR3]", effects[e].var3);
+		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_TRIGGER]", effects[e].trigger);
+		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_COMMAND]", effects[e].command);
+		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR1]", effects[e].var1);
+		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR2]", effects[e].var2);
+		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR3]", effects[e].var3);
 	}
 
 	DKLog("Saved Triggers. \n");

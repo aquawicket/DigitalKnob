@@ -33,8 +33,8 @@ function DKMenuRightApp_OnEvent(event)
 function DKMenuRightApp_Update()
 {
 	//DKLog("DKMenuRightApp_Update() \n", DKDEBUG);
-	var apppath = DKAssets_GetDataPath();
-	var userfile = DKFile_FileToString(apppath+"User.js");
+	var assets = DKAssets_LocalAssets();
+	var userfile = DKFile_FileToString(assets+"User.js");
 	DKWidget_SetValue("userfile", userfile);
 }
 
@@ -42,8 +42,8 @@ function DKMenuRightApp_Update()
 function DKMenuRightApp_SaveUserFile()
 {
 	//DKLog("DKMenuRightApp_SaveUserFile() \n");
-	var apppath = DKAssets_GetDataPath();
+	var assets = DKAssets_LocalAssets();
 	var value = DKWidget_GetValue("userfile");
-	DKFile_StringToFile(value, apppath+"User.js");
+	DKFile_StringToFile(value, assets+"User.js");
 }
 

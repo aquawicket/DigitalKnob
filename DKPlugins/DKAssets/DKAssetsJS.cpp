@@ -6,14 +6,21 @@
 /////////////////////
 void DKAssetsJS::Init()
 {
-	DKDuktape::AttachFunction("DKAssets_GetDataPath", DKAssetsJS::GetDataPath, 0);
+	DKDuktape::AttachFunction("DKAssets_LocalAssets", DKAssetsJS::LocalAssets, 0);
 	//DKDuktape::AttachFunction("DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath, 1);
 }
 
 /////////////////////////////////////////////
-int DKAssetsJS::GetDataPath(duk_context* ctx)
+int DKAssetsJS::LocalAssets(duk_context* ctx)
 {
 	duk_push_string(ctx, DKFile::local_assets.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKAssetsJS::OnlineAssets(duk_context* ctx)
+{
+	duk_push_string(ctx, DKFile::online_assets.c_str());
 	return 1;
 }
 

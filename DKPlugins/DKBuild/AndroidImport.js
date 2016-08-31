@@ -34,8 +34,8 @@ function AndroidImport_Import()
 	
 	DKHook_WaitForWindow("Welcome to Android Studio", 30); //Check for 30 seconds
 	DKLog("Window is ready. \n", DKDEBUG);
-	var datapath = DKAssets_GetDataPath();
-	DK_ClickImage(datapath+"DKBuild/import.bmp");
+	var assets = DKAssets_LocalAssets();
+	DK_ClickImage(assets+"DKBuild/import.bmp");
 
 	DKHook_WaitForWindow("Select Eclipse or Gradle Project to Import", 30); //Check for 30 seconds
 	DKLog("Window is ready. \n", DKDEBUG);

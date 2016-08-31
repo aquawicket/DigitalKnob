@@ -556,8 +556,8 @@ function DKDev_SaveHtmlFile(id)
 	DKLog("Saving: "+file+"\n", DKINFO);
 	var data = DKWidget_GetOuterHtml(file);
 	if(data){
-		var path = DKAssets_GetDataPath();
-		DKFile_StringToFile(data, path+DKWidget_GetFile(file));
+		var assets = DKAssets_LocalAssets();
+		DKFile_StringToFile(data, assets+DKWidget_GetFile(file));
 	}
 	
 	DKDev_AddDragHandles(file);

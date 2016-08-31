@@ -16,11 +16,11 @@ function DKDatabase_Init()
 		DKAddEvent("CancelButton", "click", DKDatabase_OnEvent);
 		DKAddEvent("SaveButton", "click", DKDatabase_OnEvent);
 	
-		var local_assets = DKAssets_GetDataPath();
-		var server = DKFile_GetSetting(local_assets+"USER/database.txt", "[SERVER]");
-		var name = DKFile_GetSetting(local_assets+"USER/database.txt", "[USERNAME]");
-		var pass = DKFile_GetSetting(local_assets+"USER/database.txt", "[PASSWORD]");
-		var port = DKFile_GetSetting(local_assets+"USER/database.txt", "[PORT]");
+		var assets = DKAssets_LocalAssets();
+		var server = DKFile_GetSetting(assets+"USER/database.txt", "[SERVER]");
+		var name = DKFile_GetSetting(assets+"USER/database.txt", "[USERNAME]");
+		var pass = DKFile_GetSetting(assets+"USER/database.txt", "[PASSWORD]");
+		var port = DKFile_GetSetting(assets+"USER/database.txt", "[PORT]");
 		DKWidget_SetValue("ServerBox", server);
 		DKWidget_SetValue("NameBox", name);
 		DKWidget_SetValue("PassBox", pass);
@@ -119,11 +119,11 @@ function DKDatabase_Connect()
 	//DKMySql_Database("DKData");
 
 	DKWidget_Show("Success");
-	var local_assets = DKAssets_GetDataPath();
-	DKFile_SetSetting(local_assets+"USER/database.txt", "[SERVER]", server);
-	DKFile_SetSetting(local_assets+"USER/database.txt", "[USERNAME]", username);
-	DKFile_SetSetting(local_assets+"USER/database.txt", "[PASSWORD]", password);
-	DKFile_SetSetting(local_assets+"USER/database.txt", "[PORT]", port);
+	var assets = DKAssets_LocalAssets();
+	DKFile_SetSetting(assets+"USER/database.txt", "[SERVER]", server);
+	DKFile_SetSetting(assets+"USER/database.txt", "[USERNAME]", username);
+	DKFile_SetSetting(assets+"USER/database.txt", "[PASSWORD]", password);
+	DKFile_SetSetting(assets+"USER/database.txt", "[PORT]", port);
 	return true;
 }
 

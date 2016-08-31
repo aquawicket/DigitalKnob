@@ -64,7 +64,7 @@ function DKAutomate_OnEvent(event)
 	if(DK_Id(event, "SaveButton")){
 		//var value = MessageBox(event, "Confirm", "Save Triggers?");
 		//if(!value){ return; }
-		//var local_assets = DKAssets_GetDataPath();
+		//var assets = DKAssets_LocalAssets();
 		DKTrigger_SaveTriggers("USER/triggers.txt");
 	}
 	

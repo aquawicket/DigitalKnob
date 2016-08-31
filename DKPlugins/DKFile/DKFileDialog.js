@@ -102,9 +102,9 @@ function DKFileDialog_OpenFile(path)
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	DKLog("aPath:"+aPath+"\n", DKDEBUG);
-	var datapath = DKAssets_GetDataPath();
-	//DKLog("datapath:"+datapath+"\n", DKDEBUG);
-	rPath = DKFile_GetRelativePath(aPath, datapath);
+	var assets = DKAssets_LocalAssets();
+	//DKLog("assets:"+assets+"\n", DKDEBUG);
+	rPath = DKFile_GetRelativePath(aPath, assets);
 	DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	DKWidget_SetValue("DKFileDialogPath",aPath);
 }
@@ -121,8 +121,8 @@ function DKFileDialog_UpdatePath(path)
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	DKLog("aPath:"+aPath+"\n", DKDEBUG);
-	//var datapath = DKAssets_GetDataPath();
-	//DKLog("datapath:"+datapath+"\n", DKDEBUG);
+	//var assets = DKAssets_LocalAssets();
+	//DKLog("assets:"+assets+"\n", DKDEBUG);
 	rPath = DKFile_GetRelativePath(aPath, path);
 	DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	
