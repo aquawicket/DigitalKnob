@@ -188,18 +188,15 @@ function DKApp_UpdateDescription(string)
 //////////////////////////////////
 function DKApp_UpdateScreenshots()
 {
-	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot01.png");
-	DKWidget_SetProperty(id, "height", "300rem");
-	DKWidget_SetProperty(id, "padding-right", "5rem");
-	
-	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot02.png");
-	DKWidget_SetProperty(id, "height", "300rem");
-	DKWidget_SetProperty(id, "padding-right", "5rem");
-	
-	var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
-	DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot03.png");
-	DKWidget_SetProperty(id, "height", "300rem");
-	DKWidget_SetProperty(id, "padding-right", "5rem");
+	var assets = DKAssets_LocalAssets();
+	for(var i=1; i<6; i++){
+		//DKFile_Exists("Digitalknob/"+app+"_screenshot0"+i+".png", function(rval){
+			//if(rval){
+				var id = DKWidget_CreateElement("DKApp_screenshots","img","screenshot");
+				DKWidget_SetAttribute(id, "src", "Digitalknob/"+app+"_screenshot0"+i+".png");
+				DKWidget_SetProperty(id, "height", "300rem");
+				DKWidget_SetProperty(id, "padding-right", "5rem");
+			//}
+		//});
+	}
 }
