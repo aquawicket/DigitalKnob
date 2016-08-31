@@ -619,6 +619,7 @@ function ajaxGetUrl(url)
 	var response = new Object();
 	AjaxGet(url, response);
 	
+	if(!response.value){ return "ERROR"; }
 	//php has a DKLog() function that injects return messages with {"strings"}
 	//The response may contain {"log data"}, let's extract and print it.
 	//Also remove them and pass the remaining data on
