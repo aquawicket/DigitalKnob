@@ -35,7 +35,8 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
-		SVN = "/usr/bin/svn";
+		//SVN = "/usr/bin/svn";
+		SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 	}
 	if(DK_GetOS() == "Linux"){
