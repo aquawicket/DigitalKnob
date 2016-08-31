@@ -17,7 +17,8 @@ function IconMaker_Create(AppPath)
 	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
 	
 	//Create Mac Icons
-	//DKFile_MkDir(AppPath+"/icons/mac");
+	DKFile_MkDir(AppPath+"/icons/mac");
+	DK_Execute("sips -z 16 16 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/windows/icon_16x16.png");
 	
 	//Create Linux Icons
 	//DKFile_MkDir(AppPath+"/icons/linux");
