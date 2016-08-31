@@ -392,7 +392,6 @@ function DKBuild_DoResults()
 		appdir = "USER/DKApps";
 	}
 	
-	
 	////// WIN32 /////
 	if(OS == "win32"){
 		if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
@@ -703,6 +702,11 @@ function DKBuild_DoResults()
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
+	
+	//Create icons
+	DKCreate("DKBuild/IconMaker.js", function(){
+		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
+	});
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){
