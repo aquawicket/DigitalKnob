@@ -97,7 +97,7 @@ function LoadJS(url, callback)
 				func(); //Init
 			}
 			else{
-				DKLog(name+" is not callable \n", DKERROR);
+				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
 			//filesloaded += url+","; //add file to loaded list
