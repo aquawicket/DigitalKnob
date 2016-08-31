@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////
 function DKMySql_Connect(host, name, pass, port)
 {
-	var send = serverpath+"/DKMySql/DKMySql.php?host=";
+	var send = online_assets+"/DKMySql/DKMySql.php?host=";
 	send += host;
 	if(port){
 		send += ":";
@@ -14,7 +14,7 @@ function DKMySql_Connect(host, name, pass, port)
 	send += ",";
 	send += pass;
 	var response = ajaxGetUrl(send);
-	DKDebug(response);
+	DKLog(response);
 	
 	//FIXME
 	//if(response.indexOf("DKERROR") != -1){
@@ -27,7 +27,7 @@ function DKMySql_Connect(host, name, pass, port)
 ///////////////////////////////
 function DKMySql_Database(name)
 {
-	var send = serverpath+"/DKMySql/DKMySql.php?database=";
+	var send = online_assets+"/DKMySql/DKMySql.php?database=";
 	send += name;
 	return ajaxGetUrl(send);
 }
@@ -35,7 +35,7 @@ function DKMySql_Database(name)
 /////////////////////////////
 function DKMySql_Query(query)
 {
-	var send = serverpath+"/DKMySql/DKMySql.php?Query=";
+	var send = online_assets+"/DKMySql/DKMySql.php?Query=";
 	send += query;
 	return ajaxGetUrl(send);
 }
@@ -43,17 +43,17 @@ function DKMySql_Query(query)
 /////////////////////////
 function DKMySql_Prep(id)
 {
-	DKDebug("DKMySqlPrep "+ id);
+	DKLog("DKMySqlPrep "+ id);
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
 	var nodes = document.getElementById(id).getElementsByTagName("*");
-	DKDebug("checking "+nodes.length+" nodes...\n");
+	DKLog("checking "+nodes.length+" nodes...\n");
 	
 	for(var i=0; i<nodes.length; i++){
 	
 		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
-			DKDebug(nodes[i].id);
-			DKDebug(nodes[i].getAttribute("sql"));
+			DKLog(nodes[i].id);
+			DKLog(nodes[i].getAttribute("sql"));
 			
 			var id = nodes[i].id;
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -65,21 +65,21 @@ function DKMySql_Prep(id)
 ////////////////////////////////////////
 function DKMySql_PrepField(table, field)
 {
-	DKDebug("DKMySql_PrepField("+table+", "+field+")");
+	DKLog("DKMySql_PrepField("+table+", "+field+")");
 	
 	//TODO: put this somewhere else, gui elements will work with the current active database
 	// CHECK DATABASE //
 	/*
 	var query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '"+database+"'";
 	var result = DKMySqlQuery(query);
-	DKDebug(result);
+	DKLog(result);
 	var records = result.split(',');
 
 	if(records.length < 3){
-		DKDebug("Creating Database "+database+"\n");
+		DKLog("Creating Database "+database+"\n");
 		var query = "CREATE DATABASE '"+database+"'"; //FIXME: NOT Working
 		var result = DKMySqlQuery(query);
-		DKDebug(result);
+		DKLog(result);
 	}
 	*/
 	
