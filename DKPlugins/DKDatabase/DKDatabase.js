@@ -54,7 +54,7 @@ function DKDatabase_OnEvent(event)
 			//var params = [];
 			//params.push("AddTable"); //event_type
 			//params.push("DKDatabase.html"); //event_id
-			SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
+			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
 		});
 	}
 	if(DK_Id(event, "AddColumn")){
@@ -188,6 +188,7 @@ function DKDatabase_UpdateHeader(table)
 	var id = DKWidget_CreateElement("Records", "div", "RecordsDiv");
 	DKWidget_SetProperty(id, "display", "inline-block");
 	DKWidget_SetProperty(id, "width", "100%");
+	DKWidget_SetProperty(id, "min-width", "450rem");
 
 	for(var i=1; i<records.length-1; i+=step){
 		var id = DKWidget_CreateElement("RecordsDiv", "input", "ColumnName"+i);
@@ -208,6 +209,7 @@ function DKDatabase_UpdateHeader(table)
 	DKWidget_SetProperty(id, "height", "18px");
 	DKWidget_SetProperty(id, "display", "inline-block");
 	DKWidget_SetInnerHtml(id, "+");
+	DKAddEvent(id, "click", DKDatabase_OnEvent);
 
 	return true;
 }
@@ -238,8 +240,7 @@ function DKDatabase_UpdateRecords(table)
 		var id = DKWidget_CreateElement("Records", "div", "RecordDiv"+String(r));
 		DKWidget_SetProperty(id, "display", "inline-block");
 		DKWidget_SetProperty(id, "width", "100%");
-		//DKWidget_SetProperty(record, "width", "100px");
-		//DKWidget_SetProperty(record, "overflow", "hidden");
+		DKWidget_SetProperty(id, "min-width", "450rem");
 
 		for(var i=0; i < Number(records[0]); i++){
 			var command = DKWidget_CreateElement(id, "input", "RecordValue"+String(r)+String(i));
