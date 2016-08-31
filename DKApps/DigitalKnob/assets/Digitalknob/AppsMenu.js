@@ -3,7 +3,8 @@ function AppsMenu_Init()
 {
 	DKCreate("Digitalknob/AppsMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", AppsMenu_OnEvent);
-		
+	
+	AppsMenu_AddApp("DKDatabase");
 	AppsMenu_AddApp("DKFacebook");
 	AppsMenu_AddApp("DKSDLOS");
 	AppsMenu_AddApp("DKYoutube");
@@ -43,6 +44,9 @@ function AppsMenu_OnEvent(event)
 			DKApp_UpdateApp(id);
 			
 			////////DKApp_UpdateDescription() /////////////
+			if(id == "DKDatabase"){
+				DKApp_UpdateDescription("A simple MySql database client. <br />");
+			}
 			if(id == "DKFacebook"){
 				DKApp_UpdateDescription("If you want to use facebook on your phone, but don't want all of the extra stuff that comes with it, give this a try. It fast, free and simple. <br /> \
 * Super fast <br /> \
@@ -53,7 +57,7 @@ function AppsMenu_OnEvent(event)
 * Small, Fast, simple and free <br /><br />");
 			}
 			if(id == "DKSDLOS"){
-				DKApp_UpdateDescription("experimental");
+				DKApp_UpdateDescription("Experimental OS");
 			}
 			if(id == "DKYoutube"){
 				DKApp_UpdateDescription("Introducing, DKYoutube for Android. <br /> \
