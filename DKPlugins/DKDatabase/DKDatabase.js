@@ -43,26 +43,35 @@ function DKDatabase_OnEvent(event)
 	}
 	if(DK_Id(event, "AddDatabase")){
 		DKCreate("DKMessage/DKMessage.js", function(){
-			//var params = [];
-			//params.push("AddDatabase"); //event_type
-			//params.push("DKDatabase.html"); //event_id
-			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddDatabase"); // To -> DKMessageBox
+			DKCreate("DKFrame/DKFrame.js", function(){
+				DKFrame_Widget("DKMessage.html");
+				//var params = [];
+				//params.push("AddDatabase"); //event_type
+				//params.push("DKDatabase.html"); //event_id
+				DKSendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddDatabase"); // To -> DKMessageBox
+			});
 		});
 	}
 	if(DK_Id(event, "AddTable")){
 		DKCreate("DKMessage/DKMessage.js", function(){
-			//var params = [];
-			//params.push("AddTable"); //event_type
-			//params.push("DKDatabase.html"); //event_id
-			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
+			DKCreate("DKFrame/DKFrame.js", function(){
+				DKFrame_Widget("DKMessage.html");
+				//var params = [];
+				//params.push("AddTable"); //event_type
+				//params.push("DKDatabase.html"); //event_id
+				DKSendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddTable"); // To -> DKMessageBox
+			});
 		});
 	}
 	if(DK_Id(event, "AddColumn")){
 		DKCreate("DKMessage/DKMessage.js", function(){
-			//var params = [];
-			//params.push("AddColumn"); //event_type
-			//params.push("DKDatabase.html"); //event_id
-			DK_SendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddColumn"); // To -> DKMessageBox
+			DKCreate("DKFrame/DKFrame.js", function(){
+				DKFrame_Widget("DKMessage.html");
+				//var params = [];
+				//params.push("AddColumn"); //event_type
+				//params.push("DKDatabase.html"); //event_id
+				DKSendEvent("DKMessage.html", "GetInput", "DKDatabase.html,AddColumn"); // To -> DKMessageBox
+			});
 		});
 	}
 	
