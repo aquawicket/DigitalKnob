@@ -92,11 +92,11 @@ function DKDev_OnEvent(event)
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
 		if(target == "body"){
-			DKCreate("DKDev/DKDev_RootMenu.js");
+			DKCreate("DKDev/DKDev_RootMenu.js", function(){});
 			return;
 		}
 
-		DKCreate("DKDev/DKDev_Menu.js");
+		DKCreate("DKDev/DKDev_Menu.js", function(){});
 		return;
 	}
 	if(DK_Type(event, "Clear")){
@@ -177,9 +177,10 @@ function DKDev_SelectElement(element)
 	}
 
 	//DKLog("stored_element: "+stored_element+"\n", DKDEBUG);
-	DKCreate("DKDev/DKMenuRightEdit.js");
-	DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
-	DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");	
+	DKCreate("DKDev/DKMenuRightEdit.js", function(){
+		DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
+		DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");
+	});	
 }
 
 /////////////////////////////////
@@ -649,8 +650,9 @@ function DKDev_OpenJS(path)
 function DKDev_OpenText(path)
 {
 	DKWidget_Toggle("DKNotepad.html");
-	DKCreate("DKNotepad/DKNotepad.js");
-	DKNotepad_LoadFile(path);
+	DKCreate("DKNotepad/DKNotepad.js", function(){
+		DKNotepad_LoadFile(path);
+	});
 }
 
 //////////////////////////////

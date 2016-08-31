@@ -19,20 +19,16 @@ function DKCreate(data, callback)
 		arry.splice(0, 0, "DKCss");
 	}
 	
-	
 	if(arry[0] == "DKJavascript"){
 		LoadJS(arry[1], function(){
-			//setTimeout(function(){
 			if(callback){
-				//DKLog("DKCreate("+data+"): has callback \n");
 				callback();
 			}
 			else{
 				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
+				alert("DKCreate("+data+"): does not have a callback \n");
 			}
-			//}, 500);
 		});
-		return true;
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
@@ -45,7 +41,6 @@ function DKCreate(data, callback)
 				//DKLog("DKCreate("+data+"): does not have a callback \n");
 			}
 		}, 500);
-		return true;
 	}
 	if(arry[0] == "DKCss"){
 		LoadCSS(arry[1]);
@@ -58,10 +53,9 @@ function DKCreate(data, callback)
 				//DKLog("DKCreate("+data+"): does not have a callback \n");
 			}
 		}, 500);
-		return true;
 	}
 
-	return false;
+	return;
 }
 
 //////////////////////

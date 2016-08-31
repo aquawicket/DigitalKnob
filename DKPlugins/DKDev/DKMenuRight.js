@@ -12,8 +12,8 @@ function DKMenuRight_Init()
 	DKAddEvent("HookImage", "click", DKMenuRight_OnEvent);
 	DKAddEvent("DKMenuRight.html", "SetPanel", DKMenuRight_OnEvent);
 	
-	DKCreate("DKDev/DKMenuRightApp.js");
-	DKCreate("DKDev/DKMenuRightEdit.js");
+	DKCreate("DKDev/DKMenuRightApp.js", function(){});
+	DKCreate("DKDev/DKMenuRightEdit.js", function(){});
 }
 
 //////////////////////////
@@ -30,24 +30,29 @@ function DKMenuRight_OnEvent(event)
 		DKMenuRight_SetPanel("App");
 	}
 	if(DK_Id(event, "Image19")){
-		DKCreate("DKDev/DKMenuRightEdit.js");
-		DKMenuRight_SetPanel("Edit");
+		DKCreate("DKDev/DKMenuRightEdit.js", function(){
+			DKMenuRight_SetPanel("Edit");
+		});
 	}
 	if(DK_Id(event, "Image20")){
-		DKCreate("DKDev/DKMenuRightTree.js");
-		DKMenuRight_SetPanel("Tree");
+		DKCreate("DKDev/DKMenuRightTree.js", function(){
+			DKMenuRight_SetPanel("Tree");
+		});
 	}
 	if(DK_Id(event, "WebImage")){
-		DKCreate("DKDev/DKMenuRightWeb.js");
-		DKMenuRight_SetPanel("Web");
+		DKCreate("DKDev/DKMenuRightWeb.js", function(){
+			DKMenuRight_SetPanel("Web");
+		});
 	}
 	if(DK_Id(event, "TriggerImage")){
-		DKCreate("DKTriggers/DKAutomate.js");
-		DKFrame_Widget("DKAutomate.html");
+		DKCreate("DKTriggers/DKAutomate.js", function(){
+			DKFrame_Widget("DKAutomate.html");
+		});
 	}
 	if(DK_Id(event, "HookImage")){
-		DKCreate("DKHook/DKHook.js");
-		DKFrame_Widget("DKHook.html");
+		DKCreate("DKHook/DKHook.js", function(){
+			DKFrame_Widget("DKHook.html");
+		});
 	}
 	if(DK_Id(event, "DevModeButton")){
 		DKMenuRight_ToggleEditMode();
@@ -107,9 +112,10 @@ function DKMenuRight_EditModeOn()
 {
 	DKLog("DKMenuRight_EditModeOn() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/redbutton.png");
-	DKCreate("DKDev/DKDev.js");
-	DKDev_On();
-	DKSendEvent("GLOBAL", "ToggleTriggers", "OFF");
+	DKCreate("DKDev/DKDev.js", function(){
+		DKDev_On();
+		DKSendEvent("GLOBAL", "ToggleTriggers", "OFF");
+	});
 }
 
 //////////////////////////////////
@@ -117,7 +123,8 @@ function DKMenuRight_EditModeOff()
 {
 	DKLog("DKMenuRight_EditModeOff() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/greenbutton.png");
-	DKCreate("DKDev/DKDev.js");
-	DKDev_Off();
-	DKSendEvent("GLOBAL", "ToggleTriggers", "ON");
+	DKCreate("DKDev/DKDev.js", function(){
+		DKDev_Off();
+		DKSendEvent("GLOBAL", "ToggleTriggers", "ON");
+	});
 }

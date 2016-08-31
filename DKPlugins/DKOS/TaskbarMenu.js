@@ -60,32 +60,34 @@ function TaskbarMenu_OnEvent(event)
 	//DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+") \n", DKDEBUG);
 	
 	if(DK_Id(event, "FileExplorer")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
 		DKFileAssociation_Open("DKFile/DKFileDialog.js");
-		var local_assets = DKAssets_GetDataPath();
-		DKAddEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
-		DKSendEvent("DKFileDialog.html", "GetFile", "TaskbarMenu,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
-		//return;
+			var local_assets = DKAssets_GetDataPath();
+			DKAddEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
+			DKSendEvent("DKFileDialog.html", "GetFile", "TaskbarMenu,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
+		});
 	}
 	if(DK_Type(event, "OpenFile")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
-		var file = DKWidget_GetValue(event);
-		DKFileAssociation_Open(file);		
-		DKRemoveEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			var file = DKWidget_GetValue(event);
+			DKFileAssociation_Open(file);		
+			DKRemoveEvent("TaskbarMenu", "OpenFile", TaskbarMenu_OnEvent);
+		});
 	}
 	if(DK_Id(event, "OpenConsole")){
-		DKCreate("DKConsole/DKConsole.js");
+		DKCreate("DKConsole/DKConsole.js", function(){});
 	}
 	if(DK_Id(event, "OpenBuilder")){
 		DKCreate("DKBuild/DKBuild.js", function(){
-		var frame = DKFrame_Widget("DKBuildGUI.html");
-		DKWidget_SetProperty(frame, "top", "20px");
-		DKWidget_SetProperty(frame, "left", "20px");
+			var frame = DKFrame_Widget("DKBuildGUI.html");
+			DKWidget_SetProperty(frame, "top", "20px");
+			DKWidget_SetProperty(frame, "left", "20px");
 		});
 	}
 	if(DK_Id(event, "OpenDev")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
-		DKFileAssociation_Open("DKDev/DKMenuRight.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			DKFileAssociation_Open("DKDev/DKMenuRight.js");
+		});
 	}
 	if(DK_Id(event, "OpenNotepad")){
 		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
@@ -93,23 +95,22 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "InputTest")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
-		DKFileAssociation_Open("DKInputTest/DKInput.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			DKFileAssociation_Open("DKInputTest/DKInput.js");
+		});
 	}
 	if(DK_Id(event, "OpenBrowser")){
-		DKCreate("DKFileAssociation/DKFileAssociation.js");
-		DKFileAssociation_Open("DKBrowser/DKBrowser.js");
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			DKFileAssociation_Open("DKBrowser/DKBrowser.js");
+		});
 	}
 	if(DK_Id(event, "OpenMessage")){
-		//DKFileAssociation_Open("DKMessage/DKMessage.js");
-		DKCreate("DKMessage/DKMessage.js");
-		DKFrame_Widget("DKMessage.html");
-		DKMessageBox("", "ShowMessage", "test message");
+		DKCreate("DKMessage/DKMessage.js", function(){
+			DKFrame_Widget("DKMessage.html");
+			DKMessageBox("", "ShowMessage", "test message");
+		});
 	}
 	if(DK_Id(event, "OpenTetris")){
-		//DKFileAssociation_Open("DKTetris/DKTetris.js");
-		//DKCreate("DKTetris/DKTetris.js");
-		//DKFrame_Widget("DKTetris.html");
 		DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 	}
 	if(DK_Id(event, "OpenSuperball")){
@@ -129,10 +130,11 @@ function TaskbarMenu_OnEvent(event)
 		var source = DKWidget_GetOuterHtml("body");
 		var local_assets = DKAssets_GetDataPath();
 		DKFile_StringToFile(source, local_assets+"source.html");
-		DKCreate("DKNotepad/DKNotepad.js");
-		DKFrame_Widget("DKNotepad.html");
-		DKNotepad_Open(local_assets+"source.html");
-		//DKLog(source);
+		DKCreate("DKNotepad/DKNotepad.js", function(){
+			DKFrame_Widget("DKNotepad.html");
+			DKNotepad_Open(local_assets+"source.html");
+			//DKLog(source);
+		});
 	}
 	if(DK_Id(event, "OpenDebug")){
 		DKRocket_ToggleDebugger();

@@ -45,10 +45,10 @@ function DKBuild_Init()
 	}
 
 	if(DKAvailable("DKWidget")){
-		DKCreate("DKBuild/DKBuildGUI.js");
+		DKCreate("DKBuild/DKBuildGUI.js", function(){});
 	}
 	else{
-		DKCreate("DKBuild/DKBuildConsole.js");
+		DKCreate("DKBuild/DKBuildConsole.js", function(){});
 	}
 }
 

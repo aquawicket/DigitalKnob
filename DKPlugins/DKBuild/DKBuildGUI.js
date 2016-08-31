@@ -6,39 +6,40 @@ function DKBuildGUI_Init()
 	DKCreate("DKRocket");
 	DKCreate("DKBuild/DKBuildGUI.html");
 	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html");
-	DKCreate("DKFile/DKFile.js");
-	//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
-	DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
-	DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
-	DKAddEvent("BuildType", "change", DKBuildGUI_OnEvent);
-	DKAddEvent("svn", "click", DKBuildGUI_OnEvent);
-	DKAddEvent("libraries", "click", DKBuildGUI_OnEvent);
-	DKAddEvent("build", "click", DKBuildGUI_OnEvent);
-	//DKAddEvent("DKBuildGUI.html", "NewApp", DKBuildGUI_OnEvent);
+	DKCreate("DKFile/DKFile.js", function(){
+		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
+		DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
+		DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
+		DKAddEvent("BuildType", "change", DKBuildGUI_OnEvent);
+		DKAddEvent("svn", "click", DKBuildGUI_OnEvent);
+		DKAddEvent("libraries", "click", DKBuildGUI_OnEvent);
+		DKAddEvent("build", "click", DKBuildGUI_OnEvent);
+		//DKAddEvent("DKBuildGUI.html", "NewApp", DKBuildGUI_OnEvent);
 	
-	DKBuild_ValidateSvn();
-	DKBuild_ValidateCmake();
-	DKBuild_ValidateVC2015();
+		DKBuild_ValidateSvn();
+		DKBuild_ValidateCmake();
+		DKBuild_ValidateVC2015();
 
-	if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
-		DKWidget_SetValue("OSList", "win32");
-	}
-	if(DK_GetOS() == "Mac"){
-		DKWidget_SetValue("OSList", "mac64");
-	}
-	if(DK_GetOS() == "Linux"){
-		DKWidget_SetValue("OSList", "linux64");
-	}
+		if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
+			DKWidget_SetValue("OSList", "win32");
+		}
+		if(DK_GetOS() == "Mac"){
+			DKWidget_SetValue("OSList", "mac64");
+		}	
+		if(DK_GetOS() == "Linux"){
+			DKWidget_SetValue("OSList", "linux64");
+		}	
 
-	if(DK_GetOS() == "Linux"){
-		DKWidget_SetValue("BuildType", "Release");
-	}
-	else{
-		DKWidget_SetValue("BuildType", "ALL");
-	}
+		if(DK_GetOS() == "Linux"){
+			DKWidget_SetValue("BuildType", "Release");
+		}
+		else{
+			DKWidget_SetValue("BuildType", "ALL");
+		}
 	
-	if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
-	DKBuildGUI_UpdateApps();
+		if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
+		DKBuildGUI_UpdateApps();
+	});
 }
 
 /////////////////////////
@@ -66,13 +67,13 @@ function DKBuildGUI_OnEvent(event)
 		DKBuildGUI_BuildSelect();
 	}
 	if(DK_Id(event,"svn")){
-		DKCreate("DKBuild/SvnMenu.js");
+		DKCreate("DKBuild/SvnMenu.js", function(){});
 	}
 	if(DK_Id(event,"libraries")){
-		DKCreate("DKBuild/LibraryMenu.js");
+		DKCreate("DKBuild/LibraryMenu.js", function(){});
 	}
 	if(DK_Id(event,"build")){
-		DKCreate("DKBuild/RunMenu.js");
+		DKCreate("DKBuild/RunMenu.js", function(){});
 	}		
 	
 	/*
@@ -107,8 +108,9 @@ function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
 	if(DKWidget_GetValue("AppList") == "NEW APP"){
-		DKCreate("DKMessage/DKMessage.js");
-		DKSendEvent("DKMessage.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
+		DKCreate("DKMessage/DKMessage.js", function(){
+			DKSendEvent("DKMessage.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
+		});
 		return;
 	}
 	
