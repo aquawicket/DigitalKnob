@@ -13,5 +13,5 @@ function IconMaker_Create(AppPath)
 	DKLog("IconMaker_Create("+AppPath+"+) \n", DKINFO);
 	
 	//Create Android Icons
-	DK_Run(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
+	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
 }
