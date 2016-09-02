@@ -11,7 +11,8 @@ function Digitalknob_Init()
 	DKAddEvent("Digitalknob_login", "click", Digitalknob_OnEvent);
 	
 	var width = DKWindow_GetWidth();
-	Digitalknob_GoogleAd("100%", "100rem");
+	var id = Digitalknob_GoogleAd("100%", "100rem");
+	DKWidget_SetProperty(id, "bottom", "0rem");
 }
 
 //////////////////////////
@@ -45,7 +46,7 @@ function Digitalknob_GoogleAd(width, height)
 	// container is where you want the ad to be inserted
 	var id = DKWidget_CreateElement("Digitalknob.html", "div", "DKAdd");
 	DKWidget_SetProperty(id, "position", "absolute");
-	DKWidget_SetProperty(id, "bottom", "0px");
+	//DKWidget_SetProperty(id, "bottom", "0px");
 	DKWidget_SetProperty(id, "width", width);
 	DKWidget_SetProperty(id, "height", height);
 	
@@ -69,5 +70,7 @@ function Digitalknob_GoogleAd(width, height)
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
 	script.src = 'http://pagead2.googlesyndication.com/pagead/show_ads.js';
-	document.body.appendChild(script);		
+	document.body.appendChild(script);
+
+	return id;
 }
