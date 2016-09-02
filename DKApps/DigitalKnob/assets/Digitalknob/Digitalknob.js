@@ -46,7 +46,6 @@ function Digitalknob_GoogleAd(width, height)
 	// container is where you want the ad to be inserted
 	var id = DKWidget_CreateElement("Digitalknob.html", "div", "DKAdd");
 	DKWidget_SetProperty(id, "position", "absolute");
-	//DKWidget_SetProperty(id, "bottom", "0px");
 	DKWidget_SetProperty(id, "width", width);
 	DKWidget_SetProperty(id, "height", height);
 	DKWidget_SetProperty(id, "text-align", "center");
