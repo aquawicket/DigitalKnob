@@ -3,6 +3,14 @@
 function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for javascript", DKERROR); return color; }
 function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for javascript", DKERROR); }
 
+//Set the scale
+if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
+	var pixel_ratio = DKWindow_GetPixelRatio();
+	pixel_ratio = Math.min(2, pixel_ratio);
+	DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
+	DKLog("DKWidget.js Re-Scaled the surface \n", DKSUCCESS);
+}
+	
 /////////////////////////////////
 function DKCreate(data, callback)
 {

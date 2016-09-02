@@ -4,7 +4,7 @@ function OsInfo_Init()
 	DKCreate("Digitalknob/OsInfo.html,Digitalknob.html");
 	DKAddEvent("GLOBAL", "resize", OsInfo_OnEvent);
 	
-	OsInfo_Resize();
+	//OsInfo_Resize();
 }
 
 /////////////////////
@@ -18,7 +18,7 @@ function OsInfo_OnEvent(event)
 {
 	//DKLog("OsInfo_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Type(event, "resize")){
-		OsInfo_Resize();
+		//OsInfo_Resize();
 	}
 }
 
