@@ -4,7 +4,7 @@ function OsInfo_Init()
 	DKCreate("Digitalknob/OsInfo.html,Digitalknob.html");
 	DKAddEvent("GLOBAL", "resize", OsInfo_OnEvent);
 	
-	//OsInfo_Resize();
+	OsInfo_Resize();
 }
 
 /////////////////////
@@ -18,7 +18,7 @@ function OsInfo_OnEvent(event)
 {
 	//DKLog("OsInfo_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Type(event, "resize")){
-		//OsInfo_Resize();
+		OsInfo_Resize();
 	}
 }
 
@@ -31,11 +31,23 @@ function OsInfo_Resize()
 	DKWidget_SetInnerHtml("OsInfo_height", "height: "+DKWindow_GetHeight());
 	DKWidget_SetInnerHtml("OsInfo_pixelratio", "pixel_ratio: "+DKWindow_GetPixelRatio());
 	
+	//Set the scale
+if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
+	var pixel_ratio = DKWindow_GetPixelRatio();
+	if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
+		pixel_ratio = 2.0;
+		DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
+		DKLog("DKWidget.js Re-Scaled the surface to "+pixel_ratio+"\n", DKSUCCESS);
+	}
+}
+
 	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
 		var pixel_ratio = DKWindow_GetPixelRatio();
-		pixel_ratio = Math.min(2, pixel_ratio);
-		DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
-		DKWidget_SetInnerHtml("OsInfo_scale", "scale: "+pixel_ratio+"px");
+		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
+			pixel_ratio = 2.0;
+			DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
+			DKWidget_SetInnerHtml("OsInfo_scale", "scale: "+pixel_ratio+"px");
+		}
 	}
 	else{
 		DKWidget_SetProperty("html", "font-size", "1px");
