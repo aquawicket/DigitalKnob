@@ -1,23 +1,23 @@
-////////////////////////
-function GoogleAd_Init()
-{
-
-}
-
 //////////////////////////
-function GoogleAd_End()
+function DKGoogleAd_Init()
+{
+
+}
+
+/////////////////////////
+function DKGoogleAd_End()
 {
 /
 }
 
-////////////////////////////////
-function GoogleAd_OnEvent(event)
+//////////////////////////////////
+function DKGoogleAd_OnEvent(event)
 {
 /
 }
 
-/////////////////////////////////////////
-function GoogleAd_CreateAd(width, height)
+///////////////////////////////////////////
+function DKGoogleAd_CreateAd(width, height)
 {
 	// container is where you want the ad to be inserted
 	var id = DKWidget_CreateElement("Digitalknob.html", "div", "DKAdd");
