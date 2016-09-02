@@ -7,20 +7,20 @@ function DKGoogleAd_Init()
 /////////////////////////
 function DKGoogleAd_End()
 {
-/
+
 }
 
 //////////////////////////////////
 function DKGoogleAd_OnEvent(event)
 {
-/
+
 }
 
-///////////////////////////////////////////
-function DKGoogleAd_CreateAd(width, height)
+///////////////////////////////////////////////////
+function DKGoogleAd_CreateAd(parent, width, height)
 {
 	// container is where you want the ad to be inserted
-	var id = DKWidget_CreateElement("Digitalknob.html", "div", "DKAdd");
+	var id = DKWidget_CreateElement(parent, "div", "DKAdd");
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "width", width);
 	DKWidget_SetProperty(id, "height", height);
