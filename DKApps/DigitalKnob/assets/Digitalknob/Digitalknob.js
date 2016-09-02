@@ -49,6 +49,7 @@ function Digitalknob_GoogleAd(width, height)
 	//DKWidget_SetProperty(id, "bottom", "0px");
 	DKWidget_SetProperty(id, "width", width);
 	DKWidget_SetProperty(id, "height", height);
+	DKWidget_SetProperty(id, "text-align", "center");
 	
 	var px_width = document.getElementById(id).clientWidth;
 	var px_height = document.getElementById(id).clientHeight;
