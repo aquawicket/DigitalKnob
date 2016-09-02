@@ -11,10 +11,7 @@ function Digitalknob_Init()
 	DKAddEvent("Digitalknob_login", "click", Digitalknob_OnEvent);
 	
 	var width = DKWindow_GetWidth();
-	DKLog("width = "+width);
-	var intWidth = Math.min(parseInt(width), 1200);
-	DKLog("intWidth = "+intWidth);
-	Digitalknob_GoogleAd(intWidth, 100);
+	Digitalknob_GoogleAd("100%", "100rem");
 }
 
 //////////////////////////
@@ -45,18 +42,23 @@ function Digitalknob_OnEvent(event)
 ////////////////////////////////////////////
 function Digitalknob_GoogleAd(width, height)
 {
-	window.google_ad_client = "ca-pub-4839505278360003";
-	window.google_ad_slot = "8269654670";
-	window.google_ad_width = width;
-	window.google_ad_height = height;
-
 	// container is where you want the ad to be inserted
 	var id = DKWidget_CreateElement("Digitalknob.html", "div", "DKAdd");
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "bottom", "0px");
-	DKWidget_SetProperty(id, "width", "100%");
-	DKWidget_SetProperty(id, "height", "100px");
+	DKWidget_SetProperty(id, "width", width);
+	DKWidget_SetProperty(id, "height", height);
 	
+	var px_width = document.getElementById(id).clientWidth;
+	var px_height = document.getElementById(id).clientHeight;
+	
+	px_width = Math.min(px_width, 1200);
+	px_height = Math.min(px_height, 1200);
+	window.google_ad_client = "ca-pub-4839505278360003";
+	window.google_ad_slot = "8269654670";
+	window.google_ad_width = px_width;
+	window.google_ad_height = px_height;
+
 	var container = document.getElementById(id);
 	var w = document.write;
 	document.write = function (content) {
