@@ -8,6 +8,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,8 +42,8 @@ public class DK extends Activity
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run(){
-				OpenActivity("WebviewActivity");
-				//OpenActivity("SDLActivity");
+				//OpenActivity("WebviewActivity");
+				OpenActivity("SDLActivity");
 			}
 		}, 2000);
 	}
