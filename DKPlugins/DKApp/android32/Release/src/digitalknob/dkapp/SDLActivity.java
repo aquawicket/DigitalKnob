@@ -85,7 +85,7 @@ public class SDLActivity extends Activity implements Runnable
 	
     @Override
     public void run(){
-		initJNIBridge();
+		//initJNIBridge();
         initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");
     	DK.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height)+","+Integer.toString(format)+","+Float.toString(refresh));

@@ -163,4 +163,15 @@ public class DK extends Activity
 			Log.e("DK", "copyFile2 ERROR: "+e.getMessage());
 		}
 	}
+	
+	////////////////////////////
+	public void toggleKeyboard()
+	{
+		Log.e("DK","toggleKeyborad()");
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+		if(imm != null){
+			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+		}
+	}
 }
