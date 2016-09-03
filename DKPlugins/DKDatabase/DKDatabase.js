@@ -210,10 +210,10 @@ function DKDatabase_UpdateHeader(table)
 		var id = DKWidget_CreateElement("RecordsDiv", "input", "ColumnName"+i);
 		DKWidget_SetAttribute(id, "type", "text");
 		DKWidget_SetProperty(id, "overflow", "hidden");
-		DKWidget_SetProperty(id, "width", "100px");
-		DKWidget_SetProperty(id, "height", "18px");
+		DKWidget_SetProperty(id, "width", "100rem");
+		DKWidget_SetProperty(id, "height", "18rem");
 		DKWidget_SetProperty(id, "display", "inline-block");
-		DKWidget_SetProperty(id, "border-width", "1px");
+		DKWidget_SetProperty(id, "border-width", "1rem");
 		DKWidget_SetProperty(id, "background-color", "rgb(200,200,200)");
 		//DKWidget_SetAttribute(command, "row", records[r]);
 		//DKWidget_SetAttribute(command, "column", toString(i));
@@ -221,8 +221,8 @@ function DKDatabase_UpdateHeader(table)
 	}
 
 	var id = DKWidget_CreateElement("RecordsDiv", "button", "AddColumn");
-	DKWidget_SetProperty(id, "width", "20px");
-	DKWidget_SetProperty(id, "height", "18px");
+	DKWidget_SetProperty(id, "width", "20rem");
+	DKWidget_SetProperty(id, "height", "18rem");
 	DKWidget_SetProperty(id, "display", "inline-block");
 	DKWidget_SetInnerHtml(id, "+");
 	DKAddEvent(id, "click", DKDatabase_OnEvent);
@@ -262,10 +262,10 @@ function DKDatabase_UpdateRecords(table)
 			var command = DKWidget_CreateElement(id, "input", "RecordValue"+String(r)+String(i));
 			DKWidget_SetAttribute(command, "type", "text");
 			DKWidget_SetProperty(command, "overflow-x", "hidden");
-			DKWidget_SetProperty(command, "width", "100px");
-			DKWidget_SetProperty(command, "height", "18px");
+			DKWidget_SetProperty(command, "width", "100rem");
+			DKWidget_SetProperty(command, "height", "18rem");
 			DKWidget_SetProperty(command, "display", "inline-block");
-			DKWidget_SetProperty(command, "border-width", "1px");
+			DKWidget_SetProperty(command, "border-width", "1rem");
 			DKWidget_SetAttribute(command, "row", records[r]);
 			DKWidget_SetAttribute(command, "column", columnnames[i]);
 			DKWidget_SetValue(command, records[r+i]);
@@ -273,16 +273,16 @@ function DKDatabase_UpdateRecords(table)
 
 		var deleteRecord = DKWidget_CreateElement(id, "button", "DeleteRecord"+String(r));
 		DKWidget_SetAttribute(deleteRecord, "row", records[r]);
-		DKWidget_SetProperty(deleteRecord, "width", "23px");
-		DKWidget_SetProperty(deleteRecord, "height", "18px");
+		DKWidget_SetProperty(deleteRecord, "width", "23rem");
+		DKWidget_SetProperty(deleteRecord, "height", "18rem");
 		DKWidget_SetProperty(deleteRecord, "display", "inline-block");
 		DKWidget_SetInnerHtml(deleteRecord, "-");
 		DKAddEvent(deleteRecord, "click", DKDatabase_OnEvent);
 	}
 
 	var addRecord = DKWidget_CreateElement("Records", "button", "AddRecord");
-	DKWidget_SetProperty(addRecord, "width", "23px");
-	DKWidget_SetProperty(addRecord, "height", "18px");
+	DKWidget_SetProperty(addRecord, "width", "23rem");
+	DKWidget_SetProperty(addRecord, "height", "18rem");
 	DKWidget_SetProperty(addRecord, "display", "block");
 	DKWidget_SetInnerHtml(addRecord, "+");
 	DKAddEvent(addRecord, "click", DKDatabase_OnEvent);
