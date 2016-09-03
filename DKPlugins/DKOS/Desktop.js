@@ -3,6 +3,12 @@ function Desktop_Init()
 {
 	DKCreate("DKOS/Desktop.html");
 	DKAddEvent("Background", "contextmenu", Desktop_OnEvent);
+	
+	DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
+		var width = DKWindow_GetWidth();
+		var id = DKGoogleAd_CreateAd("Desktop.html", "100%", "100rem");
+		DKWidget_SetProperty(id, "top", "0rem");
+	});
 }
 
 //////////////////////
