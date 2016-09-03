@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".SplashActivity" android:theme="@style/SplashTheme" />
         <activity android:name=".DKMain" />
-        <activity android:name=".SDLActivity" />
+        <activity android:name=".SDLActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity android:name=".WebviewActivity" 
 			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
