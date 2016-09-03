@@ -201,7 +201,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 
 #ifdef ANDROID
 	//Toggle Keyboard on text element click
-	if(event.GetType() == "mousedown"){
+	if(event.GetType() == "mousedown"){	
 		if(same(event.GetCurrentElement()->GetTagName().CString(), "textarea") ||
 			same(event.GetCurrentElement()->GetTagName().CString(), "input")){
 			CallJavaFunction("toggleKeyboard", "");
