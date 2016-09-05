@@ -10,11 +10,6 @@ class DKTrayJS : public DKObjectT<DKTrayJS>
 {
 public:
 	void Init();
-	//static int GetMidiInputs(duk_context* ctx);
-	//static int GetMidiOutputs(duk_context* ctx);
-	//static int ToggleMidiInput(duk_context* ctx);
-	//static int ToggleMidiOutput(duk_context* ctx);
-	//static int SendMidi(duk_context* ctx);
 	static int GetIcon(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);
 };
