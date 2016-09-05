@@ -21,7 +21,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize, 0);
-	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Minimize, 0);
+	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseY", DKWindowJS::GetMouseY, 0);
 }
