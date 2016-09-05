@@ -227,6 +227,34 @@ void DKWindow::Restore()
 	}
 }
 
+/////////////////////
+void DKWindow::Hide()
+{
+	if(DKClass::HasFunc("DKSDLWindow::Hide")){
+		DKClass::CallFunc("DKSDLWindow::Hide");
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::Hide")){
+		DKClass::CallFunc("DKOSGWindow::Hide");
+	}
+	else{
+		DKLog("DKWindow::Hide(): No function available \n", DKERROR);
+	}
+}
+
+/////////////////////
+void DKWindow::Show()
+{
+	if(DKClass::HasFunc("DKSDLWindow::Show")){
+		DKClass::CallFunc("DKSDLWindow::Show");
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::Show")){
+		DKClass::CallFunc("DKOSGWindow::Show");
+	}
+	else{
+		DKLog("DKWindow::Show(): No function available \n", DKERROR);
+	}
+}
+
 /////////////////////////
 int DKWindow::GetMouseX()
 {

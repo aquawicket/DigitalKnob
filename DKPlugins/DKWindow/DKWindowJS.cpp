@@ -22,6 +22,8 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize, 0);
 	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore, 0);
+	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide, 0);
+	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseY", DKWindowJS::GetMouseY, 0);
 }
@@ -129,6 +131,20 @@ int DKWindowJS::Minimize(duk_context* ctx)
 int DKWindowJS::Restore(duk_context* ctx)
 {
 	DKWindow::Restore();
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::Hide(duk_context* ctx)
+{
+	DKWindow::Hide();
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::Show(duk_context* ctx)
+{
+	DKWindow::Show();
 	return 1;
 }
 

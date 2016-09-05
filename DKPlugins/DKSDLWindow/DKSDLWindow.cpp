@@ -160,6 +160,8 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
 	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
 	DKClass::RegisterFunc("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
+	DKClass::RegisterFunc("DKSDLWindow::Hide", &DKSDLWindow::Hide, this);
+	DKClass::RegisterFunc("DKSDLWindow::Show", &DKSDLWindow::Show, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
@@ -312,6 +314,20 @@ void* DKSDLWindow::Restore(void*)
 void* DKSDLWindow::Minimize(void*)
 {
 	SDL_MinimizeWindow(sdlwin);
+	return NULL;
+}
+
+//////////////////////////////
+void* DKSDLWindow::Hide(void*)
+{
+	SDL_HideWindow(sdlwin);
+	return NULL;
+}
+
+//////////////////////////////
+void* DKSDLWindow::Show(void*)
+{
+	SDL_ShowWindow(sdlwin);
 	return NULL;
 }
 

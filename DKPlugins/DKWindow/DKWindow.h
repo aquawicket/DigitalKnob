@@ -28,6 +28,8 @@ public:
 	static void Windowed();
 	static void Minimize();
 	static void Restore();
+	static void Hide();
+	static void Show();
 	static int GetMouseX();
 	static int GetMouseY();
 
