@@ -24,6 +24,8 @@ public:
 	void* IsFullscreen(void*);
 	void* Fullscreen(void*);
 	void* Windowed(void*);
+	void* Restore(void*);
+	void* Minimize(void*);
 	void* GetMouseX(void*);
 	void* GetMouseY(void*);
 	void* GetHwnd(void*);

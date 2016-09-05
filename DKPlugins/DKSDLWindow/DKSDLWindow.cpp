@@ -158,6 +158,8 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::IsFullscreen", &DKSDLWindow::IsFullscreen, this);
 	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
+	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
+	DKClass::RegisterFunc("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
@@ -297,6 +299,20 @@ void* DKSDLWindow::Windowed(void*)
 {
 	SDL_SetWindowFullscreen(sdlwin, 0); 
 	return 0;
+}
+
+/////////////////////////////////
+void* DKSDLWindow::Restore(void*)
+{
+	SDL_RestoreWindow(sdlwin);
+	return NULL;
+}
+
+//////////////////////////////////
+void* DKSDLWindow::Minimize(void*)
+{
+	SDL_MinimizeWindow(sdlwin);
+	return NULL;
 }
 
 ///////////////////////////////////
