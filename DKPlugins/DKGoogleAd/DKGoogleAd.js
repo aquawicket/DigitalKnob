@@ -62,13 +62,18 @@ function DKGoogleAd_CreateAd(parent, width, height)
 		DKWidget_SetProperty(id, "text-align", "center");
 		
 		//TODO - don't let size go over 1200px
-		//var px_width = DKWidget_GetClientWidth(id);
-		//var px_height = DKWidget_GetClientHeight(id);
-		//px_width = Math.min(px_width, 1200);
-		//px_height = Math.min(px_height, 1200);
+		var px_width = DKWidget_GetClientWidth(id);
+		var px_height = DKWidget_GetClientHeight(id);
+		px_width = Math.min(parseInt(px_width), 1200);
+		px_height = Math.min(parseInt(px_height), 1200);
+		DKLog("px_width = "+String(px_width)+"\n");
+		DKLog("px_height = "+String(px_height)+"\n");
 		//TODO - use px_values
 		
-		var iframe = "<iframe id=\"DKBrowser_cef\" style=\"position:absolute;width:100%;height:100%\" width=\"100%\" height=\"100%\" src=\"http://digitalknob.com/Digitalknob/AdTest.html\"></iframe>";
+		DKWidget_SetProperty(id, "width", String(px_width)+":rem");
+		DKWidget_SetProperty(id, "height", String(px_height)+":rem");
+		
+		var iframe = "<iframe id=\"DKBrowser_cef\" style=\"position:absolute;width:"+String(px_width)+":rem;"+String(px_height)+":rem;\" width=\""+String(px_width)+"\" height=\""+String(px_height)+"\" src=\"http://digitalknob.com/Digitalknob/AdTest.html\"></iframe>";
 		
 		DKWidget_SetInnerHtml(id, iframe);
 		return id;
