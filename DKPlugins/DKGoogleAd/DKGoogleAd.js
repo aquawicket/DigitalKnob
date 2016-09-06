@@ -32,6 +32,7 @@ function DKGoogleAd_CreateAd(parent, width, height)
 		var px_width = document.getElementById(id).clientWidth;
 		var px_height = document.getElementById(id).clientHeight;
 	
+		//don't let size go over 1200px
 		px_width = Math.min(px_width, 1200);
 		px_height = Math.min(px_height, 1200);
 		window.google_ad_client = "ca-pub-4839505278360003";
@@ -59,6 +60,13 @@ function DKGoogleAd_CreateAd(parent, width, height)
 		DKWidget_SetProperty(id, "width", width);
 		DKWidget_SetProperty(id, "height", height);
 		DKWidget_SetProperty(id, "text-align", "center");
+		
+		//TODO - don't let size go over 1200px
+		//var px_width = DKWidget_GetClientWidth(id);
+		//var px_height = DKWidget_GetClientHeight(id);
+		//px_width = Math.min(px_width, 1200);
+		//px_height = Math.min(px_height, 1200);
+		//TODO - use px_values
 		
 		var iframe = "<iframe id=\"DKBrowser_cef\" style=\"position:absolute;width:100%;height:100%\" width=\"100%\" height=\"100%\" src=\"http://digitalknob.com/Digitalknob/AdTest.html\"></iframe>";
 		
