@@ -22,7 +22,7 @@ function DKGoogleAd_CreateAd(parent, width, height)
 	DKLog("DKGoogleAd_CreateAd("+parent+","+width+","+height+") \n");
 	DKLog("Browser = "+DK_GetBrowser()+"\n");
 	
-	if(DK_GetBrowser() != "Digitalknob"){
+	if(DK_GetBrowser() != "DigitalKnob"){
 		var id = DKWidget_CreateElement(parent, "div", "DKAdd");
 		DKWidget_SetProperty(id, "position", "absolute");
 		DKWidget_SetProperty(id, "width", width);
@@ -54,11 +54,15 @@ function DKGoogleAd_CreateAd(parent, width, height)
 		return id;
 	}
 	else{
-		var id = DKWidget_CreateElement(parent, "iframe", "DKBrowser_cef");
+		var id = DKWidget_CreateElement(parent, "div", "DKAdd");
 		DKWidget_SetProperty(id, "position", "absolute");
 		DKWidget_SetProperty(id, "width", width);
 		DKWidget_SetProperty(id, "height", height);
-		DKWidget_SetAttribute(id, "src", "http://digitalknob.com/Digitalknob/AdTest.html");
-		return;
+		DKWidget_SetProperty(id, "text-align", "center");
+		
+		var iframe = "<iframe id=\"DKBrowser_cef\" style=\"position:absolute;width:100%;height:100%\" width=\"100%\" height=\"100%\" src=\"http://digitalknob.com/Digitalknob/AdTest.html\"></iframe>";
+		
+		DKWidget_SetInnerHtml(id, iframe);
+		return id;
 	}
 }
