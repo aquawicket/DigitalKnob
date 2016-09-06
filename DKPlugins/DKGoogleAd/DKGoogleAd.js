@@ -19,7 +19,7 @@ function DKGoogleAd_OnEvent(event)
 ///////////////////////////////////////////////////
 function DKGoogleAd_CreateAd(parent, width, height)
 {
-	DKLog("DKGoogleAd_CreateAd("+parent+","+width+","+height+")");
+	DKLog("DKGoogleAd_CreateAd("+parent+","+width+","+height+") \n");
 	DKLog("Browser = "+DK_GetBrowser()+"\n");
 	
 	// container is where you want the ad to be inserted
