@@ -1124,6 +1124,8 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 {
 	//FIXME - can't clear a select element ??
 	if(!element){return false;}
+	DKString id = element->GetId().CString();
+	if(id.empty()){return false;}
 	if(same(element->GetTagName().CString(), "select")){
 		int e = element->GetNumChildren(true);
 		for(int i=0; i<e; ++i){
