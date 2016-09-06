@@ -71,6 +71,8 @@ public:
 	static int ScrollToTop(duk_context* ctx);
 	static int ScrollToBottom(duk_context* ctx);
 	static int OpenLink(duk_context* ctx);
+	static int GetClientWidth(duk_context* ctx);
+	static int GetClientHeight(duk_context* ctx);
 };
 
 
