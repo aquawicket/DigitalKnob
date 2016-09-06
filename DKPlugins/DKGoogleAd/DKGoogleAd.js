@@ -19,6 +19,9 @@ function DKGoogleAd_OnEvent(event)
 ///////////////////////////////////////////////////
 function DKGoogleAd_CreateAd(parent, width, height)
 {
+	DKLog("DKGoogleAd_CreateAd("+parent+","+width+","+height+")");
+	DKLog("Browser = "+DK_GetBrowser()+"\n");
+	
 	// container is where you want the ad to be inserted
 	var id = DKWidget_CreateElement(parent, "div", "DKAdd");
 	DKWidget_SetProperty(id, "position", "absolute");
