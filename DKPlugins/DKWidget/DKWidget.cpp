@@ -1109,6 +1109,10 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 		}
 	}
 	element->SetInnerRML(value.c_str());
+
+	DKRocketToRML dkRocketToRML;
+	dkRocketToRML.PostProcess(element);
+
 	return true;
 }
 
