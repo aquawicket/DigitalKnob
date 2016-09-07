@@ -113,7 +113,11 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
 		DKString iWidth = toString(iframes[i]->GetClientWidth());
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
-		DKString url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+
+		DKString url = "";
+		if(iframes[i]->GetAttribute("src")){
+			 url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+		}
 		//DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
 		
 		//TODO
