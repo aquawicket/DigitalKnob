@@ -50,7 +50,7 @@ public:
 	static bool GetOuterHtml(const DKString& id, DKString& string);
 	static bool GetOuterHtml(DKElement* element, DKString& string);
 
-	//by id or string
+	//by string
 	static DKElement* CreateElement(const DKString& tag);
 	static DKString CreateElement(const DKString& parent, const DKString& tag, const DKString& id);
 	static DKString CreateElementFirst(const DKString& parent, const DKString& tag, const DKString& id);
@@ -90,8 +90,6 @@ public:
 	static bool SetValue(const DKString& id, const DKProperty* value);
 	static bool ScrollToTop(const DKString& id);
 	static bool ScrollToBottom(const DKString& id);
-	static bool GetClientWidth(const DKString& id, DKString& value);
-	static bool GetClientHeight(const DKString& id,  DKString& value);
 	
 	//by element
 	static bool GetFile(DKElement* element, DKString& file);
@@ -121,8 +119,6 @@ public:
 	static bool SetValue(DKElement* element, const DKProperty* prop);
 	static bool ScrollToTop(DKElement* element);
 	static bool ScrollToBottom(DKElement* element);
-	static bool GetClientWidth(DKElement* element, DKString& value);
-	static bool GetClientHeight(DKElement* element, DKString& value);
 
 	//extra
 	static bool IsChildOf(const DKString& id, const DKString& parent);

@@ -68,8 +68,7 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_ScrollToTop", DKWidgetJS::ScrollToTop, 1);
 	DKDuktape::AttachFunction("DKWidget_ScrollToBottom", DKWidgetJS::ScrollToBottom, 1);
 	DKDuktape::AttachFunction("DKWidget_OpenLink", DKWidgetJS::OpenLink, 1);
-	DKDuktape::AttachFunction("DKWidget_GetClientWidth", DKWidgetJS::GetClientWidth, 1);
-	DKDuktape::AttachFunction("DKWidget_GetClientHeight", DKWidgetJS::GetClientHeight, 1);
+
 }
 
 ///////////////////////////////////////////
@@ -711,30 +710,6 @@ int DKWidgetJS::OpenLink(duk_context* ctx)
 {
 	DKString url = duk_require_string(ctx, 0);
 	DKUtil::Run(url); 
-	return 1;
-}
-
-////////////////////////////////////////////////
-int DKWidgetJS::GetClientWidth(duk_context* ctx)
-{
-	DKString id = duk_require_string(ctx, 0);
-	DKString value;
-	if(!DKWidget::GetClientWidth(id, value)){
-		return 0;
-	}
-	duk_push_string(ctx, value.c_str());
-	return 1;
-}
-
-/////////////////////////////////////////////////
-int DKWidgetJS::GetClientHeight(duk_context* ctx)
-{
-	DKString id = duk_require_string(ctx, 0);
-	DKString value;
-	if(!DKWidget::GetClientHeight(id, value)){
-		return 0;
-	}
-	duk_push_string(ctx, value.c_str());
 	return 1;
 }
 

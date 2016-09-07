@@ -110,7 +110,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-        //DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
+        DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
 		callback_found = true;
 	}
 

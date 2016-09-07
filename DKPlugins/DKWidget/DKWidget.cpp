@@ -700,28 +700,6 @@ bool DKWidget::ScrollToBottom(const DKString& id)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientWidth(const DKString& id, DKString& value)
-{
-	if(!GetClientWidth(GetElementById(id), value)){ return false; }
-	return true;
-}
-
-////////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientHeight(const DKString& id,  DKString& value)
-{
-	if(!GetClientHeight(GetElementById(id), value)){ return false; }
-	return true;
-}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1124,8 +1102,6 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 {
 	//FIXME - can't clear a select element ??
 	if(!element){return false;}
-	DKString id = element->GetId().CString();
-	if(id.empty()){return false;}
 	if(same(element->GetTagName().CString(), "select")){
 		int e = element->GetNumChildren(true);
 		for(int i=0; i<e; ++i){
@@ -1133,10 +1109,6 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 		}
 	}
 	element->SetInnerRML(value.c_str());
-
-	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(element);
-
 	return true;
 }
 
@@ -1299,40 +1271,6 @@ bool DKWidget::IsChildOf(DKElement* element, DKElement* parent)
 	}
 	return true;
 }
-
-//////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
-{
-	float width = element->GetClientWidth();
-	value = toString(width);
-	return true;
-}
-
-///////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientHeight(DKElement* element, DKString& value)
-{
-	float height = element->GetClientHeight();
-	value = toString(height);
-	return true;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //////////////////////////////////////////
 bool DKWidget::GetMouseWindowX(int& x_out)
