@@ -700,6 +700,26 @@ bool DKWidget::ScrollToBottom(const DKString& id)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////////
+bool DKWidget::GetClientWidth(const DKString& id, DKString& value)
+{
+	if (!GetClientWidth(GetElementById(id), value)) { return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////
+bool DKWidget::GetClientHeight(const DKString& id, DKString& value)
+{
+	if (!GetClientHeight(GetElementById(id), value)) { return false; }
+	return true;
+}
+
+
+
+
+
+
+
 
 
 
@@ -1228,6 +1248,31 @@ bool DKWidget::ScrollToBottom(DKElement* element)
 	last_child->ScrollIntoView();
 	return true;
 }
+
+//////////////////////////////////////////////////////////////////
+bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
+{
+	float width = element->GetClientWidth();
+	value = toString(width);
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////
+bool DKWidget::GetClientHeight(DKElement* element, DKString& value)
+{
+	float height = element->GetClientHeight();
+	value = toString(height);
+	return true;
+}
+
+
+
+
+
+
+
+
+
 
 
 //extra
