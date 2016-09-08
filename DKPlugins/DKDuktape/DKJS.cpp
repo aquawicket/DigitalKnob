@@ -123,8 +123,8 @@ int DKJS::_DKCreate(duk_context* ctx)
 
 	//Look for a callback function, and call it if one exists.
 	if(callback_found){
-		if (duk_pcall(ctx, 1) != 0) { // JsFunc call failed
-			DKLog("DKJS::_DKCreate(): JsFunc call failed :( \n", DKERROR);
+		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0) { // JsFunc call failed
+			DKLog("DKJS::_DKCreate(): JsFunc call failed \n", DKERROR);
 			printf("Error: %s\n", duk_safe_to_string(ctx, -1));
 		}
 		duk_pop(ctx);
