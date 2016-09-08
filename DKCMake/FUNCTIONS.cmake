@@ -3,7 +3,7 @@
 #####################################################################
 
 SET(UPX ON)
-SET(UPX_EXE "${3RDPARTY}/upx391w" CACHE INTERNAL "")
+
 
 #############################
 #### DKSET Command  #########
@@ -115,7 +115,7 @@ FUNCTION(UPX_COMPRESS file)
 	IF(UPX)
 		MESSAGE("UPX compressing ${file}...")
 		MESSAGE("Please wait...")
-		MESSAGE("${3RDPARTY}/upx391w/upx.exe -9 -v ${file}")
+		##MESSAGE("${3RDPARTY}/upx391w/upx.exe -9 -v ${file}")
 		EXECUTE_PROCESS(COMMAND cmd /c "${3RDPARTY}/upx391w/upx.exe -9 -v ${file}")
 	ENDIF()
 	ENDIF()
