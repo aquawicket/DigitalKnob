@@ -122,7 +122,7 @@ FOREACH(plugin ${DKPLUGS})
 	
 	IF(QUEUE_BUILD AND CMAKE_FILE)
 		IF(REBUILDALL)
-			#DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
+			DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
 		ENDIF()
 		IF(NOT EXISTS ${PATHTOPLUGIN}/CMakeLists.txt)
 			MESSAGE("Creating CMakeLists.txt file for ${plugin}....")
