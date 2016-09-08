@@ -56,6 +56,7 @@ ENDFUNCTION()
 
 ###################################
 FUNCTION(DKCOPY arg arg2 overwrite)
+	##MESSAGE("DKCOPY ${arg} ${arg2} ${overwrite}")
 	IF(EXISTS ${arg})
 		IF(IS_DIRECTORY ${arg})
 			FILE(GLOB_RECURSE allfiles RELATIVE "${arg}/" "${arg}/*")
