@@ -122,11 +122,12 @@ FOREACH(plugin ${DKPLUGS})
 	
 	IF(QUEUE_BUILD AND CMAKE_FILE)
 		IF(REBUILDALL)
-			DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
+			#DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
 		ENDIF()
 		IF(NOT EXISTS ${PATHTOPLUGIN}/CMakeLists.txt)
 			MESSAGE("Creating CMakeLists.txt file for ${plugin}....")
 			FILE(WRITE ${PATHTOPLUGIN}/CMakeLists.txt ${CMAKE_FILE})
+		ENDIF()
 		
 			IF(WIN_32)
 				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/win32)
@@ -249,7 +250,7 @@ FOREACH(plugin ${DKPLUGS})
 			ENDIF()
 			
 			INCLUDE(${PATHTOPLUGIN}/DKCMake.txt) ##run it again to copy any .exe and .dll files. 
-		ENDIF()
+		##ENDIF()
 	ENDIF()
 	
 	IF(ANDROID_LIBMK)
