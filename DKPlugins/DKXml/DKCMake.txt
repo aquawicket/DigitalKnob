@@ -1,5 +1,5 @@
 DKDEPEND(pugixml-1.6)
 
-DKCOPY(${3RDPARTY}/pugixml-1.6/src/pugixml.cpp ${DKPLUGINS}/DKXml TRUE)
+DKCOPY(${3RDPARTY}/pugixml-1.6/src/pugixml.cpp ${DKPLUGINS}/DKXml FALSE)
 DKINCLUDE(${3RDPARTY}/pugixml-1.6/src)
 DKPLUGIN(DKXml)

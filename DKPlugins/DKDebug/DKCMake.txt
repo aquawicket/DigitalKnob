@@ -1,7 +1,7 @@
 DKDEPEND(stackwalker)
 DKDEPEND(DKCurl)
 
-DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug TRUE)
+DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug FALSE)
 WIN_INCLUDE(${3RDPARTY}/stackwalker/StackWalker)
 
 DKPLUGIN(DKDebug)

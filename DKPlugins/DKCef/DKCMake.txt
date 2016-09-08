@@ -25,9 +25,9 @@ DKASSETS(DKCef)
 
 ##TODO: double check this
 IF(WIN)
-	DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
-	DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef TRUE)
-	DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)
+	DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef FALSE)
+	DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef FALSE)
+	DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef FALSE)
 	FILE(REMOVE ${DKPLUGINS}/DKCef/cef_sandbox.lib)
 	FILE(REMOVE ${DKPLUGINS}/DKCef/d3dcompiler_47.dll)
 	FILE(REMOVE ${DKPLUGINS}/DKCef/d3dcompiler_43.dll)
