@@ -75,6 +75,12 @@ bool DKAssets::AquireDataPath(DKString& exepath)
     exepath.erase (exepath.begin()+found+1, exepath.end());
 	replace(exepath, "/MacOS", "/Resources");
 	return true;
+#elif defined(IOS)
+	exepath = DKFile::appfilename;
+    found = exepath.find_last_of("/");
+    exepath.erase (exepath.begin()+found+1, exepath.end());
+	exepath += "/assets";
+	return true;
 #elif defined(LINUX)
 	exepath = DKFile::appfilename;
 	DKString appname;
