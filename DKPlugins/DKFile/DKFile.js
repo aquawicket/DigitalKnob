@@ -53,28 +53,28 @@ function UrlExists(url, fn)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				//output.value = request.responseText;
-				//DKDebug("AJAX RETURN: "+output.value);
+				DKLog("status: "+request.status);
 				fn && fn(true);
-				return;// true;
+				//return;// true;
 			}
 			else{
 				DKLog("AJAX ERROR: "+request.statusText, DKERROR); //report error
 				DKLog("status: "+request.status, DKERROR);
 				fn && fn(false);
-				return;// false;
+				//return;// false;
 			}
 		}
 	}
 	
-	try{ 
+	//try{ 
 		request.open("HEAD",url); 
 		request.send(); 
-	}
-	catch(err){
+	//}
+	//catch(err){
 		//output.value = "";
-		return;// false;
-	}
-	return;// true;
+	//	return;// false;
+	//}
+	//return;// true;
 }
 
 ////////////////////////////////
