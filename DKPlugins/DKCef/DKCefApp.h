@@ -17,6 +17,7 @@ public:
 		command_line->AppendSwitchWithValue("disable-gpu", "1");
 		command_line->AppendSwitchWithValue("disable-gpu-compositing", "1");
 		command_line->AppendSwitchWithValue("ignore-gpu-blacklist", "1");
+		command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
 	}
 
