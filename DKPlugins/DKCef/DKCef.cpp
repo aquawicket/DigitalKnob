@@ -270,6 +270,26 @@ bool DKCef::Paste()
 	return true;
 }
 
+/////////////////////////////////
+bool DKCef::ShowDevTools(int num)
+{
+	//TODO
+	/*)
+	CefWindowInfo windowInfo;
+	CefBrowserSettings settings;
+	CefPoint inspectElementAt;
+
+#ifdef WIN32
+	windowInfo.SetAsPopup(browsers[num]->GetHost()->GetWindowHandle(), "DevTools");
+#endif
+
+	SetUrl("chrome-devtools://devtools/devtools.html", num);
+	browsers[num]->GetHost()->ShowDevTools(windowInfo, cefHandler, settings, inspectElementAt);
+	return true;
+	*/
+	return false;
+}
+
 ////////////////////////////////////////////////////////////
 void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser) 
 {

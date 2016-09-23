@@ -24,6 +24,7 @@ public:
 	bool Reload(int num);
 	bool DownloadUrl(const DKString& url);
 	bool Paste();
+	bool ShowDevTools(int num);
 
 	bool NewBrowser();
 	int GetBrowsers();
