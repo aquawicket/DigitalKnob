@@ -16,6 +16,7 @@
 void DKSDLCef::Init()
 {
 	cef_image = NULL;
+	background_image = NULL;
 	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	id = data[1];
@@ -79,7 +80,7 @@ void* DKSDLCef::OnResize(void* data)
 void* DKSDLCef::GetTexture(void*)
 {
 	if(!cef_image){
-		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->width, dkCef->height);
+		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
 	return static_cast<void*>(cef_image);
 }

@@ -45,6 +45,7 @@ public:
 	float _scrollFactor;
 
 	SDL_Texture* cef_image;
+	SDL_Texture* background_image;
 	SDL_Texture* popup_image;
 	DKSDLCefHandler* cefHandler;
 };
@@ -91,13 +92,22 @@ public:
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){
-				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 			}
 
-			if(SDL_LockTexture(dkSdlCef->cef_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
+			if (!dkSdlCef->background_image) {
+				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			}
+			int w2, h2;
+			SDL_QueryTexture(dkSdlCef->background_image, NULL, NULL, &w2, &h2);
+			if (w2 != width || h2 != height) {
+				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			}
+
+			if(SDL_LockTexture(dkSdlCef->background_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
 				//copies whole cef bitmap to sdl texture
 				std::memcpy(surface->pixels, buffer, width * height * 4);
-				SDL_UnlockTexture(dkSdlCef->cef_image);
+				SDL_UnlockTexture(dkSdlCef->background_image);
 			}
 		}
 		else{
@@ -121,16 +131,19 @@ public:
 				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
 
-		if(dkSdlCef->cef_image && dkSdlCef->popup_image){
-			SDL_Rect DestR;
-			DestR.x = 0;
-			DestR.y = 0;
-			SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &DestR.w, &DestR.h);
-			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
-			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &DestR);
-			SDL_RenderPresent(dkSdlWindow->sdlren);
-			//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
+
+		if(dkSdlCef->cef_image) {	
+			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
+			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->background_image, NULL, NULL);
+			if(dkSdlCef->popup_image){
+				SDL_Rect popup;
+				popup.x = 0;
+				popup.y = 0;
+				SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &popup.w, &popup.h);
+				SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &popup);	
+			}
+			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
 	}
 
