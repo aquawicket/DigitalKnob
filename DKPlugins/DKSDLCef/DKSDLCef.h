@@ -82,21 +82,37 @@ public:
 	{
 		//if(!dkCef->current_browser){ return; }
 		if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
-		if(type != PET_VIEW){ return; }
-		if(dirtyRects.size() == 0){ return; }
-		SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-		if(!surface){ return; }
+		if(type == PET_VIEW){
+			if(dirtyRects.size() == 0){ return; }
+			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+			if(!surface){ return; }
 
-		int w, h;
-		SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
-		if(w != width || h != height){
-			dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			int w, h;
+			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
+			if(w != width || h != height){
+				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			}
+
+			if(SDL_LockTexture(dkSdlCef->cef_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
+				//copies whole cef bitmap to sdl texture
+				std::memcpy(surface->pixels, buffer, width * height * 4);
+				SDL_UnlockTexture(dkSdlCef->cef_image);
+			}
 		}
-
-		if(SDL_LockTexture(dkSdlCef->cef_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
-			//copies whole cef bitmap to sdl texture
-			std::memcpy(surface->pixels, buffer, width * height * 4);
-			SDL_UnlockTexture(dkSdlCef->cef_image);
+		if(type == PET_POPUP){ //FIXME
+			if(dirtyRects.size() == 0){ return; }
+			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+			if(!surface){ return; }
+			//int w, h;
+			//SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
+			//if(w != width || h != height){
+			//	dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			//}
+			if(SDL_LockTexture(dkSdlCef->cef_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
+				//copies popup bitmap to sdl texture
+				std::memcpy(surface->pixels, buffer, width * height * 4);
+				SDL_UnlockTexture(dkSdlCef->cef_image);
+			}
 		}
 	}
 
