@@ -144,6 +144,7 @@ bool DKSDLCef::handle(SDL_Event *event)
 			dkCef->current_browser->GetHost()->SendFocusEvent(true);
 			dkCef->inFocus = true;
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
+
 			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, getCefMouseButton(event->button.button), false, 1);
 			return true;
 		}
