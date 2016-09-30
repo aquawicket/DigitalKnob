@@ -10,18 +10,18 @@ if(!hostname){ hostname = "digitalknob.com"; }
 
 var pathname = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
 if(!pathname){ pathname = document.location.pathname; }
-if(pathname.indexOf("/index.html") > -1){ pathname = "/DKSDLOS/"; }
+if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
 
 var protocol = document.location.protocol;
 online_assets = "http://"+hostname+pathname;
-local_assets = "http://"+hostname+pathname;
+//if(protocol != "file:"){
+	local_assets = "http://"+hostname+pathname;
+//}
 
 appfilename = pathname.replace("/","");
 appfilename = appfilename.replace("/","");
 
-//var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+online_assets);
-//DKLog("absolutepath: "+absolutepath+"\n");
-//if(absolutepath){ online_assets = absolutepath; }
+var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
 
 DKLog("href: "+href+"\n", DKINFO);
 DKLog("hostname: "+hostname+"\n", DKINFO);
@@ -30,6 +30,8 @@ DKLog("protocol: "+protocol+"\n", DKINFO);
 DKLog("appfilename: "+appfilename+"\n", DKINFO);
 DKLog("local_assets: "+local_assets+"\n", DKINFO);
 DKLog("online_assets: "+online_assets+"\n", DKINFO);
+DKLog("absolutepath: "+absolutepath+"\n", DKINFO);
+
 
 ////////////////////////
 function DKAssets_Init()
