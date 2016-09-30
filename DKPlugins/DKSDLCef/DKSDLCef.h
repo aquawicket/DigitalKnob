@@ -100,15 +100,17 @@ public:
 			}
 		}
 		if(type == PET_POPUP){ //FIXME
-			return; //FIXME
+			//return; //FIXME
 			if(dirtyRects.size() == 0){ return; }
 			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 			if(!surface){ return; }
 
 			SDL_Texture* popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-			if(SDL_LockTexture(popup_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
+			void* mPixels;
+			int mPitch;
+			if(SDL_LockTexture(popup_image, NULL, &mPixels, &mPitch) == 0){
 				//copies popup bitmap to sdl texture
-				std::memcpy(surface->pixels, buffer, width * height * 4);
+				std::memcpy(mPixels, buffer, width * height * 4);
 				SDL_UnlockTexture(popup_image);
 			}
 
@@ -118,11 +120,12 @@ public:
 			SrcR.w = width;
 			SrcR.h = height;
 			SDL_Rect DestR;
-			DestR.x = 100;
-			DestR.y = 100;
+			DestR.x = 0;
+			DestR.y = 0;
 			DestR.w = width;
 			DestR.h = height;
 			SDL_SetTextureBlendMode(dkSdlCef->cef_image, SDL_BLENDMODE_BLEND);
+			SDL_SetTextureBlendMode(popup_image, SDL_BLENDMODE_BLEND);
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
 			SDL_RenderCopy(dkSdlWindow->sdlren, popup_image, &SrcR, &DestR);
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
