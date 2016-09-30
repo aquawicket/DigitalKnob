@@ -107,7 +107,8 @@ if($_GET["Query"])
 	if(!$_GET["Query"]){ echo "DKERROR: query variable empty"; die(); }
 	$query = $_GET["Query"];
 	if($query === "Info"){
-		echo "******DKMySql.php****** \n";
+		echo "******DKMySql.php******";
+		echo "\n";
 		echo "PHP_SELF: ";
 		echo $_SERVER['PHP_SELF'];
 		echo "\n";
