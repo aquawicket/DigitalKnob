@@ -100,11 +100,11 @@ public:
 				SDL_UnlockTexture(dkSdlCef->cef_image);
 			}
 		}
-		if(type == PET_POPUP){ //FIXME
-			//return; //FIXME
-			if(dirtyRects.size() == 0){ return; }
-			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-			if(!surface){ return; }
+		else{
+		//if(type == PET_POPUP){ //FIXME
+			//if(dirtyRects.size() == 0){ return; }
+			//SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+			//if(!surface){ return; }
 			if(!dkSdlCef->popup_image){
 				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
@@ -120,7 +120,6 @@ public:
 				std::memcpy(mPixels, buffer, width * height * 4);
 				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
-		}
 
 		if(dkSdlCef->cef_image && dkSdlCef->popup_image){
 			SDL_Rect DestR;
@@ -131,6 +130,7 @@ public:
 			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &DestR);
 			SDL_RenderPresent(dkSdlWindow->sdlren);
 			//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+		}
 		}
 	}
 
