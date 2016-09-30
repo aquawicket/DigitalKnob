@@ -24,6 +24,13 @@ int DKAssetsJS::OnlineAssets(duk_context* ctx)
 	return 1;
 }
 
+//////////////////////////////////////////
+int DKAssetsJS::Protocol(duk_context* ctx)
+{
+	duk_push_string(ctx, "file:");
+	return 1;
+}
+
 ///////////////////////////////////////////
 //int DKAssetsJS::AppendDataPath(duk_context* ctx)
 //{

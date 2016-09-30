@@ -51,3 +51,9 @@ function DKAssets_OnlineAssets()
 {
 	return online_assets;
 }
+
+////////////////////////////
+function DKAssets_Protocol()
+{
+	return protocol;
+}

@@ -12,6 +12,7 @@ public:
 	void Init();
 	static int LocalAssets(duk_context* ctx);
 	static int OnlineAssets(duk_context* ctx);
+	static int Protocol(duk_context* ctx);
 	//static int AppendDataPath(duk_context* ctx);
 };
 
