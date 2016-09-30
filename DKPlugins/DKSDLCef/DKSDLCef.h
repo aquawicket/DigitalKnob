@@ -110,11 +110,8 @@ public:
 				SDL_UnlockTexture(dkSdlCef->background_image);
 			}
 		}
-		else{
-		//if(type == PET_POPUP){ //FIXME
+		else if(type == PET_POPUP){ //FIXME
 			//if(dirtyRects.size() == 0){ return; }
-			//SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-			//if(!surface){ return; }
 			if(!dkSdlCef->popup_image){
 				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
