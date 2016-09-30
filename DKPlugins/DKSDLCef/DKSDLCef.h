@@ -47,6 +47,7 @@ public:
 	SDL_Texture* cef_image;
 	SDL_Texture* background_image;
 	SDL_Texture* popup_image;
+	CefRect popup_rect;
 	DKSDLCefHandler* cefHandler;
 };
 
@@ -127,7 +128,6 @@ public:
 				std::memcpy(mPixels, buffer, width * height * 4);
 				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
-
 		}
 
 		if(dkSdlCef->cef_image) {	
@@ -135,13 +135,28 @@ public:
 			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->background_image, NULL, NULL);
 			if(dkSdlCef->popup_image){
 				SDL_Rect popup;
-				popup.x = 0;
-				popup.y = 0;
-				SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &popup.w, &popup.h);
+				popup.x = dkSdlCef->popup_rect.x;
+				popup.y = dkSdlCef->popup_rect.y;
+				popup.w = dkSdlCef->popup_rect.width;
+				popup.h = dkSdlCef->popup_rect.height;
 				SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &popup);	
 			}
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
+	}
+
+	///////////////////////////////////////////////////////////
+	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show){
+		if(!show){
+			dkSdlCef->popup_image = NULL;
+			return;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////////
+	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect){
+		if(rect.width <= 0 || rect.height <= 0){ return; }
+		dkSdlCef->popup_rect = rect;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
