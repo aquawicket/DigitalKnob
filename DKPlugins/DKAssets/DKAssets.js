@@ -14,14 +14,15 @@ if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
 
 var protocol = document.location.protocol;
 online_assets = "http://"+hostname+pathname;
-//if(protocol != "file:"){
+if(protocol != "file:"){
 	local_assets = "http://"+hostname+pathname;
-//}
+}
 
 appfilename = pathname.replace("/","");
 appfilename = appfilename.replace("/","");
 
 var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
+//if(absolutepath){online_assets = absolutepath;}
 
 DKLog("href: "+href+"\n", DKINFO);
 DKLog("hostname: "+hostname+"\n", DKINFO);
