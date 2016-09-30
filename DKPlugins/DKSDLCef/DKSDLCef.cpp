@@ -16,6 +16,7 @@
 void DKSDLCef::Init()
 {
 	cef_image = NULL;
+	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	id = data[1];
 	dkCef = DKCef::Get(id);

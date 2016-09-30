@@ -45,6 +45,7 @@ public:
 	float _scrollFactor;
 
 	SDL_Texture* cef_image;
+	SDL_Texture* popup_image;
 	DKSDLCefHandler* cefHandler;
 };
 
@@ -104,32 +105,32 @@ public:
 			if(dirtyRects.size() == 0){ return; }
 			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 			if(!surface){ return; }
-
-			SDL_Texture* popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			if(!dkSdlCef->popup_image){
+				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			}
+			int w, h;
+			SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &w, &h);
+			if(w != width || h != height){
+				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			}
 			void* mPixels;
 			int mPitch;
-			if(SDL_LockTexture(popup_image, NULL, &mPixels, &mPitch) == 0){
+			if(SDL_LockTexture(dkSdlCef->popup_image, NULL, &mPixels, &mPitch) == 0){
 				//copies popup bitmap to sdl texture
 				std::memcpy(mPixels, buffer, width * height * 4);
-				SDL_UnlockTexture(popup_image);
+				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
+		}
 
-			SDL_Rect SrcR;
-			SrcR.x = 0;
-			SrcR.y = 0;
-			SrcR.w = width;
-			SrcR.h = height;
+		if(dkSdlCef->cef_image && dkSdlCef->popup_image){
 			SDL_Rect DestR;
 			DestR.x = 0;
 			DestR.y = 0;
-			DestR.w = width;
-			DestR.h = height;
-			SDL_SetTextureBlendMode(dkSdlCef->cef_image, SDL_BLENDMODE_BLEND);
-			SDL_SetTextureBlendMode(popup_image, SDL_BLENDMODE_BLEND);
+			SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &DestR.w, &DestR.h);
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
-			SDL_RenderCopy(dkSdlWindow->sdlren, popup_image, &SrcR, &DestR);
-			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-			//SDL_DestroyTexture(popup_image);
+			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &DestR);
+			SDL_RenderPresent(dkSdlWindow->sdlren);
+			//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
 	}
 
