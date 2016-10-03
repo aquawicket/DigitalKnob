@@ -54,10 +54,6 @@ void DKDuktape::Init()
 		
 		DKCreate("DKJS");
 
-		//load Rocket specific javascript code
-		DKString user = DKFile::local_assets + "DKRocket/DKRocket.js";
-		LoadFile(user);
-
         DKString user = DKFile::local_assets+"User.js";
 		LoadFile(user);
 	}
