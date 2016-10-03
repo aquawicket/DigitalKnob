@@ -77,7 +77,7 @@ function DKLog(string, lvl)
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 DKLog("*** DigitalKnob ***", DKSUCCESS);
-DKLog(DK_GetNavigator()+"\n");
+DKLog(DK_GetBrowser()+"\n");
 
 ////////////////////
 function DK_Reload()
@@ -157,6 +157,9 @@ function DK_GetBrowser()
     else if(navigator.userAgent.indexOf("Chrome") != -1 ){
 		return "CHROME";
     }
+	else if(navigator.userAgent.indexOf("Cef") != -1 ) {
+        return "CEF";
+    }
     else if(navigator.userAgent.indexOf("Safari") != -1){
         return "SAFARI";
     }
@@ -165,7 +168,7 @@ function DK_GetBrowser()
     }
     else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )){ //IF IE > 10
 		return "IE";
-    }  
+    }
     else {
        return "UNKNOWN BROWSER";
     }
