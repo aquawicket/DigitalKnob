@@ -111,23 +111,26 @@ bool DKSDLCef::handle(SDL_Event *event)
 {
 	if(!dkCef->current_browser){ return false; }
 
-	switch(event->type){
+	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
+	//DKLog("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n", DKDEBUG);
+
+	//switch(event->type){
 		//case SDL_MOUSEMOTION:
 		//case SDL_DRAG:
 		//case SDL_MOUSEBUTTONDOWN:
 		//case SDL_MOUSEBUTTONUP:
 		//case SDL_MOUSEBUTTONDOUBLECLICK:
 		//case SDL_MOUSEWHEEL:
-		{
+		//{
 			//if(transparentPixel(event) && !_mouseLMBdown){
-			//	if(event->type == SDL_MOUSEBUTTONUP){
+				//if(event->type == SDL_MOUSEBUTTONUP){
 					//dkCef->current_browser->GetHost()->SendFocusEvent(false);
 					//dkCef->inFocus = false;
-			//	}
-			//	return false;
+				//}
+				//return false;
 			//}
-		}
-	}
+		//}
+	//}
 
 	switch(event->type){
 		case SDL_MOUSEBUTTONDOWN:{

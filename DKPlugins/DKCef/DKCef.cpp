@@ -12,11 +12,12 @@
 #include "DKWindows.h"
 #endif
 
-CefClient* DKCef::cefHandler = NULL;
+//CefClient* DKCef::cefHandler = NULL;
 
 //////////////////
 void DKCef::Init()
 {
+	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+") \n", DKDEBUG);
