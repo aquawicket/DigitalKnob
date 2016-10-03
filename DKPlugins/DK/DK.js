@@ -77,6 +77,7 @@ function DKLog(string, lvl)
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 DKLog("*** DigitalKnob ***", DKSUCCESS);
+DKLog(DK_GetNavigator()+"\n");
 
 ////////////////////
 function DK_Reload()
@@ -168,6 +169,27 @@ function DK_GetBrowser()
     else {
        return "UNKNOWN BROWSER";
     }
+}
+
+//////////////////////////
+function DK_GetUserAgent()
+{
+	return navigator.userAgent;
+}
+
+//////////////////////////
+function DK_GetNavigator()
+{
+	var txt = "";
+	txt += "Browser CodeName: " + navigator.appCodeName + "\n";
+	txt += "Browser Name: " + navigator.appName + "\n";
+	txt += "Browser Version: " + navigator.appVersion + "\n";
+	txt += "Cookies Enabled: " + navigator.cookieEnabled + "\n";
+	txt += "Browser Language: " + navigator.language + "\n";
+	txt += "Browser Online: " + navigator.onLine + "\n";
+	txt += "Platform: " + navigator.platform + "\n";
+	txt += "User-agent header: " + navigator.userAgent + "\n";
+	return txt;
 }
 
 ////////////////
