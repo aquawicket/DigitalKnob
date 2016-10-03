@@ -117,6 +117,7 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
+	if(!url){ return; }
 	DKLog("DKWidget("+url+", "+parent+") \n", DKDEBUG);
 	
 	//if(filesloaded.indexOf(url) != -1){
