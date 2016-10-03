@@ -104,6 +104,7 @@ void DKCef::Init()
     }
     
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
+	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
 	//DKLog("CefInitialize \n", DKINFO);
 	result = CefInitialize(args, settings, cefApp, NULL);
