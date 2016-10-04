@@ -47,6 +47,7 @@ void DKWidget::Init()
 		data[2] = "body";
 	}
 	
+	if(same(data[1],"DKWidget0")){ return; }
 	CreateWidget(data[1]);
 }
 
@@ -86,21 +87,23 @@ bool DKWidget::CreateWidget(const DKString& file)
 {
 	//DKLog("DKWidget::CreateWidget("+file+")\n", DKDEBUG);
 
-	root = NULL;
 	DKString id;
-	DKFile::GetFileName(file, id);
-	DKString path = file;
 	DKString html;
-	if(DKFile::VerifyPath(path)){ 
-		DKString file_path;
-		DKFile::GetFilePath(path, file_path);
-		DKFile::FileToString(path, html); //Convert file to a string
-		//DKAssets::AppendDataPath(file_path); //If this file's path is not in the datapath list, add it
+	DKString path = file;
+	if(file.empty()){
+		DKString id = "NewWidget.html";
+		html = "<div id=\"" + id + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 	else{
-		//blank widget
-		html = "<div id=\""+id+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
+		if (!DKFile::VerifyPath(path)) { return false; }
 	}
+
+	root = NULL;
+	DKString file_path;
+	DKFile::GetFileName(file, id);		
+	DKFile::GetFilePath(path, file_path);
+	DKFile::FileToString(path, html); //Convert file to a string
+	//DKAssets::AppendDataPath(file_path); //If this file's path is not in the datapath list, add it
 
 	//Prep the string into rocket compatible code
 	DKString rml;
