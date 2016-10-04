@@ -9,14 +9,15 @@ var window = new Window();
 function Document()
 {
 	this.body = new Element("body");
-	this.getElementById = function(id){ return new Element(id); }
+	this.getElementById = function(id){ return Element(id); }
 	this.hasFocus = function(){ return true;}
 }
 
-/////////////////////
-function Element(id){
+////////////////////
+function Element(id)
+{
 	this.id = id;
-	//this.parentNode = DKWidget_GetParent(id);
+	this.parentNode = function(id){ return Element(DKWidget_GetParent(id)); }
 }
 
 ////////////////////
@@ -27,9 +28,9 @@ function Navigator()
 	this.appVersion = "Rocket/1.3.1";
 	this.cookieEnabled = false;
 	//this.geolocation;
-	this.javaEnabled = function(){	return false; }
+	this.javaEnabled = function(){ return false; }
 	this.language = "en-US";
-	this.onLine = false;
+	this.onLine = false; 
 	this.platform = DK_GetOS();
 	this.product = "Rocket";
 	this.userAgent = "Rocket/1.3.1";
