@@ -17,7 +17,7 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	if(DK_Type(event, "keypress")){
-		DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n");
+		//DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n");
 		DKDebug_LogKey(DKWidget_GetValue(event));
 		DKDebug_CheckKeys();
 	}
@@ -43,6 +43,7 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkreload") != -1){ DKDebug_RestartApp(); key_history = []; }
 	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
+	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
 }
 
 ///////////////////////////////
@@ -124,3 +125,22 @@ function DKDebug_ClearConsole()
 	DK_System("cls");
 }
 
+////////////////////////////
+function DKDebug_PrintInfo()
+{
+	DKLog("\n**** DKOBJECTS ****\n");
+	var objects = DK_GetObjects();
+	var arry = objects.split(",");
+	for(var i=0; i<arry.length; i++){
+		if(!arry[i]){ continue; }
+		DKLog(arry[i]+"\n");
+	}
+		
+	DKLog("**** DKEVENTS ****\n");
+	var events = DK_GetEvents();
+	var arry = events.split(",");
+	for(var i=0; i<arry.length; i++){
+		if(!arry[i]){ continue; }
+		DKLog(arry[i]+"\n");
+	}
+}
