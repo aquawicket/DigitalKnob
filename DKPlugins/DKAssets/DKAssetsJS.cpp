@@ -7,6 +7,7 @@
 void DKAssetsJS::Init()
 {
 	DKDuktape::AttachFunction("DKAssets_LocalAssets", DKAssetsJS::LocalAssets, 0);
+	DKDuktape::AttachFunction("DKAssets_Protocol", DKAssetsJS::Protocol, 0);
 	//DKDuktape::AttachFunction("DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath, 1);
 }
 
