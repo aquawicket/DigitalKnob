@@ -17,7 +17,7 @@ void DKJavascript::Init()
 	}
 	
     DKString user = DKFile::local_assets+data[1];
-	DKDuktape::LoadFile(user);
+	if(!DKDuktape::LoadFile(user)){ return; }
 	DKDuktape::CallInit(user);
 }
 
