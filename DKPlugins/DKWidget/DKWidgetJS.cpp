@@ -71,6 +71,8 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetClientWidth", DKWidgetJS::GetClientWidth, 1);
 	DKDuktape::AttachFunction("DKWidget_GetClientHeight", DKWidgetJS::GetClientHeight, 1);
 
+	DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
+	DKDuktape::LoadFile(jsfile);
 }
 
 ///////////////////////////////////////////
