@@ -121,9 +121,9 @@ int DKJS::_DKCreate(duk_context* ctx)
 		return 1;
 	}
 
-	//Look for a callback function, and call it if one exists.
+	//Look for a callback function, and call it if one exists. FIXME
 	if(callback_found){
-		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0) { // JsFunc call failed
+		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
 			DKLog("DKJS::_DKCreate(): JsFunc call failed \n", DKERROR);
 			printf("Error: %s\n", duk_safe_to_string(ctx, -1));
 		}
