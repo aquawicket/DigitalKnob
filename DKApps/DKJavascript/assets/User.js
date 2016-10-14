@@ -1,1 +1,1 @@
-DKCreate("Test.js");
+DKCreate("Test.js", function(){});
