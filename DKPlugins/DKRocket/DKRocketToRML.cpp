@@ -104,6 +104,10 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
 	// <iframe> tags
+	if(!element){
+		DKLog("DKRocketToRML::PostProcess(): element invalid", DKERROR);
+		return false;
+	}
 	Rocket::Core::ElementList iframes;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
