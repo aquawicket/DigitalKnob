@@ -41,7 +41,7 @@ DKObject* DKClass::_Instance(const DKString& data)
 		return (*classes)[arry[0]]->Instance("");
 	}
 
-	DKLog("DKClass: "+arry[0]+" not registered\n", DKWARN);
+	DKLog("DKClass::_Instance "+arry[0]+" not registered\n", DKWARN);
 	DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
 	return NULL;
 }
