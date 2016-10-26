@@ -75,8 +75,8 @@ bool DKClass::_Valid(const DKString& data)
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 
-	DKLog("DKClass: "+arry[0]+" not registered\n", DKWARN);
-	DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	//DKLog("DKClass: "+arry[0]+" not registered\n", DKWARN);
+	//DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
 	return NULL;
 }
 
