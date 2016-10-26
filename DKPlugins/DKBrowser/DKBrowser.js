@@ -161,21 +161,23 @@ function DKBrowser_OnEvent(event)
 		DKCreate("DKBrowser/DKBrowserMenu.js");
 	}
 	if(DK_Type(event, "DKCef_OnFullscreen")){
+		DKLog("DKCef_OnFullscreen");
 		var value = DKWidget_GetValue(event);
 		if(value == "true"){
 			DKWidget_Hide("Tabs");
 			DKWidget_Hide("Menu");
-			parent = DKWidget_GetParent("DKCefFrame");
-			DKWidget_SetProperty("DKCefFrame","top","0rem");
-			DKWidget_SetProperty("DKCefFrame","z-index","100");
-			DKWidget_AppendChild("body", "DKCefFrame");
+			DKWidget_SetProperty("DKBrowser_cef","top","0rem");
+			DKWidget_SetProperty("DKBrowser_cef","z-index","100");
+			DKWidget_AppendChild("body", "DKBrowser_cef");
+			DKWindow_Fullscreen();
 		}
 		else{
 			DKWidget_Show("Tabs");
 			DKWidget_Show("Menu");
-			DKWidget_SetProperty("DKCefFrame","top","44rem");
-			DKWidget_RemoveProperty("DKCefFrame","z-index","100");
-			DKWidget_AppendChild(parent, "DKCefFrame");
+			DKWidget_SetProperty("DKBrowser_cef","top","44rem");
+			DKWidget_RemoveProperty("DKBrowser_cef","z-index","100");
+			DKWidget_AppendChild("body", "DKBrowser_cef");
+			DKWindow_Windowed();
 		}
 	}
 	if(DK_Id(event,"Settings")){
