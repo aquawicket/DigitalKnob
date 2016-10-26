@@ -105,7 +105,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 	//we will refer to all the files in the assets folder in this case. 
 	DKString exepath;
 	DKFile::GetExePath(exepath);
-    DKLog("exepath is: "+exepath+"\n", DKINFO);
+    DKLog("DKFile::exepath is: "+exepath+"\n", DKINFO);
 
 	//TODO:
 	//get rid of the tailing / ?
