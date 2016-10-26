@@ -44,6 +44,7 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
+	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }	
 }
 
 ///////////////////////////////
