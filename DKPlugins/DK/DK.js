@@ -17,6 +17,7 @@ function DK_LogGuiConsole(){DKLog("DK_LogGuiConsole(): not available for javascr
 function DK_GetScreenWidth(){DKLog("DK_GetScreenWidth(): not available for javascript", DKERROR); return; }
 function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for javascript", DKERROR); return; }
 function DK_System(){DKLog("DK_System(): not available for javascript", DKERROR); return; }
+function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for javascript", DKERROR); return; }
 
 var DKERROR = 0;     //Red
 var DKWARN = 1;      //Yellow
