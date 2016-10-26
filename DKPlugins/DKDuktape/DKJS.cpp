@@ -15,6 +15,7 @@ void DKJS::Init()
 	DKCreate("DKAssetsJS");
 	//DKLog("DKJS::Init() \n", DKDEBUG);
 
+	/*
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
 	DKString warnings;
@@ -30,6 +31,7 @@ void DKJS::Init()
 	if(same(info,"OFF")){ log_info = false; }
 	if(same(debug,"OFF")){ log_debug = false; }
 	if(same(file,"ON")){ log_file = true; }
+	*/
 	
 	duk_eval_string(DKDuktape::ctx, "var DKERROR = 0;");
 	duk_eval_string(DKDuktape::ctx, "var DKWARN = 1;");
@@ -108,12 +110,6 @@ int DKJS::_DKCreate(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	
-	bool callback_found = false;
-	if (duk_is_function(ctx, -1)) {
-        //DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
-		callback_found = true;
-	}
-
 	DKObject* obj = DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
@@ -121,8 +117,16 @@ int DKJS::_DKCreate(duk_context* ctx)
 		return 1;
 	}
 
+	bool callback_found = false;
+	if (duk_is_function(ctx, -1)) {
+		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
+		callback_found = true;
+	}
+
 	//Look for a callback function, and call it if one exists. FIXME
 	if(callback_found){
+		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n",DKDEBUG); }
+		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n", DKDEBUG); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
 			DKLog("DKJS::_DKCreate(): JsFunc call failed \n", DKERROR);
 			printf("Error: %s\n", duk_safe_to_string(ctx, -1));
