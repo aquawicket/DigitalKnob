@@ -140,6 +140,7 @@ function CreateWidget(url, parent)
 		//top.document.body.offsetHeight; // no need to store this anywhere, the reference is enough
 		//top.document.body.style.display='block';
 	}
+	filesloaded += url+","; //add file to loaded list
 	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
 }
 
