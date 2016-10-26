@@ -111,11 +111,11 @@ function DK_GetEvents()
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
 			out += events[i].name + ",";
-			DKLog(events[i].name);
+			//DKLog(events[i].name);
 		}
 		else{
 			out += events[i] + " : ";
-			DKLog(events[i]);
+			//DKLog(events[i]);
 		}
 	}
 	return out;

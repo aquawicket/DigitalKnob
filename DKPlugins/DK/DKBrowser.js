@@ -13,7 +13,7 @@ document.documentElement.style.fontSize = "1.0px";
 var mouseX;
 var mouseY;
 var events = [];
-var filesloaded="";
+var filesloaded = "";
 
 ///////////////////////////////////
 document.onmousemove = function(e){
@@ -100,7 +100,7 @@ function LoadJS(url, callback)
 				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
-			//filesloaded += url+","; //add file to loaded list
+			filesloaded += url+","; //add file to loaded list
 			done = true;
 			callback && callback();
 		}

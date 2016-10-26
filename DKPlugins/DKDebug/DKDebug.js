@@ -151,7 +151,7 @@ function DKDebug_PrintInfo()
 		if(!arry[i]){ continue; }
 		DKLog(arry[i]+"\n");
 	}
-		
+
 	DKLog("**** DKEVENTS ****\n");
 	var events = DK_GetEvents();
 	var arry = events.split(",");
