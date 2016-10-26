@@ -123,7 +123,22 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	DK_System("cls");
+	if(DK_GetBrowser() == "DigitalKnob"){
+		DK_System("cls");
+	}
+	else{
+		console.API;
+		if(typeof console._commandLineAPI !== 'undefined'){
+			console.API = console._commandLineAPI; //chrome
+		}
+		else if(typeof console._inspectorCommandLineAPI !== 'undefined'){
+			console.API = console._inspectorCommandLineAPI; //Safari
+		} 
+		else if(typeof console.clear !== 'undefined'){
+			console.API = console;
+		}
+		console.API.clear();
+	}
 }
 
 ////////////////////////////

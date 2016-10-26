@@ -294,25 +294,25 @@ function DKWidget_GetValue(variable)
 	if(typeof variable === "string"){ //id
 		//DKLog("GetValue("+variable+") -> typeof variable === string\n", DKDEBUG);
 		var ele = document.getElementById(variable);
-		if(!ele){ DKLog("GetValue("+variable+"): Cannot find element. \n"); /*return false;*/ }
+		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n"); /*return false;*/ }
 		if(ele){ 
-			//DKLog("GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
+			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
 			return ele.value; 
 		}
 		
-		DKLog("GetValue("+variable+"): Could not get value. \n", DKERROR);
+		DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 		return false;
 	}
 	
 	if(typeof variable === "object"){
-		DKLog("GetValue("+variable+") -> typeof variable === object\n", DKDEBUG);
-		DKLog("GetValue("+variable+") -> variable.nodeType == "+variable.nodeType+"\n", DKDEBUG);
-		DKLog("GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n", DKDEBUG);
-		DKLog("GetValue("+variable+") -> variable.type == "+variable.type+"\n", DKDEBUG);
+		//DKLog("DKWidget_GetValue("+variable+") -> typeof variable === object\n", DKDEBUG);
+		//DKLog("DKWidget_GetValue("+variable+") -> variable.nodeType == "+variable.nodeType+"\n", DKDEBUG);
+		//DKLog("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n", DKDEBUG);
+		//DKLog("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n", DKDEBUG);
 		if(variable.nodeType == 1){
 			DKLog("variable.tagName: "+variable.tagName+"\n");
 			if(variable.tagName == "INPUT"){
-				DKLog("GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
+				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
 				return variable.value;
 			}
 			return DKWidget_GetInnerHtml(variable);
@@ -374,20 +374,20 @@ function DKWidget_GetValue(variable)
 				return width+","+height;
 			}
 			var ele = DKWidget_GetElement(event);
-			DKLog("GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
+			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
 			return ele.value;
 		}
 		else{ //element or other object
 			if(variable.value){
-				DKLog("GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
+				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
 				return variable.value;
 			}
-			//DKLog("GetValue("+variable+") -> "+variable[2]+"\n", DKDEBUG);
+			//DKLog("DKWidget_GetValue("+variable+") -> "+variable[2]+"\n", DKDEBUG);
 			return variable[2];
 		}
 	}
 	
-	DKLog("ERROR: GetValue(): unknown type", DKERROR);
+	DKLog("ERROR: DKWidget_GetValue(): unknown type", DKERROR);
 	return false;
 }
 
