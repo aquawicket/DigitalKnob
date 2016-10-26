@@ -144,6 +144,7 @@ function DKDebug_ClearConsole()
 ////////////////////////////
 function DKDebug_PrintInfo()
 {
+	DKLog("\n"); 
 	DKLog("\n**** DKOBJECTS ****\n");
 	var objects = DK_GetObjects();
 	var arry = objects.split(",");
@@ -151,7 +152,8 @@ function DKDebug_PrintInfo()
 		if(!arry[i]){ continue; }
 		DKLog(arry[i]+"\n");
 	}
-
+	
+	DKLog("\n");
 	DKLog("**** DKEVENTS ****\n");
 	var events = DK_GetEvents();
 	var arry = events.split(",");
@@ -159,4 +161,6 @@ function DKDebug_PrintInfo()
 		if(!arry[i]){ continue; }
 		DKLog(arry[i]+"\n");
 	}
+	
+	DKLog("\n"); 
 }
