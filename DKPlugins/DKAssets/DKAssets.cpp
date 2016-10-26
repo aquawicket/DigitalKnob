@@ -15,14 +15,14 @@ void DKAssets::Init()
 	if(DKAssets::CheckAssetsPath(datapath)){
 		DKFile::MakeDir(DKFile::local_assets+"USER");
 	}
-	DKLog("local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
+	DKLog("DKFile::local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
 
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){
 		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/";
 	}
 
-	DKLog("online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
+	DKLog("DKFile::online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
 
 #ifdef WIN32
 	DKString console;
