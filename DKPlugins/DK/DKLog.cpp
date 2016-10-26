@@ -26,12 +26,12 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
-	if(log_errors == false && lvl == DKERROR){ return; }
-	if(log_warnings == false && lvl == DKWARN){ return; }
-	if(log_success == false && lvl == DKSUCCESS){ return; }
-	if(log_info == false && lvl == DKINFO){ return; }
 	if(log_debug == false && lvl == DKDEBUG){ return; }
-
+	if(log_info == false && lvl == DKINFO){ return; }
+	if(log_warnings == false && lvl == DKWARN){ return; }
+	if(log_errors == false && lvl == DKERROR){ return; }
+	if(log_success == false && lvl == DKSUCCESS){ return; }
+	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
 		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);

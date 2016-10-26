@@ -15,34 +15,25 @@ void DKAssets::Init()
 	if(DKAssets::CheckAssetsPath(datapath)){
 		DKFile::MakeDir(DKFile::local_assets+"USER");
 	}
+
+	DKString file;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_FILE]", file);
+	if(same(file, "OFF")) { log_file = false; }
+	else{
+#ifndef ANDROID
+	//clear the log file
+	std::ofstream file_log;
+    DKString path = DKFile::local_assets+"log.txt";
+	file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
+	file_log.close();
+#endif		
+	}
+	
 	DKLog("DKFile::local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
 
 #ifdef WIN32
 	DKAssets::CopyAssets(NULL, NULL);
 #endif
-
-	DKString errors;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_ERRORS]", errors);
-	DKString warnings;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_WARNINGS]", warnings);
-	DKString info;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_INFO]", info);
-	DKString debug;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_DEBUG]", debug);
-	DKString file;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_FILE]", file);
-	if (same(errors, "OFF")) { log_errors = false; }
-	if (same(warnings, "OFF")) { log_warnings = false; }
-	if (same(info, "OFF")) { log_info = false; }
-	if (same(debug, "OFF")) { log_debug = false; }
-	if (same(file, "OFF")) { log_file = false; }
-
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
-	if(DKFile::online_assets.empty()){
-		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/";
-	}
-
-	DKLog("DKFile::online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
 
 #ifdef WIN32
 	DKString console;
@@ -52,14 +43,25 @@ void DKAssets::Init()
 	}
 #endif
 
-#ifndef ANDROID
-	//clear the log file
-	std::ofstream file_log;
-    DKString path = DKFile::local_assets+"log.txt";
-	file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
-	file_log.close();
-#endif
+	DKString debug;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_DEBUG]", debug);
+	DKString info;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_INFO]", info);
+	DKString warnings;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_WARNINGS]", warnings);
+	DKString errors;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_ERRORS]", errors);
+	if(!same(debug, "ON")) { log_debug = false; }
+	if(!same(info, "ON")) { log_info = false; }
+	if(same(warnings, "OFF")) { log_warnings = false; }
+	if(same(errors, "OFF")) { log_errors = false; }
+	
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
+	if(DKFile::online_assets.empty()){
+		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/";
+	}
 
+	DKLog("DKFile::online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
 }
 
 ////////////////////////////////////////////////
