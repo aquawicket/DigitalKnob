@@ -5,10 +5,11 @@
 [HEIGHT] 600
 [TRAYED] OFF
 [CONSOLE] ON
-[LOG_ERRORS] ON
-[LOG_WARNINGS] ON
+[LOG_DEBUG] ON
 [LOG_INFO] ON
-[LOG_FILE] OFF
+[LOG_WARNINGS] ON
+[LOG_ERRORS] ON
+[LOG_FILE] ON
 [SVN] https://github.com/aquawicket/DigitalKnob/trunk/
 [MYSVN]
 [DKPATH] C:/digitalknob
