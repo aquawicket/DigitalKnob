@@ -42,6 +42,10 @@ public:
 	{
 		DKLog("RegisterFunc("+name+") \n", DKINFO);
 		functions[name] = boost::bind(func, _this, _1);
+		if(!functions[name]){
+			DKLog("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
+			return;
+		}
 	}
 
 	////////////////////////////////////////////////
@@ -49,6 +53,10 @@ public:
 	{
 		DKLog("UnregisterFunc(" + name + ") \n", DKINFO);
 		functions.erase(name);
+		if(functions[name]) {
+			DKLog("UnegisterFunc(" + name + "): failed to unregister function \n", DKERROR);
+			return;
+		}
 	}
 	
 	///////////////////////////////////////////////////////
