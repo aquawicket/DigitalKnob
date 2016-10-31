@@ -40,6 +40,8 @@ void DKSDLCef::Init()
 void DKSDLCef::End()
 {
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
+	DKClass::UnregisterFunc(id + "::OnResize");
+	DKClass::UnregisterFunc("DKSDLCef::GetTexture::" + id);
 	cefHandler = NULL;
 	//cef_image = NULL;
 }

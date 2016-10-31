@@ -43,6 +43,13 @@ public:
 		DKLog("RegisterFunc("+name+") \n", DKINFO);
 		functions[name] = boost::bind(func, _this, _1);
 	}
+
+	////////////////////////////////////////////////
+	static void UnregisterFunc(const DKString& name)
+	{
+		DKLog("UnregisterFunc(" + name + ") \n", DKINFO);
+		functions.erase(name);
+	}
 	
 	///////////////////////////////////////////////////////
 	static void* CallFunc(const DKString& name, void* data)
