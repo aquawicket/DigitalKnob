@@ -161,6 +161,7 @@ void DKClass::GetClassList(DKStringArray& list)
 /////////////////////////////////////////////
 void DKClass::GetObjects(DKStringArray& list)
 {
+	list.clear();
 	std::map<DKString, DKClass*>::iterator it;
 	for(it = (*classes).begin(); it != (*classes).end(); ++it){
 		if((*classes)[it->first]){

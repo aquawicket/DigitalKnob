@@ -133,11 +133,12 @@ void DKCef::End()
 	current_browser = NULL;
 	for(unsigned int i = 0; i < browsers.size(); ++i){
 		browsers[i]	= NULL;
+		browsers.clear();
 	}
 	cefHandler = NULL;
 
 	if(instance_count == 1){
-		CefShutdown();
+		//CefShutdown();
 	}
 }
 

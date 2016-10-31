@@ -185,7 +185,7 @@ void DKDuktape::Reload()
 	}
 
 	//functions.clear();
-	DKClass::GetObjects(list);
+	//DKClass::GetObjects(list);
     DKString user = DKFile::local_assets+"User.js";
 	LoadFile(user);
 }
