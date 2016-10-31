@@ -184,8 +184,8 @@ void DKDuktape::Reload()
 		DKClose(list[i]);
 	}
 
-	//functions.clear();
-	//DKClass::GetObjects(list);
+	//functions.clear(); //Classes should unregister their own functions
+	DKClass::GetObjects(list); //debug: double check list
     DKString user = DKFile::local_assets+"User.js";
 	LoadFile(user);
 }
