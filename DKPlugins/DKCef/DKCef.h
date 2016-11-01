@@ -47,6 +47,7 @@ public:
 	CefBrowser* current_browser;
 	CefRefPtr<DKCefApp> cefApp;
 	CefClient* cefHandler; //external handler  (DKOSGCef or DKSDLCef)
+	HMODULE libcef;
 };
 
 

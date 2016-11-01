@@ -40,7 +40,7 @@ void DKCef::Init()
 #ifdef WIN32
 	//delay loading the DLL to move it's locations 
 	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
-	HMODULE libcef = LoadLibrary(cef_dll.c_str());
+	libcef = LoadLibrary(cef_dll.c_str());
 	if (!libcef){
 		DKLog("Could not load libcef.dll \n", DKERROR);
 	}
@@ -140,6 +140,7 @@ void DKCef::End()
 	if(instance_count == 1){
 		CefShutdown();
 	}
+	FreeLibrary(libcef);
 }
 
 ////////////////////////

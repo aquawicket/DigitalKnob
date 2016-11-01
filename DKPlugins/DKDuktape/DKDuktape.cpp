@@ -179,6 +179,8 @@ void DKDuktape::Reload()
 		if(has(list[i],"Window0")){ continue; }
 		if(has(list[i],"DKJS")){ continue; }
 		if(has(list[i],"Rocket")){ continue; }
+		if(has(list[i],"DKCef")){ continue; }
+		if(has(list[i],"DKSDLCef")){ continue; }
 		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO);
 		DKClose(list[i]);
 	}
