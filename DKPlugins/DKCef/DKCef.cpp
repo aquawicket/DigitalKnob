@@ -138,7 +138,7 @@ void DKCef::End()
 	cefHandler = NULL;
 
 	if(instance_count == 1){
-		//CefShutdown();
+		CefShutdown();
 	}
 }
 
