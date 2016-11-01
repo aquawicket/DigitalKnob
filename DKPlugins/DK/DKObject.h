@@ -107,7 +107,7 @@ public:
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//DKLog("Closing "+id+"\n", DKINFO);
 				if(instances.size() == 0) { return; }
-				DKLog("Closing "+instances[i]->data[1]+"\n", DKINFO);
+				DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKINFO);
 				instances[i]->End();
 				instances[i] = NULL;
 				instances.erase(instances.begin()+i);

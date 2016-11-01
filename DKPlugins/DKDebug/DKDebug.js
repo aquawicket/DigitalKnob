@@ -83,7 +83,9 @@ function DKDebug_KeyToChar(key)
 function DKDebug_RestartApp()
 {
 	//DKFrame_CloseAll();
+	DKWidget_SetInnerHtml("body", "");
 	DK_Reload();
+	
 }
 
 //////////////////////////////

@@ -179,13 +179,10 @@ void DKDuktape::Reload()
 		if(has(list[i],"Window0")){ continue; }
 		if(has(list[i],"DKJS")){ continue; }
 		if(has(list[i],"Rocket")){ continue; }
-		//if(has(list[i], "DKCef")) { continue; }
 		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO);
 		DKClose(list[i]);
 	}
 
-	//functions.clear(); //Classes should unregister their own functions
-	DKClass::GetObjects(list); //debug: double check list
     DKString user = DKFile::local_assets+"User.js";
 	LoadFile(user);
 }
