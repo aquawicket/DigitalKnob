@@ -209,7 +209,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 	{
-		DKLog("OnBeforeContextMenu \n", DKINFO);
+		DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+") \n", DKINFO);
 		model->Clear(); //remove original context menu
 		
 		DKString data;
