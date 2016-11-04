@@ -1,5 +1,10 @@
 //https://developers.facebook.com/docs/javascript
 
+//////////////////////////
+function DKFacebook_Init()
+{
+	
+}
 
 //////////////////////////////////
 function DKFacebookLogin(Function)
