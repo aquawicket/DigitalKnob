@@ -51,7 +51,7 @@ public:
 	DKSDLCefHandler* cefHandler;
 };
 
-
+/*/
 ///////////////////////////////////////
 class DKV8Handler : public CefV8Handler 
 {
@@ -72,14 +72,15 @@ public:
 		return false;
 	}
 
-  // Provide the reference counting implementation for this class.
-  IMPLEMENT_REFCOUNTING(DKV8Handler);
+	// Provide the reference counting implementation for this class.
+	IMPLEMENT_REFCOUNTING(DKV8Handler);
 };
+*/
 
 ///////////////////////////////////////////////////////////////////////
 class DKSDLCefHandler : public CefClient, public CefRenderHandler, 
 	public CefLoadHandler, public CefLifeSpanHandler, public CefContextMenuHandler,
-	public CefDownloadHandler, public CefDisplayHandler, public CefRenderProcessHandler
+	public CefDownloadHandler, public CefDisplayHandler, public CefV8Handler, public CefRenderProcessHandler
 {
 public:
 	DKSDLCefHandler(){}
@@ -94,6 +95,7 @@ public:
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
+	virtual CefRefPtr<CefV8Handler> GetCefV8Handler(){ return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler(){ return this; }
 	
 	/////////////////////////////////////////
@@ -248,15 +250,34 @@ public:
 		SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 	}
 
+	// FIXME: OnContextCreated never called
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 	{
 		DKLog("DKSDLCefHandler::OnContextCreated("+dkCef->id+") \n", DKINFO);
 		// Retrieve the context's window object.
 		CefRefPtr<CefV8Value> object = context->GetGlobal();
-		CefRefPtr<CefV8Handler> handler = new DKV8Handler();
+		CefRefPtr<CefV8Handler> handler = (CefV8Handler*)this;
 		CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
 		//object->SetValue("register", CefV8Value::CreateFunction("register", handler), V8_PROPERTY_ATTRIBUTE_NONE);
+	}
+
+	////////////////////////////////////////
+	bool Execute(const CefString& name,
+			CefRefPtr<CefV8Value> object,
+			const CefV8ValueList& arguments,
+			CefRefPtr<CefV8Value>& retval,
+			CefString& exception) OVERRIDE {
+
+			DKLog("DKSDLCefHandler::Execute("+dkCef->id+") \n", DKINFO);
+			if (name == "myfunc") {
+				// Return my string value.
+				retval = CefV8Value::CreateString("My Value!");
+				return true;
+			}
+
+			// Function does not exist.
+			return false;
 	}
 
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
