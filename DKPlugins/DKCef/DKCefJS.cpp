@@ -191,8 +191,8 @@ int DKCefJS::ShowDevTools(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
-int RunJavascript(duk_context* ctx)
+////////////////////////////////////////////
+int DKCefJS::RunJavascript(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
