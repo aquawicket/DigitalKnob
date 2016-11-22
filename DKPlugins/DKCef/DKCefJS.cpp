@@ -23,6 +23,7 @@ void DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers, 1);
 	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser, 1);
 	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools, 2);
+	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript, 2);
 }
 
 /////////////////////////////////////
@@ -187,6 +188,15 @@ int DKCefJS::ShowDevTools(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	int num = duk_require_int(ctx, 1);
 	DKCef::Get(id)->ShowDevTools(num);
+	return 1;
+}
+
+///////////////////////////////////
+int RunJavascript(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString string = duk_require_string(ctx, 1);
+	DKCef::Get(id)->RunJavascript(string);
 	return 1;
 }
 

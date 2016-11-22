@@ -329,3 +329,10 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 
 	CefVisitWebPluginInfo(new Visitor(browser));
 }
+
+///////////////////////////////////////////
+void DKCef::RunJavascript(DKString& string)
+{
+	CefRefPtr<CefFrame> frame = current_browser->GetMainFrame();
+	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+}

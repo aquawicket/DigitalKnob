@@ -32,6 +32,7 @@ public:
 	bool SelectBrowser(int num);
 	bool CloseBrowser(int num);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
+	void RunJavascript(DKString& string);
 	
 	DKString id;
 	int top;
