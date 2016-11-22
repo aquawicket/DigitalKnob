@@ -262,6 +262,7 @@ public:
 		//object->SetValue("register", CefV8Value::CreateFunction("register", handler), V8_PROPERTY_ATTRIBUTE_NONE);
 	}
 
+	// FIXME: Execute never called
 	////////////////////////////////////////
 	bool Execute(const CefString& name,
 			CefRefPtr<CefV8Value> object,
