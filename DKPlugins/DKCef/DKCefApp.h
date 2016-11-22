@@ -11,7 +11,7 @@ public:
 	MyV8Handler() {}
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, 
 						CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE {
-		DKLog("MyV8Handler::Execute() \n", DKDEBUG);
+		//DKLog("MyV8Handler::Execute() \n", DKDEBUG);
 		if (name == "myfunc") {
 			// Return my string value.
 			retval = CefV8Value::CreateString("My Value!");
@@ -61,7 +61,7 @@ public:
 		CefRefPtr<CefV8Value> object = context->GetGlobal(); // Retrieve the context's window object.
 		handler = new MyV8Handler();
 		CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
-		//object->SetValue("register", CefV8Value::CreateFunction("register", handler), V8_PROPERTY_ATTRIBUTE_NONE);
+		object->SetValue("myfunc", func, V8_PROPERTY_ATTRIBUTE_NONE);
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
