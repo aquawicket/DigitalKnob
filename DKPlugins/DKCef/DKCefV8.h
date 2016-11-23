@@ -10,7 +10,7 @@ class DKCefV8 : public DKObjectT<DKCefV8>
 public:
 	void Init();
 	void End();
-	bool MyFunc(CefV8ValueList arguments, CefRefPtr<CefV8Value>& retval);
+	static bool MyFunc(CefV8ValueList arguments, CefRefPtr<CefV8Value>& retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);

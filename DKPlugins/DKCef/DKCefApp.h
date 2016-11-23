@@ -69,9 +69,8 @@ public:
 		DKCreate("DKCefV8");
 	}
 
-	////////////////////////////////////////////////////////////////////////
-	template<class T>
-	static void AttachFunction(const DKString& name, bool (T::*func)(CefV8ValueList, CefRefPtr<CefV8Value>&), T* _this)
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	static void AttachFunction(const DKString& name, bool (*func)(CefV8ValueList, CefRefPtr<CefV8Value>&))
 	{
 		if(!object){
 			DKLog("DKCefApp::AttachFunction(): OnContextCreated() has not been called yet. \n", DKERROR);
@@ -79,7 +78,7 @@ public:
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
 		object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 
-		handler->functions[name] = boost::bind(func, _this, _1, _2);
+		handler->functions[name] = boost::bind(func, _1, _2);
 		if (!handler->functions[name]) {
 			DKLog("DKCefApp::AttachFunction()(" + name + "): failed to register function \n", DKERROR);
 			return;
