@@ -4,7 +4,7 @@
 
 CefRefPtr<MyV8Handler> DKCefApp::handler = NULL;
 CefRefPtr<CefV8Value> DKCefApp::object = NULL;
-std::map<DKString, boost::function<bool(CefV8ValueList, CefRefPtr<CefV8Value>&)>> MyV8Handler::functions;
+std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> MyV8Handler::functions;
 
 /////////////////////////////////////
 void DKCefApp::OnContextInitialized()

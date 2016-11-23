@@ -3,6 +3,8 @@
 #define DKCefApp_H
 #include <include/cef_app.h>
 
+typedef CefV8ValueList CefArgs;
+typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
 ///////////////////////////////////////
@@ -10,10 +12,10 @@ class MyV8Handler : public CefV8Handler
 {
 public:
 	MyV8Handler() {}
-	static std::map<DKString, boost::function<bool(CefV8ValueList, CefRefPtr<CefV8Value>&)>> functions;
+	static std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> functions;
 
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, 
-						CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE {
+	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
+						CefReturn retval, CefString& exception) OVERRIDE {
 		//DKLog("MyV8Handler::Execute() \n", DKDEBUG);
 		if(!functions[name]) {
 			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
@@ -69,8 +71,8 @@ public:
 		DKCreate("DKCefV8");
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	static void AttachFunction(const DKString& name, bool (*func)(CefV8ValueList, CefRefPtr<CefV8Value>&))
+	//////////////////////////////////////////////////////////////////////////////////
+	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		if(!object){
 			DKLog("DKCefApp::AttachFunction(): OnContextCreated() has not been called yet. \n", DKERROR);
