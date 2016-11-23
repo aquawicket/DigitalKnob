@@ -3,23 +3,24 @@
 #define DKCefApp_H
 #include <include/cef_app.h>
 
+class DKCefApp;
 
 ///////////////////////////////////////
 class MyV8Handler : public CefV8Handler
 {
 public:
 	MyV8Handler() {}
+	static std::map<DKString, boost::function<DKString(DKString)>> functions;
+
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, 
 						CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE {
 		//DKLog("MyV8Handler::Execute() \n", DKDEBUG);
-		if (name == "myfunc") {
-			// Return my string value.
-			retval = CefV8Value::CreateString("My Value!");
-			return true;
+		if(!functions[name]) {
+			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
+			return false;
 		}
-
-		// Function does not exist.
-		return false;
+		retval = CefV8Value::CreateString(functions[name]("input")); //TODO: input sould be arguments
+		return true;
 	}
 
 	// Provide the reference counting implementation for this class.
@@ -32,7 +33,8 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 public:
 	DKCefApp(){}
 
-	CefRefPtr<CefV8Handler> handler;
+	static CefRefPtr<MyV8Handler> handler;
+	static CefRefPtr<CefV8Value> object;
 
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
@@ -58,10 +60,29 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		DKLog("DKCefApp::OnContextCreated() \n", DKDEBUG);
-		CefRefPtr<CefV8Value> object = context->GetGlobal(); // Retrieve the context's window object.
+		if(object){ return; }
+		object = context->GetGlobal(); // Retrieve the context's window object.
 		handler = new MyV8Handler();
-		CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
-		object->SetValue("myfunc", func, V8_PROPERTY_ATTRIBUTE_NONE);
+		//CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
+		//object->SetValue("myfunc", func, V8_PROPERTY_ATTRIBUTE_NONE);
+		DKCreate("DKCefV8");
+	}
+
+	////////////////////////////////////////////////////////////////////////
+	template<class T>
+	static void AttachFunction(const DKString& name, DKString (T::*func)(DKString), T* _this)
+	{
+		if(!object){
+			DKLog("DKCefApp::AttachFunction(): OnContextCreated() has not been called yet. \n", DKERROR);
+		}
+		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
+		object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+
+		handler->functions[name] = boost::bind(func, _this, _1);
+		if (!handler->functions[name]) {
+			DKLog("DKCefApp::AttachFunction()(" + name + "): failed to register function \n", DKERROR);
+			return;
+		}
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);

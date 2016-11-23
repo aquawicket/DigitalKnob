@@ -2,6 +2,10 @@
 #include "DKCefApp.h"
 #include "DKFile.h"
 
+CefRefPtr<MyV8Handler> DKCefApp::handler = NULL;
+CefRefPtr<CefV8Value> DKCefApp::object = NULL;
+std::map<DKString, boost::function<DKString(DKString)>> MyV8Handler::functions;
+
 /////////////////////////////////////
 void DKCefApp::OnContextInitialized()
 {

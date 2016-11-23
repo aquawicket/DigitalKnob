@@ -1,13 +1,9 @@
-/*
 #include "DKCefV8.h"
-
-CefRefPtr<CefV8Handler> DKCefV8::handler;
 
 ////////////////////
 void DKCefV8::Init()
 {
-	handler = new DKV8Handler();
-	CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
+	DKCefApp::AttachFunction("myfunc", &DKCefV8::MyFunc, this);
 }
 
 ///////////////////
@@ -15,4 +11,11 @@ void DKCefV8::End()
 {
 
 }
-*/
+
+////////////////////////////////////////
+DKString DKCefV8::MyFunc(DKString input)
+{
+	DKLog("DKCefV8::MyFunc("+input+")", DKDEBUG);
+	return "MyFunc output";
+}
+
