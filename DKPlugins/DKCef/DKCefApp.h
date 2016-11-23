@@ -10,7 +10,7 @@ class MyV8Handler : public CefV8Handler
 {
 public:
 	MyV8Handler() {}
-	static std::map<DKString, boost::function<DKString(DKString)>> functions;
+	static std::map<DKString, boost::function<bool(CefV8ValueList, CefRefPtr<CefV8Value>&)>> functions;
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, 
 						CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE {
@@ -19,7 +19,10 @@ public:
 			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
 			return false;
 		}
-		retval = CefV8Value::CreateString(functions[name]("input")); //TODO: input sould be arguments
+		if(!functions[name](arguments, retval)){
+			DKLog("MyV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
+			return false;
+		}
 		return true;
 	}
 
@@ -59,18 +62,16 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		DKLog("DKCefApp::OnContextCreated() \n", DKDEBUG);
+		//DKLog("DKCefApp::OnContextCreated() \n", DKDEBUG);
 		if(object){ return; }
 		object = context->GetGlobal(); // Retrieve the context's window object.
 		handler = new MyV8Handler();
-		//CefRefPtr<CefV8Value> func = CefV8Value::CreateFunction("myfunc", handler);
-		//object->SetValue("myfunc", func, V8_PROPERTY_ATTRIBUTE_NONE);
 		DKCreate("DKCefV8");
 	}
 
 	////////////////////////////////////////////////////////////////////////
 	template<class T>
-	static void AttachFunction(const DKString& name, DKString (T::*func)(DKString), T* _this)
+	static void AttachFunction(const DKString& name, bool (T::*func)(CefV8ValueList, CefRefPtr<CefV8Value>&), T* _this)
 	{
 		if(!object){
 			DKLog("DKCefApp::AttachFunction(): OnContextCreated() has not been called yet. \n", DKERROR);
@@ -78,7 +79,7 @@ public:
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
 		object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 
-		handler->functions[name] = boost::bind(func, _this, _1);
+		handler->functions[name] = boost::bind(func, _this, _1, _2);
 		if (!handler->functions[name]) {
 			DKLog("DKCefApp::AttachFunction()(" + name + "): failed to register function \n", DKERROR);
 			return;
