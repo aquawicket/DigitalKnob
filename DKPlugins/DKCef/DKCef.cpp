@@ -68,7 +68,7 @@ void DKCef::Init()
 	settings.windowless_rendering_enabled = true;
 	//settings.no_sandbox = true;
 	settings.command_line_args_disabled = true;
-	settings.single_process = true; //CefRenderProcessHandler only works with this
+	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// settings.multi_threaded_message_loop = true; // not supported, except windows
