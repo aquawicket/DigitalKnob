@@ -863,6 +863,7 @@ function DKWidget_SetScale(scale)
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)
 {
+	//DKLog("DKWidget_OpenLink("+url+","+target+")\n");
 	//window.location = url;
 	window.open(url, target);
 }
