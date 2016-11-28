@@ -51,7 +51,7 @@ public:
 	DKSDLCefHandler* cefHandler;
 };
 
-///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
 {
