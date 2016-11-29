@@ -42,6 +42,7 @@
 #define DKSUCCESS 2    //Green
 #define DKINFO 3       //White
 #define DKDEBUG 4      //Blue
+#define DKFILTER 5      //Orange
 
 extern bool log_errors;
 extern bool log_warnings;

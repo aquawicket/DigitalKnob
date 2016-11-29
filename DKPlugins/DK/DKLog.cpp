@@ -31,6 +31,24 @@ void DKLog(const DKString& text, const int lvl)
 	if(log_warnings == false && lvl == DKWARN){ return; }
 	if(log_errors == false && lvl == DKERROR){ return; }
 	if(log_success == false && lvl == DKSUCCESS){ return; }
+
+	//If lvl is DKFILTER, check setting file for string
+	if(lvl == DKFILTER){
+		/* if string !contain any filters */
+		bool yes=false;
+		int i=0;
+		DKString value;
+		while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value)){
+			if(has(text,value)){
+				yes = true;
+				break;
+			}
+			i++;
+		}
+		if(!yes){
+			return;
+		}
+	}
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
@@ -48,6 +66,7 @@ void DKLog(const DKString& text, const int lvl)
 	if(lvl == DKSUCCESS){ color = DKGREEN; }
     if(lvl == DKINFO){ color = DKWHITE; }
 	if(lvl == DKDEBUG){ color = DKBLUE; }
+	if(lvl == DKFILTER){ color = DKYELLOW; }
 #elif !defined(LINUX)
     char color[10];// = 0;
 	if(lvl == DKERROR){ strcpy(color, DKRED); }
@@ -55,6 +74,7 @@ void DKLog(const DKString& text, const int lvl)
 	if(lvl == DKSUCCESS){ strcpy(color, DKGREEN); }
     if(lvl == DKINFO){ strcpy(color, DKWHITE); }
 	if(lvl == DKDEBUG){ strcpy(color, DKBLUE); }
+	if(lvl == DKFILTER){ strcpy(color, DKYELLOW); }
 #endif	
 
 #ifdef WIN32
@@ -83,6 +103,7 @@ void DKLog(const DKString& text, const int lvl)
 		if(lvl == DKSUCCESS){ clr = "green"; }
 		//if(lvl == DKINFO){ clr = "black"; }
 		if(lvl == DKDEBUG){ clr = "blue"; }
+		if(lvl == DKFILTER){ clr = "orange"; }
 		SendEvent("DKLog", "color", clr);
 		SendEvent("DKLog", "notify", text);
 	}
@@ -105,6 +126,9 @@ void DKLog(const DKString& text, const int lvl)
 		__android_log_write(ANDROID_LOG_INFO, "DKApp", text.c_str());
 	}
 	else if(lvl == DKDEBUG){
+		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", text.c_str());
+	}
+	else if(lvl == DKFILTER){
 		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", text.c_str());
 	}
 	else{
