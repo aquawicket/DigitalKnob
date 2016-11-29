@@ -34,7 +34,6 @@ void DKLog(const DKString& text, const int lvl)
 	if(log_errors == false && lvl == DKERROR){ return; }
 	if(log_success == false && lvl == DKSUCCESS){ return; }
 
-	/*
 	//If lvl is DKFILTER, check setting file for string
 	if(lvl == DKFILTER){
 		// if string !contain any filters
@@ -42,6 +41,8 @@ void DKLog(const DKString& text, const int lvl)
 		if(log_filter_all){ yes = true; }
 		int i=0;
 		DKString value;
+
+		return; //FIXME: This is loop is dangerous 
 		while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value) && !yes){
 			if(has(text,value)){
 				yes = true;
@@ -53,7 +54,6 @@ void DKLog(const DKString& text, const int lvl)
 			return;
 		}
 	}
-	*/
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
