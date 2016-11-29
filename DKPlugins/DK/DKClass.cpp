@@ -49,6 +49,8 @@ DKObject* DKClass::_Instance(const DKString& data)
 /////////////////////////////////////////////
 DKObject* DKClass::_Get(const DKString& data)
 {
+	DKLog("DKClass::_Get("+data+")\n", DKFILTER);
+	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -66,6 +68,8 @@ DKObject* DKClass::_Get(const DKString& data)
 //////////////////////////////////////////
 bool DKClass::_Valid(const DKString& data)
 {
+	DKLog("DKClass::_Valid("+data+")\n", DKFILTER);
+	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -83,6 +87,8 @@ bool DKClass::_Valid(const DKString& data)
 //////////////////////////////////////////////
 bool DKClass::_Available(const DKString& data)
 {
+	DKLog("DKClass::_Available("+data+")\n", DKFILTER);
+	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -104,6 +110,8 @@ bool DKClass::_Available(const DKString& data)
 //////////////////////////////////////////
 void DKClass::_Close(const DKString& data)
 {
+	DKLog("DKClass::_Close("+data+")\n", DKFILTER);
+	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 
@@ -133,6 +141,8 @@ void DKClass::_Close(const DKString& data)
 ////////////////////////
 void DKClass::CloseAll()
 {
+	DKLog("DKClass::CloseAll()\n", DKFILTER);
+	
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if((*classes)[rit->first]){
@@ -150,6 +160,8 @@ void DKClass::CloseAll()
 ///////////////////////////////////////////////
 void DKClass::GetClassList(DKStringArray& list)
 {
+	DKLog("DKClass::GetClassList(DKStringArray&)\n", DKFILTER);
+	
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for (rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if ((*classes)[rit->first]){
@@ -161,6 +173,8 @@ void DKClass::GetClassList(DKStringArray& list)
 /////////////////////////////////////////////
 void DKClass::GetObjects(DKStringArray& list)
 {
+	DKLog("DKClass::GetObjects(DKStringArray&)\n", DKFILTER);
+	
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;
 	for(it = (*classes).begin(); it != (*classes).end(); ++it){
