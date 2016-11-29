@@ -49,7 +49,7 @@ bool DKWindows::GetClipboard(DKString& text)
 ////////////////////////////////////////////////////////////////////////
 bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {
-	DKLog("DKWindows::GetPixelFromScreen("+toString(x)+","+toString(y)+",int&,int&,int&")\n", DKFILTER);
+	DKLog("DKWindows::GetPixelFromScreen("+toString(x)+","+toString(y)+",int&,int&,int&)\n", DKFILTER);
 	
 	HDC hdc_ = GetDC(GetDesktopWindow()) ;  //not sure if this is right or what exactly it does.
 	COLORREF color = GetPixel(hdc_, x, y);
