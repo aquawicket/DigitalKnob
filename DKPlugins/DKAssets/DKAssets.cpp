@@ -45,8 +45,8 @@ void DKAssets::Init()
 	}
 #endif
 
-	//DKString filter_all;
-	//DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_FILTER_ALL]", filter_all);
+	DKString filter_all;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_FILTER_ALL]", filter_all);
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_DEBUG]", debug);
 	DKString info;
@@ -55,7 +55,7 @@ void DKAssets::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_WARNINGS]", warnings);
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_ERRORS]", errors);
-	//if(!same(filter_all, "ON")) { log_filter_all = false; }
+	//if(!same(filter_all, "ON")) { log_filter_all = false; }  //FIXME
 	if(!same(debug, "ON")) { log_debug = false; }
 	if(!same(info, "ON")) { log_info = false; }
 	if(same(warnings, "OFF")) { log_warnings = false; }
