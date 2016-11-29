@@ -90,7 +90,7 @@ void DKUpdate::End()
 //////////////////////////////////////////////////
 bool DKUpdate::CheckForUpdate(const DKString& url)
 {
-	DKLog("DKUpdate::CheckForUpdate("+url+") \n", DKDEBUG);
+	DKLog("DKUpdate::CheckForUpdate("+url+")\n", DKDEBUG);
 
 	DKCurl::Instance("DKCurlUpdate");
 	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
@@ -135,7 +135,7 @@ bool DKUpdate::CheckForUpdate(const DKString& url)
 ////////////////////////////////////////////
 bool DKUpdate::DoUpdate(const DKString& url)
 {
-	DKLog("DKUpdate::DoUpdate("+url+") \n", DKDEBUG);
+	DKLog("DKUpdate::DoUpdate("+url+")\n", DKDEBUG);
 	DKString file;
 	DKFile::GetExeName(file);
 	DKString exepath;

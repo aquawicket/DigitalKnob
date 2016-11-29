@@ -108,6 +108,6 @@ void DKOSGRocket::OnResize(DKEvent* event)
 {
 	DKStringArray arry;
 	toStringArray(arry, event->data[0], ",");
-	DKLog("DKOSGRocket::OnResize("+arry[0]+","+arry[1]+") \n", DKINFO);
+	DKLog("DKOSGRocket::OnResize("+arry[0]+","+arry[1]+")\n", DKINFO);
 	guinode->setScreenSize(toInt(arry[0]), toInt(arry[1]));
 }

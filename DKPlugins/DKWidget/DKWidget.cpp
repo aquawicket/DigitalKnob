@@ -26,7 +26,7 @@ void DKWidget::Init()
 	}
 
 	DKString _data = toString(data, ",");
-	//DKLog("DKWidget::Init("+_data+") \n", DKDEBUG);
+	//DKLog("DKWidget::Init("+_data+")\n", DKDEBUG);
 
 	//data = ("DKWidget, file, parent")
 	if(data.size() < 2){	
@@ -64,7 +64,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	if(!root){ return; }
 	DKString id = root->GetId().CString();
 	if(id.empty()){ return; }
-	//DKLog("RemoveWidget("+id+") \n", DKINFO);
+	//DKLog("RemoveWidget("+id+")\n", DKINFO);
 	
 	//Remove all child DKWidgets and events
 	RemoveAllEventListeners(id);
@@ -144,7 +144,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 
 	int numChildren = temp->GetNumChildren();
 	for(int i = 0; i < numChildren; i++){
-		//DKLog("AppendChild("+data[2]+", temp->GetChild(0) \n", DKDEBUG);
+		//DKLog("AppendChild("+data[2]+", temp->GetChild(0)\n", DKDEBUG);
 		AppendChild(data[2], temp->GetChild(0));
 	}
 
@@ -385,7 +385,7 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id)
 {
-	DKLog("DKWidget::CreateElementBefore("+element+","+tag+","+id+") \n", DKDEBUG);
+	DKLog("DKWidget::CreateElementBefore("+element+","+tag+","+id+")\n", DKDEBUG);
 	DKElement* ele = CreateElement(tag);
 	
 	DKString ele_id;
@@ -477,7 +477,7 @@ bool DKWidget::Show(const DKString& id)
 ///////////////////////////////////////
 bool DKWidget::Hide(const DKString& id)
 {
-	//DKLog("DKWidget::Hide("+id+") \n");
+	//DKLog("DKWidget::Hide("+id+")\n");
 	if(!Hide(GetElementById(id))){ return false; }
 	return true;
 }
@@ -528,7 +528,7 @@ bool DKWidget::InsertBefore(const DKString& parent, DKElement* element)
 ////////////////////////////////////////////////
 bool DKWidget::RemoveElement(const DKString& id)
 {
-	DKLog("DKWidget::RemoveElement("+id+") \n", DKDEBUG);
+	DKLog("DKWidget::RemoveElement("+id+")\n", DKDEBUG);
 
 	//Remove all events and child events
 	DKStringArray elements;
@@ -930,7 +930,7 @@ bool DKWidget::PrependChild(DKElement* parent, DKElement* element)
 //////////////////////////////////////////////////////////////////
 bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 {
-	DKLog("DKWidget::InsertBefore("+GetId(parent)+","+GetId(element)+") \n", DKDEBUG);
+	DKLog("DKWidget::InsertBefore("+GetId(parent)+","+GetId(element)+")\n", DKDEBUG);
 	
 	if(!parent){
 		DKLog("InsertBefore(): parent invalid\n", DKERROR);
@@ -952,7 +952,7 @@ bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 	//get child
 	parent = par_store->GetFirstChild();
 	
-	DKLog("DKWidget::InsertBefore(): "+GetId(parent)+"->InsertBefore("+GetId(ele)+","+GetId(parent)+") \n", DKDEBUG);
+	DKLog("DKWidget::InsertBefore(): "+GetId(parent)+"->InsertBefore("+GetId(ele)+","+GetId(parent)+")\n", DKDEBUG);
 	//DKLog("par_store = "+GetId(par_store)+" \n", DKINFO);
 	par_store->InsertBefore(ele, parent);
 	return true;

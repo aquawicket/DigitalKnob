@@ -169,7 +169,7 @@ int DKFileJS::CopyFolder(duk_context* ctx)
 	DKString dst = duk_require_string(ctx, 1);
 	bool overwrite = duk_require_boolean(ctx, 2);
 	bool recursive = duk_require_boolean(ctx, 3);
-	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ") \n", DKINFO);
+	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n", DKINFO);
 	if (!DKFile::CopyFolder(src, dst, overwrite, recursive)){
 		DKLog("DKFile::CopyFolder(): failed. \n", DKERROR);
 		return 0;

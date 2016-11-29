@@ -96,7 +96,7 @@ bool DKMidi::GetOutputs(DKStringArray& outputs)
 //////////////////////////////////////////////
 bool DKMidi::ToggleInput(const DKString& name)
 {
-	DKLog("DKMidi::ToggleInput("+name+") \n", DKDEBUG);
+	DKLog("DKMidi::ToggleInput("+name+")\n", DKDEBUG);
 	for(unsigned int i=0; i<midiin->getPortCount(); ++i){
 		if(same(name,midiin->getPortName(i))){
 			midiin->openPort(i);
@@ -110,7 +110,7 @@ bool DKMidi::ToggleInput(const DKString& name)
 ///////////////////////////////////////////////
 bool DKMidi::ToggleOutput(const DKString& name)
 {
-	DKLog("DKMidi::ToggleOutput("+name+") \n", DKDEBUG);
+	DKLog("DKMidi::ToggleOutput("+name+")\n", DKDEBUG);
 	for(unsigned int i=0; i<midiout->getPortCount(); ++i){
 		if(same(name,midiout->getPortName(i))){
 			midiout->openPort(i);

@@ -93,7 +93,7 @@ void DKGLInfo::Init()
 
 	if (::getenv("DK_NO_GLSL")){
 		_supportsGLSL = false;
-		DKLog("Note: GLSL expressly disabled (DK_NO_GLSL) \n", DKINFO);
+		DKLog("Note: GLSL expressly disabled (DK_NO_GLSL)\n", DKINFO);
 	}
 	else{
 			/*

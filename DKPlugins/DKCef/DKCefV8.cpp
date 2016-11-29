@@ -16,7 +16,7 @@ void DKCefV8::End()
 bool DKCefV8::MyFunc(CefArgs args, CefReturn retval)
 {
 	DKString arg = args[0]->GetStringValue();
-	DKLog("DKCefV8::MyFunc("+arg+") \n", DKDEBUG);
+	DKLog("DKCefV8::MyFunc("+arg+")\n", DKDEBUG);
 
 	retval = CefV8Value::CreateString("output");
 	return true;

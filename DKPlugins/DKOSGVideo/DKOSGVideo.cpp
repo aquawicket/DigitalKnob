@@ -116,7 +116,7 @@ void DKOSGVideo::End()
 ///////////////////////////////////////////
 void DKOSGVideo::Play(const DKString& file)
 {
-	DKLog("DKOSGVideo::Play("+file+") \n", DKDEBUG);
+	DKLog("DKOSGVideo::Play("+file+")\n", DKDEBUG);
 	osg::Group* theRoot = DKOSGWindow::Instance("DKOSGWindow")->world;
 
 	bool useTextureRectangle = true;

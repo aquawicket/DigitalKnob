@@ -23,7 +23,7 @@ int DKThreadJS::_DKQueue(duk_context* ctx)
 {
 	DKString name = duk_require_string(ctx, 0);
 	DKString code = duk_require_string(ctx, 1);
-	DKLog("DKThreadJS::DKQueue("+name+","+code+") \n", DKDEBUG);
+	DKLog("DKThreadJS::DKQueue("+name+","+code+")\n", DKDEBUG);
 #ifdef WIN32
 	DKQueue(name, QueueItem, code); //Call in thread
 #else

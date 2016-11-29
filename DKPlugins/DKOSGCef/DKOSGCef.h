@@ -85,7 +85,7 @@ public:
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward){
-		//DKLog("BrowserClient::OnLoadingStateChange() \n");
+		//DKLog("BrowserClient::OnLoadingStateChange()\n");
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", "");
 	}
 
@@ -112,7 +112,7 @@ public:
 		CefBrowserSettings& settings,
 		bool* no_javascript_access) {
 		
-		DKLog("DKOSGCefHandler::OnBeforePopup() \n", DKINFO);
+		DKLog("DKOSGCefHandler::OnBeforePopup()\n", DKINFO);
 		//windowInfo.windowless_rendering_enabled = TRUE;
 		//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
 		return false;

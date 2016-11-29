@@ -481,7 +481,7 @@ bool DKSDLWindow::handle(SDL_Event *event)
 		}
 
         case SDL_KEYDOWN:{
-			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+") \n", DKDEBUG);
+			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n", DKDEBUG);
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase

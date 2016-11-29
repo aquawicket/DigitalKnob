@@ -557,7 +557,7 @@ int DKWidgetJS::SetFile(duk_context* ctx)
 int DKWidgetJS::GetOption(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	//DKLog("DKWidgetJS::GetOption("+id+") \n");
+	//DKLog("DKWidgetJS::GetOption("+id+")\n");
 	int n = 0;
 	if(!DKWidget::GetOption(id,n)){
 		return 0;
@@ -571,7 +571,7 @@ int DKWidgetJS::SetOption(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	int n = duk_require_int(ctx, 1);
-	//DKLog("DKWidgetJS::SelectOption("+id+") \n");
+	//DKLog("DKWidgetJS::SelectOption("+id+")\n");
 	if(!DKWidget::SetOption(id,n)){
 		return 0;
 	}
@@ -604,7 +604,7 @@ int DKWidgetJS::GetScale(duk_context* ctx)
 int DKWidgetJS::SetScale(duk_context* ctx)
 {
 	double scale = duk_require_number(ctx, 0);
-	//DKLog("DKWidgetJS::SetScale("+toString(scale)+") \n", DKDEBUG);
+	//DKLog("DKWidgetJS::SetScale("+toString(scale)+")\n", DKDEBUG);
 	DKWidget::SetProperty("html","font-size",toString(scale)+"px");
 	DKWidget::SetProperty("body","font-size",toString(scale)+"px");
 	return 1;

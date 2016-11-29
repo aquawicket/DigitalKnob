@@ -6,7 +6,7 @@
 /////////////////////
 void DKServer::Init()
 {
-	//DKLog("DKServer::Init() \n", DKDEBUG);
+	//DKLog("DKServer::Init()\n", DKDEBUG);
 	//DKCreate("DKServerJS");
 	thread = new DKThread();
 
@@ -40,7 +40,7 @@ tcp::socket& session::socket()
 /////////////////////
 void session::start()
 {
-	DKLog("session::start() \n", DKDEBUG);
+	DKLog("session::start()\n", DKDEBUG);
 	socket_.async_read_some(boost::asio::buffer(data_, max_length),
 		boost::bind(&session::handle_read, this,
 		boost::asio::placeholders::error,

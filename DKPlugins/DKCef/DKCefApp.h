@@ -16,7 +16,7 @@ public:
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {
-		//DKLog("MyV8Handler::Execute() \n", DKDEBUG);
+		//DKLog("MyV8Handler::Execute()\n", DKDEBUG);
 		if(!functions[name]) {
 			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
 			return false;
@@ -49,7 +49,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
-		//DKLog("DKCefApp::OnBeforeCommandLineProcessing() \n", DKDEBUG);
+		//DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKDEBUG);
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
 		command_line->AppendSwitchWithValue("disable-gpu", "1");
@@ -64,7 +64,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		//DKLog("DKCefApp::OnContextCreated() \n", DKDEBUG);
+		//DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
 		if(object){ return; }
 		object = context->GetGlobal(); // Retrieve the context's window object.
 		handler = new MyV8Handler();

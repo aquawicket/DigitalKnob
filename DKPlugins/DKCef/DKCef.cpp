@@ -17,10 +17,12 @@
 //////////////////
 void DKCef::Init()
 {
+	DKLog("DKCef::Init()\n", DKDEBUG);
+	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
-	//DKLog("DKCef::Init("+_data+") \n", DKDEBUG);
+	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
 		id = data[1];
 		top = toInt(data[2]);
@@ -130,7 +132,7 @@ void DKCef::Init()
 /////////////////
 void DKCef::End()
 {
-	DKLog("DKCef::End() \n", DKDEBUG);
+	DKLog("DKCef::End()\n", DKDEBUG);
 	current_browser = NULL;
 	for(unsigned int i = 0; i < browsers.size(); ++i){
 		browsers[i]	= NULL;

@@ -5,5 +5,5 @@
 ////////////////
 void App::Init()
 {
-	DKLog("App::Init() \n", DKDEBUG);
+	DKLog("App::Init()\n", DKDEBUG);
 }

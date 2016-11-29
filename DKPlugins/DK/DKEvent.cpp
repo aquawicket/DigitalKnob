@@ -21,7 +21,7 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
 
-	//DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+") \n");
+	//DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+")\n");
 	if(id.empty()){
 		DKLog("DKEvent::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified \n",DKERROR);
 		return false;

@@ -139,7 +139,7 @@ void* DKSDLWindowAndroid::onDropFile(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onDropFile("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onDropFile("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring filename = jd.env->NewStringUTF(arry[1].c_str());
@@ -152,7 +152,7 @@ void* DKSDLWindowAndroid::onResize(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onResize("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onResize("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint width = toInt(arry[1]);
@@ -168,7 +168,7 @@ void* DKSDLWindowAndroid::onPadDown(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onPadDown("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onPadDown("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -186,7 +186,7 @@ void* DKSDLWindowAndroid::onPadUp(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onPadUp("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onPadUp("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -204,7 +204,7 @@ void* DKSDLWindowAndroid::onJoy(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onJoy("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onJoy("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -219,7 +219,7 @@ void* DKSDLWindowAndroid::onHat(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onHat("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onHat("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -235,7 +235,7 @@ void* DKSDLWindowAndroid::onAddJoystick(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onAddJoystick("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onAddJoystick("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -258,7 +258,7 @@ void* DKSDLWindowAndroid::onRemoveJoystick(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onRemoveJoystick("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onRemoveJoystick("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint device_id = toInt(arry[1]);
@@ -293,7 +293,7 @@ void* DKSDLWindowAndroid::onKeyDown(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onKeyDown("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onKeyDown("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	if(toInt(arry[1]) == 4){ //ANDROID_BACK
@@ -311,7 +311,7 @@ void* DKSDLWindowAndroid::onKeyUp(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onKeyUp("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onKeyUp("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	if(toInt(arry[1]) == 4){ //ANDROID_BACK
@@ -338,7 +338,7 @@ void* DKSDLWindowAndroid::onTouch(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onTouch("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onTouch("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint touch_device_id_in = toInt(arry[1]);
@@ -356,7 +356,7 @@ void* DKSDLWindowAndroid::onMouse(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onMouse("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onMouse("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jint button = toInt(arry[1]);
@@ -372,7 +372,7 @@ void* DKSDLWindowAndroid::onAccel(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	//DKLog("DKSDLWindowAndroid::onAccel("+DKString(_data)+") \n", DKDEBUG);
+	//DKLog("DKSDLWindowAndroid::onAccel("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jfloat x = toFloat(arry[1]);
@@ -425,7 +425,7 @@ void* DKSDLWindowAndroid::onCommitText(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onCommitText("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onCommitText("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring text = jd.env->NewStringUTF(arry[1].c_str());
@@ -439,7 +439,7 @@ void* DKSDLWindowAndroid::onSetComposingText(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onSetComposingText("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onSetComposingText("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring text = jd.env->NewStringUTF(arry[1].c_str());
@@ -453,7 +453,7 @@ void* DKSDLWindowAndroid::onGetHint(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKSDLWindowAndroid::onGetHint("+DKString(_data)+") \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onGetHint("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring name = jd.env->NewStringUTF(arry[1].c_str());

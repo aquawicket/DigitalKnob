@@ -13,7 +13,7 @@ void DKJS::Init()
 {
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
-	//DKLog("DKJS::Init() \n", DKDEBUG);
+	//DKLog("DKJS::Init()\n", DKDEBUG);
 
 	/*
 	DKString errors;
@@ -686,7 +686,7 @@ int DKJS::LogGuiConsole(duk_context* ctx)
 int DKJS::RunJavascript(duk_context* ctx)
 {
 	DKString code = duk_require_string(ctx, 0);
-	DKLog("RunJavascript("+code+") \n", DKDEBUG);
+	DKLog("RunJavascript("+code+")\n", DKDEBUG);
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 	return 1;
 }

@@ -72,7 +72,7 @@ bool DKSDLRocket::handle(SDL_Event *event)
 
 #ifndef ANDROID
         case SDL_KEYDOWN:
-			//DKLog("DKSDLRocket::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+") \n", DKDEBUG);
+			//DKLog("DKSDLRocket::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n", DKDEBUG);
 			dkRocket->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			if(event->key.keysym.sym == 13){ //enter
 				dkRocket->context->ProcessTextInput("\n");
@@ -80,7 +80,7 @@ bool DKSDLRocket::handle(SDL_Event *event)
             break;
 #else
 		case SDL_KEYDOWN:{
-			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+") \n", DKDEBUG);
+			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n", DKDEBUG);
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
@@ -110,7 +110,7 @@ bool DKSDLRocket::handle(SDL_Event *event)
 		}
 #endif
 		case SDL_TEXTINPUT:
-			//DKLog("DKSDLRocket::SDL_TEXTINPUT("+DKString(event->text.text)+") \n", DKDEBUG);
+			//DKLog("DKSDLRocket::SDL_TEXTINPUT("+DKString(event->text.text)+")\n", DKDEBUG);
 			dkRocket->context->ProcessTextInput(event->text.text);
 			break;
 

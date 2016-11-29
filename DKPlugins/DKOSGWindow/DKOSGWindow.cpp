@@ -365,7 +365,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapte
 bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea)
 {
 	if(ea.getEventType() == osgGA::GUIEventAdapter::KEYDOWN){ 
-		//DKLog("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+") \n", DKDEBUG);
+		//DKLog("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n", DKDEBUG);
 		if(ea.getUnmodifiedKey() > 96 && ea.getUnmodifiedKey() < 123){ //letter
 			if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT && ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //both = lowercase
 				DKEvent::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()]));

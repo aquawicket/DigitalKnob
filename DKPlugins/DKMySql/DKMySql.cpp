@@ -29,7 +29,7 @@ void DKMySql::End()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
 {
-	DKLog("DKMySql::Connect("+host+", "+name+", "+pass+", "+port+") \n", DKDEBUG);
+	DKLog("DKMySql::Connect("+host+", "+name+", "+pass+", "+port+")\n", DKDEBUG);
 
 #ifdef USE_mysql
 	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
