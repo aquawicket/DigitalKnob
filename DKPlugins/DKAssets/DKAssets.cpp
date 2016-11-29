@@ -10,6 +10,8 @@
 /////////////////////
 void DKAssets::Init()
 {
+	DKLog("DKAssets::Init()", DKDEBUG);
+	
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
@@ -67,6 +69,8 @@ void DKAssets::Init()
 ////////////////////////////////////////////////
 bool DKAssets::AquireDataPath(DKString& exepath)
 {
+	DKLog("DKAssets::AquireDataPath("+exepath+")", DKFILTER);
+	
     unsigned found = 0;
 #ifdef WIN32
     exepath = DKFile::appfilename;
@@ -118,6 +122,8 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
+	DKLog("DKAssets::CheckAssetsPath("+path+")", DKFILTER);
+	
 	DKFile::local_assets = path;
 
 	//if there is an assets directory under this, then we are in a development environment.

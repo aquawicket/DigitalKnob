@@ -19,6 +19,8 @@ static jobject theobj = 0;
 /////////////////////////////////////////////////////
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
+	DKLog("JNI_OnLoad() \n", DKDEBUG);
+	
 	thejvm = vm;
     return JNI_VERSION_1_6;
 }
@@ -26,21 +28,24 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 ////////////////////////////////////////////
 void initJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKLog("initJNIBridge() \n", DKINFO);
+	DKLog("initJNIBridge() \n", DKDEBUG);
+	
 	theobj = env->NewGlobalRef(obj);
 }
 
 ////////////////////////////////////////////
 void exitJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKLog("exitJNIBridge() \n", DKINFO);
+	DKLog("exitJNIBridge() \n", DKDEBUG);
+	
 	env->DeleteGlobalRef(theobj);
 }
 
 //////////////////////////////////////////////////////////////////
 void CallJavaFunction(const DKString& name, const DKString& param)
 {
-	DKLog("CallJavaFunction("+name+","+param+") \n", DKINFO);
+	DKLog("CallJavaFunction("+name+","+param+") \n", DKDEBUG);
+	
 	JNIEnv* env;
 	bool attached = false;
 	switch(thejvm->GetEnv((void**)&env, JNI_VERSION_1_6)){
@@ -89,6 +94,8 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 ////////////////////////////////////////////////////
 void initSDL(JNIEnv* env, jclass cls, jobject array)
 {
+	DKLog("initSDL()\n", DKDEBUG);
+	
 	JavaData jdata;
 	jdata.env = env;
 	jdata.cls = cls;
@@ -100,6 +107,8 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv *env, jclass cls, jstring data)
 {
+	DKLog("initSDL()\n", DKDEBUG);
+	
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	//DKLog("CallCppFunction("+DKString(_data)+") \n", DKDEBUG);
 	DKStringArray arry;
@@ -218,6 +227,8 @@ jstring CallCppFunction(JNIEnv *env, jclass cls, jstring data)
 //////////////////////
 void DKAndroid::init()
 {
+	DKLog("DKAndroid::init()", DKDEBUG);
+	
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
 
@@ -262,6 +273,8 @@ void DKAndroid::init()
 ///////////////////////////////////////////
 bool DKAndroid::GetMousePos(int& x, int& y)
 {
+	DKLog("GetMousePos("toString(x)","toString(y)")", DKFILTER);
+	
 	x = android_mouseX;
 	y = android_mouseY;
 	return true;
