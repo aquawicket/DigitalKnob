@@ -14,7 +14,7 @@ void DKXmlJS::Init()
 /////////////////////////////////////////
 int DKXmlJS::GetXmlNode(duk_context* ctx)
 {
-	DKLog("DKXmlJS::GetXmlNode(duk_context*)", DKFILTER);
+	DKLog("DKXmlJS::GetXmlNode(duk_context*)\n", DKFILTER);
 	
 	DKString file = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);

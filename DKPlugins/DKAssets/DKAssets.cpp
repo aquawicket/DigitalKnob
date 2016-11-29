@@ -69,7 +69,7 @@ void DKAssets::Init()
 ////////////////////////////////////////////////
 bool DKAssets::AquireDataPath(DKString& exepath)
 {
-	DKLog("DKAssets::AquireDataPath("+exepath+")", DKFILTER);
+	DKLog("DKAssets::AquireDataPath("+exepath+")\n", DKFILTER);
 	
     unsigned found = 0;
 #ifdef WIN32
@@ -122,7 +122,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
-	DKLog("DKAssets::CheckAssetsPath("+path+")", DKFILTER);
+	DKLog("DKAssets::CheckAssetsPath("+path+")\n", DKFILTER);
 	
 	DKFile::local_assets = path;
 
@@ -199,6 +199,8 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 ///////////////////////////////////////////////////////
 bool DKAssets::AppendDataPath(const DKString& datapath)
 {
+	DKLog("DKAssets::AppendDataPath("+datapath+")\n", DKFILTER);
+	
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){
 		fl.push_back(datapath);

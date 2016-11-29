@@ -49,7 +49,7 @@ int DKWidgetMySqlJS::Prep(duk_context* ctx)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, const DKString& field)
 {
-	DKLog("DKWidgetMySql_PrepField("+database+", "+table+", "+field+")", DKDEBUG);
+	DKLog("DKWidgetMySql_PrepField("+database+", "+table+", "+field+")\n", DKDEBUG);
 	
 	// CHECK DATABASE //
 	/*

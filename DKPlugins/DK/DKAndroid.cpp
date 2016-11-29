@@ -272,7 +272,7 @@ void DKAndroid::init()
 ///////////////////////////////////////////
 bool DKAndroid::GetMousePos(int& x, int& y)
 {
-	DKLog("DKAndroid::GetMousePos("toString(x)","toString(y)")", DKFILTER);
+	DKLog("DKAndroid::GetMousePos("toString(x)","toString(y)")\n", DKFILTER);
 	
 	x = android_mouseX;
 	y = android_mouseY;
@@ -283,7 +283,7 @@ bool DKAndroid::GetMousePos(int& x, int& y)
 ////////////////////////////////////////////////////////
 void DKAndroid::ProcessEvent(Rocket::Core::Event& event)
 {
-	DKLog("DKAndroid::ProcessEvent(Rocket::Core::Event&)", DKFILTER);
+	DKLog("DKAndroid::ProcessEvent(Rocket::Core::Event&)\n", DKFILTER);
 	
 	//Toggle Keyboard on text element click
 	if(event.GetType() == "mousedown"){
