@@ -34,9 +34,10 @@ void DKLog(const DKString& text, const int lvl)
 	if(log_errors == false && lvl == DKERROR){ return; }
 	if(log_success == false && lvl == DKSUCCESS){ return; }
 
+	/*
 	//If lvl is DKFILTER, check setting file for string
 	if(lvl == DKFILTER){
-		/* if string !contain any filters */
+		// if string !contain any filters
 		bool yes=false;
 		if(log_filter_all){ yes = true; }
 		int i=0;
@@ -52,6 +53,7 @@ void DKLog(const DKString& text, const int lvl)
 			return;
 		}
 	}
+	*/
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;

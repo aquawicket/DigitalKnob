@@ -839,7 +839,7 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate)
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value)
 {
-	DKLog("DKFile::GetSetting("+file+","+setting+","+value+")\n", DKFILTER);
+	//DKLog("DKFile::GetSetting("+file+","+setting+","+value+")\n", DKFILTER);
 	
 	if(!PathExists(file)){ return false; }
 	DKString filestring;
