@@ -34,7 +34,6 @@ void DKLog(const DKString& text, const int lvl)
 	if(log_errors == false && lvl == DKERROR){ return; }
 	if(log_success == false && lvl == DKSUCCESS){ return; }
 
-	//If lvl is DKFILTER, check setting file for string
 	if(lvl == DKFILTER){
 		// if string !contain any filters
 		bool yes=false;
@@ -42,17 +41,21 @@ void DKLog(const DKString& text, const int lvl)
 		int i=0;
 		DKString value;
 
-		return; //FIXME: This is loop is dangerous 
-		while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value) && !yes){
-			if(has(text,value)){
-				yes = true;
-				break;
+		return; //FIXME: This is loop is dangerous
+
+		//If lvl is DKFILTER, check setting file for string
+		//if(!DKFile::local_assets.empty()){
+			while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value) && !yes){
+				if(has(text,value)){
+					yes = true;
+					break;
+				}
+				i++;
 			}
-			i++;
-		}
-		if(!yes){
-			return;
-		}
+			if(!yes){
+				return;
+			}
+		//}
 	}
 	
 	if(log_file && !DKFile::local_assets.empty()){
