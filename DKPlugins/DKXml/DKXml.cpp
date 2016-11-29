@@ -144,7 +144,7 @@ bool DKXml::FindNode(const DKString& xpath)
 ///////////////////////////////////////////////////////////
 bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
 {
-	DKLog("DKXml::GetNode("+xpath+",DKXmlNode&")\n", DKFILTER);
+	DKLog("DKXml::GetNode("+xpath+",DKXmlNode&)\n", DKFILTER);
 	
 	node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
@@ -157,7 +157,7 @@ bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
 //////////////////////////////////////////////////////////////
 bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 {
-	DKLog("DKXml::GetNodes("+xpath+",DKXmlNodes&")\n", DKFILTER);
+	DKLog("DKXml::GetNodes("+xpath+",DKXmlNodes&)\n", DKFILTER);
 	
 	nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
@@ -170,7 +170,7 @@ bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 ////////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 {
-	DKLog("DKXml::GetNodeNames("+xpath+",DKStringArray&")\n", DKFILTER);
+	DKLog("DKXml::GetNodeNames("+xpath+",DKStringArray&)\n", DKFILTER);
 	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
