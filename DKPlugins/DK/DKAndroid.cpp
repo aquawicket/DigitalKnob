@@ -250,14 +250,14 @@ void DKAndroid::init()
 		DKApp dkapp;
 
 		#ifdef DKAPP
-		DKLog("DKAPP defined \n",DKDEBUG);
+		DKLog("DKAPP defined \n", DKDEBUG);
 		#endif
 		
 		DKLog("Registered Classes \n", DKDEBUG);
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
-			DKLog(classes[i]+"\n",DKDEBUG);
+			DKLog(classes[i]+"\n", DKDEBUG);
 		}
 
 		//Attempt to preload these

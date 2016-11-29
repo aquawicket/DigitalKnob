@@ -15,7 +15,7 @@ DKString DKFile::online_assets;
 /////////////////////////////////////////////
 bool DKFile::PathExists(const DKString& path)
 {
-	//DKLog("DKFile::Exists("+path+")\n",DKDEBUG);
+	//DKLog("DKFile::Exists("+path+")\n", DKDEBUG);
 	if(boost::filesystem::exists(path)){
 		return true;
 	}
@@ -89,7 +89,7 @@ bool DKFile::Delete(const DKString& path)
 //////////////////////////////////////////////////
 bool DKFile::RemoveDirectory(const DKString& path)
 {
-	//DKLog("DKFile::RemoveDirectory("+path+")\n",DKDEBUG);
+	//DKLog("DKFile::RemoveDirectory("+path+")\n", DKDEBUG);
 	if(!PathExists(path)){ return false; }
 	if(!boost::filesystem::remove_all(path.c_str())){
 		DKLog("boost::filesystem::remove_all failed\n",DKERROR);
@@ -101,7 +101,7 @@ bool DKFile::RemoveDirectory(const DKString& path)
 /////////////////////////////////////////
 bool DKFile::MakeDir(const DKString& dir)
 {
-	//DKLog("DKFile::MakeDir("+dir+")\n",DKDEBUG);
+	//DKLog("DKFile::MakeDir("+dir+")\n", DKDEBUG);
     if(dir.empty()){ return false; }
 	if(PathExists(dir)){ return true; }
 	if(!boost::filesystem::create_directory(dir)){
@@ -124,7 +124,7 @@ bool DKFile::ChDir(const DKString& dir)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive)
 {
-	//DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n",DKDEBUG);
+	//DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n", DKDEBUG);
 	if(!PathExists(src)){ return false; }
 	if(boost::filesystem::is_directory(src)){
 		if(!CopyDirectory(src,dst,overwrite,recursive)){
@@ -146,7 +146,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive)
 {
-	//DKLog("DKFile::CopyFolder("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n",DKDEBUG);
+	//DKLog("DKFile::CopyFolder("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n", DKDEBUG);
 	if(!PathExists(src)){ return false; }
 	if(!CopyDirectory(src,dst,overwrite,recursive)){
 		DKLog("CopyFolder()\n", DKERROR);
@@ -158,7 +158,7 @@ bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool ove
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive)
 {
-	//DKLog("DKFile::CopyDirectory(source,destination,"+toString(overwrite)+","+toString(recursive)+")\n",DKDEBUG);
+	//DKLog("DKFile::CopyDirectory(source,destination,"+toString(overwrite)+","+toString(recursive)+")\n", DKDEBUG);
 	namespace fs = boost::filesystem;
     try{
 		// Check whether the function call is valid
@@ -209,7 +209,7 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
 ////////////////////////////////////////////////////////////////////
 bool DKFile::GetShortName(const DKString& file, DKString& shortname)
 {
-	//DKLog("DKFile::GetShortName("+file+","+shortname+")\n",DKDEBUG);
+	//DKLog("DKFile::GetShortName("+file+","+shortname+")\n", DKDEBUG);
 	if(!PathExists(file)){ return false; }
 #ifdef WIN32
     long length = 0;
@@ -237,7 +237,7 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname)
 //////////////////////////////////////////////
 bool DKFile::GetDrives(DKStringArray& strings)
 {
-	//DKLog("DKFile::GetDrives(&strings)\n",DKDEBUG);
+	//DKLog("DKFile::GetDrives(&strings)\n", DKDEBUG);
 #ifdef WIN32
 	TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
@@ -262,7 +262,7 @@ bool DKFile::GetDrives(DKStringArray& strings)
 ///////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings)
 {
-	//DKLog("DKFile::GetDirectoryContents("+path+",&strings)\n",DKDEBUG);
+	//DKLog("DKFile::GetDirectoryContents("+path+",&strings)\n", DKDEBUG);
 	if(!PathExists(path)){ return false; }
 
 	boost::filesystem::directory_iterator end_itr;
@@ -289,7 +289,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings)
 //////////////////////////////////////////
 bool DKFile::GetExeName(DKString& exename)
 {
-	//DKLog("DKFile::GetExeName("+exename+")\n",DKDEBUG);
+	//DKLog("DKFile::GetExeName("+exename+")\n", DKDEBUG);
 #ifdef WIN32
 	if(!DKFile::PathExists(DKFile::appfilename)){
 		TCHAR appfilename[MAX_PATH];

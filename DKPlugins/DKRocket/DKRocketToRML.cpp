@@ -94,9 +94,9 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	//////////////////////////////////////////////////////
 	*/
 
-	//DKLog("\n##################### RML ####################\n",DKDEBUG);
-	//DKLog(rml+"\n",DKDEBUG);
-	//DKLog("\n##############################################\n\n",DKDEBUG);
+	//DKLog("\n##################### RML ####################\n", DKDEBUG);
+	//DKLog(rml+"\n", DKDEBUG);
+	//DKLog("\n##############################################\n\n", DKDEBUG);
 	return true;
 }
 
@@ -184,7 +184,7 @@ void DKRocketToRML::Hyperlink(DKEvent* event)
 ////////////////////////////////////////////////
 void DKRocketToRML::ResizeIframe(DKEvent* event)
 {
-	//DKLog("DKWidget::ResizeIframe",DKDEBUG);
+	//DKLog("DKWidget::ResizeIframe", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();

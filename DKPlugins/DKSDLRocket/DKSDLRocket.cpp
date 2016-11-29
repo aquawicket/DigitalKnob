@@ -132,7 +132,7 @@ bool DKSDLRocket::handle(SDL_Event *event)
 ////////////////////////
 void DKSDLRocket::Draw()
 {
-    //DKLog("DKSDLRocket::Draw()\n",DKDEBUG);
+    //DKLog("DKSDLRocket::Draw()\n", DKDEBUG);
 	if(dkSdlWindow->width != dkRocket->context->GetDimensions().x || dkSdlWindow->height != dkRocket->context->GetDimensions().y){
 		dkRocket->context->SetDimensions(Rocket::Core::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
