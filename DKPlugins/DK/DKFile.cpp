@@ -149,7 +149,7 @@ bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool ove
 	//DKLog("DKFile::CopyFolder("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+") \n",DKDEBUG);
 	if(!PathExists(src)){ return false; }
 	if(!CopyDirectory(src,dst,overwrite,recursive)){
-		DKLog("CopyFolder() \n", DKERROR);
+		DKLog("CopyFolder()\n", DKERROR);
 		return false;
 	}
 	return true;

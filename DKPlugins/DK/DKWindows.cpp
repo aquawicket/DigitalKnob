@@ -428,7 +428,7 @@ bool DKWindows::Sleep(int milliseconds)
 ///////////////////////////////////////////
 void DKWindows::RefreshWindowsEnvironment()
 {
-	DKLog("DKWindows::RefreshWindowsEnvironment() \n", DKDEBUG);
+	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKDEBUG);
     DWORD dwReturnValue;
     ::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, &dwReturnValue);
 }

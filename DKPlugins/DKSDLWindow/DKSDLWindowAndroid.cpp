@@ -72,7 +72,7 @@ void DKSDLWindowAndroid::End()
 ///////////////////////////////////////////////
 void* DKSDLWindowAndroid::onInitSDL(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onInitSDL() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onInitSDL()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 
     int i;
@@ -273,7 +273,7 @@ void* DKSDLWindowAndroid::onRemoveJoystick(void* data)
 //////////////////////////////////////////////////////
 void* DKSDLWindowAndroid::onSurfaceChanged(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onSurfaceChanged() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onSurfaceChanged()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceChanged(jd.env, jd.cls);
 	return NULL;
@@ -282,7 +282,7 @@ void* DKSDLWindowAndroid::onSurfaceChanged(void* data)
 ////////////////////////////////////////////////////////
 void* DKSDLWindowAndroid::onSurfaceDestroyed(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onSurfaceDestroyed() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onSurfaceDestroyed()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceDestroyed(jd.env, jd.cls);
 	return NULL;
@@ -327,7 +327,7 @@ void* DKSDLWindowAndroid::onKeyUp(void* data)
 /////////////////////////////////////////////////////////
 void* DKSDLWindowAndroid::onKeyboardFocusLost(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onKeyboardFocusLost() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onKeyboardFocusLost()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_onNativeKeyboardFocusLost(jd.env, jd.cls);
 	return NULL;
@@ -385,7 +385,7 @@ void* DKSDLWindowAndroid::onAccel(void* data)
 /////////////////////////////////////////////////
 void* DKSDLWindowAndroid::onLowMemory(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onLowMemory() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onLowMemory()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_nativeLowMemory(jd.env, jd.cls);
 	return NULL;
@@ -394,7 +394,7 @@ void* DKSDLWindowAndroid::onLowMemory(void* data)
 ////////////////////////////////////////////
 void* DKSDLWindowAndroid::onQuit(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onQuit() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onQuit()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_nativeQuit(jd.env, jd.cls);
 	return NULL;
@@ -403,7 +403,7 @@ void* DKSDLWindowAndroid::onQuit(void* data)
 /////////////////////////////////////////////
 void* DKSDLWindowAndroid::onPause(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onPause() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onPause()\n", DKDEBUG);
 	DKApp::paused = true;
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_nativePause(jd.env, jd.cls);
@@ -413,7 +413,7 @@ void* DKSDLWindowAndroid::onPause(void* data)
 //////////////////////////////////////////////
 void* DKSDLWindowAndroid::onResume(void* data)
 {
-	DKLog("DKSDLWindowAndroid::onResume() \n", DKDEBUG);
+	DKLog("DKSDLWindowAndroid::onResume()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
     Java_org_libsdl_app_SDLActivity_nativeResume(jd.env, jd.cls);
 	DKApp::paused = false;
