@@ -15,6 +15,8 @@
 /////////////////////
 void DKSDLCef::Init()
 {
+	DKLog("DKSDLCef::Init()\n",DKDEBUG);
+
 	cef_image = NULL;
 	background_image = NULL;
 	popup_image = NULL;
@@ -39,6 +41,8 @@ void DKSDLCef::Init()
 ////////////////////
 void DKSDLCef::End()
 {
+	DKLog("DKSDLCef::End()\n", DKDEBUG);
+
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
 	DKClass::UnregisterFunc(id + "::OnResize");
 	DKClass::UnregisterFunc("DKSDLCef::GetTexture::" + id);
@@ -49,6 +53,8 @@ void DKSDLCef::End()
 ////////////////////////////////////
 void* DKSDLCef::OnResize(void* data)
 {
+	DKLog("DKSDLCef::OnResize(void*)\n", DKFILTER);
+
 	DKString str = *static_cast<DKString*>(data);
 
 	//DKLog("DKSDLCef::OnResize("+str+")\n", DKWARN);
@@ -81,6 +87,8 @@ void* DKSDLCef::OnResize(void* data)
 /////////////////////////////////
 void* DKSDLCef::GetTexture(void*)
 {
+	//DKLog("DKSDLCef::GetTexture(void*)\n", DKFILTER);
+
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
@@ -90,6 +98,8 @@ void* DKSDLCef::GetTexture(void*)
 /////////////////////////
 void DKSDLCef::SetupCef()
 {
+	DKLog("DKSDLCef::SetupCef()\n", DKFILTER);
+
 	//Top spacer for url bar
 	cefHandler = new DKSDLCefHandler();
 	cefHandler->dkSdlWindow = dkSdlWindow;
@@ -103,14 +113,18 @@ void DKSDLCef::SetupCef()
 ///////////////////////////////////////////////////////////////////////
 CefBrowserHost::MouseButtonType DKSDLCef::getCefMouseButton(int button)
 {
+	DKLog("DKSDLCef::getCefMouseButton("+toString(button)+")\n", DKFILTER);
+
 	if(button == 1){ return MBT_LEFT; }
 	if(button == 2){ return MBT_MIDDLE; }
 	/*if(button == 3){*/ return MBT_RIGHT; //}
 }
 
 ///////////////////////////////////////
-bool DKSDLCef::handle(SDL_Event *event)
+bool DKSDLCef::handle(SDL_Event* event)
 {
+	DKLog("DKSDLCef::handle(SDL_Event*)\n", DKFILTER);
+
 	if(!dkCef->current_browser){ return false; }
 
 	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
@@ -260,6 +274,8 @@ bool DKSDLCef::handle(SDL_Event *event)
 /////////////////////
 void DKSDLCef::Draw()
 {
+	//DKLog("DKSDLCef::Draw()\n", DKFILTER);
+
 	//NOTE: For single browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
 	//      and set url of the current_browser. All urls, will be directed to the same target.
 	//      For multiple browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
@@ -283,8 +299,10 @@ void DKSDLCef::Draw()
 }
 
 //////////////////////////////////////////////////////////////////////////////
-bool DKSDLCef::getScrollDeltas(SDL_Event *event, float &deltaX, float &deltaY)
+bool DKSDLCef::getScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 {
+	DKLog("DKSDLCef::getScrollDeltas(SDL_Event*, deltaX, deltaY)\n", DKFILTER);
+
 	deltaX = 0.0f;
 	deltaY = 0.0f;
 
@@ -307,6 +325,8 @@ bool DKSDLCef::getScrollDeltas(SDL_Event *event, float &deltaX, float &deltaY)
 /////////////////////////////////////////////////
 bool DKSDLCef::transparentPixel(SDL_Event *event)
 {
+	DKLog("DKSDLCef::transparentPixel(SDL_Event*)\n", DKFILTER);
+
 	// TODO
 	/*
 	osg::Image* image = cef_image.get();//cefHandler->getImage();

@@ -15,7 +15,7 @@ DKString DKFile::online_assets;
 /////////////////////////////////////////////
 bool DKFile::PathExists(const DKString& path)
 {
-	DKLog("DKFile::PathExists("+path+")\n", DKFILTER);
+	//DKLog("DKFile::PathExists("+path+")\n", DKFILTER);
 	
 	if(boost::filesystem::exists(path)){
 		return true;
@@ -401,7 +401,7 @@ bool DKFile::GetFilePath(const DKString& file, DKString& path)
 /////////////////////////////////////////////////////////////////
 bool DKFile::FileToString(const DKString& file, DKString& string)
 {
-	DKLog("DKFile::FileToString("+file+","+string+")\n", DKFILTER);
+	//DKLog("DKFile::FileToString("+file+","+string+")\n", DKFILTER);
 	
 	if(!PathExists(file)){
 		DKLog("DKFile::FileToString failed! \n", DKERROR);

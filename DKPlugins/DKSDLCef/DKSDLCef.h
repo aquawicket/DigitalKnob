@@ -75,9 +75,10 @@ public:
 	}
 
 	//////////////////////////////////////////////////////////////
-	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
+	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	{
-		//DKLog("DKSDLCefHandler::GetViewRect()\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKFILTER);
+		
 		rect = CefRect(0, 0, dkCef->width, dkCef->height);
 		return true;
 	}
@@ -85,7 +86,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 	{
-		//DKLog("DKSDLCefHandler::OnPaint()\n", DKDEBUG);
+		//DKLog("DKSDLCefHandler::OnPaint()\n", DKFILTER);
+
 		//if(!dkCef->current_browser){ return; }
 		if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 		if(type == PET_VIEW){
@@ -151,7 +153,8 @@ public:
 	//////////////////////////////////////////////////////////
 	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
 	{
-		DKLog("DKSDLCefHandler::OnPopupShow()\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnPopupShow()\n", DKFILTER);
+
 		if(!show){
 			dkSdlCef->popup_image = NULL;
 			return;
@@ -161,7 +164,8 @@ public:
 	////////////////////////////////////////////////////////////////////
 	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
 	{
-		DKLog("DKSDLCefHandler::OnPopupSize()\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnPopupSize()\n", DKFILTER);
+
 		if(rect.width <= 0 || rect.height <= 0){ return; }
 		dkSdlCef->popup_rect = rect;
 	}
@@ -169,7 +173,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
 	{
-		DKLog("DKSDLCefHandler::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKFILTER);
+
 		for(unsigned int i=0; i<dkCef->browsers.size(); ++i){
 			if(browser->GetIdentifier() == dkCef->browsers[i]->GetIdentifier()){
 				DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", toString(i));
@@ -181,14 +186,16 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 	{ 
-		DKLog("DKSDLCefHandler::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKFILTER);
+
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadError", toString(errorCode));
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
-		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKFILTER);
+
 		if(fullscreen){
 			dkCef->fullscreen = true;
 			//SDL_SetWindowFullscreen(dkSdlWindow->sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
@@ -203,7 +210,8 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
-		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKFILTER);
+
 		//DKEvent::SendEvent("GLOBAL", "DKCef_OnBeforePopup", target_url);
 		if(target_disposition == WOD_NEW_FOREGROUND_TAB){
 			dkCef->queue_new_browser = target_url;
@@ -217,7 +225,8 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 	{
-		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKFILTER);
+
 		//DKLog("OriginalUrl: "+download_item->GetOriginalUrl().ToString()+")\n", DKDEBUG);
 		UNREFERENCED_PARAMETER(browser);
 		UNREFERENCED_PARAMETER(download_item);
@@ -227,7 +236,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 	{
-		DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+")\n", DKFILTER);
+
 		model->Clear(); //remove original context menu
 		
 		DKString data;
