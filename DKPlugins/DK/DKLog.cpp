@@ -12,6 +12,7 @@ extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
 
+//NOTE: All DKLog's must have a message type parameter, unless we use these defaults.
 //void DKLog(const DKString& text){ DKLog(text,DKINFO); }
 //void DKLog(const int text){ DKLog(toString(text),DKINFO); }
 //void DKLog(const long& text){ DKLog(toString(text),DKINFO); }
