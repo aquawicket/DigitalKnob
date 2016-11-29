@@ -107,6 +107,9 @@ bool DKFile::RemoveDirectory(const DKString& path)
 /////////////////////////////////////////
 bool DKFile::MakeDir(const DKString& dir)
 {
+	//FIXME: sometimes we cannot create the directory if the parent directory does not exits.
+	//       EXAMPLE:  if /test does not exist, we cannot create /test/mything 
+
 	DKLog("DKFile::MakeDir("+dir+")\n", DKFILTER);
 	
     if(dir.empty()){ return false; }
