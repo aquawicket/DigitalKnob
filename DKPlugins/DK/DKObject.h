@@ -23,6 +23,8 @@ public:
 	//////////////////////////////////////////
 	virtual void SetData(const DKString& data)
 	{
+		DKLog("DKObject::SetData("+data+")\n", DKFILTER);
+		
 		toStringArray(this->data, data, ",");
 	}
 };
@@ -37,6 +39,8 @@ public:
 	/////////////////////////////////////////
 	static void SetName(const DKString& name)
     {
+		DKLog("DKObject::SetName("+name+")\n", DKFILTER);
+		
 #ifdef WIN32
 		if(!classname){ classname = _strdup(name.c_str()); }
 #else
@@ -47,14 +51,16 @@ public:
 	///////////////////////
 	static void Singleton()
     {
+		DKLog("DKObject::Singleton()\n", DKFILTER);
 		singleton = true;
 	}
 
 	////////////////////////////////////////
 	static T* Instance(const DKString& data)
     {
+		DKLog("DKObject::Instance("+data+")\n", DKFILTER);
+		
 		//data = (id,var1,var2,var3,etc)
-		//DKLog("T::Instance("+data+")\n",DKINFO);
 		if(!instances.empty() && singleton){
 			//DKLog("DKClass singleton already created as "+instances[0]->data[0]+"\n", DKWARN);
 			return instances[0];
@@ -102,6 +108,8 @@ public:
 	/////////////////////////////////////
 	static void Close(const DKString& id)
 	{
+		DKLog("DKObject::Close("+id+")\n", DKFILTER);
+		
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
@@ -119,6 +127,8 @@ public:
 	/////////////////////////////////////
 	static bool Valid(const DKString& id)
 	{
+		DKLog("DKObject::Valid("+id+")\n", DKFILTER);
+		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -133,6 +143,8 @@ public:
 	/////////////////////////////////
 	static T* Get(const DKString& id)
 	{
+		DKLog("DKObject::Get("+id+")\n", DKFILTER);
+		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -147,6 +159,8 @@ public:
 	/////////////////////////////////////////////
 	static void GetInstances(DKStringArray& list)
 	{
+		DKLog("DKObject::GetInstances(DKStringArray&)\n", DKFILTER);
+		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(instances[i]->data.size() > 2){
 				list.push_back(instances[i]->data[0]+","+instances[i]->data[1]+","+instances[i]->data[2]);
@@ -160,6 +174,7 @@ public:
 	/////////////////////////////////////////////////////
 	static void GetInstances(std::vector<T*>& _instances)
 	{
+		DKLog("DKObject::GetInstances(std::vector<T*>&)\n", DKFILTER);
 		_instances = instances;
 	}
 
