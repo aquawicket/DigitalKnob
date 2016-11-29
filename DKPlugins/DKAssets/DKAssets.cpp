@@ -10,7 +10,7 @@
 /////////////////////
 void DKAssets::Init()
 {
-	DKLog("DKAssets::Init()\n", DKDEBUG);
+	DKLog("DKAssets::Init()\n", DKFILTER);
 	
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);

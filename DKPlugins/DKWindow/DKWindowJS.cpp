@@ -6,7 +6,7 @@
 ///////////////////////
 void DKWindowJS::Init()
 {
-	DKLog("DKWindowJS::Init()\n", DKDEBUG);
+	DKLog("DKWindowJS::Init()\n", DKFILTER);
 
 	DKDuktape::AttachFunction("DKWindow_GetX", DKWindowJS::GetX, 0);
 	DKDuktape::AttachFunction("DKWindow_GetY", DKWindowJS::GetY, 0);

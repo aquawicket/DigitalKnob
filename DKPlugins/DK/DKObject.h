@@ -97,7 +97,7 @@ public:
 		}
 
 		//Create a new insance
-		DKLog("DKBaseT::Create("+final_data+")\n", DKDEBUG);
+		DKLog("DKBaseT::Create("+final_data+")\n", DKFILTER);
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 

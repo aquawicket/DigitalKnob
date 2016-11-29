@@ -40,7 +40,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, void* (T::*func) (void*), T* _this)
 	{
-		DKLog("RegisterFunc("+name+")\n", DKINFO);
+		DKLog("DKClass::RegisterFunc("+name+")\n", DKFILTER);
 		functions[name] = boost::bind(func, _this, _1);
 		if(!functions[name]){
 			DKLog("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
@@ -51,10 +51,10 @@ public:
 	////////////////////////////////////////////////
 	static void UnregisterFunc(const DKString& name)
 	{
-		DKLog("UnregisterFunc(" + name + ")\n", DKINFO);
+		DKLog("DKClass::UnregisterFunc("+name+")\n", DKFILTER);
 		functions.erase(name);
 		if(functions[name]) {
-			DKLog("UnegisterFunc(" + name + "): failed to unregister function \n", DKERROR);
+			DKLog("UnegisterFunc("+name+"): failed to unregister function \n", DKERROR);
 			return;
 		}
 	}

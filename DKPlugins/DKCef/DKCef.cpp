@@ -17,7 +17,7 @@
 //////////////////
 void DKCef::Init()
 {
-	DKLog("DKCef::Init()\n", DKDEBUG);
+	DKLog("DKCef::Init()\n", DKFILTER);
 	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
@@ -132,7 +132,8 @@ void DKCef::Init()
 /////////////////
 void DKCef::End()
 {
-	DKLog("DKCef::End()\n", DKDEBUG);
+	DKLog("DKCef::End()\n", DKFILTER);
+	
 	current_browser = NULL;
 	for(unsigned int i = 0; i < browsers.size(); ++i){
 		browsers[i]	= NULL;

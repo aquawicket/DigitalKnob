@@ -15,7 +15,7 @@
 /////////////////////
 void DKSDLCef::Init()
 {
-	DKLog("DKSDLCef::Init()\n",DKDEBUG);
+	DKLog("DKSDLCef::Init()\n",DKFILTER);
 
 	cef_image = NULL;
 	background_image = NULL;
@@ -41,7 +41,7 @@ void DKSDLCef::Init()
 ////////////////////
 void DKSDLCef::End()
 {
-	DKLog("DKSDLCef::End()\n", DKDEBUG);
+	DKLog("DKSDLCef::End()\n", DKFILTER);
 
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
 	DKClass::UnregisterFunc(id + "::OnResize");
