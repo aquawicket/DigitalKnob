@@ -6,12 +6,16 @@
 ////////////////////
 void DKXmlJS::Init()
 {
+	DKLog("DKXmlJS::Init()", DKDEBUG);
+	
 	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode, 2);
 }
 
 /////////////////////////////////////////
 int DKXmlJS::GetXmlNode(duk_context* ctx)
 {
+	DKLog("DKXmlJS::GetXmlNode(duk_context*)", DKFILTER);
+	
 	DKString file = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);
 	DKXml xml;
