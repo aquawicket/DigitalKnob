@@ -61,7 +61,10 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 ////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	//DKLog("SendEvent("+id+","+type+","+value+") \n");
+	if(!same(id,"DKLog") && !same(type,"second")){
+		DKLog("DKEvent::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
+	}
+
 	if(type.empty()){
 		DKLog("DKEvent::SendEvent("+id+","+type+","+value+"): No Type Specified \n",DKERROR);
 		return false;
