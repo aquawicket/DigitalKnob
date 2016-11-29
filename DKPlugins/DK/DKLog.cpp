@@ -11,6 +11,7 @@ extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
+extern bool log_filter_all = false;
 
 //NOTE: All DKLog's must have a message type parameter, unless we use these defaults.
 //void DKLog(const DKString& text){ DKLog(text,DKINFO); }
@@ -37,9 +38,10 @@ void DKLog(const DKString& text, const int lvl)
 	if(lvl == DKFILTER){
 		/* if string !contain any filters */
 		bool yes=false;
+		if(log_filter_all){ yes = true; }
 		int i=0;
 		DKString value;
-		while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value)){
+		while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value) && !yes){
 			if(has(text,value)){
 				yes = true;
 				break;

@@ -53,6 +53,7 @@ extern bool log_msvc;
 extern bool log_xcode;
 extern bool log_file;
 extern bool log_gui_console;
+extern bool log_filter_all;
 
 //void DKLog(const DKString& text);
 //void DKLog(const int text);
