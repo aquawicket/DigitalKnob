@@ -123,7 +123,7 @@ CefBrowserHost::MouseButtonType DKSDLCef::getCefMouseButton(int button)
 ///////////////////////////////////////
 bool DKSDLCef::handle(SDL_Event* event)
 {
-	DKLog("DKSDLCef::handle(SDL_Event*)\n", DKFILTER);
+	//DKLog("DKSDLCef::handle(SDL_Event*)\n", DKFILTER);
 
 	if(!dkCef->current_browser){ return false; }
 
