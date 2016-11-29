@@ -203,10 +203,14 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
-		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
 		//DKEvent::SendEvent("GLOBAL", "DKCef_OnBeforePopup", target_url);
-		//dkCef->queue_new_browser = target_url;
-		dkCef->current_browser->GetMainFrame()->LoadURL(target_url.c_str());
+		if(target_disposition == WOD_NEW_FOREGROUND_TAB){
+			dkCef->queue_new_browser = target_url;
+		}
+		else{
+			dkCef->current_browser->GetMainFrame()->LoadURL(target_url.c_str());
+		}
 		return true;
 	}
 
