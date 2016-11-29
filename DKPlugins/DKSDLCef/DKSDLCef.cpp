@@ -260,6 +260,10 @@ bool DKSDLCef::handle(SDL_Event *event)
 /////////////////////
 void DKSDLCef::Draw()
 {
+	//NOTE: For single browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
+	//      and set url of the current_browser. All urls, will be directed to the same target.
+	//      For multiple browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
+	//      and create a new browser(TAB) to put the url in.
 	if(!dkCef->queue_new_browser.empty()){
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnQueueNewBrowser", dkCef->queue_new_browser);
 		dkCef->queue_new_browser = "";
