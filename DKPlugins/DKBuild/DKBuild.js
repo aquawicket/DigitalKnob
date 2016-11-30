@@ -56,7 +56,7 @@ function DKBuild_Init()
 /////////////////////////////
 function DKBuild_InstallSvn()
 {
-	if(DK_GetBrowser() != "Digitalknob"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Installing Svn \n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -82,7 +82,7 @@ function DKBuild_InstallSvn()
 ////////////////////////////////
 function DKBuild_ValidateSvn()
 {
-	if(DK_GetBrowser() != "Digitalknob"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for SVN \n");
 	//DKLog(SVN+"\n");
 	if(!DKFile_Exists(SVN)){
@@ -123,7 +123,7 @@ function DKBuild_InstallCmake()
 //////////////////////////////////
 function DKBuild_ValidateCmake()
 {
-	if(DK_GetBrowser() != "Digitalknob"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for CMake \n");
 	//DKLog(CMAKE+"\n");
 	if(!DKFile_Exists(CMAKE)){
@@ -155,7 +155,7 @@ function DKBuild_InstallVC2015()
 ///////////////////////////////////
 function DKBuild_ValidateVC2015()
 {
-	if(DK_GetBrowser() != "Digitalknob"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}

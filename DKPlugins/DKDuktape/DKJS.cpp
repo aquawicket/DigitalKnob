@@ -382,7 +382,7 @@ int DKJS::GetOS(duk_context* ctx)
 //////////////////////////////////////
 int DKJS::GetBrowser(duk_context* ctx)
 {
-	DKString browser = "DigitalKnob";
+	DKString browser = "Rocket";
 	duk_push_string(ctx, browser.c_str());
 	return 1;
 }

@@ -125,7 +125,7 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	if(DK_GetBrowser() == "DigitalKnob"){
+	if(DK_GetBrowser() == "Rocket"){
 		DK_System("cls");
 	}
 	else{
