@@ -79,6 +79,7 @@ function DKLog(string, lvl)
 }
 DKLog("*** DigitalKnob ***", DKSUCCESS);
 DKLog(DK_GetBrowser()+"\n");
+DKLog(DK_GetJavascript()+"\n");
 
 ////////////////////
 function DK_Reload()
@@ -173,6 +174,24 @@ function DK_GetBrowser()
     else {
        return "UNKNOWN BROWSER";
     }
+}
+
+///////////////////////////
+function DK_GetJavascript()
+{
+	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
+
+	if('WebkitAppearance' in document.documentElement.style){  //If (probably) WebKit browser
+		if (escape(navigator.javaEnabled.toString()) === v8string){
+			return "V8";
+		}
+		else{
+			return "JSC";
+		}
+	}
+	else{
+		return "UNKNOWN JAVASCRIPT ENGINE"
+	}
 }
 
 //////////////////////////
