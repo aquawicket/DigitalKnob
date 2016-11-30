@@ -64,6 +64,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Include", DKJS::Include, 1);
 	DKDuktape::AttachFunction("DK_GetOS", DKJS::GetOS, 0);
 	DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser, 0);
+	DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript, 0);
 	DKDuktape::AttachFunction("DK_Id", DKJS::Id, 2);
 	DKDuktape::AttachFunction("DK_IdLike", DKJS::IdLike, 2);
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type, 2);
@@ -383,6 +384,14 @@ int DKJS::GetOS(duk_context* ctx)
 int DKJS::GetBrowser(duk_context* ctx)
 {
 	DKString browser = "Rocket";
+	duk_push_string(ctx, browser.c_str());
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::GetJavascript(duk_context* ctx)
+{
+	DKString browser = "Duktape";
 	duk_push_string(ctx, browser.c_str());
 	return 1;
 }

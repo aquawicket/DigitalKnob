@@ -34,6 +34,7 @@ public:
 	static int Include(duk_context* ctx);
 	static int GetOS(duk_context* ctx);
 	static int GetBrowser(duk_context* ctx);
+	static int GetJavascript(duk_context* ctx);
 	static int Id(duk_context* ctx);
 	static int IdLike(duk_context* ctx);
 	static int Type(duk_context* ctx);
