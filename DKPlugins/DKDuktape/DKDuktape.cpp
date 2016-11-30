@@ -19,7 +19,8 @@ extern int eventloop_run(duk_context *ctx);
 //////////////////////
 void DKDuktape::Init()
 {
-	//DKLog("DKDuktape::Init()\n", DKDEBUG);
+	DKLog("DKDuktape::Init()\n", DKFILTER);
+	
 	c_evloop = true;
 
 	if(!ctx){
@@ -71,7 +72,8 @@ void DKDuktape::End()
 //////////////////////////////////////////////
 bool DKDuktape::LoadFile(const DKString& file)
 {
-	//DKLog("DKDuktape::LoadFile("+jsfile+")\n", DKDEBUG);
+	DKLog("DKDuktape::LoadFile("+file+")\n", DKFILTER);
+	
 	if(file.empty()){ return false; }
 	if(FileLoaded(file)){ return false; } //prevent file from loading twice
 
@@ -108,7 +110,8 @@ bool DKDuktape::FileLoaded(const DKString& file)
 //////////////////////////////////////////////
 bool DKDuktape::CallInit(const DKString& file)
 {
-	//DKLog("DKDuktape::CallInit(" + jsfile + ")\n", DKDEBUG);
+	DKLog("DKDuktape::CallInit(" + file + ")\n", DKFILTER);
+	
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -129,7 +132,8 @@ bool DKDuktape::CallInit(const DKString& file)
 /////////////////////////////////////////////
 bool DKDuktape::CallEnd(const DKString& file)
 {
-	//DKLog("DKDuktape::CallEnd(" + jsfile + ")\n", DKDEBUG);
+	DKLog("DKDuktape::CallEnd(" + jsfile + ")\n", DKFILTER);
+	
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -230,7 +234,8 @@ void DKDuktape::OnEvent(DKEvent* event)
 ///////////////////////////////////////////////////
 void DKDuktape::RunJavascript(const DKString& code)
 {
-	DKLog("RunJavascript("+code+")\n", DKDEBUG);
+	DKLog("RunJavascript("+code+")\n", DKFILTER);
+	
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 }
 

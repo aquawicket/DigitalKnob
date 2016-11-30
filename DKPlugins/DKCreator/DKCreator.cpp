@@ -274,7 +274,7 @@ bool DKCreator::VerifyTools(const DKString& os)
 ////////////////////////////////////////////////////////////////////
 bool DKCreator::VerifyTool(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::VerifyTool("+os+", "+file+")\n", DKDEBUG);
+	DKLog("DKCreator::VerifyTool("+os+", "+file+")\n", DKFILTER);
 
 	DKString workingOS;
 	GetSystemOS(workingOS);
@@ -378,7 +378,7 @@ bool DKCreator::VerifyLibraries(const DKString& os)
 ///////////////////////////////////////////////////////////////////////
 bool DKCreator::VerifyLibrary(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::VerifyLibrary("+os+", "+file+")\n", DKDEBUG);
+	DKLog("DKCreator::VerifyLibrary("+os+", "+file+")\n", DKFILTER);
 
 	if(!DKFile::Exists(DKApp::datapath+"DKCreator/"+file)){
 		DKLog(DKApp::datapath+"DKCreator/"+file+" not found! \n", DKERROR);
@@ -412,7 +412,7 @@ bool DKCreator::VerifyLibrary(const DKString& os, const DKString& file)
 /////////////////////////////////////////////////////////////////////
 bool DKCreator::InstallTool(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::InstallTool("+os+", "+file+")\n", DKDEBUG);
+	DKLog("DKCreator::InstallTool("+os+", "+file+")\n", DKFILTER);
 
 	DKString workingOS;
 	GetSystemOS(workingOS);
@@ -424,7 +424,7 @@ bool DKCreator::InstallTool(const DKString& os, const DKString& file)
 ////////////////////////////////////////////////////////////////////////
 bool DKCreator::InstallLibrary(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::InstallLibrary("+os+", "+file+")\n", DKDEBUG);
+	DKLog("DKCreator::InstallLibrary("+os+", "+file+")\n", DKFILTER);
 
 	RunScriptNode(DKApp::datapath+"DKCreator/"+file, "INSTALL", os);
 
@@ -644,7 +644,7 @@ bool DKCreator::RebuildApp(const DKString& app, const DKString& os, const DKStri
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKCreator::BuildApp(const DKString& app, const DKString& os, const DKString& type)
 {
-	DKLog("DKCreator::BuildApp("+app+","+os+")\n", DKDEBUG);
+	DKLog("DKCreator::BuildApp("+app+","+os+")\n", DKFILTER);
 	if(!OSCheck(os)){return false;}
 	VerifyTools(os);
 	//VerifyLibraries(os);

@@ -7,7 +7,8 @@
 /////////////////////
 void DKClient::Init()
 {
-	//DKLog("DKClient::Init()\n", DKDEBUG);
+	//DKLog("DKClient::Init()\n", DKFILTER);
+	
 	DKCreate("DKClientJS");
 	thread = new DKThread();
 	c = new client(thread->io_service);

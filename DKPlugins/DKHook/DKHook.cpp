@@ -264,7 +264,8 @@ bool DKHook::WaitForWindow(const DKString& title, int timeout)
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKHook::SendHook(const DKString& window, const DKString& handle, const DKString& data)
 {
-	DKLog("DKHook::SendHook("+window+", "+handle+", "+data+")\n", DKDEBUG);
+	DKLog("DKHook::SendHook("+window+", "+handle+", "+data+")\n", DKFILTER);
+	
 	if(!SetWindowHandle(window)){ return false; }
 	if(!SetHandle(toInt(handle))){ return false; }
 

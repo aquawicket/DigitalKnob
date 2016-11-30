@@ -17,9 +17,9 @@ static JavaVM* thejvm = 0;
 static jobject theobj = 0;
 
 /////////////////////////////////////////////////////
-JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
+JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
-	DKLog("JNI_OnLoad()\n", DKDEBUG);
+	DKLog("JNI_OnLoad(JavaVM*,void*)\n", DKFILTER);
 	
 	thejvm = vm;
     return JNI_VERSION_1_6;
@@ -28,7 +28,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 ////////////////////////////////////////////
 void initJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKLog("initJNIBridge()\n", DKDEBUG);
+	DKLog("initJNIBridge(JNIEnv*,jobject)\n", DKFILTER);
 	
 	theobj = env->NewGlobalRef(obj);
 }
@@ -36,7 +36,7 @@ void initJNIBridge(JNIEnv* env, jobject obj)
 ////////////////////////////////////////////
 void exitJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKLog("exitJNIBridge()\n", DKDEBUG);
+	DKLog("exitJNIBridge(JNIEnv*,jobject)\n", DKFILTER);
 	
 	env->DeleteGlobalRef(theobj);
 }
@@ -44,7 +44,7 @@ void exitJNIBridge(JNIEnv* env, jobject obj)
 //////////////////////////////////////////////////////////////////
 void CallJavaFunction(const DKString& name, const DKString& param)
 {
-	DKLog("CallJavaFunction("+name+","+param+")\n", DKDEBUG);
+	DKLog("CallJavaFunction("+name+","+param+")\n", DKFILTER);
 	
 	JNIEnv* env;
 	bool attached = false;
@@ -94,7 +94,7 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 ////////////////////////////////////////////////////
 void initSDL(JNIEnv* env, jclass cls, jobject array)
 {
-	DKLog("initSDL()\n", DKDEBUG);
+	DKLog("initSDL(JNIEnv*,jclass,jobject)\n", DKFILTER);
 	
 	JavaData jdata;
 	jdata.env = env;
@@ -107,7 +107,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 {
-	DKLog("CallCppFunction(JNIEnv*,jclass,jstring)\n", DKDEBUG);
+	DKLog("CallCppFunction(JNIEnv*,jclass,jstring)\n", DKFILTER);
 	
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
@@ -226,7 +226,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 //////////////////////
 void DKAndroid::init()
 {
-	DKLog("DKAndroid::init()\n", DKDEBUG);
+	DKLog("DKAndroid::init()\n", DKFILTER);
 	
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
@@ -257,7 +257,7 @@ void DKAndroid::init()
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
-			DKLog(classes[i]+"\n", DKDEBUG);
+			DKLog(classes[i]+"\n", DKFILTER);
 		}
 
 		//Attempt to preload these

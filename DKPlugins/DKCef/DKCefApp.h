@@ -49,7 +49,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
-		//DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKDEBUG);
+		//DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKFILTER);
+		
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
 		command_line->AppendSwitchWithValue("disable-gpu", "1");
@@ -64,7 +65,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		//DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
+		//DKLog("DKCefApp::OnContextCreated()\n", DKFILTER);
+		
 		if(object){ return; }
 		object = context->GetGlobal(); // Retrieve the context's window object.
 		handler = new MyV8Handler();

@@ -5,13 +5,13 @@
 //////////////////
 void DKXml::Init()
 {
-	DKLog("DKXml::Init()\n", DKDEBUG);
+	DKLog("DKXml::Init()\n", DKFILTER);
 }
 
 /////////////////
 void DKXml::End()
 {
-	DKLog("DKXml::End()\n", DKDEBUG);
+	DKLog("DKXml::End()\n", DKFILTER);
 }
 
 //////////////////////////////////////////////

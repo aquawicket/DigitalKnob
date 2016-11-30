@@ -202,7 +202,8 @@ void handler(int signum)
 ////////////////////
 void DKDebug::Init()
 {
-	//DKLog("DKDebug::Init()\n", DKDEBUG);
+	//DKLog("DKDebug::Init()\n", DKFILTER);
+	
 	DKCreate("DKDebugJS");
 	
 #ifdef WIN32

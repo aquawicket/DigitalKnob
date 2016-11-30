@@ -392,7 +392,7 @@ return false;
 /////////////////////////////////////////
 bool DKUtil::Run(const DKString& command)
 {
-	DKLog("DKUtil::Run("+command+")\n", DKDEBUG);
+	DKLog("DKUtil::Run("+command+")\n", DKFILTER);
 #ifdef WIN32
 	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
 	return true;
@@ -404,7 +404,7 @@ bool DKUtil::Run(const DKString& command)
 ///////////////////////////////////////////
 bool DKUtil::System(const DKString& command)
 {
-	DKLog("DKUtil::System("+command+")\n", DKDEBUG);
+	DKLog("DKUtil::System("+command+")\n", DKFILTER);
 	int rval = system(command.c_str());
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n", DKDEBUG);
 	return true;
@@ -413,7 +413,7 @@ bool DKUtil::System(const DKString& command)
 /////////////////////////////////////////////////
 DKString DKUtil::Execute(const DKString& command)
 {
-	DKLog("DKUtil::Execute("+command+")\n", DKDEBUG);
+	DKLog("DKUtil::Execute("+command+")\n", DKFILTER);
 
 #ifdef WIN32
 	FILE* pipe = _popen(command.c_str(), "r");

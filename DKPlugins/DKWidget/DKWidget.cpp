@@ -85,7 +85,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 /////////////////////////////////////////////////
 bool DKWidget::CreateWidget(const DKString& file)
 {
-	//DKLog("DKWidget::CreateWidget("+file+")\n", DKDEBUG);
+	//DKLog("DKWidget::CreateWidget("+file+")\n", DKFILTER);
 
 	DKString id;
 	DKString html;
@@ -385,7 +385,7 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id)
 {
-	DKLog("DKWidget::CreateElementBefore("+element+","+tag+","+id+")\n", DKDEBUG);
+	DKLog("DKWidget::CreateElementBefore("+element+","+tag+","+id+")\n", DKFILTER);
 	DKElement* ele = CreateElement(tag);
 	
 	DKString ele_id;
@@ -528,7 +528,7 @@ bool DKWidget::InsertBefore(const DKString& parent, DKElement* element)
 ////////////////////////////////////////////////
 bool DKWidget::RemoveElement(const DKString& id)
 {
-	DKLog("DKWidget::RemoveElement("+id+")\n", DKDEBUG);
+	DKLog("DKWidget::RemoveElement("+id+")\n", DKFILTER);
 
 	//Remove all events and child events
 	DKStringArray elements;
@@ -568,7 +568,7 @@ bool DKWidget::RemoveEventListener(const DKString& id, const DKString& type)
 //////////////////////////////////////////////////////////
 bool DKWidget::RemoveAllEventListeners(const DKString& id)
 {
-	//DKLog("Removing All Events for: "+id+"\n", DKDEBUG);
+	//DKLog("Removing All Events for: "+id+"\n", DKFILTER);
 	DKEvent::RemoveEvents(id);
 	/*
 	RemoveEventListener(GetElementById(id), "mousedown");
@@ -930,7 +930,7 @@ bool DKWidget::PrependChild(DKElement* parent, DKElement* element)
 //////////////////////////////////////////////////////////////////
 bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 {
-	DKLog("DKWidget::InsertBefore("+GetId(parent)+","+GetId(element)+")\n", DKDEBUG);
+	DKLog("DKWidget::InsertBefore("+GetId(parent)+","+GetId(element)+")\n", DKFILTER);
 	
 	if(!parent){
 		DKLog("InsertBefore(): parent invalid\n", DKERROR);
