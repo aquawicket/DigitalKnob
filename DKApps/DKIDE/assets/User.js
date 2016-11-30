@@ -1,5 +1,5 @@
 var USE_CEF = false;
-DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 DKCreate("DKWindow");
 DKCreate("DKRocket");
 DKCreate("DKWidget");
@@ -19,18 +19,23 @@ if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	DKCef_SetUrl(iframe, url, currentBrowser);
 	DKCef_SetFocus(iframe);
 	
+	/*
 	DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
 		var id = DKGoogleAd_CreateAd("body", "100%", "100rem");
 	});
+	*/
 }
 else{
+	DKWidget_SetProperty("body","background-color","grey");
 	DKCreate("DKScale/DKScale.js", function(){});
-	DKCreate("DKOS/DKOS.js", function(){});
+	DKCreate("DKBuild/DKBuild.js", function(){});
 	
+	/*
 	if(DK_GetBrowser() != "CEF"){ 
 		DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
 			var id = DKGoogleAd_CreateAd("body", "100%", "100rem");
 		});
 	}
+	*/
 }
 //DKCreate("DKUpdate");
