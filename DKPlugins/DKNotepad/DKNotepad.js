@@ -37,8 +37,8 @@ function DKNotepad_OnEvent(event)
 function DKNotepad_Save()
 {
 	var text = DKWidget_GetValue("DKNotepad_Text");
-	//var assets = DKAssets_LocalAssets();
-	DKFile_StringToFile(text, currentFile);
+	var assets = DKAssets_LocalAssets();
+	DKFile_StringToFile(text, assets+currentFile);
 	DKCreate("DKMessage/DKMessage.js");
 	DKMessageBox("", "ShowMessage", "Saved File");
 }
@@ -51,8 +51,8 @@ function DKNotepad_Open(file)
 	//DKLog("DKNotepad_Open("+file+") \n");
 	
 	currentFile = file;
-	//var assets = DKAssets_LocalAssets();
-	var text = DKFile_FileToString(file);
+	var assets = DKAssets_LocalAssets();
+	var text = DKFile_FileToString(assets+file);
 	//DKLog("DKNotepad_Open("+file+"): text="+text+" \n");
 	DKWidget_SetAttribute("DKNotepad_Text", "value", text);
 }

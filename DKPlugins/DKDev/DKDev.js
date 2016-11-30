@@ -15,11 +15,13 @@ function DKDev_Init()
 	DKAddEvent("GLOBAL", "OpenFile", DKDev_OnEvent);
 	DKAddEvent("GLOBAL", "FileChoice", DKDev_OnEvent);
 	
+	ignorelist += "DKBuildGUI.html,";
 	ignorelist += "DKDev.html,";
 	ignorelist += "DKMenuRight.html,";
 	
 	DKDev_CreateBox();
-	DKDev_HideBox();	
+	DKDev_HideBox();
+	DKDev_On();
 }
 
 ////////////////////
