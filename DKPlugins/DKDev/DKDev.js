@@ -651,7 +651,8 @@ function DKDev_OpenText(path)
 {
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
-		DKNotepad_LoadFile(path);
+		DKFrame_Widget("DKNotepad.html");
+		DKNotepad_Open(path);
 	});
 }
 
