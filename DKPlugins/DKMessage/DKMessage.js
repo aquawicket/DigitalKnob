@@ -7,14 +7,16 @@ var event_data;
 function DKMessage_Init()
 {	
 	//DKLog("***********DKMessageInit() \n", DKDEBUG);
-	DKCreate("DKMessage/DKMessage.html"); 
-	DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
-	DKAddEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
-	DKAddEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
-	DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
-	DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
-	//DKAddEvent("DKMessageInput", "keydown", DKMessage_OnEvent);
-	//DKAddEvent(/*"DKMessageOk",*/ "keydown", DKMessage_OnEvent);
+	DKCreate("DKMessage/DKMessage.html", function(){
+		DKFrame_Widget("DKMessage.html");
+		DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
+		DKAddEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
+		DKAddEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
+		DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
+		DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
+		//DKAddEvent("DKMessageInput", "keydown", DKMessage_OnEvent);
+		//DKAddEvent(/*"DKMessageOk",*/ "keydown", DKMessage_OnEvent);
+	});
 }
 
 ////////////////////////
