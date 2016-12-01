@@ -26,7 +26,8 @@ function DKDev_RootMenu_OnEvent(event)
 	if(DK_Id(event, "DKDev_RootMenu_OpenFile")){
 		DKCreate("DKFile/DKFileDialog.js");
 		DKFrame_Widget("DKFileDialog.html");
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+		var assets = DKAssets_LocalAssets();
+		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+assets+",relative"); // To -> DKFileDialog
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

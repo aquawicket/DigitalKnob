@@ -45,7 +45,8 @@ function DKDev_Menu_OnEvent(event)
 	if(DK_Id(event, "DKDev_Menu_OpenFile")){
 		DKCreate("DKFile/DKFileDialog.js");
 		DKFrame_Widget("DKFileDialog.html");
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+		var assets = DKAssets_LocalAssets();
+		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+assets+",relative"); // To -> DKFileDialog
 	}
 	if(DK_Id(event, "DKDev_Menu_NewDiv")){
 		DKDev_NewDiv(stored_element);
@@ -53,7 +54,8 @@ function DKDev_Menu_OnEvent(event)
 	if(DK_Id(event, "DKDev_Menu_NewImage")){
 		DKCreate("DKFile/DKFileDialog.js");
 		DKFrame_Widget("DKFileDialog.html");
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+local_assets+",relative"); // To -> DKFileDialog
+		var assets = DKAssets_LocalAssets();
+		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+assets+",relative"); // To -> DKFileDialog
 	}
 	if(DK_Id(event, "DKDev_Menu_NewText")){
 		DKDev_NewText();
