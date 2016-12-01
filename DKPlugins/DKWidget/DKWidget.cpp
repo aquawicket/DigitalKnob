@@ -1053,7 +1053,7 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 	///// fix display
 	if(same(name,"display")){
 		if(same(value,"2")){
-			finalValue = "absolute";
+			finalValue = "block";
 		}
 	}
 	
