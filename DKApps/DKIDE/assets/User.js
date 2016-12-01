@@ -32,6 +32,7 @@ else{
 	DKCreate("DKDev/DKDev.js", function(){});
 	DKCreate("DKDev/DKMenuRight.js", function(){});
 	DKWidget_SetProperty("DKMenuRight.html","right","0rem");
+	DKCreate("DKDebug/Input.html", function(){});
 	
 	/*
 	if(DK_GetBrowser() != "CEF"){ 
