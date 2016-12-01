@@ -341,13 +341,14 @@ function DKDev_Paste()
 ////////////////////////
 function DKDev_NewPage()
 {
+	//FIXME
 	DKLog("DKDev_NewPage() \n", DKDEBUG);
 	
-	var id = DKWidget_GetAvailableId("NewFrame.html");
-	
-	DKCreate(id+","+stored_element);
-	DKDev_AddDragHandles(id);
-	DKDev_SelectElement(id);
+	var id = DKWidget_GetAvailableId("untitled.html");
+	DKCreate(id+","+stored_element, function(){
+		DKDev_AddDragHandles(id);
+		DKDev_SelectElement(id);
+	});
 	return true;
 }
 
