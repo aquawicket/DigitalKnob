@@ -1,7 +1,7 @@
 ///////////////////////////
 function DKMenuRight_Init()
 {
-	DKCreate("DKDev/DKMenuRight.html");
+	DKCreate("DKDev/DKMenuRight.html", function(){});
 	DKAddEvent("GLOBAL", "keydown", DKMenuRight_OnEvent);
 	DKAddEvent("DevModeButton", "click", DKMenuRight_OnEvent);
 	DKAddEvent("AppImage", "click", DKMenuRight_OnEvent);

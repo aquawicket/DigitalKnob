@@ -5,7 +5,7 @@ function DKMenuRightApp_Init()
 	DKAddEvent("SaveUserFile", "click", DKMenuRightApp_OnEvent);
 	DKAddEvent("DKMenuRightApp.html", "Update", DKMenuRightApp_OnEvent);
 	
-	DKMenuRightApp_Update();
+	//DKMenuRightApp_Update();
 }
 
 /////////////////////////////
