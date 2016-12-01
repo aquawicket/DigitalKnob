@@ -36,6 +36,10 @@ function DKFrame_OnEvent(event)
 function DKFrame_Widget(id)
 {
 	DKLog("DKFrame_Widget("+id+")\n", DKDEBUG);
+	if(!DKWidget_ElementExists(id)){
+		DKLog("DKFrame_Widget(): element does not exist\n", DKERROR);
+		return false;
+	}
 	
 	var top = DKWidget_GetProperty(id, "top");
 	var bottom = DKWidget_GetProperty(id, "bottom");
