@@ -233,7 +233,7 @@ function DKFrame_MaximizeButton(id)
 	var bottom = DKWidget_GetProperty(frame, "bottom");
 	var left = DKWidget_GetProperty(frame, "left");
 	var right = DKWidget_GetProperty(frame, "right");
-	if(top == "0rem" && bottom == "35rem" && left == "0rem" && right == "0rem"){
+	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem"){
 		DKFrame_RestoreSize(frame)
 	}
 	else{
@@ -241,7 +241,7 @@ function DKFrame_MaximizeButton(id)
 		DKWidget_SetProperty(frame, "top", "0rem");
 		DKWidget_SetProperty(frame, "left", "0rem");
 		DKWidget_SetProperty(frame, "right", "0rem");
-		DKWidget_SetProperty(frame, "bottom", "35rem");
+		DKWidget_SetProperty(frame, "bottom", "0rem");
 		DKWidget_RemoveProperty(frame, "width");
 		DKWidget_RemoveProperty(frame, "height");
 	}
