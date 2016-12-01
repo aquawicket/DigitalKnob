@@ -601,7 +601,11 @@ function DKDev_OpenHtml(path)
 	var id = DKFile_GetFilename(path);
 	DKCreate(path);
 	DKDev_AddDragHandles(id);
+	DKFrame_Widget(id);
 	DKDev_SelectElement(id);
+	
+	
+	//FIXME
 	return;
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
