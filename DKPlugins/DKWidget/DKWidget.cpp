@@ -1050,6 +1050,13 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 	
 	DKString finalValue = value;
 
+	///// fix display
+	if(same(name,"display")){
+		if(same(value,"2")){
+			finalValue = "absolute";
+		}
+	}
+	
 	///// adjust background alpha from to 1-255 scale
 	if(same(name,"background-color")){
 		if(has(value,"rgba")){
