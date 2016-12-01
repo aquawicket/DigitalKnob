@@ -650,6 +650,7 @@ function DKDev_OpenJS(path)
 {
 	var id = DKFile_GetFilename(path);
 	DKCreate(path);
+	DKFrame_Widget(id);
 }
 
 /////////////////////////////
