@@ -55,11 +55,15 @@ function DKInput_OnEvent(event)
 {
 	if(event.type){ //Browser
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event));
-		DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+"\n");
+		if(DK_GetType(event) != "mousemove"){
+			DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+"\n");
+		}
 	}
 	else{ //App
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+event);
-		DKLog("Last Event: "+event+"\n");
+		if(DK_GetType(event) != "mousemove"){
+			DKLog("Last Event: "+event+"\n");
+		}
 	}
 	
 	if(DK_Type(event, "keypress")){
