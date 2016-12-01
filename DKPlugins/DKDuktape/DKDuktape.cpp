@@ -132,7 +132,7 @@ bool DKDuktape::CallInit(const DKString& file)
 /////////////////////////////////////////////
 bool DKDuktape::CallEnd(const DKString& file)
 {
-	DKLog("DKDuktape::CallEnd(" + jsfile + ")\n", DKFILTER);
+	DKLog("DKDuktape::CallEnd(" + file + ")\n", DKFILTER);
 	
 	DKString filename;
 	DKFile::GetFileName(file, filename);
