@@ -11,7 +11,7 @@ if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	var iframe = DKWidget_CreateElement("body", "iframe", "DKCef_frame");
 	DKWidget_SetAttribute(iframe, "src", url);
 	DKWidget_SetProperty(iframe, "position", "absolute");
-	DKWidget_SetProperty(iframe, "top", "100rem");
+	DKWidget_SetProperty(iframe, "top", "0rem");
 	DKWidget_SetProperty(iframe, "left", "0rem");
 	DKWidget_SetProperty(iframe, "width", "100%");
 	DKWidget_SetProperty(iframe, "bottom", "0rem");
