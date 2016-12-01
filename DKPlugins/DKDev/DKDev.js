@@ -599,10 +599,11 @@ function DKDev_OpenHtml(path)
 {
 	//DKLog("DKDev_OpenHtml("+path+") \n", DKDEBUG);
 	var id = DKFile_GetFilename(path);
-	DKCreate(path);
-	DKDev_AddDragHandles(id);
-	DKFrame_Widget(id);
-	DKDev_SelectElement(id);
+	DKCreate(path, function(){
+		DKDev_AddDragHandles(id);
+		DKFrame_Widget(id);
+		DKDev_SelectElement(id);
+	});
 	
 	
 	//FIXME
@@ -649,8 +650,10 @@ function DKDev_OpenHtml(path)
 function DKDev_OpenJS(path)
 {
 	var id = DKFile_GetFilename(path);
-	DKCreate(path);
-	DKFrame_Widget(id);
+	id = id.replace(".js",".html");
+	DKCreate(path, function(){
+		DKFrame_Widget(id);
+	});
 }
 
 /////////////////////////////
@@ -672,8 +675,8 @@ function DKDev_OpenImage(path)
 //////////////////////////////
 function DKDev_OpenModel(path)
 {
-	DKCreate("DKOSGManipulator,,DKOSGWindow");
-	DKCreate("DKOSGModel,,DKWindow,"+path);
+	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){});
+	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
 }
 
 //////////////////////////////
@@ -681,8 +684,9 @@ function DKDev_OpenAudio(path)
 {
 	DKLog("DKDev_OpenAudio("+path+") \n");
 	//var file = DKFile_GetFilename(path);
-	DKCreate("DKAudio");
-	DKAudio_PlaySound(path);
+	DKCreate("DKAudio", function(){
+		DKAudio_PlaySound(path);
+	});
 	
 	//DKCreate("DKOSGAudio,"+file+",DKOSGWindow,"+path);
 	//DKOSGAudio_Play("DKOSGAudio,"+file);
@@ -694,7 +698,8 @@ function DKDev_OpenAudio(path)
 //////////////////////////////
 function DKDev_OpenVideo(path)
 {
-	DKCreate("DKOSGManipulator,,DKOSGWindow");
-	DKOSGVideo_Play(path);
+	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){
+		DKOSGVideo_Play(path);
+	});
 	//DKCreate("DKOSGVideo,,DKOSGWindow,"+path);
 }
