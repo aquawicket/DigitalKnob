@@ -7,7 +7,7 @@
 [LOG_ERRORS] ON
 [LOG_FILE] ON
 [LOG_FILTER_ALL] OFF
-[LOG_FILTER_0] //DKEvent::SendEvent
-[LOG_FILTER_1] //DKEvent::AddEvent
-[LOG_FILTER_2] //DKEvent::RemoveEvent
+[LOG_FILTER_0] DKBaseT::Create
+[LOG_FILTER_1] OnContextCreated
+[LOG_FILTER_2] DKThreadPool
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
