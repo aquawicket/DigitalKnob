@@ -78,6 +78,7 @@ public:
 	{
 		if(!object){
 			DKLog("DKCefApp::AttachFunction(): OnContextCreated() has not been called yet. \n", DKERROR);
+			return;
 		}
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
 		object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);

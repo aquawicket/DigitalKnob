@@ -1,5 +1,6 @@
 var USE_CEF = true;
 //DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+
 DKCreate("DKWindow");
 DKCreate("DKRocket");
 DKCreate("DKWidget");
@@ -19,6 +20,7 @@ if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	DKCef_SetUrl(iframe, url, currentBrowser);
 	DKCef_SetFocus(iframe);
 	
+	DKCreate("DKThreadPool");
 	/*
 	DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
 		var id = DKGoogleAd_CreateAd("body", "100%", "100rem");

@@ -1,4 +1,5 @@
 DKDEPEND(threadpool-0_2_5-src)
+DKDEPEND(DKCef)
 IF(WIN32 OR MAC OR LINUX)
 	DKDEPEND(boost_1_57_0 Boost_Thread)
 ENDIF()
