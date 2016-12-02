@@ -20,6 +20,7 @@ function DKCreate(data, callback)
 	}
 	else{
 		DKLog("DKCreate("+data+"): requesting c++ plugin\n", DKDEBUG);
+		DKCreate_CPP(data);
 	}
 	
 	if(arry[0] == "DKJavascript"){
