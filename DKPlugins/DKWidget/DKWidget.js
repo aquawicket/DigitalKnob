@@ -18,6 +18,9 @@ function DKCreate(data, callback)
 	else if(arry[0].indexOf(".css") > -1){
 		arry.splice(0, 0, "DKCss");
 	}
+	else{
+		DKLog("DKCreate("+data+"): requesting c++ plugin\n", DKDEBUG);
+	}
 	
 	if(arry[0] == "DKJavascript"){
 		LoadJS(arry[1], function(){
