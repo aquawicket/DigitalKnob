@@ -90,7 +90,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 	DKString id;
 	DKString html;
 	DKString path = file;
-	if(file.empty()){
+	if(has(file,"NewWidget")){
 		DKString id = "NewWidget.html";
 		html = "<div id=\"" + id + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
