@@ -12,8 +12,6 @@ public:
 	void Init();
 	void End();
 	
-	static bool MyFunc(CefArgs args, CefReturn retval);
-	
 	static bool GetThreadNames(CefArgs args, CefReturn retval);
 	static bool _DKQueue(CefArgs args, CefReturn retval);
 	static void QueueItem();

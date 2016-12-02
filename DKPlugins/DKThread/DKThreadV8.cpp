@@ -5,8 +5,6 @@
 ///////////////////////
 void DKThreadV8::Init()
 {
-	DKCefApp::AttachFunction("DKThread_myfunc", DKThreadV8::MyFunc);
-	
 	DKCefApp::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
 	DKCefApp::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
 }
@@ -15,15 +13,6 @@ void DKThreadV8::Init()
 void DKThreadV8::End()
 {
 
-}
-
-///////////////////////////////////////////////////////
-bool DKThreadV8::MyFunc(CefArgs args, CefReturn retval)
-{
-	DKString arg = args[0]->GetStringValue();
-	DKLog("DKThreadV8::MyFunc("+arg+")\n", DKFILTER);
-	retval = CefV8Value::CreateString("output");
-	return true;
 }
 
 //////////////////////////////////////////////////////////////
@@ -41,12 +30,11 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 	DKString code = args[1]->GetStringValue();
 	
 	DKLog("DKThreadJS::DKQueue("+name+","+code+")\n", DKDEBUG);
-#ifdef WIN32
-	DKQueue(name, QueueItem, code); //Call in thread
-#else
-	//duk_eval_string(DKDuktape::ctx, code.c_str()); //Call directly
-	RunJavascript(code);
-#endif
+//#ifdef WIN32
+//	DKQueue(name, QueueItem, code); //Call in thread
+//#else
+	DKCef::RunJavascript(code); //Call directly
+//#endif
 	return true;
 }
 
