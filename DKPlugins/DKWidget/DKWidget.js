@@ -117,6 +117,8 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
+	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	
 	if(!url){ return; }
 	DKLog("DKWidget("+url+", "+parent+") \n", DKDEBUG);
 	
@@ -130,6 +132,7 @@ function DKWidget_NewWidget(url, parent)
 		return;
 	}
 	
+	if(url == ".html"){ url = "New.html"; }
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }

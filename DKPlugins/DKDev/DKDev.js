@@ -188,7 +188,8 @@ function DKDev_SelectElement(element)
 /////////////////////////////////
 function DKDev_AddDragHandles(id)
 {
-	//DKLog("DKDev_AddDragHandles("+id+") \n", DKDEBUG);
+	DKLog("DKDev_AddDragHandles("+id+") \n", DKDEBUG);
+	
 	//RemoveDragHandles(id); //clear any drags first
 	var elements = DKWidget_GetElements(id);
 	var list = elements.split(",");

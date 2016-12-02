@@ -111,9 +111,11 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
+	DKLog("CreateWidget("+url+","+parent+")\n");
 	
 	var string = DK_FileToString(url);
-	if(!string){ 
+	DKLog("CreateWidget(url, parent): string = "+string+"\n");
+	if(!string || string == "ERROR"){ 
 		//DKLog("file not found \n", DKERROR); 
 		var file = DKFile_GetFilename(url);
 		string  = "<div id=\""+file+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
