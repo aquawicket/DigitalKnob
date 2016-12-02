@@ -343,11 +343,11 @@ function DKDev_NewPage()
 {
 	DKLog("DKDev_NewPage() \n", DKDEBUG);
 	
-	var id = DKWidget_GetAvailableId("NewWidget.html");
-	DKCreate(id+","+stored_element, function(){
-		DKDev_AddDragHandles(id);
-		DKDev_SelectElement(id);
-		DKFrame_Widget(id);
+	//var id = DKWidget_GetAvailableId("NewWidget.html");
+	DKCreate(".html,"+stored_element, function(){
+		DKDev_AddDragHandles("New.html");
+		DKDev_SelectElement("New.html");
+		DKFrame_Widget("New.html");
 	});
 	return true;
 }

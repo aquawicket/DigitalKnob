@@ -82,16 +82,17 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	}
 }
 
-/////////////////////////////////////////////////
-bool DKWidget::CreateWidget(const DKString& file)
+///////////////////////////////////////////
+bool DKWidget::CreateWidget(DKString& file)
 {
 	//DKLog("DKWidget::CreateWidget("+file+")\n", DKFILTER);
 
 	DKString id;
 	DKString html;
 	DKString path = file;
-	if(has(file,"NewWidget")){
-		DKString id = "NewWidget.html";
+	if(same(file,".html")){
+		file = "New.html";
+		path = "New.html";
 		html = "<div id=\"" + id + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 	else{
@@ -100,7 +101,7 @@ bool DKWidget::CreateWidget(const DKString& file)
 
 	root = NULL;
 	DKString file_path;
-	DKFile::GetFileName(file, id);		
+	DKFile::GetFileName(path, id);		
 	DKFile::GetFilePath(path, file_path);
 	DKFile::FileToString(path, html); //Convert file to a string
 	//DKAssets::AppendDataPath(file_path); //If this file's path is not in the datapath list, add it
@@ -115,24 +116,24 @@ bool DKWidget::CreateWidget(const DKString& file)
 	//Parse the sting into an element
 	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
 	if(!doc){
-		DKLog("DKWidget::CreateWidget("+file+"): could not find documant \n", DKERROR);
+		DKLog("DKWidget::CreateWidget("+path+"): could not find documant \n", DKERROR);
 		return false;
 	}
 	DKElement* temp = doc->CreateElement("temp"); //FIXME - is the memory delt with properly?
 	if(!temp){
-		DKLog("DKWidget::CreateWidget("+file+"): could not find firstChild \n", DKERROR);
+		DKLog("DKWidget::CreateWidget("+path+"): could not find firstChild \n", DKERROR);
 		return false;
 	}
 	SetInnerHtml(temp, rml);
 
 	DKElement* firstChild = temp->GetFirstChild();
 	if(!firstChild){
-		DKLog("DKWidget::CreateWidget("+file+"): could not find firstChild \n", DKERROR);
+		DKLog("DKWidget::CreateWidget("+path+"): could not find firstChild \n", DKERROR);
 		return false;
 	}
 	DKString _id = firstChild->GetId().CString();
 	if(!same(_id,id)){
-		DKLog("CreateWidget("+file+"): fixing id... "+id+"\n", DKERROR);
+		DKLog("CreateWidget("+path+"): fixing id... "+id+"\n", DKERROR);
 		DKString str;
 		GetInnerHtml(temp, str);
 		replace(str, "id=\""+_id+"\"", "id=\""+id+"\""); //Set the id to the filename (example.html)

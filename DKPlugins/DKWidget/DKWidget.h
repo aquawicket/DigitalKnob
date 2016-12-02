@@ -24,7 +24,7 @@ public:
 protected:
 	static DKRocket* dkRocket;
 	DKElement* root;
-	bool CreateWidget(const DKString& file);
+	bool CreateWidget(DKString& file);
 	void RemoveWidget(DKWidget* widget);
 	bool AttachEvents();
 	bool AttachDrags();
