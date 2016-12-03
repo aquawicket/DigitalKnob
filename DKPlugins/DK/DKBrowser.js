@@ -90,10 +90,10 @@ function LoadJS(url, callback)
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
 			
-			DKLog("Loaded: "+url, DKINFO);
+			DKLog("Loaded: "+url, DKDEBUG);
 			var func = window[name]; //Init    
 			if(typeof func == 'function'){ 
-				DKLog("Calling: "+name+" \n", DKINFO);
+				DKLog("Calling: "+name+" \n", DKDEBUG);
 				func(); //Init
 			}
 			else{
@@ -111,7 +111,7 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
-	DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
+	//DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
 	
 	var string = DK_FileToString(url);
 	DKLog("CreateWidget(url, parent): string = "+string+"\n", DKDEBUG);

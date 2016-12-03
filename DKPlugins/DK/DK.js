@@ -1,5 +1,10 @@
 //BROWSER
 
+var LOG_DEBUG = false;
+var LOG_INFO = true;
+var LOG_WARNINGS = true;
+var LOG_ERRORS = true;
+
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return;*/ }
 function EventLoop(){ /*DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return;*/ }
@@ -26,6 +31,37 @@ var DKERROR = 0;     //Red
 var DKWARN = 1;      //Yellow
 var DKINFO = 2;      //White
 var DKDEBUG = 3;     //Blue
+
+///////////////////////////
+function DKLog(string, lvl)
+{
+	if(!lvl){
+		alert("DKLog("+string+") missing lvl");
+	}
+	if(window.console){
+		var color = "";
+		if(lvl == DKERROR && LOG_ERRORS){ color = "color:red"; }
+		else if(lvl == DKWARN && LOG_WARNINGS){ color = "color:#B8860B"; }
+		else if(lvl == DKINFO && LOG_INFO){ color = "color:grey"; }
+		else if(lvl == DKDEBUG && LOG_DEBUG){ color = "color:blue"; }
+		else{ return; }
+		//if(!color){ throw new Error("DKLog(): with no lvl."); }
+		if(!color){ color = "color:grey"; }
+		string = string.replace("\n","");
+		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
+			console.log("%c"+string, color);
+		}
+		else{
+			console.log(string);
+		}
+	}
+	//DKSendEvent("DKConsole.html", "DKNotify", string);
+}
+DKLog("*** DigitalKnob ***\n", DKINFO);
+DKLog(DK_GetBrowser()+"\n", DKINFO);
+DKLog(DK_GetJavascript()+"\n", DKINFO);
+
+
 
 /////////////////////
 function DK_GetTime()
@@ -56,34 +92,6 @@ function DK_GetDate()
 	date += d.getFullYear();
 	return date;
 }
-
-///////////////////////////
-function DKLog(string, lvl)
-{
-	if(!lvl){
-		alert("DKLog("+string+") missing lvl");
-	}
-	if(window.console){
-		var color = "";
-		if(lvl == DKERROR){ color = "color:red"; }
-		if(lvl == DKWARN){ color = "color:#B8860B"; }
-		if(lvl == DKINFO){ color = "color:grey"; }
-		if(lvl == DKDEBUG){ color = "color:blue"; }
-		//if(!color){ throw new Error("DKLog(): with no lvl."); }
-		if(!color){ color = "color:grey"; }
-		string = string.replace("\n","");
-		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
-			console.log("%c"+string, color);
-		}
-		else{
-			console.log(string);
-		}
-	}
-	//DKSendEvent("DKConsole.html", "DKNotify", string);
-}
-DKLog("*** DigitalKnob ***\n", DKINFO);
-DKLog(DK_GetBrowser()+"\n", DKINFO);
-DKLog(DK_GetJavascript()+"\n", DKINFO);
 
 ////////////////////
 function DK_Reload()
