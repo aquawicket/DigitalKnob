@@ -12,6 +12,7 @@ public:
 	void End();
 
 	static bool DKCreate_CPP(CefArgs args, CefReturn retval);
+	static bool DKValid_CPP(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
 };
 

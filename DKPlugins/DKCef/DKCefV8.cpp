@@ -6,6 +6,7 @@ void DKCefV8::Init()
 	DKCreate("DKFileV8");
 	
 	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
+	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 }
 
@@ -21,6 +22,19 @@ bool DKCefV8::DKCreate_CPP(CefArgs args, CefReturn retval)
 	DKString data = args[0]->GetStringValue();
 	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKFILTER);
 	DKCreate(data);
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::DKValid_CPP(CefArgs args, CefReturn retval)
+{
+	DKString data = args[0]->GetStringValue();
+	bool valid = DKValid(data);
+	if(!valid){
+		retval = CefV8Value::CreateBool(false);
+		return true;
+	}
+	retval = CefV8Value::CreateBool(true);
 	return true;
 }
 
