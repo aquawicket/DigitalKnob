@@ -37,10 +37,10 @@
 #define DKWHITE  "\x1B[37m"
 #endif
 
-#define DKERROR 0      //Red
-#define DKWARN 1       //Yellow
-#define DKINFO 2       //White
-#define DKDEBUG 3      //Blue
+#define DKERROR 1      //Red
+#define DKWARN 2       //Yellow
+#define DKINFO 3       //White
+#define DKDEBUG 4      //Blue
 
 extern bool log_errors;
 extern bool log_warnings;

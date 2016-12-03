@@ -107,6 +107,10 @@ function DKDebug_PushDKFiles()
 	}
 	
 	var temp = DKFile_DirectoryContents(assets);
+	if(!temp){
+		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
+		return false; 
+	}
 	var folders = temp.split(",");
 	
 	for(i=0; i<folders.length; i++){

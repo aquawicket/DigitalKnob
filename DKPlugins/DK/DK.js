@@ -30,10 +30,10 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for javascript", DKERROR); return; }
 }
 
-var DKERROR = 0;     //Red
-var DKWARN = 1;      //Yellow
-var DKINFO = 2;      //White
-var DKDEBUG = 3;     //Blue
+var DKERROR = 1;     //Red
+var DKWARN = 2;      //Yellow
+var DKINFO = 3;      //White
+var DKDEBUG = 4;     //Blue
 
 ///////////////////////////
 function DKLog(string, lvl)
