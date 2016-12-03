@@ -4,9 +4,8 @@
 
 extern bool log_errors = true;
 extern bool log_warnings = true;
-extern bool log_success = true;
 extern bool log_info = true;
-extern bool log_debug = true;
+extern bool log_debug = false;
 extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;

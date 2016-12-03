@@ -53,8 +53,8 @@ void DKAssets::Init()
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
-	if(!same(debug, "ON")) { log_debug = false; }
-	if(!same(info, "ON")) { log_info = false; }
+	if(same(debug, "ON")) { log_debug = true; }
+	if(same(info, "OFF")) { log_info = false; }
 	if(same(warnings, "OFF")) { log_warnings = false; }
 	if(same(errors, "OFF")) { log_errors = false; }
 	
