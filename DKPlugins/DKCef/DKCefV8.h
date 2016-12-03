@@ -10,8 +10,9 @@ class DKCefV8 : public DKObjectT<DKCefV8>
 public:
 	void Init();
 	void End();
-	static bool MyFunc(CefArgs args, CefReturn retval);
+
 	static bool DKCreate_CPP(CefArgs args, CefReturn retval);
+	static bool Execute(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
