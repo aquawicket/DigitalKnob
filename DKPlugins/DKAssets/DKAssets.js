@@ -58,10 +58,12 @@ function DKAssets_Init()
 
 }
 
-///////////////////////////////
-function DKAssets_LocalAssets()
-{
-	return local_assets;
+if(DK_GetBrowser() != "CEF"){
+	///////////////////////////////
+	function DKAssets_LocalAssets()
+	{
+		return local_assets;
+	}
 }
 
 ////////////////////////////////

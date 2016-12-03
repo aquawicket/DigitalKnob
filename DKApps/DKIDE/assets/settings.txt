@@ -6,7 +6,7 @@
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_SHOW] //show these strings
+[LOG_SHOW] DKFile_DirectoryContents
 [LOG_HIDE] Loaded font face
 
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/

@@ -95,6 +95,10 @@ function DKDebug_PushDKFiles()
 	
 	//DKLog("DKMenuRightApp_PushDKFiles() \n");
 	var assets = DKAssets_LocalAssets();
+	if(!assets){
+		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
+		return false;
+	}
 	
 	var DKPlugins = assets+"/../../../DKPlugins";
 	var DKPlugins2 = assets+"/../../../../DKPlugins";
@@ -106,6 +110,7 @@ function DKDebug_PushDKFiles()
 		DKPlugins2 = DKFile_GetAbsolutePath(DKPlugins2);
 	}
 	
+	DKLog("Calling: DKFile_DirectoryContents("+assets+")\n", DKINFO);
 	var temp = DKFile_DirectoryContents(assets);
 	if(!temp){
 		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
