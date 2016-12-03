@@ -78,15 +78,17 @@ function UrlExists(url, fn)
 	//return;// true;
 }
 
-////////////////////////////////
-function DKFile_Exists(path, fn)
-{
-	DKLog("DKFile_Exists("+path+") \n", DKDEBUG);
-	if(!path){ return false; }
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////
+	function DKFile_Exists(path, fn)
+	{
+		DKLog("DKFile_Exists("+path+") \n", DKDEBUG);
+		if(!path){ return false; }
 	
-	UrlExists(path, function(rval){
-		fn && fn(rval);
-	});
+		UrlExists(path, function(rval){
+			fn && fn(rval);
+		});
+	}
 }
 
 ////////////////////////////////
