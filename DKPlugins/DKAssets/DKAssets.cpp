@@ -47,16 +47,22 @@ void DKAssets::Init()
 
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
+	if(same(debug, "ON")) { log_debug = true; }
+
 	DKString info;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
+	if(same(info, "OFF")) { log_info = false; }
+
 	DKString warnings;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
+	if(same(warnings, "OFF")) { log_warnings = false; }
+
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
-	if(same(debug, "ON")) { log_debug = true; }
-	if(same(info, "OFF")) { log_info = false; }
-	if(same(warnings, "OFF")) { log_warnings = false; }
 	if(same(errors, "OFF")) { log_errors = false; }
+
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){

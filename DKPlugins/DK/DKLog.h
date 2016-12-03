@@ -50,6 +50,8 @@ extern bool log_msvc;
 extern bool log_xcode;
 extern bool log_file;
 extern bool log_gui_console;
+extern DKString log_show;
+extern DKString log_hide;
 
 void DKLog(const DKString& text, const int lvl);
 void DKLog(const int text, const int lvl);

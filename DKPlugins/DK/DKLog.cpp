@@ -10,6 +10,8 @@ extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
+extern DKString log_show = ""; //comma seperated 
+extern DKString log_hide = ""; //comma seperated 
 
 void DKLog(const int text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const long& text, const int lvl){ DKLog(toString(text),lvl); }
@@ -19,18 +21,40 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
+	//FIXME: this is a file hog and slow. Do this in DKAssets and store the LOG_SHOW, LOG_HIDE variables.
+	
 	int i=0;
 	DKString value;
 
-	//check for LOG_HIDE_n
+	//check for LOG_HIDE
+	DKStringArray hides;
+	toStringArray(hides, log_hide, ",");
+	for(int i=0; i<hides.size(); ++i){
+		if(has(text,hides[i])){
+			return;
+		}
+	}
+
+	/*
 	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE_"+toString(i)+"]", value)){
 		if(has(text,value)){
 			return;
 		}
 		i++;
 	}
+	*/
 
 	//check for LOG_SHOW_n
+	bool flag = false;
+	DKStringArray shows;
+	toStringArray(shows, log_show, ",");
+	for(int i=0; i<shows.size(); ++i){
+		if(has(text,shows[i])){
+			return;
+		}
+	}
+
+	/*
 	i = 0;
 	bool flag = false;
 	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW_"+toString(i)+"]", value)){
@@ -40,6 +64,7 @@ void DKLog(const DKString& text, const int lvl)
 		}
 		i++;
 	}
+	*/
 	if(!flag){
 		if(log_debug == false && lvl == DKDEBUG){ return; }
 		if(log_info == false && lvl == DKINFO){ return; }
