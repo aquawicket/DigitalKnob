@@ -88,7 +88,7 @@ function DKClose(data)
 		name += "_End";
 		var func = window[name]; //End
 		if(typeof func == 'function'){ 
-			DKLog("Calling: "+name+" \n", DKINFO);
+			DKLog("Calling: "+name+" \n", DKDEBUG);
 			func(); //End
 		}
 		else{
