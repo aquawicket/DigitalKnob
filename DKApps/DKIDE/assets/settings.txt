@@ -6,7 +6,7 @@
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_SHOW] DKBaseT::Create
+[LOG_SHOW] DKBaseT::Create, DKCreate, DKSDLWindow
 [LOG_HIDE] Loaded font face
 
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
