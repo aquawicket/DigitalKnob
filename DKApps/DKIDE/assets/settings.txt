@@ -9,5 +9,5 @@
 [LOG_FILTER_ALL] OFF
 [LOG_FILTER_0] DKBaseT::Create
 [LOG_FILTER_1] OnContextCreated
-[LOG_FILTER_2] DKThreadPool
+[LOG_FILTER_2] DKFileV8
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/

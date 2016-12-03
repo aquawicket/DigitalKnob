@@ -641,7 +641,7 @@ function DKWidget_IsChildOf(element, parent)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
-	//DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n", DKDEBUG);
+	DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n", DKDEBUG);
 	
 	id = DKWidget_GetAvailableId(id);
 	
@@ -651,7 +651,11 @@ function DKWidget_CreateElement(parent, tag, id)
 	if(!ele){ DKLog("CreateElement(): ele invalid ("+tag+") \n", DKERROR); return false;}
 	ele.id = id;
 	
+	//DKLog("DKWidget_CreateElement(): par = "+par+"\n");
+	//DKLog("DKWidget_CreateElement(): ele = "+ele+"\n");
 	par.appendChild(ele); //This is not working on IE
+	
+	DKLog("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n");
 	return id;
 }
 

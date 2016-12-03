@@ -4,8 +4,8 @@ function DKBuildGUI_Init()
 	//DKLog("DKBuildGUI_Init() \n");
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");
-	DKCreate("DKBuild/DKBuildGUI.html");
-	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html");
+	DKCreate("DKBuild/DKBuildGUI.html", function(){
+	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
 		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
 		DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
@@ -39,6 +39,8 @@ function DKBuildGUI_Init()
 	
 		if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
 		DKBuildGUI_UpdateApps();
+	});
+	});
 	});
 }
 
@@ -95,11 +97,13 @@ function DKBuildGUI_UpdateApps()
 	////////  Update App List /////////////
 	DKWidget_SetInnerHtml("AppList", "");
 	DKBuild_GetAppList();
+	
 	for(var i=0; i<APP_LIST.length; ++i){
+		//DKLog(APP_LIST[i]+"\n");
 		var ele = DKWidget_CreateElement("AppList", "option", "al");
 		DKWidget_SetInnerHtml(ele, APP_LIST[i]);
 		DKWidget_SetAttribute(ele, "value", APP_LIST[i]);
-		DKWidget_SetValue("AppList", "DKBuilder");
+		//DKWidget_SetValue("AppList", "DKBuilder");
 	}
 }
 
