@@ -322,17 +322,19 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-////////////////////////////////////
-function DKFile_GetAbsolutePath(url)
-{
-	if(!url){ url = "/"; }
-	//DKLog("DKFile_GetAbsolutePath("+url+") \n", DKDEBUG);
-	send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
-	var result = ajaxGetUrl(send);
-	//result = result.replace(datapath,"");
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////////
+	function DKFile_GetAbsolutePath(url)
+	{
+		if(!url){ url = "/"; }
+		//DKLog("DKFile_GetAbsolutePath("+url+") \n", DKDEBUG);
+		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
+		var result = ajaxGetUrl(send);
+		//result = result.replace(datapath,"");
 	
-	//DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n", DKDEBUG);
-	return result;
+		//DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n", DKDEBUG);
+		return result;
+	}
 }
 
 ////////////////////////////////////////////////
