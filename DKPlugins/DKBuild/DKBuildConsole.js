@@ -178,7 +178,7 @@ function DKBuildConsole_Process()
 {
 	OS = "";
 	APP = "";
-	LEVEL = "RebuildAll";
+	LEVEL = "Release";
 	
 	DKBuildConsole_ChooseUpdate();
 	
