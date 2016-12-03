@@ -4,6 +4,7 @@ var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
+var LOG_FILE = true;
 var LOG_SHOW = ""; //comma seperated
 var LOG_HIDE = ""; //comma seperated
 

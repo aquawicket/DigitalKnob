@@ -4,6 +4,24 @@ var href = document.location.href;
 href = href.replace("index.html","");
 local_assets = href;
 
+var log_debug = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_DEBUG]");
+if(log_debug == "ON"){ LOG_DEBUG = true; }
+
+var log_info = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_INFO]");
+if(log_info == "OFF"){ LOG_INFO = false; }
+
+var log_warnings = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_WARNINGS]");
+if(log_warnings == "OFF"){ LOG_WARNINGS = false; }
+
+var log_errors = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_ERRORS]");
+if(log_errors == "OFF"){ LOG_ERRORS = false; }
+
+var log_file = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_FILE]");
+if(log_file == "ON"){ LOG_FILE = true; }
+
+LOG_SHOW = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_SHOW]");
+LOG_HIDE = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_HIDE]");
+
 var hostname = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
 if(!hostname){ hostname = document.location.hostname; }
 if(!hostname){ hostname = "digitalknob.com"; }
