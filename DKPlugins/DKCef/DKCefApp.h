@@ -79,10 +79,10 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-		DKLog("DKCefApp::AttachFunction()\n", DKDEBUG);
+		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
 
 		if(!object){
-			DKLog("DKCefApp::AttachFunction(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
+			DKLog("DKCefApp::AttachFunction("+name+"): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
 			return;
 		}
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
@@ -90,7 +90,7 @@ public:
 
 		handler->functions[name] = boost::bind(func, _1, _2);
 		if (!handler->functions[name]) {
-			DKLog("DKCefApp::AttachFunction()(" + name + "): failed to register function \n", DKERROR);
+			DKLog("DKCefApp::AttachFunction()("+name+"): failed to register function \n", DKERROR);
 			return;
 		}
 	}
