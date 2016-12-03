@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////
 bool DKWindows::SetClipboard(const DKString& text)
 {
-	DKLog("DKWindows::SetClipboard("+text+")\n", DKFILTER);
+	DKLog("DKWindows::SetClipboard("+text+")\n", DKDEBUG);
 	
 	if(OpenClipboard(NULL)){
 		HGLOBAL clipbuffer;
@@ -32,7 +32,7 @@ bool DKWindows::SetClipboard(const DKString& text)
 ////////////////////////////////////////////
 bool DKWindows::GetClipboard(DKString& text)
 {
-	DKLog("DKWindows::GetClipboard("+text+")\n", DKFILTER);
+	DKLog("DKWindows::GetClipboard("+text+")\n", DKDEBUG);
 	
 	char * buffer;
 	if(OpenClipboard(NULL)){
@@ -49,7 +49,7 @@ bool DKWindows::GetClipboard(DKString& text)
 ////////////////////////////////////////////////////////////////////////
 bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {
-	DKLog("DKWindows::GetPixelFromScreen("+toString(x)+","+toString(y)+",int&,int&,int&)\n", DKFILTER);
+	DKLog("DKWindows::GetPixelFromScreen("+toString(x)+","+toString(y)+",int&,int&,int&)\n", DKDEBUG);
 	
 	HDC hdc_ = GetDC(GetDesktopWindow()) ;  //not sure if this is right or what exactly it does.
 	COLORREF color = GetPixel(hdc_, x, y);
@@ -62,7 +62,7 @@ bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 //////////////////////////////////////////////////////////////////////
 bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 {
-	DKLog("DKWindows::GetPixelFromImage("+image+","+toString(y)+","+toString(x)+","+toString(y)+")\n", DKFILTER);
+	DKLog("DKWindows::GetPixelFromImage("+image+","+toString(y)+","+toString(x)+","+toString(y)+")\n", DKDEBUG);
 	
 	HANDLE hBmp = LoadImage(NULL, image.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	if(NULL == hBmp){
@@ -88,7 +88,7 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 ////////////////////////////////////////////
 bool DKWindows::ChangeVolume(double nVolume) 
 {
-	DKLog("DKWindows::ChangeVolume("+toString(nVolume)+")\n", DKFILTER);
+	DKLog("DKWindows::ChangeVolume("+toString(nVolume)+")\n", DKDEBUG);
 	
 	//Windows Vista and up only
 	if(nVolume > 1.0){nVolume = 1.0;}
@@ -144,7 +144,7 @@ bool DKWindows::ChangeVolume(double nVolume)
 ////////////////////////////
 float DKWindows::GetVolume()
 {
-	DKLog("DKWindows::GetVolume()\n", DKFILTER);
+	DKLog("DKWindows::GetVolume()\n", DKDEBUG);
 	
 	bool bScalar = true;
     HRESULT hr=NULL;
@@ -177,7 +177,7 @@ float DKWindows::GetVolume()
 ///////////////////////
 int DKWindows::GetKey()
 {
-	DKLog("DKWindows::GetKey()\n", DKFILTER);
+	DKLog("DKWindows::GetKey()\n", DKDEBUG);
 	
 	//DKLog("Press a key...\n", DKINFO);
 	return _getch();
@@ -186,7 +186,7 @@ int DKWindows::GetKey()
 /////////////////////////////////
 bool DKWindows::PressKey(int key)
 {
-	DKLog("DKWindows::PressKey("+toString(key)+")\n", DKFILTER);
+	DKLog("DKWindows::PressKey("+toString(key)+")\n", DKDEBUG);
 	
 	INPUT ip;
 	// Set up a generic keyboard event.
@@ -203,7 +203,7 @@ bool DKWindows::PressKey(int key)
 ///////////////////////////////////
 bool DKWindows::ReleaseKey(int key)
 {
-	DKLog("DKWindows::ReleaseKey("+toString(key)+")\n", DKFILTER);
+	DKLog("DKWindows::ReleaseKey("+toString(key)+")\n", DKDEBUG);
 	
 	INPUT ip;
 	// Set up a generic keyboard event.
@@ -220,7 +220,7 @@ bool DKWindows::ReleaseKey(int key)
 ///////////////////////////////////////////////////////////////
 bool DKWindows::WaitForImage(const DKString& file, int timeout)
 {
-	DKLog("DKWindows::WaitForImage("+file+","+toString(timeout)+")\n", DKFILTER);
+	DKLog("DKWindows::WaitForImage("+file+","+toString(timeout)+")\n", DKDEBUG);
 	
 	//FIXME - this is blocking,  thread this out
 	int i = 0;
@@ -428,7 +428,7 @@ bool DKWindows::Sleep(int milliseconds)
 ///////////////////////////////////////////
 void DKWindows::RefreshWindowsEnvironment()
 {
-	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKFILTER);
+	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKDEBUG);
 	
     DWORD dwReturnValue;
     ::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, &dwReturnValue);

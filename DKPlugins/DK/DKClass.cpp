@@ -49,7 +49,7 @@ DKObject* DKClass::_Instance(const DKString& data)
 /////////////////////////////////////////////
 DKObject* DKClass::_Get(const DKString& data)
 {
-	DKLog("DKClass::_Get("+data+")\n", DKFILTER);
+	DKLog("DKClass::_Get("+data+")\n", DKDEBUG);
 	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
@@ -68,7 +68,7 @@ DKObject* DKClass::_Get(const DKString& data)
 //////////////////////////////////////////
 bool DKClass::_Valid(const DKString& data)
 {
-	DKLog("DKClass::_Valid("+data+")\n", DKFILTER);
+	DKLog("DKClass::_Valid("+data+")\n", DKDEBUG);
 	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
@@ -87,7 +87,7 @@ bool DKClass::_Valid(const DKString& data)
 //////////////////////////////////////////////
 bool DKClass::_Available(const DKString& data)
 {
-	DKLog("DKClass::_Available("+data+")\n", DKFILTER);
+	DKLog("DKClass::_Available("+data+")\n", DKDEBUG);
 	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
@@ -110,7 +110,7 @@ bool DKClass::_Available(const DKString& data)
 //////////////////////////////////////////
 void DKClass::_Close(const DKString& data)
 {
-	DKLog("DKClass::_Close("+data+")\n", DKFILTER);
+	DKLog("DKClass::_Close("+data+")\n", DKDEBUG);
 	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
@@ -141,7 +141,7 @@ void DKClass::_Close(const DKString& data)
 ////////////////////////
 void DKClass::CloseAll()
 {
-	DKLog("DKClass::CloseAll()\n", DKFILTER);
+	DKLog("DKClass::CloseAll()\n", DKDEBUG);
 	
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
@@ -160,7 +160,7 @@ void DKClass::CloseAll()
 ///////////////////////////////////////////////
 void DKClass::GetClassList(DKStringArray& list)
 {
-	DKLog("DKClass::GetClassList(DKStringArray&)\n", DKFILTER);
+	DKLog("DKClass::GetClassList(DKStringArray&)\n", DKDEBUG);
 	
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for (rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
@@ -173,7 +173,7 @@ void DKClass::GetClassList(DKStringArray& list)
 /////////////////////////////////////////////
 void DKClass::GetObjects(DKStringArray& list)
 {
-	DKLog("DKClass::GetObjects(DKStringArray&)\n", DKFILTER);
+	DKLog("DKClass::GetObjects(DKStringArray&)\n", DKDEBUG);
 	
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;

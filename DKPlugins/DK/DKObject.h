@@ -23,7 +23,7 @@ public:
 	//////////////////////////////////////////
 	virtual void SetData(const DKString& data)
 	{
-		DKLog("DKObject::SetData("+data+")\n", DKFILTER);
+		DKLog("DKObject::SetData("+data+")\n", DKDEBUG);
 		
 		toStringArray(this->data, data, ",");
 	}
@@ -39,7 +39,7 @@ public:
 	/////////////////////////////////////////
 	static void SetName(const DKString& name)
     {
-		DKLog("DKObject::SetName("+name+")\n", DKFILTER);
+		DKLog("DKObject::SetName("+name+")\n", DKDEBUG);
 		
 #ifdef WIN32
 		if(!classname){ classname = _strdup(name.c_str()); }
@@ -51,14 +51,14 @@ public:
 	///////////////////////
 	static void Singleton()
     {
-		DKLog("DKObject::Singleton()\n", DKFILTER);
+		DKLog("DKObject::Singleton()\n", DKDEBUG);
 		singleton = true;
 	}
 
 	////////////////////////////////////////
 	static T* Instance(const DKString& data)
     {
-		DKLog("DKObject::Instance("+data+")\n", DKFILTER);
+		DKLog("DKObject::Instance("+data+")\n", DKDEBUG);
 		
 		//data = (id,var1,var2,var3,etc)
 		if(!instances.empty() && singleton){
@@ -97,7 +97,7 @@ public:
 		}
 
 		//Create a new insance
-		DKLog("DKBaseT::Create("+final_data+")\n", DKFILTER);
+		DKLog("DKBaseT::Create("+final_data+")\n", DKDEBUG);
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
@@ -108,7 +108,7 @@ public:
 	/////////////////////////////////////
 	static void Close(const DKString& id)
 	{
-		DKLog("DKObject::Close("+id+")\n", DKFILTER);
+		DKLog("DKObject::Close("+id+")\n", DKDEBUG);
 		
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
@@ -127,7 +127,7 @@ public:
 	/////////////////////////////////////
 	static bool Valid(const DKString& id)
 	{
-		DKLog("DKObject::Valid("+id+")\n", DKFILTER);
+		DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
 		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
@@ -143,7 +143,7 @@ public:
 	/////////////////////////////////
 	static T* Get(const DKString& id)
 	{
-		DKLog("DKObject::Get("+id+")\n", DKFILTER);
+		DKLog("DKObject::Get("+id+")\n", DKDEBUG);
 		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
@@ -159,7 +159,7 @@ public:
 	/////////////////////////////////////////////
 	static void GetInstances(DKStringArray& list)
 	{
-		DKLog("DKObject::GetInstances(DKStringArray&)\n", DKFILTER);
+		DKLog("DKObject::GetInstances(DKStringArray&)\n", DKDEBUG);
 		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(instances[i]->data.size() > 2){
@@ -174,7 +174,7 @@ public:
 	/////////////////////////////////////////////////////
 	static void GetInstances(std::vector<T*>& _instances)
 	{
-		DKLog("DKObject::GetInstances(std::vector<T*>&)\n", DKFILTER);
+		DKLog("DKObject::GetInstances(std::vector<T*>&)\n", DKDEBUG);
 		_instances = instances;
 	}
 

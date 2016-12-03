@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 //////////////
 DKApp::DKApp()
 {
-	DKLog("DKApp::DKApp()\n", DKFILTER);
+	DKLog("DKApp::DKApp()\n", DKDEBUG);
 #ifdef ANDROID
 	DKUtil::mainThreadId = (int)pthread_self();
 #endif
@@ -106,7 +106,7 @@ DKApp::DKApp()
 //////////////////
 void DKApp::Init()
 {
-	DKLog("DKApp::Init()\n", DKFILTER);
+	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
 	now = DKUtil::GetTicks();
 	lastFrame = DKUtil::GetTicks();
@@ -116,7 +116,7 @@ void DKApp::Init()
 //////////////////
 void DKApp::Loop()
 {
-	DKLog("DKApp::Loop()\n", DKFILTER);
+	DKLog("DKApp::Loop()\n", DKDEBUG);
 	while(active){
 		DoFrame();
 	}
@@ -149,7 +149,7 @@ void DKApp::DoFrame()
 //////////////////
 void DKApp::Exit()
 {
-	DKLog("DKApp::Exit()\n", DKFILTER);
+	DKLog("DKApp::Exit()\n", DKDEBUG);
 	
 	active = false;
 #ifdef ANDROID
@@ -168,7 +168,7 @@ int DKApp::GetFramerate()
 /////////////////////////////////
 void DKApp::SetFramerate(int fps)
 {
-	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKFILTER);
+	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKDEBUG);
 	_fps = fps;
 }
 
@@ -176,7 +176,7 @@ void DKApp::SetFramerate(int fps)
 /////////////////////////////////////////////
 bool WINAPI DKApp::ConsoleHandler(DWORD type)
 {
-	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKFILTER);
+	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
 	switch (type){
 		case CTRL_CLOSE_EVENT:
 			DKApp::Exit();

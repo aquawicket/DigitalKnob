@@ -10,14 +10,14 @@ std::vector<boost::function<void (const DKString&, const DKString&, const DKStri
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function<void (DKEvent*)> func, DKObject* object)
 {
-	DKLog("DKEvent::AddEvent("+id+","+type+")\n", DKFILTER);
+	DKLog("DKEvent::AddEvent("+id+","+type+")\n", DKDEBUG);
 	return DKEvent::AddEvent(id, type, "", func, object);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<void (DKEvent*)> func, DKObject* object)
 {
-	DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+")\n", DKFILTER);
+	DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+")\n", DKDEBUG);
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
 
@@ -64,7 +64,7 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")){ //prevent looping messages
-		DKLog("DKEvent::SendEvent("+id+","+type+","+value+")\n", DKFILTER);
+		DKLog("DKEvent::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
 	}
 
 	if(type.empty()){
@@ -100,7 +100,7 @@ bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString
 /////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn)
 {
-	DKLog("DKEvent::RemoveEvent("+id+","+type+","+jsreturn+")\n", DKFILTER);
+	DKLog("DKEvent::RemoveEvent("+id+","+type+","+jsreturn+")\n", DKDEBUG);
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
 
@@ -122,7 +122,7 @@ bool DKEvent::RemoveEvent(const DKString& id, const DKString& type, const DKStri
 ////////////////////////////////////////////////////////////////////
 bool DKEvent::RemoveEvents(const DKString& id, const DKString& type)
 {
-	DKLog("DKEvent::RemoveEvents("+id+","+type+")\n", DKFILTER);
+	DKLog("DKEvent::RemoveEvents("+id+","+type+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(same(events[i]->id,id) && same(events[i]->type,type)){
 			events.erase(events.begin()+i);
@@ -135,7 +135,7 @@ bool DKEvent::RemoveEvents(const DKString& id, const DKString& type)
 //////////////////////////////////////////////
 bool DKEvent::RemoveEvents(const DKString& id)
 {
-	DKLog("DKEvent::RemoveEvents("+id+")\n", DKFILTER);
+	DKLog("DKEvent::RemoveEvents("+id+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(same(events[i]->id,id)){
 			events.erase(events.begin()+i);
@@ -148,7 +148,7 @@ bool DKEvent::RemoveEvents(const DKString& id)
 /////////////////////////////////////////
 bool DKEvent::RemoveEvents(DKObject* obj)
 {
-	DKLog("DKEvent::RemoveEvents(DKObject)\n", DKFILTER);
+	DKLog("DKEvent::RemoveEvents(DKObject)\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(events[i]->object == obj){
 			events.erase(events.begin()+i);
@@ -161,14 +161,14 @@ bool DKEvent::RemoveEvents(DKObject* obj)
 ///////////////////////////
 DKString DKEvent::GetType()
 {
-	//DKLog("DKEvent::GetType()\n", DKFILTER);
+	//DKLog("DKEvent::GetType()\n", DKDEBUG);
 	return type;
 }
 
 ///////////////////////////////
 DKString DKEvent::GetJSReturn()
 {
-	//DKLog("DKEvent::GetJSReturn()\n", DKFILTER);
+	//DKLog("DKEvent::GetJSReturn()\n", DKDEBUG);
 	return jsreturn;
 }
 
@@ -176,14 +176,14 @@ DKString DKEvent::GetJSReturn()
 /////////////////////////
 DKString DKEvent::GetId()
 {
-	//DKLog("DKEvent::GetId()\n", DKFILTER);
+	//DKLog("DKEvent::GetId()\n", DKDEBUG);
 	return id;
 }
 
 ////////////////////////////
 DKString DKEvent::GetValue()
 {
-	DKLog("DKEvent::GetValue()\n", DKFILTER);
+	DKLog("DKEvent::GetValue()\n", DKDEBUG);
 	DKString value = toString(data, ",");
 	return value;
 }
@@ -191,14 +191,14 @@ DKString DKEvent::GetValue()
 /////////////////////////////////
 DKString DKEvent::GetValue(int n)
 {
-	DKLog("DKEvent::GetValue("+toString(n)+")\n", DKFILTER);
+	DKLog("DKEvent::GetValue("+toString(n)+")\n", DKDEBUG);
 	return data[n];
 }
 
 ////////////////////////
 int DKEvent::GetKeyNum()
 {
-	DKLog("DKEvent::GetKeyNum()\n", DKFILTER);
+	DKLog("DKEvent::GetKeyNum()\n", DKDEBUG);
 	if(data.size() < 1){ return 0; }
 	return toInt(data[0]);
 }
@@ -206,7 +206,7 @@ int DKEvent::GetKeyNum()
 /////////////////////////////////////////////////////////////////////////
 void DKEvent::RenameEventId(const DKString& oldID, const DKString& newID)
 {
-	DKLog("DKEvent::RenameEventId("+oldID+","+newID+")\n", DKFILTER);
+	DKLog("DKEvent::RenameEventId("+oldID+","+newID+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(same(events[i]->id, oldID)){
 			events[i]->id = newID;

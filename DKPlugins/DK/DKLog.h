@@ -39,10 +39,8 @@
 
 #define DKERROR 0      //Red
 #define DKWARN 1       //Yellow
-#define DKSUCCESS 2    //Green
 #define DKINFO 3       //White
 #define DKDEBUG 4      //Blue
-#define DKFILTER 5      //Orange
 
 extern bool log_errors;
 extern bool log_warnings;
@@ -53,7 +51,6 @@ extern bool log_msvc;
 extern bool log_xcode;
 extern bool log_file;
 extern bool log_gui_console;
-extern bool log_filter_all;
 
 //void DKLog(const DKString& text);
 //void DKLog(const int text);
