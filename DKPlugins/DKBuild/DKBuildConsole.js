@@ -173,12 +173,11 @@ function DKBuildConsole_SelectType()
 	}
 }
 
-/////////////////////////////////
+///////////////////////////////////
 function DKBuildConsole_Process()
 {
 	OS = "";
 	APP = "";
-	TYPE = "ALL"
 	LEVEL = "RebuildAll";
 	
 	DKBuildConsole_ChooseUpdate();
