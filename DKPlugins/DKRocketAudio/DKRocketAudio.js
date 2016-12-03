@@ -60,7 +60,7 @@ function DKRocketAudio_Open(file)
 //////////////////////////////////
 function DKRocketAudio_playpause()
 {
-	//DKLog("DKRocketAudio_playpause() \n",DKFILTER);
+	//DKLog("DKRocketAudio_playpause() \n",DKDEBUG);
 	
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketAudio_playpause", "src");
@@ -85,7 +85,7 @@ function DKRocketAudio_position()
 ////////////////////////////////
 function DKRocketAudio_speaker()
 {
-	//DKLog("DKRocketAudio_speaker() \n",DKFILTER);	
+	//DKLog("DKRocketAudio_speaker() \n",DKDEBUG);	
 	var src = DKWidget_GetAttribute("DKRocketAudio_speaker", "src");
 	//DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
 	
@@ -102,7 +102,7 @@ function DKRocketAudio_speaker()
 /////////////////////////////////////
 function DKRocketAudio_volume(volume)
 {
-	//DKLog("DKRocketAudio_volume("+volume+") \n",DKFILTER);
+	//DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
 	var num = parseInt(volume);
 	DKAudio_SetVolume(num);
 	if(num < 1){

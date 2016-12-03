@@ -131,7 +131,7 @@ void DKRocket::Reload()
 //////////////////////////
 bool DKRocket::LoadFonts()
 {
-	//DKLog("DKRocket::LoadFonts()\n", DKFILTER);
+	//DKLog("DKRocket::LoadFonts()\n", DKDEBUG);
 	DKStringArray dkfiles;
 	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){

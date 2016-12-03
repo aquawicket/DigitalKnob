@@ -45,7 +45,7 @@ void DKOSGWindowAndroid::End()
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::InitOSG(void* data)
 {
-	DKLog("DKOSGWindowAndroid::InitOSG()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::InitOSG()\n", DKDEBUG);
 	
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
@@ -55,7 +55,7 @@ void* DKOSGWindowAndroid::InitOSG(void* data)
 ////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onDropFile(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onDropFile()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onDropFile()\n", DKDEBUG);
 	
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
@@ -77,7 +77,7 @@ void* DKOSGWindowAndroid::onResize(void* data)
 ///////////////////////////////////////////////
 void* DKOSGWindowAndroid::onPadDown(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onPadDown()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onPadDown()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -85,7 +85,7 @@ void* DKOSGWindowAndroid::onPadDown(void* data)
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::onPadUp(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onPadUp()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onPadUp()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -93,7 +93,7 @@ void* DKOSGWindowAndroid::onPadUp(void* data)
 ///////////////////////////////////////////
 void* DKOSGWindowAndroid::onJoy(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onJoy()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onJoy()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -101,7 +101,7 @@ void* DKOSGWindowAndroid::onJoy(void* data)
 ///////////////////////////////////////////
 void* DKOSGWindowAndroid::onHat(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onHat()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onHat()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -109,7 +109,7 @@ void* DKOSGWindowAndroid::onHat(void* data)
 ///////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onAddJoystick(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onAddJoystick()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onAddJoystick()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -117,7 +117,7 @@ void* DKOSGWindowAndroid::onAddJoystick(void* data)
 //////////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onRemoveJoystick(void* data)
 {
-	DKLog("DKOSGWindowAndroid::omRemoveJoystick()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::omRemoveJoystick()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -125,7 +125,7 @@ void* DKOSGWindowAndroid::onRemoveJoystick(void* data)
 //////////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onSurfaceChanged(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onSurfaceChanged()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onSurfaceChanged()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -133,7 +133,7 @@ void* DKOSGWindowAndroid::onSurfaceChanged(void* data)
 ////////////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onSurfaceDestroyed(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onSurfaceDestroyed()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onSurfaceDestroyed()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -175,7 +175,7 @@ void* DKOSGWindowAndroid::onKeyUp(void* data)
 /////////////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onKeyboardFocusLost(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onNativeKeyboardFocusLost()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onNativeKeyboardFocusLost()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -183,7 +183,7 @@ void* DKOSGWindowAndroid::onKeyboardFocusLost(void* data)
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::onTouch(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onTouch()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onTouch()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -191,7 +191,7 @@ void* DKOSGWindowAndroid::onTouch(void* data)
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::onMouse(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onMouse()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onMouse()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -199,7 +199,7 @@ void* DKOSGWindowAndroid::onMouse(void* data)
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::onAccel(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onAccel()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onAccel()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -207,7 +207,7 @@ void* DKOSGWindowAndroid::onAccel(void* data)
 /////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onLowMemory(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onLowMemory()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onLowMemory()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -215,7 +215,7 @@ void* DKOSGWindowAndroid::onLowMemory(void* data)
 ////////////////////////////////////////////
 void* DKOSGWindowAndroid::onQuit(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onQuit()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onQuit()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -223,7 +223,7 @@ void* DKOSGWindowAndroid::onQuit(void* data)
 /////////////////////////////////////////////
 void* DKOSGWindowAndroid::onPause(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onPause()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onPause()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -231,7 +231,7 @@ void* DKOSGWindowAndroid::onPause(void* data)
 //////////////////////////////////////////////
 void* DKOSGWindowAndroid::onResume(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onResume()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onResume()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -239,7 +239,7 @@ void* DKOSGWindowAndroid::onResume(void* data)
 //////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onCommitText(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onCommitText()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onCommitText()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -247,7 +247,7 @@ void* DKOSGWindowAndroid::onCommitText(void* data)
 ////////////////////////////////////////////////////////
 void* DKOSGWindowAndroid::onSetComposingText(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onSetComposingText()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onSetComposingText()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }
@@ -255,7 +255,7 @@ void* DKOSGWindowAndroid::onSetComposingText(void* data)
 ///////////////////////////////////////////////
 void* DKOSGWindowAndroid::onGetHint(void* data)
 {
-	DKLog("DKOSGWindowAndroid::onGetHint()\n", DKFILTER);
+	DKLog("DKOSGWindowAndroid::onGetHint()\n", DKDEBUG);
 	JavaData jd = *static_cast<JavaData*>(data);
 	return NULL;
 }

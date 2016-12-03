@@ -32,7 +32,7 @@ function DKMenuRightApp_OnEvent(event)
 ////////////////////////////////
 function DKMenuRightApp_Update()
 {
-	//DKLog("DKMenuRightApp_Update() \n", DKFILTER);
+	//DKLog("DKMenuRightApp_Update() \n", DKDEBUG);
 	var assets = DKAssets_LocalAssets();
 	var userfile = DKFile_FileToString(assets+"User.js");
 	DKWidget_SetValue("userfile", userfile);

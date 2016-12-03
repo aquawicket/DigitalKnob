@@ -11,7 +11,7 @@
 /////////////////
 void DKJS::Init()
 {
-	DKLog("DKJS::Init()\n", DKFILTER);
+	DKLog("DKJS::Init()\n", DKDEBUG);
 	
 	DKCreate("DKFileJS");
 	DKCreate("DKAssetsJS");
@@ -36,9 +36,8 @@ void DKJS::Init()
 	
 	duk_eval_string(DKDuktape::ctx, "var DKERROR = 0;");
 	duk_eval_string(DKDuktape::ctx, "var DKWARN = 1;");
-	duk_eval_string(DKDuktape::ctx, "var DKSUCCESS = 2;");
-	duk_eval_string(DKDuktape::ctx, "var DKINFO = 3;");
-	duk_eval_string(DKDuktape::ctx, "var DKDEBUG = 4;");
+	duk_eval_string(DKDuktape::ctx, "var DKINFO = 2;");
+	duk_eval_string(DKDuktape::ctx, "var DKDEBUG = 3;");
 
 	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate, 2);
 	DKDuktape::AttachFunction("DKValid", DKJS::_DKValid, 1);
@@ -114,7 +113,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKSUCCESS);
+		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKINFO);
 		callback_found = true;
 	}
 	

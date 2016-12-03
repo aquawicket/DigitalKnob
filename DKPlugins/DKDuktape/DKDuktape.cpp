@@ -19,7 +19,7 @@ extern int eventloop_run(duk_context *ctx);
 //////////////////////
 void DKDuktape::Init()
 {
-	DKLog("DKDuktape::Init()\n", DKFILTER);
+	DKLog("DKDuktape::Init()\n", DKDEBUG);
 	
 	c_evloop = true;
 
@@ -72,7 +72,7 @@ void DKDuktape::End()
 //////////////////////////////////////////////
 bool DKDuktape::LoadFile(const DKString& file)
 {
-	DKLog("DKDuktape::LoadFile("+file+")\n", DKFILTER);
+	DKLog("DKDuktape::LoadFile("+file+")\n", DKDEBUG);
 	
 	if(file.empty()){ return false; }
 	if(FileLoaded(file)){ return false; } //prevent file from loading twice
@@ -110,7 +110,7 @@ bool DKDuktape::FileLoaded(const DKString& file)
 //////////////////////////////////////////////
 bool DKDuktape::CallInit(const DKString& file)
 {
-	DKLog("DKDuktape::CallInit(" + file + ")\n", DKFILTER);
+	DKLog("DKDuktape::CallInit(" + file + ")\n", DKDEBUG);
 	
 	DKString filename;
 	DKFile::GetFileName(file, filename);
@@ -132,7 +132,7 @@ bool DKDuktape::CallInit(const DKString& file)
 /////////////////////////////////////////////
 bool DKDuktape::CallEnd(const DKString& file)
 {
-	DKLog("DKDuktape::CallEnd(" + file + ")\n", DKFILTER);
+	DKLog("DKDuktape::CallEnd(" + file + ")\n", DKDEBUG);
 	
 	DKString filename;
 	DKFile::GetFileName(file, filename);
@@ -234,7 +234,7 @@ void DKDuktape::OnEvent(DKEvent* event)
 ///////////////////////////////////////////////////
 void DKDuktape::RunJavascript(const DKString& code)
 {
-	DKLog("RunJavascript("+code+")\n", DKFILTER);
+	DKLog("RunJavascript("+code+")\n", DKDEBUG);
 	
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 }

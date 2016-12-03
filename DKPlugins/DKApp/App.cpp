@@ -6,5 +6,5 @@
 ////////////////
 void App::Init()
 {
-	DKLog("App::Init()\n", DKFILTER);
+	DKLog("App::Init()\n", DKDEBUG);
 }

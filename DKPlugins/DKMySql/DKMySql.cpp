@@ -29,7 +29,7 @@ void DKMySql::End()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
 {
-	DKLog("DKMySql::Connect("+host+", "+name+", "+pass+", "+port+")\n", DKFILTER);
+	DKLog("DKMySql::Connect("+host+", "+name+", "+pass+", "+port+")\n", DKDEBUG);
 
 #ifdef USE_mysql
 	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
@@ -52,7 +52,7 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 
 	DKCurl::Get("DKCurl0")->HttpToString(send,response);
 	if(response.empty()){
-		DKLog("Successfully connected to MySql server. \n", DKSUCCESS);
+		DKLog("Successfully connected to MySql server. \n", DKINFO);
 		return true;
 	}	
 #endif
@@ -120,8 +120,8 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 		results.push_back(string);
 	}
 
-	DKLog("\n Query succeeded\n", DKSUCCESS);
-	DKLog("-> "+response+"+\n", DKSUCCESS);
+	DKLog("\n Query succeeded\n", DKINFO);
+	DKLog("-> "+response+"+\n", DKINFO);
 	return true;
 #endif
 

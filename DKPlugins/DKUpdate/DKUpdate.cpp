@@ -90,7 +90,7 @@ void DKUpdate::End()
 //////////////////////////////////////////////////
 bool DKUpdate::CheckForUpdate(const DKString& url)
 {
-	DKLog("DKUpdate::CheckForUpdate("+url+")\n", DKFILTER);
+	DKLog("DKUpdate::CheckForUpdate("+url+")\n", DKDEBUG);
 
 	DKCurl::Instance("DKCurlUpdate");
 	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
@@ -135,7 +135,7 @@ bool DKUpdate::CheckForUpdate(const DKString& url)
 ////////////////////////////////////////////
 bool DKUpdate::DoUpdate(const DKString& url)
 {
-	DKLog("DKUpdate::DoUpdate("+url+")\n", DKFILTER);
+	DKLog("DKUpdate::DoUpdate("+url+")\n", DKDEBUG);
 	DKString file;
 	DKFile::GetExeName(file);
 	DKString exepath;
@@ -166,7 +166,7 @@ bool DKUpdate::DoUpdate(const DKString& url)
 		DKFile::Rename(exepath+"/"+filename+"_dl", filename, true);
 		DKArchive::Extract(exepath+"/"+filename, exepath);
 		DKFile::Delete(exepath+"/"+filename);
-		DKLog("\nUpdate finnished..  please restart app.\n",DKSUCCESS);
+		DKLog("\nUpdate finnished..  please restart app.\n", DKINFO);
 		return true;
 	}
 
@@ -180,7 +180,7 @@ bool DKUpdate::DoUpdate(const DKString& url)
 	DKString name = file;
 	DKFile::RemoveExtention(name);
 	DKFile::Delete(exepath + "/" + name +"/ASSETS"); //delete assets marker file
-	DKLog("\nUpdate finnished..  please restart app.\n",DKSUCCESS);
+	DKLog("\nUpdate finnished..  please restart app.\n", DKINFO);
 	return true;
 }
 

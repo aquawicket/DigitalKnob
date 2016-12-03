@@ -10,7 +10,7 @@
 /////////////////////
 void DKAssets::Init()
 {
-	DKLog("DKAssets::Init()\n", DKFILTER);
+	DKLog("DKAssets::Init()\n", DKDEBUG);
 	
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
@@ -45,8 +45,6 @@ void DKAssets::Init()
 	}
 #endif
 
-	DKString filter_all;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_ALL]", filter_all);
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
 	DKString info;
@@ -55,7 +53,6 @@ void DKAssets::Init()
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_WARNINGS]", warnings);
 	DKString errors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_ERRORS]", errors);
-	if(same(filter_all, "ON")) { log_filter_all = true; }
 	if(!same(debug, "ON")) { log_debug = false; }
 	if(!same(info, "ON")) { log_info = false; }
 	if(same(warnings, "OFF")) { log_warnings = false; }
@@ -72,7 +69,7 @@ void DKAssets::Init()
 ////////////////////////////////////////////////
 bool DKAssets::AquireDataPath(DKString& exepath)
 {
-	DKLog("DKAssets::AquireDataPath("+exepath+")\n", DKFILTER);
+	DKLog("DKAssets::AquireDataPath("+exepath+")\n", DKDEBUG);
 	
     unsigned found = 0;
 #ifdef WIN32
@@ -125,7 +122,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
-	DKLog("DKAssets::CheckAssetsPath("+path+")\n", DKFILTER);
+	DKLog("DKAssets::CheckAssetsPath("+path+")\n", DKDEBUG);
 	
 	DKFile::local_assets = path;
 
@@ -202,7 +199,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 ///////////////////////////////////////////////////////
 bool DKAssets::AppendDataPath(const DKString& datapath)
 {
-	DKLog("DKAssets::AppendDataPath("+datapath+")\n", DKFILTER);
+	DKLog("DKAssets::AppendDataPath("+datapath+")\n", DKDEBUG);
 	
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){

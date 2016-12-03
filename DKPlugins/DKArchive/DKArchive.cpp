@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////
 bool DKArchive::Extract(const DKString& file, const DKString& path)
 {
-	DKLog("DKArchive::Extract("+file+","+path+")\n", DKFILTER);
+	DKLog("DKArchive::Extract("+file+","+path+")\n", DKDEBUG);
 	
 	if(!DKFile::PathExists(file)){ return false; }
 
@@ -95,7 +95,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
 ////////////////////////////////////////////////////////////////////
 bool DKArchive::Compress(const DKString& path, const DKString& file)
 {
-	DKLog("DKArchive::Compress("+path+","+file+")\n", DKFILTER);
+	DKLog("DKArchive::Compress("+path+","+file+")\n", DKDEBUG);
 	
 	if(!DKFile::PathExists(path)){ return false; }
 	DKStringArray files;
@@ -165,7 +165,7 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 ////////////////////////////////////////////////////////////////
 int DKArchive::copy_data(struct archive *ar, struct archive *aw)
 {
-	//DKLog("DKArchive::copy_data(struct,struct)\n", DKFILTER);
+	//DKLog("DKArchive::copy_data(struct,struct)\n", DKDEBUG);
 	
 	int r;
 	const void *buff;

@@ -6,7 +6,7 @@ var event_data;
 /////////////////////////
 function DKMessage_Init()
 {	
-	//DKLog("***********DKMessageInit() \n", DKFILTER);
+	//DKLog("***********DKMessageInit() \n", DKDEBUG);
 	DKCreate("DKMessage/DKMessage.html", function(){
 		DKFrame_Widget("DKMessage.html");
 		DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
@@ -28,7 +28,7 @@ function DKMessage_End()
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	DKLog("DKMessage_OnEvent("+event+") \n", DKFILTER);
+	DKLog("DKMessage_OnEvent("+event+") \n", DKDEBUG);
 	if(DK_Id(event, "DKMessageOk")){
 		//DKLog("DKMessageOk \n", DKDEBUG)
 		//DKWidget_Hide("DKMessage.html");
@@ -128,7 +128,7 @@ function DKMessage_OnEvent(event)
 //////////////////////////////
 function DKMessage_ClearData()
 {
-	//DKLog("DKMessage_ClearData() \n", DKFILTER);
+	//DKLog("DKMessage_ClearData() \n", DKDEBUG);
 	event_return_id = "";
 	event_return_type = "";
 	event_data = "";
@@ -140,7 +140,7 @@ function DKMessage_ClearData()
 //////////////////////////////////////////
 function DKMessageBox(event, cmd, message)
 {
-	//DKLog("MessageBox("+event+", "+cmd+", "+message+") \n", DKFILTER);
+	//DKLog("MessageBox("+event+", "+cmd+", "+message+") \n", DKDEBUG);
 	if(!event){
 		DKSendEvent("DKMessage.html", cmd, message);
 		return;

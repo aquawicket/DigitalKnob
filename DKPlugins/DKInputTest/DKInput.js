@@ -110,28 +110,28 @@ function DKInput_OnEvent(event)
 /////////////////////////////////////////
 function DKInput_ProcessMouseDown(button)
 {
-	//DKLog("DKInput_ProcessMouseDown("+button+")\n", DKFILTER);
+	//DKLog("DKInput_ProcessMouseDown("+button+")\n", DKDEBUG);
 	DKWidget_Show(button+"button");	
 }
 
 ///////////////////////////////////////
 function DKInput_ProcessMouseUp(button)
 {
-	//DKLog("DKInput_ProcessMouseUp("+button+")\n", DKFILTER);
+	//DKLog("DKInput_ProcessMouseUp("+button+")\n", DKDEBUG);
 	DKWidget_Hide(button+"button");	
 }
 		
 //////////////////////////////////////
 function DKInput_ProcessKeyDown(key)
 {
-	//DKLog("DKInput_ProcessKeyDown("+key+")\n", DKFILTER);
+	//DKLog("DKInput_ProcessKeyDown("+key+")\n", DKDEBUG);
 	DKInput_Highlight(DKInput_KeyToDiv(key));
 }
 
 ////////////////////////////////////
 function DKInput_ProcessKeyUp(key)
 {
-	//DKLog("DKInput_ProcessKeyUp("+key+")\n", DKFILTER);
+	//DKLog("DKInput_ProcessKeyUp("+key+")\n", DKDEBUG);
 	DKInput_UnHighlight(DKInput_KeyToDiv(key));
 }
 

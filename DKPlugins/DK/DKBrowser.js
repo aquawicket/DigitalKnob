@@ -34,7 +34,7 @@ document.onmousemove = function(e){
 /////////////////////
 function LoadCSS(url)
 {
-	//DKLog("LoadCSS("+url+") \n", DKFILTER);
+	//DKLog("LoadCSS("+url+") \n", DKDEBUG);
 	var link = document.createElement('link');
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
@@ -45,7 +45,7 @@ function LoadCSS(url)
 //////////////////////////////
 function LoadJS(url, callback)
 {
-	//DKLog("LoadJS("+url+") \n", DKFILTER);
+	//DKLog("LoadJS("+url+") \n", DKDEBUG);
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return; 
@@ -90,7 +90,7 @@ function LoadJS(url, callback)
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
 			
-			DKLog("Loaded: "+url, DKSUCCESS);
+			DKLog("Loaded: "+url, DKINFO);
 			var func = window[name]; //Init    
 			if(typeof func == 'function'){ 
 				DKLog("Calling: "+name+" \n", DKINFO);
@@ -143,14 +143,14 @@ function CreateWidget(url, parent)
 		//top.document.body.style.display='block';
 	}
 	filesloaded += url+","; //add file to loaded list
-	//DKLog("Created Widget:("+url+","+parent+")", DKFILTER);
+	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
 }
 
 ///////////////////////////
 function CheckFileSupport()
 {
 	if(window.File && window.FileReader && window.FileList && window.Blob){
-		DKLog("File support OK.", DKSUCCESS);
+		DKLog("File support OK.", DKINFO);
 	}
 	else {
 		DKLog("The File APIs are not fully supported in this browser.", DKERROR);
@@ -394,7 +394,7 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+") \n", DKFILTER);
+	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -405,7 +405,7 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n", DKFILTER);
+	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n", DKDEBUG);
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
 	}
@@ -427,7 +427,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n", DKFILTER);
+	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n", DKDEBUG);
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
 	}
@@ -594,7 +594,7 @@ function AjaxGet(url, output)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;
-				//DKLog("AJAX RETURN: "+output.value, DKFILTER);
+				//DKLog("AJAX RETURN: "+output.value, DKDEBUG);
 				return true;
 			}
 			else{

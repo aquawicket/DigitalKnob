@@ -96,7 +96,7 @@ function DKMenuRight_SetPanel(string)
 /////////////////////////////////////
 function DKMenuRight_ToggleEditMode()
 {
-	DKLog("DKMenuRight_ToggleEditMode() \n", DKFILTER);
+	DKLog("DKMenuRight_ToggleEditMode() \n", DKDEBUG);
 	var img = DKWidget_GetAttribute("DevModeButton", "src");
 	if(img.indexOf("greenbutton.png") != -1){
 		DKMenuRight_EditModeOn();
@@ -110,7 +110,7 @@ function DKMenuRight_ToggleEditMode()
 /////////////////////////////////
 function DKMenuRight_EditModeOn()
 {
-	DKLog("DKMenuRight_EditModeOn() \n", DKFILTER);
+	DKLog("DKMenuRight_EditModeOn() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/redbutton.png");
 	DKCreate("DKDev/DKDev.js", function(){
 		DKDev_On();
@@ -121,7 +121,7 @@ function DKMenuRight_EditModeOn()
 //////////////////////////////////
 function DKMenuRight_EditModeOff()
 {
-	DKLog("DKMenuRight_EditModeOff() \n", DKFILTER);
+	DKLog("DKMenuRight_EditModeOff() \n", DKDEBUG);
 	DKWidget_SetAttribute("DevModeButton", "src", "DKDev/greenbutton.png");
 	DKCreate("DKDev/DKDev.js", function(){
 		DKDev_Off();

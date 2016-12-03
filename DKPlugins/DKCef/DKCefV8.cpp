@@ -20,7 +20,7 @@ void DKCefV8::End()
 bool DKCefV8::DKCreate_CPP(CefArgs args, CefReturn retval)
 {
 	DKString data = args[0]->GetStringValue();
-	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKFILTER);
+	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
 	DKCreate(data);
 	return true;
 }

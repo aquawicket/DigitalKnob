@@ -13,14 +13,14 @@ class MyV8Handler : public CefV8Handler
 public:
 	MyV8Handler()
 	{
-		DKLog("MyV8Handler::MyV8Handler()\n",DKFILTER);
+		DKLog("MyV8Handler::MyV8Handler()\n",DKDEBUG);
 	}
 
 	static std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> functions;
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {
-		DKLog("MyV8Handler::Execute()\n", DKFILTER);
+		DKLog("MyV8Handler::Execute()\n", DKDEBUG);
 		if(!functions[name]) {
 			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
 			return false;
@@ -52,7 +52,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
-		DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKFILTER);
+		DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKDEBUG);
 		
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
@@ -68,7 +68,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		DKLog("DKCefApp::OnContextCreated()\n", DKFILTER);
+		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
 		
 		if(object){ return; }
 		object = context->GetGlobal(); // Retrieve the context's window object.
@@ -79,7 +79,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-		DKLog("DKCefApp::AttachFunction()\n", DKFILTER);
+		DKLog("DKCefApp::AttachFunction()\n", DKDEBUG);
 
 		if(!object){
 			DKLog("DKCefApp::AttachFunction(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);

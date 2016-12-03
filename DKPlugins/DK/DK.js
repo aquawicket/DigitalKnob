@@ -24,8 +24,8 @@ if(DK_GetBrowser() != "CEF"){
 
 var DKERROR = 0;     //Red
 var DKWARN = 1;      //Yellow
-var DKINFO = 3;      //White
-var DKDEBUG = 4;     //Blue
+var DKINFO = 2;      //White
+var DKDEBUG = 3;     //Blue
 
 /////////////////////
 function DK_GetTime()
@@ -81,7 +81,7 @@ function DKLog(string, lvl)
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
-DKLog("*** DigitalKnob ***", DKSUCCESS);
+DKLog("*** DigitalKnob ***", DKINFO);
 DKLog(DK_GetBrowser()+"\n");
 DKLog(DK_GetJavascript()+"\n");
 
@@ -238,14 +238,14 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	//DKLog("GetType("+event+") \n", DKFILTER);
+	//DKLog("GetType("+event+") \n", DKDEBUG);
 	if(!event){ return false; }
 	if(event.type){
-		//DKLog("GetType("+event+") -> "+event.type+"\n", DKFILTER);
+		//DKLog("GetType("+event+") -> "+event.type+"\n", DKDEBUG);
 		return event.type 
 	}
 	if(event[1]){
-		//DKLog("GetType("+event+") -> "+event[1]+"\n", DKFILTER);
+		//DKLog("GetType("+event+") -> "+event[1]+"\n", DKDEBUG);
 		return event[1]; 
 	}
 	DKLog("DK_GetType("+event+"): could not get event type. \n", DKERROR);
@@ -255,7 +255,7 @@ function DK_GetType(event)
 ////////////////////////
 function DK_GetId(event)
 {
-	//DKLog("GetId("+event+") \n", DKFILTER);
+	//DKLog("GetId("+event+") \n", DKDEBUG);
 	if(!event){ return false;}
 	if(event.type && event.type == "contextmenu"){ //rightclick
 		PreventDefault(event);
@@ -263,7 +263,7 @@ function DK_GetId(event)
 	
 	element = DKWidget_GetElement(event);
 	if(element){
-		//DKLog("GetId("+event+") -> "+element.id+"\n", DKFILTER);
+		//DKLog("GetId("+event+") -> "+element.id+"\n", DKDEBUG);
 		if(element == window || element == document){ return "GLOBAL"; }
 		return element.id; 
 	}
@@ -300,9 +300,9 @@ function DK_Type(event, command)
 /////////////////////////
 function DK_Id(event, id)
 { 
-	//DKLog("DK_Id("+event+", "+id+") \n", DKFILTER);
+	//DKLog("DK_Id("+event+", "+id+") \n", DKDEBUG);
 	var element = DKWidget_GetElement(event);
-	//DKLog("DK_Id(): element="+element.id+" \n", DKFILTER);
+	//DKLog("DK_Id(): element="+element.id+" \n", DKDEBUG);
 	if((element == window || element == document) && id == "GLOBAL"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
@@ -312,7 +312,7 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_IdLike(event, id)
 { 
-	//DKLog("DK_IdLike("+event+", "+id+") \n", DKFILTER);
+	//DKLog("DK_IdLike("+event+", "+id+") \n", DKDEBUG);
 	if(!id){ return; }
 	if(DK_GetType(event) == "keydown"){ return false; } //KeyboardEvent
 	if(DK_GetType(event) == "keyup"){ return false; } //KeyboardEvent
@@ -334,7 +334,7 @@ function DK_Value(event, id)
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
-	//DKLog("DKAddEvent("+id+", "+type+", "+Function..name+") \n", DKFILTER);
+	//DKLog("DKAddEvent("+id+", "+type+", "+Function..name+") \n", DKDEBUG);
 	if(!id){ return false; }
 		
 	var element;
@@ -356,7 +356,7 @@ function DKAddEvent(id, type, Function)
 	}
 	
 	if(element){
-		//DKLog("addEvent("+id+","+type+","+Function.name+") \n", DKFILTER);
+		//DKLog("addEvent("+id+","+type+","+Function.name+") \n", DKDEBUG);
 		//addEvent(element, type, function(event){ Function(event); StopPropagation(event); });
 		addEvent(element, type, Function);
 	}
@@ -432,19 +432,19 @@ function DKRemoveEvents(Function)
 function DKSendEvent(id, type, message)
 {
 	//if(id.indexOf("DKConsole.html") == -1){
-	DKLog("SendEvent("+id+","+type+","+message+") \n", DKFILTER);
+	DKLog("SendEvent("+id+","+type+","+message+") \n", DKDEBUG);
 	//}
 	
 	for(var i=0; i<events.length; i++){
-		//DKLog(events[i]+" \n", DKFILTER);
+		//DKLog(events[i]+" \n", DKDEBUG);
 		//if(events[i] == "GLOBAL"){ //global
-			//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKFILTER);
+			//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKDEBUG);
 		//	events[i+2]([id, type, message]);
 			//return;
 		//}
 		if(events[i] == id){
 			if(events[i+1] == type){
-				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKFILTER);
+				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKDEBUG);
 				events[i+2]([id, type, message]);
 			}
 		}

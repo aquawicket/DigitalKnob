@@ -125,7 +125,7 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	DKLog("DKDebug_ClearConsole()\n", DKFILTER);
+	DKLog("DKDebug_ClearConsole()\n", DKDEBUG);
 	DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n", DKDEBUG);
 	if(DK_GetBrowser() == "Rocket"){
 		DK_System("cls");

@@ -78,7 +78,7 @@ bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, c
 //////////////////////////////
 bool DKOSGWindow::CreateView()
 {
-	DKLog("DKOSGWindow::CreateView()\n", DKFILTER);
+	DKLog("DKOSGWindow::CreateView()\n", DKDEBUG);
 	
 	unsigned int screen = 0;
 	view = new osgViewer::Viewer;

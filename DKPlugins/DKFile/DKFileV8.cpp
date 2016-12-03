@@ -5,7 +5,7 @@
 /////////////////////
 void DKFileV8::Init()
 {
-	DKLog("DKFileV8::Init()\n", DKFILTER);
+	DKLog("DKFileV8::Init()\n", DKDEBUG);
 	//DKCefApp::AttachFunction("Test", DKFileV8::Test);
 	DKCefApp::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
 	DKCefApp::AttachFunction("DKFile_Delete", DKFileV8::Delete);
@@ -19,14 +19,14 @@ void DKFileV8::Init()
 ///////////////////
 void DKFileV8::End()
 {
-	DKLog("DKFileV8::End()\n", DKFILTER);
+	DKLog("DKFileV8::End()\n", DKDEBUG);
 }
 
 /*
 ///////////////////////////////////////////////////
 bool DKFileV8::Test(CefArgs args, CefReturn retval)
 {
-	DKLog("DKFileV8::Test(CefArgs,CefReturn)\n", DKFILTER);
+	DKLog("DKFileV8::Test(CefArgs,CefReturn)\n", DKDEBUG);
 	DKString data = args[0]->GetStringValue();
 	DKString result = data;
 	retval = CefV8Value::CreateString(result);
@@ -54,7 +54,7 @@ bool DKFileV8::Delete(CefArgs args, CefReturn retval)
 bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
-	DKLog("DKFileV8::DirectoryContents("+path+",CefReturn)\n", DKFILTER);
+	DKLog("DKFileV8::DirectoryContents("+path+",CefReturn)\n", DKDEBUG);
 	DKStringArray arry;
 	if(!DKFile::GetDirectoryContents(path, arry)){
 		return true;
@@ -80,7 +80,7 @@ bool DKFileV8::Exists(CefArgs args, CefReturn retval)
 bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
-	DKLog("DKFileV8::GetShortName("+path+",CefReturn)\n", DKFILTER);
+	DKLog("DKFileV8::GetShortName("+path+",CefReturn)\n", DKDEBUG);
 #ifdef WIN32
 	DKString shortname;
 	if(DKFile::GetShortName(path, shortname)){
@@ -96,7 +96,7 @@ bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
-	DKLog("DKFileV8::IsDirectory("+path+",CefReturn)\n", DKFILTER);
+	DKLog("DKFileV8::IsDirectory("+path+",CefReturn)\n", DKDEBUG);
 	if(!DKFile::IsDirectory(path)){
 		retval = CefV8Value::CreateBool(false);
 		return true;

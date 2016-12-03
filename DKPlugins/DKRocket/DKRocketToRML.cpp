@@ -184,7 +184,7 @@ void DKRocketToRML::Hyperlink(DKEvent* event)
 ////////////////////////////////////////////////
 void DKRocketToRML::ResizeIframe(DKEvent* event)
 {
-	//DKLog("DKWidget::ResizeIframe", DKFILTER);
+	//DKLog("DKWidget::ResizeIframe", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();

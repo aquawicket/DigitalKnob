@@ -287,7 +287,7 @@ bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKSt
 			ftpName = name;
 			ftpPass = pass;
 			ftpPort = port;
-			DKLog("FTP Connected \n", DKSUCCESS);
+			DKLog("FTP Connected \n", DKINFO);
 		    return true;
 		}
 		DKLog("Could not connect to FTP \n", DKERROR);

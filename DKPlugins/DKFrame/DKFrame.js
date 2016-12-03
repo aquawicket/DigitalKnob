@@ -35,7 +35,7 @@ function DKFrame_OnEvent(event)
 ///////////////////////////
 function DKFrame_Widget(id)
 {
-	DKLog("DKFrame_Widget("+id+")\n", DKFILTER);
+	DKLog("DKFrame_Widget("+id+")\n", DKDEBUG);
 	if(!DKWidget_ElementExists(id)){
 		DKLog("DKFrame_Widget(): element does not exist\n", DKERROR);
 		return false;
@@ -80,7 +80,7 @@ function DKFrame_Widget(id)
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
-	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+") \n", DKFILTER);
+	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+") \n", DKDEBUG);
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 
@@ -107,7 +107,7 @@ function DKFrame_Iframe(title, url, width, height)
 /////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n", DKFILTER);
+	DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n", DKDEBUG);
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
 	if(width == "100%"){ width = window_width-100; }
@@ -182,7 +182,7 @@ function DKFrame_CreateFrame(title, width, height)
 ////////////////////////////////////
 function DKFrame_CreateResize(frame)
 {
-	DKLog("DKFrame_CreateResize("+frame+") \n", DKFILTER);
+	DKLog("DKFrame_CreateResize("+frame+") \n", DKDEBUG);
 	
 	var resize = DKWidget_CreateElement(frame, "img", "resize");
 	DKWidget_SetAttribute(resize, "src", "DKFrame/resize.png");

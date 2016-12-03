@@ -274,7 +274,7 @@ bool DKCreator::VerifyTools(const DKString& os)
 ////////////////////////////////////////////////////////////////////
 bool DKCreator::VerifyTool(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::VerifyTool("+os+", "+file+")\n", DKFILTER);
+	DKLog("DKCreator::VerifyTool("+os+", "+file+")\n", DKDEBUG);
 
 	DKString workingOS;
 	GetSystemOS(workingOS);
@@ -378,7 +378,7 @@ bool DKCreator::VerifyLibraries(const DKString& os)
 ///////////////////////////////////////////////////////////////////////
 bool DKCreator::VerifyLibrary(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::VerifyLibrary("+os+", "+file+")\n", DKFILTER);
+	DKLog("DKCreator::VerifyLibrary("+os+", "+file+")\n", DKDEBUG);
 
 	if(!DKFile::Exists(DKApp::datapath+"DKCreator/"+file)){
 		DKLog(DKApp::datapath+"DKCreator/"+file+" not found! \n", DKERROR);
@@ -412,7 +412,7 @@ bool DKCreator::VerifyLibrary(const DKString& os, const DKString& file)
 /////////////////////////////////////////////////////////////////////
 bool DKCreator::InstallTool(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::InstallTool("+os+", "+file+")\n", DKFILTER);
+	DKLog("DKCreator::InstallTool("+os+", "+file+")\n", DKDEBUG);
 
 	DKString workingOS;
 	GetSystemOS(workingOS);
@@ -424,7 +424,7 @@ bool DKCreator::InstallTool(const DKString& os, const DKString& file)
 ////////////////////////////////////////////////////////////////////////
 bool DKCreator::InstallLibrary(const DKString& os, const DKString& file)
 {
-	DKLog("DKCreator::InstallLibrary("+os+", "+file+")\n", DKFILTER);
+	DKLog("DKCreator::InstallLibrary("+os+", "+file+")\n", DKDEBUG);
 
 	RunScriptNode(DKApp::datapath+"DKCreator/"+file, "INSTALL", os);
 
@@ -497,7 +497,7 @@ bool DKCreator::BuildLib(const DKString& lib, const DKString& os, const DKString
 	VerifyLibrary(os,lib);
 	DKLog("*******  Building "+lib+" for "+os+" - "+type+" ********\n", DKINFO);
 	DKCreator::MakeLib(lib,os,type);
-    DKLog("\nDone building libraries.\n",DKSUCCESS);
+    DKLog("\nDone building libraries.\n",DKINFO);
 	return true;
 }
 
@@ -547,7 +547,7 @@ bool DKCreator::BuildLibs(const DKString& os, const DKString& type)
 		DKCreator::MakeLib(libs[i], os, type);
 	}
 
-    DKLog("\nDone queueing libraries.\n",DKSUCCESS);
+    DKLog("\nDone queueing libraries.\n",DKINFO);
 	return true;
 }
 
@@ -644,7 +644,7 @@ bool DKCreator::RebuildApp(const DKString& app, const DKString& os, const DKStri
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKCreator::BuildApp(const DKString& app, const DKString& os, const DKString& type)
 {
-	DKLog("DKCreator::BuildApp("+app+","+os+")\n", DKFILTER);
+	DKLog("DKCreator::BuildApp("+app+","+os+")\n", DKDEBUG);
 	if(!OSCheck(os)){return false;}
 	VerifyTools(os);
 	//VerifyLibraries(os);
@@ -998,7 +998,7 @@ bool DKCreator::BuildEVERYTHING()
 			BuildApp(applist[b],OS,"ALL");
 		}
 	}
-	DKLog("\n\nFINNISHED BUILDING EVERYTHING!\n\n",DKSUCCESS);
+	DKLog("\n\nFINNISHED BUILDING EVERYTHING!\n\n",DKINFO);
 	return true;
 }
 
@@ -1605,7 +1605,7 @@ bool DKCreator::MakeApp(const DKString& app, const DKString& os, const DKString&
 		CopyAssets(app,os, type);
 	}
 
-	DKLog("\n Done.\n",DKSUCCESS);
+	DKLog("\n Done.\n",DKINFO);
 	return true;
 }
 
