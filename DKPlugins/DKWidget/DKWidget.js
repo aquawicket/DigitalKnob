@@ -42,8 +42,8 @@ function DKCreate(data, callback)
 			callback();
 		}
 		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n");
-			//alert("DKCreate("+data+"): does not have a callback \n");
+			//DKLog("DKCreate("+data+"): does not have a callback \n", DKDEBUG);
+			//alert("DKCreate("+data+"): does not have a callback \n", DKDEBUG);
 		}
 	}
 	if(arry[0] == "DKCss"){
@@ -52,8 +52,8 @@ function DKCreate(data, callback)
 			callback();
 		}
 		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n");
-			//alert("DKCreate("+data+"): does not have a callback \n");
+			//DKLog("DKCreate("+data+"): does not have a callback \n", DKDEBUG);
+			//alert("DKCreate("+data+"): does not have a callback \n", DKDEBUG);
 		}
 	}
 
@@ -123,7 +123,7 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	DKLog("DKWidget_NewWidget("+url+","+parent+")\n", DKDEBUG);
 	
 	if(!url){ return; }
 	DKLog("DKWidget("+url+", "+parent+") \n", DKDEBUG);
@@ -298,12 +298,12 @@ function DKWidget_GetElements(id)
 function DKWidget_GetValue(variable)
 {
 	//DKLog("GetValue("+variable+") \n", DKDEBUG);
-	if(!variable){ DKLog("variable empty \n"); return; }
+	if(!variable){ DKLog("variable empty \n", DKDEBUG); return; }
 
 	if(typeof variable === "string"){ //id
 		//DKLog("GetValue("+variable+") -> typeof variable === string\n", DKDEBUG);
 		var ele = document.getElementById(variable);
-		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n"); /*return false;*/ }
+		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n", DKDEBUG); /*return false;*/ }
 		if(ele){ 
 			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
 			return ele.value; 
@@ -319,7 +319,7 @@ function DKWidget_GetValue(variable)
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n", DKDEBUG);
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n", DKDEBUG);
 		if(variable.nodeType == 1){
-			DKLog("variable.tagName: "+variable.tagName+"\n");
+			DKLog("variable.tagName: "+variable.tagName+"\n", DKDEBUG);
 			if(variable.tagName == "INPUT"){
 				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
 				return variable.value;
@@ -651,11 +651,11 @@ function DKWidget_CreateElement(parent, tag, id)
 	if(!ele){ DKLog("CreateElement(): ele invalid ("+tag+") \n", DKERROR); return false;}
 	ele.id = id;
 	
-	//DKLog("DKWidget_CreateElement(): par = "+par+"\n");
-	//DKLog("DKWidget_CreateElement(): ele = "+ele+"\n");
+	//DKLog("DKWidget_CreateElement(): par = "+par+"\n", DKDEBUG);
+	//DKLog("DKWidget_CreateElement(): ele = "+ele+"\n", DKDEBUG);
 	par.appendChild(ele); //This is not working on IE
 	
-	DKLog("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n");
+	DKLog("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n", DKDEBUG);
 	return id;
 }
 
@@ -853,7 +853,7 @@ function DKWidget_RemoveAttribute(id, attrib)
 ///////////////////////////////////
 function DKWidget_GetHoverElement()
 { 
-	//DKLog("DKWidget_GetHoverElement() = "+document.elementFromPoint(mouseX, mouseY).id+"\n");
+	//DKLog("DKWidget_GetHoverElement() = "+document.elementFromPoint(mouseX, mouseY).id+"\n", DKDEBUG);
 	return document.elementFromPoint(mouseX, mouseY).id;
 }
 
@@ -862,21 +862,21 @@ function DKWidget_GetScale()
 {
 	var scale = getComputedStyle(document.documentElement).fontSize;
 	scale = scale.replace("px","");
-	//DKLog("DKWidget_GetScale() = "+scale+"\n");
+	//DKLog("DKWidget_GetScale() = "+scale+"\n", DKDEBUG);
 	return parseFloat(scale);
 }
 
 /////////////////////////////////
 function DKWidget_SetScale(scale)
 {
-	//DKLog("DKWidget_SetScale("+scale+")\n");
+	//DKLog("DKWidget_SetScale("+scale+")\n", DKDEBUG);
 	DKWidget_SetProperty("html", "font-size", scale+"px");
 }
 
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)
 {
-	//DKLog("DKWidget_OpenLink("+url+","+target+")\n");
+	//DKLog("DKWidget_OpenLink("+url+","+target+")\n", DKDEBUG);
 	//window.location = url;
 	window.open(url, target);
 }

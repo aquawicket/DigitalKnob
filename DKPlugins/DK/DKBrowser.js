@@ -111,10 +111,10 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
-	DKLog("CreateWidget("+url+","+parent+")\n");
+	DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
 	
 	var string = DK_FileToString(url);
-	DKLog("CreateWidget(url, parent): string = "+string+"\n");
+	DKLog("CreateWidget(url, parent): string = "+string+"\n", DKDEBUG);
 	if(!string || string == "ERROR"){ 
 		//DKLog("file not found \n", DKERROR); 
 		var file = DKFile_GetFilename(url);
@@ -563,7 +563,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKLog("AJAX SEND: "+url);
+	DKLog("AJAX SEND: "+url, DKDEBUG);
 	
 	var request = "";
 	try {

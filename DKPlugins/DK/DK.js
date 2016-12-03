@@ -61,7 +61,7 @@ function DK_GetDate()
 function DKLog(string, lvl)
 {
 	if(!lvl){
-		alert("DKLog missing lvl");
+		alert("DKLog("+string+") missing lvl");
 	}
 	if(window.console){
 		var color = "";
@@ -81,9 +81,9 @@ function DKLog(string, lvl)
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
-DKLog("*** DigitalKnob ***", DKINFO);
-DKLog(DK_GetBrowser()+"\n");
-DKLog(DK_GetJavascript()+"\n");
+DKLog("*** DigitalKnob ***\n", DKINFO);
+DKLog(DK_GetBrowser()+"\n", DKINFO);
+DKLog(DK_GetJavascript()+"\n", DKINFO);
 
 ////////////////////
 function DK_Reload()
@@ -116,11 +116,11 @@ function DK_GetEvents()
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
 			out += events[i].name + ",";
-			//DKLog(events[i].name);
+			//DKLog(events[i].name, DKDEBUG);
 		}
 		else{
 			out += events[i] + " : ";
-			//DKLog(events[i]);
+			//DKLog(events[i], DKDEBUG);
 		}
 	}
 	return out;
@@ -238,7 +238,7 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	//DKLog("GetType("+event+") \n", DKDEBUG);
+	//DKLog("GetType("+event+")\n", DKDEBUG);
 	if(!event){ return false; }
 	if(event.type){
 		//DKLog("GetType("+event+") -> "+event.type+"\n", DKDEBUG);
@@ -268,7 +268,7 @@ function DK_GetId(event)
 		return element.id; 
 	}
 	if(event[0]){ 
-		//DKLog("GetId("+event+") -> "+event[0]+"\n");
+		//DKLog("GetId("+event+") -> "+event[0]+"\n", DKDEBUG);
 		return event[0]; 
 	}
 	
@@ -362,7 +362,7 @@ function DKAddEvent(id, type, Function)
 	}
 	
 	//add event to array
-	//DKLog("events.length="+events.length+"\n");
+	//DKLog("events.length="+events.length+"\n", DKDEBUG);
 	//events.push(id);
 	//events.push(type);
 	//events.push(Function);
@@ -395,7 +395,7 @@ function DKRemoveEvent(id, type, Function)
 		element = window;
 	}
 	
-	//DKLog("DKRemoveEvent("+id+","+type+", Function) \n");
+	//DKLog("DKRemoveEvent("+id+","+type+", Function) \n", DKDEBUG);
 	for(var i=0; i<events.length; i++){
 		if(events[i] == id){
 			if(events[i+1] == type){
@@ -404,16 +404,16 @@ function DKRemoveEvent(id, type, Function)
 					if(element){
 						//removeEvent(element, type, function(event){ Function(event); });
 						removeEvent(element, type, Function);
-						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n");
+						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n", DKDEBUG);
 					}
-					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n");
+					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n", DKDEBUG);
 					i=0;
 				}
 			}
 		}
 	}
 
-	//DKLog(events+"\n");
+	//DKLog(events+"\n", DKDEBUG);
 }
 
 /*
