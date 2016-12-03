@@ -368,11 +368,13 @@ function DKFile_GetExtention(url)
 	return out;
 }
 
-///////////////////////////
-function DKFile_Delete(url)
-{
-	DKLog("Deleting: "+url+"\n");
-	send = online_assets+"/DKFile/DKFile.php?Delete="+url;
-	var result = ajaxGetUrl(send);
-	return result;
+if(DK_GetBrowser() != "CEF"){
+	///////////////////////////
+	function DKFile_Delete(url)
+	{
+		DKLog("Deleting: "+url+"\n");
+		send = online_assets+"/DKFile/DKFile.php?Delete="+url;
+		var result = ajaxGetUrl(send);
+		return result;
+	}
 }
