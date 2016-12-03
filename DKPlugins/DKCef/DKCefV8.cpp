@@ -3,6 +3,8 @@
 ////////////////////
 void DKCefV8::Init()
 {
+	DKCreate("DKFileV8");
+	
 	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 }

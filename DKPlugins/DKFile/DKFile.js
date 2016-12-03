@@ -10,7 +10,7 @@ function DKFile_CopyFolder(src,dst,overwrite,recursive){DKLog("DKFile_CopyDirect
 function DKFile_MkDir(){ DKLog("DKFile_MkDir(): not available for javascript", DKERROR); }
 function DKFile_ChDir(){ DKLog("DKFile_ChDir(): not available for javascript", DKERROR); }
 function DKFile_GetFullExeName(){ DKLog("DKFile_GetFullExeName(): not available for javascript", DKERROR); }
-function DKFile_GetShortName(){ DKLog("DKFile_GetShortName(): not available for javascript", DKERROR); }
+//function DKFile_GetShortName(){ DKLog("DKFile_GetShortName(): not available for javascript", DKERROR); }
 
 //////////////////////
 function DKFile_Init()
