@@ -14,6 +14,7 @@ public:
 	//static bool Test(CefArgs args, CefReturn retval);
 	static bool DirectoryContents(CefArgs args, CefReturn retval);
 	static bool GetShortName(CefArgs args, CefReturn retval);
+	static bool IsDirectory(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKFileV8, false);

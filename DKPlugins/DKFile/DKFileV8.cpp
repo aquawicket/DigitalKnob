@@ -6,8 +6,9 @@
 void DKFileV8::Init()
 {
 	//DKCefApp::AttachFunction("Test", DKFileV8::Test);
-	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
 	DKCefApp::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
+	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
+	DKCefApp::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
 }
 
 ///////////////////
@@ -52,5 +53,17 @@ bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 	}
 #endif
 	retval = CefV8Value::CreateString(path);
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
+{
+	DKString path = args[0]->GetStringValue();
+	if(!DKFile::IsDirectory(path)){
+		retval = CefV8Value::CreateBool(false);
+		return false;
+	}
+	retval = CefV8Value::CreateBool(true);
 	return true;
 }
