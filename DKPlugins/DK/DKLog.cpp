@@ -27,12 +27,22 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
-	bool flag = false;
+	
 	int i=0;
 	DKString value;
 
-	//check setting file for string
-	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FILTER_"+toString(i)+"]", value)){
+	//check for LOG_HIDE_n
+	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE_"+toString(i)+"]", value)){
+		if(has(text,value)){
+			return;
+		}
+		i++;
+	}
+
+	//check for LOG_SHOW_n
+	i = 0;
+	bool flag = false;
+	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW_"+toString(i)+"]", value)){
 		if(has(text,value)){
 			flag = true;
 			break;
