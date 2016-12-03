@@ -4,6 +4,8 @@ var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
+var LOG_SHOW = ""; //comma seperated
+var LOG_HIDE = ""; //comma seperated
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return;*/ }
@@ -38,6 +40,9 @@ function DKLog(string, lvl)
 	if(!lvl){
 		alert("DKLog("+string+") missing lvl");
 	}
+	
+	//TODO: implement LOG_HIDE and LOG_SHOW loops
+	
 	if(window.console){
 		var color = "";
 		if(lvl == DKERROR && LOG_ERRORS){ color = "color:red"; }
