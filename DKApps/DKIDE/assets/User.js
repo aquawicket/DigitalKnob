@@ -3,11 +3,10 @@ var USE_CEF = true;
 
 DKCreate("DKWindow");
 DKCreate("DKRocket");
-DKCreate("DKWidget");
 DKCreate("DKDebug/DKDebug.js", function(){});
 
-
 if(DK_GetBrowser() == "Rocket" && USE_CEF){
+	DKCreate("DKWidget");
 	var assets = DKAssets_LocalAssets();
 	var url = "file:///"+assets+"/index.html";
 	var iframe = DKWidget_CreateElement("body", "iframe", "DKCef_frame");
