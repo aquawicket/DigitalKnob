@@ -24,10 +24,8 @@ if(DK_GetBrowser() != "CEF"){
 
 var DKERROR = 0;     //Red
 var DKWARN = 1;      //Yellow
-var DKSUCCESS = 2;   //Green
 var DKINFO = 3;      //White
 var DKDEBUG = 4;     //Blue
-var DKFILTER = 5;     //Yellow
 
 /////////////////////
 function DK_GetTime()
@@ -62,14 +60,15 @@ function DK_GetDate()
 ///////////////////////////
 function DKLog(string, lvl)
 {
+	if(!lvl){
+		alert("DKLog missing lvl");
+	}
 	if(window.console){
 		var color = "";
 		if(lvl == DKERROR){ color = "color:red"; }
 		if(lvl == DKWARN){ color = "color:#B8860B"; }
-		if(lvl == DKSUCCESS){ color = "color:green"; }
 		if(lvl == DKINFO){ color = "color:grey"; }
 		if(lvl == DKDEBUG){ color = "color:blue"; }
-		if(lvl == DKFILTER){ color = "color:#B8860B"; }
 		//if(!color){ throw new Error("DKLog(): with no lvl."); }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
