@@ -18,10 +18,10 @@ function LibraryMenu_End()
 ///////////////////////////////////
 function LibraryMenu_OnEvent(event)
 {
-	//DKLog("LibraryMenu_OnEvent("+event+") \n");
+	//DKLog("LibraryMenu_OnEvent("+event+") \n", DKDEBUG);
 	
 	if(DK_Id(event, "Build Libraries")){
-		DKLog("Clicked Build Libraries\n");
+		DKLog("Clicked Build Libraries\n", DKDEBUG);
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

@@ -62,23 +62,23 @@ function RunMenu_OnEvent(event)
 				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 			}
 			if(OS == "android"){
-				DKLog("TODO: Run android from Windows \n");
+				DKLog("TODO: Run android from Windows \n", DKDEBUG);
 			}
 		}
 		if(DK_GetOS() == "Mac"){
 			if(OS == "mac"){
-				DKLog("TODO: Run mac apps from OSX \n");
+				DKLog("TODO: Run mac apps from OSX \n", DKDEBUG);
 			}
 			if(OS = "ios"){
-				DKLog("TODO: Run iOS apps from OSX \n");
+				DKLog("TODO: Run iOS apps from OSX \n", DKDEBUG);
 			}
 			if(OS = "ios-simulator"){
-				DKLog("TODO: Run iOS-simulator apps from OSX \n");
+				DKLog("TODO: Run iOS-simulator apps from OSX \n", DKDEBUG);
 			}
 		}
 		if(DK_GetOS() == "Linux"){
 			if(OS = "linux"){
-				DKLog("TODO: Run linux apps from Linux \n");
+				DKLog("TODO: Run linux apps from Linux \n", DKDEBUG);
 			}
 		}
 	}

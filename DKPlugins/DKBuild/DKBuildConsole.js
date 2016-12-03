@@ -15,20 +15,20 @@ function DKBuildConsole_Init()
 //////////////////////////////////////
 function DKBuildConsole_ChooseUpdate()
 {
-	DKLog("\n**** Update DigitalKnob ??? ****\n");
-	DKLog("Y. Update\n");
-	DKLog("C. Commit\n");
-	DKLog("R. Reset Apps and Plugins\n");
-	DKLog("X. Reset Everything\n");
-	DKLog("any other key to Skip\n");
-	DKLog("ESC. exit\n\n");
+	DKLog("\n**** Update DigitalKnob ??? ****\n", DKINFO);
+	DKLog("Y. Update\n", DKINFO);
+	DKLog("C. Commit\n", DKINFO);
+	DKLog("R. Reset Apps and Plugins\n", DKINFO);
+	DKLog("X. Reset Everything\n", DKINFO);
+	DKLog("any other key to Skip\n", DKINFO);
+	DKLog("ESC. exit\n\n", DKINFO);
 	
 	var key = 10;
 	while(key == 10){ //unix fix
 		key = DK_GetKey();
 	}
 	
-	//DKLog("Key pressed: "+String(key)+"\n");
+	//DKLog("Key pressed: "+String(key)+"\n", DKINFO);
 	
 	if(key == 27){
 		DK_Exit();
@@ -53,28 +53,26 @@ function DKBuildConsole_ChooseUpdate()
 //////////////////////////////////
 function DKBuildConsole_SelectOs()
 {
-	DKLog("\n**** SELECT OS TO BUILD ****\n");
-	DKLog("1. win32\n");
-	DKLog("2. win64\n");
-	DKLog("3. mac32 (NOT AVAILABLE)\n");
-	DKLog("4. mac64\n");
-	DKLog("5. linux32 (NOT AVAILABLE)\n");
-	DKLog("6. linux64\n");
-	DKLog("7. ios32 (NOT AVAILABLE)\n");
-	DKLog("8. ios64 (NOT AVAILABLE)\n");
-	DKLog("9. iossim32\n");
-	DKLog("a. iossim64 (NOT AVAILABLE)\n");
-	DKLog("b. android32\n");
-	DKLog("c. android64 (NOT AVAILABLE)\n");
-
-	
-	DKLog("ESC. exit\n\n");
+	DKLog("\n**** SELECT OS TO BUILD ****\n", DKINFO);
+	DKLog("1. win32\n", DKINFO);
+	DKLog("2. win64\n", DKINFO);
+	DKLog("3. mac32 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("4. mac64\n", DKINFO);
+	DKLog("5. linux32 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("6. linux64\n", DKINFO);
+	DKLog("7. ios32 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("8. ios64 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("9. iossim32\n", DKINFO);
+	DKLog("a. iossim64 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("b. android32\n", DKINFO);
+	DKLog("c. android64 (NOT AVAILABLE)\n", DKINFO);
+	DKLog("ESC. exit\n\n", DKINFO);
 
 	var key = 10;
 	while(key == 10){ //unix fix
 		key = DK_GetKey();
 	}
-	//DKLog("Key pressed: "+String(key)+"\n");
+	//DKLog("Key pressed: "+String(key)+"\n", DKINFO);
 	if(key == 27){
 		DK_Exit();
 	}
@@ -115,24 +113,24 @@ function DKBuildConsole_SelectOs()
 		OS = "android64";
 	}
 	else{
-		DKLog("\n INVALID OPTION\n\n");
+		DKLog("\n INVALID OPTION\n\n", DKERROR);
 	}
 }
 
 /////////////////////////////////////
 function DKBuildConsole_SelectApp()
 {
-	DKLog("**** SELECT APP TO BUILD ****\n");
+	DKLog("**** SELECT APP TO BUILD ****\n", DKINFO);
 	for(var i=0; i<APP_LIST.length; ++i){
-		DKLog(DKBuildConsole_TranslateOption(i)+":"+APP_LIST[i]+"\n");
+		DKLog(DKBuildConsole_TranslateOption(i)+":"+APP_LIST[i]+"\n", DKINFO);
 	}
-	DKLog("ESC. exit\n\n");
+	DKLog("ESC. exit\n\n", DKINFO);
 	
 	var key = 10;
 	while(key == 10){ //unix fix
 		key = DK_GetKey();
 	}
-	//DKLog("Key pressed: "+String(key)+"\n");
+	//DKLog("Key pressed: "+String(key)+"\n", DKINFO);
 	if(key == 27){
 		DK_Exit();
 	}
@@ -140,24 +138,24 @@ function DKBuildConsole_SelectApp()
 	DKBuildConsole_KeyToApp(key);
 	
 	if(APP == ""){
-		DKLog("\n INVALID OPTION\n\n");
+		DKLog("\n INVALID OPTION\n\n", DKINFO);
 	}
 }
 
 //////////////////////////////////////
 function DKBuildConsole_SelectType()
 {
-	DKLog("**** SELECT BUILD TYPE ****\n");
-	DKLog("1. Debug\n");
-	DKLog("2. Release\n");
-	DKLog("3. All\n");
-	DKLog("ESC. exit\n\n");
+	DKLog("**** SELECT BUILD TYPE ****\n", DKINFO);
+	DKLog("1. Debug\n", DKINFO);
+	DKLog("2. Release\n", DKINFO);
+	DKLog("3. All\n", DKINFO);
+	DKLog("ESC. exit\n\n", DKINFO);
 	
 	var key = 10;
 	while(key == 10){ //unix fix
 		key = DK_GetKey();
 	}
-	//DKLog("Key pressed: "+String(key)+"\n");
+	//DKLog("Key pressed: "+String(key)+"\n", DKINFO);
 	if(key == 27){
 		DK_Exit();
 	}
@@ -171,7 +169,7 @@ function DKBuildConsole_SelectType()
 		TYPE = "ALL";
 	}
 	else{
-		DKLog("\n INVALID OPTION\n\n");
+		DKLog("\n INVALID OPTION\n\n", DKERROR);
 	}
 }
 
@@ -185,7 +183,7 @@ function DKBuildConsole_Process()
 	DKBuildConsole_ChooseUpdate();
 	
 	if(!DKFile_Exists(DKPATH+"/DKPlugins")){
-		DKLog("ERROR: can't find "+DKPATH+" \n.");
+		DKLog("ERROR: can't find "+DKPATH+" \n.", DKERROR);
 		DK_GetKey();
 		DK_Exit();
 	}
@@ -193,13 +191,13 @@ function DKBuildConsole_Process()
 	while(OS == ""){
 		DKBuildConsole_SelectOs();
 	}
-	DKLog("\n ** Current OS "+OS+"\n");
+	DKLog("\n ** Current OS "+OS+"\n", DKINFO);
 
 	DKBuild_GetAppList();
 	while(APP == ""){
 		DKBuildConsole_SelectApp();
 	}
-	DKLog("\n ** Current APP "+APP+"\n");
+	DKLog("\n ** Current APP "+APP+"\n", DKINFO);
 
 	if(DK_GetOS() == "Linux" || OS == "android32" || OS == "android64"){
 		TYPE = "Release";
@@ -210,9 +208,9 @@ function DKBuildConsole_Process()
 	while(TYPE == ""){
 		DKBuildConsole_SelectType();
 	}
-	DKLog("\n ** Current Build Type "+TYPE+"\n\n");
+	DKLog("\n ** Current Build Type "+TYPE+"\n\n", DKINFO);
 
-	DKLog("Press any key to Build ("+APP+" "+OS+" "+TYPE+")\n\n");	
+	DKLog("Press any key to Build ("+APP+" "+OS+" "+TYPE+")\n\n", DKINFO);
 	DK_GetKey();
 	
 	DKBuild_DoResults();

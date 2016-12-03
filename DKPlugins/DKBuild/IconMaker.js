@@ -4,13 +4,13 @@ var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86
 function IconMaker_Init()
 {
 	IMAGEMAGICK = DKFile_GetShortName(IMAGEMAGICK);
-	DKLog("IMAGEMAGICK="+IMAGEMAGICK+"\n");
+	DKLog("IMAGEMAGICK="+IMAGEMAGICK+"\n", DKINFO);
 }
 
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	DKLog("IconMaker_Create("+AppPath+") \n", DKINFO);
+	DKLog("IconMaker_Create("+AppPath+") \n", DKDEBUG);
 	
 	//Create Windows Icon
 	DKFile_MkDir(AppPath+"/icons/windows");

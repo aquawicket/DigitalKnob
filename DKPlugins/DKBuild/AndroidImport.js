@@ -6,7 +6,7 @@ function AndroidImport_Init()
 {
 	DKCreate("DKHook");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
-	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
+	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n", DKINFO);
 }
 
 ///////////////////////////////
@@ -47,7 +47,7 @@ function AndroidImport_Import()
 	else{
 		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Release";
 	}
-	//DKLog(path+"\n");
+	//DKLog(path+"\n", DKDEBUG);
 	DK_SetClipboard(path);	
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
