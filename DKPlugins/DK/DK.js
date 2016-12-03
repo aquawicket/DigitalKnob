@@ -27,6 +27,7 @@ var DKWARN = 1;      //Yellow
 var DKSUCCESS = 2;   //Green
 var DKINFO = 3;      //White
 var DKDEBUG = 4;     //Blue
+var DKFILTER = 5;     //Yellow
 
 /////////////////////
 function DK_GetTime()
@@ -68,10 +69,11 @@ function DKLog(string, lvl)
 		if(lvl == DKSUCCESS){ color = "color:green"; }
 		if(lvl == DKINFO){ color = "color:grey"; }
 		if(lvl == DKDEBUG){ color = "color:blue"; }
+		if(lvl == DKFILTER){ color = "color:#B8860B"; }
 		//if(!color){ throw new Error("DKLog(): with no lvl."); }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
-		if(DK_GetBrowser() == "CHROME"){
+		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+string, color);
 		}
 		else{
