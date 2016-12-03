@@ -11,7 +11,9 @@
 void DKAssets::Init()
 {
 	DKLog("DKAssets::Init()\n", DKDEBUG);
-	
+	DKCreate("DKAssetsJS");
+	DKCreate("DKAssetsV8");
+
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){

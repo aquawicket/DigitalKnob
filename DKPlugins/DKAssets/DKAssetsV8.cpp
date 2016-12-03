@@ -7,6 +7,7 @@ void DKAssetsV8::Init()
 {
 	DKLog("DKAssetsV8::Init()\n", DKDEBUG);
 	//DKCefApp::AttachFunction("Test", DKAssetsV8::Test);
+	DKCefApp::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
 }
 
 ///////////////////
@@ -26,3 +27,10 @@ bool DKAssetsV8::Test(CefArgs args, CefReturn retval)
 	return true;
 }
 */
+
+////////////////////////////////////////////////////////////
+bool DKAssetsV8::LocalAssets(CefArgs args, CefReturn retval)
+{
+	retval = CefV8Value::CreateString(DKFile::local_assets);
+	return true;
+}
