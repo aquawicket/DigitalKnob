@@ -14,11 +14,11 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	//DKLog("DKBuild_Init() \n");
+	//DKLog("DKBuild_Init() \n", DKDEBUG);
 	DKCreate("DKThreadPool");
 	DKCreate("DKCurl");
 
-	//DKLog(DK_GetOS()+"\n");
+	//DKLog(DK_GetOS()+"\n", DKDEBUG);
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
@@ -57,7 +57,7 @@ function DKBuild_Init()
 function DKBuild_InstallSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Svn \n");
+	DKLog("Installing Svn \n", DKINFO);
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -75,7 +75,7 @@ function DKBuild_InstallSvn()
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS());
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
 	}
 }
 
@@ -83,13 +83,13 @@ function DKBuild_InstallSvn()
 function DKBuild_ValidateSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for SVN \n");
-	//DKLog(SVN+"\n");
+	DKLog("Looking for SVN \n", DKINFO);
+	//DKLog(SVN+"\n", DKDEBUG);
 	if(!DKFile_Exists(SVN)){
-		DKLog("Please install SVN \n");
+		DKLog("Please install SVN \n", DKINFO);
 		DKBuild_InstallSvn();
 	}
-	DKLog("Found SVN \n");
+	DKLog("Found SVN \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
 	}
@@ -98,7 +98,7 @@ function DKBuild_ValidateSvn()
 /////////////////////////////////
 function DKBuild_InstallCmake()
 {
-	DKLog("Installing CMake \n");
+	DKLog("Installing CMake \n", DKINFO);
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -116,7 +116,7 @@ function DKBuild_InstallCmake()
 		DK_Execute("sudo apt-get install cmake");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS());
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
 	}
 }
 
@@ -124,13 +124,13 @@ function DKBuild_InstallCmake()
 function DKBuild_ValidateCmake()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for CMake \n");
-	//DKLog(CMAKE+"\n");
+	DKLog("Looking for CMake \n", DKINFO);
+	//DKLog(CMAKE+"\n", DKDEBUG);
 	if(!DKFile_Exists(CMAKE)){
-		DKLog("Please install CMake \n");
+		DKLog("Please install CMake \n", DKINFO);
 		DKBuild_InstallCmake();
 	}
-	DKLog("Found CMake \n");
+	DKLog("Found CMake \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
 		CMAKE = "cmake";
 	}
@@ -139,7 +139,7 @@ function DKBuild_ValidateCmake()
 //////////////////////////////////
 function DKBuild_InstallVC2015()
 {
-	DKLog("Installing Visual Studio 2015 \n");
+	DKLog("Installing Visual Studio 2015 \n", DKINFO);
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -159,12 +159,12 @@ function DKBuild_ValidateVC2015()
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
-	DKLog("Looking for Visual Studio 2015 \n");
-	//DKLog(VC2015+"\n");
+	DKLog("Looking for Visual Studio 2015 \n", DKINFO);
+	//DKLog(VC2015+"\n", DKDEBUG);
 	if(!DKFile_Exists(VC2015)){
 		DKBuild_InstallVC2015();
 	}
-	DKLog("Found Visual Studio 2015 \n");
+	DKLog("Found Visual Studio 2015 \n", DKINFO);
 }
 
 ////////////////////////////
@@ -172,74 +172,74 @@ function DKBuild_OsCheck()
 {
 	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from a WIN64 machine.\n"); return false;
+			DKLog(OS+" can only be build from a WIN64 machine.\n", DKINFO); return false;
 		}
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
+			DKLog(OS+" can only be build from a LINUX machine.\n", DKINFO); return false;
 		}
 	}
 	if(DK_GetOS() == "Win64"){
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
+			DKLog(OS+" can only be build from a LINUX machine.\n", DKINFO); return false;
 		}
 	}
 	if(DK_GetOS() == "Mac"){
 		if(OS == "win32"){
-			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
 		}
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from an WIN64 machine.\n"); return false;
+			DKLog(OS+" can only be build from an WIN64 machine.\n", DKINFO); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a linux machine.\n"); return false;
+			DKLog(OS+" can only be build from a linux machine.\n", DKINFO); return false;
 		}
 		if(OS == "andoroid"){
-			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
 		}
 	}
 	if(DK_GetOS() == "Linux"){
 		if(OS == "win32"){
-			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
 		}
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from an WIN64 machine.\n"); return false;
+			DKLog(OS+" can only be build from an WIN64 machine.\n", DKINFO); return false;
 		}
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
 		}
 		if(OS == "andoroid"){
-			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
 		}
 	}
 	if(DK_GetOS() == "Android"){
-		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
+		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n", DKINFO); return false;
 	}
 	if(DK_GetOS() == "iOS"){
-		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
+		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n", DKINFO); return false;
 	}
 	return true;
 }
@@ -247,7 +247,7 @@ function DKBuild_OsCheck()
 //////////////////////////////
 function DKBuild_SvnUpdate()
 {
-	DKLog("Svn Update... \n");
+	DKLog("Svn Update... \n", DKINFO);
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
@@ -269,7 +269,7 @@ function DKBuild_SvnUpdate()
 //////////////////////////////
 function DKBuild_SvnCommit()
 {
-	DKLog("Svn Commit... \n");
+	DKLog("Svn Commit... \n", DKINFO);
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
@@ -291,14 +291,14 @@ function DKBuild_SvnCommit()
 ///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
-	DKLog("Deleting Apps and Plugins... \n");
+	DKLog("Deleting Apps and Plugins... \n", DKINFO);
 	
 	// Delete everything in DKApps except DKBuild
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
 	var list = apps.split(',');
 	for(var i=0; i<list.length; ++i){
 		if(list[i] == "DKBuilder"){ continue; }
-		//DKLog("Deleting "+DKPATH+"/DKApps/"+list[i]+"\n");
+		//DKLog("Deleting "+DKPATH+"/DKApps/"+list[i]+"\n", DKDEBUG);
 		DKFile_Delete(DKPATH+"/DKApps/"+list[i]);
 	}
 	
@@ -313,17 +313,17 @@ function DKBuild_ResetAppsPlugins()
 function DKBuild_Reset3rdParty()
 {
 	//TODO
-	DKLog("Deleting 3rdParty... \n");
-	DKLog("Please wait. \n");
+	DKLog("Deleting 3rdParty... \n", DKINFO);
+	DKLog("Please wait. \n", DKINFO);
 	DKFile_Delete(DKPATH+"/3rdParty");
 }
 
 /////////////////////////////
 function DKBuild_GetAppList()
 {
-	//DKLog("DKBuild_GetAppList() \n");
+	//DKLog("DKBuild_GetAppList() \n", DKDEBUG);
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
-	//DKLog("DKBuild_GetAppList() apps = "+apps+"\n");
+	//DKLog("DKBuild_GetAppList() apps = "+apps+"\n", DKDEBUG);
 	var myapps = DKFile_DirectoryContents(DKPATH+"/USER/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
@@ -340,7 +340,7 @@ function DKBuild_GetAppList()
 	if(myapps){
 		MYAPP_LIST = myapps.split(',');
 		for(var i=0; i<MYAPP_LIST.length; i++){
-			//DKLog(MYAPP_LIST[i]+"\n");
+			//DKLog(MYAPP_LIST[i]+"\n", DKDEBUG);
 			if(!DKFile_IsDirectory(DKPATH+"/USER/DKApps/"+MYAPP_LIST[i]) || MYAPP_LIST[i] == ".svn"){
 				MYAPP_LIST.splice(i, 1);
 				i=0;
@@ -350,9 +350,9 @@ function DKBuild_GetAppList()
 	}
 	
 	/*
-	DKLog("*****************\n");
+	DKLog("*****************\n", DKDEBUG);
 	for(var i=0; i<APP_LIST.length; i++){
-		DKLog(APP_LIST[i]+"\n");
+		DKLog(APP_LIST[i]+"\n", DKDEBUG);
 	}
 	*/
 }
@@ -360,7 +360,7 @@ function DKBuild_GetAppList()
 ////////////////////////////
 function DKBuild_DoResults()
 {
-	DKLog("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n");
+	DKLog("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n", DKDEBUG);
 	if(!DKBuild_OsCheck()){ return; }
 	
 	//Update the apps CmakeLists.txt file
