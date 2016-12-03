@@ -178,6 +178,7 @@ function DKBuildConsole_Process()
 {
 	OS = "";
 	APP = "";
+	TYPE = "Release"
 	LEVEL = "Release";
 	
 	DKBuildConsole_ChooseUpdate();
