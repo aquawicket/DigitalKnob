@@ -7,9 +7,11 @@ void DKFileV8::Init()
 {
 	DKLog("DKFileV8::Init()\n", DKFILTER);
 	//DKCefApp::AttachFunction("Test", DKFileV8::Test);
+	DKCefApp::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
 	DKCefApp::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
 	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
 	DKCefApp::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
+	DKCefApp::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
 }
 
 ///////////////////
@@ -29,6 +31,14 @@ bool DKFileV8::Test(CefArgs args, CefReturn retval)
 	return true;
 }
 */
+
+////////////////////////////////////////////////////
+bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
+{
+	DKString path = args[0]->GetStringValue();
+	DKFile::ChDir(path);
+	return true;
+}
 
 ////////////////////////////////////////////////////////////////
 bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
@@ -70,5 +80,13 @@ bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 		return true;
 	}
 	retval = CefV8Value::CreateBool(true);
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
+{
+	DKString path = args[0]->GetStringValue();
+	DKFile::MakeDir(path);
 	return true;
 }

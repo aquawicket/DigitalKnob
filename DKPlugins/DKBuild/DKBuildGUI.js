@@ -20,6 +20,7 @@ function DKBuildGUI_Init()
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
 
+		/*
 		if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
 			DKWidget_SetValue("OSList", "win32");
 		}
@@ -38,6 +39,8 @@ function DKBuildGUI_Init()
 		}
 	
 		if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
+		*/
+		
 		DKBuildGUI_UpdateApps();
 	});
 	});
