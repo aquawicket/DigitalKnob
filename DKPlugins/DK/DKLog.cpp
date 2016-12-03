@@ -50,7 +50,8 @@ void DKLog(const DKString& text, const int lvl)
 	toStringArray(shows, log_show, ",");
 	for(int i=0; i<shows.size(); ++i){
 		if(has(text,shows[i])){
-			return;
+			flag = true;
+			break;
 		}
 	}
 
