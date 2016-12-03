@@ -21,8 +21,6 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
-	//FIXME: this is a file hog and slow. Do this in DKAssets and store the LOG_SHOW, LOG_HIDE variables.
-	
 	int i=0;
 	DKString value;
 
@@ -35,15 +33,6 @@ void DKLog(const DKString& text, const int lvl)
 		}
 	}
 
-	/*
-	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE_"+toString(i)+"]", value)){
-		if(has(text,value)){
-			return;
-		}
-		i++;
-	}
-	*/
-
 	//check for LOG_SHOW_n
 	bool flag = false;
 	DKStringArray shows;
@@ -54,24 +43,13 @@ void DKLog(const DKString& text, const int lvl)
 			break;
 		}
 	}
-
-	/*
-	i = 0;
-	bool flag = false;
-	while(DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW_"+toString(i)+"]", value)){
-		if(has(text,value)){
-			flag = true;
-			break;
-		}
-		i++;
-	}
-	*/
 	if(!flag){
 		if(log_debug == false && lvl == DKDEBUG){ return; }
 		if(log_info == false && lvl == DKINFO){ return; }
 		if(log_warnings == false && lvl == DKWARN){ return; }
 		if(log_errors == false && lvl == DKERROR){ return; }
 	}
+	
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
