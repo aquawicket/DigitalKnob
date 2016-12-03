@@ -4,20 +4,23 @@
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return;*/ }
 function EventLoop(){ /*DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return;*/ }
 EventLoop.run = function(){};
-function DK_ClearEvents(){DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return; }
-function DKRocket_Reload(){DKLog("DKRocket_Reload(): not available for javascript", DKERROR); return; }
-function DK_CallFunc(var1, var2, var3){ DKLog("DK_CallFunc(): not available for javascript", DKERROR); return ""; }
-function DK_Queue(var1, var2, var3){ DKLog("DK_Queue(): not available for javascript", DKERROR); }
-function DK_LeftClick(){DKLog("DK_LeftClick(): not available for javascript", DKERROR); return; }
-function DK_RightClick(){DKLog("DK_RightClick(): not available for javascript", DKERROR); return; }
-function DK_SetCursorPos(){ DKLog("DK_SetCursorPos(): not available for javascript", DKERROR); return; }
-function DKHook_GetWindows(){DKLog("DKHook_GetWindows(): not available for javascript", DKERROR); return; }
-function DK_TestCrash(){DKLog("DK_TestCrash(): not available for javascript", DKERROR); return; }
-function DK_LogGuiConsole(){DKLog("DK_LogGuiConsole(): not available for javascript", DKERROR); return; }
-function DK_GetScreenWidth(){DKLog("DK_GetScreenWidth(): not available for javascript", DKERROR); return; }
-function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for javascript", DKERROR); return; }
-function DK_System(){DKLog("DK_System(): not available for javascript", DKERROR); return; }
-function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for javascript", DKERROR); return; }
+
+if(DK_GetBrowser() != "CEF"){
+	function DK_ClearEvents(){DKLog("DK_ClearEvents(): not available for javascript", DKERROR); return; }
+	function DKRocket_Reload(){DKLog("DKRocket_Reload(): not available for javascript", DKERROR); return; }
+	function DK_CallFunc(var1, var2, var3){ DKLog("DK_CallFunc(): not available for javascript", DKERROR); return ""; }
+	function DK_Queue(var1, var2, var3){ DKLog("DK_Queue(): not available for javascript", DKERROR); }
+	function DK_LeftClick(){DKLog("DK_LeftClick(): not available for javascript", DKERROR); return; }
+	function DK_RightClick(){DKLog("DK_RightClick(): not available for javascript", DKERROR); return; }
+	function DK_SetCursorPos(){ DKLog("DK_SetCursorPos(): not available for javascript", DKERROR); return; }
+	function DKHook_GetWindows(){DKLog("DKHook_GetWindows(): not available for javascript", DKERROR); return; }
+	function DK_TestCrash(){DKLog("DK_TestCrash(): not available for javascript", DKERROR); return; }
+	function DK_LogGuiConsole(){DKLog("DK_LogGuiConsole(): not available for javascript", DKERROR); return; }
+	function DK_GetScreenWidth(){DKLog("DK_GetScreenWidth(): not available for javascript", DKERROR); return; }
+	function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for javascript", DKERROR); return; }
+	function DK_System(){DKLog("DK_System(): not available for javascript", DKERROR); return; }
+	function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for javascript", DKERROR); return; }
+}
 
 var DKERROR = 0;     //Red
 var DKWARN = 1;      //Yellow

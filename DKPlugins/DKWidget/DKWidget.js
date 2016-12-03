@@ -1,7 +1,9 @@
 //BROWSER
 
-function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for javascript", DKERROR); return color; }
-function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for javascript", DKERROR); }
+if(DK_GetBrowser() != "CEF"){
+	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for javascript", DKERROR); return color; }
+	function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for javascript", DKERROR); }
+}
 
 /////////////////////////////////
 function DKCreate(data, callback)
