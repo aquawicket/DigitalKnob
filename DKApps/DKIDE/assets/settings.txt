@@ -1,13 +1,15 @@
 [CONSOLE] ON
 [WIDTH] 820
 [HEIGHT] 620
-[LOG_DEBUG] ON
+[LOG_DEBUG] OFF
 [LOG_INFO] ON
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_FILTER_ALL] OFF
-[LOG_FILTER_0] DKBaseT::Create
-[LOG_FILTER_1] OnContextCreated
-[LOG_FILTER_2] DKFileV8
+[LOG_SHOW_0] //text to show
+[LOG_SHOW_1] //text to show
+[LOG_SHOW_2] //text to show
+[LOG_HIDE_0] //text to hide
+[LOG_HIDE_1] //text to hide
+[LOG_HIDE_2] //text to hide
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
