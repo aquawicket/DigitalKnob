@@ -153,7 +153,7 @@ function DKBuildGUI_UpdateLibs()
 
 	return;
 	var result = DK_CallFunc("DKBuildGUI::GetLibList", "");
-	DKLog("Result:"+result, DKDEBUG);
+	DKLog("Result:"+result, DKFILTER);
 	
 	var libs = result.split(",");
 	

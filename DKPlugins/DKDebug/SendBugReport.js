@@ -23,7 +23,7 @@ function SendBugReport_OnEvent(event)
 /////////////////////////////////////
 function SendBugReport_CreateReport()
 {
-	DKLog("SendBugReport_CreateReport() \n", DKDEBUG);
+	DKLog("SendBugReport_CreateReport() \n", DKFILTER);
 	var str = DKWidget_GetValue("SendBugReport_Textarea");
 	DKLog(str+"\n", DKDEBUG);
 	
@@ -45,7 +45,7 @@ function SendBugReport_CreateReport()
 ///////////////////////////////////
 function SendBugReport_SendReport()
 {
-	DKLog("SendBugReport_SendReport() \n", DKDEBUG);
+	DKLog("SendBugReport_SendReport() \n", DKFILTER);
 	DKWidget_Show("SendBugReport_Image");
 	DKWidget_Show("SendBugReport_Sending");
 	DK_DoFrame();

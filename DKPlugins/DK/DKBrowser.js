@@ -34,7 +34,7 @@ document.onmousemove = function(e){
 /////////////////////
 function LoadCSS(url)
 {
-	//DKLog("LoadCSS("+url+") \n", DKDEBUG);
+	//DKLog("LoadCSS("+url+") \n", DKFILTER);
 	var link = document.createElement('link');
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
@@ -45,7 +45,7 @@ function LoadCSS(url)
 //////////////////////////////
 function LoadJS(url, callback)
 {
-	//DKLog("LoadJS("+url+") \n", DKDEBUG);
+	//DKLog("LoadJS("+url+") \n", DKFILTER);
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return; 
@@ -143,7 +143,7 @@ function CreateWidget(url, parent)
 		//top.document.body.style.display='block';
 	}
 	filesloaded += url+","; //add file to loaded list
-	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
+	//DKLog("Created Widget:("+url+","+parent+")", DKFILTER);
 }
 
 ///////////////////////////
@@ -394,7 +394,7 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
+	//DKLog("StopPropagation("+event+") \n", DKFILTER);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -405,7 +405,7 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n", DKDEBUG);
+	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n", DKFILTER);
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
 	}
@@ -427,7 +427,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n", DKDEBUG);
+	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n", DKFILTER);
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
 	}
@@ -594,7 +594,7 @@ function AjaxGet(url, output)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;
-				//DKDebug("AJAX RETURN: "+output.value);
+				//DKLog("AJAX RETURN: "+output.value, DKFILTER);
 				return true;
 			}
 			else{

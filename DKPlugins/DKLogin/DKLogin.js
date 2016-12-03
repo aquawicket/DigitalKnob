@@ -39,7 +39,7 @@ function DKLogin_OnConnect(value)
 ////////////////////////////////////////////
 function DKLogin_FBresponse(param, response)
 {
-	DKLog("DKLogin_FBresponse("+param+","+response+")", DKDEBUG);
+	DKLog("DKLogin_FBresponse("+param+","+response+")", DKFILTER);
 	
 	if(param == "name"){
 		FACEBOOK_NAME = response;

@@ -12,7 +12,7 @@ function AndroidImport_Init()
 ///////////////////////////////
 function AndroidImport_Import()
 {
-	//DKLog("AndroidImport_Import() \n", DKDEBUG);
+	//DKLog("AndroidImport_Import() \n", DKFILTER);
 	if(!APP){ 
 		DKLog("Please select an app. \n", DKINFO);
 		return; 

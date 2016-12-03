@@ -29,7 +29,7 @@ function DKFileDialog_End()
 ////////////////////////////////////
 function DKFileDialog_OnEvent(event)
 {	
-	DKLog("DKFileDialog_OnEvent("+event+")\n", DKDEBUG);
+	DKLog("DKFileDialog_OnEvent("+event+")\n", DKFILTER);
 	
 	if(DK_IdLike(event, "DKFileDialogDrive")){
 		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
@@ -95,7 +95,7 @@ function DKFileDialog_OpenFolder(path)
 ////////////////////////////////////
 function DKFileDialog_OpenFile(path)
 {
-	DKLog("DKFileDialog_OpenFile("+path+") \n", DKINFO);
+	DKLog("DKFileDialog_OpenFile("+path+") \n", DKFILTER);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -114,7 +114,7 @@ function DKFileDialog_OpenFile(path)
 function DKFileDialog_UpdatePath(path)
 {
 	//if(!path){ return false; }
-	DKLog("DKFileDialog_UpdatePath("+path+") \n", DKDEBUG);
+	DKLog("DKFileDialog_UpdatePath("+path+") \n", DKFILTER);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
