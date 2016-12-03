@@ -30,7 +30,7 @@ void DKLog(const DKString& text, const int lvl)
 	DKStringArray hides;
 	toStringArray(hides, log_hide, ",");
 	for(int i=0; i<hides.size(); ++i){
-		if(has(text,hides[i])){
+		if(has(text,hides[i]) && !hides[i].empty()){
 			return;
 		}
 	}
@@ -49,7 +49,7 @@ void DKLog(const DKString& text, const int lvl)
 	DKStringArray shows;
 	toStringArray(shows, log_show, ",");
 	for(int i=0; i<shows.size(); ++i){
-		if(has(text,shows[i])){
+		if(has(text,shows[i]) && !shows[i].empty()){
 			flag = true;
 			break;
 		}
