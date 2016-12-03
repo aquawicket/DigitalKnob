@@ -24,10 +24,11 @@ function DKDev_RootMenu_OnEvent(event)
 		DKDev_NewPage(stored_element);
 	}
 	if(DK_Id(event, "DKDev_RootMenu_OpenFile")){
-		DKCreate("DKFile/DKFileDialog.js");
-		DKFrame_Widget("DKFileDialog.html");
-		var assets = DKAssets_LocalAssets();
-		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+assets+",relative"); // To -> DKFileDialog
+		DKCreate("DKFile/DKFileDialog.js", function(){
+			DKFrame_Widget("DKFileDialog.html");
+			var assets = DKAssets_LocalAssets();
+			DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,"+assets+",relative"); // To -> DKFileDialog
+		});
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
