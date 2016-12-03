@@ -11,13 +11,6 @@ extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
 
-//NOTE: All DKLog's must have a message type parameter, unless we use these defaults.
-//void DKLog(const DKString& text){ DKLog(text,DKINFO); }
-//void DKLog(const int text){ DKLog(toString(text),DKINFO); }
-//void DKLog(const long& text){ DKLog(toString(text),DKINFO); }
-//void DKLog(const unsigned long long text){ DKLog(toString(text),DKINFO); }
-//void DKLog(const float& text){ DKLog(toString(text),DKINFO); }
-
 void DKLog(const int text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const long& text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const unsigned long long text, const int lvl){ DKLog(toString(text),lvl); }
@@ -26,7 +19,6 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
-	
 	int i=0;
 	DKString value;
 
@@ -98,13 +90,8 @@ void DKLog(const DKString& text, const int lvl)
 	printf("%s",text.c_str());
 	
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-		DKString clr = "black"; //default
-		if(lvl == DKERROR){ clr = "red"; }
-		if(lvl == DKWARN){ clr = "orange"; }
-		//if(lvl == DKINFO){ clr = "black"; }
-		if(lvl == DKDEBUG){ clr = "blue"; }
-		SendEvent("DKLog", "color", clr);
-		SendEvent("DKLog", "notify", text);
+		SendEvent("DKLog", "level", toString(lvl));
+		SendEvent("DKLog", "string", text);
 	}
 
 #ifdef WIN32
