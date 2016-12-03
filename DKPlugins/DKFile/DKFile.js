@@ -300,23 +300,25 @@ function DKFile_GetDrives()
 	return "";
 }
 
-//////////////////////////////////////
-function DKFile_DirectoryContents(url)
-{
-	DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
-	if(url.indexOf(":") > -1){ return; }
-	if(!online_assets){
-		DKLog("DKFile_DirectoryContents(url): online_assets not set!\n", DKERROR)
+if(DK_GetBrowser() != "CEF"){
+	//////////////////////////////////////
+	function DKFile_DirectoryContents(url)
+	{
+		DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
+		if(url.indexOf(":") > -1){ return; }
+		if(!online_assets){
+			DKLog("DKFile_DirectoryContents(url): online_assets not set!\n", DKERROR)
+		}
+		DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
+		//var assets = DKAssets_LocalAssets();
+		//url = url.replace(assets, online_assets);
+		//var path = DKFile_VerifyPath(url);
+		//if(!path){ return 0; }
+		send = online_assets+"/DKFile/DKFile.php?DirectoryContents="+url;
+		DKLog("ajaxGetUrl("+send+") \n", DKDEBUG);
+		var result = ajaxGetUrl(send);
+		return result;
 	}
-	DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
-	//var assets = DKAssets_LocalAssets();
-	//url = url.replace(assets, online_assets);
-	//var path = DKFile_VerifyPath(url);
-	//if(!path){ return 0; }
-	send = online_assets+"/DKFile/DKFile.php?DirectoryContents="+url;
-	DKLog("ajaxGetUrl("+send+") \n", DKDEBUG);
-	var result = ajaxGetUrl(send);
-	return result;
 }
 
 ////////////////////////////////////
@@ -344,14 +346,16 @@ function DKFile_GetRelativePath(apath, datapath)
 	return apath;
 }
 
-////////////////////////////////
-function DKFile_IsDirectory(url)
-{
-	send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
-	var result = ajaxGetUrl(send);
-	//DKLog("DKFile_IsDirectory("+url+") ->"+result+"\n", DKDEBUG);
-	if(result == "0"){ return false; }
-	return true;
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////
+	function DKFile_IsDirectory(url)
+	{
+		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
+		var result = ajaxGetUrl(send);
+		//DKLog("DKFile_IsDirectory("+url+") ->"+result+"\n", DKDEBUG);
+		if(result == "0"){ return false; }
+		return true;
+	}
 }
 
 ////////////////////////////////
