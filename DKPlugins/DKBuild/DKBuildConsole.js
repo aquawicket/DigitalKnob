@@ -178,7 +178,7 @@ function DKBuildConsole_Process()
 {
 	OS = "";
 	APP = "";
-	TYPE = "Release"
+	TYPE = "ALL"
 	LEVEL = "RebuildAll";
 	
 	DKBuildConsole_ChooseUpdate();
@@ -204,7 +204,7 @@ function DKBuildConsole_Process()
 		TYPE = "Release";
 	}
 	else{
-		TYPE = "Release";
+		TYPE = "ALL";
 	}
 	while(TYPE == ""){
 		DKBuildConsole_SelectType();
