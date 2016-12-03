@@ -34,7 +34,7 @@ bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
 	DKString path = args[0]->GetStringValue();
 	DKStringArray arry;
 	if(!DKFile::GetDirectoryContents(path, arry)){
-		return false;
+		return true;
 	}
 	DKString string = toString(arry, ",");
 	retval = CefV8Value::CreateString(string);
@@ -62,7 +62,7 @@ bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 	DKString path = args[0]->GetStringValue();
 	if(!DKFile::IsDirectory(path)){
 		retval = CefV8Value::CreateBool(false);
-		return false;
+		return true;
 	}
 	retval = CefV8Value::CreateBool(true);
 	return true;
