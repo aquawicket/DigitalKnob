@@ -250,6 +250,16 @@ public:
 		SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line )
+	{
+		DKLog("DKSDLCefHandler::OnConsoleMessage("+message.ToString()+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
+		DKString string = message.ToString();
+		replace(string,"%c","");
+		DKLog("CEF: "+string+"\n", DKINFO);
+		return true;
+	}
+
 
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
 };
