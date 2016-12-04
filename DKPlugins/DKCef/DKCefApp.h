@@ -63,36 +63,43 @@ public:
 		command_line->AppendSwitchWithValue("disable-web-security", "1");
 		command_line->AppendSwitchWithValue("no-proxy-server", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+		handler = new MyV8Handler();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
-		
-		if(object){ return; }
+		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
 		object = context->GetGlobal(); // Retrieve the context's window object.
-		handler = new MyV8Handler();
 		DKCreate("DKCefV8");
+		AttachFunctions();
+	}
+
+	//////////////////////////////
+	static void AttachFunctions()
+	{
+		if(!object){
+			DKLog("DKCefApp::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
+			return;
+		}
+
+		typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+		for(it_type iterator = handler->functions.begin(); iterator != handler->functions.end(); iterator++) {
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), handler);
+			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+			if (!handler->functions[iterator->first]) {
+				DKLog("DKCefApp::AttachFunctions()("+iterator->first+"): failed to register function \n", DKERROR);
+				return;
+			}
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
+		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
-
-		if(!object){
-			DKLog("DKCefApp::AttachFunction("+name+"): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
-			return;
-		}
-		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
-		object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-
 		handler->functions[name] = boost::bind(func, _1, _2);
-		if (!handler->functions[name]) {
-			DKLog("DKCefApp::AttachFunction()("+name+"): failed to register function \n", DKERROR);
-			return;
-		}
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
