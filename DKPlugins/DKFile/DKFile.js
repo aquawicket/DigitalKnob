@@ -24,7 +24,7 @@ function DKFile_Init()
 function UrlExists(url, fn)
 {
 	//DKLog("UrlExists("+url+") \n", DKDEBUG);
-	DKLog("AJAX SEND: "+url);
+	DKLog("AJAX SEND: "+url, DKDEBUG);
 	
 	var request = "";
 	try {
@@ -54,7 +54,7 @@ function UrlExists(url, fn)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				//output.value = request.responseText;
-				DKLog(url+" status: "+request.status);
+				DKLog(url+" status: "+request.status, DKERROR);
 				fn && fn(true);
 				//return;// true;
 			}
