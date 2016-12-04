@@ -17,7 +17,7 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	if(DK_Type(event, "keypress")){
-		//DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n");
+		//DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n", DKINFO); 
 		DKDebug_LogKey(DKWidget_GetValue(event));
 		DKDebug_CheckKeys();
 	}
@@ -93,7 +93,7 @@ function DKDebug_PushDKFiles()
 {
 	//Here, we push any altered DKPulgin files to the appropriate DKPlugin folder.
 	
-	//DKLog("DKMenuRightApp_PushDKFiles() \n");
+	//DKLog("DKMenuRightApp_PushDKFiles()\n", DKINFO); 
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
 		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
@@ -119,13 +119,13 @@ function DKDebug_PushDKFiles()
 	var folders = temp.split(",");
 	
 	for(i=0; i<folders.length; i++){
-		//DKLog(folders[i]+"\n");
+		//DKLog(folders[i]+"\n", DKINFO); 
 		if(DKFile_Exists(DKPlugins+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins+"/"+folders[i]+"\n");
+			DKLog("Pushing to: "+DKPlugins+"/"+folders[i]+"\n", DKINFO); 
 			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins+"/"+folders[i], true, true);
 		}
 		if(DKFile_Exists(DKPlugins2+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins2+"/"+folders[i]+"\n");
+			DKLog("Pushing to: "+DKPlugins2+"/"+folders[i]+"\n", DKINFO); 
 			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins2+"/"+folders[i], true, true);
 		}
 	}
@@ -157,23 +157,23 @@ function DKDebug_ClearConsole()
 ////////////////////////////
 function DKDebug_PrintInfo()
 {
-	DKLog("\n"); 
-	DKLog("\n**** DKOBJECTS ****\n");
+	DKLog("\n", DKINFO); 
+	DKLog("\n**** DKOBJECTS ****\n", DKINFO); 
 	var objects = DK_GetObjects();
 	var arry = objects.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKLog(arry[i]+"\n");
+		DKLog(arry[i]+"\n", DKINFO); 
 	}
 	
-	DKLog("\n");
-	DKLog("**** DKEVENTS ****\n");
+	DKLog("\n", DKINFO); 
+	DKLog("**** DKEVENTS ****\n", DKINFO); 
 	var events = DK_GetEvents();
 	var arry = events.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKLog(arry[i]+"\n");
+		DKLog(arry[i]+"\n", DKINFO); 
 	}
 	
-	DKLog("\n"); 
+	DKLog("\n", DKINFO); 
 }
