@@ -71,6 +71,9 @@ void DKCef::Init()
 	//settings.no_sandbox = true;
 	settings.command_line_args_disabled = true;
 	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+#ifndef DEBUG
+	settings.log_severity = LOGSEVERITY_DISABLE;
+#endif
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// settings.multi_threaded_message_loop = true; // not supported, except windows
