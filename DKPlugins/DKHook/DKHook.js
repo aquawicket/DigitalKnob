@@ -42,7 +42,10 @@ function DKHook_OnEvent(event)
 		DKHook_ToggleHighlight();
 	}
 	if(DK_IdLike(event, "wintitle")){
-		DKHook_SetWindowHandle(DKWidget_GetValue(event));
+		//DKLog("DKHook_OnEvent("+event+")\n", DKINFO);
+		//DKLog("DKHook_OnEvent(): id = "+DK_GetId(event)+"\n", DKINFO);
+		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
+		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 	}
 
 	DKWidget_SetValue("currentHandle", DKHook_CurrentHandle());
