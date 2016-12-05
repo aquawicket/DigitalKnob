@@ -412,7 +412,7 @@ function DKTrigger_LoadTriggers(file)
 /////////////////////////////////////
 function DKTrigger_SaveTriggers(file)
 {
-	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n");
+	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n", DKINFO);
 	var assets = DKAssets_LocalAssets();
 	DKFile_StringToFile(" ", assets+file); //clear file
 	
