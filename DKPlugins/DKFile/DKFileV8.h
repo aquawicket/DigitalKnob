@@ -13,6 +13,7 @@ public:
 
 	//static bool Test(CefArgs args, CefReturn retval);
 	static bool ChDir(CefArgs args, CefReturn retval);
+	static bool CopyFolder(CefArgs args, CefReturn retval);
 	static bool Delete(CefArgs args, CefReturn retval);
 	static bool DirectoryContents(CefArgs args, CefReturn retval);
 	static bool Exists(CefArgs args, CefReturn retval);

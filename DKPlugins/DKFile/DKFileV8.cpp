@@ -8,6 +8,7 @@ void DKFileV8::Init()
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
 	//DKCefApp::AttachFunction("Test", DKFileV8::Test);
 	DKCefApp::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
+	DKCefApp::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);
 	DKCefApp::AttachFunction("DKFile_Delete", DKFileV8::Delete);
 	DKCefApp::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
 	DKCefApp::AttachFunction("DKFile_Exists", DKFileV8::Exists);
@@ -40,6 +41,21 @@ bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
 	DKFile::ChDir(path);
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKFileV8::CopyFolder(CefArgs args, CefReturn retval)
+{
+	DKString src = args[0]->GetStringValue();
+	DKString dst = args[1]->GetStringValue();
+	bool overwrite = args[2]->GetBoolValue();
+	bool recursive = args[3]->GetBoolValue();
+	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n", DKINFO);
+	if (!DKFile::CopyFolder(src, dst, overwrite, recursive)){
+		DKLog("DKFile::CopyFolder(): failed. \n", DKERROR);
+		return false;
+	}
 	return true;
 }
 
