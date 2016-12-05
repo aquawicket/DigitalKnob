@@ -94,6 +94,7 @@ function DKDebug_PushDKFiles()
 	//Here, we push any altered DKPulgin files to the appropriate DKPlugin folder.
 	
 	//DKLog("DKMenuRightApp_PushDKFiles()\n", DKINFO); 
+	
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
 		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
