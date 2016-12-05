@@ -8,7 +8,7 @@ function DKMessage_Init()
 {	
 	//DKLog("***********DKMessageInit() \n", DKDEBUG);
 	DKCreate("DKMessage/DKMessage.html", function(){
-		DKFrame_Widget("DKMessage.html");
+		//DKFrame_Widget("DKMessage.html");
 		DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
 		DKAddEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
 		DKAddEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
