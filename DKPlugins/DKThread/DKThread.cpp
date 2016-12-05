@@ -49,6 +49,7 @@ void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func, co
 ////////////////////////////
 void DKThreadPool::Process()
 {
+	if(names.empty()){ return; }
 	//we can update info about the threadpool in the main thread here..
 	if(dkThreadPool->active() + dkThreadPool->pending() != names.size()){
 		names.erase(names.begin());
