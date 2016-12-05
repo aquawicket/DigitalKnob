@@ -57,7 +57,7 @@ void DKCef::Init()
 	cefApp = new DKCefApp();
 
 	//DKLog("CefExecuteProcess \n", DKINFO);
-	int result = CefExecuteProcess(args, cefApp, NULL);
+	int result = CefExecuteProcess(args, cefApp.get(), NULL);
 	if (result >= 0){
 		DKLog("CefExecuteProcess error", DKERROR);
 		return;
@@ -69,7 +69,8 @@ void DKCef::Init()
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 	//settings.no_sandbox = true;
-	settings.command_line_args_disabled = true;
+	//settings.command_line_args_disabled = true;
+	//settings.multi_threaded_message_loop = true;
 	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
 #ifndef DEBUG
 	settings.log_severity = LOGSEVERITY_DISABLE;

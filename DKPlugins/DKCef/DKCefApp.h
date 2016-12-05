@@ -64,6 +64,7 @@ public:
 		command_line->AppendSwitchWithValue("no-proxy-server", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
 		handler = new MyV8Handler();
+		DKCreate("DKCefV8");
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +72,6 @@ public:
 	{
 		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
 		object = context->GetGlobal(); // Retrieve the context's window object.
-		DKCreate("DKCefV8");
 		AttachFunctions();
 	}
 
