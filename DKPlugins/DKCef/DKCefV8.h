@@ -14,6 +14,7 @@ public:
 	static bool DKCreate_CPP(CefArgs args, CefReturn retval);
 	static bool DKValid_CPP(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
+	static bool RunJavascript(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
