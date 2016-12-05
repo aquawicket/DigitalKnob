@@ -87,10 +87,6 @@ public:
 		for(it_type iterator = handler->functions.begin(); iterator != handler->functions.end(); iterator++) {
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), handler);
 			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			if (!handler->functions[iterator->first]) {
-				DKLog("DKCefApp::AttachFunctions()("+iterator->first+"): failed to register function \n", DKERROR);
-				return;
-			}
 		}
 	}
 
@@ -100,6 +96,14 @@ public:
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
 		handler->functions[name] = boost::bind(func, _1, _2);
+		if(object){
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
+			object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		}
+		if(!handler->functions[name]){
+			DKLog("DKCefApp::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
+			return;
+		}
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
