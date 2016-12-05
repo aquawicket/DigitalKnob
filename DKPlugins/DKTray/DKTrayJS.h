@@ -12,6 +12,7 @@ public:
 	void Init();
 	static int GetIcon(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);
+	static int AddItem(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKTrayJS, true)

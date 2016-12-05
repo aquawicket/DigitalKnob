@@ -21,6 +21,7 @@ public:
 	static void SetIcon(const DKString& file);
 	static DKString GetIcon();
 	static DKString icon;
+	static void AddItem(const DKString& name);
 
 private:
 #ifdef WIN32
