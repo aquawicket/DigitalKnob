@@ -21,7 +21,6 @@ void DKHookJS::Init()
 	DKDuktape::AttachFunction("DKHook_WaitForWindow", DKHookJS::WaitForWindow, 2);
 }
 
-
 ////////////////////////////////////////
 int DKHookJS::SendHook(duk_context* ctx)
 {
@@ -29,75 +28,75 @@ int DKHookJS::SendHook(duk_context* ctx)
 	DKString handle = duk_require_string(ctx, 1);
 	DKString data = duk_require_string(ctx, 2);
 
-	if(DKHook::Instance("DKHook")->SendHook(window, handle, data)){
-		return 1;
+	if(!DKHook::Instance("DKHook")->SendHook(window, handle, data)){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 ////////////////////////////////////////
 int DKHookJS::GetValue(duk_context* ctx)
 {
 	DKString value;
-	if(DKHook::Instance("DKHook")->GetString(value)){
-		duk_push_string(ctx, value.c_str());
-		return 1;
+	if(!DKHook::Instance("DKHook")->GetString(value)){
+		return 0;
 	}
-	return 0;
+	duk_push_string(ctx, value.c_str());
+	return 1;
 }
 
 ////////////////////////////////////////
 int DKHookJS::SetValue(duk_context* ctx)
 {
 	DKString value = duk_require_string(ctx, 0);
-	if(DKHook::Instance("DKHook")->SetString(value)){
-		return 1;
+	if(!DKHook::Instance("DKHook")->SetString(value)){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 /////////////////////////////////////
 int DKHookJS::Click(duk_context* ctx)
 {
-	if(DKHook::Instance("DKHook")->Click()){
-		return 1;
+	if(!DKHook::Instance("DKHook")->Click()){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 //////////////////////////////////////////
 int DKHookJS::PrevHandle(duk_context* ctx)
 {
-	if(DKHook::Instance("DKHook")->PrevHandle()){
-		return 1;
+	if(!DKHook::Instance("DKHook")->PrevHandle()){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 //////////////////////////////////////////
 int DKHookJS::NextHandle(duk_context* ctx)
 {
-	if(DKHook::Instance("DKHook")->NextHandle()){
-		return 1;
+	if(!DKHook::Instance("DKHook")->NextHandle()){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 ///////////////////////////////////////////////
 int DKHookJS::ToggleHighlight(duk_context* ctx)
 {
 	DKHook::Instance("DKHook")->ToggleHighlight();
-	return 0;
+	return 1;
 }
 
 ///////////////////////////////////////////////
 int DKHookJS::SetWindowHandle(duk_context* ctx)
 {
 	DKString window = duk_require_string(ctx, 0);
-	if(DKHook::Instance("DKHook")->SetWindowHandle(window)){
-		return 1;
+	if(!DKHook::Instance("DKHook")->SetWindowHandle(window)){
+		return 0;
 	}
-	return 0;
+	return 1;
 }
 
 //////////////////////////////////////////

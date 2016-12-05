@@ -13,6 +13,7 @@ std::vector<HWND> DKHook::handle;
 void DKHook::Init()
 {
 	DKCreate("DKHookJS");
+	DKCreate("DKHookV8");
 	DKString path = DKFile::local_assets + "DKHook/hookdll.dll";
 	hModule = LoadLibrary(path.c_str());
 	if(NULL == hModule){
