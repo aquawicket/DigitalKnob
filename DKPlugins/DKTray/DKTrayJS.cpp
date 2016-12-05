@@ -11,7 +11,7 @@ void DKTrayJS::Init()
 
 }
 
-////////////////////////////////
+///////////////////////////////////////
 int DKTrayJS::GetIcon(duk_context* ctx)
 {
 	DKString icon = DKTray::Get("DKTray0")->GetIcon();
@@ -19,7 +19,7 @@ int DKTrayJS::GetIcon(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////
+///////////////////////////////////////
 int DKTrayJS::SetIcon(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);

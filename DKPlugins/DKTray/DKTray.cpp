@@ -11,34 +11,33 @@ DKString DKTray::icon;
 ///////////////////
 void DKTray::Init()
 {
+	DKLog("DKTray::Init()\n", DKDEBUG);
+	
 	DKCreate("DKTrayJS");
 #ifdef WIN32
-	HWND hwnd = NULL;
 
-#ifdef USE_osgViewer
-	HWND temp = ::GetActiveWindow();
-	//temp = DKOSGWindow::Instance("DKOSGWindow")->hwnd;
-	if(!temp){
-		DKLog("hWnd invalid!\n", DKERROR);
-		return;
+	HWND hwnd = ::GetActiveWindow();
+	if(!hwnd){
+		DKLog("DKTray::Init(): hWnd invalid!\n", DKERROR);
+		//return;
 	}
-#endif
 
 	icon = DKFile::local_assets+"icon.ico";
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 
 	DKApp::hInstance = GetModuleHandle(0);
 	if (!TrayIcon.Create(DKApp::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
-		DKLog("TrayIcon invalid \n", DKERROR);
+		DKLog("DKTray::Init(): TrayIcon invalid \n", DKERROR);
 		return;
 	}
 
 	setCallback(&OnTrayNotification);
 	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
 
-	DKString minimized;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", minimized);
-	if(same(minimized,"ON")){
+	DKString trayed;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
+	DKLog("DKFile::GetSetting("+DKFile::local_assets+"settings.txt,[TRAYED],"+trayed+")\n", DKINFO);
+	if(same(trayed,"ON")){
 		CSystemTray::MinimiseToTray(hwnd);
 	}
 	
@@ -46,7 +45,7 @@ void DKTray::Init()
 	return;
 #endif
 
-	DKLog("DKTray::Create() not implemented on this OS! \n", DKERROR);
+	DKLog("DKTray::Init() not implemented on this OS! \n", DKERROR);
 }
 
 //////////////////
