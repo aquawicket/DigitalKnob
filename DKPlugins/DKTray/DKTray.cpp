@@ -37,7 +37,16 @@ void DKTray::Init()
 	DKString trayed;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
 	if(same(trayed,"ON")){
-		CSystemTray::MinimiseToTray(hwnd);
+		//CSystemTray::MinimiseToTray(hwnd);
+		if(DKClass::HasFunc("DKSDLWindow::Hide")){
+			DKClass::CallFunc("DKSDLWindow::Hide");
+		}
+		else if(DKClass::HasFunc("DKOSGWindow::Hide")){
+			DKClass::CallFunc("DKOSGWindow::Hide");
+		}
+		else{
+			DKLog("DKTray::Init(): DKWindow::Hide() - No function available \n", DKERROR);
+		}
 	}
 	
 	DKApp::AppendLoopFunc(&DKTray::Process, this);
