@@ -117,6 +117,7 @@ public:
 				if(instances.size() == 0) { return; }
 				DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKINFO);
 				instances[i]->End();
+				if(instances.size() == 0) { return; }
 				instances[i] = NULL;
 				instances.erase(instances.begin()+i);
 				instance_count = instances.size();

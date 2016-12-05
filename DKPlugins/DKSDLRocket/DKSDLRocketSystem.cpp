@@ -390,6 +390,10 @@ float RocketSDL2SystemInterface::GetElapsedTime()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RocketSDL2SystemInterface::LogMessage(Rocket::Core::Log::Type type, const Rocket::Core::String& message)
 {
+	if(has(message.CString(),"Loaded font face")){
+		type = Rocket::Core::Log::LT_DEBUG;
+	}
+
 	switch(type)
 	{
 	case Rocket::Core::Log::LT_ALWAYS:

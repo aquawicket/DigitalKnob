@@ -36,7 +36,6 @@ void DKTray::Init()
 
 	DKString trayed;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
-	DKLog("DKFile::GetSetting("+DKFile::local_assets+"settings.txt,[TRAYED],"+trayed+")\n", DKINFO);
 	if(same(trayed,"ON")){
 		CSystemTray::MinimiseToTray(hwnd);
 	}

@@ -7,6 +7,6 @@
 [LOG_ERRORS] ON
 [LOG_FILE] ON
 [LOG_SHOW] 
-[LOG_HIDE] Loaded font face
+[LOG_HIDE]
 
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
