@@ -3,20 +3,22 @@ function DKAutomate_Init()
 {
 	DKCreate("DKAssets");
 	DKCreate("DKTriggers/DKAutomate.html");
-	DKCreate("DKTriggers/DKAutomate2.js");
-	DKAddEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
-	//DKAddEvent("GLOBAL", "midi", DKAutomate_OnEvent);
-	//DKAddEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
-	//DKAddEvent("DKA-Title", "click", DKAutomate_OnEvent);
-	DKAddEvent("DKA-NewButton", "click", DKAutomate_OnEvent);
-	DKAddEvent("DKA-DeleteButton", "click", DKAutomate_OnEvent);
-	DKAddEvent("CancelButton", "click", DKAutomate_OnEvent);
-	DKAddEvent("SaveButton", "click", DKAutomate_OnEvent);
-	DKAddEvent("MidiDevices", "click", DKAutomate_OnEvent);
-	DKAddEvent("DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
+	DKCreate("DKTriggers/DKAutomate2.js", function(){
+		DKAddEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
+		//DKAddEvent("GLOBAL", "midi", DKAutomate_OnEvent);
+		//DKAddEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
+		//DKAddEvent("DKA-Title", "click", DKAutomate_OnEvent);
+		DKAddEvent("DKA-NewButton", "click", DKAutomate_OnEvent);
+		DKAddEvent("DKA-DeleteButton", "click", DKAutomate_OnEvent);
+		DKAddEvent("CancelButton", "click", DKAutomate_OnEvent);
+		DKAddEvent("SaveButton", "click", DKAutomate_OnEvent);
+		DKAddEvent("MidiDevices", "click", DKAutomate_OnEvent);
+		DKAddEvent("DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
 
-	DKCreate("DKTriggers/DKTriggers.js");
-	DKAutomate_UpdateValues();
+		DKCreate("DKTriggers/DKTriggers.js", function(){
+			DKAutomate_UpdateValues();
+		});
+	});
 }
 
 /////////////////////////
