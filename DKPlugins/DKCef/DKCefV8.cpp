@@ -4,6 +4,7 @@
 void DKCefV8::Init()
 {
 	DKCreate("DKFileV8");
+	DKCreate("DKAssetsV8");
 	
 	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
 	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
