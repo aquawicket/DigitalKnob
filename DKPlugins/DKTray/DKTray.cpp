@@ -132,7 +132,7 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 		if(LOWORD(wParam) == IDM_EXIT){
 			DKLog("IDM_EXIT\n", DKINFO);
 			DKEvent::SendEvent("DKTray", "Exit", "");
-			DKApp::Exit();
+			//DKApp::Exit();
 		}
 	}
 	
