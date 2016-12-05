@@ -6,7 +6,7 @@
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_SHOW] 
+[LOG_SHOW] DKCreate,DKAssetsJS
 [LOG_HIDE] Loaded font face
 
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
