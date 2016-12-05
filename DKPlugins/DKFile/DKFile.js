@@ -124,7 +124,7 @@ function DKFile_PrintFiles()
 /////////////////////////////////
 function DKFile_GetFilename(path)
 {
-	//DKLog("DKFile_GetFilename("+path+") \n", DKDEBUG);
+	//DKLog("DKFile_GetFilename("+path+")\n", DKDEBUG);
 	if(!path){ return; }
 	var n = path.lastIndexOf("/");
 	var out = path.substring(n+1,path.length);
@@ -135,7 +135,7 @@ function DKFile_GetFilename(path)
 ////////////////////////////////////
 function DKFile_SaveFile(path, data)
 {
-	DKLog("DKFile_SaveFile("+path+", data) \n");
+	DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
 	//var send = phpurl;
 	//if(realpath){
 		//var filename = DKFile_GetFilename(path);
@@ -145,19 +145,19 @@ function DKFile_SaveFile(path, data)
 	//path = path.replace(online_assets, realpath);
 	//path = realpath+path;
 	
-	//DKLog("DKFile_SaveFile: "+path+"\n");
+	//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
 	send = online_assets+"/DKFile/DKFile.php?SaveFile=";
 	send += path;
 	send += "&data="
 	send += data;
 	var response = ajaxGetUrl(send);
-	DKLog(response);
+	DKLog(response, DKINFO);
 	
 	//FIXME
 	//if(response.indexOf("DKERROR") != -1){
 	//	return false;
 	//}
-	DKLog("Saved file: "+path+"\n");
+	DKLog("Saved file: "+path+"\n", DKINFO);
 	
 	return true;
 }
@@ -272,7 +272,7 @@ function DKFile_SetSetting(file, param, value)
 /////////////////////////////////
 function DKFile_FileToString(url)
 {
-	DKLog("DKFile_FileToString("+url+") \n");
+	DKLog("DKFile_FileToString("+url+")\n", DKINFO);
 	var path = DKFile_VerifyPath(url);
 	if(!path){ return; }
 	if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
@@ -373,7 +373,7 @@ if(DK_GetBrowser() != "CEF"){
 	///////////////////////////
 	function DKFile_Delete(url)
 	{
-		DKLog("Deleting: "+url+"\n");
+		DKLog("Deleting: "+url+"\n", DKINFO);
 		send = online_assets+"/DKFile/DKFile.php?Delete="+url;
 		var result = ajaxGetUrl(send);
 		return result;
