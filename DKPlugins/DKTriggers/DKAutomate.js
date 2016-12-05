@@ -38,11 +38,12 @@ function DKAutomate_OnEvent(event)
 	
 	if(DK_Id(event, "DKA-NewButton")){
 		//DKLog("DKA-NewButton \n", DKDEBUG);
-		DKCreate("DKMessage/DKMessage.js");
-		DKFrame_Widget("DKMessage.html");
-		var value = DKMessageBox(event, "GetInput", "New Trigger");
-		if(!value){ return; }
-		DKAutomate_NewTrigger(value);
+		DKCreate("DKMessage/DKMessage.js", function(){
+			DKFrame_Widget("DKMessage.html");
+			var value = DKMessageBox(event, "GetInput", "New Trigger");
+			if(!value){ return; }
+			DKAutomate_NewTrigger(value);
+		});
 	}
 	
 	if(DK_Id(event, "DKA-DeleteButton")){
@@ -71,8 +72,9 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "MidiDevices")){
-		DKCreate("DKMidi/DKMidiDialog.js");
-		DKWidget_Show("DKMidiDialog.html");
+		DKCreate("DKMidi/DKMidiDialog.js", function(){
+			DKWidget_Show("DKMidiDialog.html");
+		});
 	}
 	
 	if(DK_Type(event, "UpdateValues")){
