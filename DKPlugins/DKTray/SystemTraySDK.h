@@ -145,7 +145,12 @@ public:
 		item.wID = id;
 		item.dwTypeData = "Test"; //string.c_str();
 
-		InsertMenuItem(hSubMenu, 1, true, &item);
+		if(InsertMenuItem(hSubMenu, 1, true, &item) == 0){
+			DKLog("CSystemTray::AddItem(): InsertMenuItem returned error\n", DKERROR);
+		}
+
+		::DestroyMenu(hSubMenu);
+		::DestroyMenu(hMenu);
 
 		return TRUE;
 	};
