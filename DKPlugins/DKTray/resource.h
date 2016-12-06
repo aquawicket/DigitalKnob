@@ -7,3 +7,4 @@
 #define IDI_ICON3                       142
 #define IDI_ICON4                       143
 #define IDM_ANIMATE                     32773
+#define ASSETS_ZIP                      321
