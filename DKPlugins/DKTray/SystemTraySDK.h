@@ -125,7 +125,6 @@ public:
     BOOL  SetTargetWnd(HWND hTargetWnd);
     HWND  GetTargetWnd() const;
 
-	//FIXME: adding a menu item is not working
 	/////////////////////////////////////////////////////////
 	BOOL CSystemTray::AddItem(const DKString& string, int id)
 	{
