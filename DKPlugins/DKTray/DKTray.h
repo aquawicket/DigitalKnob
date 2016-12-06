@@ -23,6 +23,7 @@ public:
 	static DKString icon;
 	static void AddItem(const DKString& name, int id);
 	static bool SetTooltip(const DKString& string);
+	static bool ShowBalloon(const DKString& string, int seconds);
 
 private:
 #ifdef WIN32

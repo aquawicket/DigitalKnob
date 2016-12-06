@@ -112,6 +112,13 @@ bool DKTray::SetTooltip(const DKString& string)
 	return true;
 }
 
+/////////////////////////////////////////////////////////////
+bool DKTray::ShowBalloon(const DKString& string, int seconds)
+{
+	TrayIcon.ShowBalloon(string.c_str(), "title", 0UL, seconds);
+	return true;
+}
+
 
 
 #ifdef WIN32

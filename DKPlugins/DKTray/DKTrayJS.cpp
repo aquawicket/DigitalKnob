@@ -10,6 +10,7 @@ void DKTrayJS::Init()
 	DKDuktape::AttachFunction("DKTray_SetIcon", DKTrayJS::SetIcon, 1);
 	DKDuktape::AttachFunction("DKTray_AddItem", DKTrayJS::AddItem, 2);
 	DKDuktape::AttachFunction("DKTray_SetTooltip", DKTrayJS::SetTooltip, 1);
+	DKDuktape::AttachFunction("DKTray_ShowBalloon", DKTrayJS::ShowBalloon, 2);
 
 }
 
@@ -46,6 +47,15 @@ int DKTrayJS::SetTooltip(duk_context* ctx)
 	if(!DKTray::Get("DKTray0")->SetTooltip(name)){
 		return 0;
 	}
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKTrayJS::ShowBalloon(duk_context* ctx)
+{
+	DKString string = duk_require_string(ctx, 0);
+	int seconds = duk_require_int(ctx, 1);
+	DKTray::Get("DKTray0")->ShowBalloon(string, seconds);
 	return 1;
 }
 
