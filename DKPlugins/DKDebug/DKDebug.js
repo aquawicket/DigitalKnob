@@ -44,7 +44,8 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
-	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }	
+	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }
+	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }	
 }
 
 ///////////////////////////////
@@ -177,4 +178,11 @@ function DKDebug_PrintInfo()
 	}
 	
 	DKLog("\n", DKINFO); 
+}
+
+//////////////////////////////
+function DKDebug_ShowConsole()
+{
+	//TODO
+	DKLog("DKDebug_ShowConsole()\n",DKINFO);
 }
