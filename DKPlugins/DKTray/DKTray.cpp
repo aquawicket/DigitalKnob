@@ -102,6 +102,16 @@ void DKTray::AddItem(const DKString& name)
 	return;
 }
 
+///////////////////////////////////////////////
+bool DKTray::SetTooltip(const DKString& string)
+{
+	DKLog("DKTray::SetTooltip("+string+")\n", DKINFO);
+	if(!TrayIcon.SetTooltipText(string.c_str())){
+		return false;
+	}
+	return true;
+}
+
 
 
 #ifdef WIN32

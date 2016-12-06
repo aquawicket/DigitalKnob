@@ -22,6 +22,7 @@ public:
 	static DKString GetIcon();
 	static DKString icon;
 	static void AddItem(const DKString& name);
+	static bool SetTooltip(const DKString& string);
 
 private:
 #ifdef WIN32
