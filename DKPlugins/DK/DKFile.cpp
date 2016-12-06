@@ -404,7 +404,7 @@ bool DKFile::FileToString(const DKString& file, DKString& string)
 	//DKLog("DKFile::FileToString("+file+","+string+")\n", DKDEBUG);
 	
 	if(!PathExists(file)){
-		DKLog("DKFile::FileToString failed! \n", DKERROR);
+		DKLog("DKFile::FileToString("+file+") failed! \n", DKERROR);
 		return false; 
 	}
 
