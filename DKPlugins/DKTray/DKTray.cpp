@@ -98,7 +98,7 @@ void DKTray::AddItem(const DKString& name, int id)
 {
 	//TODO
 	DKLog("DKTray::AddItem("+name+")\n", DKINFO);
-	TrayIcon.AddItem("test", id);
+	TrayIcon.AddItem(name, id);
 	return;
 }
 
@@ -136,6 +136,9 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 
 	if(message == WM_COMMAND){
 		DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n", DKINFO);
+		DKEvent::SendEvent("DKTray", toString(LOWORD(wParam)), "");
+
+		/*
 		if(LOWORD(wParam) == IDM_RESTORE){
 			DKLog("IDM_RESTORE\n", DKINFO);
 			DKEvent::SendEvent("DKTray", "Restore", "");
@@ -148,6 +151,7 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 			DKLog("IDM_EXIT\n", DKINFO);
 			DKEvent::SendEvent("DKTray", "Exit", "");
 		}
+		*/
 	}
 	
 	return 0;
