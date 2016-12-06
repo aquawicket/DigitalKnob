@@ -22,9 +22,9 @@ function DKCreate(data, callback)
 	}
 	else{
 		DKLog("DKCreate("+data+"): requesting c++ plugin\n", DKDEBUG);
-		//if(DK_GetBrowser() == "CEF"){
+		if(DK_GetBrowser() == "CEF"){
 			DKCreate_CPP(data);
-		//}
+		}
 	}
 	
 	if(arry[0] == "DKJavascript"){
