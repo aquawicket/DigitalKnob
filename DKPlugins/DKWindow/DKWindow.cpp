@@ -227,6 +227,25 @@ void DKWindow::Restore()
 	}
 }
 
+//TODO,   look at DKSDLWindow and DKOSGWindow 
+//////////////////////////
+bool DKWindow::IsVisible()
+{
+	//FIXME
+	bool* ptr = NULL;
+	if(DKClass::HasFunc("DKSDLWindow::IsVisible")){
+		ptr = static_cast<bool*>(DKClass::CallFunc("DKSDLWindow::IsVisible"));
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::IsVisible")){
+		ptr = static_cast<bool*>(DKClass::CallFunc("DKOSGWindow::IsVisible"));
+	}
+	else{
+		DKLog("DKWindow::IsVisible(): No function available \n", DKERROR);
+		return NULL;
+	}
+	return *ptr;
+}
+
 /////////////////////
 void DKWindow::Hide()
 {
