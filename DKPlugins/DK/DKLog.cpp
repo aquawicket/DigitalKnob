@@ -21,6 +21,15 @@ void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
 {
+	//DEBUG
+	//All DK cpp functions should include the name of the function calling
+	// C++ EXAMPLE:    DKLog("DKMyClass::Function1()", DKDEBUG);
+	//  JS EXAMPLE:    DKLog("DKMyClass_Function1()", DKDEBUG);
+	//if(has(text,"DK") && !has(text,"::") && !has(text,"_")){
+	//	printf("This log does not have an :: or an _,  look closer ;) \n");
+	//}
+
+
 	int i=0;
 	DKString value;
 
