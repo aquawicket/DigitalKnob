@@ -104,6 +104,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit, 0);
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername, 0);
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep, 0);
+	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole, 0);
 }
 
 /////////////////////////////////////
