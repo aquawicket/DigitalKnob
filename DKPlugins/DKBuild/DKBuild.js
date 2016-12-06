@@ -399,7 +399,7 @@ function DKBuild_DoResults()
 	
 	//Create icons
 	DKLog("DKBuild_DoResults(): DK_GetOS() = "+DK_GetOS()+"\n", DKWARN);
-	if(DK_GetOS() == "WIN32"){
+	if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 		DKCreate("DKBuild/IconMaker.js", function(){
 			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 		});
