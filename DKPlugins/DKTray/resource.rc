@@ -14,9 +14,10 @@ IDR_POPUP_MENU MENU DISCARDABLE
 BEGIN
     POPUP "POPUP"
     BEGIN
-		MENUITEM "Restore",                         IDM_RESTORE
-        MENUITEM "Minimize to Tray",                IDM_MINTOTRAY
-        MENUITEM "Exit",                        	IDM_EXIT
+		MENUITEM "", 0
+		//MENUITEM "Restore",                         IDM_RESTORE
+        //MENUITEM "Minimize to Tray",                IDM_MINTOTRAY
+        //MENUITEM "Exit",                        	IDM_EXIT
     END
 END
 
