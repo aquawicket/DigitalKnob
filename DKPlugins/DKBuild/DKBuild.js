@@ -398,9 +398,12 @@ function DKBuild_DoResults()
 	}
 	
 	//Create icons
-	DKCreate("DKBuild/IconMaker.js", function(){
-		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
-	});
+	DKLog("DKBuild_DoResults(): DK_GetOS() = "+DK_GetOS()+"\n", DKWARN);
+	if(DK_GetOS() == "WIN32"){
+		DKCreate("DKBuild/IconMaker.js", function(){
+			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
+		});
+	}
 	
 	////// WIN32 /////
 	if(OS == "win32"){
