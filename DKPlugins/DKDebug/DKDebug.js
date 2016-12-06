@@ -183,6 +183,7 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	//TODO
+	//TODO / FIXME
 	DKLog("DKDebug_ShowConsole()\n",DKINFO);
+	DK_ShowConsole();
 }

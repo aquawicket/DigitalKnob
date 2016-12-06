@@ -805,4 +805,11 @@ int DKJS::Beep(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////
+int DKJS::ShowConsole(duk_context* ctx)
+{
+	//TODO
+	return 1;
+}
+
 #endif //USE_DKDuktape

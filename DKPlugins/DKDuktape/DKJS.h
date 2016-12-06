@@ -75,6 +75,7 @@ public:
 	static int Exit(duk_context* ctx);
 	static int DoFrame(duk_context* ctx);
 	static int Beep(duk_context* ctx);
+	static int ShowConsole(duk_context* ctx);
 };
 
 
