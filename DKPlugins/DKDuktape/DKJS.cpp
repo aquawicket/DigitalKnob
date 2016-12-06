@@ -809,7 +809,10 @@ int DKJS::Beep(duk_context* ctx)
 ///////////////////////////////////////
 int DKJS::ShowConsole(duk_context* ctx)
 {
-	//TODO
+#ifdef WIN32
+	HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_RESTORE);
+#endif 
 	return 1;
 }
 
