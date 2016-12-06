@@ -21,7 +21,7 @@ public:
 	static void SetIcon(const DKString& file);
 	static DKString GetIcon();
 	static DKString icon;
-	static void AddItem(const DKString& name);
+	static void AddItem(const DKString& name, int id);
 	static bool SetTooltip(const DKString& string);
 
 private:

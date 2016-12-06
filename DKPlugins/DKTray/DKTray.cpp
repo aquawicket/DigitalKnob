@@ -93,12 +93,12 @@ DKString DKTray::GetIcon()
 	return icon;
 }
 
-//////////////////////////////////////////
-void DKTray::AddItem(const DKString& name)
+//////////////////////////////////////////////////
+void DKTray::AddItem(const DKString& name, int id)
 {
 	//TODO
 	DKLog("DKTray::AddItem("+name+")\n", DKINFO);
-	TrayIcon.SetMenuText(300,"test");
+	TrayIcon.AddItem("test", id);
 	return;
 }
 
