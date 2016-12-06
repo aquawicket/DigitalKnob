@@ -248,7 +248,8 @@ BOOL CSystemTray::Create(HINSTANCE hInst, HWND hParent, UINT uCallbackMessage,
     }
 #endif
 
-
+	mainMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
+	subMenu = ::GetSubMenu(mainMenu, 0);
     return bResult;
 }
 
@@ -705,6 +706,7 @@ BOOL CSystemTray::SetMenuDefaultItem(UINT uItem, BOOL bByPos)
 	m_DefaultMenuItemID = uItem;
 	m_DefaultMenuItemByPos = bByPos;   
 
+	/*
 	HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
 	if (!hMenu)
 		return FALSE;
@@ -715,11 +717,12 @@ BOOL CSystemTray::SetMenuDefaultItem(UINT uItem, BOOL bByPos)
 		::DestroyMenu(hMenu);
 		return FALSE;
 	}
+	*/
 
-	::SetMenuDefaultItem(hSubMenu, m_DefaultMenuItemID, m_DefaultMenuItemByPos);
+	::SetMenuDefaultItem(subMenu, m_DefaultMenuItemID, m_DefaultMenuItemByPos);
 
-	::DestroyMenu(hSubMenu);
-	::DestroyMenu(hMenu);
+	//::DestroyMenu(hSubMenu);
+	//::DestroyMenu(hMenu);
 
 	return TRUE;
 #endif
@@ -805,6 +808,7 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
     if (LOWORD(lParam) == WM_RBUTTONUP)
 #endif
     {    
+		/*
         HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
         if (!hMenu)
             return 0;
@@ -815,13 +819,14 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
             ::DestroyMenu(hMenu);        //Be sure to Destroy Menu Before Returning
 			return 0;
 		}
+		*/
 
 #ifndef _WIN32_WCE
         // Make chosen menu item the default (bold font)
-        ::SetMenuDefaultItem(hSubMenu, m_DefaultMenuItemID, m_DefaultMenuItemByPos);
+        ::SetMenuDefaultItem(subMenu, m_DefaultMenuItemID, m_DefaultMenuItemByPos);
 #endif
 
-         CustomizeMenu(hSubMenu);
+         CustomizeMenu(subMenu);
 
         // Display and track the popup menu
         POINT pos;
@@ -834,12 +839,12 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
 #endif
 
         ::SetForegroundWindow(m_tnd.hWnd);  
-        ::TrackPopupMenu(hSubMenu, 0, pos.x, pos.y, 0, hTargetWnd, NULL);
+        ::TrackPopupMenu(subMenu, 0, pos.x, pos.y, 0, hTargetWnd, NULL);
 
         // BUGFIX: See "PRB: Menus for Notification Icons Don't Work Correctly"
         ::PostMessage(m_tnd.hWnd, WM_NULL, 0, 0);
 
-        DestroyMenu(hMenu);
+        //DestroyMenu(hMenu);
     } 
 #if defined(_WIN32_WCE) //&& _WIN32_WCE < 211
     if (LOWORD(lParam) == WM_LBUTTONDBLCLK && bAltPressed)
@@ -853,6 +858,7 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
         UINT uItem;
         if (m_DefaultMenuItemByPos)
         {
+			/*
             HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
             if (!hMenu)
                 return 0;
@@ -860,9 +866,10 @@ LRESULT CSystemTray::OnTrayNotification(UINT wParam, LONG lParam)
             HMENU hSubMenu = ::GetSubMenu(hMenu, 0);
             if (!hSubMenu)
                 return 0;
-            uItem = ::GetMenuItemID(hSubMenu, m_DefaultMenuItemID);
+			*/
+            uItem = ::GetMenuItemID(subMenu, m_DefaultMenuItemID);
 
-            DestroyMenu(hMenu);
+            //DestroyMenu(hMenu);
         }
         else
             uItem = m_DefaultMenuItemID;

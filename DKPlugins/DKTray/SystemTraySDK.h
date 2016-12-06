@@ -129,13 +129,14 @@ public:
 	/////////////////////////////////////////////////////////
 	BOOL CSystemTray::AddItem(const DKString& string, int id)
 	{
-		HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
-		if (!hMenu)
+		//HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
+		//if(!hMenu)
+		if(!mainMenu)
 			return FALSE;
 
-		HMENU hSubMenu = ::GetSubMenu(hMenu, 0);
-		if (!hSubMenu){
-			::DestroyMenu(hMenu);
+		//HMENU hSubMenu = ::GetSubMenu(mainMenu, 0);
+		if (!subMenu){
+			//::DestroyMenu(hMenu);
 			return FALSE;
 		}
 
@@ -145,12 +146,12 @@ public:
 		item.wID = id;
 		item.dwTypeData = "Test"; //string.c_str();
 
-		if(InsertMenuItem(hSubMenu, 1, true, &item) == 0){
+		if(InsertMenuItem(subMenu, 1, true, &item) == 0){
 			DKLog("CSystemTray::AddItem(): InsertMenuItem returned error\n", DKERROR);
 		}
 
-		::DestroyMenu(hSubMenu);
-		::DestroyMenu(hMenu);
+		//::DestroyMenu(hSubMenu);
+		//::DestroyMenu(hMenu);
 
 		return TRUE;
 	};
@@ -213,6 +214,9 @@ protected:
     UINT			m_DefaultMenuItemID;
     BOOL			m_DefaultMenuItemByPos;
 	UINT			m_uCreationFlags;
+
+	HMENU           mainMenu;
+	HMENU           subMenu;
 
 // Static data
 protected:
