@@ -272,7 +272,7 @@ void DKAndroid::init()
 ///////////////////////////////////////////
 bool DKAndroid::GetMousePos(int& x, int& y)
 {
-	DKLog("DKAndroid::GetMousePos("toString(x)","toString(y)")\n", DKDEBUG);
+	DKLog("DKAndroid::GetMousePos("+toString(x)+","+toString(y)+")\n", DKDEBUG);
 	
 	x = android_mouseX;
 	y = android_mouseY;
