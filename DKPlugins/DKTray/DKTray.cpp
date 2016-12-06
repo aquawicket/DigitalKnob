@@ -98,6 +98,7 @@ void DKTray::AddItem(const DKString& name)
 {
 	//TODO
 	DKLog("DKTray::AddItem("+name+")\n", DKINFO);
+	TrayIcon.SetMenuText(300,"test");
 	return;
 }
 

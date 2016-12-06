@@ -125,6 +125,35 @@ public:
     BOOL  SetTargetWnd(HWND hTargetWnd);
     HWND  GetTargetWnd() const;
 
+	//FIXME: adding a menu item is not working
+	//////////////////////////////////////////////////////////
+	BOOL CSystemTray::SetMenuText(UINT uiCmd, LPCTSTR szText){
+		HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
+		if (!hMenu)
+			return FALSE;
+
+		HMENU hSubMenu = ::GetSubMenu(hMenu, 0);
+		if (!hSubMenu){
+			::DestroyMenu(hMenu);
+			return FALSE;
+		}
+
+		MENUITEMINFO item;
+		item.cbSize = sizeof(MENUITEMINFO);
+		item.fMask = MIIM_CHECKMARKS | MIIM_FTYPE | MIIM_ID | MIIM_STATE | MIIM_STRING;
+		item.fType = MFT_STRING;
+		item.fState = MFS_ENABLED;
+		item.wID = 300;
+		item.hbmpChecked = NULL;
+		item.hbmpUnchecked = NULL;
+		item.dwTypeData = "Item abc";
+		item.cch = 4;
+		::InsertMenuItem(hSubMenu, 1, true, &item);
+
+		return TRUE;
+	};
+	///////////////////////////////////////////////////////////
+
     // Change or retrieve  notification messages sent to the window
     BOOL  SetCallbackMessage(UINT uCallbackMessage);
     UINT  GetCallbackMessage() const;
