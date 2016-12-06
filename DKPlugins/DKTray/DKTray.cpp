@@ -132,26 +132,15 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 			DKLog("Tray Icon Clicked \n", DKINFO);
 			DKEvent::SendEvent("DKTray", "click", toString(1));
 		}
+		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515){
+			DKLog("Tray Icon Double Clicked \n", DKINFO);
+			DKEvent::SendEvent("DKTray", "doubleclick", toString(1));
+		}
 	}
 
 	if(message == WM_COMMAND){
-		DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n", DKINFO);
+		//DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n", DKINFO);
 		DKEvent::SendEvent("DKTray", toString(LOWORD(wParam)), "");
-
-		/*
-		if(LOWORD(wParam) == IDM_RESTORE){
-			DKLog("IDM_RESTORE\n", DKINFO);
-			DKEvent::SendEvent("DKTray", "Restore", "");
-		}
-		if(LOWORD(wParam) == IDM_MINTOTRAY){
-			DKLog("IDM_MINTOTRAY\n", DKINFO);
-			DKEvent::SendEvent("DKTray", "Minimize", "");
-		}
-		if(LOWORD(wParam) == IDM_EXIT){
-			DKLog("IDM_EXIT\n", DKINFO);
-			DKEvent::SendEvent("DKTray", "Exit", "");
-		}
-		*/
 	}
 	
 	return 0;
