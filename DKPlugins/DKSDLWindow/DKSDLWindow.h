@@ -26,6 +26,7 @@ public:
 	void* Windowed(void*);
 	void* Restore(void*);
 	void* Minimize(void*);
+	void* IsVisible(void*);
 	void* Hide(void*);
 	void* Show(void*);
 	void* GetMouseX(void*);

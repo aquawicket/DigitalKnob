@@ -160,6 +160,7 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
 	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
 	DKClass::RegisterFunc("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
+	DKClass::RegisterFunc("DKSDLWindow::IsVisible", &DKSDLWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKSDLWindow::Hide", &DKSDLWindow::Hide, this);
 	DKClass::RegisterFunc("DKSDLWindow::Show", &DKSDLWindow::Show, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
@@ -314,6 +315,16 @@ void* DKSDLWindow::Restore(void*)
 void* DKSDLWindow::Minimize(void*)
 {
 	SDL_MinimizeWindow(sdlwin);
+	return NULL;
+}
+
+///////////////////////////////////
+void* DKSDLWindow::IsVisible(void*)
+{
+	//TODO
+	//Uint32 IsVisibleFlag = SDL_WINDOW_VISIBLE;
+    //bool isVisible = SDL_GetWindowFlags(sdlwin) & IsVisibleFlag;
+	//return static_cast<void*>(new bool(isVisible));
 	return NULL;
 }
 
