@@ -130,26 +130,23 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 		//DKLog(toString(LOWORD(lParam))+"\n", DKINFO);
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
 			DKLog("Tray Icon Clicked \n", DKINFO);
-			//SetIcon(DKApp::datapath+"icon2.ico");
 			DKEvent::SendEvent("DKTray", "click", toString(1));
 		}
 	}
 
 	if(message == WM_COMMAND){
+		DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n", DKINFO);
 		if(LOWORD(wParam) == IDM_RESTORE){
 			DKLog("IDM_RESTORE\n", DKINFO);
-			//CSystemTray::MaximiseFromTray(DKOSGWindow::Instance("DKOSGWindow")->hwnd);
 			DKEvent::SendEvent("DKTray", "Restore", "");
 		}
 		if(LOWORD(wParam) == IDM_MINTOTRAY){
 			DKLog("IDM_MINTOTRAY\n", DKINFO);
-			//CSystemTray::MinimiseToTray(DKOSGWindow::Instance("DKOSGWindow")->hwnd);
 			DKEvent::SendEvent("DKTray", "Minimize", "");
 		}
 		if(LOWORD(wParam) == IDM_EXIT){
 			DKLog("IDM_EXIT\n", DKINFO);
 			DKEvent::SendEvent("DKTray", "Exit", "");
-			//DKApp::Exit();
 		}
 	}
 	

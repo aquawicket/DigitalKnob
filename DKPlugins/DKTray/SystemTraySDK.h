@@ -129,14 +129,7 @@ public:
 	/////////////////////////////////////////////////////////
 	BOOL CSystemTray::AddItem(const DKString& string, int id)
 	{
-		//HMENU hMenu = ::LoadMenu(m_hInstance, MAKEINTRESOURCE(m_tnd.uID));
-		//if(!hMenu)
-		if(!mainMenu)
-			return FALSE;
-
-		//HMENU hSubMenu = ::GetSubMenu(mainMenu, 0);
-		if (!subMenu){
-			//::DestroyMenu(hMenu);
+		if(!mainMenu || !subMenu){
 			return FALSE;
 		}
 
@@ -149,9 +142,6 @@ public:
 		if(InsertMenuItem(subMenu, 1, true, &item) == 0){
 			DKLog("CSystemTray::AddItem(): InsertMenuItem returned error\n", DKERROR);
 		}
-
-		//::DestroyMenu(hSubMenu);
-		//::DestroyMenu(hMenu);
 
 		return TRUE;
 	};
