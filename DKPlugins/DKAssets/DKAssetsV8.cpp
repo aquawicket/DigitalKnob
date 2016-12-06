@@ -1,3 +1,4 @@
+#ifdef USE_DKCef
 #include "DKAssetsV8.h"
 #include "DKFile.h"
 #include "DKApp.h"
@@ -34,3 +35,5 @@ bool DKAssetsV8::LocalAssets(CefArgs args, CefReturn retval)
 	retval = CefV8Value::CreateString(DKFile::local_assets);
 	return true;
 }
+
+#endif //USE_DKCef
