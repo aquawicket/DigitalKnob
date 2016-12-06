@@ -1,3 +1,4 @@
+#ifdef USE_DKCef
 #include "DKFileV8.h"
 #include "DKFile.h"
 #include "DKApp.h"
@@ -139,3 +140,5 @@ bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
 	DKFile::MakeDir(path);
 	return true;
 }
+
+#endif //USE_DKCef

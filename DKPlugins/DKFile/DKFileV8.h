@@ -1,3 +1,4 @@
+#ifdef USE_DKCef
 #pragma once
 #ifndef DKFileV8_H
 #define DKFileV8_H
@@ -26,3 +27,4 @@ public:
 REGISTER_OBJECT(DKFileV8, false);
 
 #endif //DKFileV8_H
+#endif //USE_DKCef
