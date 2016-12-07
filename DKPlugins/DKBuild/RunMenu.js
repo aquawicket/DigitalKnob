@@ -85,8 +85,9 @@ function RunMenu_OnEvent(event)
 	
 	if(DK_Id(event, "Export to Android Studio")){
 		DKLog("Export to Android Studio \n", DKDEBUG);
-		DKCreate("DKBuild/AndroidImport.js");
-		AndroidImport_Import();
+		DKCreate("DKBuild/AndroidImport.js", function(){
+			AndroidImport_Import();
+		});
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
