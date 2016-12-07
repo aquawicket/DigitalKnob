@@ -486,16 +486,18 @@ function GetMouseButton(event)
     return button;
 }
 
-////////////////////////////////
-function DK_SetClipboard(string)
-{
-	//if(!document.queryCommandSupported('copy')){
-	//	DKLog("Javascript (Copy) not supported. \n", DKERROR);
-	//	return false;
-	//}
-	
-	window.prompt("Copy to clipboard: Ctrl+C, Enter", string);
-	return true;
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////
+	function DK_SetClipboard(string)
+	{
+		//if(!document.queryCommandSupported('copy')){
+		//	DKLog("Javascript (Copy) not supported. \n", DKERROR);
+		//	return false;
+		//}
+		
+		window.prompt("Copy to clipboard: Ctrl+C, Enter", string);
+		return true;
+	}
 }
 
 /////////////////////////////

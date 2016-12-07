@@ -12,6 +12,8 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
+	DKCefApp::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
@@ -72,6 +74,26 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return false; }
 	retval = CefV8Value::CreateString(string);
+	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
+{
+	int key = args[0]->GetIntValue();
+	if(!DKUtil::PressKey(key)){
+		return false;
+	}
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval)
+{
+	int key = args[0]->GetIntValue();
+	if(!DKUtil::ReleaseKey(key)){
+		return false;
+	}
 	return true;
 }
 
