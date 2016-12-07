@@ -5,6 +5,7 @@ DKCreate("DKWindow");
 DKCreate("DKRocket");
 DKCreate("DKWidget");
 DKCreate("DKDebug/DKDebug.js", function(){});
+DKCreate("DKTray/DKTray.js", function(){});
 
 if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	var assets = DKAssets_LocalAssets();
