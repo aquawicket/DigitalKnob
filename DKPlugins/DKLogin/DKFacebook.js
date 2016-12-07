@@ -61,7 +61,7 @@ function statusChangeCallback(response){
     }
 	else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      DKLog("Please log into this app");
+      DKLog("Please log into this app\n", DKINFO);
 	  FB.login(function(response) {
 		// handle the response
 		}, {scope: 'public_profile,email'});
@@ -69,7 +69,7 @@ function statusChangeCallback(response){
 	else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-	  DKLog("Please log into facebook");
+	  DKLog("Please log into facebook\n", DKINFO);
 	  FB.login(function(response) {
 		// handle the response
 		}, {scope: 'public_profile,email'});
@@ -89,9 +89,9 @@ function checkLoginState() {
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
 function connected(){
-    DKLog('Facebook: Welcome!  Fetching your information.... ');
+    DKLog("Facebook: Welcome!  Fetching your information....\n", DKINFO);
     FB.api('/me', function(response) {
-		DKLog("Successful login for: " + response.name);
+		DKLog("Successful login for: " + response.name+"\n", DKINFO);
     });
 }
 
@@ -100,7 +100,7 @@ function DKFacebook_Query(query, parameter, Function)
 {
 	FB.api(query, function(response){
 		if (response.hasOwnProperty("error")) {
-			DKLog("Error: " + response.error.message);
+			DKLog("Error: " + response.error.message+"\n", DKINFO);
 		}
 		else{
 			Function(parameter, response[parameter]);
