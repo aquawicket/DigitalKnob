@@ -147,6 +147,12 @@ OPTION(OPENGL2 "Set the OpenGL Version" OFF)
 
 
 ###########################################################################
+## Get variables for CEF
+###########################################################################
+OPTION(DKCEF "Use Chromium Embeded Framework" OFF)
+
+
+###########################################################################
 ## Set variables for OS selection
 ###########################################################################
 IF(WIN_32)
@@ -506,6 +512,10 @@ IF(LINUX_64)
 	ENDIF()
 ENDIF()
 
-IF(USE_OPENGL2)
+IF(OPENGL2)
 	ADD_DEFINITIONS(-DUSE_SHADERS)
+ENDIF()
+
+IF(DKCEF)
+	ADD_DEFINITIONS(-DUSE_DKCef)
 ENDIF()
