@@ -12,6 +12,7 @@ public:
 	void Init();
 	void End();
 
+	static bool ClickImage(CefArgs args, CefReturn retval);
 	static bool DKCreate_CPP(CefArgs args, CefReturn retval);
 	static bool DKValid_CPP(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);

@@ -7,6 +7,7 @@ void DKCefV8::Init()
 	DKCreate("DKFileV8");
 	DKCreate("DKAssetsV8");
 	
+	DKCefApp::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
 	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
 	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
@@ -18,6 +19,18 @@ void DKCefV8::Init()
 void DKCefV8::End()
 {
 
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
+{
+	DKString file = args[0]->GetStringValue();
+	int x;
+	int y;
+	if(!DKUtil::FindImageOnScreen(file, x, y)){ return false; }
+	if(!DKUtil::SetMousePos(x, y)){ return false; }
+	if(!DKUtil::LeftClick()){ return false; }
+	return true;
 }
 
 //////////////////////////////////////////////////////////
