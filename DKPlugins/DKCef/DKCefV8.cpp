@@ -54,7 +54,10 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////
 bool DKCefV8::Run(CefArgs args, CefReturn retval)
 {
-	//TODO
+	DKString command = args[0]->GetStringValue();
+	if(!DKUtil::Run(command)){ 
+		return false; 
+	}
 	return true;
 }
 
