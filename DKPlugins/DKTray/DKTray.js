@@ -12,7 +12,10 @@ function DKTray_Init()
 	DKTray_AddItem("Minimize", 1001);
 	DKTray_AddItem("Restore", 1000);
 	
-	DKTray_SetTooltip("DKReceiver");
+	var app = DKFile_GetExeName();
+	app = app.replace(".exe","");
+	DKTray_SetTooltip(app);
+	DKTray_ShowBalloon(app);
 }
 
 //////////////////////////////
