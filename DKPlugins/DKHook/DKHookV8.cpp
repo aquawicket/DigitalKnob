@@ -1,3 +1,4 @@
+#ifdef USE_DKCef
 #include "DKHookV8.h"
 #include "DKHook.h"
 
@@ -149,3 +150,5 @@ bool DKHookV8::WaitForWindow(CefArgs args, CefReturn retval)
 {
 	return true;
 }
+
+#endif //USE_DKCef

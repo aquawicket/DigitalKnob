@@ -1,3 +1,4 @@
+//#ifdef USE_DKCef
 #include "DKCefV8.h"
 
 ////////////////////
@@ -58,3 +59,4 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 	return true;
 }
 
+//#endif //USE_DKCef

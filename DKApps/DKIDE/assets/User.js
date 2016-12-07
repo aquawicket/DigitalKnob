@@ -1,4 +1,4 @@
-var USE_CEF = true;
+var USE_CEF = false;
 //DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 
 DKCreate("DKWindow");

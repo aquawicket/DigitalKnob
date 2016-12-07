@@ -1,3 +1,4 @@
+//#ifdef USE_DKCef
 #pragma once
 #ifndef DKCefV8_H
 #define DKCefV8_H
@@ -20,3 +21,4 @@ public:
 REGISTER_OBJECT(DKCefV8, false);
 
 #endif //DKCefV8_H
+//#endif //USE_DKCef

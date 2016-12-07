@@ -1,3 +1,4 @@
+#ifdef USE_DKCef
 #pragma once
 #ifndef DKHookV8_H
 #define DKHookV8_H
@@ -29,3 +30,4 @@ public:
 REGISTER_OBJECT(DKHookV8, false);
 
 #endif //DKHookV8_H
+#endif //USE_DKCef
