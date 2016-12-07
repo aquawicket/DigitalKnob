@@ -3,11 +3,15 @@ if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 }
 //DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 
-DKCreate("DKWindow");
-DKCreate("DKRocket");
-DKCreate("DKWidget");
+if(DK_GetBrowser() == "Rocket"){
+	DKCreate("DKWindow");
+	DKCreate("DKRocket");
+	DKCreate("DKWidget");
+	DKCreate("DKTray/DKTray.js", function(){});
+}
+
 DKCreate("DKDebug/DKDebug.js", function(){});
-DKCreate("DKTray/DKTray.js", function(){});
+
 
 if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	var assets = DKAssets_LocalAssets();
