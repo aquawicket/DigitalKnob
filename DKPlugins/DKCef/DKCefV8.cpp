@@ -18,6 +18,7 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKCefApp::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
+	DKCefApp::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 }
 
 ///////////////////
@@ -133,6 +134,18 @@ bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval)
 		return false;
 	}
 	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
+{
+	DKString file = args[0]->GetStringValue();
+	int timeout = args[1]->GetIntValue();
+	if(!!DKUtil::WaitForImage(file, timeout)){
+		return false;
+	}
+	retval = CefV8Value::CreateBool(true);
+	return 1;
 }
 
 //#endif //USE_DKCef
