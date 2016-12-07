@@ -1,3 +1,7 @@
+IF(NOT USE_DKCef)
+	RETURN()
+ENDIF()
+
 DKDEPEND(DKRocket)
 DKDEPEND(DKCef)
 
