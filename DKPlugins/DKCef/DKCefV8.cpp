@@ -11,8 +11,10 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
 	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
+	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
+	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 }
 
 ///////////////////
@@ -64,6 +66,15 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval)
 	return true;
 }
 
+//////////////////////////////////////////////////////////
+bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
+{
+	DKString string;
+	if(!DKUtil::GetClipboard(string)){ return false; }
+	retval = CefV8Value::CreateString(string);
+	return true;
+}
+
 /////////////////////////////////////////////////
 bool DKCefV8::Run(CefArgs args, CefReturn retval)
 {
@@ -80,6 +91,14 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 	DKString code = args[0]->GetStringValue();
 	DKLog("RunJavascript("+code+")\n", DKDEBUG);
 	DKCef::RunJavascript(code);
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
+{
+	DKString string = args[0]->GetStringValue();
+	if(!DKUtil::SetClipboard(string)){ return false; }
 	return true;
 }
 

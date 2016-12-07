@@ -148,6 +148,12 @@ bool DKHookV8::WindowExists(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHookV8::WaitForWindow(CefArgs args, CefReturn retval)
 {
+	DKString window = args[0]->GetStringValue();
+	int timeout = args[1]->GetIntValue();
+	if(!DKHook::Instance("DKHook")->WaitForWindow(window, timeout)){
+		return false;
+	}
+	retval = CefV8Value::CreateBool(true);
 	return true;
 }
 
