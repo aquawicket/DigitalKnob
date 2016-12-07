@@ -17,6 +17,7 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
+	DKCefApp::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 }
 
 ///////////////////
@@ -121,6 +122,16 @@ bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
 {
 	DKString string = args[0]->GetStringValue();
 	if(!DKUtil::SetClipboard(string)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval)
+{
+	int key = args[0]->GetIntValue();
+	if(!DKUtil::StrokeKey(key)){
+		return false;
+	}
 	return true;
 }
 

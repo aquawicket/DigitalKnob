@@ -22,6 +22,7 @@ public:
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
+	static bool StrokeKey(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
