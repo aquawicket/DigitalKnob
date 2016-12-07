@@ -33,6 +33,7 @@ void DKLog(const DKString& text, const int lvl)
 	int i=0;
 	DKString value;
 
+#ifndef MAC
 	//check for LOG_HIDE
 	if(!log_hide.empty()){
 		DKStringArray hides;
@@ -43,9 +44,11 @@ void DKLog(const DKString& text, const int lvl)
 			}
 		}
 	}
+#endif
 
 	//check for LOG_SHOW_n
 	bool flag = false;
+#ifndef MAC
 	if(!log_show.empty()){
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
@@ -56,6 +59,7 @@ void DKLog(const DKString& text, const int lvl)
 			}
 		}
 	}
+#endif
 	if(!flag){
 		if(log_debug == false && lvl == DKDEBUG){ return; }
 		if(log_info == false && lvl == DKINFO){ return; }
