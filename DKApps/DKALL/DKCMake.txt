@@ -1,5 +1,8 @@
 ##TODO - create simple DKDEPEND_ALL() to add all plugins.
 
+IF(WIN)
+	DKSET(USE_DKCef ON)
+ENDIF()
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
 DKDEPEND(DKAssets)
