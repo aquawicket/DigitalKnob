@@ -15,5 +15,5 @@ function DKBlog_End()
 //////////////////////////////
 function DKBlog_OnEvent(event)
 {
-	
+	DKLog("DKBlog_OnEvent("+event+")\n", DKINFO);
 }
