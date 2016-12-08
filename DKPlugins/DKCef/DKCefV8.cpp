@@ -13,6 +13,7 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
+	DKCefApp::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKCefApp::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
@@ -85,6 +86,17 @@ bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
 	int key = args[0]->GetIntValue();
 	if(!DKUtil::PressKey(key)){
 		return false;
+	}
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
+{
+	DKLog("\n**** V8 Functions ****\n", DKINFO);
+	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
+	for (it_type iterator = DKCefApp::handler->functions.begin(); iterator != DKCefApp::handler->functions.end(); iterator++) {
+		DKLog(iterator->first+"\n", DKINFO);
 	}
 	return true;
 }

@@ -18,6 +18,7 @@ public:
 	static bool Execute(CefArgs args, CefReturn retval);
 	static bool GetClipboard(CefArgs args, CefReturn retval);
 	static bool PressKey(CefArgs args, CefReturn retval);
+	static bool PrintFunctions(CefArgs args, CefReturn retval);
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);

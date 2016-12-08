@@ -729,6 +729,7 @@ int DKJS::Execute(duk_context* ctx)
 //////////////////////////////////////////
 int DKJS::PrintFunctions(duk_context* ctx)
 {
+	DKLog("\n**** Duktape Functions ****\n", DKINFO);
 	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
 		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
 	}
