@@ -35,8 +35,8 @@ function DKFileDialog_OnEvent(event)
 		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFolder")){
+		DKLog("DKFileDialogFolder", DKINFO);
 		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
-		//DKFileDialog_OpenFolder("/"+DKWidget_GetValue(DKWidget_GetElement(event)));
 	}
 	if(DK_IdLike(event, "DKFileDialogFile")){
 		DKFileDialog_OpenFile(DKWidget_GetValue(event));
