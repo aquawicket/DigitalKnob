@@ -58,7 +58,7 @@ public:
 	////////////////////////////////////////
 	static T* Instance(const DKString& data)
     {
-		DKLog("DKObject::Instance("+data+")\n", DKDEBUG);
+		//DKLog("DKObject::Instance("+data+")\n", DKDEBUG);
 		
 		//data = (id,var1,var2,var3,etc)
 		if(!instances.empty() && singleton){
@@ -97,7 +97,7 @@ public:
 		}
 
 		//Create a new insance
-		DKLog("DKBaseT::Create("+final_data+")\n", DKDEBUG);
+		DKLog("DKObject::Instance("+final_data+")\n", DKDEBUG);
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
@@ -115,7 +115,7 @@ public:
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//DKLog("Closing "+id+"\n", DKINFO);
 				if(instances.size() == 0) { return; }
-				DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKINFO);
+				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
 				instances[i]->End();
 				if(instances.size() == 0) { return; }
 				instances[i] = NULL;
@@ -153,7 +153,7 @@ public:
 				}
 			}
 		}
-		DKLog("DKBaseT::Get("+id+"): could not find instance \n",DKERROR);
+		DKLog("DKObject::Get("+id+"): could not find instance \n", DKERROR);
 		return 0;
 	}
 
