@@ -46,7 +46,7 @@ function DKLog(string, lvl)
 	
 	if(window.console){
 		var color = "";
-		if(lvl == DKERROR && LOG_ERRORS){ color = "color:red"; }
+		if(lvl == DKERROR && LOG_ERRORS){ color = "color:red";}
 		else if(lvl == DKWARN && LOG_WARNINGS){ color = "color:#B8860B"; }
 		else if(lvl == DKINFO && LOG_INFO){ color = "color:grey"; }
 		else if(lvl == DKDEBUG && LOG_DEBUG){ color = "color:blue"; }
@@ -56,6 +56,7 @@ function DKLog(string, lvl)
 		string = string.replace("\n","");
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+string, color);
+			if(lvl == DKERROR){ alert("ERROR: "+string); throw string; }
 		}
 		else{
 			console.log(string);

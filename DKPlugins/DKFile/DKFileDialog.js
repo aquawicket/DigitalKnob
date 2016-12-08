@@ -58,7 +58,7 @@ function DKFileDialog_OnEvent(event)
 		else{
 			//DKLog("DKFileDialog::ProcessEvent(): return_path_type incorrect. \n", DKERROR);
 		}
-		DKFrame_Close("DKFileDialog.html")
+		DKFrame_Close("DKFileDialog.html");
 		return;
 	}
 	
