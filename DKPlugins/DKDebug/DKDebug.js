@@ -186,14 +186,14 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	DKLog("DKDebug_ShowConsole()\n",DKINFO);
+	DKLog("DKDebug_ShowConsole()\n", DKDEBUG);
 	DK_ShowConsole();
 }
 
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	DKLog("DKDebug_GetSource()\n", DKINFO);
+	DKLog("DKDebug_GetSource()\n", DKDEBUG);
 	DKCreate("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("body");
 	var assets = DKAssets_LocalAssets();

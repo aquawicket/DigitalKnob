@@ -95,6 +95,12 @@ DKString toString(const double& num)
 	return s;
 }
 
+//////////////////////////////////
+DKString toString(const char* str)
+{
+	return str;
+}
+
 /////////////////////////////////////
 DKString toString(unsigned char* str) 
 {

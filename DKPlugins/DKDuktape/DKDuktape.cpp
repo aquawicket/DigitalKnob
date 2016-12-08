@@ -53,6 +53,14 @@ void DKDuktape::Init()
 		}
 		//////////////////////////////////////////////////////////////////////////////////
 		
+		/*  FIXME
+		//Set up global variables for DKLog()
+		RunJavascript("var DKERROR = 1;");
+		RunJavascript("var DKWARN = 2;");
+		RunJavascript("var DKINFO = 3;");
+		RunJavascript("var DKDEBUG = 4;");
+		*/
+
 		DKCreate("DKJS");
 
         DKString user = DKFile::local_assets+"User.js";
@@ -89,7 +97,7 @@ bool DKDuktape::LoadFile(const DKString& file)
 		DKLog("Script error: "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
 		return false;
     }
-    duk_pop(ctx);  /* ignore result */
+    duk_pop(ctx);  /* ignore result ?? */
 
 	filelist.push_back(file);
 	return true;
@@ -235,7 +243,6 @@ void DKDuktape::OnEvent(DKEvent* event)
 void DKDuktape::RunJavascript(const DKString& code)
 {
 	DKLog("RunJavascript("+code+")\n", DKDEBUG);
-	
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 }
 
@@ -310,7 +317,7 @@ int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename)
 int DKDuktape::wrapped_compile_execute(duk_context *ctx)
 {
 	int comp_flags = 0;
-	int rc;
+	//int rc;
 
 	//Compile input and place it into global _USERCODE
 	duk_compile(ctx, comp_flags);

@@ -1,7 +1,7 @@
-var DKERROR = 1;     //Red
-var DKWARN = 2;      //Yellow
-var DKINFO = 3;      //White
-var DKDEBUG = 4;     //Blue
+var DKERROR = 1;
+var DKWARN = 2;
+var DKINFO = 3;
+var DKDEBUG = 4;
 
 if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 	var USE_CEF = true;
