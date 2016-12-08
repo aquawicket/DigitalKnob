@@ -99,10 +99,12 @@ function DK_GetDate()
 	return date;
 }
 
-////////////////////
-function DK_Reload()
-{
-	window.location.href = href+"/index.html";
+if(DK_GetBrowser() != "CEF"){
+	////////////////////
+	function DK_Reload()
+	{	
+		window.location.href = href+"/index.html";
+	}
 }
 
 //////////////////////////

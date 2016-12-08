@@ -3,6 +3,7 @@ var key_history = [];
 ///////////////////////
 function DKDebug_Init()
 {
+	//DKLog("DKDebug_Init()\n", DKINFO);
 	DKCreate("DKFrame/DKFrame.js", function(){});
 	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
 }
@@ -85,6 +86,7 @@ function DKDebug_RestartApp()
 {
 	//DKFrame_CloseAll();
 	DKWidget_SetInnerHtml("body", "");
+	DKClose("DKDebug/DKDebug.js");
 	DK_Reload();
 	
 }
