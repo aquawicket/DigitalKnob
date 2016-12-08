@@ -15,13 +15,13 @@ DKString DKFile::online_assets;
 /////////////////////////////////////////////
 bool DKFile::PathExists(const DKString& path)
 {
-	//DKLog("DKFile::PathExists("+path+")\n", DKDEBUG);
+	DKLog("DKFile::PathExists("+path+")\n", DKDEBUG);
 	
 	if(boost::filesystem::exists(path)){
 		return true;
 	}
 
-	//DKLog("Path does not exist: "+path+" \n", DKDEBUG);
+	DKLog("DKFile::PathExists("+path+"): Path does not exist\n", DKDEBUG);
 	return false;
 }
 
@@ -51,19 +51,19 @@ bool DKFile::Rename(const DKString& input, const DKString& output, const bool ov
 
 	if(PathExists(output)){
 		if(overwrite == false){
-			DKLog("DKFile::Rename() failed! Path already exists \n", DKERROR);
+			DKLog("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path already exists \n", DKERROR);
 			return false;
 		}
 		else{
 			if(!DKFile::Delete(output)){
-				DKLog("DKFile::Rename() failed! Could not delete "+output+" \n", DKERROR);
+				DKLog("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Could not delete "+output+" \n", DKERROR);
 				return false;
 			}
 		}
 	}
 
 	if(rename(input.c_str(), output.c_str()) != 0){
-		DKLog("DKFile::Rename() failed to rename "+input+" \n", DKERROR);
+		DKLog("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed to rename "+input+" \n", DKERROR);
 		return false;
 	}
 
@@ -82,7 +82,7 @@ bool DKFile::Delete(const DKString& path)
 	}
 	else{
 		if(remove(path.c_str()) != 0){
-			DKLog("DKFile::Delete() failed! "+path+" \n", DKERROR);
+			DKLog("DKFile::Delete("+path+") failed! "+path+" \n", DKERROR);
 			return false;
 		}
 	}
@@ -98,7 +98,7 @@ bool DKFile::RemoveDirectory(const DKString& path)
 	
 	if(!PathExists(path)){ return false; }
 	if(!boost::filesystem::remove_all(path.c_str())){
-		DKLog("boost::filesystem::remove_all failed\n",DKERROR);
+		DKLog("DKFile::RemoveDirectory(): boost::filesystem::remove_all failed\n", DKERROR);
 		return false;
 	}
 	return true;
@@ -115,7 +115,7 @@ bool DKFile::MakeDir(const DKString& dir)
     if(dir.empty()){ return false; }
 	if(PathExists(dir)){ return true; }
 	if(!boost::filesystem::create_directory(dir)){
-		DKLog("DKFile::MakeDir() failed! \n", DKERROR);
+		DKLog("DKFile::MakeDir("+dir+") failed! \n", DKERROR);
 		return false;
 	}
 	return true;
@@ -128,7 +128,7 @@ bool DKFile::ChDir(const DKString& dir)
 	
 	if(!PathExists(dir)){ return false; }
 	boost::filesystem::current_path(dir);
-	DKLog("Path set to "+dir+"\n", DKDEBUG);
+	DKLog("DKFile::ChDir("+dir+"): Path set to "+dir+"\n", DKDEBUG);
 	return true;
 }
 
@@ -145,7 +145,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 	}
 	else{
 		if(PathExists(dst) && overwrite == false){
-			DKLog("DKFile::Copy(): destination already exists. \n", DKWARN);
+			DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): destination already exists. \n", DKWARN);
 			return false;
 		}
 		boost::filesystem::copy_file(src,dst,boost::filesystem::copy_option::overwrite_if_exists);
@@ -162,7 +162,7 @@ bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool ove
 	
 	if(!PathExists(src)){ return false; }
 	if(!CopyDirectory(src,dst,overwrite,recursive)){
-		DKLog("CopyFolder()\n", DKERROR);
+		DKLog("DKFile::CopyFolder() failed\n", DKERROR);
 		return false;
 	}
 	return true;
@@ -177,13 +177,13 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
     try{
 		// Check whether the function call is valid
         if( !fs::exists(source) || !fs::is_directory(source) ){
-            DKLog("Source directory "+source.string()+" does not exist or is not a directory.\n", DKERROR);
+            DKLog("DKFile::CopyDirectory(): Source directory "+source.string()+" does not exist or is not a directory.\n", DKERROR);
             return false;
         }
 		if(!fs::exists(destination)){ 
 			// Create the destination directory
 			if(!fs::create_directory(destination)){
-				DKLog("Unable to create destination directory "+destination.string()+"\n", DKERROR);
+				DKLog("DKFile::CopyDirectory(): Unable to create destination directory "+destination.string()+"\n", DKERROR);
 				return false;
 			}
         }
@@ -223,7 +223,7 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
 ////////////////////////////////////////////////////////////////////
 bool DKFile::GetShortName(const DKString& file, DKString& shortname)
 {
-	DKLog("DKFile::GetShortName("+file+","+shortname+")\n", DKDEBUG);
+	DKLog("DKFile::GetShortName("+file+",DKString&)\n", DKDEBUG);
 	
 	if(!PathExists(file)){ return false; }
 #ifdef WIN32
@@ -258,7 +258,7 @@ bool DKFile::GetDrives(DKStringArray& strings)
 	TCHAR szDrive[] = " A:";
 	DWORD drives = GetLogicalDrives();
 	if(drives == 0){
-		DKLog("GetLogicalDrives() failed. \n", DKERROR);
+		DKLog("DKFile::GetDrives(): GetLogicalDrives() failed. \n", DKERROR);
 		return false;
 	}
 
@@ -518,9 +518,12 @@ bool DKFile::AppendSystemPath(const DKString& path)
 ///////////////////////////////////////////////////////////////
 bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 {
-	DKLog("DKFile::GetAbsolutePath("+in+","+out+")\n", DKDEBUG);
+	DKLog("DKFile::GetAbsolutePath("+in+",DKString&)\n", DKDEBUG);
 	
-	if(!PathExists(in)){ return false; }
+	if(!PathExists(in)){ 
+		DKLog("DKFile::GetAbsolutePath("+in+",DKString&): Path does not exits\n", DKERROR);
+		return false; 
+	}
 #ifdef WIN32
 	char *fileExt;
     char resolved_path[256];
@@ -538,7 +541,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKString& out)
 {
-	DKLog("DKFile::GetRelativePath("+file+","+path+","+out+")\n", DKDEBUG);
+	DKLog("DKFile::GetRelativePath("+file+","+path+",DKString&)\n", DKDEBUG);
 	
 	if(!PathExists(file)){ return false; }
 	DKString file2 = file;
@@ -549,7 +552,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 #ifdef WIN32
 	replace(path2, "/", "\\");
 #endif
-	DKLog("DKFile::GetRelativePath("+file2+","+path2+","+out+")\n", DKDEBUG);
+	DKLog("DKFile::GetRelativePath("+file2+","+path2+",DKString&)\n", DKDEBUG);
 
 	int MAX_FILENAME_LEN = 512;
 #ifdef WIN32
@@ -669,7 +672,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 /////////////////////////////////////;////////////////////////////
 bool DKFile::GetModifiedTime(const DKString& path, DKString& time)
 {
-	DKLog("DKFile::GetModifiedTime("+path+","+time+")\n", DKDEBUG);
+	DKLog("DKFile::GetModifiedTime("+path+",DKString&)\n", DKDEBUG);
 	
 	if(!PathExists(path)){ return false; }
 
@@ -719,11 +722,11 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time)
 			}
 			return true;
 		}
-		DKLog("localFiletime; invalid \n", DKERROR);
+		DKLog("DKFile::GetModifiedTime(): localFiletime; invalid \n", DKERROR);
 		return false;
     }
 	else{
-        DKLog("file not found", DKERROR);
+        DKLog("DKFile::GetModifiedTime(): file not found", DKERROR);
 		return false;
 	}
 #else 
@@ -771,7 +774,7 @@ bool DKFile::CreateFile(const DKString& path)
 ///////////////////////////////////////////////////////////////////////////
 bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate)
 {
-	DKLog("DKFile::GetLocalCreationDate("+path+","+filedate+")\n", DKDEBUG);
+	DKLog("DKFile::GetLocalCreationDate("+path+",DKString&)\n", DKDEBUG);
 	
 	if(!PathExists(path)){ return false; }
 
@@ -806,7 +809,7 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate)
 ///////////////////////////////////////////////////////////////////////////
 bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate)
 {
-	DKLog("DKFile::GetLocalModifiedDate("+path+","+filedate+")\n", DKDEBUG);
+	DKLog("DKFile::GetLocalModifiedDate("+path+",DKString&)\n", DKDEBUG);
 	
 	if(!PathExists(path)){ return false; }
 
@@ -842,7 +845,7 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate)
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value)
 {
-	//DKLog("DKFile::GetSetting("+file+","+setting+","+value+")\n", DKDEBUG);
+	//DKLog("DKFile::GetSetting("+file+","+setting+",DKString&")\n", DKDEBUG);
 	
 	if(!PathExists(file)){ return false; }
 	DKString filestring;
@@ -908,7 +911,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKStringArray& arry)
 {
-	DKLog("DKFile::GetSettings("+file+","+setting+","DKStringArray&")\n", DKDEBUG);
+	DKLog("DKFile::GetSettings("+file+","+setting+",DKStringArray&")\n", DKDEBUG);
 	
 	if(!PathExists(file)){ 	return false; }
 

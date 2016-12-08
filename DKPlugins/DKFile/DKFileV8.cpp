@@ -98,6 +98,7 @@ bool DKFileV8::Exists(CefArgs args, CefReturn retval)
 bool DKFileV8::GetAbsolutePath(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
+	DKLog("DKFileV8::GetAbsolutePath("+path+",CefReturn)\n", DKDEBUG);
 	DKString aPath;
 	if(!DKFile::GetAbsolutePath(path, aPath)){ return false; }
 	retval = CefV8Value::CreateString(aPath);
