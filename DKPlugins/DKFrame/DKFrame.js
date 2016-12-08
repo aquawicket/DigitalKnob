@@ -276,10 +276,16 @@ function DKFrame_CloseButton(id)
 //////////////////////////
 function DKFrame_Close(id)
 {
-	//DKLog("DKFrame_Close("+id+") \n");
+	//DKLog("DKFrame_Close("+id+")\n", DKDEBUG);
 	var frame = DKWidget_GetParent(id);
+	if(!frame){
+		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);
+	}
 	//DKLog("DKFrame_Close("+id+"): frame="+frame+" \n");
 	var file = DKWidget_GetFile(id);
+	if(!file){
+		DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
+	}
 	DKClose(file);
 	var jsfile = file.replace(".html", ".js");
 	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+" \n");

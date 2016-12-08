@@ -1,9 +1,10 @@
 //BROWSER
 
-if(DK_GetBrowser() != "CEF"){
-	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for javascript", DKERROR); return color; }
-	function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for javascript", DKERROR); }
-}
+
+//if(DK_GetBrowser() != "CEF"){
+	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKWARN); return color; }
+	function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+//}
 
 /////////////////////////////////
 function DKCreate(data, callback)
@@ -99,11 +100,11 @@ function DKClose(data)
 			func(); //End
 		}
 		else{
-			DKLog(name+" is not callable \n", DKERROR);
+			DKLog(name+" is not callable \n", DKWARN);
 		}
 		var script = document.getElementById(arry[1]);
 		if(!script){
-			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
 			return;
 		}
 		script.parentNode.removeChild(script);
@@ -112,7 +113,7 @@ function DKClose(data)
 		var file = DKFile_GetFilename(arry[1]);
 		var element = document.getElementById(file);
 		if(!element){ 
-			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKERROR);
+			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
 			return; 
 		}
 		element.parentNode.removeChild(element);
@@ -187,7 +188,7 @@ function DKWidget_GetAvailableId(id)
 /////////////////////////////
 function DKWidget_GetFile(id)
 {
-	return "";
+	return id;
 }
 
 //////////////////////////
@@ -824,8 +825,11 @@ function DKWidget_ElementExists(element)
 ////////////////////////////////////////
 function DKWidget_RemoveElement(element)
 {
-	//DKLog("RemoveElement("+element+") \n", DKDEBUG);
+	//DKLog("RemoveElement("+element+")\n", DKDEBUG);
 	var ele = document.getElementById(element);
+	if(!ele){
+		DKLog("RemoveElement("+element+"): element does not exist\n", DKDEBUG);
+	}
 	var par = ele.parentNode;
 	if(ele && par){
 		par.removeChild(ele);

@@ -54,9 +54,9 @@ function DKLog(string, lvl)
 		//if(!color){ throw new Error("DKLog(): with no lvl."); }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
+		if(lvl == DKERROR){ alert("ERROR: "+string); throw string; }
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+string, color);
-			if(lvl == DKERROR){ alert("ERROR: "+string); throw string; }
 		}
 		else{
 			console.log(string);
