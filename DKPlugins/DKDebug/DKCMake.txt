@@ -1,4 +1,5 @@
 DKDEPEND(stackwalker)
+DKDEPEND(DKAssets)
 DKDEPEND(DKCurl)
 
 DKCOPY(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp FALSE)
