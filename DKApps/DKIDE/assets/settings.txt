@@ -6,7 +6,7 @@
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_SHOW] DKFileV8::GetAbsolutePath,DKFileDialog_UpdatePath,DKFileDialog_OnEvent,DKFileDialog_OpenFolder
+[LOG_SHOW] DKFile::GetAbsolutePath
 [LOG_HIDE]
 
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
