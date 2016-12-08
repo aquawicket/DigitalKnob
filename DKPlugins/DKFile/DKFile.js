@@ -132,34 +132,35 @@ function DKFile_GetFilename(path)
 	return path.substring(n+1,path.length);
 }
 
-////////////////////////////////////
-function DKFile_SaveFile(path, data)
-{
-	DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
-	//var send = phpurl;
-	//if(realpath){
-		//var filename = DKFile_GetFilename(path);
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////////
+	function DKFile_SaveFile(path, data)
+	{
+		DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
+		//var send = phpurl;
+		//if(realpath){
+			//var filename = DKFile_GetFilename(path);
+			//path = realpath+path;
+		//}
+		//path = path.replace(datapath, realpath);
+		//path = path.replace(online_assets, realpath);
 		//path = realpath+path;
-	//}
-	//path = path.replace(datapath, realpath);
-	//path = path.replace(online_assets, realpath);
-	//path = realpath+path;
 	
-	//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
-	send = online_assets+"/DKFile/DKFile.php?SaveFile=";
-	send += path;
-	send += "&data="
-	send += data;
-	var response = ajaxGetUrl(send);
-	DKLog(response, DKINFO);
+		//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
+		send = online_assets+"/DKFile/DKFile.php?SaveFile=";
+		send += path;
+		send += "&data="
+		send += data;
+		var response = ajaxGetUrl(send);
+		DKLog(response, DKINFO);
 	
-	//FIXME
-	//if(response.indexOf("DKERROR") != -1){
-	//	return false;
-	//}
-	DKLog("Saved file: "+path+"\n", DKINFO);
-	
-	return true;
+		//FIXME
+		//if(response.indexOf("DKERROR") != -1){
+		//	return false;
+		//}
+		DKLog("Saved file: "+path+"\n", DKINFO);
+		return true;
+	}
 }
 
 ///////////////////////////////////////

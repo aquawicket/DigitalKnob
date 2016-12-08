@@ -46,7 +46,8 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
 	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }
-	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }	
+	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }
+	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }	
 }
 
 ///////////////////////////////
@@ -185,7 +186,22 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	//TODO / FIXME
 	DKLog("DKDebug_ShowConsole()\n",DKINFO);
 	DK_ShowConsole();
+}
+
+////////////////////////////
+function DKDebug_GetSource()
+{
+	DKLog("DKDebug_GetSource()\n", DKINFO);
+	DKCreate("DKWidgetJS");
+	var source = DKWidget_GetOuterHtml("body");
+	var assets = DKAssets_LocalAssets();
+	
+	if(DK_GetBrowser() == "Rocket"){
+		DKFile_StringToFile(source, assets+"Rocket_Source.html");
+	}
+	else{
+		DKFile_StringToFile(source, assets+"Browser_Source.html");
+	}
 }
