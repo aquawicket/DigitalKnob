@@ -132,35 +132,33 @@ function DKFile_GetFilename(path)
 	return path.substring(n+1,path.length);
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////////
-	function DKFile_SaveFile(path, data)
-	{
-		DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
-		//var send = phpurl;
-		//if(realpath){
-			//var filename = DKFile_GetFilename(path);
-			//path = realpath+path;
-		//}
-		//path = path.replace(datapath, realpath);
-		//path = path.replace(online_assets, realpath);
+////////////////////////////////////
+function DKFile_SaveFile(path, data)
+{
+	DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
+	//var send = phpurl;
+	//if(realpath){
+		//var filename = DKFile_GetFilename(path);
 		//path = realpath+path;
-	
-		//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
-		send = online_assets+"/DKFile/DKFile.php?SaveFile=";
-		send += path;
-		send += "&data="
-		send += data;
-		var response = ajaxGetUrl(send);
-		DKLog(response, DKINFO);
-	
-		//FIXME
-		//if(response.indexOf("DKERROR") != -1){
-		//	return false;
-		//}
-		DKLog("Saved file: "+path+"\n", DKINFO);
-		return true;
-	}
+	//}
+	//path = path.replace(datapath, realpath);
+	//path = path.replace(online_assets, realpath);
+	//path = realpath+path;
+
+	//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
+	send = online_assets+"/DKFile/DKFile.php?SaveFile=";
+	send += path;
+	send += "&data="
+	send += data;
+	var response = ajaxGetUrl(send);
+	DKLog(response, DKINFO);
+
+	//FIXME
+	//if(response.indexOf("DKERROR") != -1){
+	//	return false;
+	//}
+	DKLog("Saved file: "+path+"\n", DKINFO);
+	return true;
 }
 
 ///////////////////////////////////////
@@ -270,30 +268,34 @@ function DKFile_SetSetting(file, param, value)
 	}
 }
 
-/////////////////////////////////
-function DKFile_FileToString(url)
-{
-	DKLog("DKFile_FileToString("+url+")\n", DKINFO);
-	var path = DKFile_VerifyPath(url);
-	if(!path){ return; }
-	if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
-		return ajaxGetUrl("http://cors.io/?u="+url);
+if(DK_GetBrowser() != "CEF"){
+	/////////////////////////////////
+	function DKFile_FileToString(url)
+	{
+		DKLog("DKFile_FileToString("+url+")\n", DKINFO);
+		var path = DKFile_VerifyPath(url);
+		if(!path){ return; }
+		if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
+			return ajaxGetUrl("http://cors.io/?u="+url);
+		}
+		return ajaxGetUrl(url);
 	}
-	return ajaxGetUrl(url);
 }
 
-////////////////////////////////////////
-function DKFile_StringToFile(data, path)
-{
-	//DKLog("DKFile_StringToFile("+data+", "+path+") \n", DKDEBUG);
-	data = replace(data, ": ", ":");
-	data = replace(data, "; ", ";");
-	data = replace(data, ", ", ",");
-	data = replace(data, " ", "%20");
-	data = replace(data, "'", "%27");
-	data = replace(data, "\n", "%0A");
-	//DKLog("StringToFile("+data+", "+path+") \n", DKDEBUG);
-	DKFile_SaveFile(path, data);
+if(DK_GetBrowser() != "CEF"){
+	////////////////////////////////////////
+	function DKFile_StringToFile(data, path)
+	{
+		//DKLog("DKFile_StringToFile("+data+", "+path+") \n", DKDEBUG);
+		data = replace(data, ": ", ":");
+		data = replace(data, "; ", ";");
+		data = replace(data, ", ", ",");
+		data = replace(data, " ", "%20");
+		data = replace(data, "'", "%27");
+		data = replace(data, "\n", "%0A");
+		//DKLog("StringToFile("+data+", "+path+") \n", DKDEBUG);
+		DKFile_SaveFile(path, data);
+	}
 }
 
 ///////////////////////////

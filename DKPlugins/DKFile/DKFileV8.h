@@ -18,10 +18,12 @@ public:
 	static bool Delete(CefArgs args, CefReturn retval);
 	static bool DirectoryContents(CefArgs args, CefReturn retval);
 	static bool Exists(CefArgs args, CefReturn retval);
+	static bool FileToString(CefArgs args, CefReturn retval);
 	static bool GetAbsolutePath(CefArgs args, CefReturn retval);
 	static bool GetShortName(CefArgs args, CefReturn retval);
 	static bool IsDirectory(CefArgs args, CefReturn retval);
 	static bool MkDir(CefArgs args, CefReturn retval);
+	static bool StringToFile(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKFileV8, false);
