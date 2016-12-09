@@ -30,6 +30,8 @@ bool DKFile::VerifyPath(DKString& path)
 {
 	DKLog("DKFile::VerifyPath("+path+")\n", DKDEBUG);
 	
+	replace(path, "file:///", "");
+
 	if(DKFile::PathExists(path)){
 		return true;
 	}
@@ -845,11 +847,17 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate)
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value)
 {
-	//DKLog("DKFile::GetSetting("+file+","+setting+",DKString&")\n", DKDEBUG);
+	DKLog("DKFile::GetSetting("+file+","+setting+",DKString&)\n", DKDEBUG);
 	
-	if(!PathExists(file)){ return false; }
+	DKString path = file;
+	replace(path, "file:///", "");
+
+	if(!PathExists(path)){
+		DKLog("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist\n", DKERROR);
+		return false; 
+	}
 	DKString filestring;
-	if(!FileToString(file, filestring)){ return false; }
+	if(!FileToString(path, filestring)){ return false; }
 	if(!getSettingFromString(filestring, setting, value)){ return false; }
 	return true;
 }
@@ -859,9 +867,12 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 {
 	DKLog("DKFile::SetSetting("+file+","+setting+","+value+")\n", DKDEBUG);
 	
+	DKString path = file;
+	replace(path, "file:///", "");
+
 	DKString filestring;
-	CreateFile(file);
-	if(!FileToString(file,filestring)){ return false; }
+	CreateFile(path);
+	if(!FileToString(path,filestring)){ return false; }
 
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
@@ -869,8 +880,8 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 		size_t temp = filestring.find(setting,0);
         if(temp == std::string::npos){
 			filestring.append("\n" + setting + " " + value); //create entry
-			DKFile::StringToFile(filestring,file);
-			DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+			DKFile::StringToFile(filestring,path);
+			DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
 			return true;
 		}
 		size_t start = filestring.find("]",temp);
@@ -880,8 +891,8 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 		//DKString string = filestring.substr(start+1, end-start-1);
 		DKString out = " "+value+"\n";
 		filestring.replace(start+1,end-start-1,out.c_str()); 
-		DKFile::StringToFile(filestring,file);
-		DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+		DKFile::StringToFile(filestring,path);
+		DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
 		return true;
 	}
 
