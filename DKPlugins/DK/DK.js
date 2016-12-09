@@ -34,6 +34,8 @@ var DKERROR = 1;     //Red
 var DKWARN = 2;      //Yellow
 var DKINFO = 3;      //White
 var DKDEBUG = 4;     //Blue
+var DKSHOW = 5;
+var DKHIDE = 6;
 
 ///////////////////////////
 function DKLog(string, lvl)

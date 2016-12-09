@@ -41,6 +41,8 @@
 #define DKWARN 2       //Yellow
 #define DKINFO 3       //White
 #define DKDEBUG 4      //Blue
+#define DKSHOW 5
+#define DKHIDE 6
 
 extern bool log_errors;
 extern bool log_warnings;

@@ -2,6 +2,8 @@ var DKERROR = 1;
 var DKWARN = 2;
 var DKINFO = 3;
 var DKDEBUG = 4;
+var DKSHOW = 5;
+var DKHIDE = 6;
 
 if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 	var USE_CEF = true;

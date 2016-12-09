@@ -132,10 +132,10 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(frame, "min-width", "62px");
 	DKWidget_SetProperty(frame, "min-height", "30px");
 	
-	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+" \n");
-	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+" \n");
-	//DKLog("DKFrame_Widget("+id+"): frame width="+width+" \n");
-	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+" \n");
+	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n", DKDEBUG);
+	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n", DKDEBUG);
+	//DKLog("DKFrame_Widget("+id+"): frame width="+width+"\n", DKDEBUG);
+	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n", DKDEBUG);
 	
 	var titlebar = DKWidget_CreateElement(frame, "div", "titlebar");
 	DKWidget_SetProperty(titlebar, "position", "absolute");
@@ -201,20 +201,20 @@ function DKFrame_BringToFront()
 {
 	//return;
 	
-	//DKLog("DKFrame_BringToFront()\n");
+	//DKLog("DKFrame_BringToFront()\n", DKDEBUG);
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
-	//DKLog("DKWidget_GetFocusElement() = "+id+"\n");
+	//DKLog("DKWidget_GetFocusElement() = "+id+"\n", DKDEBUG);
 	if(DKWidget_IsChildOf(id, "frame")){
-		//DKLog("DKWidget_AppendChild(body, frame) \n");
+		//DKLog("DKWidget_AppendChild(body, frame)\n", DKDEBUG);
 		DKWidget_AppendChild("body", "frame");
 		return;
 	}
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
-		//DKLog("DKFrame_BringToFront(): frame="+frame+" \n");
+		//DKLog("DKFrame_BringToFront(): frame="+frame+"\n", DKDEBUG);
 		if(DKWidget_IsChildOf(id, frame)){
-			//DKLog("DKWidget_AppendChild(body, "+frame+") \n");
+			//DKLog("DKWidget_AppendChild(body, "+frame+")\n", DKDEBUG);
 			DKWidget_AppendChild("body", frame);
 			return;
 		}
@@ -224,14 +224,14 @@ function DKFrame_BringToFront()
 ///////////////////////////////////
 function DKFrame_MinimizeButton(id)
 {
-	DKLog("DKFrame_MinimizeButton("+id+") \n");
+	DKLog("DKFrame_MinimizeButton("+id+")\n", DKDEBUG);
 	var frame = DKWidget_GetParent(id);
 }
 
 ///////////////////////////////////
 function DKFrame_MaximizeButton(id)
 {
-	//DKLog("DKFrame_MaximizeButton("+id+") \n");
+	//DKLog("DKFrame_MaximizeButton("+id+")\n", DKDEBUG);
 	var frame = DKWidget_GetParent(id);
 	var top = DKWidget_GetProperty(frame, "top");
 	var bottom = DKWidget_GetProperty(frame, "bottom");
@@ -254,18 +254,18 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	//DKLog("DKFrame_CloseButton("+id+") \n");
+	//DKLog("DKFrame_CloseButton("+id+")\n", DKDEBUG);
 	var frame = DKWidget_GetParent(id);
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		if(arry[i].indexOf(".html") > -1){
-			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+" \n");
+			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+"\n", DKDEBUG);
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
 			DKClose(file);
 			var jsfile = file.replace(".html", ".js");
-			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+" \n");
+			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
 			DKClose(jsfile);
 		}
 	}
@@ -281,14 +281,14 @@ function DKFrame_Close(id)
 	if(!frame){
 		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);
 	}
-	//DKLog("DKFrame_Close("+id+"): frame="+frame+" \n");
+	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n", DKDEBUG);
 	var file = DKWidget_GetFile(id);
 	if(!file){
 		DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
 	}
 	DKClose(file);
 	var jsfile = file.replace(".html", ".js");
-	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+" \n");
+	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
 	DKClose(jsfile);
 	DKWidget_RemoveElement(frame);
 }

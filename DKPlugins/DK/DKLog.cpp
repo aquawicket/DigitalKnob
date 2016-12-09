@@ -142,8 +142,6 @@ void DKLog(const DKString& text, const int lvl)
 ////////////////////////////////////////////////
 void SetLog(const int lvl, const DKString& text)
 {
-	//TODO
-
 	DKLog("SetLog("+toString(lvl)+","+text+")\n", DKINFO);
 
 	if(lvl == DKERROR){
@@ -170,9 +168,15 @@ void SetLog(const int lvl, const DKString& text)
 	}
 	if(lvl == DKDEBUG){
 		if(same(text,"ON")){
-			log_info = true;
+			log_debug = true;
 			return;
 		}
-		log_info = false;
+		log_debug = false;
+	}
+	if(lvl == DKSHOW){
+		log_show = text;
+	}
+	if(lvl == DKHIDE){
+		log_hide = text;
 	}
 }
