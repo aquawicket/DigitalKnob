@@ -50,10 +50,12 @@ function DKNotepadFile_Save()
 {
 	DKLog("DKNotepadFile_Save \n", DKDEBUG);
 	var text = DKWidget_GetValue("DKNotepad_Text");
-	var assets = DKAssets_LocalAssets();
-	DKFile_StringToFile(text, assets+currentFile);
-	DKCreate("DKMessage/DKMessage.js");
-	DKMessageBox("", "ShowMessage", "Saved File");
+	//var assets = DKAssets_LocalAssets();
+	DKFile_StringToFile(text, currentFile);
+	DKCreate("DKMessage/DKMessage.js", function(){
+		DKFrame_Widget("DKMessage.html");
+		DKMessageBox("", "ShowMessage", "Saved File");
+	});
 }
 
 //////////////////////////////

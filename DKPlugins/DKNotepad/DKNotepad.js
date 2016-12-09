@@ -19,13 +19,13 @@ function DKNotepad_End()
 function DKNotepad_OnEvent(event)
 {
 	if(DK_Type(event, "contextmenu")){
-		DKCreate("DKNotepad/DKNotepadMenu.js");
+		DKCreate("DKNotepad/DKNotepadMenu.js", function(){});
 	}
 	//if(DK_Type(event,"SetFile")){
 	//	DKNotepad_Open(DKWidget_GetValue(event));
 	//}
 	if(DK_Id(event,"DKNotepad_File")){
-		DKCreate("DKNotepad/DKNotepadFile.js");
+		DKCreate("DKNotepad/DKNotepadFile.js", function(){});
 	}
 }
 
@@ -37,8 +37,8 @@ function DKNotepad_Open(file)
 	//DKLog("DKNotepad_Open("+file+") \n");
 	
 	currentFile = file;
-	var assets = DKAssets_LocalAssets();
-	var text = DKFile_FileToString(assets+file);
+	//var assets = DKAssets_LocalAssets();
+	var text = DKFile_FileToString(file);
 	//DKLog("DKNotepad_Open("+file+"): text="+text+" \n");
 	DKWidget_SetAttribute("DKNotepad_Text", "value", text);
 }
