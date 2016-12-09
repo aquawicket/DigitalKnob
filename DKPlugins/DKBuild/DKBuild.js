@@ -266,7 +266,7 @@ function DKBuild_SvnUpdate()
 	}
 }
 
-//////////////////////////////
+////////////////////////////
 function DKBuild_SvnCommit()
 {
 	DKLog("Svn Commit... \n", DKINFO);
@@ -398,7 +398,6 @@ function DKBuild_DoResults()
 	}
 	
 	//Create icons
-	DKLog("DKBuild_DoResults(): DK_GetOS() = "+DK_GetOS()+"\n", DKWARN);
 	if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 		DKCreate("DKBuild/IconMaker.js", function(){
 			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);

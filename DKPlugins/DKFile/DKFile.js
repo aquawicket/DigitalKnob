@@ -55,13 +55,13 @@ function UrlExists(url, fn)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				//output.value = request.responseText;
-				DKLog(url+" status: "+request.status, DKERROR);
+				DKLog(url+" status: "+request.status, DKWARN);
 				fn && fn(true);
 				//return;// true;
 			}
 			else{
-				DKLog("AJAX ERROR: "+request.statusText, DKERROR); //report error
-				DKLog(url+" status: "+request.status, DKERROR);
+				DKLog("AJAX ERROR: "+request.statusText, DKWARN); //report error
+				DKLog(url+" status: "+request.status, DKWARN);
 				fn && fn(false);
 				//return;// false;
 			}
