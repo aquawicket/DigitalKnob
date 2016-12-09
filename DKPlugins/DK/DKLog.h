@@ -58,5 +58,6 @@ void DKLog(const int text, const int lvl);
 void DKLog(const long& text, const int lvl);
 void DKLog(const unsigned long long& text, const int lvl);
 void DKLog(const float& text, const int lvl);
+void SetLog(const int lvl, const DKString& text);
 
 #endif //DKLog_H

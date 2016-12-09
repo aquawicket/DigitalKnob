@@ -106,6 +106,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep, 0);
 	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole, 0);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole, 0);
+	DKDuktape::AttachFunction("DK_SetLog", DKJS::SetLog, 2);
 }
 
 /////////////////////////////////////
@@ -774,7 +775,7 @@ int DKJS::StrokeKey(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////
+////////////////////////////////
 int DKJS::Exit(duk_context* ctx)
 {
 	DKApp::Exit();
@@ -825,6 +826,14 @@ int DKJS::HideConsole(duk_context* ctx)
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_HIDE);
 #endif 
+	return 1;
+}
+
+//////////////////////////////////
+int DKJS::SetLog(duk_context* ctx)
+{
+	//TODO
+	//DKLog::SetLog(lvl, string);
 	return 1;
 }
 

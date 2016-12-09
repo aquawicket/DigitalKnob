@@ -138,3 +138,24 @@ void DKLog(const DKString& text, const int lvl)
 #endif
 
 }
+
+////////////////////////////////////////////////
+void SetLog(const int lvl, const DKString& text)
+{
+	//TODO
+
+	DKLog("SetLog("+toString(lvl)+","+text+")\n", DKINFO);
+
+	if(lvl == DKERROR){
+
+	}
+	if(lvl == DKWARN){
+
+	}
+	if(lvl == DKINFO){
+
+	}
+	if(lvl == DKDEBUG){
+
+	}	
+}
