@@ -1,4 +1,5 @@
 //BROWSER
+DKLog("Loaded DKAssets.js\n", DKWARN);
 
 var href = document.location.href;
 href = href.replace("index.html","");
@@ -50,6 +51,8 @@ DKLog("appfilename: "+appfilename+"\n", DKINFO);
 DKLog("local_assets: "+local_assets+"\n", DKINFO);
 DKLog("online_assets: "+online_assets+"\n", DKINFO);
 DKLog("absolutepath: "+absolutepath+"\n", DKINFO);
+
+DKLog("LOG_DEBUG: "+log_debug+"\n", DKINFO);
 
 
 ////////////////////////

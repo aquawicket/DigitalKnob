@@ -166,7 +166,8 @@ if(DK_GetBrowser() != "CEF"){
 	///////////////////////////////////////
 	function DKFile_GetSetting(file, param)
 	{
-		//DKLog("DK_GetSetting("+file+", "+param+") \n", DKDEBUG);
+		DKLog("DK_GetSetting("+file+", "+param+") \n", DKINFO);
+		
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
 			return getCookie(param);
@@ -215,7 +216,8 @@ if(DK_GetBrowser() != "CEF"){
 	//////////////////////////////////////////////
 	function DKFile_SetSetting(file, param, value)
 	{
-		//DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n", DKDEBUG);
+		DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n", DKINFO);
+		
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
 			setCookie(param, value, 9999);
