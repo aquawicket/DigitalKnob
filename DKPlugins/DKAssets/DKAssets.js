@@ -52,7 +52,13 @@ DKLog("local_assets: "+local_assets+"\n", DKINFO);
 DKLog("online_assets: "+online_assets+"\n", DKINFO);
 DKLog("absolutepath: "+absolutepath+"\n", DKINFO);
 
-DKLog("LOG_DEBUG: "+log_debug+"\n", DKINFO);
+DKLog("LOG_DEBUG: "+LOG_DEBUG+"\n", DKINFO);
+DKLog("LOG_INFO: "+LOG_INFO+"\n", DKINFO);
+DKLog("LOG_WARNINGS: "+LOG_WARNINGS+"\n", DKINFO);
+DKLog("LOG_ERRORS: "+LOG_ERRORS+"\n", DKINFO);
+DKLog("LOG_FILE: "+LOG_FILE+"\n", DKINFO);
+DKLog("LOG_SHOW: "+LOG_SHOW+"\n", DKINFO);
+DKLog("LOG_HIDE: "+LOG_HIDE+"\n", DKINFO);
 
 
 ////////////////////////

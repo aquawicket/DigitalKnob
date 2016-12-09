@@ -42,7 +42,35 @@ function DKLog(string, lvl)
 		alert("DKLog("+string+") missing lvl");
 	}
 	
-	//TODO: implement LOG_HIDE and LOG_SHOW loops
+	//check for LOG_HIDE
+	if(LOG_HIDE){
+		var arry = LOG_HIDE.split(",");
+		for(var i=0; i<arry.length; i++){
+			if(arry[i] && arry[i].includes(string)){
+				return;
+			}
+		}
+	}
+	
+	/*
+	//check for LOG_SHOW_n
+	var flag = false;
+	if(LOG_SHOW){
+		var arry = LOG_SHOW.split(",");
+		for(var i=0; i<arry.length; i++){
+			if(arry[i] && arry[i].includes(string)){
+				flag = true;
+				break;
+			}
+		}
+	}
+	if(!flag){
+		if(log_debug == false && lvl == DKDEBUG){ return; }
+		if(log_info == false && lvl == DKINFO){ return; }
+		if(log_warnings == false && lvl == DKWARN){ return; }
+		if(log_errors == false && lvl == DKERROR){ return; }
+	}
+	*/
 	
 	if(window.console){
 		var color = "";
