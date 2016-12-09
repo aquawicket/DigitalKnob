@@ -15,10 +15,12 @@ void DKFileV8::Init()
 	DKCefApp::AttachFunction("DKFile_Exists", DKFileV8::Exists);
 	DKCefApp::AttachFunction("DKFile_FileToString", DKFileV8::FileToString);
 	DKCefApp::AttachFunction("DKFile_GetAbsolutePath", DKFileV8::GetAbsolutePath);
+	DKCefApp::AttachFunction("DKFile_GetSetting", DKFileV8::GetSetting);
 	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
 	DKCefApp::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
 	DKCefApp::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
 	DKCefApp::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
+	DKCefApp::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
 }
 
 ///////////////////
@@ -117,6 +119,19 @@ bool DKFileV8::GetAbsolutePath(CefArgs args, CefReturn retval)
 	return true;
 }
 
+/////////////////////////////////////////////////////////
+bool DKFileV8::GetSetting(CefArgs args, CefReturn retval)
+{
+	DKString file = args[0]->GetStringValue();
+	DKString param = args[1]->GetStringValue();
+	DKString value;
+	if(!DKFile::GetSetting(file, param, value)){
+		return false;
+	}
+	retval = CefV8Value::CreateString(value);
+	return true;
+}
+
 ///////////////////////////////////////////////////////////
 bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 {
@@ -151,6 +166,18 @@ bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
 	DKFile::MakeDir(path);
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKFileV8::SetSetting(CefArgs args, CefReturn retval)
+{
+	DKString file = args[0]->GetStringValue();
+	DKString param = args[1]->GetStringValue();
+	DKString value = args[2]->GetStringValue();
+	if(!DKFile::SetSetting(file, param, value)){ 
+		return false; 
+	}
 	return true;
 }
 

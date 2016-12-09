@@ -162,111 +162,115 @@ function DKFile_SaveFile(path, data)
 	return true;
 }
 
-///////////////////////////////////////
-function DKFile_GetSetting(file, param)
-{
-	//DKLog("DK_GetSetting("+file+", "+param+") \n", DKDEBUG);
-	//file is ignored in browser. We use cookie instead.
-	if(!file){
-		return getCookie(param);
-	}
-	else{
-		//If the variable looks like this: [VARIABLE]
-		//then we return everything up to the next [VARIABLE] or to the end of the file.
-		var str = DK_FileToString(file);
-		if(!str){ return ""; }
-		if(param.indexOf("[") != -1 && param.indexOf("]") != -1 ){
-			var begin = str.indexOf(param);
-			if(begin == -1){ return ""; }
+if(DK_GetBrowser() != "CEF"){
+	///////////////////////////////////////
+	function DKFile_GetSetting(file, param)
+	{
+		//DKLog("DK_GetSetting("+file+", "+param+") \n", DKDEBUG);
+		//file is ignored in browser. We use cookie instead.
+		if(!file){
+			return getCookie(param);
+		}
+		else{
+			//If the variable looks like this: [VARIABLE]
+			//then we return everything up to the next [VARIABLE] or to the end of the file.
+			var str = DK_FileToString(file);
+			if(!str){ return ""; }
+			if(param.indexOf("[") != -1 && param.indexOf("]") != -1 ){
+				var begin = str.indexOf(param);
+				if(begin == -1){ return ""; }
 
-			var start = str.indexOf("]", begin);
-			var end = str.indexOf("[",start);
-			if(end == -1){end = str.length;}
+				var start = str.indexOf("]", begin);
+				var end = str.indexOf("[",start);
+				if(end == -1){end = str.length;}
+	
+				var out = str.substr(start+1, end-start-1);
+	
+				replace(out,"\r","");
+				replace(out,"\n"," ");
+				out = out.trim();
+				//DKLog("DK_GetSetting("+file+", "+param+") -> "+out+"\n", DKDEBUG);
+				return out;
+			}
 
-			var out = str.substr(start+1, end-start-1);
+			//If the variable looks like this:  VARIABLE 
+			//then we return the rest of the line
+			var string = param + " ";
+			var begin = str.indexOf(string,0);
+			if(begin == -1){return "";}
+			var start = str.indexOf(" ",begin);
+			var end = str.indexOf("\n",start);
 
+			var out = filestring.substr(start+1, end-start-1);
 			replace(out,"\r","");
-			replace(out,"\n"," ");
+			replace(out,"\n","");
 			out = out.trim();
 			//DKLog("DK_GetSetting("+file+", "+param+") -> "+out+"\n", DKDEBUG);
 			return out;
 		}
-
-		//If the variable looks like this:  VARIABLE 
-		//then we return the rest of the line
-		var string = param + " ";
-		var begin = str.indexOf(string,0);
-		if(begin == -1){return "";}
-		var start = str.indexOf(" ",begin);
-		var end = str.indexOf("\n",start);
-
-		var out = filestring.substr(start+1, end-start-1);
-		replace(out,"\r","");
-		replace(out,"\n","");
-		out = out.trim();
-		//DKLog("DK_GetSetting("+file+", "+param+") -> "+out+"\n", DKDEBUG);
-		return out;
 	}
 }
 
-//////////////////////////////////////////////
-function DKFile_SetSetting(file, param, value)
-{
-	//DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n", DKDEBUG);
-	//file is ignored in browser. We use cookie instead.
-	if(!file){
-		setCookie(param, value, 9999);
-	}
-	else{
-		var path = file;
-		//if(!DKAssets::VerifyPath(path)){ return false;}
+if(DK_GetBrowser() != "CEF"){
+	//////////////////////////////////////////////
+	function DKFile_SetSetting(file, param, value)
+	{
+		//DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n", DKDEBUG);
+		//file is ignored in browser. We use cookie instead.
+		if(!file){
+			setCookie(param, value, 9999);
+		}
+		else{
+			var path = file;
+			//if(!DKAssets::VerifyPath(path)){ return false;}
+	
+			var filestring = DKFile_FileToString(path);
+			if(!filestring){ return false; }
+	
+			//If the variable looks like this: [VARIABLE]
+			//then we return everything up to the next [VARIABLE] or to the end of the file.
+			if(param.indexOf("[") != -1 && param.indexOf("]") != -1){
+				var begin = filestring.indexOf(param);
+				if(begin == -1){
+					filestring = filestring.concat("\n" + param + " " + value); //create entry
+					DKFile_StringToFile(filestring, path);
+					DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
+					return true;
+				}
+				var start = filestring.indexOf("]", begin);
+				var end = filestring.indexOf("[", start);
+				if(end == -1){end = filestring.length;}
 
-		var filestring = DKFile_FileToString(path);
-		if(!filestring){ return false; }
-
-		//If the variable looks like this: [VARIABLE]
-		//then we return everything up to the next [VARIABLE] or to the end of the file.
-		if(param.indexOf("[") != -1 && param.indexOf("]") != -1){
-			var begin = filestring.indexOf(param);
-			if(begin == -1){
-				filestring = filestring.concat("\n" + param + " " + value); //create entry
-				DKFile_StringToFile(filestring, path);
+				var out = " "+value+"\n";
+				var oldstr = filestring.substr(start+1, end-start-1);
+				filestring = replace(filestring, oldstr, out); 
+				DKFile_StringToFile(filestring,path);
 				DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
 				return true;
 			}
-			var start = filestring.indexOf("]", begin);
-			var end = filestring.indexOf("[", start);
-			if(end == -1){end = filestring.length;}
-
-			var out = " "+value+"\n";
+	
+			//If the variable looks like this:  VARIABLE 
+			//then we return the rest of the line
+			var string = setting + " ";
+	
+			var begin = filestring.indexOf(string,0);
+			if(temp == -1){
+				filestring = filestring.concat("\n" + setting + " " + value); //create entry
+				DKFile_StringToFile(filestring,file);
+				DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+				return true;
+			}
+			var start = filestring.indexOf(" ", begin);
+			var end = filestring.indexOf("\n",start);
+	
 			var oldstr = filestring.substr(start+1, end-start-1);
-			filestring = replace(filestring, oldstr, out); 
-			DKFile_StringToFile(filestring,path);
-			DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
-			return true;
-		}
-
-		//If the variable looks like this:  VARIABLE 
-		//then we return the rest of the line
-		var string = setting + " ";
-
-		var begin = filestring.indexOf(string,0);
-		if(temp == -1){
-			filestring = filestring.concat("\n" + setting + " " + value); //create entry
+			filestring.replace(filestring, oldstr, value); 
 			DKFile_StringToFile(filestring,file);
+		
 			DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
 			return true;
 		}
-		var start = filestring.indexOf(" ", begin);
-		var end = filestring.indexOf("\n",start);
-
-		var oldstr = filestring.substr(start+1, end-start-1);
-		filestring.replace(filestring, oldstr, value); 
-		DKFile_StringToFile(filestring,file);
-	
-		DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
-		return true;
-	}
+	}	
 }
 
 if(DK_GetBrowser() != "CEF"){

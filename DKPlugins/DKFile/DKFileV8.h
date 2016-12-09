@@ -20,9 +20,11 @@ public:
 	static bool Exists(CefArgs args, CefReturn retval);
 	static bool FileToString(CefArgs args, CefReturn retval);
 	static bool GetAbsolutePath(CefArgs args, CefReturn retval);
+	static bool GetSetting(CefArgs args, CefReturn retval);
 	static bool GetShortName(CefArgs args, CefReturn retval);
 	static bool IsDirectory(CefArgs args, CefReturn retval);
 	static bool MkDir(CefArgs args, CefReturn retval);
+	static bool SetSetting(CefArgs args, CefReturn retval);
 	static bool StringToFile(CefArgs args, CefReturn retval);
 };
 
