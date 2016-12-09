@@ -46,40 +46,34 @@ function DKLog(string, lvl)
 	if(LOG_HIDE){
 		var arry = LOG_HIDE.split(",");
 		for(var i=0; i<arry.length; i++){
-			if(arry[i] && arry[i].includes(string)){
+			if(arry[i] && string.includes(arry[i])){
 				return;
 			}
 		}
 	}
 	
-	/*
-	//check for LOG_SHOW_n
-	var flag = false;
-	if(LOG_SHOW){
-		var arry = LOG_SHOW.split(",");
-		for(var i=0; i<arry.length; i++){
-			if(arry[i] && arry[i].includes(string)){
-				flag = true;
-				break;
+	if(window.console){
+		var flag = false;
+		if(LOG_SHOW){
+			var arry = LOG_SHOW.split(",");
+			for(var i=0; i<arry.length; i++){
+				if(arry[i] && string.includes(arry[i])){
+					flag = true;
+					break;
+				}
 			}
 		}
-	}
-	if(!flag){
-		if(log_debug == false && lvl == DKDEBUG){ return; }
-		if(log_info == false && lvl == DKINFO){ return; }
-		if(log_warnings == false && lvl == DKWARN){ return; }
-		if(log_errors == false && lvl == DKERROR){ return; }
-	}
-	*/
-	
-	if(window.console){
+		if(flag == false){ 
+			if(lvl == DKERROR && !LOG_ERRORS){ return; }
+			if(lvl == DKWARN && !LOG_WARNINGS){ return; }
+			if(lvl == DKINFO && !LOG_INFO){ return; }
+			if(lvl == DKDEBUG && !LOG_DEBUG){ return; }
+		}
 		var color = "";
-		if(lvl == DKERROR && LOG_ERRORS){ color = "color:red";}
-		else if(lvl == DKWARN && LOG_WARNINGS){ color = "color:#B8860B"; }
-		else if(lvl == DKINFO && LOG_INFO){ color = "color:grey"; }
-		else if(lvl == DKDEBUG && LOG_DEBUG){ color = "color:blue"; }
-		else{ return; }
-		//if(!color){ throw new Error("DKLog(): with no lvl."); }
+		if(lvl == DKERROR){ color = "color:red";}
+		if(lvl == DKWARN){ color = "color:#B8860B"; }
+		if(lvl == DKINFO){ color = "color:grey"; }
+		if(lvl == DKDEBUG){ color = "color:blue"; }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
 		if(lvl == DKERROR){ alert("ERROR: "+string); throw string; }
