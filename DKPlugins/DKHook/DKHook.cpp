@@ -147,11 +147,13 @@ void DKHook::DoHighlight()
 {
 	if(!highlight){ return; }
 	if(handle.empty()){ return; }
+	 
+	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
 
 	RECT rect;
 	GetWindowRect(handle[currentHandle], &rect);
+	screenDC = ::GetDC(GetDesktopWindow());
 
-	screenDC = ::GetDC(0);
 	HPEN pen, oldPen;
 	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
     oldPen = (HPEN)SelectObject(screenDC, pen);
@@ -165,8 +167,6 @@ void DKHook::DoHighlight()
 
 	SelectObject(screenDC, oldPen); 
     DeleteObject(pen);
-	//InvalidateRect(GetDesktopWindow(), NULL, NULL);
-	//RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE);
 }
 
 /////////////////////////

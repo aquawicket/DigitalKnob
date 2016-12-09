@@ -42,6 +42,7 @@ public:
 	bool highlight;
 	void ToggleHighlight();
 	void DoHighlight();
+	void DrawRectangleOnTransparent(HWND hWnd, const RECT& rc);
 	HDC screenDC;
 
 	DKStringArray GetWindows();
