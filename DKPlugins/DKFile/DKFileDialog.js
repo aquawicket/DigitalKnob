@@ -29,8 +29,8 @@ function DKFileDialog_End()
 ////////////////////////////////////
 function DKFileDialog_OnEvent(event)
 {	
-	DKLog("DKFileDialog_OnEvent("+event+")\n", DKDEBUG);
-	
+	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+
 	if(DK_IdLike(event, "DKFileDialogDrive")){
 		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
 	}

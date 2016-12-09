@@ -17,7 +17,7 @@ function DKMenuRightApp_End()
 //////////////////////////////////////
 function DKMenuRightApp_OnEvent(event)
 {
-	//DKLog("DKMenuRightApp_OnEvent("+event+") \n");
+	DKLog("DKMenuRightApp_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "SaveUserFile")){
 		DKMenuRightApp_SaveUserFile();

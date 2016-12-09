@@ -21,7 +21,8 @@ function DKTray_Init()
 //////////////////////////////
 function DKTray_OnEvent(event)
 {
-	//DKLog("DKTray_OnEvent("+event+") \n");
+	DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Type(event, "1000") || DK_Type(event, "doubleclick")){
 		DKCreate("DKWindowJS");
 		DKWindow_Show();

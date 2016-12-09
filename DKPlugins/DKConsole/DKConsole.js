@@ -21,6 +21,8 @@ function DKConsole_End()
 /////////////////////////////////
 function DKConsole_OnEvent(event)
 {	
+	DKLog("DKConsole_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+
 	if(DK_Id(event, "DKConsole_Clear")){
 		DKWidget_SetInnerHtml("DKConsole_Content","");
 	}

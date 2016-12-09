@@ -19,6 +19,8 @@ function DKRocketVideo_End()
 /////////////////////////////////////
 function DKRocketVideo_OnEvent(event)
 {
+	DKLog("DKRocketVideo_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "DKRocketVideo_playpause")){
 		DKRocketVideo_playpause();
 	}

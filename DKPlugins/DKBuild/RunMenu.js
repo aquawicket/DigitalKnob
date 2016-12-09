@@ -23,6 +23,8 @@ function RunMenu_End()
 ///////////////////////////////
 function RunMenu_OnEvent(event)
 {
+	DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "Build App")){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");

@@ -20,6 +20,8 @@ function DKNotepadMenu_End()
 /////////////////////////////////////
 function DKNotepadMenu_OnEvent(event)
 {
+	DKLog("DKNotepadMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event,"DKNotepadMenu_Cut")){
 		DKNotepadMenu_Cut();
 	}

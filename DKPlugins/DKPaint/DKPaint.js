@@ -18,6 +18,8 @@ function DKPaint_End()
 ///////////////////////////////
 function DKPaint_OnEvent(event)
 {
+	DKLog("DKPaint_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event,"DKPaint_Save")){
 		DKNotepad_Save();
 	}

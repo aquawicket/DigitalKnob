@@ -61,7 +61,8 @@ function DKTriggers_End()
 /////////////////////////////////
 function DKTrigger_OnEvent(event)
 {
-	//DKLog("DKTrigger_OnEvent("+event+")\n", DKINFO);
+	DKLog("DKTrigger_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Type(event, "gui")){ //C++
 		var arry = DKWidget_GetValue(event).split(",");
 		DKTrigger_ProcessGui(arry[0], arry[1]);

@@ -15,7 +15,8 @@ function Input_End()
 /////////////////////////////
 function Input_OnEvent(event)
 {
-	//DKLog("Input_OnEvent("+event+")\n", DKINFO);
+	DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "Input_Text")){
 		var key = DKWidget_GetValue(event);
 		//DKLog("Input_Text: key="+key+"\n", DKINFO);

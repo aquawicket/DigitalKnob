@@ -17,6 +17,8 @@ function DKThreadPoolDlg_End()
 ///////////////////////////////////////
 function DKThreadPoolDlg_OnEvent(event)
 {
+	DKLog("DKThreadPoolDlg_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Type(event, "Update")){
 		DKThreadPoolDlg_OnUpdate();
 	}

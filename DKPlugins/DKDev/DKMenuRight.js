@@ -26,6 +26,8 @@ function DKMenuRight_End()
 ///////////////////////////////////
 function DKMenuRight_OnEvent(event)
 {
+	DKLog("DKMenuRight_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "AppImage")){
 		DKMenuRight_SetPanel("App");
 	}

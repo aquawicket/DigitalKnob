@@ -25,6 +25,8 @@ function DKRocketAudio_End()
 /////////////////////////////////////
 function DKRocketAudio_OnEvent(event)
 {
+	DKLog("DKRocketAudio_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "DKRocketAudio_playpause")){
 		DKRocketAudio_playpause();
 	}

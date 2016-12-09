@@ -39,6 +39,8 @@ function DKDev_Menu_End()
 //////////////////////////////////
 function DKDev_Menu_OnEvent(event)
 {
+	DKLog("DKDev_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event, "DKDev_Menu_NewFrame")){
 		DKDev_NewPage(stored_element);
 	}

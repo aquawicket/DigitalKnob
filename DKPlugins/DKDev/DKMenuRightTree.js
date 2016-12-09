@@ -15,6 +15,8 @@ function DKMenuRightTree_End()
 ///////////////////////////////////////
 function DKMenuRightTree_OnEvent(event)
 {
+	DKLog("DKMenuRightTree_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event,"UpdateTree")){
 		DKMenuRightTree_UpdateTree();
 	}

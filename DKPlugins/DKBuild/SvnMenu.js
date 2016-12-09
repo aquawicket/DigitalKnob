@@ -19,6 +19,8 @@ function SvnMenu_End()
 ///////////////////////////////
 function SvnMenu_OnEvent(event)
 {
+	DKLog("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Id(event,"Svn Update")){
 		DKThread_DKQueue("SvnUpdate","DKBuild_SvnUpdate();");
 	}

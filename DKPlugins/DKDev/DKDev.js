@@ -68,8 +68,9 @@ function DKDev_Ignore(id)
 /////////////////////////////
 function DKDev_OnEvent(event)
 {
+	DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(devmode == false){ return; }
-	//DKLog("DKDev_OnEvent("+DKWidget_GetType(event)+","+DK_GetId(event)+") \n", DKDEBUG);
 	
 	var target = DK_GetId(event);
 	if(DKDev_Ignore(target)){ return; }

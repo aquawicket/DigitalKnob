@@ -30,8 +30,8 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	//DKLog("DKAutomate_OnEvent("+event+") \n", DKDEBUG);
-	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+") \n", DKDEBUG);
+	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Type(event, "keydown")){
 		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
 	}

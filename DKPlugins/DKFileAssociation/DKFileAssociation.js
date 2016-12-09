@@ -14,9 +14,10 @@ function DKFileAssociation_End()
 ////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	//if(DK_Id(event,"DKFileAssociation_item")){ }	
+	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 }
 
+/////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
 	var file2 = file;

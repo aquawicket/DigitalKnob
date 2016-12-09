@@ -53,6 +53,8 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
+	DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(event.type){ //Browser
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event));
 		if(DK_GetType(event) != "mousemove"){

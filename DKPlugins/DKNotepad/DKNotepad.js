@@ -15,9 +15,11 @@ function DKNotepad_End()
 	DKClose("DKNotepad/DKNotepad.html");
 }
 
-///////////////////////////////
+/////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
+	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){});
 	}
