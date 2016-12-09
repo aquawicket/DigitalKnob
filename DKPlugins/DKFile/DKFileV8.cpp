@@ -126,7 +126,7 @@ bool DKFileV8::GetSetting(CefArgs args, CefReturn retval)
 	DKString param = args[1]->GetStringValue();
 	DKString value;
 	if(!DKFile::GetSetting(file, param, value)){
-		return false;
+		return true;
 	}
 	retval = CefV8Value::CreateString(value);
 	return true;
