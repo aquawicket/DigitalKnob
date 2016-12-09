@@ -7,6 +7,7 @@ function DKNotepadFile_Init()
 	DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Save", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Save As", "click", DKNotepadFile_OnEvent);
+	DKAddEvent("DKNotepadFile_Exit", "click", DKNotepadFile_OnEvent);
 }
 
 ////////////////////////////
@@ -34,6 +35,9 @@ function DKNotepadFile_OnEvent(event)
 	}
 	if(DK_Id(event,"DKNotepadFile_Save As")){
 		DKNotepadFile_SaveAs();
+	}
+	if(DK_Id(event,"DKNotepadFile_Exit")){
+		DKFrame_Close("DKNotepad.html");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

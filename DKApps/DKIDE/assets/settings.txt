@@ -8,5 +8,4 @@
 [LOG_FILE] ON
 [LOG_SHOW]
 [LOG_HIDE]
-
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
