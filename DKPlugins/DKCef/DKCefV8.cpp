@@ -8,8 +8,9 @@ void DKCefV8::Init()
 	DKCreate("DKAssetsV8");
 	
 	DKCefApp::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
-	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::DKCreate_CPP);
-	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
+	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
+	DKCefApp::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
+	DKCefApp::AttachFunction("DKValid", DKCefV8::_DKValid);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKCefApp::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
@@ -43,7 +44,7 @@ bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
 }
 
 //////////////////////////////////////////////////////////
-bool DKCefV8::DKCreate_CPP(CefArgs args, CefReturn retval)
+bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 {
 	DKString data = args[0]->GetStringValue();
 	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
@@ -51,8 +52,18 @@ bool DKCefV8::DKCreate_CPP(CefArgs args, CefReturn retval)
 	return true;
 }
 
+/////////////////////////////////////////////////////
+bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
+{
+	//TODO
+	int lvl = args[0]->GetIntValue();
+	DKString string = args[1]->GetStringValue();
+	SetLog(lvl, string);
+	return true;
+}
+
 /////////////////////////////////////////////////////////
-bool DKCefV8::DKValid_CPP(CefArgs args, CefReturn retval)
+bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 {
 	DKString data = args[0]->GetStringValue();
 	bool valid = DKValid(data);

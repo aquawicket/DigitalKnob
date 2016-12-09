@@ -18,6 +18,7 @@ public:
 	static int _DKLog(duk_context* ctx);
 	static int _DKRemoveEvent(duk_context* ctx);
 	static int _DKSendEvent(duk_context* ctx);
+	static int _SetLog(duk_context* ctx);
 	static int _DKValid(duk_context* ctx);
 	
 	static int Beep(duk_context* ctx);
@@ -67,7 +68,6 @@ public:
 	static int RunJavascript(duk_context* ctx);
 	static int SetClipboard(duk_context* ctx);
 	static int SetCursorPos(duk_context* ctx);
-	static int SetLog(duk_context* ctx);
 	static int SetFramerate(duk_context* ctx);
 	static int ShowConsole(duk_context* ctx);
 	static int Sleep(duk_context* ctx);

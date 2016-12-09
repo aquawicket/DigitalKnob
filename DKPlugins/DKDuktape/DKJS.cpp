@@ -106,7 +106,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep, 0);
 	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole, 0);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole, 0);
-	DKDuktape::AttachFunction("DK_SetLog", DKJS::SetLog, 2);
+	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog, 2);
 }
 
 /////////////////////////////////////
@@ -830,10 +830,12 @@ int DKJS::HideConsole(duk_context* ctx)
 }
 
 //////////////////////////////////
-int DKJS::SetLog(duk_context* ctx)
+int DKJS::_SetLog(duk_context* ctx)
 {
 	//TODO
-	//DKLog::SetLog(lvl, string);
+	int lvl = duk_require_int(ctx, 0);
+	DKString string = duk_require_string(ctx, 1);
+	SetLog(lvl, string);
 	return 1;
 }
 

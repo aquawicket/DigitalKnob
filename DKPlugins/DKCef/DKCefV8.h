@@ -12,9 +12,11 @@ public:
 	void Init();
 	void End();
 
+	static bool _DKCreate(CefArgs args, CefReturn retval);
+	static bool _SetLog(CefArgs args, CefReturn retval);
+	static bool _DKValid(CefArgs args, CefReturn retval);
+
 	static bool ClickImage(CefArgs args, CefReturn retval);
-	static bool DKCreate_CPP(CefArgs args, CefReturn retval);
-	static bool DKValid_CPP(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
 	static bool GetClipboard(CefArgs args, CefReturn retval);
 	static bool HideConsole(CefArgs args, CefReturn retval);
