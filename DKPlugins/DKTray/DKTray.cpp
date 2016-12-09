@@ -97,7 +97,7 @@ DKString DKTray::GetIcon()
 void DKTray::AddItem(const DKString& name, int id)
 {
 	//TODO
-	DKLog("DKTray::AddItem("+name+")\n", DKINFO);
+	DKLog("DKTray::AddItem("+name+")\n", DKDEBUG);
 	TrayIcon.AddItem(name, id);
 	return;
 }
@@ -105,7 +105,7 @@ void DKTray::AddItem(const DKString& name, int id)
 ///////////////////////////////////////////////
 bool DKTray::SetTooltip(const DKString& string)
 {
-	DKLog("DKTray::SetTooltip("+string+")\n", DKINFO);
+	DKLog("DKTray::SetTooltip("+string+")\n", DKDEBUG);
 	if(!TrayIcon.SetTooltipText(string.c_str())){
 		return false;
 	}

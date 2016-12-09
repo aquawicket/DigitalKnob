@@ -40,9 +40,10 @@ function DKNotepadFile_OnEvent(event)
 function DKNotepadFile_Open()
 {
 	DKLog("DKNotepadFile_Open \n", DKDEBUG);
-	DKCreate("DKFile/DKFileDialog.js");
-	DKFrame_Widget("DKFileDialog.html");
-	DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+	DKCreate("DKFile/DKFileDialog.js", function(){
+		DKFrame_Widget("DKFileDialog.html");
+		DKSendEvent("DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+	});
 }
 
 /////////////////////////////
