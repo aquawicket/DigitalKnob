@@ -30,6 +30,7 @@ function DKTray_OnEvent(event)
 	if(DK_Type(event, "1001")){
 		DKCreate("DKWindowJS");
 		DKWindow_Hide();
+		DK_HideConsole();
 	}
 	if(DK_Type(event, "1002")){
 		DK_Exit();

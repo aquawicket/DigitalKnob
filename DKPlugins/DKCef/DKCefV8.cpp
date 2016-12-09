@@ -12,12 +12,14 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DKValid", DKCefV8::DKValid_CPP);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKCefApp::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKCefApp::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKCefApp::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
+	DKCefApp::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
 	DKCefApp::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKCefApp::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 }
@@ -80,6 +82,16 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	return true;
 }
 
+/////////////////////////////////////////////////////////
+bool DKCefV8::HideConsole(CefArgs args, CefReturn retval)
+{
+#ifdef WIN32
+	HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_HIDE);
+#endif 
+	return true;
+}
+
 //////////////////////////////////////////////////////
 bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
 {
@@ -135,6 +147,16 @@ bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
 {
 	DKString string = args[0]->GetStringValue();
 	if(!DKUtil::SetClipboard(string)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval)
+{
+#ifdef WIN32
+	HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_RESTORE);
+#endif 
 	return true;
 }
 

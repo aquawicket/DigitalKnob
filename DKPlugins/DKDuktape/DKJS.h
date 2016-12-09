@@ -76,6 +76,7 @@ public:
 	static int DoFrame(duk_context* ctx);
 	static int Beep(duk_context* ctx);
 	static int ShowConsole(duk_context* ctx);
+	static int HideConsole(duk_context* ctx);
 };
 
 

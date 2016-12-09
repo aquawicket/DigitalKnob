@@ -17,12 +17,14 @@ public:
 	static bool DKValid_CPP(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
 	static bool GetClipboard(CefArgs args, CefReturn retval);
+	static bool HideConsole(CefArgs args, CefReturn retval);
 	static bool PressKey(CefArgs args, CefReturn retval);
 	static bool PrintFunctions(CefArgs args, CefReturn retval);
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
+	static bool ShowConsole(CefArgs args, CefReturn retval);
 	static bool StrokeKey(CefArgs args, CefReturn retval);
 	static bool WaitForImage(CefArgs args, CefReturn retval);
 };

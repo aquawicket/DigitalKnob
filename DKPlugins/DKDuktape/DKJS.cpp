@@ -105,6 +105,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername, 0);
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep, 0);
 	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole, 0);
+	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole, 0);
 }
 
 /////////////////////////////////////
@@ -813,6 +814,16 @@ int DKJS::ShowConsole(duk_context* ctx)
 #ifdef WIN32
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_RESTORE);
+#endif 
+	return 1;
+}
+
+///////////////////////////////////////
+int DKJS::HideConsole(duk_context* ctx)
+{
+#ifdef WIN32
+	HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_HIDE);
 #endif 
 	return 1;
 }
