@@ -77,64 +77,13 @@ void DKDuktape::End()
 	ctx = NULL;
 }
 
-//////////////////////////////////////////////
-bool DKDuktape::LoadFile(const DKString& file)
+////////////////////////////////////////////////////////////////////////////////////
+void DKDuktape::AttachFunction(const DKString& name, duk_c_function func, int nargs)
 {
-	DKLog("DKDuktape::LoadFile("+file+")\n", DKDEBUG);
-	
-	if(file.empty()){ return false; }
-	if(FileLoaded(file)){ return false; } //prevent file from loading twice
-
-	//if the file contains a //BROWSER tag, it's broswer only
-	DKString test;
-	DKFile::FileToString(file, test);
-	if(has(test,"//BROWSER")){
-		DKLog("Ignoring: "+file+" is a browser only file. \n", DKINFO);
-		return false;
-	}
-	
-	if(duk_peval_file(ctx, file.c_str()) != 0){
-		DKLog("Script error: "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
-		return false;
-    }
-    duk_pop(ctx);  /* ignore result ?? */
-
-	filelist.push_back(file);
-	return true;
-}
-
-////////////////////////////////////////////////
-bool DKDuktape::FileLoaded(const DKString& file)
-{
-	for(unsigned int i = 0; i < filelist.size(); ++i){
-		if(same(file, filelist[i])){
-			DKLog("DKDuktape::FileLoaded(): "+file+" already loaded.\n", DKWARN);
-			return true;
-		}
-	}
-	return false;
-}
-
-//////////////////////////////////////////////
-bool DKDuktape::CallInit(const DKString& file)
-{
-	DKLog("DKDuktape::CallInit(" + file + ")\n", DKDEBUG);
-	
-	DKString filename;
-	DKFile::GetFileName(file, filename);
-	DKFile::RemoveExtention(filename);
-	DKString init = filename+"_Init";
-
 	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
-	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
-		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
-	}
-	else {
-		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
-	}
-	duk_pop(ctx);  /* pop result/error */
-	return true;
+    duk_push_c_function(ctx, func, nargs);
+	duk_put_prop_string(ctx, -2, name.c_str());
+	functions.push_back(name+"("+toString(nargs)+")");
 }
 
 /////////////////////////////////////////////
@@ -166,39 +115,64 @@ bool DKDuktape::CallEnd(const DKString& file)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-void DKDuktape::AttachFunction(const DKString& name, duk_c_function func, int nargs)
+//////////////////////////////////////////////
+bool DKDuktape::CallInit(const DKString& file)
 {
+	DKLog("DKDuktape::CallInit(" + file + ")\n", DKDEBUG);
+	
+	DKString filename;
+	DKFile::GetFileName(file, filename);
+	DKFile::RemoveExtention(filename);
+	DKString init = filename+"_Init";
+
 	duk_push_global_object(ctx);
-    duk_push_c_function(ctx, func, nargs);
-	duk_put_prop_string(ctx, -2, name.c_str());
-	functions.push_back(name+"("+toString(nargs)+")");
+	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
+	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
+		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+	}
+	else {
+		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
+	}
+	duk_pop(ctx);  /* pop result/error */
+	return true;
 }
 
-////////////////////////
-void DKDuktape::Reload()
+////////////////////////////////////////////////
+bool DKDuktape::FileLoaded(const DKString& file)
 {
-	DKEvent::events.clear();
-	filelist.clear();
-
-	DKStringArray list;
-	DKClass::GetObjects(list);
-	for(unsigned int i=list.size()-1; i>0; --i){
-		if(has(list[i],"App0")){ continue; }
-		if(has(list[i],"DKAssets")){ continue; }
-		if(has(list[i],"DKDebug")){ continue; }
-		if(has(list[i],"DKDuktape")){ continue; }
-		if(has(list[i],"Window0")){ continue; }
-		if(has(list[i],"DKJS")){ continue; }
-		if(has(list[i],"Rocket")){ continue; }
-		if(has(list[i],"DKCef")){ continue; }
-		if(has(list[i],"DKSDLCef")){ continue; }
-		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO);
-		DKClose(list[i]);
+	for(unsigned int i = 0; i < filelist.size(); ++i){
+		if(same(file, filelist[i])){
+			DKLog("DKDuktape::FileLoaded(): "+file+" already loaded.\n", DKWARN);
+			return true;
+		}
 	}
+	return false;
+}
 
-    DKString user = DKFile::local_assets+"User.js";
-	LoadFile(user);
+//////////////////////////////////////////////
+bool DKDuktape::LoadFile(const DKString& file)
+{
+	DKLog("DKDuktape::LoadFile("+file+")\n", DKDEBUG);
+	
+	if(file.empty()){ return false; }
+	if(FileLoaded(file)){ return false; } //prevent file from loading twice
+
+	//if the file contains a //BROWSER tag, it's broswer only
+	DKString test;
+	DKFile::FileToString(file, test);
+	if(has(test,"//BROWSER")){
+		DKLog("Ignoring: "+file+" is a browser only file. \n", DKINFO);
+		return false;
+	}
+	
+	if(duk_peval_file(ctx, file.c_str()) != 0){
+		DKLog("Script error: "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
+		return false;
+    }
+    duk_pop(ctx);  /* ignore result ?? */
+
+	filelist.push_back(file);
+	return true;
 }
 
 ///////////////////////////////////////
@@ -237,6 +211,32 @@ void DKDuktape::OnEvent(DKEvent* event)
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value??
     }
     duk_pop(ctx);  /* pop result/error */
+}
+
+////////////////////////
+void DKDuktape::Reload()
+{
+	DKEvent::events.clear();
+	filelist.clear();
+
+	DKStringArray list;
+	DKClass::GetObjects(list);
+	for(unsigned int i=list.size()-1; i>0; --i){
+		if(has(list[i],"App0")){ continue; }
+		if(has(list[i],"DKAssets")){ continue; }
+		if(has(list[i],"DKDebug")){ continue; }
+		if(has(list[i],"DKDuktape")){ continue; }
+		if(has(list[i],"Window0")){ continue; }
+		if(has(list[i],"DKJS")){ continue; }
+		if(has(list[i],"Rocket")){ continue; }
+		if(has(list[i],"DKCef")){ continue; }
+		if(has(list[i],"DKSDLCef")){ continue; }
+		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO);
+		DKClose(list[i]);
+	}
+
+    DKString user = DKFile::local_assets+"User.js";
+	LoadFile(user);
 }
 
 ///////////////////////////////////////////////////
