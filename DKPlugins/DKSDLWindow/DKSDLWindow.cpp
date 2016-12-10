@@ -425,7 +425,19 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 				dksdlwindow->Process();
 				DKEvent::SendEvent("GLOBAL", "resize", toString(dksdlwindow->width)+","+toString(dksdlwindow->height));
 				return 1;
-			}							 
+			}
+			case SDL_WINDOWEVENT_MINIMIZED:{
+				DKEvent::SendEvent("GLOBAL", "minimize", "");
+				return 1;
+			}
+			case SDL_WINDOWEVENT_MAXIMIZED:{
+				DKEvent::SendEvent("GLOBAL", "maximize", "");
+				return 1;
+			}
+			case SDL_WINDOWEVENT_RESTORED:{
+				DKEvent::SendEvent("GLOBAL", "restore", "");
+				return 1;
+			}							   
 		}
 	}
 	if(event->type == SDL_APP_WILLENTERBACKGROUND){
