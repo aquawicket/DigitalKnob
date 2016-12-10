@@ -19,8 +19,8 @@ void DKFileV8::Init()
 	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
 	DKCefApp::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
 	DKCefApp::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
-	DKCefApp::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
 	DKCefApp::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
+	DKCefApp::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
 }
 
 ///////////////////

@@ -52,14 +52,6 @@ void DKDuktape::Init()
 			}
 		}
 		//////////////////////////////////////////////////////////////////////////////////
-		
-		/*  FIXME
-		//Set up global variables for DKLog()
-		RunJavascript("var DKERROR = 1;");
-		RunJavascript("var DKWARN = 2;");
-		RunJavascript("var DKINFO = 3;");
-		RunJavascript("var DKDEBUG = 4;");
-		*/
 
 		DKCreate("DKJS");
 

@@ -10,9 +10,9 @@ function DKFileDialog_Init()
 {	
 	DKCreate("DKFile/DKFileDialog.html");
 	DKAddEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
-	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
-	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
+	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
+	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
 	
 	aPath = "";
 	rPath = "";

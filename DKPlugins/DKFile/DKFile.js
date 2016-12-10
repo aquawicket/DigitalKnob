@@ -5,13 +5,13 @@ var local_assets;
 var online_assets;
 
 if(DK_GetBrowser() != "CEF"){
-	function DKFile_GetExeName(){ DKLog("DKFile_GetExeName(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKFile_GetModifiedTime(){ DKLog("DKFile_GetModifiedTime(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKFile_CopyFolder(src,dst,overwrite,recursive){DKLog("DKFile_CopyDirectory(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKFile_MkDir(){ DKLog("DKFile_MkDir(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DKFile_ChDir(){ DKLog("DKFile_ChDir(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DKFile_CopyFolder(src,dst,overwrite,recursive){DKLog("DKFile_CopyDirectory(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DKFile_GetExeName(){ DKLog("DKFile_GetExeName(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DKFile_GetFullExeName(){ DKLog("DKFile_GetFullExeName(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DKFile_GetModifiedTime(){ DKLog("DKFile_GetModifiedTime(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DKFile_GetShortName(){ DKLog("DKFile_GetShortName(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DKFile_MkDir(){ DKLog("DKFile_MkDir(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 }
 function DKFile_GetDrives(){ DKLog("DKFile_GetDrives(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 

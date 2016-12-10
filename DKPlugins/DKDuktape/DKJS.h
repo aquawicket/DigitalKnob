@@ -18,8 +18,8 @@ public:
 	static int _DKLog(duk_context* ctx);
 	static int _DKRemoveEvent(duk_context* ctx);
 	static int _DKSendEvent(duk_context* ctx);
-	static int _SetLog(duk_context* ctx);
 	static int _DKValid(duk_context* ctx);
+	static int _SetLog(duk_context* ctx);
 	
 	static int Beep(duk_context* ctx);
 	static int CallFunc(duk_context* ctx);
@@ -44,17 +44,17 @@ public:
 	static int GetMouseY(duk_context* ctx);
 	static int GetObjects(duk_context* ctx);
 	static int GetOS(duk_context* ctx);
-	static int GetScreenWidth(duk_context* ctx);
 	static int GetScreenHeight(duk_context* ctx);
+	static int GetScreenWidth(duk_context* ctx);
 	static int GetTime(duk_context* ctx);
 	static int GetType(duk_context* ctx);
 	static int GetUsername(duk_context* ctx);
 	static int GetVolume(duk_context* ctx);
 	static int HideConsole(duk_context* ctx);
-	static int Include(duk_context* ctx);
 	static int Id(duk_context* ctx);
 	static int IdLike(duk_context* ctx);
 	static int IE(duk_context* ctx);
+	static int Include(duk_context* ctx);
 	static int LeftClick(duk_context* ctx);
 	static int LogGuiConsole(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);
