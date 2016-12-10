@@ -37,30 +37,30 @@ extern "C" {
 ///////////////////////////////
 void DKSDLWindowAndroid::Init()
 {
-	DKClass::RegisterFunc("DKAndroid_onInitSDL", &DKSDLWindowAndroid::onInitSDL, this);
-	DKClass::RegisterFunc("DKAndroid_onDropFile", &DKSDLWindowAndroid::onDropFile, this);
-	DKClass::RegisterFunc("DKAndroid_onResize", &DKSDLWindowAndroid::onResize, this);
-	DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSDLWindowAndroid::onPadDown, this);
-	DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSDLWindowAndroid::onPadUp, this);
-	DKClass::RegisterFunc("DKAndroid_onJoy", &DKSDLWindowAndroid::onJoy, this);
-	DKClass::RegisterFunc("DKAndroid_onHat", &DKSDLWindowAndroid::onHat, this);
+	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
 	DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
-	DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
-	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSDLWindowAndroid::onSurfaceChanged, this);
-	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSDLWindowAndroid::onSurfaceDestroyed, this);
+	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
+	DKClass::RegisterFunc("DKAndroid_onDropFile", &DKSDLWindowAndroid::onDropFile, this);
+	DKClass::RegisterFunc("DKAndroid_onGetHint", &DKSDLWindowAndroid::onGetHint, this);
+	DKClass::RegisterFunc("DKAndroid_onHat", &DKSDLWindowAndroid::onHat, this);
+	DKClass::RegisterFunc("DKAndroid_onInitSDL", &DKSDLWindowAndroid::onInitSDL, this);
+	DKClass::RegisterFunc("DKAndroid_onJoy", &DKSDLWindowAndroid::onJoy, this);
+	DKClass::RegisterFunc("DKAndroid_onKeyboardFocusLost", &DKSDLWindowAndroid::onKeyboardFocusLost, this);
 	DKClass::RegisterFunc("DKAndroid_onKeyDown", &DKSDLWindowAndroid::onKeyDown, this);
 	DKClass::RegisterFunc("DKAndroid_onKeyUp", &DKSDLWindowAndroid::onKeyUp, this);
-	DKClass::RegisterFunc("DKAndroid_onKeyboardFocusLost", &DKSDLWindowAndroid::onKeyboardFocusLost, this);
-	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSDLWindowAndroid::onTouch, this);
-	DKClass::RegisterFunc("DKAndroid_onMouse", &DKSDLWindowAndroid::onMouse, this);
-	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
 	DKClass::RegisterFunc("DKAndroid_onLowMemory", &DKSDLWindowAndroid::onLowMemory, this);
-	DKClass::RegisterFunc("DKAndroid_onQuit", &DKSDLWindowAndroid::onQuit, this);
+	DKClass::RegisterFunc("DKAndroid_onMouse", &DKSDLWindowAndroid::onMouse, this);
+	DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSDLWindowAndroid::onPadDown, this);
+	DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSDLWindowAndroid::onPadUp, this);
 	DKClass::RegisterFunc("DKAndroid_onPause", &DKSDLWindowAndroid::onPause, this);
+	DKClass::RegisterFunc("DKAndroid_onQuit", &DKSDLWindowAndroid::onQuit, this);
+	DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
+	DKClass::RegisterFunc("DKAndroid_onResize", &DKSDLWindowAndroid::onResize, this);
 	DKClass::RegisterFunc("DKAndroid_onResume", &DKSDLWindowAndroid::onResume, this);
-	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
 	DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSDLWindowAndroid::onSetComposingText, this);
-	DKClass::RegisterFunc("DKAndroid_onGetHint", &DKSDLWindowAndroid::onGetHint, this);
+	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSDLWindowAndroid::onSurfaceChanged, this);
+	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSDLWindowAndroid::onSurfaceDestroyed, this);
+	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSDLWindowAndroid::onTouch, this);
 }
 
 //////////////////////////////

@@ -61,12 +61,12 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 
-	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
-	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
-	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
-	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
+	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
+	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
+	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
+	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	
 	/////////////////////////////////////////
 	void DoFrame()

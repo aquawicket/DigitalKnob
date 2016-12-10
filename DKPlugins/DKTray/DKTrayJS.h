@@ -10,18 +10,18 @@ class DKTrayJS : public DKObjectT<DKTrayJS>
 {
 public:
 	void Init();
+	static int AddItem(duk_context* ctx);
 	static int GetIcon(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);
-	static int AddItem(duk_context* ctx);
 	static int SetTooltip(duk_context* ctx);
-	//static int GetTooltip(duk_context* ctx); // TODO
 	static int ShowBalloon(duk_context* ctx);
-	//static int HideIcon(duk_context* ctx); //TODO
-	//static int ShowIcon(duk_context* ctx); //TODO
-	//static int GetMenuDefaultItem(duk_context* ctx); //TODO
-	//static int SetMenuDefaultItem(duk_context* ctx); //TODO
-	//static int SetIconList(duk_context* ctx); //TODO
 	//static int Animate(duk_context* ctx); //TODO
+	//static int GetMenuDefaultItem(duk_context* ctx); //TODO
+	//static int GetTooltip(duk_context* ctx); // TODO
+	//static int HideIcon(duk_context* ctx); //TODO
+	//static int SetIconList(duk_context* ctx); //TODO
+	//static int SetMenuDefaultItem(duk_context* ctx); //TODO
+	//static int ShowIcon(duk_context* ctx); //TODO
 	//static int StopAnimation(duk_context* ctx); //TODO
 };
 

@@ -11,8 +11,8 @@ public:
 	void End();
 
 	bool CheckForUpdate(const DKString& url);
-	bool DoUpdate(const DKString& url);
 	bool CreateUpdate(const DKString& url);
+	bool DoUpdate(const DKString& url);
 };
 
 REGISTER_OBJECT(DKUpdate, true);

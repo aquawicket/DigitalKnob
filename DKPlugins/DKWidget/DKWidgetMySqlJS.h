@@ -11,15 +11,15 @@ class DKWidgetMySqlJS : public DKObjectT<DKWidgetMySqlJS>
 {
 public:
 	void Init();
-	static int Prep(duk_context* ctx);
-	static int PrepField(const DKString& database, const DKString& table, const DKString& field);
+	static int DeleteRecord(duk_context* ctx);
 	static int GetFirstRecordNum(duk_context* ctx);
 	static int GetLastRecordNum(duk_context* ctx);
-	static int GetPrevRecordNum(duk_context* ctx);
 	static int GetNextRecordNum(duk_context* ctx);
+	static int GetPrevRecordNum(duk_context* ctx);
 	static int LoadRecord(duk_context* ctx);
+	static int Prep(duk_context* ctx);
+	static int PrepField(const DKString& database, const DKString& table, const DKString& field);
 	static int SaveRecord(duk_context* ctx);
-	static int DeleteRecord(duk_context* ctx);
 	static int Search(duk_context* ctx);
 };
 

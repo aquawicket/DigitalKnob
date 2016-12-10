@@ -1,13 +1,13 @@
 //BROWSER
 
+function DKWindow_Fullscreen(){ DKLog("DKWindow_Fullscreen(): not available for javascript", DKERROR); }
 function DKWindow_GetX(){ DKLog("DKWindow_GetX(): not available for javascript", DKERROR); }
 function DKWindow_GetY(){ DKLog("DKWindow_GetY(): not available for javascript", DKERROR); }
+function DKWindow_IsFullscreen(){ DKLog("DKWindow_IsFullscreen(): not available for javascript", DKERROR); }
+function DKWindow_SetHeight(){ DKLog("DKWindow_SetHeight(): not available for javascript", DKERROR); }
+function DKWindow_SetWidth(){ DKLog("DKWindow_SetWidth(): not available for javascript", DKERROR); }
 function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for javascript", DKERROR); }
 function DKWindow_SetY(){ DKLog("DKWindow_SetY(): not available for javascript", DKERROR); }
-function DKWindow_SetWidth(){ DKLog("DKWindow_SetWidth(): not available for javascript", DKERROR); }
-function DKWindow_SetHeight(){ DKLog("DKWindow_SetHeight(): not available for javascript", DKERROR); }
-function DKWindow_IsFullscreen(){ DKLog("DKWindow_IsFullscreen(): not available for javascript", DKERROR); }
-function DKWindow_Fullscreen(){ DKLog("DKWindow_Fullscreen(): not available for javascript", DKERROR); }
 function DKWindow_Windowed(){ DKLog("DKWindow_Windowed(): not available for javascript", DKERROR); }
 
 

@@ -5,14 +5,14 @@
 ////////////////////////////
 void DKWidgetMySqlJS::Init()
 {
-	DKDuktape::AttachFunction("DKWidgetMySql_Prep", DKWidgetMySqlJS::Prep, 1);
+	DKDuktape::AttachFunction("DKWidgetMySql_DeleteRecord", DKWidgetMySqlJS::DeleteRecord, 2);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetFirstRecordNum", DKWidgetMySqlJS::GetFirstRecordNum, 1);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetLastRecordNum", DKWidgetMySqlJS::GetLastRecordNum, 1);
-	DKDuktape::AttachFunction("DKWidgetMySql_GetPrevRecordNum", DKWidgetMySqlJS::GetPrevRecordNum, 2);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetNextRecordNum", DKWidgetMySqlJS::GetNextRecordNum, 2);
+	DKDuktape::AttachFunction("DKWidgetMySql_GetPrevRecordNum", DKWidgetMySqlJS::GetPrevRecordNum, 2);
 	DKDuktape::AttachFunction("DKWidgetMySql_LoadRecord", DKWidgetMySqlJS::LoadRecord, 2);
+	DKDuktape::AttachFunction("DKWidgetMySql_Prep", DKWidgetMySqlJS::Prep, 1);
 	DKDuktape::AttachFunction("DKWidgetMySql_SaveRecord", DKWidgetMySqlJS::SaveRecord, 2);
-	DKDuktape::AttachFunction("DKWidgetMySql_DeleteRecord", DKWidgetMySqlJS::DeleteRecord, 2);
 	DKDuktape::AttachFunction("DKWidgetMySql_Search", DKWidgetMySqlJS::Search, 2);
 }
 

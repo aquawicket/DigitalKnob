@@ -8,25 +8,25 @@ void DKWindowJS::Init()
 {
 	DKLog("DKWindowJS::Init()\n", DKDEBUG);
 
-	DKDuktape::AttachFunction("DKWindow_GetX", DKWindowJS::GetX, 0);
-	DKDuktape::AttachFunction("DKWindow_GetY", DKWindowJS::GetY, 0);
-	DKDuktape::AttachFunction("DKWindow_GetWidth", DKWindowJS::GetWidth, 0);
-	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight, 0);
-	DKDuktape::AttachFunction("DKWindow_SetX", DKWindowJS::SetX, 1);
-	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY, 1);
-	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth, 1);
-	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight, 1);
-	DKDuktape::AttachFunction("DKWindow_GetPixelRatio", DKWindowJS::GetPixelRatio, 1);
-	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
-	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
-	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize, 0);
-	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore, 0);
-	DKDuktape::AttachFunction("DKWindow_IsVisible", DKWindowJS::IsVisible, 0);
-	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide, 0);
-	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show, 0);
+	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseY", DKWindowJS::GetMouseY, 0);
+	DKDuktape::AttachFunction("DKWindow_GetPixelRatio", DKWindowJS::GetPixelRatio, 1);
+	DKDuktape::AttachFunction("DKWindow_GetWidth", DKWindowJS::GetWidth, 0);
+	DKDuktape::AttachFunction("DKWindow_GetX", DKWindowJS::GetX, 0);
+	DKDuktape::AttachFunction("DKWindow_GetY", DKWindowJS::GetY, 0);
+	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide, 0);
+	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen, 0);
+	DKDuktape::AttachFunction("DKWindow_IsVisible", DKWindowJS::IsVisible, 0);
+	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize, 0);
+	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore, 0);
+	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight, 1);
+	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth, 1);
+	DKDuktape::AttachFunction("DKWindow_SetX", DKWindowJS::SetX, 1);
+	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY, 1);
+	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show, 0);
+	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
 }
 
 //////////////////////////////////////
