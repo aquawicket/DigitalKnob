@@ -136,11 +136,11 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 		//DKLog(toString(LOWORD(wParam))+" : ", DKINFO);
 		//DKLog(toString(LOWORD(lParam))+"\n", DKINFO);
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
-			DKLog("Tray Icon Clicked \n", DKINFO);
+			//DKLog("Tray Icon Clicked \n", DKDEBUG);
 			DKEvent::SendEvent("DKTray", "click", toString(1));
 		}
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515){
-			DKLog("Tray Icon Double Clicked \n", DKINFO);
+			//DKLog("Tray Icon Double Clicked \n", DKDEBUG);
 			DKEvent::SendEvent("DKTray", "doubleclick", toString(1));
 		}
 	}

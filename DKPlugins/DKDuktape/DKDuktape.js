@@ -1,4 +1,4 @@
-DKLog("*************  DKDuktape.js *******************\n", DKINFO);
+DKLog("*************  DKDuktape.js *******************\n", DKDEBUG);
 var DKERROR = 1;
 var DKWARN = 2;
 var DKINFO = 3;
