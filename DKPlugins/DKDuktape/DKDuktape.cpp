@@ -63,6 +63,8 @@ void DKDuktape::Init()
 
 		DKCreate("DKJS");
 
+		DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
+		LoadFile(duktape);
         DKString user = DKFile::local_assets+"User.js";
 		LoadFile(user);
 	}
