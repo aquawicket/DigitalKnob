@@ -29,6 +29,7 @@ function DKTray_OnEvent(event)
 	if(DK_Type(event, "1000")){
 		DKCreate("DKWindowJS");
 		DKWindow_Show();
+		DKWindow_Restore();
 	}
 	if(DK_Type(event, "1001")){
 		DKCreate("DKWindowJS");
@@ -50,5 +51,6 @@ function DKTray_ToggleWindow()
 	}
 	else{
 		DKWindow_Show();
+		DKWindow_Restore();
 	}
 }
