@@ -44,5 +44,11 @@ function DKTray_OnEvent(event)
 function DKTray_ToggleWindow()
 {
 	DKCreate("DKWindowJS");
-	DKWindow_Show();
+	if(DKWindow_IsVisible()){
+		DKWindow_Hide();
+		DK_HideConsole();
+	}
+	else{
+		DKWindow_Show();
+	}
 }

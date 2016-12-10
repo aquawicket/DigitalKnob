@@ -321,11 +321,9 @@ void* DKSDLWindow::Minimize(void*)
 ///////////////////////////////////
 void* DKSDLWindow::IsVisible(void*)
 {
-	//TODO
-	//Uint32 IsVisibleFlag = SDL_WINDOW_VISIBLE;
-    //bool isVisible = SDL_GetWindowFlags(sdlwin) & IsVisibleFlag;
-	//return static_cast<void*>(new bool(isVisible));
-	return NULL;
+	Uint32 IsVisibleFlag = SDL_WINDOW_SHOWN;
+    bool isVisible = SDL_GetWindowFlags(sdlwin) & IsVisibleFlag;
+	return static_cast<void*>(new bool(isVisible));
 }
 
 //////////////////////////////
