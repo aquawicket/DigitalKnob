@@ -132,8 +132,9 @@ int DKJS::_DKCreate(duk_context* ctx)
 		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n", DKDEBUG); }
 		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n", DKDEBUG); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
-			DKLog("DKJS::_DKCreate(): JsFunc call failed \n", DKERROR);
-			printf("Error: %s\n", duk_safe_to_string(ctx, -1));
+			DKLog("DKJS::_DKCreate("+data+"): JsFunc call failed \n", DKERROR);
+			DKLog("Error: "+toString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
+			//printf("Error: %s\n", duk_safe_to_string(ctx, -1));
 		}
 		duk_pop(ctx);
     }

@@ -115,7 +115,7 @@ bool DKTray::SetTooltip(const DKString& string)
 /////////////////////////////////////////////////////////////////
 bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 {
-	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 15);
+	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 10);
 	return true;
 }
 
