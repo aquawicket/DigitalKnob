@@ -23,7 +23,10 @@ function DKTray_OnEvent(event)
 {
 	DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
-	if(DK_Type(event, "1000") || DK_Type(event, "doubleclick")){
+	if(DK_Type(event, "doubleclick")){
+		DKTray_ToggleWindow();
+	}
+	if(DK_Type(event, "1000")){
 		DKCreate("DKWindowJS");
 		DKWindow_Show();
 	}
@@ -35,4 +38,11 @@ function DKTray_OnEvent(event)
 	if(DK_Type(event, "1002")){
 		DK_Exit();
 	}
+}
+
+//////////////////////////////
+function DKTray_ToggleWindow()
+{
+	DKCreate("DKWindowJS");
+	DKWindow_Show();
 }
