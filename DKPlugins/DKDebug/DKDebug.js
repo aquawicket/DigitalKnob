@@ -49,7 +49,8 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
 	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }
 	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }
-	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }	
+	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }
+	if(string.indexOf("dkcrash") != -1){ DKDebug_TestCrash(); key_history = []; }	
 }
 
 ///////////////////////////////
@@ -206,4 +207,10 @@ function DKDebug_GetSource()
 	else{
 		DKFile_StringToFile(source, assets+"Browser_Source.html");
 	}
+}
+
+////////////////////////////
+function DKDebug_TestCrash()
+{
+	DK_TestCrash();
 }
