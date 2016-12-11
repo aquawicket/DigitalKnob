@@ -19,6 +19,8 @@ public:
 	static bool ClickImage(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
 	static bool GetClipboard(CefArgs args, CefReturn retval);
+	static bool GetScreenHeight(CefArgs args, CefReturn retval);
+	static bool GetScreenWidth(CefArgs args, CefReturn retval);
 	static bool HideConsole(CefArgs args, CefReturn retval);
 	static bool PressKey(CefArgs args, CefReturn retval);
 	static bool PrintFunctions(CefArgs args, CefReturn retval);

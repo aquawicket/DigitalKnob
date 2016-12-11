@@ -13,6 +13,8 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DKValid", DKCefV8::_DKValid);
 	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKCefApp::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
+	DKCefApp::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
 	DKCefApp::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKCefApp::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
@@ -90,6 +92,42 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return false; }
 	retval = CefV8Value::CreateString(string);
+	return true;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
+{
+	int height;
+	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
+		height = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenHeight"));
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
+		height = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenHeight"));
+	}
+	else{
+		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
+		return false;
+	}
+	retval = CefV8Value::CreateInt(height);
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
+{
+	int width;
+	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
+		width = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenWidth"));
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
+		width = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenWidth"));
+	}
+	else{
+		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
+		return false;
+	}
+	retval = CefV8Value::CreateInt(width);
 	return true;
 }
 
