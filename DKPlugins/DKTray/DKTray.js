@@ -1,6 +1,9 @@
 //////////////////////
 function DKTray_Init()
 {
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+		return;
+	}
 	DKCreate("DKTray");
 	DKAddEvent("DKTray", "1000", DKTray_OnEvent);
 	DKAddEvent("DKTray", "1001", DKTray_OnEvent);
