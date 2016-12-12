@@ -1,5 +1,6 @@
 var WORKSPACE = "C:/AndroidStudio";
 var ANDROIDSTUDIO = "C:/Program Files/Android/Android Studio/bin/studio64.exe"
+TYPE = DKWidget_GetValue("BuildType");
 
 /////////////////////////////
 function AndroidImport_Init()
