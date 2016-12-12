@@ -30,7 +30,7 @@ public class DK extends Activity
 
 	@Override
 	protected void onCreate(Bundle app) {
-		Log.e("DK", "onCreate");
+		Log.d("DK.java", "onCreate()");
 		super.onCreate(app);
 
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
@@ -51,7 +51,7 @@ public class DK extends Activity
 
 	@Override
 	protected void onDestroy(){
-		Log.e("DK", "onDestroy");
+		Log.d("DK.java", "onDestroy()");
 		exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");
 		finishAffinity();
@@ -59,13 +59,17 @@ public class DK extends Activity
 		super.onDestroy();
 	}
 
-	public void Exit(){
-		Log.e("DK", "Exit");
+	//////////////////
+	public void Exit()
+	{
+		Log.d("DK.java", "Exit()");
 		onDestroy();
 	}
 	
-	public void OpenActivity(String name){
-		Log.e("DK", "OpenActivity("+name+")");
+	/////////////////////////////////////
+	public void OpenActivity(String name)
+	{
+		Log.d("DK.java", "OpenActivity("+name+")");
 		Intent intent = new Intent();
 		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
 		startActivity(intent);
@@ -75,19 +79,19 @@ public class DK extends Activity
 	/////////////////////////
 	private void copyAssets()
 	{
-		Log.e("DK","Copying assets to storage . . .");
+		Log.d("DK.java", "copyAssets()");
+		Log.i("DK.java", "Copying assets to storage . . .");
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;
 		String appdir = "/mnt/sdcard/"+context.getString(stringId);
 		File checkfile = new File(appdir+"/ASSETS");
 
 		if(checkfile.exists()){
-			Log.e("DK","Remove "+appdir+"/ASSETS file from the device to reload assets.");
-			//copyFileOrDir("null", false);
+			Log.i("DK.java", "Remove "+appdir+"/ASSETS file from the device to reload assets.");
 			return;
 		}
 		else{
-			Log.e("DK","Reloading Assets . . .");
+			Log.i("DK.java", "Reloading Assets . . .");
 			copyFileOrDir("null", true);
 		}
 	}
@@ -95,14 +99,16 @@ public class DK extends Activity
 	///////////////////////////////////
 	private void copyAsset(String path)
 	{
-		Log.e("DK", "Copying "+path+" to storage . . .");
+		Log.d("DK.java", "copyAsset("+path+")");
+		Log.i("DK.java", "Copying "+path+" to storage . . .");
 		copyFile(path, true);
 	}
 
-	///////////////////////////////////////////////////////////
-	private void copyFileOrDir(String path, boolean overwrite){
+	//////////////////////////////////////////////////////////
+	private void copyFileOrDir(String path, boolean overwrite)
+	{
+		//Log.d("DK.java", "copyFileOrDir("+path+",boolean)");	
 		if(path.equals("null")){ path = ""; }
-		//Log.e(TAG, "copyAssets2("+path+")");
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;
 
@@ -111,18 +117,13 @@ public class DK extends Activity
 		try{
 			assets = assetManager.list(path);
 			if(assets.length == 0){
-				//Log.e(TAG, path+" assets.length == 0");
 				copyFile(path, overwrite);
 			}
 			else{
-				//Log.e(TAG, path+" assets.length > 0");
 				String fullPath = "/mnt/sdcard/"+context.getString(stringId) + "/" + path;
-				//Log.e(TAG,"fullpath: "+fullPath);
 				File dir = new File(fullPath);
 				if(!dir.exists()){
-					//Log.e(TAG,"!dir.exists()");
 					dir.mkdir();
-					//Log.e(TAG,"makedir: "+fullPath);
 				}
 				for(int i = 0; i < assets.length; ++i){
 					if(path.equals("")){
@@ -135,14 +136,14 @@ public class DK extends Activity
 			}
 		}
 		catch(IOException ex){
-			Log.e("DK", "I/O Exception", ex);
+			Log.e("DK.java", "copyFileOrDir("+path+",boolean): I/O Exception", ex);
 		}
 	}
 
 	/////////////////////////////////////////////////////////
 	private void copyFile(String filename, boolean overwrite)
 	{
-		//Log.e(TAG,"copyFile2("+filename+")");
+		//Log.d("DK.java", "copyFile("+filename+",boolean)");
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;
 
@@ -152,7 +153,6 @@ public class DK extends Activity
 		try{
 			in = assetManager.open(filename);
 			String newFileName = "/mnt/sdcard/"+context.getString(stringId) + "/" + filename;
-			//Log.e(TAG,"newFileNam: "+newFileName);
 			out = new FileOutputStream(newFileName);
 
 			File file = new File(newFileName);
@@ -170,14 +170,14 @@ public class DK extends Activity
 			out = null;
 		}
 		catch(Exception e){
-			Log.e("DK", "copyFile2 ERROR: "+e.getMessage());
+			Log.e("DK.java", "copyFile("+filename+",boolean)"+e.getMessage());
 		}
 	}
 	
 	////////////////////////////
 	public void toggleKeyboard()
 	{
-		Log.e("DK","toggleKeyborad()");
+		Log.d("DK.java","toggleKeyborad()");
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 		if(imm != null){
