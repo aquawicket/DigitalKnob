@@ -9,7 +9,7 @@
 class DKWebView : public DKObjectT<DKWebView>
 {
 public:
-	void init();
+	void Init();
 	void End();
 };
 
