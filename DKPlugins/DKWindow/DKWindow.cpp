@@ -6,13 +6,12 @@
 void DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
-	
-	DKCreate("DKWindowJS");
+
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
 #ifdef ANDROID
 		DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
-		CallJavaFunction("OpenActivity","SDLActivity"):
+		CallJavaFunction("OpenActivity","SDLActivity");
 #endif
 		DKCreate("DKSDLWindow");
 	}
@@ -22,6 +21,8 @@ void DKWindow::Init()
 	else{
 		DKLog("DKWindow::Init(): No window system available \n", DKERROR);
 	}
+
+	DKCreate("DKWindowJS");
 }
 
 ////////////////////
