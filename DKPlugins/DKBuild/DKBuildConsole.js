@@ -178,6 +178,7 @@ function DKBuildConsole_Process()
 {
 	OS = "";
 	APP = "";
+	TYPE = "";
 	LEVEL = "RebuildAll";
 	
 	DKBuildConsole_ChooseUpdate();
@@ -199,14 +200,6 @@ function DKBuildConsole_Process()
 	}
 	DKLog("\n ** Current APP "+APP+"\n", DKINFO);
 
-	/*
-	if(DK_GetOS() == "Linux" || OS == "android32" || OS == "android64"){
-		TYPE = "Release";
-	}
-	else{
-		TYPE = "ALL";
-	}
-	*/
 	while(TYPE == ""){
 		DKBuildConsole_SelectType();
 	}
