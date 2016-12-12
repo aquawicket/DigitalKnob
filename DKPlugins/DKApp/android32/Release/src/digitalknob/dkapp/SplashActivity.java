@@ -4,6 +4,7 @@ package digitalknob.dkapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 public class SplashActivity extends Activity{
 

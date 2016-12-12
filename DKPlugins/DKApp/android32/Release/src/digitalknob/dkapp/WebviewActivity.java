@@ -27,6 +27,7 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
+import android.util.Log;
 
 public class WebviewActivity extends Activity {
 
