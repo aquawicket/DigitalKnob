@@ -11,9 +11,9 @@ extern "C" {
 void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
+	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
 	
 	CallJavaFunction("OpenActivity", "WebviewActivity");
-	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
 }
 
 /////////////////////
@@ -32,7 +32,7 @@ void* DKWebview::Test(void* data)
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
-	Java_org_libsdl_app_WebView_Test(jd.env, jd.cls, text);
+	//Java_org_libsdl_app_WebView_Test(jd.env, jd.cls, text);
 	return NULL;
 }
 */
