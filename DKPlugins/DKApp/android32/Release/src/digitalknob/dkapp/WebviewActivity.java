@@ -66,6 +66,14 @@ public class WebviewActivity extends Activity {
 
         mWebView.getSettings().setAppCacheEnabled(false);
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+		
+		/*
+		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(640, 480);
+        params.leftMargin = 30;
+        params.topMargin = 100;
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        mWebView.setLayoutParams(params);
+		*/
 
 		//Open links in WebView
         mWebView.setWebChromeClient(new myWebChromeClient() {

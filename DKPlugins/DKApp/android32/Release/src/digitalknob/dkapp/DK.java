@@ -30,7 +30,7 @@ public class DK extends Activity
 
 	@Override
 	protected void onCreate(Bundle app) {
-		Log.e("dkwebview", "onCreate");
+		Log.e("DK", "onCreate");
 		super.onCreate(app);
 
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
@@ -42,15 +42,15 @@ public class DK extends Activity
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run(){
-				//OpenActivity("WebviewActivity");
 				OpenActivity("SDLActivity");
+				//OpenActivity("WebviewActivity");
 			}
 		}, 2000);
 	}
 
 	@Override
 	protected void onDestroy(){
-		Log.e("dkwebview", "onDestroy");
+		Log.e("DK", "onDestroy");
 		//exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");
 		System.exit(0);
