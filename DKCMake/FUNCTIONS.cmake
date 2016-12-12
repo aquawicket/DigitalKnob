@@ -1836,6 +1836,11 @@ FUNCTION(DKBRUTEDEPENDS arg)
 	ENDIF()
 ENDFUNCTION()
 
+#######################
+FUNCTION DKDEPEND_ALL()
+	##TODO - get a list of all DKPlugins and call DKPEPEND(DKPlugin) for each of them.
+ENDFUNCTION()
+
 ###################################
 FUNCTION(DKUPDATE_ANDROID_NAME arg)
 	

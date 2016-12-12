@@ -1,5 +1,4 @@
 INCLUDE(DKCMake/FUNCTIONS.cmake)
-INCLUDE(DKCMake/FUNCTIONS.cmake)
 INCLUDE(DKCMake/OPTIONS.cmake)
 
 MESSAGE("##########################")
