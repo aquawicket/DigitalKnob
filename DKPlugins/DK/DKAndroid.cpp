@@ -107,7 +107,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 {
-	DKLog("CallCppFunction(JNIEnv*,jclass,jstring)\n", DKDEBUG);
+	//DKLog("CallCppFunction(JNIEnv*,jclass,jstring)\n", DKDEBUG);
 	
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
