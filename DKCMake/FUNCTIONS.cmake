@@ -1837,7 +1837,7 @@ FUNCTION(DKBRUTEDEPENDS arg)
 ENDFUNCTION()
 
 #######################
-FUNCTION DKDEPEND_ALL()
+FUNCTION (DKDEPEND_ALL)
 	##TODO - get a list of all DKPlugins and call DKPEPEND(DKPlugin) for each of them.
 ENDFUNCTION()
 
