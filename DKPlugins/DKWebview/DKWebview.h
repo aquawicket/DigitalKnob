@@ -6,14 +6,14 @@
 #include <jni.h>
 
 /////////////////////////////////////////////
-class DKWebView : public DKObjectT<DKWebView>
+class DKWebview : public DKObjectT<DKWebview>
 {
 public:
 	void Init();
 	void End();
 };
 
-REGISTER_OBJECT(DKWebView, true)
+REGISTER_OBJECT(DKWebview, true)
 
 #endif //DKWebview_H
 #endif //ANDROID

@@ -8,27 +8,27 @@ extern "C" {
 }
 
 //////////////////////
-void DKWebView::Init()
+void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	
 	CallJavaFunction("OpenActivity", "WebviewActivity");
-	//DKClass::RegisterFunc("DKWebview_Test", &DKWebView::Test, this);
+	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
 }
 
 /////////////////////
-void DKWebView::End()
+void DKWebview::End()
 {
 	
 }
 
 /*
 /////////////////////////////////
-void* DKWebView::Test(void* data)
+void* DKWebview::Test(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKWebView::Test("+DKString(_data)+")\n", DKDEBUG);
+	DKLog("DKWebview::Test("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
