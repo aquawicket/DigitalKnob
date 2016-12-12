@@ -1,2 +1,2 @@
 DKPLUGIN(DKWebview)
-DKASSETS(DKWbeview)
+DKASSETS(DKWebview)

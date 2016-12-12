@@ -164,7 +164,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_RemoveJoystick", static_cast<void*>(&jdata)));
 	}
 	if(same(arry[0],"onNativeSurfaceChanged")){
-		DKClass::CallFunc("DKAndroid_onSurfaceChanged", static_cast<void*>(&jdata));
+		return static_cast<jstring>(DKClass::CallFunc("DKAndroid_onSurfaceChanged", static_cast<void*>(&jdata)));
 	}
 	if(same(arry[0],"DKAndroid_onSurfaceDestroyed")){
 		DKClass::CallFunc("DKAndroid_onSurfaceDestroyed", static_cast<void*>(&jdata));
