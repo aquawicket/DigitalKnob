@@ -42,7 +42,7 @@ int DKFileJS::VerifyPath(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
+/////////////////////////////////////////////////
 int DKFileJS::DirectoryContents(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -55,7 +55,7 @@ int DKFileJS::DirectoryContents(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
+///////////////////////////////////////////
 int DKFileJS::IsDirectory(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -66,7 +66,7 @@ int DKFileJS::IsDirectory(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 int DKFileJS::Exists(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -74,7 +74,7 @@ int DKFileJS::Exists(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
+//////////////////////////////////////////
 int DKFileJS::GetExeName(duk_context* ctx)
 {
 	DKString value;
@@ -83,7 +83,7 @@ int DKFileJS::GetExeName(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////
+//////////////////////////////////////////////
 int DKFileJS::GetFullExeName(duk_context* ctx)
 {
 	DKString value;
@@ -92,7 +92,7 @@ int DKFileJS::GetFullExeName(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////
+///////////////////////////////////////////////
 int DKFileJS::GetModifiedTime(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -102,7 +102,7 @@ int DKFileJS::GetModifiedTime(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
+///////////////////////////////////////////////
 int DKFileJS::GetAbsolutePath(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -112,7 +112,7 @@ int DKFileJS::GetAbsolutePath(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
+///////////////////////////////////////////////
 int DKFileJS::GetRelativePath(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -123,7 +123,7 @@ int DKFileJS::GetRelativePath(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
+////////////////////////////////////////////
 int DKFileJS::GetExtention(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -133,7 +133,7 @@ int DKFileJS::GetExtention(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
+////////////////////////////////////////////
 int DKFileJS::FileToString(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -143,7 +143,7 @@ int DKFileJS::FileToString(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
+////////////////////////////////////////////
 int DKFileJS::StringToFile(duk_context* ctx)
 {
 	DKString string = duk_require_string(ctx, 0);
@@ -152,7 +152,7 @@ int DKFileJS::StringToFile(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
+///////////////////////////////////////////
 int DKFileJS::GetFilename(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -162,7 +162,7 @@ int DKFileJS::GetFilename(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
+//////////////////////////////////////////
 int DKFileJS::CopyFolder(duk_context* ctx)
 {
 	DKString src = duk_require_string(ctx, 0);
@@ -198,7 +198,7 @@ int DKFileJS::SetSetting(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
+////////////////////////////////////////////////////
 int DKFileJS::GetLocalCreationDate(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -214,7 +214,7 @@ int DKFileJS::GetLocalCreationDate(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
+////////////////////////////////////////////////////
 int DKFileJS::GetLocalModifiedDate(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -230,7 +230,7 @@ int DKFileJS::GetLocalModifiedDate(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
+/////////////////////////////////////////
 int DKFileJS::GetDrives(duk_context* ctx)
 {
 	DKStringArray drives;
@@ -239,7 +239,7 @@ int DKFileJS::GetDrives(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////
+/////////////////////////////////////
 int DKFileJS::ChDir(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -247,7 +247,7 @@ int DKFileJS::ChDir(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////
+/////////////////////////////////////
 int DKFileJS::MkDir(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -255,7 +255,7 @@ int DKFileJS::MkDir(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////
+//////////////////////////////////////
 int DKFileJS::Delete(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
@@ -263,13 +263,15 @@ int DKFileJS::Delete(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////
+////////////////////////////////////
 int DKFileJS::Copy(duk_context* ctx)
 {
 	DKString src = duk_require_string(ctx, 0);
 	DKString dest = duk_require_string(ctx, 1);
 	bool overwrite = duk_require_boolean(ctx, 2);
-	DKFile::Copy(src, dest, overwrite, true);
+	if(!DKFile::Copy(src, dest, overwrite, true)){
+		return 0;
+	}
 	return 1;
 }
 

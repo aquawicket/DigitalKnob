@@ -9,6 +9,7 @@ void DKFileV8::Init()
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
 	//DKCefApp::AttachFunction("Test", DKFileV8::Test);
 	DKCefApp::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
+	DKCefApp::AttachFunction("DKFile_Copy", DKFileV8::Copy);
 	DKCefApp::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);
 	DKCefApp::AttachFunction("DKFile_Delete", DKFileV8::Delete);
 	DKCefApp::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
@@ -46,6 +47,18 @@ bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
 	DKFile::ChDir(path);
+	return true;
+}
+
+///////////////////////////////////////////////////
+bool DKFileV8::Copy(CefArgs args, CefReturn retval)
+{
+	DKString src = args[0]->GetStringValue();
+	DKString dest = args[2]->GetStringValue();
+	bool overwrite = args[3]->GetIntValue();
+	if(!DKFile::Copy(src, dest, overwrite, true)){
+		return false;
+	}
 	return true;
 }
 
