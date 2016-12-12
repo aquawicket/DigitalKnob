@@ -138,6 +138,10 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	jdata.env = env;
 	jdata.cls = cls;
 	jdata.data = data;
+	
+	return static_cast<jstring>(DKClass::CallFunc(arry[0], static_cast<void*>(&jdata)));
+	
+	/*
 	////////   SDL  /////////////////////////////////
 	if(same(arry[0],"DKAndroid_onDropFile")){
 		DKClass::CallFunc("DKAndroid_onDropFile", static_cast<void*>(&jdata));
@@ -219,6 +223,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	if(same(arry[0],"DKAndroid_onMouseMove")){
 		DKClass::CallFunc("DKAndroid_onMouseMove", static_cast<void*>(&jdata));
 	}
+	*/
 }
 
 } //extern "C"
