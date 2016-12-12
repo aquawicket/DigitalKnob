@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #ifdef ANDROID
-#include "DKAndroid.h"
-#include "DKApp.h"
-#include "DKClass.h"
+#include "DKWebview.h"
 
 
 //////////////////////
