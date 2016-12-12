@@ -1448,9 +1448,6 @@ ENDFUNCTION()
 
 
 
-
-
-
 ######################
 FUNCTION(DKPLUGIN arg)
 	#MESSAGE("DKPLUGIN(${arg})")
@@ -1469,7 +1466,7 @@ FUNCTION(DKPLUGIN arg)
 			"endif\n"
 			"LOCAL_SRC_FILES := $(wildcard ${PATHTOPLUGIN}/*.cpp)\n"
 			"LOCAL_SRC_FILES += $(wildcard ${PATHTOPLUGIN}/*.c)\n\n"
-			"LOCAL_CPPFLAGS :=\n"
+			"LOCAL_CPPFLAGS := -DANDROID\n"
 			"LOCAL_LDFLAGS :=\n\n")
 		DKINCLUDE(${PATHTOPLUGIN})
 

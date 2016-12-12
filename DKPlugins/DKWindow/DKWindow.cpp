@@ -1,12 +1,19 @@
 #include "stdafx.h"
 #include "DKWindow.h"
+#include "DKAndroid.h"
 
 /////////////////////
 void DKWindow::Init()
 {
+	DKLog("DKWindow::Init()\n", DKDEBUG);
+	
 	DKCreate("DKWindowJS");
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
+#ifdef ANDROID
+		DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
+		CallJavaFunction("OpenActivity","SDLActivity"):
+#endif
 		DKCreate("DKSDLWindow");
 	}
 	else if(DKAvailable("DKOSGWindow")){

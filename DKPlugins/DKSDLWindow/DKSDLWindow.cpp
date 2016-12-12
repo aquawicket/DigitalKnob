@@ -13,6 +13,8 @@ std::map<int,int> DKSDLWindow::sdlShiftCharCode;
 ////////////////////////
 void DKSDLWindow::Init()
 {
+	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
+	
 #ifdef ANDROID
 	//DKCreate("DKSDLWindowAndroid");
 	//CallJavaFunction("OpenActivity","SDLActivity"):
