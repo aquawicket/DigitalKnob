@@ -1,5 +1,8 @@
 DKCreate("DKWindow");
 DKCreate("DKRocket");
+DKCreate("DKWidget");
+DKCreate("DKFrame/DKFrame.js");
+DKCreate("DKDebug/DKDebug.js");
 //DKCreate("test2.js");
 //DKCreate("scale.js");
 //DKCreate("DKDom");
