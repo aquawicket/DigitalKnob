@@ -57,7 +57,8 @@ public class DK extends Activity
 		super.onDestroy();
 	}
 
-	protected void OpenActivity(String name) {
+	public void OpenActivity(String name){
+		Log.e("DK", "OpenActivity");
 		Intent intent = new Intent();
 		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
 		startActivity(intent);

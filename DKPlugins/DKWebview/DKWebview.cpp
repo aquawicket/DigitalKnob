@@ -11,6 +11,8 @@ extern "C" {
 void DKWebView::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
+	
+	CallJavaFunction("OpenActivity", "WebviewActivity");
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebView::Test, this);
 }
 
