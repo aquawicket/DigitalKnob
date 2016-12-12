@@ -42,6 +42,7 @@ public class DK extends Activity
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run(){
+				copyAssets();
 				OpenActivity("SDLActivity");
 				//OpenActivity("WebviewActivity");
 			}
