@@ -12,9 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.lang.reflect.Method;
-
 import javax.microedition.khronos.opengles.GL10;
-
 import android.app.*;
 import android.content.*;
 import android.text.InputType;
@@ -37,13 +35,10 @@ import android.hardware.*;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 
-/**
-    SDL Activity
-*/
+
+/////////////////////////////////////////////////////////////
 public class SDLActivity extends Activity implements Runnable
 {
-	//public native void initJNIBridge();
-	//public static native void exitJNIBridge();
 	public static native int initSDL(Object arguments);
 
     // Keep track of the paused state
@@ -77,16 +72,16 @@ public class SDLActivity extends Activity implements Runnable
     public static int format;
     public static float refresh;
     
-	/// Entry Point
-	// Load the .so
-    public void loadLibraries() {
-	   System.loadLibrary("SDL2");
+	////////////////////////////
+    public void loadLibraries(){
+		Log.d("SDLActivity.java", "loadLibraries()");
+		System.loadLibrary("SDL2");
     }
 	
-    @Override
-    public void run(){
-		Log.e("SDLActivity","run()");
-		//initJNIBridge();
+	///////////////////////////
+    @Override public void run()
+	{
+		Log.d("SDLActivity.java", "run()");
         initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");
     	DK.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height)+","+Integer.toString(format)+","+Float.toString(refresh));
@@ -95,9 +90,9 @@ public class SDLActivity extends Activity implements Runnable
     }
 	
 	//////////////////
-    public void Exit(){
-    	Log.e("SDLActivity","Exit()");
-    	//exitJNIBridge();
+    public void Exit()
+	{
+    	Log.d("SDLActivity.java", "Exit()");
     	super.onDestroy();
     }
     
@@ -107,11 +102,15 @@ public class SDLActivity extends Activity implements Runnable
      * The default implementation returns an empty array. It never returns null.
      * @return arguments for the native application.
      */
-    protected String[] getArguments() {
+    protected String[] getArguments() 
+	{
         return new String[0];
     }
 
-    public static void initialize() {
+	///////////////////////////////
+    public static void initialize() 
+	{
+		Log.d("SDLActivity.java", "initialize()");
         // The static nature of the singleton and Android quirkyness force us to initialize everything here
         // Otherwise, when exiting the app and returning to it, these variables *keep* their pre exit values
         mSingleton = null;
@@ -128,12 +127,13 @@ public class SDLActivity extends Activity implements Runnable
         mHasFocus = true;
     }
 
-    // Setup
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Log.v("SDLActivity", "Device: " + android.os.Build.DEVICE);
-        Log.v("SDLActivity", "Model: " + android.os.Build.MODEL);
-        Log.v("SDLActivity", "onCreate(): " + mSingleton);
+    ////////////////////////////////////////////////////////////
+    @Override protected void onCreate(Bundle savedInstanceState) 
+	{
+		Log.d("SDLActivity.java", "initialize()");
+        Log.v("SDLActivity.java", "Device: " + android.os.Build.DEVICE);
+        Log.v("SDLActivity.java", "Model: " + android.os.Build.MODEL);
+        Log.v("SDLActivity.java", "onCreate(): " + mSingleton);
         super.onCreate(savedInstanceState);
 
         SDLActivity.initialize();
@@ -203,10 +203,10 @@ public class SDLActivity extends Activity implements Runnable
         }
     }
 
-    // Events
-    @Override
-    protected void onPause() {
-        Log.v("SDLActivity", "onPause()");
+    //////////////////////////////////
+    @Override protected void onPause()
+	{
+        Log.d("SDLActivity.java", "onPause()");
         super.onPause();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -214,30 +214,28 @@ public class SDLActivity extends Activity implements Runnable
         }
 
         SDLActivity.handlePause();
-		
-		//FIXME: exiting..  resume is broken.
-        Exit();
     }
 
-    @Override
-    protected void onResume() {
-        Log.v("SDLActivity", "onResume()");
+	///////////////////////////////////
+    @Override protected void onResume()
+	{
+        Log.d("SDLActivity.java", "onResume()");
         super.onResume();
 
-        if (SDLActivity.mBrokenLibraries) {
+        if(SDLActivity.mBrokenLibraries){
            return;
         }
 
         SDLActivity.handleResume();
     }
 
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
+	////////////////////////////////////////////////////////////
+    @Override public void onWindowFocusChanged(boolean hasFocus) 
+	{
+		Log.d("SDLActivity.java", "onWindowFocusChanged()");
         super.onWindowFocusChanged(hasFocus);
-        Log.v("SDLActivity", "onWindowFocusChanged(): " + hasFocus);
-
-        if (SDLActivity.mBrokenLibraries) {
+        
+        if(SDLActivity.mBrokenLibraries){
            return;
         }
 
@@ -247,9 +245,10 @@ public class SDLActivity extends Activity implements Runnable
         }
     }
 
-    @Override
-    public void onLowMemory() {
-        Log.v("SDLActivity", "onLowMemory()");
+	///////////////////////////////////
+    @Override public void onLowMemory()
+	{
+        Log.d("SDLActivity.java", "onLowMemory()");
         super.onLowMemory();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -258,9 +257,10 @@ public class SDLActivity extends Activity implements Runnable
         DK.CallCppFunction("DKAndroid_onLowMemory");
     }
 
-    @Override
-    protected void onDestroy() {
-        Log.v("SDLActivity", "onDestroy()");
+	////////////////////////////////////
+    @Override protected void onDestroy()
+	{
+        Log.d("SDLActivity.java", "onDestroy()");
 
         if (SDLActivity.mBrokenLibraries) {
            super.onDestroy();
@@ -290,9 +290,9 @@ public class SDLActivity extends Activity implements Runnable
         SDLActivity.initialize();
     }
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-
+	/////////////////////////////////////////////////////////
+    @Override public boolean dispatchKeyEvent(KeyEvent event)
+	{
         if (SDLActivity.mBrokenLibraries) {
            return false;
         }
@@ -314,7 +314,8 @@ public class SDLActivity extends Activity implements Runnable
      *  is the first to be called, mIsSurfaceReady should still be set
      *  to 'true' during the call to onPause (in a usual scenario).
      */
-    public static void handlePause() {
+    public static void handlePause() 
+	{
         if (!SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady) {
             SDLActivity.mIsPaused = true;
 			DK.CallCppFunction("DKAndroid_onPause");
@@ -326,7 +327,8 @@ public class SDLActivity extends Activity implements Runnable
      * Note: Some Android variants may send multiple surfaceChanged events, so we don't need to resume
      * every time we get one of those events, only if it comes after surfaceDestroyed
      */
-    public static void handleResume() {
+    public static void handleResume() 
+	{
         if (SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady && SDLActivity.mHasFocus) {
             SDLActivity.mIsPaused = false;
 			DK.CallCppFunction("DKAndroid_onResume");
@@ -335,7 +337,8 @@ public class SDLActivity extends Activity implements Runnable
     }
 
     /* The native thread has finished */
-    public static void handleNativeExit() {
+    public static void handleNativeExit() 
+	{
         SDLActivity.mSDLThread = null;
         mSingleton.finish();
     }
