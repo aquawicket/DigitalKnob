@@ -16,8 +16,8 @@ void DKSDLWindow::Init()
 	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
 	
 #ifdef ANDROID
-	//DKCreate("DKSDLWindowAndroid");
-	//CallJavaFunction("OpenActivity","SDLActivity"):
+		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
+		//CallJavaFunction("OpenActivity","SDLActivity");
 #endif
 
 	SDL_SetMainReady();

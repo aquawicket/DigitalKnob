@@ -9,10 +9,6 @@ void DKWindow::Init()
 
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
-#ifdef ANDROID
-		DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
-		CallJavaFunction("OpenActivity","SDLActivity");
-#endif
 		DKCreate("DKSDLWindow");
 	}
 	else if(DKAvailable("DKOSGWindow")){

@@ -85,6 +85,7 @@ public class SDLActivity extends Activity implements Runnable
 	
     @Override
     public void run(){
+		Log.e("SDLActivity","run()");
 		//initJNIBridge();
         initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");

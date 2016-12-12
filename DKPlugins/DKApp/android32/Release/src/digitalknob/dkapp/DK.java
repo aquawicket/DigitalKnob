@@ -58,7 +58,7 @@ public class DK extends Activity
 	}
 
 	public void OpenActivity(String name){
-		Log.e("DK", "OpenActivity");
+		Log.e("DK", "OpenActivity("+name+")");
 		Intent intent = new Intent();
 		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
 		startActivity(intent);
