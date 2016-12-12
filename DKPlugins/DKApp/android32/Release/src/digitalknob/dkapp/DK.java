@@ -53,10 +53,16 @@ public class DK extends Activity
 		Log.e("DK", "onDestroy");
 		exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");
+		finishAffinity();
 		System.exit(0);
 		super.onDestroy();
 	}
 
+	public void Exit(){
+		Log.e("DK", "Exit");
+		onDestroy();
+	}
+	
 	public void OpenActivity(String name){
 		Log.e("DK", "OpenActivity("+name+")");
 		Intent intent = new Intent();
