@@ -42,8 +42,8 @@ import android.content.res.AssetManager;
 */
 public class SDLActivity extends Activity implements Runnable
 {
-	public native void initJNIBridge();
-	public static native void exitJNIBridge();
+	//public native void initJNIBridge();
+	//public static native void exitJNIBridge();
 	public static native int initSDL(Object arguments);
 
     // Keep track of the paused state
@@ -97,8 +97,7 @@ public class SDLActivity extends Activity implements Runnable
 	//////////////////
     public void Exit(){
     	Log.e("SDLActivity","Exit()");
-    	exitJNIBridge();
-    	System.exit(0);
+    	//exitJNIBridge();
     	super.onDestroy();
     }
     
