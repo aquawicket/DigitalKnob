@@ -28,8 +28,9 @@ public class DK extends Activity
 		System.loadLibrary("DKAndroid");
 	}
 
-	@Override
-	protected void onCreate(Bundle app) {
+	/////////////////////////////////////////////
+	@Override protected void onCreate(Bundle app) 
+	{
 		Log.d("DK.java", "onCreate()");
 		super.onCreate(app);
 
@@ -49,8 +50,9 @@ public class DK extends Activity
 		}, 2000);
 	}
 
-	@Override
-	protected void onDestroy(){
+	////////////////////////////////////
+	@Override protected void onDestroy()
+	{
 		Log.d("DK.java", "onDestroy()");
 		exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");

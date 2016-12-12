@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends Activity{
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+	////////////////////////////////////////////////////////////
+    @Override protected void onCreate(Bundle savedInstanceState)
+	{
+		Log.d("SplashActivity.java", "onCreate");
         super.onCreate(savedInstanceState);
     }
 }
