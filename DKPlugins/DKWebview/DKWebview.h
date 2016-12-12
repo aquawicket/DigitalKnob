@@ -1,18 +1,19 @@
 #ifdef ANDROID
-
 #pragma once
 #ifndef DKWebview_H
 #define DKWebview_H
-#include "DKAndroid.h"
 
-///////////////
-class DKWebView
+#include <jni.h>
+
+/////////////////////////////////////////////
+class DKWebView : public DKObjectT<DKWebView>
 {
 public:
-	static void init();
+	void init();
+	void End();
 };
 
+REGISTER_OBJECT(DKWebView, true)
 
-
-#endif
-#endif
+#endif //DKWebview_H
+#endif //ANDROID

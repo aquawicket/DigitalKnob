@@ -37,6 +37,7 @@ extern "C" {
 ///////////////////////////////
 void DKSDLWindowAndroid::Init()
 {
+	DKLog("DKSDLWindowAndroid::Init()\n", DKDEBUG);
 	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
 	DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
 	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
