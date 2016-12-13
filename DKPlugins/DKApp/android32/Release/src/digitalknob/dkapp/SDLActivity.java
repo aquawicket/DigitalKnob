@@ -363,9 +363,12 @@ public class SDLActivity extends Activity implements Runnable
      * It uses current Activities as target (e.g. for the title).
      * static to prevent implicit references to enclosing object.
      */
-    protected static class SDLCommandHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
+    protected static class SDLCommandHandler extends Handler 
+	{
+		////////////////////////////////////////////////
+        @Override public void handleMessage(Message msg) 
+		{
+			Log.d("SDLActivity.java", "handleMessage()");
             Context context = getContext();
             if (context == null) {
                 Log.e("SDLActivity", "error handling message, getContext() returned null");
@@ -411,7 +414,9 @@ public class SDLActivity extends Activity implements Runnable
     Handler commandHandler = new SDLCommandHandler();
 
     // Send a message from the SDLMain thread
-    boolean sendCommand(int command, Object data) {
+    boolean sendCommand(int command, Object data) 
+	{
+		Log.d("SDLActivity.java", "sendCommand()");
         Message msg = commandHandler.obtainMessage();
         msg.arg1 = command;
         msg.obj = data;
@@ -421,7 +426,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean setActivityTitle(String title) {
+    public static boolean setActivityTitle(String title) 
+	{
+		Log.d("SDLActivity.java", "setActivityTitle()");
         // Called from SDLMain() thread and can't directly affect the view
         return mSingleton.sendCommand(COMMAND_CHANGE_TITLE, title);
     }
@@ -429,14 +436,18 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean sendMessage(int command, int param) {
+    public static boolean sendMessage(int command, int param) 
+	{
+		Log.d("SDLActivity.java", "sendMessage()");
         return mSingleton.sendCommand(command, Integer.valueOf(param));
     }
 
     /**
      * This method is called by SDL using JNI.
      */
-    public static Context getContext() {
+    public static Context getContext() 
+	{
+		Log.d("SDLActivity.java", "getContext()");
         return mSingleton;
     }
 
@@ -444,7 +455,9 @@ public class SDLActivity extends Activity implements Runnable
      * This method is called by SDL using JNI.
      * @return result of getSystemService(name) but executed on UI thread.
      */
-    public Object getSystemServiceFromUiThread(final String name) {
+    public Object getSystemServiceFromUiThread(final String name) 
+	{
+		Log.d("SDLActivity.java", "getSystemServiceFromUiThread()");
         final Object lock = new Object();
         final Object[] results = new Object[2]; // array for writable variables
         synchronized (lock) {
@@ -469,7 +482,8 @@ public class SDLActivity extends Activity implements Runnable
         return results[0];
     }
 
-    static class ShowTextInputTask implements Runnable {
+    static class ShowTextInputTask implements Runnable 
+	{
         /*
          * This is used to regulate the pan&scan method to have some offset from
          * the bottom edge of the input region and the top edge of an input
@@ -479,15 +493,20 @@ public class SDLActivity extends Activity implements Runnable
 
         public int x, y, w, h;
 
-        public ShowTextInputTask(int x, int y, int w, int h) {
+		////////////////////////////////////////////////////
+        public ShowTextInputTask(int x, int y, int w, int h) 
+		{
+			Log.d("SDLActivity.java", "ShowTextInputTask()");
             this.x = x;
             this.y = y;
             this.w = w;
             this.h = h;
         }
 
-        @Override
-        public void run() {
+		///////////////////////////
+        @Override public void run() 
+		{
+			Log.d("SDLActivity.java", "ShowTextInputTask:run()");
             AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams(
                     w, h + HEIGHT_PADDING, x, y);
 
@@ -510,7 +529,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static boolean showTextInput(int x, int y, int w, int h) {
+    public static boolean showTextInput(int x, int y, int w, int h) 
+	{
+		Log.d("SDLActivity.java", "showTextInput()");
         // Transfer the task to the main thread as a Runnable
         return mSingleton.commandHandler.post(new ShowTextInputTask(x, y, w, h));
     }
@@ -518,7 +539,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static Surface getNativeSurface() {
+    public static Surface getNativeSurface() 
+	{
+		Log.d("SDLActivity.java", "getNativeSurface()");
         return SDLActivity.mSurface.getNativeSurface();
     }
 
@@ -527,7 +550,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static int audioInit(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+    public static int audioInit(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) 
+	{
+		Log.d("SDLActivity.java", "audioInit()");
         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
@@ -564,7 +589,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static void audioWriteShortBuffer(short[] buffer) {
+    public static void audioWriteShortBuffer(short[] buffer) 
+	{
+		//Log.d("SDLActivity.java", "audioWriteShortBuffer()");
         for (int i = 0; i < buffer.length; ) {
             int result = mAudioTrack.write(buffer, i, buffer.length - i);
             if (result > 0) {
@@ -585,7 +612,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static void audioWriteByteBuffer(byte[] buffer) {
+    public static void audioWriteByteBuffer(byte[] buffer) 
+	{
+		//Log.d("SDLActivity.java", "audioWriteByteBuffer()");
         for (int i = 0; i < buffer.length; ) {
             int result = mAudioTrack.write(buffer, i, buffer.length - i);
             if (result > 0) {
@@ -606,7 +635,9 @@ public class SDLActivity extends Activity implements Runnable
     /**
      * This method is called by SDL using JNI.
      */
-    public static void audioQuit() {
+    public static void audioQuit() 
+	{
+		Log.d("SDLActivity.java", "audioQuit()");
         if (mAudioTrack != null) {
             mAudioTrack.stop();
             mAudioTrack = null;
@@ -619,7 +650,9 @@ public class SDLActivity extends Activity implements Runnable
      * This method is called by SDL using JNI.
      * @return an array which may be empty but is never null.
      */
-    public static int[] inputGetInputDeviceIds(int sources) {
+    public static int[] inputGetInputDeviceIds(int sources) 
+	{
+		Log.d("SDLActivity.java", "inputGetInputDeviceIds()");
         int[] ids = InputDevice.getDeviceIds();
         int[] filtered = new int[ids.length];
         int used = 0;
@@ -633,14 +666,18 @@ public class SDLActivity extends Activity implements Runnable
     }
 
     // Joystick glue code, just a series of stubs that redirect to the SDLJoystickHandler instance
-    public static boolean handleJoystickMotionEvent(MotionEvent event) {
+    public static boolean handleJoystickMotionEvent(MotionEvent event) 
+	{
+		Log.d("SDLActivity.java", "handleJoystickMotionEvent()");
         return mJoystickHandler.handleMotionEvent(event);
     }
 
     /**
      * This method is called by SDL using JNI.
      */
-    public static void pollInputDevices() {
+    public static void pollInputDevices() 
+	{
+		Log.d("SDLActivity.java", "pollInputDevices()");
         if (SDLActivity.mSDLThread != null) {
             mJoystickHandler.pollInputDevices();
         }
@@ -659,7 +696,9 @@ public class SDLActivity extends Activity implements Runnable
      * @deprecated because of an incorrect name
      */
     @Deprecated
-    public InputStream openAPKExtensionInputStream(String fileName) throws IOException {
+    public InputStream openAPKExtensionInputStream(String fileName) throws IOException 
+	{
+		Log.d("SDLActivity.java", "openAPKExtensionInputStream()");
         return openAPKExpansionInputStream(fileName);
     }
 
@@ -668,7 +707,9 @@ public class SDLActivity extends Activity implements Runnable
      * @return an InputStream on success or null if no expansion file was used.
      * @throws IOException on errors. Message is set for the SDL error message.
      */
-    public InputStream openAPKExpansionInputStream(String fileName) throws IOException {
+    public InputStream openAPKExpansionInputStream(String fileName) throws IOException 
+	{
+		Log.d("SDLActivity.java", "openAPKExpansionInputStream()");
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
         	String mainHint = null;// = DK.CallCppFunction("DKAndroid_onGetHint,SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
@@ -743,15 +784,10 @@ public class SDLActivity extends Activity implements Runnable
      * @param colors null for default or array of length 5 containing colors.
      * @return button id or -1.
      */
-    public int messageboxShowMessageBox(
-            final int flags,
-            final String title,
-            final String message,
-            final int[] buttonFlags,
-            final int[] buttonIds,
-            final String[] buttonTexts,
-            final int[] colors) {
-
+    public int messageboxShowMessageBox(final int flags, final String title, final String message, final int[] buttonFlags,
+										final int[] buttonIds, final String[] buttonTexts, final int[] colors) 
+	{
+		Log.d("SDLActivity.java", "messageboxShowMessageBox()");
         messageboxSelection[0] = -1;
 
         // sanity checks
@@ -796,9 +832,9 @@ public class SDLActivity extends Activity implements Runnable
         return messageboxSelection[0];
     }
 
-    @Override
-    protected Dialog onCreateDialog(int ignore, Bundle args) {
-
+    @Override protected Dialog onCreateDialog(int ignore, Bundle args) 
+	{
+		Log.d("SDLActivity.java", "onCreateDialog()");
         // TODO set values from "flags" to messagebox dialog
 
         // get colors
