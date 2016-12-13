@@ -10,7 +10,8 @@ void DKWebview::Init()
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
 	
-	CallJavaFunction("OpenActivity", "WebviewActivity");
+	//FIXME: when we call WebviewActivity from here, SDLActivity still runs and goes haywire. 
+	//CallJavaFunction("OpenActivity", "WebviewActivity");
 }
 
 /////////////////////
