@@ -3,15 +3,12 @@
 #include "DKWebview.h"
 #include "DKAndroid.h"
 
-extern "C" {
-	//extern JNIEXPORT jstring JNICALL Java_org_libsdl_app_Webview_Test(JNIEnv* env, jclass cls, jstring string);
-}
-
 //////////////////////
 void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
+	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
 	
 	CallJavaFunction("OpenActivity", "WebviewActivity");
 }
@@ -32,9 +29,20 @@ void* DKWebview::Test(void* data)
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
-	//Java_org_libsdl_app_WebView_Test(jd.env, jd.cls, text);
 	return NULL;
 }
 */
+
+/////////////////////////////////////
+void* DKWebview::onCreate(void* data)
+{
+	//JavaData jd = *static_cast<JavaData*>(data);
+	//const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
+	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
+	//DKStringArray arry;
+	//toStringArray(arry, _data, ",");
+	//jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
+	return NULL;
+}
 
 #endif //ANDROID

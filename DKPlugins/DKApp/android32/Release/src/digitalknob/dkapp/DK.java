@@ -64,8 +64,8 @@ public class DK extends Activity
 	@Override protected void onDestroy()
 	{
 		Log.d("DK.java", "onDestroy()");
-		exitJNIBridge();
 		//CallCppFunction("DKAndroid_exit");
+		exitJNIBridge();
 		finishAffinity();
 		System.exit(0);
 		super.onDestroy();
