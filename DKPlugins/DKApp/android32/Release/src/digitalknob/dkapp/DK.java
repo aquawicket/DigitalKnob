@@ -24,6 +24,14 @@ public class DK extends Activity
 	public native void exitJNIBridge();
 	public static native void CallCppFunction(String data);
 
+	public static DK Get(){ //Use "DK.Get().function" or "DK.Get().variable" to access this class
+		return instance;
+	}
+
+	public static void Instance(DK instance){
+		DK.instance = instance;
+	}
+	
 	static {
 		System.loadLibrary("DKAndroid");
 	}
@@ -33,6 +41,7 @@ public class DK extends Activity
 	{
 		Log.d("DK.java", "onCreate()");
 		super.onCreate(app);
+		Instance(this);
 
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
 		//CallCppFunction("DKAndroid_init");
