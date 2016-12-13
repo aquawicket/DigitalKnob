@@ -185,6 +185,7 @@ public class WebviewActivity extends Activity {
         */
 
         mWebView.loadUrl(homepage);
+		DK.CallCppFunction("DKWebview_onCreate()");
     }
 
 	
