@@ -89,12 +89,6 @@ public class SDLActivity extends Activity implements Runnable
         Log.v("SDL", "SDL thread terminated");
     }
 	
-	//////////////////
-    public void Exit()
-	{
-    	Log.d("SDLActivity.java", "Exit()");
-    	super.onDestroy();
-    }
     
     /**
      * This method is called by SDL before starting the native application thread.

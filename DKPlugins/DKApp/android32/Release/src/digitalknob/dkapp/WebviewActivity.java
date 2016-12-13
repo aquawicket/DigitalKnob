@@ -196,7 +196,6 @@ public class WebviewActivity extends Activity {
         if(doubleBackToExitPressedOnce){
             super.onBackPressed();
 			finishAffinity();
-            System.exit(0);
             return;
         }
         if (mWebView.canGoBack()){
