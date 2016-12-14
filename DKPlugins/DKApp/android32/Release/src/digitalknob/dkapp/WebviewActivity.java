@@ -243,6 +243,28 @@ public class WebviewActivity extends Activity {
         return surfaceView.dispatchTouchEvent(event); //send event to SDL
     }
 	
+	/*
+    ///////////////////////////////////////////////////////////////
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        Log.d("WebviewActivity.java","WebviewActivity.onKeyDown");
+        SurfaceView surfaceView = SDLSurface.instance;
+        //return surfaceView.dispatchKeyEvent(event);
+        surfaceView.onKeyDown(keyCode, event);
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /////////////////////////////////////////////////////////////
+    @Override public boolean onKeyUp(int keyCode, KeyEvent event)
+    {
+        Log.d("WebviewActivity.java","WebviewActivity.onKeyUp");
+        SurfaceView surfaceView = SDLSurface.instance;
+        //return surfaceView.dispatchKeyEvent(event);
+        surfaceView.onKeyUp(keyCode, event);
+        return super.onKeyUp(keyCode, event);
+    }
+    */
+	
 	//////////////////////////////////////////////////
     public class myWebViewClient extends WebViewClient
     {
