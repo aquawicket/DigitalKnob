@@ -234,7 +234,15 @@ public class WebviewActivity extends Activity {
             mUploadMessage = null;
         }
     }
-
+	
+	////////////////////////////////////////////////////////
+	@Override public boolean onTouchEvent(MotionEvent event)
+    {
+        Log.d("WebviewActivity.java","WebviewActivity.onTouchEvent");
+        SurfaceView surfaceView = SDLSurface.instance;
+        return surfaceView.dispatchTouchEvent(event); //send event to SDL
+    }
+	
 	//////////////////////////////////////////////////
     public class myWebViewClient extends WebViewClient
     {
