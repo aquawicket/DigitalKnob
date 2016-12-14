@@ -124,7 +124,7 @@ public class SDLActivity extends Activity implements Runnable
     ////////////////////////////////////////////////////////////
     @Override protected void onCreate(Bundle savedInstanceState) 
 	{
-		Log.d("SDLActivity.java", "initialize()");
+		Log.d("SDLActivity.java", "onCreate()");
         Log.v("SDLActivity.java", "Device: " + android.os.Build.DEVICE);
         Log.v("SDLActivity.java", "Model: " + android.os.Build.MODEL);
         Log.v("SDLActivity.java", "onCreate(): " + mSingleton);
@@ -986,6 +986,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
      // Startup
     public SDLSurface(Context context) {
     	
+		Log.d("SDLActivity.java", "SDLSurface()");
         super(context);
         getHolder().addCallback(this);
 
@@ -1008,10 +1009,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public void handlePause() {
+		Log.d("SDLActivity.java", "handlePause()");
         enableSensor(Sensor.TYPE_ACCELEROMETER, false);
     }
 
     public void handleResume() {
+		Log.d("SDLActivity.java", " handleResume()");
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
@@ -1027,14 +1030,14 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Called when we have a valid drawing surface
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.v("SDL", "surfaceCreated()");
+        Log.v("SDLActivity.java", "surfaceCreated()");
         holder.setType(SurfaceHolder.SURFACE_TYPE_GPU);
     }
 
     // Called when we lose the surface
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.v("SDL", "surfaceDestroyed()");
+        Log.v("SDLActivity.java", "surfaceDestroyed()");
         // Call this *before* setting mIsSurfaceReady to 'false'
         SDLActivity.handlePause();
         SDLActivity.mIsSurfaceReady = false;
@@ -1045,7 +1048,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public void surfaceChanged(SurfaceHolder holder,
                                int format, int width, int height) {
-        Log.v("SDL", "surfaceChanged()");
+        Log.v("SDLActivity.java", "surfaceChanged()");
         //setWillNotDraw(false);
     	
         int sdlFormat = 0x15151002; // SDL_PIXELFORMAT_RGB565 by default
