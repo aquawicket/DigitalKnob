@@ -266,7 +266,7 @@ void DKAndroid::init()
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
-			DKLog(classes[i]+"\n", DKDEBUG);
+			DKLog(classes[i]+"\n", DKINFO);
 		}
 
 		//Attempt to preload these
