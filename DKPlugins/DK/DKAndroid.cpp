@@ -119,7 +119,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 			DKAndroid::android_height = toInt(arry[2]);
 		}
 		DKAndroid::init();
-		return;
+		return NULL;
 	}
 	
 	if(!DKApp::active){ return NULL; }
@@ -127,15 +127,15 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	if(same(arry[0],"DKAndroid_exit")){
 		DKLog("DKAndroid::exit()\n", DKDEBUG);
 		DKApp::Exit();
-		return;
+		return NULL;
 	}
 	if(same(arry[0],"DKAndroid_step")){
 		DKApp::DoFrame();
-		return;
+		return NULL;
 	}
 	if(same(arry[0],"DKAndroid_loop")){
 		DKApp::Loop();
-		return;
+		return NULL;
 	}
 	
 	JavaData jdata;
