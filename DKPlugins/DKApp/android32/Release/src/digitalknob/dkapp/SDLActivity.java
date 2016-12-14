@@ -72,16 +72,17 @@ public class SDLActivity extends Activity implements Runnable
     public static int format;
     public static float refresh;
     
-	////////////////////////////
-    public void loadLibraries(){
-		Log.d("SDLActivity.java", "loadLibraries()");
+	///////////////////////////
+    public void loadLibraries()
+	{
+		Log.d("SDLActivity.java", "SDLActivity.loadLibraries()");
 		System.loadLibrary("SDL2");
     }
 	
 	///////////////////////////
     @Override public void run()
 	{
-		Log.d("SDLActivity.java", "run()");
+		Log.d("SDLActivity.java", "SDLActivity.run()");
         initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");
     	DK.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height)+","+Integer.toString(format)+","+Float.toString(refresh));
@@ -104,7 +105,7 @@ public class SDLActivity extends Activity implements Runnable
 	///////////////////////////////
     public static void initialize() 
 	{
-		Log.d("SDLActivity.java", "initialize()");
+		Log.d("SDLActivity.java", "SDLActivity.initialize()");
         // The static nature of the singleton and Android quirkyness force us to initialize everything here
         // Otherwise, when exiting the app and returning to it, these variables *keep* their pre exit values
         mSingleton = null;
@@ -124,7 +125,7 @@ public class SDLActivity extends Activity implements Runnable
     ////////////////////////////////////////////////////////////
     @Override protected void onCreate(Bundle savedInstanceState) 
 	{
-		Log.d("SDLActivity.java", "onCreate()");
+		Log.d("SDLActivity.java", "SDLActivity.onCreate()");
         Log.v("SDLActivity.java", "Device: " + android.os.Build.DEVICE);
         Log.v("SDLActivity.java", "Model: " + android.os.Build.MODEL);
         Log.v("SDLActivity.java", "onCreate(): " + mSingleton);
@@ -200,7 +201,7 @@ public class SDLActivity extends Activity implements Runnable
     //////////////////////////////////
     @Override protected void onPause()
 	{
-        Log.d("SDLActivity.java", "onPause()");
+        Log.d("SDLActivity.java", "SDLActivity.onPause()");
         super.onPause();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -213,7 +214,7 @@ public class SDLActivity extends Activity implements Runnable
 	///////////////////////////////////
     @Override protected void onResume()
 	{
-        Log.d("SDLActivity.java", "onResume()");
+        Log.d("SDLActivity.java", "SDLActivity.onResume()");
         super.onResume();
 
         if(SDLActivity.mBrokenLibraries){
@@ -226,7 +227,7 @@ public class SDLActivity extends Activity implements Runnable
 	////////////////////////////////////////////////////////////
     @Override public void onWindowFocusChanged(boolean hasFocus) 
 	{
-		Log.d("SDLActivity.java", "onWindowFocusChanged()");
+		Log.d("SDLActivity.java", "SDLActivity.onWindowFocusChanged()");
         super.onWindowFocusChanged(hasFocus);
         
         if(SDLActivity.mBrokenLibraries){
@@ -242,7 +243,7 @@ public class SDLActivity extends Activity implements Runnable
 	///////////////////////////////////
     @Override public void onLowMemory()
 	{
-        Log.d("SDLActivity.java", "onLowMemory()");
+        Log.d("SDLActivity.java", "SDLActivity.onLowMemory()");
         super.onLowMemory();
 
         if (SDLActivity.mBrokenLibraries) {
@@ -254,7 +255,7 @@ public class SDLActivity extends Activity implements Runnable
 	////////////////////////////////////
     @Override protected void onDestroy()
 	{
-        Log.d("SDLActivity.java", "onDestroy()");
+        Log.d("SDLActivity.java", "SDLActivity.onDestroy()");
 
         if (SDLActivity.mBrokenLibraries) {
            super.onDestroy();
@@ -287,6 +288,8 @@ public class SDLActivity extends Activity implements Runnable
 	/////////////////////////////////////////////////////////
     @Override public boolean dispatchKeyEvent(KeyEvent event)
 	{
+		Log.d("SDLActivity.java", "SDLActivity.dispatchKeyEvent()");
+		
         if (SDLActivity.mBrokenLibraries) {
            return false;
         }
@@ -310,6 +313,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void handlePause() 
 	{
+		Log.d("SDLActivity.java", "SDLActivity.handlePause()");
         if (!SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady) {
             SDLActivity.mIsPaused = true;
 			DK.CallCppFunction("DKAndroid_onPause");
@@ -323,6 +327,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void handleResume() 
 	{
+		Log.d("SDLActivity.java", "SDLActivity.handleResume()");
         if (SDLActivity.mIsPaused && SDLActivity.mIsSurfaceReady && SDLActivity.mHasFocus) {
             SDLActivity.mIsPaused = false;
 			DK.CallCppFunction("DKAndroid_onResume");
@@ -333,6 +338,7 @@ public class SDLActivity extends Activity implements Runnable
     /* The native thread has finished */
     public static void handleNativeExit() 
 	{
+		Log.d("SDLActivity.java", "SDLActivity.handleNativeExit()");
         SDLActivity.mSDLThread = null;
         mSingleton.finish();
     }
@@ -354,7 +360,9 @@ public class SDLActivity extends Activity implements Runnable
      * @param param the parameter of the message. May be null.
      * @return if the message was handled in overridden method.
      */
-    protected boolean onUnhandledMessage(int command, Object param) {
+    protected boolean onUnhandledMessage(int command, Object param) 
+	{
+		Log.d("SDLActivity.java", "SDLActivity.onUnhandledMessage()");
         return false;
     }
 
@@ -368,7 +376,7 @@ public class SDLActivity extends Activity implements Runnable
 		////////////////////////////////////////////////
         @Override public void handleMessage(Message msg) 
 		{
-			Log.d("SDLActivity.java", "handleMessage()");
+			Log.d("SDLActivity.java", "SDLCommandHandler.handleMessage()");
             Context context = getContext();
             if (context == null) {
                 Log.e("SDLActivity", "error handling message, getContext() returned null");
@@ -416,7 +424,7 @@ public class SDLActivity extends Activity implements Runnable
     // Send a message from the SDLMain thread
     boolean sendCommand(int command, Object data) 
 	{
-		Log.d("SDLActivity.java", "sendCommand()");
+		Log.d("SDLActivity.java", "SDLActivity.sendCommand()");
         Message msg = commandHandler.obtainMessage();
         msg.arg1 = command;
         msg.obj = data;
@@ -428,7 +436,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static boolean setActivityTitle(String title) 
 	{
-		Log.d("SDLActivity.java", "setActivityTitle()");
+		Log.d("SDLActivity.java", "SDLActivity.setActivityTitle()");
         // Called from SDLMain() thread and can't directly affect the view
         return mSingleton.sendCommand(COMMAND_CHANGE_TITLE, title);
     }
@@ -438,7 +446,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static boolean sendMessage(int command, int param) 
 	{
-		Log.d("SDLActivity.java", "sendMessage()");
+		Log.d("SDLActivity.java", "SDLActivity.sendMessage()");
         return mSingleton.sendCommand(command, Integer.valueOf(param));
     }
 
@@ -447,7 +455,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static Context getContext() 
 	{
-		Log.d("SDLActivity.java", "getContext()");
+		Log.d("SDLActivity.java", "SDLActivity.getContext()");
         return mSingleton;
     }
 
@@ -457,7 +465,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public Object getSystemServiceFromUiThread(final String name) 
 	{
-		Log.d("SDLActivity.java", "getSystemServiceFromUiThread()");
+		Log.d("SDLActivity.java", "SDLActivity.getSystemServiceFromUiThread()");
         final Object lock = new Object();
         final Object[] results = new Object[2]; // array for writable variables
         synchronized (lock) {
@@ -496,7 +504,7 @@ public class SDLActivity extends Activity implements Runnable
 		////////////////////////////////////////////////////
         public ShowTextInputTask(int x, int y, int w, int h) 
 		{
-			Log.d("SDLActivity.java", "ShowTextInputTask()");
+			Log.d("SDLActivity.java", "ShowTextInputTask.ShowTextInputTask()");
             this.x = x;
             this.y = y;
             this.w = w;
@@ -506,7 +514,7 @@ public class SDLActivity extends Activity implements Runnable
 		///////////////////////////
         @Override public void run() 
 		{
-			Log.d("SDLActivity.java", "ShowTextInputTask:run()");
+			Log.d("SDLActivity.java", "ShowTextInputTask.ShowTextInputTask:run()");
             AbsoluteLayout.LayoutParams params = new AbsoluteLayout.LayoutParams(
                     w, h + HEIGHT_PADDING, x, y);
 
@@ -531,7 +539,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static boolean showTextInput(int x, int y, int w, int h) 
 	{
-		Log.d("SDLActivity.java", "showTextInput()");
+		Log.d("SDLActivity.java", "SDLActivity.showTextInput()");
         // Transfer the task to the main thread as a Runnable
         return mSingleton.commandHandler.post(new ShowTextInputTask(x, y, w, h));
     }
@@ -541,7 +549,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static Surface getNativeSurface() 
 	{
-		Log.d("SDLActivity.java", "getNativeSurface()");
+		Log.d("SDLActivity.java", "SDLActivity.getNativeSurface()");
         return SDLActivity.mSurface.getNativeSurface();
     }
 
@@ -552,7 +560,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static int audioInit(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) 
 	{
-		Log.d("SDLActivity.java", "audioInit()");
+		Log.d("SDLActivity.java", "SDLActivity.audioInit()");
         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
@@ -591,7 +599,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void audioWriteShortBuffer(short[] buffer) 
 	{
-		//Log.d("SDLActivity.java", "audioWriteShortBuffer()");
+		//Log.d("SDLActivity.java", "SDLActivity.audioWriteShortBuffer()");
         for (int i = 0; i < buffer.length; ) {
             int result = mAudioTrack.write(buffer, i, buffer.length - i);
             if (result > 0) {
@@ -614,7 +622,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void audioWriteByteBuffer(byte[] buffer) 
 	{
-		//Log.d("SDLActivity.java", "audioWriteByteBuffer()");
+		//Log.d("SDLActivity.java", "SDLActivity.audioWriteByteBuffer()");
         for (int i = 0; i < buffer.length; ) {
             int result = mAudioTrack.write(buffer, i, buffer.length - i);
             if (result > 0) {
@@ -637,7 +645,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void audioQuit() 
 	{
-		Log.d("SDLActivity.java", "audioQuit()");
+		Log.d("SDLActivity.java", "SDLActivity.audioQuit()");
         if (mAudioTrack != null) {
             mAudioTrack.stop();
             mAudioTrack = null;
@@ -652,7 +660,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static int[] inputGetInputDeviceIds(int sources) 
 	{
-		Log.d("SDLActivity.java", "inputGetInputDeviceIds()");
+		Log.d("SDLActivity.java", "SDLActivity.inputGetInputDeviceIds()");
         int[] ids = InputDevice.getDeviceIds();
         int[] filtered = new int[ids.length];
         int used = 0;
@@ -668,7 +676,7 @@ public class SDLActivity extends Activity implements Runnable
     // Joystick glue code, just a series of stubs that redirect to the SDLJoystickHandler instance
     public static boolean handleJoystickMotionEvent(MotionEvent event) 
 	{
-		Log.d("SDLActivity.java", "handleJoystickMotionEvent()");
+		Log.d("SDLActivity.java", "SDLActivity.handleJoystickMotionEvent()");
         return mJoystickHandler.handleMotionEvent(event);
     }
 
@@ -677,7 +685,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void pollInputDevices() 
 	{
-		Log.d("SDLActivity.java", "pollInputDevices()");
+		Log.d("SDLActivity.java", "SDLActivity.pollInputDevices()");
         if (SDLActivity.mSDLThread != null) {
             mJoystickHandler.pollInputDevices();
         }
@@ -698,7 +706,7 @@ public class SDLActivity extends Activity implements Runnable
     @Deprecated
     public InputStream openAPKExtensionInputStream(String fileName) throws IOException 
 	{
-		Log.d("SDLActivity.java", "openAPKExtensionInputStream()");
+		Log.d("SDLActivity.java", "SDLActivity.openAPKExtensionInputStream()");
         return openAPKExpansionInputStream(fileName);
     }
 
@@ -709,7 +717,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public InputStream openAPKExpansionInputStream(String fileName) throws IOException 
 	{
-		Log.d("SDLActivity.java", "openAPKExpansionInputStream()");
+		Log.d("SDLActivity.java", "SDLActivity.openAPKExpansionInputStream()");
         // Get a ZipResourceFile representing a merger of both the main and patch files
         if (expansionFile == null) {
         	String mainHint = null;// = DK.CallCppFunction("DKAndroid_onGetHint,SDL_ANDROID_APK_EXPANSION_MAIN_FILE_VERSION");
@@ -787,7 +795,7 @@ public class SDLActivity extends Activity implements Runnable
     public int messageboxShowMessageBox(final int flags, final String title, final String message, final int[] buttonFlags,
 										final int[] buttonIds, final String[] buttonTexts, final int[] colors) 
 	{
-		Log.d("SDLActivity.java", "messageboxShowMessageBox()");
+		Log.d("SDLActivity.java", "SDLActivity.messageboxShowMessageBox()");
         messageboxSelection[0] = -1;
 
         // sanity checks
@@ -834,7 +842,7 @@ public class SDLActivity extends Activity implements Runnable
 
     @Override protected Dialog onCreateDialog(int ignore, Bundle args) 
 	{
-		Log.d("SDLActivity.java", "onCreateDialog()");
+		Log.d("SDLActivity.java", "SDLActivity.onCreateDialog()");
         // TODO set values from "flags" to messagebox dialog
 
         // get colors
@@ -986,7 +994,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
      // Startup
     public SDLSurface(Context context) {
     	
-		Log.d("SDLActivity.java", "SDLSurface()");
+		Log.d("SDLActivity.java", "SDLSurface.SDLSurface()");
         super(context);
         getHolder().addCallback(this);
 
@@ -1009,12 +1017,12 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public void handlePause() {
-		Log.d("SDLActivity.java", "handlePause()");
+		Log.d("SDLActivity.java", "SDLSurface.handlePause()");
         enableSensor(Sensor.TYPE_ACCELEROMETER, false);
     }
 
     public void handleResume() {
-		Log.d("SDLActivity.java", " handleResume()");
+		Log.d("SDLActivity.java", "SDLSurface.handleResume()");
         setFocusable(true);
         setFocusableInTouchMode(true);
         requestFocus();
@@ -1023,21 +1031,23 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         enableSensor(Sensor.TYPE_ACCELEROMETER, true);
     }
 
-    public Surface getNativeSurface() {
+    public Surface getNativeSurface() 
+	{
+		Log.d("SDLActivity.java", "SDLSurface.getNativeSurface()");
         return getHolder().getSurface();
     }
 
     // Called when we have a valid drawing surface
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.v("SDLActivity.java", "surfaceCreated()");
+        Log.d("SDLActivity.java", "SDLSurface.surfaceCreated()");
         holder.setType(SurfaceHolder.SURFACE_TYPE_GPU);
     }
 
     // Called when we lose the surface
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.v("SDLActivity.java", "surfaceDestroyed()");
+        Log.d("SDLActivity.java", "SDLSurface.surfaceDestroyed()");
         // Call this *before* setting mIsSurfaceReady to 'false'
         SDLActivity.handlePause();
         SDLActivity.mIsSurfaceReady = false;
@@ -1048,7 +1058,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     @Override
     public void surfaceChanged(SurfaceHolder holder,
                                int format, int width, int height) {
-        Log.v("SDLActivity.java", "surfaceChanged()");
+        Log.d("SDLActivity.java", "SDLSurface.surfaceChanged()");
         //setWillNotDraw(false);
     	
         int sdlFormat = 0x15151002; // SDL_PIXELFORMAT_RGB565 by default
@@ -1180,6 +1190,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Key events
     @Override
     public boolean onKey(View  v, int keyCode, KeyEvent event) {
+		Log.d("SDLActivity.java", "SDLSurface.onKey()");
         // Dispatch the different events depending on where they come from
         // Some SOURCE_DPAD or SOURCE_GAMEPAD are also SOURCE_KEYBOARD
         // So, we try to process them as DPAD or GAMEPAD events first, if that fails we try them as KEYBOARD
@@ -1218,6 +1229,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     ///////////////////////////////////////////////////////////
     @Override public boolean onTouch(View v, MotionEvent event)
 	{
+		Log.d("SDLActivity.java", "SDLSurface.onTouch()");
         /* Ref: http://developer.android.com/training/gestures/multi.html */
         final int touchDevId = event.getDeviceId();
         final int pointerCount = event.getPointerCount();
@@ -1304,6 +1316,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     // Sensor events
     public void enableSensor(int sensortype, boolean enabled) {
+		Log.d("SDLActivity.java", "SDLSurface.enableSensor()");
         // TODO: This uses getDefaultSensor - what if we have >1 accels?
         if (enabled) {
             mSensorManager.registerListener(this,
@@ -1317,11 +1330,13 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		Log.d("SDLActivity.java", "SDLSurface.onAccuracyChanged()");
         // TODO
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+		Log.d("SDLActivity.java", "SDLSurface.onSensorChanged()");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x, y;
             switch (mDisplay.getRotation()) {
@@ -1354,6 +1369,7 @@ class DummyEdit extends View implements View.OnKeyListener {
     InputConnection ic;
 
     public DummyEdit(Context context) {
+		Log.d("SDLActivity.java", "DummyEdit.DummyEdit()");
         super(context);
         setFocusableInTouchMode(true);
         setFocusable(true);
@@ -1362,12 +1378,14 @@ class DummyEdit extends View implements View.OnKeyListener {
 
     @Override
     public boolean onCheckIsTextEditor() {
+		Log.d("SDLActivity.java", "DummyEdit.onCheckIsTextEditor()");
         return true;
     }
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
 
+		Log.d("SDLActivity.java", "DummyEdit.onKey()");
         // This handles the hardware keyboard input
         if (event.isPrintingKey()) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -1390,6 +1408,7 @@ class DummyEdit extends View implements View.OnKeyListener {
     //
     @Override
     public boolean onKeyPreIme (int keyCode, KeyEvent event) {
+		Log.d("SDLActivity.java", "DummyEdit.onKeyPreIme()");
         // As seen on StackOverflow: http://stackoverflow.com/questions/7634346/keyboard-hide-event
         // FIXME: Discussion at http://bugzilla.libsdl.org/show_bug.cgi?id=1639
         // FIXME: This is not a 100% effective solution to the problem of detecting if the keyboard is showing or not
@@ -1406,6 +1425,7 @@ class DummyEdit extends View implements View.OnKeyListener {
 
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+		Log.d("SDLActivity.java", "DummyEdit.onCreateInputConnection()");
         ic = new SDLInputConnection(this, true);
 
         outAttrs.inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
@@ -1419,13 +1439,14 @@ class DummyEdit extends View implements View.OnKeyListener {
 class SDLInputConnection extends BaseInputConnection {
 
     public SDLInputConnection(View targetView, boolean fullEditor) {
+		Log.d("SDLActivity.java", "SDLInputConnection.SDLInputConnection()");
         super(targetView, fullEditor);
 
     }
 
     @Override
     public boolean sendKeyEvent(KeyEvent event) {
-
+		Log.d("SDLActivity.java", "SDLInputConnection.sendKeyEvent()");
         /*
          * This handles the keycodes from soft keyboard (and IME-translated
          * input from hardkeyboard)
@@ -1447,7 +1468,7 @@ class SDLInputConnection extends BaseInputConnection {
 
     @Override
     public boolean commitText(CharSequence text, int newCursorPosition) {
-
+		Log.d("SDLActivity.java", "SDLInputConnection.commitText()");
 		//DK.CallCppFunction("DKAndroid_onCommitText");
         nativeCommitText(text.toString(), newCursorPosition);
 
@@ -1456,7 +1477,7 @@ class SDLInputConnection extends BaseInputConnection {
 
     @Override
     public boolean setComposingText(CharSequence text, int newCursorPosition) {
-
+		Log.d("SDLActivity.java", "SDLInputConnection.setComposingText()");
 		//DK.CallCppFunction("DKAndroid_onComposingText");
         nativeSetComposingText(text.toString(), newCursorPosition);
 
@@ -1468,6 +1489,7 @@ class SDLInputConnection extends BaseInputConnection {
 
     @Override
     public boolean deleteSurroundingText(int beforeLength, int afterLength) {
+		Log.d("SDLActivity.java", "SDLInputConnection.deleteSurroundingText()");
         // Workaround to capture backspace key. Ref: http://stackoverflow.com/questions/14560344/android-backspace-in-webview-baseinputconnection
         if (beforeLength == 1 && afterLength == 0) {
             // backspace
@@ -1488,6 +1510,7 @@ class SDLJoystickHandler {
      * @return if given event was processed.
      */
     public boolean handleMotionEvent(MotionEvent event) {
+		Log.d("SDLActivity.java", "SDLJoystickHandler.handleMotionEvent()");
         return false;
     }
 
@@ -1495,6 +1518,7 @@ class SDLJoystickHandler {
      * Handles adding and removing of input devices.
      */
     public void pollInputDevices() {
+		Log.d("SDLActivity.java", "SDLJoystickHandler.pollInputDevices()");
     }
 }
 
