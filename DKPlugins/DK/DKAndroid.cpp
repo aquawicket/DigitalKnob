@@ -269,12 +269,12 @@ void DKAndroid::init()
 			DKLog(classes[i]+"\n", DKINFO);
 		}
 
+		DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
+		dkapp.Init();
+		
 		//Attempt to preload these
 		DKCreate("DKAssets");
 		DKCreate("DKDuktape");
-
-		DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
-		dkapp.Init();
 	}
 }
 
