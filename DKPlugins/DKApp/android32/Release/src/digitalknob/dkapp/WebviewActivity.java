@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;

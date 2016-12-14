@@ -984,6 +984,7 @@ public class SDLActivity extends Activity implements Runnable
 class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     View.OnKeyListener, View.OnTouchListener, SensorEventListener  {
 	
+	public static SurfaceView instance;
     // Sensors
     protected static SensorManager mSensorManager;
     protected static Display mDisplay;
@@ -996,6 +997,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     	
 		//Log.d("SDLActivity.java", "SDLSurface.SDLSurface()");
         super(context);
+		instance = this;
         getHolder().addCallback(this);
 
         setFocusable(true);
