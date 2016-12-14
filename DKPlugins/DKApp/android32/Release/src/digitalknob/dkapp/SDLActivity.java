@@ -1336,7 +1336,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-		Log.d("SDLActivity.java", "SDLSurface.onSensorChanged()");
+		//Log.d("SDLActivity.java", "SDLSurface.onSensorChanged()");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x, y;
             switch (mDisplay.getRotation()) {
