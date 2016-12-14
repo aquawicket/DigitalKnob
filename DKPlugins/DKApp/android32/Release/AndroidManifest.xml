@@ -23,7 +23,7 @@
         <activity android:name=".DKMain" />
         <activity android:name=".SDLActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name=".WebviewActivity" 
+        <activity android:name=".WebviewActivity" android:theme="@style/Theme.Transparent"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 </manifest>
