@@ -994,7 +994,7 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
      // Startup
     public SDLSurface(Context context) {
     	
-		Log.d("SDLActivity.java", "SDLSurface.SDLSurface()");
+		//Log.d("SDLActivity.java", "SDLSurface.SDLSurface()");
         super(context);
         getHolder().addCallback(this);
 
@@ -1369,7 +1369,7 @@ class DummyEdit extends View implements View.OnKeyListener {
     InputConnection ic;
 
     public DummyEdit(Context context) {
-		Log.d("SDLActivity.java", "DummyEdit.DummyEdit()");
+		//Log.d("SDLActivity.java", "DummyEdit.DummyEdit()");
         super(context);
         setFocusableInTouchMode(true);
         setFocusable(true);
@@ -1439,7 +1439,7 @@ class DummyEdit extends View implements View.OnKeyListener {
 class SDLInputConnection extends BaseInputConnection {
 
     public SDLInputConnection(View targetView, boolean fullEditor) {
-		Log.d("SDLActivity.java", "SDLInputConnection.SDLInputConnection()");
+		//Log.d("SDLActivity.java", "SDLInputConnection.SDLInputConnection()");
         super(targetView, fullEditor);
 
     }
