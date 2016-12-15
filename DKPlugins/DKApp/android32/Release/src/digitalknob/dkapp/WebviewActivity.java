@@ -80,8 +80,8 @@ public class WebviewActivity extends Activity {
 		/*
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(640, 480);
         params.leftMargin = 30;
-        params.topMargin = 100;
-        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        params.bottomMargin = 100;
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
         mWebView.setLayoutParams(params);
 		*/
 
