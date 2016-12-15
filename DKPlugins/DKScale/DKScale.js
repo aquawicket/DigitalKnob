@@ -27,6 +27,7 @@ function DKScale_Resize()
 	//Set the scale
 	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
 		var pixel_ratio = DKWindow_GetPixelRatio();
+		DKLog("DKWindow_GetPixelRatio() = "+pixel_ratio+"\n", DKINFO);
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
 			pixel_ratio = 2.0;
 			DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
