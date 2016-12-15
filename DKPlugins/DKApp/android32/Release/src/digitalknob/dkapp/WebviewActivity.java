@@ -34,6 +34,8 @@ import android.util.Log;
 public class WebviewActivity extends Activity {
 
     String homepage = "http://google.com";
+	//String homepage = "file:////mnt/sdcard/appname/index.html";
+	
     private ValueCallback<Uri> mUploadMessage;
     private final static int FILECHOOSER_RESULTCODE=1;
     private WebView mWebView;
@@ -57,9 +59,11 @@ public class WebviewActivity extends Activity {
         //mWebView.setBackgroundColor(Color.parseColor("#000000"));
 
         // Enable Javascript
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        //mWebView.getSettings().setMinimumFontSize(40);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+
+        mWebView.getSettings().setAllowFileAccess(true);
+        mWebView.getSettings().setAllowFileAccessFromFileURLs(true);
+        mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new myWebViewClient());
