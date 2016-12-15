@@ -685,7 +685,7 @@ public class SDLActivity extends Activity implements Runnable
      */
     public static void pollInputDevices() 
 	{
-		Log.d("SDLActivity.java", "SDLActivity.pollInputDevices()");
+		//Log.d("SDLActivity.java", "SDLActivity.pollInputDevices()");
         if (SDLActivity.mSDLThread != null) {
             mJoystickHandler.pollInputDevices();
         }
