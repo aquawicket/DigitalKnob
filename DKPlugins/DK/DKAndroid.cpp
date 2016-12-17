@@ -41,6 +41,7 @@ void exitJNIBridge(JNIEnv* env, jobject obj)
 	env->DeleteGlobalRef(theobj);
 }
 
+//FIXME: this needs to fail without crashing
 //////////////////////////////////////////////////////////////////
 void CallJavaFunction(const DKString& name, const DKString& param)
 {
