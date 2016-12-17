@@ -55,7 +55,15 @@ public class DK extends Activity
 			public void run(){
 				copyAssets();
 				OpenActivity("SDLActivity");
-				//OpenActivity("WebviewActivity");
+				
+				//This gives DK time to register functions for Webview
+				Handler handler2 = new Handler();
+				handler2.postDelayed(new Runnable() {
+					@Override
+					public void run(){
+						OpenActivity("WebviewActivity");
+					}
+				}, 2000);
 			}
 		}, 2000);
 	}
