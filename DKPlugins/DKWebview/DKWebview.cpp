@@ -44,7 +44,8 @@ void* DKWebview::onCreate(void* data)
 	//DKStringArray arry;
 	//toStringArray(arry, _data, ",");
 	//jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
-	CallJavaFunction("CallMe","");
+	
+	//CallJavaFunction("CallMe","");
 	return NULL;
 }
 
