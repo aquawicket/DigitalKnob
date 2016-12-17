@@ -19,6 +19,10 @@ public:
 	static void Reload();
 	static void RunJavascript(const DKString& code);
 
+	//TODO
+	//static void CreateObject(const DKString& name);
+	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);
+
 	static duk_context* ctx;
 	static DKStringArray filelist;
 	static DKStringArray functions;

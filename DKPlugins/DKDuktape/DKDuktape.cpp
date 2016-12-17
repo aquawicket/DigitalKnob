@@ -365,3 +365,15 @@ void DKDuktape::EventLoop()
 		duk_pop(ctx);
 	}
 }
+
+//TODO
+//////////////////////////////////////////////////
+/*
+void DKDuktape::CreateObject(const DKString& name)
+{
+	DKString objname = "_"+name;
+	duk_put_global_string(ctx, objname.c_str());
+	DKString eval = "var "+name+" new "+objname+"()";
+	duk_eval_string(ctx, eval.c_str());
+}
+*/

@@ -21,6 +21,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -36,6 +37,7 @@ public class WebviewActivity extends Activity {
     String homepage = "http://google.com";
 	//String homepage = "file:////mnt/sdcard/appname/index.html";
 	
+	public WebviewActivity webviewActivity;
     private ValueCallback<Uri> mUploadMessage;
     private final static int FILECHOOSER_RESULTCODE=1;
     private WebView mWebView;
@@ -45,6 +47,7 @@ public class WebviewActivity extends Activity {
 	{
 		Log.d("WebviewActivity.java", "onCreate");
         super.onCreate(savedInstanceState);
+		webviewActivity = this;
         setContentView(R.layout.webview);
 
         mWebView=(WebView)findViewById(R.id.webview_webview);
@@ -190,10 +193,20 @@ public class WebviewActivity extends Activity {
         });
         */
 
+		mWebView.addJavascriptInterface(new JavaScriptInterface(), "DK");
+        mWebView.loadUrl("javascript:function callFromJS(){ DK.callFromJS(); }");
+		
         mWebView.loadUrl(homepage);
 		DK.CallCppFunction("DKWebview_onCreate()");
     }
 
+	/////////////////////////////////
+	private class JavaScriptInterface
+    {
+        @JavascriptInterface public void callFromJS(){
+            Toast.makeText(webviewActivity, "JavaScript interface call", Toast.LENGTH_LONG).show();
+        }
+    }
 	
     boolean doubleBackToExitPressedOnce = false;
 	/////////////////////////////////////
