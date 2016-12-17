@@ -197,7 +197,7 @@ public class WebviewActivity extends Activity {
         mWebView.loadUrl("javascript:function callFromJS(){ DK.callFromJS(); }");
 		
         mWebView.loadUrl(homepage);
-		DK.CallCppFunction("DKWebview_onCreate()");
+		DK.CallCppFunction("DKWebview_onCreate");
     }
 
 	/////////////////////////////////
