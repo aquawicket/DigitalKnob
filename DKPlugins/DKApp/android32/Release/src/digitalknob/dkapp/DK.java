@@ -61,7 +61,7 @@ public class DK extends Activity
 				handler2.postDelayed(new Runnable() {
 					@Override
 					public void run(){
-						OpenActivity("WebviewActivity");
+						//OpenActivity("WebviewActivity");
 					}
 				}, 2000);
 			}
