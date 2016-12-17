@@ -95,7 +95,12 @@ public class DK extends Activity
 		startActivity(intent);
 	}
 
-
+	////////////////////
+    public void CallMe()
+    {
+        Log.d("DK.java", "CallMe()");
+    }
+	
 	/////////////////////////
 	private void copyAssets()
 	{
