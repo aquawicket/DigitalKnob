@@ -208,7 +208,8 @@ public class WebviewActivity extends Activity
 	////////////////////
     public void CallMe()
     {
-        Log.d("WebviewActivity.java", "CallMe()");
+        Log.d("DK.java", "CallMe()");
+		WebviewActivity.instance.CallMe();
     }
 	
     boolean doubleBackToExitPressedOnce = false;
