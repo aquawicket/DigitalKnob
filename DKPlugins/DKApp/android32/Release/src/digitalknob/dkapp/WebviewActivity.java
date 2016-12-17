@@ -36,7 +36,7 @@ import android.util.Log;
 /////////////////////////////////////////////
 public class WebviewActivity extends Activity 
 {
-	public WebviewActivity instance;
+	public static WebviewActivity instance;
     String homepage = "http://google.com";
 	//String homepage = "file:////mnt/sdcard/appname/index.html";
 	
