@@ -12,7 +12,7 @@ void DKWebview::Init()
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
 	//This will cause SDKActivity to pause and make things go haywire. 
-	CallJavaFunction("OpenActivity", "WebviewActivity");
+	//CallJavaFunction("OpenActivity", "WebviewActivity");
 }
 
 /////////////////////
