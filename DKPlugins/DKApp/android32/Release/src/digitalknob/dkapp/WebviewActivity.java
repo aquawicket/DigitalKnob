@@ -32,12 +32,14 @@ import android.widget.Toast;
 import android.widget.RelativeLayout;
 import android.util.Log;
 
-public class WebviewActivity extends Activity {
 
+/////////////////////////////////////////////
+public class WebviewActivity extends Activity 
+{
+	public WebviewActivity instance;
     String homepage = "http://google.com";
 	//String homepage = "file:////mnt/sdcard/appname/index.html";
 	
-	public WebviewActivity webviewActivity;
     private ValueCallback<Uri> mUploadMessage;
     private final static int FILECHOOSER_RESULTCODE=1;
     private WebView mWebView;
@@ -47,9 +49,9 @@ public class WebviewActivity extends Activity {
 	{
 		Log.d("WebviewActivity.java", "onCreate");
         super.onCreate(savedInstanceState);
-		webviewActivity = this;
+		instance = this;
+		
         setContentView(R.layout.webview);
-
         mWebView=(WebView)findViewById(R.id.webview_webview);
 
 		if (0 != (getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE)){
@@ -58,12 +60,7 @@ public class WebviewActivity extends Activity {
         mWebView.setInitialScale(1);
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
-        //mWebView.setBackgroundColor(0);
-        //mWebView.setBackgroundColor(Color.parseColor("#000000"));
-
-        // Enable Javascript
         mWebView.getSettings().setJavaScriptEnabled(true);
-
         mWebView.getSettings().setAllowFileAccess(true);
         mWebView.getSettings().setAllowFileAccessFromFileURLs(true);
         mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
@@ -204,7 +201,7 @@ public class WebviewActivity extends Activity {
 	private class JavaScriptInterface
     {
         @JavascriptInterface public void callFromJS(){
-            Toast.makeText(webviewActivity, "JavaScript interface call", Toast.LENGTH_LONG).show();
+            Toast.makeText(WebviewActivity.instance, "JavaScript interface call", Toast.LENGTH_LONG).show();
         }
     }
 	

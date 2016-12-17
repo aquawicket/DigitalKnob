@@ -39,6 +39,7 @@ import android.content.res.AssetManager;
 /////////////////////////////////////////////////////////////
 public class SDLActivity extends Activity implements Runnable
 {
+	public static SDLActivity instance;
 	public static native int initSDL(Object arguments);
 
     // Keep track of the paused state
@@ -83,6 +84,8 @@ public class SDLActivity extends Activity implements Runnable
     @Override public void run()
 	{
 		Log.d("SDLActivity.java", "SDLActivity.run()");
+		instance = this; 
+		
         initSDL(mSingleton.getArguments());
     	DK.CallCppFunction("DKAndroid_init");
     	DK.CallCppFunction("DKAndroid_onResize,"+Integer.toString(width)+","+Integer.toString(height)+","+Integer.toString(format)+","+Float.toString(refresh));
