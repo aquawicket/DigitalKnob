@@ -208,6 +208,12 @@ public class WebviewActivity extends Activity {
         }
     }
 	
+	////////////////////
+    public void CallMe()
+    {
+        Log.d("WebviewActivity.java", "CallMe()");
+    }
+	
     boolean doubleBackToExitPressedOnce = false;
 	/////////////////////////////////////
     @Override public void onBackPressed() 
