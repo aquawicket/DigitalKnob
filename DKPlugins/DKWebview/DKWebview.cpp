@@ -8,6 +8,7 @@ void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
+	DKClass::RegisterFunc("DK_PrintFunctions", &DKWebview::PrintFunctions, this);
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
@@ -34,6 +35,14 @@ void* DKWebview::Test(void* data)
 	return NULL;
 }
 */
+
+///////////////////////////////////////////
+void* DKWebview::PrintFunctions(void* data)
+{
+	DKLog("\n**** Webview Functions ****\n", DKINFO);
+	DKLog("TODO: DKWebview.cpp\n", DKINFO);
+	return NULL;
+}
 
 /////////////////////////////////////
 void* DKWebview::onCreate(void* data)
