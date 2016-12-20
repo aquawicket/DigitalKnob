@@ -24,7 +24,8 @@ public class DK extends Activity
 	public native void initJNIBridge();
 	public native void exitJNIBridge();
 	public static native void CallCppFunction(String data);
-
+	//public static native String CallCppFunction(String data);
+	
 	static {
 		System.loadLibrary("DKAndroid");
 	}

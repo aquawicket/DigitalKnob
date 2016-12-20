@@ -191,18 +191,23 @@ public class WebviewActivity extends Activity
         */
 
 		mWebView.addJavascriptInterface(new JavaScriptInterface(), "DK");
-        //AttachFunction("function callFromJS(){ DK.CallCppFunction('DK_PrintFunctions'); }");
-		
         mWebView.loadUrl(homepage);
 		DK.CallCppFunction("DKWebview_onCreate");
     }
 
 	/////////////////////////////////
-	private class JavaScriptInterface
+    private class JavaScriptInterface
     {
-        @JavascriptInterface public void CallCppFunction(String string){
-            //Toast.makeText(WebviewActivity.instance, "CallCppFunction("+string+")", Toast.LENGTH_LONG).show();
-            DK.CallCppFunction(string);
+        @JavascriptInterface public void CallCppFunction(String name){
+            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+name+")", Toast.LENGTH_LONG).show();
+            DK.CallCppFunction(name);
+            //String rval = DK.CallCppFunction(name);
+        }
+
+        @JavascriptInterface public void CallCppFunction(String name, String data){
+            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+name+","+data+")", Toast.LENGTH_LONG).show();
+            DK.CallCppFunction(name);
+            //String rval = DK.CallCppFunction(name);
         }
     }
 
@@ -210,7 +215,7 @@ public class WebviewActivity extends Activity
     public void AttachFunction(String string)
     {
         Log.d("WebviewActivity.java", "AttachFunction("+string+")");
-        //mWebView.loadUrl("javascript:function callFromJS(){ DK.CallCppFunction('DK_PrintFunctions'); }");
+        //mWebView.loadUrl("javascript:function myfunc(){ DK.CallCppFunction('myfunc'); }");
         mWebView.loadUrl("javascript:"+string);
     }
 	
