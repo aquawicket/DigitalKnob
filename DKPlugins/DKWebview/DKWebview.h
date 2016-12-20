@@ -13,6 +13,8 @@ public:
 	void End();
 	
 	//void* Test(void* data);
+	void* ReceiveValue(void* data);
+	
 	void* GetScreenHeight(void* data);
 	void* PrintFunctions(void* data);
 	void* onCreate(void* data);
