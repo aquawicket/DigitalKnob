@@ -87,11 +87,12 @@ public class DK extends Activity
 		startActivity(intent);
 	}
 
-	////////////////////
-    public void CallMe()
-    {
-        Log.d("DK.java", "CallMe()");
-    }
+	/////////////////////////////////////////
+	public void AttachFunction(String string)
+	{
+		Log.d("DK.java", "AttachFunction("+string+")");
+		WebviewActivity.instance.AttachFunction(string);
+	}
 	
 	/////////////////////////
 	private void copyAssets()

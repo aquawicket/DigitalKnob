@@ -191,7 +191,7 @@ public class WebviewActivity extends Activity
         */
 
 		mWebView.addJavascriptInterface(new JavaScriptInterface(), "DK");
-        mWebView.loadUrl("javascript:function callFromJS(){ DK.callFromJS(); }");
+        //AttachFunction("function callFromJS(){ DK.CallCppFunction('DK_PrintFunctions'); }");
 		
         mWebView.loadUrl(homepage);
 		DK.CallCppFunction("DKWebview_onCreate");
@@ -200,16 +200,18 @@ public class WebviewActivity extends Activity
 	/////////////////////////////////
 	private class JavaScriptInterface
     {
-        @JavascriptInterface public void callFromJS(){
-            Toast.makeText(WebviewActivity.instance, "JavaScript interface call", Toast.LENGTH_LONG).show();
+        @JavascriptInterface public void CallCppFunction(String string){
+            //Toast.makeText(WebviewActivity.instance, "CallCppFunction("+string+")", Toast.LENGTH_LONG).show();
+            DK.CallCppFunction(string);
         }
     }
-	
-	////////////////////
-    public void CallMe()
+
+    /////////////////////////////////////////
+    public void AttachFunction(String string)
     {
-        Log.d("DK.java", "CallMe()");
-		WebviewActivity.instance.CallMe();
+        Log.d("DK.java", "AttachFunction("+string+")");
+        //mWebView.loadUrl("javascript:function callFromJS(){ DK.CallCppFunction('DK_PrintFunctions'); }");
+        mWebView.loadUrl("javascript:"+string);
     }
 	
     boolean doubleBackToExitPressedOnce = false;
