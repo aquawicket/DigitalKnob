@@ -9,6 +9,7 @@ void DKWebview::Init()
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
+	DKClass::RegisterFunc("DK_GetScreenHeight", &DKWebview::GetScreenHeight, this);
 	DKClass::RegisterFunc("DK_PrintFunctions", &DKWebview::PrintFunctions, this);
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
@@ -26,6 +27,7 @@ void DKWebview::End()
 void* DKWebview::onCreate(void* data)
 {
 	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
+	CallJavaFunction("AttachFunction", "function DK_GetScreenHeight(){ return DK.CallCppFunction('DK_GetScreenHeight'); }");
 	CallJavaFunction("AttachFunction", "function DK_PrintFunctions(){ DK.CallCppFunction('DK_PrintFunctions'); }");
 	return NULL;
 }
@@ -43,6 +45,26 @@ void* DKWebview::Test(void* data)
 	return NULL;
 }
 */
+
+////////////////////////////////////////////
+void* DKWebview::GetScreenHeight(void* data)
+{
+	JavaData jd = *static_cast<JavaData*>(data);
+	int height;
+	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
+		height = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenHeight"));
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
+		height = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenHeight"));
+	}
+	else{
+		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
+		return NULL;
+	}
+
+	jstring rval = jd.env->NewStringUTF(toString(height).c_str());
+	return static_cast<void*>(&rval);
+}
 
 ///////////////////////////////////////////
 void* DKWebview::PrintFunctions(void* data)
