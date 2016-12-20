@@ -56,6 +56,9 @@ void* DKWebview::ReceiveValue(void* data)
 	JavaData jd = *static_cast<JavaData*>(data);
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKLog("DKWebview::ReceiveValue("+DKString(_data)+")\n", DKDEBUG);
+	DKStringArray arry;
+	toStringArray(arry, _data, ",");
+	DKLog("DKWebview::ReceiveValue("+DKString(_data)+"): value = "+arry[1]+"\n", DKDEBUG);
 	return NULL;
 }
 
