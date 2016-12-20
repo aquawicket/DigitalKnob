@@ -12,7 +12,7 @@ public:
 	void Init();
 	void End();
 	
-	static jstring jstring_rval;
+	//static jstring jstring_rval;
 	
 	//void* Test(void* data);
 	void* SendValue(void* data);

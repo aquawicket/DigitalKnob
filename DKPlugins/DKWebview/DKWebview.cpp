@@ -4,7 +4,12 @@
 #include "DKAndroid.h"
 
 
-jstring DKWebview::jstring_rval;
+//jstring DKWebview::jstring_rval;
+///////////
+extern "C"
+{
+	jstring jstring_rval;
+}
 
 //////////////////////
 void DKWebview::Init()
@@ -61,8 +66,8 @@ void* DKWebview::SendValue(void* data)
 	jstring_rval = jd.env->NewStringUTF("Test");
 	
 	//FIXME: this will crash android
-	//return static_cast<void*>(&jstring_rval);	
-	return NULL;
+	return static_cast<void*>(&jstring_rval);	
+	//return NULL;
 }
 
 /////////////////////////////////////////
