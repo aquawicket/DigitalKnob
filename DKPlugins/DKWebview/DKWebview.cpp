@@ -3,6 +3,9 @@
 #include "DKWebview.h"
 #include "DKAndroid.h"
 
+
+jstring DKWebview::jstring_rval;
+
 //////////////////////
 void DKWebview::Init()
 {
@@ -57,7 +60,8 @@ void* DKWebview::SendValue(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	DKLog("DKWebview::SendValue()\n", DKDEBUG);
-	return static_cast<void*>(new jstring(jd.env->NewStringUTF("Test")));	
+	jstring_rval = jd.env->NewStringUTF("Test");
+	return static_cast<void*>(&jstring_rval);	
 }
 
 /////////////////////////////////////////
@@ -91,7 +95,7 @@ void* DKWebview::GetScreenHeight(void* data)
 	jstring rval = jd.env->NewStringUTF(toString(height).c_str()); //FIXME
 	return NULL;
 	
-	return static_cast<void*>(&rval); //FIXME
+	//return static_cast<void*>(&rval); //FIXME
 
 }
 
