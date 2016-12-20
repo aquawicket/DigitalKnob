@@ -8,6 +8,7 @@ void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
+	DKClass::RegisterFunc("DK_SendValue", &DKWebview::SendValue, this);
 	DKClass::RegisterFunc("DK_ReceiveValue", &DKWebview::ReceiveValue, this);
 	
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
@@ -29,6 +30,7 @@ void DKWebview::End()
 void* DKWebview::onCreate(void* data)
 {
 	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
+	CallJavaFunction("AttachFunction", "function DK_SendValue(){ return DK.CallCppFunction('DK_SendValue'); }");
 	CallJavaFunction("AttachFunction", "function DK_ReceiveValue(string){ DK.CallCppFunction('DK_ReceiveValue,'+string); }");
 	
 	CallJavaFunction("AttachFunction", "function DK_GetScreenHeight(){ return DK.CallCppFunction('DK_GetScreenHeight'); }");
@@ -49,6 +51,14 @@ void* DKWebview::Test(void* data)
 	return NULL;
 }
 */
+
+//////////////////////////////////////
+void* DKWebview::SendValue(void* data)
+{
+	JavaData jd = *static_cast<JavaData*>(data);
+	DKLog("DKWebview::SendValue()\n", DKDEBUG);
+	return static_cast<void*>(new jstring(jd.env->NewStringUTF("Test")));	
+}
 
 /////////////////////////////////////////
 void* DKWebview::ReceiveValue(void* data)
@@ -78,15 +88,11 @@ void* DKWebview::GetScreenHeight(void* data)
 		return NULL;
 	}
 
-	DKLog("DKWebview::GetScreenHeight(): rval = "+toString(height)+"\n", DKDEBUG);
+	jstring rval = jd.env->NewStringUTF(toString(height).c_str()); //FIXME
+	return NULL;
 	
-	//jstring rval = jd.env->NewStringUTF(toString(height).c_str());
+	return static_cast<void*>(&rval); //FIXME
 
-	//return NULL;	
-	//return static_cast<void*>(&rval);
-	
-	DKString _height = toString(height);
-	return static_cast<void*>(new jstring(jd.env->NewStringUTF(_height.c_str())));
 }
 
 ///////////////////////////////////////////

@@ -13,6 +13,7 @@ public:
 	void End();
 	
 	//void* Test(void* data);
+	void* SendValue(void* data);
 	void* ReceiveValue(void* data);
 	
 	void* GetScreenHeight(void* data);
