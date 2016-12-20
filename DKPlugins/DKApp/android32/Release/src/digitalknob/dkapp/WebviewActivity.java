@@ -209,7 +209,7 @@ public class WebviewActivity extends Activity
     /////////////////////////////////////////
     public void AttachFunction(String string)
     {
-        Log.d("DK.java", "AttachFunction("+string+")");
+        Log.d("WebviewActivity.java", "AttachFunction("+string+")");
         //mWebView.loadUrl("javascript:function callFromJS(){ DK.CallCppFunction('DK_PrintFunctions'); }");
         mWebView.loadUrl("javascript:"+string);
     }
