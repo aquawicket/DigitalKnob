@@ -66,8 +66,8 @@ void* DKWebview::SendValue(void* data)
 	jstring_rval = jd.env->NewStringUTF("Test");
 	
 	//FIXME: this will crash android
-	return static_cast<void*>(&jstring_rval);	
-	//return NULL;
+	//return static_cast<void*>(&jstring_rval);	
+	return NULL;
 }
 
 /////////////////////////////////////////
