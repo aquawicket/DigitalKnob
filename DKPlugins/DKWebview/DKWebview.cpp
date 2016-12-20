@@ -78,6 +78,7 @@ void* DKWebview::GetScreenHeight(void* data)
 		return NULL;
 	}
 
+	return NULL;
 	jstring rval = jd.env->NewStringUTF(toString(height).c_str());
 	return static_cast<void*>(&rval);
 }

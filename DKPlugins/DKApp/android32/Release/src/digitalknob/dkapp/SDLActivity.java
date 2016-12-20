@@ -1590,7 +1590,8 @@ class SDLJoystickHandler_API12 extends SDLJoystickHandler {
                     }
 
                     mJoysticks.add(joystick);
-                    DK.CallCppFunction("DKAndroid_onAddJoystick,"+Integer.toString(joystick.device_id)+","+joystick.name+",0,-1,"+Integer.toString(joystick.axes.size())+","+Integer.toString(joystick.hats.size()/2)+",0");
+                    
+					//FIXME: causes crash					//DK.CallCppFunction("DKAndroid_onAddJoystick,"+Integer.toString(joystick.device_id)+","+joystick.name+",0,-1,"+Integer.toString(joystick.axes.size())+","+Integer.toString(joystick.hats.size()/2)+",0");
                 }
             }
         }

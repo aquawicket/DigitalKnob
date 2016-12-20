@@ -198,16 +198,9 @@ public class WebviewActivity extends Activity
 	/////////////////////////////////
     private class JavaScriptInterface
     {
-        @JavascriptInterface public void CallCppFunction(String name){
-            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+name+")", Toast.LENGTH_LONG).show();
-            DK.CallCppFunction(name);
-            //String rval = DK.CallCppFunction(name);
-        }
-
-        @JavascriptInterface public void CallCppFunction(String name, String data){
-            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+name+","+data+")", Toast.LENGTH_LONG).show();
-            DK.CallCppFunction(name);
-            //String rval = DK.CallCppFunction(name);
+        @JavascriptInterface public String CallCppFunction(String data){
+            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+data+")", Toast.LENGTH_LONG).show();
+            return DK.CallCppFunction(data);
         }
     }
 
