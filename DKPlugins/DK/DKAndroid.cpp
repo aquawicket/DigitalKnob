@@ -144,7 +144,25 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	jdata.cls = cls;
 	jdata.data = data;
 	
-	return static_cast<jstring>(DKClass::CallFunc(arry[0], static_cast<void*>(&jdata)));
+	//return static_cast<jstring>(DKClass::CallFunc(arry[0], static_cast<void*>(&jdata)));
+	DKString* string = static_cast<DKString*>(DKClass::CallFunc(arry[0], static_cast<void*>(&jdata)));
+	if(!string){ return NULL; }
+	DKString rval = *string;
+	
+	if(rval.empty()){ return NULL; }
+	jclass strClass = env->FindClass("java/lang/String"); 
+	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
+	jstring encoding = env->NewStringUTF("GBK"); 
+
+	jbyteArray bytes = env->NewByteArray(strlen(rval.c_str())); 
+	env->SetByteArrayRegion(bytes, 0, strlen(rval.c_str()), (jbyte*)rval.c_str()); 
+	jstring str = (jstring)env->NewObject(strClass, ctorID, bytes, encoding);
+	return str;
+
+	//char *buf = (char*)malloc(5);
+	//strcpy(buf, "Test"); // with the null terminator the string adds up to 5 bytes
+	//jstring jstrBuf = env->NewStringUTF(buf);
+	//return jstrBuf;
 	
 	/*
 	////////   SDL  /////////////////////////////////

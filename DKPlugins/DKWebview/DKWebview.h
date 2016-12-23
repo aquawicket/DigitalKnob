@@ -12,7 +12,7 @@ public:
 	void Init();
 	void End();
 	
-	//static jstring jstring_rval;
+	static DKString dkstring_rval;
 	
 	//void* Test(void* data);
 	void* SendValue(void* data);
