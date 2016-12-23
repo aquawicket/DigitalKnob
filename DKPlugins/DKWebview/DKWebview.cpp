@@ -49,8 +49,8 @@ void* DKWebview::Test(void* data)
 	DKLog("DKWebview::Test("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
-	jstring text = jd.env->NewStringUTF(arry[0].c_str()); //var1
-	return NULL;
+	dkstring_rval = arry[0];
+	return static_cast<void*>(&dkstring_rval);
 }
 */
 
@@ -59,12 +59,8 @@ void* DKWebview::SendValue(void* data)
 {
 	JavaData jd = *static_cast<JavaData*>(data);
 	DKLog("DKWebview::SendValue()\n", DKDEBUG);
-	//jstring_rval = jd.env->NewStringUTF("Test");
-	
-	//FIXME: this will crash android
 	dkstring_rval = "Test";
 	return static_cast<void*>(&dkstring_rval);
-	return NULL;
 }
 
 /////////////////////////////////////////
