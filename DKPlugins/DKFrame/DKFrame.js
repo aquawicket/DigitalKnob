@@ -115,8 +115,8 @@ function DKFrame_CreateFrame(title, width, height)
 	if(!width){ width = "300"; }
 	if(!height){ height = "300"; }
 	var newheight = parseFloat(height)+2.1;
-	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 2.1);
-	var newleft = parseFloat((window_width / 2) - (width / 2));
+	var newtop = parseFloat((window_height / 2) - (newheight / 2 * 10) - 2.1);
+	var newleft = parseFloat((window_width / 2) - (width / 2 * 10));
 	
 	var frame = DKWidget_CreateElement("body", "div", "frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
