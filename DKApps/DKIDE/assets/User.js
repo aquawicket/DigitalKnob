@@ -37,10 +37,12 @@ else{
 	DKCreate("DKScale/DKScale.js", function(){});
 	DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKDev/DKDev.js", function(){});
+	/*
 	DKCreate("DKDev/DKMenuRight.js", function(){
 		DKWidget_RemoveProperty("DKMenuRight.html","left");
 		DKWidget_SetProperty("DKMenuRight.html","right","0rem");
 	});
+	*/
 	DKCreate("DKDebug/Input.js", function(){});
 	
 	/*
