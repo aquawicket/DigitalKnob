@@ -21,7 +21,7 @@ function DKMenuRightTree_OnEvent(event)
 		DKMenuRightTree_UpdateTree();
 	}
 	if(DK_Id(event,"PlusImage")){
-		DKLog("PlusImage clicked \n");
+		DKLog("PlusImage clicked \n", DKINFO);
 	}
 }
 
@@ -36,10 +36,10 @@ function DKMenuRightTree_UpdateTree()
 	for(i=0; i < element.length; ++i){
 		var id = DKWidget_CreateElement("DKMenuRightTree.html", "div", "TreeDiv"+i);
 		DKWidget_SetProperty(id, "position", "absolute");
-		DKWidget_SetProperty(id, "top", "10rem");
-		DKWidget_SetProperty(id, "left", "10rem");
-		DKWidget_SetProperty(id, "width", "100rem");
-		DKWidget_SetProperty(id, "height", "20rem");
+		DKWidget_SetProperty(id, "top", "1.0rem");
+		DKWidget_SetProperty(id, "left", "1.0rem");
+		DKWidget_SetProperty(id, "width", "10.0rem");
+		DKWidget_SetProperty(id, "height", "2.0rem");
 		DKWidget_SetProperty(id, "color", "rgb(200,200,200)");
 		var string = "<img id=\"PlusImage\" style=\"display:inline;position:relative;\" src=\"DKDev/plus.png\"></img> "+element[i];	
 		DKWidget_SetInnerHtml(id, string);
