@@ -30,12 +30,12 @@ function DKScale_Resize()
 		var pixel_ratio = DKWindow_GetPixelRatio();
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
 			pixel_ratio = 2.0;
-			DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
-			DKLog("DKScale_Resize(): scale set to "+pixel_ratio+"px\n", DKINFO);
+			DKWidget_SetProperty("html", "font-size", pixel_ratio*10+"px");
+			DKLog("DKScale_Resize(): scale set to "+pixel_ratio*10+"px\n", DKINFO);
 		}
 	}
 	else{
-		DKWidget_SetProperty("html", "font-size", "1px");
-		DKLog("DKScale_Resize(): scale set to 1px\n", DKINFO);
+		DKWidget_SetProperty("html", "font-size", "10px");
+		DKLog("DKScale_Resize(): scale set to 10px\n", DKINFO);
 	}
 }

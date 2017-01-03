@@ -5,9 +5,9 @@ top.document.body.style.backgroundColor = "rgb(200,200,200)";
 document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
 document.body.id = "body";
-document.body.style.fontSize = "13em";
+document.body.style.fontSize = "1.3em";
 document.documentElement.id = "html";
-document.documentElement.style.fontSize = "1.0px";
+document.documentElement.style.fontSize = "10px";
 
 
 var mouseX;
@@ -184,6 +184,9 @@ function GetWidthPx(element)
 {
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
+	if(element.style.width.indexOf("rem") > -1){
+		return parseInt(element.style.width) * 10;
+	}
 	if(element.style.width.indexOf("%") > -1){
 		return parseInt(element.style.width) * WindowWidth() / 100;
 	}
@@ -195,6 +198,9 @@ function GetHeightPx(element)
 {
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
+	if(element.style.height.indexOf("rem") > -1){
+		return parseInt(element.style.height) * 10;
+	}
 	if(element.style.height.indexOf("%") > -1){
 		return parseInt(element.style.height) * WindowHeight() / 100;
 	}
