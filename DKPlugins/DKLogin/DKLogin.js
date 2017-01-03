@@ -47,7 +47,7 @@ function DKLogin_FBresponse(param, response)
 		FACEBOOK_NAME = response;
 		
 		var id = DKWidget_CreateElement("DKLogin.html", "div", "fbname");
-		DKWidget_SetProperty(id, "font-size", "18rem");
+		DKWidget_SetProperty(id, "font-size", "1.8rem");
 		DKWidget_SetInnerHtml(id, FACEBOOK_NAME);
 	}
 	if(param == "id"){

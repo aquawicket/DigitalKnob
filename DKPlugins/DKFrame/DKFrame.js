@@ -64,10 +64,10 @@ function DKFrame_Widget(id)
 	var frame = DKFrame_CreateFrame(title, width, height);
 	
 	DKWidget_SetProperty(id, "position", "absolute");
-	DKWidget_SetProperty(id, "top", "21rem");
+	DKWidget_SetProperty(id, "top", "2.1rem");
 	DKWidget_SetProperty(id, "left", "0rem");
 	DKWidget_SetProperty(id, "width", "100%");
-	DKWidget_SetProperty(id, "bottom", "-1rem");
+	DKWidget_SetProperty(id, "bottom", "-.1rem");
 	DKWidget_RemoveProperty(id, "height");
 	DKWidget_RemoveProperty(id, "right");
 	DKWidget_AppendChild(frame, id);
@@ -90,7 +90,7 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_SetAttribute(iframe, "width", "100%");
 	DKWidget_SetAttribute(iframe, "height", "100%");
 	DKWidget_SetProperty(iframe, "position", "absolute");
-	DKWidget_SetProperty(iframe, "top", "21rem");
+	DKWidget_SetProperty(iframe, "top", "2.1rem");
 	DKWidget_SetProperty(iframe, "left", "0rem");
 	DKWidget_SetProperty(iframe, "width", "100%");
 	DKWidget_SetProperty(iframe, "bottom", "0rem");
@@ -128,7 +128,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(frame, "background-color", "rgb(150,150,150)");
 	DKWidget_SetProperty(frame, "border-color", "rgb(0,0,0)");
 	DKWidget_SetProperty(frame, "border-style", "solid");
-	DKWidget_SetProperty(frame, "border-width", "1rem");
+	DKWidget_SetProperty(frame, "border-width", ".1rem");
 	DKWidget_SetProperty(frame, "min-width", "62px");
 	DKWidget_SetProperty(frame, "min-height", "30px");
 	
@@ -140,7 +140,7 @@ function DKFrame_CreateFrame(title, width, height)
 	var titlebar = DKWidget_CreateElement(frame, "div", "titlebar");
 	DKWidget_SetProperty(titlebar, "position", "absolute");
 	DKWidget_SetProperty(titlebar, "width", "100%");
-	DKWidget_SetProperty(titlebar, "height", "21rem");
+	DKWidget_SetProperty(titlebar, "height", "2.1rem");
 	DKWidget_SetProperty(titlebar, "background-color", "rgb(200,200,200)");
 	
 	var titlebartext = DKWidget_CreateElement(titlebar, "div", "titlebartext");
@@ -156,16 +156,16 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetAttribute(minimize, "src", "DKFrame/minimize.png");
 	DKWidget_SetProperty(minimize, "position", "absolute");
 	DKWidget_SetProperty(minimize, "top", "0rem");
-	DKWidget_SetProperty(minimize, "right", "42rem");
-	DKWidget_SetProperty(minimize, "height", "20rem");
+	DKWidget_SetProperty(minimize, "right", "4.2rem");
+	DKWidget_SetProperty(minimize, "height", "2.0rem");
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
 	var maximize = DKWidget_CreateElement(frame, "img", "maximize");
 	DKWidget_SetAttribute(maximize, "src", "DKFrame/maximize.png");
 	DKWidget_SetProperty(maximize, "position", "absolute");
 	DKWidget_SetProperty(maximize, "top", "0rem");
-	DKWidget_SetProperty(maximize, "right", "21rem");
-	DKWidget_SetProperty(maximize, "height", "20rem");
+	DKWidget_SetProperty(maximize, "right", "2.1rem");
+	DKWidget_SetProperty(maximize, "height", "2.0rem");
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
 	var close = DKWidget_CreateElement(frame, "img", "close");
@@ -173,7 +173,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(close, "position", "absolute");
 	DKWidget_SetProperty(close, "top", "0rem");
 	DKWidget_SetProperty(close, "right", "0rem");
-	DKWidget_SetProperty(close, "height", "20rem");
+	DKWidget_SetProperty(close, "height", "2.0rem");
 	DKAddEvent(close, "click", DKFrame_OnEvent);
 	
 	return frame;
@@ -190,7 +190,7 @@ function DKFrame_CreateResize(frame)
 	DKWidget_SetProperty(resize, "position", "absolute");
 	DKWidget_SetProperty(resize, "right", "0rem");
 	DKWidget_SetProperty(resize, "bottom", "0rem");
-	DKWidget_SetProperty(resize, "width", "16rem");
+	DKWidget_SetProperty(resize, "width", "1.6rem");
 	DKWidget_AddResizeHandle(resize, frame);
 	
 	return resize;
