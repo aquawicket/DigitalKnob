@@ -68,7 +68,7 @@ function DKCreate(data, callback)
 ///////////////////////
 function AdjustRems(id)
 {
-	//DKLog("AdjustRems("+id+")", DKINFO);
+	//DKLog("AdjustRems("+id+")", DKDEBUG);
 	var nodelist = document.getElementById(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array

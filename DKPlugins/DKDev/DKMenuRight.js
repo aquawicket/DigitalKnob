@@ -14,6 +14,8 @@ function DKMenuRight_Init()
 	
 	DKCreate("DKDev/DKMenuRightApp.js", function(){});
 	DKCreate("DKDev/DKMenuRightEdit.js", function(){});
+	DKCreate("DKDev/DKMenuRightTree.js", function(){});
+	DKCreate("DKDev/DKMenuRightWeb.js", function(){});
 }
 
 //////////////////////////
@@ -32,19 +34,13 @@ function DKMenuRight_OnEvent(event)
 		DKMenuRight_SetPanel("App");
 	}
 	if(DK_Id(event, "Image19")){
-		DKCreate("DKDev/DKMenuRightEdit.js", function(){
-			DKMenuRight_SetPanel("Edit");
-		});
+		DKMenuRight_SetPanel("Edit");
 	}
 	if(DK_Id(event, "Image20")){
-		DKCreate("DKDev/DKMenuRightTree.js", function(){
-			DKMenuRight_SetPanel("Tree");
-		});
+		DKMenuRight_SetPanel("Tree");
 	}
 	if(DK_Id(event, "WebImage")){
-		DKCreate("DKDev/DKMenuRightWeb.js", function(){
-			DKMenuRight_SetPanel("Web");
-		});
+		DKMenuRight_SetPanel("Web");
 	}
 	if(DK_Id(event, "TriggerImage")){
 		DKCreate("DKTriggers/DKAutomate.js", function(){
