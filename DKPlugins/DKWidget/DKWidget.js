@@ -41,8 +41,10 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
-		var filename = arry[1].replace(/^.*[\\\/]/, '');
-		AdjustRems(filename);
+		if(arry[1]){ 
+			var filename = arry[1].replace(/^.*[\\\/]/, '');
+			AdjustRems(filename);
+		}
 		if(callback){
 			callback();
 		}
