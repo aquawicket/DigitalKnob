@@ -73,16 +73,16 @@ function AdjustRems(id)
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
 	for(var i=0; i<elements.length; i++){
-		DKLog("\n", DKINFO);
-		DKLog(elements[i].id, DKINFO);
+		//DKLog("\n", DKINFO);
+		//DKLog(elements[i].id, DKINFO);
 		for(var s=0; s<elements[i].style.length; s++){
 			var style_name = elements[i].style[s];
 			var style_value = elements[i].style[elements[i].style[s]];
-			DKLog(style_name+" : "+style_value, DKINFO);
+			//DKLog(style_name+" : "+style_value, DKINFO);
 			
 			if(style_value.indexOf("rem") > -1){
 				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";
-				DKLog(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem", DKINFO);
+				//DKLog(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem", DKINFO);
 			}
         }
 	}	
