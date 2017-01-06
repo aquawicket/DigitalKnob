@@ -86,7 +86,7 @@ function AdjustRems(id)
 			//DKLog(style_name+" : "+style_value, DKINFO);
 			
 			if(style_value.indexOf("rem") > -1){
-				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";
+				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";  //NOTE: 10 = scale factor
 				//DKLog(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem", DKINFO);
 			}
         }
