@@ -64,6 +64,10 @@ public class WebviewActivity extends Activity
         mWebView.getSettings().setAllowFileAccess(true);
         mWebView.getSettings().setAllowFileAccessFromFileURLs(true);
         mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+		
+		// Fix webview minimum font-size issue
+		mWebView.getSettings().setMinimumFontSize(1);
+		mWebView.getSettings().setMinimumLogicalFontSize(1);
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new myWebViewClient());

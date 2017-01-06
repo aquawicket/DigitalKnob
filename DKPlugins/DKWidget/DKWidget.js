@@ -41,10 +41,11 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		DKWidget_NewWidget(arry[1], arry[2]);
-		if(arry[1]){ 
-			var filename = arry[1].replace(/^.*[\\\/]/, '');
-			AdjustRems(filename);
-		}
+		//Mobile device minimum font-size fix
+		//if(arry[1]){ 
+		//	var filename = arry[1].replace(/^.*[\\\/]/, '');
+		//	AdjustRems(filename);
+		//}
 		if(callback){
 			callback();
 		}
@@ -67,6 +68,8 @@ function DKCreate(data, callback)
 	return;
 }
 
+/*
+//Mobile device minimum font-size fix
 ///////////////////////
 function AdjustRems(id)
 {
@@ -89,6 +92,7 @@ function AdjustRems(id)
         }
 	}	
 }
+*/
 
 //////////////////////
 function DKClose(data)
