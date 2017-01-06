@@ -11,11 +11,11 @@ function DKMenuRight_Init()
 	DKAddEvent("TriggerImage", "click", DKMenuRight_OnEvent);
 	DKAddEvent("HookImage", "click", DKMenuRight_OnEvent);
 	DKAddEvent("DKMenuRight.html", "SetPanel", DKMenuRight_OnEvent);
-	
+
+	DKCreate("DKDev/DKMenuRightWeb.js", function(){});
+	DKCreate("DKDev/DKMenuRightTree.js", function(){});
 	DKCreate("DKDev/DKMenuRightApp.js", function(){});
 	DKCreate("DKDev/DKMenuRightEdit.js", function(){});
-	DKCreate("DKDev/DKMenuRightTree.js", function(){});
-	DKCreate("DKDev/DKMenuRightWeb.js", function(){});
 }
 
 //////////////////////////
