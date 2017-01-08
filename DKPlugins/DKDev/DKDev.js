@@ -80,6 +80,7 @@ function DKDev_OnEvent(event)
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		DKDev_SelectElement(target);
+		event.stopPropagation();
 		return;
 	}
 
@@ -94,12 +95,15 @@ function DKDev_OnEvent(event)
 
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
+		DKLog("stored_element = "+stored_element, DKINFO);
+		DKLog("storedMouseX = "+storedMouseX, DKINFO);
 		if(target == "body"){
 			DKCreate("DKDev/DKDev_RootMenu.js", function(){});
 			return;
 		}
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
+		event.stopPropagation();
 		return;
 	}
 	if(DK_Type(event, "Clear")){
@@ -165,7 +169,7 @@ function DKDev_ApplyBox(id)
 /////////////////////////////////////
 function DKDev_SelectElement(element)
 {
-	//DKLog("DKDev_SelectElement("+element+") \n", DKDEBUG);
+	DKLog("DKDev_SelectElement("+element+") \n", DKDEBUG);
 	if(!element){
 		DKLog("DKDev_SelectElement(): element invalid", DKERROR);
 		return;
@@ -207,8 +211,8 @@ function DKDev_AddDragHandles(id)
 		
 		if(DKWidget_AddDragHandle(list[t], list[t])){
 			DKLog("DKWidget_AddDragHandle("+list[t]+","+list[t]+") \n", DKDEBUG);
-			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
 			DKAddEvent(list[t], "contextmenu", DKDev_OnEvent);
+			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
 		}
 	}
 	

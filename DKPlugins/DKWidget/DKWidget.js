@@ -3,7 +3,7 @@
 
 //if(DK_GetBrowser() != "CEF"){
 	function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKWARN); return color; }
+	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKDEBUG); return color; }
 //}
 
 /////////////////////////////////
@@ -829,19 +829,25 @@ function DKWidget_GetMouseWindowY(element)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementX(element)
 {
-	//TODO: calcualte mouse postition over element
-	var left = DKWidget_GetProperty(element, "left");
-	left = left.replace("px", "");
-	return mouseX - Number(left);
+	var ele = document.getElementById(element);
+	var left = ele.offsetLeft;
+	while((ele=ele.offsetParent) != null){ 
+		left += ele.offsetLeft; 
+	}
+	//DKLog("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n", DKINFO);
+	return mouseX - parseInt(left);
 }
 
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementY(element)
 {
-	//TODO: calcualte mouse postition over element
-	var top = DKWidget_GetProperty(element, "top");
-	top = top.replace("px", "");
-	return mouseY - Number(top);
+	var ele = document.getElementById(element);
+	var top = ele.offsetTop;
+	while((ele=ele.offsetParent) != null){ 
+		top += ele.offsetTop; 
+	}
+	//DKLog("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n", DKINFO);
+	return mouseY - parseInt(top);
 }
 
 ////////////////////////////////////////
