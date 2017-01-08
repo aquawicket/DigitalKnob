@@ -6,6 +6,6 @@
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
 [LOG_FILE] ON
-[LOG_SHOW] DKDev_OnEvent
+[LOG_SHOW]
 [LOG_HIDE]
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
