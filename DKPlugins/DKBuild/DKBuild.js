@@ -298,8 +298,8 @@ function DKBuild_SvnUpdate()
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
-	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
+	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
+	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	if(DKFile_Exists(mysvn)){
 		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
 		DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
@@ -340,11 +340,11 @@ function DKBuild_GitUpdate()
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" pull origin master");
 	
-	var mygit = DKAssets_LocalAssets()+"USER/mysvn.txt";
-	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
+	var mygit = DKAssets_LocalAssets()+"mysvn.txt";
+	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	if(DKFile_Exists(mygit)){
 		var url = DKFile_GetSetting(mygit, "[MYGIT]");
-		DK_Execute(GIT +" clone "+url+" "+DKPATH);
+		DK_Execute(GIT +" clone "+url+" "+DKPATH+"/USER");
 		DKFile_ChDir(DKPATH+"/USER");
 		DK_Execute(GIT +" pull origin master");
 	}
