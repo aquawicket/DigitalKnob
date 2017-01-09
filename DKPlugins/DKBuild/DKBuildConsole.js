@@ -4,6 +4,7 @@ var working = true;
 function DKBuildConsole_Init()
 {
 	DKBuild_ValidateSvn();
+	DKBuild_ValidateGit();
 	DKBuild_ValidateCmake();
 	DKBuild_ValidateVC2015();
 	
@@ -34,19 +35,23 @@ function DKBuildConsole_ChooseUpdate()
 		DK_Exit();
 	}
 	if(key == 121){ //yes
-		DKBuild_SvnUpdate();
+		//DKBuild_SvnUpdate();
+		DKBuild_GitUpdate();
 	}
 	if(key == 99){ //SVN commit  //not shown
-		DKBuild_SvnCommit();
+		//DKBuild_SvnCommit();
+		DKBuild_GitCommit();
 	}
 	if(key == 114){
 		DKBuild_ResetAppsPlugins();
-		DKBuild_SvnUpdate();
+		//DKBuild_SvnUpdate();
+		DKBuild_GitUpdate();
 	}
 	if(key == 120){ // x
 		DKBuild_Reset3rdParty();
 		DKBuild_ResetAppsPlugins();
-		DKBuild_SvnUpdate();
+		//DKBuild_SvnUpdate();
+		DKBuild_GitUpdate();
 	}
 }
 

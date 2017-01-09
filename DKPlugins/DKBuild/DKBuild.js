@@ -5,6 +5,7 @@ var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var SVN = "";
+var GIT = "";
 var CMAKE = "";
 var NDK = "C:/android-ndk-r10d";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
@@ -21,15 +22,19 @@ function DKBuild_Init()
 	//DKLog(DK_GetOS()+"\n", DKDEBUG);
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
-		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
+		SVN = "C:/Program Files/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
-		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
+		GIT = "C:/Program Files/Git/bin/git.exe";
+		GIT = DKFile_GetShortName(GIT);
+		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 	}
 	if(DK_GetOS() == "Win64"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
+		GIT = "C:/Program Files/Git/bin/git.exe";
+		GIT = DKFile_GetShortName(GIT);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 	}
@@ -92,6 +97,48 @@ function DKBuild_ValidateSvn()
 	DKLog("Found SVN \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
+	}
+}
+
+/////////////////////////////
+function DKBuild_InstallGit()
+{
+	if(DK_GetBrowser() != "Rocket"){ return; }
+	DKLog("Installing Git \n", DKINFO);
+	var assets = DKAssets_LocalAssets();
+	
+	if(DK_GetOS() == "Win32"){
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
+		DK_System(assets+"/Git-2.11.0-32-bit.exe");
+	}
+	else if(DK_GetOS() == "Win64"){
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
+		DK_System(assets+"/Git-2.11.0-64-bit.exe");
+	}
+	else if(DK_GetOS() == "Mac"){
+		//TODO
+	}
+	else if(DK_GetOS() == "Linux"){
+		//TODO
+	}
+	else{
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
+	}
+}
+
+//////////////////////////////
+function DKBuild_ValidateGit()
+{
+	if(DK_GetBrowser() != "Rocket"){ return; }
+	DKLog("Looking for GIT \n", DKINFO);
+	//DKLog(GIT+"\n", DKDEBUG);
+	if(!DKFile_Exists(GIT)){
+		DKLog("Please install GIT \n", DKINFO);
+		DKBuild_InstallGit();
+	}
+	DKLog("Found GIT \n", DKINFO);
+	if(DK_GetOS() == "Mac"){
+		//TODO
 	}
 }
 
@@ -267,6 +314,29 @@ function DKBuild_SvnUpdate()
 }
 
 ////////////////////////////
+function DKBuild_GitUpdate()
+{
+	DKLog("Git Update... \n", DKINFO);
+	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
+	
+	/*
+	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
+	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
+	if(DKFile_Exists(mysvn)){
+		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
+		DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
+	}
+	*/
+	
+	if(DKAvailable("DKAudio")){
+		DKCreate("DKAudio");
+	}
+	if(DKValid("DKAudioJS,DKAudioJS0")){
+		DKAudio_PlaySound("DKBuild/ding.wav");
+	}
+}
+
+////////////////////////////
 function DKBuild_SvnCommit()
 {
 	DKLog("Svn Commit... \n", DKINFO);
@@ -279,6 +349,32 @@ function DKBuild_SvnCommit()
 		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");
 		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
 	}
+	
+	if(DKAvailable("DKAudio")){
+		DKCreate("DKAudio");
+	}
+	if(DKValid("DKAudioJS,DKAudioJS0")){
+		DKAudio_PlaySound("DKBuild/ding.wav");
+	}
+}
+
+////////////////////////////
+function DKBuild_GitCommit()
+{
+	DKLog("Git Commit... \n", DKINFO);
+	DKFile_ChDir(DKPATH);
+	DK_Execute(GIT +" add -A");
+	DK_Execute(GIT +" commit -m \"update\"");
+	DK_Execute(GIT +" push");
+	
+	/*
+	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
+	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
+	if(DKFile_Exists(mysvn)){
+		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");
+		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
+	}
+	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
