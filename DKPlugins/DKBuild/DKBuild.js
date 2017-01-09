@@ -40,15 +40,13 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
-		//SVN = "/usr/bin/svn";
-		SVN = "svn";
 		GIT = "git";
+		SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aquawicket/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
-		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
 	}
 
@@ -86,7 +84,7 @@ function DKBuild_InstallSvn()
 	}
 }
 
-////////////////////////////////
+//////////////////////////////
 function DKBuild_ValidateSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
@@ -121,7 +119,7 @@ function DKBuild_InstallGit()
 		//TODO
 	}
 	else if(DK_GetOS() == "Linux"){
-		DK_Execute("sudo apt-get install git");
+		//TODO
 	}
 	else{
 		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
@@ -140,11 +138,11 @@ function DKBuild_ValidateGit()
 	}
 	DKLog("Found GIT \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
-		//TODO
+		GIT = "git";
 	}
 }
 
-/////////////////////////////////
+///////////////////////////////
 function DKBuild_InstallCmake()
 {
 	DKLog("Installing CMake \n", DKINFO);
@@ -169,7 +167,7 @@ function DKBuild_InstallCmake()
 	}
 }
 
-//////////////////////////////////
+////////////////////////////////
 function DKBuild_ValidateCmake()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
@@ -185,7 +183,7 @@ function DKBuild_ValidateCmake()
 	}
 }
 
-//////////////////////////////////
+////////////////////////////////
 function DKBuild_InstallVC2015()
 {
 	DKLog("Installing Visual Studio 2015 \n", DKINFO);
@@ -201,7 +199,7 @@ function DKBuild_InstallVC2015()
 	}
 }
 
-///////////////////////////////////
+/////////////////////////////////
 function DKBuild_ValidateVC2015()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
@@ -216,7 +214,7 @@ function DKBuild_ValidateVC2015()
 	DKLog("Found Visual Studio 2015 \n", DKINFO);
 }
 
-////////////////////////////
+//////////////////////////
 function DKBuild_OsCheck()
 {
 	if(DK_GetOS() == "Win32"){
@@ -293,7 +291,7 @@ function DKBuild_OsCheck()
 	return true;
 }
 
-//////////////////////////////
+////////////////////////////
 function DKBuild_SvnUpdate()
 {
 	DKLog("Svn Update... \n", DKINFO);
@@ -345,7 +343,7 @@ function DKBuild_SvnCommit()
 {
 	DKLog("Svn Commit... \n", DKINFO);
 	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" commit -m commit from svn "+DKPATH);
+	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
 	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
@@ -367,7 +365,8 @@ function DKBuild_GitCommit()
 {
 	DKLog("Git Commit... \n", DKINFO);
 	DKFile_ChDir(DKPATH);
-	DK_Execute(GIT +" commit -a -m \"commit from git\"");
+	//DK_Execute(GIT +" add .");
+	DK_Execute(GIT +" commit -a -m \"update\"");
 	DK_Execute(GIT +" push");
 	
 	/*
@@ -706,7 +705,7 @@ function DKBuild_DoResults()
 		}
 	}
 	
-	//// LINUX32 /////
+	//// LINUX32 ///////
 	if(OS == "linux32"){
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32");
 		if(TYPE == "Debug" || TYPE == "ALL"){
@@ -733,7 +732,7 @@ function DKBuild_DoResults()
 		}
 	}
 	
-	//// LINUX64 /////
+	//// LINUX64 ///////
 	if(OS == "linux64"){
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64");
 		if(TYPE == "Debug" || TYPE == "ALL"){
