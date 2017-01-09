@@ -151,7 +151,9 @@ void DKCef::End()
 	if(instance_count == 1){
 		CefShutdown();
 	}
+#ifdef WIN32
 	FreeLibrary(libcef);
+#endif
 }
 
 ////////////////////////
