@@ -58,6 +58,22 @@ function DKBuild_Init()
 	}
 }
 
+//////////////////////////////
+function DKBuild_ValidateSvn()
+{
+	if(DK_GetBrowser() != "Rocket"){ return; }
+	DKLog("Looking for SVN \n", DKINFO);
+	//DKLog(SVN+"\n", DKDEBUG);
+	if(!DKFile_Exists(SVN)){
+		DKLog("Please install SVN \n", DKINFO);
+		DKBuild_InstallSvn();
+	}
+	DKLog("Found SVN \n", DKINFO);
+	if(DK_GetOS() == "Mac"){
+		SVN = "svn";
+	}
+}
+
 /////////////////////////////
 function DKBuild_InstallSvn()
 {
@@ -85,18 +101,18 @@ function DKBuild_InstallSvn()
 }
 
 //////////////////////////////
-function DKBuild_ValidateSvn()
+function DKBuild_ValidateGit()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for SVN \n", DKINFO);
-	//DKLog(SVN+"\n", DKDEBUG);
-	if(!DKFile_Exists(SVN)){
-		DKLog("Please install SVN \n", DKINFO);
-		DKBuild_InstallSvn();
+	DKLog("Looking for GIT \n", DKINFO);
+	//DKLog(GIT+"\n", DKDEBUG);
+	if(!DKFile_Exists(GIT)){
+		DKLog("Please install GIT \n", DKINFO);
+		DKBuild_InstallGit();
 	}
-	DKLog("Found SVN \n", DKINFO);
+	DKLog("Found GIT \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
-		SVN = "svn";
+		GIT = "git";
 	}
 }
 
@@ -126,19 +142,19 @@ function DKBuild_InstallGit()
 	}
 }
 
-//////////////////////////////
-function DKBuild_ValidateGit()
+////////////////////////////////
+function DKBuild_ValidateCmake()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for GIT \n", DKINFO);
-	//DKLog(GIT+"\n", DKDEBUG);
-	if(!DKFile_Exists(GIT)){
-		DKLog("Please install GIT \n", DKINFO);
-		DKBuild_InstallGit();
+	DKLog("Looking for CMake \n", DKINFO);
+	//DKLog(CMAKE+"\n", DKDEBUG);
+	if(!DKFile_Exists(CMAKE)){
+		DKLog("Please install CMake \n", DKINFO);
+		DKBuild_InstallCmake();
 	}
-	DKLog("Found GIT \n", DKINFO);
+	DKLog("Found CMake \n", DKINFO);
 	if(DK_GetOS() == "Mac"){
-		GIT = "git";
+		CMAKE = "cmake";
 	}
 }
 
@@ -167,20 +183,19 @@ function DKBuild_InstallCmake()
 	}
 }
 
-////////////////////////////////
-function DKBuild_ValidateCmake()
+/////////////////////////////////
+function DKBuild_ValidateVC2015()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for CMake \n", DKINFO);
-	//DKLog(CMAKE+"\n", DKDEBUG);
-	if(!DKFile_Exists(CMAKE)){
-		DKLog("Please install CMake \n", DKINFO);
-		DKBuild_InstallCmake();
+	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
+		return;
 	}
-	DKLog("Found CMake \n", DKINFO);
-	if(DK_GetOS() == "Mac"){
-		CMAKE = "cmake";
+	DKLog("Looking for Visual Studio 2015 \n", DKINFO);
+	//DKLog(VC2015+"\n", DKDEBUG);
+	if(!DKFile_Exists(VC2015)){
+		DKBuild_InstallVC2015();
 	}
+	DKLog("Found Visual Studio 2015 \n", DKINFO);
 }
 
 ////////////////////////////////
@@ -197,21 +212,6 @@ function DKBuild_InstallVC2015()
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
 		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
 	}
-}
-
-/////////////////////////////////
-function DKBuild_ValidateVC2015()
-{
-	if(DK_GetBrowser() != "Rocket"){ return; }
-	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
-		return;
-	}
-	DKLog("Looking for Visual Studio 2015 \n", DKINFO);
-	//DKLog(VC2015+"\n", DKDEBUG);
-	if(!DKFile_Exists(VC2015)){
-		DKBuild_InstallVC2015();
-	}
-	DKLog("Found Visual Studio 2015 \n", DKINFO);
 }
 
 //////////////////////////
@@ -314,21 +314,15 @@ function DKBuild_SvnUpdate()
 }
 
 ////////////////////////////
-function DKBuild_GitUpdate()
+function DKBuild_SvnCommit()
 {
-	DKLog("Git Update... \n", DKINFO);
-	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
-	DKFile_ChDir(DKPATH);
-	DK_Execute(GIT +" pull origin master");
+	DKLog("Svn Commit... \n", DKINFO);
+	DK_Execute(SVN +" cleanup "+DKPATH);
+	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
-	/*
-	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
-	if(DKFile_Exists(mysvn)){
-		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
-		DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
+	if(DKFile_Exists(DKPATH+"/USER")){
+		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
 	}
-	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -339,17 +333,20 @@ function DKBuild_GitUpdate()
 }
 
 ////////////////////////////
-function DKBuild_SvnCommit()
+function DKBuild_GitUpdate()
 {
-	DKLog("Svn Commit... \n", DKINFO);
-	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" commit -m update "+DKPATH);
+	DKLog("Git Update... \n", DKINFO);
+	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
+	DKFile_ChDir(DKPATH);
+	DK_Execute(GIT +" pull origin master");
 	
-	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
-	if(DKFile_Exists(mysvn)){
-		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");
-		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
+	var mygit = DKAssets_LocalAssets()+"USER/mysvn.txt";
+	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
+	if(DKFile_Exists(mygit)){
+		var url = DKFile_GetSetting(mygit, "[MYGIT]");
+		DK_Execute(GIT +" clone "+url+" "+DKPATH);
+		DKFile_ChDir(DKPATH+"/USER");
+		DK_Execute(GIT +" pull origin master");
 	}
 	
 	if(DKAvailable("DKAudio")){
@@ -365,18 +362,14 @@ function DKBuild_GitCommit()
 {
 	DKLog("Git Commit... \n", DKINFO);
 	DKFile_ChDir(DKPATH);
-	//DK_Execute(GIT +" add .");
-	DK_Execute(GIT +" commit -a -m \"update\"");
+	DK_Execute(GIT +" commit -a -m \"commit from git\"");
 	DK_Execute(GIT +" push");
 	
-	/*
-	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
-	if(DKFile_Exists(mysvn)){
-		//var url = DKFile_GetSetting(mysvn, "[MYSVN]");
-		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
+	if(DKFile_Exists(DKPATH+"/USER")){
+		DKFile_ChDir(DKPATH+"/USER");
+		DK_Execute(GIT +" commit -a -m \"commit from git\"");
+		DK_Execute(GIT +" push");
 	}
-	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
