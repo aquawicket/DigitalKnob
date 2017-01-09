@@ -42,11 +42,13 @@ function DKBuild_Init()
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		//SVN = "/usr/bin/svn";
 		SVN = "svn";
+		GIT = "git";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aquawicket/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
+		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
 	}
 
@@ -119,7 +121,7 @@ function DKBuild_InstallGit()
 		//TODO
 	}
 	else if(DK_GetOS() == "Linux"){
-		//TODO
+		DK_Execute("sudo apt-get install git");
 	}
 	else{
 		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
