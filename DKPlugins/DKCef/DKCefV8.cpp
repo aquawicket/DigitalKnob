@@ -154,7 +154,7 @@ bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
 {
-#ifdef WIN32
+#ifndef MAC
 	DKLog("\n**** V8 Functions ****\n", DKINFO);
 	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
 	for (it_type iterator = DKCefApp::handler->functions.begin(); iterator != DKCefApp::handler->functions.end(); iterator++) {

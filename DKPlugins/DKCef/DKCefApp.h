@@ -7,7 +7,7 @@ typedef CefV8ValueList CefArgs;
 typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
-#ifdef WIN32
+#ifndef MAC
 ///////////////////////////////////////
 class MyV8Handler : public CefV8Handler
 {
@@ -43,7 +43,7 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 public:
 	DKCefApp(){}
 
-#ifdef WIN32
+#ifndef MAC
 	static CefRefPtr<MyV8Handler> handler;
 #endif
 	static CefRefPtr<CefV8Value> object;
@@ -67,7 +67,7 @@ public:
 		command_line->AppendSwitchWithValue("disable-web-security", "1");
 		command_line->AppendSwitchWithValue("no-proxy-server", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
-#ifdef WIN32		
+#ifndef MAC	
 		handler = new MyV8Handler();
 #endif		
 		DKCreate("DKCefV8");
@@ -89,7 +89,7 @@ public:
 			return;
 		}
 
-#ifdef WIN32
+#ifndef MAC
 		typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
 		for(it_type iterator = handler->functions.begin(); iterator != handler->functions.end(); iterator++) {
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), handler);
@@ -101,7 +101,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-#ifdef WIN32
+#ifndef MAC
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
 		handler->functions[name] = boost::bind(func, _1, _2);
