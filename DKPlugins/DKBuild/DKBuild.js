@@ -343,7 +343,7 @@ function DKBuild_SvnCommit()
 {
 	DKLog("Svn Commit... \n", DKINFO);
 	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" commit -m update "+DKPATH);
+	DK_Execute(SVN +" commit -m commit from svn "+DKPATH);
 	
 	var mysvn = DKAssets_LocalAssets()+"USER/mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/USER/mysvn.txt"; } //check for /USER/mysvn.txt
@@ -366,7 +366,7 @@ function DKBuild_GitCommit()
 	DKLog("Git Commit... \n", DKINFO);
 	DKFile_ChDir(DKPATH);
 	//DK_Execute(GIT +" add -A");
-	DK_Execute(GIT +" commit -m \"update\"");
+	DK_Execute(GIT +" commit -m -a \"commit from git\"");
 	DK_Execute(GIT +" push");
 	
 	/*
