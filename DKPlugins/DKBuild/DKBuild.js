@@ -368,7 +368,7 @@ function DKBuild_GitCommit()
 	DKLog("Git Commit... \n", DKINFO);
 	DKFile_ChDir(DKPATH);
 	//DK_Execute(GIT +" add -A");
-	DK_Execute(GIT +" commit -m -a \"commit from git\"");
+	DK_Execute(GIT +" commit -a -m \"commit from git\"");
 	DK_Execute(GIT +" push");
 	
 	/*
