@@ -11,12 +11,13 @@ function DKBuildGUI_Init()
 		DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
 		DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
 		DKAddEvent("BuildType", "change", DKBuildGUI_OnEvent);
-		DKAddEvent("svn", "click", DKBuildGUI_OnEvent);
+		DKAddEvent("git", "click", DKBuildGUI_OnEvent);
 		DKAddEvent("libraries", "click", DKBuildGUI_OnEvent);
 		DKAddEvent("build", "click", DKBuildGUI_OnEvent);
 		//DKAddEvent("DKBuildGUI.html", "NewApp", DKBuildGUI_OnEvent);
 	
 		DKBuild_ValidateSvn();
+		DKBuild_ValidateGit();
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
 
@@ -73,8 +74,8 @@ function DKBuildGUI_OnEvent(event)
 	if(DK_Id(event,"BuildType")){
 		DKBuildGUI_BuildSelect();
 	}
-	if(DK_Id(event,"svn")){
-		DKCreate("DKBuild/SvnMenu.js", function(){});
+	if(DK_Id(event,"git")){
+		DKCreate("DKBuild/GitMenu.js", function(){});
 	}
 	if(DK_Id(event,"libraries")){
 		DKCreate("DKBuild/LibraryMenu.js", function(){});
