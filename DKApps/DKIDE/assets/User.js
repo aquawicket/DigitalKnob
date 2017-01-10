@@ -1,5 +1,5 @@
 if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-	var USE_CEF = false;
+	var USE_CEF = true;
 }
 
 if(DK_GetBrowser() == "Rocket"){
