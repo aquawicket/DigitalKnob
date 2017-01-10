@@ -285,7 +285,7 @@ void DKSDLCef::Draw()
 		dkCef->queue_new_browser = "";
 	}
 
-	/*
+	if(DKValid("DKRocket")){ return; }
 	///// Draw to SDL Directly
 	if(!cef_image){ return; }
 	SDL_Rect texture_rect;
@@ -295,7 +295,6 @@ void DKSDLCef::Draw()
 	texture_rect.h = dkCef->height; //the height of the texture
 
 	SDL_RenderCopy(dkSdlWindow->sdlren, cef_image, NULL, &texture_rect);
-	*/
 }
 
 //////////////////////////////////////////////////////////////////////////////
