@@ -1,1 +1,2 @@
 [CONSOLE] ON
+[LOG_DEBUG] ON
