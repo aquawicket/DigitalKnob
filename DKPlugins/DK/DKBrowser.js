@@ -184,12 +184,6 @@ function GetWidthPx(element)
 {
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
-	//Webview fix
-	/*
-	if(element.style.width.indexOf("rem") > -1){
-		return parseInt(element.style.width) * 10;
-	}
-	*/
 	if(element.style.width.indexOf("%") > -1){
 		return parseInt(element.style.width) * WindowWidth() / 100;
 	}
@@ -201,12 +195,6 @@ function GetHeightPx(element)
 {
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
-	//Webview fix
-	/*
-	if(element.style.height.indexOf("rem") > -1){
-		return parseInt(element.style.height) * 10;
-	}
-	*/
 	if(element.style.height.indexOf("%") > -1){
 		return parseInt(element.style.height) * WindowHeight() / 100;
 	}
