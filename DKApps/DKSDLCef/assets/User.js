@@ -1,6 +1,4 @@
 DKCreate("DKWindow");
-DKCreate("DKDebug/DKDebug.js", function(){});
-var assets = DKAssets_LocalAssets();
 var url = "http://www.google.com";
 var width = DKWindow_GetWidth();
 var height = DKWindow_GetHeight();
