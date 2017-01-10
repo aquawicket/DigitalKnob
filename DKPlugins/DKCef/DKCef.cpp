@@ -68,10 +68,12 @@ void DKCef::Init()
 
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
+#ifdef LINUX
 	//settings.no_sandbox = true;
+#endif
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
-	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+	//settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
 #ifndef DEBUG
 	settings.log_severity = LOGSEVERITY_DISABLE;
 #endif

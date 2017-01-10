@@ -66,6 +66,7 @@ public:
 		command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
 		command_line->AppendSwitchWithValue("disable-web-security", "1");
 		command_line->AppendSwitchWithValue("no-proxy-server", "1");
+		//command_line->AppendSwitchWithValue("no-sandbox", "1");
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
 #ifndef MAC	
