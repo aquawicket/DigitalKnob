@@ -73,7 +73,7 @@ void DKCef::Init()
 #endif
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
-	//settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
 #ifndef DEBUG
 	settings.log_severity = LOGSEVERITY_DISABLE;
 #endif
