@@ -19,8 +19,8 @@ function Input_OnEvent(event)
 	
 	if(DK_Id(event, "Input_Text")){
 		var key = DKWidget_GetValue(event);
-		//DKLog("Input_Text: key="+key+"\n", DKINFO);
-		if(key != 13){ return; }
+		DKLog("Input_Text: key="+key+"\n", DKINFO);
+		if(key != 13 && key != 72){ return; }
 		Input_Run(DKWidget_GetValue("Input_Text"))
 	}
 }
