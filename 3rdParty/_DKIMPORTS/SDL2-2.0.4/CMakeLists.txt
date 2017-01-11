@@ -822,7 +822,7 @@ elseif(UNIX AND NOT APPLE)
     CheckDirectFB()
     CheckOpenGLX11()
     CheckOpenGLESX11()
-    CheckWayland()
+    ##CheckWayland()
     CheckVivante()
   endif()
 
