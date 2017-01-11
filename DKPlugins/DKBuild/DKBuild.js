@@ -346,8 +346,9 @@ function DKBuild_GitUpdate()
 	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	if(DKFile_Exists(mygit)){
 		var url = DKFile_GetSetting(mygit, "[MYGIT]");
-		DK_Execute(GIT +" clone "+url+" "+DKPATH+"/USER");
 		DKFile_ChDir(DKPATH+"/USER");
+		DK_Execute(GIT +" clone "+url+" "+DKPATH+"/USER");
+		DK_Execute(GIT +" checkout -- .");
 		DK_Execute(GIT +" pull origin master");
 	}
 	
