@@ -339,8 +339,8 @@ function DKBuild_GitUpdate()
 	DKLog("Git Update... \n", DKINFO);
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
 	DKFile_ChDir(DKPATH);
-	//DK_Execute(GIT +" pull origin master");
 	DK_Execute(GIT +" checkout -- .");
+	DK_Execute(GIT +" pull origin master");
 	
 	var mygit = DKAssets_LocalAssets()+"mysvn.txt";
 	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
