@@ -359,6 +359,9 @@ function Pos(position){
 		return position;	
 	}
 	if(typeof position == 'string'){
+		if(position.search('rem') != -1){
+			return position;
+		}
 		if(position.search('px') != -1){
 			return position;
 		}
@@ -368,10 +371,10 @@ function Pos(position){
 		if(position.search('auto') != -1){
 			return position;
 		}
-		return position+'px'; 
+		return position+'rem'; 
 	}
 	if(typeof position == 'number'){
-		return position+'px';	
+		return position+'rem';	
 	}
 	DKLog("Pos() ERROR", DKERROR);
 }
