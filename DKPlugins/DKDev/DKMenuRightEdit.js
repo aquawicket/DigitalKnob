@@ -124,14 +124,16 @@ function DKMenuRightEdit_OnEvent(event)
 		DKMenuRightEdit_SetOverflow("auto");
 	}
 	if(DK_Id(event,"DKBGColor")){
-		DKCreate("DKColorPicker/DKColorPicker.js");
-		DKWidget_Show("DKColorPicker.html");
-		DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,background_color");
+		DKCreate("DKColorPicker/DKColorPicker.js", function(){
+			DKFrame_Widget("DKColorPicker.html");
+			DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,background_color");
+		});
 	}
 	if(DK_Id(event,"DKFGColor")){
-		DKCreate("DKColorPicker/DKColorPicker.js");
-		DKWidget_Show("DKColorPicker.html");
-		DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,foreground_color");
+		DKCreate("DKColorPicker/DKColorPicker.js", function(){
+			DKFrame_Widget("DKColorPicker.html");
+			DKSendEvent("DKColorPicker.html", "GetColor", "DKMenuRightEdit.html,foreground_color");
+		});
 	}
 	if(DK_Type(event,"background_color")){
 		var color = DKWidget_GetValue(event);
