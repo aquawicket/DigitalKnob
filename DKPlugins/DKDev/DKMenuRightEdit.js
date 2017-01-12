@@ -211,6 +211,7 @@ function DKMenuRightEdit_OnEvent(event)
 	}
 	if(DK_Id(event,"SaveHtml")){
 		DKSendEvent("GLOBAL", "SaveHtmlFiles", "");
+		StopPropagation(event);
 	}
 	if(DK_Id(event,"bold_Image")){
 		if(DKWidget_GetProperty(MenuRight_element, "font-weight") == "bold"){

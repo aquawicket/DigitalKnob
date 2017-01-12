@@ -85,7 +85,7 @@ function DKDev_OnEvent(event)
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		DKDev_SelectElement(target);
-		event.stopPropagation();
+		StopPropagation(event);
 		return;
 	}
 
@@ -112,7 +112,7 @@ function DKDev_OnEvent(event)
 		}
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
-		event.stopPropagation();
+		StopPropagation(event);
 		return;
 	}
 	if(DK_Type(event, "Clear")){
@@ -193,10 +193,8 @@ function DKDev_SelectElement(element)
 	}
 
 	//DKLog("stored_element: "+stored_element+"\n", DKDEBUG);
-	DKCreate("DKDev/DKMenuRightEdit.js", function(){
-		DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
-		DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");
-	});	
+	DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
+	DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");
 }
 
 /////////////////////////////////
