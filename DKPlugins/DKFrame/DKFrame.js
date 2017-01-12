@@ -35,8 +35,8 @@ function DKFrame_OnEvent(event)
 		var element = document.getElementById(DK_GetId(event));
 		var child = element.childNodes[4];
 		//DKLog(child.id+"\n", DKINFO);
-		DKWidget_SetProperty(child.id, "width", DKWidget_GetProperty(DK_GetId(event), "width"));
-		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(DK_GetId(event), "height")) - 21 +"px");
+		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(DK_GetId(event), "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(DK_GetId(event), "height")) - 21 + "rem");
 	}
 }
 
@@ -130,16 +130,16 @@ function DKFrame_CreateFrame(title, width, height)
 	var frame = DKWidget_CreateElement("body", "div", "frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
 	DKWidget_SetProperty(frame, "overflow", "hidden");
-	DKWidget_SetProperty(frame, "top", newtop.toString()+"px");
-	DKWidget_SetProperty(frame, "left", newleft.toString()+"px");
+	DKWidget_SetProperty(frame, "top", newtop.toString()+"rem");
+	DKWidget_SetProperty(frame, "left", newleft.toString()+"rem");
 	DKWidget_SetProperty(frame, "width", width+"rem");
 	DKWidget_SetProperty(frame, "height", newheight.toString()+"rem");
 	DKWidget_SetProperty(frame, "background-color", "rgb(150,150,150)");
 	DKWidget_SetProperty(frame, "border-color", "rgb(0,0,0)");
 	DKWidget_SetProperty(frame, "border-style", "solid");
 	DKWidget_SetProperty(frame, "border-width", "1rem");
-	DKWidget_SetProperty(frame, "min-width", "62px");
-	DKWidget_SetProperty(frame, "min-height", "30px");
+	DKWidget_SetProperty(frame, "min-width", "62rem");
+	DKWidget_SetProperty(frame, "min-height", "30rem");
 	
 	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n", DKDEBUG);
 	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n", DKDEBUG);
