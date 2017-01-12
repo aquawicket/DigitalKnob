@@ -90,7 +90,7 @@ function DKDev_Menu_OnEvent(event)
 		DKDev_NewHSlider();
 	}
 	if(DK_Id(event, "DKDev_Menu_Delete")){
-		DKWidget_PrependChild("body", "DKC-DKDevBox");
+		DKWidget_PrependChild("body", "DKDev_Box");
 		DKWidget_RemoveElement(stored_element);
 		stored_element = "body";
 	}
