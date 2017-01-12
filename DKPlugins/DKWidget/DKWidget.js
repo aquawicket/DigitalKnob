@@ -453,6 +453,10 @@ function DKWidget_GetTagName(id)
 ///////////////////////////////////////////////////
 function DKWidget_GetAttribute(variable, parameter)
 {
+	if(!variable){
+		DKLog("DKWidget_GetAttribute(): veriable empty\n", DKWARN);
+		return "";
+	}
 	if(typeof variable == "object"){
 		return variable[parameter];
 	}

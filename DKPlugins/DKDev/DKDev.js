@@ -544,8 +544,8 @@ function DKDev_SaveHtmlFile(id)
 	//if(DKDev_Ignore(file)){ continue; }
 	DKDev_RemoveDragHandles(file);
 	DKDev_HideBox();
-	var parent = DKWidget_GetParent(file);
-	var list = DKWidget_GetElements(parent);
+	//var parent = DKWidget_GetParent(file);
+	var list = DKWidget_GetElements(file);
 	var arry2 = list.split(",");
 	arry2.unshift(file);
 	for(var b=0; b<arry2.length; b++){
