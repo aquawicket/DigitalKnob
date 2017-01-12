@@ -744,6 +744,8 @@ function DKWidget_AppendChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {
+	DKLog("DKWidget_PrependChild("+parent+","+element+")\n", DKDEBUG);
+	
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -830,6 +832,7 @@ function DKWidget_GetMouseWindowY(element)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementX(element)
 {
+	DKLog("DKWidget_GetMouseElementX("+element+")\n", DKDEBUG);
 	var ele = document.getElementById(element);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 

@@ -75,6 +75,11 @@ function DKDev_OnEvent(event)
 	var target = DK_GetId(event);
 	if(DKDev_Ignore(target)){ return; }
 	
+	if(!DKWidget_ElementExists("DKDev_Box")){
+		DKDev_CreateBox();
+		DKDev_HideBox();
+	}
+	
 	if(DK_Type(event, "mousedown")){
 		var target = DK_GetId(event);
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
@@ -93,10 +98,13 @@ function DKDev_OnEvent(event)
 		mouseX = DKWidget_GetMouseWindowX();
 		mouseY = DKWidget_GetMouseWindowY();
 
+		if(!DKWidget_ElementExists(stored_element)){
+			stored_element = "body";
+		}
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
-		DKLog("stored_element = "+stored_element, DKINFO);
-		DKLog("storedMouseX = "+storedMouseX, DKINFO);
+		//DKLog("stored_element = "+stored_element, DKINFO);
+		//DKLog("storedMouseX = "+storedMouseX, DKINFO);
 		if(target == "body"){
 			DKCreate("DKDev/DKDev_RootMenu.js", function(){});
 			return;

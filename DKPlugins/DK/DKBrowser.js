@@ -111,7 +111,7 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
-	//DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
+	DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
 	
 	var string = DK_FileToString(url);
 	DKLog("CreateWidget(url, parent): string = "+string+"\n", DKDEBUG);
