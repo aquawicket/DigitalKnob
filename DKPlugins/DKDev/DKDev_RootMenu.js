@@ -3,8 +3,8 @@
 function DKDev_RootMenu_Init()
 {
 	DKCreate("DKDev/DKDev_RootMenu.html");
-	DKWidget_SetProperty("DKDev_RootMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("DKDev_RootMenu.html","left",DKWindow_GetMouseX()+"px");
+	DKWidget_SetProperty("DKDev_RootMenu.html","top",DKWindow_GetMouseY()+"rem");
+	DKWidget_SetProperty("DKDev_RootMenu.html","left",DKWindow_GetMouseX()+"rem");
 	DKAddEvent("GLOBAL", "mousedown", DKDev_RootMenu_OnEvent);
 	DKAddEvent("DKDev_RootMenu_NewFrame", "click", DKDev_RootMenu_OnEvent);
 	DKAddEvent("DKDev_RootMenu_OpenFile", "click", DKDev_RootMenu_OnEvent);

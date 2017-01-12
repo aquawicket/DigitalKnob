@@ -139,20 +139,20 @@ function DKDev_CreateBox()
 	//Control box
 	var box = DKWidget_CreateElement("body", "div", "DKDev_Box");
 	DKWidget_SetProperty(box, "position", "absolute");
-	DKWidget_SetProperty(box, "top", "-1px"); //-1 for border
-	DKWidget_SetProperty(box, "left", "-1px"); //-1 for border
+	DKWidget_SetProperty(box, "top", "-1rem"); //-1 for border
+	DKWidget_SetProperty(box, "left", "-1rem"); //-1 for border
 	DKWidget_SetProperty(box, "width", "100%");
 	DKWidget_SetProperty(box, "height", "100%");
 	DKWidget_SetProperty(box, "border-style", "solid");
 	DKWidget_SetProperty(box, "border-color", "red");
-	DKWidget_SetProperty(box, "border-width", "1px");
+	DKWidget_SetProperty(box, "border-width", "1rem");
 
 	//resize dot
 	//var resizeImg = DKWidget_CreateElement(box, "img", "DKC-DKResizeImg");
 	//DKWidget_SetAttribute(resizeImg, "src", "resize2.png");
 	//DKWidget_SetProperty(resizeImg, "position", "absolute");
-	//DKWidget_SetProperty(resizeImg, "right", "-9px");
-	//DKWidget_SetProperty(resizeImg, "bottom", "0px");
+	//DKWidget_SetProperty(resizeImg, "right", "-9rem");
+	//DKWidget_SetProperty(resizeImg, "bottom", "0rem");
 
 	//resize handler
 	//var resize = DKWidget_CreateElement(resizeImg, "handle", "DKC-DKResize");
@@ -339,8 +339,8 @@ function DKDev_Paste()
 	//DKWidget_SetAttribute(DKWidget_GetFirstChild(temp), "id", id);
 	
 	DKWidget_SetProperty(id, "position", "absolute");
-	DKWidget_SetProperty(id, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(id, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(id, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(id, "left", String(storedMouseX)+"rem");
 	
 	DKWidget_AppendChild(stored_element, id);
 	DKWidget_RemoveElement(temp);
@@ -371,10 +371,10 @@ function DKDev_NewDiv()
 {
 	var element = DKWidget_CreateElement(stored_element, "div", "Div");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
-	DKWidget_SetProperty(element, "width", "100px");
-	DKWidget_SetProperty(element, "height", "100px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
+	DKWidget_SetProperty(element, "width", "100rem");
+	DKWidget_SetProperty(element, "height", "100rem");
 	DKWidget_SetProperty(element, "background-color", "blue");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
@@ -386,10 +386,10 @@ function DKDev_NewText()
 {
 	var element = DKWidget_CreateElement(stored_element, "div", "Text");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
-	DKWidget_SetProperty(element, "width", "50px");
-	DKWidget_SetProperty(element, "height", "18px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
+	DKWidget_SetProperty(element, "width", "50rem");
+	DKWidget_SetProperty(element, "height", "18rem");
 	DKWidget_SetInnerHtml(element, "Text");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
@@ -401,10 +401,10 @@ function DKDev_NewButton()
 {
 	var element = DKWidget_CreateElement(stored_element, "button", "Button");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
-	DKWidget_SetProperty(element, "width", "50px");
-	DKWidget_SetProperty(element, "height", "22px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
+	DKWidget_SetProperty(element, "width", "50rem");
+	DKWidget_SetProperty(element, "height", "22rem");
 	DKWidget_SetInnerHtml(element, "Button");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
@@ -418,8 +418,8 @@ function DKDev_NewImage(file)
 	var element = DKWidget_CreateElement(stored_element, "img", "Image");
 	DKWidget_SetAttribute(element, "src", file);
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -432,8 +432,8 @@ function DKDev_NewTextbox()
 	DKWidget_SetAttribute(element, "type", "text");
 	DKWidget_SetAttribute(element, "value", "test");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -444,8 +444,8 @@ function DKDev_NewTextarea()
 {
 	var element = DKWidget_CreateElement(stored_element, "textarea", "Textarea");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -456,8 +456,8 @@ function DKDev_NewDropdown()
 {
 	var element = DKWidget_CreateElement(stored_element, "select", "Dropdown");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -469,8 +469,8 @@ function DKDev_NewCheckbox()
 	var element = DKWidget_CreateElement(stored_element, "input", "Checkbox");
 	DKWidget_SetAttribute(element, "type", "checkbox");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -482,8 +482,8 @@ function DKDev_NewRadioButton()
 	var element = DKWidget_CreateElement(stored_element, "input", "RadioButton");
 	DKWidget_SetAttribute(element, "type", "radio");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -494,10 +494,10 @@ function DKDev_NewiFrame()
 {
 	var element = DKWidget_CreateElement(stored_element, "iframe", "DKCefFrame");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
-	DKWidget_SetProperty(element, "width", "200px");
-	DKWidget_SetProperty(element, "height", "200px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
+	DKWidget_SetProperty(element, "width", "200rem");
+	DKWidget_SetProperty(element, "height", "200rem");
 	DKWidget_SetProperty(element, "display", "block");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
@@ -510,8 +510,8 @@ function DKDev_NewVSlider()
 	var element = DKWidget_CreateElement(stored_element, "input", "VSlider");
 	DKWidget_SetAttribute(element, "type", "range");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;
@@ -523,8 +523,8 @@ function DKDev_NewHSlider()
 	var element = DKWidget_CreateElement(stored_element, "input", "HSlider");
 	DKWidget_SetAttribute(element, "type", "range");
 	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", String(storedMouseY)+"px");
-	DKWidget_SetProperty(element, "left", String(storedMouseX)+"px");
+	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
+	DKWidget_SetProperty(element, "left", String(storedMouseX)+"rem");
 	DKDev_AddDragHandles(element);
 	DKDev_SelectElement(element);
 	return true;

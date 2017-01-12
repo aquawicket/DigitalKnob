@@ -429,9 +429,10 @@ function DKMenuRightEdit_ValidatePosition(value)
 {
 	if(!value){ return value; }
 	if(value == "auto"){ return value; }
-	var ext = "px";
-	value = value.replace("px", "");
-	value = value.replace("p", "");
+	var ext = "rem";
+	value = value.replace("rem", "");
+	value = value.replace("re", "");
+	value = value.replace("r", "");
 	if(value.indexOf("%") > -1){
 		value = value.replace("%", "");
 		ext = "%";
@@ -447,6 +448,6 @@ function DKMenuRightEdit_ValidatePosition(value)
 		return value;
 	}
 
-	value = "0px";
+	value = "0rem";
 	return value;
 }
