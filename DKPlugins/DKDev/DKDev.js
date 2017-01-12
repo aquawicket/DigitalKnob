@@ -99,7 +99,8 @@ function DKDev_OnEvent(event)
 		mouseY = DKWidget_GetMouseWindowY();
 
 		if(!DKWidget_ElementExists(stored_element)){
-			stored_element = "body";
+			//stored_element = "body";
+			DKDev_SelectElement("");
 		}
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
@@ -178,13 +179,13 @@ function DKDev_ApplyBox(id)
 function DKDev_SelectElement(element)
 {
 	DKLog("DKDev_SelectElement("+element+") \n", DKDEBUG);
-	if(!element){
-		DKLog("DKDev_SelectElement(): element invalid", DKERROR);
-		return;
-	}
+	//if(!element){
+	//	DKLog("DKDev_SelectElement(): element invalid", DKERROR);
+	//	return;
+	//}
 
 	stored_element = element;
-	if(stored_element != "body"){
+	if(stored_element && stored_element != "body"){
 		DKDev_ApplyBox(stored_element);
 	}
 	else{

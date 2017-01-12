@@ -502,6 +502,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 function DKWidget_GetProperty(variable, parameter)
 {
 	//DKLog("DKWidget_GetProperty("+variable+","+parameter+") \n", DKDEBUG);
+	if(!variable){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }
 
 	if(typeof variable == "object"){
@@ -523,7 +524,7 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
-	if(!variable){ DKLog("variable not set \n", DKERROR); return false; }
+	if(!variable){ DKLog("variable not set \n", DKWARN); return false; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
 
 	if(typeof variable == "object"){
@@ -621,6 +622,7 @@ function DKWidget_SetInnerHtml(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
+	if(!id){ DKLog("DKWidget_GetInnerHtmlString(): empty id\n", DKWARN); return "";}
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
@@ -803,6 +805,7 @@ function DKWidget_InsertBefore(parent, element)
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
+	if(!document.getElementById(id)){ return ""; }
 	return document.getElementById(id).parentNode.id;
 }
 
@@ -833,6 +836,7 @@ function DKWidget_GetMouseWindowY(element)
 function DKWidget_GetMouseElementX(element)
 {
 	DKLog("DKWidget_GetMouseElementX("+element+")\n", DKDEBUG);
+	if(!element){ element = "body"; }
 	var ele = document.getElementById(element);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 
@@ -845,6 +849,7 @@ function DKWidget_GetMouseElementX(element)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementY(element)
 {
+	if(!element){ element = "body"; }
 	var ele = document.getElementById(element);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) != null){ 
