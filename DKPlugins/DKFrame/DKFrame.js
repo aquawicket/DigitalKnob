@@ -31,7 +31,12 @@ function DKFrame_OnEvent(event)
 		DKFrame_CloseButton(DK_GetId(event));
 	}
 	if(DK_Type(event, "resize")){
-		DKLog("DKFrame_OnEvent(): resize\n", DKINFO);
+		//DKLog("DKFrame_OnEvent("+DK_GetId(event)+"): resize\n", DKINFO);
+		var element = document.getElementById(DK_GetId(event));
+		var child = element.childNodes[4];
+		//DKLog(child.id+"\n", DKINFO);
+		DKWidget_SetProperty(child.id, "width", DKWidget_GetProperty(DK_GetId(event), "width"));
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(DK_GetId(event), "height")) - 21 +"px");
 	}
 }
 
@@ -69,9 +74,10 @@ function DKFrame_Widget(id)
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "top", "21rem");
 	DKWidget_SetProperty(id, "left", "0rem");
-	DKWidget_SetProperty(id, "width", "100%");
+	//DKWidget_SetProperty(id, "width", "100%");
 	DKWidget_SetProperty(id, "bottom", "-1rem");
-	DKWidget_RemoveProperty(id, "height");
+	//DKWidget_RemoveProperty(id, "height");
+	DKWidget_RemoveProperty(id, "bottom");
 	DKWidget_RemoveProperty(id, "right");
 	DKWidget_AppendChild(frame, id);
 	
