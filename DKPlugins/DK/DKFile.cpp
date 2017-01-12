@@ -853,7 +853,7 @@ bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString&
 	replace(path, "file:///", "");
 
 	if(!PathExists(path)){
-		DKLog("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist\n", DKERROR);
+		DKLog("DKFile::GetSetting("+path+","+setting+",DKString&): path does not exist\n", DKWARN);
 		return false; 
 	}
 	DKString filestring;
