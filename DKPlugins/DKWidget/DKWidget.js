@@ -467,7 +467,8 @@ function DKWidget_GetAttribute(variable, parameter)
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
-	if(!variable){ DKLog("variable not set \n", DKERROR); return false; }
+	if(!variable){ DKLog("DKWidget_SetAttribute(): variable not set \n", DKERROR); return false; }
+	if(!value){ DKLog("DKWidget_SetAttribute(): value not set \n", DKWARN); return false; }
 	if(typeof variable == "object"){
 		//variable.setAttribute(parameter, value);
 		if(parameter == "class"){
