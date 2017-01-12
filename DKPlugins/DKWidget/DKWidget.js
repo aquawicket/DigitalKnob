@@ -1,10 +1,8 @@
 //BROWSER
 
+function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKDEBUG); return color; }
 
-//if(DK_GetBrowser() != "CEF"){
-	function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKDEBUG); return color; }
-//}
 
 /////////////////////////////////
 function DKCreate(data, callback)
@@ -943,4 +941,27 @@ function DKWidget_OpenLink(url, target)
 	//DKLog("DKWidget_OpenLink("+url+","+target+")\n", DKDEBUG);
 	//window.location = url;
 	window.open(url, target);
+}
+
+///////////////////////////////////
+function DKWidget_SetFile(id, file)
+{ 
+	DKLog("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n", DKWARN); 
+	return;
+	
+	//TODO
+	if(!id){ DKLog("DKWidget_SetFile(): id empty", DKWARN); return; }
+	while(id.indexOf(".html") == -1 && id.indexOf("body") == -1){
+		id = DKWidget_GetParent(id);
+	}
+	
+	/*  C++
+	std::vector<DKWidget*> instances;
+	DKWidget::GetInstances(instances);
+	for(unsigned int i=0; i<instances.size(); ++i){
+		if(same(instances[i]->root->GetId().CString(), id)){
+			instances[i]->data[1] = file;
+		}
+	}
+	*/
 }

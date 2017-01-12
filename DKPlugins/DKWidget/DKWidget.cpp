@@ -443,14 +443,14 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 //////////////////////////////////////////////////////////
 bool DKWidget::GetFile(const DKString& id, DKString& file)
 {
-	if (!GetFile(GetElementById(id), file)){ return false; }
+	if(!GetFile(GetElementById(id), file)){ return false; }
 	return true;
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKWidget::SetFile(const DKString& id, const DKString& file)
 {
-	if (!SetFile(GetElementById(id), file)){ return false; }
+	if(!SetFile(GetElementById(id), file)){ return false; }
 	return true;
 }
 
