@@ -30,6 +30,9 @@ function DKFrame_OnEvent(event)
 	if(DK_IdLike(event, "close")){
 		DKFrame_CloseButton(DK_GetId(event));
 	}
+	if(DK_Type(event, "resize")){
+		DKLog("DKFrame_OnEvent(): resize\n", DKINFO);
+	}
 }
 
 ///////////////////////////
@@ -192,6 +195,7 @@ function DKFrame_CreateResize(frame)
 	DKWidget_SetProperty(resize, "bottom", "0rem");
 	DKWidget_SetProperty(resize, "width", "16rem");
 	DKWidget_AddResizeHandle(resize, frame);
+	DKAddEvent(frame, "resize", DKFrame_OnEvent);
 	
 	return resize;
 }

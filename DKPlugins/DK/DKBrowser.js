@@ -334,6 +334,7 @@ function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id){
 		ceiling2.style.height = document.body.clientHeight + window.scrollY + 'px';
 	}
 	*/
+	DKSendEvent(id, "resize");
 }
 
 ////////////////////////
