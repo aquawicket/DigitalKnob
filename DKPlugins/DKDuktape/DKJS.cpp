@@ -72,7 +72,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetMouseY", DKJS::GetMouseY, 0);
 	DKDuktape::AttachFunction("DK_GetObjects", DKJS::GetObjects, 0);
 	DKDuktape::AttachFunction("DK_GetOS", DKJS::GetOS, 0);
-	DKDuktape::AttachFunction("DKWidget_GetPixelUnderMouse", DKJS::GetPixelUnderMouse, 0);
+	DKDuktape::AttachFunction("DK_GetPixelUnderMouse", DKJS::GetPixelUnderMouse, 0);
 	DKDuktape::AttachFunction("DK_GetScreenHeight", DKJS::GetScreenHeight, 0);
 	DKDuktape::AttachFunction("DK_GetScreenWidth", DKJS::GetScreenWidth, 0);
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime, 0);
