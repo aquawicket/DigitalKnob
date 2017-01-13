@@ -40,7 +40,7 @@ function DKDev_On()
 {
 	DKLog("DKDev_On \n", DKDEBUG);
 	DKDev_AddDragHandles("body");
-	DKDev_ApplyBox(stored_element);
+	//DKDev_ApplyBox(stored_element);
 	devmode = true;
 }
 
@@ -174,6 +174,7 @@ function DKDev_HideBox()
 ///////////////////////////
 function DKDev_ApplyBox(id)
 {
+	DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
 	//DKWidget_PrependChild(id, "DKDev_Box");
 	DKWidget_AppendChild("body", "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
@@ -187,14 +188,14 @@ function DKDev_ApplyBox(id)
 /////////////////////////////////////
 function DKDev_SelectElement(element)
 {
-	DKLog("DKDev_SelectElement("+element+") \n", DKDEBUG);
+	DKLog("DKDev_SelectElement("+element+") \n", DKINFO);
 	//if(!element){
 	//	DKLog("DKDev_SelectElement(): element invalid", DKERROR);
 	//	return;
 	//}
 
 	stored_element = element;
-	if(stored_element && stored_element != "body"){
+	if(stored_element && stored_element.indexOf("body") == -1){
 		DKDev_ApplyBox(stored_element);
 	}
 	else{
