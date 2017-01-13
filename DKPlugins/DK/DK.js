@@ -28,6 +28,7 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_System(){DKLog("DK_System(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DK_GetPixelUnderMouse(){DKLog("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
 }
 
 var DKERROR = 1;     //Red
