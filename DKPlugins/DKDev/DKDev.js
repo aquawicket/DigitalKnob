@@ -147,21 +147,21 @@ function DKDev_CreateBox()
 	DKWidget_SetProperty(box, "border-color", "red");
 	DKWidget_SetProperty(box, "border-width", "1rem");
 	DKWidget_SetProperty(box, "pointer-events", "none");
-	//DKAddEvent(box, "mousedown", DKDev_OnEvent);
-	//DKWidget_SetProperty(box, "z-index", "1000");
 
+	/*
 	//resize dot
-	//var resizeImg = DKWidget_CreateElement(box, "img", "DKC-DKResizeImg");
-	//DKWidget_SetAttribute(resizeImg, "src", "resize2.png");
-	//DKWidget_SetProperty(resizeImg, "position", "absolute");
-	//DKWidget_SetProperty(resizeImg, "right", "-9rem");
-	//DKWidget_SetProperty(resizeImg, "bottom", "0rem");
+	var resizeImg = DKWidget_CreateElement(box, "img", "DKResizeImg");
+	DKWidget_SetAttribute(resizeImg, "src", "DKDev/resize2.png");
+	DKWidget_SetProperty(resizeImg, "position", "absolute");
+	DKWidget_SetProperty(resizeImg, "right", "-9rem");
+	DKWidget_SetProperty(resizeImg, "bottom", "-9rem");
 
 	//resize handler
-	//var resize = DKWidget_CreateElement(resizeImg, "handle", "DKC-DKResize");
-	//DKWidget_SetProperty(resize, "position", "absolute");
-	//DKWidget_SetProperty(resize, "width", "100%");
-	//DKWidget_SetProperty(resize, "height", "100%");
+	var resize = DKWidget_CreateElement(resizeImg, "handle", "DKResize");
+	DKWidget_SetProperty(resize, "position", "absolute");
+	DKWidget_SetProperty(resize, "width", "100%");
+	DKWidget_SetProperty(resize, "height", "100%");
+	*/
 }
 
 ////////////////////////
@@ -189,10 +189,6 @@ function DKDev_ApplyBox(id)
 function DKDev_SelectElement(element)
 {
 	DKLog("DKDev_SelectElement("+element+") \n", DKINFO);
-	//if(!element){
-	//	DKLog("DKDev_SelectElement(): element invalid", DKERROR);
-	//	return;
-	//}
 
 	stored_element = element;
 	if(stored_element && stored_element.indexOf("body") == -1){
