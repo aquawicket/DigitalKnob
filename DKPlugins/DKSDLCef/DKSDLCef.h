@@ -88,24 +88,13 @@ public:
 	{
 		//DKLog("DKSDLCefHandler::OnPaint()\n", DKDEBUG);
 
-		//if(!dkCef->current_browser){ return; }
 		if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 		if(type == PET_VIEW){
 			if(dirtyRects.size() == 0){ return; }
 			
-			/*
-			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-			if(!surface){
-				DKLog("DKSDLCefHandler::OnPaint(): failed: "+toString(SDL_GetError())+"\n", DKERROR);
-				return; 
-			}
-			*/
-			
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){
-				//FIXME
-				DKLog("OnPaint(): width="+toString(width)+","+toString(height)+"\n",DKINFO);
 				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 			}
 
@@ -121,9 +110,7 @@ public:
 			unsigned char * texture_data = NULL;
 			int texture_pitch = 0;
 			if(SDL_LockTexture(dkSdlCef->background_image, NULL, (void **)&texture_data, &texture_pitch) == 0){
-			//if(SDL_LockTexture(dkSdlCef->background_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
 				//copies whole cef bitmap to sdl texture
-				//std::memcpy(surface->pixels, buffer, width * height * 4);
 				std::memcpy(texture_data, buffer, width * height * 4);
 				SDL_UnlockTexture(dkSdlCef->background_image);
 			}

@@ -101,15 +101,10 @@ void DKSDLWindow::Init()
 		return;
 	}
 
-	//FIXME - Mac need to use Software rendering to make CEF work at the moment.
-//#ifndef MAC
 	sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!sdlren){
-//#endif
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
-//#ifndef MAC	
 	}
-//#endif
 	if(!sdlren){
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);	
 	}
