@@ -17,20 +17,13 @@ function DKFrame_OnEvent(event)
 		DKFrame_BringToFront();
 	}
 	if(DK_Type(event, "dblclick")){
-		var id = DK_GetId(event);
-		var titlebar = DKWidget_GetParent(id);
-		DKFrame_MaximizeButton(titlebar);
-		var frame = document.getElementById(DK_GetId(event)).parentNode;
-		var child = frame.childNodes[4];
-		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		//FIXME
+		//var id = DK_GetId(event);
+		//var titlebar = DKWidget_GetParent(id);
+		//DKFrame_MaximizeButton(titlebar);
 	}
 	if(DK_IdLike(event, "minimize")){
 		DKFrame_MinimizeButton(DK_GetId(event));
-		var frame = document.getElementById(DK_GetId(event)).parentNode;
-		var child = frame.childNodes[4];
-		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 	if(DK_IdLike(event, "maximize")){
 		DKFrame_MaximizeButton(DK_GetId(event));
