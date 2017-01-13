@@ -369,7 +369,7 @@ function DKDev_NewPage()
 	//var id = DKWidget_GetAvailableId("NewWidget.html");
 	DKCreate(".html,"+stored_element, function(){
 		DKDev_AddDragHandles("New.html");
-		DKDev_SelectElement("New.html");
+		//DKDev_SelectElement("New.html");
 		DKFrame_Widget("New.html");
 	});
 	return true;
@@ -626,7 +626,7 @@ function DKDev_OpenHtml(path)
 	DKCreate(path, function(){
 		DKDev_AddDragHandles(id);
 		DKFrame_Widget(id);
-		DKDev_SelectElement(id);
+		//DKDev_SelectElement(id);
 	});
 	
 	
