@@ -93,11 +93,13 @@ public:
 		if(type == PET_VIEW){
 			if(dirtyRects.size() == 0){ return; }
 			
+			/*
 			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 			if(!surface){
 				DKLog("DKSDLCefHandler::OnPaint(): failed: "+toString(SDL_GetError())+"\n", DKERROR);
 				return; 
 			}
+			*/
 			
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
@@ -116,12 +118,17 @@ public:
 				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
 
-			if(SDL_LockTexture(dkSdlCef->background_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
+			unsigned char * texture_data = NULL;
+			int texture_pitch = 0;
+			if(SDL_LockTexture(dkSdlCef->background_image, NULL, (void **)&texture_data, &texture_pitch) == 0){
+			//if(SDL_LockTexture(dkSdlCef->background_image, NULL, reinterpret_cast<void**>(&surface->pixels), &surface->pitch) == 0){
 				//copies whole cef bitmap to sdl texture
-				std::memcpy(surface->pixels, buffer, width * height * 4);
+				//std::memcpy(surface->pixels, buffer, width * height * 4);
+				std::memcpy(texture_data, buffer, width * height * 4);
 				SDL_UnlockTexture(dkSdlCef->background_image);
 			}
 		}
+		/*
 		else if(type == PET_POPUP){ //FIXME
 			//if(dirtyRects.size() == 0){ return; }
 			if(!dkSdlCef->popup_image){
@@ -140,10 +147,12 @@ public:
 				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
 		}
+		*/
 
 		if(dkSdlCef->cef_image) {	
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
 			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->background_image, NULL, NULL);
+			/*
 			if(dkSdlCef->popup_image){
 				SDL_Rect popup;
 				popup.x = dkSdlCef->popup_rect.x;
@@ -152,6 +161,7 @@ public:
 				popup.h = dkSdlCef->popup_rect.height;
 				SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &popup);	
 			}
+			*/
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
 	}
