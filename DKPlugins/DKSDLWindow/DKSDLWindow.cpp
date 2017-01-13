@@ -105,21 +105,20 @@ void DKSDLWindow::Init()
 #ifndef MAC
 	sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!sdlren){
+#endif
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
+#ifndef MAC	
 	}
+#endif
 	if(!sdlren){
-#endif
-		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);
-#ifndef MAC		
+		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);	
 	}
-#endif
 	if(!sdlren){
 		SDL_DestroyWindow(sdlwin);
 		DKLog("SDL_CreateRenderer Error: "+DKString(SDL_GetError()), DKERROR);
 		SDL_Quit();
 		return;
 	}
-#endif
 
 	//Set window Title
 	DKString title2; 
