@@ -92,9 +92,13 @@ public:
 		if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 		if(type == PET_VIEW){
 			if(dirtyRects.size() == 0){ return; }
+			
 			SDL_Surface* surface = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-			if(!surface){ return; }
-
+			if(!surface){
+				DKLog("DKSDLCefHandler::OnPaint(): failed: "+toString(SDL_GetError())+"\n", DKERROR);
+				return; 
+			}
+			
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){

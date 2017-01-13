@@ -101,13 +101,18 @@ void DKSDLWindow::Init()
 		return;
 	}
 
+	//FIXME - Mac need to use Software rendering to make CEF work at the moment.
+#ifndef MAC
 	sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!sdlren){
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
 	}
 	if(!sdlren){
+#endif
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);
+#ifndef MAC		
 	}
+#endif
 	if(!sdlren){
 		SDL_DestroyWindow(sdlwin);
 		DKLog("SDL_CreateRenderer Error: "+DKString(SDL_GetError()), DKERROR);
@@ -377,8 +382,8 @@ void* DKSDLWindow::GetHwnd(void*)
 void DKSDLWindow::Process()
 {
 	SDL_SetRenderTarget(sdlren, NULL); 
-	//SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
-	SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
+	SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
+	//SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
     SDL_RenderClear(sdlren);
 	//SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
 	//SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );
