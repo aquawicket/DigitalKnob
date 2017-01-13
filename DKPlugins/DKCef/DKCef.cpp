@@ -173,7 +173,10 @@ bool DKCef::NewBrowser()
 #endif
 	CefRefPtr<CefBrowser> _browser;
 	_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
-	if(!_browser){ return false; } //error
+	if(!_browser){
+		DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
+		return false; 
+	}
 	browsers.push_back(_browser);
 	current_browser = browsers[0];
 	current_browser->GetHost()->SetWindowlessFrameRate(60);

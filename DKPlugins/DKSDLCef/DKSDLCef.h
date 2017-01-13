@@ -98,6 +98,8 @@ public:
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){
+				//FIXME
+				DKLog("OnPaint(): width="+toString(width)+","+toString(height)+"\n",DKINFO);
 				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 			}
 
