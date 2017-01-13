@@ -15,6 +15,7 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKCefApp::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
 	DKCefApp::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
+	DKCefApp::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
 	DKCefApp::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKCefApp::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
@@ -92,6 +93,21 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return false; }
 	retval = CefV8Value::CreateString(string);
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return false; }
+	int r;
+	int g;
+	int b;
+	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return false; }
+	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
+	retval = CefV8Value::CreateString(rgb);
 	return true;
 }
 
