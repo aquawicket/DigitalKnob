@@ -167,7 +167,6 @@ function DKDev_CreateBox()
 ////////////////////////
 function DKDev_HideBox()
 {
-	//DKWidget_AppendChild("body", "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "hidden");
 }
 
