@@ -44,6 +44,7 @@ public:
 	static int GetMouseY(duk_context* ctx);
 	static int GetObjects(duk_context* ctx);
 	static int GetOS(duk_context* ctx);
+	static int GetPixelUnderMouse(duk_context* ctx);
 	static int GetScreenHeight(duk_context* ctx);
 	static int GetScreenWidth(duk_context* ctx);
 	static int GetTime(duk_context* ctx);

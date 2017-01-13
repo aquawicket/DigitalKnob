@@ -39,7 +39,6 @@ public:
 	static int GetOption(duk_context* ctx);
 	static int GetOuterHtml(duk_context* ctx);
 	static int GetParent(duk_context* ctx);
-	static int GetPixelUnderMouse(duk_context* ctx);
 	static int GetProperty(duk_context* ctx);
 	static int GetScale(duk_context* ctx);
 	static int GetTagName(duk_context* ctx);

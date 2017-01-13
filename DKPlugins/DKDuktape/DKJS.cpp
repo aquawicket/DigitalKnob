@@ -72,6 +72,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetMouseY", DKJS::GetMouseY, 0);
 	DKDuktape::AttachFunction("DK_GetObjects", DKJS::GetObjects, 0);
 	DKDuktape::AttachFunction("DK_GetOS", DKJS::GetOS, 0);
+	DKDuktape::AttachFunction("DKWidget_GetPixelUnderMouse", DKJS::GetPixelUnderMouse, 0);
 	DKDuktape::AttachFunction("DK_GetScreenHeight", DKJS::GetScreenHeight, 0);
 	DKDuktape::AttachFunction("DK_GetScreenWidth", DKJS::GetScreenWidth, 0);
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime, 0);
@@ -388,6 +389,21 @@ int DKJS::GetBrowser(duk_context* ctx)
 {
 	DKString browser = "Rocket";
 	duk_push_string(ctx, browser.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKJS::GetPixelUnderMouse(duk_context* ctx)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return 0; }
+	int r;
+	int g;
+	int b;
+	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return 0; }
+	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
+	duk_push_string(ctx, rgb.c_str());
 	return 1;
 }
 

@@ -37,7 +37,6 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetOption", DKWidgetJS::GetOption, 1);
 	DKDuktape::AttachFunction("DKWidget_GetOuterHtml", DKWidgetJS::GetOuterHtml, 1);
 	DKDuktape::AttachFunction("DKWidget_GetParent", DKWidgetJS::GetParent, 1);
-	DKDuktape::AttachFunction("DKWidget_GetPixelUnderMouse", DKWidgetJS::GetPixelUnderMouse, 0);
 	DKDuktape::AttachFunction("DKWidget_GetProperty", DKWidgetJS::GetProperty, 2);
 	DKDuktape::AttachFunction("DKWidget_GetScale", DKWidgetJS::GetScale, 0);
 	DKDuktape::AttachFunction("DKWidget_GetTagName", DKWidgetJS::GetTagName, 1);
@@ -502,21 +501,6 @@ int DKWidgetJS::Visible(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::Visible(id)){ return 0; }
-	return 1;
-}
-
-////////////////////////////////////////////////////
-int DKWidgetJS::GetPixelUnderMouse(duk_context* ctx)
-{
-	int mouseX = 0;
-	int mouseY = 0;
-	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
-	int r;
-	int g;
-	int b;
-	if(!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)){ return 0; }
-	DKString rgb = toString(r)+","+toString(g)+","+toString(b);
-	duk_push_string(ctx, rgb.c_str());
 	return 1;
 }
 
