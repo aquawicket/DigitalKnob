@@ -205,14 +205,16 @@ function DKBuild_InstallVC2015()
 	DKLog("Installing Visual Studio 2015 \n", DKINFO);
 	var datapath = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() == "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
-		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
-	}
-	else if(DK_GetOS() == "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
-		DK_System(datapath+"/vs_community__de28dd49b1b30045a3a02f62906c2168.exe");
-	}
+	//if(DK_GetOS() == "Win32"){
+		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs2015.3.exe", datapath);
+		DK_System(datapath+"/vs2015.3.exe");
+	//}
+	//else if(DK_GetOS() == "Win64"){
+		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
+		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs2015.3.exe", datapath);
+		//DK_System(datapath+"/vs2015.3.exe");
+	//}
 }
 
 //////////////////////////
