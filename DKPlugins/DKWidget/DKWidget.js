@@ -834,31 +834,71 @@ function DKWidget_GetMouseWindowY(element)
 	return mouseY;
 }
 
-///////////////////////////////////////////
-function DKWidget_GetMouseElementX(element)
+//////////////////////////////////////
+function DKWidget_GetMouseElementX(id)
 {
-	DKLog("DKWidget_GetMouseElementX("+element+")\n", DKDEBUG);
-	if(!element){ element = "body"; }
-	var ele = document.getElementById(element);
+	DKLog("DKWidget_GetMouseElementX("+id+")\n", DKDEBUG);
+	if(!id){ id = "body"; }
+	/*
+	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 
 		left += ele.offsetLeft; 
 	}
+	*/
 	//DKLog("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n", DKINFO);
-	return mouseX - parseInt(left);
+	return mouseX - DKWidget_GetOffsetLeft(id);//parseInt(left);
 }
 
 ///////////////////////////////////////////
-function DKWidget_GetMouseElementY(element)
+function DKWidget_GetMouseElementY(id)
 {
-	if(!element){ element = "body"; }
+	DKLog("DKWidget_GetMouseElementY("+id+")\n", DKDEBUG);
+	if(!id){ id = "body"; }
+	/*
 	var ele = document.getElementById(element);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) != null){ 
 		top += ele.offsetTop; 
 	}
+	*/
 	//DKLog("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n", DKINFO);
-	return mouseY - parseInt(top);
+	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
+}
+
+//////////////////////////////////
+function DKWidget_GetOffsetTop(id)
+{
+	var ele = document.getElementById(id);
+	var top = ele.offsetTop;
+	while((ele=ele.offsetParent) != null){ 
+		top += ele.offsetTop; 
+	}
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	return parseInt(top);
+}
+
+//////////////////////////////////
+function DKWidget_GetOffsetLeft(id)
+{
+	var ele = document.getElementById(id);
+	var left = ele.offsetLeft;
+	while((ele=ele.offsetParent) != null){ 
+		left += ele.offsetLeft; 
+	}
+	return parseInt(left);
+}
+
+////////////////////////////////////
+function DKWidget_GetOffsetWidth(id)
+{
+	return document.getElementById(id).offsetWidth;
+}
+
+/////////////////////////////////////
+function DKWidget_GetOffsetHeight(id)
+{
+	return document.getElementById(id).offsetHeight;
 }
 
 ////////////////////////////////////////

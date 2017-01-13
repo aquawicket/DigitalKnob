@@ -139,13 +139,16 @@ function DKDev_CreateBox()
 	//Control box
 	var box = DKWidget_CreateElement("body", "div", "DKDev_Box");
 	DKWidget_SetProperty(box, "position", "absolute");
-	DKWidget_SetProperty(box, "top", "-1rem"); //-1 for border
-	DKWidget_SetProperty(box, "left", "-1rem"); //-1 for border
-	DKWidget_SetProperty(box, "width", "100%");
-	DKWidget_SetProperty(box, "height", "100%");
+	DKWidget_SetProperty(box, "top", "0rem"); //-1 for border
+	DKWidget_SetProperty(box, "left", "0rem"); //-1 for border
+	DKWidget_SetProperty(box, "right", "0rem");
+	DKWidget_SetProperty(box, "bottom", "0rem");
 	DKWidget_SetProperty(box, "border-style", "solid");
 	DKWidget_SetProperty(box, "border-color", "red");
 	DKWidget_SetProperty(box, "border-width", "1rem");
+	DKWidget_SetProperty(box, "pointer-events", "none");
+	//DKAddEvent(box, "mousedown", DKDev_OnEvent);
+	//DKWidget_SetProperty(box, "z-index", "1000");
 
 	//resize dot
 	//var resizeImg = DKWidget_CreateElement(box, "img", "DKC-DKResizeImg");
@@ -164,15 +167,21 @@ function DKDev_CreateBox()
 ////////////////////////
 function DKDev_HideBox()
 {
-	DKWidget_PrependChild("body", "DKDev_Box");
+	//DKWidget_AppendChild("body", "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "hidden");
 }
 
 ///////////////////////////
 function DKDev_ApplyBox(id)
 {
-	DKWidget_PrependChild(id, "DKDev_Box");
+	//DKWidget_PrependChild(id, "DKDev_Box");
+	DKWidget_AppendChild("body", "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
+	DKWidget_SetProperty("DKDev_Box", "top", String(DKWidget_GetOffsetTop(id))+"rem");
+	DKWidget_SetProperty("DKDev_Box", "left", String(DKWidget_GetOffsetLeft(id))+"rem");
+	DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
+	DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
+	
 }
 
 /////////////////////////////////////
