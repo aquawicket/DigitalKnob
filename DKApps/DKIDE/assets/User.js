@@ -39,7 +39,10 @@ else{
 	DKCreate("DKDev/DKDev.js", function(){});
 	DKCreate("DKDev/DKMenuRight.js", function(){
 		DKWidget_RemoveProperty("DKMenuRight.html","left");
+		DKWidget_RemoveProperty("DKMenuRight.html","height");
+		DKWidget_SetProperty("DKMenuRight.html","top","41rem");
 		DKWidget_SetProperty("DKMenuRight.html","right","0rem");
+		DKWidget_SetProperty("DKMenuRight.html","bottom","24rem");
 	});
 	DKCreate("DKDebug/Input.js", function(){});
 	
