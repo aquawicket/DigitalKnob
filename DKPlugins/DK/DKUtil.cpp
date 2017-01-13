@@ -17,6 +17,10 @@
 #ifdef ANDROID
 	#include "DKAndroid.h"
 #endif 
+
+#ifdef MAC
+	#include "DKMac.h"
+#endif
 	
 //#include <boost/foreach.hpp>
 #include <boost/asio.hpp>
@@ -123,6 +127,10 @@ bool DKUtil::GetMousePos(int& x, int& y)
 #ifdef ANDROID
 	if(!DKAndroid::GetMousePos(x, y)){ return false; }
 	return true;
+#endif
+#ifdef MAC
+	//if(!DKMac::GetMousePos(x, y)){ return false; }
+	//return true;
 #endif
 	DKLog("DKUtil::GetMousePos() not implemented on this OS \n", DKERROR);
 	x = 0;
