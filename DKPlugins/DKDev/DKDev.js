@@ -181,11 +181,51 @@ function DKDev_ApplyBox(id)
 	
 	//DKWidget_SetProperty("DKDev_Box", "top", String(DKWidget_GetOffsetTop(id))+"rem");
 	//DKWidget_SetProperty("DKDev_Box", "left", String(DKWidget_GetOffsetLeft(id))+"rem");
-	DKWidget_SetProperty("DKDev_Box", "top", parseInt(DKWidget_GetProperty(id, "top"))-1+"rem");
-	DKWidget_SetProperty("DKDev_Box", "left", parseInt(DKWidget_GetProperty(id, "left"))-1+"rem");
-	DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
-	DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
+	//DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
+	//DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
 	
+	DKLog("element = "+id+"\n", DKINFO);
+	if(DKWidget_HasProperty(id, "top")){
+		DKWidget_SetProperty("DKDev_Box", "top", parseInt(DKWidget_GetProperty(id, "top"))-1+"rem");
+	}
+	else{
+		DKWidget_RemoveProperty("DKDev_Box", "top");
+	}
+	
+	if(DKWidget_HasProperty(id, "left")){
+		DKWidget_SetProperty("DKDev_Box", "left", parseInt(DKWidget_GetProperty(id, "left"))-1+"rem");
+	}
+	else{
+		DKWidget_RemoveProperty("DKDev_Box", "left");
+	}
+	
+	if(DKWidget_HasProperty(id, "right")){
+		DKWidget_SetProperty("DKDev_Box", "right", parseInt(DKWidget_GetProperty(id, "right"))-1+"rem");
+	}
+	else{
+		DKWidget_RemoveProperty("DKDev_Box", "right");
+	}
+	
+	if(DKWidget_HasProperty(id, "bottom")){
+		DKWidget_SetProperty("DKDev_Box", "bottom", parseInt(DKWidget_GetProperty(id, "bottom"))-1+"rem");
+	}
+	else{
+		DKWidget_RemoveProperty("DKDev_Box", "bottom");
+	}
+	
+	//if(DKWidget_HasProperty(id, "width") || document.getElementById(id).tagName.indexOf("img") > -1){
+		DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
+	//}
+	//else{
+	//	DKWidget_RemoveProperty("DKDev_Box", "width");
+	//}
+	
+	//if(DKWidget_HasProperty(id, "height") || document.getElementById(id).tagName.indexOf("img") > -1){
+		DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
+	//}
+	//else{
+	//	DKWidget_RemoveProperty("DKDev_Box", "height");
+	//}
 }
 
 /////////////////////////////////////

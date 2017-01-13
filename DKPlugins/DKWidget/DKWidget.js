@@ -546,6 +546,15 @@ function DKWidget_SetProperty(variable, parameter, value)
 	return false;
 }
 
+////////////////////////////////////////////
+function DKWidget_HasProperty(id, parameter)
+{
+	if(document.getElementById(id).style[parameter]){
+		return true;
+	}
+	return false;
+}
+
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
@@ -890,6 +899,30 @@ function DKWidget_GetOffsetLeft(id)
 }
 
 ////////////////////////////////////
+function DKWidget_GetOffsetRight(id)
+{
+	var ele = document.getElementById(id);
+	var right = ele.offsetRight;
+	while((ele=ele.offsetParent) != null){ 
+		right += ele.offsetRight; 
+	}
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	return parseInt(right);
+}
+
+/////////////////////////////////////
+function DKWidget_GetOffsetBottom(id)
+{
+	var ele = document.getElementById(id);
+	var bottom = ele.offsetRight;
+	while((ele=ele.offsetParent) != null){ 
+		bottom += ele.offsetBottom; 
+	}
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	return parseInt(bottom);
+}
+
+////////////////////////////////////
 function DKWidget_GetOffsetWidth(id)
 {
 	return document.getElementById(id).offsetWidth;
@@ -899,6 +932,12 @@ function DKWidget_GetOffsetWidth(id)
 function DKWidget_GetOffsetHeight(id)
 {
 	return document.getElementById(id).offsetHeight;
+}
+
+////////////////////////////////////
+function DKWidget_GetComputedTop(id)
+{
+	return window.getComputedStyle(document.getElementById(id)).top;
 }
 
 ////////////////////////////////////////
