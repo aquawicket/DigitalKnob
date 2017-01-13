@@ -20,9 +20,17 @@ function DKFrame_OnEvent(event)
 		var id = DK_GetId(event);
 		var titlebar = DKWidget_GetParent(id);
 		DKFrame_MaximizeButton(titlebar);
+		var frame = document.getElementById(DK_GetId(event)).parentNode;
+		var child = frame.childNodes[4];
+		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 	if(DK_IdLike(event, "minimize")){
 		DKFrame_MinimizeButton(DK_GetId(event));
+		var frame = document.getElementById(DK_GetId(event)).parentNode;
+		var child = frame.childNodes[4];
+		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 	if(DK_IdLike(event, "maximize")){
 		DKFrame_MaximizeButton(DK_GetId(event));
@@ -31,12 +39,10 @@ function DKFrame_OnEvent(event)
 		DKFrame_CloseButton(DK_GetId(event));
 	}
 	if(DK_Type(event, "resize")){
-		//DKLog("DKFrame_OnEvent("+DK_GetId(event)+"): resize\n", DKINFO);
-		var element = document.getElementById(DK_GetId(event));
-		var child = element.childNodes[4];
-		//DKLog(child.id+"\n", DKINFO);
-		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(DK_GetId(event), "width")) + "rem");
-		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(DK_GetId(event), "height")) - 21 + "rem");
+		var frame = document.getElementById(DK_GetId(event));
+		var child = frame.childNodes[4];
+		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 }
 
@@ -248,7 +254,13 @@ function DKFrame_MaximizeButton(id)
 	var left = DKWidget_GetProperty(frame, "left");
 	var right = DKWidget_GetProperty(frame, "right");
 	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem"){
-		DKFrame_RestoreSize(frame)
+		DKFrame_RestoreSize(frame);
+		
+		var frame = document.getElementById(id).parentNode;
+		var child = frame.childNodes[4];
+		DKLog(frame.id+"\n", DKINFO);
+		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 	else{
 		DKFrame_StoreSize(frame);
@@ -258,6 +270,11 @@ function DKFrame_MaximizeButton(id)
 		DKWidget_SetProperty(frame, "bottom", "0rem");
 		DKWidget_RemoveProperty(frame, "width");
 		DKWidget_RemoveProperty(frame, "height");
+		
+		var frame = document.getElementById(id).parentNode;
+		var child = frame.childNodes[4];
+		DKWidget_SetProperty(child.id, "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(child.id, "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 }
 
