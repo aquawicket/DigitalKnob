@@ -176,10 +176,14 @@ function DKDev_ApplyBox(id)
 {
 	DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
 	//DKWidget_PrependChild(id, "DKDev_Box");
-	DKWidget_AppendChild("body", "DKDev_Box");
+	parent = document.getElementById(id).parentNode;
+	DKWidget_AppendChild(parent.id, "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
-	DKWidget_SetProperty("DKDev_Box", "top", String(DKWidget_GetOffsetTop(id))+"rem");
-	DKWidget_SetProperty("DKDev_Box", "left", String(DKWidget_GetOffsetLeft(id))+"rem");
+	
+	//DKWidget_SetProperty("DKDev_Box", "top", String(DKWidget_GetOffsetTop(id))+"rem");
+	//DKWidget_SetProperty("DKDev_Box", "left", String(DKWidget_GetOffsetLeft(id))+"rem");
+	DKWidget_SetProperty("DKDev_Box", "top", parseInt(DKWidget_GetProperty(id, "top"))-1+"rem");
+	DKWidget_SetProperty("DKDev_Box", "left", parseInt(DKWidget_GetProperty(id, "left"))-1+"rem");
 	DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
 	DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
 	
