@@ -1,8 +1,8 @@
 ##TODO - create simple DKDEPEND_ALL() to all all plugins.
 
-IF(WIN)
+#IF(WIN)
 	DKSET(USE_DKCef ON)
-ENDIF()
+#ENDIF()
 ##DKDEPEND(doxygen-1.8.11)
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
