@@ -115,7 +115,7 @@ public:
 				SDL_UnlockTexture(dkSdlCef->background_image);
 			}
 		}
-		/*
+		
 		else if(type == PET_POPUP){ //FIXME
 			//if(dirtyRects.size() == 0){ return; }
 			if(!dkSdlCef->popup_image){
@@ -134,12 +134,10 @@ public:
 				SDL_UnlockTexture(dkSdlCef->popup_image);
 			}
 		}
-		*/
 
 		if(dkSdlCef->cef_image) {	
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
 			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->background_image, NULL, NULL);
-			/*
 			if(dkSdlCef->popup_image){
 				SDL_Rect popup;
 				popup.x = dkSdlCef->popup_rect.x;
@@ -148,7 +146,6 @@ public:
 				popup.h = dkSdlCef->popup_rect.height;
 				SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &popup);	
 			}
-			*/
 			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 		}
 	}
