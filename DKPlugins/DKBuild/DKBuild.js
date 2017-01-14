@@ -366,6 +366,7 @@ function DKBuild_GitUpdate()
 function DKBuild_GitCommit()
 {
 	DKLog("Git Commit... \n", DKINFO);
+	//DKBuild_GitUpdate(); //first update  this does not work, changed files are reverted
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" commit -a -m \"commit from git\"");
 	DK_Execute(GIT +" push");
