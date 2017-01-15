@@ -103,20 +103,21 @@ void DKCef::Init()
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
 
+/*
 #ifdef MAC
 	DKString exepath;
 	DKFile::GetExePath(exepath);
 	DKLog("exepath="+exepath+" \n", DKDEBUG);
 	DKString exename;
 	DKFile::GetExeName(exename);
-	//DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
-	//DKString ep = "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLCef/mac64/Release/DKSDLCef.app/Contents/Frameworks/DKSDLCef Helper.app/Contents/MacOS/DKSDLCef Helper";
-	//CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
+	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+	CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #endif
 
 #ifdef LINUX
 	//TODO
 #endif
+*/
 
 	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
