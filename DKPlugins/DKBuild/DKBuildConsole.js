@@ -7,6 +7,7 @@ function DKBuildConsole_Init()
 	DKBuild_ValidateGit();
 	DKBuild_ValidateCmake();
 	DKBuild_ValidateVC2015();
+	DKBuild_ValidateGcc();
 	
 	while(working){
 		DKBuildConsole_Process();

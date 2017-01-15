@@ -9,6 +9,7 @@ var GIT = "";
 var CMAKE = "";
 var NDK = "C:/android-ndk-r10d";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
+var GCC=""
 var APP_LIST = [];
 
 
@@ -49,6 +50,7 @@ function DKBuild_Init()
 		SVN = "/usr/bin/svn";
 		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
+		GCC = "/usr/bin/g++";
 	}
 
 	if(DKAvailable("DKWidget")){
@@ -136,7 +138,7 @@ function DKBuild_InstallGit()
 		//TODO
 	}
 	else if(DK_GetOS() == "Linux"){
-		//TODO
+		DK_Execute("sudo apt-get install git");
 	}
 	else{
 		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
@@ -215,6 +217,27 @@ function DKBuild_InstallVC2015()
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs2015.3.exe", datapath);
 		//DK_System(datapath+"/vs2015.3.exe");
 	//}
+}
+
+//////////////////////////////
+function DKBuild_ValidateGcc()
+{
+	if(DK_GetOS() != "Linux"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
+	DKLog("Looking for GCC \n", DKINFO);
+	//DKLog(GCC+"\n", DKDEBUG);
+	if(!DKFile_Exists(GCC)){
+		DKLog("Please install GCC \n", DKINFO);
+		DKBuild_InstallGcc();
+	}
+	DKLog("Found Gcc \n", DKINFO);
+}
+
+///////////////////////////////
+function DKBuild_InstallGcc()
+{
+	DKLog("Installing Gcc \n", DKINFO);
+	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
 
 //////////////////////////
