@@ -5,6 +5,10 @@ DKDEPEND(msys)
 DKDEPEND(vc2015)
 ENDIF()
 
+IF(LINUX)
+DKDEPEND(libboost1.60-tools-dev)
+ENDIF()
+
 IF(ANDROID OR IPHONE OR IPHONESIMULATOR)
 	RETURN()
 ENDIF()
@@ -116,7 +120,6 @@ MAC64_COMMAND(sudo ./bjam --toolset=darwin address-model=64 link=static variant=
 MAC64_COMMAND(sudo ./bjam --toolset=darwin address-model=64 link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
-LINUX_COMMAND(sudo apt install libboost1.60-tools-dev)
 LINUX_DEBUG_COMMAND(bjam toolset=gcc link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS}/Debug)
 
 LINUX_RELEASE_COMMAND(bjam toolset=gcc link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS}/Release)

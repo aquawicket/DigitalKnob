@@ -1,0 +1,8 @@
+### INSTALL ###
+IF(NOT LINUX)
+	RETURN()
+ENDIF()
+
+#IF(NOT EXISTS "/usr/bin/libboost1.60-tools-dev")
+	LINUX_COMMAND(sudo apt install libboost1.60-tools-dev)
+#ENDIF()
