@@ -17,6 +17,7 @@ ENDIF()
 IF(LINUX)
 	DKDEPEND(libx11-dev)
 	DKDEPEND(mesa-common-dev)
+	DKDEPEND(libgl1-mesa-dev)
 ENDIF()
 
 LIST(APPEND WIN_LIBS shell32.lib)
