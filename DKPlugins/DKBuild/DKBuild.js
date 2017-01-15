@@ -9,7 +9,8 @@ var GIT = "";
 var CMAKE = "";
 var NDK = "C:/android-ndk-r10d";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
-var GCC=""
+var GCC = "/usr/bin/g++";
+var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
 
 
@@ -50,7 +51,6 @@ function DKBuild_Init()
 		SVN = "/usr/bin/svn";
 		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
-		GCC = "/usr/bin/g++";
 	}
 
 	if(DKAvailable("DKWidget")){
@@ -238,6 +238,27 @@ function DKBuild_InstallGcc()
 {
 	DKLog("Installing Gcc \n", DKINFO);
 	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
+}
+
+////////////////////////////////
+function DKBuild_ValidateXcode()
+{
+	if(DK_GetOS() != "Mac"){ return; }
+	if(DK_GetBrowser() != "Rocket"){ return; }
+	DKLog("Looking for Xcode \n", DKINFO);
+	//DKLog(XCODE+"\n", DKDEBUG);
+	if(!DKFile_Exists(XCODE)){
+		DKLog("Please install Xcode \n", DKINFO);
+		DKBuild_InstallXcode();
+	}
+	DKLog("Found Xcode \n", DKINFO);
+}
+///////////////////////////////
+function DKBuild_InstallXcode()
+{
+	DKLog("Installing Xcode \n", DKINFO);
+	var datapath = DKAssets_LocalAssets();
+	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
 }
 
 //////////////////////////
