@@ -69,7 +69,7 @@ void DKCef::Init()
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 #ifdef LINUX
-	//settings.no_sandbox = true;
+	settings.no_sandbox = true;
 #endif
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
