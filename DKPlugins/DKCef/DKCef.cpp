@@ -69,11 +69,16 @@ void DKCef::Init()
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 #ifdef LINUX
+	DKLog("DKCef::Init(): no_sandbox\n", DKINFO);
 	settings.no_sandbox = true;
 #endif
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
+//#if !defined(LINUX) && !defined(DEBUG)
+	DKLog("DKCef::Init(): single_process\n", DKINFO);
 	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+//#endif
+
 #ifndef DEBUG
 	settings.log_severity = LOGSEVERITY_DISABLE;
 #endif
