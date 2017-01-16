@@ -266,6 +266,6 @@ public:
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
 };
 
-REGISTER_OBJECT(DKSDLCef, false);
+REGISTER_OBJECT(DKSDLCef, true);
 
 #endif //DKSDLCef_H
