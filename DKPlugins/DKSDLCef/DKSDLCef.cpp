@@ -234,6 +234,9 @@ bool DKSDLCef::handle(SDL_Event* event)
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
+
+			DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
+			DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
       		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
 			return true;
 		}
