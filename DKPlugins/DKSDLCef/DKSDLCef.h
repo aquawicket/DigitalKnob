@@ -71,6 +71,7 @@ public:
 	/////////////////////////////////////////
 	void DoFrame()
 	{ 
+		//FIXME: this breaks SDL keyboard events for Mac OSX
 		CefDoMessageLoopWork(); 
 	}
 
