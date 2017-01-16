@@ -193,7 +193,8 @@ bool DKSDLCef::handle(SDL_Event* event)
 		case SDL_KEYDOWN:{
 			if(!dkCef->inFocus){ return false; }
 			CefKeyEvent KeyEvent;
-       		KeyEvent.type = KEYEVENT_KEYDOWN;
+       		//KeyEvent.type = KEYEVENT_KEYDOWN;
+			KeyEvent.type = KEYEVENT_RAWKEYDOWN;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
