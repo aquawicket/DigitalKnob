@@ -58,7 +58,7 @@ bool DKUtil::GetClipboard(DKString& text)
 #ifdef WIN32
 	return DKWindows::GetClipboard(text);
 #endif
-	DKLog("DKUtil::SetClipboard() not implemented on this OS \n", DKERROR);
+	DKLog("DKUtil::GetClipboard() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
@@ -280,7 +280,7 @@ bool DKUtil::ReleaseKey(int key)
 	return DKWindows::ReleaseKey(key);
 #endif
 
-	DKLog("DKUtil::PressKey(): not implemented on this OS \n", DKERROR);
+	DKLog("DKUtil::ReleaseKey(): not implemented on this OS \n", DKERROR);
 	return false;
 }
 
@@ -320,7 +320,7 @@ bool DKUtil::ChangeVolume(double nVolume)
 #ifdef WIN32
 	return DKWindows::ChangeVolume(nVolume);
 #endif
-	DKLog("DKUtil::GetKey() not implemented on this OS OS \n", DKERROR);
+	DKLog("DKUtil::ChangeVolume() not implemented on this OS OS \n", DKERROR);
 	return false;
 }
 
@@ -330,7 +330,7 @@ float DKUtil::GetVolume()
 #ifdef WIN32
 	return DKWindows::GetVolume();
 #endif
-	DKLog("DKUtil::GetKey() not implemented on this OS \n", DKERROR);
+	DKLog("DKUtil::GetVolume() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
