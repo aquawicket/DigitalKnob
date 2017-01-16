@@ -642,7 +642,7 @@ if(LIBC)
       list(APPEND EXTRA_LIBS iconv)
       set(HAVE_ICONV 1)
     endif()
-	ENDIF ##Added by Digitalknob
+	ENDIF() ##Added by Digitalknob
 
     if(NOT APPLE)
       check_include_file(alloca.h HAVE_ALLOCA_H)
