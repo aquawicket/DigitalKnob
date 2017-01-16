@@ -198,8 +198,8 @@ bool DKSDLCef::handle(SDL_Event* event)
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
-			DKLog("KEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
-			DKLog("KEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
+			DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
+			DKLog("RAWKEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
       		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
 
 			CefKeyEvent charKeyEvent;
