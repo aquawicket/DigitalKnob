@@ -28,5 +28,5 @@ WIN32_RELEASE_LIB(${CEF}/${OS}/libcef_dll/Release/libcef_dll_wrapper.lib)
 ### COMPILE ###
 DKSETPATH(${CEF}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} ${CEF})
-WIN32_VS_DEBUG(cef_binary_3.2623.1396.g0451528_windows32 cef.sln libcef_dll_wrapper)
-WIN32_VS_RELEASE(cef_binary_3.2623.1396.g0451528_windows32 cef.sln libcef_dll_wrapper)
+WIN32_VS_DEBUG(cef_binary_3.2704.1434.gec3e9ed_windows32 cef.sln libcef_dll_wrapper)
+WIN32_VS_RELEASE(cef_binary_3.2704.1434.gec3e9ed_windows32 cef.sln libcef_dll_wrapper)
