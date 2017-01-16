@@ -208,20 +208,25 @@ bool DKSDLCef::handle(SDL_Event* event)
       		
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					//charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
+					//charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
+					charKeyEvent.character = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
 				}
 				else{
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; // lowercase
+					//charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; // lowercase
+					charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
-				charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
+				//charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
+				charKeyEvent.character = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
 			}
 			else{
 				charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
+				charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
 			}
 
 			DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n", DKINFO);
