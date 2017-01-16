@@ -1,4 +1,4 @@
-if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"  || DK_GetOS() == "Mac"){
+if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"  || DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
 	var USE_CEF = 1;
 }
 if(DK_GetOS() == "Android"){
