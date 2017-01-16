@@ -66,6 +66,11 @@ void DKCef::Init()
 		// we are here in the father proccess.
 	}
 
+	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
+	// settings.multi_threaded_message_loop = true; // not supported, except windows
+	// CefString(&settings.log_file).FromASCII("");
+	// settings.log_severity = LOGSEVERITY_DEFAULT;
+	
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 //#ifdef LINUX
@@ -83,10 +88,6 @@ void DKCef::Init()
 	settings.log_severity = LOGSEVERITY_DISABLE;
 #endif
 
-	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
-	// settings.multi_threaded_message_loop = true; // not supported, except windows
-	// CefString(&settings.log_file).FromASCII("");
-	// settings.log_severity = LOGSEVERITY_DEFAULT;
 		
 #ifdef WIN32
 	DKString rp = DKFile::local_assets + "DKCef";
