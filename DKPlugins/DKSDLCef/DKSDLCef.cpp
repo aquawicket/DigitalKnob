@@ -222,7 +222,7 @@ bool DKSDLCef::handle(SDL_Event* event)
 				charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
 			}
 
-			DKLog("CHAR: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
+			DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n", DKINFO);
 			dkCef->current_browser->GetHost()->SendKeyEvent(charKeyEvent);
 			return true;
 		}
