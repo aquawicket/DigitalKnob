@@ -51,14 +51,13 @@ function LoadJS(url, callback)
 		return; 
 	}
 	
-	//loading = true;
-	//FIXME: change url to filename here
-	if(filesloaded.indexOf(url) != -1){
+	var file = url.substring(url.lastIndexOf("/") + 1);
+	if(filesloaded.indexOf(file) != -1){
 		DKLog(url+" already loaded \n", DKWARN);
 		return;
 	}
+	
 	// Call the js init function
-	var file = url.substring(url.lastIndexOf("/") + 1);
 	if(!file){ 
 		DKLog("LoadJS("+url+"): file invalid\n", DKERROR);
 		return; 
@@ -101,7 +100,6 @@ function LoadJS(url, callback)
 				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
-			//filesloaded += url+","; //add file to loaded list
 			filesloaded += file+","; //add file to loaded list
 			done = true;
 			callback && callback();
@@ -114,6 +112,17 @@ function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
 	DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
+	
+	if(!url){ 
+		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
+		return; 
+	}
+	
+	var file = url.substring(url.lastIndexOf("/") + 1);
+	if(filesloaded.indexOf(file) != -1){
+		DKLog(url+" already loaded \n", DKWARN);
+		return;
+	}
 	
 	var string = DK_FileToString(url);
 	DKLog("CreateWidget(url, parent): string = "+string+"\n", DKDEBUG);
@@ -145,7 +154,6 @@ function CreateWidget(url, parent)
 		//top.document.body.style.display='block';
 	}
 	var file = url.substring(url.lastIndexOf("/") + 1);
-	//filesloaded += url+","; //add file to loaded list
 	filesloaded += file+","; //add file to loaded list
 	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
 }

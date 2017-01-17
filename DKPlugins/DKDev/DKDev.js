@@ -108,13 +108,11 @@ function DKDev_OnEvent(event)
 		//DKLog("storedMouseX = "+storedMouseX, DKINFO);
 		
 		//FIXME
-		/*
-		DKLog("target = "+target+"\n", DKINFO)
-		if(target == "body"){  //target is always "body" in cef Mac and Linux
-			DKCreate("DKDev/DKDev_RootMenu.js", function(){});
-			return;
-		}
-		*/
+		//DKLog("target = "+target+"\n", DKINFO)
+		//if(target == "body"){  //target is always "body" in cef Mac and Linux
+		//	DKCreate("DKDev/DKDev_RootMenu.js", function(){});
+		//	return;
+		//}
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
 		StopPropagation(event);
