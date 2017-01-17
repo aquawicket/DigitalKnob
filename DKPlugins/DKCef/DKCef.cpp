@@ -62,6 +62,8 @@ void DKCef::Init()
 	if(DKApp::argc > 1){
 		for (int count = 1; count < DKApp::argc; count++){
 			if(has(DKApp::argv[count], "Cef")){
+				DKLog("CEF attempting to run another process,  exiting..\n", DKINFO);
+				DKApp::Exit();
 				return;	//If one of the arguments has Cef in it's string, then we should return to prevent an extra window. 
 			}
 	    }
