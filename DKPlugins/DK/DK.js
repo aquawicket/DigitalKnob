@@ -193,6 +193,9 @@ function DK_GetOS()
 		os_value = os_value.replace("32", "64");
 	}
 	
+	os_value = os_value.replace("Intel", ""); //Mac
+	os_value = os_value.replace(" x86_64", ""); //Linux
+	
 	return os_value;
 }
 
