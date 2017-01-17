@@ -131,6 +131,7 @@ function DKClose(data)
 		else{
 			DKLog(name+" is not callable \n", DKWARN);
 		}
+		filesloaded = filesloaded.replace(file+",", ""); //remove from file list
 		var script = document.getElementById(arry[1]);
 		if(!script){
 			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
@@ -139,7 +140,7 @@ function DKClose(data)
 		script.parentNode.removeChild(script);
 	}
 	if(arry[0] == "DKWidget"){
-		var file = DKFile_GetFilename(arry[1]);
+		filesloaded = filesloaded.replace(file+",", ""); //remove from file list
 		var element = document.getElementById(file);
 		if(!element){ 
 			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);

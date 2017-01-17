@@ -33,7 +33,7 @@ function DKDev_Menu_Init()
 function DKDev_Menu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKDev_Menu_OnEvent);
-	DKClose("DKDev/DKDev_Menu.html");
+	DKClose("DKDev_Menu.html");
 }
 
 //////////////////////////////////
@@ -114,5 +114,5 @@ function DKDev_Menu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKDev/DKDev_Menu.js");
+	DKClose("DKDev_Menu.js");
 }

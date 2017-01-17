@@ -52,10 +52,11 @@ function LoadJS(url, callback)
 	}
 	
 	//loading = true;
-	//if(filesloaded.indexOf(url) != -1){
-	//	DKLog(url+" already loaded \n", DKWARN);
-	//	return;
-	//}
+	//FIXME: change url to filename here
+	if(filesloaded.indexOf(url) != -1){
+		DKLog(url+" already loaded \n", DKWARN);
+		return;
+	}
 	// Call the js init function
 	var file = url.substring(url.lastIndexOf("/") + 1);
 	if(!file){ 
@@ -100,7 +101,8 @@ function LoadJS(url, callback)
 				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
-			filesloaded += url+","; //add file to loaded list
+			//filesloaded += url+","; //add file to loaded list
+			filesloaded += file+","; //add file to loaded list
 			done = true;
 			callback && callback();
 		}
@@ -142,7 +144,9 @@ function CreateWidget(url, parent)
 		//top.document.body.offsetHeight; // no need to store this anywhere, the reference is enough
 		//top.document.body.style.display='block';
 	}
-	filesloaded += url+","; //add file to loaded list
+	var file = url.substring(url.lastIndexOf("/") + 1);
+	//filesloaded += url+","; //add file to loaded list
+	filesloaded += file+","; //add file to loaded list
 	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
 }
 
