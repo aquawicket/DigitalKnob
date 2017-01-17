@@ -7,7 +7,7 @@ typedef CefV8ValueList CefArgs;
 typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
-//#ifndef MAC
+
 ///////////////////////////////////////
 class MyV8Handler : public CefV8Handler
 {
@@ -40,7 +40,6 @@ public:
 
 	IMPLEMENT_REFCOUNTING(MyV8Handler);
 };
-//#endif //WIN32
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
@@ -48,9 +47,7 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 public:
 	DKCefApp(){}
 
-//#ifndef MAC
 	static CefRefPtr<MyV8Handler> handler;
-//#endif
 	static CefRefPtr<CefV8Value> object;
 
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
@@ -75,9 +72,8 @@ public:
 		//command_line->AppendSwitchWithValue("no-sandbox", "1");
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
-//#ifndef MAC	
-		handler = new MyV8Handler();
-//#endif		
+
+		handler = new MyV8Handler();	
 		DKCreate("DKCefV8");
 	}
 
@@ -105,14 +101,12 @@ public:
 		for(it_type iterator = handler->functions.begin(); iterator != handler->functions.end(); iterator++) {
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), handler);
 			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}
-//#endif		
+		}	
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-//#ifndef MAC
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
 		handler->functions[name] = boost::bind(func, _1, _2);
@@ -123,8 +117,7 @@ public:
 		if(!handler->functions[name]){
 			DKLog("DKCefApp::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
 			return;
-		}
-//#endif		
+		}	
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
