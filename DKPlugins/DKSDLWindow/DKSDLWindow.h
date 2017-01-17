@@ -40,6 +40,7 @@ public:
 	static std::map<int,int> sdlKeyCode;
 	static std::map<int,int> sdlCharCode;
 	static std::map<int,int> sdlShiftCharCode;
+	static std::map<int,int> sdlMacCode;
 	void MapInputs();
 
 	SDL_Window* sdlwin;

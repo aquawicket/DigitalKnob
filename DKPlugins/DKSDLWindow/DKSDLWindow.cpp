@@ -9,6 +9,7 @@ std::vector<boost::function<void()> > DKSDLWindow::draw_funcs;
 std::map<int,int> DKSDLWindow::sdlKeyCode;
 std::map<int,int> DKSDLWindow::sdlCharCode;
 std::map<int,int> DKSDLWindow::sdlShiftCharCode;
+std::map<int,int> DKSDLWindow::sdlMacCode;
 
 ////////////////////////
 void DKSDLWindow::Init()
@@ -853,4 +854,109 @@ void DKSDLWindow::MapInputs()
 	sdlShiftCharCode[1073741905] = 0; //down
 	sdlShiftCharCode[1073741904] = 0; //left
 	sdlShiftCharCode[1073741903] = 0; //right
+
+	//sdlMacCode translates (SDL_Event->key.keysym.sym) to native mac keycode
+	sdlMacCode[27] = 27; //esc
+	sdlMacCode[1073741882] = 112; //f1
+	sdlMacCode[1073741883] = 113; //f2
+	sdlMacCode[1073741884] = 114; //f3
+	sdlMacCode[1073741885] = 115; //f4
+	sdlMacCode[1073741886] = 116; //f5
+	sdlMacCode[1073741887] = 117; //f6
+	sdlMacCode[1073741888] = 118; //f7
+	sdlMacCode[1073741889] = 119; //f8
+	sdlMacCode[1073741890] = 120; //f9
+	sdlMacCode[1073741891] = 121; //f10
+	sdlMacCode[1073741892] = 122; //f11
+	sdlMacCode[1073741893] = 123; //f12
+	sdlMacCode[1073741894] = 44; //printscreen
+	sdlMacCode[1073741895] = 145; //scrolllock
+	sdlMacCode[1073741896] = 19; //pause
+	sdlMacCode[96] = 192; //tilde
+	sdlMacCode[48] = 48; //0
+	sdlMacCode[49] = 49; //1
+	sdlMacCode[50] = 50; //2
+	sdlMacCode[51] = 51; //3
+	sdlMacCode[52] = 52; //4
+	sdlMacCode[53] = 53; //5
+	sdlMacCode[54] = 54; //6
+	sdlMacCode[55] = 55; //7
+	sdlMacCode[56] = 56; //8
+	sdlMacCode[57] = 57; //9
+	sdlMacCode[45] = 189; //minus
+	sdlMacCode[61] = 187; //equal
+	sdlMacCode[92] = 220; //backslash
+	sdlMacCode[8] = 8; //backspace
+	sdlMacCode[1073741901] = 35; //end
+	sdlMacCode[1073741898] = 36; //home
+	sdlMacCode[1073741907] = 144; //numlock
+	sdlMacCode[1073741908] = 111; //kp_slash
+	sdlMacCode[1073741909] = 106; //kp_multiply
+	sdlMacCode[1073741910] = 109; //kp_minus
+	sdlMacCode[9] = 9; //tab
+	sdlMacCode[113] = 81; //q
+	sdlMacCode[119] = 87; //w
+	sdlMacCode[101] = 69; //e
+	sdlMacCode[114] = 82; //r
+	sdlMacCode[116] = 84; //t
+	sdlMacCode[121] = 89; //y
+	sdlMacCode[117] = 85; //u
+	sdlMacCode[105] = 73; //i
+	sdlMacCode[111] = 79; //o
+	sdlMacCode[112] = 80; //p
+	sdlMacCode[91] = 219; //leftbracket
+	sdlMacCode[93] = 221; //rightbracket
+	sdlMacCode[13] = 13; //enter
+	sdlMacCode[127] = 46; //delete
+	sdlMacCode[1073741897] = 45; //insert
+	sdlMacCode[1073741899] = 33; //pageup
+	sdlMacCode[1073741902] = 34; //pagedown
+	sdlMacCode[1073741922] = 96; //kp_0
+	sdlMacCode[1073741913] = 97; //kp_1
+	sdlMacCode[1073741914] = 98; //kp_2
+	sdlMacCode[1073741915] = 99; //kp_3
+	sdlMacCode[1073741916] = 100; //kp_4
+	sdlMacCode[1073741917] = 101; //kp_5
+	sdlMacCode[1073741918] = 102; //kp_6
+	sdlMacCode[1073741919] = 103; //kp_7
+	sdlMacCode[1073741920] = 104; //kp_8
+	sdlMacCode[1073741921] = 105; //kp_9
+	sdlMacCode[1073741923] = 110; //kp_period
+	sdlMacCode[1073741911] = 107; //kp_plus
+	sdlMacCode[1073741912] = 13; //kp_enter
+	sdlMacCode[1073741881] = 20; //capslock
+	sdlMacCode[97] = 65; //a
+	sdlMacCode[115] = 83; //s
+	sdlMacCode[100] = 68; //d
+	sdlMacCode[102] = 70; //f
+	sdlMacCode[103] = 71; //g
+	sdlMacCode[104] = 72; //h
+	sdlMacCode[106] = 74; //j
+	sdlMacCode[107] = 75; //k
+	sdlMacCode[108] = 76; //l
+	sdlMacCode[59] = 186; //semicolon
+	sdlMacCode[39] = 222; //quote
+	sdlMacCode[1073742049] = 16; //leftshift
+	sdlMacCode[122] = 90; //z
+	sdlMacCode[120] = 88; //x
+	sdlMacCode[99] = 67; //c
+	sdlMacCode[118] = 86; //v
+	sdlMacCode[98] = 66; //b
+	sdlMacCode[110] = 78; //n
+	sdlMacCode[109] = 77; //m
+	sdlMacCode[44] = 188; //comma
+	sdlMacCode[46] = 190; //period
+	sdlMacCode[47] = 191; //slash
+	sdlMacCode[1073742053] = 16; //rightshift
+	sdlMacCode[1073742048] = 17; //leftctrl
+	sdlMacCode[1073742051] = 91; //leftwinkey
+	sdlMacCode[1073742050] = 18; //leftalt
+	sdlMacCode[32] = 32; //space
+	sdlMacCode[1073742054] = 18; //rightalt
+	sdlMacCode[1073741925] = 93; //menu
+	sdlMacCode[1073742052] = 17; //rightctrl
+	sdlMacCode[1073741906] = 38; //up
+	sdlMacCode[1073741905] = 40; //down
+	sdlMacCode[1073741904] = 37; //left
+	sdlMacCode[1073741903] = 39; //right
 }
