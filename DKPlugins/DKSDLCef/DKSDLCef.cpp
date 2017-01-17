@@ -192,10 +192,20 @@ bool DKSDLCef::handle(SDL_Event* event)
 
 		case SDL_KEYDOWN:{
 			if(!dkCef->inFocus){ return false; }
+			
+			//print SDL2 key data
+			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
+			DKLog("SDL_KEYDOWN: event->key.keysym.scancode = "+toString(event->key.keysym.scancode)+"\n", DKINFO);
+			//DKLog("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(sdlKeyCode[event->key.keysym.sym])+"\n", DKINFO);
+			//DKLog("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(sdlCharCode[event->key.keysym.sym])+"\n", DKINFO);
+			//DKLog("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(sdlShiftCharCode[event->key.keysym.sym])+"\n", DKINFO);
+			
 			CefKeyEvent KeyEvent;
-       		//KeyEvent.type = KEYEVENT_KEYDOWN;
-			KeyEvent.type = KEYEVENT_RAWKEYDOWN;
+       		KeyEvent.type = KEYEVENT_KEYDOWN;
+			//KeyEvent.type = KEYEVENT_RAWKEYDOWN;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			//KeyEvent.native_key_code = event->key.keysym.unicode;
+			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
 			//DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
@@ -239,6 +249,8 @@ bool DKSDLCef::handle(SDL_Event* event)
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			//KeyEvent.native_key_code = event->key.keysym.unicode;
+			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
