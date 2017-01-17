@@ -13,6 +13,7 @@ var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
 
+
 ///////////////////////
 function DKBuild_Init()
 {
@@ -20,7 +21,7 @@ function DKBuild_Init()
 	DKCreate("DKThreadPool");
 	DKCreate("DKCurl");
 
-	//DKLog("DK_GetOS() = "+DK_GetOS()+"\n", DKINFO);
+	//DKLog(DK_GetOS()+"\n", DKDEBUG);
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files/Subversion/bin/svn.exe";
