@@ -7,7 +7,7 @@ typedef CefV8ValueList CefArgs;
 typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
-#ifndef MAC
+//#ifndef MAC
 ///////////////////////////////////////
 class MyV8Handler : public CefV8Handler
 {
@@ -17,7 +17,8 @@ public:
 		DKLog("MyV8Handler::MyV8Handler()\n",DKDEBUG);
 	}
 
-	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+	//static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {
@@ -35,7 +36,7 @@ public:
 
 	IMPLEMENT_REFCOUNTING(MyV8Handler);
 };
-#endif //WIN32
+//#endif //WIN32
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
