@@ -17,8 +17,12 @@ public:
 		DKLog("MyV8Handler::MyV8Handler()\n",DKDEBUG);
 	}
 
-	//static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+#ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
+#else
+	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
+#endif
+	
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {

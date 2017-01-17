@@ -7,8 +7,13 @@ CefRefPtr<CefV8Value> DKCefApp::object = NULL;
 #ifndef MAC
 CefRefPtr<MyV8Handler> DKCefApp::handler = NULL;
 #endif
-//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> MyV8Handler::functions;
+
+#ifdef MAC
 std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > MyV8Handler::functions;
+#else
+std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> MyV8Handler::functions;
+#endif
+
 
 /////////////////////////////////////
 void DKCefApp::OnContextInitialized()
