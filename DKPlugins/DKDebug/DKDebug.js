@@ -148,7 +148,7 @@ function DKDebug_ClearConsole()
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
 		}
-		if(DK_GetOS() == "Mac"){
+		if(DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
 			DK_System("clear");
 		}
 	}
