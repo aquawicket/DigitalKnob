@@ -297,6 +297,10 @@ function DKFrame_CloseButton(id)
 function DKFrame_Close(id)
 {
 	//DKLog("DKFrame_Close("+id+")\n", DKDEBUG);
+	if(id.indexOf("/") > -1){
+		DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
+	}
+	
 	var frame = DKWidget_GetParent(id);
 	if(!frame){
 		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);

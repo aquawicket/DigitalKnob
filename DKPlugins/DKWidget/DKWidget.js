@@ -96,10 +96,13 @@ function AdjustRems(id)
 function DKClose(data)
 {
 	DKLog("DKClose("+data+")", DKDEBUG);
-	
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
 		return;
+	}
+	
+	if(data.indexOf("/") > -1){
+		DKLog("DKClose("+data+"): data contains a / \n", DKERROR);
 	}
 	
 	var arry = data.split(",");
