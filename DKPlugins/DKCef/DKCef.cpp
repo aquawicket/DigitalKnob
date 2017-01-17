@@ -43,7 +43,7 @@ void DKCef::Init()
 	//delay loading the DLL to move it's locations 
 	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
 	libcef = LoadLibrary(cef_dll.c_str());
-	if (!libcef){
+	if(!libcef){
 		DKLog("Could not load libcef.dll \n", DKERROR);
 	}
 	__HrLoadAllImportsForDll("libcef.dll");
@@ -58,11 +58,11 @@ void DKCef::Init()
 
 	//DKLog("CefExecuteProcess \n", DKINFO);
 	int result = CefExecuteProcess(args, cefApp.get(), NULL);
-	if (result >= 0){
+	if(result >= 0){
 		DKLog("CefExecuteProcess error", DKERROR);
 		return;
 	}
-	if (result == -1){
+	if(result == -1){
 		// we are here in the father proccess.
 	}
 
@@ -119,17 +119,12 @@ void DKCef::Init()
 	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #endif
-
-#ifdef LINUX
-	//TODO
-#endif
 */
 
 	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
 	//DKLog("CefInitialize \n", DKINFO);
 	result = CefInitialize(args, settings, cefApp, NULL);
-
 	if (!result){
 		DKLog("CefInitialize error", DKERROR);
 		return;
