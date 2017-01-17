@@ -196,9 +196,9 @@ bool DKSDLCef::handle(SDL_Event* event)
 			//print SDL2 key data
 			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
 			DKLog("SDL_KEYDOWN: event->key.keysym.scancode = "+toString(event->key.keysym.scancode)+"\n", DKINFO);
-			//DKLog("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(sdlKeyCode[event->key.keysym.sym])+"\n", DKINFO);
-			//DKLog("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(sdlCharCode[event->key.keysym.sym])+"\n", DKINFO);
-			//DKLog("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(sdlShiftCharCode[event->key.keysym.sym])+"\n", DKINFO);
+			DKLog("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])+"\n", DKINFO);
+			DKLog("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])+"\n", DKINFO);
+			DKLog("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])+"\n", DKINFO);
 			
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYDOWN;
