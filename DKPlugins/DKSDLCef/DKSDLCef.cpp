@@ -210,7 +210,9 @@ bool DKSDLCef::handle(SDL_Event* event)
        		KeyEvent.type = KEYEVENT_KEYDOWN;
 			//KeyEvent.type = KEYEVENT_RAWKEYDOWN;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
-			//KeyEvent.native_key_code = event->key.keysym.unicode;
+#ifdef MAC
+			KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
+#endif
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
@@ -255,7 +257,9 @@ bool DKSDLCef::handle(SDL_Event* event)
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
-			//KeyEvent.native_key_code = event->key.keysym.unicode;
+#ifdef MAC
+			KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
+#endif
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
