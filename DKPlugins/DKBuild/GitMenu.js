@@ -13,7 +13,7 @@ function GitMenu_Init()
 function GitMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
-	DKClose("DKBuild/GitMenu.html");
+	DKClose("GitMenu.html");
 }
 
 ///////////////////////////////
@@ -33,5 +33,5 @@ function GitMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/GitMenu.js");
+	DKClose("GitMenu.js");
 }
