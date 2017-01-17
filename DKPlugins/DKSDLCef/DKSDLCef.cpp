@@ -190,6 +190,12 @@ bool DKSDLCef::handle(SDL_Event* event)
 			return true;
 		}
 
+		/*
+		case SDL_TEXTINPUT:{
+			DKLog("SDL_TEXTINPUT: event->text.text = "+toString(event->text.text)+"\n", DKINFO);
+		}
+		*/
+		
 		case SDL_KEYDOWN:{
 			if(!dkCef->inFocus){ return false; }
 			
