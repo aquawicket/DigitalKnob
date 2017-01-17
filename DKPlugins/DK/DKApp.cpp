@@ -71,6 +71,14 @@ int main(int argc, char **argv)
 #endif
 
 	DKCreate("DKAssets");
+	
+	//print args
+	if(DKApp::argc > 1){
+		for(int i = 1; i < DKApp::argc; ++i){
+			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
+	    }
+    }
+	
 	DKString info;
 	GetOSInfo(info);
 	DKLog(info+"\n", DKINFO);
