@@ -265,7 +265,9 @@ bool DKSDLCef::handle(SDL_Event* event)
 
 			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
+#ifndef MAC
       		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
+#endif
 			return true;
 		}
 
