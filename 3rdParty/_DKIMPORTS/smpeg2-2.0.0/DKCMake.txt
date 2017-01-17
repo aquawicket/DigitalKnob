@@ -1,4 +1,4 @@
-DKDEPEND(SDL2-2.0.4)
+DKDEPEND(SDL2-2.0.5)
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/smpeg2-2.0.0.tar smpeg2-2.0.0)
