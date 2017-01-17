@@ -106,10 +106,15 @@ function DKDev_OnEvent(event)
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
 		//DKLog("stored_element = "+stored_element, DKINFO);
 		//DKLog("storedMouseX = "+storedMouseX, DKINFO);
-		if(target == "body"){
+		
+		//FIXME
+		/*
+		DKLog("target = "+target+"\n", DKINFO)
+		if(target == "body"){  //target is always "body" in cef Mac and Linux
 			DKCreate("DKDev/DKDev_RootMenu.js", function(){});
 			return;
 		}
+		*/
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
 		StopPropagation(event);
