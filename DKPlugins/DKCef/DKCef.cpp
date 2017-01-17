@@ -56,13 +56,29 @@ void DKCef::Init()
 #endif
 	cefApp = new DKCefApp();
 
-	//DKLog("CefExecuteProcess \n", DKINFO);
-	int result = CefExecuteProcess(args, cefApp.get(), NULL);
+	DKLog("CefExecuteProcess \n", DKINFO);
+	
+	//print args
+	if (DKApp::argc > 1){
+		for (int count = 1; count < DKApp::argc; count++){
+	  		//printf("argv[%d] = %s\n", count, argv[count]);
+			DKLog("argv[toString(i)] = "+toString(DKApp::argv[count])+"\n", DKINFO);
+			
+			// *** LINUX EXTRA WINDOW FIX ***
+			//If one of the arguments has Cef in it's string, then we should return to prevent an extra window. 
+			if(has(DKApp::argv[count], "Cef")){
+				return;	
+			}
+	    }
+		return;
+    }
+	
+	int result = CefExecuteProcess(args, cefApp, NULL);
 	if(result >= 0){
 		DKLog("CefExecuteProcess error", DKERROR);
 		return;
 	}
-	if(result == -1){
+	if(result <= -1){
 		// we are here in the father proccess.
 	}
 
