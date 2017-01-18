@@ -54,6 +54,7 @@ function LoadJS(url, callback)
 	var file = url.substring(url.lastIndexOf("/") + 1);
 	if(filesloaded.indexOf(file) != -1){
 		DKLog(url+" already loaded \n", DKWARN);
+		callback && callback();
 		return;
 	}
 	
