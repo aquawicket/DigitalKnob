@@ -22,7 +22,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 #if !defined(ANDROID) && !defined(IOS)
     // DISABLE SDL Shaders
 	glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
-    glUseProgramObjectARB(0);
+    glUseProgramObjectARB(0);  //FIXME: this still crashes on Win64
 #endif 
 
     glPushMatrix();
