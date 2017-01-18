@@ -209,8 +209,8 @@ function DKBuild_InstallVC2015()
 	
 	//if(DK_GetOS() == "Win32"){
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs2015.3.exe", datapath);
-		DK_System(datapath+"/vs2015.3.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU__908841471.1484716364.exe", datapath);
+		DK_System(datapath+"/vvs_community_ENU__908841471.1484716364.exe");
 	//}
 	//else if(DK_GetOS() == "Win64"){
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe", datapath);
