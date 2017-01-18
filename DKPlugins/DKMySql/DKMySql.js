@@ -14,7 +14,7 @@ function DKMySql_Connect(host, name, pass, port)
 	send += ",";
 	send += pass;
 	var response = ajaxGetUrl(send);
-	DKLog(response);
+	DKLog(response, DKINFO);
 	
 	//FIXME
 	//if(response.indexOf("DKERROR") != -1){
