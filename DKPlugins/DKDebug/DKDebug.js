@@ -90,7 +90,7 @@ function DKDebug_RestartApp()
 {
 	//DKFrame_CloseAll();
 	DKWidget_SetInnerHtml("body", "");
-	DKClose("DKDebug/DKDebug.js");
+	DKClose("DKDebug.js");
 	DK_Reload();
 	
 }
