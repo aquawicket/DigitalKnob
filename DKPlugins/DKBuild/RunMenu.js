@@ -17,7 +17,7 @@ function RunMenu_Init()
 function RunMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", RunMenu_OnEvent);
-	DKClose("DKBuild/RunMenu.html");
+	DKClose("RunMenu.html");
 }
 
 ///////////////////////////////
@@ -97,5 +97,5 @@ function RunMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/RunMenu.js");
+	DKClose("RunMenu.js");
 }

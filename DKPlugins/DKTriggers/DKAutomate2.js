@@ -10,7 +10,7 @@ function DKAutomate2_Init()
 //////////////////////////
 function DKAutomate2_End()
 {
-	DKClose("DKTriggers/DKAutomate2.html");
+	DKClose("DKAutomate2.html");
 }
 
 ///////////////////////////////////

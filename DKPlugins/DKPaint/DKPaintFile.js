@@ -12,7 +12,7 @@ function DKPaintFile_Init()
 function DKPaintFile_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKPaintFile_OnEvent);
-	DKClose("DKPaint/DKPaintFile.html");
+	DKClose("DKPaintFile.html");
 }
 
 ///////////////////////////////////
@@ -35,7 +35,7 @@ function DKPaintFile_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKPaint/DKPaintFile.js");
+	DKClose("DKPaintFile.js");
 }
 
 ///////////////////////////

@@ -12,7 +12,7 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
-	DKClose("DKNotepad/DKNotepad.html");
+	DKClose("DKNotepad.html");
 }
 
 /////////////////////////////////

@@ -10,7 +10,7 @@ function BugReport_Init()
 ////////////////////////
 function BugReport_End()
 {
-	DKClose("DKDebug/BugReport.html");
+	DKClose("BugReport.html");
 }
 
 /////////////////////////////////

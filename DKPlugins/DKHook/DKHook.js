@@ -15,7 +15,7 @@ function DKHook_Init()
 /////////////////////
 function DKHook_End()
 {
-	DKClose("DKHook/DKHook.html");
+	DKClose("DKHook.html");
 }
 
 //////////////////////////////

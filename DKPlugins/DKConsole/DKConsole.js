@@ -15,7 +15,7 @@ function DKConsole_End()
 {
 	DKRemoveEvent("DKLog", "color", DKConsole_OnEvent);
 	DKRemoveEvent("DKLog", "notify", DKConsole_OnEvent);
-	DKClose("DKConsole/DKConsole.html");
+	DKClose("DKConsole.html");
 }
 
 /////////////////////////////////
@@ -27,7 +27,7 @@ function DKConsole_OnEvent(event)
 		DKWidget_SetInnerHtml("DKConsole_Content","");
 	}
 	if(DK_Id(event, "DKConsole_Close")){
-		DKClose("DKConsole/DKConsole.js");
+		DKClose("DKConsole.js");
 	}
 	
 	if(DK_Type(event, "color")){

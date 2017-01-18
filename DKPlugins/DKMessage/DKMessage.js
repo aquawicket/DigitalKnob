@@ -22,7 +22,7 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	DKClose("DKMessage/DKMessage.html");
+	DKClose("DKMessage.html");
 }
 
 /////////////////////////////////

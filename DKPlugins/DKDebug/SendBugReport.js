@@ -9,7 +9,7 @@ function SendBugReport_Init()
 ////////////////////////////
 function SendBugReport_End()
 {
-	DKClose("DKDebug/SendBugReport.html");
+	DKClose("SendBugReport.html");
 }
 
 /////////////////////////////////////
@@ -40,7 +40,6 @@ function SendBugReport_CreateReport()
 		DKFrame_Widget("DKMessage.html");
 		DKMessageBox("", "ShowMessage", "Thank You :)");	
 		DKFrame_Close("SendBugReport.html");
-		//DKClose("DKDebug/SendBugReport.js");
 	});
 }
 

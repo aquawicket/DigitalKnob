@@ -15,7 +15,7 @@ function DKColorPicker_Init()
 ////////////////////////////
 function DKColorPicker_End()
 {
-	DKClose("DKColorPicker/DKColorPicker.html");
+	DKClose("DKColorPicker.html");
 }
 
 /////////////////////////////////////
@@ -45,7 +45,6 @@ function DKColorPicker_OnEvent(event)
 			DKSendEvent(event_id, event_type, color);
 		}
 		DKFrame_Close("DKColorPicker.html");
-		DKClose("DKColorPicker/DKColorPicker.js")
 	}
 }
 

@@ -13,7 +13,7 @@ function DKRocketVideo_Init()
 ////////////////////////////
 function DKRocketVideo_End()
 {
-	DKClose("DKRocketVideo/DKRocketVideo.html");
+	DKClose("DKRocketVideo.html");
 }
 
 /////////////////////////////////////

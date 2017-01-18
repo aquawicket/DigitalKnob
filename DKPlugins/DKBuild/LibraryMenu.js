@@ -12,7 +12,7 @@ function LibraryMenu_Init()
 function LibraryMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
-	DKClose("DKBuild/LibraryMenu.html");
+	DKClose("LibraryMenu.html");
 }
 
 ///////////////////////////////////
@@ -29,5 +29,5 @@ function LibraryMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/LibraryMenu.js");
+	DKClose("LibraryMenu.js");
 }

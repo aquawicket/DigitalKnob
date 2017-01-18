@@ -12,7 +12,7 @@ function DKPaint_Init()
 ////////////////////////
 function DKPaint_End()
 {
-	DKClose("DKPaint/DKPaint.html");
+	DKClose("DKPaint.html");
 }
 
 ///////////////////////////////
@@ -24,10 +24,10 @@ function DKPaint_OnEvent(event)
 		DKNotepad_Save();
 	}
 	if(DK_Type(event, "contextmenu")){
-		DKCreate("DKPaint/DKPaintMenu.js");
+		DKCreate("DKPaint/DKPaintMenu.js", function(){});
 	}
 	if(DK_Id(event,"DKPaint_File")){
-		DKCreate("DKPaint/DKPaintFile.js");
+		DKCreate("DKPaint/DKPaintFile.js", function(){});
 	}
 }
 

@@ -14,7 +14,7 @@ function DKPaintMenu_Init()
 function DKPaintMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKPaintMenu_OnEvent);
-	DKClose("DKPaint/DKPaintMenu.html");
+	DKClose("DKPaintMenu.html");
 }
 
 ///////////////////////////////////
@@ -37,7 +37,7 @@ function DKPaintMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKPaint/DKPaintMenu.js");
+	DKClose("DKPaintMenu.js");
 }
 
 //////////////////////////

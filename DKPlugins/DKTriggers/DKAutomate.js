@@ -24,7 +24,7 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
-	DKClose("DKTriggers/DKAutomate.html");
+	DKClose("DKAutomate.html");
 }
 
 //////////////////////////////////

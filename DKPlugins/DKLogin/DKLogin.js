@@ -11,7 +11,7 @@ function DKLogin_Init()
 //////////////////////
 function DKLogin_End()
 {
-	DKClose("DKLogin/DKLogin.html");
+	DKClose("DKLogin.html");
 }
 
 ///////////////////////////////

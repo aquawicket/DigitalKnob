@@ -10,7 +10,7 @@ function DKTooltip_Init()
 ////////////////////////
 function DKTooltip_End()
 {
-	DKClose("DKTooltip/DKTooltip.html");
+	DKClose("DKTooltip.html");
 }
 
 /////////////////////////////////

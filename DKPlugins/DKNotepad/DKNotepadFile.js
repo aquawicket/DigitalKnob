@@ -14,7 +14,7 @@ function DKNotepadFile_Init()
 function DKNotepadFile_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
-	DKClose("DKNotepad/DKNotepadFile.html");
+	DKClose("DKNotepadFile.html");
 }
 
 /////////////////////////////////////
@@ -45,7 +45,7 @@ function DKNotepadFile_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadFile.js");
+	DKClose("DKNotepadFile.js");
 }
 
 /////////////////////////////
