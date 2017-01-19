@@ -3,9 +3,9 @@
 #include <Rocket/Core/Core.h>
 #include <SDL_image.h>
 #include "DKSDLRocketRenderer.h"
+#include "DKSDLWindow.h"
 
 #if !defined(ANDROID) && !defined(IOS)
-//static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
@@ -22,8 +22,11 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 {
 #if !defined(ANDROID) && !defined(IOS)
     // DISABLE SDL Shaders
-	glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
-    glUseProgramObjectARB(0);  //FIXME: this still crashes on Win64
+	DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	if(!has(dkSdlWindow->gl_vendor, "Microsoft")){
+		glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
+		glUseProgramObjectARB(0);  //FIXME: this crashes on Microsoft Generic GDI drivers
+	}
 #endif 
 
     glPushMatrix();

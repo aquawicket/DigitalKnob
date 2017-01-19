@@ -179,11 +179,11 @@ void DKSDLWindow::Init()
 
 	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
 	SDL_GL_MakeCurrent(sdlwin, glcontext);
-	DKString gl_version = (char*)glGetString(GL_VERSION);
-	DKString gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
-	DKString gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
-	//DKString gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	DKString gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+	gl_version = (char*)glGetString(GL_VERSION);
+	gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
+	gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+	//gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 
 	DKLog("GL_VERSION = "+gl_version+"\n", DKINFO);
 	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
@@ -394,8 +394,8 @@ void* DKSDLWindow::GetHwnd(void*)
 void DKSDLWindow::Process()
 {
 	SDL_SetRenderTarget(sdlren, NULL); 
-	//SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
-	SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
+	SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
+	//SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
     SDL_RenderClear(sdlren);
 	//SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
 	//SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );

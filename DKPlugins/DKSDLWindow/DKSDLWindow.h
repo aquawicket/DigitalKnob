@@ -46,6 +46,11 @@ public:
 	SDL_Window* sdlwin;
 	SDL_Renderer* sdlren;
 	//SDL_GLContext sldcontext;
+	DKString gl_version;
+	DKString gl_vendor;
+	DKString gl_renderer;
+	//DKString gl_shading;
+	DKString gl_extensions;
 
 	DKString mTitle;
 	int winX;
