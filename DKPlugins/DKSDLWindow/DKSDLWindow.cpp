@@ -177,6 +177,8 @@ void DKSDLWindow::Init()
 	MapInputs();
 	SDL_SetEventFilter(&DKSDLWindow::EventFilter, this);
 
+	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
+	SDL_GL_MakeCurrent(sdlwin, glcontext);
 	DKString gl_version = (char*)glGetString(GL_VERSION);
 	DKString gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
 	DKString gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
