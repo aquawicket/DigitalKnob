@@ -5,6 +5,7 @@
 #include "DKSDLRocketRenderer.h"
 
 #if !defined(ANDROID) && !defined(IOS)
+//static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 

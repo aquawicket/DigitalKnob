@@ -189,6 +189,7 @@ void DKSDLWindow::Init()
 	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
 	DKLog("GL_RENDERER = "+gl_renderer+"\n", DKINFO);
 	//DKLog("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n", DKINFO);
+	DKLog("GL_EXTENSIONS = "+gl_extensions+"\n", DKINFO);
 }
 
 ///////////////////////
