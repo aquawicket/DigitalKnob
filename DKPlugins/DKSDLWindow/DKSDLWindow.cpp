@@ -177,18 +177,16 @@ void DKSDLWindow::Init()
 	MapInputs();
 	SDL_SetEventFilter(&DKSDLWindow::EventFilter, this);
 
-	DKString gl_version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
+	DKString gl_version = (char*)glGetString(GL_VERSION);
 	DKString gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
 	DKString gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
 	//DKString gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 	DKString gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 
-	//printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 	DKLog("GL_VERSION = "+gl_version+"\n", DKINFO);
 	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
 	DKLog("GL_RENDERER = "+gl_renderer+"\n", DKINFO);
 	//DKLog("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n", DKINFO);
-
 }
 
 ///////////////////////
