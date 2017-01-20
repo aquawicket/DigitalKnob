@@ -9,8 +9,8 @@
 #include <Rocket/Core/Core.h>
 #include "DKSDLRocketSystem.h"
 #include "DKSDLRocketRenderer.h"
-#include "ShellRenderInterfaceOpenGL.h"
 
+//#include "ShellRenderInterfaceOpenGL.h"
 //#define ROCKET_SHELL_RENDER 1
 
 /////////////////////////////////////////////////
