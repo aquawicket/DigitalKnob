@@ -122,7 +122,6 @@ void DKSDLWindow::Init()
 		SDL_Quit();
 		return;
 	}
-	DKLog("Created Renderer: "+result+"\n", DKINFO);
 #endif
 
 	//Set window Title
@@ -191,12 +190,41 @@ void DKSDLWindow::Init()
 	//gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 	gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 
+	DKLog("##############################\n", DKINFO);
+	DKLog("##### Window Information #####\n", DKINFO);
+	DKLog("##############################\n", DKINFO);
 	DKLog("GL_VERSION = "+gl_version+"\n", DKINFO);
 	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
 	DKLog("GL_RENDERER = "+gl_renderer+"\n", DKINFO);
 	//DKLog("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n", DKINFO);
-	DKLog("GL_EXTENSIONS = "+gl_extensions+"\n", DKINFO);
-
+	//DKLog("GL_EXTENSIONS = "+gl_extensions+"\n", DKINFO);
+	DKLog("SDL Renderer = "+result+"\n", DKINFO);
+	DKLog("Resolution = "+toString(width)+"x"+toString(height)+"\n", DKINFO);
+	int depth;
+	SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
+	DKLog("Depth = "+toString(depth)+"\n", DKINFO);
+	int doublebuffer;
+	SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doublebuffer);
+	DKLog("Double buffer = "+toString(doublebuffer)+"\n", DKINFO);
+	int red;
+	SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &red);
+	DKLog("Red Size = "+toString(red)+"\n", DKINFO);
+	int green;
+	SDL_GL_GetAttribute(SDL_GL_GREEN_SIZE, &green);
+	DKLog("Green Size = "+toString(green)+"\n", DKINFO);
+	int blue;
+	SDL_GL_GetAttribute(SDL_GL_BLUE_SIZE, &blue);
+	DKLog("Blue Size = "+toString(blue)+"\n", DKINFO);
+	int alpha;
+	SDL_GL_GetAttribute(SDL_GL_ALPHA_SIZE, &alpha);
+	DKLog("Alpha Size = "+toString(alpha)+"\n", DKINFO);
+	int buffer;
+	SDL_GL_GetAttribute(SDL_GL_BUFFER_SIZE, &buffer);
+	DKLog("Buffer Size = "+toString(buffer)+"\n", DKINFO);
+	int stencil;
+	SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
+	DKLog("Stencil Size = "+toString(stencil)+"\n", DKINFO);
+	
 	if(has(gl_vendor, "Microsoft")){
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", sdlwin);
 	}
