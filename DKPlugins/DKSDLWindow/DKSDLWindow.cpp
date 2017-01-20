@@ -81,14 +81,10 @@ void DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	
 	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n", DKINFO);
-
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
 	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &sdlwin, &sdlren) < 0){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
 		return;
@@ -97,6 +93,12 @@ void DKSDLWindow::Init()
 
 #if !defined(ANDROID) && !defined(IOS)
 	DKLog("Creating SDLWindow for Desktop \n", DKINFO);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	sdlwin = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
 	if(!sdlwin){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
@@ -104,11 +106,14 @@ void DKSDLWindow::Init()
 		return;
 	}
 
+	DKString result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
 	sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if(!sdlren){
+		result = "SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC";
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
 	}
 	if(!sdlren){
+		result = "SDL_RENDERER_SOFTWARE";
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);	
 	}
 	if(!sdlren){
@@ -117,6 +122,7 @@ void DKSDLWindow::Init()
 		SDL_Quit();
 		return;
 	}
+	DKLog("Created Renderer: "+result+"\n", DKINFO);
 #endif
 
 	//Set window Title
@@ -401,8 +407,8 @@ void DKSDLWindow::Process()
 	SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
 	//SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
     SDL_RenderClear(sdlren);
-	//SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
-	//SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );
+	SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
+	SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );
 
 	SDL_Event e;
 	while(SDL_PollEvent(&e)){
