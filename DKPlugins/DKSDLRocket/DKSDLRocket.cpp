@@ -18,7 +18,12 @@ void DKSDLRocket::Init()
 		return;
 	}
 
+#ifdef ROCKET_SHELL_RENDER
+	Renderer = new ShellRenderInterfaceOpenGL();
+#else
 	Renderer = new RocketSDL2Renderer(dkSdlWindow->sdlren, dkSdlWindow->sdlwin);
+#endif
+
 	SystemInterface = new RocketSDL2SystemInterface();
 
 	Rocket::Core::SetRenderInterface(Renderer);

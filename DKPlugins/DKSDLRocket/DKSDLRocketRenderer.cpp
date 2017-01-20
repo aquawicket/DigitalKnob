@@ -113,7 +113,6 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 	// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
     SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_NONE);
     SDL_RenderDrawPoint(mRenderer, -1, -1);
-
 }
 
 
