@@ -54,7 +54,9 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 			if(!sdl_texture){ return; }
 		}
 
-        SDL_GL_BindTexture(sdl_texture, &texw, &texh);
+        if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1){
+			DKLog("SDL_GL_BindTexture is not supported \n", DKERROR);
+		}
     }
  
     for(int  i = 0; i < num_vertices; i++) {

@@ -6,11 +6,11 @@ DKCreate("DKDebug/DKDebug.js");
 //DKCreate("test2.js");
 //DKCreate("scale.js");
 //DKCreate("DKDom");
-//DKCreate("DKNotepad/DKNotepad.js", function(){
-//	DKWidget_SetProperty("DKNotepad.html", "width", "100%");
-//	DKWidget_SetProperty("DKNotepad.html", "height", "100%");
-//});
-DKCreate("square.html");
+DKCreate("DKNotepad/DKNotepad.js", function(){
+	DKWidget_SetProperty("DKNotepad.html", "width", "100%");
+	DKWidget_SetProperty("DKNotepad.html", "height", "100%");
+});
+//DKCreate("square.html");
 
 
 /////////////////////////
