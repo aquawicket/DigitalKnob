@@ -59,7 +59,7 @@ bool DKOSGViewer::Realize()
 	}
 
 	viewer->setKeyEventSetsDone(0); //Don't close OSG with ESC key
-	DKLog("multiviewer->realize() success\n", DKSUCCESS);
+	DKLog("multiviewer->realize() success\n", DKINFO);
 	return true;
 }
 
