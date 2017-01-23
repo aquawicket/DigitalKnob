@@ -51,10 +51,14 @@ bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, c
 	width = w;
 	height = h;
 
-	DKString textX = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINX]");
-	DKString textY = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINY]");
-	DKString textWidth = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WIDTH]");
-	DKString textHeight = DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HEIGHT]");
+	DKString textX;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINX]", textX);
+	DKString textY;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINY]", textY);
+	DKString textWidth;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WIDTH]", textWidth);
+	DKString textHeight;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HEIGHT]", textHeight);
 	if(!textX.empty()){ winX = toInt(textX); }
 	if(!textY.empty()){ winY = toInt(textY); }
 	if(!textWidth.empty()){ width = toInt(textWidth); }
