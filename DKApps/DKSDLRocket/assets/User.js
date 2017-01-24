@@ -22,6 +22,15 @@ function User_OnEvent(event)  //Duktape
 		if(DKWidget_GetValue(event) == "4"){ //Exit for ANDROID
 		    DK_Exit();
 		}
+		EatMemory();
 	}
 }
 //////////////////////////
+
+
+function EatMemory()
+{
+	for(var i=0; i<10000; i++){
+		DKLog("DKWindow_TestString() = "+DKWindow_TestString("this is a test string")+"\n", DKINFO);
+	}
+}
