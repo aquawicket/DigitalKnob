@@ -4,6 +4,8 @@
 #include <boost/bind.hpp>
 #include <map>
 
+
+
 class MyFuncs
 {
 public:
@@ -26,5 +28,7 @@ public:
 		myfuncs[name](input, output);
 	}
 };
+
+std::map<std::string, boost::function<void (void*, void*&)> > MyFuncs::myfuncs;
 
 #endif //MyFuncs_H
