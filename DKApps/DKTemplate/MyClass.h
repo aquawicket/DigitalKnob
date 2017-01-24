@@ -25,15 +25,15 @@ public:
 	
 	void EditNumber(void* input, void*& output)
 	{
-		int val = 4321;
-		//int val = *input;
+		int val = *static_cast<int*>(input);
+		int i = 0; //break point test
 		output = static_cast<void*>(new int(val));
 	}
 	
 	void EditString(void* input, void*& output)
 	{
-		std::string val = "Edit test";
-		//int val = *input;
+		std::string val = *static_cast<std::string*>(input);
+		int i = 0; //break point test
 		output = static_cast<void*>(new std::string(val));
 	}
 };
