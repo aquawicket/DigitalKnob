@@ -1,8 +1,12 @@
 DKCreate("DKSDLWindow");
 DKCreate("DKWindow");
 
-DKLog("DKWindow_TestInt() = "+DKWindow_TestInt(23931)+"\n", DKINFO);
-DKLog("DKWindow_TestString() = "+DKWindow_TestString("this is a test string")+"\n", DKINFO);
+/*
+for(var i=0; i<10000; i++){
+	DKLog("DKWindow_TestInt() = "+DKWindow_TestInt(23931)+"\n", DKINFO);
+	DKLog("DKWindow_TestString() = "+DKWindow_TestString("this is a test string")+"\n", DKINFO);
+}
+*/
 
 /////////////////////////
 //ANDROID back key = exit

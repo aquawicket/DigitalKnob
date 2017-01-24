@@ -257,7 +257,7 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 
 
 
-///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 bool DKSDLWindow::TestInt(void* input, void*& output)
 {
 	int* num = static_cast<int*>(input);
@@ -265,7 +265,7 @@ bool DKSDLWindow::TestInt(void* input, void*& output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 bool DKSDLWindow::TestString(void* input, void*& output)
 {
 	DKString* string = static_cast<DKString*>(input);
