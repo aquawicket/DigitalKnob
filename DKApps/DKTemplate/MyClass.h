@@ -13,7 +13,7 @@ public:
 
 	void GetNumber(void* input, void*& output)
 	{
-		int val = 123;
+		int val = 1234;
 		output = static_cast<void*>(new int(val));
 	}
 	
@@ -25,13 +25,15 @@ public:
 	
 	void EditNumber(void* input, void*& output)
 	{
-		//output = input
-		//TODO: alter output
+		int val = 4321;
+		//int val = *input;
+		output = static_cast<void*>(new int(val));
 	}
 	
 	void EditString(void* input, void*& output)
 	{
-		//output = input;
-		//TODO: alter output
+		std::string val = "Edit test";
+		//int val = *input;
+		output = static_cast<void*>(new std::string(val));
 	}
 };

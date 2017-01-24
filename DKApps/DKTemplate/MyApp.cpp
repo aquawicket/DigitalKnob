@@ -14,18 +14,15 @@ void main()
 	std::string getStrOut = *static_cast<std::string*>(getStr);
 	printf("MyClass::GetString = %s \n", getStrOut.c_str());
 	
-	/*
-	int editNum = 321;
-	int editNumOut;
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), static_cast<void*>(&editNumOut));  //atempting to change the variable
+	void* editNum;
+	MyFuncs::CallFunc("MyClass::EditNumber", NULL, editNum);  //atempting to fill the variable
+	int editNumOut = *static_cast<int*>(editNum);
 	printf("MyClass::EditNumber = %d \n", editNumOut);
-
-
-	std::string editStr = "Edit Test";
-	std::string editStrOut;
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editStr), static_cast<void*>(&editStrOut));  //atempting to change the variable
-	printf("MyClass::EditString = %s \n", editStrOut);
-	*/
+	
+	void* editStr;
+	MyFuncs::CallFunc("MyClass::EditString", NULL, editStr);  //atempting to fill the variable
+	std::string editStrOut = *static_cast<std::string*>(editStr);
+	printf("MyClass::EditString = %s \n", editStrOut.c_str());
 
 	//wait for close
 	getchar();
