@@ -33,36 +33,35 @@ void DKWindow::End()
 int DKWindow::TestInt(int input)
 {
 	void* in = static_cast<void*>(&input);
-	void* out;
+	int val;
+	void* out = static_cast<void*>(&val);
 	DKClass::CallFunc2("DKSDLWindow::TestInt", in, out);
-	return *static_cast<int*>(out);
+	return val;
 }
 
 /////////////////////////////////////////////
 DKString DKWindow::TestString(DKString input)
 {
 	void* in = static_cast<void*>(&input);
-	void* out;
-	DKClass::CallFunc2("DKSDLWindow::TestString", in, out);
-	return *static_cast<DKString*>(out);
+	DKString out;
+	DKClass::CallFunc2("DKSDLWindow::TestString", in, static_cast<void*>(&out));
+	return out;
 }
 
 /////////////////////////////
 int DKWindow::TestReturnInt()
 {
-	void* out = NULL;
-	DKClass::CallFunc2("DKSDLWindow::TestReturnInt", NULL, out);
-	if(!out){ return 0; }
-	return *static_cast<int*>(out);
+	int out;
+	DKClass::CallFunc2("DKSDLWindow::TestReturnInt", NULL, static_cast<void*>(&out));
+	return out;
 }
 
 /////////////////////////////////////
 DKString DKWindow::TestReturnString()
 {
-	void* out = NULL;
-	DKClass::CallFunc2("DKSDLWindow::TestReturnString", NULL, out);
-	if(!out){ return ""; }
-	return *static_cast<DKString*>(out);
+	DKString out;
+	DKClass::CallFunc2("DKSDLWindow::TestReturnString", NULL, static_cast<void*>(&out));
+	return out;
 }
 
 

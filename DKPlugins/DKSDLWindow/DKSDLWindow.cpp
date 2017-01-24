@@ -259,37 +259,35 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 
 
 
-/////////////////////////////////////////////////////
-bool DKSDLWindow::TestInt(void* input, void*& output)
+////////////////////////////////////////////////////
+bool DKSDLWindow::TestInt(void* input, void* output)
 {
 	int* num = static_cast<int*>(input);
 	output = static_cast<void*>(num);
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKSDLWindow::TestString(void* input, void*& output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::TestString(void* input, void* output)
 {
 	DKString* string = static_cast<DKString*>(input);
 	output = static_cast<void*>(string);
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnInt(void* input, void*& output)
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnInt(void* input, void* output)
 {
-	int* value = new int(1234);  //FIXME: find a way to fill this
-	if(!value){ return false; }
-	output = static_cast<void*>(value);
+	int value = 12345;
+	//&output = (void**)value;
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnString(void* input, void*& output)
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnString(void* input, void* output)
 {
-	DKString* value = new DKString("test string");  //FIXME: find a way to fill this
-	if(!value){ return false; }
-	output = static_cast<DKString*>(value);
+	DKString value = "test string 2";
+	//output = static_cast<void*>(&value);
 	return true;
 }
 
