@@ -151,6 +151,9 @@ void DKSDLWindow::Init()
 	//DKLog(title+"\n", DKINFO);
 	SDL_SetWindowTitle(sdlwin, title2.c_str());
 
+	DKClass::RegisterFunc2("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
+	DKClass::RegisterFunc2("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
+
 	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
@@ -250,6 +253,28 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 	DKLog("DKSDLWindow::SetIcon is not implemented on this OS. \n", DKERROR);
 	return false;
 }
+
+
+
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::TestInt(const void* input, void*& output)
+{
+	int num = (int)input;
+	output = (void*)num;
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestString(const void* input, void*& output)
+{
+	DKString string = *(DKString*)input;
+	output = static_cast<void*>(&string);
+	return true;
+}
+
+
+
 
 //////////////////////////////
 void* DKSDLWindow::GetX(void*)

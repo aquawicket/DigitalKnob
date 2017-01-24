@@ -48,6 +48,18 @@ public:
 		}
 	}
 
+	template<class T>
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	static void RegisterFunc2(const DKString& name, bool (T::*func) (const void*, void*&), T* _this)
+	{
+		DKLog("DKClass::RegisterFunc2("+name+")\n", DKDEBUG);
+		functions2[name] = boost::bind(func, _this, _1, _2);
+		if(!functions2[name]){
+			DKLog("RegisterFunc2(" + name + "): failed to register function \n", DKERROR);
+			return;
+		}
+	}
+
 	////////////////////////////////////////////////
 	static void UnregisterFunc(const DKString& name)
 	{
@@ -67,6 +79,16 @@ public:
 			return 0;
 		}
 		return functions[name](data);
+	}
+
+	/////////////////////////////////////////////////////////////////////////////
+	static bool CallFunc2(const DKString& name, const void* input, void*& output)
+	{
+		if(!functions2[name]){ 
+			DKLog("CallFunc2("+name+") not registered\n", DKWARN);
+			return false;
+		}
+		return functions2[name](input, output);
 	}
 	
 	///////////////////////////////////////////
@@ -89,6 +111,7 @@ public:
 	}
 
 	static std::map<DKString, boost::function<void* (void*)> > functions;
+	static std::map<DKString, boost::function<bool (const void*, void*&)> > functions2;
 };
 
 /////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access

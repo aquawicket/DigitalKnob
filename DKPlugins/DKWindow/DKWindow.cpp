@@ -27,6 +27,33 @@ void DKWindow::End()
 
 }
 
+
+
+////////////////////////////////
+int DKWindow::TestInt(int input)
+{
+	void* in = (void*)input;
+	void* out;
+	DKClass::CallFunc2("DKSDLWindow::TestInt", in, out);
+	int rval = (int)out;
+	return rval;
+}
+
+/////////////////////////////////////////////
+DKString DKWindow::TestString(DKString input)
+{
+	/*
+	void* in = (void*)input;
+	void* out;
+	DKClass::CallFunc2("DKSDLWindow::TestString", in, out);
+
+	DKString *rval = static_cast<DKString*>(out);
+	*/
+	return "test";//*rval;
+}
+
+
+
 ////////////////////
 int DKWindow::GetX()
 {

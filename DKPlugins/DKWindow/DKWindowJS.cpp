@@ -8,6 +8,9 @@ void DKWindowJS::Init()
 {
 	DKLog("DKWindowJS::Init()\n", DKDEBUG);
 
+	DKDuktape::AttachFunction("DKWindow_TestInt", DKWindowJS::TestInt, 1);
+	DKDuktape::AttachFunction("DKWindow_TestString", DKWindowJS::TestString, 1);
+
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
@@ -28,6 +31,32 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show, 0);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
 }
+
+
+
+
+
+/////////////////////////////////////////
+int DKWindowJS::TestInt(duk_context* ctx)
+{
+	int input = duk_require_int(ctx, 0);
+	int output = DKWindow::TestInt(input);
+	duk_push_int(ctx, output);
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKWindowJS::TestString(duk_context* ctx)
+{
+	DKString input = duk_require_string(ctx, 0);
+	DKString output = DKWindow::TestString(input);
+	duk_push_string(ctx, output.c_str());
+	return 1;
+}
+
+
+
+
 
 //////////////////////////////////////
 int DKWindowJS::GetX(duk_context* ctx)

@@ -10,6 +10,10 @@ class DKWindowJS : public DKObjectT<DKWindowJS>
 {
 public:
 	void Init();
+
+	static int TestInt(duk_context* ctx);
+	static int TestString(duk_context* ctx);
+
 	static int Fullscreen(duk_context* ctx);
 	static int GetHeight(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);

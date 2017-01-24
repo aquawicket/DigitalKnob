@@ -14,6 +14,9 @@ public:
 	void Init();
 	void End();
 
+	static int TestInt(int input);
+	static DKString TestString(DKString input);
+
 	static int GetX();
 	static int GetY();
 	static int GetWidth();
