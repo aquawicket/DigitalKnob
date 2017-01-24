@@ -153,6 +153,8 @@ void DKSDLWindow::Init()
 
 	DKClass::RegisterFunc2("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
 	DKClass::RegisterFunc2("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
+	DKClass::RegisterFunc2("DKSDLWindow::TestReturnInt", &DKSDLWindow::TestReturnInt, this);
+	DKClass::RegisterFunc2("DKSDLWindow::TestReturnString", &DKSDLWindow::TestReturnString, this);
 
 	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
@@ -270,6 +272,22 @@ bool DKSDLWindow::TestString(void* input, void*& output)
 {
 	DKString* string = static_cast<DKString*>(input);
 	output = static_cast<void*>(string);
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnInt(void* input, void*& output)
+{
+	int* value = NULL;  //FIXME: find a way to fill this
+	output = static_cast<void*>(value);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnString(void* input, void*& output)
+{
+	DKString* value = NULL;  //FIXME: find a way to fill this
+	output = static_cast<DKString*>(value);
 	return true;
 }
 

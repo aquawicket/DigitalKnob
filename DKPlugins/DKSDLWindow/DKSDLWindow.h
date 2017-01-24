@@ -13,6 +13,8 @@ public:
 
 	bool TestInt(void* input, void*& output);
 	bool TestString(void* input, void*& output);
+	bool TestReturnInt(void* input, void*& output);
+	bool TestReturnString(void* input, void*& output);
 
 	void* Fullscreen(void*);
 	void* GetHeight(void*);

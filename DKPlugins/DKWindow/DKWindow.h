@@ -16,6 +16,8 @@ public:
 
 	static int TestInt(int input);
 	static DKString TestString(DKString input);
+	static int TestReturnInt();
+	static DKString TestReturnString();
 
 	static int GetX();
 	static int GetY();

@@ -13,6 +13,8 @@ public:
 
 	static int TestInt(duk_context* ctx);
 	static int TestString(duk_context* ctx);
+	static int TestReturnInt(duk_context* ctx);
+	static int TestReturnString(duk_context* ctx);
 
 	static int Fullscreen(duk_context* ctx);
 	static int GetHeight(duk_context* ctx);

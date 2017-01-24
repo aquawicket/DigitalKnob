@@ -10,6 +10,8 @@ void DKWindowJS::Init()
 
 	DKDuktape::AttachFunction("DKWindow_TestInt", DKWindowJS::TestInt, 1);
 	DKDuktape::AttachFunction("DKWindow_TestString", DKWindowJS::TestString, 1);
+	DKDuktape::AttachFunction("DKWindow_TestReturnInt", DKWindowJS::TestReturnInt, 0);
+	DKDuktape::AttachFunction("DKWindow_TestReturnString", DKWindowJS::TestReturnString, 0);
 
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight, 0);
@@ -54,6 +56,21 @@ int DKWindowJS::TestString(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////
+int DKWindowJS::TestReturnInt(duk_context* ctx)
+{
+	int rval = DKWindow::TestReturnInt();
+	duk_push_int(ctx, rval);
+	return 1;
+}
+
+//////////////////////////////////////////////////
+int DKWindowJS::TestReturnString(duk_context* ctx)
+{
+	DKString rval = DKWindow::TestReturnString();
+	duk_push_string(ctx, rval.c_str());
+	return 1;
+}
 
 
 
