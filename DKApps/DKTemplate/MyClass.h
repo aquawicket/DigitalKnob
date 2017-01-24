@@ -11,23 +11,25 @@ public:
 		MyFuncs::RegisterFunc("MyClass::EditString", &MyClass::EditString, this);
 	}
 
-	void GetNumber(void* input, void* output)
+	void GetNumber(void* input, void*& output)
 	{
-		//output = 123;
+		int val = 123;
+		output = static_cast<void*>(new int(val));
 	}
 	
-	void GetString(void* input, void* output)
+	void GetString(void* input, void*& output)
 	{
-		//output = "Get Test";
+		std::string val = "Get test";
+		output = static_cast<void*>(new std::string(val));
 	}
 	
-	void EditNumber(void* input, void* output)
+	void EditNumber(void* input, void*& output)
 	{
 		//output = input
 		//TODO: alter output
 	}
 	
-	void EditString(void* input, void* output)
+	void EditString(void* input, void*& output)
 	{
 		//output = input;
 		//TODO: alter output
