@@ -50,16 +50,18 @@ DKString DKWindow::TestString(DKString input)
 /////////////////////////////
 int DKWindow::TestReturnInt()
 {
-	void* out;
+	void* out = NULL;
 	DKClass::CallFunc2("DKSDLWindow::TestReturnInt", NULL, out);
+	if(!out){ return 0; }
 	return *static_cast<int*>(out);
 }
 
 /////////////////////////////////////
 DKString DKWindow::TestReturnString()
 {
-	void* out;
+	void* out = NULL;
 	DKClass::CallFunc2("DKSDLWindow::TestReturnString", NULL, out);
+	if(!out){ return ""; }
 	return *static_cast<DKString*>(out);
 }
 

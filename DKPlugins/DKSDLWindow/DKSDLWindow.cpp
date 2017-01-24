@@ -278,7 +278,8 @@ bool DKSDLWindow::TestString(void* input, void*& output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnInt(void* input, void*& output)
 {
-	int* value = NULL;  //FIXME: find a way to fill this
+	int* value = new int(1234);  //FIXME: find a way to fill this
+	if(!value){ return false; }
 	output = static_cast<void*>(value);
 	return true;
 }
@@ -286,7 +287,8 @@ bool DKSDLWindow::TestReturnInt(void* input, void*& output)
 //////////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnString(void* input, void*& output)
 {
-	DKString* value = NULL;  //FIXME: find a way to fill this
+	DKString* value = new DKString("test string");  //FIXME: find a way to fill this
+	if(!value){ return false; }
 	output = static_cast<DKString*>(value);
 	return true;
 }
