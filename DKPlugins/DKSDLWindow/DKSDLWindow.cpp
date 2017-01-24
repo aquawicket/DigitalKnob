@@ -258,18 +258,18 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 
 
 ///////////////////////////////////////////////////////////
-bool DKSDLWindow::TestInt(const void* input, void*& output)
+bool DKSDLWindow::TestInt(void* input, void*& output)
 {
-	int num = (int)input;
-	output = (void*)num;
+	int* num = static_cast<int*>(input);
+	output = static_cast<void*>(num);
 	return true;
 }
 
 //////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestString(const void* input, void*& output)
+bool DKSDLWindow::TestString(void* input, void*& output)
 {
-	DKString string = *(DKString*)input;
-	output = static_cast<void*>(&string);
+	DKString* string = static_cast<DKString*>(input);
+	output = static_cast<void*>(string);
 	return true;
 }
 

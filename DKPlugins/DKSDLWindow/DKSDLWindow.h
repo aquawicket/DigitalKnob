@@ -11,8 +11,8 @@ public:
 	virtual void Init();
 	virtual void End();
 
-	bool TestInt(const void* input, void*& output);
-	bool TestString(const void* input, void*& output);
+	bool TestInt(void* input, void*& output);
+	bool TestString(void* input, void*& output);
 
 	void* Fullscreen(void*);
 	void* GetHeight(void*);

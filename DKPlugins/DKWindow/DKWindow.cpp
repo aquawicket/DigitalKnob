@@ -32,24 +32,20 @@ void DKWindow::End()
 ////////////////////////////////
 int DKWindow::TestInt(int input)
 {
-	void* in = (void*)input;
+	void* in = static_cast<void*>(&input);
 	void* out;
 	DKClass::CallFunc2("DKSDLWindow::TestInt", in, out);
-	int rval = (int)out;
-	return rval;
+	return *static_cast<int*>(out);
 }
 
 /////////////////////////////////////////////
 DKString DKWindow::TestString(DKString input)
 {
-	/*
-	void* in = (void*)input;
+
+	void* in = static_cast<void*>(&input);
 	void* out;
 	DKClass::CallFunc2("DKSDLWindow::TestString", in, out);
-
-	DKString *rval = static_cast<DKString*>(out);
-	*/
-	return "test";//*rval;
+	return *static_cast<DKString*>(out);
 }
 
 

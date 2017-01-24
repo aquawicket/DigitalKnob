@@ -3,7 +3,7 @@
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
 std::map<DKString, boost::function<void* (void*)> > DKClass::functions;
-std::map<DKString, boost::function<bool (const void*, void*&)> > DKClass::functions2;
+std::map<DKString, boost::function<bool (void*, void*&)> > DKClass::functions2;
 
 //////////////////////////////////////////////////////////////////////////////
 void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
