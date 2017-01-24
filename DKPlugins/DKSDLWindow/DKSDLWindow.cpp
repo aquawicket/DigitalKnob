@@ -113,7 +113,7 @@ void DKSDLWindow::Init()
 
 	DKString result;
 	sdlren = NULL;
-	if(!has(sdl_renderer, "SOFTWARE")){
+	if(!same(sdl_renderer, "SOFTWARE")){
 		result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	}
