@@ -17,6 +17,11 @@ std::map<int,int> DKSDLWindow::sdlMacCode;
 void DKSDLWindow::Init()
 {
 	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
+
+	//Get values from settings.txt file
+	DKString sdl_renderer;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
+	DKLog("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n", DKINFO);
 	
 #ifdef ANDROID
 		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
@@ -106,8 +111,12 @@ void DKSDLWindow::Init()
 		return;
 	}
 
-	DKString result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
-	sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	DKString result;
+	sdlren = NULL;
+	if(!has(sdl_renderer, "SOFTWARE")){
+		result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
+		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	}
 	if(!sdlren){
 		result = "SDL_RENDERER_SOFTWARE";
 		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);	
