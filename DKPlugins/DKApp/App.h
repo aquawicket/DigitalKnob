@@ -1,3 +1,4 @@
+#ifdef USE_DK
 #pragma once
 #ifndef App_H
 #define App_H
@@ -17,3 +18,4 @@ public:
 REGISTER_OBJECT(App, true);
 
 #endif //App_H
+#endif //USE_DK

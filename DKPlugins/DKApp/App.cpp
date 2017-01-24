@@ -1,3 +1,4 @@
+#ifdef USE_DK
 #include "stdafx.h"
 #include "App.h"
 
@@ -8,3 +9,5 @@ void App::Init()
 {
 	DKLog("App::Init()\n", DKDEBUG);
 }
+
+#endif //USE_DK
