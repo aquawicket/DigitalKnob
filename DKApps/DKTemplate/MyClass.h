@@ -26,14 +26,12 @@ public:
 	void EditNumber(void* input, void*& output)
 	{
 		int val = *static_cast<int*>(input);
-		int i = 0; //break point test
-		output = static_cast<void*>(new int(val));
+		output = static_cast<void*>(&val);
 	}
 	
 	void EditString(void* input, void*& output)
 	{
 		std::string val = *static_cast<std::string*>(input);
-		int i = 0; //break point test
-		output = static_cast<void*>(new std::string(val));
+		output = static_cast<void*>(&val);
 	}
 };
