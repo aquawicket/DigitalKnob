@@ -8,4 +8,5 @@
 [LOG_FILE] ON
 [LOG_SHOW]
 [LOG_HIDE]
+[SDL_RENDERER] //SOFTWARE
 [ONLINE_ASSETS] http://digitalknob.com/DKIDE/
