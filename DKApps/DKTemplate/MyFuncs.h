@@ -1,9 +1,6 @@
-#ifndef MyFuncs_H
-#define MyFuncs_H
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 #include <map>
-
 
 
 class MyFuncs
@@ -30,5 +27,3 @@ public:
 };
 
 std::map<std::string, boost::function<void (void*, void*&)> > MyFuncs::myfuncs;
-
-#endif //MyFuncs_H

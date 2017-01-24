@@ -27,6 +27,5 @@ void main()
 	std::string editStrOut = *static_cast<std::string*>(out);
 	printf("MyClass::EditString = %s \n", editStrOut.c_str());
 
-	//wait for close
-	getchar();
+	getchar(); //wait for close
 }
