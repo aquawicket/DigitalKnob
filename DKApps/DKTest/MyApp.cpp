@@ -13,8 +13,10 @@ void main()
 	printf("MyClass::GetNumber = %d \n", getStr.c_str());
 	
 	int editNum = 321;
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), output);  //atempting to change the variable
+	void* editNumOut;
+	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), editNumOut);  //atempting to change the variable
 	
 	std::string editString = "Edit Test";
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), output);  //atempting to change the variable
+	void* editStringOut;
+	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), editStringOut);  //atempting to change the variable
 }

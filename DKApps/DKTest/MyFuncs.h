@@ -1,3 +1,9 @@
+#ifndef MyFuncs_H
+#define MyFuncs_H
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
+#include <map>
+
 class MyFuncs
 {
 public:
@@ -20,3 +26,5 @@ public:
 		myfuncs[name](input, output);
 	}
 };
+
+#endif //MyFuncs_H

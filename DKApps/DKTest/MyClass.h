@@ -1,4 +1,4 @@
-#include "FunctionFactory.h"
+#include "MyFuncs.h"
 
 class MyClass
 {
