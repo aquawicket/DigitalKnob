@@ -12,11 +12,17 @@ void main()
 	MyFuncs::CallFunc("MyClass::GetNumber", NULL, static_cast<void*>(&getStr));  //atempting to fill the variable
 	printf("MyClass::GetNumber = %d \n", getStr.c_str());
 	
+
 	int editNum = 321;
-	void* editNumOut;
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), editNumOut);  //atempting to change the variable
-	
-	std::string editString = "Edit Test";
-	void* editStringOut;
-	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), editStringOut);  //atempting to change the variable
+	int editNumOut;
+	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editNum), static_cast<void*>(&editNumOut));  //atempting to change the variable
+	printf("MyClass::EditNumber = %d \n", editNumOut);
+
+	std::string editStr = "Edit Test";
+	std::string editStrOut;
+	MyFuncs::CallFunc("MyClass::EditNumber", static_cast<void*>(&editStr), static_cast<void*>(&editStrOut));  //atempting to change the variable
+	printf("MyClass::EditString = %s \n", editStrOut);
+
+	//wait for close
+	getchar();
 }
