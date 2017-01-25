@@ -1,5 +1,10 @@
 #include "MyFuncs.h"
 
+struct MyStruct{
+	int num;
+	std::string name;
+};
+
 class MyClass
 {
 public:
@@ -7,6 +12,7 @@ public:
 	{
 		MyFuncs::RegisterFunc("MyClass::GetNumber",  &MyClass::GetNumber,  this);
 		MyFuncs::RegisterFunc("MyClass::GetString",  &MyClass::GetString,  this);
+		MyFuncs::RegisterFunc("MyClass::GetPointer", &MyClass::GetPointer, this);
 		MyFuncs::RegisterFunc("MyClass::EditNumber", &MyClass::EditNumber, this);
 		MyFuncs::RegisterFunc("MyClass::EditString", &MyClass::EditString, this);
 	}
@@ -19,8 +25,18 @@ public:
 	
 	void GetString(void* input, void* output)
 	{
-		std::string var = "Get test";
+		std::string var = "Get String";
 		*(std::string*)output = var;
+	}
+
+	void GetPointer(void* input, void* output)
+	{
+		MyStruct mystruct;
+		mystruct.num = 65;
+		mystruct.name = "Get Point";
+		MyStruct* mypoint = &mystruct;
+
+	    *(MyStruct*)output = *mypoint;
 	}
 	
 	void EditNumber(void* input, void* output)
