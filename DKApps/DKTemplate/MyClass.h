@@ -15,6 +15,7 @@ public:
 		MyFuncs::RegisterFunc("MyClass::GetPointer", &MyClass::GetPointer, this);
 		MyFuncs::RegisterFunc("MyClass::EditNumber", &MyClass::EditNumber, this);
 		MyFuncs::RegisterFunc("MyClass::EditString", &MyClass::EditString, this);
+		MyFuncs::RegisterFunc("MyClass::EditPointer", &MyClass::EditPointer, this);
 	}
 
 	void GetNumber(void* input, void* output)
@@ -33,7 +34,7 @@ public:
 	{
 		MyStruct mystruct;
 		mystruct.num = 65;
-		mystruct.name = "Get Point";
+		mystruct.name = "Get Pointer";
 		MyStruct* mypoint = &mystruct;
 
 	    *(MyStruct*)output = *mypoint;
@@ -51,5 +52,16 @@ public:
 		std::string in = *(std::string*)input; //"Edit Test"
 		std::string out = in += " (edited)";   //result is "Edit test (edited)"
 		*(std::string*)output = out;
+	}
+
+	void EditPointer(void* input, void* output)
+	{
+		MyStruct* in = (MyStruct*)input;
+		
+		MyStruct* out = in;
+		out->num = out->num + 2;
+		out->name = out->name += " (edited)";
+
+		*(MyStruct*)output = *out;
 	}
 };
