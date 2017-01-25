@@ -43,7 +43,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
     SDL_Texture* sdl_texture = NULL;
     if(texture){
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        sdl_texture = (SDL_Texture *) texture;
+        sdl_texture = (SDL_Texture*)texture;
 
 		//Cef
 		///////////////////////////////////////////////////////////

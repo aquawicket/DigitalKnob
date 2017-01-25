@@ -36,7 +36,6 @@ public:
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
 
-	/*
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, void* (T::*func) (void*), T* _this)
@@ -48,7 +47,6 @@ public:
 			return;
 		}
 	}
-	*/
 
 	template<class T>
 	/////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +104,6 @@ public:
 		return functions2[name](input, output);
 	}
 	
-	/*
 	///////////////////////////////////////////
 	static void* CallFunc(const DKString& name)
 	{
@@ -117,6 +114,7 @@ public:
 		return functions[name](NULL);
 	}
 
+	/*/
 	/////////////////////////////////////////
 	static bool HasFunc(const DKString& name)
 	{
@@ -136,7 +134,7 @@ public:
 		return true;
 	}
 
-	//static std::map<DKString, boost::function<void* (void*)> > functions;
+	static std::map<DKString, boost::function<void* (void*)> > functions;
 	static std::map<DKString, boost::function<bool (void*, void*)> > functions2;
 };
 
