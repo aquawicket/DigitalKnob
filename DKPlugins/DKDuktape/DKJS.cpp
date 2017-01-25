@@ -273,36 +273,36 @@ int DKJS::GetDate(duk_context* ctx)
 //////////////////////////////////////////
 int DKJS::GetScreenWidth(duk_context* ctx)
 {
-	int width;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
-		width = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenWidth"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetScreenWidth")){
+		DKClass::CallFunc2("DKSDLWindow::GetScreenWidth", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
-		width = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenWidth"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenWidth")){
+		DKClass::CallFunc2("DKOSGWindow::GetScreenWidth", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
 		return 0;
 	}
-	duk_push_int(ctx, width);
+	duk_push_int(ctx, output);
 	return 1;
 }
 
 ///////////////////////////////////////////
 int DKJS::GetScreenHeight(duk_context* ctx)
 {
-	int height;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
-		height = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenHeight"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetScreenHeight")){
+		DKClass::CallFunc2("DKSDLWindow::GetScreenHeight", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
-		height = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenHeight"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenHeight")){
+		DKClass::CallFunc2("DKOSGWindow::GetScreenHeight", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
 		return 0;
 	}
-	duk_push_int(ctx, height);
+	duk_push_int(ctx, output);
 	return 1;
 }
 
@@ -484,12 +484,13 @@ int DKJS::CallFunc(duk_context* ctx)
 {
 	DKString func = duk_require_string(ctx, 0);
 	DKString args = duk_require_string(ctx, 1);
-	DKString* result;
-	//result = DKClass::CallFunc(func, args);
-	result = static_cast<DKString*>(DKClass::CallFunc(func, static_cast<void*>(&args)));
-	if(!result){ return 0; }
-	DKString value = *result;
-	duk_push_string(ctx, value.c_str());
+	DKString result;
+
+	if(!DKClass::CallFunc2(func, &args, &result)){
+		return 0;
+	}
+	
+	duk_push_string(ctx, result.c_str());
 	return 1;
 }
 

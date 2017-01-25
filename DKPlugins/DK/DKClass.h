@@ -36,6 +36,7 @@ public:
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
 
+	/*
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, void* (T::*func) (void*), T* _this)
@@ -47,6 +48,7 @@ public:
 			return;
 		}
 	}
+	*/
 
 	template<class T>
 	/////////////////////////////////////////////////////////////////////////////////////////
@@ -60,6 +62,18 @@ public:
 		}
 	}
 
+	////////////////////////////////////////////////
+	static void UnregisterFunc2(const DKString& name)
+	{
+		DKLog("DKClass::UnregisterFunc2("+name+")\n", DKDEBUG);
+		functions2.erase(name);
+		if(functions2[name]) {
+			DKLog("UnegisterFunc2("+name+"): failed to unregister function \n", DKERROR);
+			return;
+		}
+	}
+
+	/*
 	////////////////////////////////////////////////
 	static void UnregisterFunc(const DKString& name)
 	{
@@ -80,6 +94,7 @@ public:
 		}
 		return functions[name](data);
 	}
+	*/
 
 	//////////////////////////////////////////////////////////////////////
 	static bool CallFunc2(const DKString& name, void* input, void* output)
@@ -91,6 +106,7 @@ public:
 		return functions2[name](input, output);
 	}
 	
+	/*
 	///////////////////////////////////////////
 	static void* CallFunc(const DKString& name)
 	{
@@ -109,6 +125,7 @@ public:
 		}
 		return true;
 	}
+	*/
 	
 	/////////////////////////////////////////
 	static bool HasFunc2(const DKString& name)
@@ -119,7 +136,7 @@ public:
 		return true;
 	}
 
-	static std::map<DKString, boost::function<void* (void*)> > functions;
+	//static std::map<DKString, boost::function<void* (void*)> > functions;
 	static std::map<DKString, boost::function<bool (void*, void*)> > functions2;
 };
 

@@ -114,36 +114,36 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 {
-	int height;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
-		height = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenHeight"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetScreenHeight")){
+		DKClass::CallFunc2("DKSDLWindow::GetScreenHeight", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
-		height = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenHeight"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenHeight")){
+		DKClass::CallFunc2("DKOSGWindow::GetScreenHeight", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
 		return false;
 	}
-	retval = CefV8Value::CreateInt(height);
+	retval = CefV8Value::CreateInt(output);
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 {
-	int width;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
-		width = *static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetScreenWidth"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetScreenWidth")){
+		DKClass::CallFunc2("DKSDLWindow::GetScreenWidth", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
-		width = *static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetScreenWidth"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenWidth")){
+		DKClass::CallFunc2("DKOSGWindow::GetScreenWidth", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
 		return false;
 	}
-	retval = CefV8Value::CreateInt(width);
+	retval = CefV8Value::CreateInt(output);
 	return true;
 }
 

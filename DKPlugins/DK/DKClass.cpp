@@ -2,7 +2,7 @@
 #include "DKClass.h"
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
-std::map<DKString, boost::function<void* (void*)> > DKClass::functions;
+//std::map<DKString, boost::function<void* (void*)> > DKClass::functions;
 std::map<DKString, boost::function<bool (void*, void*)> > DKClass::functions2;
 
 //////////////////////////////////////////////////////////////////////////////

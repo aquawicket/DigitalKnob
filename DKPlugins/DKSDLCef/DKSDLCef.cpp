@@ -34,8 +34,8 @@ void DKSDLCef::Init()
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
-	DKClass::RegisterFunc(id+"::OnResize", &DKSDLCef::OnResize, this);
-	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
+	DKClass::RegisterFunc2(id+"::OnResize", &DKSDLCef::OnResize, this);
+	DKClass::RegisterFunc2("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
 }
 
 ////////////////////
@@ -44,18 +44,19 @@ void DKSDLCef::End()
 	DKLog("DKSDLCef::End()\n", DKDEBUG);
 
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
-	DKClass::UnregisterFunc(id + "::OnResize");
-	DKClass::UnregisterFunc("DKSDLCef::GetTexture::" + id);
+	DKClass::UnregisterFunc2(id + "::OnResize");
+	DKClass::UnregisterFunc2("DKSDLCef::GetTexture::" + id);
 	cefHandler = NULL;
 	//cef_image = NULL;
 }
 
-////////////////////////////////////
-void* DKSDLCef::OnResize(void* data)
+//////////////////////////////////////////////////
+bool DKSDLCef::OnResize(void* input, void* output)
 {
 	DKLog("DKSDLCef::OnResize(void*)\n", DKDEBUG);
 
-	DKString str = *static_cast<DKString*>(data);
+	//DKString str = *static_cast<DKString*>(data);
+	DKString str = *(DKString*)input;
 
 	//DKLog("DKSDLCef::OnResize("+str+")\n", DKWARN);
 
@@ -81,18 +82,19 @@ void* DKSDLCef::OnResize(void* data)
 		dkCef->browsers[i]->GetHost()->WasResized();
 	}
 
-	return NULL;
+	return true;
 }
 
-/////////////////////////////////
-void* DKSDLCef::GetTexture(void*)
+////////////////////////////////////////////////////
+bool DKSDLCef::GetTexture(void* input, void* output)
 {
 	//DKLog("DKSDLCef::GetTexture(void*)\n", DKDEBUG);
 
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
-	return static_cast<void*>(cef_image);
+	output = cef_image;
+	return true;
 }
 
 /////////////////////////
