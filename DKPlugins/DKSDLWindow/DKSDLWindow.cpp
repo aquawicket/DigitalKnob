@@ -271,32 +271,34 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 ////////////////////////////////////////////////////
 bool DKSDLWindow::TestInt(void* input, void* output)
 {
-	int* num = static_cast<int*>(input);
-	output = static_cast<void*>(num);
+	int in = *(int*)input;
+	int out = in;
+	*(int*)output = out;
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::TestString(void* input, void* output)
 {
-	DKString* string = static_cast<DKString*>(input);
-	output = static_cast<void*>(string);
+	std::string in = *(std::string*)input;
+	std::string out = in;
+	*(std::string*)output = out;
 	return true;
 }
 
 //////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnInt(void* input, void* output)
 {
-	int value = 12345;
-	//&output = (void**)value;
+	int var = 1234;
+	*(int*)output = var;
 	return true;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnString(void* input, void* output)
 {
-	DKString value = "test string 2";
-	//output = static_cast<void*>(&value);
+	std::string var = "Return test";
+	*(std::string*)output = var;
 	return true;
 }
 
