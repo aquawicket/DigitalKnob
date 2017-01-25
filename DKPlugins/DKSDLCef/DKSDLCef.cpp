@@ -102,7 +102,7 @@ bool DKSDLCef::GetTexture2(void* input, void* output)
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
-	output = cef_image;
+	output = static_cast<void*>(cef_image);
 	return true;
 }
 
