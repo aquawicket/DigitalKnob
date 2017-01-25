@@ -11,31 +11,29 @@ public:
 		MyFuncs::RegisterFunc("MyClass::EditString", &MyClass::EditString, this);
 	}
 
-	void GetNumber(void* input, void*& output)
+	void GetNumber(void* input, void* output)
 	{
 		int var = 1234;
-		output = static_cast<void*>(new int(var));             //WORKS, var eats memory
-		//output = static_cast<void*>(&var);                   //ERROR, var goes out of scope
+		*(int*)output = var;
 	}
 	
-	void GetString(void* input, void*& output)
+	void GetString(void* input, void* output)
 	{
 		std::string var = "Get test";
-		output = static_cast<void*>(new std::string(var));     //WORKS, var eats memory
-		//output = static_cast<void*>(&var);                   //ERROR, var goes out of scope
+		*(std::string*)output = var;
 	}
 	
-	void EditNumber(void* input, void*& output)
+	void EditNumber(void* input, void* output)
 	{
-		int var = *static_cast<int*>(input);                   //WORKS, var gets 4321 OK
-		output = static_cast<void*>(new int(var));             //WORKS, var eats memory
-		//output = static_cast<void*>(&var);                   //ERROR, var goes out of scope
+		int in = *(int*)input;
+		int out = in - 4320;
+		*(int*)output = out;
 	}
 	
-	void EditString(void* input, void*& output)
+	void EditString(void* input, void* output)
 	{
-		std::string var = *static_cast<std::string*>(input);   //WORKS, var gets "Edit test" OK
-		output = static_cast<void*>(new std::string(var));     //WORKS, var eats memory
-		//output = static_cast<void*>(&var);                   //ERROR, var goes out of scope
+		std::string in = *(std::string*)input;
+		std::string out = in += "(edited)";
+		*(std::string*)output = out;
 	}
 };
