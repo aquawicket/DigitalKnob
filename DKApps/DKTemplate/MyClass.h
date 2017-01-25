@@ -25,15 +25,15 @@ public:
 	
 	void EditNumber(void* input, void* output)
 	{
-		int in = *(int*)input;
-		int out = in - 4320;
+		int in = *(int*)input; //4321
+		int out = in - 4320; //result is 1;
 		*(int*)output = out;
 	}
 	
 	void EditString(void* input, void* output)
 	{
 		std::string in = *(std::string*)input;
-		std::string out = in += "(edited)";
+		std::string out = in += " (edited)";
 		*(std::string*)output = out;
 	}
 };
