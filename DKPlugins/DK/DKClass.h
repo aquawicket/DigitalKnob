@@ -47,6 +47,16 @@ public:
 			return;
 		}
 	}
+	
+	///////////////////////////////////////////
+	static void* CallFunc(const DKString& name)
+	{
+		if(!functions[name]){ 
+			DKLog("CallFunc("+name+") not registered\n", DKWARN);
+			return 0;
+		}
+		return functions[name](NULL);
+	}
 
 	template<class T>
 	/////////////////////////////////////////////////////////////////////////////////////////
@@ -71,29 +81,6 @@ public:
 		}
 	}
 
-	/*
-	////////////////////////////////////////////////
-	static void UnregisterFunc(const DKString& name)
-	{
-		DKLog("DKClass::UnregisterFunc("+name+")\n", DKDEBUG);
-		functions.erase(name);
-		if(functions[name]) {
-			DKLog("UnegisterFunc("+name+"): failed to unregister function \n", DKERROR);
-			return;
-		}
-	}
-	
-	///////////////////////////////////////////////////////
-	static void* CallFunc(const DKString& name, void* data)
-	{
-		if(!functions[name]){ 
-			DKLog("CallFunc("+name+") not registered\n", DKWARN);
-			return 0;
-		}
-		return functions[name](data);
-	}
-	*/
-
 	//////////////////////////////////////////////////////////////////////
 	static bool CallFunc2(const DKString& name, void* input, void* output)
 	{
@@ -103,28 +90,7 @@ public:
 		}
 		return functions2[name](input, output);
 	}
-	
-	///////////////////////////////////////////
-	static void* CallFunc(const DKString& name)
-	{
-		if(!functions[name]){ 
-			DKLog("CallFunc("+name+") not registered\n", DKWARN);
-			return 0;
-		}
-		return functions[name](NULL);
-	}
 
-	/*/
-	/////////////////////////////////////////
-	static bool HasFunc(const DKString& name)
-	{
-		if(!functions[name]){ 
-			return false;
-		}
-		return true;
-	}
-	*/
-	
 	/////////////////////////////////////////
 	static bool HasFunc2(const DKString& name)
 	{
