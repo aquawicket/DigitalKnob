@@ -66,79 +66,79 @@ DKString DKWindow::TestReturnString()
 ////////////////////
 int DKWindow::GetX()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetX")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetX"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetX")){
+		DKClass::CallFunc2("DKSDLWindow::GetX", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetX")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetX"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetX")){
+		DKClass::CallFunc2("DKOSGWindow::GetX", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetX(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 ////////////////////
 int DKWindow::GetY()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetY")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetY"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetY")){
+		DKClass::CallFunc2("DKSDLWindow::GetY", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetY")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetY"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetY")){
+		DKClass::CallFunc2("DKOSGWindow::GetY", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetY(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 ////////////////////////
 int DKWindow::GetWidth()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetWidth")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetWidth"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetWidth")){
+		DKClass::CallFunc2("DKSDLWindow::GetWidth", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetWidth")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetWidth"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetWidth")){
+		DKClass::CallFunc2("DKOSGWindow::GetWidth", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetWidth(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 /////////////////////////
 int DKWindow::GetHeight()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetHeight")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetHeight"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetHeight")){
+		DKClass::CallFunc2("DKSDLWindow::GetHeight", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetHeight")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetHeight"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetHeight")){
+		DKClass::CallFunc2("DKOSGWindow::GetHeight", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetHeight(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 //////////////////////////
 void DKWindow::SetX(int x)
 {
-	if(DKClass::HasFunc("DKSDLWindow::SetX")){
-		DKClass::CallFunc("DKSDLWindow::SetX", static_cast<void*>(&x));
+	if(DKClass::HasFunc2("DKSDLWindow::SetX")){
+		DKClass::CallFunc2("DKSDLWindow::SetX", &x, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::SetX")){
-		DKClass::CallFunc("DKOSGWindow::SetX", static_cast<void*>(&x));
+	else if(DKClass::HasFunc2("DKOSGWindow::SetX")){
+		DKClass::CallFunc2("DKOSGWindow::SetX", &x, NULL);
 	}
 	else{
 		DKLog("DKWindow::SetX(): No function available \n", DKERROR);
@@ -148,11 +148,11 @@ void DKWindow::SetX(int x)
 //////////////////////////
 void DKWindow::SetY(int y)
 {
-	if(DKClass::HasFunc("DKSDLWindow::SetY")){
-		DKClass::CallFunc("DKSDLWindow::SetY", static_cast<void*>(&y));
+	if(DKClass::HasFunc2("DKSDLWindow::SetY")){
+		DKClass::CallFunc2("DKSDLWindow::SetY", &y, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::SetY")){
-		DKClass::CallFunc("DKOSGWindow::SetY", static_cast<void*>(&y));
+	else if(DKClass::HasFunc2("DKOSGWindow::SetY")){
+		DKClass::CallFunc2("DKOSGWindow::SetY", &y, NULL);
 	}
 	else{
 		DKLog("DKWindow::SetY(): No function available \n", DKERROR);
@@ -162,11 +162,11 @@ void DKWindow::SetY(int y)
 //////////////////////////////
 void DKWindow::SetWidth(int w)
 {
-	if(DKClass::HasFunc("DKSDLWindow::SetWidth")){
-		DKClass::CallFunc("DKSDLWindow::SetWidth", static_cast<void*>(&w));
+	if(DKClass::HasFunc2("DKSDLWindow::SetWidth")){
+		DKClass::CallFunc2("DKSDLWindow::SetWidth", &w, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::SetWidth")){
-		DKClass::CallFunc("DKOSGWindow::SetWidth", static_cast<void*>(&w));
+	else if(DKClass::HasFunc2("DKOSGWindow::SetWidth")){
+		DKClass::CallFunc2("DKOSGWindow::SetWidth", &w, NULL);
 	}
 	else{
 		DKLog("DKWindow::SetWidth(): No function available \n", DKERROR);
@@ -176,11 +176,11 @@ void DKWindow::SetWidth(int w)
 ///////////////////////////////
 void DKWindow::SetHeight(int h)
 {
-	if(DKClass::HasFunc("DKSDLWindow::SetHeight")){
-		DKClass::CallFunc("DKSDLWindow::SetHeight", static_cast<void*>(&h));
+	if(DKClass::HasFunc2("DKSDLWindow::SetHeight")){
+		DKClass::CallFunc2("DKSDLWindow::SetHeight", &h, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::SetHeight")){
-		DKClass::CallFunc("DKOSGWindow::SetHeight", static_cast<void*>(&h));
+	else if(DKClass::HasFunc2("DKOSGWindow::SetHeight")){
+		DKClass::CallFunc2("DKOSGWindow::SetHeight", &h, NULL);
 	}
 	else{
 		DKLog("DKWindow::SetHeight(): No function available \n", DKERROR);
@@ -197,28 +197,28 @@ float DKWindow::GetPixelRatio()
 /////////////////////////////
 bool DKWindow::IsFullscreen()
 {
-	bool* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::IsFullscreen")){
-		ptr = static_cast<bool*>(DKClass::CallFunc("DKSDLWindow::IsFullscreen"));
+	bool output;
+	if(DKClass::HasFunc2("DKSDLWindow::IsFullscreen")){
+		DKClass::CallFunc2("DKSDLWindow::IsFullscreen", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::IsFullscreen")){
-		ptr = static_cast<bool*>(DKClass::CallFunc("DKOSGWindow::IsFullscreen"));
+	else if(DKClass::HasFunc2("DKOSGWindow::IsFullscreen")){
+		DKClass::CallFunc2("DKOSGWindow::IsFullscreen", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::IsFullscreen(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 ///////////////////////////
 void DKWindow::Fullscreen()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Fullscreen")){
-		DKClass::CallFunc("DKSDLWindow::Fullscreen");
+	if(DKClass::HasFunc2("DKSDLWindow::Fullscreen")){
+		DKClass::CallFunc2("DKSDLWindow::Fullscreen", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Fullscreen")){
-		DKClass::CallFunc("DKOSGWindow::Fullscreen");
+	else if(DKClass::HasFunc2("DKOSGWindow::Fullscreen")){
+		DKClass::CallFunc2("DKOSGWindow::Fullscreen", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Fullscreen(): No function available \n", DKERROR);
@@ -228,11 +228,11 @@ void DKWindow::Fullscreen()
 /////////////////////////
 void DKWindow::Windowed()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Windowed")){
-		DKClass::CallFunc("DKSDLWindow::Windowed");
+	if(DKClass::HasFunc2("DKSDLWindow::Windowed")){
+		DKClass::CallFunc2("DKSDLWindow::Windowed", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Windowed")){
-		DKClass::CallFunc("DKOSGWindow::Windowed");
+	else if(DKClass::HasFunc2("DKOSGWindow::Windowed")){
+		DKClass::CallFunc2("DKOSGWindow::Windowed", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Windowed(): No function available \n", DKERROR);
@@ -242,11 +242,11 @@ void DKWindow::Windowed()
 /////////////////////////
 void DKWindow::Minimize()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Minimize")){
-		DKClass::CallFunc("DKSDLWindow::Minimize");
+	if(DKClass::HasFunc2("DKSDLWindow::Minimize")){
+		DKClass::CallFunc2("DKSDLWindow::Minimize", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Minimize")){
-		DKClass::CallFunc("DKOSGWindow::Minimize");
+	else if(DKClass::HasFunc2("DKOSGWindow::Minimize")){
+		DKClass::CallFunc2("DKOSGWindow::Minimize", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Minimize(): No function available \n", DKERROR);
@@ -256,11 +256,11 @@ void DKWindow::Minimize()
 ////////////////////////
 void DKWindow::Restore()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Restore")){
-		DKClass::CallFunc("DKSDLWindow::Restore");
+	if(DKClass::HasFunc2("DKSDLWindow::Restore")){
+		DKClass::CallFunc2("DKSDLWindow::Restore", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Restore")){
-		DKClass::CallFunc("DKOSGWindow::Restore");
+	else if(DKClass::HasFunc2("DKOSGWindow::Restore")){
+		DKClass::CallFunc2("DKOSGWindow::Restore", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Restore(): No function available \n", DKERROR);
@@ -272,28 +272,28 @@ void DKWindow::Restore()
 bool DKWindow::IsVisible()
 {
 	//FIXME
-	bool* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::IsVisible")){
-		ptr = static_cast<bool*>(DKClass::CallFunc("DKSDLWindow::IsVisible"));
+	bool output;
+	if(DKClass::HasFunc2("DKSDLWindow::IsVisible")){
+		DKClass::CallFunc2("DKSDLWindow::IsVisible", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::IsVisible")){
-		ptr = static_cast<bool*>(DKClass::CallFunc("DKOSGWindow::IsVisible"));
+	else if(DKClass::HasFunc2("DKOSGWindow::IsVisible")){
+		DKClass::CallFunc2("DKOSGWindow::IsVisible", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::IsVisible(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 /////////////////////
 void DKWindow::Hide()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Hide")){
-		DKClass::CallFunc("DKSDLWindow::Hide");
+	if(DKClass::HasFunc2("DKSDLWindow::Hide")){
+		DKClass::CallFunc2("DKSDLWindow::Hide", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Hide")){
-		DKClass::CallFunc("DKOSGWindow::Hide");
+	else if(DKClass::HasFunc2("DKOSGWindow::Hide")){
+		DKClass::CallFunc2("DKOSGWindow::Hide", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Hide(): No function available \n", DKERROR);
@@ -303,11 +303,11 @@ void DKWindow::Hide()
 /////////////////////
 void DKWindow::Show()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Show")){
-		DKClass::CallFunc("DKSDLWindow::Show");
+	if(DKClass::HasFunc2("DKSDLWindow::Show")){
+		DKClass::CallFunc2("DKSDLWindow::Show", NULL, NULL);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::Show")){
-		DKClass::CallFunc("DKOSGWindow::Show");
+	else if(DKClass::HasFunc2("DKOSGWindow::Show")){
+		DKClass::CallFunc2("DKOSGWindow::Show", NULL, NULL);
 	}
 	else{
 		DKLog("DKWindow::Show(): No function available \n", DKERROR);
@@ -317,52 +317,52 @@ void DKWindow::Show()
 /////////////////////////
 int DKWindow::GetMouseX()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetMouseX")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetMouseX"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetMouseX")){
+		DKClass::CallFunc2("DKSDLWindow::GetMouseX", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetMouseX")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetMouseX"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetMouseX")){
+		DKClass::CallFunc2("DKOSGWindow::GetMouseX", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetMouseX(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 /////////////////////////
 int DKWindow::GetMouseY()
 {
-	int* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetMouseY")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKSDLWindow::GetMouseY"));
+	int output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetMouseY")){
+		DKClass::CallFunc2("DKSDLWindow::GetMouseY", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetMouseY")){
-		ptr = static_cast<int*>(DKClass::CallFunc("DKOSGWindow::GetMouseY"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetMouseY")){
+		DKClass::CallFunc2("DKOSGWindow::GetMouseY", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetMouseY(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 
 #ifdef WIN32
 ////////////////////////
 HWND DKWindow::GetHwnd()
 {
-	HWND* ptr = NULL;
-	if(DKClass::HasFunc("DKSDLWindow::GetHwnd")){
-		ptr = static_cast<HWND*>(DKClass::CallFunc("DKSDLWindow::GetHwnd"));
+	HWND output;
+	if(DKClass::HasFunc2("DKSDLWindow::GetHwnd")){
+		DKClass::CallFunc2("DKSDLWindow::GetHwnd", NULL, &output);
 	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetHwnd")){
-		ptr = static_cast<HWND*>(DKClass::CallFunc("DKOSGWindow::GetHwnd"));
+	else if(DKClass::HasFunc2("DKOSGWindow::GetHwnd")){
+		DKClass::CallFunc2("DKOSGWindow::GetHwnd", NULL, &output);
 	}
 	else{
 		DKLog("DKWindow::GetHwnd(): No function available \n", DKERROR);
 		return NULL;
 	}
-	return *ptr;
+	return output;
 }
 #endif

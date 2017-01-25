@@ -109,6 +109,15 @@ public:
 		}
 		return true;
 	}
+	
+	/////////////////////////////////////////
+	static bool HasFunc2(const DKString& name)
+	{
+		if(!functions2[name]){ 
+			return false;
+		}
+		return true;
+	}
 
 	static std::map<DKString, boost::function<void* (void*)> > functions;
 	static std::map<DKString, boost::function<bool (void*, void*)> > functions2;

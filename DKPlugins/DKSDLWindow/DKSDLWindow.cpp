@@ -165,27 +165,27 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc2("DKSDLWindow::TestReturnInt", &DKSDLWindow::TestReturnInt, this);
 	DKClass::RegisterFunc2("DKSDLWindow::TestReturnString", &DKSDLWindow::TestReturnString, this);
 
-	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenHeight", &DKSDLWindow::GetScreenHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenWidth", &DKSDLWindow::GetScreenWidth, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetX", &DKSDLWindow::GetX, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetY", &DKSDLWindow::GetY, this);
-	DKClass::RegisterFunc("DKSDLWindow::Hide", &DKSDLWindow::Hide, this);
-	DKClass::RegisterFunc("DKSDLWindow::IsFullscreen", &DKSDLWindow::IsFullscreen, this);
-	DKClass::RegisterFunc("DKSDLWindow::IsVisible", &DKSDLWindow::IsVisible, this);
-	DKClass::RegisterFunc("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
-	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
-	DKClass::RegisterFunc("DKSDLWindow::SetHeight", &DKSDLWindow::SetHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::SetWidth", &DKSDLWindow::SetWidth, this);
-	DKClass::RegisterFunc("DKSDLWindow::SetX", &DKSDLWindow::SetX, this);
-	DKClass::RegisterFunc("DKSDLWindow::SetY", &DKSDLWindow::SetY, this);
-	DKClass::RegisterFunc("DKSDLWindow::Show", &DKSDLWindow::Show, this);
-	DKClass::RegisterFunc("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetScreenHeight", &DKSDLWindow::GetScreenHeight, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetScreenWidth", &DKSDLWindow::GetScreenWidth, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetX", &DKSDLWindow::GetX, this);
+	DKClass::RegisterFunc2("DKSDLWindow::GetY", &DKSDLWindow::GetY, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Hide", &DKSDLWindow::Hide, this);
+	DKClass::RegisterFunc2("DKSDLWindow::IsFullscreen", &DKSDLWindow::IsFullscreen, this);
+	DKClass::RegisterFunc2("DKSDLWindow::IsVisible", &DKSDLWindow::IsVisible, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
+	DKClass::RegisterFunc2("DKSDLWindow::SetHeight", &DKSDLWindow::SetHeight, this);
+	DKClass::RegisterFunc2("DKSDLWindow::SetWidth", &DKSDLWindow::SetWidth, this);
+	DKClass::RegisterFunc2("DKSDLWindow::SetX", &DKSDLWindow::SetX, this);
+	DKClass::RegisterFunc2("DKSDLWindow::SetY", &DKSDLWindow::SetY, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Show", &DKSDLWindow::Show, this);
+	DKClass::RegisterFunc2("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
 	DKApp::AppendLoopFunc(&DKSDLWindow::Process, this);
 	DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
 
@@ -306,175 +306,190 @@ bool DKSDLWindow::TestReturnString(void* input, void* output)
 
 
 //////////////////////////////
-void* DKSDLWindow::GetX(void*)
+bool DKSDLWindow::GetX(void* input, void* output)
 {
 	int x;
 	SDL_GetWindowPosition(sdlwin, &x, NULL);
-	return static_cast<void*>(new int(x));
+	*(int*)output = x;
+	return true;
 }
 
 //////////////////////////////
-void* DKSDLWindow::GetY(void*)
+bool DKSDLWindow::GetY(void* input, void* output)
 {
 	int y;
 	SDL_GetWindowPosition(sdlwin, NULL, &y);
-	return static_cast<void*>(new int(y));
+	*(int*)output = y;
+	return true;
 }
 
 //////////////////////////////////
-void* DKSDLWindow::GetWidth(void*)
+bool DKSDLWindow::GetWidth(void* input, void* output)
 {
 	int w;
 	SDL_GetWindowSize(sdlwin, &w, NULL);
-	return static_cast<void*>(new int(w));
+	*(int*)output = w;
+	return true;
 }
 
 ///////////////////////////////////
-void* DKSDLWindow::GetHeight(void*)
+bool DKSDLWindow::GetHeight(void* input, void* output)
 {
 	int h;
 	SDL_GetWindowSize(sdlwin, NULL, &h);
-	return static_cast<void*>(new int(h));
+	*(int*)output = h;
+	return true;
 }
 
 ////////////////////////////////
-void* DKSDLWindow::SetX(void* x)
+bool DKSDLWindow::SetX(void* input, void* output)
 {
+	int x = *(int*)input;
 	int y;
 	SDL_GetWindowPosition(sdlwin, NULL, &y);
-	SDL_SetWindowPosition(sdlwin, *static_cast<int*>(x), y);
-	return NULL;
+	SDL_SetWindowPosition(sdlwin, x, y);
+	return true;
 }
 
 ////////////////////////////////
-void* DKSDLWindow::SetY(void* y)
+bool DKSDLWindow::SetY(void* input, void* output)
 {
+	int y = *(int*)input;
 	int x;
 	SDL_GetWindowPosition(sdlwin, &x, NULL);
-	SDL_SetWindowPosition(sdlwin, x, *static_cast<int*>(y));
-	return NULL;
+	SDL_SetWindowPosition(sdlwin, x, y);
+	return true;
 }
 
 ////////////////////////////////////
-void* DKSDLWindow::SetWidth(void* w)
+bool DKSDLWindow::SetWidth(void* input, void* output)
 {
+	int w = *(int*)input;
 	int h;
 	SDL_GetWindowSize(sdlwin, NULL, &h);
-	SDL_SetWindowSize(sdlwin, *static_cast<int*>(w), h);
-	return NULL;
+	SDL_SetWindowSize(sdlwin, w, h);
+	return true;
 }
 
 /////////////////////////////////////
-void* DKSDLWindow::SetHeight(void* h)
+bool DKSDLWindow::SetHeight(void* input, void* output)
 {
+	int h = *(int*)input;
 	int w;
 	SDL_GetWindowSize(sdlwin, &w, NULL);
-	SDL_SetWindowSize(sdlwin, w, *static_cast<int*>(h));
-	return NULL;
+	SDL_SetWindowSize(sdlwin, w, h);
+	return true;
 }
 
 ////////////////////////////////////////
-void* DKSDLWindow::GetScreenWidth(void*)
+bool DKSDLWindow::GetScreenWidth(void* input, void* output)
 {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
-	return static_cast<void*>(new int(dm.w));
+	*(int*)output = dm.w;
+	return true;
 }
 
 /////////////////////////////////////////
-void* DKSDLWindow::GetScreenHeight(void*)
+bool DKSDLWindow::GetScreenHeight(void* input, void* output)
 {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
-	return static_cast<void*>(new int(dm.h));
+	*(int*)output = dm.h;
+	return true;
 }
 
 //////////////////////////////////////
-void* DKSDLWindow::IsFullscreen(void*)
+bool DKSDLWindow::IsFullscreen(void* input, void* output)
 {
 	Uint32 FullscreenFlag = SDL_WINDOW_FULLSCREEN;
     bool isFullscreen = SDL_GetWindowFlags(sdlwin) & FullscreenFlag;
-	return static_cast<void*>(new bool(isFullscreen));
+	*(bool*)output = isFullscreen;
+	return true;
 }
 
 ////////////////////////////////////
-void* DKSDLWindow::Fullscreen(void*)
+bool DKSDLWindow::Fullscreen(void* input, void* output)
 {
 	SDL_SetWindowFullscreen(sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
-	return 0;
+	return true;
 }
 
 //////////////////////////////////
-void* DKSDLWindow::Windowed(void*)
+bool DKSDLWindow::Windowed(void* input, void* output)
 {
 	SDL_SetWindowFullscreen(sdlwin, 0); 
-	return 0;
+	return true;
 }
 
 /////////////////////////////////
-void* DKSDLWindow::Restore(void*)
+bool DKSDLWindow::Restore(void* input, void* output)
 {
 	SDL_RestoreWindow(sdlwin);
-	return NULL;
+	return true;
 }
 
 //////////////////////////////////
-void* DKSDLWindow::Minimize(void*)
+bool DKSDLWindow::Minimize(void* input, void* output)
 {
 	SDL_MinimizeWindow(sdlwin);
-	return NULL;
+	return true;
 }
 
 ///////////////////////////////////
-void* DKSDLWindow::IsVisible(void*)
+bool DKSDLWindow::IsVisible(void* input, void* output)
 {
 	Uint32 IsVisibleFlag = SDL_WINDOW_SHOWN;
     bool isVisible = SDL_GetWindowFlags(sdlwin) & IsVisibleFlag;
-	return static_cast<void*>(new bool(isVisible));
+	*(bool*)output = isVisible;
+	return true;
 }
 
 //////////////////////////////
-void* DKSDLWindow::Hide(void*)
+bool DKSDLWindow::Hide(void* input, void* output)
 {
 	SDL_HideWindow(sdlwin);
-	return NULL;
+	return true;
 }
 
 //////////////////////////////
-void* DKSDLWindow::Show(void*)
+bool DKSDLWindow::Show(void* input, void* output)
 {
 	SDL_ShowWindow(sdlwin);
-	return NULL;
+	return true;
 }
 
 ///////////////////////////////////
-void* DKSDLWindow::GetMouseX(void*)
+bool DKSDLWindow::GetMouseX(void* input, void* output)
 {
 	int mouseX;
 	SDL_GetMouseState(&mouseX, NULL);
-	return static_cast<void*>(new int(mouseX));
+	*(int*)output = mouseX;
+	return true;
 }
 
 ///////////////////////////////////
-void* DKSDLWindow::GetMouseY(void*)
+bool DKSDLWindow::GetMouseY(void* input, void* output)
 {
 	int mouseY;
 	SDL_GetMouseState(NULL, &mouseY);
-	return static_cast<void*>(new int(mouseY));
+	*(int*)output = mouseY;
+	return true;
 }
 
 /////////////////////////////////
-void* DKSDLWindow::GetHwnd(void*)
+bool DKSDLWindow::GetHwnd(void* input, void* output)
 {
 #ifdef WIN32
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
-	return static_cast<void*>(&hwnd);
+	*(HWND*)output = hwnd;
+	return true;
 #else
 	DKLog("DKSDLWindow::GetHwnd(): This OS does not have a HWND handle \n", DKERROR);
-	return NULL;
+	return false;
 #endif
 }
 
