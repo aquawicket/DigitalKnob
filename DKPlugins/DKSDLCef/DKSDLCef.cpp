@@ -36,6 +36,7 @@ void DKSDLCef::Init()
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc2(id+"::OnResize", &DKSDLCef::OnResize, this);
 	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
+	DKClass::RegisterFunc2("DKSDLCef::GetTexture2::"+id, &DKSDLCef::GetTexture2, this);
 }
 
 ////////////////////
@@ -88,12 +89,21 @@ bool DKSDLCef::OnResize(void* input, void* output)
 /////////////////////////////////
 void* DKSDLCef::GetTexture(void*)
 {
-	//DKLog("DKSDLCef::GetTexture(void*)\n", DKDEBUG);
-
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
 	return static_cast<void*>(cef_image);
+}
+
+// FIXME
+/////////////////////////////////////////////////////
+bool DKSDLCef::GetTexture2(void* input, void* output)
+{
+	if(!cef_image){
+		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
+	}
+	output = cef_image;
+	return true;
 }
 
 /////////////////////////
