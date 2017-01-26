@@ -4,9 +4,6 @@
 #include "DKAndroid.h"
 
 
-//DKString DKWebview::dkstring_rval;
-
-
 //////////////////////
 void DKWebview::Init()
 {
@@ -38,8 +35,6 @@ bool DKWebview::Test(void* input, void* output)
 	DKLog("DKWebview::Test("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
-	//dkstring_rval = arry[0];
-	//return static_cast<void*>(&dkstring_rval);
 	DKString rval = arry[0];
 	*(DKString*)output = rval;
 	return true;
@@ -61,8 +56,6 @@ bool DKWebview::SendValue(void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
 	DKLog("DKWebview::SendValue()\n", DKDEBUG);
-	//dkstring_rval = "Test";
-	//return static_cast<void*>(&dkstring_rval);
 	DKString rval = "Test";
 	*(DKString*)output = rval;
 	return true;
