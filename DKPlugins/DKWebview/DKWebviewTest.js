@@ -1,4 +1,3 @@
-
 /////////////////////////////
 function DKWebviewTest_Init()
 {
@@ -11,7 +10,7 @@ function DKWebviewTest_Init()
 ////////////////////////////
 function DKWebviewTest_End()
 {
-	
+	DKClose("DKWebviewTest.html");
 }
 
 /////////////////////////////////////

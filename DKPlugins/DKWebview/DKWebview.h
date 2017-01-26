@@ -12,13 +12,12 @@ public:
 	void Init();
 	void End();
 	
-	static DKString dkstring_rval;
-	
+	bool onCreate(void* input, void* output);
 	bool Test(void* input, void* output);
 	bool SendValue(void* input, void* output);
 	bool ReceiveValue(void* input, void* output);
 	bool PrintFunctions(void* input, void* output);
-	bool onCreate(void* input, void* output);
+	
 };
 
 REGISTER_OBJECT(DKWebview, true)
