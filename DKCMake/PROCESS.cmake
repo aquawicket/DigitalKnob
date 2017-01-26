@@ -752,6 +752,11 @@ IF(ANDROID)
 	ENDIF()
 ENDIF()
 
+MESSAGE("\n")
+MESSAGE("***************************************")
+MESSAGE("********** Finnished ${AppName} **********")
+MESSAGE("***************************************\n")
+
 
 #clean these cached variables
 DKSET(DKDEFINES "")
