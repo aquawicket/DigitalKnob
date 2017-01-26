@@ -1,9 +1,10 @@
-#ifdef ANDROID
 #pragma once
 #ifndef DKWebview_H
 #define DKWebview_H
 
+#ifdef ANDROID
 #include <jni.h>
+#endif
 
 /////////////////////////////////////////////
 class DKWebview : public DKObjectT<DKWebview>
@@ -23,4 +24,4 @@ public:
 REGISTER_OBJECT(DKWebview, true)
 
 #endif //DKWebview_H
-#endif //ANDROID
+

@@ -1,4 +1,3 @@
-#ifdef ANDROID
 #include "stdafx.h"
 #include "DKWebview.h"
 #include "DKAndroid.h"
@@ -29,17 +28,21 @@ void DKWebview::End()
 ///////////////////////////////////////////////////
 bool DKWebview::onCreate(void* input, void* output)
 {
-	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
+	DKLog("DKWebview::onCreate()\n", DKDEBUG);
+#ifdef ANDROID
 	CallJavaFunction("AttachFunction", "function DKWebview_Test(){ return DK.CallCppFunction('DKWebview_Test,'+string); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
+#endif
 	return true;
 }
 
 ///////////////////////////////////////////////
 bool DKWebview::Test(void* input, void* output)
 {
+	DKLog("DKWebview::Test()\n", DKDEBUG);
+#ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKLog("DKWebview::Test("+DKString(_data)+")\n", DKDEBUG);
@@ -47,28 +50,35 @@ bool DKWebview::Test(void* input, void* output)
 	toStringArray(arry, _data, ",");
 	DKString rval = arry[0];
 	*(DKString*)output = rval;
+#endif
 	return true;
 }
 
 ////////////////////////////////////////////////////
 bool DKWebview::SendValue(void* input, void* output)
 {
+	DKLog("DKWebview::SenndValue()\n", DKDEBUG);
+#ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
 	DKLog("DKWebview::SendValue()\n", DKDEBUG);
 	DKString rval = "Test";
 	*(DKString*)output = rval;
+#endif
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKWebview::ReceiveValue(void* input, void* output)
 {
+	DKLog("DKWebview::ReceiveValue()\n", DKDEBUG);
+#ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKLog("DKWebview::ReceiveValue("+DKString(_data)+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	DKLog("DKWebview::ReceiveValue("+DKString(_data)+"): value = "+arry[1]+"\n", DKDEBUG);
+#endif
 	return true;
 }
 
@@ -77,9 +87,5 @@ bool DKWebview::PrintFunctions(void* input, void* output)
 {
 	DKLog("\n**** Webview Functions ****\n", DKINFO);
 	DKLog("TODO: DKWebview.cpp\n", DKINFO);
-	return NULL;
+	return true;
 }
-
-
-
-#endif //ANDROID
