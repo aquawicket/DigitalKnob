@@ -79,7 +79,7 @@ function DKLog(string, lvl)
 		if(lvl == DKDEBUG){ color = "color:blue"; }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
-		if(lvl == DKERROR){ alert("ERROR: "+string); throw string; }
+		if(lvl == DKERROR){ alert("ERROR: "+string); /*throw string;*/ }
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+string, color);
 		}
