@@ -9,6 +9,10 @@
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
+struct DKTexture{
+	SDL_Texture* texture;
+};
+
 //////////////////////////////////////////////////////////////////////////////////
 RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen)
 {
@@ -50,18 +54,18 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 		if(has(texture_name[texture],"iframe_")){
 			DKString id = texture_name[texture];
 			replace(id,"iframe_","");
-			sdl_texture = static_cast<SDL_Texture*>(DKClass::CallFunc("DKSDLCef::GetTexture::"+id));
+			//sdl_texture = static_cast<SDL_Texture*>(DKClass::CallFunc("DKSDLCef::GetTexture::"+id));
 
 			//FIXME
-			//void* output = NULL;
-			//DKClass::CallFunc2("DKSDLCef::GetTexture2::"+id, NULL, output);  //FIXME
-			//sdl_texture = static_cast<SDL_Texture*>(output);
+			DKTexture* output = new DKTexture();
+			DKClass::CallFunc2("DKSDLCef::GetTexture2::"+id, NULL, output);  //FIXME
+			sdl_texture = output->texture;
 
 			if(!sdl_texture){ return; }
 		}
 
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1){
-			DKLog("SDL_GL_BindTexture is not supported \n", DKERROR);
+			DKLog("SDL_GL_BindTexture: "+DKString(SDL_GetError())+" \n", DKERROR);
 		}
     }
  
