@@ -26,7 +26,7 @@ void DKWebview::End()
 	
 }
 
-/*
+
 ///////////////////////////////////////////////
 bool DKWebview::Test(void* input, void* output)
 {
@@ -39,15 +39,14 @@ bool DKWebview::Test(void* input, void* output)
 	*(DKString*)output = rval;
 	return true;
 }
-*/
 
 ///////////////////////////////////////////////////
 bool DKWebview::onCreate(void* input, void* output)
 {
 	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
-	CallJavaFunction("AttachFunction", "function DK_SendValue(){ return DK.CallCppFunction('DK_SendValue'); }");
-	CallJavaFunction("AttachFunction", "function DK_ReceiveValue(string){ DK.CallCppFunction('DK_ReceiveValue,'+string); }");
-	CallJavaFunction("AttachFunction", "function DK_PrintFunctions(){ DK.CallCppFunction('DK_PrintFunctions'); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
 	return true;
 }
 

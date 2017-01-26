@@ -14,7 +14,7 @@ public:
 	
 	static DKString dkstring_rval;
 	
-	//bool Test(void* input, void* output);
+	bool Test(void* input, void* output);
 	bool SendValue(void* input, void* output);
 	bool ReceiveValue(void* input, void* output);
 	bool PrintFunctions(void* input, void* output);
