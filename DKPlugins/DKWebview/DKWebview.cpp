@@ -13,7 +13,7 @@ void DKWebview::Init()
 	DKClass::RegisterFunc("DK_ReceiveValue", &DKWebview::ReceiveValue, this);
 	
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
-	DKClass::RegisterFunc("DK_PrintFunctions", &DKWebview::PrintFunctions, this);
+	DKClass::RegisterFunc("DKWebview_PrintFunctions", &DKWebview::PrintFunctions, this);
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
 	//This will cause SDKActivity to pause and make things go haywire. 
