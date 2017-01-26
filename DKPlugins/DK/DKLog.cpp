@@ -138,7 +138,7 @@ void DKLog(const DKString& text, const int lvl)
 #endif
 
 	//let's try to send a message box for errors
-	if(lvl == DKERROR || has(text,"Uncaught ReferenceError:")){
+	if(log_errors && (lvl == DKERROR || has(text,"Uncaught ReferenceError:"))){
 		DKString in = text;
 		DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
