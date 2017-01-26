@@ -6,7 +6,7 @@
 #define DKAndroid_H
 #define MOBILE
 
-#include <boost/asio/io_service.hpp>
+//#include <boost/asio/io_service.hpp>
 
 #define  LOG_TAG    "DKAndroid"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
