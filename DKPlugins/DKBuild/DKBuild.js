@@ -404,18 +404,18 @@ function DKBuild_GitCommit()
 	DKLog("Git Commit... \n", DKINFO);
 	//DKBuild_GitUpdate(); //first update  this does not work, changed files are reverted
 	DKFile_ChDir(DKPATH);
-	DK_Execute(GIT +"init");
-	DK_Execute(GIT +"config user.name \"dkuser\"");
-	DK_Execute(GIT +"config user.email \"dkuser@digitalknob.com\"");
+	DK_Execute(GIT +" init");
+	DK_Execute(GIT +" config user.name \"dkuser\"");
+	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
 	
 	DK_Execute(GIT +" commit -a -m \"commit from git\"");
 	DK_Execute(GIT +" push");
 	
 	if(DKFile_Exists(DKPATH+"/USER")){
 		DKFile_ChDir(DKPATH+"/USER");
-		DK_Execute(GIT +"init");
-		DK_Execute(GIT +"config user.name \"dkuser\"");
-		DK_Execute(GIT +"config user.email \"dkuser@digitalknob.com\"");
+		DK_Execute(GIT +" init");
+		DK_Execute(GIT +" config user.name \"dkuser\"");
+		DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
 	
 		DK_Execute(GIT +" commit -a -m \"commit from git\"");
 		DK_Execute(GIT +" push");
