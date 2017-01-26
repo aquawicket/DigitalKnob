@@ -752,6 +752,8 @@ IF(ANDROID)
 	ENDIF()
 ENDIF()
 
+
+## Why is this never shown?
 MESSAGE("\n")
 MESSAGE("***************************************")
 MESSAGE("********** Finnished ${AppName} **********")
