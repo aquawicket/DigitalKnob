@@ -205,7 +205,7 @@ void DKSDLWindow::Init()
 	MapInputs();
 	SDL_SetEventFilter(&DKSDLWindow::EventFilter, this);
 
-#if !defined(ANDROID) && !defiend(IOS)
+#if !defined(ANDROID) && !defined(IOS)
 	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
 	SDL_GL_MakeCurrent(sdlwin, glcontext);
 	gl_version = (char*)glGetString(GL_VERSION);
