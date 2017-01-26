@@ -35,10 +35,10 @@ void DKSDLAudio::End()
 	Mix_CloseAudio();
 }
 
-///////////////////////////////////////
-void* DKSDLAudio::PlaySound(void* data)
+/////////////////////////////////////////////////////
+bool DKSDLAudio::PlaySound(void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
+	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return 0; }
 	
 	Mix_Chunk *snd = Mix_LoadWAV(path.c_str());
@@ -53,10 +53,10 @@ void* DKSDLAudio::PlaySound(void* data)
 	return NULL;
 }
 
-///////////////////////////////////////
-void* DKSDLAudio::OpenMusic(void* data)
+/////////////////////////////////////////////////////
+bool DKSDLAudio::OpenMusic(void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
+	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return 0; }
 	
 	trk.file = path;
@@ -76,18 +76,18 @@ void* DKSDLAudio::OpenMusic(void* data)
 	return NULL;
 }
 
-///////////////////////////////////
-void* DKSDLAudio::Pause(void* data)
+/////////////////////////////////////////////////
+bool DKSDLAudio::Pause(void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
+	DKString path = *(DKString*)input;
 	Mix_PauseMusic();
 	return NULL;
 }
 
-////////////////////////////////////
-void* DKSDLAudio::Resume(void* data)
+//////////////////////////////////////////////////
+bool DKSDLAudio::Resume(void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
+	DKString path = *(DKString*)input;
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
 	Mix_RewindMusic();
@@ -95,34 +95,35 @@ void* DKSDLAudio::Resume(void* data)
 	return NULL;
 }
 
-//////////////////////////////////
-void* DKSDLAudio::Mute(void* data)
+////////////////////////////////////////////////
+bool DKSDLAudio::Mute(void* input, void* output)
 {
 	Mix_VolumeMusic(0);
 	return NULL;
 }
 
-////////////////////////////////////
-void* DKSDLAudio::UnMute(void* data)
+//////////////////////////////////////////////////
+bool DKSDLAudio::UnMute(void* input, void* output)
 {
 	Mix_VolumeMusic(volume);
 	return NULL;
 }
 
-///////////////////////////////////////
-void* DKSDLAudio::GetVolume(void* data)
+/////////////////////////////////////////////////////
+bool DKSDLAudio::GetVolume(void* input, void* output)
 {
 	int val = Mix_VolumeMusic(-1);
 	return static_cast<void*>(new int(val));
 }
 
-///////////////////////////////////////
-void* DKSDLAudio::SetVolume(void* data)
+/////////////////////////////////////////////////////
+bool DKSDLAudio::SetVolume(void* input, void* output)
 {
-	volume = *static_cast<int*>(data);
+	volume = *(int*)input;
 	Mix_VolumeMusic(volume);
 	return NULL;
 }
+
 
 //////////////////////////
 void DKSDLAudio::Process()

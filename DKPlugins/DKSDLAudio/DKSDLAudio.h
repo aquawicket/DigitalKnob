@@ -20,15 +20,15 @@ public:
 	void Init();
 	void End();
 
-	void* PlaySound(void* data); //One Shot
+	bool PlaySound(void* input, void* output);
+	bool OpenMusic(void* input, void* output);
+	bool Pause(void* input, void* output);
+	bool Resume(void* input, void* output);
+	bool Mute(void* input, void* output);
+	bool UnMute(void* input, void* output);
+	bool GetVolume(void* input, void* output);
+	bool SetVolume(void* input, void* output);
 
-	void* OpenMusic(void* data);
-	void* Pause(void* data);
-	void* Resume(void* data);
-	void* Mute(void* data);
-	void* UnMute(void* data);
-	void* GetVolume(void* data);
-	void* SetVolume(void* data);
 	void Process();
 
 	int volume;
