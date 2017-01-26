@@ -7,9 +7,14 @@
 #if defined(WIN32) || defined(MAC) || defined(LINUX)
 	#include <GL/gl.h>
 #endif
-#if defined(ANDROID) || defined(IOS)
+/*
+#if defined(ANDROID)
 	#include <GLES/gl.h>
 #endif
+#if defined(IOS)
+	#include <OpenGLES/ES1/gl.h>
+#endif
+*/
 
 
 std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
@@ -200,6 +205,7 @@ void DKSDLWindow::Init()
 	MapInputs();
 	SDL_SetEventFilter(&DKSDLWindow::EventFilter, this);
 
+#if !defined(ANDROID) && !defiend(IOS)
 	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
 	SDL_GL_MakeCurrent(sdlwin, glcontext);
 	gl_version = (char*)glGetString(GL_VERSION);
@@ -246,6 +252,7 @@ void DKSDLWindow::Init()
 	if(has(gl_vendor, "Microsoft")){
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", sdlwin);
 	}
+#endif
 }
 
 ///////////////////////
