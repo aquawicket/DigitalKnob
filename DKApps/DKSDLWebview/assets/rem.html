@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html style="font-size:1.0px;">
+<head>
+</head>
+<body style="font-size:16em;">
+
+<button style="position:absolute;width:100px;height:100px;font-size:60px;" onclick="ScaleDown()">-</button>
+<button style="position:absolute;left:110px;width:100px;height:100px;font-size:60px;" onclick="ScaleUp()">+</button>
+<a id="text" style="position:absolute;top:20px;left:220px;font-size:60px;">1.0px</a>
+
+<!-- FIXME: rem units appear 8 times too large and out of place in Android Webview. 
+     The only rem tag that works correctly is font-size:30rem; 
+     This html file works as expexted on all other browsers. -->
+<div style="position:absolute;top:115px;width:100rem;height:100rem;background-color:green;" onclick="DK_PrintFunctions()">
+    <a style="position:relative;top:30rem;left:16rem;font-size:30rem;">Scale</a>
+</div>
+
+<script>
+var scale = window.devicePixelRatio;
+Update_Scale();
+
+function ScaleDown(){
+	scale -= 0.5;
+	Update_Scale();
+}
+
+function ScaleUp(){
+	scale += 0.5;
+	Update_Scale();
+}
+
+function Update_Scale(){
+	document.documentElement.style.fontSize = parseFloat(scale).toFixed(1)+"px";
+	document.getElementById("text").innerHTML = parseFloat(scale).toFixed(1)+"px";
+}
+
+</script>
+
+</body>
+</html>
