@@ -203,7 +203,7 @@ public class WebviewActivity extends Activity
     private class JavaScriptInterface
     {
         @JavascriptInterface public String CallCppFunction(String data){
-            Toast.makeText(WebviewActivity.instance, "CallCppFunction("+data+")", Toast.LENGTH_LONG).show();
+            //Toast.makeText(WebviewActivity.instance, "CallCppFunction("+data+")", Toast.LENGTH_LONG).show();
             return DK.CallCppFunction(data);
         }
     }
