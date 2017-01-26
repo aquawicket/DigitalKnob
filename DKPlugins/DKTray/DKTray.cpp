@@ -39,10 +39,10 @@ void DKTray::Init()
 	if(same(trayed,"ON")){
 		//CSystemTray::MinimiseToTray(hwnd);
 		if(DKClass::HasFunc("DKSDLWindow::Hide")){
-			DKClass::CallFunc("DKSDLWindow::Hide");
+			DKClass::CallFunc("DKSDLWindow::Hide", NULL, NULL);
 		}
 		else if(DKClass::HasFunc("DKOSGWindow::Hide")){
-			DKClass::CallFunc("DKOSGWindow::Hide");
+			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
 		}
 		else{
 			DKLog("DKTray::Init(): DKWindow::Hide() - No function available \n", DKERROR);
