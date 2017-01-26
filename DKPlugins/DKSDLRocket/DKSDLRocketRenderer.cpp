@@ -5,7 +5,7 @@
 #include "DKSDLRocketRenderer.h"
 #include "DKSDLWindow.h"
 
-#if !defined(IOS) && //!defined(ANDROID)
+#if !defined(IOS) && !defined(ANDROID)
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
@@ -20,7 +20,7 @@ RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* scree
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
-#if !defined(IOS) //&& !defined(ANDROID)
+#if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
 	DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	if(!has(dkSdlWindow->gl_vendor, "Microsoft")){
