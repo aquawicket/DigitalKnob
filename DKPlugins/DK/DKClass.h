@@ -36,74 +36,49 @@ public:
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
 
-	/*
 	template<class T>
-	//////////////////////////////////////////////////////////////////////////////////
-	static void RegisterFunc(const DKString& name, void* (T::*func) (void*), T* _this)
+	////////////////////////////////////////////////////////////////////////////////////////
+	static void RegisterFunc(const DKString& name, bool (T::*func) (void*, void*), T* _this)
 	{
 		DKLog("DKClass::RegisterFunc("+name+")\n", DKDEBUG);
-		functions[name] = boost::bind(func, _this, _1);
+		functions[name] = boost::bind(func, _this, _1, _2);
 		if(!functions[name]){
 			DKLog("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
 			return;
 		}
 	}
-	
-	///////////////////////////////////////////
-	static void* CallFunc(const DKString& name)
-	{
-		if(!functions[name]){ 
-			DKLog("CallFunc("+name+") not registered\n", DKWARN);
-			return 0;
-		}
-		return functions[name](NULL);
-	}
-	*/
-
-	template<class T>
-	/////////////////////////////////////////////////////////////////////////////////////////
-	static void RegisterFunc2(const DKString& name, bool (T::*func) (void*, void*), T* _this)
-	{
-		DKLog("DKClass::RegisterFunc2("+name+")\n", DKDEBUG);
-		functions2[name] = boost::bind(func, _this, _1, _2);
-		if(!functions2[name]){
-			DKLog("RegisterFunc2(" + name + "): failed to register function \n", DKERROR);
-			return;
-		}
-	}
 
 	////////////////////////////////////////////////
-	static void UnregisterFunc2(const DKString& name)
+	static void UnregisterFunc(const DKString& name)
 	{
-		DKLog("DKClass::UnregisterFunc2("+name+")\n", DKDEBUG);
-		functions2.erase(name);
-		if(functions2[name]) {
-			DKLog("UnegisterFunc2("+name+"): failed to unregister function \n", DKERROR);
+		DKLog("DKClass::UnregisterFunc("+name+")\n", DKDEBUG);
+		functions.erase(name);
+		if(functions[name]) {
+			DKLog("UnegisterFunc("+name+"): failed to unregister function \n", DKERROR);
 			return;
 		}
-	}
-
-	//////////////////////////////////////////////////////////////////////
-	static bool CallFunc2(const DKString& name, void* input, void* output)
-	{
-		if(!functions2[name]){ 
-			DKLog("CallFunc2("+name+") not registered\n", DKWARN);
-			return false;
-		}
-		return functions2[name](input, output);
 	}
 
 	/////////////////////////////////////////
-	static bool HasFunc2(const DKString& name)
+	static bool HasFunc(const DKString& name)
 	{
-		if(!functions2[name]){ 
+		if(!functions[name]){ 
 			return false;
 		}
 		return true;
 	}
+	
+	/////////////////////////////////////////////////////////////////////
+	static bool CallFunc(const DKString& name, void* input, void* output)
+	{
+		if(!functions[name]){ 
+			DKLog("CallFunc("+name+") not registered\n", DKWARN);
+			return false;
+		}
+		return functions[name](input, output);
+	}
 
-	static std::map<DKString, boost::function<void* (void*)> > functions;
-	static std::map<DKString, boost::function<bool (void*, void*)> > functions2;
+	static std::map<DKString, boost::function<bool (void*, void*)> > functions;
 };
 
 /////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access

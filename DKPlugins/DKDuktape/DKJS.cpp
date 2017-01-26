@@ -274,11 +274,11 @@ int DKJS::GetDate(duk_context* ctx)
 int DKJS::GetScreenWidth(duk_context* ctx)
 {
 	int output;
-	if(DKClass::HasFunc2("DKSDLWindow::GetScreenWidth")){
-		DKClass::CallFunc2("DKSDLWindow::GetScreenWidth", NULL, &output);
+	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
+		DKClass::CallFunc("DKSDLWindow::GetScreenWidth", NULL, &output);
 	}
-	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenWidth")){
-		DKClass::CallFunc2("DKOSGWindow::GetScreenWidth", NULL, &output);
+	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
+		DKClass::CallFunc("DKOSGWindow::GetScreenWidth", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
@@ -292,11 +292,11 @@ int DKJS::GetScreenWidth(duk_context* ctx)
 int DKJS::GetScreenHeight(duk_context* ctx)
 {
 	int output;
-	if(DKClass::HasFunc2("DKSDLWindow::GetScreenHeight")){
-		DKClass::CallFunc2("DKSDLWindow::GetScreenHeight", NULL, &output);
+	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
+		DKClass::CallFunc("DKSDLWindow::GetScreenHeight", NULL, &output);
 	}
-	else if(DKClass::HasFunc2("DKOSGWindow::GetScreenHeight")){
-		DKClass::CallFunc2("DKOSGWindow::GetScreenHeight", NULL, &output);
+	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
+		DKClass::CallFunc("DKOSGWindow::GetScreenHeight", NULL, &output);
 	}
 	else{
 		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
@@ -486,7 +486,7 @@ int DKJS::CallFunc(duk_context* ctx)
 	DKString args = duk_require_string(ctx, 1);
 	DKString result;
 
-	if(!DKClass::CallFunc2(func, &args, &result)){
+	if(!DKClass::CallFunc(func, &args, &result)){
 		return 0;
 	}
 	

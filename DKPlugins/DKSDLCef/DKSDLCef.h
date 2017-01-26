@@ -27,8 +27,7 @@ public:
 	void End();
 
 	bool OnResize(void* input, void* output);
-	//void* GetTexture(void*);
-	bool GetTexture2(void* input, void* output);
+	bool GetTexture(void* input, void* output);
 
 	void SetupCef();
 

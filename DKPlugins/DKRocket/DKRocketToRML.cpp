@@ -195,5 +195,5 @@ void DKRocketToRML::ResizeIframe(DKEvent* event)
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc2(id+"::OnResize", &data, NULL); //call OnResize in DKCef window handler
+	DKClass::CallFunc(id+"::OnResize", &data, NULL); //call OnResize in DKCef window handler
 }
