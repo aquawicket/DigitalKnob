@@ -3,7 +3,13 @@
 #include "DKFile.h"
 #include "SDL_syswm.h"
 #include "DKAndroid.h"
-#include <GL/gl.h>
+
+#if defined(WIN32) || defined(MAC) || defined(LINUX)
+	#include <GL/gl.h>
+#endif
+#if defined(ANDROID) || defined(IOS)
+	#include <GLES/gl.h>
+#endif
 
 
 std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
@@ -79,6 +85,8 @@ void DKSDLWindow::Init()
 
 	SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
 	
+	DKString result;
+	
 #if defined(ANDROID) || defined(IOS)
 	DKLog("Creating SDLWindow for mobile device  \n", DKINFO);
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -89,6 +97,7 @@ void DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	
+	result = "OpenglES";
 	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n", DKINFO);
 	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &sdlwin, &sdlren) < 0){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
@@ -111,7 +120,6 @@ void DKSDLWindow::Init()
 		return;
 	}
 
-	DKString result;
 	sdlren = NULL;
 	if(!same(sdl_renderer, "SOFTWARE")){
 		result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";

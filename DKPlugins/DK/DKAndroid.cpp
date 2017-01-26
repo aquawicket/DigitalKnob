@@ -146,6 +146,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	
 	DKString rval;
 	DKClass::CallFunc(arry[0], &jdata, &rval);
+	if(rval.empty()){ return NULL; }
 
 	jclass strClass = env->FindClass("java/lang/String"); 
 	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
