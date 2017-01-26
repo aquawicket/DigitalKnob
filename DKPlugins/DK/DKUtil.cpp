@@ -22,7 +22,7 @@
 	#include "DKMac.h"
 #endif
 	
-//#include <boost/asio.hpp>
+#include <boost/asio.hpp>
 
 #include <iostream>
 #ifndef MAC
