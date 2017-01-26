@@ -2,7 +2,7 @@ if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"  || DK_GetOS() == "Mac" || DK_
 	var USE_CEF = 1;
 }
 if(DK_GetOS() == "Android"){
-	var USE_Webview = 1;
+	var USE_Webview = 0;
 }
 
 if(DK_GetBrowser() == "Rocket"){
