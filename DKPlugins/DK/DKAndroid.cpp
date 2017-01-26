@@ -102,7 +102,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 	jdata.cls = cls;
 	jdata.array = array;
 	DKCreate("DKSDLWindowAndroid");
-	DKClass::CallFunc("DKAndroid_onInitSDL", static_cast<void*>(&jdata));
+	DKClass::CallFunc("DKAndroid_onInitSDL", &jdata, NULL);
 }
 
 //////////////////////////////////////////////////////////////
@@ -144,10 +144,9 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	jdata.cls = cls;
 	jdata.data = data;
 	
-	DKString* string = static_cast<DKString*>(DKClass::CallFunc(arry[0], static_cast<void*>(&jdata)));
-	if(!string){ return NULL; }
-	DKString rval = *string;
-	
+	DKString rval;
+	DKClass::CallFunc(arry[0], &jdata, &rval);
+
 	jclass strClass = env->FindClass("java/lang/String"); 
 	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
 	jstring encoding = env->NewStringUTF("GBK"); 
