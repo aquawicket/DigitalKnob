@@ -152,7 +152,7 @@ int DKAudio::GetVolume()
 	}
 
 	DKLog("DKAudio::GetVolume(): No GetVolume funtion available \n", DKERROR);
-	return NULL;
+	return 0;
 }
 
 ////////////////////////////////////
