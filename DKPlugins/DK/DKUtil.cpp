@@ -22,10 +22,7 @@
 	#include "DKMac.h"
 #endif
 	
-//#include <boost/foreach.hpp>
-#include <boost/asio.hpp>
-//#include "boost/date_time/posix_time/posix_time.hpp"
-//#include <boost/chrono.hpp>
+//#include <boost/asio.hpp>
 
 #include <iostream>
 #ifndef MAC
