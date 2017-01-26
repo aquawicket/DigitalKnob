@@ -37,6 +37,7 @@ public:
 	bool SetY(void* input, void* output);
 	bool Show(void* input, void* output);
 	bool Windowed(void* input, void* output);
+	bool MessageBox(void* input, void* output);
 
 	bool SetIcon(const DKString& file);
 	static int EventFilter(void* userdata, SDL_Event* event);

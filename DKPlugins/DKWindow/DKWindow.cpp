@@ -18,13 +18,14 @@ void DKWindow::Init()
 		DKLog("DKWindow::Init(): No window system available \n", DKERROR);
 	}
 
+	DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 	DKCreate("DKWindowJS");
 }
 
 ////////////////////
 void DKWindow::End()
 {
-
+	DKClass::UnregisterFunc("DKWindow::MessageBox");
 }
 
 
@@ -366,3 +367,21 @@ HWND DKWindow::GetHwnd()
 	return output;
 }
 #endif
+
+////////////////////////////////////////////////////
+bool DKWindow::MessageBox(void* input, void* output)
+{
+	DKString message = *(DKString*)input;
+
+	if(DKClass::HasFunc("DKSDLWindow::MessageBox")){
+		DKClass::CallFunc("DKSDLWindow::MessageBox", &message, NULL);
+	}
+	else if(DKClass::HasFunc("DKOSGWindow::MessageBox")){
+		DKClass::CallFunc("DKOSGWindow::MessageBox", &message, NULL);
+	}
+	else{
+		DKLog("DKWindow::MessageBox(): No function available \n", DKERROR);
+	}
+
+	return true;
+}

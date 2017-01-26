@@ -39,6 +39,8 @@ public:
 	static int GetMouseX();
 	static int GetMouseY();
 
+	bool MessageBox(void* input, void* output);
+
 #ifdef WIN32
 	static HWND GetHwnd();
 #endif

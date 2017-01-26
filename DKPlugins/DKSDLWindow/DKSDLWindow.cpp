@@ -199,6 +199,7 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::SetY", &DKSDLWindow::SetY, this);
 	DKClass::RegisterFunc("DKSDLWindow::Show", &DKSDLWindow::Show, this);
 	DKClass::RegisterFunc("DKSDLWindow::Windowed", &DKSDLWindow::Windowed, this);
+	DKClass::RegisterFunc("DKSDLWindow::MessageBox", &DKSDLWindow::MessageBox, this);
 	DKApp::AppendLoopFunc(&DKSDLWindow::Process, this);
 	DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
 
@@ -506,6 +507,14 @@ bool DKSDLWindow::GetHwnd(void* input, void* output)
 	DKLog("DKSDLWindow::GetHwnd(): This OS does not have a HWND handle \n", DKERROR);
 	return false;
 #endif
+}
+
+////////////////////////////////////////////////////////
+bool DKSDLWindow::MessageBox(void* input, void* output)
+{
+	DKString message = *(DKString*)input;
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), sdlwin);
+	return true;
 }
 
 ///////////////////////////
