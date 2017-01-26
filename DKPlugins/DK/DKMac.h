@@ -4,10 +4,6 @@
 #define DKMac_H
 #define DESKTOP
 
-//#ifdef USE_Boost_System
-//#include <boost/asio/io_service.hpp>
-//#endif
-
 ////////////
 class DKMac
 {

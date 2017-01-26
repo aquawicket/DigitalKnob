@@ -4,12 +4,11 @@
 #define DKWindows_H
 #define DESKTOP
 
-//#ifdef USE_Boost
-#include <boost/asio/io_service.hpp>  //This needs to come before <windows.h>
-//#endif
+//#include <boost/asio/io_service.hpp>  //This needs to come before <windows.h>
 
-#include <windows.h>
 #define WIN32_LEAN_AND_MEAN
+//#include <Winsock2.h> //does this fix needing boost/asio to come before windows.h?
+#include <windows.h>
 #include "DKString.h"
 
 
