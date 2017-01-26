@@ -54,12 +54,11 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 		if(has(texture_name[texture],"iframe_")){
 			DKString id = texture_name[texture];
 			replace(id,"iframe_","");
+			
 			//sdl_texture = static_cast<SDL_Texture*>(DKClass::CallFunc("DKSDLCef::GetTexture::"+id));
-
-			//FIXME
-			DKTexture* output = new DKTexture();
-			DKClass::CallFunc2("DKSDLCef::GetTexture2::"+id, NULL, output);  //FIXME
-			sdl_texture = output->texture;
+			DKTexture output;
+			DKClass::CallFunc2("DKSDLCef::GetTexture2::"+id, NULL, &output);  //FIXME
+			sdl_texture = output.texture;
 
 			if(!sdl_texture){ return; }
 		}
