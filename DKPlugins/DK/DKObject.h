@@ -128,7 +128,7 @@ public:
 	/////////////////////////////////////
 	static bool Valid(const DKString& id)
 	{
-		DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
+		//DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
 		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
