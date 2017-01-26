@@ -8,11 +8,10 @@
 void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
-	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
-	DKClass::RegisterFunc("DK_SendValue", &DKWebview::SendValue, this);
-	DKClass::RegisterFunc("DK_ReceiveValue", &DKWebview::ReceiveValue, this);
-	
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
+	DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
+	DKClass::RegisterFunc("DKWebview_SendValue", &DKWebview::SendValue, this);
+	DKClass::RegisterFunc("DKWebview_ReceiveValue", &DKWebview::ReceiveValue, this);
 	DKClass::RegisterFunc("DKWebview_PrintFunctions", &DKWebview::PrintFunctions, this);
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
@@ -27,6 +26,17 @@ void DKWebview::End()
 }
 
 
+///////////////////////////////////////////////////
+bool DKWebview::onCreate(void* input, void* output)
+{
+	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
+	CallJavaFunction("AttachFunction", "function DKWebview_Test(){ return DK.CallCppFunction('DKWebview_Test,'+string); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
+	return true;
+}
+
 ///////////////////////////////////////////////
 bool DKWebview::Test(void* input, void* output)
 {
@@ -37,16 +47,6 @@ bool DKWebview::Test(void* input, void* output)
 	toStringArray(arry, _data, ",");
 	DKString rval = arry[0];
 	*(DKString*)output = rval;
-	return true;
-}
-
-///////////////////////////////////////////////////
-bool DKWebview::onCreate(void* input, void* output)
-{
-	DKLog("DKWebview::onCreate(void*)\n", DKDEBUG);
-	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
-	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
-	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
 	return true;
 }
 
