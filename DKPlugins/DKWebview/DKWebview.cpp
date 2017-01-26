@@ -12,8 +12,8 @@ void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
 	//DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
-	DKClass::RegisterFunc("DK_SendValue", &DKWebview::SendValue, this);
-	DKClass::RegisterFunc("DK_ReceiveValue", &DKWebview::ReceiveValue, this);
+	DKClass::RegisterFunc("DKWebview_SendValue", &DKWebview::SendValue, this);
+	DKClass::RegisterFunc("DKWebview_ReceiveValue", &DKWebview::ReceiveValue, this);
 	
 	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
 	DKClass::RegisterFunc("DK_PrintFunctions", &DKWebview::PrintFunctions, this);
