@@ -287,7 +287,7 @@ bool DKSDLWindowAndroid::onRemoveJoystick(void* input, void* output)
 bool DKSDLWindowAndroid::onSurfaceChanged(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onSurfaceChanged()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceChanged(jd.env, jd.cls);
 	return true;
 }
@@ -296,7 +296,7 @@ bool DKSDLWindowAndroid::onSurfaceChanged(void* input, void* output)
 bool DKSDLWindowAndroid::onSurfaceDestroyed(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onSurfaceDestroyed()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceDestroyed(jd.env, jd.cls);
 	return true;
 }
@@ -334,14 +334,14 @@ bool DKSDLWindowAndroid::onKeyUp(void* input, void* output)
 		jint keycode = toInt(arry[1]);
 		Java_org_libsdl_app_SDLActivity_onNativeKeyUp(jd.env, jd.cls, keycode);
 	}
-	return true
+	return true;
 }
 
 /////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onKeyboardFocusLost(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onKeyboardFocusLost()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeKeyboardFocusLost(jd.env, jd.cls);
 	return true;
 }
@@ -399,7 +399,7 @@ bool DKSDLWindowAndroid::onAccel(void* input, void* output)
 bool DKSDLWindowAndroid::onLowMemory(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onLowMemory()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeLowMemory(jd.env, jd.cls);
 	return true;
 }
@@ -408,7 +408,7 @@ bool DKSDLWindowAndroid::onLowMemory(void* input, void* output)
 bool DKSDLWindowAndroid::onQuit(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onQuit()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeQuit(jd.env, jd.cls);
 	return true;
 }
@@ -418,7 +418,7 @@ bool DKSDLWindowAndroid::onPause(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onPause()\n", DKDEBUG);
 	DKApp::paused = true;
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativePause(jd.env, jd.cls);
 	return true;
 }
@@ -427,7 +427,7 @@ bool DKSDLWindowAndroid::onPause(void* input, void* output)
 bool DKSDLWindowAndroid::onResume(void* input, void* output)
 {
 	DKLog("DKSDLWindowAndroid::onResume()\n", DKDEBUG);
-	JavaData jd = *static_cast<JavaData*>(data);
+	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeResume(jd.env, jd.cls);
 	DKApp::paused = false;
 	return true;
