@@ -2,6 +2,7 @@
 #pragma once
 #ifndef DKMac_H
 #define DKMac_H
+
 #define DESKTOP
 
 ////////////

@@ -2,8 +2,8 @@
 #pragma once
 #ifndef DKWindows_H
 #define DKWindows_H
-#define DESKTOP
 
+#define DESKTOP
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include "DKString.h"
