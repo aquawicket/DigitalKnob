@@ -9,10 +9,6 @@
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
 
-struct DKTexture{
-	SDL_Texture* texture;
-};
-
 //////////////////////////////////////////////////////////////////////////////////
 RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen)
 {
@@ -56,6 +52,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 			replace(id,"iframe_","");
 			
 			//sdl_texture = static_cast<SDL_Texture*>(DKClass::CallFunc("DKSDLCef::GetTexture::"+id));
+			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
 			DKClass::CallFunc2("DKSDLCef::GetTexture2::"+id, NULL, &output);  //FIXME
 			sdl_texture = output.texture;

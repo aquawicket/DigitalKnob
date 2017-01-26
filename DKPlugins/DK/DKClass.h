@@ -36,6 +36,7 @@ public:
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
 
+	/*
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, void* (T::*func) (void*), T* _this)
@@ -57,6 +58,7 @@ public:
 		}
 		return functions[name](NULL);
 	}
+	*/
 
 	template<class T>
 	/////////////////////////////////////////////////////////////////////////////////////////

@@ -12,10 +12,6 @@
 #include "DKFile.h"
 #include <include/cef_urlrequest.h>
 
-struct DKTexture{
-	SDL_Texture* texture;
-};
-
 /////////////////////
 void DKSDLCef::Init()
 {
@@ -107,6 +103,7 @@ bool DKSDLCef::GetTexture2(void* input, void* output)
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
+	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
 	out.texture = cef_image;
 	*(DKTexture*)output = out;
