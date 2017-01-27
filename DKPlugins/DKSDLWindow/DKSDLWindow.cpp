@@ -29,6 +29,11 @@ void DKSDLWindow::Init()
 {
 	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
 
+#ifdef ANDROID
+		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
+		//CallJavaFunction("OpenActivity","SDLActivity");
+#endif
+
 	//Get values from settings.txt file
 	DKString sdl_renderer;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
