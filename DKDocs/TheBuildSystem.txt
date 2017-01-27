@@ -1,8 +1,8 @@
 **** The Build System ****
 
-DigitalKnob rely's on SVN and CMake
+DigitalKnob rely's on GIT and CMake
 
-SVN will always be installed
+GIT will always be installed
 CMake will always be installed
 
 On certain platfroms, other Tools will be installed.
@@ -11,13 +11,13 @@ So CMake can find visual studio when it runs.
 
 For resons like this, we cannot rely soley on CMake to do everything.
 
-We need a prep app that will install SVN, CMAKE, VisualStudio, and anything technically required by CMake.
+We need a prep app that will install GIT, CMAKE, VisualStudio, and anything technically required by CMake.
 
 
 So far...   on all platforms, 
 Before we can run CMake..
-we need Subversion (SVN)
+we need GIT
 we need CMake
 for Windows we need Visual Studio
 for Mac we need Xcode
-and for Linux we need cmake to also find compilers..   (build-essentials?)
+and for Linux we need build-essentials
