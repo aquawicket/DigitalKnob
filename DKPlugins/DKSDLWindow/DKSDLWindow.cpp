@@ -34,11 +34,6 @@ void DKSDLWindow::Init()
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
 	DKLog("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n", DKINFO);
 	
-#ifdef ANDROID
-		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
-		//CallJavaFunction("OpenActivity","SDLActivity");
-#endif
-
 	SDL_SetMainReady();
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKLog("SDL_Init Error: "+DKString(SDL_GetError()), DKERROR);

@@ -62,8 +62,6 @@ void DKSDLWindowAndroid::Init()
 	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSDLWindowAndroid::onSurfaceChanged, this);
 	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSDLWindowAndroid::onSurfaceDestroyed, this);
 	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSDLWindowAndroid::onTouch, this);
-	
-	//CallJavaFunction("OpenActivity", "SDLActivity");
 }
 
 //////////////////////////////
