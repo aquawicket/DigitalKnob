@@ -44,8 +44,9 @@ void DKCef::Init()
 
 //FIXME - we need to grab the dll from the correct location
 //   assets/DKCef is not a good place
-//the path needs more details, specifically OS/BuildType
+//   the path needs more details, specifically OS/BuildType
 //   example:   assets/DKCef/dkwin32/Release/libcef.dll
+//        or    assets/DKCef/dkwin64/Debug/libcef.dll
 #if defined(WIN32) && !defined(WIN64) 
 	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
 	libcef = LoadLibrary(cef_dll.c_str());
