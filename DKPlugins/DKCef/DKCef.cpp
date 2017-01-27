@@ -48,7 +48,13 @@ void DKCef::Init()
 //   example:   assets/DKCef/dkwin32/Release/libcef.dll
 //        or    assets/DKCef/dkwin64/Debug/libcef.dll
 #if defined(WIN32) && !defined(WIN64) 
-	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
+	//DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";  //old path
+	DKString cef_dll;
+#ifdef DEBUG
+	cef_dll = DKFile::local_assets + "DKCef/dkwin32/Debug/libcef.dll";
+#else
+	ef_dll = DKFile::local_assets + "DKCef/dkwin32/Release/libcef.dll";
+#endif
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
 		DKLog("Could not load libcef.dll \n", DKERROR);
@@ -56,7 +62,13 @@ void DKCef::Init()
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
 #endif
 #ifdef WIN64
-	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
+	//DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";  //old path
+	DKString cef_dll;
+#ifdef DEBUG
+	cef_dll = DKFile::local_assets + "DKCef/dkwin64/Debug/libcef.dll";
+#else
+	cef_dll = DKFile::local_assets + "DKCef/dkwin64/Release/libcef.dll";
+#endif
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
 		DKLog("Could not load libcef.dll \n", DKERROR);
