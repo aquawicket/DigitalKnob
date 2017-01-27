@@ -53,7 +53,7 @@ void DKCef::Init()
 #ifdef DEBUG
 	cef_dll = DKFile::local_assets + "DKCef/dkwin32/Debug/libcef.dll";
 #else
-	ef_dll = DKFile::local_assets + "DKCef/dkwin32/Release/libcef.dll";
+	cef_dll = DKFile::local_assets + "DKCef/dkwin32/Release/libcef.dll";
 #endif
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
