@@ -7,15 +7,13 @@ if(DK_GetOS() == "Android"){
 
 if(DK_GetBrowser() == "Rocket"){
 	DKCreate("DKWindow");
-	//DKCreate("DKRocket");
-	//DKCreate("DKWidget");
-	//DKCreate("DKWebview");
+	DKCreate("DKRocket");
+	DKCreate("DKWidget");
+	DKCreate("DKWebview");
 }
+DKCreate("DKDebug/DKDebug.js", function(){});
 
-//DKCreate("DKDebug/DKDebug.js", function(){});
 
-
-/*
 ///////////////////////////////////////////////
 DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 function User_OnEvent(event)  //Duktape
@@ -60,4 +58,3 @@ else{  //Duktape or V8 or Webview
 	DKCreate("DKScale/DKScale.js", function(){});
 	DKCreate("DKWebview/DKWebviewTest.js", function(){});
 }
-*/
