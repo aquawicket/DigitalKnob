@@ -24,6 +24,7 @@ DKASSETS(DKCef)
 
 ##TODO: double check this
 IF(WIN_32)
+	MESSAGE("DKCMake: DKCEF:  WIN_32 is found")
 	DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
 	UPX_COMPRESS(${DKPLUGINS}/DKCef/libcef.dll)
 	
@@ -48,6 +49,7 @@ IF(WIN_32)
 	DKCOPY(${DKPLUGINS}/DKCef/win32/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
 ENDIF()
 IF(WIN_64)
+	MESSAGE("DKCMake: DKCEF:  WIN_64 is found")
 	DKCOPY(${CEF}/Release/ ${DKPLUGINS}/DKCef TRUE)
 	UPX_COMPRESS(${DKPLUGINS}/DKCef/libcef.dll)
 	
