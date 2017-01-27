@@ -1,3 +1,5 @@
+Alter these paths to match your Users directory, then copy and paste the needed commands.
+
 ### Debug ###
 install_name_tool -change "@executable_path/Chromium Embedded Framework" "@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework" "/Users/aquawicket/Desktop/digitalknob/DKApps/DKSDLCef/mac64/Debug/DKSDLCef.app/Contents/Frameworks/DKSDLCef Helper.app/Contents/MacOS/DKSDLCef Helper"
 

@@ -1,3 +1,9 @@
+*** UPDATE 1/27/17 ***
+This is an old file about how to build Mac from scratch.
+Much of this is outdated, but the same rules apply with the correct libraries from _DKIMPORTS
+
+
+
 DKApp should compile on Mac. Testing and development for OSX/iOS are a little behind. my mac crashed :(
 
 Here are the step by step instruction and commands to get each tool for the toolchain and compiling of each libraries. The libraries necessary for DKApp are working, but untested. 
