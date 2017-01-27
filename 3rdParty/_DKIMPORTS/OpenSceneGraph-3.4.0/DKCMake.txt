@@ -1,5 +1,6 @@
 DKDEPEND(msinttypes-r26)
 DKDEPEND(zlib-1.2.8)
+##DKDEPEND(SDL2-2.0.5)  ##TODO
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/OpenSceneGraph-3.4.0.zip OpenSceneGraph-3.4.0)
