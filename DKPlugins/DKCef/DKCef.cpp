@@ -39,15 +39,33 @@ void DKCef::Init()
 	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
 	//if(homepage.empty()){ homepage = "http://www.google.com"; }
 
-#ifdef WIN32
-	//delay loading the DLL to move it's locations 
+
+
+
+//FIXME - we need to grab the dll from the correct location
+//   assets/DKCef is not a good place
+//the path needs more details, specifically OS/BuildType
+//   example:   assets/DKCef/dkwin32/Release/libcef.dll
+#if defined(WIN32) && !defined(WIN64) 
 	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
 		DKLog("Could not load libcef.dll \n", DKERROR);
 	}
-	__HrLoadAllImportsForDll("libcef.dll");
+	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
 #endif
+#ifdef WIN64
+	DKString cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
+	libcef = LoadLibrary(cef_dll.c_str());
+	if(!libcef){
+		DKLog("Could not load libcef.dll \n", DKERROR);
+	}
+	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
+#endif
+
+
+
+
 
 #ifdef WIN32
 	CefMainArgs args(GetModuleHandle(NULL));
