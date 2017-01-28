@@ -47,7 +47,8 @@ IF(WIN_32)
 		##UPX_COMPRESS(${DKPLUGINS}/DKCef/dkwin32/Release/libcef.dll)
 	ENDIF()
 	
-	DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)	
+	DKCOPY(${CEF}/Resources/ ${DKPLUGINS}/DKCef TRUE)
+	FILE(REMOVE ${DKPLUGINS}/DKCef/icudtl.dat)
 	DKCOPY(${DKPLUGINS}/DKCef/win32/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
 ENDIF()
 
