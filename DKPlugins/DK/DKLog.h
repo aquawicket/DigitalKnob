@@ -55,11 +55,15 @@ extern bool log_gui_console;
 extern DKString log_show;
 extern DKString log_hide;
 
+//TODO 
+//Having the filename and the line number make debudding much easier. 
+void DKLog(const DKString& text, const int lvl, const char* file, int line);
+
 void DKLog(const DKString& text, const int lvl);
-void DKLog(const int text, const int lvl);
-void DKLog(const long& text, const int lvl);
-void DKLog(const unsigned long long& text, const int lvl);
-void DKLog(const float& text, const int lvl);
+//void DKLog(const int text, const int lvl);
+//void DKLog(const long& text, const int lvl);
+//void DKLog(const unsigned long long& text, const int lvl);
+//void DKLog(const float& text, const int lvl);
 void SetLog(const int lvl, const DKString& text);
 
 #endif //DKLog_H

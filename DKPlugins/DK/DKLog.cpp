@@ -13,10 +13,22 @@ extern bool log_gui_console = true;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
 
+/*
 void DKLog(const int text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const long& text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const unsigned long long text, const int lvl){ DKLog(toString(text),lvl); }
 void DKLog(const float& text, const int lvl){ DKLog(toString(text),lvl); }
+*/
+
+//// with filename and line #
+///////////////////////////////////////////////////////////////////////////
+void DKLog(const DKString& text, const int lvl, const char* file, int line)
+{
+	DKString string = file;
+	string += " "+toString(line)+": ";
+	string += text;
+	DKLog(string, lvl);
+}
 
 ///////////////////////////////////////////////
 void DKLog(const DKString& text, const int lvl)
