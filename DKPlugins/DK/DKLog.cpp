@@ -26,7 +26,7 @@ void DKLog(const DKString& text, const int lvl, const char* file, int line)
 {
 	DKString string = file;
 	string += ": ";
-	string += "line:"+toString(line)+"\n";
+	string += "line "+toString(line)+"\n";
 	string += text;
 	DKLog(string, lvl);
 }
