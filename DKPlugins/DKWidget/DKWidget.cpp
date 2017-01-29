@@ -434,7 +434,7 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 	}
 	DKElement* element = doc->GetElementById(id.c_str());
 	if(!element){
-		DKLog("GetElementById("+id+"): could not find element. \n", DKWARN);
+		//DKLog("GetElementById("+id+"): could not find element. \n", DKWARN);
 		return 0;
 	}
 	return element;
