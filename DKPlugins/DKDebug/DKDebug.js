@@ -88,11 +88,12 @@ function DKDebug_KeyToChar(key)
 /////////////////////////////
 function DKDebug_RestartApp()
 {
+if(DK_GetBrowser() != "Rocket"){
 	//DKFrame_CloseAll();
 	DKWidget_SetInnerHtml("body", "");
-	DKClose("DKDebug.js");
+	//DKClose("DKDebug.js");
 	DK_Reload();
-	
+}
 }
 
 //////////////////////////////
