@@ -132,11 +132,11 @@ bool DKDuktape::CallEnd(const DKString& file)
 }
 
 ////////////////////////////////////////////////
-bool DKDuktape::FileLoaded(const DKString& file)
+bool DKDuktape::FileLoaded(const DKString& path)
 {
 	for(unsigned int i = 0; i < filelist.size(); ++i){
-		if(same(file, filelist[i])){
-			DKLog("DKDuktape::FileLoaded(): "+file+" already loaded.\n", DKWARN);
+		if(has(path, filelist[i])){
+			DKLog("DKDuktape::FileLoaded(): "+path+" already loaded.\n", DKWARN);
 			return true;
 		}
 	}
@@ -144,28 +144,30 @@ bool DKDuktape::FileLoaded(const DKString& file)
 }
 
 //////////////////////////////////////////////
-bool DKDuktape::LoadFile(const DKString& file)
+bool DKDuktape::LoadFile(const DKString& path)
 {
-	DKLog("DKDuktape::LoadFile("+file+")\n", DKDEBUG);
+	DKLog("DKDuktape::LoadFile("+path+")\n", DKDEBUG);
 	
-	if(file.empty()){ return false; }
-	if(FileLoaded(file)){ return false; } //prevent file from loading twice
+	if(path.empty()){ return false; }
+	if(FileLoaded(path)){ return false; } //prevent file from loading twice
 
 	//if the file contains a //BROWSER tag, it's broswer only
 	DKString test;
-	DKFile::FileToString(file, test);
+	DKFile::FileToString(path, test);
 	if(has(test,"//BROWSER")){
-		DKLog("Ignoring: "+file+" is a browser only file. \n", DKINFO);
+		DKLog("Ignoring: "+path+" is a browser only file. \n", DKINFO);
 		return false;
 	}
 	
-	if(duk_peval_file(ctx, file.c_str()) != 0){
+	if(duk_peval_file(ctx, path.c_str()) != 0){
 		DKLog("Script error: "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
 		return false;
     }
     duk_pop(ctx);  /* ignore result ?? */
 
-	filelist.push_back(file);
+	DKString filename;
+	DKFile::GetFileName(path, filename);
+	filelist.push_back(filename);
 	return true;
 }
 

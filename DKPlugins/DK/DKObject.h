@@ -113,6 +113,9 @@ public:
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
+				if(has(id,"/")){
+					DKLog("Close(): "+id+" contains a / \n",DKERROR);
+				}
 				//DKLog("Closing "+id+"\n", DKINFO);
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
