@@ -18,8 +18,12 @@ extern DKString log_hide = ""; //comma seperated
 /////////////////////////////////////////////////////////////////////////
 void Log(const DKString& text, const int lvl, const char* file, int line)
 {
-	DKString string;
-	DKFile::GetFileName(file, string);
+	DKString string = file;
+	unsigned found = string.find_last_of("/\\");
+	if(found != std::string::npos && found < string.length()){
+		string = string.substr(found+1);
+	}
+
 	string += ":";
 	string += toString(line)+":  ";
 	string += text;

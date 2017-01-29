@@ -371,7 +371,7 @@ bool DKFile::GetExePath(DKString& exepath)
 //////////////////////////////////////////////////////////////////
 bool DKFile::GetFileName(const DKString& path, DKString& filename)
 {
-	DKLog("DKFile::GetFileName("+path+","+filename+")\n", DKDEBUG);
+	DKLog("DKFile::GetFileName("+path+",&filename)\n", DKDEBUG);
 	
 	unsigned found = path.find_last_of("/\\");
 	if(found != std::string::npos && found < path.length()){
