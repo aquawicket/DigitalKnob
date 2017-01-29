@@ -61,6 +61,10 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 void Log(const DKString& text, const int lvl);
 void SetLog(const int lvl, const DKString& text);
 
-#define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __func__)
+#ifdef WIN32
+	#define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __FUNCSIG__)
+#else
+	#define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __PRETTY_FUNCTION__)
+#endif
 
 #endif //DKLog_H
