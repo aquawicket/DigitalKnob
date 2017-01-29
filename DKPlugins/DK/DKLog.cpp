@@ -28,20 +28,6 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	//string += func;
 	//string += ":  ";
 	string += text;
-	Log(string, lvl);
-}
-
-/////////////////////////////////////////////
-void Log(const DKString& text, const int lvl)
-{
-	//DEBUG
-	//All DK cpp functions should include the name of the function calling
-	// C++ EXAMPLE:    DKLog("DKMyClass::Function1()", DKDEBUG);
-	//  JS EXAMPLE:    DKLog("DKMyClass_Function1()", DKDEBUG);
-	//if(has(text,"DK") && !has(text,"::") && !has(text,"_")){
-	//	printf("This log does not have an :: or an _,  look closer ;) \n");
-	//}
-
 
 	int i=0;
 	DKString value;
@@ -52,7 +38,7 @@ void Log(const DKString& text, const int lvl)
 		DKStringArray hides;
 		toStringArray(hides, log_hide, ",");
 		for(unsigned int i=0; i<hides.size(); ++i){
-			if(has(text,hides[i]) && !hides[i].empty()){
+			if(has(string,hides[i]) && !hides[i].empty()){
 				return;
 			}
 		}
@@ -66,7 +52,7 @@ void Log(const DKString& text, const int lvl)
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
 		for(unsigned int i=0; i<shows.size(); ++i){
-			if(has(text,shows[i]) && !shows[i].empty()){
+			if(has(string,shows[i]) && !shows[i].empty()){
 				flag = true;
 				break;
 			}
@@ -85,7 +71,7 @@ void Log(const DKString& text, const int lvl)
 		std::ofstream file_log;
 		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
 		if(file_log.is_open()){
-			file_log << text.c_str();
+			file_log << string.c_str();
 			file_log.close();
 		}
 	}
@@ -111,22 +97,17 @@ void Log(const DKString& text, const int lvl)
     WORD saved_attributes = consoleInfo.wAttributes;  // Save current attributes
 	SetConsoleTextAttribute(hConsole, color);
 	if(log_msvc){
-		OutputDebugString(text.c_str()); //Output to Visual Studio
+		OutputDebugString(string.c_str()); //Output to Visual Studio
 	}
 #endif
 
 #if defined(MAC) || defined (IOS)
 	if(log_xcode){
-		NSLog(@"%s", text.c_str()); //Output to XCode
+		NSLog(@"%s", string.c_str()); //Output to XCode
 	}
 #endif
 
-	printf("%s",text.c_str());
-	
-	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-		SendEvent("DKLog", "level", toString(lvl));
-		SendEvent("DKLog", "string", text);
-	}
+	printf("%s",string.c_str());
 
 #ifdef WIN32
 	SetConsoleTextAttribute(hConsole, saved_attributes);
@@ -134,25 +115,30 @@ void Log(const DKString& text, const int lvl)
 
 #ifdef ANDROID
 	if(lvl == DKERROR){
-		__android_log_write(ANDROID_LOG_ERROR, "DKApp", text.c_str());
+		__android_log_write(ANDROID_LOG_ERROR, "DKApp", string.c_str());
 	}
 	else if(lvl == DKWARN){
-		__android_log_write(ANDROID_LOG_WARN, "DKApp", text.c_str());
+		__android_log_write(ANDROID_LOG_WARN, "DKApp", string.c_str());
 	}
 	else if(lvl == DKINFO){
-		__android_log_write(ANDROID_LOG_INFO, "DKApp", text.c_str());
+		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
 	}
 	else if(lvl == DKDEBUG){
-		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", text.c_str());
+		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", string.c_str());
 	}
 	else{
-		__android_log_write(ANDROID_LOG_INFO, "DKApp", text.c_str());
+		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
 	}
 #endif
 
-	//let's try to send a message box for errors
-	if(log_errors && (lvl == DKERROR || has(text,"Uncaught ReferenceError:"))){
-		DKString in = text;
+	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
+		SendEvent("DKLog", "level", toString(lvl));
+		SendEvent("DKLog", "string", string);
+	}
+
+	//send errors to a message box.
+	if(log_errors && (lvl == DKERROR || has(string,"Uncaught ReferenceError:"))){
+		DKString in = string;
 		DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
 

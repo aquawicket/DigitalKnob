@@ -58,7 +58,6 @@ extern DKString log_hide;
 //TODO 
 //Having the filename and the line number make debudding much easier. 
 void Log(const DKString& text, const int lvl, const char* file, int line, const char* func);
-void Log(const DKString& text, const int lvl);
 void SetLog(const int lvl, const DKString& text);
 
 #ifdef WIN32
