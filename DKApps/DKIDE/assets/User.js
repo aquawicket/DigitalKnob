@@ -9,7 +9,9 @@ if(DK_GetBrowser() == "Rocket"){
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");
 	DKCreate("DKWidget");
-	DKCreate("DKTray/DKTray.js", function(){});
+	if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
+		DKCreate("DKTray/DKTray.js", function(){});
+	}
 }
 
 DKCreate("DKDebug/DKDebug.js", function(){});
