@@ -32,7 +32,7 @@ function DKDev_End()
 	DKRemoveEvent("GLOBAL", "SaveHtmlFiles", DKDev_OnEvent);
 	DKRemoveEvent("GLOBAL", "OpenFile", DKDev_OnEvent);
 	DKRemoveEvent("GLOBAL", "FileChoice", DKDev_OnEvent);
-	DKClose("DKDev/DKDev.html");
+	DKClose("DKDev.html");
 }
 
 ///////////////////
