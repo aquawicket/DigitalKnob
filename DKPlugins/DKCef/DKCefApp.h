@@ -109,6 +109,10 @@ public:
 	{
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
+		if(!handler){
+			DKLog("handler invalid \n", DKERROR);
+			return;
+		}
 		handler->functions[name] = boost::bind(func, _1, _2);
 		if(object){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
