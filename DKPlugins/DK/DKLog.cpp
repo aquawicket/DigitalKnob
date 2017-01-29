@@ -14,8 +14,8 @@ extern DKString log_show = ""; //comma seperated
 extern DKString log_hide = ""; //comma seperated 
 
 
-/////////////////////////////////////////////////////////////////////////
-void Log(const DKString& text, const int lvl, const char* file, int line)
+///////////////////////////////////////////////////////////////////////////////////////////
+void Log(const DKString& text, const int lvl, const char* file, int line, const char* func)
 {
 	DKString string = file;
 	unsigned found = string.find_last_of("/\\");
@@ -24,7 +24,9 @@ void Log(const DKString& text, const int lvl, const char* file, int line)
 	}
 
 	string += ":";
-	string += toString(line)+":  ";
+	string += toString(line)+":";
+	string += func;
+	string += ":  ";
 	string += text;
 	Log(string, lvl);
 }
