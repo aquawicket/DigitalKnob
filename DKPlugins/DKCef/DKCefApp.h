@@ -110,7 +110,7 @@ public:
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
 		if(!handler){
-			DKLog("handler invalid \n", DKERROR);
+			DKLog("DKCefApp::AttachFunction("+name+"): handler invalid \n", DKWARN);
 			return;
 		}
 		handler->functions[name] = boost::bind(func, _1, _2);

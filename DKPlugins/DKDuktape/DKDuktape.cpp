@@ -165,9 +165,9 @@ bool DKDuktape::LoadFile(const DKString& path)
     }
     duk_pop(ctx);  /* ignore result ?? */
 
-	DKString filename;
-	DKFile::GetFileName(path, filename);
-	filelist.push_back(filename);
+	//DKString filename;
+	//DKFile::GetFileName(path, filename);
+	filelist.push_back(path);
 	return true;
 }
 
