@@ -24,9 +24,9 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	}
 
 	string += ":";
-	string += toString(line)+":";
-	string += func;
-	string += ":  ";
+	string += toString(line)+":  ";
+	//string += func;
+	//string += ":  ";
 	string += text;
 	Log(string, lvl);
 }
