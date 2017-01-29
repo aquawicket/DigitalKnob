@@ -56,6 +56,53 @@ function DKMenuRightEdit_Init()
 //////////////////////////////
 function DKMenuRightEdit_End()
 {
+	DKRemoveEvent("DKMenuRightEdit.html", "SetElement", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("DKMenuRightEdit.html", "background_color", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("DKMenuRightEdit.html", "foreground_color", DKMenuRightEdit_OnEvent);
+	//DKRemoveEvent("drag", DKMenuRightEdit_OnEvent);
+	//DKRemoveEvent("keydown", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("InfoTab", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("PositionTab", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("ColorTab", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("TextTab", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("InnerHtmlTab", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("SaveHtml", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("DKParent", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("display-block", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("display-inline-block", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("display-inline", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("display-none", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("position-auto", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("position-relative", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("position-absolute", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("position-fixed", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("overflow-visible", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("overflow-hidden", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("overflow-scroll", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("overflow-auto", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("DKBGColor", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("DKFGColor", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("InfoFile", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("InfoId", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("width_box", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("height_box", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("top_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("left_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("right_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("bottom_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("topMargin_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("leftMargin_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("rightMargin_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("bottomMargin_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("FontSize_Textbox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("InnerHtmlText", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("ValueBox", "input", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("bold_Image", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("italic_Image", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("align-left_Image", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("align-center_Image", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("align-right_Image", "click", DKMenuRightEdit_OnEvent);
+	DKRemoveEvent("align-justify_Image", "click", DKMenuRightEdit_OnEvent);	
 	DKClose("DKMenuRightEdit.html");
 }
 

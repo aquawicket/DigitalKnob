@@ -9,6 +9,7 @@ function DKMenuRightTree_Init()
 //////////////////////////////
 function DKMenuRightTree_End()
 {
+	DKRemoveEvent("DKMenuRightTree.html", "UpdateTree", DKMenuRightTree_OnEvent);
 	DKClose("DKMenuRightTree.html");
 }
 

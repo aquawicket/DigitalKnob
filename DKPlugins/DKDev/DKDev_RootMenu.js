@@ -14,6 +14,8 @@ function DKDev_RootMenu_Init()
 function DKDev_RootMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKDev_RootMenu_OnEvent);
+	DKRemoveEvent("DKDev_RootMenu_NewFrame", "click", DKDev_RootMenu_OnEvent);
+	DKRemoveEvent("DKDev_RootMenu_OpenFile", "click", DKDev_RootMenu_OnEvent);
 	DKClose("DKDev/DKDev_RootMenu.html");
 }
 
