@@ -14,7 +14,6 @@ extern DKString log_show = ""; //comma seperated
 extern DKString log_hide = ""; //comma seperated 
 
 
-//// with filename and line #
 /////////////////////////////////////////////////////////////////////////
 void Log(const DKString& text, const int lvl, const char* file, int line)
 {
@@ -30,7 +29,7 @@ void Log(const DKString& text, const int lvl, const char* file, int line)
 	Log(string, lvl);
 }
 
-///////////////////////////////////////////////
+/////////////////////////////////////////////
 void Log(const DKString& text, const int lvl)
 {
 	//DEBUG
