@@ -12,6 +12,9 @@ function DKPaintFile_Init()
 function DKPaintFile_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKPaintFile_OnEvent);
+	DKRemoveEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
+	DKRemoveEvent("DKPaintFile_Save", "click", DKPaintFile_OnEvent);
+	DKRemoveEvent("DKPaintFile_Save As", "click", DKPaintFile_OnEvent);
 	DKClose("DKPaintFile.html");
 }
 

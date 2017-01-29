@@ -8,7 +8,7 @@ function DKScale_Init()
 /////////////////////
 function DKScale_End()
 {
-
+	DKRemoveEvent("GLOBAL", "resize", DKScale_OnEvent);
 }
 
 //////////////////////////////

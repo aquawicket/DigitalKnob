@@ -23,6 +23,10 @@ function DKFileDialog_Init()
 ///////////////////////////
 function DKFileDialog_End()
 {
+	DKRemoveEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
+	DKRemoveEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
+	DKRemoveEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
+	DKRemoveEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
 	DKClose("DKFileDialog.html");
 }
 

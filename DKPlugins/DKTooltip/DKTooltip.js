@@ -10,6 +10,9 @@ function DKTooltip_Init()
 ////////////////////////
 function DKTooltip_End()
 {
+	DKRemoveEvent("DKTooltip.html", "show_tooltip", DKTooltip_OnEvent);
+	//DKRemoveEvent("DKTooltip.html", "mouseover", DKTooltip_OnEvent);
+	DKRemoveEvent("DKTooltip.html", "mouseout", DKTooltip_OnEvent);
 	DKClose("DKTooltip.html");
 }
 

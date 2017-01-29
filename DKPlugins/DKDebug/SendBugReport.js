@@ -9,6 +9,7 @@ function SendBugReport_Init()
 ////////////////////////////
 function SendBugReport_End()
 {
+	DKRemoveEvent("SendBugReport_Button", "click", SendBugReport_OnEvent);
 	DKClose("SendBugReport.html");
 }
 

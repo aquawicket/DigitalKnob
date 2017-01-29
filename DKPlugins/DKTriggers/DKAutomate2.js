@@ -10,6 +10,8 @@ function DKAutomate2_Init()
 //////////////////////////
 function DKAutomate2_End()
 {
+	DKRemoveEvent("DKAutomate2.html", "SelectTrigger", DKAutomate2_OnEvent);
+	DKRemoveEvent("TriggerName", "input", DKAutomate2_OnEvent);
 	DKClose("DKAutomate2.html");
 }
 

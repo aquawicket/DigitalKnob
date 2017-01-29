@@ -15,6 +15,11 @@ function DKColorPicker_Init()
 ////////////////////////////
 function DKColorPicker_End()
 {
+	DKRemoveEvent("DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
+	DKRemoveEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
+	DKRemoveEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
+	DKRemoveEvent("DKColorPickerClose", "click", DKColorPicker_OnEvent);
+	DKRemoveEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
 	DKClose("DKColorPicker.html");
 }
 

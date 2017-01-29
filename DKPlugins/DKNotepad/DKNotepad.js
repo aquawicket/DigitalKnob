@@ -12,6 +12,9 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
+	//DKRemoveEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
+	DKRemoveEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
+	DKRemoveEvent("DKNotepad_File", "click", DKNotepad_OnEvent);
 	DKClose("DKNotepad.html");
 }
 

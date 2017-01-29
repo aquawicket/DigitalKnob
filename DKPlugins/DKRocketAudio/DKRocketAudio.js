@@ -18,6 +18,12 @@ function DKRocketAudio_Init()
 ////////////////////////////
 function DKRocketAudio_End()
 {
+	DKRemoveEvent("DKRocketAudio_playpause", "click", DKRocketAudio_OnEvent);
+	DKRemoveEvent("DKRocketAudio_position", "click", DKRocketAudio_OnEvent);
+	DKRemoveEvent("DKRocketAudio_speaker", "click", DKRocketAudio_OnEvent);
+	DKRemoveEvent("DKRocketAudio_volume", "change", DKRocketAudio_OnEvent);
+	DKRemoveEvent("DKAudio", "finnished", DKRocketAudio_OnEvent);
+	DKRemoveEvent("DKAudio", "position", DKRocketAudio_OnEvent);
 	DKClose("DKRocketAudio.html");
 	DKClose("DKAudio");
 }

@@ -22,6 +22,11 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
+	DKRemoveEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
+	DKRemoveEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
+	DKRemoveEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
+	DKRemoveEvent("DKMessageOk", "click", DKMessage_OnEvent);
+	DKRemoveEvent("DKMessageCancel", "click", DKMessage_OnEvent);
 	DKClose("DKMessage.html");
 }
 

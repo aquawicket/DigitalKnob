@@ -11,7 +11,8 @@ function DKThreadPoolDlg_Init()
 //////////////////////////////
 function DKThreadPoolDlg_End()
 {
-	DKClose("DKThread/DKThreadPoolDlg.html");
+	DKRemoveEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
+	DKClose("DKThreadPoolDlg.html");
 }
 
 ///////////////////////////////////////

@@ -12,6 +12,9 @@ function DKPaint_Init()
 ////////////////////////
 function DKPaint_End()
 {
+	DKRemoveEvent("DKPaint_Save", "click", DKPaint_OnEvent);
+	DKRemoveEvent("DKPaint_Text", "contextmenu", DKPaint_OnEvent);
+	DKRemoveEvent("DKPaint_File", "click", DKPaint_OnEvent);
 	DKClose("DKPaint.html");
 }
 

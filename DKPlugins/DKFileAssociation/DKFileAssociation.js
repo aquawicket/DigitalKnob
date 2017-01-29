@@ -8,7 +8,8 @@ function DKFileAssociation_Init()
 ////////////////////////////////
 function DKFileAssociation_End()
 {
-	//DKClose("DKFileAssociation/DKFileAssociation.html");
+	//DKRemoveEvent("DKFileAssociation_item", "click", DKFileAssociation_OnEvent);
+	//DKClose("DKFileAssociation.html");
 }
 
 ////////////////////////////////////////

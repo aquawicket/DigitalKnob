@@ -14,6 +14,9 @@ function DKNotepadMenu_Init()
 function DKNotepadMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKNotepadMenu_OnEvent);
+	DKRemoveEvent("DKNotepadMenu_Cut", "click", DKNotepadMenu_OnEvent);
+	DKRemoveEvent("DKNotepadMenu_Copy", "click", DKNotepadMenu_OnEvent);
+	DKRemoveEvent("DKNotepadMenu_Paste", "click", DKNotepadMenu_OnEvent);
 	DKClose("DKNotepadMenu.html");
 }
 

@@ -14,6 +14,11 @@ function DKNotepadFile_Init()
 function DKNotepadFile_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
+	DKRemoveEvent("GLOBAL", "OpenFile", DKNotepadFile_OnEvent);
+	DKRemoveEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);
+	DKRemoveEvent("DKNotepadFile_Save", "click", DKNotepadFile_OnEvent);
+	DKRemoveEvent("DKNotepadFile_Save As", "click", DKNotepadFile_OnEvent);
+	DKRemoveEvent("DKNotepadFile_Exit", "click", DKNotepadFile_OnEvent);
 	DKClose("DKNotepadFile.html");
 }
 

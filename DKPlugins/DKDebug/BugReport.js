@@ -10,6 +10,8 @@ function BugReport_Init()
 ////////////////////////
 function BugReport_End()
 {
+	DKRemoveEvent("BugReport_Image", "click", BugReport_OnEvent);
+	DKRemoveEvent("BugReport_Text", "click", BugReport_OnEvent);
 	DKClose("BugReport.html");
 }
 

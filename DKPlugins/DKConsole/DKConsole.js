@@ -13,6 +13,8 @@ function DKConsole_Init()
 ////////////////////////
 function DKConsole_End()
 {
+	DKRemoveEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
+	DKRemoveEvent("DKConsole_Close", "click", DKConsole_OnEvent);
 	DKRemoveEvent("DKLog", "color", DKConsole_OnEvent);
 	DKRemoveEvent("DKLog", "notify", DKConsole_OnEvent);
 	DKClose("DKConsole.html");
