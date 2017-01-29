@@ -52,6 +52,7 @@ extern bool log_msvc;
 extern bool log_xcode;
 extern bool log_file;
 extern bool log_gui_console;
+extern bool log_line;
 extern DKString log_show;
 extern DKString log_hide;
 
