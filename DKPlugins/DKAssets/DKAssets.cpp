@@ -63,6 +63,10 @@ void DKAssets::Init()
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
+
+	DKString line;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINE]", errors);
+	if(same(line, "ON")) { log_lines = false; }
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){
