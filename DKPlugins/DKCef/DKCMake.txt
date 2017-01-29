@@ -21,7 +21,6 @@ DKDEPEND(upx391w)
 DKPLUGIN(DKCef)
 DKASSETS(DKCef)
 
-
 IF(WIN_32)
 	IF(DEBUG)
 		DKCOPY(${CEF}/Debug/ ${DKPLUGINS}/DKCef/dkwin32/Debug FALSE)
@@ -56,7 +55,7 @@ IF(WIN_64)
 	IF(DEBUG)
 		DKCOPY(${CEF}/Debug/ ${DKPLUGINS}/DKCef/dkwin64/Debug FALSE)
 		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPLUGINS}/DKCef/dkwin64/Debug TRUE)
-		FILE(REMOVE ${DKPLUGINS}/DKCef/dkwin64/Debug/cef_sandbox.lib)
+		
 		FILE(REMOVE ${DKPLUGINS}/DKCef/dkwin64/Debug/d3dcompiler_47.dll)
 		FILE(REMOVE ${DKPLUGINS}/DKCef/dkwin64/Debug/d3dcompiler_43.dll)
 		FILE(REMOVE ${DKPLUGINS}/DKCef/dkwin64/Debug/libGLESv2.dll)
