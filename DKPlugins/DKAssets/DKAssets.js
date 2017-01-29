@@ -23,6 +23,9 @@ if(log_file == "ON"){ LOG_FILE = true; }
 LOG_SHOW = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_SHOW]");
 LOG_HIDE = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_HIDE]");
 
+var log_lines = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_LINES]");
+if(log_lines == "ON"){ LOG_LINES = true; }
+
 var hostname = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
 if(!hostname){ hostname = document.location.hostname; }
 if(!hostname){ hostname = "digitalknob.com"; }

@@ -7,6 +7,7 @@ var LOG_ERRORS = true;
 var LOG_FILE = true;
 var LOG_SHOW = ""; //comma seperated
 var LOG_HIDE = ""; //comma seperated
+var LOG_LINES = false;
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
@@ -37,6 +38,7 @@ var DKINFO = 3;      //White
 var DKDEBUG = 4;     //Blue
 var DKSHOW = 5;
 var DKHIDE = 6;
+
 
 ///////////////////////////
 function DKLog(string, lvl)
@@ -82,7 +84,7 @@ function DKLog(string, lvl)
 		
 		function getFileLine(){
 			var stack = Error().stack;
-			if(!stack){ return ""; }
+			if(!stack || !LOG_LINES){ return ""; }
 			var lines = stack.split("\n");
 			var n=0;
 			while(lines[n].indexOf("DKLog") == -1){ n++; }
@@ -90,15 +92,15 @@ function DKLog(string, lvl)
 			var start = fileline.lastIndexOf("/");
 			var end = fileline.lastIndexOf(":");
 			fileline = fileline.substring(start+1, end+1);
-			return fileline;
+			return fileline+"  ";
 		};
 		
 		if(lvl == DKERROR){ alert("ERROR: "+string); /*throw string;*/ }
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
-			console.log("%c"+getFileLine()+"  "+string, color);
+			console.log("%c"+getFileLine()+string, color);
 		}
 		else{
-			console.log(getFileLine()+"  "+string);
+			console.log(getFileLine()+string);
 		}
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
