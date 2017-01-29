@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 	
 	DKString info;
 	GetOSInfo(info);
-	DKLog(info+"\n", DKINFO, __FILE__, __LINE__);
+	DKLog(info+"\n", DKINFO);
 	DKLog(DKUtil::GetDate()+" "+DKUtil::GetTime()+"\n", DKINFO);
 	DKCreate("DKDuktape");
 	DKCreate("DKDebug");
