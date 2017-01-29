@@ -18,9 +18,10 @@ extern DKString log_hide = ""; //comma seperated
 /////////////////////////////////////////////////////////////////////////
 void Log(const DKString& text, const int lvl, const char* file, int line)
 {
-	DKString string = file;
-	string += ": ";
-	string += "line "+toString(line)+"\n";
+	DKString string;
+	DKFile::GetFileName(file, string);
+	string += ":";
+	string += toString(line)+":  ";
 	string += text;
 	Log(string, lvl);
 }
