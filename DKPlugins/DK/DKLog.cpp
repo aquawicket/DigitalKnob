@@ -140,7 +140,7 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	}
 
 	//send errors to a message box.
-	if(log_errors && (lvl == DKERROR || has(string,"Uncaught ReferenceError:"))){
+	if(log_errors && (lvl == DKERROR || has(string,"Uncaught "))){
 		DKString in = string;
 		DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
