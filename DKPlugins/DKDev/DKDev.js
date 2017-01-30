@@ -241,7 +241,7 @@ function DKDev_SelectElement(element)
 	DKLog("DKDev_SelectElement("+element+") \n", DKINFO);
 
 	stored_element = element;
-	if(stored_element && stored_element.indexOf("body") == -1){
+	if(stored_element/* && stored_element.indexOf("body") == -1*/){
 		DKDev_ApplyBox(stored_element);
 	}
 	else{
@@ -266,6 +266,7 @@ function DKDev_AddDragHandles(id)
 	
 	for(var t=0; t<list.length; t++){
 		if(!list[t]){ continue; }
+		if(list[t] == "html"){ continue; }
 		if(list[t] == "body"){ continue; }
 		if(DKWidget_IsChildOf(list[t], "DKDev_Box")){ continue; }
 		if(DKWidget_IsChildOf(list[t], "DKDev_RootMenu.html")){ continue; }
