@@ -101,9 +101,9 @@ function DKClose(data)
 		return;
 	}
 	
-	if(data.indexOf("/") > -1){
-		DKLog("DKClose("+data+"): data contains a / \n", DKERROR);
-	}
+	//if(data.indexOf("/") > -1){
+		//DKLog("DKClose("+data+"): data contains a / \n", DKERROR);
+	//}
 	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){

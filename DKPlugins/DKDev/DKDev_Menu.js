@@ -54,7 +54,7 @@ function DKDev_Menu_End()
 	DKRemoveEvent("DKDev_Menu_Cut", "click", DKDev_Menu_OnEvent);	
 	DKRemoveEvent("DKDev_Menu_Copy", "click", DKDev_Menu_OnEvent);	
 	DKRemoveEvent("DKDev_Menu_Paste", "click", DKDev_Menu_OnEvent);
-	DKClose("DKDev_Menu.html");
+	DKClose("DKDev/DKDev_Menu.html");
 }
 
 //////////////////////////////////
@@ -135,5 +135,5 @@ function DKDev_Menu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKDev_Menu.js");
+	DKClose("DKDev/DKDev_Menu.js");
 }
