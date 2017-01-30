@@ -44,6 +44,7 @@ public:
 	static int GetTagName(duk_context* ctx);
 	static int GetValue(duk_context* ctx);
 	static int HasAttribute(duk_context* ctx);
+	static int HasProperty(duk_context* ctx);
 	static int Hide(duk_context* ctx);
 	static int InsertBefore(duk_context* ctx);
 	static int IsChildOf(duk_context* ctx);

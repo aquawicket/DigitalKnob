@@ -42,6 +42,7 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetTagName", DKWidgetJS::GetTagName, 1);
 	DKDuktape::AttachFunction("DKWidget_GetValue", DKWidgetJS::GetValue, 1);
 	DKDuktape::AttachFunction("DKWidget_HasAttribute", DKWidgetJS::HasAttribute, 2);
+	DKDuktape::AttachFunction("DKWidget_HasProperty", DKWidgetJS::HasProperty, 2);
 	DKDuktape::AttachFunction("DKWidget_Hide", DKWidgetJS::Hide, 1);
 	DKDuktape::AttachFunction("DKWidget_InsertBefore", DKWidgetJS::InsertBefore, 2);
 	DKDuktape::AttachFunction("DKWidget_IsChildOf", DKWidgetJS::IsChildOf, 2);
@@ -373,6 +374,17 @@ int DKWidgetJS::HasAttribute(duk_context* ctx)
 	DKElement* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	if(!element->HasAttribute(attrib.c_str())){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////
+int DKWidgetJS::HasProperty(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString property = duk_require_string(ctx, 1);
+	DKElement* element = DKWidget::GetElementById(id);
+	if(!element){ return 0; }
+	if(!element->GetProperty(property.c_str())){ return 0; }
 	return 1;
 }
 
