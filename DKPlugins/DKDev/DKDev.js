@@ -235,13 +235,13 @@ function DKDev_ApplyBox(id)
 	//}
 }
 
-/////////////////////////////////////
-function DKDev_SelectElement(element)
+////////////////////////////////
+function DKDev_SelectElement(id)
 {
-	DKLog("DKDev_SelectElement("+element+") \n", DKINFO);
-
-	stored_element = element;
-	if(stored_element/* && stored_element.indexOf("body") == -1*/){
+	DKLog("DKDev_SelectElement("+id+") \n", DKINFO);
+	
+	stored_element = id;
+	if(stored_element){
 		DKDev_ApplyBox(stored_element);
 	}
 	else{

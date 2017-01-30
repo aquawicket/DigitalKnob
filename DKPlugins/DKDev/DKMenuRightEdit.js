@@ -306,7 +306,7 @@ function DKMenuRightEdit_OnEvent(event)
 ///////////////////////////////////////
 function DKMenuRightEdit_SetElement(id)
 {
-	//DKDebug("SetElement("+id+") \n");
+	DKLog("DKMenuRightEdit_SetElement("+id+") \n", DKINFO);
 	
 	MenuRight_element = id;
 
