@@ -3,7 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	DKBuild_ValidateSvn();
+	//DKBuild_ValidateSvn();
 	DKBuild_ValidateGit();
 	DKBuild_ValidateCmake();
 	DKBuild_ValidateVC2015();

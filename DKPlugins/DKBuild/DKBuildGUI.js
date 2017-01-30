@@ -16,7 +16,7 @@ function DKBuildGUI_Init()
 		DKAddEvent("build", "click", DKBuildGUI_OnEvent);
 		//DKAddEvent("DKBuildGUI.html", "NewApp", DKBuildGUI_OnEvent);
 	
-		DKBuild_ValidateSvn();
+		//DKBuild_ValidateSvn();
 		DKBuild_ValidateGit();
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
