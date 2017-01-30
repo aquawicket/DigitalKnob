@@ -85,7 +85,9 @@ function DKDev_OnEvent(event)
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		DKDev_SelectElement(target);
-		StopPropagation(event);
+		if(DK_GetBrowser() != "Rocket"){
+			StopPropagation(event);
+		}
 		return;
 	}
 
@@ -115,7 +117,9 @@ function DKDev_OnEvent(event)
 		//}
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
-		StopPropagation(event);
+		if(DK_GetBrowser() != "Rocket"){
+			StopPropagation(event);
+		}
 		return;
 	}
 	if(DK_Type(event, "Clear")){

@@ -34,6 +34,8 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetMouseElementY", DKWidgetJS::GetMouseElementY, 1);
 	DKDuktape::AttachFunction("DKWidget_GetMouseWindowX", DKWidgetJS::GetMouseWindowX, 0); 
 	DKDuktape::AttachFunction("DKWidget_GetMouseWindowY", DKWidgetJS::GetMouseWindowY, 0);
+	DKDuktape::AttachFunction("DKWidget_GetOffsetHeight", DKWidgetJS::GetOffsetHeight, 1);
+	DKDuktape::AttachFunction("DKWidget_GetOffsetWidth", DKWidgetJS::GetOffsetWidth, 1);
 	DKDuktape::AttachFunction("DKWidget_GetOption", DKWidgetJS::GetOption, 1);
 	DKDuktape::AttachFunction("DKWidget_GetOuterHtml", DKWidgetJS::GetOuterHtml, 1);
 	DKDuktape::AttachFunction("DKWidget_GetParent", DKWidgetJS::GetParent, 1);
@@ -462,8 +464,30 @@ int DKWidgetJS::AddResizeHandle(duk_context* ctx)
 ////////////////////////////////////////////////////
 int DKWidgetJS::RemoveResizeHandle(duk_context* ctx)
 {
-	DKString element = duk_require_string(ctx, 0);
-	if(!DKWidget::RemoveResizeHandle(element)){ return 0; }
+	DKString id = duk_require_string(ctx, 0);
+	if(!DKWidget::RemoveResizeHandle(id)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////////
+int DKWidgetJS::GetOffsetHeight(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKElement* element = DKWidget::GetElementById(id);
+	if(!element){ return 0; }
+	int offsetHeight = element->GetOffsetHeight();
+	duk_push_int(ctx, offsetHeight);
+	return 1;
+}
+
+////////////////////////////////////////////////
+int DKWidgetJS::GetOffsetWidth(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKElement* element = DKWidget::GetElementById(id);
+	if(!element){ return 0; }
+	int offsetWidth = element->GetOffsetWidth();
+	duk_push_int(ctx, offsetWidth);
 	return 1;
 }
 
