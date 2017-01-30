@@ -177,9 +177,8 @@ function DKDev_HideBox()
 function DKDev_ApplyBox(id)
 {
 	DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
-	//DKWidget_PrependChild(id, "DKDev_Box");
+
 	var parentid = DKWidget_GetParent(id);
-	//parent = document.getElementById(id).parentNode;
 	DKWidget_AppendChild(parentid, "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
 	
