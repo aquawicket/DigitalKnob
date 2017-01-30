@@ -20,7 +20,7 @@ function DKColorPicker_End()
 	DKRemoveEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
 	DKRemoveEvent("DKColorPickerClose", "click", DKColorPicker_OnEvent);
 	DKRemoveEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
-	DKClose("DKColorPicker.html");
+	DKClose("DKColorPicker/DKColorPicker.html");
 }
 
 /////////////////////////////////////
@@ -49,7 +49,7 @@ function DKColorPicker_OnEvent(event)
 			var color = DKWidget_GetProperty("DKColorSelected", "background-color");
 			DKSendEvent(event_id, event_type, color);
 		}
-		DKFrame_Close("DKColorPicker.html");
+		DKFrame_Close("DKColorPicker/DKColorPicker.html");
 	}
 }
 

@@ -297,19 +297,21 @@ function DKFrame_CloseButton(id)
 function DKFrame_Close(id)
 {
 	//DKLog("DKFrame_Close("+id+")\n", DKDEBUG);
-	if(id.indexOf("/") > -1){
-		DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
-	}
+	//if(id.indexOf("/") > -1){
+	//	DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
+	//}
+	var n = id.lastIndexOf("/");
+	var file = id.substring(n+1);
 	
-	var frame = DKWidget_GetParent(id);
+	var frame = DKWidget_GetParent(file);
 	if(!frame){
 		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);
 	}
 	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n", DKDEBUG);
-	var file = DKWidget_GetFile(id);
-	if(!file){
-		DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
-	}
+	//var file = DKWidget_GetFile(id);
+	//if(!file){
+	//	DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
+	//}
 	DKClose(file);
 	var jsfile = file.replace(".html", ".js");
 	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
