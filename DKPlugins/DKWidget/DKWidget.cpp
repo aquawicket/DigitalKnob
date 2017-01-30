@@ -133,7 +133,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	}
 	DKString _id = firstChild->GetId().CString();
 	if(!same(_id,id)){
-		DKLog("CreateWidget("+path+"): fixing id... "+id+"\n", DKERROR);
+		DKLog("CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
 		DKString str;
 		GetInnerHtml(temp, str);
 		replace(str, "id=\""+_id+"\"", "id=\""+id+"\""); //Set the id to the filename (example.html)
