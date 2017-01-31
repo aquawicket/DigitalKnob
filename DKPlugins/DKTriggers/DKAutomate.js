@@ -119,6 +119,8 @@ function DKAutomate_UpdateValues()
 //////////////////////////////////////
 function DKAutomate_SelectValue(value)
 {
+	//DKLog("("+value+") \n", DKINFO);
+	
 	DKTrigger_SelectTrigger(value);
 	DKSendEvent("DKAutomate2.html", "SelectTrigger", value);
 	DKAutomate_UpdateSelection(value);
@@ -135,6 +137,7 @@ function DKAutomate_CancelSave()
 //////////////////////////////////////////
 function DKAutomate_UpdateSelection(value)
 {
+	if(!value){ return; }
 	var temp = DKWidget_GetElements("DKA-TriggerList");
 	var options = temp.split(",");
 	for(var i = 0; i < options.length; ++i){

@@ -86,6 +86,7 @@ function DKAutomate2_OnEvent(event)
 function DKAutomate2_SelectTrigger()
 {
 	DKLog("DKAutomate2_SelectTrigger()\n", DKINFO);
+	
 	DKWidget_SetValue("TriggerName", current_trigger);
 	DKWidget_SetInnerHtml("Causes", "");
 	
