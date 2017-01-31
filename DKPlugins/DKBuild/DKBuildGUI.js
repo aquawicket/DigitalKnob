@@ -51,8 +51,8 @@ function DKBuildGUI_Init()
 /////////////////////////
 function DKBuildGUI_End()
 {
-	DKClose("DKBuildGUI.html");
-	DKClose("DKBuild.html");
+	DKClose("DKBuild/DKBuildGUI.html");
+	DKClose("DKBuild/DKBuild.html");
 }
 
 //////////////////////////////////
