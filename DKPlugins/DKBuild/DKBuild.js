@@ -505,8 +505,8 @@ function DKBuild_DoResults()
 	if(!DKBuild_OsCheck()){ return; }
 	
 	//Update the apps CmakeLists.txt file
-	//DKFile_Copy(DKPATH+"/DKPlugins/DKApp/CMakeLists.txt", DKPATH+"/DKApps/"+APP+"/CMakeLists.txt", true);
-	//DKFile_Copy(DKPATH+"/DKPlugins/DKApp/", DKPATH+"/DKApps/"+APP+"/", false); //any missing files
+	//DKFile_Copy(DKPATH+"/DKPlugins/_DKImport/CMakeLists.txt", DKPATH+"/DKApps/"+APP+"/CMakeLists.txt", true);
+	//DKFile_Copy(DKPATH+"/DKPlugins/_DKIMPORT/", DKPATH+"/DKApps/"+APP+"/", false); //any missing files
 	//DKFile_StringToFile("",DKPATH+"/DKApps/"+APP+"/assets.zip");
 	
 	////// Create the cmake string
