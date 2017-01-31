@@ -90,7 +90,10 @@ function DKDebug_RestartApp()
 {
 	//TODO - make this work for all variations 
 	if(DK_GetBrowser() != "Rocket"){
-		DK_Reload();
+		DK_Reload(); //Call DK.js
+	}
+	if(DK_GetBrowser() == "Rocket" && !USE_CEF){
+		DK_Reload(); //Call DKDuktape.cpp
 	}
 }
 
