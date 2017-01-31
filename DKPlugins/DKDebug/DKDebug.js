@@ -88,9 +88,10 @@ function DKDebug_KeyToChar(key)
 /////////////////////////////
 function DKDebug_RestartApp()
 {
-//if(DK_GetBrowser() != "Rocket"){
-	DK_Reload();
-//}
+	//TODO - make this work for all variations 
+	if(DK_GetBrowser() != "Rocket"){
+		DK_Reload();
+	}
 }
 
 //////////////////////////////

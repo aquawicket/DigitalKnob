@@ -141,13 +141,13 @@ function DK_GetDate()
 	return date;
 }
 
-//if(DK_GetBrowser() != "CEF"){
-	////////////////////
-	function DK_Reload()
-	{	
-		window.location.href = href+"/index.html";
-	}
-//}
+
+////////////////////
+function DK_Reload()
+{	
+	window.location.href = href+"/index.html";
+}
+
 
 //////////////////////////
 function DKAvailable(name)
