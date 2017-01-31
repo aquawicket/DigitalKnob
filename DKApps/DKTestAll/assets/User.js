@@ -8,3 +8,6 @@ DKLog(welcome, DKINFO);
 //TestJavascript
 DKCreate("TestJavascript.js");
 DKClose("TestJavascript.js");
+
+//TestWindow
+DKCreate("TestWindow.js");
