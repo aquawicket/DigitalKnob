@@ -32,6 +32,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY, 1);
 	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show, 0);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed, 0);
+	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox, 1);
 }
 
 
@@ -219,6 +220,16 @@ int DKWindowJS::GetMouseY(duk_context* ctx)
 {
 	int mouseY = DKWindow::GetMouseY();
 	duk_push_int(ctx, mouseY);
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKWindowJS::MessageBox(duk_context* ctx)
+{
+	DKString msg = duk_require_string(ctx, 0);
+	if(!DKClass::CallFunc("DKWindow::MessageBox", &msg, NULL)){
+		return 0;
+	}
 	return 1;
 }
 

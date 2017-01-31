@@ -35,6 +35,7 @@ public:
 	static int SetY(duk_context* ctx);
 	static int Show(duk_context* ctx);
 	static int Windowed(duk_context* ctx);
+	static int MessageBox(duk_context* ctx);
 };
 
 
