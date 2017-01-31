@@ -13,7 +13,7 @@ function DKMenuRightApp_End()
 {
 	DKRemoveEvent("SaveUserFile", "click", DKMenuRightApp_OnEvent);
 	DKRemoveEvent("DKMenuRightApp.html", "Update", DKMenuRightApp_OnEvent);
-	DKClose("DKMenuRightApp.html");
+	DKClose("DKDev/DKMenuRightApp.html");
 }
 
 //////////////////////////////////////

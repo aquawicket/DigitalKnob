@@ -30,11 +30,11 @@ function DKMenuRight_End()
 	DKRemoveEvent("TriggerImage", "click", DKMenuRight_OnEvent);
 	DKRemoveEvent("HookImage", "click", DKMenuRight_OnEvent);
 	DKRemoveEvent("DKMenuRight.html", "SetPanel", DKMenuRight_OnEvent);
-	DKClose("DKMenuRightWeb.js");
-	DKClose("DKMenuRightTree.js");
-	DKClose("DKMenuRightApp.js");
-	DKClose("DKMenuRightEdit.js");
-	DKClose("DKMenuRight.html");
+	DKClose("DKDev/DKMenuRightWeb.js");
+	DKClose("DKDev/DKMenuRightTree.js");
+	DKClose("DKDev/DKMenuRightApp.js");
+	DKClose("DKDev/DKMenuRightEdit.js");
+	DKClose("DKDev/DKMenuRight.html");
 }
 
 ///////////////////////////////////

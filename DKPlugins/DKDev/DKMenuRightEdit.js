@@ -103,7 +103,7 @@ function DKMenuRightEdit_End()
 	DKRemoveEvent("align-center_Image", "click", DKMenuRightEdit_OnEvent);
 	DKRemoveEvent("align-right_Image", "click", DKMenuRightEdit_OnEvent);
 	DKRemoveEvent("align-justify_Image", "click", DKMenuRightEdit_OnEvent);	
-	DKClose("DKMenuRightEdit.html");
+	DKClose("DKDev/DKMenuRightEdit.html");
 }
 
 ///////////////////////////////////////
