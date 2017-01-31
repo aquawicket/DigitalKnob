@@ -331,11 +331,11 @@ MESSAGE("***************************************\n")
 ###  TODO: Prep the app data files and assets 
 ############################################################
 
-#copy digitalknob/DKPlugins/DKApp/CMakeLists.txt to app path.
-MESSAGE("Copying DKPlugins/DKApp/ to App...")
+#copy digitalknob/DKPlugins/_DKIMPORT/CMakeLists.txt to app path.
+MESSAGE("Copying DKPlugins/_DKIMPORT/ to App...")
 
 ## copy recursivly without overwrite
-DKCOPY(${DKPLUGINS}/DKApp ${DKPROJECT} FALSE)
+DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE)
 
 ### Include all source files from the app folder
 FILE(GLOB App_SRC 
@@ -650,7 +650,7 @@ IF(ANDROID)
 	MESSAGE("${DKLIBRARIES}")
 	MESSAGE("\n")
 
-	#copy android files from DKPlugins/DKApp
+	#copy android files from DKPlugins/_DKIMPORT
 	DKREMOVE(${DKPROJECT}/android32/Debug/CMakeCache.txt)
 	DKREMOVE(${DKPROJECT}/android32/Release/CMakeCache.txt)
 	DKREMOVE(${DKPROJECT}/android64/Debug/CMakeCache.txt)
