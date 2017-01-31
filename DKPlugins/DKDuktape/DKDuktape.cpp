@@ -218,18 +218,24 @@ void DKDuktape::Reload()
 	DKStringArray list;
 	DKClass::GetObjects(list);
 	for(unsigned int i=list.size()-1; i>0; --i){
-		if(has(list[i],"App0")){ continue; }
-		if(has(list[i],"DKAssets")){ continue; }
-		if(has(list[i],"DKDebug")){ continue; }
-		if(has(list[i],"DKDuktape")){ continue; }
-		if(has(list[i],"Window0")){ continue; }
-		if(has(list[i],"DKJS")){ continue; }
-		if(has(list[i],"Rocket")){ continue; }
-		if(has(list[i],"DKCef")){ continue; }
-		if(has(list[i],"DKSDLCef")){ continue; }
-		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO);
+		if(!has(list[i],"DKJavascript,")){
+			if(has(list[i],"App0")){ continue; }
+			if(has(list[i],"DKAssets")){ continue; }
+			if(has(list[i],"DKDebug")){ continue; }
+			if(has(list[i],"DKDuktape")){ continue; }
+			if(has(list[i],"Window0")){ continue; }
+			if(has(list[i],"DKJS")){ continue; }
+			if(has(list[i],"Rocket")){ continue; }
+			if(has(list[i],"DKCef")){ continue; }
+			if(has(list[i],"DKSDLCef")){ continue; }
+		}
+		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO); //DEBUG
 		DKClose(list[i]);
 	}
+
+	//DEBUG
+	//list.clear();
+	//DKClass::GetObjects(list);
 
     DKString user = DKFile::local_assets+"User.js";
 	LoadFile(user);

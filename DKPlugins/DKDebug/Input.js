@@ -10,7 +10,7 @@ function Input_Init()
 function Input_End()
 {
 	DKRemoveEvent("Input_Text", "keydown", Input_OnEvent);
-	DKClose("Input.html");
+	DKClose("DKDebug/Input.html");
 }
 
 /////////////////////////////
