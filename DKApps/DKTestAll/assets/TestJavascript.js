@@ -1,0 +1,1 @@
+DKLog("TestJavascript.js");
