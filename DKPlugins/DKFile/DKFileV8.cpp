@@ -55,7 +55,7 @@ bool DKFileV8::Copy(CefArgs args, CefReturn retval)
 {
 	DKString src = args[0]->GetStringValue();
 	DKString dest = args[1]->GetStringValue();
-	bool overwrite = args[2]->GetIntValue();
+	bool overwrite = args[2]->GetBoolValue();
 	if(!DKFile::Copy(src, dest, overwrite, true)){
 		return false;
 	}
