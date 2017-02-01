@@ -337,6 +337,15 @@ function DK_GetId(event)
 	return;
 }
 
+///////////////////////////
+function DK_GetValue(event)
+{
+	//TODO
+	DKLog("GetValue("+event+") \n", DKDEBUG);
+
+	return;
+}
+
 ////////////////////////////////
 function DK_Type(event, command)
 { 

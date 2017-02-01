@@ -50,6 +50,7 @@ public:
 	static int GetTime(duk_context* ctx);
 	static int GetType(duk_context* ctx);
 	static int GetUsername(duk_context* ctx);
+	static int GetValue(duk_context* ctx);
 	static int GetVolume(duk_context* ctx);
 	static int HideConsole(duk_context* ctx);
 	static int Id(duk_context* ctx);
