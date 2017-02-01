@@ -164,7 +164,7 @@ void DKApp::Exit()
 	CallJavaFunction("Exit","");
 #endif
 
-#if !defined(ANDROID)
+#ifdef WIN32
 	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
 		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
 	}
