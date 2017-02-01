@@ -124,8 +124,10 @@ FOREACH(plugin ${DKPLUGS})
 	IF(QUEUE_BUILD AND CMAKE_FILE)
 		IF(REBUILDALL)
 			DKREMOVE(${PATHTOPLUGIN}/CMakeLists.txt)
-			##TODO, we need to delete the binary library file(s) too
-			##How do we determine the filenames of the libraries to be deleted?
+			FOREACH(the_lib ${LIBLIST})
+				MESSAGE("Removing ${the_lib}")
+				DKREMOVE(${the_lib})
+			ENDFOREACH()
 		ENDIF()
 		IF(NOT EXISTS ${PATHTOPLUGIN}/CMakeLists.txt)
 			MESSAGE("Creating CMakeLists.txt file for ${plugin}....")
