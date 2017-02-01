@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 {
 	DKApp::argc = argc;
     DKApp::argv = argv;
+/*
 #ifdef WIN32
 	DKUtil::mainThreadId = GetCurrentThreadId();
 #endif
@@ -43,6 +44,10 @@ int main(int argc, char **argv)
 #if defined(LINUX) || defined (IOS)
 	DKUtil::mainThreadId = (int)pthread_self();
 #endif
+*/
+	//This does what is above.
+	DKUtil::SetMainThreadNow();
+
 #ifndef IOS
 	DKFile::appfilename = argv[0];
 
