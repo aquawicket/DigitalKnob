@@ -567,6 +567,9 @@ function DKBuild_DoResults()
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
+		//copy .pdb file to assets
+		//DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".pdb", DKPATH+"/DKApps/"+APP+"/assets/", true);
+		
 		//upx compress the exe file
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx392w/upx.exe")){
 			DKLog("UPX compressing exe... please wait \n", DKWARN);
