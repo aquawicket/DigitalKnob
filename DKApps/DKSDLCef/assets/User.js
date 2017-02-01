@@ -7,7 +7,7 @@ var currentBrowser = DKCef_GetCurrentBrowser("CefSDL");
 DKCef_SetUrl("CefSDL", url, currentBrowser);
 DKCef_SetFocus("CefSDL");
 
-DKCreate("DKDebug/DKDebug.js");
+//DKCreate("DKDebug/DKDebug.js");
 
 DKAddEvent("GLOBAL", "resize", User_OnEvent);
 
