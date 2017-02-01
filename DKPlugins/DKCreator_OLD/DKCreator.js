@@ -57,7 +57,7 @@ function DKCreator_OnEvent(event)
 	DKLog("DKCreator_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"spin")){
-		DK_TestCrash();
+		DK_Crash();
 	}
 	if(DK_Id(event,"logo") && DK_Type(event,"mouseover")){
 		DKLog("hover logo \n", DKINFO);

@@ -23,7 +23,7 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_RightClick(){DKLog("DK_RightClick(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_SetCursorPos(){ DKLog("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DKHook_GetWindows(){DKLog("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_TestCrash(){DKLog("DK_TestCrash(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+	function DK_Crash(){DKLog("DK_Crash(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_LogGuiConsole(){DKLog("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_GetScreenWidth(){DKLog("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }

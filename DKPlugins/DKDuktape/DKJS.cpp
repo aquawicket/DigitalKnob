@@ -104,7 +104,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Sleep", DKJS::Sleep, 1);
 	DKDuktape::AttachFunction("DK_StrokeKey", DKJS::StrokeKey, 1);
 	DKDuktape::AttachFunction("DK_System", DKJS::System, 1);
-	DKDuktape::AttachFunction("DK_TestCrash", DKJS::TestCrash, 0);
+	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash, 0);
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type, 2);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value, 2);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage, 2);
@@ -697,7 +697,7 @@ int DKJS::GetData(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::TestCrash(duk_context* ctx)
+int DKJS::Crash(duk_context* ctx)
 {
 #if !defined(WIN32)
 	raise(SIGSEGV);

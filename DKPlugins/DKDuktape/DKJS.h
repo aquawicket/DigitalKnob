@@ -75,7 +75,7 @@ public:
 	static int Sleep(duk_context* ctx);
 	static int StrokeKey(duk_context* ctx);
 	static int System(duk_context* ctx);
-	static int TestCrash(duk_context* ctx);
+	static int Crash(duk_context* ctx);
 	static int Type(duk_context* ctx);
 	static int Value(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);	
