@@ -257,7 +257,7 @@ FOREACH(plugin ${DKPLUGS})
 		INCLUDE(${PATHTOPLUGIN}/DKCMake.txt) ##run it again to copy any .exe and .dll files. 
 	ENDIF()
 	
-	##NOTE - can this work inside the IF - END group above?..  please test
+	##NOTE - can this work inside the IF()/END() group above?..  please test
 	IF(ANDROID_LIBMK)
 		DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS})
 		FILE(MAKE_DIRECTORY ${CURRENT_DIR})
