@@ -17,7 +17,10 @@ void DKThreadPool::Init()
 ////////////////////////
 void DKThreadPool::End()
 {
-	dkThreadPool->clear();
+	active = false;
+	dkThreadPool = NULL;
+	delete dkThreadPool;
+	//dkThreadPool->clear();
 }
 
 /////////////////////////////////////////////////////////////////////////////

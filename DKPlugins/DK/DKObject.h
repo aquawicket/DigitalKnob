@@ -53,6 +53,7 @@ public:
     {
 		DKLog("DKObject::Singleton()\n", DKDEBUG);
 		singleton = true;
+		instances.clear();
 	}
 
 	////////////////////////////////////////
@@ -184,9 +185,10 @@ public:
 
 	static int instance_count;
 private:
+	static std::vector<T*> instances;
 	static char* classname;
     static bool singleton;
-	static std::vector<T*> instances;
+	
 };
 
 template<class T, class R>	char* DKBaseT<T,R>::classname;

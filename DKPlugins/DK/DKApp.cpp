@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
 	dkapp.Loop();
-	log_gui_console = false;
+	//log_gui_console = false;
 
 #else
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
@@ -157,9 +157,14 @@ void DKApp::DoFrame()
 //////////////////
 void DKApp::Exit()
 {
-	DKLog("DKApp::Exit()\n", DKDEBUG);
-	
+	DKLog("DKApp::Exit(): \n", DKINFO);
 	active = false;
+
+	if(GetCurrentThreadId() != DKUtil::mainThreadId){
+		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKERROR);
+		return; 
+	}
+
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
@@ -185,7 +190,7 @@ void DKApp::SetFramerate(int fps)
 bool WINAPI DKApp::ConsoleHandler(DWORD type)
 {
 	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
-	switch (type){
+	switch(type){
 		case CTRL_CLOSE_EVENT:
 			DKApp::Exit();
 			return(true);
