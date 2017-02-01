@@ -90,7 +90,6 @@ int main(int argc, char **argv)
 	dkapp.Init();
 	dkapp.Loop();
 	dkapp.Exit();
-	//log_gui_console = false;
 
 #else
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
@@ -161,14 +160,13 @@ void DKApp::Exit()
 	DKLog("DKApp::Exit(): \n", DKINFO);
 	active = false;
 
-	if(GetCurrentThreadId() != DKUtil::mainThreadId){
-		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKERROR);
-		return; 
-	}
-
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
+
+	if(GetCurrentThreadId() != DKUtil::mainThreadId){
+		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
+	}
 
 	DKClass::CloseAll();
 	exit(0);
