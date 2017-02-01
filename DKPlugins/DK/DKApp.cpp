@@ -89,6 +89,7 @@ int main(int argc, char **argv)
 	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
 	dkapp.Loop();
+	dkapp.Exit();
 	//log_gui_console = false;
 
 #else
@@ -137,7 +138,7 @@ void DKApp::DoFrame()
 	now = DKUtil::GetTicks();
 	double delta = now - lastFrame;
 	lastFrame = now;
-	if (delta < _fps){  //FIXME -fps does not reflet with this math. 
+	if (delta < _fps){  //FIXME -fps does not reflect with this math. 
 		DKUtil::Sleep(DKUtil::Round(_fps - delta));
 	}
 
@@ -168,6 +169,7 @@ void DKApp::Exit()
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
+
 	DKClass::CloseAll();
 	exit(0);
 }
@@ -193,7 +195,7 @@ bool WINAPI DKApp::ConsoleHandler(DWORD type)
 	switch(type){
 		case CTRL_CLOSE_EVENT:
 			DKApp::Exit();
-			return(true);
+			return true;
 	}
 	return false;
 }
