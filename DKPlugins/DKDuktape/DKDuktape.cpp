@@ -160,7 +160,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 	}
 	
 	if(duk_peval_file(ctx, path.c_str()) != 0){
-		DKLog("Script error: "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
+		DKLog(path+" "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
 		return false;
     }
     duk_pop(ctx);  /* ignore result ?? */
