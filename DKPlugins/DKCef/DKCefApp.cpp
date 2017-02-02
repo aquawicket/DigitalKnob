@@ -3,12 +3,12 @@
 #include "DKFile.h"
 
 CefRefPtr<CefV8Value> DKCefApp::object = NULL;
-CefRefPtr<MyV8Handler> DKCefApp::handler = NULL;
+CefRefPtr<DKCefV8Handler> DKCefApp::handler = NULL;
 
 #ifdef MAC
 std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > MyV8Handler::functions;
 #else
-std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> MyV8Handler::functions;
+std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKCefV8Handler::functions;
 #endif
 
 

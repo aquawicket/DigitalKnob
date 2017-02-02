@@ -8,13 +8,13 @@ typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
 
-///////////////////////////////////////
-class MyV8Handler : public CefV8Handler
+//////////////////////////////////////////
+class DKCefV8Handler : public CefV8Handler
 {
 public:
-	MyV8Handler()
+	DKCefV8Handler()
 	{
-		DKLog("MyV8Handler::MyV8Handler()\n",DKDEBUG);
+		DKLog("DKCefV8Handler::DKCefV8Handler()\n",DKDEBUG);
 	}
 
 #ifdef MAC
@@ -26,19 +26,19 @@ public:
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {
-		DKLog("MyV8Handler::Execute()\n", DKDEBUG);
+		DKLog("DKCefV8Handler::Execute()\n", DKDEBUG);
 		if(!functions[name]) {
-			DKLog("MyV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
+			DKLog("DKCefV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
 			return false;
 		}
 		if(!functions[name](arguments, retval)){
-			DKLog("MyV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
+			DKLog("DKCefV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
 			return false;
 		}
 		return true;
 	}
 
-	IMPLEMENT_REFCOUNTING(MyV8Handler);
+	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 public:
 	DKCefApp(){}
 
-	static CefRefPtr<MyV8Handler> handler;
+	static CefRefPtr<DKCefV8Handler> handler;
 	static CefRefPtr<CefV8Value> object;
 
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
@@ -73,7 +73,7 @@ public:
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
 
-		handler = new MyV8Handler();	
+		handler = new DKCefV8Handler();	
 		DKCreate("DKCefV8");
 	}
 
