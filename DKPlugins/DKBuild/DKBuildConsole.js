@@ -199,20 +199,26 @@ function DKBuildConsole_Process()
 	while(OS == ""){
 		DKBuildConsole_SelectOs();
 	}
-	DKLog("\n ** Current OS "+OS+"\n", DKINFO);
+	DKLog("########################### \n", DKINFO);
+	DKLog(OS+" -> \n", DKINFO);
+	DKLog("########################### \n\n", DKINFO);
 
 	DKBuild_GetAppList();
 	while(APP == ""){
 		DKBuildConsole_SelectApp();
 	}
-	DKLog("\n ** Current APP "+APP+"\n", DKINFO);
+	DKLog("########################### \n", DKINFO);
+	DKLog(OS+" -> "+APP+" -> \n", DKINFO);
+	DKLog("########################### \n\n", DKINFO);
 
 	while(TYPE == ""){
 		DKBuildConsole_SelectType();
 	}
-	DKLog("\n ** Current Build Type "+TYPE+"\n\n", DKINFO);
+	DKLog("########################### \n", DKINFO);
+	DKLog(OS+" -> "+APP+" -> "+TYPE+" \n", DKINFO);
+	DKLog("########################### \n\n", DKINFO);
 
-	DKLog("Press any key to Build ("+APP+" "+OS+" "+TYPE+")\n\n", DKINFO);
+	DKLog("Press any key to Build \n\n", DKINFO);
 	DK_GetKey();
 	
 	DKBuild_DoResults();
