@@ -380,6 +380,24 @@ function DKBuild_GitUpdate()
 	DK_Execute(GIT +" checkout -- .");
 	DK_Execute(GIT +" pull origin master");
 	
+	//Multipe user folders
+	//MyApps = MyApps.txt w/ [MYGIT] https://github.com/username/MyApps.git etc.
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){
+		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		if(url){
+			//DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt","");
+			//DKLog("folder = "+folder+"\n", DKINFO);
+			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
+			DK_Execute(GIT +" checkout -- .");
+			DK_Execute(GIT +" pull origin master");
+		}
+	}
+	
+	/*
 	var mygit = DKAssets_LocalAssets()+"mysvn.txt";
 	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	if(DKFile_Exists(mygit)){
@@ -389,6 +407,7 @@ function DKBuild_GitUpdate()
 		DK_Execute(GIT +" checkout -- .");
 		DK_Execute(GIT +" pull origin master");
 	}
+	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -407,19 +426,39 @@ function DKBuild_GitCommit()
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
 	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
-	
 	DK_Execute(GIT +" commit -a -m \"commit from git\"");
 	DK_Execute(GIT +" push");
 	
+	//Multipe user folders
+	//MyApps = MyApps.txt w/ [MYGIT] https://github.com/username/MyApps.git etc.
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){
+		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		if(url){
+			//DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt","");
+			//DKLog("folder = "+folder+"\n", DKINFO);
+			DKFile_ChDir(DKPATH+"/"+folder);
+			DK_Execute(GIT +" init");
+			DK_Execute(GIT +" config user.name \"dkuser\"");
+			DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
+			DK_Execute(GIT +" commit -a -m \"commit from git\"");
+			DK_Execute(GIT +" push");
+		}
+	}
+	
+	/*
 	if(DKFile_Exists(DKPATH+"/USER")){
 		DKFile_ChDir(DKPATH+"/USER");
 		DK_Execute(GIT +" init");
 		DK_Execute(GIT +" config user.name \"dkuser\"");
 		DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
-	
 		DK_Execute(GIT +" commit -a -m \"commit from git\"");
 		DK_Execute(GIT +" push");
 	}
+	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
