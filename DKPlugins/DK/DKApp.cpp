@@ -32,22 +32,17 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 #ifndef ANDROID
 int main(int argc, char **argv)
 {
+#if __cplusplus <= 199711L
+	DKLog("C99 \n", DKINFO);
+#else
+	DKLog("C++11 \n", DKINFO);
+#endif
+
 	DKApp::argc = argc;
     DKApp::argv = argv;
-/*
-#ifdef WIN32
-	DKUtil::mainThreadId = GetCurrentThreadId();
-#endif
-#if defined(MAC)
-	DKUtil::mainThreadId = pthread_self();
-#endif
-#if defined(LINUX) || defined (IOS)
-	DKUtil::mainThreadId = (int)pthread_self();
-#endif
-*/
-	//This does what is above.
-	DKUtil::SetMainThreadNow();
 
+	DKUtil::SetMainThreadNow();
+	
 #ifndef IOS
 	DKFile::appfilename = argv[0];
 
