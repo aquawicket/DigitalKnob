@@ -252,6 +252,7 @@ void DKSDLWindow::Init()
 	
 	if(has(gl_vendor, "Microsoft")){
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", sdlwin);
+		DKApp::Exit();
 	}
 #endif
 }
