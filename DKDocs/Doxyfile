@@ -1,12 +1,14 @@
 # Doxyfile 1.8.11
 
 ## ADDED BY Digitalknob
+PROJECT_NUMBER = 02/07/2017
 INPUT += ../DKPlugins/Digitalknob.md
 USE_MDFILE_AS_MAINPAGE = ../DKPlugins/Digitalknob.md
 EXCLUDE = ../DKPlugins/DKDuktape/duktape.cpp \
 		  ../DKPlugins/DKDuktape/c_eventloop.cpp \
 		  ../DKPlugins/DKDuktape/ecma_eventloop.js \
 		  ../DKPlugins/DKXml/pugixml.cpp
+
 		  
 
 # This file describes the settings to be used by the documentation system
@@ -42,12 +44,6 @@ DOXYFILE_ENCODING      = UTF-8
 # The default value is: My Project.
 
 PROJECT_NAME           = DigitalKnob
-
-# The PROJECT_NUMBER tag can be used to enter a project or revision number. This
-# could be handy for archiving the generated documentation or if some version
-# control system is used.
-
-PROJECT_NUMBER         = "0.1 Beta"
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
