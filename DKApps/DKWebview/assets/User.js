@@ -5,12 +5,14 @@ if(DK_GetOS() == "Android"){
 	var USE_Webview = 1;
 }
 
+/*
 if(DK_GetBrowser() == "Rocket"){
 	DKCreate("DKWindow");
 	DKCreate("DKRocket");
 	DKCreate("DKWidget");
-	DKCreate("DKWebview");
 }
+*/
+DKCreate("DKWebview");
 DKCreate("DKDebug/DKDebug.js", function(){});
 
 
