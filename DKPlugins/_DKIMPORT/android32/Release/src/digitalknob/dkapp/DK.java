@@ -38,8 +38,7 @@ public class DK extends Activity
 		instance = this;
 
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
-		
-
+	
 		OpenActivity("SplashActivity");
 
 		Handler handler = new Handler();
