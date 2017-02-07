@@ -47,7 +47,7 @@ public class DK extends Activity
 			public void run(){
 				copyAssets();
 				
-				//if(USE_DKSDLWindow){	
+				//if(USE_DKSDLWindow){	//TODO
 					OpenActivity("SDLActivity");
 				//}
 				//else{
@@ -59,7 +59,7 @@ public class DK extends Activity
 				handler2.postDelayed(new Runnable() {
 					@Override
 					public void run(){
-						//if(USE_DKWebview){
+						//if(USE_DKWebview){  //TODO
 							//OpenActivity("WebviewActivity");
 						//}
 					}
