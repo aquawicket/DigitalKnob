@@ -4,7 +4,12 @@
 INPUT += ../DKPlugins/Digitalknob.md
 USE_MDFILE_AS_MAINPAGE = ../DKPlugins/Digitalknob.md
 EXCLUDE = ../DKPlugins/DKDuktape/duktape.cpp \
+		  ../DKPlugins/DKDuktape/c_eventloop.cpp \
+		  ../DKPlugins/DKDuktape/ecma_eventloop.js \
+		  ../DKPlugins/DKDuktape/poll.h \
+		  ../DKPlugins/DKDuktape/poll.cpp \
 		  ../DKPlugins/DKXml/pugixml.cpp
+		  
 
 # This file describes the settings to be used by the documentation system
 # doxygen (www.doxygen.org) for a project.
