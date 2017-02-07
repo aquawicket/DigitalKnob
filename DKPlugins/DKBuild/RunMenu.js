@@ -86,9 +86,13 @@ function RunMenu_OnEvent(event)
 		}
 	}
 	
+	//TODO
 	if(DK_Id(event, "Generate Docs")){
 		DKLog("Generate Docs: TODO \n", DKDEBUG);
-		//TODO
+		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
+		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
+		var doxy_exe = DKFile_GetShortName(doxy_path);
+		DK_Execute(doxy_exe+" "+doxy_file);		
 	}
 	
 	if(DK_Id(event, "Export to Android Studio")){
