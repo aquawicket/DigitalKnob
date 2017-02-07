@@ -48,6 +48,11 @@ function TestRocket_GetDKInfo()
 ///////////////////////////////
 function TestRocket_GetWindowInfo()
 {
-	info += "Window: "+DKWindow_GetWidth()+"x"+DKWindow_GetHeight();
+	info += "Window Position: "+DKWindow_GetX()+"x"+DKWindow_GetX();
 	info += "<br/>";
+	info += "Window Size: "+DKWindow_GetWidth()+"x"+DKWindow_GetHeight();
+	info += "<br/>";
+	info += "Pixel Ratio: "+DKWindow_GetPixelRatio();
+	info += "<br/>";
+	
 }
