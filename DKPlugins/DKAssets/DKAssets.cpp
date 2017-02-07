@@ -64,13 +64,17 @@ void DKAssets::Init()
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_SHOW]", log_show);
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_HIDE]", log_hide);
 
+	DKString threads;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
+	if (same(threads, "ON")) { log_thread = true; }
+	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
 	if(same(lines, "ON")) { log_lines = true; }
 
-	DKString threads;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
-	if (same(threads, "ON")) { log_thread = true; }
+	DKString funcs;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
+	if(same(funcs, "ON")) { log_funcs = true; }
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){

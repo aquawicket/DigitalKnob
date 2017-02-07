@@ -10,8 +10,9 @@ extern bool log_msvc = false;
 extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
-extern bool log_lines = false;
 extern bool log_thread = false;
+extern bool log_lines = false;
+extern bool log_funcs = false;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
 
@@ -33,11 +34,14 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 		if(found != std::string::npos && found < filename.length()){
 			string += filename.substr(found+1);
 		}
+		string += toString(line);
 		string += ":";
-		string += toString(line)+":  ";
-		//string += func;
-		//string += ":  ";
 	}
+	if(log_funcs){
+		string += func;
+		string += ":";
+	}
+	string += "  ";
 	string += text;
 
 	int i=0;
