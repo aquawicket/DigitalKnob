@@ -10,6 +10,7 @@ function RunMenu_Init()
 	DKAddEvent("Rebuild All", "click", RunMenu_OnEvent);
 	DKAddEvent("Copy Assets", "click", RunMenu_OnEvent);
 	DKAddEvent("Run App", "click", RunMenu_OnEvent);
+	DKAddEvent("Generate Docs", "click", RunMenu_OnEvent);
 	DKAddEvent("Export to Android Studio", "click", RunMenu_OnEvent);
 }
 
@@ -83,6 +84,11 @@ function RunMenu_OnEvent(event)
 				DKLog("TODO: Run linux apps from Linux \n", DKDEBUG);
 			}
 		}
+	}
+	
+	if(DK_Id(event, "Generate Docs")){
+		DKLog("Generate Docs: TODO \n", DKDEBUG);
+		//TODO
 	}
 	
 	if(DK_Id(event, "Export to Android Studio")){
