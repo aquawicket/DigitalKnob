@@ -14,43 +14,77 @@ public:
 	void Init();
 	void End();
 
-	///
-	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
+	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
 	static int TestInt(int input);
 	
-	///
-	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestString") and recieve a return value.
+	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestString") and recieve a return value.
 	static DKString TestString(DKString input);
 	
-	///
 	///Call DKClass::CallFunc("DKSDLWindow::TestReturnInt") and recieve a return value.
 	static int TestReturnInt();
 	
-	///
 	///Call DKClass::CallFunc("DKSDLWindow::TestReturnString") and recieve a return value.
 	static DKString TestReturnString();
 
+	///Get the Left position of the window
 	static int GetX();
+	
+	///Get the Top position of the window
 	static int GetY();
+	
+	///Get the Width of the window
 	static int GetWidth();
+	
+	///Get the Height of the window
 	static int GetHeight();
+	
+	///Set the Left position of the window
 	static void SetX(int x);
+	
+	///Set the Top position of the window
 	static void SetY(int y);
+	
+	///Set the Width of the window
 	static void SetWidth(int w);
+	
+	///Set the Height of the window
 	static void SetHeight(int h);
+	
+	///Get the Pixel Ratio of the window
 	static float GetPixelRatio();
+	
+	///Get the Fullscreen status of the window 
 	static bool IsFullscreen();
+	
+	///Set the Window to Fullscreen
 	static void Fullscreen();
+	
+	///Set the Window to Windowed mode
 	static void Windowed();
+	
+	///Minimize the window
 	static void Minimize();
+	
+	///Restore the window
 	static void Restore();
+	
+	///Get the Visible status of the window 
 	static bool IsVisible();
+	
+	///Hide the window
 	static void Hide();
+	
+	///Show the window
 	static void Show();
+	
+	///Get the Mouse x postion in the window
 	static int GetMouseX();
+	
+	///Get the Mouse x postion in the window
 	static int GetMouseY();
 
-	bool MessageBox(void* input, void* output);
+	///Display a message box
+	static bool MessageBox(void* input, void* output);
 
 #ifdef WIN32
 	static HWND GetHwnd();
