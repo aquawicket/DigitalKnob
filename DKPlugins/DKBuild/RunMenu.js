@@ -92,6 +92,7 @@ function RunMenu_OnEvent(event)
 		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
 		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
 		var doxy_exe = DKFile_GetShortName(doxy_path);
+		DKFile_ChDir(DKPATH+"/DKDocs/"); 
 		DK_Execute(doxy_exe+" "+doxy_file);		
 	}
 	
