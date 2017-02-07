@@ -1,7 +1,10 @@
 # Doxyfile 1.8.11
 
-INPUT += Digitalknob.md
-USE_MDFILE_AS_MAINPAGE = Digitalknob.md
+## ADDED BY Digitalknob
+INPUT += ../DKPlugins/README.md
+USE_MDFILE_AS_MAINPAGE = ../DKPlugins/README.md
+EXCLUDE = ../DKPlugins/DKDuktape/duktape.cpp \
+		  ../DKPlugins/DKXml/pugixml.cpp
 
 # This file describes the settings to be used by the documentation system
 # doxygen (www.doxygen.org) for a project.
@@ -866,7 +869,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = 
+
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
