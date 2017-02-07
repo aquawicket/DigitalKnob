@@ -6,3 +6,5 @@ IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${DKONLINE}/Tools/doxygen-1.8.11-setup.exe)
 ENDIF()
+
+DKSET(DOXY_EXE C:/Progra~1/doxygen/doxygen.exe)
