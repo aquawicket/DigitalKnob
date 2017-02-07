@@ -15,6 +15,7 @@ class DKUtil
 {
 public:
 	static bool SetMainThreadNow(); //ONLY SET THIS FROM THE MAIN THREAD ONCE
+	static bool GetThreadId(int& id);
 	static bool SetClipboard(const DKString& text);
 	static bool GetClipboard(DKString& text);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);

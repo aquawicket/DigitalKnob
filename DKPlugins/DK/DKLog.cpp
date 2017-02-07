@@ -11,6 +11,7 @@ extern bool log_xcode = false;
 extern bool log_file = true;
 extern bool log_gui_console = true;
 extern bool log_lines = false;
+extern bool log_thread = false;
 extern DKString log_show = ""; //comma seperated 
 extern DKString log_hide = ""; //comma seperated 
 
@@ -19,8 +20,14 @@ extern DKString log_hide = ""; //comma seperated
 void Log(const DKString& text, const int lvl, const char* file, int line, const char* func)
 {
 	DKString string;
+	if(log_thread){
+		int threadId;
+		DKUtil::GetThreadId(threadId);
+		string += toString(threadId);
+		string += ":";
+	}
 	if(log_lines){
-		string = file;
+		string += file;
 		unsigned found = string.find_last_of("/\\");
 		if(found != std::string::npos && found < string.length()){
 			string = string.substr(found+1);

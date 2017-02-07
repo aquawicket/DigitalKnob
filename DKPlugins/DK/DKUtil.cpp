@@ -55,6 +55,24 @@ bool DKUtil::SetMainThreadNow()
 	return false;
 }
 
+/////////////////////////////////
+bool DKUtil::GetThreadId(int& id)
+{
+#ifdef WIN32
+	id = GetCurrentThreadId();
+	return true;
+#endif
+#if defined(MAC)
+	id = (int)pthread_self();
+	return true;
+#endif
+#if defined(LINUX) || defined (IOS)
+	id = (int)pthread_self();
+	return true;
+#endif
+	return false;
+}
+
 ///////////////////////////////////////////////
 bool DKUtil::SetClipboard(const DKString& text)
 {
