@@ -32,7 +32,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 #ifndef ANDROID
 int main(int argc, char **argv)
 {
-#if  <= 199711L
+#if __cplusplus <= 199711L
 	DKLog("C++98 \n", DKINFO);
 #else
 	DKLog("C++11 \n", DKINFO);
