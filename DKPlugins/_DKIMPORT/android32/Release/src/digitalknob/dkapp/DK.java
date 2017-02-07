@@ -38,7 +38,7 @@ public class DK extends Activity
 		instance = this;
 
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
-		//CallCppFunction("DKAndroid_init");
+		
 
 		OpenActivity("SplashActivity");
 
@@ -47,14 +47,22 @@ public class DK extends Activity
 			@Override
 			public void run(){
 				copyAssets();
-				OpenActivity("SDLActivity");
+				
+				//if(USE_DKSDLWindow){	
+					OpenActivity("SDLActivity");
+				//}
+				//else{
+					//CallCppFunction("DKAndroid_init");
+				}
 				
 				//This gives DK time to register functions for Webview
 				Handler handler2 = new Handler();
 				handler2.postDelayed(new Runnable() {
 					@Override
 					public void run(){
-						//OpenActivity("WebviewActivity");
+						//if(USE_DKWebview){
+							//OpenActivity("WebviewActivity");
+						//}
 					}
 				}, 2000);
 			}
