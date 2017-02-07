@@ -47,7 +47,8 @@ public class DK extends Activity
 			public void run(){
 				copyAssets();
 				
-				//if(USE_DKSDLWindow){	//TODO
+				//TODO: we can check if the plugins is available - DKAvailable(data)
+				//if(USE_DKSDLWindow){	
 					OpenActivity("SDLActivity");
 				//}
 				//else{
@@ -59,7 +60,8 @@ public class DK extends Activity
 				handler2.postDelayed(new Runnable() {
 					@Override
 					public void run(){
-						//if(USE_DKWebview){  //TODO
+						//TODO: we can check if the plugins is available - DKAvailable(data)
+						//if(USE_DKWebview){
 							//OpenActivity("WebviewActivity");
 						//}
 					}
