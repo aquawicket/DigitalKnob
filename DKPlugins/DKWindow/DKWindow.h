@@ -15,7 +15,7 @@ public:
 	void End();
 
 	///
-	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
+	///Test Send a variable through DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
 	static int TestInt(int input);
 	
 	///
