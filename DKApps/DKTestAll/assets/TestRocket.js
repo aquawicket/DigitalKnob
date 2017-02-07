@@ -22,5 +22,5 @@ function TestJavascript_End()
 /////////////////////////////
 function TestRocket_GetInfo()
 {
-	DKWidget_SetInnterHtml("Info", "Test");
+	DKWidget_SetInnerHtml("Info", "Test");
 }

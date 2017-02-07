@@ -1,3 +1,5 @@
+DKCreate("DKDebug/DKDebug.js");
+
 var welcome = "\n";
 welcome = "######################### \n";
 welcome += "####### DKTestAll ####### \n";
