@@ -1,8 +1,8 @@
 # Doxyfile 1.8.11
 
 ## ADDED BY Digitalknob
-INPUT += ../DKPlugins/README.md
-USE_MDFILE_AS_MAINPAGE = ../DKPlugins/README.md
+INPUT += ../DKPlugins/Digitalknob.md
+USE_MDFILE_AS_MAINPAGE = ../DKPlugins/Digitalknob.md
 EXCLUDE = ../DKPlugins/DKDuktape/duktape.cpp \
 		  ../DKPlugins/DKXml/pugixml.cpp
 
