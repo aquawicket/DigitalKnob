@@ -22,5 +22,11 @@ function TestJavascript_End()
 /////////////////////////////
 function TestRocket_GetInfo()
 {
-	DKWidget_SetInnerHtml("Info", "Test");
+	var info = "";
+	info += DK_GetOS();
+	info += "<br/>";
+	info += DK_GetBrowser();
+	
+	
+	DKWidget_SetInnerHtml("Info", info);
 }
