@@ -10,6 +10,7 @@ function TestRocket_Init()
 	
 	TestRocket_GetDKInfo();
 	TestRocket_GetWindowInfo();
+	DKWidget_SetInnerHtml("Info", info);
 }
 
 /////////////////////////////
@@ -42,12 +43,11 @@ function TestRocket_GetDKInfo()
 	//info += "<br/>";
 	//info += "Username: "+DK_GetUsername();
 	info += "<br/>";
-	
-	DKWidget_SetInnerHtml("Info", info);
 }
 
 ///////////////////////////////
 function TestRocket_GetWindowInfo()
 {
-	
+	info += "Window: "+DKWindow_GetWidth()+"x"+DKWindow_GetHeight();
+	info += "<br/>";
 }
