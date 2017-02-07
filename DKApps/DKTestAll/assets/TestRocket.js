@@ -1,4 +1,5 @@
 DKLog("Opening TestRocket.js... \n", DKINFO);
+var info = "";
 
 //////////////////////////
 function TestRocket_Init()
@@ -7,7 +8,8 @@ function TestRocket_Init()
 	DKCreate("DKRocket");
 	DKCreate("TestRocket.html");
 	
-	TestRocket_GetInfo();
+	TestRocket_GetDKInfo();
+	TestRocket_GetWindowInfo();
 }
 
 /////////////////////////////
@@ -19,14 +21,33 @@ function TestJavascript_End()
 	DKClose("TestRocket.html");
 }
 
-/////////////////////////////
-function TestRocket_GetInfo()
+///////////////////////////////
+function TestRocket_GetDKInfo()
 {
-	var info = "";
-	info += DK_GetOS();
+	info += "Date: "+DK_GetDate();
 	info += "<br/>";
-	info += DK_GetBrowser();
-	
+	info += "Time: "+DK_GetTime();
+	info += "<br/>";
+	info += "OS: "+DK_GetOS();
+	info += "<br/>";
+	info += "Browser: "+DK_GetBrowser();
+	info += "<br/>";
+	info += "Framerate: "+DK_GetFramerate();
+	info += "<br/>";
+	info += "JS: "+DK_GetJavascript();
+	info += "<br/>";
+	info += "Local IP: "+DK_GetLocalIP();
+	info += "<br/>";
+	info += "Screen: "+DK_GetScreenWidth()+"x"+DK_GetScreenHeight();
+	//info += "<br/>";
+	//info += "Username: "+DK_GetUsername();
+	info += "<br/>";
 	
 	DKWidget_SetInnerHtml("Info", info);
+}
+
+///////////////////////////////
+function TestRocket_GetWindowInfo()
+{
+	
 }
