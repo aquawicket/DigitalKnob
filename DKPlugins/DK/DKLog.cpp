@@ -23,14 +23,15 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	if(log_thread){
 		int threadId;
 		DKUtil::GetThreadId(threadId);
+		string += "TID:";
 		string += toString(threadId);
 		string += ":";
 	}
 	if(log_lines){
-		string += file;
-		unsigned found = string.find_last_of("/\\");
-		if(found != std::string::npos && found < string.length()){
-			string = string.substr(found+1);
+		DKString filename = file;
+		unsigned found = filename.find_last_of("/\\");
+		if(found != std::string::npos && found < filename.length()){
+			string += filename.substr(found+1);
 		}
 		string += ":";
 		string += toString(line)+":  ";
