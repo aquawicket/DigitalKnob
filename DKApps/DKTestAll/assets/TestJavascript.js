@@ -9,9 +9,9 @@ function TestJavascript_Init()
 	var c = a + b;
 	DKLog(a+" + "+b+" = "+c+" \n", DKINFO);
 	
-	DKLog("Press any key to test keyboard \n", DKINFO);
-	var key = DK_GetKey();
-	DKLog("Key pressed = "+key+" \n", DKINFO);
+	//DKLog("Press any key to test keyboard \n", DKINFO);
+	//var key = DK_GetKey();
+	//DKLog("Key pressed = "+key+" \n", DKINFO);
 }
 
 /////////////////////////////
