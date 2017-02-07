@@ -34,6 +34,7 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 		if(found != std::string::npos && found < filename.length()){
 			string += filename.substr(found+1);
 		}
+		string += ":";
 		string += toString(line);
 		string += ":";
 	}
