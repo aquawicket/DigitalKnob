@@ -5,7 +5,7 @@ function TestWindow_Init()
 {
 	DKLog("Running TestWindow_Init() \n", DKINFO);
 	DKCreate("DKWindow"); //create an sdl window
-	DKWindow_MessageBox("Test Message Box");
+	//DKWindow_MessageBox("Test Message Box");
 }
 
 /////////////////////////////
