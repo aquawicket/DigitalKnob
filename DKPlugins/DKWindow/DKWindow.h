@@ -84,7 +84,7 @@ public:
 	static int GetMouseY();
 
 	///Display a message box
-	static bool MessageBox(void* input, void* output);
+	bool MessageBox(void* input, void* output);
 
 #ifdef WIN32
 	static HWND GetHwnd();
