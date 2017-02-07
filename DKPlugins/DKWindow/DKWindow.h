@@ -14,7 +14,10 @@ public:
 	void Init();
 	void End();
 
+	///
+	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
 	static int TestInt(int input);
+	
 	static DKString TestString(DKString input);
 	static int TestReturnInt();
 	static DKString TestReturnString();

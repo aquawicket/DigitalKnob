@@ -29,8 +29,9 @@ void DKWindow::End()
 }
 
 
-
-////////////////////////////////
+///
+///  If DKSDLWindow::TestInt() is registered, it will alter the variable and send it back.
+///  see: DKPlugins/DKSDLWindow.h
 int DKWindow::TestInt(int input)
 {
 	int output;
