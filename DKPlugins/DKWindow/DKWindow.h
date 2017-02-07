@@ -18,8 +18,16 @@ public:
 	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
 	static int TestInt(int input);
 	
+	///
+	///Send a variable through DKClass::CallFunc("DKSDLWindow::TestString") and recieve a return value.
 	static DKString TestString(DKString input);
+	
+	///
+	///Call DKClass::CallFunc("DKSDLWindow::TestReturnInt") and recieve a return value.
 	static int TestReturnInt();
+	
+	///
+	///Call DKClass::CallFunc("DKSDLWindow::TestReturnString") and recieve a return value.
 	static DKString TestReturnString();
 
 	static int GetX();

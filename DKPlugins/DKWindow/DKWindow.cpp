@@ -30,8 +30,8 @@ void DKWindow::End()
 
 
 ///
-///  If DKSDLWindow::TestInt() is registered, it will alter the variable and send it back.
-///  see: DKPlugins/DKSDLWindow.h
+///  If "DKSDLWindow::TestInt()" is a registered function, it will alter the variable and send it back.
+///  \a see: DKPlugins/DKSDLWindow.h
 int DKWindow::TestInt(int input)
 {
 	int output;
@@ -39,7 +39,9 @@ int DKWindow::TestInt(int input)
 	return output;
 }
 
-/////////////////////////////////////////////
+///
+///  If "DKSDLWindow::TestString()" is a registered function, it will alter the variable and send it back.
+///  \a see: DKPlugins/DKSDLWindow.h
 DKString DKWindow::TestString(DKString input)
 {
 	DKString output;;
@@ -47,7 +49,9 @@ DKString DKWindow::TestString(DKString input)
 	return output;
 }
 
-/////////////////////////////
+///
+///  If "DKSDLWindow::TestReturnInt()" is a registered function, it will return a variable.
+///  \a see: DKPlugins/DKSDLWindow.h
 int DKWindow::TestReturnInt()
 {
 	int output;
@@ -55,7 +59,9 @@ int DKWindow::TestReturnInt()
 	return output;
 }
 
-/////////////////////////////////////
+///
+///  If "DKSDLWindow::TestReturnString()" is a registered function, it will return a variable.
+///  \a see: DKPlugins/DKSDLWindow.h
 DKString DKWindow::TestReturnString()
 {
 	DKString output;
