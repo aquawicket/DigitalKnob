@@ -209,9 +209,10 @@ void DKSDLWindow::Init()
 #if !defined(ANDROID) && !defined(IOS)
 	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
 	SDL_GL_MakeCurrent(sdlwin, glcontext);
-	gl_major_version = (char*)glGetString(GL_MAJOR_VERSION);
-	gl_minor_version = (char*)glGetString(GL_MINOR_VERSION);
 	gl_version = (char*)glGetString(GL_VERSION);
+	// these are only available with OpenGL 3.0+
+	// gl_major_version = (char*)glGetString(GL_MAJOR_VERSION);
+	// gl_minor_version = (char*)glGetString(GL_MINOR_VERSION);
 	gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
 	gl_renderer = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
 	//gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
