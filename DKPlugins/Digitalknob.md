@@ -1,5 +1,5 @@
 Digitalknob is Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br><br>
-"It should look and act the same on every system, including browsers." ~DK<br><br>
+"It should look and act the same on every system, including browsers."
 
 ###Supported Platforms
 Windows 32 <br>
