@@ -218,6 +218,8 @@ void DKSDLWindow::Init()
 	DKLog("##############################\n", DKINFO);
 	DKLog("##### Window Information #####\n", DKINFO);
 	DKLog("##############################\n", DKINFO);
+	DKLog("GL_MAJOR_VERSION = "+gl_major_version+"\n", DKINFO);
+	DKLog("GL_MINOR_VERSION = "+gl_minor_version+"\n", DKINFO);
 	DKLog("GL_VERSION = "+gl_version+"\n", DKINFO);
 	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
 	DKLog("GL_RENDERER = "+gl_renderer+"\n", DKINFO);

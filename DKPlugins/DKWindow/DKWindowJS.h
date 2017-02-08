@@ -16,6 +16,12 @@ public:
 	static int TestReturnInt(duk_context* ctx);
 	static int TestReturnString(duk_context* ctx);
 
+	//static int GetGLMajorVersion(duk_context* ctx);
+	//static int GetGLMinorVersion(duk_context* ctx);
+	//static int GetGLVersion(duk_context* ctx);
+	//static int GetGLVendor(duk_context* ctx);
+	//static int GetGLRenderer(duk_context* ctx);
+
 	static int Fullscreen(duk_context* ctx);
 	static int GetHeight(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);
@@ -36,6 +42,7 @@ public:
 	static int Show(duk_context* ctx);
 	static int Windowed(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);
+
 };
 
 

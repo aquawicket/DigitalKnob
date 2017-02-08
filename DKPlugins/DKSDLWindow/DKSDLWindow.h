@@ -52,6 +52,8 @@ public:
 	SDL_Window* sdlwin;
 	SDL_Renderer* sdlren;
 	//SDL_GLContext sldcontext;
+	DKString gl_major_version;
+	DKString gl_minor_version;
 	DKString gl_version;
 	DKString gl_vendor;
 	DKString gl_renderer;
