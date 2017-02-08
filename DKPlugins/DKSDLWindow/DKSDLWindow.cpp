@@ -211,6 +211,7 @@ void DKSDLWindow::Init()
 	SDL_GL_MakeCurrent(sdlwin, glcontext);
 	gl_version = (char*)glGetString(GL_VERSION);
 	// these are only available with OpenGL 3.0+
+	// https://www.khronos.org/opengl/wiki/Get_Context_Info
 	// gl_major_version = (char*)glGetString(GL_MAJOR_VERSION);
 	// gl_minor_version = (char*)glGetString(GL_MINOR_VERSION);
 	gl_vendor = reinterpret_cast<const char*>(glGetString(GL_VENDOR));
