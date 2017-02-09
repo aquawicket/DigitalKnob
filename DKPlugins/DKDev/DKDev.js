@@ -82,7 +82,7 @@ function DKDev_OnEvent(event)
 	
 	//TODO
 	if(DK_Type(event, "move")){
-		DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
+		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
 		if(target == "DKResizeImg"){ 
 			DKDev_Resize(stored_element);
 			if(DK_GetBrowser() != "Rocket"){
@@ -181,8 +181,10 @@ function DKDev_CreateBox()
 	var resizeImg = DKWidget_CreateElement(box, "img", "DKResizeImg");
 	DKWidget_SetAttribute(resizeImg, "src", "DKDev/resize2.png");
 	DKWidget_SetProperty(resizeImg, "position", "absolute");
-	DKWidget_SetProperty(resizeImg, "right", "-9rem");
-	DKWidget_SetProperty(resizeImg, "bottom", "-9rem");
+	//DKWidget_SetProperty(resizeImg, "right", "-9rem");
+	//DKWidget_SetProperty(resizeImg, "bottom", "-9rem");
+	//DKWidget_SetProperty(resizeImg, "left", "0rem");
+	//DKWidget_SetProperty(resizeImg, "top", "0rem");
 
 	//resize handler
 	//var resize = DKWidget_CreateElement(resizeImg, "handle", "DKResize");
@@ -247,6 +249,8 @@ function DKDev_ApplyBox(id)
 	
 	//if(DKWidget_HasProperty(id, "width") || document.getElementById(id).tagName.indexOf("img") > -1){
 		DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
+		DKWidget_SetProperty("DKResizeImg", "left", String(DKWidget_GetOffsetWidth(id))+"rem");
+	
 	//}
 	//else{
 	//	DKWidget_RemoveProperty("DKDev_Box", "width");
@@ -254,6 +258,7 @@ function DKDev_ApplyBox(id)
 	
 	//if(DKWidget_HasProperty(id, "height") || document.getElementById(id).tagName.indexOf("img") > -1){
 		DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
+		DKWidget_SetProperty("DKResizeImg", "top", String(DKWidget_GetOffsetHeight(id))+"rem");
 	//}
 	//else{
 	//	DKWidget_RemoveProperty("DKDev_Box", "height");
@@ -263,14 +268,18 @@ function DKDev_ApplyBox(id)
 /////////////////////////
 function DKDev_Resize(id)
 {
-	DKLog("DKDev_Resize("+id+")\n", DKINFO);
-	DKLog("DKResizeImg: right = "+DKWidget_GetProperty("DKResizeImg", "right")+"\n", DKINFO);
+	//DKLog("DKDev_Resize("+id+")\n", DKINFO);
+	//DKLog("DKResizeImg: left = "+DKWidget_GetProperty("DKResizeImg", "left")+"\n", DKINFO);
+	//DKLog("DKResizeImg: top = "+DKWidget_GetProperty("DKResizeImg", "top")+"\n", DKINFO);
+	DKWidget_SetProperty(id, "width", DKWidget_GetProperty("DKResizeImg", "left"));
+	DKWidget_SetProperty(id, "height", DKWidget_GetProperty("DKResizeImg", "top"));
+	DKDev_ApplyBox(id);
 }
 
 ////////////////////////////////
 function DKDev_SelectElement(id)
 {
-	DKLog("DKDev_SelectElement("+id+") \n", DKINFO);
+	//DKLog("DKDev_SelectElement("+id+") \n", DKINFO);
 	
 	if(id.indexOf("body") > -1){ 
 		//stored_element = "";
