@@ -82,7 +82,14 @@ function DKDev_OnEvent(event)
 	
 	//TODO
 	if(DK_Type(event, "move")){
-		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
+		DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
+		if(target == "DKResizeImg"){ 
+			DKDev_Resize(stored_element);
+			if(DK_GetBrowser() != "Rocket"){
+				StopPropagation(event);
+			}
+			return; 
+		}
 		DKDev_ApplyBox(DK_GetId(event));
 		if(DK_GetBrowser() != "Rocket"){
 			StopPropagation(event);
@@ -93,6 +100,12 @@ function DKDev_OnEvent(event)
 		var target = DK_GetId(event);
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
+		if(target == "DKResizeImg"){ 
+			if(DK_GetBrowser() != "Rocket"){
+				StopPropagation(event);
+			}
+			return; 
+		}
 		DKDev_SelectElement(target);
 		if(DK_GetBrowser() != "Rocket"){
 			StopPropagation(event);
@@ -178,7 +191,7 @@ function DKDev_CreateBox()
 	//DKWidget_SetProperty(resize, "height", "100%");
 	DKWidget_AddDragHandle(resizeImg, resizeImg);
 	//DKAddEvent(resizeImg, "contextmenu", DKDev_OnEvent);
-	//DKAddEvent(resizeImg, "mousedown", DKDev_OnEvent);
+	DKAddEvent(resizeImg, "mousedown", DKDev_OnEvent);
 	DKAddEvent(resizeImg, "move", DKDev_OnEvent); //TODO for libRocket
 }
 
@@ -245,6 +258,13 @@ function DKDev_ApplyBox(id)
 	//else{
 	//	DKWidget_RemoveProperty("DKDev_Box", "height");
 	//}
+}
+
+/////////////////////////
+function DKDev_Resize(id)
+{
+	DKLog("DKDev_Resize("+id+")\n", DKINFO);
+	DKLog("DKResizeImg: right = "+DKWidget_GetProperty("DKResizeImg", "right")+"\n", DKINFO);
 }
 
 ////////////////////////////////
