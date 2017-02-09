@@ -164,7 +164,6 @@ function DKDev_CreateBox()
 	DKWidget_SetProperty(box, "border-width", "1rem");
 	DKWidget_SetProperty(box, "pointer-events", "none");
 
-	/*
 	//resize dot
 	var resizeImg = DKWidget_CreateElement(box, "img", "DKResizeImg");
 	DKWidget_SetAttribute(resizeImg, "src", "DKDev/resize2.png");
@@ -173,11 +172,14 @@ function DKDev_CreateBox()
 	DKWidget_SetProperty(resizeImg, "bottom", "-9rem");
 
 	//resize handler
-	var resize = DKWidget_CreateElement(resizeImg, "handle", "DKResize");
-	DKWidget_SetProperty(resize, "position", "absolute");
-	DKWidget_SetProperty(resize, "width", "100%");
-	DKWidget_SetProperty(resize, "height", "100%");
-	*/
+	//var resize = DKWidget_CreateElement(resizeImg, "handle", "DKResize");
+	//DKWidget_SetProperty(resize, "position", "absolute");
+	//DKWidget_SetProperty(resize, "width", "100%");
+	//DKWidget_SetProperty(resize, "height", "100%");
+	DKWidget_AddDragHandle(resizeImg, resizeImg);
+	//DKAddEvent(resizeImg, "contextmenu", DKDev_OnEvent);
+	//DKAddEvent(resizeImg, "mousedown", DKDev_OnEvent);
+	DKAddEvent(resizeImg, "move", DKDev_OnEvent); //TODO for libRocket
 }
 
 ////////////////////////
@@ -190,7 +192,8 @@ function DKDev_HideBox()
 function DKDev_ApplyBox(id)
 {
 	//DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
-
+	if(id.indexOf("body") > -1){ return; }
+	
 	var parentid = DKWidget_GetParent(id);
 	DKWidget_AppendChild(parentid, "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
@@ -249,7 +252,13 @@ function DKDev_SelectElement(id)
 {
 	DKLog("DKDev_SelectElement("+id+") \n", DKINFO);
 	
-	stored_element = id;
+	if(id.indexOf("body") > -1){ 
+		//stored_element = "";
+	}
+	else{
+		stored_element = id;
+	}
+	
 	if(stored_element){
 		DKDev_ApplyBox(stored_element);
 	}
@@ -286,11 +295,12 @@ function DKDev_AddDragHandles(id)
 			DKLog("DKWidget_AddDragHandle("+list[t]+","+list[t]+") \n", DKDEBUG);
 			DKAddEvent(list[t], "contextmenu", DKDev_OnEvent);
 			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
-
-			DKAddEvent(list[t], "move", DKDev_OnEvent); //TODO
+			DKAddEvent(list[t], "move", DKDev_OnEvent); //TODO for libRocket
 		}		
 	}
 	
+	//DKAddEvent(id, "mousedown", DKDev_OnEvent);
+	//DKAddEvent(id, "contextmenu", DKDev_OnEvent);
 	return true;
 }
 
@@ -422,13 +432,13 @@ function DKDev_Paste()
 ////////////////////////
 function DKDev_NewPage()
 {
-	DKLog("DKDev_NewPage() \n", DKDEBUG);
+	DKLog("DKDev_NewPage("+stored_element+") \n", DKINFO);
 	
 	//var id = DKWidget_GetAvailableId("NewWidget.html");
 	DKCreate(".html,"+stored_element, function(){
+		DKFrame_Widget("New.html");
 		DKDev_AddDragHandles("New.html");
 		//DKDev_SelectElement("New.html");
-		DKFrame_Widget("New.html");
 	});
 	return true;
 }
@@ -437,6 +447,7 @@ function DKDev_NewPage()
 ///////////////////////
 function DKDev_NewDiv()
 {
+	DKLog("DKDev_NewDiv("+stored_element+") \n", DKINFO);
 	var element = DKWidget_CreateElement(stored_element, "div", "Div");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
