@@ -33,9 +33,9 @@ function TestRocket_GetDKInfo()
 	info += "<br/>";
 	info += "Browser: "+DK_GetBrowser();
 	info += "<br/>";
-	info += "Framerate: "+DK_GetFramerate();
-	info += "<br/>";
 	info += "JS: "+DK_GetJavascript();
+	info += "<br/>";
+	info += "Framerate: "+DK_GetFramerate();
 	info += "<br/>";
 	info += "Local IP: "+DK_GetLocalIP();
 	info += "<br/>";

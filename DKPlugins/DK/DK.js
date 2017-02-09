@@ -427,15 +427,11 @@ function DKAddEvent(id, type, Function)
 	
 	if(element){
 		//DKLog("addEvent("+id+","+type+","+Function.name+") \n", DKDEBUG);
-		//addEvent(element, type, function(event){ Function(event); StopPropagation(event); });
 		addEvent(element, type, Function);
 	}
 	
 	//add event to array
 	//DKLog("events.length="+events.length+"\n", DKDEBUG);
-	//events.push(id);
-	//events.push(type);
-	//events.push(Function);
 	events[events.length] = id;
 	events[events.length] = type;
 	events[events.length] = Function;
@@ -472,7 +468,6 @@ function DKRemoveEvent(id, type, Function)
 				if(events[i+2] == Function){
 					events.splice(i, 3);
 					if(element){
-						//removeEvent(element, type, function(event){ Function(event); });
 						removeEvent(element, type, Function);
 						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n", DKDEBUG);
 					}

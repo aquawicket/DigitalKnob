@@ -1,3 +1,5 @@
+var USE_CEF = 0;
+
 DKCreate("DKDebug/DKDebug.js");
 
 var welcome = "\n";

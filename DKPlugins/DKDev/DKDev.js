@@ -68,7 +68,7 @@ function DKDev_Ignore(id)
 /////////////////////////////
 function DKDev_OnEvent(event)
 {
-	DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	//DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
 	
 	if(devmode == false){ return; }
 	
@@ -79,6 +79,11 @@ function DKDev_OnEvent(event)
 		DKDev_CreateBox();
 		DKDev_HideBox();
 	}
+	
+	//TODO
+	//if(DK_Type(event, "drag")){
+	//	DKLog("DKDev_OnEvent(): drag event \n", DKINFO);
+	//}
 	
 	if(DK_Type(event, "mousedown")){
 		var target = DK_GetId(event);
@@ -277,7 +282,9 @@ function DKDev_AddDragHandles(id)
 			DKLog("DKWidget_AddDragHandle("+list[t]+","+list[t]+") \n", DKDEBUG);
 			DKAddEvent(list[t], "contextmenu", DKDev_OnEvent);
 			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
-		}
+
+			//DKAddEvent(list[t], "drag", DKDev_OnEvent); //TODO
+		}		
 	}
 	
 	return true;
