@@ -81,9 +81,13 @@ function DKDev_OnEvent(event)
 	}
 	
 	//TODO
-	//if(DK_Type(event, "drag")){
-	//	DKLog("DKDev_OnEvent(): drag event \n", DKINFO);
-	//}
+	if(DK_Type(event, "move")){
+		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
+		DKDev_ApplyBox(DK_GetId(event));
+		if(DK_GetBrowser() != "Rocket"){
+			StopPropagation(event);
+		}
+	}
 	
 	if(DK_Type(event, "mousedown")){
 		var target = DK_GetId(event);
@@ -185,7 +189,7 @@ function DKDev_HideBox()
 ///////////////////////////
 function DKDev_ApplyBox(id)
 {
-	DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
+	//DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
 
 	var parentid = DKWidget_GetParent(id);
 	DKWidget_AppendChild(parentid, "DKDev_Box");
@@ -196,7 +200,7 @@ function DKDev_ApplyBox(id)
 	//DKWidget_SetProperty("DKDev_Box", "width", String(DKWidget_GetOffsetWidth(id))+"rem");
 	//DKWidget_SetProperty("DKDev_Box", "height", String(DKWidget_GetOffsetHeight(id))+"rem");
 	
-	DKLog("element = "+id+"\n", DKINFO);
+	//DKLog("element = "+id+"\n", DKINFO);
 	if(DKWidget_HasProperty(id, "top")){
 		DKWidget_SetProperty("DKDev_Box", "top", parseInt(DKWidget_GetProperty(id, "top"))-1+"rem");
 	}
@@ -283,7 +287,7 @@ function DKDev_AddDragHandles(id)
 			DKAddEvent(list[t], "contextmenu", DKDev_OnEvent);
 			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
 
-			//DKAddEvent(list[t], "drag", DKDev_OnEvent); //TODO
+			DKAddEvent(list[t], "move", DKDev_OnEvent); //TODO
 		}		
 	}
 	

@@ -275,6 +275,28 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 	
 	//WindowRestrictions(id);
 	ceiling = document.getElementById('ceiling');
+	
+	//Create a custom move event
+	///////////////////////////////////////////////////
+	var moveevent;
+	if(document.createEvent){
+		moveevent = document.createEvent("HTMLEvents");
+		moveevent.initEvent("move", true, true);
+	}
+	else{
+		moveevent = document.createEventObject();
+		moveevent.eventType = "move";
+	}
+
+	moveevent.eventName = "move";
+
+	if(document.createEvent){
+		element.dispatchEvent(moveevent);
+	}
+	else{
+		element.fireEvent("on" + moveevent.eventType, moveevent);
+	}
+	////////////////////////////////////////////////////////////
 }
 
 //////////////////////
