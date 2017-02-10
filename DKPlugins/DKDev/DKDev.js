@@ -80,20 +80,18 @@ function DKDev_OnEvent(event)
 		DKDev_HideBox();
 	}
 	
-	//TODO
 	if(DK_Type(event, "move")){
 		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
 		if(target == "DKResizeImg"){ 
 			DKDev_Resize(stored_element);
-			if(DK_GetBrowser() != "Rocket"){
-				StopPropagation(event);
-			}
-			return; 
 		}
-		DKDev_ApplyBox(DK_GetId(event));
+		else{
+			DKDev_ApplyBox(DK_GetId(event));
+		}
 		if(DK_GetBrowser() != "Rocket"){
 			StopPropagation(event);
 		}
+		return;
 	}
 	
 	if(DK_Type(event, "mousedown")){
