@@ -89,7 +89,7 @@ function DKDev_OnEvent(event)
 			DKDev_ApplyBox(DK_GetId(event));
 		}
 		if(DK_GetBrowser() != "Rocket"){
-			StopPropagation(event);
+			StopPropagation(event);  //TODO - link to Duktape function
 		}
 		return;
 	}
