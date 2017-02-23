@@ -562,8 +562,13 @@ function DKBuild_DoResults()
 	}
 	
 	var appdir = "DKApps";
-	if(DKFile_Exists(DKPATH+"/USER/DKApps/"+APP)){
-		appdir = "USER/DKApps";
+	
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){ 
+		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
+			appdir = files[i]+"/DKApps";
+		}
 	}
 	
 	//Create icons
