@@ -498,15 +498,16 @@ function DKBuild_GetAppList()
 		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			//DKLog("url = "+url+"\n", DKINFO);
+			DKLog("url = "+url+"\n", DKINFO);
 			var folder = files[i].replace(".txt",""); 
 			//DKLog("folder = "+folder+"\n", DKINFO);
 			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
 			if(apps2){
-				//DKLog("apps2 = "+apps2+"\n", DKINFO);
+				DKLog("apps2 = "+apps2+"\n", DKINFO);
 				//apps = apps+","+apps2;
 				var APP_LIST2 = apps2.split(",");
-				for(var b=0; i<APP_LIST2.length; b++){
+				for(var b=0; b<APP_LIST2.length; b++){
+					DKLog("APP_LIST2["+b+"] = "+APP_LIST2[b]+"\n", DKINFO);
 					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn"){
 						APP_LIST2.splice(b, 1);
 						b=0;
