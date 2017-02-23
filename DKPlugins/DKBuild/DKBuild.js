@@ -339,10 +339,11 @@ function DKBuild_SvnUpdate()
 	
 	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
-	if(DKFile_Exists(mysvn)){
-		var url = DKFile_GetSetting(mysvn, "[MYSVN]");
-		DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
-	}
+	
+	//if(DKFile_Exists(mysvn)){
+	//	var url = DKFile_GetSetting(mysvn, "[MYSVN]");
+	//	DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
+	//}
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -359,9 +360,9 @@ function DKBuild_SvnCommit()
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
-	if(DKFile_Exists(DKPATH+"/USER")){
-		DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
-	}
+	//if(DKFile_Exists(DKPATH+"/USER")){
+	//	DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
+	//}
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -381,33 +382,17 @@ function DKBuild_GitUpdate()
 	DK_Execute(GIT +" pull origin master");
 	
 	//Multipe user folders
-	//MyApps = MyApps.txt w/ [MYGIT] https://github.com/username/MyApps.git etc.
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){
-		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){
-			//DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt","");
-			//DKLog("folder = "+folder+"\n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
 			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
 			DK_Execute(GIT +" checkout -- .");
 			DK_Execute(GIT +" pull origin master");
 		}
 	}
-	
-	/*
-	var mygit = DKAssets_LocalAssets()+"mysvn.txt";
-	if(!DKFile_Exists(mygit)){ mygit = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
-	if(DKFile_Exists(mygit)){
-		var url = DKFile_GetSetting(mygit, "[MYGIT]");
-		DKFile_ChDir(DKPATH+"/USER");
-		DK_Execute(GIT +" clone "+url+" "+DKPATH+"/USER");
-		DK_Execute(GIT +" checkout -- .");
-		DK_Execute(GIT +" pull origin master");
-	}
-	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -421,7 +406,6 @@ function DKBuild_GitUpdate()
 function DKBuild_GitCommit()
 {
 	DKLog("Git Commit... \n", DKINFO);
-	//DKBuild_GitUpdate(); //first update  this does not work, changed files are reverted
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -430,16 +414,12 @@ function DKBuild_GitCommit()
 	DK_Execute(GIT +" push");
 	
 	//Multipe user folders
-	//MyApps = MyApps.txt w/ [MYGIT] https://github.com/username/MyApps.git etc.
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){
-		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){
-			//DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt","");
-			//DKLog("folder = "+folder+"\n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
 			DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -448,17 +428,6 @@ function DKBuild_GitCommit()
 			DK_Execute(GIT +" push");
 		}
 	}
-	
-	/*
-	if(DKFile_Exists(DKPATH+"/USER")){
-		DKFile_ChDir(DKPATH+"/USER");
-		DK_Execute(GIT +" init");
-		DK_Execute(GIT +" config user.name \"dkuser\"");
-		DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
-		DK_Execute(GIT +" commit -a -m \"commit from git\"");
-		DK_Execute(GIT +" push");
-	}
-	*/
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -482,11 +451,19 @@ function DKBuild_ResetAppsPlugins()
 		DKFile_Delete(DKPATH+"/DKApps/"+list[i]);
 	}
 	
+	//Multipe user folders
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		if(url){ //DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+			DKFile_Delete(DKPATH+"/"+folder);
+		}
+	}
+	
 	// Delete DKPlugins
 	DKFile_Delete(DKPATH+"/DKPlugins");
-
-	// Delete the USER folder
-	DKFile_Delete(DKPATH+"/USER");
 }
 
 ////////////////////////////////
@@ -502,31 +479,43 @@ function DKBuild_Reset3rdParty()
 function DKBuild_GetAppList()
 {
 	//DKLog("DKBuild_GetAppList() \n", DKDEBUG);
+	
+	//DKApps folder
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
-	//DKLog("DKBuild_GetAppList() apps = "+apps+"\n", DKDEBUG);
-	var myapps = DKFile_DirectoryContents(DKPATH+"/USER/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
 	for(var i=0; i<APP_LIST.length; i++){
-		if(!DKFile_IsDirectory(DKPATH+"/DKApps/"+APP_LIST[i]) || 
-			APP_LIST[i] == ".svn"// ||
-			//APP_LIST[i] == "DKBuild" //FIXME:  this should be the same name of the app we are running 
-		){
-				APP_LIST.splice(i, 1);
-				i=0;
+		if(!DKFile_IsDirectory(DKPATH+"/DKApps/"+APP_LIST[i]) || APP_LIST[i] == ".svn"){
+			APP_LIST.splice(i, 1);
+			i=0;
 		}
 	}
-	
-	if(myapps){
-		MYAPP_LIST = myapps.split(',');
-		for(var i=0; i<MYAPP_LIST.length; i++){
-			//DKLog(MYAPP_LIST[i]+"\n", DKDEBUG);
-			if(!DKFile_IsDirectory(DKPATH+"/USER/DKApps/"+MYAPP_LIST[i]) || MYAPP_LIST[i] == ".svn"){
-				MYAPP_LIST.splice(i, 1);
-				i=0;
+
+	//User DKApps folders
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){ 
+		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
+		if(url){ 
+			//DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt",""); 
+			//DKLog("folder = "+folder+"\n", DKINFO);
+			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
+			if(apps2){
+				//DKLog("apps2 = "+apps2+"\n", DKINFO);
+				//apps = apps+","+apps2;
+				var APP_LIST2 = apps2.split(",");
+				for(var b=0; i<APP_LIST2.length; b++){
+					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn"){
+						APP_LIST2.splice(b, 1);
+						b=0;
+					}
+				}
+				APP_LIST = APP_LIST.concat(APP_LIST2);
+				//DKLog("apps = "+apps+"\n", DKINFO);
 			}
 		}
-		APP_LIST = APP_LIST.concat(MYAPP_LIST);
 	}
 	
 	/*
