@@ -601,7 +601,7 @@ function DKBuild_DoResults()
 		}
 		
 		//copy .pdb file to assets
-		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".pdb", DKPATH+"/DKApps/"+APP+"/assets/"+APP+".pdb", true);
+		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".pdb", DKPATH+"/"+appdir+"/"+APP+"/assets/"+APP+".pdb", true);
 		
 		//upx compress the exe file
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx392w/upx.exe")){
