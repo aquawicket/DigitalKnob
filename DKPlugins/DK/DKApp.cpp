@@ -144,8 +144,10 @@ void DKApp::DoFrame()
 	DKUtil::GetTicks(now);
 	double delta = now - lastFrame;
 	lastFrame = now;
-	if (delta < _fps){  //FIXME -fps does not reflect with this math. 
-		DKUtil::Sleep(DKUtil::Round(_fps - delta));
+	if (delta < _fps){  //FIXME -fps does not reflect with this math.
+		double sleep = _fps - delta;
+		DKUtil::Round(sleep);
+		DKUtil::Sleep(sleep);
 	}
 
 	if(paused){ return; }

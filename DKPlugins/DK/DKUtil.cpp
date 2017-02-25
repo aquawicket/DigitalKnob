@@ -329,13 +329,6 @@ bool DKUtil::StrokeKey(int key)
 	return false;
 }
 
-///////////////////////////////
-bool DKUtil::round(double& num)
-{
-	num = floor(num + 0.5);
-	return true;
-}
-
 /////////////////////////////////////
 bool DKUtil::GetLocalIP(DKString& ip)
 {
@@ -513,16 +506,25 @@ bool DKUtil::InMainThread()
 	return false;
 }
 
-////////////////////////////////
-int DKUtil::Round(double number)
+///////////////////////////////
+bool DKUtil::round(double& num)
 {
-    return (int)(number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5));
+	num = floor(num + 0.5);
+	return true;
+}
+
+///////////////////////////////
+bool DKUtil::Round(double& num)
+{
+    num = (num < 0.0 ? ceil(num - 0.5) : floor(num + 0.5));
+	return true;
 }
 
 ///////////////////
-void DKUtil::Beep()
+bool DKUtil::Beep()
 {
     std::cout << '\a' << std::flush;
+	return true;
 }
 
 ///////////////////////////////////////////

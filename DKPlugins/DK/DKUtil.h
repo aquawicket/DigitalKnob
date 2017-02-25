@@ -45,8 +45,8 @@ public:
 	static bool System(const DKString& command);
 	static bool Execute(const DKString& command, DKString& rtn);
 	static bool InMainThread();
-	static int Round(double number);
-	static void Beep();
+	static bool Round(double& num);
+	static bool Beep();
 	static bool GetProcessList(DKString& list);
 
 #ifdef MAC
