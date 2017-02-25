@@ -108,7 +108,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type, 2);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value, 2);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage, 2);
-	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::WaitForImage, 0);
+	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList, 0);
 }
 
 /////////////////////////////////////
