@@ -3,11 +3,12 @@
 #include "DKUnix.h"
 #include <unistd.h>
 
-////////////////////
-int DKUnix::GetKey()
+/////////////////////////////
+bool DKUnix::GetKey(int& key)
 {
 	DKLog("Press any key to continue...\n", DKINFO);
-	return getchar();
+	key = getchar();
+	return true;
 }
 
 ////////////////////////////////////

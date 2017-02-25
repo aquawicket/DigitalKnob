@@ -513,8 +513,8 @@ bool DKFile::AppendSystemPath(const DKString& path)
 	
 	//FIXME: does not work
 	DKString command = "set PATH=%PATH%;"+path;
-	DKUtil::Execute(command);
-	return true;
+	DKString rtn;
+	return DKUtil::Execute(command, rtn);
 }
 
 ///////////////////////////////////////////////////////////////

@@ -212,8 +212,8 @@ bool DKUtil::Sleep(int milliseconds)
 	return false;
 }
 
-/////////////////////////
-double DKUtil::GetTicks()
+////////////////////////////////////
+bool DKUtil::GetTicks(double& ticks)
 {
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
@@ -221,16 +221,18 @@ double DKUtil::GetTicks()
 	//return (double)diff.total_milliseconds();
 
 #ifdef WIN32
-    return GetTickCount();
+    ticks = GetTickCount();
+	return true;
 #else
     struct timeval tv;
     gettimeofday(&tv, 0);
-    return unsigned((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+    ticks = unsigned((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	return true;
 #endif
 }
 
-//////////////////////////
-DKString DKUtil::GetTime()
+/////////////////////////////////////
+bool DKUtil::GetTime(DKString& _time)
 {
 	time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
@@ -238,30 +240,30 @@ DKString DKUtil::GetTime()
 	
 	int standard = now->tm_hour % 12;
 	if(standard == 0){ standard = 12; }
-	DKString time = toString(standard);
-	time += ":";
+	_time = toString(standard);
+	_time += ":";
 	DKString minute = toString(now->tm_min);
 	Pad(2, '0', minute);
-	time += minute;
+	_time += minute;
 	//DKLog("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n", DKDEBUG);
 	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0){
-		time += " PM";
+		_time += " PM";
 	}
 	else{
-		time += " AM";
+		_time += " AM";
 	}
 
-	return time;
+	return true;
 }
 
-//////////////////////////
-DKString DKUtil::GetDate()
+////////////////////////////////////
+bool DKUtil::GetDate(DKString& date)
 {
 	time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
 
 	int standard = now->tm_hour % 12;
-	DKString date = toString(now->tm_mon+1);
+	date = toString(now->tm_mon+1);
 	date += "/";
 	DKString day = toString(now->tm_mday);
 	//Pad(2, '0', day);
@@ -269,23 +271,23 @@ DKString DKUtil::GetDate()
 	date += "/";
 	date += toString(now->tm_year + 1900);
 
-	return date;
+	return true;
 }
 
-////////////////////
-int DKUtil::GetKey()
+/////////////////////////////
+bool DKUtil::GetKey(int& key)
 {
 #if defined(WIN32)
-	return DKWindows::GetKey();
+	return DKWindows::GetKey(key);
 #endif
 #if defined(MAC)
-	return DKUnix::GetKey();
+	return DKUnix::GetKey(key);
 #endif
 #if defined(IOS)
-	return DKUnix::GetKey();
+	return DKUnix::GetKey(key);
 #endif
 #if defined(LINUX)
-	return DKUnix::GetKey();
+	return DKUnix::GetKey(key);
 #endif
 #if defined(ANDROID)
 	DKLog("DKUtil::GetKey(): not implemented on Android \n", DKERROR);
@@ -327,14 +329,15 @@ bool DKUtil::StrokeKey(int key)
 	return false;
 }
 
-//////////////////////////////
-double DKUtil::round(double d)
+///////////////////////////////
+bool DKUtil::round(double& num)
 {
-    return floor( d + 0.5 );
+	num = floor(num + 0.5);
+	return true;
 }
 
-/////////////////////////////
-DKString DKUtil::GetLocalIP()
+/////////////////////////////////////
+bool DKUtil::GetLocalIP(DKString& ip)
 {
 	boost::asio::io_service io_service; 
 	boost::asio::ip::tcp::resolver resolver(io_service); 
@@ -342,24 +345,25 @@ DKString DKUtil::GetLocalIP()
 	boost::asio::ip::tcp::resolver::iterator it = resolver.resolve(query);
 	boost::asio::ip::tcp::endpoint endpoint = *it; 
 
-    return endpoint.address().to_string();
+    ip = endpoint.address().to_string();
+	return true;
 }
 
 /////////////////////////////////////////
-bool DKUtil::ChangeVolume(double nVolume)
+bool DKUtil::ChangeVolume(double& volume)
 {
 #ifdef WIN32
-	return DKWindows::ChangeVolume(nVolume);
+	return DKWindows::ChangeVolume(volume);
 #endif
 	DKLog("DKUtil::ChangeVolume() not implemented on this OS OS \n", DKERROR);
 	return false;
 }
 
-/////////////////////////
-float DKUtil::GetVolume()
+/////////////////////////////////////
+bool DKUtil::GetVolume(float& volume)
 {
 #ifdef WIN32
-	return DKWindows::GetVolume();
+	return DKWindows::GetVolume(volume);
 #endif
 	DKLog("DKUtil::GetVolume() not implemented on this OS \n", DKERROR);
 	return false;
@@ -449,8 +453,8 @@ bool DKUtil::System(const DKString& command)
 	return true;
 }
 
-/////////////////////////////////////////////////
-DKString DKUtil::Execute(const DKString& command)
+////////////////////////////////////////////////////////////
+bool DKUtil::Execute(const DKString& command, DKString& rtn)
 {
 	DKLog("DKUtil::Execute("+command+")\n", DKDEBUG);
 
@@ -461,14 +465,13 @@ DKString DKUtil::Execute(const DKString& command)
 		return "ERROR";
 	}
     char buffer[128];
-    std::string result = "";
     while(!feof(pipe)) {
     	if(fgets(buffer, 128, pipe) != NULL)
-    		result += buffer;
+    		rtn += buffer;
 			DKLog(buffer, DKINFO);
     }
     _pclose(pipe);
-    return result;
+    return true;
 #else
 	FILE* pipe = popen(command.c_str(), "r");
     if(!pipe){
@@ -476,14 +479,13 @@ DKString DKUtil::Execute(const DKString& command)
 		return "ERROR";
 	}
     char buffer[128];
-    std::string result = "";
     while(!feof(pipe)) {
     	if(fgets(buffer, 128, pipe) != NULL)
-    		result += buffer;
+    		rtn += buffer;
 			DKLog(buffer, DKINFO);
     }
     pclose(pipe);
-    return result;
+    return true;
 #endif
 
 	return "";
@@ -511,7 +513,7 @@ bool DKUtil::InMainThread()
 	return false;
 }
 
-///////////////////////////////
+////////////////////////////////
 int DKUtil::Round(double number)
 {
     return (int)(number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5));
@@ -521,4 +523,16 @@ int DKUtil::Round(double number)
 void DKUtil::Beep()
 {
     std::cout << '\a' << std::flush;
+}
+
+///////////////////////////////////////////
+bool DKUtil::GetProcessList(DKString& list)
+{
+	DKLog("DKUtil::GetProcessList("+list+")\n", DKDEBUG);
+#ifdef WIN32
+	DKWindows::GetProcessList(list);
+	return true;
+#endif
+	DKLog("DKUtil::GetProcessList() not implemented on this OS. \n", DKERROR);
+	return false;
 }

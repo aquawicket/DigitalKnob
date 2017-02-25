@@ -108,6 +108,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type, 2);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value, 2);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage, 2);
+	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::WaitForImage, 0);
 }
 
 /////////////////////////////////////
@@ -260,14 +261,18 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 ///////////////////////////////////
 int DKJS::GetTime(duk_context* ctx)
 {
-	duk_push_string(ctx, DKUtil::GetTime().c_str());
+	DKString time;
+	if(!DKUtil::GetTime(time)){ return 0; }
+	duk_push_string(ctx, time.c_str());
 	return 1;
 }
 
 ///////////////////////////////////
 int DKJS::GetDate(duk_context* ctx)
 {
-	duk_push_string(ctx, DKUtil::GetDate().c_str());
+	DKString date;
+	if(!DKUtil::GetDate(date)){ return 0; }
+	duk_push_string(ctx, date.c_str());
 	return 1;
 }
 
@@ -570,7 +575,8 @@ int DKJS::GetClipboard(duk_context* ctx)
 //////////////////////////////////////
 int DKJS::GetLocalIP(duk_context* ctx)
 {
-	DKString ip = DKUtil::GetLocalIP();
+	DKString ip;
+	if(!DKUtil::GetLocalIP(ip)){ return 0; }
 	duk_push_string(ctx, ip.c_str());
 	return 1;
 }
@@ -578,7 +584,8 @@ int DKJS::GetLocalIP(duk_context* ctx)
 /////////////////////////////////////
 int DKJS::GetVolume(duk_context* ctx)
 {
-	float volume = DKUtil::GetVolume();
+	float volume;
+	if(!DKUtil::GetVolume(volume)){ return 0; }
 	duk_push_number(ctx, volume);
 	return 1;
 }
@@ -586,7 +593,7 @@ int DKJS::GetVolume(duk_context* ctx)
 ////////////////////////////////////////
 int DKJS::ChangeVolume(duk_context* ctx)
 {
-	float volume = (float)duk_require_number(ctx, 0);
+	double volume = (double)duk_require_number(ctx, 0);
 	if(!DKUtil::ChangeVolume(volume)){ return 0; }
 	return 1;
 }
@@ -748,8 +755,9 @@ int DKJS::System(duk_context* ctx)
 int DKJS::Execute(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
-	DKString result = DKUtil::Execute(command);
-	duk_push_string(ctx, result.c_str());
+	DKString rtn;
+	if(!DKUtil::Execute(command, rtn)){ return 0; }
+	duk_push_string(ctx, rtn.c_str());
 	return 1;
 }
 
@@ -766,7 +774,9 @@ int DKJS::PrintFunctions(duk_context* ctx)
 //////////////////////////////////
 int DKJS::GetKey(duk_context* ctx)
 {
-	duk_push_int(ctx, DKUtil::GetKey());
+	int key;
+	if(!DKUtil::GetKey(key)){ return 0; }
+	duk_push_int(ctx, key);
 	return 1;
 }
 
@@ -854,13 +864,22 @@ int DKJS::HideConsole(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
+///////////////////////////////////
 int DKJS::_SetLog(duk_context* ctx)
 {
 	//TODO
 	int lvl = duk_require_int(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
 	SetLog(lvl, string);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKJS::GetProcessList(duk_context* ctx)
+{
+	DKString list;
+	DKUtil::GetProcessList(list);
+	duk_push_string(ctx, list.c_str());
 	return 1;
 }
 

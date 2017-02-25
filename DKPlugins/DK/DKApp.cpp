@@ -10,8 +10,8 @@ bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 double DKApp::now;
-double DKApp::lastFrame = DKUtil::GetTicks();
-double DKApp::lastSecond = DKUtil::GetTicks();
+double DKApp::lastFrame; 
+double DKApp::lastSecond;
 double DKApp::_fps;
 
 
@@ -82,7 +82,13 @@ int main(int argc, char **argv)
 	DKString info;
 	GetOSInfo(info);
 	DKLog(info+"\n", DKINFO);
-	DKLog(DKUtil::GetDate()+" "+DKUtil::GetTime()+"\n", DKINFO);
+
+	DKString date;
+	DKUtil::GetDate(date);
+	DKString time;
+	DKUtil::GetTime(time);
+	DKLog(date+" "+time+"\n", DKINFO);
+
 	DKCreate("DKDuktape");
 	DKCreate("DKDebug");
 	DKApp dkapp;
@@ -116,8 +122,9 @@ void DKApp::Init()
 {
 	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
-	now = DKUtil::GetTicks();
-	lastFrame = DKUtil::GetTicks();
+	DKUtil::GetTicks(now);
+	DKUtil::GetTicks(lastFrame);
+	DKUtil::GetTicks(lastSecond);
 	_fps = 17; //TODO - make this number actually reflect the true FPS
 }
 
@@ -134,7 +141,7 @@ void DKApp::Loop()
 void DKApp::DoFrame()
 {
 	//Framerate / cpu limiter
-	now = DKUtil::GetTicks();
+	DKUtil::GetTicks(now);
 	double delta = now - lastFrame;
 	lastFrame = now;
 	if (delta < _fps){  //FIXME -fps does not reflect with this math. 

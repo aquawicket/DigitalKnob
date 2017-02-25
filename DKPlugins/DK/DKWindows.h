@@ -18,8 +18,8 @@ public:
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool ChangeVolume(double nVolume);
-	static float GetVolume();
-	static int GetKey();
+	static bool GetVolume(float& volume);
+	static bool GetKey(int& key);
 	static bool PressKey(int key);
 	static bool ReleaseKey(int key);
 	static bool WaitForImage(const DKString& file, int timeout);
@@ -30,9 +30,10 @@ public:
 	static bool RightClick();
 	static bool Sleep(int milliseconds);
 #if !defined(WIN64)
-	static void RefreshWindowsEnvironment();
+	static bool RefreshWindowsEnvironment();
 #endif
-	static DKString GetLastError();
+	static bool GetLastError(DKString& error);
+	static bool GetProcessList(DKString& list);
 };
 
 

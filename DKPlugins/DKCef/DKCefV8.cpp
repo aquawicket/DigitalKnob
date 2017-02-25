@@ -82,7 +82,8 @@ bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 bool DKCefV8::Execute(CefArgs args, CefReturn retval)
 {
 	DKString command = args[0]->GetStringValue();
-	DKString result = DKUtil::Execute(command);
+	DKString result;
+	if(!DKUtil::Execute(command, result)){ return false; }
 	retval = CefV8Value::CreateString(result);
 	return true;
 }

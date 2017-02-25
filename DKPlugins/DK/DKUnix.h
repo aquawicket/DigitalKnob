@@ -7,7 +7,7 @@
 class DKUnix
 {
 public:
-	static int GetKey();
+	static bool GetKey(int& key);
 	static bool Sleep(int milliseconds);
 	static bool GetUsername(DKString& username);
 };

@@ -141,8 +141,8 @@ bool DKWindows::ChangeVolume(double nVolume)
     return true;
 }
 
-////////////////////////////
-float DKWindows::GetVolume()
+////////////////////////////////////////
+bool DKWindows::GetVolume(float& volume)
 {
 	DKLog("DKWindows::GetVolume()\n", DKDEBUG);
 	
@@ -168,19 +168,20 @@ float DKWindows::GetVolume()
     defaultDevice = NULL;
  
     // -------------------------
-    float currentVolume = 0;
-    endpointVolume->GetMasterVolumeLevel(&currentVolume);
-	hr = endpointVolume->GetMasterVolumeLevelScalar(&currentVolume);
-	return currentVolume;
+    volume = 0;
+    endpointVolume->GetMasterVolumeLevel(&volume);
+	hr = endpointVolume->GetMasterVolumeLevelScalar(&volume);
+	return true;
 }
 
-///////////////////////
-int DKWindows::GetKey()
+////////////////////////////////
+bool DKWindows::GetKey(int& key)
 {
 	DKLog("DKWindows::GetKey()\n", DKDEBUG);
 	
 	//DKLog("Press a key...\n", DKINFO);
-	return _getch();
+	key = _getch();
+	return true;
 }
 
 /////////////////////////////////
@@ -426,22 +427,23 @@ bool DKWindows::Sleep(int milliseconds)
 
 #if !defined(WIN64)
 ///////////////////////////////////////////
-void DKWindows::RefreshWindowsEnvironment()
+bool DKWindows::RefreshWindowsEnvironment()
 {
 	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKDEBUG);
 	
     DWORD dwReturnValue;
     ::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, &dwReturnValue);
+	return true;
 }
 #endif
 
-//////////////////////////////////
-DKString DKWindows::GetLastError()
+/////////////////////////////////////////////
+bool DKWindows::GetLastError(DKString& error)
 {
 	//Get the error message, if any.
 	DWORD errorMessageID = ::GetLastError();
 	if (errorMessageID == 0)
-		return std::string(); //No error message has been recorded
+		return true;//std::string(); //No error message has been recorded
 
 	LPSTR messageBuffer = nullptr;
 	size_t size = FormatMessageA(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
@@ -451,8 +453,15 @@ DKString DKWindows::GetLastError()
 
 	//Free the buffer.
 	LocalFree(messageBuffer);
+	error = message;
+	return true;
+}
 
-	return message;
+//////////////////////////////////////////////
+bool DKWindows::GetProcessList(DKString& list)
+{
+	list = "this,is,a,test";
+	return true;
 }
 
 /*

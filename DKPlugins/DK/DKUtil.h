@@ -28,25 +28,26 @@ public:
 	static bool DoubleClick();
 	static bool RightClick();
 	static bool Sleep(int milliseconds);
-	static double GetTicks();
-	static DKString GetTime();
-	static DKString GetDate();
-	static int GetKey();
+	static bool GetTicks(double& ticks);
+	static bool GetTime(DKString& _time);
+	static bool GetDate(DKString& date);
+	static bool GetKey(int& key);
 	static bool PressKey(int key);
 	static bool ReleaseKey(int key);
 	static bool StrokeKey(int key);
-	static double round(double d);
-	static DKString GetLocalIP();
-	static bool ChangeVolume(double nVolume);
-	static float GetVolume();
+	static bool round(double& num);
+	static bool GetLocalIP(DKString& ip);
+	static bool ChangeVolume(double& volume);
+	static bool GetVolume(float& volume);
 	static bool Bin2C(const DKString& input, const DKString& output);
 	static bool C2Bin(const unsigned char* header, const long int size, const DKString& output);
 	static bool Run(const DKString& command);
 	static bool System(const DKString& command);
-	static DKString Execute(const DKString& command);
+	static bool Execute(const DKString& command, DKString& rtn);
 	static bool InMainThread();
 	static int Round(double number);
 	static void Beep();
+	static bool GetProcessList(DKString& list);
 
 #ifdef MAC
 	static pthread_t mainThreadId;
