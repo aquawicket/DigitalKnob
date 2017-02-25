@@ -495,10 +495,12 @@ function DKBuild_GetAppList()
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
-		//DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		if(files[i].indexOf(".txt") <=1){ continue; }
+		DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			//DKLog("url = "+url+"\n", DKINFO);
+			DKLog("url = "+url+"\n", DKINFO);
+			return;
 			var folder = files[i].replace(".txt",""); 
 			//DKLog("folder = "+folder+"\n", DKINFO);
 			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
@@ -507,7 +509,7 @@ function DKBuild_GetAppList()
 				var APP_LIST2 = apps2.split(",");
 				for(var b=0; b<APP_LIST2.length; b++){
 					//DKLog("APP_LIST2["+b+"] = "+APP_LIST2[b]+"\n", DKINFO);
-					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn"){
+					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn" || APP_LIST2[b] == ".git"){
 						APP_LIST2.splice(b, 1);
 						b=0;
 					}
