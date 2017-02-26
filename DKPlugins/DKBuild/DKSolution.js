@@ -8,7 +8,7 @@ var rPath;
 ////////////////////////////
 function DKSolution_Init()
 {	
-	DKCreate("DKFile/DKSolution.html");
+	DKCreate("DKBuild/DKSolution.html");
 	DKAddEvent("DKSolution.html", "GetFile", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionCancel", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionOK", "click", DKSolution_OnEvent);
@@ -135,7 +135,7 @@ function DKSolution_UpdatePath(path)
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
-	DKWidget_SetInnerHtml("DKSolutionMenu", ""); //Clear it
+	//DKWidget_SetInnerHtml("DKSolutionMenu", ""); //Clear it
 	DKWidget_SetInnerHtml("DKSolutionMenu2", ""); //Clear it
 
 	for(var d=0; d<files.length; d++){
