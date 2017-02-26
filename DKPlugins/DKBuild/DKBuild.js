@@ -23,7 +23,7 @@ function DKBuild_Init()
 
 	//DKLog(DK_GetOS()+"\n", DKDEBUG);
 	if(DK_GetOS() == "Win32"){
-		DKPATH = "C:/digitalknob";  //FIXME - only works for windows
+		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
 		GIT = "C:/Program Files/Git/bin/git.exe";
