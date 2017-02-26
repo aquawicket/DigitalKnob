@@ -55,8 +55,10 @@ function RunMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "Run App")){
 		OS = DKWidget_GetValue("OSList");
+		APP = DKWidget_GetValue("AppList");
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			if(OS == "win32"){
+				DKLog(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe \n", DKINFO);
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 			}
