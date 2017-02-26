@@ -9,9 +9,6 @@ var rPath;
 function DKSolution_Init()
 {	
 	DKCreate("DKBuild/DKSolution.html");
-	DKAddEvent("DKSolution.html", "GetFile", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionCancel", "click", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionOK", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	
 	aPath = "";
@@ -23,9 +20,6 @@ function DKSolution_Init()
 /////////////////////////
 function DKSolution_End()
 {
-	DKRemoveEvent("DKSolution.html", "GetFile", DKSolution_OnEvent);
-	DKRemoveEvent("DKSolutionCancel", "click", DKSolution_OnEvent);
-	DKRemoveEvent("DKSolutionOK", "click", DKSolution_OnEvent);
 	DKRemoveEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKClose("DKSolution.html");
 }
@@ -35,9 +29,6 @@ function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 
-	if(DK_IdLike(event, "DKSolutionDrive")){
-		DKSolution_OpenFolder(DKWidget_GetValue(event));
-	}
 	if(DK_IdLike(event, "DKSolutionFolder")){
 		DKLog("DKSolutionFolder", DKINFO);
 		DKSolution_OpenFolder(DKWidget_GetValue(event));
@@ -52,42 +43,14 @@ function DKSolution_OnEvent(event)
 		DKSolution_OpenFolder(up);
 	}
 	
-	if(DK_Id(event, "DKSolutionOK")){
-		if(rPath && event_data2 == "relative"){
-			DKSendEvent(event_id, event_type, rPath);
-		}
-		else if(aPath && event_data2 == "absolute"){
-			DKSendEvent(event_id, event_type, aPath);
-		}
-		else{
-			//DKLog("DKSolution::ProcessEvent(): return_path_type incorrect. \n", DKERROR);
-		}
-		
-		DKFrame_Close("DKSolution.html");
-		return;
-	}
-	
 	if(DK_Type(event, "dblclick")){
 		DKLog("dblclick\n",DKINFO);
+		//OpenFile
 	}
 	
 	if(DK_Id(event, "DKSolutionCancel")){
 		DKFrame_Close("DKSolution.html");
 		return;
-	}
-	
-	if(DK_Type(event, "GetFile")){
-		var params = DKWidget_GetValue(event).split(",");
-		event_id = params[0];
-		event_type = params[1];
-		event_data1 = params[2];
-		event_data2 = params[3];
-		DKLog("event_type:"+event_type+"\n", DKINFO);
-		DKLog("event_id:"+event_id+"\n", DKINFO);
-		DKLog("event_data1:"+event_data1+"\n", DKINFO);
-		DKLog("event_data2:"+event_data2+"\n", DKINFO);
-	
-		DKSolution_UpdatePath(event_data1);
 	}
 }
 
@@ -174,7 +137,6 @@ function DKSolution_UpdatePath(path)
 				){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
 			}
-
 			else if((extension == ".osg") || (extension == ".osgb") || (extension == ".osgt") ||
 				(extension == ".3dm") || (extension == ".3ds") || (extension == ".ac") ||
 				(extension == ".ascii") || (extension == ".blend")  || (extension == ".bvh") ||
@@ -188,11 +150,9 @@ function DKSolution_UpdatePath(path)
 			){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
 			}
-
 			else if((extension == ".html") || (extension == ".htm")){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
 			}
-
 			else{
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/file.png\")");
 			}
