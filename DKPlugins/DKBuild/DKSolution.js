@@ -149,6 +149,9 @@ function DKSolution_UpdatePath(path)
 			else if((extension == "js")){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/js.png\")");
 			}
+			else if((extension == "sln")){
+				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/sln.png\")");
+			}
 			else if((extension == "html") || (extension == "htm")){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
 			}
