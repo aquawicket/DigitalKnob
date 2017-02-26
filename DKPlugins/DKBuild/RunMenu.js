@@ -58,9 +58,16 @@ function RunMenu_OnEvent(event)
 		APP = DKWidget_GetValue("AppList");
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			if(OS == "win32"){
-				DKLog(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe \n", DKINFO);
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
-				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
+				var contents = DKFile_DirectoryContents(DKPATH);
+				var files = contents.split(",");
+				for(var i=0; i<files.length; i++){
+					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
+						DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n", DKINFO);
+						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
+						return;
+					}
+				}
 			}
 			if(OS == "win64"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
