@@ -774,21 +774,28 @@ function DKDev_OpenJS(path)
 /////////////////////////////
 function DKDev_OpenText(path)
 {
+	DK_Run(path);
+	
+	/*
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad.html");
 		DKNotepad_Open(path);
 	});
+	*/
 }
 
 //////////////////////////////
 function DKDev_OpenImage(path)
 {
+	DK_Run(path);
 	//DKDev_NewImage(path);
+	/*
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint.html");
 		DKPaint_Open(path);
 	});
+	*/
 }
 
 //////////////////////////////
