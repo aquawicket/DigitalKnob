@@ -5,7 +5,7 @@ var event_data2;
 var aPath;
 var rPath;
 
-////////////////////////////
+//////////////////////////
 function DKSolution_Init()
 {	
 	DKCreate("DKBuild/DKSolution.html");
@@ -16,11 +16,11 @@ function DKSolution_Init()
 	
 	aPath = "";
 	rPath = "";
-	var drives = DKFile_GetDrives(); //TODO
-	DKLog(drives+"\n", DKDEBUG);
+	
+	DKSolution_UpdatePath("C:/digitalknob");
 }
 
-///////////////////////////
+/////////////////////////
 function DKSolution_End()
 {
 	DKRemoveEvent("DKSolution.html", "GetFile", DKSolution_OnEvent);
@@ -30,7 +30,7 @@ function DKSolution_End()
 	DKClose("DKSolution.html");
 }
 
-////////////////////////////////////
+//////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
@@ -67,6 +67,10 @@ function DKSolution_OnEvent(event)
 		return;
 	}
 	
+	if(DK_Type(event, "dblclick")){
+		DKLog("dblclick\n",DKINFO);
+	}
+	
 	if(DK_Id(event, "DKSolutionCancel")){
 		DKFrame_Close("DKSolution.html");
 		return;
@@ -87,7 +91,7 @@ function DKSolution_OnEvent(event)
 	}
 }
 
-//////////////////////////////////////
+////////////////////////////////////
 function DKSolution_OpenFolder(path)
 {
 	DKLog("DKSolution_OpenFolder("+path+") \n", DKINFO);
@@ -97,7 +101,7 @@ function DKSolution_OpenFolder(path)
 	return false;
 }
 
-////////////////////////////////////
+//////////////////////////////////
 function DKSolution_OpenFile(path)
 {
 	DKLog("DKSolution_OpenFile("+path+") \n", DKDEBUG);
@@ -115,7 +119,7 @@ function DKSolution_OpenFile(path)
 	DKWidget_SetValue("DKSolutionPath",aPath);
 }
 
-//////////////////////////////////////
+////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
 	//if(!path){ return false; }
@@ -135,12 +139,11 @@ function DKSolution_UpdatePath(path)
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
-	//DKWidget_SetInnerHtml("DKSolutionMenu", ""); //Clear it
-	DKWidget_SetInnerHtml("DKSolutionMenu2", ""); //Clear it
+	DKWidget_SetInnerHtml("DKSolutionMenu", ""); //Clear it
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement("DKSolutionMenu2", "option", "DKSolutionFolder");
+			var element2 = DKWidget_CreateElement("DKSolutionMenu", "option", "DKSolutionFolder");
 			var value = aPath+"/"+files[d];
 			DKWidget_SetAttribute(element2,"value", value);
 			DKWidget_SetProperty(element2, "white-space", "nowrap");
@@ -154,7 +157,7 @@ function DKSolution_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement("DKSolutionMenu2", "option", "DKSolutionFile");
+			var element3 = DKWidget_CreateElement("DKSolutionMenu", "option", "DKSolutionFile");
 			var value = aPath+"/"+files[f];
 			DKWidget_SetAttribute(element3, "value", value);
 			DKWidget_SetProperty(element3, "white-space", "nowrap");
@@ -162,6 +165,7 @@ function DKSolution_UpdatePath(path)
 			DKWidget_SetProperty(element3, "background-repeat", "no-repeat");
 			DKWidget_SetInnerHtml(element3,files[f]);
 			DKAddEvent(element3, "click", DKSolution_OnEvent);
+			DKAddEvent(element3, "dblclick", DKSolution_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension == ".png") || (extension == ".jpeg") || (extension == ".jpg") || 
