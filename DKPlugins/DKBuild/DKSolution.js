@@ -29,11 +29,6 @@ function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 
-	if(DK_Type(event, "dblclick")){
-		DKLog("dblclick\n",DKINFO);
-		//OpenFile
-	}
-	
 	if(DK_Id(event, "DKSolutionUp")){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/..";
 		DKLog(up+"\n", DKDEBUG);
@@ -44,8 +39,12 @@ function DKSolution_OnEvent(event)
 		DKLog("DKSolutionFolder", DKINFO);
 		DKSolution_OpenFolder(DKWidget_GetValue(event));
 	}
-	if(DK_IdLike(event, "DKSolutionFile")){
-		DKSolution_OpenFile(DKWidget_GetValue(event));
+	
+	if(DK_Type(event, "dblclick")){
+		DKLog(DK_GetId(event)+"\n", DKINFO);
+		DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
+		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
+		return;
 	}
 }
 
@@ -62,7 +61,7 @@ function DKSolution_OpenFolder(path)
 //////////////////////////////////
 function DKSolution_OpenFile(path)
 {
-	DKLog("DKSolution_OpenFile("+path+") \n", DKDEBUG);
+	DKLog("DKSolution_OpenFile("+path+") \n", DKINFO);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -75,6 +74,7 @@ function DKSolution_OpenFile(path)
 	rPath = DKFile_GetRelativePath(aPath, assets);
 	DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	DKWidget_SetValue("DKSolutionPath",aPath);
+	DKDev_OpenFile(aPath);
 }
 
 ////////////////////////////////////
