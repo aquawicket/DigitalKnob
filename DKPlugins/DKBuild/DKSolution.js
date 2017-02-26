@@ -29,28 +29,23 @@ function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 
-	if(DK_IdLike(event, "DKSolutionFolder")){
-		DKLog("DKSolutionFolder", DKINFO);
-		DKSolution_OpenFolder(DKWidget_GetValue(event));
+	if(DK_Type(event, "dblclick")){
+		DKLog("dblclick\n",DKINFO);
+		//OpenFile
 	}
-	if(DK_IdLike(event, "DKSolutionFile")){
-		DKSolution_OpenFile(DKWidget_GetValue(event));
-	}
-
+	
 	if(DK_Id(event, "DKSolutionUp")){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/..";
 		DKLog(up+"\n", DKDEBUG);
 		DKSolution_OpenFolder(up);
 	}
 	
-	if(DK_Type(event, "dblclick")){
-		DKLog("dblclick\n",DKINFO);
-		//OpenFile
+	if(DK_IdLike(event, "DKSolutionFolder")){
+		DKLog("DKSolutionFolder", DKINFO);
+		DKSolution_OpenFolder(DKWidget_GetValue(event));
 	}
-	
-	if(DK_Id(event, "DKSolutionCancel")){
-		DKFrame_Close("DKSolution.html");
-		return;
+	if(DK_IdLike(event, "DKSolutionFile")){
+		DKSolution_OpenFile(DKWidget_GetValue(event));
 	}
 }
 
