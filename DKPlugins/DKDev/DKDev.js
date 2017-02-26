@@ -764,11 +764,15 @@ function DKDev_OpenHtml(path)
 ///////////////////////////
 function DKDev_OpenJS(path)
 {
+	DK_Run(path);
+	
+	/*
 	var id = DKFile_GetFilename(path);
 	id = id.replace(".js",".html");
 	DKCreate(path, function(){
 		DKFrame_Widget(id);
 	});
+	*/
 }
 
 /////////////////////////////
