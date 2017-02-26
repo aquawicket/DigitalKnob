@@ -63,7 +63,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
-						DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n", DKINFO);
+						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n", DKINFO);
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 						return;
 					}
@@ -72,6 +72,17 @@ function RunMenu_OnEvent(event)
 			if(OS == "win64"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
+				
+				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
+				var contents = DKFile_DirectoryContents(DKPATH);
+				var files = contents.split(",");
+				for(var i=0; i<files.length; i++){
+					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
+						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n", DKINFO);
+						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
+						return;
+					}
+				}
 			}
 			if(OS == "android"){
 				DKLog("TODO: Run android from Windows \n", DKDEBUG);
