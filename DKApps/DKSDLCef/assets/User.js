@@ -1,5 +1,6 @@
 DKCreate("DKWindow");
-var url = "file:///C:/digitalknob/DKApps/DKIDE/assets/index.html";
+//var url = "file:///C:/digitalknob/DKApps/DKIDE/assets/index.html";
+var url = "http://127.0.0.1:2393";
 var width = DKWindow_GetWidth();
 var height = DKWindow_GetHeight();
 DKCreate("DKCef,CefSDL,0,0,"+width+","+height+","+url);
