@@ -173,7 +173,7 @@ bool DKSDLCef::handle(SDL_Event* event)
 
 		case SDL_MOUSEBUTTONUP:{
 			if(event->button.clicks == 2){ // double click
-					return true;
+					//return true;
 			}
             if(event->button.button == 3){
 				_mouseLMBdown = false;
