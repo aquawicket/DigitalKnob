@@ -6,6 +6,7 @@ function DKPaintFile_Init()
 	DKAddEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Save", "click", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Save As", "click", DKPaintFile_OnEvent);
+	DKAddEvent("DKPaintFile_Exit", "click", DKPaintFile_OnEvent);
 }
 
 //////////////////////////
@@ -15,6 +16,7 @@ function DKPaintFile_End()
 	DKRemoveEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
 	DKRemoveEvent("DKPaintFile_Save", "click", DKPaintFile_OnEvent);
 	DKRemoveEvent("DKPaintFile_Save As", "click", DKPaintFile_OnEvent);
+	DKRemoveEvent("DKPaintFile_Exit", "click", DKPaintFile_OnEvent);
 	DKClose("DKPaintFile.html");
 }
 
@@ -31,6 +33,9 @@ function DKPaintFile_OnEvent(event)
 	}
 	if(DK_Id(event,"DKPaintFile_Save As")){
 		DKPaintFile_SaveAs();
+	}
+	if(DK_Id(event,"DKPaintFile_Exit")){
+		DKFrame_Close("DKPaint.html");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

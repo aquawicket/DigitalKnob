@@ -784,7 +784,11 @@ function DKDev_OpenText(path)
 //////////////////////////////
 function DKDev_OpenImage(path)
 {
-	DKDev_NewImage(path);
+	//DKDev_NewImage(path);
+	DKCreate("DKPaint/DKPaint.js", function(){
+		DKFrame_Widget("DKPaint.html");
+		DKPaint_Open(path);
+	});
 }
 
 //////////////////////////////
