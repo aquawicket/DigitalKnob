@@ -172,8 +172,9 @@ bool DKSDLCef::handle(SDL_Event* event)
 		}
 
 		case SDL_MOUSEBUTTONUP:{
+			int clicks = 1;
 			if(event->button.clicks == 2){ // double click
-					//return true;
+				clicks = 2;
 			}
             if(event->button.button == 3){
 				_mouseLMBdown = false;
@@ -188,7 +189,7 @@ bool DKSDLCef::handle(SDL_Event* event)
 			dkCef->current_browser->GetHost()->SendFocusEvent(true);
 			dkCef->inFocus = true;
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
-			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, getCefMouseButton(event->button.button), true, 1);
+			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, getCefMouseButton(event->button.button), true, clicks);
  
 			return true;
 		}
