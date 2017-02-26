@@ -764,36 +764,31 @@ function DKDev_OpenHtml(path)
 ///////////////////////////
 function DKDev_OpenJS(path)
 {
-	DK_Run(path);
-	
-	/*
+	//DK_Run(path);
 	var id = DKFile_GetFilename(path);
 	id = id.replace(".js",".html");
 	DKCreate(path, function(){
 		DKFrame_Widget(id);
 	});
-	*/
 }
 
 /////////////////////////////
 function DKDev_OpenText(path)
 {
-	DK_Run(path);
-	
-	/*
+	//DK_Run(path);
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad.html");
 		DKNotepad_Open(path);
 	});
-	*/
 }
 
 //////////////////////////////
 function DKDev_OpenImage(path)
 {
-	DK_Run(path);
-	//DKDev_NewImage(path);
+	//DK_Run(path);
+	DKDev_NewImage(path);
+	
 	/*
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint.html");

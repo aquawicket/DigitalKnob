@@ -74,7 +74,8 @@ function DKSolution_OpenFile(path)
 	rPath = DKFile_GetRelativePath(aPath, assets);
 	DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	DKWidget_SetValue("DKSolutionPath",aPath);
-	DKDev_OpenFile(aPath);
+	//DKDev_OpenFile(aPath);
+	DK_Run(aPath);
 }
 
 ////////////////////////////////////
