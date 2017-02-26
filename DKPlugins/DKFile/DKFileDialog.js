@@ -164,28 +164,28 @@ function DKFileDialog_UpdatePath(path)
 			DKAddEvent(element3, "click", DKFileDialog_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
-			if((extension == ".png") || (extension == ".jpeg") || (extension == ".jpg") || 
-				(extension == ".bmp") || (extension == ".tiff") || (extension == ".tif") || 
-				(extension == ".gif") || (extension == ".tga") || (extension == ".ico")
+			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
+				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
+				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
 			}
 
-			else if((extension == ".osg") || (extension == ".osgb") || (extension == ".osgt") ||
-				(extension == ".3dm") || (extension == ".3ds") || (extension == ".ac") ||
-				(extension == ".ascii") || (extension == ".blend")  || (extension == ".bvh") ||
-				(extension == ".c4d") || (extension == ".dae") || (extension == ".dds") ||
-				(extension == ".dgn") || (extension == ".dwg") || (extension == ".dxf") ||
-				(extension == ".fbx") || (extension == ".lwo") || (extension == ".lws") ||
-				(extension == ".ma") || (extension == ".max") || (extension == ".mb") ||
-				(extension == ".mesh") || (extension == ".mtl") || (extension == ".obj") ||
-				(extension == ".pov") || (extension == ".skp") || (extension == ".stl") ||
-				(extension == ".ztl")
+			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
+				(extension == "3dm") || (extension == "3ds") || (extension == "ac") ||
+				(extension == "ascii") || (extension == "blend")  || (extension == "bvh") ||
+				(extension == "c4d") || (extension == "dae") || (extension == "dds") ||
+				(extension == "dgn") || (extension == "dwg") || (extension == "dxf") ||
+				(extension == "fbx") || (extension == "lwo") || (extension == "lws") ||
+				(extension == "ma") || (extension == "max") || (extension == "mb") ||
+				(extension == "mesh") || (extension == "mtl") || (extension == "obj") ||
+				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
+				(extension == "ztl")
 			){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
 			}
 
-			else if((extension == ".html") || (extension == ".htm")){
+			else if((extension == "html") || (extension == "htm")){
 				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
 			}
 
