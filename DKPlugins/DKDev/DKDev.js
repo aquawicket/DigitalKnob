@@ -112,6 +112,7 @@ function DKDev_OnEvent(event)
 	}
 
 	if(DK_Type(event, "contextmenu")){
+		DKLog("DKDev_OnEvent(): contextmenu \n", DKINFO);
 		var target = DK_GetId(event);
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }

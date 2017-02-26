@@ -10,6 +10,7 @@ function DKSolution_Init()
 {	
 	DKCreate("DKBuild/DKSolution.html");
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
+	DKAddEvent("DKSolution.html", "contextmenu", DKSolution_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -29,6 +30,12 @@ function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 
+	if(DK_Type(event, "contextmenu")){
+		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
+		//StopPropagation();   //FIXME
+		return;
+	}
+		
 	if(DK_Id(event, "DKSolutionUp")){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/..";
 		DKLog(up+"\n", DKDEBUG);
