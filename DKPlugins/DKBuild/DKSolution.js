@@ -15,8 +15,7 @@ function DKSolution_Init()
 	aPath = "";
 	rPath = "";
 	
-	//FIXME - this should be DKPATH;
-	DKSolution_UpdatePath("C:/digitalknob");
+	//DKSolution_UpdatePath("C:/digitalknob");
 	DKSolution_UpdatePath(DKPATH);
 }
 
