@@ -51,6 +51,7 @@ bool DKWindows::GetClipboard(DKString& text)
 ///////////////////////////////////////////////////////////
 bool DKWindows::SetClipboardFiles(const DKString& filelist)
 {
+	DKLog("DKWindows::SetClipboardFiles("+filelist+")\n", DKDEBUG);
 	//TODO 
 	char sFiles[] = "C:\\digitalknob\README.md"
 	"C:\\digitalknob\CMakeLists.txt";
