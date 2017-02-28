@@ -93,6 +93,16 @@ bool DKUtil::GetClipboard(DKString& text)
 	return false;
 }
 
+////////////////////////////////////////////////////////
+bool DKUtil::SetClipboardFiles(const DKString& filelist)
+{
+#ifdef WIN32
+	return DKWindows::SetClipboardFiles(filelist);
+#endif
+	DKLog("DKUtil::SetClipboardFiles() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
 /////////////////////////////////////////////////////////////////////
 bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {

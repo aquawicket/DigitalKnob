@@ -15,6 +15,7 @@ class DKWindows
 public:
 	static bool SetClipboard(const DKString& text);
 	static bool GetClipboard(DKString& text);
+	static bool SetClipboardFiles(const DKString& filelist);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool ChangeVolume(double nVolume);

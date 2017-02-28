@@ -7,6 +7,7 @@
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
 #include <psapi.h>
+#include "shlobj.h"
 
 
 //////////////////////////////////////////////////
@@ -45,6 +46,31 @@ bool DKWindows::GetClipboard(DKString& text)
 	}
 	DKLog("Clipboard error! \n", DKERROR);
 	return false; 
+}
+
+///////////////////////////////////////////////////////////
+bool DKWindows::SetClipboardFiles(const DKString& filelist)
+{
+	//TODO 
+	char sFiles[] = "C:\\digitalknob\README.md"
+	"C:\\digitalknob\CMakeLists.txt";
+	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
+	int nLen = sizeof(sFiles);
+	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
+	HGLOBAL hGbl = GlobalAlloc(GMEM_ZEROINIT|GMEM_MOVEABLE|GMEM_DDESHARE, nGblLen);
+	char* sData = (char*)::GlobalLock(hGbl);
+	memcpy(sData, &dobj, 20);
+	char* sWStr = sData+20;
+	for(int i = 0; i < nLen*2; i += 2){
+		sWStr[i] = sFiles[i/2];
+	}
+	::GlobalUnlock(hGbl);
+	if(OpenClipboard(NULL)){
+		EmptyClipboard();
+		SetClipboardData( CF_HDROP, hGbl);
+		CloseClipboard();
+	}
+	return true;
 }
 
 ////////////////////////////////////////////////////////////////////////

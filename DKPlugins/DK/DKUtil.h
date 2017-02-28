@@ -18,6 +18,7 @@ public:
 	static bool GetThreadId(int& id);
 	static bool SetClipboard(const DKString& text);
 	static bool GetClipboard(DKString& text);
+	static bool SetClipboardFiles(const DKString& filelist);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool WaitForImage(const DKString& file, int timeout);

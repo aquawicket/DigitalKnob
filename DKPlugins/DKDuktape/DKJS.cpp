@@ -97,6 +97,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Run", DKJS::Run, 1);
 	DKDuktape::AttachFunction("DK_RunJavascript", DKJS::RunJavascript, 1);
 	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard, 1);
+	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles, 1);
 	DKDuktape::AttachFunction("DK_SetCursorPos", DKJS::SetCursorPos, 2);
 	DKDuktape::AttachFunction("DK_SetFramerate", DKJS::SetFramerate, 1);
 	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog, 2);
@@ -569,6 +570,14 @@ int DKJS::GetClipboard(duk_context* ctx)
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return 0; }
 	duk_push_string(ctx, string.c_str());
+	return 1;
+}
+
+/////////////////////////////////////////////
+int DKJS::SetClipboardFiles(duk_context* ctx)
+{
+	DKString filelist = duk_require_string(ctx, 0);
+	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
 	return 1;
 }
 
