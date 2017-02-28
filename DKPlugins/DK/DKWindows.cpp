@@ -52,9 +52,9 @@ bool DKWindows::GetClipboard(DKString& text)
 bool DKWindows::SetClipboardFiles(const DKString& filelist)
 {
 	DKLog("DKWindows::SetClipboardFiles("+filelist+")\n", DKDEBUG);
+
 	//TODO 
-	char sFiles[] = "C:\\digitalknob\README.md"
-	"C:\\digitalknob\CMakeLists.txt";
+	char sFiles[] = "C:\\digitalknob\\README.md\0";
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
 	int nLen = sizeof(sFiles);
 	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
@@ -68,9 +68,24 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist)
 	::GlobalUnlock(hGbl);
 	if(OpenClipboard(NULL)){
 		EmptyClipboard();
-		SetClipboardData( CF_HDROP, hGbl);
+		SetClipboardData(CF_HDROP, hGbl);
 		CloseClipboard();
 	}
+
+	/*
+	LPWSTR path = (LPWSTR)(LPCWSTR)"C:\\digitalknob\README.md";
+	int size = sizeof(DROPFILES)+((lstrlenW(path)+2)*sizeof(WCHAR));
+	HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, size);
+	DROPFILES *df = (DROPFILES*) GlobalLock(hGlobal);
+	ZeroMemory(df, size);
+	df->pFiles = sizeof(DROPFILES);
+	df->fWide = TRUE;
+	LPWSTR ptr = (LPWSTR) (df + 1);
+	lstrcpyW(ptr, path);
+	GlobalUnlock(hGlobal);
+	SetClipboardData(CF_HDROP, hGlobal);
+	*/
+
 	return true;
 }
 
