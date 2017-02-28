@@ -33,6 +33,7 @@ function DKSolution_OnEvent(event)
 
 	if(DK_Type(event, "contextmenu")){
 		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
+		DKCreate("DKBuild/DKSolutionMenu.js", function(){});
 		StopPropagation(event);
 		return;
 	}

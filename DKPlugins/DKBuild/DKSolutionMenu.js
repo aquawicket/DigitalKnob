@@ -1,38 +1,38 @@
-/////////////////////////////
+//////////////////////////////
 function DKSolutionMenu_Init()
 {
-	DKCreate("DKNotepad/DKSolutionMenu.html");
+	DKCreate("DKBuild/DKSolutionMenu.html");
 	DKWidget_SetProperty("DKSolutionMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKSolutionMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
-	DKAddEvent("DKSolutionMenu_Cut", "click", DKSolutionMenu_OnEvent);
-	DKAddEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
-	DKAddEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_1", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_2", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_3", "click", DKSolutionMenu_OnEvent);
 }
 
-////////////////////////////
+/////////////////////////////
 function DKSolutionMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Cut", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_1", "click", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_2", "click", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_3", "click", DKSolutionMenu_OnEvent);
 	DKClose("DKSolutionMenu.html");
 }
 
-/////////////////////////////////////
+//////////////////////////////////////
 function DKSolutionMenu_OnEvent(event)
 {
 	DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
-	if(DK_Id(event,"DKSolutionMenu_Cut")){
-		DKSolutionMenu_Cut();
+	if(DK_Id(event,"DKSolutionMenu_1")){
+		DKSolutionMenu_1();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Copy")){
-		DKSolutionMenu_Copy();
+	if(DK_Id(event,"DKSolutionMenu_2")){
+		DKSolutionMenu_2();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Paste")){
-		DKSolutionMenu_Paste();
+	if(DK_Id(event,"DKSolutionMenu_3")){
+		DKSolutionMenu_3();
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
@@ -43,20 +43,23 @@ function DKSolutionMenu_OnEvent(event)
 	DKClose("DKSolutionMenu.js");
 }
 
-////////////////////////////
-function DKSolutionMenu_Cut()
+///////////////////////////
+function DKSolutionMenu_1()
 {
-	//DKWidget_Cut("DKNotepad_Text");
+	//TODO
+	DKLog("DKSolutionMenu_1() \n", DKINFO);
 }
 
-/////////////////////////////
-function DKSolutionMenu_Copy()
+///////////////////////////
+function DKSolutionMenu_2()
 {
-	//DKWidget_Copy("DKNotepad_Text");
+	//TODO
+	DKLog("DKSolutionMenu_2() \n", DKINFO);
 }
 
-//////////////////////////////
-function DKSolutionMenu_Paste()
+///////////////////////////
+function DKSolutionMenu_3()
 {
-	//DKWidget_Paste("DKNotepad_Text");
+	//TODO
+	DKLog("DKSolutionMenu_3() \n", DKINFO);
 }
