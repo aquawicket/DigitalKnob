@@ -74,6 +74,10 @@ function DKSolutionMenu_Delete()
 {
 	//TODO
 	DKLog("DKSolutionMenu_Delete() \n", DKINFO);
+	DKCreate("DKMessage/DKMessage.js", function(){
+		DKMessageBox(event, "Confirm", "delete this file?");
+		DKFrame_Widget("DKMessage.html");
+	});
 }
 
 //////////////////////////////
