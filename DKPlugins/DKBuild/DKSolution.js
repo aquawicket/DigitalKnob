@@ -29,11 +29,11 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
 
 	if(DK_Type(event, "contextmenu")){
 		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
-		//StopPropagation();   //FIXME
+		StopPropagation(event);
 		return;
 	}
 		
