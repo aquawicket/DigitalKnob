@@ -52,6 +52,13 @@ function DKSolution_OnEvent(event)
 		DKLog(DK_GetId(event)+"\n", DKINFO);
 		DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
 		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
+		
+		if ( document.selection ) {
+        document.selection.empty();
+    } else if ( window.getSelection ) {
+        window.getSelection().removeAllRanges();
+    }
+	
 		return;
 	}
 }
