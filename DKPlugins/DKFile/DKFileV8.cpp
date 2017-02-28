@@ -20,6 +20,7 @@ void DKFileV8::Init()
 	DKCefApp::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
 	DKCefApp::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
 	DKCefApp::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
+	DKCefApp::AttachFunction("DKFile_Rename", DKFileV8::Rename);
 	DKCefApp::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
 	DKCefApp::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
 }
@@ -179,6 +180,18 @@ bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
 {
 	DKString path = args[0]->GetStringValue();
 	DKFile::MakeDir(path);
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKFileV8::Rename(CefArgs args, CefReturn retval)
+{
+	DKString input = args[0]->GetStringValue();
+	DKString output = args[1]->GetStringValue();
+	bool overwrite = args[2]->GetBoolValue();
+	if(!DKFile::Rename(input, output, overwrite)){
+		return false;
+	}
 	return true;
 }
 

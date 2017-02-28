@@ -27,6 +27,7 @@ void DKFileJS::Init()
 	DKDuktape::AttachFunction("DKFile_GetShortName", DKFileJS::GetShortName, 1);
 	DKDuktape::AttachFunction("DKFile_IsDirectory", DKFileJS::IsDirectory, 1);
 	DKDuktape::AttachFunction("DKFile_MkDir", DKFileJS::MkDir, 1);
+	DKDuktape::AttachFunction("DKFile_Rename", DKFileJS::Rename, 3);
 	DKDuktape::AttachFunction("DKFile_SetSetting", DKFileJS::SetSetting, 3);
 	DKDuktape::AttachFunction("DKFile_StringToFile", DKFileJS::StringToFile, 2);
 	DKDuktape::AttachFunction("DKFile_VerifyPath", DKFileJS::VerifyPath, 1);
@@ -270,6 +271,18 @@ int DKFileJS::Copy(duk_context* ctx)
 	DKString dest = duk_require_string(ctx, 1);
 	bool overwrite = duk_require_boolean(ctx, 2);
 	if(!DKFile::Copy(src, dest, overwrite, true)){
+		return 0;
+	}
+	return 1;
+}
+
+//////////////////////////////////////
+int DKFileJS::Rename(duk_context* ctx)
+{
+	DKString input = duk_require_string(ctx, 0);
+	DKString output = duk_require_string(ctx, 1);
+	bool overwrite = duk_require_boolean(ctx, 2);
+	if(!DKFile::Rename(input, output, overwrite)){
 		return 0;
 	}
 	return 1;

@@ -31,6 +31,7 @@ public:
 	static int GetSetting(duk_context* ctx);
 	static int GetShortName(duk_context* ctx);
 	static int MkDir(duk_context* ctx);
+	static int Rename(duk_context* ctx);
 	static int SetSetting(duk_context* ctx);
 	static int StringToFile(duk_context* ctx);
 	static int VerifyPath(duk_context* ctx);

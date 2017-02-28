@@ -25,6 +25,7 @@ public:
 	static bool GetShortName(CefArgs args, CefReturn retval);
 	static bool IsDirectory(CefArgs args, CefReturn retval);
 	static bool MkDir(CefArgs args, CefReturn retval);
+	static bool Rename(CefArgs args, CefReturn retval);
 	static bool SetSetting(CefArgs args, CefReturn retval);
 	static bool StringToFile(CefArgs args, CefReturn retval);
 };
