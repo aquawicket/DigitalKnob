@@ -53,11 +53,13 @@ function DKSolution_OnEvent(event)
 		DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
 		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
 		
-		if ( document.selection ) {
-        document.selection.empty();
-    } else if ( window.getSelection ) {
-        window.getSelection().removeAllRanges();
-    }
+		//Clear text selection
+		if(document.selection){
+			document.selection.empty();
+		}
+		else if(window.getSelection){
+			window.getSelection().removeAllRanges();
+		}
 	
 		return;
 	}
