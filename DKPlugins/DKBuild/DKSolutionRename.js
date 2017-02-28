@@ -4,9 +4,7 @@ DKSolutionRename_file = "";
 //////////////////////////////
 function DKSolutionRename_Init()
 {
-	DKCreate("DKBuild/DKSolutionRename.html");
-	DKWidget_SetProperty("DKSolutionRename.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("DKSolutionRename.html","left",DKWindow_GetMouseX()+"px");
+	DKCreate("DKBuild/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 }
 
@@ -27,19 +25,28 @@ function DKSolutionRename_OnEvent(event)
 			return;
 		}
 	}
+	DKSolutionRename_Rename();
 	DKClose("DKSolutionRename.js");
 }
 
-/////////////////////////////////
+///////////////////////////////////
 function DKSolutionRename_SetId(id)
 {
 	DKLog("DKSolutionRename_SetId("+id+")\n", DKINFO);
 	DKSolutionRename_id = id;
 }
 
-/////////////////////////////////////
+///////////////////////////////////////
 function DKSolutionRename_SetFile(file)
 {
 	DKLog("DKSolutionRename_SetFile("+file+")\n", DKINFO);
 	DKSolutionRename_file = file;
+}
+
+//////////////////////////////////
+function DKSolutionRename_Rename()
+{
+	var value = DKWidget_GetValue("DKSolutionRename_box");
+	DKLog("DKSolutionRename_Rename() = "+value+"\n", DKINFO);
+	DKWidget_SetValue(DKSolutionRename_id, value);
 }

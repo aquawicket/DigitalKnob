@@ -80,15 +80,13 @@ function DKSolutionMenu_Rename()
 	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
 	var top = top1 - top2 - 1;
 	
-	var element = DKWidget_CreateElement("DKSolutionMenu", "input", "rename");
-	DKWidget_SetAttribute(element, "type", "text");
-	DKWidget_SetProperty(element, "position", "absolute");
-	DKWidget_SetProperty(element, "top", top+"rem");
-	DKWidget_SetProperty(element, "width", "100%");
-	DKWidget_SetProperty(element, "height", "14rem");
-	
-	var value = DKWidget_GetInnerHtml(DKSolutionMenu_id);
-	DKWidget_SetValue(element, value);
+	DKCreate("DKBuild/DKSolutionRename.js", function(){
+		DKSolutionRename_SetId(DKSolutionMenu_id);
+		DKSolutionRename_SetFile(DKSolutionMenu_file);
+		DKWidget_SetProperty("DKSolutionRename.html", "top", top+"rem");
+		var value = DKWidget_GetInnerHtml(DKSolutionMenu_id);
+		DKWidget_SetValue("DKSolutionRename_box", value);
+	});
 }
 
 ////////////////////////////////
