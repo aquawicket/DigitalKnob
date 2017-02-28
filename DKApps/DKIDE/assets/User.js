@@ -72,10 +72,16 @@ else{  //Duktape or V8 or Webview
 	});
 	DKCreate("DKDebug/Input.js", function(){});
 	DKCreate("DKBuild/DKSolution.js", function(){
-		DKWidget_SetProperty("DKSolution.html","top","41rem");
-		DKWidget_SetProperty("DKSolution.html","left","0rem");
-		DKWidget_SetProperty("DKSolution.html","bottom","22rem");
-		DKWidget_RemoveProperty("DKSolution.html","height");
+		DKCreate("DKFrame/DKFrame.js", function(){
+			var frame = DKFrame_Widget("DKSolution.html");
+			DKWidget_SetProperty(frame, "top", "40rem");
+			DKWidget_SetProperty(frame,"left","0rem");
+			DKWidget_SetProperty(frame,"bottom","22rem");
+			DKWidget_SetProperty(frame,"width","160rem");
+			DKWidget_RemoveProperty(frame,"height");
+			DKWidget_SetProperty("DKSolution.html","bottom","0rem");
+		});
+		
 	});
 	
 	/*
