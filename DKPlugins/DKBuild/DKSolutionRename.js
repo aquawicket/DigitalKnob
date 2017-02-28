@@ -46,7 +46,18 @@ function DKSolutionRename_SetFile(file)
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	var value = DKWidget_GetValue("DKSolutionRename_box");
-	DKLog("DKSolutionRename_Rename() = "+value+"\n", DKINFO);
-	DKWidget_SetValue(DKSolutionRename_id, value);
+	DKLog("DKSolutionRename_Rename()\n", DKINFO);
+	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
+	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
+	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
+	var newvalue = oldvalue;
+	newvalue = newvalue.replace(oldhtml, newhtml);
+	DKLog("oldhtml = "+oldhtml+"\n", DKINFO);
+	DKLog("oldvalue = "+oldvalue+"\n", DKINFO);
+	DKLog("newhtml = "+newhtml+"\n", DKINFO);
+	DKLog("newvalue = "+newvalue+"\n", DKINFO);
+	
+	if(!DKFile_Rename(oldvalue, newvalue)){ return; }
+	DKWidget_SetValue(DKSolutionRename_id, newvalue);
+	DKWidget_SetInnerHtml(DKSolutionRename_id, newhtml);
 }
