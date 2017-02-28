@@ -1,3 +1,4 @@
+DKSolutionMenu_id = "";
 DKSolutionMenu_file = "";
 
 //////////////////////////////
@@ -55,6 +56,13 @@ function DKSolutionMenu_OnEvent(event)
 	DKClose("DKSolutionMenu.js");
 }
 
+/////////////////////////////////
+function DKSolutionMenu_SetId(id)
+{
+	DKLog("DKSolutionMenu_SetId("+id+")\n", DKINFO);
+	DKSolutionMenu_id = id;
+}
+
 /////////////////////////////////////
 function DKSolutionMenu_SetFile(file)
 {
@@ -67,6 +75,20 @@ function DKSolutionMenu_Rename()
 {
 	//TODO
 	DKLog("DKSolutionMenu_Rename() \n", DKINFO);
+
+	var top1 = DKWidget_GetOffsetTop(DKSolutionMenu_id);
+	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
+	var top = top1 - top2 - 1;
+	
+	var element = DKWidget_CreateElement("DKSolutionMenu", "input", "rename");
+	DKWidget_SetAttribute(element, "type", "text");
+	DKWidget_SetProperty(element, "position", "absolute");
+	DKWidget_SetProperty(element, "top", top+"rem");
+	DKWidget_SetProperty(element, "width", "100%");
+	DKWidget_SetProperty(element, "height", "14rem");
+	
+	var value = DKWidget_GetInnerHtml(DKSolutionMenu_id);
+	DKWidget_SetValue(element, value);
 }
 
 ////////////////////////////////

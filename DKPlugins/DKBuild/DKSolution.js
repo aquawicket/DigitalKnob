@@ -36,6 +36,7 @@ function DKSolution_OnEvent(event)
 		if(DK_Id(event, "DKSolution.html")){ return; }
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
+			DKSolutionMenu_SetId(DK_GetId(event));
 			DKSolutionMenu_SetFile(file);
 		});
 		return;
