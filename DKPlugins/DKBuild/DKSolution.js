@@ -15,8 +15,7 @@ function DKSolution_Init()
 	aPath = "";
 	rPath = "";
 	
-	//DKSolution_UpdatePath("C:/digitalknob");
-	DKSolution_UpdatePath(DKPATH);
+	DKSolution_UpdatePath(DKPATH); //DKPATH from DKBuild.js
 }
 
 /////////////////////////
