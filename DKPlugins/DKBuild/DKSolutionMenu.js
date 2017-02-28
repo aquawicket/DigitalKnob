@@ -107,6 +107,7 @@ function DKSolutionMenu_Copy()
 {
 	//TODO
 	DKLog("DKSolutionMenu_Copy() \n", DKINFO);
+	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
 /////////////////////////////
@@ -114,6 +115,7 @@ function DKSolutionMenu_Cut()
 {
 	//TODO
 	DKLog("DKSolutionMenu_Cut() \n", DKINFO);
+	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
 ///////////////////////////////
