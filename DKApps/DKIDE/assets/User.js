@@ -76,7 +76,7 @@ else{  //Duktape or V8 or Webview
 			var frame = DKFrame_Widget("DKSolution.html");
 			DKWidget_SetProperty(frame, "top", "40rem");
 			DKWidget_SetProperty(frame,"left","0rem");
-			DKWidget_SetProperty(frame,"bottom","22rem");
+			DKWidget_SetProperty(frame,"bottom","23rem");
 			DKWidget_SetProperty(frame,"width","160rem");
 			DKWidget_RemoveProperty(frame,"height");
 			DKWidget_SetProperty("DKSolution.html","bottom","0rem");
