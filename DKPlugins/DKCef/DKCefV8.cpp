@@ -23,6 +23,7 @@ void DKCefV8::Init()
 	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
 	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
+	DKCefApp::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
 	DKCefApp::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
 	DKCefApp::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKCefApp::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
@@ -216,6 +217,14 @@ bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
 {
 	DKString string = args[0]->GetStringValue();
 	if(!DKUtil::SetClipboard(string)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval)
+{
+	DKString filelist = args[0]->GetStringValue();
+	if(!DKUtil::SetClipboardFiles(filelist)){ return false; }
 	return true;
 }
 
