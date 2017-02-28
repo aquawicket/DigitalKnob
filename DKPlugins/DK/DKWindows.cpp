@@ -53,14 +53,12 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist)
 {
 	DKLog("DKWindows::SetClipboardFiles("+filelist+")\n", DKDEBUG);
 	
-	//DKString files = filelist;
-	//replace(files, ",", "\0");
-	//const char* sFiles = files.c_str(); 
+	//char sFiles[] = "C:/digitalknob/README.md\0";
+	DKString sFiles = filelist;
+	replace(sFiles, ",", "\0"); //not working
 	
-	char sFiles[] = "C:/digitalknob/README.md\0";
-
 	DROPFILES dobj = { 20, { 0, 0 }, 0, 1 };
-	int nLen = sizeof(sFiles);
+	int nLen = sFiles.size(); //sizeof(sFiles);
 	int nGblLen = sizeof(dobj) + nLen*2 + 5; //lots of nulls and multibyte_char
 	HGLOBAL hGbl = GlobalAlloc(GMEM_ZEROINIT|GMEM_MOVEABLE|GMEM_DDESHARE, nGblLen);
 	char* sData = (char*)::GlobalLock(hGbl);
