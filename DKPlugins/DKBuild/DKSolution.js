@@ -32,8 +32,12 @@ function DKSolution_OnEvent(event)
 
 	if(DK_Type(event, "contextmenu")){
 		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
-		DKCreate("DKBuild/DKSolutionMenu.js", function(){});
 		StopPropagation(event);
+		if(DK_Id(event, "DKSolution.html")){ return; }
+		DKCreate("DKBuild/DKSolutionMenu.js", function(){
+			var file = DKWidget_GetValue(DK_GetId(event));
+			DKSolutionMenu_SetFile(file);
+		});
 		return;
 	}
 		
@@ -128,6 +132,7 @@ function DKSolution_UpdatePath(path)
 			DKWidget_SetInnerHtml(element2,files[d]);
 			DKWidget_SetProperty(element2, "background-image", "url(\"DKFile/folder.png\")");
 			DKWidget_SetProperty(element2, "background-repeat", "no-repeat");
+			DKAddEvent(element2, "contextmenu", DKSolution_OnEvent);
 		}
 	}
 
@@ -142,6 +147,7 @@ function DKSolution_UpdatePath(path)
 			DKWidget_SetInnerHtml(element3,files[f]);
 			DKAddEvent(element3, "click", DKSolution_OnEvent);
 			DKAddEvent(element3, "dblclick", DKSolution_OnEvent);
+			DKAddEvent(element3, "contextmenu", DKSolution_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
