@@ -65,6 +65,7 @@ function DKSolutionRename_Rename()
 	DKLog("newvalue = "+newvalue+"\n", DKINFO);
 	
 	if(!DKFile_Rename(oldvalue, newvalue, true)){
+		DKLog("Rename failed\n", DKERROR);
 		return; 
 	}
 	DKWidget_SetAttribute(DKSolutionRename_id, "value", newvalue);
