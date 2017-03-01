@@ -6,12 +6,14 @@ function DKSolutionRename_Init()
 {
 	DKCreate("DKBuild/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
+	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
 }
 
 /////////////////////////////
 function DKSolutionRename_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
+	DKRemoveEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
 	DKClose("DKSolutionRename.html");
 }
 
@@ -20,6 +22,11 @@ function DKSolutionRename_OnEvent(event)
 {
 	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
+	if(DK_Type(event, "keydown")){
+		if(DKWidget_GetValue(event) != 13){
+			return;
+		}
+	}
 	if(DK_Id(event, "GLOBAL")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKSolutionRename.html")){
 			return;
