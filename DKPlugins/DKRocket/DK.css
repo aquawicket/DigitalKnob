@@ -16,13 +16,11 @@ body{
 	overflow-y: hidden;
 }
 
-textarea
-{
+textarea{
 	resize: none;
 }
 
-option
-{
+option{
 	background-color: white;
 	color:black;
 	
@@ -34,14 +32,12 @@ option
     user-select: none;
 }
 
-option:hover
-{
+option:hover{
 	background-color: rgb(123,157,212);
 	color:white;
 }
 
-div.option:hover
-{
+div.option:hover{
 	background-color: rgb(123,157,212);
 	color:white;
 }
