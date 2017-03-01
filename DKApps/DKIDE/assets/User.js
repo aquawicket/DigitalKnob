@@ -83,11 +83,7 @@ else{  //Duktape or V8 or Webview
 		});
 		
 	});
-	DKCreate("New.js", function(){});
-	DKCreate("DKFrame/DKFrame.js", function(){
-		DKFrame_Widget("New.html");
-	});
-	
+
 	
 	/*
 	if(DK_GetBrowser() != "CEF"){ 
