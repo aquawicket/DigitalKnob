@@ -62,7 +62,7 @@ function DKSolution_OnEvent(event)
 		}
 	
 		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
-		DK_ClearSelection();
+		//DK_ClearSelection();
 		return;
 	}
 }
