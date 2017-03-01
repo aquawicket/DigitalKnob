@@ -33,7 +33,7 @@ function DKSolution_OnEvent(event)
 	if(DK_Type(event, "contextmenu")){
 		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
 		StopPropagation(event);
-		if(DK_Id(event, "DKSolution.html")){ return; }
+		//if(DK_Id(event, "DKSolution.html")){ return; }
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
 			DKSolutionMenu_SetId(DK_GetId(event));
@@ -59,12 +59,15 @@ function DKSolution_OnEvent(event)
 		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
 		
 		//Clear text selection
+		DK_ClearSelection();
+		/*
 		if(document.selection){
 			document.selection.empty();
 		}
 		else if(window.getSelection){
 			window.getSelection().removeAllRanges();
 		}
+		*/
 	
 		return;
 	}

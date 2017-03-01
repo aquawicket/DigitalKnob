@@ -578,3 +578,15 @@ function DK_Sleep(milliseconds){
     }
   }
 }
+
+////////////////////////////
+function DK_ClearSelection()
+{
+	//Clear text selection
+	if(document.selection){
+		document.selection.empty();
+	}
+	else if(window.getSelection){
+		window.getSelection().removeAllRanges();
+	}
+}

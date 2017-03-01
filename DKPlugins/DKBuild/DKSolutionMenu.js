@@ -8,6 +8,8 @@ function DKSolutionMenu_Init()
 	DKWidget_SetProperty("DKSolutionMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKSolutionMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Delete", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
@@ -19,6 +21,8 @@ function DKSolutionMenu_Init()
 function DKSolutionMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_Delete", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
@@ -32,6 +36,12 @@ function DKSolutionMenu_OnEvent(event)
 {
 	DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
+	if(DK_Id(event,"DKSolutionMenu_NewFile")){
+		DKSolutionMenu_NewFile();
+	}
+	if(DK_Id(event,"DKSolutionMenu_NewFolder")){
+		DKSolutionMenu_NewFolder();
+	}
 	if(DK_Id(event,"DKSolutionMenu_Rename")){
 		DKSolutionMenu_Rename();
 	}
@@ -68,6 +78,20 @@ function DKSolutionMenu_SetFile(file)
 {
 	DKLog("DKSolutionMenu_SetFile("+file+")\n", DKINFO);
 	DKSolutionMenu_file = file;
+}
+
+/////////////////////////////////
+function DKSolutionMenu_NewFile()
+{
+	//TODO
+	DKLog("DKSolutionMenu_NewFile() \n", DKINFO);
+}
+
+///////////////////////////////////
+function DKSolutionMenu_NewFolder()
+{
+	//TODO
+	DKLog("DKSolutionMenu_NewFolder() \n", DKINFO);
 }
 
 ////////////////////////////////
