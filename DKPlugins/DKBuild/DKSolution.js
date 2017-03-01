@@ -28,7 +28,7 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_IdLike(event, "DKSolutionFolder") || DK_IdLike(event, "DKSolutionFiles")){
 		//DKWidget_SetProperty(DK_GetId(event), "background-color", "rgb(123,157,212)");
@@ -36,9 +36,7 @@ function DKSolution_OnEvent(event)
 	}
 		
 	if(DK_Type(event, "contextmenu")){
-		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);	
-		
-		
+		//DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);	
 		StopPropagation(event);
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
@@ -50,7 +48,7 @@ function DKSolution_OnEvent(event)
 		
 	if(DK_Id(event, "DKSolutionUp")){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/..";
-		DKLog(up+"\n", DKDEBUG);
+		//DKLog(up+"\n", DKDEBUG);
 		DKSolution_OpenFolder(up);
 	}
 	
@@ -72,7 +70,7 @@ function DKSolution_OnEvent(event)
 ////////////////////////////////////
 function DKSolution_OpenFolder(path)
 {
-	DKLog("DKSolution_OpenFolder("+path+") \n", DKINFO);
+	//DKLog("DKSolution_OpenFolder("+path+") \n", DKINFO);
 	if(DKSolution_UpdatePath(path)){
 		return true;
 	}
@@ -82,7 +80,7 @@ function DKSolution_OpenFolder(path)
 //////////////////////////////////
 function DKSolution_OpenFile(path)
 {
-	DKLog("DKSolution_OpenFile("+path+") \n", DKINFO);
+	//DKLog("DKSolution_OpenFile("+path+") \n", DKINFO);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -103,7 +101,7 @@ function DKSolution_OpenFile(path)
 function DKSolution_UpdatePath(path)
 {
 	//if(!path){ return false; }
-	DKLog("DKSolution_UpdatePath("+path+") \n", DKDEBUG);
+	//DKLog("DKSolution_UpdatePath("+path+") \n", DKDEBUG);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
