@@ -29,11 +29,17 @@ function DKSolution_End()
 function DKSolution_OnEvent(event)
 {	
 	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
-
+	
+	if(DK_IdLike(event, "DKSolutionFolder") || DK_IdLike(event, "DKSolutionFiles")){
+		//DKWidget_SetProperty(DK_GetId(event), "background-color", "rgb(123,157,212)");
+		//DKWidget_SetProperty(DK_GetId(event), "color", "rgb(255,255,255)");
+	}
+		
 	if(DK_Type(event, "contextmenu")){
-		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);
+		DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);	
+		
+		
 		StopPropagation(event);
-		//if(DK_Id(event, "DKSolution.html")){ return; }
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
 			DKSolutionMenu_SetId(DK_GetId(event));
@@ -48,27 +54,17 @@ function DKSolution_OnEvent(event)
 		DKSolution_OpenFolder(up);
 	}
 	
-	if(DK_IdLike(event, "DKSolutionFolder")){
-		DKLog("DKSolutionFolder", DKINFO);
-		DKSolution_OpenFolder(DKWidget_GetValue(event));
-	}
-	
 	if(DK_Type(event, "dblclick")){
-		DKLog(DK_GetId(event)+"\n", DKINFO);
-		DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
-		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
-		
-		//Clear text selection
-		DK_ClearSelection();
-		/*
-		if(document.selection){
-			document.selection.empty();
+		//DKLog(DK_GetId(event)+"\n", DKINFO);
+		//DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
+		if(DK_IdLike(event, "DKSolutionFolder")){
+			DKLog("DKSolutionFolder", DKINFO);
+			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
+			return;
 		}
-		else if(window.getSelection){
-			window.getSelection().removeAllRanges();
-		}
-		*/
 	
+		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
+		DK_ClearSelection();
 		return;
 	}
 }
@@ -136,6 +132,8 @@ function DKSolution_UpdatePath(path)
 			DKWidget_SetInnerHtml(element2,files[d]);
 			DKWidget_SetProperty(element2, "background-image", "url(\"DKFile/folder.png\")");
 			DKWidget_SetProperty(element2, "background-repeat", "no-repeat");
+			DKAddEvent(element2, "click", DKSolution_OnEvent);
+			DKAddEvent(element2, "dblclick", DKSolution_OnEvent);
 			DKAddEvent(element2, "contextmenu", DKSolution_OnEvent);
 		}
 	}

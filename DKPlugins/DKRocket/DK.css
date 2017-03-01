@@ -21,6 +21,12 @@ textarea
 	resize: none;
 }
 
+option
+{
+	background-color: white;
+	color:black;
+}
+
 option:hover
 {
 	background-color: rgb(123,157,212);
