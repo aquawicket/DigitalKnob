@@ -49,7 +49,10 @@ bool DKFile::Rename(const DKString& input, const DKString& output, const bool ov
 {
 	DKLog("DKFile::Rename("+input+","+output+","+toString(overwrite)+")\n", DKDEBUG);
 	
-	if(!PathExists(input)){ return false; }
+	if(!PathExists(input)){
+		DKLog("DKFile::Rename("+input+","+output+","+toString(overwrite)+") failed! Path does not exist \n", DKERROR);
+		return false; 
+	}
 
 	if(PathExists(output)){
 		if(overwrite == false){
