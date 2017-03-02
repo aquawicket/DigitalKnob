@@ -44,4 +44,10 @@ bool DKLinux::GetMousePos(int& x, int& y)
 	return false;
 }
 
+//////////////////////////////////////////
+bool DKLinux::Run(const DKString& command)
+{
+  return false;
+}
+
 #endif //LINUX

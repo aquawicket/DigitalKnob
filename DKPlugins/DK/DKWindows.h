@@ -29,6 +29,7 @@ public:
 	static bool GetMousePos(int& x, int& y);
 	static bool LeftClick();
 	static bool RightClick();
+	static bool Run(const DKString& command);
 	static bool Sleep(int milliseconds);
 #if !defined(WIN64)
 	static bool RefreshWindowsEnvironment();

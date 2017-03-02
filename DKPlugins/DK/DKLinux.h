@@ -5,11 +5,14 @@
 
 #define DESKTOP
 
+#include "DKString.h"
+
 /////////////
 class DKLinux
 {
 public:
 	static bool GetMousePos(int& x, int& y);
+	static bool Run(const DKString& command);
 
 };
 

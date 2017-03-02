@@ -533,6 +533,13 @@ bool DKWindows::GetProcessList(DKString& list)
 	return true;
 }
 
+////////////////////////////////////////////
+bool DKWindows::Run(const DKString& command)
+{
+  ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
+  return true;
+}
+
 /*
 ////////////////////////////
 bool DKWindows::PrintStack()
