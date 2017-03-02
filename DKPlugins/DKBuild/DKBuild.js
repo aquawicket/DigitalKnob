@@ -1,3 +1,8 @@
+/*
+	Git should be extracted from this to it's own plugin.
+	Also, git credential memory should be added.
+*/
+
 var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64
 var APP = "";  //DKAppname
 var TYPE = "";  //Debug, Release, ALL
@@ -435,6 +440,14 @@ function DKBuild_GitCommit()
 	if(DKValid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
+}
+
+/////////////////////////////////
+function DKBuild_GitCredentials()
+{
+	DKLog("Git Credentials... \n", DKINFO);
+	//how do we let git remember out login for repositories
+	//we don't want to have to log in on every commit.
 }
 
 ///////////////////////////////////
