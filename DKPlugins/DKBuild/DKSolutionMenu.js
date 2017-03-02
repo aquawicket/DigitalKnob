@@ -8,6 +8,8 @@ function DKSolutionMenu_Init()
 	DKWidget_SetProperty("DKSolutionMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKSolutionMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
@@ -22,6 +24,8 @@ function DKSolutionMenu_Init()
 function DKSolutionMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
+	DKRemoveEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
 	DKRemoveEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
@@ -38,6 +42,12 @@ function DKSolutionMenu_OnEvent(event)
 {
 	DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
+	if(DK_Id(event,"DKSolutionMenu_Open")){
+		DKSolutionMenu_Open();
+	}
+	if(DK_Id(event,"DKSolutionMenu_OpenHere")){
+		DKSolutionMenu_OpenHere();
+	}
 	if(DK_Id(event,"DKSolutionMenu_NewFile")){
 		DKSolutionMenu_NewFile();
 	}
@@ -83,6 +93,20 @@ function DKSolutionMenu_SetFile(file)
 {
 	DKLog("DKSolutionMenu_SetFile("+file+")\n", DKINFO);
 	DKSolutionMenu_file = file;
+}
+
+//////////////////////////////
+function DKSolutionMenu_Open()
+{
+	//TODO
+	DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n", DKINFO);
+}
+
+//////////////////////////////////
+function DKSolutionMenu_OpenHere()
+{
+	//TODO
+	DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n", DKINFO);
 }
 
 /////////////////////////////////
