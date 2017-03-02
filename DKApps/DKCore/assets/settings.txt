@@ -1,2 +1,0 @@
-##DKCORE does not use DKASSETS, so the settings file will not work.
-Add DKDEPEND(DKAssets) to DKCMake.txt to use this.

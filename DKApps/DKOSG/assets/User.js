@@ -1,1 +1,0 @@
-DKCreate("DKOSGWindow");

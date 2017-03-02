@@ -1,3 +1,0 @@
-[CONSOLE] ON
-[LOG_DEBUG] ON
-[LOG_HIDE] DKClass::_Valid(DKRocket
