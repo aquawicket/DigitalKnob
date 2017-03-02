@@ -1,0 +1,17 @@
+/////////////////////////
+function DKMenubar_Init()
+{
+
+}
+
+////////////////////////
+function DKMenubar_End()
+{
+
+}
+
+///////////////////////////////
+function DKMenubar_OnEvent(event)
+{
+
+}
