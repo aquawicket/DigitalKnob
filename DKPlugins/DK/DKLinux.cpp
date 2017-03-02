@@ -47,7 +47,8 @@ bool DKLinux::GetMousePos(int& x, int& y)
 //////////////////////////////////////////
 bool DKLinux::Run(const DKString& command)
 {
-  return false;
+	//https://cboard.cprogramming.com/linux-programming/79686-linux-equivalent-win32-shellexecute.html
+	return false;
 }
 
 #endif //LINUX
