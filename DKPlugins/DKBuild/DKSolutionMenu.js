@@ -90,6 +90,7 @@ function DKSolutionMenu_NewFile()
 {
 	//TODO
 	DKLog("DKSolutionMenu_NewFile() \n", DKINFO);
+	//We need to know what directory we are in first.
 }
 
 ///////////////////////////////////
@@ -97,6 +98,7 @@ function DKSolutionMenu_NewFolder()
 {
 	//TODO
 	DKLog("DKSolutionMenu_NewFolder() \n", DKINFO);
+	//We need to know what directory we are in first.	
 }
 
 ////////////////////////////////
@@ -157,4 +159,14 @@ function DKSolutionMenu_GitAdd()
 {
 	//TODO
 	DKLog("DKSolutionMenu_GitAdd() \n", DKINFO);
+	
+	//we need the path of git.exe
+	//var git = GIT; //from DKBuild.js
+	//DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n", DKINFO);
+	// The GIT variable seems OK
+	
+	
+	//we need to find the folder of the git repository
+	//we need to chdir to that path
+	//we need to "git add path" of the file we want to add.
 }
