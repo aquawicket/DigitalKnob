@@ -440,9 +440,9 @@ bool DKUtil::Run(const DKString& command)
 {
 	DKLog("DKUtil::Run("+command+")\n", DKDEBUG);
 #ifdef WIN32
-	//ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
-	//return true;
-	return DKWindow::Run(command);
+	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
+	return true;
+	//return DKWindow::Run(command);
 #endif
 #ifdef LINUX
 	return DKLinux::Run(command);
