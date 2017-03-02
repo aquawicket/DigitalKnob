@@ -1,0 +1,2 @@
+[MYSVN] https://github.com/aquawicket/DKTestApps/trunk/
+[MYGIT] https://github.com/aquawicket/DKTestApps.git
