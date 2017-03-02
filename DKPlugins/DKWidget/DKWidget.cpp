@@ -345,6 +345,10 @@ bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
 DKElement* DKWidget::CreateElement(const DKString& tag)
 {
 	DKElement* element = dkRocket->GetDocument()->CreateElement(tag.c_str());
+	if(!element){
+		DKLog("DKWidget::CreateElement("+tag+")\n", DKERROR);
+		return 0;
+	}
 	element->SetAttribute("style","top:0rem;"); //we do this just to initialze an active style string
 	return element;
 }
