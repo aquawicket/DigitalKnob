@@ -44,14 +44,16 @@ bool DKLinux::GetMousePos(int& x, int& y)
 //////////////////////////////////////////
 bool DKLinux::Run(const DKString& command)
 {
+	//TODO
 	//https://cboard.cprogramming.com/linux-programming/79686-linux-equivalent-win32-shellexecute.html
 	//http://www.linuxquestions.org/questions/programming-9/is-there-something-like-shellexecute-in-linux-213725/
 	
+	/*
 	// sh_cmd() - executes a command in the background
 	// returns TRUE is command was executed  (not the result of the command though..)
 	//NO GLOBALS
 	//static gint sh_cmd (gchar * path, gchar * cmd, gchar * args)
-	{
+	//{
 		//gchar* path = "blah blah blah"; //FIXME
 		gchar* path = (gchar*)command;
 		gchar* cmd = ""; //FIXME
@@ -83,7 +85,8 @@ bool DKLinux::Run(const DKString& command)
 		g_strfreev (argv);
 		//return rc;
 		return true;
-	}
+	//}
+	*/
 
 	return false;
 }
