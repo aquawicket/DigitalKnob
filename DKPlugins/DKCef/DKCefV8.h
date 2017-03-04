@@ -32,6 +32,7 @@ public:
 	static bool SetClipboardFiles(CefArgs args, CefReturn retval);
 	static bool ShowConsole(CefArgs args, CefReturn retval);
 	static bool StrokeKey(CefArgs args, CefReturn retval);
+	static bool System(CefArgs args, CefReturn retval);
 	static bool WaitForImage(CefArgs args, CefReturn retval);
 };
 
