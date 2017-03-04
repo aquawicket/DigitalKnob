@@ -412,6 +412,10 @@ bool DKFile::FileToString(const DKString& file, DKString& string)
 		DKLog("DKFile::FileToString("+file+") path does not exist! \n", DKWARN);
 		return false; 
 	}
+	if(IsDirectory(file)){
+		DKLog("DKFile::FileToString("+file+") path is a directory! \n", DKWARN);
+		return false; 
+	}
 
 	//TODO: error control
 	std::ifstream t(file.c_str());
