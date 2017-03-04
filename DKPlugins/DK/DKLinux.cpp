@@ -48,6 +48,20 @@ bool DKLinux::Run(const DKString& command)
 	//https://cboard.cprogramming.com/linux-programming/79686-linux-equivalent-win32-shellexecute.html
 	//http://www.linuxquestions.org/questions/programming-9/is-there-something-like-shellexecute-in-linux-213725/
 	
+	DKString cmd = command;
+	DKString params = "";
+	pid_t pid;
+    pid=fork();
+    if (pid==0){
+    	if (execl(cmd.c_str(), params.c_str()) < 0)
+        	return true;
+        else
+            return true;
+    }
+    else if(pid>0)
+           return true;
+    else
+           return true;
 	/*
 	// sh_cmd() - executes a command in the background
 	// returns TRUE is command was executed  (not the result of the command though..)
