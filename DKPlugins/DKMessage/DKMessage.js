@@ -1,7 +1,8 @@
-var event_return_type;
-var event_return_id;
-var event_data;
+//var event_return_type;
+//var event_return_id;
+//var event_data;
 
+var DKMessage_callback;
 
 /////////////////////////
 function DKMessage_Init()
@@ -9,9 +10,9 @@ function DKMessage_Init()
 	//DKLog("***********DKMessageInit() \n", DKDEBUG);
 	DKCreate("DKMessage/DKMessage.html", function(){
 		//DKFrame_Widget("DKMessage.html");
-		DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
-		DKAddEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
-		DKAddEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
+		//DKAddEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
+		//DKAddEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
+		//DKAddEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
 		DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
 		DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
 		//DKAddEvent("DKMessageInput", "keydown", DKMessage_OnEvent);
@@ -22,9 +23,9 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	DKRemoveEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
-	DKRemoveEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
-	DKRemoveEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
+	//DKRemoveEvent("DKMessage.html", "ShowMessage", DKMessage_OnEvent);
+	//DKRemoveEvent("DKMessage.html", "Confirm", DKMessage_OnEvent);
+	//DKRemoveEvent("DKMessage.html", "GetInput", DKMessage_OnEvent);
 	DKRemoveEvent("DKMessageOk", "click", DKMessage_OnEvent);
 	DKRemoveEvent("DKMessageCancel", "click", DKMessage_OnEvent);
 	DKClose("DKMessage.html");
@@ -38,6 +39,10 @@ function DKMessage_OnEvent(event)
 	if(DK_Id(event, "DKMessageOk")){
 		//DKLog("DKMessageOk \n", DKDEBUG)
 		//DKWidget_Hide("DKMessage.html");
+		DKMessage_callback(true);
+		
+		/*
+		return;
 		event_data = "OK";
 		if(DKWidget_Visible("DKMessageInput")){
 			event_data = DKWidget_GetValue("DKMessageInput");
@@ -53,26 +58,32 @@ function DKMessage_OnEvent(event)
 		}
 		
 		DKMessage_ClearData();
+		*/
 		DKFrame_Close("DKMessage.html");
 		return;
 	}
 	
 	if(DK_Id(event, "DKMessageCancel")){
 		//DKWidget_Hide("DKMessage.html");
-		event_data = "CANCEL";
+		//event_data = "CANCEL";
+		DKMessage_callback(false);
 		
 		//DKLog("event_return_type: "+event_return_type+"\n", DKDEBUG);
 		//DKLog("event_return_id: "+event_return_id+"\n", DKDEBUG);
 		//DKLog("event_data: "+event_data+"\n", DKDEBUG);
+		
+		/*
 		if(event_return_id){
 			DKSendEvent(event_return_id, event_return_type, event_data);
 		}
 		
 		DKMessage_ClearData();
+		*/
 		DKFrame_Close("DKMessage.html");
 		return;
 	}
 	
+	/*
 	if(DK_Type(event, "GetInput")){
 		var params = DKWidget_GetValue(event).split(",");
 		event_return_id = params[0];
@@ -91,7 +102,9 @@ function DKMessage_OnEvent(event)
 		DKLog("event_data: "+event_data+"\n", DKDEBUG);
 		//GetElementById("DKMessageInput")->Focus();
 	}
+	*/
 	
+	/*
 	if(DK_Type(event, "Confirm")){
 		var params = DKWidget_GetValue(event).split(",");
 		event_return_id = params[0];
@@ -110,7 +123,9 @@ function DKMessage_OnEvent(event)
 		DKLog("event_data: "+event_data+"\n", DKDEBUG);
 		//GetElementById("DKMessageOk")->Focus();
 	}
+	*/
 	
+	/*
 	if(DK_Type(event, "ShowMessage")){
 		//var params = DKWidget_GetValue(event).split(",");
 		//event_return_id = params[0];
@@ -129,8 +144,10 @@ function DKMessage_OnEvent(event)
 		//DKLog("event_data: "+event_data+"\n", DKDEBUG);
 		//GetElementById("DKMessageOk")->Focus();
 	}
+	*/
 }
 
+/*
 //////////////////////////////
 function DKMessage_ClearData()
 {
@@ -141,8 +158,21 @@ function DKMessage_ClearData()
 	DKWidget_SetValue("DKMessageText", "");
 	DKWidget_SetValue("DKMessageInput", "");
 }
+*/
 
+////////////////////////////////////
+function DKMessageBox_Confirm(message, callback)
+{
+	DKWidget_SetInnerHtml("DKMessageText", message);
+	DKWidget_Hide("DKMessageInput");
+	DKWidget_Show("DKMessageText");
+	DKWidget_Show("DKMessage.html");
+	
+	DKMessage_callback = callback;
+}
+	
 //Quick function
+/*
 //////////////////////////////////////////
 function DKMessageBox(event, cmd, message)
 {
@@ -156,3 +186,4 @@ function DKMessageBox(event, cmd, message)
 	if(DKWidget_GetValue(event) == "CANCEL"){ return false; }
 	return DKWidget_GetValue(event);
 }
+*/

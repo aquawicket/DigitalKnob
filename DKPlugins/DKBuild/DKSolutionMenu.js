@@ -200,15 +200,16 @@ function DKSolutionMenu_Delete()
 	DKLog("DKSolutionMenu_Delete() \n", DKINFO);
 	
 	//TODO - confirm
-	/*
 	DKCreate("DKMessage/DKMessage.js", function(){
-		DKMessageBox(event, "Confirm", "delete this file?");
 		DKFrame_Widget("DKMessage.html");
+		DKMessageBox_Confirm("delete this file?", function(rval){
+			DKLog("DKMessageBox_Confirm(): rval = "+rval+"\n", DKINFO);
+			if(rval == true){
+				DKFile_Delete(DKSolutionMenu_file);
+				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
+			}
+		});
 	});
-	*/
-	
-	DKFile_Delete(DKSolutionMenu_file);
-	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 }
 
 //////////////////////////////
