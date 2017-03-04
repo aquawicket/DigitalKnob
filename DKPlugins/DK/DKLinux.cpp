@@ -44,65 +44,10 @@ bool DKLinux::GetMousePos(int& x, int& y)
 //////////////////////////////////////////
 bool DKLinux::Run(const DKString& command)
 {
-	//TODO
-	//https://cboard.cprogramming.com/linux-programming/79686-linux-equivalent-win32-shellexecute.html
-	//http://www.linuxquestions.org/questions/programming-9/is-there-something-like-shellexecute-in-linux-213725/
-	
 	DKString cmd = command;
-	DKString params = "";
-	pid_t pid;
-    pid=fork();
-    if (pid==0){
-    	if (execl(cmd.c_str(), params.c_str()) < 0)
-        	return true;
-        else
-            return true;
-    }
-    else if(pid>0)
-           return true;
-    else
-           return true;
-	/*
-	// sh_cmd() - executes a command in the background
-	// returns TRUE is command was executed  (not the result of the command though..)
-	//NO GLOBALS
-	//static gint sh_cmd (gchar * path, gchar * cmd, gchar * args)
-	//{
-		//gchar* path = "blah blah blah"; //FIXME
-		gchar* path = (gchar*)command;
-		gchar* cmd = ""; //FIXME
-		gchar* args = ""; //FIXME
-		
-		gchar cmd_line[256];
-		gchar** argv;
-		gint argp;
-		gint rc = 0;
-
-		if(cmd == NULL){
-			return FALSE;
-		}
-		if (cmd[0] == '\0'){
-			return FALSE;
-		}
-		if (path != NULL){
-			chdir (path);
-		}
-
-		snprintf (cmd_line, sizeof (cmd_line), "%s %s", cmd, args);
-		rc = g_shell_parse_argv (cmd_line, &argp, &argv, NULL);
-		if(!rc){
-			g_strfreev (argv);
-			return rc;
-		}
-
-		rc = g_spawn_async (path, argv, NULL, G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
-		g_strfreev (argv);
-		//return rc;
-		return true;
-	//}
-	*/
-
-	return false;
+	cmd += " &";
+	system(cmd.c_str());
+	return true;
 }
 
 #endif //LINUX
