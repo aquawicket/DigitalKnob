@@ -94,6 +94,9 @@ function DKSolution_OpenFile(path)
 	DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	DKWidget_SetValue("DKSolutionPath",aPath);
 	//DKDev_OpenFile(aPath);
+	if(DK_GetOS() == "Linux"){
+		aPath = "xdg-open "+aPath;
+	}
 	DK_Run(aPath);
 }
 

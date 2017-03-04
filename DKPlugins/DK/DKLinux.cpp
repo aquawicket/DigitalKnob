@@ -47,6 +47,7 @@ bool DKLinux::Run(const DKString& command)
 	DKString cmd = command;
 	cmd += " &";
 	system(cmd.c_str());
+	//execl(cmd.c_str(), (char*)0);
 	return true;
 }
 
