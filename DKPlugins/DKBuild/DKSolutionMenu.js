@@ -197,12 +197,18 @@ function DKSolutionMenu_Rename()
 ////////////////////////////////
 function DKSolutionMenu_Delete()
 {
-	//TODO
 	DKLog("DKSolutionMenu_Delete() \n", DKINFO);
+	
+	//TODO - confirm
+	/*
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKMessageBox(event, "Confirm", "delete this file?");
 		DKFrame_Widget("DKMessage.html");
 	});
+	*/
+	
+	DKFile_Delete(DKSolutionMenu_file);
+	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 }
 
 //////////////////////////////
