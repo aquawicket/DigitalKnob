@@ -121,6 +121,26 @@ function DKSolutionMenu_NewFile()
 	
 	DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
 	DKFile_StringToFile("", DKSolutionMenu_file+"New.txt"); // lets try to cheat
+	
+	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
+	DKSolutionMenu_SetFile(DKWidget_GetValue("DKSolutionPath")+"/New.txt");
+	
+	//Find the id
+	var elements = DKWidget_GetElements("DKSolutionMenu");
+	DKLog("elements = "+elements+"\n", DKINFO);
+	var arry = elements.split(",");
+	for(var i=0; i<arry.length; i++){
+		DKLog("arry["+i+"] ="+arry[i]+"\n", DKINFO);
+		var value = DKWidget_GetValue(arry[i]);
+		DKLog("arry["+i+"] ="+value+"\n", DKINFO);
+		if(value == DKSolutionMenu_file){
+			DKSolutionMenu_SetId(arry[i]);
+			DKLog("id = "+arry[i]+"\n", DKINFO);
+			break;
+		}
+	}
+	
+	DKSolutionMenu_Rename();
 }
 
 ///////////////////////////////////
@@ -133,6 +153,26 @@ function DKSolutionMenu_NewFolder()
 	}
 	DKLog("DKSolutionMenu_NewFolder(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
 	DKFile_MkDir(DKSolutionMenu_file+"New");
+	
+	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
+	DKSolutionMenu_SetFile(DKWidget_GetValue("DKSolutionPath")+"/New");
+	
+	//Find the id
+	var elements = DKWidget_GetElements("DKSolutionMenu");
+	DKLog("elements = "+elements+"\n", DKINFO);
+	var arry = elements.split(",");
+	for(var i=0; i<arry.length; i++){
+		DKLog("arry["+i+"] ="+arry[i]+"\n", DKINFO);
+		var value = DKWidget_GetValue(arry[i]);
+		DKLog("arry["+i+"] ="+value+"\n", DKINFO);
+		if(value == DKSolutionMenu_file){
+			DKSolutionMenu_SetId(arry[i]);
+			DKLog("id = "+arry[i]+"\n", DKINFO);
+			break;
+		}
+	}
+	
+	DKSolutionMenu_Rename();
 }
 
 ////////////////////////////////
