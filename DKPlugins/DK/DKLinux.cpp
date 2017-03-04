@@ -45,7 +45,7 @@ bool DKLinux::GetMousePos(int& x, int& y)
 bool DKLinux::Run(const DKString& command)
 {
 	DKString cmd = command;
-	cmd += " &";
+	cmd = "xdg-open "+cmd+" &";
 	system(cmd.c_str());
 	//execl(cmd.c_str(), (char*)0);
 	return true;
