@@ -100,6 +100,7 @@ function DKSolutionMenu_Open()
 {
 	//TODO
 	DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n", DKINFO);
+	DKSolution_OpenFile(DKSolutionMenu_file);
 }
 
 //////////////////////////////////
@@ -112,29 +113,26 @@ function DKSolutionMenu_OpenHere()
 /////////////////////////////////
 function DKSolutionMenu_NewFile()
 {
-	//TODO
 	DKLog("DKSolutionMenu_NewFile() \n", DKINFO);
-	
 	if(!DKSolutionMenu_file){
-		//we can't use DKSolutionMenu_file to get the path
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
 		return;
 	}
 	
 	DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
-	//We need to know what directory we are in first.
-	//strip the file from "DKSolutionMenu_file" to get the directory.
-	//DKFile_GetExtention() works, let's create DKFile_GetPath()
-	
-	DKFile_StringToFile("", "New.txt"); // lets try to cheat
+	DKFile_StringToFile("", DKSolutionMenu_file+"New.txt"); // lets try to cheat
 }
 
 ///////////////////////////////////
 function DKSolutionMenu_NewFolder()
 {
-	//TODO
 	DKLog("DKSolutionMenu_NewFolder() \n", DKINFO);
-	//We need to know what directory we are in first.	
+	if(!DKSolutionMenu_file){
+		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
+		return;
+	}
+	DKLog("DKSolutionMenu_NewFolder(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
+	DKFile_MkDir(DKSolutionMenu_file+"New");
 }
 
 ////////////////////////////////

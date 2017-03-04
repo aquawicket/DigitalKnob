@@ -40,6 +40,9 @@ function DKSolution_OnEvent(event)
 		StopPropagation(event);
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
+			if(!file){
+				file = DKWidget_GetValue("DKSolutionPath")+"/";
+			}
 			DKSolutionMenu_SetId(DK_GetId(event));
 			DKSolutionMenu_SetFile(file);
 		});
