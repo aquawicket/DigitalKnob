@@ -100,21 +100,21 @@ function RunMenu_OnEvent(event)
 			}
 		}
 		if(DK_GetOS() == "Linux"){
-			if(OS = "linux"){
+			//if(OS == "linux64"){
 				//DKLog("TODO: Run linux apps from Linux \n", DKDEBUG);
-				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/linux64/Release/"+APP+".desktop")){
-					DK_Run(DKPATH+"/DKApps/"+APP+"/linux64/Release/"+APP+".desktop");
+				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
+					DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 				}
 				var contents = DKFile_DirectoryContents(DKPATH);
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
-					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/linux64/Release/"+APP+".desktop")){
+					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n", DKINFO);
-						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/linux64/Release/"+APP+".desktop");
+						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 						return;
 					}
 				}
-			}
+			//}
 		}
 	}
 	
