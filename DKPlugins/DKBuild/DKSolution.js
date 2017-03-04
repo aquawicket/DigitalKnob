@@ -93,9 +93,9 @@ function DKSolution_OpenFile(path)
 	DKLog("aPath:"+aPath+"\n", DKDEBUG);
 	var assets = DKAssets_LocalAssets();
 	//DKLog("assets:"+assets+"\n", DKDEBUG);
-	rPath = DKFile_GetRelativePath(aPath, assets);
-	DKLog("rPath:"+rPath+"\n", DKDEBUG);
-	DKWidget_SetValue("DKSolutionPath",aPath);
+	//rPath = DKFile_GetRelativePath(aPath, assets);
+	//DKLog("rPath:"+rPath+"\n", DKDEBUG);
+	//DKWidget_SetValue("DKSolutionPath",aPath);
 	//DKDev_OpenFile(aPath);
 	//if(DK_GetOS() == "Linux"){
 	//	aPath = "xdg-open "+aPath;
