@@ -72,7 +72,7 @@ function DKNotepadFile_Save()
 	DKFile_StringToFile(text, currentFile);
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage.html");
-		DKMessageBox("", "ShowMessage", "Saved File");
+		DKMessageBox_Message("File Saved");
 	});
 }
 

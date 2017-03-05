@@ -52,6 +52,7 @@ function DKAutomate_OnEvent(event)
 			DKFrame_Widget("DKMessage.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
 				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				if(!rval){ return; }
 				DKAutomate_NewTrigger(rval);
 			});
 		});
