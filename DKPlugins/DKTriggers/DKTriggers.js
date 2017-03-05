@@ -321,7 +321,7 @@ function DKTrigger_FireTrigger(trigger)
 		}
 		if(command == "Message"){
 			DKCreate("DKMessage/DKMessage.js", function(){
-				DKMessageBox("", "ShowMessage", var1);
+				DKMessageBox_Message(var1);
 			});
 			continue;
 		}

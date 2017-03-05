@@ -41,7 +41,7 @@ function DKPaint_Save()
 	
 	//TODO
 	//DKCreate("DKMessage/DKMessage.js");
-	//DKMessageBox("", "ShowMessage", "Saved File");
+	//DKMessageBox_Message("File Saved");
 }
 
 /////////////////////////////
