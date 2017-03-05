@@ -5,6 +5,8 @@ var event_data2;
 var aPath;
 var rPath;
 
+//var DKFileDialog_callback;
+
 ////////////////////////////
 function DKFileDialog_Init()
 {	
@@ -86,6 +88,14 @@ function DKFileDialog_OnEvent(event)
 		DKFileDialog_UpdatePath(event_data1);
 	}
 }
+
+/*
+//////////////////////////////////////
+function DKFileDialog_GetFIle(callback)
+{
+		DKFileDialog_callback = callback;
+}
+*/
 
 //////////////////////////////////////
 function DKFileDialog_OpenFolder(path)
