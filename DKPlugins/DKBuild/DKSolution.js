@@ -23,9 +23,8 @@ function DKSolution_OnEvent(event)
 {	
 	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
 	
-	//if(DK_IdLike(event, "DKSolutionFolder") || DK_IdLike(event, "DKSolutionFile")){
-		DKSolution_Select(DK_GetId(event));
-	//}
+	DKSolution_Select(DK_GetId(event));
+
 	if(DK_Type(event, "click")){
 		StopPropagation(event);
 	}
