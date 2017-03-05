@@ -50,19 +50,26 @@ function DKAutomate_OnEvent(event)
 		//DKLog("DKA-NewButton \n", DKDEBUG);
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage.html");
-			var value = DKMessageBox(event, "GetInput", "New Trigger");
-			if(!value){ return; }
-			DKAutomate_NewTrigger(value);
+			DKMessageBox_GetValue("Enter trigger name", function(rval){
+				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				DKAutomate_NewTrigger(rval);
+			});
 		});
 	}
 	
 	if(DK_Id(event, "DKA-DeleteButton")){
-		var value = DKMessageBox(event, "Confirm", "Delete Trigger?");
-		if(!value){ return; }
-		if(!current_trigger){ return; }
-		DKTrigger_RemoveTrigger(current_trigger);
-		DKSendEvent("DKAutomate.html", "UpdateValues", "");
-		DKAutomate_SelectValue("");
+		DKCreate("DKMessage/DKMessage.js", function(){
+			DKFrame_Widget("DKMessage.html");
+			DKMessageBox_Confirm("Delete Trigger?", function(rval){
+				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				if(rval == true){
+					if(!current_trigger){ return; }
+					DKTrigger_RemoveTrigger(current_trigger);
+					DKSendEvent("DKAutomate.html", "UpdateValues", "");
+					DKAutomate_SelectValue("");
+				}
+			});
+		});		
 	}
 	
 	if(DK_IdLike(event, "Trigger")){
