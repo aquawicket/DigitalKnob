@@ -22,10 +22,10 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 {
 	DKString string;
 	if(log_thread){
-		int threadId;
+		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
 		string += "TID:";
-		string += toString(threadId);
+		string += toString((unsigned int)threadId);
 		string += ":";
 	}
 	if(log_lines){
