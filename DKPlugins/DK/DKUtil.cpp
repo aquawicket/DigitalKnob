@@ -47,7 +47,7 @@ bool DKUtil::SetMainThreadNow()
 	DKUtil::mainThreadId = GetCurrentThreadId();
 #endif
 #if defined(MAC)
-	DKUtil::mainThreadId = pthread_self();
+	DKUtil::mainThreadId = (int)pthread_self();
 #endif
 #if defined(LINUX) || defined (IOS)
 	DKUtil::mainThreadId = (int)pthread_self();
@@ -63,7 +63,7 @@ bool DKUtil::GetThreadId(int& id)
 	return true;
 #endif
 #if defined(MAC)
-	id = pthread_self();
+	id = (int)pthread_self();
 	return true;
 #endif
 #if defined(LINUX) || defined (IOS)
