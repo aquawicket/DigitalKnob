@@ -36,7 +36,7 @@
 //#ifdef MAC
 //	pthread_t DKUtil::mainThreadId = 0;
 //#else
-	int DKUtil::mainThreadId = 0;
+	unsigned long int DKUtil::mainThreadId = 0;
 //#endif
 
 ///////////////////////////////
@@ -47,27 +47,27 @@ bool DKUtil::SetMainThreadNow()
 	DKUtil::mainThreadId = GetCurrentThreadId();
 #endif
 #if defined(MAC)
-	DKUtil::mainThreadId = (int)pthread_self();
+	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 #endif
 #if defined(LINUX) || defined (IOS)
-	DKUtil::mainThreadId = (int)pthread_self();
+	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 #endif
 	return false;
 }
 
 /////////////////////////////////
-bool DKUtil::GetThreadId(int& id)
+bool DKUtil::GetThreadId(unsigned long int& id)
 {
 #ifdef WIN32
 	id = GetCurrentThreadId();
 	return true;
 #endif
 #if defined(MAC)
-	id = (int)pthread_self();
+	id = (unsigned long int)pthread_self();
 	return true;
 #endif
 #if defined(LINUX) || defined (IOS)
-	id = (int)pthread_self();
+	id = (unsigned long int)pthread_self();
 	return true;
 #endif
 	return false;

@@ -15,7 +15,7 @@ class DKUtil
 {
 public:
 	static bool SetMainThreadNow(); //ONLY SET THIS FROM THE MAIN THREAD ONCE
-	static bool GetThreadId(int& id);
+	static bool GetThreadId(unsigned long int& id);
 	static bool SetClipboard(const DKString& text);
 	static bool GetClipboard(DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
@@ -53,7 +53,7 @@ public:
 //#ifdef MAC
 //	static pthread_t mainThreadId;
 //#else
-	static int mainThreadId;
+	static unsigned long int mainThreadId;
 //#endif
 };
 
