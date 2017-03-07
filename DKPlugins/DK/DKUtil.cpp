@@ -63,7 +63,7 @@ bool DKUtil::GetThreadId(int& id)
 	return true;
 #endif
 #if defined(MAC)
-	id = (int)pthread_self();
+	id = pthread_self();
 	return true;
 #endif
 #if defined(LINUX) || defined (IOS)
