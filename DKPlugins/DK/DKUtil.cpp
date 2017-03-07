@@ -510,12 +510,12 @@ bool DKUtil::InMainThread()
 	return mainThreadId == GetCurrentThreadId();
 #endif
 #if defined(MAC)
-	return mainThreadId == pthread_self();
+	return mainThreadId == (unsigned long int)pthread_self();
 #endif
 #if defined (IOS) || defined (ANDROID) //|| defined(LINUX)
-	DKString tid = "GetCurrentThreadId()(): "+toString((int)pthread_self())+"\n";
+	DKString tid = "GetCurrentThreadId()(): "+toString((unsigned int)pthread_self())+"\n";
 	//DKLog(tid, DKINFO); DO NOT DO THIS!
-	return mainThreadId == (int)pthread_self();
+	return mainThreadId == (unsigned long int)pthread_self();
 #endif
 	return false;
 }
