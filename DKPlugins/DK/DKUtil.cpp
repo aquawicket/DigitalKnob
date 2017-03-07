@@ -33,11 +33,11 @@
 
 
 
-#ifdef MAC
-	pthread_t DKUtil::mainThreadId = 0;
-#else
+//#ifdef MAC
+//	pthread_t DKUtil::mainThreadId = 0;
+//#else
 	int DKUtil::mainThreadId = 0;
-#endif
+//#endif
 
 ///////////////////////////////
 bool DKUtil::SetMainThreadNow()
