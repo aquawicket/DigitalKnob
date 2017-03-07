@@ -54,7 +54,7 @@ public:
 //	static pthread_t mainThreadId;
 //#else
 	static int mainThreadId;
-#endif
+//#endif
 };
 
 
