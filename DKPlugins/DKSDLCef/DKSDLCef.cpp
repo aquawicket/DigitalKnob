@@ -282,6 +282,17 @@ bool DKSDLCef::handle(SDL_Event* event)
 		}
 
 		case SDL_MOUSEMOTION:{
+			/*
+			if(event->motion.state & SDL_BUTTON_LMASK){
+				_mouseLMBdown = true;
+				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = true \n", DKINFO);
+			}
+			else{
+				_mouseLMBdown = false;
+				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = false \n", DKINFO);
+			}
+			*/
+
 			CefMouseEvent mouse_event;
 			mouse_event.x = event->motion.x - dkCef->left;
 			mouse_event.y = event->motion.y - dkCef->top;
