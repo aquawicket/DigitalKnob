@@ -43,6 +43,10 @@ bool DKUtil::SetMainThreadNow()
 #ifdef WIN32
 	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
 #endif
+#ifdef UNIX
+	return DKUnix::::SetMainThreadNow(DKUtil::mainThreadId);
+#endif
+/*/
 #if defined(MAC)
 	//DKUtil::mainThreadId = (unsigned long int)pthread_self();
 	return DKMac::::SetMainThreadNow(DKUtil::mainThreadId);
@@ -50,6 +54,7 @@ bool DKUtil::SetMainThreadNow()
 #if defined(LINUX) || defined (IOS)
 	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 #endif
+*/
 	DKLog("DKUtil::SetMainThreadNow() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -60,6 +65,10 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 #ifdef WIN32
 	return DKWindows::GetThreadId(id);
 #endif
+#ifdef UNIX
+	return DKUnix::GetThreadId(id);
+#endif
+/*
 #if defined(MAC)
 	//id = (unsigned long int)pthread_self();
 	//return true;
@@ -69,6 +78,7 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 	id = (unsigned long int)pthread_self();
 	return true;
 #endif
+*/
 	DKLog("DKUtil::GetThreadId() not implemented on this OS \n", DKERROR);
 	return false;
 }

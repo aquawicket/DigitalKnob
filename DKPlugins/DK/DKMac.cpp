@@ -2,6 +2,7 @@
 #ifdef MAC
 #include "DKMac.h"
 
+/*
 ///////////////////////////////////////////////////
 bool DKMac::SetMainThreadNow(unsigned long int& id)
 {
@@ -15,6 +16,7 @@ bool DKMac::GetThreadId(unsigned long int& id)
 	id = (unsigned long int)pthread_self();
 	return true;
 }
+*/
 
 ///////////////////////////////////////
 bool DKMac::GetMousePos(int& x, int& y)
