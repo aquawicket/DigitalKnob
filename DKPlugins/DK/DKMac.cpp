@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////
 bool DKMac::SetMainThreadNow(unsigned long int& id)
 {
-	id = GetCurrentThreadId();
+	id = (unsigned long int)pthread_self();
 	return true;
 }
 
