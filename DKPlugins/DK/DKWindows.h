@@ -13,6 +13,8 @@
 class DKWindows
 {
 public:
+	static bool SetMainThreadNow(unsigned long int& id);
+	static bool GetThreadId(unsigned long int& id);
 	static bool SetClipboard(const DKString& text);
 	static bool GetClipboard(DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);

@@ -50,11 +50,7 @@ public:
 	static bool Beep();
 	static bool GetProcessList(DKString& list);
 
-//#ifdef MAC
-//	static pthread_t mainThreadId;
-//#else
 	static unsigned long int mainThreadId;
-//#endif
 };
 
 

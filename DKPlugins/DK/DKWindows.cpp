@@ -9,6 +9,19 @@
 #include <psapi.h>
 #include "shlobj.h"
 
+///////////////////////////////////////////////////////
+bool DKWindows::SetMainThreadNow(unsigned long int& id)
+{
+	id = GetCurrentThreadId();
+	return true;
+}
+
+//////////////////////////////////////////////////
+bool DKWindows::GetThreadId(unsigned long int& id)
+{
+	id = GetCurrentThreadId();
+	return true;
+}
 
 //////////////////////////////////////////////////
 bool DKWindows::SetClipboard(const DKString& text)

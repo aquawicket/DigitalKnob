@@ -33,43 +33,43 @@
 
 
 
-//#ifdef MAC
-//	pthread_t DKUtil::mainThreadId = 0;
-//#else
-	unsigned long int DKUtil::mainThreadId = 0;
-//#endif
+unsigned long int DKUtil::mainThreadId = 0;
+
 
 ///////////////////////////////
 bool DKUtil::SetMainThreadNow()
 {
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
 #ifdef WIN32
-	DKUtil::mainThreadId = GetCurrentThreadId();
+	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
 #endif
 #if defined(MAC)
-	DKUtil::mainThreadId = (unsigned long int)pthread_self();
+	//DKUtil::mainThreadId = (unsigned long int)pthread_self();
+	return DKMac::::SetMainThreadNow(DKUtil::mainThreadId);
 #endif
 #if defined(LINUX) || defined (IOS)
 	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 #endif
+	DKLog("DKUtil::SetMainThreadNow() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
-/////////////////////////////////
+///////////////////////////////////////////////
 bool DKUtil::GetThreadId(unsigned long int& id)
 {
 #ifdef WIN32
-	id = GetCurrentThreadId();
-	return true;
+	return DKWindows::GetThreadId(id);
 #endif
 #if defined(MAC)
-	id = (unsigned long int)pthread_self();
-	return true;
+	//id = (unsigned long int)pthread_self();
+	//return true;
+	return DKMac::GetThreadId(id);
 #endif
 #if defined(LINUX) || defined (IOS)
 	id = (unsigned long int)pthread_self();
 	return true;
 #endif
+	DKLog("DKUtil::GetThreadId() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
@@ -158,20 +158,16 @@ bool DKUtil::SetMousePos(const int& x, const int& y)
 bool DKUtil::GetMousePos(int& x, int& y)
 {
 #ifdef WIN32
-	if(!DKWindows::GetMousePos(x, y)){ return false; }
-	return true;
+	return DKWindows::GetMousePos(x, y);
 #endif
 #ifdef LINUX
-	if(!DKLinux::GetMousePos(x, y)){ return false; }
-	return true;
+	return DKLinux::GetMousePos(x, y);
 #endif
 #ifdef ANDROID
-	if(!DKAndroid::GetMousePos(x, y)){ return false; }
-	return true;
+	return DKAndroid::GetMousePos(x, y);
 #endif
 #ifdef MAC
-	//if(!DKMac::GetMousePos(x, y)){ return false; }
-	//return true;
+	//return DKMac::GetMousePos(x, y);
 #endif
 	DKLog("DKUtil::GetMousePos() not implemented on this OS \n", DKERROR);
 	x = 0;
@@ -311,7 +307,6 @@ bool DKUtil::PressKey(int key)
 #ifdef WIN32
 	return DKWindows::PressKey(key);
 #endif
-
 	DKLog("DKUtil::PressKey(): not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -322,7 +317,6 @@ bool DKUtil::ReleaseKey(int key)
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
 #endif
-
 	DKLog("DKUtil::ReleaseKey(): not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -334,7 +328,6 @@ bool DKUtil::StrokeKey(int key)
 	DKWindows::PressKey(key);
 	return DKWindows::ReleaseKey(key);
 #endif
-
 	DKLog("DKUtil::StrokeKey(): not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -442,7 +435,6 @@ bool DKUtil::Run(const DKString& command)
 #ifdef WIN32
 	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
 	return true;
-	//return DKWindow::Run(command);
 #endif
 #ifdef LINUX
 	return DKLinux::Run(command);
@@ -546,8 +538,7 @@ bool DKUtil::GetProcessList(DKString& list)
 {
 	DKLog("DKUtil::GetProcessList("+list+")\n", DKDEBUG);
 #ifdef WIN32
-	DKWindows::GetProcessList(list);
-	return true;
+	return DKWindows::GetProcessList(list);
 #endif
 	DKLog("DKUtil::GetProcessList() not implemented on this OS. \n", DKERROR);
 	return false;
