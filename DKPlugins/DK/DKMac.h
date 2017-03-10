@@ -9,14 +9,8 @@
 class DKMac
 {
 public:
-	static bool SetMainThreadNow(unsigned long int& id){
-		id = (unsigned long int)pthread_self();
-		return true;
-	}
-	bool DKUtil::GetThreadId(unsigned long int& id){
-		id = (unsigned long int)pthread_self();
-		return true;
-	}
+	static bool SetMainThreadNow(unsigned long int& id);
+	static bool GetThreadId(unsigned long int& id);
 	static bool GetMousePos(int& x, int& y){
 		//NSPoint mouseLoc;
 		//mouseLoc = [NSEvent mouseLocation]; //get current mouse position
