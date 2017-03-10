@@ -1,3 +1,4 @@
+#ifdef USE_DKRocket
 #ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKWidgetJS_H
@@ -82,3 +83,4 @@ REGISTER_OBJECT(DKWidgetJS, true)
 
 #endif //DKWidgetJS_H
 #endif //USE_DKDuktape
+#endif //USE_DKRocket

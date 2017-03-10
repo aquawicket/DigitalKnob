@@ -1,3 +1,4 @@
+#ifdef USE_DKRocket
 #ifdef USE_DKDuktape 
 #include "DKWidgetJS.h"
 #include "DKWindow.h"
@@ -762,3 +763,4 @@ int DKWidgetJS::GetClientHeight(duk_context* ctx)
 }
 
 #endif //USE_DKDuktape
+#endif //USE_DKRocket

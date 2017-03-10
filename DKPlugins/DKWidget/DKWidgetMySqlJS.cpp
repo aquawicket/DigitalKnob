@@ -1,3 +1,5 @@
+#ifdef USE_DKMySql
+#ifdef USE_DKRocket
 #ifdef USE_DKDuktape 
 #include "DKWidgetMySqlJS.h"
 #include "DKMySql.h"
@@ -386,3 +388,5 @@ int DKWidgetMySqlJS::Search(duk_context* ctx)
 
 
 #endif //USE_DKDuktape
+#endif //USE_DKRocket
+#endif //USE_DKMySql

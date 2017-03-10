@@ -1,3 +1,5 @@
+#ifdef USE_DKRocket
+
 #include "stdafx.h"
 #include "DKWidget.h"
 #include "DKRocketToRML.h"
@@ -1890,3 +1892,6 @@ bool DKWidget::BuildOptionsString(const DKString& id, DKString &options)
 	}
 	return true;
 }
+
+
+#endif //USE_DKRocket
