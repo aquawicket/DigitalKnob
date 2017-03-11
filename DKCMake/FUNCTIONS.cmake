@@ -1652,15 +1652,16 @@ FUNCTION(DKASSETS arg)
 	FILE(COPY ${PATHTOPLUGIN} DESTINATION ${DKPROJECT}/assets ${ASSETS})
 ENDFUNCTION()
 
-
+##FIXME - need to smart scan for plugins
 FUNCTION(DKSETPATHTOPLUGIN arg)
 	DKSET(PATHTOPLUGIN "")
 	IF(EXISTS ${DKPLUGINS}/${arg})
 		DKSET(PATHTOPLUGIN "${DKPLUGINS}/${arg}")
 	ELSEIF(EXISTS ${DKIMPORTS}/${arg})
 		DKSET(PATHTOPLUGIN "${DKIMPORTS}/${arg}")
-	ELSEIF(EXISTS ${DIGITALKNOB}/USER/DKPlugins/${arg})
-		DKSET(PATHTOPLUGIN "${DIGITALKNOB}/USER/DKPlugins/${arg}")
+	##FIXME - need to smart scan for plugins, MyApps is not good enough
+	ELSEIF(EXISTS ${DIGITALKNOB}/MyApps/DKPlugins/${arg})
+		DKSET(PATHTOPLUGIN "${DIGITALKNOB}/MyApps/DKPlugins/${arg}")
 	ELSE()
 		MESSAGE(FATAL_ERROR "Could not find ${arg} Plugin.")
 	ENDIF()
