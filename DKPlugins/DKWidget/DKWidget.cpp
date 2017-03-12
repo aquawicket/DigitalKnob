@@ -98,7 +98,10 @@ bool DKWidget::CreateWidget(DKString& file)
 		html = "<div id=\"" + id + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 	else{
-		if (!DKFile::VerifyPath(path)) { return false; }
+		if (!DKFile::VerifyPath(path)) { 
+			DKLog("DKWidget::CreateWidget("+file+"): file does not exist", DKERROR);
+			return false;
+		}
 	}
 
 	root = NULL;

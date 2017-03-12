@@ -180,6 +180,13 @@ function DKWidget_NewWidget(url, parent)
 	}
 	
 	if(url == ".html"){ url = "New.html"; }
+	else{
+		var assets = DKAssets_LocalAssets();
+		if(!DKFile_Exists(assets+url)){
+			DKLog("DKWidget_NewWidget("+url+"): file does not exist \n", DKERROR);
+			return;
+		}
+	}
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
