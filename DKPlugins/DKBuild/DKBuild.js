@@ -423,6 +423,7 @@ function DKBuild_GitCommit()
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //DKLog("url = "+url+"\n", DKINFO);
 			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
