@@ -345,10 +345,7 @@ function DKBuild_SvnUpdate()
 	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
 	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
 	
-	//if(DKFile_Exists(mysvn)){
-	//	var url = DKFile_GetSetting(mysvn, "[MYSVN]");
-	//	DK_Execute(SVN +" checkout "+url+" "+DKPATH+"/USER");
-	//}
+	//TODO: Multipe user folders
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -365,9 +362,7 @@ function DKBuild_SvnCommit()
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
-	//if(DKFile_Exists(DKPATH+"/USER")){
-	//	DK_Execute(SVN +" commit -m update "+DKPATH+"/USER");
-	//}
+	//TODO: Multipe user folders
 	
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
@@ -380,7 +375,7 @@ function DKBuild_SvnCommit()
 ////////////////////////////
 function DKBuild_GitUpdate()
 {
-	DKLog("Git Update... \n", DKINFO);
+	DKLog("Git Update DigitalKnob... \n", DKINFO);
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" checkout -- .");
@@ -394,6 +389,7 @@ function DKBuild_GitUpdate()
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //DKLog("url = "+url+"\n", DKINFO);
 			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+			DKLog("Git Update "+folder+"... \n", DKINFO);
 			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
 			DK_Execute(GIT +" checkout -- .");
 			DK_Execute(GIT +" pull origin master");
@@ -411,7 +407,7 @@ function DKBuild_GitUpdate()
 ////////////////////////////
 function DKBuild_GitCommit()
 {
-	DKLog("Git Commit... \n", DKINFO);
+	DKLog("Git Commit DigitalKnob... \n", DKINFO);
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -427,6 +423,7 @@ function DKBuild_GitCommit()
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //DKLog("url = "+url+"\n", DKINFO);
 			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+			DKLog("Git Commit "+folder+"... \n", DKINFO);
 			DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");
