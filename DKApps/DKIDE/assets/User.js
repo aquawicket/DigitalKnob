@@ -2,7 +2,7 @@ if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"  || DK_GetOS() == "Mac" || DK_
 	var USE_CEF = 1;
 }
 if(DK_GetOS() == "Android"){
-	var USE_Webview = 0;
+	var USE_Webview = 1;
 }
 
 if(DK_GetBrowser() == "Rocket"){
@@ -35,6 +35,7 @@ function User_OnEvent(event)  //Duktape
 if(DK_GetBrowser() == "Rocket" && USE_CEF){
 	var assets = DKAssets_LocalAssets();
 	var url = "file:///"+assets+"/index.html";
+	//var url = "http://digitalknob.com/DKIDE/index.html";
 	var iframe = DKWidget_CreateElement("body", "iframe", "DKCef_frame");
 	DKWidget_SetAttribute(iframe, "src", url);
 	DKWidget_SetProperty(iframe, "position", "absolute");
