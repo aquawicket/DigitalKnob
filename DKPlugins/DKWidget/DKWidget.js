@@ -183,8 +183,8 @@ function DKWidget_NewWidget(url, parent)
 	else{
 		var assets = DKAssets_LocalAssets();
 		if(!DKFile_Exists(assets+url)){
-			DKLog("DKWidget_NewWidget("+url+"): file does not exist \n", DKERROR);
-			return;
+			DKLog("DKWidget_NewWidget("+assets+url+"): file does not exist \n", DKWARN);
+			//return;
 		}
 	}
 	var filename = url.replace(/^.*[\\\/]/, '');
