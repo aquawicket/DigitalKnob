@@ -1,6 +1,6 @@
 #ifdef USE_DKCef
 #include "DKTrayV8.h"
-#include "DKFile.h"
+#include "DKTray.h"
 #include "DKApp.h"
 
 /////////////////////
@@ -8,6 +8,7 @@ void DKTrayV8::Init()
 {
 	DKLog("DKTrayV8::Init()\n", DKDEBUG);
 	//DKCefApp::AttachFunction("Test", DKTrayV8::Test);
+	DKCefApp::AttachFunction("AddItem", DKTrayV8::AddItem);
 }
 
 ///////////////////
@@ -27,5 +28,15 @@ bool DKTrayV8::Test(CefArgs args, CefReturn retval)
 	return true;
 }
 */
+
+//////////////////////////////////////////////////////
+bool DKTrayV8::AddItem(CefArgs args, CefReturn retval)
+{
+	DKLog("DKTrayV8::AddItem(CefArgs,CefReturn)\n", DKDEBUG);
+	DKString name = args[0]->GetStringValue();
+	int id = args[1]->GetIntValue();
+	DKTray::Get("DKTray0")->AddItem(name, id);
+	return true;
+}
 
 #endif //USE_DKCef
