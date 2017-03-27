@@ -15,7 +15,7 @@ ENDIF()
 
 ### INSTALL ###
 IF(WIN32)
-	IF(NOT EXISTS ${3RDPARTY}/boost-build/bin/bjam.exe)
+	IF(NOT EXISTS ${3RDPARTY}/boost-build/bootstrap.log)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)
 		SET(DKONLINE "http://digitalknob.com/Download") ## WHY DO WE NEED THIS
