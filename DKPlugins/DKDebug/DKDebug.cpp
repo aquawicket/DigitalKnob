@@ -235,6 +235,19 @@ void DKDebug::End()
 
 }
 
+//////////////////////////////
+bool DKDebug::ShowStackTrace()
+{
+#ifdef WIN32
+	StackWalkerToConsole sw;  // output to console
+	sw.ShowCallstack(GetCurrentThread(), /*pExPtrs->ContextRecord*/ NULL);
+	return false;
+#else
+	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);
+#endif
+	//TODO
+}
+
 /////////////////////////////////////////////////////
 bool DKDebug::SendBugReport(const DKString& filename)
 {
