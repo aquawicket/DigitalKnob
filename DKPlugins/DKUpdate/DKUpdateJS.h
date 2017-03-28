@@ -11,10 +11,12 @@ class DKUpdateJS : public DKObjectT<DKUpdateJS>
 public:
 	void Init();
 
+	/*
 	static int TestInt(duk_context* ctx);
 	static int TestString(duk_context* ctx);
 	static int TestReturnInt(duk_context* ctx);
 	static int TestReturnString(duk_context* ctx);
+	*/
 
 	static int CheckForUpdate(duk_context* ctx);
 	static int CreateUpdate(duk_context* ctx);
