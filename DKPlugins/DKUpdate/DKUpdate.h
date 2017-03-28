@@ -10,9 +10,11 @@ public:
 	void Init();
 	void End();
 
-	bool CheckForUpdate(const DKString& url);
-	bool CreateUpdate(const DKString& url);
-	bool DoUpdate(const DKString& url);
+	static bool CheckForUpdate();
+	static bool CreateUpdate();
+	static bool DoUpdate();
+
+	static DKString url;
 };
 
 REGISTER_OBJECT(DKUpdate, true);

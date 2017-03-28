@@ -15,6 +15,10 @@ public:
 	static int TestString(duk_context* ctx);
 	static int TestReturnInt(duk_context* ctx);
 	static int TestReturnString(duk_context* ctx);
+
+	static int CheckForUpdate(duk_context* ctx);
+	static int CreateUpdate(duk_context* ctx);
+	static int DoUpdate(duk_context* ctx);
 };
 
 

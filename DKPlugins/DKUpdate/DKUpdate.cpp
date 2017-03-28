@@ -30,57 +30,56 @@ void DKUpdate::Init()
 	DKString app;
 	DKFile::GetExeName(app);
 	//DKFile::RemoveExtention(app);
-	DKString url = "http://DigitalKnob.com/Download/";
+	DKString downloads = "http://DigitalKnob.com/Download/";
 	
-	DKString update;
 #ifdef WIN32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]", update);
-	if(update.empty()){ update = url+app; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN32]", url);
+	if(url.empty()){ url = downloads+app; }
 #endif
 #ifdef WIN64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", update);
-	if(update.empty()){ update = url+app; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", url);
+	if(url.empty()){ url = downloads+app; }
 #endif
 #ifdef MAC32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", update);
-	if(update.empty()){ update = url+app+"_mac32.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", url);
+	if(url.empty()){ url = downloads+app+"_mac32.zip"; }
 #endif
 #ifdef MAC64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", update);
-	if(update.empty()){ update = url+app+"_mac64.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", url);
+	if(url.empty()){ url = downloads+app+"_mac64.zip"; }
 #endif
 #ifdef LINUX32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]", update);
-	if(update.empty()){ update = url+app+"_linux32.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]", url);
+	if(url.empty()){ url = downloads+app+"_linux32.zip"; }
 #endif
 #ifdef LINUX64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", update);
-	if(update.empty()){ update = url+app+"_linux64.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", url);
+	if(url.empty()){ url = downloads+app+"_linux64.zip"; }
 #endif
 #ifdef IOS32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]", update);
-	if(update.empty()){ update = url+app+"_ios32.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]", url);
+	if(url.empty()){ url = downloads+app+"_ios32.zip"; }
 #endif
 #ifdef IOS64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", update);
-	if(update.empty()){ update = url+app+"_ios64.zip"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", url);
+	if(url.empty()){ url = downloads+app+"_ios64.zip"; }
 #endif
 #ifdef ANDROID32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID32]", update);
-	if(update.empty()){ update = url+app+".apk"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID32]", url);
+	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
 #ifdef ANDROID64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]", update);
-	if(update.empty()){ update = url+app+".apk"; }
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]", url);
+	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
 
-	if(update.empty()){
+	if(url.empty()){
 		DKLog("DKUpdate::Init(): update url did not get set. ",DKERROR);
 		return;
 	}
 	
 	DKCreate("DKUpdateJS");
-	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, update));
+	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
 }
 
 ////////////////////
@@ -89,10 +88,10 @@ void DKUpdate::End()
 
 }
 
-//////////////////////////////////////////////////
-bool DKUpdate::CheckForUpdate(const DKString& url)
+///////////////////////////////
+bool DKUpdate::CheckForUpdate()
 {
-	DKLog("DKUpdate::CheckForUpdate("+url+")\n", DKDEBUG);
+	DKLog("DKUpdate::CheckForUpdate()\n", DKDEBUG);
 
 	DKCurl::Instance("DKCurlUpdate");
 	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
@@ -128,14 +127,14 @@ bool DKUpdate::CheckForUpdate(const DKString& url)
 
 	if(i_stime > i_lctime || i_stime > i_lmtime){
 		DKLog("Update Available \n", DKINFO);
-		DoUpdate(url);
+		//DoUpdate();
 		return true;
 	}
 	return false;
 }
 
-////////////////////////////////////////////
-bool DKUpdate::DoUpdate(const DKString& url)
+/////////////////////////
+bool DKUpdate::DoUpdate()
 {
 	DKLog("DKUpdate::DoUpdate("+url+")\n", DKDEBUG);
 	DKString file;
@@ -186,8 +185,8 @@ bool DKUpdate::DoUpdate(const DKString& url)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKUpdate::CreateUpdate(const DKString& url)
+/////////////////////////////
+bool DKUpdate::CreateUpdate()
 {
 	//TODO: create update and upload to ftp
 	return false;

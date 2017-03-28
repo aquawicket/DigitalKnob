@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
 #include "DKUpdateJS.h"
-#include "DKWindow.h"
+#include "DKUpdate.h"
 
 
 ///////////////////////
@@ -8,10 +8,10 @@ void DKUpdateJS::Init()
 {
 	DKLog("DKUpdateJS::Init()\n", DKDEBUG);
 
-	DKDuktape::AttachFunction("DKWindow_TestInt", DKUpdateJS::TestInt, 1);
-	DKDuktape::AttachFunction("DKWindow_TestString", DKUpdateJS::TestString, 1);
-	DKDuktape::AttachFunction("DKWindow_TestReturnInt", DKUpdateJS::TestReturnInt, 0);
-	DKDuktape::AttachFunction("DKWindow_TestReturnString", DKUpdateJS::TestReturnString, 0);
+	DKDuktape::AttachFunction("DKUpdate_TestInt", DKUpdateJS::TestInt, 1);
+	DKDuktape::AttachFunction("DKUpdate_TestString", DKUpdateJS::TestString, 1);
+	DKDuktape::AttachFunction("DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt, 0);
+	DKDuktape::AttachFunction("DKUpdate_TestReturnString", DKUpdateJS::TestReturnString, 0);
 }
 
 /////////////////////////////////////////
@@ -45,6 +45,29 @@ int DKUpdateJS::TestReturnString(duk_context* ctx)
 {
 	//DKString rval = DKWindow::TestReturnString();
 	//duk_push_string(ctx, rval.c_str());
+	return 1;
+}
+
+
+
+////////////////////////////////////////////////
+int DKUpdateJS::CheckForUpdate(duk_context* ctx)
+{
+	if(!DKUpdate::CheckForUpdate()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKUpdateJS::CreateUpdate(duk_context* ctx)
+{
+	if (!DKUpdate::CreateUpdate()) { return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKUpdateJS::DoUpdate(duk_context* ctx)
+{
+	if (!DKUpdate::DoUpdate()) { return 0; }
 	return 1;
 }
 
