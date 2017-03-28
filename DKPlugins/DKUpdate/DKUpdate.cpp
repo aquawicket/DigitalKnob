@@ -78,7 +78,9 @@ void DKUpdate::Init()
 		DKLog("DKUpdate::Init(): update url did not get set. ",DKERROR);
 		return;
 	}
-	DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, update));
+	
+	DKCreate("DKUpdateJS");
+	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, update));
 }
 
 ////////////////////
