@@ -71,7 +71,7 @@ protected:
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR) {}
 	virtual void OnOutput(LPCSTR szText) { 
-		DKLog(szText, DKERROR);
+		DKLog(szText, DKINFO);
 	}
 };
 
@@ -205,6 +205,7 @@ void DKDebug::Init()
 	//DKLog("DKDebug::Init()\n", DKDEBUG);
 	
 	DKCreate("DKDebugJS");
+	DKCreate("DKDebugV8");
 	
 #ifdef WIN32
 	//Copy PDB file if it exists
@@ -241,11 +242,11 @@ bool DKDebug::ShowStackTrace()
 #ifdef WIN32
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), /*pExPtrs->ContextRecord*/ NULL);
-	return false;
+	return true;
 #else
 	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);
+	return false;
 #endif
-	//TODO
 }
 
 /////////////////////////////////////////////////////
