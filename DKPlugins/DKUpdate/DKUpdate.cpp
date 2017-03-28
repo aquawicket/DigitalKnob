@@ -23,6 +23,7 @@
 // android32 - http://DigitalKnob.com/Download/DKApp.apk
 // android64 - http://DigitalKnob.com/Download/DKApp_64.apk
 
+DKString DKUpdate::url;
 
 /////////////////////
 void DKUpdate::Init()
