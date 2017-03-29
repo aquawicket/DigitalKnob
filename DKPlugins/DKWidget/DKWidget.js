@@ -330,8 +330,8 @@ function DKWidget_GetElements(id)
 {
 	var string = "";
 	
-	var nodes = document.getElementById(id).getElementsByTagName('*');
-	//var nodes = document.getElementById(id).childNodes;
+	//var nodes = document.getElementById(id).getElementsByTagName('*'); //all children recursively
+	var nodes = document.getElementById(id).childNodes;
 	for(var i=0; i<nodes.length; i++){
 		if(nodes[i].id){
 			string += nodes[i].id;

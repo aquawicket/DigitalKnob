@@ -250,11 +250,19 @@ function DKFrame_MaximizeButton(id)
 	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem"){
 		DKFrame_RestoreSize(frame);
 		
-		var frame = document.getElementById(id).parentNode;
-		var child = frame.childNodes[4];
-		DKLog(frame.id+"\n", DKINFO);
-		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		//OLD
+		//var frame = document.getElementById(id).parentNode;
+		//var child = frame.childNodes[4];
+		//DKLog(frame.id+"\n", DKINFO);
+		//DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		//DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		
+		//NEW 
+		var elements = DKWidget_GetElements(frame);
+		var arry = elements.split(",");
+		DKLog(elements+"\n", DKINFO);
+		DKWidget_SetProperty(arry[4], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
+		DKWidget_SetProperty(arry[4], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
 	}
 	else{
 		DKFrame_StoreSize(frame);
@@ -265,10 +273,18 @@ function DKFrame_MaximizeButton(id)
 		DKWidget_RemoveProperty(frame, "width");
 		DKWidget_RemoveProperty(frame, "height");
 		
-		var frame = document.getElementById(id).parentNode;
-		var child = frame.childNodes[4];
-		DKWidget_SetProperty(child.id, "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		DKWidget_SetProperty(child.id, "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		//OLD		
+		//var frame = document.getElementById(id).parentNode;
+		//var child = frame.childNodes[4];
+		//DKWidget_SetProperty(child.id, "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		//DKWidget_SetProperty(child.id, "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		
+		//NEW 
+		var elements = DKWidget_GetElements(frame);
+		var arry = elements.split(",");
+		DKLog(elements+"\n", DKINFO);
+		DKWidget_SetProperty(arry[4], "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
+		DKWidget_SetProperty(arry[4], "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
 }
 
