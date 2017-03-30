@@ -267,7 +267,13 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
 	{
-		DKLog("OnCursorChange\n", DKINFO);
+		//FIXME
+		DKLog("OnCursorChange()\n", DKINFO);
+		HWND hwnd;
+		DKClass::CallFunc("DKSDLWindow::GetHwnd", NULL, &hwnd);
+		if(!::IsWindow(hwnd)){ return; }
+		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
+		SetCursor(cursor);
 	}
 
 
