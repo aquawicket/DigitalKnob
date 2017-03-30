@@ -553,3 +553,11 @@ bool DKUtil::GetProcessList(DKString& list)
 	DKLog("DKUtil::GetProcessList() not implemented on this OS. \n", DKERROR);
 	return false;
 }
+
+////////////////////////////////
+bool DKUtil::KeyIsDown(int& key)
+{
+	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKDEBUG);
+	if(!GetKeyState(key)){ return false; }
+	return true;
+}

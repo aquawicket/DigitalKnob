@@ -57,6 +57,7 @@ public:
 	static int IdLike(duk_context* ctx);
 	static int IE(duk_context* ctx);
 	static int Include(duk_context* ctx);
+	static int KeyIsDown(duk_context* ctx);
 	static int LeftClick(duk_context* ctx);
 	static int LogGuiConsole(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);

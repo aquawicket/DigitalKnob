@@ -87,6 +87,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Include", DKJS::Include, 1);
 	DKDuktape::AttachFunction("DK_LeftClick", DKJS::LeftClick, 0);
 	DKDuktape::AttachFunction("DK_LogGuiConsole", DKJS::LogGuiConsole, 1);
+	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown, 1);
 	DKDuktape::AttachFunction("DK_MessageBox", DKJS::MessageBox, 3);
 	DKDuktape::AttachFunction("DK_MouseToImage", DKJS::MouseToImage, 1);
 	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey, 1);
@@ -786,6 +787,14 @@ int DKJS::GetKey(duk_context* ctx)
 	int key;
 	if(!DKUtil::GetKey(key)){ return 0; }
 	duk_push_int(ctx, key);
+	return 1;
+}
+
+/////////////////////////////////////
+int DKJS::KeyIsDown(duk_context* ctx)
+{
+	int key = duk_require_int(ctx, 0);
+	if(!DKUtil::KeyIsDown(key)){ return 0; }
 	return 1;
 }
 

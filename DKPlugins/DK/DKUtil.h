@@ -49,6 +49,7 @@ public:
 	static bool Round(double& num);
 	static bool Beep();
 	static bool GetProcessList(DKString& list);
+	static bool KeyIsDown(int& key);
 
 	static unsigned long int mainThreadId;
 };
