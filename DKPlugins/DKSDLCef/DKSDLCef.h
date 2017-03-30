@@ -264,6 +264,12 @@ public:
 		return true;
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
+	{
+		DKLog("OnCursorChange\n", DKINFO);
+	}
+
 
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
 };
