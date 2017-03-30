@@ -558,6 +558,6 @@ bool DKUtil::GetProcessList(DKString& list)
 bool DKUtil::KeyIsDown(int& key)
 {
 	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKDEBUG);
-	if(!GetKeyState(key)){ return false; }
-	return true;
+	if(GetKeyState(key) & 0x8000){ return true; }
+	return false;
 }
