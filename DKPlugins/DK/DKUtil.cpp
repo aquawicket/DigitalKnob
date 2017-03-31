@@ -557,7 +557,7 @@ bool DKUtil::GetProcessList(DKString& list)
 ////////////////////////////////
 bool DKUtil::KeyIsDown(int& key)
 {
-	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKINFO);
+	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKDEBUG);
 #ifdef WIN32
 	return DKWindows::KeyIsDown(key);
 #endif

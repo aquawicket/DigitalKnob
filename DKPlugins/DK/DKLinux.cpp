@@ -57,12 +57,12 @@ bool DKLinux::Run(const DKString& command)
 bool DKLinux::KeyIsDown(int& key)
 {
 	//TODO - character keys
-	DKLog("DKLinux::KeyIsDown("+toString(key)+")\n", DKINFO);
+	DKLog("DKLinux::KeyIsDown("+toString(key)+")\n", DKDEBUG);
 	
 	XkbStateRec r;
     Display* d = XOpenDisplay(NULL);
     XkbGetState(d, XkbUseCoreKbd, &r);
-    printf("mod: 0x%x\n", r.mods);
+    //printf("mod: 0x%x\n", r.mods);
 	if((r.mods & 0x01) && key == 16){ //Shift
 		return true;
 	}
