@@ -72,6 +72,10 @@ public:
 		//command_line->AppendSwitchWithValue("no-sandbox", "1");
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
 		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+#ifdef LINUX
+		command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
+		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
+#endif
 
 		handler = new DKCefV8Handler();	
 		DKCreate("DKCefV8");
