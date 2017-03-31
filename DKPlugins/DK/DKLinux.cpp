@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #ifdef LINUX
 #include "DKLinux.h"
+#include "DKLog.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
+#include <X11/XKBlib.h>
 
 /////////////////////////////////////////
 bool DKLinux::GetMousePos(int& x, int& y)
@@ -49,6 +51,20 @@ bool DKLinux::Run(const DKString& command)
 	system(cmd.c_str());
 	//execl(cmd.c_str(), (char*)0);
 	return true;
+}
+
+//////////////////////////////
+bool DKLinux::KeyIsDown(int& key)
+{
+	//TODO
+	DKLog("DKLinux::KeyIsDown("+toString(key)+")\n", DKINFO);
+	Display * d = XOpenDisplay((char*)0);
+    if (d) {
+        unsigned n;
+        XkbGetIndicatorState(d, XkbUseCoreKbd, &n);
+        printf((n & 1)?"caps on\n":"caps off\n");
+    }
+	return false;
 }
 
 #endif //LINUX

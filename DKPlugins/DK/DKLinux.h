@@ -13,6 +13,7 @@ class DKLinux
 public:
 	static bool GetMousePos(int& x, int& y);
 	static bool Run(const DKString& command);
+	static bool KeyIsDown(int& key);
 
 };
 

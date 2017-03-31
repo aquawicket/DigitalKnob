@@ -557,11 +557,13 @@ bool DKUtil::GetProcessList(DKString& list)
 ////////////////////////////////
 bool DKUtil::KeyIsDown(int& key)
 {
-	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKDEBUG);
+	DKLog("DKUtil::KeyIsDown("+toString(key)+")\n", DKINFO);
 #ifdef WIN32
-	if(GetKeyState(key) & 0x8000){ return true; }
-	return false;
+	return DKWindows::KeyIsDown(key);
 #endif
+#ifdef LINUX
+	return DKLinux::KeyIsDown(key);
+#endif	
 	DKLog("DKUtil::KeyIsDown() not implemented on this OS. \n", DKERROR);
 	return false;
 }

@@ -38,6 +38,7 @@ public:
 #endif
 	static bool GetLastError(DKString& error);
 	static bool GetProcessList(DKString& list);
+	static bool KeyIsDown(int& key);
 };
 
 
