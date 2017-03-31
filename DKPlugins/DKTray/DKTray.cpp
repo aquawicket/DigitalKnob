@@ -59,7 +59,9 @@ void DKTray::Init()
 //////////////////
 void DKTray::End()
 {
+#ifdef WIN32
 	TrayIcon.RemoveIcon();
+#endif
 }
 
 //////////////////////
@@ -98,7 +100,9 @@ void DKTray::AddItem(const DKString& name, int id)
 {
 	//TODO
 	DKLog("DKTray::AddItem("+name+")\n", DKDEBUG);
+#ifdef WIN32
 	TrayIcon.AddItem(name, id);
+#endif
 	return;
 }
 
@@ -106,17 +110,23 @@ void DKTray::AddItem(const DKString& name, int id)
 bool DKTray::SetTooltip(const DKString& string)
 {
 	DKLog("DKTray::SetTooltip("+string+")\n", DKDEBUG);
+#ifdef WIN32
 	if(!TrayIcon.SetTooltipText(string.c_str())){
 		return false;
 	}
 	return true;
+#endif
+	return false;
 }
 
 /////////////////////////////////////////////////////////////////
 bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 {
+#ifdef WIN32
 	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 10);
 	return true;
+#endif
+	return false;
 }
 
 
