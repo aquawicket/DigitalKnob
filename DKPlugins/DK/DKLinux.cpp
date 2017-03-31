@@ -56,14 +56,23 @@ bool DKLinux::Run(const DKString& command)
 //////////////////////////////
 bool DKLinux::KeyIsDown(int& key)
 {
-	//TODO
+	//TODO - character keys
 	DKLog("DKLinux::KeyIsDown("+toString(key)+")\n", DKINFO);
-	Display * d = XOpenDisplay((char*)0);
-    if (d) {
-        unsigned n;
-        XkbGetIndicatorState(d, XkbUseCoreKbd, &n);
-        printf((n & 1)?"caps on\n":"caps off\n");
-    }
+	
+	XkbStateRec r;
+    Display* d = XOpenDisplay(NULL);
+    XkbGetState(d, XkbUseCoreKbd, &r);
+    printf("mod: 0x%x\n", r.mods);
+	if((r.mods & 0x01) && key == 16){ //Shift
+		return true;
+	}
+	if((r.mods & 0x04) && key == 17){ //Ctrl
+		return true;
+	}
+	if((r.mods & 0x08) && key == 18){ //Alt
+		return true;
+	}
+    XCloseDisplay(d);
 	return false;
 }
 
