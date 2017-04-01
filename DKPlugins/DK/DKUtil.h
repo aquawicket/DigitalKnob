@@ -16,7 +16,7 @@ class DKUtil
 public:
 	static bool SetMainThreadNow(); //ONLY SET THIS FROM THE MAIN THREAD ONCE
 	static bool GetThreadId(unsigned long int& id);
-	static bool SetClipboard(const DKString& text);
+	static bool SetClipboard(DKString& text);
 	static bool GetClipboard(DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);

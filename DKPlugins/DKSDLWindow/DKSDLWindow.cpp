@@ -180,6 +180,7 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::TestReturnString", &DKSDLWindow::TestReturnString, this);
 
 	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
+	DKClass::RegisterFunc("DKSDLWindow::GetClipboard", &DKSDLWindow::GetClipboard, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
@@ -194,6 +195,7 @@ void DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::IsVisible", &DKSDLWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKSDLWindow::Minimize", &DKSDLWindow::Minimize, this);
 	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
+	DKClass::RegisterFunc("DKSDLWindow::SetClipboard", &DKSDLWindow::SetClipboard, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetHeight", &DKSDLWindow::SetHeight, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetWidth", &DKSDLWindow::SetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetX", &DKSDLWindow::SetX, this);
@@ -326,8 +328,14 @@ bool DKSDLWindow::TestReturnString(void* input, void* output)
 	return true;
 }
 
-
-
+//////////////////////////////////
+bool DKSDLWindow::GetClipboard(void* input, void* output)
+{
+	//TODO
+	std::string out = SDL_GetClipboardText();
+	*(std::string*)output = out;
+	return true;
+}
 
 //////////////////////////////
 bool DKSDLWindow::GetX(void* input, void* output)
@@ -363,6 +371,16 @@ bool DKSDLWindow::GetHeight(void* input, void* output)
 	SDL_GetWindowSize(sdlwin, NULL, &h);
 	*(int*)output = h;
 	return true;
+}
+
+//////////////////////////////////
+bool DKSDLWindow::SetClipboard(void* input, void* output)
+{
+	DKLog("DKSDLWindow::SetClipboard()\n", DKINFO);
+	std::string in = *(std::string*)input;
+	if(in.empty()){ return false; }
+	if(SDL_SetClipboardText(in.c_str()) < 0){ return false; }
+	return true;	
 }
 
 ////////////////////////////////

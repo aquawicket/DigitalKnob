@@ -76,4 +76,23 @@ bool DKLinux::KeyIsDown(int& key)
 	return false;
 }
 
+////////////////////////
+bool DKLinux::GetClipboard(DKString& text)
+{
+	//TODO
+	DKLog("DKLinux::GetClipboard()\n", DKINFO);
+	DKClass::CallFunc("DKSDLWindow::GetClipboard", NULL, &text);
+	return true;
+}
+
+///////////////////////
+bool DKLinux::SetClipboard(DKString& text)
+{
+	//TODO
+	DKLog("DKLinux::SetClipboard("+text+")\n", DKINFO);
+	DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
+	return false;
+}
+
+
 #endif //LINUX

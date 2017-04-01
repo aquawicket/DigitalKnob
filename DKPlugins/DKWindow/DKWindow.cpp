@@ -44,7 +44,7 @@ int DKWindow::TestInt(int input)
 ///  \a see: DKPlugins/DKSDLWindow.h
 DKString DKWindow::TestString(DKString input)
 {
-	DKString output;;
+	DKString output;
 	DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
 	return output;
 }

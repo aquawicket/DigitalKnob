@@ -84,10 +84,13 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 }
 
 ///////////////////////////////////////////////
-bool DKUtil::SetClipboard(const DKString& text)
+bool DKUtil::SetClipboard(DKString& text)
 {
 #ifdef WIN32
 	return DKWindows::SetClipboard(text);
+#endif
+#ifdef LINUX
+	return DKLinux::SetClipboard(text);
 #endif
 	DKLog("DKUtil::SetClipboard() not implemented on this OS \n", DKERROR);
 	return false;
@@ -98,6 +101,9 @@ bool DKUtil::GetClipboard(DKString& text)
 {
 #ifdef WIN32
 	return DKWindows::GetClipboard(text);
+#endif
+#ifdef LINUX
+	return DKLinux::GetClipboard(text);
 #endif
 	DKLog("DKUtil::GetClipboard() not implemented on this OS \n", DKERROR);
 	return false;

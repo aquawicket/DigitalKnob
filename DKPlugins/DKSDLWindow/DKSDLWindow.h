@@ -17,6 +17,7 @@ public:
 	bool TestReturnString(void* input, void* output);
 
 	bool Fullscreen(void* input, void* output);
+	bool GetClipboard(void* input, void* output);
 	bool GetHeight(void* input, void* output);
 	bool GetHwnd(void* input, void* output);
 	bool GetMouseX(void* input, void* output);
@@ -31,6 +32,7 @@ public:
 	bool IsVisible(void* input, void* output);
 	bool Minimize(void* input, void* output);
 	bool Restore(void* input, void* output);
+	bool SetClipboard(void* input, void* output);
 	bool SetHeight(void* input, void* output);
 	bool SetWidth(void* input, void* output);
 	bool SetX(void* input, void* output);
