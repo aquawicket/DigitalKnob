@@ -2,8 +2,6 @@
 #include "DKCefApp.h"
 #include "include/cef_app.h"
 
-class DKCefApp;
-
 int main(int argc, char* argv[])
 {
 #ifdef WIN32

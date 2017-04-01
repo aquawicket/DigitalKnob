@@ -90,12 +90,10 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 {
 public:
 
-	static CefRefPtr<DKCefV8Handler> handler;
+	CefRefPtr<DKCefV8Handler> handler;
 	
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
-
-	virtual void OnContextInitialized();
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
@@ -121,6 +119,21 @@ public:
 
 		handler = new DKCefV8Handler();	
 		DKCreate("DKCefV8");
+	}
+
+	/////////////////////////////////////
+	virtual void OnContextInitialized()
+	{
+		DKLog("DKCefApp::OnContextInitialized()\n", DKDEBUG);
+	
+		//DKString pp = DKFile::local_assets + "cef/plugins"; 
+		//DKString flash = pp + "/pepflashplayer32_19_0_0_185.dll";
+	
+		//FIXME
+		//CefAddWebPluginDirectory(CefString(pp));
+	
+		//CefAddWebPluginPath(CefString(flash));
+		CefRefreshWebPlugins();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
