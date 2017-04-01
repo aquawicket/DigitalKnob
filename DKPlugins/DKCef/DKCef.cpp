@@ -138,7 +138,7 @@ void DKCef::Init()
 #endif
 
 		
-#ifdef WIN32
+
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
 
@@ -148,13 +148,12 @@ void DKCef::Init()
 	DKString cp = DKFile::local_assets + "USER";
 	CefString(&settings.cache_path) = cp.c_str();
 
+#ifdef WIN32
 	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
-
 	if(!DKFile::PathExists(ep)){
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
         	return;
-    	}
-
+    }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
 	
@@ -163,7 +162,7 @@ void DKCef::Init()
 	if(!DKFile::PathExists(ep)){
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
         	return;
-    	}
+    }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
 #endif
 
