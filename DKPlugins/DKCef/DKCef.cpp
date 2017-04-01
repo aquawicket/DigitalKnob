@@ -20,6 +20,7 @@ void DKCef::Init()
 {
 	DKLog("DKCef::Init()\n", DKDEBUG);
 	
+	v8handler = new DKCefV8Handler();	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");

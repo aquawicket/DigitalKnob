@@ -90,15 +90,13 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 {
 public:
 
-	CefRefPtr<DKCefV8Handler> handler;
-	
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
-		DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKDEBUG);
+		//DKLog("DKCefApp::OnBeforeCommandLineProcessing()\n", DKDEBUG);
 		
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
@@ -117,14 +115,13 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		handler = new DKCefV8Handler();	
 		DKCreate("DKCefV8");
 	}
 
 	/////////////////////////////////////
 	virtual void OnContextInitialized()
 	{
-		DKLog("DKCefApp::OnContextInitialized()\n", DKDEBUG);
+		//DKLog("DKCefApp::OnContextInitialized()\n", DKDEBUG);
 	
 		//DKString pp = DKFile::local_assets + "cef/plugins"; 
 		//DKString flash = pp + "/pepflashplayer32_19_0_0_185.dll";
@@ -139,7 +136,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
+		//DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
+		printf("OnContextCreated\n");
 		DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
 	    DKCefV8Handler::AttachFunctions();
 	}

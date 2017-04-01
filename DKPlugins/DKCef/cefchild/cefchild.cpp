@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 #endif
 
 	//CefRefPtr<DKCefApp> app(new DKCefApp);
+	//return CefExecuteProcess(main_args, app.get(), NULL);
 	
-	// Execute the secondary process.
 	return CefExecuteProcess(main_args, NULL, NULL);
 }
