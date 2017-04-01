@@ -647,7 +647,15 @@ int DKWidgetJS::Cut(duk_context* ctx)
 		widget = ele->widget;
 	}
 
-	widget->CopySelection();
+	/*
+	Rocket::Core::WString pre, selection, post, line;
+	widget->GetLineSelection(pre, selection, post, line, 1);
+	DKCString text;
+	text = selection.ToUTF8(text,0);
+	DKLog("DKWidgetJS::Cut("+toString(text.CString())+")\n", DKINFO);
+	*/
+		
+	widget->CopySelection();  //TODO - use DKUtil::SetClipboard()
 	widget->DeleteSelection();
 	widget->UpdateRelativeCursor();
 	widget->ShowCursor(true,true);
@@ -671,7 +679,7 @@ int DKWidgetJS::Copy(duk_context* ctx)
 		widget = ele->widget;
 	}
 
-	widget->CopySelection();
+	widget->CopySelection(); //TODO - use DKUtil::SetClipboard()
 	return 1;
 }
 
