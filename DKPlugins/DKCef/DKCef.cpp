@@ -13,6 +13,7 @@
 #endif
 
 //CefClient* DKCef::cefHandler = NULL;
+//CefRefPtr<DKCefApp> DKCef::cefApp = NULL;
 
 //////////////////
 void DKCef::Init()
@@ -77,7 +78,8 @@ void DKCef::Init()
 #endif
 
 
-
+	//IMPORTANT INFORMATION
+	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
 
 
 #ifdef WIN32
@@ -87,27 +89,30 @@ void DKCef::Init()
 #endif
 	cefApp = new DKCefApp();
 
-	DKLog("CefExecuteProcess \n", DKINFO);
-	
 	// *** LINUX EXTRA WINDOW FIX ***
+	/*
 	if(DKApp::argc > 1){
 		for (int count = 1; count < DKApp::argc; count++){
 			if(has(DKApp::argv[count], "Cef")){
 				DKLog("CEF attempting to run another process,  exiting..\n", DKINFO);
-				DKApp::Exit();
-				return;	//If one of the arguments has Cef in it's string, then we should return to prevent an extra window. 
+				//DKApp::Exit();
+				//return;	//If one of the arguments has Cef in it's string, then we should return to prevent an extra window. 
 			}
 	    }
     }
+	*/
 	
-	int result = CefExecuteProcess(args, cefApp, NULL);
+	/*
+	DKLog("CefExecuteProcess \n", DKINFO);
+	int result = CefExecuteProcess(args, cefApp.get(), NULL);
 	if(result >= 0){
 		DKLog("CefExecuteProcess error", DKERROR);
 		return;
 	}
 	if(result <= -1){
-		// we are here in the father proccess.
+		DKLog("CefExecuteProcess: parent process\n", DKINFO);
 	}
+	*/
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// settings.multi_threaded_message_loop = true; // not supported, except windows
@@ -117,8 +122,8 @@ void DKCef::Init()
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 //#ifdef LINUX
-	DKLog("DKCef::Init(): no_sandbox\n", DKINFO);
-	settings.no_sandbox = true;
+	//DKLog("DKCef::Init(): no_sandbox\n", DKINFO);
+	//settings.no_sandbox = true;
 //#endif
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
@@ -176,8 +181,8 @@ void DKCef::Init()
 	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
 	//DKLog("CefInitialize \n", DKINFO);
-	result = CefInitialize(args, settings, cefApp, NULL);
-	if (!result){
+    int result2 = CefInitialize(args, settings, cefApp.get(), NULL);
+	if (!result2){
 		DKLog("CefInitialize error", DKERROR);
 		return;
 	}

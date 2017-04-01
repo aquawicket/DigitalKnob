@@ -7,8 +7,8 @@
 void DKTrayV8::Init()
 {
 	DKLog("DKTrayV8::Init()\n", DKDEBUG);
-	//DKCefApp::AttachFunction("Test", DKTrayV8::Test);
-	DKCefApp::AttachFunction("AddItem", DKTrayV8::AddItem);
+	//DKCefV8Handler::AttachFunction("Test", DKTrayV8::Test);
+	DKCefV8Handler::AttachFunction("AddItem", DKTrayV8::AddItem);
 }
 
 ///////////////////

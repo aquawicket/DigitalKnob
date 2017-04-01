@@ -7,8 +7,8 @@
 void DKAssetsV8::Init()
 {
 	DKLog("DKAssetsV8::Init()\n", DKDEBUG);
-	//DKCefApp::AttachFunction("Test", DKAssetsV8::Test);
-	DKCefApp::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
+	//DKCefV8Handler::AttachFunction("Test", DKAssetsV8::Test);
+	DKCefV8Handler::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
 }
 
 ///////////////////

@@ -7,8 +7,8 @@
 void DKDebugV8::Init()
 {
 	DKLog("DKDebugV8::Init()\n", DKDEBUG);
-	//DKCefApp::AttachFunction("Test", DKDebugV8::Test);
-	DKCefApp::AttachFunction("DKDebug_ShowStackTrace", DKDebugV8::ShowStackTrace);
+	//DKCefV8Handler::AttachFunction("Test", DKDebugV8::Test);
+	DKCefV8Handler::AttachFunction("DKDebug_ShowStackTrace", DKDebugV8::ShowStackTrace);
 }
 
 ///////////////////

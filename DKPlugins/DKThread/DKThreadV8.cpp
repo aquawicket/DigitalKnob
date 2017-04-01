@@ -5,8 +5,8 @@
 ///////////////////////
 void DKThreadV8::Init()
 {
-	DKCefApp::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
-	DKCefApp::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
+	DKCefV8Handler::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
+	DKCefV8Handler::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
 }
 
 //////////////////////

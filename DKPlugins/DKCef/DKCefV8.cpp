@@ -7,27 +7,27 @@ void DKCefV8::Init()
 	DKCreate("DKFileV8");
 	DKCreate("DKAssetsV8");
 	
-	DKCefApp::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
-	DKCefApp::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
-	DKCefApp::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
-	DKCefApp::AttachFunction("DKValid", DKCefV8::_DKValid);
-	DKCefApp::AttachFunction("DK_Execute", DKCefV8::Execute);
-	DKCefApp::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
-	DKCefApp::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
-	DKCefApp::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
-	DKCefApp::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
-	DKCefApp::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
-	DKCefApp::AttachFunction("DK_PressKey", DKCefV8::PressKey);
-	DKCefApp::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
-	DKCefApp::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
-	DKCefApp::AttachFunction("DK_Run", DKCefV8::Run);
-	DKCefApp::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
-	DKCefApp::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
-	DKCefApp::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
-	DKCefApp::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
-	DKCefApp::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
-	DKCefApp::AttachFunction("DK_System", DKCefV8::System);
-	DKCefApp::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
+	DKCefV8Handler::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
+	DKCefV8Handler::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
+	DKCefV8Handler::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
+	DKCefV8Handler::AttachFunction("DKValid", DKCefV8::_DKValid);
+	DKCefV8Handler::AttachFunction("DK_Execute", DKCefV8::Execute);
+	DKCefV8Handler::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKCefV8Handler::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
+	DKCefV8Handler::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
+	DKCefV8Handler::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
+	DKCefV8Handler::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
+	DKCefV8Handler::AttachFunction("DK_PressKey", DKCefV8::PressKey);
+	DKCefV8Handler::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
+	DKCefV8Handler::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
+	DKCefV8Handler::AttachFunction("DK_Run", DKCefV8::Run);
+	DKCefV8Handler::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
+	DKCefV8Handler::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
+	DKCefV8Handler::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
+	DKCefV8Handler::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
+	DKCefV8Handler::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
+	DKCefV8Handler::AttachFunction("DK_System", DKCefV8::System);
+	DKCefV8Handler::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 }
 
 ///////////////////
@@ -176,7 +176,7 @@ bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
 #ifndef MAC
 	DKLog("\n**** V8 Functions ****\n", DKINFO);
 	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
-	for (it_type iterator = DKCefApp::handler->functions.begin(); iterator != DKCefApp::handler->functions.end(); iterator++) {
+	for (it_type iterator = DKCefV8Handler::functions.begin(); iterator != DKCefV8Handler::functions.end(); iterator++) {
 		DKLog(iterator->first+"\n", DKINFO);
 	}
 	return true;

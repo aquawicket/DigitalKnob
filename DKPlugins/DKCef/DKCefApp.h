@@ -15,8 +15,10 @@ public:
 	DKCefV8Handler()
 	{
 		DKLog("DKCefV8Handler::DKCefV8Handler()\n",DKDEBUG);
+		instance = this;
 	}
 
+	static DKCefV8Handler* instance;
 #ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
 #else
@@ -37,6 +39,48 @@ public:
 		}
 		return true;
 	}
+	
+	/////////////////////////////////
+	static void AttachFunctions()
+	{
+		if(!object){
+			DKLog("DKCefV8Handler::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
+			return;
+		}
+
+#ifdef MAC
+		typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
+#else
+		typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+#endif
+		for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++) {
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), instance);
+			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		}	
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////
+	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
+	{
+		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
+		DKLog("DKCefV8Handler::AttachFunction("+name+")\n", DKDEBUG);
+		///if(!handler){
+			//DKLog("DKCefApp::AttachFunction("+name+"): handler invalid \n", DKWARN);
+			//return;
+		//}
+		functions[name] = boost::bind(func, _1, _2);
+		if(object){
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), instance);
+			object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		}
+		if(!functions[name]){
+			DKLog("DKCefV8Handler::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
+			return;
+		}	
+	}
+	
+	static CefRefPtr<CefV8Value> object;
+	
 
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
@@ -45,11 +89,9 @@ public:
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
 {
 public:
-	DKCefApp(){}
 
 	static CefRefPtr<DKCefV8Handler> handler;
-	static CefRefPtr<CefV8Value> object;
-
+	
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
@@ -85,47 +127,8 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
-		object = context->GetGlobal(); // Retrieve the context's window object.
-		AttachFunctions();
-	}
-
-	//////////////////////////////
-	static void AttachFunctions()
-	{
-		if(!object){
-			DKLog("DKCefApp::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
-			return;
-		}
-
-#ifdef MAC
-		typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
-#else
-		typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
-#endif
-		for(it_type iterator = handler->functions.begin(); iterator != handler->functions.end(); iterator++) {
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), handler);
-			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}	
-	}
-
-	//////////////////////////////////////////////////////////////////////////////////
-	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
-	{
-		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
-		DKLog("DKCefApp::AttachFunction("+name+")\n", DKDEBUG);
-		if(!handler){
-			DKLog("DKCefApp::AttachFunction("+name+"): handler invalid \n", DKWARN);
-			return;
-		}
-		handler->functions[name] = boost::bind(func, _1, _2);
-		if(object){
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), handler);
-			object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}
-		if(!handler->functions[name]){
-			DKLog("DKCefApp::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
-			return;
-		}	
+		DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
+	    DKCefV8Handler::AttachFunctions();
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);

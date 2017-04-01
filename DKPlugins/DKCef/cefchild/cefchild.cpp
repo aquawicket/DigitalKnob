@@ -1,4 +1,8 @@
+#include "DK.h"
+#include "DKCefApp.h"
 #include "include/cef_app.h"
+
+class DKCefApp;
 
 int main(int argc, char* argv[])
 {
@@ -8,6 +12,8 @@ int main(int argc, char* argv[])
 	CefMainArgs main_args(argc, argv);
 #endif
 
+	//CefRefPtr<DKCefApp> app(new DKCefApp);
+	
 	// Execute the secondary process.
 	return CefExecuteProcess(main_args, NULL, NULL);
 }
