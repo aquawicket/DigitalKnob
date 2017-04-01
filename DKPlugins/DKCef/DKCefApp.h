@@ -1,6 +1,8 @@
 #pragma once
 #ifndef DKCefApp_H
 #define DKCefApp_H
+#include <boost/function.hpp>
+#include <boost/bind.hpp>
 #include <include/cef_app.h>
 
 typedef CefV8ValueList CefArgs;
@@ -14,7 +16,7 @@ class DKCefV8Handler : public CefV8Handler
 public:
 	DKCefV8Handler()
 	{
-		DKLog("DKCefV8Handler::DKCefV8Handler()\n",DKDEBUG);
+		//DKLog("DKCefV8Handler::DKCefV8Handler()\n",DKDEBUG);
 		instance = this;
 	}
 
@@ -28,13 +30,13 @@ public:
 
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
 						CefReturn retval, CefString& exception) OVERRIDE {
-		DKLog("DKCefV8Handler::Execute()\n", DKDEBUG);
+		//DKLog("DKCefV8Handler::Execute()\n", DKDEBUG);
 		if(!functions[name]) {
 			DKLog("DKCefV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
 			return false;
 		}
 		if(!functions[name](arguments, retval)){
-			DKLog("DKCefV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
+			//DKLog("DKCefV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
 			return false;
 		}
 		return true;
@@ -44,7 +46,7 @@ public:
 	static void AttachFunctions()
 	{
 		if(!object){
-			DKLog("DKCefV8Handler::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
+			//DKLog("DKCefV8Handler::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n", DKERROR);
 			return;
 		}
 
@@ -63,7 +65,7 @@ public:
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
-		DKLog("DKCefV8Handler::AttachFunction("+name+")\n", DKDEBUG);
+		//DKLog("DKCefV8Handler::AttachFunction("+name+")\n", DKDEBUG);
 		///if(!handler){
 			//DKLog("DKCefApp::AttachFunction("+name+"): handler invalid \n", DKWARN);
 			//return;
@@ -74,7 +76,7 @@ public:
 			object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 		}
 		if(!functions[name]){
-			DKLog("DKCefV8Handler::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
+			//DKLog("DKCefV8Handler::AttachFunctions()("+name+"): failed to register function \n", DKERROR);
 			return;
 		}	
 	}
@@ -115,7 +117,7 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		DKCreate("DKCefV8");
+		//DKCreate("DKCefV8");
 	}
 
 	/////////////////////////////////////
@@ -137,9 +139,9 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		//DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);	
-		printf("OnContextCreated\n");
+		//printf("OnContextCreated\n");
 		DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
-	    DKCefV8Handler::AttachFunctions();
+		DKCefV8Handler::AttachFunctions();
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);

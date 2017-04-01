@@ -1,3 +1,4 @@
+#ifndef USE_DK
 #include "DK.h"
 #include "DKCefApp.h"
 #include "include/cef_app.h"
@@ -15,3 +16,5 @@ int main(int argc, char* argv[])
 	
 	//return CefExecuteProcess(main_args, NULL, NULL);
 }
+
+#endif //!USE_DK

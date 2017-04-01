@@ -197,6 +197,8 @@ void DKCef::Init()
 		DKLog("DKCef::Init(): No Cef window available \n", DKERROR);
 		return;
 	}
+	
+	DKCreate("DKCefV8");
 }
 
 /////////////////
