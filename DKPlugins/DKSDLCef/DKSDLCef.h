@@ -278,6 +278,39 @@ public:
 #endif
 	}
 
+	//////////////////////////////////////////////////////
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
+	{
+		DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
+		
+		if(!DKCefV8Handler::object){
+			DKLog("getting context.............\n", DKINFO);
+			if(!browser){
+				DKLog("browser invalid\n", DKINFO);
+				return false;
+			}
+			int frame_count = (int)browser->GetFrameCount();
+			DKLog("frame count = "+toString(frame_count)+"\n", DKINFO);
+			for(int i=0; i<frame_count; i++){
+				CefRefPtr<CefFrame> frame = browser->GetFrame(i);
+				if(frame){
+					CefRefPtr<CefV8Context> context = frame->GetV8Context();
+					if(context){
+						DKLog("We found a v8context\n", DKINFO);
+						DKCefV8Handler::object = context->GetGlobal();
+						if(DKCefV8Handler::object){
+							DKLog("WE FOUN ONE!!!t\n", DKINFO);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+		//if(DKCefV8Handler::object){
+			//DKCefV8Handler::AttachFunctions();
+		//}
+	}
 
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
 };
