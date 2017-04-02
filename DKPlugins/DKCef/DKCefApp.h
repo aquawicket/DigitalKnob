@@ -136,8 +136,8 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		printf("OnContextCreated\n");
-		//DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
-		//DKCefV8Handler::AttachFunctions();
+		DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
+		DKCefV8Handler::AttachFunctions();
 		
 		///////////////////
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("my_message");

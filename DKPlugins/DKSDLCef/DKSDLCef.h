@@ -283,6 +283,8 @@ public:
 	{
 		DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
 		
+		//BOOOOO :(
+		/*
 		if(!DKCefV8Handler::object){
 			DKLog("getting context.............\n", DKINFO);
 			if(!browser){
@@ -306,10 +308,8 @@ public:
 				}
 			}
 		}
+		*/
 		return false;
-		//if(DKCefV8Handler::object){
-			//DKCefV8Handler::AttachFunctions();
-		//}
 	}
 
 	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
