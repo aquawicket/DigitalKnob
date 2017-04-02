@@ -59,7 +59,9 @@ public:
 		for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++) {
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), instance);
 			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}	
+		}
+		
+		printf("functions: %d\n", (int)functions.size());
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +69,7 @@ public:
 	{
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
 		printf("DKCefV8Handler::AttachFunction()\n");
+		
 		functions[name] = boost::bind(func, _1, _2);
 		if(object){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), instance);
