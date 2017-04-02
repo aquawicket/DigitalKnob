@@ -28,8 +28,8 @@ public:
 #endif
 	
 
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, 
-						CefReturn retval, CefString& exception) OVERRIDE {
+	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, CefReturn retval, CefString& exception) OVERRIDE 
+	{
 		printf("DKCefV8Handler::Execute()\n");
 		if(!functions[name]) {
 			printf("DKCefV8Handler::Execute() not registered\n");
@@ -143,17 +143,10 @@ public:
 		DKCefV8Handler::AttachFunctions();
 		
 		///////////////////
-		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("my_message");
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("AttachFunctions");
 		CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
-		args->SetString(0, "my string"); // Populate the argument values.
-		args->SetInt(0, 10);
+		args->SetString(0, "myValue");
 		browser->SendProcessMessage(PID_BROWSER, msg);
-	}
-	
-	///////////////////////////////////////////////
-	virtual void OnRenderProcessThreadCreated()
-	{
-		printf("OnRenderProcessThreadCreated\n");
 	}
 	
 	//////////////////////////////////////////////////////

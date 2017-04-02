@@ -283,6 +283,13 @@ public:
 	{
 		DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
 		
+		if (message->GetName() == "AttachFunctions") {
+			DKLog("DKSDLCefHandler::OnProcessMessageReceived(AttachFunctions)\n", DKINFO);
+			CefRefPtr<CefListValue> args = message->GetArgumentList();
+			CefString string = args->GetString(0);
+			DKLog("string = "+DKString(string)+"\n", DKINFO);
+		}
+		
 		//BOOOOO :(
 		/*
 		if(!DKCefV8Handler::object){
