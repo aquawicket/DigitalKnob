@@ -9,81 +9,88 @@ typedef CefV8ValueList CefArgs;
 typedef CefRefPtr<CefV8Value>& CefReturn;
 class DKCefApp;
 
+#ifdef MAC
+typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
+#else
+typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
+#endif
 
-//////////////////////////////////////////
-class DKCefV8Handler : public CefV8Handler
+////////////
+class DKV8
 {
 public:
-	DKCefV8Handler()
+	//////////////////////////////////////////////////////////////////////////////////
+	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-		printf("DKCefV8Handler::DKCefV8Handler()\n");
-		instance = this;
+		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
+		printf("DKV8::AttachFunction()\n");
+		
+		functions[name] = boost::bind(func, _1, _2);
+		if(!functions[name]){
+			printf("DKV8::AttachFunctions()(): failed to register function \n");
+			return;
+		}	
+	}
+	
+	////////////////////////
+	static void GetFunctions(CefRefPtr<CefBrowser> browser)
+	{
+		printf("DKV8::GetFunctions()\n");
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
+		CefRefPtr<CefListValue> args = msg->GetArgumentList();
+		int i=0;
+		for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++) {
+			//printf("%s\n", iterator->first.c_str());
+			args->SetString(i, iterator->first.c_str()); ///////////Get function names
+			i++;
+		}
+		browser->SendProcessMessage(PID_RENDERER, msg);
+	}
+	
+	////////////////////////
+	static void Execute(std::string func)
+	{
+		printf("DKV8::Execute(%s)\n", func.c_str());
+		if(!functions[func]) {
+			printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
+			return;
+		}
+		//if(!functions[name](arguments, retval)){
+		//	printf("DKCefV8Handler::Execute() failed\n");
+		//	return false;
+		//}
 	}
 
-	static DKCefV8Handler* instance;
 #ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
 #else
 	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
 #endif
-	
+};
 
+//////////////////////////////////////////
+class DKCefV8Handler : public CefV8Handler
+{
+public:
+	DKCefV8Handler(){ printf("DKCefV8Handler::DKCefV8Handler()\n"); }
+	CefRefPtr<CefBrowser> browser;
+	
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, CefReturn retval, CefString& exception) OVERRIDE 
 	{
-		printf("DKCefV8Handler::Execute()\n");
-		if(!functions[name]) {
-			printf("DKCefV8Handler::Execute() not registered\n");
-			return false;
-		}
-		if(!functions[name](arguments, retval)){
-			printf("DKCefV8Handler::Execute() failed\n");
-			return false;
-		}
+		std::string func = name;
+		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("Execute");
+		CefRefPtr<CefListValue> args = msg->GetArgumentList();
+		args->SetString(0, name);
+		browser->SendProcessMessage(PID_BROWSER, msg);
 		return true;
 	}
 	
-	/////////////////////////////////
-	static void AttachFunctions()
+	void SetBrowser(CefRefPtr<CefBrowser> _browser)
 	{
-		printf("DKCefV8Handler::AttachFunctions()\n");
-		if(!object){
-			printf("DKCefV8Handler::AttachFunctions(): DKCefApp::OnContextCreated() has not been called yet. \n");
-			return;
-		}
-
-#ifdef MAC
-		typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
-#else
-		typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
-#endif
-		for(it_type iterator = functions.begin(); iterator != functions.end(); iterator++) {
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(iterator->first.c_str(), instance);
-			object->SetValue(iterator->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}
-		
-		printf("functions: %d\n", (int)functions.size());
-	}
-
-	//////////////////////////////////////////////////////////////////////////////////
-	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
-	{
-		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
-		printf("DKCefV8Handler::AttachFunction()\n");
-		
-		functions[name] = boost::bind(func, _1, _2);
-		if(object){
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), instance);
-			object->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		}
-		if(!functions[name]){
-			printf("DKCefV8Handler::AttachFunctions()(): failed to register function \n");
-			return;
-		}	
+		browser = _browser;
 	}
 	
-	static CefRefPtr<CefV8Value> object;
-	
-
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
@@ -91,7 +98,9 @@ public:
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
 {
 public:
-
+	CefRefPtr<DKCefV8Handler> v8handler = NULL;
+	CefRefPtr<CefV8Value> ctx = NULL;
+	std::vector<std::string> funcs;
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
@@ -117,21 +126,26 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		//DKCreate("DKCefV8");
+		if(!v8handler){
+			printf("Creating v8handler\n");
+			v8handler = new DKCefV8Handler();
+		}
 	}
 
+	///////////////////////////////////////////////////
+	virtual void OnBrowserCreated(CefRefPtr< CefBrowser > browser) 
+	{
+		printf("DKCefApp::OnBrowserCreated()\n");
+		v8handler->SetBrowser(browser);
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
+		CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+		browser->SendProcessMessage(PID_BROWSER, msg);
+	}
+	
 	/////////////////////////////////////
 	virtual void OnContextInitialized()
 	{
 		printf("DKCefApp::OnContextInitialized()\n");
-	
-		//DKString pp = DKFile::local_assets + "cef/plugins"; 
-		//DKString flash = pp + "/pepflashplayer32_19_0_0_185.dll";
-	
-		//FIXME
-		//CefAddWebPluginDirectory(CefString(pp));
-	
-		//CefAddWebPluginPath(CefString(flash));
 		CefRefreshWebPlugins();
 	}
 
@@ -139,20 +153,35 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		printf("OnContextCreated\n");
-		DKCefV8Handler::object = context->GetGlobal(); // Retrieve the context's window object.
-		DKCefV8Handler::AttachFunctions();
+		if(!ctx){
+			printf("Creating ctx\n");
+			ctx = context->GetGlobal();
+		}
 		
-		///////////////////
-		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("AttachFunctions");
-		CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
-		args->SetString(0, "myValue");
-		browser->SendProcessMessage(PID_BROWSER, msg);
+		for(int i=0; i<funcs.size(); i++){
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), v8handler);
+			ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+			funcs.pop_back();
+			//printf("registered: %s \n", funcs[i].c_str());
+		}
 	}
 	
-	//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 	{
-		printf("DKCefApp::OnProcessMessageReceived()\n");
+		//printf("DKCefApp::OnProcessMessageReceived()\n");
+		if(!v8handler){
+			printf("DKCefApp::OnProcessMessageReceived(): v8handler invalid\n");
+			return false;
+		}
+		if(message->GetName() == "GetFunctions"){
+			printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
+			CefRefPtr<CefListValue> args = message->GetArgumentList();
+			for(int i=0; i<args->GetSize(); i++){
+				CefString string = args->GetString(i);
+				funcs.push_back(std::string(string));
+			}
+		}	
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);

@@ -281,13 +281,21 @@ public:
 	//////////////////////////////////////////////////////
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 	{
-		DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
+		//DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
 		
-		if (message->GetName() == "AttachFunctions") {
-			DKLog("DKSDLCefHandler::OnProcessMessageReceived(AttachFunctions)\n", DKINFO);
+		if(message->GetName() == "GetFunctions"){
+			DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
+			DKV8::GetFunctions(browser);
+			//CefRefPtr<CefListValue> args = message->GetArgumentList();
+			//CefString string = args->GetString(0);
+			//DKLog("string = "+DKString(string)+"\n", DKINFO);
+		}
+		
+		if(message->GetName() == "Execute"){
+			DKLog("DKSDLCefHandler::OnProcessMessageReceived(Execute)\n", DKINFO);
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
 			CefString string = args->GetString(0);
-			DKLog("string = "+DKString(string)+"\n", DKINFO);
+			DKV8::Execute(DKString(string));
 		}
 		
 		//BOOOOO :(

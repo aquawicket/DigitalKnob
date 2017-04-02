@@ -7,22 +7,22 @@
 void DKFileV8::Init()
 {
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
-	//DKCefV8Handler::AttachFunction("Test", DKFileV8::Test);
-	DKCefV8Handler::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
-	DKCefV8Handler::AttachFunction("DKFile_Copy", DKFileV8::Copy);
-	DKCefV8Handler::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);
-	DKCefV8Handler::AttachFunction("DKFile_Delete", DKFileV8::Delete);
-	DKCefV8Handler::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
-	DKCefV8Handler::AttachFunction("DKFile_Exists", DKFileV8::Exists);
-	DKCefV8Handler::AttachFunction("DKFile_FileToString", DKFileV8::FileToString);
-	DKCefV8Handler::AttachFunction("DKFile_GetAbsolutePath", DKFileV8::GetAbsolutePath);
-	DKCefV8Handler::AttachFunction("DKFile_GetSetting", DKFileV8::GetSetting);
-	DKCefV8Handler::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
-	DKCefV8Handler::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
-	DKCefV8Handler::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
-	DKCefV8Handler::AttachFunction("DKFile_Rename", DKFileV8::Rename);
-	DKCefV8Handler::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
-	DKCefV8Handler::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
+	//DKV8::AttachFunction("Test", DKFileV8::Test);
+	DKV8::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
+	DKV8::AttachFunction("DKFile_Copy", DKFileV8::Copy);
+	DKV8::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);
+	DKV8::AttachFunction("DKFile_Delete", DKFileV8::Delete);
+	DKV8::AttachFunction("DKFile_DirectoryContents", DKFileV8::DirectoryContents);
+	DKV8::AttachFunction("DKFile_Exists", DKFileV8::Exists);
+	DKV8::AttachFunction("DKFile_FileToString", DKFileV8::FileToString);
+	DKV8::AttachFunction("DKFile_GetAbsolutePath", DKFileV8::GetAbsolutePath);
+	DKV8::AttachFunction("DKFile_GetSetting", DKFileV8::GetSetting);
+	DKV8::AttachFunction("DKFile_GetShortName", DKFileV8::GetShortName);
+	DKV8::AttachFunction("DKFile_IsDirectory", DKFileV8::IsDirectory);
+	DKV8::AttachFunction("DKFile_MkDir", DKFileV8::MkDir);
+	DKV8::AttachFunction("DKFile_Rename", DKFileV8::Rename);
+	DKV8::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
+	DKV8::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
 }
 
 ///////////////////
