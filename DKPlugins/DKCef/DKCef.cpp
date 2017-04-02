@@ -129,8 +129,12 @@ void DKCef::Init()
 	//settings.command_line_args_disabled = true;
 	//settings.multi_threaded_message_loop = true;
 //#if !defined(LINUX) && !defined(DEBUG)
-	DKLog("DKCef::Init(): single_process\n", DKINFO);
-	settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+	DKString multi_process;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
+	if(!same(multi_process, "ON")){
+		DKLog("DKCef::Init(): single_process\n", DKINFO);
+		settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+	}
 //#endif
 
 #ifndef DEBUG
