@@ -6,19 +6,19 @@
 void DKHookV8::Init()
 {
 	DKLog("DKHookV8::Init()\n", DKDEBUG);
-	//DKCefApp::AttachFunction("Test", DKHookV8::Test);
-	DKCefApp::AttachFunction("DKHook_SendHook", DKHookV8::SendHook);
-	DKCefApp::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
-	DKCefApp::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
-	DKCefApp::AttachFunction("DKHook_Click", DKHookV8::Click);
-	DKCefApp::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
-	DKCefApp::AttachFunction("DKHook_NextHandle", DKHookV8::NextHandle);
-	DKCefApp::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
-	DKCefApp::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
-	DKCefApp::AttachFunction("DKHook_GetWindows", DKHookV8::GetWindows);
-	DKCefApp::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
-	DKCefApp::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
-	DKCefApp::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
+	//DKV8::AttachFunction("Test", DKHookV8::Test);
+	DKV8::AttachFunction("DKHook_SendHook", DKHookV8::SendHook);
+	DKV8::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
+	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
+	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
+	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
+	DKV8::AttachFunction("DKHook_NextHandle", DKHookV8::NextHandle);
+	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
+	DKV8::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
+	DKV8::AttachFunction("DKHook_GetWindows", DKHookV8::GetWindows);
+	DKV8::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
+	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
+	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
 }
 
 ///////////////////
