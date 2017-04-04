@@ -288,17 +288,19 @@ public:
 			DKV8::GetFunctions(browser);
 		}
 		
-		if(has(message->GetName(),"Execute(")){
-			DKLog("DKSDLCefHandler::OnProcessMessageReceived(Execute)\n", DKINFO);
+		if(has(message->GetName(),"CallFunc(")){
+			DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
 		
 			//get function name
 			DKString func = message->GetName();
-			replace(func,"Execute(", "");
+			replace(func,"CallFunc(", "");
 			replace(func,")", "");
 
 			//get arguments
 			CefArgs args;
 			CefRefPtr<CefListValue> arguments = message->GetArgumentList();
+
+			/*
 			for(unsigned int i=0; i<arguments->GetSize(); i++){
 				CefRefPtr<CefV8Value> new_value;
 				CefValueType type = arguments->GetType(i);
@@ -329,8 +331,9 @@ public:
 					args[i]->SetValue(i, CefV8Value::CreateNull());
 				}
 			}
+			*/
 
-			DKV8::Execute(func, args);
+			//DKV8::Execute(func, args);
 		}
 		
 		return false;

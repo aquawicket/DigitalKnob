@@ -56,11 +56,20 @@ public:
 			return;
 		}
 
-		CefReturn retval = CefV8Value::CreateBool(false);
-		if(!functions[func](args,retval)){
-			printf("DKCefV8Handler::Execute() failed\n");
-			return;
+		for(unsigned int i=0; i<args.size(); i++){
+			if(args[i]->IsString()){
+				printf("%d: %s\n", i, std::string(args[i]->GetStringValue()).c_str());
+			}
+			if(args[i]->IsInt()){
+				printf("%d: %d\n", i, args[i]->GetIntValue());
+			}
 		}
+
+		//CefReturn retval = CefV8Value::CreateBool(false);
+		//if(!functions[func](args,retval)){
+		//	printf("DKCefV8Handler::Execute() failed\n");
+		//	return;
+		//}
 	}
 
 #ifdef MAC
@@ -84,9 +93,7 @@ public:
 		std::string exec = "CallFunc("+func+")";
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
 
-		/*
 		CefRefPtr<CefListValue> args = msg->GetArgumentList();
-		args->SetString(0, name); //function name
 		for(unsigned int i=0; i<arguments.size(); i++){
 			if(arguments[i]->IsString()){
 				args->SetString(i+1, arguments[i]->GetStringValue());
@@ -96,7 +103,6 @@ public:
 			}
 		}
 		browser->SendProcessMessage(PID_BROWSER, msg);
-		*/
 		return true;
 	}
 	
