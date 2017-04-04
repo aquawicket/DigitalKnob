@@ -286,44 +286,53 @@ public:
 		if(message->GetName() == "GetFunctions"){
 			DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
 			DKV8::GetFunctions(browser);
-			//CefRefPtr<CefListValue> args = message->GetArgumentList();
-			//CefString string = args->GetString(0);
-			//DKLog("string = "+DKString(string)+"\n", DKINFO);
 		}
 		
-		if(message->GetName() == "Execute"){
+		if(has(message->GetName(),"Execute(")){
 			DKLog("DKSDLCefHandler::OnProcessMessageReceived(Execute)\n", DKINFO);
-			CefRefPtr<CefListValue> args = message->GetArgumentList();
-			CefString string = args->GetString(0);
-			DKV8::Execute(DKString(string));
-		}
 		
-		//BOOOOO :(
-		/*
-		if(!DKCefV8Handler::object){
-			DKLog("getting context.............\n", DKINFO);
-			if(!browser){
-				DKLog("browser invalid\n", DKINFO);
-				return false;
-			}
-			int frame_count = (int)browser->GetFrameCount();
-			DKLog("frame count = "+toString(frame_count)+"\n", DKINFO);
-			for(int i=0; i<frame_count; i++){
-				CefRefPtr<CefFrame> frame = browser->GetFrame(i);
-				if(frame){
-					CefRefPtr<CefV8Context> context = frame->GetV8Context();
-					if(context){
-						DKLog("We found a v8context\n", DKINFO);
-						DKCefV8Handler::object = context->GetGlobal();
-						if(DKCefV8Handler::object){
-							DKLog("WE FOUN ONE!!!t\n", DKINFO);
-							return true;
-						}
-					}
+			//get function name
+			DKString func = message->GetName();
+			replace(func,"Execute(", "");
+			replace(func,")", "");
+
+			//get arguments
+			CefArgs args;
+			CefRefPtr<CefListValue> arguments = message->GetArgumentList();
+			for(unsigned int i=0; i<arguments->GetSize(); i++){
+				CefRefPtr<CefV8Value> new_value;
+				CefValueType type = arguments->GetType(i);
+				switch (type){
+					case VTYPE_BOOL:
+						new_value = CefV8Value::CreateBool(arguments->GetBool(i));
+						break;
+					case VTYPE_DOUBLE:
+						new_value = CefV8Value::CreateDouble(arguments->GetDouble(i));
+						break;
+					case VTYPE_INT:
+						new_value = CefV8Value::CreateInt(arguments->GetInt(i));
+						break;
+					case VTYPE_STRING:
+						new_value = CefV8Value::CreateString(arguments->GetString(i));
+						break;
+					case VTYPE_NULL:
+						new_value = CefV8Value::CreateNull();
+						break;
+					default:
+					break;
+				}
+
+				if(new_value.get()){
+					args[i]->SetValue(i, new_value);
+				} 
+				else{
+					args[i]->SetValue(i, CefV8Value::CreateNull());
 				}
 			}
+
+			DKV8::Execute(func, args);
 		}
-		*/
+		
 		return false;
 	}
 

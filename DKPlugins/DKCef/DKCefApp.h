@@ -47,18 +47,20 @@ public:
 		browser->SendProcessMessage(PID_RENDERER, msg);
 	}
 	
-	////////////////////////
-	static void Execute(std::string func)
+	///////////////////////////////////////////////////
+	static void Execute(std::string func, CefArgs args)
 	{
 		printf("DKV8::Execute(%s)\n", func.c_str());
 		if(!functions[func]) {
 			printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
 			return;
 		}
-		//if(!functions[name](arguments, retval)){
-		//	printf("DKCefV8Handler::Execute() failed\n");
-		//	return false;
-		//}
+
+		CefReturn retval = CefV8Value::CreateBool(false);
+		if(!functions[func](args,retval)){
+			printf("DKCefV8Handler::Execute() failed\n");
+			return;
+		}
 	}
 
 #ifdef MAC
@@ -79,10 +81,22 @@ public:
 	{
 		std::string func = name;
 		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
-		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("Execute");
+		std::string exec = "CallFunc("+func+")";
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
+
+		/*
 		CefRefPtr<CefListValue> args = msg->GetArgumentList();
-		args->SetString(0, name);
+		args->SetString(0, name); //function name
+		for(unsigned int i=0; i<arguments.size(); i++){
+			if(arguments[i]->IsString()){
+				args->SetString(i+1, arguments[i]->GetStringValue());
+			}
+			if(arguments[i]->IsInt()){
+				args->SetInt(i+1, arguments[i]->GetIntValue());
+			}
+		}
 		browser->SendProcessMessage(PID_BROWSER, msg);
+		*/
 		return true;
 	}
 	
@@ -158,7 +172,7 @@ public:
 			ctx = context->GetGlobal();
 		}
 		
-		for(int i=0; i<funcs.size(); i++){
+		for(unsigned int i=0; i<funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), v8handler);
 			ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 			funcs.pop_back();
@@ -177,7 +191,7 @@ public:
 		if(message->GetName() == "GetFunctions"){
 			printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
-			for(int i=0; i<args->GetSize(); i++){
+			for(unsigned int i=0; i<args->GetSize(); i++){
 				CefString string = args->GetString(i);
 				funcs.push_back(std::string(string));
 			}
