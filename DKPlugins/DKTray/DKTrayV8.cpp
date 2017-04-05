@@ -32,9 +32,11 @@ bool DKTrayV8::Test(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////
 bool DKTrayV8::AddItem(CefArgs args, CefReturn retval)
 {
-	DKLog("DKTrayV8::AddItem(CefArgs,CefReturn)\n", DKDEBUG);
-	DKString name = args[0]->GetStringValue();
-	int id = args[1]->GetIntValue();
+	//DKLog("DKTrayV8::AddItem(CefArgs,CefReturn)\n", DKDEBUG);
+	//DKString name = args[0]->GetStringValue();
+	DKString name = args->GetString(0);
+	//int id = args[1]->GetIntValue();
+	int id = args->GetInt(1);
 	DKTray::Get("DKTray0")->AddItem(name, id);
 	return true;
 }

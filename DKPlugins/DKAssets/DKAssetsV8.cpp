@@ -32,7 +32,8 @@ bool DKAssetsV8::Test(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKAssetsV8::LocalAssets(CefArgs args, CefReturn retval)
 {
-	retval = CefV8Value::CreateString(DKFile::local_assets);
+	//retval = CefV8Value::CreateString(DKFile::local_assets);
+	retval->SetString(0, DKFile::local_assets);
 	return true;
 }
 

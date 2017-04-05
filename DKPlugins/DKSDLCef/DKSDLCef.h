@@ -297,45 +297,10 @@ public:
 			replace(func,")", "");
 
 			//get arguments
-			CefArgs args;
 			CefRefPtr<CefListValue> arguments = message->GetArgumentList();
-
-			/*
-			for(unsigned int i=0; i<arguments->GetSize(); i++){
-				CefRefPtr<CefV8Value> new_value;
-				CefValueType type = arguments->GetType(i);
-				switch (type){
-					case VTYPE_BOOL:
-						new_value = CefV8Value::CreateBool(arguments->GetBool(i));
-						break;
-					case VTYPE_DOUBLE:
-						new_value = CefV8Value::CreateDouble(arguments->GetDouble(i));
-						break;
-					case VTYPE_INT:
-						new_value = CefV8Value::CreateInt(arguments->GetInt(i));
-						break;
-					case VTYPE_STRING:
-						new_value = CefV8Value::CreateString(arguments->GetString(i));
-						break;
-					case VTYPE_NULL:
-						new_value = CefV8Value::CreateNull();
-						break;
-					default:
-					break;
-				}
-
-				if(new_value.get()){
-					args[i]->SetValue(i, new_value);
-				} 
-				else{
-					args[i]->SetValue(i, CefV8Value::CreateNull());
-				}
-			}
-			*/
-
-			//DKV8::Execute(func, args);
+			DKV8::Execute(browser, func, arguments);
 		}
-		
+
 		return false;
 	}
 

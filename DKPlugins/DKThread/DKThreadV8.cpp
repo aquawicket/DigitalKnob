@@ -19,15 +19,18 @@ void DKThreadV8::End()
 bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval)
 {
 	DKString names = toString(DKThreadPool::Instance("DKThreadPool")->names, ",");
-	retval = CefV8Value::CreateString(names.c_str());
+	//retval = CefV8Value::CreateString(names.c_str());
+	retval->SetString(0, names.c_str());
 	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 {
-	DKString name = args[0]->GetStringValue();
-	DKString code = args[1]->GetStringValue();
+	//DKString name = args[0]->GetStringValue();
+	DKString name = args->GetString(0);
+	//DKString code = args[1]->GetStringValue();
+	DKString code = args->GetString(1);
 	
 	DKLog("DKThreadJS::DKQueue("+name+","+code+")\n", DKDEBUG);
 //#ifdef WIN32

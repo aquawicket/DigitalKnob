@@ -5,8 +5,8 @@
 #include <boost/bind.hpp>
 #include <include/cef_app.h>
 
-typedef CefV8ValueList CefArgs;
-typedef CefRefPtr<CefV8Value>& CefReturn;
+typedef CefRefPtr<CefListValue> CefArgs;
+typedef CefRefPtr<CefListValue> CefReturn;
 class DKCefApp;
 
 #ifdef MAC
@@ -32,7 +32,7 @@ public:
 		}	
 	}
 	
-	////////////////////////
+	///////////////////////////////////////////////////////
 	static void GetFunctions(CefRefPtr<CefBrowser> browser)
 	{
 		printf("DKV8::GetFunctions()\n");
@@ -47,31 +47,57 @@ public:
 		browser->SendProcessMessage(PID_RENDERER, msg);
 	}
 	
-	///////////////////////////////////////////////////
-	static void Execute(std::string func, CefArgs args)
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	static void Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 	{
-		printf("DKV8::Execute(%s)\n", func.c_str());
+		//printf("DKV8::Execute(%s)\n", func.c_str());
 		if(!functions[func]) {
 			printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
 			return;
 		}
 
-		for(unsigned int i=0; i<args.size(); i++){
-			if(args[i]->IsString()){
-				printf("%d: %s\n", i, std::string(args[i]->GetStringValue()).c_str());
+		printf("%s(", func.c_str());
+		for(unsigned int i=0; i<args->GetSize(); i++){
+			if(args->GetType(i) == VTYPE_STRING){
+			      printf("%s,", std::string(args->GetString(i)).c_str());
 			}
-			if(args[i]->IsInt()){
-				printf("%d: %d\n", i, args[i]->GetIntValue());
+			if(args->GetType(i) == VTYPE_INT){
+			      printf("%d,", args->GetInt(i));
 			}
 		}
+		printf(")\n");
 
-		//CefReturn retval = CefV8Value::CreateBool(false);
-		//if(!functions[func](args,retval)){
-		//	printf("DKCefV8Handler::Execute() failed\n");
-		//	return;
-		//}
+		CefRefPtr<CefListValue> retval = CefListValue::Create();
+		if(!functions[func](args,retval)){
+			printf("DKCefV8Handler::Execute() failed\n");
+			return;
+		}
+		
+		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("retval");
+		CefRefPtr<CefListValue> args2 = msg->GetArgumentList(); // Retrieve the argument list object.
+		
+		if(retval->GetType(0) == VTYPE_STRING){
+		      //printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
+		      args2->SetString(0, retval->GetString(0));
+		}
+		else if(retval->GetType(0) == VTYPE_INT){
+		      //printf("retval = %d\n", retval->GetInt(0));
+		      args2->SetInt(0, retval->GetInt(0));
+		}
+		else if(retval->GetType(0) == VTYPE_BOOL){
+		      //printf("retval = %d\n", retval->GetBool(0));
+		      args2->SetBool(0, retval->GetBool(0));
+		}
+		else{
+		      args2->SetBool(0, true);
+		}
+		
+		
+		browser->SendProcessMessage(PID_RENDERER, msg);
+		
 	}
 
+	static CefRefPtr<CefBrowser> _browser;
 #ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
 #else
@@ -85,9 +111,11 @@ class DKCefV8Handler : public CefV8Handler
 public:
 	DKCefV8Handler(){ printf("DKCefV8Handler::DKCefV8Handler()\n"); }
 	CefRefPtr<CefBrowser> browser;
+	CefRefPtr<CefListValue> _retval = CefListValue::Create(); 
 	
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefArgs& arguments, CefReturn retval, CefString& exception) OVERRIDE 
+	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
 	{
+		_retval->Clear();
 		std::string func = name;
 		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
 		std::string exec = "CallFunc("+func+")";
@@ -103,6 +131,9 @@ public:
 			}
 		}
 		browser->SendProcessMessage(PID_BROWSER, msg);
+		
+		
+		//while(!_retval->GetSize()){}
 		return true;
 	}
 	
@@ -201,7 +232,24 @@ public:
 				CefString string = args->GetString(i);
 				funcs.push_back(std::string(string));
 			}
-		}	
+		}
+		if(message->GetName() == "retval"){
+			printf("DKCefApp::OnProcessMessageReceived(retval)\n");
+			CefRefPtr<CefListValue> retval = message->GetArgumentList();
+
+			if(retval->GetType(0) == VTYPE_STRING){
+			      printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
+			      v8handler->_retval->SetString(0, retval->GetString(0));
+			}
+			if(retval->GetType(0) == VTYPE_INT){
+			      printf("retval = %d\n", retval->GetInt(0));
+			      v8handler->_retval->SetInt(0, retval->GetInt(0));
+			}
+			if(retval->GetType(0) == VTYPE_BOOL){
+			      printf("retval = %d\n", retval->GetBool(0));
+			      v8handler->_retval->SetBool(0, retval->GetBool(0));
+			}	
+		}
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
