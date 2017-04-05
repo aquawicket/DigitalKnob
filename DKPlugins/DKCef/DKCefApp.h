@@ -111,11 +111,11 @@ class DKCefV8Handler : public CefV8Handler
 public:
 	DKCefV8Handler(){ printf("DKCefV8Handler::DKCefV8Handler()\n"); }
 	CefRefPtr<CefBrowser> browser;
-	CefRefPtr<CefListValue> _retval = CefListValue::Create(); 
+	//CefRefPtr<CefListValue> _retval = CefListValue::Create(); 
 	
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
 	{
-		_retval->Clear();
+		//_retval->Clear();
 		std::string func = name;
 		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
 		std::string exec = "CallFunc("+func+")";
@@ -239,15 +239,15 @@ public:
 
 			if(retval->GetType(0) == VTYPE_STRING){
 			      printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
-			      v8handler->_retval->SetString(0, retval->GetString(0));
+			      //v8handler->_retval->SetString(0, retval->GetString(0));
 			}
 			if(retval->GetType(0) == VTYPE_INT){
 			      printf("retval = %d\n", retval->GetInt(0));
-			      v8handler->_retval->SetInt(0, retval->GetInt(0));
+			      //v8handler->_retval->SetInt(0, retval->GetInt(0));
 			}
 			if(retval->GetType(0) == VTYPE_BOOL){
 			      printf("retval = %d\n", retval->GetBool(0));
-			      v8handler->_retval->SetBool(0, retval->GetBool(0));
+			      //v8handler->_retval->SetBool(0, retval->GetBool(0));
 			}	
 		}
 	}
