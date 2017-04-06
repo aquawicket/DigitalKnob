@@ -20,7 +20,7 @@ void DKCef::Init()
 {
 	DKLog("DKCef::Init()\n", DKDEBUG);
 	
-	v8handler = new DKCefV8Handler();	
+	//v8handler = new DKCefV8Handler();	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
@@ -219,7 +219,7 @@ void DKCef::End()
 		browsers.clear();
 	}
 	cefHandler = NULL;
-
+	//v8handler = NULL;
 	if(instance_count == 1){
 		CefShutdown();
 	}
