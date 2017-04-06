@@ -59,7 +59,10 @@ void DKCef::Init()
 #endif
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
-		DKLog("Could not load "+cef_dll+" \n", DKERROR);
+		DKString error;
+		DKWindows::GetLastError(error);
+		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
+		FreeLibrary(libcef);
 	}
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
 #endif
