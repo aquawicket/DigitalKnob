@@ -1612,6 +1612,22 @@ ENDFUNCTION()
 
 
 ############################
+FUNCTION(DKEXECUTABLE arg)
+	##Create CmakeLists.txt file
+	DKSETPATHTOPLUGIN(${arg})
+	IF(NOT PATHTOPLUGIN)
+		RETURN()
+	ENDIF()
+	
+	DKINCLUDE(${PATHTOPLUGIN})
+	DKSET(CMAKE_FILE "### ${arg} ###\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}CMAKE_MINIMUM_REQUIRED(VERSION 3.0)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}INCLUDE(${DKCMAKE}/FUNCTIONS.cmake)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}INCLUDE(${DKCMAKE}/OPTIONS.cmake)\n")
+	DKSET(CMAKE_FILE "${CMAKE_FILE}PROJECT(${arg})\n")
+ENDFUNCTION()
+
+############################
 FUNCTION(DKAPPEND_CMAKE arg)
 	DKSET(CMAKE_FILE "${CMAKE_FILE} ${arg}")
 ENDFUNCTION()
@@ -1678,8 +1694,8 @@ ENDFUNCTION()
 
 
 ### This is the current way to build the dependency list 
-### After the list is orginized, the DKCmake.txt files will be run in order.
-### This first method, finds the DKCmake.txt file and searches for DKDEPEND() comands.
+### After the list is orginized, the DKCMake.txt files will be run in order.
+### This first method, finds the DKCMake.txt file and searches for DKDEPEND() comands.
 ### This loop will orginize them from top to bottom, then they will be run.
 ### This is more of a brute-force method, but it also ensures too many libraries will be included
 ### (LARGER EXECUTABLE FILE)
