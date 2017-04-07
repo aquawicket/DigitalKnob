@@ -8,6 +8,7 @@
 typedef CefRefPtr<CefListValue> CefArgs;
 typedef CefRefPtr<CefListValue> CefReturn;
 class DKCefApp;
+class DKCefV8Handler;
 
 #ifdef MAC
 typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterator it_type;
@@ -23,11 +24,11 @@ public:
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
-		printf("DKV8::AttachFunction()\n");
+		printf("DKV8::AttachFunction(%s)\n", name.c_str());
 		
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
-			printf("DKV8::AttachFunctions()(): failed to register function \n");
+			printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());
 			return;
 		}	
 	}
@@ -96,6 +97,8 @@ public:
 	}
 
 	static CefRefPtr<CefBrowser> _browser;
+	static CefRefPtr<DKCefV8Handler> v8handler;
+	static CefRefPtr<CefV8Value> ctx;
 	static bool singleprocess;
 #ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
@@ -200,8 +203,8 @@ public:
 class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRenderProcessHandler
 {
 public:
-	CefRefPtr<DKCefV8Handler> v8handler = NULL;
-	CefRefPtr<CefV8Value> ctx = NULL;
+	//CefRefPtr<DKCefV8Handler> v8handler = NULL;
+	//CefRefPtr<CefV8Value> ctx = NULL;
 	std::vector<std::string> funcs;
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
@@ -228,9 +231,9 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		if(!v8handler){
+		if(!DKV8::v8handler){
 			printf("Creating v8handler\n");
-			v8handler = new DKCefV8Handler();
+			DKV8::v8handler = new DKCefV8Handler();
 		}
 	}
 
@@ -238,7 +241,7 @@ public:
 	virtual void OnBrowserCreated(CefRefPtr< CefBrowser > browser) 
 	{
 		printf("DKCefApp::OnBrowserCreated()\n");
-		v8handler->SetBrowser(browser);
+		DKV8::v8handler->SetBrowser(browser);
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 		CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 		browser->SendProcessMessage(PID_BROWSER, msg);
@@ -255,16 +258,16 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		printf("OnContextCreated\n");
-		if(!ctx){
+		if(!DKV8::ctx){
 			printf("Creating ctx\n");
-			ctx = context->GetGlobal();
+			DKV8::ctx = context->GetGlobal();
 		}
 		
 		for(unsigned int i=0; i<funcs.size(); i++){
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), v8handler);
-			ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			funcs.pop_back();
-			//printf("registered: %s \n", funcs[i].c_str());
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), DKV8::v8handler);
+			DKV8::ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+			//funcs.pop_back();
+			printf("registered: %s\n", funcs[i].c_str());
 		}
 	}
 	
@@ -272,7 +275,7 @@ public:
 	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 	{
 		//printf("DKCefApp::OnProcessMessageReceived()\n");
-		if(!v8handler){
+		if(!DKV8::v8handler){
 			printf("DKCefApp::OnProcessMessageReceived(): v8handler invalid\n");
 			return false;
 		}
