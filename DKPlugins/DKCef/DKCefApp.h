@@ -114,10 +114,11 @@ public:
 	
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
 	{
+		std::string func = name;
 		if(DKV8::singleprocess == true){
-			printf("DKCefV8Handler::Execute(): singleprocess is true\n");
+			//printf("DKCefV8Handler::Execute(): singleprocess is true\n");
 			if(!DKV8::functions[name]) {
-			DKLog("DKCefV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
+			printf("DKCefV8Handler::Execute(%s) not registered\n", func.c_str());
 				return false;
 			}
 
@@ -132,7 +133,7 @@ public:
 				}
 			}
 			if(!DKV8::functions[name](args, rval)){
-				DKLog("DKCefV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
+				printf("DKCefV8Handler::Execute(%s) failed\n", func.c_str());
 				return false;
 			}
 
@@ -154,7 +155,7 @@ public:
 		}
 		else{
 			//_retval->Clear();
-			std::string func = name;
+			
 			printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
 			std::string exec = "CallFunc("+func+")";
 			CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
