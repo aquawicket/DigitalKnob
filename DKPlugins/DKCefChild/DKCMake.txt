@@ -13,11 +13,11 @@ DKEXECUTABLE(DKCefChild)
 
 
 IF(WIN_32)
-	DKCOPY(${DKPLUGINS}/DKCefChild/win32/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
+	DKCOPY(${DKPLUGINS}/DKCefChild/win32/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
 ENDIF()
 
 IF(WIN_64)
-	DKCOPY(${DKPLUGINS}/DKCefChild/win64/Release/cefchild.exe ${DKPLUGINS}/DKCef TRUE)
+	DKCOPY(${DKPLUGINS}/DKCefChild/win64/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
 ENDIF()
 
 IF(MAC_64)
@@ -49,7 +49,10 @@ ENDIF()
 
 ## cefchild win32
 IF(WIN_32)
+	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}/DK) \n")
+	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${3RDPARTY}/boost_1_57_0) \n")
 	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${CEF}) \n")
+	DKAPPEND_CMAKE("INCLUDE_DIRECTORIES(${DKPLUGINS}/DKCef) \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(libcefD libcef.lib ${CEF}/Debug) \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(libcefR libcef.lib ${CEF}/Release) \n")
 	DKAPPEND_CMAKE("FIND_LIBRARY(libcef_dll_wrapperD libcef_dll_wrapper.lib ${CEF}/win32/libcef_dll_wrapper/Debug) \n")
