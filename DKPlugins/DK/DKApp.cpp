@@ -14,7 +14,7 @@ double DKApp::lastFrame;
 double DKApp::lastSecond;
 double DKApp::_fps;
 
-
+//#ifdef USE_Boost_System
 #ifdef WIN32
 HINSTANCE DKApp::hInstance = 0L;
 int main(int argc, char **argv);
@@ -105,6 +105,7 @@ int main(int argc, char **argv)
 #endif
 }
 #endif //!ANDROID
+//#endif //USE_Boost_System
 //////////////////////////////////
 
 
