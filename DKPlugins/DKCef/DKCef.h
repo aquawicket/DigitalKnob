@@ -48,7 +48,6 @@ public:
 	CefBrowser* current_browser;
 	CefRefPtr<DKCefApp> cefApp;
 	CefClient* cefHandler; //external handler  (DKOSGCef or DKSDLCef)
-	//CefRefPtr<DKCefV8Handler> v8handler;
 
 #ifdef WIN32
 	HMODULE libcef;

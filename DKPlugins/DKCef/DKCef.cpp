@@ -12,15 +12,12 @@
 #include "DKWindows.h"
 #endif
 
-//CefClient* DKCef::cefHandler = NULL;
-//CefRefPtr<DKCefApp> DKCef::cefApp = NULL;
 
 //////////////////
 void DKCef::Init()
 {
 	DKLog("DKCef::Init()\n", DKDEBUG);
 	
-	//v8handler = new DKCefV8Handler();	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
@@ -40,8 +37,6 @@ void DKCef::Init()
 
 	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
 	//if(homepage.empty()){ homepage = "http://www.google.com"; }
-
-
 
 
 //FIXME - we need to grab the dll from the correct location
@@ -81,10 +76,8 @@ void DKCef::Init()
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
 #endif
 
-
 	//IMPORTANT INFORMATION
 	//https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-application-structure
-
 
 #ifdef WIN32
 	CefMainArgs args(GetModuleHandle(NULL));
@@ -134,9 +127,10 @@ void DKCef::Init()
 //#if !defined(LINUX) && !defined(DEBUG)
 	DKString multi_process;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
-	if(!same(multi_process, "ON")){
+	if(same(multi_process, "OFF")){
 		DKLog("DKCef::Init(): single_process\n", DKINFO);
 		settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+		DKV8::singleprocess = true;
 	}
 //#endif
 
@@ -219,7 +213,6 @@ void DKCef::End()
 		browsers.clear();
 	}
 	cefHandler = NULL;
-	//v8handler = NULL;
 	if(instance_count == 1){
 		CefShutdown();
 	}

@@ -92,12 +92,11 @@ public:
 		      args2->SetBool(0, true);
 		}
 		
-		
 		browser->SendProcessMessage(PID_RENDERER, msg);
-		
 	}
 
 	static CefRefPtr<CefBrowser> _browser;
+	static bool singleprocess;
 #ifdef MAC
 	static std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > functions;
 #else
@@ -115,24 +114,63 @@ public:
 	
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
 	{
-		//_retval->Clear();
-		std::string func = name;
-		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
-		std::string exec = "CallFunc("+func+")";
-		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
-
-		CefRefPtr<CefListValue> args = msg->GetArgumentList();
-		for(unsigned int i=0; i<arguments.size(); i++){
-			if(arguments[i]->IsString()){
-				args->SetString(i+1, arguments[i]->GetStringValue());
+		if(DKV8::singleprocess == true){
+			printf("DKCefV8Handler::Execute(): singleprocess is true\n");
+			if(!DKV8::functions[name]) {
+			DKLog("DKCefV8Handler::Execute("+DKString(name)+") not registered\n", DKWARN);
+				return false;
 			}
-			if(arguments[i]->IsInt()){
-				args->SetInt(i+1, arguments[i]->GetIntValue());
+
+			CefRefPtr<CefListValue> args = CefListValue::Create();
+			CefRefPtr<CefListValue> rval = CefListValue::Create();
+			for(unsigned int i=0; i<arguments.size(); i++){
+				if(arguments[i]->IsString()){
+					args->SetString(i+1, arguments[i]->GetStringValue());
+				}
+				if(arguments[i]->IsInt()){
+					args->SetInt(i+1, arguments[i]->GetIntValue());
+				}
+			}
+			if(!DKV8::functions[name](args, rval)){
+				DKLog("DKCefV8Handler::Execute("+DKString(name)+") failed\n", DKERROR);
+				return false;
+			}
+
+			if(rval->GetType(0) == VTYPE_STRING){
+			      printf("rval = %s\n", std::string(rval->GetString(0)).c_str());
+				  retval = CefV8Value::CreateString(rval->GetString(0));
+			}
+			else if(rval->GetType(0) == VTYPE_INT){
+			      printf("rval = %d\n", rval->GetInt(0));
+			      retval = CefV8Value::CreateInt(rval->GetInt(0));
+			}
+			else if(rval->GetType(0) == VTYPE_BOOL){
+			      printf("rval = %d\n", rval->GetBool(0));
+			      retval = CefV8Value::CreateBool(rval->GetBool(0));
+			}
+			else{
+				retval = CefV8Value::CreateNull();
 			}
 		}
-		browser->SendProcessMessage(PID_BROWSER, msg);
-		
-		
+		else{
+			//_retval->Clear();
+			std::string func = name;
+			printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
+			std::string exec = "CallFunc("+func+")";
+			CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
+
+			CefRefPtr<CefListValue> args = msg->GetArgumentList();
+			for(unsigned int i=0; i<arguments.size(); i++){
+				if(arguments[i]->IsString()){
+					args->SetString(i+1, arguments[i]->GetStringValue());
+				}
+				if(arguments[i]->IsInt()){
+					args->SetInt(i+1, arguments[i]->GetIntValue());
+				}
+			}
+			browser->SendProcessMessage(PID_BROWSER, msg);
+		}
+			
 		//while(!_retval->GetSize()){}
 		return true;
 	}
@@ -250,6 +288,7 @@ public:
 			      //v8handler->_retval->SetBool(0, retval->GetBool(0));
 			}	
 		}
+		return true;
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefApp);
