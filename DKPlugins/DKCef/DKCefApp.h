@@ -115,8 +115,9 @@ public:
 	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
 	{
 		std::string func = name;
-		if(DKV8::singleprocess == true){
-			//printf("DKCefV8Handler::Execute(): singleprocess is true\n");
+		printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
+
+		if(DKV8::singleprocess == true){ //Single process
 			if(!DKV8::functions[name]) {
 			printf("DKCefV8Handler::Execute(%s) not registered\n", func.c_str());
 				return false;
@@ -138,25 +139,27 @@ public:
 			}
 
 			if(rval->GetType(0) == VTYPE_STRING){
-			      printf("rval = %s\n", std::string(rval->GetString(0)).c_str());
+			      //printf("rval = %s\n", std::string(rval->GetString(0)).c_str());
 				  retval = CefV8Value::CreateString(rval->GetString(0));
+				  printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());
 			}
 			else if(rval->GetType(0) == VTYPE_INT){
-			      printf("rval = %d\n", rval->GetInt(0));
+			      //printf("rval = %d\n", rval->GetInt(0));
 			      retval = CefV8Value::CreateInt(rval->GetInt(0));
+				  printf("retval = %d\n", retval->GetIntValue());
 			}
 			else if(rval->GetType(0) == VTYPE_BOOL){
-			      printf("rval = %d\n", rval->GetBool(0));
+			      //printf("rval = %d\n", rval->GetBool(0));
 			      retval = CefV8Value::CreateBool(rval->GetBool(0));
+				  printf("retval = %d\n", retval->GetBoolValue());
 			}
 			else{
 				retval = CefV8Value::CreateNull();
+				printf("retval = NULL\n");
 			}
 		}
-		else{
-			//_retval->Clear();
-			
-			printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
+		else{ //Multi process
+			//_retval->Clear();			
 			std::string exec = "CallFunc("+func+")";
 			CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
 
