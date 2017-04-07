@@ -15,7 +15,11 @@
 
 #ifndef WIN32
 #define  UNREFERENCED_PARAMETER(P) (P)
-#endif 
+#endif
+
+#ifdef LINUX
+//#include <X11/cursorfont.h>
+#endif
 
 class DKSDLCefHandler;
 
@@ -275,6 +279,12 @@ public:
 		if(!::IsWindow(hwnd)){ return; }
 		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
 		SetCursor(cursor);
+#endif
+#ifdef LINUX
+		//Display* dpy;// = glfwGetX11Display();
+		//Cursor c;
+		//c = XCreateFontCursor(dpy, XC_xterm); 
+		//XDefineCursor(dpy, w, c);
 #endif
 	}
 
