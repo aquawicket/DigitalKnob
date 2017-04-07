@@ -231,10 +231,10 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		if(!DKV8::v8handler){
+		//if(!DKV8::v8handler){
 			printf("Creating v8handler\n");
 			DKV8::v8handler = new DKCefV8Handler();
-		}
+		//}
 	}
 
 	///////////////////////////////////////////////////
@@ -258,10 +258,10 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		printf("OnContextCreated\n");
-		if(!DKV8::ctx){
+		//if(!DKV8::ctx){
 			printf("Creating ctx\n");
 			DKV8::ctx = context->GetGlobal();
-		}
+		//}
 		
 		for(unsigned int i=0; i<funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), DKV8::v8handler);
