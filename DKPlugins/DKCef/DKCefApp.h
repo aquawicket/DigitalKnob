@@ -36,6 +36,8 @@ public:
 			//printf("DKV8::AttachFunction(): ctx invalid\n");
 			return;
 		}
+		
+		DKV8::funcs.push_back(name);
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 		printf("registered: %s\n", name.c_str());
