@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DKCefApp.h"
 
-bool DKV8::singleprocess = false;
+bool DKV8::singleprocess = true;
 CefRefPtr<CefBrowser> DKV8::_browser = NULL;
 CefRefPtr<DKCefV8Handler> DKV8::v8handler = NULL;
 CefRefPtr<CefV8Value> DKV8::ctx = NULL;
