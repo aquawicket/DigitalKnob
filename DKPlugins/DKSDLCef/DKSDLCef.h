@@ -294,12 +294,12 @@ public:
 		//DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
 		
 		if(message->GetName() == "GetFunctions"){
-			DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
+			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
 			DKV8::GetFunctions(browser);
 		}
 		
 		if(has(message->GetName(),"CallFunc(")){
-			DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
+			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
 		
 			//get function name
 			DKString func = message->GetName();

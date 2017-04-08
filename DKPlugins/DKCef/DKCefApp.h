@@ -23,8 +23,8 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
-		//NOTE: stoes the function, it will be attached when OnContextCreated is called.
-		printf("DKV8::AttachFunction(%s)\n", name.c_str());
+		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
+		//printf("DKV8::AttachFunction(%s)\n", name.c_str());
 		
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
@@ -32,16 +32,8 @@ public:
 			return;
 		}
 		
-		//if(_browser){
-		//  printf("DKV8::AttachFunction(): _browser invalid\n");
-		//  return; 
-		//}
-		//CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("AttachFunction");
-		//CefRefPtr<CefListValue> args = msg->GetArgumentList();
-		//args->SetString(0, name.c_str());
-		//_browser->SendProcessMessage(PID_RENDERER, msg);
-		if(!DKV8::ctx){
-			printf("DKV8::AttachFunction(): ctx invalid\n");
+		if(!DKV8::ctx){ //multi process will fail
+			//printf("DKV8::AttachFunction(): ctx invalid\n");
 			return;
 		}
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
@@ -52,7 +44,7 @@ public:
 	///////////////////////////////////////////////////////
 	static void GetFunctions(CefRefPtr<CefBrowser> browser)
 	{
-		printf("DKV8::GetFunctions()\n");
+		//printf("DKV8::GetFunctions()\n");
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 		CefRefPtr<CefListValue> args = msg->GetArgumentList();
 		int i=0;
@@ -74,6 +66,8 @@ public:
 			return;
 		}
 
+		/*
+		//Print function call
 		printf("%s(", func.c_str());
 		for(unsigned int i=0; i<args->GetSize(); i++){
 			if(args->GetType(i) == VTYPE_STRING){
@@ -84,6 +78,7 @@ public:
 			}
 		}
 		printf(")\n");
+		*/
 
 		CefRefPtr<CefListValue> retval = CefListValue::Create();
 		if(!functions[func](args,retval)){
@@ -92,8 +87,7 @@ public:
 		}
 		
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("retval");
-		CefRefPtr<CefListValue> args2 = msg->GetArgumentList(); // Retrieve the argument list object.
-		
+		CefRefPtr<CefListValue> args2 = msg->GetArgumentList();
 		if(retval->GetType(0) == VTYPE_STRING){
 		      //printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
 		      args2->SetString(0, retval->GetString(0));
@@ -108,10 +102,10 @@ public:
 		}
 		else{
 		      args2->SetBool(0, true);
-		}
-		
+		}	
 		browser->SendProcessMessage(PID_RENDERER, msg);
 	}
+
 
 	static CefRefPtr<CefBrowser> _browser;
 	static CefRefPtr<DKCefV8Handler> v8handler;
@@ -128,7 +122,7 @@ public:
 class DKCefV8Handler : public CefV8Handler
 {
 public:
-	DKCefV8Handler(){ printf("DKCefV8Handler::DKCefV8Handler()\n"); }
+	DKCefV8Handler(){ /*printf("DKCefV8Handler::DKCefV8Handler()\n");*/ }
 	CefRefPtr<CefBrowser> browser;
 	//CefRefPtr<CefListValue> _retval = CefListValue::Create(); 
 	
@@ -143,23 +137,24 @@ public:
 				return false;
 			}
 
-			printf("%s(", func.c_str());
+			//Transfer arguments and print function call
+			//printf("%s(", func.c_str());
 			CefRefPtr<CefListValue> args = CefListValue::Create();
 			for(unsigned int i=0; i<arguments.size(); i++){
 				if(arguments[i]->IsString()){
 					args->SetString(i, arguments[i]->GetStringValue());
-					printf("%s,", std::string(args->GetString(i)).c_str());
+					//printf("%s,", std::string(args->GetString(i)).c_str());
 				}
 				if(arguments[i]->IsInt()){
 					args->SetInt(i, arguments[i]->GetIntValue());
-					printf("%d,", args->GetInt(i));
+					//printf("%d,", args->GetInt(i));
 				}
 				if(arguments[i]->IsBool()){
 					args->SetBool(i, arguments[i]->GetBoolValue());
-					printf("%d,", args->GetBool(i));
+					//printf("%d,", args->GetBool(i));
 				}
 			}
-			printf(")\n");
+			//printf(")\n");
 
 			CefRefPtr<CefListValue> rval = CefListValue::Create();
 			if(!DKV8::functions[name](args, rval)){
@@ -167,21 +162,22 @@ public:
 				return false;
 			}
 
+			//Transfer retrun value into &retval
 			if(rval->GetType(0) == VTYPE_STRING){
 				  retval = CefV8Value::CreateString(rval->GetString(0));
-				  printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());
+				  //printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());
 			}
 			else if(rval->GetType(0) == VTYPE_INT){
 			      retval = CefV8Value::CreateInt(rval->GetInt(0));
-				  printf("retval = %d\n", retval->GetIntValue());
+				  //printf("retval = %d\n", retval->GetIntValue());
 			}
 			else if(rval->GetType(0) == VTYPE_BOOL){
 			      retval = CefV8Value::CreateBool(rval->GetBool(0));
-				  printf("retval = %d\n", retval->GetBoolValue());
+				  //printf("retval = %d\n", retval->GetBoolValue());
 			}
 			else{
 				retval = CefV8Value::CreateNull();
-				printf("retval = NULL\n");
+				//printf("retval = NULL\n");
 			}
 		}
 		else{ //Multi process
@@ -229,7 +225,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
-		printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
+		//printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
 		
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
@@ -249,7 +245,7 @@ public:
 #endif
 
 		//if(!DKV8::v8handler){
-			printf("Creating v8handler\n");
+			//printf("Creating v8handler\n");
 			DKV8::v8handler = new DKCefV8Handler();
 		//}
 	}
@@ -257,7 +253,7 @@ public:
 	///////////////////////////////////////////////////
 	virtual void OnBrowserCreated(CefRefPtr< CefBrowser > browser) 
 	{
-		printf("DKCefApp::OnBrowserCreated()\n");
+		//printf("DKCefApp::OnBrowserCreated()\n");
 		DKV8::_browser = browser;
 		DKV8::v8handler->SetBrowser(browser);
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
@@ -268,16 +264,16 @@ public:
 	/////////////////////////////////////
 	virtual void OnContextInitialized()
 	{
-		printf("DKCefApp::OnContextInitialized()\n");
+		//printf("DKCefApp::OnContextInitialized()\n");
 		CefRefreshWebPlugins();
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		printf("OnContextCreated\n");
+		//printf("OnContextCreated\n");
 		//if(!DKV8::ctx){
-			printf("Creating ctx\n");
+			//printf("Creating ctx\n");
 			DKV8::ctx = context->GetGlobal();
 		//}
 		
@@ -297,7 +293,7 @@ public:
 			return false;
 		}
 		if(message->GetName() == "GetFunctions"){
-			printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
+			//printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
 			for(unsigned int i=0; i<args->GetSize(); i++){
 				CefString string = args->GetString(i);
@@ -305,7 +301,7 @@ public:
 			}
 		}
 		if(message->GetName() == "AttachFunction"){
-			printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
+			//printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
 			CefString func = args->GetString(0);
 			funcs.push_back(std::string(func));
@@ -315,19 +311,19 @@ public:
 			printf("registered: %s\n", func.c_str());
 		}
 		if(message->GetName() == "retval"){
-			printf("DKCefApp::OnProcessMessageReceived(retval)\n");
+			//printf("DKCefApp::OnProcessMessageReceived(retval)\n");
 			CefRefPtr<CefListValue> retval = message->GetArgumentList();
 
 			if(retval->GetType(0) == VTYPE_STRING){
-			      printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
+			      //printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
 			      //v8handler->_retval->SetString(0, retval->GetString(0));
 			}
 			if(retval->GetType(0) == VTYPE_INT){
-			      printf("retval = %d\n", retval->GetInt(0));
+			      //printf("retval = %d\n", retval->GetInt(0));
 			      //v8handler->_retval->SetInt(0, retval->GetInt(0));
 			}
 			if(retval->GetType(0) == VTYPE_BOOL){
-			      printf("retval = %d\n", retval->GetBool(0));
+			      //printf("retval = %d\n", retval->GetBool(0));
 			      //v8handler->_retval->SetBool(0, retval->GetBool(0));
 			}	
 		}
