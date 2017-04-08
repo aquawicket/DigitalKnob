@@ -10,4 +10,5 @@ std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 #else
 std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
 #endif
+std::vector<std::string> DKV8::funcs;
 

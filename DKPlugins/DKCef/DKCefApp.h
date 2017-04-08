@@ -116,6 +116,7 @@ public:
 #else
 	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
 #endif
+	static std::vector<std::string> funcs;
 };
 
 //////////////////////////////////////////
@@ -218,7 +219,7 @@ class DKCefApp : public CefApp, public CefBrowserProcessHandler, public CefRende
 public:
 	//CefRefPtr<DKCefV8Handler> v8handler = NULL;
 	//CefRefPtr<CefV8Value> ctx = NULL;
-	std::vector<std::string> funcs;
+	//std::vector<std::string> funcs;
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
@@ -250,8 +251,8 @@ public:
 		//}
 	}
 
-	///////////////////////////////////////////////////
-	virtual void OnBrowserCreated(CefRefPtr< CefBrowser > browser) 
+	////////////////////////////////////////////////////////////
+	virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser) 
 	{
 		//printf("DKCefApp::OnBrowserCreated()\n");
 		DKV8::_browser = browser;
@@ -261,7 +262,7 @@ public:
 		browser->SendProcessMessage(PID_BROWSER, msg);
 	}
 	
-	/////////////////////////////////////
+	///////////////////////////////////
 	virtual void OnContextInitialized()
 	{
 		//printf("DKCefApp::OnContextInitialized()\n");
@@ -278,12 +279,12 @@ public:
 		//}
 		
 		//FIXME: this happens too much
-		for(unsigned int i=0; i<funcs.size(); i++){
-			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), DKV8::v8handler);
-			DKV8::ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			printf("registered: %s\n", funcs[i].c_str());
+		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
+			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+			printf("registered: %s\n", DKV8::funcs[i].c_str());
 		}
-		funcs.clear();
+		//DKV8::funcs.clear();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,14 +300,14 @@ public:
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
 			for(unsigned int i=0; i<args->GetSize(); i++){
 				CefString string = args->GetString(i);
-				funcs.push_back(std::string(string));
+				DKV8::funcs.push_back(std::string(string));
 			}
 		}
 		if(message->GetName() == "AttachFunction"){
 			//printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
 			CefString func = args->GetString(0);
-			funcs.push_back(std::string(func));
+			DKV8::funcs.push_back(std::string(func));
 			
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
