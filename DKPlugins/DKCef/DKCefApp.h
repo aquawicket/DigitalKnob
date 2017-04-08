@@ -277,11 +277,13 @@ public:
 			DKV8::ctx = context->GetGlobal();
 		//}
 		
+		//FIXME: this happens too much
 		for(unsigned int i=0; i<funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 			printf("registered: %s\n", funcs[i].c_str());
 		}
+		funcs.clear();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
