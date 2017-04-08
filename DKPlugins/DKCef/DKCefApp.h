@@ -30,7 +30,23 @@ public:
 		if(!functions[name]){
 			printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());
 			return;
-		}	
+		}
+		
+		//if(_browser){
+		//  printf("DKV8::AttachFunction(): _browser invalid\n");
+		//  return; 
+		//}
+		//CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("AttachFunction");
+		//CefRefPtr<CefListValue> args = msg->GetArgumentList();
+		//args->SetString(0, name.c_str());
+		//_browser->SendProcessMessage(PID_RENDERER, msg);
+		if(!DKV8::ctx){
+			printf("DKV8::AttachFunction(): ctx invalid\n");
+			return;
+		}
+		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
+		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		printf("registered: %s\n", name.c_str());
 	}
 	
 	///////////////////////////////////////////////////////
@@ -51,6 +67,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	static void Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 	{
+		_browser = browser;
 		//printf("DKV8::Execute(%s)\n", func.c_str());
 		if(!functions[func]) {
 			printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
@@ -241,6 +258,7 @@ public:
 	virtual void OnBrowserCreated(CefRefPtr< CefBrowser > browser) 
 	{
 		printf("DKCefApp::OnBrowserCreated()\n");
+		DKV8::_browser = browser;
 		DKV8::v8handler->SetBrowser(browser);
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 		CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
@@ -266,7 +284,6 @@ public:
 		for(unsigned int i=0; i<funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			//funcs.pop_back();
 			printf("registered: %s\n", funcs[i].c_str());
 		}
 	}
@@ -286,6 +303,16 @@ public:
 				CefString string = args->GetString(i);
 				funcs.push_back(std::string(string));
 			}
+		}
+		if(message->GetName() == "AttachFunction"){
+			printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
+			CefRefPtr<CefListValue> args = message->GetArgumentList();
+			CefString func = args->GetString(0);
+			funcs.push_back(std::string(func));
+			
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), DKV8::v8handler);
+			DKV8::ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+			printf("registered: %s\n", func.c_str());
 		}
 		if(message->GetName() == "retval"){
 			printf("DKCefApp::OnProcessMessageReceived(retval)\n");
