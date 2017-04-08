@@ -136,7 +136,7 @@ public:
 	{
 		std::string func = name;
 		//printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
-
+		
 		if(DKV8::singleprocess == true){ //Single process
 			if(!DKV8::functions[name]) {
 			printf("DKCefV8Handler::Execute(%s) not registered\n", func.c_str());
