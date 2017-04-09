@@ -13,7 +13,6 @@ if(DK_GetBrowser() == "Rocket"){
 		DKCreate("DKTray/DKTray.js", function(){});
 	}
 }
-
 DKCreate("DKDebug/DKDebug.js", function(){});
 
 ////////////////////////////
