@@ -41,6 +41,20 @@ function AndroidImport_Import()
 	DKHook_WaitForWindow("Select Eclipse or Gradle Project to Import", 30); //Check for 30 seconds
 	DKLog("Window is ready.\n", DKDEBUG);
 	
+	//Multipe user folders
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		DKFile_ChDir(DKPATH);
+		if(DKFile_IsDirectory(files[i])){ continue; }
+		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		if(url){ //DKLog("url = "+url+"\n", DKINFO);
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt";)){
+				appdir = folder+"/DKApps";
+			}
+		}
+	}
 	//Get app path
 	if(TYPE == "Debug"){
 		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Debug";
@@ -48,6 +62,9 @@ function AndroidImport_Import()
 	else{
 		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Release";
 	}
+	
+	
+	
 	//DKLog(path+"\n", DKDEBUG);
 	DK_SetClipboard(path);	
 	DK_PressKey(17); //press ctrl
