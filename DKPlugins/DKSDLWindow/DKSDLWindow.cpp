@@ -548,6 +548,10 @@ bool DKSDLWindow::MessageBox(void* input, void* output)
 ///////////////////////////
 void DKSDLWindow::Process()
 {
+	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_HIDDEN){ 
+			DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
+	}
+	
 	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_SHOWN){ 
 		SDL_SetRenderTarget(sdlren, NULL); 
 		SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
@@ -555,24 +559,24 @@ void DKSDLWindow::Process()
 		SDL_RenderClear(sdlren);
 		SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
 		SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );
+	}
 
-		SDL_Event e;
-		while(SDL_PollEvent(&e)){
+	SDL_Event e;
+	while(SDL_PollEvent(&e)){
 		for(unsigned int i = 0; i < event_funcs.size(); ++i){
 			if(event_funcs[i](&e)){ //Call event functions
 				i = event_funcs.size();	//eat the event
 			}; 
 		}
-		}
+	}
 	
+	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_SHOWN){ 
 		for(unsigned int i = 0; i < draw_funcs.size(); ++i){
 			draw_funcs[i](); //Call event functions
 		}
-	
+
 		SDL_RenderPresent(sdlren);
 	}
-	
-	DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 }
 
 //////////////////////////////////////////////////////////////
