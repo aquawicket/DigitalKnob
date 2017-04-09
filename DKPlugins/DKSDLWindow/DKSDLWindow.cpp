@@ -89,7 +89,9 @@ void DKSDLWindow::Init()
 #endif
 
 	SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
+#ifndef ANDROID
 	SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
+#endif
 	
 	DKString result;
 	
