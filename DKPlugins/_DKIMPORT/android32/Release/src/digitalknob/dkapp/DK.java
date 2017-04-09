@@ -53,7 +53,7 @@ public class DK extends Activity
 				//}
 				//else{
 					//CallCppFunction("DKAndroid_init");
-				}
+				//}
 				
 				//This gives DK time to register functions for Webview
 				Handler handler2 = new Handler();
