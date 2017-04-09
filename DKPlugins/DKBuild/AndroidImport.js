@@ -50,7 +50,7 @@ function AndroidImport_Import()
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //DKLog("url = "+url+"\n", DKINFO);
 			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
-			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt";)){
+			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
 				appdir = folder+"/DKApps";
 			}
 		}
