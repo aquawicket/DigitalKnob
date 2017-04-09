@@ -367,6 +367,9 @@ bool DKUtil::ChangeVolume(double& volume)
 #ifdef WIN32
 	return DKWindows::ChangeVolume(volume);
 #endif
+#ifdef LINUX
+	return DKLinux::ChangeVolume(volume);
+#endif
 	DKLog("DKUtil::ChangeVolume() not implemented on this OS OS \n", DKERROR);
 	return false;
 }
@@ -376,6 +379,9 @@ bool DKUtil::GetVolume(float& volume)
 {
 #ifdef WIN32
 	return DKWindows::GetVolume(volume);
+#endif
+#ifdef LINUX
+	return DKLinux::GetVolume(volume);
 #endif
 	DKLog("DKUtil::GetVolume() not implemented on this OS \n", DKERROR);
 	return false;

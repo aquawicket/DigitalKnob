@@ -7,6 +7,7 @@
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 
+
 /////////////////////////////////////////
 bool DKLinux::GetMousePos(int& x, int& y)
 {
@@ -91,6 +92,20 @@ bool DKLinux::SetClipboard(DKString& text)
 	//TODO
 	DKLog("DKLinux::SetClipboard("+text+")\n", DKINFO);
 	DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
+	return false;
+}
+
+bool DKLinux::ChangeVolume(double nVolume)
+{
+	//TODO
+	DKLog("DKLinux::ChangeVolume(): not implemented\n", DKERROR);
+	return false;
+}
+
+bool DKLinux::GetVolume(float& volume)
+{
+	//TODO
+	DKLog("DKLinux::GetVolume(): not implemented\n", DKERROR);
 	return false;
 }
 

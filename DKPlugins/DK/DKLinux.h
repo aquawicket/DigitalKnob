@@ -16,6 +16,8 @@ public:
 	static bool KeyIsDown(int& key);
 	static bool SetClipboard(DKString& text);
 	static bool GetClipboard(DKString& text);
+	static bool ChangeVolume(double nVolume);
+	static bool GetVolume(float& volume);
 };
 
 #endif //DKLinux_H
