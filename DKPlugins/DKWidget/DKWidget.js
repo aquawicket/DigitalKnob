@@ -886,6 +886,19 @@ function DKWidget_GetMouseElementY(id)
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
 
+//////////////////////////////////////
+function DKWidget_GetClientWidth(id)
+{
+	return document.getElementById(id).clientWidth;
+		
+}
+
+///////////////////////////////////////
+function DKWidget_GetClientHeight(id)
+{
+	return document.getElementById(id).clientHeight;
+}
+
 //////////////////////////////////
 function DKWidget_GetOffsetTop(id)
 {
