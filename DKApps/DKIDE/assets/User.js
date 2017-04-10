@@ -88,6 +88,7 @@ else{  //Duktape or V8 or Webview
 			});
 		});
 	});
+	//DKCreate("DKFileMenu/DKFileMenu.js", function(){});
 
 	
 	/*
