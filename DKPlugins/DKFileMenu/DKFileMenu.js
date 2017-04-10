@@ -3,13 +3,13 @@
 ///////////////////////
 function DKFileMenu_Init()
 {
-
+	DKCreate("DKFileMenu/DKFileMenu.html");
 }
 
 ///////////////////////
 function DKFileMenu_End()
 {
-
+	DKClose("DKFileMenu.html");
 }
 
 ///////////////////////////////
