@@ -229,7 +229,6 @@ public:
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
 		//printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
-		
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
 		command_line->AppendSwitchWithValue("disable-gpu", "1");
@@ -247,10 +246,7 @@ public:
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
 
-		//if(!DKV8::v8handler){
-			//printf("Creating v8handler\n");
-			DKV8::v8handler = new DKCefV8Handler();
-		//}
+		DKV8::v8handler = new DKCefV8Handler();
 	}
 
 	////////////////////////////////////////////////////////////
@@ -275,17 +271,13 @@ public:
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
 		//printf("OnContextCreated\n");
-		//if(!DKV8::ctx){
-			//printf("Creating ctx\n");
-			DKV8::ctx = context->GetGlobal();
-		//}
+		DKV8::ctx = context->GetGlobal();
 		
 		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 			printf("registered: %s\n", DKV8::funcs[i].c_str());
 		}
-		//DKV8::funcs.clear();
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -35,10 +35,6 @@ void DKCef::Init()
 	fullscreen = false;
 	queue_new_browser = "";
 
-	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HOMEPAGE]", homepage);
-	//if(homepage.empty()){ homepage = "http://www.google.com"; }
-
-
 //FIXME - we need to grab the dll from the correct location
 //   assets/DKCef is not a good place
 //   the path needs more details, specifically OS/BuildType
@@ -86,31 +82,6 @@ void DKCef::Init()
 #endif
 	cefApp = new DKCefApp();
 
-	// *** LINUX EXTRA WINDOW FIX ***
-	/*
-	if(DKApp::argc > 1){
-		for (int count = 1; count < DKApp::argc; count++){
-			if(has(DKApp::argv[count], "Cef")){
-				DKLog("CEF attempting to run another process,  exiting..\n", DKINFO);
-				//DKApp::Exit();
-				//return;	//If one of the arguments has Cef in it's string, then we should return to prevent an extra window. 
-			}
-	    }
-    }
-	*/
-	
-	/*
-	DKLog("CefExecuteProcess \n", DKINFO);
-	int result = CefExecuteProcess(args, cefApp.get(), NULL);
-	if(result >= 0){
-		DKLog("CefExecuteProcess error", DKERROR);
-		return;
-	}
-	if(result <= -1){
-		DKLog("CefExecuteProcess: parent process\n", DKINFO);
-	}
-	*/
-
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// settings.multi_threaded_message_loop = true; // not supported, except windows
 	// CefString(&settings.log_file).FromASCII("");
@@ -118,13 +89,23 @@ void DKCef::Init()
 	
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
-//#ifdef LINUX
-	//DKLog("DKCef::Init(): no_sandbox\n", DKINFO);
-	//settings.no_sandbox = true;
-//#endif
-	//settings.command_line_args_disabled = true;
-	//settings.multi_threaded_message_loop = true;
-//#if !defined(LINUX) && !defined(DEBUG)
+	
+	DKString homepage;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
+	//TODO set homepage here
+	
+	DKString sandbox;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
+	if(same(sandbox, "OFF")){
+	  settings.no_sandbox = true;
+	}
+	
+	DKString multithreadedmessageloop;
+	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTITHREADEDMESSAGELOOP]", multithreadedmessageloop);
+	if(same(multithreadedmessageloop, "ON")){
+	  settings.multi_threaded_message_loop = true;
+	}
+
 	DKString multi_process;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
 	if(same(multi_process, "ON")){
@@ -136,13 +117,10 @@ void DKCef::Init()
 		settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
 		DKV8::singleprocess = true;
 	}
-//#endif
 
 #ifndef DEBUG
 	settings.log_severity = LOGSEVERITY_DISABLE;
 #endif
-
-		
 
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
@@ -162,16 +140,6 @@ void DKCef::Init()
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
 	
-#ifdef LINUX
-	DKString ep = DKFile::local_assets + "DKCef/cefchild";
-	if(!DKFile::PathExists(ep)){
-        	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-        	return;
-    }
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
-#endif
-
-/*
 #ifdef MAC
 	DKString exepath;
 	DKFile::GetExePath(exepath);
@@ -181,7 +149,15 @@ void DKCef::Init()
 	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #endif
-*/
+	
+#ifdef LINUX
+	DKString ep = DKFile::local_assets + "DKCef/cefchild";
+	if(!DKFile::PathExists(ep)){
+        	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+        	return;
+    }
+	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
+#endif
 
 	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
