@@ -10,6 +10,7 @@ void DKClient::Init()
 	//DKLog("DKClient::Init()\n", DKDEBUG);
 	
 	DKCreate("DKClientJS");
+	//DKCreate("DKClientV8"); //TODO
 	thread = new DKThread();
 	c = new client(thread->io_service);
 	thread->start();
@@ -20,16 +21,16 @@ void DKClient::Connect(const DKString address)
 {
 	if(address.empty()){ return; }
 
-	//try{
+	try{
 		c->stop();
 		tcp::resolver resolver(thread->io_service);
 		c->start(resolver.resolve(tcp::resolver::query(address.c_str(), "8087")));
-		_address = address;
-	//}
-	//catch(boost::system::system_error& e){
-	//	std::cerr << e.what() << '\n';
-	//	return;
-	//}
+		if(_address != address){ _address = address; }
+	}
+	catch(boost::system::system_error& e){
+		DKLog(DKString(e.what())+"\n", DKERROR);
+		return;
+	}
 }
 
 ///////////////////////////////////////////
