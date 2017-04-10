@@ -345,15 +345,19 @@ function DKWidget_GetElements(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	//DKLog("GetValue("+variable+") \n", DKDEBUG);
+	//DKLog("DKWidget_GetValue("+variable+") \n", DKINFO);
 	if(!variable){ DKLog("variable empty \n", DKDEBUG); return; }
 
 	if(typeof variable === "string"){ //id
-		//DKLog("GetValue("+variable+") -> typeof variable === string\n", DKDEBUG);
+		//DKLog("GetValue("+variable+") -> typeof variable === string\n", DKINFO);
 		var ele = document.getElementById(variable);
 		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n", DKDEBUG); /*return false;*/ }
-		if(ele){ 
-			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKDEBUG);
+		if(ele){
+			if(!ele.value){
+				DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
+				return false;
+			}
+			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
 			return ele.value; 
 		}
 		
