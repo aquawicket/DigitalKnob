@@ -232,7 +232,7 @@ public:
 	client* c;
 	void Connect(const DKString address);
 	void Send(const DKString& string);
-	DKString address;
+	DKString _address;
 };
 
 

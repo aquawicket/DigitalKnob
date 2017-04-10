@@ -15,7 +15,7 @@ void DKClientJS::Init()
 int DKClientJS::Address(duk_context* ctx)
 {
 	DKString path = duk_require_string(ctx, 0);
-	DKClient::Instance("DKClient")->address = path;
+	DKClient::Instance("DKClient")->_address = path;
 	return 1;
 }
 
