@@ -357,7 +357,7 @@ function DKWidget_GetValue(variable)
 				DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 				return false;
 			}
-			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
+			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
 			return ele.value; 
 		}
 		
