@@ -354,10 +354,10 @@ function DKWidget_GetValue(variable)
 		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n", DKDEBUG); /*return false;*/ }
 		if(ele){
 			if(!ele.value){
-				DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
+				//DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 				return false;
 			}
-			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
+			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
 			return ele.value; 
 		}
 		
