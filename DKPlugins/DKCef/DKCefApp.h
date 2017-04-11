@@ -40,7 +40,7 @@ public:
 		DKV8::funcs.push_back(name);
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		printf("registered: %s\n", name.c_str());
+		//printf("registered: %s\n", name.c_str());
 	}
 	
 	///////////////////////////////////////////////////////
@@ -276,7 +276,7 @@ public:
 		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			printf("registered: %s\n", DKV8::funcs[i].c_str());
+			//printf("registered: %s\n", DKV8::funcs[i].c_str());
 		}
 	}
 	
@@ -304,7 +304,7 @@ public:
 			
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			printf("registered: %s\n", func.c_str());
+			//printf("registered: %s\n", func.c_str());
 		}
 		if(message->GetName() == "retval"){
 			//printf("DKCefApp::OnProcessMessageReceived(retval)\n");
