@@ -27,9 +27,17 @@ public:
 	{
 		DKLog("DKV8::SetFlags()\n", DKINFO);
 
-		DKString log_severity;
-		DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CEF_LOGSEVERITY]", log_severity);
-		DKLog("DKV8::log_severity = " + log_severity + "\n", DKINFO);
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
+		DKLog("DKCef::homepage = "+homepage+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_LOGSEVERITY]", log_severity);
+		DKLog("DKV8::log_severity = "+log_severity+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
+		DKLog("DKCef::multi_process = "+multi_process+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTITHREADEDMESSAGELOOP]", multithreadedmessageloop);
+		DKLog("DKCef::multithreadedmessageloops = "+multithreadedmessageloop+"\n", DKINFO);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -131,6 +139,13 @@ public:
 	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
 #endif
 	static std::vector<std::string> funcs;
+
+	//Flags
+	static DKString homepage;
+	static DKString log_severity;
+	static DKString sandbox;
+	static DKString multi_process;
+	static DKString multithreadedmessageloop;
 };
 
 //////////////////////////////////////////

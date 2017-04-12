@@ -12,3 +12,8 @@ std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
 #endif
 std::vector<std::string> DKV8::funcs;
 
+DKString DKV8::log_severity;
+DKString DKV8::homepage;
+DKString DKV8::sandbox;
+DKString DKV8::multi_process;
+DKString DKV8::multithreadedmessageloop;
