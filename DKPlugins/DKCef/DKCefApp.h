@@ -21,16 +21,23 @@ typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator
 class DKV8
 {
 public:
+
+	//////////////////////
+	static void SetFlags()
+	{
+		DKLog("DKV8::SetFlags()\n", DKINFO);
+
+		DKString log_severity;
+		DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CEF_LOGSEVERITY]", log_severity);
+		DKLog("DKV8::log_severity = " + log_severity + "\n", DKINFO);
+	}
+
 	//////////////////////////////////////////////////////////////////////////////////
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 		DKLog("DKV8::AttachFunction("+name+")\n", DKINFO);
 		
-		DKString log_severity;
-		DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CEF_LOGSEVERITY]", log_severity);
-		DKLog("DKV8::log_severity = "+log_severity+"\n", DKINFO);
-
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
 			printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());

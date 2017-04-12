@@ -87,6 +87,8 @@ void DKCef::Init()
 	// CefString(&settings.log_file).FromASCII("");
 	// settings.log_severity = LOGSEVERITY_DEFAULT;
 	
+	DKV8::SetFlags();
+
 	CefSettings settings;
 	settings.windowless_rendering_enabled = true;
 	
