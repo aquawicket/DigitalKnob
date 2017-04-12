@@ -116,6 +116,17 @@ void DKCef::Init()
 		settings.log_severity = LOGSEVERITY_DISABLE;
 	}
 
+	//settings.accept_language_list;
+	//settings.background_color;
+	//settings.command_line_args_disabled;
+	//settings.context_safety_implementation;
+	//settings.ignore_certificate_errors;
+	//settings.javascript_flags;
+	//settings.log_file;
+	//settings.pack_loading_disabled;
+	//settings.persist_session_cookies;
+	//settings.persist_user_preferences;
+
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
 
