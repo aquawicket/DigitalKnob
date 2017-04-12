@@ -4,6 +4,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 #include <include/cef_app.h>
+#include "DKFile.h"
 
 typedef CefRefPtr<CefListValue> CefArgs;
 typedef CefRefPtr<CefListValue> CefReturn;
@@ -24,8 +25,12 @@ public:
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
-		//printf("DKV8::AttachFunction(%s)\n", name.c_str());
+		DKLog("DKV8::AttachFunction("+name+")\n", DKINFO);
 		
+		DKString log_severity;
+		DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CEF_LOGSEVERITY]", log_severity);
+		DKLog("DKV8::log_severity = "+log_severity+"\n", DKINFO);
+
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
 			printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());
@@ -240,7 +245,7 @@ public:
 		command_line->AppendSwitchWithValue("enable-webgl", "1");
 		//command_line->AppendSwitchWithValue("no-sandbox", "1");
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
-		command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
 		//command_line->AppendSwitchWithValue("enable-gpu", "1");
 #ifdef LINUX
 		command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");

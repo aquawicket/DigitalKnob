@@ -92,35 +92,43 @@ void DKCef::Init()
 	
 	DKString homepage;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
+	DKLog("DKCef::homepage = " + homepage + "\n", DKINFO);
 	//TODO set homepage here
 	
 	DKString sandbox;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
 	if(same(sandbox, "OFF")){
 	  settings.no_sandbox = true;
+	  DKLog("DKCef::sandbox = " + sandbox + "\n", DKINFO);
 	}
 	
 	DKString multithreadedmessageloop;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTITHREADEDMESSAGELOOP]", multithreadedmessageloop);
 	if(same(multithreadedmessageloop, "ON")){
 	  settings.multi_threaded_message_loop = true;
+	  DKLog("DKCef::multithreadedmessageloop = " + multithreadedmessageloop + "\n", DKINFO);
 	}
 
 	DKString multi_process;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
 	if(same(multi_process, "ON")){
-		DKLog("DKCef::Init(): multi_process\n", DKINFO);
-		settings.single_process = false; //CefRenderProcessHandler::OnContextCreated() only works with this
+		settings.single_process = false;
 		DKV8::singleprocess = false;
+		DKLog("DKCef::multi_process = " + multi_process + "\n", DKINFO);
 	}
 	else{
-		settings.single_process = true; //CefRenderProcessHandler::OnContextCreated() only works with this
+		settings.single_process = true;
 		DKV8::singleprocess = true;
+		DKLog("DKCef::multi_process = " + multi_process + "\n", DKINFO);
 	}
 
-#ifndef DEBUG
-	settings.log_severity = LOGSEVERITY_DISABLE;
-#endif
+	DKString log_severity;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CEF_LOGSEVERITY]", log_severity);
+	if(!same(log_severity, "ON")){ //OFF
+		settings.log_severity = LOGSEVERITY_DISABLE;
+		DKLog("DKCef::log_severity = " + log_severity + "\n", DKINFO);
+	}
+
 
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
