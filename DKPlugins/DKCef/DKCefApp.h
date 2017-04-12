@@ -28,16 +28,52 @@ public:
 		DKLog("DKV8::SetFlags()\n", DKINFO);
 
 		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
-		DKLog("DKCef::homepage = "+homepage+"\n", DKINFO);
+		DKLog("DKV8::homepage = "+homepage+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
+		DKLog("DKV8::multi_process = "+multi_process+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
+		DKLog("DKV8::sandbox = "+sandbox+"\n", DKINFO);
 
 		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_LOGSEVERITY]", log_severity);
 		DKLog("DKV8::log_severity = "+log_severity+"\n", DKINFO);
 
-		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
-		DKLog("DKCef::multi_process = "+multi_process+"\n", DKINFO);
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTI_THREADED_MESSAGE_LOOP]", multi_threaded_message_loop);
+		DKLog("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n", DKINFO);
 
-		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTITHREADEDMESSAGELOOP]", multithreadedmessageloop);
-		DKLog("DKCef::multithreadedmessageloops = "+multithreadedmessageloop+"\n", DKINFO);
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU]", disable_gpu);
+		DKLog("DKV8::disablegpu = "+disable_gpu+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU_COMPOSITING]", disable_gpu_compositing);
+		DKLog("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_IGNORE_GPU_BLACKLIST]", ignore_gpu_blacklist);
+		DKLog("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_SYSTEM_FLASH]", enable_system_flash);
+		DKLog("DKV8::enable_system_flash = "+enable_system_flash+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_BEGIN_FRAME_SCHEDULING]", enable_begin_frame_scheduling);
+		DKLog("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_WEBGL]", enable_webgl);
+		DKLog("DKV8::enable_webgl = "+enable_webgl+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_RENDERER_PROCESS_LIMIT]", renderer_process_limit);
+		DKLog("DKV8::renderer_process_limit = "+renderer_process_limit+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_GPU]", enable_gpu);
+		DKLog("DKV8::enable_gpu = "+enable_gpu+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_WEB_SECURITY]", disable_web_security);
+		DKLog("DKV8::disable_web_security = "+disable_web_security+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_NO_PROXY_SERVER]", no_proxy_server);
+		DKLog("DKV8::no_proxy_server = "+no_proxy_server+"\n", DKINFO);
+
+		DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_REMOTE_DEBUGGING_PORT]", remote_debugging_port);
+		DKLog("DKV8::remote_debugging_port = "+remote_debugging_port+"\n", DKINFO);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
@@ -142,10 +178,21 @@ public:
 
 	//Flags
 	static DKString homepage;
-	static DKString log_severity;
-	static DKString sandbox;
 	static DKString multi_process;
-	static DKString multithreadedmessageloop;
+	static DKString sandbox;
+	static DKString log_severity;
+	static DKString multi_threaded_message_loop;
+	static DKString disable_gpu;
+	static DKString disable_gpu_compositing;
+	static DKString ignore_gpu_blacklist;
+	static DKString remote_debugging_port;
+	static DKString enable_system_flash;
+	static DKString enable_begin_frame_scheduling;
+	static DKString enable_webgl;
+	static DKString renderer_process_limit;
+	static DKString enable_gpu;
+	static DKString disable_web_security;
+	static DKString no_proxy_server;
 };
 
 //////////////////////////////////////////
@@ -255,24 +302,54 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
+#ifndef DKCefChild
 		//printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
-		command_line->AppendSwitchWithValue("enable-system-flash", "1");
-		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
-		//command_line->AppendSwitchWithValue("disable-gpu", "1");
-		//command_line->AppendSwitchWithValue("disable-gpu-compositing", "1");
-		command_line->AppendSwitchWithValue("ignore-gpu-blacklist", "1");
-		command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
-		command_line->AppendSwitchWithValue("disable-web-security", "1");
-		command_line->AppendSwitchWithValue("no-proxy-server", "1");
-		command_line->AppendSwitchWithValue("enable-webgl", "1");
-		//command_line->AppendSwitchWithValue("no-sandbox", "1");
-		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
-		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
-		//command_line->AppendSwitchWithValue("enable-gpu", "1");
+		if(same(DKV8::enable_system_flash, "ON")){
+			command_line->AppendSwitchWithValue("enable-system-flash", "1");
+		}
+		//if(same(DKV8::allow_file_access_from_files, "ON")){
+			command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
+		//}
+		if(same(DKV8::disable_gpu, "ON")){
+			command_line->AppendSwitchWithValue("disable-gpu", "1");
+		}
+		if(same(DKV8::disable_gpu_compositing, "ON")){
+			command_line->AppendSwitchWithValue("disable-gpu-compositing", "1");
+		}
+		if(same(DKV8::ignore_gpu_blacklist, "ON")){
+			command_line->AppendSwitchWithValue("ignore-gpu-blacklist", "1");
+		}
+		if(!DKV8::remote_debugging_port.empty()){
+			command_line->AppendSwitchWithValue("remote-debugging-port", DKV8::remote_debugging_port.c_str());
+			//command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
+		}
+		if(same(DKV8::disable_web_security, "ON")){
+			command_line->AppendSwitchWithValue("disable-web-security", "1");
+		}
+		if(same(DKV8::no_proxy_server, "ON")){
+			command_line->AppendSwitchWithValue("no-proxy-server", "1");
+		}
+		if(same(DKV8::enable_webgl, "ON")){
+			command_line->AppendSwitchWithValue("enable-webgl", "1");
+		}
+		if(same(DKV8::sandbox, "OFF")){
+			command_line->AppendSwitchWithValue("no-sandbox", "1");
+		}
+		if(same(DKV8::renderer_process_limit, "ON")){
+			command_line->AppendSwitchWithValue("renderer-process-limit", "1");
+		}
+		if(same(DKV8::enable_begin_frame_scheduling, "ON")){
+			command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+		}
+		if(same(DKV8::enable_gpu, "ON")){
+			command_line->AppendSwitchWithValue("enable-gpu", "1");
+		}
 #ifdef LINUX
 		command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #endif
+
+#endif //!DKCefChild
 
 		DKV8::v8handler = new DKCefV8Handler();
 	}

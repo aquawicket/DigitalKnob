@@ -1,3 +1,4 @@
+#define DKCefChild
 #include "DK.h"
 #include "DKCefApp.h"
 #include "include/cef_app.h"

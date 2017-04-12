@@ -95,8 +95,11 @@ void DKCef::Init()
 	if(same(DKV8::sandbox, "OFF")){
 	  settings.no_sandbox = true;
 	}
+	else{
+		settings.no_sandbox = false;
+	}
 	
-	if(same(DKV8::multithreadedmessageloop, "ON")){
+	if(same(DKV8::multi_threaded_message_loop, "ON")){
 	  settings.multi_threaded_message_loop = true;
 	}
 
