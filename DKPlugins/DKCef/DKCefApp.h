@@ -231,8 +231,8 @@ public:
 		//printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
 		command_line->AppendSwitchWithValue("enable-system-flash", "1");
 		command_line->AppendSwitchWithValue("allow-file-access-from-files", "1");
-		command_line->AppendSwitchWithValue("disable-gpu", "1");
-		command_line->AppendSwitchWithValue("disable-gpu-compositing", "1");
+		//command_line->AppendSwitchWithValue("disable-gpu", "1");
+		//command_line->AppendSwitchWithValue("disable-gpu-compositing", "1");
 		command_line->AppendSwitchWithValue("ignore-gpu-blacklist", "1");
 		command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
 		command_line->AppendSwitchWithValue("disable-web-security", "1");
@@ -240,7 +240,8 @@ public:
 		command_line->AppendSwitchWithValue("enable-webgl", "1");
 		//command_line->AppendSwitchWithValue("no-sandbox", "1");
 		//command_line->AppendSwitchWithValue("renderer-process-limit", "1");
-		//command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+		command_line->AppendSwitchWithValue("enable-begin-frame-scheduling", "1"); //Breaks Popups
+		//command_line->AppendSwitchWithValue("enable-gpu", "1");
 #ifdef LINUX
 		command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
 		command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
