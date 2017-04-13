@@ -83,14 +83,15 @@ void DKCef::Init()
 	cefApp = new DKCefApp();
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
-	// settings.multi_threaded_message_loop = true; // not supported, except windows
 	// CefString(&settings.log_file).FromASCII("");
-	// settings.log_severity = LOGSEVERITY_DEFAULT;
 	
 	DKV8::SetFlags();
 
 	CefSettings settings;
-	settings.windowless_rendering_enabled = true;
+
+	if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
+		settings.windowless_rendering_enabled = true;
+	}
 	
 	if(same(DKV8::sandbox, "OFF")){
 	  settings.no_sandbox = true;
@@ -173,15 +174,17 @@ void DKCef::Init()
 		return;
 	}
 
-	if(DKAvailable("DKSDLCef")){
-		DKCreate("DKSDLCef,"+id);
-	}
-	else if(DKAvailable("DKOSGCef")){
-		DKCreate("DKOSGCef,"+id);
-	}
-	else{
-		DKLog("DKCef::Init(): No Cef window available \n", DKERROR);
-		return;
+	if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
+		if(DKAvailable("DKSDLCef")){
+			DKCreate("DKSDLCef,"+id);
+		}
+		else if(DKAvailable("DKOSGCef")){
+			DKCreate("DKOSGCef,"+id);
+		}
+		else{
+			DKLog("DKCef::Init(): No Cef window available \n", DKERROR);
+			return;
+		}
 	}
 	
 	DKCreate("DKCefV8");
@@ -211,21 +214,27 @@ bool DKCef::NewBrowser()
 {
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	browserSettings.windowless_frame_rate = 60;
+	if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
+		browserSettings.windowless_frame_rate = 60;
 #ifdef WIN32
-	window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
+		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
 #else
-	window_info.SetAsWindowless(NULL, false);
+		window_info.SetAsWindowless(NULL, false);
 #endif
-	CefRefPtr<CefBrowser> _browser;
-	_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
-	if(!_browser){
-		DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
-		return false; 
+		CefRefPtr<CefBrowser> _browser;
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
+
+		if(!_browser){
+			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
+			return false; 
+		}
+		browsers.push_back(_browser);
+		current_browser = browsers[0];
+		current_browser->GetHost()->SetWindowlessFrameRate(60);
 	}
-	browsers.push_back(_browser);
-	current_browser = browsers[0];
-	current_browser->GetHost()->SetWindowlessFrameRate(60);
+	else{
+		CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
+	}
 	return true;
 }
 
