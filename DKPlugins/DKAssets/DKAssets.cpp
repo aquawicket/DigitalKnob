@@ -31,7 +31,7 @@ void DKAssets::Init()
 #endif		
 	}
 	
-	DKLog("DKFile::local_assets set to: "+DKFile::local_assets+"\n", DKINFO);
+	DKLog("DKFile::local_assets = "+DKFile::local_assets+"\n", DKINFO);
 
 #ifdef WIN32
 	DKAssets::CopyAssets(NULL, NULL);
@@ -81,7 +81,7 @@ void DKAssets::Init()
 		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/";
 	}
 
-	DKLog("DKFile::online_assets set to: "+DKFile::online_assets+"\n", DKINFO);
+	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n", DKINFO);
 }
 
 ////////////////////////////////////////////////
@@ -148,7 +148,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 	//we will refer to all the files in the assets folder in this case. 
 	DKString exepath;
 	DKFile::GetExePath(exepath);
-    DKLog("DKFile::exepath is: "+exepath+"\n", DKINFO);
+    DKLog("DKFile::exepath = "+exepath+"\n", DKINFO);
 
 	//TODO:
 	//get rid of the tailing / ?
