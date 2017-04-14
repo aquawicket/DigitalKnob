@@ -140,6 +140,7 @@ int DKCefJS::SetFocus(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKCef::Valid(id)){ return 0; }
 	if(!DKCef::Get(id)->current_browser){ return 0; }
+	if(!DKCef::Get(id)->current_browser->GetHost()){ return 0; }
 	DKCef::Get(id)->current_browser->GetHost()->SendFocusEvent(true);
 	DKCef::Get(id)->inFocus = true;
 	return 1;

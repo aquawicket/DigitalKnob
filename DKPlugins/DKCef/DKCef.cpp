@@ -186,6 +186,10 @@ void DKCef::Init()
 			return;
 		}
 	}
+	else{
+		NewBrowser();
+		CefRunMessageLoop();
+	}
 	
 	DKCreate("DKCefV8");
 }
@@ -233,7 +237,10 @@ bool DKCef::NewBrowser()
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
 	}
 	else{
-		CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
+		window_info.SetAsPopup(NULL, "cefpopup");
+		window_info.width = 800;
+		window_info.height = 600;
+		CefBrowserHost::CreateBrowser(window_info, cefHandler, "http://www.google.com", browserSettings, NULL);
 	}
 	return true;
 }
