@@ -188,9 +188,11 @@ void DKCef::Init()
 		}
 	}
 	else{
-		cefHandler = new DKCefHandler();
+		dkCefHandler = new DKCefHandler();
+		cefHandler = dkCefHandler;
+		dkCefHandler->dkCef = this;
 		NewBrowser();
-		CefRunMessageLoop();
+		DKApp::AppendLoopFunc(&DKCefHandler::DoFrame, dkCefHandler);
 	}
 	
 	DKCreate("DKCefV8");

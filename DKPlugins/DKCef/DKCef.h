@@ -7,7 +7,7 @@
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
-
+#include "DKCefHandler.h"
 
 /////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
@@ -48,6 +48,7 @@ public:
 	CefBrowser* current_browser;
 	CefRefPtr<DKCefApp> cefApp;
 	CefClient* cefHandler; //external handler  (DKOSGCef or DKSDLCef)
+	DKCefHandler *dkCefHandler;
 
 #ifdef WIN32
 	HMODULE libcef;

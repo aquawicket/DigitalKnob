@@ -2,6 +2,9 @@
 #ifndef DKCefHandler_H
 #define DKCefHandler_H
 
+#include "DKCef.h"
+class DKCef;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
@@ -10,12 +13,12 @@ public:
 	DKCefHandler(){}
 	DKCef* dkCef;
 
-	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
+	//virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
-	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
+	//virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
-	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	
 	/////////////////////////////////////////
 	void DoFrame()
@@ -29,7 +32,7 @@ public:
 	{
 		DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
 		
-		rect = CefRect(0, 0, dkCef->width, dkCef->height);
+		//rect = CefRect(0, 0, dkCef->width, dkCef->height);
 		return true;
 	}
 
@@ -85,7 +88,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 	{
-		DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+")\n", DKDEBUG);
+		DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKDEBUG);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,7 +106,13 @@ public:
 	//////////////////////////////////////////////////////
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 	{
-		return false;
+		return true;
+	}
+
+	//////////////////////////////////////////////////
+	void OnAfterCreated(CefRefPtr<CefBrowser> browser)
+	{
+		//dkCef->browsers.push_back(browser);
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefHandler);
