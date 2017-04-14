@@ -5,6 +5,7 @@
 #include "DKLog.h"
 #include "DKWindow.h"
 #include "DKFile.h"
+#include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
 
 #ifdef WIN32
@@ -187,6 +188,7 @@ void DKCef::Init()
 		}
 	}
 	else{
+		cefHandler = new DKCefHandler();
 		NewBrowser();
 		CefRunMessageLoop();
 	}
