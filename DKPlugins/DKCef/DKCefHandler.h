@@ -20,12 +20,16 @@ public:
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	
-	/////////////////////////////////////////
+	//////////////
 	void DoFrame()
 	{ 
 		//FIXME: this breaks SDL keyboard events for Mac OSX
 		CefDoMessageLoopWork(); 
 	}
+
+	///////////////////////////////////////////
+	bool DoClose(CefRefPtr<CefBrowser> browser);
+
 
 	//////////////////////////////////////////////////////////////
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)

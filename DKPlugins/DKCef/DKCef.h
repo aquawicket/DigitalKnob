@@ -9,6 +9,8 @@
 #include <include/cef_browser_process_handler.h>
 #include "DKCefHandler.h"
 
+class DKCefHandler;
+
 /////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
 {
