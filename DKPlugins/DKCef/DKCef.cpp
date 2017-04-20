@@ -241,7 +241,9 @@ bool DKCef::NewBrowser()
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
 	}
 	else{
-		window_info.SetAsPopup(NULL, "cefpopup");
+#ifndef LINUX
+		window_info.SetAsPopup(NULL, "cefpopup"); //FIXME
+#endif
 		window_info.width = 800;
 		window_info.height = 600;
 		CefBrowserHost::CreateBrowser(window_info, cefHandler, "http://www.google.com", browserSettings, NULL);
