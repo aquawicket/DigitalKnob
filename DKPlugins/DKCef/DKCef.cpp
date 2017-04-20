@@ -246,7 +246,7 @@ bool DKCef::NewBrowser()
 #endif
 		window_info.width = 800;
 		window_info.height = 600;
-		CefBrowserHost::CreateBrowser(window_info, cefHandler, "http://www.google.com", browserSettings, NULL);
+		CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
 	}
 	return true;
 }
