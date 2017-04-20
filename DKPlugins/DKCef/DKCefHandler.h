@@ -67,6 +67,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 	{ 
+		CEF_REQUIRE_UI_THREAD();
 		DKLog("DKSDLCefHandler::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
 	}
 
@@ -116,6 +117,7 @@ public:
 	//////////////////////////////////////////////////
 	void OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	{
+		CEF_REQUIRE_UI_THREAD();
 		//dkCef->browsers.push_back(browser);
 	}
 

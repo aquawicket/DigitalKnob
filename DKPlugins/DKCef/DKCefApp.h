@@ -4,6 +4,7 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 #include <include/cef_app.h>
+#include <include/wrapper/cef_helpers.h>
 #include "DKFile.h"
 
 typedef CefRefPtr<CefListValue> CefArgs;
@@ -372,6 +373,7 @@ public:
 	///////////////////////////////////
 	virtual void OnContextInitialized()
 	{
+		CEF_REQUIRE_UI_THREAD();
 		//printf("DKCefApp::OnContextInitialized()\n");
 		CefRefreshWebPlugins();
 	}
