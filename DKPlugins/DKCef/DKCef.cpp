@@ -8,9 +8,12 @@
 #include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
 
+#define CEF_USE_SANDBOX 1
+
 #ifdef WIN32
 #include <delayimp.h>
 #include "DKWindows.h"
+#include <include/cef_sandbox_win.h>
 #endif
 
 
@@ -94,11 +97,14 @@ void DKCef::Init()
 		settings.windowless_rendering_enabled = true;
 	}
 	
+	void* sandbox_info = NULL;
 	if(same(DKV8::sandbox, "OFF")){
-	  settings.no_sandbox = true;
+		settings.no_sandbox = true;
 	}
 	else{
 		settings.no_sandbox = false;
+		CefScopedSandboxInfo scoped_sandbox;
+		sandbox_info = scoped_sandbox.sandbox_info();
 	}
 	
 	if(same(DKV8::multi_threaded_message_loop, "ON")){
@@ -144,7 +150,7 @@ void DKCef::Init()
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
         	return;
     }
-	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
+	//CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
 	
 #ifdef MAC
@@ -169,7 +175,7 @@ void DKCef::Init()
 	CefString(&settings.product_version).FromASCII("Cef/3.2623");
 
 	//DKLog("CefInitialize \n", DKINFO);
-    int result2 = CefInitialize(args, settings, cefApp.get(), NULL);
+    int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
 		DKLog("CefInitialize error", DKERROR);
 		return;
