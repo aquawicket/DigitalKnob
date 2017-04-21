@@ -85,6 +85,12 @@ void DKCef::Init()
 	CefMainArgs args(DKApp::argc, DKApp::argv);
 #endif
 	cefApp = new DKCefApp();
+	
+	//int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
+	//if (exit_code >= 0) {
+	  // The sub-process has completed so return here.
+	  //return;
+	//}
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
@@ -152,7 +158,7 @@ void DKCef::Init()
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
         	return;
     }
-	//CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
+	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
 	
 #ifdef MAC
@@ -169,7 +175,7 @@ void DKCef::Init()
 	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 	if(!DKFile::PathExists(ep)){
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-        	return;
+        	//return;
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
 #endif
