@@ -19,7 +19,7 @@ IF(LINUX)
 	DKDEPEND(mesa-common-dev)
 	DKDEPEND(libgl1-mesa-dev)
 	DKDEPEND(libxrandr-dev)
-	DKDEPEND(libasound2-dev)
+	##DKDEPEND(libasound2-dev)
 ENDIF()
 
 LIST(APPEND WIN_LIBS shell32.lib)
