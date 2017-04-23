@@ -8,8 +8,6 @@
 #include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
 
-#define CEF_USE_SANDBOX 1
-
 #ifdef WIN32
 #include <delayimp.h>
 #include "DKWindows.h"
