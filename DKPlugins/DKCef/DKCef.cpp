@@ -120,8 +120,8 @@ void DKCef::Init()
 	else{
 		settings.no_sandbox = false;
 #ifndef LINUX
-		CefScopedSandboxInfo scoped_sandbox;
-		sandbox_info = scoped_sandbox.sandbox_info();
+		//CefScopedSandboxInfo scoped_sandbox;
+		//sandbox_info = scoped_sandbox.sandbox_info();
 #endif
 	}
 	
