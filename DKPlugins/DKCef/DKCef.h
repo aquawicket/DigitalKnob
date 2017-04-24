@@ -54,6 +54,7 @@ public:
 
 #ifdef WIN32
 	HMODULE libcef;
+	HMODULE libelf;
 #endif
 };
 
