@@ -27,6 +27,6 @@ WIN32_RELEASE_LIB(${CEF}/Release/cef_sandbox.lib)
 
 ### COMPILE ###
 DKSETPATH(${CEF}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} ${CEF})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -DUSE_SANDBOX=Off ${CEF})
 WIN32_VS_DEBUG(cef_binary_3.2987.1601.gf035232_windows32 cef.sln libcef_dll_wrapper)
 WIN32_VS_RELEASE(cef_binary_3.2987.1601.gf035232_windows32 cef.sln libcef_dll_wrapper)
