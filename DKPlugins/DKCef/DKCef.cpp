@@ -44,25 +44,16 @@ void DKCef::Init()
 //   example:   assets/DKCef/dkwin32/Release/libcef.dll
 //        or    assets/DKCef/dkwin64/Debug/libcef.dll
 #if defined(WIN32) && !defined(WIN64)
-	DKString cef_dll;
-	cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
-
 	DKString elf_dll;
 	elf_dll = DKFile::local_assets + "DKCef/chrome_elf.dll";
+
+	DKString cef_dll;
+	cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
 #ifdef DEBUG
 	//cef_dll = DKFile::local_assets + "DKCef/dkwin32/Debug/libcef.dll";
 #else
 	//cef_dll = DKFile::local_assets + "DKCef/dkwin32/Release/libcef.dll";
 #endif
-	libcef = LoadLibrary(cef_dll.c_str());
-	if(!libcef){
-		DKString error;
-		DKWindows::GetLastError(error);
-		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
-		FreeLibrary(libcef);
-	}
-	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations 
-
 	libelf = LoadLibrary(elf_dll.c_str());
 	if (!libelf) {
 		DKString error;
@@ -70,7 +61,16 @@ void DKCef::Init()
 		DKLog("Could not load " + elf_dll + ": " + error + "\n", DKERROR);
 		FreeLibrary(libelf);
 	}
-	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL to move it's locations 
+	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL to move it's locations
+
+	libcef = LoadLibrary(cef_dll.c_str());
+	if(!libcef){
+		DKString error;
+		DKWindows::GetLastError(error);
+		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
+		FreeLibrary(libcef);
+	}
+	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations  
 #endif
 #ifdef WIN64
 	DKString cef_dll;
