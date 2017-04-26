@@ -272,7 +272,7 @@ bool DKCef::NewBrowser()
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
 	}
 	else{
-#ifndef LINUX
+#ifdef WIN32
 		window_info.SetAsPopup(NULL, "cefpopup"); //FIXME
 #endif
 		window_info.width = 800;
