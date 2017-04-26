@@ -1,11 +1,11 @@
 #define DKCefChild
-#include "DK.h"
-#include "DKCefApp.h"
+//#include "DK.h"
+//#include "DKCefApp.h"
 #include "include/cef_app.h"
 
-#ifndef LINUX
-#include "include/cef_sandbox_win.h"
-#endif
+//#ifndef LINUX
+//#include "include/cef_sandbox_win.h"
+//#endif
 
 int main(int argc, char* argv[])
 {
@@ -15,12 +15,13 @@ int main(int argc, char* argv[])
 	CefMainArgs main_args(argc, argv);
 #endif
 
-	void* sandbox_info = NULL;
-#ifndef LINUX
-	CefScopedSandboxInfo scoped_sandbox;
-	sandbox_info = scoped_sandbox.sandbox_info();
-#endif
+	//void* sandbox_info = NULL;
+//#ifndef LINUX
+//	CefScopedSandboxInfo scoped_sandbox;
+//	sandbox_info = scoped_sandbox.sandbox_info();
+//#endif
 
-	CefRefPtr<DKCefApp> app(new DKCefApp);
-	return CefExecuteProcess(main_args, app.get(), sandbox_info);
+	//CefRefPtr<DKCefApp> app(new DKCefApp);
+	//return CefExecuteProcess(main_args, app.get(), sandbox_info);
+	return CefExecuteProcess(main_args, NULL, NULL);
 }
