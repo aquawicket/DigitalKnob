@@ -2,6 +2,10 @@
 #ifndef DKCefHandler_H
 #define DKCefHandler_H
 
+#include <X11/Xatom.h>
+#include <X11/Xlib.h>
+#undef Status
+//typedef cef_urlrequest_status_t Status;
 #include "DKCef.h"
 class DKCef;
 
@@ -75,13 +79,69 @@ public:
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
 		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKINFO);
+		
+		::Display* display = cef_get_xdisplay();
+		if(!display){ 
+		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): display invalid\n", DKINFO);
+		}
+		::Window window = browser->GetHost()->GetWindowHandle();
+		if(!window){ 
+		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window invalid\n", DKINFO);
+		}
+		
+		
+		
+		Atom wm_state = XInternAtom (display, "_NET_WM_STATE", False);
+		if(wm_state == None){
+		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_state invalid\n", DKINFO);
+		}
+		Atom wm_fullscreen = XInternAtom (display, "_NET_WM_STATE_FULLSCREEN", False);
+		if(wm_fullscreen == None){
+		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_fullscreen invalid\n", DKINFO);
+		}
+		XChangeProperty(display, window, wm_state, XA_ATOM, 32, PropModeReplace, reinterpret_cast<unsigned char*>(&wm_fullscreen), 1);
+		
+		
+		
+		/*
+		Atom window_type = XInternAtom(display, "_NET_WM_WINDOW_TYPE", False);
+		long value = XInternAtom(display, "_NET_WM_WINDOW_TYPE_DOCK", False);
+		XChangeProperty(display, window, window_type, XA_ATOM, 32, PropModeReplace, (unsigned char*) &value, 1);
+		*/
+		
+		
+		/*
+		XResizeWindow(
+		cef_get_xdisplay(),
+		browser->GetHost()->GetWindowHandle(),
+		300,
+		300);
+		*/
+		
+		
+		/*
+		Atom fullmons = XInternAtom(display, "_NET_WM_FULLSCREEN_MONITORS", False);
+		XEvent xev;
+		memset(&xev, 0, sizeof(xev));
+		xev.type = ClientMessage;
+		xev.xclient.window = window;
+		xev.xclient.message_type = fullmons;
+		xev.xclient.format = 32;
+		xev.xclient.data.l[0] = 0; // your topmost monitor number
+		xev.xclient.data.l[1] = 0; // bottommost
+		xev.xclient.data.l[2] = 0; // leftmost
+		xev.xclient.data.l[3] = 1; // rightmost
+		xev.xclient.data.l[4] = 0; // source indication
+		XSendEvent (display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
+		XFlush(display);
+		*/
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
 		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
-		return true;
+		return false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
