@@ -270,7 +270,7 @@ bool DKCef::NewBrowser()
 	}
 	else{
 #ifndef LINUX
-		//window_info.SetAsPopup(NULL, "cefpopup"); //FIXME
+		window_info.SetAsPopup(NULL, "cefpopup"); //FIXME
 #endif
 		window_info.width = 800;
 		window_info.height = 600;
