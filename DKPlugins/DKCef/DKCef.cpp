@@ -163,6 +163,9 @@ void DKCef::Init()
 	DKString cp = DKFile::local_assets + "USER";
 	CefString(&settings.cache_path) = cp.c_str();
 
+	DKString lf = DKFile::local_assets + "cef.log";
+	CefString(&settings.log_file) = lf.c_str();
+
 #ifdef WIN32
 	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
 	if(!DKFile::PathExists(ep)){
