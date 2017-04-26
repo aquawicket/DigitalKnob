@@ -7,6 +7,7 @@
 #include "DKFile.h"
 #include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
+#include <include/cef_version.h>
 
 #ifdef WIN32
 #include <delayimp.h>
@@ -190,7 +191,10 @@ void DKCef::Init()
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
 #endif
 
-	CefString(&settings.product_version).FromASCII("Cef/3.2623");
+	int major_version = cef_version_info(0);
+	int build_version = cef_version_info(4);
+	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
+	CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	//DKLog("CefInitialize \n", DKINFO);
     int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);

@@ -2,10 +2,13 @@
 #ifndef DKCefHandler_H
 #define DKCefHandler_H
 
+#ifdef LINUX
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #undef Status
 //typedef cef_urlrequest_status_t Status;
+#endif
+
 #include "DKCef.h"
 class DKCef;
 
@@ -79,7 +82,8 @@ public:
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
 		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKINFO);
-		
+
+#ifdef LINUX
 		::Display* display = cef_get_xdisplay();
 		if(!display){ 
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): display invalid\n", DKINFO);
@@ -135,6 +139,7 @@ public:
 		XSendEvent (display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
 		XFlush(display);
 		*/
+#endif //LINUX
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
