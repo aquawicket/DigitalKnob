@@ -12,7 +12,7 @@ DKDEFINE(__STDC_CONSTANT_MACROS)
 DKDEFINE(__STDC_FORMAT_MACROS)
 DKDEFINE(PSAPI_VERSION=1)
 DKDEFINE(NOMINMAX)
-##DKDEFINE(CEF_SANDBOX)
+DKDEFINE(CEF_SANDBOX)
 DKDEFINE(CEF_ATL)
 
 LINUX_INCLUDE(${CEF})
@@ -22,28 +22,6 @@ LINUX_DEBUG_LIB(${CEF}/${OS}/Debug/libcef_dll_wrapper/libcef_dll_wrapper.a)
 LINUX_RELEASE_LIB(${CEF}/${OS}/Release/libcef_dll_wrapper/libcef_dll_wrapper.a)
 ##LINUX_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
 ##LINUX_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
-
-#IF(DKAPP)
-#	IF(DEBUG)
-#		DKCOPY(${CEF}/Debug ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Resources ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Debug ${DKPROJECT}/linux64/Debug TRUE)
-#		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/linux64/Debug TRUE)
-#	ENDIF()
-#	
-#	IF(RELEASE)
-#		DKCOPY(${CEF}/Release ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Resources ${DKPROJECT}/assets/DKCef TRUE)
-#		DKCOPY(${CEF}/Release ${DKPROJECT}/linux64/Release TRUE)
-#		DKCOPY(${CEF}/Resources/icudtl.dat ${DKPROJECT}/linux64/Release TRUE)
-#	ENDIF()
-#	
-#	FILE(REMOVE ${DKPROJECT}/assets/DKCef/cef_sandbox.a)
-#	FILE(REMOVE ${DKPROJECT}/assets/DKCef/libcef.a)
-#	FILE(REMOVE ${DKPROJECT}/assets/DKCef/wow_helper.exe)
-#ENDIF()
 
 
 ### COMPILE ###
