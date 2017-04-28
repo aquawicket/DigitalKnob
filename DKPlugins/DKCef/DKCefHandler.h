@@ -19,6 +19,9 @@ class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHa
 public:
 	DKCefHandler(){}
 	DKCef* dkCef;
+#ifdef WIN32
+	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
+#endif
 
 	//virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
@@ -82,6 +85,30 @@ public:
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
 		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKINFO);
+
+#ifdef WIN32
+		HWND hwnd = GetActiveWindow();
+
+		DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+		if(dwStyle & WS_OVERLAPPEDWINDOW){
+			MONITORINFO mi = { sizeof(mi) };
+			if(GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)){
+				SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+					SetWindowPos(hwnd, HWND_TOP,
+						 mi.rcMonitor.left, mi.rcMonitor.top,
+						 mi.rcMonitor.right - mi.rcMonitor.left,
+						 mi.rcMonitor.bottom - mi.rcMonitor.top,
+						SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+			}
+		} 
+		else{
+			SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
+			SetWindowPlacement(hwnd, &g_wpPrev);
+			SetWindowPos(hwnd, NULL, 0, 0, 0, 0,
+                 SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
+                 SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+		}
+#endif
 
 #ifdef LINUX
 		::Display* display = cef_get_xdisplay();
