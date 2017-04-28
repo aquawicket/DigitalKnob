@@ -14,7 +14,7 @@ class DKCef;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
-						public CefContextMenuHandler, /*public CefDownloadHandler,*/ public CefDisplayHandler
+						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
 {
 public:
 	DKCefHandler(){}
@@ -25,7 +25,7 @@ public:
 
 	//virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
-	//virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
+	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
@@ -176,13 +176,11 @@ public:
 		return false;
 	}
 
-	/*
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 	{
 		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKDEBUG);
 	}
-	*/
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
