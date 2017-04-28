@@ -13,7 +13,7 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 double DKApp::now;
 double DKApp::lastFrame; 
 double DKApp::lastSecond;
-double DKApp::_fps;
+double DKApp::_fps = 17; //TODO - make this number actually reflect the true FPS
 
 //#ifdef USE_Boost_System
 #ifdef WIN32
@@ -127,7 +127,6 @@ void DKApp::Init()
 	DKUtil::GetTicks(now);
 	DKUtil::GetTicks(lastFrame);
 	DKUtil::GetTicks(lastSecond);
-	_fps = 17; //TODO - make this number actually reflect the true FPS
 }
 
 //////////////////
