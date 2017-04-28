@@ -273,7 +273,34 @@ bool DKCef::NewBrowser()
 	}
 	else{
 #ifdef WIN32
-		window_info.SetAsPopup(NULL, "cefpopup"); //FIXME
+		//Create window title
+		DKString title; 
+		DKFile::GetExeName(title);
+		DKFile::RemoveExtention(title);
+#if defined(WIN32) && !defined(WIN64)
+		title += " - WIN32";
+#endif
+#ifdef WIN64
+		title += " - WIN64";
+#endif
+#ifdef MAC
+		title += " - MAC";
+#endif
+#ifdef LINUX
+		title += " - LINUX";
+#endif
+#ifdef DEBUG
+		title += " DEBUG ";
+#else
+		title += " RELEASE ";
+#endif
+		DKString mTime;
+		DKString file;
+		DKFile::GetFullExeName(file);
+		DKFile::GetModifiedTime(file, mTime);
+		title += mTime;
+
+		window_info.SetAsPopup(NULL, title.c_str());
 #endif
 		window_info.width = 800;
 		window_info.height = 600;
