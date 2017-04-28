@@ -14,7 +14,7 @@ class DKCef;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
-						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
+						public CefContextMenuHandler, /*public CefDownloadHandler,*/ public CefDisplayHandler
 {
 public:
 	DKCefHandler(){}
@@ -176,11 +176,13 @@ public:
 		return false;
 	}
 
+	/*
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 	{
 		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKDEBUG);
 	}
+	*/
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
