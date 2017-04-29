@@ -181,8 +181,10 @@ public:
 	{
 		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKINFO);
 
+#ifdef WIN32
 		UNREFERENCED_PARAMETER(browser);
 		UNREFERENCED_PARAMETER(download_item);
+#endif
 		callback->Continue(suggested_name, true);
 	}
 
