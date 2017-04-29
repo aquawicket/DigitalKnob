@@ -121,7 +121,7 @@ public:
 		}
 		
 		
-		
+		/*
 		Atom wm_state = XInternAtom (display, "_NET_WM_STATE", False);
 		if(wm_state == None){
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_state invalid\n", DKINFO);
@@ -131,7 +131,7 @@ public:
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_fullscreen invalid\n", DKINFO);
 		}
 		XChangeProperty(display, window, wm_state, XA_ATOM, 32, PropModeReplace, reinterpret_cast<unsigned char*>(&wm_fullscreen), 1);
-		
+		*/
 		
 		
 		/*
@@ -166,6 +166,21 @@ public:
 		XSendEvent (display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
 		XFlush(display);
 		*/
+		
+		//Maximize window
+		XEvent xev;
+		Atom wm_state  =  XInternAtom(display, "_NET_WM_STATE", False);
+		Atom max_horz  =  XInternAtom(display, "_NET_WM_STATE_MAXIMIZED_HORZ", False);
+		Atom max_vert  =  XInternAtom(display, "_NET_WM_STATE_MAXIMIZED_VERT", False);
+		memset(&xev, 0, sizeof(xev));
+		xev.type = ClientMessage;
+		xev.xclient.window = window;
+		xev.xclient.message_type = wm_state;
+		xev.xclient.format = 32;
+		xev.xclient.data.l[0] = 1; //_NET_WM_STATE_ADD;
+		xev.xclient.data.l[1] = max_horz;
+		xev.xclient.data.l[2] = max_vert;
+		XSendEvent(display, DefaultRootWindow(display), False, SubstructureNotifyMask, &xev);
 #endif //LINUX
 	}
 
