@@ -23,13 +23,13 @@ Firefox <br>
 Opera <br>
 Internet Explorer (9.0+) <br>
 
-###Supported Frameworks
+###Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [SFML](https://github.com/SFML/SFML) "coming soon" <br>
 
-###Supported Libraries
+###Supported Libraries <br>
 [Archive](https://github.com/libarchive/libarchive) <br>
 [Boost](https://github.com/boostorg/boost) <br>
 [Boost-android](https://github.com/MysticTreeGames/Boost-for-Android) <br>
@@ -47,7 +47,7 @@ Internet Explorer (9.0+) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
 [Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
-[OpenAL](https://github.com/apportable/openal-soft](https://github.com/JogAmp/openal-soft) <br>
+[OpenAL](https://github.com/apportable/openal-soft) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
@@ -74,8 +74,8 @@ Internet Explorer (9.0+) <br>
 [Zlib](https://github.com/madler/zlib) <br>
 
 
-###How to compile 
-#[DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
+###How to compile <br>
+[DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
 
-###DKForum
-#[Digitalknob Forum](http://digitalknob.freeforums.net)
+###DKForum <br>
+[Digitalknob Forum](http://digitalknob.freeforums.net)
