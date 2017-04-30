@@ -5,6 +5,7 @@
 #ifdef LINUX
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#include <X11/extensions/Xrandr.h>
 #undef Status
 //typedef cef_urlrequest_status_t Status;
 #endif
@@ -120,6 +121,65 @@ public:
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window invalid\n", DKINFO);
 		}
 		
+		/*
+		::Screen* screen = NULL;
+		XWindowChanges xcw = { 0 };
+		screen = DefaultScreenOfDisplay(display);
+		if(!screen){
+		     DKLog("DKSDLCefHandler::OnFullscreenModeChange(): screen invalid\n", DKINFO);
+		     return;
+		}
+		
+		xcw.x = 0;
+		xcw.y = 0;
+		xcw.width = screen->width;
+		xcw.height = screen->height;
+		xcw.border_width = 0;
+		*/
+		
+		//XConfigureWindow(display, window, CWX | CWY | CWWidth| CWHeight | CWBorderWidth, &xcw);
+    
+		//int screen_number1 = XDefaultScreen(display);
+		//int screen_number2 = XRRRootToScreen(display, window);
+		//DKLog("XDefaultScreen #: "+toString(screen_number1)+"\n", DKINFO);
+		//DKLog("XRRRootToScreen #: "+toString(screen_number2)+"\n", DKINFO);
+		
+		//XWindowAttributes attributes;
+		//XGetWindowAttributes(display, window, &attributes);
+		//XMoveResizeWindow(display, window, 0, 0, attributes.width, attributes.height);
+		
+		/*
+		//int screen_number = XRRRootToScreen(display, window);
+		int screen_number = XDefaultScreen(display);
+		DKLog("Screen number of window is: "+toString(screen_number)+"\n", DKINFO);
+		int num_sizes;
+		XRRScreenSize *xrrs = XRRSizes(display, 0, &num_sizes);
+		XRRScreenConfiguration *conf = XRRGetScreenInfo(display, window);
+		//short current_rate = XRRConfigCurrentRate(conf);
+		Rotation current_rotation;
+		SizeID current_size_id = XRRConfigCurrentConfiguration(conf, &current_rotation);
+		int current_width = xrrs[current_size_id].width;
+		int current_height = xrrs[current_size_id].height;
+		DKLog("Screen width = "+toString(current_width)+"\n", DKINFO);
+		DKLog("Screen height = "+toString(current_height)+"\n", DKINFO);
+		*/
+
+		//XWindowAttributes window_attributes;
+		//XGetWindowAttributes(display, window, &window_attributes);
+		//if(!window_attributes){
+		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window_attributes invalid\n", DKINFO);
+		//}
+		//if(!window_attributes->screen){
+		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window_attributes->screen invalid\n", DKINFO);
+		//}
+		//int screen_number = XDefaultScreen(display);
+		//Screen* screen = XScreenOfDisplay(display, screen_number);
+		//if(!screen){ 
+		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): screen invalid\n", DKINFO);
+		//}
+		
+		
+		
 		
 		/*
 		Atom wm_state = XInternAtom (display, "_NET_WM_STATE", False);
@@ -143,8 +203,8 @@ public:
 		
 		/*
 		XResizeWindow(
-		cef_get_xdisplay(),
-		browser->GetHost()->GetWindowHandle(),
+		display,
+		window,
 		300,
 		300);
 		*/
@@ -168,6 +228,7 @@ public:
 		*/
 		
 		//Maximize window
+		/*
 		XEvent xev;
 		Atom wm_state  =  XInternAtom(display, "_NET_WM_STATE", False);
 		Atom max_horz  =  XInternAtom(display, "_NET_WM_STATE_MAXIMIZED_HORZ", False);
@@ -181,6 +242,7 @@ public:
 		xev.xclient.data.l[1] = max_horz;
 		xev.xclient.data.l[2] = max_vert;
 		XSendEvent(display, DefaultRootWindow(display), False, SubstructureNotifyMask, &xev);
+		*/
 #endif //LINUX
 	}
 
