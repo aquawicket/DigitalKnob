@@ -3,6 +3,7 @@
 #define DKCefHandler_H
 
 #ifdef LINUX
+#include <gtk/gtk.h>
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
@@ -121,6 +122,35 @@ public:
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window invalid\n", DKINFO);
 		}
 		
+		//GTK TODO
+		//GtkWindow* gtk_window = GTK_WINDOW(browser->GetHost()->GetWindowHandle());
+		//if(!gtk_window){
+		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): gtk_window invalid\n", DKINFO);
+		//      return;
+		//}
+		//gtk_window_maximize(gtk_window);
+		
+		//int scr = DefaultScreen(display); 
+		//Window root = DefaultRootWindow(display);
+		//int sw = DisplayWidth(display,scr); 
+		//int sh = DisplayHeight(display,scr);
+		
+		/*
+		Window root_return;
+		Window parent_return;
+		Window *children_return;
+		unsigned int nchildren_return;
+		XQueryTree(display, window, &root_return, &parent_return, &children_return, &nchildren_return);
+		
+		int screen_number = XRRRootToScreen(display, root_return);
+		DKLog("screen #: "+toString(screen_number)+"\n", DKINFO);
+		*/
+		
+		//XWindowAttributes attributes;
+		//XGetWindowAttributes(display, parent_return2, &attributes);
+		//DKLog("width: "+toString(attributes.width)+"\n", DKINFO);
+		//DKLog("height: "+toString(attributes.height)+"\n", DKINFO);
+      
 		/*
 		::Screen* screen = NULL;
 		XWindowChanges xcw = { 0 };
