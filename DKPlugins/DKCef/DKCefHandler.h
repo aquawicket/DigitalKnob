@@ -4,11 +4,6 @@
 
 #ifdef LINUX
 #include <gtk/gtk.h>
-#include <X11/Xatom.h>
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrandr.h>
-#undef Status
-//typedef cef_urlrequest_status_t Status;
 #endif
 
 #include "DKCef.h"
@@ -113,166 +108,19 @@ public:
 #endif
 
 #ifdef LINUX
-		::Display* display = cef_get_xdisplay();
-		if(!display){ 
-		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): display invalid\n", DKINFO);
+		gtk_init(NULL, NULL);
+		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+		if(!gdk_window){
+		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
+		      return;
 		}
-		::Window window = browser->GetHost()->GetWindowHandle();
-		if(!window){ 
-		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window invalid\n", DKINFO);
+		if(fullscreen){
+		  gdk_window_fullscreen(gdk_window);
 		}
-		
-		//GTK TODO
-		//GtkWindow* gtk_window = GTK_WINDOW(browser->GetHost()->GetWindowHandle());
-		//if(!gtk_window){
-		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): gtk_window invalid\n", DKINFO);
-		//      return;
-		//}
-		//gtk_window_maximize(gtk_window);
-		
-		//int scr = DefaultScreen(display); 
-		//Window root = DefaultRootWindow(display);
-		//int sw = DisplayWidth(display,scr); 
-		//int sh = DisplayHeight(display,scr);
-		
-		/*
-		Window root_return;
-		Window parent_return;
-		Window *children_return;
-		unsigned int nchildren_return;
-		XQueryTree(display, window, &root_return, &parent_return, &children_return, &nchildren_return);
-		
-		int screen_number = XRRRootToScreen(display, root_return);
-		DKLog("screen #: "+toString(screen_number)+"\n", DKINFO);
-		*/
-		
-		//XWindowAttributes attributes;
-		//XGetWindowAttributes(display, parent_return2, &attributes);
-		//DKLog("width: "+toString(attributes.width)+"\n", DKINFO);
-		//DKLog("height: "+toString(attributes.height)+"\n", DKINFO);
-      
-		/*
-		::Screen* screen = NULL;
-		XWindowChanges xcw = { 0 };
-		screen = DefaultScreenOfDisplay(display);
-		if(!screen){
-		     DKLog("DKSDLCefHandler::OnFullscreenModeChange(): screen invalid\n", DKINFO);
-		     return;
+		else{
+		  gdk_window_unfullscreen(gdk_window);
 		}
 		
-		xcw.x = 0;
-		xcw.y = 0;
-		xcw.width = screen->width;
-		xcw.height = screen->height;
-		xcw.border_width = 0;
-		*/
-		
-		//XConfigureWindow(display, window, CWX | CWY | CWWidth| CWHeight | CWBorderWidth, &xcw);
-    
-		//int screen_number1 = XDefaultScreen(display);
-		//int screen_number2 = XRRRootToScreen(display, window);
-		//DKLog("XDefaultScreen #: "+toString(screen_number1)+"\n", DKINFO);
-		//DKLog("XRRRootToScreen #: "+toString(screen_number2)+"\n", DKINFO);
-		
-		//XWindowAttributes attributes;
-		//XGetWindowAttributes(display, window, &attributes);
-		//XMoveResizeWindow(display, window, 0, 0, attributes.width, attributes.height);
-		
-		/*
-		//int screen_number = XRRRootToScreen(display, window);
-		int screen_number = XDefaultScreen(display);
-		DKLog("Screen number of window is: "+toString(screen_number)+"\n", DKINFO);
-		int num_sizes;
-		XRRScreenSize *xrrs = XRRSizes(display, 0, &num_sizes);
-		XRRScreenConfiguration *conf = XRRGetScreenInfo(display, window);
-		//short current_rate = XRRConfigCurrentRate(conf);
-		Rotation current_rotation;
-		SizeID current_size_id = XRRConfigCurrentConfiguration(conf, &current_rotation);
-		int current_width = xrrs[current_size_id].width;
-		int current_height = xrrs[current_size_id].height;
-		DKLog("Screen width = "+toString(current_width)+"\n", DKINFO);
-		DKLog("Screen height = "+toString(current_height)+"\n", DKINFO);
-		*/
-
-		//XWindowAttributes window_attributes;
-		//XGetWindowAttributes(display, window, &window_attributes);
-		//if(!window_attributes){
-		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window_attributes invalid\n", DKINFO);
-		//}
-		//if(!window_attributes->screen){
-		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): window_attributes->screen invalid\n", DKINFO);
-		//}
-		//int screen_number = XDefaultScreen(display);
-		//Screen* screen = XScreenOfDisplay(display, screen_number);
-		//if(!screen){ 
-		//      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): screen invalid\n", DKINFO);
-		//}
-		
-		
-		
-		
-		/*
-		Atom wm_state = XInternAtom (display, "_NET_WM_STATE", False);
-		if(wm_state == None){
-		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_state invalid\n", DKINFO);
-		}
-		Atom wm_fullscreen = XInternAtom (display, "_NET_WM_STATE_FULLSCREEN", False);
-		if(wm_fullscreen == None){
-		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): wm_fullscreen invalid\n", DKINFO);
-		}
-		XChangeProperty(display, window, wm_state, XA_ATOM, 32, PropModeReplace, reinterpret_cast<unsigned char*>(&wm_fullscreen), 1);
-		*/
-		
-		
-		/*
-		Atom window_type = XInternAtom(display, "_NET_WM_WINDOW_TYPE", False);
-		long value = XInternAtom(display, "_NET_WM_WINDOW_TYPE_DOCK", False);
-		XChangeProperty(display, window, window_type, XA_ATOM, 32, PropModeReplace, (unsigned char*) &value, 1);
-		*/
-		
-		
-		/*
-		XResizeWindow(
-		display,
-		window,
-		300,
-		300);
-		*/
-		
-		
-		/*
-		Atom fullmons = XInternAtom(display, "_NET_WM_FULLSCREEN_MONITORS", False);
-		XEvent xev;
-		memset(&xev, 0, sizeof(xev));
-		xev.type = ClientMessage;
-		xev.xclient.window = window;
-		xev.xclient.message_type = fullmons;
-		xev.xclient.format = 32;
-		xev.xclient.data.l[0] = 0; // your topmost monitor number
-		xev.xclient.data.l[1] = 0; // bottommost
-		xev.xclient.data.l[2] = 0; // leftmost
-		xev.xclient.data.l[3] = 1; // rightmost
-		xev.xclient.data.l[4] = 0; // source indication
-		XSendEvent (display, DefaultRootWindow(display), False, SubstructureRedirectMask | SubstructureNotifyMask, &xev);
-		XFlush(display);
-		*/
-		
-		//Maximize window
-		/*
-		XEvent xev;
-		Atom wm_state  =  XInternAtom(display, "_NET_WM_STATE", False);
-		Atom max_horz  =  XInternAtom(display, "_NET_WM_STATE_MAXIMIZED_HORZ", False);
-		Atom max_vert  =  XInternAtom(display, "_NET_WM_STATE_MAXIMIZED_VERT", False);
-		memset(&xev, 0, sizeof(xev));
-		xev.type = ClientMessage;
-		xev.xclient.window = window;
-		xev.xclient.message_type = wm_state;
-		xev.xclient.format = 32;
-		xev.xclient.data.l[0] = 1; //_NET_WM_STATE_ADD;
-		xev.xclient.data.l[1] = max_horz;
-		xev.xclient.data.l[2] = max_vert;
-		XSendEvent(display, DefaultRootWindow(display), False, SubstructureNotifyMask, &xev);
-		*/
 #endif //LINUX
 	}
 
