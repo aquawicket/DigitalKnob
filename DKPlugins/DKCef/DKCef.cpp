@@ -15,6 +15,10 @@
 #include <include/cef_sandbox_win.h>
 #endif
 
+#ifdef LINUX
+#include <gtk/gtk.h>
+#endif
+
 
 //////////////////
 void DKCef::Init()
@@ -272,7 +276,6 @@ bool DKCef::NewBrowser()
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
 	}
 	else{
-#ifdef WIN32
 		//Create window title
 		DKString title; 
 		DKFile::GetExeName(title);
@@ -299,12 +302,22 @@ bool DKCef::NewBrowser()
 		DKFile::GetFullExeName(file);
 		DKFile::GetModifiedTime(file, mTime);
 		title += mTime;
-
+#ifdef WIN32
 		window_info.SetAsPopup(NULL, title.c_str());
 #endif
 		window_info.width = 800;
 		window_info.height = 600;
-		CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
+		//CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
+		CefRefPtr<CefBrowser> _browser;
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
+		
+		gtk_init(NULL, NULL);
+		GdkWindow* gdk_window = gdk_window_foreign_new(_browser->GetHost()->GetWindowHandle());
+		if(!gdk_window){
+		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n", DKINFO);
+		      return false;
+		}
+		gdk_window_set_title(gdk_window, title.c_str());
 #ifdef LINUX
 		//TODO: for linux, find the window and set the title
 		DKLog("TODO: set linux window title here\n", DKINFO);
