@@ -15,10 +15,6 @@
 #include <include/cef_sandbox_win.h>
 #endif
 
-#ifdef LINUX
-#include <gtk/gtk.h>
-#endif
-
 
 //////////////////
 void DKCef::Init()
@@ -311,7 +307,7 @@ bool DKCef::NewBrowser()
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
 		
-		gtk_init(NULL, NULL);
+		gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
 		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n", DKINFO);

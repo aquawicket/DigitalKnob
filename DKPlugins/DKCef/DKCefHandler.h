@@ -3,7 +3,7 @@
 #define DKCefHandler_H
 
 #ifdef LINUX
-#include <gtk/gtk.h>
+#include <gdk/gdk.h>
 #endif
 
 #include "DKCef.h"
@@ -108,7 +108,7 @@ public:
 #endif
 
 #ifdef LINUX
-		//gtk_init(NULL, NULL);
+		//gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
 		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
