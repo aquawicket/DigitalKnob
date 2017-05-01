@@ -1,3 +1,4 @@
 DKDEPEND(DKThread)
+DKDEPEND(libwebsockets-2.2-stable)
 
 DKPLUGIN(DKServer)
