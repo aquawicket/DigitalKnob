@@ -1,6 +1,6 @@
 var USE_SDL = 1;
 var USE_ROCKET = 1;
-var USE_CEF = 0;
+var USE_CEF = 1;
 var USE_Webview = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://digitalknob.com/DKIDE/index.html";
@@ -38,6 +38,7 @@ function User_OnEvent(event)  //Duktape
 ////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){
 	if(USE_SDL && USE_ROCKET && USE_CEF){
+		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n", DKINFO);
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
@@ -56,12 +57,14 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", User_OnEvent);
 	}
 	else if(USE_SDL && USE_ROCKET){
+		DKLog("Creating SDL -> ROCKET -> GUI \n", DKINFO);
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		LoadPage();
 	}
 	else if(USE_SDL && USE_CEF){
+		DKLog("Creating SDL -> CEF -> GUI \n", DKINFO);
 		DKCreate("DKWindow");
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
@@ -72,12 +75,14 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "resize", User_OnEvent);
 	}
 	else if(USE_CEF){
+		DKLog("Creating CEF -> GUI \n", DKINFO);
 		var width = 800;
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
-	else if(USE_Webview){ //Duktape
+	else if(USE_Webview){
+		DKLog("Creating WEBVIEW -> GUI \n", DKINFO);
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
