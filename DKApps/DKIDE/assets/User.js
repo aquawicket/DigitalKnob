@@ -1,7 +1,7 @@
 var USE_SDL = 1;
 var USE_ROCKET = 0;
 var USE_CEF = 1;
-var USE_Webview = 1;
+var USE_WEBVIEW = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://digitalknob.com/DKIDE/index.html";
 //var DKApp_url = "http://google.com";
@@ -9,12 +9,8 @@ var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 
 
 //Validate settings
-if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){
-	USE_CEF = 0; //not available for mobile devices
-}
-else{
-	USE_Webview = 0; //not available for Desktop devices
-}
+if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){  USE_CEF = 0;  }
+else{ 	USE_WEBVIEW = 0;  }
 
 
 ////////////////////////////
@@ -23,18 +19,13 @@ function User_OnEvent(event)  //Duktape
 	DKLog("User_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){
-		var currentBrowser = DKCef_GetCurrentBrowser("DKCef_frame");
-		DKCef_SetUrl("DKCef_frame", DKWidget_GetValue(event), currentBrowser);
+		DKCef_SetUrl("DKCef_frame", DKWidget_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
 	}
-	if(DK_Type(event, "keydown")){
-		if(DKWidget_GetValue(event) == "4"){ //Exit for ANDROID
-		    DK_Exit();
-		}
+	if(DK_Type(event, "keydown") && DKWidget_GetValue(event) == "4"){
+		DK_Exit();
 	}
 	if(DK_Type(event, "resize")){
-		var width = DKWindow_GetWidth();
-		var height = DKWindow_GetHeight();
-		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(width)+","+String(height));
+		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
 }
 
@@ -83,7 +74,7 @@ if(DK_GetJavascript() == "Duktape"){
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
-	else if(USE_Webview){
+	else if(USE_WEBVIEW){
 		DKLog("Creating WEBVIEW -> GUI \n", DKINFO);
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
@@ -91,10 +82,12 @@ if(DK_GetJavascript() == "Duktape"){
 	//DKCreate("DKTray/DKTray.js", function(){});
 	//DKCreate("DKDebug/DKDebug.js", function(){});
 }
-else{  //V8 or Webview
+else{  //V8 or WEBVIEW
 	LoadPage();
 }
 
+
+///////////////////
 function LoadPage()
 {
 	//DKLog("Loading page... \n", DKINFO);
