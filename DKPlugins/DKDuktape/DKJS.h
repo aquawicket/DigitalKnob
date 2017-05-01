@@ -82,6 +82,7 @@ public:
 	static int Value(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
 	static int GetProcessList(duk_context* ctx);
+	static int StopPropagation(duk_context* ctx);
 };
 
 

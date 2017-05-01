@@ -111,6 +111,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value, 2);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage, 2);
 	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList, 0);
+	DKDuktape::AttachFunction("DK_StopPropagation", DKJS::StopPropagation, 0);
 }
 
 /////////////////////////////////////
@@ -899,6 +900,12 @@ int DKJS::GetProcessList(duk_context* ctx)
 	DKUtil::GetProcessList(list);
 	duk_push_string(ctx, list.c_str());
 	return 1;
+}
+
+///////////////////////////////////////////
+int DKJS::StopPropagation(duk_context* ctx)
+{
+	return 0;
 }
 
 #endif //USE_DKDuktape
