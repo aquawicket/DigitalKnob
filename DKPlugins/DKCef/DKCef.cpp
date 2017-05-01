@@ -307,6 +307,7 @@ bool DKCef::NewBrowser()
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
 		
+#ifdef LINUX
 		gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
@@ -314,9 +315,6 @@ bool DKCef::NewBrowser()
 		      return false;
 		}
 		gdk_window_set_title(gdk_window, title.c_str());
-#ifdef LINUX
-		//TODO: for linux, find the window and set the title
-		DKLog("TODO: set linux window title here\n", DKINFO);
 #endif
 	}
 	return true;
