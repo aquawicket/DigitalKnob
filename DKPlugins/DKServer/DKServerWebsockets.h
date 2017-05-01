@@ -2,6 +2,8 @@
 #ifndef DKServerWebsockets_H
 #define DKServerWebsockets_H
 
+#include <libwebsockets.h>
+
 ///////////////////////////////////////////
 class DKServerWebsockets : public DKObjectT<DKServerWebsockets>
 {

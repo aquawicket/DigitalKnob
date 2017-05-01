@@ -4,7 +4,8 @@ DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
 
 
 ### LINK ###
-DKINCLUDE(${WEBSOCKETS}/include)
+DKINCLUDE(${WEBSOCKETS}/lib)
+DKINCLUDE(${WEBSOCKETS}/${OS}/Release)
 ##WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/libwebsockets.lib)
 ##WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/libwebsockets.lib)
 ##APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/libwebsockets.a)
