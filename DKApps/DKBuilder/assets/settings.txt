@@ -1,4 +1,4 @@
-[CONSOLE]
+[CONSOLE] ON
 [WINX]
 [WINY]
 [WIDTH]
