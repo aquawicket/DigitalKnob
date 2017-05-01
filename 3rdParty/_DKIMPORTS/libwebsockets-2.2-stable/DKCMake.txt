@@ -1,0 +1,18 @@
+### INSTALL ###
+DKINSTALL(http://digitalknob.com/Download/Libs/libwebsockets-2.2-stable.zip libwebsockets-2.2-stable)
+DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
+
+
+### LINK ###
+##DKINCLUDE(${WEBSOCKETS}/include)
+##WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/lib/.libs/libWEBSOCKETS.lib)
+##WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/lib/.libs/libWEBSOCKETS.lib)
+##APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG}/lib/.libs/libWEBSOCKETS.a)
+##APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE}/lib/.libs/libWEBSOCKETS.a)
+##LINUX_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/lib/.libs/libWEBSOCKETS.a)
+##LINUX_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/lib/.libs/libWEBSOCKETS.a)
+##ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/obj/local/armeabi-v7a/libWEBSOCKETS.a)
+##ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/obj/local/armeabi-v7a/libWEBSOCKETS.a)
+
+
+### COMPILE ###
