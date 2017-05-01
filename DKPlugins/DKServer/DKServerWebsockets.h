@@ -5,7 +5,13 @@
 #pragma once
 #ifndef DKServerWebsockets_H
 #define DKServerWebsockets_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <libwebsockets.h>
+
 
 
 ///////////////////////////////////////////
