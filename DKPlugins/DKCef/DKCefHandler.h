@@ -152,6 +152,12 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line )
 	{
+		DKString msg = message.ToString();
+		replace(msg, "%c", "");
+		//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
+		DKString string = message.ToString();
+		replace(string,"%c","");
+		DKLog("CEF: "+string+"\n", DKINFO);
 		return true;
 	}
 
