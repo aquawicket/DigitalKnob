@@ -14,7 +14,6 @@ function DKMenuRight_Init()
 
 	DKCreate("DKDev/DKMenuRightWeb.js", function(){});
 	DKCreate("DKDev/DKMenuRightTree.js", function(){});
-	DKCreate("DKDev/DKMenuRightApp.js", function(){});
 	DKCreate("DKDev/DKMenuRightEdit.js", function(){});
 }
 
