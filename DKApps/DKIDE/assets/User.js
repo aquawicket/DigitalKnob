@@ -4,6 +4,9 @@ var USE_CEF = 1;
 var USE_Webview = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://digitalknob.com/DKIDE/index.html";
+//var DKApp_url = "http://google.com";
+//var DKApp_url = "chrome://gpu";
+
 
 //Validate settings
 if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){
@@ -53,7 +56,6 @@ if(DK_GetJavascript() == "Duktape"){
 		var currentBrowser = DKCef_GetCurrentBrowser(iframe);
 		DKCef_SetUrl(iframe, DKApp_url, currentBrowser);
 		DKCef_SetFocus(iframe);
-	
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", User_OnEvent);
 	}
 	else if(USE_SDL && USE_ROCKET){
@@ -78,6 +80,7 @@ if(DK_GetJavascript() == "Duktape"){
 		DKLog("Creating CEF -> GUI \n", DKINFO);
 		var width = 800;
 		var height = 600;
+		//DKLog("DKApp_url = "+DKApp_url+"\n", DKINFO);
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
@@ -86,8 +89,8 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
-	DKCreate("DKTray/DKTray.js", function(){});
-	DKCreate("DKDebug/DKDebug.js", function(){});
+	//DKCreate("DKTray/DKTray.js", function(){});
+	//DKCreate("DKDebug/DKDebug.js", function(){});
 }
 else{  //V8 or Webview
 	LoadPage();
@@ -95,6 +98,7 @@ else{  //V8 or Webview
 
 function LoadPage()
 {
+	//DKLog("Loading page... \n", DKINFO);
 	DKWidget_SetProperty("body","background-color","grey");
 	DKCreate("DKScale/DKScale.js", function(){});
 	DKCreate("DKBuild/DKBuild.js", function(){
