@@ -167,17 +167,37 @@ public:
 		DKLog("OnCursorChange()\n", DKINFO);
 	}
 
-	//////////////////////////////////////////////////////
-	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
-	{
-		return true;
-	}
-
 	//////////////////////////////////////////////////
 	void OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	{
 		CEF_REQUIRE_UI_THREAD();
 		//dkCef->browsers.push_back(browser);
+	}
+	
+	//////////////////////////////////////////////////////
+	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
+	{
+		//DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
+		
+		if(message->GetName() == "GetFunctions"){
+			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
+			DKV8::GetFunctions(browser);
+		}
+		
+		if(has(message->GetName(),"CallFunc(")){
+			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
+		
+			//get function name
+			DKString func = message->GetName();
+			replace(func,"CallFunc(", "");
+			replace(func,")", "");
+
+			//get arguments
+			CefRefPtr<CefListValue> arguments = message->GetArgumentList();
+			DKV8::Execute(browser, func, arguments);
+		}
+
+		return false;
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefHandler);
