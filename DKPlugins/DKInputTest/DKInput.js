@@ -3,8 +3,6 @@ var browser = DK_GetBrowser();
 /////////////////////////
 function DKInput_Init()
 {
-	DKCreate("DKWindow");
-	DKCreate("DKRocket");
 	DKCreate("DKInputTest/DKInput.html");
 	DKAddEvent("GLOBAL", "keypress", DKInput_OnEvent);
 	DKAddEvent("GLOBAL", "keydown", DKInput_OnEvent);
