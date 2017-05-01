@@ -13,7 +13,6 @@ function DKMenuRight_Init()
 	DKAddEvent("DKMenuRight.html", "SetPanel", DKMenuRight_OnEvent);
 
 	DKCreate("DKDev/DKMenuRightWeb.js", function(){});
-	DKCreate("DKDev/DKMenuRightTree.js", function(){});
 	DKCreate("DKDev/DKMenuRightEdit.js", function(){});
 }
 
