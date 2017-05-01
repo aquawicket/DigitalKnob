@@ -1,5 +1,5 @@
 var USE_SDL = 1;
-var USE_ROCKET = 1;
+var USE_ROCKET = 0;
 var USE_CEF = 1;
 var USE_Webview = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
@@ -80,7 +80,6 @@ if(DK_GetJavascript() == "Duktape"){
 		DKLog("Creating CEF -> GUI \n", DKINFO);
 		var width = 800;
 		var height = 600;
-		//DKLog("DKApp_url = "+DKApp_url+"\n", DKINFO);
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
