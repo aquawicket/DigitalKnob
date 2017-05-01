@@ -119,18 +119,18 @@ function LoadPage()
 			});
 		});
 	});
+	
+	DKCreate("DKDebug/DKDebug.js", function(){});
+	
 	//DKCreate("DKFileMenu/DKFileMenu.js", function(){
 	//	DKFileMenu_Widget("body");
 	//});
 	
-	DKCreate("DKDebug/DKDebug.js", function(){});
-	/*
-	if(DK_GetBrowser() != "CEF"){ 
-		DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
-			var id = DKGoogleAd_CreateAd("body", "100%", "100rem");
-		});
-	}
-	*/
+	//if(DK_GetBrowser() != "CEF"){ 
+	//	DKCreate("DKGoogleAd/DKGoogleAd.js", function(){
+	//		var id = DKGoogleAd_CreateAd("body", "100%", "100rem");
+	//	});
+	//}
 	
 	//DKCreate("DKUpdate");
 }

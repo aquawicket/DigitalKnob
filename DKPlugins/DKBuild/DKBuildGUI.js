@@ -2,8 +2,6 @@
 function DKBuildGUI_Init()
 {
 	//DKLog("DKBuildGUI_Init()\n", DKDEBUG);
-	DKCreate("DKWindow");
-	DKCreate("DKRocket");
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
