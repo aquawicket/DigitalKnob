@@ -397,25 +397,25 @@ bool RocketSDL2SystemInterface::LogMessage(Rocket::Core::Log::Type type, const R
 	switch(type)
 	{
 	case Rocket::Core::Log::LT_ALWAYS:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
 		break;
 	case Rocket::Core::Log::LT_ERROR:
-		DKLog(DKString(message.CString())+"\n", DKERROR);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKERROR);
 		break;
 	case Rocket::Core::Log::LT_ASSERT:
-		DKLog(DKString(message.CString())+"\n", DKERROR);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKERROR);
 		break;
 	case Rocket::Core::Log::LT_WARNING:
-		DKLog(DKString(message.CString())+"\n", DKWARN);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKWARN);
 		break;
 	case Rocket::Core::Log::LT_INFO:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
 		break;
 	case Rocket::Core::Log::LT_DEBUG:
-		DKLog(DKString(message.CString())+"\n", DKDEBUG);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKDEBUG);
 		break;
     case Rocket::Core::Log::LT_MAX:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
         break;
 	};
 
