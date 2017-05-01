@@ -26,12 +26,12 @@ function DKSolution_OnEvent(event)
 	DKSolution_Select(DK_GetId(event));
 
 	if(DK_Type(event, "click")){
-		StopPropagation(event);
+		DKStopPropagation(event);
 	}
 	
 	if(DK_Type(event, "contextmenu")){
 		//DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);	
-		StopPropagation(event);
+		DKStopPropagation(event);
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
 			if(!file){
