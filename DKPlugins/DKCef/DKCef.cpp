@@ -19,7 +19,7 @@
 //////////////////
 void DKCef::Init()
 {
-	DKLog("DKCef::Init()\n", DKDEBUG);
+	DKLog("DKCef::Init()\n", DKINFO);
 	
 	cefHandler = NULL;
 	DKCreate("DKCefJS");

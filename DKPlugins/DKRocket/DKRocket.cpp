@@ -11,6 +11,7 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 /////////////////////
 void DKRocket::Init()
 {
+	DKLog("DKRocket::Init() \n", DKINFO);
 	DKCreate("DKRocketJS");
 	document = NULL;
 
