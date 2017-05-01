@@ -401,8 +401,8 @@ function DK_Value(event, id)
 	return false;
 }
 
-/////////////////////////////////
-function DKStopPropagation(event)
+//////////////////////////////////
+function DK_StopPropagation(event)
 {
 	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
 	if(event.stopPropagation) {
