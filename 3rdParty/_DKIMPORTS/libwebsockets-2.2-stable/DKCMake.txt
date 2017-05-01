@@ -5,14 +5,18 @@ DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
 
 ### LINK ###
 ##DKINCLUDE(${WEBSOCKETS}/include)
-##WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/lib/.libs/libWEBSOCKETS.lib)
-##WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/lib/.libs/libWEBSOCKETS.lib)
-##APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG}/lib/.libs/libWEBSOCKETS.a)
-##APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE}/lib/.libs/libWEBSOCKETS.a)
-##LINUX_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/lib/.libs/libWEBSOCKETS.a)
-##LINUX_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/lib/.libs/libWEBSOCKETS.a)
-##ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/Debug/obj/local/armeabi-v7a/libWEBSOCKETS.a)
-##ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/Release/obj/local/armeabi-v7a/libWEBSOCKETS.a)
+WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/SDL_mixer.lib)
+WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/SDL_mixer.lib)
+##APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/SDL_mixer.a)
+##APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/SDL_mixer.a)
+##LINUX_DEBUG_LIB(${WEBSOCKETS}/linux64/Debug/lib/SDL_mixer.a)
+##LINUX_RELEASE_LIB(${WEBSOCKETS}/linux64/Release/lib/SDL_mixer.a)
+##ANDROID_DEBUG_LIB(${WEBSOCKETS}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+##ANDROID_RELEASE_LIB(${WEBSOCKETS}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libSDL2_mixer.a)
 
 
 ### COMPILE ###
+DKSETPATH(${WEBSOCKETS}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON ${WEBSOCKETS})
+WIN32_VS_DEBUG(libwebsockets libwebsockets.sln WEBSOCKETS)
+WIN32_VS_RELEASE(libwebsockets libwebsockets.sln WEBSOCKETS)
