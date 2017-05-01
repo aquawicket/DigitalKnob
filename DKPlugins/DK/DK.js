@@ -401,6 +401,17 @@ function DK_Value(event, id)
 	return false;
 }
 
+/////////////////////////////////
+function DKStopPropagation(event)
+{
+	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
+	if(event.stopPropagation) {
+        event.stopPropagation();
+    } else {
+        event.cancelBubble = true;
+    }
+}
+
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {

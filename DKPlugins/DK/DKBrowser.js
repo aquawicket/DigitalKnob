@@ -430,6 +430,7 @@ function PreventDefault(event)
     }
 }
 
+/*
 ///////////////////////////////
 function StopPropagation(event)
 {
@@ -440,6 +441,7 @@ function StopPropagation(event)
         event.cancelBubble = true;
     }
 }
+*/
 
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
