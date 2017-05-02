@@ -1,0 +1,64 @@
+##DKDEPEND(zlib-1.2.8)
+##DKDEPEND(libpng-1.7.0beta34)
+##DKDEPEND(jpeg-6b)
+
+
+### INSTALL ###
+DKINSTALL(${DKONLINE}/Libs/libvncserver-master.zip libvncserver-LibVNCServer-master)
+DKSET(VNCSERVER ${3RDPARTY}/libvncserver-LibVNCServer-master)
+
+
+### LINK ###
+DKINCLUDE(${VNCSERVER})
+DKINCLUDE(${VNCSERVER}/examples)
+DKINCLUDE(${VNCSERVER}/${OS}/Release)
+WIN_DEBUG_LIB(${VNCSERVER}/${OS}/lib/Debug/libvncserver.lib)
+WIN_RELEASE_LIB(${VNCSERVER}/${OS}/lib/Release/libvncserver.lib)
+#MAC_DEBUG_LIB(${VNCSERVER}/${OS}/lib/${DEBUG}/libvncserver.a)
+#MAC_RELEASE_LIB(${VNCSERVER}/${OS}/lib/${RELEASE}/libvncserver.a)
+#IOSSIM_DEBUG_LIB(${VNCSERVER}/${OS}/${DEBUG}/lib/.libs/libvncserver.a)
+#IOSSIM_RELEASE_LIB(${VNCSERVER}/${OS}/${RELEASE}/lib/.libs/libvncserver.a)
+#LINUX_DEBUG_LIB(${VNCSERVER}/${OS}/Debug/libvncserver.a)
+#LINUX_RELEASE_LIB(${VNCSERVER}/${OS}/Release/libvncserver.a)
+#ANDROID_DEBUG_LIB(${VNCSERVER}/${OS}/Debug/obj/local/armeabi-v7a/libvncserver.a)
+#ANDROID_RELEASE_LIB(${VNCSERVER}/${OS}/Release/obj/local/armeabi-v7a/libvncserver.a)
+
+
+
+DKSETPATH(${VNCSERVER}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${VNCSERVER})
+WIN32_VS_DEBUG(libvncserver-LibVNCServer-master LibVNCServer.sln vncserver)
+WIN32_VS_RELEASE(libvncserver-LibVNCServer-master LibVNCServer.sln vncserver)
+
+DKSETPATH(${VNCSERVER}/${OS})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${VNCSERVER})
+WIN64_VS_DEBUG(libvncserver-LibVNCServer-master LibVNCServer.sln vncserver)
+WIN64_VS_RELEASE(libvncserver-LibVNCServer-master LibVNCServer.sln vncserver)
+
+DKSETPATH(${VNCSERVER}/${OS})
+MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${VNCSERVER})
+MAC64_XCODE_DEBUG(libvncserver-LibVNCServer-master libvncserver)
+MAC64_XCODE_RELEASE(libvncserver-LibVNCServer-master libvncserver)
+
+DKSETPATH(${VNCSERVER}/${OS})
+IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS ${VNCSERVER})
+IOS_XCODE_DEBUG(libvncserver-LibVNCServer-master libvncserver)
+IOS_XCODE_RELEASE(libvncserver-LibVNCServer-master libvncserver)
+
+DKSETPATH(${VNCSERVER}/${OS})
+IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR ${VNCSERVER})
+IOSSIM_XCODE_DEBUG(libvncserver-LibVNCServer-master libvncserver)
+IOSSIM_XCODE_RELEASE(libvncserver-LibVNCServer-master libvncserver)
+
+DKSETPATH(${VNCSERVER}/${OS}/${DEBUG})
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${VNCSERVER})
+LINUX_DEBUG_COMMAND(make vncserver)
+##LINUX_DEBUG_COMMAND(make vncclient)
+
+DKSETPATH(${VNCSERVER}/${OS}/${RELEASE})
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${VNCSERVER})
+LINUX_RELEASE_COMMAND(make vncserver)
+##LINUX_RELEASE_COMMAND(make vncclient)
+
+ANDROID_NDK_DEBUG(libvncserver-LibVNCServer-master)
+ANDROID_NDK_RELEASE(libvncserver-LibVNCServer-master)
