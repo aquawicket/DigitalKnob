@@ -4,7 +4,9 @@ DKSET(VNCSERVER ${3RDPARTY}/libvncserver-LibVNCServer-0.9.11)
 
 
 ### LINK ###
-DKINCLUDE(${VNCSERVER}/include)
+DKINCLUDE(${VNCSERVER})
+DKINCLUDE(${VNCSERVER}/${OS}/Release)
+SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lresolv")
 #WIN_DEBUG_LIB(${VNCSERVER}/${OS}/lib/Debug/libvncserver.lib)
 #WIN_RELEASE_LIB(${VNCSERVER}/${OS}/lib/Release/libvncserver.lib)
 #MAC_DEBUG_LIB(${VNCSERVER}/${OS}/lib/${DEBUG}/libvncserver.a)
