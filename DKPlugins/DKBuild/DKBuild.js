@@ -414,6 +414,7 @@ function DKBuild_GitCommit()
 	DK_Execute(GIT +" config user.name \"dkuser\"");
 	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
 	DK_Execute(GIT +" commit -a -m \"commit from git\"");
+	DK_Execute(GIT +" config credential.helper store"); //store credentials 
 	DK_Execute(GIT +" push");
 	
 	//Multipe user folders
@@ -431,6 +432,7 @@ function DKBuild_GitCommit()
 			DK_Execute(GIT +" config user.name \"dkuser\"");
 			DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
 			DK_Execute(GIT +" commit -a -m \"commit from git\"");
+			DK_Execute(GIT +" config credential.helper store"); //store credentials 
 			DK_Execute(GIT +" push");
 		}
 	}
