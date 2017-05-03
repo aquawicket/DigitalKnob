@@ -173,12 +173,12 @@ function DKBuild_InstallCmake()
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.3.2-win32-x86.exe", datapath);
-		DK_System(datapath+"/cmake-3.3.2-win32-x86.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.4.1-win32-x86.exe", datapath);
+		DK_System(datapath+"/cmake-3.4.1-win32-x86.exe");
 	}
 	else if(DK_GetOS() == "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.3.2-win32-x86.exe", datapath);
-		DK_System(datapath+"/cmake-3.3.2-win32-x86.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.4.1-win32-x86.exe", datapath);
+		DK_System(datapath+"/cmake-3.4.1-win32-x86.exe");
 	}
 	else if(DK_GetOS() == "Mac"){
 		//TODO
