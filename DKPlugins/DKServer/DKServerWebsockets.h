@@ -7,7 +7,7 @@
 #ifndef DKServerWebsockets_H
 #define DKServerWebsockets_H
 
-#include <libwebsockets.h>
+//#include <libwebsockets.h>
 
 
 ///////////////////////////////////////////
