@@ -12,5 +12,5 @@
 ### Build All - (don't erase cmake files, but build the app and it's dependencies)
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
 INCLUDE(DKCMake/PROCESS.cmake)
