@@ -1,6 +1,6 @@
 var USE_SDL = 1;
 var USE_ROCKET = 1;
-var USE_CEF = 0;
+var USE_CEF = 1;
 var USE_WEBVIEW = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://digitalknob.com/DKIDE/index.html";
