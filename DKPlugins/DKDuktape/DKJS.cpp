@@ -528,8 +528,17 @@ int DKJS::GetType(duk_context* ctx)
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
-	//TODO
-	return 0;
+	//FIXME - We may need to call DKWidget_GetValue();
+	if(DKValid("DKWidget")){
+		DKLog("DKJS::GetValue(): DKWidget is valid", DKINFO);
+		//TODO
+	}
+	DKString evt = duk_require_string(ctx, 0);
+	DKStringArray arry;
+	toStringArray(arry, evt, ",");
+	if (arry.size() < 3) { return 0; }
+	duk_push_string(ctx, arry[1].c_str());
+	return 1;
 }
 
 /////////////////////////////////////
