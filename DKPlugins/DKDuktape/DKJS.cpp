@@ -528,15 +528,22 @@ int DKJS::GetType(duk_context* ctx)
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
-	//FIXME - We may need to call DKWidget_GetValue();
-	if(DKValid("DKWidget")){
-		DKLog("DKJS::GetValue(): DKWidget is valid", DKINFO);
-		//TODO
-	}
 	DKString evt = duk_require_string(ctx, 0);
+	DKLog("DKJS::GetValue("+evt+")\n", DKINFO);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
-	if (arry.size() < 3) { return 0; }
+	if(arry.size() < 3){ 
+		if(DKValid("DKWidget,DKWidget0")){
+			DKString rval = DKDuktape::RunJavascript("DKWidget_GetValue(\""+evt+"\");");
+			if(rval.empty()){
+				return 0;
+			}
+			duk_push_string(ctx, rval.c_str());
+			return 1;
+		}
+		DKLog("DKJS::GetValue(" + evt + "): failed. \n", DKINFO);
+		return 0;
+	}
 	duk_push_string(ctx, arry[1].c_str());
 	return 1;
 }

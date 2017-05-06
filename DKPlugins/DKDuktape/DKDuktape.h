@@ -17,7 +17,7 @@ public:
 	static void AttachFunction(const DKString& name, duk_c_function func, int nargs);
 	static void OnEvent(DKEvent* event);
 	static void Reload();
-	static void RunJavascript(const DKString& code);
+	static DKString RunJavascript(const DKString& code);
 
 	//TODO
 	//static void CreateObject(const DKString& name);

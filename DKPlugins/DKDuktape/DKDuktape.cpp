@@ -241,11 +241,17 @@ void DKDuktape::Reload()
 	LoadFile(user);
 }
 
-///////////////////////////////////////////////////
-void DKDuktape::RunJavascript(const DKString& code)
+///////////////////////////////////////////////////////
+DKString DKDuktape::RunJavascript(const DKString& code)
 {
-	DKLog("RunJavascript("+code+")\n", DKDEBUG);
+	DKLog("RunJavascript("+code+")\n", DKINFO);
 	duk_eval_string(DKDuktape::ctx, code.c_str());
+	DKString rval = duk_get_string(ctx, -1);
+	if(!rval.empty()){
+		DKLog("DKDuktape::RunJavascript(" + code + "): rval = " + rval + "\n", DKINFO);
+		return rval;
+	}
+	return "";
 }
 
 //////////////////////////////////////////////////////////////////
