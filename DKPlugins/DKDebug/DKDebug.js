@@ -4,7 +4,6 @@ var key_history = [];
 function DKDebug_Init()
 {
 	//DKLog("DKDebug_Init()\n", DKINFO);
-	DKCreate("DKFrame/DKFrame.js", function(){});
 	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
 }
 
@@ -17,7 +16,7 @@ function DKDebug_End()
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
-	DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	//DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Type(event, "keypress")){
 		//DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n", DKINFO); 
@@ -29,7 +28,7 @@ function DKDebug_OnEvent(event)
 ////////////////////////////
 function DKDebug_LogKey(key)
 {
-	DKLog("DKDebug_LogKey("+key+")\n", DKINFO);
+	//DKLog("DKDebug_LogKey("+key+")\n", DKINFO);
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = key;
 }

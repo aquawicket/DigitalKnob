@@ -1,4 +1,4 @@
-var USE_SDL = 0;
+var USE_SDL = 1;
 var USE_ROCKET = 0;
 var USE_CEF = 1;
 var USE_WEBVIEW = 1;
@@ -95,7 +95,6 @@ function LoadPage()
 {
 	//DKLog("Loading page... \n", DKINFO);
 	DKWidget_SetProperty("body","background-color","grey");
-	DKCreate("DKWidget/DKWidget.js", function(){});
 	DKCreate("DKScale/DKScale.js", function(){});
 	DKCreate("DKBuild/DKBuild.js", function(){
 		DKCreate("DKDev/DKDev.js", function(){});

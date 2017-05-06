@@ -1,4 +1,4 @@
-
+//BROWSER
 
 function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKDEBUG); return color; }
