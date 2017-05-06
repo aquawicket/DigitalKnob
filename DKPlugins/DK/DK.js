@@ -341,9 +341,8 @@ function DK_GetId(event)
 function DK_GetValue(event)
 {
 	//TODO
-	DKLog("GetValue("+event+") \n", DKDEBUG);
-
-	return;
+	//DKLog("GetValue("+event+") \n", DKDEBUG);
+	return DKWidget_GetValue(event);
 }
 
 ////////////////////////////////
