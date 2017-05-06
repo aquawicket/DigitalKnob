@@ -79,8 +79,8 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
-	//DKCreate("DKTray/DKTray.js", function(){});
-	//DKCreate("DKDebug/DKDebug.js", function(){});
+	DKCreate("DKTray/DKTray.js", function(){});
+	DKCreate("DKDebug/DKDebug.js", function(){});
 }
 else{  //V8 or WEBVIEW
 	LoadPage();
