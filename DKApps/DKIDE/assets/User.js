@@ -1,5 +1,5 @@
-var USE_SDL = 0;
-var USE_ROCKET = 0;
+var USE_SDL = 1;
+var USE_ROCKET = 1;
 var USE_CEF = 1;
 var USE_WEBVIEW = 1;
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
