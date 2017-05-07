@@ -13,5 +13,5 @@ function DKLoading_End()
 /////////////////////////////////
 function DKLoading_OnEvent(event)
 {
-	DKLog("DKLoading_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKLoading_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }

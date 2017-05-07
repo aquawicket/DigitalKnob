@@ -23,7 +23,7 @@ function DKConsole_End()
 /////////////////////////////////
 function DKConsole_OnEvent(event)
 {	
-	DKLog("DKConsole_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKConsole_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 
 	if(DK_Id(event, "DKConsole_Clear")){
 		DKWidget_SetInnerHtml("DKConsole_Content","");
@@ -33,11 +33,11 @@ function DKConsole_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "color")){
-		DKConsole_color = DKWidget_GetValue(event);
+		DKConsole_color = DK_GetValue(event);
 	}
 	
 	if(DK_Type(event, "notify")){
-		DKConsole_Notify(DKWidget_GetValue(event));
+		DKConsole_Notify(DK_GetValue(event));
 	}
 }
 

@@ -19,7 +19,7 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"Git Update")){
 		DKThread_DKQueue("GitUpdate","DKBuild_GitUpdate();");

@@ -14,7 +14,7 @@ function DKScale_End()
 //////////////////////////////
 function DKScale_OnEvent(event)
 {
-	DKLog("DKScale_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKScale_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "resize")){
 		DKScale_Resize();

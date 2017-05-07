@@ -31,7 +31,7 @@ function DKRocketAudio_End()
 /////////////////////////////////////
 function DKRocketAudio_OnEvent(event)
 {
-	DKLog("DKRocketAudio_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKRocketAudio_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "DKRocketAudio_playpause")){
 		DKRocketAudio_playpause();
@@ -50,9 +50,9 @@ function DKRocketAudio_OnEvent(event)
 		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/play.png");
 	}
 	if(DK_Type(event, "position")){
-		//DKLog("position = "+DKWidget_GetValue(event)+"\n");
+		//DKLog("position = "+DK_GetValue(event)+"\n");
 		var minute = "0:";
-		var second = ("0" + DKWidget_GetValue(event)).slice (-2);
+		var second = ("0" + DK_GetValue(event)).slice (-2);
 		DKWidget_SetValue("DKRocketAudio_time", minute+second);
 	}
 }

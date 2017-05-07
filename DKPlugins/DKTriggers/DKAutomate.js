@@ -40,10 +40,10 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "keydown")){
-		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
+		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	
 	if(DK_Id(event, "DKA-NewButton")){
@@ -74,8 +74,8 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(DK_IdLike(event, "Trigger")){
-		DKAutomate_SelectValue(DKWidget_GetValue(event));
-		DKAutomate_UpdateSelection(DKWidget_GetValue(event));
+		DKAutomate_SelectValue(DK_GetValue(event));
+		DKAutomate_UpdateSelection(DK_GetValue(event));
 	}
 	
 	if(DK_Id(event, "CancelButton")){

@@ -109,10 +109,10 @@ function DKMenuRightEdit_End()
 ///////////////////////////////////////
 function DKMenuRightEdit_OnEvent(event)
 {
-	DKLog("DKMenuRightEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKMenuRightEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "SetElement")){
-		DKMenuRightEdit_SetElement(DKWidget_GetValue(event));
+		DKMenuRightEdit_SetElement(DK_GetValue(event));
 	}
 	if(DK_Id(event,"InfoTab")){
 		DKWidget_Toggle("InfoSection");
@@ -183,78 +183,78 @@ function DKMenuRightEdit_OnEvent(event)
 		});
 	}
 	if(DK_Type(event,"background_color")){
-		var color = DKWidget_GetValue(event);
+		var color = DK_GetValue(event);
 		color = DKWidget_ValidateColor(color);
 		//DKLog("\n\n"+color+"\n")
 		DKWidget_SetProperty("DKBGColor", "background-color", color);
 		DKWidget_SetProperty(MenuRight_element, "background-color", color);
 	}
 	if(DK_Type(event,"foreground_color")){
-		var color = DKWidget_GetValue(event);
+		var color = DK_GetValue(event);
 		color = DKWidget_ValidateColor(color);
 		DKWidget_SetProperty("DKFGColor", "background-color", color);
 		DKWidget_SetProperty(MenuRight_element, "color", color);
 	}
 	if(DK_Id(event, "InfoFile")){
-		//DKLog(DKWidget_GetValue(event)+"\n");
-		DKWidget_SetFile(MenuRight_element, DKWidget_GetValue(event));
+		//DKLog(DK_GetValue(event)+"\n");
+		DKWidget_SetFile(MenuRight_element, DK_GetValue(event));
 	}
 	if(DK_Id(event, "InfoId")){
-		DKWidget_SetAttribute(MenuRight_element, "id", DKWidget_GetValue(event));
-		MenuRight_element = DKWidget_GetValue(event);
+		DKWidget_SetAttribute(MenuRight_element, "id", DK_GetValue(event));
+		MenuRight_element = DK_GetValue(event);
 	}
 	if(DK_Id(event, "width_box")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "width", value);
 	}
 	if(DK_Id(event, "height_box")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "height", value);
 	}
 	if(DK_Id(event, "top_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "top", value);
 	}
 	if(DK_Id(event, "left_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "left", value);
 	}
 	if(DK_Id(event, "right_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "right", value);
 	}
 	if(DK_Id(event, "bottom_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "bottom", value);
 	}
 	if(DK_Id(event, "topMargin_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "margin-top", value);
 	}
 	if(DK_Id(event, "leftMargin_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "margin-left", value);
 	}
 	if(DK_Id(event, "rightMargin_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "margin-right", value);
 	}
 	if(DK_Id(event, "bottomMargin_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "margin-bottom", value);
 	}
 	if(DK_Id(event, "FontSize_Textbox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		value = DKMenuRightEdit_ValidatePosition(value);
 		DKWidget_SetProperty(MenuRight_element, "font-size", value);
 	}
@@ -295,11 +295,11 @@ function DKMenuRightEdit_OnEvent(event)
 		DKMenuRightEdit_SetTextAlign("justify");
 	}
 	if(DK_Id(event,"ValueBox")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		DKWidget_SetValue(MenuRight_element, value);
 	}
 	if(DK_Id(event,"InnerHtmlText")){
-		DKWidget_SetInnerHtmlString(MenuRight_element, DKWidget_GetValue(event));
+		DKWidget_SetInnerHtmlString(MenuRight_element, DK_GetValue(event));
     }
 }
 

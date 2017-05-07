@@ -18,7 +18,7 @@ function DKMenuRightWeb_End()
 ////////////////////////////////////
 function DKMenuRightWeb_OnEvent(event)
 {
-	DKLog("DKMenuRightWeb_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKMenuRightWeb_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "ConnectButton")){
 		DKMenuRightWeb_Connect();

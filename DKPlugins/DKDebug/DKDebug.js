@@ -19,7 +19,7 @@ function DKDebug_OnEvent(event)
 	//DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Type(event, "keypress")){
-		//DKLog("Unicode CHARACTER code: "+DKWidget_GetValue(event)+"\n", DKINFO); 
+		//DKLog("Unicode CHARACTER code: "+DK_GetValue(event)+"\n", DKINFO); 
 		DKDebug_LogKey(DK_GetValue(event));
 		DKDebug_CheckKeys();
 	}

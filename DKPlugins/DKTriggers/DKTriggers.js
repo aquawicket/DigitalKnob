@@ -61,21 +61,21 @@ function DKTriggers_End()
 /////////////////////////////////
 function DKTrigger_OnEvent(event)
 {
-	DKLog("DKTrigger_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKTrigger_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "gui")){ //C++
-		var arry = DKWidget_GetValue(event).split(",");
+		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessGui(arry[0], arry[1]);
 	}
 	if(DK_Type(event, "midi")){ //C++
-		var arry = DKWidget_GetValue(event).split(",");
+		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessMidi(arry[0], arry[1], arry[2]);
 	}
 	if(DK_Type(event, "keydown")){
-		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
+		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keyup")){
-		DKTrigger_ProcessKeyUp(DKWidget_GetValue(event)); //JS keydown
+		DKTrigger_ProcessKeyUp(DK_GetValue(event)); //JS keydown
 	}
 	if(DK_Type(event, "resize")){
 		DKTrigger_ProcessWindowResize(); 

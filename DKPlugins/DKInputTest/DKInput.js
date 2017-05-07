@@ -51,12 +51,12 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
-	DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(event.type){ //Browser
-		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event));
+		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
 		if(DK_GetType(event) != "mousemove"){
-			DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+"\n", DKINFO);
+			DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n", DKINFO);
 		}
 	}
 	else{ //App
@@ -67,30 +67,30 @@ function DKInput_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "keypress")){
-		DKWidget_SetInnerHtml("charcode", "Unicode CHARACTER code: "+DKWidget_GetValue(event));
-		//DKInput_ProcessKeyPress(DKWidget_GetValue(event));
+		DKWidget_SetInnerHtml("charcode", "Unicode CHARACTER code: "+DK_GetValue(event));
+		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keydown")){
-		DKWidget_SetInnerHtml("keycode", "Unicode KEY code: "+DKWidget_GetValue(event));
-		DKInput_ProcessKeyDown(DKWidget_GetValue(event));
+		DKWidget_SetInnerHtml("keycode", "Unicode KEY code: "+DK_GetValue(event));
+		DKInput_ProcessKeyDown(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keyup")){
-		DKInput_ProcessKeyUp(DKWidget_GetValue(event));
+		DKInput_ProcessKeyUp(DK_GetValue(event));
 	}
 	if(DK_Type(event, "mousedown")){
-		DKInput_ProcessMouseDown(DKWidget_GetValue(event));
+		DKInput_ProcessMouseDown(DK_GetValue(event));
 		if(DK_GetId(event) != "GLOBAL"){
 			DKInput_Highlight(DK_GetId(event));
 		}
 	}
 	if(DK_Type(event, "mouseup") || DK_Type(event, "click")){
-		DKInput_ProcessMouseUp(DKWidget_GetValue(event));
+		DKInput_ProcessMouseUp(DK_GetValue(event));
 		if(DK_GetId(event) != "GLOBAL"){
 			DKInput_UnHighlight(DK_GetId(event));
 		}
 	}
 	if(DK_Type(event, "mousemove")){
-		var xy = DKWidget_GetValue(event);
+		var xy = DK_GetValue(event);
 		var arry = xy.split(",");
 		DKWidget_SetInnerHtml("mousex", "Mouse X: "+arry[0]);
 		DKWidget_SetInnerHtml("mousey", "Mouse Y: "+arry[1]);
@@ -98,7 +98,7 @@ function DKInput_OnEvent(event)
 		DKWidget_SetInnerHtml("screeny", "Screen Y: "+arry[3]);
 	}
 	if(DK_Type(event, "wheel")){
-		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DKWidget_GetValue(event));
+		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
 	}
 	
 	//element events

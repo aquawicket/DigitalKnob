@@ -40,7 +40,7 @@ function DKSolutionMenu_End()
 //////////////////////////////////////
 function DKSolutionMenu_OnEvent(event)
 {
-	DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"DKSolutionMenu_Open")){
 		DKSolutionMenu_Open();

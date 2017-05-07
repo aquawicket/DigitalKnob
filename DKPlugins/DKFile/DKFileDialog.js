@@ -35,17 +35,17 @@ function DKFileDialog_End()
 ////////////////////////////////////
 function DKFileDialog_OnEvent(event)
 {	
-	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 
 	if(DK_IdLike(event, "DKFileDialogDrive")){
-		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
+		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFolder")){
 		DKLog("DKFileDialogFolder", DKINFO);
-		DKFileDialog_OpenFolder(DKWidget_GetValue(event));
+		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFile")){
-		DKFileDialog_OpenFile(DKWidget_GetValue(event));
+		DKFileDialog_OpenFile(DK_GetValue(event));
 	}
 
 	if(DK_Id(event, "DKFileDialogUp")){
@@ -75,7 +75,7 @@ function DKFileDialog_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "GetFile")){
-		var params = DKWidget_GetValue(event).split(",");
+		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		event_data1 = params[2];

@@ -15,7 +15,7 @@ function DKFileAssociation_End()
 ////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }
 
 /////////////////////////////////////

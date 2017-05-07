@@ -38,7 +38,7 @@ function DKMenuRight_End()
 ///////////////////////////////////
 function DKMenuRight_OnEvent(event)
 {
-	DKLog("DKMenuRight_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKMenuRight_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "AppImage")){
 		DKMenuRight_SetPanel("App");
@@ -67,7 +67,7 @@ function DKMenuRight_OnEvent(event)
 	}
 	if(DK_Type(event, "SetPanel")){
 		DKLog("DKMenuRight_OnEvent("+event+") \n", DKDEBUG);
-		DKMenuRight_SetPanel(DKWidget_GetValue(event));
+		DKMenuRight_SetPanel(DK_GetValue(event));
 	}
 }
 

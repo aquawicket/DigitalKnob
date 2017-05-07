@@ -18,7 +18,7 @@ function BugReport_End()
 /////////////////////////////////
 function BugReport_OnEvent(event)
 {
-	DKLog("BugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("BugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "click")){
 		BugReport_SendBugReport();

@@ -21,13 +21,13 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
-	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){});
 	}
 	//if(DK_Type(event,"SetFile")){
-	//	DKNotepad_Open(DKWidget_GetValue(event));
+	//	DKNotepad_Open(DK_GetValue(event));
 	//}
 	if(DK_Id(event,"DKNotepad_File")){
 		DKCreate("DKNotepad/DKNotepadFile.js", function(){});

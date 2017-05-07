@@ -68,7 +68,7 @@ function DKDev_Ignore(id)
 /////////////////////////////
 function DKDev_OnEvent(event)
 {
-	//DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(devmode == false){ return; }
 	
@@ -150,12 +150,12 @@ function DKDev_OnEvent(event)
 		DKDev_SaveHtmlFile(stored_element);
 	}
 	if(DK_Type(event, "OpenFile")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		DKLog("OpenFile: "+value+" \n", DKDEBUG)
 		DKDev_OpenFile(value);
 	}
 	if(DK_Type(event, "FileChoice")){
-		var value = DKWidget_GetValue(event);
+		var value = DK_GetValue(event);
 		DKLog("FileChoice: "+value+"\n", DKDEBUG);
 	}
 }

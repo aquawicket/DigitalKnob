@@ -14,15 +14,15 @@ function DKMidiDialog_End()
 ////////////////////////////////////
 function DKMidiDialog_OnEvent(event)
 {
-	DKLog("DKMidiDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKMidiDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 
 	if(DK_IdLike(event, "DKMidiDialogInput")){
-		DKMidiDialog_ToggleInput(DKWidget_GetValue(event));
+		DKMidiDialog_ToggleInput(DK_GetValue(event));
 		return;
 	}
 
 	if(DK_IdLike(event, "DKMidiDialogOutput")){
-		DKMidiDialog_ToggleOutput(DKWidget_GetValue(event));
+		DKMidiDialog_ToggleOutput(DK_GetValue(event));
 		return;
 	}
 }

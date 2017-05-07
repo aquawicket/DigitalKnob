@@ -26,10 +26,10 @@ function DKColorPicker_End()
 /////////////////////////////////////
 function DKColorPicker_OnEvent(event)
 {
-	DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "GetColor")){
-		var params = DKWidget_GetValue(event).split(",");
+		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		//DKLog("event_id:"+event_id);

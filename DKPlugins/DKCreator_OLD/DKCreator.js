@@ -54,7 +54,7 @@ function DKCreator_Init()
 ///////////////////////////////
 function DKCreator_OnEvent(event)
 {
-	DKLog("DKCreator_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKCreator_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"spin")){
 		DK_Crash();
@@ -144,8 +144,8 @@ function DKCreator_OnEvent(event)
 	}
 	
 	if(DK_Type(event,"NewApp")){
-		DKSendEvent("DKCreator", "NewApp", DKWidget_GetValue(event));
-		DKWidget_SetValue("AppList", DKWidget_GetValue(event));
+		DKSendEvent("DKCreator", "NewApp", DK_GetValue(event));
+		DKWidget_SetValue("AppList", DK_GetValue(event));
 		DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKCreator::GetAppPath", DKWidget_GetValue("AppList"));

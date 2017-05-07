@@ -37,7 +37,7 @@ function DKTray_End()
 //////////////////////////////
 function DKTray_OnEvent(event)
 {
-	//DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Type(event, "doubleclick")){

@@ -27,7 +27,7 @@ function DKHook_End()
 //////////////////////////////
 function DKHook_OnEvent(event)
 {
-	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "getvalue")){
 		var value = DKHook_GetValue();

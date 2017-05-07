@@ -56,7 +56,7 @@ function DKBuildGUI_End()
 //////////////////////////////////
 function DKBuildGUI_OnEvent(event)
 {
-	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"AppList")){
 		//if(DK_Type(event,"click")){
@@ -84,8 +84,8 @@ function DKBuildGUI_OnEvent(event)
 	
 	/*
 	if(DK_Type(event,"NewApp")){
-		DKSendEvent("DKBuildGUI", "NewApp", DKWidget_GetValue(event));
-		DKWidget_SetValue("AppList", DKWidget_GetValue(event));
+		DKSendEvent("DKBuildGUI", "NewApp", DK_GetValue(event));
+		DKWidget_SetValue("AppList", DK_GetValue(event));
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));

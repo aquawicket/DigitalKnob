@@ -19,7 +19,7 @@ function DKTooltip_End()
 /////////////////////////////////
 function DKTooltip_OnEvent(event)
 {
-	DKLog("DKTooltip_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKTooltip_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Type(event, "mouseout")){
 		DKClose("DKTooltip/DKTooltip.js");
@@ -28,6 +28,6 @@ function DKTooltip_OnEvent(event)
 		//Get mouse x, y
 		DKWidget_SetProperty("DKTooltip.html", "top", mouseX + "px");
 		DKWidget_SetProperty("DKTooltip.html", "left", mouseY + "px");
-		DKWidget_SetInnerHtml("DKTooltipText", DKWidget_GetValue(event));
+		DKWidget_SetInnerHtml("DKTooltipText", DK_GetValue(event));
 	}
 }

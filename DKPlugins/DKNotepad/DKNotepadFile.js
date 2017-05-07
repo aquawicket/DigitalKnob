@@ -25,13 +25,13 @@ function DKNotepadFile_End()
 /////////////////////////////////////
 function DKNotepadFile_OnEvent(event)
 {
-	DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"DKNotepadFile_Open")){
 		DKNotepadFile_Open();
 	}
 	if(DK_Type(event, "OpenFile")){
-		var file = DKWidget_GetValue(event);
+		var file = DK_GetValue(event);
 		DKLog("OpenFile: "+file+" \n", DKDEBUG)
 		DKNotepad_Open(file)
 	}

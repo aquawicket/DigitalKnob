@@ -18,7 +18,7 @@ function DKAutomate2_End()
 ///////////////////////////////////
 function DKAutomate2_OnEvent(event)
 {
-	DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DKWidget_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"NewCause")){
 		DKTrigger_NewCause();
@@ -40,41 +40,41 @@ function DKAutomate2_OnEvent(event)
 	}
 	if(DK_Id(event,"TriggerName")){
 		if(!current_trigger){ return; }
-		DKTrigger_RenameTrigger(current_trigger, DKWidget_GetValue(event))
-		current_trigger = DKWidget_GetValue(event);
+		DKTrigger_RenameTrigger(current_trigger, DK_GetValue(event))
+		current_trigger = DK_GetValue(event);
 		DKSendEvent("DKAutomate.html", "UpdateValues", "");
 	}
 	if(DK_IdLike(event,"CauseCommand")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		causes[Number(num)].command = DKWidget_GetValue(event);
+		causes[Number(num)].command = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar1")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		causes[Number(num)].var1 = DKWidget_GetValue(event);
+		causes[Number(num)].var1 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar2")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		causes[Number(num)].var2 = DKWidget_GetValue(event);
+		causes[Number(num)].var2 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar3")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		causes[Number(num)].var3 = DKWidget_GetValue(event);
+		causes[Number(num)].var3 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectCommand")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		effects[Number(num)].command = DKWidget_GetValue(event);
+		effects[Number(num)].command = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar1")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		effects[Number(num)].var1 = DKWidget_GetValue(event);
+		effects[Number(num)].var1 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar2")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		effects[Number(num)].var2 = DKWidget_GetValue(event);
+		effects[Number(num)].var2 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar3")){
 		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
-		effects[Number(num)].var3 = DKWidget_GetValue(event);
+		effects[Number(num)].var3 = DK_GetValue(event);
 	}
 	
 	if(DK_Type(event,"SelectTrigger")){
