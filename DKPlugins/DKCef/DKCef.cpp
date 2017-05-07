@@ -303,13 +303,14 @@ bool DKCef::NewBrowser()
 #endif
 		window_info.width = 800;
 		window_info.height = 600;
-		//CefBrowserHost::CreateBrowser(window_info, cefHandler, homepage, browserSettings, NULL);
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
+		browsers.push_back(_browser);
+		current_browser = browsers[0];
 		
 #ifdef LINUX
 		gdk_init(NULL, NULL);
-		GdkWindow* gdk_window = gdk_window_foreign_new(_browser->GetHost()->GetWindowHandle());
+		GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
 		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n", DKINFO);
 		      return false;
@@ -490,6 +491,12 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 ///////////////////////////////////////////
 void DKCef::RunJavascript(DKString& string)
 {
-	CefRefPtr<CefFrame> frame = DKCef::Get("")->current_browser->GetMainFrame();
+	DKCef* dkcef = DKCef::Get("");
+	if (!dkcef) {
+		DKLog("DKCef::RunJavascript(" + string + "): dkcef invalid \n", DKERROR);
+		return;
+	}
+
+	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 }
