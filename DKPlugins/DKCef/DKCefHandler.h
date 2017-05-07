@@ -11,7 +11,8 @@ class DKCef;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
-						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
+					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
+	                 public CefKeyboardHandler
 {
 public:
 	DKCefHandler(){}
@@ -26,6 +27,7 @@ public:
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
 	
 	//////////////
 	void DoFrame()
@@ -197,6 +199,17 @@ public:
 			DKV8::Execute(browser, func, arguments);
 		}
 
+		return false;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
+	{
+		DKLog("OnPreKeyEvent()\n", DKINFO);
+		DKLog("character = " +toString(event.character) + "\n", DKINFO);
+		DKLog("native_key_code = " + toString(event.native_key_code) + "\n", DKINFO);
+		DKLog("modifiers = " + toString(event.modifiers) + "\n", DKINFO);
+		//DKEvent::SendEvent("GLOBAL", "keypress", toString(event.native_key_code));
 		return false;
 	}
 

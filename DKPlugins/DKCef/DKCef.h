@@ -49,7 +49,7 @@ public:
 	std::vector<CefRefPtr<CefBrowser> > browsers;
 	CefBrowser* current_browser;
 	CefRefPtr<DKCefApp> cefApp;
-	CefClient* cefHandler; //external handler  (DKOSGCef or DKSDLCef)
+	CefClient* cefHandler; //external handler  (DKSDLCef or DKOSGCef)
 	DKCefHandler *dkCefHandler;
 
 #ifdef WIN32

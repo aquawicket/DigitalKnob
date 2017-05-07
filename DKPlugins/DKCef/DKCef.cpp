@@ -110,7 +110,6 @@ void DKCef::Init()
 
 	CefSettings settings;
 
-	//if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
 	if(DKValid("DKWindow,DKWindow0")){
 		settings.windowless_rendering_enabled = true;
 	}
@@ -200,14 +199,12 @@ void DKCef::Init()
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	CefString(&settings.product_version).FromASCII(version_string.c_str());
 
-	//DKLog("CefInitialize \n", DKINFO);
     int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
 		DKLog("CefInitialize error", DKERROR);
 		return;
 	}
 
-	//if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
 	if(DKValid("DKWindow,DKWindow0")){
 		if(DKAvailable("DKSDLCef")){
 			DKCreate("DKSDLCef,"+id);
@@ -255,7 +252,6 @@ bool DKCef::NewBrowser()
 {
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	//if(!same(DKV8::off_screen_rendering_enabled, "OFF")){
 	if(DKValid("DKWindow,DKWindow0")){
 		browserSettings.windowless_frame_rate = 60;
 #ifdef WIN32
