@@ -28,4 +28,4 @@ DKString DKV8::renderer_process_limit;
 DKString DKV8::enable_gpu;
 DKString DKV8::disable_web_security;
 DKString DKV8::no_proxy_server;
-DKString DKV8::off_screen_rendering_enabled;
+//DKString DKV8::off_screen_rendering_enabled;
