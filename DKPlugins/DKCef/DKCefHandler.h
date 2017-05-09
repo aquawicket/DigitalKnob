@@ -205,11 +205,22 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
 	{
-		DKLog("OnPreKeyEvent()\n", DKINFO);
-		DKLog("character = " +toString(event.character) + "\n", DKINFO);
-		DKLog("native_key_code = " + toString(event.native_key_code) + "\n", DKINFO);
-		DKLog("modifiers = " + toString(event.modifiers) + "\n", DKINFO);
-		//DKEvent::SendEvent("GLOBAL", "keypress", toString(event.native_key_code));
+		//DKLog("OnPreKeyEvent(): char="+toString(event.character)+", native="+toString(event.native_key_code)+", mods="+toString(event.modifiers)+"\n", DKINFO);
+
+		if(event.type == KEYEVENT_RAWKEYDOWN){
+			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
+		}
+		if(event.type == KEYEVENT_KEYDOWN){
+			//DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n", DKINFO);
+		}
+		if(event.type == KEYEVENT_KEYUP){
+			//DKLog("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n", DKINFO);
+		}
+		if(event.type == KEYEVENT_CHAR){
+			//DKLog("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n", DKINFO);
+			DKEvent::SendEvent("GLOBAL", "keypress", toString(event.character));
+		}
+		
 		return false;
 	}
 
