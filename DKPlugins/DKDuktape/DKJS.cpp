@@ -529,7 +529,7 @@ int DKJS::GetType(duk_context* ctx)
 int DKJS::GetValue(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
-	DKLog("DKJS::GetValue("+evt+")\n", DKINFO);
+	//DKLog("DKJS::GetValue("+evt+")\n", DKINFO);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
 	if(arry.size() < 3){ 
