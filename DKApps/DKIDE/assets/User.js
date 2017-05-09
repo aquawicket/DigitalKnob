@@ -21,15 +21,15 @@ function User_OnEvent(event)  //Duktape
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){
 		DKCef_SetUrl("DKCef_frame", DK_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
 	}
-	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){
-		DK_Exit();
-	}
 	if(DK_Type(event, "resize")){
 		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
+	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){
+		DK_Exit();
+	}
 }
 
-////////////////////////////////
+////////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){
 	if(USE_SDL && USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n", DKINFO);
