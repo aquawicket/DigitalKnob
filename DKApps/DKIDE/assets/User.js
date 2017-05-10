@@ -7,7 +7,6 @@ var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://google.com";
 //var DKApp_url = "chrome://gpu";
 
-
 //Validate settings
 if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){  USE_CEF = 0;  }
 else{ 	USE_WEBVIEW = 0;  }

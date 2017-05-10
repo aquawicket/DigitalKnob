@@ -89,7 +89,7 @@ function DKDev_OnEvent(event)
 			DKDev_ApplyBox(DK_GetId(event));
 		}
 		if(DK_GetBrowser() != "Rocket"){
-			StopPropagation(event);  //TODO - link to Duktape function
+			DK_StopPropagation(event);  //TODO - link to Duktape function
 		}
 		return;
 	}
@@ -100,13 +100,13 @@ function DKDev_OnEvent(event)
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		if(target == "DKResizeImg"){ 
 			if(DK_GetBrowser() != "Rocket"){
-				StopPropagation(event);
+				DK_StopPropagation(event);
 			}
 			return; 
 		}
 		DKDev_SelectElement(target);
 		if(DK_GetBrowser() != "Rocket"){
-			StopPropagation(event);
+			DK_StopPropagation(event);
 		}
 		return;
 	}
@@ -139,7 +139,7 @@ function DKDev_OnEvent(event)
 
 		DKCreate("DKDev/DKDev_Menu.js", function(){});
 		if(DK_GetBrowser() != "Rocket"){
-			StopPropagation(event);
+			DK_StopPropagation(event);
 		}
 		return;
 	}
