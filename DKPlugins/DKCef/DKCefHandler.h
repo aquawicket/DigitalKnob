@@ -21,7 +21,7 @@ public:
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 #endif
 
-	//virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
+	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
@@ -155,7 +155,14 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 	{
-		DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKDEBUG);
+		//DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKINFO);
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)
+	{
+		//DKLog("DKSDLCefHandler::OnContextMenuCommand()\n", DKINFO);
+		return false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
