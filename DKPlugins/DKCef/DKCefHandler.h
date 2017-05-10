@@ -223,9 +223,10 @@ public:
 
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
+			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));
 		}
 		if(event.type == KEYEVENT_KEYDOWN){
-			//DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n", DKINFO);
+			DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n", DKINFO);
 		}
 		if(event.type == KEYEVENT_KEYUP){
 			//DKLog("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n", DKINFO);
