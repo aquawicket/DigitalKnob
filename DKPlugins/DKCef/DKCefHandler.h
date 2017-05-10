@@ -71,6 +71,13 @@ public:
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
 	{
 		DKLog("DKSDLCefHandler::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
+		
+		//for (unsigned int i = 0; i<dkCef->browsers.size(); ++i) {
+			//if (browser->GetIdentifier() == dkCef->browsers[i]->GetIdentifier()) {
+				DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", toString(0));
+				return;
+			///}
+		//}
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
