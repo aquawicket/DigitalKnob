@@ -25,13 +25,10 @@ function User_OnEvent(event)  //Duktape
 		DKCef_RunJavascript("CefSDL", "var z = y[3].getElementsByClassName('soft-context-menu-item');");
 		DKCef_RunJavascript("CefSDL", "var save = z[z.length-2];");
 		DKCef_RunJavascript("CefSDL", "console.log(save.innerHTML);");
-		DKCef_RunJavascript("CefSDL", "save.onclick = function(){alert('save clicked.')};");  ///grrrrr
-		//DKCef_RunJavascript("CefSDL", "var container = document.createElement('div');");
-		//DKCef_RunJavascript("CefSDL", "container.style.width = '100%';");
-		//DKCef_RunJavascript("CefSDL", "container.style.height = '100%';");
-		//DKCef_RunJavascript("CefSDL", "container.style.background = '#000';");
-		//DKCef_RunJavascript("CefSDL", "save.appendChild(container);");
-		//DKCef_RunJavascript("CefSDL", "container.onclick = function(){ alert('save') };");
+		
+		//FIXME - we can get the element of the save button, but we cannot add an event.
+		//DKCef_RunJavascript("CefSDL", "save.onclick = function(){alert('save clicked.')};");  ///grrrrr
+		//DKCef_RunJavascript("CefSDL", "save.addEventListener('focus', function(event){ event.preventDefault(); console.log('click'); });");
 	}
 }
 
