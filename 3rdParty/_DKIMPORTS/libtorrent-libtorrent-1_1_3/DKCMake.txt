@@ -7,9 +7,7 @@ DKSET(TORRENT ${3RDPARTY}/libtorrent-libtorrent-1_1_3)
 
 
 ### LINK ###
-DKINCLUDE(${TORRENT})
-DKINCLUDE(${TORRENT}/examples)
-DKINCLUDE(${TORRENT}/${OS}/Release)
+DKINCLUDE(${TORRENT}/include)
 WIN_DEBUG_LIB(${TORRENT}/${OS}/Debug/torrent-rasterbar.lib)
 WIN_RELEASE_LIB(${TORRENT}/${OS}/Release/torrent-rasterbar.lib)
 MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG}/libtorrent.a)
