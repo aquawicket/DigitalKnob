@@ -1,3 +1,4 @@
+DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/libtorrent-master.zip libtorrent-master)
