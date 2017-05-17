@@ -1,0 +1,58 @@
+
+### INSTALL ###
+DKINSTALL(${DKONLINE}/Libs/libtorrent-master.zip libtorrent-master)
+DKSET(TORRENT ${3RDPARTY}/libtorrent-master)
+
+
+### LINK ###
+DKINCLUDE(${TORRENT})
+DKINCLUDE(${TORRENT}/examples)
+DKINCLUDE(${TORRENT}/${OS}/Release)
+WIN_DEBUG_LIB(${TORRENT}/${OS}/Debug/torrent.lib)
+WIN_RELEASE_LIB(${TORRENT}/${OS}/Release/torrent.lib)
+MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG}/libtorrent.a)
+MAC_RELEASE_LIB(${TORRENT}/${OS}/lib/${RELEASE}/libtorrent.a)
+IOSSIM_DEBUG_LIB(${TORRENT}/${OS}/${DEBUG}/lib/.libs/libtorrent.a)
+IOSSIM_RELEASE_LIB(${TORRENT}/${OS}/${RELEASE}/lib/.libs/libtorrent.a)
+LINUX_DEBUG_LIB(${TORRENT}/${OS}/Debug/libtorrent.a)
+LINUX_RELEASE_LIB(${TORRENT}/${OS}/Release/libtorrent.a)
+ANDROID_DEBUG_LIB(${TORRENT}/${OS}/Debug/obj/local/armeabi-v7a/libtorrent.a)
+ANDROID_RELEASE_LIB(${TORRENT}/${OS}/Release/obj/local/armeabi-v7a/libtorrent.a)
+
+
+
+DKSETPATH(${TORRENT}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${TORRENT})
+WIN32_VS_DEBUG(libtorrent-master libtorrent.sln torrent)
+WIN32_VS_RELEASE(libtorrent-master libtorrent.sln torrent)
+
+DKSETPATH(${TORRENT}/${OS})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${TORRENT})
+WIN64_VS_DEBUG(libtorrent-master libtorrent.sln torrent)
+WIN64_VS_RELEASE(libtorrent-master libtorrent.sln torrent)
+
+DKSETPATH(${TORRENT}/${OS})
+MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${TORRENT})
+MAC64_XCODE_DEBUG(libtorrent-master libtorrent)
+MAC64_XCODE_RELEASE(libtorrent-master libtorrent)
+
+DKSETPATH(${TORRENT}/${OS})
+IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS ${TORRENT})
+IOS_XCODE_DEBUG(libtorrent-master libtorrent)
+IOS_XCODE_RELEASE(libtorrent-master libtorrent)
+
+DKSETPATH(${TORRENT}/${OS})
+IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR ${TORRENT})
+IOSSIM_XCODE_DEBUG(libtorrent-master libtorrent)
+IOSSIM_XCODE_RELEASE(libtorrent-master libtorrent)
+
+DKSETPATH(${TORRENT}/${OS}/${DEBUG})
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
+LINUX_DEBUG_COMMAND(make torrent)
+
+DKSETPATH(${TORRENT}/${OS}/${RELEASE})
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
+LINUX_RELEASE_COMMAND(make torrent)
+
+ANDROID_NDK_DEBUG(libtorrent-master)
+ANDROID_NDK_RELEASE(libtorrent-master)
