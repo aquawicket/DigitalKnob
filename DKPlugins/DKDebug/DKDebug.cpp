@@ -217,7 +217,7 @@ void DKDebug::Init()
 
 	//FIXME:
 	DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+exepath+exename+".pdb)\n", DKINFO);
-	DKFile::Copy(DKFile::local_assets+exename+".pdb", exepath+exename+".pdb", false, false);
+	DKFile::Copy(DKFile::local_assets+exename+".pdb", exepath+exename+".pdb", true, true);
 
 	InitUnhandledExceptionFilter();
 #endif
