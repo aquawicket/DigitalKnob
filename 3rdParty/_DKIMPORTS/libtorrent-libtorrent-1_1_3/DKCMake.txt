@@ -20,7 +20,7 @@ ANDROID_DEBUG_LIB(${TORRENT}/${OS}/Debug/obj/local/armeabi-v7a/libtorrent.a)
 ANDROID_RELEASE_LIB(${TORRENT}/${OS}/Release/obj/local/armeabi-v7a/libtorrent.a)
 
 
-
+### COMPILE ###
 DKSETPATH(${TORRENT}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON -DOPENSSL_ROOT_DIR=${OPENSSL} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/win32/lib ${TORRENT})
 WIN32_VS_DEBUG(libtorrent-libtorrent-1_1_3 libtorrent.sln torrent-rasterbar)
