@@ -1,6 +1,14 @@
-DKAddEvent("GLOBAL", "keydown", DKDevTools_OnEvent);
-////////////////////////////
-function DKDevTools_OnEvent(event)  //Duktape
+function DKDevTools_Init()
+{
+	DKAddEvent("GLOBAL", "keydown", DKDevTools_OnEvent);
+}
+
+function DKDevTools_End()
+{
+
+}
+
+function DKDevTools_OnEvent(event)
 {
 	//DKLog("DKDevTools_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 
