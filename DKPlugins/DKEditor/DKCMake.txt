@@ -1,0 +1,5 @@
+DKDEPEND(DKDuktape)
+DKDEPEND(DKMessage)
+DKDEPEND(DKWidget)
+
+DKASSETS(DKEditor)
