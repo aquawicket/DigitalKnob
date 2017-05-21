@@ -23,8 +23,9 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		//DKLog("Assets", DKINFO);
 		DKCreate("DKBuild/DKSolution.js", function(){
-			DKFrame_Widget("DKSolution.html");
+			var frame = DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
+			DKWidget_SetProperty("DKSolution.html", "height", "300rem");
 		});
 	}
 
