@@ -10,6 +10,7 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
 }
 
 ////////////////////////////
@@ -20,6 +21,7 @@ function DKEditor_Menu_End()
 	DKRemoveEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
+	DKRemoveEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
 
@@ -42,6 +44,9 @@ function DKEditor_Menu_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){
 		//DKCef_ShowDevTools("Cef", 0);
+	}
+	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
+		DKDebug_ClearConsole();
 	}
 
 	DKClose("DKEditor/DKEditor_Menu.js");
