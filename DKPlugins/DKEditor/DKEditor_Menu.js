@@ -33,7 +33,6 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
 	}
-	
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		DKCreate("DKBuild/DKSolution.js", function(){
 			var frame = DKFrame_Widget("DKSolution.html");
@@ -41,9 +40,8 @@ function DKEditor_Menu_OnEvent(event)
 			DKWidget_SetProperty("DKSolution.html", "height", "300rem");
 		});
 	}
-	
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){
-		//DKCef_ShowDevTools("Cef", 0);
+		DKCef_ShowDevTools("Cef", 0);
 	}
 	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
 		DKDebug_ClearConsole();
