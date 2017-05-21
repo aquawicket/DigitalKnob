@@ -7,6 +7,7 @@ function DKEditor_Menu_Init()
 	DKWidget_SetProperty("DKEditor_Menu.html","left",DKWindow_GetMouseX()+"rem");
 	DKAddEvent("GLOBAL", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("GLOBAL", "contextmenu", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
 }
@@ -15,7 +16,10 @@ function DKEditor_Menu_Init()
 function DKEditor_Menu_End()
 {
 	DKRemoveEvent("GLOBAL", "click", DKEditor_Menu_OnEvent);
+	DKRemoveEvent("GLOBAL", "contextmenu", DKEditor_Menu_OnEvent);
+	DKRemoveEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
+	DKRemoveEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
 
@@ -23,6 +27,10 @@ function DKEditor_Menu_End()
 function DKEditor_Menu_OnEvent(event)
 {
 	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	
+	if(DK_Id(event, "DKEditor_Menu_Reload")){
+		DKDebug_RestartApp();
+	}
 	
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		DKCreate("DKBuild/DKSolution.js", function(){
