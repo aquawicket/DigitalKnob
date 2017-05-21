@@ -34,6 +34,9 @@ public:
 	static bool StrokeKey(CefArgs args, CefReturn retval);
 	static bool System(CefArgs args, CefReturn retval);
 	static bool WaitForImage(CefArgs args, CefReturn retval);
+	
+	//Cef JS functions
+	static bool ShowDevTools(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);

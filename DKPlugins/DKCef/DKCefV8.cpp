@@ -28,6 +28,8 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
+	//Cef js functions
+	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 }
 
 ///////////////////
@@ -292,6 +294,17 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 	}
 	//retval = CefV8Value::CreateBool(true);
 	retval->SetBool(0, true); 
+	return 1;
+}
+
+
+//CEF js functions
+//////////////////////////////////////////////////////////
+bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int num = args->GetInt(1);
+	DKCef::Get(id)->ShowDevTools(num);
 	return 1;
 }
 
