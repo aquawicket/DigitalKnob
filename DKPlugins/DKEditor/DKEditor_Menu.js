@@ -24,6 +24,7 @@ function DKEditor_Menu_OnEvent(event)
 		//DKLog("Assets", DKINFO);
 		DKCreate("DKBuild/DKSolution.js", function(){
 			DKFrame_Widget("DKSolution.html");
+			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
 

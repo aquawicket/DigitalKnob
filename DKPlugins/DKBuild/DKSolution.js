@@ -6,7 +6,9 @@ function DKSolution_Init()
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	
-	DKSolution_UpdatePath(DKPATH); //DKPATH from DKBuild.js
+	if(typeof DKPATH !== 'undefined'){
+		DKSolution_UpdatePath(DKPATH); //DKPATH from DKBuild.js
+	}
 }
 
 /////////////////////////
