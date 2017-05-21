@@ -2,8 +2,9 @@
 function DKEditor_Init()
 {
 	DKCreate("DKEditor/DKEditor.html");
+	
+	//DKWidget_AddDragHandle("DKEditor.html", "DKEditor.html"); //FIXME - this eats the click event
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
-	//DKWidget_AddDragHandle("DKEditor_edit", "DKEditor_edit");
 }
 
 ///////////////////////
