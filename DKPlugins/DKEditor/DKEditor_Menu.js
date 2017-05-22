@@ -45,6 +45,12 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
 		DKDebug_ClearConsole();
+		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
+			DK_System("cls");
+		}
+		if(DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
+			DK_System("clear");
+		}
 	}
 
 	DKClose("DKEditor/DKEditor_Menu.js");
