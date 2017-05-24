@@ -8,6 +8,7 @@ document.body.id = "body";
 document.body.style.fontSize = "13em";
 document.documentElement.id = "html";
 document.documentElement.style.fontSize = "1px";
+document.body.style.cursor = "default";
 
 
 var mouseX;

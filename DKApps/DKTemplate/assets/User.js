@@ -6,8 +6,8 @@ var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "http://google.com";
 
 //Validate settings
-if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){  USE_CEF = 0;  }
-else{ 	USE_WEBVIEW = 0;  }
+if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){ USE_CEF = 0; }
+else{ USE_WEBVIEW = 0; }
 
 
 ////////////////////////////
