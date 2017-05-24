@@ -55,7 +55,15 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
-		DKLog("TODO: New Frame\n", DKINFO);
+		DKCreate("DKMessage/DKMessage.js", function(){
+			DKFrame_Widget("DKMessage.html");
+			DKMessageBox_GetValue("Enter name", function(rval){
+				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				if(!rval){ return; }
+				DKLog("Frame name: "+rval+"\n", DKINFO);
+				//TODO
+			});
+		});
 	}
 
 	if(DK_Id(event, "GLOBAL")){
