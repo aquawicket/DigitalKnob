@@ -8,6 +8,12 @@ function DKFrame_Init()
 
 }
 
+//////////////////////
+function DKFrame_End()
+{
+
+}
+
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {

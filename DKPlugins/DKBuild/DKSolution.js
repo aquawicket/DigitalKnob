@@ -17,7 +17,7 @@ function DKSolution_End()
 	DKRemoveEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKRemoveEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKRemoveEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
-	DKClose("DKSolution.html");
+	DKClose("DKBuild/DKSolution.html");
 }
 
 //////////////////////////////////

@@ -5,8 +5,7 @@ function DKEditor_Menu_Init()
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKWidget_SetProperty("DKEditor_Menu.html","top",DKWindow_GetMouseY()+"rem");
 	DKWidget_SetProperty("DKEditor_Menu.html","left",DKWindow_GetMouseX()+"rem");
-	DKAddEvent("GLOBAL", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("GLOBAL", "contextmenu", DKEditor_Menu_OnEvent);
+	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
@@ -16,8 +15,7 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	DKRemoveEvent("GLOBAL", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("GLOBAL", "contextmenu", DKEditor_Menu_OnEvent);
+	DKRemoveEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKRemoveEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
@@ -28,7 +26,7 @@ function DKEditor_Menu_End()
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
@@ -41,7 +39,9 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){
-		DKCef_ShowDevTools("Cef", 0);
+		if(typeof DKCef_ShowDevTools == 'function'){
+			DKCef_ShowDevTools("Cef", 0);
+		}
 	}
 	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
 		DKDebug_ClearConsole();
@@ -53,5 +53,10 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 
+	if(DK_Id(event, "GLOBAL")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor_Menu.html")){
+			return;
+		}
+	}
 	DKClose("DKEditor/DKEditor_Menu.js");
 }

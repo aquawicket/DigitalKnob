@@ -28,7 +28,7 @@ function User_OnEvent(event)  //Duktape
 
 ////////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){
-	if(USE_SDL && USE_ROCKET && USE_CEF){
+	if(USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n", DKINFO);
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
@@ -46,7 +46,7 @@ if(DK_GetJavascript() == "Duktape"){
 		DKCef_SetFocus(iframe);
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", User_OnEvent);
 	}
-	else if(USE_SDL && USE_ROCKET){
+	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n", DKINFO);
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
