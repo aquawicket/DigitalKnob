@@ -12,7 +12,7 @@ class DKCef;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
-	                 public CefKeyboardHandler
+	                 public CefKeyboardHandler, public CefGeolocationHandler
 {
 public:
 	DKCefHandler(){}
@@ -28,6 +28,7 @@ public:
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
+	virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
 	
 	//////////////
 	void DoFrame()
@@ -237,6 +238,14 @@ public:
 		}
 		
 		return false;
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnRequestGeolocationPermission(CefRefPtr< CefBrowser > browser, const CefString& requesting_url, int request_id, CefRefPtr< CefGeolocationCallback > callback)
+	{
+		DKLog("DKSDLCefHandler::OnRequestGeolocationPermission()\n", DKINFO);
+		callback->Continue(true);
+		return true;
 	}
 
 	IMPLEMENT_REFCOUNTING(DKCefHandler);
