@@ -119,11 +119,8 @@ function DKSolutionMenu_NewFile()
 		return;
 	}
 	
-	//DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
-	//DKFile_StringToFile("", DKSolutionMenu_file+"New.txt"); // lets try to cheat
-	
 	DKSolutionMenu_SetFile(DKWidget_GetValue("DKSolutionPath")+"/New.txt");
-	DKFile_StringToFile("", DKWidget_GetValue("DKSolutionPath")+"/New.txt"); // lets try to cheat
+	DKFile_StringToFile("", DKSolutionMenu_file);
 	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 	
 	//Find the id
@@ -152,11 +149,10 @@ function DKSolutionMenu_NewFolder()
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
 		return;
 	}
-	DKLog("DKSolutionMenu_NewFolder(): DKSolutionMenu_file ="+DKSolutionMenu_file+"\n", DKINFO);
-	DKFile_MkDir(DKSolutionMenu_file+"New");
 	
-	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 	DKSolutionMenu_SetFile(DKWidget_GetValue("DKSolutionPath")+"/New");
+	DKFile_MkDir(DKSolutionMenu_file);
+	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 	
 	//Find the id
 	var elements = DKWidget_GetElements("DKSolutionMenu");
