@@ -274,11 +274,11 @@ function DKWidget_AttachDrags(id)
 			x.style.setProperty("pointer-events","all");
 		}
 		
-		if(x.hasAttribute("drag")){ 	//Drag events
+		if(x.getAttribute("drag") != null){ 	//Drag events
 			var mov_tar = x.getAttribute("drag");	
 			x.onmousedown = function(event){DragStart(event, mov_tar);}
 		}
-		if(x.hasAttribute("resize")){ 	//Resize events
+		if(x.getAttribute("resize") != null){ 	//Resize events
 			var res_tar = x.getAttribute("resize");	
 			x.onmousedown = function(event){ResizeStart(event, res_tar);}
 		}
