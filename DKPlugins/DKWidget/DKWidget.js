@@ -685,13 +685,13 @@ function DKWidget_GetOuterHtml(variable)
 	return false;
 }
 
-////////////////////////////////////////////
-function DKWidget_IsChildOf(element, parent)
+///////////////////////////////////////
+function DKWidget_IsChildOf(id, parent)
 {
-	//DKLog("DKWidget_IsChildOf("+element+", "+parent+") \n", DKDEBUG);
-	if(!element){return false;}
+	//DKLog("DKWidget_IsChildOf("+id+", "+parent+") \n", DKDEBUG);
+	if(!id){return false;}
 	if(!parent){return false;}
-	var ele = document.getElementById(element);
+	var ele = document.getElementById(id);
 	var par = document.getElementById(parent);
 	if(!ele){return false;}
 	if(!par){return false;}
@@ -846,14 +846,14 @@ function DKWidget_GetFirstChild(id)
 	return false;
 }
 
-///////////////////////////////////////////
-function DKWidget_GetMouseWindowX(element)
+/////////////////////////////////////
+function DKWidget_GetMouseWindowX(id)
 {
 	return mouseX;
 }
 
-///////////////////////////////////////////
-function DKWidget_GetMouseWindowY(element)
+/////////////////////////////////////
+function DKWidget_GetMouseWindowY(id)
 {
 	return mouseY;
 }
@@ -968,22 +968,22 @@ function DKWidget_GetComputedTop(id)
 	return window.getComputedStyle(document.getElementById(id)).top;
 }
 
-////////////////////////////////////////
-function DKWidget_ElementExists(element)
+///////////////////////////////////
+function DKWidget_ElementExists(id)
 {
-	if(document.getElementById(element)){
+	if(document.getElementById(id)){
 		return true;
 	}
 	return false;
 }
 
-////////////////////////////////////////
-function DKWidget_RemoveElement(element)
+///////////////////////////////////
+function DKWidget_RemoveElement(id)
 {
-	//DKLog("RemoveElement("+element+")\n", DKDEBUG);
-	var ele = document.getElementById(element);
+	//DKLog("RemoveElement("+id+")\n", DKDEBUG);
+	var ele = document.getElementById(id);
 	if(!ele){
-		DKLog("RemoveElement("+element+"): element does not exist\n", DKDEBUG);
+		DKLog("RemoveElement("+id+"): element does not exist\n", DKDEBUG);
 	}
 	var par = ele.parentNode;
 	if(ele && par){
@@ -1005,9 +1005,9 @@ function DKWidget_ElementToString(id)
 function DKWidget_Visible(id)
 {
 	var element = document.getElementById(id);
-	if(!element){ DKLog("Visible("+id+"): element invalid. \n", DKERROR); return false;}
-	if(document.getElementById(id).style.display == "none"){ return false; }
-	if(document.getElementById(id).style.visibility != "visible"){ return false; }
+	if(!element){ return false; }
+	if(element.style.display == "none"){ return false; }
+	if(element.style.visibility != "visible"){ return false; }
 	return true;
 }
 
