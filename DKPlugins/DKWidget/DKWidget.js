@@ -360,7 +360,7 @@ function DKWidget_GetValue(variable)
 				//DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 				return false;
 			}
-			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
+			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
 			return ele.value; 
 		}
 		
@@ -603,6 +603,10 @@ function DKWidget_SetValue(variable, value)
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
 		if(!element){ DKLog("SetValue("+variable+"): Cannot find element. \n", DKERROR); return false; }
+		if(element.type && element.type === "checkbox"){
+			element.checked = value;
+			return true;
+		}
 		if(element.tagName == "INPUT"){
 			element.value = value;
 			return true;
