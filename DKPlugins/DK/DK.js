@@ -1,5 +1,12 @@
 //BROWSER
 
+/*
+var browser_js = document.createElement('script');
+browser_js.setAttribute('type','text/javascript');
+browser_js.setAttribute('src','DK/DKBrowser.js');
+document.body.appendChild(browser_js);
+*/
+
 var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
