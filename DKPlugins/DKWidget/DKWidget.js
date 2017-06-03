@@ -393,7 +393,7 @@ function DKWidget_GetValue(variable)
 				return GetMouseButton(variable);
 			}
 			if(variable.type == "click"){
-				if(variable.target.value){
+				if(variable.target && variable.target.value){
 					return variable.target.value;
 				}
 				return GetMouseButton(variable);
