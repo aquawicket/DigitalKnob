@@ -152,7 +152,9 @@ function DK_GetDate()
 ////////////////////
 function DK_Reload()
 {	
-	window.location.href = href+"/index.html";
+	//window.location.href = href+"index.html";
+	window.location.hash = "";
+	window.location.reload(true);
 }
 
 
