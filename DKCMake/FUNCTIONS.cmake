@@ -33,6 +33,7 @@ ENDFUNCTION()
 
 ########################
 FUNCTION(DKDOWNLOAD arg)
+	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 	GET_FILENAME_COMPONENT(filename ${arg} NAME)
 	IF(NOT EXISTS ${CURRENT_DIR}/${filename})
 		FILE(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS)
