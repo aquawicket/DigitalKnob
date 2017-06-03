@@ -117,6 +117,7 @@ function DKSolution_UpdatePath(path)
 	//DKLog("rPath:"+rPath+"\n", DKDEBUG);
 	
 	var temp = DKFile_DirectoryContents(aPath);
+	if(!temp){ return false; }
 	var files = temp.split(",");
 
 	DKWidget_SetInnerHtml("DKSolutionMenu", ""); //Clear it
