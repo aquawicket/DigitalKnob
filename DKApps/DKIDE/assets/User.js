@@ -92,6 +92,7 @@ function LoadPage()
 {
 	//DKLog("Loading page... \n", DKINFO);
 	DKWidget_SetProperty("body","background-color","grey");
+	DKCreate("DKWindow/DKWindow.js", function(){});
 	DKCreate("DKScale/DKScale.js", function(){});
 	DKCreate("DKBuild/DKBuild.js", function(){
 		DKCreate("DKDev/DKDev.js", function(){});
