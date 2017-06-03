@@ -326,12 +326,11 @@ public:
 		}
 		if(!DKV8::remote_debugging_port.empty()){
 			command_line->AppendSwitchWithValue("remote-debugging-port", DKV8::remote_debugging_port.c_str());
-			//command_line->AppendSwitchWithValue("remote-debugging-port", "2393");
 		}
 		if(same(DKV8::disable_web_security, "ON")){
 			command_line->AppendSwitchWithValue("disable-web-security", "1");
 		}
-		if(same(DKV8::no_proxy_server, "ON")){
+		if(!same(DKV8::no_proxy_server, "OFF")){
 			command_line->AppendSwitchWithValue("no-proxy-server", "1");
 		}
 		if(same(DKV8::enable_webgl, "ON")){
