@@ -353,6 +353,9 @@ function DKWidget_GetValue(variable)
 		var ele = document.getElementById(variable);
 		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n", DKDEBUG); /*return false;*/ }
 		if(ele){
+			if(ele.type && ele.type === "checkbox"){
+				return ele.checked;
+			}
 			if(!ele.value){
 				//DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 				return false;
@@ -371,7 +374,7 @@ function DKWidget_GetValue(variable)
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n", DKDEBUG);
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n", DKDEBUG);
 		if(variable.nodeType == 1){
-			DKLog("variable.tagName: "+variable.tagName+"\n", DKDEBUG);
+			//DKLog("variable.tagName: "+variable.tagName+"\n", DKINFO);
 			if(variable.tagName == "INPUT"){
 				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
 				return variable.value;
