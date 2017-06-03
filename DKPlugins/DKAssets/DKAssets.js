@@ -2,7 +2,7 @@
 DKLog("Loaded DKAssets.js\n", DKWARN);
 
 var href = document.location.href;
-href = href.replace("index.html","");
+href = href.substr(0, href.lastIndexOf("/")+1);
 local_assets = href;
 
 var log_debug = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_DEBUG]");
