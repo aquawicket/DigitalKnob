@@ -1,17 +1,16 @@
 var sizes = [];
 
-DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);
 
 ///////////////////////
 function DKFrame_Init()
 {
-
+	//DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 //////////////////////
 function DKFrame_End()
 {
-
+	//DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 ///////////////////////////////
