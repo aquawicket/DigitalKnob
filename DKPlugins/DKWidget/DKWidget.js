@@ -546,8 +546,14 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
+	//DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")\n", DKINFO);
+	
 	if(!variable){ DKLog("DKWidget_SetProperty(): variable not set \n", DKWARN); return false; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
+	//DKLog("DK_IE() = "+DK_IE()+"\n", DKINFO);
+	if(DK_IE() < 9){
+		value = value.replace("rem", "px"); //IE 8- fix
+	}
 
 	if(typeof variable == "object"){
 		variable.style[parameter] = value;
