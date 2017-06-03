@@ -101,7 +101,10 @@ bool DKCurl::HttpFileExists(const DKString& url)
 	
 	long http_code = 0;
 	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-	if (res == CURLE_ABORTED_BY_CALLBACK){ return false; }
+	if (res == CURLE_ABORTED_BY_CALLBACK){
+		DKLog("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n", DKERROR);
+		return false; 
+	}
 	if (http_code == 200 || http_code == 301){
         return true;
 	}
@@ -147,7 +150,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 	
 	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		DKLog("curl_easy_preform() failed \n", DKERROR); 
 		return false; 
 	}
 
