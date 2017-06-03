@@ -10,6 +10,11 @@ function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for "+DK_GetBrow
 function DKWindow_SetY(){ DKLog("DKWindow_SetY(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_Windowed(){ DKLog("DKWindow_Windowed(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 
+//////////////////////////
+function DKWindow_Init(){}
+
+/////////////////////////
+function DKWindow_End(){}
 
 ////////////////////////////
 function DKWindow_GetWidth()
