@@ -18,17 +18,21 @@ function AndroidImport_Import()
 		DKLog("Please select an app.\n", DKINFO);
 		return; 
 	}
-	var appdir;
-	if(DKFile_Exists(DKPATH+"/DKApps/"+APP)){
-		appdir = "DKApps";
-	}
-	if(DKFile_Exists(DKPATH+"/USER/DKApps/"+APP)){
-		appdir = "USER/DKApps";
+	
+	var appdir = "";	
+	var contents = DKFile_DirectoryContents(DKPATH);
+	var files = contents.split(",");
+	for(var i=0; i<files.length; i++){ 
+		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
+			appdir = files[i]+"/DKApps";
+		}
 	}
 	if(!appdir){
 		DKLog("AndroidImport_Import(): cannot locate appdir.\n", DKINFO);
+		return;
 	}
 	
+	DKFile_MkDir(WORKSPACE);
 	DKFile_Delete(WORKSPACE+"/"+APP+"_"+TYPE);
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
 	DK_Run(ANDROIDSTUDIO);
