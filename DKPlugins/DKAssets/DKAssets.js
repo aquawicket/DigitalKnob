@@ -32,7 +32,14 @@ if(!hostname){ hostname = "digitalknob.com"; }
 
 var pathname = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
 if(!pathname){ pathname = document.location.pathname; }
-if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
+if(pathname.lastIndexOf("DKApps") > 0){
+	pathname = pathname.substring(pathname.lastIndexOf("DKApps")+6, pathname.lastIndexOf("assets"));
+}
+if(pathname.lastIndexOf(".com") > 0){
+	pathname = pathname.substr(pathname.lastIndexOf(".com"));
+}
+pathname = pathname.replace("index.html", "");
+//if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
 
 var protocol = document.location.protocol;
 online_assets = "http://"+hostname+pathname;
