@@ -40,14 +40,14 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "keydown")){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	
 	if(DK_Id(event, "DKA-NewButton")){
-		//DKLog("DKA-NewButton \n", DKDEBUG);
+		//DKLog("DKA-NewButton \n");
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
@@ -112,7 +112,7 @@ function DKAutomate_NewTrigger(name)
 //////////////////////////////////
 function DKAutomate_UpdateValues()
 {
-	DKLog("DKAutomate_UpdateValues() \n", DKDEBUG);
+	DKLog("DKAutomate_UpdateValues() \n");
 	DKWidget_SetInnerHtml("DKA-TriggerList", "");
 
 	if(!triggers){return;}

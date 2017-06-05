@@ -22,11 +22,11 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	//DKLog("DKBuild_Init() \n", DKDEBUG);
+	//DKLog("DKBuild_Init() \n");
 	DKCreate("DKThreadPool");
 	DKCreate("DKCurl");
 
-	//DKLog(DK_GetOS()+"\n", DKDEBUG);
+	//DKLog(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files/Subversion/bin/svn.exe";
@@ -79,7 +79,7 @@ function DKBuild_ValidateSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for SVN \n");
-	//DKLog(SVN+"\n", DKDEBUG);
+	//DKLog(SVN+"\n");
 	if(!DKFile_Exists(SVN)){
 		DKLog("Please install SVN \n");
 		DKBuild_InstallSvn();
@@ -121,7 +121,7 @@ function DKBuild_ValidateGit()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for GIT \n");
-	//DKLog(GIT+"\n", DKDEBUG);
+	//DKLog(GIT+"\n");
 	if(!DKFile_Exists(GIT)){
 		DKLog("Please install GIT \n");
 		DKBuild_InstallGit();
@@ -163,7 +163,7 @@ function DKBuild_ValidateCmake()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for CMake \n");
-	//DKLog(CMAKE+"\n", DKDEBUG);
+	//DKLog(CMAKE+"\n");
 	if(!DKFile_Exists(CMAKE)){
 		DKLog("Please install CMake \n");
 		DKBuild_InstallCmake();
@@ -207,7 +207,7 @@ function DKBuild_ValidateVC2015()
 		return;
 	}
 	DKLog("Looking for Visual Studio 2015 \n");
-	//DKLog(VC2015+"\n", DKDEBUG);
+	//DKLog(VC2015+"\n");
 	if(!DKFile_Exists(VC2015)){
 		DKBuild_InstallVC2015();
 	}
@@ -230,7 +230,7 @@ function DKBuild_ValidateGcc()
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for GCC \n");
-	//DKLog(GCC+"\n", DKDEBUG);
+	//DKLog(GCC+"\n");
 	if(!DKFile_Exists(GCC)){
 		DKLog("Please install GCC \n");
 		DKBuild_InstallGcc();
@@ -251,7 +251,7 @@ function DKBuild_ValidateXcode()
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for Xcode \n");
-	//DKLog(XCODE+"\n", DKDEBUG);
+	//DKLog(XCODE+"\n");
 	if(!DKFile_Exists(XCODE)){
 		DKLog("Please install Xcode \n");
 		DKBuild_InstallXcode();
@@ -471,7 +471,7 @@ function DKBuild_ResetAppsPlugins()
 	var list = apps.split(',');
 	for(var i=0; i<list.length; ++i){
 		if(list[i] == "DKBuilder"){ continue; }
-		//DKLog("Deleting "+DKPATH+"/DKApps/"+list[i]+"\n", DKDEBUG);
+		//DKLog("Deleting "+DKPATH+"/DKApps/"+list[i]+"\n");
 		DKFile_Delete(DKPATH+"/DKApps/"+list[i]);
 	}
 	
@@ -502,7 +502,7 @@ function DKBuild_Reset3rdParty()
 /////////////////////////////
 function DKBuild_GetAppList()
 {
-	//DKLog("DKBuild_GetAppList() \n", DKDEBUG);
+	//DKLog("DKBuild_GetAppList() \n");
 	
 	//DKApps folder
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
@@ -544,9 +544,9 @@ function DKBuild_GetAppList()
 	}
 	
 	/*
-	DKLog("*****************\n", DKDEBUG);
+	DKLog("*****************\n");
 	for(var i=0; i<APP_LIST.length; i++){
-		DKLog(APP_LIST[i]+"\n", DKDEBUG);
+		DKLog(APP_LIST[i]+"\n");
 	}
 	*/
 }
@@ -554,7 +554,7 @@ function DKBuild_GetAppList()
 ////////////////////////////
 function DKBuild_DoResults()
 {
-	DKLog("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n", DKDEBUG);
+	DKLog("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n");
 	if(!DKBuild_OsCheck()){ return; }
 	
 	//Update the apps CmakeLists.txt file
@@ -730,7 +730,7 @@ function DKBuild_DoResults()
 			//TODO
 			//update install_name_tool if cef present
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
-				DKLog("USING CHROMIUM EMBEDDED FRAMEWORK \n", DKDEBUG);
+				DKLog("USING CHROMIUM EMBEDDED FRAMEWORK \n");
 				DK_Execute("install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/MacOS/"+APP+"\"");
 				DK_Execute("install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/MacOS/"+APP+"\"");
 			}

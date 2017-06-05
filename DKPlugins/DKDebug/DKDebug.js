@@ -145,8 +145,8 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	//DKLog("DKDebug_ClearConsole()\n", DKDEBUG);
-	//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n", DKDEBUG);
+	//DKLog("DKDebug_ClearConsole()\n");
+	//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 	if(DK_GetBrowser() == "Rocket"){
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
@@ -197,14 +197,14 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	DKLog("DKDebug_ShowConsole()\n", DKDEBUG);
+	DKLog("DKDebug_ShowConsole()\n");
 	DK_ShowConsole();
 }
 
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	DKLog("DKDebug_GetSource()\n", DKDEBUG);
+	DKLog("DKDebug_GetSource()\n");
 	DKCreate("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("body");
 	var assets = DKAssets_LocalAssets();

@@ -54,7 +54,7 @@ function DKCreator_Init()
 ///////////////////////////////
 function DKCreator_OnEvent(event)
 {
-	DKLog("DKCreator_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKCreator_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"spin")){
 		DK_Crash();
@@ -80,11 +80,11 @@ function DKCreator_OnEvent(event)
 		DKWidget_Hide("update");
 	}
 	if(DK_Id(event,"Svn Update")){
-		DKLog("Svn Update \n", DKDEBUG);
+		DKLog("Svn Update \n");
 		DKSendEvent("DKCreator", "SvnUpdate", "");
 	}
 	if(DK_Id(event,"Svn Commit")){
-		DKLog("Svn Commit \n", DKDEBUG);
+		DKLog("Svn Commit \n");
 		DKSendEvent("DKCreator", "SvnCommit", "");
 	}
 	if(DK_Id(event,"libraries")){
@@ -108,7 +108,7 @@ function DKCreator_OnEvent(event)
 		DKNotepad_LoadFile(dkpath);
 	}
 	if(DK_Id(event,"LoginText")){
-		DKWidget_Toggle("DKLogin.html", DKDEBUG);
+		DKWidget_Toggle("DKLogin.html");
 		DKCreate("DKLogin/DKLogin.js");
 	}
 	
@@ -138,7 +138,7 @@ function DKCreator_OnEvent(event)
 	}
 	
 	if(DK_IdLike(event,"LIBRARY")){
-		DKLog("LIB Clicked", DKDEBUG);
+		DKLog("LIB Clicked");
 		var value = DKWidget_GetInnerHtml(DK_GetId(event));
 		DKSendEvent("DKCreator", "BuildLib", value+","+DKWidget_GetValue("OSList")+","+DKWidget_GetValue("BuildType"));
 	}
@@ -209,7 +209,7 @@ function DKCreator_UpdateLibs()
 	DKWidget_SetInnerHtml("LibList", ""); //clear
 
 	var result = DK_CallFunc("DKCreator::GetLibList", "");
-	DKLog("Result:"+result, DKDEBUG);
+	DKLog("Result:"+result);
 	
 	var libs = result.split(",");
 	

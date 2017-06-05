@@ -35,7 +35,7 @@ document.onmousemove = function(e){
 /////////////////////
 function LoadCSS(url)
 {
-	//DKLog("LoadCSS("+url+") \n", DKDEBUG);
+	//DKLog("LoadCSS("+url+") \n");
 	var link = document.createElement('link');
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
@@ -46,7 +46,7 @@ function LoadCSS(url)
 //////////////////////////////
 function LoadJS(url, callback)
 {
-	//DKLog("LoadJS("+url+") \n", DKDEBUG);
+	//DKLog("LoadJS("+url+") \n");
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return; 
@@ -92,10 +92,10 @@ function LoadJS(url, callback)
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
 			
-			DKLog("Loaded: "+url, DKDEBUG);
+			DKLog("Loaded: "+url);
 			var func = window[name]; //Init    
 			if(typeof func == 'function'){ 
-				DKLog("Calling: "+name+" \n", DKDEBUG);
+				DKLog("Calling: "+name+" \n");
 				func(); //Init
 			}
 			else{
@@ -113,7 +113,7 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
-	DKLog("CreateWidget("+url+","+parent+")\n", DKDEBUG);
+	DKLog("CreateWidget("+url+","+parent+")\n");
 	
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
@@ -127,7 +127,7 @@ function CreateWidget(url, parent)
 	}
 	
 	var string = DK_FileToString(url);
-	DKLog("CreateWidget(url, parent): string = "+string+"\n", DKDEBUG);
+	DKLog("CreateWidget(url, parent): string = "+string+"\n");
 	if(!string || string == "ERROR"){ 
 		//DKLog("file not found \n", DKERROR); 
 		var file = DKFile_GetFilename(url);
@@ -157,7 +157,7 @@ function CreateWidget(url, parent)
 	}
 	var file = url.substring(url.lastIndexOf("/") + 1);
 	filesloaded += file+","; //add file to loaded list
-	//DKLog("Created Widget:("+url+","+parent+")", DKDEBUG);
+	//DKLog("Created Widget:("+url+","+parent+")");
 }
 
 ///////////////////////////
@@ -435,7 +435,7 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
+	//DKLog("StopPropagation("+event+") \n");
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -447,7 +447,7 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n", DKDEBUG);
+	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n");
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
 	}
@@ -469,7 +469,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n", DKDEBUG);
+	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n");
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
 	}
@@ -605,7 +605,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKLog("AJAX SEND: "+url, DKDEBUG);
+	DKLog("AJAX SEND: "+url);
 	
 	var request = "";
 	try {
@@ -636,7 +636,7 @@ function AjaxGet(url, output)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;
-				//DKLog("AJAX RETURN: "+output.value, DKDEBUG);
+				//DKLog("AJAX RETURN: "+output.value);
 				return true;
 			}
 			else{

@@ -3,7 +3,7 @@
 ///////////////////////
 function DKFileMenu_Init()
 {
-	DKLog("DKFileMenu_Init()",DKINFO);
+	DKLog("DKFileMenu_Init()");
 	//DKCreate("DKFileMenu/DKFileMenu.html");
 }
 

@@ -21,7 +21,7 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
-	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){});

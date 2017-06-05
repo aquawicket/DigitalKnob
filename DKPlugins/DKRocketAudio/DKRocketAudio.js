@@ -31,7 +31,7 @@ function DKRocketAudio_End()
 /////////////////////////////////////
 function DKRocketAudio_OnEvent(event)
 {
-	DKLog("DKRocketAudio_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKRocketAudio_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKRocketAudio_playpause")){
 		DKRocketAudio_playpause();
@@ -68,11 +68,11 @@ function DKRocketAudio_Open(file)
 //////////////////////////////////
 function DKRocketAudio_playpause()
 {
-	//DKLog("DKRocketAudio_playpause() \n",DKDEBUG);
+	//DKLog("DKRocketAudio_playpause() \n");
 	
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketAudio_playpause", "src");
-	//DKLog("DKRocketAudio_playpause(): src="+src+"\n", DKDEBUG);
+	//DKLog("DKRocketAudio_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKRocketAudio_playpause", "src", "DKRocketAudio/pause.png");
@@ -87,15 +87,15 @@ function DKRocketAudio_playpause()
 /////////////////////////////////
 function DKRocketAudio_position()
 {
-	DKLog("DKRocketAudio_position() \n",DKDEBUG);
+	DKLog("DKRocketAudio_position() \n");
 }
 
 ////////////////////////////////
 function DKRocketAudio_speaker()
 {
-	//DKLog("DKRocketAudio_speaker() \n",DKDEBUG);	
+	//DKLog("DKRocketAudio_speaker() \n");	
 	var src = DKWidget_GetAttribute("DKRocketAudio_speaker", "src");
-	//DKLog("DKRocketAudio_speaker(): src="+src+"\n", DKDEBUG);
+	//DKLog("DKRocketAudio_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){
 		DKAudio_UnMute();
@@ -110,7 +110,7 @@ function DKRocketAudio_speaker()
 /////////////////////////////////////
 function DKRocketAudio_volume(volume)
 {
-	//DKLog("DKRocketAudio_volume("+volume+") \n",DKDEBUG);
+	//DKLog("DKRocketAudio_volume("+volume+") \n");
 	var num = parseInt(volume);
 	DKAudio_SetVolume(num);
 	if(num < 1){

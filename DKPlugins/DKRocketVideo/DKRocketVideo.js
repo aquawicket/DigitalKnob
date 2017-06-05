@@ -25,7 +25,7 @@ function DKRocketVideo_End()
 /////////////////////////////////////
 function DKRocketVideo_OnEvent(event)
 {
-	DKLog("DKRocketVideo_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKRocketVideo_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKRocketVideo_playpause")){
 		DKRocketVideo_playpause();
@@ -50,11 +50,11 @@ function DKRocketVideo_OnEvent(event)
 //////////////////////////////////
 function DKRocketVideo_playpause()
 {
-	//DKLog("DKRocketVideo_playpause() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_playpause() \n");
 	
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketVideo_playpause", "src");
-	//DKLog("DKRocketVideo_playpause(): src="+src+"\n", DKDEBUG);
+	//DKLog("DKRocketVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_playpause", "src", "DKRocketVideo/pause.png");
@@ -67,23 +67,23 @@ function DKRocketVideo_playpause()
 /////////////////////////////////
 function DKRocketVideo_position()
 {
-	//DKLog("DKRocketVideo_position() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_position() \n");
 }
 
 //////////////////////////////////////
 function DKRocketVideo_positiontrack()
 {
-	//DKLog("DKRocketVideo_positiontrack() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_positiontrack() \n");
 }
 
 ////////////////////////////////
 function DKRocketVideo_speaker()
 {
-	//DKLog("DKRocketVideo_speaker() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_speaker() \n");
 	
 	//toggle volume/mute
 	var src = DKWidget_GetAttribute("DKRocketVideo_speaker", "src");
-	DKLog("DKRocketVideo_speaker(): src="+src+"\n", DKDEBUG);
+	DKLog("DKRocketVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_speaker", "src", "DKRocketVideo/volume3.png");
@@ -96,12 +96,12 @@ function DKRocketVideo_speaker()
 ///////////////////////////////
 function DKRocketVideo_volume()
 {
-	//DKLog("DKRocketVideo_volume() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_volume() \n");
 }
 
 ////////////////////////////////////
 function DKRocketVideo_volumetrack()
 {
-	//DKLog("DKRocketVideo_volumetrack() \n",DKDEBUG);
+	//DKLog("DKRocketVideo_volumetrack() \n");
 }
 

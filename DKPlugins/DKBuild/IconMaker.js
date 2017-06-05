@@ -10,7 +10,7 @@ function IconMaker_Init()
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	DKLog("IconMaker_Create("+AppPath+") \n", DKDEBUG);
+	DKLog("IconMaker_Create("+AppPath+") \n");
 	
 	//Create Windows Icon
 	DKFile_MkDir(AppPath+"/icons/windows");

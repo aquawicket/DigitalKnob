@@ -21,7 +21,7 @@ function DKPaint_End()
 ///////////////////////////////
 function DKPaint_OnEvent(event)
 {
-	DKLog("DKPaint_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKPaint_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKPaint_Save")){
 		DKNotepad_Save();

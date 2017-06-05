@@ -41,7 +41,7 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	//DKLog("DKFileAssociation_OpenHtml("+path+") \n", DKDEBUG);
+	//DKLog("DKFileAssociation_OpenHtml("+path+") \n");
 	var id = DKFile_GetFilename(path);
 	DKCreate(path, function(){
 		//DKFileAssociation_AddDragHandles(id);
@@ -55,7 +55,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
 	//var the_path = path.replace(id, "");
-	//DKLog("DKWidget_AppendDataPath("+the_path+") \n", DKDEBUG);
+	//DKLog("DKWidget_AppendDataPath("+the_path+") \n");
 	//AppendDataPath(the_path);
 
 	var filedata = DKFile_FileToString(path);
@@ -77,9 +77,9 @@ function DKFileAssociation_OpenHtml(path)
 	//	return false;
 	//}
 
-	DKLog("temp: "+temp+"\n", DKDEBUG);
+	DKLog("temp: "+temp+"\n");
 	var element = DKWidget_GetFirstChild(temp);
-	DKLog("element = "+element+"\n", DKDEBUG);
+	DKLog("element = "+element+"\n");
 	//DKElement* element = temp->GetFirstChild();
 	//DKWidget_SetAttribute(element, "id", id);
 	

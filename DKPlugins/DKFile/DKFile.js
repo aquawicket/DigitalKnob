@@ -24,8 +24,8 @@ function DKFile_Init()
 ///////////////////////////
 function UrlExists(url, fn)
 {
-	//DKLog("UrlExists("+url+") \n", DKDEBUG);
-	DKLog("AJAX SEND: "+url, DKDEBUG);
+	//DKLog("UrlExists("+url+") \n");
+	DKLog("AJAX SEND: "+url);
 	
 	var request = "";
 	try {
@@ -83,7 +83,7 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////
 	function DKFile_Exists(path, fn)
 	{
-		DKLog("DKFile_Exists("+path+") \n", DKDEBUG);
+		DKLog("DKFile_Exists("+path+") \n");
 		if(!path){ return false; }
 	
 		UrlExists(path, function(rval){
@@ -96,17 +96,17 @@ if(DK_GetBrowser() != "CEF"){
 function DKFile_VerifyPath(path)
 {
 	return true;
-	DKLog("DKFile_VerifyPath("+path+")\n", DKDEBUG);
+	DKLog("DKFile_VerifyPath("+path+")\n");
 	if(!path){ return false; }
 	
-	DKLog("DKFile_VerifyPath("+path+"): checking "+path+"\n", DKDEBUG);
+	DKLog("DKFile_VerifyPath("+path+"): checking "+path+"\n");
 	if(DKFile_Exists(path)){ 
 		DKLog("DKFile_VerifyPath("+path+"): Found "+path+"\n");
 		return path;
 	}
 	
 	var assets = DKAssets_LocalAssets();
-	DKLog("DKFile_VerifyPath("+path+"): checking "+assets+path+"\n", DKDEBUG);
+	DKLog("DKFile_VerifyPath("+path+"): checking "+assets+path+"\n");
 	if(DKFile_Exists(assets+path)){
 		DKLog("DKFile_VerifyPath("+path+"): Found "+assets+path+"\n");
 		return assets+path;
@@ -125,7 +125,7 @@ function DKFile_PrintFiles()
 /////////////////////////////////
 function DKFile_GetFilename(path)
 {
-	//DKLog("DKFile_GetFilename("+path+")\n", DKDEBUG);
+	//DKLog("DKFile_GetFilename("+path+")\n");
 	if(!path){ return; }
 	var n = path.lastIndexOf("/");
 	var out = path.substring(n+1,path.length);
@@ -146,7 +146,7 @@ function DKFile_SaveFile(path, data)
 	//path = path.replace(online_assets, realpath);
 	//path = realpath+path;
 
-	//DKLog("DKFile_SaveFile: "+path+"\n", DKDEBUG);
+	//DKLog("DKFile_SaveFile: "+path+"\n");
 	send = online_assets+"/DKFile/DKFile.php?SaveFile=";
 	send += path;
 	send += "&data="
@@ -190,7 +190,7 @@ if(DK_GetBrowser() != "CEF"){
 				replace(out,"\r","");
 				replace(out,"\n"," ");
 				out = out.trim();
-				//DKLog("DKFile_GetSetting("+file+", "+param+") -> "+out+"\n", DKDEBUG);
+				//DKLog("DKFile_GetSetting("+file+", "+param+") -> "+out+"\n");
 				return out;
 			}
 
@@ -206,7 +206,7 @@ if(DK_GetBrowser() != "CEF"){
 			replace(out,"\r","");
 			replace(out,"\n","");
 			out = out.trim();
-			//DKLog("DKFile_GetSetting("+file+", "+param+") -> "+out+"\n", DKDEBUG);
+			//DKLog("DKFile_GetSetting("+file+", "+param+") -> "+out+"\n");
 			return out;
 		}
 	}
@@ -293,14 +293,14 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////////////
 	function DKFile_StringToFile(data, path)
 	{
-		//DKLog("DKFile_StringToFile("+data+", "+path+") \n", DKDEBUG);
+		//DKLog("DKFile_StringToFile("+data+", "+path+") \n");
 		data = replace(data, ": ", ":");
 		data = replace(data, "; ", ";");
 		data = replace(data, ", ", ",");
 		data = replace(data, " ", "%20");
 		data = replace(data, "'", "%27");
 		data = replace(data, "\n", "%0A");
-		//DKLog("StringToFile("+data+", "+path+") \n", DKDEBUG);
+		//DKLog("StringToFile("+data+", "+path+") \n");
 		DKFile_SaveFile(path, data);
 	}
 }
@@ -309,7 +309,7 @@ if(DK_GetBrowser() != "CEF"){
 	//////////////////////////////////////
 	function DKFile_DirectoryContents(url)
 	{
-		DKLog("DKFile_DirectoryContents("+url+") \n", DKDEBUG);
+		DKLog("DKFile_DirectoryContents("+url+") \n");
 		if(url.indexOf(":") > -1){ return; }
 		if(!online_assets){
 			DKLog("DKFile_DirectoryContents(url): online_assets not set!\n", DKERROR)
@@ -319,7 +319,7 @@ if(DK_GetBrowser() != "CEF"){
 		//var path = DKFile_VerifyPath(url);
 		//if(!path){ return 0; }
 		send = online_assets+"/DKFile/DKFile.php?DirectoryContents="+url;
-		DKLog("ajaxGetUrl("+send+") \n", DKDEBUG);
+		DKLog("ajaxGetUrl("+send+") \n");
 		var result = ajaxGetUrl(send);
 		return result;
 	}
@@ -330,12 +330,12 @@ if(DK_GetBrowser() != "CEF"){
 	function DKFile_GetAbsolutePath(url)
 	{
 		if(!url){ url = "/"; }
-		//DKLog("DKFile_GetAbsolutePath("+url+") \n", DKDEBUG);
+		//DKLog("DKFile_GetAbsolutePath("+url+") \n");
 		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
 		//result = result.replace(datapath,"");
 	
-		//DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n", DKDEBUG);
+		//DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
 		return result;
 	}
 }
@@ -344,11 +344,11 @@ if(DK_GetBrowser() != "CEF"){
 function DKFile_GetRelativePath(apath, datapath)
 {
 	//if(!url){ url = "/"; }
-	DKLog("DKFile_GetRelativePath("+apath+","+datapath+") \n", DKDEBUG);
+	DKLog("DKFile_GetRelativePath("+apath+","+datapath+") \n");
 	//apath = apath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
 	//send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
 	//var result = ajaxGetUrl(send);
-	//DKLog("DKFile_GetRelativePath("+url+") -> "+result+"\n", DKDEBUG);
+	//DKLog("DKFile_GetRelativePath("+url+") -> "+result+"\n");
 	return apath;
 }
 
@@ -358,7 +358,7 @@ if(DK_GetBrowser() != "CEF"){
 	{
 		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
 		var result = ajaxGetUrl(send);
-		//DKLog("DKFile_IsDirectory("+url+") ->"+result+"\n", DKDEBUG);
+		//DKLog("DKFile_IsDirectory("+url+") ->"+result+"\n");
 		if(result == "0"){ return false; }
 		return true;
 	}

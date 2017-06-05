@@ -1,4 +1,4 @@
-DKLog("*************  DKRocket.js *******************\n", DKDEBUG);
+DKLog("*************  DKRocket.js *******************\n");
 //DKCreate("DKWidget");
 
 var navigator = new Navigator();

@@ -24,7 +24,7 @@ function RunMenu_End()
 ///////////////////////////////
 function RunMenu_OnEvent(event)
 {
-	DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "Build App")){
 		OS = DKWidget_GetValue("OSList");
@@ -85,23 +85,23 @@ function RunMenu_OnEvent(event)
 				}
 			}
 			if(OS == "android"){
-				DKLog("TODO: Run android from Windows \n", DKDEBUG);
+				DKLog("TODO: Run android from Windows \n");
 			}
 		}
 		if(DK_GetOS() == "Mac"){
 			if(OS == "mac"){
-				DKLog("TODO: Run mac apps from OSX \n", DKDEBUG);
+				DKLog("TODO: Run mac apps from OSX \n");
 			}
 			if(OS = "ios"){
-				DKLog("TODO: Run iOS apps from OSX \n", DKDEBUG);
+				DKLog("TODO: Run iOS apps from OSX \n");
 			}
 			if(OS = "ios-simulator"){
-				DKLog("TODO: Run iOS-simulator apps from OSX \n", DKDEBUG);
+				DKLog("TODO: Run iOS-simulator apps from OSX \n");
 			}
 		}
 		if(DK_GetOS() == "Linux"){
 			//if(OS == "linux64"){
-				//DKLog("TODO: Run linux apps from Linux \n", DKDEBUG);
+				//DKLog("TODO: Run linux apps from Linux \n");
 				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 					DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 				}
@@ -120,7 +120,7 @@ function RunMenu_OnEvent(event)
 	
 	//TODO
 	if(DK_Id(event, "Generate Docs")){
-		DKLog("Generate Docs: TODO \n", DKDEBUG);
+		DKLog("Generate Docs: TODO \n");
 		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
 		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
 		var doxy_exe = DKFile_GetShortName(doxy_path);
@@ -129,7 +129,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "Export to Android Studio")){
-		DKLog("Export to Android Studio \n", DKDEBUG);
+		DKLog("Export to Android Studio \n");
 		DKCreate("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});

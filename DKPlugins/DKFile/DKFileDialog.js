@@ -19,7 +19,7 @@ function DKFileDialog_Init()
 	aPath = "";
 	rPath = "";
 	var drives = DKFile_GetDrives(); //TODO
-	DKLog(drives+"\n", DKDEBUG);
+	DKLog(drives+"\n");
 }
 
 ///////////////////////////
@@ -35,7 +35,7 @@ function DKFileDialog_End()
 ////////////////////////////////////
 function DKFileDialog_OnEvent(event)
 {	
-	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_IdLike(event, "DKFileDialogDrive")){
 		DKFileDialog_OpenFolder(DK_GetValue(event));
@@ -50,7 +50,7 @@ function DKFileDialog_OnEvent(event)
 
 	if(DK_Id(event, "DKFileDialogUp")){
 		var up = DKWidget_GetValue("DKFileDialogPath")+"/..";
-		DKLog(up+"\n", DKDEBUG);
+		DKLog(up+"\n");
 		DKFileDialog_OpenFolder(up);
 	}
 	
@@ -110,18 +110,18 @@ function DKFileDialog_OpenFolder(path)
 ////////////////////////////////////
 function DKFileDialog_OpenFile(path)
 {
-	DKLog("DKFileDialog_OpenFile("+path+") \n", DKDEBUG);
+	DKLog("DKFileDialog_OpenFile("+path+") \n");
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n", DKDEBUG);
+	DKLog("aPath:"+aPath+"\n");
 	var assets = DKAssets_LocalAssets();
-	//DKLog("assets:"+assets+"\n", DKDEBUG);
+	//DKLog("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, assets);
-	DKLog("rPath:"+rPath+"\n", DKDEBUG);
+	DKLog("rPath:"+rPath+"\n");
 	DKWidget_SetValue("DKFileDialogPath",aPath);
 }
 
@@ -129,18 +129,18 @@ function DKFileDialog_OpenFile(path)
 function DKFileDialog_UpdatePath(path)
 {
 	//if(!path){ return false; }
-	DKLog("DKFileDialog_UpdatePath("+path+") \n", DKDEBUG);
+	DKLog("DKFileDialog_UpdatePath("+path+") \n");
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n", DKDEBUG);
+	DKLog("aPath:"+aPath+"\n");
 	//var assets = DKAssets_LocalAssets();
-	//DKLog("assets:"+assets+"\n", DKDEBUG);
+	//DKLog("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, path);
-	DKLog("rPath:"+rPath+"\n", DKDEBUG);
+	DKLog("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");

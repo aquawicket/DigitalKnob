@@ -14,7 +14,7 @@ function DKMidiDialog_End()
 ////////////////////////////////////
 function DKMidiDialog_OnEvent(event)
 {
-	DKLog("DKMidiDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKMidiDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_IdLike(event, "DKMidiDialogInput")){
 		DKMidiDialog_ToggleInput(DK_GetValue(event));

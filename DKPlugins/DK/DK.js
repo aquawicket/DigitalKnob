@@ -184,11 +184,11 @@ function DK_GetEvents()
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
 			out += events[i].name + ",";
-			//DKLog(events[i].name, DKDEBUG);
+			//DKLog(events[i].name);
 		}
 		else{
 			out += events[i] + " : ";
-			//DKLog(events[i], DKDEBUG);
+			//DKLog(events[i]);
 		}
 	}
 	return out;
@@ -309,14 +309,14 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	//DKLog("GetType("+event+")\n", DKDEBUG);
+	//DKLog("GetType("+event+")\n");
 	if(!event){ return false; }
 	if(event.type){
-		//DKLog("GetType("+event+") -> "+event.type+"\n", DKDEBUG);
+		//DKLog("GetType("+event+") -> "+event.type+"\n");
 		return event.type 
 	}
 	if(event[1]){
-		//DKLog("GetType("+event+") -> "+event[1]+"\n", DKDEBUG);
+		//DKLog("GetType("+event+") -> "+event[1]+"\n");
 		return event[1]; 
 	}
 	DKLog("DK_GetType("+event+"): could not get event type. \n", DKERROR);
@@ -326,7 +326,7 @@ function DK_GetType(event)
 ////////////////////////
 function DK_GetId(event)
 {
-	//DKLog("GetId("+event+") \n", DKDEBUG);
+	//DKLog("GetId("+event+") \n");
 	if(!event){ return false;}
 	if(event.type && event.type == "contextmenu"){ //rightclick
 		PreventDefault(event);
@@ -334,12 +334,12 @@ function DK_GetId(event)
 	
 	element = DKWidget_GetElement(event);
 	if(element){
-		//DKLog("GetId("+event+") -> "+element.id+"\n", DKDEBUG);
+		//DKLog("GetId("+event+") -> "+element.id+"\n");
 		if(element == window || element == document){ return "GLOBAL"; }
 		return element.id; 
 	}
 	if(event[0]){ 
-		//DKLog("GetId("+event+") -> "+event[0]+"\n", DKDEBUG);
+		//DKLog("GetId("+event+") -> "+event[0]+"\n");
 		return event[0]; 
 	}
 	
@@ -351,7 +351,7 @@ function DK_GetId(event)
 function DK_GetValue(event)
 {
 	//TODO
-	//DKLog("GetValue("+event+") \n", DKDEBUG);
+	//DKLog("GetValue("+event+") \n");
 	return DKWidget_GetValue(event);
 }
 
@@ -379,9 +379,9 @@ function DK_Type(event, command)
 /////////////////////////
 function DK_Id(event, id)
 { 
-	//DKLog("DK_Id("+event+", "+id+") \n", DKDEBUG);
+	//DKLog("DK_Id("+event+", "+id+") \n");
 	var element = DKWidget_GetElement(event);
-	//DKLog("DK_Id(): element="+element.id+" \n", DKDEBUG);
+	//DKLog("DK_Id(): element="+element.id+" \n");
 	if((element == window || element == document) && id == "GLOBAL"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
@@ -391,7 +391,7 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_IdLike(event, id)
 { 
-	//DKLog("DK_IdLike("+event+", "+id+") \n", DKDEBUG);
+	//DKLog("DK_IdLike("+event+", "+id+") \n");
 	if(!id){ return; }
 	if(DK_GetType(event) == "keydown"){ return false; } //KeyboardEvent
 	if(DK_GetType(event) == "keyup"){ return false; } //KeyboardEvent
@@ -413,7 +413,7 @@ function DK_Value(event, id)
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+") \n", DKDEBUG);
+	//DKLog("StopPropagation("+event+") \n");
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -424,7 +424,7 @@ function DK_StopPropagation(event)
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
-	//DKLog("DKAddEvent("+id+", "+type+", "+Function..name+") \n", DKDEBUG);
+	//DKLog("DKAddEvent("+id+", "+type+", "+Function..name+") \n");
 	if(!id){ return false; }
 		
 	var element;
@@ -446,12 +446,12 @@ function DKAddEvent(id, type, Function)
 	}
 	
 	if(element){
-		//DKLog("addEvent("+id+","+type+","+Function.name+") \n", DKDEBUG);
+		//DKLog("addEvent("+id+","+type+","+Function.name+") \n");
 		addEvent(element, type, Function);
 	}
 	
 	//add event to array
-	//DKLog("events.length="+events.length+"\n", DKDEBUG);
+	//DKLog("events.length="+events.length+"\n");
 	events[events.length] = id;
 	events[events.length] = type;
 	events[events.length] = Function;
@@ -481,7 +481,7 @@ function DKRemoveEvent(id, type, Function)
 		element = window;
 	}
 	
-	//DKLog("DKRemoveEvent("+id+","+type+", Function) \n", DKDEBUG);
+	//DKLog("DKRemoveEvent("+id+","+type+", Function) \n");
 	for(var i=0; i<events.length; i++){
 		if(events[i] == id){
 			if(events[i+1] == type){
@@ -489,16 +489,16 @@ function DKRemoveEvent(id, type, Function)
 					events.splice(i, 3);
 					if(element){
 						removeEvent(element, type, Function);
-						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n", DKDEBUG);
+						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n");
 					}
-					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n", DKDEBUG);
+					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n");
 					i=0;
 				}
 			}
 		}
 	}
 
-	//DKLog(events+"\n", DKDEBUG);
+	//DKLog(events+"\n");
 }
 
 /////////////////////////////////
@@ -517,19 +517,19 @@ function DKRemoveEvents(Function)
 function DKSendEvent(id, type, message)
 {
 	//if(id.indexOf("DKConsole.html") == -1){
-	DKLog("SendEvent("+id+","+type+","+message+") \n", DKDEBUG);
+	DKLog("SendEvent("+id+","+type+","+message+") \n");
 	//}
 	
 	for(var i=0; i<events.length; i++){
-		//DKLog(events[i]+" \n", DKDEBUG);
+		//DKLog(events[i]+" \n");
 		//if(events[i] == "GLOBAL"){ //global
-			//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKDEBUG);
+			//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n");
 		//	events[i+2]([id, type, message]);
 			//return;
 		//}
 		if(events[i] == id){
 			if(events[i+1] == type){
-				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n", DKDEBUG);
+				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n");
 				events[i+2]([id, type, message]);
 			}
 		}

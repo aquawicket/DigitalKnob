@@ -27,7 +27,7 @@ function DKHook_End()
 //////////////////////////////
 function DKHook_OnEvent(event)
 {
-	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "getvalue")){
 		var value = DKHook_GetValue();
@@ -64,7 +64,7 @@ function DKHook_UpdateWindowList()
 {
 	var str = DKHook_GetWindows();
 	if(!str){ return; }
-	DKLog("WINDOW LIST: "+str+"\n", DKDEBUG);
+	DKLog("WINDOW LIST: "+str+"\n");
 	var arry = str.split(",");
 	
 	//RemoveDuplicates(arry);

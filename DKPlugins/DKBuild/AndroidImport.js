@@ -13,7 +13,7 @@ function AndroidImport_Init()
 ///////////////////////////////
 function AndroidImport_Import()
 {
-	//DKLog("AndroidImport_Import()\n", DKDEBUG);
+	//DKLog("AndroidImport_Import()\n");
 	if(!APP){ 
 		DKLog("Please select an app.\n");
 		return; 
@@ -38,12 +38,12 @@ function AndroidImport_Import()
 	DK_Run(ANDROIDSTUDIO);
 	
 	DKHook_WaitForWindow("Welcome to Android Studio", 30); //Check for 30 seconds
-	DKLog("Window is ready.\n", DKDEBUG);
+	DKLog("Window is ready.\n");
 	var assets = DKAssets_LocalAssets();
 	DK_ClickImage(assets+"DKBuild/import.bmp");
 
 	DKHook_WaitForWindow("Select Eclipse or Gradle Project to Import", 30); //Check for 30 seconds
-	DKLog("Window is ready.\n", DKDEBUG);
+	DKLog("Window is ready.\n");
 	
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
@@ -69,7 +69,7 @@ function AndroidImport_Import()
 	
 	
 	
-	//DKLog(path+"\n", DKDEBUG);
+	//DKLog(path+"\n");
 	DK_SetClipboard(path);	
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
@@ -78,7 +78,7 @@ function AndroidImport_Import()
 	DK_StrokeKey(13) //stroke enter
 	
 	DKHook_WaitForWindow("Import Project from ADT (Eclipse Android)", 30); //Check for 30 seconds
-	DKLog("Window is ready.\n", DKDEBUG);
+	DKLog("Window is ready.\n");
 	path = WORKSPACE+"/"+APP+"_"+TYPE;
 	DK_SetClipboard(path);
 	DK_PressKey(17); //press ctrl

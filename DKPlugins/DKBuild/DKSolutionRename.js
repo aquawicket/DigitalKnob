@@ -20,7 +20,7 @@ function DKSolutionRename_End()
 //////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
-	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "keydown")){
 		if(DK_GetValue(event) != 13){

@@ -19,7 +19,7 @@ function DKTooltip_End()
 /////////////////////////////////
 function DKTooltip_OnEvent(event)
 {
-	DKLog("DKTooltip_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKTooltip_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "mouseout")){
 		DKClose("DKTooltip/DKTooltip.js");

@@ -65,7 +65,7 @@ function DKFpsTest_Init()
 //////////////////////////
 function DKFpsTest_Event()
 {
-	DKLog("DKFpsTest_Event()",DKINFO);
+	DKLog("DKFpsTest_Event()");
 }
 
 ////////////////////////

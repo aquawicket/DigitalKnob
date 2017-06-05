@@ -18,7 +18,7 @@ function DKAutomate2_End()
 ///////////////////////////////////
 function DKAutomate2_OnEvent(event)
 {
-	DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"NewCause")){
 		DKTrigger_NewCause();

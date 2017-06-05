@@ -48,7 +48,7 @@ function DKFrame_OnEvent(event)
 ///////////////////////////
 function DKFrame_Widget(id)
 {
-	DKLog("DKFrame_Widget("+id+")\n", DKDEBUG);
+	DKLog("DKFrame_Widget("+id+")\n");
 	if(!DKWidget_ElementExists(id)){
 		DKLog("DKFrame_Widget(): element does not exist\n", DKERROR);
 		return false;
@@ -100,7 +100,7 @@ function DKFrame_Widget(id)
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
-	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+") \n", DKDEBUG);
+	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+") \n");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 
@@ -127,7 +127,7 @@ function DKFrame_Iframe(title, url, width, height)
 /////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n", DKDEBUG);
+	DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n");
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
 	if(width == "100%"){ width = window_width-100; }
@@ -152,10 +152,10 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(frame, "min-width", "62rem");
 	DKWidget_SetProperty(frame, "min-height", "30rem");
 	
-	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n", DKDEBUG);
-	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n", DKDEBUG);
-	//DKLog("DKFrame_Widget("+id+"): frame width="+width+"\n", DKDEBUG);
-	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n", DKDEBUG);
+	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
+	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
+	//DKLog("DKFrame_Widget("+id+"): frame width="+width+"\n");
+	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
 	
 	var titlebar = DKWidget_CreateElement(frame, "div", title+"_titlebar");
 	DKWidget_SetProperty(titlebar, "position", "absolute");
@@ -202,7 +202,7 @@ function DKFrame_CreateFrame(title, width, height)
 ////////////////////////////////////
 function DKFrame_CreateResize(frame)
 {
-	DKLog("DKFrame_CreateResize("+frame+") \n", DKDEBUG);
+	DKLog("DKFrame_CreateResize("+frame+") \n");
 	
 	var resize = DKWidget_CreateElement(frame, "img", "resize");
 	DKWidget_SetAttribute(resize, "src", "DKFrame/resize.png");
@@ -222,20 +222,20 @@ function DKFrame_BringToFront()
 {
 	//return;
 	
-	//DKLog("DKFrame_BringToFront()\n", DKDEBUG);
+	//DKLog("DKFrame_BringToFront()\n");
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
-	//DKLog("DKWidget_GetFocusElement() = "+id+"\n", DKDEBUG);
+	//DKLog("DKWidget_GetFocusElement() = "+id+"\n");
 	if(DKWidget_IsChildOf(id, "frame")){
-		//DKLog("DKWidget_AppendChild(body, frame)\n", DKDEBUG);
+		//DKLog("DKWidget_AppendChild(body, frame)\n");
 		DKWidget_AppendChild("body", "frame");
 		return;
 	}
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
-		//DKLog("DKFrame_BringToFront(): frame="+frame+"\n", DKDEBUG);
+		//DKLog("DKFrame_BringToFront(): frame="+frame+"\n");
 		if(DKWidget_IsChildOf(id, frame)){
-			//DKLog("DKWidget_AppendChild(body, "+frame+")\n", DKDEBUG);
+			//DKLog("DKWidget_AppendChild(body, "+frame+")\n");
 			DKWidget_AppendChild("body", frame);
 			return;
 		}
@@ -245,14 +245,14 @@ function DKFrame_BringToFront()
 ///////////////////////////////////
 function DKFrame_MinimizeButton(id)
 {
-	DKLog("DKFrame_MinimizeButton("+id+")\n", DKDEBUG);
+	DKLog("DKFrame_MinimizeButton("+id+")\n");
 	var frame = DKWidget_GetParent(id);
 }
 
 ///////////////////////////////////
 function DKFrame_MaximizeButton(id)
 {
-	//DKLog("DKFrame_MaximizeButton("+id+")\n", DKDEBUG);
+	//DKLog("DKFrame_MaximizeButton("+id+")\n");
 	var frame = DKWidget_GetParent(id);
 	var top = DKWidget_GetProperty(frame, "top");
 	var bottom = DKWidget_GetProperty(frame, "bottom");
@@ -309,12 +309,12 @@ function DKFrame_CloseButton(id)
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		if(arry[i].indexOf(".html") > -1){
-			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+"\n", DKDEBUG);
+			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+"\n");
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
 			DKClose(file);
 			var jsfile = file.replace(".html", ".js");
-			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
+			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
 			DKClose(jsfile);
 		}
 	}
@@ -346,14 +346,14 @@ function DKFrame_Close(id)
 	if(!frame){
 		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);
 	}
-	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n", DKDEBUG);
+	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n");
 	//var file = DKWidget_GetFile(id);
 	//if(!file){
 	//	DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
 	//}
 	DKClose(file);
 	var jsfile = file.replace(".html", ".js");
-	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
+	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
 	DKClose(jsfile);
 	
 	//remove frame events

@@ -23,7 +23,7 @@ function DKPaintFile_End()
 ///////////////////////////////////
 function DKPaintFile_OnEvent(event)
 {
-	DKLog("DKPaintFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKPaintFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKPaintFile_Open")){
 		DKPaintFile_Open();
@@ -49,17 +49,17 @@ function DKPaintFile_OnEvent(event)
 ///////////////////////////
 function DKPaintFile_Open()
 {
-	DKLog("DKPaintFile_Open \n", DKDEBUG);
+	DKLog("DKPaintFile_Open \n");
 }
 
 ///////////////////////////
 function DKPaintFile_Save()
 {
-	DKLog("DKPaintFile_Save \n", DKDEBUG);
+	DKLog("DKPaintFile_Save \n");
 }
 
 /////////////////////////////
 function DKPaintFile_SaveAs()
 {
-	DKLog("DKPaintFile_SaveAs \n", DKDEBUG);
+	DKLog("DKPaintFile_SaveAs \n");
 }

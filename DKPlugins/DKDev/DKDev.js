@@ -125,14 +125,14 @@ function DKDev_OnEvent(event)
 	}
 	if(DK_Type(event, "FileChoice")){
 		var value = DK_GetValue(event);
-		DKLog("FileChoice: "+value+"\n", DKDEBUG);
+		DKLog("FileChoice: "+value+"\n");
 	}
 }
 
 ///////////////////
 function DKDev_On()
 {
-	DKLog("DKDev_On \n", DKDEBUG);
+	DKLog("DKDev_On \n");
 	DKDev_AddDragHandles("body");
 	//DKDev_ApplyBox(stored_element);
 	devmode = true;
@@ -141,7 +141,7 @@ function DKDev_On()
 ////////////////////
 function DKDev_Off()
 {
-	DKLog("DKDev_Off \n", DKDEBUG);
+	DKLog("DKDev_Off \n");
 	DKDev_RemoveDragHandles("body");
 	DKDev_HideBox();
 	devmode = false;
@@ -150,7 +150,7 @@ function DKDev_Off()
 /////////////////////////
 function DKDev_Ignore(id)
 {
-	//DKLog("DKDev_Ignore("+id+") \n", DKDEBUG);
+	//DKLog("DKDev_Ignore("+id+") \n");
 	var arry = ignorelist.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
@@ -288,7 +288,7 @@ function DKDev_SelectElement(id)
 		DKDev_HideBox();
 	}
 
-	//DKLog("stored_element: "+stored_element+"\n", DKDEBUG);
+	//DKLog("stored_element: "+stored_element+"\n");
 	DKSendEvent("DKMenuRightEdit.html", "SetElement", stored_element);
 	DKSendEvent("DKMenuRight.html", "SetPanel", "Edit");
 }
@@ -296,13 +296,13 @@ function DKDev_SelectElement(id)
 /////////////////////////////////
 function DKDev_AddDragHandles(id)
 {
-	DKLog("DKDev_AddDragHandles("+id+") \n", DKDEBUG);
+	DKLog("DKDev_AddDragHandles("+id+") \n");
 	
 	//RemoveDragHandles(id); //clear any drags first
 	var elements = DKWidget_GetElements(id);
 	var list = elements.split(",");
 	list.unshift(id); //add the root element to the beginning
-	//DKLog("AddDragHandles: "+list.toString()+"\n", DKDEBUG);
+	//DKLog("AddDragHandles: "+list.toString()+"\n");
 	
 	for(var t=0; t<list.length; t++){
 		if(!list[t]){ continue; }
@@ -314,7 +314,7 @@ function DKDev_AddDragHandles(id)
 		if(DKDev_Ignore(list[t])){ continue; }	
 		
 		if(DKWidget_AddDragHandle(list[t], list[t])){
-			DKLog("DKWidget_AddDragHandle("+list[t]+","+list[t]+") \n", DKDEBUG);
+			DKLog("DKWidget_AddDragHandle("+list[t]+","+list[t]+") \n");
 			DKAddEvent(list[t], "contextmenu", DKDev_OnEvent);
 			DKAddEvent(list[t], "mousedown", DKDev_OnEvent);
 			DKAddEvent(list[t], "move", DKDev_OnEvent); //TODO for libRocket
@@ -329,7 +329,7 @@ function DKDev_AddDragHandles(id)
 ////////////////////////////////////
 function DKDev_RemoveDragHandles(id)
 {
-	DKLog("DKDev_RemoveDragHandles() \n", DKDEBUG);
+	DKLog("DKDev_RemoveDragHandles() \n");
 	var elements = DKWidget_GetElements(id);
 	var list = elements.split(",");
 	
@@ -367,7 +367,7 @@ function DKDev_ClearEditor()
 ////////////////////
 function DKDev_Cut()
 {
-	DKLog("DKDev::Cut() \n", DKDEBUG);
+	DKLog("DKDev::Cut() \n");
 	DKDev_HideBox();   //FIXME: HideBox() will cause a crash when we later Remove an element
 	//PrependChild("body", "DKDev_Box");
 
@@ -392,7 +392,7 @@ function DKDev_Cut()
 /////////////////////
 function DKDev_Copy()
 {
-	DKLog("DKDev::Copy() \n", DKDEBUG);
+	DKLog("DKDev::Copy() \n");
 	DKDev_HideBox();
 
 	var el = DKWidget_GetElements(stored_element);
@@ -412,12 +412,12 @@ function DKDev_Copy()
 //////////////////////
 function DKDev_Paste()
 {
-	DKLog("DKDev::Paste() \n", DKDEBUG);
+	DKLog("DKDev::Paste() \n");
 
 	var string = DK_GetClipboard();
 	if(!string){ return false; }
 	
-	DKLog("\n\n"+string+"\n\n", DKDEBUG);
+	DKLog("\n\n"+string+"\n\n");
 	//replace id's with available id's
 	var place = 0;
 	var n = string.indexOf("id=", place);
@@ -426,10 +426,10 @@ function DKDev_Paste()
 		var res = string.substring(n+4, place);
 		var new_id = DKWidget_GetAvailableId(res);
 		string = string.replace("id=\""+res+"\"", "id=\""+new_id+"\"");
-		DKLog("Paste: renamed "+res+" to "+new_id+"\n", DKDEBUG);
+		DKLog("Paste: renamed "+res+" to "+new_id+"\n");
 		n = string.indexOf("id=", place);
 	}
-	DKLog("\n\n"+string+"\n\n", DKDEBUG);
+	DKLog("\n\n"+string+"\n\n");
 	
 	//Parse the sting into an element
 	var temp = DKWidget_CreateElement("body", "temp", "temporary");
@@ -515,7 +515,7 @@ function DKDev_NewButton()
 /////////////////////////////
 function DKDev_NewImage(file)
 {
-	DKLog("DKDev_NewImage("+file+") \n", DKDEBUG);
+	DKLog("DKDev_NewImage("+file+") \n");
 	var element = DKWidget_CreateElement(stored_element, "img", "Image");
 	DKWidget_SetAttribute(element, "src", file);
 	DKWidget_SetProperty(element, "position", "absolute");
@@ -634,7 +634,7 @@ function DKDev_NewHSlider()
 ///////////////////////////////
 function DKDev_SaveHtmlFile(id)
 {
-	DKLog("DKDev_SaveHtmlFile("+id+") \n", DKDEBUG);
+	DKLog("DKDev_SaveHtmlFile("+id+") \n");
 	var file = DKWidget_GetFile(id);
 	if(file.indexOf(".html") == -1){
 		DKLog("DKDev_SaveHtmlFile("+id+") Invalid .html file\n", DKERROR);

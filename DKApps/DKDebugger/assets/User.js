@@ -11,7 +11,7 @@ DKAddEvent("GLOBAL", "keypress", User_OnEvent);
 ////////////////////////////
 function User_OnEvent(event)  //Duktape
 {
-	DKLog("User_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("User_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "keypress")){ //press a key to run this after a DevTools context menu is open, it will find 'Save'
 		DKCef_RunJavascript("CefSDL", "var x = document.getElementsByClassName('soft-context-menu');");

@@ -23,7 +23,7 @@ function DKPaintMenu_End()
 ///////////////////////////////////
 function DKPaintMenu_OnEvent(event)
 {
-	DKLog("DKPaintMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKPaintMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKPaintMenu_Cut")){
 		DKPaintMenu_Cut();

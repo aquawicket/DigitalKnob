@@ -1,7 +1,7 @@
 //////////////////////////
 function DKBuildGUI_Init()
 {
-	//DKLog("DKBuildGUI_Init()\n", DKDEBUG);
+	//DKLog("DKBuildGUI_Init()\n");
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKBuild/DKBuild.js", function(){
@@ -59,7 +59,7 @@ function DKBuildGUI_End()
 //////////////////////////////////
 function DKBuildGUI_OnEvent(event)
 {
-	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"AppList")){
 		//if(DK_Type(event,"click")){
@@ -106,7 +106,7 @@ function DKBuildGUI_UpdateApps()
 	DKBuild_GetAppList();
 	
 	for(var i=0; i<APP_LIST.length; ++i){
-		//DKLog(APP_LIST[i]+"\n", DKDEBUG);
+		//DKLog(APP_LIST[i]+"\n");
 		var ele = DKWidget_CreateElement("AppList", "option", "al");
 		DKWidget_SetInnerHtml(ele, APP_LIST[i]);
 		DKWidget_SetAttribute(ele, "value", APP_LIST[i]);
@@ -126,7 +126,7 @@ function DKBuildGUI_AppSelect()
 	}
 	
 	APP = DKWidget_GetValue("AppList");
-	DKLog("APP = "+APP+"\n", DKDEBUG);
+	DKLog("APP = "+APP+"\n");
 	//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
 	
 	//DKSendEvent("DKMenuRight.html", "SetPanel", "App");
@@ -138,14 +138,14 @@ function DKBuildGUI_AppSelect()
 function DKBuildGUI_OsSelect()
 {
 	OS = DKWidget_GetValue("OSList");
-	DKLog("OS = "+OS+"\n", DKDEBUG);
+	DKLog("OS = "+OS+"\n");
 }
 
 /////////////////////////////////
 function DKBuildGUI_BuildSelect()
 {
 	TYPE = DKWidget_GetValue("BuildType");
-	DKLog("TYPE = "+TYPE+"\n", DKDEBUG);
+	DKLog("TYPE = "+TYPE+"\n");
 }
 
 /*
@@ -157,7 +157,7 @@ function DKBuildGUI_UpdateLibs()
 
 	return;
 	var result = DK_CallFunc("DKBuildGUI::GetLibList", "");
-	DKLog("Result:"+result, DKDEBUG);
+	DKLog("Result:"+result);
 	
 	var libs = result.split(",");
 	
