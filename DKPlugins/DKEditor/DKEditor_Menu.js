@@ -12,6 +12,8 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_ShowConsole", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_HideConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
@@ -54,6 +56,12 @@ function DKEditor_Menu_OnEvent(event)
 		if(DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
 			DK_System("clear");
 		}
+	}
+	if(DK_Id(event, "DKEditor_Menu_ShowConsole")){
+		DKLog("DKEditor_Menu_ShowConsole");
+	}
+	if(DK_Id(event, "DKEditor_Menu_HideConsole")){
+		DKLog("DKEditor_Menu_HideConsole");
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
 		DKCreate("DKMessage/DKMessage.js", function(){
