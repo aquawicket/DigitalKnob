@@ -12,7 +12,7 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
+	DKRemoveEvents(GitMenu_OnEvent);
 	DKClose("DKBuild/GitMenu.html");
 }
 
