@@ -12,15 +12,14 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	DKRemoveEvent("DKMessageOk", "click", DKMessage_OnEvent);
-	DKRemoveEvent("DKMessageCancel", "click", DKMessage_OnEvent);
+	DKRemoveEvents(DKMessage_OnEvent);
 	DKClose("DKMessage.html");
 }
 
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKMessageOk")){
 		if(DKMessage_callback){

@@ -97,12 +97,8 @@ function DKClose(data)
 	//DKLog("DKClose("+data+")");
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
-		return;
+		return false;
 	}
-	
-	//if(data.indexOf("/") > -1){
-		//DKLog("DKClose("+data+"): data contains a / \n", DKERROR);
-	//}
 	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
@@ -118,17 +114,15 @@ function DKClose(data)
 	var file = DKFile_GetFilename(arry[1]);
 	if(!file){ 
 		DKLog("DKClose("+data+"): file invalid \n", DKERROR);
-		return; 
+		return false; 
 	}
 	
 	if(arry[0] == "DKJavascript"){
-		// Call the js end function
 		var name = file.replace(".js", "");
 		name += "_End";
 		var func = window[name]; //End
 		if(typeof func == 'function'){ 
-			//DKLog("Calling: "+name+" \n");
-			func(); //End
+			func(); // Call the jsclass_End() function
 		}
 		else{
 			DKLog(name+" is not callable \n", DKWARN);
@@ -137,7 +131,7 @@ function DKClose(data)
 		var script = document.getElementById(arry[1]);
 		if(!script){
 			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
-			return;
+			return false;
 		}
 		script.parentNode.removeChild(script);
 	}
@@ -146,7 +140,7 @@ function DKClose(data)
 		var element = document.getElementById(file);
 		if(!element){ 
 			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
-			return; 
+			return false; 
 		}
 		element.parentNode.removeChild(element);
 	}
@@ -154,10 +148,12 @@ function DKClose(data)
 		var css = document.getElementById(arry[1]);
 		if(!css){ 
 			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
-			return; 
+			return false; 
 		}
 		css.parentNode.removeChild(css);
 	}
+	
+	return true;
 }
 
 ////////////////////////////////////////

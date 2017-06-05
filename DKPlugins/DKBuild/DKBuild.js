@@ -523,7 +523,7 @@ function DKBuild_GetAppList()
 		//DKLog("files["+i+"] = "+files[i]+"\n");
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			DKLog("url = "+url+"\n");
+			//DKLog("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); 
 			//DKLog("folder = "+folder+"\n");
 			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
