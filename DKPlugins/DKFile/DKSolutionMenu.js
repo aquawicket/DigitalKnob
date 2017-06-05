@@ -4,7 +4,7 @@ DKSolutionMenu_file = "";
 //////////////////////////////
 function DKSolutionMenu_Init()
 {
-	DKCreate("DKBuild/DKSolutionMenu.html");
+	DKCreate("DKFile/DKSolutionMenu.html");
 	DKWidget_SetProperty("DKSolutionMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKSolutionMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
@@ -25,7 +25,7 @@ function DKSolutionMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
 	DKRemoveEvents(DKSolutionMenu_OnEvent);
-	DKClose("DKBuild/DKSolutionMenu.html");
+	DKClose("DKFile/DKSolutionMenu.html");
 }
 
 //////////////////////////////////////
@@ -171,7 +171,7 @@ function DKSolutionMenu_Rename()
 	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
 	var top = top1 - top2 - 1;
 	
-	DKCreate("DKBuild/DKSolutionRename.js", function(){
+	DKCreate("DKFile/DKSolutionRename.js", function(){
 		DKSolutionRename_SetId(DKSolutionMenu_id);
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
 		DKWidget_SetProperty("DKSolutionRename.html", "top", top+"rem");
@@ -228,7 +228,7 @@ function DKSolutionMenu_GitAdd()
 	//TODO
 	
 	//we need the path of git.exe
-	//var git = GIT; //from DKBuild.js
+	//var git = GIT; //from DKFile.js
 	//DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n");
 	// The GIT variable seems OK
 	

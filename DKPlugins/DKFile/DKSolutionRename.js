@@ -4,7 +4,7 @@ DKSolutionRename_file = "";
 //////////////////////////////
 function DKSolutionRename_Init()
 {
-	DKCreate("DKBuild/DKSolutionRename.html,DKSolutionMenu");
+	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
 }
@@ -14,7 +14,7 @@ function DKSolutionRename_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKRemoveEvents(DKSolutionRename_OnEvent);
-	DKClose("DKBuild/DKSolutionRename.html");
+	DKClose("DKFile/DKSolutionRename.html");
 }
 
 //////////////////////////////////////
@@ -33,7 +33,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	DKSolutionRename_Rename();
-	DKClose("DKBuild/DKSolutionRename.js");
+	DKClose("DKFile/DKSolutionRename.js");
 }
 
 ///////////////////////////////////

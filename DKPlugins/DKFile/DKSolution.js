@@ -1,13 +1,13 @@
 //////////////////////////
 function DKSolution_Init()
 {	
-	DKCreate("DKBuild/DKSolution.html");
+	DKCreate("DKFile/DKSolution.html");
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	
 	if(typeof DKPATH !== 'undefined'){
-		DKSolution_UpdatePath(DKPATH); //DKPATH from DKBuild.js
+		DKSolution_UpdatePath(DKPATH); //DKPATH from DKFile.js
 	}
 }
 
@@ -15,7 +15,7 @@ function DKSolution_Init()
 function DKSolution_End()
 {
 	DKRemoveEvents(DKSolution_OnEvent);
-	DKClose("DKBuild/DKSolution.html");
+	DKClose("DKFile/DKSolution.html");
 }
 
 //////////////////////////////////
@@ -32,7 +32,7 @@ function DKSolution_OnEvent(event)
 	if(DK_Type(event, "contextmenu")){
 		//DKLog("DKSolution_OnEvent() contextmenu\n");	
 		DK_StopPropagation(event);
-		DKCreate("DKBuild/DKSolutionMenu.js", function(){
+		DKCreate("DKFile/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
 			if(!file){
 				file = DKWidget_GetValue("DKSolutionPath")+"/";

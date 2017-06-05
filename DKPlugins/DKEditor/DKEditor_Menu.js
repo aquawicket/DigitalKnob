@@ -38,7 +38,7 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_RestartApp();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
-		DKCreate("DKBuild/DKSolution.js", function(){
+		DKCreate("DKFile/DKSolution.js", function(){
 			var frame = DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 			DKWidget_SetProperty("DKSolution.html", "height", "300rem");
@@ -71,8 +71,8 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "DKEditor_Menu_Builder")){
-		DKCreate("DKBuild/DKBuildGUI.js", function(){
-			DKFrame_Widget("DKBuildGUI.html");
+		DKCreate("DKFile/DKFileGUI.js", function(){
+			DKFrame_Widget("DKFileGUI.html");
 		});
 	}
 
