@@ -54,6 +54,13 @@ function DKFrame_Widget(id)
 		return false;
 	}
 	
+	//stop if frame already exsists, multiple windows not ready yet.
+	var title = id.replace(".html", "");
+	if(DKWidget_ElementExists(title+"_frame")){
+		DKLog("DKFrame_Widget("+id+"): frame already exists\n", DKWARN);
+		return;
+	}
+	
 	var top = DKWidget_GetProperty(id, "top");
 	var bottom = DKWidget_GetProperty(id, "bottom");
 	var left = DKWidget_GetProperty(id, "left");
@@ -73,7 +80,6 @@ function DKFrame_Widget(id)
 	width = width.replace("rem", "");
 	height = height.replace("rem", "");
 	
-	var title = id.replace(".html", "");
 	var frame = DKFrame_CreateFrame(title, width, height);
 	
 	DKWidget_SetProperty(id, "position", "absolute");
