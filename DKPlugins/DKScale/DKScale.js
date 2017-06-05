@@ -28,14 +28,14 @@ function DKScale_Resize()
 {
     //DKLog("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
 	if(pixel_ratio == DKWindow_GetPixelRatio()){ return true; } //nothing to be done
-	var pixel_ratio = DKWindow_GetPixelRatio();
+	pixel_ratio = DKWindow_GetPixelRatio();
 
 	//Set the scale
-	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())))){
+	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth()))){
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
-			pixel_ratio = 2.0;
-			DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
-			DKLog("DKScale_Resize(): scale set to "+pixel_ratio+"px\n");
+			var ratio = 2.0;
+			DKWidget_SetProperty("html", "font-size", ratio+"px");
+			DKLog("DKScale_Resize(): scale set to "+ratio+"px\n");
 		}
 	}
 	else{
