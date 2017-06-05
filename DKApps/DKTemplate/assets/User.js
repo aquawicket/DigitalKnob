@@ -79,7 +79,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
-	DKCreate("DKTray/DKTray.js", function(){});
+	DKCreate("DKTray/DKTray.js", function(){}); //FIXME - DKWindow is not implemented for CEF windows, yet.
 	DKCreate("DKDebug/DKDebug.js", function(){});
 	DKCreate("DKCef/DKDevTools.js", function(){});
 }
