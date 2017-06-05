@@ -7,7 +7,7 @@ function AndroidImport_Init()
 {
 	DKCreate("DKHook");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
-	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n", DKINFO);
+	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
 
 ///////////////////////////////
@@ -15,7 +15,7 @@ function AndroidImport_Import()
 {
 	//DKLog("AndroidImport_Import()\n", DKDEBUG);
 	if(!APP){ 
-		DKLog("Please select an app.\n", DKINFO);
+		DKLog("Please select an app.\n");
 		return; 
 	}
 	
@@ -28,7 +28,7 @@ function AndroidImport_Import()
 		}
 	}
 	if(!appdir){
-		DKLog("AndroidImport_Import(): cannot locate appdir.\n", DKINFO);
+		DKLog("AndroidImport_Import(): cannot locate appdir.\n");
 		return;
 	}
 	
@@ -48,12 +48,12 @@ function AndroidImport_Import()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
 			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
 				appdir = folder+"/DKApps";
 			}
@@ -135,7 +135,7 @@ function AndroidImport_Import()
 		DKFile_Copy(DKPATH+"/"+appdir+"/"+APP+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
 	
-	DKLog("Import finished\n", DKINFO);
+	DKLog("Import finished\n");
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){

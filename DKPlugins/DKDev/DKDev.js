@@ -37,7 +37,7 @@ function DKDev_End()
 /////////////////////////////
 function DKDev_OnEvent(event)
 {
-	//DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKDev_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(devmode == false){ return; }
 	
@@ -50,7 +50,7 @@ function DKDev_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "move")){
-		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n", DKINFO);
+		//DKLog("DKDev_OnEvent("+DK_GetId(event)+"): move event \n");
 		if(target == "DKResizeImg"){ 
 			DKDev_Resize(stored_element);
 		}
@@ -81,7 +81,7 @@ function DKDev_OnEvent(event)
 	}
 
 	if(DK_Type(event, "contextmenu")){
-		DKLog("DKDev_OnEvent(): contextmenu \n", DKINFO);
+		DKLog("DKDev_OnEvent(): contextmenu \n");
 		var target = DK_GetId(event);
 		if(DKWidget_IsChildOf(target, "DKDev_Menu.html")){ return; }
 		if(DKWidget_IsChildOf(target, "DKDev_RootMenu.html")){ return; }
@@ -96,8 +96,8 @@ function DKDev_OnEvent(event)
 		}
 		storedMouseX = DKWidget_GetMouseElementX(stored_element);
 		storedMouseY = DKWidget_GetMouseElementY(stored_element);
-		//DKLog("stored_element = "+stored_element, DKINFO);
-		//DKLog("storedMouseX = "+storedMouseX, DKINFO);
+		//DKLog("stored_element = "+stored_element);
+		//DKLog("storedMouseX = "+storedMouseX);
 		
 		//FIXME
 		//DKLog("target = "+target+"\n", DKINFO)
@@ -204,14 +204,14 @@ function DKDev_HideBox()
 ///////////////////////////
 function DKDev_ApplyBox(id)
 {
-	//DKLog("DKDev_ApplyBox("+id+")\n", DKINFO);
+	//DKLog("DKDev_ApplyBox("+id+")\n");
 	if(id.indexOf("body") > -1){ return; }
 	
 	var parentid = DKWidget_GetParent(id);
 	DKWidget_AppendChild(parentid, "DKDev_Box");
 	DKWidget_SetProperty("DKDev_Box", "visibility", "visible");
 	
-	//DKLog("element = "+id+"\n", DKINFO);
+	//DKLog("element = "+id+"\n");
 	if(DKWidget_HasProperty(id, "top")){
 		DKWidget_SetProperty("DKDev_Box", "top", parseInt(DKWidget_GetProperty(id, "top"))-1+"rem");
 	}
@@ -261,9 +261,9 @@ function DKDev_ApplyBox(id)
 /////////////////////////
 function DKDev_Resize(id)
 {
-	//DKLog("DKDev_Resize("+id+")\n", DKINFO);
-	//DKLog("DKResizeImg: left = "+DKWidget_GetProperty("DKResizeImg", "left")+"\n", DKINFO);
-	//DKLog("DKResizeImg: top = "+DKWidget_GetProperty("DKResizeImg", "top")+"\n", DKINFO);
+	//DKLog("DKDev_Resize("+id+")\n");
+	//DKLog("DKResizeImg: left = "+DKWidget_GetProperty("DKResizeImg", "left")+"\n");
+	//DKLog("DKResizeImg: top = "+DKWidget_GetProperty("DKResizeImg", "top")+"\n");
 	DKWidget_SetProperty(id, "width", DKWidget_GetProperty("DKResizeImg", "left"));
 	DKWidget_SetProperty(id, "height", DKWidget_GetProperty("DKResizeImg", "top"));
 	DKDev_ApplyBox(id);
@@ -272,7 +272,7 @@ function DKDev_Resize(id)
 ////////////////////////////////
 function DKDev_SelectElement(id)
 {
-	//DKLog("DKDev_SelectElement("+id+") \n", DKINFO);
+	//DKLog("DKDev_SelectElement("+id+") \n");
 	
 	if(id.indexOf("body") > -1){ 
 		//stored_element = "";
@@ -454,7 +454,7 @@ function DKDev_Paste()
 ////////////////////////
 function DKDev_NewPage()
 {
-	DKLog("DKDev_NewPage("+stored_element+") \n", DKINFO);
+	DKLog("DKDev_NewPage("+stored_element+") \n");
 	
 	//var id = DKWidget_GetAvailableId("NewWidget.html");
 	DKCreate(".html,"+stored_element, function(){
@@ -469,7 +469,7 @@ function DKDev_NewPage()
 ///////////////////////
 function DKDev_NewDiv()
 {
-	DKLog("DKDev_NewDiv("+stored_element+") \n", DKINFO);
+	DKLog("DKDev_NewDiv("+stored_element+") \n");
 	var element = DKWidget_CreateElement(stored_element, "div", "Div");
 	DKWidget_SetProperty(element, "position", "absolute");
 	DKWidget_SetProperty(element, "top", String(storedMouseY)+"rem");
@@ -648,10 +648,10 @@ function DKDev_SaveHtmlFile(id)
 	var arry2 = list.split(",");
 	arry2.unshift(file);
 	for(var b=0; b<arry2.length; b++){
-		DKLog("DKDev_SaveHtmlFile("+id+"), Processing element("+arry2[b]+"). \n", DKINFO);
+		DKLog("DKDev_SaveHtmlFile("+id+"), Processing element("+arry2[b]+"). \n");
 
 		if(DKWidget_GetAttribute(arry2[b], "nosave_value")){
-			DKLog("DKDev_SaveHtmlFile("+id+"), nosave_value detected. \n", DKINFO);
+			DKLog("DKDev_SaveHtmlFile("+id+"), nosave_value detected. \n");
 			DKWidget_RemoveAttribute(arry2[b], "value"); //remove value attributes
 		}
 		if(!DKWidget_GetAttribute(arry2[b], "value")){
@@ -670,7 +670,7 @@ function DKDev_SaveHtmlFile(id)
 		//}
 	}
 		
-	DKLog("Saving: "+file+"\n", DKINFO);
+	DKLog("Saving: "+file+"\n");
 	var data = DKWidget_GetOuterHtml(file);
 	if(data){
 		var assets = DKAssets_LocalAssets();

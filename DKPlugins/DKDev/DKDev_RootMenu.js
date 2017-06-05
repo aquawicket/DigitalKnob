@@ -21,7 +21,7 @@ function DKDev_RootMenu_End()
 //////////////////////////////////////
 function DKDev_RootMenu_OnEvent(event)
 {
-	DKLog("DKDev_RootMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("DKDev_RootMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKDev_RootMenu_NewFrame")){
 		DKDev_NewPage(stored_element);

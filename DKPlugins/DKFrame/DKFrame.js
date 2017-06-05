@@ -16,7 +16,7 @@ function DKFrame_End()
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {
-	//DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_Type(event, "mousedown")){
 		DKFrame_BringToFront();
@@ -264,14 +264,14 @@ function DKFrame_MaximizeButton(id)
 		//OLD
 		//var frame = document.getElementById(id).parentNode;
 		//var child = frame.childNodes[4];
-		//DKLog(frame.id+"\n", DKINFO);
+		//DKLog(frame.id+"\n");
 		//DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		//DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 		
 		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKLog(elements+"\n", DKINFO);
+		DKLog(elements+"\n");
 		DKWidget_SetProperty(arry[4], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
 		DKWidget_SetProperty(arry[4], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
 	}
@@ -293,7 +293,7 @@ function DKFrame_MaximizeButton(id)
 		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKLog(elements+"\n", DKINFO);
+		DKLog(elements+"\n");
 		DKWidget_SetProperty(arry[4], "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		DKWidget_SetProperty(arry[4], "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
@@ -302,7 +302,7 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	//DKLog("DKFrame_CloseButton("+id+")\n", DKINFO);
+	//DKLog("DKFrame_CloseButton("+id+")\n");
 	
 	var frame = DKWidget_GetParent(id);
 	var children = DKWidget_GetElements(frame);
@@ -331,11 +331,10 @@ function DKFrame_CloseButton(id)
 	DKWidget_RemoveElement(frame);
 }
 
-/*
 //////////////////////////
 function DKFrame_Close(id)
 {
-	DKLog("DKFrame_Close("+id+")\n", DKINFO);
+	//DKLog("DKFrame_Close("+id+")\n");
 	
 	//if(id.indexOf("/") > -1){
 	//	DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
@@ -356,9 +355,18 @@ function DKFrame_Close(id)
 	var jsfile = file.replace(".html", ".js");
 	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n", DKDEBUG);
 	DKClose(jsfile);
+	
+	//remove frame events
+	var name = frame;
+	name = name.replace("_frame", ""); //get the raw name
+	DKRemoveEvents(name+"_close");
+	DKRemoveEvents(name+"_maximize");
+	DKRemoveEvents(name+"_minimize");
+	DKRemoveEvents(name+"_titlebartext");
+	DKRemoveEvents(name+"_frame");
+	
 	DKWidget_RemoveElement(frame);
 }
-*/
 
 //////////////////////////////
 function DKFrame_StoreSize(id)

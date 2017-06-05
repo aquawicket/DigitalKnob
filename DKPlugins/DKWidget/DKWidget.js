@@ -76,16 +76,16 @@ function AdjustRems(id)
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
 	for(var i=0; i<elements.length; i++){
-		//DKLog("\n", DKINFO);
-		//DKLog(elements[i].id, DKINFO);
+		//DKLog("\n");
+		//DKLog(elements[i].id);
 		for(var s=0; s<elements[i].style.length; s++){
 			var style_name = elements[i].style[s];
 			var style_value = elements[i].style[elements[i].style[s]];
-			//DKLog(style_name+" : "+style_value, DKINFO);
+			//DKLog(style_name+" : "+style_value);
 			
 			if(style_value.indexOf("rem") > -1){
 				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";  //NOTE: 10 = scale factor
-				//DKLog(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem", DKINFO);
+				//DKLog(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem");
 			}
         }
 	}	
@@ -347,11 +347,11 @@ function DKWidget_GetElements(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	//DKLog("DKWidget_GetValue("+variable+") \n", DKINFO);
+	//DKLog("DKWidget_GetValue("+variable+") \n");
 	if(!variable){ DKLog("variable empty \n", DKDEBUG); return; }
 
 	if(typeof variable === "string"){ //id
-		//DKLog("GetValue("+variable+") -> typeof variable === string\n", DKINFO);
+		//DKLog("GetValue("+variable+") -> typeof variable === string\n");
 		var ele = document.getElementById(variable);
 		if(!ele){ DKLog("DKWidget_GetValue("+variable+"): Cannot find element. \n", DKDEBUG); /*return false;*/ }
 		if(ele){
@@ -362,7 +362,7 @@ function DKWidget_GetValue(variable)
 				//DKLog("DKWidget_GetValue("+variable+"): Could not get value. \n", DKERROR);
 				return false;
 			}
-			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n", DKINFO);
+			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value; 
 		}
 		
@@ -376,7 +376,7 @@ function DKWidget_GetValue(variable)
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n", DKDEBUG);
 		//DKLog("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n", DKDEBUG);
 		if(variable.nodeType == 1){
-			//DKLog("variable.tagName: "+variable.tagName+"\n", DKINFO);
+			//DKLog("variable.tagName: "+variable.tagName+"\n");
 			if(variable.tagName == "INPUT"){
 				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n", DKDEBUG);
 				return variable.value;
@@ -546,11 +546,11 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
-	//DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")\n", DKINFO);
+	//DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")\n");
 	
 	if(!variable){ DKLog("DKWidget_SetProperty(): variable not set \n", DKWARN); return false; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
-	//DKLog("DK_IE() = "+DK_IE()+"\n", DKINFO);
+	//DKLog("DK_IE() = "+DK_IE()+"\n");
 	if(DK_IE() < 9){
 		value = value.replace("rem", "px"); //IE 8- fix
 	}
@@ -885,7 +885,7 @@ function DKWidget_GetMouseElementX(id)
 		left += ele.offsetLeft; 
 	}
 	*/
-	//DKLog("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n", DKINFO);
+	//DKLog("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n");
 	return mouseX - DKWidget_GetOffsetLeft(id);//parseInt(left);
 }
 
@@ -901,7 +901,7 @@ function DKWidget_GetMouseElementY(id)
 		top += ele.offsetTop; 
 	}
 	*/
-	//DKLog("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n", DKINFO);
+	//DKLog("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n");
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
 
@@ -926,7 +926,7 @@ function DKWidget_GetOffsetTop(id)
 	while((ele=ele.offsetParent) != null){ 
 		top += ele.offsetTop; 
 	}
-	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
 	return parseInt(top);
 }
 
@@ -949,7 +949,7 @@ function DKWidget_GetOffsetRight(id)
 	while((ele=ele.offsetParent) != null){ 
 		right += ele.offsetRight; 
 	}
-	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
 	return parseInt(right);
 }
 
@@ -961,7 +961,7 @@ function DKWidget_GetOffsetBottom(id)
 	while((ele=ele.offsetParent) != null){ 
 		bottom += ele.offsetBottom; 
 	}
-	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n", DKINFO);
+	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
 	return parseInt(bottom);
 }
 

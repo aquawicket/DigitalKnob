@@ -7,13 +7,13 @@ function DKFileAssociation_End(){}
 ////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 }
 
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	//DKLog("DKFileAssociation_Open("+file+") \n", DKINFO);
+	//DKLog("DKFileAssociation_Open("+file+") \n");
 	
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".html") != -1 ){ 

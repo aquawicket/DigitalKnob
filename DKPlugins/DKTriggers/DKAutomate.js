@@ -51,7 +51,7 @@ function DKAutomate_OnEvent(event)
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
-				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
 				DKAutomate_NewTrigger(rval);
 			});
@@ -62,7 +62,7 @@ function DKAutomate_OnEvent(event)
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
-				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n", DKINFO);
+				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(rval == true){
 					if(!current_trigger){ return; }
 					DKTrigger_RemoveTrigger(current_trigger);
@@ -127,7 +127,7 @@ function DKAutomate_UpdateValues()
 //////////////////////////////////////
 function DKAutomate_SelectValue(value)
 {
-	//DKLog("("+value+") \n", DKINFO);
+	//DKLog("("+value+") \n");
 	
 	DKTrigger_SelectTrigger(value);
 	DKSendEvent("DKAutomate2.html", "SelectTrigger", value);

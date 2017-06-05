@@ -101,14 +101,14 @@ function DKFile_VerifyPath(path)
 	
 	DKLog("DKFile_VerifyPath("+path+"): checking "+path+"\n", DKDEBUG);
 	if(DKFile_Exists(path)){ 
-		DKLog("DKFile_VerifyPath("+path+"): Found "+path+"\n", DKINFO);
+		DKLog("DKFile_VerifyPath("+path+"): Found "+path+"\n");
 		return path;
 	}
 	
 	var assets = DKAssets_LocalAssets();
 	DKLog("DKFile_VerifyPath("+path+"): checking "+assets+path+"\n", DKDEBUG);
 	if(DKFile_Exists(assets+path)){
-		DKLog("DKFile_VerifyPath("+path+"): Found "+assets+path+"\n", DKINFO);
+		DKLog("DKFile_VerifyPath("+path+"): Found "+assets+path+"\n");
 		return assets+path;
 	}	
 	
@@ -136,7 +136,7 @@ function DKFile_GetFilename(path)
 ////////////////////////////////////
 function DKFile_SaveFile(path, data)
 {
-	DKLog("DKFile_SaveFile("+path+", data)\n", DKINFO);
+	DKLog("DKFile_SaveFile("+path+", data)\n");
 	//var send = phpurl;
 	//if(realpath){
 		//var filename = DKFile_GetFilename(path);
@@ -152,13 +152,13 @@ function DKFile_SaveFile(path, data)
 	send += "&data="
 	send += data;
 	var response = ajaxGetUrl(send);
-	DKLog(response, DKINFO);
+	DKLog(response);
 
 	//FIXME
 	//if(response.indexOf("DKERROR") != -1){
 	//	return false;
 	//}
-	DKLog("Saved file: "+path+"\n", DKINFO);
+	DKLog("Saved file: "+path+"\n");
 	return true;
 }
 
@@ -166,7 +166,7 @@ if(DK_GetBrowser() != "CEF"){
 	///////////////////////////////////////
 	function DKFile_GetSetting(file, param)
 	{
-		//DKLog("DKFile_GetSetting("+file+", "+param+") \n", DKINFO);
+		//DKLog("DKFile_GetSetting("+file+", "+param+") \n");
 		
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
@@ -216,7 +216,7 @@ if(DK_GetBrowser() != "CEF"){
 	//////////////////////////////////////////////
 	function DKFile_SetSetting(file, param, value)
 	{
-		DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n", DKINFO);
+		DKLog("DKFile_SetSetting("+file+", "+param+", "+value+") \n");
 		
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
@@ -236,7 +236,7 @@ if(DK_GetBrowser() != "CEF"){
 				if(begin == -1){
 					filestring = filestring.concat("\n" + param + " " + value); //create entry
 					DKFile_StringToFile(filestring, path);
-					DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
+					DKLog("WROTE: "+filestring+" TO: "+path+" \n");
 					return true;
 				}
 				var start = filestring.indexOf("]", begin);
@@ -247,7 +247,7 @@ if(DK_GetBrowser() != "CEF"){
 				var oldstr = filestring.substr(start+1, end-start-1);
 				filestring = replace(filestring, oldstr, out); 
 				DKFile_StringToFile(filestring,path);
-				DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
+				DKLog("WROTE: "+filestring+" TO: "+path+" \n");
 				return true;
 			}
 	
@@ -259,7 +259,7 @@ if(DK_GetBrowser() != "CEF"){
 			if(temp == -1){
 				filestring = filestring.concat("\n" + setting + " " + value); //create entry
 				DKFile_StringToFile(filestring,file);
-				DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+				DKLog("WROTE: "+filestring+" TO: "+file+" \n");
 				return true;
 			}
 			var start = filestring.indexOf(" ", begin);
@@ -269,7 +269,7 @@ if(DK_GetBrowser() != "CEF"){
 			filestring.replace(filestring, oldstr, value); 
 			DKFile_StringToFile(filestring,file);
 		
-			DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+			DKLog("WROTE: "+filestring+" TO: "+file+" \n");
 			return true;
 		}
 	}	
@@ -279,7 +279,7 @@ if(DK_GetBrowser() != "CEF"){
 	/////////////////////////////////
 	function DKFile_FileToString(url)
 	{
-		DKLog("DKFile_FileToString("+url+")\n", DKINFO);
+		DKLog("DKFile_FileToString("+url+")\n");
 		var path = DKFile_VerifyPath(url);
 		if(!path){ return; }
 		if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
@@ -376,7 +376,7 @@ if(DK_GetBrowser() != "CEF"){
 	///////////////////////////
 	function DKFile_Delete(url)
 	{
-		DKLog("Deleting: "+url+"\n", DKINFO);
+		DKLog("Deleting: "+url+"\n");
 		send = online_assets+"/DKFile/DKFile.php?Delete="+url;
 		var result = ajaxGetUrl(send);
 		return result;

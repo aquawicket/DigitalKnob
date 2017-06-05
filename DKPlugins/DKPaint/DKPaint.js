@@ -47,7 +47,7 @@ function DKPaint_Save()
 /////////////////////////////
 function DKPaint_Open(file)
 {
-	DKLog("DKPaint_Open("+file+") \n", DKINFO);
+	DKLog("DKPaint_Open("+file+") \n");
 	currentFile = file;
 	DKWidget_SetAttribute("DKPaint_Image", "src", file);
 }

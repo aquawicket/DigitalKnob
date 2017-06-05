@@ -71,20 +71,20 @@ function DKBuild_Init()
 //////////////////////
 function DKBuild_End()
 {
-	//DKLog("DKBuild_End()\n", DKINFO);
+	//DKLog("DKBuild_End()\n");
 }
 
 //////////////////////////////
 function DKBuild_ValidateSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for SVN \n", DKINFO);
+	DKLog("Looking for SVN \n");
 	//DKLog(SVN+"\n", DKDEBUG);
 	if(!DKFile_Exists(SVN)){
-		DKLog("Please install SVN \n", DKINFO);
+		DKLog("Please install SVN \n");
 		DKBuild_InstallSvn();
 	}
-	DKLog("Found SVN \n", DKINFO);
+	DKLog("Found SVN \n");
 	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
 	}
@@ -94,7 +94,7 @@ function DKBuild_ValidateSvn()
 function DKBuild_InstallSvn()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Svn \n", DKINFO);
+	DKLog("Installing Svn \n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -120,13 +120,13 @@ function DKBuild_InstallSvn()
 function DKBuild_ValidateGit()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for GIT \n", DKINFO);
+	DKLog("Looking for GIT \n");
 	//DKLog(GIT+"\n", DKDEBUG);
 	if(!DKFile_Exists(GIT)){
-		DKLog("Please install GIT \n", DKINFO);
+		DKLog("Please install GIT \n");
 		DKBuild_InstallGit();
 	}
-	DKLog("Found GIT \n", DKINFO);
+	DKLog("Found GIT \n");
 	if(DK_GetOS() == "Mac"){
 		GIT = "git";
 	}
@@ -136,7 +136,7 @@ function DKBuild_ValidateGit()
 function DKBuild_InstallGit()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Git \n", DKINFO);
+	DKLog("Installing Git \n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -162,13 +162,13 @@ function DKBuild_InstallGit()
 function DKBuild_ValidateCmake()
 {
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for CMake \n", DKINFO);
+	DKLog("Looking for CMake \n");
 	//DKLog(CMAKE+"\n", DKDEBUG);
 	if(!DKFile_Exists(CMAKE)){
-		DKLog("Please install CMake \n", DKINFO);
+		DKLog("Please install CMake \n");
 		DKBuild_InstallCmake();
 	}
-	DKLog("Found CMake \n", DKINFO);
+	DKLog("Found CMake \n");
 	if(DK_GetOS() == "Mac"){
 		CMAKE = "cmake";
 	}
@@ -177,7 +177,7 @@ function DKBuild_ValidateCmake()
 ///////////////////////////////
 function DKBuild_InstallCmake()
 {
-	DKLog("Installing CMake \n", DKINFO);
+	DKLog("Installing CMake \n");
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -206,18 +206,18 @@ function DKBuild_ValidateVC2015()
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
-	DKLog("Looking for Visual Studio 2015 \n", DKINFO);
+	DKLog("Looking for Visual Studio 2015 \n");
 	//DKLog(VC2015+"\n", DKDEBUG);
 	if(!DKFile_Exists(VC2015)){
 		DKBuild_InstallVC2015();
 	}
-	DKLog("Found Visual Studio 2015 \n", DKINFO);
+	DKLog("Found Visual Studio 2015 \n");
 }
 
 ////////////////////////////////
 function DKBuild_InstallVC2015()
 {
-	DKLog("Installing Visual Studio 2015 \n", DKINFO);
+	DKLog("Installing Visual Studio 2015 \n");
 	var datapath = DKAssets_LocalAssets();
 	
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU__908841471.1484716364.exe", datapath);
@@ -229,19 +229,19 @@ function DKBuild_ValidateGcc()
 {
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for GCC \n", DKINFO);
+	DKLog("Looking for GCC \n");
 	//DKLog(GCC+"\n", DKDEBUG);
 	if(!DKFile_Exists(GCC)){
-		DKLog("Please install GCC \n", DKINFO);
+		DKLog("Please install GCC \n");
 		DKBuild_InstallGcc();
 	}
-	DKLog("Found Gcc \n", DKINFO);
+	DKLog("Found Gcc \n");
 }
 
 ///////////////////////////////
 function DKBuild_InstallGcc()
 {
-	DKLog("Installing Gcc \n", DKINFO);
+	DKLog("Installing Gcc \n");
 	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
 
@@ -250,18 +250,18 @@ function DKBuild_ValidateXcode()
 {
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for Xcode \n", DKINFO);
+	DKLog("Looking for Xcode \n");
 	//DKLog(XCODE+"\n", DKDEBUG);
 	if(!DKFile_Exists(XCODE)){
-		DKLog("Please install Xcode \n", DKINFO);
+		DKLog("Please install Xcode \n");
 		DKBuild_InstallXcode();
 	}
-	DKLog("Found Xcode \n", DKINFO);
+	DKLog("Found Xcode \n");
 }
 ///////////////////////////////
 function DKBuild_InstallXcode()
 {
-	DKLog("Installing Xcode \n", DKINFO);
+	DKLog("Installing Xcode \n");
 	var datapath = DKAssets_LocalAssets();
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
 }
@@ -271,74 +271,74 @@ function DKBuild_OsCheck()
 {
 	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from a WIN64 machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a WIN64 machine.\n"); return false;
 		}
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a LINUX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
 		}
 	}
 	if(DK_GetOS() == "Win64"){
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a LINUX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a LINUX machine.\n"); return false;
 		}
 	}
 	if(DK_GetOS() == "Mac"){
 		if(OS == "win32"){
-			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from an WIN64 machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an WIN64 machine.\n"); return false;
 		}
 		if(OS == "linux"){
-			DKLog(OS+" can only be build from a linux machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a linux machine.\n"); return false;
 		}
 		if(OS == "andoroid"){
-			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 	}
 	if(DK_GetOS() == "Linux"){
 		if(OS == "win32"){
-			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 		if(OS == "win64"){
-			DKLog(OS+" can only be build from an WIN64 machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an WIN64 machine.\n"); return false;
 		}
 		if(OS == "mac"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "ios-simulator"){
-			DKLog(OS+" can only be build from an OSX machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
 		if(OS == "andoroid"){
-			DKLog(OS+" can only be build from a Windows machine.\n", DKINFO); return false;
+			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		}
 	}
 	if(DK_GetOS() == "Android"){
-		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n", DKINFO); return false;
+		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
 	}
 	if(DK_GetOS() == "iOS"){
-		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n", DKINFO); return false;
+		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
 	}
 	return true;
 }
@@ -346,7 +346,7 @@ function DKBuild_OsCheck()
 ////////////////////////////
 function DKBuild_SvnUpdate()
 {
-	DKLog("Svn Update... \n", DKINFO);
+	DKLog("Svn Update... \n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
@@ -366,7 +366,7 @@ function DKBuild_SvnUpdate()
 ////////////////////////////
 function DKBuild_SvnCommit()
 {
-	DKLog("Svn Commit... \n", DKINFO);
+	DKLog("Svn Commit... \n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	
@@ -383,7 +383,7 @@ function DKBuild_SvnCommit()
 ////////////////////////////
 function DKBuild_GitUpdate()
 {
-	DKLog("Git Update DigitalKnob... \n", DKINFO);
+	DKLog("Git Update DigitalKnob... \n");
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" checkout -- .");
@@ -392,13 +392,13 @@ function DKBuild_GitUpdate()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
-			DKLog("Git Update "+folder+"... \n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
+			DKLog("Git Update "+folder+"... \n");
 			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
 			DK_Execute(GIT +" checkout -- .");
 			DK_Execute(GIT +" pull origin master");
@@ -416,7 +416,7 @@ function DKBuild_GitUpdate()
 ////////////////////////////
 function DKBuild_GitCommit()
 {
-	DKLog("Git Commit DigitalKnob... \n", DKINFO);
+	DKLog("Git Commit DigitalKnob... \n");
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -428,13 +428,13 @@ function DKBuild_GitCommit()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
-			DKLog("Git Commit "+folder+"... \n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
+			DKLog("Git Commit "+folder+"... \n");
 			DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -456,7 +456,7 @@ function DKBuild_GitCommit()
 /////////////////////////////////
 function DKBuild_GitCredentials()
 {
-	DKLog("Git Credentials... \n", DKINFO);
+	DKLog("Git Credentials... \n");
 	//how do we let git remember out login for repositories
 	//we don't want to have to log in on every commit.
 }
@@ -464,7 +464,7 @@ function DKBuild_GitCredentials()
 ///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
-	DKLog("Deleting Apps and Plugins... \n", DKINFO);
+	DKLog("Deleting Apps and Plugins... \n");
 	
 	// Delete everything in DKApps except DKBuild
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
@@ -478,10 +478,10 @@ function DKBuild_ResetAppsPlugins()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n", DKINFO);
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n", DKINFO);
+		if(url){ //DKLog("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
 			DKFile_Delete(DKPATH+"/"+folder);
 		}
 	}
@@ -494,8 +494,8 @@ function DKBuild_ResetAppsPlugins()
 function DKBuild_Reset3rdParty()
 {
 	//TODO
-	DKLog("Deleting 3rdParty... \n", DKINFO);
-	DKLog("Please wait. \n", DKINFO);
+	DKLog("Deleting 3rdParty... \n");
+	DKLog("Please wait. \n");
 	DKFile_Delete(DKPATH+"/3rdParty");
 }
 
@@ -520,25 +520,25 @@ function DKBuild_GetAppList()
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
 		if(files[i].indexOf(".txt") <=1){ continue; }
-		DKLog("files["+i+"] = "+files[i]+"\n", DKINFO);
+		DKLog("files["+i+"] = "+files[i]+"\n");
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			DKLog("url = "+url+"\n", DKINFO);
+			DKLog("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); 
-			//DKLog("folder = "+folder+"\n", DKINFO);
+			//DKLog("folder = "+folder+"\n");
 			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
 			if(apps2){
-				//DKLog("apps2 = "+apps2+"\n", DKINFO);
+				//DKLog("apps2 = "+apps2+"\n");
 				var APP_LIST2 = apps2.split(",");
 				for(var b=0; b<APP_LIST2.length; b++){
-					//DKLog("APP_LIST2["+b+"] = "+APP_LIST2[b]+"\n", DKINFO);
+					//DKLog("APP_LIST2["+b+"] = "+APP_LIST2[b]+"\n");
 					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn" || APP_LIST2[b] == ".git"){
 						APP_LIST2.splice(b, 1);
 						b=0;
 					}
 				}
 				APP_LIST = APP_LIST.concat(APP_LIST2);
-				//DKLog("apps = "+apps+"\n", DKINFO);
+				//DKLog("apps = "+apps+"\n");
 			}
 		}
 	}

@@ -50,9 +50,9 @@ function DKHook_OnEvent(event)
 		DKHook_ToggleHighlight();
 	}
 	if(DK_IdLike(event, "wintitle")){
-		//DKLog("DKHook_OnEvent("+event+")\n", DKINFO);
-		//DKLog("DKHook_OnEvent(): id = "+DK_GetId(event)+"\n", DKINFO);
-		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
+		//DKLog("DKHook_OnEvent("+event+")\n");
+		//DKLog("DKHook_OnEvent(): id = "+DK_GetId(event)+"\n");
+		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n");
 		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 	}
 

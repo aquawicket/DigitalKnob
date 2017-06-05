@@ -29,7 +29,7 @@ function User_OnEvent(event)  //Duktape
 ////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){
 	if(USE_SDL && USE_ROCKET && USE_CEF){
-		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n", DKINFO);
+		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
@@ -47,14 +47,14 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", User_OnEvent);
 	}
 	else if(USE_SDL && USE_ROCKET){
-		DKLog("Creating SDL -> ROCKET -> GUI \n", DKINFO);
+		DKLog("Creating SDL -> ROCKET -> GUI \n");
 		DKCreate("DKWindow");
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		LoadPage();
 	}
 	else if(USE_SDL && USE_CEF){
-		DKLog("Creating SDL -> CEF -> GUI \n", DKINFO);
+		DKLog("Creating SDL -> CEF -> GUI \n");
 		DKCreate("DKWindow");
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
@@ -65,14 +65,14 @@ if(DK_GetJavascript() == "Duktape"){
 		DKAddEvent("GLOBAL", "resize", User_OnEvent);
 	}
 	else if(USE_CEF){
-		DKLog("Creating CEF -> GUI \n", DKINFO);
+		DKLog("Creating CEF -> GUI \n");
 		var width = 800;
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
 	else if(USE_WEBVIEW){
-		DKLog("Creating WEBVIEW -> GUI \n", DKINFO);
+		DKLog("Creating WEBVIEW -> GUI \n");
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	

@@ -39,30 +39,30 @@ function DKSolutionRename_OnEvent(event)
 ///////////////////////////////////
 function DKSolutionRename_SetId(id)
 {
-	DKLog("DKSolutionRename_SetId("+id+")\n", DKINFO);
+	DKLog("DKSolutionRename_SetId("+id+")\n");
 	DKSolutionRename_id = id;
 }
 
 ///////////////////////////////////////
 function DKSolutionRename_SetFile(file)
 {
-	DKLog("DKSolutionRename_SetFile("+file+")\n", DKINFO);
+	DKLog("DKSolutionRename_SetFile("+file+")\n");
 	DKSolutionRename_file = file;
 }
 
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	DKLog("DKSolutionRename_Rename()\n", DKINFO);
+	DKLog("DKSolutionRename_Rename()\n");
 	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
 	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
 	var newvalue = oldvalue;
 	newvalue = newvalue.replace(oldhtml, newhtml);
-	DKLog("oldhtml = "+oldhtml+"\n", DKINFO);
-	DKLog("oldvalue = "+oldvalue+"\n", DKINFO);
-	DKLog("newhtml = "+newhtml+"\n", DKINFO);
-	DKLog("newvalue = "+newvalue+"\n", DKINFO);
+	DKLog("oldhtml = "+oldhtml+"\n");
+	DKLog("oldvalue = "+oldvalue+"\n");
+	DKLog("newhtml = "+newhtml+"\n");
+	DKLog("newvalue = "+newvalue+"\n");
 	
 	if(DKFile_Rename(oldvalue, newvalue, true) == false){
 		return; 

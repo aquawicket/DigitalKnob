@@ -146,7 +146,7 @@ function CreateWidget(url, parent)
 			parent.appendChild(nodes[i]);
 		}
 		else{
-			//DKLog("set parent to body", DKINFO);
+			//DKLog("set parent to body");
 			top.document.body.appendChild(nodes[i]);
 		}
 				
@@ -164,7 +164,7 @@ function CreateWidget(url, parent)
 function CheckFileSupport()
 {
 	if(window.File && window.FileReader && window.FileList && window.Blob){
-		DKLog("File support OK.", DKINFO);
+		DKLog("File support OK.");
 	}
 	else {
 		DKLog("The File APIs are not fully supported in this browser.", DKERROR);
@@ -674,7 +674,7 @@ function ajaxGetUrl(url)
 		place = response.value.indexOf("}");
 		var res = response.value.substring(n+1, place);
 		response.value = response.value.replace("{"+res+"}", "");
-		//DKLog("PHPLog: "+res+"\n", DKINFO);
+		//DKLog("PHPLog: "+res+"\n");
 		n = response.value.indexOf("{");
 	}
 

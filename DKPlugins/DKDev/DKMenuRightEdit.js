@@ -63,7 +63,7 @@ function DKMenuRightEdit_End()
 ///////////////////////////////////////
 function DKMenuRightEdit_OnEvent(event)
 {
-	DKLog("DKMenuRightEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("DKMenuRightEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "SetElement")){
 		DKMenuRightEdit_SetElement(DK_GetValue(event));
@@ -260,7 +260,7 @@ function DKMenuRightEdit_OnEvent(event)
 ///////////////////////////////////////
 function DKMenuRightEdit_SetElement(id)
 {
-	DKLog("DKMenuRightEdit_SetElement("+id+") \n", DKINFO);
+	DKLog("DKMenuRightEdit_SetElement("+id+") \n");
 	
 	MenuRight_element = id;
 

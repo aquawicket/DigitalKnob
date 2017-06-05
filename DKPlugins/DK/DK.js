@@ -51,7 +51,8 @@ var DKHIDE = 6;
 function DKLog(string, lvl)
 {
 	if(!lvl){
-		alert("DKLog("+string+") missing lvl");
+		//alert("DKLog("+string+") missing lvl");
+		lvl = DKINFO;
 	}
 	
 	//check for LOG_HIDE
@@ -112,9 +113,9 @@ function DKLog(string, lvl)
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
-DKLog("*** DigitalKnob ***\n", DKINFO);
-DKLog(DK_GetBrowser()+"\n", DKINFO);
-DKLog(DK_GetJavascript()+"\n", DKINFO);
+DKLog("*** DigitalKnob ***\n");
+DKLog(DK_GetBrowser()+"\n");
+DKLog(DK_GetJavascript()+"\n");
 
 
 

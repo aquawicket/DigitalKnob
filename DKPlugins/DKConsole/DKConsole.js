@@ -13,17 +13,14 @@ function DKConsole_Init()
 ////////////////////////
 function DKConsole_End()
 {
-	DKRemoveEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
-	DKRemoveEvent("DKConsole_Close", "click", DKConsole_OnEvent);
-	DKRemoveEvent("DKLog", "color", DKConsole_OnEvent);
-	DKRemoveEvent("DKLog", "notify", DKConsole_OnEvent);
-	DKClose("DKConsole.html");
+	DKRemoveEvents(DKConsole_OnEvent);
+	DKClose("DKConsole/DKConsole.html");
 }
 
 /////////////////////////////////
 function DKConsole_OnEvent(event)
 {	
-	DKLog("DKConsole_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKConsole_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_Id(event, "DKConsole_Clear")){
 		DKWidget_SetInnerHtml("DKConsole_Content","");

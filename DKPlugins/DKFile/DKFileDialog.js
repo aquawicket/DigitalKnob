@@ -41,7 +41,7 @@ function DKFileDialog_OnEvent(event)
 		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFolder")){
-		DKLog("DKFileDialogFolder", DKINFO);
+		DKLog("DKFileDialogFolder");
 		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFile")){
@@ -80,10 +80,10 @@ function DKFileDialog_OnEvent(event)
 		event_type = params[1];
 		event_data1 = params[2];
 		event_data2 = params[3];
-		DKLog("event_type:"+event_type+"\n", DKINFO);
-		DKLog("event_id:"+event_id+"\n", DKINFO);
-		DKLog("event_data1:"+event_data1+"\n", DKINFO);
-		DKLog("event_data2:"+event_data2+"\n", DKINFO);
+		DKLog("event_type:"+event_type+"\n");
+		DKLog("event_id:"+event_id+"\n");
+		DKLog("event_data1:"+event_data1+"\n");
+		DKLog("event_data2:"+event_data2+"\n");
 	
 		DKFileDialog_UpdatePath(event_data1);
 	}
@@ -100,7 +100,7 @@ function DKFileDialog_GetFIle(callback)
 //////////////////////////////////////
 function DKFileDialog_OpenFolder(path)
 {
-	DKLog("DKFileDialog_OpenFolder("+path+") \n", DKINFO);
+	DKLog("DKFileDialog_OpenFolder("+path+") \n");
 	if(DKFileDialog_UpdatePath(path)){
 		return true;
 	}

@@ -123,14 +123,14 @@ function DKTrigger_Off()
 /////////////////////////////////
 function DKTrigger_AddTrigger(name)
 {
-	DKLog("AddTrigger("+name+")\n", DKINFO);
+	DKLog("AddTrigger("+name+")\n");
 	triggers.push(name);
 }
 
 ////////////////////////////////////
 function DKTrigger_RemoveTrigger(name)
 {
-	DKLog("RemoveTrigger("+name+")\n", DKINFO);
+	DKLog("RemoveTrigger("+name+")\n");
 	for(var i = 0; i < triggers.length; i++){
 		if(name == triggers[i]){
 			triggers.splice(i, 1);
@@ -155,7 +155,7 @@ function DKTrigger_SelectTrigger(name)
 	for(var i = 0; i < triggers.length; i++){
 		if(name == triggers[i]){
 			current_trigger = triggers[i];
-			DKLog("Current Trigger: "+current_trigger+"\n", DKINFO);
+			DKLog("Current Trigger: "+current_trigger+"\n");
 		}
 	}
 }
@@ -201,21 +201,21 @@ function DKTrigger_NewEffect()
 /////////////////////////////////
 function DKTrigger_DeleteCause(num)
 {
-	DKLog("DeleteCause "+num+"\n", DKINFO);
+	DKLog("DeleteCause "+num+"\n");
 	causes.splice(Number(num), 1);
 }
 
 //////////////////////////////////
 function DKTrigger_DeleteEffect(num)
 {
-	DKLog("DeleteEffect "+num+"\n", DKINFO);
+	DKLog("DeleteEffect "+num+"\n");
 	effects.splice(Number(num), 1);
 }
 
 /////////////////////////////////////
 function DKTrigger_ProcessGui(type, id)
 {
-	//DKLog("Gui: "+id+" "+type+",\n", DKINFO);
+	//DKLog("Gui: "+id+" "+type+",\n");
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "gui" &&
 			causes[c].var1 == id &&
@@ -229,7 +229,7 @@ function DKTrigger_ProcessGui(type, id)
 ////////////////////////////////////
 function DKTrigger_ProcessKeyDown(num)
 {
-	//DKLog("DKTrigger_ProcessKeyDown("+num+")\n", DKINFO);
+	//DKLog("DKTrigger_ProcessKeyDown("+num+")\n");
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "keydown" &&
 			causes[c].var1 == num
@@ -242,7 +242,7 @@ function DKTrigger_ProcessKeyDown(num)
 //////////////////////////////////
 function DKTrigger_ProcessKeyUp(num)
 {
-	//DKLog("DKTrigger_ProcessKeyUp("+num+")\n, DKINFO);
+	//DKLog("DKTrigger_ProcessKeyUp("+num+")\n);
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "keyup" &&
 			causes[c].var1 == num
@@ -255,7 +255,7 @@ function DKTrigger_ProcessKeyUp(num)
 //////////////////////////////////////
 function DKTrigger_ProcessWindowResize()
 {
-	//DKLog("DKTrigger_ProcessWindowResize()\n", DKINFO);
+	//DKLog("DKTrigger_ProcessWindowResize()\n");
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "window_resize"){
 			DKTrigger_FireTrigger(causes[c].trigger);
@@ -266,7 +266,7 @@ function DKTrigger_ProcessWindowResize()
 //////////////////////////////////////////////////
 function DKTrigger_ProcessMidi(channel, note, value)
 {
-	DKLog("DKTrigger_ProcessMidi: Ch:"+String(channel)+" Note:"+String(note)+" Value:"+String(value)+"\n", DKINFO);
+	DKLog("DKTrigger_ProcessMidi: Ch:"+String(channel)+" Note:"+String(note)+" Value:"+String(value)+"\n");
 
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "midi" &&
@@ -282,7 +282,7 @@ function DKTrigger_ProcessMidi(channel, note, value)
 function DKTrigger_FireTrigger(trigger)
 {
 	if(trigger_events != true){ return; }
-	DKLog("Fire Trigger: "+trigger+"\n", DKINFO);
+	DKLog("Fire Trigger: "+trigger+"\n");
 	
 	for(var i=0; i < effects.length; ++i){
 		if(effects[i].trigger != trigger){ continue; }
@@ -291,10 +291,10 @@ function DKTrigger_FireTrigger(trigger)
 		var var1 = effects[i].var1;
 		var var2 = effects[i].var2;
 		var var3 = effects[i].var3;
-		DKLog("     Command: "+command+"\n", DKINFO);
-		DKLog("        Var1: "+var1+"\n", DKINFO);
-		DKLog("        Var2: "+var2+"\n", DKINFO);
-		DKLog("        Var3: "+var3+"\n", DKINFO);
+		DKLog("     Command: "+command+"\n");
+		DKLog("        Var1: "+var1+"\n");
+		DKLog("        Var2: "+var2+"\n");
+		DKLog("        Var3: "+var3+"\n");
 
 		////  Commands  ////
 		if(command == "DoubleClick"){
@@ -312,7 +312,7 @@ function DKTrigger_FireTrigger(trigger)
 			out += " ";
 			out += var3;
 			out += "\n";
-			DKLog(out, DKINFO);
+			DKLog(out);
 			continue;
 		}
 		if(command == "LeftClick"){
@@ -334,16 +334,16 @@ function DKTrigger_FireTrigger(trigger)
 			out += " ";
 			out += var3;
 			out += "\n";
-			DKLog(out, DKINFO);
+			DKLog(out);
 			continue;
 		}
 		if(command == "MouseTo"){
-			DKLog("DK_SetCursorPos("+Number(var1)+","+Number(var2)+")\n", DKINFO);
+			DKLog("DK_SetCursorPos("+Number(var1)+","+Number(var2)+")\n");
 			DK_SetCursorPos(Number(var1), Number(var2));
 			continue;
 		}
 		if(command == "MouseToImage"){
-			//DKLog("MouseToImage\n", DKINFO);
+			//DKLog("MouseToImage\n");
 			DK_MouseToImage(var1);
 			continue;
 		}
@@ -365,11 +365,11 @@ function DKTrigger_FireTrigger(trigger)
 /////////////////////////////////////
 function DKTrigger_LoadTriggers(file)
 {
-	DKLog("DKTrigger_LoadTriggers("+file+")\n", DKINFO);
+	DKLog("DKTrigger_LoadTriggers("+file+")\n");
 	
 	var assets = DKAssets_LocalAssets();
 	if(!DKFile_Exists(assets+file)){
-		DKLog("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file.\n", DKINFO);
+		DKLog("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file.\n");
 		return;
 	}
 	
@@ -413,7 +413,7 @@ function DKTrigger_LoadTriggers(file)
 /////////////////////////////////////
 function DKTrigger_SaveTriggers(file)
 {
-	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n", DKINFO);
+	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n");
 	var assets = DKAssets_LocalAssets();
 	DKFile_StringToFile(" ", assets+file); //clear file
 	
@@ -441,7 +441,7 @@ function DKTrigger_SaveTriggers(file)
 		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR3]", effects[e].var3);
 	}
 
-	DKLog("Saved Triggers.\n", DKINFO);
+	DKLog("Saved Triggers.\n");
 	
 	DKTrigger_AddEvents();
 }
@@ -449,7 +449,7 @@ function DKTrigger_SaveTriggers(file)
 ////////////////////////////
 function DKTrigger_AddEvents()
 {
-	DKLog("Adding events to gui causes . . .\n", DKINFO);
+	DKLog("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].command == "gui"){
 			DKAddEvent(causes[c].var1, causes[c].var2, DKTrigger_OnEvent);

@@ -21,7 +21,7 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	DKSolution_Select(DK_GetId(event));
 
@@ -30,7 +30,7 @@ function DKSolution_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "contextmenu")){
-		//DKLog("DKSolution_OnEvent() contextmenu\n", DKINFO);	
+		//DKLog("DKSolution_OnEvent() contextmenu\n");	
 		DK_StopPropagation(event);
 		DKCreate("DKBuild/DKSolutionMenu.js", function(){
 			var file = DKWidget_GetValue(DK_GetId(event));
@@ -50,10 +50,10 @@ function DKSolution_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "dblclick")){
-		//DKLog(DK_GetId(event)+"\n", DKINFO);
-		//DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
+		//DKLog(DK_GetId(event)+"\n");
+		//DKLog(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(DK_IdLike(event, "DKSolutionFolder")){
-			//DKLog("DKSolutionFolder", DKINFO);
+			//DKLog("DKSolutionFolder");
 			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
 			return;
 		}
@@ -82,7 +82,7 @@ function DKSolution_Select(id)
 ////////////////////////////////////
 function DKSolution_OpenFolder(path)
 {
-	//DKLog("DKSolution_OpenFolder("+path+") \n", DKINFO);
+	//DKLog("DKSolution_OpenFolder("+path+") \n");
 	if(DKSolution_UpdatePath(path)){
 		return true;
 	}
@@ -92,7 +92,7 @@ function DKSolution_OpenFolder(path)
 //////////////////////////////////
 function DKSolution_OpenFile(path)
 {
-	//DKLog("DKSolution_OpenFile("+path+") \n", DKINFO);
+	//DKLog("DKSolution_OpenFile("+path+") \n");
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
@@ -104,7 +104,7 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	//DKLog("DKSolution_OpenHere("+path+") \n", DKINFO);
+	//DKLog("DKSolution_OpenHere("+path+") \n");
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);

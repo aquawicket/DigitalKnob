@@ -63,7 +63,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n", DKINFO);
+						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 						return;
 					}
@@ -78,7 +78,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n", DKINFO);
+						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 						return;
 					}
@@ -109,7 +109,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n", DKINFO);
+						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 						return;
 					}

@@ -19,7 +19,7 @@ function DKWebviewTest_OnEvent(event)
 	DKLog("DKWebviewTest_OnEvent("+event+") \n",DKINFO);
 	
 	//FIXME: these are not available, DKWebView::OnCreate has not been called yet. 
-	DKLog("DKWebview_SendValue() = "+DKWebview_SendValue()+"\n", DKINFO);
+	DKLog("DKWebview_SendValue() = "+DKWebview_SendValue()+"\n");
 	DKWebview_ReceiveValue("DKWebview_ReceiveValue sent");
 	DKWebview_PrintFunctions();
 }

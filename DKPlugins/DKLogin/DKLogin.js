@@ -21,7 +21,7 @@ function DKLogin_OnEvent(event)
 	DKLog("DKLogin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "DKLoginFacebook")){
-		DKLog("DKLogin_OnEvent(): DKLoginFacebook\n", DKINFO);
+		DKLog("DKLogin_OnEvent(): DKLoginFacebook\n");
 		DKCreate("DKLogin/DKFacebook.js", function(){
 			DKFacebookLogin(DKLogin_OnConnect);
 		});
@@ -31,7 +31,7 @@ function DKLogin_OnEvent(event)
 /////////////////////////////////
 function DKLogin_OnConnect(value)
 {
-	DKLog("DKLogin_FBconnect()\n", DKINFO);
+	DKLog("DKLogin_FBconnect()\n");
 	if(value.status === 'connected'){
 		DKFacebook_Query('/me', "name", DKLogin_FBresponse);
 		DKFacebook_Query('/me', "id", DKLogin_FBresponse);

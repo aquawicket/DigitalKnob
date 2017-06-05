@@ -60,7 +60,7 @@ function DKCreator_OnEvent(event)
 		DK_Crash();
 	}
 	if(DK_Id(event,"logo") && DK_Type(event,"mouseover")){
-		DKLog("hover logo \n", DKINFO);
+		DKLog("hover logo \n");
 	}
 	if(DK_Id(event,"logo") && DK_Type(event,"click")){
 		DKSendEvent("DKMessage.html", "ShowMessage", "logo clicked");
@@ -113,7 +113,7 @@ function DKCreator_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "BuildLibraries")){
-		DKLog("********** BuildLibraries **************", DKINFO);
+		DKLog("********** BuildLibraries **************");
 		DKSendEvent("DKCreator", "BuildLibraries", DKWidget_GetValue("OSList")+","+DKWidget_GetValue("BuildType"));
 	}
 	if(DK_Id(event, "Build App")){

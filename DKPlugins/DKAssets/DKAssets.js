@@ -53,22 +53,22 @@ appfilename = appfilename.replace("/","");
 var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
 //if(absolutepath){online_assets = absolutepath;}
 
-DKLog("href: "+href+"\n", DKINFO);
-DKLog("hostname: "+hostname+"\n", DKINFO);
-DKLog("pathname: "+pathname+"\n", DKINFO);
-DKLog("protocol: "+protocol+"\n", DKINFO);
-DKLog("appfilename: "+appfilename+"\n", DKINFO);
-DKLog("local_assets: "+local_assets+"\n", DKINFO);
-DKLog("online_assets: "+online_assets+"\n", DKINFO);
-DKLog("absolutepath: "+absolutepath+"\n", DKINFO);
+DKLog("href: "+href+"\n");
+DKLog("hostname: "+hostname+"\n");
+DKLog("pathname: "+pathname+"\n");
+DKLog("protocol: "+protocol+"\n");
+DKLog("appfilename: "+appfilename+"\n");
+DKLog("local_assets: "+local_assets+"\n");
+DKLog("online_assets: "+online_assets+"\n");
+DKLog("absolutepath: "+absolutepath+"\n");
 
-DKLog("LOG_DEBUG: "+LOG_DEBUG+"\n", DKINFO);
-DKLog("LOG_INFO: "+LOG_INFO+"\n", DKINFO);
-DKLog("LOG_WARNINGS: "+LOG_WARNINGS+"\n", DKINFO);
-DKLog("LOG_ERRORS: "+LOG_ERRORS+"\n", DKINFO);
-DKLog("LOG_FILE: "+LOG_FILE+"\n", DKINFO);
-DKLog("LOG_SHOW: "+LOG_SHOW+"\n", DKINFO);
-DKLog("LOG_HIDE: "+LOG_HIDE+"\n", DKINFO);
+DKLog("LOG_DEBUG: "+LOG_DEBUG+"\n");
+DKLog("LOG_INFO: "+LOG_INFO+"\n");
+DKLog("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
+DKLog("LOG_ERRORS: "+LOG_ERRORS+"\n");
+DKLog("LOG_FILE: "+LOG_FILE+"\n");
+DKLog("LOG_SHOW: "+LOG_SHOW+"\n");
+DKLog("LOG_HIDE: "+LOG_HIDE+"\n");
 
 
 ////////////////////////

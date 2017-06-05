@@ -12,7 +12,7 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	DKLog("GitMenu_End()", DKINFO);
+	DKLog("GitMenu_End()");
 	
 	DKRemoveEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
 	DKRemoveEvents(GitMenu_OnEvent);
@@ -22,7 +22,7 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"Git Update")){
 		DKThread_DKQueue("GitUpdate","DKBuild_GitUpdate();");

@@ -18,7 +18,7 @@ function DKEditor_End()
 ////////////////////////////////
 function DKEditor_OnEvent(event)
 {
-	DKLog("DKEditor_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("DKEditor_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKEditor_edit")){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){});

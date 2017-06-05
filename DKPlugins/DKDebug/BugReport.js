@@ -17,7 +17,7 @@ function BugReport_End()
 /////////////////////////////////
 function BugReport_OnEvent(event)
 {
-	DKLog("BugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
+	DKLog("BugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "click")){
 		BugReport_SendBugReport();
@@ -27,7 +27,7 @@ function BugReport_OnEvent(event)
 //////////////////////////////////
 function BugReport_SendBugReport()
 {
-	//DKLog("BugReport_SendBugReport() \n", DKINFO);
+	//DKLog("BugReport_SendBugReport() \n");
 	
 	DKCreate("DKDebug/SendBugReport.js");
 	DKFrame_Widget("SendBugReport.html")
