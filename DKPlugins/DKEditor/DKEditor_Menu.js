@@ -17,6 +17,11 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
+	
+	//TODO
+	//DKEditor_Menu_GitUpdate
+	//DKEditor_Menu_GitCommit
+	//DKEditor_Menu_Info
 }
 
 ////////////////////////////
