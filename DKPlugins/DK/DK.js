@@ -500,17 +500,16 @@ function DKRemoveEvent(id, type, Function)
 	//DKLog(events+"\n", DKDEBUG);
 }
 
-/*
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
 	for(var i=0; i<events.length; i++){
 		if(events[i+2] == Function){
 			events.splice(i, 3);
+			i--;
 		}
 	}
 }
-*/
 
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
