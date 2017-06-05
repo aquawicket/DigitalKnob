@@ -49,7 +49,7 @@ function DKBuildGUI_Init()
 /////////////////////////
 function DKBuildGUI_End()
 {
-	DKLog("DKBuildGUI_End()\n", DKINFO);
+	//DKLog("DKBuildGUI_End()\n", DKINFO);
 	
 	DKRemoveEvents(DKBuildGUI_OnEvent);
 	DKClose("DKBuild/DKBuildGUI.html");

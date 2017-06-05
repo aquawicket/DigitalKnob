@@ -132,7 +132,7 @@ function DKFrame_CreateFrame(title, width, height)
 	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 21);
 	var newleft = parseFloat((window_width / 2) - (width / 2));
 	
-	var frame = DKWidget_CreateElement("body", "div", "frame");
+	var frame = DKWidget_CreateElement("body", "div", title+"_frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
 	DKWidget_SetProperty(frame, "overflow", "hidden");
 	DKWidget_SetProperty(frame, "top", newtop.toString()+"rem");
@@ -151,13 +151,13 @@ function DKFrame_CreateFrame(title, width, height)
 	//DKLog("DKFrame_Widget("+id+"): frame width="+width+"\n", DKDEBUG);
 	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n", DKDEBUG);
 	
-	var titlebar = DKWidget_CreateElement(frame, "div", "titlebar");
+	var titlebar = DKWidget_CreateElement(frame, "div", title+"_titlebar");
 	DKWidget_SetProperty(titlebar, "position", "absolute");
 	DKWidget_SetProperty(titlebar, "width", "100%");
 	DKWidget_SetProperty(titlebar, "height", "21rem");
 	DKWidget_SetProperty(titlebar, "background-color", "rgb(200,200,200)");
 	
-	var titlebartext = DKWidget_CreateElement(titlebar, "div", "titlebartext");
+	var titlebartext = DKWidget_CreateElement(titlebar, "div", title+"_titlebartext");
 	DKWidget_SetProperty(titlebartext, "position", "absolute");
 	DKWidget_SetProperty(titlebartext, "width", "100%");
 	DKWidget_SetProperty(titlebartext, "height", "100%");
@@ -166,7 +166,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_AddDragHandle(titlebartext, frame);
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
-	var minimize = DKWidget_CreateElement(frame, "img", "minimize");
+	var minimize = DKWidget_CreateElement(frame, "img", title+"_minimize");
 	DKWidget_SetAttribute(minimize, "src", "DKFrame/minimize.png");
 	DKWidget_SetProperty(minimize, "position", "absolute");
 	DKWidget_SetProperty(minimize, "top", "0rem");
@@ -174,7 +174,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(minimize, "height", "20rem");
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
-	var maximize = DKWidget_CreateElement(frame, "img", "maximize");
+	var maximize = DKWidget_CreateElement(frame, "img", title+"_maximize");
 	DKWidget_SetAttribute(maximize, "src", "DKFrame/maximize.png");
 	DKWidget_SetProperty(maximize, "position", "absolute");
 	DKWidget_SetProperty(maximize, "top", "0rem");
@@ -182,7 +182,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(maximize, "height", "20rem");
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
-	var close = DKWidget_CreateElement(frame, "img", "close");
+	var close = DKWidget_CreateElement(frame, "img", title+"_close");
 	DKWidget_SetAttribute(close, "src", "DKFrame/close.png");
 	DKWidget_SetProperty(close, "position", "absolute");
 	DKWidget_SetProperty(close, "top", "0rem");
@@ -296,7 +296,8 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	//DKLog("DKFrame_CloseButton("+id+")\n", DKDEBUG);
+	//DKLog("DKFrame_CloseButton("+id+")\n", DKINFO);
+	
 	var frame = DKWidget_GetParent(id);
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
@@ -312,13 +313,24 @@ function DKFrame_CloseButton(id)
 		}
 	}
 	
+	//remove frame events
+	var name = frame;
+	name = name.replace("_frame", ""); //get the raw name
+	DKRemoveEvents(name+"_close");
+	DKRemoveEvents(name+"_maximize");
+	DKRemoveEvents(name+"_minimize");
+	DKRemoveEvents(name+"_titlebartext");
+	DKRemoveEvents(name+"_frame");
+	
 	DKWidget_RemoveElement(frame);
 }
 
+/*
 //////////////////////////
 function DKFrame_Close(id)
 {
-	//DKLog("DKFrame_Close("+id+")\n", DKDEBUG);
+	DKLog("DKFrame_Close("+id+")\n", DKINFO);
+	
 	//if(id.indexOf("/") > -1){
 	//	DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
 	//}
@@ -340,6 +352,7 @@ function DKFrame_Close(id)
 	DKClose(jsfile);
 	DKWidget_RemoveElement(frame);
 }
+*/
 
 //////////////////////////////
 function DKFrame_StoreSize(id)

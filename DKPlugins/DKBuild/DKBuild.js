@@ -71,7 +71,7 @@ function DKBuild_Init()
 //////////////////////
 function DKBuild_End()
 {
-	DKLog("DKBuild_End()\n", DKINFO);
+	//DKLog("DKBuild_End()\n", DKINFO);
 }
 
 //////////////////////////////

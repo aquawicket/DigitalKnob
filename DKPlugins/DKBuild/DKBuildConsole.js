@@ -20,7 +20,7 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	DKLog("DKBuildConsole_End()\n", DKINFO);
+	//DKLog("DKBuildConsole_End()\n", DKINFO);
 	
 	DKClose("DKBuild/DKBuild.js");
 }
