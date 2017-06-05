@@ -7,7 +7,7 @@ function DKLoading_Init()
 ////////////////////////
 function DKLoading_End()
 {
-	DKClose("DKLoading.html");
+	DKClose("DKLoading/DKLoading.html");
 }
 
 /////////////////////////////////

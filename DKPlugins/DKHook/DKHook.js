@@ -15,13 +15,8 @@ function DKHook_Init()
 /////////////////////
 function DKHook_End()
 {
-	DKRemoveEvent("getvalue", "click", DKHook_OnEvent);
-	DKRemoveEvent("setvalue", "click", DKHook_OnEvent);
-	DKRemoveEvent("doclick", "click", DKHook_OnEvent);
-	DKRemoveEvent("Prev", "click", DKHook_OnEvent);
-	DKRemoveEvent("Next", "click", DKHook_OnEvent);
-	DKRemoveEvent("Highlight", "click", DKHook_OnEvent);
-	DKClose("DKHook.html");
+	DKRemoveEvents(DKHook_OnEvent);
+	DKClose("DKHook/DKHook.html");
 }
 
 //////////////////////////////
