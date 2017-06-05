@@ -2,6 +2,7 @@
 function DKBuildGUI_Init()
 {
 	//DKLog("DKBuildGUI_Init()\n", DKDEBUG);
+	DKCreate("DKBuild/DKBuild.js", function(){
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
@@ -44,13 +45,17 @@ function DKBuildGUI_Init()
 	});
 	});
 	});
+	});
 }
 
 /////////////////////////
 function DKBuildGUI_End()
 {
+	DKLog("DKBuildGUI_End()\n", DKINFO);
+	
+	DKRemoveEvents(DKBuildGUI_OnEvent);
 	DKClose("DKBuild/DKBuildGUI.html");
-	DKClose("DKBuild/DKBuild.html");
+	DKClose("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////

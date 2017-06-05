@@ -58,12 +58,20 @@ function DKBuild_Init()
 		CMAKE = "/usr/bin/cmake";
 	}
 
+	/*
 	if(DKAvailable("DKWidget")){
 		DKCreate("DKBuild/DKBuildGUI.js", function(){});
 	}
 	else{
 		DKCreate("DKBuild/DKBuildConsole.js", function(){});
 	}
+	*/
+}
+
+//////////////////////
+function DKBuild_End()
+{
+	DKLog("DKBuild_End()\n", DKINFO);
 }
 
 //////////////////////////////

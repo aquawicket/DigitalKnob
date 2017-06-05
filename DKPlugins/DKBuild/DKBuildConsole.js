@@ -3,16 +3,26 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	//DKBuild_ValidateSvn();
-	DKBuild_ValidateGit();
-	DKBuild_ValidateCmake();
-	DKBuild_ValidateVC2015();
-	DKBuild_ValidateGcc();
-	DKBuild_ValidateXcode();
+	DKCreate("DKBuild/DKBuild.js", function(){
+		//DKBuild_ValidateSvn();
+		DKBuild_ValidateGit();
+		DKBuild_ValidateCmake();
+		DKBuild_ValidateVC2015();
+		DKBuild_ValidateGcc();
+		DKBuild_ValidateXcode();
 	
-	while(working){
-		DKBuildConsole_Process();
+		while(working){
+			DKBuildConsole_Process();
+		}
 	}
+}
+
+/////////////////////////////
+function DKBuildConsole_End()
+{
+	DKLog("DKBuildConsole_End()\n", DKINFO);
+	
+	DKClose("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////
