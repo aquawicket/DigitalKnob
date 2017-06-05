@@ -59,7 +59,7 @@ function DKBuildGUI_End()
 //////////////////////////////////
 function DKBuildGUI_OnEvent(event)
 {
-	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"AppList")){
 		//if(DK_Type(event,"click")){
