@@ -69,9 +69,12 @@ function DKSolution_Select(id)
 {
 	var elements = DKWidget_GetElements("DKSolutionMenu");
 	var arry = elements.split(",");
-	for(var i=0; i<arry.length; i++){
-			DKWidget_SetProperty(arry[i], "background-color", "rgb(255,255,255)");
-			DKWidget_SetProperty(arry[i], "color", "rgb(0,0,0)");
+	for(var i=0; i<arry.length-1; i++){
+		if(!arry[i]){
+			DKLog("DKSolution_Select(id): arry["+i+"] invalid\n", DKERROR);
+		}
+		DKWidget_SetProperty(arry[i], "background-color", "rgb(255,255,255)");
+		DKWidget_SetProperty(arry[i], "color", "rgb(0,0,0)");
 	}
 	if(id.indexOf("DKSolutionFolder") > -1 || id.indexOf("DKSolutionFile") > -1){
 		DKWidget_SetProperty(id, "background-color", "rgb(123,157,212)");
