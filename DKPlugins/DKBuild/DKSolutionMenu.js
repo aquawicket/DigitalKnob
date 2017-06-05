@@ -75,35 +75,35 @@ function DKSolutionMenu_OnEvent(event)
 /////////////////////////////////
 function DKSolutionMenu_SetId(id)
 {
-	DKLog("DKSolutionMenu_SetId("+id+")\n");
+	//DKLog("DKSolutionMenu_SetId("+id+")\n");
 	DKSolutionMenu_id = id;
 }
 
 /////////////////////////////////////
 function DKSolutionMenu_SetFile(file)
 {
-	DKLog("DKSolutionMenu_SetFile("+file+")\n");
+	//DKLog("DKSolutionMenu_SetFile("+file+")\n");
 	DKSolutionMenu_file = file;
 }
 
 //////////////////////////////
 function DKSolutionMenu_Open()
 {
-	DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n");
+	//DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n");
 	DKSolution_OpenFile(DKSolutionMenu_file);
 }
 
 //////////////////////////////////
 function DKSolutionMenu_OpenHere()
 {
-	DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n");
+	//DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n");
 	DKSolution_OpenHere(DKSolutionMenu_file);
 }
 
 /////////////////////////////////
 function DKSolutionMenu_NewFile()
 {
-	DKLog("DKSolutionMenu_NewFile() \n");
+	//DKLog("DKSolutionMenu_NewFile() \n");
 	if(!DKSolutionMenu_file){
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
 		return;
@@ -134,7 +134,7 @@ function DKSolutionMenu_NewFile()
 ///////////////////////////////////
 function DKSolutionMenu_NewFolder()
 {
-	DKLog("DKSolutionMenu_NewFolder() \n");
+	//DKLog("DKSolutionMenu_NewFolder() \n");
 	if(!DKSolutionMenu_file){
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
 		return;
@@ -165,8 +165,7 @@ function DKSolutionMenu_NewFolder()
 ////////////////////////////////
 function DKSolutionMenu_Rename()
 {
-	//TODO
-	DKLog("DKSolutionMenu_Rename() \n");
+	//DKLog("DKSolutionMenu_Rename() \n");
 
 	var top1 = DKWidget_GetOffsetTop(DKSolutionMenu_id);
 	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
@@ -184,7 +183,7 @@ function DKSolutionMenu_Rename()
 ////////////////////////////////
 function DKSolutionMenu_Delete()
 {
-	DKLog("DKSolutionMenu_Delete() \n");
+	//DKLog("DKSolutionMenu_Delete() \n");
 	
 	//TODO - confirm
 	DKCreate("DKMessage/DKMessage.js", function(){
@@ -202,31 +201,31 @@ function DKSolutionMenu_Delete()
 //////////////////////////////
 function DKSolutionMenu_Copy()
 {
-	//TODO
-	DKLog("DKSolutionMenu_Copy() \n");
+	//DKLog("DKSolutionMenu_Copy() \n");
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
 /////////////////////////////
 function DKSolutionMenu_Cut()
 {
-	//TODO
-	DKLog("DKSolutionMenu_Cut() \n");
+	//DKLog("DKSolutionMenu_Cut() \n");
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
 
 ///////////////////////////////
 function DKSolutionMenu_Paste()
 {
+	//DKLog("DKSolutionMenu_Paste() \n");
+	
 	//TODO
-	DKLog("DKSolutionMenu_Paste() \n");
 }
 
 ////////////////////////////////
 function DKSolutionMenu_GitAdd()
 {
+	//DKLog("DKSolutionMenu_GitAdd() \n");
+	
 	//TODO
-	DKLog("DKSolutionMenu_GitAdd() \n");
 	
 	//we need the path of git.exe
 	//var git = GIT; //from DKBuild.js
