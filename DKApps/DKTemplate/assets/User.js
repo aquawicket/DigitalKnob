@@ -1,7 +1,10 @@
-var USE_SDL = 0;
-var USE_ROCKET = 0;
-var USE_CEF = 1;
-var USE_WEBVIEW = 1;
+
+
+var USE_CEF = 1;     //Desktop
+var USE_WEBVIEW = 1; //Android, iOS?
+var USE_SDL = 0;     //Use with caution
+var USE_ROCKET = 0;  //Use with caution
+
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
 //var DKApp_url = "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_geolocation_error";
 
@@ -15,19 +18,19 @@ function User_OnEvent(event)  //Duktape
 {
 	DKLog("User_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){
+	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
 		DKCef_SetUrl("DKCef_frame", DK_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
 	}
-	if(DK_Type(event, "resize")){
+	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
-	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){
+	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){ //NOTE: this is the back button on Android
 		DK_Exit();
 	}
 }
 
 ////////////////////////////////////
-if(DK_GetJavascript() == "Duktape"){
+if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can support
 	if(USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
@@ -71,7 +74,7 @@ if(DK_GetJavascript() == "Duktape"){
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
 	}
-	else if(USE_WEBVIEW){
+	else if(USE_WEBVIEW){ //TODO
 		DKLog("Creating WEBVIEW -> GUI \n");
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
@@ -80,7 +83,7 @@ if(DK_GetJavascript() == "Duktape"){
 	DKCreate("DKDebug/DKDebug.js", function(){});
 	DKCreate("DKCef/DKDevTools.js", function(){});
 }
-else{  //V8 or WEBVIEW
+else{  //Javascript: V8, WEBVIEW or Duktape
 	LoadPage();
 }
 
