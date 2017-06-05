@@ -95,7 +95,7 @@ function LoadJS(url, callback)
 			//DKLog("Loaded: "+url);
 			var func = window[name]; //Init    
 			if(typeof func == 'function'){ 
-				DKLog("Calling: "+name+" \n");
+				//DKLog("Calling: "+name+" \n");
 				func(); //Init
 			}
 			else{
