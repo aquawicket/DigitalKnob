@@ -97,8 +97,9 @@ function DKSolution_OpenFile(path)
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
-	DK_Run(aPath);
+	//DKLog("aPath:"+aPath+"\n");
+	if(!DK_Run(aPath)){ return false; }
+	return true;
 }
 
 //////////////////////////////////

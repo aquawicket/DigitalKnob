@@ -516,9 +516,7 @@ function DKRemoveEvents(Function)
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
-	//if(id.indexOf("DKConsole.html") == -1){
-	DKLog("SendEvent("+id+","+type+","+message+") \n");
-	//}
+	//DKLog("SendEvent("+id+","+type+","+message+") \n");
 	
 	for(var i=0; i<events.length; i++){
 		//DKLog(events[i]+" \n");

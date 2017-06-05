@@ -520,7 +520,7 @@ function DKBuild_GetAppList()
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
 		if(files[i].indexOf(".txt") <=1){ continue; }
-		DKLog("files["+i+"] = "+files[i]+"\n");
+		//DKLog("files["+i+"] = "+files[i]+"\n");
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
 			DKLog("url = "+url+"\n");

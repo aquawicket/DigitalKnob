@@ -48,7 +48,7 @@ function DKFrame_OnEvent(event)
 ///////////////////////////
 function DKFrame_Widget(id)
 {
-	DKLog("DKFrame_Widget("+id+")\n");
+	//DKLog("DKFrame_Widget("+id+")\n");
 	if(!DKWidget_ElementExists(id)){
 		DKLog("DKFrame_Widget(): element does not exist\n", DKERROR);
 		return false;
@@ -127,7 +127,8 @@ function DKFrame_Iframe(title, url, width, height)
 /////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n");
+	//DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n");
+	
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
 	if(width == "100%"){ width = window_width-100; }
@@ -202,7 +203,7 @@ function DKFrame_CreateFrame(title, width, height)
 ////////////////////////////////////
 function DKFrame_CreateResize(frame)
 {
-	DKLog("DKFrame_CreateResize("+frame+") \n");
+	//DKLog("DKFrame_CreateResize("+frame+") \n");
 	
 	var resize = DKWidget_CreateElement(frame, "img", "resize");
 	DKWidget_SetAttribute(resize, "src", "DKFrame/resize.png");
