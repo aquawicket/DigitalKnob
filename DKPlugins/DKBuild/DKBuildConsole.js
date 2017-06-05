@@ -14,7 +14,7 @@ function DKBuildConsole_Init()
 		while(working){
 			DKBuildConsole_Process();
 		}
-	}
+	});
 }
 
 /////////////////////////////
