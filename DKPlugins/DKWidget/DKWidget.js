@@ -130,7 +130,7 @@ function DKClose(data)
 		filesloaded = filesloaded.replace(file+",", ""); //remove from file list
 		var script = document.getElementById(arry[1]);
 		if(!script){
-			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
+			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", WARN);
 			return false;
 		}
 		script.parentNode.removeChild(script);
