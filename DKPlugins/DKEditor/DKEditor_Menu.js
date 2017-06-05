@@ -14,6 +14,7 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
 }
 
 ////////////////////////////
@@ -27,7 +28,7 @@ function DKEditor_Menu_End()
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
@@ -61,7 +62,6 @@ function DKEditor_Menu_OnEvent(event)
 				//DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
 				//DKLog("Frame name: "+rval+"\n");
-				//TODO
 			});
 		});
 	}
@@ -70,6 +70,9 @@ function DKEditor_Menu_OnEvent(event)
 		DKCreate("DKBuild/DKBuildGUI.js", function(){
 			DKFrame_Widget("DKBuildGUI.html");
 		});
+	}
+	if(DK_Id(event, "DKEditor_Menu_Info")){
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	}
 
 	if(DK_Id(event, "GLOBAL")){
