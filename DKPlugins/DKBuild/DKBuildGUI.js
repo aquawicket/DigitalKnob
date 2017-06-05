@@ -2,10 +2,9 @@
 function DKBuildGUI_Init()
 {
 	//DKLog("DKBuildGUI_Init()\n", DKDEBUG);
-	DKCreate("DKBuild/DKBuild.js", function(){
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
-	DKCreate("DKBuild/DKBuild.html,DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
+	DKCreate("DKBuild/DKBuild.js", function(){
 		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
 		DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
 		DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
@@ -42,7 +41,6 @@ function DKBuildGUI_Init()
 		*/
 		
 		DKBuildGUI_UpdateApps();
-	});
 	});
 	});
 	});
