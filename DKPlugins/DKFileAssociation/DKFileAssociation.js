@@ -44,7 +44,7 @@ function DKFileAssociation_OpenHtml(path)
 	//DKLog("DKFileAssociation_OpenHtml("+path+") \n", DKDEBUG);
 	var id = DKFile_GetFilename(path);
 	DKCreate(path, function(){
-		DKFileAssociation_AddDragHandles(id);
+		//DKFileAssociation_AddDragHandles(id);
 		DKFrame_Widget(id);
 		//DKFileAssociation_SelectElement(id);
 	});
@@ -86,8 +86,8 @@ function DKFileAssociation_OpenHtml(path)
 	DKWidget_AppendChild("body", element);
 	DKWidget_RemoveElement("temporary");
 	//Show(id);
-	DKFileAssociation_AddDragHandles(id);
-	DKFileAssociation_SelectElement(id);
+	//DKFileAssociation_AddDragHandles(id);
+	//DKFileAssociation_SelectElement(id);
 }
 
 ///////////////////////////////////////
