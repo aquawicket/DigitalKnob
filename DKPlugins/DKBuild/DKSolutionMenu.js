@@ -24,17 +24,8 @@ function DKSolutionMenu_Init()
 function DKSolutionMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Delete", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Cut", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
-	DKRemoveEvent("DKSolutionMenu_GitAdd", "click", DKSolutionMenu_OnEvent);
-	DKClose("DKSolutionMenu.html");
+	DKRemoveEvents(DKSolutionMenu_OnEvent);
+	DKClose("DKBuild/DKSolutionMenu.html");
 }
 
 //////////////////////////////////////

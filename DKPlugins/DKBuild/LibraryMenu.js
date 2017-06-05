@@ -12,13 +12,14 @@ function LibraryMenu_Init()
 function LibraryMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
+	DKRemoveEvents(LibraryMenu_OnEvent);
 	DKClose("DKBuild/LibraryMenu.html");
 }
 
 ///////////////////////////////////
 function LibraryMenu_OnEvent(event)
 {
-	DKLog("LibraryMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("LibraryMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "Build Libraries")){
 		DKLog("Clicked Build Libraries\n");

@@ -13,14 +13,14 @@ function DKSolutionRename_Init()
 function DKSolutionRename_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
-	DKRemoveEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
-	DKClose("DKSolutionRename.html");
+	DKRemoveEvents(DKSolutionRename_OnEvent);
+	DKClose("DKBuild/DKSolutionRename.html");
 }
 
 //////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
-	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "keydown")){
 		if(DK_GetValue(event) != 13){
@@ -33,7 +33,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	DKSolutionRename_Rename();
-	DKClose("DKSolutionRename.js");
+	DKClose("DKBuild/DKSolutionRename.js");
 }
 
 ///////////////////////////////////

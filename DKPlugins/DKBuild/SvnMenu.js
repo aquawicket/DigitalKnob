@@ -13,13 +13,14 @@ function SvnMenu_Init()
 function SvnMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", SvnMenu_OnEvent);
+	DKRemoveEvents(SvnMenu_OnEvent);
 	DKClose("DKBuild/SvnMenu.html");
 }
 
 ///////////////////////////////
 function SvnMenu_OnEvent(event)
 {
-	DKLog("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"Svn Update")){
 		DKThread_DKQueue("SvnUpdate","DKBuild_SvnUpdate();");
