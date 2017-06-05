@@ -115,10 +115,10 @@ function DKSolution_OpenHere(path)
 		return true;
 	}
 	else{ //File
-		//TODO
-		DKLog("DKSolution_OpenHere(): not implemented for files yet\n", DKERROR);
-		//DK_Run(aPath);
-		return false;
+		DKCreate("DKFileAssociation/DKFileAssociation.js", function(){
+			if(!DKFileAssociation_Open(aPath)){ return false; }
+			return true;
+		});
 	}
 	
 	return false; //error
