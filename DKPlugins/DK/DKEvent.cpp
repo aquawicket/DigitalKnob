@@ -132,13 +132,18 @@ bool DKEvent::RemoveEvents(const DKString& id, const DKString& type)
 	return true;
 }
 
-//////////////////////////////////////////////
-bool DKEvent::RemoveEvents(const DKString& id)
+////////////////////////////////////////////////////
+bool DKEvent::RemoveEvents(const DKString& variable)
 {
-	DKLog("DKEvent::RemoveEvents("+id+")\n", DKDEBUG);
+	//variable can be id or jsreturn
+	DKLog("DKEvent::RemoveEvents("+variable+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
-		if(same(events[i]->id,id)){
+		if(same(events[i]->id, variable)){
 			events.erase(events.begin()+i);
+			i--;
+		}
+		if(same(events[i]->jsreturn, variable)){
+			events.erase(events.begin() + i);
 			i--;
 		}
 	}

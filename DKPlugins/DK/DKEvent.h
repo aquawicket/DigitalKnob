@@ -17,7 +17,7 @@ public:
 	static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<void (DKEvent*)> func, DKObject* object);
 	static bool RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn);
 	static bool RemoveEvents(const DKString& id, const DKString& type);
-	static bool RemoveEvents(const DKString& id);
+	static bool RemoveEvents(const DKString& variable); //variable can be id or jsreturn
 	static bool RemoveEvents(DKObject* obj);
 	static bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	static void RenameEventId(const DKString& oldID, const DKString& newID);

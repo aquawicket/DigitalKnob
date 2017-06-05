@@ -46,6 +46,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin, 1);
 	DKDuktape::AttachFunction("DKLog", DKJS::_DKLog, 2);
 	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent, 3);
+	DKDuktape::AttachFunction("DKRemoveEvents", DKJS::_DKRemoveEvents, 1);
 	DKDuktape::AttachFunction("DKSendEvent", DKJS::_DKSendEvent, 3);
 	DKDuktape::AttachFunction("DKValid", DKJS::_DKValid, 1);
 	
@@ -218,7 +219,17 @@ int DKJS::_DKRemoveEvent(duk_context* ctx)
 		replace(jsreturn, "function ", "");
 	}
 
-	DKEvent::RemoveEvent(id, type, jsreturn);
+	if(!DKEvent::RemoveEvent(id, type, jsreturn)){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKJS::_DKRemoveEvents(duk_context* ctx)
+{
+	//variable can be id or jsreturn
+	DKString variable = duk_to_string(ctx, 0);
+	replace(variable, "function ", ""); //jsreturn type
+	if(!DKEvent::RemoveEvents(variable)){ return 0; } //sending id or jsreturn
 	return 1;
 }
 

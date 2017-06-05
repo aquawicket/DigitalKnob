@@ -17,6 +17,7 @@ public:
 	static int _DKLoadPlugin(duk_context* ctx);
 	static int _DKLog(duk_context* ctx);
 	static int _DKRemoveEvent(duk_context* ctx);
+	static int _DKRemoveEvents(duk_context* ctx);
 	static int _DKSendEvent(duk_context* ctx);
 	static int _DKValid(duk_context* ctx);
 	static int _SetLog(duk_context* ctx);
