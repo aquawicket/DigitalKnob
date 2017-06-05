@@ -25,6 +25,11 @@ function DKScale_OnEvent(event)
 function DKScale_Resize()
 {
     //DKLog("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
+	
+	if(pixel_ratio == DKWindow_GetPixelRatio()){ //FIXME:  pixel_ratio is adjusted, so this doesn't work
+		return true; //ratio is the same
+	}
+	
 	//Set the scale
 	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
 		var pixel_ratio = DKWindow_GetPixelRatio();
