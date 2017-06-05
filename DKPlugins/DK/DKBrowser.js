@@ -605,7 +605,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKLog("AJAX SEND: "+url);
+	//DKLog("AJAX SEND: "+url);
 	
 	var request = "";
 	try {

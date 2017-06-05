@@ -25,7 +25,6 @@ function DKFile_Init()
 function UrlExists(url, fn)
 {
 	//DKLog("UrlExists("+url+") \n");
-	DKLog("AJAX SEND: "+url);
 	
 	var request = "";
 	try {
