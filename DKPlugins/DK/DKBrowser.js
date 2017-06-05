@@ -92,7 +92,7 @@ function LoadJS(url, callback)
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
 			
-			DKLog("Loaded: "+url);
+			//DKLog("Loaded: "+url);
 			var func = window[name]; //Init    
 			if(typeof func == 'function'){ 
 				DKLog("Calling: "+name+" \n");
@@ -113,7 +113,7 @@ function LoadJS(url, callback)
 function CreateWidget(url, parent)
 {
 	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
-	DKLog("CreateWidget("+url+","+parent+")\n");
+	//DKLog("CreateWidget("+url+","+parent+")\n");
 	
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
@@ -127,7 +127,7 @@ function CreateWidget(url, parent)
 	}
 	
 	var string = DK_FileToString(url);
-	DKLog("CreateWidget(url, parent): string = "+string+"\n");
+	//("CreateWidget(url, parent): string = "+string+"\n");
 	if(!string || string == "ERROR"){ 
 		//DKLog("file not found \n", DKERROR); 
 		var file = DKFile_GetFilename(url);

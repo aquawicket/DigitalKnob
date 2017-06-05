@@ -62,9 +62,9 @@ function DKEditor_Menu_OnEvent(event)
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
-				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
+				//DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
-				DKLog("Frame name: "+rval+"\n");
+				//DKLog("Frame name: "+rval+"\n");
 				//TODO
 			});
 		});
@@ -81,5 +81,6 @@ function DKEditor_Menu_OnEvent(event)
 			return;
 		}
 	}
+	
 	DKClose("DKEditor/DKEditor_Menu.js");
 }

@@ -1,13 +1,13 @@
 //BROWSER
 
 function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
+function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKWARN); return color; }
 
 
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	DKLog("DKCreate("+data+")");
+	//DKLog("DKCreate("+data+")");
 	var arry = data.split(",");
 	
 	if(arry[0].indexOf(".html") > -1){
@@ -20,7 +20,7 @@ function DKCreate(data, callback)
 		arry.splice(0, 0, "DKCss");
 	}
 	else{
-		DKLog("DKCreate("+data+"): requesting c++ plugin\n");
+		//DKLog("DKCreate("+data+"): requesting c++ plugin\n");
 		if(DK_GetBrowser() == "CEF"){
 			DKCreate_CPP(data);
 		}
@@ -33,7 +33,6 @@ function DKCreate(data, callback)
 			}
 			else{
 				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
-				alert("DKCreate("+data+"): does not have a callback \n");
 			}
 		});
 	}
@@ -95,7 +94,7 @@ function AdjustRems(id)
 //////////////////////
 function DKClose(data)
 {
-	DKLog("DKClose("+data+")");
+	//DKLog("DKClose("+data+")");
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
 		return;
@@ -128,7 +127,7 @@ function DKClose(data)
 		name += "_End";
 		var func = window[name]; //End
 		if(typeof func == 'function'){ 
-			DKLog("Calling: "+name+" \n");
+			//DKLog("Calling: "+name+" \n");
 			func(); //End
 		}
 		else{
@@ -164,10 +163,10 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
 	
 	if(!url){ return; }
-	DKLog("DKWidget("+url+", "+parent+") \n");
+	//DKLog("DKWidget("+url+", "+parent+") \n");
 	
 	//if(filesloaded.indexOf(url) != -1){
 		//DKLog(url+" already loaded \n", DKWARN);
@@ -340,7 +339,7 @@ function DKWidget_GetElements(id)
 			string += ",";
 		}
 	}
-	DKLog("GetElements("+id+"): -> "+string+" \n");
+	//DKLog("GetElements("+id+"): -> "+string+" \n");
 	return string;
 }
 
@@ -378,7 +377,7 @@ function DKWidget_GetValue(variable)
 		if(variable.nodeType == 1){
 			//DKLog("variable.tagName: "+variable.tagName+"\n");
 			if(variable.tagName == "INPUT"){
-				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
+				//DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
 			return DKWidget_GetInnerHtml(variable);
@@ -443,12 +442,12 @@ function DKWidget_GetValue(variable)
 				return width+","+height;
 			}
 			var ele = DKWidget_GetElement(event);
-			DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
+			//DKLog("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value;
 		}
 		else{ //element or other object
 			if(variable.value){
-				DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
+				//DKLog("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
 			//DKLog("DKWidget_GetValue("+variable+") -> "+variable[2]+"\n");
@@ -727,7 +726,7 @@ function DKWidget_IsChildOf(id, parent)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
-	DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n");
+	//DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n");
 	
 	id = DKWidget_GetAvailableId(id);
 	
@@ -741,7 +740,7 @@ function DKWidget_CreateElement(parent, tag, id)
 	//DKLog("DKWidget_CreateElement(): ele = "+ele+"\n");
 	par.appendChild(ele); //This is not working on IE
 	
-	DKLog("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n");
+	//DKLog("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n");
 	return id;
 }
 
@@ -787,7 +786,7 @@ function DKWidget_AppendChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {
-	DKLog("DKWidget_PrependChild("+parent+","+element+")\n");
+	//DKLog("DKWidget_PrependChild("+parent+","+element+")\n");
 	
 	var par;
 	if(typeof parent == "string"){
@@ -855,7 +854,7 @@ function DKWidget_GetFirstChild(id)
 {
 	var fc = document.getElementById(id).firstChild;
 	if(fc){
-		DKLog("GetFirstChild("+id+"): -> "+fc.id+"\n");
+		//DKLog("GetFirstChild("+id+"): -> "+fc.id+"\n");
 		return fc.id;
 	}
 	return false;
@@ -876,7 +875,7 @@ function DKWidget_GetMouseWindowY(id)
 //////////////////////////////////////
 function DKWidget_GetMouseElementX(id)
 {
-	DKLog("DKWidget_GetMouseElementX("+id+")\n");
+	//DKLog("DKWidget_GetMouseElementX("+id+")\n");
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(id);
@@ -892,7 +891,7 @@ function DKWidget_GetMouseElementX(id)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementY(id)
 {
-	DKLog("DKWidget_GetMouseElementY("+id+")\n");
+	//DKLog("DKWidget_GetMouseElementY("+id+")\n");
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(element);
@@ -999,6 +998,7 @@ function DKWidget_RemoveElement(id)
 	var ele = document.getElementById(id);
 	if(!ele){
 		DKLog("RemoveElement("+id+"): element does not exist\n");
+		return false;
 	}
 	var par = ele.parentNode;
 	if(ele && par){
