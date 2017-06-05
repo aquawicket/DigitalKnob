@@ -10,8 +10,7 @@ function DKMenuRightWeb_Init()
 /////////////////////////////
 function DKMenuRightWeb_End()
 {
-	DKRemoveEvent("ConnectButton", "click", DKMenuRightWeb_OnEvent);
-	DKRemoveEvent("UploadButton", "click", DKMenuRightWeb_OnEvent);
+	DKRemoveEvents(DKMenuRightWeb_OnEvent);
 	DKClose("DKDev/DKMenuRightWeb.html");
 }
 

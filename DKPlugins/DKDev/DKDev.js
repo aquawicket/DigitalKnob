@@ -27,42 +27,11 @@ function DKDev_Init()
 ////////////////////
 function DKDev_End()
 {
-	DKRemoveEvent("body", "contextmenu", DKDev_OnEvent);
-	DKRemoveEvent("body", "click", DKDev_OnEvent);
 	DKRemoveEvent("GLOBAL", "SaveHtmlFiles", DKDev_OnEvent);
 	DKRemoveEvent("GLOBAL", "OpenFile", DKDev_OnEvent);
 	DKRemoveEvent("GLOBAL", "FileChoice", DKDev_OnEvent);
+	DKRemoveEvents(DKDev_OnEvent);
 	DKClose("DKDev/DKDev.html");
-}
-
-///////////////////
-function DKDev_On()
-{
-	DKLog("DKDev_On \n", DKDEBUG);
-	DKDev_AddDragHandles("body");
-	//DKDev_ApplyBox(stored_element);
-	devmode = true;
-}
-
-////////////////////
-function DKDev_Off()
-{
-	DKLog("DKDev_Off \n", DKDEBUG);
-	DKDev_RemoveDragHandles("body");
-	DKDev_HideBox();
-	devmode = false;
-}
-
-/////////////////////////
-function DKDev_Ignore(id)
-{
-	//DKLog("DKDev_Ignore("+id+") \n", DKDEBUG);
-	var arry = ignorelist.split(",");
-	for(var i=0; i<arry.length; i++){
-		if(!arry[i]){ continue; }
-		if(DKWidget_IsChildOf(id, arry[i])){return true;}
-	}
-	return false;
 }
 
 /////////////////////////////
@@ -158,6 +127,36 @@ function DKDev_OnEvent(event)
 		var value = DK_GetValue(event);
 		DKLog("FileChoice: "+value+"\n", DKDEBUG);
 	}
+}
+
+///////////////////
+function DKDev_On()
+{
+	DKLog("DKDev_On \n", DKDEBUG);
+	DKDev_AddDragHandles("body");
+	//DKDev_ApplyBox(stored_element);
+	devmode = true;
+}
+
+////////////////////
+function DKDev_Off()
+{
+	DKLog("DKDev_Off \n", DKDEBUG);
+	DKDev_RemoveDragHandles("body");
+	DKDev_HideBox();
+	devmode = false;
+}
+
+/////////////////////////
+function DKDev_Ignore(id)
+{
+	//DKLog("DKDev_Ignore("+id+") \n", DKDEBUG);
+	var arry = ignorelist.split(",");
+	for(var i=0; i<arry.length; i++){
+		if(!arry[i]){ continue; }
+		if(DKWidget_IsChildOf(id, arry[i])){return true;}
+	}
+	return false;
 }
 
 //////////////////////////

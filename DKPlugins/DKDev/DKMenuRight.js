@@ -20,14 +20,7 @@ function DKMenuRight_Init()
 function DKMenuRight_End()
 {
 	DKRemoveEvent("GLOBAL", "keydown", DKMenuRight_OnEvent);
-	DKRemoveEvent("DevModeButton", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("AppImage", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("Image19", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("Image20", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("WebImage", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("TriggerImage", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("HookImage", "click", DKMenuRight_OnEvent);
-	DKRemoveEvent("DKMenuRight.html", "SetPanel", DKMenuRight_OnEvent);
+	DKRemoveEvents(DKMenuRight_OnEvent);
 	DKClose("DKDev/DKMenuRightWeb.js");
 	DKClose("DKDev/DKMenuRightTree.js");
 	DKClose("DKDev/DKMenuRightApp.js");

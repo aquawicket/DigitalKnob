@@ -14,15 +14,14 @@ function DKDev_RootMenu_Init()
 function DKDev_RootMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKDev_RootMenu_OnEvent);
-	DKRemoveEvent("DKDev_RootMenu_NewFrame", "click", DKDev_RootMenu_OnEvent);
-	DKRemoveEvent("DKDev_RootMenu_OpenFile", "click", DKDev_RootMenu_OnEvent);
+	DKRemoveEvents(DKDev_RootMenu_OnEvent);
 	DKClose("DKDev/DKDev_RootMenu.html");
 }
 
 //////////////////////////////////////
 function DKDev_RootMenu_OnEvent(event)
 {
-	DKLog("DKDev_RootMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKDev_RootMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Id(event, "DKDev_RootMenu_NewFrame")){
 		DKDev_NewPage(stored_element);
@@ -40,5 +39,6 @@ function DKDev_RootMenu_OnEvent(event)
 			return;
 		}
 	}
+	
 	DKClose("DKDev/DKDev_RootMenu.js");
 }

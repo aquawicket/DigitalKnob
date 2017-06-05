@@ -9,14 +9,14 @@ function SendBugReport_Init()
 ////////////////////////////
 function SendBugReport_End()
 {
-	DKRemoveEvent("SendBugReport_Button", "click", SendBugReport_OnEvent);
-	DKClose("SendBugReport.html");
+	DKRemoveEvents(SendBugReport_OnEvent);
+	DKClose("DKDebug/SendBugReport.html");
 }
 
 /////////////////////////////////////
 function SendBugReport_OnEvent(event)
 {
-	DKLog("SendBugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("SendBugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Id(event, "SendBugReport_Button")){
 		SendBugReport_CreateReport();

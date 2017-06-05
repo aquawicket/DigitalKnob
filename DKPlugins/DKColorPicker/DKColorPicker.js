@@ -15,18 +15,14 @@ function DKColorPicker_Init()
 ////////////////////////////
 function DKColorPicker_End()
 {
-	DKRemoveEvent("DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
-	DKRemoveEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
-	DKRemoveEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
-	DKRemoveEvent("DKColorPickerClose", "click", DKColorPicker_OnEvent);
-	DKRemoveEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
+	DKRemoveEvents(DKColorPicker_OnEvent);
 	DKClose("DKColorPicker/DKColorPicker.html");
 }
 
 /////////////////////////////////////
 function DKColorPicker_OnEvent(event)
 {
-	DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKINFO);
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");
