@@ -18,6 +18,9 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
 	
+	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
+	
 	//TODO
 	//DKEditor_Menu_GitUpdate
 	//DKEditor_Menu_GitCommit
@@ -78,13 +81,21 @@ function DKEditor_Menu_OnEvent(event)
 			});
 		});
 	}
-	
 	if(DK_Id(event, "DKEditor_Menu_Builder")){
 		DKCreate("DKBuild/DKBuildGUI.js", function(){
 			DKFrame_Widget("DKBuildGUI.html");
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	}
+	
+	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
+		//TODO
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	}
+	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
+		//TODO
 		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	}
 
