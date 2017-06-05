@@ -20,24 +20,20 @@ function DKEditor_Menu_Init()
 function DKEditor_Menu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
-	DKRemoveEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
+	DKRemoveEvents(DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
 
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
+		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+")\n");
 		DKCreate("DKFile/DKSolution.js", function(){
 			var frame = DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
@@ -71,8 +67,8 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "DKEditor_Menu_Builder")){
-		DKCreate("DKFile/DKFileGUI.js", function(){
-			DKFrame_Widget("DKFileGUI.html");
+		DKCreate("DKBuild/DKBuildGUI.js", function(){
+			DKFrame_Widget("DKBuildGUI.html");
 		});
 	}
 

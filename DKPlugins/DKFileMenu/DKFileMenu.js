@@ -1,4 +1,5 @@
 //TODO
+DKLog("DKFileMenu_Init(): TODO: Not Implemented Yet\n", DKERROR);
 
 ///////////////////////
 function DKFileMenu_Init()
