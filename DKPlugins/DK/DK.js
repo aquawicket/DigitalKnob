@@ -503,6 +503,7 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
+	//FIXME - this doesn't seem to remove GLOBAL events
 	for(var i=0; i<events.length; i++){
 		if(events[i+2] == Function){
 			events.splice(i, 3);
