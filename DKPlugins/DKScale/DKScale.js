@@ -1,3 +1,5 @@
+var pixel_ratio = 1.0;
+
 //////////////////////
 function DKScale_Init()
 {
@@ -25,14 +27,11 @@ function DKScale_OnEvent(event)
 function DKScale_Resize()
 {
     //DKLog("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
-	
-	if(pixel_ratio == DKWindow_GetPixelRatio()){ //FIXME:  pixel_ratio is adjusted, so this doesn't work
-		return true; //ratio is the same
-	}
-	
+	if(pixel_ratio == DKWindow_GetPixelRatio()){ return true; } //nothing to be done
+	var pixel_ratio = DKWindow_GetPixelRatio();
+
 	//Set the scale
-	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())) && (parseFloat(DKWindow_GetPixelRatio()) > 1)){
-		var pixel_ratio = DKWindow_GetPixelRatio();
+	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth())))){
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
 			pixel_ratio = 2.0;
 			DKWidget_SetProperty("html", "font-size", pixel_ratio+"px");
