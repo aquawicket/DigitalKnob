@@ -103,7 +103,10 @@ function DKLog(string, lvl)
 			return fileline+"  ";
 		};
 		
-		if(lvl == DKERROR){ alert("ERROR: "+string); /*throw string;*/ }
+		if(lvl == DKERROR){ 
+			alert("ERROR: "+string);
+			throw "ERROR: "+string;
+		}
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+getFileLine()+string, color);
 		}
