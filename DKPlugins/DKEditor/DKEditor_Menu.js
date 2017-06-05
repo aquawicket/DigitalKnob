@@ -94,14 +94,6 @@ function DKEditor_Menu_OnEvent(event)
 		//TODO
 		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	}
-	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
-		//TODO
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	}
-	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
-		//TODO
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
 		//TODO
 		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
