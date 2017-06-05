@@ -543,7 +543,11 @@ function DKWidget_SetProperty(variable, parameter, value)
 {
 	//DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")\n");
 	
-	if(!variable){ DKLog("DKWidget_SetProperty(): variable not set \n", DKWARN); return false; }
+	if(!variable){ //FIXME: who called you?
+		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set \n", DKWARN); 
+		return false; 
+	} 
+	
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
 	//DKLog("DK_IE() = "+DK_IE()+"\n");
 	if(DK_IE() < 9){
