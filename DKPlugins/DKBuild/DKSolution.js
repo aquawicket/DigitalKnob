@@ -55,7 +55,7 @@ function DKSolution_OnEvent(event)
 		//DKLog(DK_GetId(event)+"\n", DKINFO);
 		//DKLog(DKWidget_GetValue(DK_GetId(event))+"\n", DKINFO);
 		if(DK_IdLike(event, "DKSolutionFolder")){
-			DKLog("DKSolutionFolder", DKINFO);
+			//DKLog("DKSolutionFolder", DKINFO);
 			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
 			return;
 		}
@@ -66,7 +66,7 @@ function DKSolution_OnEvent(event)
 	}
 }
 
-////////////////////////////////////
+//////////////////////////////
 function DKSolution_Select(id)
 {
 	var elements = DKWidget_GetElements("DKSolutionMenu");
@@ -101,6 +101,29 @@ function DKSolution_OpenFile(path)
 	}
 	DKLog("aPath:"+aPath+"\n", DKDEBUG);
 	DK_Run(aPath);
+}
+
+//////////////////////////////////
+function DKSolution_OpenHere(path)
+{
+	//DKLog("DKSolution_OpenHere("+path+") \n", DKINFO);
+	var aPath = path;
+	if(DK_GetOS() != "Android"){
+		aPath = DKFile_GetAbsolutePath(path);
+	}
+	DKLog("aPath:"+aPath+"\n", DKDEBUG);
+	if(DKFile_IsDirectory(aPath)){ //Folder
+		if(!DKSolution_UpdatePath(aPath)){ return false; }
+		return true;
+	}
+	else{ //File
+		//TODO
+		DKLog("DKSolution_OpenHere(): not implemented for files yet\n", DKERROR);
+		//DK_Run(aPath);
+		return false;
+	}
+	
+	return false; //error
 }
 
 ////////////////////////////////////

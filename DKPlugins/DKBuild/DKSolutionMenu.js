@@ -98,7 +98,6 @@ function DKSolutionMenu_SetFile(file)
 //////////////////////////////
 function DKSolutionMenu_Open()
 {
-	//TODO
 	DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n", DKINFO);
 	DKSolution_OpenFile(DKSolutionMenu_file);
 }
@@ -106,8 +105,8 @@ function DKSolutionMenu_Open()
 //////////////////////////////////
 function DKSolutionMenu_OpenHere()
 {
-	//TODO
 	DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n", DKINFO);
+	DKSolution_OpenHere(DKSolutionMenu_file);
 }
 
 /////////////////////////////////
