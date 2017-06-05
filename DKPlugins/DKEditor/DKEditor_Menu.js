@@ -20,11 +20,7 @@ function DKEditor_Menu_Init()
 	
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
-	
-	//TODO
-	//DKEditor_Menu_GitUpdate
-	//DKEditor_Menu_GitCommit
-	//DKEditor_Menu_Info
+	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
 }
 
 ////////////////////////////
@@ -98,7 +94,20 @@ function DKEditor_Menu_OnEvent(event)
 		//TODO
 		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	}
+	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
+		//TODO
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	}
+	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
+		//TODO
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	}
+	if(DK_Id(event, "DKEditor_Menu_Info")){
+		//TODO
+		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	}
 
+	///////////////////////////
 	if(DK_Id(event, "GLOBAL")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor_Menu.html")){
 			return;
