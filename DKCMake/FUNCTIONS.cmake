@@ -36,7 +36,24 @@ FUNCTION(DKDOWNLOAD arg)
 	##https://cmake.org/pipermail/cmake/2012-September/052205.html/
 	GET_FILENAME_COMPONENT(filename ${arg} NAME)
 	IF(NOT EXISTS ${CURRENT_DIR}/${filename})
-		FILE(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS)
+		MESSAGE(STATUS "downloading... ${filename}")
+		FILE(DOWNLOAD ${arg} ${CURRENT_DIR}/${filename} SHOW_PROGRESS 
+		#no TIMEOUT
+		STATUS status 
+		#no LOG
+		)
+		
+		LIST(GET status 0 status_code) 
+		LIST(GET status 1 status_string)
+		
+		IF(NOT status_code EQUAL 0) 
+		MESSAGE(FATAL_ERROR "error: downloading ${filename} failed 
+							status_code: ${status_code} 
+							status_string: ${status_string} 
+							") 
+		ENDIF() 
+
+		MESSAGE(STATUS "downloading... done") 
 	ENDIF()
 ENDFUNCTION()
 
