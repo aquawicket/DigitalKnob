@@ -46,14 +46,12 @@ FUNCTION(DKDOWNLOAD arg)
 		LIST(GET status 0 status_code) 
 		LIST(GET status 1 status_string)
 		
-		IF(NOT status_code EQUAL 0) 
-		MESSAGE(FATAL_ERROR "error: downloading ${filename} failed 
-							status_code: ${status_code} 
-							status_string: ${status_string} 
-							") 
+		IF(NOT status_code EQUAL 0)
+			DKREMOVE(${CURRENT_DIR}/${filename})
+			MESSAGE(FATAL_ERROR "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}") 
+		ELSE()
+			MESSAGE(STATUS "downloading... done") 
 		ENDIF() 
-
-		MESSAGE(STATUS "downloading... done") 
 	ENDIF()
 ENDFUNCTION()
 
