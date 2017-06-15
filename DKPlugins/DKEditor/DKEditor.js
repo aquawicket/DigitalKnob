@@ -21,21 +21,13 @@ function DKEditor_OnEvent(event)
 	if(DK_Id(event, "DKEditor_edit")){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
 			
-			//TODO - make sure menu is within window
+			//make sure menu is within window
 			var win_width = DKWidget_GetClientWidth("body");
 			var win_height = DKWidget_GetClientHeight("body");
-			DKLog("win_width = "+win_width+"\n");
-			DKLog("win_height = "+win_height+"\n");
-			
 			var top = DKWidget_GetOffsetTop("DKEditor_Menu.html");
 			var left = DKWidget_GetOffsetLeft("DKEditor_Menu.html");
 			var width = DKWidget_GetClientWidth("DKEditor_Menu.html");
 			var height = DKWidget_GetClientHeight("DKEditor_Menu.html");
-			DKLog("top = "+top+"\n");
-			DKLog("left = "+left+"\n");
-			DKLog("width = "+width+"\n");
-			DKLog("height = "+height+"\n");
-			
 			if(top + height > win_height){
 				top = win_height - height;
 				DKWidget_SetProperty("DKEditor_Menu.html", "top", top+"px");
@@ -44,7 +36,6 @@ function DKEditor_OnEvent(event)
 				left = win_width - width;
 				DKWidget_SetProperty("DKEditor_Menu.html", "left", left+"px");
 			}
-			
 		});
 	}
 }
