@@ -171,7 +171,7 @@ function DKSolution_UpdatePath(path)
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement("DKSolutionMenu", "div", "DKSolutionFile");
-			DKWidget_SetAttribute(element2, "class", "option");
+			DKWidget_SetAttribute(element3, "class", "option");
 			var value = aPath+"/"+files[f];
 			DKWidget_SetAttribute(element3, "value", value);
 			DKWidget_SetProperty(element3, "white-space", "nowrap");
@@ -187,7 +187,7 @@ function DKSolution_UpdatePath(path)
 				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
 				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/picture.png)");
 			}
 			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
 				(extension == "3dm") || (extension == "3ds") || (extension == "ac") ||
@@ -200,19 +200,19 @@ function DKSolution_UpdatePath(path)
 				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
 				(extension == "ztl")
 			){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/cube.png)");
 			}
 			else if((extension == "js")){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/js.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/js.png)");
 			}
 			else if((extension == "sln")){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/sln.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/sln.png)");
 			}
 			else if((extension == "html") || (extension == "htm")){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/html.png)");
 			}
 			else{
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/file.png\")");
+				DKWidget_SetProperty(element3, "background-image", "url(DKFile/file.png)");
 			}
 		}
 	}
