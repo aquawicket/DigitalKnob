@@ -383,7 +383,7 @@ function DKBuild_SvnCommit()
 ////////////////////////////
 function DKBuild_GitUpdate()
 {
-	if(DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" || DK_GetBrowser() != "Rocket"){
 		return;
 	}
 	
@@ -420,6 +420,10 @@ function DKBuild_GitUpdate()
 ////////////////////////////
 function DKBuild_GitCommit()
 {
+	if(DK_GetBrowser() != "CEF" || DK_GetBrowser() != "Rocket"){
+		return;
+	}
+	
 	DKLog("Git Commit DigitalKnob... \n");
 	DKFile_ChDir(DKPATH);
 	DK_Execute(GIT +" init");
