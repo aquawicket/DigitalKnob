@@ -85,7 +85,8 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		DKDebug_PrintInfo();
 	}
 	
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
