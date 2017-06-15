@@ -7,6 +7,7 @@ function DKEditor_Init()
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
 	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
 	
+	DKWidget_AddDragHandle("DKEditor.html", "DKEditor.html");
 }
 
 ///////////////////////
