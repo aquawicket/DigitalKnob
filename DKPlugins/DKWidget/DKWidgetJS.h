@@ -38,6 +38,8 @@ public:
 	static int GetMouseWindowX(duk_context* ctx);
 	static int GetMouseWindowY(duk_context* ctx);
 	static int GetOffsetHeight(duk_context* ctx);
+	static int GetOffsetTop(duk_context* ctx);
+	static int GetOffsetLeft(duk_context* ctx);
 	static int GetOffsetWidth(duk_context* ctx);
 	static int GetOption(duk_context* ctx);
 	static int GetOuterHtml(duk_context* ctx);
