@@ -65,7 +65,8 @@ bool DKCefHandler::Minimize(void* input, void* output)
 	DKLog("DKCefHandler::Minimize()\n", DKINFO);
 
 #ifdef WIN32
-	HWND hwnd = GetActiveWindow();
+	//HWND hwnd = GetActiveWindow();
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
 #endif
 
@@ -78,7 +79,8 @@ bool DKCefHandler::Restore(void* input, void* output)
 	DKLog("DKCefHandler::Restore()\n", DKINFO);
 
 #ifdef WIN32
-	HWND hwnd = GetActiveWindow();
+	//HWND hwnd = GetActiveWindow();
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_RESTORE);
 #endif
 
@@ -91,7 +93,7 @@ bool DKCefHandler::Hide(void* input, void* output)
 	DKLog("DKCefHandler::Hide()\n", DKINFO);
 
 #ifdef WIN32
-	HWND hwnd = GetActiveWindow();
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_HIDE);
 #endif
 
@@ -104,7 +106,8 @@ bool DKCefHandler::Show(void* input, void* output)
 	DKLog("DKCefHandler::Show()\n", DKINFO);
 
 #ifdef WIN32
-	HWND hwnd = GetActiveWindow();
+	//HWND hwnd = GetActiveWindow();
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_SHOW);
 #endif
 
