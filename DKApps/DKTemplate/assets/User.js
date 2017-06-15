@@ -1,12 +1,11 @@
 
-
 var USE_CEF = 1;     //Desktop
 var USE_WEBVIEW = 1; //Android, iOS?
 var USE_SDL = 0;     //Use with caution
 var USE_ROCKET = 0;  //Use with caution
 
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
-//var DKApp_url = "https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_geolocation_error";
+//var DKApp_url = "http://digitalknob.com/DKTemplate";
 
 //Validate settings
 if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){ USE_CEF = 0; }
