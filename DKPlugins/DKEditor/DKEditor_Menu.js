@@ -16,11 +16,10 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_HideConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
-	
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
 }
 
 ////////////////////////////
@@ -62,11 +61,9 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 	if(DK_Id(event, "DKEditor_Menu_ShowConsole")){
-		//DKLog("DKEditor_Menu_ShowConsole");
 		DK_ShowConsole();
 	}
 	if(DK_Id(event, "DKEditor_Menu_HideConsole")){
-		//DKLog("DKEditor_Menu_HideConsole");
 		DK_HideConsole();
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
@@ -85,20 +82,21 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
-		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		DKDebug_PrintInfo();
 	}
-	
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
-		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitUpdate();
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
-		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitCommit();
+		});
+	}
+	if(DK_Id(event, "DKEditor_Menu_Report")){
+		DKCreate("DKDebug/SendBugReport.js", function(){
+			DKFrame_Widget("SendBugReport.html");
 		});
 	}
 
