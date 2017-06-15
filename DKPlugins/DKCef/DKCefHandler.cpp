@@ -62,7 +62,7 @@ bool DKCefHandler::TestReturnString(void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKCefHandler::Minimize(void* input, void* output)
 {
-	//DKLog("DKCefHandler::Minimize()\n", DKINFO);
+	DKLog("DKCefHandler::Minimize()\n", DKINFO);
 
 #ifdef WIN32
 	HWND hwnd = GetActiveWindow();
@@ -75,7 +75,7 @@ bool DKCefHandler::Minimize(void* input, void* output)
 /////////////////////////////////////////////////////
 bool DKCefHandler::Restore(void* input, void* output)
 {
-	//DKLog("DKCefHandler::Restore()\n", DKINFO);
+	DKLog("DKCefHandler::Restore()\n", DKINFO);
 
 #ifdef WIN32
 	HWND hwnd = GetActiveWindow();
@@ -88,7 +88,7 @@ bool DKCefHandler::Restore(void* input, void* output)
 //////////////////////////////////////////////////
 bool DKCefHandler::Hide(void* input, void* output)
 {
-	//DKLog("DKCefHandler::Hide()\n", DKINFO);
+	DKLog("DKCefHandler::Hide()\n", DKINFO);
 
 #ifdef WIN32
 	HWND hwnd = GetActiveWindow();
@@ -101,7 +101,7 @@ bool DKCefHandler::Hide(void* input, void* output)
 //////////////////////////////////////////////////
 bool DKCefHandler::Show(void* input, void* output)
 {
-	//DKLog("DKCefHandler::Show()\n", DKINFO);
+	DKLog("DKCefHandler::Show()\n", DKINFO);
 
 #ifdef WIN32
 	HWND hwnd = GetActiveWindow();
