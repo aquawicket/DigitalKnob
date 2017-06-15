@@ -22,10 +22,9 @@ function DKFrame_OnEvent(event)
 		DKFrame_BringToFront();
 	}
 	if(DK_Type(event, "dblclick")){
-		//FIXME
-		//var id = DK_GetId(event);
-		//var titlebar = DKWidget_GetParent(id);
-		//DKFrame_MaximizeButton(titlebar);
+		var id = DK_GetId(event);
+		var titlebar = DKWidget_GetParent(id);
+		DKFrame_MaximizeButton(titlebar);
 	}
 	if(DK_IdLike(event, "minimize")){
 		DKFrame_MinimizeButton(DK_GetId(event));
