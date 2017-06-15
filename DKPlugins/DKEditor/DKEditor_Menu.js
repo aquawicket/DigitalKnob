@@ -101,10 +101,6 @@ function DKEditor_Menu_OnEvent(event)
 			DKBuild_GitCommit();
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_Info")){
-		//TODO
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	}
 
 	///////////////////////////
 	if(DK_Id(event, "GLOBAL")){

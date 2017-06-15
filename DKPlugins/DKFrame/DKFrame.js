@@ -253,13 +253,14 @@ function DKFrame_MinimizeButton(id)
 ///////////////////////////////////
 function DKFrame_MaximizeButton(id)
 {
-	//DKLog("DKFrame_MaximizeButton("+id+")\n");
+	DKLog("DKFrame_MaximizeButton("+id+")\n");
 	var frame = DKWidget_GetParent(id);
 	var top = DKWidget_GetProperty(frame, "top");
 	var bottom = DKWidget_GetProperty(frame, "bottom");
 	var left = DKWidget_GetProperty(frame, "left");
 	var right = DKWidget_GetProperty(frame, "right");
-	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem"){
+	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem" ||
+		top == "0px" && bottom == "0px" && left == "0px" && right == "0px" ){
 		DKFrame_RestoreSize(frame);
 		
 		//OLD
@@ -272,7 +273,7 @@ function DKFrame_MaximizeButton(id)
 		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKLog(elements+"\n");
+		//DKLog(elements+"\n");
 		DKWidget_SetProperty(arry[4], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
 		DKWidget_SetProperty(arry[4], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
 	}
@@ -294,7 +295,7 @@ function DKFrame_MaximizeButton(id)
 		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKLog(elements+"\n");
+		//DKLog(elements+"\n");
 		DKWidget_SetProperty(arry[4], "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		DKWidget_SetProperty(arry[4], "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
