@@ -5,7 +5,7 @@
 
 #include "DKCef.h"
 
-///////////////////////////////////////////
+/////////////////////////////////////////////
 class DKDebugV8 : public DKObjectT<DKDebugV8>
 {
 public:
@@ -14,6 +14,7 @@ public:
 
 	//static bool Test(CefArgs args, CefReturn retval);
 	static bool ShowStackTrace(CefArgs args, CefReturn retval);
+	static bool SendBugReport(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKDebugV8, false);
