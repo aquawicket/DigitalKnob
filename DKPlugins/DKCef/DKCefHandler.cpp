@@ -11,6 +11,8 @@ DKCefHandler::DKCefHandler()
 
 	DKClass::RegisterFunc("DKCefHandler::Minimize", &DKCefHandler::Minimize, this);
 	DKClass::RegisterFunc("DKCefHandler::Restore", &DKCefHandler::Restore, this);
+	DKClass::RegisterFunc("DKCefHandler::Hide", &DKCefHandler::Hide, this);
+	DKClass::RegisterFunc("DKCefHandler::Show", &DKCefHandler::Show, this);
 }
 
 /////////////////////////////////////////////////////////
@@ -71,5 +73,21 @@ bool DKCefHandler::Restore(void* input, void* output)
 	//TODO
 	DKLog("DKCefHandler::Restore()\n", DKINFO);
 	return false;
+}
+
+//////////////////////////////////////////////////
+bool DKCefHandler::Hide(void* input, void* output)
+{
+	//TODO
+	DKLog("DKCefHandler::Hide()\n", DKINFO);
+	return true;
+}
+
+//////////////////////////////////////////////////
+bool DKCefHandler::Show(void* input, void* output)
+{
+	//TODO
+	DKLog("DKCefHandler::Show()\n", DKINFO);
+	return true;
 }
 

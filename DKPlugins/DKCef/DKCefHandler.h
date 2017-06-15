@@ -22,6 +22,8 @@ public:
 	bool TestReturnString(void* input, void* output);
 	bool Minimize(void* input, void* output);
 	bool Restore(void* input, void* output);
+	bool Hide(void* input, void* output);
+	bool Show(void* input, void* output);
 
 	DKCef* dkCef;
 #ifdef WIN32

@@ -303,7 +303,10 @@ bool DKWindow::IsVisible()
 /////////////////////
 void DKWindow::Hide()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Hide")){
+	if (DKClass::HasFunc("DKCefHandler::Hide")) {
+		DKClass::CallFunc("DKCefHandler::Hide", NULL, NULL);
+	}
+	else if(DKClass::HasFunc("DKSDLWindow::Hide")){
 		DKClass::CallFunc("DKSDLWindow::Hide", NULL, NULL);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::Hide")){
@@ -317,7 +320,10 @@ void DKWindow::Hide()
 /////////////////////
 void DKWindow::Show()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Show")){
+	if (DKClass::HasFunc("DKCefHandler::Show")) {
+		DKClass::CallFunc("DKCefHandler::Show", NULL, NULL);
+	}
+	else if(DKClass::HasFunc("DKSDLWindow::Show")){
 		DKClass::CallFunc("DKSDLWindow::Show", NULL, NULL);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::Show")){
