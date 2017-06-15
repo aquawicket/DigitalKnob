@@ -250,7 +250,10 @@ void DKWindow::Windowed()
 /////////////////////////
 void DKWindow::Minimize()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Minimize")){
+	if (DKClass::HasFunc("DKCefHandler::Minimize")) {
+		DKClass::CallFunc("DKCefHandler::Minimize", NULL, NULL);
+	}
+	else if(DKClass::HasFunc("DKSDLWindow::Minimize")){
 		DKClass::CallFunc("DKSDLWindow::Minimize", NULL, NULL);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::Minimize")){
@@ -264,7 +267,10 @@ void DKWindow::Minimize()
 ////////////////////////
 void DKWindow::Restore()
 {
-	if(DKClass::HasFunc("DKSDLWindow::Restore")){
+	if (DKClass::HasFunc("DKCefHandler::Restore")) {
+		DKClass::CallFunc("DKCefHandler::Restore", NULL, NULL);
+	}
+	else if(DKClass::HasFunc("DKSDLWindow::Restore")){
 		DKClass::CallFunc("DKSDLWindow::Restore", NULL, NULL);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::Restore")){

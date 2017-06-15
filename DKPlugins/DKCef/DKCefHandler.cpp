@@ -61,6 +61,7 @@ bool DKCefHandler::TestReturnString(void* input, void* output)
 bool DKCefHandler::Minimize(void* input, void* output)
 {
 	//TODO
+	DKLog("DKCefHandler::Minimize()\n", DKINFO);
 	return false;
 }
 
@@ -68,6 +69,7 @@ bool DKCefHandler::Minimize(void* input, void* output)
 bool DKCefHandler::Restore(void* input, void* output)
 {
 	//TODO
+	DKLog("DKCefHandler::Restore()\n", DKINFO);
 	return false;
 }
 
