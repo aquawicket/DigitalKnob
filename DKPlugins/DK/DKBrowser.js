@@ -232,18 +232,18 @@ function DragStart(event, id)
 	objectX = GetLeftPx(element);
 	objectY = GetTopPx(element);
 
-	ceiling = document.createElement( 'div' );
-	ceiling.setAttribute('id', 'ceiling');
-	ceiling.style.position = 'absolute';
-    ceiling.style.top = '0px';
-	ceiling.style.left = '0px';
-	ceiling.style.bottom = '0px';
-	ceiling.style.right = '0px';
-	ceiling.style.overflow = 'hidden';  //FIXME   do we need this
-	ceiling.style.zIndex = '100000';
-	ceiling.onmousemove = function(event){DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id);}
-	ceiling.onmouseup = function(event){DragStop(id);}
-	document.body.appendChild(ceiling);
+	//ceiling = document.createElement( 'div' );
+	//ceiling.setAttribute('id', 'ceiling');
+	//ceiling.style.position = 'absolute';
+    //ceiling.style.top = '0px';
+	//ceiling.style.left = '0px';
+	//ceiling.style.bottom = '0px';
+	//ceiling.style.right = '0px';
+	//ceiling.style.overflow = 'hidden';  //FIXME   do we need this
+	//ceiling.style.zIndex = '100000';
+	document.body.onmousemove = function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }
+	document.body.onmouseup = function(event){ DragStop(id); }
+	//document.body.appendChild(ceiling);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -275,7 +275,6 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 	}
 	
 	//WindowRestrictions(id);
-	ceiling = document.getElementById('ceiling');
 	
 	//Create a custom move event
 	///////////////////////////////////////////////////
@@ -303,8 +302,9 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 /////////////////////
 function DragStop(id)
 {
-	ceiling = document.getElementById('ceiling');
-	if(ceiling){document.body.removeChild(ceiling);} 
+	document.body.onmousemove = function(){};
+	//ceiling = document.getElementById('ceiling');
+	//if(ceiling){document.body.removeChild(ceiling);} 
 }
 
 ///////////////////////////////
@@ -326,18 +326,18 @@ function ResizeStart(event, id)
 	objectX = GetWidthPx(element);
 	objectY = GetHeightPx(element);
 	
-	ceiling2 = document.createElement('div');
-	ceiling2.setAttribute('id', 'ceiling2');
-	ceiling2.style.position = 'absolute';
-    ceiling2.style.top = '0px';
-	ceiling2.style.left = '0px';
-	ceiling2.style.bottom = '0px';
-	ceiling2.style.right = '0px';
-	ceiling2.style.overflow = 'hidden'; //FIXME  do we need this
-	ceiling2.style.zIndex = '100000';
-	ceiling2.onmousemove = function(event){ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id);}
-	ceiling2.onmouseup = function(event){ResizeStop(id);}
-	document.body.appendChild(ceiling2);
+	//ceiling2 = document.createElement('div');
+	//ceiling2.setAttribute('id', 'ceiling2');
+	//ceiling2.style.position = 'absolute';
+    //ceiling2.style.top = '0px';
+	//ceiling2.style.left = '0px';
+	//ceiling2.style.bottom = '0px';
+	//ceiling2.style.right = '0px';
+	//ceiling2.style.overflow = 'hidden'; //FIXME  do we need this
+	//ceiling2.style.zIndex = '100000';
+	document.body.onmousemove = function(event){ ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }
+	document.body.onmouseup = function(event){ ResizeStop(id); }
+	//document.body.appendChild(ceiling2);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -362,19 +362,9 @@ function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
   	if((objectY + y - mouseStartY) > 1){
 	  	element.style.height = Pos(objectY + y - mouseStartY);
   	}
+	
 	//WindowRestrictions(id);
-    //SetEditResize(id);
-	ceiling2 = document.getElementById('ceiling2');
-	/*
-	if(browserName == 'Internet Explorer'){
-		ceiling2.style.width = document.body.clientWidth + document.documentElement.scrollLeft + document.body.scrollLeft + 'px';
-		ceiling2.style.height = document.body.clientHeight + document.documentElement.scrollTop + document.body.scrollTop + 'px';
-	}
-	else{
-		ceiling2.style.width = document.body.clientWidth  + window.scrollX + 'px';
-		ceiling2.style.height = document.body.clientHeight + window.scrollY + 'px';
-	}
-	*/
+
 	DKSendEvent(id, "resize");
 }
 
@@ -383,17 +373,10 @@ function ResizeStop(id)
 {
 	//DKLog("ResizeStop("+id+")\n");
 	
-	ceiling2 = document.getElementById('ceiling2');
-	if(ceiling2){document.body.removeChild(ceiling2);} 
+	document.body.onmousemove = function(){};
 	
-	/*
-	element = document.getElementById(id);
-  	var width = parseInt(element.style.width);
-  	var height = (parseInt(element.style.height) - 30);
-	var zindex = parseInt(element.style.zIndex);
-	*/
-		
-	//ajaxGet('UpdateWindow='+id+'&width='+width+'&height='+height+'&zindex='+zindex, true);
+	//ceiling2 = document.getElementById('ceiling2');
+	//if(ceiling2){document.body.removeChild(ceiling2);} 
 }
 
 ///////////////////////
