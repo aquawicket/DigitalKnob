@@ -254,6 +254,7 @@ function DKFrame_MinimizeButton(id)
 function DKFrame_MaximizeButton(id)
 {
 	DKLog("DKFrame_MaximizeButton("+id+")\n");
+	
 	var frame = DKWidget_GetParent(id);
 	var top = DKWidget_GetProperty(frame, "top");
 	var bottom = DKWidget_GetProperty(frame, "bottom");
@@ -263,17 +264,8 @@ function DKFrame_MaximizeButton(id)
 		top == "0px" && bottom == "0px" && left == "0px" && right == "0px" ){
 		DKFrame_RestoreSize(frame);
 		
-		//OLD
-		//var frame = document.getElementById(id).parentNode;
-		//var child = frame.childNodes[4];
-		//DKLog(frame.id+"\n");
-		//DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		//DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
-		
-		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		//DKLog(elements+"\n");
 		DKWidget_SetProperty(arry[4], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
 		DKWidget_SetProperty(arry[4], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
 	}
@@ -286,18 +278,10 @@ function DKFrame_MaximizeButton(id)
 		DKWidget_RemoveProperty(frame, "width");
 		DKWidget_RemoveProperty(frame, "height");
 		
-		//OLD		
-		//var frame = document.getElementById(id).parentNode;
-		//var child = frame.childNodes[4];
-		//DKWidget_SetProperty(child.id, "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		//DKWidget_SetProperty(child.id, "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
-		
-		//NEW 
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		//DKLog(elements+"\n");
-		DKWidget_SetProperty(arry[4], "width", "100%");//parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
-		DKWidget_SetProperty(arry[4], "height", "100%");//parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
+		DKWidget_SetProperty(arry[4], "width", "100%");
+		DKWidget_SetProperty(arry[4], "height", "100%");
 	}
 }
 
