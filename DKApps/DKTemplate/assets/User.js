@@ -90,7 +90,8 @@ else{  //Javascript: V8, WEBVIEW or Duktape
 ///////////////////
 function LoadPage()
 {
-	//DKLog("Loading page... \n");
+	DKLog("Loading page... \n");
+	
 	DKWidget_SetProperty("body","background-color","grey");
 	DKCreate("DKWindow/DKWindow.js", function(){
 		DKCreate("DKScale/DKScale.js", function(){
@@ -103,4 +104,6 @@ function LoadPage()
 			});
 		});
 	});
+	
+	//DKCreate("DKUpdate");
 }
