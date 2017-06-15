@@ -300,15 +300,18 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 	////////////////////////////////////////////////////////////
 }
 
-//////////////////////
-function DragStop(id){
+/////////////////////
+function DragStop(id)
+{
 	ceiling = document.getElementById('ceiling');
 	if(ceiling){document.body.removeChild(ceiling);} 
 }
 
-////////////////////////////////
-function ResizeStart(event, id){
-	//DebugStr('ResizeStart('+id+')');
+///////////////////////////////
+function ResizeStart(event, id)
+{
+	//DKLog("ResizeStart("+id+")\n");
+	
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -323,7 +326,7 @@ function ResizeStart(event, id){
 	objectX = GetWidthPx(element);
 	objectY = GetHeightPx(element);
 	
-	ceiling2 = document.createElement( 'div' );
+	ceiling2 = document.createElement('div');
 	ceiling2.setAttribute('id', 'ceiling2');
 	ceiling2.style.position = 'absolute';
     ceiling2.style.top = '0px';
@@ -337,9 +340,11 @@ function ResizeStart(event, id){
 	document.body.appendChild(ceiling2);
 }
 
-///////////////////////////////////////////////////////////////////////////
-function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id){	
-	//DebugStr('ResizeMove()');
+//////////////////////////////////////////////////////////////////////////
+function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
+{	
+	//DKLog("ResizeMove()\n");
+	
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -373,9 +378,11 @@ function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id){
 	DKSendEvent(id, "resize");
 }
 
-////////////////////////
-function ResizeStop(id){
-	//DebugStr('ResizeStop('+id+')');
+///////////////////////
+function ResizeStop(id)
+{
+	//DKLog("ResizeStop("+id+")\n");
+	
 	ceiling2 = document.getElementById('ceiling2');
 	if(ceiling2){document.body.removeChild(ceiling2);} 
 	
@@ -392,7 +399,7 @@ function ResizeStop(id){
 ///////////////////////
 function Pos(position){
 	
-	DKLog("Pos("+position+")\n");
+	//DKLog("Pos("+position+")\n");
 	
 	if(position == ''){
 		return position;	
@@ -429,6 +436,7 @@ function Pos(position){
 			return position+'rem';
 		}	
 	}
+	
 	DKLog("Pos() ERROR", DKERROR);
 }
 
