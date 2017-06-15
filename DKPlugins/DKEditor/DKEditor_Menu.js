@@ -62,10 +62,12 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 	if(DK_Id(event, "DKEditor_Menu_ShowConsole")){
-		DKLog("DKEditor_Menu_ShowConsole");
+		//DKLog("DKEditor_Menu_ShowConsole");
+		DK_ShowConsole();
 	}
 	if(DK_Id(event, "DKEditor_Menu_HideConsole")){
-		DKLog("DKEditor_Menu_HideConsole");
+		//DKLog("DKEditor_Menu_HideConsole");
+		DK_HideConsole();
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
 		DKCreate("DKMessage/DKMessage.js", function(){
@@ -87,12 +89,16 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
-		//TODO
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		DKCreate("DKBuild/DKBuild.js", function(){
+			DKBuild_GitUpdate();
+		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
-		//TODO
-		DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+		DKCreate("DKBuild/DKBuild.js", function(){
+			DKBuild_GitCommit();
+		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
 		//TODO
