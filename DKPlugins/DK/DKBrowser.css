@@ -5,3 +5,8 @@ body{
 button{
 	font-size: 13rem;
 }
+
+img{
+	user-select: none;
+	user-drag: none;
+}

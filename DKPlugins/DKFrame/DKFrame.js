@@ -205,13 +205,14 @@ function DKFrame_CreateResize(frame)
 {
 	//DKLog("DKFrame_CreateResize("+frame+") \n");
 	
-	var resize = DKWidget_CreateElement(frame, "img", "resize");
-	DKWidget_SetAttribute(resize, "src", "DKFrame/resize.png");
+	var resize = DKWidget_CreateElement(frame, "div", "resize");
+	DKWidget_SetProperty(resize, "background", "url(DKFrame/resize.png)");
 	DKWidget_RemoveProperty(resize, "top");
 	DKWidget_SetProperty(resize, "position", "absolute");
 	DKWidget_SetProperty(resize, "right", "0rem");
 	DKWidget_SetProperty(resize, "bottom", "0rem");
 	DKWidget_SetProperty(resize, "width", "16rem");
+	DKWidget_SetProperty(resize, "height", "16rem");
 	DKWidget_AddResizeHandle(resize, frame);
 	DKAddEvent(frame, "resize", DKFrame_OnEvent);
 	

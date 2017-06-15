@@ -289,7 +289,7 @@ function DKWidget_AddDragHandle(id, drag)
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
 	}
-	element.onmousedown = function(event){DragStart(event, drag);}
+	element.onmousedown = function(event){ DragStart(event, drag);}
 	return true;
 }
 
@@ -300,7 +300,7 @@ function DKWidget_AddResizeHandle(id, resize)
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
 	}
-	element.onmousedown = function(event){ResizeStart(event, resize);}
+	element.onmousedown = function(event){ ResizeStart(event, resize); }
 	return true;
 }
 

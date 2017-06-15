@@ -365,7 +365,7 @@ function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 	
 	//WindowRestrictions(id);
 
-	DKSendEvent(id, "resize");
+	//DKSendEvent(id, "resize");
 }
 
 ///////////////////////
