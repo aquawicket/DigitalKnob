@@ -383,6 +383,10 @@ function DKBuild_SvnCommit()
 ////////////////////////////
 function DKBuild_GitUpdate()
 {
+	if(DK_GetBrowser() != "Rocket"){
+		return;
+	}
+	
 	DKLog("Git Update DigitalKnob... \n");
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
 	DKFile_ChDir(DKPATH);

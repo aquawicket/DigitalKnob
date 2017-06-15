@@ -37,8 +37,8 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_System(){DKLog("DK_System(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DK_GetPixelUnderMouse(){DKLog("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_DK_ShowConsole(){DKLog("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_DK_HideConsole(){DKLog("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_ShowConsole(){DKLog("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_HideConsole(){DKLog("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
 }
 
 var DKERROR = 1;     //Red
