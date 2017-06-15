@@ -4,7 +4,10 @@ function DKEditor_Init()
 	DKCreate("DKEditor/DKEditor.html");
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
 	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
-	DKWidget_AddDragHandle("DKEditor.html", "DKEditor.html");
+	
+	if(DK_GetBrowser() != "Rocket"){
+		DKWidget_AddDragHandle("DKEditor.html", "DKEditor.html"); //FIXME - eats click events in Rocket
+	}
 }
 
 ///////////////////////
