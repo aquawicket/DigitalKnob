@@ -142,9 +142,9 @@ function DKFrame_CreateFrame(title, width, height)
 	var frame = DKWidget_CreateElement("body", "div", title+"_frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
 	DKWidget_SetProperty(frame, "overflow", "hidden");
-	DKWidget_SetProperty(frame, "top", newtop.toString()+"rem");
-	DKWidget_SetProperty(frame, "left", newleft.toString()+"rem");
-	DKWidget_SetProperty(frame, "width", width+"rem");
+	DKWidget_SetProperty(frame, "top", newtop.toString()+"px");
+	DKWidget_SetProperty(frame, "left", newleft.toString()+"px");
+	DKWidget_SetProperty(frame, "width", width.toString()+"rem");
 	DKWidget_SetProperty(frame, "height", newheight.toString()+"rem");
 	DKWidget_SetProperty(frame, "background-color", "rgb(150,150,150)");
 	DKWidget_SetProperty(frame, "border-color", "rgb(0,0,0)");

@@ -550,7 +550,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 	
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
 	//DKLog("DK_IE() = "+DK_IE()+"\n");
-	if(DK_IE() < 9){
+	if(DK_IE() && DK_IE() < 9){
 		value = value.replace("rem", "px"); //IE 8- fix
 	}
 
