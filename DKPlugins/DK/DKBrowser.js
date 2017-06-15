@@ -391,11 +391,17 @@ function ResizeStop(id){
 
 ///////////////////////
 function Pos(position){
+	
+	DKLog("Pos("+position+")\n");
+	
 	if(position == ''){
 		return position;	
 	}
 	if(typeof position == 'string'){
 		if(position.search('rem') != -1){
+			if(DK_IE() < 9){
+				position = position.replace("rem", "px");
+			}
 			return position;
 		}
 		if(position.search('px') != -1){
@@ -407,10 +413,21 @@ function Pos(position){
 		if(position.search('auto') != -1){
 			return position;
 		}
-		return position+'rem'; 
+		
+		if(DK_IE() < 9){
+			return position+'px';
+		}
+		else{
+			return position+'rem';
+		}
 	}
 	if(typeof position == 'number'){
-		return position+'rem';	
+		if(DK_IE() < 9){
+			return position+'px';
+		}
+		else{
+			return position+'rem';
+		}	
 	}
 	DKLog("Pos() ERROR", DKERROR);
 }
