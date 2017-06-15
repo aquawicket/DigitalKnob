@@ -16,6 +16,7 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_HideConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_PushFiles", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
@@ -83,6 +84,10 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
 		DKDebug_PrintInfo();
+	}
+	if(DK_Id(event, "DKEditor_Menu_PushFiles")){
+		DKLog("DKEditor_Menu_PushFiles\n");
+		DKDebug_PushDKFiles();
 	}
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
 		DKCreate("DKBuild/DKBuild.js", function(){

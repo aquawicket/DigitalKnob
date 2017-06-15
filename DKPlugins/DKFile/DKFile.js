@@ -328,13 +328,15 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////////
 	function DKFile_GetAbsolutePath(url)
 	{
+		if(url.indexOf("file:///") > -1){ url = pathname; }
 		if(!url){ url = "/"; }
 		//DKLog("DKFile_GetAbsolutePath("+url+") \n");
+		
 		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
 		//result = result.replace(datapath,"");
 	
-		//DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
+		DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
 		return result;
 	}
 }

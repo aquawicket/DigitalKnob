@@ -6,10 +6,6 @@ function DKSolution_Init()
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
-	
-	if(typeof DKPATH !== 'undefined'){
-		DKSolution_UpdatePath(DKPATH); //DKPATH from DKFile.js
-	}
 }
 
 /////////////////////////
@@ -138,8 +134,8 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	//if(!path){ return false; }
-	//DKLog("DKSolution_UpdatePath("+path+") \n");
+	DKLog("DKSolution_UpdatePath("+path+") \n");
+	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
