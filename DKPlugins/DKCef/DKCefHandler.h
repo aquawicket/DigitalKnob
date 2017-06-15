@@ -15,7 +15,14 @@ class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHa
 	                 public CefKeyboardHandler, public CefGeolocationHandler
 {
 public:
-	DKCefHandler(){}
+	DKCefHandler();
+	bool TestInt(void* input, void* output);
+	bool TestString(void* input, void* output);
+	bool TestReturnInt(void* input, void* output);
+	bool TestReturnString(void* input, void* output);
+	bool Minimize(void* input, void* output);
+	bool Restore(void* input, void* output);
+
 	DKCef* dkCef;
 #ifdef WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
