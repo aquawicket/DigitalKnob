@@ -116,7 +116,6 @@ function DKFileAssociation_OpenText(path)
 function DKFileAssociation_OpenImage(path)
 {
 	//DK_Run(path);
-	
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint.html");
 		DKPaint_Open(path);
