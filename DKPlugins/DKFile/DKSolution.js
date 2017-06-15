@@ -152,14 +152,15 @@ function DKSolution_UpdatePath(path)
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement("DKSolutionMenu", "option", "DKSolutionFolder");
+			var element2 = DKWidget_CreateElement("DKSolutionMenu", "div", "DKSolutionFolder");
+			DKWidget_SetAttribute(element2, "class", "option");
 			var value = aPath+"/"+files[d];
 			DKWidget_SetAttribute(element2,"value", value);
 			DKWidget_SetProperty(element2, "white-space", "nowrap");
 			DKAddEvent(element2, "click", DKSolution_OnEvent);
 			DKWidget_SetProperty(element2, "padding-left", "17px");
 			DKWidget_SetInnerHtml(element2,files[d]);
-			DKWidget_SetProperty(element2, "background-image", "url(\"DKFile/folder.png\")");
+			DKWidget_SetProperty(element2, "background-image", "url(DKFile/folder.png)");
 			DKWidget_SetProperty(element2, "background-repeat", "no-repeat");
 			DKAddEvent(element2, "click", DKSolution_OnEvent);
 			DKAddEvent(element2, "dblclick", DKSolution_OnEvent);
@@ -169,7 +170,8 @@ function DKSolution_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement("DKSolutionMenu", "option", "DKSolutionFile");
+			var element3 = DKWidget_CreateElement("DKSolutionMenu", "div", "DKSolutionFile");
+			DKWidget_SetAttribute(element2, "class", "option");
 			var value = aPath+"/"+files[f];
 			DKWidget_SetAttribute(element3, "value", value);
 			DKWidget_SetProperty(element3, "white-space", "nowrap");
