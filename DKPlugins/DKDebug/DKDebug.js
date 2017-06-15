@@ -146,7 +146,7 @@ function DKDebug_PushDKFiles()
 function DKDebug_ClearConsole()
 {
 	//DKLog("DKDebug_ClearConsole()\n");
-	//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+
 	if(DK_GetBrowser() == "Rocket"){
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
@@ -156,17 +156,18 @@ function DKDebug_ClearConsole()
 		}
 	}
 	else{
-		console.API;
+		var api;
+		if(typeof console === 'undefined'){ return; }
 		if(typeof console._commandLineAPI !== 'undefined'){
-			console.API = console._commandLineAPI; //chrome
+			api = console._commandLineAPI; //chrome
 		}
 		else if(typeof console._inspectorCommandLineAPI !== 'undefined'){
-			console.API = console._inspectorCommandLineAPI; //Safari
+			api = console._inspectorCommandLineAPI; //Safari
 		} 
 		else if(typeof console.clear !== 'undefined'){
-			console.API = console;
+			api = console;
 		}
-		console.API.clear();
+		api.clear();
 	}
 }
 
