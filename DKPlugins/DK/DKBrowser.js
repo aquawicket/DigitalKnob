@@ -389,7 +389,7 @@ function Pos(position){
 	}
 	if(typeof position == 'string'){
 		if(position.search('rem') != -1){
-			if(DK_IE() < 9){
+			if(DK_IE() && DK_IE() < 9){
 				position = position.replace("rem", "px");
 			}
 			return position;
@@ -404,7 +404,7 @@ function Pos(position){
 			return position;
 		}
 		
-		if(DK_IE() < 9){
+		if(DK_IE() && DK_IE() < 9){
 			return position+'px';
 		}
 		else{
@@ -412,7 +412,7 @@ function Pos(position){
 		}
 	}
 	if(typeof position == 'number'){
-		if(DK_IE() < 9){
+		if(DK_IE() && DK_IE() < 9){
 			return position+'px';
 		}
 		else{
