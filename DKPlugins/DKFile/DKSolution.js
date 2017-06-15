@@ -5,6 +5,7 @@ function DKSolution_Init()
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
+	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
 	
 	if(typeof DKPATH !== 'undefined'){
 		DKSolution_UpdatePath(DKPATH); //DKPATH from DKFile.js
@@ -61,6 +62,12 @@ function DKSolution_OnEvent(event)
 		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
 		//DK_ClearSelection();
 		return;
+	}
+	
+	if(DK_Id(event, "DKSolutionPath")){
+		if(DKWidget_GetValue(event) == 13){ //enter
+			DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
+		}
 	}
 }
 
