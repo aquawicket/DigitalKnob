@@ -16,7 +16,8 @@ DKRocket* DKWidget::dkRocket;
 /////////////////////
 void DKWidget::Init()
 {
-	DKLog("DKWidget::Init() \n", DKINFO);
+	DKLog("DKWidget::Init() \n", DKDEBUG);
+	
 	DKCreate("DKWidgetJS");
 	DKCreate("DKWidgetMySqlJS");
 	root = NULL;
