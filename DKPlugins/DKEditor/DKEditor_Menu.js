@@ -51,6 +51,9 @@ function DKEditor_Menu_OnEvent(event)
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools("Cef", 0);
 		}
+		if(typeof DKRocket_ToggleDebugger == 'function'){
+			DKRocket_ToggleDebugger();
+		}
 	}
 	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
 		DKDebug_ClearConsole();
