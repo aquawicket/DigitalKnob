@@ -3,7 +3,7 @@
 #include "DKWindow.h"
 #include "DKApp.h"
 
-/////////////////////
+///////////////////////
 void DKWindowV8::Init()
 {
 	DKLog("DKWindowV8::Init()\n", DKDEBUG);
