@@ -20,7 +20,7 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);	
 }
 
 ////////////////////////////
