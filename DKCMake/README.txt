@@ -1,4 +1,4 @@
-*** The DigitalKnob Build System ***
+*** DKCMake: The DigitalKnob Build System ***
 
 * There is only one CMakeLists.txt file in the root of the /digitalknob folder.
 
