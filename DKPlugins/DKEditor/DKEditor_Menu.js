@@ -42,9 +42,8 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+")\n");
 		DKCreate("DKFile/DKSolution.js", function(){
-			var frame = DKFrame_Widget("DKSolution.html");
+			DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
-			DKWidget_SetProperty("DKSolution.html", "height", "300rem");
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){

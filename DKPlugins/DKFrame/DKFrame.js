@@ -60,10 +60,10 @@ function DKFrame_Widget(id)
 		return;
 	}
 	
-	var top = DKWidget_GetProperty(id, "top");
-	var bottom = DKWidget_GetProperty(id, "bottom");
-	var left = DKWidget_GetProperty(id, "left");
-	var right = DKWidget_GetProperty(id, "right");
+	//var top = DKWidget_GetProperty(id, "top");
+	//var bottom = DKWidget_GetProperty(id, "bottom");
+	//var left = DKWidget_GetProperty(id, "left");
+	//var right = DKWidget_GetProperty(id, "right");
 	var width = DKWidget_GetProperty(id, "width");
 	var height = DKWidget_GetProperty(id, "height");
 	//DKLog("top: "+top+"\n");
@@ -73,33 +73,34 @@ function DKFrame_Widget(id)
 	//DKLog("width: "+width+"\n");
 	//DKLog("height: "+height+"\n");
 	
-	top = top.replace("px", "");
-	bottom = bottom.replace("px", "");
-	left = left.replace("px", "");
-	right = right.replace("px", "");
+	//top = top.replace("px", "");
+	//bottom = bottom.replace("px", "");
+	//left = left.replace("px", "");
+	//right = right.replace("px", "");
 	width = width.replace("px", "");
 	height = height.replace("px", "");
-	top = top.replace("rem", "");
-	bottom = bottom.replace("rem", "");
-	left = left.replace("rem", "");
-	right = right.replace("rem", "");
+	//top = top.replace("rem", "");
+	//bottom = bottom.replace("rem", "");
+	//left = left.replace("rem", "");
+	//right = right.replace("rem", "");
 	width = width.replace("rem", "");
 	height = height.replace("rem", "");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 	
+	DKWidget_AppendChild(frame, id);
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "top", "21rem");
 	DKWidget_SetProperty(id, "left", "0rem");
-	//DKWidget_SetProperty(id, "width", "100%");
+	DKWidget_SetProperty(id, "width", "100%");
+	//DKWidget_SetProperty(id, "height", "100%");
 	DKWidget_SetProperty(id, "bottom", "-1rem");
-	//DKWidget_RemoveProperty(id, "height");
-	DKWidget_RemoveProperty(id, "bottom");
+	//DKWidget_RemoveProperty(id, "bottom");
 	DKWidget_RemoveProperty(id, "right");
-	DKWidget_AppendChild(frame, id);
+	DKWidget_RemoveProperty(id, "height");
+	
 	
 	DKFrame_CreateResize(frame);
-
 	return frame;
 }
 
@@ -383,6 +384,8 @@ function DKFrame_StoreSize(id)
 ////////////////////////////////
 function DKFrame_RestoreSize(id)
 {
+	DKLog("DKFrame_RestoreSize("+id+")\n");
+	
 	for(var i=0; i<sizes.length; i++){
 		if(sizes[i].indexOf(id) > -1){
 			var arry = sizes[i].split(":");
