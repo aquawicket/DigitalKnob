@@ -556,7 +556,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 		return false; 
 	}
 	if(!value){
-		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set \n", DKERROR);
+		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set \n", DKWARN);
 		return false; 
 	} 
 	
