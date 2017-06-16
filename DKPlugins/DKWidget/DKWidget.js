@@ -520,6 +520,7 @@ function DKWidget_GetProperty(variable, parameter)
 {
 	//DKLog("DKWidget_GetProperty("+variable+","+parameter+") \n");
 	if(!variable){ return ""; }
+	if(!parameter){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }
 
 	if(typeof variable == "object"){
@@ -531,7 +532,10 @@ function DKWidget_GetProperty(variable, parameter)
 			DKLog("DKWidget_GetProperty(): element is null \n", DKERROR);
 			return;
 		}
-		//if(!element.hasOwnProperty(parameter)){ return; }
+		//if(!element.hasOwnProperty(parameter)){
+			//DKLog("DKWidget_GetProperty(): parameter is null \n", DKWARN);
+			//return false; 
+		//}
 		return element.style[parameter];
 	}
 	DKLog("ERROR: GetProperty(): unknown type", DKERROR);
@@ -545,6 +549,14 @@ function DKWidget_SetProperty(variable, parameter, value)
 	
 	if(!variable){ //FIXME: who called you?
 		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set \n", DKERROR);
+		return false; 
+	}
+	if(!parameter){
+		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): parameter not set \n", DKERROR);
+		return false; 
+	}
+	if(!value){
+		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set \n", DKERROR);
 		return false; 
 	} 
 	
@@ -564,7 +576,11 @@ function DKWidget_SetProperty(variable, parameter, value)
 			DKLog("ERROR: SetProperty(): element("+variable+") invalid", DKERROR);
 			return false;
 		}
-		element.style[parameter] = value;
+		//if(!element.style[parameter]){
+		//	DKLog("ERROR: SetProperty(): element("+variable+").style["+parameter+"] invalid", DKERROR);
+		//	return false;
+		//}
+		element.style[parameter] = value; //FIXME: how to deal with failure here? (IE8)
 		return true;
 	}
 	DKLog("ERROR: SetProperty(): unknown type", DKERROR);
