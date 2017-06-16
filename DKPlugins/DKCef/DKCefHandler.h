@@ -20,6 +20,7 @@ public:
 	bool TestString(void* input, void* output);
 	bool TestReturnInt(void* input, void* output);
 	bool TestReturnString(void* input, void* output);
+	bool SetIcon(void* input, void* output);
 	bool Minimize(void* input, void* output);
 	bool Restore(void* input, void* output);
 	bool Hide(void* input, void* output);

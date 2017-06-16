@@ -26,6 +26,9 @@ public:
 	///Call DKClass::CallFunc("DKSDLWindow::TestReturnString") and recieve a return value.
 	static DKString TestReturnString();
 
+	///Set the Window icon
+	static void SetIcon(DKString file);
+
 	///Get the Left position of the window
 	static int GetX();
 	

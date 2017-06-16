@@ -12,7 +12,10 @@ public:
 	void Init();
 	void End();
 
-	static bool Test(CefArgs args, CefReturn retval);
+	static bool TestInt(CefArgs args, CefReturn retval);
+	static bool TestString(CefArgs args, CefReturn retval);
+	static bool TestReturnInt(CefArgs args, CefReturn retval);
+	static bool TestReturnString(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKWindowV8, false);

@@ -9,6 +9,7 @@ DKCefHandler::DKCefHandler()
 	DKClass::RegisterFunc("DKCefHandler::TestReturnInt", &DKCefHandler::TestReturnInt, this);
 	DKClass::RegisterFunc("DKCefHandler::TestReturnString", &DKCefHandler::TestReturnString, this);
 
+	DKClass::RegisterFunc("DKCefHandler::SetIcon", &DKCefHandler::SetIcon, this);
 	DKClass::RegisterFunc("DKCefHandler::Minimize", &DKCefHandler::Minimize, this);
 	DKClass::RegisterFunc("DKCefHandler::Restore", &DKCefHandler::Restore, this);
 	DKClass::RegisterFunc("DKCefHandler::Hide", &DKCefHandler::Hide, this);
@@ -58,6 +59,22 @@ bool DKCefHandler::TestReturnString(void* input, void* output)
 	return true;
 }
 
+/////////////////////////////////////////////////////
+bool DKCefHandler::SetIcon(void* input, void* output)
+{
+	DKLog("DKCefHandler::SetIcon()\n", DKINFO);
+
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	//TODO
+	/*
+	HANDLE icon = LoadImage(fgDisplay.Instance, "c:\\icon.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	SendMessage(instance, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+	*/
+#endif
+
+	return false;
+}
 
 //////////////////////////////////////////////////////
 bool DKCefHandler::Minimize(void* input, void* output)
@@ -65,7 +82,6 @@ bool DKCefHandler::Minimize(void* input, void* output)
 	DKLog("DKCefHandler::Minimize()\n", DKINFO);
 
 #ifdef WIN32
-	//HWND hwnd = GetActiveWindow();
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
 #endif
@@ -79,7 +95,6 @@ bool DKCefHandler::Restore(void* input, void* output)
 	DKLog("DKCefHandler::Restore()\n", DKINFO);
 
 #ifdef WIN32
-	//HWND hwnd = GetActiveWindow();
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_RESTORE);
 #endif
@@ -106,7 +121,6 @@ bool DKCefHandler::Show(void* input, void* output)
 	DKLog("DKCefHandler::Show()\n", DKINFO);
 
 #ifdef WIN32
-	//HWND hwnd = GetActiveWindow();
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_SHOW);
 #endif
