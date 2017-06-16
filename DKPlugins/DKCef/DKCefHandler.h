@@ -1,3 +1,5 @@
+//NOTE - This is soon to be replaced by DKCefWindow
+
 #pragma once
 #ifndef DKCefHandler_H
 #define DKCefHandler_H

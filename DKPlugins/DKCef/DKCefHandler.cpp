@@ -1,3 +1,5 @@
+//NOTE - This is soon to be replaced by DKCefWindow
+
 #include "stdafx.h"
 #include "DKCefHandler.h"
 
