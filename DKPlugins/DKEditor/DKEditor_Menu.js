@@ -8,6 +8,7 @@ function DKEditor_Menu_Init()
 	DKWidget_SetProperty("DKEditor_Menu.html","left",DKWindow_GetMouseX()+"px");
 	DKWidget_SetProperty("DKEditor_Menu.html","left",DKWindow_GetMouseX()+"rem");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
@@ -38,6 +39,10 @@ function DKEditor_Menu_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
+	}
+	if(DK_Id(event, "DKEditor_Menu_Notes")){
+		//TODO
+		DKLog("DKEditor_Menu_Notes\n");
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		DKCreate("DKFile/DKSolution.js", function(){
