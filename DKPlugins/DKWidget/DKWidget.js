@@ -576,10 +576,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 			DKLog("ERROR: SetProperty(): element("+variable+") invalid", DKERROR);
 			return false;
 		}
-		//if(!element.style[parameter]){
-		//	DKLog("ERROR: SetProperty(): element("+variable+").style["+parameter+"] invalid", DKERROR);
-		//	return false;
-		//}
+
 		element.style[parameter] = value; //FIXME: how to deal with failure here? (IE8)
 		return true;
 	}
