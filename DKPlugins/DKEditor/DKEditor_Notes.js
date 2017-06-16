@@ -2,13 +2,16 @@
 /////////////////////////////
 function DKEditor_Notes_Init()
 {
-	DKCreate("DKEditor/DKEditor_Notes.html");
+	//DKCreate("DKEditor/DKEditor_Notes.html");
+	DKCreate("DKNotepad/DKNotepad.js", function(){
+		DKFrame_Widget("DKNotepad.html");
+	});
 }
 
 ////////////////////////////
 function DKEditor_Notes_End()
 {
-	DKClose("DKEditor/DKEditor_Notes.html");
+	//DKClose("DKEditor/DKEditor_Notes.html");
 }
 
 /////////////////////////////////////
