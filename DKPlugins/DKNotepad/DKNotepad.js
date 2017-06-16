@@ -24,7 +24,11 @@ function DKNotepad_OnEvent(event)
 	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "contextmenu")){
-		DKCreate("DKNotepad/DKNotepadMenu.js", function(){});
+		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
+			DKCreate("DKFrame/DKMenu.js", function(){
+				DKMenu_ValidatePosition("DKNotepadMenu.html");
+			});
+		});
 	}
 	//if(DK_Type(event,"SetFile")){
 	//	DKNotepad_Open(DK_GetValue(event));
