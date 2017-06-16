@@ -1,2 +1,4 @@
+DKDEPEND(DKCef)
+
 DKPLUGIN(DKWindow)
 DKASSETS(DKWindow)

@@ -3,7 +3,7 @@
 #include "DKApp.h"
 #include "DKClass.h"
 #include "DKLog.h"
-#include "DKWindow.h"
+//#include "DKWindow.h"
 #include "DKFile.h"
 #include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
@@ -271,11 +271,11 @@ bool DKCef::NewBrowser()
 	CefBrowserSettings browserSettings;
 	if(DKValid("DKWindow,DKWindow0")){
 		browserSettings.windowless_frame_rate = 60;
-#ifdef WIN32
-		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
-#else
+//#ifdef WIN32
+//		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
+//#else
 		window_info.SetAsWindowless(NULL, false);
-#endif
+//#endif
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
 
