@@ -40,7 +40,6 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_RestartApp();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
-		//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+")\n");
 		DKCreate("DKFile/DKSolution.js", function(){
 			DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
