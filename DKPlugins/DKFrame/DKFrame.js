@@ -66,6 +66,13 @@ function DKFrame_Widget(id)
 	var right = DKWidget_GetProperty(id, "right");
 	var width = DKWidget_GetProperty(id, "width");
 	var height = DKWidget_GetProperty(id, "height");
+	//DKLog("top: "+top+"\n");
+	//DKLog("bottom: "+bottom+"\n");
+	//DKLog("left: "+left+"\n");
+	//DKLog("right: "+right+"\n");
+	//DKLog("width: "+width+"\n");
+	//DKLog("height: "+height+"\n");
+	
 	top = top.replace("px", "");
 	bottom = bottom.replace("px", "");
 	left = left.replace("px", "");
