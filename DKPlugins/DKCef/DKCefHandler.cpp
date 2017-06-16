@@ -66,11 +66,13 @@ bool DKCefHandler::SetIcon(void* input, void* output)
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
+	DKString file = *(DKString*)input;
+
 	//TODO
-	/*
-	HANDLE icon = LoadImage(fgDisplay.Instance, "c:\\icon.ico", IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-	SendMessage(instance, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
-	*/
+	HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+
 #endif
 
 	return false;
