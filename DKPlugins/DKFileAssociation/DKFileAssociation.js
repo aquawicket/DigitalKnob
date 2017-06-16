@@ -129,7 +129,7 @@ function DKFileAssociation_OpenModel(path)
 	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
 }
 
-//////////////////////////////
+//////////////////////////////////////////
 function DKFileAssociation_OpenAudio(path)
 {
 	DKLog("DKFileAssociation_OpenAudio("+path+") \n");
@@ -148,8 +148,8 @@ function DKFileAssociation_OpenAudio(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenVideo(path)
 {
-	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){
-		DKOSGVideo_Play(path);
-	});
-	//DKCreate("DKOSGVideo,,DKOSGWindow,"+path);
+	//FIXME
+	DKLog("DKFileAssociation_OpenVideo("+path+")\n");
+	
+	DKVideo_Play(path);
 }
