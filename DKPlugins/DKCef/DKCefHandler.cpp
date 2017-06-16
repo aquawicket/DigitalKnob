@@ -14,6 +14,10 @@ DKCefHandler::DKCefHandler()
 	DKClass::RegisterFunc("DKCefHandler::Restore", &DKCefHandler::Restore, this);
 	DKClass::RegisterFunc("DKCefHandler::Hide", &DKCefHandler::Hide, this);
 	DKClass::RegisterFunc("DKCefHandler::Show", &DKCefHandler::Show, this);
+
+	//TODO
+	DKString icon = "icon.ico";
+	DKClass::CallFunc("DKCefHandler::SetIcon", &icon, NULL);
 }
 
 /////////////////////////////////////////////////////////
@@ -63,16 +67,14 @@ bool DKCefHandler::TestReturnString(void* input, void* output)
 bool DKCefHandler::SetIcon(void* input, void* output)
 {
 	DKLog("DKCefHandler::SetIcon()\n", DKINFO);
+	//DKString file = *(DKString*)input;
 
 #ifdef WIN32
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
-	DKString file = *(DKString*)input;
-
 	//TODO
-	HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
-
+	//HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	//HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
+	//HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	//SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
 #endif
 
 	return false;
