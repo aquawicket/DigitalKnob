@@ -5,6 +5,7 @@ function DKEditor_Notes_Init()
 	//DKCreate("DKEditor/DKEditor_Notes.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad.html");
+		DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 	});
 }
 
