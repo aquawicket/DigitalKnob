@@ -1,9 +1,10 @@
-### TODO
+### MASTER CMakeLists.txt FILE ###
+###
 ### This will be the ONLY CMakeLists.txt file in DigitalKnob
 ### All Apps will be build from here.
-### The required Tools, libraries and plugins will optionaly built from here. 
+### The required Tools, libraries and plugins will optionaly build from here. 
 ### 
-### The script will become smart enough to determine what needs to be built. 
+### This script will become smart enough to determine what needs to be built. 
 ### A flag shall determine weather or not to build libs.
 ###
 ### TODO
