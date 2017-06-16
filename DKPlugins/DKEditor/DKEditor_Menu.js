@@ -43,6 +43,9 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_Notes")){
 		//TODO
 		DKLog("DKEditor_Menu_Notes\n");
+		DKCreate("DKEditor/DKEditor_Notes.js", function(){
+			//TODO
+		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		DKCreate("DKFile/DKSolution.js", function(){
