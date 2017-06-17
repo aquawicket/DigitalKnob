@@ -1,3 +1,5 @@
 *** DKTemplate Notes ***
 
 //TODO
+
+1. We would like to build an app from a blank slate like this.
