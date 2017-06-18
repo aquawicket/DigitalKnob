@@ -328,7 +328,7 @@ function DKFrame_CloseButton(id)
 //////////////////////////
 function DKFrame_Close(id)
 {
-	//DKLog("DKFrame_Close("+id+")\n");
+	DKLog("DKFrame_Close("+id+")\n");
 	
 	//if(id.indexOf("/") > -1){
 	//	DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);

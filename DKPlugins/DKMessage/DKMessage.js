@@ -13,7 +13,7 @@ function DKMessage_Init()
 function DKMessage_End()
 {
 	DKRemoveEvents(DKMessage_OnEvent);
-	DKClose("DKMessage.html");
+	DKClose("DKMessage/DKMessage.html");
 }
 
 /////////////////////////////////
@@ -30,7 +30,7 @@ function DKMessage_OnEvent(event)
 				DKMessage_callback(true);
 			}
 		}
-		DKFrame_Close("DKMessage.html");
+		DKFrame_Close("DKMessage/DKMessage.html");
 		return;
 	}
 	
@@ -38,7 +38,7 @@ function DKMessage_OnEvent(event)
 		if(DKMessage_callback){
 			DKMessage_callback(false);
 		}
-		DKFrame_Close("DKMessage.html");
+		DKFrame_Close("DKMessage/DKMessage.html");
 		return;
 	}
 }

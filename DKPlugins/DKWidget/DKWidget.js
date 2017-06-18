@@ -95,6 +95,7 @@ function AdjustRems(id)
 function DKClose(data)
 {
 	//DKLog("DKClose("+data+")");
+	
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
 		return false;
@@ -130,27 +131,30 @@ function DKClose(data)
 		filesloaded = filesloaded.replace(file+",", ""); //remove from file list
 		var script = document.getElementById(arry[1]);
 		if(!script){
-			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
+			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
 			return false;
 		}
 		script.parentNode.removeChild(script);
+		//DKLog("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKWidget"){
 		filesloaded = filesloaded.replace(file+",", ""); //remove from file list
 		var element = document.getElementById(file);
 		if(!element){ 
-			DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
+			//DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
 			return false; 
 		}
 		element.parentNode.removeChild(element);
+		//DKLog("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKCss"){
 		var css = document.getElementById(arry[1]);
 		if(!css){ 
-			DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
+			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
 			return false; 
 		}
 		css.parentNode.removeChild(css);
+		//DKLog("Closed "+arry[1]+"\n");
 	}
 	
 	return true;
