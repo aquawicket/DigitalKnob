@@ -451,12 +451,14 @@ bool DKCef::Paste()
 /////////////////////////////////
 bool DKCef::ShowDevTools(int num)
 {
-	//TODO
+
 	CefWindowInfo window_info;
 	CefBrowserSettings settings;
 	CefPoint inspectElementAt;
 
-	window_info.SetAsPopup(NULL, "DevTools");
+#ifndef MAC
+	window_info.SetAsPopup(NULL, "DevTools"); //FIXME for mac
+#endif
 	window_info.width = 800;
 	window_info.height = 600;
 
