@@ -221,7 +221,7 @@ function DKBuild_InstallVC2015()
 	var datapath = DKAssets_LocalAssets();
 	
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU__908841471.1484716364.exe", datapath);
-	DK_System(datapath+"/vvs_community_ENU__908841471.1484716364.exe");
+	DK_System(datapath+"vs_community_ENU__908841471.1484716364.exe");
 }
 
 //////////////////////////////

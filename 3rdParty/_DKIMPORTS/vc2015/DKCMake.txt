@@ -8,6 +8,7 @@ IF(NOT EXISTS "C:/Program Files (x86)/Microsoft Visual Studio 14.0")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(http://DigitalKnob.com/Download/Tools/vs_community__de28dd49b1b30045a3a02f62906c2168.exe)
 	#DKEXTRACT(${DIGITALKNOB}/Download/MSYS-20111123.zip)
+	DKSET(QUEUE_BUILD ON)
 	WIN32_COMMAND(${DIGITALKNOB}/Download/vs_community__de28dd49b1b30045a3a02f62906c2168.exe)
 ENDIF()
 
