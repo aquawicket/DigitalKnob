@@ -171,11 +171,13 @@ void DKCef::Init()
 	//settings.persist_user_preferences;
 
 //FIXME - incorrect location on mac
+#ifndef MAC
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
 
 	DKString lp = DKFile::local_assets + "DKCef/locales";
 	CefString(&settings.locales_dir_path) = lp.c_str();
+#endif
 ///////////////////////////////////
 
 	DKString cp = DKFile::local_assets + "USER";
