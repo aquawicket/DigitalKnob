@@ -122,7 +122,6 @@ bool DKHookV8::GetWindows(CefArgs args, CefReturn retval)
 {
 	DKStringArray arry = DKHook::Instance("DKHook")->GetWindows();
 	DKString list = toString(arry, ",");
-	//retval = CefV8Value::CreateString(list);
 	retval->SetString(0, list);
 	return true;
 }
@@ -131,7 +130,6 @@ bool DKHookV8::GetWindows(CefArgs args, CefReturn retval)
 bool DKHookV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
 	DKString handle = toString(DKHook::Instance("DKHook")->currentHandle);
-	//retval = CefV8Value::CreateString(handle);
 	retval->SetString(0, handle);
 	return true;
 }
@@ -141,9 +139,9 @@ bool DKHookV8::WindowExists(CefArgs args, CefReturn retval)
 {
 	DKString window = args->GetString(0);
 	if(!DKHook::Instance("DKHook")->WindowExists(window)){
+		retval->SetBool(0, false);
 		return false;
 	}
-	//retval = CefV8Value::CreateBool(true);
 	retval->SetBool(0, true);
 	return true;
 }
@@ -156,7 +154,6 @@ bool DKHookV8::WaitForWindow(CefArgs args, CefReturn retval)
 	if(!DKHook::Instance("DKHook")->WaitForWindow(window, timeout)){
 		return false;
 	}
-	//retval = CefV8Value::CreateBool(true);
 	retval->SetBool(0, true);
 	return true;
 }
