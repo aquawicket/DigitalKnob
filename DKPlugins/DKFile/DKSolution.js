@@ -30,6 +30,7 @@ function DKSolution_OnEvent(event)
 		//DKLog("DKSolution_OnEvent() contextmenu\n");	
 		DK_StopPropagation(event);
 		DKCreate("DKFile/DKSolutionMenu.js", function(){
+			DKMenu_ValidatePosition("DKSolutionMenu.html");
 			var file = DKWidget_GetValue(DK_GetId(event));
 			if(!file){
 				file = DKWidget_GetValue("DKSolutionPath")+"/";
