@@ -3,7 +3,6 @@
 #include "DKApp.h"
 #include "DKClass.h"
 #include "DKLog.h"
-//#include "DKWindow.h"
 #include "DKFile.h"
 #include "DKCefHandler.h"
 #include <include/cef_urlrequest.h>
@@ -171,11 +170,13 @@ void DKCef::Init()
 	//settings.persist_session_cookies;
 	//settings.persist_user_preferences;
 
+//FIXME - incorrect location on mac
 	DKString rp = DKFile::local_assets + "DKCef";
 	CefString(&settings.resources_dir_path) = rp.c_str();
 
 	DKString lp = DKFile::local_assets + "DKCef/locales";
 	CefString(&settings.locales_dir_path) = lp.c_str();
+///////////////////////////////////
 
 	DKString cp = DKFile::local_assets + "USER";
 	CefString(&settings.cache_path) = cp.c_str();
