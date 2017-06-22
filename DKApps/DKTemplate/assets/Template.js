@@ -14,5 +14,5 @@ function Template_End()
 ////////////////////////////////
 function Template_OnEvent(event)
 {
-	DKLog("Tempalte_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("Template_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 }
