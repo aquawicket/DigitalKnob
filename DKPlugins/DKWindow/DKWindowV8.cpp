@@ -8,10 +8,10 @@
 void DKWindowV8::Init()
 {
 	DKLog("DKWindowV8::Init()\n", DKDEBUG);
-	DKV8::AttachFunction("TestInt", DKWindowV8::TestInt);
-	DKV8::AttachFunction("TestString", DKWindowV8::TestString);
-	DKV8::AttachFunction("TestReturnInt", DKWindowV8::TestReturnInt);
-	DKV8::AttachFunction("TestReturnString", DKWindowV8::TestReturnString);
+	DKV8::AttachFunction("DKWindow_TestInt", DKWindowV8::TestInt);
+	DKV8::AttachFunction("DKWindow_TestString", DKWindowV8::TestString);
+	DKV8::AttachFunction("DKWindow_TestReturnInt", DKWindowV8::TestReturnInt);
+	DKV8::AttachFunction("DKWindow_TestReturnString", DKWindowV8::TestReturnString);
 }
 
 //////////////////////
