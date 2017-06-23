@@ -7,8 +7,6 @@ void DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
 
-	CreateWin();
-
 	DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 	DKCreate("DKWindowJS");
 	DKCreate("DKWindowV8");
