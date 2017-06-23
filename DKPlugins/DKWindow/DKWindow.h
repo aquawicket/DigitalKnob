@@ -14,7 +14,7 @@ public:
 	void Init();
 	void End();
 
-	static bool CreateWin();
+	static bool Create();
 
 	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
 	static int TestInt(int input);

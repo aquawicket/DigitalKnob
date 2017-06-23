@@ -7,7 +7,7 @@ void DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
 
-	CreateWin();
+	Create();
 	
 	DKCreate("DKWindowJS");
 	DKCreate("DKWindowV8");
@@ -20,8 +20,8 @@ void DKWindow::End()
 	DKClass::UnregisterFunc("DKWindow::MessageBox");
 }
 
-//////////////////////////
-bool DKWindow::CreateWin()
+///////////////////////
+bool DKWindow::Create()
 {
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){

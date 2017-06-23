@@ -13,7 +13,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_TestReturnInt", DKWindowJS::TestReturnInt, 0);
 	DKDuktape::AttachFunction("DKWindow_TestReturnString", DKWindowJS::TestReturnString, 0);
 
-	DKDuktape::AttachFunction("DKWindow_Create", DKWindowJS::Fullscreen, 0);
+	DKDuktape::AttachFunction("DKWindow_Create", DKWindowJS::Create, 0);
 	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen, 0);
 	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight, 0);
 	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX, 0);
@@ -79,7 +79,7 @@ int DKWindowJS::TestReturnString(duk_context* ctx)
 ////////////////////////////////////////
 int DKWindowJS::Create(duk_context* ctx)
 {
-	if(!DKWindow::CreateWin()){ return 0; }
+	if(!DKWindow::Create()){ return 0; }
 	return 1;
 }
 
