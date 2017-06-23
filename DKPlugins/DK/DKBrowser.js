@@ -4,10 +4,11 @@
 top.document.body.style.backgroundColor = "rgb(200,200,200)";
 document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
-document.documentElement.id = "html";
-document.head.id = "head";
+
+document.getElementsByTagName('head')[0].id = "head";
 document.body.id = "body";
 document.body.style.fontSize = "13em";
+document.documentElement.id = "html";
 document.documentElement.style.fontSize = "1px";
 document.body.style.cursor = "default";
 
