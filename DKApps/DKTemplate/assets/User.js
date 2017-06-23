@@ -71,11 +71,11 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	}
 	else if(USE_CEF){
 		DKLog("Creating CEF -> GUI \n");
-		//DKCreate("DKWindow");
 		var width = 800;
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
+		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
 		DKLog("Creating WEBVIEW -> GUI \n");
