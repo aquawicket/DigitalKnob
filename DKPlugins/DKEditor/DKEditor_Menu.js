@@ -21,7 +21,8 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);	
+	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);	
 }
 
 ////////////////////////////
@@ -111,6 +112,10 @@ function DKEditor_Menu_OnEvent(event)
 		DKCreate("DKDebug/SendBugReport.js", function(){
 			DKFrame_Widget("SendBugReport.html");
 		});
+	}
+	if(DK_Id(event, "DKEditor_Menu_Web")){
+		DKLog("DKEditor_Menu_Web()\n");
+		//TODO - Create an iFrame and display digitalknob.com
 	}
 
 	///////////////////////////
