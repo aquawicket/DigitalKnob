@@ -38,6 +38,7 @@ public:
 	static int Restore(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);
 	static int SetHeight(duk_context* ctx);
+	static int SetTitle(duk_context* ctx);
 	static int SetWidth(duk_context* ctx);
 	static int SetX(duk_context* ctx);
 	static int SetY(duk_context* ctx);

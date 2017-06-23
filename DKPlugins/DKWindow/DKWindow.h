@@ -1,5 +1,5 @@
 // This is a Switch plugin..  
-// To links to DKOSGWindow and DKSDLWindow
+// To links to DKCefWindow, DKOSGWindow and DKSDLWindow
 // When we call DKWindow commands, this class will determine the proper window system to use. 
 
 #pragma once
@@ -30,6 +30,9 @@ public:
 
 	///Set the Window icon
 	static bool SetIcon(DKString file);
+
+	///Set the Window title
+	static bool SetTitle(DKString string);
 
 	///Get the Left position of the window
 	static int GetX();

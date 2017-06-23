@@ -96,6 +96,24 @@ bool DKWindow::SetIcon(DKString file)
 	return false;
 }
 
+////////////////////////////////////////
+bool DKWindow::SetTitle(DKString string)
+{
+	if (DKClass::HasFunc("DKCefHandler::SetTitle")) {
+		return DKClass::CallFunc("DKCefHandler::SetTitle", &string, NULL);
+	}
+	if (DKClass::HasFunc("DKSDLWindow::SetTitle")) {
+		return DKClass::CallFunc("DKSDLWindow::SetTitle", &string, NULL);
+	}
+	else if (DKClass::HasFunc("DKOSGWindow::SetTitle")) {
+		return DKClass::CallFunc("DKOSGWindow::SetTitle", &string, NULL);
+	}
+	else {
+		DKLog("DKWindow::SetTitle(): No function available \n", DKERROR);
+	}
+	return false;
+}
+
 ////////////////////
 int DKWindow::GetX()
 {

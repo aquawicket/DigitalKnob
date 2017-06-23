@@ -29,6 +29,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore, 0);
 	DKDuktape::AttachFunction("DKWindow_SetIcon", DKWindowJS::SetIcon, 1);
 	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight, 1);
+	DKDuktape::AttachFunction("DKWindow_SetTitle", DKWindowJS::SetTitle, 1);
 	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth, 1);
 	DKDuktape::AttachFunction("DKWindow_SetX", DKWindowJS::SetX, 1);
 	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY, 1);
@@ -89,6 +90,14 @@ int DKWindowJS::SetIcon(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	if (!DKWindow::SetIcon(file)) { return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::SetTitle(duk_context* ctx)
+{
+	DKString string = duk_require_string(ctx, 0);
+	if(!DKWindow::SetTitle(string)){ return 0; }
 	return 1;
 }
 

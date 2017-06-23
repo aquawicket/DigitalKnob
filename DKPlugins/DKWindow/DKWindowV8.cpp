@@ -15,6 +15,7 @@ void DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_TestReturnString", DKWindowV8::TestReturnString);
 
 	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
+	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
 }
 
 //////////////////////
@@ -75,6 +76,16 @@ bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
 
 	DKString file = args->GetString(0);
 	if(!DKWindow::SetIcon(file)) { return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
+{
+	DKLog("DKWindowV8::SetTitle(CefArgs,CefReturn)\n", DKINFO);
+
+	DKString string = args->GetString(0);
+	if (!DKWindow::SetTitle(string)) { return false; }
 	return true;
 }
 
