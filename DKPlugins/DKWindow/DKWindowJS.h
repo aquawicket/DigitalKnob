@@ -22,6 +22,7 @@ public:
 	//static int GetGLVendor(duk_context* ctx);
 	//static int GetGLRenderer(duk_context* ctx);
 
+	static int Create(duk_context* ctx);
 	static int Fullscreen(duk_context* ctx);
 	static int GetHeight(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);

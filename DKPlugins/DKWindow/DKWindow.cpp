@@ -7,16 +7,7 @@ void DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
 
-	//Create DKSDLWindow or DKOSGWindow
-	if(DKAvailable("DKSDLWindow")){
-		DKCreate("DKSDLWindow");
-	}
-	else if(DKAvailable("DKOSGWindow")){
-		DKCreate("DKOSGWindow");
-	}
-	else{
-		DKLog("DKWindow::Init(): No window system available \n", DKERROR);
-	}
+	CreateWin();
 
 	DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 	DKCreate("DKWindowJS");
@@ -29,6 +20,23 @@ void DKWindow::End()
 	DKClass::UnregisterFunc("DKWindow::MessageBox");
 }
 
+//////////////////////////
+bool DKWindow::CreateWin()
+{
+	//Create DKSDLWindow or DKOSGWindow
+	if(DKAvailable("DKSDLWindow")){
+		DKCreate("DKSDLWindow");
+		return true;
+	}
+	else if(DKAvailable("DKOSGWindow")){
+		DKCreate("DKOSGWindow");
+		return true;
+	}
+	else{
+		DKLog("DKWindow::Init(): No window system available \n", DKERROR);
+	}
+	return false;
+}
 
 ///
 ///  If "DKSDLWindow::TestInt()" is a registered function, it will alter the variable and send it back.
