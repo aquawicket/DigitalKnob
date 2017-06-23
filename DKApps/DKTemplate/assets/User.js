@@ -104,6 +104,8 @@ function LoadPage()
 					DKCreate("DKDebug/DKDebug.js", function(){
 						DKCreate("Template.js", function(){
 							DKCreate("DKEditor/DKEditor.js", function(){});
+							var title = DKWidget_CreateElement("head", "title", "title");
+							DKWidget_SetInnerHtml(title, "DKTemplate - A template for creating Digitalknob Apps");
 						});
 					});
 				});
