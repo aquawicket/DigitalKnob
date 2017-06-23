@@ -14,6 +14,7 @@ void DKTray::Init()
 	DKLog("DKTray::Init()\n", DKDEBUG);
 	
 	DKCreate("DKTrayJS");
+	DKCreate("DKTrayV8");
 #ifdef WIN32
 
 	HWND hwnd = ::GetActiveWindow();
