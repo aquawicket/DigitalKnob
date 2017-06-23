@@ -71,15 +71,6 @@ int main(int argc, char **argv)
 	SetConsoleTitle(title.c_str());
 #endif
 
-	DKCreate("DKAssets");
-	
-	//print args
-	if(DKApp::argc > 1){
-		for(int i = 1; i < DKApp::argc; ++i){
-			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
-	    }
-    }
-	
 	DKString info;
 	GetOSInfo(info);
 	DKLog(info+"\n", DKINFO);
@@ -89,7 +80,15 @@ int main(int argc, char **argv)
 	DKString time;
 	DKUtil::GetTime(time);
 	DKLog(date+" "+time+"\n", DKINFO);
-
+	
+	//print args
+	if(DKApp::argc > 1){
+		for(int i = 1; i < DKApp::argc; ++i){
+			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
+	    }
+    }
+	
+	DKCreate("DKAssets");
 	DKCreate("DKDuktape");
 	DKCreate("DKDebug");
 	DKApp dkapp;
