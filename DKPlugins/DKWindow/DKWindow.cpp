@@ -7,11 +7,10 @@ void DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
 
-	Create();
-	
+	//Create();
+	DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 	DKCreate("DKWindowJS");
 	DKCreate("DKWindowV8");
-	//DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 }
 
 ////////////////////
@@ -424,7 +423,7 @@ bool DKWindow::MessageBox(void* input, void* output)
 		DKClass::CallFunc("DKOSGWindow::MessageBox", &message, NULL);
 	}
 	else{
-		DKLog("DKWindow::MessageBox(): No function available \n", DKERROR);
+		DKLog("DKWindow::MessageBox(): No function available \n", DKWARN);
 	}
 
 	return true;
