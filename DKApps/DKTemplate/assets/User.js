@@ -33,6 +33,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	if(USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
+		//DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		var assets = DKAssets_LocalAssets();
@@ -51,6 +52,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
 		DKCreate("DKWindow");
+		//DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		LoadPage();
@@ -58,6 +60,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	else if(USE_SDL && USE_CEF){
 		DKLog("Creating SDL -> CEF -> GUI \n");
 		DKCreate("DKWindow");
+		//DKWindow_Create();
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
 		DKCreate("DKCef,CefSDL,0,0,"+width+","+height+","+DKApp_url);

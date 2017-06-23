@@ -224,16 +224,14 @@ void DKCef::Init()
 		return;
 	}
 
-	if(DKValid("DKWindow,DKWindow0")){
+	if(DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKAvailable("DKSDLCef")){
 			DKCreate("DKSDLCef,"+id);
 		}
-		else if(DKAvailable("DKOSGCef")){
+	}
+	else if(DKValid("DKOSGWindow,DKOSGWindow0")){
+		if(DKAvailable("DKOSGCef")){
 			DKCreate("DKOSGCef,"+id);
-		}
-		else{
-			DKLog("DKCef::Init(): No Cef window available \n", DKERROR);
-			return;
 		}
 	}
 	else{
