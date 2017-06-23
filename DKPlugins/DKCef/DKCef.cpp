@@ -242,6 +242,9 @@ void DKCef::Init()
 		dkCefHandler->dkCef = this;
 		NewBrowser();
 		DKApp::AppendLoopFunc(&DKCefHandler::DoFrame, dkCefHandler);
+
+		DKString icon = DKFile::local_assets+"icon.ico";
+		DKClass::CallFunc("DKCefHandler::SetIcon", &icon, NULL);
 	}
 	
 	DKCreate("DKCefV8");

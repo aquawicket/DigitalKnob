@@ -16,10 +16,6 @@ DKCefHandler::DKCefHandler()
 	DKClass::RegisterFunc("DKCefHandler::Restore", &DKCefHandler::Restore, this);
 	DKClass::RegisterFunc("DKCefHandler::Hide", &DKCefHandler::Hide, this);
 	DKClass::RegisterFunc("DKCefHandler::Show", &DKCefHandler::Show, this);
-
-	//TODO
-	DKString icon = "icon.ico";
-	DKClass::CallFunc("DKCefHandler::SetIcon", &icon, NULL);
 }
 
 /////////////////////////////////////////////////////////
@@ -72,11 +68,42 @@ bool DKCefHandler::SetIcon(void* input, void* output)
 	//DKString file = *(DKString*)input;
 
 #ifdef WIN32
-	//TODO
-	//HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	//HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
-	//HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-	//SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+	if(!dkCef){
+		DKLog("DKCefHandler::SetIcon(): dkCef is invalid \n", DKERROR);
+		return false;
+	}
+	if(!dkCef->current_browser){
+		DKLog("DKCefHandler::SetIcon(): dkCef->current_browser is invalid \n", DKERROR);
+		return false;
+	}
+	if(!dkCef->current_browser->GetHost()){
+		DKLog("DKCefHandler::SetIcon(): dkCef->current_browser->GetHost() is invalid \n", DKERROR);
+		return false;
+	}
+	if(!dkCef->current_browser->GetHost()->GetWindowHandle()){
+		DKLog("DKCefHandler::SetIcon(): dkCef->current_browser->GetHost()->GetWindowHandle() is invalid \n", DKERROR);
+		return false;
+	}
+	
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){
+		DKLog("DKCefHandler::SetIcon(): hwnd is invalid \n", DKERROR);
+		return false;
+	}
+	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
+	if(!hinstance){
+		DKLog("DKCefHandler::SetIcon(): hinstance is invalid \n", DKERROR);
+		return false;
+	}
+	DKString file = *(DKString*)input;
+	HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	if(!icon){
+		DKLog("DKCefHandler::SetIcon(): icon is invalid \n", DKERROR);
+		return false;
+	}
+
+	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+	return true;
 #endif
 
 	return false;
