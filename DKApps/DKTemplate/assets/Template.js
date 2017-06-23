@@ -2,6 +2,12 @@
 function Template_Init()
 {
 	DKLog("Template_Init()\n");
+	
+	var title = DKWidget_CreateElement("head", "title", "title");
+	DKWidget_SetInnerHtml(title, "DKTemplate - A template for creating Digitalknob Apps");
+		
+	DKWidget_SetProperty("body","background-color","grey");
+	
 	DKCreate("Template.html", function(){});
 }
 

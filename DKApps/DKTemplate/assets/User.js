@@ -33,7 +33,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	if(USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
-		//DKWindow_Create();
+		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		var assets = DKAssets_LocalAssets();
@@ -82,7 +82,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
-	DKCreate("DKTray/DKTray.js", function(){}); //FIXME - DKWindow is not implemented for CEF windows, yet.
+	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
 	DKCreate("DKCef/DKDevTools.js", function(){});
 }
@@ -96,21 +96,19 @@ function LoadPage()
 {
 	DKLog("Loading page... \n");
 	
-	DKWidget_SetProperty("body","background-color","grey");
 	DKCreate("DKWindow/DKWindow.js", function(){
-		DKCreate("DKScale/DKScale.js", function(){
-			DKCreate("DKFrame/DKFrame.js", function(){
-				DKCreate("DKFrame/DKMenu.js", function(){
-					DKCreate("DKDebug/DKDebug.js", function(){
-						DKCreate("Template.js", function(){
-							DKCreate("DKEditor/DKEditor.js", function(){});
-							var title = DKWidget_CreateElement("head", "title", "title");
-							DKWidget_SetInnerHtml(title, "DKTemplate - A template for creating Digitalknob Apps");
-						});
-					});
-				});
-			});
-		});
+	DKCreate("DKScale/DKScale.js", function(){
+	DKCreate("DKFrame/DKFrame.js", function(){
+	DKCreate("DKFrame/DKMenu.js", function(){
+	DKCreate("DKDebug/DKDebug.js", function(){
+	DKCreate("Template.js", function(){
+	DKCreate("DKEditor/DKEditor.js", function(){
+	});
+	});
+	});
+	});
+	});
+	});
 	});
 	
 	//DKCreate("DKUpdate");
