@@ -23,9 +23,7 @@ function DKEditor_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_edit")){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
-			DKCreate("DKFrame/DKMenu.js", function(){
-				DKMenu_ValidatePosition("DKEditor_Menu.html");
-			});
+			DKMenu_ValidatePosition("DKEditor_Menu.html");
 		});
 	}
 }

@@ -135,7 +135,7 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	DKLog("DKSolution_UpdatePath("+path+") \n");
+	//DKLog("DKSolution_UpdatePath("+path+")\n");
 	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
