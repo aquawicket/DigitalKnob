@@ -79,20 +79,21 @@ DKString DKWindow::TestReturnString()
 
 
 /////////////////////////////////////
-void DKWindow::SetIcon(DKString file)
+bool DKWindow::SetIcon(DKString file)
 {
 	if (DKClass::HasFunc("DKCefHandler::SetIcon")) {
-		DKClass::CallFunc("DKCefHandler::SetIcon", &file, NULL);
+		return DKClass::CallFunc("DKCefHandler::SetIcon", &file, NULL);
 	}
 	if (DKClass::HasFunc("DKSDLWindow::SetIcon")) {
-		DKClass::CallFunc("DKSDLWindow::SetIcon", &file, NULL);
+		return DKClass::CallFunc("DKSDLWindow::SetIcon", &file, NULL);
 	}
 	else if (DKClass::HasFunc("DKOSGWindow::SetIcon")) {
-		DKClass::CallFunc("DKOSGWindow::SetIcon", &file, NULL);
+		return DKClass::CallFunc("DKOSGWindow::SetIcon", &file, NULL);
 	}
 	else {
 		DKLog("DKWindow::SetIcon(): No function available \n", DKERROR);
 	}
+	return false;
 }
 
 ////////////////////

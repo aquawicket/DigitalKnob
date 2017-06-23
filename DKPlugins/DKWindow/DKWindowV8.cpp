@@ -8,10 +8,13 @@
 void DKWindowV8::Init()
 {
 	DKLog("DKWindowV8::Init()\n", DKDEBUG);
+
 	DKV8::AttachFunction("DKWindow_TestInt", DKWindowV8::TestInt);
 	DKV8::AttachFunction("DKWindow_TestString", DKWindowV8::TestString);
 	DKV8::AttachFunction("DKWindow_TestReturnInt", DKWindowV8::TestReturnInt);
 	DKV8::AttachFunction("DKWindow_TestReturnString", DKWindowV8::TestReturnString);
+
+	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
 }
 
 //////////////////////
@@ -64,5 +67,15 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 }
 
 
+
+////////////////////////////////////////////////////////
+bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
+{
+	DKLog("DKWindowV8::SetIcon(CefArgs,CefReturn)\n", DKINFO);
+
+	DKString file = args->GetString(0);
+	if(!DKWindow::SetIcon(file)) { return false; }
+	return true;
+}
 
 #endif //USE_DKCef

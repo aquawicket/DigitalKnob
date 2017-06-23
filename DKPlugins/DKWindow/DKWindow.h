@@ -29,7 +29,7 @@ public:
 	static DKString TestReturnString();
 
 	///Set the Window icon
-	static void SetIcon(DKString file);
+	static bool SetIcon(DKString file);
 
 	///Get the Left position of the window
 	static int GetX();

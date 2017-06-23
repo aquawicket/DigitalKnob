@@ -16,6 +16,8 @@ public:
 	static bool TestString(CefArgs args, CefReturn retval);
 	static bool TestReturnInt(CefArgs args, CefReturn retval);
 	static bool TestReturnString(CefArgs args, CefReturn retval);
+
+	static bool SetIcon(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKWindowV8, false);
