@@ -51,7 +51,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_TestBrowserApp")){
 		DKLog("DKEditor_Menu_TestBrowserApp()\n");
 		DKCreate("DKEditor/DKEditor_BrowserMenu.js", function(){
-			DKMenu_ValidatePosition("DKEditor_BrowserMenu.html");
+			DKMenu_ValidatePosition("DKEditor/DKEditor_BrowserMenu.html");
 		});
 		return;
 	}
