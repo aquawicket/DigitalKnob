@@ -179,7 +179,43 @@ function DKAvailable(name)
 ////////////////////////
 function DK_GetObjects()
 {
-	return filesloaded;
+	// Search the Dom for all scripts (.js files)
+	var jsfiles = "";
+	var elements = document.getElementsByTagName("script");
+	for(var i=0; i<elements.length; i++){
+		if(!elements[i].id){
+			DKLog(elements[i].src+": has no id\n", DKWARN);
+			continue; 
+		}
+		jsfiles += elements[i].id+",";
+	}
+	
+	// Search the Dom for all css (.css files)
+	var cssfiles = "";
+	var elements = document.getElementsByTagName("link");
+	for(var i=0; i<elements.length; i++){
+		if(!elements[i].id){
+			DKLog(elements[i].href+": has no id\n", DKWARN);
+			continue; 
+		}
+		cssfiles += elements[i].id+",";
+	}
+	
+	// Search the Dom for all widgets (.html id's)
+	var htmlfiles = "";
+	var divs = document.getElementsByTagName("div");
+	for(var i = divs.length; i;){
+		var div = divs[--i];
+		if(!div.id){
+			DKLog(div+": has no id\n", DKWARN);
+			continue; 
+		}
+		if(div.id.indexOf(".html") > -1){
+			htmlfiles += div.id+",";
+		}
+	}
+	
+	return jsfiles+cssfiles+htmlfiles;
 }
 
 ///////////////////////

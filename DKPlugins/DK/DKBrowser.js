@@ -54,12 +54,13 @@ function LoadJS(url, callback)
 		return; 
 	}
 	
-	var file = url.substring(url.lastIndexOf("/") + 1);
-	if(filesloaded.indexOf(file) != -1){
+	if(filesloaded.indexOf(url) != -1){
 		DKLog(url+" already loaded \n", DKWARN);
 		callback && callback();
 		return;
 	}
+	
+	var file = url.substring(url.lastIndexOf("/") + 1);
 	
 	// Call the js init function
 	if(!file){ 
@@ -104,7 +105,7 @@ function LoadJS(url, callback)
 				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
-			filesloaded += file+","; //add file to loaded list
+			filesloaded += url+","; //add file to loaded list
 			done = true;
 			callback && callback();
 		}
@@ -122,11 +123,12 @@ function CreateWidget(url, parent)
 		return; 
 	}
 	
-	var file = url.substring(url.lastIndexOf("/") + 1);
-	if(filesloaded.indexOf(file) != -1){
+	if(filesloaded.indexOf(url) != -1){
 		DKLog(url+" already loaded \n", DKWARN);
 		return;
 	}
+	
+	var file = url.substring(url.lastIndexOf("/") + 1);
 	
 	var string = DK_FileToString(url);
 	//("CreateWidget(url, parent): string = "+string+"\n");
@@ -157,8 +159,8 @@ function CreateWidget(url, parent)
 		//top.document.body.offsetHeight; // no need to store this anywhere, the reference is enough
 		//top.document.body.style.display='block';
 	}
-	var file = url.substring(url.lastIndexOf("/") + 1);
-	filesloaded += file+","; //add file to loaded list
+	//var file = url.substring(url.lastIndexOf("/") + 1);
+	filesloaded += url+","; //add file to loaded list
 	//DKLog("Created Widget:("+url+","+parent+")");
 }
 
