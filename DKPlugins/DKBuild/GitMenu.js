@@ -2,8 +2,6 @@
 function GitMenu_Init()
 {
 	DKCreate("DKBuild/GitMenu.html", function(){});
-	DKWidget_SetProperty("GitMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("GitMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
 	DKAddEvent("Git Update", "click", GitMenu_OnEvent);
 	DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
@@ -14,7 +12,6 @@ function GitMenu_End()
 {
 	DKLog("GitMenu_End()");
 	
-	DKRemoveEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
 	DKRemoveEvents(GitMenu_OnEvent);
 	DKClose("DKBuild/GitMenu.html");
 }
