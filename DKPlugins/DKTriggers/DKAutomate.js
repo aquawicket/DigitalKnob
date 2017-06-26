@@ -25,6 +25,8 @@ function DKAutomate_Init()
 function DKAutomate_End()
 {
 	DKRemoveEvents(DKAutomate_OnEvent);
+	DKClose("DKTriggers/DKTriggers.js");
+	DKClose("DKTriggers/DKAutomate2.js");
 	DKClose("DKTriggers/DKAutomate.html");
 }
 
