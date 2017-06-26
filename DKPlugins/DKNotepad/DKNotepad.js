@@ -12,6 +12,8 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
+	DKLog("DKNotepad_End() \n");
+	
 	DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
 }
@@ -24,7 +26,7 @@ function DKNotepad_OnEvent(event)
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
 			DKCreate("DKFrame/DKMenu.js", function(){
-				DKMenu_ValidatePosition("DKNotepadMenu.html");
+				DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
 			});
 		});
 	}
