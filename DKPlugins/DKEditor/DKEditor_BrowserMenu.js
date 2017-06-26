@@ -1,7 +1,7 @@
 ////////////////////////////////////
 function DKEditor_BrowserMenu_Init()
 {
-	DKLog("DKEditor_BrowserMenu_Init()\n");	
+	//DKLog("DKEditor_BrowserMenu_Init()\n");	
 	
 	DKCreate("DKEditor/DKEditor_BrowserMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
@@ -12,7 +12,7 @@ function DKEditor_BrowserMenu_Init()
 ///////////////////////////////////
 function DKEditor_BrowserMenu_End()
 {
-	DKLog("DKEditor_BrowserMenu_End()\n");
+	//DKLog("DKEditor_BrowserMenu_End()\n");
 	
 	//DKRemoveEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
 	DKRemoveEvents(DKEditor_BrowserMenu_OnEvent);
