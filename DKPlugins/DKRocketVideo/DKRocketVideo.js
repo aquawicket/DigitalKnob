@@ -13,13 +13,8 @@ function DKRocketVideo_Init()
 ////////////////////////////
 function DKRocketVideo_End()
 {
-	DKRemoveEvent("DKRocketVideo_playpause", "click", DKRocketVideo_OnEvent);
-	DKRemoveEvent("DKRocketVideo_position", "click", DKRocketVideo_OnEvent);
-	DKRemoveEvent("DKRocketVideo_positiontrack", "click", DKRocketVideo_OnEvent);
-	DKRemoveEvent("DKRocketVideo_speaker", "click", DKRocketVideo_OnEvent);
-	DKRemoveEvent("DKRocketVideo_volume", "click", DKRocketVideo_OnEvent);
-	DKRemoveEvent("DKRocketVideo_volumetrack", "click", DKRocketVideo_OnEvent);
-	DKClose("DKRocketVideo.html");
+	DKRemoveEvents(DKRocketVideo_OnEvent);
+	DKClose("DKRocketVideo/DKRocketVideo.html");
 }
 
 /////////////////////////////////////

@@ -9,6 +9,7 @@ function DKMidiDialog_Init()
 function DKMidiDialog_End()
 {
 	DKClose("DKMidi/DKMidiDialog.html");
+	DKRemoveEvents(DKMidiDialog_OnEvent);
 }
 
 ////////////////////////////////////

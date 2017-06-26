@@ -24,17 +24,8 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
-	DKRemoveEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
-	//DKRemoveEvent("GLOBAL", "midi", DKAutomate_OnEvent);
-	//DKRemoveEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
-	//DKRemoveEvent("DKA-Title", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("DKA-NewButton", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("DKA-DeleteButton", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("CancelButton", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("SaveButton", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("MidiDevices", "click", DKAutomate_OnEvent);
-	DKRemoveEvent("DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
-	DKClose("DKAutomate.html");
+	DKRemoveEvents(DKAutomate_OnEvent);
+	DKClose("DKTriggers/DKAutomate.html");
 }
 
 //////////////////////////////////

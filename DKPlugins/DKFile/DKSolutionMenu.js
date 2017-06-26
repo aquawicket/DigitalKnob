@@ -5,8 +5,6 @@ DKSolutionMenu_file = "";
 function DKSolutionMenu_Init()
 {
 	DKCreate("DKFile/DKSolutionMenu.html");
-	DKWidget_SetProperty("DKSolutionMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("DKSolutionMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);

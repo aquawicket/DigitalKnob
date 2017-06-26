@@ -27,11 +27,7 @@ function DKTray_Init()
 /////////////////////
 function DKTray_End()
 {
-	DKRemoveEvent("DKTray", "1000", DKTray_OnEvent);
-	DKRemoveEvent("DKTray", "1001", DKTray_OnEvent);
-	DKRemoveEvent("DKTray", "1002", DKTray_OnEvent);
-	DKRemoveEvent("DKTray", "click", DKTray_OnEvent);
-	DKRemoveEvent("DKTray", "doubleclick", DKTray_OnEvent);
+	DKRemoveEvents(DKTray_OnEvent);
 }
 
 //////////////////////////////

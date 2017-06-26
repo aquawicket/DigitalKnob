@@ -11,8 +11,8 @@ function DKLogin_Init()
 //////////////////////
 function DKLogin_End()
 {
-	DKRemoveEvent("DKLoginFacebook", "click", DKLogin_OnEvent);
-	DKClose("DKLogin.html");
+	DKRemoveEvents("DKLogin_OnEvent);
+	DKClose("DKLogin/DKLogin.html");
 }
 
 ///////////////////////////////
