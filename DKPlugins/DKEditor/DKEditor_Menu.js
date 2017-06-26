@@ -22,7 +22,8 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);	
+	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);	
 }
 
 ////////////////////////////
@@ -52,6 +53,10 @@ function DKEditor_Menu_OnEvent(event)
 			DKFrame_Widget("DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
+	}
+	if(DK_Id(event, "DKEditor_Menu_TestBrowserApp")){
+		DKLog("DKEditor_Menu_TestBrowserApp()\n");
+		DKCreate("DKEditor/DKEditor_BrowserMenu.js", function(){});
 	}
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){
 		if(typeof DKCef_ShowDevTools == 'function'){
