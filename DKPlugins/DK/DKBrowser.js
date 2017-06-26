@@ -146,6 +146,7 @@ function CreateWidget(url, parent)
 		//return false;
 	}
 
+	nodes[0].id = url;
 	if(parent){
 		parent.appendChild(nodes[0]);
 	}

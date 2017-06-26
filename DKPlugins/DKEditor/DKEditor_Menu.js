@@ -122,7 +122,7 @@ function DKEditor_Menu_OnEvent(event)
 
 	///////////////////////////
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor_Menu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor/DKEditor_Menu.html")){
 			return;
 		}
 	}
