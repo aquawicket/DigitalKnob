@@ -2,8 +2,6 @@
 function DKPaintMenu_Init()
 {
 	DKCreate("DKPaint/DKPaintMenu.html");
-	DKWidget_SetProperty("DKPaintMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("DKPaintMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKPaintMenu_OnEvent);
 	DKAddEvent("DKPaintMenu_Cut", "click", DKPaintMenu_OnEvent);
 	DKAddEvent("DKPaintMenu_Copy", "click", DKPaintMenu_OnEvent);

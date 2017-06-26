@@ -2,8 +2,6 @@
 function DKNotepadMenu_Init()
 {
 	DKCreate("DKNotepad/DKNotepadMenu.html");
-	DKWidget_SetProperty("DKNotepadMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("DKNotepadMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Cut", "click", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Copy", "click", DKNotepadMenu_OnEvent);
