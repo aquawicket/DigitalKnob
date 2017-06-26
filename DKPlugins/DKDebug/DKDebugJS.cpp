@@ -6,8 +6,8 @@
 //////////////////////
 void DKDebugJS::Init()
 {
-	DKDuktape::AttachFunction("DKDebug_ShowStackTrace", DKDebugJS::ShowStackTrace, 1);
-	DKDuktape::AttachFunction("DKDebug_SendBugReport", DKDebugJS::SendBugReport, 1);
+	DKDuktape::AttachFunction("DKDebug_ShowStackTrace", DKDebugJS::ShowStackTrace);
+	DKDuktape::AttachFunction("DKDebug_SendBugReport", DKDebugJS::SendBugReport);
 }
 
 ///////////////////////////////////////////////

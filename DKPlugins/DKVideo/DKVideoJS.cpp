@@ -6,7 +6,7 @@
 //////////////////////
 void DKVideoJS::Init()
 {
-	DKDuktape::AttachFunction("DKVideo_Play", DKVideoJS::Play, 1);
+	DKDuktape::AttachFunction("DKVideo_Play", DKVideoJS::Play);
 }
 
 //////////////////////////////

@@ -6,8 +6,8 @@
 ///////////////////////
 void DKThreadJS::Init()
 {
-	DKDuktape::AttachFunction("DKThread_GetThreadNames", &DKThreadJS::GetThreadNames, 0);
-	DKDuktape::AttachFunction("DKThread_DKQueue", &DKThreadJS::_DKQueue, 2);
+	DKDuktape::AttachFunction("DKThread_GetThreadNames", &DKThreadJS::GetThreadNames);
+	DKDuktape::AttachFunction("DKThread_DKQueue", &DKThreadJS::_DKQueue);
 }
 
 /////////////////////////////////////////

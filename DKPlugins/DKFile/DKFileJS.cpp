@@ -6,31 +6,31 @@
 /////////////////////
 void DKFileJS::Init()
 {
-	DKDuktape::AttachFunction("DKFile_ChDir", DKFileJS::ChDir, 1);
-	DKDuktape::AttachFunction("DKFile_Copy", DKFileJS::Copy, 3);
-	DKDuktape::AttachFunction("DKFile_CopyFolder", DKFileJS::CopyFolder, 4);
-	DKDuktape::AttachFunction("DKFile_Delete", DKFileJS::Delete, 1);
-	DKDuktape::AttachFunction("DKFile_DirectoryContents", DKFileJS::DirectoryContents, 1);
-	DKDuktape::AttachFunction("DKFile_Exists", DKFileJS::Exists, 1);
-	DKDuktape::AttachFunction("DKFile_FileToString", DKFileJS::FileToString, 1);
-	DKDuktape::AttachFunction("DKFile_GetAbsolutePath", DKFileJS::GetAbsolutePath, 1);
-	DKDuktape::AttachFunction("DKFile_GetDrives", DKFileJS::GetDrives, 0);
-	DKDuktape::AttachFunction("DKFile_GetExeName", DKFileJS::GetExeName, 0);
-	DKDuktape::AttachFunction("DKFile_GetExtention", DKFileJS::GetExtention, 1);
-	DKDuktape::AttachFunction("DKFile_GetFilename", DKFileJS::GetFilename, 1);
-	DKDuktape::AttachFunction("DKFile_GetFullExeName", DKFileJS::GetFullExeName, 0);
-	DKDuktape::AttachFunction("DKFile_GetLocalCreationDate", DKFileJS::GetLocalCreationDate, 1);
-	DKDuktape::AttachFunction("DKFile_GetLocalModifiedDate", DKFileJS::GetLocalModifiedDate, 1);
-	DKDuktape::AttachFunction("DKFile_GetModifiedTime", DKFileJS::GetModifiedTime, 1);
-	DKDuktape::AttachFunction("DKFile_GetRelativePath", DKFileJS::GetRelativePath, 2);
-	DKDuktape::AttachFunction("DKFile_GetSetting", DKFileJS::GetSetting, 2);
-	DKDuktape::AttachFunction("DKFile_GetShortName", DKFileJS::GetShortName, 1);
-	DKDuktape::AttachFunction("DKFile_IsDirectory", DKFileJS::IsDirectory, 1);
-	DKDuktape::AttachFunction("DKFile_MkDir", DKFileJS::MkDir, 1);
-	DKDuktape::AttachFunction("DKFile_Rename", DKFileJS::Rename, 3);
-	DKDuktape::AttachFunction("DKFile_SetSetting", DKFileJS::SetSetting, 3);
-	DKDuktape::AttachFunction("DKFile_StringToFile", DKFileJS::StringToFile, 2);
-	DKDuktape::AttachFunction("DKFile_VerifyPath", DKFileJS::VerifyPath, 1);
+	DKDuktape::AttachFunction("DKFile_ChDir", DKFileJS::ChDir);
+	DKDuktape::AttachFunction("DKFile_Copy", DKFileJS::Copy);
+	DKDuktape::AttachFunction("DKFile_CopyFolder", DKFileJS::CopyFolder);
+	DKDuktape::AttachFunction("DKFile_Delete", DKFileJS::Delete);
+	DKDuktape::AttachFunction("DKFile_DirectoryContents", DKFileJS::DirectoryContents);
+	DKDuktape::AttachFunction("DKFile_Exists", DKFileJS::Exists);
+	DKDuktape::AttachFunction("DKFile_FileToString", DKFileJS::FileToString);
+	DKDuktape::AttachFunction("DKFile_GetAbsolutePath", DKFileJS::GetAbsolutePath);
+	DKDuktape::AttachFunction("DKFile_GetDrives", DKFileJS::GetDrives);
+	DKDuktape::AttachFunction("DKFile_GetExeName", DKFileJS::GetExeName);
+	DKDuktape::AttachFunction("DKFile_GetExtention", DKFileJS::GetExtention);
+	DKDuktape::AttachFunction("DKFile_GetFilename", DKFileJS::GetFilename);
+	DKDuktape::AttachFunction("DKFile_GetFullExeName", DKFileJS::GetFullExeName);
+	DKDuktape::AttachFunction("DKFile_GetLocalCreationDate", DKFileJS::GetLocalCreationDate);
+	DKDuktape::AttachFunction("DKFile_GetLocalModifiedDate", DKFileJS::GetLocalModifiedDate);
+	DKDuktape::AttachFunction("DKFile_GetModifiedTime", DKFileJS::GetModifiedTime);
+	DKDuktape::AttachFunction("DKFile_GetRelativePath", DKFileJS::GetRelativePath);
+	DKDuktape::AttachFunction("DKFile_GetSetting", DKFileJS::GetSetting);
+	DKDuktape::AttachFunction("DKFile_GetShortName", DKFileJS::GetShortName);
+	DKDuktape::AttachFunction("DKFile_IsDirectory", DKFileJS::IsDirectory);
+	DKDuktape::AttachFunction("DKFile_MkDir", DKFileJS::MkDir);
+	DKDuktape::AttachFunction("DKFile_Rename", DKFileJS::Rename);
+	DKDuktape::AttachFunction("DKFile_SetSetting", DKFileJS::SetSetting);
+	DKDuktape::AttachFunction("DKFile_StringToFile", DKFileJS::StringToFile);
+	DKDuktape::AttachFunction("DKFile_VerifyPath", DKFileJS::VerifyPath);
 }
 
 //////////////////////////////////////////

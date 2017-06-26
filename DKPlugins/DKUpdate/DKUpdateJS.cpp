@@ -8,14 +8,14 @@ void DKUpdateJS::Init()
 {
 	DKLog("DKUpdateJS::Init()\n", DKDEBUG);
 
-	//DKDuktape::AttachFunction("DKUpdate_TestInt", DKUpdateJS::TestInt, 1);
-	//DKDuktape::AttachFunction("DKUpdate_TestString", DKUpdateJS::TestString, 1);
-	//DKDuktape::AttachFunction("DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt, 0);
-	//DKDuktape::AttachFunction("DKUpdate_TestReturnString", DKUpdateJS::TestReturnString, 0);
+	//DKDuktape::AttachFunction("DKUpdate_TestInt", DKUpdateJS::TestInt);
+	//DKDuktape::AttachFunction("DKUpdate_TestString", DKUpdateJS::TestString);
+	//DKDuktape::AttachFunction("DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt);
+	//DKDuktape::AttachFunction("DKUpdate_TestReturnString", DKUpdateJS::TestReturnString);
 
-	DKDuktape::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateJS::CheckForUpdate, 0);
-	DKDuktape::AttachFunction("DKUpdate_CreateUpdate", DKUpdateJS::CreateUpdate, 0);
-	DKDuktape::AttachFunction("DKUpdate_DoUpdate", DKUpdateJS::DoUpdate, 0);
+	DKDuktape::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateJS::CheckForUpdate);
+	DKDuktape::AttachFunction("DKUpdate_CreateUpdate", DKUpdateJS::CreateUpdate);
+	DKDuktape::AttachFunction("DKUpdate_DoUpdate", DKUpdateJS::DoUpdate);
 }
 
 /*

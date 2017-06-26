@@ -8,7 +8,7 @@ void DKXmlJS::Init()
 {
 	DKLog("DKXmlJS::Init()\n", DKDEBUG);
 	
-	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode, 2);
+	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
 }
 
 /////////////////////////////////////////

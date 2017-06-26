@@ -459,7 +459,7 @@ bool DKCef::ShowDevTools(int num)
 	CefBrowserSettings settings;
 	CefPoint inspectElementAt;
 
-#ifndef MAC
+#ifdef WIN32
 	window_info.SetAsPopup(NULL, "DevTools"); //FIXME for mac
 #endif
 	window_info.width = 800;

@@ -6,9 +6,9 @@
 ///////////////////////
 void DKClientJS::Init()
 {
-	DKDuktape::AttachFunction("DKClient_Address", DKClientJS::Address, 1);
-	DKDuktape::AttachFunction("DKClient_Connect", DKClientJS::Connect, 1);
-	DKDuktape::AttachFunction("DKClient_Send", DKClientJS::Send, 1);
+	DKDuktape::AttachFunction("DKClient_Address", DKClientJS::Address);
+	DKDuktape::AttachFunction("DKClient_Connect", DKClientJS::Connect);
+	DKDuktape::AttachFunction("DKClient_Send", DKClientJS::Send);
 }
 
 //////////////////////////////////

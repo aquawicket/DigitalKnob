@@ -6,9 +6,9 @@
 ///////////////////////
 void DKMySqlJS::Init()
 {
-	DKDuktape::AttachFunction("DKMySql_Connect", DKMySqlJS::Connect, 4);
-	DKDuktape::AttachFunction("DKMySql_Database", DKMySqlJS::Database, 1);
-	DKDuktape::AttachFunction("DKMySql_Query", DKMySqlJS::Query, 1);
+	DKDuktape::AttachFunction("DKMySql_Connect", DKMySqlJS::Connect);
+	DKDuktape::AttachFunction("DKMySql_Database", DKMySqlJS::Database);
+	DKDuktape::AttachFunction("DKMySql_Query", DKMySqlJS::Query);
 }
 
 /////////////////////////////////

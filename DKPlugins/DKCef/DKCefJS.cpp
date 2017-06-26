@@ -6,24 +6,24 @@
 ////////////////////
 void DKCefJS::Init()
 {
-	DKDuktape::AttachFunction("DKCef_GetUrl", DKCefJS::GetUrl, 2);
-	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl, 3);
-	DKDuktape::AttachFunction("DKCef_GoBack", DKCefJS::GoBack, 2);
-	DKDuktape::AttachFunction("DKCef_GoForward", DKCefJS::GoForward, 2);
-	DKDuktape::AttachFunction("DKCef_Stop", DKCefJS::Stop, 2);
-	DKDuktape::AttachFunction("DKCef_Reload", DKCefJS::Reload, 2);
-	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl, 2);
-	DKDuktape::AttachFunction("DKCef_Paste", DKCefJS::Paste, 1);
-	DKDuktape::AttachFunction("DKCef_NewBrowser", DKCefJS::NewBrowser, 1);
-	DKDuktape::AttachFunction("DKCef_SelectBrowser", DKCefJS::SelectBrowser, 2);
-	DKDuktape::AttachFunction("DKCef_CloseBrowser", DKCefJS::CloseBrowser, 2);
-	DKDuktape::AttachFunction("DKCef_SetFocus", DKCefJS::SetFocus, 1);
-	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus, 1);
-	DKDuktape::AttachFunction("DKCef_Focused", DKCefJS::Focused, 1);
-	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers, 1);
-	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser, 1);
-	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools, 2);
-	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript, 2);
+	DKDuktape::AttachFunction("DKCef_GetUrl", DKCefJS::GetUrl);
+	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
+	DKDuktape::AttachFunction("DKCef_GoBack", DKCefJS::GoBack);
+	DKDuktape::AttachFunction("DKCef_GoForward", DKCefJS::GoForward);
+	DKDuktape::AttachFunction("DKCef_Stop", DKCefJS::Stop);
+	DKDuktape::AttachFunction("DKCef_Reload", DKCefJS::Reload);
+	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl);
+	DKDuktape::AttachFunction("DKCef_Paste", DKCefJS::Paste);
+	DKDuktape::AttachFunction("DKCef_NewBrowser", DKCefJS::NewBrowser);
+	DKDuktape::AttachFunction("DKCef_SelectBrowser", DKCefJS::SelectBrowser);
+	DKDuktape::AttachFunction("DKCef_CloseBrowser", DKCefJS::CloseBrowser);
+	DKDuktape::AttachFunction("DKCef_SetFocus", DKCefJS::SetFocus);
+	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus);
+	DKDuktape::AttachFunction("DKCef_Focused", DKCefJS::Focused);
+	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers);
+	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser);
+	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
+	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
 }
 
 /////////////////////////////////////

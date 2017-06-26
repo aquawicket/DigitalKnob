@@ -6,11 +6,11 @@
 /////////////////////
 void DKMidiJS::Init()
 {
-	DKDuktape::AttachFunction("DKMidi_GetMidiInputs", DKMidiJS::GetMidiInputs, 0);
-	DKDuktape::AttachFunction("DKMidi_GetMidiOutputs", DKMidiJS::GetMidiOutputs, 0);
-	DKDuktape::AttachFunction("DKMidi_ToggleMidiInput", DKMidiJS::ToggleMidiInput, 1);
-	DKDuktape::AttachFunction("DKMidi_ToggleMidiOutput", DKMidiJS::ToggleMidiOutput, 1);
-	DKDuktape::AttachFunction("DKMidi_SendMidi", DKMidiJS::SendMidi, 3);
+	DKDuktape::AttachFunction("DKMidi_GetMidiInputs", DKMidiJS::GetMidiInputs);
+	DKDuktape::AttachFunction("DKMidi_GetMidiOutputs", DKMidiJS::GetMidiOutputs);
+	DKDuktape::AttachFunction("DKMidi_ToggleMidiInput", DKMidiJS::ToggleMidiInput);
+	DKDuktape::AttachFunction("DKMidi_ToggleMidiOutput", DKMidiJS::ToggleMidiOutput);
+	DKDuktape::AttachFunction("DKMidi_SendMidi", DKMidiJS::SendMidi);
 }
 
 //////////////////////////////////////

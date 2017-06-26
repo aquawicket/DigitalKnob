@@ -6,12 +6,12 @@
 /////////////////////
 void DKCurlJS::Init()
 {
-	DKDuktape::AttachFunction("DKCurl_FtpConnect", DKCurlJS::FtpConnect, 4);
-	DKDuktape::AttachFunction("DKCurl_FtpUpload", DKCurlJS::FtpUpload, 2);
-	DKDuktape::AttachFunction("DKCurl_HttpToString", DKCurlJS::HttpToString, 1);
-	DKDuktape::AttachFunction("DKCurl_HttpFileExists", DKCurlJS::HttpFileExists, 1);
-	DKDuktape::AttachFunction("DKCurl_FileDate", DKCurlJS::FileDate, 1);
-	DKDuktape::AttachFunction("DKCurl_Download", DKCurlJS::Download, 2);
+	DKDuktape::AttachFunction("DKCurl_FtpConnect", DKCurlJS::FtpConnect);
+	DKDuktape::AttachFunction("DKCurl_FtpUpload", DKCurlJS::FtpUpload);
+	DKDuktape::AttachFunction("DKCurl_HttpToString", DKCurlJS::HttpToString);
+	DKDuktape::AttachFunction("DKCurl_HttpFileExists", DKCurlJS::HttpFileExists);
+	DKDuktape::AttachFunction("DKCurl_FileDate", DKCurlJS::FileDate);
+	DKDuktape::AttachFunction("DKCurl_Download", DKCurlJS::Download);
 	DKCurl::Instance("DKCurl0");
 }
 

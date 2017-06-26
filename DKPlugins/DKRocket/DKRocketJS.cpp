@@ -6,8 +6,8 @@
 ///////////////////////
 void DKRocketJS::Init()
 {
-	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger, 0);
-	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload, 0);
+	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
+	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload);
 
 	//Note: moved to DKWidgetJS
 	//DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";

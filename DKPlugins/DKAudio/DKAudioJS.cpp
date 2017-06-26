@@ -6,14 +6,14 @@
 //////////////////////
 void DKAudioJS::Init()
 {
-	DKDuktape::AttachFunction("DKAudio_PlaySound", DKAudioJS::PlaySound, 1);
-	DKDuktape::AttachFunction("DKAudio_OpenMusic", DKAudioJS::OpenMusic, 1);
-	DKDuktape::AttachFunction("DKAudio_Pause", DKAudioJS::Pause, 1);
-	DKDuktape::AttachFunction("DKAudio_Resume", DKAudioJS::Resume, 1);
-	DKDuktape::AttachFunction("DKAudio_Mute", DKAudioJS::Mute, 0);
-	DKDuktape::AttachFunction("DKAudio_UnMute", DKAudioJS::UnMute, 0);
-	DKDuktape::AttachFunction("DKAudio_GetVolume", DKAudioJS::GetVolume, 0);
-	DKDuktape::AttachFunction("DKAudio_SetVolume", DKAudioJS::SetVolume, 1);
+	DKDuktape::AttachFunction("DKAudio_PlaySound", DKAudioJS::PlaySound);
+	DKDuktape::AttachFunction("DKAudio_OpenMusic", DKAudioJS::OpenMusic);
+	DKDuktape::AttachFunction("DKAudio_Pause", DKAudioJS::Pause);
+	DKDuktape::AttachFunction("DKAudio_Resume", DKAudioJS::Resume);
+	DKDuktape::AttachFunction("DKAudio_Mute", DKAudioJS::Mute);
+	DKDuktape::AttachFunction("DKAudio_UnMute", DKAudioJS::UnMute);
+	DKDuktape::AttachFunction("DKAudio_GetVolume", DKAudioJS::GetVolume);
+	DKDuktape::AttachFunction("DKAudio_SetVolume", DKAudioJS::SetVolume);
 }
 
 //////////////////////////////////////////
