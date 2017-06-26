@@ -75,7 +75,8 @@ void DKDuktape::End()
 void DKDuktape::AttachFunction(const DKString& name, duk_c_function func, int nargs)
 {
 	duk_push_global_object(ctx);
-    duk_push_c_function(ctx, func, nargs);
+    //duk_push_c_function(ctx, func, nargs);
+	duk_push_c_function(ctx, func, DUK_VARARGS);
 	duk_put_prop_string(ctx, -2, name.c_str());
 	functions.push_back(name+"("+toString(nargs)+")");
 }

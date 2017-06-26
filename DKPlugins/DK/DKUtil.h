@@ -42,7 +42,7 @@ public:
 	static bool GetVolume(float& volume);
 	static bool Bin2C(const DKString& input, const DKString& output);
 	static bool C2Bin(const unsigned char* header, const long int size, const DKString& output);
-	static bool Run(const DKString& command);
+	static bool Run(const DKString& command, const DKString& params);
 	static bool System(const DKString& command);
 	static bool Execute(const DKString& command, DKString& rtn);
 	static bool InMainThread();

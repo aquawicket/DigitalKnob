@@ -178,7 +178,7 @@ void DKRocketToRML::Hyperlink(DKEvent* event)
 
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
 	DKLog("DKWidget::Hyperlink: " + value + "\n", DKINFO);
-	DKUtil::Run(value);
+	DKUtil::Run(value, "");
 }
 
 ////////////////////////////////////////////////

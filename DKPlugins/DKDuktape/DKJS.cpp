@@ -96,7 +96,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_ReleaseKey", DKJS::ReleaseKey, 1);
 	DKDuktape::AttachFunction("DK_Reload", DKJS::Reload, 0);
 	DKDuktape::AttachFunction("DK_RightClick", DKJS::RightClick, 0);
-	DKDuktape::AttachFunction("DK_Run", DKJS::Run, 1);
+	DKDuktape::AttachFunction("DK_Run", DKJS::Run, 2);
 	DKDuktape::AttachFunction("DK_RunJavascript", DKJS::RunJavascript, 1);
 	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard, 1);
 	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles, 1);
@@ -333,7 +333,7 @@ int DKJS::GetFramerate(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////
+////////////////////////////////////////
 int DKJS::SetFramerate(duk_context* ctx)
 {
 	int fps = duk_require_int(ctx, 0);
@@ -341,7 +341,7 @@ int DKJS::SetFramerate(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////
+/////////////////////////////////////
 int DKJS::GetEvents(duk_context* ctx)
 {
 	DKString list;
@@ -359,14 +359,14 @@ int DKJS::GetEvents(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////
+///////////////////////////////////////
 int DKJS::ClearEvents(duk_context* ctx)
 {
 	DKEvent::events.clear();
 	return 1;
 }
 
-///////////////////////////////
+//////////////////////////////////////
 int DKJS::GetObjects(duk_context* ctx)
 {
 	DKStringArray list;
@@ -386,14 +386,14 @@ int DKJS::Reload(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////
+///////////////////////////////////
 int DKJS::Include(duk_context* ctx)
 {
 	//ignore this for now
 	return 1;
 }
 
-//////////////////////////
+/////////////////////////////////
 int DKJS::GetOS(duk_context* ctx)
 {
 	DKString os;
@@ -777,7 +777,8 @@ int DKJS::RunJavascript(duk_context* ctx)
 int DKJS::Run(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
-	if(!DKUtil::Run(command)){ return 0; }
+	DKString params = duk_require_string(ctx, 1);
+	if(!DKUtil::Run(command, params)){ return 0; }
 	return 1;
 }
 

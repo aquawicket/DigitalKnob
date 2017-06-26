@@ -767,7 +767,7 @@ int DKWidgetJS::ScrollToBottom(duk_context* ctx)
 int DKWidgetJS::OpenLink(duk_context* ctx)
 {
 	DKString url = duk_require_string(ctx, 0);
-	DKUtil::Run(url); 
+	DKUtil::Run(url, ""); 
 	return 1;
 }
 

@@ -26,11 +26,14 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_BrowserMenu_IE")){
 		DKLog("DKEditor_BrowserMenu_IE \n");
-		DK_Run("C:/Program Files (x86)/Internet Explorer/iexplore.exe"); //TODO - set url
+		var url = DKApp_url.replace("file:///", "");
+		url = url.replace("//", "/");
+		alert(url);
+		DK_Run("C:/Program Files (x86)/Internet Explorer/iexplore.exe", url);
 	}
 	if(DK_Id(event, "DKEditor_BrowserMenu_Chrome")){
 		DKLog("DKEditor_BrowserMenu_Chrome \n");
-		DK_Run("C:\Program Files (x86)/Google/Chrome/Application/chrome.exe");
+		DK_Run("C:\Program Files (x86)/Google/Chrome/Application/chrome.exe", DKApp_url); //--allow-file-access-from-files does not work
 	}
 	
 	///////////////////////////
