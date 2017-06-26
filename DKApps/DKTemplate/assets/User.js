@@ -1,4 +1,3 @@
-
 var USE_CEF = 1;     //Desktop
 var USE_WEBVIEW = 1; //Android, iOS?
 var USE_SDL = 0;     //Use with caution
