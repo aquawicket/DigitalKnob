@@ -26,9 +26,11 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_BrowserMenu_IE")){
 		DKLog("DKEditor_BrowserMenu_IE \n");
+		DK_Run("C:/Program Files (x86)/Internet Explorer/iexplore.exe"); //TODO - set url
 	}
 	if(DK_Id(event, "DKEditor_BrowserMenu_Chrome")){
 		DKLog("DKEditor_BrowserMenu_Chrome \n");
+		DK_Run("C:\Program Files (x86)/Google/Chrome/Application/chrome.exe");
 	}
 	
 	///////////////////////////
