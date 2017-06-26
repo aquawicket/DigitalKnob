@@ -11,6 +11,7 @@ function DKSolution_Init()
 /////////////////////////
 function DKSolution_End()
 {
+	DKRemoveEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
 }

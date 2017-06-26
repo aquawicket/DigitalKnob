@@ -308,7 +308,7 @@ function DKFrame_CloseButton(id)
 			if(!file){ file = arry[i];}
 			DKClose(file);
 			var jsfile = file.replace(".html", ".js");
-			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
+			DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
 			DKClose(jsfile);
 		}
 	}
@@ -316,11 +316,12 @@ function DKFrame_CloseButton(id)
 	//remove frame events
 	var name = frame;
 	name = name.replace("_frame", ""); //get the raw name
-	DKRemoveEvents(name+"_close");
-	DKRemoveEvents(name+"_maximize");
-	DKRemoveEvents(name+"_minimize");
-	DKRemoveEvents(name+"_titlebartext");
-	DKRemoveEvents(name+"_frame");
+	DKLog("name = "+name+"\n");
+	DKRemoveEvent(name+"_close", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_maximize", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_minimize", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_titlebartext", "dblclick", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_frame", "resize", DKFrame_OnEvent);
 	
 	DKWidget_RemoveElement(frame);
 }
@@ -353,11 +354,11 @@ function DKFrame_Close(id)
 	//remove frame events
 	var name = frame;
 	name = name.replace("_frame", ""); //get the raw name
-	DKRemoveEvents(name+"_close");
-	DKRemoveEvents(name+"_maximize");
-	DKRemoveEvents(name+"_minimize");
-	DKRemoveEvents(name+"_titlebartext");
-	DKRemoveEvents(name+"_frame");
+	DKRemoveEvent(name+"_close", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_maximize", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_minimize", "click", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_titlebartext", "dblclick", DKFrame_OnEvent);
+	DKRemoveEvent(name+"_frame", "resize", DKFrame_OnEvent);
 	
 	DKWidget_RemoveElement(frame);
 }

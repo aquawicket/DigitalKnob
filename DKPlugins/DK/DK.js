@@ -466,38 +466,38 @@ function DKAddEvent(id, type, Function)
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
-	if(!id){ return false; }
+	if(typeof id != "string"){
+		DKLog("DKRemoveEvent(id, type, Function): id invalid\n", DKERROR);
+		return;
+	}
+	if(typeof type != "string"){
+		DKLog("DKRemoveEvent(id, type, Function): type invalid\n", DKERROR);
+		return;
+	}
+	if(typeof Function != "function"){
+		DKLog("DKRemoveEvents(id, type, Function): Function invalid\n", DKERROR);
+		return;
+	}
 		
-	var element;
-	if(Function){
-		if(typeof id == "object" && !id.type){
-			element = id;
-		}
-		else{
-			element = document.getElementById(id);
-		}
-	}
-	else{
-		element = top.document;
-		Function = id;
-	}
-	
 	if(id == "GLOBAL"){
 		element = window;
+	}
+	else{
+		element = document.getElementById(id);
 	}
 	
 	//DKLog("DKRemoveEvent("+id+","+type+", Function) \n");
 	for(var i=0; i<events.length; i++){
 		if(events[i] == id){
 			if(events[i+1] == type){
-				if(events[i+2] == Function){
-					events.splice(i, 3);
+				if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
 					if(element){
+						DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): Removing event \n");
+						events.splice(i, 3);
 						removeEvent(element, type, Function);
-						//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Element Event \n");
+						i--;
 					}
-					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n");
-					i=0;
+					//DKLog("DKRemoveEvent("+id+","+type+", Function): Removed Event \n");	
 				}
 			}
 		}
@@ -509,11 +509,30 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
-	//FIXME - this doesn't seem to remove GLOBAL events
+	if(typeof Function != "function"){
+		DKLog("DKRemoveEvents(Function): Function invalid\n", DKERROR);
+		return;
+	}
+
 	for(var i=0; i<events.length; i++){
-		if(events[i+2] == Function){
-			events.splice(i, 3);
-			i--;
+		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
+			//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
+			if(events[i] == "GLOBAL"){
+				var element = window;
+			}
+			else{
+				var element = document.getElementById(events[i]);
+			}
+			if(element){
+				DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+","+events[i+2].name+"): Removing Event \n");
+				events.splice(i, 3);
+				removeEvent(element, events[i+1], Function);
+				i=0;
+			}
+			else{
+				//DKLog("DKRemoveEvent("+id+","+type+", Function): error removing event \n", DKERROR);
+			}
+			
 		}
 	}
 }
