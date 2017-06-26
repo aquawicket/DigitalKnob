@@ -22,16 +22,23 @@ function DKEditor_BrowserMenu_End()
 ////////////////////////////////////////////
 function DKEditor_BrowserMenu_OnEvent(event)
 {
-	DKLog("DKEditor_BrowserMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKEditor_BrowserMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
+	if(DK_Id(event, "DKEditor_BrowserMenu_Chrome")){
+		DK_Run("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "--allow-file-access-from-files "+DKApp_url);
+	}
+	if(DK_Id(event, "DKEditor_BrowserMenu_Firefox")){
+		DK_Run("C:/Program Files (x86)/Mozilla Firefox/firefox.exe", DKApp_url);
+	}
 	if(DK_Id(event, "DKEditor_BrowserMenu_IE")){
-		DKLog("DKEditor_BrowserMenu_IE \n");
 		var url = DKApp_url.replace("file:///", "");
 		DK_Run("C:/Program Files (x86)/Internet Explorer/iexplore.exe", url);
 	}
-	if(DK_Id(event, "DKEditor_BrowserMenu_Chrome")){
-		DKLog("DKEditor_BrowserMenu_Chrome \n");
-		DK_Run("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "--allow-file-access-from-files "+DKApp_url); //--allow-file-access-from-files does not work
+	if(DK_Id(event, "DKEditor_BrowserMenu_Opera")){
+		DK_Run("C:/Program Files/Opera/launcher.exe", "--allow-file-access-from-files "+DKApp_url);
+	}
+	if(DK_Id(event, "DKEditor_BrowserMenu_Safari")){
+		DK_Run("C:/Program Files (x86)/Safari/Safari.exe", DKApp_url);
 	}
 	
 	///////////////////////////
@@ -47,8 +54,30 @@ function DKEditor_BrowserMenu_OnEvent(event)
 ////////////////////////////////////////
 function DKEditor_BrowserMenu_Populate()
 {
-	DKEditor_BrowserMenu_AddIE();
 	DKEditor_BrowserMenu_AddChrome();
+	DKEditor_BrowserMenu_AddFirefox();
+	DKEditor_BrowserMenu_AddIE();
+	DKEditor_BrowserMenu_AddOpera();
+	DKEditor_BrowserMenu_AddSafari();
+}
+
+/////////////////////////////////////////
+function DKEditor_BrowserMenu_AddChrome()
+{
+	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Chrome");
+	DKWidget_SetAttribute("DKEditor_BrowserMenu_Chrome", "class", "option");
+	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Chrome", "Chrome");
+	DKAddEvent("DKEditor_BrowserMenu_Chrome", "click", DKEditor_BrowserMenu_OnEvent);
+}
+
+
+//////////////////////////////////////////
+function DKEditor_BrowserMenu_AddFirefox()
+{
+	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Firefox");
+	DKWidget_SetAttribute("DKEditor_BrowserMenu_Firefox", "class", "option");
+	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Firefox", "Firefox");
+	DKAddEvent("DKEditor_BrowserMenu_Firefox", "click", DKEditor_BrowserMenu_OnEvent);
 }
 
 /////////////////////////////////////
@@ -60,11 +89,20 @@ function DKEditor_BrowserMenu_AddIE()
 	DKAddEvent("DKEditor_BrowserMenu_IE", "click", DKEditor_BrowserMenu_OnEvent);
 }
 
-/////////////////////////////////////////
-function DKEditor_BrowserMenu_AddChrome()
+////////////////////////////////////////
+function DKEditor_BrowserMenu_AddOpera()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Chrome");
-	DKWidget_SetAttribute("DKEditor_BrowserMenu_Chrome", "class", "option");
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Chrome", "Chrome");
-	DKAddEvent("DKEditor_BrowserMenu_Chrome", "click", DKEditor_BrowserMenu_OnEvent);
+	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Opera");
+	DKWidget_SetAttribute("DKEditor_BrowserMenu_Opera", "class", "option");
+	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Opera", "Opera");
+	DKAddEvent("DKEditor_BrowserMenu_Opera", "click", DKEditor_BrowserMenu_OnEvent);
+}
+
+/////////////////////////////////////////
+function DKEditor_BrowserMenu_AddSafari()
+{
+	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Safari");
+	DKWidget_SetAttribute("DKEditor_BrowserMenu_Safari", "class", "option");
+	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Safari", "Safari");
+	DKAddEvent("DKEditor_BrowserMenu_Safari", "click", DKEditor_BrowserMenu_OnEvent);
 }
