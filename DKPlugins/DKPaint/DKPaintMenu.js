@@ -12,10 +12,8 @@ function DKPaintMenu_Init()
 function DKPaintMenu_End()
 {
 	DKRemoveEvent("GLOBAL", "mousedown", DKPaintMenu_OnEvent);
-	DKRemoveEvent("DKPaintMenu_Cut", "click", DKPaintMenu_OnEvent);
-	DKRemoveEvent("DKPaintMenu_Copy", "click", DKPaintMenu_OnEvent);
-	DKRemoveEvent("DKPaintMenu_Paste", "click", DKPaintMenu_OnEvent);
-	DKClose("DKPaintMenu.html");
+	DKRemoveEvents(DKPaintMenu_OnEvent);
+	DKClose("DKPaint/DKPaintMenu.html");
 }
 
 ///////////////////////////////////
