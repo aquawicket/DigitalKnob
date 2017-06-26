@@ -31,7 +31,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_BrowserMenu_Chrome")){
 		DKLog("DKEditor_BrowserMenu_Chrome \n");
-		DK_Run("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", DKApp_url); //--allow-file-access-from-files does not work
+		DK_Run("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "--allow-file-access-from-files "+DKApp_url); //--allow-file-access-from-files does not work
 	}
 	
 	///////////////////////////
