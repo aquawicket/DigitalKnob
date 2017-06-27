@@ -1,7 +1,7 @@
 /////////////////////
 function Input_Init()
 {
-	//DKLog("Input_Init() \n");
+	//DKLog("Input_Init()\n");
 	
 	DKCreate("DKDebug/Input.html");
 	DKAddEvent("Input_Text", "keydown", Input_OnEvent);
@@ -10,7 +10,7 @@ function Input_Init()
 ////////////////////
 function Input_End()
 {
-	//DKLog("Input_End() \n");
+	//DKLog("Input_End()\n");
 	
 	DKRemoveEvents(Input_OnEvent);
 	DKClose("DKDebug/Input.html");
@@ -19,7 +19,7 @@ function Input_End()
 /////////////////////////////
 function Input_OnEvent(event)
 {
-	//DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
+	//DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "Input_Text")){
 		var key = DK_GetValue(event);
@@ -32,7 +32,7 @@ function Input_OnEvent(event)
 ///////////////////////////
 function Input_Run(command)
 {
-	//DKLog("Input_Run("+command+") \n");
+	//DKLog("Input_Run("+command+")\n");
 	
 	DK_RunJavascript(command);
 }

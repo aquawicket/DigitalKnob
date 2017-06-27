@@ -1,7 +1,7 @@
 /////////////////////////
 function BugReport_Init()
 {
-	//DKLog("BugReport_Init() \n");
+	//DKLog("BugReport_Init()\n");
 	
 	DKCreate("DKDebug/BugReport.html");
 	DKAddEvent("BugReport_Image", "click", BugReport_OnEvent);
@@ -11,7 +11,7 @@ function BugReport_Init()
 ////////////////////////
 function BugReport_End()
 {
-	//DKLog("BugReport_End() \n");
+	//DKLog("BugReport_End()\n");
 	
 	DKRemoveEvents(BugReport_OnEvent);
 	DKClose("DKDebug/BugReport.html");
@@ -30,7 +30,7 @@ function BugReport_OnEvent(event)
 //////////////////////////////////
 function BugReport_SendBugReport()
 {
-	//DKLog("BugReport_SendBugReport() \n");
+	//DKLog("BugReport_SendBugReport()\n");
 	
 	DKCreate("DKDebug/SendBugReport.js", function(){});
 		DKFrame_Widget("DKDebug/SendBugReport.html");

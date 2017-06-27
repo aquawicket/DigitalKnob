@@ -3,7 +3,7 @@ var DKMessage_callback;
 /////////////////////////
 function DKMessage_Init()
 {	
-	//DKLog("DKMessage_Init() \n");
+	//DKLog("DKMessage_Init()\n");
 
 	DKCreate("DKMessage/DKMessage.html", function(){
 		DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
@@ -14,7 +14,7 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	//DKLog("DKMessage_End() \n");
+	//DKLog("DKMessage_End()\n");
 	
 	DKRemoveEvents(DKMessage_OnEvent);
 	DKClose("DKMessage/DKMessage.html");
@@ -23,7 +23,7 @@ function DKMessage_End()
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
+	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKMessageOk")){
 		if(DKMessage_callback){
@@ -50,6 +50,8 @@ function DKMessage_OnEvent(event)
 //////////////////////////////////////
 function DKMessageBox_Message(message)
 {
+	//DKLog("DKMessageBox_Message("+message+")\n");
+	
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Hide("DKMessageCancel");
@@ -60,6 +62,8 @@ function DKMessageBox_Message(message)
 ////////////////////////////////////////////////
 function DKMessageBox_Confirm(message, callback)
 {
+	//DKLog("DKMessageBox_Confirm("+message+","+callback+")\n");
+	
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Show("DKMessageText");
@@ -72,6 +76,8 @@ function DKMessageBox_Confirm(message, callback)
 /////////////////////////////////////////////////
 function DKMessageBox_GetValue(message, callback)
 {
+	//DKLog("DKMessageBox_GetValue("+message+","+callback+")\n");
+	
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageInput");
