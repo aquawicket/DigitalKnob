@@ -4,7 +4,7 @@ function GitMenu_Init()
 	//DKLog("GitMenu_Init()");
 	
 	DKCreate("DKBuild/GitMenu.html", function(){});
-	DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
+	//DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
 	DKAddEvent("Git Update", "click", GitMenu_OnEvent);
 	DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
 }
