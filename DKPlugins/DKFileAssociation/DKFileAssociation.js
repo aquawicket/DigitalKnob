@@ -106,7 +106,7 @@ function DKFileAssociation_OpenText(path)
 	//DK_Run(path);
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
-		DKFrame_Widget("DKNotepad.html");
+		DKFrame_Widget("DKNotepad/DKNotepad.html");
 		DKNotepad_Open(path);
 	});
 }
@@ -116,7 +116,7 @@ function DKFileAssociation_OpenImage(path)
 {
 	//DK_Run(path);
 	DKCreate("DKPaint/DKPaint.js", function(){
-		DKFrame_Widget("DKPaint.html");
+		DKFrame_Widget("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
 	});
 }
