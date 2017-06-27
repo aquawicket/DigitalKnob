@@ -1,9 +1,9 @@
 ///////////////////////////
 function LibraryMenu_Init()
 {
+	//DKLog("LibraryMenu_Init()");
+	
 	DKCreate("DKBuild/LibraryMenu.html");
-	DKWidget_SetProperty("LibraryMenu.html","top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty("LibraryMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKAddEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
 	DKAddEvent("Build Libraries", "click", LibraryMenu_OnEvent);
 }
@@ -11,7 +11,8 @@ function LibraryMenu_Init()
 //////////////////////////
 function LibraryMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
+	//DKLog("LibraryMenu_End()");
+	
 	DKRemoveEvents(LibraryMenu_OnEvent);
 	DKClose("DKBuild/LibraryMenu.html");
 }
@@ -26,7 +27,7 @@ function LibraryMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "LibraryMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/LibraryMenu.html")){
 			return;
 		}
 	}
