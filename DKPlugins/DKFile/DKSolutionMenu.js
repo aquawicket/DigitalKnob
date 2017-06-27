@@ -21,7 +21,6 @@ function DKSolutionMenu_Init()
 /////////////////////////////
 function DKSolutionMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
 	DKRemoveEvents(DKSolutionMenu_OnEvent);
 	DKClose("DKFile/DKSolutionMenu.html");
 }
@@ -63,11 +62,11 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKSolutionMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionMenu.html")){
 			return;
 		}
 	}
-	DKClose("DKSolutionMenu.js");
+	DKClose("DKFile/DKSolutionMenu.js");
 }
 
 /////////////////////////////////
@@ -185,7 +184,7 @@ function DKSolutionMenu_Delete()
 	
 	//TODO - confirm
 	DKCreate("DKMessage/DKMessage.js", function(){
-		DKFrame_Widget("DKMessage.html");
+		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessageBox_Confirm("delete this file?", function(rval){
 			DKLog("DKMessageBox_Confirm(): rval = "+rval+"\n");
 			if(rval == true){

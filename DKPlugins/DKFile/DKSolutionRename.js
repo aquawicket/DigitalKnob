@@ -1,23 +1,26 @@
 DKSolutionRename_id = "";
 DKSolutionRename_file = "";
 
-//////////////////////////////
+////////////////////////////////
 function DKSolutionRename_Init()
 {
+	//DKLog("DKSolutionRename_Init() \n");
+	
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
 }
 
-/////////////////////////////
+///////////////////////////////
 function DKSolutionRename_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
+	//DKLog("DKSolutionRename_End() \n");
+	
 	DKRemoveEvents(DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }
 
-//////////////////////////////////////
+////////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
 	//DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
@@ -28,7 +31,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKSolutionRename.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionRename.html")){
 			return;
 		}
 	}
@@ -39,21 +42,24 @@ function DKSolutionRename_OnEvent(event)
 ///////////////////////////////////
 function DKSolutionRename_SetId(id)
 {
-	DKLog("DKSolutionRename_SetId("+id+")\n");
+	//DKLog("DKSolutionRename_SetId("+id+")\n");
+	
 	DKSolutionRename_id = id;
 }
 
 ///////////////////////////////////////
 function DKSolutionRename_SetFile(file)
 {
-	DKLog("DKSolutionRename_SetFile("+file+")\n");
+	//DKLog("DKSolutionRename_SetFile("+file+")\n");
+	
 	DKSolutionRename_file = file;
 }
 
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	DKLog("DKSolutionRename_Rename()\n");
+	//DKLog("DKSolutionRename_Rename()\n");
+	
 	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
 	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
