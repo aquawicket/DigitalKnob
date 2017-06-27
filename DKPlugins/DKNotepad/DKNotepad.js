@@ -3,6 +3,8 @@ var currentFile;
 /////////////////////////
 function DKNotepad_Init()
 {
+	//DKLog("DKNotepad_Init() \n");
+	
 	DKCreate("DKNotepad/DKNotepad.html");
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
@@ -12,7 +14,7 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
-	DKLog("DKNotepad_End() \n");
+	//DKLog("DKNotepad_End() \n");
 	
 	DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
@@ -21,7 +23,7 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
-	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
