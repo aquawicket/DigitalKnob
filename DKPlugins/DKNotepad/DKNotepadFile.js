@@ -1,6 +1,8 @@
 /////////////////////////////
 function DKNotepadFile_Init()
 {
+	//DKLog("DKNotepadFile_Init() \n");
+	
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
 	DKAddEvent("GLOBAL", "OpenFile", DKNotepadFile_OnEvent);
@@ -13,6 +15,8 @@ function DKNotepadFile_Init()
 ////////////////////////////
 function DKNotepadFile_End()
 {
+	//DKLog("DKNotepadFile_End() \n");
+	
 	DKRemoveEvents(DKNotepadFile_OnEvent);
 	DKClose("DKNotepad/DKNotepadFile.html");
 }
@@ -20,7 +24,7 @@ function DKNotepadFile_End()
 /////////////////////////////////////
 function DKNotepadFile_OnEvent(event)
 {
-	DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKNotepadFile_Open")){
 		DKNotepadFile_Open();
@@ -37,7 +41,7 @@ function DKNotepadFile_OnEvent(event)
 		DKNotepadFile_SaveAs();
 	}
 	if(DK_Id(event,"DKNotepadFile_Exit")){
-		DKFrame_Close("DKNotepad.html");
+		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
@@ -51,7 +55,8 @@ function DKNotepadFile_OnEvent(event)
 /////////////////////////////
 function DKNotepadFile_Open()
 {
-	DKLog("DKNotepadFile_Open \n");
+	//DKLog("DKNotepadFile_Open \n");
+	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
 		DKSendEvent("DKFile/DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
@@ -61,7 +66,8 @@ function DKNotepadFile_Open()
 /////////////////////////////
 function DKNotepadFile_Save()
 {
-	DKLog("DKNotepadFile_Save \n");
+	//DKLog("DKNotepadFile_Save \n");
+	
 	var text = DKWidget_GetValue("DKNotepad_Text");
 	//var assets = DKAssets_LocalAssets();
 	DKFile_StringToFile(text, currentFile);
@@ -74,7 +80,8 @@ function DKNotepadFile_Save()
 //////////////////////////////
 function DKNotepadFile_SaveAs()
 {
-	DKLog("DKNotepadFile_SaveAs \n");
+	//DKLog("DKNotepadFile_SaveAs \n");
+	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
 		//DKSendEvent("DKFile/DKFileDialog.html", "SetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
