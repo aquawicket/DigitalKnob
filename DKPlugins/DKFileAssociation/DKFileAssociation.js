@@ -13,7 +13,7 @@ function DKFileAssociation_OnEvent(event)
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	//DKLog("DKFileAssociation_Open("+file+") \n");
+	DKLog("DKFileAssociation_Open("+file+") \n");
 	
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".html") != -1 ){ 
@@ -93,10 +93,9 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	//DK_Run(path);
-	var id = DKFile_GetFilename(path);
+	var id = path.replace(DKAssets_LocalAssets(),"");
 	id = id.replace(".js",".html");
-	DKCreate(path, function(){
+	DKCreate(id, function(){
 		DKFrame_Widget(id);
 	});
 }

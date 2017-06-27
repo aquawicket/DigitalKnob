@@ -112,7 +112,7 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	//DKLog("DKSolution_OpenHere("+path+") \n");
+	DKLog("DKSolution_OpenHere("+path+") \n");
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
