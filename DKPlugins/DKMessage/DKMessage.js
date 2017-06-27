@@ -3,6 +3,8 @@ var DKMessage_callback;
 /////////////////////////
 function DKMessage_Init()
 {	
+	//DKLog("DKMessage_Init() \n");
+
 	DKCreate("DKMessage/DKMessage.html", function(){
 		DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
 		DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
@@ -12,6 +14,8 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
+	//DKLog("DKMessage_End() \n");
+	
 	DKRemoveEvents(DKMessage_OnEvent);
 	DKClose("DKMessage/DKMessage.html");
 }
@@ -19,7 +23,7 @@ function DKMessage_End()
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
 	
 	if(DK_Id(event, "DKMessageOk")){
 		if(DKMessage_callback){
