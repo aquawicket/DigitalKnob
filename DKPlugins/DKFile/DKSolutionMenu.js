@@ -4,7 +4,7 @@ DKSolutionMenu_file = "";
 //////////////////////////////
 function DKSolutionMenu_Init()
 {
-	//DKLog("DKSolutionMenu_Init() \n");
+	//DKLog("DKSolutionMenu_Init()\n");
 	
 	DKCreate("DKFile/DKSolutionMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
@@ -23,7 +23,7 @@ function DKSolutionMenu_Init()
 /////////////////////////////
 function DKSolutionMenu_End()
 {
-	//DKLog("DKSolutionMenu_End() \n");
+	//DKLog("DKSolutionMenu_End()\n");
 	
 	DKRemoveEvents(DKSolutionMenu_OnEvent);
 	DKClose("DKFile/DKSolutionMenu.html");
@@ -32,7 +32,7 @@ function DKSolutionMenu_End()
 //////////////////////////////////////
 function DKSolutionMenu_OnEvent(event)
 {
-	//DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
+	//DKLog("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKSolutionMenu_Open")){
 		DKSolutionMenu_Open();
@@ -76,7 +76,7 @@ function DKSolutionMenu_OnEvent(event)
 /////////////////////////////////
 function DKSolutionMenu_SetId(id)
 {
-	//DKLog("DKSolutionMenu_SetId("+id+") \n");
+	//DKLog("DKSolutionMenu_SetId("+id+")\n");
 	
 	DKSolutionMenu_id = id;
 }
@@ -84,7 +84,7 @@ function DKSolutionMenu_SetId(id)
 /////////////////////////////////////
 function DKSolutionMenu_SetFile(file)
 {
-	//DKLog("DKSolutionMenu_SetFile("+file+") \n");
+	//DKLog("DKSolutionMenu_SetFile("+file+")\n");
 	
 	DKSolutionMenu_file = file;
 }
@@ -92,7 +92,7 @@ function DKSolutionMenu_SetFile(file)
 //////////////////////////////
 function DKSolutionMenu_Open()
 {
-	//DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+") \n");
+	//DKLog("DKSolutionMenu_Open("+DKSolutionMenu_file+")\n");
 	
 	DKSolution_OpenFile(DKSolutionMenu_file);
 }
@@ -100,7 +100,7 @@ function DKSolutionMenu_Open()
 //////////////////////////////////
 function DKSolutionMenu_OpenHere()
 {
-	//DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+") \n");
+	//DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n");
 	
 	DKSolution_OpenHere(DKSolutionMenu_file);
 }
@@ -108,7 +108,7 @@ function DKSolutionMenu_OpenHere()
 /////////////////////////////////
 function DKSolutionMenu_NewFile()
 {
-	//DKLog("DKSolutionMenu_NewFile() \n");
+	//DKLog("DKSolutionMenu_NewFile()\n");
 	
 	if(!DKSolutionMenu_file){
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
@@ -140,7 +140,7 @@ function DKSolutionMenu_NewFile()
 ///////////////////////////////////
 function DKSolutionMenu_NewFolder()
 {
-	//DKLog("DKSolutionMenu_NewFolder() \n");
+	//DKLog("DKSolutionMenu_NewFolder()\n");
 	
 	if(!DKSolutionMenu_file){
 		DKLog("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n", DKERROR);
@@ -172,7 +172,7 @@ function DKSolutionMenu_NewFolder()
 ////////////////////////////////
 function DKSolutionMenu_Rename()
 {
-	//DKLog("DKSolutionMenu_Rename() \n");
+	//DKLog("DKSolutionMenu_Rename()\n");
 
 	var top1 = DKWidget_GetOffsetTop(DKSolutionMenu_id);
 	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
@@ -190,7 +190,7 @@ function DKSolutionMenu_Rename()
 ////////////////////////////////
 function DKSolutionMenu_Delete()
 {
-	//DKLog("DKSolutionMenu_Delete() \n");
+	//DKLog("DKSolutionMenu_Delete()\n");
 	
 	//TODO - confirm
 	DKCreate("DKMessage/DKMessage.js", function(){
@@ -208,7 +208,7 @@ function DKSolutionMenu_Delete()
 //////////////////////////////
 function DKSolutionMenu_Copy()
 {
-	//DKLog("DKSolutionMenu_Copy() \n");
+	//DKLog("DKSolutionMenu_Copy()\n");
 	
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
@@ -216,7 +216,7 @@ function DKSolutionMenu_Copy()
 /////////////////////////////
 function DKSolutionMenu_Cut()
 {
-	//DKLog("DKSolutionMenu_Cut() \n");
+	//DKLog("DKSolutionMenu_Cut()\n");
 	
 	DK_SetClipboardFiles(DKSolutionMenu_file);
 }
@@ -224,7 +224,7 @@ function DKSolutionMenu_Cut()
 ///////////////////////////////
 function DKSolutionMenu_Paste()
 {
-	//DKLog("DKSolutionMenu_Paste() \n");
+	//DKLog("DKSolutionMenu_Paste()\n");
 	
 	//TODO
 }
@@ -232,7 +232,7 @@ function DKSolutionMenu_Paste()
 ////////////////////////////////
 function DKSolutionMenu_GitAdd()
 {
-	//DKLog("DKSolutionMenu_GitAdd() \n");
+	//DKLog("DKSolutionMenu_GitAdd()\n");
 	
 	//TODO
 	

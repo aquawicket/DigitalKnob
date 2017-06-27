@@ -18,13 +18,13 @@ function DKFile_GetDrives(){ DKLog("DKFile_GetDrives(): not available for "+DK_G
 //////////////////////
 function DKFile_Init()
 {
-	
+	//DKLog("DKFile_Init()\n");
 }
 
 ///////////////////////////
 function UrlExists(url, fn)
 {
-	//DKLog("UrlExists("+url+") \n");
+	//DKLog("UrlExists("+url+","+fn.name+")\n");
 	
 	var request = "";
 	try {
@@ -94,8 +94,10 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////////
 function DKFile_VerifyPath(path)
 {
+	//DKLog("DKFile_VerifyPath("+path+")\n");
+	
+	//FIXME
 	return true;
-	DKLog("DKFile_VerifyPath("+path+")\n");
 	if(!path){ return false; }
 	
 	DKLog("DKFile_VerifyPath("+path+"): checking "+path+"\n");
@@ -118,6 +120,8 @@ function DKFile_VerifyPath(path)
 ////////////////////////////
 function DKFile_PrintFiles()
 {
+	//DKLog("DKFile_PrintFiles()\n");
+	
 	return ajaxGetUrl(online_assets+"/DKFile/DKFile.php?PrintFiles=1");
 }
 
@@ -125,6 +129,7 @@ function DKFile_PrintFiles()
 function DKFile_GetFilename(path)
 {
 	//DKLog("DKFile_GetFilename("+path+")\n");
+	
 	if(!path){ return; }
 	var n = path.lastIndexOf("/");
 	var out = path.substring(n+1,path.length);
@@ -135,7 +140,8 @@ function DKFile_GetFilename(path)
 ////////////////////////////////////
 function DKFile_SaveFile(path, data)
 {
-	DKLog("DKFile_SaveFile("+path+", data)\n");
+	//DKLog("DKFile_SaveFile("+path+", data)\n");
+	
 	//var send = phpurl;
 	//if(realpath){
 		//var filename = DKFile_GetFilename(path);
@@ -344,8 +350,8 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////////////////////////
 function DKFile_GetRelativePath(apath, datapath)
 {
-	//if(!url){ url = "/"; }
-	DKLog("DKFile_GetRelativePath("+apath+","+datapath+") \n");
+	//DKLog("DKFile_GetRelativePath("+apath+","+datapath+")\n");
+	
 	//apath = apath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
 	//send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
 	//var result = ajaxGetUrl(send);
@@ -365,9 +371,11 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-////////////////////////////////
+/////////////////////////////////
 function DKFile_GetExtention(url)
 {
+	//DKLog(" DKFile_GetExtention("+url+")\n");
+	
 	var n = url.lastIndexOf(".");
 	var out = url.substring(n+1,url.length);
 	return out;

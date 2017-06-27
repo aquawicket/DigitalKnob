@@ -10,7 +10,7 @@ var rPath;
 ////////////////////////////
 function DKFileDialog_Init()
 {	
-	//DKLog("DKFileDialog_Init() \n");
+	//DKLog("DKFileDialog_Init()\n");
 
 	DKCreate("DKFile/DKFileDialog.html");
 	DKAddEvent("DKFile/DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
@@ -27,7 +27,7 @@ function DKFileDialog_Init()
 ///////////////////////////
 function DKFileDialog_End()
 {
-	//DKLog("DKFileDialog_End() \n");
+	//DKLog("DKFileDialog_End()\n");
 	
 	DKRemoveEvents(DKFileDialog_OnEvent);
 	DKClose("DKFile/DKFileDialog.html");
@@ -101,7 +101,8 @@ function DKFileDialog_GetFIle(callback)
 //////////////////////////////////////
 function DKFileDialog_OpenFolder(path)
 {
-	DKLog("DKFileDialog_OpenFolder("+path+") \n");
+	//DKLog("DKFileDialog_OpenFolder("+path+")\n");
+	
 	if(DKFileDialog_UpdatePath(path)){
 		return true;
 	}
@@ -111,7 +112,8 @@ function DKFileDialog_OpenFolder(path)
 ////////////////////////////////////
 function DKFileDialog_OpenFile(path)
 {
-	DKLog("DKFileDialog_OpenFile("+path+") \n");
+	//DKLog("DKFileDialog_OpenFile("+path+")\n");
+	
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -129,6 +131,8 @@ function DKFileDialog_OpenFile(path)
 //////////////////////////////////////
 function DKFileDialog_UpdatePath(path)
 {
+	//DKLog("DKFileDialog_UpdatePath("+path+")\n");
+	
 	//if(!path){ return false; }
 	DKLog("DKFileDialog_UpdatePath("+path+") \n");
 	if(DK_GetOS() == "Android"){
@@ -209,4 +213,3 @@ function DKFileDialog_UpdatePath(path)
 	DKWidget_SetValue("DKFileDialogPath", aPath);
 	return true;
 }
-
