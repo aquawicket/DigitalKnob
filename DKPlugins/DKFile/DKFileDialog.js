@@ -10,8 +10,10 @@ var rPath;
 ////////////////////////////
 function DKFileDialog_Init()
 {	
+	//DKLog("DKFileDialog_Init() \n");
+
 	DKCreate("DKFile/DKFileDialog.html");
-	DKAddEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
+	DKAddEvent("DKFile/DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
@@ -25,23 +27,22 @@ function DKFileDialog_Init()
 ///////////////////////////
 function DKFileDialog_End()
 {
-	DKRemoveEvent("DKFileDialog.html", "GetFile", DKFileDialog_OnEvent);
-	DKRemoveEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
-	DKRemoveEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
-	DKRemoveEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
-	DKClose("DKFileDialog.html");
+	//DKLog("DKFileDialog_End() \n");
+	
+	DKRemoveEvents(DKFileDialog_OnEvent);
+	DKClose("DKFile/DKFileDialog.html");
 }
 
 ////////////////////////////////////
 function DKFileDialog_OnEvent(event)
 {	
-	DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKFileDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_IdLike(event, "DKFileDialogDrive")){
 		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFolder")){
-		DKLog("DKFileDialogFolder");
+		//DKLog("DKFileDialogFolder");
 		DKFileDialog_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKFileDialogFile")){
@@ -50,7 +51,7 @@ function DKFileDialog_OnEvent(event)
 
 	if(DK_Id(event, "DKFileDialogUp")){
 		var up = DKWidget_GetValue("DKFileDialogPath")+"/..";
-		DKLog(up+"\n");
+		//DKLog(up+"\n");
 		DKFileDialog_OpenFolder(up);
 	}
 	
@@ -65,12 +66,12 @@ function DKFileDialog_OnEvent(event)
 			//DKLog("DKFileDialog::ProcessEvent(): return_path_type incorrect. \n", DKERROR);
 		}
 		
-		DKFrame_Close("DKFileDialog.html");
+		DKFrame_Close("DKFile/DKFileDialog.html");
 		return;
 	}
 	
 	if(DK_Id(event, "DKFileDialogCancel")){
-		DKFrame_Close("DKFileDialog.html");
+		DKFrame_Close("DKFile/DKFileDialog.html");
 		return;
 	}
 	
