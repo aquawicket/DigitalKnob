@@ -91,6 +91,8 @@ else{  //V8 or WEBVIEW
 ///////////////////
 function LoadPage()
 {
+	DKLog("LoadPage()\n");
+	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
 	//DKCreate("YourApp.js", function(){ /* process */ });

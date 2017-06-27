@@ -93,7 +93,7 @@ else{  //Javascript: V8, WEBVIEW or Duktape
 ///////////////////
 function LoadPage()
 {
-	DKLog("Loading page... \n");
+	DKLog("LoadPage()\n");
 	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
