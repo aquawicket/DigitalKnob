@@ -1,6 +1,8 @@
 /////////////////////////////
 function DKEditor_Menu_Init()
 {
+	//DKLog("DKEditor_Menu_Init() \n");
+	
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
@@ -24,6 +26,8 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
+	//DKLog("DKEditor_Menu_End() \n");
+	
 	DKRemoveEvents(DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
@@ -31,7 +35,7 @@ function DKEditor_Menu_End()
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
 	
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
 		DKDebug_RestartApp();
@@ -96,7 +100,6 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_PrintInfo();
 	}
 	if(DK_Id(event, "DKEditor_Menu_PushFiles")){
-		//DKLog("DKEditor_Menu_PushFiles\n");
 		DKDebug_PushDKFiles();
 	}
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
