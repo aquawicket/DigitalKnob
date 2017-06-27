@@ -1,6 +1,8 @@
 //////////////////////////
 function DKSolution_Init()
 {	
+	//DKLog("DKSolution_Init() \n");
+
 	DKCreate("DKFile/DKSolution.html");
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
@@ -11,6 +13,8 @@ function DKSolution_Init()
 /////////////////////////
 function DKSolution_End()
 {
+	//DKLog("DKSolution_End() \n");
+	
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
 }
@@ -18,7 +22,7 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+") \n");
 	
 	DKSolution_Select(DK_GetId(event));
 
@@ -90,6 +94,7 @@ function DKSolution_Select(id)
 function DKSolution_OpenFolder(path)
 {
 	//DKLog("DKSolution_OpenFolder("+path+") \n");
+	
 	if(DKSolution_UpdatePath(path)){
 		return true;
 	}
@@ -100,6 +105,7 @@ function DKSolution_OpenFolder(path)
 function DKSolution_OpenFile(path)
 {
 	//DKLog("DKSolution_OpenFile("+path+") \n");
+	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
@@ -112,7 +118,8 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	DKLog("DKSolution_OpenHere("+path+") \n");
+	//DKLog("DKSolution_OpenHere("+path+") \n");
+	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
@@ -135,7 +142,7 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	//DKLog("DKSolution_UpdatePath("+path+")\n");
+	//DKLog("DKSolution_UpdatePath("+path+") \n");
 	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
@@ -221,4 +228,3 @@ function DKSolution_UpdatePath(path)
 	DKWidget_SetValue("DKSolutionPath", aPath);
 	return true;
 }
-
