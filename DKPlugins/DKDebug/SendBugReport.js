@@ -1,7 +1,8 @@
-
 ////////////////////////////
 function SendBugReport_Init()
 {
+	//DKLog("SendBugReport_Init() \n");
+	
 	DKCreate("DKDebug/SendBugReport.html");
 	DKAddEvent("SendBugReport_Button", "click", SendBugReport_OnEvent);
 }
@@ -9,7 +10,8 @@ function SendBugReport_Init()
 ////////////////////////////
 function SendBugReport_End()
 {
-	DKLog("SendBugReport_End() \n");
+	//DKLog("SendBugReport_End() \n");
+	
 	DKRemoveEvents(SendBugReport_OnEvent);
 	DKClose("DKDebug/SendBugReport.html");
 }
@@ -17,7 +19,7 @@ function SendBugReport_End()
 /////////////////////////////////////
 function SendBugReport_OnEvent(event)
 {
-	DKLog("SendBugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("SendBugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "SendBugReport_Button")){
 		SendBugReport_CreateReport();
@@ -27,7 +29,8 @@ function SendBugReport_OnEvent(event)
 /////////////////////////////////////
 function SendBugReport_CreateReport()
 {
-	DKLog("SendBugReport_CreateReport() \n");
+	//DKLog("SendBugReport_CreateReport() \n");
+	
 	var str = DKWidget_GetValue("SendBugReport_Textarea");
 	DKLog(str+"\n");
 	
@@ -48,7 +51,8 @@ function SendBugReport_CreateReport()
 ///////////////////////////////////
 function SendBugReport_SendReport()
 {
-	DKLog("SendBugReport_SendReport() \n");
+	//DKLog("SendBugReport_SendReport() \n");
+	
 	DKWidget_Show("SendBugReport_Image");
 	DKWidget_Show("SendBugReport_Sending");
 	DK_DoFrame();
