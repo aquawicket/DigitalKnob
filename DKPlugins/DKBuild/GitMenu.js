@@ -4,7 +4,7 @@ function GitMenu_Init()
 	//DKLog("GitMenu_Init()");
 	
 	DKCreate("DKBuild/GitMenu.html", function(){});
-	//DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
+	DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent); //FIXME - eats mouse events
 	DKAddEvent("Git Update", "click", GitMenu_OnEvent);
 	DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
 }
@@ -31,7 +31,7 @@ function GitMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "GitMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/GitMenu.html")){
 			return;
 		}
 	}
