@@ -2,7 +2,7 @@ var USE_SDL = 0;
 var USE_ROCKET = 0;
 var USE_CEF = 1;
 var USE_WEBVIEW = 1;
-var DKApp_url = "file:///"+DKAssets_LocalAssets()+"/index.html";
+var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 
 	
 //Validate settings
@@ -31,6 +31,7 @@ if(DK_GetJavascript() == "Duktape"){
 	if(USE_SDL && USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
+		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		var assets = DKAssets_LocalAssets();
@@ -49,6 +50,7 @@ if(DK_GetJavascript() == "Duktape"){
 	else if(USE_SDL && USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
 		DKCreate("DKWindow");
+		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
 		LoadPage();
@@ -56,6 +58,7 @@ if(DK_GetJavascript() == "Duktape"){
 	else if(USE_SDL && USE_CEF){
 		DKLog("Creating SDL -> CEF -> GUI \n");
 		DKCreate("DKWindow");
+		DKWindow_Create();
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
 		DKCreate("DKCef,CefSDL,0,0,"+width+","+height+","+DKApp_url);
@@ -70,6 +73,7 @@ if(DK_GetJavascript() == "Duktape"){
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
 		DK_SetFramerate(5);
+		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){
 		DKLog("Creating WEBVIEW -> GUI \n");
@@ -87,7 +91,9 @@ else{  //V8 or WEBVIEW
 ///////////////////
 function LoadPage()
 {
-	DKCreate("DKWindow/DKWindow.js", function(){});
-	DKCreate("DKScale/DKScale.js", function(){});
-	//DKCreate("YourApp.js", function(){});
+	DKCreate("DKWindow/DKWindow.js", function(){
+	DKCreate("DKScale/DKScale.js", function(){
+	//DKCreate("YourApp.js", function(){ /* process */ });
+	});
+	});
 }
