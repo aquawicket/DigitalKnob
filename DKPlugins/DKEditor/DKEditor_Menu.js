@@ -38,20 +38,20 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_Notes")){
 		DKCreate("DKNotepad/DKNotepad.js", function(){
-			DKFrame_Widget("DKNotepad.html");
+			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
 		DKCreate("DKFile/DKSolution.js", function(){
-			DKFrame_Widget("DKSolution.html");
+			DKFrame_Widget("DKFile/DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_TestBrowserApp")){
 		DKLog("DKEditor_Menu_TestBrowserApp()\n");
 		DKCreate("DKEditor/DKEditor_BrowserMenu.js", function(){
-			DKMenu_ValidatePosition("DKEditor_BrowserMenu.html");
+			DKMenu_ValidatePosition("DKEditor/DKEditor_BrowserMenu.html");
 		});
 		return;
 	}
@@ -80,7 +80,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
 		DKCreate("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage.html");
+			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
 				//DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -90,14 +90,14 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_Builder")){
 		DKCreate("DKBuild/DKBuildGUI.js", function(){
-			DKFrame_Widget("DKBuildGUI.html");
+			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Info")){
 		DKDebug_PrintInfo();
 	}
 	if(DK_Id(event, "DKEditor_Menu_PushFiles")){
-		DKLog("DKEditor_Menu_PushFiles\n");
+		//DKLog("DKEditor_Menu_PushFiles\n");
 		DKDebug_PushDKFiles();
 	}
 	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
@@ -112,7 +112,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_Report")){
 		DKCreate("DKDebug/SendBugReport.js", function(){
-			DKFrame_Widget("SendBugReport.html");
+			DKFrame_Widget("DKDebug/SendBugReport.html");
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Web")){
