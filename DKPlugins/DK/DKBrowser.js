@@ -37,7 +37,8 @@ document.onmousemove = function(e){
 /////////////////////
 function LoadCSS(url)
 {
-	//DKLog("LoadCSS("+url+") \n");
+	//DKLog("LoadCSS("+url+")\n");
+	
 	var link = document.createElement('link');
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
@@ -48,7 +49,8 @@ function LoadCSS(url)
 //////////////////////////////
 function LoadJS(url, callback)
 {
-	//DKLog("LoadJS("+url+") \n");
+	//DKLog("LoadJS("+url+")\n");
+	
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return; 
@@ -115,9 +117,9 @@ function LoadJS(url, callback)
 //////////////////////////////////
 function CreateWidget(url, parent)
 {
-	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	//DKLog("CreateWidget("+url+","+parent+")\n");
 	
+	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
 		return false; 
@@ -160,6 +162,8 @@ function CreateWidget(url, parent)
 ///////////////////////////
 function CheckFileSupport()
 {
+	//DKLog("CheckFileSupport()\n");
+	
 	if(window.File && window.FileReader && window.FileList && window.Blob){
 		DKLog("File support OK.");
 	}
@@ -171,6 +175,8 @@ function CheckFileSupport()
 ///////////////////////////
 function GetLeftPx(element)
 {
+	//DKLog("GetLeftPx("+element+")\n");
+	
 	if(!element){ return 0; }
 	if(!element.style.left){ return 0; }
 	if(element.style.left.indexOf("%") > -1){
@@ -182,6 +188,8 @@ function GetLeftPx(element)
 //////////////////////////
 function GetTopPx(element)
 {
+	//DKLog("GetTopPx("+element+")\n");
+	
 	if(!element){ return 0; }
 	if(!element.style.top){ return 0; }
 	if(element.style.top.indexOf("%") > -1){
@@ -193,6 +201,8 @@ function GetTopPx(element)
 ////////////////////////////
 function GetWidthPx(element)
 {
+	//DKLog("GetWidthPx("+element+")\n");
+	
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
 	if(element.style.width.indexOf("%") > -1){
@@ -204,6 +214,8 @@ function GetWidthPx(element)
 /////////////////////////////
 function GetHeightPx(element)
 {
+	//DKLog("GetHeightPx("+element+")\n");
+	
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
 	if(element.style.height.indexOf("%") > -1){
@@ -215,6 +227,8 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
+	//DKLog("DragStart("+event+","+id+")\n");
+	
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -246,6 +260,8 @@ function DragStart(event, id)
 ////////////////////////////////////////////////////////////////////////
 function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 {
+	//DKLog("DragMove("+event+","+mouseStartX+","+mouseStartY+","+objectX+","+objectY+","+id+")\n");
+	
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -299,6 +315,8 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 /////////////////////
 function DragStop(id)
 {
+	//DKLog("DragStop(id)\n");
+	
 	document.body.onmousemove = function(){};
 	//ceiling = document.getElementById('ceiling');
 	//if(ceiling){document.body.removeChild(ceiling);} 
@@ -307,7 +325,7 @@ function DragStop(id)
 ///////////////////////////////
 function ResizeStart(event, id)
 {
-	//DKLog("ResizeStart("+id+")\n");
+	//DKLog("ResizeStart("+event+","+id+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -376,9 +394,9 @@ function ResizeStop(id)
 	//if(ceiling2){document.body.removeChild(ceiling2);} 
 }
 
-///////////////////////
-function Pos(position){
-	
+//////////////////////
+function Pos(position)
+{
 	//DKLog("Pos("+position+")\n");
 	
 	if(position == ''){
@@ -423,12 +441,16 @@ function Pos(position){
 /////////////////////////
 function GetKeyNum(event)
 {
+	//DKLog("GetKeyNum("+event+")\n");
+	
 	return (event.charCode) ? event.charCode : event.keyCode; //IE or other
 }
 
 //////////////////////////////
 function PreventDefault(event)
 {
+	//DKLog("PreventDefault("+event+")\n");
+	
 	if(event.stopPropagation) {
         event.preventDefault();
     } else {
@@ -440,7 +462,8 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+") \n");
+	//DKLog("StopPropagation("+event+")\n");
+	
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -452,7 +475,8 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	//DKLog("addEvent("+evnt+", "+elem.id+", "+func+") \n");
+	//DKLog("addEvent("+elem+","+evnt+","+func+")\n");
+	
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
 	}
@@ -474,7 +498,8 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem.id+", "+evnt+", "+func+") \n");
+	//DKLog("removeEvent("+elem+","+evnt+","+func+")\n");
+	
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
 	}
@@ -496,6 +521,8 @@ function removeEvent(elem, evnt, func)
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
+	//DKLog("setCookie("+cname+","+cvalue+","+exdays+")\n");
+	
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
@@ -505,6 +532,8 @@ function setCookie(cname, cvalue, exdays)
 /////////////////////////
 function getCookie(cname) 
 {
+	//DKLog("getCookie("+cname+")\n");
+	
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) {
@@ -518,30 +547,40 @@ function getCookie(cname)
 //////////////////////
 function WindowWidth()
 {
+	//DKLog("WindowWidth()\n");
+	
 	return document.documentElement.clientWidth;
 }
 
 ///////////////////////
 function WindowHeight()
 {
+	//DKLog("WindowHeight()\n");
+	
 	return document.documentElement.clientHeight;
 }
 
 ////////////////////
 function GetMouseX()
 {
+	//DKLog("GetMouseX()\n");
+	
 	return mouseX;
 }
 
 ////////////////////
 function GetMouseY()
 {
+	//DKLog("GetMouseY()\n");
+	
 	return mouseY;
 }
 
 //////////////////////////
 function makeStruct(names)
 {
+	//DKLog("makeStruct("+names+")\n");
+	
 	var names = names.split(' ');
 	var count = names.length;
 	function constructor(){
@@ -560,6 +599,8 @@ function makeStruct(names)
 //////////////////////////////////
 function replace(str, old, newstr)
 {
+	//DKLog("replace("+str+","+old+","+newstr+")\n");
+	
 	var re = new RegExp(old, 'g');
 	return str.replace(re, newstr);
 }
@@ -574,6 +615,8 @@ if(typeof String.prototype.trim !== 'function') {
 //////////////////
 function IsLocal()
 {
+	//DKLog("IsLocal()\n");
+	
 	switch(window.location.protocol){
 		case 'http:':
 		case 'https:':
@@ -610,7 +653,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	//DKLog("AJAX SEND: "+url);
+	//DKLog("AjaxGet("+url+","+output+")\n");
 	
 	var request = "";
 	try {
@@ -666,6 +709,8 @@ function AjaxGet(url, output)
 ////////////////////////
 function ajaxGetUrl(url)
 {
+	//DKLog("ajaxGetUrl("+url+")\n");
+	
 	var response = new Object();
 	AjaxGet(url, response);
 	
