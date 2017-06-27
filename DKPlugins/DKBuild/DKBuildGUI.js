@@ -77,13 +77,19 @@ function DKBuildGUI_OnEvent(event)
 		DKBuildGUI_BuildSelect();
 	}
 	if(DK_Id(event,"git")){
-		DKCreate("DKBuild/GitMenu.js", function(){});
+		DKCreate("DKBuild/GitMenu.js", function(){
+			DKMenu_ValidatePosition("DKBuild/GitMenu.html");
+		});
 	}
 	if(DK_Id(event,"libraries")){
-		DKCreate("DKBuild/LibraryMenu.js", function(){});
+		DKCreate("DKBuild/LibraryMenu.js", function(){
+			DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
+		});
 	}
 	if(DK_Id(event,"build")){
-		DKCreate("DKBuild/RunMenu.js", function(){});
+		DKCreate("DKBuild/RunMenu.js", function(){
+			DKMenu_ValidatePosition("DKBuild/RunMenu.html");
+		});
 	}		
 	
 	/*

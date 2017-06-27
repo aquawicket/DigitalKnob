@@ -43,36 +43,36 @@ function DKMessage_OnEvent(event)
 	}
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 function DKMessageBox_Message(message)
 {
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Hide("DKMessageCancel");
 	DKWidget_Show("DKMessageText");
-	DKWidget_Show("DKMessage.html");
+	DKWidget_Show("DKMessage/DKMessage.html");
 }
 
-////////////////////////////////////
+////////////////////////////////////////////////
 function DKMessageBox_Confirm(message, callback)
 {
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageCancel");
-	DKWidget_Show("DKMessage.html");
+	DKWidget_Show("DKMessage/DKMessage.html");
 	
 	DKMessage_callback = callback;
 }
 
-////////////////////////////////////
+/////////////////////////////////////////////////
 function DKMessageBox_GetValue(message, callback)
 {
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageInput");
 	DKWidget_Show("DKMessageCancel");
-	DKWidget_Show("DKMessage.html");
+	DKWidget_Show("DKMessage/DKMessage.html");
 	
 	DKMessage_callback = callback;
 }

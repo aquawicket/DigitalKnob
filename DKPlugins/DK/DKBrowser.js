@@ -115,53 +115,46 @@ function LoadJS(url, callback)
 //////////////////////////////////
 function CreateWidget(url, parent)
 {
-	//TODO: the id of the root element in the html file should be the file path..   I.E. /MyPlugin/MyPlugin.html
+	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	//DKLog("CreateWidget("+url+","+parent+")\n");
 	
 	if(!url){ 
 		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
-		return; 
+		return false; 
 	}
 	
 	if(filesloaded.indexOf(url) != -1){
 		DKLog(url+" already loaded \n", DKWARN);
-		return;
+		return false;
 	}
 	
-	var file = url.substring(url.lastIndexOf("/") + 1);
-	
 	var string = DK_FileToString(url);
-	//("CreateWidget(url, parent): string = "+string+"\n");
+	//Create an empty widget
 	if(!string || string == "ERROR"){ 
-		//DKLog("file not found \n", DKERROR); 
-		var file = DKFile_GetFilename(url);
-		string  = "<div id=\""+file+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
+		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 
 	var temp = document.createElement("temp");
 	temp.innerHTML = string;
 	var nodes = temp.childNodes;
 	if(!nodes){
-		DKLog("Could not get nodes from file "+url, DKERROR);
+		DKLog("CreateWidget("+url+", "+parent+"): Could not get nodes from file url \n", DKERROR);
+		return false;
 	}
-	for(var i=0; i<nodes.length; i++){
-		//if(i == 0){ nodes[i].setAttribute("id",url); } //The first node is our widget
-		if(parent){
-			parent.appendChild(nodes[i]);
-		}
-		else{
-			//DKLog("set parent to body");
-			top.document.body.appendChild(nodes[i]);
-		}
+	if(nodes.length > 1){
+		//DKLog("CreateWidget("+url+", "+parent+"): too many nodes in file \n", DKERROR);
+		//return false;
+	}
+
+	nodes[0].id = url;
+	if(parent){
+		parent.appendChild(nodes[0]);
+	}
+	else{
+		top.document.body.appendChild(nodes[0]);
+	}
 				
-		//redraw the element (bug fix)
-		//top.document.body.style.display='none';
-		//top.document.body.offsetHeight; // no need to store this anywhere, the reference is enough
-		//top.document.body.style.display='block';
-	}
-	//var file = url.substring(url.lastIndexOf("/") + 1);
 	filesloaded += url+","; //add file to loaded list
-	//DKLog("Created Widget:("+url+","+parent+")");
 }
 
 ///////////////////////////

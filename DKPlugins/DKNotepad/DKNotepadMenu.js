@@ -11,11 +11,8 @@ function DKNotepadMenu_Init()
 ////////////////////////////
 function DKNotepadMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", DKNotepadMenu_OnEvent);
-	DKRemoveEvent("DKNotepadMenu_Cut", "click", DKNotepadMenu_OnEvent);
-	DKRemoveEvent("DKNotepadMenu_Copy", "click", DKNotepadMenu_OnEvent);
-	DKRemoveEvent("DKNotepadMenu_Paste", "click", DKNotepadMenu_OnEvent);
-	DKClose("DKNotepadMenu.html");
+	DKRemoveEvents(DKNotepadMenu_OnEvent);
+	DKClose("DKNotepad/DKNotepadMenu.html");
 }
 
 /////////////////////////////////////
@@ -34,11 +31,11 @@ function DKNotepadMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepadMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadMenu.html")){
 			return;
 		}
 	}
-	DKClose("DKNotepadMenu.js");
+	DKClose("DKNotepad/DKNotepadMenu.js");
 }
 
 ////////////////////////////

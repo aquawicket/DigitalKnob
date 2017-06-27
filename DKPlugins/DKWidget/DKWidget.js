@@ -139,7 +139,7 @@ function DKClose(data)
 	}
 	if(arry[0] == "DKWidget"){
 		filesloaded = filesloaded.replace(arry[1]+",", ""); //remove from file list
-		var element = document.getElementById(file);
+		var element = document.getElementById(arry[1]);
 		if(!element){ 
 			//DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
 			return false; 

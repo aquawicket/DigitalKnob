@@ -1,7 +1,7 @@
 ////////////////////////////////////
 function DKEditor_BrowserMenu_Init()
 {
-	DKLog("DKEditor_BrowserMenu_Init()\n");	
+	//DKLog("DKEditor_BrowserMenu_Init()\n");	
 	
 	DKCreate("DKEditor/DKEditor_BrowserMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
@@ -12,9 +12,9 @@ function DKEditor_BrowserMenu_Init()
 ///////////////////////////////////
 function DKEditor_BrowserMenu_End()
 {
-	DKLog("DKEditor_BrowserMenu_End()\n");
+	//DKLog("DKEditor_BrowserMenu_End()\n");
 	
-	DKRemoveEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
+	//DKRemoveEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
 	DKRemoveEvents(DKEditor_BrowserMenu_OnEvent);
 	DKClose("DKEditor/DKEditor_BrowserMenu.html");
 }
@@ -43,7 +43,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	
 	///////////////////////////
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor_BrowserMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor/DKEditor_BrowserMenu.html")){
 			return;
 		}
 	}
@@ -64,7 +64,7 @@ function DKEditor_BrowserMenu_Populate()
 /////////////////////////////////////////
 function DKEditor_BrowserMenu_AddChrome()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Chrome");
+	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Chrome");
 	DKWidget_SetAttribute("DKEditor_BrowserMenu_Chrome", "class", "option");
 	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Chrome", "Chrome");
 	DKAddEvent("DKEditor_BrowserMenu_Chrome", "click", DKEditor_BrowserMenu_OnEvent);
@@ -74,7 +74,7 @@ function DKEditor_BrowserMenu_AddChrome()
 //////////////////////////////////////////
 function DKEditor_BrowserMenu_AddFirefox()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Firefox");
+	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Firefox");
 	DKWidget_SetAttribute("DKEditor_BrowserMenu_Firefox", "class", "option");
 	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Firefox", "Firefox");
 	DKAddEvent("DKEditor_BrowserMenu_Firefox", "click", DKEditor_BrowserMenu_OnEvent);
@@ -83,7 +83,7 @@ function DKEditor_BrowserMenu_AddFirefox()
 /////////////////////////////////////
 function DKEditor_BrowserMenu_AddIE()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_IE");
+	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_IE");
 	DKWidget_SetAttribute("DKEditor_BrowserMenu_IE", "class", "option");
 	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_IE", "Internet Explorer");
 	DKAddEvent("DKEditor_BrowserMenu_IE", "click", DKEditor_BrowserMenu_OnEvent);
@@ -92,7 +92,7 @@ function DKEditor_BrowserMenu_AddIE()
 ////////////////////////////////////////
 function DKEditor_BrowserMenu_AddOpera()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Opera");
+	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Opera");
 	DKWidget_SetAttribute("DKEditor_BrowserMenu_Opera", "class", "option");
 	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Opera", "Opera");
 	DKAddEvent("DKEditor_BrowserMenu_Opera", "click", DKEditor_BrowserMenu_OnEvent);
@@ -101,7 +101,7 @@ function DKEditor_BrowserMenu_AddOpera()
 /////////////////////////////////////////
 function DKEditor_BrowserMenu_AddSafari()
 {
-	DKWidget_CreateElement("DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Safari");
+	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Safari");
 	DKWidget_SetAttribute("DKEditor_BrowserMenu_Safari", "class", "option");
 	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Safari", "Safari");
 	DKAddEvent("DKEditor_BrowserMenu_Safari", "click", DKEditor_BrowserMenu_OnEvent);

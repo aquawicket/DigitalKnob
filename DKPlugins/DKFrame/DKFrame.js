@@ -298,6 +298,12 @@ function DKFrame_CloseButton(id)
 {
 	//DKLog("DKFrame_CloseButton("+id+")\n");
 	
+	DKFrame_Close(id);
+}
+
+//////////////////////////
+function DKFrame_Close(id)
+{
 	var frame = DKWidget_GetParent(id);
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
@@ -317,43 +323,6 @@ function DKFrame_CloseButton(id)
 	var name = frame;
 	name = name.replace("_frame", ""); //get the raw name
 	//DKLog("name = "+name+"\n");
-	DKRemoveEvent(name+"_close", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_maximize", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_minimize", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_titlebartext", "dblclick", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_frame", "resize", DKFrame_OnEvent);
-	
-	DKWidget_RemoveElement(frame);
-}
-
-//////////////////////////
-function DKFrame_Close(id)
-{
-	DKLog("DKFrame_Close("+id+")\n");
-	
-	//if(id.indexOf("/") > -1){
-	//	DKLog("DKFrame_Close(id): id contains a / \n", DKERROR);
-	//}
-	var n = id.lastIndexOf("/");
-	var file = id.substring(n+1);
-	
-	var frame = DKWidget_GetParent(file);
-	if(!frame){
-		DKLog("DKFrame_Close("+id+"): parent invalid\n", DKERROR);
-	}
-	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n");
-	//var file = DKWidget_GetFile(id);
-	//if(!file){
-	//	DKLog("DKFrame_Close("+id+"): file invalid\n", DKERROR);
-	//}
-	DKClose(file);
-	var jsfile = file.replace(".html", ".js");
-	//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
-	DKClose(jsfile);
-	
-	//remove frame events
-	var name = frame;
-	name = name.replace("_frame", ""); //get the raw name
 	DKRemoveEvent(name+"_close", "click", DKFrame_OnEvent);
 	DKRemoveEvent(name+"_maximize", "click", DKFrame_OnEvent);
 	DKRemoveEvent(name+"_minimize", "click", DKFrame_OnEvent);

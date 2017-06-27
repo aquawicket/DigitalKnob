@@ -6,7 +6,7 @@ function DKEditor_Init()
 	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
 	
 	if(DK_GetBrowser() != "Rocket"){
-		DKWidget_AddDragHandle("DKEditor.html", "DKEditor.html"); //FIXME - eats click events in Rocket
+		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
 }
 
@@ -23,7 +23,7 @@ function DKEditor_OnEvent(event)
 	
 	if(DK_Id(event, "DKEditor_edit")){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
-			DKMenu_ValidatePosition("DKEditor_Menu.html");
+			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");
 		});
 	}
 }

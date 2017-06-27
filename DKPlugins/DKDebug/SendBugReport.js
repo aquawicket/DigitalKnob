@@ -9,6 +9,7 @@ function SendBugReport_Init()
 ////////////////////////////
 function SendBugReport_End()
 {
+	DKLog("SendBugReport_End() \n");
 	DKRemoveEvents(SendBugReport_OnEvent);
 	DKClose("DKDebug/SendBugReport.html");
 }
@@ -35,12 +36,12 @@ function SendBugReport_CreateReport()
 	DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
 	SendBugReport_SendReport();
 	
-	DKWidget_Hide("SendBugReport.html");
+	DKWidget_Hide("DKDebug/SendBugReport.html");
 	//TODO: say thank you here
 	DKCreate("DKMessage/DKMessage.js", function(){
-		DKFrame_Widget("DKMessage.html");
+		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessageBox_Message("Thank You :)");	
-		DKFrame_Close("SendBugReport.html");
+		DKFrame_Close("DKDebug/SendBugReport.html");
 	});
 }
 
