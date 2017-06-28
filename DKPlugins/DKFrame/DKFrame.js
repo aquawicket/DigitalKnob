@@ -4,12 +4,16 @@ var sizes = [];
 ///////////////////////
 function DKFrame_Init()
 {
+	//DKLog("DKFrame_Init()\n");
+	
 	//DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 //////////////////////
 function DKFrame_End()
 {
+	//DKLog("DKFrame_End()\n");
+	
 	//DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
@@ -48,8 +52,9 @@ function DKFrame_OnEvent(event)
 function DKFrame_Widget(id)
 {
 	//DKLog("DKFrame_Widget("+id+")\n");
+	
 	if(!DKWidget_ElementExists(id)){
-		DKLog("DKFrame_Widget(): element does not exist\n", DKERROR);
+		DKLog("DKFrame_Widget("+id+"): element does not exist\n", DKERROR);
 		return false;
 	}
 	
@@ -107,7 +112,7 @@ function DKFrame_Widget(id)
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
-	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+") \n");
+	//DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+")\n");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 
@@ -134,7 +139,7 @@ function DKFrame_Iframe(title, url, width, height)
 /////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	//DKLog("DKFrame_CreateFrame("+title+","+width+","+height+") \n");
+	//DKLog("DKFrame_CreateFrame("+title+","+width+","+height+")\n");
 	
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
@@ -210,7 +215,7 @@ function DKFrame_CreateFrame(title, width, height)
 ////////////////////////////////////
 function DKFrame_CreateResize(frame)
 {
-	//DKLog("DKFrame_CreateResize("+frame+") \n");
+	//DKLog("DKFrame_CreateResize("+frame+")\n");
 	
 	var resize = DKWidget_CreateElement(frame, "div", "resize");
 	DKWidget_SetProperty(resize, "background-image", "url(\"DKFrame/resize.png\")");
@@ -229,7 +234,7 @@ function DKFrame_CreateResize(frame)
 ///////////////////////////////
 function DKFrame_BringToFront()
 {
-	//return;
+	//DKLog("DKFrame_BringToFront()\n");
 	
 	//DKLog("DKFrame_BringToFront()\n");
 	var id = DKWidget_GetHoverElement();
@@ -254,14 +259,15 @@ function DKFrame_BringToFront()
 ///////////////////////////////////
 function DKFrame_MinimizeButton(id)
 {
-	DKLog("DKFrame_MinimizeButton("+id+")\n");
+	//DKLog("DKFrame_MinimizeButton("+id+")\n");
+	
 	var frame = DKWidget_GetParent(id);
 }
 
 ///////////////////////////////////
 function DKFrame_MaximizeButton(id)
 {
-	DKLog("DKFrame_MaximizeButton("+id+")\n");
+	//DKLog("DKFrame_MaximizeButton("+id+")\n");
 	
 	var frame = DKWidget_GetParent(id);
 	var top = DKWidget_GetProperty(frame, "top");
@@ -304,6 +310,8 @@ function DKFrame_CloseButton(id)
 //////////////////////////
 function DKFrame_Close(id)
 {
+	//DKLog("DKFrame_Close("+id+")\n");
+	
 	var frame = DKWidget_GetParent(id);
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
@@ -336,6 +344,8 @@ function DKFrame_Close(id)
 //////////////////////////////
 function DKFrame_StoreSize(id)
 {
+	//DKLog("DKFrame_StoreSize("+id+")\n");
+	
 	var top = DKWidget_GetProperty(id, "top");
 	var bottom = DKWidget_GetProperty(id, "bottom");
 	var left = DKWidget_GetProperty(id, "left");
@@ -355,7 +365,7 @@ function DKFrame_StoreSize(id)
 ////////////////////////////////
 function DKFrame_RestoreSize(id)
 {
-	DKLog("DKFrame_RestoreSize("+id+")\n");
+	//DKLog("DKFrame_RestoreSize("+id+")\n");
 	
 	for(var i=0; i<sizes.length; i++){
 		if(sizes[i].indexOf(id) > -1){
@@ -374,6 +384,8 @@ function DKFrame_RestoreSize(id)
 ///////////////////////////
 function DKFrame_CloseAll()
 {
+	//DKLog("DKFrame_CloseAll()\n");
+	
 	var children = DKWidget_GetElements("body");
 	var arry = children.split(",");
 	for(var i=0; i<arry.length; i++){

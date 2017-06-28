@@ -47,10 +47,11 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	//DKLog("DKFileAssociation_OpenHtml("+path+")\n");
+	DKLog("DKFileAssociation_OpenHtml("+path+")\n");
 	
-	var id = DKFile_GetFilename(path);
-	DKCreate(path, function(){
+	var id = path.replace(DKAssets_LocalAssets(),"");
+	//var id = DKFile_GetFilename(path);
+	DKCreate(id, function(){
 		//DKFileAssociation_AddDragHandles(id);
 		DKFrame_Widget(id);
 		//DKFileAssociation_SelectElement(id);
