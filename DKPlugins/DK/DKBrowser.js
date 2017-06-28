@@ -481,7 +481,7 @@ function addEvent(elem, evnt, func)
 	//DKLog("addEvent("+elem+","+evnt+","+func+")\n");
 	
 	if (elem.addEventListener){  // W3C DOM
-		elem.addEventListener(evnt,func,false);
+		elem.addEventListener(evnt,func,true);
 	}
 	else if (elem.attachEvent){ // IE 8> DOM
 		if(elem == window && evnt != "resize"){

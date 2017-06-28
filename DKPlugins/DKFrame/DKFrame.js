@@ -6,7 +6,7 @@ function DKFrame_Init()
 {
 	//DKLog("DKFrame_Init()\n");
 	
-	DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
+	//DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 //////////////////////
@@ -14,13 +14,13 @@ function DKFrame_End()
 {
 	//DKLog("DKFrame_End()\n");
 	
-	DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
+	//DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {
-	//DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_Type(event, "mousedown")){
 		DKFrame_BringToFront();
@@ -167,6 +167,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(frame, "border-width", "1rem");
 	DKWidget_SetProperty(frame, "min-width", "62rem");
 	DKWidget_SetProperty(frame, "min-height", "30rem");
+	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
 	
 	//DKLog("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
 	//DKLog("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
@@ -239,20 +240,27 @@ function DKFrame_BringToFront()
 {
 	//DKLog("DKFrame_BringToFront()\n");
 	
+	//FIXME - this cancels click events
+	
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
 	
 	if(DKWidget_IsChildOf(id, "frame")){
-		DKWidget_AppendChild("body", "frame");
-		return;
+		if(document.getElementById("body").lastChild.id != "frame"){
+			DKWidget_AppendChild("body", "frame");
+			return;
+		}
 	}
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
 		if(DKWidget_IsChildOf(id, frame)){
-			DKWidget_AppendChild("body", frame);
-			return;
+			if(document.getElementById("body").lastChild.id != frame){
+				DKWidget_AppendChild("body", frame);
+				return;
+			}
 		}
 	}
+
 }
 
 ///////////////////////////////////
@@ -329,6 +337,7 @@ function DKFrame_Close(id)
 	
 	//remove frame events
 	var num = frame.replace("frame","");
+	DKRemoveEvent("frame"+num, "mousedown", DKFrame_OnEvent);
 	DKRemoveEvent("close"+num, "click", DKFrame_OnEvent);
 	DKRemoveEvent("maximize"+num, "click", DKFrame_OnEvent);
 	DKRemoveEvent("minimize"+num, "click", DKFrame_OnEvent);
