@@ -181,7 +181,7 @@ function DKSolutionMenu_Rename()
 	DKCreate("DKFile/DKSolutionRename.js", function(){
 		DKSolutionRename_SetId(DKSolutionMenu_id);
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
-		DKWidget_SetProperty("DKSolutionRename.html", "top", top+"rem");
+		DKWidget_SetProperty("DKFile/DKSolutionRename.html", "top", top+"rem");
 		var value = DKWidget_GetInnerHtml(DKSolutionMenu_id);
 		DKWidget_SetValue("DKSolutionRename_box", value);
 	});
