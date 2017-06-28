@@ -1,10 +1,12 @@
 //////////////////////////
 function DKAutomate_Init()
 {
+	//DKLog("DKAutomate_Init()\n");
+	
 	DKCreate("DKAssets");
 	DKCreate("DKTriggers/DKAutomate.html");
 	DKCreate("DKTriggers/DKAutomate2.js", function(){
-		DKAddEvent("DKAutomate.html", "keydown", DKAutomate_OnEvent);
+		DKAddEvent("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
 		//DKAddEvent("GLOBAL", "midi", DKAutomate_OnEvent);
 		//DKAddEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
 		//DKAddEvent("DKA-Title", "click", DKAutomate_OnEvent);
@@ -13,7 +15,7 @@ function DKAutomate_Init()
 		DKAddEvent("CancelButton", "click", DKAutomate_OnEvent);
 		DKAddEvent("SaveButton", "click", DKAutomate_OnEvent);
 		DKAddEvent("MidiDevices", "click", DKAutomate_OnEvent);
-		DKAddEvent("DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
+		DKAddEvent("DKTriggers/DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
 
 		DKCreate("DKTriggers/DKTriggers.js", function(){
 			DKAutomate_UpdateValues();
@@ -24,6 +26,8 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
+	//DKLog("DKAutomate_End()\n");
+	
 	DKRemoveEvents(DKAutomate_OnEvent);
 	DKClose("DKTriggers/DKTriggers.js");
 	DKClose("DKTriggers/DKAutomate2.js");
@@ -33,7 +37,7 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKAutomate_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "keydown")){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
@@ -42,7 +46,7 @@ function DKAutomate_OnEvent(event)
 	if(DK_Id(event, "DKA-NewButton")){
 		//DKLog("DKA-NewButton \n");
 		DKCreate("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage.html");
+			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
 				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -53,13 +57,13 @@ function DKAutomate_OnEvent(event)
 	
 	if(DK_Id(event, "DKA-DeleteButton")){
 		DKCreate("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage.html");
+			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
 				DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(rval == true){
 					if(!current_trigger){ return; }
 					DKTrigger_RemoveTrigger(current_trigger);
-					DKSendEvent("DKAutomate.html", "UpdateValues", "");
+					DKSendEvent("DKTriggers/DKAutomate.html", "UpdateValues", "");
 					DKAutomate_SelectValue("");
 				}
 			});
@@ -84,7 +88,7 @@ function DKAutomate_OnEvent(event)
 	
 	if(DK_Id(event, "MidiDevices")){
 		DKCreate("DKMidi/DKMidiDialog.js", function(){
-			DKWidget_Show("DKMidiDialog.html");
+			DKWidget_Show("DKMidi/DKMidiDialog.html");
 		});
 	}
 	
@@ -96,7 +100,8 @@ function DKAutomate_OnEvent(event)
 ////////////////////////////////////
 function DKAutomate_NewTrigger(name)
 {
-	DKLog("DKAutomate_NewTrigger("+name+") \n", DKDEBUG)
+	//DKLog("DKAutomate_NewTrigger("+name+")\n");
+	
 	DKTrigger_AddTrigger(name);
 	DKAutomate_UpdateValues();
 	DKAutomate_SelectValue(name);
@@ -105,7 +110,8 @@ function DKAutomate_NewTrigger(name)
 //////////////////////////////////
 function DKAutomate_UpdateValues()
 {
-	DKLog("DKAutomate_UpdateValues() \n");
+	//DKLog("DKAutomate_UpdateValues()\n");
+	
 	DKWidget_SetInnerHtml("DKA-TriggerList", "");
 
 	if(!triggers){return;}
@@ -120,24 +126,28 @@ function DKAutomate_UpdateValues()
 //////////////////////////////////////
 function DKAutomate_SelectValue(value)
 {
-	//DKLog("("+value+") \n");
+	//DKLog("DKAutomate_SelectValue("+value+")\n");
 	
 	DKTrigger_SelectTrigger(value);
-	DKSendEvent("DKAutomate2.html", "SelectTrigger", value);
+	DKSendEvent("DKTriggers/DKAutomate2.html", "SelectTrigger", value);
 	DKAutomate_UpdateSelection(value);
 }
 
 ////////////////////////////////
 function DKAutomate_CancelSave()
 {
+	//DKLog("DKAutomate_CancelSave()\n");
+	
 	//DKTrigger_LoadTriggers();
-	DKSendEvent("DKAutomate.html", "UpdateValues", "");
+	DKSendEvent("DKTriggers/DKAutomate.html", "UpdateValues", "");
 	DKAutomate_SelectValue(current_trigger);
 }
 
 //////////////////////////////////////////
 function DKAutomate_UpdateSelection(value)
 {
+	//DKLog("DKAutomate_UpdateSelection("+value+")\n");
+	
 	if(!value){ return; }
 	var temp = DKWidget_GetElements("DKA-TriggerList");
 	var options = temp.split(",");

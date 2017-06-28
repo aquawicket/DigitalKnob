@@ -1,6 +1,8 @@
 //////////////////////////
 function makeStruct(names)
 {
+	//DKLog("makeStruct(names)\n");
+	
 	var names = names.split(' ');
 	var count = names.length;
 	function constructor(){
@@ -29,6 +31,8 @@ var trigger_events;
 //////////////////////////
 function DKTriggers_Init()
 {
+	//DKLog("DKTriggers_Init()\n");
+	
 	current_trigger;
 	triggers = [];
 	Cause = makeStruct("trigger command var1 var2 var3");
@@ -50,18 +54,15 @@ function DKTriggers_Init()
 /////////////////////////
 function DKTriggers_End()
 {
-	DKRemoveEvent("GLOBAL", "gui", DKTrigger_OnEvent); //C++
-	DKRemoveEvent("GLOBAL", "midi", DKTrigger_OnEvent); //C++
-	DKRemoveEvent("GLOBAL", "keydown", DKTrigger_OnEvent);
-	DKRemoveEvent("GLOBAL", "keyup", DKTrigger_OnEvent);
-	DKRemoveEvent("GLOBAL", "resize", DKTrigger_OnEvent);
-	DKRemoveEvent("GLOBAL", "ToggleTriggers", DKTrigger_OnEvent); //JS
+	//DKLog("DKTriggers_End()\n");
+	
+	DKRemoveEvents(DKTrigger_OnEvent);
 }
 
 /////////////////////////////////
 function DKTrigger_OnEvent(event)
 {
-	DKLog("DKTrigger_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKTrigger_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "gui")){ //C++
 		var arry = DK_GetValue(event).split(",");
@@ -111,26 +112,32 @@ function DKTrigger_OnEvent(event)
 ///////////////////////
 function DKTrigger_On()
 {
+	//DKLog("DKTrigger_On()\n");
+	
 	trigger_events = true;
 }
 
-//////////////////////
+////////////////////////
 function DKTrigger_Off()
 {
+	//DKLog("DKTrigger_Off()\n");
+	
 	trigger_events = false;
 }
 
-/////////////////////////////////
+///////////////////////////////////
 function DKTrigger_AddTrigger(name)
 {
-	DKLog("AddTrigger("+name+")\n");
+	//DKLog("AddTrigger("+name+")\n");
+	
 	triggers.push(name);
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 function DKTrigger_RemoveTrigger(name)
 {
-	DKLog("RemoveTrigger("+name+")\n");
+	//DKLog("RemoveTrigger("+name+")\n");
+	
 	for(var i = 0; i < triggers.length; i++){
 		if(name == triggers[i]){
 			triggers.splice(i, 1);
@@ -148,9 +155,11 @@ function DKTrigger_RemoveTrigger(name)
 	}
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 function DKTrigger_SelectTrigger(name)
 {
+	//DKLog("DKTrigger_SelectTrigger("+name+")\n");
+	
 	current_trigger = "";
 	for(var i = 0; i < triggers.length; i++){
 		if(name == triggers[i]){
@@ -160,9 +169,11 @@ function DKTrigger_SelectTrigger(name)
 	}
 }
 
-/////////////////////////////////////////////
+///////////////////////////////////////////////
 function DKTrigger_RenameTrigger(name, newname)
 {
+	//DKLog("DKTrigger_RenameTrigger("+name+","+newname+")\n");
+	
 	for(var c=0; c < causes.length; c++){
 		if(name == causes[c].trigger){
 			causes[c].trigger = newname;
@@ -184,38 +195,45 @@ function DKTrigger_RenameTrigger(name, newname)
 	}
 }
 
-///////////////////////////
+/////////////////////////////
 function DKTrigger_NewCause()
 {
+	//DKLog("DKTrigger_NewCause()\n");
+	
 	var cause = new Cause(current_trigger, "", "", "", "");
 	causes.push(cause);
 }
 
-///////////////////////////
+//////////////////////////////
 function DKTrigger_NewEffect()
 {
+	//DKLog("DKTrigger_NewEffect()\n");
+	
 	var effect = new Effect(current_trigger, "", "", "", "");
 	effects.push(effect);
 }
 
-/////////////////////////////////
+///////////////////////////////////
 function DKTrigger_DeleteCause(num)
 {
-	DKLog("DeleteCause "+num+"\n");
+	//DKLog("DKTrigger_DeleteCause("+num+")\n");
+	
 	causes.splice(Number(num), 1);
 }
 
-//////////////////////////////////
+////////////////////////////////////
 function DKTrigger_DeleteEffect(num)
 {
-	DKLog("DeleteEffect "+num+"\n");
+	//DKLog("DKTrigger_DeleteEffect("+num+")\n");
+	
 	effects.splice(Number(num), 1);
 }
 
-/////////////////////////////////////
+///////////////////////////////////////
 function DKTrigger_ProcessGui(type, id)
 {
-	//DKLog("Gui: "+id+" "+type+",\n");
+	//DKLog("DKTrigger_ProcessGui("+type+","+id+")\n");
+	
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "gui" &&
 			causes[c].var1 == id &&
@@ -226,10 +244,11 @@ function DKTrigger_ProcessGui(type, id)
 	}
 }
 
-////////////////////////////////////
+//////////////////////////////////////
 function DKTrigger_ProcessKeyDown(num)
 {
 	//DKLog("DKTrigger_ProcessKeyDown("+num+")\n");
+	
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "keydown" &&
 			causes[c].var1 == num
@@ -239,10 +258,11 @@ function DKTrigger_ProcessKeyDown(num)
 	}
 }
 
-//////////////////////////////////
+////////////////////////////////////
 function DKTrigger_ProcessKeyUp(num)
 {
 	//DKLog("DKTrigger_ProcessKeyUp("+num+")\n);
+	
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "keyup" &&
 			causes[c].var1 == num
@@ -252,10 +272,11 @@ function DKTrigger_ProcessKeyUp(num)
 	}
 }
 
-//////////////////////////////////////
+////////////////////////////////////////
 function DKTrigger_ProcessWindowResize()
 {
 	//DKLog("DKTrigger_ProcessWindowResize()\n");
+	
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "window_resize"){
 			DKTrigger_FireTrigger(causes[c].trigger);
@@ -263,10 +284,10 @@ function DKTrigger_ProcessWindowResize()
 	}
 }
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////
 function DKTrigger_ProcessMidi(channel, note, value)
 {
-	DKLog("DKTrigger_ProcessMidi: Ch:"+String(channel)+" Note:"+String(note)+" Value:"+String(value)+"\n");
+	//DKLog("DKTrigger_ProcessMidi("+channel+","+note+","+value+")\n");
 
 	for(var c=0; c < causes.length; c++){
 		if(causes[c].command == "midi" &&
@@ -278,9 +299,11 @@ function DKTrigger_ProcessMidi(channel, note, value)
 	}
 }
 
-/////////////////////////////////////
+///////////////////////////////////////
 function DKTrigger_FireTrigger(trigger)
 {
+	//DKLog("DKTrigger_FireTrigger("+trigger+")\n");
+	
 	if(trigger_events != true){ return; }
 	DKLog("Fire Trigger: "+trigger+"\n");
 	
@@ -365,7 +388,7 @@ function DKTrigger_FireTrigger(trigger)
 /////////////////////////////////////
 function DKTrigger_LoadTriggers(file)
 {
-	DKLog("DKTrigger_LoadTriggers("+file+")\n");
+	//DKLog("DKTrigger_LoadTriggers("+file+")\n");
 	
 	var assets = DKAssets_LocalAssets();
 	if(!DKFile_Exists(assets+file)){
@@ -413,7 +436,8 @@ function DKTrigger_LoadTriggers(file)
 /////////////////////////////////////
 function DKTrigger_SaveTriggers(file)
 {
-	DKLog("DKTrigger_SaveTriggers("+assets+file+") \n");
+	//DKLog("DKTrigger_SaveTriggers("+file+")\n");
+	
 	var assets = DKAssets_LocalAssets();
 	DKFile_StringToFile(" ", assets+file); //clear file
 	
@@ -446,9 +470,11 @@ function DKTrigger_SaveTriggers(file)
 	DKTrigger_AddEvents();
 }
 
-////////////////////////////
+//////////////////////////////
 function DKTrigger_AddEvents()
 {
+	//DKLog("DKTrigger_AddEvents()\n");
+	
 	DKLog("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].command == "gui"){
