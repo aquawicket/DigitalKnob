@@ -593,18 +593,23 @@ function DKRemoveEvents(Function)
 
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
-			//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
+			DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
+			var element;
 			if(events[i] == "GLOBAL"){
-				var element = window;
+				element = window;
 			}
 			else{
-				var element = document.getElementById(events[i]);
+				element = document.getElementById(events[i]);
 			}
+			
 			if(element){
 				//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+","+events[i+2].name+"): Removing Event \n");
 				events.splice(i, 3);
 				removeEvent(element, events[i+1], Function);
 				i--;
+			}
+			else{
+				DKLog("DKRemoveEvents("+Function.name+"): element "+events[i]+" is invalid\n", DKWARN);
 			}
 		}
 	}

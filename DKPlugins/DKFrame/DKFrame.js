@@ -309,13 +309,14 @@ function DKFrame_Close(id)
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		if(arry[i].indexOf(".html") > -1){
-			//DKLog("DKFrame_CloseButton("+id+"): .html="+arry[i]+"\n");
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
-			DKClose(file);
+			
 			var jsfile = file.replace(".html", ".js");
-			//DKLog("DKFrame_CloseButton("+id+"): .js="+jsfile+"\n");
 			DKClose(jsfile);
+			
+			var htmlfile = file.replace(".js", ".html");
+			DKClose(htmlfile);
 		}
 	}
 	
