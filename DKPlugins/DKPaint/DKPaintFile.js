@@ -13,7 +13,7 @@ function DKPaintFile_Init()
 function DKPaintFile_End()
 {
 	DKRemoveEvents(DKPaintFile_OnEvent);
-	DKClose("DKPaintFile.html");
+	DKClose("DKPaint/DKPaintFile.html");
 }
 
 ///////////////////////////////////
@@ -31,6 +31,7 @@ function DKPaintFile_OnEvent(event)
 		DKPaintFile_SaveAs();
 	}
 	if(DK_Id(event,"DKPaintFile_Exit")){
+		DKClose("DKPaint/DKPaintFile.js");
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
@@ -39,7 +40,7 @@ function DKPaintFile_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKPaintFile.js");
+	DKClose("DKPaint/DKPaintFile.js");
 }
 
 ///////////////////////////
