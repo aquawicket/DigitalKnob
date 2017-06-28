@@ -4,17 +4,20 @@ var event_id;
 /////////////////////////////
 function DKColorPicker_Init()
 {
+	//DKLog("DKColorPicker_Init()\n");
+	
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
-	DKAddEvent("DKColorPickerClose", "click", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
 }
 
 ////////////////////////////
 function DKColorPicker_End()
 {
+	//DKLog("DKColorPicker_End()\n");
+	
 	DKRemoveEvents(DKColorPicker_OnEvent);
 	DKClose("DKColorPicker/DKColorPicker.html");
 }
@@ -22,7 +25,7 @@ function DKColorPicker_End()
 /////////////////////////////////////
 function DKColorPicker_OnEvent(event)
 {
-	DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");
@@ -53,6 +56,8 @@ function DKColorPicker_OnEvent(event)
 /////////////////////////////////
 function DKColorPicker_ColorBar()
 {
+	//DKLog("DKColorPicker_ColorBar()\n");
+	
 	var temp = DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
@@ -71,6 +76,8 @@ function DKColorPicker_ColorBar()
 /////////////////////////////////
 function DKColorPicker_ColorBox()
 {
+	//DKLog("DKColorPicker_ColorBox()\n");
+	
 	var temp = DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 

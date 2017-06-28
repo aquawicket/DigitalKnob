@@ -150,7 +150,7 @@ function CreateWidget(url, parent)
 
 	if(nodes[0].id != url){
 		nodes[0].id = url;
-		DKLog("CreateWidget("+url+",parent): please rename the id", DKWARN);
+		DKLog("CreateWidget("+url+",parent): please fix the id", DKWARN);
 	}
 	if(parent){
 		parent.appendChild(nodes[0]);
