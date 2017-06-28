@@ -20,7 +20,7 @@ function DKFrame_End()
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {
-	DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 
 	if(DK_Type(event, "mousedown")){
 		DKFrame_BringToFront();
