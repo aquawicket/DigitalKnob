@@ -7,7 +7,8 @@ function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not ava
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	//DKLog("DKCreate("+data+")");
+	//DKLog("DKCreate("+data+")\n");
+	
 	var arry = data.split(",");
 	
 	if(arry[0].indexOf(".html") > -1){

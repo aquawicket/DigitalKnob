@@ -13,7 +13,7 @@ function DKFileAssociation_OnEvent(event)
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	DKLog("DKFileAssociation_Open("+file+") \n");
+	//DKLog("DKFileAssociation_Open("+file+") \n");
 	
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".html") != -1 ){ 
@@ -93,9 +93,11 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
+	DKLog("DKFileAssociation_OpenJS("+path+")\n");
+	
 	var id = path.replace(DKAssets_LocalAssets(),"");
-	id = id.replace(".js",".html");
 	DKCreate(id, function(){
+		id = id.replace(".js",".html");
 		DKFrame_Widget(id);
 	});
 }

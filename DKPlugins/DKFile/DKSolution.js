@@ -146,6 +146,13 @@ function DKSolution_UpdatePath(path)
 {
 	//DKLog("DKSolution_UpdatePath("+path+")\n");
 	
+	//reload events
+	DKRemoveEvents(DKSolution_OnEvent);
+	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
+	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
+	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
+	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);

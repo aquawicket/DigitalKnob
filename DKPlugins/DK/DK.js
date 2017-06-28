@@ -593,7 +593,7 @@ function DKRemoveEvents(Function)
 
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
-			DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
+			//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
 			var element;
 			if(events[i] == "GLOBAL"){
 				element = window;
