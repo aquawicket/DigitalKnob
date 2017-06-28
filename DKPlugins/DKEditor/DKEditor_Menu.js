@@ -26,7 +26,7 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	DKLog("DKEditor_Menu_End()\n");
+	//DKLog("DKEditor_Menu_End()\n");
 	
 	//DKRemoveEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
 	DKRemoveEvents(DKEditor_Menu_OnEvent);
