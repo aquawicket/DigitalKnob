@@ -1,8 +1,10 @@
 ///////////////////////////
 function DKAutomate2_Init()
 {
-	DKCreate("DKTriggers/DKAutomate2.html,DKAutomate.html", function(){
-		DKAddEvent("DKAutomate2.html", "SelectTrigger", DKAutomate2_OnEvent);
+	//DKLog("DKAutomate2_Init()\n");
+	
+	DKCreate("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
+		DKAddEvent("DKTriggers/DKAutomate2.html", "SelectTrigger", DKAutomate2_OnEvent);
 		DKAddEvent("TriggerName", "input", DKAutomate2_OnEvent);
 	});
 }
@@ -10,6 +12,8 @@ function DKAutomate2_Init()
 //////////////////////////
 function DKAutomate2_End()
 {
+	//DKLog("DKAutomate2_End()\n");
+	
 	DKRemoveEvents(DKAutomate2_OnEvent);
 	DKClose("DKTriggers/DKAutomate2.html");
 }
@@ -17,7 +21,7 @@ function DKAutomate2_End()
 ///////////////////////////////////
 function DKAutomate2_OnEvent(event)
 {
-	DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKAutomate2_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"NewCause")){
 		DKTrigger_NewCause();
@@ -84,7 +88,7 @@ function DKAutomate2_OnEvent(event)
 ////////////////////////////////////
 function DKAutomate2_SelectTrigger()
 {
-	DKLog("DKAutomate2_SelectTrigger()\n");
+	//DKLog("DKAutomate2_SelectTrigger()\n");
 	
 	DKWidget_SetValue("TriggerName", current_trigger);
 	DKWidget_SetInnerHtml("Causes", "");
