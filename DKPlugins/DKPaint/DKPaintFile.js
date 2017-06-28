@@ -19,7 +19,7 @@ function DKPaintFile_End()
 ///////////////////////////////////
 function DKPaintFile_OnEvent(event)
 {
-	DKLog("DKPaintFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKPaintFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKPaintFile_Open")){
 		DKPaintFile_Open();

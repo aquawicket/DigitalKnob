@@ -498,7 +498,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem+","+evnt+","+func+")\n");
+	//DKLog("removeEvent("+elem+","+evnt+","+func.name+")\n");
 	
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);

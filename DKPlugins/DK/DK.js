@@ -570,8 +570,8 @@ function DKRemoveEvent(id, type, Function)
 			if(events[i+1] == type){
 				if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
 					//DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): Removing event \n");
-					events.splice(i, 3);
 					removeEvent(element, type, Function);
+					events.splice(i, 3);
 					i--;
 				}
 			}
@@ -594,7 +594,7 @@ function DKRemoveEvents(Function)
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
 			//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
-			var element;
+			//var element;
 			if(events[i] == "GLOBAL"){
 				element = window;
 			}
@@ -604,8 +604,8 @@ function DKRemoveEvents(Function)
 			
 			if(element){
 				//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+","+events[i+2].name+"): Removing Event \n");
-				events.splice(i, 3);
 				removeEvent(element, events[i+1], Function);
+				events.splice(i, 3);
 				i--;
 			}
 			else{
