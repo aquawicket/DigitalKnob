@@ -11,7 +11,6 @@ function DKPaintMenu_Init()
 //////////////////////////
 function DKPaintMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", DKPaintMenu_OnEvent);
 	DKRemoveEvents(DKPaintMenu_OnEvent);
 	DKClose("DKPaint/DKPaintMenu.html");
 }
@@ -32,7 +31,7 @@ function DKPaintMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaintMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaint/DKPaintMenu.html")){
 			return;
 		}
 	}
