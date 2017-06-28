@@ -20,7 +20,14 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);	
+	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
+	
+	DKCreate("DKTooltip/DKTooltip.js", function(){
+		DKTooltip_Add("DKEditor_Menu_Notes", "notes...");
+		DKTooltip_Add("DKEditor_Menu_Reload", "refresh the page");
+		DKTooltip_Add("DKEditor_Menu_Assets", "view DKTemplate asset files");
+		DKTooltip_Add("DKEditor_Menu_DevTools", "open dev tools");
+	});
 }
 
 ////////////////////////////
