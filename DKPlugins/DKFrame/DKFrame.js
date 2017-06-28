@@ -6,7 +6,7 @@ function DKFrame_Init()
 {
 	//DKLog("DKFrame_Init()\n");
 	
-	//DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
+	DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 //////////////////////
@@ -14,7 +14,7 @@ function DKFrame_End()
 {
 	//DKLog("DKFrame_End()\n");
 	
-	//DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
+	DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 ///////////////////////////////
@@ -59,7 +59,10 @@ function DKFrame_Widget(id)
 	}
 	
 	//stop if frame already exsists, multiple windows not ready yet.
-	var title = id.replace(".html", "");
+	
+	var title = DKFile_GetFilename(id);
+	title = title.replace(".html", "");
+	
 	if(DKWidget_ElementExists(title+"_frame")){
 		DKLog("DKFrame_Widget("+id+"): frame already exists\n", DKWARN);
 		return;
@@ -151,7 +154,7 @@ function DKFrame_CreateFrame(title, width, height)
 	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 21);
 	var newleft = parseFloat((window_width / 2) - (width / 2));
 	
-	var frame = DKWidget_CreateElement("body", "div", title+"_frame");
+	var frame = DKWidget_CreateElement("body", "div", "frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
 	DKWidget_SetProperty(frame, "overflow", "hidden");
 	DKWidget_SetProperty(frame, "top", newtop.toString()+"px");
@@ -170,13 +173,13 @@ function DKFrame_CreateFrame(title, width, height)
 	//DKLog("DKFrame_Widget("+id+"): frame width="+width+"\n");
 	//DKLog("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
 	
-	var titlebar = DKWidget_CreateElement(frame, "div", title+"_titlebar");
+	var titlebar = DKWidget_CreateElement(frame, "div", "titlebar");
 	DKWidget_SetProperty(titlebar, "position", "absolute");
 	DKWidget_SetProperty(titlebar, "width", "100%");
 	DKWidget_SetProperty(titlebar, "height", "21rem");
 	DKWidget_SetProperty(titlebar, "background-color", "rgb(200,200,200)");
 	
-	var titlebartext = DKWidget_CreateElement(titlebar, "div", title+"_titlebartext");
+	var titlebartext = DKWidget_CreateElement(titlebar, "div", "titlebartext");
 	DKWidget_SetProperty(titlebartext, "position", "absolute");
 	DKWidget_SetProperty(titlebartext, "width", "100%");
 	DKWidget_SetProperty(titlebartext, "height", "100%");
@@ -185,7 +188,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_AddDragHandle(titlebartext, frame);
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
-	var minimize = DKWidget_CreateElement(frame, "img", title+"_minimize");
+	var minimize = DKWidget_CreateElement(frame, "img", "minimize");
 	DKWidget_SetAttribute(minimize, "src", "DKFrame/minimize.png");
 	DKWidget_SetProperty(minimize, "position", "absolute");
 	DKWidget_SetProperty(minimize, "top", "0rem");
@@ -193,7 +196,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(minimize, "height", "20rem");
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
-	var maximize = DKWidget_CreateElement(frame, "img", title+"_maximize");
+	var maximize = DKWidget_CreateElement(frame, "img", "maximize");
 	DKWidget_SetAttribute(maximize, "src", "DKFrame/maximize.png");
 	DKWidget_SetProperty(maximize, "position", "absolute");
 	DKWidget_SetProperty(maximize, "top", "0rem");
@@ -201,7 +204,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(maximize, "height", "20rem");
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
-	var close = DKWidget_CreateElement(frame, "img", title+"_close");
+	var close = DKWidget_CreateElement(frame, "img", "close");
 	DKWidget_SetAttribute(close, "src", "DKFrame/close.png");
 	DKWidget_SetProperty(close, "position", "absolute");
 	DKWidget_SetProperty(close, "top", "0rem");
@@ -236,20 +239,16 @@ function DKFrame_BringToFront()
 {
 	//DKLog("DKFrame_BringToFront()\n");
 	
-	//DKLog("DKFrame_BringToFront()\n");
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
-	//DKLog("DKWidget_GetFocusElement() = "+id+"\n");
+	
 	if(DKWidget_IsChildOf(id, "frame")){
-		//DKLog("DKWidget_AppendChild(body, frame)\n");
 		DKWidget_AppendChild("body", "frame");
 		return;
 	}
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
-		//DKLog("DKFrame_BringToFront(): frame="+frame+"\n");
 		if(DKWidget_IsChildOf(id, frame)){
-			//DKLog("DKWidget_AppendChild(body, "+frame+")\n");
 			DKWidget_AppendChild("body", frame);
 			return;
 		}
@@ -319,24 +318,22 @@ function DKFrame_Close(id)
 		if(arry[i].indexOf(".html") > -1){
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
-			
 			var jsfile = file.replace(".html", ".js");
 			DKClose(jsfile);
-			
 			var htmlfile = file.replace(".js", ".html");
 			DKClose(htmlfile);
 		}
 	}
 	
+	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n");
+	
 	//remove frame events
-	var name = frame;
-	name = name.replace("_frame", ""); //get the raw name
-	//DKLog("name = "+name+"\n");
-	DKRemoveEvent(name+"_close", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_maximize", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_minimize", "click", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_titlebartext", "dblclick", DKFrame_OnEvent);
-	DKRemoveEvent(name+"_frame", "resize", DKFrame_OnEvent);
+	var num = frame.replace("frame","");
+	DKRemoveEvent("close"+num, "click", DKFrame_OnEvent);
+	DKRemoveEvent("maximize"+num, "click", DKFrame_OnEvent);
+	DKRemoveEvent("minimize"+num, "click", DKFrame_OnEvent);
+	DKRemoveEvent("titlebartext"+num, "dblclick", DKFrame_OnEvent);
+	DKRemoveEvent("frame"+num, "resize", DKFrame_OnEvent);
 	
 	DKWidget_RemoveElement(frame);
 }

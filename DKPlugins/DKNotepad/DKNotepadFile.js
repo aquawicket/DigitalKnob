@@ -41,6 +41,7 @@ function DKNotepadFile_OnEvent(event)
 		DKNotepadFile_SaveAs();
 	}
 	if(DK_Id(event,"DKNotepadFile_Exit")){
+		DKClose("DKNotepad/DKNotepadFile.js");
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
