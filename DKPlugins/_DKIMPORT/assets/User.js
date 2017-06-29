@@ -1,10 +1,11 @@
-var USE_SDL = 0;
-var USE_ROCKET = 0;
-var USE_CEF = 1;
-var USE_WEBVIEW = 1;
-var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
+var USE_CEF = 1;     //Desktop
+var USE_WEBVIEW = 1; //Android, iOS?
+var USE_SDL = 0;     //Use with caution
+var USE_ROCKET = 0;  //Use with caution
 
-	
+var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
+//var DKApp_url = "http://digitalknob.com/MyApp";
+
 //Validate settings
 if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){  USE_CEF = 0;  }
 else{ 	USE_WEBVIEW = 0;  }
@@ -15,20 +16,20 @@ function User_OnEvent(event)  //Duktape
 {
 	DKLog("User_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){
+	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
 		DKCef_SetUrl("DKCef_frame", DK_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
 	}
-	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){
-		DK_Exit();
-	}
-	if(DK_Type(event, "resize")){
+	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
+	}
+	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){ //NOTE: this is the back button on Android
+		DK_Exit();
 	}
 }
 
-////////////////////////////////
-if(DK_GetJavascript() == "Duktape"){
-	if(USE_SDL && USE_ROCKET && USE_CEF){
+////////////////////////////////////
+if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can support
+	if(USE_ROCKET && USE_CEF){
 		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
@@ -47,7 +48,7 @@ if(DK_GetJavascript() == "Duktape"){
 		DKCef_SetFocus(iframe);
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", User_OnEvent);
 	}
-	else if(USE_SDL && USE_ROCKET){
+	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
@@ -75,15 +76,16 @@ if(DK_GetJavascript() == "Duktape"){
 		DK_SetFramerate(5);
 		DKCreate("DKWindow");
 	}
-	else if(USE_WEBVIEW){
+	else if(USE_WEBVIEW){ //TODO
 		DKLog("Creating WEBVIEW -> GUI \n");
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
 	
 	DKCreate("DKTray/DKTray.js", function(){});
-	//DKCreate("DKDebug/DKDebug.js", function(){});
+	DKCreate("DKDebug/DKDebug.js", function(){});
+	DKCreate("DKCef/DKDevTools.js", function(){});
 }
-else{  //V8 or WEBVIEW
+else{  //Javascript: V8, WEBVIEW or Duktape
 	LoadPage();
 }
 
@@ -95,7 +97,17 @@ function LoadPage()
 	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
-	//DKCreate("YourApp.js", function(){ /* process */ });
+	DKCreate("DKFrame/DKFrame.js", function(){
+	DKCreate("DKFrame/DKMenu.js", function(){
+	DKCreate("DKDebug/DKDebug.js", function(){
+	DKCreate("DKEditor/DKEditor.js", function(){
+		
 	});
 	});
+	});
+	});
+	});
+	});
+	
+	//DKCreate("DKUpdate");
 }
