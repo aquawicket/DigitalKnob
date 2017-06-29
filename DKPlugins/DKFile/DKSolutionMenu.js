@@ -121,15 +121,15 @@ function DKSolutionMenu_NewFile()
 	
 	//Find the id
 	var elements = DKWidget_GetElements("DKSolutionMenu");
-	DKLog("elements = "+elements+"\n");
+	//DKLog("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){
-		DKLog("arry["+i+"] ="+arry[i]+"\n");
+		//DKLog("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
-		DKLog("arry["+i+"] ="+value+"\n");
+		//DKLog("arry["+i+"] ="+value+"\n");
 		if(value == DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
-			DKLog("id = "+arry[i]+"\n");
+			//DKLog("id = "+arry[i]+"\n");
 			break;
 		}
 	}
@@ -153,15 +153,15 @@ function DKSolutionMenu_NewFolder()
 	
 	//Find the id
 	var elements = DKWidget_GetElements("DKSolutionMenu");
-	DKLog("elements = "+elements+"\n");
+	//DKLog("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){
-		DKLog("arry["+i+"] ="+arry[i]+"\n");
+		//DKLog("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
-		DKLog("arry["+i+"] ="+value+"\n");
+		//DKLog("arry["+i+"] ="+value+"\n");
 		if(value == DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
-			DKLog("id = "+arry[i]+"\n");
+			//DKLog("id = "+arry[i]+"\n");
 			break;
 		}
 	}
@@ -196,7 +196,7 @@ function DKSolutionMenu_Delete()
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessageBox_Confirm("delete this file?", function(rval){
-			DKLog("DKMessageBox_Confirm(): rval = "+rval+"\n");
+			//DKLog("DKMessageBox_Confirm(): rval = "+rval+"\n");
 			if(rval == true){
 				DKFile_Delete(DKSolutionMenu_file);
 				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));

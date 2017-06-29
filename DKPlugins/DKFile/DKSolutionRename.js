@@ -16,6 +16,7 @@ function DKSolutionRename_End()
 {
 	//DKLog("DKSolutionRename_End()\n");
 	
+	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKRemoveEvents(DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }
@@ -65,10 +66,10 @@ function DKSolutionRename_Rename()
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
 	var newvalue = oldvalue;
 	newvalue = newvalue.replace(oldhtml, newhtml);
-	DKLog("oldhtml = "+oldhtml+"\n");
-	DKLog("oldvalue = "+oldvalue+"\n");
-	DKLog("newhtml = "+newhtml+"\n");
-	DKLog("newvalue = "+newvalue+"\n");
+	//DKLog("oldhtml = "+oldhtml+"\n");
+	//DKLog("oldvalue = "+oldvalue+"\n");
+	//DKLog("newhtml = "+newhtml+"\n");
+	//DKLog("newvalue = "+newvalue+"\n");
 	
 	if(DKFile_Rename(oldvalue, newvalue, true) == false){
 		return; 
