@@ -23,17 +23,18 @@ function DKTooltip_OnEvent(event)
 		return;
 	}
 	
-	DKClose("DKTooltip/DKTooltip.js");
+	DKClose("DKTooltip/DKTooltip.html");
 }
 
 //////////////////////////////////
 function DKTooltip_Add(id, string)
 {
 	//DKLog("DKTooltip_Add("+id+","+string+")\n");
+	
 	DKWidget_SetAttribute(id, "tooltip", string);
 	DKAddEvent(id, "mouseenter", DKTooltip_OnEvent);
+	DKAddEvent(id, "mouseout", DKTooltip_OnEvent);
 	DKAddEvent("GLOBAL", "mousedown", DKTooltip_OnEvent);
-	DKAddEvent("GLOBAL", "mouseout", DKTooltip_OnEvent);
 }
 
 ///////////////////////////
@@ -44,7 +45,7 @@ function DKTooltip_Show(id)
 	setTimeout(function(){
 		var hover = DKWidget_GetHoverElement();
 		if(hover != id){
-			DKClose("DKTooltip/DKTooltip.js");
+			DKClose("DKTooltip/DKTooltip.html");
 			return;
 		}
 		DKCreate("DKTooltip/DKTooltip.html");
