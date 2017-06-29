@@ -16,7 +16,6 @@ function DKSolutionRename_End()
 {
 	//DKLog("DKSolutionRename_End()\n");
 	
-	DKRemoveEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKRemoveEvents(DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }

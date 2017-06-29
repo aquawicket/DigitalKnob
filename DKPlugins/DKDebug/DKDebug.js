@@ -13,7 +13,7 @@ function DKDebug_End()
 {
 	//DKLog("DKDebug_End()\n");
 	
-	DKRemoveEvent("GLOBAL", "keypress", DKDebug_OnEvent);
+	DKRemoveEvents(DKDebug_OnEvent);
 }
 
 ///////////////////////////////

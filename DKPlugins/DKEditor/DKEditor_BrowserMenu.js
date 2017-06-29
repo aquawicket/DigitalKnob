@@ -14,7 +14,6 @@ function DKEditor_BrowserMenu_End()
 {
 	//DKLog("DKEditor_BrowserMenu_End()\n");
 	
-	//DKRemoveEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
 	DKRemoveEvents(DKEditor_BrowserMenu_OnEvent);
 	DKClose("DKEditor/DKEditor_BrowserMenu.html");
 }

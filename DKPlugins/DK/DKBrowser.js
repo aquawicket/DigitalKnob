@@ -34,17 +34,17 @@ document.onmousemove = function(e){
 }
 
 /////////////////////
-function LoadCSS(url)
+function LoadCss(url)
 {
-	//DKLog("LoadCSS("+url+")\n");
+	//DKLog("LoadCss("+url+")\n");
 	
 	if(!url){ 
-		DKLog("LoadCSS("+url+"): url invalid\n", DKERROR);
+		DKLog("LoadCss("+url+"): url invalid\n", DKERROR);
 		return; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("LoadCSS("+url+"): url already loaded \n", DKWARN);
+		DKLog("LoadCss("+url+"): url already loaded \n", DKWARN);
 		callback && callback();
 		return;
 	}
@@ -58,18 +58,18 @@ function LoadCSS(url)
 }
 
 //////////////////////////////
-function LoadJS(url, callback)
+function LoadJs(url, callback)
 {
-	//DKLog("LoadJS("+url+")\n");
+	//DKLog("LoadJs("+url+")\n");
 	
 	if(!url){ 
-		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
+		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
 		return; 
 	}
 	
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("LoadJS("+url+", callback): url already loaded \n", DKWARN);
+		DKLog("LoadJs("+url+", callback): url already loaded \n", DKWARN);
 		//callback && callback();
 		return;
 	}
@@ -78,7 +78,7 @@ function LoadJS(url, callback)
 	
 	// Call the js init function
 	if(!file){ 
-		DKLog("LoadJS("+url+"): file invalid\n", DKERROR);
+		DKLog("LoadJs("+url+"): file invalid\n", DKERROR);
 		return; 
 	}
 	
@@ -125,19 +125,19 @@ function LoadJS(url, callback)
 	};
 }
 
-//////////////////////////////////
-function CreateWidget(url, parent)
+//////////////////////////////
+function LoadHtml(url, parent)
 {
-	//DKLog("CreateWidget("+url+","+parent+")\n");
+	//DKLog("LoadHtml("+url+","+parent+")\n");
 	
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		DKLog("LoadJS("+url+"): url invalid\n", DKERROR);
+		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("CreateWidget("+url+", parent): url already loaded \n", DKWARN);
+		DKLog("LoadHtml("+url+", parent): url already loaded \n", DKWARN);
 		return false;
 	}
 	
@@ -151,17 +151,17 @@ function CreateWidget(url, parent)
 	temp.innerHTML = string;
 	var nodes = temp.childNodes;
 	if(!nodes){
-		DKLog("CreateWidget("+url+", "+parent+"): Could not get nodes from file url \n", DKERROR);
+		DKLog("LoadHtml("+url+", "+parent+"): Could not get nodes from file url \n", DKERROR);
 		return false;
 	}
 	if(nodes.length > 1){
-		//DKLog("CreateWidget("+url+", "+parent+"): too many nodes in file \n", DKERROR);
+		//DKLog("LoadHtml("+url+", "+parent+"): too many nodes in file \n", DKERROR);
 		//return false;
 	}
 
 	if(nodes[0].id != url){
 		nodes[0].id = url;
-		DKLog("CreateWidget("+url+",parent): please fix the id", DKWARN);
+		DKLog("LoadHtml("+url+",parent): please fix the id", DKWARN);
 	}
 	if(parent){
 		parent.appendChild(nodes[0]);

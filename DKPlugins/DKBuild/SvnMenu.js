@@ -12,7 +12,6 @@ function SvnMenu_Init()
 //////////////////////
 function SvnMenu_End()
 {
-	DKRemoveEvent("GLOBAL", "mousedown", SvnMenu_OnEvent);
 	DKRemoveEvents(SvnMenu_OnEvent);
 	DKClose("DKBuild/SvnMenu.html");
 }

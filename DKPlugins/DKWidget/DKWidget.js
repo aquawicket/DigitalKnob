@@ -28,7 +28,7 @@ function DKCreate(data, callback)
 	}
 	
 	if(arry[0] == "DKJavascript"){
-		LoadJS(arry[1], function(){
+		LoadJs(arry[1], function(){
 			if(callback){
 				callback();
 			}
@@ -53,7 +53,7 @@ function DKCreate(data, callback)
 		}
 	}
 	if(arry[0] == "DKCss"){
-		LoadCSS(arry[1]);
+		LoadCss(arry[1]);
 		if(callback){
 			callback();
 		}
@@ -177,11 +177,11 @@ function DKWidget_NewWidget(url, parent)
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
 		if(!element){ DKLog("DKWidget(): could not get parent ("+parent+") \n", DKERROR); return false; }
-		CreateWidget(url, element);
+		LoadHtml(url, element);
 		DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	else{
-		CreateWidget(url);
+		LoadHtml(url);
 		DKWidget_AttachDrags(filename); //Attach Drags
 	}
 }
