@@ -10,6 +10,10 @@ function DKNotepad_Init()
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_File", "click", DKNotepad_OnEvent);
+	DKAddEvent("DKNotepad_Edit", "click", DKNotepad_OnEvent);
+	DKAddEvent("DKNotepad_Format", "click", DKNotepad_OnEvent);
+	DKAddEvent("DKNotepad_View", "click", DKNotepad_OnEvent);
+	DKAddEvent("DKNotepad_Help", "click", DKNotepad_OnEvent);
 }
 
 ////////////////////////
@@ -37,6 +41,18 @@ function DKNotepad_OnEvent(event)
 	//}
 	if(DK_Id(event,"DKNotepad_File")){
 		DKCreate("DKNotepad/DKNotepadFile.js", function(){});
+	}
+	if(DK_Id(event,"DKNotepad_Edit")){
+		DKCreate("DKNotepad/DKNotepadEdit.js", function(){});
+	}
+	if(DK_Id(event,"DKNotepad_Format")){
+		DKCreate("DKNotepad/DKNotepadFormat.js", function(){});
+	}
+	if(DK_Id(event,"DKNotepad_View")){
+		DKCreate("DKNotepad/DKNotepadView.js", function(){});
+	}
+	if(DK_Id(event,"DKNotepad_Help")){
+		DKCreate("DKNotepad/DKNotepadHelp.js", function(){});
 	}
 }
 

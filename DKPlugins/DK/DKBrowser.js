@@ -16,7 +16,6 @@ document.body.style.cursor = "default";
 var mouseX;
 var mouseY;
 var events = [];
-var filesloaded = "";
 
 ///////////////////////////////////
 document.onmousemove = function(e){
@@ -39,6 +38,17 @@ function LoadCSS(url)
 {
 	//DKLog("LoadCSS("+url+")\n");
 	
+	if(!url){ 
+		DKLog("LoadCSS("+url+"): url invalid\n", DKERROR);
+		return; 
+	}
+	
+	if(DK_GetObjects().indexOf(url) != -1){
+		DKLog("LoadCSS("+url+"): url already loaded \n", DKWARN);
+		callback && callback();
+		return;
+	}
+	
 	var link = document.createElement('link');
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
@@ -57,8 +67,9 @@ function LoadJS(url, callback)
 		return; 
 	}
 	
-	if(filesloaded.indexOf(url) != -1){
-		DKLog(url+" already loaded \n", DKWARN);
+	
+	if(DK_GetObjects().indexOf(url) != -1){
+		DKLog("LoadJS("+url+", callback): url already loaded \n", DKWARN);
 		callback && callback();
 		return;
 	}
@@ -108,7 +119,6 @@ function LoadJS(url, callback)
 				DKLog(name+" is not callable \n", DKWARN);
 			}
 			
-			filesloaded += url+","; //add file to loaded list
 			done = true;
 			callback && callback();
 		}
@@ -126,8 +136,8 @@ function CreateWidget(url, parent)
 		return false; 
 	}
 	
-	if(filesloaded.indexOf(url) != -1){
-		DKLog(url+" already loaded \n", DKWARN);
+	if(DK_GetObjects().indexOf(url) != -1){
+		DKLog("CreateWidget("+url+", parent): url already loaded \n", DKWARN);
 		return false;
 	}
 	
@@ -159,8 +169,6 @@ function CreateWidget(url, parent)
 	else{
 		top.document.body.appendChild(nodes[0]);
 	}
-				
-	filesloaded += url+","; //add file to loaded list
 }
 
 ///////////////////////////

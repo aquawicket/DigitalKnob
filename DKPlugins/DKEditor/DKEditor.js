@@ -11,9 +11,11 @@ function DKEditor_Init()
 		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
 	
+	/*
 	DKCreate("DKTooltip/DKTooltip.js", function(){
 		DKTooltip_Add("DKEditor_edit", "Admin tools");
 	});
+	*/
 }
 
 ///////////////////////
