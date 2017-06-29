@@ -47,7 +47,7 @@ void DKWidget::Init()
 	//make sure the parent exists
 	if(!DKWidget::GetElementById(data[2])){
 		DKLog("DKWidget::Init(): the parent element ("+data[2]+") is invalid. \n", DKWARN);
-		DKLog("Changing parent to \"body\" \n", DKWARN);
+		DKLog("DKWidget::Init(): Changing parent to \"body\" \n", DKWARN);
 		data[2] = "body";
 	}
 	
@@ -68,7 +68,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	if(!root){ return; }
 	DKString id = root->GetId().CString();
 	if(id.empty()){ return; }
-	//DKLog("RemoveWidget("+id+")\n", DKINFO);
+	//DKLog("DKWidget::RemoveWidget("+id+")\n", DKINFO);
 	
 	//Remove all child DKWidgets and events
 	RemoveAllEventListeners(id);
@@ -140,7 +140,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	}
 	DKString _id = firstChild->GetId().CString();
 	if(!same(_id,id)){
-		DKLog("CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
+		DKLog("DKWidget::CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
 		DKString str;
 		GetInnerHtml(temp, str);
 		replace(str, "id=\""+_id+"\"", "id=\""+id+"\""); //Set the id to the filename (example.html)
@@ -429,14 +429,14 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 		}
 		i++;
 	}
-	//DKLog("GetAvailableId("+id+")-> "+out+"\n");
+	//DKLog("DKWidget::GetAvailableId("+id+")-> "+out+"\n");
 }
 
 ///////////////////////////////////////////////////////
 DKElement* DKWidget::GetElementById(const DKString& id)
 {
 	if(id.empty()){
-		DKLog("GetElementById(): id empty. \n",DKWARN);
+		DKLog("DKWidget::GetElementById(): id empty. \n",DKWARN);
 		return NULL;
 	}
 	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
@@ -445,7 +445,7 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 	}
 	DKElement* element = doc->GetElementById(id.c_str());
 	if(!element){
-		//DKLog("GetElementById("+id+"): could not find element. \n", DKWARN);
+		//DKLog("DKWidget::GetElementById("+id+"): could not find element. \n", DKWARN);
 		return 0;
 	}
 	return element;
@@ -580,7 +580,7 @@ bool DKWidget::RemoveEventListener(const DKString& id, const DKString& type)
 //////////////////////////////////////////////////////////
 bool DKWidget::RemoveAllEventListeners(const DKString& id)
 {
-	//DKLog("Removing All Events for: "+id+"\n", DKDEBUG);
+	//DKLog("DKWidget::RemoveAllEventListeners("+id+")\n", DKDEBUG);
 	DKEvent::RemoveEvents(id);
 	/*
 	RemoveEventListener(GetElementById(id), "mousedown");
@@ -825,7 +825,7 @@ bool DKWidget::Toggle(DKElement* element)
 bool DKWidget::Show(DKElement* element)
 {
 	if(!element){
-		//DKLog("Show(): element not valid \n", DKWARN);
+		//DKLog("DKWidget::Show(): element not valid \n", DKWARN);
 		return false;
 	}
 	if(!SetProperty(element, "display", "block")){ return false; }
@@ -836,7 +836,7 @@ bool DKWidget::Show(DKElement* element)
 bool DKWidget::Hide(DKElement* element)
 {
 	if(!element){
-		//DKLog("Hide(): element not valid \n", DKWARN);
+		//DKLog("DKWidget::Hide(): element not valid \n", DKWARN);
 		return false;
 	}
 	if(!SetProperty(element, "display", "none")){ return false; }
@@ -857,11 +857,11 @@ bool DKWidget::GetParent(DKElement* element, DKString& parent)
 bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 {
 	if(!parent){
-		DKLog("AppendChild(): parent invalid\n", DKERROR);
+		DKLog("DKWidget::AppendChild(): parent invalid\n", DKERROR);
 		return false;
 	}
 	if(!element){
-		DKLog("AppendChild(): element invalid\n", DKERROR);
+		DKLog("DKWidget::AppendChild(): element invalid\n", DKERROR);
 		return false;
 	}
 	

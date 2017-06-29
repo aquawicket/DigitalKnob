@@ -696,6 +696,7 @@ function DK_FileToString(url)
 	return ajaxGetUrl(url);
 }
 
+/*
 /////////////////////////////
 function DK_GetMouseWindowX()
 {
@@ -711,6 +712,7 @@ function DK_GetMouseWindowY()
 	
 	return mouseY;
 }
+*/
 
 ///////////////////////////////
 function DK_Sleep(milliseconds)
