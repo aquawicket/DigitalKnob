@@ -80,6 +80,9 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKLog("Creating WEBVIEW -> GUI \n");
 		DKAddEvent("GLOBAL", "keydown", User_OnEvent);
 	}
+	else{
+		DKLog("Console App\n"); //FIXME
+	}
 	
 	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
