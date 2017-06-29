@@ -5,10 +5,10 @@ function DKMessage_Init()
 {	
 	//DKLog("DKMessage_Init()\n");
 
-	DKCreate("DKMessage/DKMessage.html", function(){
+	DKCreate("DKMessage/DKMessage.html");//, function(){
 		DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
 		DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
-	});
+	//});
 }
 
 ////////////////////////

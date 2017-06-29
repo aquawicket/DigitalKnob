@@ -39,7 +39,6 @@ function DKCreate(data, callback)
 		){
 			return false;
 		}
-		return true;
 	}
 	if(arry[0] == "DKWidget"){
 		if(!DKWidget_NewWidget(arry[1], arry[2])){
