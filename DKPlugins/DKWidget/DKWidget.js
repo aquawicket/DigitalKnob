@@ -28,14 +28,18 @@ function DKCreate(data, callback)
 	}
 	
 	if(arry[0] == "DKJavascript"){
-		LoadJs(arry[1], function(rval){
+		if(!LoadJs(arry[1], function(rval){
 			if(callback){ 
 				callback(rval); 
 			}
 			else{
 				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
 			}
-		});
+		})
+		){
+			return false;
+		}
+		return true;
 	}
 	if(arry[0] == "DKWidget"){
 		if(!DKWidget_NewWidget(arry[1], arry[2])){

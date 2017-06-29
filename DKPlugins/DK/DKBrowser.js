@@ -61,7 +61,7 @@ function LoadCss(url)
 //////////////////////////////
 function LoadJs(url, callback)
 {
-	//DKLog("LoadJs("+url+")\n");
+	//DKLog("LoadJs("+url+", callback)\n");
 	
 	if(!url){ 
 		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
@@ -123,6 +123,8 @@ function LoadJs(url, callback)
 			callback && callback(true);
 		}
 	};
+	
+	return true;
 }
 
 //////////////////////////////
