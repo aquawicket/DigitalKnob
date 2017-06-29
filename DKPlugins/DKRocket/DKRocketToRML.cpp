@@ -105,7 +105,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
 	// <iframe> tags
 	if(!element){
-		DKLog("DKRocketToRML::PostProcess(): element invalid", DKERROR);
+		DKLog("DKRocketToRML::PostProcess(): element invalid", DKWARN);
 		return false;
 	}
 	Rocket::Core::ElementList iframes;

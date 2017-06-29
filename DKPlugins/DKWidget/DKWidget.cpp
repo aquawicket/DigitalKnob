@@ -310,10 +310,7 @@ DKElement* DKWidget::GetElement(const DKString& id)
 /////////////////////////////////////////////////////////////////
 bool DKWidget::GetOuterHtml(const DKString& id, DKString& string)
 {
-	if(!GetOuterHtml(GetElementById(id), string)){
-		return false;
-	}
-	return true;
+	return GetOuterHtml(GetElementById(id), string);
 }
 
 /////////////////////////////////////////////////////////////////
@@ -454,87 +451,73 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 //////////////////////////////////////////////////////////
 bool DKWidget::GetFile(const DKString& id, DKString& file)
 {
-	if(!GetFile(GetElementById(id), file)){ return false; }
-	return true;
+	return GetFile(GetElementById(id), file);
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKWidget::SetFile(const DKString& id, const DKString& file)
 {
-	if(!SetFile(GetElementById(id), file)){ return false; }
-	return true;
+	return SetFile(GetElementById(id), file);
 }
 
 //////////////////////////////////////////
 bool DKWidget::Visible(const DKString& id)
 {
-	if(!Visible(GetElementById(id))){ return false; }
-	return true;
+	return Visible(GetElementById(id));
 }
 
 /////////////////////////////////////////
 bool DKWidget::Toggle(const DKString& id)
 {
-	if(!Toggle(GetElementById(id))){ return false; }
-	return true;
+	return Toggle(GetElementById(id));
 }
 
 ///////////////////////////////////////
 bool DKWidget::Show(const DKString& id)
 {
-	if(!Show(GetElementById(id))){ return false; }
-	return true;
+	return Show(GetElementById(id));
 }
 
 ///////////////////////////////////////
 bool DKWidget::Hide(const DKString& id)
 {
-	//DKLog("DKWidget::Hide("+id+")\n");
-	if(!Hide(GetElementById(id))){ return false; }
-	return true;
+	return Hide(GetElementById(id));
 }
 
 //////////////////////////////////////////////////////////////
 bool DKWidget::GetParent(const DKString& id, DKString& parent)
 {
-	DKElement* par = NULL;
-	if(!GetParent(GetElementById(id), parent)){ return false; }
-	return true;
+	return GetParent(GetElementById(id), parent);
 }
 
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::AppendChild(const DKString& parent, const DKString& id)
 {
-	if(!AppendChild(GetElementById(parent), GetElementById(id))){ return false; }
-	return true;
+	return AppendChild(GetElementById(parent), GetElementById(id));
 }
 
 ///////////////////////////////////////////////////////////////////////
 bool DKWidget::PrependChild(const DKString& parent, const DKString& id)
 {
-	if(!PrependChild(GetElementById(parent), GetElementById(id))){ return false; }
-	return true;
+	return PrependChild(GetElementById(parent), GetElementById(id));
 }
 
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::AppendChild(const DKString& parent, DKElement* element)
 {
-	if(!AppendChild(GetElementById(parent), element)){ return false; }
-	return true;
+	return AppendChild(GetElementById(parent), element);
 }
 
 ////////////////////////////////////////////////////////////////////////////
 bool DKWidget::InsertBefore(const DKString& parent, const DKString& element)
 {
-	if(!InsertBefore(GetElementById(parent), GetElementById(element))){ return false; }
-	return true;
+	return InsertBefore(GetElementById(parent), GetElementById(element));
 }
 
 ///////////////////////////////////////////////////////////////////////
 bool DKWidget::InsertBefore(const DKString& parent, DKElement* element)
 {
-	if(!InsertBefore(GetElementById(parent), element)){ return false; }
-	return true;
+	return InsertBefore(GetElementById(parent), element);
 }
 
 ////////////////////////////////////////////////
@@ -565,8 +548,7 @@ bool DKWidget::RemoveElement(const DKString& id)
 /////////////////////////////////////////////////////////////////////////
 bool DKWidget::AddEventListener(const DKString& id, const DKString& type)
 {
-	if(!AddEventListener(GetElementById(id), type)){ return false; }
-	return true;
+	return AddEventListener(GetElementById(id), type);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -580,24 +562,7 @@ bool DKWidget::RemoveEventListener(const DKString& id, const DKString& type)
 //////////////////////////////////////////////////////////
 bool DKWidget::RemoveAllEventListeners(const DKString& id)
 {
-	//DKLog("DKWidget::RemoveAllEventListeners("+id+")\n", DKDEBUG);
-	DKEvent::RemoveEvents(id);
-	/*
-	RemoveEventListener(GetElementById(id), "mousedown");
-	RemoveEventListener(GetElementById(id), "mouseup");
-	RemoveEventListener(GetElementById(id), "mouseover");
-	RemoveEventListener(GetElementById(id), "mouseout");
-	RemoveEventListener(GetElementById(id), "click");
-	RemoveEventListener(GetElementById(id), "keydown");
-	RemoveEventListener(GetElementById(id), "keyup");
-	RemoveEventListener(GetElementById(id), "change");
-	RemoveEventListener(GetElementById(id), "input");
-	RemoveEventListener(GetElementById(id), "resize");
-	RemoveEventListener(GetElementById(id), "window_resize");
-	RemoveEventListener(GetElementById(id), "contextmenu");
-	RemoveEventListener(GetElementById(id), "rightclick");
-	*/
-	return true;
+	return DKEvent::RemoveEvents(id);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -607,8 +572,7 @@ bool DKWidget::GetAttribute(const DKString& id, const DKString& name, DKString& 
 #ifndef LINUX
 	//if(!DKUtil::InMainThread()){ return false; } //Talking to the GUI from other threads is bad.
 #endif
-	if(!GetAttribute(GetElementById(id), name, value)){ return false; }
-	return true;
+	return GetAttribute(GetElementById(id), name, value);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -618,101 +582,84 @@ bool DKWidget::SetAttribute(const DKString& id, const DKString& name, const DKSt
 #ifndef LINUX
 	//if(!DKUtil::InMainThread()){ return false; }  //Talking to the GUI from other threads is bad.
 #endif
-	if(!SetAttribute(GetElementById(id), name, value)){ return false; }
-	return true;
+	return SetAttribute(GetElementById(id), name, value);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::GetProperty(const DKString& id, const DKString& name, DKString& value)
 {
-	if(!GetProperty(GetElementById(id), name, value)){ return false; }
-	return true;
+	return GetProperty(GetElementById(id), name, value);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetProperty(const DKString& id, const DKString& name, const DKString& value)
 {
-	if(!SetProperty(GetElementById(id), name, value)){
-		DKLog("DKWidget::SetProperty("+id+","+name+","+value+"): failed\n", DKERROR);
-		return false; 
-	}		
-	return true;
+	return SetProperty(GetElementById(id), name, value);
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKWidget::GetInnerHtml(const DKString& id, DKString& value)
 {
-	if(!GetInnerHtml(GetElementById(id), value)){ return false; }
-	return true;
+	return GetInnerHtml(GetElementById(id), value);
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKWidget::GetInnerHtmlString(const DKString& id, DKString& value)
 {
-	if(!GetInnerHtmlString(GetElementById(id), value)){ return false; }
-	return true;
+	return GetInnerHtmlString(GetElementById(id), value);
 }
 
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::SetInnerHtml(const DKString& id, const DKString& value)
 {
-	if(!SetInnerHtml(GetElementById(id), value)){ return false; }
-	return true;
+	return SetInnerHtml(GetElementById(id), value);
 }
 
 ////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetInnerHtmlString(const DKString& id, const DKString& value)
 {
-	if(!SetInnerHtmlString(GetElementById(id), value)){ return false; }
-	return true;
+	return SetInnerHtmlString(GetElementById(id), value);
 }
 
 ////////////////////////////////////////////////////////////
 bool DKWidget::GetValue(const DKString& id, DKString& value)
 {
-	if(!GetValue(GetElementById(id), value)){ return false; }
-	return true;
+	return GetValue(GetElementById(id), value);
 }
 
 ///////////////////////////////////////////////////////
 bool DKWidget::GetValue(const DKString& id, int& value)
 {
-	if(!GetValue(GetElementById(id), value)){ return false; }
-	return true;
+	return GetValue(GetElementById(id), value);
 }
 
 //////////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(const DKString& id, const DKString& value)
 {
-	if(!SetValue(GetElementById(id), value)){ return false; }
-	return true;
+	return SetValue(GetElementById(id), value);
 }
 
 /////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(const DKString& id, const int& value)
 {
-	if(!SetValue(GetElementById(id), value)){ return false; }
-	return true;
+	return SetValue(GetElementById(id), value);
 }
 
 ////////////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(const DKString& id, const DKProperty* value)
 {
-	if(!SetValue(GetElementById(id), value)){ return false; }
-	return true;
+	return SetValue(GetElementById(id), value);
 }
 
 //////////////////////////////////////////////
 bool DKWidget::ScrollToTop(const DKString& id)
 {
-	if(!ScrollToTop(GetElementById(id))){ return false; }
-	return true;
+	return ScrollToTop(GetElementById(id));
 }
 
 /////////////////////////////////////////////////
 bool DKWidget::ScrollToBottom(const DKString& id)
 {
-	if(!ScrollToBottom(GetElementById(id))){ return false; }
-	return true;
+	return ScrollToBottom(GetElementById(id));
 }
 
 //////////////////////////////////////////////////////////////////
@@ -725,8 +672,7 @@ bool DKWidget::GetClientWidth(const DKString& id, DKString& value)
 ////////////////////////////////////////////////////////////////////
 bool DKWidget::GetClientHeight(const DKString& id, DKString& value)
 {
-	if (!GetClientHeight(GetElementById(id), value)) { return false; }
-	return true;
+	return GetClientHeight(GetElementById(id), value);
 }
 
 
@@ -857,7 +803,7 @@ bool DKWidget::GetParent(DKElement* element, DKString& parent)
 bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 {
 	if(!parent){
-		DKLog("DKWidget::AppendChild(): parent invalid\n", DKERROR);
+		DKLog("DKWidget::AppendChild(): parent invalid\n", DKWARN);
 		return false;
 	}
 	if(!element){
@@ -1051,7 +997,7 @@ bool DKWidget::GetProperty(DKElement* element, const DKString& name, DKString& v
 bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKString& value)
 {
 	if(!element){
-		DKLog("DKWidget::SetProperty(): element invalid. \n", DKERROR);
+		DKLog("DKWidget::SetProperty(): element invalid. \n", DKWARN);
 		return false;
 	}
 	if(name.empty()){
@@ -1114,7 +1060,7 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 ////////////////////////////////////////////////////////////////
 bool DKWidget::GetInnerHtml(DKElement* element, DKString& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	value = element->GetInnerRML().CString();
 	return true;
 }
@@ -1122,7 +1068,7 @@ bool DKWidget::GetInnerHtml(DKElement* element, DKString& value)
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::GetInnerHtmlString(DKElement* element, DKString& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	for(int i = 0; i < element->GetNumChildren(); i++){
 		DKString test = element->GetChild(i)->GetTagName().CString();
 		if(has(test,"#")){
@@ -1143,7 +1089,7 @@ bool DKWidget::GetInnerHtmlString(DKElement* element, DKString& value)
 bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 {
 	//FIXME - can't clear a select element ??
-	if(!element){return false;}
+	if(!element){ return false; }
 	if(same(element->GetTagName().CString(), "select")){
 		int e = element->GetNumChildren(true);
 		for(int i=0; i<e; ++i){
@@ -1157,7 +1103,7 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 ////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetInnerHtmlString(DKElement* element, const DKString& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	for(int i = 0; i < element->GetNumChildren(); i++){
 		DKString test = element->GetChild(i)->GetTagName().CString();
 		if(has(test,"#")){
@@ -1203,7 +1149,7 @@ bool DKWidget::GetValue(DKElement* element, DKString& value)
 //////////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(DKElement* element, const DKString& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKElementFormControl* input = static_cast<DKElementFormControl*>(element);
 	if(input && (same(element->GetTagName().CString(),"input") || 
 				 same(element->GetTagName().CString(),"textarea") ||
@@ -1218,9 +1164,9 @@ bool DKWidget::SetValue(DKElement* element, const DKString& value)
 ///////////////////////////////////////////////////////
 bool DKWidget::GetValue(DKElement* element, int& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKString temp;
-	if(!GetValue(element, temp)){return false;}
+	if(!GetValue(element, temp)){ return false; }
 	value = toInt(temp);
 	return true;
 }
@@ -1228,7 +1174,7 @@ bool DKWidget::GetValue(DKElement* element, int& value)
 /////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(DKElement* element, const int& value)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKElementFormControl* input = static_cast<DKElementFormControl*>(element);
 	input->SetValue(toString(value).c_str());
 	return true;
@@ -1237,7 +1183,7 @@ bool DKWidget::SetValue(DKElement* element, const int& value)
 ///////////////////////////////////////////////////////////////////
 bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKElementFormControl* input = static_cast<DKElementFormControl*>(element);
 	if(!prop || prop->parser_index == -1){
 		input->SetValue("");
@@ -1324,8 +1270,7 @@ bool DKWidget::IsChildOf(const DKString& id, const DKString& parent)
 ////////////////////////////////////////////////////////////////////
 bool DKWidget::IsChildOf(DKElement* element, const DKString& parent)
 {
-	if(!IsChildOf(element, GetElementById(parent))){ return false; }
-	return true;
+	return IsChildOf(element, GetElementById(parent));
 }
 
 ///////////////////////////////////////////////////////////////
@@ -1388,16 +1333,13 @@ bool DKWidget::GetMouseWindowY(int& y_out)
 //////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::GetMouseElementPosition(const DKString& id, int& x_out, int& y_out)
 {
-	if(!DKWidget::GetMouseElementPosition(GetElementById(id), x_out, y_out)){
-		return false;
-	}
-	return true;
+	return DKWidget::GetMouseElementPosition(GetElementById(id), x_out, y_out);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_out)
 {
-	if(!element){return false;}
+	if(!element){ return false; }
 
 	int mouseX;
 	int mouseY;
@@ -1407,7 +1349,6 @@ bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_ou
 	int temp_x = 0;
 	int temp_y = 0;
 	
-
 	DKElement* ele = element;
 	DKElement* root = GetElementById("body");
 	while(ele != root){
@@ -1478,7 +1419,7 @@ bool DKWidget::MoveToFront(const DKString& id)
 		the_panel->AppendChild(temp);//items in .html files need to stay within the .html file
 	}
 	*/
-	return true;
+	return false;
 }
 
 /////////////////////////////////////////////////
@@ -1630,8 +1571,7 @@ bool DKWidget::GetElements(const DKString& id, DKStringArray& elements)
 ///////////////////////////////////////////////////////////////////////
 bool DKWidget::GetElements(const DKString& id, DKElementList& elements)
 {
-	if(!GetElements(GetElementById(id), elements)){ return false; }
-	return true;
+	return GetElements(GetElementById(id), elements);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -1722,7 +1662,7 @@ bool DKWidget::AddDragHandle(const DKString& id, const DKString& drag)
 bool DKWidget::RemoveDragHandle(const DKString& id)
 {
 	DKElement* element = DKWidget::GetElementById(id);
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKString tag = element->GetTagName().CString();
 	if(same(tag, "handle")){
 		DKWidget::RemoveElement(id);
@@ -1762,7 +1702,7 @@ bool DKWidget::AddResizeHandle(const DKString& id, const DKString& resize)
 bool DKWidget::RemoveResizeHandle(const DKString& id)
 {
 	DKElement* element = DKWidget::GetElementById(id);
-	if(!element){return false;}
+	if(!element){ return false; }
 	DKString tag = element->GetTagName().CString();
 	if(same(tag, "handle")){
 		DKWidget::RemoveElement(id);
@@ -1775,7 +1715,7 @@ bool DKWidget::RemoveResizeHandle(const DKString& id)
 DKString DKWidget::GetFirstChild(const DKString& id)
 {
 	DKElement* element = DKWidget::GetElementById(id);
-	if(!element){return 0;}
+	if(!element){ return 0; }
 	DKElement* child = element->GetFirstChild();
 	if(!child){return "";}
 	return DKWidget::GetId(child);
