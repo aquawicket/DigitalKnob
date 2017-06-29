@@ -90,7 +90,7 @@ bool DKCefHandler::SetIcon(void* input, void* output)
 		DKLog("DKCefHandler::SetIcon(): hwnd is invalid \n", DKERROR);
 		return false;
 	}
-	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE);
+	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
 	if(!hinstance){
 		DKLog("DKCefHandler::SetIcon(): hinstance is invalid \n", DKERROR);
 		return false;
