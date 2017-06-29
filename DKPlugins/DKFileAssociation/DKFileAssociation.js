@@ -51,11 +51,11 @@ function DKFileAssociation_OpenHtml(path)
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	//var id = DKFile_GetFilename(path);
-	DKCreate(id, function(){
+	if(DKCreate(id)){
 		//DKFileAssociation_AddDragHandles(id);
 		DKFrame_Widget(id);
 		//DKFileAssociation_SelectElement(id);
-	});
+	};
 	
 	
 	//FIXME

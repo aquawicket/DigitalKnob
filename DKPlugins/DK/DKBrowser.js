@@ -169,6 +169,8 @@ function CreateWidget(url, parent)
 	else{
 		top.document.body.appendChild(nodes[0]);
 	}
+	
+	return true;
 }
 
 ///////////////////////////
