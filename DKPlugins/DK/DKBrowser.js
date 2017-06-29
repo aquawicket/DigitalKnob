@@ -70,7 +70,7 @@ function LoadJS(url, callback)
 	
 	if(DK_GetObjects().indexOf(url) != -1){
 		DKLog("LoadJS("+url+", callback): url already loaded \n", DKWARN);
-		callback && callback();
+		//callback && callback();
 		return;
 	}
 	

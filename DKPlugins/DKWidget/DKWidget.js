@@ -129,7 +129,6 @@ function DKClose(data)
 		else{
 			DKLog(name+" is not callable \n", DKWARN);
 		}
-		filesloaded = filesloaded.replace(arry[1]+",", ""); //remove from file list
 		var script = document.getElementById(arry[1]);
 		if(!script){
 			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
@@ -139,7 +138,6 @@ function DKClose(data)
 		//DKLog("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKWidget"){
-		filesloaded = filesloaded.replace(arry[1]+",", ""); //remove from file list
 		var element = document.getElementById(arry[1]);
 		if(!element){ 
 			//DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
@@ -166,29 +164,14 @@ function DKWidget_NewWidget(url, parent)
 {
 	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
 	
-	if(!url){ return; }
-	//DKLog("DKWidget("+url+", "+parent+") \n");
-	
-	//if(filesloaded.indexOf(url) != -1){
-		//DKLog(url+" already loaded \n", DKWARN);
-		//return;
-	//}
+	if(!url){ return false; }
 	
 	if(url.indexOf(".html") == -1){ 
-		DKLog(url+" is not a valid .html file \n", DKERROR);
-		return;
+		DKLog("DKWidget_NewWidget("+url+", parent): url is not a valid .html file \n", DKERROR);
+		return false;
 	}
 	
 	if(url == ".html"){ url = "New.html"; }
-	/*
-	else{
-		var assets = DKAssets_LocalAssets();
-		if(!DKFile_Exists(assets+url)){
-			DKLog("DKWidget_NewWidget("+assets+url+"): file does not exist \n", DKWARN);
-			//return;
-		}
-	}
-	*/
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
@@ -201,8 +184,6 @@ function DKWidget_NewWidget(url, parent)
 		CreateWidget(url);
 		DKWidget_AttachDrags(filename); //Attach Drags
 	}
-	
-	//filesloaded += url+","; //add file to loaded list
 }
 
 ////////////////////////////////////
