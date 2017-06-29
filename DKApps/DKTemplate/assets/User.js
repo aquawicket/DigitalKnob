@@ -97,8 +97,8 @@ function LoadPage()
 	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
-	DKCreate("DKFrame/DKFrame.js", function(){
-	DKCreate("DKFrame/DKMenu.js", function(){
+	DKCreate("DKGui/DKFrame.js", function(){
+	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("Template.js", function(){
 	DKCreate("DKEditor/DKEditor.js", function(){
