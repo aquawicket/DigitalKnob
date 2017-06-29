@@ -165,7 +165,7 @@ function DKBuildConsole_SelectType()
 	DKLog("**** SELECT BUILD TYPE ****\n");
 	DKLog("1. Debug\n");
 	DKLog("2. Release\n");
-	DKLog("3. All\n");
+	//DKLog("3. All\n");
 	DKLog("ESC. exit\n\n");
 	
 	var key = 10;
@@ -182,9 +182,9 @@ function DKBuildConsole_SelectType()
 	else if(key == 50){
 		TYPE = "Release";
 	}
-	else if(key == 51){
-		TYPE = "ALL";
-	}
+	//else if(key == 51){
+	//	TYPE = "ALL";
+	//}
 	else{
 		DKLog("\n INVALID OPTION\n\n", DKERROR);
 	}
