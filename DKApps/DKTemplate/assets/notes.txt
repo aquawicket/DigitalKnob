@@ -3,4 +3,4 @@
 * The app should run on every system the same.
 
 *** TOTO ***
-* Need a lot of work DKRocket.cpp and DKWidget.cpp
+* Need a lot of work in DKRocket.cpp and DKWidget.cpp
