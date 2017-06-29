@@ -1,1 +1,1 @@
-DKASSETS(DKGui)
+DKASSETS(DKFrame)
