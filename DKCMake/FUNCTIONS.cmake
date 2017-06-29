@@ -4,16 +4,14 @@
 
 SET(UPX ON)
 
-####################
-FUNCTION(DKLOG text)
-	DKLOG(text STATUS)
-ENDFUNCTION()
-
 ########################
-FUNCTION(DKLOG text lvl)
-	##TODO - set up the lvl parameter
-	MESSAGE(text)
-ENDFUNCTION()
+#FUNCTION(DKLOG text lvl)
+#	IF(${lvl} STREQUAL "DKINFO")
+#		MESSAGE(STATUS ${text})
+#	ELSEIF(${lvl} STREQUAL "DKERROR")
+#		MESSAGE(FATAL_ERROR ${text})
+#	ENDIF()
+#ENDFUNCTION()
 	
 ########################
 FUNCTION(DKSET arg arg2)
