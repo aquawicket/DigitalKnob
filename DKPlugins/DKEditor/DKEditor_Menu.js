@@ -127,6 +127,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_RefreshIcons")){
 		DK_Execute("ie4uinit.exe -ClearIconCache");
+		//FIXME: For Windows 10, use: "ie4uinit.exe -show"
 	}
 	if(DK_Id(event, "DKEditor_Menu_Report")){
 		DKCreate("DKDebug/SendBugReport.js", function(){
