@@ -4,7 +4,8 @@
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
 
-body{
+body
+{
 	font-family: "Times New Roman";
 	font-size: 1px;
 	color: black;
@@ -21,23 +22,27 @@ body, div, option, img, select, dataselect, input, textarea, button
 }
 */
 
-option, div, tr{
+option, div, tr
+{
 	display:block;
 	font-size: 13rem;
 }
 
-th{
+th
+{
 	font-weight: bold;
 }
 
-p{
+p
+{
 	display:block;
 	height:18rem;
 	margin-top: 1em;
 	margin-bottom: 1em;	
 }
 
-h1{
+h1
+{
 	display:block;
 	font-size: 2em;
 	font-weight: bold;
@@ -46,7 +51,8 @@ h1{
 	margin-bottom: 0.67em;
 }
 
-h2{
+h2
+{
 	display:block;
 	font-size: 1.5em;
 	font-weight: bold;
@@ -55,7 +61,8 @@ h2{
 	margin-bottom: 0.83em;
 }
 
-h3{
+h3
+{
 	display:block;
 	font-size: 1.17em;
 	font-weight: bold;
@@ -64,7 +71,8 @@ h3{
 	margin-bottom: 1em;
 }
 
-h4{
+h4
+{
 	display:block;
 	font-weight: bold;
 	height:18rem;
@@ -72,7 +80,8 @@ h4{
 	margin-bottom: 1.33em;
 }
 
-h5{
+h5
+{
 	display:block;
 	font-size: 0.83em;
 	font-weight: bold;
@@ -81,7 +90,8 @@ h5{
 	margin-bottom: 1.67em;
 }
 
-h6{
+h6
+{
 	display:block;
 	font-size: 0.67em;
 	font-weight: bold;
@@ -97,14 +107,16 @@ h6{
 /**********************************/
 dataselect,
 dataselect selectvalue,
-dataselect selectbox option{
+dataselect selectbox option
+{
 	background-color:white;
 	color:black;
 }
 
 
 /* Buttons */
-button{
+button
+{
 	color: black;
 	width: 21rem;
 	height: 20rem;
@@ -117,13 +129,15 @@ button{
 	background-right-image: buttons.png 20px 0px 21px 21px;
 }
 
-button:hover{
+button:hover
+{
 	background-left-image: buttons.png 21px 0px 22px 21px;
 	background-center-image: buttons.png 22px 0px 41px 21px;
 	background-right-image: buttons.png 41px 0px 42px 21px;
 }
 
-button:active{
+button:active
+{
 	background-left-image: buttons.png 42px 0px 43px 21px;
 	background-center-image: buttons.png 43px 0px 62px 21px;
 	background-right-image: buttons.png 62px 0px 63px 21px;
@@ -131,24 +145,28 @@ button:active{
 
 
 /* Checkboxes */
-input.checkbox{
+input.checkbox
+{
 	width:12rem;
 	height:12rem;
 	icon-decorator: image;
 	icon-image: checkboxes.png 0px 0px 12px 12px;
 }
 
-input.checkbox:active{
+input.checkbox:active
+{
 	icon-image: checkboxes.png 12px 0px 24px 12px;
 }
 
-input.checkbox:checked{
+input.checkbox:checked
+{
 	icon-image: checkboxes.png 24px 0px 36px 12px;
 }
 
 
 /* Passwords */
-input.password{
+input.password
+{
 	width: 100rem;
 	height: 22rem;
 	background-color:white;
@@ -158,35 +176,41 @@ input.password{
 	border-color: rgb(167,167,167);
 }
 
-input.password:focus{
+input.password:focus
+{
 	border-color: rgb(123,157,212);
 }
 
 
 /* Radio Buttons */
-input.radio{
+input.radio
+{
 	width:12rem;
 	height:12rem;
 	icon-decorator: image;
 	icon-image: radios.png 0px 0px 12px 12px;
 }
 
-input.radio:hover{
+input.radio:hover
+{
 	icon-image: radios.png 12px 0px 24px 12px;
 }
 
-input.radio:checked{
+input.radio:checked
+{
 	icon-image: radios.png 24px 0px 36px 12px;
 }
 
 
 /* Ranges */
-input.range{
+input.range
+{
 	width:150rem;
 	height:150rem;
 }
 
-input.range slidertrack{
+input.range slidertrack
+{
 	height:4rem;
 	width:4rem;
 	margin-top:9rem;
@@ -194,7 +218,8 @@ input.range slidertrack{
 	background-image: rangetrack.png 0px 0px 4px 4px;
 }
 
-input.range sliderbar{
+input.range sliderbar
+{
 	width:11rem;
 	height:21rem;
 	background-decorator: image;
@@ -202,12 +227,14 @@ input.range sliderbar{
 }
 
 /* Position Ranges */
-input.range.position{
+input.range.position
+{
 	width:107rem;
 	height:14rem;
 }
 
-input.range.position slidertrack{
+input.range.position slidertrack
+{
 	height:8rem;
 	width:107rem;
 	margin-top:3rem;
@@ -215,7 +242,8 @@ input.range.position slidertrack{
 	background-image: ../DKRocketAudio/position_track.png 0px 0px 107px 8px;
 }
 
-input.range.position sliderbar{
+input.range.position sliderbar
+{
 	width:22rem;
 	height:14rem;
 	background-decorator: image;
@@ -223,12 +251,14 @@ input.range.position sliderbar{
 }
 
 /* Volume Ranges */
-input.range.volume{
+input.range.volume
+{
 	width:44rem;
 	height:14rem;
 }
 
-input.range.volume slidertrack{
+input.range.volume slidertrack
+{
 	height:8rem;
 	width:44rem;
 	margin-top:3rem;
@@ -236,7 +266,8 @@ input.range.volume slidertrack{
 	background-image: ../DKRocketAudio/volume_track.png 0px 0px 44px 8px;
 }
 
-input.range.volume sliderbar{
+input.range.volume sliderbar
+{
 	width:14rem;
 	height:14rem;
 	background-decorator: image;
@@ -245,7 +276,8 @@ input.range.volume sliderbar{
 
 
 /* Text Inputs */
-input.text{
+input.text
+{
 	width: 100rem;
 	height: 21rem;
 	min-height: 19px;
@@ -256,13 +288,15 @@ input.text{
 	border-color: rgb(167,167,167);
 }
 
-input.text:focus{
+input.text:focus
+{
 	border-color: rgb(123,157,212);
 }
 
 
 /* Textareas */
-textarea{
+textarea
+{
 	width: 180rem;
 	height: 50rem;
 	background-color:white;
@@ -273,13 +307,15 @@ textarea{
 	resize: none;
 }
 
-textarea:focus{
+textarea:focus
+{
 	border-color: rgb(123,157,212);
 }
 
 
 /* Selects */
-select{
+select
+{
 	background-color:white;
 	color:black;
 	width:80rem;
@@ -289,19 +325,23 @@ select{
 	border-color: rgb(167,167,167);
 }
 
-select:hover{
+select:hover
+{
 	border-color: rgb(120,120,120);
 }
 
-select:focus{
+select:focus
+{
 	border-color: rgb(123,157,212);
 }
 
-select selectvalue{
+select selectvalue
+{
 	padding-left: 3rem;
 }
 
-select selectarrow{
+select selectarrow
+{
 	width: 6rem;
 	height: 6rem;
 	margin-top: 6rem;
@@ -310,7 +350,8 @@ select selectarrow{
 	icon-image: select.png 0px 0px 6px 6px;
 }
 
-select selectbox{
+select selectbox
+{
 	border-style: solid;
     border-left-width: 1rem;
 	border-right-width: 1rem;
@@ -318,140 +359,162 @@ select selectbox{
 	border-color: rgb(123,157,212);
 }
 
-select selectbox option{
-	/*z-index: 100;*/
+select selectbox option
+{
 	padding-left: 3rem;
 	background-color:white;
 }
 
-select selectbox option:hover{
+select selectbox option:hover
+{
 	background-color: rgb(123,157,212);
 	color:white;
 }
 
 
 /* Scrollbars */
-scrollbarvertical{
+scrollbarvertical
+{
 	width: 17rem;
-	/*z-index: 100;*/
 }
 
-scrollbarvertical slidertrack{
+scrollbarvertical slidertrack
+{
 	background-decorator: image;
 	background-image: scrollbars.png 51px 52px 68px 68px;
 }
 
-scrollbarvertical sliderbar{
+scrollbarvertical sliderbar
+{
 	min-height: 17rem;
 	background-decorator: image;
 	background-image: scrollbars.png 0px 17px 17px 34px;
 }
 
-scrollbarvertical sliderbar:hover{
+scrollbarvertical sliderbar:hover
+{
 	background-decorator: image;
 	background-image: scrollbars.png 34px 17px 51px 34px;
 }
 
-scrollbarvertical sliderbar:active{
+scrollbarvertical sliderbar:active
+{
 	background-decorator: image;
 	background-image: scrollbars.png 51px 17px 68px 34px;
 }
 
-scrollbarvertical sliderarrowdec{
+scrollbarvertical sliderarrowdec
+{
 	height: 17rem;
 	width: 17rem;
 	icon-decorator: image;
 	icon-image: scrollbars.png 17px 0px 34px 17px;
 }
 
-scrollbarvertical sliderarrowdec:hover{
+scrollbarvertical sliderarrowdec:hover
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 0px 51px 17px;
 }
 
-scrollbarvertical sliderarrowdec:active{
+scrollbarvertical sliderarrowdec:active
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 51px 0px 68px 17px;
 }
 
-scrollbarvertical sliderarrowinc{
+scrollbarvertical sliderarrowinc
+{
 	height: 17rem;
 	width: 17rem;
 	icon-decorator: image;
 	icon-image: scrollbars.png 17px 34px 34px 51px;
 }
 
-scrollbarvertical sliderarrowinc:hover{
+scrollbarvertical sliderarrowinc:hover
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 34px 51px 51px;
 }
 
-scrollbarvertical sliderarrowinc:active{
+scrollbarvertical sliderarrowinc:active
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 51px 34px 68px 51px;
 }
 
 
-scrollbarhorizontal{
+scrollbarhorizontal
+{
 	height: 17rem;
-	/*z-index: 100;*/
 }
 
-scrollbarhorizontal slidertrack{
+scrollbarhorizontal slidertrack
+{
 	background-decorator: image;
 	background-image: scrollbars.png 51px 51px 51px 68px;
 }
 
-scrollbarhorizontal sliderbar{
+scrollbarhorizontal sliderbar
+{
 	min-width: 17rem;
 	background-decorator: image;
 	background-image: scrollbars.png 17px 51px 34px 68px;
 }
 
-scrollbarhorizontal sliderbar:hover{
+scrollbarhorizontal sliderbar:hover
+{
 	background-decorator: image;
 	background-image: scrollbars.png 17px 85px 34px 102px;
 }
 
-scrollbarhorizontal sliderbar:active{
+scrollbarhorizontal sliderbar:active
+{
 	background-decorator: image;
 	background-image: scrollbars.png 17px 102px 34px 119px;
 }
 
-scrollbarhorizontal sliderarrowdec{
+scrollbarhorizontal sliderarrowdec
+{
 	height: 17rem;
 	width: 17rem;
 	icon-decorator: image;
 	icon-image: scrollbars.png 0px 68px 17px 85px;
 }
 
-scrollbarhorizontal sliderarrowdec:hover{
+scrollbarhorizontal sliderarrowdec:hover
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 0px 85px 17px 102px;
 }
 
-scrollbarhorizontal sliderarrowdec:active{
+scrollbarhorizontal sliderarrowdec:active
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 0px 102px 17px 119px;
 }
 
-scrollbarhorizontal sliderarrowinc{
+scrollbarhorizontal sliderarrowinc
+{
 	height: 17rem;
 	width: 17rem;
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 68px 51px 85px;
 }
 
-scrollbarhorizontal sliderarrowinc:hover{
+scrollbarhorizontal sliderarrowinc:hover
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 85px 51px 102px;
 }
 
-scrollbarhorizontal sliderarrowinc:active{
+scrollbarhorizontal sliderarrowinc:active
+{
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 102px 51px 119px;
 }
 
-scrollbarcorner{
+scrollbarcorner
+{
 	background-color: rgb(220,220,220);
 }
