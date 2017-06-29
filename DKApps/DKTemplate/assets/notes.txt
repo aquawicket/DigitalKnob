@@ -4,3 +4,4 @@
 
 *** TOTO ***
 * Need a lot of work in DKRocket.cpp and DKWidget.cpp
+* Test windows 10+
