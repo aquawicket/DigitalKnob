@@ -4,9 +4,18 @@
 
 SET(UPX ON)
 
+####################
+FUNCTION(DKLOG text)
+	DKLOG(text STATUS)
+ENDFUNCTION()
 
-#############################
-#### DKSET Command  #########
+########################
+FUNCTION(DKLOG text lvl)
+	##TODO - set up the lvl parameter
+	MESSAGE(text)
+ENDFUNCTION()
+	
+########################
 FUNCTION(DKSET arg arg2)
 	SET(extra_args ${ARGN})
 	LIST(LENGTH extra_args num_extra_args)
