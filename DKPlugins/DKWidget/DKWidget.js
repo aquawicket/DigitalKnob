@@ -28,9 +28,9 @@ function DKCreate(data, callback)
 	}
 	
 	if(arry[0] == "DKJavascript"){
-		LoadJs(arry[1], function(){
-			if(callback){
-				callback();
+		LoadJs(arry[1], function(rval){
+			if(callback){ 
+				callback(rval); 
 			}
 			else{
 				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);

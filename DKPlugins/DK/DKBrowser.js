@@ -64,14 +64,13 @@ function LoadJs(url, callback)
 	
 	if(!url){ 
 		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
-		return; 
+		return false; 
 	}
-	
 	
 	if(DK_GetObjects().indexOf(url) != -1){
 		DKLog("LoadJs("+url+", callback): url already loaded \n", DKWARN);
-		//callback && callback();
-		return;
+		callback && callback(false);
+		return false;
 	}
 	
 	var file = url.substring(url.lastIndexOf("/") + 1);
@@ -79,7 +78,7 @@ function LoadJs(url, callback)
 	// Call the js init function
 	if(!file){ 
 		DKLog("LoadJs("+url+"): file invalid\n", DKERROR);
-		return; 
+		return false; 
 	}
 	
 	//already loaded, remove it first
@@ -97,7 +96,7 @@ function LoadJs(url, callback)
 	
 	if(typeof script == "undefined"){ 
 		DKLog("Cannot load "+url+" \n", DKERROR);
-		return; 
+		return false; 
 	}
 	
 	var name = file.replace(".js", "");
@@ -120,7 +119,7 @@ function LoadJs(url, callback)
 			}
 			
 			done = true;
-			callback && callback();
+			callback && callback(true);
 		}
 	};
 }

@@ -5,7 +5,7 @@ function DKBuildGUI_Init()
 	
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
-	DKCreate("DKBuild/DKBuild.js", function(){
+	DKCreate("DKBuild/DKBuild.js", function(rval){
 		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
 		DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
 		DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
