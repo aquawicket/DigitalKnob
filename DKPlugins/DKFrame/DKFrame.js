@@ -58,15 +58,15 @@ function DKFrame_Widget(id)
 		return false;
 	}
 	
-	//stop if frame already exsists, multiple windows not ready yet.
-	
 	var title = DKFile_GetFilename(id);
 	title = title.replace(".html", "");
 	
-	if(DKWidget_ElementExists(title+"_frame")){
-		DKLog("DKFrame_Widget("+id+"): frame already exists\n", DKWARN);
-		return;
-	}
+	//stop if frame already exsists, multiple windows not ready yet.
+	//FIXME
+	//if(DKWidget_ElementExists(title+"_frame")){
+	//	DKLog("DKFrame_Widget("+id+"): frame already exists\n", DKWARN);
+	//	return;
+	//}
 	
 	//var top = DKWidget_GetProperty(id, "top");
 	//var bottom = DKWidget_GetProperty(id, "bottom");
@@ -78,8 +78,8 @@ function DKFrame_Widget(id)
 	//DKLog("bottom: "+bottom+"\n");
 	//DKLog("left: "+left+"\n");
 	//DKLog("right: "+right+"\n");
-	//DKLog("width: "+width+"\n");
-	//DKLog("height: "+height+"\n");
+	DKLog("width: "+width+"\n");
+	DKLog("height: "+height+"\n");
 	
 	//top = top.replace("px", "");
 	//bottom = bottom.replace("px", "");
