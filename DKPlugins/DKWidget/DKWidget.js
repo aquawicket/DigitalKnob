@@ -38,32 +38,17 @@ function DKCreate(data, callback)
 		});
 	}
 	if(arry[0] == "DKWidget"){
-		DKWidget_NewWidget(arry[1], arry[2]);
-		//Mobile device minimum font-size fix
-		//if(arry[1]){ 
-		//	var filename = arry[1].replace(/^.*[\\\/]/, '');
-		//	AdjustRems(filename);
-		//}
-		if(callback){
-			callback();
-		}
-		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n");
-			//alert("DKCreate("+data+"): does not have a callback \n");
+		if(!DKWidget_NewWidget(arry[1], arry[2])){
+			return false;
 		}
 	}
 	if(arry[0] == "DKCss"){
-		LoadCss(arry[1]);
-		if(callback){
-			callback();
-		}
-		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n");
-			//alert("DKCreate("+data+"): does not have a callback \n");
+		if(!LoadCss(arry[1])){
+			return false;
 		}
 	}
 
-	return;
+	return true;
 }
 
 /*
@@ -169,13 +154,19 @@ function DKWidget_NewWidget(url, parent)
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
 		if(!element){ DKLog("DKWidget(): could not get parent ("+parent+") \n", DKERROR); return false; }
-		LoadHtml(url, element);
+		if(!LoadHtml(url, element)){ 
+			return false;
+		}
 		DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	else{
-		LoadHtml(url);
+		if(!LoadHtml(url)){
+			return false;
+		}
 		DKWidget_AttachDrags(filename); //Attach Drags
 	}
+	
+	return true;
 }
 
 ////////////////////////////////////

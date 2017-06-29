@@ -22,10 +22,9 @@ function DKFileAssociation_Open(file)
 	//DKLog("DKFileAssociation_Open("+file+")\n");
 	
 	if(file.indexOf(".") == -1 ){ return false; }
-	if(file.indexOf(".html") != -1 ){ 
-		DKFileAssociation_OpenHtml(file); return true; 
-	}
 	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
+	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
+	if(file.indexOf(".css") != -1 ){ DKFileAssociation_OpenCss(file); return true; }
 	if(file.indexOf(".png") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
 	if(file.indexOf(".bmp") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
 	if(file.indexOf(".gif") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
@@ -104,9 +103,21 @@ function DKFileAssociation_OpenJS(path)
 	//DKLog("DKFileAssociation_OpenJS("+path+")\n");
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
-	DKCreate(id, function(){
+	DKCreate(id, function(rval){
+		if(!rval){ return; }
 		id = id.replace(".js",".html");
 		DKFrame_Widget(id);
+	});
+}
+
+////////////////////////////////////////
+function DKFileAssociation_OpenCss(path)
+{
+	//DKLog("DKFileAssociation_OpenCss("+path+")\n");
+	
+	var id = path.replace(DKAssets_LocalAssets(),"");
+	DKCreate(id, function(rval){
+		if(!rval){ return; }
 	});
 }
 

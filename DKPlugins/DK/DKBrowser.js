@@ -40,13 +40,12 @@ function LoadCss(url)
 	
 	if(!url){ 
 		DKLog("LoadCss("+url+"): url invalid\n", DKERROR);
-		return; 
+		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
 		DKLog("LoadCss("+url+"): url already loaded \n", DKWARN);
-		callback && callback();
-		return;
+		return false;
 	}
 	
 	var link = document.createElement('link');
@@ -55,6 +54,8 @@ function LoadCss(url)
 	link.setAttribute('id', url);
 	link.setAttribute('href', url);
 	document.getElementsByTagName('head')[0].appendChild(link);
+	
+	return true;
 }
 
 //////////////////////////////
