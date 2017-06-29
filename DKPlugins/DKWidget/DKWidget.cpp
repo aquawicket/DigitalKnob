@@ -141,6 +141,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	DKString _id = firstChild->GetId().CString();
 
 	//FIXME - the id needs to be the path from the assets folder..  i.e.  MyPlugin/MyPlugin.js
+	/*
 	if(!same(_id,id)){
 		DKLog("DKWidget::CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
 		DKString str;
@@ -148,8 +149,9 @@ bool DKWidget::CreateWidget(DKString& file)
 		replace(str, "id=\""+_id+"\"", "id=\""+id+"\""); //Set the id to the filename (example.html)
 		SetInnerHtml(temp, str);
 	}
+	*/
 
-	//Add the elements to the DOM :)
+	//Add the elements to the DOM
 	Trim(data[2]);
 
 	int numChildren = temp->GetNumChildren();
