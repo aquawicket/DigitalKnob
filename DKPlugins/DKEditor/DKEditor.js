@@ -11,6 +11,11 @@ function DKEditor_Init()
 		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
 	
+	DKCreate("DKNotepad/DKNotepad.js", function(rval){
+		if(!rval){ return; }
+		DKFrame_Widget("DKNotepad/DKNotepad.html");
+		DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
+	});
 	/*
 	DKCreate("DKTooltip/DKTooltip.js", function(){
 		DKTooltip_Add("DKEditor_edit", "Admin tools");
