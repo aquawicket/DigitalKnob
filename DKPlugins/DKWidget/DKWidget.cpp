@@ -1274,6 +1274,10 @@ bool DKWidget::ScrollToBottom(DKElement* element)
 //////////////////////////////////////////////////////////////////
 bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
 {
+	if(!element){
+		DKLog("DKWidget::GetClientWidth(element,"+value+"): element invalid\n", DKWARN);
+		return false;
+	}
 	float width = element->GetClientWidth();
 	value = toString(width);
 	return true;
@@ -1282,6 +1286,10 @@ bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
 ///////////////////////////////////////////////////////////////////
 bool DKWidget::GetClientHeight(DKElement* element, DKString& value)
 {
+	if(!element){
+		DKLog("DKWidget::GetClientHeight(element,"+value+"): element invalid\n", DKWARN);
+		return false;
+	}
 	float height = element->GetClientHeight();
 	value = toString(height);
 	return true;
