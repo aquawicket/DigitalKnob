@@ -64,15 +64,15 @@ function DKNotepadFile_OnEvent(event)
 /////////////////////////////
 function DKNotepadFile_New()
 {
-	DKLog("DKNotepadFile_New \n");
+	DKLog("DKNotepadFile_New\n");
 	
-	DKLog("TODO\n");
+	DKLog("TODO\n");	
 }
 
 /////////////////////////////
 function DKNotepadFile_Open()
 {
-	//DKLog("DKNotepadFile_Open \n");
+	//DKLog("DKNotepadFile_Open\n");
 	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
@@ -83,7 +83,7 @@ function DKNotepadFile_Open()
 /////////////////////////////
 function DKNotepadFile_Save()
 {
-	//DKLog("DKNotepadFile_Save \n");
+	//DKLog("DKNotepadFile_Save\n");
 	
 	var text = DKWidget_GetValue("DKNotepad_Text");
 	//var assets = DKAssets_LocalAssets();
@@ -97,7 +97,7 @@ function DKNotepadFile_Save()
 //////////////////////////////
 function DKNotepadFile_SaveAs()
 {
-	//DKLog("DKNotepadFile_SaveAs \n");
+	//DKLog("DKNotepadFile_SaveAs\n");
 	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
@@ -108,7 +108,15 @@ function DKNotepadFile_SaveAs()
 //////////////////////////////
 function DKNotepadFile_Print()
 {
-	DKLog("DKNotepadFile_Print \n");
+	DKLog("DKNotepadFile_Print\n");
+	
+	DKLog("TODO\n");
+}
+
+/////////////////////////////////////
+function DKNotepadFile_CheckForSave()
+{
+	DKLog("DKNotepadFile_CheckForSave\n");
 	
 	DKLog("TODO\n");
 }
