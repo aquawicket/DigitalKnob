@@ -190,7 +190,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
 	var minimize = DKWidget_CreateElement(frame, "img", "minimize");
-	DKWidget_SetAttribute(minimize, "src", "DKFrame/minimize.png");
+	DKWidget_SetAttribute(minimize, "src", "DKGui/minimize.png");
 	DKWidget_SetProperty(minimize, "position", "absolute");
 	DKWidget_SetProperty(minimize, "top", "0rem");
 	DKWidget_SetProperty(minimize, "right", "42rem");
@@ -198,7 +198,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
 	var maximize = DKWidget_CreateElement(frame, "img", "maximize");
-	DKWidget_SetAttribute(maximize, "src", "DKFrame/maximize.png");
+	DKWidget_SetAttribute(maximize, "src", "DKGui/maximize.png");
 	DKWidget_SetProperty(maximize, "position", "absolute");
 	DKWidget_SetProperty(maximize, "top", "0rem");
 	DKWidget_SetProperty(maximize, "right", "21rem");
@@ -206,7 +206,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
 	var close = DKWidget_CreateElement(frame, "img", "close");
-	DKWidget_SetAttribute(close, "src", "DKFrame/close.png");
+	DKWidget_SetAttribute(close, "src", "DKGui/close.png");
 	DKWidget_SetProperty(close, "position", "absolute");
 	DKWidget_SetProperty(close, "top", "0rem");
 	DKWidget_SetProperty(close, "right", "0rem");
@@ -222,7 +222,7 @@ function DKFrame_CreateResize(frame)
 	//DKLog("DKFrame_CreateResize("+frame+")\n");
 	
 	var resize = DKWidget_CreateElement(frame, "div", "resize");
-	DKWidget_SetProperty(resize, "background-image", "url(DKFrame/resize.png)");
+	DKWidget_SetProperty(resize, "background-image", "url(DKGui/resize.png)");
 	DKWidget_RemoveProperty(resize, "top");
 	DKWidget_SetProperty(resize, "position", "absolute");
 	DKWidget_SetProperty(resize, "right", "0rem");
