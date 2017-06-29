@@ -5,6 +5,7 @@ function DKNotepad_Init()
 {
 	//DKLog("DKNotepad_Init() \n");
 	
+	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
 	DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
@@ -18,6 +19,7 @@ function DKNotepad_End()
 	
 	DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
+	DKClose("DKNotepad/DKNotepad.css");
 }
 
 /////////////////////////////////
