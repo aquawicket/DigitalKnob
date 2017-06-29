@@ -1,3 +1,5 @@
+##MESSAGE("android-ndk")
+
 ### INSTALL ###
 IF(NOT ANDROID)
 	RETURN()
