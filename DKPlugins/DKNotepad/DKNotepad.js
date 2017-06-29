@@ -59,13 +59,11 @@ function DKNotepad_OnEvent(event)
 /////////////////////////////
 function DKNotepad_Open(file)
 {
+	//DKLog("DKNotepad_Open("+file+")\n");
+	
 	//TODO - only open files under 5mb
-	
-	//DKLog("DKNotepad_Open("+file+") \n");
-	
+	//TODO - set the frame title with the filename
 	currentFile = file;
-	//var assets = DKAssets_LocalAssets();
 	var text = DKFile_FileToString(file);
-	//DKLog("DKNotepad_Open("+file+"): text="+text+" \n");
 	DKWidget_SetAttribute("DKNotepad_Text", "value", text);
 }
