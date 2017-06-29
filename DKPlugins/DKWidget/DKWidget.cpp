@@ -139,6 +139,8 @@ bool DKWidget::CreateWidget(DKString& file)
 		return false;
 	}
 	DKString _id = firstChild->GetId().CString();
+
+	//FIXME - the id needs to be the path from the assets folder..  i.e.  MyPlugin/MyPlugin.js
 	if(!same(_id,id)){
 		DKLog("DKWidget::CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
 		DKString str;
