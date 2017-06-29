@@ -163,15 +163,7 @@ function DKClose(data)
 function DKWidget_NewWidget(url, parent)
 {
 	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
-	
-	if(!url){ return false; }
-	
-	if(url.indexOf(".html") == -1){ 
-		DKLog("DKWidget_NewWidget("+url+", parent): url is not a valid .html file \n", DKERROR);
-		return false;
-	}
-	
-	if(url == ".html"){ url = "New.html"; }
+		
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }

@@ -136,6 +136,13 @@ function LoadHtml(url, parent)
 		return false; 
 	}
 	
+	if(url.indexOf(".html") == -1){ 
+		DKLog("LoadHtml("+url+", parent): url is not a valid .html file \n", DKERROR);
+		return false;
+	}
+	
+	if(url == ".html"){ url = "New.html"; }
+	
 	if(DK_GetObjects().indexOf(url) != -1){
 		DKLog("LoadHtml("+url+", parent): url already loaded \n", DKWARN);
 		return false;
