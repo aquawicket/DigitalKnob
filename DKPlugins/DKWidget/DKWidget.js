@@ -41,10 +41,22 @@ function DKCreate(data, callback)
 		if(!DKWidget_NewWidget(arry[1], arry[2])){
 			return false;
 		}
+		if(callback){ 
+			callback(); 
+		}
+		else{
+			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
+		}
 	}
 	if(arry[0] == "DKCss"){
 		if(!LoadCss(arry[1])){
 			return false;
+		}
+		if(callback){ 
+			callback(); 
+		}
+		else{
+			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
 		}
 	}
 

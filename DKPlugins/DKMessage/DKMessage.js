@@ -23,7 +23,7 @@ function DKMessage_End()
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	//DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKMessage_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKMessageOk")){
 		if(DKMessage_callback){

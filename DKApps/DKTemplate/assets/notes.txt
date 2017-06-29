@@ -1,6 +1,7 @@
 *** DKTemplate Notes ***
 
-//TODO
+*** GOALS ***
+* We would like to build an app from a blank slate like this.
+* The app should run on every system the same.
 
-1. We would like to build an app from a blank slate like this.
-2. The app should run on every system the same.
+*** TOTO ***
