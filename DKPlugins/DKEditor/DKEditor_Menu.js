@@ -57,7 +57,8 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Assets")){
-		DKCreate("DKFile/DKSolution.js", function(){
+		DKCreate("DKFile/DKSolution.js", function(rval){
+			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
@@ -92,7 +93,8 @@ function DKEditor_Menu_OnEvent(event)
 		DK_HideConsole();
 	}
 	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
-		DKCreate("DKMessage/DKMessage.js", function(){
+		DKCreate("DKMessage/DKMessage.js", function(rval){
+			if(!rval){ return; }
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
 				//DKLog("DKMessageBox_GetValue() rval = "+rval+"\n");
@@ -102,7 +104,8 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "DKEditor_Menu_Builder")){
-		DKCreate("DKBuild/DKBuildGUI.js", function(){
+		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
+			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
