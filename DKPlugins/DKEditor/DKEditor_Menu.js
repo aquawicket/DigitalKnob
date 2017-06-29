@@ -5,30 +5,30 @@ function DKEditor_Menu_Init()
 	
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_ShowConsole", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_HideConsole", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_PushFiles", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_RefreshIcons", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
 	
 	/*
-	DKCreate("DKTooltip/DKTooltip.js", function(){
-		DKTooltip_Add("DKEditor_Menu_Notes", "notes...");
-		DKTooltip_Add("DKEditor_Menu_Reload", "refresh the page");
-		DKTooltip_Add("DKEditor_Menu_Assets", "view DKTemplate asset files");
-		DKTooltip_Add("DKEditor_Menu_DevTools", "open dev tools");
-	});
+	DKCreate("DKTooltip/DKTooltip.js", function(){});
+	DKTooltip_Add("DKEditor_Menu_Notes", "notes...");
+	DKTooltip_Add("DKEditor_Menu_Reload", "refresh the page");
+	DKTooltip_Add("DKEditor_Menu_Assets", "view DKTemplate asset files");
+	DKTooltip_Add("DKEditor_Menu_DevTools", "open dev tools");
 	*/
 }
 
@@ -124,6 +124,9 @@ function DKEditor_Menu_OnEvent(event)
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitCommit();
 		});
+	}
+	if(DK_Id(event, "DKEditor_Menu_RefreshIcons")){
+		DK_Execute("ie4uinit.exe -ClearIconCache");
 	}
 	if(DK_Id(event, "DKEditor_Menu_Report")){
 		DKCreate("DKDebug/SendBugReport.js", function(){
