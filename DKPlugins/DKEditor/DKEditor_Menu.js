@@ -50,7 +50,8 @@ function DKEditor_Menu_OnEvent(event)
 		DKDebug_RestartApp();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Notes")){
-		DKCreate("DKNotepad/DKNotepad.js", function(){
+		DKCreate("DKNotepad/DKNotepad.js", function(rval){
+			if(!rval){ return; }
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
