@@ -15,6 +15,8 @@ document.body.style.cursor = "default";
 
 var mouseX;
 var mouseY;
+var mouseStartX;
+var mouseStartY;
 var events = [];
 
 ///////////////////////////////////
