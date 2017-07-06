@@ -71,7 +71,8 @@ function DKCreate(data, callback)
 ///////////////////////
 function AdjustRems(id)
 {
-	//DKLog("AdjustRems("+id+")");
+	//DKLog("AdjustRems("+id+")\n");
+	
 	var nodelist = document.getElementById(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
@@ -95,7 +96,7 @@ function AdjustRems(id)
 //////////////////////
 function DKClose(data)
 {
-	//DKLog("DKClose("+data+")");
+	//DKLog("DKClose("+data+")\n");
 	
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
@@ -187,6 +188,8 @@ function DKWidget_NewWidget(url, parent)
 ////////////////////////////////////
 function DKWidget_GetAvailableId(id)
 {
+	//DKLog("DKWidget_GetAvailableId("+id+")\n");
+	
 	out = id;
 	var i = 0;
 	
@@ -209,12 +212,16 @@ function DKWidget_GetAvailableId(id)
 /////////////////////////////
 function DKWidget_GetFile(id)
 {
+	//DKLog("DKWidget_GetFile("+id+")\n");
+	
 	return id;
 }
 
 //////////////////////////
 function DKWidget_Hide(id)
 {
+	//DKLog("DKWidget_Hide("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "none";
@@ -223,6 +230,8 @@ function DKWidget_Hide(id)
 //////////////////////////
 function DKWidget_Show(id)
 {
+	//DKLog("DKWidget_Show("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "block";
@@ -232,6 +241,8 @@ function DKWidget_Show(id)
 ////////////////////////////
 function DKWidget_Toggle(id)
 {
+	//DKLog("DKWidget_Toggle("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none" || element.style.visibility == "hidden"){
@@ -464,6 +475,8 @@ function DKWidget_GetTagName(id)
 ///////////////////////////////////////////////////
 function DKWidget_GetAttribute(variable, parameter)
 {
+	//DKLog("DKWidget_GetAttribute("+variable+","+parameter+")\n");
+	
 	if(!variable){
 		DKLog("DKWidget_GetAttribute(): veriable empty\n", DKWARN);
 		return "";
@@ -482,6 +495,8 @@ function DKWidget_GetAttribute(variable, parameter)
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
+	//DKLog("DKWidget_SetAttribute("+variable+","+parameter+","+value+")\n");
+	
 	if(!variable){ DKLog("DKWidget_SetAttribute(): variable not set \n", DKERROR); return false; }
 	if(!value){ DKLog("DKWidget_SetAttribute(): value not set \n", DKWARN); return false; }
 	if(typeof variable == "object"){
@@ -516,7 +531,8 @@ function DKWidget_SetAttribute(variable, parameter, value)
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
 {
-	//DKLog("DKWidget_GetProperty("+variable+","+parameter+") \n");
+	//DKLog("DKWidget_GetProperty("+variable+","+parameter+")\n");
+	
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }
@@ -543,7 +559,7 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
-	//DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")\n");
+	//DKLog("DKWidget_SetProperty("+variable+","+parameter+","+value+")\n");
 	
 	if(!variable){ //FIXME: who called you?
 		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set \n", DKERROR);
@@ -585,6 +601,8 @@ function DKWidget_SetProperty(variable, parameter, value)
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
 {
+	//DKLog("DKWidget_HasProperty("+id+","+parameter+")\n");
+	
 	if(document.getElementById(id).style[parameter]){
 		return true;
 	}
@@ -594,7 +612,8 @@ function DKWidget_HasProperty(id, parameter)
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
-	//DKLog("DKWidget_RemoveProperty("+id+","+parameter+") \n");
+	//DKLog("DKWidget_RemoveProperty("+id+","+parameter+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ 
 		DKLog("DKWidget_RemoveProperty(): element invalid. \n");
@@ -608,6 +627,8 @@ function DKWidget_RemoveProperty(id, parameter)
 ///////////////////////////////////////////
 function DKWidget_SetValue(variable, value)
 {
+	//DKLog("DKWidget_SetValue("+variable+","+value+")\n");
+	
 	if(!variable){ return false; }
 	if(!value){ value = ""; }
 	if(typeof variable == "object"){
@@ -639,6 +660,8 @@ function DKWidget_SetValue(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtml(variable)
 {
+	//DKLog("DKWidget_GetInnerHtml("+variable+")\n");
+	
 	if(typeof variable == "object"){
 		return variable.innerHTML;
 	}
@@ -653,6 +676,8 @@ function DKWidget_GetInnerHtml(variable)
 ///////////////////////////////////////////////
 function DKWidget_SetInnerHtml(variable, value)
 {
+	//DKLog("DKWidget_SetInnerHtml("+variable+","+value+")\n");
+	
 	if(typeof variable == "object"){
 		variable.innerHTML = value;
 		return true;
@@ -673,6 +698,8 @@ function DKWidget_SetInnerHtml(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
+	//DKLog("DKWidget_GetInnerHtmlString("+id+")\n");
+	
 	if(!id){ DKLog("DKWidget_GetInnerHtmlString(): empty id\n", DKWARN); return "";}
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
@@ -686,6 +713,8 @@ function DKWidget_GetInnerHtmlString(id)
 ////////////////////////////////////////////////
 function DKWidget_SetInnerHtmlString(id, string)
 {
+	//DKLog("DKWidget_SetInnerHtmlString("+id+","+string+")\n");
+	
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
@@ -699,6 +728,8 @@ function DKWidget_SetInnerHtmlString(id, string)
 ////////////////////////////////////////
 function DKWidget_GetOuterHtml(variable)
 {
+	//DKLog("DKWidget_GetOuterHtml("+variable+")\n");
+	
 	if(typeof variable == "object"){
 		return variable.outerHTML;
 	}
@@ -713,7 +744,8 @@ function DKWidget_GetOuterHtml(variable)
 ///////////////////////////////////////
 function DKWidget_IsChildOf(id, parent)
 {
-	//DKLog("DKWidget_IsChildOf("+id+", "+parent+") \n");
+	//DKLog("DKWidget_IsChildOf("+id+","+parent+")\n");
+	
 	if(!id){return false;}
 	if(!parent){return false;}
 	var ele = document.getElementById(id);
@@ -736,6 +768,8 @@ function DKWidget_IsChildOf(id, parent)
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {
+	//DKLog("DKWidget_CreateElement("+parent+","+tag+","+id+")\n");
+	
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
 	//DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n");
 	
@@ -758,8 +792,9 @@ function DKWidget_CreateElement(parent, tag, id)
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
-	id = DKWidget_GetAvailableId(id);
+	//DKLog("DKWidget_CreateElementBefore("+parent+","+tag+","+id+")\n");
 	
+	id = DKWidget_GetAvailableId(id);
 	var par = document.getElementById(parent);
 	var ele = document.createElement(tag);
 	ele.id = id;
@@ -777,6 +812,8 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 //////////////////////////////////////////////
 function DKWidget_AppendChild(parent, element)
 {
+	//DKLog("DKWidget_AppendChild("+parent+","+element+")\n");
+	
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -830,6 +867,8 @@ function DKWidget_PrependChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_InsertBefore(parent, element)
 {
+	//DKLog("DKWidget_InsertBefore("+parent+","+element+")\n");
+	
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -856,6 +895,8 @@ function DKWidget_InsertBefore(parent, element)
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
+	//DKLog("DKWidget_GetParent("+id+")\n");
+	
 	if(!document.getElementById(id)){ return ""; }
 	return document.getElementById(id).parentNode.id;
 }
@@ -863,6 +904,8 @@ function DKWidget_GetParent(id)
 ///////////////////////////////////
 function DKWidget_GetFirstChild(id)
 {
+	//DKLog("DKWidget_GetFirstChild("+id+")\n");
+	
 	var fc = document.getElementById(id).firstChild;
 	if(fc){
 		//DKLog("GetFirstChild("+id+"): -> "+fc.id+"\n");
@@ -874,12 +917,16 @@ function DKWidget_GetFirstChild(id)
 /////////////////////////////////////
 function DKWidget_GetMouseWindowX(id)
 {
+	//DKLog("DKWidget_GetMouseWindowX("+id+")\n");
+	
 	return mouseX;
 }
 
 /////////////////////////////////////
 function DKWidget_GetMouseWindowY(id)
 {
+	//DKLog("DKWidget_GetMouseWindowY("+id+")\n");
+	
 	return mouseY;
 }
 
@@ -887,6 +934,7 @@ function DKWidget_GetMouseWindowY(id)
 function DKWidget_GetMouseElementX(id)
 {
 	//DKLog("DKWidget_GetMouseElementX("+id+")\n");
+	
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(id);
@@ -903,6 +951,7 @@ function DKWidget_GetMouseElementX(id)
 function DKWidget_GetMouseElementY(id)
 {
 	//DKLog("DKWidget_GetMouseElementY("+id+")\n");
+	
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(element);
@@ -918,6 +967,8 @@ function DKWidget_GetMouseElementY(id)
 //////////////////////////////////////
 function DKWidget_GetClientWidth(id)
 {
+	//DKLog("DKWidget_GetClientWidth("+id+")\n");
+	
 	return document.getElementById(id).clientWidth;
 		
 }
@@ -925,12 +976,16 @@ function DKWidget_GetClientWidth(id)
 ///////////////////////////////////////
 function DKWidget_GetClientHeight(id)
 {
+	//DKLog("DKWidget_GetClientHeight("+id+")\n");
+	
 	return document.getElementById(id).clientHeight;
 }
 
 //////////////////////////////////
 function DKWidget_GetOffsetTop(id)
 {
+	//DKLog("DKWidget_GetOffsetTop("+id+")\n");
+	
 	var ele = document.getElementById(id);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) != null){ 
@@ -943,6 +998,8 @@ function DKWidget_GetOffsetTop(id)
 //////////////////////////////////
 function DKWidget_GetOffsetLeft(id)
 {
+	//DKLog("DKWidget_GetOffsetLeft("+id+")\n");
+	
 	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 
@@ -954,48 +1011,60 @@ function DKWidget_GetOffsetLeft(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetRight(id)
 {
+	//DKLog("DKWidget_GetOffsetRight("+id+")\n");
+	
 	var ele = document.getElementById(id);
 	var right = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
 		right += ele.offsetRight; 
 	}
-	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
+	//DKLog("DKWidget_GetOffsetRight("+id+") = "+top+"\n");
 	return parseInt(right);
 }
 
 /////////////////////////////////////
 function DKWidget_GetOffsetBottom(id)
 {
+	//DKLog("DKWidget_GetOffsetBottom("+id+")\n");
+	
 	var ele = document.getElementById(id);
 	var bottom = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
 		bottom += ele.offsetBottom; 
 	}
-	//DKLog("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
+	//DKLog("DKWidget_GetOffsetBottom("+id+") = "+top+"\n");
 	return parseInt(bottom);
 }
 
 ////////////////////////////////////
 function DKWidget_GetOffsetWidth(id)
 {
+	//DKLog("DKWidget_GetOffsetWidth("+id+")\n");
+	
 	return document.getElementById(id).offsetWidth;
 }
 
 /////////////////////////////////////
 function DKWidget_GetOffsetHeight(id)
 {
+	//DKLog("DKWidget_GetOffsetHeight("+id+")\n");
+	
 	return document.getElementById(id).offsetHeight;
 }
 
 ////////////////////////////////////
 function DKWidget_GetComputedTop(id)
 {
+	//DKLog("DKWidget_GetComputedTop("+id+")\n");
+	
 	return window.getComputedStyle(document.getElementById(id)).top;
 }
 
 ///////////////////////////////////
 function DKWidget_ElementExists(id)
 {
+	//DKLog("DKWidget_ElementExists("+id+")\n");
+	
 	if(document.getElementById(id)){
 		return true;
 	}
@@ -1005,7 +1074,8 @@ function DKWidget_ElementExists(id)
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
 {
-	//DKLog("RemoveElement("+id+")\n");
+	//DKLog("DKWidget_RemoveElement("+id+")\n");
+	
 	var ele = document.getElementById(id);
 	if(!ele){
 		DKLog("RemoveElement("+id+"): element does not exist\n");
@@ -1022,6 +1092,8 @@ function DKWidget_RemoveElement(id)
 /////////////////////////////////////
 function DKWidget_ElementToString(id)
 {
+	//DKLog("DKWidget_ElementToString("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.outerHTML;
@@ -1030,6 +1102,8 @@ function DKWidget_ElementToString(id)
 /////////////////////////////
 function DKWidget_Visible(id)
 {
+	//DKLog("DKWidget_Visible("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none"){ return false; }
@@ -1040,6 +1114,8 @@ function DKWidget_Visible(id)
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
+	//DKLog("DKWidget_RemoveAttribute("+id+","+attrib+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.removeAttribute(attrib);
@@ -1048,6 +1124,8 @@ function DKWidget_RemoveAttribute(id, attrib)
 ///////////////////////////////////
 function DKWidget_GetHoverElement()
 { 
+	//DKLog("DKWidget_GetHoverElement()\n");
+
 	//DKLog("DKWidget_GetHoverElement() = "+document.elementFromPoint(mouseX, mouseY).id+"\n");
 	return document.elementFromPoint(mouseX, mouseY).id;
 }
@@ -1055,6 +1133,8 @@ function DKWidget_GetHoverElement()
 ////////////////////////////
 function DKWidget_GetScale()
 {
+	//DKLog("DKWidget_GetScale()\n");
+	
 	var scale = getComputedStyle(document.documentElement).fontSize;
 	scale = scale.replace("px","");
 	//DKLog("DKWidget_GetScale() = "+scale+"\n");
@@ -1065,6 +1145,7 @@ function DKWidget_GetScale()
 function DKWidget_SetScale(scale)
 {
 	//DKLog("DKWidget_SetScale("+scale+")\n");
+	
 	DKWidget_SetProperty("html", "font-size", scale+"px");
 }
 
@@ -1072,6 +1153,7 @@ function DKWidget_SetScale(scale)
 function DKWidget_OpenLink(url, target)
 {
 	//DKLog("DKWidget_OpenLink("+url+","+target+")\n");
+	
 	//window.location = url;
 	window.open(url, target);
 }
@@ -1079,6 +1161,8 @@ function DKWidget_OpenLink(url, target)
 ///////////////////////////////////
 function DKWidget_SetFile(id, file)
 { 
+	//DKLog("DKWidget_SetFile("+id+","+file+")\n");
+
 	DKLog("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n", DKWARN); 
 	return;
 	
