@@ -245,6 +245,8 @@ function DKWidget_Toggle(id)
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
 {
+	//DKLog("DKWidget_AttachDrags("+id+")\n");
+	
 	var parent = document.getElementById(id);
 	if(!parent){ return false; }
 	var elements = parent.getElementsByTagName('*');
@@ -269,6 +271,8 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
+	//DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
+	
 	var element = document.getElementById(id);
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
@@ -280,6 +284,8 @@ function DKWidget_AddDragHandle(id, drag)
 /////////////////////////////////////////////
 function DKWidget_AddResizeHandle(id, resize)
 {
+	//DKLog("DKWidget_AddResizeHandle("+id+","+resize+")\n");
+	
 	var element = document.getElementById(id);
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
@@ -291,6 +297,8 @@ function DKWidget_AddResizeHandle(id, resize)
 //////////////////////////////////////
 function DKWidget_RemoveDragHandle(id)
 {
+	//DKLog("DKWidget_RemoveDragHandle("+id+")\n");
+	
 	if(!id){ return; }
 	var element = document.getElementById(id);
 	if(!DK_IE()){
@@ -302,6 +310,8 @@ function DKWidget_RemoveDragHandle(id)
 ///////////////////////////////////
 function DKWidget_GetElement(event)
 {
+	//DKLog("DKWidget_GetElement("+event+")\n");
+	
 	if(!event){event = window.event;}
 	return (event.currentTarget) ? event.currentTarget : event.srcElement; //IE or other
 }
@@ -309,8 +319,9 @@ function DKWidget_GetElement(event)
 /////////////////////////////////
 function DKWidget_GetElements(id)
 {
-	var string = "";
+	//DKLog("DKWidget_GetElements("+id+")\n");
 	
+	var string = "";
 	//var nodes = document.getElementById(id).getElementsByTagName('*'); //all children recursively
 	var nodes = document.getElementById(id).childNodes;
 	for(var i=0; i<nodes.length; i++){
@@ -326,7 +337,8 @@ function DKWidget_GetElements(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	//DKLog("DKWidget_GetValue("+variable+") \n");
+	//DKLog("DKWidget_GetValue("+variable+")\n");
+	
 	if(!variable){ DKLog("variable empty \n"); return; }
 
 	if(typeof variable === "string"){ //id
@@ -442,6 +454,8 @@ function DKWidget_GetValue(variable)
 ////////////////////////////////
 function DKWidget_GetTagName(id)
 {
+	//DKLog("DKWidget_GetTagName("+id+")\n");
+	
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.tag;
