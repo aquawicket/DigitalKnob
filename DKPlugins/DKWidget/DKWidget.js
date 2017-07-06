@@ -282,13 +282,14 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
-	//DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
+	DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
 	
 	var element = document.getElementById(id);
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ DragStart(event, drag);}
+	//element.addEventListener('touchstart', function(event){ DragStart(event, drag);}, false);
 	return true;
 }
 
@@ -302,6 +303,7 @@ function DKWidget_AddResizeHandle(id, resize)
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ ResizeStart(event, resize); }
+	//element.addEventListener('touchstart', function(event){ ResizeStart(event, resize); }, false);
 	return true;
 }
 
