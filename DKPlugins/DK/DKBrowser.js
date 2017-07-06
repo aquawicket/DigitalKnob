@@ -17,6 +17,9 @@ var mouseX;
 var mouseY;
 var mouseStartX;
 var mouseStartY;
+var objectX;
+var objectY;
+var drag_id;
 var events = [];
 
 ///////////////////////////////////
@@ -252,7 +255,7 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	//DKLog("DragStart("+event+","+id+")\n");
+	DKLog("DragStart("+event+","+id+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -263,21 +266,22 @@ function DragStart(event, id)
 		mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
 		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-	element = document.getElementById(id);
+	drag_id = id;
+	element = document.getElementById(drag_id);
 	
 	objectX = GetLeftPx(element);
 	objectY = GetTopPx(element);
 
-	document.body.onmousemove = function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }
-	document.body.onmouseup = function(event){ DragStop(id); }
-	document.body.addEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
-	document.body.addEventListener('touchend', function(event){ DragStop(id); }, false);
+	document.body.onmousemove = function(event){ DragMove(event); }
+	document.body.onmouseup = function(event){ DragStop(event); }
+	document.body.addEventListener('touchmove', DragMove, false);
+	document.body.addEventListener('touchend', DragStop, false);
 }
 
-////////////////////////////////////////////////////////////////////////
-function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
+////////////////////////
+function DragMove(event)
 {
-	//DKLog("DragMove("+event+","+mouseStartX+","+mouseStartY+","+objectX+","+objectY+","+id+")\n");
+	DKLog("DragMove("+event+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -289,7 +293,7 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 
-	element = document.getElementById(id);
+	element = document.getElementById(drag_id);
 
 	if(element.style.left){
 		element.style.left = Pos(objectX + x - mouseStartX);
@@ -329,16 +333,15 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 	////////////////////////////////////////////////////////////
 }
 
-/////////////////////
-function DragStop(id)
+///////////////////////
+function DragStop(event)
 {
-	DKLog("DragStop("+id+")\n");
+	DKLog("DragStop("+event+")\n");
 	
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
-	
-	//FIXME - not working
-	document.body.removeEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
+	document.body.removeEventListener('touchmove', DragMove, false);
+	document.body.removeEventListener('touchend', DragStop, false);
 }
 
 ///////////////////////////////
