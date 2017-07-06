@@ -303,7 +303,7 @@ function DKWidget_AddResizeHandle(id, resize)
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ ResizeStart(event, resize); }
-	//element.addEventListener('touchstart', function(event){ ResizeStart(event, resize); }, false);
+	element.addEventListener('touchstart', function(event){ ResizeStart(event, resize); }, false);
 	return true;
 }
 

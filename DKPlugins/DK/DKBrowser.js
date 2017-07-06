@@ -255,7 +255,7 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	DKLog("DragStart("+event+","+id+")\n");
+	//DKLog("DragStart("+event+","+id+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -281,7 +281,7 @@ function DragStart(event, id)
 ////////////////////////
 function DragMove(event)
 {
-	DKLog("DragMove("+event+")\n");
+	//DKLog("DragMove("+event+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -336,7 +336,7 @@ function DragMove(event)
 ///////////////////////
 function DragStop(event)
 {
-	DKLog("DragStop("+event+")\n");
+	//DKLog("DragStop("+event+")\n");
 	
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
@@ -355,22 +355,26 @@ function ResizeStart(event, id)
         mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
 	}
 	else{
-		mouseStartX = event.clientX + window.scrollX;
-		mouseStartY = event.clientY + window.scrollY;
+		mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
+	
+	drag_id = id;
 	element = document.getElementById(id);
 	
 	objectX = GetWidthPx(element);
 	objectY = GetHeightPx(element);
 	
-	document.body.onmousemove = function(event){ ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }
-	document.body.onmouseup = function(event){ ResizeStop(id); }
+	document.body.onmousemove = function(event){ ResizeMove(event); }
+	document.body.onmouseup = function(event){ ResizeStop(event); }
+	document.body.addEventListener('touchmove', ResizeMove, false);
+	document.body.addEventListener('touchend', ResizeStop, false);
 }
 
-//////////////////////////////////////////////////////////////////////////
-function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
+//////////////////////////
+function ResizeMove(event)
 {	
-	//DKLog("ResizeMove()\n");
+	//DKLog("ResizeMove("+event+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -378,10 +382,11 @@ function ResizeMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
 	}
 	else{
-		x = event.clientX + window.scrollX;
-		y = event.clientY + window.scrollY;
+		x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-	element = document.getElementById(id);
+	
+	element = document.getElementById(drag_id);
 	if((objectX + x - mouseStartX) > 1){
   		element.style.width = Pos(objectX + x - mouseStartX);
 		
@@ -402,6 +407,8 @@ function ResizeStop(id)
 	
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
+	document.body.removeEventListener('touchmove', ResizeMove, false);
+	document.body.removeEventListener('touchend', ResizeStop, false);
 }
 
 //////////////////////
