@@ -252,7 +252,7 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	DKLog("DragStart("+event+","+id+")\n");
+	//DKLog("DragStart("+event+","+id+")\n");
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -260,11 +260,8 @@ function DragStart(event, id)
         mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
 	}
 	else{
-		//DKLog("DragStart("+event+","+id+"): event.clientX="+event.clientX+", window.scrollX="+window.scrollX+"\n");
-		mouseStartX = event.clientX + window.scrollX;
-		mouseStartY = event.clientY + window.scrollY;
-		//mouseStartX = parseInt(event.changedTouches[0].clientX);
-		//mouseStartY = parseInt(event.changedTouches[0].clientY);
+		mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 	element = document.getElementById(id);
 	
@@ -273,10 +270,8 @@ function DragStart(event, id)
 
 	document.body.onmousemove = function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }
 	document.body.onmouseup = function(event){ DragStop(id); }
-	
-	//DKLog("DragStart("+event+","+id+"): event="+event+", mouseStartX="+mouseStartX+", mouseStartY="+mouseStartY+", objectX="+objectX+", objectY="+objectY+", id="+id+"\n");
-	//document.body.addEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
-	//document.body.addEventListener('touchend', function(event){ DragStop(id); }, false);
+	document.body.addEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
+	document.body.addEventListener('touchend', function(event){ DragStop(id); }, false);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -290,8 +285,8 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
 	}
 	else{
-		x = event.clientX + window.scrollX;
-		y = event.clientY + window.scrollY;	
+		x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 
 	element = document.getElementById(id);

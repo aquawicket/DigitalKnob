@@ -289,7 +289,7 @@ function DKWidget_AddDragHandle(id, drag)
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ DragStart(event, drag);}
-	//element.addEventListener('touchstart', function(event){ DragStart(event, drag);}, false);
+	element.addEventListener('touchstart', function(event){ DragStart(event, drag);}, false);
 	return true;
 }
 
