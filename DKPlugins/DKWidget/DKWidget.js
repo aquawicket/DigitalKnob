@@ -318,6 +318,7 @@ function DKWidget_RemoveDragHandle(id)
 		//element.style.setProperty("pointer-events","none");
 	}
 	element.onmousedown = 0;
+	//element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
 }
 
 ///////////////////////////////////

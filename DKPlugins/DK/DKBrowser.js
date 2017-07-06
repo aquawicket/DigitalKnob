@@ -332,9 +332,12 @@ function DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id)
 /////////////////////
 function DragStop(id)
 {
-	//DKLog("DragStop(id)\n");
+	DKLog("DragStop(id)\n");
 	
 	document.body.onmousemove = function(){};
+	
+	//FIXME - not working
+	document.body.removeEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
 }
 
 ///////////////////////////////
