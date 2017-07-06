@@ -339,10 +339,6 @@ function DragStop(id)
 	
 	//FIXME - not working
 	document.body.removeEventListener('touchmove', function(event){ DragMove(event, mouseStartX, mouseStartY, objectX, objectY, id); }, false);
-	
-	//var el = document.getElementById(id),
-    //elClone = el.cloneNode(true);
-	//el.parentNode.replaceChild(elClone, el);
 }
 
 ///////////////////////////////
@@ -402,6 +398,7 @@ function ResizeStop(id)
 	//DKLog("ResizeStop("+id+")\n");
 	
 	document.body.onmousemove = function(){};
+	document.body.onmouseup = function(){};
 }
 
 //////////////////////
