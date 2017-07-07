@@ -27,10 +27,8 @@ DKObject* DKClass::_Instance(const DKString& data)
 	else if(has(arry[0],".js")){
 		arry.insert(arry.begin(),"DKJavascript");
 	}
-	//TODO
 	else if(has(arry[0],".css")){
-		//arry.insert(arry.begin(),"DKCss");
-		return NULL;
+		arry.insert(arry.begin(),"DKCss");
 	}
 
 	if((*classes)[arry[0]]){
