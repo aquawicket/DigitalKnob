@@ -334,6 +334,9 @@ function DKFrame_Close(id)
 	}
 	
 	//DKLog("DKFrame_Close("+id+"): frame="+frame+"\n");
+	if(frame == "body"){
+		return;
+	}
 	
 	//remove frame events
 	var num = frame.replace("frame","");
