@@ -31,16 +31,17 @@ void DKCss::Init()
 
 	DKString string;
 	DKFile::FileToString(file, string);
+	replace(string, "\n", "");
+	replace(string, "\t", "");
 
 	// Method 1 - Not Working
-	/*
 	Rocket::Core::StyleSheet* current_sheet = dkRocket->GetDocument()->GetStyleSheet();
-	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
-	//Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetString(string.c_str());
+	//Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
+	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetString(string.c_str());
+	//new_sheet->BuildNodeIndex();
 	current_sheet->CombineStyleSheet(new_sheet);
 	dkRocket->GetDocument()->SetStyleSheet(current_sheet);
 	//Rocket::Core::Factory::ClearStyleSheetCache();
-	*/
 
 
 	// Method 2 - Not Working
