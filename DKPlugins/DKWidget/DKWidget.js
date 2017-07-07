@@ -282,7 +282,7 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
-	DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
+	//DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
 	
 	var element = document.getElementById(id);
 	if(!DK_IE()){

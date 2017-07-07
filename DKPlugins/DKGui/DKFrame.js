@@ -78,8 +78,8 @@ function DKFrame_Widget(id)
 	//DKLog("bottom: "+bottom+"\n");
 	//DKLog("left: "+left+"\n");
 	//DKLog("right: "+right+"\n");
-	DKLog("width: "+width+"\n");
-	DKLog("height: "+height+"\n");
+	//DKLog("width: "+width+"\n");
+	//DKLog("height: "+height+"\n");
 	
 	//top = top.replace("px", "");
 	//bottom = bottom.replace("px", "");
@@ -146,13 +146,13 @@ function DKFrame_CreateFrame(title, width, height)
 	
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
-	if(width == "100%"){ width = window_width-100; }
-	if(height == "100%"){ height = window_height-100; }
+	if(width == "100%"){ width = window_width-50; }
+	if(height == "100%"){ height = window_height-21-50; }
 	if(!width){ width = "300"; }
 	if(!height){ height = "300"; }
 	var newheight = parseFloat(height)+21;
-	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 21);
-	var newleft = parseFloat((window_width / 2) - (width / 2));
+	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 1);
+	var newleft = parseFloat((window_width / 2) - (width / 2) - 1);
 	
 	var frame = DKWidget_CreateElement("body", "div", "frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
