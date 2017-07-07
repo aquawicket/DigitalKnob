@@ -26,6 +26,8 @@ function DKScale_OnEvent(event)
 /////////////////////////
 function DKScale_Resize()
 {
+	DKLog("DKScale_Resize()\n");
+	
     DKLog("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
 	DKLog("DKWindow_GetWidth() = "+DKWindow_GetWidth()+"\n");
 	DKLog("DKWindow_GetHeight() = "+DKWindow_GetHeight()+"\n");
