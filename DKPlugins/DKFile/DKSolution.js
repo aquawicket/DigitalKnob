@@ -3,8 +3,10 @@ function DKSolution_Init()
 {	
 	//DKLog("DKSolution_Init()\n");
 
+	DKCreate("DKFile/DKSolution.css");
 	DKCreate("DKFile/DKSolution.html");
 	DKCreate("DKFileAssociation/DKFileAssociation.js", function(){});
+	
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
