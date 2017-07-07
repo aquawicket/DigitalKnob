@@ -162,7 +162,7 @@ bool DKWidget::CreateWidget(DKString& file)
 
 	//Set the root element of this widget
 	Trim(id);
-	root = dkRocket->GetDocument()->GetElementById(id.c_str());
+	root = dkRocket->GetDocument()->GetElementById(_id.c_str());
 
 	dkRocketToRML.PostProcess(root);
 

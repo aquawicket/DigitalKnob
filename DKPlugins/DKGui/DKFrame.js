@@ -222,7 +222,7 @@ function DKFrame_CreateResize(frame)
 	//DKLog("DKFrame_CreateResize("+frame+")\n");
 	
 	var resize = DKWidget_CreateElement(frame, "div", "resize");
-	DKWidget_SetProperty(resize, "background-image", "url(DKGui/resize.png)");
+	DKWidget_SetProperty(resize, "background-image", "url(\"DKGui/resize.png\")");
 	DKWidget_RemoveProperty(resize, "top");
 	DKWidget_SetProperty(resize, "position", "absolute");
 	DKWidget_SetProperty(resize, "right", "0rem");
