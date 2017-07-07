@@ -33,12 +33,14 @@ void DKCss::Init()
 	DKFile::FileToString(file, string);
 
 	// Method 1 - Not Working
-
+	/*
 	Rocket::Core::StyleSheet* current_sheet = dkRocket->GetDocument()->GetStyleSheet();
-	//Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
-	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetString(string.c_str());
+	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
+	//Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetString(string.c_str());
 	current_sheet->CombineStyleSheet(new_sheet);
 	dkRocket->GetDocument()->SetStyleSheet(current_sheet);
+	//Rocket::Core::Factory::ClearStyleSheetCache();
+	*/
 
 
 	// Method 2 - Not Working
