@@ -28,12 +28,13 @@ void DKCss::Init()
 	}
 	
     DKString file = DKFile::local_assets+data[1];
-	DKLog("DKCss::Init(): file = "+file+"\n", DKINFO);
 
+	/*
 	DKString string;
 	DKFile::FileToString(file, string);
 	replace(string, "\n", "");
 	replace(string, "\t", "");
+	*/
 
 	// Method 1
 	Rocket::Core::StyleSheet* current_sheet = dkRocket->GetDocument()->GetStyleSheet();
