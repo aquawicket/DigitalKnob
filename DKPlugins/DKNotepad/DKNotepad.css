@@ -20,6 +20,8 @@
 	top:2rem;
 	left:6px;
 	left:6rem;
+	width:35px;
+	width:35rem;
 }
 
 #DKNotepad_Edit
@@ -29,6 +31,8 @@
 	top:2rem;
 	left:46px;
 	left:46rem;
+	width:35px;
+	width:35rem;
 }
 
 #DKNotepad_Format
@@ -38,6 +42,8 @@
 	top:2rem;
 	left:86px;
 	left:86rem;
+	width:50px;
+	width:50rem;
 }
 
 #DKNotepad_View
@@ -47,6 +53,8 @@
 	top:2rem;
 	left:146px;
 	left:146rem;
+	width:35px;
+	width:35rem;
 }
 
 #DKNotepad_Help
@@ -56,6 +64,8 @@
 	top:2rem;
 	left:190px;
 	left:190rem;
+	width:35px;
+	width:35rem;
 }
 
 #DKNotepad_Container
