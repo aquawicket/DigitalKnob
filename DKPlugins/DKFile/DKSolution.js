@@ -5,7 +5,7 @@ function DKSolution_Init()
 
 	DKCreate("DKFile/DKSolution.css");
 	DKCreate("DKFile/DKSolution.html");
-	DKCreate("DKFileAssociation/DKFileAssociation.js", function(){});
+	DKCreate("DKFile/DKFileAssociation.js", function(){});
 	
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
