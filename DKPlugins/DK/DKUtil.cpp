@@ -456,9 +456,10 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 	DKLog("DKUtil::Run("+command+","+params+")\n", DKDEBUG);
 #ifdef WIN32
 	//https://msdn.microsoft.com/en-us/library/windows/desktop/bb762153(v=vs.85).aspx
-	//ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL);
-	if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){ 
-		DKLog("DKUtil::Run(): ShellExecute returned an error \n", DKERROR);
+	if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){
+		DKString error;
+		DKWindows::GetLastError(error);
+		DKLog("DKUtil::Run(): "+error+"\n", DKERROR);
 		return false;
 	}
 	return true;

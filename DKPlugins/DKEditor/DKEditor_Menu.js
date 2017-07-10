@@ -128,7 +128,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_RefreshIcons")){
 		//FIXME - not working
 		//DK_Execute("C:/Windows/System32/ie4uinit.exe -ClearIconCache");
-		//DK_Run("C:/Windows/System32/ie4uinit.exe","-ClearIconCache");
+		DK_Run("C:/Windows/System32/ie4uinit.exe","-ClearIconCache");
 		//NOTE: For Windows 10, use: "ie4uinit.exe -show"
 	}
 	if(DK_Id(event, "DKEditor_Menu_Report")){
