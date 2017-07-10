@@ -1185,3 +1185,9 @@ function DKWidget_SetFile(id, file)
 	}
 	*/
 }
+
+//////////////////////////////////
+function DKWidget_GetLastChild(id)
+{
+	return document.getElementById("body").lastChild.id;
+}

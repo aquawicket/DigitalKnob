@@ -107,7 +107,6 @@ function DKFrame_Widget(id)
 	DKWidget_RemoveProperty(id, "right");
 	DKWidget_RemoveProperty(id, "height");
 	
-	
 	DKFrame_CreateResize(frame);
 	return frame;
 }
@@ -246,7 +245,8 @@ function DKFrame_BringToFront()
 	if(!id){ return; }
 	
 	if(DKWidget_IsChildOf(id, "frame")){
-		if(document.getElementById("body").lastChild.id != "frame"){
+		//if(document.getElementById("body").lastChild.id != "frame"){
+		if(DKWidget_GetLastChild("body") != "frame"){
 			DKWidget_AppendChild("body", "frame");
 			return;
 		}
@@ -254,7 +254,8 @@ function DKFrame_BringToFront()
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
 		if(DKWidget_IsChildOf(id, frame)){
-			if(document.getElementById("body").lastChild.id != frame){
+			//if(document.getElementById("body").lastChild.id != frame){
+			if(DKWidget_GetLastChild("body") != "frame"){
 				DKWidget_AppendChild("body", frame);
 				return;
 			}
