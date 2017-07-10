@@ -47,7 +47,7 @@ void DKCss::Init()
 	// Method 2 - Not Working
 	/*
 	replace(file, DKFile::local_assets, "");
-	Rocket::Core::Element* link = dkRocket->context->GetDocument(0)->CreateElement("link");
+	Rocket::Core::Element* link = dkRocket->GetDocument()->CreateElement("link");
 	link->SetAttribute("rel", "stylesheet");
 	link->SetAttribute("type", "text/css");
 	link->SetAttribute("id", file.c_str());
