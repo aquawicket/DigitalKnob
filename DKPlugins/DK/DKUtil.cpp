@@ -459,7 +459,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 	if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("DKUtil::Run(): "+error+"\n", DKERROR);
+		DKLog("DKUtil::Run("+command+","+params+"): "+error+"\n", DKERROR);
 		return false;
 	}
 	return true;
