@@ -26,11 +26,12 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetClientWidth", DKWidgetJS::GetClientWidth);
 	DKDuktape::AttachFunction("DKWidget_GetElements", DKWidgetJS::GetElements);
 	DKDuktape::AttachFunction("DKWidget_GetFile", DKWidgetJS::GetFile);
-	DKDuktape::AttachFunction("DKWidget_GetFirstChild", DKWidgetJS::GetFirstChild); 
+	DKDuktape::AttachFunction("DKWidget_GetFirstChild", DKWidgetJS::GetFirstChild);
 	DKDuktape::AttachFunction("DKWidget_GetFocusElement", DKWidgetJS::GetFocusElement);
 	DKDuktape::AttachFunction("DKWidget_GetHoverElement", DKWidgetJS::GetHoverElement);
 	DKDuktape::AttachFunction("DKWidget_GetInnerHtml", DKWidgetJS::GetInnerHtml);
 	DKDuktape::AttachFunction("DKWidget_GetInnerHtmlString", DKWidgetJS::GetInnerHtmlString);
+	DKDuktape::AttachFunction("DKWidget_GetLastChild", DKWidgetJS::GetLastChild); 
 	DKDuktape::AttachFunction("DKWidget_GetMouseElementX", DKWidgetJS::GetMouseElementX); 
 	DKDuktape::AttachFunction("DKWidget_GetMouseElementY", DKWidgetJS::GetMouseElementY);
 	DKDuktape::AttachFunction("DKWidget_GetMouseWindowX", DKWidgetJS::GetMouseWindowX); 
@@ -291,6 +292,15 @@ int DKWidgetJS::GetFirstChild(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString child = DKWidget::GetFirstChild(id);
+	duk_push_string(ctx, child.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKWidgetJS::GetLastChild(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString child = DKWidget::GetLastChild(id);
 	duk_push_string(ctx, child.c_str());
 	return 1;
 }

@@ -33,6 +33,7 @@ public:
 	static int GetHoverElement(duk_context* ctx);
 	static int GetInnerHtml(duk_context* ctx);
 	static int GetInnerHtmlString(duk_context* ctx);
+	static int GetLastChild(duk_context* ctx);
 	static int GetMouseElementX(duk_context* ctx);
 	static int GetMouseElementY(duk_context* ctx);
 	static int GetMouseWindowX(duk_context* ctx);

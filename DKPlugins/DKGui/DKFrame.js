@@ -239,13 +239,11 @@ function DKFrame_BringToFront()
 {
 	//DKLog("DKFrame_BringToFront()\n");
 	
-	//FIXME - this cancels click events
-	
+	//FIXME - this function is not working properly
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
 	
 	if(DKWidget_IsChildOf(id, "frame")){
-		//if(document.getElementById("body").lastChild.id != "frame"){
 		if(DKWidget_GetLastChild("body") != "frame"){
 			DKWidget_AppendChild("body", "frame");
 			return;
@@ -254,7 +252,6 @@ function DKFrame_BringToFront()
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
 		if(DKWidget_IsChildOf(id, frame)){
-			//if(document.getElementById("body").lastChild.id != frame){
 			if(DKWidget_GetLastChild("body") != "frame"){
 				DKWidget_AppendChild("body", frame);
 				return;

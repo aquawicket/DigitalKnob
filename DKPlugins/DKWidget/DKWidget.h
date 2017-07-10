@@ -131,6 +131,7 @@ public:
 	//extra
 	static DKString Filter(const DKProperty* prop);
 	static DKString GetFirstChild(const DKString& id);
+	static DKString GetLastChild(const DKString& id);
 	static bool AddDragHandle(const DKString& id, const DKString& drag);
 	static bool AddResizeHandle(const DKString& id, const DKString& resize);
 	static bool BuildOptionsString(const DKString& id, DKString &options);

@@ -1726,6 +1726,16 @@ DKString DKWidget::GetFirstChild(const DKString& id)
 }
 
 ///////////////////////////////////////////////////
+DKString DKWidget::GetLastChild(const DKString& id)
+{
+	DKElement* element = DKWidget::GetElementById(id);
+	if(!element){ return 0; }
+	DKElement* child = element->GetLastChild();
+	if(!child){return "";}
+	return DKWidget::GetId(child);
+}
+
+///////////////////////////////////////////////////
 bool DKWidget::GetOption(const DKString& id, int n)
 {
 	DKElement* element = DKWidget::GetElementById(id);
