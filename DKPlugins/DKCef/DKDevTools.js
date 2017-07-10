@@ -1,11 +1,15 @@
 function DKDevTools_Init()
 {
+	DKLog("DKDevTools_Init()\n");
+	
 	DKAddEvent("GLOBAL", "keydown", DKDevTools_OnEvent);
 }
 
 function DKDevTools_End()
 {
-
+	//DKLog("DKDevTools_End()\n");
+	
+	DKRemoveEvents(DKDevTools_OnEvent);
 }
 
 function DKDevTools_OnEvent(event)
