@@ -252,7 +252,7 @@ function DKFrame_BringToFront()
 	for(var i=0; i<100; i++){
 		var frame = "frame"+i.toString();
 		if(DKWidget_IsChildOf(id, frame)){
-			if(DKWidget_GetLastChild("body") != "frame"){
+			if(DKWidget_GetLastChild("body") != frame){
 				DKWidget_AppendChild("body", frame);
 				return;
 			}
