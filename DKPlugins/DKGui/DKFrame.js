@@ -261,7 +261,6 @@ function DKFrame_BringToFront()
 			}
 		}
 	}
-
 }
 
 ///////////////////////////////////
