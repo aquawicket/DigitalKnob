@@ -1,6 +1,6 @@
 
 
-#DKNotepad_Menubar
+div#DKNotepad_Menubar
 {
 	position:absolute;
 	width:100%;
@@ -9,7 +9,7 @@
 	background-color:rgb(220,220,220);
 }
 
-#DKNotepad_File
+div#DKNotepad_File
 {
 	position:absolute;
 	top:2px;
@@ -18,13 +18,19 @@
 	left:6rem;
 }
 
-#DKNotepad_Edit
+div#DKNotepad_Edit
 {
 	position:absolute;
 	top:2px;
 	top:2rem;
 	left:46px;
 	left:46rem;
+}
+
+#DKNotepad/DKNotepad/.html
+{
+	position:absolute;
+	overflow:hidden;
 }
 
 #DKNotepad_Format
