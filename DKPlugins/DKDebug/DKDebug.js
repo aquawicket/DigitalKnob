@@ -6,6 +6,7 @@ function DKDebug_Init()
 	//DKLog("DKDebug_Init()\n");
 	
 	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
+	DKAddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
 }
 
 //////////////////////
@@ -25,6 +26,15 @@ function DKDebug_OnEvent(event)
 		//DKLog("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
 		DKDebug_LogKey(DK_GetValue(event));
 		DKDebug_CheckKeys();
+	}
+	
+	if(DK_Type(event, "keydown") && DK_GetValue(event) == 123){ //F12
+		if(typeof DKCef_ShowDevTools == 'function'){
+			DKCef_ShowDevTools("Cef", 0);
+		}
+		if(typeof DKRocket_ToggleDebugger == 'function'){
+			DKRocket_ToggleDebugger();
+		}
 	}
 }
 
