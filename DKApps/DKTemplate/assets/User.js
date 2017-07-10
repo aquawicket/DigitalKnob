@@ -100,10 +100,8 @@ function LoadPage()
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	//DKCreate("Template.js", function(){
-	
 	DKCreate("DKEditor/DKEditor.js", function(){
 	});
-	
 	//});
 	});
 	});
