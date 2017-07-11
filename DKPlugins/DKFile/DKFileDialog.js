@@ -17,6 +17,7 @@ function DKFileDialog_Init()
 	DKAddEvent("DKFileDialogCancel", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogOK", "click", DKFileDialog_OnEvent);
 	DKAddEvent("DKFileDialogUp", "click", DKFileDialog_OnEvent);
+	DKAddEvent("DKFileDialogPath", "change", DKFileDialog_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -89,6 +90,12 @@ function DKFileDialog_OnEvent(event)
 		DKLog("event_data2:"+event_data2+"\n");
 	
 		DKFileDialog_UpdatePath(event_data1);
+	}
+	
+	if(DK_Id(event, "DKFileDialogPath")){
+		DKLog("DKFileDialogPath\n");
+		//var path = DKWidget_GetAttribute("DKFileDialogPath", "value");
+		//DKFileDialog_UpdatePath(path);
 	}
 }
 

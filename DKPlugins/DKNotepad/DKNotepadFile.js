@@ -25,7 +25,7 @@ function DKNotepadFile_End()
 /////////////////////////////////////
 function DKNotepadFile_OnEvent(event)
 {
-	DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKNotepadFile_New")){
 		DKNotepadFile_New();
@@ -100,7 +100,7 @@ function DKNotepadFile_SaveAs()
 	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
-		//DKSendEvent("DKFile/DKFileDialog.html", "SetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+		DKSendEvent("DKFile/DKFileDialog.html", "GetFile", "GLOBAL,SaveFile,/,relative"); // To -> DKFileDialog
 	});
 }
 
