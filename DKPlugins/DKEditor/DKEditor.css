@@ -1,0 +1,15 @@
+#DKEditor/DKEditor/.html
+{
+	position:absolute;
+	overflow:hidden;
+	top:0px;
+	top:0rem;
+	left:0px;
+	left:0rem;
+}
+
+#DKEditor_edit
+{
+	width:40px;
+	width:40rem;
+}

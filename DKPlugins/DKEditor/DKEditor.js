@@ -3,6 +3,7 @@ function DKEditor_Init()
 {
 	//DKLog("DKEditor_Init()\n");
 	
+	DKCreate("DKEditor/DKEditor.css");
 	DKCreate("DKEditor/DKEditor.html");
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
 	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
@@ -29,6 +30,7 @@ function DKEditor_End()
 	//DKLog("DKEditor_End()\n");
 	
 	DKClose("DKEditor/DKEditor.html");
+	DKClose("DKEditor/DKEditor.css");
 }
 
 ////////////////////////////////
