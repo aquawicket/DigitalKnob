@@ -21,6 +21,7 @@ function DKColorPicker_End()
 	
 	DKRemoveEvents(DKColorPicker_OnEvent);
 	DKClose("DKColorPicker/DKColorPicker.html");
+	DKClose("DKColorPicker/DKColorPicker.css");
 }
 
 /////////////////////////////////////

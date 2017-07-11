@@ -20,6 +20,7 @@ function DKSolution_End()
 	
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
+	DKClose("DKFile/DKSolution.css");
 }
 
 //////////////////////////////////
