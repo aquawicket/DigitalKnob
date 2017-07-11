@@ -3,9 +3,8 @@
 * The app should run on every system the same.
 
 *** TOTO ***
-* Need a lot of work in DKRocket.cpp and DKWidget.cpp
 * Test windows 10+
 * add DKWidget_SetFocus(id) javascript function to c++
 * Create DKFile/SaveFile and DKFile/OpenFile to replace DKFileDialog
-* DKFile/DKSolution should be renamed to DKExplorer
+* DKFile/DKSolution should be renamed to FileExplorer
 

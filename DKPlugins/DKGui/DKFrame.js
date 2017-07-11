@@ -111,6 +111,17 @@ function DKFrame_Widget(id)
 	return frame;
 }
 
+////////////////////////////////////
+function DKFrame_SetTitle(id, title)
+{
+	//DKLog("DKFrame_SetTitle("+id+","+title+")\n");
+	
+	var frame = DKWidget_GetParent(id);
+	var titlebar = DKWidget_GetFirstChild(frame);
+	var titlebartext = DKWidget_GetFirstChild(titlebar);
+	DKWidget_SetInnerHtml(titlebartext, title);
+}
+
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {

@@ -60,6 +60,7 @@ function DKEditor_Menu_OnEvent(event)
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
+			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
