@@ -5,7 +5,6 @@ function DKNotepadFile_Init()
 	
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
-	DKAddEvent("GLOBAL", "OpenFile", DKNotepadFile_OnEvent);     //FIXME
 	DKAddEvent("DKNotepadFile_New", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Save", "click", DKNotepadFile_OnEvent);
@@ -33,11 +32,6 @@ function DKNotepadFile_OnEvent(event)
 	}
 	if(DK_Id(event,"DKNotepadFile_Open")){
 		DKNotepadFile_Open();
-	}
-	if(DK_Type(event, "OpenFile")){
-		var file = DK_GetValue(event);
-		DKLog("OpenFile: "+file+" \n", DKDEBUG)
-		DKNotepad_Open(file)
 	}
 	if(DK_Id(event,"DKNotepadFile_Save")){
 		DKNotepadFile_Save();
