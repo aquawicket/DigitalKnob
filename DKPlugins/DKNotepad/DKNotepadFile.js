@@ -85,7 +85,10 @@ function DKNotepadFile_Open()
 function DKNotepadFile_Save()
 {
 	//DKLog("DKNotepadFile_Save\n");
-	
+	if(!currentFile){
+		DKNotepadFile_SaveAs();
+		return;
+	}
 	var text = DKWidget_GetValue("DKNotepad_Text");
 	//var assets = DKAssets_LocalAssets();
 	DKFile_StringToFile(text, currentFile);
