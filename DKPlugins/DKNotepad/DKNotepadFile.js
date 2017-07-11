@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadFile_Init()
 {
-	//DKLog("DKNotepadFile_Init() \n");
+	//DKLog("DKNotepadFile_Init()\n");
 	
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
@@ -17,7 +17,7 @@ function DKNotepadFile_Init()
 ////////////////////////////
 function DKNotepadFile_End()
 {
-	//DKLog("DKNotepadFile_End() \n");
+	//DKLog("DKNotepadFile_End()\n");
 	
 	DKRemoveEvents(DKNotepadFile_OnEvent);
 	DKClose("DKNotepad/DKNotepadFile.html");
@@ -64,7 +64,7 @@ function DKNotepadFile_OnEvent(event)
 /////////////////////////////
 function DKNotepadFile_New()
 {
-	DKLog("DKNotepadFile_New\n");
+	//DKLog("DKNotepadFile_New()\n");
 	
 	DKWidget_SetAttribute("DKNotepad_Text", "value", "");
 	currentFile = "";
@@ -73,7 +73,7 @@ function DKNotepadFile_New()
 /////////////////////////////
 function DKNotepadFile_Open()
 {
-	//DKLog("DKNotepadFile_Open\n");
+	//DKLog("DKNotepadFile_Open()\n");
 	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
@@ -84,7 +84,8 @@ function DKNotepadFile_Open()
 /////////////////////////////
 function DKNotepadFile_Save()
 {
-	//DKLog("DKNotepadFile_Save\n");
+	//DKLog("DKNotepadFile_Save()\n");
+	
 	if(!currentFile){
 		DKNotepadFile_SaveAs();
 		return;
@@ -98,10 +99,10 @@ function DKNotepadFile_Save()
 	});
 }
 
-//////////////////////////////
+///////////////////////////////
 function DKNotepadFile_SaveAs()
 {
-	//DKLog("DKNotepadFile_SaveAs\n");
+	//DKLog("DKNotepadFile_SaveAs()\n");
 	
 	DKCreate("DKFile/DKFileDialog.js", function(){
 		DKFrame_Widget("DKFile/DKFileDialog.html");
@@ -112,7 +113,7 @@ function DKNotepadFile_SaveAs()
 //////////////////////////////
 function DKNotepadFile_Print()
 {
-	DKLog("DKNotepadFile_Print\n");
+	DKLog("DKNotepadFile_Print()\n");
 	
 	DKLog("TODO\n");
 }
@@ -120,7 +121,7 @@ function DKNotepadFile_Print()
 /////////////////////////////////////
 function DKNotepadFile_CheckForSave()
 {
-	DKLog("DKNotepadFile_CheckForSave\n");
+	DKLog("DKNotepadFile_CheckForSave()\n");
 	
 	DKLog("TODO\n");
 }
