@@ -5,6 +5,7 @@ function DKPaint_Init()
 {
 	//DKLog("DKPaint_Init()\n");
 	
+	DKCreate("DKPaint/DKPaint.css");
 	DKCreate("DKPaint/DKPaint.html");
 	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
 	DKAddEvent("DKPaint/DKPaint.html", "contextmenu", DKPaint_OnEvent);
@@ -18,6 +19,7 @@ function DKPaint_End()
 	
 	DKRemoveEvents(DKPaint_OnEvent);
 	DKClose("DKPaint/DKPaint.html");
+	DKClose("DKPaint/DKPaint.css");
 }
 
 ///////////////////////////////

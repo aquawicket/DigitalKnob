@@ -5,3 +5,5 @@
 *** TOTO ***
 * Need a lot of work in DKRocket.cpp and DKWidget.cpp
 * Test windows 10+
+* DKFile/DKSolution: Select upon rename
+
