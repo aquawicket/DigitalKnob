@@ -9,6 +9,8 @@ function DKSolutionRename_Init()
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
+	
+	DKWidget_SetFocus("DKSolutionRename_box");
 }
 
 ///////////////////////////////

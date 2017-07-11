@@ -1192,3 +1192,9 @@ function DKWidget_GetLastChild(id)
 {
 	return document.getElementById("body").lastChild.id;
 }
+
+//////////////////////////////
+function DKWidget_SetFocus(id)
+{
+	document.getElementById(id).focus();
+}
