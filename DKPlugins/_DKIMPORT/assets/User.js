@@ -88,7 +88,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	DKCreate("DKDebug/DKDebug.js", function(){});
 }
 else{  //Javascript: V8, WEBVIEW or Duktape
-	LoadPage();
+	User_LoadPage();
 }
 
 
