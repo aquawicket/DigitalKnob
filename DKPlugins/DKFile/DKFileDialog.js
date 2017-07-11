@@ -57,9 +57,11 @@ function DKFileDialog_OnEvent(event)
 	
 	if(DK_Id(event, "DKFileDialogOK")){
 		if(rPath && event_data2 == "relative"){
+			DKLog("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 == "absolute"){
+			DKLog("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
 			DKSendEvent(event_id, event_type, aPath);
 		}
 		else{
