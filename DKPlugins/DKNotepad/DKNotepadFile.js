@@ -98,9 +98,9 @@ function DKNotepadFile_SaveAs()
 {
 	//DKLog("DKNotepadFile_SaveAs()\n");
 	
-	DKCreate("DKFile/DKFileDialog.js", function(){
-		DKFrame_Widget("DKFile/DKFileDialog.html");
-		DKSendEvent("DKFile/DKFileDialog.html", "GetFile", "GLOBAL,SaveFile,/,relative"); // To -> DKFileDialog
+	DKCreate("DKFile/DKSaveFile.js", function(){
+		DKFrame_Widget("DKFile/DKSaveFile.html");
+		DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "GLOBAL,SaveFile,/,relative"); // To -> DKFileDialog
 	});
 }
 
