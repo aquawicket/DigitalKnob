@@ -3,6 +3,7 @@ function DKMidiDialog_Init()
 {
 	//DKLog("DKMidiDialog_Init()\n");
 	
+	DKCreate("DKMidi/DKMidiDialog.css");
 	DKCreate("DKMidi/DKMidiDialog.html");
 	//DKMidiDialog_UpdatePorts();
 }
@@ -14,6 +15,7 @@ function DKMidiDialog_End()
 	
 	DKRemoveEvents(DKMidiDialog_OnEvent);
 	DKClose("DKMidi/DKMidiDialog.html");
+	DKClose("DKMidi/DKMidiDialog.css");
 }
 
 ////////////////////////////////////
