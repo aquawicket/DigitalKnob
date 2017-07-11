@@ -5,5 +5,7 @@
 *** TOTO ***
 * Need a lot of work in DKRocket.cpp and DKWidget.cpp
 * Test windows 10+
-* DKFile/DKSolution: Select upon rename
+* add DKWidget_SetFocus(id) javascript function to c++
+* Create DKFile/SaveFile and DKFile/OpenFile to replace DKFileDialog
+* DKFile/DKSolution should be renamed to DKExplorer
 
