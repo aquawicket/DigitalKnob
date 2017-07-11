@@ -6,6 +6,7 @@ function DKColorPicker_Init()
 {
 	//DKLog("DKColorPicker_Init()\n");
 	
+	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
