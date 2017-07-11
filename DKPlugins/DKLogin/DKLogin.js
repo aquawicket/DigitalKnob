@@ -4,6 +4,7 @@ var FACEBOOK_NAME;
 ///////////////////////
 function DKLogin_Init()
 {
+	DKCreate("DKLogin/DKLogin.css");
 	DKCreate("DKLogin/DKLogin.html");
 	DKAddEvent("DKLoginFacebook", "click", DKLogin_OnEvent);
 }
