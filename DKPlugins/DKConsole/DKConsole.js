@@ -5,6 +5,7 @@ function DKConsole_Init()
 {
 	//DKLog("DKConsole_Init()\n");
 	
+	DKCreate("DKConsole/DKConsole.css");
 	DKCreate("DKConsole/DKConsole.html");
 	DKAddEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
 	DKAddEvent("DKConsole_Close", "click", DKConsole_OnEvent);
@@ -19,6 +20,7 @@ function DKConsole_End()
 	
 	DKRemoveEvents(DKConsole_OnEvent);
 	DKClose("DKConsole/DKConsole.html");
+	DKClose("DKConsole/DKConsole.css");
 }
 
 /////////////////////////////////
