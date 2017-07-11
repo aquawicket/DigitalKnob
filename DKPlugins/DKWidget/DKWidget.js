@@ -589,6 +589,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 	}
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
+		if(variable == "body"){ element = document.body; }
 		if(!element){ 
 			DKLog("ERROR: SetProperty(): element("+variable+") invalid", DKERROR);
 			return false;

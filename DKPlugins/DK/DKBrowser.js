@@ -1,7 +1,7 @@
 //BROWSER
 
 //***** DigitalKnob *****
-top.document.body.style.backgroundColor = "rgb(200,200,200)";
+document.body.style.backgroundColor = "rgb(200,200,200)";
 document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
 
@@ -181,7 +181,7 @@ function LoadHtml(url, parent)
 		parent.appendChild(nodes[0]);
 	}
 	else{
-		top.document.body.appendChild(nodes[0]);
+		document.body.appendChild(nodes[0]);
 	}
 	
 	return true;
