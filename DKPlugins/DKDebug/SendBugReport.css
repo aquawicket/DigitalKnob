@@ -1,0 +1,60 @@
+#DKDebug/SendBugReport/.html
+{
+	position:absolute;
+	overflow:hidden;
+	width:300px;
+	width:300rem;
+	height:200px;
+	height:200rem;
+}
+
+#SendBugReport_Text
+{
+	position:absolute;
+	top:10px;
+	top:10rem;
+	left:10px;
+	left:10rem;
+	font-size:13px;
+	font-size:13rem;
+}
+
+#SendBugReport_Textarea
+{
+	position:absolute;
+	top:20%;
+	left:5%;
+	width:90%;
+	height:60%;
+}
+
+#SendBugReport_Button
+{
+	position:absolute;
+	right:20px;
+	right:20rem;
+	bottom:10px;
+	bottom:10rem;
+	width:50px;
+	width:50rem;
+}
+
+#SendBugReport_Image
+{
+	display:none;
+	position:absolute;
+	left:50px;
+	left:50rem;
+	bottom:10px;
+	bottom:10rem;
+}
+
+#SendBugReport_Sending
+{
+	display:none;
+	position:absolute;
+	left:80px;
+	left:80rem;
+	bottom:10px;
+	bottom:10rem;
+}

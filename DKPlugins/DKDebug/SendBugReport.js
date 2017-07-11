@@ -3,6 +3,7 @@ function SendBugReport_Init()
 {
 	//DKLog("SendBugReport_Init()\n");
 	
+	DKCreate("DKDebug/SendBugReport.css");
 	DKCreate("DKDebug/SendBugReport.html");
 	DKAddEvent("SendBugReport_Button", "click", SendBugReport_OnEvent);
 }
@@ -14,6 +15,7 @@ function SendBugReport_End()
 	
 	DKRemoveEvents(SendBugReport_OnEvent);
 	DKClose("DKDebug/SendBugReport.html");
+	DKClose("DKDebug/SendBugReport.css");
 }
 
 /////////////////////////////////////
