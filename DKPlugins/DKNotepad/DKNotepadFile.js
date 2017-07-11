@@ -69,9 +69,9 @@ function DKNotepadFile_Open()
 {
 	//DKLog("DKNotepadFile_Open()\n");
 	
-	DKCreate("DKFile/DKFileDialog.js", function(){
-		DKFrame_Widget("DKFile/DKFileDialog.html");
-		DKSendEvent("DKFile/DKFileDialog.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKFileDialog
+	DKCreate("DKFile/DKOpenFile.js", function(){
+		DKFrame_Widget("DKFile/DKOpenFile.html");
+		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKOpenFile
 	});
 }
 
