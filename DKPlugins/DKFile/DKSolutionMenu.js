@@ -232,15 +232,20 @@ function DKSolutionMenu_Paste()
 ////////////////////////////////
 function DKSolutionMenu_GitAdd()
 {
-	//DKLog("DKSolutionMenu_GitAdd()\n");
+	DKLog("DKSolutionMenu_GitAdd()\n");
 	
 	//TODO
 	
 	//we need the path of git.exe
-	//var git = GIT; //from DKFile.js
-	//DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n");
-	// The GIT variable seems OK
-	
+	DKCreate("DKBuild/DKBuild.js", function(){
+		var git = GIT; //from DKBuild.js
+		DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n");
+		
+		//Windows
+		DKFile_ChDir("C:/digitalknob");
+		DK_Execute(git+" add "+DKSolutionMenu_file);
+		//TODO
+	});
 	
 	//we need to find the folder of the git repository
 	//we need to chdir to that path
