@@ -11,7 +11,7 @@ function DKLogin_Init()
 //////////////////////
 function DKLogin_End()
 {
-	DKRemoveEvents("DKLogin_OnEvent);
+	DKRemoveEvents(DKLogin_OnEvent);
 	DKClose("DKLogin/DKLogin.html");
 }
 
