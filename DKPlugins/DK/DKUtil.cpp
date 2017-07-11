@@ -455,13 +455,28 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 {
 	DKLog("DKUtil::Run("+command+","+params+")\n", DKDEBUG);
 #ifdef WIN32
+	DKString error;
+	PVOID OldValue = NULL;
+    //  Disable redirection immediately prior to the native API function call.
+    if(!Wow64DisableWow64FsRedirection(&OldValue)){
+		DKWindows::GetLastError(error);
+		DKLog("DKUtil::Run("+command+","+params+"): Disable redirection failed: "+error+"\n", DKERROR);
+		return false;
+	}
+
 	//https://msdn.microsoft.com/en-us/library/windows/desktop/bb762153(v=vs.85).aspx
 	if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){
-		DKString error;
 		DKWindows::GetLastError(error);
 		DKLog("DKUtil::Run("+command+","+params+"): "+error+"\n", DKERROR);
 		return false;
 	}
+
+    //  Immediately re-enable redirection. 
+    if(Wow64RevertWow64FsRedirection(OldValue) == FALSE){
+		DKWindows::GetLastError(error);
+        DKLog("DKUtil::Run("+command+","+params+"): Enable redirection failed: "+error+"\n", DKERROR);    
+		return false;
+    }
 	return true;
 #endif
 #ifdef LINUX
