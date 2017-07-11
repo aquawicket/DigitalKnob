@@ -28,6 +28,9 @@ function DKNotepadFile_OnEvent(event)
 {
 	//DKLog("DKNotepadFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
+	if(DK_Id(event,"DKNotepadFile_New")){
+		DKNotepadFile_New();
+	}
 	if(DK_Id(event,"DKNotepadFile_Open")){
 		DKNotepadFile_Open();
 	}
@@ -35,9 +38,6 @@ function DKNotepadFile_OnEvent(event)
 		var file = DK_GetValue(event);
 		DKLog("OpenFile: "+file+" \n", DKDEBUG)
 		DKNotepad_Open(file)
-	}
-	if(DK_Id(event,"DKNotepadFile_New")){
-		DKNotepadFile_New();
 	}
 	if(DK_Id(event,"DKNotepadFile_Save")){
 		DKNotepadFile_Save();
@@ -66,7 +66,8 @@ function DKNotepadFile_New()
 {
 	DKLog("DKNotepadFile_New\n");
 	
-	DKLog("TODO\n");	
+	DKWidget_SetAttribute("DKNotepad_Text", "value", "");
+	currentFile = "";
 }
 
 /////////////////////////////
