@@ -1,20 +1,15 @@
 var sizes = [];
 
-
 ///////////////////////
 function DKFrame_Init()
 {
 	//DKLog("DKFrame_Init()\n");
-	
-	//DKAddEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 //////////////////////
 function DKFrame_End()
 {
 	//DKLog("DKFrame_End()\n");
-	
-	//DKRemoveEvent("GLOBAL", "mousedown", DKFrame_OnEvent);  //Fixme - this eats clicks
 }
 
 ///////////////////////////////
@@ -68,29 +63,11 @@ function DKFrame_Widget(id)
 	//	return;
 	//}
 	
-	//var top = DKWidget_GetProperty(id, "top");
-	//var bottom = DKWidget_GetProperty(id, "bottom");
-	//var left = DKWidget_GetProperty(id, "left");
-	//var right = DKWidget_GetProperty(id, "right");
 	var width = DKWidget_GetProperty(id, "width");
 	var height = DKWidget_GetProperty(id, "height");
-	//DKLog("top: "+top+"\n");
-	//DKLog("bottom: "+bottom+"\n");
-	//DKLog("left: "+left+"\n");
-	//DKLog("right: "+right+"\n");
-	//DKLog("width: "+width+"\n");
-	//DKLog("height: "+height+"\n");
-	
-	//top = top.replace("px", "");
-	//bottom = bottom.replace("px", "");
-	//left = left.replace("px", "");
-	//right = right.replace("px", "");
+
 	width = width.replace("px", "");
 	height = height.replace("px", "");
-	//top = top.replace("rem", "");
-	//bottom = bottom.replace("rem", "");
-	//left = left.replace("rem", "");
-	//right = right.replace("rem", "");
 	width = width.replace("rem", "");
 	height = height.replace("rem", "");
 	
@@ -101,9 +78,7 @@ function DKFrame_Widget(id)
 	DKWidget_SetProperty(id, "top", "21rem");
 	DKWidget_SetProperty(id, "left", "0rem");
 	DKWidget_SetProperty(id, "width", "100%");
-	//DKWidget_SetProperty(id, "height", "100%");
 	DKWidget_SetProperty(id, "bottom", "-1rem");
-	//DKWidget_RemoveProperty(id, "bottom");
 	DKWidget_RemoveProperty(id, "right");
 	DKWidget_RemoveProperty(id, "height");
 	
@@ -116,6 +91,7 @@ function DKFrame_SetTitle(id, title)
 {
 	//DKLog("DKFrame_SetTitle("+id+","+title+")\n");
 	
+	//TODO - add protection	
 	var frame = DKWidget_GetParent(id);
 	var titlebar = DKWidget_GetFirstChild(frame);
 	var titlebartext = DKWidget_GetFirstChild(titlebar);
@@ -250,7 +226,6 @@ function DKFrame_BringToFront()
 {
 	//DKLog("DKFrame_BringToFront()\n");
 	
-	//FIXME - this function is not working properly
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
 	
