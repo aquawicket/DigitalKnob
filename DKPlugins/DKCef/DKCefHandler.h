@@ -14,7 +14,7 @@ class DKCef;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
-	                 public CefKeyboardHandler, public CefGeolocationHandler, public CefPrintHandler
+	                 public CefKeyboardHandler, public CefGeolocationHandler
 {
 public:
 	DKCefHandler();
@@ -41,7 +41,6 @@ public:
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
 	virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
-	//virtual CefRefPtr<CefPrintHandler> GetPrintHandler() { return this; }
 	
 	//////////////
 	void DoFrame()

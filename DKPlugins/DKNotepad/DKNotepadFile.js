@@ -109,7 +109,7 @@ function DKNotepadFile_Print()
 {
 	DKLog("DKNotepadFile_Print()\n");
 	
-	DKLog("TODO\n");
+	DKCef_Print("Cef", 0);
 }
 
 /////////////////////////////////////

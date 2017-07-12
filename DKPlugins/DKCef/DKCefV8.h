@@ -37,6 +37,7 @@ public:
 	
 	//Cef JS functions
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
+	static bool Print(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);

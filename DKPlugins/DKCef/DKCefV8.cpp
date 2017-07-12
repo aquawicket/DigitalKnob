@@ -30,6 +30,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
+	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 }
 
 ///////////////////
@@ -282,6 +283,15 @@ bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
 	DKString id = args->GetString(0);
 	int num = args->GetInt(1);
 	DKCef::Get(id)->ShowDevTools(num);
+	return 1;
+}
+
+///////////////////////////////////////////////////
+bool DKCefV8::Print(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int num = args->GetInt(1);
+	DKCef::Get(id)->Print(num);
 	return 1;
 }
 

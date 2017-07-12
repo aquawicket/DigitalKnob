@@ -467,6 +467,13 @@ bool DKCef::ShowDevTools(int num)
 	return true;
 }
 
+//////////////////////////
+bool DKCef::Print(int num)
+{
+	current_browser->GetHost()->Print();
+	return true;
+}
+
 ////////////////////////////////////////////////////////////
 void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser) 
 {

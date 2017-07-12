@@ -27,6 +27,7 @@ public:
 	static int GetBrowsers(duk_context* ctx);
 	static int GetCurrentBrowser(duk_context* ctx);
 	static int ShowDevTools(duk_context* ctx);
+	static int Print(duk_context* ctx);
 	static int RunJavascript(duk_context* ctx);
 };
 
