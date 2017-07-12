@@ -5,13 +5,12 @@ var event_data2;
 var aPath;
 var rPath;
 
-//var DKOpenFile_callback;
-
-////////////////////////////
+//////////////////////////
 function DKOpenFile_Init()
 {	
 	//DKLog("DKOpenFile_Init()\n");
 
+	DKCreate("DKFile/DKOpenFile.css");
 	DKCreate("DKFile/DKOpenFile.html");
 	DKAddEvent("DKFile/DKOpenFile.html", "GetFile", DKOpenFile_OnEvent);
 	DKAddEvent("DKOpenFileCancel", "click", DKOpenFile_OnEvent);
@@ -25,16 +24,17 @@ function DKOpenFile_Init()
 	DKLog(drives+"\n");
 }
 
-///////////////////////////
+/////////////////////////
 function DKOpenFile_End()
 {
 	//DKLog("DKOpenFile_End()\n");
 	
 	DKRemoveEvents(DKOpenFile_OnEvent);
 	DKClose("DKFile/DKOpenFile.html");
+	DKClose("DKFile/DKOpenFile.css");
 }
 
-////////////////////////////////////
+//////////////////////////////////
 function DKOpenFile_OnEvent(event)
 {	
 	//DKLog("DKOpenFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
@@ -99,15 +99,7 @@ function DKOpenFile_OnEvent(event)
 	}
 }
 
-/*
-//////////////////////////////////////
-function DKOpenFile_GetFIle(callback)
-{
-		DKOpenFile_callback = callback;
-}
-*/
-
-//////////////////////////////////////
+////////////////////////////////////
 function DKOpenFile_OpenFolder(path)
 {
 	//DKLog("DKOpenFile_OpenFolder("+path+")\n");
@@ -118,7 +110,7 @@ function DKOpenFile_OpenFolder(path)
 	return false;
 }
 
-////////////////////////////////////
+//////////////////////////////////
 function DKOpenFile_OpenFile(path)
 {
 	//DKLog("DKOpenFile_OpenFile("+path+")\n");
@@ -137,7 +129,7 @@ function DKOpenFile_OpenFile(path)
 	DKWidget_SetValue("DKOpenFilePath",aPath);
 }
 
-//////////////////////////////////////
+////////////////////////////////////
 function DKOpenFile_UpdatePath(path)
 {
 	//DKLog("DKOpenFile_UpdatePath("+path+")\n");
