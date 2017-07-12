@@ -36,6 +36,7 @@ public:
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	static void RunJavascript(DKString& string);
 	
+	
 	DKString id;
 	int top;
 	int left;
