@@ -14,7 +14,7 @@ function DKSaveFile_Init()
 
 	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
-	DKAddEvent("DKFile/DKSaveFile.html", "GetFile", DKSaveFile_OnEvent);
+	DKAddEvent("DKFile/DKSaveFile.html", "SetFile", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileCancel", "click", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileOK", "click", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileUp", "click", DKSaveFile_OnEvent);
@@ -80,7 +80,7 @@ function DKSaveFile_OnEvent(event)
 		return;
 	}
 	
-	if(DK_Type(event, "GetFile")){
+	if(DK_Type(event, "SetFile")){
 		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
