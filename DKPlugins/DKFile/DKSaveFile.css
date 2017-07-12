@@ -55,6 +55,24 @@
 	background-color:rgb(255,255,255);
 }
 
+#DKSaveFileNameText
+{
+	position:absolute;
+	left:10px;
+	left:10rem;
+	bottom:5rem;
+	width:50rem;
+}
+
+#DKSaveFileName
+{
+	position:absolute;
+	left:60px;
+	left:60rem;
+	bottom:5rem;
+	width:50rem;
+}
+
 #DKSaveFileCancel
 {
 	position:absolute;
