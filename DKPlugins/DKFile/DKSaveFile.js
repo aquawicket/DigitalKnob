@@ -12,6 +12,7 @@ function DKSaveFile_Init()
 {	
 	//DKLog("DKSaveFile_Init()\n");
 
+	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
 	DKAddEvent("DKFile/DKSaveFile.html", "GetFile", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileCancel", "click", DKSaveFile_OnEvent);
@@ -32,6 +33,7 @@ function DKSaveFile_End()
 	
 	DKRemoveEvents(DKSaveFile_OnEvent);
 	DKClose("DKFile/DKSaveFile.html");
+	DKClose("DKFile/DKSaveFile.css");
 }
 
 ////////////////////////////////////

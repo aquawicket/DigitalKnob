@@ -65,6 +65,7 @@ function DKFrame_Widget(id)
 	
 	var width = DKWidget_GetProperty(id, "width");
 	var height = DKWidget_GetProperty(id, "height");
+	//DKLog("DKFrame_Widget("+id+"): width="+width+" , height="+height+"\n");
 
 	width = width.replace("px", "");
 	height = height.replace("px", "");
@@ -98,6 +99,7 @@ function DKFrame_SetTitle(id, title)
 	DKWidget_SetInnerHtml(titlebartext, title);
 }
 
+/*
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
@@ -124,8 +126,9 @@ function DKFrame_Iframe(title, url, width, height)
 	DKCef_SetFocus(iframe);
 	return iframe;
 }
+*/
 
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
 	//DKLog("DKFrame_CreateFrame("+title+","+width+","+height+")\n");
