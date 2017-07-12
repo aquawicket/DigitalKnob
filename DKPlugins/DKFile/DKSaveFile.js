@@ -18,7 +18,7 @@ function DKSaveFile_Init()
 	DKAddEvent("DKSaveFileCancel", "click", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileOK", "click", DKSaveFile_OnEvent);
 	DKAddEvent("DKSaveFileUp", "click", DKSaveFile_OnEvent);
-	DKAddEvent("DKSaveFilePath", "change", DKSaveFile_OnEvent);
+	DKAddEvent("DKSaveFilePath", "input", DKSaveFile_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -60,10 +60,16 @@ function DKSaveFile_OnEvent(event)
 	
 	if(DK_Id(event, "DKSaveFileOK")){
 		if(rPath && event_data2 == "relative"){
+			if(DKFile_IsDirectory(rPath)){
+				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");
+			}
 			DKLog("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 == "absolute"){
+			if(DKFile_IsDirectory(aPath)){
+				aPath = aPath+"/"+DKWidget_GetValue("DKSaveFileName");
+			}
 			DKLog("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
 			DKSendEvent(event_id, event_type, aPath);
 		}

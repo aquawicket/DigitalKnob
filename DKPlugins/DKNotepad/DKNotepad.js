@@ -87,6 +87,6 @@ function DKNotepad_Save(file)
 	//DKLog("DKNotepad_Save("+file+")\n");
 	
 	var text = DKWidget_GetAttribute("DKNotepad_Text", "value");
-	DKLog("DKNotepad_Save("+file+"): text = "+text+"\n");
+	//DKLog("DKNotepad_Save("+file+"): text = "+text+"\n");
 	DKFile_StringToFile(text, file);
 }
