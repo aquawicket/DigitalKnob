@@ -9,7 +9,7 @@ function DKNotepadFormat_Init()
 	DKAddEvent("DKNotepadFormat_Font", "click", DKNotepadFormat_OnEvent);
 }
 
-////////////////////////////
+//////////////////////////////
 function DKNotepadFormat_End()
 {
 	//DKLog("DKNotepadFormat_End()\n");
@@ -18,13 +18,13 @@ function DKNotepadFormat_End()
 	DKClose("DKNotepad/DKNotepadFormat.html");
 }
 
-/////////////////////////////////////
+///////////////////////////////////////
 function DKNotepadFormat_OnEvent(event)
 {
 	//DKLog("DKNotepadFormat_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"DKNotepadFormat_WordWrap")){
-		DKLog("DKNotepadFormat_WordWrap\n");
+		DKNotepadFormat_WordWrap();
 	}
 	if(DK_Id(event,"DKNotepadFormat_Font")){
 		DKLog("DKNotepadFormat_Font\n");
@@ -36,4 +36,17 @@ function DKNotepadFormat_OnEvent(event)
 		}
 	}
 	DKClose("DKNotepad/DKNotepadFormat.js");
+}
+
+///////////////////////////////////
+function DKNotepadFormat_WordWrap()
+{
+	//DKLog("DKNotepadFormat_WordWrap()\n");
+	
+	if(DKWidget_GetProperty("DKNotepad_Text","white-space") == ""){
+		DKWidget_SetProperty("DKNotepad_Text","white-space","nowrap");
+	}
+	else{
+		DKWidget_RemoveProperty("DKNotepad_Text","white-space");
+	}
 }

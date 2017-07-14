@@ -152,6 +152,8 @@ function DKEditor_Menu_OnEvent(event)
 		DKWidget_SetAttribute(iframe, "width", "100%");
 		DKWidget_SetAttribute(iframe, "height", "100%");
 		DKWidget_SetProperty(iframe, "border-width", "0px");
+		//DKWidget_SetProperty(iframe, "overflow-x", "auto");
+		//DKWidget_SetProperty(iframe, "overflow-y", "auto");
 		
 		DKFrame_Widget(div);
 	}
