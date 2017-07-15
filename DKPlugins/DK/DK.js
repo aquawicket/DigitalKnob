@@ -420,6 +420,7 @@ function DK_GetId(event)
 	return;
 }
 
+/*
 ///////////////////////////
 function DK_GetValue(event)
 {
@@ -429,6 +430,7 @@ function DK_GetValue(event)
 	//DKLog("GetValue("+event+") \n");
 	return DKWidget_GetValue(event);
 }
+*/
 
 ////////////////////////////////
 function DK_Type(event, command)
