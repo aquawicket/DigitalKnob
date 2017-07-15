@@ -79,7 +79,7 @@ function DKOpenFile_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "GetFile")){
-		var params = DK_GetValue(event).split(",");
+		var params = DKWidget_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		event_data1 = params[2];
