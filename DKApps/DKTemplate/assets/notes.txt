@@ -5,5 +5,5 @@
 *** TOTO ***
 * Test windows 10+
 * add DKWidget_SetFocus(id) javascript function to c++
-* DKFile/DKSolution should be renamed to FileExplorer
+* DKFile/DKSolution should be renamed to DKFileExplorer
 
