@@ -71,7 +71,7 @@ function DKNotepadFile_Open()
 	
 	DKCreate("DKFile/DKOpenFile.js", function(){
 		DKFrame_Widget("DKFile/DKOpenFile.html");
-		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "GLOBAL,OpenFile,/,relative"); // To -> DKOpenFile
+		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "GLOBAL,OpenFile,/,absolute"); // To -> DKOpenFile
 	});
 }
 
@@ -100,7 +100,7 @@ function DKNotepadFile_SaveAs()
 	
 	DKCreate("DKFile/DKSaveFile.js", function(){
 		DKFrame_Widget("DKFile/DKSaveFile.html");
-		DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "GLOBAL,SaveFile,/,relative"); // To -> DKFileDialog
+		DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "GLOBAL,SaveFile,/,absolute"); // To -> DKFileDialog
 	});
 }
 
