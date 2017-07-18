@@ -240,7 +240,7 @@ void DKCef::Init()
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
 
 		DKString icon = DKFile::local_assets+"icon.ico";
-		DKClass::CallFunc("DKCefHandler::SetIcon", &icon, NULL);
+		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
 	DKCreate("DKCefV8");
