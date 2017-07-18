@@ -1,8 +1,6 @@
-/*
-
 #pragma once
-#ifndef DKCefHandler_H
-#define DKCefHandler_H
+#ifndef DKCefWindow_H
+#define DKCefWindow_H
 
 #ifdef LINUX
 #include <gdk/gdk.h>
@@ -12,12 +10,12 @@
 class DKCef;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class DKCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
+class DKCefWindow : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
 	                 public CefKeyboardHandler, public CefGeolocationHandler
 {
 public:
-	DKCefHandler();
+	DKCefWindow();
 	bool TestInt(void* input, void* output);
 	bool TestString(void* input, void* output);
 	bool TestReturnInt(void* input, void* output);
@@ -56,7 +54,7 @@ public:
 	//////////////////////////////////////////////////////////////
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	{
-		DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
+		DKLog("DKCefWindow::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
 		
 		//rect = CefRect(0, 0, dkCef->width, dkCef->height);
 		return true;
@@ -65,25 +63,25 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 	{
-		DKLog("DKCefHandler::OnPaint()\n", DKDEBUG);
+		DKLog("DKCefWindow::OnPaint()\n", DKDEBUG);
 	}
 
 	//////////////////////////////////////////////////////////
 	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
 	{
-		DKLog("DKCefHandler::OnPopupShow()\n", DKDEBUG);
+		DKLog("DKCefWindow::OnPopupShow()\n", DKDEBUG);
 	}
 
 	////////////////////////////////////////////////////////////////////
 	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
 	{
-		DKLog("DKSDLCefHandler::OnPopupSize()\n", DKDEBUG);
+		DKLog("DKCefWindow::OnPopupSize()\n", DKDEBUG);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
 	{
-		DKLog("DKSDLCefHandler::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
+		DKLog("DKCefWindow::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
 		
 		//for (unsigned int i = 0; i<dkCef->browsers.size(); ++i) {
 			//if (browser->GetIdentifier() == dkCef->browsers[i]->GetIdentifier()) {
@@ -97,13 +95,13 @@ public:
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 	{ 
 		CEF_REQUIRE_UI_THREAD();
-		DKLog("DKSDLCefHandler::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
+		DKLog("DKCefWindow::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
-		DKLog("DKSDLCefHandler::OnFullscreenModeChange()\n", DKINFO);
+		DKLog("DKCefWindow::OnFullscreenModeChange()\n", DKINFO);
 
 #ifdef WIN32
 		HWND hwnd = GetActiveWindow();
@@ -133,7 +131,7 @@ public:
 		//gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
-		      DKLog("DKSDLCefHandler::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
+		      DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
 		      return;
 		}
 		if(fullscreen){
@@ -149,14 +147,14 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
-		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
+		DKLog("DKCefWindow::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
 		return false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 	{
-		DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKINFO);
+		DKLog("DKCefWindow::OnBeforeDownload("+suggested_name.ToString()+")\n", DKINFO);
 
 #ifdef WIN32
 		UNREFERENCED_PARAMETER(browser);
@@ -168,13 +166,13 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 	{
-		//DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKINFO);
+		//DKLog("DKCefWindow::OnBeforeContextMenu()\n", DKINFO);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)
 	{
-		//DKLog("DKSDLCefHandler::OnContextMenuCommand()\n", DKINFO);
+		//DKLog("DKCefWindow::OnContextMenuCommand()\n", DKINFO);
 		return false;
 	}
 
@@ -183,7 +181,7 @@ public:
 	{
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
-		//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
+		//DKLog("DKCefWindow::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
 		DKString string = message.ToString();
 		replace(string,"%c","");
 		DKLog("[CEF] "+string+"\n", DKINFO);
@@ -206,15 +204,15 @@ public:
 	//////////////////////////////////////////////////////
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 	{
-		//DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
+		//DKLog("DKCefWindow::OnProcessMessageReceived()\n", DKINFO);
 		
 		if(message->GetName() == "GetFunctions"){
-			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
+			//DKLog("DKCefWindow::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
 			DKV8::GetFunctions(browser);
 		}
 		
 		if(has(message->GetName(),"CallFunc(")){
-			//DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
+			//DKLog("DKCefWindow::OnProcessMessageReceived(CallFunc)\n", DKINFO);
 		
 			//get function name
 			DKString func = message->GetName();
@@ -255,14 +253,12 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnRequestGeolocationPermission(CefRefPtr< CefBrowser > browser, const CefString& requesting_url, int request_id, CefRefPtr< CefGeolocationCallback > callback)
 	{
-		DKLog("DKSDLCefHandler::OnRequestGeolocationPermission()\n", DKINFO);
+		DKLog("DKCefWindow::OnRequestGeolocationPermission()\n", DKINFO);
 		callback->Continue(true);
 		return true;
 	}
 
-	IMPLEMENT_REFCOUNTING(DKCefHandler);
+	IMPLEMENT_REFCOUNTING(DKCefWindow);
 };
 
-#endif //DKCefHandler_H
-
-*/
+#endif //DKCefWindow_H

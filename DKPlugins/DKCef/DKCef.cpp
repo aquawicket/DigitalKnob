@@ -4,7 +4,7 @@
 #include "DKClass.h"
 #include "DKLog.h"
 #include "DKFile.h"
-#include "DKCefHandler.h"
+#include "DKCefWindow.h"
 #include <include/cef_urlrequest.h>
 #include <include/cef_version.h>
 
@@ -233,11 +233,11 @@ void DKCef::Init()
 		}
 	}
 	else{
-		dkCefHandler = new DKCefHandler();
-		cefHandler = dkCefHandler;
-		dkCefHandler->dkCef = this;
+		dkCefWindow = new DKCefWindow();
+		cefHandler = dkCefWindow;
+		dkCefWindow->dkCef = this;
 		NewBrowser();
-		DKApp::AppendLoopFunc(&DKCefHandler::DoFrame, dkCefHandler);
+		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
 
 		DKString icon = DKFile::local_assets+"icon.ico";
 		DKClass::CallFunc("DKCefHandler::SetIcon", &icon, NULL);
