@@ -20,8 +20,10 @@ function DKOpenFile_Init()
 	
 	aPath = "";
 	rPath = "";
-	var drives = DKFile_GetDrives(); //TODO
-	DKLog(drives+"\n");
+	
+	//TODO
+	//var drives = DKFile_GetDrives();
+	//DKLog(drives+"\n");
 }
 
 /////////////////////////
@@ -58,11 +60,11 @@ function DKOpenFile_OnEvent(event)
 	
 	if(DK_Id(event, "DKOpenFileOK")){
 		if(rPath && event_data2 == "relative"){
-			DKLog("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
+			//DKLog("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 == "absolute"){
-			DKLog("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
+			//DKLog("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
 			DKSendEvent(event_id, event_type, aPath);
 		}
 		else{
@@ -84,10 +86,10 @@ function DKOpenFile_OnEvent(event)
 		event_type = params[1];
 		event_data1 = params[2];
 		event_data2 = params[3];
-		DKLog("event_type:"+event_type+"\n");
-		DKLog("event_id:"+event_id+"\n");
-		DKLog("event_data1:"+event_data1+"\n");
-		DKLog("event_data2:"+event_data2+"\n");
+		//DKLog("event_type:"+event_type+"\n");
+		//DKLog("event_id:"+event_id+"\n");
+		//DKLog("event_data1:"+event_data1+"\n");
+		//DKLog("event_data2:"+event_data2+"\n");
 	
 		DKOpenFile_UpdatePath(event_data1);
 	}
@@ -121,11 +123,11 @@ function DKOpenFile_OpenFile(path)
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	//DKLog("aPath:"+aPath+"\n");
 	var assets = DKAssets_LocalAssets();
 	//DKLog("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, assets);
-	DKLog("rPath:"+rPath+"\n");
+	//DKLog("rPath:"+rPath+"\n");
 	DKWidget_SetValue("DKOpenFilePath",aPath);
 }
 
@@ -135,18 +137,18 @@ function DKOpenFile_UpdatePath(path)
 	//DKLog("DKOpenFile_UpdatePath("+path+")\n");
 	
 	//if(!path){ return false; }
-	DKLog("DKOpenFile_UpdatePath("+path+") \n");
+	//DKLog("DKOpenFile_UpdatePath("+path+") \n");
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	//DKLog("aPath:"+aPath+"\n");
 	//var assets = DKAssets_LocalAssets();
 	//DKLog("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, path);
-	DKLog("rPath:"+rPath+"\n");
+	//DKLog("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
