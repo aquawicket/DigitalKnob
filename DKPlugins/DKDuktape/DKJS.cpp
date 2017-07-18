@@ -79,7 +79,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime);
 	DKDuktape::AttachFunction("DK_GetType", DKJS::GetType);
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername);
-	//DKDuktape::AttachFunction("DK_GetValue", DKJS::GetValue);
+	DKDuktape::AttachFunction("DK_GetValue", DKJS::GetValue);
 	DKDuktape::AttachFunction("DK_GetVolume", DKJS::GetVolume);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole);
 	DKDuktape::AttachFunction("DK_Id", DKJS::Id);
@@ -536,7 +536,6 @@ int DKJS::GetType(duk_context* ctx)
 	return 1;
 }
 
-/*
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
@@ -559,7 +558,6 @@ int DKJS::GetValue(duk_context* ctx)
 	duk_push_string(ctx, arry[2].c_str());
 	return 1;
 }
-*/
 
 /////////////////////////////////////
 int DKJS::GetMouseX(duk_context* ctx)
