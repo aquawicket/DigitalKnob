@@ -362,7 +362,7 @@ bool DKWindow::IsVisible()
 	if(DKClass::HasFunc("DKCefWindow::IsVisible")){
 		DKClass::CallFunc("DKCefWindow::IsVisible", NULL, &output);
 	}
-	if(DKClass::HasFunc("DKSDLWindow::IsVisible")){
+	else if(DKClass::HasFunc("DKSDLWindow::IsVisible")){
 		DKClass::CallFunc("DKSDLWindow::IsVisible", NULL, &output);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::IsVisible")){
