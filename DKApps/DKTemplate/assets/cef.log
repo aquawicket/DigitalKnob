@@ -385,3 +385,18 @@
 [0718/104817.592:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0718/105046.721:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0718/105046.939:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/105435.415:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/105435.680:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/105635.283:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/105635.861:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/105642.753:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/105642.753:ERROR:tcp_socket_win.cc(355)] bind() returned an error: Only one usage of each socket address (protocol/network address/port) is normally permitted. (0x2740)
+[0718/105642.768:ERROR:devtools_http_handler.cc(221)] Cannot start http server for devtools. Stop devtools.
+[0718/105643.345:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/105643.666:ERROR:cache_util_win.cc(20)] Unable to move the cache: 5
+[0718/105643.669:ERROR:cache_util.cc(134)] Unable to move cache folder C:/digitalknob/DKApps/DKTemplate/assets/USER\Cache to C:/digitalknob/DKApps/DKTemplate/assets/USER\old_Cache_000
+[0718/105643.671:ERROR:disk_cache.cc(132)] Unable to create cache
+[0718/110848.486:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/110848.705:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/111758.898:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/111759.164:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.

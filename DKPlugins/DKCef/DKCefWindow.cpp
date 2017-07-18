@@ -12,6 +12,7 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::SetIcon", &DKCefWindow::SetIcon, this);
 	DKClass::RegisterFunc("DKCefWindow::Minimize", &DKCefWindow::Minimize, this);
 	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
+	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
 }
@@ -115,6 +116,7 @@ bool DKCefWindow::Minimize(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
+	return true;
 #endif
 
 	return false;
@@ -128,6 +130,21 @@ bool DKCefWindow::Restore(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_RESTORE);
+	return true;
+#endif
+
+	return false;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefWindow::IsVisible(void* input, void* output)
+{
+	DKLog("DKCefWindow::IsVisible()\n", DKINFO);
+
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	*(bool*)output = IsWindowVisible(hwnd);
+	return true;
 #endif
 
 	return false;
@@ -141,9 +158,10 @@ bool DKCefWindow::Hide(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_HIDE);
+	return true;
 #endif
 
-	return true;
+	return false;
 }
 
 /////////////////////////////////////////////////
@@ -154,7 +172,8 @@ bool DKCefWindow::Show(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_SHOW);
+	return true;
 #endif
 
-	return true;
+	return false;
 }
