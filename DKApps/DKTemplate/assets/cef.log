@@ -371,3 +371,5 @@
 [0718/100000.023:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0718/100356.545:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0718/100356.758:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0718/100418.782:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0718/100419.005:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.

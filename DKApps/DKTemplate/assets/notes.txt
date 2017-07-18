@@ -7,5 +7,4 @@
 * add DKWidget_SetFocus(id) javascript function to c++
 * Create DKFile/SaveFile and DKFile/OpenFile to replace DKFileDialog
 * DKFile/DKSolution should be renamed to FileExplorer
-* DKWidget_GetValue() should be changed to DK_GetValue()
 
