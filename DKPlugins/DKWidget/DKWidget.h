@@ -87,6 +87,7 @@ public:
 	static bool ScrollToTop(const DKString& id);
 	static bool SetAttribute(const DKString& id, const DKString& name, const DKString& value);
 	static bool SetFile(const DKString& id, const DKString& file);
+	static bool SetFocus(DKString& id);
 	static bool SetInnerHtml(const DKString& id, const DKString& value);
 	static bool SetInnerHtmlString(const DKString& id, const DKString& value);
 	static bool SetProperty(const DKString& id, const DKString& name, const DKString& value);

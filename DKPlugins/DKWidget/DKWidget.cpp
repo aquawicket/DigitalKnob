@@ -741,6 +741,17 @@ bool DKWidget::GetFocusElement(DKString& id)
 	return true;
 }
 
+/////////////////////////////////////
+bool DKWidget::SetFocus(DKString& id)
+{
+	DKElement* element = dkRocket->document->GetElementById(id.c_str());
+	if(!element){ 
+		DKLog("DKWidget::SetFocus("+id+")\n", DKERROR);
+		return false; 
+	}
+	return element->Focus();
+}
+
 ////////////////////////////////////////////
 bool DKWidget::GetHoverElement(DKString& id)
 {

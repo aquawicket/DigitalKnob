@@ -64,6 +64,7 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_ScrollToTop", DKWidgetJS::ScrollToTop);
 	DKDuktape::AttachFunction("DKWidget_SetAttribute", DKWidgetJS::SetAttribute);
 	DKDuktape::AttachFunction("DKWidget_SetFile", DKWidgetJS::SetFile);
+	DKDuktape::AttachFunction("DKWidget_SetFocus", DKWidgetJS::SetFocus);
 	DKDuktape::AttachFunction("DKWidget_SetInnerHtml", DKWidgetJS::SetInnerHtml);
 	DKDuktape::AttachFunction("DKWidget_SetInnerHtmlString", DKWidgetJS::SetInnerHtmlString);
 	DKDuktape::AttachFunction("DKWidget_SetOption", DKWidgetJS::SetOption);
@@ -566,6 +567,14 @@ int DKWidgetJS::GetFocusElement(duk_context* ctx)
 	DKString id;
 	if(!DKWidget::GetFocusElement(id)){ return 0; }
 	duk_push_string(ctx, id.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWidgetJS::SetFocus(duk_context* ctx)
+{
+	DKString id;
+	if(!DKWidget::SetFocus(id)){ return 0; }
 	return 1;
 }
 

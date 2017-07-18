@@ -67,6 +67,7 @@ public:
 	static int ScrollToTop(duk_context* ctx);
 	static int SetAttribute(duk_context* ctx);
 	static int SetFile(duk_context* ctx);
+	static int SetFocus(duk_context* ctx);
 	static int SetInnerHtml(duk_context* ctx);
 	static int SetInnerHtmlString(duk_context* ctx);
 	static int SetOption(duk_context* ctx);
