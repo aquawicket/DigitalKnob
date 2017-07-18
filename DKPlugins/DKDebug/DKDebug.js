@@ -59,7 +59,7 @@ function DKDebug_CheckKeys()
 	}
 	
 	//check for commands
-	if(string.indexOf("dkreload") != -1){ DKDebug_RestartApp(); key_history = []; }
+	if(string.indexOf("dkrefresh") != -1){ DKDebug_Refresh(); key_history = []; }
 	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
@@ -104,14 +104,14 @@ function DKDebug_KeyToChar(key)
 	return " ";
 }
 
-/////////////////////////////
-function DKDebug_RestartApp()
+//////////////////////////
+function DKDebug_Refresh()
 {
-	//DKLog("DKDebug_RestartApp()\n");
+	//DKLog("DKDebug_Refresh()\n");
 	
 	//TODO - make this work for all variations 
 	if(DK_GetBrowser() != "Rocket"){
-		DK_Reload(); //Call DK.js
+		DK_Refresh(); //Call DK.js
 	}
 	if(DK_GetBrowser() == "Rocket" && !USE_CEF){
 		DK_Reload(); //Call DKDuktape.cpp

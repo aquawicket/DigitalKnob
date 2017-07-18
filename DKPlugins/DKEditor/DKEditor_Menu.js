@@ -5,7 +5,7 @@ function DKEditor_Menu_Init()
 	
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Refresh", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
@@ -46,8 +46,8 @@ function DKEditor_Menu_OnEvent(event)
 {
 	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Id(event, "DKEditor_Menu_Reload")){
-		DKDebug_RestartApp();
+	if(DK_Id(event, "DKEditor_Menu_Refresh")){
+		DKDebug_Refresh();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Notes")){
 		DKCreate("DKNotepad/DKNotepad.js", function(rval){

@@ -159,10 +159,10 @@ function DK_GetDate()
 }
 
 
-////////////////////
-function DK_Reload()
+/////////////////////
+function DK_Refresh()
 {	
-	//DKLog("DK_Reload()\n");
+	//DKLog("DK_Refresh()\n");
 	
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
