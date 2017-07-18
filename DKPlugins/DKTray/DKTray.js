@@ -1,6 +1,8 @@
 //////////////////////
 function DKTray_Init()
 {
+	//DKLog("DKTray_Init()\n");
+	
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
@@ -27,6 +29,8 @@ function DKTray_Init()
 /////////////////////
 function DKTray_End()
 {
+	//DKLog("DKTray_End()\n");
+	
 	DKRemoveEvents(DKTray_OnEvent);
 }
 
@@ -34,7 +38,6 @@ function DKTray_End()
 function DKTray_OnEvent(event)
 {
 	//DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	DKLog("DKTray_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "doubleclick")){
 		DKTray_ToggleWindow();
@@ -57,6 +60,8 @@ function DKTray_OnEvent(event)
 //////////////////////////////
 function DKTray_ToggleWindow()
 {
+	//DKLog("DKTray_ToggleWindow()\n");
+	
 	DKCreate("DKWindowJS");
 	if(DKWindow_IsVisible()){
 		DKWindow_Hide();

@@ -4,6 +4,8 @@
 //////////////////////////
 DKCefWindow::DKCefWindow()
 {
+	DKLog("DKCefWindow::DKCefWindow()\n", DKDEBUG);
+	
 	DKClass::RegisterFunc("DKCefWindow::TestInt", &DKCefWindow::TestInt, this);
 	DKClass::RegisterFunc("DKCefWindow::TestString", &DKCefWindow::TestString, this);
 	DKClass::RegisterFunc("DKCefWindow::TestReturnInt", &DKCefWindow::TestReturnInt, this);
@@ -20,6 +22,8 @@ DKCefWindow::DKCefWindow()
 ////////////////////////////////////////////////////////
 bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser)
 {
+	DKLog("DKCefWindow::DoClose()\n", DKDEBUG);
+	
 	CEF_REQUIRE_UI_THREAD();
 	if(browser->IsPopup()){ return false; }
 	DKApp::Exit();
@@ -29,6 +33,8 @@ bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser)
 ////////////////////////////////////////////////////
 bool DKCefWindow::TestInt(void* input, void* output)
 {
+	DKLog("DKCefWindow::TestInt()\n", DKDEBUG);
+	
 	int in = *(int*)input;
 	int out = in;
 	*(int*)output = out;
@@ -38,6 +44,8 @@ bool DKCefWindow::TestInt(void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKCefWindow::TestString(void* input, void* output)
 {
+	DKLog("DKCefWindow::TestString()\n", DKDEBUG);
+	
 	std::string in = *(std::string*)input;
 	std::string out = in;
 	*(std::string*)output = out;
@@ -47,6 +55,8 @@ bool DKCefWindow::TestString(void* input, void* output)
 //////////////////////////////////////////////////////////
 bool DKCefWindow::TestReturnInt(void* input, void* output)
 {
+	DKLog("DKCefWindow::TestReturnInt()\n", DKDEBUG);
+	
 	int var = 1234;
 	*(int*)output = var;
 	return true;
@@ -55,6 +65,8 @@ bool DKCefWindow::TestReturnInt(void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKCefWindow::TestReturnString(void* input, void* output)
 {
+	DKLog("DKCefWindow::TestReturnString()\n", DKDEBUG);
+	
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
@@ -63,7 +75,7 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 ////////////////////////////////////////////////////
 bool DKCefWindow::SetIcon(void* input, void* output)
 {
-	DKLog("DKCefWindow::SetIcon()\n", DKINFO);
+	DKLog("DKCefWindow::SetIcon()\n", DKDEBUG);
 	//DKString file = *(DKString*)input;
 
 #ifdef WIN32
@@ -111,7 +123,7 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 /////////////////////////////////////////////////////
 bool DKCefWindow::Minimize(void* input, void* output)
 {
-	DKLog("DKCefWindow::Minimize()\n", DKINFO);
+	DKLog("DKCefWindow::Minimize()\n", DKDEBUG);
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -125,7 +137,7 @@ bool DKCefWindow::Minimize(void* input, void* output)
 ////////////////////////////////////////////////////
 bool DKCefWindow::Restore(void* input, void* output)
 {
-	DKLog("DKCefWindow::Restore()\n", DKINFO);
+	DKLog("DKCefWindow::Restore()\n", DKDEBUG);
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -139,7 +151,7 @@ bool DKCefWindow::Restore(void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKCefWindow::IsVisible(void* input, void* output)
 {
-	DKLog("DKCefWindow::IsVisible()\n", DKINFO);
+	DKLog("DKCefWindow::IsVisible()\n", DKDEBUG);
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -153,7 +165,7 @@ bool DKCefWindow::IsVisible(void* input, void* output)
 /////////////////////////////////////////////////
 bool DKCefWindow::Hide(void* input, void* output)
 {
-	DKLog("DKCefWindow::Hide()\n", DKINFO);
+	DKLog("DKCefWindow::Hide()\n", DKDEBUG);
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -167,7 +179,7 @@ bool DKCefWindow::Hide(void* input, void* output)
 /////////////////////////////////////////////////
 bool DKCefWindow::Show(void* input, void* output)
 {
-	DKLog("DKCefWindow::Show()\n", DKINFO);
+	DKLog("DKCefWindow::Show()\n", DKDEBUG);
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
