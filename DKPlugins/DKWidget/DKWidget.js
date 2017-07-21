@@ -1198,3 +1198,98 @@ function DKWidget_SetFocus(id)
 {
 	document.getElementById(id).focus();
 }
+
+/////////////////////////
+function DKWidget_Cut(id)
+{
+	DKLog("DKWidget_Cut("+id+")\n");
+	
+	//TODO
+	var text = "";
+    if(window.getSelection){
+        text = window.getSelection().toString();
+    } 
+	else if(document.selection && document.selection.type != "Control"){
+        text = document.selection.createRange().text;
+    }
+	
+	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
+	copyToClipboard(text);
+	
+	
+	if(window.getSelection){
+		if(window.getSelection().empty){  // Chrome
+			window.getSelection().empty();
+		} 
+		else if(window.getSelection().removeAllRanges){  // Firefox
+			window.getSelection().removeAllRanges();
+		}
+	} 
+	else if(document.selection){  // IE?
+		document.selection.empty();
+	}
+    //return text;
+}
+
+//////////////////////////
+function DKWidget_Copy(id)
+{
+	DKLog("DKWidget_Copy("+id+")\n");
+	
+	//TODO
+	var text = "";
+    if(window.getSelection){
+        text = window.getSelection().toString();
+    } 
+	else if(document.selection && document.selection.type != "Control"){
+        text = document.selection.createRange().text;
+    }
+	
+	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
+	copyToClipboard(text);
+	
+    //return text;
+}
+
+///////////////////////////
+function DKWidget_Paste(id)
+{
+	DKLog("DKWidget_Paste("+id+")\n");
+	
+	//TODO
+	var text = "";
+    if(window.getSelection){
+        text = window.getSelection().toString();
+    } 
+	else if(document.selection && document.selection.type != "Control"){
+        text = document.selection.createRange().text;
+    }
+	
+	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
+    //return text;
+}
+
+
+function copyToClipboard(text) 
+{
+    if (window.clipboardData && window.clipboardData.setData) {
+        // IE specific code path to prevent textarea being shown while dialog is visible.
+        return clipboardData.setData("Text", text); 
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        } catch (ex) {
+            console.warn("Copy to clipboard failed.", ex);
+            return false;
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+
