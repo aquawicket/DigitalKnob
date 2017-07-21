@@ -1199,12 +1199,12 @@ function DKWidget_SetFocus(id)
 	document.getElementById(id).focus();
 }
 
+
 /////////////////////////
 function DKWidget_Cut(id)
 {
-	DKLog("DKWidget_Cut("+id+")\n");
+	//DKLog("DKWidget_Cut("+id+")\n");
 	
-	//TODO
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1212,31 +1212,16 @@ function DKWidget_Cut(id)
 	else if(document.selection && document.selection.type != "Control"){
         text = document.selection.createRange().text;
     }
-	
-	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
+	//DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
 	copyToClipboard(text);
-	
-	
-	if(window.getSelection){
-		if(window.getSelection().empty){  // Chrome
-			window.getSelection().empty();
-		} 
-		else if(window.getSelection().removeAllRanges){  // Firefox
-			window.getSelection().removeAllRanges();
-		}
-	} 
-	else if(document.selection){  // IE?
-		document.selection.empty();
-	}
-    //return text;
+	removeSelection(id);
 }
 
 //////////////////////////
 function DKWidget_Copy(id)
 {
-	DKLog("DKWidget_Copy("+id+")\n");
+	//DKLog("DKWidget_Copy("+id+")\n");
 	
-	//TODO
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1245,10 +1230,8 @@ function DKWidget_Copy(id)
         text = document.selection.createRange().text;
     }
 	
-	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
+	//DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
 	copyToClipboard(text);
-	
-    //return text;
 }
 
 ///////////////////////////
@@ -1257,16 +1240,11 @@ function DKWidget_Paste(id)
 	DKLog("DKWidget_Paste("+id+")\n");
 	
 	//TODO
-	var text = "";
-    if(window.getSelection){
-        text = window.getSelection().toString();
-    } 
-	else if(document.selection && document.selection.type != "Control"){
-        text = document.selection.createRange().text;
-    }
-	
-	DKLog("DKWidget_Cut("+id+"): text = "+text+"\n");
-    //return text;
+	removeSelection(id);
+	var ele = document.getElementById(id);
+	ele.focus();
+	ele.select();
+	document.execCommand('Paste');
 }
 
 
@@ -1293,3 +1271,10 @@ function copyToClipboard(text)
     }
 }
 
+function removeSelection(id)
+{
+	var ele = document.getElementById(id);
+    var text = ele.value;
+    text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
+    ele.value = text;
+}
