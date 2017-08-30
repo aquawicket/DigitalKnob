@@ -130,6 +130,7 @@ function DKDebug_PushDKFiles()
 		return false;
 	}
 	
+	//TODO - find all of the DKPlugin folders
 	var DKPlugins = assets+"/../../../DKPlugins";
 	var DKPlugins2 = assets+"/../../../../DKPlugins";
 	
@@ -148,6 +149,7 @@ function DKDebug_PushDKFiles()
 	}
 	var folders = temp.split(",");
 	
+	//TODO - push to all of the DKPlugins folders that contain 
 	for(i=0; i<folders.length; i++){
 		//DKLog(folders[i]+"\n"); 
 		if(DKFile_Exists(DKPlugins+"/"+folders[i])){
