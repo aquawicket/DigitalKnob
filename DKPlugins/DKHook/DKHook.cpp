@@ -221,6 +221,26 @@ bool DKHook::SetString(const DKString& text)
 	return true;
 }
 
+/////////////////////////////
+bool DKHook::GetTop(int& top)
+{
+	if(handle.empty()){ return false; }
+	RECT rect;
+	GetWindowRect(handle[currentHandle], &rect);
+	top = rect.top;
+	return true;
+}
+
+///////////////////////////////
+bool DKHook::GetLeft(int& left)
+{
+	if(handle.empty()){ return false; }
+	RECT rect;
+	GetWindowRect(handle[currentHandle], &rect);
+	left = rect.left;
+	return true;
+}
+
 ////////////////////
 bool DKHook::Click()
 {
@@ -260,6 +280,9 @@ bool DKHook::WaitForWindow(const DKString& title, int timeout)
 		++i;
 	}
 	Sleep(1000);
+	if(!WindowExists(title)){
+		return false;
+	}
 	return true;
 }
 

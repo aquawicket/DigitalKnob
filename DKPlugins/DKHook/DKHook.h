@@ -51,6 +51,8 @@ public:
 	bool SetHandle(unsigned int index);
 	bool GetString(DKString& text);
 	bool SetString(const DKString& text);
+	bool GetTop(int& top);
+	bool GetLeft(int& left);
 	bool Click();
 
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);

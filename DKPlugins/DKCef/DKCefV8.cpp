@@ -24,6 +24,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
+	DKV8::AttachFunction("DK_SetMousePos", DKCefV8::SetMousePos);
 	DKV8::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
 	DKV8::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
@@ -230,6 +231,15 @@ bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval)
 {
 	DKString filelist = args->GetString(0);
 	if(!DKUtil::SetClipboardFiles(filelist)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval)
+{
+	int x = args->GetInt(0);
+	int y = args->GetInt(1);
+	if(!DKUtil::SetMousePos(x,y)){ return false; }
 	return true;
 }
 

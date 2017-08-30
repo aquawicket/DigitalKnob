@@ -10,6 +10,8 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_SendHook", DKHookV8::SendHook);
 	DKV8::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
 	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
+	DKV8::AttachFunction("DKHook_GetTop", DKHookV8::GetTop);
+	DKV8::AttachFunction("DKHook_GetLeft", DKHookV8::GetLeft);
 	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
 	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
 	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
@@ -71,6 +73,28 @@ bool DKHookV8::SetValue(CefArgs args, CefReturn retval)
 	if(!DKHook::Instance("DKHook")->SetString(value)){
 		return false;
 	}
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKHookV8::GetTop(CefArgs args, CefReturn retval)
+{
+	int top;
+	if(!DKHook::Instance("DKHook")->GetTop(top)){
+		return false;
+	}
+	retval->SetInt(0, top);
+	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKHookV8::GetLeft(CefArgs args, CefReturn retval)
+{
+	int left;
+	if(!DKHook::Instance("DKHook")->GetLeft(left)){
+		return false;
+	}
+	retval->SetInt(0, left);
 	return true;
 }
 
