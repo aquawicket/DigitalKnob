@@ -99,15 +99,11 @@ function User_LoadPage()
 	DKCreate("DKGui/DKFrame.js", function(){
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
-	//DKCreate("Template.js", function(){
 	DKCreate("DKEditor/DKEditor.js", function(){
-	DKCreate("DKNotepad/DKNotepad.js", function(rval){
-		if(!rval){ return; }
-		DKFrame_Widget("DKNotepad/DKNotepad.html");
-		DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
+	DKCreate("BemisApp/BemisApp.js", function(){
+		DKFrame_Widget("BemisApp/BemisApp.html");
 	});		
 	});
-	//});
 	});
 	});
 	});

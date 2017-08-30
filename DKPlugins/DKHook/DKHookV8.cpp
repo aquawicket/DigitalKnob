@@ -11,6 +11,7 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
 	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
 	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
+	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
 	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
 	DKV8::AttachFunction("DKHook_NextHandle", DKHookV8::NextHandle);
 	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
@@ -82,6 +83,16 @@ bool DKHookV8::Click(CefArgs args, CefReturn retval)
 	return true;
 }
 
+////////////////////////////////////////////////////////
+bool DKHookV8::SetHandle(CefArgs args, CefReturn retval)
+{
+	int index = args->GetInt(0);
+	if(!DKHook::Instance("DKHook")->SetHandle(index)){
+		return false;
+	}
+	return true;
+}
+
 /////////////////////////////////////////////////////////
 bool DKHookV8::PrevHandle(CefArgs args, CefReturn retval)
 {
@@ -112,8 +123,10 @@ bool DKHookV8::SetWindowHandle(CefArgs args, CefReturn retval)
 {
 	DKString window = args->GetString(0);
 	if(!DKHook::Instance("DKHook")->SetWindowHandle(window)){
+		retval->SetBool(0, false);
 		return false;
 	}
+	retval->SetBool(0, true);
 	return true;
 }
 

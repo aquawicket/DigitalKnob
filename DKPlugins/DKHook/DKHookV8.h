@@ -17,6 +17,7 @@ public:
 	static bool GetValue(CefArgs args, CefReturn retval);
 	static bool SetValue(CefArgs args, CefReturn retval);
 	static bool Click(CefArgs args, CefReturn retval);
+	static bool SetHandle(CefArgs args, CefReturn retval);
 	static bool PrevHandle(CefArgs args, CefReturn retval);
 	static bool NextHandle(CefArgs args, CefReturn retval);
 	static bool ToggleHighlight(CefArgs args, CefReturn retval);

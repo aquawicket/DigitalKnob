@@ -242,7 +242,8 @@ bool DKHook::WindowExists(const DKString& title)
 {
 	HWNDname temp;
 	temp.caption = title.c_str();
-	if(EnumWindows(FindWindowPartial, (LPARAM)&temp)){//true - fail
+	if(EnumWindows(FindWindowPartial, (LPARAM)&temp)){
+		//TODO: GetLastError
 		return false;
 	}
 
