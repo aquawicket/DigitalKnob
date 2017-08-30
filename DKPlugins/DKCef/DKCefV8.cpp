@@ -17,6 +17,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
 	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
 	DKV8::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
+	DKV8::AttachFunction("DK_LeftClick", DKCefV8::LeftClick);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKV8::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
@@ -164,14 +165,17 @@ bool DKCefV8::HideConsole(CefArgs args, CefReturn retval)
 	return true;
 }
 
+///////////////////////////////////////////////////////
+bool DKCefV8::LeftClick(CefArgs args, CefReturn retval)
+{
+	return DKUtil::LeftClick();
+}
+
 //////////////////////////////////////////////////////
 bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
 {
 	int key = args->GetInt(0);
-	if(!DKUtil::PressKey(key)){
-		return false;
-	}
-	return true;
+	return DKUtil::PressKey(key);
 }
 
 ////////////////////////////////////////////////////////////
@@ -192,10 +196,7 @@ bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
 bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval)
 {
 	int key = args->GetInt(0);
-	if(!DKUtil::ReleaseKey(key)){
-		return false;
-	}
-	return true;
+	return DKUtil::ReleaseKey(key);
 }
 
 /////////////////////////////////////////////////
@@ -203,10 +204,7 @@ bool DKCefV8::Run(CefArgs args, CefReturn retval)
 {
 	DKString command = args->GetString(0);
 	DKString params = args->GetString(1);
-	if(!DKUtil::Run(command, params)){ 
-		return false; 
-	}
-	return true;
+	return DKUtil::Run(command, params);
 }
 
 ///////////////////////////////////////////////////////////
@@ -222,16 +220,14 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
 {
 	DKString string = args->GetString(0);
-	if(!DKUtil::SetClipboard(string)){ return false; }
-	return true;
+	return DKUtil::SetClipboard(string);
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval)
 {
 	DKString filelist = args->GetString(0);
-	if(!DKUtil::SetClipboardFiles(filelist)){ return false; }
-	return true;
+	return DKUtil::SetClipboardFiles(filelist);
 }
 
 /////////////////////////////////////////////////////////
@@ -239,8 +235,7 @@ bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval)
 {
 	int x = args->GetInt(0);
 	int y = args->GetInt(1);
-	if(!DKUtil::SetMousePos(x,y)){ return false; }
-	return true;
+	return DKUtil::SetMousePos(x,y);
 }
 
 /////////////////////////////////////////////////////////
@@ -257,20 +252,14 @@ bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval)
 bool DKCefV8::StrokeKey(CefArgs args, CefReturn retval)
 {
 	int key = args->GetInt(0);
-	if(!DKUtil::StrokeKey(key)){
-		return false;
-	}
-	return true;
+	return DKUtil::StrokeKey(key);
 }
 
 ///////////////////////////////////////////////////////
 bool DKCefV8::System(CefArgs args, CefReturn retval)
 {
 	DKString command = args->GetString(0);
-	if(!DKUtil::System(command)){
-		return false;
-	}
-	return true;
+	return DKUtil::System(command);
 }
 
 //////////////////////////////////////////////////////////
@@ -278,7 +267,8 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 {
 	DKString file = args->GetString(0);
 	int timeout = args->GetInt(1);
-	if(!!DKUtil::WaitForImage(file, timeout)){
+	if(!DKUtil::WaitForImage(file, timeout)){
+		retval->SetBool(0, false); 
 		return false;
 	}
 	retval->SetBool(0, true); 

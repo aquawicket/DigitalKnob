@@ -23,6 +23,7 @@ public:
 	static bool GetScreenHeight(CefArgs args, CefReturn retval);
 	static bool GetScreenWidth(CefArgs args, CefReturn retval);
 	static bool HideConsole(CefArgs args, CefReturn retval);
+	static bool LeftClick(CefArgs args, CefReturn retval);
 	static bool PressKey(CefArgs args, CefReturn retval);
 	static bool PrintFunctions(CefArgs args, CefReturn retval);
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
