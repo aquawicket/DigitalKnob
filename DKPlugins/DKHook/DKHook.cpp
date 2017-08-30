@@ -280,9 +280,7 @@ bool DKHook::WaitForWindow(const DKString& title, int timeout)
 		++i;
 	}
 	Sleep(1000);
-	if(!WindowExists(title)){
-		return false;
-	}
+	if(!WindowExists(title)){ return false; }
 	return true;
 }
 
