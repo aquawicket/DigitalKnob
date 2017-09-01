@@ -49,6 +49,7 @@ public:
 	bool WindowExists(const DKString& title);
 	bool WaitForWindow(const DKString& title, int timeout);
 	bool SetHandle(unsigned int index);
+	bool SetHandle(const DKString& value);
 	bool GetString(DKString& text);
 	bool SetString(const DKString& text);
 	bool GetTop(int& top);

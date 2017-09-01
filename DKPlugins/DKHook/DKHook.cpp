@@ -202,6 +202,23 @@ bool DKHook::SetHandle(unsigned int index)
 	return false;
 }
 
+/////////////////////////////////////////////
+bool DKHook::SetHandle(const DKString& value)
+{
+	if(handle.empty()){ return false; }
+	for(int i=0; i<handle.size(); i++){
+		int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+		char* buffer = new char[len];
+		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+		DKString text = buffer;
+		if(text == value){
+			currentHandle = i;
+			return true;
+		}
+	}
+	return false;
+}
+
 //////////////////////////////////////
 bool DKHook::GetString(DKString& text)
 {

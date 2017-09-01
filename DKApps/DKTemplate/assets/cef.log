@@ -680,3 +680,15 @@
 [0901/090731.971:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0901/090826.197:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0901/090826.527:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/092056.623:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/092056.865:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/100854.762:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/100855.013:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/102250.288:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/102250.522:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/102401.927:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/102402.146:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/103844.194:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/103844.412:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0901/104811.653:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0901/104811.872:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
