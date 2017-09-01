@@ -37,9 +37,13 @@ function DKHook_OnEvent(event)
     }
 	if(DK_Id(event, "Prev")){
 		DKHook_PrevHandle();
+		var value = DKHook_GetValue();
+		DKWidget_SetValue("GetValueBox", value);
 	}
 	if(DK_Id(event, "Next")){
 		DKHook_NextHandle();
+		var value = DKHook_GetValue();
+		DKWidget_SetValue("GetValueBox", value);
 	}
 	if(DK_Id(event, "Highlight")){
 		DKHook_ToggleHighlight();
