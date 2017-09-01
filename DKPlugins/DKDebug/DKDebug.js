@@ -129,36 +129,57 @@ function DKDebug_PushDKFiles()
 		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
 		return false;
 	}
+	DKLog("assets = "+assets+"\n");
 	
-	//TODO - find all of the DKPlugin folders
-	var DKPlugins = assets+"/../../../DKPlugins";
-	var DKPlugins2 = assets+"/../../../../DKPlugins";
-	
-	if(DKFile_Exists(DKPlugins)){
-		DKPlugins = DKFile_GetAbsolutePath(DKPlugins);
+	var seperator = ""
+	var DKPATH;
+	for(var i=0; i<6; i++){
+		DKPATH = assets+seperator+"digitalknob";
+		if(DKFile_Exists(DKPATH)){
+			continue;
+		}
+		seperator = seperator + "../";
 	}
-	if(DKFile_Exists(DKPlugins2)){
-		DKPlugins2 = DKFile_GetAbsolutePath(DKPlugins2);
+	if(!DKFile_Exists(DKPATH)){
+		DKLog("Could not find DKPATH\n");
+		return;
 	}
 	
-	DKLog("Calling: DKFile_DirectoryContents("+assets+")\n");
+	var temp = DKFile_DirectoryContents(DKPATH);
+	if(!temp){
+		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
+		return false; 
+	}
+	var folders = temp.split(",");
+	//DKLog("folders = "+folders+"\n");
+	
+	var plugin_folders = [];
+	plugin_folders.push(DKPATH+"/DKPlugins");
+	for(var i=0; i<folders.length; i++){
+		//DKLog("checking "+DKPATH+"/"+folders[i]+"/DKPlugins"+"\n");
+		if(DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
+			plugin_folders.push(DKPATH+"/"+folders[i]+"/DKPlugins");
+		}
+	}
+	
+	for(var i=0; i<plugin_folders.length; i++){
+		plugin_folders[i] = DKFile_GetAbsolutePath(plugin_folders[i]);
+	}
+	//DKLog("plugins_folders = "+plugin_folders+"\n");
+	
+	
 	var temp = DKFile_DirectoryContents(assets);
 	if(!temp){
 		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
 		return false; 
 	}
 	var folders = temp.split(",");
-	
-	//TODO - push to all of the DKPlugins folders that contain 
 	for(i=0; i<folders.length; i++){
 		//DKLog(folders[i]+"\n"); 
-		if(DKFile_Exists(DKPlugins+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins+"/"+folders[i]+"\n"); 
-			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins+"/"+folders[i], true, true);
-		}
-		if(DKFile_Exists(DKPlugins2+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins2+"/"+folders[i]+"\n"); 
-			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins2+"/"+folders[i], true, true);
+		for(var b=0; b<plugin_folders.length; b++){
+			if(DKFile_Exists(plugin_folders[b]+"/"+folders[i])){
+				DKFile_CopyFolder(assets+"/"+folders[i], plugin_folders[b]+"/"+folders[i], true, true);
+			}
 		}
 	}
 }
