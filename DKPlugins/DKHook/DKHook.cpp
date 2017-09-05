@@ -258,6 +258,15 @@ bool DKHook::GetLeft(int& left)
 	return true;
 }
 
+/////////////////////////////////////
+bool DKHook::GetClass(DKString& clas)
+{
+	char classname[256];
+	if(!GetClassName(handle[currentHandle], classname, 256)){ return false; }
+	clas = classname;
+	return true;
+}
+
 ////////////////////
 bool DKHook::Click()
 {

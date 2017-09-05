@@ -54,6 +54,7 @@ public:
 	bool SetString(const DKString& text);
 	bool GetTop(int& top);
 	bool GetLeft(int& left);
+	bool GetClass(DKString& clas);
 	bool Click();
 
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
