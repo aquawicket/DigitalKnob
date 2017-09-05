@@ -3,7 +3,6 @@ function DKHook_Init()
 {
 	DKCreate("DKHook");
 	DKCreate("DKHook/DKHook.html");
-	DKAddEvent("getvalue", "click", DKHook_OnEvent);
 	DKAddEvent("setvalue", "click", DKHook_OnEvent);
 	DKAddEvent("doclick", "click", DKHook_OnEvent);
 	DKAddEvent("Prev", "click", DKHook_OnEvent);
@@ -24,10 +23,6 @@ function DKHook_OnEvent(event)
 {
 	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Id(event, "getvalue")){
-		var value = DKHook_GetValue();
-		DKWidget_SetValue("GetValueBox", value);
-    }
 	if(DK_Id(event, "setvalue")){
 		var value = DKWidget_GetValue("SetValueBox");
 		DKHook_SetValue(value);
@@ -38,12 +33,16 @@ function DKHook_OnEvent(event)
 	if(DK_Id(event, "Prev")){
 		DKHook_PrevHandle();
 		var value = DKHook_GetValue();
-		DKWidget_SetValue("GetValueBox", value);
+		DKWidget_SetValue("value", "Value: "+value);
+		var clas = DKHook_GetClass();
+		DKWidget_SetValue("class", "Class: "+clas);
 	}
 	if(DK_Id(event, "Next")){
 		DKHook_NextHandle();
 		var value = DKHook_GetValue();
-		DKWidget_SetValue("GetValueBox", value);
+		DKWidget_SetValue("value", "Value: "+value);
+		var clas = DKHook_GetClass();
+		DKWidget_SetValue("class", "Class: "+clas);
 	}
 	if(DK_Id(event, "Highlight")){
 		DKHook_ToggleHighlight();
@@ -55,7 +54,7 @@ function DKHook_OnEvent(event)
 		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 	}
 
-	DKWidget_SetValue("currentHandle", DKHook_CurrentHandle());
+	DKWidget_SetValue("currentHandle", "Handle: "+DKHook_CurrentHandle());
 }
 
 //////////////////////////////////
