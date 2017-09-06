@@ -172,7 +172,10 @@ void DKHook::DoHighlight()
 /////////////////////////
 bool DKHook::NextHandle()
 {
-	if(handle.empty()){ return false; }
+	if(handle.empty()){
+		DKLog("DKHook::NextHandle(): handle is empty\n", DKWARN);
+		return false; 
+	}
 	if(currentHandle < handle.size()-1){currentHandle++;}
 	if(currentHandle <= handle.size()){
 		DoHighlight();
@@ -183,7 +186,10 @@ bool DKHook::NextHandle()
 /////////////////////////
 bool DKHook::PrevHandle()
 {
-	if(handle.empty()){ return false; }
+	if(handle.empty()){
+		DKLog("DKHook::PrevHandle(): handle is empty\n", DKWARN);
+		return false; 
+	}
 	if(currentHandle > 0){currentHandle--;}
 	if(currentHandle <= handle.size()){
 		DoHighlight();
@@ -194,19 +200,23 @@ bool DKHook::PrevHandle()
 //////////////////////////////////////////
 bool DKHook::SetHandle(unsigned int index)
 {
-	if(handle.empty()){ return false; }
-	if(index < handle.size()){
-		currentHandle = index;
-		return true;
+	if(handle.empty()){ 
+		DKLog("DKHook::SetHandle("+toString(index)+"): handle is empty\n", DKWARN);
+		return false; 
 	}
-	return false;
+	if(index > handle.size()){
+		DKLog("DKHook::SetHandle("+toString(index)+"): index larger than handle.size "+toString(handle.size())+"\n", DKWARN);
+		return false;
+	}
+	currentHandle = index;
+	return true;
 }
 
 /////////////////////////////////////////////
 bool DKHook::SetHandle(const DKString& value)
 {
 	if(handle.empty()){ return false; }
-	for(int i=0; i<handle.size(); i++){
+	for(unsigned int i=0; i<handle.size(); i++){
 		int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
 		char* buffer = new char[len];
 		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
@@ -216,6 +226,34 @@ bool DKHook::SetHandle(const DKString& value)
 			return true;
 		}
 	}
+	
+	DKLog("DKHook::SetHandle("+value+"): cound not find match. \n", DKWARN);
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////
+bool DKHook::SetHandle(const DKString& clas, const DKString& value)
+{
+	if(handle.empty()){ return false; }
+	for(unsigned int i=0; i<handle.size(); i++){
+		int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+		char* buffer = new char[len];
+		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+		DKString text = buffer;
+		if(text == value){
+			char classname[256];
+			if(!GetClassName(handle[i], classname, 256)){
+				DKLog("DKHook::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
+				return false; 
+			}
+			if(clas == (DKString)classname){
+				currentHandle = i;
+				return true;
+			}
+		}
+	}
+	
+	DKLog("DKHook::SetHandle("+clas+","+value+"): cound not find match. \n", DKWARN);
 	return false;
 }
 
@@ -262,7 +300,10 @@ bool DKHook::GetLeft(int& left)
 bool DKHook::GetClass(DKString& clas)
 {
 	char classname[256];
-	if(!GetClassName(handle[currentHandle], classname, 256)){ return false; }
+	if(!GetClassName(handle[currentHandle], classname, 256)){
+		DKLog("DKHook::GetClass("+clas+")\n", DKWARN);
+		return false; 
+	}
 	clas = classname;
 	return true;
 }

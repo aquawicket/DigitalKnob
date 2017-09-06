@@ -122,12 +122,17 @@ bool DKHookV8::Click(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKHookV8::SetHandle(CefArgs args, CefReturn retval)
 {
-	if(args->GetType(0) == VTYPE_INT){
+	if(args->GetType(0) == VTYPE_INT){ //By handle number
 		if(!DKHook::Instance("DKHook")->SetHandle(args->GetInt(0))){
 			return false;
 		}
 	}
-	if(args->GetType(0) == VTYPE_STRING){
+	if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
+		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0), args->GetString(1))){
+			return false;
+		}
+	}
+	if(args->GetType(0) == VTYPE_STRING){ //By handle value
 		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0))){
 			return false;
 		}
