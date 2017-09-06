@@ -33,20 +33,20 @@ function DKHook_OnEvent(event)
 	if(DK_Id(event, "Prev")){
 		DKHook_PrevHandle();
 		var value = DKHook_GetValue();
-		DKWidget_SetValue("value", "Value: "+value);
+		DKWidget_SetValue("value", value);
 		var clas = DKHook_GetClass();
-		DKWidget_SetValue("class", "Class: "+clas);
+		DKWidget_SetValue("class", clas);
 		var par = DKHook_GetParent();
-		DKWidget_SetValue("parent", "Parent: "+par);
+		DKWidget_SetValue("parent", par);
 	}
 	if(DK_Id(event, "Next")){
 		DKHook_NextHandle();
 		var value = DKHook_GetValue();
-		DKWidget_SetValue("value", "Value: "+value);
+		DKWidget_SetValue("value", value);
 		var clas = DKHook_GetClass();
-		DKWidget_SetValue("class", "Class: "+clas);
+		DKWidget_SetValue("class", clas);
 		var par = DKHook_GetParent();
-		DKWidget_SetValue("parent", "Parent: "+par);
+		DKWidget_SetValue("parent", par);
 	}
 	if(DK_Id(event, "Highlight")){
 		DKHook_ToggleHighlight();
@@ -57,11 +57,11 @@ function DKHook_OnEvent(event)
 		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n");
 		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 		var value = DKHook_GetValue();
-		DKWidget_SetValue("value", "Value: "+value);
+		DKWidget_SetValue("value", value);
 		var clas = DKHook_GetClass();
-		DKWidget_SetValue("class", "Class: "+clas);
+		DKWidget_SetValue("class", clas);
 		var par = DKHook_GetParent();
-		DKWidget_SetValue("parent", "Parent: "+par);
+		DKWidget_SetValue("parent", par);
 	}
 
 	DKWidget_SetValue("currentHandle", "Handle: "+DKHook_CurrentHandle());
