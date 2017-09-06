@@ -52,6 +52,10 @@ function DKHook_OnEvent(event)
 		//DKLog("DKHook_OnEvent(): id = "+DK_GetId(event)+"\n");
 		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n");
 		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
+		var value = DKHook_GetValue();
+		DKWidget_SetValue("value", "Value: "+value);
+		var clas = DKHook_GetClass();
+		DKWidget_SetValue("class", "Class: "+clas);
 	}
 
 	DKWidget_SetValue("currentHandle", "Handle: "+DKHook_CurrentHandle());
@@ -62,8 +66,9 @@ function DKHook_UpdateWindowList()
 {
 	var str = DKHook_GetWindows();
 	if(!str){ return; }
-	DKLog("WINDOW LIST: "+str+"\n");
+	//DKLog("WINDOW LIST: "+str+"\n");
 	var arry = str.split(",");
+	arry.sort();
 	
 	//RemoveDuplicates(arry);
 	for(var i=0; i<arry.length; i++){
