@@ -73,8 +73,10 @@ bool DKHookV8::SetValue(CefArgs args, CefReturn retval)
 {
 	DKString value = args->GetString(0);
 	if(!DKHook::Instance("DKHook")->SetString(value)){
+		retval->SetBool(0, false);
 		return false;
 	}
+	retval->SetBool(0, true);
 	return true;
 }
 
@@ -115,8 +117,10 @@ bool DKHookV8::GetLeft(CefArgs args, CefReturn retval)
 bool DKHookV8::Click(CefArgs args, CefReturn retval)
 {
 	if(!DKHook::Instance("DKHook")->Click()){
+		retval->SetBool(0, false);
 		return false;
 	}
+	retval->SetBool(0, true);
 	return true;
 }
 
