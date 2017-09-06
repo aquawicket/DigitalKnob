@@ -346,8 +346,10 @@ bool DKHook::WaitForWindow(const DKString& title, int timeout)
 		Sleep(1000);
 		++i;
 	}
-	Sleep(1000);
-	if(!WindowExists(title)){ return false; }
+	if(i >= timeout){
+		DKLog("DKHook::WaitForWindow("+title+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
 	return true;
 }
 
@@ -356,6 +358,7 @@ bool DKHook::WaitForHandle(unsigned int index, int timeout)
 {
 	int i = 0;
 	while(index > handle.size() && i < timeout){
+		GetHandles();
 		Sleep(1000);
 		++i;
 	}
@@ -363,7 +366,61 @@ bool DKHook::WaitForHandle(unsigned int index, int timeout)
 		DKLog("DKHook::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
 		return false;
 	}
-	currentHandle = index;
+	//currentHandle = index;
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+bool DKHook::WaitForHandle(const DKString& clas, const DKString& value, int timeout)
+{
+	int i = 0;
+	DKString text;
+	char classname[256];
+	
+	while(text != value && clas != (DKString)classname && i < timeout){
+		GetHandles();
+		for(unsigned int i=0; i<handle.size(); i++){
+			int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+			char* buffer = new char[len];
+			SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			DKString text = buffer;
+			if(text == value){
+				if(!GetClassName(handle[i], classname, 256)){
+					DKLog("DKHook::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
+					return false; 
+				}
+			}
+		}
+		Sleep(1000);
+		++i;
+	}
+	if(i >= timeout){
+		DKLog("DKHook::WaitForHandle("+clas+","+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKHook::WaitForHandle(const DKString& value, int timeout)
+{
+	int i = 0;
+	DKString text;
+	while(text != value && i < timeout){
+		GetHandles();
+		for(unsigned int i=0; i<handle.size(); i++){
+			int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+			char* buffer = new char[len];
+			SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			text = buffer;
+		}
+		Sleep(1000);
+		++i;
+	}
+	if(i >= timeout){
+		DKLog("DKHook::WaitForHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
 	return true;
 }
 

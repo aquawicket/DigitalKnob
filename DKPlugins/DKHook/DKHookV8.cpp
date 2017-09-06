@@ -125,19 +125,23 @@ bool DKHookV8::SetHandle(CefArgs args, CefReturn retval)
 {
 	if(args->GetType(0) == VTYPE_INT){ //By handle number
 		if(!DKHook::Instance("DKHook")->SetHandle(args->GetInt(0))){
+			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
 		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0), args->GetString(1))){
+			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
 		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0))){
+			retval->SetBool(0, false);
 			return false;
 		}
 	}
+	retval->SetBool(0, true);
 	return true;
 }
 
@@ -223,11 +227,23 @@ bool DKHookV8::WaitForWindow(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHookV8::WaitForHandle(CefArgs args, CefReturn retval)
 {
-	int index = args->GetInt(0);
-	int timeout = args->GetInt(1);
-	if(!DKHook::Instance("DKHook")->WaitForHandle(index, timeout)){
-		retval->SetBool(0, false);
-		return false;
+	if(args->GetType(0) == VTYPE_INT){ //By handle number
+		if(!DKHook::Instance("DKHook")->WaitForHandle(args->GetInt(0), args->GetInt(1))){
+			retval->SetBool(0, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
+		if(!DKHook::Instance("DKHook")->WaitForHandle(args->GetString(0), args->GetString(1), args->GetInt(2))){
+			retval->SetBool(0, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
+		if(!DKHook::Instance("DKHook")->WaitForHandle(args->GetString(0), args->GetInt(1))){
+			retval->SetBool(0, false);
+			return false;
+		}
 	}
 	retval->SetBool(0, true);
 	return true;
