@@ -29,6 +29,7 @@ public:
 	static bool CurrentHandle(CefArgs args, CefReturn retval);
 	static bool WindowExists(CefArgs args, CefReturn retval);
 	static bool WaitForWindow(CefArgs args, CefReturn retval);
+	static bool WaitForHandle(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKHookV8, false);

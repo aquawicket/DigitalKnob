@@ -351,6 +351,22 @@ bool DKHook::WaitForWindow(const DKString& title, int timeout)
 	return true;
 }
 
+///////////////////////////////////////////////////////////
+bool DKHook::WaitForHandle(unsigned int index, int timeout)
+{
+	int i = 0;
+	while(index > handle.size() && i < timeout){
+		Sleep(1000);
+		++i;
+	}
+	if(i >= timeout){
+		DKLog("DKHook::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
+	currentHandle = index;
+	return true;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKHook::SendHook(const DKString& window, const DKString& handle, const DKString& data)
 {

@@ -23,6 +23,7 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
 	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
 	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
+	DKV8::AttachFunction("DKHook_WaitForHandle", DKHookV8::WaitForHandle);
 }
 
 ///////////////////
@@ -212,6 +213,19 @@ bool DKHookV8::WaitForWindow(CefArgs args, CefReturn retval)
 	DKString window = args->GetString(0);
 	int timeout = args->GetInt(1);
 	if(!DKHook::Instance("DKHook")->WaitForWindow(window, timeout)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetBool(0, true);
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKHookV8::WaitForHandle(CefArgs args, CefReturn retval)
+{
+	int index = args->GetInt(0);
+	int timeout = args->GetInt(1);
+	if(!DKHook::Instance("DKHook")->WaitForHandle(index, timeout)){
 		retval->SetBool(0, false);
 		return false;
 	}
