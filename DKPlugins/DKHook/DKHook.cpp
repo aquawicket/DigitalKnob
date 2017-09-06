@@ -208,10 +208,10 @@ bool DKHook::SetHandle(unsigned int index)
 		DKLog("DKHook::SetHandle("+toString(index)+"): index larger than handle.size "+toString(handle.size())+"\n", DKWARN);
 		return false;
 	}
-	if(!IsWindowVisible(handle[index])){
-		DKLog("DKHook::SetHandle("+toString(index)+"): handle is not visible\n", DKWARN);
-		return false;
-	}
+	//if(!IsWindowVisible(handle[index])){
+	//	DKLog("DKHook::SetHandle("+toString(index)+"): handle is not visible\n", DKWARN);
+	//	return false;
+	//}
 	currentHandle = index;
 	return true;
 }
@@ -225,7 +225,7 @@ bool DKHook::SetHandle(const DKString& value)
 		char* buffer = new char[len];
 		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 		DKString text = buffer;
-		if(text == value && IsWindowVisible(handle[i])){
+		if(text == value /*&& IsWindowVisible(handle[i])*/){
 			currentHandle = i;
 			return true;
 		}
@@ -250,7 +250,7 @@ bool DKHook::SetHandle(const DKString& clas, const DKString& value)
 				DKLog("DKHook::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
 				return false; 
 			}
-			if(clas == (DKString)classname && IsWindowVisible(handle[i])){
+			if(clas == (DKString)classname /*&& IsWindowVisible(handle[i])*/){
 				currentHandle = i;
 				return true;
 			}
