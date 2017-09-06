@@ -320,6 +320,19 @@ bool DKHook::Click()
 	return true;
 }
 
+////////////////////////////////////////
+bool DKHook::GetParent(DKString& parent)
+{
+	if(handle.empty()){ return false; }
+	HWND par = ::GetParent(handle[currentHandle]);
+	if(!par){ return false; }
+	int len = SendMessage(par, WM_GETTEXTLENGTH, 0, 0);
+    char* buffer = new char[len];
+    SendMessage(par, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+    parent = buffer;
+	return true;
+}
+
 //////////////////////////////////
 DKStringArray DKHook::GetWindows()
 {

@@ -13,6 +13,7 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_GetClass", DKHookV8::GetClass);
 	DKV8::AttachFunction("DKHook_GetTop", DKHookV8::GetTop);
 	DKV8::AttachFunction("DKHook_GetLeft", DKHookV8::GetLeft);
+	DKV8::AttachFunction("DKHook_GetParent", DKHookV8::GetParent);
 	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
 	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
 	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
@@ -110,6 +111,18 @@ bool DKHookV8::GetLeft(CefArgs args, CefReturn retval)
 		return false;
 	}
 	retval->SetInt(0, left);
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKHookV8::GetParent(CefArgs args, CefReturn retval)
+{
+	DKString parent;
+	if(!DKHook::Instance("DKHook")->GetParent(parent)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetString(0, parent);
 	return true;
 }
 

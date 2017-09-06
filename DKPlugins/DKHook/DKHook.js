@@ -36,6 +36,8 @@ function DKHook_OnEvent(event)
 		DKWidget_SetValue("value", "Value: "+value);
 		var clas = DKHook_GetClass();
 		DKWidget_SetValue("class", "Class: "+clas);
+		var par = DKHook_GetParent();
+		DKWidget_SetValue("parent", "Parent: "+par);
 	}
 	if(DK_Id(event, "Next")){
 		DKHook_NextHandle();
@@ -43,6 +45,8 @@ function DKHook_OnEvent(event)
 		DKWidget_SetValue("value", "Value: "+value);
 		var clas = DKHook_GetClass();
 		DKWidget_SetValue("class", "Class: "+clas);
+		var par = DKHook_GetParent();
+		DKWidget_SetValue("parent", "Parent: "+par);
 	}
 	if(DK_Id(event, "Highlight")){
 		DKHook_ToggleHighlight();
@@ -56,6 +60,8 @@ function DKHook_OnEvent(event)
 		DKWidget_SetValue("value", "Value: "+value);
 		var clas = DKHook_GetClass();
 		DKWidget_SetValue("class", "Class: "+clas);
+		var par = DKHook_GetParent();
+		DKWidget_SetValue("parent", "Parent: "+par);
 	}
 
 	DKWidget_SetValue("currentHandle", "Handle: "+DKHook_CurrentHandle());

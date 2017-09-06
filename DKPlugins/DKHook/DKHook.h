@@ -60,6 +60,7 @@ public:
 	bool GetLeft(int& left);
 	bool GetClass(DKString& clas);
 	bool Click();
+	bool GetParent(DKString& parent);
 
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
 };
