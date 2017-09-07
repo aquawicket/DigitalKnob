@@ -328,10 +328,10 @@ bool DKHook::SetWindowHandle(const DKString& title, unsigned int timeout)
 	return true;
 }
 
-/////////////////////////
-bool DKHook::ShowWindow()
+//////////////////////////////////////////
+bool DKHook::ShowWindow(unsigned int flag)
 {
-	::ShowWindow(handle[currentHandle], SW_SHOW);
+	::ShowWindow(handle[currentHandle], flag);
 	return true;
 }
 

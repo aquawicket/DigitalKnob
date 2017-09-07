@@ -41,7 +41,7 @@ public:
 	bool SetHandle(const DKString& value, unsigned int timeout);
 	bool SetString(const DKString& text);
 	bool SetWindowHandle(const DKString& title, unsigned int timeout);
-	bool ShowWindow();
+	bool ShowWindow(unsigned int flag);
 	bool ToggleHighlight();
 	bool WaitForWindow(const DKString& title, int timeout);
 	bool WaitForHandle(unsigned int index, int timeout);

@@ -98,7 +98,7 @@ bool DKHookV8::SetValue(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKHookV8::ShowWindow(CefArgs args, CefReturn retval)
 {
-	if(!DKHook::Instance("DKHook")->ShowWindow()){
+	if(!DKHook::Instance("DKHook")->ShowWindow(args->GetInt(0))){
 		retval->SetBool(0, false);
 		return false;
 	}
