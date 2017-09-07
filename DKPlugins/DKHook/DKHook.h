@@ -25,30 +25,30 @@ public:
 	void End();
 
 	bool Click();
-	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
-	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
-	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
+	bool GetClass(DKString& clas);
+	bool GetHandles();
+	bool GetLeft(int& left);
+	bool GetParent(DKString& parent);
+	bool GetString(DKString& text);
+	bool GetTop(int& top);
+	bool GetWindows(DKStringArray& windows);
 	bool NextHandle();
 	bool PrevHandle();
-	bool GetHandles();
-	bool GetString(DKString& text);
-	bool GetWindows(DKStringArray& windows);
+	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
 	bool SetHandle(unsigned int index);
 	bool SetHandle(const DKString& clas, const DKString& value);
 	bool SetHandle(const DKString& value);
 	bool SetString(const DKString& text);
-	bool GetTop(int& top);
-	bool GetLeft(int& left);
-	bool GetClass(DKString& clas);
-	bool GetParent(DKString& parent);
-	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
 	bool SetWindowHandle(const DKString& caption);
-	bool WindowExists(const DKString& title);
 	bool WaitForWindow(const DKString& title, int timeout);
 	bool WaitForHandle(unsigned int index, int timeout);
 	bool WaitForHandle(const DKString& clas, const DKString& value, int timeout);
 	bool WaitForHandle(const DKString& value, int timeout);
-	
+	bool WindowExists(const DKString& title);
+	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
+	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
+	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
+
 	HMODULE hModule;  //dll module
 	static std::vector<HWND> handle; //handle[0] is the window
 	static DKStringArray _windows;
