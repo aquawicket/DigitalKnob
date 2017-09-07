@@ -3,6 +3,7 @@ function DKHook_Init()
 {
 	DKCreate("DKHook");
 	DKCreate("DKHook/DKHook.html");
+	DKAddEvent("refresh", "click", DKHook_OnEvent);
 	DKAddEvent("setvalue", "click", DKHook_OnEvent);
 	DKAddEvent("doclick", "click", DKHook_OnEvent);
 	DKAddEvent("Prev", "click", DKHook_OnEvent);
@@ -23,6 +24,9 @@ function DKHook_OnEvent(event)
 {
 	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
+	if(DK_Id(event, "refresh")){
+		DKHook_UpdateWindowList();
+    }
 	if(DK_Id(event, "setvalue")){
 		var value = DKWidget_GetValue("SetValueBox");
 		DKHook_SetValue(value);
@@ -70,6 +74,7 @@ function DKHook_OnEvent(event)
 //////////////////////////////////
 function DKHook_UpdateWindowList()
 {
+	DKWidget_SetInnerHtml("windows", "");
 	var str = DKHook_GetWindows();
 	if(!str){ return; }
 	//DKLog("WINDOW LIST: "+str+"\n");
