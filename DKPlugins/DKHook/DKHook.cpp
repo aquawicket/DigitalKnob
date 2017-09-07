@@ -283,7 +283,7 @@ bool DKHook::SetHandle(const DKString& value, unsigned int timeout)
 	unsigned int t = 0;
 	unsigned int h = 0;
 	DKString text;
-	while(text != value && t < timeout){
+	while(t < timeout){
 		GetHandles();
 		for(h=0; h<handle.size(); h++){
 			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
@@ -339,13 +339,16 @@ bool DKHook::SetHandle(const DKString& clas, const DKString& value, unsigned int
 	DKString text;
 	char classname[256];
 
-	while(text != value && clas != (DKString)classname && t < timeout){
+	while(t < timeout){
 		GetHandles();
 		for(h=0; h<handle.size(); h++){
 			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
 			char* buffer = new char[len];
 			SendMessage(handle[h], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
+			if (value.empty()) {
+				int test = 0;
+			}
 			if(text == value){
 				if(!GetClassName(handle[h], classname, 256)){
 					DKLog("DKHook::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);

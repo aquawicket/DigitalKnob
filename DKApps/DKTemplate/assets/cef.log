@@ -980,3 +980,34 @@
 [0907/135630.085:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0907/140253.082:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0907/140253.425:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/150856.615:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/150856.834:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/151252.072:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/151252.306:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/151708.260:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/151708.494:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/152339.293:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/152340.094:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/152343.682:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152348.720:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152353.721:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152358.721:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152403.723:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152408.738:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152413.740:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152418.752:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152423.752:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152428.726:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152843.298:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/152843.547:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/152848.217:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/152853.206:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/153409.699:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/153409.995:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/153424.529:ERROR:discardable_shared_memory.cc(364)] VirtualFree() MEM_DECOMMIT failed in Purge(): The parameter is incorrect. (0x57)
+[0907/154304.158:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/154304.407:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/154437.792:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/154438.104:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0907/154533.800:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0907/154534.018:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
