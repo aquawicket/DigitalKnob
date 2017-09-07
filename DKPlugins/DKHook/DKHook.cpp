@@ -218,27 +218,6 @@ bool DKHook::SendHook(const DKString& window, const DKString& handle, const DKSt
 	return true;
 }
 
-/*
-//////////////////////////////////////////
-bool DKHook::SetHandle(unsigned int index)
-{
-	if(handle.empty()){ 
-		DKLog("DKHook::SetHandle("+toString(index)+"): handle is empty\n", DKWARN);
-		return false; 
-	}
-	if(index > handle.size()){
-		DKLog("DKHook::SetHandle("+toString(index)+"): index larger than handle.size "+toString(handle.size())+"\n", DKWARN);
-		return false;
-	}
-	//if(!IsWindowVisible(handle[index])){
-	//	DKLog("DKHook::SetHandle("+toString(index)+"): handle is not visible\n", DKWARN);
-	//	return false;
-	//}
-	currentHandle = index;
-	return true;
-}
-*/
-
 ////////////////////////////////////////////////////////////////
 bool DKHook::SetHandle(unsigned int index, unsigned int timeout)
 {
@@ -255,27 +234,6 @@ bool DKHook::SetHandle(unsigned int index, unsigned int timeout)
 	currentHandle = index;
 	return true;
 }
-
-/*
-/////////////////////////////////////////////
-bool DKHook::SetHandle(const DKString& value)
-{
-	if(handle.empty()){ return false; }
-	for(unsigned int i=0; i<handle.size(); i++){
-		int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
-		char* buffer = new char[len];
-		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
-		DKString text = buffer;
-		if(text == value){
-			currentHandle = i;
-			return true;
-		}
-	}
-
-	DKLog("DKHook::SetHandle("+value+"): cound not find match. \n", DKWARN);
-	return false;
-}
-*/
 
 ///////////////////////////////////////////////////////////////////
 bool DKHook::SetHandle(const DKString& value, unsigned int timeout)
@@ -302,34 +260,6 @@ bool DKHook::SetHandle(const DKString& value, unsigned int timeout)
 	DKLog("DKHook::SetHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
 	return false;
 }
-
-/*
-///////////////////////////////////////////////////////////////////
-bool DKHook::SetHandle(const DKString& clas, const DKString& value)
-{
-	if(handle.empty()){ return false; }
-	for(unsigned int i=0; i<handle.size(); i++){
-		int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
-		char* buffer = new char[len];
-		SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
-		DKString text = buffer;
-		if(text == value){
-			char classname[256];
-			if(!GetClassName(handle[i], classname, 256)){
-				DKLog("DKHook::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
-				return false; 
-			}
-			if(clas == (DKString)classname){
-				currentHandle = i;
-				return true;
-			}
-		}
-	}
-
-	DKLog("DKHook::SetHandle("+clas+","+value+"): cound not find match. \n", DKWARN);
-	return false;
-}
-*/
 
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKHook::SetHandle(const DKString& clas, const DKString& value, unsigned int timeout)
@@ -376,25 +306,6 @@ bool DKHook::SetString(const DKString& text)
 	return true;
 }
 
-/*
-/////////////////////////////////////////////////////
-bool DKHook::SetWindowHandle(const DKString& caption)
-{
-	handle.clear();
-	HWNDname temp;
-	temp.caption = caption.c_str();
-	if(EnumWindows(FindWindow, (LPARAM)&temp)){//true = fail
-		DKLog("DKHook::SetWindowHandle() cannot find window "+caption+" \n", DKERROR);
-		return false;
-	}
-
-	DKLog("Selected Window: "+caption+"\n", DKINFO);
-	GetHandles();
-	SetHandle(0,0);
-	return true;
-}
-*/
-
 /////////////////////////////////////////////////////////////////////////
 bool DKHook::SetWindowHandle(const DKString& title, unsigned int timeout)
 {
@@ -414,6 +325,13 @@ bool DKHook::SetWindowHandle(const DKString& title, unsigned int timeout)
 	GetHandles();
 	SetHandle(0,1);
 	DKLog("Selected Window: "+title+"\n", DKINFO);
+	return true;
+}
+
+/////////////////////////
+bool DKHook::ShowWindow()
+{
+	::ShowWindow(handle[currentHandle], SW_SHOW);
 	return true;
 }
 

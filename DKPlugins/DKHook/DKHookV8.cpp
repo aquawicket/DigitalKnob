@@ -22,6 +22,7 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
 	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
 	DKV8::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
+	DKV8::AttachFunction("DKHook_ShowWindow", DKHookV8::ShowWindow);
 	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
 	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
 	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
@@ -87,6 +88,17 @@ bool DKHookV8::SetValue(CefArgs args, CefReturn retval)
 {
 	DKString value = args->GetString(0);
 	if(!DKHook::Instance("DKHook")->SetString(value)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetBool(0, true);
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKHookV8::ShowWindow(CefArgs args, CefReturn retval)
+{
+	if(!DKHook::Instance("DKHook")->ShowWindow()){
 		retval->SetBool(0, false);
 		return false;
 	}

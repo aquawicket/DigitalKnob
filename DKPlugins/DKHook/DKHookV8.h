@@ -23,10 +23,11 @@ public:
 	static bool GetWindows(CefArgs args, CefReturn retval);
 	static bool NextHandle(CefArgs args, CefReturn retval);
 	static bool PrevHandle(CefArgs args, CefReturn retval);
+	static bool SendHook(CefArgs args, CefReturn retval);
 	static bool SetHandle(CefArgs args, CefReturn retval);
 	static bool SetWindowHandle(CefArgs args, CefReturn retval);
-	static bool SendHook(CefArgs args, CefReturn retval);
 	static bool SetValue(CefArgs args, CefReturn retval);
+	static bool ShowWindow(CefArgs args, CefReturn retval);
 	static bool ToggleHighlight(CefArgs args, CefReturn retval);
 	static bool WindowExists(CefArgs args, CefReturn retval);
 	static bool WaitForWindow(CefArgs args, CefReturn retval);
