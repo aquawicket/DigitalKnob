@@ -8,8 +8,9 @@ class DKArchive : public DKObjectT<DKArchive>
 {
 public:
 	void Init(){}
-	static bool Extract(const DKString& file, const DKString& path);
+	
 	static bool Compress(const DKString& path, const DKString& file);
+	static bool Extract(const DKString& file, const DKString& path);
 	static int copy_data(struct archive *ar, struct archive *aw);
 };
 

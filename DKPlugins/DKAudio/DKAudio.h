@@ -9,15 +9,15 @@ class DKAudio : public DKObjectT<DKAudio>
 public:
 	void Init();
 	void End();
-	static void PlaySound(DKString& file); //one shot
+	
+	static int GetVolume();
+	static void Mute();
 	static void OpenMusic(DKString& file);
 	static void Pause(DKString& file);
+	static void PlaySound(DKString& file); //one shot
 	static void Resume(DKString& file);
-	static void Mute();
-	static void UnMute();
-	static int GetVolume();
 	static void SetVolume(int& volume);
-
+	static void UnMute();
 };
 
 REGISTER_OBJECT(DKAudio, true);

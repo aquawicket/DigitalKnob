@@ -8,11 +8,12 @@ class DKAssets : public DKObjectT<DKAssets>
 {
 public:
 	void Init();
+	
+	//static bool AppendDataPath(const DKString& datapath);
 	static bool AquireDataPath(DKString& exepath);
 	static bool CheckAssetsPath(const DKString& datapath);
-	//static bool AppendDataPath(const DKString& datapath);
-	static bool PackageAssets(DKString& input, DKString& output);
 	static bool CopyAssets(const unsigned char* assets, const long int assets_size);
+	static bool PackageAssets(DKString& input, DKString& output);
 };
 
 

@@ -20,11 +20,12 @@ public:
 	bool TestString(void* input, void* output);
 	bool TestReturnInt(void* input, void* output);
 	bool TestReturnString(void* input, void* output);
-	bool SetIcon(void* input, void* output);
+	
+	bool Hide(void* input, void* output);
+	bool IsVisible(void* input, void* output);
 	bool Minimize(void* input, void* output);
 	bool Restore(void* input, void* output);
-	bool IsVisible(void* input, void* output);
-	bool Hide(void* input, void* output);
+	bool SetIcon(void* input, void* output);
 	bool Show(void* input, void* output);
 
 	DKCef* dkCef;
@@ -35,11 +36,11 @@ public:
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
+	virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
+	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
-	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
-	virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
 	
 	//////////////
 	void DoFrame()

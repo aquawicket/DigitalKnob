@@ -181,23 +181,23 @@ public:
 	static std::vector<std::string> funcs;
 
 	//Flags
-	static DKString homepage;
-	static DKString multi_process;
-	static DKString sandbox;
-	static DKString log_severity;
-	static DKString multi_threaded_message_loop;
 	static DKString disable_gpu;
 	static DKString disable_gpu_compositing;
-	static DKString ignore_gpu_blacklist;
-	static DKString remote_debugging_port;
-	static DKString enable_system_flash;
-	static DKString enable_begin_frame_scheduling;
-	static DKString enable_webgl;
-	static DKString renderer_process_limit;
-	static DKString enable_gpu;
 	static DKString disable_web_security;
+	static DKString enable_begin_frame_scheduling;
+	static DKString enable_gpu;
+	static DKString enable_system_flash;
+	static DKString enable_webgl;
+	static DKString homepage;
+	static DKString ignore_gpu_blacklist;
+	static DKString log_severity;
+	static DKString multi_process;
+	static DKString multi_threaded_message_loop;
 	static DKString no_proxy_server;
 	static DKString off_screen_rendering_enabled;
+	static DKString remote_debugging_port;
+	static DKString renderer_process_limit;
+	static DKString sandbox;
 };
 
 //////////////////////////////////////////

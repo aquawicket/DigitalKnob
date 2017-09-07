@@ -18,25 +18,23 @@ public:
 	void Init();
 	void End();
 
-	const DKString GetUrl(int num);
-	bool SetUrl(const DKString& url, int num);
-	bool GoBack(int num);
-	bool GoForward(int num);
-	bool Stop(int num);
-	bool Reload(int num);
+	bool CloseBrowser(int num);
 	bool DownloadUrl(const DKString& url);
-	bool Paste();
-	bool ShowDevTools(int num);
-	bool Print(int num);
-
-	bool NewBrowser();
 	int GetBrowsers();
 	int GetCurrentBrowser();
-	bool SelectBrowser(int num);
-	bool CloseBrowser(int num);
-	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
+	const DKString GetUrl(int num);
+	bool GoBack(int num);
+	bool GoForward(int num);
+	bool NewBrowser();
+	bool Paste();
+	bool Print(int num);
+	bool Reload(int num);
 	static void RunJavascript(DKString& string);
-	
+	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
+	bool SelectBrowser(int num);
+	bool SetUrl(const DKString& url, int num);
+	bool ShowDevTools(int num);
+	bool Stop(int num);
 	
 	DKString id;
 	int top;

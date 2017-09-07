@@ -13,8 +13,8 @@ public:
 	void End();
 
 	static bool _DKCreate(CefArgs args, CefReturn retval);
-	static bool _SetLog(CefArgs args, CefReturn retval);
 	static bool _DKValid(CefArgs args, CefReturn retval);
+	static bool _SetLog(CefArgs args, CefReturn retval);
 
 	static bool ClickImage(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
@@ -38,8 +38,8 @@ public:
 	static bool WaitForImage(CefArgs args, CefReturn retval);
 	
 	//Cef JS functions
-	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Print(CefArgs args, CefReturn retval);
+	static bool ShowDevTools(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
