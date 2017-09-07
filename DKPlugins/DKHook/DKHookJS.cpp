@@ -102,8 +102,11 @@ int DKHookJS::SetWindowHandle(duk_context* ctx)
 //////////////////////////////////////////
 int DKHookJS::GetWindows(duk_context* ctx)
 {
-	DKStringArray arry = DKHook::Instance("DKHook")->GetWindows();
-	DKString list = toString(arry, ",");
+	DKStringArray windows;
+	if (!DKHook::Instance("DKHook")->GetWindows(windows)) {
+		return 0;
+	}
+	DKString list = toString(windows, ",");
 	duk_push_string(ctx, list.c_str());
 	return 1;
 }

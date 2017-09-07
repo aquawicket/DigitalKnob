@@ -202,8 +202,12 @@ bool DKHookV8::SetWindowHandle(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKHookV8::GetWindows(CefArgs args, CefReturn retval)
 {
-	DKStringArray arry = DKHook::Instance("DKHook")->GetWindows();
-	DKString list = toString(arry, ",");
+	DKStringArray windows;
+	if(!DKHook::Instance("DKHook")->GetWindows(windows)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	DKString list = toString(windows, ",");
 	retval->SetString(0, list);
 	return true;
 }

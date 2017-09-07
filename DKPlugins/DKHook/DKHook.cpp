@@ -6,7 +6,7 @@
 #include "DKFile.h"
 #include <tchar.h>
 
-DKStringArray DKHook::windows;
+DKStringArray DKHook::_windows;
 std::vector<HWND> DKHook::handle;
 
 ///////////////////
@@ -124,7 +124,7 @@ BOOL CALLBACK DKHook::GetWindows(HWND hwnd, LPARAM lparam)
 	GetWindowText(hwnd, buffer, 50);
 	DKString title = buffer;
 	if(!title.empty()){
-		windows.push_back(title);
+		_windows.push_back(title);
 	}    
 	return true; 
 }
@@ -333,12 +333,13 @@ bool DKHook::GetParent(DKString& parent)
 	return true;
 }
 
-//////////////////////////////////
-DKStringArray DKHook::GetWindows()
+///////////////////////////////////////////////
+bool DKHook::GetWindows(DKStringArray& windows)
 {
-	windows.clear();
-	EnumWindows(GetWindows, NULL);
-	return windows;
+	_windows.clear();
+	bool rval = EnumWindows(GetWindows, NULL);
+	windows = _windows;
+	return rval;
 }
 
 ////////////////////////////////////////////////
