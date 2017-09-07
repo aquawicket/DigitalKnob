@@ -30,22 +30,31 @@ void DKHook::End()
 	if(hModule){FreeLibrary(hModule);}
 }
 
-/////////////////////////////////////////////////////
-bool DKHook::SetWindowHandle(const DKString& caption)
+//////////////////////////
+bool DKHook::DoHighlight()
 {
-	//const char* 
-	handle.clear();
-	//This method fills handle with window whose title partially matches
-	HWNDname temp;
-	temp.caption = caption.c_str();
-	if(EnumWindows(FindWindowPartial, (LPARAM)&temp)){//true - fail
-		DKLog("DKHook::SetWindowHandle() cannot find window "+caption+" \n", DKERROR);
-		return false;
-	}
+	if(!highlight){ return false; }
+	if(handle.empty()){ return false; }
 
-	DKLog("Selected Window: "+caption+"\n", DKINFO);
-	GetHandles();
-	SetHandle(0);
+	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
+
+	RECT rect;
+	GetWindowRect(handle[currentHandle], &rect);
+	HDC screenDC = ::GetDC(GetDesktopWindow());
+
+	HPEN pen, oldPen;
+	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
+	oldPen = (HPEN)SelectObject(screenDC, pen);
+
+	::MoveToEx(screenDC, rect.left, rect.top, NULL);
+	::LineTo(screenDC, rect.right, rect.top);
+	::LineTo(screenDC, rect.right, rect.bottom);
+	::LineTo(screenDC, rect.left, rect.bottom);
+	::LineTo(screenDC, rect.left, rect.top);
+	::ReleaseDC(0, screenDC);
+
+	SelectObject(screenDC, oldPen); 
+	DeleteObject(pen);
 	return true;
 }
 
@@ -56,7 +65,7 @@ bool DKHook::GetHandles()
 		DKLog("DKHook::GetHandles() window not found! \n", DKERROR);
 		return false;
 	}
-		
+
 	//Window IS open, so look for all of the items and assigne handles
 	bool searchFromBase = true;
 	unsigned int s = 0;
@@ -83,90 +92,36 @@ bool DKHook::GetHandles()
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-BOOL CALLBACK DKHook::EnumWindowsProc(HWND hwnd, LPARAM lParam)
+/////////////////////////////////////////////////////
+bool DKHook::SetWindowHandle(const DKString& caption)
 {
-	char class_name[80];
-	char title[80];
-	GetClassName(hwnd,class_name, sizeof(class_name));
-	GetWindowText(hwnd,title,sizeof(title));
-
-	/*
-	if(!same("",title)){
-		DKLog("Window: ");
-		DKLog(title);
-		DKLog(" Class: ");
-		DKLog(class_name);
-		DKLog("\n");
+	//const char* 
+	handle.clear();
+	//This method fills handle with window whose title partially matches
+	HWNDname temp;
+	temp.caption = caption.c_str();
+	if(EnumWindows(FindWindowPartial, (LPARAM)&temp)){//true - fail
+		DKLog("DKHook::SetWindowHandle() cannot find window "+caption+" \n", DKERROR);
+		return false;
 	}
-	*/
 
-	return TRUE;
+	DKLog("Selected Window: "+caption+"\n", DKINFO);
+	GetHandles();
+	SetHandle(0);
+	return true;
 }
-
-/////////////////////////////////////////////////////////////////
-BOOL CALLBACK DKHook::FindWindowPartial(HWND hwnd, LPARAM lparam) 
-{     
-	HWNDname *temp = (HWNDname*)lparam;
-	static TCHAR buffer[50];      
-	GetWindowText(hwnd, buffer, 50);     
-	if(_tcsstr(buffer, temp->caption)) { 
-		handle.push_back(hwnd);
-		return FALSE;     
-	}      
-	return TRUE; 
-}
-
-//////////////////////////////////////////////////////////
-BOOL CALLBACK DKHook::GetWindows(HWND hwnd, LPARAM lparam) 
-{     
-	static TCHAR buffer[50];      
-	GetWindowText(hwnd, buffer, 50);
-	DKString title = buffer;
-	if(!title.empty()){
-		_windows.push_back(title);
-	}    
-	return true; 
-}
-
 
 //////////////////////////////
-void DKHook::ToggleHighlight()
+bool DKHook::ToggleHighlight()
 {
 	if(highlight){
 		highlight = false;
 		DoHighlight();
-		return;
+		return true;
 	}
 	highlight = true;
 	DoHighlight();
-}
-
-//////////////////////////
-void DKHook::DoHighlight()
-{
-	if(!highlight){ return; }
-	if(handle.empty()){ return; }
-	 
-	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
-
-	RECT rect;
-	GetWindowRect(handle[currentHandle], &rect);
-	screenDC = ::GetDC(GetDesktopWindow());
-
-	HPEN pen, oldPen;
-	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
-    oldPen = (HPEN)SelectObject(screenDC, pen);
-
-	::MoveToEx(screenDC, rect.left, rect.top, NULL);
-	::LineTo(screenDC, rect.right, rect.top);
-	::LineTo(screenDC, rect.right, rect.bottom);
-	::LineTo(screenDC, rect.left, rect.bottom);
-	::LineTo(screenDC, rect.left, rect.top);
-	::ReleaseDC(0, screenDC);
-
-	SelectObject(screenDC, oldPen); 
-    DeleteObject(pen);
+	return true;
 }
 
 /////////////////////////
@@ -342,6 +297,31 @@ bool DKHook::GetWindows(DKStringArray& windows)
 	return rval;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+bool DKHook::SendHook(const DKString& window, const DKString& handle, const DKString& data)
+{
+	DKLog("DKHook::SendHook("+window+", "+handle+", "+data+")\n", DKDEBUG);
+
+	if(!SetWindowHandle(window)){ return false; }
+	if(!SetHandle(toInt(handle))){ return false; }
+
+	DKStringArray arry;
+	toStringArray(arry, data, ",");
+
+	if(same(arry[0], "click")){
+		Click();
+	}
+	if(same(arry[0], "GetValue")){
+		DKString value;
+		GetString(value);
+		DKLog("Hook GetValue returned: "+value+"\n", DKINFO);
+	}
+	if(same(arry[0], "SetValue")){
+		SetString(arry[1]);
+	}
+	return true;
+}
+
 ////////////////////////////////////////////////
 bool DKHook::WindowExists(const DKString& title)
 {
@@ -442,29 +422,49 @@ bool DKHook::WaitForHandle(const DKString& value, int timeout)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////
-bool DKHook::SendHook(const DKString& window, const DKString& handle, const DKString& data)
+///////////////////////////////////////////////////////////////
+BOOL CALLBACK DKHook::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
-	DKLog("DKHook::SendHook("+window+", "+handle+", "+data+")\n", DKDEBUG);
-	
-	if(!SetWindowHandle(window)){ return false; }
-	if(!SetHandle(toInt(handle))){ return false; }
+	char class_name[80];
+	char title[80];
+	GetClassName(hwnd,class_name, sizeof(class_name));
+	GetWindowText(hwnd,title,sizeof(title));
 
-	DKStringArray arry;
-	toStringArray(arry, data, ",");
+	/*
+	if(!same("",title)){
+	DKLog("Window: ");
+	DKLog(title);
+	DKLog(" Class: ");
+	DKLog(class_name);
+	DKLog("\n");
+	}
+	*/
 
-	if(same(arry[0], "click")){
-		Click();
-	}
-	if(same(arry[0], "GetValue")){
-		DKString value;
-		GetString(value);
-		DKLog("Hook GetValue returned: "+value+"\n", DKINFO);
-	}
-	if(same(arry[0], "SetValue")){
-		SetString(arry[1]);
-	}
-	return true;
+	return TRUE;
 }
 
+/////////////////////////////////////////////////////////////////
+BOOL CALLBACK DKHook::FindWindowPartial(HWND hwnd, LPARAM lparam) 
+{     
+	HWNDname *temp = (HWNDname*)lparam;
+	static TCHAR buffer[50];      
+	GetWindowText(hwnd, buffer, 50);     
+	if(_tcsstr(buffer, temp->caption)) { 
+		handle.push_back(hwnd);
+		return FALSE;     
+	}      
+	return TRUE; 
+}
+
+//////////////////////////////////////////////////////////
+BOOL CALLBACK DKHook::GetWindows(HWND hwnd, LPARAM lparam) 
+{     
+	static TCHAR buffer[50];      
+	GetWindowText(hwnd, buffer, 50);
+	DKString title = buffer;
+	if(!title.empty()){
+		_windows.push_back(title);
+	}    
+	return true; 
+}
 #endif //WIN32

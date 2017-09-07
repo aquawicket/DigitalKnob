@@ -25,6 +25,7 @@ public:
 	void End();
 
 	bool Click();
+	bool DoHighlight();
 	bool GetClass(DKString& clas);
 	bool GetHandles();
 	bool GetLeft(int& left);
@@ -40,6 +41,7 @@ public:
 	bool SetHandle(const DKString& value);
 	bool SetString(const DKString& text);
 	bool SetWindowHandle(const DKString& caption);
+	bool ToggleHighlight();
 	bool WaitForWindow(const DKString& title, int timeout);
 	bool WaitForHandle(unsigned int index, int timeout);
 	bool WaitForHandle(const DKString& clas, const DKString& value, int timeout);
@@ -53,13 +55,8 @@ public:
 	static std::vector<HWND> handle; //handle[0] is the window
 	static DKStringArray _windows;
 	unsigned int currentHandle;
-	
-	//Highlight window
 	bool highlight;
-	void ToggleHighlight();
-	void DoHighlight();
-	void DrawRectangleOnTransparent(HWND hWnd, const RECT& rc);
-	HDC screenDC;
+	//HDC screenDC;
 };
 
 REGISTER_OBJECT(DKHook, true);
