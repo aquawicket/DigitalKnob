@@ -93,7 +93,7 @@ int DKHookJS::ToggleHighlight(duk_context* ctx)
 int DKHookJS::SetWindowHandle(duk_context* ctx)
 {
 	DKString window = duk_require_string(ctx, 0);
-	if(!DKHook::Instance("DKHook")->SetWindowHandle(window)){
+	if(!DKHook::Instance("DKHook")->SetWindowHandle(window, 1)){
 		return 0;
 	}
 	return 1;

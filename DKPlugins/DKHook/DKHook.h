@@ -36,11 +36,11 @@ public:
 	bool NextHandle();
 	bool PrevHandle();
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
-	bool SetHandle(unsigned int index);
-	bool SetHandle(const DKString& clas, const DKString& value);
-	bool SetHandle(const DKString& value);
+	bool SetHandle(unsigned int index, unsigned int timeout);
+	bool SetHandle(const DKString& clas, const DKString& value, unsigned int timeout);
+	bool SetHandle(const DKString& value, unsigned int timeout);
 	bool SetString(const DKString& text);
-	bool SetWindowHandle(const DKString& caption);
+	bool SetWindowHandle(const DKString& title, unsigned int timeout);
 	bool ToggleHighlight();
 	bool WaitForWindow(const DKString& title, int timeout);
 	bool WaitForHandle(unsigned int index, int timeout);

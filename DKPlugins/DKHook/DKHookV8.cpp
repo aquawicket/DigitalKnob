@@ -142,20 +142,24 @@ bool DKHookV8::GetParent(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKHookV8::SetHandle(CefArgs args, CefReturn retval)
 {
+	int timeout = 1;
 	if(args->GetType(0) == VTYPE_INT){ //By handle number
-		if(!DKHook::Instance("DKHook")->SetHandle(args->GetInt(0))){
+		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
+		if(!DKHook::Instance("DKHook")->SetHandle(args->GetInt(0), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
-		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0), args->GetString(1))){
+		if(args->GetType(2) == VTYPE_INT){ timeout = args->GetInt(2); }
+		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0), args->GetString(1), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
-		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0))){
+		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
+		if(!DKHook::Instance("DKHook")->SetHandle(args->GetString(0), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
@@ -192,8 +196,9 @@ bool DKHookV8::ToggleHighlight(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKHookV8::SetWindowHandle(CefArgs args, CefReturn retval)
 {
-	DKString window = args->GetString(0);
-	if(!DKHook::Instance("DKHook")->SetWindowHandle(window)){
+	int timeout = 1;
+	if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
+	if(!DKHook::Instance("DKHook")->SetWindowHandle(args->GetString(0), timeout)){
 		retval->SetBool(0, false);
 		return false;
 	}
