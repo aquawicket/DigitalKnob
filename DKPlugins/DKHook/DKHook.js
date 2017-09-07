@@ -60,6 +60,7 @@ function DKHook_OnEvent(event)
 		//DKLog("DKHook_OnEvent(): id = "+DK_GetId(event)+"\n");
 		//DKLog("DKHook_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n");
 		DKHook_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
+		DKWidget_SetValue("window",DKWidget_GetValue(DK_GetId(event)));
 		var value = DKHook_GetValue();
 		DKWidget_SetValue("value", value);
 		var clas = DKHook_GetClass();
