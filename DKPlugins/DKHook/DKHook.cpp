@@ -293,12 +293,10 @@ bool DKHook::SetString(const DKString& text)
 /////////////////////////////////////////////////////
 bool DKHook::SetWindowHandle(const DKString& caption)
 {
-	//const char* 
 	handle.clear();
-	//This method fills handle with window whose title partially matches
 	HWNDname temp;
 	temp.caption = caption.c_str();
-	if(EnumWindows(FindWindowPartial, (LPARAM)&temp)){//true - fail
+	if(EnumWindows(FindWindow, (LPARAM)&temp)){//true = fail
 		DKLog("DKHook::SetWindowHandle() cannot find window "+caption+" \n", DKERROR);
 		return false;
 	}
@@ -441,6 +439,19 @@ BOOL CALLBACK DKHook::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 	*/
 
 	return TRUE;
+}
+
+//////////////////////////////////////////////////////////
+BOOL CALLBACK DKHook::FindWindow(HWND hwnd, LPARAM lparam) 
+{     
+	HWNDname *temp = (HWNDname*)lparam;
+	static TCHAR buffer[50];      
+	GetWindowText(hwnd, buffer, 50);     
+	if(strcmp(buffer, temp->caption) == 0){ 
+		handle.push_back(hwnd);
+		return FALSE;     
+	}      
+	return TRUE; 
 }
 
 /////////////////////////////////////////////////////////////////

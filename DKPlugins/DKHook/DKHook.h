@@ -48,6 +48,7 @@ public:
 	bool WaitForHandle(const DKString& value, int timeout);
 	bool WindowExists(const DKString& title);
 	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
+	static BOOL CALLBACK FindWindow(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
 
