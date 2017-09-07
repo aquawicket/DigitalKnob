@@ -6,28 +6,29 @@
 void DKHookV8::Init()
 {
 	DKLog("DKHookV8::Init()\n", DKDEBUG);
+
 	//DKV8::AttachFunction("Test", DKHookV8::Test);
-	DKV8::AttachFunction("DKHook_SendHook", DKHookV8::SendHook);
-	DKV8::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
-	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
+	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
+	DKV8::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
 	DKV8::AttachFunction("DKHook_GetClass", DKHookV8::GetClass);
-	DKV8::AttachFunction("DKHook_GetTop", DKHookV8::GetTop);
 	DKV8::AttachFunction("DKHook_GetLeft", DKHookV8::GetLeft);
 	DKV8::AttachFunction("DKHook_GetParent", DKHookV8::GetParent);
-	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
-	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
-	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
-	DKV8::AttachFunction("DKHook_NextHandle", DKHookV8::NextHandle);
-	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
-	DKV8::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
+	DKV8::AttachFunction("DKHook_GetTop", DKHookV8::GetTop);
+	DKV8::AttachFunction("DKHook_GetValue", DKHookV8::GetValue);
 	DKV8::AttachFunction("DKHook_GetWindows", DKHookV8::GetWindows);
-	DKV8::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
+	DKV8::AttachFunction("DKHook_NextHandle", DKHookV8::NextHandle);
+	DKV8::AttachFunction("DKHook_PrevHandle", DKHookV8::PrevHandle);
+	DKV8::AttachFunction("DKHook_SendHook", DKHookV8::SendHook);
+	DKV8::AttachFunction("DKHook_SetHandle", DKHookV8::SetHandle);
+	DKV8::AttachFunction("DKHook_SetValue", DKHookV8::SetValue);
+	DKV8::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
+	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
 	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
 	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
 	DKV8::AttachFunction("DKHook_WaitForHandle", DKHookV8::WaitForHandle);
 }
 
-///////////////////
+////////////////////
 void DKHookV8::End()
 {
 	DKLog("DKHookV8::End()\n", DKDEBUG);
@@ -44,6 +45,18 @@ bool DKHookV8::Test(CefArgs args, CefReturn retval)
 	return true;
 }
 */
+
+
+////////////////////////////////////////////////////
+bool DKHookV8::Click(CefArgs args, CefReturn retval)
+{
+	if(!DKHook::Instance("DKHook")->Click()){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetBool(0, true);
+	return true;
+}
 
 ///////////////////////////////////////////////////////
 bool DKHookV8::SendHook(CefArgs args, CefReturn retval)
@@ -123,17 +136,6 @@ bool DKHookV8::GetParent(CefArgs args, CefReturn retval)
 		return false;
 	}
 	retval->SetString(0, parent);
-	return true;
-}
-
-////////////////////////////////////////////////////
-bool DKHookV8::Click(CefArgs args, CefReturn retval)
-{
-	if(!DKHook::Instance("DKHook")->Click()){
-		retval->SetBool(0, false);
-		return false;
-	}
-	retval->SetBool(0, true);
 	return true;
 }
 

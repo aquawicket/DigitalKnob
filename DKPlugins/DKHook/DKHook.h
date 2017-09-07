@@ -4,7 +4,7 @@
 #define DKHook_H
 #include "DK.h"
 
-#include <Tlhelp32.h>
+//#include <Tlhelp32.h>
 #include <vector>
 
 //Functions in wxHookDLL.dll
@@ -53,10 +53,9 @@ public:
 
 	HMODULE hModule;  //dll module
 	static std::vector<HWND> handle; //handle[0] is the window
-	static DKStringArray _windows;
-	unsigned int currentHandle;
-	bool highlight;
-	//HDC screenDC;
+	unsigned int currentHandle; //current indes of handle[]
+	static DKStringArray _windows; //list of windows
+	bool highlight; //highlight toggle
 };
 
 REGISTER_OBJECT(DKHook, true);
