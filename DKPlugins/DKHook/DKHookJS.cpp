@@ -7,18 +7,18 @@
 /////////////////////
 void DKHookJS::Init()
 {
-	DKDuktape::AttachFunction("DKHook_SendHook", DKHookJS::SendHook);
-	DKDuktape::AttachFunction("DKHook_GetValue", DKHookJS::GetValue);
-	DKDuktape::AttachFunction("DKHook_SetValue", DKHookJS::SetValue);
 	DKDuktape::AttachFunction("DKHook_Click", DKHookJS::Click);
-	DKDuktape::AttachFunction("DKHook_PrevHandle", DKHookJS::PrevHandle);
-	DKDuktape::AttachFunction("DKHook_NextHandle", DKHookJS::NextHandle);
-	DKDuktape::AttachFunction("DKHook_ToggleHighlight", DKHookJS::ToggleHighlight);
-	DKDuktape::AttachFunction("DKHook_SetWindowHandle", DKHookJS::SetWindowHandle);
-	DKDuktape::AttachFunction("DKHook_GetWindows", DKHookJS::GetWindows);
 	DKDuktape::AttachFunction("DKHook_CurrentHandle", DKHookJS::CurrentHandle);
-	DKDuktape::AttachFunction("DKHook_WindowExists", DKHookJS::WindowExists);
+	DKDuktape::AttachFunction("DKHook_GetValue", DKHookJS::GetValue);
+	DKDuktape::AttachFunction("DKHook_GetWindows", DKHookJS::GetWindows);
+	DKDuktape::AttachFunction("DKHook_NextHandle", DKHookJS::NextHandle);
+	DKDuktape::AttachFunction("DKHook_PrevHandle", DKHookJS::PrevHandle);
+	DKDuktape::AttachFunction("DKHook_SendHook", DKHookJS::SendHook);
+	DKDuktape::AttachFunction("DKHook_SetValue", DKHookJS::SetValue);
+	DKDuktape::AttachFunction("DKHook_SetWindowHandle", DKHookJS::SetWindowHandle);
+	DKDuktape::AttachFunction("DKHook_ToggleHighlight", DKHookJS::ToggleHighlight);
 	DKDuktape::AttachFunction("DKHook_WaitForWindow", DKHookJS::WaitForWindow);
+	DKDuktape::AttachFunction("DKHook_WindowExists", DKHookJS::WindowExists);
 }
 
 ////////////////////////////////////////
