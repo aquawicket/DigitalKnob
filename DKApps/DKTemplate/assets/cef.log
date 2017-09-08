@@ -1059,3 +1059,7 @@
 [0908/090116.155:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0908/090948.117:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0908/090948.382:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0908/091559.734:FATAL:browser_context_impl.cc(214)] Check failed: request_context_count_ == 0 (1 vs. 0)
+[0908/091559.735:FATAL:context.cc(229)] Check failed: false. context not valid
+[0908/100250.137:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0908/100250.387:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
