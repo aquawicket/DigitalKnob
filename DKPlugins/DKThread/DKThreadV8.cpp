@@ -5,8 +5,8 @@
 ///////////////////////
 void DKThreadV8::Init()
 {
-	DKV8::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
 	DKV8::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
+	DKV8::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
 }
 
 //////////////////////

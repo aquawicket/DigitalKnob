@@ -30,18 +30,18 @@ public:
 	bool Hide(void* input, void* output);
 	bool IsFullscreen(void* input, void* output);
 	bool IsVisible(void* input, void* output);
+	bool MessageBox(void* input, void* output);
 	bool Minimize(void* input, void* output);
 	bool Restore(void* input, void* output);
 	bool SetClipboard(void* input, void* output);
 	bool SetHeight(void* input, void* output);
+	bool SetIcon(const DKString& file);
 	bool SetWidth(void* input, void* output);
 	bool SetX(void* input, void* output);
 	bool SetY(void* input, void* output);
 	bool Show(void* input, void* output);
 	bool Windowed(void* input, void* output);
-	bool MessageBox(void* input, void* output);
-
-	bool SetIcon(const DKString& file);
+	
 	static int EventFilter(void* userdata, SDL_Event* event);
 	bool handle(SDL_Event* event);
 	void Process();

@@ -20,15 +20,14 @@ public:
 	void Init();
 	void End();
 
-	bool PlaySound(void* input, void* output);
+	bool GetVolume(void* input, void* output);
+	bool Mute(void* input, void* output);
 	bool OpenMusic(void* input, void* output);
 	bool Pause(void* input, void* output);
+	bool PlaySound(void* input, void* output);
 	bool Resume(void* input, void* output);
-	bool Mute(void* input, void* output);
-	bool UnMute(void* input, void* output);
-	bool GetVolume(void* input, void* output);
 	bool SetVolume(void* input, void* output);
-
+	bool UnMute(void* input, void* output);
 	void Process();
 
 	int volume;

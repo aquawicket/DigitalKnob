@@ -10,6 +10,7 @@ class DKXmlJS : public DKObjectT<DKXmlJS>
 {
 public:
 	void Init();
+	
 	static int GetXmlNode(duk_context* ctx);
 };
 

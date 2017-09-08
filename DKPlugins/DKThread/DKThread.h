@@ -25,6 +25,7 @@ public:
 	void Queue(const DKString& name, boost::function<void ()> func);
 	void Queue(const DKString& name, boost::function<void ()> func, const DKString& data);
 	void Process();
+	
 	boost::threadpool::pool* dkThreadPool; //Not truly a Boost function.
 	DKStringArray names;
 	DKStringArray tdata;

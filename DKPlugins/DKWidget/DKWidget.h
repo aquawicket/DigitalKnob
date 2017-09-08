@@ -47,9 +47,9 @@ public:
 	//to string
 	static DKString GetId(DKElement* element);
 	static DKString GetId(DKEvent* event);
-	static DKString GetValue(const DKString& id);
 	static DKString GetValue(DKElement* element);
 	static DKString GetValue(DKEvent* event);
+	static DKString GetValue(const DKString& id);
 	static DKElement* GetElement(const DKString& id);
 	static bool GetOuterHtml(const DKString& id, DKString& string);
 	static bool GetOuterHtml(DKElement* element, DKString& string);
@@ -61,8 +61,8 @@ public:
 	static DKString CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id);
 	static DKElement* GetElementById(const DKString& id);
 	static bool AddEventListener(const DKString& id, const DKString& type);
-	static bool AppendChild(const DKString& parent, const DKString& element);
 	static bool AppendChild(const DKString& parent, DKElement* element);
+	static bool AppendChild(const DKString& parent, const DKString& element);
 	static bool GetAttribute(const DKString& id, const DKString& name, DKString& value);
 	static void GetAvailableId(const DKString& id, DKString& out);
 	static bool GetClientHeight(const DKString& id, DKString& value);
@@ -77,8 +77,8 @@ public:
 	static bool GetValue(const DKString& id, DKString& value);
 	static bool GetValue(const DKString& id, int& value);
 	static bool Hide(const DKString& id);
-	static bool InsertBefore(const DKString& parent, const DKString& id);
 	static bool InsertBefore(const DKString& parent, DKElement* element);
+	static bool InsertBefore(const DKString& parent, const DKString& id);
 	static bool PrependChild(const DKString& parent, const DKString& id);
 	static bool RemoveAllEventListeners(const DKString& id);
 	static bool RemoveElement(const DKString& id);
@@ -137,17 +137,17 @@ public:
 	static bool AddResizeHandle(const DKString& id, const DKString& resize);
 	static bool BuildOptionsString(const DKString& id, DKString &options);
 	static bool BuildStyleString(const DKString& id, DKString &style);
+	static bool GetElements(DKElement* parent, DKElementList& elements);
 	static bool GetElements(const DKString& id, DKElementList& elements);
 	static bool GetElements(const DKString& id, DKStringArray& elements);
-	static bool GetElements(DKElement* parent, DKElementList& elements);
-	static bool GetMouseElementPosition(const DKString& id, int& x_out, int& y_out);
 	static bool GetMouseElementPosition(DKElement* element, int& x_out, int& y_out);
+	static bool GetMouseElementPosition(const DKString& id, int& x_out, int& y_out);
 	static bool GetMouseWindowX(int& x_out);
 	static bool GetMouseWindowY(int& y_out);
 	static bool GetOption(const DKString& id, int n);
-	static bool IsChildOf(const DKString& id, const DKString& parent);
-	static bool IsChildOf(DKElement* element, const DKString& parent);
 	static bool IsChildOf(DKElement* element, DKElement* parent);
+	static bool IsChildOf(DKElement* element, const DKString& parent);
+	static bool IsChildOf(const DKString& id, const DKString& parent);
 	static bool MoveToFront(const DKString& id);
 	static bool RemoveDragHandle(const DKString& id);
 	static bool RemoveResizeHandle(const DKString& id);

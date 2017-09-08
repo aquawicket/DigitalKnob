@@ -17,14 +17,14 @@ void DKSDLAudio::Init()
 	}
 	volume = 128;
 
-	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
+	DKClass::RegisterFunc("DKSDLAudio::GetVolume", &DKSDLAudio::GetVolume, this);
+	DKClass::RegisterFunc("DKSDLAudio::Mute", &DKSDLAudio::Mute, this);
 	DKClass::RegisterFunc("DKSDLAudio::OpenMusic", &DKSDLAudio::OpenMusic, this);
 	DKClass::RegisterFunc("DKSDLAudio::Pause", &DKSDLAudio::Pause, this);
+	DKClass::RegisterFunc("DKSDLAudio::PlaySound", &DKSDLAudio::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLAudio::Resume", &DKSDLAudio::Resume, this);
-	DKClass::RegisterFunc("DKSDLAudio::Mute", &DKSDLAudio::Mute, this);
-	DKClass::RegisterFunc("DKSDLAudio::UnMute", &DKSDLAudio::UnMute, this);
-	DKClass::RegisterFunc("DKSDLAudio::GetVolume", &DKSDLAudio::GetVolume, this);
 	DKClass::RegisterFunc("DKSDLAudio::SetVolume", &DKSDLAudio::SetVolume, this);
+	DKClass::RegisterFunc("DKSDLAudio::UnMute", &DKSDLAudio::UnMute, this);
 	DKApp::AppendLoopFunc(&DKSDLAudio::Process, this);
 }
 

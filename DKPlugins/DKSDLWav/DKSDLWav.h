@@ -14,13 +14,13 @@ public:
 	void Init();
 	void End();
 
-	void initAudio();
-	void endAudio();
-	void playSound(const char * filename, int volume);
 	void OpenMusic(const char * filename, int volume);
+	void endAudio();
+	void initAudio();
+	void playSound(const char * filename, int volume);
 
-	void* PlaySound(void* data);
 	void* OpenMusic(void* data);
+	void* PlaySound(void* data);
 };
 
 

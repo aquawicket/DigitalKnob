@@ -36,9 +36,9 @@ void DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_GetMouseElementY", DKWidgetJS::GetMouseElementY);
 	DKDuktape::AttachFunction("DKWidget_GetMouseWindowX", DKWidgetJS::GetMouseWindowX); 
 	DKDuktape::AttachFunction("DKWidget_GetMouseWindowY", DKWidgetJS::GetMouseWindowY);
-	DKDuktape::AttachFunction("DKWidget_GetOffsetTop", DKWidgetJS::GetOffsetTop);
-	DKDuktape::AttachFunction("DKWidget_GetOffsetLeft", DKWidgetJS::GetOffsetLeft);
 	DKDuktape::AttachFunction("DKWidget_GetOffsetHeight", DKWidgetJS::GetOffsetHeight);
+	DKDuktape::AttachFunction("DKWidget_GetOffsetLeft", DKWidgetJS::GetOffsetLeft);
+	DKDuktape::AttachFunction("DKWidget_GetOffsetTop", DKWidgetJS::GetOffsetTop);
 	DKDuktape::AttachFunction("DKWidget_GetOffsetWidth", DKWidgetJS::GetOffsetWidth);
 	DKDuktape::AttachFunction("DKWidget_GetOption", DKWidgetJS::GetOption);
 	DKDuktape::AttachFunction("DKWidget_GetOuterHtml", DKWidgetJS::GetOuterHtml);

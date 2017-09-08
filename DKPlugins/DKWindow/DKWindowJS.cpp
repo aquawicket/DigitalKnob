@@ -25,21 +25,18 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide);
 	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen);
 	DKDuktape::AttachFunction("DKWindow_IsVisible", DKWindowJS::IsVisible);
+	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize);
 	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore);
-	DKDuktape::AttachFunction("DKWindow_SetIcon", DKWindowJS::SetIcon);
 	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight);
+	DKDuktape::AttachFunction("DKWindow_SetIcon", DKWindowJS::SetIcon);
 	DKDuktape::AttachFunction("DKWindow_SetTitle", DKWindowJS::SetTitle);
 	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth);
 	DKDuktape::AttachFunction("DKWindow_SetX", DKWindowJS::SetX);
 	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY);
 	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed);
-	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox);
 }
-
-
-
 
 
 /////////////////////////////////////////

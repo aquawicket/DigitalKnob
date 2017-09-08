@@ -20,9 +20,9 @@ public:
 	bool onHat(void*input, void* output);
 	bool onInitSDL(void*input, void* output);
 	bool onJoy(void*input, void* output);
-	bool onKeyboardFocusLost(void*input, void* output);
 	bool onKeyDown(void*input, void* output);
 	bool onKeyUp(void*input, void* output);
+	bool onKeyboardFocusLost(void*input, void* output);
 	bool onLowMemory(void*input, void* output);
 	bool onMouse(void*input, void* output);
 	bool onPadDown(void*input, void* output);

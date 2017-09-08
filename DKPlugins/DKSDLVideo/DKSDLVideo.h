@@ -13,6 +13,7 @@ class DKSDLVideo : public DKObjectT<DKSDLVideo>
 public:
 	void Init();
 	void End();
+	
 	void* Play(void* data);
 	bool handle(SDL_Event* event);
 

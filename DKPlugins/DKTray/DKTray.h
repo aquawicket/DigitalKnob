@@ -17,6 +17,7 @@ class DKTray : public DKObjectT<DKTray>
 public:
 	void Init();
 	void End();
+	
 	void Process();
 	static void SetIcon(const DKString& file);
 	static DKString GetIcon();

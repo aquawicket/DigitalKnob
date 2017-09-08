@@ -32,9 +32,7 @@ public:
 
 	bool OnResize(void* input, void* output);
 	bool GetTexture(void* input, void* output);
-
 	void SetupCef();
-
 	bool handle(SDL_Event *event);
 	void Draw();
 	bool transparentPixel(SDL_Event *event);

@@ -10,6 +10,7 @@ class DKTrayJS : public DKObjectT<DKTrayJS>
 {
 public:
 	void Init();
+	
 	static int AddItem(duk_context* ctx);
 	static int GetIcon(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);

@@ -15,12 +15,16 @@ void DKWindow::Init()
 ////////////////////
 void DKWindow::End()
 {
+	DKLog("DKWindow::End()\n", DKDEBUG);
+	
 	DKClass::UnregisterFunc("DKWindow::MessageBox");
 }
 
 ///////////////////////
 bool DKWindow::Create()
 {
+	DKLog("DKWindow::Create()\n", DKDEBUG);
+	
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
 		DKCreate("DKSDLWindow");
@@ -41,6 +45,8 @@ bool DKWindow::Create()
 ///  \a see: DKPlugins/DKSDLWindow.h
 int DKWindow::TestInt(int input)
 {
+	DKLog("DKWindow::TestInt("+toString(input)+")\n", DKDEBUG);
+	
 	int output;
 	DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
 	return output;

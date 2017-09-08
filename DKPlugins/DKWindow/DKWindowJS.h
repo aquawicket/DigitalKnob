@@ -34,17 +34,17 @@ public:
 	static int Hide(duk_context* ctx);
 	static int IsFullscreen(duk_context* ctx);
 	static int IsVisible(duk_context* ctx);
+	static int MessageBox(duk_context* ctx);
 	static int Minimize(duk_context* ctx);
 	static int Restore(duk_context* ctx);
-	static int SetIcon(duk_context* ctx);
 	static int SetHeight(duk_context* ctx);
+	static int SetIcon(duk_context* ctx);
 	static int SetTitle(duk_context* ctx);
 	static int SetWidth(duk_context* ctx);
 	static int SetX(duk_context* ctx);
 	static int SetY(duk_context* ctx);
 	static int Show(duk_context* ctx);
 	static int Windowed(duk_context* ctx);
-	static int MessageBox(duk_context* ctx);
 };
 
 

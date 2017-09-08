@@ -7,11 +7,12 @@
 void DKWebview::Init()
 {
 	DKLog("DKWebview::Init()\n", DKDEBUG);
-	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
-	DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
-	DKClass::RegisterFunc("DKWebview_SendValue", &DKWebview::SendValue, this);
-	DKClass::RegisterFunc("DKWebview_ReceiveValue", &DKWebview::ReceiveValue, this);
+	
 	DKClass::RegisterFunc("DKWebview_PrintFunctions", &DKWebview::PrintFunctions, this);
+	DKClass::RegisterFunc("DKWebview_ReceiveValue", &DKWebview::ReceiveValue, this);
+	DKClass::RegisterFunc("DKWebview_SendValue", &DKWebview::SendValue, this);
+	DKClass::RegisterFunc("DKWebview_Test", &DKWebview::Test, this);
+	DKClass::RegisterFunc("DKWebview_onCreate", &DKWebview::onCreate, this);
 	
 	//FIXME: if we call WebviewActivity from here, it will be called inside SDLActivity.java, onCreate
 	//This will cause SDKActivity to pause and make things go haywire. 
@@ -30,10 +31,10 @@ bool DKWebview::onCreate(void* input, void* output)
 {
 	DKLog("DKWebview::onCreate()\n", DKDEBUG);
 #ifdef ANDROID
-	CallJavaFunction("AttachFunction", "function DKWebview_Test(){ return DK.CallCppFunction('DKWebview_Test,'+string); }");
-	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
-	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
+	CallJavaFunction("AttachFunction", "function DKWebview_Test(){ return DK.CallCppFunction('DKWebview_Test,'+string); }");
 #endif
 	return true;
 }

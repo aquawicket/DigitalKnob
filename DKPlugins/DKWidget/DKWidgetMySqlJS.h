@@ -13,6 +13,7 @@ class DKWidgetMySqlJS : public DKObjectT<DKWidgetMySqlJS>
 {
 public:
 	void Init();
+	
 	static int DeleteRecord(duk_context* ctx);
 	static int GetFirstRecordNum(duk_context* ctx);
 	static int GetLastRecordNum(duk_context* ctx);

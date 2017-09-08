@@ -24,8 +24,8 @@ public:
 	bool GetFullNode(const DKString& xpath, DKString& string);
 	bool GetNode(const DKString& xpath, DKXmlNode& node);
 	bool GetNodeNames(const DKString& xpath, DKStringArray& arry);
-	bool GetNodes(const DKString& xpath, DKXmlNodes& nodes);
 	bool GetNodeValue(const DKString& xpath, DKString& string);
+	bool GetNodes(const DKString& xpath, DKXmlNodes& nodes);
 	bool LoadDocument(const DKString& file);
 	bool LoadDocumentFromString(const DKString& string);
 	bool PrependNode(const DKString& xpath, const DKString& type);
