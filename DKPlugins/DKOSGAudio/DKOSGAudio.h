@@ -15,14 +15,14 @@ class DKOSGAudio : public DKObjectT<DKOSGAudio>
 public:
 	void Init();
 	void End();
+	
 	bool Create();
-
-	void* PlaySound(void* data);
 	void* OpenMusic(void* data);
+	void* PlaySound(void* data);
 
+	osg::ref_ptr<osgAudio::Sample> sample;
 	osg::ref_ptr<osgAudio::SoundNode> sound_node;
 	osg::ref_ptr<osgAudio::SoundState> musicSoundState;
-	osg::ref_ptr<osgAudio::Sample> sample;
 };
 
 

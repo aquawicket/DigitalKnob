@@ -22,15 +22,16 @@ public:
 	void Init();
 	void End();
 
-	void* OnResize(void* data);
 	void* GetTexture(void*);
-	void SetupOsg();
+	void* OnResize(void* data);
 	void SetupCef();
+	void SetupOsg();
 
+	bool getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY);
 	bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa);
 	bool transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea);
 	CefBrowserHost::MouseButtonType getCefMouseButton(int button);
-	bool getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY);
+	
 	void setSize(unsigned int width, unsigned int height);
 
 	DKString id;
@@ -56,14 +57,13 @@ public:
 	osg::Image* cef_image;
 	DKOSGCef* dkosgcef;
 
-	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
-	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
-	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
-	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
+	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
+	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
+	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
+	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	
-
 	/////////////////////////////////////////
 	void DoFrame(){ CefDoMessageLoopWork(); }
 

@@ -8,6 +8,7 @@ void DKFileV8::Init()
 {
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKFileV8::Test);
+	
 	DKV8::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
 	DKV8::AttachFunction("DKFile_Copy", DKFileV8::Copy);
 	DKV8::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);

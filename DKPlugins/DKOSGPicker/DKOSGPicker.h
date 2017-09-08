@@ -13,6 +13,7 @@ class DKOSGPicker : public osgGA::GUIEventHandler, public DKObjectT<DKOSGPicker>
 {
 public:
 	void Init();
+	
 	~DKOSGPicker();
 
 private:

@@ -10,6 +10,7 @@ class DKJS : public DKObjectT<DKJS>
 {
 public:
 	void Init();
+	
 	static int _DKAddEvent(duk_context* ctx);
 	static int _DKAvailable(duk_context* ctx);
 	static int _DKClose(duk_context* ctx);
@@ -27,6 +28,7 @@ public:
 	static int ChangeVolume(duk_context* ctx);
 	static int ClearEvents(duk_context* ctx);
 	static int ClickImage(duk_context* ctx);
+	static int Crash(duk_context* ctx);
 	static int DoFrame(duk_context* ctx);
 	static int DoubleClick(duk_context* ctx);
 	static int Execute(duk_context* ctx);
@@ -43,9 +45,10 @@ public:
 	static int GetLocalIP(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);
 	static int GetMouseY(duk_context* ctx);
-	static int GetObjects(duk_context* ctx);
 	static int GetOS(duk_context* ctx);
+	static int GetObjects(duk_context* ctx);
 	static int GetPixelUnderMouse(duk_context* ctx);
+	static int GetProcessList(duk_context* ctx);
 	static int GetScreenHeight(duk_context* ctx);
 	static int GetScreenWidth(duk_context* ctx);
 	static int GetTime(duk_context* ctx);
@@ -54,9 +57,9 @@ public:
 	static int GetValue(duk_context* ctx);
 	static int GetVolume(duk_context* ctx);
 	static int HideConsole(duk_context* ctx);
+	static int IE(duk_context* ctx);
 	static int Id(duk_context* ctx);
 	static int IdLike(duk_context* ctx);
-	static int IE(duk_context* ctx);
 	static int Include(duk_context* ctx);
 	static int KeyIsDown(duk_context* ctx);
 	static int LeftClick(duk_context* ctx);
@@ -76,14 +79,12 @@ public:
 	static int SetFramerate(duk_context* ctx);
 	static int ShowConsole(duk_context* ctx);
 	static int Sleep(duk_context* ctx);
+	static int StopPropagation(duk_context* ctx);
 	static int StrokeKey(duk_context* ctx);
 	static int System(duk_context* ctx);
-	static int Crash(duk_context* ctx);
 	static int Type(duk_context* ctx);
 	static int Value(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
-	static int GetProcessList(duk_context* ctx);
-	static int StopPropagation(duk_context* ctx);
 };
 
 

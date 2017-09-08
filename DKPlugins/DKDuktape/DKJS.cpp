@@ -55,6 +55,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_ChangeVolume", DKJS::ChangeVolume);
 	DKDuktape::AttachFunction("DK_ClearEvents", DKJS::ClearEvents);
 	DKDuktape::AttachFunction("DK_ClickImage", DKJS::ClickImage);
+	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash);
 	DKDuktape::AttachFunction("DK_DoFrame", DKJS::DoFrame);
 	DKDuktape::AttachFunction("DK_DoubleClick", DKJS::DoubleClick);
 	DKDuktape::AttachFunction("DK_Execute", DKJS::Execute);
@@ -71,9 +72,10 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetLocalIP", DKJS::GetLocalIP);
 	DKDuktape::AttachFunction("DK_GetMouseX", DKJS::GetMouseX); 
 	DKDuktape::AttachFunction("DK_GetMouseY", DKJS::GetMouseY);
-	DKDuktape::AttachFunction("DK_GetObjects", DKJS::GetObjects);
 	DKDuktape::AttachFunction("DK_GetOS", DKJS::GetOS);
+	DKDuktape::AttachFunction("DK_GetObjects", DKJS::GetObjects);
 	DKDuktape::AttachFunction("DK_GetPixelUnderMouse", DKJS::GetPixelUnderMouse);
+	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList);
 	DKDuktape::AttachFunction("DK_GetScreenHeight", DKJS::GetScreenHeight);
 	DKDuktape::AttachFunction("DK_GetScreenWidth", DKJS::GetScreenWidth);
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime);
@@ -82,13 +84,13 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetValue", DKJS::GetValue);
 	DKDuktape::AttachFunction("DK_GetVolume", DKJS::GetVolume);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole);
+	DKDuktape::AttachFunction("DK_IE", DKJS::IE);
 	DKDuktape::AttachFunction("DK_Id", DKJS::Id);
 	DKDuktape::AttachFunction("DK_IdLike", DKJS::IdLike);
-	DKDuktape::AttachFunction("DK_IE", DKJS::IE);
 	DKDuktape::AttachFunction("DK_Include", DKJS::Include);
+	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown);
 	DKDuktape::AttachFunction("DK_LeftClick", DKJS::LeftClick);
 	DKDuktape::AttachFunction("DK_LogGuiConsole", DKJS::LogGuiConsole);
-	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown);
 	DKDuktape::AttachFunction("DK_MessageBox", DKJS::MessageBox);
 	DKDuktape::AttachFunction("DK_MouseToImage", DKJS::MouseToImage);
 	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey);
@@ -105,14 +107,12 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog);
 	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole);
 	DKDuktape::AttachFunction("DK_Sleep", DKJS::Sleep);
+	DKDuktape::AttachFunction("DK_StopPropagation", DKJS::StopPropagation);
 	DKDuktape::AttachFunction("DK_StrokeKey", DKJS::StrokeKey);
 	DKDuktape::AttachFunction("DK_System", DKJS::System);
-	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash);
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
-	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList);
-	DKDuktape::AttachFunction("DK_StopPropagation", DKJS::StopPropagation);
 }
 
 /////////////////////////////////////

@@ -10,13 +10,13 @@ class DKFileJS : public DKObjectT<DKFileJS>
 {
 public:
 	void Init();
+	
 	static int ChDir(duk_context* ctx);
 	static int Copy(duk_context* ctx);
 	static int CopyFolder(duk_context* ctx);
 	static int Delete(duk_context* ctx);
 	static int DirectoryContents(duk_context* ctx);
 	static int Exists(duk_context* ctx);
-	static int IsDirectory(duk_context* ctx);
 	static int FileToString(duk_context* ctx);
 	static int GetAbsolutePath(duk_context* ctx);
 	static int GetDrives(duk_context* ctx);
@@ -30,6 +30,7 @@ public:
 	static int GetRelativePath(duk_context* ctx);
 	static int GetSetting(duk_context* ctx);
 	static int GetShortName(duk_context* ctx);
+	static int IsDirectory(duk_context* ctx);
 	static int MkDir(duk_context* ctx);
 	static int Rename(duk_context* ctx);
 	static int SetSetting(duk_context* ctx);

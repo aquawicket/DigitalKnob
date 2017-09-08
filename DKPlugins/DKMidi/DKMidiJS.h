@@ -10,11 +10,12 @@ class DKMidiJS : public DKObjectT<DKMidiJS>
 {
 public:
 	void Init();
+	
 	static int GetMidiInputs(duk_context* ctx);
 	static int GetMidiOutputs(duk_context* ctx);
+	static int SendMidi(duk_context* ctx);
 	static int ToggleMidiInput(duk_context* ctx);
 	static int ToggleMidiOutput(duk_context* ctx);
-	static int SendMidi(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKMidiJS, true)

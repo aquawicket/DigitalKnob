@@ -10,6 +10,7 @@ class DKMySqlJS : public DKObjectT<DKMySqlJS>
 {
 public:
 	void Init();
+	
 	static int Connect(duk_context* ctx);
 	static int Database(duk_context* ctx);
 	static int Query(duk_context* ctx);

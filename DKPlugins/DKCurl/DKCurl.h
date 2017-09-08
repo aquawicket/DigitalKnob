@@ -15,26 +15,24 @@ public:
 	void End();
 
 	bool CurlInit();
-	bool FileExists(const DKString& url);
 	bool Download(const DKString& url, const DKString& dest);
-	bool FileSize(const DKString& url, long& size);
 	bool FileDate(const DKString& url, DKString& filedate);
-	bool HttpToString(const DKString& url, DKString& output);
+	bool FileExists(const DKString& url);
+	bool FileSize(const DKString& url, long& size);
 	bool FtpConnect(const DKString& server, const DKString& name, const DKString& pass, const DKString port);
 	bool FtpUpload(const DKString& file, const DKString& url);
-
 	bool HttpFileExists(const DKString& url);
+	bool HttpToString(const DKString& url, DKString& output);
 
 private:
-	bool HttpDownload(const DKString& url, const DKString& dest);
-	bool HttpFileSize(const DKString& url, long& size);
-	bool HttpFileDate(const DKString& url, DKString& filedate);
-	
-	bool FtpFileExists(const DKString& url);
-	bool FtpDownload(const DKString& url, const DKString& dest);
-	bool FtpFileSize(const DKString& url, long& size);
-	bool FtpFileDate(const DKString& url, DKString& filedate);
 	bool FacebookLogin(const DKString& email, const DKString& password, DKString& output);
+	bool FtpDownload(const DKString& url, const DKString& dest);
+	bool FtpFileDate(const DKString& url, DKString& filedate);
+	bool FtpFileExists(const DKString& url);
+	bool FtpFileSize(const DKString& url, long& size);
+	bool HttpDownload(const DKString& url, const DKString& dest);
+	bool HttpFileDate(const DKString& url, DKString& filedate);
+	bool HttpFileSize(const DKString& url, long& size);
 
 	static int WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer);
 	static size_t WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream);

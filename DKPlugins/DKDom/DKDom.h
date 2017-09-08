@@ -18,9 +18,9 @@ class ElementObject
 public:
 	ElementObject();
 	static DKString property;
+	static int duk_getter(duk_context *ctx);
 	static int duk_method(duk_context *ctx);
 	static int duk_setter(duk_context *ctx);
-	static int duk_getter(duk_context *ctx);
 };
 
 

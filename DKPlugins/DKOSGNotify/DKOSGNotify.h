@@ -16,6 +16,7 @@ class DKOSGNotify : public DKObjectT<DKOSGNotify>, public osg::NotifyHandler
 public:
 	void Init();
 	void End();
+	
 	bool AttachNotify(osg::NotifyHandler* panel);
 	bool RemoveNotify(osg::NotifyHandler* panel);
 

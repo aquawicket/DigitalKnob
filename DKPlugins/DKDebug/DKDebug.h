@@ -10,8 +10,9 @@ class DKDebug : public DKObjectT<DKDebug>
 public:
 	void Init();
 	void End();
-	static bool ShowStackTrace();
+	
 	static bool SendBugReport(const DKString& filename);
+	static bool ShowStackTrace();
 };
 
 

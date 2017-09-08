@@ -6,8 +6,8 @@
 void DKHookV8::Init()
 {
 	DKLog("DKHookV8::Init()\n", DKDEBUG);
-
 	//DKV8::AttachFunction("Test", DKHookV8::Test);
+	
 	DKV8::AttachFunction("DKHook_Click", DKHookV8::Click);
 	DKV8::AttachFunction("DKHook_CurrentHandle", DKHookV8::CurrentHandle);
 	DKV8::AttachFunction("DKHook_GetClass", DKHookV8::GetClass);
@@ -24,9 +24,9 @@ void DKHookV8::Init()
 	DKV8::AttachFunction("DKHook_SetWindowHandle", DKHookV8::SetWindowHandle);
 	DKV8::AttachFunction("DKHook_ShowWindow", DKHookV8::ShowWindow);
 	DKV8::AttachFunction("DKHook_ToggleHighlight", DKHookV8::ToggleHighlight);
-	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
-	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
 	DKV8::AttachFunction("DKHook_WaitForHandle", DKHookV8::WaitForHandle);
+	DKV8::AttachFunction("DKHook_WaitForWindow", DKHookV8::WaitForWindow);
+	DKV8::AttachFunction("DKHook_WindowExists", DKHookV8::WindowExists);
 }
 
 ////////////////////
