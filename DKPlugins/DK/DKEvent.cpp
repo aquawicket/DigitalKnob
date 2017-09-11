@@ -5,17 +5,17 @@
 std::vector<DKEvent*> DKEvent::events;
 std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::reg_funcs;
 std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::unreg_funcs;
-std::vector<boost::function<void (const DKString&, const DKString&, const DKString&)> > DKEvent::send_funcs;
+std::vector<boost::function<bool (const DKString&, const DKString&, const DKString&)> > DKEvent::send_funcs;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function<void (DKEvent*)> func, DKObject* object)
+bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvent*)> func, DKObject* object)
 {
 	DKLog("DKEvent::AddEvent("+id+","+type+")\n", DKDEBUG);
 	return DKEvent::AddEvent(id, type, "", func, object);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<void (DKEvent*)> func, DKObject* object)
+bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, boost::function<bool (DKEvent*)> func, DKObject* object)
 {
 	DKLog("DKEvent::AddEvent("+id+","+type+","+jsreturn+")\n", DKDEBUG);
 	DKString _jsreturn = jsreturn;
@@ -209,7 +209,7 @@ int DKEvent::GetKeyNum()
 }
 
 /////////////////////////////////////////////////////////////////////////
-void DKEvent::RenameEventId(const DKString& oldID, const DKString& newID)
+bool DKEvent::RenameEventId(const DKString& oldID, const DKString& newID)
 {
 	DKLog("DKEvent::RenameEventId("+oldID+","+newID+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < events.size(); ++i){
@@ -217,4 +217,5 @@ void DKEvent::RenameEventId(const DKString& oldID, const DKString& newID)
 			events[i]->id = newID;
 		}
 	}
+	return true;
 }

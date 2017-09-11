@@ -16,17 +16,15 @@ public:
 	void Init();
 	void End();
 
-	Rocket::Core::ElementDocument* GetDocument();
-	void ToggleDebugger();
-
+	bool ToggleDebugger();
 	bool LoadGui(const DKString& file);
-	void Reload();
+	bool Reload();
 	bool LoadFonts();
 	bool LoadFont(const DKString& file);
 	bool RegisterEvent(const DKString& id, const DKString& type);
 	bool UnregisterEvent(const DKString& id, const DKString& type);
-	void SendEvent(const DKString& id, const DKString& type, const DKString& value);
-	void ProcessEvent(Rocket::Core::Event& event);
+	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
+	void ProcessEvent(Rocket::Core::Event& event); //overwritten 
 
 	Rocket::Core::Context* context;
 	Rocket::Core::ElementDocument* document;

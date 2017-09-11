@@ -121,7 +121,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	}
 
 	//Parse the sting into an element
-	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	if(!doc){
 		DKLog("DKWidget::CreateWidget("+path+"): could not find documant \n", DKERROR);
 		return false;
@@ -162,7 +162,7 @@ bool DKWidget::CreateWidget(DKString& file)
 
 	//Set the root element of this widget
 	Trim(id);
-	root = dkRocket->GetDocument()->GetElementById(_id.c_str());
+	root = dkRocket->document->GetElementById(_id.c_str());
 
 	dkRocketToRML.PostProcess(root);
 
@@ -352,7 +352,7 @@ bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
 ///////////////////////////////////////////////////////
 DKElement* DKWidget::CreateElement(const DKString& tag)
 {
-	DKElement* element = dkRocket->GetDocument()->CreateElement(tag.c_str());
+	DKElement* element = dkRocket->document->CreateElement(tag.c_str());
 	if(!element){
 		DKLog("DKWidget::CreateElement("+tag+")\n", DKERROR);
 		return 0;
@@ -440,7 +440,7 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 		DKLog("DKWidget::GetElementById(): id empty. \n",DKWARN);
 		return NULL;
 	}
-	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	if(!doc){
 		return 0;
 	}

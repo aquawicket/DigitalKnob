@@ -169,25 +169,26 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 }
 
 /////////////////////////////////////////////
-void DKRocketToRML::Hyperlink(DKEvent* event)
+bool DKRocketToRML::Hyperlink(DKEvent* event)
 {
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
-	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
 
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-	DKLog("DKWidget::Hyperlink: " + value + "\n", DKINFO);
+	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
 	DKUtil::Run(value, "");
+	return true;
 }
 
 ////////////////////////////////////////////////
-void DKRocketToRML::ResizeIframe(DKEvent* event)
+bool DKRocketToRML::ResizeIframe(DKEvent* event)
 {
 	//DKLog("DKWidget::ResizeIframe", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
-	Rocket::Core::ElementDocument* doc = dkRocket->GetDocument();
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
 
 	DKString iTop = toString(iframe->GetAbsoluteTop());
@@ -196,4 +197,5 @@ void DKRocketToRML::ResizeIframe(DKEvent* event)
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
 	DKClass::CallFunc(id+"::OnResize", &data, NULL); //call OnResize in DKCef window handler
+	return true;
 }

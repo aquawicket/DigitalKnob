@@ -32,12 +32,13 @@ DLLAPI void* getName();
 class DKPlugins
 {
 public:
+	static bool LoadPlugin(const std::string& file);
+	static void ClosePlugins();
+
 #ifdef WIN32
 	static std::vector<HINSTANCE> modules;
 #endif
 	static std::vector<DKObject*> dkobjs;
-	static bool LoadPlugin(const std::string& file);
-	static void ClosePlugins();
 };
 
 #endif //DKPlugin_H

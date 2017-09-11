@@ -6,10 +6,18 @@
 /////////////////////
 void DKAssetsJS::Init()
 {
+	//DKDuktape::AttachFunction("DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath);
 	DKDuktape::AttachFunction("DKAssets_LocalAssets", DKAssetsJS::LocalAssets);
 	DKDuktape::AttachFunction("DKAssets_Protocol", DKAssetsJS::Protocol);
-	//DKDuktape::AttachFunction("DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath);
 }
+
+///////////////////////////////////////////
+//int DKAssetsJS::AppendDataPath(duk_context* ctx)
+//{
+//	DKString path = duk_require_string(ctx, 0);
+//	if (!DKAssets::AppendDataPath(path)){ return 0; }
+//	return 1;
+//}
 
 /////////////////////////////////////////////
 int DKAssetsJS::LocalAssets(duk_context* ctx)
@@ -32,12 +40,5 @@ int DKAssetsJS::Protocol(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-//int DKAssetsJS::AppendDataPath(duk_context* ctx)
-//{
-//	DKString path = duk_require_string(ctx, 0);
-//	if (!DKAssets::AppendDataPath(path)){ return 0; }
-//	return 1;
-//}
 
 #endif //USE_DKDuktape

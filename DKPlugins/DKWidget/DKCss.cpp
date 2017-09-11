@@ -37,10 +37,10 @@ void DKCss::Init()
 	*/
 
 	// Method 1
-	Rocket::Core::StyleSheet* current_sheet = dkRocket->GetDocument()->GetStyleSheet();
+	Rocket::Core::StyleSheet* current_sheet = dkRocket->document->GetStyleSheet();
 	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
 	current_sheet = current_sheet->CombineStyleSheet(new_sheet);
-	dkRocket->GetDocument()->SetStyleSheet(current_sheet);
+	dkRocket->document->SetStyleSheet(current_sheet);
 
 	// Method 2 - Not Working
 	/*

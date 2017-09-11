@@ -15,8 +15,8 @@ public:
 	static bool CallInit(const DKString& file);
 	static bool FileLoaded(const DKString& path);
 	static bool LoadFile(const DKString& path);
-	static void AttachFunction(const DKString& name, duk_c_function func);
-	static void OnEvent(DKEvent* event);
+	static bool AttachFunction(const DKString& name, duk_c_function func);
+	static bool OnEvent(DKEvent* event);
 	static void Reload();
 	static DKString RunJavascript(const DKString& code);
 
@@ -34,7 +34,6 @@ public:
 	int handle_fh(duk_context *ctx, FILE *f, const char *filename);
 	static int wrapped_compile_execute(duk_context *ctx);
 	void EventLoop();
-
 };
 
 

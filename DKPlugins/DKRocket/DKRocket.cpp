@@ -124,9 +124,9 @@ bool DKRocket::LoadGui(const DKString& file)
 }
 
 ///////////////////////
-void DKRocket::Reload()
+bool DKRocket::Reload()
 {
-	LoadGui("index.html");
+	return LoadGui("index.html");
 }
 
 //////////////////////////
@@ -269,14 +269,8 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	}
 }
 
-//////////////////////////////////////////////////////
-Rocket::Core::ElementDocument* DKRocket::GetDocument()
-{
-	return document;
-}
-
 ///////////////////////////////
-void DKRocket::ToggleDebugger()
+bool DKRocket::ToggleDebugger()
 {
 	if(Rocket::Debugger::IsVisible()){
 		Rocket::Debugger::SetVisible(false);
@@ -286,6 +280,7 @@ void DKRocket::ToggleDebugger()
 		Rocket::Debugger::SetVisible(true);
 		DKLog("Rocket Debugger ON\n", DKINFO);
 	}
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -341,17 +336,17 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-void DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
+bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	if(id.empty()){ return; }
-	if(type.empty()){ return; }
-	if(!document){ return; }
+	if(id.empty()){ return false; }
+	if(type.empty()){ return false; }
+	if(!document){ return false; }
 	
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());
-	if(!element){ return; }
+	if(!element){ return false; }
 	
 	Rocket::Core::Dictionary parameters;
 	parameters.Set("msg0", value.c_str());
 	element->DispatchEvent(type.c_str(), parameters, false);
-	return; //return true;
+	return true;
 }

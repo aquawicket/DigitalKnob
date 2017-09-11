@@ -8,12 +8,11 @@
 class DKRocketToRML : public DKObjectT<DKRocketToRML>
 {
 public:
-	bool IndexToRml(const DKString& html, DKString& rml);
 	bool HtmlToRml(const DKString& html, DKString& rml);
+	bool Hyperlink(DKEvent* event);
+	bool IndexToRml(const DKString& html, DKString& rml);
 	bool PostProcess(Rocket::Core::Element* element);
-
-	void Hyperlink(DKEvent* event);
-	void ResizeIframe(DKEvent* event);
+	bool ResizeIframe(DKEvent* event);
 };
 
 #endif //DKRocketToRML_H
