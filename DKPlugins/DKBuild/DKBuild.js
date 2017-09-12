@@ -616,8 +616,12 @@ function DKBuild_DoResults()
 		if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeFiles");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/"+APP+".dir");
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Debug");
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
+			if(TYPE == "Debug" || TYPE == "ALL"){
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Debug");
+			}
+			if(TYPE == "Release" || TYPE == "ALL"){
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
+			}
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Win32");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeCache.txt");	
 		}
