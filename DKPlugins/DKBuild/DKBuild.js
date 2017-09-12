@@ -616,14 +616,14 @@ function DKBuild_DoResults()
 		if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeFiles");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/"+APP+".dir");
+			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Win32");
+			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeCache.txt");	
 			if(TYPE == "Debug" || TYPE == "ALL"){
 				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Debug");
 			}
 			if(TYPE == "Release" || TYPE == "ALL"){
 				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
 			}
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Win32");
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeCache.txt");	
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
@@ -655,10 +655,16 @@ function DKBuild_DoResults()
 		if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/CMakeFiles");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/"+APP+".dir");
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Debug");
-			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Release");
+			
+			
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Win32");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/CMakeCache.txt");
+			if(TYPE == "Debug" || TYPE == "ALL"){
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Debug");
+			}
+			if(TYPE == "Release" || TYPE == "ALL"){
+				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Release");
+			}
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
