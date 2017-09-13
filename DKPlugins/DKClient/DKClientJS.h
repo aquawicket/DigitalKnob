@@ -3,7 +3,7 @@
 #ifndef DKClientJS_H
 #define DKClientJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////////
 class DKClientJS : public DKObjectT<DKClientJS>
