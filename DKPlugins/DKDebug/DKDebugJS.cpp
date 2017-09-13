@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
-#include "DKDebug.h"
-#include "DKDebugJS.h"
+#include "DKDebug/DKDebug.h"
+#include "DKDebug/DKDebugJS.h"
 
 
 //////////////////////
