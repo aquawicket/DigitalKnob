@@ -268,7 +268,7 @@ void DKAndroid::init()
 		//CallJavaFunction("copyAsset", "DKLoading.html");
 		//CallJavaFunction("copyAsset", "digitalknob.png");
 		//CallJavaFunction("copyAsset", "settings.txt");
-		//CallJavaFunction("copyAsset", "User.js");
+		//CallJavaFunction("copyAsset", "app.js");
 		//CallJavaFunction("copyAsset", "DKConsole.html");
 
 		DKApp dkapp;
