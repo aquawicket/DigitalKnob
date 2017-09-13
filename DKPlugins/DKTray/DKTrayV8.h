@@ -3,7 +3,7 @@
 #ifndef DKTrayV8_H
 #define DKTrayV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 ///////////////////////////////////////////
 class DKTrayV8 : public DKObjectT<DKTrayV8>

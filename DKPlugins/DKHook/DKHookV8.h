@@ -3,7 +3,7 @@
 #ifndef DKHookV8_H
 #define DKHookV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 ///////////////////////////////////////////
 class DKHookV8 : public DKObjectT<DKHookV8>

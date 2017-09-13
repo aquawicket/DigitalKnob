@@ -3,7 +3,7 @@
 #ifndef DKAssetsV8_H
 #define DKAssetsV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 ///////////////////////////////////////////
 class DKAssetsV8 : public DKObjectT<DKAssetsV8>
