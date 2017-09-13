@@ -6,7 +6,7 @@ else{ USE_WEBVIEW = 0; }
 ////////////////////////////
 function init_OnEvent(event)  //Duktape
 {
-	DKLog("init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
 		DKCef_SetUrl("DKCef_frame", DK_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
