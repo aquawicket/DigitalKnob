@@ -1115,3 +1115,46 @@
 [0911/234243.650:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
 [0911/234334.306:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
 [0911/234334.633:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/151020.505:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/151020.912:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/160057.038:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/160057.223:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/163544.662:WARNING:resource_bundle.cc(327)] locale_file_path.empty() for locale 
+[0912/163544.663:ERROR:main_delegate.cc(684)] Could not load locale pak for en-US
+[0912/163544.665:ERROR:main_delegate.cc(691)] Could not load cef.pak
+[0912/163544.666:ERROR:main_delegate.cc(708)] Could not load cef_100_percent.pak
+[0912/163544.667:ERROR:main_delegate.cc(717)] Could not load cef_200_percent.pak
+[0912/163544.668:ERROR:main_delegate.cc(726)] Could not load cef_extensions.pak
+[0912/163544.699:ERROR:content_client.cc(269)] No data resource available for id 20418
+[0912/163544.700:FATAL:service_manager_context.cc(123)] Check failed: !contents.empty(). 
+[0912/163639.769:WARNING:resource_bundle.cc(327)] locale_file_path.empty() for locale 
+[0912/163639.770:ERROR:main_delegate.cc(684)] Could not load locale pak for en-US
+[0912/163639.772:ERROR:main_delegate.cc(691)] Could not load cef.pak
+[0912/163639.773:ERROR:main_delegate.cc(708)] Could not load cef_100_percent.pak
+[0912/163639.774:ERROR:main_delegate.cc(717)] Could not load cef_200_percent.pak
+[0912/163639.775:ERROR:main_delegate.cc(726)] Could not load cef_extensions.pak
+[0912/163639.801:ERROR:content_client.cc(269)] No data resource available for id 20418
+[0912/163639.802:FATAL:service_manager_context.cc(123)] Check failed: !contents.empty(). 
+[0912/164437.797:ERROR:icu_util.cc(173)] Invalid file descriptor to ICU data received.
+[0912/164524.602:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/164524.855:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/164528.873:FATAL:browser_context_impl.cc(214)] Check failed: request_context_count_ == 0 (1 vs. 0)
+[0912/164528.887:FATAL:context.cc(229)] Check failed: false. context not valid
+[0912/164711.300:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/164711.525:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/164715.427:FATAL:browser_context_impl.cc(214)] Check failed: request_context_count_ == 0 (1 vs. 0)
+[0912/164715.438:FATAL:context.cc(229)] Check failed: false. context not valid
+[0912/165331.459:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/165331.681:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/165335.762:FATAL:browser_context_impl.cc(214)] Check failed: request_context_count_ == 0 (1 vs. 0)
+[0912/165335.774:FATAL:context.cc(229)] Check failed: false. context not valid
+[0912/165709.051:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/165709.486:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/170225.988:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/170226.358:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/170229.047:FATAL:browser_context_impl.cc(214)] Check failed: request_context_count_ == 0 (1 vs. 0)
+[0912/170229.060:FATAL:context.cc(229)] Check failed: false. context not valid
+[0912/170237.331:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/170237.618:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.
+[0912/170952.494:ERROR:proxy_service_factory.cc(116)] Cannot use V8 Proxy resolver in single process mode.
+[0912/170952.672:WARNING:histograms.cc(40)] Started multiple compositor clients (Browser, Renderer) in one process. Some metrics will be disabled.

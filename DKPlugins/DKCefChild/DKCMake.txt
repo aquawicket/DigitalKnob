@@ -13,11 +13,21 @@ DKEXECUTABLE(DKCefChild)
 
 
 IF(WIN_32)
-	DKCOPY(${DKPLUGINS}/DKCefChild/win32/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
+	IF(DEBUG)
+		DKCOPY(${DKPLUGINS}/DKCefChild/win32/Debug/cefchild.exe ${DKPROJECT}/assets/DKCef/win32Debug TRUE)
+	ENDIF()
+	IF(RELEASE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/win32/Release/cefchild.exe ${DKPROJECT}/assets/DKCef/win32Release TRUE)
+	ENDIF()
 ENDIF()
 
 IF(WIN_64)
-	DKCOPY(${DKPLUGINS}/DKCefChild/win64/Release/cefchild.exe ${DKPROJECT}/assets/DKCef TRUE)
+	IF(DEBUG)
+		DKCOPY(${DKPLUGINS}/DKCefChild/win64/Debug/cefchild.exe ${DKPROJECT}/assets/DKCef/win64Debug TRUE)
+	ENDIF()
+	IF(RELEASE)
+		DKCOPY(${DKPLUGINS}/DKCefChild/win64/Release/cefchild.exe ${DKPROJECT}/assets/DKCef/win64Release TRUE)
+	ENDIF()
 ENDIF()
 
 IF(MAC_64)

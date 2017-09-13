@@ -40,17 +40,17 @@ void DKCef::Init()
 //FIXME - we need to grab the dll from the correct location
 //   assets/DKCef is not a good place
 //   the path needs more details, specifically OS/BuildType
-//   example:   assets/DKCef/dkwin32/Release/libcef.dll
-//        or    assets/DKCef/dkwin64/Debug/libcef.dll
+//   example:   assets/DKCef/win32Debug/libcef.dll
+//        or    assets/DKCef/win32Release/libcef.dll
 #if defined(WIN32) && !defined(WIN64)
 	DKString elf_dll;
 	DKString cef_dll;
 #ifdef DEBUG
-	elf_dll = DKFile::local_assets + "DKCef/Debug/chrome_elf.dll";
-	cef_dll = DKFile::local_assets + "DKCef/Debug/libcef.dll";
+	elf_dll = DKFile::local_assets + "DKCef/win32Debug/chrome_elf.dll";
+	cef_dll = DKFile::local_assets + "DKCef/win32Debug/libcef.dll";
 #else
-	elf_dll = DKFile::local_assets + "DKCef/chrome_elf.dll";
-	cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
+	elf_dll = DKFile::local_assets + "DKCef/win32Release/chrome_elf.dll";
+	cef_dll = DKFile::local_assets + "DKCef/win32Release/libcef.dll";
 #endif
 	libelf = LoadLibrary(elf_dll.c_str());
 	if (!libelf) {
@@ -76,11 +76,11 @@ void DKCef::Init()
 	DKString elf_dll;
 	DKString cef_dll;
 #ifdef DEBUG
-	elf_dll = DKFile::local_assets + "DKCef/Debug/chrome_elf.dll";
-	cef_dll = DKFile::local_assets + "DKCef/Debug/libcef.dll";
+	elf_dll = DKFile::local_assets + "DKCef/win64Debug/chrome_elf.dll";
+	cef_dll = DKFile::local_assets + "DKCef/win64Debug/libcef.dll";
 #else
-	elf_dll = DKFile::local_assets + "DKCef/chrome_elf.dll";
-	cef_dll = DKFile::local_assets + "DKCef/libcef.dll";
+	elf_dll = DKFile::local_assets + "DKCef/win64Release/chrome_elf.dll";
+	cef_dll = DKFile::local_assets + "DKCef/win64Release/libcef.dll";
 #endif
 	libelf = LoadLibrary(elf_dll.c_str());
 	if (!libelf) {
@@ -184,7 +184,20 @@ void DKCef::Init()
 	CefString(&settings.log_file) = lf.c_str();
 
 #ifdef WIN32
-	DKString ep = DKFile::local_assets + "DKCef/cefchild.exe";
+	#if defined(WIN32) && !defined(WIN64)
+		#ifdef DEBUG
+			DKString ep = DKFile::local_assets + "DKCef/win32Debug/cefchild.exe";
+		#else
+			DKString ep = DKFile::local_assets + "DKCef/win32Release/cefchild.exe";
+		#endif
+	#endif
+	#ifdef WIN64
+		#ifdef DEBUG
+			DKString ep = DKFile::local_assets + "DKCef/win64Debug/cefchild.exe";
+		#else
+			DKString ep = DKFile::local_assets + "DKCef/win64Release/cefchild.exe";
+		#endif
+	#endif
 	if(!DKFile::PathExists(ep)){
         	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
         	return;
