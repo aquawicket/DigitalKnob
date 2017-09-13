@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "DKTray.h"
-#include "DKAssets.h"
-#include "DKFile.h"
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DKTray/DKTray.h"
 
 DKString DKTray::icon;
 #ifdef WIN32

@@ -1,5 +1,5 @@
 #include <Rocket/Core.h>
-#include "DKSDLRocketSystem.h"
+#include "DKSDLRocket/DKSDLRocketSystem.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 Rocket::Core::Input::KeyIdentifier RocketSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)

@@ -2,7 +2,7 @@
 #pragma once
 #ifndef DKTray_H
 #define DKTray_H
-#include "DK.h"
+#include "DK/DK.h"
 
 #ifdef WIN32
 #include "resource.h"

@@ -1,9 +1,8 @@
 #include "stdafx.h"
-#include "DKSDLRocket.h"
-#include "DKAssets.h"
-#include "DKFile.h"
 #include "SDL.h"
-
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DKSDLRocket/DKSDLRocket.h"
 
 ////////////////////////
 void DKSDLRocket::Init()

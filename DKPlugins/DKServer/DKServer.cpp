@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "DKServer.h"
+#include "DKServer/DKServer.h"
 //#ifdef USE_Boost_Thread
 
 

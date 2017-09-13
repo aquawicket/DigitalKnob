@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "DKServerWebsockets.h"
-
+#include "DKServer/DKServerWebsockets.h"
 
 ///////////////////////////////
 void DKServerWebsockets::Init()

@@ -1,6 +1,6 @@
-#ifdef USE_DKDuktape 
-#include "DKMySqlJS.h"
-#include "DKMySql.h"
+#ifdef USE_DKDuktape
+#include "DKMySql/DKMySql.h"
+#include "DKMySql/DKMySqlJS.h"
 
 
 ///////////////////////

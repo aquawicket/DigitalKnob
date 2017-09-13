@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
-#include "DKTray.h"
-#include "DKTrayJS.h"
+#include "DKTray/DKTray.h"
+#include "DKTray/DKTrayJS.h"
 
 
 /////////////////////

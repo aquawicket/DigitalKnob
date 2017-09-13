@@ -3,7 +3,7 @@
 #ifndef DKMySqlJS_H
 #define DKMySqlJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////////
 class DKMySqlJS : public DKObjectT<DKMySqlJS>

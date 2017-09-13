@@ -4,16 +4,13 @@
 #pragma once
 #ifndef DKServer_H
 #define DKServer_H
-
-#include "DKThread.h"
-
 #include <cstdlib>
 #include <iostream>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
+#include "DKThread/DKThread.h"
 
 using boost::asio::ip::tcp;
-
 
 /////////////
 class session
