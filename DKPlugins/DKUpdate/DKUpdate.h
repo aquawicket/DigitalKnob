@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKUpdate_H
 #define DKUpdate_H
-#include "DK.h"
+#include "DK/DK.h"
 
 ///////////////////////////////////////////
 class DKUpdate : public DKObjectT<DKUpdate>

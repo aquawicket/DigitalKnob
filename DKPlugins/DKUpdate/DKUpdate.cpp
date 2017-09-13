@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "DKUpdate.h"
-#include "DKFile.h"
-#include "DKArchive.h"
-#include "DKCurl.h"
-#include <sys/stat.h>
 #include <stdlib.h> 
-#include "DKAssets.h"
-#include "DKThread.h"
+#include <sys/stat.h>
+#include "DK/DKFile.h"
+#include "DKArchive/DKArchive.h"
+#include "DKAssets/DKAssets.h"
+#include "DKCurl/DKCurl.h"
+#include "DKThread/DKThread.h"
+#include "DKUpdate/DKUpdate.h"
 
 //////////////////////////////////////
 //     Default update files

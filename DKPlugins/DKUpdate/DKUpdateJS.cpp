@@ -1,7 +1,6 @@
-#ifdef USE_DKDuktape 
-#include "DKUpdateJS.h"
-#include "DKUpdate.h"
-
+#ifdef USE_DKDuktape
+#include "DKUpdate/DKUpdate.h"
+#include "DKUpdate/DKUpdateJS.h"
 
 ///////////////////////
 void DKUpdateJS::Init()
