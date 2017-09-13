@@ -3,7 +3,7 @@
 #ifndef DKAudioJS_H
 #define DKAudioJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////////
 class DKAudioJS : public DKObjectT<DKAudioJS>

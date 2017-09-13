@@ -3,7 +3,7 @@
 #ifndef DKCefJS_H
 #define DKCefJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////
 class DKCefJS : public DKObjectT<DKCefJS>

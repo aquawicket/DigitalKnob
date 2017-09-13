@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "DKAssets.h"
-#include "DKUtil.h"
-#include "DKLog.h"
-#include "DKFile.h"
-#include "DKArchive.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+#include "DK/DKUtil.h"
+#include "DKArchive/DKArchive.h"
+#include "DKAssets/DKAssets.h"
 #include <algorithm>
 
 
