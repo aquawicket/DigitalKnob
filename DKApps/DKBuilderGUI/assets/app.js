@@ -3,7 +3,7 @@ var USE_WEBVIEW = 1; //Android, iOS?
 var USE_SDL = 0;     //Use with caution
 var USE_ROCKET = 0;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
-//var DKApp_url = "http://digitalknob.com/MyApp";
+//var DKApp_url = "http://digitalknob.com/DKBuilderGUI";
 
 DKCreate("init.js", function(){});
 
@@ -11,7 +11,7 @@ DKCreate("init.js", function(){});
 ///////////////////////
 function app_LoadPage()
 {
-	DKLog("User_LoadPage()\n");
+	DKLog("app_LoadPage()\n");
 	
 	DKWidget_SetProperty("body", "background-color", "grey");
 	DKCreate("DKWindow/DKWindow.js", function(){
