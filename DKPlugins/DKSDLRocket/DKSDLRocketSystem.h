@@ -1,9 +1,10 @@
 #ifndef SYSTEMINTEFACESDL2_H
 #define SYSTEMINTEFACESDL2_H
-#include "DK.h"
+
 #include <Rocket/Core/SystemInterface.h>
 #include <Rocket/Core/Input.h>
 #include <SDL.h>
+#include "DK/DK.h"
 
 //////////////////////////////////////////////////////////////////////
 class RocketSDL2SystemInterface : public Rocket::Core::SystemInterface

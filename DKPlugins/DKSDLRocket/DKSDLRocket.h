@@ -1,14 +1,14 @@
 //https://github.com/wheybags/libRocket/tree/sdl2/Samples/basic/sdl2
-
 #pragma once
 #ifndef DKSDLRocket_H
 #define DKSDLRocket_H
-#include "DK.h"
-#include "DKSDLWindow.h"
-#include "DKRocket.h"
+
 #include <Rocket/Core/Core.h>
-#include "DKSDLRocketSystem.h"
-#include "DKSDLRocketRenderer.h"
+#include "DK/DK.h"
+#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKRocket/DKRocket.h"
+#include "DKSDLRocket/DKSDLRocketSystem.h"
+#include "DKSDLRocket/DKSDLRocketRenderer.h"
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define ROCKET_SHELL_RENDER 1

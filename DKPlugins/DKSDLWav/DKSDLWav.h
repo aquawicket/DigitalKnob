@@ -1,11 +1,10 @@
 //https://gist.github.com/armornick/3447121
-
 #pragma once
 #ifndef DKSDLWav_H
 #define DKSDLWav_H
-#include "DK.h"
-#include "SDL.h"
 
+#include "SDL.h"
+#include "DK/DK.h"
 
 ///////////////////////////////////////////
 class DKSDLWav : public DKObjectT<DKSDLWav>

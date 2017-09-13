@@ -1,11 +1,11 @@
 //https://gist.github.com/armornick/3447121
-
 #pragma once
 #ifndef DKSDLAudio_H
 #define DKSDLAudio_H
-#include "DK.h"
+
 #include "SDL.h"
 #include "SDL_mixer.h"
+#include "DK/DK.h"
 
 struct track{
 	DKString file;

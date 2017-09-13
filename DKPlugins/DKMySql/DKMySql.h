@@ -1,7 +1,6 @@
 #pragma once
 #ifndef DKMySql_H
 #define DKMySql_H
-#include "DK.h"
 
 //#if defined (WIN32) || defined (WIN64)
   //#include <winsock.h>
@@ -12,14 +11,16 @@
 //#include <stdio.h>
 //#include <string.h>
 
+#if !defined (WIN32) && !defined (WIN64)
+  #include <unistd.h>
+#endif
+
+#include "DK/DK.h"
+
 #ifdef USE_mysql
 	#include "mysql.h"
 #else
-	#include "DKCurl.h"
-#endif
-
-#if !defined (WIN32) && !defined (WIN64)
-  #include <unistd.h>
+	#include "DKCurl/DKCurl.h"
 #endif
 
 /////////////////////////////////////////

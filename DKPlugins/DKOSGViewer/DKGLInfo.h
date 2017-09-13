@@ -1,10 +1,10 @@
 #pragma once
 #ifndef DKGLInfo_H
 #define DKGLInfo_H
-#include "DK.h"
 
 #include <osg/Uniform>
 #include <osg/Texture>
+#include "DK/DK.h"
 
 ///////////////////////////////////////////
 class DKGLInfo : public DKObjectT<DKGLInfo>

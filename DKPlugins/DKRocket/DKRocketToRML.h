@@ -1,8 +1,9 @@
 #pragma once
 #ifndef DKRocketToRML_H
 #define DKRocketToRML_H
-#include "DK.h"
-#include "DKRocket.h"
+
+#include "DK/DK.h"
+#include "DKRocket/DKRocket.h"
 
 /////////////////////////////////////////////////////
 class DKRocketToRML : public DKObjectT<DKRocketToRML>

@@ -1,13 +1,13 @@
 #pragma once
 #ifndef DKRocket_H
 #define DKRocket_H
-#include "DK.h"
-#include "DKWindow.h"
-#include "DKRocketFile.h"
+
 #include <Rocket/Core/Core.h>
 #include <Rocket/Controls/Controls.h>
 #include <Rocket/Core/ElementUtilities.h>
-
+#include "DK/DK.h"
+#include "DKWindow/DKWindow.h"
+#include "DKRocket/DKRocketFile.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 class DKRocket : public Rocket::Core::EventListener, public DKObjectT<DKRocket>

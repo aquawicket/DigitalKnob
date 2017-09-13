@@ -1,8 +1,9 @@
 #pragma once
 #ifndef DKSDLWindow_H
 #define DKSDLWindow_H
-#include "DK.h"
+
 #include "SDL.h"
+#include "DK/DK.h"
 
 /////////////////////////////////////////////////
 class DKSDLWindow : public DKObjectT<DKSDLWindow>
