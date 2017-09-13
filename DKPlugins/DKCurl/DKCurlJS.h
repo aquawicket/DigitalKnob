@@ -3,7 +3,7 @@
 #ifndef DKCurlJS_H
 #define DKCurlJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////
 class DKCurlJS : public DKObjectT<DKCurlJS>
