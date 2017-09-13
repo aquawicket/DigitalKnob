@@ -5,13 +5,13 @@ var USE_ROCKET = 0;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKTemplate";
 
-DKCreate("Init.js", function(){});
+DKCreate("init.js", function(){});
 
 
-////////////////////////
-function User_LoadPage()
+///////////////////////
+function app_LoadPage()
 {
-	DKLog("User_LoadPage()\n");
+	DKLog("Uapp_LoadPage()\n");
 	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
