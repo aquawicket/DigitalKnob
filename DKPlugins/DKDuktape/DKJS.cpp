@@ -1,11 +1,11 @@
 #ifdef USE_DKDuktape 
-#include "DKJS.h"
-#include "DKApp.h"
-#include "DKPlugin.h"
-#include "DKOsInfo.h"
-#include "DKFile.h"
-#include "DKUtil.h"
-#include "DKUnix.h"
+#include "DK/DKApp.h"
+#include "DK/DKFile.h"
+#include "DK/DKOsInfo.h"
+#include "DK/DKPlugin.h"
+#include "DK/DKUnix.h"
+#include "DK/DKUtil.h"
+#include "DKDuktape/DKJS.h"
 #include <signal.h>
 
 /////////////////

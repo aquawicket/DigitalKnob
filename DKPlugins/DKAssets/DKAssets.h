@@ -1,7 +1,8 @@
 #pragma once
 #ifndef DKAssets_H
 #define DKAssets_H
-#include "DK.h"
+
+#include "DK/DK.h"
 
 ///////////////////////////////////////////
 class DKAssets : public DKObjectT<DKAssets>
@@ -15,7 +16,6 @@ public:
 	static bool CopyAssets(const unsigned char* assets, const long int assets_size);
 	static bool PackageAssets(DKString& input, DKString& output);
 };
-
 
 REGISTER_OBJECT(DKAssets, true);
 

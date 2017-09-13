@@ -1,7 +1,7 @@
 #ifdef USE_DKDuktape 
-#include "DKFile.h"
-#include "DKFileJS.h"
-#include "DKApp.h"
+#include "DK/DKApp.h"
+#include "DK/DKFile.h"
+#include "DKFile/DKFileJS.h"
 
 /////////////////////
 void DKFileJS::Init()

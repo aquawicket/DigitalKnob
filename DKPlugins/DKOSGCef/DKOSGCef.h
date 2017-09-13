@@ -1,17 +1,17 @@
 #pragma once
 #ifndef DKOSGCef_H
 #define DKOSGCef_H
-#include "DK.h"
-#include "DKApp.h"
-#include "DKOSGWindow.h"
+#include "DK/DK.h"
+#include "DK/DKApp.h"
+#include "DKCef/DKOSGCefKeyboard.h"
+#include "DKCef/DKCef.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 #include <osg/MatrixTransform>
 #include <osgViewer/ViewerEventHandlers>
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
 #include <include/cef_display_handler.h>
-#include "DKOSGCefKeyboard.h"
-#include "DKCef.h"
 
 class DKOSGCefHandler;
 

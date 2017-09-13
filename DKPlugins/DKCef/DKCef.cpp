@@ -1,19 +1,18 @@
 #include "stdafx.h"
-#include "DKCef.h"
-#include "DKApp.h"
-#include "DKClass.h"
-#include "DKLog.h"
-#include "DKFile.h"
-#include "DKCefWindow.h"
 #include <include/cef_urlrequest.h>
 #include <include/cef_version.h>
+#include "DK/DKApp.h"
+#include "DK/DKClass.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+#include "DKCef/DKCef.h"
+#include "DKCef/DKCefWindow.h"
 
 #ifdef WIN32
 #include <delayimp.h>
-#include "DKWindows.h"
 #include <include/cef_sandbox_win.h>
+#include "DK/DKWindows.h"
 #endif
-
 
 //////////////////
 void DKCef::Init()

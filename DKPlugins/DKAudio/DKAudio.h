@@ -1,7 +1,8 @@
 #pragma once
 #ifndef DKAudio_H
 #define DKAudio_H
-#include "DK.h"
+
+#include "DK/DK.h"
 
 /////////////////////////////////////////
 class DKAudio : public DKObjectT<DKAudio>

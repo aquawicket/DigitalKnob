@@ -1,8 +1,7 @@
 #ifdef USE_DKCef
-#include "DKWindowV8.h"
-#include "DKWindow.h"
-#include "DKApp.h"
-
+#include "DK/DKApp.h"
+#include "DKWindow/DKWindow.h"
+#include "DKWindow/DKWindowV8.h"
 
 ///////////////////////
 void DKWindowV8::Init()

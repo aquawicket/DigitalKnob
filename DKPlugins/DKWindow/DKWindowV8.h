@@ -3,7 +3,7 @@
 #ifndef DKWindowV8_H
 #define DKWindowV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 ///////////////////////////////////////////////
 class DKWindowV8 : public DKObjectT<DKWindowV8>

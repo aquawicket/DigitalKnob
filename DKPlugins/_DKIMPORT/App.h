@@ -3,9 +3,8 @@
 #ifndef App_H
 #define App_H
 
-#include "DKApp.h"
+#include "DK/DKApp.h"
 #include "Android.h"
-
 
 /////////////////////////////////
 class App : public DKObjectT<App>
@@ -13,7 +12,6 @@ class App : public DKObjectT<App>
 public:
 	void Init();
 };
-
 
 REGISTER_OBJECT(App, true);
 

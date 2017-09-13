@@ -2,16 +2,17 @@
 #ifndef DKSDLCef_H
 #define DKSDLCef_H
 
-#include "DK.h"
-#include "DKApp.h"
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
 #include <include/cef_display_handler.h>
-#include "DKSDLCefKeyboard.h"
-#include "DKSDLWindow.h"
 #include "SDL.h"
-#include "DKCef.h"
+
+#include "DK/DK.h"
+#include "DK/DKApp.h"
+#include "DKCef/DKCef.h"
+#include "DKSDLCef/DKSDLCefKeyboard.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 #ifndef WIN32
 #define  UNREFERENCED_PARAMETER(P) (P)

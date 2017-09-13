@@ -2,10 +2,10 @@
 #pragma once
 #ifndef DKHook_H
 #define DKHook_H
-#include "DK.h"
 
 //#include <Tlhelp32.h>
 #include <vector>
+#include "DK/DK.h"
 
 //Functions in wxHookDLL.dll
 typedef bool(*InstallHook)(unsigned long);

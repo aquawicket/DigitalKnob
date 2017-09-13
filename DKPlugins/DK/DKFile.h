@@ -2,10 +2,9 @@
 #ifndef DKFile_H
 #define DKFile_H
 
-#include "DK.h"
-#include "DKString.h"
 #include <boost/filesystem.hpp>
-
+#include "DK/DK.h"
+#include "DK/DKString.h"
 
 ////////////
 class DKFile
@@ -50,6 +49,5 @@ public:
 	static DKString local_assets;
 	static DKString online_assets;
 };
-
 
 #endif //DKFile_H

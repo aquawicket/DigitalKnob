@@ -1,7 +1,7 @@
 #ifdef USE_DKCef
-#include "DKFileV8.h"
-#include "DKFile.h"
-#include "DKApp.h"
+#include "DK/DKApp.h"
+#include "DK/DKFile.h"
+#include "DKFile/DKFileV8.h"
 
 /////////////////////
 void DKFileV8::Init()

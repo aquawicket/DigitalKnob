@@ -1,9 +1,7 @@
 #pragma once
 #ifndef DKClient_H
 #define DKClient_H
-#include "DK.h"
 
-#include "DKThread/DKThread.h"
 #include <boost/asio.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
@@ -13,6 +11,9 @@
 #include <boost/asio/write.hpp>
 #include <boost/bind.hpp>
 #include <iostream>
+#include "DK/DK.h"
+#include "DKThread/DKThread.h"
+
 using boost::asio::ip::tcp;
 
 

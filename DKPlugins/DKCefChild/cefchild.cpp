@@ -1,7 +1,8 @@
 #define DKCefChild
-//#include "DK.h"
-//#include "DKCefApp.h"
+
 #include "include/cef_app.h"
+//#include "DK/DK.h"
+//#include "DKCef/DKCefApp.h"
 
 //#ifndef LINUX
 //#include "include/cef_sandbox_win.h"

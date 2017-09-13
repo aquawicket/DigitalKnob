@@ -9,24 +9,24 @@
 #define DK_H
 
 #if defined(WIN32)
-#include "DKWindows.h"
+#include "DK/DKWindows.h"
 #elif defined(MAC)
-#include "DKMac.h"
+#include "DK/DKMac.h"
 #elif defined(LINUX)
-#include "DKLinux.h"
+#include "DK/DKLinux.h"
 #elif defined(ANDROID)
-#include "DKAndroid.h"
+#include "DK/DKAndroid.h"
 #elif defined(IOS)
-#include "DKIos.h"
+#include "DK/DKIos.h"
 #else
 #error NO KNOWN OS FLAG WAS STATED (WIN32,MAC,LINUX,ANDROID,IOS)
 #endif
 
 //DK
-#include "DKClass.h"
-#include "DKEvent.h"
-#include "DKUtil.h"
-#include "DKApp.h"
+#include "DK/DKClass.h"
+#include "DK/DKEvent.h"
+#include "DK/DKUtil.h"
+#include "DK/DKApp.h"
 
 #ifdef DKAPP
 	#include "DKPlugins.h"

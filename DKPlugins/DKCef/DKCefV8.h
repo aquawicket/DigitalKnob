@@ -3,7 +3,7 @@
 #ifndef DKCefV8_H
 #define DKCefV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 /////////////////////////////////////////
 class DKCefV8 : public DKObjectT<DKCefV8>

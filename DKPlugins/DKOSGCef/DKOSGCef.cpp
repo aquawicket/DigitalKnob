@@ -1,11 +1,10 @@
 #include "stdafx.h"
-#include "DKOSGCef.h"
-#include "DKApp.h"
-#include "DKClass.h"
-#include "DKLog.h"
-#include "DKFile.h"
+#include "DK/DKApp.h"
+#include "DK/DKClass.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+#include "DKOSGCef/DKOSGCef.h"
 #include <include/cef_urlrequest.h>
-
 #ifdef WIN32
 #include <delayimp.h>
 #include "DKWindows.h"

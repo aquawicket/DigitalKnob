@@ -1,7 +1,8 @@
 #pragma once
 #ifndef DKApp_H
 #define DKApp_H
-#include "DK.h"
+
+#include "DK/DK.h"
 
 ///////////
 class DKApp

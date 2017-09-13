@@ -2,11 +2,11 @@
 #ifndef DKOSGWindow_H
 #define DKOSGWindow_H
 
-#include "DK.h"
-#include "DKLog.h"
-#include "DKString.h"
-#include "DKApp.h"
-#include "DKOSGViewer.h"
+#include "DK/DK.h"
+#include "DK/DKLog.h"
+#include "DK/DKString.h"
+#include "DK/DKApp.h"
+#include "DKOSGViewer.h" //FIXME
 
 #ifdef WIN32
 #include <osgViewer/api/Win32/GraphicsHandleWin32>

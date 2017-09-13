@@ -1,7 +1,8 @@
 #pragma once
 #ifndef DKJavascript_H
 #define DKJavascript_H
-#include "DK.h"
+
+#include "DK/DK.h"
 
 
 ///////////////////////////////////////////////////

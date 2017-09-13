@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
-#include "DKCef.h"
-#include "DKCefJS.h"
+#include "DKCef/DKCef.h"
+#include "DKCef/DKCefJS.h"
 
 
 ////////////////////

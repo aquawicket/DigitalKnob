@@ -1,16 +1,14 @@
 #include "stdafx.h"
-#include "DKSDLCef.h"
-#include "DKApp.h"
-#include "DKLog.h"
 #include "SDL_syswm.h"
-
+#include <include/cef_urlrequest.h>
+#include "DK/DKApp.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+#include "DKSDLCef/DKSDLCef.h"
 #ifdef WIN32
 #include <delayimp.h>
-#include "DKWindows.h"
+#include "DK/DKWindows.h"
 #endif
-
-#include "DKFile.h"
-#include <include/cef_urlrequest.h>
 
 /////////////////////
 void DKSDLCef::Init()

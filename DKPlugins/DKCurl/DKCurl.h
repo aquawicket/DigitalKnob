@@ -1,10 +1,10 @@
 #pragma once
 #ifndef DKCurl_H
 #define DKCurl_H
-#include "DK.h"
-#include "DKUtil.h"
-#include <curl/curl.h>
 
+#include <curl/curl.h>
+#include "DK/DK.h"
+#include "DK/DKUtil.h"
 
 ///////////////////////////////////////
 class DKCurl : public DKObjectT<DKCurl>

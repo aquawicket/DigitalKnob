@@ -1,8 +1,9 @@
 #pragma once
 #ifndef DKDuktape_H
 #define DKDuktape_H
-#include "DK.h"
-#include "duktape.h"
+
+#include "DK/DK.h"
+#include "duktape-1.5.0/src/duktape.h"
 
 /////////////////////////////////////////////
 class DKDuktape : public DKObjectT<DKDuktape>

@@ -1,7 +1,7 @@
 #ifdef USE_DKCef
-#include "DKTrayV8.h"
-#include "DKTray.h"
-#include "DKApp.h"
+#include "DK/DKApp.h"
+#include "DKTray/DKTray.h"
+#include "DKTray/DKTrayV8.h"
 
 /////////////////////
 void DKTrayV8::Init()

@@ -1,9 +1,9 @@
 #pragma once
 #ifndef DKMidi_H
 #define DKMidi_H
-#include "DK.h"
 
 #include "RtMidi.h"
+#include "DK/DK.h"
 
 ///////////////////////////////////////
 class DKMidi : public DKObjectT<DKMidi>

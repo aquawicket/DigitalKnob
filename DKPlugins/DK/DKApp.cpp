@@ -1,8 +1,8 @@
 #include "stdafx.h"
 
-#include "DKApp.h"
-#include "DKOsInfo.h"
-#include "DKFile.h"
+#include "DK/DKApp.h"
+#include "DK/DKOsInfo.h"
+#include "DK/DKFile.h"
 
 int DKApp::argc;
 char** DKApp::argv;

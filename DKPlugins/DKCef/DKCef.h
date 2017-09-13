@@ -1,13 +1,14 @@
 #pragma once
 #ifndef DKCef_H
 #define DKCef_H
-#include "DK.h"
-#include "DKApp.h"
-#include "DKCefApp.h"
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
-#include "DKCefWindow.h"
+#include "DK/DK.h"
+#include "DK/DKApp.h"
+#include "DKCef/DKCefApp.h"
+#include "DKCef/DKCefWindow.h"
+
 
 class DKCefWindow;
 

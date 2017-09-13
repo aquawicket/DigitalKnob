@@ -5,7 +5,7 @@
 #include <boost/bind.hpp>
 #include <include/cef_app.h>
 #include <include/wrapper/cef_helpers.h>
-#include "DKFile.h"
+#include "DK/DKFile.h"
 
 typedef CefRefPtr<CefListValue> CefArgs;
 typedef CefRefPtr<CefListValue> CefReturn;

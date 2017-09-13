@@ -1,7 +1,7 @@
 #ifdef USE_DKCef
-#include "DKAssetsV8.h"
-#include "DKFile.h"
-#include "DKApp.h"
+#include "DK/DKApp.h"
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssetsV8.h"
 
 /////////////////////
 void DKAssetsV8::Init()
