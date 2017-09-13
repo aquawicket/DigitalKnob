@@ -3,7 +3,7 @@
 #ifndef DKThreadV8_H
 #define DKThreadV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 ///////////////////////////////////////////////
 class DKThreadV8 : public DKObjectT<DKThreadV8>

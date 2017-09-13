@@ -3,7 +3,7 @@
 #define DKClient_H
 #include "DK.h"
 
-#include "DKThread.h"
+#include "DKThread/DKThread.h"
 #include <boost/asio.hpp>
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_service.hpp>
