@@ -3,7 +3,7 @@
 #ifndef DKDebugV8_H
 #define DKDebugV8_H
 
-#include "DKCef.h"
+#include "DKCef/DKCef.h"
 
 /////////////////////////////////////////////
 class DKDebugV8 : public DKObjectT<DKDebugV8>

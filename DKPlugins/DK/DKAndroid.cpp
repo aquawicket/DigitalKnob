@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
 #ifdef ANDROID
-#include "DKAndroid.h"
-#include "DKApp.h"
-#include "DKClass.h"
+#include "DK/DKAndroid.h"
+#include "DK/DKApp.h"
+#include "DK/DKClass.h"
 
 unsigned int DKAndroid::android_width = 800;
 unsigned int DKAndroid::android_height = 480;

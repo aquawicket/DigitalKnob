@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "DKClient.h"
+#include "DKClient/DKClient.h"
 #include <iostream>
 #include <string>
 

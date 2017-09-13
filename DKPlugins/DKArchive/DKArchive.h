@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKArchive_H
 #define DKArchive_H
-#include "DK.h"
+#include "DK/DK.h"
 
 /////////////////////////////////////////////
 class DKArchive : public DKObjectT<DKArchive>

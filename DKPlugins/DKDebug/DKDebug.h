@@ -1,8 +1,8 @@
 #pragma once
 #ifndef DKDebug_H
 #define DKDebug_H
-#include "DK.h"
-#include "DKCurl.h"
+#include "DK/DK.h"
+#include "DKCurl/DKCurl.h"
 
 /////////////////////////////////////////
 class DKDebug : public DKObjectT<DKDebug>

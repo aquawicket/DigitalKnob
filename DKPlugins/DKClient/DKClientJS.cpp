@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
-#include "DKClient.h"
-#include "DKClientJS.h"
+#include "DKClient/DKClient.h"
+#include "DKClient/DKClientJS.h"
 
 
 ///////////////////////

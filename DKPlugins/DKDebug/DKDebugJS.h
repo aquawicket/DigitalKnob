@@ -3,7 +3,7 @@
 #ifndef DKDebugJS_H
 #define DKDebugJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////////
 class DKDebugJS : public DKObjectT<DKDebugJS>

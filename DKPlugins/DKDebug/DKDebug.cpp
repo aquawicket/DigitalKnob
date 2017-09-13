@@ -1,10 +1,10 @@
 //https://oroboro.com/stack-trace-on-crash
 
 #include "stdafx.h"
-#include "DKDebug.h"
-#include "DKFile.h"
-#include "DKAssets.h"
-#include "DKCurl.h"
+#include "DKDebug/DKDebug.h"
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DKCurl/DKCurl.h"
 #include <stdio.h>
 
 #ifdef WIN32
