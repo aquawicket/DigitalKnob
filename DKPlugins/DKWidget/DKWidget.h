@@ -1,12 +1,12 @@
 #ifdef USE_DKRocket
-
 #pragma once
 #ifndef DKWidget_H
 #define DKWidget_H
-#include "DK.h"
-#include "DKRocket.h"
-#include "DKWindow.h"
-#include "DKXml.h"
+
+#include "DK/DK.h"
+#include "DKRocket/DKRocket.h"
+#include "DKWindow/DKWindow.h"
+#include "DKXml/DKXml.h"
 
 typedef Rocket::Core::Element DKElement;
 typedef Rocket::Core::Property DKProperty;

@@ -1,10 +1,9 @@
 #include "stdafx.h"
-
 #ifdef WIN32
-#include "DKHook.h"
-#include "DKAssets.h"
-#include "DKFile.h"
 #include <tchar.h>
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DKHook/DKHook.h"
 
 DKStringArray DKHook::_windows;
 std::vector<HWND> DKHook::handle;

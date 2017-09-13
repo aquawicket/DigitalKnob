@@ -1,9 +1,8 @@
 #include "stdafx.h"
-#include "DKMySql.h"
-#include "DKString.h"
-#include "DKAssets.h"
-#include "DKFile.h"
-
+#include "DK/DKFile.h"
+#include "DK/DKString.h"
+#include "DKAssets/DKAssets.h"
+#include "DKMySql/DKMySql.h"
 
 ////////////////////
 void DKMySql::Init()

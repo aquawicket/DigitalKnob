@@ -3,7 +3,7 @@
 #define DKDom_H
 
 #include "DK/DK.h"
-#include "DKDuktape/duktape.h"
+#include "duktape-1.5.0/src/duktape.h"
 
 /////////////////////////////////////
 class DKDom : public DKObjectT<DKDom>

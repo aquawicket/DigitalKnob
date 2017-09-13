@@ -1,8 +1,9 @@
 #ifdef USE_DKMySql
 #ifdef USE_DKRocket
 #ifdef USE_DKDuktape 
-#include "DKWidgetMySqlJS.h"
-#include "DKMySql.h"
+
+#include "DKMySql/DKMySql.h"
+#include "DKWidget/DKWidgetMySqlJS.h"
 
 ////////////////////////////
 void DKWidgetMySqlJS::Init()

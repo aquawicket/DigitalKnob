@@ -1,14 +1,12 @@
 #ifdef USE_DKRocket
-
 #include "stdafx.h"
-#include "DKWidget.h"
-#include "DKRocketToRML.h"
-#include "DKThread.h"
-#include "DKFile.h"
-#include "DKEvent.h"
-
-#include "Controls/WidgetTextInput.h"
 #include "Controls/ElementTextSelection.h"
+#include "Controls/WidgetTextInput.h"
+#include "DK/DKEvent.h"
+#include "DK/DKFile.h"
+#include "DKThread/DKThread.h"
+#include "DKRocket/DKRocketToRML.h"
+#include "DKWidget/DKWidget.h"
 
 #define DRAG_FIX 1
 DKRocket* DKWidget::dkRocket;

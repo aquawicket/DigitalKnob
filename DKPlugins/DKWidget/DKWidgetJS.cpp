@@ -1,10 +1,11 @@
 #ifdef USE_DKRocket
 #ifdef USE_DKDuktape 
-#include "DKWidgetJS.h"
-#include "DKWindow.h"
-#include "DKFile.h"
+
 #include "Controls/WidgetTextInput.h"
 #include "Controls/ElementTextSelection.h"
+#include "DK/DKFile.h"
+#include "DKWidget/DKWidgetJS.h"
+#include "DKWindow/DKWindow.h"
 
 DKString DKWidgetJS::htmlfile;
 

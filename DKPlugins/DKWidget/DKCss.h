@@ -1,8 +1,8 @@
 #pragma once
 #ifndef DKCss_H
 #define DKCss_H
-#include "DK.h"
-#include "DKRocket.h"
+#include "DK/DK.h"
+#include "DKRocket/DKRocket.h"
 
 /////////////////////////////////////
 class DKCss : public DKObjectT<DKCss>

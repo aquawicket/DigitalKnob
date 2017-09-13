@@ -1,12 +1,11 @@
 #include "stdafx.h"
-#include "DKRocket.h"
-#include "DKRocketToRML.h"
-#include "DKWindow.h"
 #include <Rocket/Debugger/Debugger.h>
+#include "DKRocket/DKRocket.h"
+#include "DKRocket/DKRocketToRML.h"
+#include "DKWindow/DKWindow.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
-
 
 /////////////////////
 void DKRocket::Init()
