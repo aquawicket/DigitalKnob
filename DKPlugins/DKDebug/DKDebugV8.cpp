@@ -1,7 +1,7 @@
 #ifdef USE_DKCef
-#include "DKDebugV8.h"
-#include "DKDebug.h"
-#include "DKApp.h"
+#include "DK/DKApp.h"
+#include "DKDebug/DKDebug.h"
+#include "DKDebug/DKDebugV8.h"
 
 /////////////////////
 void DKDebugV8::Init()
