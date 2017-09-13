@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "DKDuktape.h"
-#include "DKFile.h"
+#include "DK/DKFile.h"
+#include "DKDuktape/DKDuktape.h"
 
 duk_context* DKDuktape::ctx = NULL;
 DKStringArray DKDuktape::filelist;

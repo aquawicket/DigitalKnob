@@ -1,7 +1,9 @@
 #include "DKRocketToRML.h"
-#include "DKXml.h"
-#include "DKLog.h"
-#include "DKDuktape.h"
+
+
+#include "DK/DKLog.h"
+#include "DKDuktape/DKDuktape.h"
+#include "DKXml/DKXml.h"
 
 ///////////////////////////////////////////////////////////////////
 bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)

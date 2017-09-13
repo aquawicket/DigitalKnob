@@ -3,7 +3,7 @@
 #ifndef DKOSGModelJS_H
 #define DKOSGModelJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////////
 class DKOSGModelJS : public DKObjectT<DKOSGModelJS>

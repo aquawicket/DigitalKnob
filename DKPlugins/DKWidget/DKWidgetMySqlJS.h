@@ -5,8 +5,8 @@
 #ifndef DKWidgetMySqlJS_H
 #define DKWidgetMySqlJS_H
 
-#include "DKDuktape.h"
-#include "DKWidget.h"
+#include "DKDuktape/DKDuktape.h"
+#include "DKWidget/DKWidget.h"
 
 /////////////////////////////////////////////////////////
 class DKWidgetMySqlJS : public DKObjectT<DKWidgetMySqlJS>

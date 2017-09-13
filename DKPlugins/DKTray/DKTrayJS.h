@@ -3,7 +3,7 @@
 #ifndef DKTrayJS_H
 #define DKTrayJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////
 class DKTrayJS : public DKObjectT<DKTrayJS>

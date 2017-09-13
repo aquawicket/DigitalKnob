@@ -3,7 +3,7 @@
 #ifndef DKAssetsJS_H
 #define DKAssetsJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////////
 class DKAssetsJS : public DKObjectT<DKAssetsJS>

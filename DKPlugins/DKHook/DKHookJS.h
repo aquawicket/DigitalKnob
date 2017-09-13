@@ -4,7 +4,7 @@
 #ifndef DKHookJS_H
 #define DKHookJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////
 class DKHookJS : public DKObjectT<DKHookJS>

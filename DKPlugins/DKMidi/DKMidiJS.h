@@ -3,7 +3,7 @@
 #ifndef DKMidiJS_H
 #define DKMidiJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////
 class DKMidiJS : public DKObjectT<DKMidiJS>

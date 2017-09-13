@@ -3,7 +3,7 @@
 #ifndef DKJS_H
 #define DKJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ////////////////////////////////////
 class DKJS : public DKObjectT<DKJS>

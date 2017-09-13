@@ -3,7 +3,7 @@
 #ifndef DKRocketJS_H
 #define DKRocketJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////////
 class DKRocketJS : public DKObjectT<DKRocketJS>

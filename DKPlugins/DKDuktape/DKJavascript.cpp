@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "DKJavascript.h"
-#include "DKDuktape.h"
-#include "DKFile.h"
+#include "DK/DKFile.h"
+#include "DKDuktape/DKDuktape.h"
+#include "DKDuktape/DKJavascript.h"
 
 /////////////////////////
 void DKJavascript::Init()

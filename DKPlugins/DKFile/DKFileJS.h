@@ -3,7 +3,7 @@
 #ifndef DKFileJS_H
 #define DKFileJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////
 class DKFileJS : public DKObjectT<DKFileJS>

@@ -3,7 +3,7 @@
 #ifndef DKWindowJS_H
 #define DKWindowJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////////
 class DKWindowJS : public DKObjectT<DKWindowJS>

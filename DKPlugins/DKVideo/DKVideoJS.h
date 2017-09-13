@@ -3,7 +3,7 @@
 #ifndef DKVideoJS_H
 #define DKVideoJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /////////////////////////////////////////////
 class DKVideoJS : public DKObjectT<DKVideoJS>

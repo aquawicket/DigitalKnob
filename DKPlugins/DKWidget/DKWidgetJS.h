@@ -4,8 +4,8 @@
 #ifndef DKWidgetJS_H
 #define DKWidgetJS_H
 
-#include "DKDuktape.h"
-#include "DKWidget.h"
+#include "DKDuktape/DKDuktape.h"
+#include "DKWidget/DKWidget.h"
 
 ///////////////////////////////////////////////
 class DKWidgetJS : public DKObjectT<DKWidgetJS>

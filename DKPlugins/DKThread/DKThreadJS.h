@@ -3,7 +3,7 @@
 #ifndef DKThreadJS_H
 #define DKThreadJS_H
 
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 ///////////////////////////////////////////////
 class DKThreadJS : public DKObjectT<DKThreadJS>

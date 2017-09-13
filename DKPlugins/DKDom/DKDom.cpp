@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "DKDom.h"
-#include "DKDuktape.h"
+#include "DKDom/DKDom.h"
+#include "DKDuktape/DKDuktape.h"
 
 DKString ElementObject::property;
 
