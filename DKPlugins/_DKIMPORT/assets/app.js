@@ -9,9 +9,9 @@ DKCreate("Init.js", function(){});
 
 
 ///////////////////////
-function App_LoadPage()
+function app_LoadPage()
 {
-	DKLog("App_LoadPage()\n");
+	DKLog("app_LoadPage()\n");
 	
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
