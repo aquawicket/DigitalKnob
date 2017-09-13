@@ -57,8 +57,8 @@ void DKDuktape::Init()
 
 		DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
 		LoadFile(duktape);
-        DKString user = DKFile::local_assets+"User.js";
-		LoadFile(user);
+        DKString app = DKFile::local_assets+"app.js";
+		LoadFile(app);
 	}
 
 	//DKApp::AddLoopFunc("RENDER", &DKDuktape::EventLoop, this);
@@ -239,8 +239,8 @@ void DKDuktape::Reload()
 	//list.clear();
 	//DKClass::GetObjects(list);
 
-    DKString user = DKFile::local_assets+"User.js";
-	LoadFile(user);
+    DKString app = DKFile::local_assets+"app.js";
+	LoadFile(app);
 }
 
 ///////////////////////////////////////////////////////
