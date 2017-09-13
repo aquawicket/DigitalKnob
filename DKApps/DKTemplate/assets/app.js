@@ -7,7 +7,6 @@ var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 
 DKCreate("DK/init.js", function(){});
 
-
 ///////////////////////
 function app_LoadPage()
 {
