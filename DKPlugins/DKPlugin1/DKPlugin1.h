@@ -2,7 +2,7 @@
 #ifndef DKPlugin1_H
 #define DKPlugin1_H
 
-#include "DKPlugin.h"
+#include "DK/DKPlugin.h"
 
 /////////////////////////////////////////////
 class DKPlugin1 : public DKObjectT<DKPlugin1>
