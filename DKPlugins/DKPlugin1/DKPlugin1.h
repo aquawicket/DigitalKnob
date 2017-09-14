@@ -10,7 +10,7 @@ class DKPlugin1 : public DKObjectT<DKPlugin1>
 public:
 	void Init();
 	void End(){};
-	void* SomeFunction(void* data);
+	bool SomeFunction(void* input, void* output);
 };
 
 extern "C" void* getObj() {

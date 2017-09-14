@@ -7,10 +7,9 @@ void DKPlugin1::Init()
 	DKClass::RegisterFunc("DKPlugin1::SomeFunction", &DKPlugin1::SomeFunction, this);
 };
 
-/////////////////////////////////////////
-void* DKPlugin1::SomeFunction(void* data)
+///////////////////////////////////////////////////////
+bool DKPlugin1::SomeFunction(void* input, void* output)
 {
 	DKLog("DKPlugin1::SomeFunction()\n", DKINFO);
 	return NULL;
 };
-
