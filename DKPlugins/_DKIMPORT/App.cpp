@@ -1,5 +1,5 @@
 #ifdef USE_DK
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "App.h"
 
 ////////////////

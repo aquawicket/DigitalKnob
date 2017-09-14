@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 //#ifdef USE_osgFX
 #include "DKOSGPicker.h"
 #include "DKOSGWindow.h"

@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKVideo_H
 #define DKVideo_H
-#include "DK.h"
+#include "DK/DK.h"
 
 /////////////////////////////////////////
 class DKVideo : public DKObjectT<DKVideo>

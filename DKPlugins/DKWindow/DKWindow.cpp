@@ -1,6 +1,6 @@
-#include "stdafx.h"
-#include "DKWindow.h"
-#include "DKAndroid.h"
+#include "DK/stdafx.h"
+#include "DK/DKAndroid.h"
+#include "DKWindow/DKWindow.h"
 
 /////////////////////
 void DKWindow::Init()

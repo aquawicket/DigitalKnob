@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #ifndef WIN32
 #include "DKUnix.h"
 #include <unistd.h>

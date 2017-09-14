@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKClass.h"
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;

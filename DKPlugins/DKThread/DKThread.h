@@ -1,7 +1,8 @@
 #pragma once
 #ifndef DKThread_H
 #define DKThread_H
-#include "DK.h"
+
+#include "DK/DK.h"
 
 #if defined(MAC) || defined(ANDROID) || defined(IOS)
 #define TIME_UTC_ TIME_UTC

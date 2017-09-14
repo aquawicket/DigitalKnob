@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKServer/DKServer.h"
 //#ifdef USE_Boost_Thread
 

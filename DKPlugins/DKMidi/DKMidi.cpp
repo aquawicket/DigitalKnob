@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "DKMidi.h"
-#include "DKFile.h"
-
+#include "DK/stdafx.h"
+#include "DK/DKFile.h"
+#include "DKMidi/DKMidi.h"
 
 ///////////////////
 void DKMidi::Init()

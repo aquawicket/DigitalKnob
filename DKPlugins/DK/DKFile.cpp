@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKFile.h"
 #include "DKLog.h"
 #include <stdio.h>

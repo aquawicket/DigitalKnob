@@ -3,7 +3,7 @@
 #ifdef ANDROID
 #ifndef AndroidApp_H
 #define AndroidApp_H
-#include "DKAndroid.h"
+#include "DK/DKAndroid.h"
 
 extern "C" {
 

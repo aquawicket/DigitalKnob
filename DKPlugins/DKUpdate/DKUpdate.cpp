@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include <stdlib.h> 
 #include <sys/stat.h>
 #include "DK/DKFile.h"

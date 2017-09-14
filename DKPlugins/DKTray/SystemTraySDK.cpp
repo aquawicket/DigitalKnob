@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 
 #if defined (_MSC_VER)
 
@@ -26,7 +26,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-//#include "stdafx.h"
+//#include "DK/stdafx.h"
 #include "SystemTraySDK.h"
 
 #ifndef ASSERT

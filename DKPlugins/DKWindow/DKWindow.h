@@ -5,7 +5,7 @@
 #pragma once
 #ifndef DKWindow_H
 #define DKWindow_H
-#include "DK.h"
+#include "DK/DK.h"
 
 ///////////////////////////////////////////
 class DKWindow : public DKObjectT<DKWindow>

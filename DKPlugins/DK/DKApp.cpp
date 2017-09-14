@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"

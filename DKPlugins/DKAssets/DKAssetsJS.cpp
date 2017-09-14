@@ -1,7 +1,7 @@
 #ifdef USE_DKDuktape
-#include "DKAssetsJS.h"
-#include "DKAssets.h"
-#include "DKFile.h"
+#include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DKAssets/DKAssetsJS.h"
 
 /////////////////////
 void DKAssetsJS::Init()

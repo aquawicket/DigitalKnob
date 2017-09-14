@@ -1,5 +1,5 @@
 #ifdef USE_DKRocket
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "Controls/ElementTextSelection.h"
 #include "Controls/WidgetTextInput.h"
 #include "DK/DKEvent.h"

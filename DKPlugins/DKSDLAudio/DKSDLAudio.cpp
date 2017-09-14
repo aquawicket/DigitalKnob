@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "DKSDLAudio.h"
-#include "DKFile.h"
-
+#include "DK/stdafx.h"
+#include "DK/DKFile.h"
+#include "DKSDLAudio/DKSDLAudio.h"
 
 ///////////////////////
 void DKSDLAudio::Init()

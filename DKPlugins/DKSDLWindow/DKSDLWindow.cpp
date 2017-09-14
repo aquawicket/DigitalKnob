@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "DKSDLWindow.h"
-#include "DKFile.h"
+#include "DK/stdafx.h"
 #include "SDL_syswm.h"
-#include "DKAndroid.h"
+#include "DK/DKAndroid.h"
+#include "DK/DKFile.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 #if defined(WIN32) || defined(MAC) || defined(LINUX)
 	#include <GL/gl.h>

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKClient/DKClient.h"
 #include <iostream>
 #include <string>

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKSDLVideo.h"
 #include "DKFile.h"
 #include "DKSDLWindow.h"

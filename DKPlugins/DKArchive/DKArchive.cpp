@@ -1,13 +1,12 @@
-#include "stdafx.h"
-#include "DKArchive.h"
-#include "DKFile.h"
+#include "DK/stdafx.h"
 #include <iostream>
 #include <fcntl.h>
 #include <sstream>
 #include <fstream>
 #include <archive.h>
 #include <archive_entry.h>
-
+#include "DK/DKFile.h"
+#include "DKArchive/DKArchive.h"
 
 ///////////////////////////////////////////////////////////////////
 bool DKArchive::Extract(const DKString& file, const DKString& path)

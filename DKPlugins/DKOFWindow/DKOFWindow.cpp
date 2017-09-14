@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKOFWindow.h"
 
 #include "ofMain.h"

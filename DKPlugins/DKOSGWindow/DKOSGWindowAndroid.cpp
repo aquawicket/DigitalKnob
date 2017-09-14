@@ -1,5 +1,5 @@
 #ifdef ANDROID
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKOSGWindowAndroid.h"
 #include "DKOSGWindow.h"
 

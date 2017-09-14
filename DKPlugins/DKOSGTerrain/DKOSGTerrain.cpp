@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKOSGTerrain.h"
 #include "DKOSGWindow.h"
 #include <osg/ShapeDrawable>

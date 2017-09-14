@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #ifdef WIN32
 #include <tchar.h>
 #include "DK/DKFile.h"

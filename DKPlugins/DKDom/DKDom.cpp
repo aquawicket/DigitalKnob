@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKDom/DKDom.h"
 #include "DKDuktape/DKDuktape.h"
 

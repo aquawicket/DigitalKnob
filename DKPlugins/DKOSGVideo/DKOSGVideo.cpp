@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKOSGVideo.h"
 #include "DKffmpeg.h"
 #include "DKFile.h"

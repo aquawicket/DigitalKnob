@@ -1,8 +1,7 @@
-#include "stdafx.h"
-#include "DKCurl.h"
-#include "DKFile.h"
+#include "DK/stdafx.h"
 #include <sys/stat.h>
-
+#include "DK/DKFile.h"
+#include "DKCurl/DKCurl.h"
 
 ///////////////////
 void DKCurl::Init()

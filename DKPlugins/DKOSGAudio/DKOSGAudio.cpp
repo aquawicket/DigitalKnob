@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 #include "DKOSGAudio.h"
 #include "DKOSGWindow.h"
 #include "DKAssets.h"

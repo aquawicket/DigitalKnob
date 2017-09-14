@@ -1,6 +1,6 @@
-#include "stdafx.h"
-#include "DKXml.h"
-#include "DKFile.h"
+#include "DK/stdafx.h"
+#include "DK/DKFile.h"
+#include "DKXml/DKXml.h"
 
 //////////////////
 void DKXml::Init()

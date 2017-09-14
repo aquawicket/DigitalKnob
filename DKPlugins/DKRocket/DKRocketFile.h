@@ -1,10 +1,8 @@
 #pragma once
 #ifndef DKRocketFile_H
 #define DKRocketFile_H
-
 #include <Rocket/Core/Core.h>
-#include "DKFile.h"
-
+#include "DK/DKFile.h"
 
 ///////////////////////////////////////////////////////
 class DKRocketFile : public Rocket::Core::FileInterface

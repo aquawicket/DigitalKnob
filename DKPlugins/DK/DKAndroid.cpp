@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "DK/stdafx.h"
 
 #ifdef ANDROID
 #include "DK/DKAndroid.h"
