@@ -11,5 +11,5 @@ void DKPlugin1::Init()
 bool DKPlugin1::SomeFunction(void* input, void* output)
 {
 	DKLog("DKPlugin1::SomeFunction()\n", DKINFO);
-	return NULL;
+	return true;
 };

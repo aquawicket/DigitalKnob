@@ -8,9 +8,11 @@ function DKEditor_Init()
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
 	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
 	
+	/*
 	if(DK_GetBrowser() != "Rocket"){
 		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
+	*/
 	
 	/*
 	DKCreate("DKTooltip/DKTooltip.js", function(){
