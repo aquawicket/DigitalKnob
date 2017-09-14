@@ -1,7 +1,6 @@
 #include "DK/stdafx.h"
-#include "DKWebview.h"
-#include "DKAndroid.h"
-
+#include "DK/DKAndroid.h"
+#include "DKWebview/DKWebview.h"
 
 //////////////////////
 void DKWebview::Init()
