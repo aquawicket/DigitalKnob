@@ -1,4 +1,3 @@
-DKDEPEND(autoconf-2.68)
 DKDEPEND(zlib-1.2.8)
 ##DKDEPEND(libpng-1.7.0beta34)
 ##DKDEPEND(jpeg-6b)
