@@ -1,0 +1,10 @@
+### INSTALL ###
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+IF(NOT EXISTS C:/mingw/msys/bin/autoconf-2.68)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://digitalknob.com/Download/Tools/autoconf-2.68-1-msys-1.0.17-bin.tar)
+	DKEXTRACT(${DIGITALKNOB}/Download/Tools/autoconf-2.68-1-msys-1.0.17-bin.tar C:/mingw)
+ENDIF()
