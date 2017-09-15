@@ -34,7 +34,9 @@ WIN32_BASH("#!/bin/bash
 cd ${VNCSERVER}/win32/Debug
 export PATH=/c/mingw/mingw32/bin:$PATH 
 export PATH=/c/mingw/msys/bin:$PATH
-../../autogen.sh 
+cd ${VNCSERVER}
+./autogen.sh
+cd ${VNCSERVER}/win32/Debug
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
@@ -42,11 +44,13 @@ exit \n")
 
 DKSETPATH(${VNCSERVER}/win32/Release)
 WIN32_BASH("#!/bin/bash 
-cd ${VNCSERVER}
+cd ${VNCSERVER}/win32/Release
 export PATH=/c/mingw/mingw32/bin:$PATH 
 export PATH=/c/mingw/msys/bin:$PATH
+cd ${VNCSERVER}
 ./autogen.sh
-./configure --disable-shared --enable-static 
+cd ${VNCSERVER}/win32/Release
+../../configure --disable-shared --enable-static 
 make 
 exit\n ")
 ##DKRENAME(${VNCSERVER}/win32/Release/lib/.libs/libgif.a ${VNCSERVER}/win32/Release/lib/.libs/libgif.lib)

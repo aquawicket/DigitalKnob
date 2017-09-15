@@ -1,5 +1,0 @@
-IF(NOT WIN32)
-	RETURN()
-ENDIF()
-IF(NOT EXISTS C:/mingw/msys/bin/autoconf-2.68)
-ENDIF()
