@@ -18,9 +18,9 @@ function app_LoadPage()
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKEditor/DKEditor.js", function(){
-	DKCreate("DKHook/DKHook.js", function(){
-		DKFrame_Widget("DKHook/DKHook.html");
-	});		
+	//DKCreate("DKHook/DKHook.js", function(){
+		//DKFrame_Widget("DKHook/DKHook.html");
+	//});		
 	});
 	});
 	});
