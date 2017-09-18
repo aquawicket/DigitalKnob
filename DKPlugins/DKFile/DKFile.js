@@ -344,6 +344,7 @@ if(DK_GetBrowser() != "CEF"){
 		
 		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
+		result = result.replace(protocol+"//"+hostname+"/","");
 		result = result.replace("//","/");
 	
 		DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
