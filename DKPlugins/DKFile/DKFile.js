@@ -339,13 +339,12 @@ if(DK_GetBrowser() != "CEF"){
 	{
 		//DKLog("DKFile_GetAbsolutePath("+url+")\n");
 		
-		if(url.indexOf("file:///") > -1){ url = pathname; }
 		if(!url){ url = "/"; }
-		//DKLog("DKFile_GetAbsolutePath("+url+") \n");
+		if(url.indexOf("file:///") > -1){ url = pathname; }
 		
 		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
-		//result = result.replace(datapath,"");
+		result = result.replace("//","/");
 	
 		DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
 		return result;
@@ -356,8 +355,8 @@ if(DK_GetBrowser() != "CEF"){
 function DKFile_GetRelativePath(apath, datapath)
 {
 	//DKLog("DKFile_GetRelativePath("+apath+","+datapath+")\n");
-	
-	//apath = apath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
+	//var rpath = apath.replace(pathname,"");
+	//var rpath = rpath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
 	//send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
 	//var result = ajaxGetUrl(send);
 	//DKLog("DKFile_GetRelativePath("+url+") -> "+result+"\n");

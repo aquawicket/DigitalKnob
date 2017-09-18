@@ -51,6 +51,7 @@ appfilename = pathname.replace("/","");
 appfilename = appfilename.replace("/","");
 
 var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
+absolutepath = absolutepath.replace("//","/");
 //if(absolutepath){online_assets = absolutepath;}
 
 DKLog("href: "+href+"\n");

@@ -85,7 +85,6 @@ function DKSolutionMenu_SetId(id)
 function DKSolutionMenu_SetFile(file)
 {
 	//DKLog("DKSolutionMenu_SetFile("+file+")\n");
-	
 	DKSolutionMenu_file = file;
 }
 
@@ -102,7 +101,9 @@ function DKSolutionMenu_OpenHere()
 {
 	//DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n");
 	
-	DKSolution_OpenHere(DKSolutionMenu_file);
+	var path = DKSolutionMenu_file;
+	path = path.replace(absolutepath,"");
+	DKSolution_OpenHere(path);
 }
 
 /////////////////////////////////

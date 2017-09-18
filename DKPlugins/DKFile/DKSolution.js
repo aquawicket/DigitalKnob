@@ -11,6 +11,8 @@ function DKSolution_Init()
 	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	
+	DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
 }
 
 /////////////////////////
@@ -137,7 +139,8 @@ function DKSolution_OpenHere(path)
 		return true;
 	}
 	else{ //File
-		if(!DKFileAssociation_Open(aPath)){ return false; }
+		var rPath = aPath.replace(absolutepath,"");
+		if(!DKFileAssociation_Open(rPath)){ return false; }
 		return true;
 	}
 	
