@@ -1,5 +1,3 @@
-##MESSAGE("android-studio")
-
 IF(NOT ANDROID)
 	RETURN()
 ENDIF()

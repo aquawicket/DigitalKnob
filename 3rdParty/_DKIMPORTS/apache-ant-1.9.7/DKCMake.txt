@@ -1,6 +1,3 @@
-##MESSAGE("apache-ant-1.9.7")
-
-### INSTALL ###
 IF(NOT ANDROID)
 	RETURN()
 ENDIF()
