@@ -1,6 +1,6 @@
 ///// DK.h /////
 
-//NOTE:
+// NOTE:
 // This is the core of DigitalKnob. 
 // Anything that is an absolute must for the core to work, starts in this header file.
 
