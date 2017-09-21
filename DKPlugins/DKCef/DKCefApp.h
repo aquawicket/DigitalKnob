@@ -18,7 +18,7 @@ typedef std::map<DKString, boost::function2<bool, CefArgs, CefReturn> >::iterato
 typedef std::map<DKString, boost::function<bool (CefArgs, CefReturn)>>::iterator it_type;
 #endif
 
-////////////
+//////////
 class DKV8
 {
 public:
