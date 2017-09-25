@@ -1,0 +1,3 @@
+DKDEPEND(libvncserver-master)
+
+DKPLUGIN(DKVncClient)

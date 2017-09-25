@@ -1,0 +1,5 @@
+##DKDEPEND(libvncserver-LibVNCServer-0.9.11)
+DKDEPEND(libvncserver-master)
+
+DKPLUGIN(DKVncServer)
+##DKASSETS(DKVncServer)
