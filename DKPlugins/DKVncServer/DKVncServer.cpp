@@ -95,6 +95,7 @@ static void DrawBuffer()
 		src++;
 		dest++;
 	}
+
 	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 	ReleaseDC(desktop, src_dc);
 	DeleteDC(src_dc);
