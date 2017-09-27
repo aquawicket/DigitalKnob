@@ -123,18 +123,18 @@ static void clientgone(rfbClientPtr cl)
 /////////////////////////////////////////////////////////
 static enum rfbNewClientAction newclient(rfbClientPtr cl)
 {
+	//DKLog("newclient()\n", DKINFO);
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
 
-	char buffer[1024];
+	//Get client ip address
 	struct sockaddr_in addr;
 	socklen_t len = sizeof(addr);
 	unsigned int ip;
 	getpeername(cl->sock, (struct sockaddr*)&addr, &len);
-	ip=ntohl(addr.sin_addr.s_addr);
-	sprintf(buffer,"Client connected from ip %d.%d.%d.%d", 
-		(ip>>24)&0xff,(ip>>16)&0xff,(ip>>8)&0xff,ip&0xff);
-	//output(cl->screen,buffer);
+	ip = ntohl(addr.sin_addr.s_addr);
+	DKString ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
+	DKLog("ip = "+ipaddress+"\n", DKINFO);
 
 	return RFB_CLIENT_ACCEPT;
 }
