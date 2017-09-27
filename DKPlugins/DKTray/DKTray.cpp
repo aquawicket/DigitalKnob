@@ -17,11 +17,11 @@ void DKTray::Init()
 	DKCreate("DKTrayV8");
 #ifdef WIN32
 
-	HWND hwnd = ::GetActiveWindow();
-	if(!hwnd){
-		DKLog("DKTray::Init(): hWnd invalid!\n", DKERROR);
+	//HWND hwnd = ::GetActiveWindow();
+	//if(!hwnd){
+	//	DKLog("DKTray::Init(): hWnd invalid!\n", DKERROR);
 		//return;
-	}
+	//}
 
 	icon = DKFile::local_assets+"icon.ico";
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
