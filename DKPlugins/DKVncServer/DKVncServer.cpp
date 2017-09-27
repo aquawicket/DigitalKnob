@@ -60,6 +60,7 @@ static void DrawBuffer()
 #ifdef WIN32
 	//https://pastebin.com/r3CZpWDs
 
+	HWND desktop = GetDesktopWindow();
 	BITMAPINFO info = {0};
 	info.bmiHeader.biSize = sizeof(info.bmiHeader);
 	info.bmiHeader.biWidth = rfbScreen->width;
@@ -69,21 +70,20 @@ static void DrawBuffer()
 	info.bmiHeader.biCompression = BI_RGB;
 	BYTE* pbBitmap;
 
-	HWND hDesktopWnd = GetDesktopWindow();
-	HDC src_dc = GetDC(hDesktopWnd);
+	HDC src_dc = GetDC(desktop);
 	HDC buffer_dc = CreateCompatibleDC(src_dc);
 	HBITMAP dest_dc = CreateDIBSection(buffer_dc, &info, DIB_RGB_COLORS, (void**)&pbBitmap, NULL, 0);
-	BITMAP screen;
+	BITMAP bmp;
 	SelectObject(buffer_dc, dest_dc);
-	GetObject(dest_dc, sizeof(BITMAP), &screen);
+	GetObject(dest_dc, sizeof(BITMAP), &bmp);
 	int res = BitBlt(buffer_dc, 0, 0, rfbScreen->width, rfbScreen->height, src_dc, 0, 0, SRCCOPY);
-	int go = GetObject(dest_dc, sizeof(BITMAP), &screen);
+	int go = GetObject(dest_dc, sizeof(BITMAP), &bmp);
 	//Invert
 	size_t n = rfbScreen->width * rfbScreen->height * 4;
 	int* buffer = (int*)malloc(n);
 	int* dest = (int*)rfbScreen->frameBuffer;
-	int* src = ((int*)screen.bmBits);
-	while(src != ((int*)screen.bmBits) + (rfbScreen->width * rfbScreen->height - 1)){
+	int* src = ((int*)bmp.bmBits);
+	while(src != ((int*)bmp.bmBits) + (rfbScreen->width * rfbScreen->height - 1)){
 		char* c_dest = (char*)dest;
 		char* c_src = (char*)src;
 		c_dest[0] = c_src[2];
@@ -94,7 +94,7 @@ static void DrawBuffer()
 		dest++;
 	}
 	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
-	ReleaseDC(hDesktopWnd, src_dc);
+	ReleaseDC(desktop, src_dc);
 	DeleteDC(src_dc);
 	DeleteDC(buffer_dc);
 	DeleteObject(dest_dc);
@@ -198,17 +198,22 @@ void DKVncServer::Init()
     XMapWindow(disp, root);
 #endif
 
-    // Get width and height of the display
-	int windowWidth = 800;//XDisplayWidth(disp, 0);
-    int windowHeight = 600;//XDisplayHeight (disp, 0);
-    
-	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, windowWidth, windowHeight, 8, 3, bpp);
+	HWND desktop = GetDesktopWindow();
+	RECT size;
+	int desktopWidth;
+	int desktopHeight;
+	if(GetWindowRect(desktop, &size)){
+		desktopWidth = size.right - size.left;
+		desktopHeight = size.bottom - size.top;
+	}
+
+	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
 		DKLog("DKVncServer::Init(): rfbScreen is invalid", DKERROR);
 		return;
 	}
 	rfbScreen->desktopName = "DKVncServer";
-	rfbScreen->frameBuffer = (char*)malloc(windowHeight * windowWidth * bpp);
+	rfbScreen->frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
 	rfbScreen->alwaysShared = TRUE;
 	rfbScreen->ptrAddEvent = mouseevent;
 	rfbScreen->kbdAddEvent = keyevent;
