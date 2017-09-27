@@ -139,9 +139,9 @@ static void newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 /////////////////////////////////////////////////////////////////////
 static void mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-	//DKUtil::SetMousePos(x, y);
 	if(buttonMask){
 		DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
+		DKUtil::SetMousePos(x, y);
 	}
 	return;
 
