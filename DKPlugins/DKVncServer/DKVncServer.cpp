@@ -153,44 +153,11 @@ static void newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 static void mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
 	if(buttonMask){
-		DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 		DKUtil::SetMousePos(x, y);
+		DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 	}
-	return;
 
-	/*
-	ClientData* cd = (ClientData*)cl->clientData;
-	if(x>=0 && y>=0 && x < cl->screen->width && y < cl->screen->height){
-		if(buttonMask){
-			int i,j,x1,x2,y1,y2;
-			if(cd->oldButton==buttonMask){ // draw a line
-				//drawline((unsigned char*)cl->screen->frameBuffer,cl->screen->paddedWidthInBytes,bpp,x,y,cd->oldx,cd->oldy);
-				x1=x; y1=y;
-				if(x1>cd->oldx) x1++; else cd->oldx++;
-				if(y1>cd->oldy) y1++; else cd->oldy++;
-				rfbMarkRectAsModified(cl->screen,x,y,cd->oldx,cd->oldy);
-			}
-			else{ // draw a point (diameter depends on button)
-				int w=cl->screen->paddedWidthInBytes;
-				x1=x-buttonMask; if(x1<0) x1=0;
-				x2=x+buttonMask; if(x2>cl->screen->width) x2=cl->screen->width;
-				y1=y-buttonMask; if(y1<0) y1=0;
-				y2=y+buttonMask; if(y2>cl->screen->height) y2=cl->screen->height;
-
-				for(i=x1*bpp;i<x2*bpp;i++)
-					for(j=y1;j<y2;j++)
-						cl->screen->frameBuffer[j*w+i]=(char)0xff;
-						rfbMarkRectAsModified(cl->screen,x1,y1,x2,y2);
-			}
-		} 
-		else{
-			cd->oldButton=0;
-		}
-
-		cd->oldx=x; cd->oldy=y; cd->oldButton=buttonMask;
-	}
 	rfbDefaultPtrAddEvent(buttonMask,x,y,cl);
-	*/
 }
 
 // Here the key events are handled
@@ -236,7 +203,7 @@ void DKVncServer::Init()
     
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
-	//DKApp::SetFramerate(0);
+	DKApp::SetFramerate(0);
 }
 
 ///////////////////////
@@ -248,6 +215,6 @@ void DKVncServer::End()
 ////////////////////////
 void DKVncServer::Loop()
 {
-	rfbProcessEvents(rfbScreen, 100000);
+	rfbProcessEvents(rfbScreen, 1);
 	DrawBuffer();
 }
