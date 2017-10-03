@@ -1,3 +1,4 @@
 DKDEPEND(libvncserver-master)
+DKDEPEND(DKSDLWindow)
 
 DKPLUGIN(DKVncClient)
