@@ -1,6 +1,11 @@
 #include "DK/stdafx.h"
 #include "DKVncClient.h"
 
+#include <SDL.h>
+#include <signal.h>
+#include <rfb/rfbclient.h>
+//#include "scrap.h"
+
 ////////////////////////
 void DKVncClient::Init()
 {
