@@ -6,38 +6,16 @@
 
 #include "SDL.h"
 #include <signal.h>
-#include <client_examples/scrap.h>
+//#include "scrap.h"
 
-static int enableResizable = 1, viewOnly, listenLoop, buttonMask;
+
+
 /*
-struct { int sdl; int rfb; } buttonMapping[]={
-	{1, rfbButton1Mask},
-	{2, rfbButton2Mask},
-	{3, rfbButton3Mask},
-	{4, rfbButton4Mask},
-	{5, rfbButton5Mask},
-	{0,0}
-};
-
 #ifdef SDL_ASYNCBLIT
-	int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
+int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
 #else
-	int sdlFlags = SDL_HWSURFACE | SDL_HWACCEL;
+int sdlFlags = SDL_HWSURFACE | SDL_HWACCEL;
 #endif
-static int realWidth, realHeight, bytesPerPixel, rowStride;
-static char *sdlPixels;
-static int rightAltKeyDown, leftAltKeyDown;
-
-static rfbBool resize(rfbClient* client);
-static void update(rfbClient* cl,int x,int y,int w,int h);
-static void kbd_leds(rfbClient* cl, int value, int pad);
-static void text_chat(rfbClient* cl, int value, char *text);
-static void got_selection(rfbClient *cl, const char *text, int len);
-static void cleanup(rfbClient* cl);
-static void resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h);
-static uint32_t get(rfbClient *cl, int x, int y);
-static void put(int x, int y, uint32_t v);
-static void setRealDimension(rfbClient *client, int w, int h);
 */
 
 ////////////////////////
@@ -70,22 +48,21 @@ void DKVncClient::Init()
 		}
 		DKApp::argc = j;
 
-/*
-		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE);
-		SDL_EnableUNICODE(1);
-		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+		//SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE);
+		//SDL_EnableUNICODE(1);
+		//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 		atexit(SDL_Quit);
 		signal(SIGINT, exit);
-		
+
 		do{
 			// 16-bit: cl = rfbGetClient(5,3,2);
 			cl = rfbGetClient(8,3,4);
-			cl->MallocFrameBuffer = resize;
+			cl->MallocFrameBuffer = DKVncClient::resize;
 			cl->canHandleNewFBSize = TRUE;
-			cl->GotFrameBufferUpdate = update;
-			cl->HandleKeyboardLedState = kbd_leds;
-			cl->HandleTextChat = text_chat;
-			cl->GotXCutText = got_selection;
+			cl->GotFrameBufferUpdate = DKVncClient::update;
+			cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
+			cl->HandleTextChat = DKVncClient::text_chat;
+			cl->GotXCutText = DKVncClient::got_selection;
 			cl->listenPort = LISTEN_PORT_OFFSET;
 			cl->listen6Port = LISTEN_PORT_OFFSET;
 			if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
@@ -94,7 +71,7 @@ void DKVncClient::Init()
 				break;
 			}
 
-			init_scrap();
+			//init_scrap();
 
 			while(1){
 				if(SDL_PollEvent(&e)){
@@ -120,7 +97,6 @@ void DKVncClient::Init()
 			}
 		}
 		while(listenLoop);
-*/
 }
 
 ///////////////////////
@@ -129,10 +105,10 @@ void DKVncClient::End()
 
 }
 
-/*
-////////////////////////////////////////
-static rfbBool resize(rfbClient* client) 
+//////////////////////////////////////////////
+rfbBool DKVncClient::resize(rfbClient* client) 
 {
+/*
 	int width = client->width;
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
@@ -179,11 +155,12 @@ static rfbBool resize(rfbClient* client)
 		return FALSE;
 	}
 	SDL_WM_SetCaption(client->desktopName, "SDL");
+*/
 	return TRUE;
 }
 
-/////////////////////////////////////////////////////////
-static void update(rfbClient* cl,int x,int y,int w,int h) 
+///////////////////////////////////////////////////////////////
+void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h) 
 {
 	if(sdlPixels){
 		resizeRectangleToReal(cl, x, y, w, h);
@@ -194,19 +171,19 @@ static void update(rfbClient* cl,int x,int y,int w,int h)
 		w -= x;
 		h -= y;
 	}
-	SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
+	//SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
 }
 
-///////////////////////////////////////////////////////
-static void kbd_leds(rfbClient* cl, int value, int pad)
+/////////////////////////////////////////////////////////////
+void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad)
 {
 	// note: pad is for future expansion 0=unused
 	fprintf(stderr,"Led State= 0x%02X\n", value);
 	fflush(stderr);
 }
 
-///////////////////////////////////////////////////////////
-static void text_chat(rfbClient* cl, int value, char *text) 
+/////////////////////////////////////////////////////////////////
+void DKVncClient::text_chat(rfbClient* cl, int value, char *text) 
 {
 	switch(value) {
 	case rfbTextChatOpen:
@@ -226,14 +203,14 @@ static void text_chat(rfbClient* cl, int value, char *text)
 	fflush(stderr);
 }
 
-///////////////////////////////////////////////////////////////////
-static void got_selection(rfbClient *cl, const char *text, int len)
+/////////////////////////////////////////////////////////////////////////
+void DKVncClient::got_selection(rfbClient *cl, const char *text, int len)
 {
-	put_scrap(T('T', 'E', 'X', 'T'), len, text);
+	//put_scrap(T('T', 'E', 'X', 'T'), len, text);
 }
 
-//////////////////////////////////
-static void cleanup(rfbClient* cl)
+////////////////////////////////////////
+void DKVncClient::cleanup(rfbClient* cl)
 {
 	//just in case we're running in listenLoop:
 	//close viewer window by restarting SDL video subsystem
@@ -243,16 +220,18 @@ static void cleanup(rfbClient* cl)
 		rfbClientCleanup(cl);
 }
 
-//////////////////////////////////////////////////////////
-static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e)
+////////////////////////////////////////////////////////////////
+rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 {
 	switch(e->type) {
+/*
 #if SDL_MAJOR_VERSION > 1 || SDL_MINOR_VERSION >= 2
 	case SDL_VIDEOEXPOSE:
 		SendFramebufferUpdateRequest(cl, 0, 0,
 			cl->width, cl->height, FALSE);
 		break;
 #endif
+*/
 	case SDL_MOUSEBUTTONUP:
 	case SDL_MOUSEBUTTONDOWN:
 	case SDL_MOUSEMOTION:
@@ -292,8 +271,7 @@ static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	case SDL_KEYDOWN:
 		if (viewOnly)
 			break;
-		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key),
-			e->type == SDL_KEYDOWN ? TRUE : FALSE);
+		//SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
 		if (e->key.keysym.sym == SDLK_RALT)
 			rightAltKeyDown = e->type == SDL_KEYDOWN;
 		if (e->key.keysym.sym == SDLK_LALT)
@@ -310,6 +288,7 @@ static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			rfbClientCleanup(cl);
 			exit(0);
 		}
+	/*
 	case SDL_ACTIVEEVENT:
 		if (!e->active.gain && rightAltKeyDown) {
 			SendKeyEvent(cl, XK_Alt_R, FALSE);
@@ -330,20 +309,23 @@ static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e)
 				SendClientCutText(cl, data, len);
 		}
 		break;
+	*/
 	case SDL_SYSWMEVENT:
-		clipboard_filter(e);
+		//clipboard_filter(e);
 		break;
+	/*
 	case SDL_VIDEORESIZE:
 		setRealDimension(cl, e->resize.w, e->resize.h);
 		break;
+	*/
 	default:
 		rfbClientLog("ignore SDL event: 0x%x\n", e->type);
 	}
 	return TRUE;
 }
 
-////////////////////////////////////////////////////////////////////////////
-static void resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h)
+//////////////////////////////////////////////////////////////////////////////////
+void DKVncClient::resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h)
 {
 	int i0 = x * realWidth / cl->width;
 	int i1 = ((x + w) * realWidth - 1) / cl->width + 1;
@@ -381,8 +363,8 @@ static void resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h)
 		}
 }
 
-////////////////////////////////////////////////
-static uint32_t get(rfbClient *cl, int x, int y)
+//////////////////////////////////////////////////////
+uint32_t DKVncClient::get(rfbClient *cl, int x, int y)
 {
 	switch (bytesPerPixel) {
 	case 1: return ((uint8_t *)cl->frameBuffer)[x + y * cl->width];
@@ -394,8 +376,8 @@ static uint32_t get(rfbClient *cl, int x, int y)
 	}
 }
 
-/////////////////////////////////////////
-static void put(int x, int y, uint32_t v)
+///////////////////////////////////////////////
+void DKVncClient::put(int x, int y, uint32_t v)
 {
 	switch (bytesPerPixel) {
 	case 1: ((uint8_t *)sdlPixels)[x + y * rowStride] = v; break;
@@ -407,16 +389,18 @@ static void put(int x, int y, uint32_t v)
 	}
 }
 
-/////////////////////////////////////////////////////////////
-static void setRealDimension(rfbClient *client, int w, int h)
+///////////////////////////////////////////////////////////////////
+void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 {
 	SDL_Surface* sdl;
 
+	/*
 	if (w < 0) {
 		const SDL_VideoInfo *info = SDL_GetVideoInfo();
 		w = info->current_h;
 		h = info->current_w;
 	}
+	*/
 
 	if (w == realWidth && h == realHeight)
 		return;
@@ -429,7 +413,7 @@ static void setRealDimension(rfbClient *client, int w, int h)
 
 		bytesPerPixel = client->format.bitsPerPixel / 8;
 		size = client->width * bytesPerPixel * client->height;
-		client->frameBuffer = malloc(size);
+		client->frameBuffer = (uint8_t*)malloc(size);
 		if (!client->frameBuffer) {
 			rfbClientErr("Could not allocate %d bytes", size);
 			exit(1);
@@ -437,12 +421,12 @@ static void setRealDimension(rfbClient *client, int w, int h)
 		memcpy(client->frameBuffer, sdlPixels, size);
 	}
 
-	sdl = rfbClientGetClientData(client, SDL_Init);
+	sdl = (SDL_Surface*)rfbClientGetClientData(client, SDL_Init);
 	if (sdl->w != w || sdl->h != h) {
 		int depth = sdl->format->BitsPerPixel;
-		sdl = SDL_SetVideoMode(w, h, depth, sdlFlags);
+		//sdl = SDL_SetVideoMode(w, h, depth, sdlFlags);
 		rfbClientSetClientData(client, SDL_Init, sdl);
-		sdlPixels = sdl->pixels;
+		sdlPixels = (char*)sdl->pixels;
 		rowStride = sdl->pitch / (depth / 8);
 	}
 
@@ -450,4 +434,3 @@ static void setRealDimension(rfbClient *client, int w, int h)
 	realHeight = h;
 	update(client, 0, 0, client->width, client->height);
 }
-*/
