@@ -121,6 +121,8 @@ void DKVncClient::End()
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
+	DKLog("DKVncClient::resize()\n", DKINFO);
+
 	int width = client->width;
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
@@ -131,12 +133,13 @@ rfbBool DKVncClient::resize(rfbClient* client)
 
 	client->updateRect.x = client->updateRect.y = 0;
 	client->updateRect.w = width; client->updateRect.h = height;
-	rfbBool okay;// = SDL_VideoModeOK(width, height, depth, sdlFlags);
+	rfbBool okay = 1;//SDL_VideoModeOK(width, height, depth, sdlFlags);
 	if(!okay)
 		for(depth=24;!okay && depth>4;depth/=2)
 			//okay = SDL_VideoModeOK(width,height,depth,sdlFlags);
 	if(okay){
-		SDL_Surface* sdl;// = SDL_SetVideoMode(width, height, depth, sdlFlags);
+		//SDL_Surface* sdl = SDL_SetVideoMode(width, height, depth, sdlFlags);
+		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 		rfbClientSetClientData(client, SDL_Init, sdl);
 		client->width = sdl->pitch / (depth / 8);
 		if(sdlPixels){
@@ -155,8 +158,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	}
 	else{
 		SDL_Surface* sdl;// = rfbClientGetClientData(client, SDL_Init);
-		rfbClientLog("Could not set resolution %dx%d!\n",
-			client->width,client->height);
+		rfbClientLog("Could not set resolution %dx%d!\n", client->width,client->height);
 		if(sdl) {
 			client->width=sdl->pitch / (depth / 8);
 			client->height=sdl->h;
@@ -199,8 +201,11 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 
 	//Now render the texture target to our screen, but upside down
 	SDL_RenderClear(dkSdlWindow->sdlren);
-	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_VERTICAL);
+	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(dkSdlWindow->sdlren);
+
+	//Cleanup
+	SDL_DestroyTexture(tex);
 }
 
 /////////////////////////////////////////////////////////////
