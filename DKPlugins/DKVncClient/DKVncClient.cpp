@@ -29,6 +29,7 @@ int DKVncClient::enableResizable, DKVncClient::viewOnly, DKVncClient::listenLoop
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
 char* DKVncClient::sdlPixels;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
+DKSDLWindow* DKVncClient::dkSdlWindow;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -174,6 +175,8 @@ rfbBool DKVncClient::resize(rfbClient* client)
 ///////////////////////////////////////////////////////////////
 void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h) 
 {
+	//DKLog("DKVncClient::update\n", DKINFO);
+
 	if(sdlPixels){
 		resizeRectangleToReal(cl, x, y, w, h);
 		w = ((x + w) * realWidth - 1) / cl->width + 1;
@@ -184,6 +187,20 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 		h -= y;
 	}
 	//SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
+	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, w, h);
+	
+	//Now render to the texture
+	SDL_SetRenderTarget(dkSdlWindow->sdlren, tex);
+	SDL_RenderClear(dkSdlWindow->sdlren);
+
+	//copy data here
+	SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)rfbClientGetClientData(cl, SDL_Init), NULL, NULL);
+	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+
+	//Now render the texture target to our screen, but upside down
+	SDL_RenderClear(dkSdlWindow->sdlren);
+	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_VERTICAL);
+	SDL_RenderPresent(dkSdlWindow->sdlren);
 }
 
 /////////////////////////////////////////////////////////////

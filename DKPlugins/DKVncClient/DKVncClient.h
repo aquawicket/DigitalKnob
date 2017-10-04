@@ -6,9 +6,6 @@
 #include <rfb/rfbclient.h>
 
 
-
-
-
 /////////////////////////////////////////////////
 class DKVncClient : public DKObjectT<DKVncClient>
 {
@@ -28,7 +25,7 @@ public:
 	static void setRealDimension(rfbClient *client, int w, int h);
 	static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e);
 
-	DKSDLWindow* dkSdlWindow;
+	static DKSDLWindow* dkSdlWindow;
 	rfbClient* cl;
 	static int enableResizable, viewOnly, listenLoop, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
