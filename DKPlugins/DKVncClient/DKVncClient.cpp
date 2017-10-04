@@ -6,9 +6,10 @@
 
 #include "SDL.h"
 #include <signal.h>
-#include <rfb/rfbclient.h>
 #include <client_examples/scrap.h>
 
+static int enableResizable = 1, viewOnly, listenLoop, buttonMask;
+/*
 struct { int sdl; int rfb; } buttonMapping[]={
 	{1, rfbButton1Mask},
 	{2, rfbButton2Mask},
@@ -18,7 +19,6 @@ struct { int sdl; int rfb; } buttonMapping[]={
 	{0,0}
 };
 
-static int enableResizable = 1, viewOnly, listenLoop, buttonMask;
 #ifdef SDL_ASYNCBLIT
 	int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
 #else
@@ -38,18 +38,20 @@ static void resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h);
 static uint32_t get(rfbClient *cl, int x, int y);
 static void put(int x, int y, uint32_t v);
 static void setRealDimension(rfbClient *client, int w, int h);
+*/
 
 ////////////////////////
 void DKVncClient::Init()
 {
-	rfbClient* cl;
+	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+
 	int i, j;
 	SDL_Event e;
 
 #ifdef LOG_TO_FILE
 	rfbClientLog=rfbClientErr=log_to_file;
 #endif
-	for (i = 1, j = 1; i < DKApp::argc; i++)
+	for(i = 1, j = 1; i < DKApp::argc; i++)
 		if (!strcmp(DKApp::argv[i], "-viewonly"))
 			viewOnly = 1;
 		else if (!strcmp(DKApp::argv[i], "-resizable"))
@@ -68,6 +70,7 @@ void DKVncClient::Init()
 		}
 		DKApp::argc = j;
 
+/*
 		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE);
 		SDL_EnableUNICODE(1);
 		SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
@@ -75,8 +78,8 @@ void DKVncClient::Init()
 		signal(SIGINT, exit);
 		
 		do{
-			/* 16-bit: cl=rfbGetClient(5,3,2); */
-			cl=rfbGetClient(8,3,4);
+			// 16-bit: cl = rfbGetClient(5,3,2);
+			cl = rfbGetClient(8,3,4);
 			cl->MallocFrameBuffer = resize;
 			cl->canHandleNewFBSize = TRUE;
 			cl->GotFrameBufferUpdate = update;
@@ -86,7 +89,7 @@ void DKVncClient::Init()
 			cl->listenPort = LISTEN_PORT_OFFSET;
 			cl->listen6Port = LISTEN_PORT_OFFSET;
 			if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
-				cl = NULL; /* rfbInitClient has already freed the client struct */
+				cl = NULL; // rfbInitClient has already freed the client struct
 				cleanup(cl);
 				break;
 			}
@@ -95,10 +98,8 @@ void DKVncClient::Init()
 
 			while(1){
 				if(SDL_PollEvent(&e)){
-					/*
-					handleSDLEvent() return 0 if user requested window close.
-					In this case, handleSDLEvent() will have called cleanup().
-					*/
+					//handleSDLEvent() return 0 if user requested window close.
+					//In this case, handleSDLEvent() will have called cleanup().
 					if(!handleSDLEvent(cl, &e)){
 						break;
 					}
@@ -119,6 +120,7 @@ void DKVncClient::Init()
 			}
 		}
 		while(listenLoop);
+*/
 }
 
 ///////////////////////
@@ -127,6 +129,7 @@ void DKVncClient::End()
 
 }
 
+/*
 ////////////////////////////////////////
 static rfbBool resize(rfbClient* client) 
 {
@@ -197,7 +200,7 @@ static void update(rfbClient* cl,int x,int y,int w,int h)
 ///////////////////////////////////////////////////////
 static void kbd_leds(rfbClient* cl, int value, int pad)
 {
-	/* note: pad is for future expansion 0=unused */
+	// note: pad is for future expansion 0=unused
 	fprintf(stderr,"Led State= 0x%02X\n", value);
 	fflush(stderr);
 }
@@ -232,10 +235,8 @@ static void got_selection(rfbClient *cl, const char *text, int len)
 //////////////////////////////////
 static void cleanup(rfbClient* cl)
 {
-	/*
-	just in case we're running in listenLoop:
-	close viewer window by restarting SDL video subsystem
-	*/
+	//just in case we're running in listenLoop:
+	//close viewer window by restarting SDL video subsystem
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
 	if(cl)
@@ -449,3 +450,4 @@ static void setRealDimension(rfbClient *client, int w, int h)
 	realHeight = h;
 	update(client, 0, 0, client->width, client->height);
 }
+*/
