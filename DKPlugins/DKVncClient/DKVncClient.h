@@ -7,14 +7,7 @@
 
 
 
-struct { int sdl; int rfb; } buttonMapping[]={
-	{1, rfbButton1Mask},
-	{2, rfbButton2Mask},
-	{3, rfbButton3Mask},
-	{4, rfbButton4Mask},
-	{5, rfbButton5Mask},
-	{0,0}
-};
+
 
 /////////////////////////////////////////////////
 class DKVncClient : public DKObjectT<DKVncClient>

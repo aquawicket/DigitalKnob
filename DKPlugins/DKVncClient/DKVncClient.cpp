@@ -8,8 +8,6 @@
 #include <signal.h>
 //#include "scrap.h"
 
-
-
 /*
 #ifdef SDL_ASYNCBLIT
 int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
@@ -17,6 +15,20 @@ int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
 int sdlFlags = SDL_HWSURFACE | SDL_HWACCEL;
 #endif
 */
+
+struct { int sdl; int rfb; } buttonMapping[]={
+	{1, rfbButton1Mask},
+	{2, rfbButton2Mask},
+	{3, rfbButton3Mask},
+	{4, rfbButton4Mask},
+	{5, rfbButton5Mask},
+	{0,0}
+};
+
+int DKVncClient::enableResizable, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
+int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
+char* DKVncClient::sdlPixels;
+int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 
 ////////////////////////
 void DKVncClient::Init()
