@@ -121,30 +121,29 @@ void DKVncClient::End()
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
-/*
 	int width = client->width;
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
 
 	if(enableResizable){
-		sdlFlags |= SDL_RESIZABLE;
+		//sdlFlags |= SDL_RESIZABLE;
 	}
 
 	client->updateRect.x = client->updateRect.y = 0;
 	client->updateRect.w = width; client->updateRect.h = height;
-	rfbBool okay = SDL_VideoModeOK(width, height, depth, sdlFlags);
+	rfbBool okay;// = SDL_VideoModeOK(width, height, depth, sdlFlags);
 	if(!okay)
 		for(depth=24;!okay && depth>4;depth/=2)
-			okay=SDL_VideoModeOK(width,height,depth,sdlFlags);
+			//okay = SDL_VideoModeOK(width,height,depth,sdlFlags);
 	if(okay){
-		SDL_Surface* sdl = SDL_SetVideoMode(width, height, depth, sdlFlags);
+		SDL_Surface* sdl;// = SDL_SetVideoMode(width, height, depth, sdlFlags);
 		rfbClientSetClientData(client, SDL_Init, sdl);
 		client->width = sdl->pitch / (depth / 8);
 		if(sdlPixels){
 			free(client->frameBuffer);
 			sdlPixels = NULL;
 		}
-		client->frameBuffer = sdl->pixels;
+		client->frameBuffer = (uint8_t*)sdl->pixels;
 		client->format.bitsPerPixel = depth;
 		client->format.redShift = sdl->format->Rshift;
 		client->format.greenShift = sdl->format->Gshift;
@@ -155,20 +154,21 @@ rfbBool DKVncClient::resize(rfbClient* client)
 		SetFormatAndEncodings(client);
 	}
 	else{
-		SDL_Surface* sdl = rfbClientGetClientData(client, SDL_Init);
+		SDL_Surface* sdl;// = rfbClientGetClientData(client, SDL_Init);
 		rfbClientLog("Could not set resolution %dx%d!\n",
 			client->width,client->height);
 		if(sdl) {
 			client->width=sdl->pitch / (depth / 8);
 			client->height=sdl->h;
-		} else {
+		} 
+		else{
 			client->width=0;
 			client->height=0;
 		}
 		return FALSE;
 	}
-	SDL_WM_SetCaption(client->desktopName, "SDL");
-*/
+	//SDL_WM_SetCaption(client->desktopName, "SDL");
+
 	return TRUE;
 }
 
@@ -342,11 +342,9 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	case SDL_SYSWMEVENT:
 		//clipboard_filter(e);
 		break;
-	/*
-	case SDL_VIDEORESIZE:
-		setRealDimension(cl, e->resize.w, e->resize.h);
+	case SDL_WINDOWEVENT_RESIZED || SDL_WINDOWEVENT_SIZE_CHANGED:
+		setRealDimension(cl, e->window.data1, e->window.data2);
 		break;
-	*/
 	default:
 		rfbClientLog("ignore SDL event: 0x%x\n", e->type);
 	}
