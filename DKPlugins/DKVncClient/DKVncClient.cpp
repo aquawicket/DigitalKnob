@@ -272,7 +272,7 @@ void DKVncClient::cleanup(rfbClient* cl)
 ////////////////////////////////////////////////////////////////
 rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 {
-	DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
+	//DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
 
 	switch(e->type) {
 /*
