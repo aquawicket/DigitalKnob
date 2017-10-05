@@ -25,9 +25,9 @@ struct { int sdl; int rfb; } buttonMapping[]={
 	{0,0}
 };
 
-int DKVncClient::enableResizable, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
+int DKVncClient::enableResizable = 1, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
-char* DKVncClient::sdlPixels;
+//char* DKVncClient::sdlPixels;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 
@@ -127,9 +127,9 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
 
-	if(enableResizable){
-		//sdlFlags |= SDL_RESIZABLE;
-	}
+	//if(enableResizable){
+	//	sdlFlags |= SDL_RESIZABLE;
+	//}
 
 	client->updateRect.x = client->updateRect.y = 0;
 	client->updateRect.w = width; client->updateRect.h = height;
@@ -142,9 +142,9 @@ rfbBool DKVncClient::resize(rfbClient* client)
 		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 		rfbClientSetClientData(client, SDL_Init, sdl);
 		client->width = sdl->pitch / (depth / 8);
-		if(sdlPixels){
+		if(sdl->pixels){
 			free(client->frameBuffer);
-			sdlPixels = NULL;
+			sdl->pixels = NULL;
 		}
 		client->frameBuffer = (uint8_t*)sdl->pixels;
 		client->format.bitsPerPixel = depth;
@@ -179,7 +179,8 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 {
 	//DKLog("DKVncClient::update\n", DKINFO);
 
-	if(sdlPixels){
+	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	if(sdl->pixels){
 		resizeRectangleToReal(cl, x, y, w, h);
 		w = ((x + w) * realWidth - 1) / cl->width + 1;
 		h = ((y + h) * realHeight - 1) / cl->height + 1;
@@ -293,7 +294,8 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 					break;
 				}
 		}
-		if (sdlPixels) {
+		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+		if(sdl->pixels) {
 			x = x * cl->width / realWidth;
 			y = y * cl->height / realHeight;
 		}
@@ -411,10 +413,11 @@ uint32_t DKVncClient::get(rfbClient *cl, int x, int y)
 ///////////////////////////////////////////////
 void DKVncClient::put(int x, int y, uint32_t v)
 {
+	SDL_Surface* sdl;
 	switch (bytesPerPixel) {
-	case 1: ((uint8_t *)sdlPixels)[x + y * rowStride] = v; break;
-	case 2: ((uint16_t *)sdlPixels)[x + y * rowStride] = v; break;
-	case 4: ((uint32_t *)sdlPixels)[x + y * rowStride] = v; break;
+	case 1: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint8_t *)sdl->pixels)[x + y * rowStride] = v; break;
+	case 2: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint16_t *)sdl->pixels)[x + y * rowStride] = v; break;
+	case 4: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint32_t *)sdl->pixels)[x + y * rowStride] = v; break;
 	default:
 		rfbClientErr("Unknown bytes/pixel: %d", bytesPerPixel);
 		exit(1);
@@ -437,10 +440,11 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 	if (w == realWidth && h == realHeight)
 		return;
 
-	if (!sdlPixels) {
+	sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); 
+	if (!sdl->pixels) {
 		int size;
 
-		sdlPixels = (char *)client->frameBuffer;
+		sdl->pixels = (char *)client->frameBuffer;
 		rowStride = client->width;
 
 		bytesPerPixel = client->format.bitsPerPixel / 8;
@@ -450,7 +454,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 			rfbClientErr("Could not allocate %d bytes", size);
 			exit(1);
 		}
-		memcpy(client->frameBuffer, sdlPixels, size);
+		memcpy(client->frameBuffer, sdl->pixels, size);
 	}
 
 	sdl = (SDL_Surface*)rfbClientGetClientData(client, SDL_Init);
@@ -458,7 +462,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 		int depth = sdl->format->BitsPerPixel;
 		//sdl = SDL_SetVideoMode(w, h, depth, sdlFlags);
 		rfbClientSetClientData(client, SDL_Init, sdl);
-		sdlPixels = (char*)sdl->pixels;
+		sdl->pixels = (char*)sdl->pixels;
 		rowStride = sdl->pitch / (depth / 8);
 	}
 
