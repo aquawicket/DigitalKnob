@@ -148,7 +148,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 		rfbClientSetClientData(client, SDL_Init, sdl);
 		client->width = sdl->pitch / (depth / 8);
-		if(sdl->pixels){
+		if(!sdl->pixels){
 			free(client->frameBuffer);
 			sdl->pixels = NULL;
 		}
@@ -186,6 +186,8 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 	//DKLog("DKVncClient::update\n", DKINFO);
 
 	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+
+	/*
 	if(sdl->pixels){
 		resizeRectangleToReal(cl, x, y, w, h);
 		w = ((x + w) * realWidth - 1) / cl->width + 1;
@@ -195,20 +197,29 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 		w -= x;
 		h -= y;
 	}
+	*/
+
 	//SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
-	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, w, h);
+	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 	
 	//Now render to the texture
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, tex);
 	SDL_RenderClear(dkSdlWindow->sdlren);
 
 	//copy data here
-	SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)rfbClientGetClientData(cl, SDL_Init), NULL, NULL);
-	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-
+	void* data = rfbClientGetClientData(cl, SDL_Init);
+	SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)data, NULL, NULL);
+	
 	//Now render the texture target to our screen, but upside down
+	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+	SDL_SetRenderDrawColor(dkSdlWindow->sdlren, 0, 0, 0, 255);
 	SDL_RenderClear(dkSdlWindow->sdlren);
+
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+
+	SDL_SetRenderDrawColor(dkSdlWindow->sdlren, 242, 242, 242, 255);
+	SDL_RenderDrawLine(dkSdlWindow->sdlren, 0, 0, 1000, 1000);
+
 	SDL_RenderPresent(dkSdlWindow->sdlren);
 
 	//Cleanup
@@ -366,7 +377,7 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 		//clipboard_filter(e);
 		break;
 	case SDL_WINDOWEVENT_RESIZED || SDL_WINDOWEVENT_SIZE_CHANGED:
-		setRealDimension(cl, e->window.data1, e->window.data2);
+		//setRealDimension(cl, e->window.data1, e->window.data2);
 		break;
 	default:
 		rfbClientLog("ignore SDL event: 0x%x\n", e->type);
@@ -378,6 +389,10 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 void DKVncClient::resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h)
 {
 	DKLog("DKVncClient::resizeRectangleToReal()\n", DKINFO);
+	
+	if(!realWidth || !realHeight){
+		return;
+	}
 
 	int i0 = x * realWidth / cl->width;
 	int i1 = ((x + w) * realWidth - 1) / cl->width + 1;
