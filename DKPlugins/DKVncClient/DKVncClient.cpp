@@ -25,7 +25,7 @@ struct { int sdl; int rfb; } buttonMapping[]={
 	{0,0}
 };
 
-int DKVncClient::enableResizable = 1, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
+int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
 //char* DKVncClient::sdlPixels;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
@@ -76,14 +76,14 @@ void DKVncClient::Init()
 		do{
 			// 16-bit: cl = rfbGetClient(5,3,2);
 			cl = rfbGetClient(8,3,4);
-			cl->MallocFrameBuffer = DKVncClient::resize;
-			cl->canHandleNewFBSize = TRUE;
+			//cl->MallocFrameBuffer = DKVncClient::resize;
+			//cl->canHandleNewFBSize = TRUE;
 			cl->GotFrameBufferUpdate = DKVncClient::update;
-			cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
-			cl->HandleTextChat = DKVncClient::text_chat;
-			cl->GotXCutText = DKVncClient::got_selection;
-			cl->listenPort = LISTEN_PORT_OFFSET;
-			cl->listen6Port = LISTEN_PORT_OFFSET;
+			//cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
+			//cl->HandleTextChat = DKVncClient::text_chat;
+			//cl->GotXCutText = DKVncClient::got_selection;
+			//cl->listenPort = LISTEN_PORT_OFFSET;
+			//cl->listen6Port = LISTEN_PORT_OFFSET;
 			if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 				cl = NULL; // rfbInitClient has already freed the client struct
 				cleanup(cl);
@@ -180,10 +180,10 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	return TRUE;
 }
 
-///////////////////////////////////////////////////////////////
-void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h) 
+///////////////////////////////////////////////////////////////////
+void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) 
 {
-	//DKLog("DKVncClient::update\n", DKINFO);
+	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 
 	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 
@@ -207,8 +207,16 @@ void DKVncClient::update(rfbClient* cl,int x,int y,int w,int h)
 	SDL_RenderClear(dkSdlWindow->sdlren);
 
 	//copy data here
-	void* data = rfbClientGetClientData(cl, SDL_Init);
-	SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)data, NULL, NULL);
+	unsigned char * texture_data = NULL;
+	int texture_pitch = 0;
+	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
+		//copies whole buffer to sdl texture
+		std::memcpy(texture_data, cl->frameBuffer, cl->width * cl->height * 4);
+		SDL_UnlockTexture(tex);
+	}
+	//DKLog(toString(sizeof(cl->frameBuffer))+"\n", DKINFO);
+	//void* data = cl->frameBuffer; //rfbClientGetClientData(cl, SDL_Init);
+	//SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)data, NULL, NULL);
 	
 	//Now render the texture target to our screen, but upside down
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
@@ -321,6 +329,7 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 					break;
 				}
 		}
+		/*
 		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 		if(sdl->pixels) {
 			x = x * cl->width / realWidth;
@@ -328,6 +337,7 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 		}
 		SendPointerEvent(cl, x, y, buttonMask);
 		buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
+		*/
 		break;
 	}
 	case SDL_KEYUP:
