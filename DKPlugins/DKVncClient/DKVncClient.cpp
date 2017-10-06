@@ -200,7 +200,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	*/
 
 	//SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
-	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
+	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	
 	//Now render to the texture
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, tex);
