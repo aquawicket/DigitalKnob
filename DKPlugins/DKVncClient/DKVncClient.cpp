@@ -199,8 +199,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	}
 	*/
 
-	//SDL_UpdateRect(rfbClientGetClientData(cl, SDL_Init), x, y, w, h);
-	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	
 	//Now render to the texture
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, tex);
@@ -210,24 +209,14 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	unsigned char * texture_data = NULL;
 	int texture_pitch = 0;
 	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
-		//copies whole buffer to sdl texture
 		std::memcpy(texture_data, cl->frameBuffer, cl->width * cl->height * 4);
 		SDL_UnlockTexture(tex);
 	}
-	//DKLog(toString(sizeof(cl->frameBuffer))+"\n", DKINFO);
-	//void* data = cl->frameBuffer; //rfbClientGetClientData(cl, SDL_Init);
-	//SDL_RenderCopy(dkSdlWindow->sdlren, (SDL_Texture*)data, NULL, NULL);
 	
-	//Now render the texture target to our screen, but upside down
+	//Now render the texture target to our screen
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	SDL_SetRenderDrawColor(dkSdlWindow->sdlren, 0, 0, 0, 255);
 	SDL_RenderClear(dkSdlWindow->sdlren);
-
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
-
-	SDL_SetRenderDrawColor(dkSdlWindow->sdlren, 242, 242, 242, 255);
-	SDL_RenderDrawLine(dkSdlWindow->sdlren, 0, 0, 1000, 1000);
-
 	SDL_RenderPresent(dkSdlWindow->sdlren);
 
 	//Cleanup
