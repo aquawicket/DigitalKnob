@@ -3,7 +3,7 @@
 
 #include "DK/stdafx.h"
 #include "DKVncClient.h"
-
+#include "DK/DKFile.h"
 #include "SDL.h"
 #include <signal.h>
 //#include "scrap.h"
@@ -35,6 +35,10 @@ DKSDLWindow* DKVncClient::dkSdlWindow;
 void DKVncClient::Init()
 {
 	DKLog("DKVncClient::Init()\n", DKINFO);
+
+	DKString server_ip;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
+	if(server_ip.empty()){ server_ip = "127.0.0.1"; }
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	int width = 1280;
@@ -84,6 +88,8 @@ void DKVncClient::Init()
 			//cl->GotXCutText = DKVncClient::got_selection;
 			//cl->listenPort = LISTEN_PORT_OFFSET;
 			//cl->listen6Port = LISTEN_PORT_OFFSET;
+			cl->serverHost = (char*)server_ip.c_str();
+			DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 			if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 				cl = NULL; // rfbInitClient has already freed the client struct
 				cleanup(cl);
