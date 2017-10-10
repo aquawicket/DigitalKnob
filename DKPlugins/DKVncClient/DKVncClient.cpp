@@ -330,9 +330,9 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			x = x * cl->width / realWidth;
 			y = y * cl->height / realHeight;
 		}
+		*/
 		SendPointerEvent(cl, x, y, buttonMask);
 		buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
-		*/
 		break;
 	}
 	case SDL_KEYUP:
@@ -383,6 +383,9 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 		break;
 	case SDL_WINDOWEVENT_RESIZED || SDL_WINDOWEVENT_SIZE_CHANGED:
 		//setRealDimension(cl, e->window.data1, e->window.data2);
+		break;
+	case SDL_WINDOWEVENT:
+		//DKLog("SDL_WINDOWEVENT\n", DKINFO);
 		break;
 	default:
 		rfbClientLog("ignore SDL event: 0x%x\n", e->type);
