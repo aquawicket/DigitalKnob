@@ -324,13 +324,13 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 					break;
 				}
 		}
-		/*
+		
 		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 		if(sdl->pixels) {
-			x = x * cl->width / realWidth;
-			y = y * cl->height / realHeight;
+			x = x * cl->width / dkSdlWindow->width;// / realWidth;
+			y = y * cl->height / dkSdlWindow->height;// / realHeight;
 		}
-		*/
+		
 		SendPointerEvent(cl, x, y, buttonMask);
 		buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
 		break;
