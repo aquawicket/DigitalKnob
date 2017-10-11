@@ -20,13 +20,13 @@ ANDROID_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/obj/local/armeabi-v7a/libjpeg.a)
 ### COMPILE ###
 DKSETPATH(${JPEGTURBO}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEGTURBO})
-WIN32_VS_DEBUG(jpeg-6b jpeg.sln jpeg-static)
-WIN32_VS_RELEASE(jpeg-6b jpeg.sln jpeg-static)
+WIN32_VS_DEBUG(libjpeg-turbo-1.5.1 libjpeg-turbo.sln jpeg-static)
+WIN32_VS_RELEASE(libjpeg-turbo-1.5.1 libjpeg-turbo.sln jpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEGTURBO})
-WIN64_VS_DEBUG(jpeg-6b jpeg.sln jpeg-static)
-WIN64_VS_RELEASE(jpeg-6b jpeg.sln jpeg-static)
+WIN64_VS_DEBUG(jpeg-6b libjpeg-turbo.sln jpeg-static)
+WIN64_VS_RELEASE(jpeg-6b libjpeg-turbo.sln jpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${JPEGTURBO})
