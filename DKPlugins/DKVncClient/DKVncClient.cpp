@@ -46,6 +46,8 @@ void DKVncClient::Init()
 	dkSdlWindow->SetWidth(&width, NULL);
 	dkSdlWindow->SetHeight(&height, NULL);
 
+	SDL_SetEventFilter(NULL, NULL);
+
 	int i, j;
 	SDL_Event e;
 
@@ -325,11 +327,11 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 				}
 		}
 		
-		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-		if(sdl->pixels) {
+		//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+		//if(sdl->pixels) {
 			x = x * cl->width / dkSdlWindow->width;// / realWidth;
 			y = y * cl->height / dkSdlWindow->height;// / realHeight;
-		}
+		//}
 		
 		SendPointerEvent(cl, x, y, buttonMask);
 		buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
@@ -381,11 +383,22 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	case SDL_SYSWMEVENT:
 		//clipboard_filter(e);
 		break;
-	case SDL_WINDOWEVENT_RESIZED || SDL_WINDOWEVENT_SIZE_CHANGED:
-		setRealDimension(cl, e->window.data1, e->window.data2);
-		break;
 	case SDL_WINDOWEVENT:
 		//DKLog("SDL_WINDOWEVENT\n", DKINFO);
+		switch(e->window.event){
+			case SDL_WINDOWEVENT_RESIZED:{
+				dkSdlWindow->width = e->window.data1;
+				dkSdlWindow->height = e->window.data2;
+				update(cl, 0, 0, cl->width, cl->height);
+				return 1;
+			}
+			case SDL_WINDOWEVENT_SIZE_CHANGED:{
+				dkSdlWindow->width = e->window.data1;
+				dkSdlWindow->height = e->window.data2;
+				update(cl, 0, 0, cl->width, cl->height);
+				return 1;
+			}
+		}
 		break;
 	default:
 		rfbClientLog("ignored SDL event: 0x%x\n", e->type);
