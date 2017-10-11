@@ -1,6 +1,6 @@
 DKDEPEND(zlib-1.2.8)
 DKDEPEND(libpng-1.7.0beta34)
-##DKDEPEND(jpeg-6b)
+##DKDEPEND(libjpeg-turbo-1.5.1)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
