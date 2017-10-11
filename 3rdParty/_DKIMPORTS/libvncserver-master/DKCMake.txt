@@ -1,6 +1,6 @@
 DKDEPEND(zlib-1.2.8)
 DKDEPEND(libpng-1.7.0beta34)
-DKDEPEND(libjpeg-turbo-1.5.1)
+##DKDEPEND(libjpeg-turbo-1.5.1)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
@@ -28,7 +28,7 @@ ANDROID_RELEASE_LIB(${VNCSERVER}/${OS}/Release/obj/local/armeabi-v7a/libvncserve
 
 
 DKSETPATH(${VNCSERVER}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS} /I${JPEG}/${OS} /I${PNG}/${OS} /I${JPEGTURBO}/${OS}" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib -DPNG_PNG_INCLUDE_DIR=${PNG} -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/Debug/libpng17_staticd.lib -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/Release/libpng17_static.lib -DJPEG_INCLUDE_DIR=${JPEGTURBO} -DJPEG_LIBRARY=${JPEGTURBO}/${OS}/Release/turbojpeg-static.lib -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib ${VNCSERVER})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS} /I${JPEG}/${OS} /I${PNG}/${OS} /I${JPEGTURBO}/${OS}" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib -DPNG_PNG_INCLUDE_DIR=${PNG} -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/Debug/libpng17_staticd.lib -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/Release/libpng17_static.lib -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib ${VNCSERVER})
 WIN32_VS_DEBUG(libvncserver-master LibVNCServer.sln vncserver)
 WIN32_VS_RELEASE(libvncserver-master LibVNCServer.sln vncserver)
 WIN32_VS_DEBUG(libvncserver-master LibVNCServer.sln vncclient)
