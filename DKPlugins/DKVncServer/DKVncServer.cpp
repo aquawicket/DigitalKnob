@@ -83,8 +83,9 @@ void DKVncServer::End()
 ////////////////////////
 void DKVncServer::Loop()
 {
-	rfbProcessEvents(rfbScreen, 1);
-	DrawBuffer();
+	if(rfbProcessEvents(rfbScreen, 1)){
+		DrawBuffer();
+	}
 }
 
 //////////////////////////////
