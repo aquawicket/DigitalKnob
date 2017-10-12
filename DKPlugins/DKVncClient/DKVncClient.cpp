@@ -613,5 +613,6 @@ rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e)
 char* DKVncClient::password(rfbClient *cl)
 {
 	DKLog("DKVncClient::password()\n", DKINFO);
+	
 	return NULL;
 }
