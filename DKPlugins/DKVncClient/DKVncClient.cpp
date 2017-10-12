@@ -50,7 +50,12 @@ void DKVncClient::Init()
 		//cl = rfbGetClient(5,3,2); // 16-bit
 		cl = rfbGetClient(8,3,4); // 32-bit?
 		//cl->MallocFrameBuffer = DKVncClient::resize;
-		cl->appData.encodingsString = "ultra";
+		//cl->appData.encodingsString = "tight zrle ultra hextile zlib corre rre raw";
+		cl->appData.encodingsString = "ultra hextile zlib corre rre raw";
+		cl->appData.compressLevel = 3;
+		cl->appData.enableJPEG = TRUE;
+		cl->appData.qualityLevel = 1;
+		cl->appData.useRemoteCursor = true;
 		cl->canHandleNewFBSize = TRUE;
 		cl->GotFrameBufferUpdate = DKVncClient::update;
 		cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
