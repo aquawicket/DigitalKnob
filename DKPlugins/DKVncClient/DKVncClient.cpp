@@ -1,20 +1,10 @@
 //see: digitalknob/3rdParty/libvncserver-master/client_examples/SDLvncviewer.c
-//FIXME: convert to SDL2 compatable 
 
 #include "DK/stdafx.h"
 #include "DKVncClient.h"
 #include "DK/DKFile.h"
 #include "SDL.h"
 #include <signal.h>
-//#include "scrap.h"
-
-/*
-#ifdef SDL_ASYNCBLIT
-int sdlFlags = SDL_HWSURFACE | SDL_ASYNCBLIT | SDL_HWACCEL;
-#else
-int sdlFlags = SDL_HWSURFACE | SDL_HWACCEL;
-#endif
-*/
 
 struct { int sdl; int rfb; } buttonMapping[]={
 	{1, rfbButton1Mask},
@@ -27,7 +17,6 @@ struct { int sdl; int rfb; } buttonMapping[]={
 
 int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
-//char* DKVncClient::sdlPixels;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 
@@ -39,6 +28,9 @@ void DKVncClient::Init()
 	DKString server_ip;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
 	if(server_ip.empty()){ server_ip = "127.0.0.1"; }
+	DKString server_port;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PORT]", server_port);
+	if(server_port.empty()){ server_port = "5900"; }
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	int width = 1280;
@@ -54,7 +46,19 @@ void DKVncClient::Init()
 #ifdef LOG_TO_FILE
 	rfbClientLog=rfbClientErr=log_to_file;
 #endif
-	for(i = 1, j = 1; i < DKApp::argc; i++)
+	//printf(toString(DKApp::argc).c_str(), DKApp::argv);
+
+	//FIXEME
+	/*
+	std::vector<char*> new_argv(DKApp::argv, DKApp::argv + DKApp::argc);
+	new_argv.push_back("-app_ver");
+	new_argv.push_back(nullptr); // or NULL if you are using an old compiler
+	DKApp::argv = &new_argv[0]; // or &new_argv[0] if you are using an old compiler
+	DKApp::argc = DKApp::argc + 1;
+	*/
+
+	/*
+	for(i = 1, j = 1; i < DKApp::argc; i++){
 		if (!strcmp(DKApp::argv[i], "-viewonly"))
 			viewOnly = 1;
 		else if (!strcmp(DKApp::argv[i], "-resizable"))
@@ -71,59 +75,63 @@ void DKVncClient::Init()
 				DKApp::argv[j] = DKApp::argv[i];
 			j++;
 		}
-		DKApp::argc = j;
+	}
+	DKApp::argc = j;
+	*/
 
-		//SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE);
-		//SDL_EnableUNICODE(1);
-		//SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-		atexit(SDL_Quit);
-		signal(SIGINT, exit);
+	printf(toString(DKApp::argc).c_str(), DKApp::argv);
 
-		do{
-			// 16-bit: cl = rfbGetClient(5,3,2);
-			cl = rfbGetClient(8,3,4);
-			//cl->MallocFrameBuffer = DKVncClient::resize;
-			cl->canHandleNewFBSize = TRUE;
-			cl->GotFrameBufferUpdate = DKVncClient::update;
-			cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
-			cl->HandleTextChat = DKVncClient::text_chat;
-			cl->GotXCutText = DKVncClient::got_selection;
-			cl->listenPort = LISTEN_PORT_OFFSET;
-			cl->listen6Port = LISTEN_PORT_OFFSET;
-			cl->serverHost = (char*)server_ip.c_str();
-			DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
-			if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
-				cl = NULL; // rfbInitClient has already freed the client struct
-				cleanup(cl);
-				break;
-			}
+	atexit(SDL_Quit);
+	signal(SIGINT, exit);
 
-			//init_scrap();
+	do{
+		//cl = rfbGetClient(5,3,2); // 16-bit
+		cl = rfbGetClient(8,3,4); // 32-bit?
+		//cl->MallocFrameBuffer = DKVncClient::resize;
+		cl->canHandleNewFBSize = TRUE;
+		cl->GotFrameBufferUpdate = DKVncClient::update;
+		cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
+		cl->HandleTextChat = DKVncClient::text_chat;
+		cl->GotXCutText = DKVncClient::got_selection;
+		cl->listenPort = LISTEN_PORT_OFFSET;
+		cl->listen6Port = LISTEN_PORT_OFFSET;
+		cl->serverHost = (char*)server_ip.c_str();
+		cl->serverPort = toInt(server_port);
+		DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
+		if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
+			cl = NULL; // rfbInitClient has already freed the client struct
+			cleanup(cl);
+			break;
+		}
 
-			while(1){
-				if(SDL_PollEvent(&e)){
-					//handleSDLEvent() return 0 if user requested window close.
-					//In this case, handleSDLEvent() will have called cleanup().
-					if(!handleSDLEvent(cl, &e)){
-						break;
-					}
+		//Display extra info
+		DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
+		DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
+		
+		while(1){
+			if(SDL_PollEvent(&e)){
+				//handleSDLEvent() return 0 if user requested window close.
+				//In this case, handleSDLEvent() will have called cleanup().
+				if(!handleSDLEvent(cl, &e)){
+					break;
 				}
-				else{
-					i=WaitForMessage(cl,500);
-					if(i<0){
+			}
+			else{
+				i=WaitForMessage(cl,500);
+				if(i<0){
+					cleanup(cl);
+					break;
+				}
+				if(i){
+					if(!HandleRFBServerMessage(cl)){
 						cleanup(cl);
 						break;
-					}
-					if(i){
-						if(!HandleRFBServerMessage(cl)){
-							cleanup(cl);
-							break;
-						}
 					}
 				}
 			}
 		}
-		while(listenLoop);
+	}
+	while(listenLoop);
 }
 
 ///////////////////////

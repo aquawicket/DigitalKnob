@@ -30,7 +30,6 @@ public:
 	rfbClient* cl;
 	static int enableResizable, viewOnly, listenLoop, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
-	//static char *sdlPixels;
 	static int rightAltKeyDown, leftAltKeyDown;
 };
 
