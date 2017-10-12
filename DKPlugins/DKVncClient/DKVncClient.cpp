@@ -43,44 +43,6 @@ void DKVncClient::Init()
 	int i, j;
 	SDL_Event e;
 
-#ifdef LOG_TO_FILE
-	rfbClientLog=rfbClientErr=log_to_file;
-#endif
-	//printf(toString(DKApp::argc).c_str(), DKApp::argv);
-
-	//FIXEME
-	/*
-	std::vector<char*> new_argv(DKApp::argv, DKApp::argv + DKApp::argc);
-	new_argv.push_back("-app_ver");
-	new_argv.push_back(nullptr); // or NULL if you are using an old compiler
-	DKApp::argv = &new_argv[0]; // or &new_argv[0] if you are using an old compiler
-	DKApp::argc = DKApp::argc + 1;
-	*/
-
-	/*
-	for(i = 1, j = 1; i < DKApp::argc; i++){
-		if (!strcmp(DKApp::argv[i], "-viewonly"))
-			viewOnly = 1;
-		else if (!strcmp(DKApp::argv[i], "-resizable"))
-			enableResizable = 1;
-		else if (!strcmp(DKApp::argv[i], "-no-resizable"))
-			enableResizable = 0;
-		else if (!strcmp(DKApp::argv[i], "-listen")) {
-			listenLoop = 1;
-			DKApp::argv[i] = "-listennofork";
-			++j;
-		}
-		else {
-			if (i != j)
-				DKApp::argv[j] = DKApp::argv[i];
-			j++;
-		}
-	}
-	DKApp::argc = j;
-	*/
-
-	printf(toString(DKApp::argc).c_str(), DKApp::argv);
-
 	atexit(SDL_Quit);
 	signal(SIGINT, exit);
 
@@ -88,6 +50,7 @@ void DKVncClient::Init()
 		//cl = rfbGetClient(5,3,2); // 16-bit
 		cl = rfbGetClient(8,3,4); // 32-bit?
 		//cl->MallocFrameBuffer = DKVncClient::resize;
+		cl->appData.encodingsString = "ultra";
 		cl->canHandleNewFBSize = TRUE;
 		cl->GotFrameBufferUpdate = DKVncClient::update;
 		cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
