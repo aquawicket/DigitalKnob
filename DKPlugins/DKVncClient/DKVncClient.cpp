@@ -65,6 +65,7 @@ void DKVncClient::Init()
 		cl->listen6Port = LISTEN_PORT_OFFSET;
 		cl->serverHost = (char*)server_ip.c_str();
 		cl->serverPort = toInt(server_port);
+		cl->GetPassword = DKVncClient::password;
 		DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 		if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 			cl = NULL; // rfbInitClient has already freed the client struct
@@ -606,4 +607,11 @@ rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e)
 	}
 
 	return k;
+}
+
+//////////////////////////////////////////
+char* DKVncClient::password(rfbClient *cl)
+{
+	DKLog("DKVncClient::password()\n", DKINFO);
+	return NULL;
 }
