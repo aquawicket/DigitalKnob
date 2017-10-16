@@ -19,6 +19,7 @@ int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::listen
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
+const char* DKVncClient::pass;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -31,6 +32,9 @@ void DKVncClient::Init()
 	DKString server_port;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PORT]", server_port);
 	if(server_port.empty()){ server_port = "5900"; }
+	DKString server_password;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", server_password);
+	pass = server_password.c_str();
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	int width = 1280;
@@ -40,7 +44,7 @@ void DKVncClient::Init()
 
 	SDL_SetEventFilter(NULL, NULL);
 
-	int i, j;
+	int i;
 	SDL_Event e;
 
 	atexit(SDL_Quit);
@@ -614,5 +618,5 @@ char* DKVncClient::password(rfbClient *cl)
 {
 	DKLog("DKVncClient::password()\n", DKINFO);
 	
-	return NULL;
+	return (char*)pass;
 }
