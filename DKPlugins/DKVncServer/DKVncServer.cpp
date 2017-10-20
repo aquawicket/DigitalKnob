@@ -46,7 +46,7 @@ void DKVncServer::Init()
 	XMapWindow(disp, root);
 #endif
 
-	capture = "GDI";
+	capture = "GDI"; //"DIRECTX";
 	HWND desktop = GetDesktopWindow();
 	RECT size;
 	int desktopWidth;
@@ -225,18 +225,45 @@ void DKVncServer::DrawBuffer()
 
 		if(shots != nullptr){
 			for (UINT i = 0; i < count; i++){
-				delete shots[i];
+				//delete shots[i];
 			}
-			delete[] shots;
+			//delete[] shots;
 		}
 		// save all screenshots
 		for(UINT i = 0; i < count; i++){
 			//WCHAR file[100];
-			//wsprintf(file, L"cap%i.png", i);
+			//wsprintf(file, "cap%i.png", i);
 			//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+			
+			HRESULT hr = S_OK;
+			IWICImagingFactory *factory = nullptr;
+			IWICBitmapEncoder *encoder = nullptr;
+			IWICBitmapFrameEncode *frame = nullptr;
+			IWICStream *stream = nullptr;
+			GUID pf = GUID_WICPixelFormat32bppPBGRA;
+			BOOL coInit = CoInitialize(nullptr);
+
+			HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
+			HRCHECK(factory->CreateStream(&stream));
+			std::wstring filename = toWString("test.png");
+			HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
+			//HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
+			HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
+			HRCHECK(encoder->Initialize(stream, WICBitmapEncoderNoCache));
+			HRCHECK(encoder->CreateNewFrame(&frame, nullptr)); // we don't use options here
+			HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
+			HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
+			HRCHECK(frame->SetPixelFormat(&pf));
+			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shots[i]));
+			HRCHECK(frame->Commit());
+			HRCHECK(encoder->Commit());
+
+			RELEASE(stream);
+			RELEASE(frame);
+			RELEASE(encoder);
+			RELEASE(factory);
 		}
 
-	//cleanup:
 		RELEASE(surface);
 		RELEASE(device);
 		RELEASE(d3d);
