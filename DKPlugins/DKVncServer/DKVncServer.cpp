@@ -261,8 +261,8 @@ void DKVncServer::DrawBuffer()
 			HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
 			HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
 			HRCHECK(frame->SetPixelFormat(&pf));
-			factory->CreateBitmapFlipRotator(&flip);
-			flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
+			//factory->CreateBitmapFlipRotator(&flip);
+			//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
 			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shot));
 			HRCHECK(frame->Commit());
 			HRCHECK(encoder->Commit());
