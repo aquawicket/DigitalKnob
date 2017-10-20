@@ -180,7 +180,8 @@ void DKVncServer::DrawBuffer()
 		D3DLOCKED_RECT rc;
 		UINT pitch;
 		SYSTEMTIME st;
-		LPBYTE *shots = nullptr;
+		//LPBYTE *shots = nullptr;
+		LPBYTE shot;
 		UINT adapter = D3DADAPTER_DEFAULT;
 
 		// init D3D and get screen size
@@ -204,46 +205,48 @@ void DKVncServer::DrawBuffer()
 		HRCHECK(surface->UnlockRect());
 
 		// allocate screenshots buffers
-		UINT count = 1;
-		shots = new LPBYTE[count];
-		for(UINT i = 0; i < count; i++){
-			shots[i] = new BYTE[pitch * mode.Height];
-		}
+		//UINT count = 1;
+		//shots = new LPBYTE[count];
+		//shot = new LPBYTE[1];
+		//for(UINT i = 0; i < count; i++){
+			//shots[i] = new BYTE[pitch * mode.Height];
+			shot = new BYTE[pitch * mode.Height];
+		//}
 
 		GetSystemTime(&st); // measure the time we spend doing <count> captures
 		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
-		for (UINT i = 0; i < count; i++)
-		{
+		//for (UINT i = 0; i < count; i++)
+		//{
 			// get the data
 			HRCHECK(device->GetFrontBufferData(0, surface));
 
 			// copy it into our buffers
 			HRCHECK(surface->LockRect(&rc, NULL, 0));
-			CopyMemory(shots[i], rc.pBits, rc.Pitch * mode.Height);
+			CopyMemory(shot, rc.pBits, rc.Pitch * mode.Height);
 			HRCHECK(surface->UnlockRect());
-		}
+		//}
 		GetSystemTime(&st);
 		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 
-		if(shots != nullptr){
-			for (UINT i = 0; i < count; i++){
+		//if(shots != nullptr){
+			//for (UINT i = 0; i < count; i++){
 				//delete shots[i];
-			}
+			//}
 			//delete[] shots;
-		}
+		//}
 		// save all screenshots
-		for(UINT i = 0; i < count; i++){
+		//for(UINT i = 0; i < count; i++){
 			//WCHAR file[100];
 			//wsprintf(file, "cap%i.png", i);
 			//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
 			
-			HRESULT hr = S_OK;
+			//HRESULT hr = S_OK;
 			IWICImagingFactory *factory = nullptr;
 			IWICBitmapEncoder *encoder = nullptr;
 			IWICBitmapFrameEncode *frame = nullptr;
 			IWICBitmapFlipRotator *flip = nullptr;
 			IWICStream *stream = nullptr;
-			GUID pf = GUID_WICPixelFormat32bppPBGRA;
+			GUID pf = GUID_WICPixelFormat32bppBGRA;
 			BOOL coInit = CoInitialize(nullptr);
 
 			HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
@@ -258,9 +261,9 @@ void DKVncServer::DrawBuffer()
 			HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
 			HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
 			HRCHECK(frame->SetPixelFormat(&pf));
-			//factory->CreateBitmapFlipRotator(&flip);
-			//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
-			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shots[i]));
+			factory->CreateBitmapFlipRotator(&flip);
+			flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
+			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shot));
 			HRCHECK(frame->Commit());
 			HRCHECK(encoder->Commit());
 
@@ -268,7 +271,7 @@ void DKVncServer::DrawBuffer()
 			RELEASE(frame);
 			RELEASE(encoder);
 			RELEASE(factory);
-		}
+		//}
 
 		RELEASE(surface);
 		RELEASE(device);
