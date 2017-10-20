@@ -40,13 +40,15 @@ DKString DKVncServer::capture;
 ////////////////////////
 void DKVncServer::Init()
 {
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
+	if(capture.empty()){ capture = "GDI"; } //DIRECT X
+
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
 	root = DefaultRootWindow(disp);
 	XMapWindow(disp, root);
 #endif
 
-	capture = "GDI"; //"DIRECTX";
 	HWND desktop = GetDesktopWindow();
 	RECT size;
 	int desktopWidth;
