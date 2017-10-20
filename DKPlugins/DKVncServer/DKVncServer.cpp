@@ -4,6 +4,7 @@
 
 #ifdef WIN32
 #define sleep Sleep
+
 #else
 #include <unistd.h>
 #include <X11/Xlib.h>
@@ -162,6 +163,83 @@ void DKVncServer::DrawBuffer()
 		DeleteDC(buffer_dc);
 		DeleteObject(dest_dc);
 		delete buffer;
+	}
+	else if(capture == "DIRECTX"){
+		//TODO
+		//FIXME
+		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
+
+		HRESULT hr = S_OK;
+		IDirect3D9 *d3d = nullptr;
+		IDirect3DDevice9 *device = nullptr;
+		IDirect3DSurface9 *surface = nullptr;
+		D3DPRESENT_PARAMETERS parameters = { 0 };
+		D3DDISPLAYMODE mode;
+		D3DLOCKED_RECT rc;
+		UINT pitch;
+		SYSTEMTIME st;
+		LPBYTE *shots = nullptr;
+		UINT adapter = 0;
+
+		// init D3D and get screen size
+		d3d = Direct3DCreate9(D3D_SDK_VERSION);
+		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
+
+		parameters.Windowed = TRUE;
+		parameters.BackBufferCount = 1;
+		parameters.BackBufferHeight = mode.Height;
+		parameters.BackBufferWidth = mode.Width;
+		parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
+		parameters.hDeviceWindow = NULL;
+
+		// create device & capture surface
+		HRCHECK(d3d->CreateDevice(adapter, D3DDEVTYPE_HAL, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &parameters, &device));
+		HRCHECK(device->CreateOffscreenPlainSurface(mode.Width, mode.Height, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &surface, nullptr));
+
+		// compute the required buffer size
+		HRCHECK(surface->LockRect(&rc, NULL, 0));
+		pitch = rc.Pitch;
+		HRCHECK(surface->UnlockRect());
+
+		// allocate screenshots buffers
+		UINT count = 1;
+		shots = new LPBYTE[count];
+		for(UINT i = 0; i < count; i++){
+			shots[i] = new BYTE[pitch * mode.Height];
+		}
+
+		GetSystemTime(&st); // measure the time we spend doing <count> captures
+		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+		for (UINT i = 0; i < count; i++)
+		{
+			// get the data
+			HRCHECK(device->GetFrontBufferData(0, surface));
+
+			// copy it into our buffers
+			HRCHECK(surface->LockRect(&rc, NULL, 0));
+			CopyMemory(shots[i], rc.pBits, rc.Pitch * mode.Height);
+			HRCHECK(surface->UnlockRect());
+		}
+		GetSystemTime(&st);
+		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+
+		if(shots != nullptr){
+			for (UINT i = 0; i < count; i++){
+				delete shots[i];
+			}
+			delete[] shots;
+		}
+		// save all screenshots
+		for(UINT i = 0; i < count; i++){
+			//WCHAR file[100];
+			//wsprintf(file, L"cap%i.png", i);
+			//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+		}
+
+	//cleanup:
+		RELEASE(surface);
+		RELEASE(device);
+		RELEASE(d3d);
 	}
 #endif
 
