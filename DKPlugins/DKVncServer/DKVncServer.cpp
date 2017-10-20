@@ -181,7 +181,7 @@ void DKVncServer::DrawBuffer()
 		UINT pitch;
 		SYSTEMTIME st;
 		LPBYTE *shots = nullptr;
-		UINT adapter = 0;
+		UINT adapter = D3DADAPTER_DEFAULT;
 
 		// init D3D and get screen size
 		d3d = Direct3DCreate9(D3D_SDK_VERSION);
@@ -241,21 +241,25 @@ void DKVncServer::DrawBuffer()
 			IWICImagingFactory *factory = nullptr;
 			IWICBitmapEncoder *encoder = nullptr;
 			IWICBitmapFrameEncode *frame = nullptr;
+			IWICBitmapFlipRotator *flip = nullptr;
 			IWICStream *stream = nullptr;
 			GUID pf = GUID_WICPixelFormat32bppPBGRA;
 			BOOL coInit = CoInitialize(nullptr);
 
 			HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
 			HRCHECK(factory->CreateStream(&stream));
-			std::wstring filename = toWString("test.png");
-			HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
-			//HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
-			HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
+			//std::wstring filename = toWString("test.bmp");
+			//HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
+			HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
+			//HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
+			HRCHECK(factory->CreateEncoder(GUID_ContainerFormatBmp, nullptr, &encoder));
 			HRCHECK(encoder->Initialize(stream, WICBitmapEncoderNoCache));
 			HRCHECK(encoder->CreateNewFrame(&frame, nullptr)); // we don't use options here
 			HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
 			HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
 			HRCHECK(frame->SetPixelFormat(&pf));
+			//factory->CreateBitmapFlipRotator(&flip);
+			//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
 			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shots[i]));
 			HRCHECK(frame->Commit());
 			HRCHECK(encoder->Commit());
