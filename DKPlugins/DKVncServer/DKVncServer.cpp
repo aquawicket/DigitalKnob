@@ -144,7 +144,7 @@ void DKVncServer::DrawBuffer()
 		int res = BitBlt(buffer_dc, 0, 0, rfbScreen->width, rfbScreen->height, src_dc, 0, 0, SRCCOPY);
 		int go = GetObject(dest_dc, sizeof(BITMAP), &bmp);
 		//Invert
-		size_t n = rfbScreen->width * rfbScreen->height * 4;
+		size_t n = rfbScreen->width * rfbScreen->height * bpp;
 		int* buffer = (int*)malloc(n);
 		int* dest = (int*)rfbScreen->frameBuffer;
 		int* src = ((int*)bmp.bmBits);
@@ -167,6 +167,8 @@ void DKVncServer::DrawBuffer()
 		delete buffer;
 	}
 	else if(capture == "DIRECTX"){
+
+		//DKLog("DIRECTX\n",DKINFO);
 		//TODO
 		//FIXME
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
@@ -204,74 +206,49 @@ void DKVncServer::DrawBuffer()
 		pitch = rc.Pitch;
 		HRCHECK(surface->UnlockRect());
 
-		// allocate screenshots buffers
-		//UINT count = 1;
-		//shots = new LPBYTE[count];
-		//shot = new LPBYTE[1];
-		//for(UINT i = 0; i < count; i++){
-			//shots[i] = new BYTE[pitch * mode.Height];
-			shot = new BYTE[pitch * mode.Height];
-		//}
+		shot = new BYTE[mode.Height * mode.Width * bpp];
 
-		GetSystemTime(&st); // measure the time we spend doing <count> captures
-		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
-		//for (UINT i = 0; i < count; i++)
-		//{
-			// get the data
-			HRCHECK(device->GetFrontBufferData(0, surface));
+		HRCHECK(device->GetFrontBufferData(0, surface));
 
-			// copy it into our buffers
-			HRCHECK(surface->LockRect(&rc, NULL, 0));
-			CopyMemory(shot, rc.pBits, rc.Pitch * mode.Height);
-			HRCHECK(surface->UnlockRect());
-		//}
-		GetSystemTime(&st);
-		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+		// copy it into our buffers
+		HRCHECK(surface->LockRect(&rc, NULL, 0));
+		CopyMemory(shot, rc.pBits, mode.Height * mode.Width * bpp);
+		HRCHECK(surface->UnlockRect());
+		
+		IWICImagingFactory *factory = nullptr;
+		IWICBitmapEncoder *encoder = nullptr;
+		IWICBitmapFrameEncode *frame = nullptr;
+		IWICBitmapFlipRotator *flip = nullptr;
+		IWICStream *stream = nullptr;
+		GUID pf = GUID_WICPixelFormat32bppBGR;
+		BOOL coInit = CoInitialize(nullptr);
 
-		//if(shots != nullptr){
-			//for (UINT i = 0; i < count; i++){
-				//delete shots[i];
-			//}
-			//delete[] shots;
-		//}
-		// save all screenshots
-		//for(UINT i = 0; i < count; i++){
-			//WCHAR file[100];
-			//wsprintf(file, "cap%i.png", i);
-			//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+		HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
+		HRCHECK(factory->CreateStream(&stream));
+		//std::wstring filename = toWString("test.bmp");
+		//HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
+		HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
+		//HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
+		HRCHECK(factory->CreateEncoder(GUID_ContainerFormatBmp, nullptr, &encoder));
+		//factory->CreateBitmapFlipRotator(&flip);
+		//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
+		HRCHECK(encoder->Initialize(stream, WICBitmapEncoderNoCache));
+		HRCHECK(encoder->CreateNewFrame(&frame, nullptr)); // we don't use options here
+		HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
+		HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
+		HRCHECK(frame->SetPixelFormat(&pf));
+
+		//HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shot));
+		HRCHECK(frame->WritePixels(rfbScreen->height, pitch, rfbScreen->height * rfbScreen->width * bpp, shot));
+		HRCHECK(frame->Commit());
+		HRCHECK(encoder->Commit());
+
+		rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 			
-			//HRESULT hr = S_OK;
-			IWICImagingFactory *factory = nullptr;
-			IWICBitmapEncoder *encoder = nullptr;
-			IWICBitmapFrameEncode *frame = nullptr;
-			IWICBitmapFlipRotator *flip = nullptr;
-			IWICStream *stream = nullptr;
-			GUID pf = GUID_WICPixelFormat32bppBGRA;
-			BOOL coInit = CoInitialize(nullptr);
-
-			HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
-			HRCHECK(factory->CreateStream(&stream));
-			//std::wstring filename = toWString("test.bmp");
-			//HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
-			HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
-			//HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
-			HRCHECK(factory->CreateEncoder(GUID_ContainerFormatBmp, nullptr, &encoder));
-			HRCHECK(encoder->Initialize(stream, WICBitmapEncoderNoCache));
-			HRCHECK(encoder->CreateNewFrame(&frame, nullptr)); // we don't use options here
-			HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
-			HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
-			HRCHECK(frame->SetPixelFormat(&pf));
-			//factory->CreateBitmapFlipRotator(&flip);
-			//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
-			HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shot));
-			HRCHECK(frame->Commit());
-			HRCHECK(encoder->Commit());
-
-			RELEASE(stream);
-			RELEASE(frame);
-			RELEASE(encoder);
-			RELEASE(factory);
-		//}
+		RELEASE(stream);
+		RELEASE(frame);
+		RELEASE(encoder);
+		RELEASE(factory);
 
 		RELEASE(surface);
 		RELEASE(device);
