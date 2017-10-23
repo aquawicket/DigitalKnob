@@ -322,5 +322,6 @@ void DKVncServer::keyevent(rfbBool down,rfbKeySym key,rfbClientPtr cl)
 {
 	if(down){
 		DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);
+		DKUtil::StrokeKey((int)key);
 	}
 }
