@@ -55,7 +55,7 @@ void DKVncClient::Init()
 		cl = rfbGetClient(8,3,4); // 32-bit?
 		//cl->MallocFrameBuffer = DKVncClient::resize;
 		//cl->appData.encodingsString = "tight zrle ultra hextile zlib corre rre raw";
-		cl->appData.encodingsString = "ultra hextile zlib corre rre raw";
+		cl->appData.encodingsString = "raw";
 		cl->appData.compressLevel = 3;
 		cl->appData.enableJPEG = TRUE;
 		cl->appData.qualityLevel = 1;
