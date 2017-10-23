@@ -30,6 +30,7 @@ public:
 	static void keyevent(rfbBool down,rfbKeySym key,rfbClientPtr cl);
 
 	static DKString capture; //GDI, DIRECTX, OPENGL
+	static DKString ipaddress;
 };
 
 

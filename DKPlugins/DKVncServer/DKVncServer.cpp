@@ -36,6 +36,7 @@ typedef struct ClientData
 } ClientData;
 
 DKString DKVncServer::capture;
+DKString DKVncServer::ipaddress;
 
 ////////////////////////
 void DKVncServer::Init()
@@ -285,7 +286,7 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	unsigned int ip;
 	getpeername(cl->sock, (struct sockaddr*)&addr, &len);
 	ip = ntohl(addr.sin_addr.s_addr);
-	DKString ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
+	ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
 	DKLog("ip = "+ipaddress+"\n", DKINFO);
 
 	return RFB_CLIENT_ACCEPT;
@@ -305,8 +306,12 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
 	if(buttonMask){
+		if(same(ipaddress,"127.0.0.1")){ return; }
+		//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 		DKUtil::SetMousePos(x, y);
-		DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
+		if(buttonMask == 1){
+			DKUtil::LeftClick();
+		}
 	}
 
 	rfbDefaultPtrAddEvent(buttonMask,x,y,cl);
