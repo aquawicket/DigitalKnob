@@ -305,12 +305,16 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 ///////////////////////////////////////////////////////////////////////////
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
+	if(same(ipaddress,"127.0.0.1")){ return; }
+
+	DKUtil::SetMousePos(x, y);
 	if(buttonMask){
-		if(same(ipaddress,"127.0.0.1")){ return; }
 		//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
-		DKUtil::SetMousePos(x, y);
 		if(buttonMask == 1){
 			DKUtil::LeftClick();
+		}
+		if(buttonMask == 4) {
+			DKUtil::RightClick();
 		}
 	}
 
