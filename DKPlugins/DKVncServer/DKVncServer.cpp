@@ -206,15 +206,16 @@ void DKVncServer::DrawBuffer()
 		pitch = rc.Pitch;
 		HRCHECK(surface->UnlockRect());
 
-		shot = new BYTE[mode.Height * mode.Width * bpp];
+		//shot = new BYTE[mode.Height * mode.Width * bpp];
 
 		HRCHECK(device->GetFrontBufferData(0, surface));
 
 		// copy it into our buffers
 		HRCHECK(surface->LockRect(&rc, NULL, 0));
-		CopyMemory(shot, rc.pBits, mode.Height * mode.Width * bpp);
+		CopyMemory(rfbScreen->frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
 		HRCHECK(surface->UnlockRect());
 		
+		/*
 		IWICImagingFactory *factory = nullptr;
 		IWICBitmapEncoder *encoder = nullptr;
 		IWICBitmapFrameEncode *frame = nullptr;
@@ -242,13 +243,16 @@ void DKVncServer::DrawBuffer()
 		HRCHECK(frame->WritePixels(rfbScreen->height, pitch, rfbScreen->height * rfbScreen->width * bpp, shot));
 		HRCHECK(frame->Commit());
 		HRCHECK(encoder->Commit());
+		*/
 
 		rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
-			
+		
+		/*
 		RELEASE(stream);
 		RELEASE(frame);
 		RELEASE(encoder);
 		RELEASE(factory);
+		*/
 
 		RELEASE(surface);
 		RELEASE(device);
