@@ -26,6 +26,8 @@ void DKVncClient::Init()
 {
 	DKLog("DKVncClient::Init()\n", DKINFO);
 
+	listenLoop = true;
+
 	DKString server_ip;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
 	if(server_ip.empty()){ server_ip = "127.0.0.1"; }
@@ -35,6 +37,9 @@ void DKVncClient::Init()
 	DKString server_password;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", server_password);
 	pass = server_password.c_str();
+	DKString encoding;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
+
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	int width = 1280;
@@ -55,7 +60,7 @@ void DKVncClient::Init()
 		cl = rfbGetClient(8,3,4); // 32-bit?
 		//cl->MallocFrameBuffer = DKVncClient::resize;
 		//cl->appData.encodingsString = "tight zrle ultra hextile zlib corre rre raw";
-		cl->appData.encodingsString = "raw";
+		cl->appData.encodingsString = encoding.c_str();
 		cl->appData.compressLevel = 3;
 		cl->appData.enableJPEG = TRUE;
 		cl->appData.qualityLevel = 1;
@@ -82,6 +87,7 @@ void DKVncClient::Init()
 		DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 		
 		while(1){
+			DKUtil::Sleep(100);
 			if(SDL_PollEvent(&e)){
 				//handleSDLEvent() return 0 if user requested window close.
 				//In this case, handleSDLEvent() will have called cleanup().
