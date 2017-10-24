@@ -54,9 +54,9 @@ void DKVncClient::Init()
 		//cl = rfbGetClient(5,3,2); // 16-bit
 		cl = rfbGetClient(8,3,4); // 32-bit?
 		cl->appData.encodingsString = encoding.c_str();
-		cl->appData.compressLevel = 3;
+		//cl->appData.compressLevel = 3;
 		cl->appData.enableJPEG = TRUE;
-		cl->appData.qualityLevel = 1;
+		//cl->appData.qualityLevel = 1;
 		cl->appData.useRemoteCursor = false;
 		cl->canHandleNewFBSize = TRUE;
 		//cl->MallocFrameBuffer = DKVncClient::resize;
