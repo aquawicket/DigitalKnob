@@ -26,7 +26,7 @@ void DKVncClient::Init()
 {
 	DKLog("DKVncClient::Init()\n", DKINFO);
 
-	listenLoop = true;
+	//listenLoop = true;
 
 	DKString server_ip;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
@@ -40,12 +40,7 @@ void DKVncClient::Init()
 	DKString encoding;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
 
-
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	int width = 1280;
-	int height = 1024;
-	dkSdlWindow->SetWidth(&width, NULL);
-	dkSdlWindow->SetHeight(&height, NULL);
 
 	SDL_SetEventFilter(NULL, NULL);
 
@@ -55,17 +50,16 @@ void DKVncClient::Init()
 	atexit(SDL_Quit);
 	signal(SIGINT, exit);
 
-	do{
+	//do{
 		//cl = rfbGetClient(5,3,2); // 16-bit
 		cl = rfbGetClient(8,3,4); // 32-bit?
-		//cl->MallocFrameBuffer = DKVncClient::resize;
-		//cl->appData.encodingsString = "tight zrle ultra hextile zlib corre rre raw";
 		cl->appData.encodingsString = encoding.c_str();
 		cl->appData.compressLevel = 3;
 		cl->appData.enableJPEG = TRUE;
 		cl->appData.qualityLevel = 1;
-		cl->appData.useRemoteCursor = true;
+		cl->appData.useRemoteCursor = false;
 		cl->canHandleNewFBSize = TRUE;
+		//cl->MallocFrameBuffer = DKVncClient::resize;
 		cl->GotFrameBufferUpdate = DKVncClient::update;
 		cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
 		cl->HandleTextChat = DKVncClient::text_chat;
@@ -79,7 +73,7 @@ void DKVncClient::Init()
 		if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 			cl = NULL; // rfbInitClient has already freed the client struct
 			cleanup(cl);
-			break;
+			return;
 		}
 
 		//Display extra info
@@ -87,7 +81,6 @@ void DKVncClient::Init()
 		DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 		
 		while(1){
-			DKUtil::Sleep(100);
 			if(SDL_PollEvent(&e)){
 				//handleSDLEvent() return 0 if user requested window close.
 				//In this case, handleSDLEvent() will have called cleanup().
@@ -96,7 +89,7 @@ void DKVncClient::Init()
 				}
 			}
 			else{
-				i=WaitForMessage(cl,500);
+				i=WaitForMessage(cl,1);
 				if(i<0){
 					cleanup(cl);
 					break;
@@ -109,8 +102,8 @@ void DKVncClient::Init()
 				}
 			}
 		}
-	}
-	while(listenLoop);
+	
+	//while(listenLoop);
 }
 
 ///////////////////////
@@ -178,8 +171,15 @@ rfbBool DKVncClient::resize(rfbClient* client)
 ///////////////////////////////////////////////////////////////////
 void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) 
 {
-	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
+	//Throttle the drawing to conserve cpu
+	DKUtil::GetTicks(DKApp::now);
+	double delta = DKApp::now - DKApp::lastFrame;
+	DKApp::lastFrame = DKApp::now;
+	if (delta < 90){  
+		return;
+	}
 
+	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 
 	/*
