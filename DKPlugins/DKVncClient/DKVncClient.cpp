@@ -332,10 +332,9 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 		break;
 	case SDL_QUIT:
 			cleanup(cl);
-			return FALSE;
 			rfbClientCleanup(cl);
-			exit(0);
-			break;
+			DKApp::Exit();
+			return false;
 
 	/*
 	case SDL_ACTIVEEVENT:
