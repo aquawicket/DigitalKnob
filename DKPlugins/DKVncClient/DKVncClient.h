@@ -30,7 +30,7 @@ public:
 
 	static DKSDLWindow* dkSdlWindow;
 	rfbClient* cl;
-	static int enableResizable, viewOnly, listenLoop, buttonMask;
+	static int enableResizable, viewOnly, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
 	static int rightAltKeyDown, leftAltKeyDown;
 	static const char* pass;

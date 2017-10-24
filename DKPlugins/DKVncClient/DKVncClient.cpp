@@ -15,7 +15,7 @@ struct { int sdl; int rfb; } buttonMapping[]={
 	{0,0}
 };
 
-int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::listenLoop, DKVncClient::buttonMask;
+int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
@@ -25,8 +25,6 @@ const char* DKVncClient::pass;
 void DKVncClient::Init()
 {
 	DKLog("DKVncClient::Init()\n", DKINFO);
-
-	//listenLoop = true;
 
 	DKString server_ip;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
@@ -50,60 +48,58 @@ void DKVncClient::Init()
 	atexit(SDL_Quit);
 	signal(SIGINT, exit);
 
-	//do{
-		//cl = rfbGetClient(5,3,2); // 16-bit
-		cl = rfbGetClient(8,3,4); // 32-bit?
-		cl->appData.encodingsString = encoding.c_str();
-		//cl->appData.compressLevel = 3;
-		cl->appData.enableJPEG = TRUE;
-		//cl->appData.qualityLevel = 1;
-		cl->appData.useRemoteCursor = false;
-		cl->canHandleNewFBSize = TRUE;
-		//cl->MallocFrameBuffer = DKVncClient::resize;
-		cl->GotFrameBufferUpdate = DKVncClient::update;
-		cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
-		cl->HandleTextChat = DKVncClient::text_chat;
-		cl->GotXCutText = DKVncClient::got_selection;
-		cl->listenPort = LISTEN_PORT_OFFSET;
-		cl->listen6Port = LISTEN_PORT_OFFSET;
-		cl->serverHost = (char*)server_ip.c_str();
-		cl->serverPort = toInt(server_port);
-		cl->GetPassword = DKVncClient::password;
-		DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
-		if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
-			cl = NULL; // rfbInitClient has already freed the client struct
-			cleanup(cl);
-			return;
-		}
-
-		//Display extra info
-		DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
-		DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
-		
-		while(1){
-			if(SDL_PollEvent(&e)){
-				//handleSDLEvent() return 0 if user requested window close.
-				//In this case, handleSDLEvent() will have called cleanup().
-				if(!handleSDLEvent(cl, &e)){
-					break;
-				}
+	//cl = rfbGetClient(5,3,2); // 16-bit
+	cl = rfbGetClient(8,3,4); // 32-bit?
+	cl->appData.encodingsString = encoding.c_str();
+	//cl->appData.compressLevel = 3;
+	cl->appData.enableJPEG = TRUE;
+	//cl->appData.qualityLevel = 1;
+	cl->appData.useRemoteCursor = false;
+	cl->canHandleNewFBSize = TRUE;
+	//cl->MallocFrameBuffer = DKVncClient::resize;
+	cl->GotFrameBufferUpdate = DKVncClient::update;
+	cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
+	cl->HandleTextChat = DKVncClient::text_chat;
+	cl->GotXCutText = DKVncClient::got_selection;
+	cl->listenPort = LISTEN_PORT_OFFSET;
+	cl->listen6Port = LISTEN_PORT_OFFSET;
+	cl->serverHost = (char*)server_ip.c_str();
+	cl->serverPort = toInt(server_port);
+	cl->GetPassword = DKVncClient::password;
+	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
+	if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
+		cl = NULL; // rfbInitClient has already freed the client struct
+		cleanup(cl);
+		return;
+	}
+	
+	//Display extra info
+	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
+	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
+	
+	while(1){
+		if(SDL_PollEvent(&e)){
+			//handleSDLEvent() return 0 if user requested window close.
+			//In this case, handleSDLEvent() will have called cleanup().
+			if(!handleSDLEvent(cl, &e)){
+				break;
 			}
-			else{
-				i=WaitForMessage(cl,500);
-				if(i<0){
+		}
+		else{
+			i=WaitForMessage(cl,500);
+			if(i<0){
+				cleanup(cl);
+				break;
+			}
+			if(i){
+				if(!HandleRFBServerMessage(cl)){
 					cleanup(cl);
 					break;
 				}
-				if(i){
-					if(!HandleRFBServerMessage(cl)){
-						cleanup(cl);
-						break;
-					}
-				}
 			}
 		}
+	}
 	
-	//while(listenLoop);
 }
 
 ///////////////////////
@@ -335,16 +331,12 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			leftAltKeyDown = e->type == SDL_KEYDOWN;
 		break;
 	case SDL_QUIT:
-		if(listenLoop)
-		{
 			cleanup(cl);
 			return FALSE;
-		}
-		else
-		{
 			rfbClientCleanup(cl);
 			exit(0);
-		}
+			break;
+
 	/*
 	case SDL_ACTIVEEVENT:
 		if (!e->active.gain && rightAltKeyDown) {
