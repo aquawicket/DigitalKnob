@@ -89,7 +89,7 @@ void DKVncClient::Init()
 				}
 			}
 			else{
-				i=WaitForMessage(cl,1);
+				i=WaitForMessage(cl,500);
 				if(i<0){
 					cleanup(cl);
 					break;
