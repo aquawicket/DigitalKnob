@@ -171,7 +171,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	DKUtil::GetTicks(DKApp::now);
 	double delta = DKApp::now - DKApp::lastFrame;
 	DKApp::lastFrame = DKApp::now;
-	if (delta < 90){  
+	if(delta < 90){
 		return;
 	}
 
@@ -294,6 +294,7 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			x = e->motion.x;
 			y = e->motion.y;
 			state = e->motion.state;
+			buttonMask &= ~state;
 		}
 		else {
 			x = e->button.x;
@@ -316,8 +317,10 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			y = y * cl->height / dkSdlWindow->height;// / realHeight;
 		//}
 		
-		SendPointerEvent(cl, x, y, buttonMask);
-		buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
+		//if(e->type == SDL_MOUSEBUTTONDOWN){
+			SendPointerEvent(cl, x, y, buttonMask);
+			buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
+		//}
 		break;
 	}
 	case SDL_KEYUP:
