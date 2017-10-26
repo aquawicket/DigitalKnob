@@ -77,7 +77,8 @@ void DKVncClient::Init()
 	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
 	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 	
-	while(1){
+	DKApp::active = true;
+	while(DKApp::active){
 		if(SDL_PollEvent(&e)){
 			//handleSDLEvent() return 0 if user requested window close.
 			//In this case, handleSDLEvent() will have called cleanup().
@@ -265,6 +266,7 @@ void DKVncClient::cleanup(rfbClient* cl)
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
 	if(cl)
+		cl->serverHost = NULL;
 		rfbClientCleanup(cl);
 }
 
@@ -334,8 +336,8 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			leftAltKeyDown = e->type == SDL_KEYDOWN;
 		break;
 	case SDL_QUIT:
+			DKApp::active = false;
 			cleanup(cl);
-			rfbClientCleanup(cl);
 			DKApp::Exit();
 			return false;
 
