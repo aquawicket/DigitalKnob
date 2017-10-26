@@ -30,7 +30,11 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetMousePos(int& x, int& y);
 	static bool LeftClick();
+	static bool LeftPress();
+	static bool LeftRelease();
 	static bool RightClick();
+	static bool RightPress();
+	static bool RightRelease();
 	static bool Run(const DKString& command);
 	static bool Sleep(int milliseconds);
 #if !defined(WIN64)

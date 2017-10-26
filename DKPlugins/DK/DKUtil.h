@@ -26,8 +26,12 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetMousePos(int& x, int& y);
 	static bool LeftClick();
+	static bool LeftPress();
+	static bool LeftRelease();
 	static bool DoubleClick();
 	static bool RightClick();
+	static bool RightPress();
+	static bool RightRelease();
 	static bool Sleep(int milliseconds);
 	static bool GetTicks(double& ticks);
 	static bool GetTime(DKString& _time);

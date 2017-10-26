@@ -434,12 +434,31 @@ bool DKWindows::GetMousePos(int& x, int& y)
 bool DKWindows::LeftClick()
 {
 	INPUT Input={0};							// Create our input.
-
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;	// We are setting left mouse button down.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
-
+	
 	ZeroMemory(&Input,sizeof(INPUT));			// Fills a block of memory with zeros.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;		// We are setting left mouse button up.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+///////////////////////////
+bool DKWindows::LeftPress()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;	// We are setting left mouse button down.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+/////////////////////////////
+bool DKWindows::LeftRelease()
+{
+	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;		// We are setting left mouse button up.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
@@ -450,12 +469,31 @@ bool DKWindows::LeftClick()
 bool DKWindows::RightClick()
 {
 	INPUT Input={0};							// Create our input.
-
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;	// We are setting right mouse button down.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
 
 	ZeroMemory(&Input,sizeof(INPUT));			// Fills a block of memory with zeros.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;		// We are setting right mouse button up.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+////////////////////////////
+bool DKWindows::RightPress()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;	// We are setting right mouse button down.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+//////////////////////////////
+bool DKWindows::RightRelease()
+{
+	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;		// We are setting right mouse button up.
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.

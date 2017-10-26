@@ -37,6 +37,7 @@ typedef struct ClientData
 
 DKString DKVncServer::capture;
 DKString DKVncServer::ipaddress;
+int DKVncServer::_buttonMask = 0;
 
 ////////////////////////
 void DKVncServer::Init()
@@ -306,19 +307,29 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
 	if(same(ipaddress,"127.0.0.1")){ return; }
-
+	
 	DKUtil::SetMousePos(x, y);
-	if(buttonMask){
+	if(buttonMask && !_buttonMask){
 		//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
-		if(buttonMask == 1){
-			DKUtil::LeftClick();
+		_buttonMask = buttonMask;
+		if(_buttonMask == 1){
+			DKUtil::LeftPress();
 		}
-		if(buttonMask == 4) {
-			DKUtil::RightClick();
+		if(_buttonMask == 4) {
+			DKUtil::RightPress();
 		}
 	}
+	if (!buttonMask && _buttonMask) {
+		if(_buttonMask == 1){
+			DKUtil::LeftRelease();
+		}
+		if(_buttonMask == 4) {
+			DKUtil::RightRelease();
+		}
+		_buttonMask = 0;
+	}
 
-	rfbDefaultPtrAddEvent(buttonMask,x,y,cl);
+	rfbDefaultPtrAddEvent(buttonMask, x, y, cl);
 }
 
 //////////////////////////////////////////////////////////////////////

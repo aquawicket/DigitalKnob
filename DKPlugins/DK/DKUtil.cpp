@@ -191,7 +191,6 @@ bool DKUtil::GetMousePos(int& x, int& y)
 	return false;
 }
 
-
 ////////////////////////
 bool DKUtil::LeftClick()
 {
@@ -199,6 +198,26 @@ bool DKUtil::LeftClick()
 	return DKWindows::LeftClick();
 #endif
 	DKLog("DKUtil::LeftClick() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////
+bool DKUtil::LeftPress()
+{
+#ifdef WIN32
+	return DKWindows::LeftPress();
+#endif
+	DKLog("DKUtil::LeftPress() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////////
+bool DKUtil::LeftRelease()
+{
+#ifdef WIN32
+	return DKWindows::LeftRelease();
+#endif
+	DKLog("DKUtil::LeftRelease() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
@@ -220,6 +239,26 @@ bool DKUtil::RightClick()
 	return DKWindows::RightClick();
 #endif
 	DKLog("DKUtil::RightClick() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+/////////////////////////
+bool DKUtil::RightPress()
+{
+#ifdef WIN32
+	return DKWindows::RightPress();
+#endif
+	DKLog("DKUtil::RightPress() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+///////////////////////////
+bool DKUtil::RightRelease()
+{
+#ifdef WIN32
+	return DKWindows::RightRelease();
+#endif
+	DKLog("DKUtil::RightRelease() not implemented on this OS \n", DKERROR);
 	return false;
 }
 
