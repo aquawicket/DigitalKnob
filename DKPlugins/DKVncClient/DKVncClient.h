@@ -34,6 +34,7 @@ public:
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
 	static int rightAltKeyDown, leftAltKeyDown;
 	static const char* pass;
+	static int fps;
 };
 
 

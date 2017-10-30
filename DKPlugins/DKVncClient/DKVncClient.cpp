@@ -20,6 +20,7 @@ int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel,
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
+int DKVncClient::fps = 90;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -37,6 +38,11 @@ void DKVncClient::Init()
 	pass = server_password.c_str();
 	DKString encoding;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
+	DKString vncfps;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_FPS]", vncfps);
+	if (!vncfps.empty()) {
+		fps = toInt(vncfps);
+	}
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
@@ -172,7 +178,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	DKUtil::GetTicks(DKApp::now);
 	double delta = DKApp::now - DKApp::lastFrame;
 	DKApp::lastFrame = DKApp::now;
-	if(delta < 90){
+	if(delta < fps){
 		return;
 	}
 
