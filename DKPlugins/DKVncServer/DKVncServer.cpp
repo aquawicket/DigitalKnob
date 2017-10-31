@@ -322,6 +322,12 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 		if(_buttonMask == 4) {
 			DKUtil::RightPress();
 		}
+		if(_buttonMask == 8) {
+			DKUtil::WheelUp();
+		}
+		if(_buttonMask == 16) {
+			DKUtil::WheelDown();
+		}
 	}
 	if (!buttonMask && _buttonMask) {
 		if(_buttonMask == 1){
