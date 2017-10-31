@@ -431,6 +431,7 @@ void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 			//case : k = 0; break; //RWinKey   
 			case 65383: k = 93; break; //Menu      
 			case 65508: k = 17; break; //RCtrl     
+			/*
 			case 126: k = 0; break; //~         
 			case 33: k = 0; break; //!         
 			case 64: k = 0; break; //@         
@@ -477,7 +478,8 @@ void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 			case 77: k = 0; break; //M         
 			case 60: k = 0; break; //<         
 			case 62: k = 0; break; //>         
-			case 63: k = 0; break; //?         
+			case 63: k = 0; break; //?
+			*/			
 			case 65379: k = 45; break; //Insert    
 			case 65360: k = 36; break; //Home      
 			case 65365: k = 33; break; //PageUp    
