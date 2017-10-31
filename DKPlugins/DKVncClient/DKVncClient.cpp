@@ -21,6 +21,7 @@ int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
 int DKVncClient::fps = 90;
+int DKVncClient::message_wait = 1;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -42,6 +43,11 @@ void DKVncClient::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_FPS]", vncfps);
 	if (!vncfps.empty()) {
 		fps = toInt(vncfps);
+	}
+	DKString vnc_message_wait;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_MESSAGE_WAIT]", vnc_message_wait);
+	if (!vnc_message_wait.empty()) {
+		message_wait = toInt(vnc_message_wait);
 	}
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
@@ -85,6 +91,13 @@ void DKVncClient::Init()
 	
 	DKApp::active = true;
 	while(DKApp::active){
+		while(SDL_PollEvent(&e)){
+			handleSDLEvent(cl, &e);
+		}
+		while(WaitForMessage(cl, message_wait)){
+			HandleRFBServerMessage(cl);
+		}
+		/*
 		if(SDL_PollEvent(&e)){
 			//handleSDLEvent() return 0 if user requested window close.
 			//In this case, handleSDLEvent() will have called cleanup().
@@ -93,8 +106,8 @@ void DKVncClient::Init()
 			}
 		}
 		else{
-			i=WaitForMessage(cl,500);
-			if(i<0){
+			i = WaitForMessage(cl, message_wait);
+			if(i < 0){
 				cleanup(cl);
 				break;
 			}
@@ -105,6 +118,7 @@ void DKVncClient::Init()
 				}
 			}
 		}
+		*/
 	}
 	
 }

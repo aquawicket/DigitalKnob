@@ -35,6 +35,7 @@ public:
 	static int rightAltKeyDown, leftAltKeyDown;
 	static const char* pass;
 	static int fps;
+	static int message_wait;
 };
 
 
