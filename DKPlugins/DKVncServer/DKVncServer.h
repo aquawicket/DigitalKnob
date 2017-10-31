@@ -32,6 +32,7 @@ public:
 	static DKString capture; //GDI, DIRECTX, OPENGL
 	static DKString ipaddress;
 	static int _buttonMask;
+	static int _key;
 };
 
 

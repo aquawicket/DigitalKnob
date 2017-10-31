@@ -38,6 +38,7 @@ typedef struct ClientData
 DKString DKVncServer::capture;
 DKString DKVncServer::ipaddress;
 int DKVncServer::_buttonMask = 0;
+int DKVncServer::_key = 0;
 
 ////////////////////////
 void DKVncServer::Init()
@@ -348,8 +349,29 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 ////////////////////////////////////////////////////////////////////////
 void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
+	int k = key;
+
 	if(down){
 		DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);
-		DKUtil::StrokeKey((int)key);
+
+		switch(key){
+			case XK_Escape: k = VK_ESCAPE; break;
+			//case XK_1: k = 49; break;
+			//case XK_2: k = 50; break;
+			//case XK_3: k = 51; break;
+			//case XK_4: k = 52; break;
+			//case XK_5: k = 53; break;
+			//case XK_6: k = 54; break;
+			//case XK_7: k = 55; break;
+			//case XK_8: k = 56; break;
+			//case XK_9: k = 57; break;
+			//case XK_0: k = 48; break;
+			case XK_BackSpace: k = VK_BACK; break;
+			case XK_Tab: k = VK_TAB; break;
+			case XK_q: k = 81; break;
+			//case XK_w: k = ?; break;
+			default: break;
+		}
+		DKUtil::StrokeKey((int)k);
 	}
 }
