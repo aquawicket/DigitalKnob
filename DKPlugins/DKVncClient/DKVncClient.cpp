@@ -85,6 +85,7 @@ void DKVncClient::Init()
 	cl->appData.enableJPEG = jpeg;
 	cl->appData.qualityLevel = quality;
 	cl->appData.useRemoteCursor = false;
+	//cl->appData.nColours = ?;
 	cl->canHandleNewFBSize = TRUE;
 	//cl->MallocFrameBuffer = DKVncClient::resize;
 	cl->GotFrameBufferUpdate = DKVncClient::update;
