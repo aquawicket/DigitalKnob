@@ -523,14 +523,7 @@ bool DKWindows::RightRelease()
 /////////////////////////
 bool DKWindows::WheelUp()
 {
-	DKLog("DKWindows::WheelUp()\n", DKINFO);
-	/*
-	INPUT Input={0};							// Create our input.
-	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
-	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel up.
-	Input.mi.mouseData = WHEEL_DELTA;
-	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
-	*/
+	//DKLog("DKWindows::WheelUp()\n", DKINFO);
 
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
 	return true;
@@ -539,14 +532,7 @@ bool DKWindows::WheelUp()
 ///////////////////////////
 bool DKWindows::WheelDown()
 {
-	DKLog("DKWindows::WheelDown()\n", DKINFO);
-	/*
-	INPUT Input={0};							// Create our input.
-	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
-	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel down.
-	Input.mi.mouseData = -WHEEL_DELTA;
-	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
-	*/
+	//DKLog("DKWindows::WheelDown()\n", DKINFO);
 
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -WHEEL_DELTA, NULL);
 	return true;
