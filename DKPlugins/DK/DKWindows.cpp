@@ -523,22 +523,30 @@ bool DKWindows::RightRelease()
 /////////////////////////
 bool DKWindows::WheelUp()
 {
+	/*
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel up.
 	Input.mi.mouseData = WHEEL_DELTA;
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	*/
+
+	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
 	return true;
 }
 
 ///////////////////////////
 bool DKWindows::WheelDown()
 {
+	/*
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel down.
 	Input.mi.mouseData = -WHEEL_DELTA;
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	*/
+
+	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -WHEEL_DELTA, NULL);
 	return true;
 }
 
