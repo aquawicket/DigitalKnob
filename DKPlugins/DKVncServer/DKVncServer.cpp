@@ -323,11 +323,9 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 			DKUtil::RightPress();
 		}
 		if(_buttonMask == 8){
-			DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 			DKUtil::WheelUp();
 		}
 		if(_buttonMask == 16){
-			DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 			DKUtil::WheelDown();
 		}
 	}

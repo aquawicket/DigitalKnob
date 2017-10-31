@@ -523,6 +523,7 @@ bool DKWindows::RightRelease()
 /////////////////////////
 bool DKWindows::WheelUp()
 {
+	DKLog("DKWindows::WheelUp()\n", DKINFO);
 	/*
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
@@ -538,6 +539,7 @@ bool DKWindows::WheelUp()
 ///////////////////////////
 bool DKWindows::WheelDown()
 {
+	DKLog("DKWindows::WheelDown()\n", DKINFO);
 	/*
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
