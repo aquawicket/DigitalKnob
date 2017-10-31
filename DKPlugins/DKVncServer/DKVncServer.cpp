@@ -319,24 +319,26 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 		if(_buttonMask == 2){
 			DKUtil::MiddlePress();
 		}
-		if(_buttonMask == 4) {
+		if(_buttonMask == 4){
 			DKUtil::RightPress();
 		}
-		if(_buttonMask == 8) {
+		if(_buttonMask == 8){
+			DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 			DKUtil::WheelUp();
 		}
-		if(_buttonMask == 16) {
+		if(_buttonMask == 16){
+			DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 			DKUtil::WheelDown();
 		}
 	}
-	if (!buttonMask && _buttonMask) {
+	if(!buttonMask && _buttonMask){
 		if(_buttonMask == 1){
 			DKUtil::LeftRelease();
 		}
 		if(_buttonMask == 2){
 			DKUtil::MiddleRelease();
 		}
-		if(_buttonMask == 4) {
+		if(_buttonMask == 4){
 			DKUtil::RightRelease();
 		}
 		_buttonMask = 0;
