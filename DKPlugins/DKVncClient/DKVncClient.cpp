@@ -49,6 +49,24 @@ void DKVncClient::Init()
 	if (!vnc_message_wait.empty()) {
 		message_wait = toInt(vnc_message_wait);
 	}
+	DKString vnc_compression;
+	int compression = 0;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_COMPRESSION]", vnc_compression);
+	if (!vnc_compression.empty()) {
+		compression = toInt(vnc_compression);
+	}
+	DKString vnc_quality;
+	int quality = 1;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_QUALITY]", vnc_quality);
+	if (!vnc_quality.empty()) {
+		quality = toInt(vnc_quality);
+	}
+	DKString vnc_jpeg;
+	bool jpeg = true;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_JPEG]", vnc_jpeg);
+	if (!vnc_jpeg.empty()) {
+		jpeg = toInt(vnc_jpeg);
+	}
 
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
@@ -63,9 +81,9 @@ void DKVncClient::Init()
 	//cl = rfbGetClient(5,3,2); // 16-bit
 	cl = rfbGetClient(8,3,4); // 32-bit?
 	cl->appData.encodingsString = encoding.c_str();
-	//cl->appData.compressLevel = 3;
-	cl->appData.enableJPEG = TRUE;
-	//cl->appData.qualityLevel = 1;
+	cl->appData.compressLevel = compression;
+	cl->appData.enableJPEG = jpeg;
+	cl->appData.qualityLevel = quality;
 	cl->appData.useRemoteCursor = false;
 	cl->canHandleNewFBSize = TRUE;
 	//cl->MallocFrameBuffer = DKVncClient::resize;
