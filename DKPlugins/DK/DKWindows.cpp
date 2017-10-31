@@ -465,6 +465,26 @@ bool DKWindows::LeftRelease()
 	return true;
 }
 
+/////////////////////////////
+bool DKWindows::MiddlePress()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;	// We are setting middle mouse button down.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+///////////////////////////////
+bool DKWindows::MiddleRelease()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;	// We are setting middle mouse button up.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
 ////////////////////////////
 bool DKWindows::RightClick()
 {
@@ -496,6 +516,28 @@ bool DKWindows::RightRelease()
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;		// We are setting right mouse button up.
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+/////////////////////////
+bool DKWindows::WheelUp()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel up.
+	Input.mi.mouseData = WHEEL_DELTA;
+	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
+	return true;
+}
+
+///////////////////////////
+bool DKWindows::WheelDown()
+{
+	INPUT Input={0};							// Create our input.
+	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
+	Input.mi.dwFlags = MOUSEEVENTF_WHEEL;		// We are sending mouse wheel down.
+	Input.mi.mouseData = -WHEEL_DELTA;
 	SendInput(1, &Input, sizeof(INPUT));		// Send the input.
 	return true;
 }

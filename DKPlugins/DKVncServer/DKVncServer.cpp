@@ -307,13 +307,17 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
 	if(same(ipaddress,"127.0.0.1")){ return; }
-	
+	DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
+
 	DKUtil::SetMousePos(x, y);
 	if(buttonMask && !_buttonMask){
-		//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
+		
 		_buttonMask = buttonMask;
 		if(_buttonMask == 1){
 			DKUtil::LeftPress();
+		}
+		if(_buttonMask == 2){
+			DKUtil::MiddlePress();
 		}
 		if(_buttonMask == 4) {
 			DKUtil::RightPress();
@@ -322,6 +326,9 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 	if (!buttonMask && _buttonMask) {
 		if(_buttonMask == 1){
 			DKUtil::LeftRelease();
+		}
+		if(_buttonMask == 2){
+			DKUtil::MiddleRelease();
 		}
 		if(_buttonMask == 4) {
 			DKUtil::RightRelease();
@@ -332,8 +339,8 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 	rfbDefaultPtrAddEvent(buttonMask, x, y, cl);
 }
 
-//////////////////////////////////////////////////////////////////////
-void DKVncServer::keyevent(rfbBool down,rfbKeySym key,rfbClientPtr cl)
+////////////////////////////////////////////////////////////////////////
+void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
 	if(down){
 		DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);

@@ -32,9 +32,13 @@ public:
 	static bool LeftClick();
 	static bool LeftPress();
 	static bool LeftRelease();
+	static bool MiddlePress();
+	static bool MiddleRelease();
 	static bool RightClick();
 	static bool RightPress();
 	static bool RightRelease();
+	static bool WheelUp();
+	static bool WheelDown();
 	static bool Run(const DKString& command);
 	static bool Sleep(int milliseconds);
 #if !defined(WIN64)

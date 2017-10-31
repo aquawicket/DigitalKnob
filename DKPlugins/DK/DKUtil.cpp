@@ -222,6 +222,26 @@ bool DKUtil::LeftRelease()
 }
 
 //////////////////////////
+bool DKUtil::MiddlePress()
+{
+#ifdef WIN32
+	return DKWindows::MiddlePress();
+#endif
+	DKLog("DKUtil::MiddlePress() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////////
+bool DKUtil::MiddleRelease()
+{
+#ifdef WIN32
+	return DKWindows::MiddleRelease();
+#endif
+	DKLog("DKUtil::MiddleRelease() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////////
 bool DKUtil::DoubleClick()
 {
 #ifdef WIN32
@@ -259,6 +279,26 @@ bool DKUtil::RightRelease()
 	return DKWindows::RightRelease();
 #endif
 	DKLog("DKUtil::RightRelease() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////
+bool DKUtil::WheelUp()
+{
+#ifdef WIN32
+	return DKWindows::WheelUp();
+#endif
+	DKLog("DKUtil::WheelUp() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////
+bool DKUtil::WheelDown()
+{
+#ifdef WIN32
+	return DKWindows::WheelDown();
+#endif
+	DKLog("DKUtil::WheelDown() not implemented on this OS \n", DKERROR);
 	return false;
 }
 

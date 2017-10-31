@@ -28,10 +28,14 @@ public:
 	static bool LeftClick();
 	static bool LeftPress();
 	static bool LeftRelease();
+	static bool MiddlePress();
+	static bool MiddleRelease();
 	static bool DoubleClick();
 	static bool RightClick();
 	static bool RightPress();
 	static bool RightRelease();
+	static bool WheelUp();
+	static bool WheelDown();
 	static bool Sleep(int milliseconds);
 	static bool GetTicks(double& ticks);
 	static bool GetTime(DKString& _time);
