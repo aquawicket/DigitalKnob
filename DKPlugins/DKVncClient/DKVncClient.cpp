@@ -231,6 +231,16 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 
 	DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 
+	/*
+	resizeRectangleToReal(cl, x, y, w, h);
+	w = ((x + w) * realWidth - 1) / cl->width + 1;
+	h = ((y + h) * realHeight - 1) / cl->height + 1;
+	x = x * realWidth / cl->width;
+	y = y * realHeight / cl->height;
+	w -= x;
+	h -= y;
+	*/
+
 	//SDL_Rect r{x, y, w, h};
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
