@@ -121,6 +121,9 @@ void DKVncClient::Init()
 	
 	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 
+	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	rfbClientSetClientData(cl, SDL_Init, sdl);
+
 	DKApp::active = true;
 	while(DKApp::active){
 		while(SDL_PollEvent(&e)){
@@ -165,6 +168,7 @@ void DKVncClient::End()
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
+	return TRUE;
 	DKLog("DKVncClient::resize()\n", DKINFO);
 
 	int width = client->width;
@@ -229,7 +233,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 		return;
 	}
 
-	DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
+	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 
 	/*
 	resizeRectangleToReal(cl, x, y, w, h);
@@ -242,6 +246,8 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	*/
 
 	//SDL_Rect r{x, y, w, h};
+	//SDL_UpdateTexture(tex, &r, rfbClientGetClientData(cl, SDL_Init), cl->width*4);
+
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 	
@@ -409,12 +415,14 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 			case SDL_WINDOWEVENT_RESIZED:{
 				dkSdlWindow->width = e->window.data1;
 				dkSdlWindow->height = e->window.data2;
+				//resize(cl);
 				update(cl, 0, 0, cl->width, cl->height);
 				return 1;
 			}
 			case SDL_WINDOWEVENT_SIZE_CHANGED:{
 				dkSdlWindow->width = e->window.data1;
 				dkSdlWindow->height = e->window.data2;
+				//resize(cl);
 				update(cl, 0, 0, cl->width, cl->height);
 				return 1;
 			}
