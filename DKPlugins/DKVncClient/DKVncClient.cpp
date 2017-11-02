@@ -20,7 +20,7 @@ int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel,
 int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
-int DKVncClient::fps = 90;
+int DKVncClient::fps = 48;
 int DKVncClient::message_wait = 1;
 
 ////////////////////////
@@ -67,7 +67,6 @@ void DKVncClient::Init()
 	if (!vnc_jpeg.empty()) {
 		jpeg = toInt(vnc_jpeg);
 	}
-
 	DKString vnc_cursor;
 	bool cursor = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CURSOR]", vnc_cursor);

@@ -28,6 +28,13 @@ static Window root;
 static XImage *image;
 #endif
 
+const rfbPixelFormat vnc8bitFormat =
+{ 8, 8, 0, 1, 7, 7, 3, 0, 3, 6, 0, 0 };
+const rfbPixelFormat vnc16bitFormat =
+{ 16, 16, 0, 1, 63, 31, 31, 0, 6, 11, 0, 0 };
+const rfbPixelFormat vnc24bitFormat =
+{ 32, 24, 0, 1, 255, 255, 255, 16, 8, 0, 0, 0 };
+
 /////////////////////////
 typedef struct ClientData
 {
@@ -75,6 +82,7 @@ void DKVncServer::Init()
 	rfbScreen->httpDir = (char*)DKFile::local_assets.c_str(); //+"DKVncServer";
 	rfbScreen->httpEnableProxyConnect = TRUE;
 	
+	/*
 	rfbPixelFormat pixfmt = {
 		32,     //U8  bitsPerPixel;
 		32,     //U8  depth;
@@ -89,8 +97,9 @@ void DKVncServer::Init()
 		0,     //U8  pad 1;
 		0    //U8  pad 2
 	};
+	*/
 
-	rfbScreen->serverFormat = pixfmt;
+	rfbScreen->serverFormat = vnc24bitFormat;
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
