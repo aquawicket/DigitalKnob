@@ -74,7 +74,7 @@ void DKVncClient::Init()
 	if (!vnc_cursor.empty()) {
 		cursor = toInt(vnc_cursor);
 	}
-
+	
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
 	SDL_SetEventFilter(NULL, NULL);
@@ -104,6 +104,10 @@ void DKVncClient::Init()
 	cl->serverHost = (char*)server_ip.c_str();
 	cl->serverPort = toInt(server_port);
 	cl->GetPassword = DKVncClient::password;
+	//cl->format.redShift = 16;
+    //cl->format.greenShift = 0;
+    //cl->format.blueShift = 8;
+	
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 		cl = NULL; // rfbInitClient has already freed the client struct

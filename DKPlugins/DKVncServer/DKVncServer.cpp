@@ -74,6 +74,23 @@ void DKVncServer::Init()
 	rfbScreen->newClientHook = newclient;
 	rfbScreen->httpDir = (char*)DKFile::local_assets.c_str(); //+"DKVncServer";
 	rfbScreen->httpEnableProxyConnect = TRUE;
+	
+	rfbPixelFormat pixfmt = {
+		32,     //U8  bitsPerPixel;
+		32,     //U8  depth;
+		0,     //U8  bigEndianFlag;
+		1,     //U8  trueColourFlag;
+		255,     //U16 redMax;
+		255,     //U16 greenMax;
+		255,     //U16 blueMax;
+		16,     //U8  redShift;
+		8,     //U8  greenShift;
+		0,     //U8  blueShift;
+		0,     //U8  pad 1;
+		0    //U8  pad 2
+	};
+
+	rfbScreen->serverFormat = pixfmt;
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
@@ -300,7 +317,7 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 	char *oldfb, *newfb;
 	oldfb = (char*)screen->frameBuffer;
 	newfb = (char*)malloc(width * height * bpp);
-	rfbNewFramebuffer(screen, (char*)newfb, width, height, 8, 3, bpp);
+	rfbNewFramebuffer(screen, (char*)newfb, width, height, 5, 3, bpp);
 	free(oldfb);
 }
 
