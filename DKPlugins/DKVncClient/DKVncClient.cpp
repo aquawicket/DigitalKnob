@@ -68,6 +68,13 @@ void DKVncClient::Init()
 		jpeg = toInt(vnc_jpeg);
 	}
 
+	DKString vnc_cursor;
+	bool cursor = true;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CURSOR]", vnc_cursor);
+	if (!vnc_cursor.empty()) {
+		cursor = toInt(vnc_cursor);
+	}
+
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
 	SDL_SetEventFilter(NULL, NULL);
@@ -84,7 +91,7 @@ void DKVncClient::Init()
 	cl->appData.compressLevel = compression;
 	cl->appData.enableJPEG = jpeg;
 	cl->appData.qualityLevel = quality;
-	cl->appData.useRemoteCursor = false;
+	cl->appData.useRemoteCursor = cursor;
 	//cl->appData.nColours = ?;
 	cl->canHandleNewFBSize = TRUE;
 	//cl->MallocFrameBuffer = DKVncClient::resize;
