@@ -29,6 +29,7 @@ public:
 
 
 	static DKSDLWindow* dkSdlWindow;
+	static SDL_Texture *tex;
 	rfbClient* cl;
 	static int enableResizable, viewOnly, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;

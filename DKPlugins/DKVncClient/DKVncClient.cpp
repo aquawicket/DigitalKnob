@@ -22,6 +22,7 @@ DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
 int DKVncClient::fps = 48;
 int DKVncClient::message_wait = 1;
+SDL_Texture* DKVncClient::tex;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -118,6 +119,8 @@ void DKVncClient::Init()
 	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
 	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 	
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+
 	DKApp::active = true;
 	while(DKApp::active){
 		while(SDL_PollEvent(&e)){
@@ -156,6 +159,7 @@ void DKVncClient::Init()
 void DKVncClient::End()
 {
 	DKLog("DKVncClient::End()\n", DKINFO);
+	SDL_DestroyTexture(tex);
 }
 
 //////////////////////////////////////////////
@@ -225,43 +229,17 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 		return;
 	}
 
-	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
-	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 
-	/*
-	if(sdl->pixels){
-		resizeRectangleToReal(cl, x, y, w, h);
-		w = ((x + w) * realWidth - 1) / cl->width + 1;
-		h = ((y + h) * realHeight - 1) / cl->height + 1;
-		x = x * realWidth / cl->width;
-		y = y * realHeight / cl->height;
-		w -= x;
-		h -= y;
-	}
-	*/
-
-	SDL_Texture *tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
-	
-	//Now render to the texture
-	SDL_SetRenderTarget(dkSdlWindow->sdlren, tex);
-	SDL_RenderClear(dkSdlWindow->sdlren);
-
-	//copy data here
-	unsigned char * texture_data = NULL;
-	int texture_pitch = 0;
-	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
-		std::memcpy(texture_data, cl->frameBuffer, cl->width * cl->height * 4);
-		SDL_UnlockTexture(tex);
-	}
+	//SDL_Rect r{x, y, w, h};
+	SDL_Rect r{0, 0, cl->width, cl->height};
+	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 	
 	//Now render the texture target to our screen
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 	SDL_RenderClear(dkSdlWindow->sdlren);
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(dkSdlWindow->sdlren);
-
-	//Cleanup
-	SDL_DestroyTexture(tex);
 }
 
 /////////////////////////////////////////////////////////////
