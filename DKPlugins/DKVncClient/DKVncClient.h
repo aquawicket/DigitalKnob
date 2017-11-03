@@ -33,7 +33,7 @@ public:
 	rfbClient* cl;
 	static int enableResizable, viewOnly, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
-	static int rightAltKeyDown, leftAltKeyDown;
+	static int rightShiftKeyDown, leftShiftKeyDown;
 	static const char* pass;
 	static int fps;
 	static int message_wait;

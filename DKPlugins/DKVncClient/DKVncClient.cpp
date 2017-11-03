@@ -17,7 +17,7 @@ struct { int sdl; int rfb; } buttonMapping[]={
 
 int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
-int DKVncClient::rightAltKeyDown, DKVncClient::leftAltKeyDown;
+int DKVncClient::rightShiftKeyDown, DKVncClient::leftShiftKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
 int DKVncClient::fps = 48;
@@ -226,11 +226,22 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	{
 		//if (viewOnly)
 		//	break;
+		/*
+		if(e->key.keysym.sym == SDLK_LSHIFT && !rightShiftKeyDown){
+			DKLog("left shift down\n", DKINFO);
+			rightShiftKeyDown = TRUE;
+			SendKeyEvent(cl, XK_Shift_L, TRUE);
+		}
+		*/
+		/*
+		else if(e->key.keysym.sym != SDLK_LSHIFT && rightShiftKeyDown){
+			DKLog("left shift up\n", DKINFO);
+			rightShiftKeyDown = FALSE;
+			SendKeyEvent(cl, XK_Shift_L, FALSE);
+		}
+		*/
+		DKLog(toString(SDL_key2rfbKeySym(&e->key))+", "+toString(e->type == SDL_KEYDOWN ? "down" : "up")+"\n", DKINFO);
 		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
-		if (e->key.keysym.sym == SDLK_RALT)
-			rightAltKeyDown = e->type == SDL_KEYDOWN;
-		if (e->key.keysym.sym == SDLK_LALT)
-			leftAltKeyDown = e->type == SDL_KEYDOWN;
 		break;
 	}
 	case SDL_QUIT:
