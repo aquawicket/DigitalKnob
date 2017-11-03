@@ -4,7 +4,6 @@
 
 #ifdef WIN32
 #define sleep Sleep
-
 #else
 #include <unistd.h>
 #include <X11/Xlib.h>
@@ -316,6 +315,10 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	ip = ntohl(addr.sin_addr.s_addr);
 	ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
 	DKLog("ip = "+ipaddress+"\n", DKINFO);
+
+	//TODO
+	cl->enableKeyboardLedState = TRUE;
+	rfbScreen->getKeyboardLedStateHook(rfbScreen);
 
 	return RFB_CLIENT_ACCEPT;
 }
