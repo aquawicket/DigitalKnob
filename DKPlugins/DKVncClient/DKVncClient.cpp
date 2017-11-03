@@ -180,20 +180,23 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	case SDL_MOUSEMOTION:
 	{
 		int x, y, state;
-		if (viewOnly)
-			break;
+		//if (viewOnly)
+		//	break;
 
-		if (e->type == SDL_MOUSEMOTION) {
+		if(e->type == SDL_MOUSEMOTION){
 			x = e->motion.x;
 			y = e->motion.y;
 			state = e->motion.state;
 			if(state == 3){ state = 4;}
 		}
-		else {
+		else{
 			x = e->button.x;
 			y = e->button.y;
 			state = e->button.button;
 			if(state == 3){ state = 4;}
+			if(e->type == SDL_MOUSEBUTTONUP){
+				state = 0;
+			}
 		}
 
 		x = x * cl->width / dkSdlWindow->width;
@@ -220,20 +223,23 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 	}
 	case SDL_KEYUP:
 	case SDL_KEYDOWN:
-		if (viewOnly)
-			break;
+	{
+		//if (viewOnly)
+		//	break;
 		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
 		if (e->key.keysym.sym == SDLK_RALT)
 			rightAltKeyDown = e->type == SDL_KEYDOWN;
 		if (e->key.keysym.sym == SDLK_LALT)
 			leftAltKeyDown = e->type == SDL_KEYDOWN;
 		break;
+	}
 	case SDL_QUIT:
+	{
 		DKApp::active = false;
 		cleanup(cl);
 		DKApp::Exit();
 		return false;
-
+	}
 		/*
 		case SDL_ACTIVEEVENT:
 		if (!e->active.gain && rightAltKeyDown) {
