@@ -110,7 +110,7 @@ void DKVncClient::Init()
 	
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
-		cl = NULL; // rfbInitClient has already freed the client struct
+		cl = NULL;
 		cleanup(cl);
 		return;
 	}
@@ -132,30 +132,7 @@ void DKVncClient::Init()
 		while(WaitForMessage(cl, message_wait)){
 			HandleRFBServerMessage(cl);
 		}
-		/*
-		if(SDL_PollEvent(&e)){
-			//handleSDLEvent() return 0 if user requested window close.
-			//In this case, handleSDLEvent() will have called cleanup().
-			if(!handleSDLEvent(cl, &e)){
-				break;
-			}
-		}
-		else{
-			i = WaitForMessage(cl, message_wait);
-			if(i < 0){
-				cleanup(cl);
-				break;
-			}
-			if(i){
-				if(!HandleRFBServerMessage(cl)){
-					cleanup(cl);
-					break;
-				}
-			}
-		}
-		*/
 	}
-	
 }
 
 ///////////////////////
@@ -163,6 +140,148 @@ void DKVncClient::End()
 {
 	DKLog("DKVncClient::End()\n", DKINFO);
 	SDL_DestroyTexture(tex);
+}
+
+///////////////////////////////////////////////////////////////////
+void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) 
+{
+	//Throttle the drawing to conserve cpu
+	DKUtil::GetTicks(DKApp::now);
+	double delta = DKApp::now - DKApp::lastFrame;
+	DKApp::lastFrame = DKApp::now;
+	if(delta < fps){
+		return;
+	}
+
+	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
+
+	//SDL_Rect r{x, y, w, h};
+	//SDL_UpdateTexture(tex, &r, rfbClientGetClientData(cl, SDL_Init), cl->width*4);
+
+	SDL_Rect r{0, 0, cl->width, cl->height};
+	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
+
+	//Now render the texture target to our screen
+	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+	SDL_RenderClear(dkSdlWindow->sdlren);
+	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+	SDL_RenderPresent(dkSdlWindow->sdlren);
+}
+
+////////////////////////////////////////////////////////////////
+rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
+{
+	//DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
+
+	switch(e->type){
+
+	case SDL_MOUSEBUTTONUP:
+	case SDL_MOUSEBUTTONDOWN:
+	case SDL_MOUSEMOTION:
+	{
+		int x, y, state;
+		if (viewOnly)
+			break;
+
+		if (e->type == SDL_MOUSEMOTION) {
+			x = e->motion.x;
+			y = e->motion.y;
+			state = e->motion.state;
+			if(state == 3){ state = 4;}
+		}
+		else {
+			x = e->button.x;
+			y = e->button.y;
+			state = e->button.button;
+			if(state == 3){ state = 4;}
+		}
+
+		x = x * cl->width / dkSdlWindow->width;
+		y = y * cl->height / dkSdlWindow->height;
+		SendPointerEvent(cl, x, y, state);
+		break;
+	}
+	case SDL_MOUSEWHEEL:
+	{
+		int x, y;
+		SDL_GetMouseState(&x, &y);
+		x = x * cl->width / dkSdlWindow->width;
+		y = y * cl->height / dkSdlWindow->height;
+		if(e->wheel.y == 1){ // scroll up
+			SendPointerEvent(cl, x, y, 8);
+			SendPointerEvent(cl, x, y, 0);
+			break;
+		}
+		else if(e->wheel.y == -1){ // scroll down
+			SendPointerEvent(cl, x, y, 16);
+			SendPointerEvent(cl, x, y, 0);
+			break;
+		}
+	}
+	case SDL_KEYUP:
+	case SDL_KEYDOWN:
+		if (viewOnly)
+			break;
+		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
+		if (e->key.keysym.sym == SDLK_RALT)
+			rightAltKeyDown = e->type == SDL_KEYDOWN;
+		if (e->key.keysym.sym == SDLK_LALT)
+			leftAltKeyDown = e->type == SDL_KEYDOWN;
+		break;
+	case SDL_QUIT:
+		DKApp::active = false;
+		cleanup(cl);
+		DKApp::Exit();
+		return false;
+
+		/*
+		case SDL_ACTIVEEVENT:
+		if (!e->active.gain && rightAltKeyDown) {
+		SendKeyEvent(cl, XK_Alt_R, FALSE);
+		rightAltKeyDown = FALSE;
+		rfbClientLog("released right Alt key\n");
+		}
+		if (!e->active.gain && leftAltKeyDown) {
+		SendKeyEvent(cl, XK_Alt_L, FALSE);
+		leftAltKeyDown = FALSE;
+		rfbClientLog("released left Alt key\n");
+		}
+
+		if (e->active.gain && lost_scrap()) {
+		static char *data = NULL;
+		static int len = 0;
+		get_scrap(T('T', 'E', 'X', 'T'), &len, &data);
+		if (len)
+		SendClientCutText(cl, data, len);
+		}
+		break;
+		*/
+	case SDL_SYSWMEVENT:
+		//clipboard_filter(e);
+		break;
+	case SDL_WINDOWEVENT:
+		//DKLog("SDL_WINDOWEVENT\n", DKINFO);
+		switch(e->window.event){
+		case SDL_WINDOWEVENT_RESIZED:{
+			dkSdlWindow->width = e->window.data1;
+			dkSdlWindow->height = e->window.data2;
+			//resize(cl);
+			update(cl, 0, 0, cl->width, cl->height);
+			return 1;
+		}
+		case SDL_WINDOWEVENT_SIZE_CHANGED:{
+			dkSdlWindow->width = e->window.data1;
+			dkSdlWindow->height = e->window.data2;
+			//resize(cl);
+			update(cl, 0, 0, cl->width, cl->height);
+			return 1;
+		}
+		}
+		break;
+	default:
+		rfbClientLog("ignored SDL event: 0x%x\n", e->type);
+	}
+	return TRUE;
 }
 
 //////////////////////////////////////////////
@@ -222,42 +341,6 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	return TRUE;
 }
 
-///////////////////////////////////////////////////////////////////
-void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) 
-{
-	//Throttle the drawing to conserve cpu
-	DKUtil::GetTicks(DKApp::now);
-	double delta = DKApp::now - DKApp::lastFrame;
-	DKApp::lastFrame = DKApp::now;
-	if(delta < fps){
-		return;
-	}
-
-	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
-
-	/*
-	resizeRectangleToReal(cl, x, y, w, h);
-	w = ((x + w) * realWidth - 1) / cl->width + 1;
-	h = ((y + h) * realHeight - 1) / cl->height + 1;
-	x = x * realWidth / cl->width;
-	y = y * realHeight / cl->height;
-	w -= x;
-	h -= y;
-	*/
-
-	//SDL_Rect r{x, y, w, h};
-	//SDL_UpdateTexture(tex, &r, rfbClientGetClientData(cl, SDL_Init), cl->width*4);
-
-	SDL_Rect r{0, 0, cl->width, cl->height};
-	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
-	
-	//Now render the texture target to our screen
-	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	SDL_RenderClear(dkSdlWindow->sdlren);
-	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
-	SDL_RenderPresent(dkSdlWindow->sdlren);
-}
-
 /////////////////////////////////////////////////////////////
 void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad)
 {
@@ -311,127 +394,6 @@ void DKVncClient::cleanup(rfbClient* cl)
 	if(cl)
 		cl->serverHost = NULL;
 		rfbClientCleanup(cl);
-}
-
-////////////////////////////////////////////////////////////////
-rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
-{
-	//DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
-
-	switch(e->type) {
-/*
-#if SDL_MAJOR_VERSION > 1 || SDL_MINOR_VERSION >= 2
-	case SDL_VIDEOEXPOSE:
-		SendFramebufferUpdateRequest(cl, 0, 0,
-			cl->width, cl->height, FALSE);
-		break;
-#endif
-*/
-	case SDL_MOUSEBUTTONUP:
-	case SDL_MOUSEBUTTONDOWN:
-	case SDL_MOUSEMOTION:
-	{
-		int x, y, state, i;
-		if (viewOnly)
-			break;
-
-		if (e->type == SDL_MOUSEMOTION) {
-			x = e->motion.x;
-			y = e->motion.y;
-			state = e->motion.state;
-			buttonMask &= ~state;
-		}
-		else {
-			x = e->button.x;
-			y = e->button.y;
-			state = e->button.button;
-			for (i = 0; buttonMapping[i].sdl; i++)
-				if (state == buttonMapping[i].sdl) {
-					state = buttonMapping[i].rfb;
-					if (e->type == SDL_MOUSEBUTTONDOWN)
-						buttonMask |= state;
-					else
-						buttonMask &= ~state;
-					break;
-				}
-		}
-		
-		//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
-		//if(sdl->pixels) {
-			x = x * cl->width / dkSdlWindow->width;// / realWidth;
-			y = y * cl->height / dkSdlWindow->height;// / realHeight;
-		//}
-		
-		//if(e->type == SDL_MOUSEBUTTONDOWN){
-			SendPointerEvent(cl, x, y, buttonMask);
-			buttonMask &= ~(rfbButton4Mask | rfbButton5Mask);
-		//}
-		break;
-	}
-	case SDL_KEYUP:
-	case SDL_KEYDOWN:
-		if (viewOnly)
-			break;
-		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
-		if (e->key.keysym.sym == SDLK_RALT)
-			rightAltKeyDown = e->type == SDL_KEYDOWN;
-		if (e->key.keysym.sym == SDLK_LALT)
-			leftAltKeyDown = e->type == SDL_KEYDOWN;
-		break;
-	case SDL_QUIT:
-			DKApp::active = false;
-			cleanup(cl);
-			DKApp::Exit();
-			return false;
-
-	/*
-	case SDL_ACTIVEEVENT:
-		if (!e->active.gain && rightAltKeyDown) {
-			SendKeyEvent(cl, XK_Alt_R, FALSE);
-			rightAltKeyDown = FALSE;
-			rfbClientLog("released right Alt key\n");
-		}
-		if (!e->active.gain && leftAltKeyDown) {
-			SendKeyEvent(cl, XK_Alt_L, FALSE);
-			leftAltKeyDown = FALSE;
-			rfbClientLog("released left Alt key\n");
-		}
-
-		if (e->active.gain && lost_scrap()) {
-			static char *data = NULL;
-			static int len = 0;
-			get_scrap(T('T', 'E', 'X', 'T'), &len, &data);
-			if (len)
-				SendClientCutText(cl, data, len);
-		}
-		break;
-	*/
-	case SDL_SYSWMEVENT:
-		//clipboard_filter(e);
-		break;
-	case SDL_WINDOWEVENT:
-		//DKLog("SDL_WINDOWEVENT\n", DKINFO);
-		switch(e->window.event){
-			case SDL_WINDOWEVENT_RESIZED:{
-				dkSdlWindow->width = e->window.data1;
-				dkSdlWindow->height = e->window.data2;
-				//resize(cl);
-				update(cl, 0, 0, cl->width, cl->height);
-				return 1;
-			}
-			case SDL_WINDOWEVENT_SIZE_CHANGED:{
-				dkSdlWindow->width = e->window.data1;
-				dkSdlWindow->height = e->window.data2;
-				//resize(cl);
-				update(cl, 0, 0, cl->width, cl->height);
-				return 1;
-			}
-		}
-		break;
-	default:
-		rfbClientLog("ignored SDL event: 0x%x\n", e->type);
-	}
-	return TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
