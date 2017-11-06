@@ -668,6 +668,15 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	DKLog("DKVncClient::ValidateAspectRatio(): new height = "+toString(height)+"\n", DKINFO);
 	DKWindow::SetHeight(height);
 	dkSdlWindow->height = height;
+
+	int w, h;
+	SDL_GetWindowSize(dkSdlWindow->sdlwin, &w, &h);
+	DKLog("DKVncClient::ValidateAspectRatio(): width="+toString(w)+" height="+toString(h)+"\n", DKINFO);
+
+	int top, left, bottom, right;
+	SDL_GetWindowBordersSize(dkSdlWindow->sdlwin, &top, &left, &bottom, &right);
+	DKLog("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n", DKINFO);
+
 	update(cl, 0, 0, cl->width, cl->height);
 	return true;
 }
