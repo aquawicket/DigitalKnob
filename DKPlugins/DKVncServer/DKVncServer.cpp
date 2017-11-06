@@ -100,6 +100,10 @@ void DKVncServer::Init()
 
 	rfbScreen->serverFormat = vnc24bitFormat;
 
+	static const char* passwords[2]={"8BallBreak",0};
+	rfbScreen->authPasswdData = (void*)passwords;
+	rfbScreen->passwordCheck = rfbCheckPasswordByList;
+
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
 	DKApp::SetFramerate(0);
