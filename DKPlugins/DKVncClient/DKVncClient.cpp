@@ -125,7 +125,7 @@ void DKVncClient::Init()
 	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	rfbClientSetClientData(cl, SDL_Init, sdl);
 
-	ValidateAspectRatio(cl);
+	//ValidateAspectRatio(cl);
 
 	DKApp::active = true;
 	while(DKApp::active){
@@ -284,6 +284,8 @@ rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
 		switch(e->window.event){
 		case SDL_WINDOWEVENT_RESIZED:{
 			if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
+				dkSdlWindow->width = e->window.data1;
+				dkSdlWindow->height = e->window.data2;
 				ValidateAspectRatio(cl);
 			}
 			return 1;
@@ -661,6 +663,11 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	//cl->width;
 	//cl->height;
 	//DKWindow::SetHeight(300);
+	float delta = (float)cl->width / (float)dkSdlWindow->width;
+	float height = (float)cl->height / delta;
+	DKLog("DKVncClient::ValidateAspectRatio(): new height = "+toString(height)+"\n", DKINFO);
+	DKWindow::SetHeight(height);
+	dkSdlWindow->height = height;
 	update(cl, 0, 0, cl->width, cl->height);
 	return true;
 }
