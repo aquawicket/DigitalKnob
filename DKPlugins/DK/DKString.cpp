@@ -152,14 +152,14 @@ DKString toString(const DKStringArray& arry, const char* seperator)
 }
 
 /*
-//////////////////////////////////////////////////////////////////////////////////////
-bool ArrayToString(const DKStringArray& arry, DKString& string, const char* seperator)
+///////////////////////////////////////////////////////////////////////////////////
+bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator)
 {
-	string = "";
+	str = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
-		string += arry[i];
+		str += arry[i];
 		if(i < arry.size()-1){
-			string += seperator;
+			str += seperator;
 		}
 	}
 	return true;
@@ -200,7 +200,7 @@ long toLong(const DKString& str)
 	return false;
 }
 
-///////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 unsigned long long int toULongLong(const DKString& str)
 {
 #if defined(WIN32) || defined(MAC)
@@ -218,6 +218,12 @@ int toInt(const DKString& str)
 	return value;
 }
 
+////////////////////////////////
+bool toBool(const DKString& str)
+{
+	return str != "0";
+}
+
 ////////////////////////////////////////
 unsigned int toUInt(const DKString& str)
 {
@@ -225,27 +231,27 @@ unsigned int toUInt(const DKString& str)
 	return value;
 }
 
-/////////////////////////////////////
-float toFloat(const DKString& string)
+//////////////////////////////////
+float toFloat(const DKString& str)
 {
-	float value = (float)atof(string.c_str());
+	float value = (float)atof(str.c_str());
 	return value;
 }
 
-/////////////////////////////////////
-bool IsNumber(const DKString& string)
+//////////////////////////////////
+bool IsNumber(const DKString& str)
 {
-    std::string::const_iterator it = string.begin();
-    while (it != string.end() && std::isdigit(*it)) ++it;
-    return !string.empty() && it == string.end();
+    std::string::const_iterator it = str.begin();
+    while (it != str.end() && std::isdigit(*it)) ++it;
+    return !str.empty() && it == str.end();
 }
 
-///////////////////////////////////////////////////
-bool Pad(int num, char character, DKString& string)
+////////////////////////////////////////////////
+bool Pad(int num, char character, DKString& str)
 {
 	std::ostringstream ss;
-	ss << std::setw(num) << std::setfill(character) << string;
-	string = ss.str();
+	ss << std::setw(num) << std::setfill(character) << str;
+	str = ss.str();
 	return true;
 }
 
@@ -340,20 +346,20 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 }
 */
 
-///////////////////////////
-bool Trim(DKString& string)
+////////////////////////
+bool Trim(DKString& str)
 {
-	string.erase(string.begin(), std::find_if(string.begin(), string.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
-	string.erase(std::find_if(string.rbegin(), string.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), string.end());
+	str.erase(str.begin(), std::find_if(str.begin(), str.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+	str.erase(std::find_if(str.rbegin(), str.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), str.end());
 	return true;
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////
-bool toStringArray(DKStringArray& output, const DKString& string, const DKString& seperator)
+/////////////////////////////////////////////////////////////////////////////////////////
+bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator)
 {
 	//FIXME - while(1) loops are dangerous 
-	DKString text = string + seperator; //add a seperator at the end, or we won't get the last variable
+	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
 
 	int begin = 0;
 	while(1){
@@ -382,14 +388,14 @@ DKString toLower(const DKString& input)
 }
 
 #ifdef WIN32
-////////////////////////////////////////////
-std::wstring toWString(const std::string& s)
+///////////////////////////////////////////
+std::wstring toWString(const DKString& str)
 {
 	int len;
-	int slength = (int)s.length() + 1;
-	len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);
+	int slength = (int)str.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, 0, 0);
 	wchar_t* buf = new wchar_t[len];
-	MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, buf, len);
+	MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, buf, len);
 	std::wstring r(buf);
 	delete[] buf;
 	return r;

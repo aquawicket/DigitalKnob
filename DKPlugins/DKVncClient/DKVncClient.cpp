@@ -67,20 +67,19 @@ void DKVncClient::Init()
 	bool jpeg = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_JPEG]", vnc_jpeg);
 	if (!vnc_jpeg.empty()) {
-		jpeg = toInt(vnc_jpeg);
+		jpeg = toBool(vnc_jpeg);
 	}
 	DKString vnc_cursor;
 	bool cursor = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CURSOR]", vnc_cursor);
 	if (!vnc_cursor.empty()) {
-		cursor = toInt(vnc_cursor);
+		cursor = toBool(vnc_cursor);
 	}
 	
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
 	SDL_SetEventFilter(NULL, NULL);
 
-	int i;
 	SDL_Event e;
 
 	atexit(SDL_Quit);
@@ -665,21 +664,23 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	//DKWindow::SetHeight(300);
 
 	//TODO = test this
-	//SDL_SetWindowBordered(dkSdlWindow->sdlwin, false);
+	//SDL_SetWindowBordered(dkSdlWindow->sdlwin, SDL_FALSE);
 
 	float delta = (float)cl->width / (float)dkSdlWindow->width;
+	DKLog("DKVncClient::ValidateAspectRatio(): "+toString(cl->width)+" / "+toString(dkSdlWindow->width)+" = "+toString(delta)+"\n", DKINFO);
+
 	float height = (float)cl->height / delta;
-	DKLog("DKVncClient::ValidateAspectRatio(): new height = "+toString(height)+"\n", DKINFO);
-	DKWindow::SetHeight(height);
-	dkSdlWindow->height = height;
+	DKLog("DKVncClient::ValidateAspectRatio(): "+toString(cl->height)+" / "+toString(delta)+" = "+toString(height)+"\n", DKINFO);
+	DKWindow::SetHeight((int)height);
+	dkSdlWindow->height = (int)height;
 
 	int w, h;
 	SDL_GetWindowSize(dkSdlWindow->sdlwin, &w, &h);
 	DKLog("DKVncClient::ValidateAspectRatio(): width="+toString(w)+" height="+toString(h)+"\n", DKINFO);
 
-	int top, left, bottom, right;
-	SDL_GetWindowBordersSize(dkSdlWindow->sdlwin, &top, &left, &bottom, &right);
-	DKLog("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n", DKINFO);
+	//int top, left, bottom, right;
+	//SDL_GetWindowBordersSize(dkSdlWindow->sdlwin, &top, &left, &bottom, &right);
+	//DKLog("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n", DKINFO);
 
 	update(cl, 0, 0, cl->width, cl->height);
 
