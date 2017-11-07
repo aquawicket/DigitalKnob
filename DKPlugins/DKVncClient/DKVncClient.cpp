@@ -7,6 +7,7 @@
 #include "SDL.h"
 #include <signal.h>
 
+
 struct { int sdl; int rfb; } buttonMapping[]={
 	{1, rfbButton1Mask},
 	{2, rfbButton2Mask},
@@ -107,6 +108,7 @@ void DKVncClient::Init()
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
+	//cl->appData.scaleSetting = 2;
 	
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
@@ -125,6 +127,9 @@ void DKVncClient::Init()
 	rfbClientSetClientData(cl, SDL_Init, sdl);
 
 	ValidateAspectRatio(cl);
+
+	//rfbScaledScreenAllocate(cl, dkSdlWindow->width, dkSdlWindow->height);
+	//SendScaleSetting(cl, cl->appData.scaleSetting);	
 
 	DKApp::active = true;
 	while(DKApp::active){
