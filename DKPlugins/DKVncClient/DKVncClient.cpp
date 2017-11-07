@@ -125,7 +125,7 @@ void DKVncClient::Init()
 	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	rfbClientSetClientData(cl, SDL_Init, sdl);
 
-	//ValidateAspectRatio(cl);
+	ValidateAspectRatio(cl);
 
 	DKApp::active = true;
 	while(DKApp::active){
