@@ -423,7 +423,6 @@ void DKVncClient::cleanup(rfbClient* cl)
 	SDL_InitSubSystem(SDL_INIT_VIDEO);
 	if(cl)
 		cl->serverHost = NULL;
-		rfbClientCleanup(cl);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
