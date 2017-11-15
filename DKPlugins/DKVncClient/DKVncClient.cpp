@@ -130,9 +130,6 @@ void DKVncClient::Init()
 
 	ValidateAspectRatio(cl);
 
-	//rfbScaledScreenAllocate(cl, dkSdlWindow->width, dkSdlWindow->height);
-	//SendScaleSetting(cl, cl->appData.scaleSetting);	
-
 	if(seperate_loop){
 		SDL_Event e;
 		DKApp::active = true;
@@ -326,8 +323,8 @@ bool DKVncClient::handle(SDL_Event *e)
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
-	return TRUE;
 	DKLog("DKVncClient::resize()\n", DKINFO);
+	return TRUE;
 
 	int width = client->width;
 	int height = client->height;
@@ -339,6 +336,8 @@ rfbBool DKVncClient::resize(rfbClient* client)
 
 	client->updateRect.x = client->updateRect.y = 0;
 	client->updateRect.w = width; client->updateRect.h = height;
+
+
 	rfbBool okay = 1;//SDL_VideoModeOK(width, height, depth, sdlFlags);
 	//if(!okay)
 		//for(depth=24;!okay && depth>4;depth/=2)
