@@ -13,6 +13,7 @@ public:
 	void Init();
 	void End();
 
+	void Process();
 	static void update(rfbClient* cl,int x,int y,int w,int h);
 	static rfbBool resize(rfbClient* client);
 	static void kbd_leds(rfbClient* cl, int value, int pad);

@@ -81,8 +81,6 @@ void DKVncClient::Init()
 
 	SDL_SetEventFilter(NULL, NULL);
 
-	SDL_Event e;
-
 	atexit(SDL_Quit);
 	signal(SIGINT, exit);
 
@@ -131,6 +129,8 @@ void DKVncClient::Init()
 	//rfbScaledScreenAllocate(cl, dkSdlWindow->width, dkSdlWindow->height);
 	//SendScaleSetting(cl, cl->appData.scaleSetting);	
 
+	
+	SDL_Event e;
 	DKApp::active = true;
 	while(DKApp::active){
 		while(SDL_PollEvent(&e)){
@@ -140,6 +140,9 @@ void DKVncClient::Init()
 			HandleRFBServerMessage(cl);
 		}
 	}
+	
+	//TODO
+	//DKApp::AppendLoopFunc(&DKVncClient::Process, this);
 }
 
 ///////////////////////
@@ -147,6 +150,18 @@ void DKVncClient::End()
 {
 	DKLog("DKVncClient::End()\n", DKINFO);
 	SDL_DestroyTexture(tex);
+}
+
+///////////////////////////
+void DKVncClient::Process()
+{
+	SDL_Event e;
+	while(SDL_PollEvent(&e)){
+		handleSDLEvent(cl, &e);
+	}
+	while(WaitForMessage(cl, message_wait)){
+		HandleRFBServerMessage(cl);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////
