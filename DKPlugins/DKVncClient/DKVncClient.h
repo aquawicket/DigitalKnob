@@ -12,8 +12,8 @@ class DKVncClient : public DKObjectT<DKVncClient>
 public:
 	void Init();
 	void End();
-
-	void Process();
+    
+	void draw();
 	static void update(rfbClient* cl,int x,int y,int w,int h);
 	static rfbBool resize(rfbClient* client);
 	static void kbd_leds(rfbClient* cl, int value, int pad);
@@ -24,7 +24,8 @@ public:
 	static uint32_t get(rfbClient *cl, int x, int y);
 	static void put(int x, int y, uint32_t v);
 	static void setRealDimension(rfbClient *client, int w, int h);
-	static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e);
+	//static rfbBool handleSDLEvent(rfbClient *cl, SDL_Event *e);
+	bool handle(SDL_Event *e);
 	static rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e);
 	static char* password(rfbClient *cl);
 	static bool ValidateAspectRatio(rfbClient *cl);
@@ -32,7 +33,7 @@ public:
 
 	static DKSDLWindow* dkSdlWindow;
 	static SDL_Texture *tex;
-	rfbClient* cl;
+	static rfbClient* cl;
 	static int enableResizable, viewOnly, buttonMask;
 	static int realWidth, realHeight, bytesPerPixel, rowStride;
 	static int rightShiftKeyDown, leftShiftKeyDown;
