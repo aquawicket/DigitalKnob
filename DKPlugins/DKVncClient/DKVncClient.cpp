@@ -26,6 +26,7 @@ int DKVncClient::fps = 48;
 int DKVncClient::message_wait = 1;
 SDL_Texture* DKVncClient::tex;
 rfbClient* DKVncClient::cl;
+bool DKVncClient::seperate_loop = false;
 
 ////////////////////////
 void DKVncClient::Init()
@@ -95,7 +96,9 @@ void DKVncClient::Init()
 	//cl->appData.nColours = ?;
 	cl->canHandleNewFBSize = TRUE;
 	//cl->MallocFrameBuffer = DKVncClient::resize;
-	//cl->GotFrameBufferUpdate = DKVncClient::update;
+	if(seperate_loop){
+		cl->GotFrameBufferUpdate = DKVncClient::update;
+	}
 	cl->HandleKeyboardLedState = DKVncClient::kbd_leds;
 	cl->HandleTextChat = DKVncClient::text_chat;
 	cl->GotXCutText = DKVncClient::got_selection;
@@ -130,8 +133,22 @@ void DKVncClient::Init()
 	//rfbScaledScreenAllocate(cl, dkSdlWindow->width, dkSdlWindow->height);
 	//SendScaleSetting(cl, cl->appData.scaleSetting);	
 
-	DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
-	DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
+	if(seperate_loop){
+		SDL_Event e;
+		DKApp::active = true;
+		while(DKApp::active){
+			while(SDL_PollEvent(&e)){
+				handle(&e);
+			}
+			//while(WaitForMessage(cl, message_wait)){
+				HandleRFBServerMessage(cl);
+			//}
+		}
+	}
+	else{
+		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
+		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
+	}
 }
 
 ///////////////////////
@@ -144,10 +161,7 @@ void DKVncClient::End()
 ////////////////////////
 void DKVncClient::draw()
 {
-	//while(WaitForMessage(cl, message_wait)){
-		HandleRFBServerMessage(cl);
-	//}
-
+	HandleRFBServerMessage(cl);
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
@@ -163,28 +177,21 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	double delta = DKApp::now - DKApp::lastFrame;
 	DKApp::lastFrame = DKApp::now;
 	if(delta < fps){
-		//return;
+		return;
 	}
 
 	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
-
-	//SDL_Rect r{x, y, w, h};
-	//SDL_UpdateTexture(tex, &r, rfbClientGetClientData(cl, SDL_Init), cl->width*4);
-
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 
-	/*
 	//Now render the texture target to our screen
 	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 	SDL_RenderClear(dkSdlWindow->sdlren);
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
 	SDL_RenderPresent(dkSdlWindow->sdlren);
-	*/
 }
 
-////////////////////////////////////////////////////////////////
-//rfbBool DKVncClient::handleSDLEvent(rfbClient *cl, SDL_Event *e)
+//////////////////////////////////////
 bool DKVncClient::handle(SDL_Event *e)
 {
 	//DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
