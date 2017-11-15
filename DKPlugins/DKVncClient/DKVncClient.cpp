@@ -81,7 +81,7 @@ void DKVncClient::Init()
 	
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 
-	SDL_SetEventFilter(NULL, NULL);
+	//SDL_SetEventFilter(NULL, NULL);
 
 	atexit(SDL_Quit);
 	signal(SIGINT, exit);
@@ -197,134 +197,126 @@ bool DKVncClient::handle(SDL_Event *e)
 	//DKLog("DKVncClient::handleSDLEvent()\n", DKINFO);
 
 	switch(e->type){
+		case SDL_MOUSEBUTTONUP:
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEMOTION:
+		{
+			int x, y, state;
+			//if (viewOnly)
+			//	break;
 
-	case SDL_MOUSEBUTTONUP:
-	case SDL_MOUSEBUTTONDOWN:
-	case SDL_MOUSEMOTION:
-	{
-		int x, y, state;
-		//if (viewOnly)
-		//	break;
+			if(e->type == SDL_MOUSEMOTION){
+				x = e->motion.x;
+				y = e->motion.y;
+				state = e->motion.state;
+				if(state == 3){ state = 4;}
+			}
+			else{
+				x = e->button.x;
+				y = e->button.y;
+				state = e->button.button;
+				if(state == 3){ state = 4;}
+				if(e->type == SDL_MOUSEBUTTONUP){
+					state = 0;
+				}
+			}
 
-		if(e->type == SDL_MOUSEMOTION){
-			x = e->motion.x;
-			y = e->motion.y;
-			state = e->motion.state;
-			if(state == 3){ state = 4;}
+			x = x * cl->width / dkSdlWindow->width;
+			y = y * cl->height / dkSdlWindow->height;
+			SendPointerEvent(cl, x, y, state);
+			break;
 		}
-		else{
-			x = e->button.x;
-			y = e->button.y;
-			state = e->button.button;
-			if(state == 3){ state = 4;}
-			if(e->type == SDL_MOUSEBUTTONUP){
-				state = 0;
+		case SDL_MOUSEWHEEL:
+		{
+			int x, y;
+			SDL_GetMouseState(&x, &y);
+			x = x * cl->width / dkSdlWindow->width;
+			y = y * cl->height / dkSdlWindow->height;
+			if(e->wheel.y == 1){ // scroll up
+				SendPointerEvent(cl, x, y, 8);
+				SendPointerEvent(cl, x, y, 0);
+				break;
+			}
+			else if(e->wheel.y == -1){ // scroll down
+				SendPointerEvent(cl, x, y, 16);
+				SendPointerEvent(cl, x, y, 0);
+				break;
 			}
 		}
-
-		x = x * cl->width / dkSdlWindow->width;
-		y = y * cl->height / dkSdlWindow->height;
-		SendPointerEvent(cl, x, y, state);
-		break;
-	}
-	case SDL_MOUSEWHEEL:
-	{
-		int x, y;
-		SDL_GetMouseState(&x, &y);
-		x = x * cl->width / dkSdlWindow->width;
-		y = y * cl->height / dkSdlWindow->height;
-		if(e->wheel.y == 1){ // scroll up
-			SendPointerEvent(cl, x, y, 8);
-			SendPointerEvent(cl, x, y, 0);
+		case SDL_KEYUP:
+		case SDL_KEYDOWN:
+		{
+			//if (viewOnly)
+			//	break;
+			/*
+			if(e->key.keysym.sym == SDLK_LSHIFT && !rightShiftKeyDown){
+				DKLog("left shift down\n", DKINFO);
+				rightShiftKeyDown = TRUE;
+				SendKeyEvent(cl, XK_Shift_L, TRUE);
+			}
+			*/
+			/*
+			else if(e->key.keysym.sym != SDLK_LSHIFT && rightShiftKeyDown){
+				DKLog("left shift up\n", DKINFO);
+				rightShiftKeyDown = FALSE;
+				SendKeyEvent(cl, XK_Shift_L, FALSE);
+			}
+			*/
+			DKLog(toString(SDL_key2rfbKeySym(&e->key))+", "+toString(e->type == SDL_KEYDOWN ? "down" : "up")+"\n", DKINFO);
+			SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
 			break;
 		}
-		else if(e->wheel.y == -1){ // scroll down
-			SendPointerEvent(cl, x, y, 16);
-			SendPointerEvent(cl, x, y, 0);
-			break;
+		case SDL_QUIT:
+		{
+			DKApp::active = false;
+			cleanup(cl);
+			DKApp::Exit();
+			return false;
 		}
-	}
-	case SDL_KEYUP:
-	case SDL_KEYDOWN:
-	{
-		//if (viewOnly)
-		//	break;
-		/*
-		if(e->key.keysym.sym == SDLK_LSHIFT && !rightShiftKeyDown){
-			DKLog("left shift down\n", DKINFO);
-			rightShiftKeyDown = TRUE;
-			SendKeyEvent(cl, XK_Shift_L, TRUE);
-		}
-		*/
-		/*
-		else if(e->key.keysym.sym != SDLK_LSHIFT && rightShiftKeyDown){
-			DKLog("left shift up\n", DKINFO);
-			rightShiftKeyDown = FALSE;
-			SendKeyEvent(cl, XK_Shift_L, FALSE);
-		}
-		*/
-		DKLog(toString(SDL_key2rfbKeySym(&e->key))+", "+toString(e->type == SDL_KEYDOWN ? "down" : "up")+"\n", DKINFO);
-		SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
-		break;
-	}
-	case SDL_QUIT:
-	{
-		DKApp::active = false;
-		cleanup(cl);
-		DKApp::Exit();
-		return false;
-	}
 		/*
 		case SDL_ACTIVEEVENT:
-		if (!e->active.gain && rightAltKeyDown) {
-		SendKeyEvent(cl, XK_Alt_R, FALSE);
-		rightAltKeyDown = FALSE;
-		rfbClientLog("released right Alt key\n");
-		}
-		if (!e->active.gain && leftAltKeyDown) {
-		SendKeyEvent(cl, XK_Alt_L, FALSE);
-		leftAltKeyDown = FALSE;
-		rfbClientLog("released left Alt key\n");
-		}
+			if (!e->active.gain && rightAltKeyDown){
+				SendKeyEvent(cl, XK_Alt_R, FALSE);
+				rightAltKeyDown = FALSE;
+				rfbClientLog("released right Alt key\n");
+			}
+			if (!e->active.gain && leftAltKeyDown){
+				SendKeyEvent(cl, XK_Alt_L, FALSE);
+				leftAltKeyDown = FALSE;
+				rfbClientLog("released left Alt key\n");
+			}
 
-		if (e->active.gain && lost_scrap()) {
-		static char *data = NULL;
-		static int len = 0;
-		get_scrap(T('T', 'E', 'X', 'T'), &len, &data);
-		if (len)
-		SendClientCutText(cl, data, len);
-		}
+			if (e->active.gain && lost_scrap()) {
+				static char *data = NULL;
+				static int len = 0;
+				get_scrap(T('T', 'E', 'X', 'T'), &len, &data);
+				if (len)
+				SendClientCutText(cl, data, len);
+			}
 		break;
 		*/
-	case SDL_SYSWMEVENT:
-		//clipboard_filter(e);
-		break;
-	case SDL_WINDOWEVENT:
-		//DKLog("SDL_WINDOWEVENT\n", DKINFO);
-		switch(e->window.event){
-		case SDL_WINDOWEVENT_RESIZED:{
-			if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
-				dkSdlWindow->width = e->window.data1;
-				dkSdlWindow->height = e->window.data2;
-				ValidateAspectRatio(cl);
+		case SDL_SYSWMEVENT:
+			//clipboard_filter(e);
+			break;
+		case SDL_WINDOWEVENT:
+			//DKLog("SDL_WINDOWEVENT\n", DKINFO);
+			switch(e->window.event){
+				case SDL_WINDOWEVENT_SIZE_CHANGED:
+				//case SDL_WINDOWEVENT_RESIZED:
+				//case SDL_WINDOWEVENT_MINIMIZED:      
+				//case SDL_WINDOWEVENT_MAXIMIZED:      
+				//case SDL_WINDOWEVENT_RESTORED: 
+				{
+					if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
+						dkSdlWindow->width = e->window.data1;
+						dkSdlWindow->height = e->window.data2;
+						ValidateAspectRatio(cl);
+					}
+					return 1;
+				}
 			}
-			return 1;
-		}
-		/*
-		case SDL_WINDOWEVENT_SIZE_CHANGED:{
-			if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
-				//dkSdlWindow->width = e->window.data1;
-				//dkSdlWindow->height = e->window.data2;
-				//resize(cl);
-				ValidateAspectRatio(cl);
-				update(cl, 0, 0, cl->width, cl->height);
-			}
-			return 1;
-		}
-		*/
-		}
-		break;
-	default:
+			break;
+		default:
 		rfbClientLog("ignored SDL event: 0x%x\n", e->type);
 	}
 
