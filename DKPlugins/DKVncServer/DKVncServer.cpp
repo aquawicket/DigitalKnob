@@ -27,6 +27,22 @@ static Window root;
 static XImage *image;
 #endif
 
+/*
+rfbPixelFormat pixfmt = {
+	32,     //U8  bitsPerPixel;
+	32,     //U8  depth;
+	0,     //U8  bigEndianFlag;
+	1,     //U8  trueColourFlag;
+	255,     //U16 redMax;
+	255,     //U16 greenMax;
+	255,     //U16 blueMax;
+	16,     //U8  redShift;
+	8,     //U8  greenShift;
+	0,     //U8  blueShift;
+	0,     //U8  pad 1;
+	0    //U8  pad 2
+};
+*/
 const rfbPixelFormat vnc8bitFormat =
 { 8, 8, 0, 1, 7, 7, 3, 0, 3, 6, 0, 0 };
 const rfbPixelFormat vnc16bitFormat =
@@ -80,24 +96,6 @@ void DKVncServer::Init()
 	rfbScreen->newClientHook = newclient;
 	rfbScreen->httpDir = (char*)DKFile::local_assets.c_str(); //+"DKVncServer";
 	rfbScreen->httpEnableProxyConnect = TRUE;
-	
-	/*
-	rfbPixelFormat pixfmt = {
-		32,     //U8  bitsPerPixel;
-		32,     //U8  depth;
-		0,     //U8  bigEndianFlag;
-		1,     //U8  trueColourFlag;
-		255,     //U16 redMax;
-		255,     //U16 greenMax;
-		255,     //U16 blueMax;
-		16,     //U8  redShift;
-		8,     //U8  greenShift;
-		0,     //U8  blueShift;
-		0,     //U8  pad 1;
-		0    //U8  pad 2
-	};
-	*/
-
 	rfbScreen->serverFormat = vnc24bitFormat;
 
 	static const char* passwords[2]={"8BallBreak",0};
