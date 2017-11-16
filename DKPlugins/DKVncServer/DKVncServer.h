@@ -28,6 +28,7 @@ public:
 	static void newframebuffer(rfbScreenInfoPtr screen, int width, int height);
 	static void mouseevent(int buttonMask, int x, int y, rfbClientPtr cl);
 	static void keyevent(rfbBool down,rfbKeySym key,rfbClientPtr cl);
+	static rfbBool rfbCheckPasswordByList2(rfbClientPtr cl,const char* response,int len);
 
 	static DKString capture; //GDI, DIRECTX, OPENGL
 	static DKString ipaddress;

@@ -100,7 +100,7 @@ void DKVncServer::Init()
 
 	static const char* passwords[2]={"8BallBreak",0};
 	rfbScreen->authPasswdData = (void*)passwords;
-	rfbScreen->passwordCheck = rfbCheckPasswordByList;
+	rfbScreen->passwordCheck = rfbCheckPasswordByList2;
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
@@ -150,6 +150,30 @@ void DKVncServer::Loop()
 	if(rfbProcessEvents(rfbScreen, 1)){
 		DrawBuffer();
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl,const char* response,int len)
+{
+	char **passwds;
+	int i=0;
+
+	for(passwds=(char**)cl->screen->authPasswdData;*passwds;passwds++,i++){
+		uint8_t auth_tmp[CHALLENGESIZE];
+		memcpy((char *)auth_tmp, (char *)cl->authChallenge, CHALLENGESIZE);
+		rfbEncryptBytes(auth_tmp, *passwds);
+
+		if(memcmp(auth_tmp, response, len) == 0){
+			if(i>=cl->screen->authPasswdFirstViewOnly)
+				cl->viewOnly=TRUE;
+			DKLog("DKVncServer::rfbCheckPasswordByList2() = true\n", DKINFO);
+			return(TRUE);
+		}
+	}
+	
+	rfbErr("authProcessClientMessage: authentication failed from %s\n", cl->host);
+	DKLog("DKVncServer::rfbCheckPasswordByList2() = false\n", DKINFO);
+	return(FALSE);
 }
 
 //////////////////////////////
