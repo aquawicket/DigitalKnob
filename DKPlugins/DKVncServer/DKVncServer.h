@@ -31,7 +31,6 @@ public:
 	static rfbBool rfbCheckPasswordByList2(rfbClientPtr cl,const char* response,int len);
 
 	static DKString capture; //GDI, DIRECTX, OPENGL
-	static DKString ipaddress;
 	static int _buttonMask;
 	static int _key;
 };

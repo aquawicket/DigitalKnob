@@ -53,12 +53,12 @@ const rfbPixelFormat vnc24bitFormat =
 /////////////////////////
 typedef struct ClientData
 {
-	rfbBool oldButton;
-	int oldx,oldy;
+	//rfbBool oldButton;
+	//int oldx,oldy;
+	DKString ipaddress;
 } ClientData;
 
 DKString DKVncServer::capture;
-DKString DKVncServer::ipaddress;
 int DKVncServer::_buttonMask = 0;
 int DKVncServer::_key = 0;
 
@@ -127,8 +127,9 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	unsigned int ip;
 	getpeername(cl->sock, (struct sockaddr*)&addr, &len);
 	ip = ntohl(addr.sin_addr.s_addr);
-	ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
-	DKLog("ip = "+ipaddress+"\n", DKINFO);
+	ClientData* cd = (ClientData*)cl->clientData;
+	cd->ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
+	DKLog("ip = "+cd->ipaddress+"\n", DKINFO);
 
 	//FIXME - keyboard led status
 	//cl->enableKeyboardLedState = TRUE;
@@ -152,19 +153,18 @@ void DKVncServer::Loop()
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl,const char* response,int len)
+////////////////////////////////////////////////////////////////////////////////////////////
+rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len)
 {
 	char **passwds;
 	int i=0;
 
-	for(passwds=(char**)cl->screen->authPasswdData;*passwds;passwds++,i++){
+	for(passwds=(char**)cl->screen->authPasswdData; *passwds; passwds++,i++){
 		uint8_t auth_tmp[CHALLENGESIZE];
 		memcpy((char *)auth_tmp, (char *)cl->authChallenge, CHALLENGESIZE);
 		rfbEncryptBytes(auth_tmp, *passwds);
-
 		if(memcmp(auth_tmp, response, len) == 0){
-			if(i>=cl->screen->authPasswdFirstViewOnly)
+			if(i >= cl->screen->authPasswdFirstViewOnly)
 				cl->viewOnly=TRUE;
 			DKLog("DKVncServer::rfbCheckPasswordByList2() = true\n", DKINFO);
 			return(TRUE);
@@ -173,6 +173,9 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl,const char* respons
 	
 	rfbErr("authProcessClientMessage: authentication failed from %s\n", cl->host);
 	DKLog("DKVncServer::rfbCheckPasswordByList2() = false\n", DKINFO);
+
+	//TODO - log the ipaddress of the client, if failed 3 times, block for 5 minutes.
+
 	return(FALSE);
 }
 
@@ -321,7 +324,8 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 ///////////////////////////////////////////////////////////////////////////
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-	if(same(ipaddress,"127.0.0.1")){ return; }
+	ClientData* cd = (ClientData*)cl->clientData;
+	if(same(cd->ipaddress,"127.0.0.1")){ return; }
 	//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 
 	DKUtil::SetMousePos(x, y);
