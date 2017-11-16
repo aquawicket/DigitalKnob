@@ -115,6 +115,37 @@ void DKVncServer::End()
 
 }
 
+///////////////////////////////////////////////////////////////
+enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
+{
+	DKLog("newclient()\n", DKINFO);
+
+	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
+	cl->clientGoneHook = clientgone;
+
+	//Get client ip address
+	struct sockaddr_in addr;
+	socklen_t len = sizeof(addr);
+	unsigned int ip;
+	getpeername(cl->sock, (struct sockaddr*)&addr, &len);
+	ip = ntohl(addr.sin_addr.s_addr);
+	ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
+	DKLog("ip = "+ipaddress+"\n", DKINFO);
+
+	//FIXME - keyboard led status
+	//cl->enableKeyboardLedState = TRUE;
+	//rfbScreen->getKeyboardLedStateHook(rfbScreen);
+
+	return RFB_CLIENT_ACCEPT;
+}
+
+/////////////////////////////////////////////
+void DKVncServer::clientgone(rfbClientPtr cl)
+{
+	free(cl->clientData);
+	cl->clientData = NULL;
+}
+
 ////////////////////////
 void DKVncServer::Loop()
 {
@@ -201,8 +232,6 @@ void DKVncServer::DrawBuffer()
 	else if(capture == "DIRECTX"){
 
 		//DKLog("DIRECTX\n",DKINFO);
-		//TODO
-		//FIXME
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
 
 		HRESULT hr = S_OK;
@@ -214,7 +243,6 @@ void DKVncServer::DrawBuffer()
 		D3DLOCKED_RECT rc;
 		UINT pitch;
 		SYSTEMTIME st;
-		//LPBYTE *shots = nullptr;
 		LPBYTE shot;
 		UINT adapter = D3DADAPTER_DEFAULT;
 
@@ -246,46 +274,9 @@ void DKVncServer::DrawBuffer()
 		HRCHECK(surface->LockRect(&rc, NULL, 0));
 		CopyMemory(rfbScreen->frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
 		HRCHECK(surface->UnlockRect());
-		
-		/*
-		IWICImagingFactory *factory = nullptr;
-		IWICBitmapEncoder *encoder = nullptr;
-		IWICBitmapFrameEncode *frame = nullptr;
-		IWICBitmapFlipRotator *flip = nullptr;
-		IWICStream *stream = nullptr;
-		GUID pf = GUID_WICPixelFormat32bppBGR;
-		BOOL coInit = CoInitialize(nullptr);
-
-		HRCHECK(CoCreateInstance(CLSID_WICImagingFactory, nullptr, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory)));
-		HRCHECK(factory->CreateStream(&stream));
-		//std::wstring filename = toWString("test.bmp");
-		//HRCHECK(stream->InitializeFromFilename(filename.c_str(), GENERIC_WRITE));
-		HRCHECK(stream->InitializeFromMemory((WICInProcPointer)rfbScreen->frameBuffer, GENERIC_WRITE));
-		//HRCHECK(factory->CreateEncoder(GUID_ContainerFormatPng, nullptr, &encoder));
-		HRCHECK(factory->CreateEncoder(GUID_ContainerFormatBmp, nullptr, &encoder));
-		//factory->CreateBitmapFlipRotator(&flip);
-		//flip->Initialize((IWICBitmapSource*)encoder, WICBitmapTransformFlipVertical);
-		HRCHECK(encoder->Initialize(stream, WICBitmapEncoderNoCache));
-		HRCHECK(encoder->CreateNewFrame(&frame, nullptr)); // we don't use options here
-		HRCHECK(frame->Initialize(nullptr)); // we dont' use any options here
-		HRCHECK(frame->SetSize(rfbScreen->width, rfbScreen->height));
-		HRCHECK(frame->SetPixelFormat(&pf));
-
-		//HRCHECK(frame->WritePixels(rfbScreen->height, pitch, pitch * rfbScreen->height, shot));
-		HRCHECK(frame->WritePixels(rfbScreen->height, pitch, rfbScreen->height * rfbScreen->width * bpp, shot));
-		HRCHECK(frame->Commit());
-		HRCHECK(encoder->Commit());
-		*/
 
 		rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 		
-		/*
-		RELEASE(stream);
-		RELEASE(frame);
-		RELEASE(encoder);
-		RELEASE(factory);
-		*/
-
 		RELEASE(surface);
 		RELEASE(device);
 		RELEASE(d3d);
@@ -293,38 +284,6 @@ void DKVncServer::DrawBuffer()
 #endif
 
 	rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
-}
-
-
-
-/////////////////////////////////////////////
-void DKVncServer::clientgone(rfbClientPtr cl)
-{
-	free(cl->clientData);
-	cl->clientData = NULL;
-}
-
-///////////////////////////////////////////////////////////////
-enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
-{
-	//DKLog("newclient()\n", DKINFO);
-	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
-	cl->clientGoneHook = clientgone;
-
-	//Get client ip address
-	struct sockaddr_in addr;
-	socklen_t len = sizeof(addr);
-	unsigned int ip;
-	getpeername(cl->sock, (struct sockaddr*)&addr, &len);
-	ip = ntohl(addr.sin_addr.s_addr);
-	ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
-	DKLog("ip = "+ipaddress+"\n", DKINFO);
-
-	//FIXME - keyboard led status
-	//cl->enableKeyboardLedState = TRUE;
-	//rfbScreen->getKeyboardLedStateHook(rfbScreen);
-
-	return RFB_CLIENT_ACCEPT;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
