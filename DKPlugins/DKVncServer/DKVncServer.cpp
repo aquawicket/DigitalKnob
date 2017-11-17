@@ -68,6 +68,12 @@ void DKVncServer::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //DIRECT X
 
+	DKString password;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", password);
+	if(password.empty()){
+		DKLog("WARNING! No password set in settings file!", DKWARN);
+	}
+
 	int desktopWidth;
 	int desktopHeight;
 
@@ -104,7 +110,12 @@ void DKVncServer::Init()
 	rfbScreen->httpEnableProxyConnect = TRUE;
 	rfbScreen->serverFormat = vnc24bitFormat;
 
-	static const char* passwords[2]={"8BallBreak",0};
+	//FIXME - DOES NOT WORK
+	//password = "8BallBreak";
+	//const char* pass = password.c_str(); 
+
+	const char* pass = "8BallBreak";
+	static const char* passwords[2]={pass, 0};
 	rfbScreen->authPasswdData = (void*)passwords;
 	rfbScreen->passwordCheck = rfbCheckPasswordByList2;
 
@@ -122,7 +133,7 @@ void DKVncServer::End()
 ///////////////////////////////////////////////////////////////
 enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 {
-	DKLog("newclient()\n", DKINFO);
+	//DKLog("DKVncServer::newclient()\n", DKINFO);
 
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
@@ -135,12 +146,12 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	ip = ntohl(addr.sin_addr.s_addr);
 	ClientData* cd = (ClientData*)cl->clientData;
 	cd->ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
-	DKLog("ip = "+cd->ipaddress+"\n", DKINFO);
+	DKLog("Client ip address: "+cd->ipaddress+"\n", DKINFO);
 
-	for(int i=0; i<clientLog.size(); i++){
+	for(unsigned int i=0; i<clientLog.size(); i++){
 		if(same(cd->ipaddress, clientLog[i].ipaddress)){
 			if(clientLog[i].failed_attempts > 9){
-				rfbErr("You are banned from this server.\n");
+				DKLog(cd->ipaddress+" is banned from this server\n", DKWARN);
 				return RFB_CLIENT_REFUSE;
 			}
 		}
@@ -173,7 +184,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 	//search for ipaddress in clientLog or add new 
 	ClientData* cd = (ClientData*)cl->clientData;
 	int current_client = -1;
-	for(int i=0; i<clientLog.size(); i++){
+	for(unsigned int i=0; i<clientLog.size(); i++){
 		if(same(cd->ipaddress, clientLog[i].ipaddress)){
 			current_client = i;
 			continue;
@@ -193,14 +204,12 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 		if(memcmp(auth_tmp, response, len) == 0){
 			if(i >= cl->screen->authPasswdFirstViewOnly)
 				cl->viewOnly=TRUE;
-			DKLog("DKVncServer::rfbCheckPasswordByList2() = true\n", DKINFO);
 			clientLog[current_client].failed_attempts = 0;
 			return(TRUE);
 		}
 	}
 	
 	rfbErr("authProcessClientMessage: authentication failed from %s\n", cl->host);
-	DKLog("DKVncServer::rfbCheckPasswordByList2() = false\n", DKINFO);
 	clientLog[current_client].failed_attempts++;
 	return(FALSE);
 }
@@ -386,7 +395,7 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 ////////////////////////////////////////////////////////////////////////
 void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
-	DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);
+	//DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);
 
 	int k = key;
 	switch(key){
