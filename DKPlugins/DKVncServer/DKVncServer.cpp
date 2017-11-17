@@ -146,7 +146,7 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 
 	for(unsigned int i=0; i<clientLog.size(); i++){
 		if(same(cd->ipaddress, clientLog[i].ipaddress)){
-			if(clientLog[i].failed_attempts > 9){
+			if(clientLog[i].failed_attempts > 2){
 				DKLog(cd->ipaddress+" is banned from this server\n", DKWARN);
 				return RFB_CLIENT_REFUSE;
 			}
