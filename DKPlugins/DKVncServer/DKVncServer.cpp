@@ -111,11 +111,18 @@ void DKVncServer::Init()
 	rfbScreen->serverFormat = vnc24bitFormat;
 
 	//FIXME - DOES NOT WORK
-	//password = "8BallBreak";
-	//const char* pass = password.c_str(); 
+	password = "8BallBreak";
+	const char* pass1 = password.c_str(); 
 
-	const char* pass = "8BallBreak";
-	static const char* passwords[2]={pass, 0};
+	char * pass2 = new char[password.size() + 1];
+	std::copy(password.begin(), password.end(), pass2);
+	pass2[password.size()] = '\0'; // don't forget the terminating 0
+
+	const char* pass3 = "8BallBreak";
+
+	static const char* passwords[2]={pass2, 0};
+	delete[] pass2;
+
 	rfbScreen->authPasswdData = (void*)passwords;
 	rfbScreen->passwordCheck = rfbCheckPasswordByList2;
 
