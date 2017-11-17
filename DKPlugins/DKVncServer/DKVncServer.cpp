@@ -53,14 +53,14 @@ const rfbPixelFormat vnc24bitFormat =
 /////////////////////////
 typedef struct ClientData
 {
-	//rfbBool oldButton;
-	//int oldx,oldy;
+	//int key = 0;
+	int buttonMask = 0;
 	DKString ipaddress;
 } ClientData;
 
+std::vector<ClientLog> DKVncServer::clientLog;
 DKString DKVncServer::capture;
-int DKVncServer::_buttonMask = 0;
-int DKVncServer::_key = 0;
+
 
 ////////////////////////
 void DKVncServer::Init()
@@ -68,20 +68,26 @@ void DKVncServer::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //DIRECT X
 
+	int desktopWidth;
+	int desktopHeight;
+
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
 	root = DefaultRootWindow(disp);
 	XMapWindow(disp, root);
+	//TODO - Desktop size
+	//desktopWidth = ?
+	//desktopHeight = ?
 #endif
 
+#ifdef WIN32
 	HWND desktop = GetDesktopWindow();
 	RECT size;
-	int desktopWidth;
-	int desktopHeight;
 	if(GetWindowRect(desktop, &size)){
 		desktopWidth = size.right - size.left;
 		desktopHeight = size.bottom - size.top;
 	}
+#endif
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
@@ -131,9 +137,14 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	cd->ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
 	DKLog("ip = "+cd->ipaddress+"\n", DKINFO);
 
-	//FIXME - keyboard led status
-	//cl->enableKeyboardLedState = TRUE;
-	//rfbScreen->getKeyboardLedStateHook(rfbScreen);
+	for(int i=0; i<clientLog.size(); i++){
+		if(same(cd->ipaddress, clientLog[i].ipaddress)){
+			if(clientLog[i].failed_attempts > 9){
+				rfbErr("You are banned from this server.\n");
+				return RFB_CLIENT_REFUSE;
+			}
+		}
+	}
 
 	return RFB_CLIENT_ACCEPT;
 }
@@ -159,6 +170,22 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 	char **passwds;
 	int i=0;
 
+	//search for ipaddress in clientLog or add new 
+	ClientData* cd = (ClientData*)cl->clientData;
+	int current_client = -1;
+	for(int i=0; i<clientLog.size(); i++){
+		if(same(cd->ipaddress, clientLog[i].ipaddress)){
+			current_client = i;
+			continue;
+		}
+	}
+	if(current_client == -1){
+		ClientLog cl;
+		cl.ipaddress = cd->ipaddress;
+		clientLog.push_back(cl);
+		current_client = clientLog.size()-1;
+	}
+
 	for(passwds=(char**)cl->screen->authPasswdData; *passwds; passwds++,i++){
 		uint8_t auth_tmp[CHALLENGESIZE];
 		memcpy((char *)auth_tmp, (char *)cl->authChallenge, CHALLENGESIZE);
@@ -167,15 +194,14 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 			if(i >= cl->screen->authPasswdFirstViewOnly)
 				cl->viewOnly=TRUE;
 			DKLog("DKVncServer::rfbCheckPasswordByList2() = true\n", DKINFO);
+			clientLog[current_client].failed_attempts = 0;
 			return(TRUE);
 		}
 	}
 	
 	rfbErr("authProcessClientMessage: authentication failed from %s\n", cl->host);
 	DKLog("DKVncServer::rfbCheckPasswordByList2() = false\n", DKINFO);
-
-	//TODO - log the ipaddress of the client, if failed 3 times, block for 5 minutes.
-
+	clientLog[current_client].failed_attempts++;
 	return(FALSE);
 }
 
@@ -184,8 +210,7 @@ void DKVncServer::DrawBuffer()
 {
     //Capture Desktop
 #ifdef LINUX
-    image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
-    
+    image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);    
     int w,h;
     for(h=0;h<rfbScreen->height;++h) {
       for(w=0;w<rfbScreen->width;++w) {
@@ -210,7 +235,6 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef WIN32
-	
 	if(capture == "GDI"){
 		//https://pastebin.com/r3CZpWDs
 		HWND desktop = GetDesktopWindow();
@@ -267,8 +291,6 @@ void DKVncServer::DrawBuffer()
 		D3DDISPLAYMODE mode;
 		D3DLOCKED_RECT rc;
 		UINT pitch;
-		SYSTEMTIME st;
-		LPBYTE shot;
 		UINT adapter = D3DADAPTER_DEFAULT;
 
 		// init D3D and get screen size
@@ -290,9 +312,6 @@ void DKVncServer::DrawBuffer()
 		HRCHECK(surface->LockRect(&rc, NULL, 0));
 		pitch = rc.Pitch;
 		HRCHECK(surface->UnlockRect());
-
-		//shot = new BYTE[mode.Height * mode.Width * bpp];
-
 		HRCHECK(device->GetFrontBufferData(0, surface));
 
 		// copy it into our buffers
@@ -324,41 +343,41 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 ///////////////////////////////////////////////////////////////////////////
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-	ClientData* cd = (ClientData*)cl->clientData;
-	if(same(cd->ipaddress,"127.0.0.1")){ return; }
 	//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKINFO);
 
+	ClientData* cd = (ClientData*)cl->clientData;
+	if(same(cd->ipaddress,"127.0.0.1")){ return; }
+	
 	DKUtil::SetMousePos(x, y);
-	if(buttonMask && !_buttonMask){
-		
-		_buttonMask = buttonMask;
-		if(_buttonMask == 1){
+	if(buttonMask && !cd->buttonMask){
+		cd->buttonMask = buttonMask;
+		if(cd->buttonMask == 1){
 			DKUtil::LeftPress();
 		}
-		if(_buttonMask == 2){
+		if(cd->buttonMask == 2){
 			DKUtil::MiddlePress();
 		}
-		if(_buttonMask == 4){
+		if(cd->buttonMask == 4){
 			DKUtil::RightPress();
 		}
-		if(_buttonMask == 8){
+		if(cd->buttonMask == 8){
 			DKUtil::WheelUp();
 		}
-		if(_buttonMask == 16){
+		if(cd->buttonMask == 16){
 			DKUtil::WheelDown();
 		}
 	}
-	if(!buttonMask && _buttonMask){
-		if(_buttonMask == 1){
+	if(!buttonMask && cd->buttonMask){
+		if(cd->buttonMask == 1){
 			DKUtil::LeftRelease();
 		}
-		if(_buttonMask == 2){
+		if(cd->buttonMask == 2){
 			DKUtil::MiddleRelease();
 		}
-		if(_buttonMask == 4){
+		if(cd->buttonMask == 4){
 			DKUtil::RightRelease();
 		}
-		_buttonMask = 0;
+		cd->buttonMask = 0;
 	}
 
 	rfbDefaultPtrAddEvent(buttonMask, x, y, cl);

@@ -14,6 +14,14 @@
 #define HRCHECK(__expr) {hr=(__expr);if(FAILED(hr)){wprintf(L"FAILURE 0x%08X (%i)\n\tline: %u file: '%s'\n\texpr: '" WIDEN(#__expr) L"'\n",hr, hr, __LINE__,__WFILE__);}}
 #define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 
+////////////////////////
+typedef struct ClientLog
+{
+	DKString ipaddress;
+	int failed_attempts;
+	int lockout_timer;
+} ClientLog;
+
 /////////////////////////////////////////////////
 class DKVncServer : public DKObjectT<DKVncServer>
 {
@@ -31,8 +39,7 @@ public:
 	static rfbBool rfbCheckPasswordByList2(rfbClientPtr cl,const char* response,int len);
 
 	static DKString capture; //GDI, DIRECTX, OPENGL
-	static int _buttonMask;
-	static int _key;
+	static std::vector<ClientLog> clientLog;
 };
 
 
