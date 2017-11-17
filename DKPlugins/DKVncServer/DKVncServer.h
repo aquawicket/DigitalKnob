@@ -18,7 +18,7 @@
 typedef struct ClientLog
 {
 	DKString ipaddress;
-	int failed_attempts;
+	int failed_attempts = 0;
 	int lockout_timer;
 } ClientLog;
 
