@@ -110,10 +110,16 @@ void DKVncClient::Init()
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
-	cl->appData.scaleSetting = 2;
+	cl->appData.scaleSetting = 200;
 	
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
-	if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
+	//if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
+	//	cl = NULL;
+	//	cleanup(cl);
+	//	return;
+	//}
+
+	if(!rfbInitConnection(cl)){
 		cl = NULL;
 		cleanup(cl);
 		return;
@@ -129,7 +135,7 @@ void DKVncClient::Init()
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
 	ValidateAspectRatio(cl);
-	resize(cl);
+	//resize(cl);
 
 	if(seperate_loop){
 		SDL_Event e;
@@ -147,6 +153,55 @@ void DKVncClient::Init()
 		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
+}
+
+/////////////////////////////////////////////////////////
+rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
+	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
+	if (!client->listenSpecified) {
+		if (!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort))
+			return FALSE;
+		}
+	
+	/* Initialise the VNC connection, including reading the password */
+	
+	if (!InitialiseRFBConnection(client))
+	return FALSE;
+	
+	if (!SetFormatAndEncodings(client))
+		return FALSE;
+	
+	client->width=client->si.framebufferWidth;
+	client->height=client->si.framebufferHeight;
+	client->MallocFrameBuffer(client);
+	
+	if (client->updateRect.x < 0) {
+		client->updateRect.x = client->updateRect.y = 0;
+		client->updateRect.w = client->width;
+		client->updateRect.h = client->height;
+	}
+	
+	if (client->appData.scaleSetting>1)
+	{
+		 if (!SendScaleSetting(client, client->appData.scaleSetting))
+		 return FALSE;
+		if (!SendFramebufferUpdateRequest(client,
+			client->updateRect.x / client->appData.scaleSetting,
+			client->updateRect.y / client->appData.scaleSetting,
+			client->updateRect.w / client->appData.scaleSetting,
+			client->updateRect.h / client->appData.scaleSetting,
+			FALSE))
+			return FALSE;
+	}
+	else
+	{
+		if (!SendFramebufferUpdateRequest(client,
+			client->updateRect.x, client->updateRect.y,
+			client->updateRect.w, client->updateRect.h,
+		FALSE))
+		return FALSE;
+	}
+	return TRUE;
 }
 
 ///////////////////////
@@ -325,44 +380,22 @@ bool DKVncClient::handle(SDL_Event *e)
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
 	DKLog("DKVncClient::resize()\n", DKINFO);
-
+	//DKLog("client->appData.scaleSetting="+toString(client->appData.scaleSetting)+"\n", DKINFO);
 	int width = client->width;
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
 
-	//if(enableResizable){
-	//	sdlFlags |= SDL_RESIZABLE;
-	//}
+	//client->updateRect.x = client->updateRect.y = 0;
+	//client->updateRect.w = width; client->updateRect.h = height;
 
-	client->updateRect.x = client->updateRect.y = 0;
-	client->updateRect.w = width; client->updateRect.h = height;
-
-	if(client->appData.scaleSetting>1){
-		if(!SendScaleSetting(client, client->appData.scaleSetting)){
-			DKLog("SendScaleSetting(): false", DKINFO);
-			return false;
-		}
-	if(!SendFramebufferUpdateRequest(client,
-		client->updateRect.x / client->appData.scaleSetting,
-		client->updateRect.y / client->appData.scaleSetting,
-		client->updateRect.w / client->appData.scaleSetting,
-		client->updateRect.h / client->appData.scaleSetting,
-		FALSE)){
-			DKLog("SendFramebufferUpdateRequest(): false", DKINFO);
-			return false;
-		}
-	}
-	else{
-		if (!SendFramebufferUpdateRequest(client,
-			client->updateRect.x, client->updateRect.y,
-			client->updateRect.w, client->updateRect.h,
-			FALSE)){
-			DKLog("SendFramebufferUpdateRequest(): false", DKINFO);
-			return false;
-		}
-	}
-
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, client->width, client->height);
+	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	client->width = sdl->pitch / (depth / 8);
+	client->height = sdl->h;
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+	client->frameBuffer = (uint8_t*)sdl->pixels;
+	client->format.bitsPerPixel=depth;
+	SetFormatAndEncodings(client);
+	DKLog("client->width="+toString(client->width)+",client->height="+toString(client->height)+"\n", DKINFO);
 	return true;
 
 
