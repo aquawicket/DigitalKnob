@@ -33,6 +33,7 @@ void DKCefV8::Init()
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
+	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
 }
 
 ///////////////////
@@ -292,6 +293,15 @@ bool DKCefV8::Print(CefArgs args, CefReturn retval)
 	DKString id = args->GetString(0);
 	int num = args->GetInt(1);
 	DKCef::Get(id)->Print(num);
+	return 1;
+}
+
+//////////////////////////////////////////////////
+bool DKCefV8::Find(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString text = args->GetString(1);
+	DKCef::Get(id)->Find(text);
 	return 1;
 }
 

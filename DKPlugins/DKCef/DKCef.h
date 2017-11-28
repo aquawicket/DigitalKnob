@@ -36,6 +36,7 @@ public:
 	bool SetUrl(const DKString& url, int num);
 	bool ShowDevTools(int num);
 	bool Stop(int num);
+	bool Find(const DKString& text);
 	
 	DKString id;
 	int top;

@@ -534,3 +534,10 @@ void DKCef::RunJavascript(DKString& string)
 	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 }
+
+//////////////////////////////////////
+bool DKCef::Find(const DKString& text)
+{
+	current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
+	return true;
+}

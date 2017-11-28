@@ -25,6 +25,7 @@ void DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
 	DKDuktape::AttachFunction("DKCef_Print", DKCefJS::Print);
 	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
+	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
 }
 
 /////////////////////////////////////
@@ -210,6 +211,15 @@ int DKCefJS::RunJavascript(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
 	DKCef::Get(id)->RunJavascript(string);
+	return 1;
+}
+
+///////////////////////////////////
+int DKCefJS::Find(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString text = duk_require_string(ctx, 1);
+	DKCef::Get(id)->Find(text);
 	return 1;
 }
 
