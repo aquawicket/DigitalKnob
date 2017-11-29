@@ -538,6 +538,11 @@ void DKCef::RunJavascript(DKString& string)
 //////////////////////////////////////
 bool DKCef::Find(const DKString& text)
 {
-	current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
+	if(!text.empty()){
+		current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
+	}
+	else{
+		current_browser->GetHost()->StopFinding(true);
+	}
 	return true;
 }
