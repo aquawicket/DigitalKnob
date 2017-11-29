@@ -226,7 +226,7 @@ bool DKHook::SetHandle(unsigned int index, unsigned int timeout)
 		Sleep(1000);
 		++t;
 	}
-	if(t >= timeout){
+	if(index > handle.size()){
 		DKLog("DKHook::SetHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
 		return false;
 	}
