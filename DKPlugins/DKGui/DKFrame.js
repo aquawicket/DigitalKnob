@@ -295,7 +295,7 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	//DKLog("DKFrame_CloseButton("+id+")\n");
+	DKLog("DKFrame_CloseButton("+id+")\n");
 	
 	DKFrame_Close(id);
 }
@@ -306,6 +306,7 @@ function DKFrame_Close(id)
 	//DKLog("DKFrame_Close("+id+")\n");
 	
 	var frame = DKWidget_GetParent(id);
+	//DKLog("DKFrame_Close("+id+"): frame = "+frame+"\n");
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
@@ -313,6 +314,7 @@ function DKFrame_Close(id)
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
 			var jsfile = file.replace(".html", ".js");
+			//DKLog("DKClose("+jsfile+")\n");
 			DKClose(jsfile);
 			var htmlfile = file.replace(".js", ".html");
 			DKClose(htmlfile);
