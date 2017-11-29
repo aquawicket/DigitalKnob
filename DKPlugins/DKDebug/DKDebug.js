@@ -123,19 +123,20 @@ function DKDebug_PushDKFiles()
 {
 	//DKLog("DKMenuRightApp_PushDKFiles()\n"); 
 	
-	//Here, we push any altered DKPulgin files to the appropriate DKPlugin folder.
+	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
 		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
 		return false;
 	}
-	DKLog("assets = "+assets+"\n");
+	//DKLog("assets = "+assets+"\n");
 	
 	var seperator = ""
 	var DKPATH;
 	for(var i=0; i<6; i++){
 		DKPATH = assets+seperator+"digitalknob";
-		if(DKFile_Exists(DKPATH)){
+		if(DKFile_Exists(DKPATH+"/DKPlugins")){
+			DKPATH = DKFile_GetAbsolutePath(DKPATH);
 			continue;
 		}
 		seperator = seperator + "../";
@@ -144,6 +145,7 @@ function DKDebug_PushDKFiles()
 		DKLog("Could not find DKPATH\n");
 		return;
 	}
+	//DKLog("DKPATH = "+DKPATH+"\n");
 	
 	var temp = DKFile_DirectoryContents(DKPATH);
 	if(!temp){
@@ -158,6 +160,7 @@ function DKDebug_PushDKFiles()
 	for(var i=0; i<folders.length; i++){
 		//DKLog("checking "+DKPATH+"/"+folders[i]+"/DKPlugins"+"\n");
 		if(DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
+			//DKLog("adding "+DKPATH+"/"+folders[i]+"/DKPlugins");
 			plugin_folders.push(DKPATH+"/"+folders[i]+"/DKPlugins");
 		}
 	}
