@@ -4,6 +4,7 @@
 
 #include "DKClass.h"
 #include "DKObject.h"
+#include "DKString.h"
 #include <vector>
 
 #ifdef WIN32

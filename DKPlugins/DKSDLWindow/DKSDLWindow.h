@@ -46,6 +46,7 @@ public:
 	static int EventFilter(void* userdata, SDL_Event* event);
 	bool handle(SDL_Event* event);
 	void Process();
+	void ShowFps();
 	static std::map<int,int> sdlKeyCode;
 	static std::map<int,int> sdlCharCode;
 	static std::map<int,int> sdlShiftCharCode;
