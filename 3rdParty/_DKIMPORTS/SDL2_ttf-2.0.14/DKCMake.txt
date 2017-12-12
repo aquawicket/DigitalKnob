@@ -1,3 +1,6 @@
+DKDEPEND(DKSDLWindow)
+DKDEPEND(freetype-2.5.5)
+
 ### INSTALL ###
 DKINSTALL(http://DigitalKnob.com/Download/Libs/SDL2_ttf-2.0.14.zip SDL2_ttf-2.0.14)
 DKSET(SDLTTF ${3RDPARTY}/SDL2_ttf-2.0.14)
