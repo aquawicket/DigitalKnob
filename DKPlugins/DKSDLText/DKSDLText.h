@@ -8,7 +8,6 @@
 
 // How many frames time values to keep
 // The higher the value the smoother the result is...
-// Don't make it 0 or less :)
 #define FRAME_VALUES 30
 
 /////////////////////////////////////////////
@@ -21,12 +20,13 @@ public:
 	void fpsinit();
 	void fpsthink();
 
-	void SetText(DKString& text);
+	void SetText(DKString text);
 	void Draw();
 
 	DKSDLWindow* dkSdlWindow;
 	TTF_Font* font;
 	SDL_Texture* texture;
+	SDL_Surface* surface;
 	SDL_Color color;
 	
 	Uint32 frametimes[FRAME_VALUES]; // An array to store frame times:

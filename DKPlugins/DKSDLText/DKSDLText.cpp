@@ -21,6 +21,7 @@ void DKSDLText::Init()
 /////////////////////
 void DKSDLText::End()
 {
+	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
 	TTF_CloseFont(font);
 }
@@ -52,10 +53,6 @@ void DKSDLText::fpsthink()
 	frametimelast = getticks; // save the last frame time for the next fpsthink
 	framecount++; // increment the frame count
 
-	// Work out the current framerate
-	// The code below could be moved into another function if you don't need the value every frame.
-	// I've included a test to see if the whole array has been written to or not. This will stop
-	// strange values on the first few (FRAME_VALUES) frames.
 	if(framecount < FRAME_VALUES){
 		count = framecount;
 	}
@@ -63,25 +60,23 @@ void DKSDLText::fpsthink()
 		count = FRAME_VALUES;
 	}
 
-	// add up all the values and divide to get the average frame time.
 	framespersecond = 0;
 	for(i = 0; i < count; i++){
 		framespersecond += frametimes[i];
 	}
 
 	framespersecond /= count;
-
-	// now to make it an actual frames per second value...
 	framespersecond = 1000.f / framespersecond;
-	SetText(toString(framespersecond));
+	DKString fps = toString(framespersecond);
+	SetText(fps);
 }
 
-///////////////////////////////////////
-void DKSDLText::SetText(DKString& text)
+//////////////////////////////////////
+void DKSDLText::SetText(DKString text)
 {
-	//SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
-	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, TTF_RenderText_Solid(font, text.c_str(), color));
-	//SDL_FreeSurface(surface);
+	//FIXME - eats memory
+	surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, surface);
 }
 
 //////////////////////
