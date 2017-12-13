@@ -26,6 +26,7 @@ public:
 	DKSDLWindow* dkSdlWindow;
 	TTF_Font* font;
 	SDL_Texture* texture;
+	SDL_Surface* surface;
 	SDL_Color color;
 	
 	Uint32 frametimes[FRAME_VALUES]; // An array to store frame times:
