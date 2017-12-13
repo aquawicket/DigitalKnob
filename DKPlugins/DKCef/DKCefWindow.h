@@ -66,6 +66,15 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 	{
+		//Test drawing text to screen
+		HWND hwnd = browser->GetHost()->GetWindowHandle();
+		HDC hdc = GetDC(hwnd);
+		RECT rect;
+		GetClientRect(hwnd, &rect);
+		char * text = "this is a text string";
+		DrawTextA(hdc, text, strlen(text), &rect, DT_CENTER | DT_VCENTER);
+		ReleaseDC(hwnd, hdc);
+
 		DKLog("DKCefWindow::OnPaint()\n", DKDEBUG);
 	}
 
