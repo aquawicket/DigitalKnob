@@ -9,7 +9,7 @@ void DKSDLText::Init()
 
 	TTF_Init();
 	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
-	font = TTF_OpenFont(file.c_str(), 25);
+	font = TTF_OpenFont(file.c_str(), 20);
 	color = {255, 255, 255};
 	SetText(toString("Test String"));
 
@@ -67,7 +67,8 @@ void DKSDLText::fpsthink()
 
 	framespersecond /= count;
 	framespersecond = 1000.f / framespersecond;
-	DKString fps = toString(framespersecond);
+	DKString fps = toString((int)framespersecond);
+	fps += "fps";
 	SetText(fps);
 }
 
@@ -86,7 +87,7 @@ void DKSDLText::Draw()
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	int left = 0;
+	int left = 5;
 	int top = dkSdlWindow->height - texH;
 	SDL_Rect dstrect = {left, top, texW, texH};
 	SDL_RenderCopy(dkSdlWindow->sdlren, texture, NULL, &dstrect);
