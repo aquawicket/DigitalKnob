@@ -65,7 +65,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var width = 800;
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
-		DK_SetFramerate(5);
+		DK_SetFramerate(60);
 		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
