@@ -166,8 +166,6 @@ add_library(SDLIMAGE STATIC
 	${SDLIMAGE_SOURCES}
 )
 
-#add_dependencies(SDLIMAGE SDL2)
-
 set_target_properties(SDLIMAGE
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
