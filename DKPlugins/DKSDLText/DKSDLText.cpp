@@ -26,7 +26,7 @@ void DKSDLText::End()
 {
 	//SDL_FreeSurface(surface);
 	//SDL_DestroyTexture(texture);
-	TTF_CloseFont(font);
+	//TTF_CloseFont(font);
 }
 
 /////////////////////////
