@@ -21,7 +21,6 @@ void DKSDLText::Init()
 /////////////////////
 void DKSDLText::End()
 {
-	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
 	TTF_CloseFont(font);
 }
@@ -75,8 +74,10 @@ void DKSDLText::fpsthink()
 void DKSDLText::SetText(DKString text)
 {
 	//FIXME - eats memory
-	surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, surface);
+	SDL_FreeSurface(surface);
+	delete surface;
 }
 
 //////////////////////
