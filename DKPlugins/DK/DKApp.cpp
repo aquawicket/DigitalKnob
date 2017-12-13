@@ -15,8 +15,8 @@ UINT32 DKApp::lastSecond;
 
 UINT32 DKApp::now;
 UINT32 DKApp::lastFrame; 
-UINT32 DKApp::_fps = 30;
-UINT32 DKApp::ticksPerFrame = 1000 / DKApp::_fps;
+int DKApp::_fps = 30;
+int DKApp::ticksPerFrame = 1000 / DKApp::_fps;
 
 //#ifdef USE_Boost_System
 #ifdef WIN32
@@ -191,7 +191,7 @@ void DKApp::Exit()
 /////////////////////////
 int DKApp::GetFramerate()
 {
-	return (int)_fps;
+	return _fps;
 }
 
 /////////////////////////////////
