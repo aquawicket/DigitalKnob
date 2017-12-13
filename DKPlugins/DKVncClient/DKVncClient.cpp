@@ -227,12 +227,13 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 {
 	//Throttle the drawing to conserve cpu
 	DKUtil::GetTicks(DKApp::now);
-	double delta = DKApp::now - DKApp::lastFrame;
-	DKApp::lastFrame = DKApp::now;
-	if(delta < fps){
+	UINT32 delta = DKApp::now - DKApp::lastFrame;
+	if(delta < DKApp::ticksPerFrame){
+		//UINT32 sleep = DKApp::ticksPerFrame - delta;
+		//DKUtil::Sleep(sleep);
 		return;
 	}
-
+	DKUtil::GetTicks(DKApp::lastFrame);
 	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);

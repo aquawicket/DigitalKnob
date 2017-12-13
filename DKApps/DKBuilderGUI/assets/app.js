@@ -21,7 +21,7 @@ function app_LoadPage()
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKBuild/DKBuildGUI.js", function(){
-		DKCreate("DKSDLText");
+		DKCreate("DKSDLText"); //SDL fps counter
 	});
 	});
 	});
