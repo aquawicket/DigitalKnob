@@ -76,6 +76,7 @@ void DKSDLText::SetText(DKString text)
 {
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, surface);
+	SDL_FreeSurface(surface);
 }
 
 //////////////////////
