@@ -6,7 +6,8 @@
 //////////////////////
 void DKSDLText::Init()
 {
-
+	TTF_Init();
+	TTF_Font* font = TTF_OpenFont(DKFile::local_assets+"DKSDLText/arial.ttf", 25);
 }
 
 /////////////////////
