@@ -314,7 +314,7 @@ bool DKUtil::Sleep(int milliseconds)
 }
 
 ////////////////////////////////////
-bool DKUtil::GetTicks(double& ticks)
+bool DKUtil::GetTicks(UINT32& ticks)
 {
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();

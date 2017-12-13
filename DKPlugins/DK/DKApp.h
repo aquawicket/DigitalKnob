@@ -21,10 +21,13 @@ public:
 	static bool paused;
 	static int argc;
 	static char** argv;
-	static double now;
-	static double lastFrame;
-	static double lastSecond;
-	static double _fps;
+
+	static UINT32 now;
+	static UINT32 lastFrame;
+	static UINT32 _fps;
+	static UINT32 ticksPerFrame;
+
+	static UINT32 lastSecond;
 	
 	template<class T>
 	///////////////////////////////////////////////////////

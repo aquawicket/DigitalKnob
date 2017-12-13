@@ -10,10 +10,13 @@ bool DKApp::active = false;
 bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
-double DKApp::now;
-double DKApp::lastFrame; 
-double DKApp::lastSecond;
-double DKApp::_fps = 17; //TODO - make this number actually reflect the true FPS
+
+UINT32 DKApp::lastSecond;
+
+UINT32 DKApp::now;
+UINT32 DKApp::lastFrame; 
+UINT32 DKApp::_fps = 30;
+UINT32 DKApp::ticksPerFrame = 1000 / DKApp::_fps;
 
 //#ifdef USE_Boost_System
 #ifdef WIN32
@@ -140,27 +143,29 @@ void DKApp::Loop()
 /////////////////////
 void DKApp::DoFrame()
 {
+	if(paused){ return; }
+
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(now);
-	double delta = now - lastFrame;
-	lastFrame = now;
-	if (delta < _fps){  //FIXME -fps does not reflect with this math.
-		double sleep = _fps - delta;
-		DKUtil::Round(sleep);
+	UINT32 delta = now - lastFrame;
+	if(delta < ticksPerFrame){
+		UINT32 sleep = ticksPerFrame - delta;
 		DKUtil::Sleep(sleep);
 	}
+	DKUtil::GetTicks(lastFrame);
 
-	if(paused){ return; }
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){
 			loop_funcs[i](); //Call loop functions
 		}
 	}
 
+	/*
 	if (((now - lastSecond) / 1000) > 1.0){ // 1 second
 		SendEvent("GLOBAL", "second", ""); //This might be to heavy
 		lastSecond = now;
 	}
+	*/
 }
 
 //////////////////
@@ -194,6 +199,7 @@ void DKApp::SetFramerate(int fps)
 {
 	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKDEBUG);
 	_fps = fps;
+	ticksPerFrame = 1000 / _fps;
 }
 
 #ifdef WIN32

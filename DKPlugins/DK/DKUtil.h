@@ -37,7 +37,7 @@ public:
 	static bool WheelUp();
 	static bool WheelDown();
 	static bool Sleep(int milliseconds);
-	static bool GetTicks(double& ticks);
+	static bool GetTicks(UINT32& ticks);
 	static bool GetTime(DKString& _time);
 	static bool GetDate(DKString& date);
 	static bool GetKey(int& key);
