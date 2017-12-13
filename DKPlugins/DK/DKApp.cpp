@@ -160,12 +160,10 @@ void DKApp::DoFrame()
 		}
 	}
 
-	/*
 	if (((now - lastSecond) / 1000) > 1.0){ // 1 second
 		SendEvent("GLOBAL", "second", ""); //This might be to heavy
 		lastSecond = now;
 	}
-	*/
 }
 
 //////////////////
