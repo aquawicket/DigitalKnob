@@ -5,6 +5,7 @@ var USE_ROCKET = 1;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKBuilderGUI";
 
+
 DKCreate("DK/init.js", function(){});
 
 
@@ -20,7 +21,7 @@ function app_LoadPage()
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKBuild/DKBuildGUI.js", function(){
-		
+		DKCreate("DKSDLText");
 	});
 	});
 	});
