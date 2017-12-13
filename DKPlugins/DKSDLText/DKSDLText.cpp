@@ -5,7 +5,10 @@
 //////////////////////
 void DKSDLText::Init()
 {
-	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	dkSdlWindow = DKSDLWindow::Get("DKSDLWindow0");
+	if(!dkSdlWindow){
+		return; //SDL window not available
+	}
 
 	TTF_Init();
 	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
