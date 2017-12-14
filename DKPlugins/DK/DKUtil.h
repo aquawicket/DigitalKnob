@@ -59,6 +59,17 @@ public:
 	static bool GetProcessList(DKString& list);
 	static bool KeyIsDown(int& key);
 
+	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+	static bool VirtualMemory(int& virtualMemory);
+	static bool VirtualMemoryUsed(int& virtualMemory);
+	static bool VirtualMemoryUsedByApp(int& virtualMemory);
+	static bool PhysicalMemory(int& physicalMemory);
+	static bool PhysicalMemoryUsed(int& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(int& physicalMemory);
+	static bool CpuUsed(int& cpu);
+	static bool CpuUsedByApp(int& cpu);
+
+
 	static unsigned long int mainThreadId;
 };
 

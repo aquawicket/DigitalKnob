@@ -679,3 +679,62 @@ bool DKUtil::KeyIsDown(int& key)
 	DKLog("DKUtil::KeyIsDown() not implemented on this OS. \n", DKERROR);
 	return false;
 }
+
+
+
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+//////////////////////////////////////////////
+bool DKUtil::VirtualMemory(int& virtualMemory)
+{
+	DKLog("DKUtil::VirtualMemory() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////////////////////////////////
+bool DKUtil::VirtualMemoryUsed(int& virtualMemory)
+{
+	DKLog("DKUtil::VirtualMemoryUsed() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKUtil::VirtualMemoryUsedByApp(int& virtualMemory)
+{
+	DKLog("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////////
+bool DKUtil::PhysicalMemory(int& physicalMemory)
+{
+	DKLog("DKUtil::PhysicalMemory() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////////////
+bool DKUtil::PhysicalMemoryUsed(int& physicalMemory)
+{
+	DKLog("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+/////////////////////////////////////////////////////////
+bool DKUtil::PhysicalMemoryUsedByApp(int& physicalMemory)
+{
+	DKLog("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////////////
+bool DKUtil::CpuUsed(int& cpu)
+{
+	DKLog("DKUtil::CpuUsed() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////
+bool DKUtil::CpuUsedByApp(int& cpu)
+{
+	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKERROR);
+	return false;
+}

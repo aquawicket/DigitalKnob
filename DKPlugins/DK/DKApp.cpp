@@ -147,7 +147,7 @@ void DKApp::DoFrame()
 
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(now);
-	UINT32 delta = now - lastFrame;
+	int delta = now - lastFrame;
 	if(delta < ticksPerFrame){
 		UINT32 sleep = ticksPerFrame - delta;
 		DKUtil::Sleep(sleep);
