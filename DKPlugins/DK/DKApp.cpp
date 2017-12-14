@@ -195,7 +195,7 @@ int DKApp::GetFramerate()
 /////////////////////////////////
 void DKApp::SetFramerate(int fps)
 {
-	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKDEBUG);
+	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKINFO);
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return; }
 	ticksPerFrame = 1000 / _fps;

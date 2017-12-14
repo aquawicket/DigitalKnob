@@ -110,10 +110,12 @@ void DKVncServer::Init()
 	rfbScreen->httpEnableProxyConnect = TRUE;
 	rfbScreen->serverFormat = vnc24bitFormat;
 
-	static const char* pass = password.c_str(); 
-	static const char* passwords[2]={pass, 0};
-	rfbScreen->authPasswdData = (void*)passwords;
-	rfbScreen->passwordCheck = rfbCheckPasswordByList2;
+	if(!password.empty()){
+		static const char* pass = password.c_str(); 
+		static const char* passwords[2]={pass, 0};
+		rfbScreen->authPasswdData = (void*)passwords;
+		rfbScreen->passwordCheck = rfbCheckPasswordByList2;
+	}
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);

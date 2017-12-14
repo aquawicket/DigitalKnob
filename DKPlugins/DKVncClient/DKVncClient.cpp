@@ -41,7 +41,9 @@ void DKVncClient::Init()
 	if(server_port.empty()){ server_port = "5900"; }
 	DKString server_password;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", server_password);
-	pass = server_password.c_str();
+	if(!server_password.empty()){
+		pass = server_password.c_str();
+	}
 	DKString encoding;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
 	DKString vncfps;
@@ -106,7 +108,9 @@ void DKVncClient::Init()
 	cl->listen6Port = LISTEN_PORT_OFFSET;
 	cl->serverHost = (char*)server_ip.c_str();
 	cl->serverPort = toInt(server_port);
-	cl->GetPassword = DKVncClient::password;
+	if(!server_password.empty()){
+		cl->GetPassword = DKVncClient::password;
+	}
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
