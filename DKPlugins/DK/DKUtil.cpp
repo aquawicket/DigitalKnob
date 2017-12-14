@@ -683,8 +683,8 @@ bool DKUtil::KeyIsDown(int& key)
 
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
-//////////////////////////////////////////////
-bool DKUtil::VirtualMemory(int& virtualMemory)
+////////////////////////////////////////////////
+bool DKUtil::VirtualMemory(float& virtualMemory)
 {
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
@@ -693,8 +693,8 @@ bool DKUtil::VirtualMemory(int& virtualMemory)
 	return false;
 }
 
-//////////////////////////////////////////////////
-bool DKUtil::VirtualMemoryUsed(int& virtualMemory)
+////////////////////////////////////////////////////
+bool DKUtil::VirtualMemoryUsed(float& virtualMemory)
 {
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
@@ -703,8 +703,8 @@ bool DKUtil::VirtualMemoryUsed(int& virtualMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////////
-bool DKUtil::VirtualMemoryUsedByApp(int& virtualMemory)
+/////////////////////////////////////////////////////////
+bool DKUtil::VirtualMemoryUsedByApp(float& virtualMemory)
 {
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
@@ -713,8 +713,8 @@ bool DKUtil::VirtualMemoryUsedByApp(int& virtualMemory)
 	return false;
 }
 
-////////////////////////////////////////////////
-bool DKUtil::PhysicalMemory(int& physicalMemory)
+//////////////////////////////////////////////////
+bool DKUtil::PhysicalMemory(float& physicalMemory)
 {
 #ifdef WIN32
 	return DKWindows::PhysicalMemory(physicalMemory);
@@ -723,8 +723,8 @@ bool DKUtil::PhysicalMemory(int& physicalMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////
-bool DKUtil::PhysicalMemoryUsed(int& physicalMemory)
+//////////////////////////////////////////////////////
+bool DKUtil::PhysicalMemoryUsed(float& physicalMemory)
 {
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsed(physicalMemory);
@@ -733,8 +733,8 @@ bool DKUtil::PhysicalMemoryUsed(int& physicalMemory)
 	return false;
 }
 
-/////////////////////////////////////////////////////////
-bool DKUtil::PhysicalMemoryUsedByApp(int& physicalMemory)
+///////////////////////////////////////////////////////////
+bool DKUtil::PhysicalMemoryUsedByApp(float& physicalMemory)
 {
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);

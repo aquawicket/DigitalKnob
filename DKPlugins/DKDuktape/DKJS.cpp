@@ -952,7 +952,7 @@ int DKJS::StopPropagation(duk_context* ctx)
 /////////////////////////////////////////
 int DKJS::VirtualMemory(duk_context* ctx)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return 0; }
 	duk_push_number(ctx, virtualMemory);
 	return 1;
@@ -961,7 +961,7 @@ int DKJS::VirtualMemory(duk_context* ctx)
 /////////////////////////////////////////////
 int DKJS::VirtualMemoryUsed(duk_context* ctx)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return 0; }
 	duk_push_number(ctx, virtualMemory);
 	return 1;
@@ -970,7 +970,7 @@ int DKJS::VirtualMemoryUsed(duk_context* ctx)
 //////////////////////////////////////////////////
 int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return 0; }
 	duk_push_number(ctx, virtualMemory);
 	return 1;
@@ -979,7 +979,7 @@ int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 //////////////////////////////////////////
 int DKJS::PhysicalMemory(duk_context* ctx)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return 0; }
 	duk_push_number(ctx, physicalMemory);
 	return 1;
@@ -988,7 +988,7 @@ int DKJS::PhysicalMemory(duk_context* ctx)
 //////////////////////////////////////////////
 int DKJS::PhysicalMemoryUsed(duk_context* ctx)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return 0; }
 	duk_push_number(ctx, physicalMemory);
 	return 1;
@@ -997,7 +997,7 @@ int DKJS::PhysicalMemoryUsed(duk_context* ctx)
 ///////////////////////////////////////////////////
 int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
 	duk_push_number(ctx, physicalMemory);
 	return 1;

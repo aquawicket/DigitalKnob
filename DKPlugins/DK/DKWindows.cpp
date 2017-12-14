@@ -667,67 +667,67 @@ bool DKWindows::PrintStack()
 
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
-/////////////////////////////////////////////////
-bool DKWindows::VirtualMemory(int& virtualMemory)
+///////////////////////////////////////////////////
+bool DKWindows::VirtualMemory(float& virtualMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
-	virtualMemory = totalVirtualMem;
+	virtualMemory = totalVirtualMem / MB;
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsed(int& virtualMemory)
+///////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsed(float& virtualMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG virtualMemUsed = memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
-	virtualMemory = virtualMemUsed;
+	virtualMemory = virtualMemUsed / MB;
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsedByApp(int& virtualMemory)
+////////////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsedByApp(float& virtualMemory)
 {
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
 	SIZE_T virtualMemUsedByMe = pmc.PagefileUsage;
-	virtualMemory = virtualMemUsedByMe;
+	virtualMemory = virtualMemUsedByMe / MB;
 	return true;
 }
 
-///////////////////////////////////////////////////
-bool DKWindows::PhysicalMemory(int& physicalMemory)
+/////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemory(float& physicalMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
-	physicalMemory = totalPhysMem;
+	physicalMemory = totalPhysMem / MB;
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsed(int& physicalMemory)
+/////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsed(float& physicalMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
 	DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
-	physicalMemory = physMemUsed;
+	physicalMemory = physMemUsed / MB;
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsedByApp(int& physicalMemory)
+//////////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsedByApp(float& physicalMemory)
 {
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
 	SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
-	physicalMemory = physMemUsedByMe;
+	physicalMemory = physMemUsedByMe / MB;
 	return true;
 }
 

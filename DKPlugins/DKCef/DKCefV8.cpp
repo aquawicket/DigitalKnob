@@ -321,54 +321,55 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return false; }
 	retval->SetInt(0, virtualMemory); 
+	retval->SetDouble(0, virtualMemory);
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return false; }
-	retval->SetInt(0, virtualMemory); 
+	retval->SetDouble(0, virtualMemory); 
 	return true;
 }
 
 ////////////////////////////////////////////////////////////////////
 bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
-	int virtualMemory;
+	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return false; }
-	retval->SetInt(0, virtualMemory); 
+	retval->SetDouble(0, virtualMemory); 
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
-	retval->SetInt(0, physicalMemory); 
+	retval->SetDouble(0, physicalMemory); 
 	return true;
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
-	retval->SetInt(0, physicalMemory); 
+	retval->SetDouble(0, physicalMemory); 
 	return true;
 }
 
 /////////////////////////////////////////////////////////////////////
 bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
-	int physicalMemory;
+	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
-	retval->SetInt(0, physicalMemory); 
+	retval->SetDouble(0, physicalMemory); 
 	return true;
 }
 
