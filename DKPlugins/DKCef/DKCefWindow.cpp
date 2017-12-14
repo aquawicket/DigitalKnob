@@ -33,18 +33,17 @@ int DKCefWindow::GetTextSize (LPSTR a0)
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
-	//FIXME: this breaks SDL keyboard events for Mac OSX
-	CefDoMessageLoopWork();
 
-	//FIXME - Test drawing text to screen NOT WORKING
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	//HDC hdc = GetDC(hwnd);
-	PAINTSTRUCT ps;
-	HDC hDC;
-	char szBuffer[]="Hello, World!";
-	hDC=BeginPaint(hwnd,&ps);
-	TextOut(hDC,10,10,szBuffer,strlen(szBuffer));
-	EndPaint(hwnd,&ps);
+	HWND win = dkCef->current_browser->GetHost()->GetWindowHandle();
+	HWND hwnd = GetWindow(win, GW_CHILD);
+	HDC hdc = GetDC(hwnd);
+	RECT rect;
+	GetClientRect(hwnd, &rect);
+	char * text = "test string";
+	DrawTextA(hdc, text, strlen(text), &rect, DT_LEFT | DT_BOTTOM);
+	ReleaseDC(hwnd, hdc);
+
+	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
 }
 
 ////////////////////////////////////////////////////////
