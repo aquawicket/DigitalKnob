@@ -22,17 +22,17 @@ DKCefWindow::DKCefWindow()
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
-	//FIXME: this breaks SDL keyboard events for Mac OSX
-	CefDoMessageLoopWork();
-
 	//FIXME - Test drawing text to screen
-	HWND hwnd = GetActiveWindow(); //NOT WORKING
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle(); //NOT WORKING
 	HDC hdc = GetDC(hwnd);
 	RECT rect;
 	GetClientRect(hwnd, &rect);
 	char * text = "this is a text string";
 	DrawTextA(hdc, text, strlen(text), &rect, DT_CENTER | DT_VCENTER);
 	ReleaseDC(hwnd, hdc);
+
+	//FIXME: this breaks SDL keyboard events for Mac OSX
+	CefDoMessageLoopWork();
 }
 
 ////////////////////////////////////////////////////////
