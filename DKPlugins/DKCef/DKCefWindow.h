@@ -40,9 +40,11 @@ public:
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
-	//virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	virtual CefRefPtr<CefFindHandler> GetFindHandler(){ return this; }
 	
+	int GetTextSize(LPSTR a0);
+
 	///////////////
 	void DoFrame();
 
@@ -54,7 +56,7 @@ public:
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	{
 		DKLog("DKCefWindow::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
-		
+
 		//rect = CefRect(0, 0, dkCef->width, dkCef->height);
 		return true;
 	}
@@ -81,7 +83,6 @@ public:
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward)
 	{
 		DKLog("DKCefWindow::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
-		
 		//for (unsigned int i = 0; i<dkCef->browsers.size(); ++i) {
 			//if (browser->GetIdentifier() == dkCef->browsers[i]->GetIdentifier()) {
 				DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", toString(0));
@@ -147,6 +148,7 @@ public:
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
 		DKLog("DKCefWindow::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
+
 		return false;
 	}
 
@@ -230,7 +232,7 @@ public:
 	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
 	{
 		//DKLog("OnPreKeyEvent(): char="+toString(event.character)+", native="+toString(event.native_key_code)+", mods="+toString(event.modifiers)+"\n", DKINFO);
-		
+
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
 			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));
@@ -253,6 +255,7 @@ public:
 	bool OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr< CefGeolocationCallback > callback)
 	{
 		DKLog("DKCefWindow::OnRequestGeolocationPermission()\n", DKINFO);
+
 		callback->Continue(true);
 		return true;
 	}

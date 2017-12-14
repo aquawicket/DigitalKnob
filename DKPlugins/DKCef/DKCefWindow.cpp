@@ -19,20 +19,32 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
 }
 
+// Function I made to get the size of the text
+int DKCefWindow::GetTextSize (LPSTR a0)
+{
+	for (int iLoopCounter = 0; ;iLoopCounter++)
+	{
+		if (a0 [iLoopCounter] == '\0')
+			return iLoopCounter;
+	}
+}
+
+
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
-	//FIXME - Test drawing text to screen
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle(); //NOT WORKING
-	HDC hdc = GetDC(hwnd);
-	RECT rect;
-	GetClientRect(hwnd, &rect);
-	char * text = "this is a text string";
-	DrawTextA(hdc, text, strlen(text), &rect, DT_CENTER | DT_VCENTER);
-	ReleaseDC(hwnd, hdc);
-
 	//FIXME: this breaks SDL keyboard events for Mac OSX
 	CefDoMessageLoopWork();
+
+	//FIXME - Test drawing text to screen NOT WORKING
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	//HDC hdc = GetDC(hwnd);
+	PAINTSTRUCT ps;
+	HDC hDC;
+	char szBuffer[]="Hello, World!";
+	hDC=BeginPaint(hwnd,&ps);
+	TextOut(hDC,10,10,szBuffer,strlen(szBuffer));
+	EndPaint(hwnd,&ps);
 }
 
 ////////////////////////////////////////////////////////

@@ -5,8 +5,6 @@ var USE_ROCKET = 0;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKTemplate";
 
-var DKApp_url = "http://plex.tv";
-
 DKCreate("DK/init.js", function(){});
 
 ///////////////////////
@@ -20,7 +18,7 @@ function app_LoadPage()
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKEditor/DKEditor.js", function(){
-	DKCreate("DKSDLText"); //SDL fps counter
+	//DKCreate("DKSDLText"); //SDL fps counter
 	//DKCreate("DKHook/DKHook.js", function(){
 		//DKFrame_Widget("DKHook/DKHook.html");
 	//});		
