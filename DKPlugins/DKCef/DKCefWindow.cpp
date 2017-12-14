@@ -19,17 +19,6 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
 }
 
-// Function I made to get the size of the text
-int DKCefWindow::GetTextSize (LPSTR a0)
-{
-	for (int iLoopCounter = 0; ;iLoopCounter++)
-	{
-		if (a0 [iLoopCounter] == '\0')
-			return iLoopCounter;
-	}
-}
-
-
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
@@ -39,12 +28,13 @@ void DKCefWindow::DoFrame()
 	RECT rect;
 	GetClientRect(hwnd, &rect);
 	rect.top = rect.bottom - 16;
-	char * text = "test string";
-	DrawTextA(hdc, text, strlen(text), &rect, DT_LEFT);
+	//char * text = "test string";
+	fpsthink();
+	DrawTextA(hdc, fps.c_str(), strlen(fps.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
 
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
-}
+};
 
 ////////////////////////////////////////////////////////
 bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser)

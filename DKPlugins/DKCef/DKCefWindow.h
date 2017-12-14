@@ -7,6 +7,9 @@
 #endif
 
 #include "DKCef/DKCef.h"
+
+#define FRAME_VALUES 30
+
 class DKCef;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,6 +32,13 @@ public:
 	bool Show(void* input, void* output);
 
 	DKCef* dkCef;
+
+	UINT32 frametimes[FRAME_VALUES]; // An array to store frame times:
+	UINT32 frametimelast; // Last calculated SDL_GetTicks
+	UINT32 framecount; // total frames rendered
+	float framespersecond;
+	DKString fps;
+
 #ifdef WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 #endif
@@ -43,9 +53,52 @@ public:
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 	virtual CefRefPtr<CefFindHandler> GetFindHandler(){ return this; }
 	
-	int GetTextSize(LPSTR a0);
+	//////////////
+	void fpsinit() 
+	{
+		// Set all frame times to 0ms.
+		memset(frametimes, 0, sizeof(frametimes));
+		framecount = 0;
+		framespersecond = 0;
+		DKUtil::GetTicks(frametimelast);
+	}
 
 	///////////////
+	void fpsthink()
+	{
+		UINT32 frametimesindex;
+		UINT32 getticks;
+		UINT32 count;
+		UINT32 i;
+
+		// frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
+		// This value rotates back to 0 after it hits FRAME_VALUES.
+		frametimesindex = framecount % FRAME_VALUES;
+
+		DKUtil::GetTicks(getticks);// store the current time
+		frametimes[frametimesindex] = getticks - frametimelast; // save the frame time value
+		frametimelast = getticks; // save the last frame time for the next fpsthink
+		framecount++; // increment the frame count
+
+		if(framecount < FRAME_VALUES){
+			count = framecount;
+		}
+		else{
+			count = FRAME_VALUES;
+		}
+
+		framespersecond = 0;
+		for(i = 0; i < count; i++){
+			framespersecond += frametimes[i];
+		}
+
+		framespersecond /= count;
+		framespersecond = 1000.f / framespersecond;
+		fps = toString((int)framespersecond);
+		fps += "fps";
+	}
+
+	//////////////
 	void DoFrame();
 
 	///////////////////////////////////////////
