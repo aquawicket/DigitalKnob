@@ -13,7 +13,7 @@ void DKSDLText::Init()
 	TTF_Init();
 	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
 	font = TTF_OpenFont(file.c_str(), 20);
-	color = {255, 255, 255};
+	color = {100, 100, 255};
 	SetText(toString("Test String"));
 
 	fpsinit();
