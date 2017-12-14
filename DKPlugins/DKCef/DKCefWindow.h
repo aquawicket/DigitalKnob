@@ -230,7 +230,7 @@ public:
 	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
 	{
 		//DKLog("OnPreKeyEvent(): char="+toString(event.character)+", native="+toString(event.native_key_code)+", mods="+toString(event.modifiers)+"\n", DKINFO);
-
+		
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
 			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));

@@ -23,10 +23,10 @@ DKCefWindow::DKCefWindow()
 void DKCefWindow::DoFrame()
 { 
 	//FIXME: this breaks SDL keyboard events for Mac OSX
-	CefDoMessageLoopWork(); 
+	CefDoMessageLoopWork();
 
 	//FIXME - Test drawing text to screen
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	HWND hwnd = GetActiveWindow(); //NOT WORKING
 	HDC hdc = GetDC(hwnd);
 	RECT rect;
 	GetClientRect(hwnd, &rect);
