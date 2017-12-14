@@ -629,7 +629,7 @@ bool DKWindows::Run(const DKString& command)
   return true;
 }
 
-//////////////////////////////
+///////////////////////////////////
 bool DKWindows::KeyIsDown(int& key)
 {
 	if(GetKeyState(key) & 0x8000){ return true; }
@@ -662,6 +662,66 @@ bool DKWindows::PrintStack()
     free( symbol );
 }
 */
+
+
+
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+/////////////////////////////////////////////////
+bool DKWindows::VirtualMemory(int& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsed(int& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsedByApp(int& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////
+bool DKWindows::PhysicalMemory(int& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsed(int& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsedByApp(int& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////
+bool DKWindows::CpuUsed(int& cpu)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////
+bool DKWindows::CpuUsedByApp(int& cpu)
+{
+	//TODO
+	return false;
+}
+
 
 
 #endif //WIN32
