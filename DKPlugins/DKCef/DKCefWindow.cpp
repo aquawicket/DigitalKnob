@@ -19,6 +19,22 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
 }
 
+///////////////////////////
+void DKCefWindow::DoFrame()
+{ 
+	//FIXME: this breaks SDL keyboard events for Mac OSX
+	CefDoMessageLoopWork(); 
+
+	//FIXME - Test drawing text to screen
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	HDC hdc = GetDC(hwnd);
+	RECT rect;
+	GetClientRect(hwnd, &rect);
+	char * text = "this is a text string";
+	DrawTextA(hdc, text, strlen(text), &rect, DT_CENTER | DT_VCENTER);
+	ReleaseDC(hwnd, hdc);
+}
+
 ////////////////////////////////////////////////////////
 bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser)
 {
