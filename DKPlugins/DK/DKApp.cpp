@@ -15,7 +15,7 @@ UINT32 DKApp::lastSecond;
 
 UINT32 DKApp::now;
 UINT32 DKApp::lastFrame; 
-int DKApp::_fps = 30;
+int DKApp::_fps = 60;
 int DKApp::ticksPerFrame = 1000 / DKApp::_fps;
 
 //#ifdef USE_Boost_System
