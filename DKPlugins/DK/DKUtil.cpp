@@ -686,6 +686,9 @@ bool DKUtil::KeyIsDown(int& key)
 //////////////////////////////////////////////
 bool DKUtil::VirtualMemory(int& virtualMemory)
 {
+#ifdef WIN32
+	//return DKWindows::VirtualMemory(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemory() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -693,6 +696,9 @@ bool DKUtil::VirtualMemory(int& virtualMemory)
 //////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsed(int& virtualMemory)
 {
+#ifdef WIN32
+	//return DKWindows::VirtualMemoryUsed(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -700,6 +706,9 @@ bool DKUtil::VirtualMemoryUsed(int& virtualMemory)
 ///////////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsedByApp(int& virtualMemory)
 {
+#ifdef WIN32
+	//return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -707,6 +716,9 @@ bool DKUtil::VirtualMemoryUsedByApp(int& virtualMemory)
 ////////////////////////////////////////////////
 bool DKUtil::PhysicalMemory(int& physicalMemory)
 {
+#ifdef WIN32
+	//return DKWindows::PhysicalMemory(physicalMemory);
+#endif
 	DKLog("DKUtil::PhysicalMemory() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -714,6 +726,9 @@ bool DKUtil::PhysicalMemory(int& physicalMemory)
 ////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsed(int& physicalMemory)
 {
+#ifdef WIN32
+	//return DKWindows::PhysicalMemoryUsed(physicalMemory);
+#endif
 	DKLog("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -721,6 +736,9 @@ bool DKUtil::PhysicalMemoryUsed(int& physicalMemory)
 /////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsedByApp(int& physicalMemory)
 {
+#ifdef WIN32
+	//return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);
+#endif
 	DKLog("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -728,6 +746,9 @@ bool DKUtil::PhysicalMemoryUsedByApp(int& physicalMemory)
 //////////////////////////////
 bool DKUtil::CpuUsed(int& cpu)
 {
+#ifdef WIN32
+	//return DKWindows::CpuUsed(cpu);
+#endif
 	DKLog("DKUtil::CpuUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -735,6 +756,9 @@ bool DKUtil::CpuUsed(int& cpu)
 ///////////////////////////////////
 bool DKUtil::CpuUsedByApp(int& cpu)
 {
+#ifdef WIN32
+	//return DKWindows::CpuUsedByApp(cpu);
+#endif
 	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
