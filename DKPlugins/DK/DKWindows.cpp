@@ -9,6 +9,7 @@
 #include <psapi.h>
 #include "shlobj.h"
 
+
 ///////////////////////////////////////////////////////
 bool DKWindows::SetMainThreadNow(unsigned long int& id)
 {
