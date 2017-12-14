@@ -30,10 +30,20 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
+
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
+
+	DKV8::AttachFunction("DK_VirtualMemory", DKCefV8::VirtualMemory);
+	DKV8::AttachFunction("DK_VirtualMemoryUsed", DKCefV8::VirtualMemoryUsed);
+	DKV8::AttachFunction("DK_VirtualMemoryUsedByApp", DKCefV8::VirtualMemoryUsedByApp);
+	DKV8::AttachFunction("DK_PhysicalMemory", DKCefV8::PhysicalMemory);
+	DKV8::AttachFunction("DK_PhysicalMemoryUsed", DKCefV8::PhysicalMemoryUsed);
+	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
+	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
+	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
 }
 
 ///////////////////
@@ -303,6 +313,81 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 	DKString text = args->GetString(1);
 	DKCef::Get(id)->Find(text);
 	return 1;
+}
+
+
+
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+///////////////////////////////////////////////////////////
+bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemory(virtualMemory)){ return false; }
+	retval->SetInt(0, virtualMemory); 
+	return true;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return false; }
+	retval->SetInt(0, virtualMemory); 
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////
+bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return false; }
+	retval->SetInt(0, virtualMemory); 
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
+	retval->SetInt(0, physicalMemory); 
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
+	retval->SetInt(0, physicalMemory); 
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
+	retval->SetInt(0, physicalMemory); 
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
+{
+	int cpu;
+	if(!DKUtil::CpuUsed(cpu)){ return false; }
+	retval->SetInt(0, cpu); 
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
+{
+	int cpu;
+	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
+	retval->SetInt(0, cpu); 
+	return true;
 }
 
 //#endif //USE_DKCef

@@ -41,6 +41,16 @@ public:
 	static bool Print(CefArgs args, CefReturn retval);
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Find(CefArgs args, CefReturn retval);
+
+	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+	static bool VirtualMemory(CefArgs args, CefReturn retval);
+	static bool VirtualMemoryUsed(CefArgs args, CefReturn retval);
+	static bool VirtualMemoryUsedByApp(CefArgs args, CefReturn retval);
+	static bool PhysicalMemory(CefArgs args, CefReturn retval);
+	static bool PhysicalMemoryUsed(CefArgs args, CefReturn retval);
+	static bool PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval);
+	static bool CpuUsed(CefArgs args, CefReturn retval);
+	static bool CpuUsedByApp(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
