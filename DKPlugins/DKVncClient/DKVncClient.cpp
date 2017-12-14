@@ -133,7 +133,8 @@ void DKVncClient::Init()
 	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
 	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 	
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
@@ -221,9 +222,21 @@ void DKVncClient::draw()
 	HandleRFBServerMessage(cl);
 	SDL_Rect r{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
-	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	SDL_RenderClear(dkSdlWindow->sdlren);
+	//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+	//SDL_RenderClear(dkSdlWindow->sdlren);
+
+	/*
+	unsigned char * texture_data = NULL;
+	int texture_pitch = 0;
+	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
+		//copies whole cl->frameBuffer to sdl texture
+		std::memcpy(texture_data, cl->frameBuffer, cl->width* 4);
+		SDL_UnlockTexture(tex);
+	}
+	*/
+
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+	//SDL_RenderCopy(dkSdlWindow->sdlren, tex, NULL, &r);
 }
 
 ///////////////////////////////////////////////////////////////////
