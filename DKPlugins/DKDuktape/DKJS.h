@@ -85,6 +85,16 @@ public:
 	static int Type(duk_context* ctx);
 	static int Value(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
+
+	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+	static int VirtualMemory(duk_context* ctx);
+	static int VirtualMemoryUsed(duk_context* ctx);
+	static int VirtualMemoryUsedByApp(duk_context* ctx);
+	static int PhysicalMemory(duk_context* ctx);
+	static int PhysicalMemoryUsed(duk_context* ctx);
+	static int PhysicalMemoryUsedByApp(duk_context* ctx);
+	static int CpuUsed(duk_context* ctx);
+	static int CpuUsedByApp(duk_context* ctx);
 };
 
 

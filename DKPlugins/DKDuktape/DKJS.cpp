@@ -113,6 +113,15 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
+
+	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
+	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
+	DKDuktape::AttachFunction("DK_VirtualMemoryUsedByApp", DKJS::VirtualMemoryUsedByApp);
+	DKDuktape::AttachFunction("DK_PhysicalMemory", DKJS::PhysicalMemory);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKJS::PhysicalMemoryUsed);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
+	DKDuktape::AttachFunction("DK_CpuUsed", DKJS::CpuUsed);
+	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKJS::CpuUsedByApp);
 }
 
 /////////////////////////////////////
@@ -935,5 +944,82 @@ int DKJS::StopPropagation(duk_context* ctx)
 {
 	return 0;
 }
+
+
+
+
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+/////////////////////////////////////////
+int DKJS::VirtualMemory(duk_context* ctx)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemory(virtualMemory)){ return 0; }
+	duk_push_number(ctx, virtualMemory);
+	return 1;
+}
+
+/////////////////////////////////////////////
+int DKJS::VirtualMemoryUsed(duk_context* ctx)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return 0; }
+	duk_push_number(ctx, virtualMemory);
+	return 1;
+}
+
+//////////////////////////////////////////////////
+int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
+{
+	int virtualMemory;
+	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return 0; }
+	duk_push_number(ctx, virtualMemory);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKJS::PhysicalMemory(duk_context* ctx)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemory(physicalMemory)){ return 0; }
+	duk_push_number(ctx, physicalMemory);
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKJS::PhysicalMemoryUsed(duk_context* ctx)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return 0; }
+	duk_push_number(ctx, physicalMemory);
+	return 1;
+}
+
+///////////////////////////////////////////////////
+int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
+{
+	int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
+	duk_push_number(ctx, physicalMemory);
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::CpuUsed(duk_context* ctx)
+{
+	int cpu;
+	if(!DKUtil::CpuUsed(cpu)){ return 0; }
+	duk_push_number(ctx, cpu);
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::CpuUsedByApp(duk_context* ctx)
+{
+	int cpu;
+	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
+	duk_push_number(ctx, cpu);
+	return 1;
+}
+
 
 #endif //USE_DKDuktape
