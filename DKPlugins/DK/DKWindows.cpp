@@ -669,57 +669,116 @@ bool DKWindows::PrintStack()
 /////////////////////////////////////////////////
 bool DKWindows::VirtualMemory(int& virtualMemory)
 {
-	//TODO
-	return false;
+	MEMORYSTATUSEX memInfo;
+	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+	GlobalMemoryStatusEx(&memInfo);
+	DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
+	virtualMemory = totalVirtualMem;
+	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKWindows::VirtualMemoryUsed(int& virtualMemory)
 {
-	//TODO
-	return false;
+	MEMORYSTATUSEX memInfo;
+	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+	GlobalMemoryStatusEx(&memInfo);
+	DWORDLONG virtualMemUsed = memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
+	virtualMemory = virtualMemUsed;
+	return true;
 }
 
 //////////////////////////////////////////////////////////
 bool DKWindows::VirtualMemoryUsedByApp(int& virtualMemory)
 {
-	//TODO
-	return false;
+	PROCESS_MEMORY_COUNTERS pmc;
+	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	SIZE_T virtualMemUsedByMe = pmc.PagefileUsage;
+	virtualMemory = virtualMemUsedByMe;
+	return true;
 }
 
 ///////////////////////////////////////////////////
 bool DKWindows::PhysicalMemory(int& physicalMemory)
 {
-	//TODO
-	return false;
+	MEMORYSTATUSEX memInfo;
+	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+	GlobalMemoryStatusEx(&memInfo);
+	DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
+	physicalMemory = totalPhysMem;
+	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKWindows::PhysicalMemoryUsed(int& physicalMemory)
 {
-	//TODO
-	return false;
+	MEMORYSTATUSEX memInfo;
+	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+	GlobalMemoryStatusEx(&memInfo);
+	DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+	physicalMemory = physMemUsed;
+	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKWindows::PhysicalMemoryUsedByApp(int& physicalMemory)
 {
-	//TODO
-	return false;
+	PROCESS_MEMORY_COUNTERS pmc;
+	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
+	physicalMemory = physMemUsedByMe;
+	return true;
 }
+
 
 /////////////////////////////////
 bool DKWindows::CpuUsed(int& cpu)
 {
-	//TODO
-	return false;
+	//Init
+	PdhOpenQuery(NULL, NULL, &cpuQuery);
+	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
+	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
+	PdhCollectQueryData(cpuQuery);
+
+	//getCurrentValue
+	PDH_FMT_COUNTERVALUE counterVal;
+	PdhCollectQueryData(cpuQuery);
+	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
+	cpu = counterVal.doubleValue;
+	return true;
 }
 
 //////////////////////////////////////
 bool DKWindows::CpuUsedByApp(int& cpu)
 {
-	//TODO
-	return false;
+	//Init
+	SYSTEM_INFO sysInfo;
+	FILETIME ftime, fsys, fuser;
+	GetSystemInfo(&sysInfo);
+	numProcessors = sysInfo.dwNumberOfProcessors;
+	GetSystemTimeAsFileTime(&ftime);
+	memcpy(&lastCPU, &ftime, sizeof(FILETIME));
+	self = GetCurrentProcess();
+	GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+	memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
+	memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
+
+	//getCurrentValue
+	ULARGE_INTEGER now, sys, user;
+	double percent;
+	GetSystemTimeAsFileTime(&ftime);
+	memcpy(&now, &ftime, sizeof(FILETIME));
+	GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
+	memcpy(&sys, &fsys, sizeof(FILETIME));
+	memcpy(&user, &fuser, sizeof(FILETIME));
+	percent = (sys.QuadPart - lastSysCPU.QuadPart) + (user.QuadPart - lastUserCPU.QuadPart);
+	percent /= (now.QuadPart - lastCPU.QuadPart);
+	percent /= numProcessors;
+	lastCPU = now;
+	lastUserCPU = user;
+	lastSysCPU = sys;
+	cpu = percent * 100;
+	return true;
 }
 
 

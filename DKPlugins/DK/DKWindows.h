@@ -8,6 +8,12 @@
 #include <windows.h>
 #include "DKString.h"
 
+#include "pdh.h"
+static PDH_HQUERY cpuQuery;
+static PDH_HCOUNTER cpuTotal;
+static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
+static int numProcessors;
+static HANDLE self;
 
 ////////////////
 class DKWindows
