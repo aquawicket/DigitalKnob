@@ -48,5 +48,3 @@ function DKStats_Update()
 	var ram = DK_PhysicalMemoryUsedByApp();
 	DKWidget_SetInnerHtml("DKStats_ram", "RAM: "+ram+"MB");
 }
-
-('00'+n).slice(-2);
