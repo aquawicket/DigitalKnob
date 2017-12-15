@@ -706,7 +706,7 @@ void DKUtil::UpdateFps()
 
 	DKUtil::GetTicks(getticks);// store the current time
 	frametimes[frametimesindex] = getticks - frametimelast; // save the frame time value
-	frametimelast = getticks; // save the last frame time for the next fpsthink
+	frametimelast = getticks; // save the last frame time for the next UpdateFps()
 	framecount++; // increment the frame count
 
 	if(framecount < FRAME_VALUES){
@@ -720,7 +720,6 @@ void DKUtil::UpdateFps()
 	for(i = 0; i < count; i++){
 		framespersecond += frametimes[i];
 	}
-
 	framespersecond /= count;
 	framespersecond = 1000.f / framespersecond;
 }
