@@ -154,11 +154,13 @@ void DKApp::DoFrame()
 	}
 	DKUtil::GetTicks(lastFrame);
 
+	/*
 	//Send a timer even ever second
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
 	}
+	*/
 
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){

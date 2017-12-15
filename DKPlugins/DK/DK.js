@@ -21,6 +21,11 @@ function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrow
 function EventLoop(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
 EventLoop.run = function(){};
 
+var myVar = setInterval(myTimer, 1000);
+function myTimer() {
+    DKSendEvent("GLOBAL", "second", "");
+}
+
 if(DK_GetBrowser() != "CEF"){
 	function DK_ClearEvents(){DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 	function DKRocket_Reload(){DKLog("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
