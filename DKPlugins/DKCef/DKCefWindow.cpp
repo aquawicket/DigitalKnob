@@ -22,13 +22,13 @@ DKCefWindow::DKCefWindow()
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
+	//Display FPS
 	HWND win = dkCef->current_browser->GetHost()->GetWindowHandle();
 	HWND hwnd = GetWindow(win, GW_CHILD);
 	HDC hdc = GetDC(hwnd);
 	RECT rect;
 	GetClientRect(hwnd, &rect);
 	rect.top = rect.bottom - 16;
-	//char * text = "test string";
 	fpsthink();
 	DrawTextA(hdc, fps.c_str(), strlen(fps.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
