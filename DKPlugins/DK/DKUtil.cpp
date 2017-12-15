@@ -692,8 +692,8 @@ void DKUtil::InitFps()
 	DKUtil::GetTicks(frametimelast);
 }
 
-/////////////////////////////
-void DKUtil::GetFps(int& fps)
+////////////////////////
+void DKUtil::UpdateFps()
 {
 	UINT32 frametimesindex;
 	UINT32 getticks;
@@ -723,8 +723,12 @@ void DKUtil::GetFps(int& fps)
 
 	framespersecond /= count;
 	framespersecond = 1000.f / framespersecond;
+}
+
+/////////////////////////////
+void DKUtil::GetFps(int& fps)
+{
 	fps = (int)framespersecond;
-	return;
 }
 
 

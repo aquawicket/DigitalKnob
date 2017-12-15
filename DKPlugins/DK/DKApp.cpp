@@ -135,6 +135,7 @@ void DKApp::Init()
 void DKApp::Loop()
 {
 	DKLog("DKApp::Loop()\n", DKDEBUG);
+	DKUtil::InitFps();
 	while(active){
 		DoFrame();
 	}
@@ -153,6 +154,7 @@ void DKApp::DoFrame()
 		DKUtil::Sleep(sleep);
 	}
 	DKUtil::GetTicks(lastFrame);
+	DKUtil::UpdateFps();
 
 	//TODO - This timer needs to be moved to DKRocket/DKRocket.js
 	//       Duktape currently blocks when using timers, so we've placed it here for now.

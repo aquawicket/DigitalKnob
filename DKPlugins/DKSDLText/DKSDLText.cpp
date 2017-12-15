@@ -16,8 +16,6 @@ void DKSDLText::Init()
 	color = {100, 100, 255};
 	SetText(toString("Test String"));
 
-	DKUtil::InitFps();
-
 	DKSDLWindow::AddDrawFunc(&DKSDLText::Draw, this);
 }
 
@@ -40,11 +38,11 @@ void DKSDLText::SetText(DKString text)
 //////////////////////
 void DKSDLText::Draw()
 {
+	//Draw fps
 	int fps;
 	DKUtil::GetFps(fps);
 	DKString fpsString = toString(fps)+"fps";
 	SetText(fpsString);
-
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);

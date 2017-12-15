@@ -17,8 +17,6 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
-
-	DKUtil::InitFps();
 }
 
 ///////////////////////////

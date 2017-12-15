@@ -72,6 +72,7 @@ public:
 	static bool CpuUsedByApp(int& cpu);
 
 	static void InitFps();
+	static void UpdateFps();
 	static void GetFps(int& fps);
 
 
