@@ -92,7 +92,7 @@ bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 		retval->SetBool(0, false); 
 		return true;
 	}
-	retval->SetBool(0, true); 
+	if(!retval->SetBool(0, true)){ return false; } 
 	return true;
 }
 
@@ -102,7 +102,7 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval)
 	DKString command = args->GetString(0);
 	DKString result;
 	if(!DKUtil::Execute(command, result)){ return false; }
-	retval->SetString(0, result); 
+	if(!retval->SetString(0, result)){ return false; }
 	return true;
 }
 
@@ -111,7 +111,7 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 {
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return false; }
-	retval->SetString(0, string); 
+	if(!retval->SetString(0, string)){ return false; } 
 	return true;
 }
 
@@ -126,7 +126,7 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 	int b;
 	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return false; }
 	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
-	retval->SetString(0, rgb);
+	if(!retval->SetString(0, rgb)){ return false; }
 	return true;
 }
 
@@ -144,7 +144,7 @@ bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
 		return false;
 	}
-	retval->SetInt(0, output); 
+	if(!retval->SetInt(0, output)){ return false; }
 	return true;
 }
 
@@ -162,7 +162,7 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
 		return false;
 	}
-	retval->SetInt(0, output); 
+	if(!retval->SetInt(0, output)){ return false; } 
 	return true;
 }
 
@@ -282,8 +282,8 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 		retval->SetBool(0, false); 
 		return false;
 	}
-	retval->SetBool(0, true); 
-	return 1;
+	if(!retval->SetBool(0, true)){ return false; }
+	return true;
 }
 
 
@@ -323,8 +323,7 @@ bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return false; }
-	retval->SetInt(0, virtualMemory); 
-	retval->SetDouble(0, virtualMemory);
+	if(!retval->SetInt(0, virtualMemory)){ return false; }
 	return true;
 }
 
@@ -333,7 +332,7 @@ bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return false; }
-	retval->SetDouble(0, virtualMemory); 
+	if(!retval->SetInt(0, virtualMemory)){ return false; }
 	return true;
 }
 
@@ -342,7 +341,7 @@ bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return false; }
-	retval->SetDouble(0, virtualMemory); 
+	if(!retval->SetInt(0, virtualMemory)){ return false; }
 	return true;
 }
 
@@ -351,7 +350,7 @@ bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
-	retval->SetDouble(0, physicalMemory); 
+	if(!retval->SetInt(0, physicalMemory)){ return false; }
 	return true;
 }
 
@@ -360,7 +359,7 @@ bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
-	retval->SetDouble(0, physicalMemory); 
+	if(!retval->SetInt(0, physicalMemory)){ return false; }
 	return true;
 }
 
@@ -369,7 +368,7 @@ bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
-	retval->SetDouble(0, physicalMemory); 
+	if(!retval->SetInt(0, physicalMemory)){ return false; }
 	return true;
 }
 
@@ -378,7 +377,7 @@ bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
 {
 	int cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return false; }
-	retval->SetInt(0, cpu); 
+	if(!retval->SetInt(0, cpu)){ return false; }
 	return true;
 }
 
@@ -387,7 +386,7 @@ bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
 {
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
-	retval->SetInt(0, cpu); 
+	if(retval->SetInt(0, cpu)){ return false; }
 	return true;
 }
 
