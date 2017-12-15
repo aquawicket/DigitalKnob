@@ -386,7 +386,7 @@ bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
 {
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
-	if(retval->SetInt(0, cpu)){ return false; }
+	if(!retval->SetInt(0, cpu)){ return false; }
 	return true;
 }
 

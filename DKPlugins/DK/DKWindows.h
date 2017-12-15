@@ -15,6 +15,7 @@ static PDH_HCOUNTER cpuTotal;
 static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
 static int numProcessors;
 static HANDLE self;
+static bool cpuInit = false;
 
 ////////////////
 class DKWindows
@@ -62,6 +63,7 @@ public:
 	static bool PhysicalMemory(float& physicalMemory);
 	static bool PhysicalMemoryUsed(float& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(float& physicalMemory);
+	static void CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 };

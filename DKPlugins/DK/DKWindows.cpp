@@ -731,32 +731,16 @@ bool DKWindows::PhysicalMemoryUsedByApp(float& physicalMemory)
 	return true;
 }
 
-
-/////////////////////////////////
-bool DKWindows::CpuUsed(int& cpu)
+/////////////////////////
+void DKWindows::CpuInit()
 {
-	//FIXME
-	
-	//Init
+	//Init for DKWindows::CpuUsed()
 	PdhOpenQuery(NULL, NULL, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
 	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
 	PdhCollectQueryData(cpuQuery);
 
-	//getCurrentValue
-	PDH_FMT_COUNTERVALUE counterVal;
-	PdhCollectQueryData(cpuQuery);
-	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
-	cpu = counterVal.doubleValue;
-	return true;
-}
-
-//////////////////////////////////////
-bool DKWindows::CpuUsedByApp(int& cpu)
-{
-	//FIXME
-	
-	//Init
+	//Init for DKWindows::CpuUsedByApp()
 	SYSTEM_INFO sysInfo;
 	FILETIME ftime, fsys, fuser;
 	GetSystemInfo(&sysInfo);
@@ -768,7 +752,28 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 	memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
 	memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
 
-	//getCurrentValue
+	cpuInit = true;
+	Sleep(1000);
+}
+
+/////////////////////////////////
+bool DKWindows::CpuUsed(int& cpu)
+{
+	if(!cpuInit){ CpuInit(); }
+
+	PDH_FMT_COUNTERVALUE counterVal;
+	PdhCollectQueryData(cpuQuery);
+	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
+	cpu = counterVal.doubleValue;
+	return true;
+}
+
+//////////////////////////////////////
+bool DKWindows::CpuUsedByApp(int& cpu)
+{
+	if(!cpuInit){ CpuInit(); }
+
+	FILETIME ftime, fsys, fuser;
 	ULARGE_INTEGER now, sys, user;
 	double percent;
 	GetSystemTimeAsFileTime(&ftime);
