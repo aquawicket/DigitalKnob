@@ -47,4 +47,8 @@ function DKStats_Update()
 	//RAM usage
 	var ram = DK_PhysicalMemoryUsedByApp();
 	DKWidget_SetInnerHtml("DKStats_ram", "RAM: "+ram+"MB");
+	
+	//Frames Per Second
+	var fps = DKUtil_GetFps();
+	DKWidget_SetInnerHtml("DKStats_fps", "FPS: "+fps);
 }

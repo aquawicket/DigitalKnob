@@ -31,12 +31,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
-
-	//Cef js functions
-	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
-	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
-	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
-	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
+	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
 
 	DKV8::AttachFunction("DK_VirtualMemory", DKCefV8::VirtualMemory);
 	DKV8::AttachFunction("DK_VirtualMemoryUsed", DKCefV8::VirtualMemoryUsed);
@@ -46,6 +41,12 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
 	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
 	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
+
+	//Cef js functions
+	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
+	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
+	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
+	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 }
 
 ///////////////////
@@ -293,6 +294,15 @@ bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
 {
 	int fps = args->GetInt(0);
 	DKApp::SetFramerate(fps);
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
+{
+	int fps;
+	DKUtil::GetFps(fps);
+	if(!retval->SetInt(0, fps)){ return false; }
 	return true;
 }
 
