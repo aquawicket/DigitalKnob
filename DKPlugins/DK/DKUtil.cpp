@@ -34,6 +34,10 @@
 
 
 unsigned long int DKUtil::mainThreadId = 0;
+UINT32 DKUtil::frametimes[FRAME_VALUES]; // An array to store frame times:
+UINT32 DKUtil::frametimelast; // Last calculated DKUtil::GetTicks()
+UINT32 DKUtil::framecount = 0; // total frames rendered
+float DKUtil::framespersecond = 0;
 
 
 ///////////////////////////////
@@ -678,6 +682,49 @@ bool DKUtil::KeyIsDown(int& key)
 #endif	
 	DKLog("DKUtil::KeyIsDown() not implemented on this OS. \n", DKERROR);
 	return false;
+}
+
+
+//////////////////////
+void DKUtil::InitFps()
+{
+	memset(frametimes, 0, sizeof(frametimes)); // Set all frame times to 0ms
+	DKUtil::GetTicks(frametimelast);
+}
+
+/////////////////////////////
+void DKUtil::GetFps(int& fps)
+{
+	UINT32 frametimesindex;
+	UINT32 getticks;
+	UINT32 count;
+	UINT32 i;
+
+	// frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
+	// This value rotates back to 0 after it hits FRAME_VALUES.
+	frametimesindex = framecount % FRAME_VALUES;
+
+	DKUtil::GetTicks(getticks);// store the current time
+	frametimes[frametimesindex] = getticks - frametimelast; // save the frame time value
+	frametimelast = getticks; // save the last frame time for the next fpsthink
+	framecount++; // increment the frame count
+
+	if(framecount < FRAME_VALUES){
+		count = framecount;
+	}
+	else{
+		count = FRAME_VALUES;
+	}
+
+	framespersecond = 0;
+	for(i = 0; i < count; i++){
+		framespersecond += frametimes[i];
+	}
+
+	framespersecond /= count;
+	framespersecond = 1000.f / framespersecond;
+	fps = (int)framespersecond;
+	return;
 }
 
 

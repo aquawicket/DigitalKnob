@@ -10,6 +10,8 @@
 	#include <shellapi.h> //DKFile::Execute()
 #endif
 
+#define FRAME_VALUES 30
+
 ////////////
 class DKUtil
 {
@@ -69,8 +71,16 @@ public:
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
+	static void InitFps();
+	static void GetFps(int& fps);
+
 
 	static unsigned long int mainThreadId;
+
+	static UINT32 frametimes[FRAME_VALUES]; // An array to store frame times:
+	static UINT32 frametimelast; // Last calculated SDL_GetTicks
+	static UINT32 framecount; // total frames rendered
+	static float framespersecond;
 };
 
 

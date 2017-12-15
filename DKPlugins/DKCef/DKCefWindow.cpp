@@ -29,8 +29,10 @@ void DKCefWindow::DoFrame()
 	RECT rect;
 	GetClientRect(hwnd, &rect);
 	rect.top = rect.bottom - 16;
-	fpsthink();
-	DrawTextA(hdc, fps.c_str(), strlen(fps.c_str()), &rect, DT_LEFT);
+	int fps;
+	DKUtil::GetFps(fps);
+	DKString fpsString = fps+"fps";
+	DrawTextA(hdc, fpsString.c_str(), strlen(fpsString.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
 
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX

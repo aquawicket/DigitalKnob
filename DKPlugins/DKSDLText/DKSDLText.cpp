@@ -16,7 +16,7 @@ void DKSDLText::Init()
 	color = {100, 100, 255};
 	SetText(toString("Test String"));
 
-	fpsinit();
+	DKUtil::InitFps();
 
 	DKSDLWindow::AddDrawFunc(&DKSDLText::Draw, this);
 }
@@ -27,52 +27,6 @@ void DKSDLText::End()
 	//SDL_FreeSurface(surface);
 	//SDL_DestroyTexture(texture);
 	//TTF_CloseFont(font);
-}
-
-/////////////////////////
-void DKSDLText::fpsinit() 
-{
-	// Set all frame times to 0ms.
-	memset(frametimes, 0, sizeof(frametimes));
-	framecount = 0;
-	framespersecond = 0;
-	frametimelast = SDL_GetTicks();
-}
-
-//////////////////////////
-void DKSDLText::fpsthink()
-{
-	Uint32 frametimesindex;
-	Uint32 getticks;
-	Uint32 count;
-	Uint32 i;
-
-	// frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
-	// This value rotates back to 0 after it hits FRAME_VALUES.
-	frametimesindex = framecount % FRAME_VALUES;
-
-	getticks = SDL_GetTicks(); // store the current time
-	frametimes[frametimesindex] = getticks - frametimelast; // save the frame time value
-	frametimelast = getticks; // save the last frame time for the next fpsthink
-	framecount++; // increment the frame count
-
-	if(framecount < FRAME_VALUES){
-		count = framecount;
-	}
-	else{
-		count = FRAME_VALUES;
-	}
-
-	framespersecond = 0;
-	for(i = 0; i < count; i++){
-		framespersecond += frametimes[i];
-	}
-
-	framespersecond /= count;
-	framespersecond = 1000.f / framespersecond;
-	DKString fps = toString((int)framespersecond);
-	fps += "fps";
-	SetText(fps);
 }
 
 //////////////////////////////////////
@@ -86,7 +40,11 @@ void DKSDLText::SetText(DKString text)
 //////////////////////
 void DKSDLText::Draw()
 {
-	fpsthink();
+	int fps;
+	DKUtil::GetFps(fps);
+	DKString fpsString = toString(fps)+"fps";
+	SetText(fpsString);
+
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);

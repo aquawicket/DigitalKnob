@@ -576,16 +576,8 @@ void DKSDLWindow::Process()
 			draw_funcs[i](); //Call event functions
 		}
 
-		ShowFps();
 		SDL_RenderPresent(sdlren);
 	}
-}
-
-//////////////////////////
-void DKSDLWindow::ShowFps()
-{
-	//Todo
-	//TTF_Font* Sans;
 }
 
 //////////////////////////////////////////////////////////////
