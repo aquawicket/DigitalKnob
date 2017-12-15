@@ -5,6 +5,14 @@ var navigator = new Navigator();
 var document = new Document();
 var window = new Window();
 
+//FIXME: Duktape currently blocks when using timers, timers need to be run in another thread. 
+/*
+var myVar = setInterval(myTimer, 1000);
+function myTimer() {
+    DKSendEvent("GLOBAL", "second", "");
+}
+*/
+
 ///////////////////
 function Document()
 {

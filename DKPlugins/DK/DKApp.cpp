@@ -154,13 +154,13 @@ void DKApp::DoFrame()
 	}
 	DKUtil::GetTicks(lastFrame);
 
-	/*
-	//Send a timer even ever second
+	//TODO - This timer needs to be moved to DKRocket/DKRocket.js
+	//       Duktape currently blocks when using timers, so we've placed it here for now.
+	//Send a timer event every second
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
 	}
-	*/
 
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){
