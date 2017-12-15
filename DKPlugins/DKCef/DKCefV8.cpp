@@ -36,6 +36,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
+	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 
 	DKV8::AttachFunction("DK_VirtualMemory", DKCefV8::VirtualMemory);
 	DKV8::AttachFunction("DK_VirtualMemoryUsed", DKCefV8::VirtualMemoryUsed);
@@ -322,6 +323,16 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 	DKString text = args->GetString(1);
 	DKCef::Get(id)->Find(text);
 	return 1;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString url = args->GetString(1);
+	int num = args->GetInt(2);
+	if(!DKCef::Get(id)->SetUrl(url, num)){ return false; }
+	return true;
 }
 
 

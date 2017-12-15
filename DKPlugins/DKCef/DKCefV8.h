@@ -42,6 +42,7 @@ public:
 	static bool Print(CefArgs args, CefReturn retval);
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Find(CefArgs args, CefReturn retval);
+	static bool SetUrl(CefArgs args, CefReturn retval);
 
 	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static bool VirtualMemory(CefArgs args, CefReturn retval);
