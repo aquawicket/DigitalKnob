@@ -2,6 +2,11 @@
 if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){ USE_CEF = 0; }
 else{ USE_WEBVIEW = 0; }
 
+//////////////////////
+function init_Init(){}
+
+/////////////////////
+function init_End(){}
 
 ////////////////////////////
 function init_OnEvent(event)  //Duktape
@@ -65,7 +70,6 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var width = 800;
 		var height = 600;
 		DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
-		DK_SetFramerate(60);
 		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
