@@ -17,6 +17,8 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
+
+	DKUtil::InitFps();
 }
 
 ///////////////////////////
@@ -31,7 +33,7 @@ void DKCefWindow::DoFrame()
 	rect.top = rect.bottom - 16;
 	int fps;
 	DKUtil::GetFps(fps);
-	DKString fpsString = fps+"fps";
+	DKString fpsString = toString(fps)+="fps";
 	DrawTextA(hdc, fpsString.c_str(), strlen(fpsString.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
 
