@@ -44,6 +44,10 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_GetPixelUnderMouse(){DKLog("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
 	function DK_ShowConsole(){DKLog("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
 	function DK_HideConsole(){DKLog("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_CpuUsed(){DKLog("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_CpuUsedByApp(){DKLog("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_PhysicalMemory(){DKLog("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_PhysicalMemoryUsedByApp(){DKLog("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
 }
 
 var DKERROR = 1;     //Red
