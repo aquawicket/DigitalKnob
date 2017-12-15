@@ -32,12 +32,12 @@ function DKStats_Update()
 {
 	//TIME
 	var currentdate = new Date(); 
-	var datetime = (currentdate.getMonth()+1) + "/"
-                + currentdate.getDate() + "/" 
+	var datetime = ('00'+(currentdate.getMonth()+1)).slice(-2) + "/"
+                + ('00'+currentdate.getDate()).slice(-2) + "/" 
                 + currentdate.getFullYear() + " "  
                 + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+                + ('00'+currentdate.getMinutes()).slice(-2) + ":" 
+                + ('00'+currentdate.getSeconds()).slice(-2);
 	DKWidget_SetInnerHtml("DKStats_time", "TIME: "+datetime);
 				
 	//CPU%
@@ -48,3 +48,5 @@ function DKStats_Update()
 	var ram = DK_PhysicalMemoryUsedByApp();
 	DKWidget_SetInnerHtml("DKStats_ram", "RAM: "+ram+"MB");
 }
+
+('00'+n).slice(-2);
