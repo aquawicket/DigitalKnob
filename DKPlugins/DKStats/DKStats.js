@@ -9,7 +9,7 @@ function DKStats_Init()
 }
 
 //////////////////////
-function DKPaint_End()
+function DKStats_End()
 {
 	//DKLog("DKStats_End()\n");
 	
@@ -30,6 +30,16 @@ function DKStats_OnEvent(event)
 /////////////////////////
 function DKStats_Update()
 {
+	//TIME
+	var currentdate = new Date(); 
+	var datetime = (currentdate.getMonth()+1) + "/"
+                + currentdate.getDate() + "/" 
+                + currentdate.getFullYear() + " "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+	DKWidget_SetInnerHtml("DKStats_time", "TIME: "+datetime);
+				
 	//CPU%
 	var cpu = DK_CpuUsedByApp();
 	DKWidget_SetInnerHtml("DKStats_cpu", "CPU: "+cpu+"%");
