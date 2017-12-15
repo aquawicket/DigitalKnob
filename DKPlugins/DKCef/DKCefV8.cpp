@@ -30,6 +30,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
+	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
 
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
@@ -286,6 +287,14 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 	return true;
 }
 
+//////////////////////////////////////////////////////////
+bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
+{
+	int fps = args->GetInt(0);
+	DKApp::SetFramerate(fps);
+	return true;
+}
+
 
 //CEF js functions
 //////////////////////////////////////////////////////////
@@ -323,7 +332,7 @@ bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return false; }
-	if(!retval->SetInt(0, virtualMemory)){ return false; }
+	if(!retval->SetInt(0, (int)virtualMemory)){ return false; }
 	return true;
 }
 
@@ -332,7 +341,7 @@ bool DKCefV8::VirtualMemoryUsed(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return false; }
-	if(!retval->SetInt(0, virtualMemory)){ return false; }
+	if(!retval->SetInt(0, (int)virtualMemory)){ return false; }
 	return true;
 }
 
@@ -341,7 +350,7 @@ bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
 	float virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return false; }
-	if(!retval->SetInt(0, virtualMemory)){ return false; }
+	if(!retval->SetInt(0, (int)virtualMemory)){ return false; }
 	return true;
 }
 
@@ -350,7 +359,7 @@ bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
 	return true;
 }
 
@@ -359,7 +368,7 @@ bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
 	return true;
 }
 
@@ -368,7 +377,7 @@ bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
 {
 	float physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
 	return true;
 }
 
