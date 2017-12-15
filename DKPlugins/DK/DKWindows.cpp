@@ -735,6 +735,8 @@ bool DKWindows::PhysicalMemoryUsedByApp(float& physicalMemory)
 /////////////////////////////////
 bool DKWindows::CpuUsed(int& cpu)
 {
+	//FIXME
+	
 	//Init
 	PdhOpenQuery(NULL, NULL, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
@@ -752,6 +754,8 @@ bool DKWindows::CpuUsed(int& cpu)
 //////////////////////////////////////
 bool DKWindows::CpuUsedByApp(int& cpu)
 {
+	//FIXME
+	
 	//Init
 	SYSTEM_INFO sysInfo;
 	FILETIME ftime, fsys, fuser;
