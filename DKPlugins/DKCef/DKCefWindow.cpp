@@ -29,7 +29,7 @@ void DKCefWindow::DoFrame()
 	RECT rect;
 	GetClientRect(hwnd, &rect);
 	rect.top = rect.bottom - 16;
-	int fps;
+	unsigned int fps;
 	DKUtil::GetFps(fps);
 	DKString fpsString = toString(fps)+="fps";
 	DrawTextA(hdc, fpsString.c_str(), strlen(fpsString.c_str()), &rect, DT_LEFT);

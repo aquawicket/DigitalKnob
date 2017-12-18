@@ -300,7 +300,7 @@ bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////
 bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
 {
-	int fps;
+	unsigned int fps;
 	DKUtil::GetFps(fps);
 	if(!retval->SetInt(0, fps)){ return false; }
 	return true;
