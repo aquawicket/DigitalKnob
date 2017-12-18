@@ -6,7 +6,7 @@
 int DKApp::argc;
 char** DKApp::argv;
 bool DKApp::active = false;
-bool DKApp::loaded = false;
+//bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 
