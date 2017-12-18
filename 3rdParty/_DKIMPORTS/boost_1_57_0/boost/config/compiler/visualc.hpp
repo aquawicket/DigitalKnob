@@ -25,7 +25,7 @@
 //
 // Helper macro BOOST_MSVC_FULL_VER for use in Boost code:
 //
-#if _MSC_FULL_VER > 100000000
+#if _MSC_FULL_VER > 200000000
 #  define BOOST_MSVC_FULL_VER _MSC_FULL_VER
 #else
 #  define BOOST_MSVC_FULL_VER (_MSC_FULL_VER * 10)
@@ -290,7 +290,7 @@
 #endif
 
 // last known and checked version is 19.00.23506 (VC++ 2015 Update 1):
-#if (_MSC_VER > 1800 && _MSC_FULL_VER > 190023918)
+#if (_MSC_VER > 1800 && _MSC_FULL_VER > 200000000)
 #  if defined(BOOST_ASSERT_CONFIG)
 #     error "Unknown compiler version - please run the configure tests and report the results"
 #  else
