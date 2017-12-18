@@ -59,7 +59,7 @@ public:
 	
 #ifdef WIN32
 	//static HINSTANCE hInstance; //posibbly move to DKWindows
-	static bool WINAPI ConsoleHandler(DWORD type);
+	//static bool WINAPI ConsoleHandler(DWORD type);
 #endif
 
 };

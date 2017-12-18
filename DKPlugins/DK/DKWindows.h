@@ -55,8 +55,6 @@ public:
 	static bool GetLastError(DKString& error);
 	static bool GetProcessList(DKString& list);
 	static bool KeyIsDown(int& key);
-
-	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static bool VirtualMemory(float& virtualMemory);
 	static bool VirtualMemoryUsed(float& virtualMemory);
 	static bool VirtualMemoryUsedByApp(float& virtualMemory);
@@ -67,7 +65,10 @@ public:
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
+	static bool WINAPI ConsoleHandler(DWORD type);
+
 	static HINSTANCE hInstance;
+	static HWND consoleWindow;
 };
 
 

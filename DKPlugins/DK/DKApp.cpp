@@ -44,11 +44,12 @@ int main(int argc, char **argv)
 	DKFile::appfilename = argv[0];
 
 #ifdef WIN32
-	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKApp::ConsoleHandler, true)){
+	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
 		DKLog("Could not set Console Handler. \n", DKERROR);
 	}
-	HWND consoleWindow = GetConsoleWindow();
-	SetWindowPos(consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
+	//HWND consoleWindow = GetConsoleWindow();
+	DKWindows::consoleWindow = GetConsoleWindow();
+	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
 
 	/////  Set the window title
 	DKString title; 
@@ -183,6 +184,7 @@ void DKApp::Exit()
 	exit(0);
 }
 
+/*
 #ifdef WIN32
 /////////////////////////////////////////////
 bool WINAPI DKApp::ConsoleHandler(DWORD type)
@@ -196,3 +198,4 @@ bool WINAPI DKApp::ConsoleHandler(DWORD type)
 	return false;
 }
 #endif
+*/

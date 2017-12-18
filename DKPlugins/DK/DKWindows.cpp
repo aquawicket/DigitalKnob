@@ -9,8 +9,9 @@
 #include <psapi.h>
 #include "shlobj.h"
 
-
 HINSTANCE DKWindows::hInstance = 0L;
+HWND DKWindows::consoleWindow;
+
 
 ///////////////////////////////////////////////////////
 bool DKWindows::SetMainThreadNow(unsigned long int& id)
@@ -639,7 +640,6 @@ bool DKWindows::KeyIsDown(int& key)
 	return false;
 }
 
-
 /*
 ////////////////////////////
 bool DKWindows::PrintStack()
@@ -666,9 +666,6 @@ bool DKWindows::PrintStack()
 }
 */
 
-
-
-//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 ///////////////////////////////////////////////////
 bool DKWindows::VirtualMemory(float& virtualMemory)
 {
@@ -791,6 +788,18 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 	lastSysCPU = sys;
 	cpu = percent * 100;
 	return true;
+}
+
+
+bool WINAPI DKWindows::ConsoleHandler(DWORD type)
+{
+	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
+	switch(type){
+	case CTRL_CLOSE_EVENT:
+		DKApp::Exit();
+		return true;
+	}
+	return false;
 }
 
 
