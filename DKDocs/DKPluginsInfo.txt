@@ -1,17 +1,17 @@
 "A DKPlugin"
 
-A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  DKPlugins/MyPlugin
-A DKPlugin can be anything from c++ files, to html, javascript, or just file assets.
-Every Plugin shall include a DKCMake.txt file to run.
-Every Plugin shall be located in the digitalknob/DKPlugins folder
+A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  i.e. DKPlugins/MyPlugin
+A DKPlugin can be anything from c++ files, to html, javascript, or just file assets ,.png,.txt.etc.
+Every Plugin must include a DKCMake.txt file to run.
+Every Plugin must be located in the digitalknob/DKPlugins folder
 
 
 *** DKASSETS() ***
 /DKPlugins/MyPlugin/DKCmake.txt -> "DKASSETS(MyPlugin)"
-This is the easiest version of a plugin, anything in the /MyPlugin folder will be copied to the app's assets
+This is the easiest version of a plugin, anything in the "DKPlugins/MyPlugin" folder will be copied to the app's assets
 
 *** DKDEPEND() ***
-Should a Plugin depend on another plugin, specify DKDEPEND(DKName)
+When a Plugin depends on another plugin, specify DKDEPEND(DKPluginName)
 
 For example, DKPng requires DKZlib..   
 The DKCmake.txt file in the /DKPlugins/DKPng folder will state...
@@ -25,8 +25,7 @@ This will allow DKPlugins and the DKApp to see these header files.
 
 *** DKPLUGIN() ***
 When we use c++ files to work with DK, we need to compile them.
-If the .cpp and .h files for the plugin are made to specification, this command will do the rest.
-I.E. DKPLUGIN(MyPlugin) will compile to a library can be linked to your app.
+I.E. DKPLUGIN(MyPlugin) will compile to a library to be linked to your app.
 
 *** DEBUG_LIB() ***
 This will include a static library into the app.  (please use platfrom spacific commands below)
