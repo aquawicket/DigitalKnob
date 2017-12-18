@@ -3,11 +3,10 @@
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
 
-int DKApp::argc;
+int    DKApp::argc;
 char** DKApp::argv;
-bool DKApp::active = false;
-//bool DKApp::loaded = false;
-bool DKApp::paused = false;
+bool   DKApp::active = false;
+bool   DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 
 
@@ -31,24 +30,6 @@ int main(int argc, char **argv)
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
 	DKWindows::SetTitle();
-
-	/*
-	/////  Set the window title
-	DKString title; 
-	DKFile::GetExeName(title);
-	title += " - WIN32";
-#ifdef DEBUG
-	title += " DEBUG ";
-#else
-	title += " RELEASE ";
-#endif
-	DKString mTime;
-	DKString file;
-	DKFile::GetFullExeName(file);
-	DKFile::GetModifiedTime(file, mTime);
-	title += mTime;
-	SetConsoleTitle(title.c_str());
-	*/
 #endif
 
 	DKString info;

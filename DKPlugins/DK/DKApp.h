@@ -16,7 +16,6 @@ public:
 	static void Exit();
 
 	static bool active;
-	//static bool loaded;
 	static bool paused;
 	static int argc;
 	static char** argv;
