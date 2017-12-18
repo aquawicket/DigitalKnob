@@ -26,8 +26,8 @@ void DKTray::Init()
 	icon = DKFile::local_assets+"icon.ico";
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 
-	DKApp::hInstance = GetModuleHandle(0);
-	if (!TrayIcon.Create(DKApp::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
+	DKWindows::hInstance = GetModuleHandle(0);
+	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
 		DKLog("DKTray::Init(): TrayIcon invalid \n", DKERROR);
 		return;
 	}
