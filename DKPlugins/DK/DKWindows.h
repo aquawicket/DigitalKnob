@@ -65,6 +65,7 @@ public:
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
+	static bool CreateConsoleHandler(); 
 	static bool WINAPI ConsoleHandler(DWORD type);
 
 	static HINSTANCE hInstance;

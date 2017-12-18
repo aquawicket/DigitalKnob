@@ -803,6 +803,17 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 	return true;
 }
 
+//////////////////////////////////////
+bool DKWindows::CreateConsoleHandler()
+{
+	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
+		DKLog("Could not set Console Handler. \n", DKERROR);
+	}
+	//HWND consoleWindow = GetConsoleWindow();
+	DKWindows::consoleWindow = GetConsoleWindow();
+	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
+	return true;
+}
 
 bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 {

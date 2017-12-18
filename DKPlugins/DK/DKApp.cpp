@@ -13,7 +13,6 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 
 
 #ifdef WIN32
-//HINSTANCE DKApp::hInstance = 0L;
 int main(int argc, char **argv);
 
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
@@ -45,13 +44,16 @@ int main(int argc, char **argv)
 	DKFile::appfilename = argv[0];
 
 #ifdef WIN32
-	//DKWindows::CreateConsoleHandler();   //TODO
+	DKWindows::CreateConsoleHandler();   //TODO
+
+	/*
 	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
 		DKLog("Could not set Console Handler. \n", DKERROR);
 	}
 	//HWND consoleWindow = GetConsoleWindow();
 	DKWindows::consoleWindow = GetConsoleWindow();
 	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
+	*/
 
 	/////  Set the window title
 	DKString title; 
@@ -121,8 +123,6 @@ void DKApp::Init()
 {
 	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
-	//DKUtil::InitFramerate();
-	//DKUtil::InitFps();
 }
 
 //////////////////
@@ -136,32 +136,17 @@ void DKApp::Loop()
 /////////////////////
 void DKApp::DoFrame()
 {
-	if(paused){ return; }
-
-	/*
-	//Framerate / cpu limiter
-	DKUtil::GetTicks(DKUtil::now);
-	int delta = DKUtil::now - DKUtil::lastFrame;
-	if(delta < DKUtil::ticksPerFrame){
-		UINT32 sleep = DKUtil::ticksPerFrame - delta;
-		DKUtil::Sleep(sleep);
+	if(paused){ 
+		DKUtil::Sleep(100);
+		return;
 	}
-	DKUtil::GetTicks(DKUtil::lastFrame);
-	DKUtil::UpdateFps();
 
-	//TODO - This timer needs to be moved to DKRocket/DKRocket.js
-	//       Duktape currently blocks when using timers, so we've placed it here for now.
-	//Send a timer event every second
-	if(((DKUtil::lastFrame / 1000) - (DKUtil::lastSecond / 1000)) >= 1){ //1 second
-		SendEvent("GLOBAL", "second", "");
-		DKUtil::GetTicks(DKUtil::lastSecond);
-	}
-	*/
 	DKUtil::LimitFramerate();
 
+	//Call loop functions
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){
-			loop_funcs[i](); //Call loop functions
+			loop_funcs[i](); 
 		}
 	}
 }
