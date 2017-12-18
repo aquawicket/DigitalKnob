@@ -39,7 +39,7 @@ void DKSDLText::SetText(DKString text)
 void DKSDLText::Draw()
 {
 	//Draw fps
-	int fps;
+	unsigned int fps;
 	DKUtil::GetFps(fps);
 	DKString fpsString = toString(fps)+"fps";
 	SetText(fpsString);
