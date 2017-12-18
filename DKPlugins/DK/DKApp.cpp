@@ -11,7 +11,7 @@ bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 
-
+/*
 #ifdef WIN32
 int main(int argc, char **argv);
 
@@ -24,6 +24,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     return main(__argc, __argv);
 }
 #endif
+*/
 
 
 /////////// MAIN ////////////////
