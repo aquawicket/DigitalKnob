@@ -293,7 +293,7 @@ bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
 {
 	int fps = args->GetInt(0);
-	DKApp::SetFramerate(fps);
+	DKUtil::SetFramerate(fps);
 	return true;
 }
 
