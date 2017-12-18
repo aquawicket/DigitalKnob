@@ -1,4 +1,4 @@
-#pragma once //Is this obsolete?
+#pragma once
 #ifndef DKApp_H
 #define DKApp_H
 

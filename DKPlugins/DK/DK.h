@@ -2,7 +2,7 @@
 
 // NOTE:
 // This is the core of DigitalKnob. 
-// Anything that is an absolute must for the core to work, starts in this header file.
+// Anything that is an absolute for the core to work, starts in this header file.
 
 #pragma once
 #ifndef DK_H

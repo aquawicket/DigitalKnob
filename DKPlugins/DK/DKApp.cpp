@@ -89,6 +89,7 @@ void DKApp::Init()
 //////////////////
 void DKApp::Loop()
 {
+	DKLog("DKApp::Loop(): \n", DKINFO);
 	while(active){
 		DoFrame();
 	}
@@ -117,17 +118,6 @@ void DKApp::Exit()
 {
 	DKLog("DKApp::Exit(): \n", DKINFO);
 	active = false;
-
-#ifdef ANDROID
-	CallJavaFunction("Exit","");
-#endif
-
-#ifdef WIN32
-	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
-		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
-	}
-#endif	
-
-	DKClass::CloseAll();
+	DKUtil::CallExit();
 	exit(0);
 }

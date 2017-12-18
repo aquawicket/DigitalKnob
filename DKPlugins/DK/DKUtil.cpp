@@ -779,6 +779,21 @@ void DKUtil::LimitFramerate()
 	DKUtil::UpdateFps();
 }
 
+///////////////////////
+void DKUtil::CallExit()
+{
+#ifdef ANDROID
+	CallJavaFunction("Exit","");
+#endif
+#ifdef WIN32
+	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
+		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
+	}
+#endif
+
+	DKClass::CloseAll();
+}
+
 
 
 

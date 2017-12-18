@@ -64,6 +64,7 @@ public:
 	static int GetFramerate();
 	static void SetFramerate(int fps);
 	static void LimitFramerate();
+	static void CallExit();
 
 	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static bool VirtualMemory(float& virtualMemory);
