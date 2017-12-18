@@ -724,10 +724,10 @@ void DKUtil::UpdateFps()
 	framespersecond = 1000.f / framespersecond;
 }
 
-/////////////////////////////
-void DKUtil::GetFps(int& fps)
+//////////////////////////////////////
+void DKUtil::GetFps(unsigned int& fps)
 {
-	fps = (int)framespersecond;
+	fps = (unsigned int)framespersecond;
 }
 
 

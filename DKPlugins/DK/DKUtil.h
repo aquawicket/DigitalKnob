@@ -73,7 +73,7 @@ public:
 
 	static void InitFps();
 	static void UpdateFps();
-	static void GetFps(int& fps);
+	static void GetFps(unsigned int& fps);
 
 
 	static unsigned long int mainThreadId;
