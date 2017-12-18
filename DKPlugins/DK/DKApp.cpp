@@ -11,12 +11,6 @@ bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 
-UINT32 DKApp::lastSecond;
-
-UINT32 DKApp::now;
-UINT32 DKApp::lastFrame; 
-int DKApp::_fps = 60;
-int DKApp::ticksPerFrame = 1000 / DKApp::_fps;
 
 //#ifdef USE_Boost_System
 #ifdef WIN32
@@ -126,9 +120,9 @@ void DKApp::Init()
 {
 	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
-	DKUtil::GetTicks(now);
-	DKUtil::GetTicks(lastFrame);
-	DKUtil::GetTicks(lastSecond);
+	DKUtil::GetTicks(DKUtil::now);
+	DKUtil::GetTicks(DKUtil::lastFrame);
+	DKUtil::GetTicks(DKUtil::lastSecond);
 }
 
 //////////////////
@@ -147,21 +141,21 @@ void DKApp::DoFrame()
 	if(paused){ return; }
 
 	//Framerate / cpu limiter
-	DKUtil::GetTicks(now);
-	int delta = now - lastFrame;
-	if(delta < ticksPerFrame){
-		UINT32 sleep = ticksPerFrame - delta;
+	DKUtil::GetTicks(DKUtil::now);
+	int delta = DKUtil::now - DKUtil::lastFrame;
+	if(delta < DKUtil::ticksPerFrame){
+		UINT32 sleep = DKUtil::ticksPerFrame - delta;
 		DKUtil::Sleep(sleep);
 	}
-	DKUtil::GetTicks(lastFrame);
+	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::UpdateFps();
 
 	//TODO - This timer needs to be moved to DKRocket/DKRocket.js
 	//       Duktape currently blocks when using timers, so we've placed it here for now.
 	//Send a timer event every second
-	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
+	if(((DKUtil::lastFrame / 1000) - (DKUtil::lastSecond / 1000)) >= 1){ //1 second
 		SendEvent("GLOBAL", "second", "");
-		DKUtil::GetTicks(lastSecond);
+		DKUtil::GetTicks(DKUtil::lastSecond);
 	}
 
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
@@ -189,21 +183,6 @@ void DKApp::Exit()
 
 	DKClass::CloseAll();
 	exit(0);
-}
-
-/////////////////////////
-int DKApp::GetFramerate()
-{
-	return _fps;
-}
-
-/////////////////////////////////
-void DKApp::SetFramerate(int fps)
-{
-	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKINFO);
-	_fps = fps;
-	if(_fps == 0){ ticksPerFrame = 0; return; }
-	ticksPerFrame = 1000 / _fps;
 }
 
 #ifdef WIN32

@@ -338,7 +338,7 @@ int DKJS::GetScreenHeight(duk_context* ctx)
 ////////////////////////////////////////
 int DKJS::GetFramerate(duk_context* ctx)
 {
-	duk_push_int(ctx, DKApp::GetFramerate());
+	duk_push_int(ctx, DKUtil::GetFramerate());
 	return 1;
 }
 
@@ -346,7 +346,7 @@ int DKJS::GetFramerate(duk_context* ctx)
 int DKJS::SetFramerate(duk_context* ctx)
 {
 	int fps = duk_require_int(ctx, 0);
-	DKApp::SetFramerate(fps);
+	DKUtil::SetFramerate(fps);
 	return 1;
 }
 

@@ -60,6 +60,8 @@ public:
 	static bool Beep();
 	static bool GetProcessList(DKString& list);
 	static bool KeyIsDown(int& key);
+	static int GetFramerate();
+	static void SetFramerate(int fps);
 
 	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static bool VirtualMemory(float& virtualMemory);
@@ -71,6 +73,14 @@ public:
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
+	//Frame limiter
+	static UINT32 now;
+	static UINT32 lastFrame;
+	static int _fps;
+	static int ticksPerFrame;
+	static UINT32 lastSecond;
+
+	//Fps counter
 	static void InitFps();
 	static void UpdateFps();
 	static void GetFps(unsigned int& fps);

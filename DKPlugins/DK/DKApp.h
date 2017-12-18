@@ -14,21 +14,12 @@ public:
 	static void Loop();
 	static void DoFrame();
 	static void Exit();
-	static int GetFramerate();
-	static void SetFramerate(int fps);
 	static bool active;
 	static bool loaded;
 	static bool paused;
 	static int argc;
 	static char** argv;
 
-	static UINT32 now;
-	static UINT32 lastFrame;
-	static int _fps;
-	static int ticksPerFrame;
-
-	static UINT32 lastSecond;
-	
 	template<class T>
 	///////////////////////////////////////////////////////
 	static void AppendLoopFunc(void (T::*func)(), T* _this)

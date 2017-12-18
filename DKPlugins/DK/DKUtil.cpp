@@ -32,7 +32,14 @@
 #include <assert.h>
 
 
+//Frame limiter
+UINT32 DKUtil::lastSecond;
+UINT32 DKUtil::now;
+UINT32 DKUtil::lastFrame; 
+int DKUtil::_fps = 60;
+int DKUtil::ticksPerFrame = 1000 / _fps;
 
+//FPS Counter
 unsigned long int DKUtil::mainThreadId = 0;
 UINT32 DKUtil::frametimes[FRAME_VALUES]; // An array to store frame times:
 UINT32 DKUtil::frametimelast; // Last calculated DKUtil::GetTicks()
@@ -729,6 +736,23 @@ void DKUtil::GetFps(unsigned int& fps)
 {
 	fps = (unsigned int)framespersecond;
 }
+
+
+//////////////////////////
+int DKUtil::GetFramerate()
+{
+	return DKUtil::_fps;
+}
+
+//////////////////////////////////
+void DKUtil::SetFramerate(int fps)
+{
+	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKINFO);
+	_fps = fps;
+	if(_fps == 0){ ticksPerFrame = 0; return; }
+	ticksPerFrame = 1000 / _fps;
+}
+
 
 
 
