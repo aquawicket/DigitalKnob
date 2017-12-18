@@ -66,6 +66,8 @@ public:
 	static void CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
+
+	static HINSTANCE hInstance;
 };
 
 

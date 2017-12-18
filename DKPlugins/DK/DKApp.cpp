@@ -13,14 +13,14 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 
 
 #ifdef WIN32
-HINSTANCE DKApp::hInstance = 0L;
+//HINSTANCE DKApp::hInstance = 0L;
 int main(int argc, char **argv);
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-    DKApp::hInstance = hInstance;
+    DKWindows::hInstance = hInstance;
     return main(__argc, __argv);
 }
 #endif

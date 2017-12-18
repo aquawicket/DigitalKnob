@@ -10,6 +10,8 @@
 #include "shlobj.h"
 
 
+HINSTANCE DKWindows::hInstance = 0L;
+
 ///////////////////////////////////////////////////////
 bool DKWindows::SetMainThreadNow(unsigned long int& id)
 {
