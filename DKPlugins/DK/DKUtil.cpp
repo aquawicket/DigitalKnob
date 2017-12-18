@@ -33,16 +33,16 @@
 
 
 //Frame limiter
-UINT32 DKUtil::lastSecond;
-UINT32 DKUtil::now;
-UINT32 DKUtil::lastFrame; 
+UINT32 DKUtil::lastSecond = 0;
+UINT32 DKUtil::now = 0;
+UINT32 DKUtil::lastFrame = 0; 
 int DKUtil::_fps = 60;
 int DKUtil::ticksPerFrame = 1000 / _fps;
 
 //FPS Counter
 unsigned long int DKUtil::mainThreadId = 0;
 UINT32 DKUtil::frametimes[FRAME_VALUES]; // An array to store frame times:
-UINT32 DKUtil::frametimelast; // Last calculated DKUtil::GetTicks()
+UINT32 DKUtil::frametimelast = 0; // Last calculated DKUtil::GetTicks()
 UINT32 DKUtil::framecount = 0; // total frames rendered
 float DKUtil::framespersecond = 0;
 
@@ -702,6 +702,7 @@ void DKUtil::InitFps()
 ////////////////////////
 void DKUtil::UpdateFps()
 {
+	if(!frametimelast){ DKUtil::InitFps(); }
 	UINT32 frametimesindex;
 	UINT32 getticks;
 	UINT32 count;
@@ -738,6 +739,16 @@ void DKUtil::GetFps(unsigned int& fps)
 }
 
 
+
+
+////////////////////////////
+void DKUtil::InitFramerate()
+{
+	GetTicks(DKUtil::now);
+	DKUtil::GetTicks(DKUtil::lastFrame);
+	DKUtil::GetTicks(DKUtil::lastSecond);
+}
+
 //////////////////////////
 int DKUtil::GetFramerate()
 {
@@ -751,6 +762,21 @@ void DKUtil::SetFramerate(int fps)
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return; }
 	ticksPerFrame = 1000 / _fps;
+}
+
+/////////////////////////////
+void DKUtil::LimitFramerate()
+{
+	if(!DKUtil::now){ DKUtil::InitFramerate(); }
+	//Framerate / cpu limiter
+	DKUtil::GetTicks(DKUtil::now);
+	int delta = DKUtil::now - DKUtil::lastFrame;
+	if(delta < DKUtil::ticksPerFrame){
+		UINT32 sleep = DKUtil::ticksPerFrame - delta;
+		DKUtil::Sleep(sleep);
+	}
+	DKUtil::GetTicks(DKUtil::lastFrame);
+	DKUtil::UpdateFps();
 }
 
 

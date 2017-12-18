@@ -30,17 +30,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 #ifndef ANDROID
 int main(int argc, char **argv)
 {
+	DKUtil::SetMainThreadNow();
+	DKApp::argc = argc;
+	DKApp::argv = argv;
+
 #if __cplusplus <= 199711L
 	DKLog("C++98 \n", DKINFO);
 #else
 	DKLog("C++11 \n", DKINFO);
 #endif
 
-	DKApp::argc = argc;
-    DKApp::argv = argv;
-
-	DKUtil::SetMainThreadNow();
-	
 #ifndef IOS
 	DKFile::appfilename = argv[0];
 
@@ -120,16 +119,13 @@ void DKApp::Init()
 {
 	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
-	DKUtil::GetTicks(DKUtil::now);
-	DKUtil::GetTicks(DKUtil::lastFrame);
-	DKUtil::GetTicks(DKUtil::lastSecond);
+	//DKUtil::InitFramerate();
+	//DKUtil::InitFps();
 }
 
 //////////////////
 void DKApp::Loop()
 {
-	DKLog("DKApp::Loop()\n", DKDEBUG);
-	DKUtil::InitFps();
 	while(active){
 		DoFrame();
 	}
@@ -140,6 +136,7 @@ void DKApp::DoFrame()
 {
 	if(paused){ return; }
 
+	/*
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
 	int delta = DKUtil::now - DKUtil::lastFrame;
@@ -157,6 +154,8 @@ void DKApp::DoFrame()
 		SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(DKUtil::lastSecond);
 	}
+	*/
+	DKUtil::LimitFramerate();
 
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
 		if (active){
