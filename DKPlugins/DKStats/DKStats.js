@@ -32,10 +32,12 @@ function DKStats_Update()
 {
 	//TIME
 	var currentdate = new Date(); 
+	var hours = currentdate.getHours();
+	if(hours > 12){ hours = hours - 12; } // Standard time
 	var datetime = ('00'+(currentdate.getMonth()+1)).slice(-2) + "/"
                 + ('00'+currentdate.getDate()).slice(-2) + "/" 
                 + currentdate.getFullYear() + " "  
-                + currentdate.getHours() + ":"  
+                + hours + ":"  
                 + ('00'+currentdate.getMinutes()).slice(-2) + ":" 
                 + ('00'+currentdate.getSeconds()).slice(-2);
 	DKWidget_SetInnerHtml("DKStats_time", "TIME: "+datetime);
