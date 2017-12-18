@@ -67,6 +67,7 @@ public:
 
 	static bool CreateConsoleHandler(); 
 	static bool WINAPI ConsoleHandler(DWORD type);
+	static void SetTitle();
 
 	static HINSTANCE hInstance;
 	static HWND consoleWindow;

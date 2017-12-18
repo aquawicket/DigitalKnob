@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #ifdef WIN32
 #include "DKWindows.h"
+#include "DKFile.h"
 #include "DKLog.h"
 
 #include "conio.h"
@@ -824,6 +825,24 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 	return false;
 }
 
-
+//////////////////////////
+void DKWindows::SetTitle()
+{
+	/////  Set the window title
+	DKString title; 
+	DKFile::GetExeName(title);
+	title += " - WIN32";
+#ifdef DEBUG
+	title += " DEBUG ";
+#else
+	title += " RELEASE ";
+#endif
+	DKString mTime;
+	DKString file;
+	DKFile::GetFullExeName(file);
+	DKFile::GetModifiedTime(file, mTime);
+	title += mTime;
+	SetConsoleTitle(title.c_str());
+}
 
 #endif //WIN32

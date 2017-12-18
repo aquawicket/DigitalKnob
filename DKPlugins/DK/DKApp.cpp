@@ -29,8 +29,10 @@ int main(int argc, char **argv)
 	DKFile::appfilename = argv[0];
 
 #ifdef WIN32
-	DKWindows::CreateConsoleHandler();   //TODO
+	DKWindows::CreateConsoleHandler();
+	DKWindows::SetTitle();
 
+	/*
 	/////  Set the window title
 	DKString title; 
 	DKFile::GetExeName(title);
@@ -46,6 +48,7 @@ int main(int argc, char **argv)
 	DKFile::GetModifiedTime(file, mTime);
 	title += mTime;
 	SetConsoleTitle(title.c_str());
+	*/
 #endif
 
 	DKString info;
