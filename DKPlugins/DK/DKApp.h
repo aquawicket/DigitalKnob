@@ -56,13 +56,8 @@ public:
 	}
 
 	static std::vector<boost::function<void()> > loop_funcs;
-	
-#ifdef WIN32
-	//static HINSTANCE hInstance; //posibbly move to DKWindows
-	//static bool WINAPI ConsoleHandler(DWORD type);
-#endif
-
 };
+
 
 //////////
 #ifdef IOS

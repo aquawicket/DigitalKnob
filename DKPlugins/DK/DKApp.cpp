@@ -1,5 +1,4 @@
 #include "DK/stdafx.h"
-
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
@@ -10,21 +9,6 @@ bool DKApp::active = false;
 bool DKApp::loaded = false;
 bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
-
-/*
-#ifdef WIN32
-int main(int argc, char **argv);
-
-//////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
-{
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
-    DKWindows::hInstance = hInstance;
-    return main(__argc, __argv);
-}
-#endif
-*/
 
 
 /////////// MAIN ////////////////
@@ -46,15 +30,6 @@ int main(int argc, char **argv)
 
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();   //TODO
-
-	/*
-	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
-		DKLog("Could not set Console Handler. \n", DKERROR);
-	}
-	//HWND consoleWindow = GetConsoleWindow();
-	DKWindows::consoleWindow = GetConsoleWindow();
-	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
-	*/
 
 	/////  Set the window title
 	DKString title; 
@@ -114,6 +89,7 @@ int main(int argc, char **argv)
 DKApp::DKApp()
 {
 	DKLog("DKApp::DKApp()\n", DKDEBUG);
+
 #ifdef ANDROID
 	DKUtil::mainThreadId = (int)pthread_self();
 #endif
@@ -171,19 +147,3 @@ void DKApp::Exit()
 	DKClass::CloseAll();
 	exit(0);
 }
-
-/*
-#ifdef WIN32
-/////////////////////////////////////////////
-bool WINAPI DKApp::ConsoleHandler(DWORD type)
-{
-	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
-	switch(type){
-		case CTRL_CLOSE_EVENT:
-			DKApp::Exit();
-			return true;
-	}
-	return false;
-}
-#endif
-*/
