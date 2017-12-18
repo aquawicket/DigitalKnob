@@ -14,6 +14,7 @@ public:
 	static void Loop();
 	static void DoFrame();
 	static void Exit();
+
 	static bool active;
 	static bool loaded;
 	static bool paused;

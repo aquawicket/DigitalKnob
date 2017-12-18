@@ -12,7 +12,6 @@ bool DKApp::paused = false;
 std::vector<boost::function<void()> > DKApp::loop_funcs;
 
 
-//#ifdef USE_Boost_System
 #ifdef WIN32
 HINSTANCE DKApp::hInstance = 0L;
 int main(int argc, char **argv);
@@ -25,6 +24,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     return main(__argc, __argv);
 }
 #endif
+
 
 /////////// MAIN ////////////////
 #ifndef ANDROID
@@ -101,8 +101,7 @@ int main(int argc, char **argv)
 #endif
 }
 #endif //!ANDROID
-//#endif //USE_Boost_System
-//////////////////////////////////
+/////////////////////////////////
 
 
 //////////////
