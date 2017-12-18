@@ -15,6 +15,7 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 #ifdef WIN32
 //HINSTANCE DKApp::hInstance = 0L;
 int main(int argc, char **argv);
+
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
 {
@@ -44,6 +45,7 @@ int main(int argc, char **argv)
 	DKFile::appfilename = argv[0];
 
 #ifdef WIN32
+	//DKWindows::CreateConsoleHandler();   //TODO
 	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
 		DKLog("Could not set Console Handler. \n", DKERROR);
 	}
