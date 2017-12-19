@@ -8,7 +8,7 @@ LOCAL_SRC_FILES:= \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../..
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SDL)/include
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(FREETYPE)
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(FREETYPE)/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(FREETYPE)/android32/Debug/jni
 	
 LOCAL_CFLAGS := -DLOAD_FREETYPE
