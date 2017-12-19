@@ -19,7 +19,7 @@ function DKAudioPlayer_End()
 {
 	DKRemoveEvents(DKAudioPlayer_OnEvent);
 	DKClose("DKAudio/DKAudioPlayer.html");
-	DKClose("DKAudio");
+	//DKClose("DKAudio");
 }
 
 /////////////////////////////////////
