@@ -22,13 +22,20 @@ function AndroidImport_Import()
 	var appdir = "";	
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
+	/*
 	for(var i=0; i<files.length; i++){ 
 		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
 			appdir = files[i]+"/DKApps";
 		}
 	}
+	*/
+	if(DKFile_Exists(DKPATH+"/DKApps/"+APP)){
+		appdir = DKPATH+"/DKApps/"+APP;
+	}
+		
 	if(!appdir){
 		DKLog("AndroidImport_Import(): cannot locate appdir.\n");
+		
 		return;
 	}
 	
@@ -40,12 +47,14 @@ function AndroidImport_Import()
 	DKHook_WaitForWindow("Welcome to Android Studio", 30); //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	var assets = DKAssets_LocalAssets();
+	DK_WaitForImage(assets+"DKBuild/import.bmp", 30); //Check for 30 seconds
 	DK_ClickImage(assets+"DKBuild/import.bmp");
 
 	DKHook_WaitForWindow("Select Eclipse or Gradle Project to Import", 30); //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	
 	//Multipe user folders
+	/*
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
@@ -59,21 +68,23 @@ function AndroidImport_Import()
 			}
 		}
 	}
+	*/
+	
 	//Get app path
 	if(TYPE == "Debug"){
-		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Debug";
+		path =  appdir+"/android32/Debug";
 	}
 	else{
-		path =  DKPATH+"/"+appdir+"/"+APP+"/android32/Release";
+		path =  appdir+"/android32/Release";
 	}
 	
 	
-	
-	//DKLog(path+"\n");
-	DK_SetClipboard(path);	
+	DKLog(path+"\n");
+	DK_SetClipboard(path);
+	DK_Sleep(2000);
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
-	DK_ReleaseKey(17); //release ctrl	
+	DK_ReleaseKey(17); //release ctrl
 	DK_Sleep(2000);
 	DK_StrokeKey(13) //stroke enter
 	
