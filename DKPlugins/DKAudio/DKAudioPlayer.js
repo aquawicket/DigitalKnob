@@ -6,9 +6,9 @@ function DKAudioPlayer_Init()
 	DKCreate("DKAudio");
 	DKCreate("DKAudio/DKAudioPlayer.html");
 	DKAddEvent("DKAudioPlayer_playpause", "click", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudioPlayer_position", "click", DKAudioPlayer_OnEvent);
+	DKAddEvent("DKAudioPlayer_position", "input", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_speaker", "click", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudioPlayer_volume", "change", DKAudioPlayer_OnEvent);
+	DKAddEvent("DKAudioPlayer_volume", "input", DKAudioPlayer_OnEvent);
 	//DKAddEvent("DKAudio", "finnished", DKAudioPlayer_OnEvent);
 	DKAddEvent("GLOBAL", "timeupdate", DKAudioPlayer_OnEvent);
 	DKWidget_SetValue("DKAudioPlayer_volume","128");
