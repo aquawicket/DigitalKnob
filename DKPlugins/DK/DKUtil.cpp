@@ -794,6 +794,18 @@ void DKUtil::CallExit()
 	DKClass::CloseAll();
 }
 
+//TODO - This timer needs to be moved to DKRocket/DKRocket.js
+//       Duktape currently blocks when using timers, so we've placed it here for now.
+//       Send a timer event every second
+///////////////////////
+void DKUtil::SendTick()
+{
+	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
+		SendEvent("GLOBAL", "second", "");
+		DKUtil::GetTicks(lastSecond);
+	}
+}
+
 
 
 
