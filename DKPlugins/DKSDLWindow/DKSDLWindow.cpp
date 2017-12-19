@@ -361,9 +361,11 @@ bool DKSDLWindow::GetY(void* input, void* output)
 /////////////////////////////////////////////////////
 bool DKSDLWindow::GetWidth(void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
+	//DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
 	int w;
 	SDL_GetWindowSize(sdlwin, &w, NULL);
+	DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n", DKINFO);
+	if(w == 0){ w = width; }
 	*(int*)output = w;
 	return true;
 }
@@ -371,9 +373,11 @@ bool DKSDLWindow::GetWidth(void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKSDLWindow::GetHeight(void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
+	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
 	int h;
 	SDL_GetWindowSize(sdlwin, NULL, &h);
+	DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n", DKINFO);
+	if(h == 0){ h = height; }
 	*(int*)output = h;
 	return true;
 }
