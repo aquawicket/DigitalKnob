@@ -10,7 +10,7 @@ function DKAudioPlayer_Init()
 	DKAddEvent("DKAudioPlayer_speaker", "click", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_volume", "change", DKAudioPlayer_OnEvent);
 	//DKAddEvent("DKAudio", "finnished", DKAudioPlayer_OnEvent);
-	//DKAddEvent("DKAudio", "position", DKAudioPlayer_OnEvent);
+	DKAddEvent("GLOBAL", "timeupdate", DKAudioPlayer_OnEvent);
 	DKWidget_SetValue("DKAudioPlayer_volume","128");
 }
 
@@ -25,13 +25,13 @@ function DKAudioPlayer_End()
 /////////////////////////////////////
 function DKAudioPlayer_OnEvent(event)
 {
-	DKLog("DKAudioPlayer_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKAudioPlayer_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKAudioPlayer_playpause")){
 		DKAudioPlayer_playpause();
 	}
 	if(DK_Id(event, "DKAudioPlayer_position")){
-		DKAudioPlayer_position();
+		//TODO
 	}
 	if(DK_Id(event, "DKAudioPlayer_speaker")){
 		DKAudioPlayer_speaker();
@@ -44,11 +44,9 @@ function DKAudioPlayer_OnEvent(event)
 	if(DK_Type(event, "finnished")){
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
 	}
-	if(DK_Type(event, "position")){
+	if(DK_Type(event, "timeupdate")){
 		//DKLog("position = "+DK_GetValue(event)+"\n");
-		var minute = "0:";
-		var second = ("0" + DK_GetValue(event)).slice (-2);
-		DKWidget_SetValue("DKAudioPlayer_time", minute+second);
+		DKAudioPlayer_TimeUpdate();
 	}
 }
 
@@ -79,10 +77,15 @@ function DKAudioPlayer_playpause()
 	}
 }
 
-/////////////////////////////////
-function DKAudioPlayer_position()
+///////////////////////////////////
+function DKAudioPlayer_TimeUpdate()
 {
-	DKLog("DKAudioPlayer_position() \n");
+	DKLog("DKAudioPlayer_TimeUpdate() \n", DKINFO);
+	
+	DKWidget_SetValue("DKAudioPlayer_position", DKAudio_GetPosition());
+	var minute = "0:";
+		var second = ("0" + DK_GetValue(event)).slice (-2);
+		DKWidget_SetValue("DKAudioPlayer_time", minute+second);
 }
 
 ////////////////////////////////
