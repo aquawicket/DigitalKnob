@@ -41,8 +41,8 @@ function DKAudioPlayer_OnEvent(event)
 	}
 	if(DK_Id(event, "DKAudioPlayer_volume")){
 		var volume = DKWidget_GetValue("DKAudioPlayer_volume");
-		DKAudio_SetVolume(volume);
-		DKAudioPlayer_UpdateVolume(volume);
+		DKAudio_SetVolume(parseInt(volume));
+		DKAudioPlayer_UpdateVolume(parseInt(volume));
 	}
 	if(DK_Type(event, "finnished")){
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");

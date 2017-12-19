@@ -172,3 +172,57 @@ void DKAudio::SetVolume(int& volume)
 	}
 	DKLog("DKAudio::SetVolume(): No SetVolume funtion available \n", DKERROR);
 }
+
+///////////////////////////////////
+void DKAudio::SetTime(int& seconds)
+{
+	if(DKClass::HasFunc("DKSDLAudio::SetTime")){
+		DKClass::CallFunc("DKSDLAudio::SetTime", &seconds, NULL);
+		return;
+	}
+	if(DKClass::HasFunc("DKSDLWav::SetTime")){
+		DKClass::CallFunc("DKSDLWav::SetTime", &seconds, NULL);
+		return;
+	}
+	if (DKClass::HasFunc("DKOSGAudio::SetTime")) {
+		DKClass::CallFunc("DKOSGAudio::SetTime", &seconds, NULL);
+		return;
+	}
+	DKLog("DKAudio::SetTime(): No SetTime funtion available \n", DKERROR);
+}
+
+//////////////////////
+int DKAudio::GetTime()
+{
+	int seconds;
+	if(DKClass::HasFunc("DKSDLAudio::GetTime")){
+		DKClass::CallFunc("DKSDLAudio::GetTime", NULL, &seconds);
+	}
+	if(DKClass::HasFunc("DKSDLWav::GetTime")){
+		DKClass::CallFunc("DKSDLWav::GetTime", NULL, &seconds);
+	}
+	if (DKClass::HasFunc("DKOSGAudio::GetTime")) {
+		DKClass::CallFunc("DKOSGAudio::GetTime", NULL, &seconds);
+	}
+
+	DKLog("DKAudio::GetTime(): No GetTime funtion available \n", DKERROR);
+	return 0;
+}
+
+//////////////////////////
+int DKAudio::GetDuration()
+{
+	int seconds;
+	if(DKClass::HasFunc("DKSDLAudio::GetDuration")){
+		DKClass::CallFunc("DKSDLAudio::GetDuration", NULL, &seconds);
+	}
+	if(DKClass::HasFunc("DKSDLWav::GetDuration")){
+		DKClass::CallFunc("DKSDLWav::GetDuration", NULL, &seconds);
+	}
+	if (DKClass::HasFunc("DKOSGAudio::GetDuration")) {
+		DKClass::CallFunc("DKOSGAudio::GetDuration", NULL, &seconds);
+	}
+
+	DKLog("DKAudio::GetDuration(): No GetDuration funtion available \n", DKERROR);
+	return 0;
+}

@@ -19,6 +19,9 @@ public:
 	static void Resume(DKString& file);
 	static void SetVolume(int& volume);
 	static void UnMute();
+	static void SetTime(int& seconds);
+	static int GetTime();
+	static int GetDuration();
 };
 
 REGISTER_OBJECT(DKAudio, true);

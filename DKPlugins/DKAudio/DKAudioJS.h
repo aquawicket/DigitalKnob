@@ -19,6 +19,9 @@ public:
 	static int Resume(duk_context* ctx);
 	static int SetVolume(duk_context* ctx);
 	static int UnMute(duk_context* ctx);
+	static int SetTime(duk_context* ctx);
+	static int GetTime(duk_context* ctx);
+	static int GetDuration(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKAudioJS, true)
