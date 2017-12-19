@@ -100,7 +100,7 @@ function AndroidImport_Import()
 	DK_Sleep(3000);
 	DK_StrokeKey(13) //stroke enter
 	
-	DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 30); //Check for 30 seconds
+	DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500); //Check for 500 seconds
 	DK_ClickImage(assets+"DKBuild/enableNdk.bmp");
 	
 	/*
