@@ -9,9 +9,9 @@ function DKAudioPlayer_Init()
 	DKAddEvent("DKAudioPlayer_position", "input", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_speaker", "click", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_volume", "input", DKAudioPlayer_OnEvent);
-	//DKAddEvent("DKAudio", "finnished", DKAudioPlayer_OnEvent);
 	DKAddEvent("GLOBAL", "timeupdate", DKAudioPlayer_OnEvent);
-	DKWidget_SetValue("DKAudioPlayer_volume","128");
+	DKAddEvent("GLOBAL", "ended", DKAudioPlayer_OnEvent);
+	DKWidget_SetValue("DKAudioPlayer_volume", "128");
 }
 
 ////////////////////////////
@@ -56,6 +56,7 @@ function DKAudioPlayer_Open(file)
 	//DKAudio_PlaySound(file);
 	DKAudioPlayer_file = file;
 	DKAudio_OpenMusic(file);
+	DKWidget_SetValue("DKAudioPlayer_position", "0");
 }
 
 //////////////////////////////////
@@ -99,7 +100,7 @@ function DKAudioPlayer_TimeUpdate()
 	
 	var minute = "0";
 	minute += ":";
-	var second = parseInt(DKAudio_GetTime());;//("0" + DK_GetValue(event)).slice (-2);
+	var second = parseInt(DKAudio_GetTime());//("0" + DK_GetValue(event)).slice (-2);
 	DKWidget_SetValue("DKAudioPlayer_time", minute+second);
 }
 
