@@ -113,6 +113,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
+	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
 
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
@@ -945,6 +946,14 @@ int DKJS::StopPropagation(duk_context* ctx)
 	return 0;
 }
 
+//////////////////////////////////
+int DKJS::GetFps(duk_context* ctx)
+{
+	unsigned int fps;
+	DKUtil::GetFps(fps);
+	duk_push_int(ctx, fps);
+	return 1;
+}
 
 
 
