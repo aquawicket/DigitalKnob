@@ -39,7 +39,7 @@ public:
 	static bool WheelUp();
 	static bool WheelDown();
 	static bool Sleep(int milliseconds);
-	static bool GetTicks(UINT32& ticks);
+	static bool GetTicks(long& ticks);
 	static bool GetTime(DKString& _time);
 	static bool GetDate(DKString& date);
 	static bool GetKey(int& key);
@@ -77,11 +77,11 @@ public:
 	static bool CpuUsedByApp(int& cpu);
 
 	//Frame limiter
-	static UINT32 now;
-	static UINT32 lastFrame;
+	static long now;
+	static long lastFrame;
 	static int _fps;
 	static int ticksPerFrame;
-	static UINT32 lastSecond;
+	static long lastSecond;
 
 	//Fps counter
 	static void InitFps();
@@ -91,9 +91,9 @@ public:
 
 	static unsigned long int mainThreadId;
 
-	static UINT32 frametimes[FRAME_VALUES]; // An array to store frame times:
-	static UINT32 frametimelast; // Last calculated SDL_GetTicks
-	static UINT32 framecount; // total frames rendered
+	static long frametimes[FRAME_VALUES]; // An array to store frame times:
+	static long frametimelast; // Last calculated SDL_GetTicks
+	static long framecount; // total frames rendered
 	static float framespersecond;
 };
 

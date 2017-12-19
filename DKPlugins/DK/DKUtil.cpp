@@ -33,17 +33,17 @@
 
 
 //Frame limiter
-UINT32 DKUtil::lastSecond = 0;
-UINT32 DKUtil::now = 0;
-UINT32 DKUtil::lastFrame = 0; 
+long DKUtil::lastSecond = 0;
+long DKUtil::now = 0;
+long DKUtil::lastFrame = 0; 
 int DKUtil::_fps = 60;
 int DKUtil::ticksPerFrame = 1000 / _fps;
 
 //FPS Counter
 unsigned long int DKUtil::mainThreadId = 0;
-UINT32 DKUtil::frametimes[FRAME_VALUES]; // An array to store frame times:
-UINT32 DKUtil::frametimelast = 0; // Last calculated DKUtil::GetTicks()
-UINT32 DKUtil::framecount = 0; // total frames rendered
+long DKUtil::frametimes[FRAME_VALUES]; // An array to store frame times:
+long DKUtil::frametimelast = 0; // Last calculated DKUtil::GetTicks()
+long DKUtil::framecount = 0; // total frames rendered
 float DKUtil::framespersecond = 0;
 
 
@@ -325,7 +325,7 @@ bool DKUtil::Sleep(int milliseconds)
 }
 
 ////////////////////////////////////
-bool DKUtil::GetTicks(UINT32& ticks)
+bool DKUtil::GetTicks(long& ticks)
 {
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
@@ -703,10 +703,10 @@ void DKUtil::InitFps()
 void DKUtil::UpdateFps()
 {
 	if(!frametimelast){ DKUtil::InitFps(); }
-	UINT32 frametimesindex;
-	UINT32 getticks;
-	UINT32 count;
-	UINT32 i;
+	long frametimesindex;
+	long getticks;
+	long count;
+	long i;
 
 	// frametimesindex is the position in the array. It ranges from 0 to FRAME_VALUES.
 	// This value rotates back to 0 after it hits FRAME_VALUES.
@@ -772,7 +772,7 @@ void DKUtil::LimitFramerate()
 	DKUtil::GetTicks(DKUtil::now);
 	int delta = DKUtil::now - DKUtil::lastFrame;
 	if(delta < DKUtil::ticksPerFrame){
-		UINT32 sleep = DKUtil::ticksPerFrame - delta;
+		long sleep = DKUtil::ticksPerFrame - delta;
 		DKUtil::Sleep(sleep);
 	}
 	DKUtil::GetTicks(DKUtil::lastFrame);
