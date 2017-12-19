@@ -3,7 +3,6 @@ var DKAudioPlayer_file = "";
 /////////////////////////////
 function DKAudioPlayer_Init()
 {
-	DKCreate("DKAudio/DKAudio.js", function(){});
 	DKCreate("DKAudio");
 	DKCreate("DKAudio/DKAudioPlayer.html");
 	DKAddEvent("DKAudioPlayer_playpause", "click", DKAudioPlayer_OnEvent);
