@@ -38,7 +38,8 @@ function DKAudioPlayer_OnEvent(event)
 	}
 	if(DK_Id(event, "DKAudioPlayer_volume")){
 		var volume = DKWidget_GetValue("DKAudioPlayer_volume");
-		DKAudioPlayer_volume(volume);
+		DKAudio_SetVolume(volume);
+		DKAudioPlayer_UpdateVolume(volume);
 	}
 	if(DK_Type(event, "finnished")){
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
@@ -93,20 +94,23 @@ function DKAudioPlayer_speaker()
 	
 	if(src.indexOf("mute.png") != -1){
 		DKAudio_UnMute();
-		DKAudioPlayer_volume(DKAudio_GetVolume());
+		DKAudioPlayer_UpdateVolume(DKAudio_GetVolume());
 	}
 	else{
 		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/mute.png");
 		DKAudio_Mute();
 	}
+	
+	//DKLog("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n" ,DKINFO);
+	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume()+1);
 }
 
-/////////////////////////////////////
-function DKAudioPlayer_volume(volume)
+///////////////////////////////////////////
+function DKAudioPlayer_UpdateVolume(volume)
 {
-	//DKLog("DKAudioPlayer_volume("+volume+") \n");
+	DKLog("DKAudioPlayer_UpdateVolume("+volume+") \n");
 	var num = parseInt(volume);
-	DKAudio_SetVolume(num);
+	//DKAudio_SetVolume(num);
 	if(num < 1){
 		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/mute.png");
 	}
