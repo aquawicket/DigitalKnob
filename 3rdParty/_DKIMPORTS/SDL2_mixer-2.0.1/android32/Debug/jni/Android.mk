@@ -1,5 +1,7 @@
 SDL := SDL2-2.0.4
 SMPEG := smpeg2-2.0.0
+OGG := libogg-1.3.2
+VORBIS := libvorbis-1.3.5
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -13,9 +15,12 @@ LOCAL_MODULE := SDL2_mixer
 LOCAL_C_INCLUDES := $(LOCAL_PATH) 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SDL)/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(SMPEG)
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(OGG)/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../../../$(VORBIS)/include
 
 LOCAL_CFLAGS := -DWAV_MUSIC 
 LOCAL_CFLAGS += -DMP3_MUSIC
+LOCAL_CFLAGS += -DOGG_MUSIC
 
 LOCAL_SRC_FILES:= \
 	../../../dynamic_flac.c \
