@@ -14,8 +14,8 @@ APPLE_DEBUG_LIB(${SDLTTF}/${OS}/lib/Debug/SDL_ttf.a)
 APPLE_RELEASE_LIB(${SDLTTF}/${OS}/lib/Release/SDL_ttf.a)
 LINUX_DEBUG_LIB(${SDLTTF}/${OS}/Debug/lib/SDL_ttf.a)
 LINUX_RELEASE_LIB(${SDLTTF}/${OS}/Release/lib/SDL_ttf.a)
-ANDROID_DEBUG_LIB(${SDLTTF}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libSDL2_image.a)
-ANDROID_RELEASE_LIB(${SDLTTF}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libSDL2_image.a)
+ANDROID_DEBUG_LIB(${SDLTTF}/${OS}/${DEBUG}/obj/local/armeabi-v7a/libSDL2_ttf.a)
+ANDROID_RELEASE_LIB(${SDLTTF}/${OS}/${RELEASE}/obj/local/armeabi-v7a/libSDL2_ttf.a)
 
 
 
