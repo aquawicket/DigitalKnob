@@ -24,10 +24,10 @@ function app_LoadPage()
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
-		//DKCreate("DKRocketAudio/DKRocketAudio.js", function(){
-		//	DKFrame_Widget("DKRocketAudio/DKRocketAudio.html");
-		//	DKRocketAudio_Open("C:/test.ogg");
-		//});
+		DKCreate("DKAudio/DKAudioPlayer.js", function(){
+			DKFrame_Widget("DKAudio/DKAudioPlayer.html");
+			DKAudioPlayer_Open("C:/test.ogg");
+		});
 	//});		
 	});
 	});
