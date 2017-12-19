@@ -3,16 +3,15 @@ var DKAudioPlayer_file = "";
 /////////////////////////////
 function DKAudioPlayer_Init()
 {
-	DKCreate("DKAudio");
 	DKCreate("DKAudio/DKAudio.js", function(){});
+	DKCreate("DKAudio");
 	DKCreate("DKAudio/DKAudioPlayer.html");
 	DKAddEvent("DKAudioPlayer_playpause", "click", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_position", "click", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_speaker", "click", DKAudioPlayer_OnEvent);
 	DKAddEvent("DKAudioPlayer_volume", "change", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudio", "finnished", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudio", "position", DKAudioPlayer_OnEvent);
-	
+	//DKAddEvent("DKAudio", "finnished", DKAudioPlayer_OnEvent);
+	//DKAddEvent("DKAudio", "position", DKAudioPlayer_OnEvent);
 	DKWidget_SetValue("DKAudioPlayer_volume","128");
 }
 
