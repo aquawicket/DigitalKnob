@@ -81,11 +81,11 @@ function DKAudioPlayer_playpause()
 /////////////////////////////////////
 function DKAudioPlayer_SetTime(value)
 {
-	//DKLog("DKAudioPlayer_SetTime("+value+")\n", DKINFO);
+	DKLog("DKAudioPlayer_SetTime("+value+")\n", DKINFO);
 	
 	var time = (value * DKAudio_GetDuration() / 1000);
 	DKLog("time = "+time+"\n", DKINFO);
-	//DKAudio_SetTime(time);
+	DKAudio_SetTime(time);
 }
 
 ///////////////////////////////////
@@ -117,6 +117,7 @@ function DKAudioPlayer_speaker()
 		DKAudio_Mute();
 	}
 	
+	DKLog("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n", DKINFO);
 	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume());
 }
 

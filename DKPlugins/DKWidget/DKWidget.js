@@ -634,7 +634,7 @@ function DKWidget_SetValue(variable, value)
 	//DKLog("DKWidget_SetValue("+variable+","+value+")\n");
 	
 	if(!variable){ return false; }
-	if(!value){ value = ""; }
+	//if(!value){ value = ""; } //FIXME - sould be if(value == emptystring) so 0's can pass through
 	if(typeof variable == "object"){
 		if(variable.tagName == "INPUT"){
 			variable.value = value;
