@@ -127,7 +127,7 @@ void DKJS::Init()
 
 /////////////////////////////////////
 int DKJS::_DKCreate(duk_context* ctx)
-{
+{	
 	DKString data = duk_require_string(ctx, 0);
 	
 	bool callback_found = false;
