@@ -14,6 +14,7 @@ void DKSDLAudio::Init()
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
 		DKLog("DKSDLAudio::Init(): could not load mixer \n",DKERROR);
 	}
+
 	_volume = 128;
 
 	DKClass::RegisterFunc("DKSDLAudio::GetVolume", &DKSDLAudio::GetVolume, this);
@@ -43,7 +44,7 @@ bool DKSDLAudio::PlaySound(void* input, void* output)
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	
-	Mix_Chunk *snd = Mix_LoadWAV(path.c_str());
+	Mix_Chunk* snd = Mix_LoadWAV(path.c_str());
 	if(!snd){
 		DKLog("DKSDLAudio::PlaySound(): could not load file \n", DKERROR);
 		return false;
@@ -152,9 +153,25 @@ bool DKSDLAudio::SetTime(void* input, void* output)
 bool DKSDLAudio::GetDuration(void* input, void* output)
 {
 	//FIXME - TODO
-	int val = 0;
-	*(int*)output = val;
 	return false;
+
+	/*
+	Uint32 points = 0; 
+	Uint32 frames = 0; 
+	int freq = 0; 
+	Uint16 fmt = 0;  
+	int chans = 0;  
+	// Chunks are converted to audio device format... 
+	if (!Mix_QuerySpec(&freq, &fmt, &chans)){ return false; } // never called Mix_OpenAudio()?!
+
+	if(!trk.snd){ return false; }
+	points = (trk.snd / (fmt & 0xFF)); // bytes / samplesize == sample points  
+	frames = (points / chans);  // sample points / channels == sample frames 
+	int val = ((frames * 1000) / freq); // (sample frames * 1000) / frequency == play length in ms 
+
+	*(int*)output = val;
+	return true;
+	*/
 }
 
 

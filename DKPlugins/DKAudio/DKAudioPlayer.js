@@ -85,7 +85,7 @@ function DKAudioPlayer_SetTime(value)
 	
 	var time = (value * DKAudio_GetDuration() / 1000);
 	DKLog("time = "+time+"\n", DKINFO);
-	DKAudio_SetTime(time);
+	//DKAudio_SetTime(time);
 }
 
 ///////////////////////////////////
