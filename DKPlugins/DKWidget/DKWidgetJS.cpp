@@ -150,7 +150,7 @@ int DKWidgetJS::SetAttribute(duk_context* ctx)
 int DKWidgetJS::GetValue(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
-	DKLog("DKWidgetJS::GetValue("+evt+")\n", DKINFO);
+	//DKLog("DKWidgetJS::GetValue("+evt+")\n", DKINFO);
 	
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
