@@ -5,6 +5,7 @@ IF(IOSSIM)
 	RETURN()
 ENDIF()
 
+DKDEPEND(DKDuktape)
 
 DKSET(QUEUE_BUILD ON)
 ##DKDEPEND(cef_binary_3.2704.1434.gec3e9ed_windows32)
