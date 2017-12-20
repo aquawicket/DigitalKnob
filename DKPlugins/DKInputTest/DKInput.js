@@ -103,7 +103,7 @@ function DKInput_OnEvent(event)
 	
 	//element events
 	if(DK_Id(event, "esc")){
-		DKLog("esc\n", DKINFO)
+		DKLog("esc\n")
 	}
 }
 
