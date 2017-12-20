@@ -48,7 +48,6 @@ function DKAudioPlayer_OnEvent(event)
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
 	}
 	if(DK_Type(event, "timeupdate")){
-		//DKLog("position = "+DK_GetValue(event)+"\n");
 		DKAudioPlayer_TimeUpdate();
 	}
 }
@@ -93,6 +92,9 @@ function DKAudioPlayer_SetTime(value)
 function DKAudioPlayer_TimeUpdate()
 {
 	//DKLog("DKAudioPlayer_TimeUpdate()\n", DKINFO);
+	//DKLog("DKAudio_GetDuration() = "+DKAudio_GetDuration()+"\n", DKINFO);
+	
+	if(DKAudio_GetDuration() < 1){ return; }
 	
 	var time = DKAudio_GetTime() / DKAudio_GetDuration() * 1000;
 	DKWidget_SetValue("DKAudioPlayer_position", time);

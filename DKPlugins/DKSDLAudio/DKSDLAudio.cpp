@@ -152,8 +152,8 @@ bool DKSDLAudio::GetDuration(void* input, void* output)
 {
 	//FIXME - TODO
 
-	//int val = duration;
-	//output = static_cast<void*>(new int(val));
+	int val = 0;
+	output = static_cast<void*>(new int(val));
 	return false;
 }
 
@@ -166,7 +166,7 @@ void DKSDLAudio::Process()
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
 			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
-			DKEvent::SendEvent("GLOBAL", "timeupdate", toString(trk.position));
+			DKEvent::SendEvent("GLOBAL", "timeupdate", "");
 		}
 	}
 	else if(!Mix_PlayingMusic()){
@@ -178,6 +178,6 @@ void DKSDLAudio::Process()
 		Mix_PauseMusic();
 		trk.position = 0;
 		lastTime = SDL_GetTicks();
-		DKEvent::SendEvent("DKGLOABL", "ended", trk.file);
+		DKEvent::SendEvent("DKGLOABL", "ended", "");
 	}
 }
