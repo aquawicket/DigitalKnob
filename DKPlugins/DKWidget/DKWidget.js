@@ -7,7 +7,7 @@ function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not ava
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	//DKLog("DKCreate("+data+")\n");
+	DKLog("DKCreate("+data+")\n");
 	
 	var arry = data.split(",");
 	
@@ -96,7 +96,7 @@ function AdjustRems(id)
 //////////////////////
 function DKClose(data)
 {
-	//DKLog("DKClose("+data+")\n");
+	DKLog("DKClose("+data+")\n");
 	
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
