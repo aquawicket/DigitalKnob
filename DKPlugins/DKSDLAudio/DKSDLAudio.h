@@ -33,7 +33,7 @@ public:
 	bool GetDuration(void* input, void* output);
 	void Process();
 
-	int volume;
+	int _volume;
 	track trk;
 	unsigned int lastTime;
 };

@@ -120,7 +120,7 @@ function DKAudioPlayer_speaker()
 		DKAudio_Mute();
 	}
 	
-	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume()+1);
+	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume());
 }
 
 ///////////////////////////////////////////

@@ -14,7 +14,7 @@ void DKSDLAudio::Init()
 	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1){
 		DKLog("DKSDLAudio::Init(): could not load mixer \n",DKERROR);
 	}
-	volume = 128;
+	_volume = 128;
 
 	DKClass::RegisterFunc("DKSDLAudio::GetVolume", &DKSDLAudio::GetVolume, this);
 	DKClass::RegisterFunc("DKSDLAudio::Mute", &DKSDLAudio::Mute, this);
@@ -104,6 +104,7 @@ bool DKSDLAudio::Resume(void* input, void* output)
 ////////////////////////////////////////////////
 bool DKSDLAudio::Mute(void* input, void* output)
 {
+	_volume = Mix_VolumeMusic(-1);
 	Mix_VolumeMusic(0);
 	return true;
 }
@@ -111,22 +112,22 @@ bool DKSDLAudio::Mute(void* input, void* output)
 //////////////////////////////////////////////////
 bool DKSDLAudio::UnMute(void* input, void* output)
 {
-	Mix_VolumeMusic(volume);
+	Mix_VolumeMusic(_volume);
 	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKSDLAudio::GetVolume(void* input, void* output)
 {
-	int val = Mix_VolumeMusic(-1);
-	output = static_cast<void*>(new int(val));
+	int volume = Mix_VolumeMusic(-1);
+	*(int*)output = volume;
 	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKSDLAudio::SetVolume(void* input, void* output)
 {
-	volume = *(int*)input;
+	int volume = *(int*)input;
 	Mix_VolumeMusic(volume);
 	return true;
 }
@@ -135,7 +136,7 @@ bool DKSDLAudio::SetVolume(void* input, void* output)
 bool DKSDLAudio::GetTime(void* input, void* output)
 {
 	int val = trk.position;
-	output = static_cast<void*>(new int(val));
+	*(int*)output = val;
 	return true;
 }
 
@@ -151,9 +152,8 @@ bool DKSDLAudio::SetTime(void* input, void* output)
 bool DKSDLAudio::GetDuration(void* input, void* output)
 {
 	//FIXME - TODO
-
 	int val = 0;
-	output = static_cast<void*>(new int(val));
+	*(int*)output = val;
 	return false;
 }
 

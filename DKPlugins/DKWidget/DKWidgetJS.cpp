@@ -179,7 +179,14 @@ int DKWidgetJS::GetValue(duk_context* ctx)
 int DKWidgetJS::SetValue(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	DKString value = duk_require_string(ctx, 1);
+	DKString value;
+	if(duk_is_number(ctx, 1)){
+		float num = duk_require_number(ctx, 1);
+		value = toString(num);
+	}
+	else{
+		value = duk_require_string(ctx, 1);
+	}
 	if(!DKWidget::SetValue(id, value)){ return 0; }
 	return 1;
 }
