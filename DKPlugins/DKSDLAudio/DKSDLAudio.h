@@ -28,6 +28,9 @@ public:
 	bool Resume(void* input, void* output);
 	bool SetVolume(void* input, void* output);
 	bool UnMute(void* input, void* output);
+	bool GetTime(void* input, void* output);
+	bool SetTime(void* input, void* output);
+	bool GetDuration(void* input, void* output);
 	void Process();
 
 	int volume;
