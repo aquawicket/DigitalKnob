@@ -28,6 +28,8 @@ DKString DKUpdate::url;
 /////////////////////
 void DKUpdate::Init()
 {
+	DKLog("DKUpdate::Init()", DKINFO);
+
 	DKString app;
 	DKFile::GetExeName(app);
 	//DKFile::RemoveExtention(app);
@@ -92,7 +94,7 @@ void DKUpdate::End()
 ///////////////////////////////
 bool DKUpdate::CheckForUpdate()
 {
-	DKLog("DKUpdate::CheckForUpdate()\n", DKDEBUG);
+	DKLog("DKUpdate::CheckForUpdate()\n", DKINFO);
 
 	DKCurl::Instance("DKCurlUpdate");
 	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
@@ -131,6 +133,7 @@ bool DKUpdate::CheckForUpdate()
 		//DoUpdate();
 		return true;
 	}
+	DKLog("No Update Available \n", DKINFO);
 	return false;
 }
 
