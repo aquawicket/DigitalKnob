@@ -78,7 +78,7 @@ void DKAssets::Init()
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){
-		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/";
+		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/"; //FIXME - path should reflect App name
 	}
 
 	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n", DKINFO);
