@@ -12,7 +12,9 @@
 
 #include "DKString.h"
 #include <stdio.h>
-#include <fstream>
+#if !defined(IOS)
+    #include <fstream>
+#endif
 
 #ifdef WIN32
 #define DKNORMAL FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE

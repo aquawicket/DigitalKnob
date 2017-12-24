@@ -580,9 +580,12 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 bool DKUtil::System(const DKString& command)
 {
 	DKLog("DKUtil::System("+command+")\n", DKDEBUG);
+#if !defined(IOS)
 	int rval = system(command.c_str());
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n", DKDEBUG);
 	return true;
+#endif
+    return false;
 }
 
 ////////////////////////////////////////////////////////////
@@ -634,10 +637,10 @@ bool DKUtil::InMainThread()
 	//DKLog(tid, DKINFO); DO NOT DO THIS!
 	return mainThreadId == GetCurrentThreadId();
 #endif
-#if defined(MAC)
+#if defined(MAC) || defined(IOS)
 	return mainThreadId == (unsigned long int)pthread_self();
 #endif
-#if defined (IOS) || defined (ANDROID) //|| defined(LINUX)
+#if defined (ANDROID) //|| defined(LINUX)
 	DKString tid = "GetCurrentThreadId()(): "+toString((unsigned int)pthread_self())+"\n";
 	//DKLog(tid, DKINFO); DO NOT DO THIS!
 	return mainThreadId == (unsigned long int)pthread_self();
