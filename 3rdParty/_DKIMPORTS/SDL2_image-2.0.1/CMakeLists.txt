@@ -26,7 +26,7 @@ set(SDLIMAGE_SUPPORT_XV ON CACHE BOOL "Support for XV file format")
 set(SDLIMAGE_SUPPORT_JPEG ON CACHE BOOL "Support for JPEG file format")
 set(SDLIMAGE_SUPPORT_PNG ON CACHE BOOL "Support for PNG file format")
 set(SDLIMAGE_SUPPORT_WEBP ON CACHE BOOL "Support for WEBP file format")
-set(SDLIMAGE_SUPPORT_TIFF ON CACHE BOOL "Support for TIFF file format")
+set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 
 if(SDLIMAGE_SUPPORT_BMP)
 	add_definitions(-DLOAD_BMP)
