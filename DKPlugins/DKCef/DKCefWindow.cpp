@@ -22,6 +22,7 @@ DKCefWindow::DKCefWindow()
 ///////////////////////////
 void DKCefWindow::DoFrame()
 { 
+#ifdef WIN32
 	//Display FPS
 	HWND win = dkCef->current_browser->GetHost()->GetWindowHandle();
 	HWND hwnd = GetWindow(win, GW_CHILD);
@@ -34,6 +35,7 @@ void DKCefWindow::DoFrame()
 	DKString fpsString = toString(fps)+="fps";
 	DrawTextA(hdc, fpsString.c_str(), strlen(fpsString.c_str()), &rect, DT_LEFT);
 	ReleaseDC(hwnd, hdc);
+#endif
 
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
 };
