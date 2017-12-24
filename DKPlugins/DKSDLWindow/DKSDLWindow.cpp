@@ -4,8 +4,11 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-#if defined(WIN32) || defined(MAC) || defined(LINUX)
+#if defined(WIN32) || defined(LINUX)
 	#include <GL/gl.h>
+#endif
+#if defined(MAC)
+	#include <OpenGL/gl.h>
 #endif
 /*
 #if defined(ANDROID)
