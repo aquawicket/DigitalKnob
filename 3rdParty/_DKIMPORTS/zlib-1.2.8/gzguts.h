@@ -20,7 +20,9 @@
 
 #include <stdio.h>
 #include "zlib.h"
+#ifndef WIN32       //ADDED BY Digitalknob
 #include <unistd.h> //ADDED BY Digitalknob
+#endif              //ADDED BY Digitalknob
 #ifdef STDC
 #  include <string.h>
 #  include <stdlib.h>
