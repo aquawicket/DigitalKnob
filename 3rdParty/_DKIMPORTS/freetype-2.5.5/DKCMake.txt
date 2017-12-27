@@ -40,11 +40,11 @@ IOS_XCODE_DEBUG(freetype-2.5.5 freetype)
 IOS_XCODE_RELEASE(freetype-2.5.5 freetype)
 
 DKSETPATH(${FREETYPE}/${OS}/${DEBUG})
-IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch i386")
+IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
 IOSSIM_DEBUG_COMMAND(make)
 
 DKSETPATH(${FREETYPE}/${OS}/${RELEASE})
-IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch i386")
+IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
 IOSSIM_RELEASE_COMMAND(make)
 
 
