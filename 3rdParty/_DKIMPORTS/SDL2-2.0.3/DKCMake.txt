@@ -11,6 +11,6 @@ IOSSIM_RELEASE_LIB(${SDL}/Xcode-iOS/SDL/build/Release-iphonesimulator/libSDL2.a)
 
 ### COMPILE ###
 IF(IOSSIM)
-	EXECUTE_PROCESS(COMMAND xcodebuild -configuration Debug build -arch i386 -sdk iphonesimulator6.1 WORKING_DIRECTORY ${SDL}/Xcode-iOS/SDL)
-	EXECUTE_PROCESS(COMMAND xcodebuild -configuration Release build -arch i386 -sdk iphonesimulator6.1 WORKING_DIRECTORY ${SDL}/Xcode-iOS/SDL)
+	EXECUTE_PROCESS(COMMAND xcodebuild -configuration Debug build -arch x86_64 -sdk iphonesimulator11.2 WORKING_DIRECTORY ${SDL}/Xcode-iOS/SDL)
+	EXECUTE_PROCESS(COMMAND xcodebuild -configuration Release build -arch x86_64 -sdk iphonesimulator11.2 WORKING_DIRECTORY ${SDL}/Xcode-iOS/SDL)
 ENDIF()
