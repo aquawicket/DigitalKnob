@@ -12,6 +12,8 @@ void DKAssets::Init()
 {
 	DKLog("DKAssets::Init()\n", DKDEBUG);
 	
+	DKLog("DKFile::appfilename = "+DKFile::appfilename+"\n", DKINFO);
+
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
@@ -78,7 +80,10 @@ void DKAssets::Init()
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty()){
-		DKFile::online_assets = "http://digitalknob.com/DKSDLOS/"; //FIXME - path should reflect App name
+		DKString app_name;
+		DKFile::GetExeName(app_name);
+		replace(app_name, ".exe", "");
+		DKFile::online_assets = "http://digitalknob.com/"+app_name;
 	}
 
 	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n", DKINFO);
