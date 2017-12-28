@@ -73,16 +73,16 @@ function DKBuildConsole_SelectOs()
 	DKLog("\n**** SELECT OS TO BUILD ****\n");
 	DKLog("1. win32\n");
 	DKLog("2. win64\n");
-	DKLog("3. mac32 (NOT AVAILABLE)\n");
+	DKLog("3. mac32\n");
 	DKLog("4. mac64\n");
-	DKLog("5. linux32 (NOT AVAILABLE)\n");
+	DKLog("5. linux32\n");
 	DKLog("6. linux64\n");
-	DKLog("7. ios32 (NOT AVAILABLE)\n");
-	DKLog("8. ios64 (NOT AVAILABLE)\n");
+	DKLog("7. ios32\n");
+	DKLog("8. ios64\n");
 	DKLog("9. iossim32\n");
-	DKLog("a. iossim64 (NOT AVAILABLE)\n");
+	DKLog("a. iossim64\n");
 	DKLog("b. android32\n");
-	DKLog("c. android64 (NOT AVAILABLE)\n");
+	DKLog("c. android64\n");
 	DKLog("ESC. exit\n\n");
 
 	var key = 10;
