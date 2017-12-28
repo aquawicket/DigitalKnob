@@ -171,7 +171,7 @@ void DKSDLWindow::Init()
 #endif
 	DKString mTime;
 	DKString file;
-	DKFile::GetFullExeName(file);
+	DKFile::GetExePath(file);
 	DKFile::GetModifiedTime(file, mTime);
 	title2 += mTime;
 	

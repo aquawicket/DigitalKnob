@@ -12,8 +12,6 @@ void DKAssets::Init()
 {
 	DKLog("DKAssets::Init()\n", DKDEBUG);
 	
-	DKLog("DKFile::appfilename = "+DKFile::appfilename+"\n", DKINFO);
-
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
@@ -96,7 +94,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 	
     unsigned found = 0;
 #ifdef WIN32
-    exepath = DKFile::appfilename;
+    exepath = DKFile::exe_path;
 	if (exepath.empty()){
 		TCHAR appfilename[MAX_PATH];
 		GetModuleFileName(NULL, appfilename, MAX_PATH);

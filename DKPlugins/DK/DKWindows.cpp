@@ -839,7 +839,7 @@ void DKWindows::SetTitle()
 #endif
 	DKString mTime;
 	DKString file;
-	DKFile::GetFullExeName(file);
+	DKFile::GetExePath(file);
 	DKFile::GetModifiedTime(file, mTime);
 	title += mTime;
 	SetConsoleTitle(title.c_str());

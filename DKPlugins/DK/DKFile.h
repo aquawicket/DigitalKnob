@@ -23,11 +23,12 @@ public:
 	static bool GetDirectoryContents(const DKString& path, DKStringArray& strings);
 	static bool GetDrives(DKStringArray& strings);
 	static bool GetExeName(DKString& exename);
-	static bool GetExePath(DKString& exepath);
+	static bool GetAppPath(DKString& exepath);
+	static bool GetAppName(DKString& appname);
 	static bool GetExtention(const DKString& file, DKString& extension);
 	static bool GetFileName(const DKString& path, DKString& filename);
 	static bool GetFilePath(const DKString& file, DKString& path);
-	static bool GetFullExeName(DKString& fullexename);
+	static bool GetExePath(DKString& exepath);
 	static bool GetLocalCreationDate(const DKString& path, DKString& filedate);
 	static bool GetLocalModifiedDate(const DKString& path, DKString& filedate);
 	static bool GetModifiedTime(const DKString& path, DKString& time);
@@ -45,9 +46,13 @@ public:
 	static bool VerifyPath(DKString& path);
     static bool MakeDir(const DKString& dir);
 
-	static DKString appfilename;
-	static DKString local_assets;
-	static DKString online_assets;
+	
+	static DKString exe_path;      //example:  C:/digitalknob/DKApps/DKMyApp/win32/Release/DKMyApp.exe
+	static DKString exe_name;      //example:  DKMyApp.exe
+	static DKString app_path;      //example:  C:/digitalknob/DKApps/DKMyApp/win32/Release
+	static DKString app_name;      //example:  DKMyApp
+	static DKString local_assets;  //example:  C:/digitalknob/DKApps/DKMyApp/assets
+	static DKString online_assets; //example:  http://digitalknob.com/DKMyApp
 };
 
 #endif //DKFile_H

@@ -7,7 +7,10 @@
 #include <iostream>
 #include <sys/stat.h>
 
-DKString DKFile::appfilename;
+DKString DKFile::exe_path;
+DKString DKFile::exe_name;
+DKString DKFile::app_path;
+DKString DKFile::app_name;
 DKString DKFile::local_assets;
 DKString DKFile::online_assets;
 
@@ -315,17 +318,17 @@ bool DKFile::GetExeName(DKString& exename)
 	DKLog("DKFile::GetExeName("+exename+")\n", DKDEBUG);
 	
 #ifdef WIN32
-	if(!DKFile::PathExists(DKFile::appfilename)){
+	if(!DKFile::PathExists(DKFile::exe_path)){
 		TCHAR appfilename[MAX_PATH];
 		GetModuleFileName(NULL, appfilename, MAX_PATH);
-		DKFile::appfilename = appfilename;
+		DKFile::exe_path = appfilename;
 	}
 #endif 
 
-	if (!DKFile::PathExists(DKFile::appfilename)){
+	if (!DKFile::PathExists(DKFile::exe_path)){
 		return false;
 	}
-	DKString filename = DKFile::appfilename;
+	DKString filename = DKFile::exe_path;
     
 #ifdef WIN32
 	unsigned found = filename.find_last_of("\\");
@@ -337,39 +340,47 @@ bool DKFile::GetExeName(DKString& exename)
     return true;
 }
 
-//////////////////////////////////////////////////
-bool DKFile::GetFullExeName(DKString& fullexename)
-{
-	DKLog("DKFile::GetFullExeName("+fullexename+")\n", DKDEBUG);
-	
-	if(!DKFile::PathExists(DKFile::appfilename)){ return false; }
-	fullexename = DKFile::appfilename;
-    return true;
-}
-
 //////////////////////////////////////////
 bool DKFile::GetExePath(DKString& exepath)
 {
 	DKLog("DKFile::GetExePath("+exepath+")\n", DKDEBUG);
 	
+	if(!DKFile::PathExists(DKFile::exe_path)){ return false; }
+	exepath = DKFile::exe_path;
+    return true;
+}
+
+//////////////////////////////////////////
+bool DKFile::GetAppPath(DKString& apppath)
+{
+	DKLog("DKFile::GetAppPath("+apppath+")\n", DKDEBUG);
+	
     unsigned found = 0;
 #ifdef WIN32
-    exepath = DKFile::appfilename;
-	found = exepath.find_last_of("\\");
-    exepath.erase (exepath.begin()+found+1, exepath.end()); 
+    apppath = DKFile::exe_path;
+	found = apppath.find_last_of("\\");
+    apppath.erase (apppath.begin()+found+1, apppath.end()); 
 	return true;
 #elif defined(ANDROID)
-	exepath = "/mnt/sdcard/digitalknob/";
+	apppath = "/mnt/sdcard/digitalknob/";
 	return true;
 #elif defined(MAC) || defined(IOS) || defined(LINUX)
-    exepath = DKFile::appfilename;
-    found = exepath.find_last_of("/");
-    exepath.erase (exepath.begin()+found+1, exepath.end());
+    apppath = DKFile::exe_path;
+    found = apppath.find_last_of("/");
+    apppath.erase (apppath.begin()+found+1, apppath.end());
 	return true;
 #endif
 	
-	DKLog("DKFile::GetExePath() not implemented on this OS \n", DKERROR);
+	DKLog("DKFile::GetAppPath() not implemented on this OS \n", DKERROR);
 	return false;
+}
+
+//////////////////////////////////////////
+bool DKFile::GetAppName(DKString& appname)
+{
+	DKFile::GetExeName(appname);
+	replace(appname, ".exe", "");
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////

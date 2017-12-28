@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 #endif
 
 #ifndef IOS
-	DKFile::appfilename = argv[0];
+	DKFile::exe_path = argv[0];
 
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
@@ -49,6 +49,16 @@ int main(int argc, char **argv)
 	    }
     }
 	
+	//Display app path information
+	DKFile::GetExePath(DKFile::exe_path);
+	DKFile::GetExeName(DKFile::exe_name);
+	DKFile::GetAppPath(DKFile::app_path);
+	DKFile::GetAppName(DKFile::app_name);
+	DKLog("DKFile::exe_path = "+DKFile::exe_path+"\n", DKINFO);
+	DKLog("DKFile::exe_name = "+DKFile::exe_name+"\n", DKINFO);
+	DKLog("DKFile::app_path = "+DKFile::app_path+"\n", DKINFO);
+	DKLog("DKFile::app_name = "+DKFile::app_name+"\n", DKINFO);
+
 	DKCreate("DKAssets");
 	DKCreate("DKDuktape");
 	DKCreate("DKDebug");

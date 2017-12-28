@@ -324,7 +324,7 @@ bool DKCef::NewBrowser()
 #endif
 		DKString mTime;
 		DKString file;
-		DKFile::GetFullExeName(file);
+		DKFile::GetExePath(file);
 		DKFile::GetModifiedTime(file, mTime);
 		title += mTime;
 #ifdef WIN32

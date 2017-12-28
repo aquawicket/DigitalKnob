@@ -102,7 +102,7 @@ bool DKUpdate::CheckForUpdate()
 		return false;
 	}
 	DKString localfile;
-	DKFile::GetFullExeName(localfile);
+	DKFile::GetExePath(localfile);
 	
 #ifdef ANDROID
 	localfile = DKFile::local_assets+"ASSETS";

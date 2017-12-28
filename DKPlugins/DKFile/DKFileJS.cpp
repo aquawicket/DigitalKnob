@@ -18,7 +18,7 @@ void DKFileJS::Init()
 	DKDuktape::AttachFunction("DKFile_GetExeName", DKFileJS::GetExeName);
 	DKDuktape::AttachFunction("DKFile_GetExtention", DKFileJS::GetExtention);
 	DKDuktape::AttachFunction("DKFile_GetFilename", DKFileJS::GetFilename);
-	DKDuktape::AttachFunction("DKFile_GetFullExeName", DKFileJS::GetFullExeName);
+	DKDuktape::AttachFunction("DKFile_GetExePath", DKFileJS::GetExePath);
 	DKDuktape::AttachFunction("DKFile_GetLocalCreationDate", DKFileJS::GetLocalCreationDate);
 	DKDuktape::AttachFunction("DKFile_GetLocalModifiedDate", DKFileJS::GetLocalModifiedDate);
 	DKDuktape::AttachFunction("DKFile_GetModifiedTime", DKFileJS::GetModifiedTime);
@@ -84,11 +84,11 @@ int DKFileJS::GetExeName(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKFileJS::GetFullExeName(duk_context* ctx)
+//////////////////////////////////////////
+int DKFileJS::GetExePath(duk_context* ctx)
 {
 	DKString value;
-	if (!DKFile::GetFullExeName(value)){ return 0; }
+	if (!DKFile::GetExePath(value)){ return 0; }
 	duk_push_string(ctx, value.c_str());
 	return 1;
 }
