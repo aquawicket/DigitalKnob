@@ -149,32 +149,28 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 
 	//if there is an assets directory under this, then we are in a development environment.
 	//we will refer to all the files in the assets folder in this case. 
-	DKString exepath;
-	DKFile::GetExePath(exepath);
-    DKLog("DKFile::exepath = "+exepath+"\n", DKINFO);
 
 	//TODO:
 	//get rid of the tailing / ?
 	//... it would need to be added to all references
-	//..  i.e.   DKApp::datapath+"/file.ext"
+	//..  i.e.   DKFile::local_assets+"/file.ext"
 
-	// current method is DKApp::datapath+"file.ext" :P
 
 #ifdef WIN32
-	if(DKFile::PathExists(exepath+"..\\assets\\ASSETS")){ //Windows
-		DKFile::GetAbsolutePath(exepath+"..\\assets\\", DKFile::local_assets);
+	if(DKFile::PathExists(DKFile::app_path + "..\\assets\\ASSETS")){ //Windows
+		DKFile::GetAbsolutePath(DKFile::app_path + "..\\assets\\", DKFile::local_assets);
 		return true;
 	}
-	if (DKFile::PathExists(exepath + "..\\..\\assets\\ASSETS")){ //Windows
-		DKFile::GetAbsolutePath(exepath + "..\\..\\assets\\", DKFile::local_assets);
+	if (DKFile::PathExists(DKFile::app_path + "..\\..\\assets\\ASSETS")){ //Windows
+		DKFile::GetAbsolutePath(DKFile::app_path + "..\\..\\assets\\", DKFile::local_assets);
 		return true;
 	}
-	//SetDllDirectory(DKApp::datapath.c_str()); //FIXME: get rid of this?
+	//SetDllDirectory(DKFile::app_path.c_str()); //FIXME: get rid of this?
 #endif
     
 #ifdef MAC
-    if(DKFile::PathExists(exepath+"../../../../../assets/ASSETS")){ //Mac
-		DKFile::GetAbsolutePath(exepath+"../../../../../assets/", DKFile::local_assets);
+    if(DKFile::PathExists(DKFile::app_path + "../../../../../assets/ASSETS")){ //Mac
+		DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", DKFile::local_assets);
 		DKFile::local_assets += "/";
 		return true;
 	}
@@ -182,37 +178,32 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 
 #ifdef IOS
 	DKLog("Searching for iOS assets path... \n", DKDEBUG);
-	DKLog("DKFile::appfilename="+DKFile::appfilename+"\n", DKDEBUG);
-	DKLog("exepath="+exepath+"\n", DKDEBUG);
-	DKString exename;
-	DKFile::GetExeName(exename);
-	DKLog("exename="+exename+"\n", DKDEBUG);
 	
 	// /Users/aquawicket/Library/Application Support/iPhone Simulator/6.1/Applications/D4BEB636-716E-445D-8CD9-8722785D7EB7/GuiTest.app/GuiTest
 	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/GuiTest.app/GuiTest
 	
-	std::size_t pos = exepath.find("/Library");
-	DKString userpath = exepath.substr(0, pos);
+	std::size_t pos = DKFile::app_path.find("/Library");
+	DKString userpath = DKFile::app_path.substr(0, pos);
 	
-	if(DKFile::PathExists(userpath+"/Desktop/digitalknob/DKApps/"+exename+"/assets/ASSETS")){
-		DKFile::local_assets = userpath+"/Desktop/digitalknob/DKApps/"+exename+"/assets/";
+	if(DKFile::PathExists(userpath+"/Desktop/digitalknob/DKApps/"+DKFile::app_name+"/assets/ASSETS")){
+		DKFile::local_assets = userpath+"/Desktop/digitalknob/DKApps/"+DKFile::app_name+"/assets/";
 		return true;
 	}
-	if(DKFile::PathExists(userpath+"/Desktop/digitalknob/USER/DKApps/"+exename+"/assets/ASSETS")){
-		DKFile::local_assets = userpath+"/Desktop/digitalknob/USER/DKApps/"+exename+"/assets/";
+	if(DKFile::PathExists(userpath+"/Desktop/digitalknob/USER/DKApps/"+DKFile::app_name+"/assets/ASSETS")){
+		DKFile::local_assets = userpath+"/Desktop/digitalknob/USER/DKApps/"+DKFile::app_name+"/assets/";
 		return true;
 	}
 #endif
 
 #ifdef LINUX
-    if(DKFile::PathExists(exepath+"../../assets/ASSETS")){ //Linux
-		DKFile::GetAbsolutePath(exepath+"../../assets/", DKFile::local_assets);
+    if(DKFile::PathExists(DKFile::app_path+"../../assets/ASSETS")){ //Linux
+		DKFile::GetAbsolutePath(DKFile::app_path+"../../assets/", DKFile::local_assets);
 		DKFile::local_assets += "/";
 		return true;
 	}
 #endif
 
-	//AppendDataPath(DKApp::datapath);
+	//AppendDataPath(DKFile::app_path);
 	return false;
 }
 
