@@ -1,0 +1,38 @@
+DIRECTORY STRUCTURE
+Our current design is a no no for git. You must not nest git clones in folders. 
+
+"Example: current structure"
+digitalknob/git            <- parent git
+			/3rdParty
+			/DKApps
+			/DKCMake
+			/DKDocs
+			/DKPlugins
+			/MyApps
+			/MyApps/git    <- nested git
+			/MyApps/DKApps
+			/MyApps/DKPlugins
+
+			
+			
+			
+"Example: idea structure"	
+digitalknob/DK
+			git             <-clean git
+			/3rdParty
+			/DKApps
+			/DKCMake
+			/DKDocs
+			/DKPlugins
+digitalknob/MyApps
+			git				<-clean git
+			/3rdParty
+			/DKApps
+			/DKDocs
+			/DKPlugins
+digitalknob/Misc
+			git				<-clean git
+			/3rdParty
+			/DKApps
+			/DKDocs
+			/DKPlugins
