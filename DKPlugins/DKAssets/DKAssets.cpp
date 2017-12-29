@@ -114,19 +114,19 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 	exepath = "/mnt/sdcard/"+DKFile::appfilename+"/";
 	return true;
 #elif defined(MAC) || defined(IOS)
-    exepath = DKFile::appfilename;
+    exepath = DKFile::exe_path;
     found = exepath.find_last_of("/");
     exepath.erase (exepath.begin()+found+1, exepath.end());
 	replace(exepath, "/MacOS", "/Resources");
 	return true;
-#elif defined(IOS)
-	exepath = DKFile::appfilename;
+#elif defined(IOS) //FIXME - this will never happen, look at the #elif above.
+	exepath = DKFile::exe_path;
     found = exepath.find_last_of("/");
     exepath.erase (exepath.begin()+found+1, exepath.end());
 	exepath += "/assets";
 	return true;
 #elif defined(LINUX)
-	exepath = DKFile::appfilename;
+	exepath = DKFile::exe_path;
 	DKString appname;
 	DKFile::GetExeName(appname);
 	DKFile::RemoveExtention(appname);
