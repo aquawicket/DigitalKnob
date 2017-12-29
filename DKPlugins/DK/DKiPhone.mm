@@ -14,7 +14,7 @@
     //NSString *prodName = [info objectForKey:@"CFBundleExecutable"];
     //DKString appname = std::string([prodName UTF8String]); //NSString to std::string
     NSString *epath = [[NSBundle mainBundle] executablePath];
-    DKFile::appfilename = std::string([epath UTF8String]); //NSString to std::string
+    DKFile::exe_path = std::string([epath UTF8String]); //NSString to std::string
 
     //NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	//NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Populator"];
