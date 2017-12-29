@@ -111,7 +111,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 #elif defined(ANDROID)
 	//TODO - folder should be the name of the app
 	//CallJavaFunction("getApplicationName", "");
-	exepath = "/mnt/sdcard/"+DKFile::appfilename+"/";
+	exepath = "/mnt/sdcard/"+DKFile::exe_path+"/";
 	return true;
 #elif defined(MAC) || defined(IOS)
     exepath = DKFile::exe_path;
