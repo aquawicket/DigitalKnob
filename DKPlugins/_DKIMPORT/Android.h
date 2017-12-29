@@ -8,7 +8,7 @@
 extern "C" {
 
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_initJNIBridge(JNIEnv *env, jobject jobj){
-		DKFile::appfilename = "dkapp";
+		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_exitJNIBridge(JNIEnv *env, jobject jobj){
@@ -19,7 +19,7 @@ extern "C" {
 	}
 	
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DKMain_initJNIBridge(JNIEnv *env, jobject jobj){
-		DKFile::appfilename = "dkapp";
+		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DKMain_exitJNIBridge(JNIEnv *env, jobject jobj){
@@ -30,7 +30,7 @@ extern "C" {
 	}
 	
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_initJNIBridge(JNIEnv *env, jobject jobj){
-		DKFile::appfilename = "dkapp";
+		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
 	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_exitJNIBridge(JNIEnv *env, jobject jobj){
