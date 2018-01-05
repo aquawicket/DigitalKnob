@@ -212,13 +212,12 @@ void DKDebug::Init()
 	DKString exename;
 	DKFile::GetExeName(exename);
 	DKFile::RemoveExtention(exename);
-	DKString exepath;
-	DKFile::GetExePath(exepath);
+	DKString apppath;
+	DKFile::GetAppPath(apppath);
 
-	//FIXME:
 #ifndef DEBUG
-	DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+exepath+exename+".pdb)\n", DKINFO);
-	DKFile::Copy(DKFile::local_assets+exename+".pdb", exepath+exename+".pdb", true, true);
+	DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n", DKINFO);
+	DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);
 #endif
 
 	InitUnhandledExceptionFilter();
