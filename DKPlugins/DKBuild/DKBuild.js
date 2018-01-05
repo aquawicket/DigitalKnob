@@ -52,7 +52,7 @@ function DKBuild_Init()
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 	}
 	if(DK_GetOS() == "Linux"){
-		DKPATH = "/home/aquawicket/Desktop/digitalknob";
+		DKPATH = "/home/aqualinux/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
 		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
