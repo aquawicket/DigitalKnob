@@ -1,8 +1,0 @@
-*** GOALS ***
-* We would like to build an app from a blank slate like this.
-* The app should run on every OS and Browser as identical as possible.
-
-*** TODO ***
-* Test Windows 10+
-* DKFile/DKSolution should be renamed to DKFileExplorer
-
