@@ -57,9 +57,9 @@ cmake_minimum_required(VERSION 2.6)
 if (APPLE)
   if (DEFINED IOS_PLATFORM)
     if (NOT "${IOS_PLATFORM}" STREQUAL "OS"
-        AND NOT "${IOS_PLATFORM}" STREQUAL "SIMULATOR64")   //CHANGED BY DIGITALKNOB
+        AND NOT "${IOS_PLATFORM}" STREQUAL "SIMULATOR64")   ##CHANGED BY DIGITALKNOB
       message(FATAL_ERROR
-        "IOS_PLATFORM must be set to either OS or SIMULATOR64")   //CHANGED BY DIGITALKNOB
+        "IOS_PLATFORM must be set to either OS or SIMULATOR64")   ##CHANGED BY DIGITALKNOB
     endif ()
     if (NOT "${CMAKE_GENERATOR}" STREQUAL "Xcode")
       message(AUTHOR_WARNING
@@ -77,8 +77,8 @@ if (APPLE)
     # iOS only uses static libraries
     set(BUILD_SHARED_LIBS OFF)
 
-    ##set(CMAKE_TOOLCHAIN_FILE                          //CHANGED BY DIGITALKNOB
-    ##  ${PROJECT_SOURCE_DIR}/builds/cmake/iOS.cmake)   //CHANGED BY DIGITALKNOB
+    ##set(CMAKE_TOOLCHAIN_FILE                          ##CHANGED BY DIGITALKNOB
+    ##  ${PROJECT_SOURCE_DIR}/builds/cmake/iOS.cmake)   ##CHANGED BY DIGITALKNOB
   endif ()
 else ()
   if (DEFINED IOS_PLATFORM)
