@@ -113,7 +113,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 	//CallJavaFunction("getApplicationName", "");
 	exepath = "/mnt/sdcard/"+DKFile::exe_path+"/";
 	return true;
-#elif defined(MAC) || defined(IOS)
+#elif defined(MAC)
     exepath = DKFile::exe_path;
     found = exepath.find_last_of("/");
     exepath.erase (exepath.begin()+found+1, exepath.end());
