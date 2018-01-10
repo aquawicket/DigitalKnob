@@ -1,0 +1,29 @@
+IF(NOT APPLE)
+	RETURN()
+ENDIF()
+IF(MAC)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+IF(EXISTS ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
+	###
+ELSE()
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(${DKONLINE}/Libs/ofxiOSBoost-1.60.0-libc-bitcode.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/ofxiOSBoost-1.60.0-libc-bitcode ${3RDPARTY})
+ENDIF()
+
+DKSET(BOOST ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
+
+### LINK ###
+DKINCLUDE(${BOOST})
+LINK_DIRECTORIES(${BOOST}/libs/boost/ios)
+DKINCLUDE(${BOOST}/libs/boost/include)
+IOS_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOS_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOSSIM_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
+IOSSIM_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)
+
+
+### COMPILE ###
