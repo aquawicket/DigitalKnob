@@ -802,10 +802,10 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch i386 -sdk iphonesimulator11.2");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch i386 -sdk iphonesimulator11.2");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
 		}
 	}
 	
@@ -816,14 +816,14 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH);
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch x86_64 -sdk iphonesimulator11.2");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch x86_64 -sdk iphonesimulator11.2");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
 		}
 	}
 	
