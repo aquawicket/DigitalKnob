@@ -11,7 +11,8 @@ ENDIF()
 
 IF(IOS OR IOSSIM)
 	##DKDEPEND(Boost.1.60.0-libstdcpp)
-	DKDEPEND(ofxiOSBoost-1.60.0)
+	##DKDEPEND(ofxiOSBoost-1.60.0)
+	DKDEPEND(ofxiOSBoost-1.60.0-libc-bitcode)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
 ENDIF()
 
