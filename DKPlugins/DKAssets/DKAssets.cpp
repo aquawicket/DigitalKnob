@@ -123,7 +123,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 	exepath = DKFile::exe_path;
     found = exepath.find_last_of("/");
     exepath.erase (exepath.begin()+found+1, exepath.end());
-	exepath += "/assets";
+	exepath += "assets/";
 	return true;
 #elif defined(LINUX)
 	exepath = DKFile::exe_path;
