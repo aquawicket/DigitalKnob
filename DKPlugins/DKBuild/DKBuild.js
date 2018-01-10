@@ -802,10 +802,10 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch i386 -sdk iphonesimulator6.1");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch i386 -sdk iphonesimulator11.2");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch i386 -sdk iphonesimulator6.1");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch i386 -sdk iphonesimulator11.2");
 		}
 	}
 	
@@ -820,10 +820,10 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch x86_64");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch x86_64 -sdk iphonesimulator11.2");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch x86_64");
+			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch x86_64 -sdk iphonesimulator11.2");
 		}
 	}
 	
