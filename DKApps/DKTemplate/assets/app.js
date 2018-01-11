@@ -27,7 +27,8 @@ function app_LoadPage()
 		DKCreate("DKAudio/DKAudio.js", function(){
 			DKCreate("DKAudio/DKAudioPlayer.js", function(){
 				DKFrame_Widget("DKAudio/DKAudioPlayer.html");
-				DKAudioPlayer_Open("C:/test.ogg");
+				var assets = DKAssets_LocalAssets();
+				DKAudioPlayer_Open(assets+"/DKAudio/test.wav");
 			});
 		});
 	//});		
