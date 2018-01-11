@@ -112,7 +112,7 @@ function DKBuild_InstallSvn()
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
 	}
 }
 
@@ -154,7 +154,7 @@ function DKBuild_InstallGit()
 		DK_Execute("sudo apt-get install git");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
 	}
 }
 
@@ -195,7 +195,7 @@ function DKBuild_InstallCmake()
 		DK_Execute("sudo apt-get install cmake");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKERROR);
+		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
 	}
 }
 
