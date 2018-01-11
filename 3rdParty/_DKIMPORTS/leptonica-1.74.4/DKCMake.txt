@@ -7,12 +7,12 @@ DKSET(LEPTONICA ${3RDPARTY}/leptonica-1.74.4)
 DKINCLUDE(${LEPTONICA}/src)
 WIN_DEBUG_LIB(${LEPTONICA}/${OS}/src/Debug/leptonica-1.74.4d.lib)
 WIN_RELEASE_LIB(${LEPTONICA}/${OS}/src/Release/leptonica-1.74.4.lib)
-APPLE_DEBUG_LIB(${LEPTONICA}/${OS}/lib/${DEBUG}/libtesseract.a)
-APPLE_RELEASE_LIB(${LEPTONICA}/${OS}/lib/${RELEASE}/libtesseract.a)
-LINUX_DEBUG_LIB(${LEPTONICA}/${OS}/Debug/lib/libtesseract.a)
-LINUX_RELEASE_LIB(${LEPTONICA}/${OS}/Release/lib/libtesseract.a)
-ANDROID_DEBUG_LIB(${LEPTONICA}/${OS}/Debug/obj/local/armeabi-v7a/libtesseract.a)
-ANDROID_RELEASE_LIB(${LEPTONICA}/${OS}/Release/obj/local/armeabi-v7a/libtesseract.a)
+APPLE_DEBUG_LIB(${LEPTONICA}/${OS}/lib/${DEBUG}/leptonica-1.74.4.a)
+APPLE_RELEASE_LIB(${LEPTONICA}/${OS}/lib/${RELEASE}/leptonica-1.74.4.a)
+LINUX_DEBUG_LIB(${LEPTONICA}/${OS}/Debug/lib/leptonica-1.74.4.a)
+LINUX_RELEASE_LIB(${LEPTONICA}/${OS}/Release/lib/leptonica-1.74.4.a)
+ANDROID_DEBUG_LIB(${LEPTONICA}/${OS}/Debug/obj/local/armeabi-v7a/leptonica-1.74.4.a)
+ANDROID_RELEASE_LIB(${LEPTONICA}/${OS}/Release/obj/local/armeabi-v7a/leptonica-1.74.4.a)
 
 
 ### COMPILE ###
