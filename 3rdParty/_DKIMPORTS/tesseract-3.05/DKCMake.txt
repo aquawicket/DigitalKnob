@@ -6,6 +6,7 @@ DKSET(TESSERACT ${3RDPARTY}/tesseract-3.05)
 
 
 ### LINK ###
+DKINCLUDE(${LEPTONICA}/src)
 DKINCLUDE(${TESSERACT}/include)
 WIN_DEBUG_LIB(${TESSERACT}/${OS}/lib/Debug/libtesseract.lib)
 WIN_RELEASE_LIB(${TESSERACT}/${OS}/lib/Release/libtesseract.lib)
