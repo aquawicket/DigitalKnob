@@ -135,7 +135,7 @@ foreach(library ${LIBRARIES})
     
     if(APPLE)
     	set_target_properties(${NAME} PROPERTIES
-    					OSX_ARCHITECTURES "i386;x86_64;"
+    					OSX_ARCHITECTURES "x86_64;"
     	)
     endif()
 
