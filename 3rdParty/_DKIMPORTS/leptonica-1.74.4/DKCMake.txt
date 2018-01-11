@@ -4,7 +4,7 @@ DKSET(LEPTONICA ${3RDPARTY}/leptonica-1.74.4)
 
 
 ### LINK ###
-DKINCLUDE(${LEPTONICA}/include)
+DKINCLUDE(${LEPTONICA}/src)
 WIN_DEBUG_LIB(${LEPTONICA}/${OS}/src/Debug/leptonica-1.74.4d.lib)
 WIN_RELEASE_LIB(${LEPTONICA}/${OS}/src/Release/leptonica-1.74.4.lib)
 APPLE_DEBUG_LIB(${LEPTONICA}/${OS}/lib/${DEBUG}/libtesseract.a)
