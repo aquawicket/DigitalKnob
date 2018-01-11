@@ -77,8 +77,8 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKAddEvent("GLOBAL", "keydown", init_OnEvent);
 	}
 	
-	DKCreate("DKSDLText"); //SDL fps counter
-	DKCreate("DKTray/DKTray.js", function(){});
+	//DKCreate("DKSDLText"); //SDL fps counter
+	//DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
 }
 else{  //Javascript: V8, WEBVIEW or Duktape
