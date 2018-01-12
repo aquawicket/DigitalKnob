@@ -819,6 +819,9 @@ bool DKUtil::VirtualMemory(float& virtualMemory)
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
 #endif
+#ifdef MAC
+	return DKMac::VirtualMemory(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemory() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -828,6 +831,9 @@ bool DKUtil::VirtualMemoryUsed(float& virtualMemory)
 {
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
+#endif
+#ifdef MAC
+	return DKMac::VirtualMemoryUsed(virtualMemory);
 #endif
 	DKLog("DKUtil::VirtualMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
@@ -839,6 +845,9 @@ bool DKUtil::VirtualMemoryUsedByApp(float& virtualMemory)
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
 #endif
+#ifdef MAC
+	return DKMac::VirtualMemoryUsedByApp(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -848,6 +857,9 @@ bool DKUtil::PhysicalMemory(float& physicalMemory)
 {
 #ifdef WIN32
 	return DKWindows::PhysicalMemory(physicalMemory);
+#endif
+#ifdef MAC
+	return DKMac::PhysicalMemory(physicalMemory);
 #endif
 	DKLog("DKUtil::PhysicalMemory() not implemented on this OS \n", DKERROR);
 	return false;
@@ -859,6 +871,9 @@ bool DKUtil::PhysicalMemoryUsed(float& physicalMemory)
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsed(physicalMemory);
 #endif
+#ifdef MAC
+	return DKMac::PhysicalMemoryUsed(physicalMemory);
+#endif
 	DKLog("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -868,6 +883,9 @@ bool DKUtil::PhysicalMemoryUsedByApp(float& physicalMemory)
 {
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);
+#endif
+#ifdef MAC
+	return DKMac::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
 	DKLog("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
@@ -879,6 +897,9 @@ bool DKUtil::CpuUsed(int& cpu)
 #ifdef WIN32
 	return DKWindows::CpuUsed(cpu);
 #endif
+#ifdef MAC
+	return DKMac::CpuUsed(cpu);
+#endif
 	DKLog("DKUtil::CpuUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -888,6 +909,9 @@ bool DKUtil::CpuUsedByApp(int& cpu)
 {
 #ifdef WIN32
 	return DKWindows::CpuUsedByApp(cpu);
+#endif
+#ifdef MAC
+	return DKMac::CpuUsedByApp(cpu);
 #endif
 	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
