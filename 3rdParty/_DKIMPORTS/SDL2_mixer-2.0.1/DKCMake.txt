@@ -1,8 +1,6 @@
-IF(NOT LINUX)
-	DKDEPEND(smpeg2-2.0.0)
-	DKDEPEND(libogg-1.3.2)
-	DKDEPEND(libvorbis-1.3.5)
-ENDIF()
+DKDEPEND(smpeg2-2.0.0)
+DKDEPEND(libogg-1.3.2)
+DKDEPEND(libvorbis-1.3.5)
 
 
 ### INSTALL ###
