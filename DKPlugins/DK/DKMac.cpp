@@ -29,4 +29,68 @@ bool DKMac::GetMousePos(int& x, int& y)
 	return true;
 }
 
+
+///////////////////////////////////////////////////
+bool DKMac::VirtualMemory(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKMac::VirtualMemoryUsed(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////
+bool DKMac::VirtualMemoryUsedByApp(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKMac::PhysicalMemory(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////////
+bool DKMac::PhysicalMemoryUsed(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKMac::PhysicalMemoryUsedByApp(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////
+void DKMac::CpuInit()
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////
+bool DKMac::CpuUsed(int& cpu)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////
+bool DKMac::CpuUsedByApp(int& cpu)
+{
+	//TODO
+	return false;
+}
+
 #endif //MAC
