@@ -1,0 +1,4 @@
+DKDEPEND(tesseract-3.05)
+
+DKPLUGIN(DKOcr)
+DKASSETS(DKOcr)
