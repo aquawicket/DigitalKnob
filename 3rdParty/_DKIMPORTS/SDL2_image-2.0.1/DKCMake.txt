@@ -3,7 +3,7 @@ DKDEPEND(zlib-1.2.8)
 ##DKDEPEND(giflib-5.1.1)
 DKDEPEND(libpng-1.7.0beta34)
 DKDEPEND(jpeg-6b)
-##DKDEPEND(tiff-4.0.3)
+DKDEPEND(tiff-4.0.3)
 DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
