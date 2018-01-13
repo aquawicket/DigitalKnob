@@ -53,8 +53,7 @@ WIN64_BASH("#!/bin/bash
 cd ${VORBIS}/win64/Debug 
 export PATH=/c/mingw/mingw64/bin:$PATH 
 export PATH=/c/mingw/msys/bin:$PATH 
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
-make 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Debug/src/.libs\" --with-ogg-includes=\"${OGG}/include\" make 
 exit \n")
 DKRENAME(${VORBIS}/win64/Debug/lib/.libs/libvorbis.a ${VORBIS}/win64/Debug/lib/.libs/libvorbis.lib)
 DKRENAME(${VORBIS}/win64/Debug/lib/.libs/libvorbisfile.a ${VORBIS}/win64/Debug/lib/.libs/libvorbisfile.lib)
@@ -65,8 +64,7 @@ WIN64_BASH("#!/bin/bash
 cd ${VORBIS}/win64/Release 
 export PATH=/c/mingw/mingw64/bin:$PATH 
 export PATH=/c/mingw/msys/bin:$PATH 
-../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" 
-make 
+../../configure --disable-shared --enable-static --with-ogg-libraries=\"${OGG}/win64/Release/src/.libs\" --with-ogg-includes=\"${OGG}/include\" make 
 exit \n")
 DKRENAME(${VORBIS}/win64/Release/lib/.libs/libvorbis.a ${VORBIS}/win64/Release/lib/.libs/libvorbis.lib)
 DKRENAME(${VORBIS}/win64/Release/lib/.libs/libvorbisfile.a ${VORBIS}/win64/Release/lib/.libs/libvorbisfile.lib)
