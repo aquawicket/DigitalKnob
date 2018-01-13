@@ -198,7 +198,7 @@ bool DKLinux::PhysicalMemoryUsedByApp(float& physicalMemory)
 void DKLinux::CpuInit()
 {
 	//TODO
-	return false;
+	return;
 }
 
 ///////////////////////////////
