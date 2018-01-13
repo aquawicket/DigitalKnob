@@ -33,7 +33,12 @@ bool DKMac::GetMousePos(int& x, int& y)
 ///////////////////////////////////////////////////
 bool DKMac::VirtualMemory(float& virtualMemory)
 {
-	//TODO
+	struct statfs stats;
+	if (0 == statfs("/", &stats))
+	{
+		myFreeSwap = (uint64_t)stats.f_bsize * stats.f_bfree;
+	}
+	virtualMemory = myFreeSwap;
 	return false;
 }
 
