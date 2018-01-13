@@ -137,6 +137,7 @@ foreach(library ${LIBRARIES})
     	set_target_properties(${NAME} PROPERTIES
     					OSX_ARCHITECTURES "x86_64;"
     	)
+        SET(CMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY "libstdc++")
     endif()
 
     install(TARGETS ${NAME}
