@@ -54,7 +54,7 @@ bool DKLinux::Run(const DKString& command)
 	return true;
 }
 
-//////////////////////////////
+/////////////////////////////////
 bool DKLinux::KeyIsDown(int& key)
 {
 	//TODO - character keys
@@ -77,7 +77,7 @@ bool DKLinux::KeyIsDown(int& key)
 	return false;
 }
 
-////////////////////////
+//////////////////////////////////////////
 bool DKLinux::GetClipboard(DKString& text)
 {
 	//TODO
@@ -86,7 +86,7 @@ bool DKLinux::GetClipboard(DKString& text)
 	return true;
 }
 
-///////////////////////
+//////////////////////////////////////////
 bool DKLinux::SetClipboard(DKString& text)
 {
 	//TODO
@@ -95,6 +95,7 @@ bool DKLinux::SetClipboard(DKString& text)
 	return false;
 }
 
+//////////////////////////////////////////
 bool DKLinux::ChangeVolume(double nVolume)
 {
 	DKLog("DKLinux::ChangeVolume("+toString(nVolume)+")\n", DKINFO);
@@ -121,6 +122,7 @@ bool DKLinux::ChangeVolume(double nVolume)
 	return true;
 }
 
+//////////////////////////////////////
 bool DKLinux::GetVolume(float& volume)
 {
 	//DKLog("DKLinux::GetVolume()\n", DKINFO);
@@ -155,6 +157,8 @@ bool DKLinux::GetVolume(float& volume)
 /////////////////////////////////////////////////
 bool DKLinux::VirtualMemory(float& virtualMemory)
 {
+	//TODO
+	/*
 	#include "sys/types.h"
 	#include "sys/sysinfo.h"
 	struct sysinfo memInfo;
@@ -164,18 +168,22 @@ bool DKLinux::VirtualMemory(float& virtualMemory)
 	totalVirtualMem += memInfo.totalswap;
 	totalVirtualMem *= memInfo.mem_unit;
 	virtualMemory = totalVirtualMem;
-	return true;
+	*/
+	return false;
 }
 
 /////////////////////////////////////////////////////
 bool DKLinux::VirtualMemoryUsed(float& virtualMemory)
 {
+	//TODO
+	/*
 	long long virtualMemUsed = memInfo.totalram - memInfo.freeram;
 	//Add other values in next statement to avoid int overflow on right hand side...
 	virtualMemUsed += memInfo.totalswap - memInfo.freeswap;
 	virtualMemUsed *= memInfo.mem_unit;
 	virtualMemory = virtualMemUsed;
-	return true;
+	*/
+	return false;
 }
 
 //////////////////////////////////////////////////////////
@@ -218,21 +226,27 @@ bool DKLinux::VirtualMemoryUsedByApp(float& virtualMemory)
 ///////////////////////////////////////////////////
 bool DKLinux::PhysicalMemory(float& physicalMemory)
 {
+	//TODO
+	/*
 	long long totalPhysMem = memInfo.totalram;
 	//Multiply in next statement to avoid int overflow on right hand side...
 	totalPhysMem *= memInfo.mem_unit;
 	physicalMemory = totalPhysMem;
-	return true;
+	*/
+	return false;
 }
 
 ///////////////////////////////////////////////////////
 bool DKLinux::PhysicalMemoryUsed(float& physicalMemory)
 {
+	//TODO
+	/*
 	long long physMemUsed = memInfo.totalram - memInfo.freeram;
 	//Multiply in next statement to avoid int overflow on right hand side...
 	physMemUsed *= memInfo.mem_unit;
 	physicalMemory = physMemUsed;
-	return true;
+	*/
+	return false;
 }
 
 ////////////////////////////////////////////////////////////
