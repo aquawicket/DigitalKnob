@@ -152,4 +152,67 @@ bool DKLinux::GetVolume(float& volume)
 }
 
 
+/////////////////////////////////////////////////
+bool DKLinux::VirtualMemory(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKLinux::VirtualMemoryUsed(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////////
+bool DKLinux::VirtualMemoryUsedByApp(float& virtualMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////
+bool DKLinux::PhysicalMemory(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKLinux::PhysicalMemoryUsed(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////
+bool DKLinux::PhysicalMemoryUsedByApp(float& physicalMemory)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////
+void DKLinux::CpuInit()
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////
+bool DKLinux::CpuUsed(int& cpu)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////
+bool DKLinux::CpuUsedByApp(int& cpu)
+{
+	//TODO
+	return false;
+}
+
 #endif //LINUX

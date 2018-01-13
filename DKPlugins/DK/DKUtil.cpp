@@ -822,6 +822,9 @@ bool DKUtil::VirtualMemory(float& virtualMemory)
 #ifdef MAC
 	return DKMac::VirtualMemory(virtualMemory);
 #endif
+#ifdef LINUX
+	return DKLinux::VirtualMemory(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemory() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -834,6 +837,9 @@ bool DKUtil::VirtualMemoryUsed(float& virtualMemory)
 #endif
 #ifdef MAC
 	return DKMac::VirtualMemoryUsed(virtualMemory);
+#endif
+#ifdef LINUX
+	return DKLinux::VirtualMemoryUsed(virtualMemory);
 #endif
 	DKLog("DKUtil::VirtualMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
@@ -848,6 +854,9 @@ bool DKUtil::VirtualMemoryUsedByApp(float& virtualMemory)
 #ifdef MAC
 	return DKMac::VirtualMemoryUsedByApp(virtualMemory);
 #endif
+#ifdef LINUX
+	return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
+#endif
 	DKLog("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -860,6 +869,9 @@ bool DKUtil::PhysicalMemory(float& physicalMemory)
 #endif
 #ifdef MAC
 	return DKMac::PhysicalMemory(physicalMemory);
+#endif
+#ifdef LINUX
+	return DKLinux::PhysicalMemory(physicalMemory);
 #endif
 	DKLog("DKUtil::PhysicalMemory() not implemented on this OS \n", DKERROR);
 	return false;
@@ -874,6 +886,9 @@ bool DKUtil::PhysicalMemoryUsed(float& physicalMemory)
 #ifdef MAC
 	return DKMac::PhysicalMemoryUsed(physicalMemory);
 #endif
+#ifdef LINUX
+	return DKLinux::PhysicalMemoryUsed(physicalMemory);
+#endif
 	DKLog("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -886,6 +901,9 @@ bool DKUtil::PhysicalMemoryUsedByApp(float& physicalMemory)
 #endif
 #ifdef MAC
 	return DKMac::PhysicalMemoryUsedByApp(physicalMemory);
+#endif
+#ifdef LINUX
+	return DKLinux::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
 	DKLog("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
@@ -900,6 +918,9 @@ bool DKUtil::CpuUsed(int& cpu)
 #ifdef MAC
 	return DKMac::CpuUsed(cpu);
 #endif
+#ifdef LINUX
+	return DKLinux::CpuUsed(cpu);
+#endif
 	DKLog("DKUtil::CpuUsed() not implemented on this OS \n", DKERROR);
 	return false;
 }
@@ -912,6 +933,9 @@ bool DKUtil::CpuUsedByApp(int& cpu)
 #endif
 #ifdef MAC
 	return DKMac::CpuUsedByApp(cpu);
+#endif
+#ifdef LINUX
+	return DKLinux::CpuUsedByApp(cpu);
 #endif
 	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
