@@ -576,7 +576,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 	return false;
 }
 
-///////////////////////////////////////////
+////////////////////////////////////////////
 bool DKUtil::System(const DKString& command)
 {
 	DKLog("DKUtil::System("+command+")\n", DKDEBUG);

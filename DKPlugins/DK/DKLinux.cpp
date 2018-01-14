@@ -399,4 +399,22 @@ bool DKLinux::CpuUsedByApp(int& cpu)
 	return false;
 }
 
+//////////////////////////////
+bool DKLinux::TurnOffMonitor()
+{
+	return DKUtil::System("xset dpms force off");
+}
+
+/////////////////////////////
+bool DKLinux::TurnOnMonitor()
+{
+	return false;
+}
+
+///////////////////////////////
+bool DKLinux::LowPowerMonitor()
+{
+	return false;
+}
+
 #endif //LINUX

@@ -28,6 +28,10 @@ public:
 	static void CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
+
+	static bool TurnOffMonitor();
+	static bool TurnOnMonitor();
+	static bool LowPowerMonitor();
 };
 
 #endif //DKLinux_H
