@@ -49,8 +49,8 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 
 	DKV8::AttachFunction("DK_TurnOffMonitor", DKCefV8::TurnOffMonitor);
-	DKV8::AttachFunction("DKCef_TurnOnMonitor", DKCefV8::TurnOnMonitor);
-	DKV8::AttachFunction("DKCef_LowPowerMonitor", DKCefV8::LowPowerMonitor);
+	DKV8::AttachFunction("DK_TurnOnMonitor", DKCefV8::TurnOnMonitor);
+	DKV8::AttachFunction("DK_LowPowerMonitor", DKCefV8::LowPowerMonitor);
 }
 
 ///////////////////
