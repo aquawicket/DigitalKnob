@@ -947,6 +947,12 @@ bool DKUtil::TurnOffMonitor()
 #ifdef WIN32
 	return DKWindows::TurnOffMonitor();
 #endif
+#ifdef MAC
+	return DKMac::TurnOffMonitor();
+#endif
+#ifdef LINUX
+	return DKLinux::TurnOffMonitor();
+#endif
 	DKLog("DKUtil::TurnOffMonitor() not implemented on this OS \n", DKERROR);
 	return false;
 }
