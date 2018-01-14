@@ -874,6 +874,17 @@ function DKBuild_DoResults()
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute("make "+APP);
+			
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
 			if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
@@ -885,6 +896,17 @@ function DKBuild_DoResults()
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute("make "+APP);
+			
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+".desktop");
 		}
 	}
 	
@@ -911,7 +933,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop")
+			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
 			if(LEVEL == "Rebuild" || LEVEL == "RebuildAll"){
@@ -933,7 +955,7 @@ function DKBuild_DoResults()
 			string += "Name="+APP+"\n";
 			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+"\n";
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
-			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop")
+			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop");
 		}
 	}
 	
