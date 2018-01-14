@@ -47,6 +47,10 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
+
+	DKV8::AttachFunction("DK_TurnOffMonitor", DKCefV8::TurnOffMonitor);
+	DKV8::AttachFunction("DKCef_TurnOnMonitor", DKCefV8::TurnOnMonitor);
+	DKV8::AttachFunction("DKCef_LowPowerMonitor", DKCefV8::LowPowerMonitor);
 }
 
 ///////////////////
@@ -417,6 +421,27 @@ bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
 	if(!retval->SetInt(0, cpu)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::TurnOffMonitor(CefArgs args, CefReturn retval)
+{
+	if(!DKUtil::TurnOffMonitor()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval)
+{
+	if(!DKUtil::TurnOnMonitor()){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval)
+{
+	if(!DKUtil::LowPowerMonitor()){ return false; }
 	return true;
 }
 

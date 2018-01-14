@@ -54,6 +54,10 @@ public:
 	static bool PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval);
 	static bool CpuUsed(CefArgs args, CefReturn retval);
 	static bool CpuUsedByApp(CefArgs args, CefReturn retval);
+
+	static bool TurnOffMonitor(CefArgs args, CefReturn retval);
+	static bool TurnOnMonitor(CefArgs args, CefReturn retval);
+	static bool LowPowerMonitor(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
