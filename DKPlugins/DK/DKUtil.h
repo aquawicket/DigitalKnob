@@ -89,6 +89,10 @@ public:
 	static void UpdateFps();
 	static void GetFps(unsigned int& fps);
 
+	static bool TurnOffMonitor();
+	static bool TurnOnMonitor();
+	static bool LowPowerMonitor();
+
 
 	static unsigned long int mainThreadId;
 

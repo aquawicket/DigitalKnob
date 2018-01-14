@@ -845,4 +845,26 @@ void DKWindows::SetTitle()
 	SetConsoleTitle(title.c_str());
 }
 
+////////////////////////////////
+bool DKWindows::TurnOffMonitor()
+{
+	Sleep(500); // Eliminate user's interaction for 500 ms
+	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2);
+	return true;
+}
+
+///////////////////////////////
+bool DKWindows::TurnOnMonitor()
+{
+	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);
+	return true;
+}
+
+/////////////////////////////////
+bool DKWindows::LowPowerMonitor()
+{
+	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
+	return true;
+}
+
 #endif //WIN32

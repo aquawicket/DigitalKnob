@@ -940,3 +940,33 @@ bool DKUtil::CpuUsedByApp(int& cpu)
 	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKERROR);
 	return false;
 }
+
+/////////////////////////////
+bool DKUtil::TurnOffMonitor()
+{
+#ifdef WIN32
+	return DKWindows::TurnOffMonitor();
+#endif
+	DKLog("DKUtil::TurnOffMonitor() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+////////////////////////////
+bool DKUtil::TurnOnMonitor()
+{
+#ifdef WIN32
+	return DKWindows::TurnOnMonitor();
+#endif
+	DKLog("DKUtil::TurnOnMonitor() not implemented on this OS \n", DKERROR);
+	return false;
+}
+
+//////////////////////////////
+bool DKUtil::LowPowerMonitor()
+{
+#ifdef WIN32
+	return DKWindows::LowPowerMonitor();
+#endif
+	DKLog("DKUtil::LowPowerMonitor() not implemented on this OS \n", DKERROR);
+	return false;
+}

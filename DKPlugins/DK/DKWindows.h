@@ -69,6 +69,10 @@ public:
 	static bool WINAPI ConsoleHandler(DWORD type);
 	static void SetTitle();
 
+	static bool TurnOffMonitor();
+	static bool TurnOnMonitor();
+	static bool LowPowerMonitor();
+
 	static HINSTANCE hInstance;
 	static HWND consoleWindow;
 };
