@@ -174,4 +174,27 @@ bool DKMac::CpuUsedByApp(int& cpu)
 	return false;
 }
 
+
+////////////////////////////
+bool DKMac::TurnOffMonitor()
+{
+	io_registry_entry_t r = IORegistryEntryFromPath(kIOMasterPortDefault, "IOService:/IOResources/IODisplayWrangler");
+	if(!r){ return false; }
+	int err = IORegistryEntrySetCFProperty(r, CFSTR("IORequestIdle"), kCFBooleanTrue);
+	IOObjectRelease(r);
+	return true;
+}
+
+///////////////////////////
+bool DKMac::TurnOnMonitor()
+{
+	return false;
+}
+
+/////////////////////////////
+bool DKMac::LowPowerMonitor()
+{
+	return false;
+}
+
 #endif //MAC
