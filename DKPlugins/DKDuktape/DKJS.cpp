@@ -123,6 +123,10 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
 	DKDuktape::AttachFunction("DK_CpuUsed", DKJS::CpuUsed);
 	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKJS::CpuUsedByApp);
+
+	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
+	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
+	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKJS::LowPowerMonitor);
 }
 
 /////////////////////////////////////
@@ -1027,6 +1031,28 @@ int DKJS::CpuUsedByApp(duk_context* ctx)
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
 	duk_push_number(ctx, cpu);
+	return 1;
+}
+
+
+//////////////////////////////////////////
+int DKJS::TurnOffMonitor(duk_context* ctx)
+{
+	if(!DKUtil::TurnOffMonitor()){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::TurnOnMonitor(duk_context* ctx)
+{
+	if(!DKUtil::TurnOnMonitor()){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKJS::LowPowerMonitor(duk_context* ctx)
+{
+	if(!DKUtil::LowPowerMonitor()){ return 0; }
 	return 1;
 }
 

@@ -96,6 +96,10 @@ public:
 	static int PhysicalMemoryUsedByApp(duk_context* ctx);
 	static int CpuUsed(duk_context* ctx);
 	static int CpuUsedByApp(duk_context* ctx);
+
+	static int TurnOffMonitor(duk_context* ctx);
+	static int TurnOnMonitor(duk_context* ctx);
+	static int LowPowerMonitor(duk_context* ctx);
 };
 
 
