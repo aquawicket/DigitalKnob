@@ -304,6 +304,15 @@ public:
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
+	///////////////////////////////////////////////////////////////////////////////
+	bool SendEvent(const DKString& id, const DKString& type, const DKString& value)
+	{
+		if(id.empty()){ return false; }
+		if(type.empty()){ return false; }
+		//DKCef::RunJavascript("DKSendEvent(\""+id+"\",\""+type+"\",\"\");");
+		return true;
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 	{
@@ -388,6 +397,8 @@ public:
 			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 			//printf("registered: %s\n", DKV8::funcs[i].c_str());
 		}
+		
+		DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
