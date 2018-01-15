@@ -1,14 +1,11 @@
 #ifdef WIN32
 #pragma once
-#ifndef DKHook_H
-#define DKHook_H
+#ifndef DKHandles_H
+#define DKHandles_H
 
 #include <vector>
 #include "DK/DK.h"
 
-//Functions in DKHookDLL.dll
-//typedef bool(*InstallHook)(unsigned long);
-//typedef bool(*UnInstallHook)();
 
 ////////////////
 struct HWNDname{   
@@ -16,8 +13,8 @@ struct HWNDname{
    const char* caption;
 };
 
-///////////////////////////////////////
-class DKHook : public DKObjectT<DKHook>
+/////////////////////////////////////////////
+class DKHandles : public DKObjectT<DKHandles>
 {
 public:
 	void Init();
@@ -52,13 +49,12 @@ public:
 	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
 
-	//HMODULE hModule;  //dll module
 	static std::vector<HWND> handle; //handle[0] is the window
 	unsigned int currentHandle; //current indes of handle[]
 	static DKStringArray _windows; //list of windows
 	bool highlight; //highlight toggle
 };
 
-REGISTER_OBJECT(DKHook, true);
-#endif //DKHook_H
+REGISTER_OBJECT(DKHandles, true);
+#endif //DKHandles_H
 #endif //WIN32 || WIN64
