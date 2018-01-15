@@ -66,35 +66,32 @@ void DKHook::UninstallHook()
 	UnhookWindowsHookEx(hook);
 }
 
+
 ///////////////////////////////////////////////////////////////////////
 LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam)
 {
-	MSLLHOOKSTRUCT * pMouseStruct = (MSLLHOOKSTRUCT *)lParam; // WH_MOUSE_LL struct
+	MSLLHOOKSTRUCT* pMouseStruct = (MSLLHOOKSTRUCT *)lParam; // WH_MOUSE_LL struct
 															 
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:
-		if (pMouseStruct != NULL){ // Mouse struct contain information?			
-			printf_s("Mouse Coordinates: x = %i | y = %i \n", pMouseStruct->pt.x, pMouseStruct->pt.y);
+		if(pMouseStruct != NULL){ // Mouse struct contain information?			
+			DKLog("Mouse Coordinates: "+toString(pMouseStruct->pt.x)+","+toString(pMouseStruct->pt.y)+"\n", DKINFO);
+			DKEvent::SendEvent("GLOBAL", "mousemove", toString(pMouseStruct->pt.x)+","+toString(pMouseStruct->pt.y));
 		}
 
-		switch (wParam){
+		switch(wParam){
 			case WM_LBUTTONUP:{
-				printf_s("LEFT CLICK UP\n");
+				DKLog("LEFT CLICK UP\n", DKINFO);
+				DKEvent::SendEvent("GLOBAL", "mousedown", toString(1));
 			}break;
 			case WM_LBUTTONDOWN:{
-				printf_s("LEFT CLICK DOWN\n");
+				DKLog("LEFT CLICK DOWN\n", DKINFO);
+				DKEvent::SendEvent("GLOBAL", "mouseup", toString(1));
 			}break;
 		}
 	}
 
-	/*
-	Every time that the nCode is less than 0 we need to CallNextHookEx:
-	-> Pass to the next hook
-	MSDN: Calling CallNextHookEx is optional, but it is highly recommended; 
-	otherwise, other applications that have installed hooks will not receive hook notifications and may behave incorrectly as a result.
-	*/
 	return CallNextHookEx(DKHook::hook, nCode, wParam, lParam);
 }
-
 
 //////////////////////////////////////////////////////////////////////////
 LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam)
@@ -104,6 +101,7 @@ LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam)
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:
 		if(pKeyboardStruct != NULL){ // Mouse struct contain information?			
 			DKLog("keyboard event\n", DKINFO);
+			DKEvent::SendEvent("GLOBAL", "keypress", "");
 		}
 	}
 
