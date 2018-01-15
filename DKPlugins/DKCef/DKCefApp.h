@@ -7,6 +7,7 @@
 #include <include/wrapper/cef_helpers.h>
 #include "DK/DKFile.h"
 
+
 typedef CefRefPtr<CefListValue> CefArgs;
 typedef CefRefPtr<CefListValue> CefReturn;
 class DKCefApp;
@@ -307,10 +308,19 @@ public:
 	///////////////////////////////////////////////////////////////////////////////
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value)
 	{
+		/*
 		if(id.empty()){ return false; }
+		if(same(id,"DKLog")){ return false; }
 		if(type.empty()){ return false; }
-		//DKCef::RunJavascript("DKSendEvent(\""+id+"\",\""+type+"\",\"\");");
+		if(same(type,"second")){ return false; }
+		DKLog("DKCefApp::SendEvent("+id+","+type+")", DKINFO);
+
+		DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
+		CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
+		frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 		return true;
+		*/
+		return false;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +408,7 @@ public:
 			//printf("registered: %s\n", DKV8::funcs[i].c_str());
 		}
 		
-		DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
+		//DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
