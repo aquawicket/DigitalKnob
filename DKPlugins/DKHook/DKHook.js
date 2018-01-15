@@ -3,12 +3,12 @@ function DKHook_Init()
 {
 	DKCreate("DKHook");
 
-	DKAddEvent("GLOBAL", "mousemove", DKHook_OnEvent);
-	DKAddEvent("GLOBAL", "mousedown", DKHook_OnEvent);
-	DKAddEvent("GLOBAL", "mouseup", DKHook_OnEvent);
-	DKAddEvent("GLOBAL", "keypress", DKHook_OnEvent);
-	DKAddEvent("GLOBAL", "keydown", DKHook_OnEvent);
-	DKAddEvent("GLOBAL", "keyup", DKHook_OnEvent);
+	DKAddEvent("window", "mousemove", DKHook_OnEvent);
+	DKAddEvent("window", "mousedown", DKHook_OnEvent);
+	DKAddEvent("window", "mouseup", DKHook_OnEvent);
+	DKAddEvent("window", "keypress", DKHook_OnEvent);
+	DKAddEvent("window", "keydown", DKHook_OnEvent);
+	DKAddEvent("window", "keyup", DKHook_OnEvent);
 }
 
 /////////////////////
