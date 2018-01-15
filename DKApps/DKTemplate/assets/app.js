@@ -5,9 +5,16 @@ var USE_ROCKET = 0;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKTemplate";
 
-DKCreate("DKHook/DKHook.js", function(){});
-
 DKCreate("DK/init.js", function(){});
+
+//////////////////////////
+function app_LoadPlugins()
+{
+	//DKCreate("DKSDLText"); //SDL fps counter
+	DKCreate("DKTray/DKTray.js", function(){});
+	DKCreate("DKDebug/DKDebug.js", function(){});
+	DKCreate("AutoSleep.js", function(){});
+}
 
 ///////////////////////
 function app_LoadPage()
