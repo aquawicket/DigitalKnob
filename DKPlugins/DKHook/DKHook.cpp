@@ -4,6 +4,7 @@
 #include "DKAssets/DKAssets.h"
 #include "DKHook/DKHook.h"
 
+HHOOK DKHook::hook;
 
 ///////////////////
 void DKHook::Init()
