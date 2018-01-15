@@ -25,7 +25,8 @@ public:
 	//HMODULE hModule;  //dll module
 };
 
-LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam); //callback declaration
+LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam);
+LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam);
 
 REGISTER_OBJECT(DKHook, true);
 #endif //DKHook_H
