@@ -7,6 +7,10 @@
 HHOOK DKHook::hook;
 #endif
 
+#ifdef LINUX
+#include <fcntl.h>
+#endif
+
 ///////////////////
 void DKHook::Init()
 {
