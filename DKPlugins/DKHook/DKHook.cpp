@@ -10,7 +10,9 @@ HHOOK DKHook::hook;
 ///////////////////
 void DKHook::Init()
 {
+#ifdef WIN32
 	InstallHook();
+#endif
 
 	/*
 	DKString path = DKFile::local_assets + "DKHook/hookdll.dll";
