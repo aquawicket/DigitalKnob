@@ -21,7 +21,7 @@ public:
 	unsigned char data[3];
 	int left, middle, right;
 	signed char x, y;
-#endif
+#endif //LINUX
 
 #ifdef WIN32
 	void InstallHook(); // function to install our hook
@@ -31,7 +31,7 @@ public:
 	static HHOOK hook; // handle to the hook
 	MSG msg; // struct with information about all messages in our queue
 	//HMODULE hModule;  //dll module
-#endif
+#endif //WIN32
 };
 
 #ifdef WIN32
