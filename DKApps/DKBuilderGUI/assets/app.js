@@ -5,9 +5,13 @@ var USE_ROCKET = 1;  //Use with caution
 var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKBuilderGUI";
 
-
 DKCreate("DK/init.js", function(){});
 
+//////////////////////////
+function app_LoadPlugins()
+{
+
+}
 
 ///////////////////////
 function app_LoadPage()
