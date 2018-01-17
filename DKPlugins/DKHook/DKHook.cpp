@@ -33,7 +33,7 @@ void DKHook::Init()
 	fd = open(pDevice, O_RDWR);
 	if(fd == -1){
 		printf("ERROR Opening %s\n", pDevice);
-		return -1;
+		return;
 	}
 
 	DKApp::AppendLoopFunc(&DKHook::LinuxHook, this);
