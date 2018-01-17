@@ -1,4 +1,3 @@
-#ifdef WIN32
 #pragma once
 #ifndef DKHook_H
 #define DKHook_H
@@ -16,18 +15,29 @@ public:
 	void Init();
 	void End();
 
-	static HHOOK hook; // handle to the hook	
+#ifdef LINUX
+	void LinuxHook();
+	int fd, bytes;
+	unsigned char data[3];
+	int left, middle, right;
+	signed char x, y;
+#endif
+
+#ifdef WIN32
 	void InstallHook(); // function to install our hook
 	void UninstallHook(); // function to uninstall our hook
 	int Messsages(); // function to "deal" with our messages 
 
+	static HHOOK hook; // handle to the hook
 	MSG msg; // struct with information about all messages in our queue
 	//HMODULE hModule;  //dll module
+#endif
 };
 
+#ifdef WIN32
 LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam);
+#endif //WIN32
 
 REGISTER_OBJECT(DKHook, true);
 #endif //DKHook_H
-#endif //WIN32 || WIN64

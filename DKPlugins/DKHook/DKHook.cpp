@@ -1,10 +1,11 @@
 #include "DK/stdafx.h"
-#ifdef WIN32
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKHook/DKHook.h"
 
+#ifdef WIN32
 HHOOK DKHook::hook;
+#endif
 
 ///////////////////
 void DKHook::Init()
@@ -18,6 +19,19 @@ void DKHook::Init()
 		DKLog("DKHook::DKHook(): cannot find hookdll.dll \n", DKERROR);
 	}
 	*/
+
+#ifdef LINUX
+	const char *pDevice = "/dev/input/mice";
+
+	// Open Mouse
+	fd = open(pDevice, O_RDWR);
+	if(fd == -1){
+		printf("ERROR Opening %s\n", pDevice);
+		return -1;
+	}
+
+	DKApp::AppendLoopFunc(&DKHook::LinuxHook, this);
+#endif
 }
 
 //////////////////
@@ -26,6 +40,27 @@ void DKHook::End()
 	//if(hModule){FreeLibrary(hModule);}
 }
 
+#ifdef LINUX
+////////////////////////
+void DKHook::LinuxHook()
+{
+	// Read Mouse     
+	bytes = read(fd, data, sizeof(data));
+
+	if(bytes > 0)
+	{
+		left = data[0] & 0x1;
+		right = data[0] & 0x2;
+		middle = data[0] & 0x4;
+
+		x = data[1];
+		y = data[2];
+		printf("x=%d, y=%d, left=%d, middle=%d, right=%d\n", x, y, left, middle, right);
+	} 
+}
+#endif
+
+#ifdef WIN32
 ///////////////////////
 int DKHook::Messsages()
 {
