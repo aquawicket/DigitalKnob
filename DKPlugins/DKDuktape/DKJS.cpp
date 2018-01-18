@@ -965,25 +965,25 @@ int DKJS::GetFps(duk_context* ctx)
 /////////////////////////////////////////
 int DKJS::VirtualMemory(duk_context* ctx)
 {
-	float virtualMemory;
+	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return 0; }
-	duk_push_number(ctx, virtualMemory);
+	duk_push_number(ctx, (double)virtualMemory);
 	return 1;
 }
 
 /////////////////////////////////////////////
 int DKJS::VirtualMemoryUsed(duk_context* ctx)
 {
-	float virtualMemory;
+	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return 0; }
-	duk_push_number(ctx, virtualMemory);
+	duk_push_number(ctx, (double)virtualMemory);
 	return 1;
 }
 
 //////////////////////////////////////////////////
 int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 {
-	float virtualMemory;
+	unsigned int virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return 0; }
 	duk_push_number(ctx, virtualMemory);
 	return 1;
@@ -992,25 +992,25 @@ int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 //////////////////////////////////////////
 int DKJS::PhysicalMemory(duk_context* ctx)
 {
-	float physicalMemory;
+	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return 0; }
-	duk_push_number(ctx, physicalMemory);
+	duk_push_number(ctx, (double)physicalMemory);
 	return 1;
 }
 
 //////////////////////////////////////////////
 int DKJS::PhysicalMemoryUsed(duk_context* ctx)
 {
-	float physicalMemory;
+	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return 0; }
-	duk_push_number(ctx, physicalMemory);
+	duk_push_number(ctx, (double)physicalMemory);
 	return 1;
 }
 
 ///////////////////////////////////////////////////
 int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 {
-	float physicalMemory;
+	unsigned int physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
 	duk_push_number(ctx, physicalMemory);
 	return 1;
@@ -1019,7 +1019,7 @@ int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 ///////////////////////////////////
 int DKJS::CpuUsed(duk_context* ctx)
 {
-	int cpu;
+	long cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return 0; }
 	duk_push_number(ctx, cpu);
 	return 1;
