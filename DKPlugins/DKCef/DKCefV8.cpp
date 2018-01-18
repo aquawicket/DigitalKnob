@@ -409,7 +409,7 @@ bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
 {
-	long cpu;
+	int cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return false; }
 	if(!retval->SetInt(0, cpu)){ return false; }
 	return true;
