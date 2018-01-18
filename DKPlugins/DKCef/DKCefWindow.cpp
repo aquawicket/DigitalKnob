@@ -176,7 +176,7 @@ bool DKCefWindow::IsVisible(void* input, void* output)
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	*(bool*)output = IsWindowVisible(hwnd);
+	*(bool*)output = (IsWindowVisible(hwnd) != 0);
 	return true;
 #endif
 
