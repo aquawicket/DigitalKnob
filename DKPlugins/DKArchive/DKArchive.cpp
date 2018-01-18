@@ -143,12 +143,12 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 
 		// get length of file:
 		input.seekg (0, input.end);
-		int length = input.tellg();
+		long long length = input.tellg();
 		input.seekg (0, input.beg);
 
-		char* buffer = new char [length];
+		char* buffer = new char [(unsigned long)length];
 		input.read(buffer, length);
-		archive_write_data(a, buffer, length);
+		archive_write_data(a, buffer, (unsigned int)length);
 
 		input.close();
 		archive_entry_free(entry);
