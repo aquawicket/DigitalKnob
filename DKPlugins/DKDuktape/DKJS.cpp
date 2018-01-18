@@ -1019,7 +1019,7 @@ int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 ///////////////////////////////////
 int DKJS::CpuUsed(duk_context* ctx)
 {
-	long cpu;
+	int cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return 0; }
 	duk_push_number(ctx, cpu);
 	return 1;
