@@ -41,16 +41,40 @@ function DKStats_Update()
                 + ('00'+currentdate.getMinutes()).slice(-2) + ":" 
                 + ('00'+currentdate.getSeconds()).slice(-2);
 	DKWidget_SetInnerHtml("DKStats_time", "TIME: "+datetime);
-				
-	//CPU%
-	var cpu = DK_CpuUsedByApp();
-	DKWidget_SetInnerHtml("DKStats_cpu", "CPU: "+cpu+"%");
-	
-	//RAM usage
-	var ram = DK_PhysicalMemoryUsedByApp();
-	DKWidget_SetInnerHtml("DKStats_ram", "RAM: "+ram+"MB");
 	
 	//Frames Per Second
 	var fps = DK_GetFps();
 	DKWidget_SetInnerHtml("DKStats_fps", "FPS: "+fps);
+	
+	//CPU used by app
+	var cpu = DK_CpuUsedByApp();
+	DKWidget_SetInnerHtml("DKStats_cpu", "CPU: "+cpu+"%");
+	
+	//RAM used by app
+	var ram = DK_PhysicalMemoryUsedByApp();
+	DKWidget_SetInnerHtml("DKStats_ram", "RAM: "+ram+"MB");
+	
+	//Virtual Memory used by app
+	var swap = DK_VirtualMemoryUsedByApp();
+	DKWidget_SetInnerHtml("DKStats_swap", "SWAP: "+swap+"MB");
+	
+	//CPU used total
+	var cpu = DK_CpuUsed();
+	DKWidget_SetInnerHtml("DKStats_totalcpu", "TOTAL CPU: "+cpu+"%");
+	
+	//RAM used total
+	var ram = DK_PhysicalMemoryUsed();
+	DKWidget_SetInnerHtml("DKStats_totalram", "TOTAL RAM: "+ram+"MB");
+	
+	//Virtual Memory used total
+	var swap = DK_VirtualMemoryUsed();
+	DKWidget_SetInnerHtml("DKStats_totalswap", "TOTAL SWAP: "+swap+"MB");
+	
+	//System RAM
+	var ram = DK_PhysicalMemory();
+	DKWidget_SetInnerHtml("DKStats_systemram", "SYSTEM RAM: "+ram+"MB");
+	
+	//System Virtual Memory
+	var swap = DK_VirtualMemory();
+	DKWidget_SetInnerHtml("DKStats_systemswap", "SYSTEM SWAP: "+swap+"MB");
 }
