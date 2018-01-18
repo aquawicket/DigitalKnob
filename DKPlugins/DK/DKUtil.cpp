@@ -910,7 +910,7 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 }
 
 ///////////////////////////////
-bool DKUtil::CpuUsed(long& cpu)
+bool DKUtil::CpuUsed(int& cpu)
 {
 #ifdef WIN32
 	return DKWindows::CpuUsed(cpu);

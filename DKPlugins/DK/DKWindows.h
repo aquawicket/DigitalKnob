@@ -62,7 +62,7 @@ public:
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static void CpuInit();
-	static bool CpuUsed(long& cpu);
+	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
 	static bool CreateConsoleHandler(); 

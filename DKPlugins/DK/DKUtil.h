@@ -74,7 +74,7 @@ public:
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
-	static bool CpuUsed(long& cpu);
+	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 
 	//Frame limiter

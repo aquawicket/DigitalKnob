@@ -768,14 +768,14 @@ void DKWindows::CpuInit()
 }
 
 //////////////////////////////////
-bool DKWindows::CpuUsed(long& cpu)
+bool DKWindows::CpuUsed(int& cpu)
 {
 	if(!cpuInit){ CpuInit(); }
 
 	PDH_FMT_COUNTERVALUE counterVal;
 	PdhCollectQueryData(cpuQuery);
 	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
-	cpu = counterVal.longValue;
+	cpu = (int)counterVal.doubleValue;
 	return true;
 }
 
