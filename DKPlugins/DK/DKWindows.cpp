@@ -786,13 +786,13 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 
 	FILETIME ftime, fsys, fuser;
 	ULARGE_INTEGER now, sys, user;
-	unsigned long long percent;
+	float percent;
 	GetSystemTimeAsFileTime(&ftime);
 	memcpy(&now, &ftime, sizeof(FILETIME));
 	GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
 	memcpy(&sys, &fsys, sizeof(FILETIME));
 	memcpy(&user, &fuser, sizeof(FILETIME));
-	percent = (sys.QuadPart - lastSysCPU.QuadPart) + (user.QuadPart - lastUserCPU.QuadPart);
+	percent = (float)((sys.QuadPart - lastSysCPU.QuadPart) + (user.QuadPart - lastUserCPU.QuadPart));
 	percent /= (now.QuadPart - lastCPU.QuadPart);
 	percent /= numProcessors;
 	lastCPU = now;
