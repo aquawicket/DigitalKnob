@@ -181,7 +181,7 @@ int DKWidgetJS::SetValue(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
 	if(duk_is_number(ctx, 1)){
-		float num = duk_require_number(ctx, 1);
+		double num = duk_require_number(ctx, 1);
 		value = toString(num);
 	}
 	else{
@@ -498,9 +498,9 @@ int DKWidgetJS::GetOffsetTop(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKElement* element = DKWidget::GetElementById(id);
-	if (!element) { return 0; }
-	int offsetTop = element->GetOffsetTop();
-	duk_push_int(ctx, offsetTop);
+	if(!element){ return 0; }
+	float offsetTop = element->GetOffsetTop();
+	duk_push_int(ctx, (int)offsetTop);
 	return 1;
 }
 
@@ -509,9 +509,9 @@ int DKWidgetJS::GetOffsetLeft(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKElement* element = DKWidget::GetElementById(id);
-	if (!element) { return 0; }
-	int offsetLeft = element->GetOffsetLeft();
-	duk_push_int(ctx, offsetLeft);
+	if(!element){ return 0; }
+	float offsetLeft = element->GetOffsetLeft();
+	duk_push_int(ctx, (int)offsetLeft);
 	return 1;
 }
 
@@ -521,8 +521,8 @@ int DKWidgetJS::GetOffsetHeight(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	DKElement* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
-	int offsetHeight = element->GetOffsetHeight();
-	duk_push_int(ctx, offsetHeight);
+	float offsetHeight = element->GetOffsetHeight();
+	duk_push_int(ctx, (int)offsetHeight);
 	return 1;
 }
 
@@ -532,8 +532,8 @@ int DKWidgetJS::GetOffsetWidth(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	DKElement* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
-	int offsetWidth = element->GetOffsetWidth();
-	duk_push_int(ctx, offsetWidth);
+	float offsetWidth = element->GetOffsetWidth();
+	duk_push_int(ctx, (int)offsetWidth);
 	return 1;
 }
 
