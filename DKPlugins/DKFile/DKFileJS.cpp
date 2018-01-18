@@ -168,8 +168,8 @@ int DKFileJS::CopyFolder(duk_context* ctx)
 {
 	DKString src = duk_require_string(ctx, 0);
 	DKString dst = duk_require_string(ctx, 1);
-	bool overwrite = duk_require_boolean(ctx, 2);
-	bool recursive = duk_require_boolean(ctx, 3);
+	bool overwrite = (duk_require_boolean(ctx, 2) != 0);
+	bool recursive = (duk_require_boolean(ctx, 3) != 0);
 	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n", DKINFO);
 	if (!DKFile::CopyFolder(src, dst, overwrite, recursive)){
 		DKLog("DKFile::CopyFolder(): failed. \n", DKERROR);
@@ -211,7 +211,7 @@ int DKFileJS::GetLocalCreationDate(duk_context* ctx)
 	//duk_push_string(ctx, filedate.c_str());
 	char* pEnd;
 	unsigned long long time = strtoull(filedate.c_str(), &pEnd, 10);
-	duk_push_number(ctx, time);
+	duk_push_number(ctx, (double)time);
 	return 1;
 }
 
@@ -227,7 +227,7 @@ int DKFileJS::GetLocalModifiedDate(duk_context* ctx)
 	//duk_push_string(ctx, filedate.c_str());
 	char* pEnd;
 	unsigned long long time = strtoull(filedate.c_str(), &pEnd, 10);
-	duk_push_number(ctx, time);
+	duk_push_number(ctx, (double)time);
 	return 1;
 }
 
@@ -269,7 +269,7 @@ int DKFileJS::Copy(duk_context* ctx)
 {
 	DKString src = duk_require_string(ctx, 0);
 	DKString dest = duk_require_string(ctx, 1);
-	bool overwrite = duk_require_boolean(ctx, 2);
+	bool overwrite = (duk_require_boolean(ctx, 2) != 0);
 	if(!DKFile::Copy(src, dest, overwrite, true)){
 		return 0;
 	}
@@ -281,7 +281,7 @@ int DKFileJS::Rename(duk_context* ctx)
 {
 	DKString input = duk_require_string(ctx, 0);
 	DKString output = duk_require_string(ctx, 1);
-	bool overwrite = duk_require_boolean(ctx, 2);
+	bool overwrite = (duk_require_boolean(ctx, 2) != 0);
 	if(!DKFile::Rename(input, output, overwrite)){
 		return 0;
 	}
