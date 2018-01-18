@@ -678,8 +678,8 @@ bool DKWindows::PrintStack()
 }
 */
 
-///////////////////////////////////////////////////
-bool DKWindows::VirtualMemory(float& virtualMemory)
+////////////////////////////////////////////////////////////////
+bool DKWindows::VirtualMemory(unsigned long long& virtualMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -689,8 +689,8 @@ bool DKWindows::VirtualMemory(float& virtualMemory)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsed(float& virtualMemory)
+////////////////////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -700,8 +700,8 @@ bool DKWindows::VirtualMemoryUsed(float& virtualMemory)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKWindows::VirtualMemoryUsedByApp(float& virtualMemory)
+///////////////////////////////////////////////////////////////////
+bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -710,8 +710,8 @@ bool DKWindows::VirtualMemoryUsedByApp(float& virtualMemory)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemory(float& physicalMemory)
+//////////////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -721,8 +721,8 @@ bool DKWindows::PhysicalMemory(float& physicalMemory)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsed(float& physicalMemory)
+//////////////////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
@@ -732,8 +732,8 @@ bool DKWindows::PhysicalMemoryUsed(float& physicalMemory)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKWindows::PhysicalMemoryUsedByApp(float& physicalMemory)
+/////////////////////////////////////////////////////////////////////
+bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -767,15 +767,15 @@ void DKWindows::CpuInit()
 	Sleep(1000);
 }
 
-/////////////////////////////////
-bool DKWindows::CpuUsed(int& cpu)
+//////////////////////////////////
+bool DKWindows::CpuUsed(long& cpu)
 {
 	if(!cpuInit){ CpuInit(); }
 
 	PDH_FMT_COUNTERVALUE counterVal;
 	PdhCollectQueryData(cpuQuery);
 	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
-	cpu = counterVal.doubleValue;
+	cpu = counterVal.longValue;
 	return true;
 }
 
@@ -786,7 +786,7 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 
 	FILETIME ftime, fsys, fuser;
 	ULARGE_INTEGER now, sys, user;
-	double percent;
+	unsigned long long percent;
 	GetSystemTimeAsFileTime(&ftime);
 	memcpy(&now, &ftime, sizeof(FILETIME));
 	GetProcessTimes(self, &ftime, &ftime, &fsys, &fuser);
@@ -798,7 +798,7 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 	lastCPU = now;
 	lastUserCPU = user;
 	lastSysCPU = sys;
-	cpu = percent * 100;
+	cpu = (int)(percent * 100);
 	return true;
 }
 
