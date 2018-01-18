@@ -154,7 +154,7 @@ bool DKHandles::GetTop(int& top)
 bool DKHandles::GetWindows(DKStringArray& windows)
 {
 	_windows.clear();
-	bool rval = EnumWindows(GetWindows, NULL);
+	bool rval = (EnumWindows(GetWindows, NULL) != 0);
 	windows = _windows;
 	return rval;
 }
