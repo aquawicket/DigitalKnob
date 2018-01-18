@@ -457,7 +457,7 @@ bool DKSDLWindow::GetScreenHeight(void* input, void* output)
 bool DKSDLWindow::IsFullscreen(void* input, void* output)
 {
 	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-    bool isFullscreen = SDL_GetWindowFlags(sdlwin) & FullscreenFlag;
+    bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
 	*(bool*)output = isFullscreen;
 	return true;
 }
@@ -494,7 +494,7 @@ bool DKSDLWindow::Minimize(void* input, void* output)
 bool DKSDLWindow::IsVisible(void* input, void* output)
 {
 	long IsVisibleFlag = SDL_WINDOW_SHOWN;
-    bool isVisible = SDL_GetWindowFlags(sdlwin) & IsVisibleFlag;
+    bool isVisible = ((SDL_GetWindowFlags(sdlwin) & IsVisibleFlag) != 0);
 	*(bool*)output = isVisible;
 	return true;
 }
