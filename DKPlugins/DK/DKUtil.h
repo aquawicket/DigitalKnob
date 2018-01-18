@@ -48,7 +48,7 @@ public:
 	static bool StrokeKey(int key);
 	static bool round(double& num);
 	static bool GetLocalIP(DKString& ip);
-	static bool ChangeVolume(double& volume);
+	static bool SetVolume(double& volume);
 	static bool GetVolume(float& volume);
 	static bool Bin2C(const DKString& input, const DKString& output);
 	static bool C2Bin(const unsigned char* header, const long int size, const DKString& output);

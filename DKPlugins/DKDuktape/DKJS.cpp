@@ -52,7 +52,7 @@ void DKJS::Init()
 	
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep);
 	DKDuktape::AttachFunction("DK_CallFunc", DKJS::CallFunc);
-	DKDuktape::AttachFunction("DK_ChangeVolume", DKJS::ChangeVolume);
+	DKDuktape::AttachFunction("DK_SetVolume", DKJS::SetVolume);
 	DKDuktape::AttachFunction("DK_ClearEvents", DKJS::ClearEvents);
 	DKDuktape::AttachFunction("DK_ClickImage", DKJS::ClickImage);
 	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash);
@@ -642,11 +642,11 @@ int DKJS::GetVolume(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////
-int DKJS::ChangeVolume(duk_context* ctx)
+/////////////////////////////////////
+int DKJS::SetVolume(duk_context* ctx)
 {
 	double volume = (double)duk_require_number(ctx, 0);
-	if(!DKUtil::ChangeVolume(volume)){ return 0; }
+	if(!DKUtil::SetVolume(volume)){ return 0; }
 	return 1;
 }
 

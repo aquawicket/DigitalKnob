@@ -95,10 +95,10 @@ bool DKLinux::SetClipboard(DKString& text)
 	return false;
 }
 
-//////////////////////////////////////////
-bool DKLinux::ChangeVolume(double nVolume)
+///////////////////////////////////////
+bool DKLinux::SetVolume(double nVolume)
 {
-	DKLog("DKLinux::ChangeVolume("+toString(nVolume)+")\n", DKINFO);
+	DKLog("DKLinux::SetVolume("+toString(nVolume)+")\n", DKINFO);
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;

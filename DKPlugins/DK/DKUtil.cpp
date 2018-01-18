@@ -451,16 +451,16 @@ bool DKUtil::GetLocalIP(DKString& ip)
 	return true;
 }
 
-/////////////////////////////////////////
-bool DKUtil::ChangeVolume(double& volume)
+//////////////////////////////////////
+bool DKUtil::SetVolume(double& volume)
 {
 #ifdef WIN32
-	return DKWindows::ChangeVolume(volume);
+	return DKWindows::SetVolume(volume);
 #endif
 #ifdef LINUX
-	return DKLinux::ChangeVolume(volume);
+	return DKLinux::SetVolume(volume);
 #endif
-	DKLog("DKUtil::ChangeVolume() not implemented on this OS OS \n", DKERROR);
+	DKLog("DKUtil::SetVolume() not implemented on this OS\n", DKERROR);
 	return false;
 }
 

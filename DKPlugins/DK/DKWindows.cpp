@@ -145,10 +145,10 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 	return true;
 }
 
-////////////////////////////////////////////
-bool DKWindows::ChangeVolume(double nVolume) 
+/////////////////////////////////////////
+bool DKWindows::SetVolume(double nVolume) 
 {
-	DKLog("DKWindows::ChangeVolume("+toString(nVolume)+")\n", DKDEBUG);
+	DKLog("DKWindows::SetVolume("+toString(nVolume)+")\n", DKDEBUG);
 	
 	//Windows Vista and up only
 	if(nVolume > 1.0){nVolume = 1.0;}
