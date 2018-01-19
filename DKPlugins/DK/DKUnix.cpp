@@ -28,7 +28,7 @@ bool DKUnix::GetKey(int& key)
 ////////////////////////////////////
 bool DKUnix::Sleep(int milliseconds)
 {
-	usleep(milliseconds);
+	usleep(milliseconds * 1000);
 	return true;
 }
 
