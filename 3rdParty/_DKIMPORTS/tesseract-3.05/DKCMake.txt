@@ -7,6 +7,7 @@ DKSET(TESSERACT ${3RDPARTY}/tesseract-3.05)
 
 ### LINK ###
 DKINCLUDE(${TESSERACT})
+DKINCLUDE(${TESSERACT}/ccutil)
 WIN_DEBUG_LIB(${TESSERACT}/${OS}/Debug/tesseract305d.lib)
 WIN_RELEASE_LIB(${TESSERACT}/${OS}/Release/tesseract305.lib)
 APPLE_DEBUG_LIB(${TESSERACT}/${OS}/lib/${DEBUG}/libtesseract.a)
