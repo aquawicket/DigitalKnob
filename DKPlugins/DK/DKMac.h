@@ -13,12 +13,12 @@ public:
 	//static bool GetThreadId(unsigned long int& id);
 	static bool GetMousePos(int& x, int& y);
 
-	static bool VirtualMemory(float& virtualMemory);
-	static bool VirtualMemoryUsed(float& virtualMemory);
-	static bool VirtualMemoryUsedByApp(float& virtualMemory);
-	static bool PhysicalMemory(float& physicalMemory);
-	static bool PhysicalMemoryUsed(float& physicalMemory);
-	static bool PhysicalMemoryUsedByApp(float& physicalMemory);
+	static bool VirtualMemory(unsigned long long& virtualMemory);
+	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
+	static bool VirtualMemoryUsedByApp(unsigned int& virtualMemory);
+	static bool PhysicalMemory(unsigned long long& physicalMemory);
+	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static void CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);

@@ -374,7 +374,7 @@ bool DKUtil::GetDate(DKString& date)
 	time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
 
-	int standard = now->tm_hour % 12;
+	//int standard = now->tm_hour % 12;
 	date = toString(now->tm_mon+1);
 	date += "/";
 	DKString day = toString(now->tm_mday);
@@ -582,6 +582,7 @@ bool DKUtil::System(const DKString& command)
 	DKLog("DKUtil::System("+command+")\n", DKDEBUG);
 #if !defined(IOS)
 	int rval = system(command.c_str());
+    rval;
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n", DKDEBUG);
 	return true;
 #endif

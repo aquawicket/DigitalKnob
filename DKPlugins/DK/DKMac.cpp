@@ -31,7 +31,7 @@ bool DKMac::GetMousePos(int& x, int& y)
 
 
 ///////////////////////////////////////////////////
-bool DKMac::VirtualMemory(float& virtualMemory)
+bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
 {
     //TODO
     /*
@@ -45,7 +45,7 @@ bool DKMac::VirtualMemory(float& virtualMemory)
 }
 
 ///////////////////////////////////////////////////////
-bool DKMac::VirtualMemoryUsed(float& virtualMemory)
+bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
     //TODO
     /*
@@ -60,7 +60,7 @@ bool DKMac::VirtualMemoryUsed(float& virtualMemory)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKMac::VirtualMemoryUsedByApp(float& virtualMemory)
+bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
     //TODO
     /*
@@ -80,7 +80,7 @@ bool DKMac::VirtualMemoryUsedByApp(float& virtualMemory)
 }
 
 /////////////////////////////////////////////////////
-bool DKMac::PhysicalMemory(float& physicalMemory)
+bool DKMac::PhysicalMemory(unsigned long long& physicalMemory)
 {
     //TODO
     /*
@@ -98,7 +98,7 @@ bool DKMac::PhysicalMemory(float& physicalMemory)
 }
 
 /////////////////////////////////////////////////////////
-bool DKMac::PhysicalMemoryUsed(float& physicalMemory)
+bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
     //TODO
     /*
@@ -134,7 +134,7 @@ bool DKMac::PhysicalMemoryUsed(float& physicalMemory)
 }
 
 //////////////////////////////////////////////////////////////
-bool DKMac::PhysicalMemoryUsedByApp(float& physicalMemory)
+bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
     //TODO
     /*
