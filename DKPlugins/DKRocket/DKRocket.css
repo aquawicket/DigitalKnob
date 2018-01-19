@@ -239,7 +239,7 @@ input.range.position slidertrack
 	width:107rem;
 	margin-top:3rem;
 	background-decorator: image;
-	background-image: ../DKRocketAudio/position_track.png 0px 0px 107px 8px;
+	background-image: ../DKAudio/position_track.png 0px 0px 107px 8px;
 }
 
 input.range.position sliderbar
@@ -247,7 +247,7 @@ input.range.position sliderbar
 	width:22rem;
 	height:14rem;
 	background-decorator: image;
-	background-image: ../DKRocketAudio/position.png 0px 0px 22px 14px;
+	background-image: ../DKAudio/position.png 0px 0px 22px 14px;
 }
 
 /* Volume Ranges */
@@ -263,7 +263,7 @@ input.range.volume slidertrack
 	width:44rem;
 	margin-top:3rem;
 	background-decorator: image;
-	background-image: ../DKRocketAudio/volume_track.png 0px 0px 44px 8px;
+	background-image: ../DKAudio/volume_track.png 0px 0px 44px 8px;
 }
 
 input.range.volume sliderbar
@@ -271,7 +271,7 @@ input.range.volume sliderbar
 	width:14rem;
 	height:14rem;
 	background-decorator: image;
-	background-image: ../DKRocketAudio/volume.png 0px 0px 14px 14px;
+	background-image: ../DKAudio/volume.png 0px 0px 14px 14px;
 }
 
 
