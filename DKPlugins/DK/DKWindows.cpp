@@ -294,7 +294,7 @@ bool DKWindows::WaitForImage(const DKString& file, int timeout)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 {
 	//// Screen to RGB ////
@@ -445,7 +445,6 @@ bool DKWindows::GetMousePos(int& x, int& y)
 	return false;
 }
 
-
 ///////////////////////////
 bool DKWindows::LeftClick()
 {
@@ -561,17 +560,18 @@ bool DKWindows::Sleep(int milliseconds)
 	return true;;
 }
 
-#if !defined(WIN64)
 ///////////////////////////////////////////
 bool DKWindows::RefreshWindowsEnvironment()
 {
 	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKDEBUG);
 	
+#if !defined(WIN64)
     DWORD dwReturnValue;
     ::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, &dwReturnValue);
 	return true;
-}
 #endif
+	return false;
+}
 
 /////////////////////////////////////////////
 bool DKWindows::GetLastError(DKString& error)
@@ -814,6 +814,7 @@ bool DKWindows::CreateConsoleHandler()
 	return true;
 }
 
+/////////////////////////////////////////////////
 bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 {
 	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
