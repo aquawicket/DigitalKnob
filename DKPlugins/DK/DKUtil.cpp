@@ -343,6 +343,13 @@ bool DKUtil::GetTicks(long& ticks)
 #endif
 }
 
+////////////////////////////////////
+bool DKUtil::GetFrames(long& frames)
+{
+	frames = framecount;
+	return true;
+}
+
 /////////////////////////////////////
 bool DKUtil::GetTime(DKString& _time)
 {

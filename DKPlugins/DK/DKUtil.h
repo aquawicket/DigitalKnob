@@ -40,6 +40,7 @@ public:
 	static bool WheelDown();
 	static bool Sleep(int milliseconds);
 	static bool GetTicks(long& ticks);
+	static bool GetFrames(long& frames);
 	static bool GetTime(DKString& _time);
 	static bool GetDate(DKString& date);
 	static bool GetKey(int& key);

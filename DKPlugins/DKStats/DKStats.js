@@ -77,4 +77,12 @@ function DKStats_Update()
 	//System Virtual Memory
 	var swap = DK_VirtualMemory();
 	DKWidget_SetInnerHtml("DKStats_systemswap", "SYSTEM SWAP: "+swap+"MB");
+	
+	//Ticks
+	var ticks = DK_GetTicks();
+	DKWidget_SetInnerHtml("DKStats_ticks", "TICKS2: "+ticks);
+	
+	//Frames
+	var frames = DK_GetFrames();
+	DKWidget_SetInnerHtml("DKStats_frames", "FRAMES2: "+frames);
 }

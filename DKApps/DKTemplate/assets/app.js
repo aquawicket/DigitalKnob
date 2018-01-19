@@ -32,6 +32,7 @@ function app_LoadPage()
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
+		/*
 		DKCreate("DKAudio/DKAudio.js", function(){
 			DKCreate("DKAudio/DKAudioPlayer.js", function(){
 				DKFrame_Widget("DKAudio/DKAudioPlayer.html");
@@ -39,6 +40,7 @@ function app_LoadPage()
 				DKAudioPlayer_Open(assets+"/DKAudio/test.wav");
 			});
 		});
+		*/
 	//});		
 	});
 	});

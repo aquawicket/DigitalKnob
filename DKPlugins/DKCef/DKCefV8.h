@@ -38,6 +38,8 @@ public:
 	static bool WaitForImage(CefArgs args, CefReturn retval);
 	static bool SetFramerate(CefArgs args, CefReturn retval);
 	static bool GetFps(CefArgs args, CefReturn retval);
+	static bool GetTicks(CefArgs args, CefReturn retval);
+	static bool GetFrames(CefArgs args, CefReturn retval);
 	
 	//Cef JS functions
 	static bool Print(CefArgs args, CefReturn retval);

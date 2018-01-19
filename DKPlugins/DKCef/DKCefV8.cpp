@@ -32,6 +32,8 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
 	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
+	DKV8::AttachFunction("DK_GetTicks", DKCefV8::GetTicks);
+	DKV8::AttachFunction("DK_GetFrames", DKCefV8::GetFrames);
 
 	DKV8::AttachFunction("DK_VirtualMemory", DKCefV8::VirtualMemory);
 	DKV8::AttachFunction("DK_VirtualMemoryUsed", DKCefV8::VirtualMemoryUsed);
@@ -442,6 +444,24 @@ bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval)
 bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval)
 {
 	if(!DKUtil::LowPowerMonitor()){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefV8::GetTicks(CefArgs args, CefReturn retval)
+{
+	long ticks;
+	if(!DKUtil::GetTicks(ticks)){ return false; }
+	if(!retval->SetInt(0, (int)ticks)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
+{
+	long frames;
+	if(!DKUtil::GetFrames(frames)){ return false; }
+	if(!retval->SetInt(0, (int)frames)){ return false; }
 	return true;
 }
 
