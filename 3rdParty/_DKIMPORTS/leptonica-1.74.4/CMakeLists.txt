@@ -82,7 +82,7 @@ endif()
 #
 ###############################################################################
 
-set(LIBRARY_TYPE SHARED)
+set(LIBRARY_TYPE STATIC)
 if (STATIC)
     set(LIBRARY_TYPE)
 endif()
