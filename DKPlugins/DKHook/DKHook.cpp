@@ -51,16 +51,16 @@ void DKHook::End()
 void DKHook::LinuxHook()
 {
 	// Read Mouse     
-	bytes = read(fd, data, sizeof(data));
+	bytes = read(fd, _data, sizeof(_data));
 
 	if(bytes > 0)
 	{
-		left = data[0] & 0x1;
-		right = data[0] & 0x2;
-		middle = data[0] & 0x4;
+		left = _data[0] & 0x1;
+		right = _data[0] & 0x2;
+		middle = _data[0] & 0x4;
 
-		x = data[1];
-		y = data[2];
+		x = _data[1];
+		y = _data[2];
 		printf("x=%d, y=%d, left=%d, middle=%d, right=%d\n", x, y, left, middle, right);
 	} 
 }

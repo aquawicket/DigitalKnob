@@ -18,7 +18,7 @@ public:
 #ifdef LINUX
 	void LinuxHook();
 	int fd, bytes;
-	unsigned char data[3];
+	unsigned char _data[3];
 	int left, middle, right;
 	signed char x, y;
 #endif //LINUX
