@@ -80,9 +80,9 @@ function DKStats_Update()
 	
 	//Ticks
 	var ticks = DK_GetTicks();
-	DKWidget_SetInnerHtml("DKStats_ticks", "TICKS2: "+ticks);
+	DKWidget_SetInnerHtml("DKStats_ticks", "TICKS: "+ticks);
 	
 	//Frames
 	var frames = DK_GetFrames();
-	DKWidget_SetInnerHtml("DKStats_frames", "FRAMES2: "+frames);
+	DKWidget_SetInnerHtml("DKStats_frames", "FRAMES: "+frames);
 }
