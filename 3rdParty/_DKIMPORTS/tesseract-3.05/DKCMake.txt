@@ -7,8 +7,8 @@ DKSET(TESSERACT ${3RDPARTY}/tesseract-3.05)
 
 ### LINK ###
 DKINCLUDE(${TESSERACT}/include)
-WIN_DEBUG_LIB(${TESSERACT}/${OS}/lib/Debug/libtesseract.lib)
-WIN_RELEASE_LIB(${TESSERACT}/${OS}/lib/Release/libtesseract.lib)
+WIN_DEBUG_LIB(${TESSERACT}/${OS}/lib/Debug/tesseract305.lib)
+WIN_RELEASE_LIB(${TESSERACT}/${OS}/lib/Release/tesseract305.lib)
 APPLE_DEBUG_LIB(${TESSERACT}/${OS}/lib/${DEBUG}/libtesseract.a)
 APPLE_RELEASE_LIB(${TESSERACT}/${OS}/lib/${RELEASE}/libtesseract.a)
 LINUX_DEBUG_LIB(${TESSERACT}/${OS}/Debug/lib/libtesseract.a)
@@ -19,6 +19,6 @@ ANDROID_RELEASE_LIB(${TESSERACT}/${OS}/Release/obj/local/armeabi-v7a/libtesserac
 
 ### COMPILE ###
 DKSETPATH(${TESSERACT}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_TRAINING_TOOLS=OFF -DLeptonica_DIR=${LEPTONICA}/win32 -DLeptonica_INCLUDE_DIRS=${LEPTONICA}/src ${TESSERACT})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_TRAINING_TOOLS=OFF -DLeptonica_DIR=${LEPTONICA}/win32 ${TESSERACT})
 WIN32_VS_DEBUG(tesseract-3.05 tesseract.sln libtesseract)
 WIN32_VS_RELEASE(tesseract-3.05 tesseract.sln libtesseract)
