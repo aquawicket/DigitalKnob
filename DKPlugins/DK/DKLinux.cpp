@@ -155,7 +155,7 @@ bool DKLinux::GetVolume(float& volume)
 
 
 /////////////////////////////////////////////////
-bool DKLinux::VirtualMemory(float& virtualMemory)
+bool DKLinux::VirtualMemory(unsigned long long& virtualMemory)
 {
 	//TODO
 	/*
@@ -173,7 +173,7 @@ bool DKLinux::VirtualMemory(float& virtualMemory)
 }
 
 /////////////////////////////////////////////////////
-bool DKLinux::VirtualMemoryUsed(float& virtualMemory)
+bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
 	//TODO
 	/*
@@ -187,7 +187,7 @@ bool DKLinux::VirtualMemoryUsed(float& virtualMemory)
 }
 
 //////////////////////////////////////////////////////////
-bool DKLinux::VirtualMemoryUsedByApp(float& virtualMemory)
+bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
 	//TODO
 	/*
@@ -224,7 +224,7 @@ bool DKLinux::VirtualMemoryUsedByApp(float& virtualMemory)
 }
 
 ///////////////////////////////////////////////////
-bool DKLinux::PhysicalMemory(float& physicalMemory)
+bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory)
 {
 	//TODO
 	/*
@@ -237,7 +237,7 @@ bool DKLinux::PhysicalMemory(float& physicalMemory)
 }
 
 ///////////////////////////////////////////////////////
-bool DKLinux::PhysicalMemoryUsed(float& physicalMemory)
+bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
 	//TODO
 	/*
@@ -250,7 +250,7 @@ bool DKLinux::PhysicalMemoryUsed(float& physicalMemory)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKLinux::PhysicalMemoryUsedByApp(float& physicalMemory)
+bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
 	//TODO
 	/*

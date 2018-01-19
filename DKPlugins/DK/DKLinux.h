@@ -20,16 +20,16 @@ public:
 	static bool GetVolume(float& volume);
 	static bool KeyIsDown(int& key);
 	static bool LowPowerMonitor();
-	static bool PhysicalMemory(float& physicalMemory);
-	static bool PhysicalMemoryUsed(float& physicalMemory);
-	static bool PhysicalMemoryUsedByApp(float& physicalMemory);
+	static bool PhysicalMemory(unsigned long long& physicalMemory);
+	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static bool Run(const DKString& command);
 	static bool SetClipboard(DKString& text);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
-	static bool VirtualMemory(float& virtualMemory);
-	static bool VirtualMemoryUsed(float& virtualMemory);
-	static bool VirtualMemoryUsedByApp(float& virtualMemory);
+	static bool VirtualMemory(unsigned long long& virtualMemory);
+	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
+	static bool VirtualMemoryUsedByApp(unsigned int& virtualMemory);
 };
 
 #endif //DKLinux_H
