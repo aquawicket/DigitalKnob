@@ -28,6 +28,7 @@ void DKOcr::End()
 ///////////////////////////////////////////////////////
 bool DKOcr::ImageToText(DKString& file, DKString& text)
 {
+	if(!DKFile::PathExists(file)){ return false; }
 	char* outText;
 	Pix *image = pixRead(file.c_str());
 	api->SetImage(image);
