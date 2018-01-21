@@ -108,7 +108,7 @@ include(Configure)
 
 configure_file(${AUTOCONFIG_SRC} ${AUTOCONFIG} @ONLY)
 
-set(INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/src" "${CMAKE_INSTALL_PREFIX}/win32/src")  ##CHANGED BY DIGITALKNOB
+set(INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/src" "${CMAKE_INSTALL_PREFIX}/win32/src" "${CMAKE_INSTALL_PREFIX}/linux64/Release/src")  ##CHANGED BY DIGITALKNOB
 
 configure_file(
     ${CMAKE_SOURCE_DIR}/cmake/templates/LeptonicaConfig-version.cmake.in
