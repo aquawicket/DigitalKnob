@@ -103,9 +103,9 @@ public:
 		//DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 		//printf("registered: %s\n", name.c_str());
 
-		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[DKV8::funcs.size-1].c_str(), DKV8::v8handler);
-		DKV8::ctx->SetValue(DKV8::funcs[DKV8::funcs.size-1].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		DKLog("registered: "+DKV8::funcs[DKV8::funcs.size-1].c_str()+"\n", DKINFO);
+		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[DKV8::funcs.size()-1].c_str(), DKV8::v8handler);
+		DKV8::ctx->SetValue(DKV8::funcs[DKV8::funcs.size()-1].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		DKLog("registered: "+DKV8::funcs[DKV8::funcs.size()-1]+"\n", DKINFO);
 	}
 	
 	///////////////////////////////////////////////////////
