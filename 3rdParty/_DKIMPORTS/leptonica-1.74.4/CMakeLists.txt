@@ -62,6 +62,7 @@ if(NOT EXISTS ${PROJECT_SOURCE_DIR}/.cppan)
 		include_directories(${PNG_PNG_INCLUDE_DIR})
 		include_directories(${PNG_PNG_INCLUDE_DIR2})
 		include_directories(${JPEG_INCLUDE_DIR})
+		include_directories(${JPEG_INCLUDE_DIR2})
 	##ENDIF()
 	
     if (PKG_CONFIG_FOUND)
