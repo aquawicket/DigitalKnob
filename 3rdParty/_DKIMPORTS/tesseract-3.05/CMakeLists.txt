@@ -68,6 +68,8 @@ else()
     add_subdirectory(.cppan)
 endif()
 
+include_directories(${Leptonica_DIR}/src)
+
 find_package(OpenCL QUIET)
 
 option(BUILD_TRAINING_TOOLS "Build training tools" ON)
