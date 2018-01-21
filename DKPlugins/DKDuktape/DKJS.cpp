@@ -114,8 +114,8 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
 	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
-	DKDuktape::AttachFunction("GetTicks", DKJS::GetTicks);
-	DKDuktape::AttachFunction("GetFrames", DKJS::GetFrames);
+	DKDuktape::AttachFunction("DK_GetTicks", DKJS::GetTicks);
+	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
 
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
