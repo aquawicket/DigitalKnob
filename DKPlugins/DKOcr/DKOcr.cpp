@@ -8,10 +8,9 @@
 void DKOcr::Init()
 {
 	char* outText;
-
 	tesseract::TessBaseAPI *api = new tesseract::TessBaseAPI();
-	// Initialize tesseract-ocr with English, without specifying tessdata path
-	if (api->Init(NULL, "eng")){
+	DKString datapath = DKFile::local_assets+"DKOcr";
+	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
 		DKLog("Could not initialize tesseract.\n", DKERROR);
 		return;
 	}
