@@ -2,7 +2,7 @@
 #ifndef DKOcr_H
 #define DKOcr_H
 
-#include "RtMidi.h"
+#include "api/baseapi.h"
 #include "DK/DK.h"
 
 //////////////////////////////////////
@@ -11,7 +11,9 @@ class DKOcr : public DKObjectT<DKOcr>
 public:
 	void Init();
 	void End();
+	static bool ImageToText(DKString& file, DKString& text);
 
+	static tesseract::TessBaseAPI* api;
 };
 
 
