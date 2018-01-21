@@ -56,14 +56,26 @@ if(NOT EXISTS ${PROJECT_SOURCE_DIR}/.cppan)
 
     find_package(PkgConfig)
 
-	##IF(TIFF_FOUND)
+	##ADDED BY DIGITALKNOB
+	IF(TIFF_INCLUDE_DIR)
 		include_directories(${TIFF_INCLUDE_DIR})
+	ENDIF()
+	IF(TIFF_INCLUDE_DIR2)
 		include_directories(${TIFF_INCLUDE_DIR2})
+	ENDIF()
+	IF(PNG_PNG_INCLUDE_DIR)
 		include_directories(${PNG_PNG_INCLUDE_DIR})
+	ENDIF()
+	IF(PNG_PNG_INCLUDE_DIR2)
 		include_directories(${PNG_PNG_INCLUDE_DIR2})
+	ENDIF()
+	IF(JPEG_INCLUDE_DIR)
 		include_directories(${JPEG_INCLUDE_DIR})
+	ENDIF()
+	IF(JPEG_INCLUDE_DIR2)
 		include_directories(${JPEG_INCLUDE_DIR2})
-	##ENDIF()
+	ENDIF()
+	##ADDED BY DIGITALKNOB
 	
     if (PKG_CONFIG_FOUND)
     pkg_check_modules(WEBP libwebp)
