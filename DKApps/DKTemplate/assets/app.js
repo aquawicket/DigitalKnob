@@ -32,7 +32,7 @@ function app_LoadPage()
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
-		//DKCreate("DKOcr", function(){});
+		DKCreate("DKOcr", function(){});
 		/*
 		DKCreate("DKAudio/DKAudio.js", function(){
 			DKCreate("DKAudio/DKAudioPlayer.js", function(){
