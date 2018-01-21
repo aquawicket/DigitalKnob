@@ -17,7 +17,7 @@ void DKOcr::Init()
 	}
 
 	// Open input image with leptonica library
-	DKString file = DKFile::local_assets+"test.tif";
+	DKString file = DKFile::local_assets+"DKOcr/test.tif";
 	Pix *image = pixRead(file.c_str());
 	api->SetImage(image);
 	// Get OCR result
