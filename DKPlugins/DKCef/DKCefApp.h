@@ -94,14 +94,18 @@ public:
 		}
 		
 		if(!DKV8::ctx){ //multi process will fail
-			//printf("DKV8::AttachFunction(): ctx invalid\n");
+			DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
 			return;
 		}
 		
 		DKV8::funcs.push_back(name);
-		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
-		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		//CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
+		//DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
 		//printf("registered: %s\n", name.c_str());
+
+		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[DKV8::funcs.size-1].c_str(), DKV8::v8handler);
+		DKV8::ctx->SetValue(DKV8::funcs[DKV8::funcs.size-1].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
+		DKLog("registered: "+DKV8::funcs[DKV8::funcs.size-1].c_str()+"\n", DKINFO);
 	}
 	
 	///////////////////////////////////////////////////////
