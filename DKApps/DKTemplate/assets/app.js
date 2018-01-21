@@ -1,8 +1,8 @@
-var USE_CEF = 0;     //Desktop
+var USE_CEF     = 1; //Desktop
 var USE_WEBVIEW = 1; //Android, iOS?
-var USE_SDL = 1;     //Use with caution
-var USE_ROCKET = 1;  //Use with caution
-var DKApp_url = "file:///"+DKAssets_LocalAssets()+"index.html";
+var USE_SDL     = 0; //Use with caution
+var USE_ROCKET  = 0; //Use with caution
+var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://digitalknob.com/DKTemplate";
 
 DKCreate("DK/init.js", function(){});
@@ -32,7 +32,8 @@ function app_LoadPage()
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
-		DKCreate("DKOcr", function(){});
+		DKCreate("DKOcr");
+		DKOcr_ImageToText("C:/digitalknob/DKApps/DKTemplate/assets/DKOcr/test.tif");
 		/*
 		DKCreate("DKAudio/DKAudio.js", function(){
 			DKCreate("DKAudio/DKAudioPlayer.js", function(){
