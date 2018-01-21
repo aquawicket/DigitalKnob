@@ -961,8 +961,8 @@ int DKJS::GetFps(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////
-int GetTicks(duk_context* ctx)
+////////////////////////////////////
+int DKJS::GetTicks(duk_context* ctx)
 {
 	long ticks;
 	if(!DKUtil::GetTicks(ticks)){ return 0; }
@@ -970,8 +970,8 @@ int GetTicks(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////
-int GetFrames(duk_context* ctx)
+/////////////////////////////////////
+int DKJS::GetFrames(duk_context* ctx)
 {
 	long frames;
 	if(!DKUtil::GetFrames(frames)){ return 0; }
