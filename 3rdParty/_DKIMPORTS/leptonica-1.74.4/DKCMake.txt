@@ -1,6 +1,5 @@
-IF(NOT MAC)
-	DKDEPEND(tiff-4.0.3)
-ENDIF()
+DKDEPEND(tiff-4.0.3)
+
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/leptonica-1.74.4.zip leptonica-1.74.4)
