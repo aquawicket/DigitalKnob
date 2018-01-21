@@ -1,7 +1,3 @@
-IF(IOS)
-	RETURN()
-ENDIF()
-
 DKDEPEND(tesseract-3.05)
 
 DKPLUGIN(DKOcr)
