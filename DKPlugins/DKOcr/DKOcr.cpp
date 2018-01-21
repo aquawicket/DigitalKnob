@@ -8,8 +8,8 @@ tesseract::TessBaseAPI* DKOcr::api;
 //////////////////
 void DKOcr::Init()
 {
-	DKCreate("DKMidiJS");
-	DKCreate("DKMidiV8");
+	DKCreate("DKOcrJS");
+	DKCreate("DKOcrV8");
 	
 	api = new tesseract::TessBaseAPI();
 	DKString datapath = DKFile::local_assets+"DKOcr";
