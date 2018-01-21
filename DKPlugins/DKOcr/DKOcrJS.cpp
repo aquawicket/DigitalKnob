@@ -12,40 +12,52 @@ void DKOcrJS::Init()
 	DKDuktape::AttachFunction("DKOcr_TestString", DKOcrJS::TestString);
 	DKDuktape::AttachFunction("DKOcr_TestReturnInt", DKOcrJS::TestReturnInt);
 	DKDuktape::AttachFunction("DKOcr_TestReturnString", DKOcrJS::TestReturnString);
+
+	DKDuktape::AttachFunction("DKOcr_ImageToText", DKOcrJS::ImageToText);
 }
 
-
-/////////////////////////////////////////
+//////////////////////////////////////
 int DKOcrJS::TestInt(duk_context* ctx)
 {
 	int input = duk_require_int(ctx, 0);
-	int output = DKOcr::TestInt(input);
+	int output = input;
 	duk_push_int(ctx, output);
 	return 1;
 }
 
-////////////////////////////////////////////
+/////////////////////////////////////////
 int DKOcrJS::TestString(duk_context* ctx)
 {
 	DKString input = duk_require_string(ctx, 0);
-	DKString output = DKOcr::TestString(input);
+	DKString output = input;
 	duk_push_string(ctx, output.c_str());
 	return 1;
 }
 
-///////////////////////////////////////////////
+////////////////////////////////////////////
 int DKOcrJS::TestReturnInt(duk_context* ctx)
 {
-	int rval = DKOcr::TestReturnInt();
+	int rval = 12345;
 	duk_push_int(ctx, rval);
 	return 1;
 }
 
-//////////////////////////////////////////////////
+///////////////////////////////////////////////
 int DKOcrJS::TestReturnString(duk_context* ctx)
 {
-	DKString rval = DKOcr::TestReturnString();
+	DKString rval = "test string";
 	duk_push_string(ctx, rval.c_str());
+	return 1;
+}
+
+
+//////////////////////////////////////////
+int DKOcrJS::ImageToText(duk_context* ctx)
+{
+	DKString file = duk_require_string(ctx, 0);
+	DKString text;
+	if(!DKOcr::ImageToText(file, text)){ return 0; }
+	duk_push_string(ctx, text.c_str());
 	return 1;
 }
 

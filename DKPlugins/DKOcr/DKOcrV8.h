@@ -16,6 +16,8 @@ public:
 	static bool TestString(CefArgs args, CefReturn retval);
 	static bool TestReturnInt(CefArgs args, CefReturn retval);
 	static bool TestReturnString(CefArgs args, CefReturn retval);
+
+	static bool ImageToText(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKOcrV8, false);

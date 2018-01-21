@@ -12,6 +12,8 @@ void DKOcrV8::Init()
 	DKV8::AttachFunction("DKOcr_TestString", DKOcrV8::TestString);
 	DKV8::AttachFunction("DKOcr_TestReturnInt", DKOcrV8::TestReturnInt);
 	DKV8::AttachFunction("DKOcr_TestReturnString", DKOcrV8::TestReturnString);
+
+	DKV8::AttachFunction("DKOcr_ImageToText", DKOcrV8::ImageToText);
 }
 
 ///////////////////
@@ -21,7 +23,7 @@ void DKOcrV8::End()
 }
 
 
-////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 bool DKOcrV8::TestInt(CefArgs args, CefReturn retval)
 {
 	DKLog("DKOcrV8::TestInt(CefArgs,CefReturn)\n", DKINFO);
@@ -32,7 +34,7 @@ bool DKOcrV8::TestInt(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 bool DKOcrV8::TestString(CefArgs args, CefReturn retval)
 {
 	DKLog("DKOcrV8::TestString(CefArgs,CefReturn)\n", DKINFO);
@@ -43,7 +45,7 @@ bool DKOcrV8::TestString(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKOcrV8::TestReturnInt(CefArgs args, CefReturn retval)
 {
 	DKLog("DKOcrV8::TestReturnInt(CefArgs,CefReturn)\n", DKINFO);
@@ -53,13 +55,24 @@ bool DKOcrV8::TestReturnInt(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 bool DKOcrV8::TestReturnString(CefArgs args, CefReturn retval)
 {
 	DKLog("DKOcrV8::TestReturnString(CefArgs,CefReturn)\n", DKINFO);
 
 	DKString result = "test string";
 	retval->SetString(0, result);
+	return true;
+}
+
+
+/////////////////////////////////////////////////////////
+bool DKOcrV8::ImageToText(CefArgs args, CefReturn retval)
+{
+	DKString file = args->GetString(0);
+	DKString text;
+	if(!DKOcr::ImageToText(file, text)){ return false; }
+	retval->SetString(0, text);
 	return true;
 }
 

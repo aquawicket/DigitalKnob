@@ -15,6 +15,8 @@ public:
 	static int TestString(duk_context* ctx);
 	static int TestReturnInt(duk_context* ctx);
 	static int TestReturnString(duk_context* ctx);
+
+	static int ImageToText(duk_context* ctx);
 };
 
 
