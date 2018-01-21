@@ -80,7 +80,7 @@ else()
         -DHAVE_LIBWEBP=1
         -DHAVE_LIBZ=1
 
-        -DHAVE_LIBJP2K=1
+        -DHAVE_LIBJP2K=0
         -DLIBJP2K_HEADER="openjpeg.h"
     )
 endif()
