@@ -56,6 +56,10 @@ if(NOT EXISTS ${PROJECT_SOURCE_DIR}/.cppan)
 
     find_package(PkgConfig)
 
+	##IF(TIFF_FOUND)
+		include_directories(${TIFF_INCLUDE_DIR})
+	##ENDIF()
+	
     if (PKG_CONFIG_FOUND)
     pkg_check_modules(WEBP libwebp)
     pkg_check_modules(JP2K libopenjp2)
