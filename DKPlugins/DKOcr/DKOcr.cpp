@@ -8,6 +8,9 @@ tesseract::TessBaseAPI* DKOcr::api;
 //////////////////
 void DKOcr::Init()
 {
+	DKCreate("DKMidiJS");
+	DKCreate("DKMidiV8");
+	
 	api = new tesseract::TessBaseAPI();
 	DKString datapath = DKFile::local_assets+"DKOcr";
 	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
