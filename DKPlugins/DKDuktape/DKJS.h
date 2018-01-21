@@ -86,6 +86,8 @@ public:
 	static int Value(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
 	static int GetFps(duk_context* ctx);
+	static int GetTicks(duk_context* ctx);
+	static int GetFrames(duk_context* ctx);
 
 	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static int VirtualMemory(duk_context* ctx);

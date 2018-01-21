@@ -114,6 +114,8 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
 	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
+	DKDuktape::AttachFunction("GetTicks", DKJS::GetTicks);
+	DKDuktape::AttachFunction("GetFrames", DKJS::GetFrames);
 
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
@@ -959,7 +961,23 @@ int DKJS::GetFps(duk_context* ctx)
 	return 1;
 }
 
+//////////////////////////////
+int GetTicks(duk_context* ctx)
+{
+	long ticks;
+	if(!DKUtil::GetTicks(ticks)){ return 0; }
+	duk_push_int(ctx, ticks);
+	return 1;
+}
 
+///////////////////////////////
+int GetFrames(duk_context* ctx)
+{
+	long frames;
+	if(!DKUtil::GetFrames(frames)){ return 0; }
+	duk_push_int(ctx, frames);
+	return 1;
+}
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 /////////////////////////////////////////
