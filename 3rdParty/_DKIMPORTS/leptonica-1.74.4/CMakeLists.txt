@@ -67,7 +67,7 @@ if(NOT EXISTS ${PROJECT_SOURCE_DIR}/.cppan)
 	
     if (PKG_CONFIG_FOUND)
     pkg_check_modules(WEBP libwebp)
-    pkg_check_modules(JP2K libopenjp2)
+    #pkg_check_modules(JP2K libopenjp2)
     endif()
 else()
     add_subdirectory(.cppan)
@@ -81,7 +81,7 @@ else()
         -DHAVE_LIBZ=1
 
         -DHAVE_LIBJP2K=0
-        -DLIBJP2K_HEADER="openjpeg.h"
+        #-DLIBJP2K_HEADER="openjpeg.h"
     )
 endif()
 
