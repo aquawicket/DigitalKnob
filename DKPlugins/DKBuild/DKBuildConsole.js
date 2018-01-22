@@ -43,26 +43,22 @@ function DKBuildConsole_ChooseUpdate()
 	
 	//DKLog("Key pressed: "+String(key)+"\n");
 	
-	if(key == 27){
+	if(key == 27){ //Esc key
 		DK_Exit();
 	}
-	if(key == 121){ //yes
-		//DKBuild_SvnUpdate();
+	if(key == 121){ //y key
 		DKBuild_GitUpdate();
 	}
-	if(key == 99){ //SVN commit  //not shown
-		//DKBuild_SvnCommit();
+	if(key == 99){ //c key
 		DKBuild_GitCommit();
 	}
-	if(key == 114){
+	if(key == 114){ //r key
 		DKBuild_ResetAppsPlugins();
-		//DKBuild_SvnUpdate();
 		DKBuild_GitUpdate();
 	}
-	if(key == 120){ // x
+	if(key == 120){ //x key
 		DKBuild_Reset3rdParty();
 		DKBuild_ResetAppsPlugins();
-		//DKBuild_SvnUpdate();
 		DKBuild_GitUpdate();
 	}
 }
