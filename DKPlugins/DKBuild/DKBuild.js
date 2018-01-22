@@ -985,12 +985,13 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-			//if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-				var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
-			//}
-			//if(DK_GetOS() == "Linux" || DK_GetOS() == "Mac"){
-			//	var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
-			//}
+			var rtvalue;
+			if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
+				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			}
+			if(DK_GetOS() == "Linux" || DK_GetOS() == "Mac"){
+				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
