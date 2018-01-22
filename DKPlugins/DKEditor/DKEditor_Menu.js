@@ -22,6 +22,8 @@ function DKEditor_Menu_Init()
 	DKAddEvent("DKEditor_Menu_RefreshIcons", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Command_Input", "change", DKEditor_Menu_OnEvent);
 	
 	/*
 	DKCreate("DKTooltip/DKTooltip.js", function(){});
@@ -44,8 +46,12 @@ function DKEditor_Menu_End()
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	//DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
+	if(DK_Id(event, "DKEditor_Menu_Command_Input")){
+		//TODO
+		DKLog("TODO\n", DKINFO);
+	}
 	if(DK_Id(event, "DKEditor_Menu_Refresh")){
 		DKDebug_Refresh();
 	}
