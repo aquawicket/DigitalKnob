@@ -330,9 +330,9 @@ function DKBuild_OsCheck()
 		if(OS == "ios-simulator"){
 			DKLog(OS+" can only be build from an OSX machine.\n"); return false;
 		}
-		if(OS == "andoroid"){
-			DKLog(OS+" can only be build from a Windows machine.\n"); return false;
-		}
+		//if(OS == "andoroid"){
+		//	DKLog(OS+" can only be build from a Windows machine.\n"); return false;
+		//}
 	}
 	if(DK_GetOS() == "Android"){
 		DKLog("Android is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
@@ -968,7 +968,7 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
@@ -979,7 +979,7 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
@@ -995,7 +995,7 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
@@ -1006,7 +1006,7 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
