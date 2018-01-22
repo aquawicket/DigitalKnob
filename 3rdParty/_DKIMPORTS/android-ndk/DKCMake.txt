@@ -16,7 +16,7 @@ ENDIF()
 IF(UNIX)
 IF(NOT APPLE)
 	##TODO - test
-	IF(NOT EXISTS ${DIGITALKNOB}/Download/android-ndk-r10e-linux-x86_64)
+	IF(NOT EXISTS ${DIGITALKNOB}/Download/android-ndk-r10e)
 		DKSETPATH(${DIGITALKNOB}/Download)
 		DKDOWNLOAD(${DKONLINE}/Tools/android-ndk-r10e-linux-x86_64.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/android-ndk-r10e-linux-x86_64.zip ${DIGITALKNOB}/Download)
