@@ -1,5 +1,10 @@
 //Validate settings
-if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){ USE_CEF = 0; }
+if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){
+	USE_CEF = 0;
+	USE_SDL = 1;
+	USE_ROCKET = 1;
+	USE_WEBVIEW = 0; //TODO
+}
 else{ USE_WEBVIEW = 0; }
 
 //////////////////////

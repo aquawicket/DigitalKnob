@@ -32,8 +32,8 @@ function app_LoadPage()
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
-		DKCreate("DKOcr");
-		DKOcr_ImageToText("C:/digitalknob/DKApps/DKTemplate/assets/DKOcr/test.tif");
+		//DKCreate("DKOcr");
+		//DKOcr_ImageToText("C:/digitalknob/DKApps/DKTemplate/assets/DKOcr/test.tif");
 		/*
 		DKCreate("DKAudio/DKAudio.js", function(){
 			DKCreate("DKAudio/DKAudioPlayer.js", function(){
