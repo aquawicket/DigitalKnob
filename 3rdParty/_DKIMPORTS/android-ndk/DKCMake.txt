@@ -1,7 +1,3 @@
-IF(NOT ANDROID)
-	RETURN()
-ENDIF()
-
 IF(WIN)
 	IF(NOT EXISTS C:/android-ndk-r10d/ndk-build.cmd)
 		DKSETPATH(${DIGITALKNOB}/Download)
