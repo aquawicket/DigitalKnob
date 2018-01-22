@@ -12,7 +12,7 @@ var DKPATH = "";
 var SVN = "";
 var GIT = "";
 var CMAKE = "";
-var NDK = "C:/android-ndk-r10d";
+var NDK = "";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
 var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
@@ -35,6 +35,8 @@ function DKBuild_Init()
 		GIT = DKFile_GetShortName(GIT);
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
+		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
+		NDK = DKFile_GetShortName(NDK);
 	}
 	if(DK_GetOS() == "Win64"){
 		DKPATH = "C:/digitalknob";
@@ -44,18 +46,22 @@ function DKBuild_Init()
 		GIT = DKFile_GetShortName(GIT);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
+		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
+		NDK = DKFile_GetShortName(NDK);
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		GIT = "git";
 		SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
+		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aqualinux/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
 		GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
+		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
 	}
 
 	/*
@@ -979,7 +985,12 @@ function DKBuild_DoResults()
 			}
 			DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			//if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
+				var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+			//}
+			//if(DK_GetOS() == "Linux" || DK_GetOS() == "Mac"){
+			//	var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH);
+			//}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
