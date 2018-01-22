@@ -2,12 +2,21 @@ IF(NOT ANDROID)
 	RETURN()
 ENDIF()
 
-IF(NOT EXISTS C:/android-ndk-r10d/ndk-build.cmd)
-	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Tools/android-ndk-r10d-windows-x86.exe)
-	DKSETPATH(C:/)
-	DKSET(QUEUE_BUILD ON)
-	ANDROID_COMMAND(${DIGITALKNOB}/Download/android-ndk-r10d-windows-x86.exe)
+IF(WIN)
+	IF(NOT EXISTS C:/android-ndk-r10d/ndk-build.cmd)
+		DKSETPATH(${DIGITALKNOB}/Download)
+		DKDOWNLOAD(${DKONLINE}/Tools/android-ndk-r10d-windows-x86.exe)
+		DKSETPATH(C:/)
+		DKSET(QUEUE_BUILD ON)
+		ANDROID_COMMAND(${DIGITALKNOB}/Download/android-ndk-r10d-windows-x86.exe)
+	ENDIF()
+	GET_FILENAME_COMPONENT(ANDROID_NDK "C:/android-ndk-r10d" ABSOLUTE)
 ENDIF()
 
-GET_FILENAME_COMPONENT(ANDROID_NDK "C:/android-ndk-r10d" ABSOLUTE)
+IF(MAC)
+	##TODO
+ENDIF()
+
+IF(LINUX)
+	##TODO
+ENDIF()
