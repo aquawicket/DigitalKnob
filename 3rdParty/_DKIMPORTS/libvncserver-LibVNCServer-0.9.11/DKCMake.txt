@@ -31,8 +31,8 @@ LINUX_RELEASE_LIB(${VNCSERVER}/${OS}/Release/libvncserver.a)
 DKSETPATH(${VNCSERVER}/win32/Debug)
 WIN32_BASH("#!/bin/bash
 cd ${VNCSERVER}/win32/Debug
-export PATH=/c/mingw/mingw32/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 cd ${VNCSERVER}
 ./autogen.sh
 cd ${VNCSERVER}/win32/Debug
@@ -44,8 +44,8 @@ exit \n")
 DKSETPATH(${VNCSERVER}/win32/Release)
 WIN32_BASH("#!/bin/bash 
 cd ${VNCSERVER}/win32/Release
-export PATH=/c/mingw/mingw32/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 cd ${VNCSERVER}
 ./autogen.sh
 cd ${VNCSERVER}/win32/Release

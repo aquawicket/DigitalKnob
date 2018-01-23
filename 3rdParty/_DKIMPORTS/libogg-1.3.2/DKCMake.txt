@@ -20,8 +20,8 @@ ANDROID_RELEASE_LIB(${OGG}/${OS}/Release/obj/local/armeabi-v7a/libogg.a)
 DKSETPATH(${OGG}/win32/Debug)
 WIN32_BASH("#!/bin/bash 
 cd ${OGG}/win32/Debug 
-export PATH=/c/mingw/mingw32/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH 
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
@@ -30,8 +30,8 @@ DKCOPY(${OGG}/win32/Debug/src/.libs/libogg.a ${OGG}/win32/Debug/src/.libs/libogg
 DKSETPATH(${OGG}/win32/Release)
 WIN32_BASH("#!/bin/bash 
 cd ${OGG}/win32/Release 
-export PATH=/c/mingw/mingw32/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH 
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
@@ -41,8 +41,8 @@ DKCOPY(${OGG}/win32/Release/src/.libs/libogg.a ${OGG}/win32/Release/src/.libs/li
 DKSETPATH(${OGG}/win64/Debug)
 WIN64_BASH("#!/bin/bash 
 cd ${OGG}/win64/Debug 
-export PATH=/c/mingw/mingw64/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH 
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")
@@ -51,8 +51,8 @@ DKCOPY(${OGG}/win64/Debug/src/.libs/libogg.a ${OGG}/win64/Debug/src/.libs/libogg
 DKSETPATH(${OGG}/win64/Release)
 WIN64_BASH("#!/bin/bash 
 cd ${OGG}/win64/Release 
-export PATH=/c/mingw/mingw64/bin:$PATH 
-export PATH=/c/mingw/msys/bin:$PATH 
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static 
 make 
 exit \n")

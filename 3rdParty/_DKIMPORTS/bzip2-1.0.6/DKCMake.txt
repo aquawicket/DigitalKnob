@@ -28,13 +28,13 @@ IF(WIN_32)
 
 WIN32_BASH("#!/bin/bash\;
 cd ${BZIP2}/win32\;
-export PATH=/c/mingw/mingw32/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
 	DKRENAME(${BZIP2}/win32/libbz2.a ${BZIP2}/win32/libbz2.lib)
-	DKCOPY(C:/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win32 TRUE)
+	DKCOPY(${3RDPARTY}/mingw/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win32 TRUE)
 	DKRENAME(${BZIP2}/win32/libgcc.a ${BZIP2}/win32/libgcc.lib)
 ENDIF()
 
@@ -46,13 +46,13 @@ IF(WIN_64)
 
 WIN64_BASH("#!/bin/bash\;
 cd ${BZIP2}/win64\;
-export PATH=/c/mingw/mingw64/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 make CFLAGS='-static-libgcc'\;
 exit\;")
 
 	DKRENAME(${BZIP2}/win64/libbz2.a ${BZIP2}/win64/libbz2.lib)
-	DKCOPY(C:/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win64 TRUE)
+	DKCOPY(${3RDPARTY}/mingw/mingw64/lib/gcc/x86_64-w64-mingw32/4.9.2/libgcc.a ${BZIP2}/win64 TRUE)
 	DKRENAME(${BZIP2}/win64/libgcc.a ${BZIP2}/win64/libgcc.lib)
 ENDIF()
 

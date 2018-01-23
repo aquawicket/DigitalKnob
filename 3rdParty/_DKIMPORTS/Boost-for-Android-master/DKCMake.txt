@@ -49,6 +49,6 @@ ENDIF()
 ### COMPILE ###
 ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
-export PATH=/c/mingw/mingw32/bin:$PATH
-export PATH=/c/mingw/msys/bin:$PATH
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ./build-android.sh --boost=1.53.0 ${ANDROID_NDK}")

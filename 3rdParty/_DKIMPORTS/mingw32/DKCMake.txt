@@ -3,8 +3,11 @@ IF(NOT WIN32)
 	RETURN()
 ENDIF()
 
-IF(NOT EXISTS C:/mingw/mingw32)
+IF(NOT EXISTS ${3RDPARTY}/mingw/mingw32)
 	DKSETPATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(http://digitalknob.com/Download/Tools/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z)
-	DKEXTRACT(${DIGITALKNOB}/Download/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z C:/mingw)
+	DKEXTRACT(${DIGITALKNOB}/Download/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z ${3RDPARTY}/mingw)
 ENDIF()
+
+DKSET(MINGW32 ${3RDPARTY}/mingw/mingw32)
+string(REPLACE "C:" "c" MINGW32 ${MINGW32})

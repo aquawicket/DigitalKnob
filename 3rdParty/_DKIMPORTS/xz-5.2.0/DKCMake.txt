@@ -20,8 +20,8 @@ LINUX_RELEASE_LIB(${XZ}/${OS}/Release/src/liblzma/.libs/liblzma.a)
 DKSETPATH(${XZ}/win32/Debug)
 WIN32_BASH("#!/bin/bash\;
 cd ${XZ}/win32/Debug\;
-export PATH=/c/mingw/mingw32/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static\;
 make\;
 exit\;")
@@ -30,8 +30,8 @@ DKRENAME(${XZ}/win32/Debug/src/liblzma/.libs/liblzma.a ${XZ}/win32/Debug/src/lib
 DKSETPATH(${XZ}/win32/Release)
 WIN32_BASH("#!/bin/bash\;
 cd ${XZ}/win32/Release\;
-export PATH=/c/mingw/mingw32/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static\;
 make\;
 exit\;")
@@ -41,8 +41,8 @@ DKRENAME(${XZ}/win32/Release/src/liblzma/.libs/liblzma.a ${XZ}/win32/Release/src
 DKSETPATH(${XZ}/win64/Debug)
 WIN64_BASH("#!/bin/bash\;
 cd ${XZ}/win64/Debug\;
-export PATH=/c/mingw/mingw64/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
 make\;
 exit\;")
@@ -51,8 +51,8 @@ DKRENAME(${XZ}/win64/Debug/src/liblzma/.libs/liblzma.a ${XZ}/win64/Debug/src/lib
 DKSETPATH(${XZ}/win64/Release)
 WIN64_BASH("#!/bin/bash\;
 cd ${XZ}/win64/Release\;
-export PATH=/c/mingw/mingw64/bin:$PATH\;
-export PATH=/c/mingw/msys/bin:$PATH\;
+export PATH=/${MINGW64}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
 ../../configure --disable-shared --enable-static --build=x86_64-w64-mingw32\;
 make\;
 exit\;")
