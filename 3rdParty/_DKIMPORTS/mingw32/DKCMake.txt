@@ -10,4 +10,4 @@ IF(NOT EXISTS ${3RDPARTY}/mingw/mingw32)
 ENDIF()
 
 DKSET(MINGW32 ${3RDPARTY}/mingw/mingw32)
-string(REPLACE "C:" "c" MINGW32 ${MINGW32})
+string(REPLACE ":" "" MINGW32 ${MINGW32})
