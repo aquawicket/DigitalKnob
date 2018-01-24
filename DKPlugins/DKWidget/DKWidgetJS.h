@@ -12,8 +12,7 @@ class DKWidgetJS : public DKObjectT<DKWidgetJS>
 {
 public:
 	void Init();
-	static DKString htmlfile;
-
+	
 	static int AddDragHandle(duk_context* ctx);
 	static int AddResizeHandle(duk_context* ctx);
 	static int AppendChild(duk_context* ctx);
@@ -80,6 +79,8 @@ public:
 	static int Visible(duk_context* ctx);
 	static int WindowHeight(duk_context* ctx);
 	static int WindowWidth(duk_context* ctx);
+	
+	static DKString htmlfile;
 };
 
 

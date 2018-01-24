@@ -13,6 +13,7 @@ public:
 	
 	static int CloseBrowser(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);
+	static int Find(duk_context* ctx);
 	static int Focused(duk_context* ctx);
 	static int GetBrowsers(duk_context* ctx);
 	static int GetCurrentBrowser(duk_context* ctx);
@@ -30,7 +31,6 @@ public:
 	static int SetUrl(duk_context* ctx);
 	static int ShowDevTools(duk_context* ctx);
 	static int Stop(duk_context* ctx);
-	static int Find(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKCefJS, true)
