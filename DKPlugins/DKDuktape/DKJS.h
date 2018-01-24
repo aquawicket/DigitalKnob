@@ -25,7 +25,6 @@ public:
 	
 	static int Beep(duk_context* ctx);
 	static int CallFunc(duk_context* ctx);
-	static int SetVolume(duk_context* ctx);
 	static int ClearEvents(duk_context* ctx);
 	static int ClickImage(duk_context* ctx);
 	static int Crash(duk_context* ctx);
@@ -77,6 +76,7 @@ public:
 	static int SetClipboardFiles(duk_context* ctx);
 	static int SetCursorPos(duk_context* ctx);
 	static int SetFramerate(duk_context* ctx);
+	static int SetVolume(duk_context* ctx);
 	static int ShowConsole(duk_context* ctx);
 	static int Sleep(duk_context* ctx);
 	static int StopPropagation(duk_context* ctx);
