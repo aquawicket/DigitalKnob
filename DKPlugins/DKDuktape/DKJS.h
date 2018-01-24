@@ -27,6 +27,8 @@ public:
 	static int CallFunc(duk_context* ctx);
 	static int ClearEvents(duk_context* ctx);
 	static int ClickImage(duk_context* ctx);
+	static int CpuUsed(duk_context* ctx);
+	static int CpuUsedByApp(duk_context* ctx);
 	static int Crash(duk_context* ctx);
 	static int DoFrame(duk_context* ctx);
 	static int DoubleClick(duk_context* ctx);
@@ -37,7 +39,9 @@ public:
 	static int GetData(duk_context* ctx);
 	static int GetDate(duk_context* ctx);
 	static int GetEvents(duk_context* ctx);
+	static int GetFps(duk_context* ctx);
 	static int GetFramerate(duk_context* ctx);
+	static int GetFrames(duk_context* ctx);
 	static int GetId(duk_context* ctx);
 	static int GetJavascript(duk_context* ctx);
 	static int GetKey(duk_context* ctx);
@@ -50,6 +54,7 @@ public:
 	static int GetProcessList(duk_context* ctx);
 	static int GetScreenHeight(duk_context* ctx);
 	static int GetScreenWidth(duk_context* ctx);
+	static int GetTicks(duk_context* ctx);
 	static int GetTime(duk_context* ctx);
 	static int GetType(duk_context* ctx);
 	static int GetUsername(duk_context* ctx);
@@ -63,8 +68,12 @@ public:
 	static int KeyIsDown(duk_context* ctx);
 	static int LeftClick(duk_context* ctx);
 	static int LogGuiConsole(duk_context* ctx);
+	static int LowPowerMonitor(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);
 	static int MouseToImage(duk_context* ctx);
+	static int PhysicalMemory(duk_context* ctx);
+	static int PhysicalMemoryUsed(duk_context* ctx);
+	static int PhysicalMemoryUsedByApp(duk_context* ctx);
 	static int PressKey(duk_context* ctx);
 	static int PrintFunctions(duk_context* ctx);
 	static int ReleaseKey(duk_context* ctx);
@@ -82,26 +91,14 @@ public:
 	static int StopPropagation(duk_context* ctx);
 	static int StrokeKey(duk_context* ctx);
 	static int System(duk_context* ctx);
+	static int TurnOffMonitor(duk_context* ctx);
+	static int TurnOnMonitor(duk_context* ctx);
 	static int Type(duk_context* ctx);
 	static int Value(duk_context* ctx);
-	static int WaitForImage(duk_context* ctx);
-	static int GetFps(duk_context* ctx);
-	static int GetTicks(duk_context* ctx);
-	static int GetFrames(duk_context* ctx);
-
-	//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 	static int VirtualMemory(duk_context* ctx);
 	static int VirtualMemoryUsed(duk_context* ctx);
 	static int VirtualMemoryUsedByApp(duk_context* ctx);
-	static int PhysicalMemory(duk_context* ctx);
-	static int PhysicalMemoryUsed(duk_context* ctx);
-	static int PhysicalMemoryUsedByApp(duk_context* ctx);
-	static int CpuUsed(duk_context* ctx);
-	static int CpuUsedByApp(duk_context* ctx);
-
-	static int TurnOffMonitor(duk_context* ctx);
-	static int TurnOnMonitor(duk_context* ctx);
-	static int LowPowerMonitor(duk_context* ctx);
+	static int WaitForImage(duk_context* ctx);
 };
 
 
