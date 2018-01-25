@@ -143,9 +143,9 @@ bool DKUpdate::DoUpdate()
 	DKLog("DKUpdate::DoUpdate("+url+")\n", DKDEBUG);
 	DKString file;
 	DKFile::GetExeName(file);
-	DKString exepath;
-	DKFile::GetExePath(exepath);
-	DKFile::ChDir(exepath);
+	DKString apppath;
+	DKFile::GetExePath(apppath);
+	DKFile::ChDir(apppath);
 	DKString filename;
 	DKFile::GetFileName(url, filename);
 
