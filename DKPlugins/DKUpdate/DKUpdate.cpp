@@ -166,11 +166,11 @@ bool DKUpdate::DoUpdate()
 
 	//Apply .zip update
 	if(has(url,".zip")){
-		DKFile::Delete(exepath+"/"+filename+"_dl");
-		DKCurl::Get("DKCurlUpdate")->Download(url, exepath+"/"+filename+"_dl");
-		DKFile::Rename(exepath+"/"+filename+"_dl", filename, true);
-		DKArchive::Extract(exepath+"/"+filename, exepath);
-		DKFile::Delete(exepath+"/"+filename);
+		DKFile::Delete(apppath+"/"+filename+"_dl");
+		DKCurl::Get("DKCurlUpdate")->Download(url, apppath+"/"+filename+"_dl");
+		DKFile::Rename(apppath+"/"+filename+"_dl", filename, true);
+		DKArchive::Extract(apppath+"/"+filename, apppath);
+		DKFile::Delete(apppath+"/"+filename);
 		DKLog("\nUpdate finnished..  please restart app.\n", DKINFO);
 		return true;
 	}
@@ -184,7 +184,7 @@ bool DKUpdate::DoUpdate()
 	DKFile::Rename(file+"_dl",file,true);
 	DKString name = file;
 	DKFile::RemoveExtention(name);
-	DKFile::Delete(exepath + "/" + name +"/ASSETS"); //delete assets marker file
+	DKFile::Delete(apppath + "/" + name +"/ASSETS"); //delete assets marker file
 	DKLog("\nUpdate finnished..  please restart app.\n", DKINFO);
 	return true;
 }
