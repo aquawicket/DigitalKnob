@@ -11,7 +11,7 @@ public:
 	void Init();
 	void End();
 	
-	static int GetVolume();
+	static bool GetVolume(int& volume);
 	static void Mute();
 	static void OpenMusic(DKString& file);
 	static void Pause(DKString& file);

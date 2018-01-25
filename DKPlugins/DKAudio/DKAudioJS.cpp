@@ -68,7 +68,8 @@ int DKAudioJS::UnMute(duk_context* ctx)
 //////////////////////////////////////////
 int DKAudioJS::GetVolume(duk_context* ctx)
 {
-	int volume = DKAudio::GetVolume();
+	int volume;
+	if(!DKAudio::GetVolume(volume)){ return 0; }
 	duk_push_int(ctx, volume);
 	return 1;
 }

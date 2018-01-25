@@ -137,25 +137,22 @@ void DKAudio::UnMute()
 	DKLog("DKAudio::UnMute(): No UnMute funtion available \n", DKERROR);
 }
 
-////////////////////////
-int DKAudio::GetVolume()
+////////////////////////////////////
+bool DKAudio::GetVolume(int& volume)
 {
 	int output;
 	if(DKClass::HasFunc("DKSDLAudio::GetVolume")){
-		DKClass::CallFunc("DKSDLAudio::GetVolume", NULL, &output);
-		return output;
+		return DKClass::CallFunc("DKSDLAudio::GetVolume", NULL, &volume);
 	}
 	if(DKClass::HasFunc("DKSDLWav::GetVolume")){
-		DKClass::CallFunc("DKSDLWav::GetVolume", NULL, &output);
-		return output;
+		return DKClass::CallFunc("DKSDLWav::GetVolume", NULL, &volume);
 	}
 	if (DKClass::HasFunc("DKOSGAudio::GetVolume")) {
-		DKClass::CallFunc("DKOSGAudio::GetVolume", NULL, &output);
-		return output;
+		return DKClass::CallFunc("DKOSGAudio::GetVolume", NULL, &volume);
 	}
 
-	DKLog("DKAudio::GetVolume(): No GetVolume funtion available \n", DKERROR);
-	return 0;
+	DKLog("DKAudio::GetVolume(): No GetVolume funtion available \n", DKWARN);
+	return false;
 }
 
 ////////////////////////////////////
