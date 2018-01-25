@@ -862,7 +862,9 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	Rocket::Core::ElementList inputs;
 	element->GetElementsByTagName(inputs,"input");
 	for(unsigned int i=0; i<inputs.size(); i++){
-		if(inputs[i]->GetAttribute("type")->Get<DKCString>() != "text"){ continue; }
+		Rocket::Core::Variant* variant = inputs[i]->GetAttribute("type");
+		if(!variant){ continue; }
+		if(variant->Get<DKCString>() != "text"){ continue; }
 		Rocket::Controls::ElementTextSelection* ele = static_cast<Rocket::Controls::ElementTextSelection*>(inputs[i]);
 		Rocket::Core::ElementText* ti = static_cast<Rocket::Core::ElementText*>(ele->widget->selected_text_element);
 		Rocket::Controls::WidgetTextInput* widget = reinterpret_cast<Rocket::Controls::WidgetTextInput*>(ti);
