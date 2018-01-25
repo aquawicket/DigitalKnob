@@ -28,9 +28,9 @@ function app_LoadPage()
 		DKCreate("DKSDLText"); //SDL fps counter
 		DKLog("width = "+DKWindow_GetWidth()+"\n");
 		DKLog("height = "+DKWindow_GetHeight()+"\n");
-		DKCreate("DKNotepad/DKNotepad.js", function(){
-			DKFrame_Widget("DKNotepad/DKNotepad.html");
-		});
+		//DKCreate("DKNotepad/DKNotepad.js", function(){
+		//	DKFrame_Widget("DKNotepad/DKNotepad.html");
+		//});
 	});
 	});
 	});
