@@ -179,6 +179,7 @@ bool DKSDLAudio::GetDuration(void* input, void* output)
 //////////////////////////
 void DKSDLAudio::Process()
 {
+	/*
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
@@ -186,7 +187,9 @@ void DKSDLAudio::Process()
 			DKEvent::SendEvent("GLOBAL", "timeupdate", "");
 		}
 	}
-	else if(!Mix_PlayingMusic()){
+	else 
+	*/
+	if(!Mix_PlayingMusic()){
 		//FIXME: !!!  PlaySound will call this constantly !!!
 		//DKLog("!Mix_PlayingMusic()\n", DKDEBUG);
 		Mix_RewindMusic();
