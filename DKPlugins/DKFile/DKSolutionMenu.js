@@ -102,7 +102,7 @@ function DKSolutionMenu_OpenHere()
 	//DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n");
 	
 	var path = DKSolutionMenu_file;
-	path = path.replace(absolutepath,"");
+	//path = path.replace(absolutepath,"");
 	DKSolution_OpenHere(path);
 }
 
