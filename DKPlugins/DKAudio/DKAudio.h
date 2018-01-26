@@ -12,16 +12,16 @@ public:
 	void End();
 	
 	static bool GetVolume(int& volume);
-	static void Mute();
-	static void OpenMusic(DKString& file);
-	static void Pause(DKString& file);
-	static void PlaySound(DKString& file); //one shot
-	static void Resume(DKString& file);
-	static void SetVolume(int& volume);
-	static void UnMute();
-	static void SetTime(int& seconds);
-	static int GetTime();
-	static int GetDuration();
+	static bool Mute();
+	static bool OpenMusic(DKString& file);
+	static bool Pause(DKString& file);
+	static bool PlaySound(DKString& file); //one shot
+	static bool Resume(DKString& file);
+	static bool SetVolume(int& volume);
+	static bool UnMute();
+	static bool SetTime(int& seconds);
+	static bool GetTime(int& time);
+	static bool GetDuration(int& duration);
 };
 
 REGISTER_OBJECT(DKAudio, true);

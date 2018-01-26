@@ -23,7 +23,7 @@ void DKAudioJS::Init()
 int DKAudioJS::PlaySound(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::PlaySound(data);
+	if(!DKAudio::PlaySound(data)){ return 0; }
 	return 1;
 }
 
@@ -31,7 +31,7 @@ int DKAudioJS::PlaySound(duk_context* ctx)
 int DKAudioJS::OpenMusic(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::OpenMusic(data);
+	if(!DKAudio::OpenMusic(data)){ return 0; }
 	return 1;
 }
 
@@ -39,7 +39,7 @@ int DKAudioJS::OpenMusic(duk_context* ctx)
 int DKAudioJS::Pause(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::Pause(data);
+	if(!DKAudio::Pause(data)){ return 0; }
 	return 1;
 }
 
@@ -47,21 +47,21 @@ int DKAudioJS::Pause(duk_context* ctx)
 int DKAudioJS::Resume(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	DKAudio::Resume(data);
+	if(!DKAudio::Resume(data)){ return 0; }
 	return 1;
 }
 
 /////////////////////////////////////
 int DKAudioJS::Mute(duk_context* ctx)
 {
-	DKAudio::Mute();
+	if(!DKAudio::Mute()){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////////////
 int DKAudioJS::UnMute(duk_context* ctx)
 {
-	DKAudio::UnMute();
+	if(!DKAudio::UnMute()){ return 0; }
 	return 1;
 }
 
@@ -78,7 +78,7 @@ int DKAudioJS::GetVolume(duk_context* ctx)
 int DKAudioJS::SetVolume(duk_context* ctx)
 {
 	int volume = duk_require_int(ctx, 0);
-	DKAudio::SetVolume(volume);
+	if(!DKAudio::SetVolume(volume)){ return 0; }
 	return 1;
 }
 
@@ -86,14 +86,15 @@ int DKAudioJS::SetVolume(duk_context* ctx)
 int DKAudioJS::SetTime(duk_context* ctx)
 {
 	int time = duk_require_int(ctx, 0);
-	DKAudio::SetTime(time);
+	if(!DKAudio::SetTime(time)){ return 0; }
 	return 1;
 }
 
 ////////////////////////////////////////
 int DKAudioJS::GetTime(duk_context* ctx)
 {
-	int time = DKAudio::GetTime();
+	int time;
+	if(!DKAudio::GetTime(time)){ return 0; }
 	duk_push_int(ctx, time);
 	return 1;
 }
@@ -101,7 +102,8 @@ int DKAudioJS::GetTime(duk_context* ctx)
 ////////////////////////////////////////////
 int DKAudioJS::GetDuration(duk_context* ctx)
 {
-	int duration = DKAudio::GetDuration();
+	int duration;
+	if(!DKAudio::GetDuration(duration)){ return 0; }
 	duk_push_int(ctx, duration);
 	return 1;
 }
