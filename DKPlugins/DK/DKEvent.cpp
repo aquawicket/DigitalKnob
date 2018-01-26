@@ -135,19 +135,16 @@ bool DKEvent::RemoveEvents(const DKString& id, const DKString& type)
 ////////////////////////////////////////////////////
 bool DKEvent::RemoveEvents(const DKString& variable)
 {
-	//variable can be id or jsreturn
 	DKLog("DKEvent::RemoveEvents("+variable+")\n", DKDEBUG);
+
+	//variable can be id or jsreturn
+	DKString _variable = variable;
+	replace(_variable, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
 	for(unsigned int i=0; i < events.size(); ++i){
-		if(same(events[i]->id, variable) || same(events[i]->jsreturn, variable)){
+		if(same(events[i]->id, _variable) || same(events[i]->jsreturn, _variable)){
 			events.erase(events.begin()+i);
 			i--;
 		}
-		/*
-		if(same(events[i]->jsreturn, variable)){
-			events.erase(events.begin()+i);
-			i--;
-		}
-		*/
 	}
 	return true;
 }
