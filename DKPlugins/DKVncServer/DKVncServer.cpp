@@ -119,7 +119,7 @@ void DKVncServer::Init()
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
-	DKApp::SetFramerate(0);
+	//DKUtil::SetFramerate(0);
 }
 
 ///////////////////////
