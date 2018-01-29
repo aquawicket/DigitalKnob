@@ -1,4 +1,5 @@
 DKDEPEND(tesseract-3.05)
+DKDEPEND(podofo-0.9.5)
 
 DKPLUGIN(DKOcr)
 DKASSETS(DKOcr)
