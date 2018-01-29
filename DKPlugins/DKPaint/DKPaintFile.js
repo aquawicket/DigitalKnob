@@ -46,7 +46,12 @@ function DKPaintFile_OnEvent(event)
 ///////////////////////////
 function DKPaintFile_Open()
 {
-	DKLog("DKPaintFile_Open \n");
+	//DKLog("DKPaintFile_Open()\n");
+	
+	DKCreate("DKFile/DKOpenFile.js", function(){
+		DKFrame_Widget("DKFile/DKOpenFile.html");
+		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "GLOBAL,OpenFile,/,absolute"); // To -> DKOpenFile
+	});
 }
 
 ///////////////////////////

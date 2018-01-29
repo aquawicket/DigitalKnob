@@ -10,6 +10,7 @@ function DKPaint_Init()
 	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
 	DKAddEvent("DKPaint/DKPaint.html", "contextmenu", DKPaint_OnEvent);
 	DKAddEvent("DKPaint_File", "click", DKPaint_OnEvent);
+	DKAddEvent("GLOBAL", "OpenFile", DKPaint_OnEvent);
 }
 
 //////////////////////
@@ -35,6 +36,11 @@ function DKPaint_OnEvent(event)
 	}
 	if(DK_Id(event,"DKPaint_File")){
 		DKCreate("DKPaint/DKPaintFile.js", function(){});
+	}
+	if(DK_Type(event, "OpenFile")){
+		var file = DK_GetValue(event);
+		DKLog("OpenFile: "+file+" \n");
+		DKPaint_Open(file)
 	}
 }
 
