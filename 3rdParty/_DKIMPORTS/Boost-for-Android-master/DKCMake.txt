@@ -1,6 +1,9 @@
 DKDEPEND(android-ndk-r16b)
-DKDEPEND(mingw32)
-DKDEPEND(msys)
+
+IF(NOT APPLE)
+	DKDEPEND(mingw32)
+	DKDEPEND(msys)
+ENDIF()
 
 
 ### INSTALL ###
