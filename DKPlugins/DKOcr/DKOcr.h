@@ -2,7 +2,8 @@
 #ifndef DKOcr_H
 #define DKOcr_H
 
-#include "api/baseapi.h"
+#include "api/baseapi.h"  //tesseract
+#include "podofo.h"       //podofo
 #include "DK/DK.h"
 
 //////////////////////////////////////
