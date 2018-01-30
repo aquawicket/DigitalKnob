@@ -1,5 +1,4 @@
-##DKDEPEND(android-ndk-r10d)
-DKDEPEND(android-ndk-r16b)
+DKDEPEND(android-ndk-r10d)
 
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
@@ -8,8 +7,8 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
-DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
+DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-devel.zip Boost-for-Android-devel)
+DKSET(BOOST ${3RDPARTY}/Boost-for-Android-devel)
 
 ##FIXME: this get's overwritten
 IF(EXISTS ${BOOST}/boost_1_53_0)
