@@ -1,6 +1,6 @@
 IF(WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r16b/ndk-build.cmd")
-		DKINSTALL(${DKONLINE}/Tools/android-ndk-r16b-windows-x86.zip android-ndk-r16b)
+		DKINSTALL(${DKONLINE}/Tools/android-ndk-r16b-windows-x86_64.zip android-ndk-r16b)
 	ENDIF()
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r16b" ABSOLUTE)  #Get the windows short filepath
 ENDIF()

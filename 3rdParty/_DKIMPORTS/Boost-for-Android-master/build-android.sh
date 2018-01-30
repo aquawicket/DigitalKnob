@@ -284,7 +284,7 @@ case "$NDK_RN" in
 		;;
 	16.*)
 		TOOLCHAIN=${TOOLCHAIN:-llvm}
-		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/${PlatformOS}/bin/clang++
+		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/${PlatformOS}-x86_64/bin/clang++
 		TOOLSET=clang
 		;;
 	*)
