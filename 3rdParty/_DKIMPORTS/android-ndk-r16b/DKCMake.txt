@@ -1,10 +1,6 @@
 IF(WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r16b/ndk-build.cmd")
-		DKSETPATH(${DIGITALKNOB}/Download)
-		DKDOWNLOAD(${DKONLINE}/Tools/android-ndk-r16b-windows-x86.exe)
-		DKSETPATH(${3RDPARTY})
-		DKSET(QUEUE_BUILD ON)
-		ANDROID_COMMAND(${DIGITALKNOB}/Download/android-ndk-r16b-windows-x86.exe)
+		DKINSTALL(${DKONLINE}/Tools/android-ndk-r16b-windows-x86.zip android-ndk-r16b)
 	ENDIF()
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r16b" ABSOLUTE)  #Get the windows short filepath
 ENDIF()

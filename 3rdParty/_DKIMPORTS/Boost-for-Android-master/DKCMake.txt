@@ -1,11 +1,7 @@
+DKDEPEND(android-ndk-r16b)
 DKDEPEND(mingw32)
 DKDEPEND(msys)
 
-IF(NOT ANDROID)
-	RETURN()
-ENDIF()
-
-DKDEPEND(android-ndk)
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
