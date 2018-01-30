@@ -56,6 +56,7 @@ public:
 	}
 
 	static std::vector<boost::function<void()> > loop_funcs;
+	static std::vector<std::function<void()> > loop_funcs2; //TODO: Test std::function 
 };
 
 
