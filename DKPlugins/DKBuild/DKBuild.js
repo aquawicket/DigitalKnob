@@ -316,6 +316,12 @@ function DKBuild_OsCheck()
 		if(OS == "linux"){
 			DKLog(OS+" can only be build from a linux machine.\n"); return false;
 		}
+		if(OS == "linux32"){
+			DKLog(OS+" can only be build from a linux machine.\n"); return false;
+		}
+		if(OS == "linux64"){
+			DKLog(OS+" can only be build from a linux machine.\n"); return false;
+		}
 		//if(OS == "andoroid"){
 		//	DKLog(OS+" can only be build from a Windows machine.\n"); return false;
 		//}
