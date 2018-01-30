@@ -3,7 +3,10 @@ function DKOcr_Init()
 {
 	DKLog("DKOcr_Init()\n");
 	
-	DKCreate("DKNotepad/DKNotepad.html");
+	DKCreate("DKOcr/DKOcr.html");
+	DKCreate("DKNotePad/DKNotepad.js", function(){
+		DKWidget_AppendChild("DKOcr/DKOcr.html", "DKNotepad/DKNotepad.html");
+	});
 }
 
 ////////////////////
