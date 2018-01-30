@@ -1,6 +1,6 @@
 DKDEPEND(android-ndk-r16b)
 
-IF(NOT APPLE)
+IF(NOT UNIX)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
 ENDIF()
