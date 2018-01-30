@@ -16,7 +16,6 @@ IF(EXISTS ${BOOST}/boost_1_53_0)
 ELSE()
 	DKSETPATH(${BOOST})
 	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_53_0.tar.bz2)
-	##DKEXTRACT(${DIGITALKNOB}/Download/boost_1_53_0.tar.bz2 ${BOOST})
 ENDIF()
 
 ### LINK ###
@@ -59,7 +58,7 @@ ENDIF()
 
 IF(UNIX)
 DKSETPATH(${BOOST})
-SET(arg ./build-android.sh --boost=1.53.0 ${ANDROID_NDK})
+SET(arg ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
 EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
