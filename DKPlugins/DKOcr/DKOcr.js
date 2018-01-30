@@ -2,12 +2,16 @@
 function DKOcr_Init()
 {
 	DKLog("DKOcr_Init()\n");
+	
+	DKCreate("DKNotepad/DKNotepad.html");
 }
 
 ////////////////////
 function DKOcr_End()
 {
 	DKLog("DKOcr_End()\n");
+	
+	DKRemoveEvents(DKOcr_OnEvent);
 }
 
 /////////////////////////////
