@@ -11,13 +11,13 @@ DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
 ##FIXME: this get's overwritten
-#IF(EXISTS ${BOOST}/boost_1_53_0)
+IF(EXISTS ${BOOST}/boost_1_65_1)
 	###
-#ELSE()
-#	DKSETPATH(${BOOST})
-#	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_53_0.tar.bz2)
+ELSE()
+	DKSETPATH(${BOOST})
+	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_65_1.tar.bz2)
 	##DKEXTRACT(${DIGITALKNOB}/Download/boost_1_53_0.tar.bz2 ${BOOST})
-#ENDIF()
+ENDIF()
 
 ### LINK ###
 #ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53)
