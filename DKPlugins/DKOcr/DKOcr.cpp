@@ -33,6 +33,10 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 	Pix *image = pixRead(file.c_str());
 	api->SetImage(image);
 	outText = api->GetUTF8Text();
+	if(!outText){ 
+		DKLog("DKOcr::ImageToText(): outText invalid.\n",DKERROR);	
+		return false; 
+	}
 	text = outText;
 	DKLog("OCR output:\n"+text+"\n", DKINFO);
 	delete [] outText;
