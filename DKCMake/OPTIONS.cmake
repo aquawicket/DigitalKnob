@@ -6,7 +6,7 @@ SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #is this 
 
 SET(DKONLINE "http://DigitalKnob.com/Download")
 
-########### Determine the OS ####################
+########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 IF(${index} GREATER -1)
 	SET(WIN_32 ON)
