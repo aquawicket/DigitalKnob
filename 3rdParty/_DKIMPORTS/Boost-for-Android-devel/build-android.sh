@@ -82,7 +82,7 @@ do_download ()
 	CLEAN=yes
 }
 
-#LIBRARIES=--with-libraries=date_time,filesystem,program_options,regex,signals,system,thread,iostreams
+#LIBRARIES==date_time,filesystem,program_options,regex,signals,system,thread,iostreams,locale
 LIBRARIES=
 register_option "--with-libraries=<list>" do_with_libraries "Comma separated list of libraries to build."
 do_with_libraries () { 
@@ -115,7 +115,8 @@ echo "Building boost version: $BOOST_VER1.$BOOST_VER2.$BOOST_VER3"
 # Build constants
 # -----------------------
 
-BOOST_DOWNLOAD_LINK="http://downloads.sourceforge.net/project/boost/boost/$BOOST_VER1.$BOOST_VER2.$BOOST_VER3/boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2Fboost%2F${BOOST_VER1}.${BOOST_VER2}.${BOOST_VER3}%2F&ts=1291326673&use_mirror=garr"
+
+BOOST_DOWNLOAD_LINK="http://digitalknob.com/Download/Libs/boost_1_53_0.tar.bz2"
 BOOST_TAR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}.tar.bz2"
 BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 BUILD_DIR="./build/"
@@ -242,7 +243,7 @@ case "$NDK_RN" in
 		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/$PlatformOS-x86/bin/arm-linux-androideabi-g++
 		TOOLSET=gcc-androidR8b
 		;;
-	8e|9|9b|9c|9d|10)
+	8e|9|9b|9c|9d)
 		TOOLCHAIN=${TOOLCHAIN:-arm-linux-androideabi-4.6}
 		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/$PlatformOS-x86/bin/arm-linux-androideabi-g++
 		TOOLSET=gcc-androidR8e
@@ -262,11 +263,11 @@ case "$NDK_RN" in
 		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/${PlatformOS}-x86_64/bin/arm-linux-androideabi-g++
 		TOOLSET=gcc-androidR8e
 		;;
-	"10 (64-bit)"|"10b (64-bit)")
+	"10 (64-bit)"|"10b (64-bit)"|"10c (64-bit)"|"10d (64-bit)")
 		TOOLCHAIN=${TOOLCHAIN:-arm-linux-androideabi-4.6}
-                CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/${PlatformOS}-x86_64/bin/arm-linux-androideabi-g++
-                TOOLSET=gcc-androidR8e
-                ;;
+		CXXPATH=$AndroidNDKRoot/toolchains/${TOOLCHAIN}/prebuilt/${PlatformOS}-x86_64/bin/arm-linux-androideabi-g++
+		TOOLSET=gcc-androidR8e
+		;;
 	*)
 		echo "Undefined or not supported Android NDK version!"
 		exit 1
@@ -306,7 +307,7 @@ fi
 if [ ! -d $PROGDIR/$BOOST_DIR ]
 then
 	echo "Unpacking boost"
-	if [ $OPTION_PROGRESS = "yes" ] ; then
+	if [ "$OPTION_PROGRESS" = "yes" ] ; then
 		pv $PROGDIR/$BOOST_TAR | tar xjf - -C $PROGDIR
 	else
 		tar xjf $PROGDIR/$BOOST_TAR
@@ -329,10 +330,10 @@ then
   cd $BOOST_DIR 
   case "$HOST_OS" in
     windows)
-        cmd //c "bootstrap.bat" 2>&1 | tee -a $PROGDIR/build.log
+        cmd //c "bootstrap.bat gcc" 2>&1 | tee -a $PROGDIR/build.log
         ;;
     *)  # Linux and others
-        ./bootstrap.sh 2>&1 | tee -a $PROGDIR/build.log
+        ./bootstrap.sh gcc 2>&1 | tee -a $PROGDIR/build.log
     esac
 
 
@@ -389,6 +390,19 @@ echo "# ---------------"
 # Build boost for android
 echo "Building boost for android"
 (
+
+  if echo $LIBRARIES | grep locale; then
+    if [ -e libiconv-libicu-android ]; then
+      echo "ICONV and ICU already compiled"
+    else
+      echo "boost_locale selected - compiling ICONV and ICU"
+      git clone https://github.com/pelya/libiconv-libicu-android.git
+      cd libiconv-libicu-android
+      ./build.sh || exit 1
+      cd ..
+    fi
+  fi
+
   cd $BOOST_DIR
 
   echo "Adding pathname: `dirname $CXXPATH`"
@@ -407,7 +421,10 @@ echo "Building boost for android"
          $cxxflags                    \
          link=static                  \
          threading=multi              \
+		 threadapi=pthread            \
          --layout=versioned           \
+         -sICONV_PATH=`pwd`/../libiconv-libicu-android/armeabi \
+         -sICU_PATH=`pwd`/../libiconv-libicu-android/armeabi \
          --prefix="./../$BUILD_DIR/"  \
          $LIBRARIES                   \
          install 2>&1                 \
