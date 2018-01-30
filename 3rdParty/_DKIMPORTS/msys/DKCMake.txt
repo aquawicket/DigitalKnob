@@ -1,7 +1,4 @@
 ### INSTALL ###
-#IF(NOT WIN32)
-#	RETURN()
-#ENDIF()
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/msys)
 	DKSETPATH(${DIGITALKNOB}/Download)
