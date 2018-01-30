@@ -4,6 +4,7 @@ IF(NOT MAC)
 ENDIF()
 DKDEPEND(libpng-1.7.0beta34)
 DKDEPEND(jpeg-6b)
+DKDEPEND(giflib-5.1.1)
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/leptonica-1.74.4.zip leptonica-1.74.4)
