@@ -1,4 +1,4 @@
-DKDEPEND(android-ndk-r10e)
+DKDEPEND(android-ndk-r10d)
 ##DKDEPEND(android-ndk-r16b)
 
 IF(NOT UNIX)
