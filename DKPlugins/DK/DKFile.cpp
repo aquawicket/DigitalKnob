@@ -269,9 +269,9 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings)
 		strings.push_back(filename);
 	}
 
-#ifdef LINUX
+//#if defined(LINUX) || defined(MAC)
 	std::sort(strings.begin(), strings.end());
-#endif
+//#endif
 
 	//remove . && ..
 	for(unsigned int i=0; i < strings.size(); ++i){
