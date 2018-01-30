@@ -58,6 +58,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ENDIF()
 
 IF(UNIX)
+DKSETPATH(${BOOST})
 SET(arg ./build-android.sh --boost=1.53.0 ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
