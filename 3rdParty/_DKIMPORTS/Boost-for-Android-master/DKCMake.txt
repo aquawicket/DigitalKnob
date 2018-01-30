@@ -1,3 +1,6 @@
+DKDEPEND(mingw32)
+DKDEPEND(msys)
+
 IF(NOT ANDROID)
 	RETURN()
 ENDIF()
