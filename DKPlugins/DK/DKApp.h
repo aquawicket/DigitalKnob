@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 
+
 ///////////
 class DKApp
 {
@@ -21,34 +22,34 @@ public:
 	static char** argv;
 
 	template<class T>
-	///////////////////////////////////////////////////////
-	static void AppendLoopFunc(void (T::*func)(), T* _this)
+	//////////////////////////////////////////////////////////
+	static void AppendLoopFunc(void (T::*func)(), T* instance)
 	{
-		loop_funcs.push_back(boost::bind(func, _this));
+		loop_funcs.push_back(boost::bind(func, instance));
 	}
 	
 	/*
 	template<class T>
-	////////////////////////////////////////////////////////
-	static void PrependLoopFunc(void (T::*func)(), T* _this)
+	///////////////////////////////////////////////////////////
+	static void PrependLoopFunc(void (T::*func)(), T* instance)
 	{
-		loop_funcs.insert(loop_funcs.begin(), boost::bind(func, _this));
+		loop_funcs.insert(loop_funcs.begin(), boost::bind(func, instance));
 	}
 	
 	template<class T>
-	/////////////////////////////////////////////////////////////////////
-	static void InsertLoopFunc(void (T::*func)(), T* _this, int position)
+	////////////////////////////////////////////////////////////////////////
+	static void InsertLoopFunc(void (T::*func)(), T* instance, int position)
 	{
-		loop_funcs.insert(loop_funcs.begin() + position, boost::bind(func, _this));
+		loop_funcs.insert(loop_funcs.begin() + position, boost::bind(func, instance));
 	}
 	*/
 
 	template<class T>
-	///////////////////////////////////////////////////////
-	static void RemoveLoopFunc(void (T::*func)(), T* _this)
+	//////////////////////////////////////////////////////////
+	static void RemoveLoopFunc(void (T::*func)(), T* instance)
 	{
 		for(unsigned int i=0; i<loop_funcs.size(); ++i){
-			if(loop_funcs[i].contains(boost::bind(func, _this))){
+			if(loop_funcs[i].contains(boost::bind(func, instance))){
 				loop_funcs.erase(loop_funcs.begin() +i );
 			}
 		}
