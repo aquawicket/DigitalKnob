@@ -10,6 +10,7 @@ DKSET(PODOFO ${3RDPARTY}/podofo-0.9.5)
 ### LINK ###
 DKINCLUDE(${PODOFO}/podofo)
 DKINCLUDE(${PODOFO}/${OS})
+DKINCLUDE(${PODOFO}/${OS}/Release)
 WIN_DEBUG_LIB(${PODOFO}/${OS}/src/Debug/podofo.lib)
 WIN_RELEASE_LIB(${PODOFO}/${OS}/src/Release/podofo.lib)
 MAC_DEBUG_LIB(${PODOFO}/${OS}/src/${DEBUG}/libpodofo.a)
