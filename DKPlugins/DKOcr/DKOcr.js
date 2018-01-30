@@ -5,7 +5,7 @@ function DKOcr_Init()
 	
 	DKCreate("DKOcr");
 	DKCreate("DKOcr/DKOcr.html");
-	DKCreate("DKNotePad/DKNotepad.js", function(){
+	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKWidget_AppendChild("DKOcr/DKOcr.html", "DKNotepad/DKNotepad.html");
 	});
 	
