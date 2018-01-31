@@ -574,7 +574,7 @@ function DKRemoveEvent(id, type, Function)
 		element = document.getElementById(id);
 	}
 	if(!element){
-		DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): element invalid\n", DKERROR);
+		DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): element invalid\n", DKWARN);
 		return false;
 	}
 	
@@ -622,7 +622,9 @@ function DKRemoveEvents(Function)
 				i--;
 			}
 			else{
-				DKLog("DKRemoveEvents("+Function.name+"): element "+events[i]+" is invalid\n", DKWARN);
+				//DKLog("DKRemoveEvents("+Function.name+"): element "+events[i]+" is invalid\n", DKWARN);
+				events.splice(i, 3);
+				i--;
 			}
 		}
 	}
