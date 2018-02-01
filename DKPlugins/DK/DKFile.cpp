@@ -778,6 +778,9 @@ bool DKFile::MakeDir(const DKString& dir)
 
 	if(dir.empty()){ return false; }
 	if(PathExists(dir)){ return true; }
+
+	//Still can crash!  It crashes because the dir is empty.
+	//Maybe check if the folder is empty first?
 	if(!boost::filesystem::create_directory(dir)){
 		DKLog("DKFile::MakeDir("+dir+") failed! \n", DKERROR);
 		return false;
