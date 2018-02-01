@@ -4,8 +4,12 @@
 /////////////////////////
 void DKThreadPool::Init()
 {
+#ifdef USE_DKDuktape 
 	DKCreate("DKThreadJS");
+#endif
+#ifdef USE_DKCef
 	DKCreate("DKThreadV8");
+#endif
 	DKCreate("DKThread/DKThreadPoolDlg.js");
 	active = true;//false;
 
