@@ -85,7 +85,7 @@ public:
 	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
-		DKLog("DKV8::AttachFunction("+name+")\n", DKINFO);
+		//DKLog("DKV8::AttachFunction("+name+")\n", DKINFO);
 		
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
@@ -94,7 +94,7 @@ public:
 		}
 		
 		if(!DKV8::ctx){ //multi process will fail
-			DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
+			//DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
 			return;
 		}
 		
