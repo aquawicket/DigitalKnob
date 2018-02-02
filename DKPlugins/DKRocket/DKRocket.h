@@ -13,7 +13,7 @@
 class DKRocket : public Rocket::Core::EventListener, public DKObjectT<DKRocket>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool ToggleDebugger();

@@ -9,7 +9,7 @@
 class DKRocketJS : public DKObjectT<DKRocketJS>
 {
 public:
-	void Init();
+	bool Init();
 
 	static int ToggleDebugger(duk_context* ctx);
 	static int Reload(duk_context* ctx);

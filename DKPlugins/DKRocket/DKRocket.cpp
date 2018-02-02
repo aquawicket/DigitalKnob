@@ -8,7 +8,7 @@
 DKRocketFile* DKRocket::dkRocketFile = NULL;
 
 /////////////////////
-void DKRocket::Init()
+bool DKRocket::Init()
 {
 	DKLog("DKRocket::Init() \n", DKINFO);
 	DKCreate("DKRocketJS");
@@ -28,13 +28,13 @@ void DKRocket::Init()
 	}
 	else{
 		DKLog("DKRocket::Init(): No registered rocket window found\n", DKERROR);
-		return;
+		return false;
 	}
 	
 	if(DKAvailable("DKSDLRocket")){
 		if(!Rocket::Core::Initialise()){
 			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
-			return;
+			return false;
 		}
 
 		int w = DKWindow::GetWidth();
@@ -49,7 +49,7 @@ void DKRocket::Init()
 	if(DKAvailable("DKSDLRocket")){
 		if(!Rocket::Debugger::Initialise(context)){
 			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
-			return;
+			return false;
 		}
 	}
 
@@ -58,6 +58,7 @@ void DKRocket::Init()
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
 
 	LoadGui("index.html");
+	return true;
 }
 
 ////////////////////
