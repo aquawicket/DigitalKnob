@@ -50,7 +50,7 @@ private:
 class DKServer : public DKObjectT<DKServer>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	DKThread* thread;

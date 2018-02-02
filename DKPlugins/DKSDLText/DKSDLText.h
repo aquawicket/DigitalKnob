@@ -11,7 +11,7 @@
 class DKSDLText : public DKObjectT<DKSDLText>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	void SetText(DKString text);

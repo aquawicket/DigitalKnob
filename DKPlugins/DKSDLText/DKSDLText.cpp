@@ -3,12 +3,12 @@
 #include "DK/DKFile.h"
 
 //////////////////////
-void DKSDLText::Init()
+bool DKSDLText::Init()
 {
-	if(!DKSDLWindow::Valid("DKSDLWindow0")){ return; }
+	if(!DKSDLWindow::Valid("DKSDLWindow0")){ return false; }
 	dkSdlWindow = DKSDLWindow::Get("DKSDLWindow0");
 	if(!dkSdlWindow){
-		return; //SDL window not available
+		return false; //SDL window not available
 	}
 
 	TTF_Init();
@@ -20,6 +20,7 @@ void DKSDLText::Init()
 	SetText(toString("Test String"));
 
 	DKSDLWindow::AddDrawFunc(&DKSDLText::Draw, this);
+	return true;
 }
 
 /////////////////////
