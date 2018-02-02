@@ -11,7 +11,7 @@
 #endif
 
 /////////////////////
-void DKSDLCef::Init()
+bool DKSDLCef::Init()
 {
 	DKLog("DKSDLCef::Init()\n",DKDEBUG);
 
@@ -23,7 +23,7 @@ void DKSDLCef::Init()
 	dkCef = DKCef::Get(id);
 	if(!dkSdlWindow || !dkCef){
 		DKLog("DKOSGRocket::Init(): INVALID OBJECTS \n", DKERROR);
-		return;
+		return false;
 	}
 
 	SetupCef();
@@ -34,6 +34,7 @@ void DKSDLCef::Init()
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc(id+"::OnResize", &DKSDLCef::OnResize, this);
 	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
+	return true;
 }
 
 ////////////////////

@@ -28,7 +28,7 @@ class DKSDLCefHandler;
 class DKSDLCef : public DKObjectT<DKSDLCef>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool OnResize(void* input, void* output);
