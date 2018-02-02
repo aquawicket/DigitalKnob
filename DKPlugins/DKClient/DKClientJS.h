@@ -9,7 +9,7 @@
 class DKClientJS : public DKObjectT<DKClientJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int Address(duk_context* ctx);
 	static int Connect(duk_context* ctx);

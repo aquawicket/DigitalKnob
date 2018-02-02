@@ -5,7 +5,7 @@
 
 
 /////////////////////
-void DKClient::Init()
+bool DKClient::Init()
 {
 	//DKLog("DKClient::Init()\n", DKDEBUG);
 	
@@ -14,6 +14,7 @@ void DKClient::Init()
 	thread = new DKThread();
 	c = new client(thread->io_service);
 	thread->start();
+	return true;
 }
 
 //////////////////////////////////////////////

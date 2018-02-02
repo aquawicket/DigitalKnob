@@ -228,7 +228,7 @@ private:
 class DKClient : public DKObjectT<DKClient>
 {
 public:
-	void Init();
+	bool Init();
 	DKThread* thread;
 	client* c;
 	void Connect(const DKString address);
