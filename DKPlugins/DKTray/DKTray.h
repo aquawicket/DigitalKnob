@@ -15,7 +15,7 @@
 class DKTray : public DKObjectT<DKTray>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	void Process();

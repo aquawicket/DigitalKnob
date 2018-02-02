@@ -9,7 +9,7 @@ DKString DKTray::icon;
 #endif
 
 ///////////////////
-void DKTray::Init()
+bool DKTray::Init()
 {
 	DKLog("DKTray::Init()\n", DKDEBUG);
 	
@@ -29,7 +29,7 @@ void DKTray::Init()
 	DKWindows::hInstance = GetModuleHandle(0);
 	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
 		DKLog("DKTray::Init(): TrayIcon invalid \n", DKERROR);
-		return;
+		return false;
 	}
 
 	setCallback(&OnTrayNotification);
@@ -51,10 +51,11 @@ void DKTray::Init()
 	}
 	
 	DKApp::AppendLoopFunc(&DKTray::Process, this);
-	return;
+	return true;
 #endif
 
 	DKLog("DKTray::Init() not implemented on this OS! \n", DKERROR);
+	return false;
 }
 
 //////////////////

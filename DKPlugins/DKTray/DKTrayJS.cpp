@@ -4,13 +4,14 @@
 
 
 /////////////////////
-void DKTrayJS::Init()
+bool DKTrayJS::Init()
 {
 	DKDuktape::AttachFunction("DKTray_AddItem", DKTrayJS::AddItem);
 	DKDuktape::AttachFunction("DKTray_GetIcon", DKTrayJS::GetIcon);
 	DKDuktape::AttachFunction("DKTray_SetIcon", DKTrayJS::SetIcon);
 	DKDuktape::AttachFunction("DKTray_SetTooltip", DKTrayJS::SetTooltip);
 	DKDuktape::AttachFunction("DKTray_ShowBalloon", DKTrayJS::ShowBalloon);
+	return true;
 }
 
 ///////////////////////////////////////

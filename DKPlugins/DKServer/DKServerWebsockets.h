@@ -10,11 +10,11 @@
 //#include <libwebsockets.h>
 
 
-///////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 class DKServerWebsockets : public DKObjectT<DKServerWebsockets>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 };
 

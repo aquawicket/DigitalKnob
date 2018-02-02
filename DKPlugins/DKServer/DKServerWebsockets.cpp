@@ -2,10 +2,10 @@
 #include "DKServer/DKServerWebsockets.h"
 
 ///////////////////////////////
-void DKServerWebsockets::Init()
+bool DKServerWebsockets::Init()
 {
 	DKLog("DKServerWebsockets::Init()\n", DKINFO);
-
+	return true;
 }
 
 //////////////////////////////

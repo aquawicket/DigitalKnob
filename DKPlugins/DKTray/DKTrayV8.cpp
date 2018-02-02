@@ -4,11 +4,12 @@
 #include "DKTray/DKTrayV8.h"
 
 /////////////////////
-void DKTrayV8::Init()
+bool DKTrayV8::Init()
 {
 	DKLog("DKTrayV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKTrayV8::Test);
 	DKV8::AttachFunction("DKTray_AddItem", DKTrayV8::AddItem);
+	return true;
 }
 
 ///////////////////
