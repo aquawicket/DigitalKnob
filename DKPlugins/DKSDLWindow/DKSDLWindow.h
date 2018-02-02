@@ -9,8 +9,8 @@
 class DKSDLWindow : public DKObjectT<DKSDLWindow>
 {
 public:
-	virtual void Init();
-	virtual void End();
+	bool Init();
+	void End();
 
 	bool TestInt(void* input, void* output);
 	bool TestString(void* input, void* output);

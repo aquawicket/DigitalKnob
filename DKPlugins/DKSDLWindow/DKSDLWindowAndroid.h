@@ -9,7 +9,7 @@
 class DKSDLWindowAndroid : public DKObjectT<DKSDLWindowAndroid>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	bool onAccel(void*input, void* output);

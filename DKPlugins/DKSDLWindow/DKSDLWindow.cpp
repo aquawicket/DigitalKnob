@@ -28,7 +28,7 @@ std::map<int,int> DKSDLWindow::sdlShiftCharCode;
 std::map<int,int> DKSDLWindow::sdlMacCode;
 
 ////////////////////////
-void DKSDLWindow::Init()
+bool DKSDLWindow::Init()
 {
 	DKLog("DKSDLWindow::Init()\n", DKINFO);
 
@@ -45,7 +45,7 @@ void DKSDLWindow::Init()
 	SDL_SetMainReady();
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKLog("SDL_Init Error: "+DKString(SDL_GetError()), DKERROR);
-		return;
+		return false;
 	}
 
 	DKString title;
@@ -112,7 +112,7 @@ void DKSDLWindow::Init()
 	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n", DKINFO);
 	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &sdlwin, &sdlren) < 0){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
-		return;
+		return false;
 	}
 #endif
 
@@ -128,7 +128,7 @@ void DKSDLWindow::Init()
 	if(!sdlwin){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
 		SDL_Quit();
-		return;
+		return false;
 	}
 
 	sdlren = NULL;
@@ -145,7 +145,7 @@ void DKSDLWindow::Init()
 		SDL_DestroyWindow(sdlwin);
 		DKLog("SDL_CreateRenderer Error: "+DKString(SDL_GetError()), DKERROR);
 		SDL_Quit();
-		return;
+		return false;
 	}
 #endif
 
@@ -270,6 +270,7 @@ void DKSDLWindow::Init()
 		DKApp::Exit();
 	}
 #endif
+	return true;
 }
 
 ///////////////////////
