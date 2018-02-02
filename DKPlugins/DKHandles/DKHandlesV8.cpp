@@ -3,7 +3,7 @@
 #include "DKHandles.h"
 
 ////////////////////////
-void DKHandlesV8::Init()
+bool DKHandlesV8::Init()
 {
 	DKLog("DKHandlesV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKHandlesV8::Test);
@@ -27,6 +27,7 @@ void DKHandlesV8::Init()
 	DKV8::AttachFunction("DKHandles_WaitForHandle", DKHandlesV8::WaitForHandle);
 	DKV8::AttachFunction("DKHandles_WaitForWindow", DKHandlesV8::WaitForWindow);
 	DKV8::AttachFunction("DKHandles_WindowExists", DKHandlesV8::WindowExists);
+	return true;
 }
 
 ///////////////////////

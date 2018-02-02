@@ -12,7 +12,7 @@ HHOOK DKHook::hook;
 #endif
 
 ///////////////////
-void DKHook::Init()
+bool DKHook::Init()
 {
 #ifdef WIN32
 	InstallHook();
@@ -33,11 +33,12 @@ void DKHook::Init()
 	fd = open(pDevice, O_RDWR);
 	if(fd == -1){
 		printf("ERROR Opening %s\n", pDevice);
-		return;
+		return false;
 	}
 
 	DKApp::AppendLoopFunc(&DKHook::LinuxHook, this);
 #endif
+	return true;
 }
 
 //////////////////

@@ -7,7 +7,7 @@
 class DKRocketIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<DKRocketIframe>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 };
 

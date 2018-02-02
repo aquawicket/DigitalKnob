@@ -6,7 +6,7 @@
 tesseract::TessBaseAPI* DKOcr::api;
 
 //////////////////
-void DKOcr::Init()
+bool DKOcr::Init()
 {
 	DKCreate("DKOcrJS");
 	DKCreate("DKOcrV8");
@@ -15,8 +15,9 @@ void DKOcr::Init()
 	DKString datapath = DKFile::local_assets+"DKOcr";
 	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
 		DKLog("Could not initialize tesseract.\n", DKERROR);
-		return;
+		return false;
 	}
+	return true;
 }
 
 /////////////////

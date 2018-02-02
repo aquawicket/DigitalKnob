@@ -5,8 +5,8 @@
 
 DKRocket* DKCss::dkRocket;
 
-/////////////////////////
-void DKCss::Init()
+//////////////////
+bool DKCss::Init()
 {
 	DKLog("DKCss::Init()\n", DKDEBUG);
 
@@ -14,7 +14,7 @@ void DKCss::Init()
 	dkRocket = DKRocket::Get("DKRocket0");
 	if(!dkRocket){
 		DKLog("DKWidget::Init(): INVALID OBJECTS \n", DKERROR);
-		return;
+		return false;
 	}
 
 	//data = ("DKCss", file)
@@ -53,6 +53,7 @@ void DKCss::Init()
 	Rocket::Core::Element* body = dkRocket->GetDocument();
 	body->AppendChild(link, true);
 	*/
+	return true;
 }
 
 ////////////////////////

@@ -4,7 +4,7 @@
 #include "DKOcr/DKOcrV8.h"
 
 ////////////////////
-void DKOcrV8::Init()
+bool DKOcrV8::Init()
 {
 	DKLog("DKOcrV8::Init()\n", DKDEBUG);
 
@@ -14,6 +14,7 @@ void DKOcrV8::Init()
 	DKV8::AttachFunction("DKOcr_TestReturnString", DKOcrV8::TestReturnString);
 
 	DKV8::AttachFunction("DKOcr_ImageToText", DKOcrV8::ImageToText);
+	return true;
 }
 
 ///////////////////

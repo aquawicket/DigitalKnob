@@ -1,11 +1,13 @@
 #include "DK/stdafx.h"
 #include "DKVideo.h"
 
-void DKVideo::Init()
+////////////////////
+bool DKVideo::Init()
 {
 	DKCreate("DKVideoJS");
 	DKCreate("DKOSGVideo");
 	DKCreate("DKSDLVideo");
+	return true;
 }
 
 //////////////////////////////////

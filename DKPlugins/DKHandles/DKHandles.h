@@ -17,7 +17,7 @@ struct HWNDname{
 class DKHandles : public DKObjectT<DKHandles>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool Click();

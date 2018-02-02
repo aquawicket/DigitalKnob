@@ -10,7 +10,7 @@
 class DKHandlesJS : public DKObjectT<DKHandlesJS>
 {
 public:
-	void Init();
+	bool Init();
 
 	static int Click(duk_context* ctx);
 	static int CurrentHandle(duk_context* ctx);

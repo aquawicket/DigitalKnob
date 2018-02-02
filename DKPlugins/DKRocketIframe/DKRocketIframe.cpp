@@ -4,7 +4,7 @@
 //TODO 
 
 ///////////////////////////
-void DKRocketIframe::Init()
+bool DKRocketIframe::Init()
 {
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
@@ -15,6 +15,7 @@ void DKRocketIframe::Init()
 		//width = toInt(data[4]);
 		//height = toInt(data[5]);
 	}
+	return true;
 }
 
 //////////////////////////

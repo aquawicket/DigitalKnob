@@ -12,7 +12,7 @@
 class DKHook : public DKObjectT<DKHook>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 #ifdef LINUX

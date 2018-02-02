@@ -8,7 +8,7 @@
 class DKDom : public DKObjectT<DKDom>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 };
 

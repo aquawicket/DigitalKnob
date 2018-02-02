@@ -8,7 +8,7 @@
 class DKCss : public DKObjectT<DKCss>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	static DKRocket* dkRocket;

@@ -3,7 +3,7 @@
 #include "DKMidi/DKMidi.h"
 
 ///////////////////
-void DKMidi::Init()
+bool DKMidi::Init()
 {
 	DKCreate("DKMidiJS");
 	midiin = new RtMidiIn();
@@ -16,6 +16,7 @@ void DKMidi::Init()
 	ToggleOutput(outputs);
 
 	midiin->setCallback(&DKMidi::midiCallback,(void *)this);
+	return true;
 }
 
 //////////////////

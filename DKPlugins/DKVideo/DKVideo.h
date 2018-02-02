@@ -7,7 +7,7 @@
 class DKVideo : public DKObjectT<DKVideo>
 {
 public:
-	void Init();
+	bool Init();
 	void End(){};
 	
 	static void Play(DKString& file);

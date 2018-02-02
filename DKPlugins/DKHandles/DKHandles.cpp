@@ -9,12 +9,13 @@ DKStringArray DKHandles::_windows;
 std::vector<HWND> DKHandles::handle;
 
 //////////////////////
-void DKHandles::Init()
+bool DKHandles::Init()
 {
 	DKCreate("DKHandlesJS");
 	DKCreate("DKHandlesV8");
 	highlight = false;
 	currentHandle = 0;
+	return true;
 }
 
 /////////////////////

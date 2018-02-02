@@ -4,10 +4,10 @@
 
 DKString ElementObject::property;
 
-///////////////////
-void DKDom::Init()
+//////////////////
+bool DKDom::Init()
 {
-	
+	return true;
 }
 
 /////////////////

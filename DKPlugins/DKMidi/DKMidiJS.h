@@ -9,7 +9,7 @@
 class DKMidiJS : public DKObjectT<DKMidiJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int GetMidiInputs(duk_context* ctx);
 	static int GetMidiOutputs(duk_context* ctx);

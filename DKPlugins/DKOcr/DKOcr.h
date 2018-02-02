@@ -10,7 +10,7 @@
 class DKOcr : public DKObjectT<DKOcr>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	static bool ImageToText(DKString& file, DKString& text);
 

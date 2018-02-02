@@ -4,9 +4,10 @@
 
 
 //////////////////////
-void DKVideoJS::Init()
+bool DKVideoJS::Init()
 {
 	DKDuktape::AttachFunction("DKVideo_Play", DKVideoJS::Play);
+	return true;
 }
 
 //////////////////////////////

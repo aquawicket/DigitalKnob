@@ -4,7 +4,7 @@
 
 
 ////////////////////
-void DKOcrJS::Init()
+bool DKOcrJS::Init()
 {
 	DKLog("DKOcrJS::Init()\n", DKDEBUG);
 
@@ -14,6 +14,7 @@ void DKOcrJS::Init()
 	DKDuktape::AttachFunction("DKOcr_TestReturnString", DKOcrJS::TestReturnString);
 
 	DKDuktape::AttachFunction("DKOcr_ImageToText", DKOcrJS::ImageToText);
+	return true;
 }
 
 //////////////////////////////////////

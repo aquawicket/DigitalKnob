@@ -9,7 +9,7 @@
 class DKVideoJS : public DKObjectT<DKVideoJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int Play(duk_context* ctx);
 };

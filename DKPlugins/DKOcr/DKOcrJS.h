@@ -9,7 +9,7 @@
 class DKOcrJS : public DKObjectT<DKOcrJS>
 {
 public:
-	void Init();
+	bool Init();
 
 	static int TestInt(duk_context* ctx);
 	static int TestString(duk_context* ctx);

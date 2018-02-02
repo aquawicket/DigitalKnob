@@ -5,7 +5,7 @@
 
 
 ////////////////////////
-void DKHandlesJS::Init()
+bool DKHandlesJS::Init()
 {
 	DKDuktape::AttachFunction("DKHandles_Click", DKHandlesJS::Click);
 	DKDuktape::AttachFunction("DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
@@ -19,6 +19,7 @@ void DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_ToggleHighlight", DKHandlesJS::ToggleHighlight);
 	DKDuktape::AttachFunction("DKHandles_WaitForWindow", DKHandlesJS::WaitForWindow);
 	DKDuktape::AttachFunction("DKHandles_WindowExists", DKHandlesJS::WindowExists);
+	return true;
 }
 
 ///////////////////////////////////////////
