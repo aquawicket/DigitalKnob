@@ -12,7 +12,7 @@
 class DKWidgetMySqlJS : public DKObjectT<DKWidgetMySqlJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int DeleteRecord(duk_context* ctx);
 	static int GetFirstRecordNum(duk_context* ctx);

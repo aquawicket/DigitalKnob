@@ -10,7 +10,7 @@
 DKString DKWidgetJS::htmlfile;
 
 ///////////////////////
-void DKWidgetJS::Init()
+bool DKWidgetJS::Init()
 {
 	//DKDuktape::AttachFunction("DKWidget_NewWidget", DKWidgetJS::NewWidget);
 	DKDuktape::AttachFunction("DKWidget_AddDragHandle", DKWidgetJS::AddDragHandle);
@@ -81,6 +81,8 @@ void DKWidgetJS::Init()
 
 	DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
 	DKDuktape::LoadFile(jsfile);
+	
+	return true;
 }
 
 ///////////////////////////////////////////

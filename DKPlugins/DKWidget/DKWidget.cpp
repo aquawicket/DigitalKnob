@@ -12,7 +12,7 @@
 DKRocket* DKWidget::dkRocket;
 
 /////////////////////
-void DKWidget::Init()
+bool DKWidget::Init()
 {
 	DKLog("DKWidget::Init() \n", DKDEBUG);
 	
@@ -24,7 +24,7 @@ void DKWidget::Init()
 	dkRocket = DKRocket::Get("DKRocket0");
 	if(!dkRocket){
 		DKLog("DKWidget::Init(): INVALID OBJECTS \n", DKERROR);
-		return;
+		return false;
 	}
 
 	DKString _data = toString(data, ",");
@@ -49,8 +49,9 @@ void DKWidget::Init()
 		data[2] = "body";
 	}
 	
-	if(same(data[1],"DKWidget0")){ return; }
+	if(same(data[1],"DKWidget0")){ return true; }
 	CreateWidget(data[1]);
+	return true;
 }
 
 ////////////////////

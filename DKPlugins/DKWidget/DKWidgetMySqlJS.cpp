@@ -6,7 +6,7 @@
 #include "DKWidget/DKWidgetMySqlJS.h"
 
 ////////////////////////////
-void DKWidgetMySqlJS::Init()
+bool DKWidgetMySqlJS::Init()
 {
 	DKDuktape::AttachFunction("DKWidgetMySql_DeleteRecord", DKWidgetMySqlJS::DeleteRecord);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetFirstRecordNum", DKWidgetMySqlJS::GetFirstRecordNum);
@@ -17,6 +17,7 @@ void DKWidgetMySqlJS::Init()
 	DKDuktape::AttachFunction("DKWidgetMySql_Prep", DKWidgetMySqlJS::Prep);
 	DKDuktape::AttachFunction("DKWidgetMySql_SaveRecord", DKWidgetMySqlJS::SaveRecord);
 	DKDuktape::AttachFunction("DKWidgetMySql_Search", DKWidgetMySqlJS::Search);
+	return true;
 }
 
 ////////////////////////////////////

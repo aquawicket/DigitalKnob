@@ -11,7 +11,7 @@
 class DKWidgetJS : public DKObjectT<DKWidgetJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int AddDragHandle(duk_context* ctx);
 	static int AddResizeHandle(duk_context* ctx);

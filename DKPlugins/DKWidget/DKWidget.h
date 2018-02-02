@@ -20,7 +20,7 @@ typedef Rocket::Core::String DKCString;
 class DKWidget : public DKObjectT<DKWidget>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 protected:
