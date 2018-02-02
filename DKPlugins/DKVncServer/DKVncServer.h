@@ -26,7 +26,7 @@ typedef struct ClientLog
 class DKVncServer : public DKObjectT<DKVncServer>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	void Loop();
 

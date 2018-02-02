@@ -10,7 +10,7 @@
 class DKVncClient : public DKObjectT<DKVncClient>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
     
 	void draw();

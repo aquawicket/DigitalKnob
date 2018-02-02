@@ -29,7 +29,7 @@ rfbClient* DKVncClient::cl;
 bool DKVncClient::seperate_loop = false;
 
 ////////////////////////
-void DKVncClient::Init()
+bool DKVncClient::Init()
 {
 	DKLog("DKVncClient::Init()\n", DKINFO);
 
@@ -126,7 +126,7 @@ void DKVncClient::Init()
 	if(!rfbInitConnection(cl)){
 		cl = NULL;
 		cleanup(cl);
-		return;
+		return false;
 	}
 	
 	//Display extra info
@@ -158,6 +158,8 @@ void DKVncClient::Init()
 		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
+	
+	return true;
 }
 
 /////////////////////////////////////////////////////////

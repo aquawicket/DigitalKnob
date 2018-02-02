@@ -63,7 +63,7 @@ DKString DKVncServer::capture;
 
 
 ////////////////////////
-void DKVncServer::Init()
+bool DKVncServer::Init()
 {
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //DIRECT X
@@ -98,7 +98,7 @@ void DKVncServer::Init()
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
 		DKLog("DKVncServer::Init(): rfbScreen is invalid", DKERROR);
-		return;
+		return false;
 	}
 	rfbScreen->desktopName = "DKVncServer";
 	rfbScreen->frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
@@ -120,6 +120,7 @@ void DKVncServer::Init()
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
 	//DKUtil::SetFramerate(0);
+	return true;
 }
 
 ///////////////////////
