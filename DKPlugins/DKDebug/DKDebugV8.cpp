@@ -3,13 +3,14 @@
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugV8.h"
 
-/////////////////////
-void DKDebugV8::Init()
+//////////////////////
+bool DKDebugV8::Init()
 {
 	DKLog("DKDebugV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKDebugV8::Test);
 	DKV8::AttachFunction("DKDebug_SendBugReport", DKDebugV8::SendBugReport);
 	DKV8::AttachFunction("DKDebug_ShowStackTrace", DKDebugV8::ShowStackTrace);
+	return true;
 }
 
 ///////////////////

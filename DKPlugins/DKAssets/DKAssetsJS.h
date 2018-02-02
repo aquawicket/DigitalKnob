@@ -9,7 +9,7 @@
 class DKAssetsJS : public DKObjectT<DKAssetsJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	//static int AppendDataPath(duk_context* ctx);
 	static int LocalAssets(duk_context* ctx);

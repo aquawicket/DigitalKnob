@@ -5,9 +5,10 @@
 ////////////////
 // For Doxygen purporses, this is a test.
 ////////////////
-void App::Init()
+bool App::Init()
 {
 	DKLog("App::Init()\n", DKDEBUG);
+	return true;
 }
 
 #endif //USE_DK

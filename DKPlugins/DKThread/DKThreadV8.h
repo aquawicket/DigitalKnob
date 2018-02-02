@@ -9,7 +9,7 @@
 class DKThreadV8 : public DKObjectT<DKThreadV8>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	static bool GetThreadNames(CefArgs args, CefReturn retval);

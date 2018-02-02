@@ -4,10 +4,11 @@
 
 
 //////////////////////
-void DKDebugJS::Init()
+bool DKDebugJS::Init()
 {
 	DKDuktape::AttachFunction("DKDebug_ShowStackTrace", DKDebugJS::ShowStackTrace);
 	DKDuktape::AttachFunction("DKDebug_SendBugReport", DKDebugJS::SendBugReport);
+	return true;
 }
 
 ///////////////////////////////////////////////

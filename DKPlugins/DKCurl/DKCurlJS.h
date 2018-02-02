@@ -9,7 +9,7 @@
 class DKCurlJS : public DKObjectT<DKCurlJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int Download(duk_context* ctx);
 	static int FileDate(duk_context* ctx);

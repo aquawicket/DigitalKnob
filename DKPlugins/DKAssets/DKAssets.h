@@ -8,7 +8,7 @@
 class DKAssets : public DKObjectT<DKAssets>
 {
 public:
-	void Init();
+	bool Init();
 	
 	//static bool AppendDataPath(const DKString& datapath);
 	static bool AquireDataPath(DKString& exepath);

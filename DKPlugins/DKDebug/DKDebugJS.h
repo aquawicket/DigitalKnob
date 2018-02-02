@@ -9,7 +9,7 @@
 class DKDebugJS : public DKObjectT<DKDebugJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int SendBugReport(duk_context* ctx);
 	static int ShowStackTrace(duk_context* ctx);

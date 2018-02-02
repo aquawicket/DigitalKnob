@@ -15,7 +15,7 @@ class DKObject
 public:
 	
 	~DKObject(){ /*DKEvent::RemoveEvents(this);*/ }	
-	virtual void Init(){}
+	virtual bool Init(){ return true; }
 	virtual void End(){}
 
 	DKStringArray data; //(class,id,var1,var2,var3,etc)

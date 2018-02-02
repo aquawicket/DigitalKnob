@@ -8,7 +8,7 @@
 class DKDebug : public DKObjectT<DKDebug>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	static bool SendBugReport(const DKString& filename);

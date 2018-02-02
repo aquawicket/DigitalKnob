@@ -9,7 +9,7 @@
 class DKJavascript : public DKObjectT<DKJavascript>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 };
 

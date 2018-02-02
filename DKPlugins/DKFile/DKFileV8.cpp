@@ -4,7 +4,7 @@
 #include "DKFile/DKFileV8.h"
 
 /////////////////////
-void DKFileV8::Init()
+bool DKFileV8::Init()
 {
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKFileV8::Test);
@@ -24,6 +24,7 @@ void DKFileV8::Init()
 	DKV8::AttachFunction("DKFile_Rename", DKFileV8::Rename);
 	DKV8::AttachFunction("DKFile_SetSetting", DKFileV8::SetSetting);
 	DKV8::AttachFunction("DKFile_StringToFile", DKFileV8::StringToFile);
+	return true;
 }
 
 ///////////////////

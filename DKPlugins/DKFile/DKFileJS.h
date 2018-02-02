@@ -9,7 +9,7 @@
 class DKFileJS : public DKObjectT<DKFileJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int ChDir(duk_context* ctx);
 	static int Copy(duk_context* ctx);

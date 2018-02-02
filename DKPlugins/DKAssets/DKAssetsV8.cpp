@@ -3,12 +3,13 @@
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssetsV8.h"
 
-/////////////////////
-void DKAssetsV8::Init()
+///////////////////////
+bool DKAssetsV8::Init()
 {
 	DKLog("DKAssetsV8::Init()\n", DKDEBUG);
 	//DKV8::AttachFunction("Test", DKAssetsV8::Test);
 	DKV8::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
+	return true;
 }
 
 ///////////////////

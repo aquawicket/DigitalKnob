@@ -8,7 +8,7 @@
 
 
 /////////////////////
-void DKAssets::Init()
+bool DKAssets::Init()
 {
 	DKLog("DKAssets::Init()\n", DKDEBUG);
 	
@@ -85,6 +85,7 @@ void DKAssets::Init()
 	}
 
 	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n", DKINFO);
+	return true;
 }
 
 ////////////////////////////////////////////////

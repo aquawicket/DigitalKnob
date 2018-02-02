@@ -2,7 +2,7 @@
 #include "DKThread.h"
 
 /////////////////////////
-void DKThreadPool::Init()
+bool DKThreadPool::Init()
 {
 #ifdef USE_DKDuktape 
 	DKCreate("DKThreadJS");
@@ -16,6 +16,7 @@ void DKThreadPool::Init()
 	dkThreadPool = new boost::threadpool::pool(1);
 
 	DKApp::AppendLoopFunc(&DKThreadPool::Process, this);
+	return true;
 }
 
 ////////////////////////

@@ -9,7 +9,7 @@
 class DKJS : public DKObjectT<DKJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int _DKAddEvent(duk_context* ctx);
 	static int _DKAvailable(duk_context* ctx);

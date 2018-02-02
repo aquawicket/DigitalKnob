@@ -17,7 +17,7 @@ extern int eventloop_run(duk_context *ctx);
 
 
 //////////////////////
-void DKDuktape::Init()
+bool DKDuktape::Init()
 {
 	DKLog("DKDuktape::Init()\n", DKDEBUG);
 	
@@ -27,7 +27,7 @@ void DKDuktape::Init()
 		ctx = duk_create_heap_default();
 		if(!ctx){
 			DKLog("Failed to create a Duktape heap.\n", DKERROR);
-		    return;
+		    return false;
 		}
 
 		//////////////////////////////////////////////////////////////////////////////////
@@ -37,18 +37,18 @@ void DKDuktape::Init()
 		if(c_evloop){ //c_eventloop.js
 			eventloop_register(ctx);
 			DKString file = DKFile::local_assets+"DKDuktape/c_eventloop.js";
-			if(!LoadFile(file)){ return; }
+			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0) {
 				DKLog("DKDuktape::Init(): Error in handle_file\n", DKERROR);
-				return;
+				return false;
 			}
 		}
 		else{ //ecma_eventloop.js
 			DKString file = DKFile::local_assets+"DKDuktape/ecma_eventloop.js";
-			if(!LoadFile(file)){ return; }
+			if(!LoadFile(file)){ return false; }
 			if(handle_file(ctx, file.c_str()) != 0) {
 				DKLog("DKDuktape::Init(): Error in handle_file\n", DKERROR);
-				return;
+				return false;
 			}
 		}
 		//////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,7 @@ void DKDuktape::Init()
 	}
 
 	//DKApp::AddLoopFunc("RENDER", &DKDuktape::EventLoop, this);
+	return true;
 }
 
 /////////////////////

@@ -5,6 +5,7 @@
 //////////////////////
 void DKSDLText::Init()
 {
+	if(!DKSDLWindow::Valid("DKSDLWindow0")){ return; }
 	dkSdlWindow = DKSDLWindow::Get("DKSDLWindow0");
 	if(!dkSdlWindow){
 		return; //SDL window not available

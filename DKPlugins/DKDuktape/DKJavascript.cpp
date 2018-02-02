@@ -4,7 +4,7 @@
 #include "DKDuktape/DKJavascript.h"
 
 /////////////////////////
-void DKJavascript::Init()
+bool DKJavascript::Init()
 {
 	DKLog("DKJavascript::Init()\n", DKDEBUG);
 
@@ -19,8 +19,9 @@ void DKJavascript::Init()
 	}
 	
     DKString file = DKFile::local_assets+data[1];
-	if(!DKDuktape::LoadFile(file)){ return; }
+	if(!DKDuktape::LoadFile(file)){ return false; }
 	DKDuktape::CallInit(file);
+	return true;
 }
 
 ////////////////////////

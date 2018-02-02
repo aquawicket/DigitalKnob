@@ -9,7 +9,7 @@
 class DKThreadJS : public DKObjectT<DKThreadJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int GetThreadNames(duk_context* ctx);
 	static int _DKQueue(duk_context* ctx);

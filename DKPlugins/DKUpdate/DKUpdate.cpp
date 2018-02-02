@@ -26,7 +26,7 @@
 DKString DKUpdate::url;
 
 /////////////////////
-void DKUpdate::Init()
+bool DKUpdate::Init()
 {
 	DKLog("DKUpdate::Init()\n", DKINFO);
 
@@ -78,11 +78,12 @@ void DKUpdate::Init()
 
 	if(url.empty()){
 		DKLog("DKUpdate::Init(): update url did not get set. ",DKERROR);
-		return;
+		return false;
 	}
 	
 	DKCreate("DKUpdateJS");
 	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
+	return true;
 }
 
 ////////////////////

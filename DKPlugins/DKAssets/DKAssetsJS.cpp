@@ -3,12 +3,13 @@
 #include "DKAssets/DKAssets.h"
 #include "DKAssets/DKAssetsJS.h"
 
-/////////////////////
-void DKAssetsJS::Init()
+///////////////////////
+bool DKAssetsJS::Init()
 {
 	//DKDuktape::AttachFunction("DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath);
 	DKDuktape::AttachFunction("DKAssets_LocalAssets", DKAssetsJS::LocalAssets);
 	DKDuktape::AttachFunction("DKAssets_Protocol", DKAssetsJS::Protocol);
+	return true;
 }
 
 ///////////////////////////////////////////

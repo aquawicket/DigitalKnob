@@ -9,7 +9,7 @@
 class DKAssetsV8 : public DKObjectT<DKAssetsV8>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	//static bool Test(CefArgs args, CefReturn retval);

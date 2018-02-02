@@ -4,7 +4,7 @@
 #include "DKCurl/DKCurl.h"
 
 ///////////////////
-void DKCurl::Init()
+bool DKCurl::Init()
 {
 	DKCreate("DKCurlJS");
 	
@@ -17,6 +17,7 @@ void DKCurl::Init()
 	}
 	*/
 	curl = NULL;
+	return true;
 }
 
 //////////////////

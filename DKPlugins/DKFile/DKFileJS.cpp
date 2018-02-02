@@ -4,7 +4,7 @@
 #include "DKFile/DKFileJS.h"
 
 /////////////////////
-void DKFileJS::Init()
+bool DKFileJS::Init()
 {
 	DKDuktape::AttachFunction("DKFile_ChDir", DKFileJS::ChDir);
 	DKDuktape::AttachFunction("DKFile_Copy", DKFileJS::Copy);
@@ -31,6 +31,7 @@ void DKFileJS::Init()
 	DKDuktape::AttachFunction("DKFile_SetSetting", DKFileJS::SetSetting);
 	DKDuktape::AttachFunction("DKFile_StringToFile", DKFileJS::StringToFile);
 	DKDuktape::AttachFunction("DKFile_VerifyPath", DKFileJS::VerifyPath);
+	return true;
 }
 
 //////////////////////////////////////////

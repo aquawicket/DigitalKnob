@@ -11,7 +11,7 @@ class DKCurl : public DKObjectT<DKCurl>
 {
 public:
 	//TODO: Persistant connecton
-	void Init();
+	bool Init();
 	void End();
 
 	bool CurlInit();

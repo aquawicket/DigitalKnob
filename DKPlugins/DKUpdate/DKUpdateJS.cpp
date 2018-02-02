@@ -3,7 +3,7 @@
 #include "DKUpdate/DKUpdateJS.h"
 
 ///////////////////////
-void DKUpdateJS::Init()
+bool DKUpdateJS::Init()
 {
 	DKLog("DKUpdateJS::Init()\n", DKDEBUG);
 
@@ -15,6 +15,7 @@ void DKUpdateJS::Init()
 	DKDuktape::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateJS::CheckForUpdate);
 	DKDuktape::AttachFunction("DKUpdate_CreateUpdate", DKUpdateJS::CreateUpdate);
 	DKDuktape::AttachFunction("DKUpdate_DoUpdate", DKUpdateJS::DoUpdate);
+	return true;
 }
 
 /*

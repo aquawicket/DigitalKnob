@@ -200,7 +200,7 @@ void handler(int signum)
 #endif 
 
 ////////////////////
-void DKDebug::Init()
+bool DKDebug::Init()
 {
 	//DKLog("DKDebug::Init()\n", DKDEBUG);
 	
@@ -229,6 +229,7 @@ void DKDebug::Init()
 	signal(SIGILL,  handler);
 	signal(SIGFPE,  handler);
 #endif
+	return true;
 }
 
 ///////////////////

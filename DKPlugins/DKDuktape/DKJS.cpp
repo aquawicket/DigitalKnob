@@ -9,7 +9,7 @@
 #include <signal.h>
 
 /////////////////
-void DKJS::Init()
+bool DKJS::Init()
 {
 	DKLog("DKJS::Init()\n", DKDEBUG);
 	
@@ -129,6 +129,7 @@ void DKJS::Init()
 	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
 	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
 	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKJS::LowPowerMonitor);
+	return true;
 }
 
 /////////////////////////////////////

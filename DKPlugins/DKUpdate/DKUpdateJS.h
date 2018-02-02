@@ -9,7 +9,7 @@
 class DKUpdateJS : public DKObjectT<DKUpdateJS>
 {
 public:
-	void Init();
+	bool Init();
 
 	/*
 	static int TestInt(duk_context* ctx);

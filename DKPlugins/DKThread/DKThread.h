@@ -19,7 +19,7 @@
 class DKThreadPool : public DKObjectT<DKThreadPool>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool active;

@@ -10,7 +10,7 @@
 class App : public DKObjectT<App>
 {
 public:
-	void Init();
+	bool Init();
 };
 
 REGISTER_OBJECT(App, true);

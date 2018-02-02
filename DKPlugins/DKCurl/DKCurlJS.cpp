@@ -4,7 +4,7 @@
 #include "DKThread/DKThread.h"
 
 /////////////////////
-void DKCurlJS::Init()
+bool DKCurlJS::Init()
 {
 	DKDuktape::AttachFunction("DKCurl_FtpConnect", DKCurlJS::FtpConnect);
 	DKDuktape::AttachFunction("DKCurl_FtpUpload", DKCurlJS::FtpUpload);
@@ -13,6 +13,7 @@ void DKCurlJS::Init()
 	DKDuktape::AttachFunction("DKCurl_FileDate", DKCurlJS::FileDate);
 	DKDuktape::AttachFunction("DKCurl_Download", DKCurlJS::Download);
 	DKCurl::Instance("DKCurl0");
+	return true;
 }
 
 ///////////////////////////////////

@@ -7,7 +7,7 @@
 class DKArchive : public DKObjectT<DKArchive>
 {
 public:
-	void Init(){}
+	bool Init(){ return true; }
 	
 	static bool Compress(const DKString& path, const DKString& file);
 	static bool Extract(const DKString& file, const DKString& path);
