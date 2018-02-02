@@ -11,7 +11,7 @@ typedef pugi::xpath_node_set DKXmlNodes;
 class DKXml : public DKObjectT<DKXml>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool AppendNode(const DKString& xpath, const DKString& type);

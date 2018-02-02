@@ -4,11 +4,12 @@
 
 
 ////////////////////
-void DKXmlJS::Init()
+bool DKXmlJS::Init()
 {
 	DKLog("DKXmlJS::Init()\n", DKDEBUG);
 	
 	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
+	return true;
 }
 
 /////////////////////////////////////////

@@ -3,9 +3,10 @@
 #include "DKXml/DKXml.h"
 
 //////////////////
-void DKXml::Init()
+bool DKXml::Init()
 {
 	DKLog("DKXml::Init()\n", DKDEBUG);
+	return true;
 }
 
 /////////////////
