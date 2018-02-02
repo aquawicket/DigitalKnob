@@ -10,7 +10,7 @@
 class DKWebview : public DKObjectT<DKWebview>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 	
 	bool PrintFunctions(void* input, void* output);
