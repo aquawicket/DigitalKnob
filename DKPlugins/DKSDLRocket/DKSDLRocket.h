@@ -17,7 +17,7 @@
 class DKSDLRocket : public DKObjectT<DKSDLRocket>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool handle(SDL_Event *event);

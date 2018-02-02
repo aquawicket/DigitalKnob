@@ -5,7 +5,7 @@
 #include "DKSDLRocket/DKSDLRocket.h"
 
 ////////////////////////
-void DKSDLRocket::Init()
+bool DKSDLRocket::Init()
 {
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
@@ -15,7 +15,7 @@ void DKSDLRocket::Init()
 	dkRocket = DKRocket::Instance("DKRocket0");
 	if(!dkSdlWindow || !dkRocket){
 		DKLog("DKSDLRocket::Init(): INVALID OBJECTS \n", DKERROR);
-		return;
+		return false;
 	}
 
 #ifdef ROCKET_SHELL_RENDER
@@ -31,6 +31,7 @@ void DKSDLRocket::Init()
 
 	DKSDLWindow::AddEventFunc(&DKSDLRocket::handle, this);
 	DKSDLWindow::AddDrawFunc(&DKSDLRocket::Draw, this);
+	return true;
 }
 
 ///////////////////////
