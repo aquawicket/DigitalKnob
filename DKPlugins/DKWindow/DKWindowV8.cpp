@@ -4,7 +4,7 @@
 #include "DKWindow/DKWindowV8.h"
 
 ///////////////////////
-void DKWindowV8::Init()
+bool DKWindowV8::Init()
 {
 	DKLog("DKWindowV8::Init()\n", DKDEBUG);
 
@@ -15,6 +15,7 @@ void DKWindowV8::Init()
 
 	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
 	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
+	return true;
 }
 
 //////////////////////

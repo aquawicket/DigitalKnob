@@ -3,13 +3,14 @@
 #include "DKWindow/DKWindow.h"
 
 /////////////////////
-void DKWindow::Init()
+bool DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
 
 	DKClass::RegisterFunc("DKWindow::MessageBox", &DKWindow::MessageBox, this);
 	DKCreate("DKWindowJS");
 	DKCreate("DKWindowV8");
+	return true;
 }
 
 ////////////////////

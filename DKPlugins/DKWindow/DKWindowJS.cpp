@@ -4,7 +4,7 @@
 
 
 ///////////////////////
-void DKWindowJS::Init()
+bool DKWindowJS::Init()
 {
 	DKLog("DKWindowJS::Init()\n", DKDEBUG);
 
@@ -36,6 +36,7 @@ void DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY);
 	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show);
 	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed);
+	return true;
 }
 
 

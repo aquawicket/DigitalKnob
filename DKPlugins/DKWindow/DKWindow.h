@@ -11,7 +11,7 @@
 class DKWindow : public DKObjectT<DKWindow>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	static bool Create();
