@@ -27,7 +27,7 @@
 class DKMySql : public DKObjectT<DKMySql> 
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port);

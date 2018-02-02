@@ -3,12 +3,13 @@
 #include "DKMySql/DKMySqlJS.h"
 
 
-///////////////////////
-void DKMySqlJS::Init()
+//////////////////////
+bool DKMySqlJS::Init()
 {
 	DKDuktape::AttachFunction("DKMySql_Connect", DKMySqlJS::Connect);
 	DKDuktape::AttachFunction("DKMySql_Database", DKMySqlJS::Database);
 	DKDuktape::AttachFunction("DKMySql_Query", DKMySqlJS::Query);
+	return true;
 }
 
 /////////////////////////////////
