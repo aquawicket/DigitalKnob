@@ -4,7 +4,7 @@
 
 
 ////////////////////
-void DKCefJS::Init()
+bool DKCefJS::Init()
 {
 	DKDuktape::AttachFunction("DKCef_GetUrl", DKCefJS::GetUrl);
 	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
@@ -26,6 +26,7 @@ void DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_Print", DKCefJS::Print);
 	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
 	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
+	return true;
 }
 
 /////////////////////////////////////

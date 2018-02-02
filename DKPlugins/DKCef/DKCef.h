@@ -16,7 +16,7 @@ class DKCefWindow;
 class DKCef : public DKObjectT<DKCef>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool CloseBrowser(int num);

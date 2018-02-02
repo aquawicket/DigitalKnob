@@ -9,7 +9,7 @@
 class DKCefJS : public DKObjectT<DKCefJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int CloseBrowser(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);

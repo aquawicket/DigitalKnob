@@ -2,7 +2,7 @@
 #include "DKCef/DKCefV8.h"
 
 ////////////////////
-void DKCefV8::Init()
+bool DKCefV8::Init()
 {
 	DKCreate("DKFileV8");
 	DKCreate("DKAssetsV8");
@@ -53,6 +53,7 @@ void DKCefV8::Init()
 	DKV8::AttachFunction("DK_TurnOffMonitor", DKCefV8::TurnOffMonitor);
 	DKV8::AttachFunction("DK_TurnOnMonitor", DKCefV8::TurnOnMonitor);
 	DKV8::AttachFunction("DK_LowPowerMonitor", DKCefV8::LowPowerMonitor);
+	return true;
 }
 
 ///////////////////

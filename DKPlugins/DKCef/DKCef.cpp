@@ -15,7 +15,7 @@
 #endif
 
 //////////////////
-void DKCef::Init()
+bool DKCef::Init()
 {
 	DKLog("DKCef::Init()\n", DKINFO);
 	
@@ -198,8 +198,8 @@ void DKCef::Init()
 		#endif
 	#endif
 	if(!DKFile::PathExists(ep)){
-        	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-        	return;
+        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+        return false;
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
@@ -231,7 +231,7 @@ void DKCef::Init()
     int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
 		DKLog("CefInitialize error", DKERROR);
-		return;
+		return false;
 	}
 
 	if(DKValid("DKSDLWindow,DKSDLWindow0")){
@@ -256,6 +256,7 @@ void DKCef::Init()
 	}
 	
 	DKCreate("DKCefV8");
+	return true;
 }
 
 /////////////////
