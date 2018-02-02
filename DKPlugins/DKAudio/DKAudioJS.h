@@ -9,7 +9,7 @@
 class DKAudioJS : public DKObjectT<DKAudioJS>
 {
 public:
-	void Init();
+	bool Init();
 	
 	static int GetVolume(duk_context* ctx);
 	static int Mute(duk_context* ctx);

@@ -2,22 +2,23 @@
 #include "DKAudio.h"
 
 ////////////////////
-void DKAudio::Init()
+bool DKAudio::Init()
 {
 	DKCreate("DKAudioJS");
 	if(DKAvailable("DKSDLAudio")){
 		DKCreate("DKSDLAudio");
-		return;
+		return false;
 	}
 	if(DKAvailable("DKSDLWav")){
 		DKCreate("DKSDLWav");
-		return;
+		return false;
 	}
 	if(DKAvailable("DKOSGAudio")){
 		DKCreate("DKOSGAudio");
-		return;
+		return false;
 	}
 	DKLog("DKAudio::Init(): No audio interface available \n", DKERROR);
+	return true;
 }
 
 ///////////////////

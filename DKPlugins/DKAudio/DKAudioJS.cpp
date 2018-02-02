@@ -4,7 +4,7 @@
 
 
 //////////////////////
-void DKAudioJS::Init()
+bool DKAudioJS::Init()
 {
 	DKDuktape::AttachFunction("DKAudio_PlaySound", DKAudioJS::PlaySound);
 	DKDuktape::AttachFunction("DKAudio_OpenMusic", DKAudioJS::OpenMusic);
@@ -17,6 +17,7 @@ void DKAudioJS::Init()
 	DKDuktape::AttachFunction("DKAudio_SetTime", DKAudioJS::SetTime);
 	DKDuktape::AttachFunction("DKAudio_GetTime", DKAudioJS::GetTime);
 	DKDuktape::AttachFunction("DKAudio_GetDuration", DKAudioJS::GetDuration);
+	return true;
 }
 
 //////////////////////////////////////////
