@@ -17,7 +17,7 @@ struct track{
 class DKSDLAudio : public DKObjectT<DKSDLAudio>
 {
 public:
-	void Init();
+	bool Init();
 	void End();
 
 	bool GetVolume(void* input, void* output);

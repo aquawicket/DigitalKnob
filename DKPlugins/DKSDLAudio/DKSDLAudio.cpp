@@ -3,11 +3,11 @@
 #include "DKSDLAudio/DKSDLAudio.h"
 
 ///////////////////////
-void DKSDLAudio::Init()
+bool DKSDLAudio::Init()
 {
 	if(SDL_Init(SDL_INIT_AUDIO) < 0){
 		DKLog("Could not Init SDL_Audio. \n",DKERROR);
-		return;
+		return false;
 	}	
 
 	//Initialize SDL_mixer 
@@ -29,6 +29,7 @@ void DKSDLAudio::Init()
 	DKClass::RegisterFunc("DKSDLAudio::SetTime", &DKSDLAudio::SetTime, this);
 	DKClass::RegisterFunc("DKSDLAudio::GetDuration", &DKSDLAudio::GetDuration, this);
 	DKApp::AppendLoopFunc(&DKSDLAudio::Process, this);
+	return true;
 }
 
 //////////////////////
