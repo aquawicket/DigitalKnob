@@ -12,7 +12,7 @@ class DKSDLText : public DKObjectT<DKSDLText>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	void SetText(DKString text);
 	void Draw();

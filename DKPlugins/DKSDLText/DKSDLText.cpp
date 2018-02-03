@@ -24,11 +24,12 @@ bool DKSDLText::Init()
 }
 
 /////////////////////
-void DKSDLText::End()
+bool DKSDLText::End()
 {
 	//SDL_FreeSurface(surface);
 	//SDL_DestroyTexture(texture);
 	//TTF_CloseFont(font);
+	return true;
 }
 
 //////////////////////////////////////
