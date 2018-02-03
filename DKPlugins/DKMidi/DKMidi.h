@@ -10,7 +10,7 @@ class DKMidi : public DKObjectT<DKMidi>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool GetInputs(DKStringArray& inputs);
 	bool GetOutputs(DKStringArray& outputs);

@@ -20,9 +20,9 @@ bool DKMidi::Init()
 }
 
 //////////////////
-void DKMidi::End()
+bool DKMidi::End()
 {
-
+	return true;
 }
 
 //////////////////////////
