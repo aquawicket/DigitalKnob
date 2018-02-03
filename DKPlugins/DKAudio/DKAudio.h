@@ -9,7 +9,7 @@ class DKAudio : public DKObjectT<DKAudio>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	static bool GetVolume(int& volume);
 	static bool Mute();

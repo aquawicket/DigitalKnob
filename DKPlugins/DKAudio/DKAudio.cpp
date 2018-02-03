@@ -22,12 +22,13 @@ bool DKAudio::Init()
 }
 
 ///////////////////
-void DKAudio::End()
+bool DKAudio::End()
 {
 	DKClose("DKAudioJS");
 	DKClose("DKSDLAudio");
 	DKClose("DKSDLWav");
 	DKClose("DKOSGAudio");
+	return true;
 }
 
 ///////////////////////////////////////
