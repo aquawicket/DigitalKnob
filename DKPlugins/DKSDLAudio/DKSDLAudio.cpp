@@ -33,10 +33,11 @@ bool DKSDLAudio::Init()
 }
 
 //////////////////////
-void DKSDLAudio::End()
+bool DKSDLAudio::End()
 {
 	DKApp::RemoveLoopFunc(&DKSDLAudio::Process, this);
 	Mix_CloseAudio();
+	return true;
 }
 
 /////////////////////////////////////////////////////

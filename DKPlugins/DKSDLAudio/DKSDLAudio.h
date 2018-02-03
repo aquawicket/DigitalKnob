@@ -18,7 +18,7 @@ class DKSDLAudio : public DKObjectT<DKSDLAudio>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool GetVolume(void* input, void* output);
 	bool Mute(void* input, void* output);
