@@ -18,9 +18,10 @@ bool DKOcrV8::Init()
 }
 
 ///////////////////
-void DKOcrV8::End()
+bool DKOcrV8::End()
 {
 	DKLog("DKOcrV8::End()\n", DKDEBUG);
+	return true;
 }
 
 

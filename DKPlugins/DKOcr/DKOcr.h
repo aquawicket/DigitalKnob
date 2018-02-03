@@ -11,7 +11,7 @@ class DKOcr : public DKObjectT<DKOcr>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	static bool ImageToText(DKString& file, DKString& text);
 
 	static tesseract::TessBaseAPI* api;

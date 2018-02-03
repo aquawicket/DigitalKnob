@@ -21,9 +21,10 @@ bool DKOcr::Init()
 }
 
 /////////////////
-void DKOcr::End()
+bool DKOcr::End()
 {
 	api->End();
+	return true;
 }
 
 ///////////////////////////////////////////////////////

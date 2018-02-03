@@ -10,7 +10,7 @@ class DKOcrV8 : public DKObjectT<DKOcrV8>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	static bool TestInt(CefArgs args, CefReturn retval);
 	static bool TestString(CefArgs args, CefReturn retval);
