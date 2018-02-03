@@ -21,11 +21,12 @@ bool DKCurl::Init()
 }
 
 //////////////////
-void DKCurl::End()
+bool DKCurl::End()
 {
 	if(curl){
 		curl_easy_cleanup(curl);
 	}
+	return true;
 }
 
 ///////////////////////

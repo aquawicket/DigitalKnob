@@ -12,7 +12,7 @@ class DKCurl : public DKObjectT<DKCurl>
 public:
 	//TODO: Persistant connecton
 	bool Init();
-	void End();
+	bool End();
 
 	bool CurlInit();
 	bool Download(const DKString& url, const DKString& dest);
