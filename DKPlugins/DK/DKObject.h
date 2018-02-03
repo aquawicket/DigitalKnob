@@ -102,7 +102,10 @@ public:
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
-		instances[instances.size()-1]->Init();
+		if(!instances[instances.size()-1]->Init()){
+			DKLog("DKBaseT::Instance("+date+"): failed\n", DKERROR);
+			//FIXME - We should we delete the instance. From here or by calling End();
+		}
 		return instances[instances.size()-1];
 	}
 
