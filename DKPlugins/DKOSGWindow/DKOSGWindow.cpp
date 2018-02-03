@@ -10,14 +10,14 @@ std::map<int,int> DKOSGWindow::osgShiftCharCode;
 std::map<int,int> DKOSGWindow::osgMouse;
 
 ////////////////////////
-void DKOSGWindow::Init()
+bool DKOSGWindow::Init()
 {
 #ifdef ANDROID
 	DKCreate("DKOSGWindowAndroid");
 #endif	
 	//link objects
 	dkOsgViewer = DKOSGViewer::Instance("DKOSGViewer0");
-	if(!dkOsgViewer){ DKLog("DKOSGRocket::Init(): dkOsgViewer invalid \n", DKERROR); return; }
+	if(!dkOsgViewer){ DKLog("DKOSGRocket::Init(): dkOsgViewer invalid \n", DKERROR); return false; }
 
 	lastMouseX = 0;
 	lastMouseY = 0;
@@ -40,6 +40,7 @@ void DKOSGWindow::Init()
 	DKClass::RegisterFunc("DKOSGWindow::GetMouseY", &DKOSGWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKOSGWindow::GetHwnd", &DKOSGWindow::GetHwnd, this);
 	MapInputs();
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
