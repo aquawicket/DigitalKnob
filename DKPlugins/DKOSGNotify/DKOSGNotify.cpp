@@ -4,8 +4,8 @@
 #include "DKAssets.h"
 #include "DKFile.h"
 
-/////////////////////
-void DKOSGNotify::Init()
+////////////////////////
+bool DKOSGNotify::Init()
 {
 	osg::setNotifyHandler(this);
 #ifdef DEBUG
@@ -13,12 +13,13 @@ void DKOSGNotify::Init()
 #else
 	osg::setNotifyLevel(osg::NOTICE);
 #endif
+	return true;
 }
 
-////////////////////
-void DKOSGNotify::End()
+///////////////////////
+bool DKOSGNotify::End()
 {
-
+	return true;
 }
 
 //////////////////////////////////////////////////////
