@@ -9,7 +9,8 @@ bool DKServerWebsockets::Init()
 }
 
 //////////////////////////////
-void DKServerWebsockets::End()
+bool DKServerWebsockets::End()
 {
 	DKLog("DKServerWebsockets::End()\n", DKINFO);
+	return true;
 }

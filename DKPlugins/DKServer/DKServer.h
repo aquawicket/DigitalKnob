@@ -51,7 +51,7 @@ class DKServer : public DKObjectT<DKServer>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	DKThread* thread;
 	server* s;

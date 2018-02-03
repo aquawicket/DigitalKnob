@@ -17,9 +17,10 @@ bool DKServer::Init()
 }
 
 ////////////////////
-void DKServer::End()
+bool DKServer::End()
 {
 	thread->stop();
+	return true;
 }
 
 

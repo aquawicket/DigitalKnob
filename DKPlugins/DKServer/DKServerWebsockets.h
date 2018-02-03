@@ -15,7 +15,7 @@ class DKServerWebsockets : public DKObjectT<DKServerWebsockets>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 };
 
 
