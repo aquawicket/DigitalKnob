@@ -14,7 +14,7 @@ class DKRocket : public Rocket::Core::EventListener, public DKObjectT<DKRocket>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool ToggleDebugger();
 	bool LoadGui(const DKString& file);

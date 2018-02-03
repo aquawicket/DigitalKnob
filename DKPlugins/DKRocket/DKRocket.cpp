@@ -62,7 +62,7 @@ bool DKRocket::Init()
 }
 
 ////////////////////
-void DKRocket::End()
+bool DKRocket::End()
 {
 	DKEvent::RemoveRegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::RemoveUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
@@ -75,7 +75,7 @@ void DKRocket::End()
 		context->RemoveReference();
 		Rocket::Core::Shutdown();
 	}
-	
+	return true;
 }
 
 ////////////////////////////////////////////
