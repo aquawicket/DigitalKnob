@@ -10,7 +10,7 @@ class DKCefV8 : public DKObjectT<DKCefV8>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	static bool _DKCreate(CefArgs args, CefReturn retval);
 	static bool _DKValid(CefArgs args, CefReturn retval);

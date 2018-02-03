@@ -57,9 +57,9 @@ bool DKCefV8::Init()
 }
 
 ///////////////////
-void DKCefV8::End()
+bool DKCefV8::End()
 {
-
+	return true;
 }
 
 ////////////////////////////////////////////////////////
