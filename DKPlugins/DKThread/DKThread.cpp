@@ -20,12 +20,13 @@ bool DKThreadPool::Init()
 }
 
 ////////////////////////
-void DKThreadPool::End()
+bool DKThreadPool::End()
 {
 	active = false;
 	dkThreadPool = NULL;
 	delete dkThreadPool;
 	//dkThreadPool->clear();
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////

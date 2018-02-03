@@ -20,7 +20,7 @@ class DKThreadPool : public DKObjectT<DKThreadPool>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool active;
 	void Queue(const DKString& name, boost::function<void ()> func);

@@ -10,7 +10,7 @@ class DKThreadV8 : public DKObjectT<DKThreadV8>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	static bool GetThreadNames(CefArgs args, CefReturn retval);
 	static bool _DKQueue(CefArgs args, CefReturn retval);
