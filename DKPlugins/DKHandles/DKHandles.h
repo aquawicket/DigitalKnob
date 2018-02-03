@@ -18,7 +18,7 @@ class DKHandles : public DKObjectT<DKHandles>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool Click();
 	bool DoHighlight();

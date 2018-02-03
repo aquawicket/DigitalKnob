@@ -19,9 +19,9 @@ bool DKHandles::Init()
 }
 
 /////////////////////
-void DKHandles::End()
+bool DKHandles::End()
 {
-
+	return true;
 }
 
 

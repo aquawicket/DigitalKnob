@@ -31,9 +31,10 @@ bool DKHandlesV8::Init()
 }
 
 ///////////////////////
-void DKHandlesV8::End()
+bool DKHandlesV8::End()
 {
 	DKLog("DKHandlesV8::End()\n", DKDEBUG);
+	return true;
 }
 
 /*
