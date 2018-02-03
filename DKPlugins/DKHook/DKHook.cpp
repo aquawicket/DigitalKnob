@@ -42,9 +42,10 @@ bool DKHook::Init()
 }
 
 //////////////////
-void DKHook::End()
+bool DKHook::End()
 {
 	//if(hModule){FreeLibrary(hModule);}
+	return true;
 }
 
 #ifdef LINUX
