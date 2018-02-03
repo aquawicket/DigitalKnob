@@ -12,7 +12,7 @@ class DKXml : public DKObjectT<DKXml>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool AppendNode(const DKString& xpath, const DKString& type);
 	bool FindNode(const DKString& xpath);

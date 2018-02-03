@@ -10,9 +10,10 @@ bool DKXml::Init()
 }
 
 /////////////////
-void DKXml::End()
+bool DKXml::End()
 {
 	DKLog("DKXml::End()\n", DKDEBUG);
+	return true;
 }
 
 //////////////////////////////////////////////
