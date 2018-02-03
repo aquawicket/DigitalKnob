@@ -12,10 +12,11 @@ bool DKAssetsV8::Init()
 	return true;
 }
 
-///////////////////
-void DKAssetsV8::End()
+//////////////////////
+bool DKAssetsV8::End()
 {
 	DKLog("DKAssetsV8::End()\n", DKDEBUG);
+	return true;
 }
 
 /*
