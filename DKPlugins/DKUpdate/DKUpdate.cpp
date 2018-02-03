@@ -87,9 +87,9 @@ bool DKUpdate::Init()
 }
 
 ////////////////////
-void DKUpdate::End()
+bool DKUpdate::End()
 {
-
+	return true;
 }
 
 ///////////////////////////////

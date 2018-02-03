@@ -8,7 +8,7 @@ class DKUpdate : public DKObjectT<DKUpdate>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	static bool CheckForUpdate();
 	static bool CreateUpdate();
