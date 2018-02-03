@@ -13,8 +13,8 @@
 class DKOSGAudio : public DKObjectT<DKOSGAudio>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 	
 	bool Create();
 	void* OpenMusic(void* data);

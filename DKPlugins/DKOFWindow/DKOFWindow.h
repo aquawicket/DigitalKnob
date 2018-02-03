@@ -8,8 +8,8 @@
 class DKOFWindow : public DKObjectT<DKOFWindow>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 };
 
 REGISTER_OBJECT(DKOFWindow, true)

@@ -9,7 +9,7 @@
 class DKOSGLights : public DKObjectT<DKOSGLights>
 {
 public:
-	void Init();
+	bool Init();
 
 private:
 	osg::Node* createLights();

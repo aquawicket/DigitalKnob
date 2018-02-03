@@ -19,8 +19,8 @@ class DKOSGCefHandler;
 class DKOSGCef : public osgGA::GUIEventHandler, public DKObjectT<DKOSGCef>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 
 	void* GetTexture(void*);
 	void* OnResize(void* data);

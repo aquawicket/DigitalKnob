@@ -4,7 +4,7 @@
 #include "DKAssets.h"
 
 ///////////////////////
-void DKOSGAudio::Init()
+bool DKOSGAudio::Init()
 {
 	if(instance_count == 1){ //only initiate on first instance
 		osgAudio::SoundManager::instance()->init(32); 
@@ -17,10 +17,11 @@ void DKOSGAudio::Init()
 
 	DKClass::RegisterFunc("DKOSGAudio::PlaySound", &DKOSGAudio::PlaySound, this);
 	DKClass::RegisterFunc("DKOSGAudio::OpenMusic", &DKOSGAudio::OpenMusic, this);
+	return true;
 }
 
 //////////////////////
-void DKOSGAudio::End()
+bool DKOSGAudio::End()
 {
 	musicSoundState->setPlay( false ); 
 	//sample = nullptr;
@@ -33,11 +34,12 @@ void DKOSGAudio::End()
 	sound_node = NULL;
 
 	// Very important to call before end of main!
-	if(instance_count != 1){ return; } //only shutdown on last instance
+	if(instance_count != 1){ return false; } //only shutdown on last instance
 	if(osg::Referenced::getDeleteHandler()){
 	    osg::Referenced::getDeleteHandler()->setNumFramesToRetainObjects(0);
 	}
 	osgAudio::SoundManager::instance()->shutdown();
+	return true;
 }
 
 /////////////////////////

@@ -4,8 +4,8 @@
 #include <osg/Point>
 
 
-/////////////////////
-void DKOSGLights::Init()
+////////////////////////
+bool DKOSGLights::Init()
 {
 	osg::Light* pLight = new osg::Light;
     pLight->setLightNum( 4 );                        
@@ -22,6 +22,7 @@ void DKOSGLights::Init()
     DKOSGWindow::Instance("DKOSGWindow")->world->addChild( pLightSource );
 
 	DKOSGWindow::Instance("DKOSGWindow")->world->getOrCreateStateSet()->setMode( GL_LIGHT4, osg::StateAttribute::ON );
+	return true;
 }
 
 ///////////////////////////////////

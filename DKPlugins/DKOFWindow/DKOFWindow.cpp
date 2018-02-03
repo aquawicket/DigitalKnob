@@ -4,7 +4,7 @@
 #include "ofMain.h"
 
 ///////////////////////
-void DKOFWindow::Init()
+bool DKOFWindow::Init()
 {
 	//ofSetupOpenGL(1024, 768, OF_WINDOW);
 	
@@ -13,10 +13,11 @@ void DKOFWindow::Init()
 	//settings.windowMode = OF_FULLSCREEN;
 	//ofCreateWindow(settings);
 	//ofRunApp(new ofApp());
+	return true;
 }
 
-///////////////////////
-void DKOFWindow::End()
+//////////////////////
+bool DKOFWindow::End()
 {
-
+	return true;
 }

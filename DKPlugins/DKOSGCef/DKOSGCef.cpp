@@ -12,7 +12,7 @@
 
 
 /////////////////////
-void DKOSGCef::Init()
+bool DKOSGCef::Init()
 {
 	dkOsgWindow = DKOSGWindow::Instance("DKOSGWindow0");
 	dkCef = DKCef::Instance("DKCef");
@@ -31,16 +31,18 @@ void DKOSGCef::Init()
 	dkOsgWindow->view->addEventHandler(this);
 	DKClass::RegisterFunc(id+"::OnResize", &DKOSGCef::OnResize, this);
 	DKClass::RegisterFunc("DKOSGCef::GetTexture", &DKOSGCef::GetTexture, this);
+	return true;
 }
 
 ////////////////////
-void DKOSGCef::End()
+bool DKOSGCef::End()
 {
 	DKApp::RemoveLoopFunc(&DKOSGCefHandler::DoFrame, cefHandler);
 	//dkOsgWindow->view->removeEventHandler(this); //crash
 	dkOsgWindow->root->removeChild(modelViewMat);
 	modelViewMat = NULL;
 	cefHandler = nullptr;
+	return true;
 }
 
 ////////////////////////////////////
