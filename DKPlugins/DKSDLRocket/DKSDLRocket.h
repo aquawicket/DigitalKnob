@@ -18,7 +18,7 @@ class DKSDLRocket : public DKObjectT<DKSDLRocket>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool handle(SDL_Event *event);
 	//void ProcessEvent(Rocket::Core::Event& event);

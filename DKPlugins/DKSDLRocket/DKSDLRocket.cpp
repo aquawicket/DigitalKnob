@@ -35,9 +35,9 @@ bool DKSDLRocket::Init()
 }
 
 ///////////////////////
-void DKSDLRocket::End()
+bool DKSDLRocket::End()
 {
-
+	return true;
 }
 
 //////////////////////////////////////////
