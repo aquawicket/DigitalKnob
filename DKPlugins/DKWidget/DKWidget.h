@@ -21,7 +21,7 @@ class DKWidget : public DKObjectT<DKWidget>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 protected:
 	static DKRocket* dkRocket;

@@ -55,9 +55,10 @@ bool DKWidget::Init()
 }
 
 ////////////////////
-void DKWidget::End()
+bool DKWidget::End()
 {
 	RemoveWidget(this);
+	return true;
 }
 
 /////////////////////////////////////////////
