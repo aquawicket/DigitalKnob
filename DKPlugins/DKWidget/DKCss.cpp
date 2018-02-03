@@ -56,8 +56,9 @@ bool DKCss::Init()
 	return true;
 }
 
-////////////////////////
-void DKCss::End()
+/////////////////
+bool DKCss::End()
 {
 	DKLog("DKCss::End()\n", DKDEBUG);
+	return true;
 }
