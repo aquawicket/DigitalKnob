@@ -8,7 +8,7 @@ class DKRocketIframe : /*public Rocket::Core::EventListener,*/ public DKObjectT<
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 };
 
 REGISTER_OBJECT(DKRocketIframe, true)

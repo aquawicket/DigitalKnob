@@ -19,7 +19,7 @@ bool DKRocketIframe::Init()
 }
 
 //////////////////////////
-void DKRocketIframe::End()
+bool DKRocketIframe::End()
 {
-	
+	return true;
 }
