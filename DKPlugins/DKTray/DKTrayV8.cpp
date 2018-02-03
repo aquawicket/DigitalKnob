@@ -13,9 +13,10 @@ bool DKTrayV8::Init()
 }
 
 ///////////////////
-void DKTrayV8::End()
+bool DKTrayV8::End()
 {
 	DKLog("DKTrayV8::End()\n", DKDEBUG);
+	return true;
 }
 
 /*

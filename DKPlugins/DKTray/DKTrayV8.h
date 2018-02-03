@@ -10,7 +10,7 @@ class DKTrayV8 : public DKObjectT<DKTrayV8>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	//static bool Test(CefArgs args, CefReturn retval);
 	
 	static bool AddItem(CefArgs args, CefReturn retval);

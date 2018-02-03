@@ -55,15 +55,16 @@ bool DKTray::Init()
 #endif
 
 	DKLog("DKTray::Init() not implemented on this OS! \n", DKERROR);
-	return false;
+	return false; //TODO - double check this. 
 }
 
 //////////////////
-void DKTray::End()
+bool DKTray::End()
 {
 #ifdef WIN32
 	TrayIcon.RemoveIcon();
 #endif
+	return true;
 }
 
 //////////////////////
