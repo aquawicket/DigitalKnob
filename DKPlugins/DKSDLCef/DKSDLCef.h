@@ -29,7 +29,7 @@ class DKSDLCef : public DKObjectT<DKSDLCef>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool OnResize(void* input, void* output);
 	bool GetTexture(void* input, void* output);

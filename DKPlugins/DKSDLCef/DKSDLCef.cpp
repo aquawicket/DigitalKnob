@@ -38,7 +38,7 @@ bool DKSDLCef::Init()
 }
 
 ////////////////////
-void DKSDLCef::End()
+bool DKSDLCef::End()
 {
 	DKLog("DKSDLCef::End()\n", DKDEBUG);
 
@@ -47,6 +47,7 @@ void DKSDLCef::End()
 	DKClass::UnregisterFunc("DKSDLCef::GetTexture::" + id);
 	cefHandler = NULL;
 	//cef_image = NULL;
+	return true;
 }
 
 //////////////////////////////////////////////////
