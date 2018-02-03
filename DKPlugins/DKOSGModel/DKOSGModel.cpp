@@ -15,18 +15,20 @@
 #include "DKAssets.h"
 
 
-////////////////////
-void DKOSGModel::Init()
+///////////////////////
+bool DKOSGModel::Init()
 {
 	modelNode = NULL;
 	Create(DKOSGWindow::Get("DKOSGWindow0"), DKOSGWindow::Get("DKOSGWindow0")->world, data[1], osg::Vec3(0, 0, 70));
+	return true;
 }
 
-///////////////////
-void DKOSGModel::End()
+//////////////////////
+bool DKOSGModel::End()
 {
 	this->theRoot->removeChild(modelNode);
 	modelNode = NULL;
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

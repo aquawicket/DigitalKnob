@@ -9,7 +9,7 @@
 class DKOSGModelJS : public DKObjectT<DKOSGModelJS>
 {
 public:
-	void Init();
+	bool Init();
 	//static int NewModel(duk_context* ctx);
 };
 

@@ -7,8 +7,8 @@
 class DKOSGManipulator : public DKObjectT<DKOSGManipulator>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 	
 	osg::ref_ptr<osgGA::TrackballManipulator> tb;
 };

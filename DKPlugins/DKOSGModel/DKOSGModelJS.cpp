@@ -3,10 +3,11 @@
 #include "DKOSGModelJS.h"
 #include "DKOSGWindow.h"
 
-//////////////////////
-void DKOSGModelJS::Init()
+/////////////////////////
+bool DKOSGModelJS::Init()
 {
 	//DKDuktape::AttachFunction("DKOSGModel_NewModel", DKOSGModelJS::NewModel, 1);
+	return true;
 }
 
 /*

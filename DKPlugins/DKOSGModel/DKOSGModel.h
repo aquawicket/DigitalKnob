@@ -10,8 +10,8 @@
 class DKOSGModel : public DKObjectT<DKOSGModel>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 
 	bool Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file, osg::Vec3 pos);
 	osg::ref_ptr<osg::Node> modelNode;
