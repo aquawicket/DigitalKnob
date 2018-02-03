@@ -27,10 +27,11 @@ bool DKFileV8::Init()
 	return true;
 }
 
-///////////////////
-void DKFileV8::End()
+////////////////////
+bool DKFileV8::End()
 {
 	DKLog("DKFileV8::End()\n", DKDEBUG);
+	return true;
 }
 
 /*
