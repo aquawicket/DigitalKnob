@@ -10,7 +10,7 @@ class DKSDLWindowAndroid : public DKObjectT<DKSDLWindowAndroid>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	bool onAccel(void*input, void* output);
 	bool onAddJoystick(void*input, void* output);

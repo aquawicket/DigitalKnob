@@ -274,12 +274,13 @@ bool DKSDLWindow::Init()
 }
 
 ///////////////////////
-void DKSDLWindow::End()
+bool DKSDLWindow::End()
 {
 	//SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(sdlren);
 	SDL_DestroyWindow(sdlwin);
 	SDL_Quit();
+	return true;
 }
 
 ///////////////////////////////////////////////

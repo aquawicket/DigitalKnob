@@ -67,9 +67,9 @@ bool DKSDLWindowAndroid::Init()
 }
 
 //////////////////////////////
-void DKSDLWindowAndroid::End()
+bool DKSDLWindowAndroid::End()
 {
-	
+	return true;
 }
 	
 /////////////////////////////////////////////////////////////
