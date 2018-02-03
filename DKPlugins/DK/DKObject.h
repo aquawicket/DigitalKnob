@@ -16,7 +16,7 @@ public:
 	
 	~DKObject(){ /*DKEvent::RemoveEvents(this);*/ }	
 	virtual bool Init(){ return true; }
-	virtual void End(){}
+	virtual bool End(){ return true; }
 
 	DKStringArray data; //(class,id,var1,var2,var3,etc)
 
@@ -103,7 +103,7 @@ public:
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
 		if(!instances[instances.size()-1]->Init()){
-			DKLog("DKBaseT::Instance("+date+"): failed\n", DKERROR);
+			DKLog("DKBaseT::Instance("+data+"): failed\n", DKERROR);
 			//FIXME - We should we delete the instance. From here or by calling End();
 		}
 		return instances[instances.size()-1];

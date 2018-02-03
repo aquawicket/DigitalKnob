@@ -260,7 +260,7 @@ bool DKCef::Init()
 }
 
 /////////////////
-void DKCef::End()
+bool DKCef::End()
 {
 	DKLog("DKCef::End()\n", DKDEBUG);
 	
@@ -276,6 +276,7 @@ void DKCef::End()
 #ifdef WIN32
 	FreeLibrary(libcef);
 #endif
+	return true;
 }
 
 ////////////////////////

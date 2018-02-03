@@ -17,7 +17,7 @@ class DKCef : public DKObjectT<DKCef>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	bool CloseBrowser(int num);
 	bool DownloadUrl(const DKString& url);

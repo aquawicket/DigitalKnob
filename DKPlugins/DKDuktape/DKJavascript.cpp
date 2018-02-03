@@ -25,9 +25,10 @@ bool DKJavascript::Init()
 }
 
 ////////////////////////
-void DKJavascript::End()
+bool DKJavascript::End()
 {
 	DKLog("DKJavascript::End()\n", DKDEBUG);
     DKString file = DKFile::local_assets+data[1];
 	DKDuktape::CallEnd(file);
+	return true;
 }

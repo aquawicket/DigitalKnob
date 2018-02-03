@@ -66,10 +66,11 @@ bool DKDuktape::Init()
 }
 
 /////////////////////
-void DKDuktape::End()
+bool DKDuktape::End()
 {
 	duk_destroy_heap(ctx);
 	ctx = NULL;
+	return true;
 }
 
 

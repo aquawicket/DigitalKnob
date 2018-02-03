@@ -10,7 +10,7 @@ class DKDuktape : public DKObjectT<DKDuktape>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	static bool AttachFunction(const DKString& name, duk_c_function func);
 	static bool CallEnd(const DKString& file);
