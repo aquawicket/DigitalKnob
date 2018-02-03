@@ -123,7 +123,9 @@ public:
 				//DKLog("Closing "+id+"\n", DKINFO);
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
-				instances[i]->End();
+				if(!instances[i]->End()){
+					DKLog("DKBaseT::Close(): failed\n", DKERROR);
+				}
 				if(instances.size() == 0) { return; }
 				instances[i] = NULL;
 				instances.erase(instances.begin()+i);
