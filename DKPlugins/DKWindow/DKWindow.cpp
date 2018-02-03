@@ -14,11 +14,12 @@ bool DKWindow::Init()
 }
 
 ////////////////////
-void DKWindow::End()
+bool DKWindow::End()
 {
 	DKLog("DKWindow::End()\n", DKDEBUG);
 	
 	DKClass::UnregisterFunc("DKWindow::MessageBox");
+	return true;
 }
 
 ///////////////////////

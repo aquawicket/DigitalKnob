@@ -19,9 +19,10 @@ bool DKWindowV8::Init()
 }
 
 //////////////////////
-void DKWindowV8::End()
+bool DKWindowV8::End()
 {
 	DKLog("DKWindowV8::End()\n", DKDEBUG);
+	return true;
 }
 
 
