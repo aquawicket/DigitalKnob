@@ -13,10 +13,11 @@ bool DKDebugV8::Init()
 	return true;
 }
 
-///////////////////
-void DKDebugV8::End()
+/////////////////////
+bool DKDebugV8::End()
 {
 	DKLog("DKDebugV8::End()\n", DKDEBUG);
+	return true;
 }
 
 /*

@@ -233,9 +233,9 @@ bool DKDebug::Init()
 }
 
 ///////////////////
-void DKDebug::End()
+bool DKDebug::End()
 {
-
+	return true;
 }
 
 //////////////////////////////

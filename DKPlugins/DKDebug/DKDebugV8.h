@@ -10,7 +10,7 @@ class DKDebugV8 : public DKObjectT<DKDebugV8>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 
 	//static bool Test(CefArgs args, CefReturn retval);
 	static bool SendBugReport(CefArgs args, CefReturn retval);
