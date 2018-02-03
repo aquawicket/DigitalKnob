@@ -384,8 +384,8 @@
 class DKOSGViewer : public DKObjectT<DKOSGViewer>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 
 	bool Realize();
 	void DoFrame();

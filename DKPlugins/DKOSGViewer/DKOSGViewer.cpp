@@ -6,8 +6,8 @@
 #include <osgDB/FileNameUtils>
 #include "DKFile.h"
 
-/////////////////////
-void DKOSGViewer::Init()
+////////////////////////
+bool DKOSGViewer::Init()
 {
 	DKCreate("DKOSGNotify");
 	DKCreate("DKGLInfo");
@@ -17,12 +17,13 @@ void DKOSGViewer::Init()
 	//viewer->setRunFrameScheme(osgViewer::ViewerBase::ON_DEMAND);
 	viewer->setRunFrameScheme(osgViewer::ViewerBase::CONTINUOUS);
 	AppendDataPath(DKFile::local_assets);
+	return true;
 }
 
-////////////////////
-void DKOSGViewer::End()
+///////////////////////
+bool DKOSGViewer::End()
 {
-
+	return true;
 }
 
 ///////////////////////////
