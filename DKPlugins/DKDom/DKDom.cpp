@@ -11,9 +11,9 @@ bool DKDom::Init()
 }
 
 /////////////////
-void DKDom::End()
+bool DKDom::End()
 {
-
+	return true;
 }
 
 ElementObject::ElementObject()
