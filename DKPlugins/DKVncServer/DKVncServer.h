@@ -27,7 +27,7 @@ class DKVncServer : public DKObjectT<DKVncServer>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	void Loop();
 
 	static void DrawBuffer();

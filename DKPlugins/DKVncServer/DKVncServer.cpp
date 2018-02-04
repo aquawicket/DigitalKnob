@@ -124,9 +124,9 @@ bool DKVncServer::Init()
 }
 
 ///////////////////////
-void DKVncServer::End()
+bool DKVncServer::End()
 {
-
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////
