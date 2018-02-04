@@ -106,7 +106,7 @@ public:
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
 		if(!instances[instances.size()-1]->Init()){
-			DKLog("DKBaseT::Instance("+final_data+"): failed\n", DKERROR);
+			DKLog("DKBaseT::Instance("+final_data+"): failed\n", DKWARN);
 			//TEST - We should we delete the instance. From here or by calling End();
 			Close(arry[1]);
 			return NULL;
@@ -129,7 +129,7 @@ public:
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
 				if(!instances[i]->End()){
-					DKLog("DKBaseT::Close("+id+"): failed\n", DKERROR);
+					DKLog("DKBaseT::Close("+id+"): failed\n", DKWARN);
 				}
 				if(instances.size() == 0) { return; }
 				instances[i] = NULL;
