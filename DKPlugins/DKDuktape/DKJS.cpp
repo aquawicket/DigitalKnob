@@ -147,7 +147,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	if(!obj){
 		duk_push_string(ctx, "");
 		DKLog("DKJS::_DKCreate("+data+"): obj invalid \n", DKWARN);
-		return 0;
+		return 1;
 	}
 
 	//Look for a callback function, and call it if one exists. FIXME
