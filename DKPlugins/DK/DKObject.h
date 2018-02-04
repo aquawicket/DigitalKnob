@@ -106,7 +106,7 @@ public:
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
 		if(!instances[instances.size()-1]->Init()){
-			DKLog("DKBaseT::Instance("+data+"): failed\n", DKERROR);
+			DKLog("DKBaseT::Instance("+final_data+"): failed\n", DKERROR);
 			//FIXME - We should we delete the instance. From here or by calling End();
 		}
 		return instances[instances.size()-1];
@@ -127,7 +127,7 @@ public:
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
 				if(!instances[i]->End()){
-					DKLog("DKBaseT::Close(): failed\n", DKERROR);
+					DKLog("DKBaseT::Close("+id+"): failed\n", DKERROR);
 				}
 				if(instances.size() == 0) { return; }
 				instances[i] = NULL;
@@ -196,16 +196,13 @@ private:
 	static std::vector<T*> instances;
 	static char* classname;
     static bool singleton;
-	
 };
+
 
 template<class T, class R>	char* DKBaseT<T,R>::classname;
 template<class T, class R>	int DKBaseT<T,R>::instance_count;
 template<class T, class R>	bool DKBaseT<T,R>::singleton;
 template<class T, class R>	std::vector<T*> DKBaseT<T,R>::instances;
-
-
-
 
 template <class T>
 //////////////////////////////////////////////////////
@@ -213,8 +210,5 @@ class DKObjectT : public DKObject, public DKBaseT<T,T>
 {	
 
 };
-
-
-
 
 #endif //DKObject_H
