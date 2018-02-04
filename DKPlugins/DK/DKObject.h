@@ -107,7 +107,9 @@ public:
 		instances[instances.size()-1]->SetData(final_data); 
 		if(!instances[instances.size()-1]->Init()){
 			DKLog("DKBaseT::Instance("+final_data+"): failed\n", DKERROR);
-			//FIXME - We should we delete the instance. From here or by calling End();
+			//TEST - We should we delete the instance. From here or by calling End();
+			Close(arry[1]);
+			return NULL;
 		}
 		return instances[instances.size()-1];
 	}
