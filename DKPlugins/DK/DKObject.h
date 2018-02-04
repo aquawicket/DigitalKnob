@@ -109,7 +109,7 @@ public:
 			DKLog("DKBaseT::Instance("+final_data+"): failed\n", DKWARN);
 			//TEST - We should we delete the instance.
 			//Close(arry[1]);
-			return NULL;
+			//return NULL;
 		}
 		return instances[instances.size()-1];
 	}
