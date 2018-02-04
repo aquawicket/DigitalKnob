@@ -11,7 +11,7 @@ class DKVncClient : public DKObjectT<DKVncClient>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
     
 	void draw();
 	static void update(rfbClient* cl,int x,int y,int w,int h);

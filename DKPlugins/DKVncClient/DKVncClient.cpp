@@ -212,10 +212,11 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 }
 
 ///////////////////////
-void DKVncClient::End()
+bool DKVncClient::End()
 {
 	DKLog("DKVncClient::End()\n", DKINFO);
 	SDL_DestroyTexture(tex);
+	return true;
 }
 
 ////////////////////////
@@ -246,7 +247,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 {
 	//Throttle the drawing to conserve cpu
 	DKUtil::GetTicks(DKUtil::now);
-	UINT32 delta = DKUtil::now - DKUtil::lastFrame;
+	int delta = DKUtil::now - DKUtil::lastFrame;
 	if(delta < DKUtil::ticksPerFrame){
 		//UINT32 sleep = DKApp::ticksPerFrame - delta;
 		//DKUtil::Sleep(sleep);
