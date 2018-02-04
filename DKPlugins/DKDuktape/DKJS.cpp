@@ -146,7 +146,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	DKObject* obj = DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
-		DKLog("DKJS::_DKCreate("+data+"): obj invalid \n", DKERROR);
+		DKLog("DKJS::_DKCreate("+data+"): obj invalid \n", DKWARN);
 		return 0;
 	}
 
