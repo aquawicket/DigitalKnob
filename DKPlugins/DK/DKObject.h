@@ -60,9 +60,9 @@ public:
 	static T* Instance(const DKString& data)
     {
 		//DKLog("DKObject::Instance("+data+")\n", DKDEBUG);
-		if(has(data, ".js")){
-			DKLog("DKObject::Instance(): this is a .js file. Can't work for Cef.\n", DKERROR);
-		}
+		//if(has(data, ".js")){
+		//	DKLog("DKObject::Instance(): this is a .js file. Can't work for Cef.\n", DKERROR);
+		//}
 		
 		//data = (id,var1,var2,var3,etc)
 		if(!instances.empty() && singleton){
