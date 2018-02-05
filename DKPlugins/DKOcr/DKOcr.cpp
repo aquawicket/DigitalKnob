@@ -31,9 +31,9 @@ bool DKOcr::End()
 bool DKOcr::ImageToText(DKString& file, DKString& text)
 {
 	if(!DKFile::PathExists(file)){ return false; }
-	if(has(file,".pdf")){
-		return PdfToText(file, text);
-	}
+	//if(has(file,".pdf")){
+	//	return PdfToText(file, text);
+	//}
 	char* outText;
 	Pix *image = pixRead(file.c_str());
 	api->SetImage(image);
@@ -49,6 +49,7 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 	return true;
 }
 
+/*
 /////////////////////////////////////////////////////
 bool DKOcr::PdfToText(DKString& file, DKString& text)
 {
@@ -166,3 +167,4 @@ void DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pC
 	}
 	printf("(%.3f,%.3f) %s \n", dCurPosX, dCurPosY, unicode.GetStringUtf8().c_str());
 }
+*/
