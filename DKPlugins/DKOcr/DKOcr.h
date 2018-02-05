@@ -14,6 +14,10 @@ public:
 	bool End();
 	static bool ImageToText(DKString& file, DKString& text);
 
+	static bool PdfToText(DKString& file, DKString& text);
+	static void ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* pPage);
+	static void AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pCurFont, const PoDoFo::PdfString & rString);
+
 	static tesseract::TessBaseAPI* api;
 };
 
