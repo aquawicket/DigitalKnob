@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKOcr/DKOcr.h"
 #include "DK/DKFile.h"
+#include "DKAssets/DKAssets.h"
 #include "src/allheaders.h"
 
 tesseract::TessBaseAPI* DKOcr::api;
@@ -30,12 +31,14 @@ bool DKOcr::End()
 ///////////////////////////////////////////////////////
 bool DKOcr::ImageToText(DKString& file, DKString& text)
 {
-	if(!DKFile::PathExists(file)){ return false; }
-	//if(has(file,".pdf")){
-	//	return PdfToText(file, text);
-	//}
+	DKString _file = file;
+	if(has(file,".pdf")){
+		if(!PdfToText(file, text)){ return false; }
+		_file = DKFile::local_assets+"/temp.png";
+	}
+	if(!DKFile::PathExists(_file)){ return false; }
 	char* outText;
-	Pix *image = pixRead(file.c_str());
+	Pix *image = pixRead(_file.c_str());
 	api->SetImage(image);
 	outText = api->GetUTF8Text();
 	if(!outText){ 
@@ -46,6 +49,19 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 	DKLog("OCR output:\n"+text+"\n", DKINFO);
 	delete [] outText;
 	pixDestroy(&image);
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKOcr::PdfToText(DKString& file, DKString& text)
+{
+	//TODO
+
+	//convert -density 300 a.pdf -resize 25% a.png
+	DKString assets = DKFile::local_assets;
+	DKString infile;
+	DKFile::GetShortName(file, infile);
+	DKUtil::System(assets+"/DKImageMagick/magick.exe convert -density 300 "+infile+" -resize 25% "+assets+"/temp.png");
 	return true;
 }
 
