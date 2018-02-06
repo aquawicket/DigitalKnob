@@ -62,6 +62,12 @@ function DKPaint_Open(file)
 	if(file.includes(".pdf") || file.includes(".PDF")){
 		DKWidget_SetAttribute("DKPaint_Image", "src", "");
 		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
+		DKWidget_SetAttribute("DKPaint_Embed", "type", "application/pdf");
+	}
+	else if(file.includes(".tif")){
+		DKWidget_SetAttribute("DKPaint_Image", "src", "");
+		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
+		DKWidget_SetAttribute("DKPaint_Embed", "type", "image/tiff");
 	}
 	else{
 		DKWidget_SetAttribute("DKPaint_Image", "src", file);
