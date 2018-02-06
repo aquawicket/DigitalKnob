@@ -31,7 +31,7 @@ function DKOcr_OnEvent(event)
 		DKLog("OpenFile: "+file+" \n");
 		
 		//if file is pdf, convert it to png
-		if(file.includes(".pdf")){
+		if(file.includes(".pdf") || file.includes(".PDF")){
 			DKLog("DKOcr_OnEvent(): file is a pdf\n", DKINFO);
 			var assets = DKAssets_LocalAssets();
 			var temp_file = assets+"temp.png";
