@@ -1,3 +1,5 @@
+DKDEPEND(gs922w64)
+
 ### INSTALL ###
 IF(NOT WIN32)
 	RETURN()
