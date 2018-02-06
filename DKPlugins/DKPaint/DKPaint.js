@@ -59,21 +59,16 @@ function DKPaint_Open(file)
 {
 	DKLog("DKPaint_Open("+file+") \n");
 	currentFile = file;
+	
+	DKWidget_SetInnerHtml("DKPaint_content", "");
 	if(file.includes(".pdf") || file.includes(".PDF")){
-		DKWidget_SetAttribute("DKPaint_Image", "src", "");
-		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
-		DKWidget_SetAttribute("DKPaint_Embed", "height", "100%");
-		DKWidget_SetAttribute("DKPaint_Embed", "type", "application/pdf");
+		DKWidget_SetInnerHtml("DKPaint_content", "<embed id=\"DKPaint_Embed\" width=\"100%\" height=\"100%\" type='application/pdf' src="+file+"></embed>");
 	}
 	else if(file.includes(".tif")){
-		DKWidget_SetAttribute("DKPaint_Image", "src", "");
-		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
-		DKWidget_SetAttribute("DKPaint_Embed", "height", "0");
 		DKPaint_LoadTif(file);
 	}
 	else{
-		DKWidget_SetAttribute("DKPaint_Image", "src", file);
-		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
+		DKWidget_SetInnerHtml("DKPaint_content", "<img id=\"DKPaint_Image\" src="+file+"></img>");
 	}
 }
 
