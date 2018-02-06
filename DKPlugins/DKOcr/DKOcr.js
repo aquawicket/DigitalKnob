@@ -34,8 +34,35 @@ function DKOcr_OnEvent(event)
 		if(file.includes(".pdf")){
 			DKLog("DKOcr_OnEvent(): file is a pdf\n", DKINFO);
 			var assets = DKAssets_LocalAssets();
-			DK_System(assets+"/DKImageMagick/magick.exe convert -density 300 "+file+" "+assets+"/temp.png");
+			var temp_file = assets+"temp.png";
+			DKLog("temp_file = "+temp_file+"\n", DKINFO);
+			
+			DKFile_Delete(assets+"/temp.png");
+			for(var i=0; i<1000; i++){
+				if(DKFile_Exists(assets+"/temp-"+i+".png")){
+					DKFile_Delete(assets+"/temp-"+i+".png");
+				}
+				else{
+					i=1000;
+					continue;
+				}
+			}
+			
+			DK_System(assets+"/DKImageMagick/magick.exe convert -density 300 "+file+" "+temp_file);
 			file = assets+"/temp.png";
+			
+			var pages = "";
+			for(var i=0; i<1000; i++){
+				if(DKFile_Exists(assets+"/temp-"+i+".png")){
+					pages += DKOcr_ImageToText(assets+"/temp-"+i+".png");
+					DKWidget_SetAttribute("DKNotepad_Text", "value", pages);
+				}
+				else{
+					i=1000;
+					continue;
+				}
+			}
+			if(DKFile_Exists(assets+"/temp-0.png")){ return ; }
 		}
 		
 		var text;
