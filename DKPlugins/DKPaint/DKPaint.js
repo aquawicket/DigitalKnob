@@ -66,11 +66,37 @@ function DKPaint_Open(file)
 	}
 	else if(file.includes(".tif")){
 		DKWidget_SetAttribute("DKPaint_Image", "src", "");
-		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
-		DKWidget_SetAttribute("DKPaint_Embed", "type", "image/tiff");
+		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
+		DKPaint_LoadTif(file);
 	}
 	else{
 		DKWidget_SetAttribute("DKPaint_Image", "src", file);
 		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
 	}
+}
+
+//////////////////////////////
+function DKPaint_LoadTif(file)
+{
+	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){});
+	DKCreate("DKPaint/tiff.min.js", function(){});
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', file);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function (e) {
+      var buffer = xhr.response;
+      var tiff = new Tiff({buffer: buffer});
+      var canvas = tiff.toCanvas();
+      var width = tiff.width();
+      var height = tiff.height();
+      if (canvas) {
+        var $elem = $('<div><div><a href="' + file + '">' +
+                      file +
+                      ' (width: ' + width + ', height:' + height + ')' +
+                      '</a></div></div>');
+        $elem.append(canvas);
+        $('DKPaint/DKPaint.html').append($elem);
+      }
+    };
+    xhr.send();
 }
