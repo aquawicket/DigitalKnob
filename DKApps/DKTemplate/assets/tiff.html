@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://seikichi.github.io/tiff.js/basic.html -->
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+  <body style="">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="DKPaint/tiff.min.js"></script>
+    <script type="text/javascript">
+$(function () {
+  var loadImage = function (filename) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', filename);
+    xhr.responseType = 'arraybuffer';
+    xhr.onload = function (e) {
+      var buffer = xhr.response;
+      var tiff = new Tiff({buffer: buffer});
+      var canvas = tiff.toCanvas();
+      var width = tiff.width();
+      var height = tiff.height();
+      if (canvas) {
+        var $elem = $('<div></div>');
+        $elem.append(canvas);
+        $('body').append($elem);
+      }
+    };
+    xhr.send();
+  };
+
+    loadImage('http://seikichi.github.io/tiff.js/images/rgb-3c-16b.tiff');
+});
+
+		</script>
+	</body>
+</html>
