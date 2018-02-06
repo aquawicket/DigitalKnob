@@ -1,14 +1,11 @@
-DKDEPEND(gs922w64)
+IF(WIN)
+	DKDEPEND(gs922w64)
 
-### INSTALL ###
-IF(NOT WIN32)
-	RETURN()
+	IF(NOT EXISTS ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
+		DKSETPATH(${DIGITALKNOB}/Download)
+		DKDOWNLOAD(${DKONLINE}/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip)
+		DKEXTRACT(${DIGITALKNOB}/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
+	ENDIF()
+
+	DKSET(IMAGEMAGICK ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
 ENDIF()
-
-IF(NOT EXISTS ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
-	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip)
-	DKEXTRACT(${DIGITALKNOB}/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
-ENDIF()
-
-DKSET(IMAGEMAGICK ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
