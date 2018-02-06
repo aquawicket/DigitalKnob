@@ -63,12 +63,15 @@ function DKPaint_Open(file)
 	DKWidget_SetInnerHtml("DKPaint_content", "");
 	if(file.includes(".pdf") || file.includes(".PDF")){
 		DKWidget_SetInnerHtml("DKPaint_content", "<embed id=\"DKPaint_Embed\" width=\"100%\" height=\"100%\" type='application/pdf' src="+file+"></embed>");
+		DKWidget_SetProperty("DKPaint_content", "overflow-y", "none");
 	}
 	else if(file.includes(".tif")){
 		DKPaint_LoadTif(file);
+		DKWidget_SetProperty("DKPaint_content", "overflow-y", "auto");
 	}
 	else{
 		DKWidget_SetInnerHtml("DKPaint_content", "<img id=\"DKPaint_Image\" src="+file+"></img>");
+		DKWidget_SetProperty("DKPaint_content", "overflow-y", "auto");
 	}
 }
 
