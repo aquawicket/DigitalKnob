@@ -62,11 +62,13 @@ function DKPaint_Open(file)
 	if(file.includes(".pdf") || file.includes(".PDF")){
 		DKWidget_SetAttribute("DKPaint_Image", "src", "");
 		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
+		DKWidget_SetAttribute("DKPaint_Embed", "height", "100%");
 		DKWidget_SetAttribute("DKPaint_Embed", "type", "application/pdf");
 	}
 	else if(file.includes(".tif")){
 		DKWidget_SetAttribute("DKPaint_Image", "src", "");
 		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
+		DKWidget_SetAttribute("DKPaint_Embed", "height", "0");
 		DKPaint_LoadTif(file);
 	}
 	else{
@@ -91,9 +93,7 @@ function DKPaint_LoadTif(filename)
 			var width = tiff.width();
 			var height = tiff.height();
 			if(canvas){
-				var $elem = $('<div></div>');
-				$elem.append(canvas);
-				$('body').append($elem);
+				document.getElementById("DKPaint_content").append(canvas);
 			}
 		};
 		xhr.send();
