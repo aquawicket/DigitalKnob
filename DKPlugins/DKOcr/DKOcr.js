@@ -34,7 +34,7 @@ function DKOcr_OnEvent(event)
 		if(file.includes(".pdf")){
 			DKLog("DKOcr_OnEvent(): file is a pdf\n", DKINFO);
 			var assets = DKAssets_LocalAssets();
-			DK_System(assets+"/DKImageMagick/magick.exe convert "+file+" "+assets+"/temp.png");
+			DK_System(assets+"/DKImageMagick/magick.exe convert -density 300 "+file+" "+assets+"/temp.png");
 			file = assets+"/temp.png";
 		}
 		
