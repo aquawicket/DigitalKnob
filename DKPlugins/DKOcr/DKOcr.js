@@ -48,7 +48,7 @@ function DKOcr_OnEvent(event)
 				}
 			}
 			
-			DK_System(assets+"/DKImageMagick/magick.exe convert -verbose -density 300 -trim \""+file+"\" -colorspace Gray -quality 100 "+temp_file);
+			DK_System(assets+"/DKImageMagick/magick.exe convert -verbose -density 300 -trim \""+file+"\" -colorspace Gray -quality 100 \""+temp_file+"\"");
 			file = assets+"/temp.png";
 			
 			var pages = "";
