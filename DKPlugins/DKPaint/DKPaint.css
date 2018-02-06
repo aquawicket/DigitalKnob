@@ -37,4 +37,6 @@
 	right:2rem;
 	bottom:2px;
 	bottom:2rem;
+	overflow-x:auto;
+	overflow-y:auto;
 }
