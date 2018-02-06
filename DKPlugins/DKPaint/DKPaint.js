@@ -59,5 +59,12 @@ function DKPaint_Open(file)
 {
 	DKLog("DKPaint_Open("+file+") \n");
 	currentFile = file;
-	DKWidget_SetAttribute("DKPaint_Image", "src", file);
+	if(file.includes(".pdf") || file.includes(".PDF")){
+		DKWidget_SetAttribute("DKPaint_Image", "src", "");
+		DKWidget_SetAttribute("DKPaint_Embed", "src", file);
+	}
+	else{
+		DKWidget_SetAttribute("DKPaint_Image", "src", file);
+		DKWidget_SetAttribute("DKPaint_Embed", "src", "");
+	}
 }
