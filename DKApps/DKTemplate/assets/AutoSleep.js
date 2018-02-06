@@ -17,7 +17,7 @@ function AutoSleep_Init()
 ////////////////////////
 function AutoSleep_End()
 {
-	DKRemoveEvents(DKHook_OnEvent);
+	DKRemoveEvents(AutoSleep_OnEvent);
 }
 
 /////////////////////////////////
