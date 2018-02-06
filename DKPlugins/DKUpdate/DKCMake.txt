@@ -1,3 +1,4 @@
+DKDEPEND(DKCurl)
 DKDEPEND(DKArchive)
 
 DKPLUGIN(DKUpdate)
