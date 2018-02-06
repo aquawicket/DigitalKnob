@@ -17,7 +17,7 @@ function DKOcr_End()
 {
 	DKLog("DKOcr_End()\n");
 	
-	DKClose("DKNotePad/DKNotepad.js");
+	DKClose("DKNotepad/DKNotepad.js");
 	DKRemoveEvents(DKOcr_OnEvent);
 }
 
