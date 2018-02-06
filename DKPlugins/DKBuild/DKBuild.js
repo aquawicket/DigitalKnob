@@ -631,10 +631,10 @@ function DKBuild_DoResults()
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Win32");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/CMakeCache.txt");	
 			if(TYPE == "Debug" || TYPE == "ALL"){
-				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Debug");
+				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Debug");
 			}
 			if(TYPE == "Release" || TYPE == "ALL"){
-				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
+				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win32/Release");
 			}
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
@@ -643,9 +643,15 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
+			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe")){
+				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
+			}		
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
+			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe")){
+				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
+			}
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
@@ -672,10 +678,10 @@ function DKBuild_DoResults()
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Win32");
 			DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/CMakeCache.txt");
 			if(TYPE == "Debug" || TYPE == "ALL"){
-				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Debug");
+				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Debug");
 			}
 			if(TYPE == "Release" || TYPE == "ALL"){
-				DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Release");
+				//DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/win64/Release");
 			}
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
@@ -684,9 +690,15 @@ function DKBuild_DoResults()
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
+			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe")){
+				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
+			}
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
+			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
+				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
+			}
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		

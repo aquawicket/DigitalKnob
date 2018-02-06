@@ -807,7 +807,7 @@ bool DKFile::RemoveDirectory(const DKString& path)
 	DKLog("DKFile::RemoveDirectory("+path+")\n", DKDEBUG);
 
 	if(!PathExists(path)){ return false; }
-	if(!boost::filesystem::remove_all(path.c_str())){
+	if(!boost::filesystem::remove_all(path.c_str())){ //FIXME: This will crash if a file is in use. 
 		DKLog("DKFile::RemoveDirectory(): boost::filesystem::remove_all failed\n", DKERROR);
 		return false;
 	}
