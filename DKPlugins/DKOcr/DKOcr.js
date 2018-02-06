@@ -29,6 +29,15 @@ function DKOcr_OnEvent(event)
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
 		DKLog("OpenFile: "+file+" \n");
+		
+		//if file is pdf, convert it.
+		if(file.includes(".pdf")){
+			DKLog("DKOcr_OnEvent(): file is a pdf\n", DKINFO);
+			var assets = DKAssets_LocalAssets();
+			DK_System(assets+"/DKImageMagick/magick.exe convert "+file+" "+assets+"/temp.bmp");
+			return;
+		}
+		
 		var text;
 		if(text = DKOcr_ImageToText(file)){
 			DKWidget_SetAttribute("DKNotepad_Text", "value", text);
