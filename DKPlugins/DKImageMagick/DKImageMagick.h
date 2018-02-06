@@ -10,6 +10,9 @@ class DKImageMagick : public DKObjectT<DKImageMagick>
 public:
 	bool Init();
 	bool End();
+	
+	static bool PdfToPng(DKString& filein, DKString& fileout);
+	static bool PdfToBmp(DKString& filein, DKString& fileout);
 };
 
 
