@@ -2,12 +2,14 @@
 <!-- saved from url=(0044)http://seikichi.github.io/tiff.js/basic.html -->
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
-  <body style="">
+  <body>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="DKPaint/tiff.min.js"></script>
     <script type="text/javascript">
-$(function () {
-  var loadImage = function (filename) {
+
+////////////////////////////
+function loadImage(filename)
+{
     var xhr = new XMLHttpRequest();
     xhr.open('GET', filename);
     xhr.responseType = 'arraybuffer';
@@ -24,10 +26,9 @@ $(function () {
       }
     };
     xhr.send();
-  };
+};
 
     loadImage('http://seikichi.github.io/tiff.js/images/rgb-3c-16b.tiff');
-});
 
 		</script>
 	</body>

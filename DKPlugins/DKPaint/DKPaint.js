@@ -75,28 +75,29 @@ function DKPaint_Open(file)
 	}
 }
 
-//////////////////////////////
-function DKPaint_LoadTif(file)
+//////////////////////////////////
+function DKPaint_LoadTif(filename)
 {
-	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){});
-	DKCreate("DKPaint/tiff.min.js", function(){});
-	var xhr = new XMLHttpRequest();
-    xhr.open('GET', file);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = function (e) {
-      var buffer = xhr.response;
-      var tiff = new Tiff({buffer: buffer});
-      var canvas = tiff.toCanvas();
-      var width = tiff.width();
-      var height = tiff.height();
-      if (canvas) {
-        var $elem = $('<div><div><a href="' + file + '">' +
-                      file +
-                      ' (width: ' + width + ', height:' + height + ')' +
-                      '</a></div></div>');
-        $elem.append(canvas);
-        $('DKPaint/DKPaint.html').append($elem);
-      }
-    };
-    xhr.send();
+	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){
+	DKCreate("DKPaint/tiff.min.js", function(){
+	
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', filename);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function(e){
+			var buffer = xhr.response;
+			var tiff = new Tiff({buffer: buffer});
+			var canvas = tiff.toCanvas();
+			var width = tiff.width();
+			var height = tiff.height();
+			if(canvas){
+				var $elem = $('<div></div>');
+				$elem.append(canvas);
+				$('body').append($elem);
+			}
+		};
+		xhr.send();
+	
+	});
+	});
 }
