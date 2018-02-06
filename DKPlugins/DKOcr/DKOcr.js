@@ -48,8 +48,6 @@ function DKOcr_OnEvent(event)
 				}
 			}
 			
-			//DK_System(assets+"/DKImageMagick/magick.exe convert -density 300 "+file+" "+temp_file);
-			//-sharpen 0x1.0 
 			DK_System(assets+"/DKImageMagick/magick.exe convert -verbose -density 300 -trim "+file+" -quality 100 "+temp_file);
 			file = assets+"/temp.png";
 			

@@ -61,7 +61,7 @@ bool DKOcr::PdfToText(DKString& file, DKString& text)
 	DKString assets = DKFile::local_assets;
 	DKString infile;
 	DKFile::GetShortName(file, infile);
-	DKUtil::System(assets+"/DKImageMagick/magick.exe convert -density 300 "+infile+" "+assets+"/temp.png");
+	DKUtil::System(assets+"/DKImageMagick/magick.exe convert -verbose -density 300 -trim "+infile+" -quality 100 "+assets+"/temp.png");
 	return true;
 }
 
