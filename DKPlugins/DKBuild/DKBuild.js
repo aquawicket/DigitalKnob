@@ -652,9 +652,6 @@ function DKBuild_DoResults()
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe")){
 				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
 			}
-			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/assets/cef.log")){
-				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/assets/cef.log", DKPATH+"/"+appdir+"/"+APP+"/assets/cef_old.log", true);
-			}
 			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
