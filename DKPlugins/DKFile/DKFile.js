@@ -285,12 +285,13 @@ if(DK_GetBrowser() != "CEF"){
 	function DKFile_FileToString(url)
 	{
 		//DKLog("DKFile_FileToString("+url+")\n");
+		url = url.replace(absolutepath, "");
 		
-		var path = DKFile_VerifyPath(url);
-		if(!path){ return; }
-		if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
-			return ajaxGetUrl("http://cors.io/?u="+url);
-		}
+		//var path = DKFile_VerifyPath(url);
+		if(!url){ return; }
+		//if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
+		//	return ajaxGetUrl("http://cors.io/?u="+url);
+		//}
 		return ajaxGetUrl(url);
 	}
 }
