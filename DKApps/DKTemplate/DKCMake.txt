@@ -2,7 +2,7 @@
 
 DKSET(USE_DKCef ON)
 
-DKDEPEND(emsdk-portable-64bit)
+DKDEPEND(DKEmscripten)
 ##DKDEPEND(doxygen-1.8.11)
 DKDEPEND(DK)
 DKDEPEND(DKArchive)
