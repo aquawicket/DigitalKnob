@@ -10,7 +10,7 @@ function DKPaint_Init()
 	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
 	DKAddEvent("DKPaint/DKPaint.html", "contextmenu", DKPaint_OnEvent);
 	DKAddEvent("DKPaint_File", "click", DKPaint_OnEvent);
-	DKAddEvent("GLOBAL", "OpenFile", DKPaint_OnEvent);
+	DKAddEvent("DKPaint/DKPaint.html", "OpenFile", DKPaint_OnEvent);
 }
 
 //////////////////////

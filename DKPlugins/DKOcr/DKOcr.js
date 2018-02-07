@@ -7,9 +7,9 @@ function DKOcr_Init()
 	DKCreate("DKOcr/DKOcr.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKWidget_AppendChild("DKOcr/DKOcr.html", "DKNotepad/DKNotepad.html");
+		DKRemoveEvent("DKNotepad/DKNotepad.html", "OpenFile", DKNotepad_OnEvent);
+		DKAddEvent("DKNotepad/DKNotepad.html", "OpenFile", DKOcr_OnEvent);
 	});
-	
-	DKAddEvent("GLOBAL", "OpenFile", DKOcr_OnEvent);
 }
 
 ////////////////////
