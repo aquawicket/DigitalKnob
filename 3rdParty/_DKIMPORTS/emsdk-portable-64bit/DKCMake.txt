@@ -14,6 +14,5 @@ IF(WIN32)
 		WIN32_COMMAND(${3RDPARTY}/emsdk-portable-64bit/emsdk_env.bat)
 	ENDIF()
 	
-	
 	DKSET(EMSCRIPTEN ${3RDPARTY}/emsdk-portable-64bit)
 ENDIF()
