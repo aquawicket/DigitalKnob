@@ -19,5 +19,5 @@ std::string em_test(const std::string& in)
 
 
 EMSCRIPTEN_BINDINGS(my_module){
-    function("em_test", &em_test);
+    function("DK_Test", &em_test);
 }
