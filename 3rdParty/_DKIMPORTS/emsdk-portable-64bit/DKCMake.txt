@@ -1,5 +1,8 @@
 IF(WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable-64bit/bin")
+		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
+		DKDOWNLOAD(${DKONLINE}/Tools/emsdk-portable-64bit.zip)
+		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKINSTALL(${DKONLINE}/Tools/emsdk-portable-64bit.zip emsdk-portable-64bit)
 	ENDIF()
 ENDIF()
