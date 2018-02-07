@@ -58,6 +58,8 @@ function DKPaint_Save()
 function DKPaint_Open(file)
 {
 	DKLog("DKPaint_Open("+file+") \n");
+	
+	file = file.replace(absolutepath, "");
 	currentFile = file;
 	
 	DKWidget_SetInnerHtml("DKPaint_content", "");
