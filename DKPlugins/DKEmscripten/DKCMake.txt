@@ -3,7 +3,5 @@ DKDEPEND(emsdk-portable-64bit)
 ##DKPLUGIN(DKEmscripten)
 ##DKASSETS(DKEmscripten)
 
-
-DKSET(CURRENT_DIR ${EMSCRIPTEN})
 DKSET(QUEUE_BUILD ON)
 WIN32_COMMAND(${EMSCRIPTEN}/emscripten/1.37.33/emcc ${DKPLUGINS}/DKEmscripten/hello.c -o hello.html)
