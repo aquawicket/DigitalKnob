@@ -14,7 +14,7 @@ function app_LoadPlugins()
 	DKCreate("DKSDLText"); //SDL fps counter
 	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
-	DKCreate("AutoSleep.js", function(){});
+	//DKCreate("AutoSleep.js", function(){});
 }
 
 ///////////////////////

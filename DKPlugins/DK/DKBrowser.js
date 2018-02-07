@@ -79,17 +79,17 @@ function LoadJs(url, callback)
 		return false;
 	}
 	
+	//TEST: already loaded, remove it first
+	if(document.getElementById(url)){
+		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
+	}
+	
 	var file = url.substring(url.lastIndexOf("/") + 1);
 	
 	// Call the js init function
 	if(!file){ 
 		DKLog("LoadJs("+url+"): file invalid\n", DKERROR);
 		return false; 
-	}
-	
-	//already loaded, remove it first
-	if(document.getElementById(url)){
-		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
 	}
 	
 	// Adding the script tag to the head as suggested before
@@ -107,7 +107,7 @@ function LoadJs(url, callback)
 	
 	var name = file.replace(".js", "");
 	name += "_Init";
-
+	
 	head.appendChild(script);
 	
 	var done = false;
