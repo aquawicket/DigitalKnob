@@ -20,7 +20,7 @@ SET(DKONLINE "http://DigitalKnob.com/Download")
 ########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 IF(${index} GREATER -1)
-	SET(WIN_32 ON)
+	SET(WIN_32 ON) ##FIXME - this should be the OS we are building from. 
 	SET(OS "win32")
 	STRING(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 ENDIF()
