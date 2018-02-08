@@ -188,6 +188,7 @@ function DKAvailable(name)
 		return true; 
 	}
 	if(name == "DKWidgetJS"){  //FIXME: is this needed?
+		DKLog("DKAvailable("+name+"): name == DKWidgetJS!  check DK.js line 191\n");
 		return true; 
 	}
 	return false;
