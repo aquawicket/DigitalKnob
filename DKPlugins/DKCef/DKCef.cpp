@@ -289,8 +289,9 @@ bool DKCef::NewBrowser()
 //#ifdef WIN32
 //		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
 //#else
-		//window_info.SetAsWindowless(NULL, false);
-		window_info.SetAsWindowless(NULL);
+		//TODO: this function changed in later CEF builds
+		window_info.SetAsWindowless(NULL, false);
+		//window_info.SetAsWindowless(NULL);
 //#endif
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
