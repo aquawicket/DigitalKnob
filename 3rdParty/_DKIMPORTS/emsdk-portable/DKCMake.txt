@@ -1,0 +1,18 @@
+##https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
+
+IF(MAC)
+	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable/emscripten")
+		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
+		DKDOWNLOAD(${DKONLINE}/Tools/emsdk-portable.tar.gz)
+		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
+		DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten true)
+		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable)
+		DKSET(QUEUE_BUILD ON)
+		MAC_COMMAND(${3RDPARTY}/emsdk-portable/emsdk update)
+		MAC_COMMAND(${3RDPARTY}/emsdk-portable/emsdk install latest)
+		MAC_COMMAND(${3RDPARTY}/emsdk-portable/emsdk install activate latest)
+		MAC_COMMAND(${3RDPARTY}/emsdk-portable/source ./emsdk_env.sh)
+	ENDIF()
+	
+	DKSET(EMSCRIPTEN ${3RDPARTY}/emsdk-portable)
+ENDIF()
