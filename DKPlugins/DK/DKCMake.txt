@@ -1,4 +1,4 @@
-IF(WIN OR MAC OR LINUX)
+IF(WIN OR LINUX)
 	DKDEPEND(boost_1_57_0 Boost_System)
 	DKDEPEND(boost_1_57_0 Boost_Filesystem)
 	##DKDEPEND(boost_1_66_0 Boost_System)
