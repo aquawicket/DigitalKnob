@@ -1,4 +1,9 @@
-DKDEPEND(emsdk-portable-64bit)
+IF(WIN32)
+	DKDEPEND(emsdk-portable-64bit)
+ENDIF()
+IF(MAC)
+	DKDEPEND(emsdk-portable)
+ENDIF()
 
 ##DKPLUGIN(DKEmscripten)
 ##DKASSETS(DKEmscripten)
