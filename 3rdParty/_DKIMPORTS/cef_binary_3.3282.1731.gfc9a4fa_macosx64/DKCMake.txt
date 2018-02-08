@@ -3,8 +3,8 @@ IF(NOT MAC)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/cef_binary_3.2987.1601.gf035232_macosx64.tar.bz2 cef_binary_3.2987.1601.gf035232_macosx64)
-DKSET(CEF ${3RDPARTY}/cef_binary_3.2987.1601.gf035232_macosx64)
+DKINSTALL(${DKONLINE}/Libs/cef_binary_3.3282.1731.gfc9a4fa_macosx64.tar.bz2 cef_binary_3.3282.1731.gfc9a4fa_macosx64)
+DKSET(CEF ${3RDPARTY}/cef_binary_3.3282.1731.gfc9a4fa_macosx64)
 
 
 ### LINK ###
@@ -27,5 +27,5 @@ MAC_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE}/libcef_dll_wrapper.a)
 ### COMPILE ###
 DKSETPATH(${CEF}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${CEF})
-MAC_XCODE_DEBUG(cef_binary_3.2987.1601.gf035232_macosx64 libcef_dll_wrapper)
-MAC_XCODE_RELEASE(cef_binary_3.2987.1601.gf035232_macosx64 libcef_dll_wrapper)
+MAC_XCODE_DEBUG(cef_binary_3.3282.1731.gfc9a4fa_macosx64 libcef_dll_wrapper)
+MAC_XCODE_RELEASE(cef_binary_3.3282.1731.gfc9a4fa_macosx64 libcef_dll_wrapper)
