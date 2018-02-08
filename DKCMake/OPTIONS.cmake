@@ -1,11 +1,3 @@
-########### Initial setup ####################
-IF(COMMAND cmake_policy)
-	CMAKE_POLICY(SET CMP0003 NEW) ##what is this for?
-ENDIF(COMMAND cmake_policy)
-SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #is this needed?
-
-SET(DKONLINE "http://DigitalKnob.com/Download")
-
 ## TODO
 ## NOTE: lets look at this
 ## STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
@@ -14,6 +6,16 @@ SET(DKONLINE "http://DigitalKnob.com/Download")
 ##	SET(OS "win32") ## This is the target os
 ##	STRING(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 ## ENDIF()
+
+
+########### Initial setup ####################
+IF(COMMAND cmake_policy)
+	CMAKE_POLICY(SET CMP0003 NEW) ##what is this for?
+ENDIF(COMMAND cmake_policy)
+SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
+
+SET(DKONLINE "http://DigitalKnob.com/Download")
+
 
 ########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
