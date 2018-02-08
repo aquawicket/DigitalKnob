@@ -8,6 +8,7 @@ SET(DKONLINE "http://DigitalKnob.com/Download")
 
 ## TODO
 ## NOTE: lets look at this
+## STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 ## IF(${index} GREATER -1)
 ##	SET(WIN_32 ON)  ## THIS IS WRONG. This should set the working computer os
 ##	SET(OS "win32") ## This is the target os
