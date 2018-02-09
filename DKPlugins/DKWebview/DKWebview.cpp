@@ -20,9 +20,9 @@ bool DKWebview::Init()
 }
 
 /////////////////////
-void DKWebview::End()
+bool DKWebview::End()
 {
-	
+	return true;
 }
 
 

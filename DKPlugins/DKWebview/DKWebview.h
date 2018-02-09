@@ -11,7 +11,7 @@ class DKWebview : public DKObjectT<DKWebview>
 {
 public:
 	bool Init();
-	void End();
+	bool End();
 	
 	bool PrintFunctions(void* input, void* output);
 	bool ReceiveValue(void* input, void* output);
