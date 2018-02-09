@@ -13,8 +13,8 @@ Linux 32 (TODO) <br>
 Linux 64 <br>
 iPhone/iPad 32 (TODO) <br>
 iPhone/iPad 64 (TODO) <br>
-iPhone/iPad-Simulator 32 <br>
-iPhone/iPad-Simulator 64 (TODO) <br>
+iPhone/iPad-Simulator 32 (TODO) <br>
+iPhone/iPad-Simulator 64 <br>
 Android 32 <br>
 Android 64 (TODO) <br>
 Chrome <br>
