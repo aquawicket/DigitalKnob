@@ -1,8 +1,6 @@
 IF(WIN)
-	##DKDEPEND(boost_1_57_0 Boost_System)
-	##DKDEPEND(boost_1_57_0 Boost_Filesystem)
-	DKDEPEND(boost_1_66_0 Boost_System) ##TODO
-	DKDEPEND(boost_1_66_0 Boost_Filesystem) ##TODO
+	DKDEPEND(boost_1_66_0 Boost_System)
+	DKDEPEND(boost_1_66_0 Boost_Filesystem)
 	
 	LIST(APPEND WIN_LIBS shell32.lib)
 	LIST(APPEND WIN_LIBS user32.lib)
@@ -18,8 +16,6 @@ IF(MAC)
 ENDIF()
 
 IF(LINUX)
-	##DKDEPEND(boost_1_57_0 Boost_System)
-	##DKDEPEND(boost_1_57_0 Boost_Filesystem)
 	DKDEPEND(boost_1_66_0 Boost_System)
 	DKDEPEND(boost_1_66_0 Boost_Filesystem)
 ENDIF()
