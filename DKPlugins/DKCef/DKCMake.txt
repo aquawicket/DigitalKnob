@@ -11,23 +11,23 @@ DKSET(QUEUE_BUILD ON)
 
 IF(WIN_32)
 	##DKDEPEND(cef_binary_3.2987.1601.gf035232_windows32)
-	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_windows32)  ##TODO
+	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_windows32)
 ENDIF()
 IF(WIN_64)
 	##DKDEPEND(cef_binary_3.2987.1601.gf035232_windows64)
-	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_windows64)  ##TODO
+	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_windows64)
 ENDIF()
 IF(LINUX_32)
 	##DKDEPEND(cef_binary_3.2987.1601.gf035232_linux32)
-	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_linux32)   ##TODO
+	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_linux32)
 ENDIF()
 IF(LINUX_64)
 	##DKDEPEND(cef_binary_3.2987.1601.gf035232_linux64)
-	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_linux64)  ##TODO
+	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_linux64)
 ENDIF()
 IF(MAC_64)
 	##DKDEPEND(cef_binary_3.2987.1601.gf035232_macosx64)
-	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_macosx64)  ##TODO
+	DKDEPEND(cef_binary_3.3282.1731.gfc9a4fa_macosx64)
 ENDIF()
 IF(WIN)
 	DKDEPEND(upx391w)
