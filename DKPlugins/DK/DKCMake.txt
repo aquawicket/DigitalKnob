@@ -1,13 +1,27 @@
-IF(WIN OR LINUX)
-	DKDEPEND(boost_1_57_0 Boost_System)
-	DKDEPEND(boost_1_57_0 Boost_Filesystem)
-	##DKDEPEND(boost_1_66_0 Boost_System)
-	##DKDEPEND(boost_1_66_0 Boost_Filesystem)
+IF(WIN)
+	##DKDEPEND(boost_1_57_0 Boost_System)
+	##DKDEPEND(boost_1_57_0 Boost_Filesystem)
+	DKDEPEND(boost_1_66_0 Boost_System) ##TODO
+	DKDEPEND(boost_1_66_0 Boost_Filesystem) ##TODO
+	
+	LIST(APPEND WIN_LIBS shell32.lib)
+	LIST(APPEND WIN_LIBS user32.lib)
+	LIST(APPEND WIN_LIBS gdi32.lib)
+	LIST(APPEND WIN_LIBS ole32.lib)
+	LIST(APPEND WIN_LIBS Psapi.lib)
+	LIST(APPEND WIN_LIBS pdh.lib)
 ENDIF()
 
 IF(MAC)
 	DKDEPEND(boost_1_66_0 Boost_System)
 	DKDEPEND(boost_1_66_0 Boost_Filesystem)
+ENDIF()
+
+IF(LINUX)
+	DKDEPEND(boost_1_57_0 Boost_System)
+	DKDEPEND(boost_1_57_0 Boost_Filesystem)
+	##DKDEPEND(boost_1_66_0 Boost_System)
+	##DKDEPEND(boost_1_66_0 Boost_Filesystem)
 ENDIF()
 
 IF(ANDROID)
@@ -20,8 +34,6 @@ ENDIF()
 
 IF(IOS OR IOSSIM)
 	DKDEPEND(Boost.1.60.0-libstdcpp)
-	##DKDEPEND(ofxiOSBoost-1.60.0)
-	##DKDEPEND(ofxiOSBoost-1.60.0-libc-bitcode)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
 ENDIF()
 
@@ -33,12 +45,6 @@ IF(LINUX)
 	DKDEPEND(libasound2-dev)
 ENDIF()
 
-LIST(APPEND WIN_LIBS shell32.lib)
-LIST(APPEND WIN_LIBS user32.lib)
-LIST(APPEND WIN_LIBS gdi32.lib)
-LIST(APPEND WIN_LIBS ole32.lib)
-LIST(APPEND WIN_LIBS Psapi.lib)
-LIST(APPEND WIN_LIBS pdh.lib)
 
 DKPLUGIN(DK)
 DKASSETS(DK)
