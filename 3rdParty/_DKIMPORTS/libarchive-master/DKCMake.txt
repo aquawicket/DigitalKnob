@@ -1,4 +1,5 @@
-DKDEPEND(zlib-1.2.8)
+##DKDEPEND(zlib-1.2.8)
+DKDEPEND(zlib-1.2.11) ##TODO
 DKDEPEND(xz-5.2.0)
 IF(NOT WIN_64)
 	DKDEPEND(bzip2-1.0.6)
