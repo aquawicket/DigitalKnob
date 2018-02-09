@@ -177,9 +177,11 @@ public:
 		return false;
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line )
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line)
 	{
+		DKLog("DKCefWindow::OnConsoleMessage()\n", DKINFO);
+
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
 		//DKLog("DKCefWindow::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
