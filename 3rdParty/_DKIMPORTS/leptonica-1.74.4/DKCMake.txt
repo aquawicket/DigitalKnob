@@ -1,4 +1,5 @@
-DKDEPEND(zlib-1.2.8)
+##DKDEPEND(zlib-1.2.8)
+DKDEPEND(zlib-1.2.11)
 IF(NOT MAC)
 	DKDEPEND(tiff-4.0.3)
 ENDIF()
