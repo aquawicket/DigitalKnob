@@ -2,6 +2,7 @@
 function TestGui_Init()
 {
 	DKLog("TestGui_Init()\n");
+	DKCreate("DKGui/TestGui.html");
 }
 
 //////////////////////
