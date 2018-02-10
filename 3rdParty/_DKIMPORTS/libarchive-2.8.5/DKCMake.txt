@@ -3,7 +3,7 @@ IF(NOT APPLE)
 ENDIF()
 
 ##DKDEPEND(zlib-1.2.8)
-DKDEPEND(zlib-1.2.11) ##TODO
+DKDEPEND(zlib-1.2.11)
 DKDEPEND(xz-5.2.0)
 
 ### INSTALL ###
