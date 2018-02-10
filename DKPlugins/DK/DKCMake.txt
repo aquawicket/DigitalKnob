@@ -18,6 +18,12 @@ ENDIF()
 IF(LINUX)
 	DKDEPEND(boost_1_66_0 Boost_System)
 	DKDEPEND(boost_1_66_0 Boost_Filesystem)
+	
+	DKDEPEND(libx11-dev)
+	DKDEPEND(mesa-common-dev)
+	DKDEPEND(libgl1-mesa-dev)
+	DKDEPEND(libxrandr-dev)
+	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 ENDIF()
 
 IF(ANDROID)
@@ -33,13 +39,6 @@ IF(IOS OR IOSSIM)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
 ENDIF()
 
-IF(LINUX)
-	DKDEPEND(libx11-dev)
-	DKDEPEND(mesa-common-dev)
-	DKDEPEND(libgl1-mesa-dev)
-	DKDEPEND(libxrandr-dev)
-	DKDEPEND(libasound2-dev)
-ENDIF()
 
 
 DKPLUGIN(DK)
