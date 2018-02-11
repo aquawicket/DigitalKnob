@@ -166,8 +166,8 @@ ENDIF(STATIC)
 IF(DYNAMIC)
 
 IF(Boost_System)
-	WIN_DEBUG_LIB(${BOOST}/${OS}/lib/libboost_system-vc140-mt-1_66.lib)
-	WIN_RELEASE_LIB(${BOOST}/${OS}/lib/libboost_system-vc140-mt-1_66.lib)
+	WIN_DEBUG_LIB(${BOOST}/${OS}/lib/boost_system-vc140-mt-gd-x32-1_66.lib)
+	WIN_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system-vc140-mt-x32-1_66.lib)
 ENDIF()
 
 IF(WIN_32)
