@@ -402,6 +402,7 @@ public:
 		//printf("OnContextCreated\n");
 		DKV8::ctx = context->GetGlobal();
 		
+		//FIXME - this will register over and over
 		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
