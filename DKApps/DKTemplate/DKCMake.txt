@@ -2,8 +2,10 @@
 
 DKSET(USE_DKCef ON)
 
-DKDEPEND(cryptopp600)
-DKDEPEND(far)
+IF(WIN)
+	DKDEPEND(cryptopp600)
+	DKDEPEND(far)
+ENDIF()
 DKDEPEND(DKEmscripten)
 ##DKDEPEND(doxygen-1.8.11)
 DKDEPEND(DK)
