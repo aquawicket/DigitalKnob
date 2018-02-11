@@ -177,6 +177,7 @@ public:
 		return false;
 	}
 
+	//FIXME - this is never called. 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line)
 	{
