@@ -6,6 +6,7 @@ function DKEditor_Menu_Init()
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Refresh", "click", DKEditor_Menu_OnEvent);
+	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
@@ -51,6 +52,10 @@ function DKEditor_Menu_OnEvent(event)
 	if(DK_Id(event, "DKEditor_Menu_Command_Input")){
 		//TODO
 		DKLog("TODO\n", DKINFO);
+	}
+	if(DK_Id(event, "DKEditor_Menu_Reload")){
+		DKLog("DKEditor_Menu_OnEvent(): TODO\n");
+		//DKDebug_Reload();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Refresh")){
 		DKDebug_Refresh();
