@@ -54,8 +54,7 @@ function DKEditor_Menu_OnEvent(event)
 		DKLog("TODO\n", DKINFO);
 	}
 	if(DK_Id(event, "DKEditor_Menu_Reload")){
-		DKLog("DKEditor_Menu_OnEvent(): TODO\n");
-		//DKDebug_Reload();
+		DKDebug_Reload();
 	}
 	if(DK_Id(event, "DKEditor_Menu_Refresh")){
 		DKDebug_Refresh();

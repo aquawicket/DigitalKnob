@@ -104,6 +104,13 @@ function DKDebug_KeyToChar(key)
 	return " ";
 }
 
+/////////////////////////
+function DKDebug_Reload()
+{
+	//TODO
+	DKLog("DKDebug_Reload(): TODO\n");
+}
+
 //////////////////////////
 function DKDebug_Refresh()
 {
