@@ -162,7 +162,6 @@ bool DKCef::Init()
 	//settings.context_safety_implementation;
 	//settings.ignore_certificate_errors;
 	//settings.javascript_flags;
-	//settings.log_file;
 	//settings.pack_loading_disabled;
 	//settings.persist_session_cookies;
 	//settings.persist_user_preferences;
