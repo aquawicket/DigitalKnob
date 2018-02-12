@@ -93,18 +93,18 @@ public:
 			return;
 		}
 		
+		DKV8::funcs.push_back(name);
+		//DKV8::funcs2.insert(std::make_pair(name, false));
+
 		if(!DKV8::ctx){ //multi process will fail
 			//DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
 			return;
 		}
 		
-		if(std::find(DKV8::funcs.begin(), DKV8::funcs.end(), name) != DKV8::funcs.end()){
-			return;
-		}
-		DKV8::funcs.push_back(name);
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
-		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-		DKLog("DKV8::AttachFunction(): registered: "+name+"\n", DKINFO);
+		if(DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+			DKLog("DKV8::AttachFunction(): registered: "+name+"\n", DKINFO);
+		}
 	}
 	
 	///////////////////////////////////////////////////////
@@ -183,6 +183,7 @@ public:
 	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
 #endif
 	static std::vector<std::string> funcs;
+	//static std::map<std::string, bool> funcs2;
 
 	//Flags
 	static DKString disable_gpu;
@@ -405,11 +406,25 @@ public:
 		DKLog(" DKCefApp::OnContextCreated\n", DKINFO);
 		DKV8::ctx = context->GetGlobal();
 		
-		//FIXME - this will register over and over
+		/*
+		std::map<std::string, bool>::iterator it = DKV8::funcs2.begin();
+		while(it != DKV8::funcs2.end()){
+			if(!it->second){
+				CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(it->first.c_str(), DKV8::v8handler);
+				if(DKV8::ctx->SetValue(it->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+					it->second = true;
+					DKLog("DKCefApp::OnContextCreated(): registered: "+it->first+"\n", DKINFO);
+				}
+			}
+			it++;
+		}
+		*/
+
 		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
-			DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
-			printf("DKCefApp::OnContextCreated(): registered: %s\n", DKV8::funcs[i].c_str());
+			if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+				DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKINFO);
+			}
 		}
 		
 		//DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
@@ -424,6 +439,7 @@ public:
 			return false;
 		}
 
+		/*
 		if(message->GetName() == "GetFunctions"){
 			//printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
 			CefRefPtr<CefListValue> args = message->GetArgumentList();
@@ -459,6 +475,7 @@ public:
 			      //v8handler->_retval->SetBool(0, retval->GetBool(0));
 			}	
 		}
+		*/
 		return true;
 	}
 
