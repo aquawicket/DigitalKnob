@@ -98,6 +98,9 @@ public:
 			return;
 		}
 		
+		if(std::find(DKV8::funcs.begin(), DKV8::funcs.end(), name) != DKV8::funcs.end()){
+			return;
+		}
 		DKV8::funcs.push_back(name);
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 		DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE);
@@ -399,7 +402,7 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) OVERRIDE
 	{
-		//printf("OnContextCreated\n");
+		DKLog(" DKCefApp::OnContextCreated\n", DKINFO);
 		DKV8::ctx = context->GetGlobal();
 		
 		//FIXME - this will register over and over
