@@ -42,7 +42,8 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		//DKLog("DKCreate(data, callback)\n", DKINFO);
-		if(!DKWidget_NewWidget(arry[1], arry[2])){
+		//if(!DKWidget_NewWidget(arry[1], arry[2])){
+		if(!DKWidget_NewWidget(arry[1])){	
 			return false;
 		}
 		if(callback){ 
@@ -164,7 +165,7 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
 		
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
