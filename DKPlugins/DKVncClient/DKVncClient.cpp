@@ -22,7 +22,7 @@ int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel,
 int DKVncClient::rightShiftKeyDown, DKVncClient::leftShiftKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
-int DKVncClient::fps = 48;
+//int DKVncClient::fps = 48;
 int DKVncClient::message_wait = 1;
 SDL_Texture* DKVncClient::tex;
 rfbClient* DKVncClient::cl;
@@ -46,11 +46,11 @@ bool DKVncClient::Init()
 	}
 	DKString encoding;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
-	DKString vncfps;
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_FPS]", vncfps);
-	if (!vncfps.empty()) {
-		fps = toInt(vncfps);
-	}
+	//DKString vncfps;
+	//DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_FPS]", vncfps);
+	//if (!vncfps.empty()) {
+	//	fps = toInt(vncfps);
+	//}
 	DKString vnc_message_wait;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_MESSAGE_WAIT]", vnc_message_wait);
 	if (!vnc_message_wait.empty()) {
