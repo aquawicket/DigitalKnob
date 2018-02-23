@@ -49,7 +49,7 @@ function DKFrame_Widget(id)
 	//DKLog("DKFrame_Widget("+id+")\n");
 	
 	if(!DKWidget_ElementExists(id)){
-		DKLog("DKFrame_Widget("+id+"): element does not exist\n", DKERROR);
+		DKLog("DKFrame_Widget("+id+"): element does not exist\n", DKWARN);
 		return false;
 	}
 	
