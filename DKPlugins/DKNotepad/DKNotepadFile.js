@@ -3,7 +3,8 @@ function DKNotepadFile_Init()
 {
 	//DKLog("DKNotepadFile_Init()\n");
 	
-	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
+	DKCreate("DKNotepad/DKNotepadFile.html");
+	DKWidget_AppendChild("DKNotepad/DKNotepad.html", "DKNotepad/DKNotepadFile.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_New", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);

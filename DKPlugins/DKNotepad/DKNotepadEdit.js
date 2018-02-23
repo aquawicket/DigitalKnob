@@ -3,7 +3,8 @@ function DKNotepadEdit_Init()
 {
 	//DKLog("DKNotepadEdit_Init()\n");
 	
-	DKCreate("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
+	DKCreate("DKNotepad/DKNotepadEdit.html");
+	DKWidget_AppendChild("DKNotepad/DKNotepad.html", "DKNotepad/DKNotepadEdit.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Cut", "click", DKNotepadEdit_OnEvent);
