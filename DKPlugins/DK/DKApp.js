@@ -7,14 +7,14 @@ if(DK_GetOS() == "Android" || DK_GetOS() == "iOS"){
 }
 else{ USE_WEBVIEW = 0; }
 
+///////////////////////
+function DKApp_Init(){}
+
 //////////////////////
-function init_Init(){}
+function DKApp_End(){}
 
-/////////////////////
-function init_End(){}
-
-////////////////////////////
-function init_OnEvent(event)  //Duktape
+/////////////////////////////
+function DKApp_OnEvent(event)  //Duktape
 {
 	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
@@ -28,6 +28,7 @@ function init_OnEvent(event)  //Duktape
 		DK_Exit();
 	}
 }
+
 
 ////////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can support
@@ -48,7 +49,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var currentBrowser = DKCef_GetCurrentBrowser(iframe);
 		DKCef_SetUrl(iframe, DKApp_url, currentBrowser);
 		DKCef_SetFocus(iframe);
-		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
+		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", DKApp_OnEvent);
 	}
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
@@ -68,7 +69,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var currentBrowser = DKCef_GetCurrentBrowser("CefSDL");
 		DKCef_SetUrl("CefSDL", DKApp_url, currentBrowser);
 		DKCef_SetFocus("CefSDL");
-		DKAddEvent("GLOBAL", "resize", init_OnEvent);
+		DKAddEvent("GLOBAL", "resize", DKApp_OnEvent);
 	}
 	else if(USE_CEF){
 		DKLog("Creating CEF -> GUI \n");
@@ -79,7 +80,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	}
 	else if(USE_WEBVIEW){ //TODO
 		DKLog("Creating WEBVIEW -> GUI \n");
-		DKAddEvent("GLOBAL", "keydown", init_OnEvent);
+		DKAddEvent("GLOBAL", "keydown", DKApp_OnEvent);
 	}
 	
 	app_LoadPlugins();
