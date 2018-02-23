@@ -271,9 +271,9 @@ void DKVncServer::DrawBuffer()
 		while(src != ((int*)bmp.bmBits) + (rfbScreen->width * rfbScreen->height - 1)){
 			char* c_dest = (char*)dest;
 			char* c_src = (char*)src;
-			c_dest[0] = c_src[2];
+			c_dest[0] = c_src[0];
 			c_dest[1] = c_src[1];
-			c_dest[2] = c_src[0];
+			c_dest[2] = c_src[2];
 			c_dest[3] = 0;
 			src++;
 			dest++;
