@@ -45,6 +45,12 @@ bool DKVncClient::Init()
 	}
 	DKString encoding;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_ENCODING]", encoding);
+	DKString vnc_bgrttt;
+	bool bgrttt = false;
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_BGR233]", vnc_bgrttt);
+	if (!vnc_bgrttt.empty()) {
+		bgrttt = toBool(vnc_bgrttt);
+	}
 	DKString vnc_message_wait;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_MESSAGE_WAIT]", vnc_message_wait);
 	if (!vnc_message_wait.empty()) {
@@ -87,7 +93,7 @@ bool DKVncClient::Init()
 	//cl->appData.shareDesktop = true;
 	//cl->appData.viewOnly = false;
 	cl->appData.encodingsString = encoding.c_str();
-	//cl->appData.useBGR233 = false;
+	cl->appData.useBGR233 = bgrttt;
 	//cl->appData.nColours = 256;
 	//cl->appData.forceOwnCmap = false;
 	//cl->appData.forceTrueColour = false;
