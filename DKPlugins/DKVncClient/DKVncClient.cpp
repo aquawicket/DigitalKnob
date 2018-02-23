@@ -84,12 +84,21 @@ bool DKVncClient::Init()
 
 	//cl = rfbGetClient(5,3,2); // 16-bit
 	cl = rfbGetClient(8,3,4); // 32-bit?
+	//cl->appData.shareDesktop = true;
+	//cl->appData.viewOnly = false;
 	cl->appData.encodingsString = encoding.c_str();
+	//cl->appData.useBGR233 = false;
+	//cl->appData.nColours = 256;
+	//cl->appData.forceOwnCmap = false;
+	//cl->appData.forceTrueColour = false;
+	//cl->appData.requestedDepth = 32;
 	cl->appData.compressLevel = compression;
-	cl->appData.enableJPEG = jpeg;
 	cl->appData.qualityLevel = quality;
+	cl->appData.enableJPEG = jpeg;
 	cl->appData.useRemoteCursor = cursor;
-	//cl->appData.nColours = ?;
+	//cl->appData.palmVNC = false;
+	cl->appData.scaleSetting = 200;
+	
 	cl->canHandleNewFBSize = TRUE;
 	//cl->MallocFrameBuffer = DKVncClient::resize;
 	if(seperate_loop){
@@ -108,8 +117,7 @@ bool DKVncClient::Init()
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
-	cl->appData.scaleSetting = 200;
-	
+		
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	//if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 	//	cl = NULL;
