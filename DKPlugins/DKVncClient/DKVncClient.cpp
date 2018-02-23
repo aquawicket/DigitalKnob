@@ -141,8 +141,8 @@ bool DKVncClient::Init()
 	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
 	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
 	
-	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB1555, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
