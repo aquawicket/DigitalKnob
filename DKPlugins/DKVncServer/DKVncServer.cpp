@@ -336,7 +336,7 @@ void DKVncServer::DrawBuffer()
 	}
 #endif
 
-	rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
+	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
