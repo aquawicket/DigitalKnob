@@ -33,7 +33,7 @@ function DKCreate(data, callback)
 				callback(rval); 
 			}
 			else{
-				DKLog("DKCreate("+data+"): does not have a callback \n", DKWARN);
+				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
 			}
 		})
 		){
@@ -42,17 +42,14 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		//DKLog("DKCreate(data, callback)\n", DKINFO);
-		//if(!DKWidget_NewWidget(arry[1])){
-		if(!DKWidget_NewWidget(arry[1], function(rval){
-			if(callback){ 
-				callback(rval); 
-			}
-			else{
-				DKLog("DKCreate("+data+"): does not have a callback \n", DKWARN);
-			}
-		})
-		){
+		if(!DKWidget_NewWidget(arry[1], arry[2])){
 			return false;
+		}
+		if(callback){ 
+			callback(); 
+		}
+		else{
+			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
 		}
 	}
 	if(arry[0] == "DKCss"){
@@ -164,14 +161,12 @@ function DKClose(data)
 	return true;
 }
 
-//////////////////////////////////////////
-function DKWidget_NewWidget(url, callback)
-//function DKWidget_NewWidget(url)
+////////////////////////////////////////
+function DKWidget_NewWidget(url, parent)
 {
-	//DKLog("DKWidget_NewWidget("+url+")\n");
+	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
 		
 	var filename = url.replace(/^.*[\\\/]/, '');
-	var parent = "body"; //TODO - add back the ability to use a parent
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
@@ -179,16 +174,15 @@ function DKWidget_NewWidget(url, callback)
 		if(!LoadHtml(url, element)){ 
 			return false;
 		}
-		DKWidget_AttachDrags(filename);
+		DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	else{
 		if(!LoadHtml(url)){
 			return false;
 		}
-		DKWidget_AttachDrags(filename);
+		DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	
-	callback && callback(true);
 	return true;
 }
 
