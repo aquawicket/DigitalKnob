@@ -43,14 +43,15 @@ function DKTray_OnEvent(event)
 		DKTray_ToggleWindow();
 	}
 	if(DK_Type(event, "1000")){
+		DK_ShowConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Show();
 		DKWindow_Restore();
 	}
 	if(DK_Type(event, "1001")){
+		DK_HideConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Hide();
-		DK_HideConsole();
 	}
 	if(DK_Type(event, "1002")){
 		DK_Exit();
