@@ -29,18 +29,18 @@ static XImage *image;
 
 /*
 rfbPixelFormat pixfmt = {
-	32,     //U8  bitsPerPixel;
-	32,     //U8  depth;
+	32,    //U8  bitsPerPixel;
+	32,    //U8  depth;
 	0,     //U8  bigEndianFlag;
 	1,     //U8  trueColourFlag;
-	255,     //U16 redMax;
-	255,     //U16 greenMax;
-	255,     //U16 blueMax;
-	16,     //U8  redShift;
+	255,   //U16 redMax;
+	255,   //U16 greenMax;
+	255,   //U16 blueMax;
+	16,    //U8  redShift;
 	8,     //U8  greenShift;
 	0,     //U8  blueShift;
 	0,     //U8  pad 1;
-	0    //U8  pad 2
+	0	   //U8  pad 2
 };
 */
 const rfbPixelFormat vnc8bitFormat =

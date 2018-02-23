@@ -94,6 +94,8 @@ void DKApp::Init()
 {
 	DKLog("DKApp::Init()\n", DKDEBUG);
 	active = true;
+	DKCHECK(true);
+	DKCHECK(false);
 }
 
 //////////////////
