@@ -42,7 +42,7 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		//DKLog("DKCreate(data, callback)\n", DKINFO);
-		//if(!DKWidget_NewWidget(arry[1], arry[2])){
+		//if(!DKWidget_NewWidget(arry[1])){
 		if(!DKWidget_NewWidget(arry[1], function(rval){
 			if(callback){ 
 				callback(rval); 
@@ -166,11 +166,12 @@ function DKClose(data)
 
 //////////////////////////////////////////
 function DKWidget_NewWidget(url, callback)
+//function DKWidget_NewWidget(url)
 {
-	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	//DKLog("DKWidget_NewWidget("+url+")\n");
 		
 	var filename = url.replace(/^.*[\\\/]/, '');
-	var parent = "body";
+	var parent = "body"; //TODO - add back the ability to use a parent
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
@@ -178,13 +179,13 @@ function DKWidget_NewWidget(url, callback)
 		if(!LoadHtml(url, element)){ 
 			return false;
 		}
-		DKWidget_AttachDrags(filename); //Attach Drags
+		DKWidget_AttachDrags(filename);
 	}
 	else{
 		if(!LoadHtml(url)){
 			return false;
 		}
-		DKWidget_AttachDrags(filename); //Attach Drags
+		DKWidget_AttachDrags(filename);
 	}
 	
 	callback && callback(true);
