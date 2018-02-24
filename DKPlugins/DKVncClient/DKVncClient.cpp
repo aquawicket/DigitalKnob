@@ -383,8 +383,8 @@ bool DKVncClient::handle(SDL_Event *e)
 		case SDL_WINDOWEVENT:
 			//DKLog("SDL_WINDOWEVENT\n", DKINFO);
 			switch(e->window.event){
-				case SDL_WINDOWEVENT_SIZE_CHANGED:
-				//case SDL_WINDOWEVENT_RESIZED:
+				//case SDL_WINDOWEVENT_SIZE_CHANGED:
+				case SDL_WINDOWEVENT_RESIZED:
 				//case SDL_WINDOWEVENT_MINIMIZED:      
 				//case SDL_WINDOWEVENT_MAXIMIZED:      
 				//case SDL_WINDOWEVENT_RESTORED: 
@@ -392,9 +392,11 @@ bool DKVncClient::handle(SDL_Event *e)
 					if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
 						dkSdlWindow->width = e->window.data1;
 						dkSdlWindow->height = e->window.data2;
-						ValidateAspectRatio(cl);
+						if(!SDL_GetWindowFlags(dkSdlWindow->sdlwin) & SDL_WINDOW_MAXIMIZED){
+							ValidateAspectRatio(cl);
+						}
 					}
-					return 1;
+					return true;
 				}
 			}
 			break;
