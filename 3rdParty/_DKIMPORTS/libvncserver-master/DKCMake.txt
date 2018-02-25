@@ -43,7 +43,7 @@ WIN64_VS_DEBUG(libvncserver-master LibVNCServer.sln vncserver)
 WIN64_VS_RELEASE(libvncserver-master LibVNCServer.sln vncserver)
 
 DKSETPATH(${VNCSERVER}/${OS})
-MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${VNCSERVER})
+MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DPNG_PNG_INCLUDE_DIR=${PNG} -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/${DEBUG}/libpng17d.a -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/${RELEASE}/libpng17.a ${VNCSERVER})
 MAC64_XCODE_DEBUG(libvncserver-master libvncserver)
 MAC64_XCODE_RELEASE(libvncserver-master libvncserver)
 
