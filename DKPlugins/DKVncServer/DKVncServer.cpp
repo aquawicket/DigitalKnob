@@ -5,10 +5,15 @@
 #ifdef WIN32
 #define sleep Sleep
 #include <WS2tcpip.h>
-#else
+#endif
+
+#ifdef LINUX
 #include <unistd.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+static Display *disp;
+static Window root;
+static XImage *image;
 #endif
 
 #ifdef __IRIX__
@@ -20,12 +25,6 @@
 
 static rfbScreenInfoPtr rfbScreen;
 static int bpp = 4;
-
-#ifdef LINUX
-static Display *disp;
-static Window root;
-static XImage *image;
-#endif
 
 /*
 rfbPixelFormat pixfmt = {
