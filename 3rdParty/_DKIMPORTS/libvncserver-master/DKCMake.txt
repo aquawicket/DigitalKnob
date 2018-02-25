@@ -27,6 +27,8 @@ IOSSIM_DEBUG_LIB(${VNCSERVER}/${OS}/${DEBUG}/lib/.libs/libvncserver.a)
 IOSSIM_RELEASE_LIB(${VNCSERVER}/${OS}/${RELEASE}/lib/.libs/libvncserver.a)
 LINUX_DEBUG_LIB(${VNCSERVER}/${OS}/Debug/libvncserver.a)
 LINUX_RELEASE_LIB(${VNCSERVER}/${OS}/Release/libvncserver.a)
+LINUX_DEBUG_LIB(${VNCSERVER}/${OS}/Debug/libvncclient.a)
+LINUX_RELEASE_LIB(${VNCSERVER}/${OS}/Release/libvncclient.a)
 ANDROID_DEBUG_LIB(${VNCSERVER}/${OS}/Debug/obj/local/armeabi-v7a/libvncserver.a)
 ANDROID_RELEASE_LIB(${VNCSERVER}/${OS}/Release/obj/local/armeabi-v7a/libvncserver.a)
 
