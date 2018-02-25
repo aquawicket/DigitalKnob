@@ -4,6 +4,7 @@
 
 #ifdef WIN32
 #define sleep Sleep
+#include <WS2tcpip.h>
 #else
 #include <unistd.h>
 #include <X11/Xlib.h>
@@ -16,7 +17,6 @@
 
 #include <rfb/keysym.h>
 #include "radon.h"
-#include <WS2tcpip.h>
 
 static rfbScreenInfoPtr rfbScreen;
 static int bpp = 4;
