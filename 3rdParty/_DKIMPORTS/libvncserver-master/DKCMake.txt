@@ -4,6 +4,9 @@ IF(WIN)
 	DKDEPEND(libjpeg-turbo-1.5.1)
 ENDIF()
 DKDEPEND(openssl-1.0.2h-vs2015)
+IF(LINUX)
+	DKDEPEND(libsystemd)
+ENDIF()
 
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/libvncserver-master.zip libvncserver-master)
