@@ -70,7 +70,7 @@ bool DKVncServer::Init()
 	static DKString password;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", password);
 	if(password.empty()){
-		DKLog("WARNING! No password set in settings file!", DKWARN);
+		DKLog("WARNING! No password set in settings file!\n", DKWARN);
 	}
 
 	int desktopWidth;
