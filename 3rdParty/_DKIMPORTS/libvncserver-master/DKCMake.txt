@@ -5,7 +5,7 @@ IF(WIN)
 ENDIF()
 DKDEPEND(openssl-1.0.2h-vs2015)
 IF(LINUX)
-	DKDEPEND(libsystemd)
+	DKDEPEND(libsystemd-dev)
 ENDIF()
 
 ### INSTALL ###
