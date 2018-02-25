@@ -1,4 +1,4 @@
-DKDEPEND(zlib-1.2.8)
+DKDEPEND(zlib-1.2.11)
 DKDEPEND(libpng-1.7.0beta34)
 IF(WIN)
 	DKDEPEND(libjpeg-turbo-1.5.1)
