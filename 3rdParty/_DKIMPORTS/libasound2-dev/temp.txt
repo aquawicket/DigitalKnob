@@ -1,3 +1,0 @@
-IF(NOT LINUX)
-	RETURN()
-ENDIF()
