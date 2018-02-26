@@ -51,7 +51,7 @@ endif()
 
 message(STATUS "VERSION = ${VERSION}, BUILD = ${BUILD}")
 
-option(WITH_SIMD "Include SIMD extensions" FALSE)
+option(WITH_SIMD "Include SIMD extensions" TRUE)
 option(WITH_ARITH_ENC "Include arithmetic encoding support when emulating the libjpeg v6b API/ABI" TRUE)
 option(WITH_ARITH_DEC "Include arithmetic decoding support when emulating the libjpeg v6b API/ABI" TRUE)
 option(WITH_JPEG7 "Emulate libjpeg v7 API/ABI (this makes libjpeg-turbo backward incompatible with libjpeg v6b)" FALSE)
@@ -61,7 +61,7 @@ option(WITH_TURBOJPEG "Include the TurboJPEG wrapper library and associated test
 option(WITH_JAVA "Build Java wrapper for the TurboJPEG library" FALSE)
 option(WITH_12BIT "Encode/decode JPEG images with 12-bit samples (implies WITH_SIMD=0 WITH_TURBOJPEG=0 WITH_ARITH_ENC=0 WITH_ARITH_DEC=0)" FALSE)
 option(ENABLE_STATIC "Build static libraries" TRUE)
-option(ENABLE_SHARED "Build shared libraries" TRUE)
+option(ENABLE_SHARED "Build shared libraries" FALSE)
 
 if(WITH_12BIT)
   set(WITH_SIMD FALSE)
