@@ -99,7 +99,7 @@ void DKApp::Init()
 //////////////////
 void DKApp::Loop()
 {
-	DKLog("DKApp::Loop(): \n", DKINFO);
+	DKLog("DKApp::Loop()\n", DKINFO);
 	while(active){
 		DoFrame();
 	}
