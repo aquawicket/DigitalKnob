@@ -604,6 +604,7 @@ void DKVncClient::put(int x, int y, uint32_t v)
 	}
 }
 
+/*
 ///////////////////////////////////////////////////////////////////
 void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 {
@@ -654,6 +655,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 	realHeight = h;
 	update(client, 0, 0, client->width, client->height);
 }
+*/
 
 //////////////////////////////////////////////////////////////
 rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e)

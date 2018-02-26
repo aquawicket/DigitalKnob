@@ -23,7 +23,7 @@ public:
 	static void resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h);
 	static uint32_t get(rfbClient *cl, int x, int y);
 	static void put(int x, int y, uint32_t v);
-	static void setRealDimension(rfbClient *client, int w, int h);
+	//static void setRealDimension(rfbClient *client, int w, int h);
 	bool handle(SDL_Event *e);
 	static rfbKeySym SDL_key2rfbKeySym(SDL_KeyboardEvent* e);
 	static char* password(rfbClient *cl);
