@@ -304,6 +304,7 @@ bool DKVncClient::handle(SDL_Event *e)
 
 			if(e->type == SDL_MOUSEMOTION){
 				//TODO - limit the fps of mouse motion events?
+				if(!DKUtil::now){ DKUtil::InitFramerate(); }
 				DKUtil::GetTicks(DKUtil::now);
 				int delta = DKUtil::now - last_mouse_move;
 				if(delta < (1000 / 10)){  //10 fps
