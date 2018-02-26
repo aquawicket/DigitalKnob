@@ -163,8 +163,8 @@ bool DKVncClient::Init()
 		}
 	}
 	else{
-		//DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
-		//DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
+		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
+		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
 	return true;
