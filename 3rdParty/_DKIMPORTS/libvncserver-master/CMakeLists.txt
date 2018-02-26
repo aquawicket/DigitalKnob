@@ -47,7 +47,7 @@ option(WITH_TIGHTVNC_FILETRANSFER "Enable filetransfer if there is pthreads supp
 option(WITH_24BPP "Allow 24 bpp" ON)
 option(WITH_IPv6 "Enable IPv6 Support" ON)
 option(WITH_WEBSOCKETS "Build with websockets support" ON)
-option(WITH_SASL "Build with SASL support" ON)
+option(WITH_SASL "Build with SASL support" OFF)
 
 
 
