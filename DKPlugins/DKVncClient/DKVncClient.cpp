@@ -408,6 +408,7 @@ bool DKVncClient::handle(SDL_Event *e)
 	return true;
 }
 
+/*
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
@@ -471,6 +472,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 
 	return TRUE;
 }
+*/
 
 /////////////////////////////////////////////////////////////
 void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad)

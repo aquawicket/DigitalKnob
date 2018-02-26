@@ -15,7 +15,7 @@ public:
     
 	void draw();
 	static void update(rfbClient* cl,int x,int y,int w,int h);
-	static rfbBool resize(rfbClient* client);
+	//static rfbBool resize(rfbClient* client);
 	static void kbd_leds(rfbClient* cl, int value, int pad);
 	static void text_chat(rfbClient* cl, int value, char *text);
 	static void got_selection(rfbClient *cl, const char *text, int len);
