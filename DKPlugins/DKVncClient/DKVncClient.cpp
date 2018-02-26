@@ -230,7 +230,7 @@ bool DKVncClient::End()
 ////////////////////////
 void DKVncClient::draw()
 {
-	DKLog("DKVncClient::draw()", DKINFO);
+	//DKLog("DKVncClient::draw()", DKINFO);
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
