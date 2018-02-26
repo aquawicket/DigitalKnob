@@ -268,7 +268,12 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	}
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n", DKINFO);
-	SDL_Rect r{0, 0, cl->width, cl->height};
+	SDL_Rect r;
+	r.x = 0;
+	r.y = 0;
+	r.w = cl->width;
+	r.h = cl->height;
+
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 
 	//Now render the texture target to our screen
