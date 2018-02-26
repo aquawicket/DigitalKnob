@@ -6,6 +6,7 @@ DKSET(JPEG ${3RDPARTY}/jpeg-6b)
 ### LINK ###
 DKINCLUDE(${JPEG})
 DKINCLUDE(${JPEG}/${OS})
+DKINCLUDE(${JPEG}/${OS}/Release)
 ANDROID_INCLUDE(${JPEG}/${OS}/$(BUILD_TYPE)/jni)
 WIN_DEBUG_LIB(${JPEG}/${OS}/Debug/jpeg-static.lib)
 WIN_RELEASE_LIB(${JPEG}/${OS}/Release/jpeg-static.lib)
