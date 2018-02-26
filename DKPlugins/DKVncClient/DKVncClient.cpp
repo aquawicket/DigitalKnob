@@ -301,12 +301,12 @@ bool DKVncClient::handle(SDL_Event *e)
 			//	break;
 
 			if(e->type == SDL_MOUSEMOTION){
-				if(e->type == SDL_MOUSEBUTTONUP){
-					return true;
+				if(e->motion.state == 0){
+					return true; //don't send drag events without buttons pressed
 				}
+				state = e->motion.state;
 				x = e->motion.x;
 				y = e->motion.y;
-				state = e->motion.state;
 				if(state == 3){ state = 4;}
 			}
 			else{
