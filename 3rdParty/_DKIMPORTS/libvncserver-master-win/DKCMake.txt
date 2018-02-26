@@ -6,8 +6,8 @@ ENDIF()
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libvncserver-master-win.zip libvncserver-master)
-DKSET(VNCSERVER ${3RDPARTY}/libvncserver-master)
+DKINSTALL(${DKONLINE}/Libs/libvncserver-master-win.zip libvncserver-master-win)
+DKSET(VNCSERVER ${3RDPARTY}/libvncserver-master-win)
 
 
 ### LINK ###

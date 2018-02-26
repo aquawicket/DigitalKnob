@@ -25,7 +25,7 @@ public:
 	static void put(int x, int y, uint32_t v);
 	static void setRealDimension(rfbClient *client, int w, int h);
 	bool handle(SDL_Event *e);
-	static rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e);
+	static rfbKeySym SDL_key2rfbKeySym(SDL_KeyboardEvent* e);
 	static char* password(rfbClient *cl);
 	static bool ValidateAspectRatio(rfbClient *cl);
 
