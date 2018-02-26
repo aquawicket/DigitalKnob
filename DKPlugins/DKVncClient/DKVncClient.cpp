@@ -301,6 +301,9 @@ bool DKVncClient::handle(SDL_Event *e)
 			//	break;
 
 			if(e->type == SDL_MOUSEMOTION){
+				if(e->type == SDL_MOUSEBUTTONUP){
+					return true;
+				}
 				x = e->motion.x;
 				y = e->motion.y;
 				state = e->motion.state;
