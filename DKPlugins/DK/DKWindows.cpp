@@ -28,12 +28,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 /////////////////////////////////////////////////
 bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 {
+	//FIXME - this is not the main thread
 	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
 	switch(type){
 	case CTRL_CLOSE_EVENT:
 		//TODO - hide console first
 		DKApp::Exit();
-		Sleep(1000);
+		//Sleep(1000);
 		return true;
 	}
 	return false;
