@@ -163,11 +163,11 @@ bool DKVncClient::Init()
 		}
 	}
 	else{
+		DKLog("DKVncClient::Init(): added handle and draw functions\n", DKINFO);
 		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
-	DKLog("DKVncClient::Init(): end of function.\n", DKINFO);
 	return true;
 }
 
