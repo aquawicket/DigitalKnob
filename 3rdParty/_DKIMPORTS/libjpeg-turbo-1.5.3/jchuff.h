@@ -19,7 +19,9 @@
  * Hence the magnitude should always fit in 10 or 14 bits respectively.
  */
 
+#ifndef WIN32
 #define SIZEOF_SIZE_T 8
+#endif
  
 #if BITS_IN_JSAMPLE == 8
 #define MAX_COEF_BITS 10

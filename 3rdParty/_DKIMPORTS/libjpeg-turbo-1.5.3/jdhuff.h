@@ -13,7 +13,9 @@
  * progressive decoder (jdphuff.c).  No other modules need to see these.
  */
 
- #define SIZEOF_SIZE_T 8
+#ifndef WIN32
+#define SIZEOF_SIZE_T 8
+#endif
  
 #include "jconfigint.h"
 
