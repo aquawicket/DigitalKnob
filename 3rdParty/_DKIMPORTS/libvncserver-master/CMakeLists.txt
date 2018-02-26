@@ -34,7 +34,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CM
 # all the build configuration switches
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(WITH_ZLIB "Search for the zlib compression library to support additional encodings" ON)
-option(WITH_JPEG "Search for the libjpeg compression library to support additional encodings" ON)
+option(WITH_JPEG "Search for the libjpeg compression library to support additional encodings" OFF)
 option(WITH_PNG "Search for the PNG compression library to support additional encodings" ON)
 option(WITH_SDL "Search for the Simple Direct Media Layer library to build an example SDL vnc client" ON)
 option(WITH_THREADS "Search for a threading library to build with multithreading support" ON)
