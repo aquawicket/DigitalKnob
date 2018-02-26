@@ -39,6 +39,8 @@ public:
 	static int message_wait;
 	static bool seperate_loop;
 	rfbBool rfbInitConnection(rfbClient* client);
+
+	static long last_mouse_move;
 };
 
 

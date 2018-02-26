@@ -301,9 +301,17 @@ bool DKVncClient::handle(SDL_Event *e)
 			//	break;
 
 			if(e->type == SDL_MOUSEMOTION){
-				if(e->motion.state == 0){
-					return true; //don't send drag events without buttons pressed
+				//TODO - limit the fps of mouse motion events?
+				DKUtil::GetTicks(DKUtil::now);
+				int delta = DKUtil::now - last_mouse_move;
+				if(delta < DKUtil::ticksPerFrame){
+					return true;
 				}
+				DKUtil::GetTicks(last_mouse_move);
+
+				//if(e->motion.state == 0){
+				//	return true; //don't send drag events without buttons pressed
+				//}
 				state = e->motion.state;
 				x = e->motion.x;
 				y = e->motion.y;
