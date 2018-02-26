@@ -147,7 +147,9 @@ bool DKVncClient::Init()
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
+#ifdef WIN32
 	ValidateAspectRatio(cl);
+#endif
 	//resize(cl);
 
 	if(seperate_loop){
