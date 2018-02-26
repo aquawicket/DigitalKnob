@@ -163,7 +163,6 @@ bool DKVncClient::Init()
 		}
 	}
 	else{
-		DKLog("DKVncClient::Init(): added handle and draw functions\n", DKINFO);
 		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
@@ -231,7 +230,7 @@ bool DKVncClient::End()
 ////////////////////////
 void DKVncClient::draw()
 {
-	//DKLog("DKVncClient::draw()", DKINFO);
+	DKLog("DKVncClient::draw()", DKINFO);
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
