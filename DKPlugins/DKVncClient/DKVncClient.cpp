@@ -231,7 +231,12 @@ bool DKVncClient::End()
 void DKVncClient::draw()
 {
 	HandleRFBServerMessage(cl);
-	SDL_Rect r{0, 0, cl->width, cl->height};
+	SDL_Rect r;
+	r.x = 0;
+	r.y = 0;
+	r.w = cl->width;
+	r.h = cl->height;
+	//{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 	//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
 	//SDL_RenderClear(dkSdlWindow->sdlren);
