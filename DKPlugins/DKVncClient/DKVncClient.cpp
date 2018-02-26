@@ -27,6 +27,8 @@ SDL_Texture* DKVncClient::tex;
 rfbClient* DKVncClient::cl;
 bool DKVncClient::seperate_loop = false;
 
+long DKVncClient::last_mouse_move = 0;
+
 ////////////////////////
 bool DKVncClient::Init()
 {
