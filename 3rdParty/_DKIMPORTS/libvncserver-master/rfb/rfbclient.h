@@ -52,7 +52,7 @@
 #endif
 #include <rfb/rfbproto.h>
 #include <rfb/keysym.h>
-//#include "turbojpeg.h"
+#include "turbojpeg.h"
 
 #ifdef LIBVNCSERVER_HAVE_SASL
 #include <sasl/sasl.h>
