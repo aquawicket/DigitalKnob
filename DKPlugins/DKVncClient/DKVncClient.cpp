@@ -303,7 +303,7 @@ bool DKVncClient::handle(SDL_Event *e)
 			//	break;
 
 			if(e->type == SDL_MOUSEMOTION){
-				//FIXME - limit the fps of mouse motion events?
+				//limit sending mouse move events to 30 frames per second
 				if(!DKUtil::now){ DKUtil::InitFramerate(); }
 				if(!last_mouse_move){ DKUtil::GetTicks(last_mouse_move); }
 				DKUtil::GetTicks(DKUtil::now);
@@ -313,9 +313,6 @@ bool DKVncClient::handle(SDL_Event *e)
 				}
 				DKUtil::GetTicks(last_mouse_move);
 
-				//if(e->motion.state == 0){
-				//	return true; //don't send drag events without buttons pressed
-				//}
 				state = e->motion.state;
 				x = e->motion.x;
 				y = e->motion.y;
