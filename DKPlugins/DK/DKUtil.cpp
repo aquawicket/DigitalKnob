@@ -94,6 +94,26 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 	return false;
 }
 
+///////////////////////////////////
+bool DKUtil::GetScreenWidth(int& w)
+{
+#ifdef WIN32
+	return DKWindows::GetScreenWidth(w);
+#endif
+	DKLog("DKUtil::GetScreenWidth() not implemented on this OS \n", DKWARN);
+	return false;
+}
+
+////////////////////////////////////
+bool DKUtil::GetScreenHeight(int& h)
+{
+#ifdef WIN32
+	return DKWindows::GetScreenHeight(h);
+#endif
+	DKLog("DKUtil::GetScreenHeight() not implemented on this OS \n", DKWARN);
+	return false;
+}
+
 ///////////////////////////////////////////////
 bool DKUtil::SetClipboard(DKString& text)
 {

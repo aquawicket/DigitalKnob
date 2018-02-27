@@ -386,6 +386,26 @@ bool DKWindows::GetProcessList(DKString& list)
 	return true;
 }
 
+//////////////////////////////////////
+bool DKWindows::GetScreenWidth(int& w)
+{
+	RECT desktop;
+	const HWND hDesktop = GetDesktopWindow();
+	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
+	w = desktop.right;
+	return true;
+}
+
+///////////////////////////////////////
+bool DKWindows::GetScreenHeight(int& h)
+{
+	RECT desktop;
+	const HWND hDesktop = GetDesktopWindow();
+	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
+	h = desktop.bottom;
+	return true;
+}
+
 //////////////////////////////////////////////////
 bool DKWindows::GetThreadId(unsigned long int& id)
 {

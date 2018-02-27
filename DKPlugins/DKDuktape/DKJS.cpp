@@ -310,6 +310,11 @@ int DKJS::GetDate(duk_context* ctx)
 //////////////////////////////////////////
 int DKJS::GetScreenWidth(duk_context* ctx)
 {
+	int w;
+	if(!DKUtil::GetScreenWidth(w)){ return 0; }
+	duk_push_int(ctx, w);
+	return 1;
+	/*
 	int output;
 	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
 		DKClass::CallFunc("DKSDLWindow::GetScreenWidth", NULL, &output);
@@ -326,11 +331,18 @@ int DKJS::GetScreenWidth(duk_context* ctx)
 	}
 	duk_push_int(ctx, output);
 	return 1;
+	*/
 }
 
 ///////////////////////////////////////////
 int DKJS::GetScreenHeight(duk_context* ctx)
 {
+	int h;
+	if(!DKUtil::GetScreenHeight(h)){ return 0; }
+	duk_push_int(ctx, h);
+	return 1;
+
+	/*
 	int output;
 	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
 		DKClass::CallFunc("DKSDLWindow::GetScreenHeight", NULL, &output);
@@ -344,6 +356,7 @@ int DKJS::GetScreenHeight(duk_context* ctx)
 	}
 	duk_push_int(ctx, output);
 	return 1;
+	*/
 }
 
 ////////////////////////////////////////
