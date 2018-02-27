@@ -33,7 +33,7 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 	switch(type){
 	case CTRL_CLOSE_EVENT:
 		//ExitThread(0);  //This is a hack
-		DKApp::Exit(); //we need the main thread to call this
+		DKApp::Exit(); //we need the main thread to call this and wait
 		return true;
 	}
 	return false;
