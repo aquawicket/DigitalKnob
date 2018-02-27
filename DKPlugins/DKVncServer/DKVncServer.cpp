@@ -313,13 +313,14 @@ void DKVncServer::DrawBuffer()
 #ifdef MAC
 	//https://stackoverflow.com/questions/17334786/get-pixel-from-the-screen-screenshot-in-max-osx
 	//TODO - some example code to try
+    /*
 	CGImageRef image_ref = CGDisplayCreateImage(CGMainDisplayID()); 
 	CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
 	CFDataRef dataref = CGDataProviderCopyData(provider);
 	size_t width, height;    width = CGImageGetWidth(image_ref);
 	height = CGImageGetHeight(image_ref); 
 	size_t bpp = CGImageGetBitsPerPixel(image_ref) / 8;
-	uint8 *pixels = malloc(width * height * bpp);
+	uint8 *pixels = malloc(width * height * bpp);         //FIXME
 	memcpy(pixels, CFDataGetBytePtr(dataref), width * height * bpp);
 	CFRelease(dataref); 
 	CGImageRelease(image_ref); 
@@ -327,6 +328,7 @@ void DKVncServer::DrawBuffer()
 	fwrite(pixels, bpp, width * height, stream);
 	fclose(stream); 
 	free(pixels);
+     */
 #endif
 
 #ifdef LINUX
