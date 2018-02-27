@@ -32,9 +32,8 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
 	switch(type){
 	case CTRL_CLOSE_EVENT:
-		//TODO - hide console first
-		DKApp::Exit();
-		//Sleep(1000);
+		//ExitThread(0);  //This is a hack
+		DKApp::Exit(); //we need the main thread to call this
 		return true;
 	}
 	return false;
