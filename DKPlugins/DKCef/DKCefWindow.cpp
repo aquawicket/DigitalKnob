@@ -104,8 +104,9 @@ bool DKCefWindow::SetHeight(void* input, void* output)
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	LPRECT rect;
 	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int width = rect->right - rect->left;
 	int height = *(int*)input;
-	if(!SetWindowPos(hwnd, HWND_TOP, rect->left, rect->top, rect->right, height, 0)){ return false; }
+	if(!MoveWindow(hwnd, rect->left, rect->top, width, height, true)){ return false; }
 	return true;
 #endif
 	return false;
@@ -118,8 +119,9 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	LPRECT rect;
 	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int height = rect->bottom - rect->top;
 	int width = *(int*)input;
-	if(!SetWindowPos(hwnd, HWND_TOP, rect->left, rect->top, width, rect->bottom, 0)){ return false; }
+	if(!MoveWindow(hwnd, rect->left, rect->top, width, height, true)){ return false; }
 	return true;
 #endif
 	return false;
