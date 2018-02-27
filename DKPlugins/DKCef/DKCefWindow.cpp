@@ -11,14 +11,14 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::TestReturnInt", &DKCefWindow::TestReturnInt, this);
 	DKClass::RegisterFunc("DKCefWindow::TestReturnString", &DKCefWindow::TestReturnString, this);
 
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenHeight", &DKCefWindow::GetScreenHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenWidth", &DKCefWindow::GetScreenWidth, this);
 	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
 	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
 	DKClass::RegisterFunc("DKCefWindow::Minimize", &DKCefWindow::Minimize, this);
 	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
 	DKClass::RegisterFunc("DKCefWindow::SetIcon", &DKCefWindow::SetIcon, this);
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
+	DKClass::RegisterFunc("DKCefWindow::SetHeight", &DKCefWindow::SetHeight, this);
+	DKClass::RegisterFunc("DKCefWindow::SetWidth", &DKCefWindow::SetWidth, this);
 }
 
 ///////////////////////////
@@ -97,24 +97,31 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 	return true;
 }
 
-
-///////////////////////////////////////////////////////////
-bool DKCefWindow::GetScreenWidth(void* input, void* output)
+//////////////////////////////////////////////////////
+bool DKCefWindow::SetHeight(void* input, void* output)
 {
-	//TODO
-	//SDL_DisplayMode dm;
-	//SDL_GetCurrentDisplayMode(0, &dm);
-	//*(int*)output = dm.w;
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	LPRECT rect;
+	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int height = *(int*)input;
+	if(!SetWindowPos(hwnd, HWND_TOP, rect->left, rect->top, rect->right, height, 0)){ return false; }
+	return true;
+#endif
 	return false;
 }
 
-////////////////////////////////////////////////////////////
-bool DKCefWindow::GetScreenHeight(void* input, void* output)
+/////////////////////////////////////////////////////
+bool DKCefWindow::SetWidth(void* input, void* output)
 {
-	//TODO
-	//SDL_DisplayMode dm;
-	//SDL_GetCurrentDisplayMode(0, &dm);
-	//*(int*)output = dm.h;
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	LPRECT rect;
+	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int width = *(int*)input;
+	if(!SetWindowPos(hwnd, HWND_TOP, rect->left, rect->top, width, rect->bottom, 0)){ return false; }
+	return true;
+#endif
 	return false;
 }
 
