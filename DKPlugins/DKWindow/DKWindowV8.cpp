@@ -13,6 +13,7 @@ bool DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_TestReturnInt", DKWindowV8::TestReturnInt);
 	DKV8::AttachFunction("DKWindow_TestReturnString", DKWindowV8::TestReturnString);
 
+	DKV8::AttachFunction("DKWindow_GetPixelRatio", DKWindowV8::GetPixelRatio);
 	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
 	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
 	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
@@ -35,7 +36,7 @@ bool DKWindowV8::TestInt(CefArgs args, CefReturn retval)
 
 	int data = args->GetInt(0);
 	int result = data;
-	retval->SetInt(0, result);
+	if(!retval->SetInt(0, result)){ return false; }
 	return true;
 }
 
@@ -46,7 +47,7 @@ bool DKWindowV8::TestString(CefArgs args, CefReturn retval)
 
 	DKString data = args->GetString(0);
 	DKString result = data;
-	retval->SetString(0, result);
+	if(!retval->SetString(0, result)){ return false; }
 	return true;
 }
 
@@ -56,7 +57,7 @@ bool DKWindowV8::TestReturnInt(CefArgs args, CefReturn retval)
 	DKLog("DKWindowV8::TestReturnInt(CefArgs,CefReturn)\n", DKINFO);
 
 	int result = 12345;
-	retval->SetInt(0, result);
+	if(!retval->SetInt(0, result)){ return false; }
 	return true;
 }
 
@@ -66,11 +67,16 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 	DKLog("DKWindowV8::TestReturnString(CefArgs,CefReturn)\n", DKINFO);
 
 	DKString result = "test string";
-	retval->SetString(0, result);
+	if(!retval->SetString(0, result)){ return false; }
 	return true;
 }
 
-
+//////////////////////////////////////////////////////////////
+bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
+{
+	if(!retval->SetDouble(0, DKWindow::GetPixelRatio())){ return false; }
+	return true;
+}
 
 ////////////////////////////////////////////////////////
 bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
