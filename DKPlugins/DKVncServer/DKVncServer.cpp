@@ -332,6 +332,8 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef LINUX
+	//TODO - some example code to try
+	/*
 	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);    
 	int w,h;
 	for(h=0;h<rfbScreen->height;++h) {
@@ -354,6 +356,7 @@ void DKVncServer::DrawBuffer()
 	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 	XDestroyImage(image);
 	image = NULL;
+	*/
 #endif
 
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
