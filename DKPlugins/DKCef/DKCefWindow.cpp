@@ -17,6 +17,8 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
 	DKClass::RegisterFunc("DKCefWindow::SetIcon", &DKCefWindow::SetIcon, this);
 	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
+	DKClass::RegisterFunc("DKCefWindow::GetHeight", &DKCefWindow::GetHeight, this);
+	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
 	DKClass::RegisterFunc("DKCefWindow::SetHeight", &DKCefWindow::SetHeight, this);
 	DKClass::RegisterFunc("DKCefWindow::SetWidth", &DKCefWindow::SetWidth, this);
 }
@@ -95,6 +97,34 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefWindow::GetHeight(void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	LPRECT rect;
+	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int height = rect->bottom - rect->top;
+	*(int*)output = height;
+	return true;
+#endif
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefWindow::GetWidth(void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	LPRECT rect;
+	if(!GetWindowRect(hwnd, rect)){ return false; }
+	int width = rect->right - rect->left;
+	*(int*)output = width;
+	return true;
+#endif
+	return false;
 }
 
 //////////////////////////////////////////////////////

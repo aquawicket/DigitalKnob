@@ -28,6 +28,8 @@ public:
 	bool Restore(void* input, void* output);
 	bool SetIcon(void* input, void* output);
 	bool Show(void* input, void* output);
+	bool GetHeight(void* input, void* output);
+	bool GetWidth(void* input, void* output);
 	bool SetHeight(void* input, void* output);
 	bool SetWidth(void* input, void* output);
 
