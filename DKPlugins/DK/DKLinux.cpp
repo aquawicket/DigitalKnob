@@ -44,6 +44,20 @@ bool DKLinux::GetMousePos(int& x, int& y)
 	return false;
 }
 
+////////////////////////////////////
+bool DKLinux::GetScreenWidth(int& w)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////
+bool DKLinux::GetScreenHeight(int& h)
+{
+	//TODO
+	return false;
+}
+
 //////////////////////////////////////////
 bool DKLinux::Run(const DKString& command)
 {

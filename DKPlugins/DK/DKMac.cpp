@@ -29,8 +29,21 @@ bool DKMac::GetMousePos(int& x, int& y)
 	return true;
 }
 
+//////////////////////////////////
+bool DKMac::GetScreenWidth(int& w)
+{
+	//TODO
+	return false;
+}
 
-///////////////////////////////////////////////////
+///////////////////////////////////
+bool DKMac::GetScreenHeight(int& h)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////
 bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
 {
     //TODO
@@ -44,7 +57,7 @@ bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
     //TODO
@@ -59,7 +72,7 @@ bool DKMac::VirtualMemoryUsed(unsigned long long& virtualMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
     //TODO
@@ -79,7 +92,7 @@ bool DKMac::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
     return false;
 }
 
-/////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 bool DKMac::PhysicalMemory(unsigned long long& physicalMemory)
 {
     //TODO
@@ -97,7 +110,7 @@ bool DKMac::PhysicalMemory(unsigned long long& physicalMemory)
     return false;
 }
 
-/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
     //TODO
@@ -133,7 +146,7 @@ bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory)
     return false;
 }
 
-//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
     //TODO
@@ -153,21 +166,21 @@ bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
      return false;
 }
 
-/////////////////////////
+/////////////////////
 void DKMac::CpuInit()
 {
 	//TODO
 	return false;
 }
 
-/////////////////////////////////
+/////////////////////////////
 bool DKMac::CpuUsed(int& cpu)
 {
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////
+//////////////////////////////////
 bool DKMac::CpuUsedByApp(int& cpu)
 {
 	//TODO

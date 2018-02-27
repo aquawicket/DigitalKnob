@@ -12,6 +12,8 @@ public:
 	//static bool SetMainThreadNow(unsigned long int& id);
 	//static bool GetThreadId(unsigned long int& id);
 	static bool GetMousePos(int& x, int& y);
+	static bool GetScreenWidth(int& w);
+	static bool GetScreenHeight(int& h);
 
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);

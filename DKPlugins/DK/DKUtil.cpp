@@ -100,6 +100,12 @@ bool DKUtil::GetScreenWidth(int& w)
 #ifdef WIN32
 	return DKWindows::GetScreenWidth(w);
 #endif
+#ifdef MAC
+	return DKMac::GetScreenWidth(w);
+#endif
+#ifdef LINUX
+	return DKLinux::GetScreenWidth(w);
+#endif
 	DKLog("DKUtil::GetScreenWidth() not implemented on this OS \n", DKWARN);
 	return false;
 }
@@ -109,6 +115,12 @@ bool DKUtil::GetScreenHeight(int& h)
 {
 #ifdef WIN32
 	return DKWindows::GetScreenHeight(h);
+#endif
+#ifdef MAC
+	return DKMac::GetScreenHeight(h);
+#endif
+#ifdef LINUX
+	return DKLinux::GetScreenHeight(h);
 #endif
 	DKLog("DKUtil::GetScreenHeight() not implemented on this OS \n", DKWARN);
 	return false;
