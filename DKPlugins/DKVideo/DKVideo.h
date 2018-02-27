@@ -10,7 +10,7 @@ public:
 	bool Init();
 	bool End(){ return true; };
 	
-	static void Play(DKString& file);
+	static bool Play(DKString& file);
 };
 
 REGISTER_OBJECT(DKVideo, true);

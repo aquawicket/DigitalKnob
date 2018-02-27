@@ -539,9 +539,7 @@ int DKJS::CallFunc(duk_context* ctx)
 	DKString args = duk_require_string(ctx, 1);
 	DKString result;
 
-	if(!DKClass::CallFunc(func, &args, &result)){
-		return 0;
-	}
+	if(!DKClass::CallFunc(func, &args, &result)){ return 0;	}
 	
 	duk_push_string(ctx, result.c_str());
 	return 1;
