@@ -37,9 +37,10 @@ bool DKRocket::Init()
 			return false;
 		}
 
-		int w = DKWindow::GetWidth();
+		int w;
+		if(!DKWindow::GetWidth(w)){ return false; }
 		int h;
-		DKWindow::GetHeight(h);
+		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(w, h));
 
 		Rocket::Controls::Initialise();
