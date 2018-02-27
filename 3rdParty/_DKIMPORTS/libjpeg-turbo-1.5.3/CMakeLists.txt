@@ -51,9 +51,7 @@ endif()
 
 message(STATUS "VERSION = ${VERSION}, BUILD = ${BUILD}")
 
-IF(NOT APPLE)
-option(WITH_SIMD "Include SIMD extensions" TRUE)
-ENDIF()
+option(WITH_SIMD "Include SIMD extensions" FALSE) ##NOTE: this must be enabled on all server and client builds to work
 option(WITH_ARITH_ENC "Include arithmetic encoding support when emulating the libjpeg v6b API/ABI" TRUE)
 option(WITH_ARITH_DEC "Include arithmetic decoding support when emulating the libjpeg v6b API/ABI" TRUE)
 option(WITH_JPEG7 "Emulate libjpeg v7 API/ABI (this makes libjpeg-turbo backward incompatible with libjpeg v6b)" FALSE)
