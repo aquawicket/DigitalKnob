@@ -76,7 +76,9 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 {
-	if(!retval->SetDouble(0, DKWindow::GetPixelRatio())){ return false; }
+	float ratio;
+	if(!DKWindow::GetPixelRatio(ratio)){ return false; }
+	if(!retval->SetDouble(0, ratio)){ return false; }
 	return true;
 }
 

@@ -17,85 +17,85 @@ public:
 	static bool Create();
 
 	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
-	static int TestInt(int input);
+	static bool TestInt(int& input, int& output);
 	
 	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestString") and recieve a return value.
-	static DKString TestString(DKString input);
+	static bool TestString(DKString& input, DKString& output);
 	
 	///Call DKClass::CallFunc("DKSDLWindow::TestReturnInt") and recieve a return value.
-	static int TestReturnInt();
+	static bool TestReturnInt(int& output);
 	
 	///Call DKClass::CallFunc("DKSDLWindow::TestReturnString") and recieve a return value.
-	static DKString TestReturnString();
+	static bool TestReturnString(DKString& output);
 
 	///Set the Window icon
-	static bool SetIcon(DKString file);
+	static bool SetIcon(DKString& file);
 
 	///Set the Window title
-	static bool SetTitle(DKString string);
+	static bool SetTitle(DKString& string);
 
 	///Get the Left position of the window
-	static int GetX();
+	static bool GetX(int& x);
 	
 	///Get the Top position of the window
-	static int GetY();
+	static bool GetY(int& y);
 	
 	///Get the Width of the window
-	static int GetWidth();
+	static bool GetWidth(int& width);
 	
 	///Get the Height of the window
 	static bool GetHeight(int& height);
 	
 	///Set the Left position of the window
-	static void SetX(int x);
+	static bool SetX(int& x);
 	
 	///Set the Top position of the window
-	static void SetY(int y);
+	static bool SetY(int& y);
 	
 	///Set the Width of the window
-	static void SetWidth(int w);
+	static bool SetWidth(int& w);
 	
 	///Set the Height of the window
-	static void SetHeight(int h);
+	static bool SetHeight(int& h);
 	
 	///Get the Pixel Ratio of the window
-	static float GetPixelRatio();
+	static bool GetPixelRatio(float& ratio);
 	
 	///Get the Fullscreen status of the window 
-	static bool IsFullscreen();
+	static bool IsFullscreen(bool& fullscreen);
 	
 	///Set the Window to Fullscreen
-	static void Fullscreen();
+	static bool Fullscreen();
 	
 	///Set the Window to Windowed mode
-	static void Windowed();
+	static bool Windowed();
 	
 	///Minimize the window
-	static void Minimize();
+	static bool Minimize();
 	
 	///Restore the window
-	static void Restore();
+	static bool Restore();
 	
 	///Get the Visible status of the window 
-	static bool IsVisible();
+	static bool IsVisible(bool& visible);
 	
 	///Hide the window
-	static void Hide();
+	static bool Hide();
 	
 	///Show the window
-	static void Show();
+	static bool Show();
 	
 	///Get the Mouse x postion in the window
-	static int GetMouseX();
+	static bool GetMouseX(int& x);
 	
 	///Get the Mouse x postion in the window
-	static int GetMouseY();
+	static bool GetMouseY(int& y);
 
 	///Display a message box
-	bool MessageBox(void* input, void* output);
+	static bool MessageBox(DKString& msg);
 
 #ifdef WIN32
-	static HWND GetHwnd();
+	static bool GetHwnd(HWND* hwnd);
 #endif
 
 };
