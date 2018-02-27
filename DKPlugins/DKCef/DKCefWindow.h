@@ -22,6 +22,8 @@ public:
 	bool TestReturnInt(void* input, void* output);
 	bool TestReturnString(void* input, void* output);
 	
+	bool GetScreenHeight(void* input, void* output);
+	bool GetScreenWidth(void* input, void* output);
 	bool Hide(void* input, void* output);
 	bool IsVisible(void* input, void* output);
 	bool Minimize(void* input, void* output);

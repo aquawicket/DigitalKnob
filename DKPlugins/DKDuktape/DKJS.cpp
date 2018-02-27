@@ -314,6 +314,9 @@ int DKJS::GetScreenWidth(duk_context* ctx)
 	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
 		DKClass::CallFunc("DKSDLWindow::GetScreenWidth", NULL, &output);
 	}
+	else if(DKClass::HasFunc("DKCefWindow::GetScreenWidth")){
+		DKClass::CallFunc("DKCefWindow::GetScreenWidth", NULL, &output);
+	}
 	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
 		DKClass::CallFunc("DKOSGWindow::GetScreenWidth", NULL, &output);
 	}
