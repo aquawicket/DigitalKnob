@@ -20,6 +20,8 @@ public:
 	static bool GetPixelRatio(CefArgs args, CefReturn retval);
 	static bool SetIcon(CefArgs args, CefReturn retval);
 	static bool SetTitle(CefArgs args, CefReturn retval);
+	static bool GetHeight(CefArgs args, CefReturn retval);
+	static bool GetWidth(CefArgs args, CefReturn retval);
 	static bool SetHeight(CefArgs args, CefReturn retval);
 	static bool SetWidth(CefArgs args, CefReturn retval);
 };

@@ -16,6 +16,8 @@ bool DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_GetPixelRatio", DKWindowV8::GetPixelRatio);
 	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
 	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
+	DKV8::AttachFunction("DKWindow_GetHeight", DKWindowV8::GetHeight);
+	DKV8::AttachFunction("DKWindow_GetWidth", DKWindowV8::GetWidth);
 	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
 	DKV8::AttachFunction("DKWindow_SetWidth", DKWindowV8::SetWidth);
 	return true;
@@ -95,6 +97,24 @@ bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 
 	DKString string = args->GetString(0);
 	if (!DKWindow::SetTitle(string)) { return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
+{
+	int height;
+	if(!DKWindow::GetHeight(height)){ return false; }
+	if(!retval->SetInt(0, height)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
+{
+	int height;
+	if(!DKWindow::GetWidth(width)){ return false; }
+	if(!retval->SetInt(0, width)){ return false; }
 	return true;
 }
 
