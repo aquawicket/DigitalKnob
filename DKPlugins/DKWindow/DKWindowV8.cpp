@@ -95,16 +95,16 @@ bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::SetHeight(CefArgs args, CefReturn retval)
 {
-	DKString data = duk_require_string(ctx, 0);
-	DKWindow::SetHeight(toInt(data));
+	int height = args->GetInt(0);
+	DKWindow::SetHeight(height);
 	return 1;
 }
 
 /////////////////////////////////////////////////////////
 bool DKWindowV8::SetWidth(CefArgs args, CefReturn retval)
 {
-	DKString data = duk_require_string(ctx, 0);
-	DKWindow::SetWidth(toInt(data));
+	int width = args->GetInt(0);
+	DKWindow::SetWidth(width);
 	return 1;
 }
 
