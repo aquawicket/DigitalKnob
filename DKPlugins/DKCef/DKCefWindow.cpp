@@ -104,12 +104,16 @@ bool DKCefWindow::GetHeight(void* input, void* output)
 {
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	LPRECT rect;
-	if(!GetWindowRect(hwnd, rect)){ return false; }
-	int height = rect->bottom - rect->top;
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ 
+		DKLog("DKCefWindow::GetHeight(): GetWindowRect() failed\n", DKWARN);
+		return false; 
+	}
+	int height = rect.bottom - rect.top;
 	*(int*)output = height;
 	return true;
 #endif
+	DKLog("DKCefWindow::GetHeight(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -118,9 +122,9 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 {
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	LPRECT rect;
-	if(!GetWindowRect(hwnd, rect)){ return false; }
-	int width = rect->right - rect->left;
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int width = rect.right - rect.left;
 	*(int*)output = width;
 	return true;
 #endif
@@ -132,11 +136,11 @@ bool DKCefWindow::SetHeight(void* input, void* output)
 {
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	LPRECT rect;
-	if(!GetWindowRect(hwnd, rect)){ return false; }
-	int width = rect->right - rect->left;
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int width = rect.right - rect.left;
 	int height = *(int*)input;
-	if(!MoveWindow(hwnd, rect->left, rect->top, width, height, true)){ return false; }
+	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
 	return true;
 #endif
 	return false;
@@ -147,11 +151,13 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 {
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	LPRECT rect;
-	if(!GetWindowRect(hwnd, rect)){ return false; }
-	int height = rect->bottom - rect->top;
+	if(!hwnd){ return false; }
+	
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int height = rect.bottom - rect.top;
 	int width = *(int*)input;
-	if(!MoveWindow(hwnd, rect->left, rect->top, width, height, true)){ return false; }
+	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
 	return true;
 #endif
 	return false;

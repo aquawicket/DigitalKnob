@@ -1401,7 +1401,8 @@ bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_ou
 				//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 				//int w_height = window->height;
 				//int w_height = DKOSGWindow::Get("DKOSGWindow")->height;
-				int w_height = DKWindow::GetHeight();
+				int w_height;
+				DKWindow::GetHeight(w_height);
 
 				int height = ele->GetProperty<int>("height");
 				int bottom = ele->GetProperty<int>("bottom");

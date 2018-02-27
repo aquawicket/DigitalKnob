@@ -44,7 +44,7 @@ public:
 	static int GetWidth();
 	
 	///Get the Height of the window
-	static int GetHeight();
+	static bool GetHeight(int& height);
 	
 	///Set the Left position of the window
 	static void SetX(int x);

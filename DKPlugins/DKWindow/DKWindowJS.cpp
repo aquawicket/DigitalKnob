@@ -123,7 +123,9 @@ int DKWindowJS::GetWidth(duk_context* ctx)
 ///////////////////////////////////////////
 int DKWindowJS::GetHeight(duk_context* ctx)
 {
-	duk_push_int(ctx, DKWindow::GetHeight());
+	int height;
+	if(!DKWindow::GetHeight(height)){ return 0; }
+	duk_push_int(ctx, height);
 	return 1;
 }
 

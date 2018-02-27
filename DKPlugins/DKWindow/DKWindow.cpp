@@ -181,24 +181,21 @@ int DKWindow::GetWidth()
 	return output;
 }
 
-/////////////////////////
-int DKWindow::GetHeight()
+/////////////////////////////////////
+bool DKWindow::GetHeight(int& height)
 {
-	int output;
 	if(DKClass::HasFunc("DKCefWindow::GetHeight")){
-		DKClass::CallFunc("DKCefWindow::GetHeight", NULL, &output);
+		return DKClass::CallFunc("DKCefWindow::GetHeight", NULL, &height);
 	}
 	else if(DKClass::HasFunc("DKSDLWindow::GetHeight")){
-		DKClass::CallFunc("DKSDLWindow::GetHeight", NULL, &output);
+		return DKClass::CallFunc("DKSDLWindow::GetHeight", NULL, (void*)height);
 	}
 	else if(DKClass::HasFunc("DKOSGWindow::GetHeight")){
-		DKClass::CallFunc("DKOSGWindow::GetHeight", NULL, &output);
+		return DKClass::CallFunc("DKOSGWindow::GetHeight", NULL, (void*)height);
 	}
-	else{
-		DKLog("DKWindow::GetHeight(): No function available \n", DKERROR);
-		return NULL;
-	}
-	return output;
+	
+	DKLog("DKWindow::GetHeight(): No function available \n", DKERROR);
+	return false;
 }
 
 //////////////////////////
