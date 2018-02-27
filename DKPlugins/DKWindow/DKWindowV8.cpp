@@ -15,6 +15,8 @@ bool DKWindowV8::Init()
 
 	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
 	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
+	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
+	DKV8::AttachFunction("DKWindow_SetWidth", DKWindowV8::SetWidth);
 	return true;
 }
 
@@ -88,6 +90,22 @@ bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 	DKString string = args->GetString(0);
 	if (!DKWindow::SetTitle(string)) { return false; }
 	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindowV8::SetHeight(CefArgs args, CefReturn retval)
+{
+	DKString data = duk_require_string(ctx, 0);
+	DKWindow::SetHeight(toInt(data));
+	return 1;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::SetWidth(CefArgs args, CefReturn retval)
+{
+	DKString data = duk_require_string(ctx, 0);
+	DKWindow::SetWidth(toInt(data));
+	return 1;
 }
 
 #endif //USE_DKCef
