@@ -143,6 +143,12 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 {
+	int h;
+	if(!DKUtil::GetScreenHeight(h)){ return false; }
+	if(!retval->SetInt(0, h)){ return false; }
+	return true;
+
+	/*
 	int output;
 	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
 		DKClass::CallFunc("DKSDLWindow::GetScreenHeight", NULL, &output);
@@ -156,11 +162,18 @@ bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 	}
 	if(!retval->SetInt(0, output)){ return false; }
 	return true;
+	*/
 }
 
 ////////////////////////////////////////////////////////////
 bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 {
+	int w;
+	if(!DKUtil::GetScreenWidth(w)){ return false; }
+	if(!retval->SetInt(0, w)){ return false; }
+	return true;
+
+	/*
 	int output;
 	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
 		DKClass::CallFunc("DKSDLWindow::GetScreenWidth", NULL, &output);
@@ -174,6 +187,7 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 	}
 	if(!retval->SetInt(0, output)){ return false; } 
 	return true;
+	*/
 }
 
 /////////////////////////////////////////////////////////
