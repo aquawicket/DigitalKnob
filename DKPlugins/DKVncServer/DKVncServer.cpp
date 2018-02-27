@@ -216,31 +216,6 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 void DKVncServer::DrawBuffer()
 {
     //Capture Desktop
-#ifdef LINUX
-    image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);    
-    int w,h;
-    for(h=0;h<rfbScreen->height;++h) {
-      for(w=0;w<rfbScreen->width;++w) {
-	  unsigned long xpixel = XGetPixel(image, w, h);
-	  unsigned int red   = (xpixel & 0x00ff0000) >> 16;
-	  unsigned int green = (xpixel & 0x0000ff00) >> 8;
-	  unsigned int blue  = (xpixel & 0x000000ff);
-
-	  rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=red;
-	  rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=green;
-	  rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=blue;
-      }
-      rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
-      rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
-      rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
-      rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
-    }
-    
-    rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
-    XDestroyImage(image);
-    image = NULL;
-#endif
-
 #ifdef WIN32
 	if(capture == "GDI"){
 		//https://pastebin.com/r3CZpWDs
@@ -333,6 +308,50 @@ void DKVncServer::DrawBuffer()
 		RELEASE(device);
 		RELEASE(d3d);
 	}
+#endif
+
+#ifdef MAC
+	//https://stackoverflow.com/questions/17334786/get-pixel-from-the-screen-screenshot-in-max-osx
+	//TODO - some example code to try
+	CGImageRef image_ref = CGDisplayCreateImage(CGMainDisplayID()); 
+	CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
+	CFDataRef dataref = CGDataProviderCopyData(provider);
+	size_t width, height;    width = CGImageGetWidth(image_ref);
+	height = CGImageGetHeight(image_ref); 
+	size_t bpp = CGImageGetBitsPerPixel(image_ref) / 8;
+	uint8 *pixels = malloc(width * height * bpp);
+	memcpy(pixels, CFDataGetBytePtr(dataref), width * height * bpp);
+	CFRelease(dataref); 
+	CGImageRelease(image_ref); 
+	FILE *stream = fopen("/Users/aquawicket/Desktop/screencap.raw", "w+");
+	fwrite(pixels, bpp, width * height, stream);
+	fclose(stream); 
+	free(pixels);
+#endif
+
+#ifdef LINUX
+	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);    
+	int w,h;
+	for(h=0;h<rfbScreen->height;++h) {
+		for(w=0;w<rfbScreen->width;++w) {
+			unsigned long xpixel = XGetPixel(image, w, h);
+			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
+			unsigned int green = (xpixel & 0x0000ff00) >> 8;
+			unsigned int blue  = (xpixel & 0x000000ff);
+
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=red;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=green;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=blue;
+		}
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
+	}
+
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
+	XDestroyImage(image);
+	image = NULL;
 #endif
 
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
