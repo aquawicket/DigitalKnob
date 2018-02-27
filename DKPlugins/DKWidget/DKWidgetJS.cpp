@@ -599,7 +599,9 @@ int DKWidgetJS::Visible(duk_context* ctx)
 /////////////////////////////////////////////
 int DKWidgetJS::WindowWidth(duk_context* ctx)
 {
-	duk_push_int(ctx, DKWindow::GetWidth());
+	int width;
+	if(!DKWindow::GetWidth(width)){ return 0; }
+	duk_push_int(ctx, width);
 	return 1;
 }
 
@@ -617,7 +619,7 @@ int DKWidgetJS::GetFile(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString file;
-	DKWidget::GetFile(id,file);
+	if(!DKWidget::GetFile(id,file)){ return 0; }
 	duk_push_string(ctx, file.c_str());
 	return 1;
 }
@@ -637,9 +639,7 @@ int DKWidgetJS::GetOption(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	//DKLog("DKWidgetJS::GetOption("+id+")\n");
 	int n = 0;
-	if(!DKWidget::GetOption(id,n)){
-		return 0;
-	}
+	if(!DKWidget::GetOption(id,n)){ return 0; }
 	duk_push_int(ctx, n);
 	return 1;
 }
@@ -650,9 +650,7 @@ int DKWidgetJS::SetOption(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	int n = duk_require_int(ctx, 1);
 	//DKLog("DKWidgetJS::SelectOption("+id+")\n");
-	if(!DKWidget::SetOption(id,n)){
-		return 0;
-	}
+	if(!DKWidget::SetOption(id,n)){ return 0; }
 	return 1;
 }
 
@@ -660,9 +658,7 @@ int DKWidgetJS::SetOption(duk_context* ctx)
 int DKWidgetJS::GetHoverElement(duk_context* ctx)
 {
 	DKString id;
-	if(!DKWidget::GetHoverElement(id)){
-		return 0;
-	}
+	if(!DKWidget::GetHoverElement(id)){	return 0; }
 	duk_push_string(ctx, id.c_str());
 	return 1;
 }
@@ -671,7 +667,7 @@ int DKWidgetJS::GetHoverElement(duk_context* ctx)
 int DKWidgetJS::GetScale(duk_context* ctx)
 {
 	DKString scale;
-	DKWidget::GetProperty("html","font-size",scale);
+	if(!DKWidget::GetProperty("html","font-size",scale)){ return 0; }
 	replace(scale, "px", "");
 	//DKLog("DKWidgetJS::GetScale() = "+scale+" \n", DKDEBUG);
 	duk_push_number(ctx, toFloat(scale));
@@ -683,8 +679,8 @@ int DKWidgetJS::SetScale(duk_context* ctx)
 {
 	double scale = duk_require_number(ctx, 0);
 	//DKLog("DKWidgetJS::SetScale("+toString(scale)+")\n", DKDEBUG);
-	DKWidget::SetProperty("html","font-size",toString(scale)+"px");
-	DKWidget::SetProperty("body","font-size",toString(scale)+"px");
+	if(!DKWidget::SetProperty("html","font-size",toString(scale)+"px")){ return 0; }
+	if(!DKWidget::SetProperty("body","font-size",toString(scale)+"px")){ return 0; }
 	return 1;
 }
 

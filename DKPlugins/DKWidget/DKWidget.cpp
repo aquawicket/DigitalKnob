@@ -1314,14 +1314,16 @@ bool DKWidget::GetMouseWindowX(int& x_out)
 {
 	int mouseX = 0;
 	int mouseY = 0;
-	DKUtil::GetMousePos(mouseX, mouseY);
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return false; }
 
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseX -= window->traits->x;
 #ifdef DESKTOP
 	//mouseX -= DKOSGWindow::Get("DKOSGWindow")->traits->x;
-	mouseX -= DKWindow::GetX();
+	int x;
+	if(!DKWindow::GetX(x)){ return 0; }
+	mouseX -= x;
 #endif	
 
 	x_out = mouseX;
@@ -1333,14 +1335,16 @@ bool DKWidget::GetMouseWindowY(int& y_out)
 {
 	int mouseX = 0;
 	int mouseY = 0;
-	DKUtil::GetMousePos(mouseX, mouseY);
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
 
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseY -= window->traits->y;
 #ifdef DESKTOP
 	//mouseY -= DKOSGWindow::Get("DKOSGWindow")->traits->y;
-	mouseY -= DKWindow::GetY();
+	int y;
+	if(!DKWindow::GetY(y)){ return false; }
+	mouseY -= y;
 #endif
 
 	y_out = mouseY;
@@ -1387,7 +1391,8 @@ bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_ou
 				//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 				//int w_width = window->width;
 				//int w_width = DKOSGWindow::Get("DKOSGWindow")->width;
-				int w_width = DKWindow::GetWidth();
+				int w_width;
+				if(!DKWindow::GetWidth(w_width)){ return false; }
 
 				int width = ele->GetProperty<int>("width");
 				int right = ele->GetProperty<int>("right");
