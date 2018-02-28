@@ -1,3 +1,5 @@
+DKDEPEND(python)
+
 IF(WIN_32)
 	DKDEPEND(mingw32)
 ENDIF()
