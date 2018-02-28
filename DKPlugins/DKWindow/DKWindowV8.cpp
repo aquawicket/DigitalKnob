@@ -92,7 +92,6 @@ bool DKWindowV8::GetMouseY(CefArgs args, CefReturn retval)
 	if(!retval->SetInt(0, mouseY)){ return false; }
 	return true;
 }
-}
 	
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
@@ -107,7 +106,6 @@ bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
 {
 	DKLog("DKWindowV8::SetIcon(CefArgs,CefReturn)\n", DKINFO);
-
 	DKString file = args->GetString(0);
 	if(!DKWindow::SetIcon(file)) { return false; }
 	return true;
@@ -117,7 +115,6 @@ bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
 bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 {
 	DKLog("DKWindowV8::SetTitle(CefArgs,CefReturn)\n", DKINFO);
-
 	DKString string = args->GetString(0);
 	if (!DKWindow::SetTitle(string)) { return false; }
 	return true;
