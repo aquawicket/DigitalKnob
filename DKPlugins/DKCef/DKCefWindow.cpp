@@ -128,6 +128,7 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 	*(int*)output = width;
 	return true;
 #endif
+	DKLog("DKCefWindow::GetWidth(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 

@@ -249,7 +249,7 @@ bool DKWindow::SetHeight(int& h)
 bool DKWindow::GetPixelRatio(float& ratio)
 {
 	//TODO
-	ratio = 1.0f;
+	ratio = 1.0;
 	return true;
 }
 

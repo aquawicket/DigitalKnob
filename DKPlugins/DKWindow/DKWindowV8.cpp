@@ -120,14 +120,16 @@ bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
 {
-	//TODO
-	return false;
-	/*
 	int width;
-	if(!DKWindow::GetWidth(width)){ return false; }
-	if(!retval->SetInt(0, width)){ return false; }
+	if(!DKWindow::GetWidth(width)){
+		DKLog("DKWindowV8::GetWidth(): DKWindow::GetWidth() failed\n", DKWARN);
+		return false; 
+	}
+	if(!retval->SetInt(0, width)){
+		DKLog("DKWindowV8::GetWidth(): retval->SetInt() failed\n", DKWARN);
+		return false; 
+	}
 	return true;
-	*/
 }
 
 //////////////////////////////////////////////////////////
