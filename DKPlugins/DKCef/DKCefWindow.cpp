@@ -104,15 +104,25 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(void* input, void* output)
 {
-	//TODO
-	return false;
+	POINT p;
+	if(!GetCursorPos(&p)){ return false; }
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+	if(!ScreenToClient(hwnd, &p)){ return false; }		
+	*(int*)output = p.x; //p.x and p.y are now relative to hwnd's client area
+	return true;
 }
 
 //////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseY(void* input, void* output)
 {
-	//TODO
-	return false;
+	POINT p;
+	if(!GetCursorPos(&p)){ return false; }
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+	if(!ScreenToClient(hwnd, &p)){ return false; }		
+	*(int*)output = p.y; //p.x and p.y are now relative to hwnd's client area
+	return true;
 }
 
 //////////////////////////////////////////////////////
