@@ -21,6 +21,8 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
 	DKClass::RegisterFunc("DKCefWindow::SetHeight", &DKCefWindow::SetHeight, this);
 	DKClass::RegisterFunc("DKCefWindow::SetWidth", &DKCefWindow::SetWidth, this);
+	DKClass::RegisterFunc("DKCefWindow::GetMouseX", &DKCefWindow::GetMouseX, this);
+	DKClass::RegisterFunc("DKCefWindow::GetMouseY", &DKCefWindow::GetMouseY, this);
 }
 
 ///////////////////////////
@@ -97,6 +99,20 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefWindow::GetMouseX(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefWindow::GetMouseY(void* input, void* output)
+{
+	//TODO
+	return false;
 }
 
 //////////////////////////////////////////////////////

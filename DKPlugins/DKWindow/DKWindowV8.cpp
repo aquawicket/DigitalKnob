@@ -20,6 +20,8 @@ bool DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_GetWidth", DKWindowV8::GetWidth);
 	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
 	DKV8::AttachFunction("DKWindow_SetWidth", DKWindowV8::SetWidth);
+	DKV8::AttachFunction("DKWindow_GetMouseX", DKWindowV8::GetMouseX);
+	DKV8::AttachFunction("DKWindow_GetMouseY", DKWindowV8::GetMouseY);
 	return true;
 }
 
@@ -73,6 +75,25 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 	return true;
 }
 
+//////////////////////////////////////////////////////////
+bool DKWindowV8::GetMouseX(CefArgs args, CefReturn retval)
+{
+	int mouseX;
+	if(!DKWindow::GetMouseX(mouseX)){ return false; }
+	if(!retval->SetInt(0, mouseX)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindowV8::GetMouseY(CefArgs args, CefReturn retval)
+{
+	int mouseY;
+	if(!DKWindow::GetMouseY(mouseY)){ return false; }
+	if(!retval->SetInt(0, mouseY)){ return false; }
+	return true;
+}
+}
+	
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 {

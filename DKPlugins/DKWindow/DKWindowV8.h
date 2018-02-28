@@ -24,6 +24,8 @@ public:
 	static bool GetWidth(CefArgs args, CefReturn retval);
 	static bool SetHeight(CefArgs args, CefReturn retval);
 	static bool SetWidth(CefArgs args, CefReturn retval);
+	static bool GetMouseX(CefArgs args, CefReturn retval);
+	static bool GetMouseY(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKWindowV8, false);

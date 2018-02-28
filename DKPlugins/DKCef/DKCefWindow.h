@@ -32,6 +32,8 @@ public:
 	bool GetWidth(void* input, void* output);
 	bool SetHeight(void* input, void* output);
 	bool SetWidth(void* input, void* output);
+	bool GetMouseX(void* input, void* output);
+	bool GetMouseY(void* input, void* output);
 
 	DKCef* dkCef;
 
