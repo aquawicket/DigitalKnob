@@ -6,6 +6,7 @@ DKAudio_lastVolume = 0.0;
 function DKAudio_Init()
 {
 	//DKLog("DKAudio_Init()\n");
+	DKCreate("DKAudio");
 }
 
 //////////////////////
