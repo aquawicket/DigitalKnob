@@ -18,6 +18,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
 	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
 	DKV8::AttachFunction("DK_GetVolume", DKCefV8::GetVolume);
+	DKV8::AttachFunction("DK_SetVolume", DKCefV8::SetVolume);
 	DKV8::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKV8::AttachFunction("DK_LeftClick", DKCefV8::LeftClick);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
@@ -207,6 +208,14 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 	float volume;
 	if(!DKUtil::GetVolume(volume)){ return false; }
 	if(!retval->SetDouble(0, volume)){ return false; }
+	return 1;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
+{
+	double volume = args->GetDouble(0);
+	if(!DKUtil::SetVolume(volume)){ return false; }
 	return 1;
 }
 

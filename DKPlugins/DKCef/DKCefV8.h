@@ -29,6 +29,7 @@ public:
 	static bool GetScreenWidth(CefArgs args, CefReturn retval);
 	static bool GetTicks(CefArgs args, CefReturn retval);
 	static bool GetVolume(CefArgs args, CefReturn retval);
+	static bool SetVolume(CefArgs args, CefReturn retval);
 	static bool HideConsole(CefArgs args, CefReturn retval);
 	static bool LeftClick(CefArgs args, CefReturn retval);
 	static bool LowPowerMonitor(CefArgs args, CefReturn retval);
