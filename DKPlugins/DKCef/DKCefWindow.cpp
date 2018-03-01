@@ -239,7 +239,9 @@ bool DKCefWindow::Restore(void* input, void* output)
 
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	ShowWindow(hwnd, SW_RESTORE);
+	if(!hwnd){ return false; }
+	if(!ShowWindow(hwnd, SW_RESTORE)){ return false; }
+	if(!BringWindowToTop(hwnd)){ return false; }
 	return true;
 #endif
 
