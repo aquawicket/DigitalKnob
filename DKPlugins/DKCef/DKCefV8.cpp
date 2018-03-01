@@ -13,9 +13,11 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
 	DKV8::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKV8::AttachFunction("DK_GetLocalIP", DKCefV8::GetLocalIP);
 	DKV8::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
 	DKV8::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
 	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
+	DKV8::AttachFunction("DK_GetVolume", DKCefV8::GetVolume);
 	DKV8::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKV8::AttachFunction("DK_LeftClick", DKCefV8::LeftClick);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
@@ -125,6 +127,15 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	return true;
 }
 
+////////////////////////////////////////////////////////
+bool DKCefV8::GetLocalIP(CefArgs args, CefReturn retval)
+{
+	DKString ip;
+	if(!DKUtil::GetLocalIP(ip)){ return false; }
+	if(!retval->SetString(0, ip)){ return false; } 
+	return true;
+}
+
 ////////////////////////////////////////////////////////////////
 bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval)
 {
@@ -188,6 +199,15 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 	if(!retval->SetInt(0, output)){ return false; } 
 	return true;
 	*/
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
+{
+	float volume;
+	if(!DKUtil::GetVolume(volume)){ return false; }
+	if(!retval->SetDouble(0, volume)){ return false; }
+	return 1;
 }
 
 /////////////////////////////////////////////////////////

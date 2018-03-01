@@ -23,10 +23,12 @@ public:
 	static bool GetClipboard(CefArgs args, CefReturn retval);
 	static bool GetFps(CefArgs args, CefReturn retval);
 	static bool GetFrames(CefArgs args, CefReturn retval);
+	static bool GetLocalIP(CefArgs args, CefReturn retval);
 	static bool GetPixelUnderMouse(CefArgs args, CefReturn retval);
 	static bool GetScreenHeight(CefArgs args, CefReturn retval);
 	static bool GetScreenWidth(CefArgs args, CefReturn retval);
 	static bool GetTicks(CefArgs args, CefReturn retval);
+	static bool GetVolume(CefArgs args, CefReturn retval);
 	static bool HideConsole(CefArgs args, CefReturn retval);
 	static bool LeftClick(CefArgs args, CefReturn retval);
 	static bool LowPowerMonitor(CefArgs args, CefReturn retval);
