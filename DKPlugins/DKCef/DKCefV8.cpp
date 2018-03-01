@@ -207,6 +207,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 {
 	float volume;
 	if(!DKUtil::GetVolume(volume)){ return false; }
+	DKLog("DKCefV8::GetVolume(): volume ="+toString(volume)+"\n", DKINFO);
 	if(!retval->SetDouble(0, volume)){ return false; }
 	return 1;
 }
@@ -215,6 +216,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
 {
 	double volume = args->GetDouble(0);
+	DKLog("DKCefV8::SetVolume(): volume ="+toString(volume)+"\n", DKINFO);
 	if(!DKUtil::SetVolume(volume)){ return false; }
 	return 1;
 }
