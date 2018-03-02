@@ -75,6 +75,29 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 	return true;
 }
 
+///////////////////////////////////////////////////////
+bool DKWindowV8::Create(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Create()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKWindowV8::Fullscreen(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Fullscreen()){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
+{
+	int height;
+	if(!DKWindow::GetHeight(height)){ return false; }
+	if(!retval->SetInt(0, height)){	return false; }
+	return true;
+}
+
 //////////////////////////////////////////////////////////
 bool DKWindowV8::GetMouseX(CefArgs args, CefReturn retval)
 {
@@ -92,7 +115,7 @@ bool DKWindowV8::GetMouseY(CefArgs args, CefReturn retval)
 	if(!retval->SetInt(0, mouseY)){ return false; }
 	return true;
 }
-	
+
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 {
@@ -102,51 +125,77 @@ bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
-{
-	DKLog("DKWindowV8::SetIcon(CefArgs,CefReturn)\n", DKINFO);
-	DKString file = args->GetString(0);
-	if(!DKWindow::SetIcon(file)) { return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////////
-bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
-{
-	DKLog("DKWindowV8::SetTitle(CefArgs,CefReturn)\n", DKINFO);
-	DKString string = args->GetString(0);
-	if (!DKWindow::SetTitle(string)) { return false; }
-	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
-{
-	int height;
-	if(!DKWindow::GetHeight(height)){
-		DKLog("DKWindowV8::GetHeight(): DKWindow::GetHeight() failed\n", DKWARN);
-		return false; 
-	}
-	if(!retval->SetInt(0, height)){
-		DKLog("DKWindowV8::GetHeight(): retval->SetInt() failed\n", DKWARN);
-		return false; 
-	}
-	return true;
-}
-
 /////////////////////////////////////////////////////////
 bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
 {
 	int width;
-	if(!DKWindow::GetWidth(width)){
-		DKLog("DKWindowV8::GetWidth(): DKWindow::GetWidth() failed\n", DKWARN);
-		return false; 
-	}
-	if(!retval->SetInt(0, width)){
-		DKLog("DKWindowV8::GetWidth(): retval->SetInt() failed\n", DKWARN);
-		return false; 
-	}
+	if(!DKWindow::GetWidth(width)){	return false; }
+	if(!retval->SetInt(0, width)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::GetX(CefArgs args, CefReturn retval)
+{
+	int x;
+	if(!DKWindow::GetX(x)){ return false; }
+	if(!retval->SetInt(0, x)){ return false; }
+	return 1;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::GetY(CefArgs args, CefReturn retval)
+{
+	int y;
+	if(!DKWindow::GetY(y)){ return false; }
+	if(!retval->SetInt(0, y)){ return false; }
+	return 1;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::Hide(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Hide()){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKWindowV8::IsFullscreen(CefArgs args, CefReturn retval)
+{
+	bool fullscreen;
+	if(!DKWindow::IsFullscreen(fullscreen)){ return false; }
+	if(!retval->SetInt(0, fullscreen)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKWindowV8::IsVisible(CefArgs args, CefReturn retval)
+{
+	bool visible;
+	if(!DKWindow::IsVisible(visible)){ return false; } 
+	if(!retval->SetInt(0, visible)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKWindowV8::MessageBox(CefArgs args, CefReturn retval)
+{
+	DKString msg = args->GetString(0);
+	if(!DKWindow::MessageBox(msg)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::Minimize(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Minimize()){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKWindowV8::Restore(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Restore()){ return false; }
 	return true;
 }
 
@@ -154,16 +203,62 @@ bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
 bool DKWindowV8::SetHeight(CefArgs args, CefReturn retval)
 {
 	int height = args->GetInt(0);
-	DKWindow::SetHeight(height);
-	return 1;
+	if(!DKWindow::SetHeight(height)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
+{
+	DKString file = args->GetString(0);
+	if(!DKWindow::SetIcon(file)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
+{
+	DKString string = args->GetString(0);
+	if(!DKWindow::SetTitle(string)){ return false; }
+	return true;
 }
 
 /////////////////////////////////////////////////////////
 bool DKWindowV8::SetWidth(CefArgs args, CefReturn retval)
 {
 	int width = args->GetInt(0);
-	DKWindow::SetWidth(width);
-	return 1;
+	if(!DKWindow::SetWidth(width)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::SetX(CefArgs args, CefReturn retval)
+{
+	int x = args->GetInt(0);
+	if(!DKWindow::SetX(x)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::SetY(CefArgs args, CefReturn retval)
+{
+	int y = args->GetInt(0);
+	if(!DKWindow::SetY(y)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKWindowV8::Show(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Show()){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::Windowed(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Windowed()){ return false; }
+	return true;
 }
 
 #endif //USE_DKCef

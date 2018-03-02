@@ -87,46 +87,10 @@ int DKWindowJS::Create(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKWindowJS::SetIcon(duk_context* ctx)
+////////////////////////////////////////////
+int DKWindowJS::Fullscreen(duk_context* ctx)
 {
-	DKString file = duk_require_string(ctx, 0);
-	if (!DKWindow::SetIcon(file)) { return 0; }
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKWindowJS::SetTitle(duk_context* ctx)
-{
-	DKString string = duk_require_string(ctx, 0);
-	if(!DKWindow::SetTitle(string)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::GetX(duk_context* ctx)
-{
-	int x;
-	if(!DKWindow::GetX(x)){ return 0; }
-	duk_push_int(ctx, x);
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::GetY(duk_context* ctx)
-{
-	int y;
-	if(!DKWindow::GetY(y)){ return 0; }
-	duk_push_int(ctx, y);
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKWindowJS::GetWidth(duk_context* ctx)
-{
-	int width;
-	if(!DKWindow::GetWidth(width)){ return 0; }
-	duk_push_int(ctx, width);
+	if(!DKWindow::Fullscreen()){ return 0; }
 	return 1;
 }
 
@@ -136,107 +100,6 @@ int DKWindowJS::GetHeight(duk_context* ctx)
 	int height;
 	if(!DKWindow::GetHeight(height)){ return 0; }
 	duk_push_int(ctx, height);
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::SetX(duk_context* ctx)
-{
-	int x = duk_require_int(ctx, 0);
-	if(!DKWindow::SetX(x)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::SetY(duk_context* ctx)
-{
-	int y = duk_require_int(ctx, 0);
-	if(!DKWindow::SetY(y)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKWindowJS::SetWidth(duk_context* ctx)
-{
-	int width = duk_require_int(ctx, 0);
-	if(!DKWindow::SetWidth(width)){ return 0; }
-	return 1;
-}
-
-///////////////////////////////////////////
-int DKWindowJS::SetHeight(duk_context* ctx)
-{
-	int height = duk_require_int(ctx, 0);
-	if(!DKWindow::SetHeight(height)){ return 0; }
-	return 1;
-}
-
-///////////////////////////////////////////////
-int DKWindowJS::GetPixelRatio(duk_context* ctx)
-{
-	float ratio;
-	if(!DKWindow::GetPixelRatio(ratio)){ return 0; }
-	duk_push_number(ctx, ratio);
-	return 1;
-}
-
-//////////////////////////////////////////////
-int DKWindowJS::IsFullscreen(duk_context* ctx)
-{
-	bool fullscreen;
-	if(!DKWindow::IsFullscreen(fullscreen)){ return 0; }
-	duk_push_int(ctx, fullscreen);
-	return 1;
-}
-
-////////////////////////////////////////////
-int DKWindowJS::Fullscreen(duk_context* ctx)
-{
-	if(!DKWindow::Fullscreen()){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKWindowJS::Windowed(duk_context* ctx)
-{
-	if(!DKWindow::Windowed()){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKWindowJS::Minimize(duk_context* ctx)
-{
-	if(!DKWindow::Minimize()){ return 0; }
-	return 1;
-}
-
-/////////////////////////////////////////
-int DKWindowJS::Restore(duk_context* ctx)
-{
-	if(!DKWindow::Restore()){ return 0; }
-	return 1;
-}
-
-///////////////////////////////////////////
-int DKWindowJS::IsVisible(duk_context* ctx)
-{
-	bool visible;
-	if(!DKWindow::IsVisible(visible)){ return 0; } 
-	duk_push_int(ctx, visible);
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::Hide(duk_context* ctx)
-{
-	if(!DKWindow::Hide()){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKWindowJS::Show(duk_context* ctx)
-{
-	if(!DKWindow::Show()){ return 0; }
 	return 1;
 }
 
@@ -258,11 +121,148 @@ int DKWindowJS::GetMouseY(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////
+int DKWindowJS::GetPixelRatio(duk_context* ctx)
+{
+	float ratio;
+	if(!DKWindow::GetPixelRatio(ratio)){ return 0; }
+	duk_push_number(ctx, ratio);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::GetWidth(duk_context* ctx)
+{
+	int width;
+	if(!DKWindow::GetWidth(width)){ return 0; }
+	duk_push_int(ctx, width);
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::GetX(duk_context* ctx)
+{
+	int x;
+	if(!DKWindow::GetX(x)){ return 0; }
+	duk_push_int(ctx, x);
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::GetY(duk_context* ctx)
+{
+	int y;
+	if(!DKWindow::GetY(y)){ return 0; }
+	duk_push_int(ctx, y);
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::Hide(duk_context* ctx)
+{
+	if(!DKWindow::Hide()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKWindowJS::IsFullscreen(duk_context* ctx)
+{
+	bool fullscreen;
+	if(!DKWindow::IsFullscreen(fullscreen)){ return 0; }
+	duk_push_int(ctx, fullscreen);
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKWindowJS::IsVisible(duk_context* ctx)
+{
+	bool visible;
+	if(!DKWindow::IsVisible(visible)){ return 0; } 
+	duk_push_int(ctx, visible);
+	return 1;
+}
+
 ////////////////////////////////////////////
 int DKWindowJS::MessageBox(duk_context* ctx)
 {
 	DKString msg = duk_require_string(ctx, 0);
 	if(!DKWindow::MessageBox(msg)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::Minimize(duk_context* ctx)
+{
+	if(!DKWindow::Minimize()){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKWindowJS::Restore(duk_context* ctx)
+{
+	if(!DKWindow::Restore()){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKWindowJS::SetHeight(duk_context* ctx)
+{
+	int height = duk_require_int(ctx, 0);
+	if(!DKWindow::SetHeight(height)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKWindowJS::SetIcon(duk_context* ctx)
+{
+	DKString file = duk_require_string(ctx, 0);
+	if (!DKWindow::SetIcon(file)) { return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::SetTitle(duk_context* ctx)
+{
+	DKString string = duk_require_string(ctx, 0);
+	if(!DKWindow::SetTitle(string)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::SetWidth(duk_context* ctx)
+{
+	int width = duk_require_int(ctx, 0);
+	if(!DKWindow::SetWidth(width)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::SetX(duk_context* ctx)
+{
+	int x = duk_require_int(ctx, 0);
+	if(!DKWindow::SetX(x)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::SetY(duk_context* ctx)
+{
+	int y = duk_require_int(ctx, 0);
+	if(!DKWindow::SetY(y)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////
+int DKWindowJS::Show(duk_context* ctx)
+{
+	if(!DKWindow::Show()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::Windowed(duk_context* ctx)
+{
+	if(!DKWindow::Windowed()){ return 0; }
 	return 1;
 }
 
