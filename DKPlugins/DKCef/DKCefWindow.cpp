@@ -329,7 +329,11 @@ bool DKCefWindow::IsFullscreen(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	GdkWindowState state = gdk_window_hide(gdk_window);
+	*(bool*)output = (state & GDK_WINDOW_STATE_FULLSCREEN);
+	return true;
 #endif
 	DKLog("DKCefWindow::IsFullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
