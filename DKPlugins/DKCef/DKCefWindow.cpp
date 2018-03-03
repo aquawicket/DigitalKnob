@@ -114,7 +114,20 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKCefWindow::Fullscreen(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+	MONITORINFO mi = { sizeof(mi) };
+	if(GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)){
+		SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+		SetWindowPos(hwnd, HWND_TOP,
+			mi.rcMonitor.left, mi.rcMonitor.top,
+			mi.rcMonitor.right - mi.rcMonitor.left,
+			mi.rcMonitor.bottom - mi.rcMonitor.top,
+			SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	}
+	return true;
+#endif
 	return false;
 }
 
@@ -429,6 +442,15 @@ bool DKCefWindow::Show(void* input, void* output)
 /////////////////////////////////////////////////////
 bool DKCefWindow::Windowed(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+	SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
+	SetWindowPlacement(hwnd, &g_wpPrev);
+	SetWindowPos(hwnd, NULL, 0, 0, 0, 0,
+		SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
+		SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	return true;
+#endif
 	return false;
 }
