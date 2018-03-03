@@ -178,14 +178,30 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 /////////////////////////////////////////////////
 bool DKCefWindow::GetX(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int x = rect.left;
+	*(int*)output = x;
+	return true;
+#endif
+	DKLog("DKCefWindow::GetX(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 /////////////////////////////////////////////////
 bool DKCefWindow::GetY(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int y = rect.top;
+	*(int*)output = y;
+	return true;
+#endif
+	DKLog("DKCefWindow::GetY(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -327,7 +343,12 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 /////////////////////////////////////////////////////
 bool DKCefWindow::SetTitle(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+	if(!SetWindowText(hwnd, "test")){ return false; }
+	return true;
+#endif
 	return false;
 }
 
@@ -351,14 +372,36 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 /////////////////////////////////////////////////
 bool DKCefWindow::SetX(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int width = rect.right - rect.left;
+	int height = rect.bottom - rect.top;
+	int x = *(int*)input;
+	if(!MoveWindow(hwnd, x, rect.top, width, height, true)){ return false; }
+	return true;
+#endif
 	return false;
 }
 
 /////////////////////////////////////////////////
 bool DKCefWindow::SetY(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int width = rect.right - rect.left;
+	int height = rect.bottom - rect.top;
+	int y = *(int*)input;
+	if(!MoveWindow(hwnd, rect.left, y, width, height, true)){ return false; }
+	return true;
+#endif
 	return false;
 }
 
@@ -372,7 +415,6 @@ bool DKCefWindow::Show(void* input, void* output)
 	ShowWindow(hwnd, SW_SHOW);
 	return true;
 #endif
-
 	return false;
 }
 
