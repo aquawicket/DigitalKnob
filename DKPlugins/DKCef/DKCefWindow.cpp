@@ -259,10 +259,6 @@ bool DKCefWindow::GetX(void* input, void* output)
 	gdk_window_get_position(gdk_window, &x, &y);
 	*(int*)output = (int)x;
 	return true;
-
-	GtkWidget *gtk_widget;
-	gint x, y;
-	gtk_widget_translate_coordinates(gtk_widget, gtk_widget_get_toplevel(gtk_widget), 0, 0, &wx, &wy);
 #endif
 	DKLog("DKCefWindow::GetX(): not implemented on this OS\n", DKWARN);
 	return false;
