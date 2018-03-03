@@ -129,12 +129,11 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	return true;
 #endif
 #ifdef LINUX
-	GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){
 		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
 		return false;
 	}
-
 	gdk_window_fullscreen(gdk_window);
 	return true;
 #endif
@@ -469,12 +468,11 @@ bool DKCefWindow::Windowed(void* input, void* output)
 	return true;
 #endif
 #ifdef LINUX
-	GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){
 		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
 		return false;
 	}
-
 	gdk_window_unfullscreen(gdk_window);
 	return true;
 #endif
