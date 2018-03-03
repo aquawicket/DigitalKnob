@@ -270,11 +270,11 @@ public:
 
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
-#ifdef WIN32
+//#ifdef WIN32
 			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.windows_key_code));
-#else
-			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));
-#endif
+//#else
+//			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));
+//#endif
 		}
 		if(event.type == KEYEVENT_KEYDOWN){
 			DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n", DKINFO);
