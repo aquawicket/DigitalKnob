@@ -133,10 +133,7 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
-	if(!gdk_window){
-		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
-		return false;
-	}
+	if(!gdk_window){ return false; }
 	gdk_window_fullscreen(gdk_window);
 	return true;
 #endif
@@ -162,7 +159,11 @@ bool DKCefWindow::GetHeight(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int height = gdk_window_get_height(gdk_window);
+	*(int*)output = height;
+	return true;
 #endif
 	DKLog("DKCefWindow::GetHeight(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -227,7 +228,11 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int width = gdk_window_get_width(gdk_window);
+	*(int*)output = width;
+	return true;
 #endif
 	DKLog("DKCefWindow::GetWidth(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -248,7 +253,12 @@ bool DKCefWindow::GetX(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int x, y;
+	gdk_window_get_position(GdkWindow *window, &x, &y);
+	*(int*)output = x;
+	return true;
 #endif
 	DKLog("DKCefWindow::GetX(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -269,7 +279,12 @@ bool DKCefWindow::GetY(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int x, y;
+	gdk_window_get_position(GdkWindow *window, &x, &y);
+	*(int*)output = y;
+	return true;
 #endif
 	DKLog("DKCefWindow::GetY(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -287,7 +302,10 @@ bool DKCefWindow::Hide(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_hide(gdk_window);
+	return true;
 #endif
 	DKLog("DKCefWindow::Hide(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -327,7 +345,11 @@ bool DKCefWindow::IsVisible(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	bool visible = gdk_window_is_visible(gdk_window);
+	*(bool*)output = visible;
+	return true;
 #endif
 	DKLog("DKCefWindow::IsVisible(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -361,7 +383,10 @@ bool DKCefWindow::Minimize(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_iconify(gdk_window);
+	return true;
 #endif
 	DKLog("DKCefWindow::Minimize(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -381,7 +406,10 @@ bool DKCefWindow::Restore(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_deiconify(gdk_window);
+	return true;
 #endif
 	DKLog("DKCefWindow::Restore(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -403,7 +431,13 @@ bool DKCefWindow::SetHeight(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int width;
+	if(!GetWidth(NULL, &width)){ return false; }
+	int height = *(int*)input;
+	gdk_window_resize(gdk_window, width, height);
+	return true;
 #endif
 	DKLog("DKCefWindow::SetHeight(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -473,7 +507,10 @@ bool DKCefWindow::SetTitle(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_set_title(gdk_window, "test");
+	return true;
 #endif
 	DKLog("DKCefWindow::SetTitle(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -496,7 +533,13 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int height;
+	if(!GetHeight(NULL, &height)){ return false; }
+	int width = *(int*)input;
+	gdk_window_resize(gdk_window, width, height);
+	return true;
 #endif
 	DKLog("DKCefWindow::SetWidth(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -521,7 +564,13 @@ bool DKCefWindow::SetX(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int y;
+	if(!GetY(NULL, &y)){ return false; }
+	int x = *(int*)input;
+	gdk_window_move(gdk_window, x, y);
+	return true;
 #endif
 	DKLog("DKCefWindow::SetX(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -545,7 +594,12 @@ bool DKCefWindow::SetY(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	int x;
+	if(!GetX(NULL, &x)){ return false; }
+	int y = *(int*)input;
+	gdk_window_move(gdk_window, x, y);
 #endif
 	DKLog("DKCefWindow::SetY(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -563,7 +617,10 @@ bool DKCefWindow::Show(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
-	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_show(gdk_window);
+	return true;
 #endif
 	DKLog("DKCefWindow::Show(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -587,10 +644,7 @@ bool DKCefWindow::Windowed(void* input, void* output)
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
-	if(!gdk_window){
-		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
-		return false;
-	}
+	if(!gdk_window){ return false;}
 	gdk_window_unfullscreen(gdk_window);
 	return true;
 #endif
