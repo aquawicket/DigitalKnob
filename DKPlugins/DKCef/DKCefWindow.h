@@ -48,6 +48,11 @@ public:
 
 #ifdef WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
+
+	BOOL isFullscreen = TRUE;
+	WINDOWPLACEMENT wpc;
+	LONG HWNDStyle = 0;
+	LONG HWNDStyleEx = 0;
 #endif
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }

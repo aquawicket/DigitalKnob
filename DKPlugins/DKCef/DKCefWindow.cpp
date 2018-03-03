@@ -222,7 +222,15 @@ bool DKCefWindow::Hide(void* input, void* output)
 /////////////////////////////////////////////////////////
 bool DKCefWindow::IsFullscreen(void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	RECT a, b;
+	if(!GetWindowRect(hwnd, &a)){ return false; }
+	if(!GetWindowRect(GetDesktopWindow(), &b)){ return false; }
+	bool fullscreen = (a.left == b.left && a.top == b.top && a.right == b.right && a.bottom == b.bottom);
+	*(bool*)output = fullscreen;
+	return true;
+#endif
 	return false;
 }
 
