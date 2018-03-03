@@ -13,15 +13,29 @@ bool DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_TestReturnInt", DKWindowV8::TestReturnInt);
 	DKV8::AttachFunction("DKWindow_TestReturnString", DKWindowV8::TestReturnString);
 
-	DKV8::AttachFunction("DKWindow_GetPixelRatio", DKWindowV8::GetPixelRatio);
-	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
-	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
+	DKV8::AttachFunction("DKWindow_Create", DKWindowV8::Create);
+	DKV8::AttachFunction("DKWindow_Fullscreen", DKWindowV8::Fullscreen);
 	DKV8::AttachFunction("DKWindow_GetHeight", DKWindowV8::GetHeight);
-	DKV8::AttachFunction("DKWindow_GetWidth", DKWindowV8::GetWidth);
-	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
-	DKV8::AttachFunction("DKWindow_SetWidth", DKWindowV8::SetWidth);
 	DKV8::AttachFunction("DKWindow_GetMouseX", DKWindowV8::GetMouseX);
 	DKV8::AttachFunction("DKWindow_GetMouseY", DKWindowV8::GetMouseY);
+	DKV8::AttachFunction("DKWindow_GetPixelRatio", DKWindowV8::GetPixelRatio);
+	DKV8::AttachFunction("DKWindow_GetWidth", DKWindowV8::GetWidth);
+	DKV8::AttachFunction("DKWindow_GetX", DKWindowV8::GetX);
+	DKV8::AttachFunction("DKWindow_GetY", DKWindowV8::GetY);
+	DKV8::AttachFunction("DKWindow_Hide", DKWindowV8::Hide);
+	DKV8::AttachFunction("DKWindow_IsFullscreen", DKWindowV8::IsFullscreen);
+	DKV8::AttachFunction("DKWindow_IsVisible", DKWindowV8::IsVisible);
+	DKV8::AttachFunction("DKWindow_MessageBox", DKWindowV8::MessageBox);
+	DKV8::AttachFunction("DKWindow_Minimize", DKWindowV8::Minimize);
+	DKV8::AttachFunction("DKWindow_Restore", DKWindowV8::Restore);
+	DKV8::AttachFunction("DKWindow_SetHeight", DKWindowV8::SetHeight);
+	DKV8::AttachFunction("DKWindow_SetIcon", DKWindowV8::SetIcon);
+	DKV8::AttachFunction("DKWindow_SetTitle", DKWindowV8::SetTitle);
+	DKV8::AttachFunction("DKWindow_SetWidth", DKWindowV8::SetWidth);
+	DKV8::AttachFunction("DKWindow_SetX", DKWindowV8::SetX);
+	DKV8::AttachFunction("DKWindow_SetY", DKWindowV8::SetY);
+	DKV8::AttachFunction("DKWindow_Show", DKWindowV8::Show);
+	DKV8::AttachFunction("DKWindow_Windowed", DKWindowV8::Windowed);
 	return true;
 }
 
