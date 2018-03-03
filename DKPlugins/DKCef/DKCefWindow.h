@@ -45,13 +45,15 @@ public:
 	bool Windowed(void* input, void* output);
 
 	DKCef* dkCef;
-	bool isFullscreen = false;
 
 #ifdef WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 	WINDOWPLACEMENT wpc;
 	LONG HWNDStyle = 0;
 	LONG HWNDStyleEx = 0;
+#endif
+#ifdef LINUX
+	bool isFullscreen = false;
 #endif
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
@@ -153,7 +155,6 @@ public:
 #endif
 
 #ifdef LINUX
-		//gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
 		      DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
@@ -161,9 +162,11 @@ public:
 		}
 		if(fullscreen){
 		  gdk_window_fullscreen(gdk_window);
+		  isFullscreen = true;
 		}
 		else{
 		  gdk_window_unfullscreen(gdk_window);
+		  isFullscreen = false;
 		}
 #endif //LINUX
 	}
