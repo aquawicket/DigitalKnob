@@ -332,7 +332,7 @@ bool DKCefWindow::IsFullscreen(void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	GdkWindowState state = gdk_window_get_state(gdk_window);
-	bool fullscreen = (state & GDK_WINDOW_STATE_FULLSCREEN);
+	bool fullscreen = ((state & GDK_WINDOW_STATE_FULLSCREEN) != 0);
 	*(bool*)output = fullscreen;
 	return true;
 #endif
