@@ -257,6 +257,7 @@ bool DKCefWindow::GetX(void* input, void* output)
 	if(!gdk_window){ return false; }
 	gint x, y;
 	gdk_window_get_position(gdk_window, &x, &y);
+	DKLog("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n", DKINFO);
 	*(int*)output = (int)x;
 	return true;
 #endif
