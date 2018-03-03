@@ -129,7 +129,12 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	//TODO
+	//TEST
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){
+		DKLog("DKCefWindow::Fullscreen(): nsview invalid\n", DKWARN);
+		return false; 
+	}
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
