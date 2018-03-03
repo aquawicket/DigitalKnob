@@ -256,7 +256,7 @@ bool DKCefWindow::GetX(void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int x, y;
-	gdk_window_get_position(GdkWindow *window, &x, &y);
+	gdk_window_get_position(gdk_window, &x, &y);
 	*(int*)output = x;
 	return true;
 #endif
@@ -282,7 +282,7 @@ bool DKCefWindow::GetY(void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int x, y;
-	gdk_window_get_position(GdkWindow *window, &x, &y);
+	gdk_window_get_position(gdk_window, &x, &y);
 	*(int*)output = y;
 	return true;
 #endif
