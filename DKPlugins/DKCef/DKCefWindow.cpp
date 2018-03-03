@@ -282,9 +282,10 @@ bool DKCefWindow::GetY(void* input, void* output)
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	int x, y;
+	gint x, y;
 	gdk_window_get_position(gdk_window, &x, &y);
-	*(int*)output = y;
+	DKLog("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n", DKINFO);
+	*(int*)output = (int)y;
 	return true;
 #endif
 	DKLog("DKCefWindow::GetY(): not implemented on this OS\n", DKWARN);
