@@ -129,12 +129,9 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	//TEST
+	//TODO
 	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
-	if(!nsview){
-		DKLog("DKCefWindow::Fullscreen(): nsview invalid\n", DKWARN);
-		return false; 
-	}
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -163,6 +160,8 @@ bool DKCefWindow::GetHeight(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -189,9 +188,13 @@ bool DKCefWindow::GetMouseX(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
 #endif
 	DKLog("DKCefWindow::GetMouseX(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -211,9 +214,13 @@ bool DKCefWindow::GetMouseY(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
 #endif
 	DKLog("DKCefWindow::GetMouseY(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -232,6 +239,8 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -257,6 +266,8 @@ bool DKCefWindow::GetX(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -284,6 +295,8 @@ bool DKCefWindow::GetY(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -308,6 +321,8 @@ bool DKCefWindow::Hide(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -333,6 +348,8 @@ bool DKCefWindow::IsFullscreen(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	/*
@@ -359,6 +376,8 @@ bool DKCefWindow::IsVisible(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -397,6 +416,8 @@ bool DKCefWindow::Minimize(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -420,6 +441,8 @@ bool DKCefWindow::Restore(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -445,6 +468,8 @@ bool DKCefWindow::SetHeight(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -502,9 +527,13 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
 #endif
 	DKLog("DKCefWindow::SetIcon(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -521,6 +550,8 @@ bool DKCefWindow::SetTitle(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -547,6 +578,8 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -578,6 +611,8 @@ bool DKCefWindow::SetX(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -608,6 +643,8 @@ bool DKCefWindow::SetY(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -631,6 +668,8 @@ bool DKCefWindow::Show(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
@@ -657,6 +696,8 @@ bool DKCefWindow::Windowed(void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
