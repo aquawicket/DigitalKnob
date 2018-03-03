@@ -45,11 +45,10 @@ public:
 	bool Windowed(void* input, void* output);
 
 	DKCef* dkCef;
+	bool isFullscreen = false;
 
 #ifdef WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
-
-	BOOL isFullscreen = TRUE;
 	WINDOWPLACEMENT wpc;
 	LONG HWNDStyle = 0;
 	LONG HWNDStyleEx = 0;

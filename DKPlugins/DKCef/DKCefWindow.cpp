@@ -135,6 +135,7 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_fullscreen(gdk_window);
+	isFullscreen = true;
 	return true;
 #endif
 	DKLog("DKCefWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
@@ -329,11 +330,14 @@ bool DKCefWindow::IsFullscreen(void* input, void* output)
 	//TODO
 #endif
 #ifdef LINUX
+	/*
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	GdkWindowState state = gdk_window_get_state(gdk_window);
 	bool fullscreen = ((state & GDK_WINDOW_STATE_FULLSCREEN) != 0);
 	*(bool*)output = fullscreen;
+	*/
+	*(bool*)output = isFullscreen;
 	return true;
 #endif
 	DKLog("DKCefWindow::IsFullscreen(): not implemented on this OS\n", DKWARN);
@@ -653,6 +657,7 @@ bool DKCefWindow::Windowed(void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false;}
 	gdk_window_unfullscreen(gdk_window);
+	isFullscreen = false;
 	return true;
 #endif
 	DKLog("DKCefWindow::Windowed(): not implemented on this OS\n", DKWARN);
