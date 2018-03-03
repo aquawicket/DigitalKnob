@@ -152,6 +152,7 @@ bool DKCefWindow::GetHeight(void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(void* input, void* output)
 {
+#ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -159,11 +160,14 @@ bool DKCefWindow::GetMouseX(void* input, void* output)
 	if(!ScreenToClient(hwnd, &p)){ return false; }		
 	*(int*)output = p.x; //p.x and p.y are now relative to hwnd's client area
 	return true;
+#endif
+	return false;
 }
 
 //////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseY(void* input, void* output)
 {
+#ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
@@ -171,6 +175,8 @@ bool DKCefWindow::GetMouseY(void* input, void* output)
 	if(!ScreenToClient(hwnd, &p)){ return false; }		
 	*(int*)output = p.y; //p.x and p.y are now relative to hwnd's client area
 	return true;
+#endif
+	return false;
 }
 
 /////////////////////////////////////////////////////
