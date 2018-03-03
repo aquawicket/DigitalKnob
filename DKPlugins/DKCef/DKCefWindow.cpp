@@ -255,10 +255,14 @@ bool DKCefWindow::GetX(void* input, void* output)
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	int x, y;
+	gint x, y;
 	gdk_window_get_position(gdk_window, &x, &y);
-	*(int*)output = x;
+	*(int*)output = (int)x;
 	return true;
+
+	GtkWidget *gtk_widget;
+	gint x, y;
+	gtk_widget_translate_coordinates(gtk_widget, gtk_widget_get_toplevel(gtk_widget), 0, 0, &wx, &wy);
 #endif
 	DKLog("DKCefWindow::GetX(): not implemented on this OS\n", DKWARN);
 	return false;
