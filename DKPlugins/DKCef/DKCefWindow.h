@@ -166,7 +166,6 @@ public:
 		else{
 		  gdk_window_unfullscreen(gdk_window);
 		}
-		
 #endif //LINUX
 	}
 

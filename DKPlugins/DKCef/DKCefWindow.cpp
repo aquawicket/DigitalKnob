@@ -128,6 +128,15 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	}
 	return true;
 #endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){
+		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
+		return;
+	}
+
+	gdk_window_fullscreen(gdk_window);
+#endif
 	return false;
 }
 
@@ -457,6 +466,15 @@ bool DKCefWindow::Windowed(void* input, void* output)
 		SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
 		SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
 	return true;
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){
+		DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n", DKINFO);
+		return;
+	}
+
+	gdk_window_unfullscreen(gdk_window);
 #endif
 	return false;
 }
