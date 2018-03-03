@@ -22,18 +22,27 @@ public:
 	bool TestReturnInt(void* input, void* output);
 	bool TestReturnString(void* input, void* output);
 	
-	bool Hide(void* input, void* output);
-	bool IsVisible(void* input, void* output);
-	bool Minimize(void* input, void* output);
-	bool Restore(void* input, void* output);
-	bool SetIcon(void* input, void* output);
-	bool Show(void* input, void* output);
+	bool Fullscreen(void* input, void* output);
 	bool GetHeight(void* input, void* output);
-	bool GetWidth(void* input, void* output);
-	bool SetHeight(void* input, void* output);
-	bool SetWidth(void* input, void* output);
 	bool GetMouseX(void* input, void* output);
 	bool GetMouseY(void* input, void* output);
+	bool GetWidth(void* input, void* output);
+	bool GetX(void* input, void* output);
+	bool GetY(void* input, void* output);
+	bool Hide(void* input, void* output);
+	bool IsFullscreen(void* input, void* output);
+	bool IsVisible(void* input, void* output);
+	bool MessageBox(void* input, void* output);
+	bool Minimize(void* input, void* output);
+	bool Restore(void* input, void* output);
+	bool SetHeight(void* input, void* output);
+	bool SetIcon(void* input, void* output);
+	bool SetTitle(void* input, void* output);
+	bool SetWidth(void* input, void* output);
+	bool SetX(void* input, void* output);
+	bool SetY(void* input, void* output);
+	bool Show(void* input, void* output);
+	bool Windowed(void* input, void* output);
 
 	DKCef* dkCef;
 

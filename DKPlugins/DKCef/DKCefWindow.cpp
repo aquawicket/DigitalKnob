@@ -11,18 +11,27 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::TestReturnInt", &DKCefWindow::TestReturnInt, this);
 	DKClass::RegisterFunc("DKCefWindow::TestReturnString", &DKCefWindow::TestReturnString, this);
 
-	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
-	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
-	DKClass::RegisterFunc("DKCefWindow::Minimize", &DKCefWindow::Minimize, this);
-	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
-	DKClass::RegisterFunc("DKCefWindow::SetIcon", &DKCefWindow::SetIcon, this);
-	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
+	DKClass::RegisterFunc("DKCefWindow::Fullscreen", &DKCefWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKCefWindow::GetHeight", &DKCefWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
-	DKClass::RegisterFunc("DKCefWindow::SetHeight", &DKCefWindow::SetHeight, this);
-	DKClass::RegisterFunc("DKCefWindow::SetWidth", &DKCefWindow::SetWidth, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseX", &DKCefWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseY", &DKCefWindow::GetMouseY, this);
+	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
+	DKClass::RegisterFunc("DKCefWindow::GetX", &DKCefWindow::GetX, this);
+	DKClass::RegisterFunc("DKCefWindow::GetY", &DKCefWindow::GetY, this);
+	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
+	DKClass::RegisterFunc("DKCefWindow::IsFullscreen", &DKCefWindow::IsFullscreen, this);
+	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
+	DKClass::RegisterFunc("DKCefWindow::MessageBox", &DKCefWindow::MessageBox, this);
+	DKClass::RegisterFunc("DKCefWindow::Minimize", &DKCefWindow::Minimize, this);
+	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
+	DKClass::RegisterFunc("DKCefWindow::SetHeight", &DKCefWindow::SetHeight, this);
+	DKClass::RegisterFunc("DKCefWindow::SetIcon", &DKCefWindow::SetIcon, this);
+	DKClass::RegisterFunc("DKCefWindow::SetTitle", &DKCefWindow::SetTitle, this);
+	DKClass::RegisterFunc("DKCefWindow::SetWidth", &DKCefWindow::SetWidth, this);
+	DKClass::RegisterFunc("DKCefWindow::SetX", &DKCefWindow::SetX, this);
+	DKClass::RegisterFunc("DKCefWindow::SetY", &DKCefWindow::SetY, this);
+	DKClass::RegisterFunc("DKCefWindow::Show", &DKCefWindow::Show, this);
+	DKClass::RegisterFunc("DKCefWindow::Windowed", &DKCefWindow::Windowed, this);
 }
 
 ///////////////////////////
@@ -101,6 +110,32 @@ bool DKCefWindow::TestReturnString(void* input, void* output)
 	return true;
 }
 
+
+///////////////////////////////////////////////////////
+bool DKCefWindow::Fullscreen(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefWindow::GetHeight(void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ 
+		DKLog("DKCefWindow::GetHeight(): GetWindowRect() failed\n", DKWARN);
+		return false; 
+	}
+	int height = rect.bottom - rect.top;
+	*(int*)output = height;
+	return true;
+#endif
+	DKLog("DKCefWindow::GetHeight(): not implemented on this OS\n", DKWARN);
+	return false;
+}
+
 //////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(void* input, void* output)
 {
@@ -125,24 +160,6 @@ bool DKCefWindow::GetMouseY(void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKCefWindow::GetHeight(void* input, void* output)
-{
-#ifdef WIN32
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	RECT rect;
-	if(!GetWindowRect(hwnd, &rect)){ 
-		DKLog("DKCefWindow::GetHeight(): GetWindowRect() failed\n", DKWARN);
-		return false; 
-	}
-	int height = rect.bottom - rect.top;
-	*(int*)output = height;
-	return true;
-#endif
-	DKLog("DKCefWindow::GetHeight(): not implemented on this OS\n", DKWARN);
-	return false;
-}
-
 /////////////////////////////////////////////////////
 bool DKCefWindow::GetWidth(void* input, void* output)
 {
@@ -158,35 +175,17 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
-bool DKCefWindow::SetHeight(void* input, void* output)
+/////////////////////////////////////////////////
+bool DKCefWindow::GetX(void* input, void* output)
 {
-#ifdef WIN32
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	RECT rect;
-	if(!GetWindowRect(hwnd, &rect)){ return false; }
-	int width = rect.right - rect.left;
-	int height = *(int*)input;
-	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
-	return true;
-#endif
+	//TODO
 	return false;
 }
 
-/////////////////////////////////////////////////////
-bool DKCefWindow::SetWidth(void* input, void* output)
+/////////////////////////////////////////////////
+bool DKCefWindow::GetY(void* input, void* output)
 {
-#ifdef WIN32
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	if(!hwnd){ return false; }
-	
-	RECT rect;
-	if(!GetWindowRect(hwnd, &rect)){ return false; }
-	int height = rect.bottom - rect.top;
-	int width = *(int*)input;
-	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
-	return true;
-#endif
+	//TODO
 	return false;
 }
 
@@ -204,6 +203,13 @@ bool DKCefWindow::Hide(void* input, void* output)
 	return false;
 }
 
+/////////////////////////////////////////////////////////
+bool DKCefWindow::IsFullscreen(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
 //////////////////////////////////////////////////////
 bool DKCefWindow::IsVisible(void* input, void* output)
 {
@@ -215,6 +221,13 @@ bool DKCefWindow::IsVisible(void* input, void* output)
 	return true;
 #endif
 
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefWindow::MessageBox(void* input, void* output)
+{
+	//TODO
 	return false;
 }
 
@@ -248,6 +261,21 @@ bool DKCefWindow::Restore(void* input, void* output)
 	return false;
 }
 
+//////////////////////////////////////////////////////
+bool DKCefWindow::SetHeight(void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int width = rect.right - rect.left;
+	int height = *(int*)input;
+	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
+	return true;
+#endif
+	return false;
+}
+
 ////////////////////////////////////////////////////
 bool DKCefWindow::SetIcon(void* input, void* output)
 {
@@ -271,7 +299,7 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 		DKLog("DKCefWindow::SetIcon(): dkCef->current_browser->GetHost()->GetWindowHandle() is invalid \n", DKERROR);
 		return false;
 	}
-	
+
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd){
 		DKLog("DKCefWindow::SetIcon(): hwnd is invalid \n", DKERROR);
@@ -296,6 +324,44 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 	return false;
 }
 
+/////////////////////////////////////////////////////
+bool DKCefWindow::SetTitle(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefWindow::SetWidth(void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!hwnd){ return false; }
+	
+	RECT rect;
+	if(!GetWindowRect(hwnd, &rect)){ return false; }
+	int height = rect.bottom - rect.top;
+	int width = *(int*)input;
+	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
+	return true;
+#endif
+	return false;
+}
+
+/////////////////////////////////////////////////
+bool DKCefWindow::SetX(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////
+bool DKCefWindow::SetY(void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
 /////////////////////////////////////////////////
 bool DKCefWindow::Show(void* input, void* output)
 {
@@ -307,5 +373,12 @@ bool DKCefWindow::Show(void* input, void* output)
 	return true;
 #endif
 
+	return false;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefWindow::Windowed(void* input, void* output)
+{
+	//TODO
 	return false;
 }
