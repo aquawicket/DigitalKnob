@@ -128,6 +128,9 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	}
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){
@@ -137,6 +140,7 @@ bool DKCefWindow::Fullscreen(void* input, void* output)
 	gdk_window_fullscreen(gdk_window);
 	return true;
 #endif
+	DKLog("DKCefWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -154,6 +158,12 @@ bool DKCefWindow::GetHeight(void* input, void* output)
 	*(int*)output = height;
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
 	DKLog("DKCefWindow::GetHeight(): not implemented on this OS\n", DKWARN);
 	return false;
 }
@@ -170,6 +180,13 @@ bool DKCefWindow::GetMouseX(void* input, void* output)
 	*(int*)output = p.x; //p.x and p.y are now relative to hwnd's client area
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::GetMouseX(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -185,6 +202,13 @@ bool DKCefWindow::GetMouseY(void* input, void* output)
 	*(int*)output = p.y; //p.x and p.y are now relative to hwnd's client area
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::GetMouseY(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -198,6 +222,12 @@ bool DKCefWindow::GetWidth(void* input, void* output)
 	int width = rect.right - rect.left;
 	*(int*)output = width;
 	return true;
+#endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
 #endif
 	DKLog("DKCefWindow::GetWidth(): not implemented on this OS\n", DKWARN);
 	return false;
@@ -214,6 +244,12 @@ bool DKCefWindow::GetX(void* input, void* output)
 	*(int*)output = x;
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
 	DKLog("DKCefWindow::GetX(): not implemented on this OS\n", DKWARN);
 	return false;
 }
@@ -229,6 +265,12 @@ bool DKCefWindow::GetY(void* input, void* output)
 	*(int*)output = y;
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
 	DKLog("DKCefWindow::GetY(): not implemented on this OS\n", DKWARN);
 	return false;
 }
@@ -236,14 +278,18 @@ bool DKCefWindow::GetY(void* input, void* output)
 /////////////////////////////////////////////////
 bool DKCefWindow::Hide(void* input, void* output)
 {
-	DKLog("DKCefWindow::Hide()\n", DKDEBUG);
-
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_HIDE);
 	return true;
 #endif
-
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::Hide(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -259,49 +305,71 @@ bool DKCefWindow::IsFullscreen(void* input, void* output)
 	*(bool*)output = fullscreen;
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::IsFullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 //////////////////////////////////////////////////////
 bool DKCefWindow::IsVisible(void* input, void* output)
 {
-	DKLog("DKCefWindow::IsVisible()\n", DKDEBUG);
-
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	*(bool*)output = (IsWindowVisible(hwnd) != 0);
 	return true;
 #endif
-
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::IsVisible(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 ///////////////////////////////////////////////////////
 bool DKCefWindow::MessageBox(void* input, void* output)
 {
+#ifdef WIN32
 	//TODO
+#endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::MessageBox(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 /////////////////////////////////////////////////////
 bool DKCefWindow::Minimize(void* input, void* output)
 {
-	DKLog("DKCefWindow::Minimize()\n", DKDEBUG);
-
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
 	return true;
 #endif
-
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::Minimize(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKCefWindow::Restore(void* input, void* output)
 {
-	DKLog("DKCefWindow::Restore()\n", DKDEBUG);
-
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd){ return false; }
@@ -309,7 +377,13 @@ bool DKCefWindow::Restore(void* input, void* output)
 	if(!BringWindowToTop(hwnd)){ return false; }
 	return true;
 #endif
-
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::Restore(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -325,15 +399,19 @@ bool DKCefWindow::SetHeight(void* input, void* output)
 	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetHeight(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKCefWindow::SetIcon(void* input, void* output)
 {
-	DKLog("DKCefWindow::SetIcon()\n", DKDEBUG);
-	//DKString file = *(DKString*)input;
-
 #ifdef WIN32
 	if(!dkCef){
 		DKLog("DKCefWindow::SetIcon(): dkCef is invalid \n", DKERROR);
@@ -372,7 +450,13 @@ bool DKCefWindow::SetIcon(void* input, void* output)
 	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
 	return true;
 #endif
-
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetIcon(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -385,6 +469,13 @@ bool DKCefWindow::SetTitle(void* input, void* output)
 	if(!SetWindowText(hwnd, "test")){ return false; }
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetTitle(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -394,7 +485,6 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd){ return false; }
-	
 	RECT rect;
 	if(!GetWindowRect(hwnd, &rect)){ return false; }
 	int height = rect.bottom - rect.top;
@@ -402,6 +492,13 @@ bool DKCefWindow::SetWidth(void* input, void* output)
 	if(!MoveWindow(hwnd, rect.left, rect.top, width, height, true)){ return false; }
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetWidth(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -420,6 +517,13 @@ bool DKCefWindow::SetX(void* input, void* output)
 	if(!MoveWindow(hwnd, x, rect.top, width, height, true)){ return false; }
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetX(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -429,7 +533,6 @@ bool DKCefWindow::SetY(void* input, void* output)
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!hwnd){ return false; }
-
 	RECT rect;
 	if(!GetWindowRect(hwnd, &rect)){ return false; }
 	int width = rect.right - rect.left;
@@ -438,19 +541,31 @@ bool DKCefWindow::SetY(void* input, void* output)
 	if(!MoveWindow(hwnd, rect.left, y, width, height, true)){ return false; }
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::SetY(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 /////////////////////////////////////////////////
 bool DKCefWindow::Show(void* input, void* output)
 {
-	DKLog("DKCefWindow::Show()\n", DKDEBUG);
-
 #ifdef WIN32
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
 	ShowWindow(hwnd, SW_SHOW);
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
+#ifdef LINUX
+	//TODO
+#endif
+	DKLog("DKCefWindow::Show(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -467,6 +582,9 @@ bool DKCefWindow::Windowed(void* input, void* output)
 		SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
 	return true;
 #endif
+#ifdef MAC
+	//TODO
+#endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){
@@ -476,5 +594,6 @@ bool DKCefWindow::Windowed(void* input, void* output)
 	gdk_window_unfullscreen(gdk_window);
 	return true;
 #endif
+	DKLog("DKCefWindow::Windowed(): not implemented on this OS\n", DKWARN);
 	return false;
 }
