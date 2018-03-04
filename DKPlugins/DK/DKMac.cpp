@@ -27,7 +27,7 @@ bool DKMac::GetMousePos(int& x, int& y)
 	
 	//Carbon
 	CGEventRef ourEvent = CGEventCreate(NULL);
-	point = CGEventGetLocation(ourEvent);
+	CGPoint point = CGEventGetLocation(ourEvent);
 	CFRelease(ourEvent);
 	NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
 	
