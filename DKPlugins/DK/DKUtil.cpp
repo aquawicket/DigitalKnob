@@ -219,18 +219,16 @@ bool DKUtil::GetMousePos(int& x, int& y)
 #ifdef WIN32
 	return DKWindows::GetMousePos(x, y);
 #endif
+#ifdef MAC
+	return DKMac::GetMousePos(x, y);
+#endif
 #ifdef LINUX
 	return DKLinux::GetMousePos(x, y);
 #endif
 #ifdef ANDROID
 	return DKAndroid::GetMousePos(x, y);
 #endif
-#ifdef MAC
-	//return DKMac::GetMousePos(x, y);
-#endif
 	DKLog("DKUtil::GetMousePos() not implemented on this OS \n", DKWARN);
-	x = 0;
-	y = 0;
 	return false;
 }
 
