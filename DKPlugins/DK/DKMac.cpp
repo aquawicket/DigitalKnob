@@ -29,10 +29,9 @@ bool DKMac::GetMousePos(int& x, int& y)
 	CGEventRef ourEvent = CGEventCreate(NULL);
 	CGPoint point = CGEventGetLocation(ourEvent);
 	CFRelease(ourEvent);
-	NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
-	
-	x = 0;//mouseLoc.x;
-	y = 0;//mouseLoc.y;
+	//NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
+	x = point.x;
+	y = point.y;
 	return true;
 }
 
