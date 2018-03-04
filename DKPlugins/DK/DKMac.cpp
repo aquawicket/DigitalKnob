@@ -21,8 +21,16 @@ bool DKMac::GetThreadId(unsigned long int& id)
 ///////////////////////////////////////
 bool DKMac::GetMousePos(int& x, int& y)
 {
-	NSPoint mouseLoc = [NSEvent mouseLocation]; //get current mouse position
-	NSLog(@"Mouse location: %f %f", mouseLoc.x, mouseLoc.y);
+	//Quartz
+	//NSPoint mouseLoc = [NSEvent mouseLocation]; //get current mouse position
+	//NSLog(@"Mouse location: %f %f", mouseLoc.x, mouseLoc.y);
+	
+	//Carbon
+	CGEventRef ourEvent = CGEventCreate(NULL);
+	point = CGEventGetLocation(ourEvent);
+	CFRelease(ourEvent);
+	NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
+	
 	x = 0;//mouseLoc.x;
 	y = 0;//mouseLoc.y;
 	return true;
