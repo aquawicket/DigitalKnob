@@ -21,15 +21,9 @@ bool DKMac::GetThreadId(unsigned long int& id)
 ///////////////////////////////////////
 bool DKMac::GetMousePos(int& x, int& y)
 {
-	//Quartz
-	//NSPoint mouseLoc = [NSEvent mouseLocation]; //get current mouse position
-	//NSLog(@"Mouse location: %f %f", mouseLoc.x, mouseLoc.y);
-	
-	//Carbon
 	CGEventRef ourEvent = CGEventCreate(NULL);
 	CGPoint point = CGEventGetLocation(ourEvent);
 	CFRelease(ourEvent);
-	//NSLog(@"Location? x= %f, y = %f", (float)point.x, (float)point.y);
 	x = point.x;
 	y = point.y;
 	return true;
@@ -38,15 +32,19 @@ bool DKMac::GetMousePos(int& x, int& y)
 //////////////////////////////////
 bool DKMac::GetScreenWidth(int& w)
 {
-	//TODO
-	return false;
+	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
+	CGFloat monitorWidth = CGRectGetWidth(mainMonitor);
+	w = monitorWidth;
+	return true;
 }
 
 ///////////////////////////////////
 bool DKMac::GetScreenHeight(int& h)
 {
-	//TODO
-	return false;
+	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
+	CGFloat monitorHeight = CGRectGetHeight(mainMonitor);
+	w = monitorHeight;
+	return true;
 }
 
 ////////////////////////////////////////////////////////////
