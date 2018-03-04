@@ -14,6 +14,8 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKV8::AttachFunction("DK_GetLocalIP", DKCefV8::GetLocalIP);
+	DKV8::AttachFunction("DK_GetMouseX", DKCefV8::GetMouseX);
+	DKV8::AttachFunction("DK_GetMouseY", DKCefV8::GetMouseY);
 	DKV8::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
 	DKV8::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
 	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
@@ -134,6 +136,26 @@ bool DKCefV8::GetLocalIP(CefArgs args, CefReturn retval)
 	DKString ip;
 	if(!DKUtil::GetLocalIP(ip)){ return false; }
 	if(!retval->SetString(0, ip)){ return false; } 
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GetMouseX(CefArgs args, CefReturn retval)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return false; }
+	if(!retval->SetInt(0, mouseX)){ return false; } 
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GetMouseY(CefArgs args, CefReturn retval)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return false; }
+	if(!retval->SetInt(0, mouseY)){ return false; } 
 	return true;
 }
 
