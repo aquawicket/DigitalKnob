@@ -43,7 +43,7 @@ bool DKMac::GetScreenHeight(int& h)
 {
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorHeight = CGRectGetHeight(mainMonitor);
-	w = monitorHeight;
+	h = monitorHeight;
 	return true;
 }
 

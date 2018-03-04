@@ -181,22 +181,6 @@ bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval)
 	if(!DKUtil::GetScreenHeight(h)){ return false; }
 	if(!retval->SetInt(0, h)){ return false; }
 	return true;
-
-	/*
-	int output;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenHeight")){
-		DKClass::CallFunc("DKSDLWindow::GetScreenHeight", NULL, &output);
-	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenHeight")){
-		DKClass::CallFunc("DKOSGWindow::GetScreenHeight", NULL, &output);
-	}
-	else{
-		DKLog("DKJS::GetScreenHeight(): no function available \n", DKERROR);
-		return false;
-	}
-	if(!retval->SetInt(0, output)){ return false; }
-	return true;
-	*/
 }
 
 ////////////////////////////////////////////////////////////
@@ -206,22 +190,6 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 	if(!DKUtil::GetScreenWidth(w)){ return false; }
 	if(!retval->SetInt(0, w)){ return false; }
 	return true;
-
-	/*
-	int output;
-	if(DKClass::HasFunc("DKSDLWindow::GetScreenWidth")){
-		DKClass::CallFunc("DKSDLWindow::GetScreenWidth", NULL, &output);
-	}
-	else if(DKClass::HasFunc("DKOSGWindow::GetScreenWidth")){
-		DKClass::CallFunc("DKOSGWindow::GetScreenWidth", NULL, &output);
-	}
-	else{
-		DKLog("DKJS::GetScreenWidth(): no function available \n", DKERROR);
-		return false;
-	}
-	if(!retval->SetInt(0, output)){ return false; } 
-	return true;
-	*/
 }
 
 ///////////////////////////////////////////////////////
