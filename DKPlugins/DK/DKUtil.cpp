@@ -386,7 +386,6 @@ bool DKUtil::GetTime(DKString& _time)
 	time_t t = time(0);   // get time now
     struct tm * now = localtime(&t);
 
-	
 	int standard = now->tm_hour % 12;
 	if(standard == 0){ standard = 12; }
 	_time = toString(standard);
@@ -572,7 +571,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 	fclose(f_output);
 	return true;
 #endif //!MAC
-return false;
+	return false;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -617,7 +616,6 @@ bool DKUtil::System(const DKString& command)
 	DKLog("DKUtil::System("+command+")\n", DKDEBUG);
 #if !defined(IOS)
 	int rval = system(command.c_str());
-    rval;
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n", DKDEBUG);
 	return true;
 #endif
@@ -772,9 +770,6 @@ bool DKUtil::GetFps(unsigned int& fps)
 	return true;
 }
 
-
-
-
 ////////////////////////////
 bool DKUtil::InitFramerate()
 {
@@ -784,7 +779,7 @@ bool DKUtil::InitFramerate()
 	return true;
 }
 
-////////////////////////////////////////
+/////////////////////////////////////////
 bool DKUtil::GetFramerate(int& framerate)
 {
 	framerate = DKUtil::_fps;
