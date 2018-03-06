@@ -82,7 +82,7 @@ public:
 	static bool WaitForImage(const DKString& file, int timeout);
 	static bool WheelDown();
 	static bool WheelUp();
-	static bool round(double& num);
+	//static bool round(double& num);
 
 	static unsigned long int mainThreadId;
 

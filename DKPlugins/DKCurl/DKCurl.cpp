@@ -562,7 +562,7 @@ int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloade
     double fractiondownloaded = NowDownloaded / TotalToDownload;
     // part of the progressmeter that's already "full"
 	double dotz = fractiondownloaded * totaldotz;
-	DKUtil::round(dotz);
+	DKUtil::Round(dotz);
 
     // create the "meter"
     int ii=0;
