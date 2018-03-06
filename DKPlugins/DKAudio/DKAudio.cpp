@@ -31,8 +31,8 @@ bool DKAudio::End()
 	return true;
 }
 
-///////////////////////////////////////
-bool DKAudio::PlaySound(DKString& file)
+/////////////////////////////////////////////
+bool DKAudio::PlaySound(const DKString& file)
 {
 	if(DKClass::HasFunc("DKSDLAudio::PlaySound")){
 		return DKClass::CallFunc("DKSDLAudio::PlaySound", &file, NULL);

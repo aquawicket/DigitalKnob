@@ -50,8 +50,8 @@ bool DKSDLCef::End()
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKSDLCef::OnResize(void* input, void* output)
+////////////////////////////////////////////////////////
+bool DKSDLCef::OnResize(const void* input, void* output)
 {
 	DKLog("DKSDLCef::OnResize(void*)\n", DKDEBUG);
 
@@ -85,8 +85,8 @@ bool DKSDLCef::OnResize(void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKSDLCef::GetTexture(void* input, void* output)
+//////////////////////////////////////////////////////////
+bool DKSDLCef::GetTexture(const void* input, void* output)
 {
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);

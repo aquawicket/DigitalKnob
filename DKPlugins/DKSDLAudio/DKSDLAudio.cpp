@@ -40,8 +40,8 @@ bool DKSDLAudio::End()
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLAudio::PlaySound(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLAudio::PlaySound(const void* input, void* output)
 {
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
@@ -60,8 +60,8 @@ bool DKSDLAudio::PlaySound(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLAudio::OpenMusic(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLAudio::OpenMusic(const void* input, void* output)
 {
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return 0; }
@@ -85,16 +85,16 @@ bool DKSDLAudio::OpenMusic(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLAudio::Pause(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLAudio::Pause(const void* input, void* output)
 {
 	DKString path = *(DKString*)input;
 	Mix_PauseMusic();
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKSDLAudio::Resume(void* input, void* output)
+////////////////////////////////////////////////////////
+bool DKSDLAudio::Resume(const void* input, void* output)
 {
 	DKString path = *(DKString*)input;
 	trk.position = 0;
@@ -104,55 +104,55 @@ bool DKSDLAudio::Resume(void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKSDLAudio::Mute(void* input, void* output)
+//////////////////////////////////////////////////////
+bool DKSDLAudio::Mute(const void* input, void* output)
 {
 	_volume = Mix_VolumeMusic(-1);
 	Mix_VolumeMusic(0);
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKSDLAudio::UnMute(void* input, void* output)
+////////////////////////////////////////////////////////
+bool DKSDLAudio::UnMute(const void* input, void* output)
 {
 	Mix_VolumeMusic(_volume);
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLAudio::GetVolume(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLAudio::GetVolume(const void* input, void* output)
 {
 	int volume = Mix_VolumeMusic(-1);
 	*(int*)output = volume;
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLAudio::SetVolume(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLAudio::SetVolume(const void* input, void* output)
 {
 	int volume = *(int*)input;
 	Mix_VolumeMusic(volume);
 	return true;
 }
 
-///////////////////////////////////////////////////
-bool DKSDLAudio::GetTime(void* input, void* output)
+/////////////////////////////////////////////////////////
+bool DKSDLAudio::GetTime(const void* input, void* output)
 {
 	int val = trk.position;
 	*(int*)output = val;
 	return true;
 }
 
-///////////////////////////////////////////////////
-bool DKSDLAudio::SetTime(void* input, void* output)
+/////////////////////////////////////////////////////////
+bool DKSDLAudio::SetTime(const void* input, void* output)
 {
 	int time = *(int*)input;
 	Mix_SetMusicPosition(time);
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKSDLAudio::GetDuration(void* input, void* output)
+/////////////////////////////////////////////////////////////
+bool DKSDLAudio::GetDuration(const void* input, void* output)
 {
 	//FIXME - TODO
 	return false;

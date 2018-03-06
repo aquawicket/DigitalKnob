@@ -17,32 +17,32 @@ class DKCefWindow : public CefClient, public CefRenderHandler, public CefLoadHan
 {
 public:
 	DKCefWindow();
-	bool TestInt(void* input, void* output);
-	bool TestString(void* input, void* output);
-	bool TestReturnInt(void* input, void* output);
-	bool TestReturnString(void* input, void* output);
+	bool TestInt(const void* input, void* output);
+	bool TestString(const void* input, void* output);
+	bool TestReturnInt(const void* input, void* output);
+	bool TestReturnString(const void* input, void* output);
 	
-	bool Fullscreen(void* input, void* output);
-	bool GetHeight(void* input, void* output);
-	bool GetMouseX(void* input, void* output);
-	bool GetMouseY(void* input, void* output);
-	bool GetWidth(void* input, void* output);
-	bool GetX(void* input, void* output);
-	bool GetY(void* input, void* output);
-	bool Hide(void* input, void* output);
-	bool IsFullscreen(void* input, void* output);
-	bool IsVisible(void* input, void* output);
-	bool MessageBox(void* input, void* output);
-	bool Minimize(void* input, void* output);
-	bool Restore(void* input, void* output);
-	bool SetHeight(void* input, void* output);
-	bool SetIcon(void* input, void* output);
-	bool SetTitle(void* input, void* output);
-	bool SetWidth(void* input, void* output);
-	bool SetX(void* input, void* output);
-	bool SetY(void* input, void* output);
-	bool Show(void* input, void* output);
-	bool Windowed(void* input, void* output);
+	bool Fullscreen(const void* input, void* output);
+	bool GetHeight(const void* input, void* output);
+	bool GetMouseX(const void* input, void* output);
+	bool GetMouseY(const void* input, void* output);
+	bool GetWidth(const void* input, void* output);
+	bool GetX(const void* input, void* output);
+	bool GetY(const void* input, void* output);
+	bool Hide(const void* input, void* output);
+	bool IsFullscreen(const void* input, void* output);
+	bool IsVisible(const void* input, void* output);
+	bool MessageBox(const void* input, void* output);
+	bool Minimize(const void* input, void* output);
+	bool Restore(const void* input, void* output);
+	bool SetHeight(const void* input, void* output);
+	bool SetIcon(const void* input, void* output);
+	bool SetTitle(const void* input, void* output);
+	bool SetWidth(const void* input, void* output);
+	bool SetX(const void* input, void* output);
+	bool SetY(const void* input, void* output);
+	bool Show(const void* input, void* output);
+	bool Windowed(const void* input, void* output);
 
 	DKCef* dkCef;
 

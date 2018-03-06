@@ -302,8 +302,8 @@ bool DKSDLWindow::SetIcon(const DKString& file)
 
 
 
-////////////////////////////////////////////////////
-bool DKSDLWindow::TestInt(void* input, void* output)
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::TestInt(const void* input, void* output)
 {
 	int in = *(int*)input;
 	int out = in;
@@ -311,8 +311,8 @@ bool DKSDLWindow::TestInt(void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKSDLWindow::TestString(void* input, void* output)
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestString(const void* input, void* output)
 {
 	std::string in = *(std::string*)input;
 	std::string out = in;
@@ -320,24 +320,24 @@ bool DKSDLWindow::TestString(void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnInt(void* input, void* output)
+////////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnInt(const void* input, void* output)
 {
 	int var = 1234;
 	*(int*)output = var;
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKSDLWindow::TestReturnString(void* input, void* output)
+///////////////////////////////////////////////////////////////////
+bool DKSDLWindow::TestReturnString(const void* input, void* output)
 {
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKSDLWindow::GetClipboard(void* input, void* output)
+///////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetClipboard(const void* input, void* output)
 {
 	//TODO
 	std::string out = SDL_GetClipboardText();
@@ -345,8 +345,8 @@ bool DKSDLWindow::GetClipboard(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::GetX(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::GetX(const void* input, void* output)
 {
 	int x;
 	SDL_GetWindowPosition(sdlwin, &x, NULL);
@@ -354,8 +354,8 @@ bool DKSDLWindow::GetX(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::GetY(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::GetY(const void* input, void* output)
 {
 	int y;
 	SDL_GetWindowPosition(sdlwin, NULL, &y);
@@ -363,8 +363,8 @@ bool DKSDLWindow::GetY(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLWindow::GetWidth(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::GetWidth(const void* input, void* output)
 {
 	//DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
 	int w;
@@ -375,8 +375,8 @@ bool DKSDLWindow::GetWidth(void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLWindow::GetHeight(void* input, void* output)
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetHeight(const void* input, void* output)
 {
 	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
 	int h;
@@ -387,8 +387,8 @@ bool DKSDLWindow::GetHeight(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKSDLWindow::SetClipboard(void* input, void* output)
+///////////////////////////////////////////////////////////////
+bool DKSDLWindow::SetClipboard(const void* input, void* output)
 {
 	DKLog("DKSDLWindow::SetClipboard()\n", DKINFO);
 	std::string in = *(std::string*)input;
@@ -397,8 +397,8 @@ bool DKSDLWindow::SetClipboard(void* input, void* output)
 	return true;	
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::SetX(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::SetX(const void* input, void* output)
 {
 	int x = *(int*)input;
 	int y;
@@ -407,8 +407,8 @@ bool DKSDLWindow::SetX(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::SetY(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::SetY(const void* input, void* output)
 {
 	int y = *(int*)input;
 	int x;
@@ -417,8 +417,8 @@ bool DKSDLWindow::SetY(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLWindow::SetWidth(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::SetWidth(const void* input, void* output)
 {
 	int w = *(int*)input;
 	int h;
@@ -427,8 +427,8 @@ bool DKSDLWindow::SetWidth(void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLWindow::SetHeight(void* input, void* output)
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::SetHeight(const void* input, void* output)
 {
 	int h = *(int*)input;
 	int w;
@@ -437,8 +437,8 @@ bool DKSDLWindow::SetHeight(void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKSDLWindow::GetScreenWidth(void* input, void* output)
+/////////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetScreenWidth(const void* input, void* output)
 {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
@@ -446,8 +446,8 @@ bool DKSDLWindow::GetScreenWidth(void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetScreenHeight(void* input, void* output)
+//////////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetScreenHeight(const void* input, void* output)
 {
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
@@ -455,8 +455,8 @@ bool DKSDLWindow::GetScreenHeight(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKSDLWindow::IsFullscreen(void* input, void* output)
+///////////////////////////////////////////////////////////////
+bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 {
 	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
     bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
@@ -464,36 +464,36 @@ bool DKSDLWindow::IsFullscreen(void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKSDLWindow::Fullscreen(void* input, void* output)
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::Fullscreen(const void* input, void* output)
 {
 	SDL_SetWindowFullscreen(sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLWindow::Windowed(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::Windowed(const void* input, void* output)
 {
 	SDL_SetWindowFullscreen(sdlwin, 0); 
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKSDLWindow::Restore(void* input, void* output)
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::Restore(const void* input, void* output)
 {
 	SDL_RestoreWindow(sdlwin);
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKSDLWindow::Minimize(void* input, void* output)
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::Minimize(const void* input, void* output)
 {
 	SDL_MinimizeWindow(sdlwin);
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLWindow::IsVisible(void* input, void* output)
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::IsVisible(const void* input, void* output)
 {
 	long IsVisibleFlag = SDL_WINDOW_SHOWN;
     bool isVisible = ((SDL_GetWindowFlags(sdlwin) & IsVisibleFlag) != 0);
@@ -501,22 +501,22 @@ bool DKSDLWindow::IsVisible(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::Hide(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::Hide(const void* input, void* output)
 {
 	SDL_HideWindow(sdlwin);
 	return true;
 }
 
-/////////////////////////////////////////////////
-bool DKSDLWindow::Show(void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::Show(const void* input, void* output)
 {
 	SDL_ShowWindow(sdlwin);
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseX(void* input, void* output)
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetMouseX(const void* input, void* output)
 {
 	int mouseX;
 	SDL_GetMouseState(&mouseX, NULL);
@@ -524,8 +524,8 @@ bool DKSDLWindow::GetMouseX(void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseY(void* input, void* output)
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetMouseY(const void* input, void* output)
 {
 	int mouseY;
 	SDL_GetMouseState(NULL, &mouseY);
@@ -533,8 +533,8 @@ bool DKSDLWindow::GetMouseY(void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKSDLWindow::GetHwnd(void* input, void* output)
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::GetHwnd(const void* input, void* output)
 {
 #ifdef WIN32
 	SDL_SysWMinfo wmInfo;
@@ -549,8 +549,8 @@ bool DKSDLWindow::GetHwnd(void* input, void* output)
 #endif
 }
 
-///////////////////////////////////////////////////////
-bool DKSDLWindow::MessageBox(void* input, void* output)
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::MessageBox(const void* input, void* output)
 {
 	DKString message = *(DKString*)input;
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), sdlwin);

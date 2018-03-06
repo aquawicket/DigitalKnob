@@ -31,8 +31,8 @@ public:
 	bool Init();
 	bool End();
 
-	bool OnResize(void* input, void* output);
-	bool GetTexture(void* input, void* output);
+	bool OnResize(const void* input, void* output);
+	bool GetTexture(const void* input, void* output);
 	void SetupCef();
 	bool handle(SDL_Event *event);
 	void Draw();

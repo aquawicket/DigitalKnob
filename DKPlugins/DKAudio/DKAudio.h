@@ -15,7 +15,7 @@ public:
 	static bool Mute();
 	static bool OpenMusic(DKString& file);
 	static bool Pause(DKString& file);
-	static bool PlaySound(DKString& file); //one shot
+	static bool PlaySound(const DKString& file);
 	static bool Resume(DKString& file);
 	static bool SetVolume(int& volume);
 	static bool UnMute();

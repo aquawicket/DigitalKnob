@@ -20,17 +20,17 @@ public:
 	bool Init();
 	bool End();
 
-	bool GetVolume(void* input, void* output);
-	bool Mute(void* input, void* output);
-	bool OpenMusic(void* input, void* output);
-	bool Pause(void* input, void* output);
-	bool PlaySound(void* input, void* output);
-	bool Resume(void* input, void* output);
-	bool SetVolume(void* input, void* output);
-	bool UnMute(void* input, void* output);
-	bool GetTime(void* input, void* output);
-	bool SetTime(void* input, void* output);
-	bool GetDuration(void* input, void* output);
+	bool GetVolume(const void* input, void* output);
+	bool Mute(const void* input, void* output);
+	bool OpenMusic(const void* input, void* output);
+	bool Pause(const void* input, void* output);
+	bool PlaySound(const void* input, void* output);
+	bool Resume(const void* input, void* output);
+	bool SetVolume(const void* input, void* output);
+	bool UnMute(const void* input, void* output);
+	bool GetTime(const void* input, void* output);
+	bool SetTime(const void* input, void* output);
+	bool GetDuration(const void* input, void* output);
 	void Process();
 
 	int _volume;
