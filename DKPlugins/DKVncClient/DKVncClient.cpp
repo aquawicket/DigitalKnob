@@ -149,9 +149,7 @@ bool DKVncClient::Init()
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
-#ifdef WIN32
 	ValidateAspectRatio(cl);
-#endif
 	//resize(cl);
 
 	if(seperate_loop){
@@ -792,6 +790,9 @@ char* DKVncClient::password(rfbClient *cl)
 ////////////////////////////////////////////////////
 bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 {
+	//FIXME
+	return true; //BYPASS
+
 	//DKLog("DKVncClient::ValidateAspectRatio(): cl->width="+toString(cl->width)+", cl->height="+toString(cl->height)+"\n", DKINFO);
 	//cl->width;
 	//cl->height;

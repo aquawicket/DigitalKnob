@@ -40,7 +40,7 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 }
 
 /////////////////////////
-void DKWindows::CpuInit()
+bool DKWindows::CpuInit()
 {
 	//Init for DKWindows::CpuUsed()
 	PdhOpenQuery(NULL, NULL, &cpuQuery);
@@ -62,6 +62,7 @@ void DKWindows::CpuInit()
 
 	cpuInit = true;
 	Sleep(1000);
+	return true;
 }
 
 //////////////////////////////////

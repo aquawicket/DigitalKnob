@@ -21,7 +21,7 @@ public:
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
-	static void CpuInit();
+	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 

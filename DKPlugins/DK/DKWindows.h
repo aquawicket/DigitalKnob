@@ -22,7 +22,7 @@ class DKWindows
 {
 public:
 	static bool WINAPI ConsoleHandler(DWORD type);
-	static void CpuInit();
+	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 	static bool CreateConsoleHandler(); 

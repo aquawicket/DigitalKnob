@@ -127,7 +127,7 @@ bool DKUtil::GetScreenHeight(int& h)
 }
 
 ///////////////////////////////////////////////
-bool DKUtil::SetClipboard(DKString& text)
+bool DKUtil::SetClipboard(const DKString& text)
 {
 #ifdef WIN32
 	return DKWindows::SetClipboard(text);
@@ -343,8 +343,8 @@ bool DKUtil::WheelDown()
 	return false;
 }
 
-////////////////////////////////////
-bool DKUtil::Sleep(int milliseconds)
+///////////////////////////////////////////
+bool DKUtil::Sleep(const int& milliseconds)
 {
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
@@ -442,8 +442,8 @@ bool DKUtil::GetKey(int& key)
 	return false;
 }
 
-//////////////////////////////
-bool DKUtil::PressKey(int key)
+/////////////////////////////////////
+bool DKUtil::PressKey(const int& key)
 {
 #ifdef WIN32
 	return DKWindows::PressKey(key);
@@ -452,8 +452,8 @@ bool DKUtil::PressKey(int key)
 	return false;
 }
 
-////////////////////////////////
-bool DKUtil::ReleaseKey(int key)
+///////////////////////////////////////
+bool DKUtil::ReleaseKey(const int& key)
 {
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
@@ -462,8 +462,8 @@ bool DKUtil::ReleaseKey(int key)
 	return false;
 }
 
-///////////////////////////////
-bool DKUtil::StrokeKey(int key)
+//////////////////////////////////////
+bool DKUtil::StrokeKey(const int& key)
 {
 #ifdef WIN32
 	DKWindows::PressKey(key);
@@ -486,8 +486,8 @@ bool DKUtil::GetLocalIP(DKString& ip)
 	return true;
 }
 
-//////////////////////////////////////
-bool DKUtil::SetVolume(double& volume)
+////////////////////////////////////////////
+bool DKUtil::SetVolume(const double& volume)
 {
 #ifdef WIN32
 	return DKWindows::SetVolume(volume);
@@ -732,14 +732,14 @@ bool DKUtil::KeyIsDown(int& key)
 
 
 //////////////////////
-void DKUtil::InitFps()
+bool DKUtil::InitFps()
 {
 	memset(frametimes, 0, sizeof(frametimes)); // Set all frame times to 0ms
-	DKUtil::GetTicks(frametimelast);
+	return DKUtil::GetTicks(frametimelast);
 }
 
 ////////////////////////
-void DKUtil::UpdateFps()
+bool DKUtil::UpdateFps()
 {
 	if(!frametimelast){ DKUtil::InitFps(); }
 	long frametimesindex;
@@ -769,42 +769,47 @@ void DKUtil::UpdateFps()
 	}
 	framespersecond /= count;
 	framespersecond = 1000.f / framespersecond;
+	return true;
 }
 
 //////////////////////////////////////
-void DKUtil::GetFps(unsigned int& fps)
+bool DKUtil::GetFps(unsigned int& fps)
 {
 	fps = (unsigned int)framespersecond;
+	return true;
 }
 
 
 
 
 ////////////////////////////
-void DKUtil::InitFramerate()
+bool DKUtil::InitFramerate()
 {
 	GetTicks(DKUtil::now);
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::GetTicks(DKUtil::lastSecond);
+	return true;
 }
 
-//////////////////////////
-int DKUtil::GetFramerate()
+////////////////////////////////////////
+bool DKUtil::GetFramerate(int& framerate)
 {
-	return DKUtil::_fps;
+	framerate = DKUtil::_fps;
+	return true;
 }
 
-//////////////////////////////////
-void DKUtil::SetFramerate(int fps)
+/////////////////////////////////////////
+bool DKUtil::SetFramerate(const int& fps)
 {
 	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKINFO);
 	_fps = fps;
-	if(_fps == 0){ ticksPerFrame = 0; return; }
+	if(_fps == 0){ ticksPerFrame = 0; return true; }
 	ticksPerFrame = 1000 / _fps;
+	return true;
 }
 
 /////////////////////////////
-void DKUtil::LimitFramerate()
+bool DKUtil::LimitFramerate()
 {
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
@@ -816,10 +821,11 @@ void DKUtil::LimitFramerate()
 	}
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::UpdateFps();
+	return true;
 }
 
 ///////////////////////
-void DKUtil::CallExit()
+bool DKUtil::CallExit()
 {
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
@@ -831,18 +837,20 @@ void DKUtil::CallExit()
 #endif
 
 	DKClass::CloseAll();
+	return true;
 }
 
 //TODO - This timer needs to be moved to DKRocket/DKRocket.js
 //       Duktape currently blocks when using timers, so we've placed it here for now.
 //       Send a timer event every second
 ///////////////////////
-void DKUtil::SendTick()
+bool DKUtil::SendTick()
 {
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
 	}
+	return true;
 }
 
 

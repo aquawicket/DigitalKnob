@@ -171,7 +171,7 @@ bool DKMac::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 }
 
 /////////////////////
-void DKMac::CpuInit()
+bool DKMac::CpuInit()
 {
 	//TODO
 	return false;

@@ -299,10 +299,10 @@ bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 }
 
 ///////////////////////
-void DKLinux::CpuInit()
+bool DKLinux::CpuInit()
 {
 	//TODO
-	return;
+	return false;
 }
 
 ///////////////////////////////

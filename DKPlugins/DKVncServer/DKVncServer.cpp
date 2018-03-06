@@ -217,6 +217,57 @@ void DKVncServer::DrawBuffer()
 {
     //Capture Desktop
 #ifdef WIN32
+	if(capture == "DIRECTX"){
+		//DKLog("DIRECTX\n",DKINFO);
+		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
+
+		HRESULT hr = S_OK;
+		IDirect3D9 *d3d = nullptr;
+		IDirect3DDevice9 *device = nullptr;
+		IDirect3DSurface9 *surface = nullptr;
+		D3DPRESENT_PARAMETERS parameters = { 0 };
+		D3DDISPLAYMODE mode;
+		D3DLOCKED_RECT rc;
+		UINT pitch;
+		UINT adapter = D3DADAPTER_DEFAULT;
+
+		// init D3D and get screen size
+		d3d = Direct3DCreate9(D3D_SDK_VERSION);
+		if(!d3d){
+			DKLog("DKVncServer::DrawBuffer(): Direct3DCreate9() failed\n", DKERROR);
+			return;
+		}
+		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
+
+		parameters.Windowed = TRUE;
+		parameters.BackBufferCount = 1;
+		parameters.BackBufferHeight = mode.Height;
+		parameters.BackBufferWidth = mode.Width;
+		parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
+		parameters.hDeviceWindow = NULL;
+
+		// create device & capture surface
+		//HRCHECK(d3d->CreateDevice(adapter, D3DDEVTYPE_HAL, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &parameters, &device));
+		HRCHECK(d3d->CreateDevice(adapter, D3DDEVTYPE_REF, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &parameters, &device));
+		HRCHECK(device->CreateOffscreenPlainSurface(mode.Width, mode.Height, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &surface, nullptr));
+
+		// compute the required buffer size
+		HRCHECK(surface->LockRect(&rc, NULL, 0));
+		pitch = rc.Pitch;
+		HRCHECK(surface->UnlockRect());
+		HRCHECK(device->GetFrontBufferData(0, surface));
+
+		// copy it into our buffers
+		HRCHECK(surface->LockRect(&rc, NULL, 0));
+		CopyMemory(rfbScreen->frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
+		HRCHECK(surface->UnlockRect());
+
+		rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
+
+		RELEASE(surface);
+		RELEASE(device);
+		RELEASE(d3d);
+	}
 	if(capture == "GDI"){
 		//https://pastebin.com/r3CZpWDs
 		HWND desktop = GetDesktopWindow();
@@ -259,54 +310,6 @@ void DKVncServer::DrawBuffer()
 		DeleteDC(buffer_dc);
 		DeleteObject(dest_dc);
 		delete buffer;
-	}
-	else if(capture == "DIRECTX"){
-
-		//DKLog("DIRECTX\n",DKINFO);
-		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
-
-		HRESULT hr = S_OK;
-		IDirect3D9 *d3d = nullptr;
-		IDirect3DDevice9 *device = nullptr;
-		IDirect3DSurface9 *surface = nullptr;
-		D3DPRESENT_PARAMETERS parameters = { 0 };
-		D3DDISPLAYMODE mode;
-		D3DLOCKED_RECT rc;
-		UINT pitch;
-		UINT adapter = D3DADAPTER_DEFAULT;
-
-		// init D3D and get screen size
-		d3d = Direct3DCreate9(D3D_SDK_VERSION);
-		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
-
-		parameters.Windowed = TRUE;
-		parameters.BackBufferCount = 1;
-		parameters.BackBufferHeight = mode.Height;
-		parameters.BackBufferWidth = mode.Width;
-		parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
-		parameters.hDeviceWindow = NULL;
-
-		// create device & capture surface
-		//HRCHECK(d3d->CreateDevice(adapter, D3DDEVTYPE_HAL, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &parameters, &device));
-		HRCHECK(d3d->CreateDevice(adapter, D3DDEVTYPE_REF, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &parameters, &device));
-		HRCHECK(device->CreateOffscreenPlainSurface(mode.Width, mode.Height, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &surface, nullptr));
-
-		// compute the required buffer size
-		HRCHECK(surface->LockRect(&rc, NULL, 0));
-		pitch = rc.Pitch;
-		HRCHECK(surface->UnlockRect());
-		HRCHECK(device->GetFrontBufferData(0, surface));
-
-		// copy it into our buffers
-		HRCHECK(surface->LockRect(&rc, NULL, 0));
-		CopyMemory(rfbScreen->frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
-		HRCHECK(surface->UnlockRect());
-
-		rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
-		
-		RELEASE(surface);
-		RELEASE(device);
-		RELEASE(d3d);
 	}
 #endif
 

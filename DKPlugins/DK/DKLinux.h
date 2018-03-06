@@ -12,7 +12,7 @@ class DKLinux
 {
 public:
 	static bool SetVolume(double nVolume);
-	static void CpuInit();
+	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 	static bool GetClipboard(DKString& text);
