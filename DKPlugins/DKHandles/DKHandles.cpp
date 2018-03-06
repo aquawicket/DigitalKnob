@@ -65,6 +65,7 @@ bool DKHandles::DoHighlight()
 bool DKHandles::GetClass(DKString& clas)
 {
 	char classname[256];
+	if(handle.empty()){ return false; }
 	if(!GetClassName(handle[currentHandle], classname, 256)){
 		DKLog("DKHandles::GetClass("+clas+")\n", DKWARN);
 		return false; 
