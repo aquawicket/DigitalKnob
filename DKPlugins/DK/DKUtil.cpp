@@ -684,15 +684,6 @@ bool DKUtil::InMainThread()
 	return false;
 }
 
-/*
-///////////////////////////////
-bool DKUtil::round(double& num)
-{
-	num = floor(num + 0.5);
-	return true;
-}
-*/
-
 ///////////////////////////////
 bool DKUtil::Round(double& num)
 {
