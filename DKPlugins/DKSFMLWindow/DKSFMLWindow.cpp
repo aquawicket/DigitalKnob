@@ -1,5 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+#include <SFML/Graphics.hpp>
 
 std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
 std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
@@ -21,6 +22,7 @@ bool DKSFMLWindow::Init()
 ////////////////////////
 bool DKSFMLWindow::End()
 {
+	window.close();
 	return true;
 }
 
@@ -35,13 +37,22 @@ void DKSFMLWindow::Process()
 			}; 
 		}
 	}
+
+	// Activate the window for OpenGL rendering
+	window.setActive();
+
+	// OpenGL drawing commands go here...
+
+	// End the current frame and display its contents on screen
+	window.display();
 }
 
 ///////////////////////////////////////
 bool DKSFMLWindow::handle(sf::Event& e)
 {
 	if(e.type == sf::Event::Closed){
-		DKLog("DKSFMLWindow::handle(): requested close\n", DKINFO);
+		DKApp::Exit();
+		return false; //allow event to continue
 	}
 	return false; //allow event to continue
 }
