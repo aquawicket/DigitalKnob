@@ -12,20 +12,20 @@ public:
 	bool Init();
 	bool End();
 
-	//bool handle(SFML_Event* event);
+	bool handle(sf::Event& e);
 	void Process();
 
-	//static std::vector<boost::function<bool(SFML_Event *event)> > event_funcs;
+	sf::Window window;
+
+	static std::vector<boost::function<bool(sf::Event& e)> > event_funcs;
 	static std::vector<boost::function<void()> > draw_funcs;
 
-	/*
 	template<class T>
 	/////////////////////////////////////////////////////////////////////
-	static void AddEventFunc(bool (T::*func)(SFML_Event *event), T* _this)
+	static void AddEventFunc(bool (T::*func)(sf::Event& e), T* _this)
 	{
 		event_funcs.push_back(boost::bind(func, _this, _1));
 	}
-	*/
 
 	template<class T>
 	////////////////////////////////////////////////////
