@@ -191,8 +191,8 @@ bool DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenHeight", &DKSDLWindow::GetScreenHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetScreenWidth", &DKSDLWindow::GetScreenWidth, this);
+	//DKClass::RegisterFunc("DKSDLWindow::GetScreenHeight", &DKSDLWindow::GetScreenHeight, this);
+	//DKClass::RegisterFunc("DKSDLWindow::GetScreenWidth", &DKSDLWindow::GetScreenWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetX", &DKSDLWindow::GetX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetY", &DKSDLWindow::GetY, this);
@@ -336,11 +336,77 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output)
 	return true;
 }
 
+
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::Fullscreen(const void* input, void* output)
+{
+	SDL_SetWindowFullscreen(sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	return true;
+}
+
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetClipboard(const void* input, void* output)
 {
 	std::string out = SDL_GetClipboardText();
 	*(std::string*)output = out;
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetHeight(const void* input, void* output)
+{
+	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
+	int h;
+	SDL_GetWindowSize(sdlwin, NULL, &h);
+	DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n", DKINFO);
+	if(h == 0){ h = height; }
+	*(int*)output = h;
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::GetHwnd(const void* input, void* output)
+{
+#ifdef WIN32
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+	*(HWND*)output = hwnd;
+	return true;
+#else
+	DKLog("DKSDLWindow::GetHwnd(): This OS does not have a HWND handle \n", DKERROR);
+	return false;
+#endif
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetMouseX(const void* input, void* output)
+{
+	int mouseX;
+	SDL_GetMouseState(&mouseX, NULL);
+	*(int*)output = mouseX;
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetMouseY(const void* input, void* output)
+{
+	int mouseY;
+	SDL_GetMouseState(NULL, &mouseY);
+	*(int*)output = mouseY;
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::GetWidth(const void* input, void* output)
+{
+	//DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
+	int w;
+	SDL_GetWindowSize(sdlwin, &w, NULL);
+	DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n", DKINFO);
+	if(w == 0){ w = width; }
+	*(int*)output = w;
 	return true;
 }
 
@@ -359,30 +425,6 @@ bool DKSDLWindow::GetY(const void* input, void* output)
 	int y;
 	SDL_GetWindowPosition(sdlwin, NULL, &y);
 	*(int*)output = y;
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKSDLWindow::GetWidth(const void* input, void* output)
-{
-	//DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
-	int w;
-	SDL_GetWindowSize(sdlwin, &w, NULL);
-	DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n", DKINFO);
-	if(w == 0){ w = width; }
-	*(int*)output = w;
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetHeight(const void* input, void* output)
-{
-	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
-	int h;
-	SDL_GetWindowSize(sdlwin, NULL, &h);
-	DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n", DKINFO);
-	if(h == 0){ h = height; }
-	*(int*)output = h;
 	return true;
 }
 
@@ -436,6 +478,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output)
 	return true;
 }
 
+/*
 /////////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetScreenWidth(const void* input, void* output)
 {
@@ -453,6 +496,7 @@ bool DKSDLWindow::GetScreenHeight(const void* input, void* output)
 	*(int*)output = dm.h;
 	return true;
 }
+*/
 
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::IsFullscreen(const void* input, void* output)
@@ -460,13 +504,6 @@ bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
     bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
 	*(bool*)output = isFullscreen;
-	return true;
-}
-
-/////////////////////////////////////////////////////////////
-bool DKSDLWindow::Fullscreen(const void* input, void* output)
-{
-	SDL_SetWindowFullscreen(sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	return true;
 }
 
@@ -512,40 +549,6 @@ bool DKSDLWindow::Show(const void* input, void* output)
 {
 	SDL_ShowWindow(sdlwin);
 	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseX(const void* input, void* output)
-{
-	int mouseX;
-	SDL_GetMouseState(&mouseX, NULL);
-	*(int*)output = mouseX;
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetMouseY(const void* input, void* output)
-{
-	int mouseY;
-	SDL_GetMouseState(NULL, &mouseY);
-	*(int*)output = mouseY;
-	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKSDLWindow::GetHwnd(const void* input, void* output)
-{
-#ifdef WIN32
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
-	*(HWND*)output = hwnd;
-	return true;
-#else
-	DKLog("DKSDLWindow::GetHwnd(): This OS does not have a HWND handle \n", DKERROR);
-	return false;
-#endif
 }
 
 /////////////////////////////////////////////////////////////
