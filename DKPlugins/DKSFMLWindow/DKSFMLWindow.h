@@ -12,6 +12,11 @@ public:
 	bool Init();
 	bool End();
 
+	bool TestInt(const void* input, void* output);
+	bool TestString(const void* input, void* output);
+	bool TestReturnInt(const void* input, void* output);
+	bool TestReturnString(const void* input, void* output);
+
 	bool handle(sf::Event& e);
 	void Process();
 

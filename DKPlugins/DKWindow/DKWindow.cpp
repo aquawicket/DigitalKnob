@@ -23,37 +23,63 @@ bool DKWindow::End()
 
 
 ///
-///  If "DKSDLWindow::TestInt()" is a registered function, it will alter the variable and send it back.
+///  If "DKWindow::TestInt()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestInt(int& input, int& output)
 {
-	//DKLog("DKWindow::TestInt("+toString(input)+")\n", DKDEBUG);
-	return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
+	if(DKClass::HasFunc("DKSDLWindow::TestInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
+	}
+	DKLog("DKWindow::TestInt(): No function available \n", DKERROR);
+	return false;
 }
 
 ///
-///  If "DKSDLWindow::TestString()" is a registered function, it will alter the variable and send it back.
+///  If "DKWindow::TestString()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestString(DKString& input, DKString& output)
 {
-	//DKLog("DKWindow::TestString("+input+")\n", DKDEBUG);
-	return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
+	if(DKClass::HasFunc("DKSDLWindow::TestString")){
+		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
+	}
+	DKLog("DKWindow::TestString(): No function available \n", DKERROR);
+	return false;
 }
 
 ///
-///  If "DKSDLWindow::TestReturnInt()" is a registered function, it will return a variable.
+///  If "DKWindow::TestReturnInt()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestReturnInt(int& output)
 {
-	return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnInt(): No function available \n", DKERROR);
+	return false;
 }
 
 ///
-///  If "DKSDLWindow::TestReturnString()" is a registered function, it will return a variable.
+///  If "DKWindow::TestReturnString()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestReturnString(DKString& output)
 {
-	return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSMFLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSMFLWindow::TestReturnString", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
+	return false;
 }
 
 
@@ -65,6 +91,10 @@ bool DKWindow::Create()
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKAvailable("DKSDLWindow")){
 		DKCreate("DKSDLWindow");
+		return true;
+	}
+	else if(DKAvailable("DKSFMLWindow")){
+		DKCreate("DKSFMLWindow");
 		return true;
 	}
 	else if(DKAvailable("DKOSGWindow")){
