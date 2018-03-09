@@ -4,6 +4,7 @@ DKSET(SFML ${3RDPARTY}/SFML-2.4.2)
 
 
 ### LINK ###
+DKDEFINE(SFML_STATIC)
 DKINCLUDE(${SFML}/include)
 WIN_DEBUG_LIB(${SFML}/${OS}/lib/Debug/sfml-audio-s-d.lib)
 WIN_RELEASE_LIB(${SFML}/${OS}/lib/Release/sfml-audio-s.lib)
