@@ -1,0 +1,10 @@
+### INSTALL ###
+DKINSTALL(${DKONLINE}/Libs/SFML-2.4.2.zip SFML-2.4.2)
+DKSET(SFML ${3RDPARTY}/SFML-2.4.2)
+
+
+### LINK ###
+
+
+
+### COMPILE ###
