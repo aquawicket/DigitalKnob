@@ -339,7 +339,6 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output)
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetClipboard(const void* input, void* output)
 {
-	//TODO
 	std::string out = SDL_GetClipboardText();
 	*(std::string*)output = out;
 	return true;

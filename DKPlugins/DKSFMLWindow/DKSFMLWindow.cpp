@@ -18,6 +18,31 @@ bool DKSFMLWindow::Init()
 	DKClass::RegisterFunc("DKSFMLWindow::TestReturnInt", &DKSFMLWindow::TestReturnInt, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestReturnString", &DKSFMLWindow::TestReturnString, this);
 
+	DKClass::RegisterFunc("DKSFMLWindow::Fullscreen", &DKSFMLWindow::Fullscreen, this);
+	DKClass::RegisterFunc("DKSFMLWindow::GetClipboard", &DKSFMLWindow::GetClipboard, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetHeight", &DKSFMLWindow::GetHeight, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetHwnd", &DKSFMLWindow::GetHwnd, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetMouseX", &DKSFMLWindow::GetMouseX, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetMouseY", &DKSFMLWindow::GetMouseY, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetScreenHeight", &DKSFMLWindow::GetScreenHeight, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetScreenWidth", &DKSFMLWindow::GetScreenWidth, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetWidth", &DKSFMLWindow::GetWidth, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetX", &DKSFMLWindow::GetX, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::GetY", &DKSFMLWindow::GetY, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::Hide", &DKSFMLWindow::Hide, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::IsFullscreen", &DKSFMLWindow::IsFullscreen, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::IsVisible", &DKSFMLWindow::IsVisible, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::MessageBox", &DKSFMLWindow::MessageBox, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::Minimize", &DKSFMLWindow::Minimize, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::Restore", &DKSFMLWindow::Restore, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::SetClipboard", &DKSFMLWindow::SetClipboard, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::SetHeight", &DKSFMLWindow::SetHeight, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::SetWidth", &DKSFMLWindow::SetWidth, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::SetX", &DKSFMLWindow::SetX, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::SetY", &DKSFMLWindow::SetY, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::Show", &DKSFMLWindow::Show, this);
+	//DKClass::RegisterFunc("DKSFMLWindow::Windowed", &DKSFMLWindow::Windowed, this);
+
 	DKApp::AppendLoopFunc(&DKSFMLWindow::Process, this);
 	DKSFMLWindow::AddEventFunc(&DKSFMLWindow::handle, this);
 
@@ -95,3 +120,19 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 	*(std::string*)output = var;
 	return true;
 }
+
+
+//////////////////////////////////////////////////////////////
+bool DKSFMLWindow::Fullscreen(const void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKSFMLWindow::GetClipboard(const void* input, void* output)
+{
+	//TODO
+	return false;
+}
+
