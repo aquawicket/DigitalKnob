@@ -27,6 +27,7 @@ LINUX_RELEASE_LIB(${SFML}/${OS}/Release/libSFML.a)
 ANDROID_DEBUG_LIB(${SFML}/${OS}/Debug/obj/local/armeabi-v7a/libSFML.so)
 ANDROID_RELEASE_LIB(${SFML}/${OS}/Release/obj/local/armeabi-v7a/libSFML.so)
 
+LIST(APPEND WIN_LIBS winmm.lib)
 
 
 ### COMPILE ###
