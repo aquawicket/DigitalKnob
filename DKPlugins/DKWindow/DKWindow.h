@@ -1,5 +1,5 @@
 // This is a Switch plugin..  
-// To links to DKCefWindow, DKOSGWindow and DKSDLWindow
+// To links to DKSDLWindow, DKSFMLWindow, DKCefWindow and DKOSGWindow
 // When we call DKWindow commands, this class will determine the proper window system to use. 
 
 #pragma once
@@ -14,16 +14,16 @@ public:
 	bool Init();
 	bool End();
 
-	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestInt") and recieve a return value.
+	///Send a variable to DKClass::CallFunc("DKXXXWindow::TestInt") and recieve a return value.
 	static bool TestInt(int& input, int& output);
 	
-	///Send a variable to DKClass::CallFunc("DKSDLWindow::TestString") and recieve a return value.
+	///Send a variable to DKClass::CallFunc("DKXXXWindow::TestString") and recieve a return value.
 	static bool TestString(DKString& input, DKString& output);
 	
-	///Call DKClass::CallFunc("DKSDLWindow::TestReturnInt") and recieve a return value.
+	///Call DKClass::CallFunc("DKXXXWindow::TestReturnInt") and recieve a return value.
 	static bool TestReturnInt(int& output);
 	
-	///Call DKClass::CallFunc("DKSDLWindow::TestReturnString") and recieve a return value.
+	///Call DKClass::CallFunc("DKXXXWindow::TestReturnString") and recieve a return value.
 	static bool TestReturnString(DKString& output);
 
 

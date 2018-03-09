@@ -15,8 +15,6 @@ bool DKWindow::Init()
 bool DKWindow::End()
 {
 	DKLog("DKWindow::End()\n", DKDEBUG);
-	
-	DKClass::UnregisterFunc("DKWindow::MessageBox");
 	return true;
 }
 
@@ -75,8 +73,8 @@ bool DKWindow::TestReturnString(DKString& output)
 	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
 		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
 	}
-	if(DKClass::HasFunc("DKSMFLWindow::TestReturnString")){
-		return DKClass::CallFunc("DKSMFLWindow::TestReturnString", NULL, &output);
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
 	}
 	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
 	return false;
