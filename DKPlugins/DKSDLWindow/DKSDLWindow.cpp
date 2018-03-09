@@ -561,7 +561,7 @@ bool DKSDLWindow::MessageBox(const void* input, void* output)
 void DKSDLWindow::Process()
 {
 	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_HIDDEN){ 
-			DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
+		DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
 	}
 	
 	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_SHOWN){ 

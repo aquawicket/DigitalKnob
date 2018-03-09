@@ -10,6 +10,8 @@ bool DKSFMLWindow::Init()
 {
 	DKLog("DKSFMLWindow::Init()\n", DKINFO);
 
+	sf::Window window(sf::VideoMode(800, 600), "My window");
+
 	DKApp::AppendLoopFunc(&DKSFMLWindow::Process, this);
 	//DKSFMLWindow::AddEventFunc(&DKSFMLWindow::handle, this);
 
