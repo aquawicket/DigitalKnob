@@ -145,7 +145,7 @@ bool DKCefWindow::Fullscreen(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKCefWindow::GetHeight(const void* input, void* output)
 {
 #ifdef WIN32
@@ -175,7 +175,7 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(const void* input, void* output)
 {
 #ifdef WIN32
@@ -201,7 +201,7 @@ bool DKCefWindow::GetMouseX(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseY(const void* input, void* output)
 {
 #ifdef WIN32
@@ -227,7 +227,7 @@ bool DKCefWindow::GetMouseY(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKCefWindow::GetWidth(const void* input, void* output)
 {
 #ifdef WIN32
@@ -254,7 +254,7 @@ bool DKCefWindow::GetWidth(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::GetX(const void* input, void* output)
 {
 #ifdef WIN32
@@ -283,7 +283,7 @@ bool DKCefWindow::GetX(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::GetY(const void* input, void* output)
 {
 #ifdef WIN32
@@ -312,7 +312,7 @@ bool DKCefWindow::GetY(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::Hide(const void* input, void* output)
 {
 #ifdef WIN32
@@ -335,7 +335,7 @@ bool DKCefWindow::Hide(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 bool DKCefWindow::IsFullscreen(const void* input, void* output)
 {
 #ifdef WIN32
@@ -367,7 +367,7 @@ bool DKCefWindow::IsFullscreen(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKCefWindow::IsVisible(const void* input, void* output)
 {
 #ifdef WIN32
@@ -391,7 +391,7 @@ bool DKCefWindow::IsVisible(const void* input, void* output)
 	return false;
 }
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 bool DKCefWindow::MessageBox(const void* input, void* output)
 {
 #ifdef WIN32
@@ -407,7 +407,7 @@ bool DKCefWindow::MessageBox(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKCefWindow::Minimize(const void* input, void* output)
 {
 #ifdef WIN32
@@ -430,7 +430,7 @@ bool DKCefWindow::Minimize(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 bool DKCefWindow::Restore(const void* input, void* output)
 {
 #ifdef WIN32
@@ -455,7 +455,7 @@ bool DKCefWindow::Restore(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKCefWindow::SetHeight(const void* input, void* output)
 {
 #ifdef WIN32
@@ -485,7 +485,7 @@ bool DKCefWindow::SetHeight(const void* input, void* output)
 	return false;
 }
 
-////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 bool DKCefWindow::SetIcon(const void* input, void* output)
 {
 #ifdef WIN32
@@ -540,7 +540,7 @@ bool DKCefWindow::SetIcon(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKCefWindow::SetTitle(const void* input, void* output)
 {
 #ifdef WIN32
@@ -564,7 +564,7 @@ bool DKCefWindow::SetTitle(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKCefWindow::SetWidth(const void* input, void* output)
 {
 #ifdef WIN32
@@ -595,7 +595,7 @@ bool DKCefWindow::SetWidth(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::SetX(const void* input, void* output)
 {
 #ifdef WIN32
@@ -628,7 +628,7 @@ bool DKCefWindow::SetX(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::SetY(const void* input, void* output)
 {
 #ifdef WIN32
@@ -659,7 +659,7 @@ bool DKCefWindow::SetY(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 bool DKCefWindow::Show(const void* input, void* output)
 {
 #ifdef WIN32
@@ -682,7 +682,7 @@ bool DKCefWindow::Show(const void* input, void* output)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 bool DKCefWindow::Windowed(const void* input, void* output)
 {
 #ifdef WIN32
