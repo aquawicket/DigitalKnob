@@ -125,8 +125,6 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 {
-	//TODO
-/*
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
@@ -141,7 +139,19 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 	}
 	return true;
 #endif
-*/
+#ifdef MAC
+	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_fullscreen(gdk_window);
+	isFullscreen = true;
+	return true;
+#endif
+	DKLog("DKCefWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 

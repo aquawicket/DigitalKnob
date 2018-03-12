@@ -44,6 +44,10 @@ public:
 	bool handle(sf::Event& e);
 	void Process();
 
+#ifdef WIN32
+	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
+#endif
+
 	sf::Window window;
 
 	static std::vector<boost::function<bool(sf::Event& e)> > event_funcs;
