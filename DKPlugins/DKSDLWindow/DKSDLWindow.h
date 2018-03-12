@@ -34,7 +34,7 @@ public:
 	bool Restore(const void* input, void* output);
 	bool SetClipboard(const void* input, void* output);
 	bool SetHeight(const void* input, void* output);
-	bool SetIcon(const DKString& file);
+	bool SetIcon(const void* input, void* output);
 	bool SetWidth(const void* input, void* output);
 	bool SetX(const void* input, void* output);
 	bool SetY(const void* input, void* output);

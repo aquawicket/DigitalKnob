@@ -175,7 +175,8 @@ bool DKSDLWindow::Init()
 	DKFile::GetModifiedTime(file, mTime);
 	title2 += mTime;
 	
-	SetIcon(DKFile::local_assets+"icon.ico");
+	DKString icon = DKFile::local_assets+"icon.ico";
+	SetIcon(&icon, NULL);
 
 	//DKLog(title+"\n", DKINFO);
 	SDL_SetWindowTitle(sdlwin, title2.c_str());
@@ -201,6 +202,7 @@ bool DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::Restore", &DKSDLWindow::Restore, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetClipboard", &DKSDLWindow::SetClipboard, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetHeight", &DKSDLWindow::SetHeight, this);
+	DKClass::RegisterFunc("DKSDLWindow::SetIcon", &DKSDLWindow::SetIcon, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetWidth", &DKSDLWindow::SetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetX", &DKSDLWindow::SetX, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetY", &DKSDLWindow::SetY, this);
@@ -475,10 +477,11 @@ bool DKSDLWindow::SetHeight(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////
-bool DKSDLWindow::SetIcon(const DKString& file)
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::SetIcon(const void* input, void* output)
 {
 #ifdef WIN32
+	DKString file = *(DKString*)input;
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
