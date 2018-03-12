@@ -68,6 +68,7 @@ bool DKCefWindow::DoClose(CefRefPtr<CefBrowser> browser)
 	return false;
 }
 
+
 //////////////////////////////////////////////////////////
 bool DKCefWindow::TestInt(const void* input, void* output)
 {
@@ -79,7 +80,7 @@ bool DKCefWindow::TestInt(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 bool DKCefWindow::TestString(const void* input, void* output)
 {
 	DKLog("DKCefWindow::TestString()\n", DKDEBUG);
@@ -90,7 +91,7 @@ bool DKCefWindow::TestString(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 bool DKCefWindow::TestReturnInt(const void* input, void* output)
 {
 	DKLog("DKCefWindow::TestReturnInt()\n", DKDEBUG);
@@ -100,7 +101,7 @@ bool DKCefWindow::TestReturnInt(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 bool DKCefWindow::TestReturnString(const void* input, void* output)
 {
 	DKLog("DKCefWindow::TestReturnString()\n", DKDEBUG);
@@ -111,7 +112,7 @@ bool DKCefWindow::TestReturnString(const void* input, void* output)
 }
 
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 bool DKCefWindow::Fullscreen(const void* input, void* output)
 {
 #ifdef WIN32

@@ -126,6 +126,22 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 {
 	//TODO
+/*
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+	MONITORINFO mi = { sizeof(mi) };
+	if(GetWindowPlacement(hwnd, &g_wpPrev) && GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)){
+		SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+		SetWindowPos(hwnd, HWND_TOP,
+			mi.rcMonitor.left, mi.rcMonitor.top,
+			mi.rcMonitor.right - mi.rcMonitor.left,
+			mi.rcMonitor.bottom - mi.rcMonitor.top,
+			SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	}
+	return true;
+#endif
+*/
 	return false;
 }
 
