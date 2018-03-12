@@ -167,14 +167,19 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHeight(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2u size = window.getSize();
+	*(int*)output = size.y;
+	return true;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHwnd(const void* input, void* output)
 {
-	//TODO
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	*(HWND*)output = hwnd;
+	return true;
+#endif
 	return false;
 }
 
@@ -195,22 +200,25 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetWidth(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2u size = window.getSize();
+	*(int*)output = size.x;
+	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetX(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2i position = window.getPosition();
+	*(int*)output = position.x;
+	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetY(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2i position = window.getPosition();
+	*(int*)output = position.x;
+	return true;
 }
 
 ////////////////////////////////////////////////////////
@@ -265,8 +273,10 @@ bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetHeight(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2u size = window.getSize();
+	size.y = *(int*)input;
+	window.setSize(size);
+	return true;
 }
 
 ///////////////////////////////////////////////////////////
@@ -274,27 +284,34 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output)
 {
 	//TODO
 	return false;
+	//window.setIcon(unsigned int width, unsigned int height, const Uint8 *pixels);
 }
 
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetWidth(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2u size = window.getSize();
+	size.x = *(int*)input;
+	window.setSize(size);	
+	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetX(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2i position = window.getPosition();
+	position.x = *(int*)input;
+	window.setPosition(position);	
+	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetY(const void* input, void* output)
 {
-	//TODO
-	return false;
+	sf::Vector2i position = window.getPosition();
+	position.y = *(int*)input;
+	window.setPosition(position);	
+	return true;
 }
 
 ////////////////////////////////////////////////////////
