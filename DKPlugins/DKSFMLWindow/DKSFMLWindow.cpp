@@ -158,8 +158,10 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 {
-	//TODO
-	return false;
+	DKString text;
+	if(!DKUtil::GetClipboard(text)){ return false; }
+	*(DKString*)output = text;
+	return true;
 }
 
 /////////////////////////////////////////////////////////////
