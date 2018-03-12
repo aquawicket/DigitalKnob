@@ -224,8 +224,8 @@ bool DKSFMLWindow::GetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Hide(const void* input, void* output)
 {
-	//TODO
-	return false;
+	window.setVisible(false);
+	return true;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -317,8 +317,8 @@ bool DKSFMLWindow::SetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Show(const void* input, void* output)
 {
-	//TODO
-	return false;
+	window.setVisible(true);
+	return true;
 }
 
 ////////////////////////////////////////////////////////////
