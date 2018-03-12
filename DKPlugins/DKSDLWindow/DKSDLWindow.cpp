@@ -191,8 +191,6 @@ bool DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
-	//DKClass::RegisterFunc("DKSDLWindow::GetScreenHeight", &DKSDLWindow::GetScreenHeight, this);
-	//DKClass::RegisterFunc("DKSDLWindow::GetScreenWidth", &DKSDLWindow::GetScreenWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetX", &DKSDLWindow::GetX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetY", &DKSDLWindow::GetY, this);
@@ -282,24 +280,6 @@ bool DKSDLWindow::End()
 	SDL_Quit();
 	return true;
 }
-
-///////////////////////////////////////////////
-bool DKSDLWindow::SetIcon(const DKString& file)
-{
-#ifdef WIN32
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
-	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
-	SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
-	return true;
-#endif
-	DKLog("DKSDLWindow::SetIcon is not implemented on this OS. \n", DKERROR);
-	return false;
-}
-
-
 
 
 //////////////////////////////////////////////////////////
@@ -428,6 +408,53 @@ bool DKSDLWindow::GetY(const void* input, void* output)
 	return true;
 }
 
+///////////////////////////////////////////////////////
+bool DKSDLWindow::Hide(const void* input, void* output)
+{
+	SDL_HideWindow(sdlwin);
+	return true;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKSDLWindow::IsFullscreen(const void* input, void* output)
+{
+	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
+	bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
+	*(bool*)output = isFullscreen;
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::IsVisible(const void* input, void* output)
+{
+	long IsVisibleFlag = SDL_WINDOW_SHOWN;
+	bool isVisible = ((SDL_GetWindowFlags(sdlwin) & IsVisibleFlag) != 0);
+	*(bool*)output = isVisible;
+	return true;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKSDLWindow::MessageBox(const void* input, void* output)
+{
+	DKString message = *(DKString*)input;
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), sdlwin);
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::Minimize(const void* input, void* output)
+{
+	SDL_MinimizeWindow(sdlwin);
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKSDLWindow::Restore(const void* input, void* output)
+{
+	SDL_RestoreWindow(sdlwin);
+	return true;
+}
+
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::SetClipboard(const void* input, void* output)
 {
@@ -436,6 +463,42 @@ bool DKSDLWindow::SetClipboard(const void* input, void* output)
 	if(in.empty()){ return false; }
 	if(SDL_SetClipboardText(in.c_str()) < 0){ return false; }
 	return true;	
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLWindow::SetHeight(const void* input, void* output)
+{
+	int h = *(int*)input;
+	int w;
+	SDL_GetWindowSize(sdlwin, &w, NULL);
+	SDL_SetWindowSize(sdlwin, w, h);
+	return true;
+}
+
+///////////////////////////////////////////////
+bool DKSDLWindow::SetIcon(const DKString& file)
+{
+#ifdef WIN32
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
+	return true;
+#endif
+	DKLog("DKSDLWindow::SetIcon is not implemented on this OS. \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::SetWidth(const void* input, void* output)
+{
+	int w = *(int*)input;
+	int h;
+	SDL_GetWindowSize(sdlwin, NULL, &h);
+	SDL_SetWindowSize(sdlwin, w, h);
+	return true;
 }
 
 ///////////////////////////////////////////////////////
@@ -458,52 +521,10 @@ bool DKSDLWindow::SetY(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKSDLWindow::SetWidth(const void* input, void* output)
+///////////////////////////////////////////////////////
+bool DKSDLWindow::Show(const void* input, void* output)
 {
-	int w = *(int*)input;
-	int h;
-	SDL_GetWindowSize(sdlwin, NULL, &h);
-	SDL_SetWindowSize(sdlwin, w, h);
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::SetHeight(const void* input, void* output)
-{
-	int h = *(int*)input;
-	int w;
-	SDL_GetWindowSize(sdlwin, &w, NULL);
-	SDL_SetWindowSize(sdlwin, w, h);
-	return true;
-}
-
-/*
-/////////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetScreenWidth(const void* input, void* output)
-{
-	SDL_DisplayMode dm;
-	SDL_GetCurrentDisplayMode(0, &dm);
-	*(int*)output = dm.w;
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////
-bool DKSDLWindow::GetScreenHeight(const void* input, void* output)
-{
-	SDL_DisplayMode dm;
-	SDL_GetCurrentDisplayMode(0, &dm);
-	*(int*)output = dm.h;
-	return true;
-}
-*/
-
-///////////////////////////////////////////////////////////////
-bool DKSDLWindow::IsFullscreen(const void* input, void* output)
-{
-	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-    bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
-	*(bool*)output = isFullscreen;
+	SDL_ShowWindow(sdlwin);
 	return true;
 }
 
@@ -514,50 +535,6 @@ bool DKSDLWindow::Windowed(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKSDLWindow::Restore(const void* input, void* output)
-{
-	SDL_RestoreWindow(sdlwin);
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKSDLWindow::Minimize(const void* input, void* output)
-{
-	SDL_MinimizeWindow(sdlwin);
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKSDLWindow::IsVisible(const void* input, void* output)
-{
-	long IsVisibleFlag = SDL_WINDOW_SHOWN;
-    bool isVisible = ((SDL_GetWindowFlags(sdlwin) & IsVisibleFlag) != 0);
-	*(bool*)output = isVisible;
-	return true;
-}
-
-///////////////////////////////////////////////////////
-bool DKSDLWindow::Hide(const void* input, void* output)
-{
-	SDL_HideWindow(sdlwin);
-	return true;
-}
-
-///////////////////////////////////////////////////////
-bool DKSDLWindow::Show(const void* input, void* output)
-{
-	SDL_ShowWindow(sdlwin);
-	return true;
-}
-
-/////////////////////////////////////////////////////////////
-bool DKSDLWindow::MessageBox(const void* input, void* output)
-{
-	DKString message = *(DKString*)input;
-	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), sdlwin);
-	return true;
-}
 
 ///////////////////////////
 void DKSDLWindow::Process()

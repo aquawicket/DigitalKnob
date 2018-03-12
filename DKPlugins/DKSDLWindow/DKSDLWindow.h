@@ -23,8 +23,6 @@ public:
 	bool GetHwnd(const void* input, void* output);
 	bool GetMouseX(const void* input, void* output);
 	bool GetMouseY(const void* input, void* output);
-	//bool GetScreenHeight(const void* input, void* output);
-	//bool GetScreenWidth(const void* input, void* output);
 	bool GetWidth(const void* input, void* output);
 	bool GetX(const void* input, void* output);
 	bool GetY(const void* input, void* output);
