@@ -19,8 +19,8 @@ public:
 
 	bool Fullscreen(const void* input, void* output);
 	bool GetClipboard(const void* input, void* output);
+	bool GetHandle(const void* input, void* output);
 	bool GetHeight(const void* input, void* output);
-	bool GetHwnd(const void* input, void* output);
 	bool GetMouseX(const void* input, void* output);
 	bool GetMouseY(const void* input, void* output);
 	bool GetWidth(const void* input, void* output);

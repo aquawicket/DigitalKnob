@@ -20,8 +20,8 @@ bool DKSFMLWindow::Init()
 
 	DKClass::RegisterFunc("DKSFMLWindow::Fullscreen", &DKSFMLWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKSFMLWindow::GetClipboard", &DKSFMLWindow::GetClipboard, this);
+	DKClass::RegisterFunc("DKSFMLWindow::GetHandle", &DKSFMLWindow::GetHandle, this);
 	DKClass::RegisterFunc("DKSFMLWindow::GetHeight", &DKSFMLWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetHwnd", &DKSFMLWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKSFMLWindow::GetMouseX", &DKSFMLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSFMLWindow::GetMouseY", &DKSFMLWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKSFMLWindow::GetWidth", &DKSFMLWindow::GetWidth, this);
@@ -165,22 +165,35 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 }
 
 /////////////////////////////////////////////////////////////
-bool DKSFMLWindow::GetHeight(const void* input, void* output)
-{
-	sf::Vector2u size = window.getSize();
-	*(int*)output = size.y;
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKSFMLWindow::GetHwnd(const void* input, void* output)
+bool DKSFMLWindow::GetHandle(const void* input, void* output)
 {
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	*(HWND*)output = hwnd;
 	return true;
 #endif
+#ifdef MAC
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false }
+	*(NSView*)output = nsview;
+	return true;
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	*(GdkWindow*)output = gdk_window;
+	return true;
+#endif
+	DKLog("DKSFMLWindow::GetHandle(): not implemented on this OS\n", DKWARN);
 	return false;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKSFMLWindow::GetHeight(const void* input, void* output)
+{
+	sf::Vector2u size = window.getSize();
+	*(int*)output = size.y;
+	return true;
 }
 
 /////////////////////////////////////////////////////////////

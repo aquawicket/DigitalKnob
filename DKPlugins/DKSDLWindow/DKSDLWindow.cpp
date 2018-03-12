@@ -188,8 +188,8 @@ bool DKSDLWindow::Init()
 
 	DKClass::RegisterFunc("DKSDLWindow::Fullscreen", &DKSDLWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetClipboard", &DKSDLWindow::GetClipboard, this);
+	DKClass::RegisterFunc("DKSDLWindow::GetHandle", &DKSDLWindow::GetHandle, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKSDLWindow::GetHwnd", &DKSDLWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
@@ -335,6 +335,21 @@ bool DKSDLWindow::GetClipboard(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetHandle(const void* input, void* output)
+{
+#ifdef WIN32
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+	*(HWND*)output = hwnd;
+	return true;
+#endif
+	DKLog("DKSDLWindow::GetHandle(): not implemented on this OS\n", DKWARN);
+	return false;
+}
+
+////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetHeight(const void* input, void* output)
 {
 	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
@@ -344,22 +359,6 @@ bool DKSDLWindow::GetHeight(const void* input, void* output)
 	if(h == 0){ h = height; }
 	*(int*)output = h;
 	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKSDLWindow::GetHwnd(const void* input, void* output)
-{
-#ifdef WIN32
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
-	HWND hwnd = wmInfo.info.win.window;
-	*(HWND*)output = hwnd;
-	return true;
-#else
-	DKLog("DKSDLWindow::GetHwnd(): This OS does not have a HWND handle \n", DKERROR);
-	return false;
-#endif
 }
 
 ////////////////////////////////////////////////////////////
