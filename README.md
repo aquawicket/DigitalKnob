@@ -28,7 +28,7 @@ Internet Explorer (9.0+) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [SFML](https://github.com/SFML/SFML) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
-[Emscripten] (https://github.com/kripken/emscripten) "coming soon" <br>
+[Emscripten](https://github.com/kripken/emscripten) "coming soon" <br>
 
 ###Supported Libraries <br>
 [Archive](https://github.com/libarchive/libarchive) <br>
