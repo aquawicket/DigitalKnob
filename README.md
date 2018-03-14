@@ -25,8 +25,8 @@ Internet Explorer (9.0+) <br>
 
 ###Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
-[OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [SFML](https://github.com/SFML/SFML) <br>
+[OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
 [Emscripten](https://github.com/kripken/emscripten) "coming soon" <br>
 
