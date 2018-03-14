@@ -151,7 +151,7 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 	isFullscreen = true;
 	return true;
 #endif
-	DKLog("DKCefWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
+	DKLog("DKSFMLWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -199,14 +199,52 @@ bool DKSFMLWindow::GetHeight(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 {
+#ifdef WIN32
+	POINT p;
+	if(!GetCursorPos(&p)){ return false; }
+	HWND hwnd = window.getSystemHandle();
+	if(!hwnd){ return false; }
+	if(!ScreenToClient(hwnd, &p)){ return false; }		
+	*(int*)output = p.x; //p.x and p.y are now relative to hwnd's client area
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+#endif
+	DKLog("DKSFMLWindow::GetMouseX(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 {
+#ifdef WIN32
+	POINT p;
+	if(!GetCursorPos(&p)){ return false; }
+	HWND hwnd = window.getSystemHandle();
+	if(!hwnd){ return false; }
+	if(!ScreenToClient(hwnd, &p)){ return false; }		
+	*(int*)output = p.y; //p.x and p.y are now relative to hwnd's client area
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+#endif
+	DKLog("DKSFMLWindow::GetMouseY(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -244,14 +282,56 @@ bool DKSFMLWindow::Hide(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	RECT a, b;
+	if(!GetWindowRect(hwnd, &a)){ return false; }
+	if(!GetWindowRect(GetDesktopWindow(), &b)){ return false; }
+	bool fullscreen = (a.left == b.left && a.top == b.top && a.right == b.right && a.bottom == b.bottom);
+	*(bool*)output = fullscreen;
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	/*
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	GdkWindowState state = gdk_window_get_state(gdk_window);
+	bool fullscreen = ((state & GDK_WINDOW_STATE_FULLSCREEN) != 0);
+	*(bool*)output = fullscreen;
+	*/
+	*(bool*)output = isFullscreen;
+	return true;
+#endif
+	DKLog("DKSFMLWindow::IsFullscreen(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsVisible(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	*(bool*)output = (IsWindowVisible(hwnd) != 0);
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	bool visible = gdk_window_is_visible(gdk_window);
+	*(bool*)output = visible;
+	return true;
+#endif
+	DKLog("DKSFMLWindow::IsVisible(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -265,14 +345,48 @@ bool DKSFMLWindow::MessageBox(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Minimize(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	ShowWindow(hwnd, SW_MINIMIZE);
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_iconify(gdk_window);
+	return true;
+#endif
+	DKLog("DKSFMLWindow::Minimize(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::Restore(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	if(!hwnd){ return false; }
+	if(!ShowWindow(hwnd, SW_RESTORE)){ return false; }
+	if(!BringWindowToTop(hwnd)){ return false; }
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_deiconify(gdk_window);
+	return true;
+#endif
+	DKLog("DKSFMLWindow::Restore(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 
@@ -295,9 +409,39 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetIcon(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	if(!hwnd){
+		DKLog("DKCefWindow::SetIcon(): hwnd is invalid \n", DKERROR);
+		return false;
+	}
+	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
+	if(!hinstance){
+		DKLog("DKCefWindow::SetIcon(): hinstance is invalid \n", DKERROR);
+		return false;
+	}
+	DKString file = *(DKString*)input;
+	HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
+	if(!icon){
+		DKLog("DKCefWindow::SetIcon(): icon is invalid \n", DKERROR);
+		return false;
+	}
+
+	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	//TODO
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+#endif
+	DKLog("DKSFMLWindow::SetIcon(): not implemented on this OS\n", DKWARN);
 	return false;
-	//window.setIcon(unsigned int width, unsigned int height, const Uint8 *pixels);
 }
 
 ////////////////////////////////////////////////////////////
@@ -330,13 +474,51 @@ bool DKSFMLWindow::SetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Show(const void* input, void* output)
 {
-	window.setVisible(true);
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	ShowWindow(hwnd, SW_SHOW);
 	return true;
+#endif
+#ifdef MAC
+	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_show(gdk_window);
+	return true;
+#endif
+	DKLog("DKSFMLWindow::Show(): not implemented on this OS\n", DKWARN);
+	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Windowed(const void* input, void* output)
 {
+#ifdef WIN32
+	HWND hwnd = window.getSystemHandle();
+	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+	SetWindowLong(hwnd, GWL_STYLE, dwStyle | WS_OVERLAPPEDWINDOW);
+	SetWindowPlacement(hwnd, &g_wpPrev);
+	SetWindowPos(hwnd, NULL, 0, 0, 0, 0,
+		SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
+		SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+	return true;
+#endif
+#ifdef MAC
 	//TODO
+	NSView* nsview = window.getSystemHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
+	if(!gdk_window){ return false;}
+	gdk_window_unfullscreen(gdk_window);
+	isFullscreen = false;
+	return true;
+#endif
+	DKLog("DKSFMLWindow::Windowed(): not implemented on this OS\n", DKWARN);
 	return false;
 }
