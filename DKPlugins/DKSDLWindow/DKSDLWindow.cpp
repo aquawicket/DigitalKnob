@@ -203,6 +203,7 @@ bool DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::SetClipboard", &DKSDLWindow::SetClipboard, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetHeight", &DKSDLWindow::SetHeight, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetIcon", &DKSDLWindow::SetIcon, this);
+	DKClass::RegisterFunc("DKSDLWindow::SetTitle", &DKSDLWindow::SetTitle, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetWidth", &DKSDLWindow::SetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetX", &DKSDLWindow::SetX, this);
 	DKClass::RegisterFunc("DKSDLWindow::SetY", &DKSDLWindow::SetY, this);
@@ -489,7 +490,16 @@ bool DKSDLWindow::SetIcon(const void* input, void* output)
 	SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 	return true;
 #endif
-	DKLog("DKSDLWindow::SetIcon is not implemented on this OS. \n", DKERROR);
+	DKLog("DKSDLWindow::SetIcon is not implemented on this OS. \n", DKWARN);
+	return false;
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLWindow::SetTitle(const void* input, void* output)
+{
+	DKString title = *(DKString*)input;
+	SDL_SetWindowTitle(sdlwin, title.c_str());
+	DKLog("DKSDLWindow::SetTitle is not implemented on this OS. \n", DKWARN);
 	return false;
 }
 

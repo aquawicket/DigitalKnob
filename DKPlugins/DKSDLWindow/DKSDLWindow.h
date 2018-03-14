@@ -35,6 +35,7 @@ public:
 	bool SetClipboard(const void* input, void* output);
 	bool SetHeight(const void* input, void* output);
 	bool SetIcon(const void* input, void* output);
+	bool SetTitle(const void* input, void* output);
 	bool SetWidth(const void* input, void* output);
 	bool SetX(const void* input, void* output);
 	bool SetY(const void* input, void* output);
