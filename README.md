@@ -2,7 +2,7 @@
 # DigitalKnob
 
 Digitalknob is Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br><br>
-"It should look and act the same on every system, including browsers." ~DK<br><br>
+"It should look and act the same on every system, including browsers." <br><br>
 
 ###Supported Platforms <br>
 Windows 32 <br>
@@ -26,8 +26,9 @@ Internet Explorer (9.0+) <br>
 ###Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
+[SFML](https://github.com/SFML/SFML) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
-[SFML](https://github.com/SFML/SFML) "coming soon" <br>
+[Emscripten] (https://github.com/kripken/emscripten) "coming soon" <br>
 
 ###Supported Libraries <br>
 [Archive](https://github.com/libarchive/libarchive) <br>
@@ -37,14 +38,20 @@ Internet Explorer (9.0+) <br>
 [Bullet](https://github.com/bulletphysics/bullet3) <br>
 [Bzip2](https://github.com/asimonov-im/bzip2) <br>
 [Cef3](https://bitbucket.org/chromiumembedded/cef) <br>
-[Curl](https://github.com/bagder/curl) <br>
 [Crosswalk](https://github.com/crosswalk-project/crosswalk) "coming soon" <br>
+[Crypto++](https://github.com/weidai11/cryptopp) "coming soon" <br>
+[Curl](https://github.com/bagder/curl) <br>
 [Duktape](https://github.com/svaarala/duktape) <br>
 [FFmpeg](https://github.com/FFmpeg/FFmpeg) <br>
 [Freealut](https://github.com/vancegroup/freealut) <br>
 [Freetype](https://github.com/vinniefalco/FreeType) <br>
 [Gif](http://sourceforge.net/projects/giflib/files/) <br>
+[ImageMagick++](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
+[Jpeg-Turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
+[libtorrent](https://github.com/arvidn/libtorrent)<br>
+[libvncserver](https://github.com/LibVNC/libvncserver)<br>
+[Leptonica](https://github.com/DanBloomberg/leptonica) <br>
 [Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
 [OpenAL](https://github.com/apportable/openal-soft) <br>
@@ -55,6 +62,7 @@ Internet Explorer (9.0+) <br>
 [OsgBullet](https://github.com/mccdo/osgbullet) <br>
 [OsgWorks](https://github.com/mccdo/osgworks) <br>
 [Png](https://github.com/coapp-packages/libpng) <br>
+[Pofodo](http://podofo.sourceforge.net) <br>
 [Pugixml](https://github.com/zeux/pugixml) <br>
 [Rocket](https://github.com/libRocket/libRocket) <br>
 [RtMidi](https://github.com/thestk/rtmidi) <br>
@@ -62,9 +70,12 @@ Internet Explorer (9.0+) <br>
 [SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
 [SDL_image](https://www.libsdl.org/projects/SDL_image/) <br>
 [SDL_mixer](https://github.com/aduros/SDL_mixer) <br>
+[SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/) <br>
+[SFML](https://github.com/SFML/SFML) <br>
 [Smpeg](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
 [StackWalker](https://stackwalker.codeplex.com/) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
+[Tesseract-ocr](https://github.com/tesseract-ocr/tesseract) <br>
 [ThreadPool](http://threadpool.sourceforge.net/) <br>
 [Tiff](https://github.com/LuaDist/libtiff) <br>
 [Vorbis](https://github.com/soundcloud/vorbis) <br>
