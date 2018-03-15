@@ -254,32 +254,15 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 ////////////////////////
 void DKVncClient::draw()
 {
-	//DKLog("DKVncClient::draw()", DKINFO);
 	if(!cl->frameBuffer){ return; }
-
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
 	r.w = cl->width;
 	r.h = cl->height;
-	//{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
-	//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	//SDL_RenderClear(dkSdlWindow->sdlren);
-
-	/*
-	unsigned char * texture_data = NULL;
-	int texture_pitch = 0;
-	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
-		//copies whole cl->frameBuffer to sdl texture
-		std::memcpy(texture_data, cl->frameBuffer, cl->width* 4);
-		SDL_UnlockTexture(tex);
-	}
-	*/
-
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
-	//SDL_RenderCopy(dkSdlWindow->sdlren, tex, NULL, &r);
 }
 
 ///////////////////////////////////////////////////////////////////
