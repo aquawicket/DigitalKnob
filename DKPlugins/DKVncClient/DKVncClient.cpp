@@ -173,7 +173,7 @@ bool DKVncClient::Init()
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
-	Connect("10.0.1.129", "8BallBreak");
+	Connect(server_ip, server_password);
 	return true;
 }
 
@@ -255,6 +255,8 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 void DKVncClient::draw()
 {
 	//DKLog("DKVncClient::draw()", DKINFO);
+	if(!cl->frameBuffer){ return; }
+
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
