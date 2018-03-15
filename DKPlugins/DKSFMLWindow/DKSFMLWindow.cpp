@@ -141,8 +141,8 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -173,10 +173,10 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false }
-	*(NSView*)output = nsview;
-	return true;
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false }
+	//*(NSView*)output = nsview;
+	//return true;
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -210,8 +210,8 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
@@ -236,8 +236,8 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
@@ -293,8 +293,8 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	/*
@@ -321,8 +321,8 @@ bool DKSFMLWindow::IsVisible(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -352,8 +352,8 @@ bool DKSFMLWindow::Minimize(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -377,8 +377,8 @@ bool DKSFMLWindow::Restore(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -432,8 +432,8 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	//TODO
@@ -481,8 +481,8 @@ bool DKSFMLWindow::Show(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
@@ -509,8 +509,8 @@ bool DKSFMLWindow::Windowed(const void* input, void* output)
 #endif
 #ifdef MAC
 	//TODO
-	NSView* nsview = window.getSystemHandle();
-	if(!nsview){ return false; }
+	//NSView* nsview = window.getSystemHandle();
+	//if(!nsview){ return false; }
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
