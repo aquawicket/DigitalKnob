@@ -1,5 +1,5 @@
 IF(LINUX)
-	DKDEFINE(openal)
+	DKDEPEND(openal)
 ENDIF()
 
 ### INSTALL ###
