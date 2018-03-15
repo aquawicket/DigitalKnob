@@ -50,36 +50,36 @@ bool DKVncClient::Init()
 	DKString vnc_bgrttt;
 	bool bgrttt = false;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_BGR233]", vnc_bgrttt);
-	if (!vnc_bgrttt.empty()) {
+	if(!vnc_bgrttt.empty()){
 		bgrttt = toBool(vnc_bgrttt);
 	}
 	DKString vnc_message_wait;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_MESSAGE_WAIT]", vnc_message_wait);
-	if (!vnc_message_wait.empty()) {
+	if(!vnc_message_wait.empty()){
 		message_wait = toInt(vnc_message_wait);
 	}
 	DKString vnc_compression;
 	int compression = 0;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_COMPRESSION]", vnc_compression);
-	if (!vnc_compression.empty()) {
+	if(!vnc_compression.empty()){
 		compression = toInt(vnc_compression);
 	}
 	DKString vnc_quality;
 	int quality = 1;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_QUALITY]", vnc_quality);
-	if (!vnc_quality.empty()) {
+	if(!vnc_quality.empty()){
 		quality = toInt(vnc_quality);
 	}
 	DKString vnc_jpeg;
 	bool jpeg = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_JPEG]", vnc_jpeg);
-	if (!vnc_jpeg.empty()) {
+	if(!vnc_jpeg.empty()){
 		jpeg = toBool(vnc_jpeg);
 	}
 	DKString vnc_cursor;
 	bool cursor = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CURSOR]", vnc_cursor);
-	if (!vnc_cursor.empty()) {
+	if(!vnc_cursor.empty()){
 		cursor = toBool(vnc_cursor);
 	}
 	
@@ -173,7 +173,8 @@ bool DKVncClient::Init()
 }
 
 /////////////////////////////////////////////////////////
-rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
+rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
+{
 	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
 	if (!client->listenSpecified) {
 		if (!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort))
@@ -182,11 +183,13 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 	
 	/* Initialise the VNC connection, including reading the password */
 	
-	if (!InitialiseRFBConnection(client))
-	return FALSE;
-	
-	if (!SetFormatAndEncodings(client))
+	if(!InitialiseRFBConnection(client)){
 		return FALSE;
+	}
+	
+	if(!SetFormatAndEncodings(client)){
+		return FALSE;
+	}
 	
 	client->width=client->si.framebufferWidth;
 	client->height=client->si.framebufferHeight;
@@ -198,8 +201,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 		client->updateRect.h = client->height;
 	}
 	
-	if (client->appData.scaleSetting>1)
-	{
+	if(client->appData.scaleSetting>1){
 		 if (!SendScaleSetting(client, client->appData.scaleSetting))
 		 return FALSE;
 		if (!SendFramebufferUpdateRequest(client,
@@ -210,8 +212,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 			FALSE))
 			return FALSE;
 	}
-	else
-	{
+	else{
 		if (!SendFramebufferUpdateRequest(client,
 			client->updateRect.x, client->updateRect.y,
 			client->updateRect.w, client->updateRect.h,
