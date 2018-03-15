@@ -177,6 +177,69 @@ bool DKVncClient::Init()
 	return true;
 }
 
+///////////////////////
+bool DKVncClient::End()
+{
+	DKLog("DKVncClient::End()\n", DKINFO);
+	SDL_DestroyTexture(tex);
+	cl = NULL;
+	cleanup(cl);
+	return true;
+}
+
+
+//////////////////////////////////////////////////
+bool DKVncClient::TestInt(int& input, int& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
+	}
+	DKLog("DKWindow::TestInt(): No function available \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKVncClient::TestString(DKString& input, DKString& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestString")){
+		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
+	}
+	DKLog("DKWindow::TestString(): No function available \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////
+bool DKVncClient::TestReturnInt(int& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnInt(): No function available \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////////////
+bool DKVncClient::TestReturnString(DKString& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
+	return false;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 bool DKVncClient::Connect(const DKString& address, const DKString& password)
 {
@@ -188,16 +251,6 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 	if(!rfbInitConnection(cl)){ return false; }
 	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	ValidateAspectRatio(cl);
-	return true;
-}
-
-///////////////////////
-bool DKVncClient::End()
-{
-	DKLog("DKVncClient::End()\n", DKINFO);
-	SDL_DestroyTexture(tex);
-	cl = NULL;
-	cleanup(cl);
 	return true;
 }
 
