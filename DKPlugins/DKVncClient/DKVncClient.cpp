@@ -308,6 +308,12 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 void DKVncClient::draw()
 {
 	if(!cl->frameBuffer){ return; }
+
+	//SDL_Event e;
+	//while(SDL_PollEvent(&e)){
+	//	handle(&e);
+	//}
+
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
