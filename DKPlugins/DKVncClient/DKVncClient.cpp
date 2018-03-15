@@ -92,6 +92,11 @@ bool DKVncClient::Init()
 
 	//cl = rfbGetClient(5,3,2); // 16-bit
 	cl = rfbGetClient(8,3,4); // 32-bit?
+
+	//Display extra info
+	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
+	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
+
 	//cl->appData.shareDesktop = true;
 	//cl->appData.viewOnly = false;
 	cl->appData.encodingsString = encoding.c_str();
@@ -125,7 +130,8 @@ bool DKVncClient::Init()
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
-		
+	
+	/*
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	//if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 	//	cl = NULL;
@@ -138,18 +144,16 @@ bool DKVncClient::Init()
 		cleanup(cl);
 		return false;
 	}
+	*/
+	//Connect("address", "password");
 	
-	//Display extra info
-	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
-	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
-	
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB1555, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
-	ValidateAspectRatio(cl);
+	//ValidateAspectRatio(cl);
 	//resize(cl);
 
 	if(seperate_loop){
@@ -169,6 +173,31 @@ bool DKVncClient::Init()
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
+	Connect("10.0.1.129", "8BallBreak");
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////
+bool DKVncClient::Connect(const DKString& address, const DKString& password)
+{
+	DKLog("DKVncClient::Connect("+address+","+password+")\n", DKINFO);
+
+	cl->serverHost = (char*)address.c_str();
+	pass = password.c_str();
+	cl->GetPassword = DKVncClient::password; //Tell vnc to grab the password on connect.
+	if(!rfbInitConnection(cl)){ return false; }
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	ValidateAspectRatio(cl);
+	return true;
+}
+
+///////////////////////
+bool DKVncClient::End()
+{
+	DKLog("DKVncClient::End()\n", DKINFO);
+	SDL_DestroyTexture(tex);
+	cl = NULL;
+	cleanup(cl);
 	return true;
 }
 
@@ -220,14 +249,6 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 		return FALSE;
 	}
 	return TRUE;
-}
-
-///////////////////////
-bool DKVncClient::End()
-{
-	DKLog("DKVncClient::End()\n", DKINFO);
-	SDL_DestroyTexture(tex);
-	return true;
 }
 
 ////////////////////////
