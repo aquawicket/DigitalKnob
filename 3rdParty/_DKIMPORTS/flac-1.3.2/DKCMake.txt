@@ -1,0 +1,19 @@
+### INSTALL ###
+DKINSTALL(${DKONLINE}/Libs/flac-1.3.2.zip flac-1.3.2)
+DKSET(FLAC ${3RDPARTY}/flac-1.3.2)
+
+
+### LINK ###
+DKINCLUDE(${FLAC})
+WIN_DEBUG_LIB(${FLAC}/${OS}/Debug/flac.lib)
+WIN_RELEASE_LIB(${FLAC}/${OS}/Release/flac.lib)
+APPLE_DEBUG_LIB(${FLAC}/${OS}/${DEBUG}/libflac.a)
+APPLE_RELEASE_LIB(${FLAC}/${OS}/${RELEASE}/libflac.a)
+LINUX_DEBUG_LIB(${FLAC}/${OS}/Debug/libflac.a)
+LINUX_RELEASE_LIB(${FLAC}/${OS}/Release/libflac.a)
+ANDROID_DEBUG_LIB(${FLAC}/${OS}/$(LIBDIR)/libflac.a)
+ANDROID_RELEASE_LIB(${FLAC}/${OS}/$(LIBDIR)/libflac.a)
+
+
+### COMPILE ###
+## TODO
