@@ -99,8 +99,8 @@ bool DKLinux::GetClipboard(DKString& text)
 	return DKClass::CallFunc("DKSDLWindow::GetClipboard", NULL, &text);
 }
 
-//////////////////////////////////////////
-bool DKLinux::SetClipboard(DKString& text)
+////////////////////////////////////////////////
+bool DKLinux::SetClipboard(const DKString& text)
 {
 	//TODO
 	DKLog("DKLinux::SetClipboard("+text+")\n", DKINFO);

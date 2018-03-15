@@ -26,7 +26,7 @@ public:
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
 	static bool Run(const DKString& command);
-	static bool SetClipboard(DKString& text);
+	static bool SetClipboard(const DKString& text);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();
 	static bool VirtualMemory(unsigned long long& virtualMemory);
