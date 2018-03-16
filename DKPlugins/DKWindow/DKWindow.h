@@ -43,6 +43,9 @@ public:
 
 	///Get the Pixel Ratio of the window
 	static bool GetPixelRatio(float& ratio);
+	
+	///Get the Title of the window
+	static bool GetTitle(DKString& title);
 
 	///Get the Width of the window
 	static bool GetWidth(int& width);

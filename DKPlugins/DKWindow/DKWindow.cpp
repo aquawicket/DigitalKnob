@@ -177,6 +177,13 @@ bool DKWindow::GetPixelRatio(float& ratio)
 	return true;
 }
 
+////////////////////////////////////////
+bool DKWindow::GetTitle(DKString& title)
+{
+	//TODO
+	return false;
+}
+
 ///////////////////////////////////
 bool DKWindow::GetWidth(int& width)
 {
