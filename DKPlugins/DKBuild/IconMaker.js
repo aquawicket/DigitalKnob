@@ -1,6 +1,6 @@
 //FIXME - We need to add an install feature here.
 
-var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert";
+var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert.exe";
 
 /////////////////////////
 function IconMaker_Init()
