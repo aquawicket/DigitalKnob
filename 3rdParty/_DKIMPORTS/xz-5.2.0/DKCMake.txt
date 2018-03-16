@@ -1,3 +1,13 @@
+IF(WIN_32)
+	DKDEPEND(mingw32)
+ENDIF()
+IF(WIN_64)
+	DKDEPEND(mingw64)
+ENDIF()
+IF(WIN)
+	DKDEPEND(msys)
+ENDIF()
+
 ### INSTALL ###
 DKINSTALL(http://digitalknob.com/Download/Libs/xz-5.2.0.tar.gz xz-5.2.0) 
 DKSET(XZ ${3RDPARTY}/xz-5.2.0)

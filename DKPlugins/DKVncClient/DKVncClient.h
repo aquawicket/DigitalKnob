@@ -12,7 +12,13 @@ class DKVncClient : public DKObjectT<DKVncClient>
 public:
 	bool Init();
 	bool End();
-    
+
+	static bool TestInt(int& input, int& output);
+	static bool TestString(DKString& input, DKString& output);
+	static bool TestReturnInt(int& output);
+	static bool TestReturnString(DKString& output);
+
+	bool Connect(const DKString& address, const DKString& password);  
 	void draw();
 	static void update(rfbClient* cl,int x,int y,int w,int h);
 	//static rfbBool resize(rfbClient* client);

@@ -1,13 +1,5 @@
-DKDEPEND(python)
-
-IF(WIN_32)
-	DKDEPEND(mingw32)
-ENDIF()
-IF(WIN_64)
-	DKDEPEND(mingw64)
-ENDIF()
 IF(WIN)
-	DKDEPEND(msys)
+	DKDEPEND(python)
 	DKDEPEND(vc2015)
 ENDIF()
 

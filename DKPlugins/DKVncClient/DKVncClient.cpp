@@ -50,36 +50,36 @@ bool DKVncClient::Init()
 	DKString vnc_bgrttt;
 	bool bgrttt = false;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_BGR233]", vnc_bgrttt);
-	if (!vnc_bgrttt.empty()) {
+	if(!vnc_bgrttt.empty()){
 		bgrttt = toBool(vnc_bgrttt);
 	}
 	DKString vnc_message_wait;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_MESSAGE_WAIT]", vnc_message_wait);
-	if (!vnc_message_wait.empty()) {
+	if(!vnc_message_wait.empty()){
 		message_wait = toInt(vnc_message_wait);
 	}
 	DKString vnc_compression;
 	int compression = 0;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_COMPRESSION]", vnc_compression);
-	if (!vnc_compression.empty()) {
+	if(!vnc_compression.empty()){
 		compression = toInt(vnc_compression);
 	}
 	DKString vnc_quality;
 	int quality = 1;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_QUALITY]", vnc_quality);
-	if (!vnc_quality.empty()) {
+	if(!vnc_quality.empty()){
 		quality = toInt(vnc_quality);
 	}
 	DKString vnc_jpeg;
 	bool jpeg = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_JPEG]", vnc_jpeg);
-	if (!vnc_jpeg.empty()) {
+	if(!vnc_jpeg.empty()){
 		jpeg = toBool(vnc_jpeg);
 	}
 	DKString vnc_cursor;
 	bool cursor = true;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CURSOR]", vnc_cursor);
-	if (!vnc_cursor.empty()) {
+	if(!vnc_cursor.empty()){
 		cursor = toBool(vnc_cursor);
 	}
 	
@@ -92,6 +92,11 @@ bool DKVncClient::Init()
 
 	//cl = rfbGetClient(5,3,2); // 16-bit
 	cl = rfbGetClient(8,3,4); // 32-bit?
+
+	//Display extra info
+	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
+	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
+
 	//cl->appData.shareDesktop = true;
 	//cl->appData.viewOnly = false;
 	cl->appData.encodingsString = encoding.c_str();
@@ -125,7 +130,8 @@ bool DKVncClient::Init()
 	//cl->format.redShift = 16;
     //cl->format.greenShift = 0;
     //cl->format.blueShift = 8;
-		
+	
+	/*
 	DKLog("Connecting to "+server_ip+". . .\n", DKINFO);
 	//if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 	//	cl = NULL;
@@ -138,18 +144,16 @@ bool DKVncClient::Init()
 		cleanup(cl);
 		return false;
 	}
+	*/
+	//Connect("address", "password");
 	
-	//Display extra info
-	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n", DKINFO);
-	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n", DKINFO);
-	
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB1555, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 
 	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
-	ValidateAspectRatio(cl);
+	//ValidateAspectRatio(cl);
 	//resize(cl);
 
 	if(seperate_loop){
@@ -169,11 +173,90 @@ bool DKVncClient::Init()
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
+	Connect(server_ip, server_password);
+	return true;
+}
+
+///////////////////////
+bool DKVncClient::End()
+{
+	DKLog("DKVncClient::End()\n", DKINFO);
+	SDL_DestroyTexture(tex);
+	cl = NULL;
+	cleanup(cl);
+	return true;
+}
+
+
+//////////////////////////////////////////////////
+bool DKVncClient::TestInt(int& input, int& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
+	}
+	DKLog("DKWindow::TestInt(): No function available \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKVncClient::TestString(DKString& input, DKString& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestString")){
+		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
+	}
+	DKLog("DKWindow::TestString(): No function available \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////
+bool DKVncClient::TestReturnInt(int& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnInt(): No function available \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////////////
+bool DKVncClient::TestReturnString(DKString& output)
+{
+	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
+	}
+	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString")){
+		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
+	}
+	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////////
+bool DKVncClient::Connect(const DKString& address, const DKString& password)
+{
+	DKLog("DKVncClient::Connect("+address+","+password+")\n", DKINFO);
+
+	cl->serverHost = (char*)address.c_str();
+	pass = password.c_str();
+	cl->GetPassword = DKVncClient::password; //Tell vnc to grab the password on connect.
+	if(!rfbInitConnection(cl)){ return false; }
+	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	ValidateAspectRatio(cl);
 	return true;
 }
 
 /////////////////////////////////////////////////////////
-rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
+rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
+{
 	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
 	if (!client->listenSpecified) {
 		if (!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort))
@@ -182,11 +265,13 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 	
 	/* Initialise the VNC connection, including reading the password */
 	
-	if (!InitialiseRFBConnection(client))
-	return FALSE;
-	
-	if (!SetFormatAndEncodings(client))
+	if(!InitialiseRFBConnection(client)){
 		return FALSE;
+	}
+	
+	if(!SetFormatAndEncodings(client)){
+		return FALSE;
+	}
 	
 	client->width=client->si.framebufferWidth;
 	client->height=client->si.framebufferHeight;
@@ -198,8 +283,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 		client->updateRect.h = client->height;
 	}
 	
-	if (client->appData.scaleSetting>1)
-	{
+	if(client->appData.scaleSetting>1){
 		 if (!SendScaleSetting(client, client->appData.scaleSetting))
 		 return FALSE;
 		if (!SendFramebufferUpdateRequest(client,
@@ -210,8 +294,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 			FALSE))
 			return FALSE;
 	}
-	else
-	{
+	else{
 		if (!SendFramebufferUpdateRequest(client,
 			client->updateRect.x, client->updateRect.y,
 			client->updateRect.w, client->updateRect.h,
@@ -221,41 +304,24 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 	return TRUE;
 }
 
-///////////////////////
-bool DKVncClient::End()
-{
-	DKLog("DKVncClient::End()\n", DKINFO);
-	SDL_DestroyTexture(tex);
-	return true;
-}
-
 ////////////////////////
 void DKVncClient::draw()
 {
-	//DKLog("DKVncClient::draw()", DKINFO);
+	if(!cl->frameBuffer){ return; }
+
+	//SDL_Event e;
+	//while(SDL_PollEvent(&e)){
+	//	handle(&e);
+	//}
+
 	HandleRFBServerMessage(cl);
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
 	r.w = cl->width;
 	r.h = cl->height;
-	//{0, 0, cl->width, cl->height};
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
-	//SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	//SDL_RenderClear(dkSdlWindow->sdlren);
-
-	/*
-	unsigned char * texture_data = NULL;
-	int texture_pitch = 0;
-	if(SDL_LockTexture(tex, NULL, (void **)&texture_data, &texture_pitch) == 0){
-		//copies whole cl->frameBuffer to sdl texture
-		std::memcpy(texture_data, cl->frameBuffer, cl->width* 4);
-		SDL_UnlockTexture(tex);
-	}
-	*/
-
 	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
-	//SDL_RenderCopy(dkSdlWindow->sdlren, tex, NULL, &r);
 }
 
 ///////////////////////////////////////////////////////////////////
