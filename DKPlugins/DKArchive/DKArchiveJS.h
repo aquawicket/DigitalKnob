@@ -11,7 +11,7 @@ class DKArchiveJS : public DKObjectT<DKArchiveJS>
 public:
 	bool Init();
 	
-	//static int Extract(duk_context* ctx);
+	static int Extract(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKArchiveJS, true)

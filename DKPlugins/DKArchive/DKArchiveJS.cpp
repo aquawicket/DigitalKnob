@@ -10,7 +10,6 @@ bool DKArchiveJS::Init()
 	return true;
 }
 
-/*
 //////////////////////////////////////////
 int DKArchiveJS::Extract(duk_context* ctx)
 {
@@ -23,6 +22,5 @@ int DKArchiveJS::Extract(duk_context* ctx)
 	//return 1;
 	return 0;
 }
-*/
 
 #endif //USE_DKDuktape
