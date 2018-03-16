@@ -175,13 +175,13 @@ bool DKWindow::GetMouseY(int& y)
 bool DKWindow::GetPixelRatio(float& ratio)
 {
 	if(DKClass::HasFunc("DKCefWindow::GetPixelRatio")){
-		return DKClass::CallFunc("DKCefWindow::GetPixelRatio", NULL, &width);
+		return DKClass::CallFunc("DKCefWindow::GetPixelRatio", NULL, &ratio);
 	}
 	if(DKClass::HasFunc("DKSDLWindow::GetPixelRatio")){
-		return DKClass::CallFunc("DKSDLWindow::GetPixelRatio", NULL, &width);
+		return DKClass::CallFunc("DKSDLWindow::GetPixelRatio", NULL, &ratio);
 	}
 	if(DKClass::HasFunc("DKOSGWindow::GetPixelRatio")){
-		return DKClass::CallFunc("DKOSGWindow::GetPixelRatio", NULL, &width);
+		return DKClass::CallFunc("DKOSGWindow::GetPixelRatio", NULL, &ratio);
 	}
 	DKLog("DKWindow::GetPixelRatio(): No function available \n", DKWARN);
 	ratio = 1.0;
@@ -192,13 +192,13 @@ bool DKWindow::GetPixelRatio(float& ratio)
 bool DKWindow::GetTitle(DKString& title)
 {
 	if(DKClass::HasFunc("DKCefWindow::GetTitle")){
-		return DKClass::CallFunc("DKCefWindow::GetTitle", NULL, &width);
+		return DKClass::CallFunc("DKCefWindow::GetTitle", NULL, &title);
 	}
 	if(DKClass::HasFunc("DKSDLWindow::GetTitle")){
-		return DKClass::CallFunc("DKSDLWindow::GetTitle", NULL, &width);
+		return DKClass::CallFunc("DKSDLWindow::GetTitle", NULL, &title);
 	}
 	if(DKClass::HasFunc("DKOSGWindow::GetTitle")){
-		return DKClass::CallFunc("DKOSGWindow::GetTitle", NULL, &width);
+		return DKClass::CallFunc("DKOSGWindow::GetTitle", NULL, &title);
 	}
 	DKLog("DKWindow::GetTitle(): No function available \n", DKWARN);
 	return false;
