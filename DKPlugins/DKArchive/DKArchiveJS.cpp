@@ -5,11 +5,12 @@
 ////////////////////////
 bool DKArchiveJS::Init()
 {
-	DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
+	//DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
 	//DKArchive::Instance("DKArchive0");
 	return true;
 }
 
+/*
 //////////////////////////////////////////
 int DKArchiveJS::Extract(duk_context* ctx)
 {
@@ -20,6 +21,8 @@ int DKArchiveJS::Extract(duk_context* ctx)
 	//	return 0;
 	//}
 	//return 1;
+	return 0;
 }
+*/
 
 #endif //USE_DKDuktape
