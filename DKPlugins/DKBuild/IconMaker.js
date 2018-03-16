@@ -1,4 +1,6 @@
-var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/";
+//FIXME - We need to add an install feature here.
+
+var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert";
 
 /////////////////////////
 function IconMaker_Init()
@@ -12,9 +14,11 @@ function IconMaker_Create(AppPath)
 {
 	DKLog("IconMaker_Create("+AppPath+") \n");
 	
+	IconMaker_ValidateImageMagick();
+	
 	//Create Windows Icon
 	DKFile_MkDir(AppPath+"/icons/windows");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
 	
 	//Create Mac Icons
 	if(DK_GetOS() == "Mac"){
@@ -54,4 +58,24 @@ function IconMaker_Create(AppPath)
 	
 	//Create iOS 7 Icons
 	//DKFile_MkDir(AppPath+"/icons/ios7");
+}
+
+////////////////////////////////////////
+function IconMaker_ValidateImageMagick()
+{
+	DKLog("Looking for ImageMagick... \n");
+	//DKLog(SVN+"\n");
+	if(!DKFile_Exists(IMAGEMAGICK)){
+		DKLog("Installing ImageMagick... \n");
+		IconMaker_InstallImageMagick();
+	}
+	DKLog("Found ImageMagick \n");
+}
+
+///////////////////////////////////////
+function IconMaker_InstallImageMagick()
+{
+	var datapath = "C:/digitalknob/3rdParty/Download/";
+	DKCurl_Download("http://digitalknob.com/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath);
+	//TODO unzip file to C:/digitalknob/3rdParty/
 }

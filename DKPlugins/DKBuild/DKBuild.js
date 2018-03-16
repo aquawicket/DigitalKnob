@@ -616,7 +616,7 @@ function DKBuild_DoResults()
 		}
 	}
 	
-	//Create icons
+	//// Create Icons
 	if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 		DKCreate("DKBuild/IconMaker.js", function(){
 			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
