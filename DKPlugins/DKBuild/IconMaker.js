@@ -12,6 +12,8 @@ function IconMaker_Create(AppPath)
 {
 	DKLog("IconMaker_Create("+AppPath+") \n");
 	
+	DKCreate("DKArchiveJS");
+	
 	IconMaker_ValidateImageMagick();
 	
 	//Create Windows Icon
