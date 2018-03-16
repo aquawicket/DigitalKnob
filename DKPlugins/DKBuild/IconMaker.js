@@ -75,5 +75,7 @@ function IconMaker_InstallImageMagick()
 {
 	var datapath = "C:/digitalknob/Download";
 	DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath);
+	
 	//TODO unzip file to C:/digitalknob/3rdParty/
+	DKArchive_Extract(datapath+"/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath);  //This is a test
 }
