@@ -1,3 +1,5 @@
+//TODO - add DKSFMLWindow to all functions
+
 #include "DK/stdafx.h"
 #include "DK/DKAndroid.h"
 #include "DKWindow/DKWindow.h"
@@ -31,7 +33,7 @@ bool DKWindow::TestInt(int& input, int& output)
 	if(DKClass::HasFunc("DKSFMLWindow::TestInt")){
 		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
 	}
-	DKLog("DKWindow::TestInt(): No function available \n", DKERROR);
+	DKLog("DKWindow::TestInt(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -46,7 +48,7 @@ bool DKWindow::TestString(DKString& input, DKString& output)
 	if(DKClass::HasFunc("DKSFMLWindow::TestString")){
 		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
 	}
-	DKLog("DKWindow::TestString(): No function available \n", DKERROR);
+	DKLog("DKWindow::TestString(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -61,7 +63,7 @@ bool DKWindow::TestReturnInt(int& output)
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt")){
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
 	}
-	DKLog("DKWindow::TestReturnInt(): No function available \n", DKERROR);
+	DKLog("DKWindow::TestReturnInt(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -76,7 +78,7 @@ bool DKWindow::TestReturnString(DKString& output)
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString")){
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
 	}
-	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
+	DKLog("DKWindow::TestReturnString(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -100,7 +102,7 @@ bool DKWindow::Create()
 		return true;
 	}
 	else{
-		DKLog("DKWindow::Init(): No window system available \n", DKERROR);
+		DKLog("DKWindow::Init(): No window system available \n", DKWARN);
 	}
 	return false;
 }
@@ -117,7 +119,7 @@ bool DKWindow::Fullscreen()
 	if(DKClass::HasFunc("DKOSGWindow::Fullscreen")){
 		return DKClass::CallFunc("DKOSGWindow::Fullscreen", NULL, NULL);
 	}
-	DKLog("DKWindow::Fullscreen(): No function available \n", DKERROR);
+	DKLog("DKWindow::Fullscreen(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -133,7 +135,7 @@ bool DKWindow::GetHeight(int& height)
 	if(DKClass::HasFunc("DKOSGWindow::GetHeight")){
 		return DKClass::CallFunc("DKOSGWindow::GetHeight", NULL, &height);
 	}
-	DKLog("DKWindow::GetHeight(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetHeight(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -149,7 +151,7 @@ bool DKWindow::GetMouseX(int& x)
 	if(DKClass::HasFunc("DKOSGWindow::GetMouseX")){
 		return DKClass::CallFunc("DKOSGWindow::GetMouseX", NULL, &x);
 	}
-	DKLog("DKWindow::GetMouseX(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetMouseX(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -165,22 +167,40 @@ bool DKWindow::GetMouseY(int& y)
 	if(DKClass::HasFunc("DKOSGWindow::GetMouseY")){
 		return DKClass::CallFunc("DKOSGWindow::GetMouseY", NULL, &y);
 	}
-	DKLog("DKWindow::GetMouseY(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetMouseY(): No function available \n", DKWARN);
 	return false;
 }
 
 //////////////////////////////////////////
 bool DKWindow::GetPixelRatio(float& ratio)
 {
-	//TODO
+	if(DKClass::HasFunc("DKCefWindow::GetPixelRatio")){
+		return DKClass::CallFunc("DKCefWindow::GetPixelRatio", NULL, &width);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::GetPixelRatio")){
+		return DKClass::CallFunc("DKSDLWindow::GetPixelRatio", NULL, &width);
+	}
+	if(DKClass::HasFunc("DKOSGWindow::GetPixelRatio")){
+		return DKClass::CallFunc("DKOSGWindow::GetPixelRatio", NULL, &width);
+	}
+	DKLog("DKWindow::GetPixelRatio(): No function available \n", DKWARN);
 	ratio = 1.0;
-	return true;
+	return false;
 }
 
 ////////////////////////////////////////
 bool DKWindow::GetTitle(DKString& title)
 {
-	//TODO
+	if(DKClass::HasFunc("DKCefWindow::GetTitle")){
+		return DKClass::CallFunc("DKCefWindow::GetTitle", NULL, &width);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::GetTitle")){
+		return DKClass::CallFunc("DKSDLWindow::GetTitle", NULL, &width);
+	}
+	if(DKClass::HasFunc("DKOSGWindow::GetTitle")){
+		return DKClass::CallFunc("DKOSGWindow::GetTitle", NULL, &width);
+	}
+	DKLog("DKWindow::GetTitle(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -196,7 +216,7 @@ bool DKWindow::GetWidth(int& width)
 	if(DKClass::HasFunc("DKOSGWindow::GetWidth")){
 		return DKClass::CallFunc("DKOSGWindow::GetWidth", NULL, &width);
 	}
-	DKLog("DKWindow::GetWidth(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetWidth(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -212,7 +232,7 @@ bool DKWindow::GetX(int& x)
 	if(DKClass::HasFunc("DKOSGWindow::GetX")){
 		return DKClass::CallFunc("DKOSGWindow::GetX", NULL, &x);
 	}
-	DKLog("DKWindow::GetX(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetX(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -228,7 +248,7 @@ bool DKWindow::GetY(int& y)
 	if(DKClass::HasFunc("DKOSGWindow::GetY")){
 		return DKClass::CallFunc("DKOSGWindow::GetY", NULL, &y);
 	}
-	DKLog("DKWindow::GetY(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetY(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -244,7 +264,7 @@ bool DKWindow::Hide()
 	if(DKClass::HasFunc("DKOSGWindow::Hide")){
 		return DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
 	}
-	DKLog("DKWindow::Hide(): No function available \n", DKERROR);
+	DKLog("DKWindow::Hide(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -260,7 +280,7 @@ bool DKWindow::IsFullscreen(bool& fullscreen)
 	if(DKClass::HasFunc("DKOSGWindow::IsFullscreen")){
 		return DKClass::CallFunc("DKOSGWindow::IsFullscreen", NULL, &fullscreen);
 	}
-	DKLog("DKWindow::IsFullscreen(): No function available \n", DKERROR);
+	DKLog("DKWindow::IsFullscreen(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -276,7 +296,7 @@ bool DKWindow::IsVisible(bool& visible)
 	if(DKClass::HasFunc("DKOSGWindow::IsVisible")){
 		return DKClass::CallFunc("DKOSGWindow::IsVisible", NULL, &visible);
 	}
-	DKLog("DKWindow::IsVisible(): No function available \n", DKERROR);
+	DKLog("DKWindow::IsVisible(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -308,7 +328,7 @@ bool DKWindow::Minimize()
 	if(DKClass::HasFunc("DKOSGWindow::Minimize")){
 		return DKClass::CallFunc("DKOSGWindow::Minimize", NULL, NULL);
 	}
-	DKLog("DKWindow::Minimize(): No function available \n", DKERROR);
+	DKLog("DKWindow::Minimize(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -324,7 +344,7 @@ bool DKWindow::Restore()
 	if(DKClass::HasFunc("DKOSGWindow::Restore")){
 		return DKClass::CallFunc("DKOSGWindow::Restore", NULL, NULL);
 	}
-	DKLog("DKWindow::Restore(): No function available \n", DKERROR);
+	DKLog("DKWindow::Restore(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -340,7 +360,7 @@ bool DKWindow::SetHeight(int& h)
 	if(DKClass::HasFunc("DKOSGWindow::SetHeight")){
 		return DKClass::CallFunc("DKOSGWindow::SetHeight", &h, NULL);
 	}
-	DKLog("DKWindow::SetHeight(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetHeight(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -356,7 +376,7 @@ bool DKWindow::SetIcon(DKString& file)
 	if(DKClass::HasFunc("DKOSGWindow::SetIcon")){
 		return DKClass::CallFunc("DKOSGWindow::SetIcon", &file, NULL);
 	}
-	DKLog("DKWindow::SetIcon(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetIcon(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -372,7 +392,7 @@ bool DKWindow::SetTitle(DKString& string)
 	if(DKClass::HasFunc("DKOSGWindow::SetTitle")){
 		return DKClass::CallFunc("DKOSGWindow::SetTitle", &string, NULL);
 	}
-	DKLog("DKWindow::SetTitle(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetTitle(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -388,7 +408,7 @@ bool DKWindow::SetWidth(int& w)
 	if(DKClass::HasFunc("DKOSGWindow::SetWidth")){
 		return DKClass::CallFunc("DKOSGWindow::SetWidth", &w, NULL);
 	}
-	DKLog("DKWindow::SetWidth(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetWidth(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -404,7 +424,7 @@ bool DKWindow::SetX(int& x)
 	if(DKClass::HasFunc("DKOSGWindow::SetX")){
 		return DKClass::CallFunc("DKOSGWindow::SetX", &x, NULL);
 	}
-	DKLog("DKWindow::SetX(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetX(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -420,7 +440,7 @@ bool DKWindow::SetY(int& y)
 	if(DKClass::HasFunc("DKOSGWindow::SetY")){
 		return DKClass::CallFunc("DKOSGWindow::SetY", &y, NULL);
 	}
-	DKLog("DKWindow::SetY(): No function available \n", DKERROR);
+	DKLog("DKWindow::SetY(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -436,7 +456,7 @@ bool DKWindow::Show()
 	if(DKClass::HasFunc("DKOSGWindow::Show")){
 		return DKClass::CallFunc("DKOSGWindow::Show", NULL, NULL);
 	}
-	DKLog("DKWindow::Show(): No function available \n", DKERROR);
+	DKLog("DKWindow::Show(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -452,7 +472,7 @@ bool DKWindow::Windowed()
 	if(DKClass::HasFunc("DKOSGWindow::Windowed")){
 		return DKClass::CallFunc("DKOSGWindow::Windowed", NULL, NULL);
 	}
-	DKLog("DKWindow::Windowed(): No function available \n", DKERROR);
+	DKLog("DKWindow::Windowed(): No function available \n", DKWARN);
 	return false;
 }
 
@@ -470,7 +490,7 @@ bool DKWindow::GetHwnd(HWND* hwnd)
 	if(DKClass::HasFunc("DKOSGWindow::GetHwnd")){
 		return DKClass::CallFunc("DKOSGWindow::GetHwnd", NULL, &hwnd);
 	}
-	DKLog("DKWindow::GetHwnd(): No function available \n", DKERROR);
+	DKLog("DKWindow::GetHwnd(): No function available \n", DKWARN);
 	return false;
 }
 #endif
