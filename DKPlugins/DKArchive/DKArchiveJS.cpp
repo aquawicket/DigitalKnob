@@ -5,22 +5,30 @@
 ////////////////////////
 bool DKArchiveJS::Init()
 {
-	//DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
+	DKDuktape::AttachFunction("DKArchive_Compress", DKArchiveJS::Compress);
+	DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
 	//DKArchive::Instance("DKArchive0");
 	return true;
+}
+
+///////////////////////////////////////////
+int DKArchiveJS::Compress(duk_context* ctx)
+{
+	//DEBUGME
+	DKString path = duk_require_string(ctx, 0);
+	DKString file = duk_require_string(ctx, 1);
+	if(!DKArchive::Extract(path, file)){ return 0; }
+	return 1;
 }
 
 //////////////////////////////////////////
 int DKArchiveJS::Extract(duk_context* ctx)
 {
-	//TODO
-	//DKString url = duk_require_string(ctx, 0);
-	//DKString dest = duk_require_string(ctx, 1);
-	//if(!DKArchive::Get("DKArchive0")->Download(url, dest)){
-	//	return 0;
-	//}
-	//return 1;
-	return 0;
+	//DEBUGME
+	DKString file = duk_require_string(ctx, 0);
+	DKString path = duk_require_string(ctx, 1);
+	if(!DKArchive::Extract(file, path)){ return 0; }
+	return 1;
 }
 
 #endif //USE_DKDuktape

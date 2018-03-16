@@ -8,6 +8,13 @@
 #include "DK/DKFile.h"
 #include "DKArchive/DKArchive.h"
 
+//////////////////////
+bool DKArchive::Init()
+{
+	DKCreate("DKArchiveJS");
+	return true;	
+}
+
 ///////////////////////////////////////////////////////////////////
 bool DKArchive::Extract(const DKString& file, const DKString& path)
 {
