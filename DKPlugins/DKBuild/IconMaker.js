@@ -41,15 +41,15 @@ function IconMaker_Create(AppPath)
 	//Create Android Icons
 	DKFile_MkDir(AppPath+"/icons/android");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-hdpi");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 72x72 "+AppPath+"/icons/android/drawable-hdpi/icon.png");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 72x72 "+AppPath+"/icons/android/drawable-hdpi/icon.png");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-ldpi");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 36x36 "+AppPath+"/icons/android/drawable-ldpi/icon.png");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 36x36 "+AppPath+"/icons/android/drawable-ldpi/icon.png");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-mdpi");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 48x48 "+AppPath+"/icons/android/drawable-mdpi/icon.png");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 48x48 "+AppPath+"/icons/android/drawable-mdpi/icon.png");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-xhdpi");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 96x96 "+AppPath+"/icons/android/drawable-xhdpi/icon.png");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 96x96 "+AppPath+"/icons/android/drawable-xhdpi/icon.png");
 	DKFile_MkDir(AppPath+"/icons/android/drawable-xxhdpi");
-	DK_Execute(IMAGEMAGICK+"convert "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -resize 144x144 "+AppPath+"/icons/android/drawable-xxhdpi/icon.png");
 	
 	//Create iOS Icons
 	//DKFile_MkDir(AppPath+"/icons/ios");
