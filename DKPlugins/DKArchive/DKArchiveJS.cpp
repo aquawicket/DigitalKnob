@@ -6,7 +6,7 @@
 bool DKArchiveJS::Init()
 {
 	DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
-	DKArchive::Instance("DKArchive0");
+	//DKArchive::Instance("DKArchive0");
 	return true;
 }
 
