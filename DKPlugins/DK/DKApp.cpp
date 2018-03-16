@@ -59,8 +59,8 @@ int main(int argc, char **argv)
 	DKLog("DKFile::app_path = "+DKFile::app_path+"\n", DKINFO);
 	DKLog("DKFile::app_name = "+DKFile::app_name+"\n", DKINFO);
 
-	DKCreate("DKDuktape");
 	DKCreate("DKAssets");
+	DKCreate("DKDuktape");
 	DKCreate("DKDebug");
 	DKApp dkapp;
 	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
