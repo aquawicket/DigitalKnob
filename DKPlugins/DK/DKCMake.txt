@@ -1,6 +1,7 @@
 IF(WIN)
 	DKDEPEND(boost_1_66_0 Boost_System)
 	DKDEPEND(boost_1_66_0 Boost_Filesystem)
+	DKDEPEND(upx391w)
 	
 	LIST(APPEND WIN_LIBS shell32.lib)
 	LIST(APPEND WIN_LIBS user32.lib)
