@@ -63,10 +63,10 @@ FUNCTION(DKDOWNLOAD arg)
 			MESSAGE("*********************************************")
 			MESSAGE(" ")
 			## TODO - copy the url to the clipboard and notify the user
-			MESSAGE(FATAL_ERROR "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}")
+			MESSAGE(STATUS "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}")
 			
 			##Download with DKCurl
-			MESSAGE("Attempting to download via DKCurl...")
+			MESSAGE("Attempting to download with DKCurl...")
 			WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${arg} ${CURRENT_DIR}/${filename}")
 		ELSE()
 			MESSAGE(STATUS "downloading... done")
