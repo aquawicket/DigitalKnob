@@ -67,6 +67,7 @@ FUNCTION(DKDOWNLOAD arg)
 			
 			##Download with DKCurl
 			MESSAGE("Attempting to download with DKCurl...")
+			DKSET(QUEUE_BUILD ON)
 			WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${arg} ${CURRENT_DIR}/${filename}")
 		ELSE()
 			MESSAGE(STATUS "downloading... done")
