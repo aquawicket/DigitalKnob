@@ -60,6 +60,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_DoubleClick", DKJS::DoubleClick);
 	DKDuktape::AttachFunction("DK_Execute", DKJS::Execute);
 	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit);
+	DKDuktape::AttachFunction("DK_GetArgs", DKJS::GetArgs);
 	DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
 	DKDuktape::AttachFunction("DK_GetClipboard", DKJS::GetClipboard);
 	DKDuktape::AttachFunction("DK_GetData", DKJS::GetData);
@@ -288,6 +289,18 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 
 
 
+///////////////////////////////////
+int DKJS::GetArgs(duk_context* ctx)
+{
+	DKString args;
+	if(DKApp::argc > 1){
+		for(int i = 1; i < DKApp::argc; ++i){
+			args += toString(i) += ";";
+		}
+	}
+	duk_push_string(ctx, args.c_str());
+	return 1;
+}
 
 ///////////////////////////////////
 int DKJS::GetTime(duk_context* ctx)

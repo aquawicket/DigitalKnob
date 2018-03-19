@@ -34,6 +34,7 @@ public:
 	static int DoubleClick(duk_context* ctx);
 	static int Execute(duk_context* ctx);
 	static int Exit(duk_context* ctx);
+	static int GetArgs(duk_context* ctx);
 	static int GetBrowser(duk_context* ctx);
 	static int GetClipboard(duk_context* ctx);
 	static int GetData(duk_context* ctx);
