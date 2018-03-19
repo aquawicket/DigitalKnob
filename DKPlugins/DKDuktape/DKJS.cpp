@@ -295,7 +295,8 @@ int DKJS::GetArgs(duk_context* ctx)
 	DKString args;
 	if(DKApp::argc > 1){
 		for(int i = 1; i < DKApp::argc; ++i){
-			args += toString(i) += ";";
+			//DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
+			args += toString(DKApp::argv[i]) += ";";
 		}
 	}
 	duk_push_string(ctx, args.c_str());
