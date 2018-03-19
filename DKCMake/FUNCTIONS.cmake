@@ -65,11 +65,11 @@ FUNCTION(DKDOWNLOAD arg)
 			## TODO - copy the url to the clipboard and notify the user
 			MESSAGE(FATAL_ERROR "error: downloading ${filename} status_code: ${status_code} status_string: ${status_string}")
 			
-			##TODO - download with DKCurl
-			##MESSAGE("Attempting to download via DKCurl...")
-			##WIN_COMMAND("C:/digitalknob/DKCurl.exe ${arg} ${CURRENT_DIR}/${filename}")
+			##Download with DKCurl
+			MESSAGE("Attempting to download via DKCurl...")
+			WIN_COMMAND("${DIGITALKNOB}/DKCMake/DKCurl.exe ${arg} ${CURRENT_DIR}/${filename}")
 		ELSE()
-			MESSAGE(STATUS "downloading... done") 
+			MESSAGE(STATUS "downloading... done")
 		ENDIF() 
 	ENDIF()
 ENDFUNCTION()
