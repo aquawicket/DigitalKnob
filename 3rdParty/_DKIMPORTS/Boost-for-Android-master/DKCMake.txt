@@ -53,7 +53,7 @@ ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-./build-android.sh ${ANDROID_NDK}")
+./build-android.bat ${ANDROID_NDK}")
 ENDIF()
 
 IF(UNIX)
