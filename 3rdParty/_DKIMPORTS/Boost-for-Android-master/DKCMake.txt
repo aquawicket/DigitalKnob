@@ -11,39 +11,39 @@ DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
 ##FIXME: this get's overwritten
-IF(EXISTS ${BOOST}/boost_1_65_1)
+IF(EXISTS ${BOOST}/boost_1_66)
 	###
 ELSE()
 	DKSETPATH(${BOOST})
-	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_65_1.tar.bz2)
+	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_66_0.zip)
 ENDIF()
 
 ### LINK ###
-#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_65_1)
+#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66)
 
 IF(Boost_Chrono)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_65_1.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_65_1.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_66.a)
 ENDIF()
 
 IF(Boost_DateTime)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_65_1.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_65_1.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_66.a)
 ENDIF()
 
 IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_65_1.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_65_1.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_66.a)
 ENDIF()
 
 IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_65_1.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_65_1.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_66.a)
 ENDIF()
 
 IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_65_1.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_65_1.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_66.a)
 ENDIF()
 
 
