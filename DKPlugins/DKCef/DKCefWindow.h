@@ -13,7 +13,7 @@ class DKCef;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefWindow : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
-	                 public CefKeyboardHandler, public CefGeolocationHandler, public CefFindHandler
+	                 public CefKeyboardHandler,/* public CefGeolocationHandler,*/ public CefFindHandler
 {
 public:
 	DKCefWindow();
@@ -60,7 +60,7 @@ public:
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefFindHandler> GetFindHandler(){ return this; }
-	virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
+	//virtual CefRefPtr<CefGeolocationHandler> GetGeolocationHandler() { return this; }
 	virtual CefRefPtr<CefKeyboardHandler> GetKeyboardHandler() { return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
@@ -291,6 +291,7 @@ public:
 		return false;
 	}
 
+	/*
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr< CefGeolocationCallback > callback)
 	{
@@ -300,6 +301,7 @@ public:
 		callback->Continue(true);
 		return true;
 	}
+	*/
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
