@@ -1,0 +1,3 @@
+IF(NOT WIN_32)
+	RETURN()
+ENDIF()
