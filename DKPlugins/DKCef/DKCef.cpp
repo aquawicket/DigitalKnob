@@ -197,8 +197,8 @@ bool DKCef::Init()
 		#endif
 	#endif
 	if(!DKFile::PathExists(ep)){
-        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-        return false;
+        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKWARN);
+        //TODO: disable multi-process
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
 #endif
@@ -216,8 +216,8 @@ bool DKCef::Init()
 #ifdef LINUX
 	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 	if(!DKFile::PathExists(ep)){
-        	DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
-        	//return;
+        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+        //TODO: disable multi-process
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
 #endif
