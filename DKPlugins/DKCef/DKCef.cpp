@@ -19,6 +19,12 @@ bool DKCef::Init()
 {
 	DKLog("DKCef::Init()\n", DKINFO);
 	
+	//int major_version = cef_version_info(0);
+	//int build_version = cef_version_info(4);
+	//DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
+	//DKLog("Cef version "+version_string+"\n", DKINFO);
+	//CefString(&settings.product_version).FromASCII(version_string.c_str());
+
 	cefHandler = NULL;
 	DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
@@ -226,6 +232,7 @@ bool DKCef::Init()
 	int build_version = cef_version_info(4);
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	CefString(&settings.product_version).FromASCII(version_string.c_str());
+	DKLog("Cef version "+version_string+"\n", DKINFO);
 
     int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
