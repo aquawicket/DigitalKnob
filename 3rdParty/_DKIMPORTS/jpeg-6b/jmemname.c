@@ -13,9 +13,9 @@
  */
 
 #define JPEG_INTERNALS
-#ifndef WIN32           //ADDED BY DIGITALKNOB
-#include <unistd.h>     //ADDED BY DIGITALKNOB
-#endif                  //ADDED BY DIGITALKNOB
+#if !defined(WIN32) && !defined(WIN64) //ADDED BY DIGITALKNOB
+#include <unistd.h>                    //ADDED BY DIGITALKNOB
+#endif                                 //ADDED BY DIGITALKNOB
 #include "jinclude.h"
 #include "jpeglib.h"
 #include "jmemsys.h"		/* import the system-dependent declarations */
