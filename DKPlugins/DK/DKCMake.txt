@@ -41,7 +41,7 @@ IF(IOS OR IOSSIM)
 ENDIF()
 
 ##TODO - make optional
-DKDEPEND(DKDuktape)
+##DKDEPEND(DKDuktape)
 
 DKPLUGIN(DK)
 DKASSETS(DK)
