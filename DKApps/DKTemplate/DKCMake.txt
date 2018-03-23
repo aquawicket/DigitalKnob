@@ -1,4 +1,4 @@
-##TODO - create simple DKDEPEND_ALL() to all all plugins.
+##TODO - create simple DKDEPEND_ALL() to add all plugins.
 
 DKSET(USE_DKCef ON)
 
