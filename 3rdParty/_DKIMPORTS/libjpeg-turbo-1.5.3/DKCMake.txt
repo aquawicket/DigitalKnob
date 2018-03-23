@@ -24,9 +24,9 @@ WIN32_VS_DEBUG(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 WIN32_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEGTURBO})
-WIN64_VS_DEBUG(libjpeg-turbo-1.5.3 libjpeg-turbo.sln jpeg-static)
-WIN64_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln jpeg-static)
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEGTURBO})
+WIN64_VS_DEBUG(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
+WIN64_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${JPEGTURBO})
