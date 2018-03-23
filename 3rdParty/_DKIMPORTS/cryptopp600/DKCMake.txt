@@ -4,7 +4,7 @@ IF(NOT EXISTS "${3RDPARTY}/cryptopp600")
 	DKDOWNLOAD(${DKONLINE}/Libs/cryptopp600.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/cryptopp600.zip ${3RDPARTY}/cryptopp600)
 ENDIF()
-DKCOPY(${DKIMPORTS}/cryptopp600 ${3RDPARTY}/cryptopp600, TRUE)
+DKCOPY(${DKIMPORTS}/cryptopp600 ${3RDPARTY}/cryptopp600 TRUE)
 DKSET(CRYPTO ${3RDPARTY}/cryptopp600)
 
 
