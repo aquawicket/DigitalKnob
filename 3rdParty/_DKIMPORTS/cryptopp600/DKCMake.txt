@@ -1,13 +1,12 @@
 ##https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 
-DKSET(CRYPTO ${3RDPARTY}/cryptopp600)
-
 ### INSTALL ###
-IF(NOT EXISTS "${CRYPTO}")
+IF(NOT EXISTS "${3RDPARTY}/cryptopp600")
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 	DKDOWNLOAD(${DKONLINE}/Libs/cryptopp600.zip)
-	DKEXTRACT(${DIGITALKNOB}/Download/cryptopp600.zip ${CRYPTO})
+	DKEXTRACT(${DIGITALKNOB}/Download/cryptopp600.zip ${3RDPARTY}/cryptopp600)
 ENDIF()
+DKSET(CRYPTO ${3RDPARTY}/cryptopp600)
 
 
 ### LINK ###
@@ -18,5 +17,5 @@ WIN_RELEASE_LIB(${CRYPTO}/${OS}/Release/crypto.lib)
 ### COMPILE ###
 DKSETPATH(${CRYPTO}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${CRYPTO})
-WIN32_VS_DEBUG(cryptopp600 crypto.sln crypto)
-WIN32_VS_RELEASE(cryptopp600 crypto.sln crypto)
+WIN32_VS_DEBUG(cryptopp600 cryptopp.sln cryptopp-static)
+WIN32_VS_RELEASE(cryptopp600 cryptopp.sln cryptopp-static)
