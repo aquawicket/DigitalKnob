@@ -1,7 +1,7 @@
 ![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
 # DigitalKnob
 
-# Digitalknob is Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br>
+### Digitalknob is Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br>
 "Apps should look and act the same on every operating system, including browsers." <br><br>
 
 ###Supported Platforms <br>
