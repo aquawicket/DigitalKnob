@@ -23,14 +23,14 @@ Firefox <br>
 Opera <br>
 Internet Explorer (9.0+) <br>
 
-###Supported Frameworks <br>
+### Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [SFML](https://github.com/SFML/SFML) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
 [Emscripten](https://github.com/kripken/emscripten) (TODO) <br>
 
-###Supported Libraries <br>
+### Supported Libraries <br>
 [Archive](https://github.com/libarchive/libarchive) <br>
 [Boost](https://github.com/boostorg/boost) <br>
 [Boost-android](https://github.com/MysticTreeGames/Boost-for-Android) <br>
@@ -85,8 +85,8 @@ Internet Explorer (9.0+) <br>
 [Zlib](https://github.com/madler/zlib) <br>
 
 
-###How to compile <br>
+### How to compile <br>
 [DigitalKnob - Wiki](https://github.com/aquawicket/DigitalKnob/wiki)
 
-###DKForum <br>
+### DKForum <br>
 [Digitalknob Forum](http://digitalknob.freeforums.net)
