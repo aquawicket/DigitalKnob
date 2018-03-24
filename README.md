@@ -27,8 +27,8 @@ Internet Explorer (9.0+) <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 [SFML](https://github.com/SFML/SFML) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-[OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
-[Emscripten](https://github.com/kripken/emscripten) "coming soon" <br>
+[OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
+[Emscripten](https://github.com/kripken/emscripten) (TODO) <br>
 
 ###Supported Libraries <br>
 [Archive](https://github.com/libarchive/libarchive) <br>
@@ -38,8 +38,8 @@ Internet Explorer (9.0+) <br>
 [Bullet](https://github.com/bulletphysics/bullet3) <br>
 [Bzip2](https://github.com/asimonov-im/bzip2) <br>
 [Cef3](https://bitbucket.org/chromiumembedded/cef) <br>
-[Crosswalk](https://github.com/crosswalk-project/crosswalk) "coming soon" <br>
-[Crypto++](https://github.com/weidai11/cryptopp) "coming soon" <br>
+[Crosswalk](https://github.com/crosswalk-project/crosswalk) (TODO) <br>
+[Crypto++](https://github.com/weidai11/cryptopp) (TODO) <br>
 [Curl](https://github.com/bagder/curl) <br>
 [Duktape](https://github.com/svaarala/duktape) <br>
 [FFmpeg](https://github.com/FFmpeg/FFmpeg) <br>
@@ -55,7 +55,7 @@ Internet Explorer (9.0+) <br>
 [Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
 [OpenAL](https://github.com/apportable/openal-soft) <br>
-[OpenFrameworks](https://github.com/openframeworks/openFrameworks) "coming soon" <br>
+[OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
 [OsgAudio](https://github.com/mccdo/osgaudio) <br>
