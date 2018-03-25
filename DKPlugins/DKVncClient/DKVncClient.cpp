@@ -173,7 +173,7 @@ bool DKVncClient::Init()
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
-	Connect(server_ip, server_password);
+	if(!Connect(server_ip, server_password)){ return false; }
 	return true;
 }
 
@@ -248,9 +248,9 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 	cl->serverHost = (char*)address.c_str();
 	pass = password.c_str();
 	cl->GetPassword = DKVncClient::password; //Tell vnc to grab the password on connect.
-	if(!rfbInitConnection(cl)){ return false; }
+	if(!rfbInitConnection(cl)){	return false; }
 	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
-	ValidateAspectRatio(cl);
+	if(!ValidateAspectRatio(cl)){ return false; }
 	return true;
 }
 
@@ -260,16 +260,19 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
 	if (!client->listenSpecified) {
 		if (!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort))
+			DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
 			return FALSE;
 		}
 	
 	/* Initialise the VNC connection, including reading the password */
 	
 	if(!InitialiseRFBConnection(client)){
+		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
 		return FALSE;
 	}
 	
 	if(!SetFormatAndEncodings(client)){
+		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
 		return FALSE;
 	}
 	
@@ -292,6 +295,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 			client->updateRect.w / client->appData.scaleSetting,
 			client->updateRect.h / client->appData.scaleSetting,
 			FALSE))
+			DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
 			return FALSE;
 	}
 	else{
@@ -299,6 +303,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 			client->updateRect.x, client->updateRect.y,
 			client->updateRect.w, client->updateRect.h,
 		FALSE))
+		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
 		return FALSE;
 	}
 	return TRUE;
@@ -307,7 +312,10 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 ////////////////////////
 void DKVncClient::draw()
 {
-	if(!cl->frameBuffer){ return; }
+	if(!cl->frameBuffer){
+		DKLog("DKVncClient::draw(): cl->frameBuffer invalid\n", DKWARN);
+		return; 
+	}
 
 	//SDL_Event e;
 	//while(SDL_PollEvent(&e)){
