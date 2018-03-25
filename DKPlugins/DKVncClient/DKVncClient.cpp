@@ -336,14 +336,23 @@ void DKVncClient::draw()
 	//	handle(&e);
 	//}
 
-	HandleRFBServerMessage(cl);
+	if(!HandleRFBServerMessage(cl)){
+		DKLog("DKVncClient::draw(): HandleRFBServerMessage() failed\n", DKWARN);
+		return;
+	}
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
 	r.w = cl->width;
 	r.h = cl->height;
-	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
-	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+	if(SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4) == -1){
+		DKLog("DKVncClient::draw(): SDL_UpdateTexture() failed\n", DKWARN);
+		return;
+	}
+	if(SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1){
+		DKLog("DKVncClient::draw(): SDL_RenderCopyEx() failed\n", DKWARN);
+		return;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////
