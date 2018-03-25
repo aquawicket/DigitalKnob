@@ -251,9 +251,15 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 	cl->serverHost = (char*)address.c_str();
 	pass = password.c_str();
 	cl->GetPassword = DKVncClient::password; //Tell vnc to grab the password on connect.
-	if(!rfbInitConnection(cl)){	return false; }
+	if(!rfbInitConnection(cl)){
+		DKLog("DKVncClient::Connect(): rfbInitConnection() failed\n", DKWARN);
+		return false; 
+	}
 	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
-	if(!ValidateAspectRatio(cl)){ return false; }
+	if(!ValidateAspectRatio(cl)){
+		DKLog("DKVncClient::Connect(): ValidateAspectRatio() failed\n", DKWARN);
+		return false; 
+	}
 	return true;
 }
 
