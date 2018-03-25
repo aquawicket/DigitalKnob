@@ -23,7 +23,7 @@ int DKVncClient::rightShiftKeyDown, DKVncClient::leftShiftKeyDown;
 DKSDLWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
 int DKVncClient::message_wait = 1;
-SDL_Texture* DKVncClient::tex;
+SDL_Texture* DKVncClient::tex = NULL;
 rfbClient* DKVncClient::cl;
 bool DKVncClient::seperate_loop = false;
 
@@ -256,6 +256,10 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 		return false; 
 	}
 	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	if(!tex){
+		DKLog("DKVncClient::Connect(): tex invalid\n", DKWARN);
+		return false; 
+	}
 	if(!ValidateAspectRatio(cl)){
 		DKLog("DKVncClient::Connect(): ValidateAspectRatio() failed\n", DKWARN);
 		return false; 
