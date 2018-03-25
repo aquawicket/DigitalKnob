@@ -2,7 +2,6 @@
 #ifndef DKVncServer_H
 #define DKVncServer_H
 #include "DK/DK.h"
-#include "zconf.h"
 #include <rfb/rfb.h>
 
 //DirectX Capture
