@@ -3,6 +3,9 @@
 #define DKVncClient_H
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
+#ifdef LINUX
+typedef unsigned long z_size_t;
+#endif
 #include <rfb/rfbclient.h>
 
 
