@@ -2,6 +2,9 @@
 #ifndef DKVncServer_H
 #define DKVncServer_H
 #include "DK/DK.h"
+#ifdef LINUX
+typedef unsigned long z_size_t;
+#endif
 #include <rfb/rfb.h>
 
 //DirectX Capture
