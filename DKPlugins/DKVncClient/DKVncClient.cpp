@@ -173,7 +173,10 @@ bool DKVncClient::Init()
 		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
 	}
 	
-	if(!Connect(server_ip, server_password)){ return false; }
+	if(!Connect(server_ip, server_password)){
+		DKLog("DKVncClient::Init(): Connect() failed\n", DKWARN);
+		return false; 
+	}
 	return true;
 }
 
