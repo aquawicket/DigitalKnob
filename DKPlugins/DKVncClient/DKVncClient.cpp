@@ -267,21 +267,22 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 {
 	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
-	if (!client->listenSpecified) {
-		if (!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort))
-			DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
+	if(!client->listenSpecified){
+		if(!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort)){
+			DKLog("DKVncClient::rfbInitConnection(): ConnectToRFBServer() failed\n", DKWARN);
 			return FALSE;
 		}
+	}
 	
 	/* Initialise the VNC connection, including reading the password */
 	
 	if(!InitialiseRFBConnection(client)){
-		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
+		DKLog("DKVncClient::rfbInitConnection(): InitialiseRFBConnection() failed\n", DKWARN);
 		return FALSE;
 	}
 	
 	if(!SetFormatAndEncodings(client)){
-		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
+		DKLog("DKVncClient::rfbInitConnection(): SetFormatAndEncodings() failed\n", DKWARN);
 		return FALSE;
 	}
 	
@@ -289,31 +290,35 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 	client->height=client->si.framebufferHeight;
 	client->MallocFrameBuffer(client);
 	
-	if (client->updateRect.x < 0) {
+	if(client->updateRect.x < 0){
 		client->updateRect.x = client->updateRect.y = 0;
 		client->updateRect.w = client->width;
 		client->updateRect.h = client->height;
 	}
 	
 	if(client->appData.scaleSetting>1){
-		 if (!SendScaleSetting(client, client->appData.scaleSetting))
-		 return FALSE;
-		if (!SendFramebufferUpdateRequest(client,
+		if(!SendScaleSetting(client, client->appData.scaleSetting)){
+			DKLog("DKVncClient::rfbInitConnection(): SendScaleSetting() failed\n", DKWARN);
+			return FALSE; 
+		} 
+		if(!SendFramebufferUpdateRequest(client,
 			client->updateRect.x / client->appData.scaleSetting,
 			client->updateRect.y / client->appData.scaleSetting,
 			client->updateRect.w / client->appData.scaleSetting,
 			client->updateRect.h / client->appData.scaleSetting,
-			FALSE))
-			DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
-			return FALSE;
+			FALSE)){
+				DKLog("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n", DKWARN);
+				return FALSE;
+		}
 	}
 	else{
-		if (!SendFramebufferUpdateRequest(client,
+		if(!SendFramebufferUpdateRequest(client,
 			client->updateRect.x, client->updateRect.y,
 			client->updateRect.w, client->updateRect.h,
-		FALSE))
-		DKLog("DKVncClient::rfbInitConnection(): failed\n", DKWARN);
-		return FALSE;
+			FALSE)){
+			DKLog("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n", DKWARN);
+			return FALSE;
+		}
 	}
 	return TRUE;
 }
@@ -322,7 +327,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 void DKVncClient::draw()
 {
 	if(!cl->frameBuffer){
-		DKLog("DKVncClient::draw(): cl->frameBuffer invalid\n", DKWARN);
+		//DKLog("DKVncClient::draw(): cl->frameBuffer invalid\n", DKWARN);
 		return; 
 	}
 
