@@ -279,7 +279,6 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 	}
 	
 	/* Initialise the VNC connection, including reading the password */
-	
 	if(!InitialiseRFBConnection(client)){
 		DKLog("DKVncClient::rfbInitConnection(): InitialiseRFBConnection() failed\n", DKWARN);
 		return FALSE;
