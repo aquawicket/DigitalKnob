@@ -67,17 +67,7 @@ bool DKCefV8::End()
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
-{
-	DKString file = args->GetString(0);
-	int x;
-	int y;
-	if(!DKUtil::FindImageOnScreen(file, x, y)){ return false; }
-	if(!DKUtil::SetMousePos(x, y)){ return false; }
-	if(!DKUtil::LeftClick()){ return false; }
-	return true;
-}
+
 
 //////////////////////////////////////////////////////////
 bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
@@ -85,16 +75,6 @@ bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 	DKString data = args->GetString(0);
 	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
 	DKCreate(data);
-	return true;
-}
-
-/////////////////////////////////////////////////////
-bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
-{
-	//TODO
-	int lvl = args->GetInt(0);
-	DKString string = args->GetString(1);
-	SetLog(lvl, string);
 	return true;
 }
 
@@ -108,6 +88,30 @@ bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 		return true;
 	}
 	if(!retval->SetBool(0, true)){ return false; } 
+	return true;
+}
+
+
+
+////////////////////////////////////////////////////////
+bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
+{
+	DKString file = args->GetString(0);
+	int x;
+	int y;
+	if(!DKUtil::FindImageOnScreen(file, x, y)){ return false; }
+	if(!DKUtil::SetMousePos(x, y)){ return false; }
+	if(!DKUtil::LeftClick()){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
+{
+	//TODO
+	int lvl = args->GetInt(0);
+	DKString string = args->GetString(1);
+	SetLog(lvl, string);
 	return true;
 }
 
