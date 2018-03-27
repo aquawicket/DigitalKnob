@@ -315,6 +315,85 @@ int DKJS::CallFunc(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////
+int DKJS::ClearEvents(duk_context* ctx)
+{
+	DKEvent::events.clear();
+	return 1;
+}
+
+//////////////////////////////////////
+int DKJS::ClickImage(duk_context* ctx)
+{
+	DKString file = duk_require_string(ctx, 0);
+	int x;
+	int y;
+	if(!DKUtil::FindImageOnScreen(file, x, y)){ return 0; }
+	if(!DKUtil::SetMousePos(x, y)){ return 0; }
+	if(!DKUtil::LeftClick()){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::CpuUsed(duk_context* ctx)
+{
+	int cpu;
+	if(!DKUtil::CpuUsed(cpu)){ return 0; }
+	duk_push_number(ctx, cpu);
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::CpuUsedByApp(duk_context* ctx)
+{
+	int cpu;
+	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
+	duk_push_number(ctx, cpu);
+	return 1;
+}
+
+/////////////////////////////////
+int DKJS::Crash(duk_context* ctx)
+{
+#if !defined(WIN32)
+	raise(SIGSEGV);
+#else
+	abort();
+#endif
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::DoFrame(duk_context* ctx)
+{
+	DKApp::DoFrame();
+	return 1;
+}
+
+///////////////////////////////////////
+int DKJS::DoubleClick(duk_context* ctx)
+{
+	if(!DKUtil::DoubleClick()){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::Execute(duk_context* ctx)
+{
+	DKString command = duk_require_string(ctx, 0);
+	DKString rtn;
+	if(!DKUtil::Execute(command, rtn)){ return 0; }
+	duk_push_string(ctx, rtn.c_str());
+	return 1;
+}
+
+////////////////////////////////
+int DKJS::Exit(duk_context* ctx)
+{
+	DKApp::Exit();
+	return 1;
+}
+
 ///////////////////////////////////
 int DKJS::GetArgs(duk_context* ctx)
 {
@@ -329,12 +408,30 @@ int DKJS::GetArgs(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
-int DKJS::GetTime(duk_context* ctx)
+//////////////////////////////////////
+int DKJS::GetBrowser(duk_context* ctx)
 {
-	DKString time;
-	if(!DKUtil::GetTime(time)){ return 0; }
-	duk_push_string(ctx, time.c_str());
+	DKString browser = "Rocket";
+	duk_push_string(ctx, browser.c_str());
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::GetClipboard(duk_context* ctx)
+{
+	DKString string;
+	if(!DKUtil::GetClipboard(string)){ return 0; }
+	duk_push_string(ctx, string.c_str());
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::GetData(duk_context* ctx)
+{
+	DKString data = duk_require_string(ctx, 0);
+	if(!DKValid(data)){ return 0; }
+	DKString output = toString(DKGet(data)->data, ",");
+	duk_push_string(ctx, output.c_str());
 	return 1;
 }
 
@@ -344,6 +441,165 @@ int DKJS::GetDate(duk_context* ctx)
 	DKString date;
 	if(!DKUtil::GetDate(date)){ return 0; }
 	duk_push_string(ctx, date.c_str());
+	return 1;
+}
+
+/////////////////////////////////////
+int DKJS::GetEvents(duk_context* ctx)
+{
+	DKString list;
+	for(unsigned int i = 0; i < DKEvent::events.size(); ++i){
+			
+		list += DKEvent::events[i]->GetId();
+		list += " : ";
+		list += DKEvent::events[i]->GetType();
+		list += " : ";
+		list += DKEvent::events[i]->GetJSReturn();
+		list += ",";
+	}
+
+	duk_push_string(ctx, list.c_str());
+	return 1;
+}
+
+//////////////////////////////////
+int DKJS::GetFps(duk_context* ctx)
+{
+	unsigned int fps;
+	DKUtil::GetFps(fps);
+	duk_push_int(ctx, fps);
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::GetFramerate(duk_context* ctx)
+{
+	int framerate;
+	if(!DKUtil::GetFramerate(framerate)){ return 0; }
+	duk_push_int(ctx, framerate);
+	return 1;
+}
+
+/////////////////////////////////////
+int DKJS::GetFrames(duk_context* ctx)
+{
+	long frames;
+	if(!DKUtil::GetFrames(frames)){ return 0; }
+	duk_push_int(ctx, frames);
+	return 1;
+}
+
+/////////////////////////////////
+int DKJS::GetId(duk_context* ctx)
+{
+	DKString evt = duk_require_string(ctx, 0);
+	DKStringArray arry;
+	toStringArray(arry, evt, ",");
+	if(arry.size() < 1){ return 0; }
+	duk_push_string(ctx, arry[0].c_str());
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::GetJavascript(duk_context* ctx)
+{
+	DKString browser = "Duktape";
+	duk_push_string(ctx, browser.c_str());
+	return 1;
+}
+
+//////////////////////////////////
+int DKJS::GetKey(duk_context* ctx)
+{
+	int key;
+	if(!DKUtil::GetKey(key)){ return 0; }
+	duk_push_int(ctx, key);
+	return 1;
+}
+
+//////////////////////////////////////
+int DKJS::GetLocalIP(duk_context* ctx)
+{
+	DKString ip;
+	if(!DKUtil::GetLocalIP(ip)){ return 0; }
+	duk_push_string(ctx, ip.c_str());
+	return 1;
+}
+
+/////////////////////////////////////
+int DKJS::GetMouseX(duk_context* ctx)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
+	duk_push_int(ctx, mouseX);
+	return 1;
+}
+
+/////////////////////////////////////
+int DKJS::GetMouseY(duk_context* ctx)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
+	duk_push_int(ctx, mouseY);
+	return 1;
+}
+
+/////////////////////////////////
+int DKJS::GetOS(duk_context* ctx)
+{
+	DKString os;
+	if(!GetSystemOS(os)){
+		return 0; 
+	}
+	duk_push_string(ctx, os.c_str());
+	return 1;
+}
+
+//////////////////////////////////////
+int DKJS::GetObjects(duk_context* ctx)
+{
+	DKStringArray list;
+	DKClass::GetObjects(list);
+	for(unsigned int i=0; i<list.size(); ++i){
+		replace(list[i], ",", " : ");
+	}
+	DKString str = toString(list, ",");
+	duk_push_string(ctx, str.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKJS::GetPixelUnderMouse(duk_context* ctx)
+{
+	int mouseX = 0;
+	int mouseY = 0;
+	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return 0; }
+	int r;
+	int g;
+	int b;
+	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return 0; }
+	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
+	duk_push_string(ctx, rgb.c_str());
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKJS::GetProcessList(duk_context* ctx)
+{
+	DKString list;
+	DKUtil::GetProcessList(list);
+	duk_push_string(ctx, list.c_str());
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::GetTime(duk_context* ctx)
+{
+	DKString time;
+	if(!DKUtil::GetTime(time)){ return 0; }
+	duk_push_string(ctx, time.c_str());
 	return 1;
 }
 
@@ -400,57 +656,10 @@ int DKJS::GetScreenHeight(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::GetFramerate(duk_context* ctx)
-{
-	int framerate;
-	if(!DKUtil::GetFramerate(framerate)){ return 0; }
-	duk_push_int(ctx, framerate);
-	return 1;
-}
-
-////////////////////////////////////////
 int DKJS::SetFramerate(duk_context* ctx)
 {
 	int fps = duk_require_int(ctx, 0);
 	DKUtil::SetFramerate(fps);
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::GetEvents(duk_context* ctx)
-{
-	DKString list;
-	for(unsigned int i = 0; i < DKEvent::events.size(); ++i){
-			
-		list += DKEvent::events[i]->GetId();
-		list += " : ";
-		list += DKEvent::events[i]->GetType();
-		list += " : ";
-		list += DKEvent::events[i]->GetJSReturn();
-		list += ",";
-	}
-
-	duk_push_string(ctx, list.c_str());
-	return 1;
-}
-
-///////////////////////////////////////
-int DKJS::ClearEvents(duk_context* ctx)
-{
-	DKEvent::events.clear();
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::GetObjects(duk_context* ctx)
-{
-	DKStringArray list;
-	DKClass::GetObjects(list);
-	for(unsigned int i=0; i<list.size(); ++i){
-		replace(list[i], ",", " : ");
-	}
-	DKString str = toString(list, ",");
-	duk_push_string(ctx, str.c_str());
 	return 1;
 }
 
@@ -465,48 +674,6 @@ int DKJS::Reload(duk_context* ctx)
 int DKJS::Include(duk_context* ctx)
 {
 	//ignore this for now
-	return 1;
-}
-
-/////////////////////////////////
-int DKJS::GetOS(duk_context* ctx)
-{
-	DKString os;
-	if(!GetSystemOS(os)){
-		return 0; 
-	}
-	duk_push_string(ctx, os.c_str());
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::GetBrowser(duk_context* ctx)
-{
-	DKString browser = "Rocket";
-	duk_push_string(ctx, browser.c_str());
-	return 1;
-}
-
-//////////////////////////////////////////////
-int DKJS::GetPixelUnderMouse(duk_context* ctx)
-{
-	int mouseX = 0;
-	int mouseY = 0;
-	if (!DKUtil::GetMousePos(mouseX, mouseY)) { return 0; }
-	int r;
-	int g;
-	int b;
-	if (!DKUtil::GetPixelFromScreen(mouseX, mouseY, r, g, b)) { return 0; }
-	DKString rgb = toString(r) + "," + toString(g) + "," + toString(b);
-	duk_push_string(ctx, rgb.c_str());
-	return 1;
-}
-
-/////////////////////////////////////////
-int DKJS::GetJavascript(duk_context* ctx)
-{
-	DKString browser = "Duktape";
-	duk_push_string(ctx, browser.c_str());
 	return 1;
 }
 
@@ -574,17 +741,6 @@ int DKJS::Value(duk_context* ctx)
 
 }
 
-/////////////////////////////////
-int DKJS::GetId(duk_context* ctx)
-{
-	DKString evt = duk_require_string(ctx, 0);
-	DKStringArray arry;
-	toStringArray(arry, evt, ",");
-	if(arry.size() < 1){ return 0; }
-	duk_push_string(ctx, arry[0].c_str());
-	return 1;
-}
-
 ///////////////////////////////////
 int DKJS::GetType(duk_context* ctx)
 {
@@ -620,26 +776,6 @@ int DKJS::GetValue(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
-int DKJS::GetMouseX(duk_context* ctx)
-{
-	int mouseX = 0;
-	int mouseY = 0;
-	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
-	duk_push_int(ctx, mouseX);
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::GetMouseY(duk_context* ctx)
-{
-	int mouseX = 0;
-	int mouseY = 0;
-	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
-	duk_push_int(ctx, mouseY);
-	return 1;
-}
-
 //////////////////////////////
 int DKJS::IE(duk_context* ctx)
 {
@@ -654,29 +790,11 @@ int DKJS::SetClipboard(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////
-int DKJS::GetClipboard(duk_context* ctx)
-{
-	DKString string;
-	if(!DKUtil::GetClipboard(string)){ return 0; }
-	duk_push_string(ctx, string.c_str());
-	return 1;
-}
-
 /////////////////////////////////////////////
 int DKJS::SetClipboardFiles(duk_context* ctx)
 {
 	DKString filelist = duk_require_string(ctx, 0);
 	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::GetLocalIP(duk_context* ctx)
-{
-	DKString ip;
-	if(!DKUtil::GetLocalIP(ip)){ return 0; }
-	duk_push_string(ctx, ip.c_str());
 	return 1;
 }
 
@@ -720,13 +838,6 @@ int DKJS::RightClick(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////
-int DKJS::DoubleClick(duk_context* ctx)
-{
-	if(!DKUtil::DoubleClick()){ return 0; }
-	return 1;
-}
-
 ////////////////////////////////////////
 int DKJS::WaitForImage(duk_context* ctx)
 {
@@ -736,18 +847,6 @@ int DKJS::WaitForImage(duk_context* ctx)
 		return 0;
 	}
 	duk_push_true(ctx);
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::ClickImage(duk_context* ctx)
-{
-	DKString file = duk_require_string(ctx, 0);
-	int x;
-	int y;
-	if(!DKUtil::FindImageOnScreen(file, x, y)){ return 0; }
-	if(!DKUtil::SetMousePos(x, y)){ return 0; }
-	if(!DKUtil::LeftClick()){ return 0; }
 	return 1;
 }
 
@@ -792,27 +891,6 @@ int DKJS::Sleep(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
-int DKJS::GetData(duk_context* ctx)
-{
-	DKString data = duk_require_string(ctx, 0);
-	if(!DKValid(data)){ return 0; }
-	DKString output = toString(DKGet(data)->data, ",");
-	duk_push_string(ctx, output.c_str());
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::Crash(duk_context* ctx)
-{
-#if !defined(WIN32)
-	raise(SIGSEGV);
-#else
-	abort();
-#endif
-	return 1;
-}
-
 /////////////////////////////////////////
 int DKJS::LogGuiConsole(duk_context* ctx)
 {
@@ -851,16 +929,6 @@ int DKJS::System(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
-int DKJS::Execute(duk_context* ctx)
-{
-	DKString command = duk_require_string(ctx, 0);
-	DKString rtn;
-	if(!DKUtil::Execute(command, rtn)){ return 0; }
-	duk_push_string(ctx, rtn.c_str());
-	return 1;
-}
-
 //////////////////////////////////////////
 int DKJS::PrintFunctions(duk_context* ctx)
 {
@@ -868,15 +936,6 @@ int DKJS::PrintFunctions(duk_context* ctx)
 	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
 		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
 	}
-	return 1;
-}
-
-//////////////////////////////////
-int DKJS::GetKey(duk_context* ctx)
-{
-	int key;
-	if(!DKUtil::GetKey(key)){ return 0; }
-	duk_push_int(ctx, key);
 	return 1;
 }
 
@@ -918,13 +977,6 @@ int DKJS::StrokeKey(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////
-int DKJS::Exit(duk_context* ctx)
-{
-	DKApp::Exit();
-	return 1;
-}
-
 //////////////////////////////////////
 int DKJS::GetUsername(duk_context* ctx)
 {
@@ -935,13 +987,6 @@ int DKJS::GetUsername(duk_context* ctx)
 #else
 	DKLog("GetUsername: not implemented on this OS \n", DKERROR);
 #endif
-	return 1;
-}
-
-///////////////////////////////////
-int DKJS::DoFrame(duk_context* ctx)
-{
-	DKApp::DoFrame();
 	return 1;
 }
 
@@ -965,28 +1010,10 @@ int DKJS::HideConsole(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKJS::GetProcessList(duk_context* ctx)
-{
-	DKString list;
-	DKUtil::GetProcessList(list);
-	duk_push_string(ctx, list.c_str());
-	return 1;
-}
-
 ///////////////////////////////////////////
 int DKJS::StopPropagation(duk_context* ctx)
 {
 	return 0;
-}
-
-//////////////////////////////////
-int DKJS::GetFps(duk_context* ctx)
-{
-	unsigned int fps;
-	DKUtil::GetFps(fps);
-	duk_push_int(ctx, fps);
-	return 1;
 }
 
 ////////////////////////////////////
@@ -995,15 +1022,6 @@ int DKJS::GetTicks(duk_context* ctx)
 	long ticks;
 	if(!DKUtil::GetTicks(ticks)){ return 0; }
 	duk_push_int(ctx, ticks);
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::GetFrames(duk_context* ctx)
-{
-	long frames;
-	if(!DKUtil::GetFrames(frames)){ return 0; }
-	duk_push_int(ctx, frames);
 	return 1;
 }
 
@@ -1061,25 +1079,6 @@ int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 	duk_push_number(ctx, physicalMemory);
 	return 1;
 }
-
-///////////////////////////////////
-int DKJS::CpuUsed(duk_context* ctx)
-{
-	int cpu;
-	if(!DKUtil::CpuUsed(cpu)){ return 0; }
-	duk_push_number(ctx, cpu);
-	return 1;
-}
-
-////////////////////////////////////////
-int DKJS::CpuUsedByApp(duk_context* ctx)
-{
-	int cpu;
-	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
-	duk_push_number(ctx, cpu);
-	return 1;
-}
-
 
 //////////////////////////////////////////
 int DKJS::TurnOffMonitor(duk_context* ctx)
