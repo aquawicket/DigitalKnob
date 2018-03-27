@@ -242,188 +242,6 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKCurl::HttpFileExists(const DKString& url)
-{
-	DKString _url = url;
-	if (!has(url, "http://") && !has(url, "HTTP://")){
-		_url = "http://" + url;
-	}
-	CurlInit();
-	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
-	//curl_easy_setopt(curl, CURLOPT_HEADER, 1L);
-	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
-	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
-	
-	long http_code = 0;
-	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-	if (res == CURLE_ABORTED_BY_CALLBACK){
-		DKLog("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n", DKERROR);
-		return false; 
-	}
-	if (http_code == 200 || http_code == 301){
-        return true;
-	}
-
-	//if(res != CURLE_REMOTE_FILE_NOT_FOUND){
-	//	return true;
-	//}
-
-	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
-	return false;
-}
-
-////////////////////////////////////////////////////////////////
-bool DKCurl::HttpToString(const DKString& url, DKString& output)
-{
-	DKString _url = url;
-	DKLog("DKCurl::Http -> "+ _url +"\n", DKINFO);
-	replace(_url," ","%20");
-	replace(_url,"'","%27");
-	//replace(_url,"@","%40");
-	//replace(_url,".","%2E");
-	//replace(_url,"=","%3D");
-
-	if(!DKCurl::FileExists(url)){
-		DKLog("url not found \n", DKERROR);
-		//return false;
-	}
-	
-	CurlInit();
-	DKString curlBuffer = "";
-	curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
-	curl_easy_setopt(curl, CURLOPT_COOKIEFILE, /*DKApp::datapath+*/"cookies.txt");
-	curl_easy_setopt(curl, CURLOPT_COOKIEJAR, /*DKApp::datapath+*/"cookies.txt");
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToBuffer);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
-	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
-	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
-	//curl_easy_setopt(curl, CURLOPT_RETURNTRANSFER, 1);
-	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, true); // example.com is redirected, so we tell libcurl to follow redirection
- 	//curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5000);
-	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
-	
-	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n", DKERROR); 
-		return false; 
-	}
-
-	output = curlBuffer;
-	return true;
-}
-
-////////////////////////////////////////////////////////////////////
-bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
-{
-	if(!DKCurl::FileExists(url)){
-		DKLog("url not found \n", DKERROR);
-		return false;
-	}
-
-	FILE *fp = fopen(dest.c_str(),"wb");
-	if(!fp){ 
-		DKLog("DKCurl::Download() *fp invalid \n", DKERROR);
-		return false; 
-	}
-
-	DKLog("Downloading "+url+"...\n", DKINFO);
-
-	CurlInit();
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-	curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
-	curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &DKCurl::progress_func);
-	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
-	fclose(fp);
-
-	if(res != CURLE_OK){ 
-		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
-		return false; 
-	}
-	if(!DKFile::PathExists(dest)){
-		DKLog("Download Failed: "+dest+"\n", DKERROR);
-		return false;
-	}
-
-	DKLog("Download Complete: "+dest+"\n", DKINFO);
-	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKCurl::HttpFileSize(const DKString& url, long& size)
-{
-	/*
-	double length = 0.0;
-	if(curl){
-		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		curl_easy_setopt(curl, CURLOPT_NOBODY, 1); 
-		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
-		curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, handle_data);
-		curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 500);
-		res = curl_easy_perform(curl);
-	}
-	curl_easy_cleanup(curl);
-	
-	if(contents == ""){
-		return(-1);
-	}
-	else
-	{
-	  return atol(contents.c_str());
-	}
-	*/
-	return false;
-}
-
-//////////////////////////////////////////////////////////////////
-bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
-{
-	if(!HttpFileExists(url)){
-		DKLog("url not found\n", DKERROR);
-		return false;
-	}
-
-	CurlInit();
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
-	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
-	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
- 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
-	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
-		curl_easy_cleanup(curl);
-		return false; 
-	}
-
-	const time_t filetime = 0;
-	res = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
-	
-	struct tm* clock;
-	clock = localtime(&filetime);
-	DKString month = toString(clock->tm_mon);
-	DKString day = toString(clock->tm_mday);
-	DKString hour = toString(clock->tm_hour);
-	DKString minute = toString(clock->tm_min);
-	DKString second = toString(clock->tm_sec);
-	DKString year = toString(clock->tm_year + 1900);
-	Pad(4, '0', year);
-	Pad(2, '0', month);
-	Pad(2, '0', day);
-	Pad(2, '0', hour);
-	Pad(2, '0', minute);
-	Pad(2, '0', second);
-	filedate = year + month + day + hour + minute + second;
-	//DKString(filedate+"\n");
-
-	return true;
-}
-
 ///////////////////////////////////////////////
 bool DKCurl::FtpFileExists(const DKString& url)
 {
@@ -446,6 +264,13 @@ bool DKCurl::FtpFileExists(const DKString& url)
 	}
 
 	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
+	return false;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCurl::FtpFileSize(const DKString& url, long& size)
+{
+	//TODO
 	return false;
 }
 
@@ -520,10 +345,186 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKCurl::FtpFileSize(const DKString& url, long& size)
+////////////////////////////////////////////////////////////////////
+bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 {
+	if(!DKCurl::FileExists(url)){
+		DKLog("url not found \n", DKERROR);
+		return false;
+	}
+
+	FILE *fp = fopen(dest.c_str(),"wb");
+	if(!fp){ 
+		DKLog("DKCurl::Download() *fp invalid \n", DKERROR);
+		return false; 
+	}
+
+	DKLog("Downloading "+url+"...\n", DKINFO);
+
+	CurlInit();
+	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+	curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
+	curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &DKCurl::progress_func);
+	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
+	fclose(fp);
+
+	if(res != CURLE_OK){ 
+		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
+		return false; 
+	}
+	if(!DKFile::PathExists(dest)){
+		DKLog("Download Failed: "+dest+"\n", DKERROR);
+		return false;
+	}
+
+	DKLog("Download Complete: "+dest+"\n", DKINFO);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////
+bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
+{
+	if(!HttpFileExists(url)){
+		DKLog("url not found\n", DKERROR);
+		return false;
+	}
+
+	CurlInit();
+	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
+	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
+ 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
+	if(res != CURLE_OK){ 
+		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		curl_easy_cleanup(curl);
+		return false; 
+	}
+
+	const time_t filetime = 0;
+	res = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
+	
+	struct tm* clock;
+	clock = localtime(&filetime);
+	DKString month = toString(clock->tm_mon);
+	DKString day = toString(clock->tm_mday);
+	DKString hour = toString(clock->tm_hour);
+	DKString minute = toString(clock->tm_min);
+	DKString second = toString(clock->tm_sec);
+	DKString year = toString(clock->tm_year + 1900);
+	Pad(4, '0', year);
+	Pad(2, '0', month);
+	Pad(2, '0', day);
+	Pad(2, '0', hour);
+	Pad(2, '0', minute);
+	Pad(2, '0', second);
+	filedate = year + month + day + hour + minute + second;
+	//DKString(filedate+"\n");
+
+	return true;
+}
+
+////////////////////////////////////////////////
+bool DKCurl::HttpFileExists(const DKString& url)
+{
+	DKString _url = url;
+	if (!has(url, "http://") && !has(url, "HTTP://")){
+		_url = "http://" + url;
+	}
+	CurlInit();
+	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
+	//curl_easy_setopt(curl, CURLOPT_HEADER, 1L);
+	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
+	
+	long http_code = 0;
+	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+	if (res == CURLE_ABORTED_BY_CALLBACK){
+		DKLog("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n", DKERROR);
+		return false; 
+	}
+	if (http_code == 200 || http_code == 301){
+        return true;
+	}
+
+	//if(res != CURLE_REMOTE_FILE_NOT_FOUND){
+	//	return true;
+	//}
+
+	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
 	return false;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCurl::HttpFileSize(const DKString& url, long& size)
+{
+	/*
+	double length = 0.0;
+	if(curl){
+		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_NOBODY, 1); 
+		curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+		curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, handle_data);
+		curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 500);
+		res = curl_easy_perform(curl);
+	}
+	curl_easy_cleanup(curl);
+	
+	if(contents == ""){
+		return(-1);
+	}
+	else
+	{
+	  return atol(contents.c_str());
+	}
+	*/
+	return false;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKCurl::HttpToString(const DKString& url, DKString& output)
+{
+	DKString _url = url;
+	DKLog("DKCurl::Http -> "+ _url +"\n", DKINFO);
+	replace(_url," ","%20");
+	replace(_url,"'","%27");
+	//replace(_url,"@","%40");
+	//replace(_url,".","%2E");
+	//replace(_url,"=","%3D");
+
+	if(!DKCurl::FileExists(url)){
+		DKLog("url not found \n", DKERROR);
+		//return false;
+	}
+	
+	CurlInit();
+	DKString curlBuffer = "";
+	curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
+	curl_easy_setopt(curl, CURLOPT_COOKIEFILE, /*DKApp::datapath+*/"cookies.txt");
+	curl_easy_setopt(curl, CURLOPT_COOKIEJAR, /*DKApp::datapath+*/"cookies.txt");
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToBuffer);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
+	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
+	//curl_easy_setopt(curl, CURLOPT_RETURNTRANSFER, 1);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, true); // example.com is redirected, so we tell libcurl to follow redirection
+ 	//curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5000);
+	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
+	
+	if(res != CURLE_OK){ 
+		DKLog("curl_easy_preform() failed \n", DKERROR); 
+		return false; 
+	}
+
+	output = curlBuffer;
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
