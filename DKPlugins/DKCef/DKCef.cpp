@@ -285,6 +285,89 @@ bool DKCef::End()
 	return true;
 }
 
+
+
+////////////////////////////////////////
+bool DKCef::CloseBrowser(const int& num)
+{
+	//DKLog("CloseBrowser: "+toString(num)+"\n");
+	current_browser = browsers[0];
+	current_browser->GetHost()->Invalidate(PET_VIEW);
+
+	browsers[num] = NULL;
+	browsers.erase(browsers.begin() + num);
+	return true;
+}
+
+////////////////////////////////////////////
+bool DKCef::DownloadUrl(const DKString& url)
+{
+	DKLog("Downloading.. "+url+"\n", DKINFO);
+	current_browser->GetHost()->StartDownload(url);
+	return false;
+}
+
+//////////////////////////////////////
+bool DKCef::Find(const DKString& text)
+{
+	if(!text.empty()){
+		current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
+	}
+	else{
+		current_browser->GetHost()->StopFinding(true);
+	}
+	return true;
+}
+
+/////////////////////////////////
+bool DKCef::GetBrowsers(int& num)
+{
+	num = browsers.size();
+	return true;
+}
+
+///////////////////////////////////////
+bool DKCef::GetCurrentBrowser(int& num)
+{
+	for(unsigned int i=0; i<browsers.size(); ++i){
+		if(browsers[i] == current_browser){
+			num = i;
+			return true;
+		}
+	}
+	return false; //error
+}
+
+///////////////////////////////////////////
+bool DKCef::GetUrl(int& num, DKString& url)
+{
+	if(num > (int)browsers.size()-1){ return false; } //error
+	url = browsers[num]->GetMainFrame()->GetURL().ToString();
+	return true;
+}
+
+//////////////////////////////////
+bool DKCef::GoBack(const int& num)
+{
+	if(num > (int)browsers.size()-1){ return false; } //error
+	if (browsers[num]->CanGoBack()){
+		browsers[num]->GoBack();
+		return true;
+	}
+	return false;
+}
+
+/////////////////////////////////////
+bool DKCef::GoForward(const int& num)
+{
+	if(num > (int)browsers.size()-1){ return false; } //error
+	if (browsers[num]->CanGoForward()){
+		browsers[num]->GoForward();
+		return true;
+	}
+	return false;
+}
+
 ////////////////////////
 bool DKCef::NewBrowser()
 {
@@ -360,23 +443,26 @@ bool DKCef::NewBrowser()
 	return true;
 }
 
-/////////////////////////////////
-bool DKCef::GetBrowsers(int& num)
+///////////////////
+bool DKCef::Paste()
 {
-	num = browsers.size();
+	current_browser->GetFocusedFrame()->Paste();
 	return true;
 }
 
-///////////////////////////////////////
-bool DKCef::GetCurrentBrowser(int& num)
+/////////////////////////////////
+bool DKCef::Print(const int& num)
 {
-	for(unsigned int i=0; i<browsers.size(); ++i){
-		if(browsers[i] == current_browser){
-			num = i;
-			return true;
-		}
-	}
-	return false; //error
+	current_browser->GetHost()->Print();
+	return true;
+}
+
+//////////////////////////////////
+bool DKCef::Reload(const int& num)
+{
+	if(num > (int)browsers.size()-1){ return false; } //error
+	browsers[num]->Reload();
+	return true;
 }
 
 ///////////////////////////////////
@@ -385,26 +471,6 @@ bool DKCef::SelectBrowser(int& num)
 	//DKLog("SelectBrowser: "+toString(num)+"\n");
 	current_browser = browsers[num];
 	current_browser->GetHost()->Invalidate(PET_VIEW);
-	return true;
-}
-
-////////////////////////////////////////
-bool DKCef::CloseBrowser(const int& num)
-{
-	//DKLog("CloseBrowser: "+toString(num)+"\n");
-	current_browser = browsers[0];
-	current_browser->GetHost()->Invalidate(PET_VIEW);
-
-	browsers[num] = NULL;
-	browsers.erase(browsers.begin() + num);
-	return true;
-}
-
-///////////////////////////////////////////
-bool DKCef::GetUrl(int& num, DKString& url)
-{
-	if(num > (int)browsers.size()-1){ return false; } //error
-	url = browsers[num]->GetMainFrame()->GetURL().ToString();
 	return true;
 }
 
@@ -417,59 +483,6 @@ bool DKCef::SetUrl(const DKString& url, const int& num)
 		return true;
 	}
 	browsers[num]->GetMainFrame()->LoadURL(url.c_str());
-	return true;
-}
-
-//////////////////////////////////
-bool DKCef::GoBack(const int& num)
-{
-	if(num > (int)browsers.size()-1){ return false; } //error
-	if (browsers[num]->CanGoBack()){
-		browsers[num]->GoBack();
-		return true;
-	}
-	return false;
-}
-
-/////////////////////////////////////
-bool DKCef::GoForward(const int& num)
-{
-	if(num > (int)browsers.size()-1){ return false; } //error
-	if (browsers[num]->CanGoForward()){
-		browsers[num]->GoForward();
-		return true;
-	}
-	return false;
-}
-
-////////////////////////////////
-bool DKCef::Stop(const int& num)
-{
-	if(num > (int)browsers.size()-1){ return false; } //error
-	browsers[num]->StopLoad();
-	return true;
-}
-
-//////////////////////////////////
-bool DKCef::Reload(const int& num)
-{
-	if(num > (int)browsers.size()-1){ return false; } //error
-	browsers[num]->Reload();
-	return true;
-}
-
-////////////////////////////////////////////
-bool DKCef::DownloadUrl(const DKString& url)
-{
-	DKLog("Downloading.. "+url+"\n", DKINFO);
-	current_browser->GetHost()->StartDownload(url);
-	return false;
-}
-
-///////////////////
-bool DKCef::Paste()
-{
-	current_browser->GetFocusedFrame()->Paste();
 	return true;
 }
 
@@ -491,12 +504,15 @@ bool DKCef::ShowDevTools(const int& num)
 	return true;
 }
 
-/////////////////////////////////
-bool DKCef::Print(const int& num)
+////////////////////////////////
+bool DKCef::Stop(const int& num)
 {
-	current_browser->GetHost()->Print();
+	if(num > (int)browsers.size()-1){ return false; } //error
+	browsers[num]->StopLoad();
 	return true;
 }
+
+
 
 ///////////////////////////////////////////
 bool DKCef::RunJavascript(DKString& string)
@@ -546,16 +562,4 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 	};
 
 	CefVisitWebPluginInfo(new Visitor(browser));
-}
-
-//////////////////////////////////////
-bool DKCef::Find(const DKString& text)
-{
-	if(!text.empty()){
-		current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
-	}
-	else{
-		current_browser->GetHost()->StopFinding(true);
-	}
-	return true;
 }
