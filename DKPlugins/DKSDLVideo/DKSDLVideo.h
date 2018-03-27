@@ -14,9 +14,9 @@ public:
 	void Init();
 	void End();
 	
-	void* Play(void* data);
-	bool handle(SDL_Event* event);
-
+	bool Handle(SDL_Event* event);
+	bool Play(const void* input, void* output);
+	
 	WVStream* stream;
 	WVStreamingObject* streamObj;
 };

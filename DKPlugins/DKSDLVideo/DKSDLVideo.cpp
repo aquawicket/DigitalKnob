@@ -4,7 +4,7 @@
 #include "DKSDLWindow.h"
 
 
-////////////////////
+///////////////////////
 void DKSDLVideo::Init()
 {
 	stream = NULL;
@@ -27,39 +27,10 @@ void DKSDLVideo::End()
 	WV_waaveClose();
 }
 
-//////////////////////////////////
-void* DKSDLVideo::Play(void* data)
-{
-	DKString path = *static_cast<DKString*>(data);
-	if (!DKFile::VerifyPath(path)) { return 0; }
 
-	WV_waaveInit(WAAVE_INIT_AUDIO | WAAVE_INIT_VIDEO);
-	stream = WV_getStream(path.c_str());
-
-	int streamType = WV_getStreamType(stream);
-
-	if (streamType == WV_STREAM_TYPE_VIDEO || streamType == WV_STREAM_TYPE_AUDIOVIDEO) {
-		//SDL_RenderClear(DKSDLWindow::Get("")->sdlren);
-		streamObj = WV_getStreamRendererObj(DKSDLWindow::Get("")->sdlren, NULL, NULL);
-		WV_setStreamingMethod(stream, streamObj);
-	}
-
-	WV_loadStream(stream);
-
-	/* reset window size for video */
-	if (streamObj) {
-		int winWidth = streamObj->srcWidth;
-		int winHeight = streamObj->srcHeight;
-		SDL_SetWindowSize(DKSDLWindow::Get("")->sdlwin, winWidth, winHeight);
-		WV_resetStreamRendererOutput(streamObj, DKSDLWindow::Get("")->sdlren, NULL); //!! update the object !!
-	}
-
-	WV_playStream(stream);
-	return NULL;
-}
 
 /////////////////////////////////////////
-bool DKSDLVideo::handle(SDL_Event *event)
+bool DKSDLVideo::Handle(SDL_Event *event)
 {
 	if (event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
@@ -81,3 +52,33 @@ bool DKSDLVideo::handle(SDL_Event *event)
 	return false;
 }
 
+//////////////////////////////////////////////////////
+bool DKSDLVideo::Play(const void* input, void* output)
+{
+	DKString path = *(DKString*)input;
+	if(!DKFile::VerifyPath(path)) { return false; }
+
+	WV_waaveInit(WAAVE_INIT_AUDIO | WAAVE_INIT_VIDEO);
+	stream = WV_getStream(path.c_str());
+
+	int streamType = WV_getStreamType(stream);
+
+	if(streamType == WV_STREAM_TYPE_VIDEO || streamType == WV_STREAM_TYPE_AUDIOVIDEO){
+		//SDL_RenderClear(DKSDLWindow::Get("")->sdlren);
+		streamObj = WV_getStreamRendererObj(DKSDLWindow::Get("")->sdlren, NULL, NULL);
+		WV_setStreamingMethod(stream, streamObj);
+	}
+
+	WV_loadStream(stream);
+
+	/* reset window size for video */
+	if(streamObj){
+		int winWidth = streamObj->srcWidth;
+		int winHeight = streamObj->srcHeight;
+		SDL_SetWindowSize(DKSDLWindow::Get("")->sdlwin, winWidth, winHeight);
+		WV_resetStreamRendererOutput(streamObj, DKSDLWindow::Get("")->sdlren, NULL); //!! update the object !!
+	}
+
+	WV_playStream(stream);
+	return true;
+}
