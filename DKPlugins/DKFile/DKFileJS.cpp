@@ -16,9 +16,9 @@ bool DKFileJS::Init()
 	DKDuktape::AttachFunction("DKFile_GetAbsolutePath", DKFileJS::GetAbsolutePath);
 	DKDuktape::AttachFunction("DKFile_GetDrives", DKFileJS::GetDrives);
 	DKDuktape::AttachFunction("DKFile_GetExeName", DKFileJS::GetExeName);
+	DKDuktape::AttachFunction("DKFile_GetExePath", DKFileJS::GetExePath);
 	DKDuktape::AttachFunction("DKFile_GetExtention", DKFileJS::GetExtention);
 	DKDuktape::AttachFunction("DKFile_GetFilename", DKFileJS::GetFilename);
-	DKDuktape::AttachFunction("DKFile_GetExePath", DKFileJS::GetExePath);
 	DKDuktape::AttachFunction("DKFile_GetLocalCreationDate", DKFileJS::GetLocalCreationDate);
 	DKDuktape::AttachFunction("DKFile_GetLocalModifiedDate", DKFileJS::GetLocalModifiedDate);
 	DKDuktape::AttachFunction("DKFile_GetModifiedTime", DKFileJS::GetModifiedTime);

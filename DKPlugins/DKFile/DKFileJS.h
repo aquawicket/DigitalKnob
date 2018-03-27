@@ -21,9 +21,9 @@ public:
 	static int GetAbsolutePath(duk_context* ctx);
 	static int GetDrives(duk_context* ctx);
 	static int GetExeName(duk_context* ctx);
+	static int GetExePath(duk_context* ctx);
 	static int GetExtention(duk_context* ctx);
 	static int GetFilename(duk_context* ctx);
-	static int GetExePath(duk_context* ctx);
 	static int GetLocalCreationDate(duk_context* ctx);
 	static int GetLocalModifiedDate(duk_context* ctx);
 	static int GetModifiedTime(duk_context* ctx);

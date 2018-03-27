@@ -131,6 +131,43 @@ bool DKJS::Init()
 	return true;
 }
 
+
+
+///////////////////////////////////////
+int DKJS::_DKAddEvent(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString type = duk_require_string(ctx, 1);
+
+	DKString jsreturn;
+	if(duk_to_string(ctx, 2)){
+		jsreturn = duk_to_string(ctx, 2);
+		replace(jsreturn, "function ", "");
+	}
+
+	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get("DKDuktape0"));
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::_DKAvailable(duk_context* ctx)
+{
+	DKString data = duk_require_string(ctx, 0);
+	bool available = DKAvailable(data);
+	if(!available){
+		return 0;
+	}
+	return 1;
+}
+
+////////////////////////////////////
+int DKJS::_DKClose(duk_context* ctx)
+{
+	DKString value = duk_require_string(ctx, 0);
+	DKClose(value);
+	return 1;
+}
+
 /////////////////////////////////////
 int DKJS::_DKCreate(duk_context* ctx)
 {	
@@ -165,33 +202,11 @@ int DKJS::_DKCreate(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
-int DKJS::_DKValid(duk_context* ctx)
+/////////////////////////////////////////
+int DKJS::_DKLoadPlugin(duk_context* ctx)
 {
-	DKString data = duk_require_string(ctx, 0);
-	bool valid = DKValid(data);
-	if(!valid){
-		return 0;
-	}
-	return 1;
-}
-
-////////////////////////////////////////
-int DKJS::_DKAvailable(duk_context* ctx)
-{
-	DKString data = duk_require_string(ctx, 0);
-	bool available = DKAvailable(data);
-	if(!available){
-		return 0;
-	}
-	return 1;
-}
-
-////////////////////////////////////
-int DKJS::_DKClose(duk_context* ctx)
-{
-	DKString value = duk_require_string(ctx, 0);
-	DKClose(value);
+	DKString file = duk_require_string(ctx, 0);
+	DKPlugins::LoadPlugin(file);
 	return 1;
 }
 
@@ -205,22 +220,6 @@ int DKJS::_DKLog(duk_context* ctx)
 		return 1;
 	}
 	DKLog(string, DKINFO);
-	return 1;
-}
-
-///////////////////////////////////////
-int DKJS::_DKAddEvent(duk_context* ctx)
-{
-	DKString id = duk_require_string(ctx, 0);
-	DKString type = duk_require_string(ctx, 1);
-
-	DKString jsreturn;
-	if(duk_to_string(ctx, 2)){
-		jsreturn = duk_to_string(ctx, 2);
-		replace(jsreturn, "function ", "");
-	}
-
-	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get("DKDuktape0"));
 	return 1;
 }
 
@@ -273,16 +272,48 @@ int DKJS::_DKSendEvent(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKJS::_DKLoadPlugin(duk_context* ctx)
+////////////////////////////////////
+int DKJS::_DKValid(duk_context* ctx)
 {
-	DKString file = duk_require_string(ctx, 0);
-	DKPlugins::LoadPlugin(file);
+	DKString data = duk_require_string(ctx, 0);
+	bool valid = DKValid(data);
+	if(!valid){
+		return 0;
+	}
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::_SetLog(duk_context* ctx)
+{
+	//TODO
+	int lvl = duk_require_int(ctx, 0);
+	DKString string = duk_require_string(ctx, 1);
+	SetLog(lvl, string);
 	return 1;
 }
 
 
 
+////////////////////////////////
+int DKJS::Beep(duk_context* ctx)
+{
+	DKUtil::Beep();
+	return 1;
+}
+
+////////////////////////////////////
+int DKJS::CallFunc(duk_context* ctx)
+{
+	DKString func = duk_require_string(ctx, 0);
+	DKString args = duk_require_string(ctx, 1);
+	DKString result;
+
+	if(!DKClass::CallFunc(func, &args, &result)){ return 0;	}
+	
+	duk_push_string(ctx, result.c_str());
+	return 1;
+}
 
 ///////////////////////////////////
 int DKJS::GetArgs(duk_context* ctx)
@@ -541,19 +572,6 @@ int DKJS::Value(duk_context* ctx)
 	if(!same(events[1],value)){ return 0; }
 	return 1;
 
-}
-
-////////////////////////////////////
-int DKJS::CallFunc(duk_context* ctx)
-{
-	DKString func = duk_require_string(ctx, 0);
-	DKString args = duk_require_string(ctx, 1);
-	DKString result;
-
-	if(!DKClass::CallFunc(func, &args, &result)){ return 0;	}
-	
-	duk_push_string(ctx, result.c_str());
-	return 1;
 }
 
 /////////////////////////////////
@@ -927,13 +945,6 @@ int DKJS::DoFrame(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////
-int DKJS::Beep(duk_context* ctx)
-{
-	DKUtil::Beep();
-	return 1;
-}
-
 ///////////////////////////////////////
 int DKJS::ShowConsole(duk_context* ctx)
 {
@@ -951,16 +962,6 @@ int DKJS::HideConsole(duk_context* ctx)
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_HIDE);
 #endif 
-	return 1;
-}
-
-///////////////////////////////////
-int DKJS::_SetLog(duk_context* ctx)
-{
-	//TODO
-	int lvl = duk_require_int(ctx, 0);
-	DKString string = duk_require_string(ctx, 1);
-	SetLog(lvl, string);
 	return 1;
 }
 
