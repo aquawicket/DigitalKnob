@@ -6,16 +6,9 @@
 //////////////////////
 bool DKDebugJS::Init()
 {
-	DKDuktape::AttachFunction("DKDebug_ShowStackTrace", DKDebugJS::ShowStackTrace);
 	DKDuktape::AttachFunction("DKDebug_SendBugReport", DKDebugJS::SendBugReport);
+	DKDuktape::AttachFunction("DKDebug_ShowStackTrace", DKDebugJS::ShowStackTrace);
 	return true;
-}
-
-///////////////////////////////////////////////
-int DKDebugJS::ShowStackTrace(duk_context* ctx)
-{
-	if(!DKDebug::ShowStackTrace()){ return 0; }
-	return 1;
 }
 
 //////////////////////////////////////////////
@@ -26,5 +19,11 @@ int DKDebugJS::SendBugReport(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////
+int DKDebugJS::ShowStackTrace(duk_context* ctx)
+{
+	if(!DKDebug::ShowStackTrace()){ return 0; }
+	return 1;
+}
 
 #endif //USE_DKDuktape

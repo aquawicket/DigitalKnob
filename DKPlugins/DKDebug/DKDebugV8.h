@@ -12,7 +12,6 @@ public:
 	bool Init();
 	bool End();
 
-	//static bool Test(CefArgs args, CefReturn retval);
 	static bool SendBugReport(CefArgs args, CefReturn retval);
 	static bool ShowStackTrace(CefArgs args, CefReturn retval);
 };
