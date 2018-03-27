@@ -27,6 +27,8 @@ bool DKMySql::End()
 	return true;
 }
 
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
 {

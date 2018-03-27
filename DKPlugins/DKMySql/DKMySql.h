@@ -44,4 +44,3 @@ public:
 REGISTER_OBJECT(DKMySql, true);
 
 #endif //DKMySql_H
-
