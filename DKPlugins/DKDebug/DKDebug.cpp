@@ -25,38 +25,35 @@ static BOOL s_bUnhandledExeptionFilterSet = FALSE;
 ////////////////////////////////////////////////
 static BOOL PreventSetUnhandledExceptionFilter()
 {
-  HMODULE hKernel32 = LoadLibrary("kernel32.dll");
-  if (hKernel32 == NULL) return FALSE;
-  void *pOrgEntry = GetProcAddress(hKernel32, "SetUnhandledExceptionFilter");
-  if (pOrgEntry == NULL) return FALSE;
+	HMODULE hKernel32 = LoadLibrary("kernel32.dll");
+	if(hKernel32 == NULL) return FALSE;
+	void *pOrgEntry = GetProcAddress(hKernel32, "SetUnhandledExceptionFilter");
+	if(pOrgEntry == NULL) return FALSE;
  
 #ifdef _M_IX86
-  // Code for x86:
-  // 33 C0                xor         eax,eax  
-  // C2 04 00             ret         4 
-  unsigned char szExecute[] = { 0x33, 0xC0, 0xC2, 0x04, 0x00 };
+	// Code for x86:
+	// 33 C0                xor         eax,eax  
+	// C2 04 00             ret         4 
+	unsigned char szExecute[] = { 0x33, 0xC0, 0xC2, 0x04, 0x00 };
 #elif _M_X64
-  // 33 C0                xor         eax,eax 
-  // C3                   ret  
-  unsigned char szExecute[] = { 0x33, 0xC0, 0xC3 };
+	// 33 C0                xor         eax,eax 
+	// C3                   ret  
+	unsigned char szExecute[] = { 0x33, 0xC0, 0xC3 };
 #else
 #error "The following code only works for x86 and x64!"
 #endif
  
-  DWORD dwOldProtect = 0;
-  BOOL bProt = VirtualProtect(pOrgEntry, sizeof(szExecute), 
-    PAGE_EXECUTE_READWRITE, &dwOldProtect);
+	DWORD dwOldProtect = 0;
+	BOOL bProt = VirtualProtect(pOrgEntry, sizeof(szExecute), PAGE_EXECUTE_READWRITE, &dwOldProtect);
 
-  SIZE_T bytesWritten = 0;
-  BOOL bRet = WriteProcessMemory(GetCurrentProcess(),
-    pOrgEntry, szExecute, sizeof(szExecute), &bytesWritten);
+	SIZE_T bytesWritten = 0;
+	BOOL bRet = WriteProcessMemory(GetCurrentProcess(), pOrgEntry, szExecute, sizeof(szExecute), &bytesWritten);
 
-  if ( (bProt != FALSE) && (dwOldProtect != PAGE_EXECUTE_READWRITE))
-  {
-    DWORD dwBuf;
-    VirtualProtect(pOrgEntry, sizeof(szExecute), dwOldProtect, &dwBuf);
-  }
-  return bRet;
+	if((bProt != FALSE) && (dwOldProtect != PAGE_EXECUTE_READWRITE)){
+		DWORD dwBuf;
+		VirtualProtect(pOrgEntry, sizeof(szExecute), dwOldProtect, &dwBuf);
+	}
+	return bRet;
 }
 #else
 #pragma message("This code works only for x86 and x64!")
@@ -67,10 +64,10 @@ class StackWalkerToConsole : public StackWalker
 {
 protected:
 	// do not print modules initialization
-	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG) {}
+	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){}
 	// do not print symbols initialization
-	void OnSymInit(LPCSTR, DWORD, LPCSTR) {}
-	virtual void OnOutput(LPCSTR szText) { 
+	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
+	virtual void OnOutput(LPCSTR szText){ 
 		DKLog(szText, DKINFO);
 	}
 };
@@ -79,7 +76,7 @@ protected:
 static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 {
 #ifdef _M_IX86
-	if (pExPtrs->ExceptionRecord->ExceptionCode == EXCEPTION_STACK_OVERFLOW){
+	if(pExPtrs->ExceptionRecord->ExceptionCode == EXCEPTION_STACK_OVERFLOW){
 		static char MyStack[1024*128];  // be sure that we have enought space...
 		// it assumes that DS and SS are the same!!! (this is the case for Win32)
 		// change the stack only if the selectors are the same (this is the case for Win32)
@@ -108,7 +105,9 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 	TCHAR filename[500];
 	_stprintf_s(filename,_T("0x%8.8X"), (unsigned int)pExPtrs->ExceptionRecord->ExceptionAddress);
 
-	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return EXCEPTION_CONTINUE_SEARCH; }
+	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ 
+		return EXCEPTION_CONTINUE_SEARCH; 
+	}
 	
 	DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21");
@@ -121,8 +120,8 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 //////////////////////////////////////////
 static void InitUnhandledExceptionFilter()
 {
-	if (s_bUnhandledExeptionFilterSet == FALSE){
-		// set global exception handler (for handling all unhandled exceptions)
+	if(s_bUnhandledExeptionFilterSet == FALSE){
+		//set global exception handler (for handling all unhandled exceptions)
 		SetUnhandledExceptionFilter(CrashHandlerExceptionFilter);
 #if defined _M_X64 || defined _M_IX86
 		PreventSetUnhandledExceptionFilter();
@@ -139,8 +138,8 @@ static void InitUnhandledExceptionFilter()
 #include <stdlib.h>
 #include <unistd.h>
 
-//////////////////////////////////////////////////////////////////////////////////////
-static inline void printStackTrace( FILE *out = stderr, unsigned int max_frames = 63 )
+////////////////////////////////////////////////////////////////////////////////////
+static inline void printStackTrace(FILE *out = stderr, unsigned int max_frames = 63)
 {
 	DKString logfile = DKFile::local_assets+"log.txt";
 	FILE* log = fopen(logfile.c_str(),"a");
@@ -153,9 +152,7 @@ static inline void printStackTrace( FILE *out = stderr, unsigned int max_frames 
 	// retrieve current stack addresses
 	int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
  
-	if (addrlen == 0){
-		return;
-	}
+	if(addrlen == 0){ return; }
  
 	// create readable strings to each frame.
 	char** symbollist = backtrace_symbols(addrlist, addrlen);
@@ -238,6 +235,16 @@ bool DKDebug::End()
 	return true;
 }
 
+/////////////////////////////////////////////////////
+bool DKDebug::SendBugReport(const DKString& filename)
+{
+	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return false; }
+	DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
+	if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
+	if(!dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log")){ return false; }
+	return true;
+}
+
 //////////////////////////////
 bool DKDebug::ShowStackTrace()
 {
@@ -249,14 +256,4 @@ bool DKDebug::ShowStackTrace()
 	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);
 	return false;
 #endif
-}
-
-/////////////////////////////////////////////////////
-bool DKDebug::SendBugReport(const DKString& filename)
-{
-	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return false; }
-	DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
-	if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
-	if(!dkCurl->FtpUpload(DKFile::local_assets+DKString(filename)+".log", "ftp.aquawicket.com/"+DKString(filename)+".log")){ return false; }
-	return true;
 }
