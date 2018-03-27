@@ -30,27 +30,27 @@ WIN64_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${JPEGTURBO})
-MAC_XCODE_DEBUG(libjpeg-turbo-1.5.3 jpeg-static)
-MAC_XCODE_RELEASE(libjpeg-turbo-1.5.3 jpeg-static)
+MAC_XCODE_DEBUG(libjpeg-turbo-1.5.3 turbojpeg-static)
+MAC_XCODE_RELEASE(libjpeg-turbo-1.5.3 turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS ${JPEGTURBO})
-IOS_XCODE_DEBUG(libjpeg-turbo-1.5.3 jpeg-static)
-IOS_XCODE_RELEASE(libjpeg-turbo-1.5.3 jpeg-static)
+IOS_XCODE_DEBUG(libjpeg-turbo-1.5.3 turbojpeg-static)
+IOS_XCODE_RELEASE(libjpeg-turbo-1.5.3 turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS})
 IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR ${JPEGTURBO})
-IOSSIM_XCODE_DEBUG(libjpeg-turbo-1.5.3 jpeg-static)
-IOSSIM_XCODE_RELEASE(libjpeg-turbo-1.5.3 jpeg-static)
+IOSSIM_XCODE_DEBUG(libjpeg-turbo-1.5.3 turbojpeg-static)
+IOSSIM_XCODE_RELEASE(libjpeg-turbo-1.5.3 turbojpeg-static)
 
 
 DKSETPATH(${JPEGTURBO}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${JPEGTURBO})
-LINUX_DEBUG_COMMAND(make jpeg-static)
+LINUX_DEBUG_COMMAND(make turbojpeg-static)
 
 DKSETPATH(${JPEGTURBO}/${OS}/Release)
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${JPEGTURBO})
-LINUX_RELEASE_COMMAND(make jpeg-static)
+LINUX_RELEASE_COMMAND(make turbojpeg-static)
 
 ANDROID_NDK_DEBUG(libjpeg-turbo-1.5.3)
 ANDROID_NDK_RELEASE(libjpeg-turbo-1.5.3)
