@@ -118,7 +118,6 @@ bool DKVncServer::Init()
 
 	rfbInitServer(rfbScreen);  
 	DKApp::AppendLoopFunc(&DKVncServer::Loop, this);
-	//DKUtil::SetFramerate(0);
 	return true;
 }
 
@@ -332,12 +331,13 @@ void DKVncServer::DrawBuffer()
 	fclose(stream); 
 	free(pixels);
      */
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 #endif
 
 #ifdef LINUX
 	//TODO - some example code to try
 	/*
-	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);    
+	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0;h<rfbScreen->height;++h) {
 		for(w=0;w<rfbScreen->width;++w) {
@@ -360,9 +360,10 @@ void DKVncServer::DrawBuffer()
 	XDestroyImage(image);
 	image = NULL;
 	*/
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 #endif
 
-	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
+	rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
