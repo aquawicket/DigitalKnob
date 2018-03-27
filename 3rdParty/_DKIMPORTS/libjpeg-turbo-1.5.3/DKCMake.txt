@@ -9,12 +9,12 @@ DKINCLUDE(${JPEGTURBO}/${OS})
 ANDROID_INCLUDE(${JPEGTURBO}/${OS}/$(BUILD_TYPE)/jni)
 WIN_DEBUG_LIB(${JPEGTURBO}/${OS}/Debug/turbojpeg-static.lib)
 WIN_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/turbojpeg-static.lib)
-APPLE_DEBUG_LIB(${JPEGTURBO}/${OS}/${DEBUG}/libjpeg.a)
-APPLE_RELEASE_LIB(${JPEGTURBO}/${OS}/${RELEASE}/libjpeg.a)
-LINUX_DEBUG_LIB(${JPEGTURBO}/${OS}/Debug/libjpeg.a)
-LINUX_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/libjpeg.a)
-ANDROID_DEBUG_LIB(${JPEGTURBO}/${OS}/Debug/obj/local/armeabi-v7a/libjpeg.a)
-ANDROID_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/obj/local/armeabi-v7a/libjpeg.a)
+APPLE_DEBUG_LIB(${JPEGTURBO}/${OS}/${DEBUG}/libturbojpeg.a)
+APPLE_RELEASE_LIB(${JPEGTURBO}/${OS}/${RELEASE}/libturbojpeg.a)
+LINUX_DEBUG_LIB(${JPEGTURBO}/${OS}/Debug/libturbojpeg.a)
+LINUX_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/libturbojpeg.a)
+ANDROID_DEBUG_LIB(${JPEGTURBO}/${OS}/Debug/obj/local/armeabi-v7a/libturbojpeg.a)
+ANDROID_RELEASE_LIB(${JPEGTURBO}/${OS}/Release/obj/local/armeabi-v7a/libturbojpeg.a)
 
 
 ### COMPILE ###
