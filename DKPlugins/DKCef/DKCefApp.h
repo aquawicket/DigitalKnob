@@ -38,7 +38,6 @@ public:
 	static std::map<DKString, boost::function<bool (CefArgs, CefReturn)>> functions;
 #endif
 	static std::vector<std::string> funcs;
-	//static std::map<std::string, bool> funcs2;
 
 	//Flags
 	static DKString disable_gpu;
@@ -64,94 +63,13 @@ public:
 class DKCefV8Handler : public CefV8Handler
 {
 public:
-	DKCefV8Handler(){ /*printf("DKCefV8Handler::DKCefV8Handler()\n");*/ }
+	DKCefV8Handler(){}
+
+	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE;
+	void SetBrowser(CefRefPtr<CefBrowser> _browser);
+	
 	CefRefPtr<CefBrowser> browser;
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	virtual bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) OVERRIDE 
-	{
-		std::string func = name;
-		//printf("DKCefV8Handler::Execute(%s)\n", func.c_str());
-		
-		if(DKV8::singleprocess == true){ //Single process
-			if(!DKV8::functions[name]) {
-			printf("DKCefV8Handler::Execute(%s) not registered\n", func.c_str());
-				return false;
-			}
 
-			//Transfer arguments and print function call
-			//printf("%s(", func.c_str());
-			CefRefPtr<CefListValue> args = CefListValue::Create();
-			for(unsigned int i=0; i<arguments.size(); i++){
-				if(arguments[i]->IsString()){
-					args->SetString(i, arguments[i]->GetStringValue());
-					//printf("%s,", std::string(args->GetString(i)).c_str());
-				}
-				if(arguments[i]->IsInt()){
-					args->SetInt(i, arguments[i]->GetIntValue());
-					//printf("%d,", args->GetInt(i));
-				}
-				if(arguments[i]->IsBool()){
-					args->SetBool(i, arguments[i]->GetBoolValue());
-					//printf("%d,", args->GetBool(i));
-				}
-			}
-			//printf(")\n");
-
-			CefRefPtr<CefListValue> rval = CefListValue::Create();
-			if(!DKV8::functions[name](args, rval)){
-				printf("DKCefV8Handler::Execute(%s) failed\n", func.c_str());
-				return false;
-			}
-
-			//Transfer retrun value into &retval
-			if(rval->GetType(0) == VTYPE_STRING){
-				  retval = CefV8Value::CreateString(rval->GetString(0));
-				  //printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());
-			}
-			else if(rval->GetType(0) == VTYPE_INT){
-			      retval = CefV8Value::CreateInt(rval->GetInt(0));
-				  //printf("retval = %d\n", retval->GetIntValue());
-			}
-			else if(rval->GetType(0) == VTYPE_BOOL){
-			      retval = CefV8Value::CreateBool(rval->GetBool(0));
-				  //printf("retval = %d\n", retval->GetBoolValue());
-			}
-			else{
-				retval = CefV8Value::CreateNull();
-				//printf("retval = NULL\n");
-			}
-		}
-		else{ //Multi process
-			//_retval->Clear();			
-			std::string exec = "CallFunc("+func+")";
-			CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
-
-			CefRefPtr<CefListValue> args = msg->GetArgumentList();
-			for(unsigned int i=0; i<arguments.size(); i++){
-				if(arguments[i]->IsString()){
-					args->SetString(i, arguments[i]->GetStringValue());
-				}
-				if(arguments[i]->IsInt()){
-					args->SetInt(i, arguments[i]->GetIntValue());
-				}
-				if(arguments[i]->IsBool()){
-					args->SetBool(i, arguments[i]->GetBoolValue());
-				}
-			}
-			browser->SendProcessMessage(PID_BROWSER, msg);
-		}
-			
-		//while(!_retval->GetSize()){}
-		return true;
-	}
-	
-	///////////////////////////////////////////////
-	void SetBrowser(CefRefPtr<CefBrowser> _browser)
-	{
-		browser = _browser;
-	}
-	
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
 
