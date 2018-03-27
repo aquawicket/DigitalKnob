@@ -6,8 +6,8 @@
 ///////////////////////
 bool DKRocketJS::Init()
 {
-	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
 	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload);
+	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
 
 	//Note: moved to DKWidgetJS
 	//DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
@@ -15,12 +15,7 @@ bool DKRocketJS::Init()
 	return true;
 }
 
-////////////////////////////////////////////////
-int DKRocketJS::ToggleDebugger(duk_context* ctx)
-{
-	DKRocket::Get("DKRocket0")->ToggleDebugger();
-	return 1;
-}
+
 
 /////////////////////////////////
 int DKRocketJS::Reload(duk_context* ctx)
@@ -29,5 +24,11 @@ int DKRocketJS::Reload(duk_context* ctx)
 	return 1;
 }
 
+////////////////////////////////////////////////
+int DKRocketJS::ToggleDebugger(duk_context* ctx)
+{
+	DKRocket::Get("DKRocket0")->ToggleDebugger();
+	return 1;
+}
 
 #endif //USE_DKDuktape

@@ -11,8 +11,8 @@ class DKRocketJS : public DKObjectT<DKRocketJS>
 public:
 	bool Init();
 
-	static int ToggleDebugger(duk_context* ctx);
 	static int Reload(duk_context* ctx);
+	static int ToggleDebugger(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRocketJS, true)

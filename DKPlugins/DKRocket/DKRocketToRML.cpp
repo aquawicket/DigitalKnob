@@ -1,46 +1,8 @@
 #include "DKRocketToRML.h"
-
-
 #include "DK/DKLog.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 
-///////////////////////////////////////////////////////////////////
-bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
-{
-	rml = html;
-	rml = "<rml>\n"+rml+"</rml>";
-	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
-
-	DKXml xml;
-	if(!xml.LoadDocumentFromString(rml)){ return false; }
-
-	if(!xml.FindNode("//head")){
-		xml.PrependNode("//rml", "head");
-	}
-	if (!xml.FindNode("//body")) {
-		DKLog("No body tag\n", DKERROR);
-		xml.PrependNode("//html", "body");
-		//todo, we need to move the rest of the content into the body node.
-	}
-
-	//Add the base DKRocket.css stylesheet
-	xml.PrependNode("//head","link");
-	xml.SetAttributes("//head/link[1]","rel","stylesheet");
-	xml.SetAttributes("//head/link[1]","type","text/css");
-	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
-
-	//Rocket cannot read nodes outside of the body, so add an html node we can work with.
-	xml.PrependNode("//body", "html"); 
-
-	xml.SetAttributes("//body","id","body");
-	xml.SetAttributes("//html","id","html");
-
-	xml.SaveDocumentToString(rml);
-
-	HtmlToRml(rml, rml);
-	return true;
-}
 
 //////////////////////////////////////////////////////////////////
 bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
@@ -99,6 +61,57 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	//DKLog("\n##################### RML ####################\n", DKDEBUG);
 	//DKLog(rml+"\n", DKDEBUG);
 	//DKLog("\n##############################################\n\n", DKDEBUG);
+	return true;
+}
+
+/////////////////////////////////////////////
+bool DKRocketToRML::Hyperlink(DKEvent* event)
+{
+	DKString id = event->GetId();
+	DKRocket* dkRocket = DKRocket::Get("");
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
+	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
+
+	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
+	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
+	DKUtil::Run(value, "");
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////
+bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
+{
+	rml = html;
+	rml = "<rml>\n"+rml+"</rml>";
+	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
+
+	DKXml xml;
+	if(!xml.LoadDocumentFromString(rml)){ return false; }
+
+	if(!xml.FindNode("//head")){
+		xml.PrependNode("//rml", "head");
+	}
+	if (!xml.FindNode("//body")) {
+		DKLog("No body tag\n", DKERROR);
+		xml.PrependNode("//html", "body");
+		//todo, we need to move the rest of the content into the body node.
+	}
+
+	//Add the base DKRocket.css stylesheet
+	xml.PrependNode("//head","link");
+	xml.SetAttributes("//head/link[1]","rel","stylesheet");
+	xml.SetAttributes("//head/link[1]","type","text/css");
+	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
+
+	//Rocket cannot read nodes outside of the body, so add an html node we can work with.
+	xml.PrependNode("//body", "html"); 
+
+	xml.SetAttributes("//body","id","body");
+	xml.SetAttributes("//html","id","html");
+
+	xml.SaveDocumentToString(rml);
+
+	HtmlToRml(rml, rml);
 	return true;
 }
 
@@ -168,20 +181,6 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 	}
 
-	return true;
-}
-
-/////////////////////////////////////////////
-bool DKRocketToRML::Hyperlink(DKEvent* event)
-{
-	DKString id = event->GetId();
-	DKRocket* dkRocket = DKRocket::Get("");
-	Rocket::Core::ElementDocument* doc = dkRocket->document;
-	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
-
-	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
-	DKUtil::Run(value, "");
 	return true;
 }
 
