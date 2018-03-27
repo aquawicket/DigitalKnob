@@ -12,7 +12,6 @@ public:
 	bool Init();
 	bool End();
 
-	//static bool Test(CefArgs args, CefReturn retval);
 	static bool LocalAssets(CefArgs args, CefReturn retval);
 };
 
