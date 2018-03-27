@@ -11,6 +11,14 @@
 #define AUDIO_CHANNELS 2;
 #define AUDIO_SAMPLES 4096;
 
+
+static void addSound(Sound* root, Sound* snd);
+static void freeSound(Sound* sound);
+static Sound * createSound(const char* filename, uint8_t loop, int volume);
+static inline void audioCallback(void* userdata, uint8_t* stream, int len);
+static PrivateAudioDevice* gDevice;
+
+////////////////////
 typedef struct sound
 {
     uint32_t length;
@@ -24,6 +32,7 @@ typedef struct sound
     struct sound * next;
 } Sound;
 
+/////////////////////////////////
 typedef struct privateAudioDevice
 {
     SDL_AudioDeviceID device;
@@ -32,53 +41,47 @@ typedef struct privateAudioDevice
 } PrivateAudioDevice;
 
 
-static void addSound(Sound* root, Sound* snd);
-static void freeSound(Sound* sound);
-static Sound * createSound(const char* filename, uint8_t loop, int volume);
-static inline void audioCallback(void* userdata, uint8_t* stream, int len);
-static PrivateAudioDevice* gDevice;
-
-
 /////////////////////
-void DKSDLWav::Init()
+bool DKSDLWav::Init()
 {
 	if(SDL_Init(SDL_INIT_AUDIO) < 0){
 		DKLog("Could not Init SDL_Audio. \n",DKERROR);
-		return;
+		return false;
 	}	
 
-	initAudio();
+	InitAudio();
 	DKClass::RegisterFunc("DKSDLWav::PlaySound", &DKSDLWav::PlaySound, this);
 	DKClass::RegisterFunc("DKSDLWav::OpenMusic", &DKSDLWav::OpenMusic, this);
+	return true;
 }
 
 ////////////////////
-void DKSDLWav::End()
+bool DKSDLWav::End()
 {
 	endAudio();
+	return true;
 }
 
+
+
 //////////////////////////
-void DKSDLWav::initAudio()
+bool DKSDLWav::InitAudio()
 {
     Sound* global;
     gDevice = static_cast<PrivateAudioDevice*>(calloc(1, sizeof(PrivateAudioDevice)));
 
-    if(!(SDL_WasInit(SDL_INIT_AUDIO) & SDL_INIT_AUDIO))
-    {
+    if(!(SDL_WasInit(SDL_INIT_AUDIO) & SDL_INIT_AUDIO)){
         fprintf(stderr, "[%s: %d]Error: SDL_INIT_AUDIO not initialized\n", __FILE__, __LINE__);
         gDevice->audioEnabled = 0;
-        return;
+        return false;
     }
-    else
-    {
+    else{
         gDevice->audioEnabled = 1;
     }
 
-    if(gDevice == NULL)
-    {
+    if(gDevice == NULL){
         fprintf(stderr, "[%s: %d]Fatal Error: Memory c-allocation error\n", __FILE__, __LINE__);
-        return;
+        return false;
     }
 
     SDL_memset(&(gDevice->want), 0, sizeof(gDevice->want));
@@ -92,51 +95,46 @@ void DKSDLWav::initAudio()
 
     global = (Sound*)(gDevice->want).userdata;
 
-    if(global == NULL)
-    {
+    if(global == NULL){
         fprintf(stderr, "[%s: %d]Error: Memory allocation error\n", __FILE__, __LINE__);
-        return;
+        return false;
     }
 
     global->buffer = NULL;
     global->next = NULL;
 
     /* want.userdata = new; */
-    if((gDevice->device = SDL_OpenAudioDevice(NULL, 0, &(gDevice->want), NULL, SDL_AUDIO_ALLOW_ANY_CHANGE)) == 0)
-    {
+    if((gDevice->device = SDL_OpenAudioDevice(NULL, 0, &(gDevice->want), NULL, SDL_AUDIO_ALLOW_ANY_CHANGE)) == 0){
         fprintf(stderr, "[%s: %d]Warning: failed to open audio device: %s\n", __FILE__, __LINE__, SDL_GetError());
     }
-    else
-    {
+    else{
         /* Unpause active audio stream */
         SDL_PauseAudioDevice(gDevice->device, 0);
     }
+	return true;
 }
 
 /////////////////////////
-void DKSDLWav::endAudio()
+bool DKSDLWav::EndAudio()
 {
-    if(gDevice->audioEnabled)
-    {
+    if(gDevice->audioEnabled){
         SDL_PauseAudioDevice(gDevice->device, 1);
-
         freeSound((Sound *) (gDevice->want).userdata);
 
         /* Close down audio */
         SDL_CloseAudioDevice(gDevice->device);
     }
-
     free(gDevice);
+	return true;
 }
 
-///////////////////////////////////////////////////////////
-void DKSDLWav::playSound(const char * filename, int volume)
+//////////////////////////////////////////////////////////
+bool DKSDLWav::playSound(const char* filename, int volume)
 {
     Sound * snd;
 
-    if(!gDevice->audioEnabled)
-    {
-        return;
+    if(!gDevice->audioEnabled){
+        return false;
     }
 
     snd = createSound(filename, 0, volume);
@@ -145,17 +143,18 @@ void DKSDLWav::playSound(const char * filename, int volume)
     addSound((Sound *) (gDevice->want).userdata, snd);
 
     SDL_UnlockAudioDevice(gDevice->device);
+	return true;
 }
 
-///////////////////////////////////////////////////////////
-void DKSDLWav::OpenMusic(const char * filename, int volume)
+//////////////////////////////////////////////////////////
+bool DKSDLWav::OpenMusic(const char* filename, int volume)
 {
     Sound * global;
     Sound * snd;
     uint8_t music;
 
     if(!gDevice->audioEnabled){
-        return;
+        return false;
     }
 
     music = 0;
@@ -186,24 +185,25 @@ void DKSDLWav::OpenMusic(const char * filename, int volume)
 
     addSound((Sound *) (gDevice->want).userdata, snd);
     SDL_UnlockAudioDevice(gDevice->device);
+	return true;
 }
 
-/////////////////////////////////////
-void* DKSDLWav::PlaySound(void* data)
+/////////////////////////////////////////////////////////
+bool DKSDLWav::PlaySound(const void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
-	if(!DKFile::VerifyPath(path)){ return 0; }
+	DKString path = *(DKString*)input;
+	if(!DKFile::VerifyPath(path)){ return false; }
 	playSound(path.c_str(), SDL_MIX_MAXVOLUME);
-	return NULL;
+	return true;
 }
 
-/////////////////////////////////////
-void* DKSDLWav::OpenMusic(void* data)
+/////////////////////////////////////////////////////////
+bool DKSDLWav::OpenMusic(const void* input, void* output)
 {
-	DKString path = *static_cast<DKString*>(data);
-	if(!DKFile::VerifyPath(path)){ return 0; }
+	DKString path = *(DKString*)input;
+	if(!DKFile::VerifyPath(path)){ return false; }
 	OpenMusic(path.c_str(), SDL_MIX_MAXVOLUME);
-	return NULL;
+	return true;
 }
 
 

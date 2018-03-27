@@ -10,16 +10,16 @@
 class DKSDLWav : public DKObjectT<DKSDLWav>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 
-	void OpenMusic(const char * filename, int volume);
-	void endAudio();
-	void initAudio();
-	void playSound(const char * filename, int volume);
+	bool EndAudio();
+	bool InitAudio();
+	bool OpenMusic(const char* filename, int volume);
+	bool PlaySound(const char* filename, int volume);
 
-	void* OpenMusic(void* data);
-	void* PlaySound(void* data);
+	bool OpenMusic(const void* input, void* output);
+	bool PlaySound(const void* input, void* output);
 };
 
 
