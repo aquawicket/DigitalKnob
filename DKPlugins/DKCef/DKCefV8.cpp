@@ -7,22 +7,30 @@ bool DKCefV8::Init()
 	DKCreate("DKFileV8");
 	DKCreate("DKAssetsV8");
 	
-	DKV8::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
 	DKV8::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
-	DKV8::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
+	
+	DKV8::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
+	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
+	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
 	DKV8::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
+	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
+	DKV8::AttachFunction("DK_GetFrames", DKCefV8::GetFrames);
 	DKV8::AttachFunction("DK_GetLocalIP", DKCefV8::GetLocalIP);
 	DKV8::AttachFunction("DK_GetMouseX", DKCefV8::GetMouseX);
 	DKV8::AttachFunction("DK_GetMouseY", DKCefV8::GetMouseY);
+	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
 	DKV8::AttachFunction("DK_GetScreenHeight", DKCefV8::GetScreenHeight);
 	DKV8::AttachFunction("DK_GetScreenWidth", DKCefV8::GetScreenWidth);
-	DKV8::AttachFunction("DK_GetPixelUnderMouse", DKCefV8::GetPixelUnderMouse);
+	DKV8::AttachFunction("DK_GetTicks", DKCefV8::GetTicks);
 	DKV8::AttachFunction("DK_GetVolume", DKCefV8::GetVolume);
-	DKV8::AttachFunction("DK_SetVolume", DKCefV8::SetVolume);
 	DKV8::AttachFunction("DK_HideConsole", DKCefV8::HideConsole);
 	DKV8::AttachFunction("DK_LeftClick", DKCefV8::LeftClick);
+	DKV8::AttachFunction("DK_LowPowerMonitor", DKCefV8::LowPowerMonitor);
+	DKV8::AttachFunction("DK_PhysicalMemory", DKCefV8::PhysicalMemory);
+	DKV8::AttachFunction("DK_PhysicalMemoryUsed", DKCefV8::PhysicalMemoryUsed);
+	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKV8::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
@@ -30,24 +38,19 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
+	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
+	DKV8::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("DK_SetMousePos", DKCefV8::SetMousePos);
+	DKV8::AttachFunction("DK_SetVolume", DKCefV8::SetVolume);
 	DKV8::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
 	DKV8::AttachFunction("DK_StrokeKey", DKCefV8::StrokeKey);
 	DKV8::AttachFunction("DK_System", DKCefV8::System);
-	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
-	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
-	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
-	DKV8::AttachFunction("DK_GetTicks", DKCefV8::GetTicks);
-	DKV8::AttachFunction("DK_GetFrames", DKCefV8::GetFrames);
-
+	DKV8::AttachFunction("DK_TurnOffMonitor", DKCefV8::TurnOffMonitor);
+	DKV8::AttachFunction("DK_TurnOnMonitor", DKCefV8::TurnOnMonitor);
 	DKV8::AttachFunction("DK_VirtualMemory", DKCefV8::VirtualMemory);
 	DKV8::AttachFunction("DK_VirtualMemoryUsed", DKCefV8::VirtualMemoryUsed);
 	DKV8::AttachFunction("DK_VirtualMemoryUsedByApp", DKCefV8::VirtualMemoryUsedByApp);
-	DKV8::AttachFunction("DK_PhysicalMemory", DKCefV8::PhysicalMemory);
-	DKV8::AttachFunction("DK_PhysicalMemoryUsed", DKCefV8::PhysicalMemoryUsed);
-	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
-	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
-	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
+	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
@@ -55,9 +58,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 
-	DKV8::AttachFunction("DK_TurnOffMonitor", DKCefV8::TurnOffMonitor);
-	DKV8::AttachFunction("DK_TurnOnMonitor", DKCefV8::TurnOnMonitor);
-	DKV8::AttachFunction("DK_LowPowerMonitor", DKCefV8::LowPowerMonitor);
 	return true;
 }
 
