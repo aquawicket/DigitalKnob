@@ -52,9 +52,10 @@ bool DKJS::Init()
 	
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep);
 	DKDuktape::AttachFunction("DK_CallFunc", DKJS::CallFunc);
-	DKDuktape::AttachFunction("DK_SetVolume", DKJS::SetVolume);
 	DKDuktape::AttachFunction("DK_ClearEvents", DKJS::ClearEvents);
 	DKDuktape::AttachFunction("DK_ClickImage", DKJS::ClickImage);
+	DKDuktape::AttachFunction("DK_CpuUsed", DKJS::CpuUsed);
+	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKJS::CpuUsedByApp);
 	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash);
 	DKDuktape::AttachFunction("DK_DoFrame", DKJS::DoFrame);
 	DKDuktape::AttachFunction("DK_DoubleClick", DKJS::DoubleClick);
@@ -66,7 +67,9 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetData", DKJS::GetData);
 	DKDuktape::AttachFunction("DK_GetDate", DKJS::GetDate);
 	DKDuktape::AttachFunction("DK_GetEvents", DKJS::GetEvents);
+	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
 	DKDuktape::AttachFunction("DK_GetFramerate", DKJS::GetFramerate);
+	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
 	DKDuktape::AttachFunction("DK_GetId", DKJS::GetId);
 	DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript);
 	DKDuktape::AttachFunction("DK_GetKey", DKJS::GetKey);
@@ -79,6 +82,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList);
 	DKDuktape::AttachFunction("DK_GetScreenHeight", DKJS::GetScreenHeight);
 	DKDuktape::AttachFunction("DK_GetScreenWidth", DKJS::GetScreenWidth);
+	DKDuktape::AttachFunction("DK_GetTicks", DKJS::GetTicks);
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime);
 	DKDuktape::AttachFunction("DK_GetType", DKJS::GetType);
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername);
@@ -92,8 +96,12 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown);
 	DKDuktape::AttachFunction("DK_LeftClick", DKJS::LeftClick);
 	DKDuktape::AttachFunction("DK_LogGuiConsole", DKJS::LogGuiConsole);
+	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKJS::LowPowerMonitor);
 	DKDuktape::AttachFunction("DK_MessageBox", DKJS::MessageBox);
 	DKDuktape::AttachFunction("DK_MouseToImage", DKJS::MouseToImage);
+	DKDuktape::AttachFunction("DK_PhysicalMemory", DKJS::PhysicalMemory);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKJS::PhysicalMemoryUsed);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
 	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey);
 	DKDuktape::AttachFunction("DK_PrintFunctions", DKJS::PrintFunctions);
 	DKDuktape::AttachFunction("DK_ReleaseKey", DKJS::ReleaseKey);
@@ -106,30 +114,20 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_SetCursorPos", DKJS::SetCursorPos);
 	DKDuktape::AttachFunction("DK_SetFramerate", DKJS::SetFramerate);
 	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog);
+	DKDuktape::AttachFunction("DK_SetVolume", DKJS::SetVolume);
 	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole);
 	DKDuktape::AttachFunction("DK_Sleep", DKJS::Sleep);
 	DKDuktape::AttachFunction("DK_StopPropagation", DKJS::StopPropagation);
 	DKDuktape::AttachFunction("DK_StrokeKey", DKJS::StrokeKey);
 	DKDuktape::AttachFunction("DK_System", DKJS::System);
+	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
+	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
 	DKDuktape::AttachFunction("DK_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
-	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
-	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
-	DKDuktape::AttachFunction("DK_GetTicks", DKJS::GetTicks);
-	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
-
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsedByApp", DKJS::VirtualMemoryUsedByApp);
-	DKDuktape::AttachFunction("DK_PhysicalMemory", DKJS::PhysicalMemory);
-	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKJS::PhysicalMemoryUsed);
-	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
-	DKDuktape::AttachFunction("DK_CpuUsed", DKJS::CpuUsed);
-	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKJS::CpuUsedByApp);
-
-	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
-	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
-	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKJS::LowPowerMonitor);
+	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
 	return true;
 }
 
@@ -275,10 +273,6 @@ int DKJS::_DKSendEvent(duk_context* ctx)
 	return 1;
 }
 
-
-
-
-
 /////////////////////////////////////////
 int DKJS::_DKLoadPlugin(duk_context* ctx)
 {
@@ -286,6 +280,7 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 	DKPlugins::LoadPlugin(file);
 	return 1;
 }
+
 
 
 
