@@ -18,13 +18,14 @@ public:
 	bool Init();
 	bool End();
 	
-	void Process();
-	static void SetIcon(const DKString& file);
-	static DKString GetIcon();
-	static DKString icon;
-	static void AddItem(const DKString& name, int id);
+	static bool AddItem(const DKString& name, int& id);
+	static bool GetIcon(DKString& file);
+	static bool SetIcon(const DKString& file);
 	static bool SetTooltip(const DKString& string);
 	static bool ShowBalloon(const DKString& string/*, int seconds*/);
+	void Process();
+
+	static DKString icon;
 
 private:
 #ifdef WIN32

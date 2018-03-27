@@ -67,46 +67,36 @@ bool DKTray::End()
 	return true;
 }
 
-//////////////////////
-void DKTray::Process()
+
+
+///////////////////////////////////////////////////
+bool DKTray::AddItem(const DKString& name, int& id)
 {
+	DKLog("DKTray::AddItem("+name+")\n", DKDEBUG);
 #ifdef WIN32
-    //Process Tray Icon Messages
-    MSG msg;
-	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
-	if(msg.message == WM_COMMAND){
-		PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+	TrayIcon.AddItem(name, id);
 #endif
+	return true;
+}
+
+////////////////////////////////////
+bool DKTray::GetIcon(DKString& file)
+{
+	file = icon;
+	return true;
 }
 
 //////////////////////////////////////////
-void DKTray::SetIcon(const DKString& file)
+bool DKTray::SetIcon(const DKString& file)
 {
 #ifdef WIN32
 	icon = file;
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	TrayIcon.SetIcon(hIcon);
+	return true;
 #endif
-}
-
-//////////////////////////
-DKString DKTray::GetIcon()
-{
-	return icon;
-}
-
-//////////////////////////////////////////////////
-void DKTray::AddItem(const DKString& name, int id)
-{
-	//TODO
-	DKLog("DKTray::AddItem("+name+")\n", DKDEBUG);
-#ifdef WIN32
-	TrayIcon.AddItem(name, id);
-#endif
-	return;
+	DKLog("DKTray::SetIcon(): not implemented on this system\n", DKWARN);
+	return false;
 }
 
 ///////////////////////////////////////////////
@@ -131,6 +121,23 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 #endif
 	return false;
 }
+
+//////////////////////
+void DKTray::Process()
+{
+#ifdef WIN32
+    //Process Tray Icon Messages
+    MSG msg;
+	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
+	if(msg.message == WM_COMMAND){
+		PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+#endif
+}
+
+
 
 
 
