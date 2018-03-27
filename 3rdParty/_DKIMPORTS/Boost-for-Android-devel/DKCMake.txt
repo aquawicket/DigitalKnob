@@ -1,5 +1,5 @@
-DKDEPEND(android-ndk-r10d)
-##DKDEPEND(android-ndk-r10e)
+##DKDEPEND(android-ndk-r10d)
+DKDEPEND(android-ndk-r10e)
 
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
