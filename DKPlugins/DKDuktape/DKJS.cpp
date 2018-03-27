@@ -1,3 +1,5 @@
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
@@ -823,6 +825,102 @@ int DKJS::PhysicalMemoryUsed(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////////
+int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
+{
+	unsigned int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
+	duk_push_number(ctx, physicalMemory);
+	return 1;
+}
+
+////////////////////////////////////
+int DKJS::PressKey(duk_context* ctx)
+{
+	int key = duk_require_int(ctx, 0);
+	if(!DKUtil::PressKey(key)){
+		return 0;
+	}
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKJS::PrintFunctions(duk_context* ctx)
+{
+	DKLog("\n**** Duktape Functions ****\n", DKINFO);
+	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
+		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
+	}
+	return 1;
+}
+
+//////////////////////////////////////
+int DKJS::ReleaseKey(duk_context* ctx)
+{
+	int key = duk_require_int(ctx, 0);
+	if(!DKUtil::ReleaseKey(key)){
+		return 0;
+	}
+	return 1;
+}
+
+//////////////////////////////////
+int DKJS::Reload(duk_context* ctx)
+{
+	DKDuktape::Reload();
+	return 1;
+}
+
+//////////////////////////////////////
+int DKJS::RightClick(duk_context* ctx)
+{
+	if(!DKUtil::RightClick()){ return 0; }
+	return 1;
+}
+
+///////////////////////////////
+int DKJS::Run(duk_context* ctx)
+{
+	DKString command = duk_require_string(ctx, 0);
+	DKString params = duk_require_string(ctx, 1);
+	if(!DKUtil::Run(command, params)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::RunJavascript(duk_context* ctx)
+{
+	DKString code = duk_require_string(ctx, 0);
+	DKLog("RunJavascript("+code+")\n", DKDEBUG);
+	duk_eval_string(DKDuktape::ctx, code.c_str());
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::SetClipboard(duk_context* ctx)
+{
+	DKString string = duk_require_string(ctx, 0);
+	if(!DKUtil::SetClipboard(string)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////
+int DKJS::SetClipboardFiles(duk_context* ctx)
+{
+	DKString filelist = duk_require_string(ctx, 0);
+	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::SetCursorPos(duk_context* ctx)
+{
+	int x = duk_require_int(ctx, 0);
+	int y = duk_require_int(ctx, 1);
+	if(!DKUtil::SetMousePos(x, y)){ return 0; }
+	return 1;
+}
+
 ////////////////////////////////////////
 int DKJS::SetFramerate(duk_context* ctx)
 {
@@ -831,10 +929,67 @@ int DKJS::SetFramerate(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
-int DKJS::Reload(duk_context* ctx)
+/////////////////////////////////////
+int DKJS::SetVolume(duk_context* ctx)
 {
-	DKDuktape::Reload();
+	double volume = (double)duk_require_number(ctx, 0);
+	if(!DKUtil::SetVolume(volume)){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////
+int DKJS::ShowConsole(duk_context* ctx)
+{
+#ifdef WIN32
+	HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_RESTORE);
+#endif 
+	return 1;
+}
+
+/////////////////////////////////
+int DKJS::Sleep(duk_context* ctx)
+{
+	int milliseconds = duk_require_int(ctx, 0);
+	if(!DKUtil::Sleep(milliseconds)){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKJS::StopPropagation(duk_context* ctx)
+{
+	return 0;
+}
+
+/////////////////////////////////////
+int DKJS::StrokeKey(duk_context* ctx)
+{
+	int key = duk_require_int(ctx, 0);
+	if(!DKUtil::StrokeKey(key)){
+		return 0;
+	}
+	return 1;
+}
+
+//////////////////////////////////
+int DKJS::System(duk_context* ctx)
+{
+	DKString command = duk_require_string(ctx, 0);
+	if(!DKUtil::System(command)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKJS::TurnOffMonitor(duk_context* ctx)
+{
+	if(!DKUtil::TurnOffMonitor()){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::TurnOnMonitor(duk_context* ctx)
+{
+	if(!DKUtil::TurnOnMonitor()){ return 0; }
 	return 1;
 }
 
@@ -874,149 +1029,6 @@ int DKJS::Value(duk_context* ctx)
 
 }
 
-////////////////////////////////////////
-int DKJS::SetClipboard(duk_context* ctx)
-{
-	DKString string = duk_require_string(ctx, 0);
-	if(!DKUtil::SetClipboard(string)){ return 0; }
-	return 1;
-}
-
-/////////////////////////////////////////////
-int DKJS::SetClipboardFiles(duk_context* ctx)
-{
-	DKString filelist = duk_require_string(ctx, 0);
-	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::SetVolume(duk_context* ctx)
-{
-	double volume = (double)duk_require_number(ctx, 0);
-	if(!DKUtil::SetVolume(volume)){ return 0; }
-	return 1;
-}
-
-////////////////////////////////////////
-int DKJS::SetCursorPos(duk_context* ctx)
-{
-	int x = duk_require_int(ctx, 0);
-	int y = duk_require_int(ctx, 1);
-	if(!DKUtil::SetMousePos(x, y)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::RightClick(duk_context* ctx)
-{
-	if(!DKUtil::RightClick()){ return 0; }
-	return 1;
-}
-
-////////////////////////////////////////
-int DKJS::WaitForImage(duk_context* ctx)
-{
-	DKString file = duk_require_string(ctx, 0);
-	int timeout = duk_require_int(ctx, 1);
-	if(!!DKUtil::WaitForImage(file, timeout)){
-		return 0;
-	}
-	duk_push_true(ctx);
-	return 1;
-}
-
-/////////////////////////////////
-int DKJS::Sleep(duk_context* ctx)
-{
-	int milliseconds = duk_require_int(ctx, 0);
-	if(!DKUtil::Sleep(milliseconds)){ return 0; }
-	return 1;
-}
-
-/////////////////////////////////////////
-int DKJS::RunJavascript(duk_context* ctx)
-{
-	DKString code = duk_require_string(ctx, 0);
-	DKLog("RunJavascript("+code+")\n", DKDEBUG);
-	duk_eval_string(DKDuktape::ctx, code.c_str());
-	return 1;
-}
-
-///////////////////////////////
-int DKJS::Run(duk_context* ctx)
-{
-	DKString command = duk_require_string(ctx, 0);
-	DKString params = duk_require_string(ctx, 1);
-	if(!DKUtil::Run(command, params)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////
-int DKJS::System(duk_context* ctx)
-{
-	DKString command = duk_require_string(ctx, 0);
-	if(!DKUtil::System(command)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKJS::PrintFunctions(duk_context* ctx)
-{
-	DKLog("\n**** Duktape Functions ****\n", DKINFO);
-	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
-		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
-	}
-	return 1;
-}
-
-////////////////////////////////////
-int DKJS::PressKey(duk_context* ctx)
-{
-	int key = duk_require_int(ctx, 0);
-	if(!DKUtil::PressKey(key)){
-		return 0;
-	}
-	return 1;
-}
-
-//////////////////////////////////////
-int DKJS::ReleaseKey(duk_context* ctx)
-{
-	int key = duk_require_int(ctx, 0);
-	if(!DKUtil::ReleaseKey(key)){
-		return 0;
-	}
-	return 1;
-}
-
-/////////////////////////////////////
-int DKJS::StrokeKey(duk_context* ctx)
-{
-	int key = duk_require_int(ctx, 0);
-	if(!DKUtil::StrokeKey(key)){
-		return 0;
-	}
-	return 1;
-}
-
-///////////////////////////////////////
-int DKJS::ShowConsole(duk_context* ctx)
-{
-#ifdef WIN32
-	HWND consoleWindow = GetConsoleWindow();
-	ShowWindow(consoleWindow, SW_RESTORE);
-#endif 
-	return 1;
-}
-
-///////////////////////////////////////////
-int DKJS::StopPropagation(duk_context* ctx)
-{
-	return 0;
-}
-
-//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 /////////////////////////////////////////
 int DKJS::VirtualMemory(duk_context* ctx)
 {
@@ -1044,26 +1056,15 @@ int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////////
-int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
+////////////////////////////////////////
+int DKJS::WaitForImage(duk_context* ctx)
 {
-	unsigned int physicalMemory;
-	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
-	duk_push_number(ctx, physicalMemory);
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKJS::TurnOffMonitor(duk_context* ctx)
-{
-	if(!DKUtil::TurnOffMonitor()){ return 0; }
-	return 1;
-}
-
-/////////////////////////////////////////
-int DKJS::TurnOnMonitor(duk_context* ctx)
-{
-	if(!DKUtil::TurnOnMonitor()){ return 0; }
+	DKString file = duk_require_string(ctx, 0);
+	int timeout = duk_require_int(ctx, 1);
+	if(!!DKUtil::WaitForImage(file, timeout)){
+		return 0;
+	}
+	duk_push_true(ctx);
 	return 1;
 }
 
