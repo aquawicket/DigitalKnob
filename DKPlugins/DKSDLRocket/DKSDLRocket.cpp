@@ -29,7 +29,7 @@ bool DKSDLRocket::Init()
 	Rocket::Core::SetRenderInterface(Renderer);
     Rocket::Core::SetSystemInterface(SystemInterface);
 
-	DKSDLWindow::AddEventFunc(&DKSDLRocket::handle, this);
+	DKSDLWindow::AddEventFunc(&DKSDLRocket::Handle, this);
 	DKSDLWindow::AddDrawFunc(&DKSDLRocket::Draw, this);
 	return true;
 }
@@ -41,7 +41,7 @@ bool DKSDLRocket::End()
 }
 
 //////////////////////////////////////////
-bool DKSDLRocket::handle(SDL_Event *event)
+bool DKSDLRocket::Handle(SDL_Event *event)
 {
 	Rocket::Core::Element* hover;
 	switch(event->type){

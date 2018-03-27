@@ -20,10 +20,10 @@ public:
 	bool Init();
 	bool End();
 
-	bool handle(SDL_Event *event);
-	//void ProcessEvent(Rocket::Core::Event& event);
+	bool Handle(SDL_Event *event);
 	void Draw();
-
+	//void ProcessEvent(Rocket::Core::Event& event);
+	
 	DKSDLWindow* dkSdlWindow;
 	DKRocket* dkRocket;
 #ifdef ROCKET_SHELL_RENDER
