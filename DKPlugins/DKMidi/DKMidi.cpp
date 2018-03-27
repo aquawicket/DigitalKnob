@@ -25,39 +25,7 @@ bool DKMidi::End()
 	return true;
 }
 
-//////////////////////////
-bool DKMidi::PrintInputs()
-{
-	unsigned int nPorts = midiin->getPortCount();
-	if(nPorts == 0){
-		DKLog("No Input ports available!\n",DKERROR);
-		return false;
-	}
-	DKLog("\nMIDI Input Ports\n", DKINFO);
-	DKLog("----------------\n", DKINFO);
-	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiin->getPortName(i)+"\n", DKINFO);
-	}
-	DKLog("\n\n", DKINFO);
-	return true;
-}
 
-///////////////////////////
-bool DKMidi::PrintOutputs()
-{
-	unsigned int nPorts = midiout->getPortCount();
-	if(nPorts == 0){
-		DKLog("No Output ports available!\n",DKERROR);
-		return false;
-	}
-	DKLog("MIDI Output Ports\n", DKINFO);
-	DKLog("-----------------\n", DKINFO);
-	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiout->getPortName(i)+"\n", DKINFO);
-	}
-	DKLog("\n\n", DKINFO);
-	return true;
-}
 
 /////////////////////////////////////////////
 bool DKMidi::GetInputs(DKStringArray& inputs)
@@ -93,6 +61,40 @@ bool DKMidi::GetOutputs(DKStringArray& outputs)
 	return true;
 }
 
+//////////////////////////
+bool DKMidi::PrintInputs()
+{
+	unsigned int nPorts = midiin->getPortCount();
+	if(nPorts == 0){
+		DKLog("No Input ports available!\n",DKERROR);
+		return false;
+	}
+	DKLog("\nMIDI Input Ports\n", DKINFO);
+	DKLog("----------------\n", DKINFO);
+	for(unsigned int i=0; i<nPorts; ++i){
+		DKLog(midiin->getPortName(i)+"\n", DKINFO);
+	}
+	DKLog("\n\n", DKINFO);
+	return true;
+}
+
+///////////////////////////
+bool DKMidi::PrintOutputs()
+{
+	unsigned int nPorts = midiout->getPortCount();
+	if(nPorts == 0){
+		DKLog("No Output ports available!\n",DKERROR);
+		return false;
+	}
+	DKLog("MIDI Output Ports\n", DKINFO);
+	DKLog("-----------------\n", DKINFO);
+	for(unsigned int i=0; i<nPorts; ++i){
+		DKLog(midiout->getPortName(i)+"\n", DKINFO);
+	}
+	DKLog("\n\n", DKINFO);
+	return true;
+}
+
 //////////////////////////////////////////////
 bool DKMidi::ToggleInput(const DKString& name)
 {
@@ -122,6 +124,7 @@ bool DKMidi::ToggleOutput(const DKString& name)
 	}
 	return false;
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 void DKMidi::midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
