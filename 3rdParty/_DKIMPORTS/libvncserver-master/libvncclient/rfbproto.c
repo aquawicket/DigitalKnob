@@ -571,10 +571,10 @@ HandleVncAuth(rfbClient *client)
       for (i = strlen(passwd); i >= 0; i--) {
         passwd[i] = '\0';
       }
-#if defined(WIN32) || defined(WIN64)
+#if defined(WIN32) || defined(WIN64) || defined(LINUX)
 	  passwd=NULL;
-#endif	  
       free(passwd);
+#endif	
 
       if (!WriteToRFBServer(client, (char *)challenge, CHALLENGESIZE)) return FALSE;
     }
