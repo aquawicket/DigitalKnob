@@ -571,7 +571,9 @@ HandleVncAuth(rfbClient *client)
       for (i = strlen(passwd); i >= 0; i--) {
         passwd[i] = '\0';
       }
+#if defined(WIN32) || defined(WIN64)
 	  passwd=NULL;
+#endif	  
       free(passwd);
 
       if (!WriteToRFBServer(client, (char *)challenge, CHALLENGESIZE)) return FALSE;
