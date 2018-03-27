@@ -174,7 +174,8 @@ int DKCefJS::Focused(duk_context* ctx)
 int DKCefJS::GetBrowsers(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	int num = DKCef::Get(id)->GetBrowsers();
+	int num;
+	DKCef::Get(id)->GetBrowsers(num);
 	duk_push_int(ctx, num);
 	return 1;
 }
@@ -183,7 +184,8 @@ int DKCefJS::GetBrowsers(duk_context* ctx)
 int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	int num = DKCef::Get(id)->GetCurrentBrowser();
+	int num;
+	DKCef::Get(id)->GetCurrentBrowser(num);
 	duk_push_int(ctx, num);
 	return 1;
 }
