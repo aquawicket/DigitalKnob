@@ -592,7 +592,8 @@ int DKJS::GetValue(duk_context* ctx)
 	toStringArray(arry, evt, ",");
 	if(arry.size() < 3){ 
 		if(DKValid("DKWidget,DKWidget0")){
-			DKString rval = DKDuktape::RunJavascript("DKWidget_GetValue(\""+evt+"\");");
+			DKString rval;
+			DKDuktape::RunJavascript("DKWidget_GetValue(\""+evt+"\");", rval);
 			if(rval.empty()){
 				return 0;
 			}

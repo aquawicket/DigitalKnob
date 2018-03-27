@@ -215,7 +215,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 }
 
 ////////////////////////
-void DKDuktape::Reload()
+bool DKDuktape::Reload()
 {
 	DKEvent::events.clear();
 	filelist.clear();
@@ -244,19 +244,20 @@ void DKDuktape::Reload()
 
     DKString app = DKFile::local_assets+"app.js";
 	LoadFile(app);
+	return true;
 }
 
-///////////////////////////////////////////////////////
-DKString DKDuktape::RunJavascript(const DKString& code)
+///////////////////////////////////////////////////////////////////
+bool DKDuktape::RunJavascript(const DKString& code, DKString& rval)
 {
 	DKLog("RunJavascript("+code+")\n", DKINFO);
 	duk_eval_string(DKDuktape::ctx, code.c_str());
-	DKString rval = duk_get_string(ctx, -1);
+	rval = duk_get_string(ctx, -1);
 	if(!rval.empty()){
-		DKLog("DKDuktape::RunJavascript(" + code + "): rval = " + rval + "\n", DKINFO);
-		return rval;
+		DKLog("DKDuktape::RunJavascript(" + code + "): rval = "+rval+"\n", DKINFO);
+		return true;
 	}
-	return "";
+	return true;
 }
 
 

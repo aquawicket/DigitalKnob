@@ -18,8 +18,8 @@ public:
 	static bool FileLoaded(const DKString& path);
 	static bool LoadFile(const DKString& path);
 	static bool OnEvent(DKEvent* event);
-	static void Reload();
-	static DKString RunJavascript(const DKString& code);
+	static bool Reload();
+	static bool RunJavascript(const DKString& code, DKString& rval);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);
