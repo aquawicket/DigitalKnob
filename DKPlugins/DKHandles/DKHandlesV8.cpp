@@ -6,7 +6,6 @@
 bool DKHandlesV8::Init()
 {
 	DKLog("DKHandlesV8::Init()\n", DKDEBUG);
-	//DKV8::AttachFunction("Test", DKHandlesV8::Test);
 	
 	DKV8::AttachFunction("DKHandles_Click", DKHandlesV8::Click);
 	DKV8::AttachFunction("DKHandles_CurrentHandle", DKHandlesV8::CurrentHandle);
@@ -37,17 +36,6 @@ bool DKHandlesV8::End()
 	return true;
 }
 
-/*
-//////////////////////////////////////////////////////
-bool DKHandlesV8::Test(CefArgs args, CefReturn retval)
-{
-	DKLog("DKHandlesV8::Test(CefArgs,CefReturn)\n", DKDEBUG);
-	DKString data = args[0]->GetStringValue();
-	DKString result = data;
-	retval = CefV8Value::CreateString(result);
-	return true;
-}
-*/
 
 
 ///////////////////////////////////////////////////////
@@ -61,50 +49,11 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
+///////////////////////////////////////////////////////////////
+bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
-	DKString window = args->GetString(0);
-	DKString handle = args->GetString(1);
-	DKString data = args->GetString(2);
-
-	if(!DKHandles::Instance("DKHandles")->SendHook(window, handle, data)){
-		return false;
-	}
-	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
-{
-	DKString value;
-	if(!DKHandles::Instance("DKHandles")->GetString(value)){
-		return false;
-	}
-	retval->SetString(0, value);
-	return true;
-}
-
-//////////////////////////////////////////////////////////
-bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
-{
-	DKString value = args->GetString(0);
-	if(!DKHandles::Instance("DKHandles")->SetString(value)){
-		retval->SetBool(0, false);
-		return false;
-	}
-	retval->SetBool(0, true);
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
-{
-	if(!DKHandles::Instance("DKHandles")->ShowWindow(args->GetInt(0))){
-		retval->SetBool(0, false);
-		return false;
-	}
-	retval->SetBool(0, true);
+	DKString handle = toString(DKHandles::Instance("DKHandles")->currentHandle);
+	retval->SetString(0, handle);
 	return true;
 }
 
@@ -116,17 +65,6 @@ bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 		return false;
 	}
 	retval->SetString(0, clas);
-	return true;
-}
-
-////////////////////////////////////////////////////////
-bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
-{
-	int top;
-	if(!DKHandles::Instance("DKHandles")->GetTop(top)){
-		return false;
-	}
-	retval->SetInt(0, top);
 	return true;
 }
 
@@ -150,6 +88,72 @@ bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 		return false;
 	}
 	retval->SetString(0, parent);
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
+{
+	int top;
+	if(!DKHandles::Instance("DKHandles")->GetTop(top)){
+		return false;
+	}
+	retval->SetInt(0, top);
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
+{
+	DKString value;
+	if(!DKHandles::Instance("DKHandles")->GetString(value)){
+		return false;
+	}
+	retval->SetString(0, value);
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
+{
+	DKStringArray windows;
+	if(!DKHandles::Instance("DKHandles")->GetWindows(windows)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	DKString list = toString(windows, ",");
+	retval->SetString(0, list);
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
+{
+	if(!DKHandles::Instance("DKHandles")->NextHandle()){
+		return false;
+	}
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
+{
+	if(!DKHandles::Instance("DKHandles")->PrevHandle()){
+		return false;
+	}
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
+{
+	DKString window = args->GetString(0);
+	DKString handle = args->GetString(1);
+	DKString data = args->GetString(2);
+
+	if(!DKHandles::Instance("DKHandles")->SendHook(window, handle, data)){
+		return false;
+	}
 	return true;
 }
 
@@ -182,28 +186,15 @@ bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
+//////////////////////////////////////////////////////////
+bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->PrevHandle()){
+	DKString value = args->GetString(0);
+	if(!DKHandles::Instance("DKHandles")->SetString(value)){
+		retval->SetBool(0, false);
 		return false;
 	}
-	return true;
-}
-
-////////////////////////////////////////////////////////////
-bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
-{
-	if(!DKHandles::Instance("DKHandles")->NextHandle()){
-		return false;
-	}
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////
-bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
-{
-	DKHandles::Instance("DKHandles")->ToggleHighlight();
+	retval->SetBool(0, true);
 	return true;
 }
 
@@ -221,31 +212,9 @@ bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
+bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 {
-	DKStringArray windows;
-	if(!DKHandles::Instance("DKHandles")->GetWindows(windows)){
-		retval->SetBool(0, false);
-		return false;
-	}
-	DKString list = toString(windows, ",");
-	retval->SetString(0, list);
-	return true;
-}
-
-///////////////////////////////////////////////////////////////
-bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
-{
-	DKString handle = toString(DKHandles::Instance("DKHandles")->currentHandle);
-	retval->SetString(0, handle);
-	return true;
-}
-
-//////////////////////////////////////////////////////////////
-bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
-{
-	DKString window = args->GetString(0);
-	if(!DKHandles::Instance("DKHandles")->WindowExists(window)){
+	if(!DKHandles::Instance("DKHandles")->ShowWindow(args->GetInt(0))){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -253,16 +222,10 @@ bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
+/////////////////////////////////////////////////////////////////
+bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
 {
-	DKString window = args->GetString(0);
-	int timeout = args->GetInt(1);
-	if(!DKHandles::Instance("DKHandles")->WaitForWindow(window, timeout)){
-		retval->SetBool(0, false);
-		return false;
-	}
-	retval->SetBool(0, true);
+	DKHandles::Instance("DKHandles")->ToggleHighlight();
 	return true;
 }
 
@@ -286,6 +249,31 @@ bool DKHandlesV8::WaitForHandle(CefArgs args, CefReturn retval)
 			retval->SetBool(0, false);
 			return false;
 		}
+	}
+	retval->SetBool(0, true);
+	return true;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
+{
+	DKString window = args->GetString(0);
+	int timeout = args->GetInt(1);
+	if(!DKHandles::Instance("DKHandles")->WaitForWindow(window, timeout)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetBool(0, true);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
+{
+	DKString window = args->GetString(0);
+	if(!DKHandles::Instance("DKHandles")->WindowExists(window)){
+		retval->SetBool(0, false);
+		return false;
 	}
 	retval->SetBool(0, true);
 	return true;

@@ -11,7 +11,6 @@ class DKHandlesV8 : public DKObjectT<DKHandlesV8>
 public:
 	bool Init();
 	bool End();
-	//static bool Test(CefArgs args, CefReturn retval);
 	
 	static bool Click(CefArgs args, CefReturn retval);
 	static bool CurrentHandle(CefArgs args, CefReturn retval);
