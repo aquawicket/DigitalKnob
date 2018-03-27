@@ -12,11 +12,6 @@ public:
 	bool Init();
 	bool End();
 
-	static bool TestInt(CefArgs args, CefReturn retval);
-	static bool TestString(CefArgs args, CefReturn retval);
-	static bool TestReturnInt(CefArgs args, CefReturn retval);
-	static bool TestReturnString(CefArgs args, CefReturn retval);
-
 	static bool ImageToText(CefArgs args, CefReturn retval);
 };
 

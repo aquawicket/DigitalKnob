@@ -12,7 +12,7 @@ bool DKMySqlJS::Init()
 	return true;
 }
 
-/////////////////////////////////
+////////////////////////////////////////
 int DKMySqlJS::Connect(duk_context* ctx)
 {
 	DKString host = duk_require_string(ctx, 0);
@@ -23,7 +23,7 @@ int DKMySqlJS::Connect(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
+/////////////////////////////////////////
 int DKMySqlJS::Database(duk_context* ctx)
 {
 	DKString name = duk_require_string(ctx, 0);
@@ -31,7 +31,7 @@ int DKMySqlJS::Database(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////
+//////////////////////////////////////
 int DKMySqlJS::Query(duk_context* ctx)
 {
 	DKString query = duk_require_string(ctx, 0);
