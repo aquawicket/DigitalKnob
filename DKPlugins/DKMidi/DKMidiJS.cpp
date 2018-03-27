@@ -14,7 +14,7 @@ bool DKMidiJS::Init()
 	return true;
 }
 
-//////////////////////////////////////
+/////////////////////////////////////////////
 int DKMidiJS::GetMidiInputs(duk_context* ctx)
 {
 	DKMidi::Instance("DKMidi");
@@ -25,7 +25,7 @@ int DKMidiJS::GetMidiInputs(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////
+//////////////////////////////////////////////
 int DKMidiJS::GetMidiOutputs(duk_context* ctx)
 {
 	DKMidi::Instance("DKMidi");
@@ -37,26 +37,6 @@ int DKMidiJS::GetMidiOutputs(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKMidiJS::ToggleMidiInput(duk_context* ctx)
-{
-	DKString input = duk_require_string(ctx, 0);
-	if(DKMidi::Instance("DKMidi")->ToggleInput(input)){
-		return 1;
-	}
-	return 0;
-}
-
-/////////////////////////////////////////
-int DKMidiJS::ToggleMidiOutput(duk_context* ctx)
-{
-	DKString output = duk_require_string(ctx, 0);
-	if(DKMidi::Instance("DKMidi")->ToggleOutput(output)){
-		return 1;
-	}
-	return 0;
-}
-
-/////////////////////////////////
 int DKMidiJS::SendMidi(duk_context* ctx)
 {
 	int var1 = duk_require_int(ctx, 0);
@@ -71,5 +51,24 @@ int DKMidiJS::SendMidi(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////
+int DKMidiJS::ToggleMidiInput(duk_context* ctx)
+{
+	DKString input = duk_require_string(ctx, 0);
+	if(DKMidi::Instance("DKMidi")->ToggleInput(input)){
+		return 1;
+	}
+	return 0;
+}
+
+////////////////////////////////////////////////
+int DKMidiJS::ToggleMidiOutput(duk_context* ctx)
+{
+	DKString output = duk_require_string(ctx, 0);
+	if(DKMidi::Instance("DKMidi")->ToggleOutput(output)){
+		return 1;
+	}
+	return 0;
+}
 
 #endif //USE_DKDuktape
