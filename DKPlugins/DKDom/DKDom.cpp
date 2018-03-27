@@ -16,6 +16,7 @@ bool DKDom::End()
 	return true;
 }
 
+//////////////////////////////
 ElementObject::ElementObject()
 {
 	duk_push_string(DKDuktape::ctx, "Property");
@@ -26,17 +27,23 @@ ElementObject::ElementObject()
 	duk_put_prop_string(DKDuktape::ctx, -2, "Method");
 }
 
-int ElementObject::duk_method(duk_context *ctx) {
+///////////////////////////////////////////////
+int ElementObject::duk_method(duk_context *ctx)
+{
 	//MethodToBind();
 	return 0; //no args and no return value, no need to act on JS stack
 }
 
-int ElementObject::duk_setter(duk_context *ctx) {
+///////////////////////////////////////////////
+int ElementObject::duk_setter(duk_context *ctx)
+{
 	property = toString(duk_get_string(ctx, 0)); //first arg to String
 	return 0;
 }
 
-duk_ret_t ElementObject::duk_getter(duk_context *ctx) {
+/////////////////////////////////////////////////////
+duk_ret_t ElementObject::duk_getter(duk_context *ctx)
+{
 	duk_push_string(ctx, property.c_str());
 	return 1; //we pushed one return value
 }
