@@ -7,7 +7,9 @@
 #include "SDL_mixer.h"
 #include "DK/DK.h"
 
-struct track{
+////////////
+struct track
+{
 	DKString file;
 	Mix_Music* snd;
 	int position;
@@ -20,17 +22,17 @@ public:
 	bool Init();
 	bool End();
 
+	bool GetDuration(const void* input, void* output);
+	bool GetTime(const void* input, void* output);
 	bool GetVolume(const void* input, void* output);
 	bool Mute(const void* input, void* output);
 	bool OpenMusic(const void* input, void* output);
 	bool Pause(const void* input, void* output);
 	bool PlaySound(const void* input, void* output);
 	bool Resume(const void* input, void* output);
+	bool SetTime(const void* input, void* output);
 	bool SetVolume(const void* input, void* output);
 	bool UnMute(const void* input, void* output);
-	bool GetTime(const void* input, void* output);
-	bool SetTime(const void* input, void* output);
-	bool GetDuration(const void* input, void* output);
 	void Process();
 
 	int _volume;
@@ -42,4 +44,3 @@ public:
 REGISTER_OBJECT(DKSDLAudio, true);
 
 #endif //DKSDLAudio_H
-
