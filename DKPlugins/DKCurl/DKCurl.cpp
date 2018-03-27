@@ -29,6 +29,8 @@ bool DKCurl::End()
 	return true;
 }
 
+
+
 ///////////////////////
 bool DKCurl::CurlInit()
 {
@@ -42,14 +44,6 @@ bool DKCurl::CurlInit()
 		return false;
 	}
 	return true;
-}
-
-////////////////////////////////////////////
-bool DKCurl::FileExists(const DKString& url)
-{
-	if(has(url,"ftp.") && FtpFileExists(url)){return true;}
-	if(HttpFileExists(url)){ return true; }
-	return false;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -71,12 +65,43 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 	return false;
 }
 
-//////////////////////////////////////////////////////
-bool DKCurl::FileSize(const DKString& url, long& size)
+/////////////////////////////////////////////////////////////////////////////////////////////
+bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKString& output)
 {
-	if(has(url,"http://") && HttpFileSize(url, size)){return true;}
-	if(has(url,"ftp.") && FtpFileSize(url, size)){return true;}
-	return false;
+	// TODO: need a working facebook login 
+
+	CurlInit();
+
+	DKString curlBuffer = "";
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToBuffer);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
+
+	curl_easy_setopt(curl, CURLOPT_URL, "https://www.facebook.com/login.php");
+	//curl_easy_setopt(curl, CURLOPT_POSTFIELDS,"email="+email+"&pass="+password+"&login=Login");
+	curl_easy_setopt(curl, CURLOPT_POST, 1);
+	curl_easy_setopt(curl, CURLOPT_HEADER, 0);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
+	//curl_easy_setopt(curl, CURLOPT_COOKIESESSION, false);
+	
+
+	//curl_easy_setopt(curl, CURLOPT_COOKIEJAR, DKApp::datapath+"cookies.txt");
+	//curl_easy_setopt(curl, CURLOPT_COOKIEFILE, DKApp::datapath+"cookies.txt");
+
+	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.3) Gecko/20070309 Firefox/2.0.0.3");
+	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
+	curl_easy_setopt(curl, CURLOPT_REFERER, "http://www.facebook.com");
+	
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+
+	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code	
+	if(res != CURLE_OK){ 
+		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		return false; 
+	}
+
+	output = curlBuffer;
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -85,6 +110,136 @@ bool DKCurl::FileDate(const DKString& url, DKString& filedate)
 	if(has(url,"http://") && HttpFileDate(url, filedate)){return true;}
 	if(has(url,"ftp.") && FtpFileDate(url, filedate)){return true;}
 	return false;
+}
+
+////////////////////////////////////////////
+bool DKCurl::FileExists(const DKString& url)
+{
+	if(has(url,"ftp.") && FtpFileExists(url)){return true;}
+	if(HttpFileExists(url)){ return true; }
+	return false;
+}
+
+//////////////////////////////////////////////////////
+bool DKCurl::FileSize(const DKString& url, long& size)
+{
+	if(has(url,"http://") && HttpFileSize(url, size)){return true;}
+	if(has(url,"ftp.") && FtpFileSize(url, size)){return true;}
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKString& pass, const DKString port)
+{
+	ftpServer.clear();
+	ftpName.clear();
+	ftpPass.clear();
+	ftpPort.clear();
+
+	CurlInit();
+	if(curl){
+		//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+		DKString login = name+":"+pass;
+		curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
+		curl_easy_setopt(curl, CURLOPT_URL, server.c_str());
+		CURLcode res = curl_easy_perform(curl);
+		
+		if(res == CURLE_OK){
+			ftpServer = server;
+			ftpName = name;
+			ftpPass = pass;
+			ftpPort = port;
+			DKLog("FTP Connected \n", DKINFO);
+		    return true;
+		}
+		DKLog("Could not connect to FTP \n", DKERROR);
+		return false;
+	}
+
+	DKLog("curl invalid \n", DKERROR);
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////
+bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
+{
+	//if(!FtpFileExists(url)){
+	//	DKLog("url not found \n", DKERROR);
+	//	return false;
+	//}
+
+	FILE *fp = fopen(dest.c_str(),"wb");
+	if(!fp){ 
+		DKLog("DKCurl::FtpDownload() *fp invalid \n", DKERROR);
+		return false; 
+	}
+
+	DKLog("Downloading "+url+"...\n", DKINFO);
+ 
+	CurlInit();
+	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	DKString login = ftpName+":"+ftpPass;
+	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
+	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+	CURLcode res = curl_easy_perform(curl);
+	fclose(fp);
+ 
+	if(res != CURLE_OK){ 
+		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
+		return false; 
+	}
+	if(!DKFile::PathExists(dest)){
+		DKLog("Download Failed: "+dest+"\n", DKERROR);
+		return false;
+	}
+
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////
+bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
+{
+	//if(!FtpFileExists(url)){
+	//	DKLog("url not found\n", DKERROR);
+	//	return false;
+	//}
+
+	CurlInit();
+	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	DKString login = ftpName+":"+ftpPass;
+	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
+	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
+	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
+	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
+ 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
+	if(res != CURLE_OK){ 
+		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		return false; 
+	}
+
+	const time_t filetime = 0;
+	res = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
+	
+	struct tm* clock;
+	clock = localtime(&filetime);
+	DKString month = toString(clock->tm_mon);
+	DKString day = toString(clock->tm_mday);
+	DKString hour = toString(clock->tm_hour);
+	DKString minute = toString(clock->tm_min);
+	DKString second = toString(clock->tm_sec);
+	DKString year = toString(clock->tm_year + 1900);
+	Pad(4, '0', year);
+	Pad(2, '0', month);
+	Pad(2, '0', day);
+	Pad(2, '0', hour);
+	Pad(2, '0', minute);
+	Pad(2, '0', second);
+	filedate = year + month + day + hour + minute + second;
+	//DKString(filedate+"\n");
+	return true;
 }
 
 ////////////////////////////////////////////////
@@ -269,39 +424,6 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 	return true;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKString& pass, const DKString port)
-{
-	ftpServer.clear();
-	ftpName.clear();
-	ftpPass.clear();
-	ftpPort.clear();
-
-	CurlInit();
-	if(curl){
-		//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-		DKString login = name+":"+pass;
-		curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
-		curl_easy_setopt(curl, CURLOPT_URL, server.c_str());
-		CURLcode res = curl_easy_perform(curl);
-		
-		if(res == CURLE_OK){
-			ftpServer = server;
-			ftpName = name;
-			ftpPass = pass;
-			ftpPort = port;
-			DKLog("FTP Connected \n", DKINFO);
-		    return true;
-		}
-		DKLog("Could not connect to FTP \n", DKERROR);
-		return false;
-	}
-
-	DKLog("curl invalid \n", DKERROR);
-	return false;
-}
-
 ///////////////////////////////////////////////
 bool DKCurl::FtpFileExists(const DKString& url)
 {
@@ -325,44 +447,6 @@ bool DKCurl::FtpFileExists(const DKString& url)
 
 	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
 	return false;
-}
-
-///////////////////////////////////////////////////////////////////
-bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
-{
-	//if(!FtpFileExists(url)){
-	//	DKLog("url not found \n", DKERROR);
-	//	return false;
-	//}
-
-	FILE *fp = fopen(dest.c_str(),"wb");
-	if(!fp){ 
-		DKLog("DKCurl::FtpDownload() *fp invalid \n", DKERROR);
-		return false; 
-	}
-
-	DKLog("Downloading "+url+"...\n", DKINFO);
- 
-	CurlInit();
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	DKString login = ftpName+":"+ftpPass;
-	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-	CURLcode res = curl_easy_perform(curl);
-	fclose(fp);
- 
-	if(res != CURLE_OK){ 
-		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
-		return false; 
-	}
-	if(!DKFile::PathExists(dest)){
-		DKLog("Download Failed: "+dest+"\n", DKERROR);
-		return false;
-	}
-
-	return true;
 }
 
 /////////////////////////////////////////////////////////////////
@@ -440,89 +524,6 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 bool DKCurl::FtpFileSize(const DKString& url, long& size)
 {
 	return false;
-}
-
-/////////////////////////////////////////////////////////////////
-bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
-{
-	//if(!FtpFileExists(url)){
-	//	DKLog("url not found\n", DKERROR);
-	//	return false;
-	//}
-
-	CurlInit();
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
-	DKString login = ftpName+":"+ftpPass;
-	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
-	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
-	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
-	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
- 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
-	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
-		return false; 
-	}
-
-	const time_t filetime = 0;
-	res = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
-	
-	struct tm* clock;
-	clock = localtime(&filetime);
-	DKString month = toString(clock->tm_mon);
-	DKString day = toString(clock->tm_mday);
-	DKString hour = toString(clock->tm_hour);
-	DKString minute = toString(clock->tm_min);
-	DKString second = toString(clock->tm_sec);
-	DKString year = toString(clock->tm_year + 1900);
-	Pad(4, '0', year);
-	Pad(2, '0', month);
-	Pad(2, '0', day);
-	Pad(2, '0', hour);
-	Pad(2, '0', minute);
-	Pad(2, '0', second);
-	filedate = year + month + day + hour + minute + second;
-	//DKString(filedate+"\n");
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKString& output)
-{
-	// TODO: need a working facebook login 
-
-	CurlInit();
-
-	DKString curlBuffer = "";
-	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToBuffer);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
-
-	curl_easy_setopt(curl, CURLOPT_URL, "https://www.facebook.com/login.php");
-	//curl_easy_setopt(curl, CURLOPT_POSTFIELDS,"email="+email+"&pass="+password+"&login=Login");
-	curl_easy_setopt(curl, CURLOPT_POST, 1);
-	curl_easy_setopt(curl, CURLOPT_HEADER, 0);
-	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
-	//curl_easy_setopt(curl, CURLOPT_COOKIESESSION, false);
-	
-
-	//curl_easy_setopt(curl, CURLOPT_COOKIEJAR, DKApp::datapath+"cookies.txt");
-	//curl_easy_setopt(curl, CURLOPT_COOKIEFILE, DKApp::datapath+"cookies.txt");
-
-	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.3) Gecko/20070309 Firefox/2.0.0.3");
-	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
-	curl_easy_setopt(curl, CURLOPT_REFERER, "http://www.facebook.com");
-	
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-
-	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code	
-	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
-		return false; 
-	}
-
-	output = curlBuffer;
-	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

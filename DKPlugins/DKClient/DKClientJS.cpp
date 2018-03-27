@@ -36,5 +36,4 @@ int DKClientJS::Send(duk_context* ctx)
 	return 1;
 }
 
-
 #endif //USE_DKDuktape
