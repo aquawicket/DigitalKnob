@@ -80,6 +80,49 @@ bool DKRocket::End()
 	return true;
 }
 
+
+
+/////////////////////////////////////////////
+bool DKRocket::LoadFont(const DKString& file)
+{
+	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
+		DKLog("Could not load "+file+" \n", DKERROR);
+		return false;
+	}
+	//fonts_loaded = true;
+	return true;
+}
+
+//////////////////////////
+bool DKRocket::LoadFonts()
+{
+	//DKLog("DKRocket::LoadFonts()\n", DKDEBUG);
+	DKStringArray dkfiles;
+	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
+	for(unsigned int i=0; i<dkfiles.size(); ++i){
+		DKString extension;
+		DKFile::GetExtention(dkfiles[i],extension);
+		if(same(extension,".otf") || same(extension,".ttf")){
+			DKString file;
+			DKFile::GetFileName(dkfiles[i],file);
+			LoadFont(DKFile::local_assets+"DKRocket/"+file);
+		}
+	}
+
+	DKStringArray files;
+	DKFile::GetDirectoryContents(DKFile::local_assets, files);
+	for(unsigned int i=0; i<files.size(); ++i){
+		DKString extension;
+		DKFile::GetExtention(files[i],extension);
+		if(same(extension,".otf") || same(extension,".ttf")){
+			DKString file;
+			DKFile::GetFileName(files[i],file);
+			LoadFont(file);
+		}
+	}
+	return true;
+}
+
 ////////////////////////////////////////////
 bool DKRocket::LoadGui(const DKString& file)
 {
@@ -125,52 +168,95 @@ bool DKRocket::LoadGui(const DKString& file)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////////////
+bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
+{
+	if(id.empty()){ return false; } //no id
+	if(type.empty()){ return false; } //no type
+	
+	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	if(!element){ return false; } //no element
+
+	DKString _type = type;
+	if(same(type, "contextmenu")){ _type = "mouseup"; }
+	if(same(type, "input")){ _type = "change"; 	}
+		
+	//FIXME - StopPropagation() on a mousedown event will bock the elements ability to drag
+	// we need to find a way to stop propagation of the event, while allowing drag events.
+	// If we bubble our event upward and allow mousedown events to propagate, it works,
+	// but it's a very nasty fix as every mousedown listener under the element will process
+	// first and then finally process the element clicked, allowing drag.
+	// WE don't want to process mousedown on other events! We want a one-shot mousedown event
+	// processed for that element and stopped. And it must allow drag to bleed thru.
+
+#ifdef DRAG_FIX
+	if(same(type, "mousedown")){
+		element->AddEventListener(_type.c_str(), this, true); //bubble up
+	}
+	else{
+#endif
+		element->AddEventListener(_type.c_str(), this, false);
+#ifdef DRAG_FIX
+	}
+#endif
+	return true;
+}
+
 ///////////////////////
 bool DKRocket::Reload()
 {
 	return LoadGui("index.html");
 }
 
-//////////////////////////
-bool DKRocket::LoadFonts()
+/////////////////////////////////////////////////////////////////////////////////////////
+bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	//DKLog("DKRocket::LoadFonts()\n", DKDEBUG);
-	DKStringArray dkfiles;
-	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
-	for(unsigned int i=0; i<dkfiles.size(); ++i){
-		DKString extension;
-		DKFile::GetExtention(dkfiles[i],extension);
-		if(same(extension,".otf") || same(extension,".ttf")){
-			DKString file;
-			DKFile::GetFileName(dkfiles[i],file);
-			LoadFont(DKFile::local_assets+"DKRocket/"+file);
-		}
-	}
+	if(id.empty()){ return false; }
+	if(type.empty()){ return false; }
+	if(!document){ return false; }
+	
+	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	if(!element){ return false; }
+	
+	Rocket::Core::Dictionary parameters;
+	parameters.Set("msg0", value.c_str());
+	element->DispatchEvent(type.c_str(), parameters, false);
+	return true;
+}
 
-	DKStringArray files;
-	DKFile::GetDirectoryContents(DKFile::local_assets, files);
-	for(unsigned int i=0; i<files.size(); ++i){
-		DKString extension;
-		DKFile::GetExtention(files[i],extension);
-		if(same(extension,".otf") || same(extension,".ttf")){
-			DKString file;
-			DKFile::GetFileName(files[i],file);
-			LoadFont(file);
-		}
+///////////////////////////////
+bool DKRocket::ToggleDebugger()
+{
+	if(Rocket::Debugger::IsVisible()){
+		Rocket::Debugger::SetVisible(false);
+		DKLog("Rocket Debugger OFF\n", DKINFO);
+	}
+	else{
+		Rocket::Debugger::SetVisible(true);
+		DKLog("Rocket Debugger ON\n", DKINFO);
 	}
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKRocket::LoadFont(const DKString& file)
+////////////////////////////////////////////////////////////////////////
+bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 {
-	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
-		DKLog("Could not load "+file+" \n", DKERROR);
-		return false;
-	}
-	//fonts_loaded = true;
+	if(id.empty()){ return false; } //no id
+	if(type.empty()){ return false; } //no type
+	if(same(id,"GLOBAL")){ return false; }
+	//if(!DKValid("DKRocket0")){ return false; }
+
+	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	if(!element){ return false; } //no element
+
+	DKString _type = type;
+	if(same(type, "contextmenu")){ _type = "mouseup"; }
+	if(same(type, "input")){ _type = "change"; 	}
+	element->RemoveEventListener(_type.c_str(), this, false);
 	return true;
 }
+
+
 
 ///////////////////////////////////////////////////////
 void DKRocket::ProcessEvent(Rocket::Core::Event& event)
@@ -269,86 +355,4 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 			return;
 		}
 	}
-}
-
-///////////////////////////////
-bool DKRocket::ToggleDebugger()
-{
-	if(Rocket::Debugger::IsVisible()){
-		Rocket::Debugger::SetVisible(false);
-		DKLog("Rocket Debugger OFF\n", DKINFO);
-	}
-	else{
-		Rocket::Debugger::SetVisible(true);
-		DKLog("Rocket Debugger ON\n", DKINFO);
-	}
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////////
-bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
-{
-	if(id.empty()){ return false; } //no id
-	if(type.empty()){ return false; } //no type
-	
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
-	if(!element){ return false; } //no element
-
-	DKString _type = type;
-	if(same(type, "contextmenu")){ _type = "mouseup"; }
-	if(same(type, "input")){ _type = "change"; 	}
-		
-	//FIXME - StopPropagation() on a mousedown event will bock the elements ability to drag
-	// we need to find a way to stop propagation of the event, while allowing drag events.
-	// If we bubble our event upward and allow mousedown events to propagate, it works,
-	// but it's a very nasty fix as every mousedown listener under the element will process
-	// first and then finally process the element clicked, allowing drag.
-	// WE don't want to process mousedown on other events! We want a one-shot mousedown event
-	// processed for that element and stopped. And it must allow drag to bleed thru.
-
-#ifdef DRAG_FIX
-	if(same(type, "mousedown")){
-		element->AddEventListener(_type.c_str(), this, true); //bubble up
-	}
-	else{
-#endif
-		element->AddEventListener(_type.c_str(), this, false);
-#ifdef DRAG_FIX
-	}
-#endif
-	return true;
-}
-
-////////////////////////////////////////////////////////////////////////
-bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
-{
-	if(id.empty()){ return false; } //no id
-	if(type.empty()){ return false; } //no type
-	if(same(id,"GLOBAL")){ return false; }
-	//if(!DKValid("DKRocket0")){ return false; }
-
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
-	if(!element){ return false; } //no element
-
-	DKString _type = type;
-	if(same(type, "contextmenu")){ _type = "mouseup"; }
-	if(same(type, "input")){ _type = "change"; 	}
-	element->RemoveEventListener(_type.c_str(), this, false);
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
-{
-	if(id.empty()){ return false; }
-	if(type.empty()){ return false; }
-	if(!document){ return false; }
-	
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
-	if(!element){ return false; }
-	
-	Rocket::Core::Dictionary parameters;
-	parameters.Set("msg0", value.c_str());
-	element->DispatchEvent(type.c_str(), parameters, false);
-	return true;
 }
