@@ -7,7 +7,6 @@
 bool DKFileV8::Init()
 {
 	DKLog("DKFileV8::Init()\n", DKDEBUG);
-	//DKV8::AttachFunction("Test", DKFileV8::Test);
 	
 	DKV8::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
 	DKV8::AttachFunction("DKFile_Copy", DKFileV8::Copy);
@@ -34,17 +33,7 @@ bool DKFileV8::End()
 	return true;
 }
 
-/*
-///////////////////////////////////////////////////
-bool DKFileV8::Test(CefArgs args, CefReturn retval)
-{
-	DKLog("DKFileV8::Test(CefArgs,CefReturn)\n", DKDEBUG);
-	DKString data = args[0]->GetStringValue();
-	DKString result = data;
-	retval = CefV8Value::CreateString(result);
-	return true;
-}
-*/
+
 
 ////////////////////////////////////////////////////
 bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
