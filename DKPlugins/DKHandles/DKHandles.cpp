@@ -25,6 +25,7 @@ bool DKHandles::End()
 }
 
 
+
 ///////////////////////
 bool DKHandles::Click()
 {
@@ -214,49 +215,6 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
-{
-	unsigned int t = 0;
-	while(index > handle.size() && t < timeout){
-		GetHandles();
-		Sleep(1000);
-		++t;
-	}
-	if(index > handle.size()){
-		DKLog("DKHandles::SetHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
-		return false;
-	}
-	currentHandle = index;
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////////
-bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
-{
-	unsigned int t = 0;
-	unsigned int h = 0;
-	DKString text;
-	while(t < timeout){
-		GetHandles();
-		for(h=0; h<handle.size(); h++){
-			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
-			char* buffer = new char[len];
-			SendMessage(handle[h], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
-			text = buffer;
-			if(text == value){
-				currentHandle = h;
-				return true;
-			}
-		}
-		Sleep(1000);
-		++t;
-	}
-
-	DKLog("DKHandles::SetHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
-	return false;
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned int timeout)
 {
@@ -292,6 +250,49 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 	
 	DKLog("DKHandles::SetHandle("+clas+","+value+","+toString(timeout)+"): timed out.\n", DKWARN);
 	return false;
+}
+
+//////////////////////////////////////////////////////////////////////
+bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
+{
+	unsigned int t = 0;
+	unsigned int h = 0;
+	DKString text;
+	while(t < timeout){
+		GetHandles();
+		for(h=0; h<handle.size(); h++){
+			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
+			char* buffer = new char[len];
+			SendMessage(handle[h], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			text = buffer;
+			if(text == value){
+				currentHandle = h;
+				return true;
+			}
+		}
+		Sleep(1000);
+		++t;
+	}
+
+	DKLog("DKHandles::SetHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////
+bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
+{
+	unsigned int t = 0;
+	while(index > handle.size() && t < timeout){
+		GetHandles();
+		Sleep(1000);
+		++t;
+	}
+	if(index > handle.size()){
+		DKLog("DKHandles::SetHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
+	currentHandle = index;
+	return true;
 }
 
 ///////////////////////////////////////////////
@@ -341,39 +342,6 @@ bool DKHandles::ToggleHighlight()
 	}
 	highlight = true;
 	DoHighlight();
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////
-bool DKHandles::WaitForWindow(const DKString& title, int timeout)
-{
-	//FIXME - this is blocking,  thread this out
-	int i = 0;
-	while(!WindowExists(title) && i < timeout){
-		Sleep(1000);
-		++i;
-	}
-	if(i >= timeout){
-		DKLog("DKHandles::WaitForWindow("+title+","+toString(timeout)+"): timed out.\n", DKWARN);
-		return false;
-	}
-	return true;
-}
-
-//////////////////////////////////////////////////////////////
-bool DKHandles::WaitForHandle(unsigned int index, int timeout)
-{
-	int i = 0;
-	while(index > handle.size() && i < timeout){
-		GetHandles();
-		Sleep(1000);
-		++i;
-	}
-	if(i >= timeout){
-		DKLog("DKHandles::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
-		return false;
-	}
-	//currentHandle = index;
 	return true;
 }
 
@@ -431,6 +399,39 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////
+bool DKHandles::WaitForHandle(unsigned int index, int timeout)
+{
+	int i = 0;
+	while(index > handle.size() && i < timeout){
+		GetHandles();
+		Sleep(1000);
+		++i;
+	}
+	if(i >= timeout){
+		DKLog("DKHandles::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
+	//currentHandle = index;
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////
+bool DKHandles::WaitForWindow(const DKString& title, int timeout)
+{
+	//FIXME - this is blocking,  thread this out
+	int i = 0;
+	while(!WindowExists(title) && i < timeout){
+		Sleep(1000);
+		++i;
+	}
+	if(i >= timeout){
+		DKLog("DKHandles::WaitForWindow("+title+","+toString(timeout)+"): timed out.\n", DKWARN);
+		return false;
+	}
+	return true;
+}
+
 ///////////////////////////////////////////////////
 bool DKHandles::WindowExists(const DKString& title)
 {
@@ -443,6 +444,8 @@ bool DKHandles::WindowExists(const DKString& title)
 
 	return true;
 }
+
+
 
 //////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
