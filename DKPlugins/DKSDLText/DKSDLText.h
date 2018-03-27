@@ -14,7 +14,7 @@ public:
 	bool Init();
 	bool End();
 	
-	void SetText(DKString text);
+	bool SetText(const DKString& text);
 	void Draw();
 
 	DKSDLWindow* dkSdlWindow;

@@ -32,12 +32,13 @@ bool DKSDLText::End()
 	return true;
 }
 
-//////////////////////////////////////
-void DKSDLText::SetText(DKString text)
+/////////////////////////////////////////////
+bool DKSDLText::SetText(const DKString& text)
 {
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, surface);
 	SDL_FreeSurface(surface);
+	return true;
 }
 
 //////////////////////
