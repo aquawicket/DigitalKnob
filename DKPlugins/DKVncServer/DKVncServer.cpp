@@ -213,9 +213,9 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 
 //////////////////////////////
 void DKVncServer::DrawBuffer()
-{
-    //Capture Desktop
+{  
 #ifdef WIN32
+	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKLog("DIRECTX\n",DKINFO);
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
@@ -267,6 +267,7 @@ void DKVncServer::DrawBuffer()
 		RELEASE(device);
 		RELEASE(d3d);
 	}
+	//Capture Desktop with GDI
 	if(capture == "GDI"){
 		//https://pastebin.com/r3CZpWDs
 		HWND desktop = GetDesktopWindow();
@@ -313,6 +314,8 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef MAC
+	//TODO - start by filling the frameBuffer with a solid color..
+	
 	//https://stackoverflow.com/questions/17334786/get-pixel-from-the-screen-screenshot-in-max-osx
 	//TODO - some example code to try
     /*
@@ -331,10 +334,11 @@ void DKVncServer::DrawBuffer()
 	fclose(stream); 
 	free(pixels);
      */
-	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 #endif
 
 #ifdef LINUX
+	//TODO - start by filling the frameBuffer with a solid color..
+	
 	//TODO - some example code to try
 	/*
 	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
@@ -360,10 +364,9 @@ void DKVncServer::DrawBuffer()
 	XDestroyImage(image);
 	image = NULL;
 	*/
-	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 #endif
 
-	rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
+	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
