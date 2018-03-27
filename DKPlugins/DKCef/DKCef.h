@@ -21,6 +21,7 @@ public:
 
 	bool CloseBrowser(const int& num);
 	bool DownloadUrl(const DKString& url);
+	bool Find(const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& num);
 	bool GetUrl(int& num, DKString& url);
@@ -34,7 +35,6 @@ public:
 	bool SetUrl(const DKString& url, const int& num);
 	bool ShowDevTools(const int& num);
 	bool Stop(const int& num);
-	bool Find(const DKString& text);
 
 	static bool RunJavascript(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
