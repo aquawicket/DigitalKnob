@@ -34,8 +34,9 @@ int DKCefJS::GetUrl(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	int num = duk_require_int(ctx, 1);
-	DKString url = DKCef::Get(id)->GetUrl(num);
-	if (url.empty()){ return 0; }
+	DKString url;
+	DKCef::Get(id)->GetUrl(num, url);
+	if(url.empty()){ return 0; }
 	duk_push_string(ctx, url.c_str());
 	return 1;
 }

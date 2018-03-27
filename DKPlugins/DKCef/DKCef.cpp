@@ -400,12 +400,12 @@ bool DKCef::CloseBrowser(const int& num)
 	return true;
 }
 
-//////////////////////////////////////
-const DKString DKCef::GetUrl(int& num)
+///////////////////////////////////////////
+bool DKCef::GetUrl(int& num, DKString& url)
 {
-	if(num > (int)browsers.size()-1){ return ""; } //error
-	DKString url = browsers[num]->GetMainFrame()->GetURL().ToString();
-	return url;
+	if(num > (int)browsers.size()-1){ return false; } //error
+	url = browsers[num]->GetMainFrame()->GetURL().ToString();
+	return true;
 }
 
 ///////////////////////////////////////////////////////
@@ -498,6 +498,20 @@ bool DKCef::Print(const int& num)
 	return true;
 }
 
+///////////////////////////////////////////
+bool DKCef::RunJavascript(DKString& string)
+{
+	DKCef* dkcef = DKCef::Get("");
+	if(!dkcef){
+		DKLog("DKCef::RunJavascript(" + string + "): dkcef invalid \n", DKERROR);
+		return false;
+	}
+
+	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
+	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+	return true;
+}
+
 ////////////////////////////////////////////////////////////
 void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser) 
 {
@@ -519,9 +533,9 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 		virtual bool Visit(CefRefPtr<CefWebPluginInfo> info, int count, int total)
 			OVERRIDE{
 			html_ += "\n<br/><br/>Name: " + info->GetName().ToString() +
-			"\n<br/>Description: " + info->GetDescription().ToString() +
-			"\n<br/>Version: " + info->GetVersion().ToString() +
-			"\n<br/>Path: " + info->GetPath().ToString();
+				"\n<br/>Description: " + info->GetDescription().ToString() +
+				"\n<br/>Version: " + info->GetVersion().ToString() +
+				"\n<br/>Path: " + info->GetPath().ToString();
 			return true;
 		}
 
@@ -532,19 +546,6 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 	};
 
 	CefVisitWebPluginInfo(new Visitor(browser));
-}
-
-///////////////////////////////////////////
-void DKCef::RunJavascript(DKString& string)
-{
-	DKCef* dkcef = DKCef::Get("");
-	if (!dkcef) {
-		DKLog("DKCef::RunJavascript(" + string + "): dkcef invalid \n", DKERROR);
-		return;
-	}
-
-	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
-	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 }
 
 //////////////////////////////////////

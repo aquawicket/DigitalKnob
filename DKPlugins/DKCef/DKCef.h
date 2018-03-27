@@ -23,20 +23,21 @@ public:
 	bool DownloadUrl(const DKString& url);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& num);
-	const DKString GetUrl(int& num);
+	bool GetUrl(int& num, DKString& url);
 	bool GoBack(const int& num);
 	bool GoForward(const int& num);
 	bool NewBrowser();
 	bool Paste();
 	bool Print(const int& num);
 	bool Reload(const int& num);
-	static void RunJavascript(DKString& string);
-	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	bool SelectBrowser(int& num);
 	bool SetUrl(const DKString& url, const int& num);
 	bool ShowDevTools(const int& num);
 	bool Stop(const int& num);
 	bool Find(const DKString& text);
+
+	static bool RunJavascript(DKString& string);
+	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
 	DKString id;
 	int top;
