@@ -31,15 +31,14 @@ public:
 	bool Init();
 	bool End();
 
-	bool OnResize(const void* input, void* output);
+	bool GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type);
+	bool GetScrollDeltas(SDL_Event *event, float &deltaX, float &deltaY);
 	bool GetTexture(const void* input, void* output);
-	void SetupCef();
-	bool handle(SDL_Event *event);
+	bool Handle(SDL_Event *event);
+	bool OnResize(const void* input, void* output);
+	bool SetupCef();
+	bool TransparentPixel(SDL_Event *event);
 	void Draw();
-	bool transparentPixel(SDL_Event *event);
-	CefBrowserHost::MouseButtonType getCefMouseButton(int button);
-	bool getScrollDeltas(SDL_Event *event, float &deltaX, float &deltaY);
-	//void setSize(unsigned int width, unsigned int height);
 	
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;

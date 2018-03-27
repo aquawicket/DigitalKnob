@@ -30,7 +30,7 @@ bool DKSDLCef::Init()
 	_mouseLMBdown = false;
 	_scrollFactor = 70.0f;
 
-	DKSDLWindow::AddEventFunc(&DKSDLCef::handle, this);
+	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc(id+"::OnResize", &DKSDLCef::OnResize, this);
 	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
@@ -50,39 +50,41 @@ bool DKSDLCef::End()
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKSDLCef::OnResize(const void* input, void* output)
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type)
 {
-	DKLog("DKSDLCef::OnResize(void*)\n", DKDEBUG);
+	DKLog("DKSDLCef::getCefMouseButton()\n", DKDEBUG);
 
-	//DKString str = *static_cast<DKString*>(data);
-	DKString str = *(DKString*)input;
-
-	//DKLog("DKSDLCef::OnResize("+str+")\n", DKWARN);
-
-	DKStringArray arry;
-	toStringArray(arry,str,",");
-	if(dkCef->fullscreen){
-		dkCef->top = 0;
-		dkCef->left = 0;
-		//SDL_DisplayMode displayMode;
-		//int display = SDL_GetWindowDisplayIndex(dkSdlWindow->sdlwin);
-		//SDL_GetCurrentDisplayMode(display, &displayMode);
-		dkCef->width = dkSdlWindow->width;//displayMode.w;
-		dkCef->height = dkSdlWindow->height;//displayMode.h;
-	}
-	else{
-		dkCef->top = toInt(arry[0]);
-		dkCef->left = toInt(arry[1]);
-		dkCef->width = toInt(arry[2]);
-		dkCef->height = toInt(arry[3]);
-	}
-
-	for(unsigned int i = 0; i < dkCef->browsers.size(); ++i){
-		dkCef->browsers[i]->GetHost()->WasResized();
-	}
-
+	if(button == 1){ type = MBT_LEFT; }
+	if(button == 2){ type = MBT_MIDDLE; }
+	/*if(button == 3){*/ type = MBT_RIGHT; //}
 	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
+{
+	DKLog("DKSDLCef::getScrollDeltas(SDL_Event*, deltaX, deltaY)\n", DKDEBUG);
+
+	deltaX = 0.0f;
+	deltaY = 0.0f;
+
+	if(event->wheel.y > 0){
+		deltaY = _scrollFactor;
+	}
+	if(event->wheel.y < 0){
+		deltaY = -_scrollFactor;
+	}
+	if(event->wheel.x > 0){
+		deltaX = -_scrollFactor;
+	}
+	if(event->wheel.x < 0){
+		deltaX = _scrollFactor;
+	}
+
+	return deltaX != 0.0f || deltaY != 0.0f;
 }
 
 //////////////////////////////////////////////////////////
@@ -98,33 +100,8 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////
-void DKSDLCef::SetupCef()
-{
-	DKLog("DKSDLCef::SetupCef()\n", DKDEBUG);
-
-	//Top spacer for url bar
-	cefHandler = new DKSDLCefHandler();
-	cefHandler->dkSdlWindow = dkSdlWindow;
-	cefHandler->dkCef = dkCef;
-	cefHandler->dkSdlCef = this;
-	dkCef->cefHandler = cefHandler;
-	dkCef->NewBrowser();
-	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
-}
-
-///////////////////////////////////////////////////////////////////////
-CefBrowserHost::MouseButtonType DKSDLCef::getCefMouseButton(int button)
-{
-	DKLog("DKSDLCef::getCefMouseButton("+toString(button)+")\n", DKDEBUG);
-
-	if(button == 1){ return MBT_LEFT; }
-	if(button == 2){ return MBT_MIDDLE; }
-	/*if(button == 3){*/ return MBT_RIGHT; //}
-}
-
 ///////////////////////////////////////
-bool DKSDLCef::handle(SDL_Event* event)
+bool DKSDLCef::Handle(SDL_Event* event)
 {
 	//DKLog("DKSDLCef::handle(SDL_Event*)\n", DKDEBUG);
 
@@ -171,7 +148,9 @@ bool DKSDLCef::handle(SDL_Event* event)
 			dkCef->inFocus = true;
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
-			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, getCefMouseButton(event->button.button), false, clicks);
+			CefBrowserHost::MouseButtonType type;
+			GetCefMouseButton(event->button.button, type);
+			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, type, false, clicks);
 			return true;
 		}
 
@@ -193,7 +172,10 @@ bool DKSDLCef::handle(SDL_Event* event)
 			dkCef->current_browser->GetHost()->SendFocusEvent(true);
 			dkCef->inFocus = true;
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
-			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, getCefMouseButton(event->button.button), true, clicks);
+
+			CefBrowserHost::MouseButtonType type;
+			GetCefMouseButton(event->button.button, type);
+			dkCef->current_browser->GetHost()->SendMouseClickEvent(mouse_event, type, true, clicks);
  
 			return true;
 		}
@@ -313,7 +295,7 @@ bool DKSDLCef::handle(SDL_Event* event)
 
 		case SDL_MOUSEWHEEL:{
 			float deltaX, deltaY;
-			if(getScrollDeltas(event, deltaX, deltaY)){
+			if(GetScrollDeltas(event, deltaX, deltaY)){
 				CefMouseEvent mouse_event;
 				int mouseX;
 				int mouseY;
@@ -327,6 +309,78 @@ bool DKSDLCef::handle(SDL_Event* event)
 			return true;
 		}
 	}
+	return false;
+}
+
+////////////////////////////////////////////////////////
+bool DKSDLCef::OnResize(const void* input, void* output)
+{
+	DKLog("DKSDLCef::OnResize(void*)\n", DKDEBUG);
+
+	//DKString str = *static_cast<DKString*>(data);
+	DKString str = *(DKString*)input;
+
+	//DKLog("DKSDLCef::OnResize("+str+")\n", DKWARN);
+
+	DKStringArray arry;
+	toStringArray(arry,str,",");
+	if(dkCef->fullscreen){
+		dkCef->top = 0;
+		dkCef->left = 0;
+		//SDL_DisplayMode displayMode;
+		//int display = SDL_GetWindowDisplayIndex(dkSdlWindow->sdlwin);
+		//SDL_GetCurrentDisplayMode(display, &displayMode);
+		dkCef->width = dkSdlWindow->width;//displayMode.w;
+		dkCef->height = dkSdlWindow->height;//displayMode.h;
+	}
+	else{
+		dkCef->top = toInt(arry[0]);
+		dkCef->left = toInt(arry[1]);
+		dkCef->width = toInt(arry[2]);
+		dkCef->height = toInt(arry[3]);
+	}
+
+	for(unsigned int i = 0; i < dkCef->browsers.size(); ++i){
+		dkCef->browsers[i]->GetHost()->WasResized();
+	}
+
+	return true;
+}
+
+/////////////////////////
+bool DKSDLCef::SetupCef()
+{
+	DKLog("DKSDLCef::SetupCef()\n", DKDEBUG);
+
+	cefHandler = new DKSDLCefHandler();
+	cefHandler->dkSdlWindow = dkSdlWindow;
+	cefHandler->dkCef = dkCef;
+	cefHandler->dkSdlCef = this;
+	dkCef->cefHandler = cefHandler;
+	dkCef->NewBrowser();
+	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
+	return true;
+}
+
+/////////////////////////////////////////////////
+bool DKSDLCef::TransparentPixel(SDL_Event *event)
+{
+	DKLog("DKSDLCef::transparentPixel(SDL_Event*)\n", DKDEBUG);
+
+	// TODO
+	/*
+	osg::Image* image = cef_image.get();//cefHandler->getImage();
+	if (image && image->getPixelFormat()){
+		int x = ea.getX();
+		int y = ea.getWindowHeight() - ea.getY();
+		if (x >= 0 && x < image->s() && y >= 0 && y < image->t()){
+			//TODO
+			//ImageUtils::PixelReader ia(image);
+			//osg::Vec4 color = ia(x, y);
+			//return color.a() == 0.0;
+		}
+	}
+	*/
 	return false;
 }
 
@@ -354,50 +408,4 @@ void DKSDLCef::Draw()
 	texture_rect.w = dkCef->width; //the width of the texture
 	texture_rect.h = dkCef->height; //the height of the texture
 	SDL_RenderCopy(dkSdlWindow->sdlren, cef_image, NULL, &texture_rect);
-}
-
-//////////////////////////////////////////////////////////////////////////////
-bool DKSDLCef::getScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
-{
-	DKLog("DKSDLCef::getScrollDeltas(SDL_Event*, deltaX, deltaY)\n", DKDEBUG);
-
-	deltaX = 0.0f;
-	deltaY = 0.0f;
-
-	if(event->wheel.y > 0){
-		deltaY = _scrollFactor;
-	}
-	if(event->wheel.y < 0){
-		deltaY = -_scrollFactor;
-	}
-	if(event->wheel.x > 0){
-		deltaX = -_scrollFactor;
-	}
-	if(event->wheel.x < 0){
-		deltaX = _scrollFactor;
-	}
-
-	return deltaX != 0.0f || deltaY != 0.0f;
-}
-
-/////////////////////////////////////////////////
-bool DKSDLCef::transparentPixel(SDL_Event *event)
-{
-	DKLog("DKSDLCef::transparentPixel(SDL_Event*)\n", DKDEBUG);
-
-	// TODO
-	/*
-	osg::Image* image = cef_image.get();//cefHandler->getImage();
-	if (image && image->getPixelFormat()){
-		int x = ea.getX();
-		int y = ea.getWindowHeight() - ea.getY();
-		if (x >= 0 && x < image->s() && y >= 0 && y < image->t()){
-			//TODO
-			//ImageUtils::PixelReader ia(image);
-			//osg::Vec4 color = ia(x, y);
-			//return color.a() == 0.0;
-		}
-	}
-	*/
-	return false;
 }
