@@ -82,7 +82,7 @@ public:
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
-	static void AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
+	static bool AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 	{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 		//DKLog("DKV8::AttachFunction("+name+")\n", DKINFO);
@@ -90,7 +90,7 @@ public:
 		functions[name] = boost::bind(func, _1, _2);
 		if(!functions[name]){
 			printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());
-			return;
+			return false;
 		}
 		
 		DKV8::funcs.push_back(name);
@@ -98,17 +98,18 @@ public:
 
 		if(!DKV8::ctx){ //multi process will fail
 			//DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
-			return;
+			return false;
 		}
 		
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
-		if(DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
-			DKLog("DKV8::AttachFunction(): registered: "+name+"\n", DKINFO);
-		}
+		if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){ return false; }
+
+		DKLog("DKV8::AttachFunction(): registered: "+name+"\n", DKINFO);
+		return true;
 	}
 	
 	///////////////////////////////////////////////////////
-	static void GetFunctions(CefRefPtr<CefBrowser> browser)
+	static bool GetFunctions(CefRefPtr<CefBrowser> browser)
 	{
 		//printf("DKV8::GetFunctions()\n");
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
@@ -120,16 +121,17 @@ public:
 			i++;
 		}
 		browser->SendProcessMessage(PID_RENDERER, msg);
+		return true;
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
-	static void Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
+	static bool Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 	{
 		_browser = browser;
 		//printf("DKV8::Execute(%s)\n", func.c_str());
 		if(!functions[func]) {
 			printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
-			return;
+			return false;
 		}
 
 		/*
@@ -149,7 +151,7 @@ public:
 		CefRefPtr<CefListValue> retval = CefListValue::Create();
 		if(!functions[func](args,retval)){
 			printf("DKCefV8Handler::Execute() failed\n");
-			return;
+			return false;
 		}
 		
 		CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("retval");
@@ -170,6 +172,7 @@ public:
 		      args2->SetBool(0, true);
 		}	
 		browser->SendProcessMessage(PID_RENDERER, msg);
+		return true;
 	}
 
 
