@@ -29,6 +29,12 @@ bool DKMac::GetMousePos(int& x, int& y)
 	return true;
 }
 
+///////////////////////////////////////////////////
+bool DKMac::SetMousePos(const int& x, const int& y)
+{
+	CGWarpMouseCursorPosition(CGPointMake(x, y));
+}
+
 //////////////////////////////////
 bool DKMac::GetScreenWidth(int& w)
 {
