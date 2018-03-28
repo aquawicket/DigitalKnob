@@ -80,7 +80,7 @@ bool DKLinux::LeftRelease()
 bool DKLinux::RightPress()
 {
 	Display *display = XOpenDisplay(NULL);
-	XTestFakeButtonEvent(display, 2, true, 0);
+	XTestFakeButtonEvent(display, 3, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
@@ -90,7 +90,7 @@ bool DKLinux::RightPress()
 bool DKLinux::RightRelease()
 {
 	Display *display = XOpenDisplay(NULL);
-	XTestFakeButtonEvent(display, 2, false, 0);
+	XTestFakeButtonEvent(display, 3, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
@@ -100,7 +100,7 @@ bool DKLinux::RightRelease()
 bool DKLinux::MiddlePress()
 {
 	Display *display = XOpenDisplay(NULL);
-	XTestFakeButtonEvent(display, 3, true, 0);
+	XTestFakeButtonEvent(display, 2, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
@@ -110,7 +110,7 @@ bool DKLinux::MiddlePress()
 bool DKLinux::MiddleRelease()
 {
 	Display *display = XOpenDisplay(NULL);
-	XTestFakeButtonEvent(display, 3, false, 0);
+	XTestFakeButtonEvent(display, 2, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
