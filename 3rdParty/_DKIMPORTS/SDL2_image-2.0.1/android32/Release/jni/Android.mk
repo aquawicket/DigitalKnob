@@ -1,7 +1,7 @@
 SDL := SDL2-2.0.4
 PNG := libpng-1.7.0beta34
 TIF := tiff-4.0.3
-JPG := jpeg-6b
+JPG := libjpeg-turbo-1.5.3
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
