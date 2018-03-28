@@ -17,6 +17,7 @@ public:
 	static bool CpuUsedByApp(int& cpu);
 	static bool GetClipboard(DKString& text);
 	static bool GetMousePos(int& x, int& y);
+	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
 	static bool GetVolume(float& volume);
