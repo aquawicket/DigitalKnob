@@ -33,6 +33,7 @@ bool DKMac::GetMousePos(int& x, int& y)
 bool DKMac::SetMousePos(const int& x, const int& y)
 {
 	CGWarpMouseCursorPosition(CGPointMake(x, y));
+	return true;
 }
 
 //////////////////////////////////
