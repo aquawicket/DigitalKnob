@@ -11,9 +11,9 @@
 #include <unistd.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-static Display *disp;
-static Window root;
-static XImage *image;
+Display* DKVncServer::disp;
+Window DKVncServer::root;
+XImage* DKVncServer::image;
 #endif
 
 #ifdef __IRIX__
@@ -80,8 +80,8 @@ bool DKVncServer::Init()
 
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
-	root = DefaultRootWindow(disp);
-	XMapWindow(disp, root);
+	root = XDefaultRootWindow(d);
+	//XMapWindow(disp, root);
 #endif
 
 /*
@@ -351,9 +351,7 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef LINUX
-	Display* d = XOpenDisplay(NULL);
-	Window root = XDefaultRootWindow(d);
-	image = XGetImage(d, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
+	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0;h<rfbScreen->height;++h) {
 		for(w=0;w<rfbScreen->width;++w) {
@@ -373,8 +371,8 @@ void DKVncServer::DrawBuffer()
 	}
 
 	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
-	XDestroyImage(image);
-	image = NULL;
+	//XDestroyImage(image);
+	//image = NULL;
 #endif
 	
 	/*

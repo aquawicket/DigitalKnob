@@ -45,6 +45,12 @@ public:
 
 	static DKString capture; //GDI, DIRECTX, OPENGL
 	static std::vector<ClientLog> clientLog;
+
+#ifdef LINUX
+	static Display* disp;
+	static Window root;
+	static XImage* image;
+#endif
 };
 
 
