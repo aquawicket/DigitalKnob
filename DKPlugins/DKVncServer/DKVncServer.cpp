@@ -319,6 +319,7 @@ void DKVncServer::DrawBuffer()
 	height = CGImageGetHeight(image_ref); 
 	size_t bpp = CGImageGetBitsPerPixel(image_ref) / 8;
 	memcpy(rfbScreen->frameBuffer, CFDataGetBytePtr(dataref), width * height * bpp);
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
 	//CFRelease(dataref); 
 	//CGImageRelease(image_ref); 
 #endif
