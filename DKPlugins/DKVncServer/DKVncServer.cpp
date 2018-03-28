@@ -75,16 +75,16 @@ bool DKVncServer::Init()
 
 	int desktopWidth;
 	int desktopHeight;
+	DKUtil::GetScreenWidth(desktopWidth);
+	DKUtil::GetScreenHeight(desktopHeight);
 
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
 	root = DefaultRootWindow(disp);
 	XMapWindow(disp, root);
-	//TODO - Desktop size
-	//desktopWidth = ?
-	//desktopHeight = ?
 #endif
 
+/*
 #ifdef WIN32
 	HWND desktop = GetDesktopWindow();
 	RECT size;
@@ -93,6 +93,7 @@ bool DKVncServer::Init()
 		desktopHeight = size.bottom - size.top;
 	}
 #endif
+*/
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
@@ -366,7 +367,7 @@ void DKVncServer::DrawBuffer()
 	*/
 #endif
 
-	//Paint framebuffer solid black
+	//Paint framebuffer solid white
 	int w, h;
 	for(h=0;h<rfbScreen->height;++h) {
 		for(w=0;w<rfbScreen->width;++w) {
@@ -379,7 +380,7 @@ void DKVncServer::DrawBuffer()
 		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
 		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
 	}
-	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
+	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 
 	//rfbFillRect(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height, 0xffffff);
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
