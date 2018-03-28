@@ -315,7 +315,20 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef MAC
-	//TODO - start by filling the frameBuffer with a solid color..
+	//Paint framebuffer solid white
+	int w, h;
+	for(h=0;h<rfbScreen->height;++h) {
+		for(w=0;w<rfbScreen->width;++w) {
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=0xff;
+		}
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
+	}
+	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 	
 	//https://stackoverflow.com/questions/17334786/get-pixel-from-the-screen-screenshot-in-max-osx
 	//TODO - some example code to try
@@ -338,7 +351,20 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef LINUX
-	//TODO - start by filling the frameBuffer with a solid color..
+	//Paint framebuffer solid white
+	int w, h;
+	for(h=0;h<rfbScreen->height;++h) {
+		for(w=0;w<rfbScreen->width;++w) {
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=0xff;
+		}
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
+	}
+	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 	
 	//TODO - some example code to try
 	/*
@@ -366,21 +392,6 @@ void DKVncServer::DrawBuffer()
 	image = NULL;
 	*/
 #endif
-
-	//Paint framebuffer solid white
-	int w, h;
-	for(h=0;h<rfbScreen->height;++h) {
-		for(w=0;w<rfbScreen->width;++w) {
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=0xff;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=0xff;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=0xff;
-		}
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
-	}
-	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
 
 	//rfbFillRect(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height, 0xffffff);
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
