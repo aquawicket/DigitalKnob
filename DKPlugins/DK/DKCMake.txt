@@ -25,6 +25,7 @@ IF(LINUX)
 	DKDEPEND(libgl1-mesa-dev)
 	DKDEPEND(libxrandr-dev)
 	DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
+	DKDEPEND(libxtst-dev)
 ENDIF()
 
 IF(ANDROID)
