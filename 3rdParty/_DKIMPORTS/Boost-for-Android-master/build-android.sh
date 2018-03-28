@@ -90,8 +90,8 @@ do_download ()
 	CLEAN=yes
 }
 
-LIBRARIES=--with-libraries=date_time,filesystem,system,thread
-#LIBRARIES=
+#LIBRARIES=--with-libraries=date_time,filesystem,program_options,regex,signals,system,thread,iostreams,locale
+LIBRARIES=
 register_option "--with-libraries=<list>" do_with_libraries "Comma separated list of libraries to build."
 do_with_libraries () { 
   for lib in $(echo $1 | tr ',' '\n') ; do LIBRARIES="--with-$lib ${LIBRARIES}"; done 
