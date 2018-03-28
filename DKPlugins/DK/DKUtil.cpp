@@ -468,6 +468,9 @@ bool DKUtil::PressKey(const int& key)
 #ifdef WIN32
 	return DKWindows::PressKey(key);
 #endif
+#ifdef LINUX
+	return DKLinux::PressKey(key);
+#endif
 	DKLog("DKUtil::PressKey(): not implemented on this OS \n", DKWARN);
 	return false;
 }
@@ -477,6 +480,9 @@ bool DKUtil::ReleaseKey(const int& key)
 {
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
+#endif
+#ifdef LINUX
+	return DKLinux::ReleaseKey(key);
 #endif
 	DKLog("DKUtil::ReleaseKey(): not implemented on this OS \n", DKWARN);
 	return false;

@@ -116,6 +116,26 @@ bool DKLinux::MiddleRelease()
 	return true;
 }
 
+///////////////////////////////
+bool DKLinux::PressKey(int key)
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeKeyEvent(display, key, true, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
+/////////////////////////////////
+bool DKLinux::ReleaseKey(int key)
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeKeyEvent(display, key, false, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
 ////////////////////////////////////
 bool DKLinux::GetScreenWidth(int& w)
 {

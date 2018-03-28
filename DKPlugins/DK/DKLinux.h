@@ -28,6 +28,8 @@ public:
 	static bool RightRelease();
 	static bool MiddlePress();
 	static bool MiddleRelease();
+	static bool PressKey(int key);
+	static bool ReleaseKey(int key);
 	static bool LowPowerMonitor();
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
