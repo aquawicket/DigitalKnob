@@ -208,6 +208,9 @@ bool DKUtil::SetMousePos(const int& x, const int& y)
 #ifdef WIN32
 	return DKWindows::SetMousePos(x, y);
 #endif
+#ifdef LINUX
+	return DKLinux::SetMousePos(x, y);
+#endif
 	DKLog("DKUtil::SetMousePos() not implemented on this OS \n", DKWARN);
 	return false;
 }

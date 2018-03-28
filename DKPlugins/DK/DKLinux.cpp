@@ -44,6 +44,17 @@ bool DKLinux::GetMousePos(int& x, int& y)
 	return false;
 }
 
+/////////////////////////////////////////////////////
+bool DKLinux::SetMousePos(const int& x, const int& y)
+{
+	Display *dpy = XOpenDisplay(0);
+	Window root = XRootWindow(dpy, 0);
+	XSelectInput(dpy, root, KeyReleaseMask);
+	XWarpPointer(dpy, None, root, 0, 0, 0, 0, x, y);
+	XFlush(dpy); // Flushes the output buffer, therefore updates the cursor's position.
+	return true;
+}
+
 ////////////////////////////////////
 bool DKLinux::GetScreenWidth(int& w)
 {
