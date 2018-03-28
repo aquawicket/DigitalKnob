@@ -1,6 +1,24 @@
 /* jconfig.vc --- jconfig.h for Microsoft Visual C++ on Windows 95 or NT. */
 /* see jconfig.doc for explanations */
 
+#define JPEG_LIB_VERSION 62
+#define LIBJPEG_TURBO_VERSION 1.5.3
+#define LIBJPEG_TURBO_VERSION_NUMBER 1005003
+#define C_ARITH_CODING_SUPPORTED
+#define D_ARITH_CODING_SUPPORTED
+#define MEM_SRCDST_SUPPORTED
+
+/*
+ * Define BITS_IN_JSAMPLE as either
+ *   8   for 8-bit sample values (the usual setting)
+ *   12  for 12-bit sample values
+ * Only 8 and 12 are legal data precisions for lossy JPEG according to the
+ * JPEG standard, and the IJG code does not support anything else!
+ * We do not support run-time selection of data precision, sorry.
+ */
+
+#define BITS_IN_JSAMPLE  8      /* use 8 or 12 */
+
 #define HAVE_PROTOTYPES
 #define HAVE_UNSIGNED_CHAR
 #define HAVE_UNSIGNED_SHORT
