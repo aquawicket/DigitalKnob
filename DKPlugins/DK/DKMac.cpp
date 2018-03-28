@@ -57,9 +57,12 @@ bool DKMac::GetScreenHeight(int& h)
 ///////////////////////
 bool DKMac::LeftPress()
 {
-	CGPoint point;
-	GetMousePos(point.x, point.y);
-	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, point, kCGMouseButtonLeft);
+    int x, y;
+    GetMousePos(x, y);
+    CGPoint point;
+    point.x = x;
+    point.y = y;
+    CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, point, kCGMouseButtonLeft);
 	CGEventPost(kCGHIDEventTap, eventRef);
 	CFRelease(eventRef);
 	return true;
@@ -68,8 +71,11 @@ bool DKMac::LeftPress()
 /////////////////////////
 bool DKMac::LeftRelease()
 {
-	CGPoint point;
-	GetMousePos(point.x, point.y);
+    int x, y;
+    GetMousePos(x, y);
+    CGPoint point;
+    point.x = x;
+    point.y = y;
 	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, point, kCGMouseButtonLeft);
 	CGEventPost(kCGHIDEventTap, eventRef);
 	CFRelease(eventRef);
@@ -79,8 +85,11 @@ bool DKMac::LeftRelease()
 ////////////////////////
 bool DKMac::RightPress()
 {
-	CGPoint point;
-	GetMousePos(point.x, point.y);
+    int x, y;
+    GetMousePos(x, y);
+    CGPoint point;
+    point.x = x;
+    point.y = y;
 	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventRightMouseDown ,point, kCGMouseButtonRight);
 	CGEventPost(kCGHIDEventTap, eventRef);
 	CFRelease(eventRef);
@@ -90,8 +99,11 @@ bool DKMac::RightPress()
 //////////////////////////
 bool DKMac::RightRelease()
 {
-	CGPoint point;
-	GetMousePos(point.x, point.y);
+    int x, y;
+    GetMousePos(x, y);
+    CGPoint point;
+    point.x = x;
+    point.y = y;
 	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventRightMouseUp, point, kCGMouseButtonRight);
 	CGEventPost(kCGHIDEventTap, eventRef);
 	CFRelease(eventRef);
