@@ -351,6 +351,33 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef LINUX
+	Display* d = XOpenDisplay(NULL);
+	Window root = XDefaultRootWindow(d);
+	image = XGetImage(d, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
+	int w,h;
+	for(h=0;h<rfbScreen->height;++h) {
+		for(w=0;w<rfbScreen->width;++w) {
+			unsigned long xpixel = XGetPixel(image, w, h);
+			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
+			unsigned int green = (xpixel & 0x0000ff00) >> 8;
+			unsigned int blue  = (xpixel & 0x000000ff);
+
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=blue;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=green;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=red;
+		}
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
+	}
+
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
+	XDestroyImage(image);
+	image = NULL;
+#endif
+	
+	/*
 	//Paint framebuffer solid white
 	int w, h;
 	for(h=0;h<rfbScreen->height;++h) {
@@ -365,33 +392,7 @@ void DKVncServer::DrawBuffer()
 		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
 	}
 	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
-	
-	//TODO - some example code to try
-	/*
-	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
-	int w,h;
-	for(h=0;h<rfbScreen->height;++h) {
-		for(w=0;w<rfbScreen->width;++w) {
-			unsigned long xpixel = XGetPixel(image, w, h);
-			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
-			unsigned int green = (xpixel & 0x0000ff00) >> 8;
-			unsigned int blue  = (xpixel & 0x000000ff);
-
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=red;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=green;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=blue;
-		}
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
-	}
-
-	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
-	XDestroyImage(image);
-	image = NULL;
 	*/
-#endif
 
 	//rfbFillRect(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height, 0xffffff);
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
