@@ -54,6 +54,84 @@ bool DKMac::GetScreenHeight(int& h)
 	return true;
 }
 
+///////////////////////
+bool DKMac::LeftPress()
+{
+	CGPoint point;
+	GetMousePos(point.x, point.y);
+	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, point, kCGMouseButtonLeft);
+	CGEventPost(kCGHIDEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
+/////////////////////////
+bool DKMac::LeftRelease()
+{
+	CGPoint point;
+	GetMousePos(point.x, point.y);
+	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, point, kCGMouseButtonLeft);
+	CGEventPost(kCGHIDEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
+////////////////////////
+bool DKMac::RightPress()
+{
+	CGPoint point;
+	GetMousePos(point.x, point.y);
+	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventRightMouseDown ,point, kCGMouseButtonRight);
+	CGEventPost(kCGHIDEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
+//////////////////////////
+bool DKMac::RightRelease()
+{
+	CGPoint point;
+	GetMousePos(point.x, point.y);
+	CGEventRef eventRef = CGEventCreateMouseEvent(NULL, kCGEventRightMouseUp, point, kCGMouseButtonRight);
+	CGEventPost(kCGHIDEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
+/////////////////////////
+bool DKMac::MiddlePress()
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////
+bool DKMac::MiddleRelease()
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////
+bool DKMac::PressKey(int key)
+{
+	CGKeyCode keyCode = key;
+	CGEventRef eventRef = CGEventCreateKeyboardEvent(NULL, keyCode, true);
+	CGEventPost(kCGSessionEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
+///////////////////////////////
+bool DKMac::ReleaseKey(int key)
+{
+	CGKeyCode keyCode = key;
+	CGEventRef eventRef = CGEventCreateKeyboardEvent(NULL, keyCode, false);
+	CGEventPost(kCGSessionEventTap, eventRef);
+	CFRelease(eventRef);
+	return true;
+}
+
 ////////////////////////////////////////////////////////////
 bool DKMac::VirtualMemory(unsigned long long& virtualMemory)
 {

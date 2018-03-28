@@ -254,6 +254,9 @@ bool DKUtil::LeftPress()
 #ifdef WIN32
 	return DKWindows::LeftPress();
 #endif
+#ifdef MAC
+	return DKMac::LeftPress();
+#endif
 #ifdef LINUX
 	return DKLinux::LeftPress();
 #endif
@@ -266,6 +269,9 @@ bool DKUtil::LeftRelease()
 {
 #ifdef WIN32
 	return DKWindows::LeftRelease();
+#endif
+#ifdef MAC
+	return DKMac::LeftRelease();
 #endif
 #ifdef LINUX
 	return DKLinux::LeftRelease();
@@ -280,6 +286,9 @@ bool DKUtil::MiddlePress()
 #ifdef WIN32
 	return DKWindows::MiddlePress();
 #endif
+#ifdef MAC
+	return DKMac::MiddlePress();
+#endif
 #ifdef LINUX
 	return DKLinux::MiddlePress();
 #endif
@@ -292,6 +301,9 @@ bool DKUtil::MiddleRelease()
 {
 #ifdef WIN32
 	return DKWindows::MiddleRelease();
+#endif
+#ifdef MAC
+	return DKMac::MiddleRelease();
 #endif
 #ifdef LINUX
 	return DKLinux::MiddleRelease();
@@ -327,6 +339,9 @@ bool DKUtil::RightPress()
 #ifdef WIN32
 	return DKWindows::RightPress();
 #endif
+#ifdef MAC
+	return DKMac::RightPress();
+#endif
 #ifdef LINUX
 	return DKLinux::RightPress();
 #endif
@@ -339,6 +354,9 @@ bool DKUtil::RightRelease()
 {
 #ifdef WIN32
 	return DKWindows::RightRelease();
+#endif
+#ifdef MAC
+	return DKMac::RightRelease();
 #endif
 #ifdef LINUX
 	return DKLinux::RightRelease();
@@ -471,6 +489,9 @@ bool DKUtil::PressKey(const int& key)
 #ifdef WIN32
 	return DKWindows::PressKey(key);
 #endif
+#ifdef MAC
+	return DKMac::PressKey(key);
+#endif
 #ifdef LINUX
 	return DKLinux::PressKey(key);
 #endif
@@ -483,6 +504,9 @@ bool DKUtil::ReleaseKey(const int& key)
 {
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
+#endif
+#ifdef MAC
+	return DKMac::ReleaseKey(key);
 #endif
 #ifdef LINUX
 	return DKLinux::ReleaseKey(key);

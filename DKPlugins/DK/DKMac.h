@@ -15,6 +15,14 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
+	static bool LeftPress();
+	static bool LeftRelease();
+	static bool RightPress();
+	static bool RightRelease();
+	static bool MiddlePress();
+	static bool MiddleRelease();
+	static bool PressKey(int key);
+	static bool ReleaseKey(int key);
 
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
