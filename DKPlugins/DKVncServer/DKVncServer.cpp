@@ -16,6 +16,12 @@ Window DKVncServer::root;
 XImage* DKVncServer::image;
 #endif
 
+#ifdef MAC
+CGImageRef DKVncServer::image_ref;
+CGDataProviderRef DKVncServer::provider;
+CFDataRef DKVncServer::dataref;
+#endif
+
 #ifdef __IRIX__
 #include <netdb.h>
 #endif
@@ -78,22 +84,15 @@ bool DKVncServer::Init()
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
+#ifdef MAC
+	image_ref = CGDisplayCreateImage(CGMainDisplayID());
+	provider = CGImageGetDataProvider(image_ref);
+	dataref = CGDataProviderCopyData(provider);
+#endif
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(disp);
-	//XMapWindow(disp, root);
 #endif
-
-/*
-#ifdef WIN32
-	HWND desktop = GetDesktopWindow();
-	RECT size;
-	if(GetWindowRect(desktop, &size)){
-		desktopWidth = size.right - size.left;
-		desktopHeight = size.bottom - size.top;
-	}
-#endif
-*/
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
@@ -315,16 +314,13 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef MAC
-	CGImageRef image_ref = CGDisplayCreateImage(CGMainDisplayID());
-	CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
-	CFDataRef dataref = CGDataProviderCopyData(provider);
 	size_t width, height;
     width = CGImageGetWidth(image_ref);
 	height = CGImageGetHeight(image_ref); 
 	size_t bpp = CGImageGetBitsPerPixel(image_ref) / 8;
 	memcpy(rfbScreen->frameBuffer, CFDataGetBytePtr(dataref), width * height * bpp);
-	CFRelease(dataref); 
-	CGImageRelease(image_ref); 
+	//CFRelease(dataref); 
+	//CGImageRelease(image_ref); 
 #endif
 
 #ifdef LINUX

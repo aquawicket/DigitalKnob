@@ -51,6 +51,11 @@ public:
 	static DKString capture; //GDI, DIRECTX, OPENGL
 	static std::vector<ClientLog> clientLog;
 
+#ifdef MAC
+	static CGImageRef image_ref;
+	static CGDataProviderRef provider;
+	static CFDataRef dataref;
+#endif
 #ifdef LINUX
 	static Display* disp;
 	static Window root;
