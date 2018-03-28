@@ -277,6 +277,9 @@ bool DKUtil::MiddlePress()
 #ifdef WIN32
 	return DKWindows::MiddlePress();
 #endif
+#ifdef LINUX
+	return DKLinux::MiddlePress();
+#endif
 	DKLog("DKUtil::MiddlePress() not implemented on this OS \n", DKWARN);
 	return false;
 }
@@ -286,6 +289,9 @@ bool DKUtil::MiddleRelease()
 {
 #ifdef WIN32
 	return DKWindows::MiddleRelease();
+#endif
+#ifdef LINUX
+	return DKLinux::MiddleRelease();
 #endif
 	DKLog("DKUtil::MiddleRelease() not implemented on this OS \n", DKWARN);
 	return false;
@@ -318,6 +324,9 @@ bool DKUtil::RightPress()
 #ifdef WIN32
 	return DKWindows::RightPress();
 #endif
+#ifdef LINUX
+	return DKLinux::RightPress();
+#endif
 	DKLog("DKUtil::RightPress() not implemented on this OS \n", DKWARN);
 	return false;
 }
@@ -327,6 +336,9 @@ bool DKUtil::RightRelease()
 {
 #ifdef WIN32
 	return DKWindows::RightRelease();
+#endif
+#ifdef LINUX
+	return DKLinux::RightRelease();
 #endif
 	DKLog("DKUtil::RightRelease() not implemented on this OS \n", DKWARN);
 	return false;

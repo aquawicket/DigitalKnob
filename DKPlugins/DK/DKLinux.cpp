@@ -76,6 +76,46 @@ bool DKLinux::LeftRelease()
 	return true;
 }
 
+//////////////////////////
+bool DKLinux::RightPress()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 2, true, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
+////////////////////////////
+bool DKLinux::RightRelease()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 2, false, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
+///////////////////////////
+bool DKLinux::MiddlePress()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 3, true, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
+/////////////////////////////
+bool DKLinux::MiddleRelease()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 3, false, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
 ////////////////////////////////////
 bool DKLinux::GetScreenWidth(int& w)
 {

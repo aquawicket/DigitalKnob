@@ -24,6 +24,10 @@ public:
 	static bool KeyIsDown(int& key);
 	static bool LeftPress();
 	static bool LeftRelease();
+	static bool RightPress();
+	static bool RightRelease();
+	static bool MiddlePress();
+	static bool MiddleRelease();
 	static bool LowPowerMonitor();
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
