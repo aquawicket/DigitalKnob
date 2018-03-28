@@ -315,39 +315,16 @@ void DKVncServer::DrawBuffer()
 #endif
 
 #ifdef MAC
-	//Paint framebuffer solid white
-	int w, h;
-	for(h=0;h<rfbScreen->height;++h) {
-		for(w=0;w<rfbScreen->width;++w) {
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=0xff;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=0xff;
-			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=0xff;
-		}
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
-		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
-	}
-	rfbMarkRectAsModified(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height);
-	
-	//https://stackoverflow.com/questions/17334786/get-pixel-from-the-screen-screenshot-in-max-osx
-	//TODO - some example code to try
-    /*
-	CGImageRef image_ref = CGDisplayCreateImage(CGMainDisplayID()); 
+	CGImageRef image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	CGDataProviderRef provider = CGImageGetDataProvider(image_ref);
 	CFDataRef dataref = CGDataProviderCopyData(provider);
-	size_t width, height;    width = CGImageGetWidth(image_ref);
+	size_t width, height;
+    width = CGImageGetWidth(image_ref);
 	height = CGImageGetHeight(image_ref); 
 	size_t bpp = CGImageGetBitsPerPixel(image_ref) / 8;
-	uint8 *pixels = malloc(width * height * bpp);         //FIXME
-	memcpy(pixels, CFDataGetBytePtr(dataref), width * height * bpp);
+	memcpy(rfbScreen->frameBuffer, CFDataGetBytePtr(dataref), width * height * bpp);
 	CFRelease(dataref); 
 	CGImageRelease(image_ref); 
-	FILE *stream = fopen("/Users/aquawicket/Desktop/screencap.raw", "w+");
-	fwrite(pixels, bpp, width * height, stream);
-	fclose(stream); 
-	free(pixels);
-     */
 #endif
 
 #ifdef LINUX
