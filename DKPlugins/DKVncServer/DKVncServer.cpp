@@ -455,6 +455,7 @@ void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 	//DKLog("keyevent(): key="+toString((int)key)+"\n", DKINFO);
 
 	int k = key;
+#ifndef LINUX
 	switch(key){
 		case 65307: k = 27; break; //ESC
 		case 65470: k = 112; break; //F1
@@ -611,6 +612,7 @@ void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 		case 65454: k = 110; break; //.         
 		default: break;
 	}
+#endif
 	
 	if(down){
 		DKUtil::PressKey(k);
