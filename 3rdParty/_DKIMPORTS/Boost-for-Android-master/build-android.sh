@@ -28,7 +28,7 @@
 # -----------------------
 
 BOOST_VER1=1
-BOOST_VER2=66
+BOOST_VER2=53
 BOOST_VER3=0
 register_option "--boost=<version>" boost_version "Boost version to be used, one of {1.66.0, 1.65.1, 1.55.0, 1.54.0, 1.53.0, 1.49.0, 1.48.0, 1.45.0}, default is 1.66.0."
 boost_version()
