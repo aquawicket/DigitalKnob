@@ -380,8 +380,8 @@ bool DKSDLWindowAndroid::onMouse(void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKSDLWindowAndroid::onAccel(void* input, void* output)
+/////////////////////////////////////////////////////////////////
+bool DKSDLWindowAndroid::onAccel(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
