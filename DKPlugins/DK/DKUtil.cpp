@@ -251,6 +251,9 @@ bool DKUtil::LeftPress()
 #ifdef WIN32
 	return DKWindows::LeftPress();
 #endif
+#ifdef LINUX
+	return DKLinux::LeftPress();
+#endif
 	DKLog("DKUtil::LeftPress() not implemented on this OS \n", DKWARN);
 	return false;
 }
@@ -260,6 +263,9 @@ bool DKUtil::LeftRelease()
 {
 #ifdef WIN32
 	return DKWindows::LeftRelease();
+#endif
+#ifdef LINUX
+	return DKLinux::LeftRelease();
 #endif
 	DKLog("DKUtil::LeftRelease() not implemented on this OS \n", DKWARN);
 	return false;
