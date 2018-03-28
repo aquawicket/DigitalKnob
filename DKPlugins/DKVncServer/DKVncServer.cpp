@@ -366,7 +366,22 @@ void DKVncServer::DrawBuffer()
 	*/
 #endif
 
-	rfbFillRect(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height, 0xffffff);
+	//Paint framebuffer solid black
+	int w, h;
+	for(h=0;h<rfbScreen->height;++h) {
+		for(w=0;w<rfbScreen->width;++w) {
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+0]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+1]=0xff;
+			rfbScreen->frameBuffer[(h*rfbScreen->width+w)*bpp+2]=0xff;
+		}
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+0]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+1]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+2]=0xff;
+		rfbScreen->frameBuffer[h*rfbScreen->width*bpp+3]=0xff;
+	}
+	rfbMarkRectAsModified(rfbScreen,0,0,rfbScreen->width,rfbScreen->height);
+
+	//rfbFillRect(rfbScreen, 0, 0, rfbScreen->width, rfbScreen->height, 0xffffff);
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
