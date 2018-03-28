@@ -80,7 +80,7 @@ bool DKVncServer::Init()
 
 #ifdef LINUX
 	disp = XOpenDisplay(NULL);
-	root = XDefaultRootWindow(d);
+	root = XDefaultRootWindow(disp);
 	//XMapWindow(disp, root);
 #endif
 
