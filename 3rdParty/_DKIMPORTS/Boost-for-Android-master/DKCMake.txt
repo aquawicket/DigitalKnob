@@ -1,5 +1,5 @@
-DKDEPEND(android-ndk-r10e)
-##DKDEPEND(android-ndk-r16b)
+##DKDEPEND(android-ndk-r10e)
+DKDEPEND(android-ndk-r16b)
 
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
@@ -11,21 +11,15 @@ ENDIF()
 DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
-IF(EXISTS ${BOOST}/boost_1_53_0)
+IF(EXISTS ${BOOST}/boost_1_66_0)
 	###
 ELSE()
 	DKSETPATH(${BOOST})
-	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_53_0.tar.bz2)
+	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_66_0.tar.bz2)
 ENDIF()
-##IF(EXISTS ${BOOST}/boost_1_66_0)
-##	###
-##ELSE()
-##	DKSETPATH(${BOOST})
-##	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_66_0.tar.bz2)
-##ENDIF()
 
 ### LINK ###
-#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53_0)
+#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66_0)
 
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_66.a)
