@@ -22,6 +22,8 @@ public:
 	static bool GetScreenHeight(int& h);
 	static bool GetVolume(float& volume);
 	static bool KeyIsDown(int& key);
+	static bool LeftPress();
+	static bool LeftRelease();
 	static bool LowPowerMonitor();
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);

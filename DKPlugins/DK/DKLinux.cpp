@@ -55,6 +55,26 @@ bool DKLinux::SetMousePos(const int& x, const int& y)
 	return true;
 }
 
+/////////////////////////
+bool DKLinux::LeftPress()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 1, true, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
+///////////////////////////
+bool DKLinux::LeftRelease()
+{
+	Display *display = XOpenDisplay(NULL);
+	XTestFakeButtonEvent(display, 1, false, 0);
+	XFlush(display);
+	XCloseDisplay(display);
+	return true;
+}
+
 ////////////////////////////////////
 bool DKLinux::GetScreenWidth(int& w)
 {
