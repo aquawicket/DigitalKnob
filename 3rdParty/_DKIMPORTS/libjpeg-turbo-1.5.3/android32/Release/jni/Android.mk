@@ -2,7 +2,7 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := libjpeg
+LOCAL_MODULE := libturbojpeg
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
@@ -50,7 +50,7 @@ LOCAL_SRC_FILES :=   \
 ../../../jdmainct.c \
 ../../../jcmaster.c \
 ../../../jquant1.c \
-../../../jmemansi.c \
+##../../../jmemansi.c \
 ../../../jcsample.c \
 ../../../jdmarker.c \
 ../../../jcapistd.c \
