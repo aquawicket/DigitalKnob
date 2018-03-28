@@ -2,10 +2,13 @@
 #ifndef DKVncServer_H
 #define DKVncServer_H
 #include "DK/DK.h"
+
 #ifdef LINUX
+#include <unistd.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 typedef unsigned long z_size_t;
 #endif
-#include <rfb/rfb.h>
 
 //DirectX Capture
 #ifdef WIN32
@@ -18,6 +21,8 @@ typedef unsigned long z_size_t;
 #define HRCHECK(__expr) {hr=(__expr);if(FAILED(hr)){wprintf(L"FAILURE 0x%08X (%i)\n\tline: %u file: '%s'\n\texpr: '" WIDEN(#__expr) L"'\n",hr, hr, __LINE__,__WFILE__);}}
 #define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
+
+#include <rfb/rfb.h>
 
 ////////////////////////
 typedef struct ClientLog
