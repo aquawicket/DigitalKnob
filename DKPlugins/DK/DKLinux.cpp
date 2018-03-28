@@ -47,15 +47,19 @@ bool DKLinux::GetMousePos(int& x, int& y)
 ////////////////////////////////////
 bool DKLinux::GetScreenWidth(int& w)
 {
-	//TODO
-	return false;
+	Display* d = XOpenDisplay(NULL);
+	Screen* s = DefaultScreenOfDisplay(d);
+	w = s->width;
+	return true;
 }
 
 /////////////////////////////////////
 bool DKLinux::GetScreenHeight(int& h)
 {
-	//TODO
-	return false;
+	Display* d = XOpenDisplay(NULL);
+	Screen* s = DefaultScreenOfDisplay(d);
+	h = s->height;
+	return true;
 }
 
 //////////////////////////////////////////
