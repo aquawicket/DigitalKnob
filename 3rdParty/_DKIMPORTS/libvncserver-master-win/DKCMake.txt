@@ -1,6 +1,10 @@
 DKDEPEND(zlib-1.2.11)
 DKDEPEND(libpng-1.7.0beta34)
-DKDEPEND(libjpeg-turbo-1.5.3)
+IF(ANDROID)
+	DKDEPEND(jpeg-6b)
+ELSE()
+	DKDEPEND(libjpeg-turbo-1.5.3)
+ENDIF()
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
