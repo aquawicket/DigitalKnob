@@ -5,7 +5,7 @@ TYPE = DKWidget_GetValue("BuildType");
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DKCreate("DKHook");
+	DKCreate("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
 	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
@@ -44,13 +44,13 @@ function AndroidImport_Import()
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
 	DK_Run(ANDROIDSTUDIO);
 	
-	DKHook_WaitForWindow("Welcome to Android Studio", 30); //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 30)){ return ; }  //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	var assets = DKAssets_LocalAssets();
-	DK_WaitForImage(assets+"DKBuild/import.bmp", 30); //Check for 30 seconds
-	DK_ClickImage(assets+"DKBuild/import.bmp");
+	if(!DK_WaitForImage(assets+"DKBuild/import.bmp", 30)){ return ; } //Check for 30 seconds
+	if(!DK_ClickImage(assets+"DKBuild/import.bmp")){ return; }
 
-	DKHook_WaitForWindow("Select Eclipse or Gradle Project to Import", 30); //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)){ return ; } //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	
 	//Multipe user folders
@@ -88,7 +88,7 @@ function AndroidImport_Import()
 	DK_Sleep(2000);
 	DK_StrokeKey(13) //stroke enter
 	
-	DKHook_WaitForWindow("Import Project from ADT (Eclipse Android)", 30); //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)){ return; } //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	path = WORKSPACE+"/"+APP+"_"+TYPE;
 	DK_SetClipboard(path);
@@ -100,8 +100,8 @@ function AndroidImport_Import()
 	DK_Sleep(3000);
 	DK_StrokeKey(13) //stroke enter
 	
-	DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500); //Check for 500 seconds
-	DK_ClickImage(assets+"DKBuild/enableNdk.bmp");
+	if(!DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500)){ return; } //Check for 500 seconds
+	if(!DK_ClickImage(assets+"DKBuild/enableNdk.bmp")){ return ; }
 	
 	/*
 	DK_WaitForImage(assets+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
