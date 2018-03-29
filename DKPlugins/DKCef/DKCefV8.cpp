@@ -102,6 +102,7 @@ bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
 	if(!DKUtil::FindImageOnScreen(file, x, y)){ return false; }
 	if(!DKUtil::SetMousePos(x, y)){ return false; }
 	if(!DKUtil::LeftClick()){ return false; }
+	retval->SetBool(0, true);
 	return true;
 }
 

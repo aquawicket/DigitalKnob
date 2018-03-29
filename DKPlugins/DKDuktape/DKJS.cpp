@@ -333,6 +333,7 @@ int DKJS::ClickImage(duk_context* ctx)
 	if(!DKUtil::FindImageOnScreen(file, x, y)){ return 0; }
 	if(!DKUtil::SetMousePos(x, y)){ return 0; }
 	if(!DKUtil::LeftClick()){ return 0; }
+	duk_push_true(ctx);
 	return 1;
 }
 
