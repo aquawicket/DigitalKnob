@@ -58,7 +58,7 @@ ENDIF()
 
 IF(UNIX)
 DKSETPATH(${BOOST})
-SET(arg bash sudo ./build-android.sh ${ANDROID_NDK})
+SET(arg sudo bash ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
 EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
