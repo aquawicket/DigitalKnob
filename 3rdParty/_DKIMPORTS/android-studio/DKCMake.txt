@@ -4,10 +4,8 @@ ENDIF()
 
 IF(NOT EXISTS "C:/Program Files/Android/Android Studio/bin/studio.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
-	##DKDOWNLOAD(${DKONLINE}/Tools/android-studio-bundle-143.2915827-windows.exe)
-	DKDOWNLOAD(https://dl.google.com/dl/android/studio/install/2.1.2.0/android-studio-bundle-143.2915827-windows.exe)
-	## android-studio-ide-173.4670197-windows.exe
+	DKDOWNLOAD(${DKONLINE}/Tools/android-studio-ide-173.4670197-windows.exe)
 	DKSETPATH(C:/)
 	DKSET(QUEUE_BUILD ON)
-	ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-bundle-143.2915827-windows.exe)
+	ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-173.4670197-windows.exe)
 ENDIF()
