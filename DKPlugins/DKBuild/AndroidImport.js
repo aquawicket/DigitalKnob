@@ -35,7 +35,6 @@ function AndroidImport_Import()
 		
 	if(!appdir){
 		DKLog("AndroidImport_Import(): cannot locate appdir.\n");
-		
 		return;
 	}
 	
@@ -44,13 +43,25 @@ function AndroidImport_Import()
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
 	DK_Run(ANDROIDSTUDIO);
 	
-	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 30)){ return ; }  //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 30)){
+		DKLog("DKHandles_WaitForWindow(Welcome to Android Studio): failed\n", DKWARN);
+		return; 
+	}  //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	var assets = DKAssets_LocalAssets();
-	if(!DK_WaitForImage(assets+"DKBuild/import.bmp", 30)){ return ; } //Check for 30 seconds
-	if(!DK_ClickImage(assets+"DKBuild/import.bmp")){ return; }
+	if(!DK_WaitForImage(assets+"DKBuild/import.bmp", 30)){
+		DKLog("DK_WaitForImage("+assets+"DKBuild/import.bmp): failed\n", DKWARN);
+		return;
+	} //Check for 30 seconds
+	if(!DK_ClickImage(assets+"DKBuild/import.bmp")){
+		DKLog("DK_ClickImage("+assets+"DKBuild/import.bmp): failed\n", DKWARN);
+		return; 
+	}
 
-	if(!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)){ return ; } //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)){
+		DKLog("DKHandles_WaitForWindow(Select Eclipse or Gradle Project to Import): failed\n", DKWARN);
+		return; 
+	} //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	
 	//Multipe user folders
@@ -88,7 +99,10 @@ function AndroidImport_Import()
 	DK_Sleep(2000);
 	DK_StrokeKey(13) //stroke enter
 	
-	if(!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)){ return; } //Check for 30 seconds
+	if(!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)){
+		DKLog("DKHandles_WaitForWindow(Import Project from ADT (Eclipse Android)): failed\n", DKWARN);
+		return; 
+	} //Check for 30 seconds
 	DKLog("Window is ready.\n");
 	path = WORKSPACE+"/"+APP+"_"+TYPE;
 	DK_SetClipboard(path);
@@ -100,8 +114,14 @@ function AndroidImport_Import()
 	DK_Sleep(3000);
 	DK_StrokeKey(13) //stroke enter
 	
-	if(!DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500)){ return; } //Check for 500 seconds
-	if(!DK_ClickImage(assets+"DKBuild/enableNdk.bmp")){ return ; }
+	if(!DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500)){
+		DKLog("DK_WaitForImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
+		return; 
+	} //Check for 500 seconds
+	if(!DK_ClickImage(assets+"DKBuild/enableNdk.bmp")){
+		DKLog("DK_ClickImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
+		return ; 
+	}
 	
 	/*
 	DK_WaitForImage(assets+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
