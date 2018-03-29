@@ -186,7 +186,7 @@ if [ -z "$AndroidNDKRoot" ] ; then
 else
   # User passed the NDK root as a parameter. Make sure the directory
   # exists and make it an absolute path.
-  if [ ! -f "$AndroidNDKRoot/ndk-build.cmd" ]; then
+  if [ ! -f "$AndroidNDKRoot/ndk-build" ]; then
     dump "ERROR: $AndroidNDKRoot is not a valid NDK root"
     exit 1
   fi
