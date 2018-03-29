@@ -92,7 +92,7 @@ function AndroidImport_Import()
 	
 	DKLog(path+"\n");
 	DK_SetClipboard(path);
-	DK_Sleep(2000);
+	DK_Sleep(3000);
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
 	DK_ReleaseKey(17); //release ctrl
@@ -109,12 +109,13 @@ function AndroidImport_Import()
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
 	DK_ReleaseKey(17); //release ctrl
-	DK_Sleep(2000);
+	DK_Sleep(10000);
 	DK_StrokeKey(13) //stroke enter
-	DK_Sleep(3000);
+	DK_Sleep(10000);
 	DKLog("Pressing enter\n");
 	DK_StrokeKey(13) //stroke enter
 	
+	/*
 	if(!DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500)){ //Check for 500 seconds
 		DKLog("DK_WaitForImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
 		return; 
@@ -123,6 +124,7 @@ function AndroidImport_Import()
 		DKLog("DK_ClickImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
 		return ; 
 	}
+	*/
 	
 	/*
 	DK_WaitForImage(assets+"DKBuild/selectNdk.bmp", 30); //Check for 30 seconds
