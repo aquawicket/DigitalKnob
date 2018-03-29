@@ -15,7 +15,7 @@ ENDIF()
 IF(NOT MAC)
 	DKDEPEND(tiff-4.0.3)
 ENDIF()
-DKDEPEND(freetype-2.5.5)
+##DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
 DKINSTALL(http://DigitalKnob.com/Download/Libs/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
