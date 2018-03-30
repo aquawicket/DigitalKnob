@@ -1,5 +1,5 @@
-##DKDEPEND(android-ndk-r10e)
-DKDEPEND(android-ndk-r16b)
+DKDEPEND(android-ndk-r10e)
+##DKDEPEND(android-ndk-r16b)
 
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
@@ -11,6 +11,7 @@ ENDIF()
 DKINSTALL(${DKONLINE}/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
+##FIXME: this get's overwritten
 IF(EXISTS ${BOOST}/boost_1_66_0)
 	###
 ELSE()
@@ -19,31 +20,31 @@ ELSE()
 ENDIF()
 
 ### LINK ###
-#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66_0)
+#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66)
 
 IF(Boost_Chrono)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_66.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_66.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
 ENDIF()
 
 IF(Boost_DateTime)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_66.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_66.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_66.a)
 ENDIF()
 
 IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_66.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_66.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_66.a)
 ENDIF()
 
 IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_66.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_66.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_66.a)
 ENDIF()
 
 IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_66.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_66.a)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
 ENDIF()
 
 
@@ -53,12 +54,12 @@ ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
-./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${ANDROID_NDK}")
+./build-android.sh ${ANDROID_NDK}")
 ENDIF()
 
 IF(UNIX)
 DKSETPATH(${BOOST})
-SET(arg sudo bash ./build-android.sh ${ANDROID_NDK})
+SET(arg ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
 EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
