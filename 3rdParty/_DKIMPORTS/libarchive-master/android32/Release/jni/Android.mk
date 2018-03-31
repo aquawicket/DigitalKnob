@@ -3,10 +3,10 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := zlib
-LIBDIR := /obj/local/armeabi
+LIBDIR := obj/local/armeabi
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
-LIBDIR := /obj/local/armeabi-v7a
+LIBDIR := obj/local/armeabi-v7a
 endif
 LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(ZLIB)/android32/Release/$(LIBDIR)/libzlib.a
 include $(PREBUILT_STATIC_LIBRARY)
