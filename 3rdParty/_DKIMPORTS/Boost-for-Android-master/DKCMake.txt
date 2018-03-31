@@ -80,6 +80,7 @@ ENDIF()
 
 IF(UNIX)
 IF(NOT APPLE)
+	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_66)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
