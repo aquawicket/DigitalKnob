@@ -192,6 +192,7 @@ bool DKSDLWindow::Init()
 	DKClass::RegisterFunc("DKSDLWindow::GetHeight", &DKSDLWindow::GetHeight, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseX", &DKSDLWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetMouseY", &DKSDLWindow::GetMouseY, this);
+	DKClass::RegisterFunc("DKSDLWindow::GetPixelRatio", &DKSDLWindow::GetPixelRatio, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetWidth", &DKSDLWindow::GetWidth, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetX", &DKSDLWindow::GetX, this);
 	DKClass::RegisterFunc("DKSDLWindow::GetY", &DKSDLWindow::GetY, this);
@@ -377,6 +378,13 @@ bool DKSDLWindow::GetMouseY(const void* input, void* output)
 	int mouseY;
 	SDL_GetMouseState(NULL, &mouseY);
 	*(int*)output = mouseY;
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKSDLWindow::GetPixelRatio(const void* input, void* output)
+{
+	*(int*)output = 1;
 	return true;
 }
 
