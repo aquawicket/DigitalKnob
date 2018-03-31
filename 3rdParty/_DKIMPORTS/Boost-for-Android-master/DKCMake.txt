@@ -22,6 +22,7 @@ ENDIF()
 ### LINK ###
 #ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66)
 
+IF(NOT UNIX)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
@@ -45,6 +46,65 @@ ENDIF()
 IF(Boost_Thread)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
+ENDIF()
+ENDIF()
+
+IF(UNIX)
+IF(APPLE)
+IF(Boost_Chrono)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_DateTime)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_66.aa)
+ENDIF()
+
+IF(Boost_Filesystem)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_System)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_Thread)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_66.a)
+ENDIF()
+ENDIF()
+ENDIF()
+
+IF(UNIX)
+IF(NOT APPLE)
+IF(Boost_Chrono)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_DateTime)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_Filesystem)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_System)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_66.a)
+ENDIF()
+
+IF(Boost_Thread)
+	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
+	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_66.a)
+ENDIF()
+ENDIF()
 ENDIF()
 
 
