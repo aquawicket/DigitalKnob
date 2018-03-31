@@ -1027,7 +1027,7 @@ ENDFUNCTION()
 ###########################
 FUNCTION(DKRELEASE_LIB arg)
 	IF(RELEASE)
-		MESSAGE(${arg})
+		MESSAGE("DKRELEASE_LIB(${arg})")
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 		IF(NOT EXISTS ${arg})
 			MESSAGE("MISSING: ${arg}")
