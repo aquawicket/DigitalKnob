@@ -1027,7 +1027,7 @@ ENDFUNCTION()
 ###########################
 FUNCTION(DKRELEASE_LIB arg)
 	IF(RELEASE)
-		MESSAGE("DKRELEASE_LIB(${arg})")
+		##MESSAGE("DKRELEASE_LIB(${arg})")
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 		IF(NOT EXISTS ${arg})
 			MESSAGE("MISSING: ${arg}")
@@ -1097,14 +1097,18 @@ ENDFUNCTION()
 #############################
 FUNCTION(APPLE_DEBUG_LIB arg)
 	IF(APPLE)
+	IF(NOT ANDROID)
 		DKDEBUG_LIB(${arg})
+	ENDIF()
 	ENDIF()
 ENDFUNCTION()
 
 ###############################
 FUNCTION(APPLE_RELEASE_LIB arg)
 	IF(APPLE)
+	IF(NOT ANDROID)
 		DKRELEASE_LIB(${arg})
+	ENDIF()
 	ENDIF()
 ENDFUNCTION()
 
