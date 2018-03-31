@@ -1,4 +1,3 @@
-##DKDEPEND(android-ndk-r10e)
 DKDEPEND(android-ndk-r16b)
 
 IF(NOT UNIX)
@@ -19,10 +18,10 @@ ELSE()
 	DKDOWNLOAD(${DKONLINE}/Libs/boost_1_66_0.tar.bz2)
 ENDIF()
 
-### LINK ###
-#ANDROID_INCLUDE(${BOOST}/build/include/boost-1_66)
 
+### LINK ###
 IF(NOT UNIX)
+	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_66)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_66.a)
@@ -51,6 +50,7 @@ ENDIF()
 
 IF(UNIX)
 IF(APPLE)
+	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_66)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_66.a)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_66.a)
