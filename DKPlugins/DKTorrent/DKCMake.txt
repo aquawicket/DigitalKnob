@@ -1,0 +1,3 @@
+DKDEPEND(libtorrent-libtorrent-1_1_3)
+
+DKPLUGIN(DKTorrent)
