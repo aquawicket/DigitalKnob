@@ -20,6 +20,7 @@ function app_OnEvent(event)
 //////////////////////////
 function app_LoadPlugins()
 {
+	DKCreate("DKScreenRecorder");
 	DKCreate("DKTray/DKTray.js", function(){
 		DKTray_AddItem("Record", 1003);
 		DKAddEvent("DKTray", "1003", app_OnEvent);
