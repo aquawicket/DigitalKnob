@@ -6,11 +6,23 @@ var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html";
 
 DKCreate("DK/init.js", function(){});
 
+///////////////////////////
+function app_OnEvent(event)
+{
+	DKLog("app_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	
+	if(DK_Type(event, "1003")){ //Tray, Fullscreen
+		DKLog("Clicked Tray -> Record\n", DKINFO);
+		//TODO: Record the screen to a file. 
+	}
+}
+
 //////////////////////////
 function app_LoadPlugins()
 {
 	DKCreate("DKTray/DKTray.js", function(){
-
+		DKTray_AddItem("Record", 1003);
+		DKAddEvent("DKTray", "1003", app_OnEvent);
 	});
 }
 
