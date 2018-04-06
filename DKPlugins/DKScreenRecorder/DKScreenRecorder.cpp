@@ -1,3 +1,5 @@
+// http://tommy.chheng.com/post/123568080616/encode-opengl-to-video-with-opencv
+
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKScreenRecorder.h"
