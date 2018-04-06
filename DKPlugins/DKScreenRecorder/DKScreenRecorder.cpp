@@ -92,9 +92,14 @@ void DKScreenRecorder::Loop()
 
 	//typedef unsigned char pixel;
 	//pixel *pixels = this->window_->GetRGBACharPixelData(0, 0, this->w_, this->h_, true);
-	cv::Mat img2 = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
-	videoWriter.write(img2);
-	img2.release();
+	cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+	//cv::Mat rgbMat;
+	//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
+	//Work with mat 2 now
+
+
+	videoWriter.write(brgMat);
+	brgMat.release();
 }
 
 ///////////////////////////////////
@@ -181,9 +186,9 @@ void DKScreenRecorder::DrawBuffer()
 		while(src != ((int*)bmp.bmBits) + (desktopWidth * desktopHeight - 1)){
 			char* c_dest = (char*)dest;
 			char* c_src = (char*)src;
-			c_dest[0] = c_src[0];
+			c_dest[0] = c_src[2];
 			c_dest[1] = c_src[1];
-			c_dest[2] = c_src[2];
+			c_dest[2] = c_src[0];
 			c_dest[3] = 0;
 			src++;
 			dest++;
