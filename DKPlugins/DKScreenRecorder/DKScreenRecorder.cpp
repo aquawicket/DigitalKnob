@@ -49,12 +49,12 @@ bool DKScreenRecorder::Init()
 	DKUtil::GetScreenHeight(desktopHeight);
 
 	//OpenCV
-	CvVideoWriter* writer = 0;
-	int isColor = 1;
-	int fps     = 30;
-	int width  = desktopWidth;
-	int height  = desktopHeight;
-
+	cv::VideoWriter outputVideo;
+	outputVideo.open("out.avi", cv::VideoWriter::fourcc('P','I','M','1'), 30, cvSize(desktopWidth, desktopHeight), true);
+	if(!outputVideo.isOpened()){
+		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
+		return false;
+	}
 /*
 #ifdef MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
