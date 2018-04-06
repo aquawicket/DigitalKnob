@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\digitalknob\DKPlugins\DKScreenRecorder\DKScreenRecorder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\digitalknob\DKPlugins\DKScreenRecorder\DKScreenRecorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\digitalknob\DKPlugins\DKScreenRecorder\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A22610A3-C565-3FD3-B798-1A28EA0C0F37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4F7BE8A5-CBA5-38C8-A14F-99E95F62DC08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

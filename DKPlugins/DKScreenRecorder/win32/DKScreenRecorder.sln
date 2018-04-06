@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "ALL_BUILD.vcxproj", "{64D74DAF-BE8F-3BC1-8501-99639A35DBFC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9B11C226-F897-36A6-9F6C-FD095FB81DB7} = {9B11C226-F897-36A6-9F6C-FD095FB81DB7}
+		{A8F603D0-B300-3230-AC91-E0E67B19A962} = {A8F603D0-B300-3230-AC91-E0E67B19A962}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DKScreenRecorder", "DKScreenRecorder.vcxproj", "{9B11C226-F897-36A6-9F6C-FD095FB81DB7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8F603D0-B300-3230-AC91-E0E67B19A962} = {A8F603D0-B300-3230-AC91-E0E67B19A962}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZERO_CHECK", "ZERO_CHECK.vcxproj", "{A8F603D0-B300-3230-AC91-E0E67B19A962}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64D74DAF-BE8F-3BC1-8501-99639A35DBFC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{64D74DAF-BE8F-3BC1-8501-99639A35DBFC}.Release|Win32.ActiveCfg = Release|Win32
+		{9B11C226-F897-36A6-9F6C-FD095FB81DB7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B11C226-F897-36A6-9F6C-FD095FB81DB7}.Debug|Win32.Build.0 = Debug|Win32
+		{9B11C226-F897-36A6-9F6C-FD095FB81DB7}.Release|Win32.ActiveCfg = Release|Win32
+		{9B11C226-F897-36A6-9F6C-FD095FB81DB7}.Release|Win32.Build.0 = Release|Win32
+		{A8F603D0-B300-3230-AC91-E0E67B19A962}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A8F603D0-B300-3230-AC91-E0E67B19A962}.Debug|Win32.Build.0 = Debug|Win32
+		{A8F603D0-B300-3230-AC91-E0E67B19A962}.Release|Win32.ActiveCfg = Release|Win32
+		{A8F603D0-B300-3230-AC91-E0E67B19A962}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
