@@ -41,8 +41,6 @@ bool DKScreenRecorder::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
 
-	
-
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
@@ -52,7 +50,6 @@ bool DKScreenRecorder::Init()
 		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
 		return false;
 	}
-
 
 /*
 #ifdef MAC
@@ -84,20 +81,9 @@ bool DKScreenRecorder::End()
 void DKScreenRecorder::Loop()
 {
 	DrawBuffer();
-
-	//TODO: the framebuffer holds a current image of the desktop
-	//TODO: we need to use OpenCV or FFMPEG to record this to a video file.
-	//IplImage* img = cvCreateImage(cvSize(desktopWidth, desktopHeight), IPL_DEPTH_8U, 3);
-	//img->imageData = frameBuffer;
-
-	//typedef unsigned char pixel;
-	//pixel *pixels = this->window_->GetRGBACharPixelData(0, 0, this->w_, this->h_, true);
 	cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
 	//cv::Mat rgbMat;
 	//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
-	//Work with mat 2 now
-
-
 	videoWriter.write(brgMat);
 	brgMat.release();
 }
