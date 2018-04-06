@@ -47,7 +47,7 @@ bool DKScreenRecorder::Init()
 	DKUtil::GetScreenHeight(desktopHeight);
 
 	//OpenCV
-	videoWriter.open("out.avi", cv::VideoWriter::fourcc('P','I','M','1'), 30, cvSize(desktopWidth, desktopHeight), true);
+	videoWriter.open("out.avi", cv::VideoWriter::fourcc('M','J','P','G'), 30, cvSize(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened()){
 		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
 		return false;
