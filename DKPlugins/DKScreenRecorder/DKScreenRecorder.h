@@ -43,6 +43,7 @@ public:
 	static int desktopHeight;
 
 	static cv::VideoWriter videoWriter;
+	static cv::Mat brgMat;
 
 #ifdef MAC
 	static CGImageRef image_ref;

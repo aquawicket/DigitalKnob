@@ -28,12 +28,20 @@ CFDataRef DKScreenRecorder::dataref;
 #include <netdb.h>
 #endif
 
+static int fps = 30;
 static int bpp = 4;
 DKString DKScreenRecorder::capture;
 char* DKScreenRecorder::frameBuffer;
 int DKScreenRecorder::desktopWidth;
 int DKScreenRecorder::desktopHeight;
 cv::VideoWriter DKScreenRecorder::videoWriter;
+cv::Mat DKScreenRecorder::brgMat;
+
+//fps padder
+static long now = 0;
+static long lastFrame = 0;
+static int ticksPerFrame = 1000 / fps;
+
 
 
 /////////////////////////////
@@ -70,6 +78,7 @@ bool DKScreenRecorder::Init()
 ////////////////////////////
 bool DKScreenRecorder::End()
 {
+	brgMat.release();
 	videoWriter.release();
 	return true;
 }
@@ -79,7 +88,7 @@ bool DKScreenRecorder::End()
 bool DKScreenRecorder::Record(const DKString& file)
 {
 	//OpenCV
-	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), 15, cvSize(desktopWidth, desktopHeight), true);
+	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened()){
 		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
 		return false;
@@ -90,6 +99,7 @@ bool DKScreenRecorder::Record(const DKString& file)
 /////////////////////////////
 bool DKScreenRecorder::Stop()
 {
+	brgMat.release();
 	videoWriter.release();
 	return true;
 }
@@ -99,12 +109,34 @@ void DKScreenRecorder::Loop()
 {
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
-		DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
-		cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+		//DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
+		//cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
 		//cv::Mat rgbMat;
 		//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
+		//videoWriter.write(brgMat);
+		//brgMat.release();
+	//}
+
+		//TODO - fill the frames until we are caught up to fps
+		//FIXME:  this isn't really working
+		//////////////////////////////////////////////////////
+		if(!now){ //init fps counter
+			DKUtil::GetTicks(now);
+			DKUtil::GetTicks(lastFrame);
+		}
+		DKUtil::GetTicks(now);
+		int delta = now - lastFrame;
+		if(delta < ticksPerFrame){
+			DrawBuffer();
+			brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+		}
+		DKUtil::GetTicks(lastFrame);
+		//////////////////////////////////////////////////////
+		if(brgMat.empty()){
+			brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+		}
 		videoWriter.write(brgMat);
-		brgMat.release();
+		//brgMat.release();
 	}
 }
 
