@@ -31,15 +31,18 @@ class DKScreenRecorder : public DKObjectT<DKScreenRecorder>
 public:
 	bool Init();
 	bool End();
+		
+	static bool Record(const DKString& file);
+	static bool Stop();
 	void Loop();
-
 	static void DrawBuffer();
+
 	static DKString capture; //GDI, DIRECTX, OPENGL
 	static char* frameBuffer;
 	static int desktopWidth;
 	static int desktopHeight;
 
-	cv::VideoWriter videoWriter;
+	static cv::VideoWriter videoWriter;
 
 #ifdef MAC
 	static CGImageRef image_ref;

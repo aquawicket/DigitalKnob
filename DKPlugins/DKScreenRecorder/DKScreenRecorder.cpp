@@ -33,23 +33,19 @@ DKString DKScreenRecorder::capture;
 char* DKScreenRecorder::frameBuffer;
 int DKScreenRecorder::desktopWidth;
 int DKScreenRecorder::desktopHeight;
+cv::VideoWriter DKScreenRecorder::videoWriter;
 
 
 /////////////////////////////
 bool DKScreenRecorder::Init()
 {
+	DKCreate("DKScreenRecorderJS");
+
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
 
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
-
-	//OpenCV
-	videoWriter.open("out.avi", cv::VideoWriter::fourcc('M','J','P','G'), 30, cvSize(desktopWidth, desktopHeight), true);
-	if(!videoWriter.isOpened()){
-		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
-		return false;
-	}
 
 /*
 #ifdef MAC
@@ -66,6 +62,8 @@ bool DKScreenRecorder::Init()
 	frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
  
 	DKApp::AppendLoopFunc(&DKScreenRecorder::Loop, this);
+
+	Record("out.avi"); //TEST
 	return true;
 }
 
@@ -77,16 +75,37 @@ bool DKScreenRecorder::End()
 }
 
 
+///////////////////////////////////////////////////
+bool DKScreenRecorder::Record(const DKString& file)
+{
+	//OpenCV
+	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), 30, cvSize(desktopWidth, desktopHeight), true);
+	if(!videoWriter.isOpened()){
+		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
+		return false;
+	}
+	return true;
+}
+
+/////////////////////////////
+bool DKScreenRecorder::Stop()
+{
+	videoWriter.release();
+	return true;
+}
+
 /////////////////////////////
 void DKScreenRecorder::Loop()
 {
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
-	DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
-	cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
-	//cv::Mat rgbMat;
-	//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
-	videoWriter.write(brgMat);
-	brgMat.release();
+	if(videoWriter.isOpened()){
+		DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
+		cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+		//cv::Mat rgbMat;
+		//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
+		videoWriter.write(brgMat);
+		brgMat.release();
+	}
 }
 
 ///////////////////////////////////
