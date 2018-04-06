@@ -1,3 +1,0 @@
-C:/digitalknob/DKPlugins/DKScreenRecorder/win32/CMakeFiles/DKScreenRecorder.dir
-C:/digitalknob/DKPlugins/DKScreenRecorder/win32/CMakeFiles/ALL_BUILD.dir
-C:/digitalknob/DKPlugins/DKScreenRecorder/win32/CMakeFiles/ZERO_CHECK.dir
