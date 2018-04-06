@@ -11,7 +11,8 @@ class DKScreenRecorderJS : public DKObjectT<DKScreenRecorderJS>
 public:
 	bool Init();
 	
-	static int Test(duk_context* ctx);
+	static int Record(duk_context* ctx);
+	static int Stop(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKScreenRecorderJS, true)

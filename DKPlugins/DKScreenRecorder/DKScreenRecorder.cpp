@@ -63,7 +63,7 @@ bool DKScreenRecorder::Init()
  
 	DKApp::AppendLoopFunc(&DKScreenRecorder::Loop, this);
 
-	Record("out.avi"); //TEST
+	//Record("out.avi"); //TEST
 	return true;
 }
 
