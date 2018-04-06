@@ -4,6 +4,8 @@
 #include "DK/DKFile.h"
 #include "DKScreenRecorder.h"
 
+#include "opencv2/videoio.hpp"
+
 #ifdef WIN32
 #define sleep Sleep
 #include <WS2tcpip.h>
@@ -41,8 +43,17 @@ bool DKScreenRecorder::Init()
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
 
+	
+
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
+
+	//OpenCV
+	CvVideoWriter* writer = 0;
+	int isColor = 1;
+	int fps     = 30;
+	int width  = desktopWidth;
+	int height  = desktopHeight;
 
 /*
 #ifdef MAC
