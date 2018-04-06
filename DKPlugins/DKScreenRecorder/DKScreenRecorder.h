@@ -21,6 +21,7 @@
 #define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
+#include "opencv2/videoio.hpp"
 
 /////////////////////////////////////////////////
 class DKScreenRecorder : public DKObjectT<DKScreenRecorder>
@@ -35,6 +36,8 @@ public:
 	static char* frameBuffer;
 	static int desktopWidth;
 	static int desktopHeight;
+
+	cv::VideoWriter videoWriter;
 
 #ifdef MAC
 	static CGImageRef image_ref;

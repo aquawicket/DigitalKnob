@@ -4,8 +4,6 @@
 #include "DK/DKFile.h"
 #include "DKScreenRecorder.h"
 
-#include "opencv2/videoio.hpp"
-
 #ifdef WIN32
 #define sleep Sleep
 #include <WS2tcpip.h>
@@ -49,12 +47,13 @@ bool DKScreenRecorder::Init()
 	DKUtil::GetScreenHeight(desktopHeight);
 
 	//OpenCV
-	cv::VideoWriter outputVideo;
-	outputVideo.open("out.avi", cv::VideoWriter::fourcc('P','I','M','1'), 30, cvSize(desktopWidth, desktopHeight), true);
-	if(!outputVideo.isOpened()){
+	videoWriter.open("out.avi", cv::VideoWriter::fourcc('P','I','M','1'), 30, cvSize(desktopWidth, desktopHeight), true);
+	if(!videoWriter.isOpened()){
 		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
 		return false;
 	}
+
+
 /*
 #ifdef MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
@@ -76,6 +75,7 @@ bool DKScreenRecorder::Init()
 ////////////////////////////
 bool DKScreenRecorder::End()
 {
+	videoWriter.release();
 	return true;
 }
 
@@ -83,9 +83,18 @@ bool DKScreenRecorder::End()
 /////////////////////////////
 void DKScreenRecorder::Loop()
 {
-	//DrawBuffer();
+	DrawBuffer();
+
 	//TODO: the framebuffer holds a current image of the desktop
 	//TODO: we need to use OpenCV or FFMPEG to record this to a video file.
+	//IplImage* img = cvCreateImage(cvSize(desktopWidth, desktopHeight), IPL_DEPTH_8U, 3);
+	//img->imageData = frameBuffer;
+
+	//typedef unsigned char pixel;
+	//pixel *pixels = this->window_->GetRGBACharPixelData(0, 0, this->w_, this->h_, true);
+	cv::Mat img2 = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
+	videoWriter.write(img2);
+	img2.release();
 }
 
 ///////////////////////////////////
