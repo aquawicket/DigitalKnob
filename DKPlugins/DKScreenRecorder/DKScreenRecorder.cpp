@@ -80,7 +80,8 @@ bool DKScreenRecorder::End()
 /////////////////////////////
 void DKScreenRecorder::Loop()
 {
-	DrawBuffer();
+	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
+	DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
 	cv::Mat brgMat = cv::Mat(desktopHeight, desktopWidth, CV_8UC4, frameBuffer);
 	//cv::Mat rgbMat;
 	//cv::cvtColor(brgMat, rgbMat, CV_RGB2BGR);
