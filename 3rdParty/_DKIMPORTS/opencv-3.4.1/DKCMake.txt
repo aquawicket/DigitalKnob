@@ -36,6 +36,7 @@ LINUX_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE}/libopencv_core341.a)
 ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG}/obj/local/armeabi-v7a/libopencv_core341d.a)
 ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE}/obj/local/armeabi-v7a/libopencv_core341.a)
 
+LIST(APPEND WIN_LIBS vfw32.lib)
 
 ### COMPILE ###
 DKSETPATH(${OPENCV}/${OS})
