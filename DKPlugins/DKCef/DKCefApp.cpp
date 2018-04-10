@@ -372,7 +372,9 @@ void DKCefApp::OnContextInitialized()
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
 	DKLog(" DKCefApp::OnContextCreated\n", DKINFO);
-	DKV8::ctx = context->GetGlobal();
+	if(!DKV8::ctx){
+		DKV8::ctx = context->GetGlobal();
+	}
 
 	/*
 	std::map<std::string, bool>::iterator it = DKV8::funcs2.begin();
