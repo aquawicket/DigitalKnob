@@ -12,10 +12,11 @@ public:
 	bool Init();
 	bool End();
 
-	static bool TestInt(CefArgs args, CefReturn retval);
-	static bool TestString(CefArgs args, CefReturn retval);
-	static bool TestReturnInt(CefArgs args, CefReturn retval);
-	static bool TestReturnString(CefArgs args, CefReturn retval);
+	static bool GetMidiInputs(CefArgs args, CefReturn retval);
+	static bool GetMidiOutputs(CefArgs args, CefReturn retval);
+	static bool SendMidi(CefArgs args, CefReturn retval);
+	static bool ToggleMidiInput(CefArgs args, CefReturn retval);
+	static bool ToggleMidiOutput(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKMidiV8, false);
