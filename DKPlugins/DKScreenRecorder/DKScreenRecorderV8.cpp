@@ -8,10 +8,8 @@ bool DKScreenRecorderV8::Init()
 {
 	DKLog("DKScreenRecorderV8::Init()\n", DKDEBUG);
 
-	DKV8::AttachFunction("DKScreenRecorder_TestInt", DKScreenRecorderV8::TestInt);
-	DKV8::AttachFunction("DKScreenRecorder_TestString", DKScreenRecorderV8::TestString);
-	DKV8::AttachFunction("DKScreenRecorder_TestReturnInt", DKScreenRecorderV8::TestReturnInt);
-	DKV8::AttachFunction("DKScreenRecorder_TestReturnString", DKScreenRecorderV8::TestReturnString);
+	DKV8::AttachFunction("DKScreenRecorder_Record", DKScreenRecorderV8::Record);
+	DKV8::AttachFunction("DKScreenRecorder_Stop", DKScreenRecorderV8::Stop);
 	return true;
 }
 
@@ -23,45 +21,18 @@ bool DKScreenRecorderV8::End()
 }
 
 
-////////////////////////////////////////////////////////////////
-bool DKScreenRecorderV8::TestInt(CefArgs args, CefReturn retval)
+///////////////////////////////////////////////////////////////
+bool DKScreenRecorderV8::Record(CefArgs args, CefReturn retval)
 {
-	DKLog("DKScreenRecorderV8::TestInt(CefArgs,CefReturn)\n", DKINFO);
-
-	int data = args->GetInt(0);
-	int result = data;
-	if(!retval->SetInt(0, result)){ return false; }
+	DKString file = args->GetString(0);
+	if(!DKScreenRecorder::Record(file)){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKScreenRecorderV8::TestString(CefArgs args, CefReturn retval)
+/////////////////////////////////////////////////////////////
+bool DKScreenRecorderV8::Stop(CefArgs args, CefReturn retval)
 {
-	DKLog("DKScreenRecorderV8::TestString(CefArgs,CefReturn)\n", DKINFO);
-
-	DKString data = args->GetString(0);
-	DKString result = data;
-	if(!retval->SetString(0, result)){ return false; }
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////////
-bool DKScreenRecorderV8::TestReturnInt(CefArgs args, CefReturn retval)
-{
-	DKLog("DKScreenRecorderV8::TestReturnInt(CefArgs,CefReturn)\n", DKINFO);
-
-	int result = 12345;
-	if(!retval->SetInt(0, result)){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////////////
-bool DKScreenRecorderV8::TestReturnString(CefArgs args, CefReturn retval)
-{
-	DKLog("DKScreenRecorderV8::TestReturnString(CefArgs,CefReturn)\n", DKINFO);
-
-	DKString result = "test string";
-	if(!retval->SetString(0, result)){ return false; }
+	if(!DKScreenRecorder::Stop()){ return false; }
 	return true;
 }
 

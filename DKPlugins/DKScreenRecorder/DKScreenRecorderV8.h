@@ -12,10 +12,8 @@ public:
 	bool Init();
 	bool End();
 
-	static bool TestInt(CefArgs args, CefReturn retval);
-	static bool TestString(CefArgs args, CefReturn retval);
-	static bool TestReturnInt(CefArgs args, CefReturn retval);
-	static bool TestReturnString(CefArgs args, CefReturn retval);
+	static bool Record(CefArgs args, CefReturn retval);
+	static bool Stop(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKScreenRecorderV8, false);
