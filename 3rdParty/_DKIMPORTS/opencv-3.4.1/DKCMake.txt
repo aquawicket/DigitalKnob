@@ -1,4 +1,6 @@
-
+DKDEPEND(libjpeg-turbo-1.5.3)
+DKDEPEND(tiff-4.0.3)
+DKDEPEND(libpng-1.7.0beta34)
 
 ### INSTALL ###
 DKINSTALL(http://digitalknob.com/Download/Libs/opencv-3.4.1.zip opencv-3.4.1)
