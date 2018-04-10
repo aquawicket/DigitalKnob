@@ -55,6 +55,7 @@ Internet Explorer (9.0+) <br>
 [Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
 [OpenAL](https://github.com/apportable/openal-soft) <br>
+[OpenCV](https://github.com/opencv/opencv) <br>
 [OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 [OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
