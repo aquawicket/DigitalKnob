@@ -63,7 +63,7 @@ int DKMidiJS::ToggleMidiInput(duk_context* ctx)
 int DKMidiJS::ToggleMidiOutput(duk_context* ctx)
 {
 	DKString output = duk_require_string(ctx, 0);
-	if(!DKMidi::Instance("DKMidi")->ToggleOutput(output)){ reutrn 0; |
+	if(!DKMidi::Instance("DKMidi")->ToggleOutput(output)){ return 0; }
 	return 1;
 }
 
