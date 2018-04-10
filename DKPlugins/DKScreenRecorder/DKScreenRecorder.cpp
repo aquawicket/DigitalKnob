@@ -48,6 +48,7 @@ static int ticksPerFrame = 1000 / fps;
 bool DKScreenRecorder::Init()
 {
 	DKCreate("DKScreenRecorderJS");
+	DKCreate("DKScreenRecorderV8");
 
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
