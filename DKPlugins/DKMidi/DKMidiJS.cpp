@@ -55,20 +55,16 @@ int DKMidiJS::SendMidi(duk_context* ctx)
 int DKMidiJS::ToggleMidiInput(duk_context* ctx)
 {
 	DKString input = duk_require_string(ctx, 0);
-	if(DKMidi::Instance("DKMidi")->ToggleInput(input)){
-		return 1;
-	}
-	return 0;
+	if(!DKMidi::Instance("DKMidi")->ToggleInput(input)){ return 0; }
+	return 1;
 }
 
 ////////////////////////////////////////////////
 int DKMidiJS::ToggleMidiOutput(duk_context* ctx)
 {
 	DKString output = duk_require_string(ctx, 0);
-	if(DKMidi::Instance("DKMidi")->ToggleOutput(output)){
-		return 1;
-	}
-	return 0;
+	if(!DKMidi::Instance("DKMidi")->ToggleOutput(output)){ reutrn 0; |
+	return 1;
 }
 
 #endif //USE_DKDuktape
