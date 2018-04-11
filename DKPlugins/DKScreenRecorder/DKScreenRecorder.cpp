@@ -268,7 +268,7 @@ void DKScreenRecorder::DrawBuffer()
 			frameBuffer[(h*desktopWidth+w)*bpp+1]=green;
 			frameBuffer[(h*desktopWidth+w)*bpp+2]=red;
 		}
-		frameBuffer[h*desktopWidthh*bpp+0]=0xff;
+		frameBuffer[h*desktopWidth*bpp+0]=0xff;
 		frameBuffer[h*desktopWidth*bpp+1]=0xff;
 		frameBuffer[h*desktopWidth*bpp+2]=0xff;
 		frameBuffer[h*desktopWidth*bpp+3]=0xff;
