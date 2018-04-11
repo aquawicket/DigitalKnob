@@ -89,7 +89,8 @@ bool DKScreenRecorder::End()
 bool DKScreenRecorder::Record(const DKString& file)
 {
 	//OpenCV
-	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
+	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
+	videoWriter.open(file.c_str(), CV_FOURCC_DEFAULT, fps, cvSize(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened()){
 		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
 		return false;
