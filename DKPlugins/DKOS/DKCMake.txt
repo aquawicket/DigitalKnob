@@ -1,0 +1,1 @@
+DKASSETS(DKOS)
