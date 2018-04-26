@@ -5,6 +5,10 @@ function DKOS_Init()
 	DKCreate("DKOS/DKOS.html", function(){
 	var OS = DK_GetOS();
 	DKLog("OS="+OS+"\n");
+	DKWidget_SetProperty("DKOS/DKOS.html", "left", "0px");
+	DKWidget_SetProperty("DKOS/DKOS.html", "top", "0px");
+	DKWidget_SetProperty("DKOS/DKOS.html", "width", "100%");
+	DKWidget_SetProperty("DKOS/DKOS.html", "height", "100%");
 	if(OS != "iOS" && OS != "Android"){
 		var screenwidth = DK_GetScreenWidth();
 		var screenheight = DK_GetScreenHeight();
