@@ -14,6 +14,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
 	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
 	DKV8::AttachFunction("DK_Execute", DKCefV8::Execute);
+	DKV8::AttachFunction("DK_Exit", DKCefV8::Exit);
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
 	DKV8::AttachFunction("DK_GetFrames", DKCefV8::GetFrames);
@@ -123,6 +124,13 @@ bool DKCefV8::Execute(CefArgs args, CefReturn retval)
 	DKString result;
 	if(!DKUtil::Execute(command, result)){ return false; }
 	if(!retval->SetString(0, result)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////
+bool DKCefV8::Exit(CefArgs args, CefReturn retval)
+{
+	DKApp::Exit();
 	return true;
 }
 

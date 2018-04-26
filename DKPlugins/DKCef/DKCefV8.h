@@ -20,6 +20,7 @@ public:
 	static bool CpuUsed(CefArgs args, CefReturn retval);
 	static bool CpuUsedByApp(CefArgs args, CefReturn retval);
 	static bool Execute(CefArgs args, CefReturn retval);
+	static bool Exit(CefArgs args, CefReturn retval);
 	static bool GetClipboard(CefArgs args, CefReturn retval);
 	static bool GetFps(CefArgs args, CefReturn retval);
 	static bool GetFrames(CefArgs args, CefReturn retval);
