@@ -705,7 +705,7 @@ function AjaxGet(url, output)
 				return true;
 			}
 			else{
-				DKLog("AJAX ERROR: "+request.statusText, DKWARN); //report error
+				DKLog("AJAX ERROR: "+url+" "+request.statusText, DKWARN); //report error
 				DKLog("status: "+request.status, DKWARN);
 				return false;
 			}
