@@ -266,11 +266,11 @@ int DKJS::_DKSendEvent(duk_context* ctx)
 	}
 
 	if(!param.empty()){
-		SendEvent(id, type, param);
+		DKEvent::SendEvent(id, type, param);
 		return 1;
 	}
 
-	SendEvent(id, type, "");
+	DKEvent::SendEvent(id, type, "");
 	return 1;
 }
 
@@ -791,7 +791,7 @@ int DKJS::MessageBox(duk_context* ctx)
 		value = arry[2];
 	}
 
-	if(value.empty()){ SendEvent("DKMessage.html", cmd, id+","+type+","+message); return 0; }
+	if(value.empty()){ DKEvent::SendEvent("DKMessage.html", cmd, id+","+type+","+message); return 0; }
 	if(same(value,"CANCEL")){ return 0; }
 	duk_push_string(ctx, value.c_str());
 	return 1;

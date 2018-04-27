@@ -889,7 +889,7 @@ bool DKUtil::CallExit()
 bool DKUtil::SendTick()
 {
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
-		SendEvent("GLOBAL", "second", "");
+		DKEvent::SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
 	}
 	return true;

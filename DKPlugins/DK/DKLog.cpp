@@ -148,8 +148,8 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 #endif
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-		SendEvent("DKLog", "level", toString(lvl));
-		SendEvent("DKLog", "string", string);
+		DKEvent::SendEvent("DKLog", "level", toString(lvl));
+		DKEvent::SendEvent("DKLog", "string", string);
 	}
 
 	//send errors to a message box.

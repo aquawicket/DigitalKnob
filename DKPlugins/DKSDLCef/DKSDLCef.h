@@ -251,7 +251,7 @@ public:
 		data += ",";
 		data += params->GetLinkUrl();
 
-		SendEvent("GLOBAL", "DKCef_ContextMenu", data);
+		DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
