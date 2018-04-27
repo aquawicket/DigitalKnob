@@ -102,14 +102,6 @@ public:
 
 
 //Global quick functions
-/*
-//////////////////////////////////////////////////////////////////////////////////////
-static bool SendEvent(const DKString& id, const DKString& type, const DKString& value)
-{
-	return DKEvent::SendEvent(id, type, value);
-}
-*/
-
 template<class T>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
@@ -123,24 +115,5 @@ static bool AddEvent(const DKString& id, const DKString& type, const DKString& j
 {
 	return DKEvent::AddEvent(id, type, jsreturn, boost::bind(func, _this, _1), _this);
 };
-
-///////////////////////////////////////////////////////////////////////////////////////////
-static bool RemoveEvent(const DKString& id, const DKString& type, const DKString& jsreturn)
-{
-	return DKEvent::RemoveEvent(id, type, jsreturn);
-};
-
-//////////////////////////////////////////////////////////////////
-static bool RemoveEvents(const DKString& id, const DKString& type)
-{
-	return DKEvent::RemoveEvents(id, type);
-};
-
-////////////////////////////////////////////
-static bool RemoveEvents(const DKString& id)
-{
-	return DKEvent::RemoveEvents(id);
-};
-
 
 #endif //DKEvent_H
