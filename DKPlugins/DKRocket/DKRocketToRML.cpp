@@ -143,8 +143,8 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//DKCreate("DKRocketIframe,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
 		
 		DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url);
-		AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
-		AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
+		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
+		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
 
 		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
 		DKString cef_id = "iframe_"+id;
@@ -163,7 +163,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId().CString();
-			AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
+			DKEvent::AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
 		}
 	}
 

@@ -40,6 +40,19 @@ public:
 	DKStringArray data;
 	boost::function<bool (DKEvent*)> event_func;
 
+	template<class T>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
+	{
+		return DKEvent::AddEvent(id, type, boost::bind(func, _this, _1), _this);
+	};
+
+	template<class T>
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, bool (T::*func) (DKEvent*), T* _this)
+	{
+		return DKEvent::AddEvent(id, type, jsreturn, boost::bind(func, _this, _1), _this);
+	};
 
 	template<class T>
 	/////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +115,7 @@ public:
 
 
 //Global quick functions
+/*
 template<class T>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
@@ -115,5 +129,6 @@ static bool AddEvent(const DKString& id, const DKString& type, const DKString& j
 {
 	return DKEvent::AddEvent(id, type, jsreturn, boost::bind(func, _this, _1), _this);
 };
+*/
 
 #endif //DKEvent_H
