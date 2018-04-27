@@ -40,7 +40,8 @@ public:
 	DKStringArray data;
 	boost::function<bool (DKEvent*)> event_func;
 
-	template<class T> static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this);
+	template<class T> 
+	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this);
 
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

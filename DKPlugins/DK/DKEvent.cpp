@@ -7,12 +7,6 @@ std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::
 std::vector<boost::function<bool (const DKString&, const DKString&)> > DKEvent::unreg_funcs;
 std::vector<boost::function<bool (const DKString&, const DKString&, const DKString&)> > DKEvent::send_funcs;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-template<class T> bool DKEvent::AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
-{
-	return DKEvent::AddEvent(id, type, boost::bind(func, _this, _1), _this);
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::AddEvent(const DKString& id, const DKString& type, boost::function<bool (DKEvent*)> func, DKObject* object)
 {
@@ -64,6 +58,13 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 	}
 
 	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+template<class T> 
+bool DKEvent::AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
+{
+	return DKEvent::AddEvent(id, type, boost::bind(func, _this, _1), _this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
