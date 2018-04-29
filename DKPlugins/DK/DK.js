@@ -654,11 +654,11 @@ function DKSendEvent(id, type, message)
 			if(events[i+1] == type){
 				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n");
 				events[i+2]([id, type, message]);
-				return true;
+				//return true;
 			}
 		}
 	}
-	return false;
+	return true;
 }
 
 ///////////////////////////
