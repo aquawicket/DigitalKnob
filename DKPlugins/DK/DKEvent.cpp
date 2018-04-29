@@ -60,13 +60,6 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-template<class T> 
-bool DKEvent::AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
-{
-	return DKEvent::AddEvent(id, type, boost::bind(func, _this, _1), _this);
-}
-
 ////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {

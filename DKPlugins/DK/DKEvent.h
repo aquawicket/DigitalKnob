@@ -41,7 +41,10 @@ public:
 	boost::function<bool (DKEvent*)> event_func;
 
 	template<class T> 
-	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this);
+	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvent*), T* _this)
+	{
+		return DKEvent::AddEvent(id, type, boost::bind(func, _this, _1), _this);
+	};
 
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
