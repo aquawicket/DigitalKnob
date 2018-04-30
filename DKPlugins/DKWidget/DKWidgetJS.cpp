@@ -98,7 +98,7 @@ int DKWidgetJS::NewWidget(duk_context* ctx)
 	DKFile::GetFileName(file, file2);
 
 	//DKWidget::NewWidget(file, parent);
-	DKCreate(file2+","+parent+","+file);
+	DKClass::DKCreate(file2+","+parent+","+file);
 
 	return 1;
 }

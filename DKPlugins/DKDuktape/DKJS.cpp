@@ -15,8 +15,8 @@ bool DKJS::Init()
 {
 	DKLog("DKJS::Init()\n", DKDEBUG);
 	
-	DKCreate("DKFileJS");
-	DKCreate("DKAssetsJS");
+	DKClass::DKCreate("DKFileJS");
+	DKClass::DKCreate("DKAssetsJS");
 	
 	/*
 	DKString errors;
@@ -155,7 +155,7 @@ int DKJS::_DKAddEvent(duk_context* ctx)
 int DKJS::_DKAvailable(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	bool available = DKAvailable(data);
+	bool available = DKClass::DKAvailable(data);
 	if(!available){
 		return 0;
 	}
@@ -166,7 +166,7 @@ int DKJS::_DKAvailable(duk_context* ctx)
 int DKJS::_DKClose(duk_context* ctx)
 {
 	DKString value = duk_require_string(ctx, 0);
-	DKClose(value);
+	DKClass::DKClose(value);
 	return 1;
 }
 
@@ -181,7 +181,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 		callback_found = true;
 	}
 	
-	DKObject* obj = DKCreate(data);
+	DKObject* obj = DKClass::DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
 		DKLog("DKJS::_DKCreate("+data+"): obj invalid \n", DKWARN);
@@ -278,7 +278,7 @@ int DKJS::_DKSendEvent(duk_context* ctx)
 int DKJS::_DKValid(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	bool valid = DKValid(data);
+	bool valid = DKClass::DKValid(data);
 	if(!valid){
 		return 0;
 	}
@@ -432,8 +432,8 @@ int DKJS::GetClipboard(duk_context* ctx)
 int DKJS::GetData(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
-	if(!DKValid(data)){ return 0; }
-	DKString output = toString(DKGet(data)->data, ",");
+	if(!DKClass::DKValid(data)){ return 0; }
+	DKString output = toString(DKClass::DKGet(data)->data, ",");
 	duk_push_string(ctx, output.c_str());
 	return 1;
 }
@@ -665,7 +665,7 @@ int DKJS::GetValue(duk_context* ctx)
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
 	if(arry.size() < 3){ 
-		if(DKValid("DKWidget,DKWidget0")){
+		if(DKClass::DKValid("DKWidget,DKWidget0")){
 			DKString rval;
 			DKDuktape::RunJavascript("DKWidget_GetValue(\""+evt+"\");", rval);
 			if(rval.empty()){
@@ -781,7 +781,7 @@ int DKJS::MessageBox(duk_context* ctx)
 	DKString evt = duk_require_string(ctx, 0);
 	DKString cmd = duk_require_string(ctx, 1);
 	DKString message = duk_require_string(ctx, 2);
-	DKCreate("DKMessage.js");
+	DKClass::DKCreate("DKMessage.js");
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
 	DKString type = arry[0];

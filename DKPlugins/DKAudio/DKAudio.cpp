@@ -4,17 +4,17 @@
 ////////////////////
 bool DKAudio::Init()
 {
-	DKCreate("DKAudioJS");
-	if(DKAvailable("DKSDLAudio")){
-		DKCreate("DKSDLAudio");
+	DKClass::DKCreate("DKAudioJS");
+	if(DKClass::DKAvailable("DKSDLAudio")){
+		DKClass::DKCreate("DKSDLAudio");
 		return false;
 	}
-	if(DKAvailable("DKSDLWav")){
-		DKCreate("DKSDLWav");
+	if(DKClass::DKAvailable("DKSDLWav")){
+		DKClass::DKCreate("DKSDLWav");
 		return false;
 	}
-	if(DKAvailable("DKOSGAudio")){
-		DKCreate("DKOSGAudio");
+	if(DKClass::DKAvailable("DKOSGAudio")){
+		DKClass::DKCreate("DKOSGAudio");
 		return false;
 	}
 	DKLog("DKAudio::Init(): No audio interface available \n", DKERROR);
@@ -24,10 +24,10 @@ bool DKAudio::Init()
 ///////////////////
 bool DKAudio::End()
 {
-	DKClose("DKAudioJS");
-	DKClose("DKSDLAudio");
-	DKClose("DKSDLWav");
-	DKClose("DKOSGAudio");
+	DKClass::DKClose("DKAudioJS");
+	DKClass::DKClose("DKSDLAudio");
+	DKClass::DKClose("DKSDLWav");
+	DKClass::DKClose("DKOSGAudio");
 	return true;
 }
 

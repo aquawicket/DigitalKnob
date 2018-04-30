@@ -5,8 +5,8 @@
 ///////////////////
 bool DKMidi::Init()
 {
-	DKCreate("DKMidiJS");
-	DKCreate("DKMidiV8");
+	DKClass::DKCreate("DKMidiJS");
+	DKClass::DKCreate("DKMidiV8");
 	
 	midiin = new RtMidiIn();
 	midiout = new RtMidiOut();

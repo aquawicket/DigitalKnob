@@ -81,7 +81,7 @@ bool DKUpdate::Init()
 		return false;
 	}
 	
-	DKCreate("DKUpdateJS");
+	DKClass::DKCreate("DKUpdateJS");
 	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
 	return true;
 }

@@ -9,8 +9,8 @@ bool DKClient::Init()
 {
 	//DKLog("DKClient::Init()\n", DKDEBUG);
 	
-	DKCreate("DKClientJS");
-	//DKCreate("DKClientV8"); //TODO
+	DKClass::DKCreate("DKClientJS");
+	//DKClass::DKCreate("DKClientV8"); //TODO
 	thread = new DKThread();
 	c = new client(thread->io_service);
 	thread->start();

@@ -201,8 +201,8 @@ bool DKDebug::Init()
 {
 	//DKLog("DKDebug::Init()\n", DKDEBUG);
 	
-	DKCreate("DKDebugJS");
-	DKCreate("DKDebugV8");
+	DKClass::DKCreate("DKDebugJS");
+	DKClass::DKCreate("DKDebugV8");
 	
 #ifdef WIN32
 	//Copy PDB file if it exists

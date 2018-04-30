@@ -4,8 +4,8 @@
 ////////////////////
 bool DKCefV8::Init()
 {
-	DKCreate("DKFileV8");
-	DKCreate("DKAssetsV8");
+	DKClass::DKCreate("DKFileV8");
+	DKClass::DKCreate("DKAssetsV8");
 	
 	DKV8::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
@@ -75,7 +75,7 @@ bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 {
 	DKString data = args->GetString(0);
 	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
-	DKCreate(data);
+	DKClass::DKCreate(data);
 	return true;
 }
 
@@ -83,7 +83,7 @@ bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 {
 	DKString data = args->GetString(0);
-	bool valid = DKValid(data);
+	bool valid = DKClass::DKValid(data);
 	if(!valid){
 		retval->SetBool(0, false); 
 		return true;

@@ -399,7 +399,7 @@ void DKSDLCef::Draw()
 	}
 
 
-	if(DKValid("DKRocket,DKRocket0")){ return; }
+	if(DKClass::DKValid("DKRocket,DKRocket0")){ return; }
 	///// Draw to SDL Directly
 	if(!cef_image){ return; }
 	SDL_Rect texture_rect;

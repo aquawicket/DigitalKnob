@@ -26,7 +26,7 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
-	DKCreate("DKCefJS");
+	DKClass::DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
@@ -129,7 +129,7 @@ bool DKCef::Init()
 
 	CefSettings settings;
 
-	if(DKValid("DKWindow,DKWindow0")){
+	if(DKClass::DKValid("DKWindow,DKWindow0")){
 		settings.windowless_rendering_enabled = true;
 	}
 	
@@ -240,14 +240,14 @@ bool DKCef::Init()
 		return false;
 	}
 
-	if(DKValid("DKSDLWindow,DKSDLWindow0")){
-		if(DKAvailable("DKSDLCef")){
-			DKCreate("DKSDLCef,"+id);
+	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
+		if(DKClass::DKAvailable("DKSDLCef")){
+			DKClass::DKCreate("DKSDLCef,"+id);
 		}
 	}
-	else if(DKValid("DKOSGWindow,DKOSGWindow0")){
-		if(DKAvailable("DKOSGCef")){
-			DKCreate("DKOSGCef,"+id);
+	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
+		if(DKClass::DKAvailable("DKOSGCef")){
+			DKClass::DKCreate("DKOSGCef,"+id);
 		}
 	}
 	else{
@@ -261,7 +261,7 @@ bool DKCef::Init()
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
-	DKCreate("DKCefV8");
+	DKClass::DKCreate("DKCefV8");
 	return true;
 }
 
@@ -373,7 +373,7 @@ bool DKCef::NewBrowser()
 {
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
-	if(DKValid("DKWindow,DKWindow0")){
+	if(DKClass::DKValid("DKWindow,DKWindow0")){
 		browserSettings.windowless_frame_rate = 60;
 //#ifdef WIN32
 //		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);

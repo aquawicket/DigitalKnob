@@ -8,8 +8,8 @@
 bool DKWindow::Init()
 {
 	DKLog("DKWindow::Init()\n", DKDEBUG);
-	DKCreate("DKWindowJS");
-	DKCreate("DKWindowV8");
+	DKClass::DKCreate("DKWindowJS");
+	DKClass::DKCreate("DKWindowV8");
 	return true;
 }
 
@@ -89,16 +89,16 @@ bool DKWindow::Create()
 	DKLog("DKWindow::Create()\n", DKDEBUG);
 
 	//Create DKSDLWindow or DKOSGWindow
-	if(DKAvailable("DKSDLWindow")){
-		DKCreate("DKSDLWindow");
+	if(DKClass::DKAvailable("DKSDLWindow")){
+		DKClass::DKCreate("DKSDLWindow");
 		return true;
 	}
-	else if(DKAvailable("DKSFMLWindow")){
-		DKCreate("DKSFMLWindow");
+	else if(DKClass::DKAvailable("DKSFMLWindow")){
+		DKClass::DKCreate("DKSFMLWindow");
 		return true;
 	}
-	else if(DKAvailable("DKOSGWindow")){
-		DKCreate("DKOSGWindow");
+	else if(DKClass::DKAvailable("DKOSGWindow")){
+		DKClass::DKCreate("DKOSGWindow");
 		return true;
 	}
 	else{

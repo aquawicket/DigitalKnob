@@ -142,7 +142,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//TODO
 		//DKCreate("DKRocketIframe,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
 		
-		DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url);
+		DKClass::DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url);
 		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
 		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
 
@@ -171,7 +171,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	Rocket::Core::ElementList audios;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(audios, element, "audio");
 	for(unsigned int i=0; i<audios.size(); ++i){
-		DKCreate("DKRocketAudio/DKRocketAudio.js");
+		DKClass::DKCreate("DKRocketAudio/DKRocketAudio.js");
 		Rocket::Core::ElementList sources;
 		Rocket::Core::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
 		for(unsigned int s=0; s<sources.size(); ++s){

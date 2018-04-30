@@ -11,7 +11,7 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 bool DKRocket::Init()
 {
 	DKLog("DKRocket::Init() \n", DKINFO);
-	DKCreate("DKRocketJS");
+	DKClass::DKCreate("DKRocketJS");
 	document = NULL;
 
 	if(!dkRocketFile){ 
@@ -20,18 +20,18 @@ bool DKRocket::Init()
 	}
 
 	//Create DKSDLRocket or DKOSGRocket
-	if(DKAvailable("DKSDLRocket")){
-		DKCreate("DKSDLRocket");
+	if(DKClass::DKAvailable("DKSDLRocket")){
+		DKClass::DKCreate("DKSDLRocket");
 	}
-	else if(DKAvailable("DKOSGRocket")){
-		DKCreate("DKOSGRocket");
+	else if(DKClass::DKAvailable("DKOSGRocket")){
+		DKClass::DKCreate("DKOSGRocket");
 	}
 	else{
 		DKLog("DKRocket::Init(): No registered rocket window found\n", DKERROR);
 		return false;
 	}
 	
-	if(DKAvailable("DKSDLRocket")){
+	if(DKClass::DKAvailable("DKSDLRocket")){
 		if(!Rocket::Core::Initialise()){
 			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
 			return false;
@@ -48,7 +48,7 @@ bool DKRocket::Init()
 	
 	LoadFonts();
 	
-	if(DKAvailable("DKSDLRocket")){
+	if(DKClass::DKAvailable("DKSDLRocket")){
 		if(!Rocket::Debugger::Initialise(context)){
 			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
 			return false;

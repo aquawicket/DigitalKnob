@@ -4,9 +4,9 @@
 ////////////////////
 bool DKVideo::Init()
 {
-	DKCreate("DKVideoJS");
-	DKCreate("DKOSGVideo");
-	DKCreate("DKSDLVideo");
+	DKClass::DKCreate("DKVideoJS");
+	DKClass::DKCreate("DKOSGVideo");
+	DKClass::DKCreate("DKSDLVideo");
 	return true;
 }
 

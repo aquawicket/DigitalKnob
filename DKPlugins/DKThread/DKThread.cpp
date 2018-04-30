@@ -5,12 +5,12 @@
 bool DKThreadPool::Init()
 {
 #ifdef USE_DKDuktape 
-	DKCreate("DKThreadJS");
+	DKClass::DKCreate("DKThreadJS");
 #endif
 #ifdef USE_DKCef
-	DKCreate("DKThreadV8");
+	DKClass::DKCreate("DKThreadV8");
 #endif
-	DKCreate("DKThread/DKThreadPoolDlg.js");
+	DKClass::DKCreate("DKThread/DKThreadPoolDlg.js");
 	active = true;//false;
 
 	dkThreadPool = new boost::threadpool::pool(1);

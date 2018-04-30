@@ -53,7 +53,7 @@ bool DKDuktape::Init()
 		}
 		//////////////////////////////////////////////////////////////////////////////////
 
-		DKCreate("DKJS");
+		DKClass::DKCreate("DKJS");
 
 		DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
 		LoadFile(duktape);
@@ -235,7 +235,7 @@ bool DKDuktape::Reload()
 			if(has(list[i],"DKSDLCef")){ continue; }
 		}
 		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO); //DEBUG
-		DKClose(list[i]);
+		DKClass::DKClose(list[i]);
 	}
 
 	//DEBUG

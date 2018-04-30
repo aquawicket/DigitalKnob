@@ -16,8 +16,8 @@ bool DKWidget::Init()
 {
 	DKLog("DKWidget::Init() \n", DKDEBUG);
 	
-	DKCreate("DKWidgetJS");
-	DKCreate("DKWidgetMySqlJS");
+	DKClass::DKCreate("DKWidgetJS");
+	DKClass::DKCreate("DKWidgetMySqlJS");
 	root = NULL;
 
 	//link objects
@@ -76,7 +76,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	GetElements(id, elements);
 	for(unsigned int i = elements.size(); i-- > 0;){
 		RemoveAllEventListeners(elements[i]);
-		if(has(elements[i],".html")){ DKClose(elements[i]); }
+		if(has(elements[i],".html")){ DKClass::DKClose(elements[i]); }
 	}
 
 	if(DKApp::active){
@@ -535,7 +535,7 @@ bool DKWidget::RemoveElement(const DKString& id)
 	elements.push_back(id);
 	for(unsigned int i = elements.size(); i-- > 0;){
 		if(has(elements[i],".html")){
-			DKClose(elements[i]);
+			DKClass::DKClose(elements[i]);
 			continue;
 		}
 		RemoveAllEventListeners(elements[i]);

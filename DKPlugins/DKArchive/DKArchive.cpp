@@ -11,7 +11,7 @@
 //////////////////////
 bool DKArchive::Init()
 {
-	DKCreate("DKArchiveJS");
+	DKClass::DKCreate("DKArchiveJS");
 	return true;	
 }
 

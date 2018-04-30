@@ -7,8 +7,8 @@
 ////////////////////
 bool DKMySql::Init()
 {
-	DKCreate("DKMySqlJS");
-	DKCreate("DKCurl");
+	DKClass::DKCreate("DKMySqlJS");
+	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
 	if(mysql_init(&mysql)==NULL){
 		DKLog("Failed to initate MySQL connection\n",DKERROR);

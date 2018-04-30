@@ -11,8 +11,8 @@ std::vector<HWND> DKHandles::handle;
 //////////////////////
 bool DKHandles::Init()
 {
-	DKCreate("DKHandlesJS");
-	DKCreate("DKHandlesV8");
+	DKClass::DKCreate("DKHandlesJS");
+	DKClass::DKCreate("DKHandlesV8");
 	highlight = false;
 	currentHandle = 0;
 	return true;

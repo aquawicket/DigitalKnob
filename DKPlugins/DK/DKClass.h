@@ -37,6 +37,44 @@ public:
 	static void GetObjects(DKStringArray& list);
 	static std::map<DKString, DKClass*>* classes;
 
+	/////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access
+	///////////////////////////////////////////////
+	static DKObject* DKCreate(const DKString& data)
+	{
+		DKLog("DKCreate("+data+")\n", DKINFO);
+		//data = (class,id,var1,var2,var3,etc)
+		return DKClass::_Instance(data);
+	}
+
+	////////////////////////////////////////////
+	static DKObject* DKGet(const DKString& data)
+	{
+		//data = (class,id)
+		return DKClass::_Get(data);
+	}
+
+	/////////////////////////////////////////
+	static bool DKValid(const DKString& data)
+	{
+		//data = (class,id)
+		return DKClass::_Valid(data);
+	}
+
+	/////////////////////////////////////////////
+	static bool DKAvailable(const DKString& data)
+	{
+		//data = (class,id)
+		return DKClass::_Available(data);
+	}
+
+	/////////////////////////////////////////
+	static void DKClose(const DKString& data)
+	{
+		DKLog("DKClose("+data+")\n", DKINFO);
+		//data = (class,id)
+		DKClass::_Close(data);
+	}
+
 	template<class T>
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this)
@@ -81,44 +119,6 @@ public:
 
 	static std::map<DKString, boost::function<bool (const void*, void*)> > functions;
 };
-
-/////  GLOBAL FUNCTIONS ////////////////// note: primarily for javascript access
-///////////////////////////////////////////////
-static DKObject* DKCreate(const DKString& data)
-{
-	DKLog("DKCreate("+data+")\n", DKINFO);
-	//data = (class,id,var1,var2,var3,etc)
-	return DKClass::_Instance(data);
-}
-
-////////////////////////////////////////////
-static DKObject* DKGet(const DKString& data)
-{
-	//data = (class,id)
-	return DKClass::_Get(data);
-}
-
-/////////////////////////////////////////
-static bool DKValid(const DKString& data)
-{
-	//data = (class,id)
-	return DKClass::_Valid(data);
-}
-
-/////////////////////////////////////////////
-static bool DKAvailable(const DKString& data)
-{
-	//data = (class,id)
-	return DKClass::_Available(data);
-}
-
-/////////////////////////////////////////
-static void DKClose(const DKString& data)
-{
-	DKLog("DKClose("+data+")\n", DKINFO);
-	//data = (class,id)
-	DKClass::_Close(data);
-}
 
 
 
