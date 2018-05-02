@@ -13,6 +13,7 @@ DKCefWindow::DKCefWindow()
 
 	DKClass::RegisterFunc("DKCefWindow::Fullscreen", &DKCefWindow::Fullscreen, this);
 	DKClass::RegisterFunc("DKCefWindow::GetHeight", &DKCefWindow::GetHeight, this);
+	DKClass::RegisterFunc("DKCefWindow::GetHwnd", &DKCefWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseX", &DKCefWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseY", &DKCefWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
@@ -175,6 +176,13 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 	return false;
 }
 
+//////////////////////////////////////////////////////////
+bool DKCefWindow::GetHwnd(const void* input, void* output)
+{
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	*(HWND*)output = hwnd; //p.x and p.y are now relative to hwnd's client area
+	return true;
+}
 ////////////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(const void* input, void* output)
 {
