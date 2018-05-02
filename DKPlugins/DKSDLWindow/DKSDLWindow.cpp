@@ -357,14 +357,14 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 	//FIXME
 	NSView* nsview = NULL; //TODO - from SDL
 	if(!nsview){ return false; }
-	*(NSView*)output = nsview;
+	*(NSView**)output = nsview;
 	return true;
 #endif
 #ifdef LINUX
 	//FIXME
 	GdkWindow* gdk_window = NULL; //TODO - from SDL
 	if(!gdk_window){ return false; }
-	*(GdkWindow*)output = gdk_window;
+	*(GdkWindow**)output = gdk_window;
 	return true;
 #endif
 	DKLog("DKSDLWindow::GetHandle(): not implemented on this OS\n", DKWARN);
