@@ -1,3 +1,5 @@
+DKDEPEND(DKDuktape)
+
 ##IF(NOT APPLE)
 	DKDEPEND(libarchive-master)
 ##ELSE()
