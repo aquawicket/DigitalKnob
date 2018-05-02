@@ -344,19 +344,13 @@ bool DKHandles::StartSearch()
 	//HWND hwnd = ::GetActiveWindow();
 	HWND hwnd = NULL;
 	DKWindow::GetHwnd(hwnd);
-	
-	//TEST
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
+		return false;
 	}
-	else{
-		DKLog("DKHandles::StartSearch(): hwnd has a value\n", DKINFO);
-	}
-	return true;
-	///////
 
-	//SetWindowSubclass(hwnd, &SearchProc, 1, 0);
-	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
+	SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
+	//SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
@@ -545,6 +539,7 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 //////////////////////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK DKHandles::SearchProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
 {
+	//FIXME - NOT WORKING
 	DKLog("DKHandles::SearchProc\n", DKINFO);
 
 	switch (uMsg){
@@ -554,6 +549,7 @@ LRESULT CALLBACK DKHandles::SearchProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
 			if(searching){
 				// Only when we have started the Window Searching operation will we track mouse movement.
 				//DoMouseMove(hwndDlg, uMsg, wParam, lParam);
+				DKLog("DKHandles::SearchProc(): WM_MOUSEMOVE\n", DKINFO);
 			}
 			break;
 		}
