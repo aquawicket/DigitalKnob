@@ -478,17 +478,17 @@ bool DKWindow::Windowed()
 
 
 #ifdef WIN32
-//////////////////////////////////
-bool DKWindow::GetHwnd(HWND* hwnd)
+/////////////////////////////////
+bool DKWindow::GetHwnd(HWND hwnd)
 {
 	if(DKClass::HasFunc("DKCefWindow::GetHwnd")){
-		return DKClass::CallFunc("DKCefWindow::GetHwnd", NULL, &hwnd);
+		return DKClass::CallFunc("DKCefWindow::GetHwnd", NULL, hwnd);
 	}
 	if(DKClass::HasFunc("DKSDLWindow::GetHwnd")){
-		return DKClass::CallFunc("DKSDLWindow::GetHwnd", NULL, &hwnd);
+		return DKClass::CallFunc("DKSDLWindow::GetHwnd", NULL, hwnd);
 	}
 	if(DKClass::HasFunc("DKOSGWindow::GetHwnd")){
-		return DKClass::CallFunc("DKOSGWindow::GetHwnd", NULL, &hwnd);
+		return DKClass::CallFunc("DKOSGWindow::GetHwnd", NULL, hwnd);
 	}
 	DKLog("DKWindow::GetHwnd(): No function available \n", DKWARN);
 	return false;

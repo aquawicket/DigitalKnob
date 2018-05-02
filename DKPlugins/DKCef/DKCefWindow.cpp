@@ -180,7 +180,7 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 bool DKCefWindow::GetHwnd(const void* input, void* output)
 {
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	*(HWND*)output = hwnd; //p.x and p.y are now relative to hwnd's client area
+	output = hwnd;
 	return true;
 }
 ////////////////////////////////////////////////////////////

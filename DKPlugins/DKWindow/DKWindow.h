@@ -99,7 +99,7 @@ public:
 	static bool Windowed();
 
 #ifdef WIN32
-	static bool GetHwnd(HWND* hwnd);
+	static bool GetHwnd(HWND hwnd);
 #endif
 
 };
