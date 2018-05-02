@@ -123,8 +123,8 @@ bool DKWindow::Fullscreen()
 	return false;
 }
 
-//////////////////////////////////////
-bool DKWindow::GetHandle(void* handle)
+///////////////////////////////////////
+bool DKWindow::GetHandle(void*& handle)
 {
 	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
 		return DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &handle);

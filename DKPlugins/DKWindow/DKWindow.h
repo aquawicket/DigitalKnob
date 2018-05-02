@@ -33,7 +33,7 @@ public:
 	static bool Fullscreen();
 
 	///Get the handle of the window
-	static bool GetHandle(void* handle);
+	static bool GetHandle(void*& handle);
 
 	///Get the Height of the window
 	static bool GetHeight(int& height);

@@ -158,13 +158,13 @@ bool DKCefWindow::GetHandle(const void* input, void* output)
 	//TODO / FIXME
 	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!nsview){ return false; }
-	*(NSView**)output = nsview;
+	*(NSView*)output = nsview;
 	return true;
 #endif
 #ifdef LINUX
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	*(GdkWindow**)output = gdk_window;
+	*(GdkWindow*)output = gdk_window;
 	return true;
 #endif
 
