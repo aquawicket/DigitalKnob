@@ -53,7 +53,8 @@ public:
 	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
 	//static LRESULT CALLBACK SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
-	static LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	//static LRESULT CALLBACK SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK SearchProc(int code, WPARAM wParam, LPARAM lParam);
 
 	static std::vector<HWND> handle; //handle[0] is the window
 	unsigned int currentHandle; //current indes of handle[]
@@ -61,6 +62,7 @@ public:
 	bool highlight; //highlight toggle
 	static bool searching;
 	static WNDPROC prevWndProc;
+	static HHOOK hMouseHook;
 };
 
 REGISTER_OBJECT(DKHandles, true);

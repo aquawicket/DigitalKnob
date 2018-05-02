@@ -11,6 +11,7 @@ DKStringArray DKHandles::_windows;
 std::vector<HWND> DKHandles::handle;
 bool DKHandles::searching = false;
 WNDPROC DKHandles::prevWndProc;
+HHOOK DKHandles::hMouseHook;
 
 //////////////////////
 bool DKHandles::Init()
@@ -354,7 +355,8 @@ bool DKHandles::StartSearch()
 	SetWindowText(hwnd, "This is a test"); //Set the title to test
 
 	//SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
-	prevWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
+	//prevWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
+	hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, &SearchProc, DKWindows::hInstance, NULL);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
@@ -542,11 +544,21 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
-LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+//LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
 	//FIXME - NOT WORKING
 	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
+	MOUSEHOOKSTRUCT * pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
+	if(pMouseStruct != NULL){
+		if(wParam == WM_LBUTTONDOWN){
+			printf("clicked"); 
+		}
+		printf("Mouse position X = %d  Mouse Position Y = %d\n", pMouseStruct->pt.x,pMouseStruct->pt.y);
+	}
+
+	/*
 	switch(uMsg){
 		case WM_MOUSEMOVE :
 		{
@@ -574,9 +586,11 @@ LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 			break;
 		}
 	}
+	*/
 
 	//return DefSubclassProc(hwnd, uMsg, wParam, lParam);
-	return CallWindowProc(prevWndProc, hwnd, uMsg, wParam, lParam);
+	//return CallWindowProc(prevWndProc, hwnd, uMsg, wParam, lParam);
+	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
 
 
