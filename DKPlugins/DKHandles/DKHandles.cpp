@@ -10,6 +10,7 @@
 DKStringArray DKHandles::_windows;
 std::vector<HWND> DKHandles::handle;
 bool DKHandles::searching = false;
+WNDPROC DKHandles::prevWndProc;
 
 //////////////////////
 bool DKHandles::Init()
@@ -353,7 +354,7 @@ bool DKHandles::StartSearch()
 	SetWindowText(hwnd, "This is a test"); //Set the title to test
 
 	//SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
-	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
+	prevWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
@@ -540,39 +541,42 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-LRESULT CALLBACK DKHandles::SearchProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
+//LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
+LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//FIXME - NOT WORKING
-	DKLog("DKHandles::SearchProc\n", DKINFO);
+	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
-	switch (uMsg){
-
+	switch(uMsg){
 		case WM_MOUSEMOVE :
 		{
+			DKLog("DKHandles::SearchProc(): WM_MOUSEMOVE\n", DKINFO);
 			if(searching){
 				// Only when we have started the Window Searching operation will we track mouse movement.
 				//DoMouseMove(hwndDlg, uMsg, wParam, lParam);
-				DKLog("DKHandles::SearchProc(): WM_MOUSEMOVE\n", DKINFO);
 			}
 			break;
 		}
 		case WM_LBUTTONUP :
 		{
-			if (searching){
+			DKLog("DKHandles::SearchProc(): WM_LBUTTONUP\n", DKINFO);
+			if(searching){
 				// Only when we have started the window searching operation will we
 				// be interested when the user lifts up the left mouse button.
 				//DoMouseUp(hwndDlg, uMsg, wParam, lParam);
-				DKLog("DKHandles::SearchProc(): WM_LBUTTONUP\n", DKINFO);
+				searching = false;
 			}
 			break;
 		}
 		default :
 		{
+			//DKLog("DKHandles::SearchProc(): default\n", DKINFO);
 			break;
 		}
 	}
 
-	return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+	//return DefSubclassProc(hwnd, uMsg, wParam, lParam);
+	return CallWindowProc(prevWndProc, hwnd, uMsg, wParam, lParam);
 }
 
 
