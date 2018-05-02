@@ -1,12 +1,14 @@
 #include "DK/stdafx.h"
 #ifdef WIN32
 #include <tchar.h>
+#include <Commctrl.h>
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKHandles/DKHandles.h"
 
 DKStringArray DKHandles::_windows;
 std::vector<HWND> DKHandles::handle;
+bool DKHandles::searching = false;
 
 //////////////////////
 bool DKHandles::Init()
@@ -335,6 +337,19 @@ bool DKHandles::ShowWindow(unsigned int flag)
 /////////////////////////////
 bool DKHandles::StartSearch()
 {
+	DKLog("DKHandles::StartSearch()\n", DKINFO);
+
+	/*
+	::DialogBox(
+		DKWindows::hInstance, // handle to application instance 
+		0, // identifies dialog box template 
+		::GetActiveWindow(), // handle to owner window 
+		(DLGPROC)SearchProc // pointer to dialog box procedure 
+	);
+	*/
+
+	SetWindowSubclass(::GetActiveWindow(), &SearchProc, 1, 0);
+
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
 	//TODO - Set the screen cursor to the BullsEye cursor.
@@ -518,5 +533,40 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 	}    
 	return true; 
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+LRESULT CALLBACK DKHandles::SearchProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
+{
+	DKLog("DKHandles::SearchProc\n", DKINFO);
+
+	switch (uMsg){
+
+		case WM_MOUSEMOVE :
+		{
+			if(searching){
+				// Only when we have started the Window Searching operation will we track mouse movement.
+				//DoMouseMove(hwndDlg, uMsg, wParam, lParam);
+			}
+			break;
+		}
+		case WM_LBUTTONUP :
+		{
+			if (searching){
+				// Only when we have started the window searching operation will we
+				// be interested when the user lifts up the left mouse button.
+				//DoMouseUp(hwndDlg, uMsg, wParam, lParam);
+				DKLog("DKHandles::SearchProc(): WM_LBUTTONUP\n", DKINFO);
+			}
+			break;
+		}
+		default :
+		{
+			break;
+		}
+	}
+
+	return DefSubclassProc(hWnd, uMsg, wParam, lParam);
+}
+
 
 #endif //WIN32
