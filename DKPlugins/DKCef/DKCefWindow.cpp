@@ -181,7 +181,7 @@ bool DKCefWindow::GetHwnd(const void* input, void* output)
 {
 	//FIXME
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	*(HWND*)output = (HWND)1;//hwnd;
+	*(HWND*)output = hwnd;
 	return true;
 }
 ////////////////////////////////////////////////////////////
