@@ -12,8 +12,8 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::TestReturnString", &DKCefWindow::TestReturnString, this);
 
 	DKClass::RegisterFunc("DKCefWindow::Fullscreen", &DKCefWindow::Fullscreen, this);
+	DKClass::RegisterFunc("DKCefWindow::GetHandle", &DKCefWindow::GetHandle, this);
 	DKClass::RegisterFunc("DKCefWindow::GetHeight", &DKCefWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKCefWindow::GetHwnd", &DKCefWindow::GetHwnd, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseX", &DKCefWindow::GetMouseX, this);
 	DKClass::RegisterFunc("DKCefWindow::GetMouseY", &DKCefWindow::GetMouseY, this);
 	DKClass::RegisterFunc("DKCefWindow::GetWidth", &DKCefWindow::GetWidth, this);
@@ -147,6 +147,31 @@ bool DKCefWindow::Fullscreen(const void* input, void* output)
 }
 
 ////////////////////////////////////////////////////////////
+bool DKCefWindow::GetHandle(const void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	*(HWND*)output = hwnd;
+	return true;
+#endif
+#ifdef MAC
+	//TODO / FIXME
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
+	*(NSView**)output = nsview;
+	return true;
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	*(GdkWindow**)output = gdk_window;
+	return true;
+#endif
+
+	return false;
+}
+
+////////////////////////////////////////////////////////////
 bool DKCefWindow::GetHeight(const void* input, void* output)
 {
 #ifdef WIN32
@@ -176,14 +201,6 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 	return false;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefWindow::GetHwnd(const void* input, void* output)
-{
-	//FIXME
-	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	*(HWND*)output = hwnd;
-	return true;
-}
 ////////////////////////////////////////////////////////////
 bool DKCefWindow::GetMouseX(const void* input, void* output)
 {

@@ -123,6 +123,22 @@ bool DKWindow::Fullscreen()
 	return false;
 }
 
+//////////////////////////////////////
+bool DKWindow::GetHandle(void* handle)
+{
+	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
+		return DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &handle);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::GetHandle")){
+		return DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &handle);
+	}
+	if(DKClass::HasFunc("DKOSGWindow::GetHandle")){
+		return DKClass::CallFunc("DKOSGWindow::GetHandle", NULL, &handle);
+	}
+	DKLog("DKWindow::GetHandle(): No function available \n", DKWARN);
+	return false;
+}
+
 /////////////////////////////////////
 bool DKWindow::GetHeight(int& height)
 {
@@ -475,22 +491,3 @@ bool DKWindow::Windowed()
 	DKLog("DKWindow::Windowed(): No function available \n", DKWARN);
 	return false;
 }
-
-
-#ifdef WIN32
-//////////////////////////////////
-bool DKWindow::GetHwnd(HWND& hwnd)
-{
-	if(DKClass::HasFunc("DKCefWindow::GetHwnd")){
-		return DKClass::CallFunc("DKCefWindow::GetHwnd", NULL, &hwnd);
-	}
-	if(DKClass::HasFunc("DKSDLWindow::GetHwnd")){
-		return DKClass::CallFunc("DKSDLWindow::GetHwnd", NULL, &hwnd);
-	}
-	if(DKClass::HasFunc("DKOSGWindow::GetHwnd")){
-		return DKClass::CallFunc("DKOSGWindow::GetHwnd", NULL, &hwnd);
-	}
-	DKLog("DKWindow::GetHwnd(): No function available \n", DKWARN);
-	return false;
-}
-#endif

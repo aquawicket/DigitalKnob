@@ -343,11 +343,14 @@ bool DKHandles::StartSearch()
 
 	//HWND hwnd = ::GetActiveWindow();
 	HWND hwnd = NULL;
-	DKWindow::GetHwnd(hwnd);
+	DKWindow::GetHandle(hwnd);
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
 		return false;
 	}
+	
+	//TEST - are we getting the main DK window? 
+	SetWindowText(hwnd, "This is a test"); //Set the title to test
 
 	SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
 	//SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);

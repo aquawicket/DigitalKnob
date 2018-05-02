@@ -32,6 +32,9 @@ public:
 	///Set the Window to Fullscreen
 	static bool Fullscreen();
 
+	///Get the handle of the window
+	static bool GetHandle(void* handle);
+
 	///Get the Height of the window
 	static bool GetHeight(int& height);
 
@@ -97,11 +100,6 @@ public:
 
 	///Set the Window to Windowed mode
 	static bool Windowed();
-
-#ifdef WIN32
-	static bool GetHwnd(HWND& hwnd);
-#endif
-
 };
 
 REGISTER_OBJECT(DKWindow, true)
