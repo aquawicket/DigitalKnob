@@ -83,7 +83,7 @@ bool DKHandles::GetHandles()
 		return false;
 	}
 
-	//Window IS open, so look for all of the items and assigne handles
+	//Window IS open, so look for all of the items and assign handles
 	bool searchFromBase = true;
 	unsigned int s = 0;
 	unsigned int h = 1;
@@ -244,7 +244,7 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 				}
 			}
 		}
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++t;
 	}
 	
@@ -270,7 +270,7 @@ bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
 				return true;
 			}
 		}
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++t;
 	}
 
@@ -284,7 +284,7 @@ bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 	unsigned int t = 0;
 	while(index > handle.size() && t < timeout){
 		GetHandles();
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++t;
 	}
 	if(index > handle.size()){
@@ -311,7 +311,7 @@ bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
 	temp.caption = title.c_str();
 	unsigned int t = 0;
 	while(EnumWindows(FindWindow, (LPARAM)&temp) && t < timeout){
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++t;
 	}
 	if(t >= timeout){
@@ -366,7 +366,7 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 				}
 			}
 		}
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++i;
 	}
 	if(i >= timeout){
@@ -389,7 +389,7 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 			SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			text = buffer;
 		}
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++i;
 	}
 	if(i >= timeout){
@@ -405,7 +405,7 @@ bool DKHandles::WaitForHandle(unsigned int index, int timeout)
 	int i = 0;
 	while(index > handle.size() && i < timeout){
 		GetHandles();
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++i;
 	}
 	if(i >= timeout){
@@ -422,7 +422,7 @@ bool DKHandles::WaitForWindow(const DKString& title, int timeout)
 	//FIXME - this is blocking,  thread this out
 	int i = 0;
 	while(!WindowExists(title) && i < timeout){
-		Sleep(1000);
+		Sleep(1000); //FIXME
 		++i;
 	}
 	if(i >= timeout){
