@@ -126,6 +126,10 @@ bool DKWindow::Fullscreen()
 ///////////////////////////////////////
 bool DKWindow::GetHandle(void*& handle)
 {
+	//EXAMPLE
+	//HWND hwnd = NULL;
+	//DKWindow::GetHandle((void*&)hwnd);
+	
 	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
 		return DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &handle);
 	}
