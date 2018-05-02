@@ -40,7 +40,7 @@
 	DKClass::DKCreate("DKAssets");
 	DKClass::DKCreate("DKDuktape");
 
-	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
+	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
 		
     [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(updateScene) userInfo:nil repeats:YES];
