@@ -4,6 +4,7 @@
 #include <Commctrl.h>
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
+#include "DKWindow/DKWindow.h"
 #include "DKHandles/DKHandles.h"
 
 DKStringArray DKHandles::_windows;
@@ -340,8 +341,11 @@ bool DKHandles::StartSearch()
 	//FIXME
 	DKLog("DKHandles::StartSearch()\n", DKINFO);
 
-	HWND hwnd = ::GetActiveWindow();
-	SetWindowSubclass(hwnd, &SearchProc, 1, 0);
+	//HWND hwnd = ::GetActiveWindow();
+	HWND hwnd;
+	DKWindow::GetHwnd(&hwnd);
+	//SetWindowSubclass(hwnd, &SearchProc, 1, 0);
+	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
