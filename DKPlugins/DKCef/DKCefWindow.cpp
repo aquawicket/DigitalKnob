@@ -179,8 +179,9 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 //////////////////////////////////////////////////////////
 bool DKCefWindow::GetHwnd(const void* input, void* output)
 {
+	//FIXME
 	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
-	output = hwnd;
+	*(HWND*)output = (HWND)1;//hwnd;
 	return true;
 }
 ////////////////////////////////////////////////////////////

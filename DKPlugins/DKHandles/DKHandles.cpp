@@ -344,9 +344,17 @@ bool DKHandles::StartSearch()
 	//HWND hwnd = ::GetActiveWindow();
 	HWND hwnd = NULL;
 	DKWindow::GetHwnd(hwnd);
+	
+	//TEST
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
 	}
+	else{
+		DKLog("DKHandles::StartSearch(): hwnd has a value\n", DKINFO);
+	}
+	return true;
+	///////
+
 	//SetWindowSubclass(hwnd, &SearchProc, 1, 0);
 	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
