@@ -354,11 +354,14 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 	return true;
 #endif
 #ifdef MAC
-	//FIXME
+	//FIXME - we need a header for NSView
+	/*
 	NSView* nsview = NULL; //TODO - from SDL
 	if(!nsview){ return false; }
 	*(NSView**)output = nsview;
 	return true;
+	*/
+	return false;
 #endif
 #ifdef LINUX
 	//FIXME
