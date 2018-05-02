@@ -332,6 +332,19 @@ bool DKHandles::ShowWindow(unsigned int flag)
 	return true;
 }
 
+/////////////////////////////
+bool DKHandles::StartSearch()
+{
+	searching = TRUE;
+	//TODO - MoveCursorPositionToBullsEye
+	//TODO - Set the screen cursor to the BullsEye cursor.
+
+	SetCapture(::GetActiveWindow());
+
+	//TODO - Hide main window.
+	return true;
+}
+
 /////////////////////////////////
 bool DKHandles::ToggleHighlight()
 {

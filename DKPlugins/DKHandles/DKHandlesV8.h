@@ -27,6 +27,7 @@ public:
 	static bool SetValue(CefArgs args, CefReturn retval);
 	static bool SetWindowHandle(CefArgs args, CefReturn retval);
 	static bool ShowWindow(CefArgs args, CefReturn retval);
+	static bool StartSearch(CefArgs args, CefReturn retval);
 	static bool ToggleHighlight(CefArgs args, CefReturn retval);
 	static bool WaitForHandle(CefArgs args, CefReturn retval);
 	static bool WaitForWindow(CefArgs args, CefReturn retval);

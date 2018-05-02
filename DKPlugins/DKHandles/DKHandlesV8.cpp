@@ -22,6 +22,7 @@ bool DKHandlesV8::Init()
 	DKV8::AttachFunction("DKHandles_SetValue", DKHandlesV8::SetValue);
 	DKV8::AttachFunction("DKHandles_SetWindowHandle", DKHandlesV8::SetWindowHandle);
 	DKV8::AttachFunction("DKHandles_ShowWindow", DKHandlesV8::ShowWindow);
+	DKV8::AttachFunction("DKHandles_StartSearch", DKHandlesV8::StartSearch);
 	DKV8::AttachFunction("DKHandles_ToggleHighlight", DKHandlesV8::ToggleHighlight);
 	DKV8::AttachFunction("DKHandles_WaitForHandle", DKHandlesV8::WaitForHandle);
 	DKV8::AttachFunction("DKHandles_WaitForWindow", DKHandlesV8::WaitForWindow);
@@ -215,6 +216,17 @@ bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 {
 	if(!DKHandles::Instance("DKHandles")->ShowWindow(args->GetInt(0))){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetBool(0, true);
+	return true;
+}
+
+/////////////////////////////////////////////////////////////
+bool DKHandlesV8::StartSearch(CefArgs args, CefReturn retval)
+{
+	if(!DKHandles::Instance("DKHandles")->StartSearch()){
 		retval->SetBool(0, false);
 		return false;
 	}

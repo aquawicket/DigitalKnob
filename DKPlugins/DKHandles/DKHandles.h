@@ -40,6 +40,7 @@ public:
 	bool SetString(const DKString& text);
 	bool SetWindowHandle(const DKString& title, unsigned int timeout);
 	bool ShowWindow(unsigned int flag);
+	bool StartSearch();
 	bool ToggleHighlight();
 	bool WaitForHandle(const DKString& clas, const DKString& value, int timeout);
 	bool WaitForHandle(const DKString& value, int timeout);
@@ -56,6 +57,7 @@ public:
 	unsigned int currentHandle; //current indes of handle[]
 	static DKStringArray _windows; //list of windows
 	bool highlight; //highlight toggle
+	bool searching; 
 };
 
 REGISTER_OBJECT(DKHandles, true);
