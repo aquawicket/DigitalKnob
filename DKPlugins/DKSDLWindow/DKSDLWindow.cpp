@@ -4,6 +4,7 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
+
 #if defined(WIN32) || defined(LINUX)
 	#include <GL/gl.h>
 #endif
@@ -18,6 +19,10 @@
 	#include <OpenGLES/ES1/gl.h>
 #endif
 */
+
+#ifdef LINUX
+#include <gdk/gdk.h>
+#endif
 
 
 std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
