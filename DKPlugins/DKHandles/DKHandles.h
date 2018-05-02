@@ -1,3 +1,5 @@
+//TODO - https://www.codeproject.com/Articles/1698/MS-Spy-style-Window-Finder
+
 #ifdef WIN32
 #pragma once
 #ifndef DKHandles_H
