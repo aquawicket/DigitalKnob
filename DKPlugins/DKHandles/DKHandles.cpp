@@ -350,10 +350,10 @@ bool DKHandles::StartSearch()
 	}
 	
 	//TEST - are we getting the main DK window, set the title of the window? 
-	//SetWindowText(hwnd, "This is a test"); //Set the title to test
+	SetWindowText(hwnd, "This is a test"); //Set the title to test
 
-	SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
-	//SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
+	//SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
+	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
