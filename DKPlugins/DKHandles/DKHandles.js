@@ -4,12 +4,15 @@ function DKHandles_Init()
 	DKCreate("DKHandles");
 	DKCreate("DKHandles/DKHandles.html");
 	DKAddEvent("refresh", "click", DKHandles_OnEvent);
+	DKAddEvent("search", "mousedown", DKHandles_OnEvent);
 	DKAddEvent("setvalue", "click", DKHandles_OnEvent);
 	DKAddEvent("doclick", "click", DKHandles_OnEvent);
 	DKAddEvent("Prev", "click", DKHandles_OnEvent);
 	DKAddEvent("Next", "click", DKHandles_OnEvent);
 	DKAddEvent("Highlight", "click", DKHandles_OnEvent);
 	DKHandles_UpdateWindowList();
+	
+	document.getElementById("search").ondragstart = function() { return false; };
 }
 
 ////////////////////////
@@ -26,6 +29,11 @@ function DKHandles_OnEvent(event)
 	
 	if(DK_Id(event, "refresh")){
 		DKHandles_UpdateWindowList();
+    }
+	if(DK_Id(event, "search")){
+		DKLog("search\n", DKINFO);
+		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
+		DKHandles_StartSearch();
     }
 	if(DK_Id(event, "setvalue")){
 		var value = DKWidget_GetValue("SetValueBox");
