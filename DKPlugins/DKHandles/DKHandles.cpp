@@ -337,24 +337,17 @@ bool DKHandles::ShowWindow(unsigned int flag)
 /////////////////////////////
 bool DKHandles::StartSearch()
 {
+	//FIXME
 	DKLog("DKHandles::StartSearch()\n", DKINFO);
 
-	/*
-	::DialogBox(
-		DKWindows::hInstance, // handle to application instance 
-		0, // identifies dialog box template 
-		::GetActiveWindow(), // handle to owner window 
-		(DLGPROC)SearchProc // pointer to dialog box procedure 
-	);
-	*/
-
-	SetWindowSubclass(::GetActiveWindow(), &SearchProc, 1, 0);
+	HWND hwnd = ::GetActiveWindow();
+	SetWindowSubclass(hwnd, &SearchProc, 1, 0);
 
 	searching = TRUE;
 	//TODO - MoveCursorPositionToBullsEye
 	//TODO - Set the screen cursor to the BullsEye cursor.
 
-	SetCapture(::GetActiveWindow());
+	SetCapture(hwnd);
 
 	//TODO - Hide main window.
 	return true;
