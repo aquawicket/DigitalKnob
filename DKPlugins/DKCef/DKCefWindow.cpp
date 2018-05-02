@@ -158,7 +158,7 @@ bool DKCefWindow::GetHandle(const void* input, void* output)
 	//TODO / FIXME
 	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
 	if(!nsview){ return false; }
-	*(NSView*)output = nsview;
+	*(NSView**)output = nsview;
 	return true;
 #endif
 #ifdef LINUX
