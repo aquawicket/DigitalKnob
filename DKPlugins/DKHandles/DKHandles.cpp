@@ -339,11 +339,14 @@ bool DKHandles::ShowWindow(unsigned int flag)
 bool DKHandles::StartSearch()
 {
 	//FIXME
-	DKLog("DKHandles::StartSearch()\n", DKINFO);
+	//DKLog("DKHandles::StartSearch()\n", DKINFO);
 
 	//HWND hwnd = ::GetActiveWindow();
 	HWND hwnd;
-	DKWindow::GetHwnd(&hwnd);
+	DKWindow::GetHwnd(hwnd);
+	if(hwnd){
+		DKLog("DKHandles::StartSearch(): hwnd = "+toString(hwnd)+"\n", DKINFO);
+	}
 	//SetWindowSubclass(hwnd, &SearchProc, 1, 0);
 	SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 
