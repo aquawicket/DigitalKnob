@@ -570,7 +570,7 @@ LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPAR
 		}
 		default :
 		{
-			//DKLog("DKHandles::SearchProc(): default\n", DKINFO);
+			DKLog("DKHandles::SearchProc(): uMsg = "+toString(uMsg)+"\n", DKINFO);
 			break;
 		}
 	}
