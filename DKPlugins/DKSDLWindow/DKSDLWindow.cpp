@@ -339,12 +339,27 @@ bool DKSDLWindow::GetClipboard(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetHandle(const void* input, void* output)
 {
-#ifdef WIN32
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+
+#ifdef WIN32
 	HWND hwnd = wmInfo.info.win.window;
 	*(HWND*)output = hwnd;
+	return true;
+#endif
+#ifdef MAC
+	//FIXME
+	NSView* nsview = NULL; //TODO - from SDL
+	if(!nsview){ return false; }
+	*(NSView*)output = nsview;
+	return true;
+#endif
+#ifdef LINUX
+	//FIXME
+	GdkWindow* gdk_window = NULL; //TODO - from SDL
+	if(!gdk_window){ return false; }
+	*(GdkWindow*)output = gdk_window;
 	return true;
 #endif
 	DKLog("DKSDLWindow::GetHandle(): not implemented on this OS\n", DKWARN);
