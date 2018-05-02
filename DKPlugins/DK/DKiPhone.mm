@@ -37,8 +37,8 @@
 	}
 
 	//Attempt to preload these
-	DKCreate("DKAssets");
-	DKCreate("DKDuktape");
+	DKClass::DKCreate("DKAssets");
+	DKClass::DKCreate("DKDuktape");
 
 	DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
