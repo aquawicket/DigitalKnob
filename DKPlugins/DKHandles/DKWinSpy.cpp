@@ -1,7 +1,7 @@
 #include "DK/stdafx.h"
 #ifdef WIN32
 
-#include "DKWinSpy/DKWinSpy.h"
+#include "DKHandles/DKWinSpy.h"
 
 
 //////////////////////
