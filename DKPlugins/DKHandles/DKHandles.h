@@ -23,10 +23,10 @@ public:
 	bool End();
 
 	bool Click();
-	static bool DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow);
+	static bool DisplayInfoOnFoundWindow(HWND hwndFoundWindow);
 	bool DoHighlight();
-	static bool DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);
-	static bool DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);
+	static bool DoMouseMove();
+	static bool DoMouseUp();
 	bool GetClass(DKString& clas);
 	bool GetHandles();
 	bool GetLeft(int& left);
@@ -34,7 +34,7 @@ public:
 	bool GetString(DKString& text);
 	bool GetTop(int& top);
 	bool GetWindows(DKStringArray& windows);
-	static bool HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow);
+	static bool HighlightFoundWindow(HWND hwndFoundWindow);
 	bool NextHandle();
 	bool PrevHandle();
 	static bool RefreshWindow(HWND hwndWindowToBeRefreshed);

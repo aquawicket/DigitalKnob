@@ -49,8 +49,8 @@ bool DKHandles::Click()
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////
-bool DKHandles::DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow)
+//////////////////////////////////////////////////////////////
+bool DKHandles::DisplayInfoOnFoundWindow(HWND hwndFoundWindow)
 {
 	RECT rect; // Rectangle area of the found window.
 	char szClassName[100];
@@ -101,8 +101,8 @@ bool DKHandles::DoHighlight()
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////////////
-bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
+/////////////////////////////
+bool DKHandles::DoMouseMove()
 {
 	//DKLog("DKHandles::DoMouseMove\n", DKINFO);
 
@@ -122,12 +122,12 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
 		//Display some information on this found window.
-		DisplayInfoOnFoundWindow(hwnd, new_hwndFoundWindow);
+		DisplayInfoOnFoundWindow(new_hwndFoundWindow);
 
 		// If there was a previously found window, we must instruct it to refresh itself. 
 		// This is done to remove any highlighting effects drawn by us.
 		RefreshWindow(hwndFoundWindow);
-		HighlightFoundWindow(hwnd, new_hwndFoundWindow);
+		HighlightFoundWindow(new_hwndFoundWindow);
 		
 		hwndFoundWindow = new_hwndFoundWindow;
 		
@@ -138,8 +138,8 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////
-bool DKHandles::DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
+///////////////////////////
+bool DKHandles::DoMouseUp()
 {
 	DKLog("DKHandles::DoMouseUp\n", DKINFO);
 
@@ -267,8 +267,8 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 	return rval;
 }
 
-//////////////////////////////////////////////////////////////////////
-bool DKHandles::HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow)
+///////////////////////////////////////////////////////////
+bool DKHandles::HighlightFoundWindow (HWND hwndFoundWindow)
 {
 	HDC hWindowDC = NULL;  // The DC of the found window.
 	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
@@ -683,16 +683,16 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 
 	MOUSEHOOKSTRUCT* pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
 	if(pMouseStruct){
-		HWND hwnd = NULL;
-		DKWindow::GetHandle((void*&)hwnd);
-		if(!hwnd){
-			DKLog("DKHandles::SearchProc(): hwnd is NULL\n", DKINFO);
-			return false;
-		}
+		//HWND hwnd = NULL;
+		//DKWindow::GetHandle((void*&)hwnd);
+		//if(!hwnd){
+		//	DKLog("DKHandles::SearchProc(): hwnd is NULL\n", DKINFO);
+		//	return false;
+		//}
 		if(wParam == WM_MOUSEMOVE){
 			//DKLog("WM_MOUSEMOVE", DKINFO);
 			if(searching){
-				DoMouseMove(hwnd, code, wParam, lParam);
+				DoMouseMove();
 			}
 		}
 		//if(wParam == WM_LBUTTONDOWN){
@@ -701,7 +701,7 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 		if(wParam == WM_LBUTTONUP){
 			//DKLog("WM_LBUTTONUP", DKINFO);
 			if(searching){
-				DoMouseUp(hwnd, code, wParam, lParam);
+				DoMouseUp();
 				searching = false;
 			}
 		}
