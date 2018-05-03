@@ -24,7 +24,7 @@ bool DKHandles::Init()
 	highlight = false;
 	currentHandle = 0;
 
-	rectanglePen = CreatePen(PS_SOLID, 3, RGB(256, 0, 0));
+	rectanglePen = CreatePen(PS_SOLID, 3, RGB(256, 256, 256));
 	if(!rectanglePen){
 		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n", DKINFO);
 		return false;
@@ -117,7 +117,7 @@ bool DKHandles::DoMouseMove()
 		return false;
 	}
 
-	if(hwndFoundWindow != new_hwndFoundWindow){
+	//if(hwndFoundWindow != new_hwndFoundWindow){
 		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
 		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
@@ -126,14 +126,13 @@ bool DKHandles::DoMouseMove()
 
 		// If there was a previously found window, we must instruct it to refresh itself. 
 		// This is done to remove any highlighting effects drawn by us.
-		RefreshWindow(hwndFoundWindow);
-		HighlightFoundWindow(new_hwndFoundWindow);
+		if(hwndFoundWindow){
+			RefreshWindow(hwndFoundWindow);
+		}
 		
 		hwndFoundWindow = new_hwndFoundWindow;
-		
-		//FIXME - not working
-		DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", "");
-	}
+		HighlightFoundWindow(hwndFoundWindow);
+	//}
 
 	return true;
 }
@@ -161,8 +160,18 @@ bool DKHandles::DoMouseUp()
 	// Very important : must release the mouse capture.
 	ReleaseCapture();
 
+
 	// Make the main window appear normally.
-	//ShowWindow(g_hwndMainWnd, SW_SHOWNORMAL);
+	HWND hwnd = NULL;
+	DKWindow::GetHandle((void*&)hwnd);
+	if(!hwnd){
+		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
+		return false;
+	}
+	::ShowWindow(hwnd, SW_SHOWNORMAL);
+
+	//FIXME - not working
+	DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", "");
 
 	return true;
 }
@@ -267,8 +276,8 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 	return rval;
 }
 
-///////////////////////////////////////////////////////////
-bool DKHandles::HighlightFoundWindow (HWND hwndFoundWindow)
+//////////////////////////////////////////////////////////
+bool DKHandles::HighlightFoundWindow(HWND hwndFoundWindow)
 {
 	HDC hWindowDC = NULL;  // The DC of the found window.
 	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
@@ -498,7 +507,9 @@ bool DKHandles::StartSearch()
 
 	SetCapture(hwnd);
 
-	//TODO - Hide main window.
+	// Hide the main window.
+	::ShowWindow(hwnd, SW_HIDE);
+
 	return true;
 }
 
