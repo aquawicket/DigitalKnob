@@ -33,6 +33,7 @@ public:
 	bool GetString(DKString& text);
 	bool GetTop(int& top);
 	bool GetWindows(DKStringArray& windows);
+	static bool HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow);
 	bool NextHandle();
 	bool PrevHandle();
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
@@ -65,6 +66,7 @@ public:
 	static bool searching;
 	static WNDPROC prevWndProc;
 	static HHOOK hMouseHook;
+	static HPEN	rectanglePen;
 };
 
 REGISTER_OBJECT(DKHandles, true);

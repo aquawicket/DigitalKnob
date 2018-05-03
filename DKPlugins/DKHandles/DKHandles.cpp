@@ -12,6 +12,7 @@ std::vector<HWND> DKHandles::handle;
 bool DKHandles::searching = false;
 WNDPROC DKHandles::prevWndProc;
 HHOOK DKHandles::hMouseHook;
+HPEN DKHandles::rectanglePen;
 
 //////////////////////
 bool DKHandles::Init()
@@ -20,6 +21,13 @@ bool DKHandles::Init()
 	DKClass::DKCreate("DKHandlesV8");
 	highlight = false;
 	currentHandle = 0;
+
+	rectanglePen = CreatePen(PS_SOLID, 3, RGB(256, 0, 0));
+	if(!rectanglePen){
+		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n", DKINFO);
+		return false;
+	}
+
 	return true;
 }
 
@@ -105,7 +113,7 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		//g_hwndFoundWindow = hwndFoundWindow;
 
 		// We now highlight the found window.
-		//HighlightFoundWindow (hwndDialog, g_hwndFoundWindow);
+		HighlightFoundWindow(hwnd, hwndFoundWindow);
 	//}
 
 	return true;
@@ -117,26 +125,23 @@ bool DKHandles::DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 	// If we had a previous cursor, set the screen cursor to the previous one.
 	// The cursor is to stay exactly where it is currently located when the 
 	// left mouse button is lifted.
-	//if (g_hCursorPrevious){
+	//if(g_hCursorPrevious){
 	//	SetCursor (g_hCursorPrevious);
 	//}
 
 	// If there was a found window, refresh it so that its highlighting is erased. 
 	//if(g_hwndFoundWindow){
-	//	RefreshWindow (g_hwndFoundWindow);
+	//	RefreshWindow(g_hwndFoundWindow);
 	//}
 
 	// Set the bitmap on the Finder Tool icon to be the bitmap with the bullseye bitmap.
 	//SetFinderToolImage(hwndDialog, TRUE);
 
 	// Very important : must release the mouse capture.
-	ReleaseCapture ();
+	ReleaseCapture();
 
 	// Make the main window appear normally.
 	//ShowWindow(g_hwndMainWnd, SW_SHOWNORMAL);
-
-	// Set the global search window flag to FALSE.
-	//g_bStartSearchWindow = FALSE;
 
 	return true;
 }
@@ -239,6 +244,38 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 	bool rval = (EnumWindows(GetWindows, NULL) != 0);
 	windows = _windows;
 	return rval;
+}
+
+//////////////////////////////////////////////////////////////////////
+bool DKHandles::HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow)
+{
+	HDC hWindowDC = NULL;  // The DC of the found window.
+	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
+	HGDIOBJ	hPrevBrush = NULL; // Handle of the existing brush in the DC of the found window.
+	RECT rect;              // Rectangle area of the found window.
+	long lRet = 0;
+
+	// Get the screen coordinates of the rectangle of the found window.
+	GetWindowRect(hwndFoundWindow, &rect);
+
+	// Get the window DC of the found window.
+	hWindowDC = GetWindowDC (hwndFoundWindow);
+
+	if(hWindowDC){
+		// Select our created pen into the DC and backup the previous pen.
+		hPrevPen = SelectObject (hWindowDC, rectanglePen);
+
+		// Select a transparent brush into the DC and backup the previous brush.
+		hPrevBrush = SelectObject (hWindowDC, GetStockObject(HOLLOW_BRUSH));
+
+		// Draw a rectangle in the DC covering the entire window area of the found window.
+		Rectangle (hWindowDC, 0, 0, rect.right - rect.left, rect.bottom - rect.top);
+		SelectObject (hWindowDC, hPrevPen); // Reinsert the previous pen and brush into the found window's DC.
+		SelectObject (hWindowDC, hPrevBrush);
+		ReleaseDC (hwndFoundWindow, hWindowDC); // Finally release the DC.
+	}
+
+	return true;
 }
 
 ////////////////////////////
@@ -614,8 +651,8 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
 	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
-	MOUSEHOOKSTRUCT * pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
-	if(pMouseStruct != NULL){
+	MOUSEHOOKSTRUCT* pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
+	if(pMouseStruct){
 		HWND hwnd = NULL;
 		DKWindow::GetHandle((void*&)hwnd);
 		if(!hwnd){
@@ -624,13 +661,13 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 		}
 		if(wParam == WM_MOUSEMOVE){
 			if(searching){
-				DKLog("Mouse position X = "+toString(pMouseStruct->pt.x)+"  Mouse Position Y = "+toString(pMouseStruct->pt.y)+"\n", DKINFO);
+				DKLog("WM_MOUSEMOVE: X:"+toString(pMouseStruct->pt.x)+"  Y:"+toString(pMouseStruct->pt.y)+"\n", DKINFO);
 				DoMouseMove(hwnd, code, wParam, lParam);
 			}
 		}
-		if(wParam == WM_LBUTTONDOWN){
-			DKLog("WM_LBUTTONDOWN", DKINFO); 
-		}
+		//if(wParam == WM_LBUTTONDOWN){
+		//	DKLog("WM_LBUTTONDOWN", DKINFO); 
+		//}
 		if(wParam == WM_LBUTTONUP){
 			DKLog("WM_LBUTTONUP", DKINFO);
 			if(searching){
