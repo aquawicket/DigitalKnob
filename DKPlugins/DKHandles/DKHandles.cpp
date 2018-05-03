@@ -4,8 +4,9 @@
 #include <Commctrl.h>
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKWindow/DKWindow.h"
 #include "DKHandles/DKHandles.h"
+#include "DKWindow/DKWindow.h"
+
 
 DKStringArray DKHandles::_windows;
 std::vector<HWND> DKHandles::handle;
@@ -127,6 +128,9 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 
 		// We now highlight the found window.
 		HighlightFoundWindow(hwnd, hwndFoundWindow);
+		
+		//TEST
+		DKEvent::SendEvent("GLOBAL", "DKHandles_DoMouseMove", "");
 	}
 
 	return true;
