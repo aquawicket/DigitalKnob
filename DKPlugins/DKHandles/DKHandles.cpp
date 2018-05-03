@@ -125,8 +125,6 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		DisplayInfoOnFoundWindow(hwnd, new_hwndFoundWindow);
 
 		RefreshWindow(hwndFoundWindow);
-		
-		// We now highlight the found window.
 		HighlightFoundWindow(hwnd, new_hwndFoundWindow);
 		
 		hwndFoundWindow = new_hwndFoundWindow;
