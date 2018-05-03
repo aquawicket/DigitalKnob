@@ -57,10 +57,10 @@ bool DKHandles::DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow)
 	long		lRet = 0;
 
 	// Get the screen coordinates of the rectangle of the found window.
-	GetWindowRect (hwndFoundWindow, &rect);
+	GetWindowRect(hwndFoundWindow, &rect);
 
 	// Get the class name of the found window.
-	GetClassName (hwndFoundWindow, szClassName, sizeof (szClassName) - 1);
+	GetClassName(hwndFoundWindow, szClassName, sizeof (szClassName) - 1);
 
 	DKLog("\n", DKINFO);
 	DKLog("Window Handle: "+toString(hwndFoundWindow)+"\n", DKINFO);
@@ -687,12 +687,13 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 			return false;
 		}
 		if(wParam == WM_MOUSEMOVE){
+			//DKLog("WM_MOUSEMOVE", DKINFO);
 			if(searching){
 				DoMouseMove(hwnd, code, wParam, lParam);
 			}
 		}
 		//if(wParam == WM_LBUTTONDOWN){
-		//	DKLog("WM_LBUTTONDOWN", DKINFO); 
+			//DKLog("WM_LBUTTONDOWN", DKINFO); 
 		//}
 		if(wParam == WM_LBUTTONUP){
 			//DKLog("WM_LBUTTONUP", DKINFO);
