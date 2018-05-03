@@ -131,7 +131,7 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		
 		hwndFoundWindow = new_hwndFoundWindow;
 		
-		//TEST
+		//FIXME - not working
 		DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", "");
 	}
 

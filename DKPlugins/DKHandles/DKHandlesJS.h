@@ -21,6 +21,7 @@ public:
 	static int SendHook(duk_context* ctx);
 	static int SetValue(duk_context* ctx);
 	static int SetWindowHandle(duk_context* ctx);
+	static int StartSearch(duk_context* ctx);
 	static int ToggleHighlight(duk_context* ctx);
 	static int WaitForWindow(duk_context* ctx);
 	static int WindowExists(duk_context* ctx);

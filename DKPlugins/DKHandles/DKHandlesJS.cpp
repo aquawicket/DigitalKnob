@@ -16,6 +16,7 @@ bool DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_SendHook", DKHandlesJS::SendHook);
 	DKDuktape::AttachFunction("DKHandles_SetValue", DKHandlesJS::SetValue);
 	DKDuktape::AttachFunction("DKHandles_SetWindowHandle", DKHandlesJS::SetWindowHandle);
+	DKDuktape::AttachFunction("DKHandles_StartSearch", DKHandlesJS::StartSearch);
 	DKDuktape::AttachFunction("DKHandles_ToggleHighlight", DKHandlesJS::ToggleHighlight);
 	DKDuktape::AttachFunction("DKHandles_WaitForWindow", DKHandlesJS::WaitForWindow);
 	DKDuktape::AttachFunction("DKHandles_WindowExists", DKHandlesJS::WindowExists);
@@ -110,6 +111,15 @@ int DKHandlesJS::SetWindowHandle(duk_context* ctx)
 {
 	DKString window = duk_require_string(ctx, 0);
 	if(!DKHandles::Instance("DKHandles")->SetWindowHandle(window, 1)){
+		return 0;
+	}
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKHandlesJS::StartSearch(duk_context* ctx)
+{
+	if(!DKHandles::Instance("DKHandles")->StartSearch()){
 		return 0;
 	}
 	return 1;
