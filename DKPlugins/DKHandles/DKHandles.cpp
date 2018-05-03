@@ -117,7 +117,7 @@ bool DKHandles::DoMouseMove()
 		return false;
 	}
 
-	//if(hwndFoundWindow != new_hwndFoundWindow){
+	if(hwndFoundWindow != new_hwndFoundWindow){
 		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
 		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
@@ -132,7 +132,7 @@ bool DKHandles::DoMouseMove()
 		
 		hwndFoundWindow = new_hwndFoundWindow;
 		HighlightFoundWindow(hwndFoundWindow);
-	//}
+	}
 
 	return true;
 }
@@ -692,8 +692,8 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
 	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
-	MOUSEHOOKSTRUCT* pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
-	if(pMouseStruct){
+	//MOUSEHOOKSTRUCT* pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
+	//if(pMouseStruct){
 		//HWND hwnd = NULL;
 		//DKWindow::GetHandle((void*&)hwnd);
 		//if(!hwnd){
@@ -716,7 +716,7 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 				searching = false;
 			}
 		}
-	}
+	//}
 
 	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
