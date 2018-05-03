@@ -62,6 +62,7 @@ bool DKHandles::DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow)
 	// Get the class name of the found window.
 	GetClassName (hwndFoundWindow, szClassName, sizeof (szClassName) - 1);
 
+	DKLog("\n", DKINFO);
 	DKLog("Window Handle: "+toString(hwndFoundWindow)+"\n", DKINFO);
 	DKLog("Class Name: "+toString(szClassName)+"\n", DKINFO);
 	DKLog("Left: "+toString(rect.left)+"\n", DKINFO);
