@@ -52,9 +52,9 @@ bool DKHandles::Click()
 /////////////////////////////////////////////////////////////////////////
 bool DKHandles::DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow)
 {
-	RECT		rect;              // Rectangle area of the found window.
-	char		szClassName[100];
-	long		lRet = 0;
+	RECT rect; // Rectangle area of the found window.
+	char szClassName[100];
+	long lRet = 0;
 
 	// Get the screen coordinates of the rectangle of the found window.
 	GetWindowRect(hwndFoundWindow, &rect);
@@ -104,6 +104,8 @@ bool DKHandles::DoHighlight()
 //////////////////////////////////////////////////////////////////////////////
 bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 {
+	//DKLog("DKHandles::DoMouseMove\n", DKINFO);
+
 	POINT screenpoint;
 	HWND new_hwndFoundWindow = NULL;
 	GetCursorPos(&screenpoint); //Must use GetCursorPos() instead of calculating from "lParam".
@@ -115,8 +117,6 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		return false;
 	}
 
-	// If there was a previously found window, we must instruct it to refresh itself. 
-	// This is done to remove any highlighting effects drawn by us.
 	if(hwndFoundWindow != new_hwndFoundWindow){
 		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
 		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
@@ -124,13 +124,15 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		//Display some information on this found window.
 		DisplayInfoOnFoundWindow(hwnd, new_hwndFoundWindow);
 
+		// If there was a previously found window, we must instruct it to refresh itself. 
+		// This is done to remove any highlighting effects drawn by us.
 		RefreshWindow(hwndFoundWindow);
 		HighlightFoundWindow(hwnd, new_hwndFoundWindow);
 		
 		hwndFoundWindow = new_hwndFoundWindow;
 		
 		//TEST
-		//DKEvent::SendEvent("GLOBAL", "DKHandles_DoMouseMove", "");
+		DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", "");
 	}
 
 	return true;
@@ -139,6 +141,8 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 ////////////////////////////////////////////////////////////////////////////
 bool DKHandles::DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 {
+	DKLog("DKHandles::DoMouseUp\n", DKINFO);
+
 	// If we had a previous cursor, set the screen cursor to the previous one.
 	// The cursor is to stay exactly where it is currently located when the 
 	// left mouse button is lifted.

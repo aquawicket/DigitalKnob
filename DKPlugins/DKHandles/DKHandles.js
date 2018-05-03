@@ -10,6 +10,7 @@ function DKHandles_Init()
 	DKAddEvent("Prev", "click", DKHandles_OnEvent);
 	DKAddEvent("Next", "click", DKHandles_OnEvent);
 	DKAddEvent("Highlight", "click", DKHandles_OnEvent);
+	DKAddEvent("GLOBAL", "DKHandles_WindowChanged", DKHandles_OnEvent);
 	DKHandles_UpdateWindowList();
 	
 	document.getElementById("search").ondragstart = function() { return false; };
@@ -75,6 +76,9 @@ function DKHandles_OnEvent(event)
 		DKWidget_SetValue("class", clas);
 		var par = DKHandles_GetParent();
 		DKWidget_SetValue("parent", par);
+	}
+	if(DK_Type(event, "DKHandles_WindowChanged")){
+		DKLog("DKHandles_WindowChanged\n", DKINFO);
 	}
 
 	DKWidget_SetValue("currentHandle", "Handle: "+DKHandles_CurrentHandle());
