@@ -36,6 +36,7 @@ public:
 	static bool HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow);
 	bool NextHandle();
 	bool PrevHandle();
+	static bool RefreshWindow(HWND hwndWindowToBeRefreshed);
 	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
 	bool SetHandle(const DKString& clas, const DKString& value, unsigned int timeout);
 	bool SetHandle(const DKString& value, unsigned int timeout);
@@ -67,6 +68,7 @@ public:
 	static WNDPROC prevWndProc;
 	static HHOOK hMouseHook;
 	static HPEN	rectanglePen;
+	static HWND hwndFoundWindow;
 };
 
 REGISTER_OBJECT(DKHandles, true);

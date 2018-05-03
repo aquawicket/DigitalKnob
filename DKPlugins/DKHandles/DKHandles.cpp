@@ -13,6 +13,7 @@ bool DKHandles::searching = false;
 WNDPROC DKHandles::prevWndProc;
 HHOOK DKHandles::hMouseHook;
 HPEN DKHandles::rectanglePen;
+HWND DKHandles::hwndFoundWindow;
 
 //////////////////////
 bool DKHandles::Init()
@@ -79,8 +80,6 @@ bool DKHandles::DoHighlight()
 bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 {
 	POINT screenpoint;
-	HWND hwndFoundWindow = NULL;
-
 	GetCursorPos(&screenpoint); // Must use GetCursorPos() instead of calculating from "lParam".
 
 	// Display global positioning in the dialog box.
@@ -88,7 +87,7 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 	DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
 	// Determine the window that lies underneath the mouse cursor.
-	hwndFoundWindow = WindowFromPoint (screenpoint);
+	hwndFoundWindow = WindowFromPoint(screenpoint);
 	if(!hwndFoundWindow){
 		DKLog("DKHandles::DoMouseMove(): hwndFoundWindow invalid\n", DKINFO);
 		return false;
@@ -105,9 +104,9 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 
 		// If there was a previously found window, we must instruct it to refresh itself. 
 		// This is done to remove any highlighting effects drawn by us.
-		//if (g_hwndFoundWindow){
-		//	RefreshWindow (g_hwndFoundWindow);
-		//}
+		if(hwndFoundWindow){
+			RefreshWindow(hwndFoundWindow);
+		}
 
 		// Indicate that this found window is now the current global found window.
 		//g_hwndFoundWindow = hwndFoundWindow;
@@ -130,9 +129,9 @@ bool DKHandles::DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 	//}
 
 	// If there was a found window, refresh it so that its highlighting is erased. 
-	//if(g_hwndFoundWindow){
-	//	RefreshWindow(g_hwndFoundWindow);
-	//}
+	if(hwndFoundWindow){
+		RefreshWindow(hwndFoundWindow);
+	}
 
 	// Set the bitmap on the Finder Tool icon to be the bitmap with the bullseye bitmap.
 	//SetFinderToolImage(hwndDialog, TRUE);
@@ -303,6 +302,15 @@ bool DKHandles::PrevHandle()
 	if(currentHandle <= handle.size()){
 		DoHighlight();
 	}
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKHandles::RefreshWindow(HWND hwndWindowToBeRefreshed)
+{
+	InvalidateRect (hwndWindowToBeRefreshed, NULL, TRUE);
+	UpdateWindow (hwndWindowToBeRefreshed);
+	RedrawWindow (hwndWindowToBeRefreshed, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
 	return true;
 }
 
