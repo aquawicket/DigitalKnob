@@ -23,6 +23,7 @@ public:
 	bool End();
 
 	bool Click();
+	static bool DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow);
 	bool DoHighlight();
 	static bool DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);
 	static bool DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);

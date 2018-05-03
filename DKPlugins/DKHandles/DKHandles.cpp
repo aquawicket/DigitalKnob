@@ -48,6 +48,29 @@ bool DKHandles::Click()
 	return true;
 }
 
+/////////////////////////////////////////////////////////////////////////
+bool DKHandles::DisplayInfoOnFoundWindow(HWND hwnd, HWND hwndFoundWindow)
+{
+	RECT		rect;              // Rectangle area of the found window.
+	char		szClassName[100];
+	long		lRet = 0;
+
+	// Get the screen coordinates of the rectangle of the found window.
+	GetWindowRect (hwndFoundWindow, &rect);
+
+	// Get the class name of the found window.
+	GetClassName (hwndFoundWindow, szClassName, sizeof (szClassName) - 1);
+
+	DKLog("Window Handle: "+toString(hwndFoundWindow)+"\n", DKINFO);
+	DKLog("Class Name: "+toString(szClassName)+"\n", DKINFO);
+	DKLog("Left: "+toString(rect.left)+"\n", DKINFO);
+	DKLog("Top: "+toString(rect.top)+"\n", DKINFO);
+	DKLog("Right: "+toString(rect.right)+"\n", DKINFO);
+	DKLog("Bottom: "+toString(rect.bottom)+"\n", DKINFO);
+
+	return true;
+}
+
 /////////////////////////////
 bool DKHandles::DoHighlight()
 {
@@ -80,40 +103,35 @@ bool DKHandles::DoHighlight()
 bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 {
 	POINT screenpoint;
-	GetCursorPos(&screenpoint); // Must use GetCursorPos() instead of calculating from "lParam".
+	HWND new_hwndFoundWindow = NULL;
+	GetCursorPos(&screenpoint); //Must use GetCursorPos() instead of calculating from "lParam".
 
-	// Display global positioning in the dialog box.
-	DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
-	DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
+	//Display global positioning in the dialog box.
+	//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
+	//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
+	//DKLog("DKHandles::DoMouseMove(): found window under mouse\n", DKINFO);
+
+	//Display some information on this found window.
+	DisplayInfoOnFoundWindow(hwnd, hwndFoundWindow);
 
 	// Determine the window that lies underneath the mouse cursor.
-	hwndFoundWindow = WindowFromPoint(screenpoint);
-	if(!hwndFoundWindow){
-		DKLog("DKHandles::DoMouseMove(): hwndFoundWindow invalid\n", DKINFO);
+	new_hwndFoundWindow = WindowFromPoint(screenpoint);
+	if(!new_hwndFoundWindow){
+		DKLog("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n", DKINFO);
 		return false;
 	}
 
-	DKLog("DKHandles::DoMouseMove(): found window under mouse\n", DKINFO);
-	// Check first for validity.
-	//if (CheckWindowValidity (hwndDialog, hwndFoundWindow))
-	//{
-		// We have just found a new window.
+	// If there was a previously found window, we must instruct it to refresh itself. 
+	// This is done to remove any highlighting effects drawn by us.
+	if(hwndFoundWindow){
+		RefreshWindow(hwndFoundWindow);
+	}
 
-		// Display some information on this found window.
-		//DisplayInfoOnFoundWindow (hwndDialog, hwndFoundWindow);
+	// Indicate that this found window is now the current global found window.
+	hwndFoundWindow = new_hwndFoundWindow;
 
-		// If there was a previously found window, we must instruct it to refresh itself. 
-		// This is done to remove any highlighting effects drawn by us.
-		if(hwndFoundWindow){
-			RefreshWindow(hwndFoundWindow);
-		}
-
-		// Indicate that this found window is now the current global found window.
-		//g_hwndFoundWindow = hwndFoundWindow;
-
-		// We now highlight the found window.
-		HighlightFoundWindow(hwnd, hwndFoundWindow);
-	//}
+	// We now highlight the found window.
+	HighlightFoundWindow(hwnd, hwndFoundWindow);
 
 	return true;
 }
@@ -268,10 +286,10 @@ bool DKHandles::HighlightFoundWindow (HWND hwnd, HWND hwndFoundWindow)
 		hPrevBrush = SelectObject (hWindowDC, GetStockObject(HOLLOW_BRUSH));
 
 		// Draw a rectangle in the DC covering the entire window area of the found window.
-		Rectangle (hWindowDC, 0, 0, rect.right - rect.left, rect.bottom - rect.top);
-		SelectObject (hWindowDC, hPrevPen); // Reinsert the previous pen and brush into the found window's DC.
-		SelectObject (hWindowDC, hPrevBrush);
-		ReleaseDC (hwndFoundWindow, hWindowDC); // Finally release the DC.
+		Rectangle(hWindowDC, 0, 0, rect.right - rect.left, rect.bottom - rect.top);
+		SelectObject(hWindowDC, hPrevPen); // Reinsert the previous pen and brush into the found window's DC.
+		SelectObject(hWindowDC, hPrevBrush);
+		ReleaseDC(hwndFoundWindow, hWindowDC); // Finally release the DC.
 	}
 
 	return true;
@@ -669,7 +687,6 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 		}
 		if(wParam == WM_MOUSEMOVE){
 			if(searching){
-				DKLog("WM_MOUSEMOVE: X:"+toString(pMouseStruct->pt.x)+"  Y:"+toString(pMouseStruct->pt.y)+"\n", DKINFO);
 				DoMouseMove(hwnd, code, wParam, lParam);
 			}
 		}
