@@ -690,7 +690,7 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 		//	DKLog("WM_LBUTTONDOWN", DKINFO); 
 		//}
 		if(wParam == WM_LBUTTONUP){
-			DKLog("WM_LBUTTONUP", DKINFO);
+			//DKLog("WM_LBUTTONUP", DKINFO);
 			if(searching){
 				DoMouseUp(hwnd, code, wParam, lParam);
 				searching = false;
@@ -700,6 +700,5 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 
 	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
-
 
 #endif //WIN32
