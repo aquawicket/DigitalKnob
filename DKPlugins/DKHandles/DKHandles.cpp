@@ -106,10 +106,6 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 	HWND new_hwndFoundWindow = NULL;
 	GetCursorPos(&screenpoint); //Must use GetCursorPos() instead of calculating from "lParam".
 
-	//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
-	//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
-	//DKLog("DKHandles::DoMouseMove(): found window under mouse\n", DKINFO);
-
 	// Determine the window that lies underneath the mouse cursor.
 	new_hwndFoundWindow = WindowFromPoint(screenpoint);
 	if(!new_hwndFoundWindow){
@@ -117,21 +113,21 @@ bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
 		return false;
 	}
 
-	//Display some information on this found window.
-	DisplayInfoOnFoundWindow(hwnd, new_hwndFoundWindow);
-
-	// FIXME - look into removing repeats here
 	// If there was a previously found window, we must instruct it to refresh itself. 
 	// This is done to remove any highlighting effects drawn by us.
-	if(hwndFoundWindow){
-		RefreshWindow(hwndFoundWindow);
-	}
-	// Indicate that this found window is now the current global found window.
-	hwndFoundWindow = new_hwndFoundWindow;
-	//END FIXME
+	if(hwndFoundWindow != new_hwndFoundWindow){
+		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
+		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
-	// We now highlight the found window.
-	HighlightFoundWindow(hwnd, hwndFoundWindow);
+		//Display some information on this found window.
+		DisplayInfoOnFoundWindow(hwnd, new_hwndFoundWindow);
+
+		RefreshWindow(hwndFoundWindow);
+		hwndFoundWindow = new_hwndFoundWindow;
+
+		// We now highlight the found window.
+		HighlightFoundWindow(hwnd, hwndFoundWindow);
+	}
 
 	return true;
 }
