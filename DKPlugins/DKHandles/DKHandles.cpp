@@ -67,6 +67,80 @@ bool DKHandles::DoHighlight()
 	return true;
 }
 
+//////////////////////////////////////////////////////////////////////////////
+bool DKHandles::DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
+{
+	POINT screenpoint;
+	HWND hwndFoundWindow = NULL;
+
+	GetCursorPos(&screenpoint); // Must use GetCursorPos() instead of calculating from "lParam".
+
+	// Display global positioning in the dialog box.
+	DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
+	DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
+
+	// Determine the window that lies underneath the mouse cursor.
+	hwndFoundWindow = WindowFromPoint (screenpoint);
+	if(!hwndFoundWindow){
+		DKLog("DKHandles::DoMouseMove(): hwndFoundWindow invalid\n", DKINFO);
+		return false;
+	}
+
+	DKLog("DKHandles::DoMouseMove(): found window under mouse\n", DKINFO);
+	// Check first for validity.
+	//if (CheckWindowValidity (hwndDialog, hwndFoundWindow))
+	//{
+		// We have just found a new window.
+
+		// Display some information on this found window.
+		//DisplayInfoOnFoundWindow (hwndDialog, hwndFoundWindow);
+
+		// If there was a previously found window, we must instruct it to refresh itself. 
+		// This is done to remove any highlighting effects drawn by us.
+		//if (g_hwndFoundWindow){
+		//	RefreshWindow (g_hwndFoundWindow);
+		//}
+
+		// Indicate that this found window is now the current global found window.
+		//g_hwndFoundWindow = hwndFoundWindow;
+
+		// We now highlight the found window.
+		//HighlightFoundWindow (hwndDialog, g_hwndFoundWindow);
+	//}
+
+	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////
+bool DKHandles::DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam)
+{
+	// If we had a previous cursor, set the screen cursor to the previous one.
+	// The cursor is to stay exactly where it is currently located when the 
+	// left mouse button is lifted.
+	//if (g_hCursorPrevious){
+	//	SetCursor (g_hCursorPrevious);
+	//}
+
+	// If there was a found window, refresh it so that its highlighting is erased. 
+	//if(g_hwndFoundWindow){
+	//	RefreshWindow (g_hwndFoundWindow);
+	//}
+
+	// Set the bitmap on the Finder Tool icon to be the bitmap with the bullseye bitmap.
+	//SetFinderToolImage(hwndDialog, TRUE);
+
+	// Very important : must release the mouse capture.
+	ReleaseCapture ();
+
+	// Make the main window appear normally.
+	//ShowWindow(g_hwndMainWnd, SW_SHOWNORMAL);
+
+	// Set the global search window flag to FALSE.
+	//g_bStartSearchWindow = FALSE;
+
+	return true;
+}
+
 ////////////////////////////////////////
 bool DKHandles::GetClass(DKString& clas)
 {
@@ -340,22 +414,15 @@ bool DKHandles::ShowWindow(unsigned int flag)
 /////////////////////////////
 bool DKHandles::StartSearch()
 {
-	//FIXME
 	//DKLog("DKHandles::StartSearch()\n", DKINFO);
 
-	//HWND hwnd = ::GetActiveWindow();
 	HWND hwnd = NULL;
 	DKWindow::GetHandle((void*&)hwnd);
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
 		return false;
 	}
-	
-	//TEST - are we getting the main DK window, set the title of the window? 
-	SetWindowText(hwnd, "This is a test"); //Set the title to test
 
-	//SetWindowSubclass(hwnd, &SearchProc, 1, 0); //FIXME - NOT WORKING
-	//prevWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)&SearchProc);
 	hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, &SearchProc, DKWindows::hInstance, NULL);
 
 	searching = TRUE;
@@ -542,54 +609,37 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 	return true; 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData)
-//LRESULT CALLBACK DKHandles::SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+//////////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
-	//FIXME - NOT WORKING
 	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
 	MOUSEHOOKSTRUCT * pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
 	if(pMouseStruct != NULL){
-		if(wParam == WM_LBUTTONDOWN){
-			printf("clicked"); 
+		HWND hwnd = NULL;
+		DKWindow::GetHandle((void*&)hwnd);
+		if(!hwnd){
+			DKLog("DKHandles::SearchProc(): hwnd is NULL\n", DKINFO);
+			return false;
 		}
-		printf("Mouse position X = %d  Mouse Position Y = %d\n", pMouseStruct->pt.x,pMouseStruct->pt.y);
-	}
-
-	/*
-	switch(uMsg){
-		case WM_MOUSEMOVE :
-		{
-			DKLog("DKHandles::SearchProc(): WM_MOUSEMOVE\n", DKINFO);
+		if(wParam == WM_MOUSEMOVE){
 			if(searching){
-				// Only when we have started the Window Searching operation will we track mouse movement.
-				//DoMouseMove(hwndDlg, uMsg, wParam, lParam);
+				DKLog("Mouse position X = "+toString(pMouseStruct->pt.x)+"  Mouse Position Y = "+toString(pMouseStruct->pt.y)+"\n", DKINFO);
+				DoMouseMove(hwnd, code, wParam, lParam);
 			}
-			break;
 		}
-		case WM_LBUTTONUP :
-		{
-			DKLog("DKHandles::SearchProc(): WM_LBUTTONUP\n", DKINFO);
+		if(wParam == WM_LBUTTONDOWN){
+			DKLog("WM_LBUTTONDOWN", DKINFO); 
+		}
+		if(wParam == WM_LBUTTONUP){
+			DKLog("WM_LBUTTONUP", DKINFO);
 			if(searching){
-				// Only when we have started the window searching operation will we
-				// be interested when the user lifts up the left mouse button.
-				//DoMouseUp(hwndDlg, uMsg, wParam, lParam);
+				DoMouseUp(hwnd, code, wParam, lParam);
 				searching = false;
 			}
-			break;
-		}
-		default :
-		{
-			DKLog("DKHandles::SearchProc(): uMsg = "+toString(uMsg)+"\n", DKINFO);
-			break;
 		}
 	}
-	*/
 
-	//return DefSubclassProc(hwnd, uMsg, wParam, lParam);
-	//return CallWindowProc(prevWndProc, hwnd, uMsg, wParam, lParam);
 	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
 

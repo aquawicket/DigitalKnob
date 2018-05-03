@@ -24,6 +24,8 @@ public:
 
 	bool Click();
 	bool DoHighlight();
+	static bool DoMouseMove(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);
+	static bool DoMouseUp(HWND hwnd, int code, WPARAM wParam, LPARAM lParam);
 	bool GetClass(DKString& clas);
 	bool GetHandles();
 	bool GetLeft(int& left);
