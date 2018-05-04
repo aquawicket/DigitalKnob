@@ -280,20 +280,20 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	DKLog("DKCefApp::SendEvent()\n", DKINFO);
-	/*
+	//DKLog("DKCefApp::SendEvent()\n", DKINFO);
+	
 	if(id.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
 	if(type.empty()){ return false; }
 	if(same(type,"second")){ return false; }
-	DKLog("DKCefApp::SendEvent("+id+","+type+")", DKINFO);
+	if(has(type, "DKCef_")){ return false; }
 
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
+	//DKLog(string+"\n", DKINFO);
 	CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+	
 	return true;
-	*/
-	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +398,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		}
 	}
 
-	//DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
+	DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
