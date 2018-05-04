@@ -280,6 +280,7 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
+	DKLog("DKCefApp::SendEvent()\n", DKINFO);
 	/*
 	if(id.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }

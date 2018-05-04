@@ -63,6 +63,8 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 ////////////////////////////////////////////////////////////////////////////////////////
 bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
+	//DKLog("DKEvent::SendEvent()\n", DKINFO);
+	
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")){ //prevent looping messages
 		DKLog("DKEvent::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
 	}
