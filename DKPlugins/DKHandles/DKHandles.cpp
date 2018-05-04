@@ -112,6 +112,7 @@ bool DKHandles::DoMouseMove()
 
 	// Determine the window that lies underneath the mouse cursor.
 	new_hwndFoundWindow = WindowFromPoint(screenpoint);
+	//new_hwndFoundWindow = RealChildWindowFromPoint(hwnd, screenpoint);
 	if(!new_hwndFoundWindow){
 		DKLog("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n", DKINFO);
 		return false;
@@ -695,31 +696,17 @@ LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
 	//DKLog("DKHandles::SearchProc\n", DKINFO);
 
-	//MOUSEHOOKSTRUCT* pMouseStruct = (MOUSEHOOKSTRUCT *)lParam;
-	//if(pMouseStruct){
-		//HWND hwnd = NULL;
-		//DKWindow::GetHandle((void*&)hwnd);
-		//if(!hwnd){
-		//	DKLog("DKHandles::SearchProc(): hwnd is NULL\n", DKINFO);
-		//	return false;
-		//}
-		if(wParam == WM_MOUSEMOVE){
-			//DKLog("WM_MOUSEMOVE", DKINFO);
-			if(searching){
-				DoMouseMove();
-			}
+	if(wParam == WM_MOUSEMOVE){
+		if(searching){
+			DoMouseMove();
 		}
-		//if(wParam == WM_LBUTTONDOWN){
-			//DKLog("WM_LBUTTONDOWN", DKINFO); 
-		//}
-		if(wParam == WM_LBUTTONUP){
-			//DKLog("WM_LBUTTONUP", DKINFO);
-			if(searching){
-				DoMouseUp();
-				searching = false;
-			}
+	}
+	if(wParam == WM_LBUTTONUP){
+		if(searching){
+			DoMouseUp();
+			searching = false;
 		}
-	//}
+	}
 
 	return CallNextHookEx(hMouseHook, code, wParam, lParam);
 }
