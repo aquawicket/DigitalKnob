@@ -126,7 +126,7 @@ bool DKHandles::DoMouseMove()
 		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
 
 		//Display some information on this found window.
-		DisplayInfoOnFoundWindow(new_hwndFoundWindow);
+		//DisplayInfoOnFoundWindow(new_hwndFoundWindow);
 
 		// If there was a previously found window, we must instruct it to refresh itself. 
 		// This is done to remove any highlighting effects drawn by us.
