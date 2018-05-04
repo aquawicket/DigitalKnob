@@ -287,6 +287,8 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(type.empty()){ return false; }
 	if(same(type,"second")){ return false; }
 	if(has(type, "DKCef_")){ return false; }
+	if(same(type, "keydown")){ return false; }
+	if(same(type, "keypress")){ return false; }
 
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	//DKLog(string+"\n", DKINFO);
