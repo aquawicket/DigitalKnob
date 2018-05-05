@@ -24,7 +24,7 @@ bool DKHandles::Init()
 	highlight = false;
 	currentHandle = 0;
 
-	rectanglePen = CreatePen(PS_SOLID, 3, RGB(256, 256, 256));
+	rectanglePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
 	if(!rectanglePen){
 		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n", DKINFO);
 		return false;
