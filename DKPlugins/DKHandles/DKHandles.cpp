@@ -49,33 +49,6 @@ bool DKHandles::Click(HWND handle)
 	return true;
 }
 
-////////////////////////////////////////
-bool DKHandles::DoHighlight(HWND handle)
-{
-	if(!highlight){ return false; }
-
-	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
-
-	RECT rect;
-	GetWindowRect(handle, &rect);
-	HDC screenDC = ::GetDC(GetDesktopWindow());
-
-	HPEN pen, oldPen;
-	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
-	oldPen = (HPEN)SelectObject(screenDC, pen);
-
-	::MoveToEx(screenDC, rect.left, rect.top, NULL);
-	::LineTo(screenDC, rect.right, rect.top);
-	::LineTo(screenDC, rect.right, rect.bottom);
-	::LineTo(screenDC, rect.left, rect.bottom);
-	::LineTo(screenDC, rect.left, rect.top);
-	::ReleaseDC(0, screenDC);
-
-	SelectObject(screenDC, oldPen); 
-	DeleteObject(pen);
-	return true;
-}
-
 /////////////////////////////
 bool DKHandles::DoMouseMove()
 {
@@ -110,6 +83,7 @@ bool DKHandles::DoMouseMove()
 		}
 		
 		hwndFoundWindow = new_hwndFoundWindow;
+		//HighlightFoundWindow(hwndFoundWindow);
 		HighlightFoundWindow(hwndFoundWindow);
 	}
 
@@ -259,6 +233,33 @@ bool DKHandles::HighlightFoundWindow(HWND hwnd)
 	return true;
 }
 
+////////////////////////////////////////////
+bool DKHandles::HighlightWindow(HWND handle)
+{
+	//if(!highlight){ return false; }
+
+	RefreshWindow(handle);
+
+	RECT rect;
+	GetWindowRect(handle, &rect);
+	HDC screenDC = ::GetDC(GetDesktopWindow());
+
+	HPEN pen, oldPen;
+	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
+	oldPen = (HPEN)SelectObject(screenDC, pen);
+
+	::MoveToEx(screenDC, rect.left, rect.top, NULL);
+	::LineTo(screenDC, rect.right, rect.top);
+	::LineTo(screenDC, rect.right, rect.bottom);
+	::LineTo(screenDC, rect.left, rect.bottom);
+	::LineTo(screenDC, rect.left, rect.top);
+	::ReleaseDC(0, screenDC);
+
+	SelectObject(screenDC, oldPen); 
+	DeleteObject(pen);
+	return true;
+}
+
 ////////////////////////////////////////////////
 bool DKHandles::NextHandle(HWND hwnd, HWND next)
 {
@@ -330,9 +331,9 @@ bool DKHandles::PrevHandle(HWND hwnd, HWND prev)
 ///////////////////////////////////////////////////////////
 bool DKHandles::RefreshWindow(HWND hwnd)
 {
-	InvalidateRect (hwnd, NULL, TRUE);
-	UpdateWindow (hwnd);
-	RedrawWindow (hwnd, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
+	InvalidateRect(hwnd, NULL, TRUE);
+	UpdateWindow(hwnd);
+	RedrawWindow(hwnd, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
 	return true;
 }
 

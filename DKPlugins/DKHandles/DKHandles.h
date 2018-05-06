@@ -23,7 +23,6 @@ public:
 	bool End();
 
 	static bool Click(HWND handle);
-	static bool DoHighlight(HWND handle);
 	static bool DoMouseMove();
 	static bool DoMouseUp();
 	static bool GetClass(HWND handle, DKString& clas);
@@ -33,6 +32,7 @@ public:
 	static bool GetTop(HWND handle, int& top);
 	static bool GetWindows(DKStringArray& windows);
 	static bool HighlightFoundWindow(HWND hwnd);
+	static bool HighlightWindow(HWND handle);
 	static bool NextHandle(HWND hwnd, HWND next);
 	static bool PopulateHandles();
 	static bool PrevHandle(HWND hwnd, HWND prev);

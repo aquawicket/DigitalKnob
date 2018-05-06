@@ -83,6 +83,8 @@ function DKHandles_OnEvent(event)
 		DKLog("DKHandles_WindowChanged\n", DKINFO);
 		var handle = DK_GetValue(event);
 		DKWidget_SetValue("currentHandle", "Handle: "+handle);
+		//var win = DKWidget_GetValue(DK_GetId(event));
+		//DKWidget_SetValue("window", win);
 		var value = DKHandles_GetValue(handle);
 		DKWidget_SetValue("value", value);
 		var clas = DKHandles_GetClass(handle);
