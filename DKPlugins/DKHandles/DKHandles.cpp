@@ -186,12 +186,16 @@ bool DKHandles::GetLeft(HWND handle, int& left)
 ////////////////////////////////////////////////////////
 bool DKHandles::GetParent(HWND handle, DKString& parent)
 {
-	HWND par = ::GetParent(handle);
-	if(!par){ return false; }
-	int len = SendMessage(par, WM_GETTEXTLENGTH, 0, 0);
-    char* buffer = new char[len];
-    SendMessage(par, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
-    parent = buffer;
+	//HWND par = ::GetParent(handle);
+	//HWND par = ::GetWindow(handle, GW_OWNER);
+	HWND par = ::GetAncestor(handle, GA_PARENT);
+	if(!par){
+		DKString error;
+		DKWindows::GetLastError(error);
+		DKLog("DKHandles::GetParent("+toString(handle)+"): "+error+"\n", DKWARN);
+		return false; 
+	}
+	parent = toString(par);
 	return true;
 }
 
