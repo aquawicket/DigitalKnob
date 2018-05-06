@@ -13,7 +13,7 @@ bool DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
 	DKDuktape::AttachFunction("DKHandles_NextHandle", DKHandlesJS::NextHandle);
 	DKDuktape::AttachFunction("DKHandles_PrevHandle", DKHandlesJS::PrevHandle);
-	DKDuktape::AttachFunction("DKHandles_SendHook", DKHandlesJS::SendHook);
+	//DKDuktape::AttachFunction("DKHandles_SendHook", DKHandlesJS::SendHook);
 	DKDuktape::AttachFunction("DKHandles_SetValue", DKHandlesJS::SetValue);
 	DKDuktape::AttachFunction("DKHandles_SetWindowHandle", DKHandlesJS::SetWindowHandle);
 	DKDuktape::AttachFunction("DKHandles_StartSearch", DKHandlesJS::StartSearch);
@@ -28,7 +28,8 @@ bool DKHandlesJS::Init()
 ////////////////////////////////////////
 int DKHandlesJS::Click(duk_context* ctx)
 {
-	if(!DKHandles::Instance("DKHandles")->Click()){
+	DKString handle = duk_require_string(ctx, 0);
+	if(!DKHandles::Click((HWND)handle.c_str())){
 		return 0;
 	}
 	return 1;
@@ -37,7 +38,7 @@ int DKHandlesJS::Click(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKHandlesJS::CurrentHandle(duk_context* ctx)
 {
-	DKString handle = toString(DKHandles::Instance("DKHandles")->currentHandle);
+	DKString handle = toString(DKHandles::currentHandle);
 	duk_push_string(ctx, handle.c_str());
 	return 1;
 }
@@ -45,10 +46,9 @@ int DKHandlesJS::CurrentHandle(duk_context* ctx)
 ///////////////////////////////////////////
 int DKHandlesJS::GetValue(duk_context* ctx)
 {
+	DKString handle = duk_require_string(ctx, 0);
 	DKString value;
-	if(!DKHandles::Instance("DKHandles")->GetString(value)){
-		return 0;
-	}
+	if(!DKHandles::GetString((HWND)handle.c_str(), value)){ return 0; }
 	duk_push_string(ctx, value.c_str());
 	return 1;
 }
@@ -57,9 +57,7 @@ int DKHandlesJS::GetValue(duk_context* ctx)
 int DKHandlesJS::GetWindows(duk_context* ctx)
 {
 	DKStringArray windows;
-	if (!DKHandles::Instance("DKHandles")->GetWindows(windows)) {
-		return 0;
-	}
+	if(!DKHandles::GetWindows(windows)){ return 0; }
 	DKString list = toString(windows, ",");
 	duk_push_string(ctx, list.c_str());
 	return 1;
@@ -68,21 +66,30 @@ int DKHandlesJS::GetWindows(duk_context* ctx)
 /////////////////////////////////////////////
 int DKHandlesJS::NextHandle(duk_context* ctx)
 {
-	if(!DKHandles::Instance("DKHandles")->NextHandle()){
-		return 0;
-	}
+	DKString handle = duk_require_string(ctx, 0);
+	HWND next;
+	if(!DKHandles::NextHandle((HWND)handle.c_str(), next)){ return 0; }
+	std::stringstream ss;
+	ss << "0x" << next;
+	DKString sval = ss.str();
+	duk_push_string(ctx, sval.c_str());
 	return 1;
 }
 
 /////////////////////////////////////////////
 int DKHandlesJS::PrevHandle(duk_context* ctx)
 {
-	if(!DKHandles::Instance("DKHandles")->PrevHandle()){
-		return 0;
-	}
+	DKString handle = duk_require_string(ctx, 0);
+	HWND prev;
+	if(!DKHandles::PrevHandle((HWND)handle.c_str(), prev)){ return 0;}
+	std::stringstream ss;
+	ss << "0x" << prev;
+	DKString sval = ss.str();
+	duk_push_string(ctx, sval.c_str());
 	return 1;
 }
 
+/*
 ///////////////////////////////////////////
 int DKHandlesJS::SendHook(duk_context* ctx)
 {
@@ -95,14 +102,14 @@ int DKHandlesJS::SendHook(duk_context* ctx)
 	}
 	return 1;
 }
+*/
 
 ///////////////////////////////////////////
 int DKHandlesJS::SetValue(duk_context* ctx)
 {
-	DKString value = duk_require_string(ctx, 0);
-	if(!DKHandles::Instance("DKHandles")->SetString(value)){
-		return 0;
-	}
+	DKString handle = duk_require_string(ctx, 0);
+	DKString value = duk_require_string(ctx, 1);
+	if(!DKHandles::SetString((HWND)handle.c_str(), value)){ return 0; }
 	return 1;
 }
 
@@ -110,9 +117,13 @@ int DKHandlesJS::SetValue(duk_context* ctx)
 int DKHandlesJS::SetWindowHandle(duk_context* ctx)
 {
 	DKString window = duk_require_string(ctx, 0);
-	if(!DKHandles::Instance("DKHandles")->SetWindowHandle(window, 1)){
-		return 0;
-	}
+	HWND hwnd;
+	if(!DKHandles::SetWindowHandle(window, 1, hwnd)){ return 0; }
+	std::stringstream ss;
+	ss << "0x" << hwnd;
+	DKString sval = ss.str();
+	DKLog("DKHandlesJS::SetWindowHandle() = "+ss.str()+"\n", DKINFO);
+	duk_push_string(ctx, sval.c_str());
 	return 1;
 }
 

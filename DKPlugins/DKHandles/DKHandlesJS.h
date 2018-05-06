@@ -18,7 +18,7 @@ public:
 	static int GetWindows(duk_context* ctx);
 	static int NextHandle(duk_context* ctx);
 	static int PrevHandle(duk_context* ctx);
-	static int SendHook(duk_context* ctx);
+	//static int SendHook(duk_context* ctx);
 	static int SetValue(duk_context* ctx);
 	static int SetWindowHandle(duk_context* ctx);
 	static int StartSearch(duk_context* ctx);

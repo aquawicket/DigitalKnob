@@ -17,7 +17,7 @@ bool DKHandlesV8::Init()
 	DKV8::AttachFunction("DKHandles_GetWindows", DKHandlesV8::GetWindows);
 	DKV8::AttachFunction("DKHandles_NextHandle", DKHandlesV8::NextHandle);
 	DKV8::AttachFunction("DKHandles_PrevHandle", DKHandlesV8::PrevHandle);
-	DKV8::AttachFunction("DKHandles_SendHook", DKHandlesV8::SendHook);
+	//DKV8::AttachFunction("DKHandles_SendHook", DKHandlesV8::SendHook);
 	DKV8::AttachFunction("DKHandles_SetHandle", DKHandlesV8::SetHandle);
 	DKV8::AttachFunction("DKHandles_SetValue", DKHandlesV8::SetValue);
 	DKV8::AttachFunction("DKHandles_SetWindowHandle", DKHandlesV8::SetWindowHandle);
@@ -42,7 +42,8 @@ bool DKHandlesV8::End()
 ///////////////////////////////////////////////////////
 bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->Click()){
+	DKString handle = args->GetString(0);
+	if(!DKHandles::Click((HWND)handle.c_str())){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -54,7 +55,7 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
 	std::stringstream handle;
-	handle << "0x" << DKHandles::Instance("DKHandles")->currentHandle;
+	handle << "0x" << DKHandles::currentHandle;
 	retval->SetString(0, handle.str());
 	return true;
 }
@@ -62,8 +63,15 @@ bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 {
+	DKString handle = args->GetString(0);
+	DKLog("DKHandlesV8::GetClass("+handle+")\n", DKINFO);
+	//handle.erase(0,2);
+	DKLog("DKHandlesV8::GetClass("+handle+")\n", DKINFO);
+	//int hwnd = (int)handle.c_str();
+	int hwnd = atoi(handle.c_str());
 	DKString clas;
-	if(!DKHandles::Instance("DKHandles")->GetClass(clas)){
+	if(!DKHandles::GetClass((HWND)(LONG_PTR)handle.c_str(), clas)){
+		retval->SetBool(0, false);
 		return false;
 	}
 	retval->SetString(0, clas);
@@ -73,8 +81,10 @@ bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKHandlesV8::GetLeft(CefArgs args, CefReturn retval)
 {
+	DKString handle = args->GetString(0);
 	int left;
-	if(!DKHandles::Instance("DKHandles")->GetLeft(left)){
+	if(!DKHandles::GetLeft((HWND)handle.c_str(), left)){
+		retval->SetBool(0, false);
 		return false;
 	}
 	retval->SetInt(0, left);
@@ -84,8 +94,9 @@ bool DKHandlesV8::GetLeft(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 {
+	DKString handle = args->GetString(0);
 	DKString parent;
-	if(!DKHandles::Instance("DKHandles")->GetParent(parent)){
+	if(!DKHandles::GetParent((HWND)handle.c_str(), parent)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -96,8 +107,10 @@ bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
 {
+	DKString handle = args->GetString(0);
 	int top;
-	if(!DKHandles::Instance("DKHandles")->GetTop(top)){
+	if(!DKHandles::GetTop((HWND)handle.c_str(), top)){
+		retval->SetBool(0, false);
 		return false;
 	}
 	retval->SetInt(0, top);
@@ -107,8 +120,10 @@ bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
 {
+	DKString handle = args->GetString(0);
 	DKString value;
-	if(!DKHandles::Instance("DKHandles")->GetString(value)){
+	if(!DKHandles::GetString((HWND)handle.c_str(), value)){
+		retval->SetBool(0, false);
 		return false;
 	}
 	retval->SetString(0, value);
@@ -119,7 +134,7 @@ bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
 bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
 {
 	DKStringArray windows;
-	if(!DKHandles::Instance("DKHandles")->GetWindows(windows)){
+	if(!DKHandles::GetWindows(windows)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -131,21 +146,36 @@ bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->NextHandle()){
+	DKString handle = args->GetString(0);
+	HWND next;
+	if(!DKHandles::NextHandle((HWND)handle.c_str(), next)){
+		retval->SetBool(0, false);
 		return false;
 	}
+	std::stringstream ss;
+	ss << "0x" << next;
+	DKString sval = ss.str();
+	retval->SetString(0, sval);
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->PrevHandle()){
+	DKString handle = args->GetString(0);
+	HWND prev;
+	if(!DKHandles::PrevHandle((HWND)handle.c_str(), prev)){
+		retval->SetBool(0, false);
 		return false;
 	}
+	std::stringstream ss;
+	ss << "0x" << prev;
+	DKString sval = ss.str();
+	retval->SetString(0, sval);
 	return true;
 }
 
+/*
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
 {
@@ -158,6 +188,7 @@ bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
 	}
 	return true;
 }
+*/
 
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
@@ -165,21 +196,21 @@ bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 	int timeout = 1;
 	if(args->GetType(0) == VTYPE_INT){ //By handle number
 		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
-		if(!DKHandles::Instance("DKHandles")->SetHandle(args->GetInt(0), timeout)){
+		if(!DKHandles::SetHandle(args->GetInt(0), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
 		if(args->GetType(2) == VTYPE_INT){ timeout = args->GetInt(2); }
-		if(!DKHandles::Instance("DKHandles")->SetHandle(args->GetString(0), args->GetString(1), timeout)){
+		if(!DKHandles::SetHandle(args->GetString(0), args->GetString(1), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
 		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
-		if(!DKHandles::Instance("DKHandles")->SetHandle(args->GetString(0), timeout)){
+		if(!DKHandles::SetHandle(args->GetString(0), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
@@ -191,8 +222,9 @@ bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 {
-	DKString value = args->GetString(0);
-	if(!DKHandles::Instance("DKHandles")->SetString(value)){
+	DKString handle = args->GetString(0);
+	DKString value = args->GetString(1);
+	if(!DKHandles::SetString((HWND)handle.c_str(), value)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -204,19 +236,26 @@ bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 {
 	int timeout = 1;
+	HWND hwnd;
 	if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
-	if(!DKHandles::Instance("DKHandles")->SetWindowHandle(args->GetString(0), timeout)){
+	if(!DKHandles::SetWindowHandle(args->GetString(0), timeout, hwnd)){
 		retval->SetBool(0, false);
 		return false;
 	}
-	retval->SetBool(0, true);
+	std::stringstream ss;
+	ss << "0x" << hwnd;
+	DKString sval = ss.str();
+	DKLog("DKHandlesJS::SetWindowHandle() = "+sval+"\n", DKINFO);
+	retval->SetString(0, sval);
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->ShowWindow(args->GetInt(0))){
+	DKString handle = args->GetString(0);
+	bool flag = args->GetBool(1);
+	if(!DKHandles::ShowWindow((HWND)handle.c_str(), flag)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -227,7 +266,7 @@ bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKHandlesV8::StartSearch(CefArgs args, CefReturn retval)
 {
-	if(!DKHandles::Instance("DKHandles")->StartSearch()){
+	if(!DKHandles::StartSearch()){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -238,7 +277,7 @@ bool DKHandlesV8::StartSearch(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////////
 bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
 {
-	DKHandles::Instance("DKHandles")->ToggleHighlight();
+	DKHandles::ToggleHighlight();
 	return true;
 }
 
@@ -246,19 +285,19 @@ bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
 bool DKHandlesV8::WaitForHandle(CefArgs args, CefReturn retval)
 {
 	if(args->GetType(0) == VTYPE_INT){ //By handle number
-		if(!DKHandles::Instance("DKHandles")->WaitForHandle(args->GetInt(0), args->GetInt(1))){
+		if(!DKHandles::WaitForHandle(args->GetInt(0), args->GetInt(1))){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
-		if(!DKHandles::Instance("DKHandles")->WaitForHandle(args->GetString(0), args->GetString(1), args->GetInt(2))){
+		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetString(1), args->GetInt(2))){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
 	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
-		if(!DKHandles::Instance("DKHandles")->WaitForHandle(args->GetString(0), args->GetInt(1))){
+		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetInt(1))){
 			retval->SetBool(0, false);
 			return false;
 		}
@@ -272,7 +311,7 @@ bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
 {
 	DKString window = args->GetString(0);
 	int timeout = args->GetInt(1);
-	if(!DKHandles::Instance("DKHandles")->WaitForWindow(window, timeout)){
+	if(!DKHandles::WaitForWindow(window, timeout)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -284,7 +323,7 @@ bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
 bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
 {
 	DKString window = args->GetString(0);
-	if(!DKHandles::Instance("DKHandles")->WindowExists(window)){
+	if(!DKHandles::WindowExists(window)){
 		retval->SetBool(0, false);
 		return false;
 	}

@@ -68,13 +68,15 @@ function DKHandles_OnEvent(event)
 		//DKLog("DKHandles_OnEvent("+event+")\n");
 		//DKLog("DKHandles_OnEvent(): id = "+DK_GetId(event)+"\n");
 		//DKLog("DKHandles_OnEvent(): value = "+DKWidget_GetValue(DK_GetId(event))+"\n");
-		DKHandles_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
-		DKWidget_SetValue("window",DKWidget_GetValue(DK_GetId(event)));
-		var value = DKHandles_GetValue();
+		var handle = DKHandles_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
+		DKLog("handle: "+handle+"\n", DKINFO);
+		var win = DKWidget_GetValue(DK_GetId(event));
+		DKWidget_SetValue("window", win);
+		var value = DKHandles_GetValue(handle);
 		DKWidget_SetValue("value", value);
-		var clas = DKHandles_GetClass();
+		var clas = DKHandles_GetClass(handle);
 		DKWidget_SetValue("class", clas);
-		var par = DKHandles_GetParent();
+		var par = DKHandles_GetParent(handle);
 		DKWidget_SetValue("parent", par);
 	}
 	if(DK_Type(event, "DKHandles_WindowChanged")){

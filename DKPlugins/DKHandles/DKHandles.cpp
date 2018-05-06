@@ -16,6 +16,7 @@ HPEN DKHandles::rectanglePen;
 HWND DKHandles::hwndFoundWindow;
 std::map<HWND,HWND> DKHandles::handles;
 HWND DKHandles::currentHandle = NULL;
+bool DKHandles::highlight = false;
 
 //////////////////////
 bool DKHandles::Init()
@@ -41,40 +42,15 @@ bool DKHandles::End()
 
 
 
-///////////////////////
-bool DKHandles::Click()
+//////////////////////////////////
+bool DKHandles::Click(HWND handle)
 {
-	if(handles.empty()){ return false; }
-	SendMessage(currentHandle, BM_CLICK, 0, 0);
+	SendMessage(handle, BM_CLICK, 0, 0);
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKHandles::DisplayInfoOnFoundWindow(HWND hwndFoundWindow)
-{
-	RECT rect; // Rectangle area of the found window.
-	char szClassName[100];
-	long lRet = 0;
-
-	// Get the screen coordinates of the rectangle of the found window.
-	GetWindowRect(hwndFoundWindow, &rect);
-
-	// Get the class name of the found window.
-	GetClassName(hwndFoundWindow, szClassName, sizeof (szClassName) - 1);
-
-	//DKLog("\n", DKINFO);
-	DKLog("\nWindow Handle: "+toString(hwndFoundWindow)+"\n", DKINFO);
-	DKLog("Class Name: "+toString(szClassName)+"\n", DKINFO);
-	DKLog("Left: "+toString(rect.left)+"\n", DKINFO);
-	DKLog("Top: "+toString(rect.top)+"\n", DKINFO);
-	DKLog("Right: "+toString(rect.right)+"\n", DKINFO);
-	DKLog("Bottom: "+toString(rect.bottom)+"\n", DKINFO);
-
-	return true;
-}
-
-/////////////////////////////
-bool DKHandles::DoHighlight()
+////////////////////////////////////////
+bool DKHandles::DoHighlight(HWND handle)
 {
 	if(!highlight){ return false; }
 	if(handles.empty()){ return false; }
@@ -82,7 +58,7 @@ bool DKHandles::DoHighlight()
 	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
 
 	RECT rect;
-	GetWindowRect(currentHandle, &rect);
+	GetWindowRect(handle, &rect);
 	HDC screenDC = ::GetDC(GetDesktopWindow());
 
 	HPEN pen, oldPen;
@@ -180,7 +156,6 @@ bool DKHandles::DoMouseUp()
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(it->first == hwndFoundWindow){
-			currentHandle = it->first;
 			std::stringstream ss;
 			ss << "0x" << it->first;
 			//DKLog("handle = "+ss.str()+"\n", DKINFO);
@@ -191,70 +166,34 @@ bool DKHandles::DoMouseUp()
 	return true;
 }
 
-////////////////////////////////////////
-bool DKHandles::GetClass(DKString& clas)
+/////////////////////////////////////////////////////
+bool DKHandles::GetClass(HWND handle, DKString& clas)
 {
+	std::stringstream ss;
+	ss << "0x" << handle;
+	DKLog("DKHandles::GetClass("+ss.str()+")\n", DKINFO);
 	char classname[256];
-	if(handles.empty()){ return false; }
-	if(!GetClassName(currentHandle, classname, 256)){
-		DKLog("DKHandles::GetClass("+clas+")\n", DKWARN);
+	if(!GetClassName(handle, classname, 256)){
+		DKLog("DKHandles::GetClass(): GetClassName failed\n", DKWARN);
 		return false; 
 	}
 	clas = classname;
 	return true;
 }
 
-/*
-////////////////////////////
-bool DKHandles::GetHandles()
+///////////////////////////////////////////////
+bool DKHandles::GetLeft(HWND handle, int& left)
 {
-	if(handle.empty() || handle[0] == NULL){ //Window is not open so don't look for its items.
-		DKLog("DKHandles::GetHandles() window not found! \n", DKERROR);
-		return false;
-	}
-
-	//Window IS open, so look for all of the items and assign handles
-	bool searchFromBase = true;
-	unsigned int s = 0;
-	unsigned int h = 1;
-	while(s < handle.size()){
-		HWND temp = NULL;
-		if(searchFromBase){
-			temp = FindWindowEx(handle[s], NULL, NULL, NULL);
-			if(temp){ handle.push_back(temp); }
-			searchFromBase = false;
-		}
-		else{
-			temp = FindWindowEx(handle[s], handle[h-1], NULL, NULL);
-			if(temp){ handle.push_back(temp); }
-		}
-		if(temp != NULL){
-			h++;
-		}
-		else{
-			s++; searchFromBase = true;
-		}
-	}
-
-	return true;
-}
-*/
-
-//////////////////////////////////
-bool DKHandles::GetLeft(int& left)
-{
-	if(handles.empty()){ return false; }
 	RECT rect;
-	GetWindowRect(currentHandle, &rect);
+	GetWindowRect(handle, &rect);
 	left = rect.left;
 	return true;
 }
 
-///////////////////////////////////////////
-bool DKHandles::GetParent(DKString& parent)
+////////////////////////////////////////////////////////
+bool DKHandles::GetParent(HWND handle, DKString& parent)
 {
-	if(handles.empty()){ return false; }
-	HWND par = ::GetParent(currentHandle);
+	HWND par = ::GetParent(handle);
 	if(!par){ return false; }
 	int len = SendMessage(par, WM_GETTEXTLENGTH, 0, 0);
     char* buffer = new char[len];
@@ -263,23 +202,21 @@ bool DKHandles::GetParent(DKString& parent)
 	return true;
 }
 
-/////////////////////////////////////////
-bool DKHandles::GetString(DKString& text)
+//////////////////////////////////////////////////////
+bool DKHandles::GetString(HWND handle, DKString& text)
 {
-	if(handles.empty()){ return false; }
-	int len = SendMessage(currentHandle, WM_GETTEXTLENGTH, 0, 0);
+	int len = SendMessage(handle, WM_GETTEXTLENGTH, 0, 0);
 	char* buffer = new char[len];
-	SendMessage(currentHandle, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+	SendMessage(handle, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 	text = buffer;
 	return true;
 }
 
-////////////////////////////////
-bool DKHandles::GetTop(int& top)
+/////////////////////////////////////////////
+bool DKHandles::GetTop(HWND handle, int& top)
 {
-	if(handles.empty()){ return false; }
 	RECT rect;
-	GetWindowRect(currentHandle, &rect);
+	GetWindowRect(handle, &rect);
 	top = rect.top;
 	return true;
 }
@@ -293,8 +230,8 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 	return rval;
 }
 
-//////////////////////////////////////////////////////////
-bool DKHandles::HighlightFoundWindow(HWND hwndFoundWindow)
+///////////////////////////////////////////////
+bool DKHandles::HighlightFoundWindow(HWND hwnd)
 {
 	HDC hWindowDC = NULL;  // The DC of the found window.
 	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
@@ -303,10 +240,10 @@ bool DKHandles::HighlightFoundWindow(HWND hwndFoundWindow)
 	long lRet = 0;
 
 	// Get the screen coordinates of the rectangle of the found window.
-	GetWindowRect(hwndFoundWindow, &rect);
+	GetWindowRect(hwnd, &rect);
 
 	// Get the window DC of the found window.
-	hWindowDC = GetWindowDC (hwndFoundWindow);
+	hWindowDC = GetWindowDC (hwnd);
 
 	if(hWindowDC){
 		// Select our created pen into the DC and backup the previous pen.
@@ -319,29 +256,24 @@ bool DKHandles::HighlightFoundWindow(HWND hwndFoundWindow)
 		Rectangle(hWindowDC, 0, 0, rect.right - rect.left, rect.bottom - rect.top);
 		SelectObject(hWindowDC, hPrevPen); // Reinsert the previous pen and brush into the found window's DC.
 		SelectObject(hWindowDC, hPrevBrush);
-		ReleaseDC(hwndFoundWindow, hWindowDC); // Finally release the DC.
+		ReleaseDC(hwnd, hWindowDC); // Finally release the DC.
 	}
 
 	return true;
 }
 
-////////////////////////////
-bool DKHandles::NextHandle()
+////////////////////////////////////////////////
+bool DKHandles::NextHandle(HWND hwnd, HWND next)
 {
-	if(handles.empty()){
-		DKLog("DKHandles::NextHandle(): handle is empty\n", DKWARN);
-		return false; 
+	std::map<HWND,HWND>::iterator it;
+	for(it=handles.begin(); it!=handles.end(); it++){
+		if(hwnd == it->first){
+			it++;
+			next = it->first;
+			return true;
+		}
 	}
-
-	//FIXME
-	/*
-	if(currentHandle < handle.size()-1){currentHandle++;}
-	if(currentHandle <= handle.size()){
-		DoHighlight();
-	}
-	*/
-
-	return true;
+	return false;
 }
 
 /////////////////////////////////
@@ -384,33 +316,30 @@ bool DKHandles::PopulateHandles()
 	return true;
 }
 
-////////////////////////////
-bool DKHandles::PrevHandle()
+////////////////////////////////////////////////
+bool DKHandles::PrevHandle(HWND hwnd, HWND prev)
 {
-	if(handles.empty()){
-		DKLog("DKHandles::PrevHandle(): handle is empty\n", DKWARN);
-		return false; 
+	std::map<HWND,HWND>::iterator it;
+	for(it=handles.end(); it!=handles.begin(); it--){
+		if(hwnd == it->first){
+			it--;
+			prev = it->first;
+			return true;
+		}
 	}
-
-	//FIXME
-	/*
-	if(currentHandle > 0){currentHandle--;}
-	if(currentHandle <= handle.size()){
-		DoHighlight();
-	}
-	*/
-	return true;
+	return false;
 }
 
 ///////////////////////////////////////////////////////////
-bool DKHandles::RefreshWindow(HWND hwndWindowToBeRefreshed)
+bool DKHandles::RefreshWindow(HWND hwnd)
 {
-	InvalidateRect (hwndWindowToBeRefreshed, NULL, TRUE);
-	UpdateWindow (hwndWindowToBeRefreshed);
-	RedrawWindow (hwndWindowToBeRefreshed, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
+	InvalidateRect (hwnd, NULL, TRUE);
+	UpdateWindow (hwnd);
+	RedrawWindow (hwnd, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
 	return true;
 }
 
+/*
 //////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SendHook(const DKString& window, const DKString& handle, const DKString& data)
 {
@@ -435,6 +364,7 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 	}
 	return true;
 }
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned int timeout)
@@ -452,7 +382,7 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 			char* buffer = new char[len];
 			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
-			if (value.empty()) {
+			if(value.empty()){
 				int test = 0;
 			}
 			if(text == value){
@@ -518,16 +448,15 @@ bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 	return true;
 }
 
-///////////////////////////////////////////////
-bool DKHandles::SetString(const DKString& text)
+//////////////////////////////////////////////////////////
+bool DKHandles::SetString(HWND hwnd, const DKString& text)
 {
-	if(handles.empty()){ return false; }
-	SendMessage(currentHandle, WM_SETTEXT, (WPARAM)text.size(), (LPARAM)text.c_str());
+	SendMessage(hwnd, WM_SETTEXT, (WPARAM)text.size(), (LPARAM)text.c_str());
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////
-bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
+//////////////////////////////////////////////////////////////////////////////////////////////
+bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeout, HWND& hwnd)
 {
 	handles.clear();
 	HWNDname temp;
@@ -542,16 +471,18 @@ bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
 		return false;
 	}
 	
-	PopulateHandles();
+	hwnd = currentHandle;
+
+	//PopulateHandles();
 	SetHandle(0,1);
 	DKLog("Selected Window: "+title+"\n", DKINFO);
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKHandles::ShowWindow(unsigned int flag)
+////////////////////////////////////////////////////////
+bool DKHandles::ShowWindow(HWND hwnd, unsigned int flag)
 {
-	::ShowWindow(currentHandle, flag);
+	::ShowWindow(hwnd, flag);
 	return true;
 }
 
@@ -586,11 +517,9 @@ bool DKHandles::ToggleHighlight()
 {
 	if(highlight){
 		highlight = false;
-		DoHighlight();
 		return true;
 	}
 	highlight = true;
-	DoHighlight();
 	return true;
 }
 
@@ -732,10 +661,11 @@ BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam)
 	HWNDname *temp = (HWNDname*)lparam;
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
-	if(strcmp(buffer, temp->caption) == 0){ 
-		//handles.push_back(hwnd);
+	if(strcmp(buffer, temp->caption) == 0){
+		//currentHandle = hwnd;
 		return FALSE;     
-	}      
+	} 
+	currentHandle = hwnd;
 	return TRUE; 
 }
 

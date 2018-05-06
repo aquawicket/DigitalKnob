@@ -22,36 +22,35 @@ public:
 	bool Init();
 	bool End();
 
-	bool Click();
-	static bool DisplayInfoOnFoundWindow(HWND hwndFoundWindow);
-	bool DoHighlight();
+	static bool Click(HWND handle);
+	static bool DoHighlight(HWND handle);
 	static bool DoMouseMove();
 	static bool DoMouseUp();
-	bool GetClass(DKString& clas);
-	bool GetLeft(int& left);
-	bool GetParent(DKString& parent);
-	bool GetString(DKString& text);
-	bool GetTop(int& top);
-	bool GetWindows(DKStringArray& windows);
-	static bool HighlightFoundWindow(HWND hwndFoundWindow);
-	bool NextHandle();
+	static bool GetClass(HWND handle, DKString& clas);
+	static bool GetLeft(HWND handle, int& left);
+	static bool GetParent(HWND handle, DKString& parent);
+	static bool GetString(HWND handle, DKString& text);
+	static bool GetTop(HWND handle, int& top);
+	static bool GetWindows(DKStringArray& windows);
+	static bool HighlightFoundWindow(HWND hwnd);
+	static bool NextHandle(HWND hwnd, HWND next);
 	static bool PopulateHandles();
-	bool PrevHandle();
-	static bool RefreshWindow(HWND hwndWindowToBeRefreshed);
-	bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
-	bool SetHandle(const DKString& clas, const DKString& value, unsigned int timeout);
-	bool SetHandle(const DKString& value, unsigned int timeout);
-	bool SetHandle(unsigned int index, unsigned int timeout);
-	bool SetString(const DKString& text);
-	bool SetWindowHandle(const DKString& title, unsigned int timeout);
-	bool ShowWindow(unsigned int flag);
-	bool StartSearch();
-	bool ToggleHighlight();
-	bool WaitForHandle(const DKString& clas, const DKString& value, int timeout);
-	bool WaitForHandle(const DKString& value, int timeout);
-	bool WaitForHandle(unsigned int index, int timeout);
-	bool WaitForWindow(const DKString& title, int timeout);
-	bool WindowExists(const DKString& title);
+	static bool PrevHandle(HWND hwnd, HWND prev);
+	static bool RefreshWindow(HWND hwnd);
+	//bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
+	static bool SetHandle(const DKString& clas, const DKString& value, unsigned int timeout);
+	static bool SetHandle(const DKString& value, unsigned int timeout);
+	static bool SetHandle(unsigned int index, unsigned int timeout);
+	static bool SetString(HWND hwnd, const DKString& text);
+	static bool SetWindowHandle(const DKString& title, const unsigned int timeout, HWND& hwnd);
+	static bool ShowWindow(HWND hwnd, unsigned int flag);
+	static bool StartSearch();
+	static bool ToggleHighlight();
+	static bool WaitForHandle(const DKString& clas, const DKString& value, int timeout);
+	static bool WaitForHandle(const DKString& value, int timeout);
+	static bool WaitForHandle(unsigned int index, int timeout);
+	static bool WaitForWindow(const DKString& title, int timeout);
+	static bool WindowExists(const DKString& title);
 	
 	static BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam);
 	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
@@ -62,7 +61,7 @@ public:
 
 	static HWND currentHandle;
 	static DKStringArray _windows; //list of windows
-	bool highlight; //highlight toggle
+	static bool highlight; //highlight toggle
 	static bool searching;
 	static WNDPROC prevWndProc;
 	static HHOOK hMouseHook;
