@@ -15,6 +15,8 @@ WNDPROC DKHandles::prevWndProc;
 HHOOK DKHandles::hMouseHook;
 HPEN DKHandles::rectanglePen;
 HWND DKHandles::hwndFoundWindow;
+std::map<HWND,HWND> DKHandles::handles;
+unsigned int DKHandles::currentHandle;
 
 //////////////////////
 bool DKHandles::Init()
@@ -174,8 +176,18 @@ bool DKHandles::DoMouseUp()
 	}
 	::ShowWindow(hwnd, SW_SHOWNORMAL);
 
-	//FIXME - not working
-	DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", "");
+	//determin the handle selected
+	PopulateHandles();
+
+	int i=0;
+	std::map<HWND,HWND>::iterator it;
+	for(it=handles.begin(); it!=handles.end(); it++){
+		if(it->first == hwndFoundWindow){
+			currentHandle = i;
+			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", toString(i));
+		}
+		i++;
+	}
 
 	return true;
 }
@@ -184,7 +196,7 @@ bool DKHandles::DoMouseUp()
 bool DKHandles::GetClass(DKString& clas)
 {
 	char classname[256];
-	if(handle.empty()){ return false; }
+	if(handles.empty()){ return false; }
 	if(!GetClassName(handle[currentHandle], classname, 256)){
 		DKLog("DKHandles::GetClass("+clas+")\n", DKWARN);
 		return false; 
@@ -323,6 +335,46 @@ bool DKHandles::NextHandle()
 	if(currentHandle <= handle.size()){
 		DoHighlight();
 	}
+	return true;
+}
+
+/////////////////////////////////
+bool DKHandles::PopulateHandles()
+{
+	//TODO - get a hierarchy of all window handles
+	//std::map<HWND,HWND> DKHandles::handles;
+	handles.clear();
+	handles.insert(std::pair<HWND,HWND>(::GetDesktopWindow(), NULL));
+
+	EnumChildWindows(::GetDesktopWindow(), EnumChildProc, 0);
+	
+	/*
+	std::map<HWND,HWND>::iterator it;
+	for(it=handles.begin(); it!=handles.end(); it++){
+		EnumChildWindows(it->first, EnumChildProc, 0);
+	}
+	*/
+
+	DKLog("hande size: "+toString(handles.size())+"\n", DKINFO);
+
+	/*
+	//std::map<HWND,HWND>::iterator it;
+	for(it=handles.begin(); it!=handles.end(); it++){
+		char class_name[80];
+		char title[80];
+		GetClassName(it->first, class_name, sizeof(class_name));
+		GetWindowText(it->first, title, sizeof(title));
+
+		if(!same("",title)){
+		DKLog("Window: ", DKINFO);
+		DKLog(title, DKINFO);
+		DKLog(" Class: ", DKINFO);
+		DKLog(class_name, DKINFO);
+		DKLog("\n", DKINFO);
+		}
+	}
+	*/
+
 	return true;
 }
 
@@ -631,6 +683,13 @@ bool DKHandles::WindowExists(const DKString& title)
 }
 
 
+////////////////////////////////////////////////////////////////
+BOOL CALLBACK DKHandles::EnumChildProc(HWND hwnd, LPARAM lParam) 
+{
+	handles.insert(std::pair<HWND,HWND>(hwnd, ::GetParent(hwnd)));
+	return TRUE;
+}
+
 
 //////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
@@ -642,11 +701,11 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 
 	/*
 	if(!same("",title)){
-	DKLog("Window: ");
-	DKLog(title);
-	DKLog(" Class: ");
-	DKLog(class_name);
-	DKLog("\n");
+	DKLog("Window: ", DKINFO);
+	DKLog(title, DKINFO);
+	DKLog(" Class: ", DKINFO);
+	DKLog(class_name, DKINFO);
+	DKLog("\n", DKINFO);
 	}
 	*/
 

@@ -79,6 +79,12 @@ function DKHandles_OnEvent(event)
 	}
 	if(DK_Type(event, "DKHandles_WindowChanged")){
 		DKLog("DKHandles_WindowChanged\n", DKINFO);
+		//var value = DKHandles_GetValue();
+		//DKWidget_SetValue("value", value);
+		//var clas = DKHandles_GetClass();
+		//DKWidget_SetValue("class", clas);
+		//var par = DKHandles_GetParent();
+		//DKWidget_SetValue("parent", par);
 	}
 
 	DKWidget_SetValue("currentHandle", "Handle: "+DKHandles_CurrentHandle());
