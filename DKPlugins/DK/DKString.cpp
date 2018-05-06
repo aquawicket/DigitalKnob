@@ -124,6 +124,14 @@ DKString toString(bool _bool)
 	return "false";
 }
 
+//////////////////////////////////
+DKString toString(const HWND hwnd)
+{
+	std::stringstream ss;
+	ss << "0x" << hwnd;
+	return ss.str();
+}
+
 #ifdef WIN32
 /////////////////////////////////////////
 DKString toString(const std::wstring& ws)
@@ -244,6 +252,18 @@ bool IsNumber(const DKString& str)
     std::string::const_iterator it = str.begin();
     while (it != str.end() && std::isdigit(*it)) ++it;
     return !str.empty() && it == str.end();
+}
+
+////////////////////////////////
+HWND toHWND(const DKString& str)
+{
+	DKString hex = str;
+	hex.erase(0,2);
+	unsigned int x;   
+	std::stringstream ss;
+	ss << std::hex << hex;
+	ss >> x;
+	return (HWND)x;
 }
 
 ////////////////////////////////////////////////

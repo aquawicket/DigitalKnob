@@ -29,7 +29,7 @@ bool DKHandlesJS::Init()
 int DKHandlesJS::Click(duk_context* ctx)
 {
 	DKString handle = duk_require_string(ctx, 0);
-	if(!DKHandles::Click((HWND)handle.c_str())){
+	if(!DKHandles::Click(toHWND(handle))){
 		return 0;
 	}
 	return 1;
@@ -48,7 +48,7 @@ int DKHandlesJS::GetValue(duk_context* ctx)
 {
 	DKString handle = duk_require_string(ctx, 0);
 	DKString value;
-	if(!DKHandles::GetString((HWND)handle.c_str(), value)){ return 0; }
+	if(!DKHandles::GetString(toHWND(handle), value)){ return 0; }
 	duk_push_string(ctx, value.c_str());
 	return 1;
 }
@@ -68,7 +68,7 @@ int DKHandlesJS::NextHandle(duk_context* ctx)
 {
 	DKString handle = duk_require_string(ctx, 0);
 	HWND next;
-	if(!DKHandles::NextHandle((HWND)handle.c_str(), next)){ return 0; }
+	if(!DKHandles::NextHandle(toHWND(handle), next)){ return 0; }
 	std::stringstream ss;
 	ss << "0x" << next;
 	DKString sval = ss.str();
@@ -81,7 +81,7 @@ int DKHandlesJS::PrevHandle(duk_context* ctx)
 {
 	DKString handle = duk_require_string(ctx, 0);
 	HWND prev;
-	if(!DKHandles::PrevHandle((HWND)handle.c_str(), prev)){ return 0;}
+	if(!DKHandles::PrevHandle(toHWND(handle), prev)){ return 0;}
 	std::stringstream ss;
 	ss << "0x" << prev;
 	DKString sval = ss.str();
@@ -109,7 +109,7 @@ int DKHandlesJS::SetValue(duk_context* ctx)
 {
 	DKString handle = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
-	if(!DKHandles::SetString((HWND)handle.c_str(), value)){ return 0; }
+	if(!DKHandles::SetString(toHWND(handle), value)){ return 0; }
 	return 1;
 }
 

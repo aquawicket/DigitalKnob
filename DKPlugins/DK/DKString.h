@@ -45,6 +45,7 @@ DKString toString(unsigned char* str);
 DKString toString(void* ptr);
 DKString toString(bool _bool);
 DKString toString(const DKStringArray& arry, const char* seperator);
+DKString toString(const HWND hwnd);
 
 long toLong(const DKString& str);
 unsigned long long int toULongLong(const DKString& str);
@@ -52,6 +53,7 @@ int toInt(const DKString& str);
 bool toBool(const DKString& str);
 unsigned int toUInt(const DKString& str);
 float toFloat(const DKString& str);
+HWND toHWND(const DKString& str);
 bool replace(DKString& str, const DKString& oldStr, const DKString& newStr);
 bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr);
 bool IsNumber(const DKString& str);

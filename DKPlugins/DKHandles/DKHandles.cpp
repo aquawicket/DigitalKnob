@@ -53,7 +53,6 @@ bool DKHandles::Click(HWND handle)
 bool DKHandles::DoHighlight(HWND handle)
 {
 	if(!highlight){ return false; }
-	if(handles.empty()){ return false; }
 
 	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
 
@@ -156,10 +155,7 @@ bool DKHandles::DoMouseUp()
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(it->first == hwndFoundWindow){
-			std::stringstream ss;
-			ss << "0x" << it->first;
-			//DKLog("handle = "+ss.str()+"\n", DKINFO);
-			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", ss.str());
+			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", toString(it->first));
 		}
 	}
 
@@ -169,9 +165,6 @@ bool DKHandles::DoMouseUp()
 /////////////////////////////////////////////////////
 bool DKHandles::GetClass(HWND handle, DKString& clas)
 {
-	std::stringstream ss;
-	ss << "0x" << handle;
-	DKLog("DKHandles::GetClass("+ss.str()+")\n", DKINFO);
 	char classname[256];
 	if(!GetClassName(handle, classname, 256)){
 		DKLog("DKHandles::GetClass(): GetClassName failed\n", DKWARN);
@@ -458,7 +451,6 @@ bool DKHandles::SetString(HWND hwnd, const DKString& text)
 //////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeout, HWND& hwnd)
 {
-	handles.clear();
 	HWNDname temp;
 	temp.caption = title.c_str();
 	unsigned int t = 0;
@@ -472,9 +464,6 @@ bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeou
 	}
 	
 	hwnd = currentHandle;
-
-	//PopulateHandles();
-	SetHandle(0,1);
 	DKLog("Selected Window: "+title+"\n", DKINFO);
 	return true;
 }
@@ -662,10 +651,9 @@ BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam)
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
 	if(strcmp(buffer, temp->caption) == 0){
-		//currentHandle = hwnd;
+		currentHandle = hwnd;
 		return FALSE;     
 	} 
-	currentHandle = hwnd;
 	return TRUE; 
 }
 
@@ -676,7 +664,7 @@ BOOL CALLBACK DKHandles::FindWindowPartial(HWND hwnd, LPARAM lparam)
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
 	if(_tcsstr(buffer, temp->caption)) { 
-		//handle.push_back(hwnd);
+		currentHandle = hwnd;
 		return FALSE;     
 	}      
 	return TRUE; 

@@ -43,7 +43,7 @@ bool DKHandlesV8::End()
 bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
-	if(!DKHandles::Click((HWND)handle.c_str())){
+	if(!DKHandles::Click(toHWND(handle))){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -54,9 +54,7 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
-	std::stringstream handle;
-	handle << "0x" << DKHandles::currentHandle;
-	retval->SetString(0, handle.str());
+	retval->SetString(0, toString(DKHandles::currentHandle));
 	return true;
 }
 
@@ -64,13 +62,8 @@ bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
-	DKLog("DKHandlesV8::GetClass("+handle+")\n", DKINFO);
-	//handle.erase(0,2);
-	DKLog("DKHandlesV8::GetClass("+handle+")\n", DKINFO);
-	//int hwnd = (int)handle.c_str();
-	int hwnd = atoi(handle.c_str());
 	DKString clas;
-	if(!DKHandles::GetClass((HWND)(LONG_PTR)handle.c_str(), clas)){
+	if(!DKHandles::GetClass(toHWND(handle), clas)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -83,7 +76,7 @@ bool DKHandlesV8::GetLeft(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	int left;
-	if(!DKHandles::GetLeft((HWND)handle.c_str(), left)){
+	if(!DKHandles::GetLeft(toHWND(handle), left)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -96,7 +89,7 @@ bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	DKString parent;
-	if(!DKHandles::GetParent((HWND)handle.c_str(), parent)){
+	if(!DKHandles::GetParent(toHWND(handle), parent)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -109,7 +102,7 @@ bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	int top;
-	if(!DKHandles::GetTop((HWND)handle.c_str(), top)){
+	if(!DKHandles::GetTop(toHWND(handle), top)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -122,7 +115,7 @@ bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	DKString value;
-	if(!DKHandles::GetString((HWND)handle.c_str(), value)){
+	if(!DKHandles::GetString(toHWND(handle), value)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -148,7 +141,7 @@ bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	HWND next;
-	if(!DKHandles::NextHandle((HWND)handle.c_str(), next)){
+	if(!DKHandles::NextHandle(toHWND(handle), next)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -164,7 +157,7 @@ bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	HWND prev;
-	if(!DKHandles::PrevHandle((HWND)handle.c_str(), prev)){
+	if(!DKHandles::PrevHandle(toHWND(handle), prev)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -224,7 +217,7 @@ bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	DKString value = args->GetString(1);
-	if(!DKHandles::SetString((HWND)handle.c_str(), value)){
+	if(!DKHandles::SetString(toHWND(handle), value)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -255,7 +248,7 @@ bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	bool flag = args->GetBool(1);
-	if(!DKHandles::ShowWindow((HWND)handle.c_str(), flag)){
+	if(!DKHandles::ShowWindow(toHWND(handle), flag)){
 		retval->SetBool(0, false);
 		return false;
 	}
