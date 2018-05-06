@@ -187,8 +187,7 @@ bool DKHandles::DoMouseUp()
 
 			std::stringstream ss;
 			ss << "0x" << it->first;
-
-			DKLog("handle = "+ss.str()+"\n", DKINFO);
+			//DKLog("handle = "+ss.str()+"\n", DKINFO);
 			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", ss.str());
 		}
 		i++;
