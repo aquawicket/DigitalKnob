@@ -28,7 +28,6 @@ public:
 	static bool DoMouseMove();
 	static bool DoMouseUp();
 	bool GetClass(DKString& clas);
-	static bool GetHandles();
 	bool GetLeft(int& left);
 	bool GetParent(DKString& parent);
 	bool GetString(DKString& text);
@@ -59,12 +58,9 @@ public:
 	static BOOL CALLBACK FindWindow(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK GetWindows(HWND hwnd, LPARAM lParam);
-	//static LRESULT CALLBACK SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
-	//static LRESULT CALLBACK SearchProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	static LRESULT CALLBACK SearchProc(int code, WPARAM wParam, LPARAM lParam);
 
-	static std::vector<HWND> handle; //handle[0] is the window
-	static unsigned int currentHandle; //current indes of handle[]
+	static HWND currentHandle;
 	static DKStringArray _windows; //list of windows
 	bool highlight; //highlight toggle
 	static bool searching;
@@ -72,7 +68,6 @@ public:
 	static HHOOK hMouseHook;
 	static HPEN	rectanglePen;
 	static HWND hwndFoundWindow;
-
 	static std::map<HWND,HWND> handles;
 };
 

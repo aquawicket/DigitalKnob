@@ -53,8 +53,9 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
-	DKString handle = toString(DKHandles::Instance("DKHandles")->currentHandle);
-	retval->SetString(0, handle);
+	std::stringstream handle;
+	handle << "0x" << DKHandles::Instance("DKHandles")->currentHandle;
+	retval->SetString(0, handle.str());
 	return true;
 }
 

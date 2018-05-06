@@ -9,14 +9,13 @@
 
 
 DKStringArray DKHandles::_windows;
-std::vector<HWND> DKHandles::handle;
 bool DKHandles::searching = false;
 WNDPROC DKHandles::prevWndProc;
 HHOOK DKHandles::hMouseHook;
 HPEN DKHandles::rectanglePen;
 HWND DKHandles::hwndFoundWindow;
 std::map<HWND,HWND> DKHandles::handles;
-unsigned int DKHandles::currentHandle;
+HWND DKHandles::currentHandle = NULL;
 
 //////////////////////
 bool DKHandles::Init()
@@ -24,7 +23,6 @@ bool DKHandles::Init()
 	DKClass::DKCreate("DKHandlesJS");
 	DKClass::DKCreate("DKHandlesV8");
 	highlight = false;
-	currentHandle = 0;
 
 	rectanglePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
 	if(!rectanglePen){
@@ -46,8 +44,8 @@ bool DKHandles::End()
 ///////////////////////
 bool DKHandles::Click()
 {
-	if(handle.empty()){ return false; }
-	SendMessage(handle[currentHandle], BM_CLICK, 0, 0);
+	if(handles.empty()){ return false; }
+	SendMessage(currentHandle, BM_CLICK, 0, 0);
 	return true;
 }
 
@@ -79,12 +77,12 @@ bool DKHandles::DisplayInfoOnFoundWindow(HWND hwndFoundWindow)
 bool DKHandles::DoHighlight()
 {
 	if(!highlight){ return false; }
-	if(handle.empty()){ return false; }
+	if(handles.empty()){ return false; }
 
 	RedrawWindow(GetDesktopWindow(), NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW); //FIXME
 
 	RECT rect;
-	GetWindowRect(handle[currentHandle], &rect);
+	GetWindowRect(currentHandle, &rect);
 	HDC screenDC = ::GetDC(GetDesktopWindow());
 
 	HPEN pen, oldPen;
@@ -179,18 +177,15 @@ bool DKHandles::DoMouseUp()
 	//determin the handle selected
 	PopulateHandles();
 
-	int i=0;
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(it->first == hwndFoundWindow){
-			currentHandle = i;
-
+			currentHandle = it->first;
 			std::stringstream ss;
 			ss << "0x" << it->first;
 			//DKLog("handle = "+ss.str()+"\n", DKINFO);
 			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", ss.str());
 		}
-		i++;
 	}
 
 	return true;
@@ -201,7 +196,7 @@ bool DKHandles::GetClass(DKString& clas)
 {
 	char classname[256];
 	if(handles.empty()){ return false; }
-	if(!GetClassName(handle[currentHandle], classname, 256)){
+	if(!GetClassName(currentHandle, classname, 256)){
 		DKLog("DKHandles::GetClass("+clas+")\n", DKWARN);
 		return false; 
 	}
@@ -209,6 +204,7 @@ bool DKHandles::GetClass(DKString& clas)
 	return true;
 }
 
+/*
 ////////////////////////////
 bool DKHandles::GetHandles()
 {
@@ -242,13 +238,14 @@ bool DKHandles::GetHandles()
 
 	return true;
 }
+*/
 
 //////////////////////////////////
 bool DKHandles::GetLeft(int& left)
 {
-	if(handle.empty()){ return false; }
+	if(handles.empty()){ return false; }
 	RECT rect;
-	GetWindowRect(handle[currentHandle], &rect);
+	GetWindowRect(currentHandle, &rect);
 	left = rect.left;
 	return true;
 }
@@ -256,8 +253,8 @@ bool DKHandles::GetLeft(int& left)
 ///////////////////////////////////////////
 bool DKHandles::GetParent(DKString& parent)
 {
-	if(handle.empty()){ return false; }
-	HWND par = ::GetParent(handle[currentHandle]);
+	if(handles.empty()){ return false; }
+	HWND par = ::GetParent(currentHandle);
 	if(!par){ return false; }
 	int len = SendMessage(par, WM_GETTEXTLENGTH, 0, 0);
     char* buffer = new char[len];
@@ -269,10 +266,10 @@ bool DKHandles::GetParent(DKString& parent)
 /////////////////////////////////////////
 bool DKHandles::GetString(DKString& text)
 {
-	if(handle.empty()){ return false; }
-	int len = SendMessage(handle[currentHandle], WM_GETTEXTLENGTH, 0, 0);
+	if(handles.empty()){ return false; }
+	int len = SendMessage(currentHandle, WM_GETTEXTLENGTH, 0, 0);
 	char* buffer = new char[len];
-	SendMessage(handle[currentHandle], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+	SendMessage(currentHandle, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 	text = buffer;
 	return true;
 }
@@ -280,9 +277,9 @@ bool DKHandles::GetString(DKString& text)
 ////////////////////////////////
 bool DKHandles::GetTop(int& top)
 {
-	if(handle.empty()){ return false; }
+	if(handles.empty()){ return false; }
 	RECT rect;
-	GetWindowRect(handle[currentHandle], &rect);
+	GetWindowRect(currentHandle, &rect);
 	top = rect.top;
 	return true;
 }
@@ -331,14 +328,19 @@ bool DKHandles::HighlightFoundWindow(HWND hwndFoundWindow)
 ////////////////////////////
 bool DKHandles::NextHandle()
 {
-	if(handle.empty()){
+	if(handles.empty()){
 		DKLog("DKHandles::NextHandle(): handle is empty\n", DKWARN);
 		return false; 
 	}
+
+	//FIXME
+	/*
 	if(currentHandle < handle.size()-1){currentHandle++;}
 	if(currentHandle <= handle.size()){
 		DoHighlight();
 	}
+	*/
+
 	return true;
 }
 
@@ -385,14 +387,18 @@ bool DKHandles::PopulateHandles()
 ////////////////////////////
 bool DKHandles::PrevHandle()
 {
-	if(handle.empty()){
+	if(handles.empty()){
 		DKLog("DKHandles::PrevHandle(): handle is empty\n", DKWARN);
 		return false; 
 	}
+
+	//FIXME
+	/*
 	if(currentHandle > 0){currentHandle--;}
 	if(currentHandle <= handle.size()){
 		DoHighlight();
 	}
+	*/
 	return true;
 }
 
@@ -439,22 +445,23 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 	char classname[256];
 
 	while(t < timeout){
-		GetHandles();
-		for(h=0; h<handle.size(); h++){
-			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
+		PopulateHandles();
+		std::map<HWND,HWND>::iterator it;
+		for(it=handles.begin(); it!=handles.end(); it++){
+			int len = SendMessage(it->first, WM_GETTEXTLENGTH, 0, 0);
 			char* buffer = new char[len];
-			SendMessage(handle[h], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
 			if (value.empty()) {
 				int test = 0;
 			}
 			if(text == value){
-				if(!GetClassName(handle[h], classname, 256)){
+				if(!GetClassName(it->first, classname, 256)){
 					DKLog("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
 					return false; 
 				}
 				if(clas == (DKString)classname){
-					currentHandle = h;
+					currentHandle = it->first;
 					return true;
 				}
 			}
@@ -474,14 +481,15 @@ bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
 	unsigned int h = 0;
 	DKString text;
 	while(t < timeout){
-		GetHandles();
-		for(h=0; h<handle.size(); h++){
-			int len = SendMessage(handle[h], WM_GETTEXTLENGTH, 0, 0);
+		PopulateHandles();
+		std::map<HWND,HWND>::iterator it;
+		for(it=handles.begin(); it!=handles.end(); it++){
+			int len = SendMessage(it->first, WM_GETTEXTLENGTH, 0, 0);
 			char* buffer = new char[len];
-			SendMessage(handle[h], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			text = buffer;
 			if(text == value){
-				currentHandle = h;
+				currentHandle = it->first;
 				return true;
 			}
 		}
@@ -497,31 +505,31 @@ bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
 bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 {
 	unsigned int t = 0;
-	while(index > handle.size() && t < timeout){
-		GetHandles();
+	while(index > handles.size() && t < timeout){
+		PopulateHandles();
 		Sleep(1000); //FIXME
 		++t;
 	}
-	if(index > handle.size()){
+	if(index > handles.size()){
 		DKLog("DKHandles::SetHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
 		return false;
 	}
-	currentHandle = index;
+	//currentHandle = index;
 	return true;
 }
 
 ///////////////////////////////////////////////
 bool DKHandles::SetString(const DKString& text)
 {
-	if(handle.empty()){ return false; }
-	SendMessage(handle[currentHandle], WM_SETTEXT, (WPARAM)text.size(), (LPARAM)text.c_str());
+	if(handles.empty()){ return false; }
+	SendMessage(currentHandle, WM_SETTEXT, (WPARAM)text.size(), (LPARAM)text.c_str());
 	return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
 {
-	handle.clear();
+	handles.clear();
 	HWNDname temp;
 	temp.caption = title.c_str();
 	unsigned int t = 0;
@@ -534,7 +542,7 @@ bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
 		return false;
 	}
 	
-	GetHandles();
+	PopulateHandles();
 	SetHandle(0,1);
 	DKLog("Selected Window: "+title+"\n", DKINFO);
 	return true;
@@ -543,7 +551,7 @@ bool DKHandles::SetWindowHandle(const DKString& title, unsigned int timeout)
 /////////////////////////////////////////////
 bool DKHandles::ShowWindow(unsigned int flag)
 {
-	::ShowWindow(handle[currentHandle], flag);
+	::ShowWindow(currentHandle, flag);
 	return true;
 }
 
@@ -594,14 +602,15 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 	char classname[256];
 	
 	while(text != value && clas != (DKString)classname && i < timeout){
-		GetHandles();
-		for(unsigned int i=0; i<handle.size(); i++){
-			int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+		PopulateHandles();
+		std::map<HWND,HWND>::iterator it;
+		for(it=handles.begin(); it!=handles.end(); it++){
+			int len = SendMessage(it->first, WM_GETTEXTLENGTH, 0, 0);
 			char* buffer = new char[len];
-			SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			DKString text = buffer;
 			if(text == value){
-				if(!GetClassName(handle[i], classname, 256)){
+				if(!GetClassName(it->first, classname, 256)){
 					DKLog("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
 					return false; 
 				}
@@ -623,11 +632,12 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 	int i = 0;
 	DKString text;
 	while(text != value && i < timeout){
-		GetHandles();
-		for(unsigned int i=0; i<handle.size(); i++){
-			int len = SendMessage(handle[i], WM_GETTEXTLENGTH, 0, 0);
+		PopulateHandles();
+		std::map<HWND,HWND>::iterator it;
+		for(it=handles.begin(); it!=handles.end(); it++){
+			int len = SendMessage(it->first, WM_GETTEXTLENGTH, 0, 0);
 			char* buffer = new char[len];
-			SendMessage(handle[i], WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
+			SendMessage(it->first, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
 			text = buffer;
 		}
 		Sleep(1000); //FIXME
@@ -644,8 +654,8 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 bool DKHandles::WaitForHandle(unsigned int index, int timeout)
 {
 	int i = 0;
-	while(index > handle.size() && i < timeout){
-		GetHandles();
+	while(index > handles.size() && i < timeout){
+		PopulateHandles();
 		Sleep(1000); //FIXME
 		++i;
 	}
@@ -723,7 +733,7 @@ BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam)
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
 	if(strcmp(buffer, temp->caption) == 0){ 
-		handle.push_back(hwnd);
+		//handles.push_back(hwnd);
 		return FALSE;     
 	}      
 	return TRUE; 
@@ -736,7 +746,7 @@ BOOL CALLBACK DKHandles::FindWindowPartial(HWND hwnd, LPARAM lparam)
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
 	if(_tcsstr(buffer, temp->caption)) { 
-		handle.push_back(hwnd);
+		//handle.push_back(hwnd);
 		return FALSE;     
 	}      
 	return TRUE; 
