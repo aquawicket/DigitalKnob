@@ -55,6 +55,10 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
+	if(!DKHandles::currentHandle){
+		retval->SetBool(0, false);
+		return false;
+	}
 	retval->SetString(0, toString(DKHandles::currentHandle));
 	return true;
 }

@@ -110,11 +110,9 @@ bool DKHandles::DoMouseUp()
 	// Set the bitmap on the Finder Tool icon to be the bitmap with the bullseye bitmap.
 	//SetFinderToolImage(hwndDialog, TRUE);
 
-	// Very important : must release the mouse capture.
 	ReleaseCapture();
 
-
-	// Make the main window appear normally.
+	//Bring back the main window
 	HWND hwnd = NULL;
 	DKWindow::GetHandle((void*&)hwnd);
 	if(!hwnd){
@@ -123,7 +121,6 @@ bool DKHandles::DoMouseUp()
 	}
 	::ShowWindow(hwnd, SW_SHOWNORMAL);
 
-	//determin the handle selected
 	PopulateHandles();
 
 	std::map<HWND,HWND>::iterator it;
