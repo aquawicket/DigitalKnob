@@ -104,7 +104,12 @@ function DKHandles_UpdateProperties(handle)
 	var clas = DKHandles_GetClass(handle);
 	DKWidget_SetValue("class", clas);
 	var par = DKHandles_GetParent(handle);
-	DKWidget_SetValue("parent", par);
+	if(!par){
+		DKWidget_SetValue("parent", "");
+	}
+	else{
+		DKWidget_SetValue("parent", par);
+	}
 	var index = DKHandles_GetIndex(handle);
 	DKWidget_SetValue("index", index);
 }
