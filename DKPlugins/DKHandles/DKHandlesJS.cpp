@@ -13,6 +13,7 @@ bool DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_GetIndex", DKHandlesJS::GetIndex);
 	DKDuktape::AttachFunction("DKHandles_GetLeft", DKHandlesJS::GetLeft);
 	DKDuktape::AttachFunction("DKHandles_GetParent", DKHandlesJS::GetParent);
+	DKDuktape::AttachFunction("DKHandles_GetTop", DKHandlesJS::GetTop);
 	DKDuktape::AttachFunction("DKHandles_GetValue", DKHandlesJS::GetValue);
 	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
 	DKDuktape::AttachFunction("DKHandles_NextHandle", DKHandlesJS::NextHandle);
@@ -90,6 +91,19 @@ int DKHandlesJS::GetParent(duk_context* ctx)
 		return false;
 	}
 	duk_push_string(ctx, parent.c_str());
+	return true;
+}
+
+/////////////////////////////////////////
+int DKHandlesJS::GetTop(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int top;
+	if(!DKHandles::GetTop(toHWND(handle), top)){
+		duk_push_boolean(ctx, false);
+		return false;
+	}
+	duk_push_int(0, top);
 	return true;
 }
 

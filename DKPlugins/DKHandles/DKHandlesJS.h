@@ -18,6 +18,7 @@ public:
 	static int GetIndex(duk_context* ctx);
 	static int GetLeft(duk_context* ctx);
 	static int GetParent(duk_context* ctx);
+	static int GetTop(duk_context* ctx);
 	static int GetValue(duk_context* ctx);
 	static int GetWindows(duk_context* ctx);
 	static int NextHandle(duk_context* ctx);
