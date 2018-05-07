@@ -34,9 +34,9 @@ public:
 	static bool GetWindows(DKStringArray& windows);
 	static bool HighlightFoundWindow(HWND hwnd);
 	static bool HighlightWindow(HWND handle);
-	static bool NextHandle(HWND hwnd, HWND next);
+	static bool NextHandle(HWND hwnd, HWND& next);
 	static bool PopulateHandles();
-	static bool PrevHandle(HWND hwnd, HWND prev);
+	static bool PrevHandle(HWND hwnd, HWND& prev);
 	static bool RefreshWindow(HWND hwnd);
 	//bool SendHook(const DKString& window, const DKString& handle, const DKString& data);
 	static bool SetHandle(const DKString& clas, const DKString& value, unsigned int timeout);

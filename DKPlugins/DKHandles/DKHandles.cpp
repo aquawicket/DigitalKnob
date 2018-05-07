@@ -271,8 +271,8 @@ bool DKHandles::HighlightWindow(HWND handle)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKHandles::NextHandle(HWND hwnd, HWND next)
+/////////////////////////////////////////////////
+bool DKHandles::NextHandle(HWND hwnd, HWND& next)
 {
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
@@ -325,8 +325,8 @@ bool DKHandles::PopulateHandles()
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKHandles::PrevHandle(HWND hwnd, HWND prev)
+/////////////////////////////////////////////////
+bool DKHandles::PrevHandle(HWND hwnd, HWND& prev)
 {
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.end(); it!=handles.begin(); it--){

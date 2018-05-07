@@ -163,10 +163,7 @@ bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
 		retval->SetBool(0, false);
 		return false;
 	}
-	std::stringstream ss;
-	ss << "0x" << next;
-	DKString sval = ss.str();
-	retval->SetString(0, sval);
+	retval->SetString(0, toString(next));
 	return true;
 }
 
@@ -179,10 +176,7 @@ bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
 		retval->SetBool(0, false);
 		return false;
 	}
-	std::stringstream ss;
-	ss << "0x" << prev;
-	DKString sval = ss.str();
-	retval->SetString(0, sval);
+	retval->SetString(0, toString(prev));
 	return true;
 }
 
