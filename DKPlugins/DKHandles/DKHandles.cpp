@@ -279,6 +279,7 @@ bool DKHandles::NextHandle(HWND hwnd, HWND& next)
 		if(hwnd == it->first){
 			it++;
 			next = it->first;
+			currentHandle = it->first;
 			return true;
 		}
 	}
@@ -333,6 +334,7 @@ bool DKHandles::PrevHandle(HWND hwnd, HWND& prev)
 		if(hwnd == it->first){
 			it--;
 			prev = it->first;
+			currentHandle = it->first;
 			return true;
 		}
 	}
