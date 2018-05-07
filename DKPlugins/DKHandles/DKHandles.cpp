@@ -129,6 +129,7 @@ bool DKHandles::DoMouseUp()
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(it->first == hwndFoundWindow){
+			currentHandle = it->first;
 			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", toString(it->first));
 		}
 	}
