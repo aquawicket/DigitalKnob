@@ -26,6 +26,7 @@ public:
 	static bool DoMouseMove();
 	static bool DoMouseUp();
 	static bool GetClass(HWND handle, DKString& clas);
+	static bool GetIndex(HWND handle, int& index);
 	static bool GetLeft(HWND handle, int& left);
 	static bool GetParent(HWND handle, DKString& parent);
 	static bool GetString(HWND handle, DKString& text);

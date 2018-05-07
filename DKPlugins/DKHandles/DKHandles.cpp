@@ -149,6 +149,21 @@ bool DKHandles::GetClass(HWND handle, DKString& clas)
 	return true;
 }
 
+/////////////////////////////////////////////////
+bool DKHandles::GetIndex(HWND handle, int& index)
+{
+	int i = 0;
+	std::map<HWND,HWND>::iterator it;
+	for(it=handles.begin(); it!=handles.end(); it++){
+		if(it->first == handle){
+			index = i;
+			return true;
+		}
+		i++;
+	}
+	return false;
+}
+
 ///////////////////////////////////////////////
 bool DKHandles::GetLeft(HWND handle, int& left)
 {

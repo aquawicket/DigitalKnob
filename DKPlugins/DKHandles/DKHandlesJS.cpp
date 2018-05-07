@@ -9,6 +9,10 @@ bool DKHandlesJS::Init()
 {
 	DKDuktape::AttachFunction("DKHandles_Click", DKHandlesJS::Click);
 	DKDuktape::AttachFunction("DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
+	DKDuktape::AttachFunction("DKHandles_GetClass", DKHandlesJS::GetClass);
+	DKDuktape::AttachFunction("DKHandles_GetIndex", DKHandlesJS::GetIndex);
+	DKDuktape::AttachFunction("DKHandles_GetLeft", DKHandlesJS::GetLeft);
+	DKDuktape::AttachFunction("DKHandles_GetParent", DKHandlesJS::GetParent);
 	DKDuktape::AttachFunction("DKHandles_GetValue", DKHandlesJS::GetValue);
 	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
 	DKDuktape::AttachFunction("DKHandles_NextHandle", DKHandlesJS::NextHandle);
@@ -41,6 +45,52 @@ int DKHandlesJS::CurrentHandle(duk_context* ctx)
 	DKString handle = toString(DKHandles::currentHandle);
 	duk_push_string(ctx, handle.c_str());
 	return 1;
+}
+
+///////////////////////////////////////////
+int DKHandlesJS::GetClass(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	DKString clas;
+	if(!DKHandles::GetClass(toHWND(handle), clas)){ return 0; }
+	duk_push_string(ctx, clas.c_str());
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKHandlesJS::GetIndex(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int index;
+	if(!DKHandles::GetIndex(toHWND(handle), index)){ return 0; }
+	duk_push_int(ctx, index);
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKHandlesJS::GetLeft(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int left;
+	if(!DKHandles::GetLeft(toHWND(handle), left)){
+		duk_push_boolean(ctx, false);
+		return false;
+	}
+	duk_push_int(0, left);
+	return true;
+}
+
+////////////////////////////////////////////
+int DKHandlesJS::GetParent(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	DKString parent;
+	if(!DKHandles::GetParent(toHWND(handle), parent)){
+		duk_push_boolean(ctx, false);
+		return false;
+	}
+	duk_push_string(ctx, parent.c_str());
+	return true;
 }
 
 ///////////////////////////////////////////
