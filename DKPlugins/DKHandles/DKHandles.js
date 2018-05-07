@@ -53,12 +53,14 @@ function DKHandles_OnEvent(event)
 		DKWidget_SetValue("parent", par);
 	}
 	if(DK_Id(event, "Next")){
-		DKHandles_NextHandle();
-		var value = DKHandles_GetValue();
+		var currentHandle = DKHandles_CurrentHandle();
+		var handle = DKHandles_NextHandle(currentHandle);
+		DKWidget_SetValue("currentHandle", "Handle: "+handle);
+		var value = DKHandles_GetValue(handle);
 		DKWidget_SetValue("value", value);
-		var clas = DKHandles_GetClass();
+		var clas = DKHandles_GetClass(handle);
 		DKWidget_SetValue("class", clas);
-		var par = DKHandles_GetParent();
+		var par = DKHandles_GetParent(handle);
 		DKWidget_SetValue("parent", par);
 	}
 	if(DK_Id(event, "Highlight")){

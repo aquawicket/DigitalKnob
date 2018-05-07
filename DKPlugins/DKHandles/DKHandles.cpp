@@ -160,8 +160,6 @@ bool DKHandles::GetLeft(HWND handle, int& left)
 ////////////////////////////////////////////////////////
 bool DKHandles::GetParent(HWND handle, DKString& parent)
 {
-	//HWND par = ::GetParent(handle);
-	//HWND par = ::GetWindow(handle, GW_OWNER);
 	HWND par = ::GetAncestor(handle, GA_PARENT);
 	if(!par){
 		DKString error;
@@ -171,7 +169,7 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 	}
 	parent = toString(par);
 	return true;
-}
+}          
 
 //////////////////////////////////////////////////////
 bool DKHandles::GetString(HWND handle, DKString& text)
