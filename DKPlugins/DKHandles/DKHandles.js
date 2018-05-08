@@ -43,10 +43,12 @@ function DKHandles_OnEvent(event)
     }
 	if(DK_Id(event, "setvalue")){
 		var value = DKWidget_GetValue("SetValueBox");
-		DKHandles_SetValue(value);
+		var currentHandle = DKHandles_CurrentHandle();
+		DKHandles_SetValue(currentHandle, value);
     }
 	if(DK_Id(event, "doclick")){
-		DKHandles_Click();
+		var currentHandle = DKHandles_CurrentHandle();
+		DKHandles_Click(currentHandle);
     }
 	if(DK_Id(event, "Prev")){
 		var currentHandle = DKHandles_CurrentHandle();
