@@ -29,6 +29,7 @@ public:
 	static bool GetIndex(HWND handle, int& index);
 	static bool GetLeft(HWND handle, int& left);
 	static bool GetParent(HWND handle, DKString& parent);
+	static bool GetWindow(HWND handle, HWND& window);
 	static bool GetString(HWND handle, DKString& text);
 	static bool GetTop(HWND handle, int& top);
 	static bool GetWindows(DKStringArray& windows);

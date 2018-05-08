@@ -182,7 +182,19 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 	}
 	parent = toString(par);
 	return true;
-}          
+}
+
+////////////////////////////////////////////////////
+bool DKHandles::GetWindow(HWND handle, HWND& window)
+{
+	HWND win = handle;
+	static TCHAR buffer[50]; 
+	while(!GetWindowText(win, buffer, 50)){
+		win = ::GetAncestor(win, GA_PARENT);
+	}
+	window = win;
+	return true;
+}
 
 //////////////////////////////////////////////////////
 bool DKHandles::GetString(HWND handle, DKString& text)
