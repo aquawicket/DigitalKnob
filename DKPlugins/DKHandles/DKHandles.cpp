@@ -189,7 +189,7 @@ bool DKHandles::GetWindow(HWND handle, HWND& window)
 {
 	HWND win = handle;
 	static TCHAR buffer[50]; 
-	while(!GetWindowText(win, buffer, 50)){
+	while(!GetWindowText(win, buffer, 50) && win != ::GetDesktopWindow()){
 		win = ::GetAncestor(win, GA_PARENT);
 	}
 	window = win;
