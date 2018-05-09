@@ -124,6 +124,7 @@ DKString toString(bool _bool)
 	return "false";
 }
 
+#ifdef WIN32
 //////////////////////////////////
 DKString toString(const HWND hwnd)
 {
@@ -131,6 +132,7 @@ DKString toString(const HWND hwnd)
 	ss << "0x" << hwnd;
 	return ss.str();
 }
+#endif
 
 #ifdef WIN32
 /////////////////////////////////////////

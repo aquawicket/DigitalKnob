@@ -53,7 +53,9 @@ int toInt(const DKString& str);
 bool toBool(const DKString& str);
 unsigned int toUInt(const DKString& str);
 float toFloat(const DKString& str);
-HWND toHWND(const DKString& str);
+#ifdef WIN32
+	HWND toHWND(const DKString& str);
+#endif
 bool replace(DKString& str, const DKString& oldStr, const DKString& newStr);
 bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr);
 bool IsNumber(const DKString& str);
