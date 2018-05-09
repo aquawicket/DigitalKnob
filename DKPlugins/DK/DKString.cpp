@@ -256,6 +256,7 @@ bool IsNumber(const DKString& str)
     return !str.empty() && it == str.end();
 }
 
+#ifdef WIN32
 ////////////////////////////////
 HWND toHWND(const DKString& str)
 {
@@ -267,6 +268,7 @@ HWND toHWND(const DKString& str)
 	ss >> x;
 	return (HWND)x;
 }
+#endif
 
 ////////////////////////////////////////////////
 bool Pad(int num, char character, DKString& str)
