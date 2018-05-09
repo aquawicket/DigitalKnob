@@ -4,6 +4,7 @@ function DKHandles_Init()
 	DKCreate("DKHandles");
 	DKCreate("DKHandles/DKHandles.html");
 	DKAddEvent("refresh", "click", DKHandles_OnEvent);
+	DKAddEvent("window", "click", DKHandles_OnEvent);
 	DKAddEvent("parent", "click", DKHandles_OnEvent);
 	DKAddEvent("search", "mousedown", DKHandles_OnEvent);
 	DKAddEvent("setvalue", "click", DKHandles_OnEvent);
@@ -29,6 +30,10 @@ function DKHandles_OnEvent(event)
 {
 	DKLog("DKHandles_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
+	if(DK_Id(event, "window")){
+		var handle = DKWidget_GetInnerHtml("window");
+		DKHandles_UpdateProperties(handle);
+    }
 	if(DK_Id(event, "parent")){
 		var handle = DKWidget_GetInnerHtml("parent");
 		DKHandles_UpdateProperties(handle);
