@@ -45,7 +45,9 @@ DKString toString(unsigned char* str);
 DKString toString(void* ptr);
 DKString toString(bool _bool);
 DKString toString(const DKStringArray& arry, const char* seperator);
-DKString toString(const HWND hwnd);
+#ifdef WIN32
+	DKString toString(const HWND hwnd);
+#endif
 
 long toLong(const DKString& str);
 unsigned long long int toULongLong(const DKString& str);
