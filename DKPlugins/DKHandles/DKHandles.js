@@ -99,8 +99,8 @@ function DKHandles_UpdateProperties(handle)
 {
 	DKLog("DKHandles_UpdateProperties("+handle+")\n", DKINFO);
 	DKWidget_SetValue("currentHandle", "Handle: "+handle);
-	//var win = DKWidget_GetValue(DK_GetId(event));
-	//DKWidget_SetValue("window", win);
+	var win = DKHandles_GetWindow(handle);
+	DKWidget_SetValue("window", win);
 	var value = DKHandles_GetValue(handle);
 	DKWidget_SetValue("value", value);
 	var clas = DKHandles_GetClass(handle);
