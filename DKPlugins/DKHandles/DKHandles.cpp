@@ -220,9 +220,10 @@ bool DKHandles::GetWindow(HWND handle, HWND& window)
 bool DKHandles::GetWindowIndex(HWND handle, int& index)
 {
 	HWND window;
-	if(!GetWindow(handle, window)){ return false; }	
+	if(!GetWindow(handle, window)){ return false; }
+	winhandles.clear();
 	winhandles.push_back(window);
-	EnumChildWindows(::GetDesktopWindow(), EnumChildProcTemp, 0);
+	EnumChildWindows(window, EnumChildProcTemp, 0);
 	for(unsigned int i=0; i<winhandles.size(); i++){
 		if(handle == winhandles[i]){
 			index = i;
