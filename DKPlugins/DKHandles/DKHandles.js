@@ -119,4 +119,6 @@ function DKHandles_UpdateProperties(handle)
 	}
 	var index = DKHandles_GetIndex(handle);
 	DKWidget_SetValue("index", index);
+	var windowindex = DKHandles_GetWindowIndex(handle);
+	DKWidget_SetValue("windowindex", windowindex);
 }
