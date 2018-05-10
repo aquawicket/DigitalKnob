@@ -17,6 +17,7 @@ HWND DKHandles::hwndFoundWindow;
 std::map<HWND,HWND> DKHandles::handles;
 HWND DKHandles::currentHandle = NULL;
 bool DKHandles::highlight = false;
+std::vector<HWND> DKHandles::winhandles;
 
 //////////////////////
 bool DKHandles::Init()
@@ -184,18 +185,6 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKHandles::GetWindow(HWND handle, HWND& window)
-{
-	HWND win = handle;
-	static TCHAR buffer[50]; 
-	while(!GetWindowText(win, buffer, 50) && win != ::GetDesktopWindow()){
-		win = ::GetAncestor(win, GA_PARENT);
-	}
-	window = win;
-	return true;
-}
-
 //////////////////////////////////////////////////////
 bool DKHandles::GetString(HWND handle, DKString& text)
 {
@@ -213,6 +202,34 @@ bool DKHandles::GetTop(HWND handle, int& top)
 	GetWindowRect(handle, &rect);
 	top = rect.top;
 	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKHandles::GetWindow(HWND handle, HWND& window)
+{
+	HWND win = handle;
+	static TCHAR buffer[50]; 
+	while(!GetWindowText(win, buffer, 50) && win != ::GetDesktopWindow()){
+		win = ::GetAncestor(win, GA_PARENT);
+	}
+	window = win;
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKHandles::GetWindowIndex(HWND handle, int& index)
+{
+	HWND window;
+	if(!GetWindow(handle, window)){ return false; }	
+	winhandles.push_back(window);
+	EnumChildWindows(::GetDesktopWindow(), EnumChildProcTemp, 0);
+	for(unsigned int i=0; i<winhandles.size(); i++){
+		if(handle == winhandles[i]){
+			index = i;
+			return true;
+		}
+	}
+	return false;
 }
 
 //////////////////////////////////////////////////
@@ -652,6 +669,12 @@ BOOL CALLBACK DKHandles::EnumChildProc(HWND hwnd, LPARAM lParam)
 	return TRUE;
 }
 
+////////////////////////////////////////////////////////////////////
+BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam) 
+{
+	winhandles.push_back(hwnd);
+	return TRUE;
+}
 
 //////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)

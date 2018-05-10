@@ -29,9 +29,10 @@ public:
 	static bool GetIndex(HWND handle, int& index);
 	static bool GetLeft(HWND handle, int& left);
 	static bool GetParent(HWND handle, DKString& parent);
-	static bool GetWindow(HWND handle, HWND& window);
 	static bool GetString(HWND handle, DKString& text);
 	static bool GetTop(HWND handle, int& top);
+	static bool GetWindow(HWND handle, HWND& window);
+	static bool GetWindowIndex(HWND handle, int& index);
 	static bool GetWindows(DKStringArray& windows);
 	static bool HighlightFoundWindow(HWND hwnd);
 	static bool HighlightWindow(HWND handle);
@@ -55,6 +56,7 @@ public:
 	static bool WindowExists(const DKString& title);
 	
 	static BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam);
+	static BOOL CALLBACK EnumChildProcTemp(HWND hwnd, LPARAM lParam);
 	static BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
 	static BOOL CALLBACK FindWindow(HWND hwnd, LPARAM lapram);
 	static BOOL CALLBACK FindWindowPartial(HWND hwnd, LPARAM lapram);
@@ -70,6 +72,7 @@ public:
 	static HPEN	rectanglePen;
 	static HWND hwndFoundWindow;
 	static std::map<HWND,HWND> handles;
+	static std::vector<HWND> winhandles;
 };
 
 REGISTER_OBJECT(DKHandles, true);
