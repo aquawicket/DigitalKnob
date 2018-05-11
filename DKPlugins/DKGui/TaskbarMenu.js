@@ -1,7 +1,7 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DKCreate("DKOS/TaskbarMenu.html,DKOS/DKOS.html", function(){
+	DKCreate("DKGui/TaskbarMenu.html,DKGui/DKGui.html", function(){
 	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
@@ -9,7 +9,7 @@ function TaskbarMenu_Init()
 	DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("Reload", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("CloseDKOS", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenConsole", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
@@ -31,7 +31,7 @@ function TaskbarMenu_Init()
 function TaskbarMenu_End()
 {
 	DKRemoveEvents(TaskbarMenu_OnEvent);
-	DKClose("DKOS/TaskbarMenu.html");
+	DKClose("DKGui/TaskbarMenu.html");
 }
 
 ///////////////////////////////////
@@ -170,7 +170,7 @@ function TaskbarMenu_OnEvent(event)
 		DKFrame_CloseAll();
 		DK_Refresh();
 	}
-	if(DK_Id(event, "CloseDKOS")){
+	if(DK_Id(event, "CloseDKGui")){
 		DKClose("TaskbarMenu.js")
 		DK_Exit();
 		return;
@@ -183,11 +183,11 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/TaskbarMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGui/TaskbarMenu.html")){
 			return;
 		}
 	}
-	DKClose("DKOS/TaskbarMenu.js");
+	DKClose("DKGui/TaskbarMenu.js");
 }
 
 //////////////////////////////////
