@@ -14,7 +14,7 @@
 [SVN] https://github.com/aquawicket/DigitalKnob/trunk/
 [MYSVN]
 [DKPATH] C:/digitalknob
-[ONLINE_ASSETS] http://Digitalknob.com/DKSDLOS
+[ONLINE_ASSETS] http://Digitalknob.com/DKGui
 [UPDATE_WIN32] 
 [UPDATE_WIN64] 
 [UPDATE_MAC] 
