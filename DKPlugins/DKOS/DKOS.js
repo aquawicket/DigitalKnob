@@ -18,8 +18,8 @@ function DKOS_Init()
 			DKWindow_SetHeight(newheight);
 		}
 
-		DKCreate("DKGui/DKFrame.js", function(){
-		DKCreate("DKGui/DKMenu.js", function(){
+		//DKCreate("DKGui/DKFrame.js", function(){
+		//DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKOS/Desktop.js", function(){
 		DKCreate("DKOS/Taskbar.js", function(){
 			if(OS == "iOS" || OS == "Android"){
@@ -27,7 +27,7 @@ function DKOS_Init()
 			}
 		});
 		});
-		});
-		});
+		//});
+		//});
 	});
 }
