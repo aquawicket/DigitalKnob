@@ -2,7 +2,7 @@
 function DKOS_Init()
 {
 	//DKCreate("DK/DKBrowser.css");
-	DKCreate("DKOS/DKOS.html", function(){
+	DKCreate("DKOS/DKOS.html", function(){    //We are creating a blank html.. it does not exist. We build it from scratch. 
 		var OS = DK_GetOS();
 		DKLog("OS="+OS+"\n");
 		DKWidget_SetProperty("DKOS/DKOS.html", "left", "0px");
