@@ -1,7 +1,7 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DKCreate("DKGui/TaskbarMenu.html,DKGui/DKGui.html", function(){
+	DKCreate("DKGui/TaskbarMenu.html,DKGui/DKOS.html", function(){
 	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);

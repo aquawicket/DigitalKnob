@@ -2,13 +2,13 @@
 function DKOS_Init()
 {
 	DKCreate("DK/DKBrowser.css");
-	DKCreate("DKOS/DKOS.html", function(){
+	DKCreate("DKGui/DKOS.html", function(){
 	var OS = DK_GetOS();
 	DKLog("OS="+OS+"\n");
-	DKWidget_SetProperty("DKOS/DKOS.html", "left", "0px");
-	DKWidget_SetProperty("DKOS/DKOS.html", "top", "0px");
-	DKWidget_SetProperty("DKOS/DKOS.html", "width", "100%");
-	DKWidget_SetProperty("DKOS/DKOS.html", "height", "100%");
+	DKWidget_SetProperty("DKGui/DKOS.html", "left", "0px");
+	DKWidget_SetProperty("DKGui/DKOS.html", "top", "0px");
+	DKWidget_SetProperty("DKGui/DKOS.html", "width", "100%");
+	DKWidget_SetProperty("DKGui/DKOS.html", "height", "100%");
 	if(OS != "iOS" && OS != "Android"){
 		var screenwidth = DK_GetScreenWidth();
 		var screenheight = DK_GetScreenHeight();
@@ -20,8 +20,8 @@ function DKOS_Init()
 
 	DKCreate("DKGui/DKFrame.js", function(){
 	DKCreate("DKGui/DKMenu.js", function(){
-	DKCreate("DKOS/Desktop.js", function(){
-	DKCreate("DKOS/Taskbar.js", function(){
+	DKCreate("DKGui/Desktop.js", function(){
+	DKCreate("DKGui/Taskbar.js", function(){
 		if(OS == "iOS" || OS == "Android"){
 			//DKWidget_SetScale(2);   FIXME
 		}
