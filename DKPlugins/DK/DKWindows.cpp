@@ -115,6 +115,7 @@ bool DKWindows::CreateConsoleHandler()
 //////////////////////////////////////////////////////
 bool DKWindows::DrawTextOnScreen(const DKString& text)
 {
+	//FIXME
 	PAINTSTRUCT ps;
 	HWND hwnd = ::GetDesktopWindow();
 	HDC hdc = BeginPaint(hwnd, &ps);
