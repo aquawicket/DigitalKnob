@@ -179,7 +179,10 @@ bool DKUtil::DoubleClick()
 ///////////////////////////////////////////////////
 bool DKUtil::DrawTextOnScreen(const DKString& text)
 {
-	//TODO
+#ifdef WIN32
+	return DKWindows::DrawTextOnScreen(text);
+#endif
+	DKLog("DKUtil::DrawTextOnScreen() not implemented on this OS \n", DKWARN);
 	return false;
 }
 

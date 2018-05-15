@@ -103,12 +103,24 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 //////////////////////////////////////
 bool DKWindows::CreateConsoleHandler()
 {
-	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
-		DKLog("Could not set Console Handler. \n", DKERROR);
+	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
+		DKLog("Could not set Console Handler. \n", DKWARN);
+		return false;
 	}
-	//HWND consoleWindow = GetConsoleWindow();
 	DKWindows::consoleWindow = GetConsoleWindow();
 	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
+	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKWindows::DrawTextOnScreen(const DKString& text)
+{
+	PAINTSTRUCT ps;
+	HWND hwnd = ::GetDesktopWindow();
+	HDC hdc = BeginPaint(hwnd, &ps);
+	TextOut(hdc, 10, 10, TEXT(text.c_str()), strlen(text.c_str()));
+	EndPaint(hwnd, &ps);
+	ReleaseDC(hwnd, hdc);
 	return true;
 }
 

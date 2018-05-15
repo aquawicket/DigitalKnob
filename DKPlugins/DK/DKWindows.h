@@ -25,7 +25,8 @@ public:
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
-	static bool CreateConsoleHandler(); 
+	static bool CreateConsoleHandler();
+	static bool DrawTextOnScreen(const DKString& text);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);
 	static bool GetKey(int& key);
