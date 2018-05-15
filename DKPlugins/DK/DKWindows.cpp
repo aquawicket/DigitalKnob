@@ -115,15 +115,11 @@ bool DKWindows::CreateConsoleHandler()
 //////////////////////////////////////////////////////
 bool DKWindows::DrawTextOnScreen(const DKString& text)
 {
-	//FIXME
 	HDC screenDC = ::GetDC(GetDesktopWindow());
-	HPEN pen, oldPen;
-	pen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255)); 
-	oldPen = (HPEN)SelectObject(screenDC, pen);
-	TextOut(screenDC, 10, 10, TEXT(text.c_str()), strlen(text.c_str()));
+	::SetBkColor(screenDC, TRANSPARENT);
+	::SetTextColor(screenDC, RGB(0, 255, 0));
+	::TextOut(screenDC, 10, 10, TEXT(text.c_str()), strlen(text.c_str()));
 	::ReleaseDC(0, screenDC);
-	SelectObject(screenDC, oldPen); 
-	DeleteObject(pen);
 	return true;
 }
 
