@@ -23,6 +23,7 @@ public:
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);
 	static bool DoubleClick();
+	static bool DrawTextOnScreen(const DKString& text);
 	static bool Execute(const DKString& command, DKString& rtn);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);

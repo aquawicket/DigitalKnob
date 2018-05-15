@@ -47,6 +47,99 @@ long DKUtil::framecount = 0; // total frames rendered
 float DKUtil::framespersecond = 0;
 
 
+///////////////////
+bool DKUtil::Beep()
+{
+	std::cout << '\a' << std::flush;
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////
+bool DKUtil::Bin2C(const DKString& input, const DKString& output)
+{
+#ifndef MAC
+	char *buf;
+	const char* ident  = "assets";
+	unsigned int i, file_size, need_comma;
+	FILE *f_input, *f_output;
+
+	f_input = fopen(input.c_str(), "rb");
+	if (f_input == NULL) {
+		printf("can't open file for reading\n");
+		return false;
+	}
+
+	// Get the file length
+	fseek(f_input, 0, SEEK_END);
+	file_size = ftell(f_input);
+	fseek(f_input, 0, SEEK_SET);
+	file_size++;
+
+	buf = (char *)malloc(file_size);
+	assert(buf);   
+
+	fread(buf, file_size, 1, f_input);
+	fclose(f_input);
+	f_output = fopen(output.c_str(), "w");
+	if (f_output == NULL){
+		printf("can't open file for writing\n");
+		return false;
+	}
+
+	//ident = "assets";
+	need_comma = 0;
+	fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size);
+
+	for (i = 0; i < file_size; ++i){
+		if (need_comma) fprintf(f_output, ", ");
+		else need_comma = 1;
+		if (( i % 11 ) == 0) fprintf(f_output, "\n\t");
+		fprintf(f_output, "0x%.2x", buf[i] & 0xff);
+	}
+	fprintf(f_output, "\n};\n\n");
+	fprintf(f_output, "const int %s_size = %i;\n", ident, file_size);
+
+	fclose(f_output);
+	return true;
+#endif //!MAC
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKString& output)
+{
+#ifndef MAC
+	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
+	file.write(header, size);
+	file.close();
+	return true;
+#endif //!MAC
+	return false;
+}
+
+///////////////////////
+bool DKUtil::CallExit()
+{
+#ifdef ANDROID
+	CallJavaFunction("Exit","");
+#endif
+#ifdef WIN32
+	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
+		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
+	}
+#endif
+
+	DKClass::CloseAll();
+	return true;
+}
+
+///////////////////////////////////////////////////
+bool DKUtil::DrawTextOnScreen(const DKString& text)
+{
+	//TODO
+	return false;
+}
+
 ///////////////////////////////
 bool DKUtil::SetMainThreadNow()
 {
@@ -565,69 +658,6 @@ bool DKUtil::GetVolume(float& volume)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKString& output)
-{
-#ifndef MAC
-	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
-	file.write(header, size);
-	file.close();
-	return true;
-#endif //!MAC
-return false;
-}
-
-/////////////////////////////////////////////////////////////////
-bool DKUtil::Bin2C(const DKString& input, const DKString& output)
-{
-#ifndef MAC
-	char *buf;
-    const char* ident  = "assets";
-    unsigned int i, file_size, need_comma;
-    FILE *f_input, *f_output;
-
-	f_input = fopen(input.c_str(), "rb");
-    if (f_input == NULL) {
-        printf("can't open file for reading\n");
-        return false;
-    }
-
-	// Get the file length
-    fseek(f_input, 0, SEEK_END);
-    file_size = ftell(f_input);
-    fseek(f_input, 0, SEEK_SET);
-    file_size++;
-
-    buf = (char *)malloc(file_size);
-    assert(buf);   
-
-    fread(buf, file_size, 1, f_input);
-    fclose(f_input);
-	f_output = fopen(output.c_str(), "w");
-    if (f_output == NULL){
-        printf("can't open file for writing\n");
-        return false;
-    }
-
-    //ident = "assets";
-    need_comma = 0;
-    fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size);
-
-    for (i = 0; i < file_size; ++i){
-        if (need_comma) fprintf(f_output, ", ");
-        else need_comma = 1;
-        if (( i % 11 ) == 0) fprintf(f_output, "\n\t");
-        fprintf(f_output, "0x%.2x", buf[i] & 0xff);
-    }
-	fprintf(f_output, "\n};\n\n");
-    fprintf(f_output, "const int %s_size = %i;\n", ident, file_size);
-
-	fclose(f_output);
-	return true;
-#endif //!MAC
-	return false;
-}
-
 /////////////////////////////////////////////////////////////////
 bool DKUtil::Run(const DKString& command, const DKString& params)
 {
@@ -740,13 +770,6 @@ bool DKUtil::InMainThread()
 bool DKUtil::Round(double& num)
 {
     num = (num < 0.0 ? ceil(num - 0.5) : floor(num + 0.5));
-	return true;
-}
-
-///////////////////
-bool DKUtil::Beep()
-{
-    std::cout << '\a' << std::flush;
 	return true;
 }
 
@@ -863,22 +886,6 @@ bool DKUtil::LimitFramerate()
 	}
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::UpdateFps();
-	return true;
-}
-
-///////////////////////
-bool DKUtil::CallExit()
-{
-#ifdef ANDROID
-	CallJavaFunction("Exit","");
-#endif
-#ifdef WIN32
-	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
-		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
-	}
-#endif
-
-	DKClass::CloseAll();
 	return true;
 }
 
