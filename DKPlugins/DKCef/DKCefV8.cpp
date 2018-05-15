@@ -13,6 +13,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
 	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
 	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
+	DKV8::AttachFunction("DK_DrawTextOnScreen", DKCefV8::DrawTextOnScreen);
 	DKV8::AttachFunction("DK_Execute", DKCefV8::Execute);
 	DKV8::AttachFunction("DK_Exit", DKCefV8::Exit);
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
@@ -103,6 +104,18 @@ bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
 	if(!DKUtil::FindImageOnScreen(file, x, y)){ return false; }
 	if(!DKUtil::SetMousePos(x, y)){ return false; }
 	if(!DKUtil::LeftClick()){ return false; }
+	retval->SetBool(0, true);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval)
+{
+	DKString text = args->GetString(0);
+	if(!DKUtil::DrawTextOnScreen(text)){ 
+		retval->SetBool(0, false);
+		return false; 
+	}
 	retval->SetBool(0, true);
 	return true;
 }
