@@ -284,7 +284,7 @@ void DKAndroid::init()
 			DKLog(classes[i]+"\n", DKINFO);
 		}
 
-		DKObject* app = DKCreate("App"); //App.h/App.cpp (user code)
+		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
 		dkapp.Init();
 		
 		//Attempt to preload these
