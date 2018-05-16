@@ -26,9 +26,9 @@ function app_LoadPage()
 	DKCreate("DKGui/DKFrame.js", function(){
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
-	DKCreate("DKGui/DKOS.js", function(){
-		//TODO - move DKOS into DKGui
-	});
+		DKCreate("DKGui/DKOS.js", function(){
+			//TODO - move DKOS into DKGui
+		});
 	});
 	});
 	});
