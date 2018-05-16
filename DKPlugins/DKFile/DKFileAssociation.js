@@ -100,7 +100,7 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	//DKLog("DKFileAssociation_OpenJS("+path+")\n");
+	DKLog("DKFileAssociation_OpenJS("+path+")\n");
 	
 	//path = path.replace(absolutepath, "");
 		

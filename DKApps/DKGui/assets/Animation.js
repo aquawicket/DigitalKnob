@@ -3,7 +3,7 @@ var animation1 = 1;
 var pos2;
 var animation2 = 1;
 
-///////////////////////
+/////////////////////////
 function Animation_Init()
 {
 	DKCreate("Animation.html");
