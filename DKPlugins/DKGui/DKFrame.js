@@ -135,10 +135,12 @@ function DKFrame_CreateFrame(title, width, height)
 	
 	var window_width = parseInt(DKWindow_GetWidth());
 	var window_height = parseInt(DKWindow_GetHeight());
-	if(width == "100%"){ width = window_width-50; }
-	if(height == "100%"){ height = window_height-21-50; }
-	if(!width){ width = "300"; }
-	if(!height){ height = "300"; }
+	if(width == "100%"){ width = window_width-100; }
+	if(height == "100%"){ height = window_height-21-100; }
+	//if(!width){ width = "300"; }
+	//if(!height){ height = "300"; }
+	if(!width){ width = window_width / 2; }
+	if(!height){ height = window_height / 2; }
 	var newheight = parseFloat(height)+21;
 	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 1);
 	var newleft = parseFloat((window_width / 2) - (width / 2) - 1);
