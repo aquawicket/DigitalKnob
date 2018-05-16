@@ -3,7 +3,8 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	DKCreate("DKGui/Taskbar.html,DKGui/DKOS.html");
+	//DKCreate("DKGui/Taskbar.html,DKGui/DKOS.html");
+	DKCreate("DKGui/Taskbar.html");
 	DKCreate("DKGui/scale.js", function(){});
 	DKCreate("DKGui/Clock.js", function(){});
 	if(DK_GetBrowser() == "Rocket"){
