@@ -288,8 +288,8 @@ void DKAndroid::init()
 		dkapp.Init();
 		
 		//Attempt to preload these
-		DKCreate("DKAssets");
-		DKCreate("DKDuktape");
+		DKClass::DKCreate("DKAssets");
+		DKClass::DKCreate("DKDuktape");
 	}
 }
 
