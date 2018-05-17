@@ -128,7 +128,7 @@ public:
 				//DKLog("Closing "+id+"\n", DKINFO);
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
-				if(!instances[i]->End()){
+				if(!instances[i]->End()){ //FIXME - this can crash if End() does not exits in the instance. 
 					DKLog("DKBaseT::Close("+id+"): failed\n", DKWARN);
 				}
 				if(instances.size() == 0) { return; }
