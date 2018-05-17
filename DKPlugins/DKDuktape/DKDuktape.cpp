@@ -77,6 +77,10 @@ bool DKDuktape::End()
 /////////////////////////////////////////////////////////////////////////
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 {
+	if(!ctx){
+		DKLog("DKDuktape::AttachFunction(): ctx invalid\n", DKWARN);
+		return false; 
+	}
 	duk_push_global_object(ctx);
 	duk_push_c_function(ctx, func, DUK_VARARGS);
 	duk_put_prop_string(ctx, -2, name.c_str());

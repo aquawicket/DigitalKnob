@@ -174,8 +174,12 @@ public:
 	/////////////////////////////////////////////
 	static void GetInstances(DKStringArray& list)
 	{
-		DKLog("DKObject::GetInstances(DKStringArray&)\n", DKDEBUG);
-		
+		//DKLog("DKObject::GetInstances()\n", DKINFO);
+
+		if(!list){
+			DKLog("DKObject::GetInstances(): list is empty\n", DKWARN);
+			return;
+		}
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(instances[i]->data.size() > 2){
 				list.push_back(instances[i]->data[0]+","+instances[i]->data[1]+","+instances[i]->data[2]);
