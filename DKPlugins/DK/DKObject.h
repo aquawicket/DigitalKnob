@@ -176,7 +176,7 @@ public:
 	{
 		//DKLog("DKObject::GetInstances()\n", DKINFO);
 
-		if(!list){
+		if(list.empty()){
 			DKLog("DKObject::GetInstances(): list is empty\n", DKWARN);
 			return;
 		}
