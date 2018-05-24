@@ -34,13 +34,16 @@ function DKFrame_OnEvent(event)
 	if(DK_IdLike(event, "close")){
 		DKFrame_CloseButton(DK_GetId(event));
 	}
+	/*   FIXME - does not fire
 	if(DK_Type(event, "resize")){
+		DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		var frame = document.getElementById(DK_GetId(event));
 		if(!frame){ return; }
 		var child = frame.childNodes[4];
 		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
+	*/
 }
 
 ///////////////////////////
@@ -221,7 +224,7 @@ function DKFrame_CreateResize(frame)
 	DKWidget_SetProperty(resize, "width", "16rem");
 	DKWidget_SetProperty(resize, "height", "16rem");
 	DKWidget_AddResizeHandle(resize, frame);
-	DKAddEvent(frame, "resize", DKFrame_OnEvent);
+	DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
 	
 	return resize;
 }
