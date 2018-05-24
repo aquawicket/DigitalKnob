@@ -324,7 +324,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	if(same(DKV8::disable_web_security, "ON")){
 		command_line->AppendSwitchWithValue("disable-web-security", "1");
 	}
-	if(!same(DKV8::no_proxy_server, "OFF")){
+	if(!same(DKV8::no_proxy_server, "ON")){
 		command_line->AppendSwitchWithValue("no-proxy-server", "1");
 	}
 	if(same(DKV8::enable_webgl, "ON")){
