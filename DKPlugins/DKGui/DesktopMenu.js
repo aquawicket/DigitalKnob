@@ -68,13 +68,14 @@ function Desktop_ToggleFullscreen()
 			}  
 		} 
 	}
-	
-	if(DKWindow_IsFullscreen()){
-		DKLog("EXIT Fullscreen \n");
-		DKWindow_Windowed();
-	}
 	else{
-		DKLog("ENTER Fullscreen \n");
-		DKWindow_Fullscreen();
+		if(DKWindow_IsFullscreen()){
+			DKLog("EXIT Fullscreen \n");
+			DKWindow_Windowed();
+		}
+		else{
+			DKLog("ENTER Fullscreen \n");
+			DKWindow_Fullscreen();
+		}
 	}
 }
