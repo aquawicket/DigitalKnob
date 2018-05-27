@@ -141,7 +141,7 @@ function DKSolution_OpenHere(path)
 		return true;
 	}
 	else{ //File
-		if(!DKFileAssociation_Open(path)){ return false; }
+		if(!DKFileAssociation_Open(aPath)){ return false; }
 		return true;
 	}
 	
