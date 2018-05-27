@@ -178,7 +178,7 @@ function DKSolution_UpdatePath(path)
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement("DKSolutionMenu", "div", "DKSolutionFolder");
 			DKWidget_SetAttribute(element2, "class", "option");
-			var value = aPath+files[d]+"/";
+			var value = aPath+"/"+files[d]+"/";
 			DKWidget_SetAttribute(element2,"value", value);
 			DKWidget_SetProperty(element2, "white-space", "nowrap");
 			DKAddEvent(element2, "click", DKSolution_OnEvent);
@@ -196,7 +196,7 @@ function DKSolution_UpdatePath(path)
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement("DKSolutionMenu", "div", "DKSolutionFile");
 			DKWidget_SetAttribute(element3, "class", "option");
-			var value = aPath+files[f];
+			var value = aPath+"/"+files[f];
 			DKWidget_SetAttribute(element3, "value", value);
 			DKWidget_SetProperty(element3, "white-space", "nowrap");
 			DKWidget_SetProperty(element3, "padding-left", "17px");
