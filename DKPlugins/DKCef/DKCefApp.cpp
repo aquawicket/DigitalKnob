@@ -293,6 +293,10 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	//DKLog(string+"\n", DKINFO);
 	CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
+	if(!frame){
+		DKLog("DKCefApp::SendEvent(): frame invalid\n", DKWARN);
+		return false;
+	}
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	
 	return true;
