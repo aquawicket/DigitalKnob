@@ -145,7 +145,7 @@ function TaskbarMenu_OnEvent(event)
 		DKRocket_ToggleDebugger();
 	}
 	if(DK_Id(event, "PushDKFiles")){
-		TaskbarMenu_PushDKFiles();
+		DKDebug_PushDKFiles();
 	}
 	if(DK_Id(event, "ClearConsole")){
 		DK_System("cls");
@@ -189,40 +189,6 @@ function TaskbarMenu_OnEvent(event)
 		}
 	}
 	DKClose("DKGui/TaskbarMenu.js");
-}
-
-//////////////////////////////////
-function TaskbarMenu_PushDKFiles()
-{
-	//Here, we push any altered DKPulgin files to the appropriate DKPlugin folder.
-	
-	//DKLog("DKMenuRightApp_PushDKFiles()\n");
-	var assets = DKAssets_LocalAssets();
-	
-	var DKPlugins = assets+"/../../../DKPlugins";
-	var DKPlugins2 = assets+"/../../../../DKPlugins";
-	
-	if(DKFile_Exists(DKPlugins)){
-		DKPlugins = DKFile_GetAbsolutePath(DKPlugins);
-	}
-	if(DKFile_Exists(DKPlugins2)){
-		DKPlugins2 = DKFile_GetAbsolutePath(DKPlugins2);
-	}
-	
-	var temp = DKFile_DirectoryContents(assets);
-	var folders = temp.split(",");
-	
-	for(i=0; i<folders.length; i++){
-		//DKLog(folders[i]+"\n");
-		if(DKFile_Exists(DKPlugins+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins+"/"+folders[i]+"\n");
-			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins+"/"+folders[i], true, true);
-		}
-		if(DKFile_Exists(DKPlugins2+"/"+folders[i])){
-			DKLog("Pushing to: "+DKPlugins2+"/"+folders[i]+"\n");
-			DKFile_CopyFolder(assets+"/"+folders[i], DKPlugins2+"/"+folders[i], true, true);
-		}
-	}
 }
 
 /////////////////////////////////
