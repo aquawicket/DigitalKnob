@@ -196,7 +196,7 @@ function DKBuildConsole_Process()
 	
 	DKBuildConsole_ChooseUpdate();
 	
-	if(!DKFile_Exists(DKPATH+"/DKPlugins")){
+	if(!DKFile_Exists(DKPATH+"/DK/DKPlugins")){
 		DKLog("ERROR: can't find "+DKPATH+" \n.", DKERROR);
 		DK_GetKey();
 		DK_Exit();

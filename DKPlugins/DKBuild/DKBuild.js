@@ -400,8 +400,8 @@ function DKBuild_GitUpdate()
 	}
 	
 	DKLog("Git Update DigitalKnob... \n");
-	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH);
-	DKFile_ChDir(DKPATH);
+	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
+	DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" checkout -- .");
 	DK_Execute(GIT +" pull origin master");
 	
@@ -437,7 +437,7 @@ function DKBuild_GitCommit()
 	}
 	
 	DKLog("Git Commit DigitalKnob... \n");
-	DKFile_ChDir(DKPATH);
+	DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
 	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
@@ -525,11 +525,11 @@ function DKBuild_GetAppList()
 	//DKLog("DKBuild_GetAppList() \n");
 	
 	//DKApps folder
-	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
+	var apps = DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
 	for(var i=0; i<APP_LIST.length; i++){
-		if(!DKFile_IsDirectory(DKPATH+"/DKApps/"+APP_LIST[i]) || APP_LIST[i] == ".svn"){
+		if(!DKFile_IsDirectory(DKPATH+"/DK/DKApps/"+APP_LIST[i]) || APP_LIST[i] == ".svn"){
 			APP_LIST.splice(i, 1);
 			i=0;
 		}
@@ -639,7 +639,7 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH);
+		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){

@@ -1,4 +1,4 @@
-var IMAGEMAGICK = "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert.exe";
+var IMAGEMAGICK = "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86/convert.exe";
 
 /////////////////////////
 function IconMaker_Init()
