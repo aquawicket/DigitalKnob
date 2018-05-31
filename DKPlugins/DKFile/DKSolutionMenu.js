@@ -235,20 +235,25 @@ function DKSolutionMenu_GitAdd()
 {
 	DKLog("DKSolutionMenu_GitAdd()\n");
 	
-	//TODO
-	
-	//we need the path of git.exe
 	DKCreate("DKBuild/DKBuild.js", function(){
-		var git = GIT; //from DKBuild.js
-		DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n");
+		var git = GIT;       //from DKBuild.js
+		var dkpath = DKPATH; //from DKBuild.js
+		//DKLog("DKSolutionMenu_GitAdd(): git = "+git+"\n");
 		
-		//Windows
-		DKFile_ChDir("C:/digitalknob");
-		DK_Execute(git+" add "+DKSolutionMenu_file);
-		//TODO
+		DKLog("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n", DKINFO);
+		var search = DKSolutionMenu_file;
+		while(!DKFile_Exists(search+"/.git")){
+			var n = search.lastIndexOf("/");
+			if(n == -1){
+				DKLog("could not locate a .git folder\n", DKWARN);
+				return false;
+			}
+			search = search.substring(0, n);
+			DKLog(search+"\n", DKINFO);
+		}
+		
+		//DKLog("found .git\n", DKINFO);
+		DKFile_ChDir(search);
+		DK_Execute(git+" add "+DKSolutionMenu_file);	
 	});
-	
-	//we need to find the folder of the git repository
-	//we need to chdir to that path
-	//we need to "git add path" of the file we want to add.
 }
