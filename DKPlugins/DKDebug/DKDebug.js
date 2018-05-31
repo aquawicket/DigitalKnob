@@ -139,7 +139,7 @@ function DKDebug_PushDKFiles()
 	DKLog("assets = "+assets+"\n");
 	
 	var search = assets;
-	while(!DKFile_Exists(search+"/DKPlugins")){
+	while(!DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
 		if(n == -1){
 			DKLog("could not locate a DKPlugins folder\n", DKWARN);
@@ -166,7 +166,7 @@ function DKDebug_PushDKFiles()
 	//DKLog("folders = "+folders+"\n");
 	
 	var plugin_folders = [];
-	plugin_folders.push(DKPATH+"/DKPlugins");
+	plugin_folders.push(DKPATH+"/DK/DKPlugins");
 	for(var i=0; i<folders.length; i++){
 		//DKLog("checking "+search+"/"+folders[i]+"/DKPlugins"+"\n");
 		if(DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
