@@ -13,7 +13,8 @@ class DKCef;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKCefWindow : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 					 public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
-	                 public CefKeyboardHandler,/* public CefGeolocationHandler,*/ public CefFindHandler
+	                 public CefKeyboardHandler,/* public CefGeolocationHandler,*/ public CefFindHandler,
+				     public CefPrintHandler
 {
 public:
 	DKCefWindow();
@@ -66,6 +67,7 @@ public:
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	virtual CefRefPtr<CefPrintHandler> GetPrintHandler(){ return this; }
 	
 	//////////////
 	void DoFrame();
@@ -73,6 +75,17 @@ public:
 	///////////////////////////////////////////
 	bool DoClose(CefRefPtr<CefBrowser> browser);
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback)
+	{
+		DKLog("OnPrintDialog()\n", DKINFO);
+		return true;
+	}
+
+	void OnPrintStart(CefRefPtr<CefBrowser> browser){}
+	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults){}
+	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback){ return true; }
+	void OnPrintReset(CefRefPtr<CefBrowser> browser){}
 
 	//////////////////////////////////////////////////////////////
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
