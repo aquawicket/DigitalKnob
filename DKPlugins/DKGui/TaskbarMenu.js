@@ -12,17 +12,11 @@ function TaskbarMenu_Init()
 	DKAddEvent("Reload", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenConsole", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenDev", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenBrowser", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenSuperball", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("TestSound", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("TestVideo", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
 	
 	DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
@@ -51,18 +45,10 @@ function TaskbarMenu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(DK_Id(event, "OpenConsole")){
-		DKCreate("DKConsole/DKConsole.js", function(){});
-	}
 	if(DK_Id(event, "OpenBuilder")){
 		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
-		});
-	}
-	if(DK_Id(event, "OpenDev")){
-		DKCreate("DKFile/DKFileAssociation.js", function(){
-			DKFileAssociation_Open("DKDev/DKMenuRight.js");
 		});
 	}
 	if(DK_Id(event, "OpenNotepad")){
@@ -73,11 +59,6 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "InputTest")){
 		DKCreate("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKInputTest/DKInput.js");
-		});
-	}
-	if(DK_Id(event, "OpenBrowser")){
-		DKCreate("DKFile/DKFileAssociation.js", function(){
-			DKFileAssociation_Open("DKBrowser/DKBrowser.js");
 		});
 	}
 	if(DK_Id(event, "OpenMessage")){
@@ -103,35 +84,7 @@ function TaskbarMenu_OnEvent(event)
 		
 		DKFrame_Widget(div);
 	}
-	if(DK_Id(event, "OpenSuperball")){
-		//DKFrame_Iframe("Superball","http://wiredtron.com/games/games/3dsuperball.swf",800,600);
-		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
-		DKWidget_SetProperty(div, "position", "absolute");
-		DKWidget_SetProperty(div, "width", "100%");
-		DKWidget_SetProperty(div, "height", "100%");
-		
-		var iframe = DKWidget_CreateElement(div, "iframe", "iframe");
-		DKWidget_SetAttribute(iframe, "src", "http://wiredtron.com/games/games/3dsuperball.swf");
-		DKWidget_SetAttribute(iframe, "width", "100%");
-		DKWidget_SetAttribute(iframe, "height", "100%");
-		DKWidget_SetProperty(iframe, "border-width", "0px");
-		//DKWidget_SetProperty(iframe, "overflow-x", "auto");
-		//DKWidget_SetProperty(iframe, "overflow-y", "auto");
-		
-		DKFrame_Widget(div);
-	}
-	if(DK_Id(event, "TestSound")){
-		DKCreate("DKAudio/DKAudio.js", function(){
-			var assets = DKAssets_LocalAssets();
-			DKAudio_PlaySound(assets+"DKAudio/test.wav");
-		});
-	}
-	if(DK_Id(event, "TestVideo")){
-		DKCreate("DKVideo/DKVideo.js", function(){
-			var assets = DKAssets_LocalAssets();
-			DKVideo_Play(assets+"DKVideo/test.avi");
-		});
-	}
+	
 	if(DK_Id(event, "OpenSource")){
 		DKLog("OpenSource\n");
 		DKCreate("DKWidgetJS");
