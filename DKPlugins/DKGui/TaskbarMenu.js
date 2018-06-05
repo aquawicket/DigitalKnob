@@ -24,6 +24,9 @@ function TaskbarMenu_Init()
 	DKAddEvent("TestSound", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("TestVideo", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
+	
+	DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
+	
 	});
 	//DKWidget_SetFocus("TaskbarMenu_Run");
 }
