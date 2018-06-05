@@ -1,3 +1,7 @@
+//TODO - Give this DKTtaskbarMenu the ability start with a blank slate.
+// All elements will be added dynamically via DKTaskbarMenu functions.   I.E.  DKTaskbarMenu_AddApp(); 
+// Start with a blank DKTaskbarMenu that forms to the number of elements in it.
+
 ///////////////////////////
 function TaskbarMenu_Init()
 {
