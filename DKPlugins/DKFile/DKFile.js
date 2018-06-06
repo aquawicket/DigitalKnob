@@ -302,6 +302,10 @@ if(DK_GetBrowser() != "CEF"){
 	{
 		//DKLog("DKFile_StringToFile("+data+","+path+")\n");
 		
+		if(!path.includes(absolutepath)){
+			path = absolutepath+path;
+		}
+		
 		data = replace(data, ": ", ":");
 		data = replace(data, "; ", ";");
 		data = replace(data, ", ", ",");
