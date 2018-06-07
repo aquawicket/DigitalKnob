@@ -58,12 +58,12 @@ function DKNotepad_OnEvent(event)
 	}
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
-		DKLog("OpenFile: "+file+" \n");
+		//DKLog("OpenFile: "+file+" \n");
 		DKNotepad_Open(file)
 	}
 	if(DK_Type(event, "SaveFile")){
 		var file = DK_GetValue(event);
-		DKLog("SaveFile: "+file+" \n");
+		//DKLog("SaveFile: "+file+" \n");
 		DKNotepad_Save(file)
 	}
 }
