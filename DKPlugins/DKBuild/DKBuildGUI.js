@@ -133,7 +133,7 @@ function DKBuildGUI_AppSelect()
 	}
 	
 	APP = DKWidget_GetValue("AppList");
-	DKLog("APP = "+APP+"\n");
+	//DKLog("APP = "+APP+"\n");
 	//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
 	
 	//DKSendEvent("DKMenuRight.html", "SetPanel", "App");

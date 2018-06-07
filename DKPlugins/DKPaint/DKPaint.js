@@ -39,7 +39,7 @@ function DKPaint_OnEvent(event)
 	}
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
-		DKLog("OpenFile: "+file+" \n");
+		//DKLog("OpenFile: "+file+" \n");
 		DKPaint_Open(file)
 	}
 }
@@ -57,7 +57,7 @@ function DKPaint_Save()
 ///////////////////////////
 function DKPaint_Open(file)
 {
-	DKLog("DKPaint_Open("+file+") \n");
+	//DKLog("DKPaint_Open("+file+") \n");
 	
 	file = file.replace(absolutepath, "");
 	currentFile = file;

@@ -20,7 +20,7 @@ function DKLogin_End()
 ///////////////////////////////
 function DKLogin_OnEvent(event)
 {
-	DKLog("DKLogin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKLogin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "DKLoginFacebook")){
 		DKLog("DKLogin_OnEvent(): DKLoginFacebook\n");
@@ -33,7 +33,7 @@ function DKLogin_OnEvent(event)
 /////////////////////////////////
 function DKLogin_OnConnect(value)
 {
-	DKLog("DKLogin_FBconnect()\n");
+	//DKLog("DKLogin_FBconnect()\n");
 	if(value.status === 'connected'){
 		DKFacebook_Query('/me', "name", DKLogin_FBresponse);
 		DKFacebook_Query('/me', "id", DKLogin_FBresponse);
@@ -44,7 +44,7 @@ function DKLogin_OnConnect(value)
 ////////////////////////////////////////////
 function DKLogin_FBresponse(param, response)
 {
-	DKLog("DKLogin_FBresponse("+param+","+response+")");
+	//DKLog("DKLogin_FBresponse("+param+","+response+")");
 	
 	if(param == "name"){
 		FACEBOOK_NAME = response;

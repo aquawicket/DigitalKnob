@@ -28,7 +28,7 @@ function DKHandles_End()
 /////////////////////////////////
 function DKHandles_OnEvent(event)
 {
-	DKLog("DKHandles_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("DKHandles_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "window")){
 		var handle = DKWidget_GetInnerHtml("window");
@@ -42,7 +42,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateWindowList();
     }
 	if(DK_Id(event, "search")){
-		DKLog("search\n", DKINFO);
+		//DKLog("search\n", DKINFO);
 		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
 		DKHandles_StartSearch();
     }
@@ -73,7 +73,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateProperties(handle);
 	}
 	if(DK_Type(event, "DKHandles_WindowChanged")){
-		DKLog("DKHandles_WindowChanged\n", DKINFO);
+		//DKLog("DKHandles_WindowChanged\n", DKINFO);
 		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
 	}
@@ -102,7 +102,7 @@ function DKHandles_UpdateWindowList()
 ///////////////////////////////////////////
 function DKHandles_UpdateProperties(handle)
 {
-	DKLog("DKHandles_UpdateProperties("+handle+")\n", DKINFO);
+	//DKLog("DKHandles_UpdateProperties("+handle+")\n", DKINFO);
 	DKWidget_SetValue("currentHandle", "Handle: "+handle);
 	var win = DKHandles_GetWindow(handle);
 	DKWidget_SetValue("window", win);
