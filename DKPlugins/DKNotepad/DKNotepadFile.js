@@ -107,8 +107,7 @@ function DKNotepadFile_SaveAs()
 //////////////////////////////
 function DKNotepadFile_Print()
 {
-	DKLog("DKNotepadFile_Print()\n");
-	
+	//DKLog("DKNotepadFile_Print()\n");
 	DKCef_Print("Cef", 0);
 }
 

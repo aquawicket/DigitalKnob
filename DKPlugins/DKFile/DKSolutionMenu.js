@@ -195,8 +195,8 @@ function DKSolutionMenu_Delete()
 	//TODO - confirm
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
-		DKMessageBox_Confirm("delete this file?", function(rval){
-			//DKLog("DKMessageBox_Confirm(): rval = "+rval+"\n");
+		DKMessage_Confirm("delete this file?", function(rval){
+			//DKLog("DKMessage_Confirm(): rval = "+rval+"\n");
 			if(rval == true){
 				DKFile_Delete(DKSolutionMenu_file);
 				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));

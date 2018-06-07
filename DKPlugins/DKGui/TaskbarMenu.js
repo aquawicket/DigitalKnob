@@ -68,7 +68,7 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "OpenMessage")){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
-			DKMessageBox("", "ShowMessage", "test message");
+			//DKMessage("", "ShowMessage", "test message");
 		});
 	}
 	if(DK_Id(event, "OpenTetris")){
@@ -90,7 +90,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "OpenSource")){
-		DKLog("OpenSource\n");
+		//DKLog("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
 		var assets = DKAssets_LocalAssets();

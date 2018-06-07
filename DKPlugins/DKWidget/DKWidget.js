@@ -1083,7 +1083,7 @@ function DKWidget_RemoveElement(id)
 	
 	var ele = document.getElementById(id);
 	if(!ele){
-		DKLog("RemoveElement("+id+"): element does not exist\n");
+		DKLog("RemoveElement("+id+"): element does not exist\n", DKWARN);
 		return false;
 	}
 	var par = ele.parentNode;
