@@ -140,8 +140,8 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DK_GetValue(event);
 		DKLog("TaskbarMenu_Run: key="+key+"\n");
-		if(key != 72){ return; }
-		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"))
+		if(key != 13){ return; }
+		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
@@ -155,6 +155,7 @@ function TaskbarMenu_OnEvent(event)
 /////////////////////////////////
 function TaskbarMenu_Run(command)
 {
+	DKLog("TaskbarMenu_Run("+command+")\n", DKINFO);
 	if(command.indexOf("http://") > -1){
 		DKFrame_Iframe(command,command,800,600);
 		return;

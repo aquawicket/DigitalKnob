@@ -3,7 +3,7 @@ function BackgroundMenu_Init()
 {
 	DKCreate("DKGui/BackgroundMenu.html");
 	var file = DKWidget_GetAttribute("Background","src");
-	DKLog("file="+file+"\n");
+	//DKLog("file="+file+"\n");
 	DKWidget_SetAttribute("BackgroundMenu_Image","src",file);
 }
 

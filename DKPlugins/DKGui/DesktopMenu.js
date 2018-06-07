@@ -20,7 +20,7 @@ function DesktopMenu_End()
 ///////////////////////////////////
 function DesktopMenu_OnEvent(event)
 {
-	DKLog("DesktopMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DesktopMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "OpenBackgtoundMenu")){
 		DKCreate("DKGui/BackgroundMenu.js", function(){

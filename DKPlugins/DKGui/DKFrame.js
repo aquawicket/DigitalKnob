@@ -102,7 +102,6 @@ function DKFrame_SetTitle(id, title)
 	DKWidget_SetInnerHtml(titlebartext, title);
 }
 
-/*
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
@@ -129,7 +128,6 @@ function DKFrame_Iframe(title, url, width, height)
 	DKCef_SetFocus(iframe);
 	return iframe;
 }
-*/
 
 //////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)

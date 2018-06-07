@@ -142,7 +142,7 @@ public:
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
 		CEF_REQUIRE_UI_THREAD();
-		DKLog("DKCefWindow::OnFullscreenModeChange()\n", DKINFO);
+		DKLog("DKCefWindow::OnFullscreenModeChange()\n", DKDEBUG);
 
 #ifdef WIN32
 		HWND hwnd = GetActiveWindow();
