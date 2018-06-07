@@ -76,8 +76,7 @@ function DKSolutionMenu_OnEvent(event)
 /////////////////////////////////
 function DKSolutionMenu_SetId(id)
 {
-	DKLog("DKSolutionMenu_SetId("+id+")\n");
-	
+	//DKLog("DKSolutionMenu_SetId("+id+")\n");
 	DKSolutionMenu_id = id;
 }
 

@@ -300,8 +300,7 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	DKLog("DKFrame_CloseButton("+id+")\n");
-	
+	//DKLog("DKFrame_CloseButton("+id+")\n");
 	DKFrame_Close(id);
 }
 

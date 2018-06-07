@@ -74,7 +74,7 @@ function LoadJs(url, callback)
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("LoadJs("+url+", callback): url already loaded \n", DKWARN);
+		//DKLog("LoadJs("+url+", callback): url already loaded \n", DKWARN);
 		callback && callback(false);
 		return false;
 	}

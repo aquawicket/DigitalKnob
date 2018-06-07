@@ -46,7 +46,7 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	DKLog("DKFileAssociation_OpenHtml("+path+")\n");
+	//DKLog("DKFileAssociation_OpenHtml("+path+")\n");
 	
 	path = path.replace(absolutepath, "");
 	
@@ -102,7 +102,7 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	DKLog("DKFileAssociation_OpenJS("+path+")\n");
+	//DKLog("DKFileAssociation_OpenJS("+path+")\n");
 	
 	path = path.replace(absolutepath, "");
 		
@@ -177,7 +177,7 @@ function DKFileAssociation_OpenAudio(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenVideo(path)
 {
-	DKLog("DKFileAssociation_OpenVideo("+path+")\n");
+	//DKLog("DKFileAssociation_OpenVideo("+path+")\n");
 	
 	//FIXME
 	DKVideo_Play(path);

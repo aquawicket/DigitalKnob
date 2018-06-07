@@ -28,7 +28,7 @@ function Taskbar_End()
 ///////////////////////////////
 function Taskbar_OnEvent(event)
 {
-	DKLog("Taskbar_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKLog("Taskbar_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "start")){
 		DKCreate("DKGui/TaskbarMenu.js", function(){});

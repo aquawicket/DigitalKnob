@@ -129,13 +129,13 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	DKLog("DKSolution_OpenHere("+path+")\n");
+	//DKLog("DKSolution_OpenHere("+path+")\n");
 	
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	//DKLog("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
@@ -151,7 +151,7 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	DKLog("DKSolution_UpdatePath("+path+")\n");
+	//DKLog("DKSolution_UpdatePath("+path+")\n");
 	
 	//reload events
 	DKRemoveEvents(DKSolution_OnEvent);
@@ -164,7 +164,7 @@ function DKSolution_UpdatePath(path)
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	//DKLog("aPath:"+aPath+"\n");
 	//var rPath = DKFile_GetRelativePath(aPath, path);
 	//DKLog("rPath:"+rPath+"\n");
 	

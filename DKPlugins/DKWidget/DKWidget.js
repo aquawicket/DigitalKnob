@@ -164,7 +164,7 @@ function DKClose(data)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
+	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
 		
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
