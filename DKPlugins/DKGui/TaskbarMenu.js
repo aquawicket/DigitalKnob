@@ -7,26 +7,25 @@ function TaskbarMenu_Init()
 {
 	//DKCreate("DKGui/TaskbarMenu.html,DKGui/DKOS.html", function(){
 	DKCreate("DKGui/TaskbarMenu.html", function(){
-	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("Refresh", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
-	
-	DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
-	
+		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("Refresh", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
+		DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
+		
+		DKWidget_SetFocus("TaskbarMenu_Run");
 	});
-	//DKWidget_SetFocus("TaskbarMenu_Run");
 }
 
 //////////////////////////
