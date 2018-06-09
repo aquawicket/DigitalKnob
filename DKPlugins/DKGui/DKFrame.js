@@ -111,9 +111,9 @@ function DKFrame_Iframe(title, url, width, height)
 
 	var iframe = DKWidget_CreateElement(frame, "iframe", title);
 	DKWidget_SetAttribute(iframe, "src", url);
+	
 	DKWidget_SetAttribute(iframe, "width", "100%");
 	DKWidget_SetAttribute(iframe, "height", "100%");
-	DKWidget_SetProperty(iframe, "border-width", "0rem");
 	DKWidget_SetProperty(iframe, "position", "absolute");
 	DKWidget_SetProperty(iframe, "top", "21rem");
 	DKWidget_SetProperty(iframe, "left", "0rem");
@@ -122,10 +122,10 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
 	
-	//var currentBrowser = DKCef_GetCurrentBrowser(iframe);
-	//DKCef_SetUrl(iframe, url, currentBrowser);
-	//DKFrame_CreateResize(frame);
-	//DKCef_SetFocus(iframe);
+	var currentBrowser = DKCef_GetCurrentBrowser(iframe);
+	DKCef_SetUrl(iframe, url, currentBrowser);
+	DKFrame_CreateResize(frame);
+	DKCef_SetFocus(iframe);
 	return iframe;
 }
 

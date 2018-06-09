@@ -7,25 +7,26 @@ function TaskbarMenu_Init()
 {
 	//DKCreate("DKGui/TaskbarMenu.html,DKGui/DKOS.html", function(){
 	DKCreate("DKGui/TaskbarMenu.html", function(){
-		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("Refresh", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
-		DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
-		DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
-		
-		DKWidget_SetFocus("TaskbarMenu_Run");
+	DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("Reload", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
+	
+	DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
+	
 	});
+	//DKWidget_SetFocus("TaskbarMenu_Run");
 }
 
 //////////////////////////
@@ -71,19 +72,21 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenTetris")){
-		DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
-		/*
+		//DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
 		DKWidget_SetProperty(div, "position", "absolute");
 		DKWidget_SetProperty(div, "width", "100%");
 		DKWidget_SetProperty(div, "height", "100%");
+		
 		var iframe = DKWidget_CreateElement(div, "iframe", "iframe");
 		DKWidget_SetAttribute(iframe, "src", "http://www.lutanho.net/play/tetris.html");
 		DKWidget_SetAttribute(iframe, "width", "100%");
 		DKWidget_SetAttribute(iframe, "height", "100%");
 		DKWidget_SetProperty(iframe, "border-width", "0px");
+		//DKWidget_SetProperty(iframe, "overflow-x", "auto");
+		//DKWidget_SetProperty(iframe, "overflow-y", "auto");
+		
 		DKFrame_Widget(div);
-		*/
 	}
 	
 	if(DK_Id(event, "OpenSource")){
@@ -125,7 +128,7 @@ function TaskbarMenu_OnEvent(event)
 			DKLog(arry[i]+"\n");
 		}
 	}
-	if(DK_Id(event, "Refresh")){
+	if(DK_Id(event, "Reload")){
 		DKFrame_CloseAll();
 		DK_Refresh();
 	}
@@ -136,7 +139,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DK_GetValue(event);
-		//DKLog("TaskbarMenu_Run: key="+key+"\n");
+		DKLog("TaskbarMenu_Run: key="+key+"\n");
 		if(key != 13){ return; }
 		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
@@ -154,15 +157,15 @@ function TaskbarMenu_Run(command)
 {
 	DKLog("TaskbarMenu_Run("+command+")\n", DKINFO);
 	if(command.indexOf("http://") > -1){
-		DKFrame_Iframe(command,command,"100%","100%");
+		DKFrame_Iframe(command,command,800,600);
 		return;
 	}
 	if(command.indexOf("https://") > -1){
-		DKFrame_Iframe(command,command,"100%","100%");
+		DKFrame_Iframe(command,command,800,600);
 		return;
 	}
 	if(command.indexOf("file://") > -1){
-		DKFrame_Iframe(command,command,"100%","100%");
+		DKFrame_Iframe(command,command,800,600);
 		return;
 	}
 	DK_RunJavascript(command);
