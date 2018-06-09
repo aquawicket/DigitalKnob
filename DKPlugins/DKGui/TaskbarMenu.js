@@ -13,7 +13,7 @@ function TaskbarMenu_Init()
 	DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
-	DKAddEvent("Reload", "click", TaskbarMenu_OnEvent);
+	DKAddEvent("Refresh", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
 	DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
@@ -128,7 +128,7 @@ function TaskbarMenu_OnEvent(event)
 			DKLog(arry[i]+"\n");
 		}
 	}
-	if(DK_Id(event, "Reload")){
+	if(DK_Id(event, "Refresh")){
 		DKFrame_CloseAll();
 		DK_Refresh();
 	}
