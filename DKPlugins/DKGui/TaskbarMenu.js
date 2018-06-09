@@ -72,21 +72,19 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenTetris")){
-		//DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
+		DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
+		/*
 		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
 		DKWidget_SetProperty(div, "position", "absolute");
 		DKWidget_SetProperty(div, "width", "100%");
 		DKWidget_SetProperty(div, "height", "100%");
-		
 		var iframe = DKWidget_CreateElement(div, "iframe", "iframe");
 		DKWidget_SetAttribute(iframe, "src", "http://www.lutanho.net/play/tetris.html");
 		DKWidget_SetAttribute(iframe, "width", "100%");
 		DKWidget_SetAttribute(iframe, "height", "100%");
 		DKWidget_SetProperty(iframe, "border-width", "0px");
-		//DKWidget_SetProperty(iframe, "overflow-x", "auto");
-		//DKWidget_SetProperty(iframe, "overflow-y", "auto");
-		
 		DKFrame_Widget(div);
+		*/
 	}
 	
 	if(DK_Id(event, "OpenSource")){
