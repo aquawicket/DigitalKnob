@@ -138,6 +138,15 @@ public:
 		DKLog("DKCefWindow::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
 	}
 
+	//////////////////////////////////////////////////////////////
+	bool OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
+	{
+		//FIXME: this is never called
+		CEF_REQUIRE_UI_THREAD();
+		DKLog("DKCefWindow::OnTooltip()\n", DKINFO);
+		return true;
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen)
 	{
