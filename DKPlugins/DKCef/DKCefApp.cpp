@@ -379,24 +379,8 @@ void DKCefApp::OnContextInitialized()
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
 	DKLog(" DKCefApp::OnContextCreated\n", DKINFO);
-	if(!DKV8::ctx){
-		DKV8::ctx = context->GetGlobal();
-	}
 
-	/*
-	std::map<std::string, bool>::iterator it = DKV8::funcs2.begin();
-	while(it != DKV8::funcs2.end()){
-	if(!it->second){
-	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(it->first.c_str(), DKV8::v8handler);
-	if(DKV8::ctx->SetValue(it->first.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
-	it->second = true;
-	DKLog("DKCefApp::OnContextCreated(): registered: "+it->first+"\n", DKINFO);
-	}
-	}
-	it++;
-	}
-	*/
-
+	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
