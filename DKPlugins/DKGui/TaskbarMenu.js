@@ -159,17 +159,17 @@ function TaskbarMenu_OnEvent(event)
 function TaskbarMenu_Run(command)
 {
 	DKLog("TaskbarMenu_Run("+command+")\n", DKINFO);
-	if(command.indexOf("http://") > -1){
+	if(command.indexOf("http://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
-		return;
+		return true;
 	}
-	if(command.indexOf("https://") > -1){
+	if(command.indexOf("https://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
-		return;
+		return true;
 	}
-	if(command.indexOf("file://") > -1){
+	if(command.indexOf("file://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
-		return;
+		return true;
 	}
 	DK_RunJavascript(command);
 }
