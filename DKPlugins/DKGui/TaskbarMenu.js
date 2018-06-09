@@ -157,15 +157,15 @@ function TaskbarMenu_Run(command)
 {
 	DKLog("TaskbarMenu_Run("+command+")\n", DKINFO);
 	if(command.indexOf("http://") > -1){
-		DKFrame_Iframe(command,command,800,600);
+		DKFrame_Iframe(command,command,"100%","100%");
 		return;
 	}
 	if(command.indexOf("https://") > -1){
-		DKFrame_Iframe(command,command,800,600);
+		DKFrame_Iframe(command,command,"100%","100%");
 		return;
 	}
 	if(command.indexOf("file://") > -1){
-		DKFrame_Iframe(command,command,800,600);
+		DKFrame_Iframe(command,command,"100%","100%");
 		return;
 	}
 	DK_RunJavascript(command);
