@@ -137,7 +137,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DK_GetValue(event);
-		DKLog("TaskbarMenu_Run: key="+key+"\n");
+		//DKLog("TaskbarMenu_Run: key="+key+"\n");
 		if(key != 13){ return; }
 		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
