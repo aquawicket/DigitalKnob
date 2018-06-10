@@ -17,7 +17,7 @@ function DKBuildGUI_Init()
 	
 		//DKBuild_ValidateSvn();
 		DKCreate("DKGit/DKGit.js", function(){
-			DKGit_ValidateGit();
+			//DKGit_ValidateGit();
 		});
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
