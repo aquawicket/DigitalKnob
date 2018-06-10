@@ -10,7 +10,7 @@ var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var SVN = "";
-var GIT = "";
+//var GIT = "";
 var CMAKE = "";
 var NDK = "";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
@@ -31,8 +31,8 @@ function DKBuild_Init()
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
-		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		//GIT = "C:/Program Files/Git/bin/git.exe";
+		//GIT = DKFile_GetShortName(GIT);
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
@@ -42,8 +42,8 @@ function DKBuild_Init()
 		DKPATH = "C:/digitalknob";
 		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
 		SVN = DKFile_GetShortName(SVN);
-		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		//GIT = "C:/Program Files/Git/bin/git.exe";
+		//GIT = DKFile_GetShortName(GIT);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
@@ -51,7 +51,7 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
-		GIT = "git";
+		//GIT = "git";
 		SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
@@ -59,7 +59,7 @@ function DKBuild_Init()
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aqualinux/Desktop/digitalknob";
 		SVN = "/usr/bin/svn";
-		GIT = "/usr/bin/git";
+		//GIT = "/usr/bin/git";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
 	}

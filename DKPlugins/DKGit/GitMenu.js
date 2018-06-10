@@ -1,12 +1,32 @@
+var GIT = "";
+
 ///////////////////////
 function GitMenu_Init()
 {
-	//DKLog("GitMenu_Init()");
-	DKCreate("DKBuild/DKBuild.js", function(){});
-	DKCreate("DKBuild/GitMenu.html", function(){});
-	DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
-	DKAddEvent("Git Update", "click", GitMenu_OnEvent);
-	DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
+	//DKLog("GitMenu_Init()\n", DKDEBUG);
+	DKCreate("DKThreadPool");
+
+	//DKLog(DK_GetOS()+"\n");
+	if(DK_GetOS() == "Win32"){
+		GIT = "C:/Program Files/Git/bin/git.exe";
+		GIT = DKFile_GetShortName(GIT);
+	}
+	if(DK_GetOS() == "Win64"){
+		GIT = "C:/Program Files/Git/bin/git.exe";
+		GIT = DKFile_GetShortName(GIT);
+	}
+	if(DK_GetOS() == "Mac"){
+		GIT = "git";
+	}
+	if(DK_GetOS() == "Linux"){
+		GIT = "/usr/bin/git";
+	}
+
+	DKCreate("DKGit/GitMenu.html", function(){
+		DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
+		DKAddEvent("Git Update", "click", GitMenu_OnEvent);
+		DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
+	});
 }
 
 //////////////////////
