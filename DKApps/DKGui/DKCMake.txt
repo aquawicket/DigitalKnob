@@ -3,7 +3,7 @@
 DKSET(USE_DKCef ON)
 
 IF(WIN)
-	##DKDEPEND(far)
+	DKDEPEND(far)
 ENDIF()
 ##DKDEPEND(DKEmscripten)
 ##DKDEPEND(doxygen-1.8.11)
