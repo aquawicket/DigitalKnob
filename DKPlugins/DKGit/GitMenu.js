@@ -44,10 +44,10 @@ function GitMenu_OnEvent(event)
 	//DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event,"Git Update")){
-		DKThread_DKQueue("GitUpdate","DKGit_GitUpdate();");
+		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
 	if(DK_Id(event,"Git Commit")){
-		DKThread_DKQueue("GitCommit","DKGit_GitCommit();");
+		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
