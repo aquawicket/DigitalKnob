@@ -473,14 +473,6 @@ function DKBuild_SvnCommit()
 //	}
 //}
 
-/////////////////////////////////
-function DKBuild_GitCredentials()
-{
-	DKLog("Git Credentials... \n");
-	//how do we let git remember out login for repositories
-	//we don't want to have to log in on every commit.
-}
-
 ///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
