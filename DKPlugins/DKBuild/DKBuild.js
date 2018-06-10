@@ -9,7 +9,7 @@ var TYPE = "";  //Debug, Release, ALL
 var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
-var SVN = "";
+//var SVN = "";
 var CMAKE = "";
 var NDK = "";
 var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
@@ -29,8 +29,8 @@ function DKBuild_Init()
 	//DKLog(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
-		SVN = "C:/Program Files/Subversion/bin/svn.exe";
-		SVN = DKFile_GetShortName(SVN);
+		//SVN = "C:/Program Files/Subversion/bin/svn.exe";
+		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
@@ -38,8 +38,8 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Win64"){
 		DKPATH = "C:/digitalknob";
-		SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
-		SVN = DKFile_GetShortName(SVN);
+		//SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
+		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
@@ -47,13 +47,13 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
-		SVN = "svn";
+		//SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aqualinux/Desktop/digitalknob";
-		SVN = "/usr/bin/svn";
+		//SVN = "/usr/bin/svn";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
 	}
@@ -72,48 +72,6 @@ function DKBuild_Init()
 function DKBuild_End()
 {
 	//DKLog("DKBuild_End()\n");
-}
-
-//////////////////////////////
-function DKBuild_ValidateSvn()
-{
-	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for SVN \n");
-	//DKLog(SVN+"\n");
-	if(!DKFile_Exists(SVN)){
-		DKLog("Please install SVN \n");
-		DKBuild_InstallSvn();
-	}
-	DKLog("Found SVN \n");
-	if(DK_GetOS() == "Mac"){
-		SVN = "svn";
-	}
-}
-
-/////////////////////////////
-function DKBuild_InstallSvn()
-{
-	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Svn \n");
-	var assets = DKAssets_LocalAssets();
-	
-	if(DK_GetOS() == "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
-		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
-	}
-	else if(DK_GetOS() == "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
-		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
-	}
-	else if(DK_GetOS() == "Mac"){
-		//TODO
-	}
-	else if(DK_GetOS() == "Linux"){
-		DK_Execute("sudo apt-get install subversion");
-	}
-	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
-	}
 }
 
 ////////////////////////////////
@@ -305,43 +263,6 @@ function DKBuild_OsCheck()
 		DKLog("iOS is not capable of compiling DKApps..  please use a desktop system.\n"); return false;
 	}
 	return true;
-}
-
-////////////////////////////
-function DKBuild_SvnUpdate()
-{
-	DKLog("Svn Update... \n");
-	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
-	
-	var mysvn = DKAssets_LocalAssets()+"mysvn.txt";
-	if(!DKFile_Exists(mysvn)){ mysvn = DKPATH+"/mysvn.txt"; } //check for /mysvn.txt
-	
-	//TODO: Multipe user folders
-	
-	if(DKAvailable("DKAudio")){
-		DKCreate("DKAudio");
-	}
-	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_PlaySound("DKBuild/ding.wav");
-	}
-}
-
-////////////////////////////
-function DKBuild_SvnCommit()
-{
-	DKLog("Svn Commit... \n");
-	DK_Execute(SVN +" cleanup "+DKPATH);
-	DK_Execute(SVN +" commit -m update "+DKPATH);
-	
-	//TODO: Multipe user folders
-	
-	if(DKAvailable("DKAudio")){
-		DKCreate("DKAudio");
-	}
-	if(DKValid("DKAudioJS,DKAudioJS0")){
-		DKAudio_PlaySound("DKBuild/ding.wav");
-	}
 }
 
 ///////////////////////////////////
