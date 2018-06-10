@@ -88,8 +88,8 @@ function TaskbarMenu_OnEvent(event)
 	
 	if(DK_Id(event,"Git")){
 		//DKCreate("DKBuild/GitMenu.js", function(){
-		//	DKMenu_ValidatePosition("DKBuild/GitMenu.html");
-		//	DKWidget_SetProperty("DKBuild/GitMenu.html","top",DKWindow_GetMouseY()-30+"px");
+		//	DKMenu_ValidatePosition("DKGit/GitMenu.html");
+		//	DKWidget_SetProperty("DKGit/GitMenu.html","top",DKWindow_GetMouseY()-30+"px");
 		//});
 		DKCreate("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
