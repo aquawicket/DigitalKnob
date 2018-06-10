@@ -25,6 +25,7 @@ function DKBuild_Init()
 	//DKLog("DKBuild_Init() \n");
 	DKCreate("DKThreadPool");
 	DKCreate("DKCurl");
+	DKCreate("DKGit/DKGit.js", function(){});
 
 	//DKLog(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
