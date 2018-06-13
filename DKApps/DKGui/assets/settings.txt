@@ -9,8 +9,8 @@
 [LOG_INFO] ON
 [LOG_WARNINGS] ON
 [LOG_ERRORS] ON
-[LOG_FILE] ON
-[LOG_LINES] ON
+[LOG_FILE] OFF
+[LOG_LINES] OFF
 [LOG_SHOW]
 [SVN] https://github.com/aquawicket/DigitalKnob/trunk/
 [MYSVN]

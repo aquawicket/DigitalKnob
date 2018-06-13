@@ -3,7 +3,8 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	//DKLog("GitMenu_Init()\n", DKDEBUG);
+	DKLog("GitMenu_Init()\n", DKINFO);
+	DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKThreadPool");
 
 	//DKLog(DK_GetOS()+"\n");
