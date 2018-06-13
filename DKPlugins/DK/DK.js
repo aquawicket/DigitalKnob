@@ -517,15 +517,15 @@ function DKAddEvent(id, type, Function)
 	//DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n");
 	
 	if(typeof id != "string"){
-		DKLog("DKAddEvent(id, type, Function): id invalid\n", DKERROR);
+		DKLog("DKAddEvent(id, type, Function): id invalid\n", DKWARN);
 		return;
 	}
 	if(typeof type != "string"){
-		DKLog("DKAddEvent(id, type, Function): type invalid\n", DKERROR);
+		DKLog("DKAddEvent(id, type, Function): type invalid\n", DKWARN);
 		return;
 	}
 	if(typeof Function != "function"){
-		DKLog("DKAddEvent(id, type, Function): Function invalid\n", DKERROR);
+		DKLog("DKAddEvent(id, type, Function): Function invalid\n", DKWARN);
 		return;
 	}
 	if(id == "GLOBAL"){
@@ -535,7 +535,7 @@ function DKAddEvent(id, type, Function)
 		element = document.getElementById(id);
 	}
 	if(!element){
-		DKLog("DKAddEvent("+id+","+type+","+Function.name+"): element invalid\n", DKERROR);
+		DKLog("DKAddEvent("+id+","+type+","+Function.name+"): element invalid\n", DKWARN);
 		return;
 	}
 	
