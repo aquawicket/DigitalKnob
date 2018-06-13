@@ -10,7 +10,9 @@ DKCreate("DK/init.js", function(){});
 //////////////////////////
 function app_LoadPlugins()
 {
-	DKCreate("DKSDLText"); //SDL fps counter
+	if(USE_SDL){
+		DKCreate("DKSDLText"); //SDL fps counter
+	}
 	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
 }
