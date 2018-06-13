@@ -5,7 +5,6 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	//DKCreate("DKGui/TaskbarMenu.html,DKGui/DKOS.html", function(){
 	DKCreate("DKGui/TaskbarMenu.html", function(){
 		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
@@ -153,6 +152,14 @@ function TaskbarMenu_OnEvent(event)
 		}
 	}
 	DKClose("DKGui/TaskbarMenu.js");
+}
+
+/////////////////////////////////////
+function TaskbarMenu_Add(title, code)
+{
+	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
+	var ele = DKWidget_CreateElement("DKGui/TaskbarMenu.html", "div", "TaskbarMenu_item");
+	DKWidget_SetInnerHtml(ele, title);
 }
 
 /////////////////////////////////
