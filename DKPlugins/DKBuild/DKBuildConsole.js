@@ -4,8 +4,6 @@ var working = true;
 function DKBuildConsole_Init()
 {
 	DKCreate("DKBuild/DKBuild.js", function(){
-		//DKBuild_ValidateSvn();
-		//DKGit_ValidateGit();
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
 		DKBuild_ValidateGcc();
@@ -21,7 +19,6 @@ function DKBuildConsole_Init()
 function DKBuildConsole_End()
 {
 	//DKLog("DKBuildConsole_End()\n");
-	
 	DKClose("DKBuild/DKBuild.js");
 }
 
@@ -47,10 +44,14 @@ function DKBuildConsole_ChooseUpdate()
 		DK_Exit();
 	}
 	if(key == 121){ //y key
-		DKGit_GitUpdate();
+		DKCreate("DKGit/DKGit.js", function(){
+			DKGit_GitUpdate();
+		});
 	}
 	if(key == 99){ //c key
-		DKGit_GitCommit();
+		DKCreate("DKGit/DKGit.js", function(){
+			DKGit_GitCommit();
+		});
 	}
 	if(key == 114){ //r key
 		DKBuild_ResetAppsPlugins();
