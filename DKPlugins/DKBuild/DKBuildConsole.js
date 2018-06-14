@@ -5,7 +5,7 @@ function DKBuildConsole_Init()
 {
 	DKCreate("DKBuild/DKBuild.js", function(){
 		//DKBuild_ValidateSvn();
-		DKGit_ValidateGit();
+		//DKGit_ValidateGit();
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
 		DKBuild_ValidateGcc();
