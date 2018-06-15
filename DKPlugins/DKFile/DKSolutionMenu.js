@@ -17,6 +17,7 @@ function DKSolutionMenu_Init()
 	DKAddEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Cut", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_Import", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_GitAdd", "click", DKSolutionMenu_OnEvent);
 }
 
@@ -60,6 +61,9 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	if(DK_Id(event,"DKSolutionMenu_Paste")){
 		DKSolutionMenu_Paste();
+	}
+	if(DK_Id(event,"DKSolutionMenu_Import")){
+		DKSolutionMenu_Import();
 	}
 	if(DK_Id(event,"DKSolutionMenu_GitAdd")){
 		DKSolutionMenu_GitAdd();
@@ -226,6 +230,12 @@ function DKSolutionMenu_Paste()
 {
 	//DKLog("DKSolutionMenu_Paste()\n");
 	
+	//TODO
+}
+
+////////////////////////////////
+function DKSolutionMenu_Import()
+{
 	//TODO
 }
 
