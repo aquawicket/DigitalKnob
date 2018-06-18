@@ -5,7 +5,7 @@ var second_flag = false;
 /////////////////////
 function Clock_Init()
 {
-	DKCreate("DKGui/Clock.html,DKGui/Taskbar.html");
+	DKCreate("DKGui/Clock.html,DKGui/DKTaskbar/Taskbar.html");
 	DKAddEvent("GLOBAL", "second", Clock_OnEvent);
 	Clock_Update();
 }

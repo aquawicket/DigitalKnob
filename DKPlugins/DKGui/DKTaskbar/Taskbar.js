@@ -4,12 +4,12 @@ var animation;
 function Taskbar_Init()
 {
 	//DKCreate("DKGui/Taskbar.html,DKGui/DKOS.html");
-	DKCreate("DKGui/Taskbar.html");
+	DKCreate("DKGui/DKTaskbar/Taskbar.html");
 	DKCreate("DKGui/scale.js", function(){});
 	DKCreate("DKGui/Clock.js", function(){});
 	if(DK_GetBrowser() == "Rocket"){
 		DKCreate("DKDebug/BugReport.js", function(){});
-		DKWidget_AppendChild("DKGui/Taskbar.html","DKDebug/BugReport.html"); //reparent
+		DKWidget_AppendChild("DKGui/DKTaskbar/Taskbar.html","DKDebug/BugReport.html"); //reparent
 	}
 	DKAddEvent("start", "click", Taskbar_OnEvent);
 	DKAddEvent("test_animate", "click", Taskbar_OnEvent);
@@ -19,7 +19,7 @@ function Taskbar_Init()
 function Taskbar_End()
 {
 	DKRemoveEvents(Taskbar_OnEvent);
-	DKClose("DKGui/Taskbar.html");
+	DKClose("DKGui/DKTaskbar/Taskbar.html");
 	DKClose("DKGui/scale.js");
 	DKClose("DKGui/Clock.js");
 	DKClose("DKDebug/BugReport.js");
@@ -50,7 +50,7 @@ function Taskbar_Animate()
     } 
 	else{
         pos++; 
-		DKWidget_SetProperty("DKGui/Taskbar.html","bottom",pos+"rem");
+		DKWidget_SetProperty("DKGui/DKTaskbar/Taskbar.html","bottom",pos+"rem");
 		DK_DoFrame();
     }
 }
