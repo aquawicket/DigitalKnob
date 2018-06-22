@@ -56,7 +56,9 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
-		app_LoadPage();
+		if(typeof app_LoadPage === "function"){
+			app_LoadPage();
+		}
 	}
 	else if(USE_SDL && USE_CEF){
 		DKLog("Creating SDL -> CEF -> GUI \n");
@@ -82,8 +84,12 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKAddEvent("GLOBAL", "keydown", init_OnEvent);
 	}
 	
-	app_LoadPlugins();
+	if(typeof app_LoadPlugins === "function"){
+		app_LoadPlugins();
+	}
 }
 else{  //Javascript: V8, WEBVIEW or Duktape
-	app_LoadPage();
+	if(typeof app_LoadPage === "function"){
+		app_LoadPage();
+	}
 }
