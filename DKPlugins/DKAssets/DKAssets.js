@@ -42,9 +42,9 @@ pathname = pathname.replace("index.html", "");
 //if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
 
 var protocol = document.location.protocol;
-online_assets = "http://"+hostname+pathname;
+online_assets = protocol+"//"+hostname+pathname;
 if(protocol != "file:"){
-	local_assets = "http://"+hostname+pathname;
+	local_assets = protocol+"//"+hostname+pathname;
 }
 
 appfilename = pathname.replace("/","");
