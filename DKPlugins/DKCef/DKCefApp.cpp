@@ -290,13 +290,12 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(same(type, "keydown")){ return false; }
 	if(same(type, "keypress")){ return false; }
 
-	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
-	//DKLog(string+"\n", DKINFO);
 	CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
 	if(!frame){
-		DKLog("DKCefApp::SendEvent(): frame invalid\n", DKWARN);
+		DKLog("DKCefApp::SendEvent("+id+","+type+","value"): frame invalid\n", DKWARN);
 		return false;
 	}
+	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	
 	return true;
