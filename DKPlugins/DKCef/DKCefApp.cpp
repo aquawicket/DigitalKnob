@@ -377,7 +377,7 @@ void DKCefApp::OnContextInitialized()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
-	DKLog(" DKCefApp::OnContextCreated\n", DKINFO);
+	DKLog("DKCefApp::OnContextCreated\n", DKINFO);
 
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
