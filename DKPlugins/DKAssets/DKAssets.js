@@ -50,8 +50,13 @@ if(protocol != "file:"){
 appfilename = pathname.replace("/","");
 appfilename = appfilename.replace("/","");
 
-//var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
-//absolutepath = absolutepath.replace("//","/");
+if(DK_GetBrowser() != "CEF"){
+	var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
+	absolutepath = absolutepath.replace("//","/");
+}
+else{
+	absolutepath = online_assets;
+}
 //if(absolutepath){online_assets = absolutepath;}
 
 DKLog("href: "+href+"\n");
