@@ -19,6 +19,7 @@ function IconMaker_Create(AppPath)
 	//Create Windows Icon
 	DKFile_MkDir(AppPath+"/icons/windows");
 	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 "+AppPath+"/icons/windows/icon.ico");
+	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=16 "+AppPath+"/assets/favicon.ico");
 	
 	//Create Mac Icons
 	if(DK_GetOS() == "Mac"){
