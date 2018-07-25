@@ -89,6 +89,11 @@ function GetAbsolutePath($dir)
 	else{
 		$aPath = $root.$dir;
 	}
+	
+	//if(realpath($aPath)){
+	//	$aPath = realpath($aPath);
+	//	str_replace($dir, "", $aPath);
+	//}
 	//DKLog($aPath);
 	return $aPath;
 }

@@ -342,7 +342,7 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////////
 	function DKFile_GetAbsolutePath(url)
 	{
-		//DKLog("DKFile_GetAbsolutePath("+url+")\n");
+		DKLog("DKFile_GetAbsolutePath("+url+")\n");
 		
 		if(!url){ url = "/"; }
 		if(url.indexOf("file:///") > -1){ url = pathname; }
