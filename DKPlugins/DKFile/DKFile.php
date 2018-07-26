@@ -82,19 +82,13 @@ if($_GET["GetRelativePath"])
 function GetAbsolutePath($dir)
 {
 	$root = substr($_SERVER['SCRIPT_FILENAME'], 0, -strlen($_SERVER['SCRIPT_NAME'])+1);
-	//DKLog($root);
 	if(strpos($dir, $root) !== FALSE){
 		$aPath = $dir;
 	}
 	else{
 		$aPath = $root.$dir;
 	}
-	
-	//if(realpath($aPath)){
-	//	$aPath = realpath($aPath);
-	//	str_replace($dir, "", $aPath);
-	//}
-	//DKLog($aPath);
+	//return pathinfo($aPath,PATHINFO_DIRNAME)."/".pathinfo($aPath,PATHINFO_BASENAME);
 	return $aPath;
 }
 if($_GET["GetAbsolutePath"])
@@ -105,8 +99,6 @@ if($_GET["GetAbsolutePath"])
 //////////////////////////
 function IsDirectory($dir)
 {
-	//$dir = GetRelativePath($dir);
-	//DKLog("IsDirectory(".$dir.")");
 	if(is_dir($dir)){
 		return "1";
 	}
@@ -123,7 +115,6 @@ if($_GET["IsDirectory"])
 function DirectoryContents($dir)
 {
 	$myDirectory = opendir($dir);
-	//DKLog("opendir(".$dir.")");
 	while($entryName = readdir($myDirectory)){
 		$dirArray[] = $entryName;
 	}

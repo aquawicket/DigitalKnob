@@ -331,7 +331,7 @@ if(DK_GetBrowser() != "CEF"){
 		//url = url.replace(assets, online_assets);
 		//var path = DKFile_VerifyPath(url);
 		//if(!path){ return 0; }
-		send = online_assets+"/DKFile/DKFile.php?DirectoryContents="+url;
+		send = online_assets+"DKFile/DKFile.php?DirectoryContents="+url;
 		DKLog("ajaxGetUrl("+send+") \n");
 		var result = ajaxGetUrl(send);
 		return result;
@@ -342,15 +342,18 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////////
 	function DKFile_GetAbsolutePath(url)
 	{
-		DKLog("DKFile_GetAbsolutePath("+url+")\n");
+		//DKLog("DKFile_GetAbsolutePath("+url+")\n");
 		
 		if(!url){ url = "/"; }
 		if(url.indexOf("file:///") > -1){ url = pathname; }
 		
-		send = online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+url;
+		url = url.replace(protocol+"//"+hostname+"/","");
+		url = url.replace("//","/");
+		DKLog("DKFile_GetAbsolutePath("+url+")\n");
+		send = online_assets+"DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
-		result = result.replace(protocol+"//"+hostname+"/","");
-		result = result.replace("//","/");
+		//result = result.replace(protocol+"//"+hostname+"/","");
+		//result = result.replace("//","/");
 	
 		DKLog("DKFile_GetAbsolutePath("+url+") -> "+result+"\n");
 		return result;
