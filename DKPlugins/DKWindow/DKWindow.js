@@ -2,7 +2,7 @@
 
 function DKWindow_SetHeight(){ DKLog("DKWindow_SetHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetWidth(){ DKLog("DKWindow_SetWidth(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
+//function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetY(){ DKLog("DKWindow_SetY(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 
 //////////////////////////
@@ -96,13 +96,15 @@ function DKWindow_IsFullscreen()
 	return true;
 }
 
-/////////////////////////
-//function DKWindow_SetX(x)
-//{
-//	DKLog("DKWindow_SetX("+x+")\n");
-//	window.moveTo(x, DKWindow_GetY());
-//	return true;
-//}
+/////////////////////////////
+if(DK_GetBrowser() != "CEF"){
+	function DKWindow_SetX(x)
+	{
+		DKLog("DKWindow_SetX("+x+")\n");
+		window.moveTo(x, DKWindow_GetY());
+		return true;
+	}
+}
 
 ////////////////////////////
 function DKWindow_Windowed()
