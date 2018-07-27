@@ -25,6 +25,7 @@ bool DKWindowV8::Init()
 	DKV8::AttachFunction("DKWindow_Hide", DKWindowV8::Hide);
 	DKV8::AttachFunction("DKWindow_IsFullscreen", DKWindowV8::IsFullscreen);
 	DKV8::AttachFunction("DKWindow_IsVisible", DKWindowV8::IsVisible);
+	DKV8::AttachFunction("DKWindow_Maximize", DKWindowV8::Maximize);
 	DKV8::AttachFunction("DKWindow_MessageBox", DKWindowV8::MessageBox);
 	DKV8::AttachFunction("DKWindow_Minimize", DKWindowV8::Minimize);
 	DKV8::AttachFunction("DKWindow_Restore", DKWindowV8::Restore);
@@ -188,6 +189,13 @@ bool DKWindowV8::IsVisible(CefArgs args, CefReturn retval)
 	bool visible;
 	if(!DKWindow::IsVisible(visible)){ return false; } 
 	if(!retval->SetInt(0, visible)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKWindowV8::Maximize(CefArgs args, CefReturn retval)
+{
+	if(!DKWindow::Maximize()){ return false; }
 	return true;
 }
 

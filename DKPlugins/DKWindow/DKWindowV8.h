@@ -29,6 +29,7 @@ public:
 	static bool Hide(CefArgs args, CefReturn retval);
 	static bool IsFullscreen(CefArgs args, CefReturn retval);
 	static bool IsVisible(CefArgs args, CefReturn retval);
+	static bool Maximize(CefArgs args, CefReturn retval);
 	static bool MessageBox(CefArgs args, CefReturn retval);
 	static bool Minimize(CefArgs args, CefReturn retval);
 	static bool Restore(CefArgs args, CefReturn retval);

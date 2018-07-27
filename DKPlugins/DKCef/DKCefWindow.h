@@ -34,6 +34,7 @@ public:
 	bool Hide(const void* input, void* output);
 	bool IsFullscreen(const void* input, void* output);
 	bool IsVisible(const void* input, void* output);
+	bool Maximize(const void* input, void* output);
 	bool MessageBox(const void* input, void* output);
 	bool Minimize(const void* input, void* output);
 	bool Restore(const void* input, void* output);

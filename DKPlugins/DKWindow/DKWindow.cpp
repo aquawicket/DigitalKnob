@@ -320,6 +320,22 @@ bool DKWindow::IsVisible(bool& visible)
 	return false;
 }
 
+/////////////////////////
+bool DKWindow::Maximize()
+{
+	if(DKClass::HasFunc("DKCefWindow::Maximize")) {
+		return DKClass::CallFunc("DKCefWindow::Maximize", NULL, NULL);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::Maximize")){
+		return DKClass::CallFunc("DKSDLWindow::Maximize", NULL, NULL);
+	}
+	if(DKClass::HasFunc("DKOSGWindow::Maximize")){
+		return DKClass::CallFunc("DKOSGWindow::Maximize", NULL, NULL);
+	}
+	DKLog("DKWindow::Maximize(): No function available \n", DKWARN);
+	return false;
+}
+
 ////////////////////////////////////////
 bool DKWindow::MessageBox(DKString& msg)
 {

@@ -22,6 +22,7 @@ DKCefWindow::DKCefWindow()
 	DKClass::RegisterFunc("DKCefWindow::Hide", &DKCefWindow::Hide, this);
 	DKClass::RegisterFunc("DKCefWindow::IsFullscreen", &DKCefWindow::IsFullscreen, this);
 	DKClass::RegisterFunc("DKCefWindow::IsVisible", &DKCefWindow::IsVisible, this);
+	DKClass::RegisterFunc("DKCefWindow::Maximize", &DKCefWindow::Maximize, this);
 	DKClass::RegisterFunc("DKCefWindow::MessageBox", &DKCefWindow::MessageBox, this);
 	DKClass::RegisterFunc("DKCefWindow::Minimize", &DKCefWindow::Minimize, this);
 	DKClass::RegisterFunc("DKCefWindow::Restore", &DKCefWindow::Restore, this);
@@ -414,6 +415,29 @@ bool DKCefWindow::IsVisible(const void* input, void* output)
 	return true;
 #endif
 	DKLog("DKCefWindow::IsVisible(): not implemented on this OS\n", DKWARN);
+	return false;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefWindow::Maximize(const void* input, void* output)
+{
+#ifdef WIN32
+	HWND hwnd = dkCef->current_browser->GetHost()->GetWindowHandle();
+	ShowWindow(hwnd, SW_MAXIMIZE);
+	return true;
+#endif
+#ifdef MAC
+	//TODO
+	NSView* nsview = dkCef->current_browser->GetHost()->GetWindowHandle();
+	if(!nsview){ return false; }
+#endif
+#ifdef LINUX
+	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
+	if(!gdk_window){ return false; }
+	gdk_window_maximize(gdk_window);
+	return true;
+#endif
+	DKLog("DKCefWindow::Maximize(): not implemented on this OS\n", DKWARN);
 	return false;
 }
 

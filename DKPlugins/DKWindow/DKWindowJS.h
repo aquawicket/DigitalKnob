@@ -34,6 +34,7 @@ public:
 	static int Hide(duk_context* ctx);
 	static int IsFullscreen(duk_context* ctx);
 	static int IsVisible(duk_context* ctx);
+	static int Maximize(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);
 	static int Minimize(duk_context* ctx);
 	static int Restore(duk_context* ctx);

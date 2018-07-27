@@ -25,6 +25,7 @@ bool DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide);
 	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen);
 	DKDuktape::AttachFunction("DKWindow_IsVisible", DKWindowJS::IsVisible);
+	DKDuktape::AttachFunction("DKWindow_Maximize", DKWindowJS::Maximize);
 	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize);
 	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore);
@@ -179,6 +180,13 @@ int DKWindowJS::IsVisible(duk_context* ctx)
 	bool visible;
 	if(!DKWindow::IsVisible(visible)){ return 0; } 
 	duk_push_int(ctx, visible);
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKWindowJS::Maximize(duk_context* ctx)
+{
+	if(!DKWindow::Maximize()){ return 0; }
 	return 1;
 }
 

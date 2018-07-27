@@ -68,6 +68,9 @@ public:
 	///Get the Visible status of the window 
 	static bool IsVisible(bool& visible);
 
+	///Maximize the window
+	static bool Maximize();
+
 	///Display a message box
 	static bool MessageBox(DKString& msg);
 
