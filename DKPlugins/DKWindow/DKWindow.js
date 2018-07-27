@@ -1,20 +1,31 @@
 //BROWSER
 
-function DKWindow_Fullscreen(){ DKLog("DKWindow_Fullscreen(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_GetX(){ DKLog("DKWindow_GetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_GetY(){ DKLog("DKWindow_GetY(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-function DKWindow_IsFullscreen(){ DKLog("DKWindow_IsFullscreen(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetHeight(){ DKLog("DKWindow_SetHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetWidth(){ DKLog("DKWindow_SetWidth(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetY(){ DKLog("DKWindow_SetY(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-function DKWindow_Windowed(){ DKLog("DKWindow_Windowed(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 
 //////////////////////////
 function DKWindow_Init(){}
 
 /////////////////////////
 function DKWindow_End(){}
+
+//////////////////////////////
+function DKWindow_Fullscreen()
+{
+	if(document.documentElement.requestFullScreen){  
+		document.documentElement.requestFullScreen();  
+	} 
+	else if(document.documentElement.mozRequestFullScreen){  
+		document.documentElement.mozRequestFullScreen();  
+	} 
+	else if(document.documentElement.webkitRequestFullScreen){  
+		document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+	} 
+}
 
 ////////////////////////////
 function DKWindow_GetWidth()
@@ -58,4 +69,27 @@ function DKWindow_GetMouseY()
 function DKWindow_GetPixelRatio()
 {
 	return window.devicePixelRatio || 1;
+}
+
+////////////////////////////////
+function DKWindow_IsFullscreen()
+{
+	if((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)){
+		return false;
+	}
+	return true;
+}
+
+////////////////////////////
+function DKWindow_Windowed()
+{
+	if(document.cancelFullScreen){  
+		document.cancelFullScreen();  
+	} 
+	else if(document.mozCancelFullScreen){  
+		document.mozCancelFullScreen();  
+	} 
+	else if(document.webkitCancelFullScreen){  
+		document.webkitCancelFullScreen();  
+	} 
 }
