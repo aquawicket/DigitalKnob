@@ -141,6 +141,7 @@ function DK_GetTime()
 	var d = new Date();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
+	minute = minute > 9 ? minute : '0' + minute; //pad 0
 	var time = hour;
 	time += ":";
 	time += minute;
