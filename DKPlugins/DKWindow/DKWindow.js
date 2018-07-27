@@ -1,7 +1,5 @@
 //BROWSER
 
-function DKWindow_GetX(){ DKLog("DKWindow_GetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-function DKWindow_GetY(){ DKLog("DKWindow_GetY(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetHeight(){ DKLog("DKWindow_SetHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetWidth(){ DKLog("DKWindow_SetWidth(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
 function DKWindow_SetX(){ DKLog("DKWindow_SetX(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
@@ -25,19 +23,6 @@ function DKWindow_Fullscreen()
 	else if(document.documentElement.webkitRequestFullScreen){  
 		document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
 	} 
-}
-
-////////////////////////////
-function DKWindow_GetWidth()
-{ 
-	var w = window,
-    d = document,
-    e = d.documentElement,
-    g = d.getElementsByTagName('body')[0],
-    x = w.innerWidth || e.clientWidth || g.clientWidth,
-    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	//DKLog("DKWindow_GetWidth(): = "+x.toString());
-	return x;
 }
 
 /////////////////////////////
@@ -69,6 +54,31 @@ function DKWindow_GetMouseY()
 function DKWindow_GetPixelRatio()
 {
 	return window.devicePixelRatio || 1;
+}
+
+////////////////////////////
+function DKWindow_GetWidth()
+{ 
+	var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+	//DKLog("DKWindow_GetWidth(): = "+x.toString());
+	return x;
+}
+
+////////////////////////
+function DKWindow_GetX()
+{
+	 return window.screenX;
+}
+
+////////////////////////
+function DKWindow_GetY()
+{
+	 return window.screenY;
 }
 
 ////////////////////////////////
