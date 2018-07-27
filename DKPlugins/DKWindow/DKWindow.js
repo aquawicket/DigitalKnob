@@ -22,7 +22,11 @@ function DKWindow_Fullscreen()
 	} 
 	else if(document.documentElement.webkitRequestFullScreen){  
 		document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
-	} 
+	}
+	else{
+		return false;
+	}
+	return true;
 }
 
 /////////////////////////////
@@ -72,13 +76,15 @@ function DKWindow_GetWidth()
 ////////////////////////
 function DKWindow_GetX()
 {
-	 return window.screenX;
+	//DKLog("DKWindow_GetX() = "+window.screenX+"\n");
+	return window.screenX;
 }
 
 ////////////////////////
 function DKWindow_GetY()
 {
-	 return window.screenY;
+	//DKLog("DKWindow_GetY() = "+window.screenY+"\n");
+	return window.screenY;
 }
 
 ////////////////////////////////
@@ -89,6 +95,14 @@ function DKWindow_IsFullscreen()
 	}
 	return true;
 }
+
+/////////////////////////
+//function DKWindow_SetX(x)
+//{
+//	DKLog("DKWindow_SetX("+x+")\n");
+//	window.moveTo(x, DKWindow_GetY());
+//	return true;
+//}
 
 ////////////////////////////
 function DKWindow_Windowed()
@@ -101,5 +115,9 @@ function DKWindow_Windowed()
 	} 
 	else if(document.webkitCancelFullScreen){  
 		document.webkitCancelFullScreen();  
-	} 
+	}
+	else{
+		return false;
+	}
+	return true;
 }
