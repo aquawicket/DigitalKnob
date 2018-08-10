@@ -1,3 +1,7 @@
+if(document.location.protocol == "http:"){ //redirect to https
+	window.location.href = "https://"+document.location.hostname+document.location.pathname;
+}
+
 var USE_CEF = 1;     //Desktop
 var USE_WEBVIEW = 1; //Android, iOS?
 var USE_SDL = 0;     //Use with caution
