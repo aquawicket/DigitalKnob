@@ -56,7 +56,7 @@ function UrlExists(url, fn)
 				//output.value = request.responseText;
 				DKLog(url+" status: "+request.status, DKWARN);
 				fn && fn(true);
-				//return;// true;
+				return true;
 			}
 			else{
 				DKLog("AJAX ERROR: "+request.statusText, DKWARN); //report error
@@ -83,17 +83,18 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////
 	function DKFile_Exists(path, fn)
 	{
-		path = DKFile_GetAbsolutePath(path);
 		DKLog("DKFile_Exists("+path+") \n");
 		if(!path){ return false; }
 	
-		if(DKFile_IsDirectory(path)){
+		dir = DKFile_GetAbsolutePath(path);
+		if(DKFile_IsDirectory(dir)){
 			fn && fn(true);
 			return true;
 		}
 	
 		UrlExists(path, function(rval){
 			fn && fn(rval);
+			return rval;
 		});
 	}
 }
