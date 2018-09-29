@@ -68,7 +68,8 @@ function UrlExists(url, fn)
 	}
 	
 	//try{ 
-		request.open("HEAD",url); 
+		request.open("HEAD",url);
+		//request.open("GET",url); 
 		request.send(); 
 	//}
 	//catch(err){
@@ -82,8 +83,14 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////
 	function DKFile_Exists(path, fn)
 	{
+		path = DKFile_GetAbsolutePath(path);
 		DKLog("DKFile_Exists("+path+") \n");
 		if(!path){ return false; }
+	
+		if(DKFile_IsDirectory(path)){
+			fn && fn(true);
+			return true;
+		}
 	
 		UrlExists(path, function(rval){
 			fn && fn(rval);
