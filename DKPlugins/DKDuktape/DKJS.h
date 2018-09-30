@@ -81,7 +81,7 @@ public:
 	static int Reload(duk_context* ctx);
 	static int RightClick(duk_context* ctx);
 	static int Run(duk_context* ctx);
-	static int RunJavascript(duk_context* ctx);
+	static int RunDuktape(duk_context* ctx);
 	static int SetClipboard(duk_context* ctx);
 	static int SetClipboardFiles(duk_context* ctx);
 	static int SetCursorPos(duk_context* ctx);

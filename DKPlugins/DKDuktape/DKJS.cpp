@@ -110,7 +110,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_Reload", DKJS::Reload);
 	DKDuktape::AttachFunction("DK_RightClick", DKJS::RightClick);
 	DKDuktape::AttachFunction("DK_Run", DKJS::Run);
-	DKDuktape::AttachFunction("DK_RunJavascript", DKJS::RunJavascript);
+	DKDuktape::AttachFunction("DK_RunDuktape", DKJS::RunDuktape);
 	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard);
 	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles);
 	DKDuktape::AttachFunction("DK_SetCursorPos", DKJS::SetCursorPos);
@@ -667,7 +667,7 @@ int DKJS::GetValue(duk_context* ctx)
 	if(arry.size() < 3){ 
 		if(DKClass::DKValid("DKWidget,DKWidget0")){
 			DKString rval;
-			DKDuktape::RunJavascript("DKWidget_GetValue(\""+evt+"\");", rval);
+			DKDuktape::RunDuktape("DKWidget_GetValue(\""+evt+"\");", rval);
 			if(rval.empty()){
 				return 0;
 			}
@@ -889,13 +889,11 @@ int DKJS::Run(duk_context* ctx)
 }
 
 /////////////////////////////////////////
-int DKJS::RunJavascript(duk_context* ctx)
+int DKJS::RunDuktape(duk_context* ctx)
 {
 	DKString code = duk_require_string(ctx, 0);
-	DKLog("RunJavascript("+code+")\n", DKDEBUG);
-
 	DKString rval;
-	DKDuktape::RunJavascript(code, rval);
+	DKDuktape::RunDuktape(code, rval);
 	if(rval.empty()){
 		return 0;
 	}

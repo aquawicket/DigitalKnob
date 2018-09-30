@@ -19,7 +19,7 @@ public:
 	static bool LoadFile(const DKString& path);
 	static bool OnEvent(DKEvent* event);
 	static bool Reload();
-	static bool RunJavascript(const DKString& code, DKString& rval);
+	static bool RunDuktape(const DKString& code, DKString& rval);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);

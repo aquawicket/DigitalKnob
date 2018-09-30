@@ -517,7 +517,7 @@ bool DKCef::Stop(const int& num)
 ////////////////////////////////////////////////////////
 bool DKCef::RunDuktape(DKString& string, DKString& rval)
 {
-	return DKDuktape::RunJavascript(string, rval);
+	return DKDuktape::RunDuktape(string, rval);
 }
 
 ///////////////////////////////////////////

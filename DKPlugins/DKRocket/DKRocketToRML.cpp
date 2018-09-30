@@ -177,7 +177,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		for(unsigned int s=0; s<sources.size(); ++s){
 			DKString file = sources[s]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
 			DKString rval;
-			DKDuktape::RunJavascript("DKRocketAudio_Open(\""+file+"\");", rval);
+			DKDuktape::RunDuktape("DKRocketAudio_Open(\""+file+"\");", rval);
 		}
 	}
 
