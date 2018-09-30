@@ -389,7 +389,7 @@ void DKDuktape::EventLoop()
 {
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
-		DKString rval; //unused
+		DKString rval;
 		DKDuktape::RunDuktape(codeToRun[0], rval);
 		codeToRun.erase(codeToRun.begin());
 	}

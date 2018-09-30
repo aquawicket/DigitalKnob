@@ -304,8 +304,16 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 {
 	DKString code = args->GetString(0);
 	DKString rval;
-	if(!DKCef::RunDuktape(code, rval)){ return false; }
-	if(!retval->SetString(0, rval)){ return false; }
+	if(!DKCef::RunDuktape(code, rval)){
+		DKLog("DKCefV8::RunDuktape():  DKCef::RunDuktape(code, rval) failed", DKWARN);
+		return false; 
+	}
+	if(!rval.empty()){
+		if(!retval->SetString(0, rval)){ 
+			DKLog("DKCefV8::RunDuktape() retval->SetString(0, rval) failed", DKWARN);
+			return false; 
+		}
+	}
 	return true;
 }
 
