@@ -7,6 +7,8 @@
 #include "DK/DKLog.h"
 #include "DKCef/DKCef.h"
 #include "DKCef/DKCefWindow.h"
+#include "DKDuktape/DKDuktape.h"
+
 
 #ifdef WIN32
 #include <delayimp.h>
@@ -512,7 +514,11 @@ bool DKCef::Stop(const int& num)
 	return true;
 }
 
-
+////////////////////////////////////////////////////////
+bool DKCef::RunDuktape(DKString& string, DKString& rval)
+{
+	return DKDuktape::RunJavascript(string, rval);
+}
 
 ///////////////////////////////////////////
 bool DKCef::RunJavascript(DKString& string)

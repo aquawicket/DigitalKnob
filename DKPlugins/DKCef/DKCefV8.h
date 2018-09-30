@@ -44,6 +44,7 @@ public:
 	static bool PrintFunctions(CefArgs args, CefReturn retval);
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
+	static bool RunDuktape(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
 	static bool SetClipboardFiles(CefArgs args, CefReturn retval);

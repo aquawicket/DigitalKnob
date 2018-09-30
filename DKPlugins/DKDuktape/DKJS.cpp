@@ -893,7 +893,13 @@ int DKJS::RunJavascript(duk_context* ctx)
 {
 	DKString code = duk_require_string(ctx, 0);
 	DKLog("RunJavascript("+code+")\n", DKDEBUG);
-	duk_eval_string(DKDuktape::ctx, code.c_str());
+
+	DKString rval;
+	DKDuktape::RunJavascript(code, rval);
+	if(rval.empty()){
+		return 0;
+	}
+	duk_push_string(ctx, rval.c_str());
 	return 1;
 }
 

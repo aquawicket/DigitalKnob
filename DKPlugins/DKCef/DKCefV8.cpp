@@ -37,6 +37,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
+	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
 	DKV8::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
@@ -287,6 +288,17 @@ bool DKCefV8::Run(CefArgs args, CefReturn retval)
 	DKString command = args->GetString(0);
 	DKString params = args->GetString(1);
 	return DKUtil::Run(command, params);
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
+{
+	DKString code = args->GetString(0);
+	DKLog("RunDuktape("+code+")\n", DKDEBUG);
+	DKString rval;
+	if(!DKCef::RunDuktape(code, rval)){ return false; }
+	if(!retval->SetString(0, rval)){ return false; }
+	return true;
 }
 
 ///////////////////////////////////////////////////////////

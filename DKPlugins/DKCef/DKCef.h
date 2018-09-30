@@ -36,6 +36,7 @@ public:
 	bool ShowDevTools(const int& num);
 	bool Stop(const int& num);
 
+	static bool RunDuktape(DKString& string, DKString& rval);
 	static bool RunJavascript(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
