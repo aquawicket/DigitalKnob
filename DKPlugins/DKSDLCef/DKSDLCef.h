@@ -121,6 +121,7 @@ public:
 		}
 		
 		else if(type == PET_POPUP){ //FIXME
+			DKLog("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n", DKINFO);
 			//if(dirtyRects.size() == 0){ return; }
 			if(!dkSdlCef->popup_image){
 				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
@@ -157,7 +158,9 @@ public:
 	//////////////////////////////////////////////////////////
 	void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
 	{
+		//TODO
 		DKLog("DKSDLCefHandler::OnPopupShow()\n", DKDEBUG);
+		return;
 
 		if(!show){
 			dkSdlCef->popup_image = NULL;
@@ -168,7 +171,9 @@ public:
 	////////////////////////////////////////////////////////////////////
 	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
 	{
+		//TODO
 		DKLog("DKSDLCefHandler::OnPopupSize()\n", DKDEBUG);
+		return;
 
 		if(rect.width <= 0 || rect.height <= 0){ return; }
 		dkSdlCef->popup_rect = rect;
@@ -223,8 +228,10 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
+		//TODO
 		DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
 
+		return false;
 		//DKEvent::SendEvent("GLOBAL", "DKCef_OnBeforePopup", target_url);
 		if(target_disposition == WOD_NEW_FOREGROUND_TAB){
 			dkCef->queue_new_browser = target_url;
