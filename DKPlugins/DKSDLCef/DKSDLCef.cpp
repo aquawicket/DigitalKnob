@@ -50,8 +50,6 @@ bool DKSDLCef::End()
 	return true;
 }
 
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type)
 {
