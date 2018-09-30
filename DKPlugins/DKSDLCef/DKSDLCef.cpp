@@ -28,7 +28,7 @@ bool DKSDLCef::Init()
 
 	SetupCef();
 	_mouseLMBdown = false;
-	_scrollFactor = 125.0f;
+	_scrollFactor = 120.0f;
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
