@@ -61,7 +61,7 @@ bool DKDuktape::Init()
 		LoadFile(app);
 	}
 
-	//DKApp::AddLoopFunc("RENDER", &DKDuktape::EventLoop, this);
+	//DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
 }
 
@@ -264,7 +264,13 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	return true;
 }
 
-
+//////////////////////////////////////////////////
+bool DKDuktape::QueueDuktape(const DKString& code)
+{
+	//TODO
+	DKLog("QueueDuktape("+code+")\n", DKINFO);
+	return true;
+}
 
 //////////////////////////////////////////////////////////////////
 ////////////// eventloop stuff  //////////////////////////////////
@@ -376,6 +382,16 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx)
 ///////////////////////////
 void DKDuktape::EventLoop()
 {
+	//TODO
+	//DKLog("DKDuktape::EventLoop()\n", DKINFO);
+}
+
+
+
+/*
+///////////////////////////    OLD CODE
+void DKDuktape::EventLoop()
+{
 	int rc;
 	if(c_evloop){
 		DKLog("DKDuktape: calling eventloop_run()\n", DKDEBUG);
@@ -391,6 +407,7 @@ void DKDuktape::EventLoop()
 		duk_pop(ctx);
 	}
 }
+*/
 
 //TODO
 //////////////////////////////////////////////////

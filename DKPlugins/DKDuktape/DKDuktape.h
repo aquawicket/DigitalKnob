@@ -20,6 +20,7 @@ public:
 	static bool OnEvent(DKEvent* event);
 	static bool Reload();
 	static bool RunDuktape(const DKString& code, DKString& rval);
+	static bool QueueDuktape(const DKString& code);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);

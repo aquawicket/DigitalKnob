@@ -106,6 +106,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
 	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey);
 	DKDuktape::AttachFunction("DK_PrintFunctions", DKJS::PrintFunctions);
+	DKDuktape::AttachFunction("DK_QueueDuktape", DKJS::QueueDuktape);
 	DKDuktape::AttachFunction("DK_ReleaseKey", DKJS::ReleaseKey);
 	DKDuktape::AttachFunction("DK_Reload", DKJS::Reload);
 	DKDuktape::AttachFunction("DK_RightClick", DKJS::RightClick);
@@ -852,6 +853,14 @@ int DKJS::PrintFunctions(duk_context* ctx)
 	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
 		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
 	}
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::QueueDuktape(duk_context* ctx)
+{
+	DKString code = duk_require_string(ctx, 0);
+	DKDuktape::QueueDuktape(code);
 	return 1;
 }
 
