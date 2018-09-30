@@ -256,11 +256,14 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
 	DKLog("RunDuktape("+code+")\n", DKINFO);
 	duk_eval_string(DKDuktape::ctx, code.c_str());
-	rval = duk_get_string(ctx, -1);
-	if(!rval.empty()){
-		DKLog("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n", DKINFO);
-		return true;
+
+	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
+		rval = duk_get_string(ctx, -1);
+		if(!rval.empty()){
+			DKLog("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n", DKINFO);
+		}
 	}
+
 	return true;
 }
 
