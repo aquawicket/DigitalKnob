@@ -187,6 +187,12 @@ public:
 		}
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////
+	void OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
+	{
+		DKLog("DKSDLCefHandler::OnLoadEnd("+toString(httpStatusCode)+")\n", DKDEBUG);
+	}
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 	{ 
