@@ -59,7 +59,7 @@ bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonT
 
 	if(button == 1){ type = MBT_LEFT; }
 	if(button == 2){ type = MBT_MIDDLE; }
-	/*if(button == 3){*/ type = MBT_RIGHT; //}
+	if(button == 3){ type = MBT_RIGHT; }
 	return true;
 }
 
