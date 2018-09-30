@@ -37,6 +37,7 @@ public:
 	bool Stop(const int& num);
 
 	static bool RunDuktape(DKString& string, DKString& rval);
+	static bool QueueDuktape(DKString& string);
 	static bool RunJavascript(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	

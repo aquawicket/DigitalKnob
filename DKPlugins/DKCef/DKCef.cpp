@@ -520,6 +520,12 @@ bool DKCef::RunDuktape(DKString& string, DKString& rval)
 	return DKDuktape::RunDuktape(string, rval);
 }
 
+//////////////////////////////////////////
+bool DKCef::QueueDuktape(DKString& string)
+{
+	return DKDuktape::QueueDuktape(string);
+}
+
 ///////////////////////////////////////////
 bool DKCef::RunJavascript(DKString& string)
 {

@@ -42,6 +42,7 @@ public:
 	static bool PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval);
 	static bool PressKey(CefArgs args, CefReturn retval);
 	static bool PrintFunctions(CefArgs args, CefReturn retval);
+	static bool QueueDuktape(CefArgs args, CefReturn retval);
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunDuktape(CefArgs args, CefReturn retval);

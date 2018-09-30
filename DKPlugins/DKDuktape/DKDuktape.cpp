@@ -6,6 +6,8 @@ duk_context* DKDuktape::ctx = NULL;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
 
+DKStringArray DKDuktape::codeToRun;
+
 int DKDuktape::c_evloop = 0;
 extern void poll_register(duk_context *ctx);
 extern void eventloop_register(duk_context *ctx);
@@ -61,7 +63,7 @@ bool DKDuktape::Init()
 		LoadFile(app);
 	}
 
-	//DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
+	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
 }
 
@@ -270,8 +272,8 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 //////////////////////////////////////////////////
 bool DKDuktape::QueueDuktape(const DKString& code)
 {
-	//TODO
 	DKLog("QueueDuktape("+code+")\n", DKINFO);
+	codeToRun.push_back(code);
 	return true;
 }
 
@@ -385,8 +387,12 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx)
 ///////////////////////////
 void DKDuktape::EventLoop()
 {
-	//TODO
-	//DKLog("DKDuktape::EventLoop()\n", DKINFO);
+	//cycle through queue codeToRun
+	if(codeToRun.size() > 0){
+		DKString rval; //unused
+		DKDuktape::RunDuktape(codeToRun[0], rval);
+		codeToRun.erase(codeToRun.begin());
+	}
 }
 
 

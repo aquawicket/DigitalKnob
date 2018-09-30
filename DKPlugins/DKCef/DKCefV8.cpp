@@ -35,6 +35,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKV8::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
+	DKV8::AttachFunction("DK_QueueDuktape", DKCefV8::QueueDuktape);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
 	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
@@ -275,6 +276,14 @@ bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
 	return false;
 }
 
+//////////////////////////////////////////////////////////
+bool DKCefV8::QueueDuktape(CefArgs args, CefReturn retval)
+{
+	DKString code = args->GetString(0);
+	if(!DKCef::QueueDuktape(code)){ return false; }
+	return true;
+}
+
 ////////////////////////////////////////////////////////
 bool DKCefV8::ReleaseKey(CefArgs args, CefReturn retval)
 {
@@ -294,7 +303,6 @@ bool DKCefV8::Run(CefArgs args, CefReturn retval)
 bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 {
 	DKString code = args->GetString(0);
-	DKLog("RunDuktape("+code+")\n", DKDEBUG);
 	DKString rval;
 	if(!DKCef::RunDuktape(code, rval)){ return false; }
 	if(!retval->SetString(0, rval)){ return false; }
