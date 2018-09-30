@@ -273,7 +273,7 @@ public:
 		//DKLog("OnCursorChange()\n", DKINFO);
 #ifdef WIN32
 		HWND hwnd;
-		if(!DKClass::CallFunc("DKSDLWindow::GetHwnd", NULL, &hwnd)){ return; }
+		if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
 		if(!::IsWindow(hwnd)){ return; }
 		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
 		SetCursor(cursor);

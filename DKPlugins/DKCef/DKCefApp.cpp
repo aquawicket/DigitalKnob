@@ -389,7 +389,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		}
 	}
 
-	DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
+	//DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
