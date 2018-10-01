@@ -22,7 +22,6 @@
 //#include <X11/cursorfont.h>
 #endif
 
-class DKSDLCefFileDialogCallback;
 class DKSDLCefHandler;
 
 ///////////////////////////////////////////
@@ -55,14 +54,17 @@ public:
 	DKSDLCefHandler* cefHandler;
 };
 
-///////////////////////////////////////////////////////////////
-class DKSDLCefFileDialogCallback : public CefFileDialogCallback
+//////////////////////////////////////////////////////
+class DialogCallback : public CefRunFileDialogCallback 
 {
 public:
-	DKSDLCefFileDialogCallback(){}
+	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
+	{
+		DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKINFO);
+		delete this;
+	}
 
-	void Cancel();
-	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths);
+	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +78,8 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 
-	CefRefPtr<DKSDLCefFileDialogCallback> fileDialogCallback;
+	CefRefPtr<DialogCallback> dialog_callback;
+	//DialogCallback* dialog_callback;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
@@ -290,9 +293,14 @@ public:
 	{
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
 		
-		callback = fileDialogCallback;
-		//static_cast<CefRefPtr<CefFileDialogCallback>>(fileDialogCallback) = callback;
-		//callback = fileDialogCallback;
+		// Sample file type filter.
+		std::vector<CefString> file_types;
+		file_types.push_back("text/*");
+		file_types.push_back(".log");
+		file_types.push_back(".patch");
+
+		dialog_callback = new DialogCallback;
+		browser->GetHost()->RunFileDialog(FILE_DIALOG_OPEN, "Select File", default_file_path, file_types, selected_accept_filter, dialog_callback);
 		return false;
 	}
 
