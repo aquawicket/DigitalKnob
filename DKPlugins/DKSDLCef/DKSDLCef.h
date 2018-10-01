@@ -58,8 +58,11 @@ public:
 class DKSDLCefFileDialogCallback : public CefFileDialogCallback
 {
 public:
-	void Cancel(){}
-	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths)
+	void Cancel() OVERRIDE
+	{
+		DKLog("DKSDLCefFileDialogCallback::Cancel()\n", DKINFO);
+	}
+	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
 	{
 		DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
 	}
@@ -76,7 +79,7 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 
-	DKSDLCefFileDialogCallback* fileDialogCallback;
+	CefRefPtr<DKSDLCefFileDialogCallback> fileDialogCallback;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
@@ -289,7 +292,10 @@ public:
 	bool OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
 	{
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
-		//callback = fileDialogCallback;
+		callback = fileDialogCallback;
+		std::vector<CefString> file_paths;
+		callback->Continue(selected_accept_filter, file_paths);
+		//DKLog(file_paths[0].toString()+"\n", DKINFO);
 		return false;
 	}
 

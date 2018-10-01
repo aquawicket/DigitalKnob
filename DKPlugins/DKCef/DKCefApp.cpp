@@ -304,7 +304,9 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 {
+#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
+#endif
 #ifndef DKCefChild
 	//printf("DKCefApp::OnBeforeCommandLineProcessing()\n");
 	if(same(DKV8::enable_system_flash, "ON")){
@@ -359,7 +361,9 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 //////////////////////////////////////////////////////////////
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser) 
 {
+#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
+#endif
 	DKLog("DKCefApp::OnBrowserCreated()\n", DKINFO);
 	DKV8::_browser = browser;
 	DKV8::v8handler->SetBrowser(browser);
@@ -371,7 +375,9 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 /////////////////////////////////////
 void DKCefApp::OnContextInitialized()
 {
+#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
+#endif
 	DKLog("DKCefApp::OnContextInitialized()\n", DKINFO);
 	CefRefreshWebPlugins();
 }
@@ -379,7 +385,9 @@ void DKCefApp::OnContextInitialized()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
+#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
+#endif
 	DKLog("DKCefApp::OnContextCreated()\n", DKINFO);
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
@@ -395,7 +403,9 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 {
+#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
+#endif
 	DKLog("DKCefApp::OnProcessMessageReceived()\n", DKINFO);
 	if(!DKV8::v8handler){
 		printf("DKCefApp::OnProcessMessageReceived(): v8handler invalid\n");
