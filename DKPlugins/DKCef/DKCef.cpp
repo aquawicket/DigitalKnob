@@ -152,11 +152,9 @@ bool DKCef::Init()
 	}
 
 	if(same(DKV8::multi_process, "ON")){
-		settings.single_process = false;
 		DKV8::singleprocess = false;
 	}
 	else{
-		settings.single_process = true;
 		DKV8::singleprocess = true;
 	}
 
