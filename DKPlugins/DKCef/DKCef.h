@@ -12,6 +12,18 @@
 
 class DKCefWindow;
 
+//////////////////////////////////////////////////////
+class DialogCallback : public CefRunFileDialogCallback 
+{
+public:
+	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
+	{
+		DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKINFO);
+	}
+
+	IMPLEMENT_REFCOUNTING(DialogCallback);
+};
+
 /////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
 {
@@ -21,6 +33,7 @@ public:
 
 	bool CloseBrowser(const int& num);
 	bool DownloadUrl(const DKString& url);
+	bool FileDialog();
 	bool Find(const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& num);
@@ -56,6 +69,8 @@ public:
 	CefRefPtr<DKCefApp> cefApp;
 	CefClient* cefHandler; //external handler  (DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
+
+	DialogCallback* fileDialogCallback;
 
 #ifdef WIN32
 	HMODULE libcef;

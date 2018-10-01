@@ -54,18 +54,6 @@ public:
 	DKSDLCefHandler* cefHandler;
 };
 
-//////////////////////////////////////////////////////
-class DialogCallback : public CefRunFileDialogCallback 
-{
-public:
-	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
-	{
-		DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKINFO);
-		delete this;
-	}
-
-	IMPLEMENT_REFCOUNTING(DialogCallback);
-};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
@@ -77,9 +65,6 @@ public:
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
-
-	CefRefPtr<DialogCallback> dialog_callback;
-	//DialogCallback* dialog_callback;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
@@ -292,15 +277,7 @@ public:
 	bool OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
 	{
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
-		
-		// Sample file type filter.
-		std::vector<CefString> file_types;
-		file_types.push_back("text/*");
-		file_types.push_back(".log");
-		file_types.push_back(".patch");
 
-		dialog_callback = new DialogCallback;
-		browser->GetHost()->RunFileDialog(FILE_DIALOG_OPEN, "Select File", default_file_path, file_types, selected_accept_filter, dialog_callback);
 		return false;
 	}
 

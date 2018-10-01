@@ -66,6 +66,7 @@ public:
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Find(CefArgs args, CefReturn retval);
 	static bool SetUrl(CefArgs args, CefReturn retval);
+	static bool FileDialog(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);

@@ -61,6 +61,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
+	DKV8::AttachFunction("DKCef_FileDialog", DKCefV8::FileDialog);
 
 	return true;
 }
@@ -438,6 +439,14 @@ bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
 	DKString url = args->GetString(1);
 	int num = args->GetInt(2);
 	if(!DKCef::Get(id)->SetUrl(url, num)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Get(id)->FileDialog()){ return false; }
 	return true;
 }
 

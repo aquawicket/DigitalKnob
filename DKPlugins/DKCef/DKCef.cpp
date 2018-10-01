@@ -309,6 +309,19 @@ bool DKCef::DownloadUrl(const DKString& url)
 	return false;
 }
 
+////////////////////////
+bool DKCef::FileDialog()
+{
+	std::vector<CefString> file_types;
+	file_types.push_back("text/*");
+	file_types.push_back(".log");
+	file_types.push_back(".txt");
+
+	fileDialogCallback = new DialogCallback;
+	current_browser->GetHost()->RunFileDialog(FILE_DIALOG_OPEN, "Open File", CefString(), file_types, 0, fileDialogCallback);
+	return true;
+}
+
 //////////////////////////////////////
 bool DKCef::Find(const DKString& text)
 {
