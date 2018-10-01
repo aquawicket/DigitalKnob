@@ -313,10 +313,7 @@ bool DKCef::DownloadUrl(const DKString& url)
 bool DKCef::FileDialog()
 {
 	std::vector<CefString> file_types;
-	file_types.push_back("text/*");
-	file_types.push_back(".log");
-	file_types.push_back(".txt");
-
+	file_types.push_back("image/*");
 	fileDialogCallback = new DialogCallback;
 	current_browser->GetHost()->RunFileDialog(FILE_DIALOG_OPEN, "Open File", CefString(), file_types, 0, fileDialogCallback);
 	return true;
@@ -587,4 +584,21 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 	};
 
 	CefVisitWebPluginInfo(new Visitor(browser));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths)
+{
+	DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKINFO);
+	DKString files;
+	for(unsigned int i=0; i<file_paths.size(); ++i){
+		DKLog(file_paths[i].ToString()+"\n", DKINFO);
+		files += file_paths[i].ToString();
+		if(i<file_paths.size()-1){
+			files += ";";
+		}
+	}
+	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
+	DKCef::RunJavascript("DKSendEvent(\"GLOBAL\", \"DKCef_OnFileDialogDismissed\", \""+files+"\");");
+	return;
 }

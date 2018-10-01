@@ -16,14 +16,7 @@ class DKCefWindow;
 class DialogCallback : public CefRunFileDialogCallback 
 {
 public:
-	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
-	{
-		DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKINFO);
-		for(int i=0; i<file_paths.size(); ++i){
-			DKLog(file_paths[i].ToString()+"\n", DKINFO);
-		}
-	}
-
+	void OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths);
 	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
