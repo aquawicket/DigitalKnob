@@ -22,6 +22,7 @@
 //#include <X11/cursorfont.h>
 #endif
 
+class DKSDLCefFileDialogCallback;
 class DKSDLCefHandler;
 
 ///////////////////////////////////////////
@@ -58,14 +59,18 @@ public:
 class DKSDLCefFileDialogCallback : public CefFileDialogCallback
 {
 public:
-	void Cancel() OVERRIDE
+	DKSDLCefFileDialogCallback(){}
+	void Cancel()
 	{
 		DKLog("DKSDLCefFileDialogCallback::Cancel()\n", DKINFO);
+		return;
 	}
-	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
+	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths)
 	{
 		DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
+		return;
 	}
+	IMPLEMENT_REFCOUNTING(DKSDLCefFileDialogCallback);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,7 +297,13 @@ public:
 	bool OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
 	{
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
-		callback = this->fileDialogCallback;
+		
+		callback = fileDialogCallback;
+		//callback = this->fileDialogCallback;
+		//callback = (CefFileDialogCallback*)this->fileDialogCallback;
+		//fileDialogCallback = callback;
+
+		//fileDialogCallback = (DKSDLCefFileDialogCallback)callback;
 		//std::vector<CefString> file_paths;
 		//callback->Continue(selected_accept_filter, file_paths);
 		//DKLog(file_paths[0].toString()+"\n", DKINFO);
