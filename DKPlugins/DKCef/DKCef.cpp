@@ -598,7 +598,9 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 			files += ";";
 		}
 	}
+
 	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
+	replace(files, "\\", "\\\\");
 	DKCef::RunJavascript("DKSendEvent(\"GLOBAL\", \"DKCef_OnFileDialogDismissed\", \""+files+"\");");
 	return;
 }
