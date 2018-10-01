@@ -10,6 +10,16 @@
 #include "DK/DKWindows.h"
 #endif
 
+void DKSDLCefFileDialogCallback::Cancel()
+{
+	DKLog("DKSDLCefFileDialogCallback::Cancel()\n", DKINFO);
+}
+
+void DKSDLCefFileDialogCallback::Continue(int selected_accept_filter, const std::vector<CefString>& file_paths)
+{
+	DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
+}
+
 /////////////////////
 bool DKSDLCef::Init()
 {

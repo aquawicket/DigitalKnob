@@ -60,17 +60,9 @@ class DKSDLCefFileDialogCallback : public CefFileDialogCallback
 {
 public:
 	DKSDLCefFileDialogCallback(){}
-	void Cancel()
-	{
-		DKLog("DKSDLCefFileDialogCallback::Cancel()\n", DKINFO);
-		return;
-	}
-	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths)
-	{
-		DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
-		return;
-	}
-	IMPLEMENT_REFCOUNTING(DKSDLCefFileDialogCallback);
+
+	void Cancel();
+	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,14 +291,8 @@ public:
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
 		
 		callback = fileDialogCallback;
-		//callback = this->fileDialogCallback;
-		//callback = (CefFileDialogCallback*)this->fileDialogCallback;
-		//fileDialogCallback = callback;
-
-		//fileDialogCallback = (DKSDLCefFileDialogCallback)callback;
-		//std::vector<CefString> file_paths;
-		//callback->Continue(selected_accept_filter, file_paths);
-		//DKLog(file_paths[0].toString()+"\n", DKINFO);
+		//static_cast<CefRefPtr<CefFileDialogCallback>>(fileDialogCallback) = callback;
+		//callback = fileDialogCallback;
 		return false;
 	}
 
