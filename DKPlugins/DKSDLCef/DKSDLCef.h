@@ -65,6 +65,7 @@ public:
 	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths) OVERRIDE
 	{
 		DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
+		printf("DKSDLCefFileDialogCallback::Continue()\n");
 	}
 };
 
@@ -293,8 +294,8 @@ public:
 	{
 		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
 		callback = fileDialogCallback;
-		std::vector<CefString> file_paths;
-		callback->Continue(selected_accept_filter, file_paths);
+		//std::vector<CefString> file_paths;
+		//callback->Continue(selected_accept_filter, file_paths);
 		//DKLog(file_paths[0].toString()+"\n", DKINFO);
 		return false;
 	}
