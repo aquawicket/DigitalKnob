@@ -54,9 +54,21 @@ public:
 	DKSDLCefHandler* cefHandler;
 };
 
+///////////////////////////////////////////////////////////////
+class DKSDLCefFileDialogCallback : public CefFileDialogCallback
+{
+public:
+	void Cancel(){}
+	void Continue(int selected_accept_filter, const std::vector<CefString>& file_paths)
+	{
+		DKLog("DKSDLCefFileDialogCallback::Continue()\n", DKINFO);
+	}
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
-						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler
+						public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
+						public CefDialogHandler
 {
 public:
 	DKSDLCefHandler(){}
@@ -64,12 +76,15 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 
+	DKSDLCefFileDialogCallback* fileDialogCallback;
+
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
 	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
 	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	virtual CefRefPtr<CefDialogHandler> GetDialogHandler(){ return this; }
 	
 	/////////////////////////////////////////
 	void DoFrame()
@@ -268,6 +283,14 @@ public:
 		data += params->GetLinkUrl();
 
 		DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
+	{
+		DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
+		//callback = fileDialogCallback;
+		return false;
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
