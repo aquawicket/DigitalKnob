@@ -40,15 +40,15 @@ public:
 	bool Paste();
 	bool Print();
 	bool Reload(const int& browser);
+	static bool RunJavascript(const int& browser, DKString& string);
 	bool SelectBrowser(int& browser);
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
 	bool Stop(const int& browser);
 
+	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	static bool RunDuktape(DKString& string, DKString& rval);
 	static bool QueueDuktape(DKString& string);
-	static bool RunJavascript(DKString& string);
-	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
 	DKString id;

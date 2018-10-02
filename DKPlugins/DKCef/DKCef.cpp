@@ -539,8 +539,8 @@ bool DKCef::QueueDuktape(DKString& string)
 	return DKDuktape::QueueDuktape(string);
 }
 
-///////////////////////////////////////////
-bool DKCef::RunJavascript(DKString& string)
+///////////////////////////////////////////////////////////////
+bool DKCef::RunJavascript(const int& browser, DKString& string)
 {
 	//if(!DKUtil::InMainThread()){ return false; }
 	DKCef* dkcef = DKCef::Get("");
@@ -548,9 +548,7 @@ bool DKCef::RunJavascript(DKString& string)
 		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid \n", DKERROR);
 		return false;
 	}
-
-	//Run Javascript on first browsers only
-	CefRefPtr<CefFrame> frame = dkcef->browsers[0]->GetMainFrame();
+	CefRefPtr<CefFrame> frame = dkcef->browsers[browser]->GetMainFrame();
 	if(!frame){
 		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
 		return false;

@@ -171,7 +171,8 @@ int DKCefJS::RunJavascript(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
-	DKCef::Get(id)->RunJavascript(string);
+	int browser = duk_require_int(ctx, 2);
+	DKCef::Get(id)->RunJavascript(browser, string);
 	return 1;
 }
 

@@ -30,7 +30,7 @@ function DKDebug_OnEvent(event)
 	
 	if(DK_Type(event, "keydown") && DK_GetValue(event) == 123){ //F12
 		if(typeof DKCef_ShowDevTools == 'function'){
-			DKCef_ShowDevTools("", 0);
+			DKCef_ShowDevTools("", DKCef_GetCurrentBrowser("DKBrowser_cef"));
 		}
 		if(typeof DKRocket_ToggleDebugger == 'function'){
 			DKRocket_ToggleDebugger();
