@@ -409,8 +409,8 @@ bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
 bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	int num = args->GetInt(1);
-	DKCef::Get(id)->ShowDevTools(num);
+	int browser = args->GetInt(1);
+	DKCef::Get(id)->ShowDevTools(browser);
 	return 1;
 }
 
@@ -418,8 +418,7 @@ bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
 bool DKCefV8::Print(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	int num = args->GetInt(1);
-	DKCef::Get(id)->Print(num);
+	DKCef::Get(id)->Print();
 	return 1;
 }
 
@@ -437,8 +436,8 @@ bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
 	DKString url = args->GetString(1);
-	int num = args->GetInt(2);
-	if(!DKCef::Get(id)->SetUrl(url, num)){ return false; }
+	int browser = args->GetInt(2);
+	if(!DKCef::Get(id)->SetUrl(browser, url)){ return false; }
 	return true;
 }
 

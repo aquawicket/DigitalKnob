@@ -27,23 +27,23 @@ public:
 	bool Init();
 	bool End();
 
-	bool CloseBrowser(const int& num);
+	bool CloseBrowser(const int& browser);
 	bool DownloadUrl(const DKString& url);
 	bool FileDialog();
 	bool Find(const DKString& text);
 	bool GetBrowsers(int& num);
-	bool GetCurrentBrowser(int& num);
-	bool GetUrl(int& num, DKString& url);
-	bool GoBack(const int& num);
-	bool GoForward(const int& num);
+	bool GetCurrentBrowser(int& browser);
+	bool GetUrl(int& browser, DKString& url);
+	bool GoBack(const int& browser);
+	bool GoForward(const int& browser);
 	bool NewBrowser();
 	bool Paste();
-	bool Print(const int& num);
-	bool Reload(const int& num);
-	bool SelectBrowser(int& num);
-	bool SetUrl(const DKString& url, const int& num);
-	bool ShowDevTools(const int& num);
-	bool Stop(const int& num);
+	bool Print();
+	bool Reload(const int& browser);
+	bool SelectBrowser(int& browser);
+	bool SetUrl(const int& browser, const DKString& url);
+	bool ShowDevTools(const int& browser);
+	bool Stop(const int& browser);
 
 	static bool RunDuktape(DKString& string, DKString& rval);
 	static bool QueueDuktape(DKString& string);
