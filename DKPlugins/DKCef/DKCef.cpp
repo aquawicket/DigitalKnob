@@ -576,6 +576,9 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"keyup")){ return false; }
 	if(same(type,"move")){ return false; }
 	if(same(type,"resize")){ return false; }
+	if(same(type,"minimize")){ return false; }
+	if(same(type,"maximize")){ return false; }
+	if(same(type,"restore")){ return false; }
 	
 	DKLog("DKCef::SendEvent("+id+", "+type+", "+value+")\n", DKINFO);
 	
