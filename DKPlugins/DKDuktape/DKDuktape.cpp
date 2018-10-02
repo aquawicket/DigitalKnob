@@ -387,6 +387,8 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx)
 ///////////////////////////
 void DKDuktape::EventLoop()
 {
+	if(!DKUtil::InMainThread()){ return; }
+
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
 		DKString rval;
