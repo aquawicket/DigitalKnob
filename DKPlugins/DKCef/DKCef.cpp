@@ -561,8 +561,6 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 //////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	DKLog("DKCef::SendEvent()\n", DKDEBUG);
-
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
@@ -570,6 +568,12 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"mousemove")){ return false; }
 	if(same(type,"mousedown")){ return false; }
 	if(same(type,"mouseup")){ return false; }
+	if(same(type,"click")){ return false; }
+	if(same(type,"keypress")){ return false; }
+	if(same(type,"keydown")){ return false; }
+	if(same(type,"keyup")){ return false; }
+	
+	DKLog("DKCef::SendEvent("+id+", "+type+", "+value+")\n", DKINFO);
 	
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){
