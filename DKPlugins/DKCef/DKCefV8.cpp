@@ -39,7 +39,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
 	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
-	DKV8::AttachFunction("DK_RunJavascript", DKCefV8::RunJavascript);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
 	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
@@ -57,11 +56,27 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_WaitForImage", DKCefV8::WaitForImage);
 
 	//Cef js functions
-	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
-	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
-	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
-	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
+	DKV8::AttachFunction("DKCef_CloseBrowser", DKCefV8::CloseBrowser);
+	DKV8::AttachFunction("DKCef_DownloadUrl", DKCefV8::DownloadUrl);
 	DKV8::AttachFunction("DKCef_FileDialog", DKCefV8::FileDialog);
+	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
+	DKV8::AttachFunction("DKCef_Focused", DKCefV8::Focused);
+	DKV8::AttachFunction("DKCef_GetBrowsers", DKCefV8::GetBrowsers);
+	DKV8::AttachFunction("DKCef_GetCurrentBrowser", DKCefV8::GetCurrentBrowser);
+	DKV8::AttachFunction("DKCef_GetUrl", DKCefV8::GetUrl);
+	DKV8::AttachFunction("DKCef_GoBack", DKCefV8::GoBack);
+	DKV8::AttachFunction("DKCef_GoForward", DKCefV8::GoForward);
+	DKV8::AttachFunction("DKCef_NewBrowser", DKCefV8::NewBrowser);
+	DKV8::AttachFunction("DKCef_Paste", DKCefV8::Paste);
+	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
+	DKV8::AttachFunction("DKCef_Reload", DKCefV8::Reload);
+	DKV8::AttachFunction("DKCef_RemoveFocus", DKCefV8::RemoveFocus);
+	DKV8::AttachFunction("DKCef_RunJavascript", DKCefV8::RunJavascript);
+	DKV8::AttachFunction("DKCef_SelectBrowser", DKCefV8::SelectBrowser);
+	DKV8::AttachFunction("DKCef_SetFocus", DKCefV8::SetFocus);
+	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
+	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
+	DKV8::AttachFunction("DKCef_Stop", DKCefV8::Stop);
 
 	return true;
 }
@@ -318,16 +333,6 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
-{
-	DKString code = args->GetString(0);
-	int browser = args->GetInt(1);
-	DKLog("RunJavascript("+code+")\n", DKDEBUG);
-	DKCef::RunJavascript(browser, code);
-	return true;
-}
-
 //////////////////////////////////////////////////////////
 bool DKCefV8::SetClipboard(CefArgs args, CefReturn retval)
 {
@@ -403,54 +408,6 @@ bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
 	if(!retval->SetInt(0, fps)){ return false; }
 	return true;
 }
-
-
-//CEF js functions
-//////////////////////////////////////////////////////////
-bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
-{
-	DKString id = args->GetString(0);
-	int browser = args->GetInt(1);
-	DKCef::Get(id)->ShowDevTools(browser);
-	return 1;
-}
-
-///////////////////////////////////////////////////
-bool DKCefV8::Print(CefArgs args, CefReturn retval)
-{
-	DKString id = args->GetString(0);
-	DKCef::Get(id)->Print();
-	return 1;
-}
-
-//////////////////////////////////////////////////
-bool DKCefV8::Find(CefArgs args, CefReturn retval)
-{
-	DKString id = args->GetString(0);
-	DKString text = args->GetString(1);
-	DKCef::Get(id)->Find(text);
-	return 1;
-}
-
-////////////////////////////////////////////////////
-bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
-{
-	DKString id = args->GetString(0);
-	DKString url = args->GetString(1);
-	int browser = args->GetInt(2);
-	if(!DKCef::Get(id)->SetUrl(browser, url)){ return false; }
-	return true;
-}
-
-////////////////////////////////////////////////////////
-bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
-{
-	DKString id = args->GetString(0);
-	if(!DKCef::Get(id)->FileDialog()){ return false; }
-	return true;
-}
-
-
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 ///////////////////////////////////////////////////////////
@@ -561,6 +518,205 @@ bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
 	long frames;
 	if(!DKUtil::GetFrames(frames)){ return false; }
 	if(!retval->SetInt(0, (int)frames)){ return false; }
+	return true;
+}
+
+
+
+
+//CEF js functions
+//////////////////////////////////////////////////////////
+bool DKCefV8::CloseBrowser(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->CloseBrowser(browser)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::DownloadUrl(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString url = args->GetString(1);
+	if(!DKCef::Get(id)->DownloadUrl(url)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Get(id)->FileDialog()){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////
+bool DKCefV8::Find(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString text = args->GetString(1);
+	if(!DKCef::Get(id)->Find(text)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefV8::Focused(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	bool focused = DKCef::Get(id)->inFocus;
+	if(!focused){ return false; }
+	if(!retval->SetBool(0, true)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::GetBrowsers(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int num;
+	if(!DKCef::Get(id)->GetBrowsers(num)){ return false; }
+	if(!retval->SetInt(0, num)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////////
+bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser;
+	if(!DKCef::Get(id)->GetCurrentBrowser(browser)){ return false; }
+	if(!retval->SetInt(0, browser)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	DKString url;
+	if(!DKCef::Get(id)->GetUrl(browser, url)){ return false; }
+	if(url.empty()){ return false; }
+	if(!retval->SetString(0, url)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::GoBack(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->GoBack(browser)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GoForward(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->GoForward(browser)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKCefV8::NewBrowser(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Get(id)->NewBrowser()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////
+bool DKCefV8::Paste(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Get(id)->Paste()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////
+bool DKCefV8::Print(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Get(id)->Print()){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::Reload(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->Reload(browser)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////
+bool DKCefV8::RemoveFocus(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKCef::Get(id)->current_browser->GetHost()->SendFocusEvent(false);
+	DKCef::Get(id)->inFocus = false;
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
+{
+	DKString code = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::RunJavascript(browser, code)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefV8::SelectBrowser(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->SelectBrowser(browser)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////
+bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	if(!DKCef::Valid(id)){ return false; }
+	if(!DKCef::Get(id)->current_browser){ return false; }
+	if(!DKCef::Get(id)->current_browser->GetHost()){ return false; }
+	DKCef::Get(id)->current_browser->GetHost()->SendFocusEvent(true);
+	DKCef::Get(id)->inFocus = true;
+	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString url = args->GetString(1);
+	int browser = args->GetInt(2);
+	if(!DKCef::Get(id)->SetUrl(browser, url)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::ShowDevTools(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->ShowDevTools(browser)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////
+bool DKCefV8::Stop(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->Stop(browser)){ return false; }
 	return true;
 }
 

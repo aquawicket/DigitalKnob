@@ -11,6 +11,7 @@ class DKCefJS : public DKObjectT<DKCefJS>
 public:
 	bool Init();
 	
+	//Cef js functions
 	static int CloseBrowser(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);
 	static int Find(duk_context* ctx);

@@ -46,7 +46,6 @@ public:
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunDuktape(CefArgs args, CefReturn retval);
-	static bool RunJavascript(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
 	static bool SetClipboardFiles(CefArgs args, CefReturn retval);
 	static bool SetFramerate(CefArgs args, CefReturn retval);
@@ -62,11 +61,27 @@ public:
 	static bool WaitForImage(CefArgs args, CefReturn retval);
 	
 	//Cef JS functions
-	static bool Print(CefArgs args, CefReturn retval);
-	static bool ShowDevTools(CefArgs args, CefReturn retval);
-	static bool Find(CefArgs args, CefReturn retval);
-	static bool SetUrl(CefArgs args, CefReturn retval);
+	static bool CloseBrowser(CefArgs args, CefReturn retval);
+	static bool DownloadUrl(CefArgs args, CefReturn retval);
 	static bool FileDialog(CefArgs args, CefReturn retval);
+	static bool Find(CefArgs args, CefReturn retval);
+	static bool Focused(CefArgs args, CefReturn retval);
+	static bool GetBrowsers(CefArgs args, CefReturn retval);
+	static bool GetCurrentBrowser(CefArgs args, CefReturn retval);
+	static bool GetUrl(CefArgs args, CefReturn retval);
+	static bool GoBack(CefArgs args, CefReturn retval);
+	static bool GoForward(CefArgs args, CefReturn retval);
+	static bool NewBrowser(CefArgs args, CefReturn retval);
+	static bool Paste(CefArgs args, CefReturn retval);
+	static bool Print(CefArgs args, CefReturn retval);
+	static bool Reload(CefArgs args, CefReturn retval);
+	static bool RemoveFocus(CefArgs args, CefReturn retval);
+	static bool RunJavascript(CefArgs args, CefReturn retval);
+	static bool SelectBrowser(CefArgs args, CefReturn retval);
+	static bool SetFocus(CefArgs args, CefReturn retval);
+	static bool SetUrl(CefArgs args, CefReturn retval);
+	static bool ShowDevTools(CefArgs args, CefReturn retval);
+	static bool Stop(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);
