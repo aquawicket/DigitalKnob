@@ -276,7 +276,7 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 
 
 
-
+/*
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
@@ -290,16 +290,17 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(same(type, "keydown")){ return false; }
 	if(same(type, "keypress")){ return false; }
 
-	CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
+	//CefRefPtr<CefFrame> frame = DKV8::v8handler->browser->GetMainFrame();
+	//CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
 	if(!frame){
 		DKLog("DKCefApp::SendEvent("+id+","+type+","+value+"): frame invalid\n", DKWARN);
 		return false;
 	}
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
-	
 	return true;
 }
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
@@ -391,7 +392,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
+	DKLog("DKCefApp::OnContextCreated()\n", DKINFO);
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
@@ -400,7 +401,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		}
 	}
 
-	//DKEvent::AddSendEventFunc(&DKCefApp::SendEvent, this);
+	//DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

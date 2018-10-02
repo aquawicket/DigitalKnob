@@ -267,6 +267,7 @@ bool DKCef::Init()
 	}
 	
 	DKClass::DKCreate("DKCefV8");
+	DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
 	return true;
 }
 
@@ -542,14 +543,45 @@ bool DKCef::QueueDuktape(DKString& string)
 ///////////////////////////////////////////
 bool DKCef::RunJavascript(DKString& string)
 {
+	//if(!DKUtil::InMainThread()){ return false; }
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){
-		DKLog("DKCef::RunJavascript(" + string + "): dkcef invalid \n", DKERROR);
+		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid \n", DKERROR);
 		return false;
 	}
-
 	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
+	if(!frame){
+		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
+		return false;
+	}
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value)
+{
+	DKLog("DKCef::SendEvent()\n", DKDEBUG);
+
+	if(id.empty()){ return false; }
+	if(type.empty()){ return false; }
+	if(same(id,"DKLog")){ return false; }
+	//if(same(type,"second")){ return false; }
+
+	DKCef* dkcef = DKCef::Get("");
+	if(!dkcef){
+		DKLog("DKCef::SendEvent(): dkcef invalid \n", DKERROR);
+		return false;
+	}
+	for(unsigned int i=0; i<dkcef->browsers.size(); ++i){
+		CefRefPtr<CefFrame> frame = dkcef->browsers[i]->GetMainFrame();
+		if(!frame){
+			DKLog("DKCef::SendEvent(): frame invalid \n", DKERROR);
+			return false;
+		}
+		DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
+		frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+	}
 	return true;
 }
 
@@ -602,8 +634,7 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 		}
 	}
 
-	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
 	replace(files, "\\", "\\\\");
-	DKCef::RunJavascript("DKSendEvent(\"GLOBAL\", \"DKCef_OnFileDialogDismissed\", \""+files+"\");");
+	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
 	return;
 }

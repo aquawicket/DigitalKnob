@@ -80,7 +80,7 @@ public:
 	virtual CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE { return this; }
 	virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() OVERRIDE { return this; }
 
-	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
+	//bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 
 	virtual void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line);
 	virtual void OnBrowserCreated(CefRefPtr<CefBrowser> browser);

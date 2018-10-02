@@ -48,6 +48,7 @@ public:
 	static bool RunDuktape(DKString& string, DKString& rval);
 	static bool QueueDuktape(DKString& string);
 	static bool RunJavascript(DKString& string);
+	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
 	DKString id;
@@ -63,7 +64,7 @@ public:
 	std::vector<CefRefPtr<CefBrowser> > browsers;
 	CefBrowser* current_browser;
 	CefRefPtr<DKCefApp> cefApp;
-	CefClient* cefHandler; //external handler  (DKSDLCef or DKOSGCef)
+	CefClient* cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
 
 	DialogCallback* fileDialogCallback;
