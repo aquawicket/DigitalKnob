@@ -665,8 +665,9 @@ bool DKCefV8::RemoveFocus(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 {
-	DKString code = args->GetString(0);
+	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
+	DKString code = args->GetString(2);
 	if(!DKCef::RunJavascript(browser, code)){ return false; }
 	return true;
 }

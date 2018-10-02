@@ -178,5 +178,5 @@ function TaskbarMenu_Run(command)
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;
 	}
-	DK_RunJavascript(command);
+	DK_RunJavascript(0, 0, command);
 }

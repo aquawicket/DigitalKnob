@@ -34,5 +34,5 @@ function Input_Run(command)
 {
 	//DKLog("Input_Run("+command+")\n");
 	
-	DK_RunJavascript(command);
+	DK_RunJavascript(0, 0, command);
 }
