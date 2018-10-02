@@ -550,8 +550,8 @@ bool DKCef::RunJavascript(DKString& string)
 		return false;
 	}
 
-	//Run Javascript on the current browser
-	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
+	//Run Javascript on first browsers only
+	CefRefPtr<CefFrame> frame = dkcef->browsers[0]->GetMainFrame();
 	if(!frame){
 		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
 		return false;
