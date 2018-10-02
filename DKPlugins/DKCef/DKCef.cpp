@@ -568,7 +568,9 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"mousemove")){ return false; }
 	if(same(type,"mousedown")){ return false; }
 	if(same(type,"mouseup")){ return false; }
+	if(same(type,"wheel")){ return false; }
 	if(same(type,"click")){ return false; }
+	if(same(type,"contextmenu")){ return false; }
 	if(same(type,"keypress")){ return false; }
 	if(same(type,"keydown")){ return false; }
 	if(same(type,"keyup")){ return false; }
