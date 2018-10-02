@@ -566,7 +566,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
-	//if(same(type,"second")){ return false; }
+	if(same(type,"mousedown")){ return false; }
 
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){

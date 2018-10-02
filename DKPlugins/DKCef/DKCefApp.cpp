@@ -392,7 +392,9 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	DKLog("DKCefApp::OnContextCreated()\n", DKINFO);
+	DKLog("DKCefApp::OnContextCreated()\n", DKDEBUG);
+
+	//Load all of the c++ functions into the V8 context.
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
@@ -400,8 +402,6 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 			DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKDEBUG);
 		}
 	}
-
-	//DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
