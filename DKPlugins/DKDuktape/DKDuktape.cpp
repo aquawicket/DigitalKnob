@@ -257,6 +257,7 @@ bool DKDuktape::Reload()
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
 	DKLog("RunDuktape("+code+")\n", DKINFO);
+	if(!DKUtil::InMainThread()){ return; }
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 
 	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
