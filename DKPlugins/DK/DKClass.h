@@ -41,7 +41,7 @@ public:
 	///////////////////////////////////////////////
 	static DKObject* DKCreate(const DKString& data)
 	{
-		DKLog("DKCreate("+data+")\n", DKINFO);
+		DKLog("DKClass::DKCreate("+data+")\n", DKINFO);
 		//data = (class,id,var1,var2,var3,etc)
 		return DKClass::_Instance(data);
 	}
@@ -70,7 +70,7 @@ public:
 	/////////////////////////////////////////
 	static void DKClose(const DKString& data)
 	{
-		DKLog("DKClose("+data+")\n", DKINFO);
+		DKLog("DKClass::DKClose("+data+")\n", DKINFO);
 		//data = (class,id)
 		DKClass::_Close(data);
 	}
