@@ -555,8 +555,9 @@ bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
 bool DKCefV8::Find(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	DKString text = args->GetString(1);
-	if(!DKCef::Get(id)->Find(text)){ return false; }
+	int browser = args->GetInt(1);
+	DKString text = args->GetString(2);
+	if(!DKCef::Get(id)->Find(browser, text)){ return false; }
 	return true;
 }
 
@@ -640,7 +641,8 @@ bool DKCefV8::Paste(CefArgs args, CefReturn retval)
 bool DKCefV8::Print(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	if(!DKCef::Get(id)->Print()){ return false; }
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->Print(browser)){ return false; }
 	return true;
 }
 
@@ -697,8 +699,8 @@ bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
 bool DKCefV8::SetUrl(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	DKString url = args->GetString(1);
-	int browser = args->GetInt(2);
+	int browser = args->GetInt(1);
+	DKString url = args->GetString(2);
 	if(!DKCef::Get(id)->SetUrl(browser, url)){ return false; }
 	return true;
 }

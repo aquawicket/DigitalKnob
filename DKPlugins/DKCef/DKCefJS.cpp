@@ -51,8 +51,9 @@ int DKCefJS::DownloadUrl(duk_context* ctx)
 int DKCefJS::Find(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	DKString text = duk_require_string(ctx, 1);
-	if(!DKCef::Get(id)->Find(text)){ return 0; }
+	int browser = duk_require_int(ctx, 1);
+	DKString text = duk_require_string(ctx, 2);
+	if(!DKCef::Get(id)->Find(browser, text)){ return 0; }
 	return 1;
 }
 
@@ -136,7 +137,8 @@ int DKCefJS::Paste(duk_context* ctx)
 int DKCefJS::Print(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	if(!DKCef::Get(id)->Print()){ return 0; }
+	int browser = duk_require_int(ctx, 1);
+	if(!DKCef::Get(id)->Print(browser)){ return 0; }
 	return 1;
 }
 
@@ -193,8 +195,8 @@ int DKCefJS::SetFocus(duk_context* ctx)
 int DKCefJS::SetUrl(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
-	DKString url = duk_require_string(ctx, 1);
-	int browser = duk_require_int(ctx, 2);
+	int browser = duk_require_int(ctx, 1);
+	DKString url = duk_require_string(ctx, 2);
 	if(!DKCef::Get(id)->SetUrl(browser, url)){ return 0; }
 	return 1;
 }

@@ -323,14 +323,15 @@ bool DKCef::FileDialog()
 	return true;
 }
 
-//////////////////////////////////////
-bool DKCef::Find(const DKString& text)
+//////////////////////////////////////////////////////////
+bool DKCef::Find(const int& browser, const DKString& text)
 {
+	if(browser > (int)browsers.size()-1){ return false; } //error
 	if(!text.empty()){
-		current_browser->GetHost()->Find(0, text.c_str(), true, false, false);
+		browsers[browser]->GetHost()->Find(0, text.c_str(), true, false, false);
 	}
 	else{
-		current_browser->GetHost()->StopFinding(true);
+		browsers[browser]->GetHost()->StopFinding(true);
 	}
 	return true;
 }
@@ -466,10 +467,10 @@ bool DKCef::Paste()
 	return true;
 }
 
-///////////////////
-bool DKCef::Print()
+/////////////////////////////////////
+bool DKCef::Print(const int& browser)
 {
-	current_browser->GetHost()->Print();
+	browsers[browser]->GetHost()->Print();
 	return true;
 }
 

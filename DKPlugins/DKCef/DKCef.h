@@ -30,7 +30,7 @@ public:
 	bool CloseBrowser(const int& browser);
 	bool DownloadUrl(const DKString& url);
 	bool FileDialog();
-	bool Find(const DKString& text);
+	bool Find(const int& browser, const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
 	bool GetUrl(int& browser, DKString& url);
@@ -38,7 +38,7 @@ public:
 	bool GoForward(const int& browser);
 	bool NewBrowser();
 	bool Paste();
-	bool Print();
+	bool Print(const int& browser);
 	bool Reload(const int& browser);
 	static bool RunJavascript(const int& browser, DKString& string);
 	bool SelectBrowser(int& browser);

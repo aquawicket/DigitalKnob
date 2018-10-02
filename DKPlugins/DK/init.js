@@ -19,7 +19,7 @@ function init_OnEvent(event)  //Duktape
 	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
-		DKCef_SetUrl("DKCef_frame", DK_GetValue(event), DKCef_GetCurrentBrowser("DKCef_frame"));
+		DKCef_SetUrl("DKCef_frame", DKCef_GetCurrentBrowser("DKCef_frame"), DK_GetValue(event));
 	}
 	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("CefSDL::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
@@ -45,8 +45,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "left", "0rem");
 		DKWidget_SetProperty(iframe, "width", "100%");
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
-		var currentBrowser = DKCef_GetCurrentBrowser(iframe);
-		DKCef_SetUrl(iframe, DKApp_url, currentBrowser);
+		DKCef_SetUrl(iframe, DKCef_GetCurrentBrowser(iframe), DKApp_url);
 		DKCef_SetFocus(iframe);
 		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
 	}
@@ -67,8 +66,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
 		DKCreate("DKCef,CefSDL,0,0,"+width+","+height+","+DKApp_url);
-		var currentBrowser = DKCef_GetCurrentBrowser("CefSDL");
-		DKCef_SetUrl("CefSDL", DKApp_url, currentBrowser);
+		DKCef_SetUrl("CefSDL", DKCef_GetCurrentBrowser("CefSDL"), DKApp_url);
 		DKCef_SetFocus("CefSDL");
 		DKAddEvent("GLOBAL", "resize", init_OnEvent);
 	}
