@@ -549,6 +549,8 @@ bool DKCef::RunJavascript(DKString& string)
 		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid \n", DKERROR);
 		return false;
 	}
+
+	//Run Javascript on the current browser
 	CefRefPtr<CefFrame> frame = dkcef->current_browser->GetMainFrame();
 	if(!frame){
 		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
