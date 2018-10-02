@@ -299,7 +299,7 @@ function DK_GetBrowser()
     if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
     }
-    else if(navigator.userAgent.indexOf("Chrome") != -1 ){
+    else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") == -1){
 		return "CHROME";
     }
 	else if(navigator.userAgent.indexOf("Cef") != -1 ) {

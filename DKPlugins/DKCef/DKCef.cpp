@@ -232,9 +232,14 @@ bool DKCef::Init()
 	int build_version = cef_version_info(4);
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	CefString(&settings.product_version).FromASCII(version_string.c_str());
-	DKLog("Cef version "+version_string+"\n", DKINFO);
+	DKLog("Cef Version: "+version_string+"\n", DKINFO);
 
-    int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
+	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
+	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
+	DKLog("User Agent: "+CefString(&settings.user_agent).ToString()+"\n", DKINFO);
+
+
+	int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
 		DKLog("CefInitialize error", DKERROR);
 		return false;
