@@ -231,7 +231,7 @@ bool DKCef::Init()
 	int major_version = cef_version_info(0);
 	int build_version = cef_version_info(4);
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
-	CefString(&settings.product_version).FromASCII(version_string.c_str());
+	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 	DKLog("Cef Version: "+version_string+"\n", DKINFO);
 
 	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
