@@ -57,6 +57,7 @@ bool DKCefV8::Init()
 
 	//Cef js functions
 	DKV8::AttachFunction("DKCef_CloseBrowser", DKCefV8::CloseBrowser);
+	DKV8::AttachFunction("DKCef_CloseDevTools", DKCefV8::CloseDevTools);
 	DKV8::AttachFunction("DKCef_DownloadUrl", DKCefV8::DownloadUrl);
 	DKV8::AttachFunction("DKCef_FileDialog", DKCefV8::FileDialog);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
@@ -531,6 +532,15 @@ bool DKCefV8::CloseBrowser(CefArgs args, CefReturn retval)
 	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
 	if(!DKCef::Get(id)->CloseBrowser(browser)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefV8::CloseDevTools(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->CloseDevTools(browser)){ return false; }
 	return true;
 }
 

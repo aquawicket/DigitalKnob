@@ -7,6 +7,7 @@
 bool DKCefJS::Init()
 {
 	DKDuktape::AttachFunction("DKCef_CloseBrowser", DKCefJS::CloseBrowser);
+	DKDuktape::AttachFunction("DKCef_CloseDevTools", DKCefJS::CloseDevTools);
 	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl);
 	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
 	DKDuktape::AttachFunction("DKCef_Focused", DKCefJS::Focused);
@@ -35,6 +36,15 @@ int DKCefJS::CloseBrowser(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
 	if(!DKCef::Get(id)->CloseBrowser(browser)){ return 0; }
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKCefJS::CloseDevTools(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	int browser = duk_require_int(ctx, 1);
+	if(!DKCef::Get(id)->CloseDevTools(browser)){ return 0; }
 	return 1;
 }
 

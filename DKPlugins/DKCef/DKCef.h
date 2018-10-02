@@ -28,6 +28,7 @@ public:
 	bool End();
 
 	bool CloseBrowser(const int& browser);
+	bool CloseDevTools(const int& browser);
 	bool DownloadUrl(const DKString& url);
 	bool FileDialog();
 	bool Find(const int& browser, const DKString& text);

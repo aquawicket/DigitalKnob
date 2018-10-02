@@ -305,6 +305,13 @@ bool DKCef::CloseBrowser(const int& browser)
 	return true;
 }
 
+/////////////////////////////////////////////
+bool DKCef::CloseDevTools(const int& browser)
+{
+	browsers[browser]->GetHost()->CloseDevTools();
+	return true;
+}
+
 ////////////////////////////////////////////
 bool DKCef::DownloadUrl(const DKString& url)
 {

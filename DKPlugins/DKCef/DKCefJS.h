@@ -13,6 +13,7 @@ public:
 	
 	//Cef js functions
 	static int CloseBrowser(duk_context* ctx);
+	static int CloseDevTools(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);
 	static int Find(duk_context* ctx);
 	static int Focused(duk_context* ctx);
