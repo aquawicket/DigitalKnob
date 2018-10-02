@@ -566,6 +566,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
+	if(same(type,"second")){ return false; }
 	if(same(type,"mousedown")){ return false; }
 
 	DKCef* dkcef = DKCef::Get("");
@@ -573,6 +574,18 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 		DKLog("DKCef::SendEvent(): dkcef invalid \n", DKERROR);
 		return false;
 	}
+
+	//DKSendEvent to first browsers only
+	CefRefPtr<CefFrame> frame = dkcef->browsers[0]->GetMainFrame();
+	if(!frame){
+		DKLog("DKCef::SendEvent(): frame invalid \n", DKERROR);
+		return false;
+	}
+	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
+	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
+
+	/*
+	//DKSendEvent to all browsers
 	for(unsigned int i=0; i<dkcef->browsers.size(); ++i){
 		CefRefPtr<CefFrame> frame = dkcef->browsers[i]->GetMainFrame();
 		if(!frame){
@@ -582,6 +595,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 		DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 		frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	}
+	*/
 	return true;
 }
 
