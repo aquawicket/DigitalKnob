@@ -567,9 +567,10 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(type.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
 	if(same(type,"second")){ return false; }
-	if(same(type,"mousedown")){ return false; }
 	if(same(type,"mousemove")){ return false; }
-
+	if(same(type,"mousedown")){ return false; }
+	if(same(type,"mouseup")){ return false; }
+	
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){
 		DKLog("DKCef::SendEvent(): dkcef invalid \n", DKERROR);
