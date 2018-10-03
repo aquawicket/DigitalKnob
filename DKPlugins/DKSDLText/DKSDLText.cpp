@@ -44,6 +44,19 @@ bool DKSDLText::SetText(const DKString& text)
 //////////////////////
 void DKSDLText::Draw()
 {
+	//DEBUG CODE
+	SetText(" ");
+	int dtexW = 0;
+	int dtexH = 0;
+	SDL_QueryTexture(texture, NULL, NULL, &dtexW, &dtexH);
+	int dleft = 0;
+	int dtop = 0;
+	SDL_Rect ddstrect = {dleft, dtop, dtexW, dtexH};
+	SDL_RenderCopy(dkSdlWindow->sdlren, texture, NULL, &ddstrect);
+	SDL_DestroyTexture(texture);
+
+	return; //remove to turn fps counter on
+
 	//Draw fps
 	unsigned int fps;
 	DKUtil::GetFps(fps);
