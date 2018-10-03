@@ -544,10 +544,10 @@ bool DKCef::Stop(const int& browser)
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKCef::RunDuktape(DKString& string, DKString& rval)
+////////////////////////////////////////
+bool DKCef::RunDuktape(DKString& string)
 {
-	return DKDuktape::RunDuktape(string, rval);
+	return DKDuktape::RunDuktape(string);
 }
 
 //////////////////////////////////////////

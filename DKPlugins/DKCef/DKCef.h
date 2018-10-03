@@ -48,7 +48,7 @@ public:
 	bool Stop(const int& browser);
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-	static bool RunDuktape(DKString& string, DKString& rval);
+	static bool RunDuktape(DKString& string);
 	static bool QueueDuktape(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
