@@ -276,6 +276,7 @@ bool DKCef::End()
 	//FIXME - many crashes at CefShutdown
 	DKLog("DKCef::End()\n", DKDEBUG);
 	
+	/*
 	current_browser = NULL;
 	for(unsigned int i = 0; i < browsers.size(); ++i){
 		CloseDevTools(i);
@@ -283,8 +284,9 @@ bool DKCef::End()
 		browsers.clear();
 	}
 	cefHandler = NULL;
+	*/
 
-	if(instance_count == 1){
+	//if(instance_count == 1){
 		DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
 		unsigned long threadId;
 		DKUtil::GetThreadId(threadId);
@@ -293,7 +295,7 @@ bool DKCef::End()
 			return false;
 		}
 		CefShutdown(); //call on same thread as CefInitialize
-	}
+	//}
 #ifdef WIN32
 	FreeLibrary(libcef);
 #endif
