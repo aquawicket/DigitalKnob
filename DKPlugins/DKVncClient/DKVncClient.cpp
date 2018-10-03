@@ -147,10 +147,10 @@ bool DKVncClient::Init()
 	*/
 	//Connect("address", "password");
 	
-	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
-	//tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB1555, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	//tex = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB1555, SDL_TEXTUREACCESS_TARGET, cl->width, cl->height);
 
-	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	//SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 	//rfbClientSetClientData(cl, SDL_Init, sdl);
 
 	//ValidateAspectRatio(cl);
@@ -255,7 +255,7 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 		DKLog("DKVncClient::Connect(): rfbInitConnection() failed\n", DKWARN);
 		return false; 
 	}
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
+	tex = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	if(!tex){
 		DKLog("DKVncClient::Connect(): tex invalid\n", DKWARN);
 		return false; 
@@ -352,7 +352,7 @@ void DKVncClient::draw()
 		DKLog("DKVncClient::draw(): SDL_UpdateTexture() failed\n", DKWARN);
 		return;
 	}
-	if(SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1){
+	if(SDL_RenderCopyEx(dkSdlWindow->renderer, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1){
 		DKLog("DKVncClient::draw(): SDL_RenderCopyEx() failed\n", DKWARN);
 		return;
 	}
@@ -380,10 +380,10 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 	SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4);
 
 	//Now render the texture target to our screen
-	SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
-	SDL_RenderClear(dkSdlWindow->sdlren);
-	SDL_RenderCopyEx(dkSdlWindow->sdlren, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
-	SDL_RenderPresent(dkSdlWindow->sdlren);
+	SDL_SetRenderTarget(dkSdlWindow->renderer, NULL);
+	SDL_RenderClear(dkSdlWindow->renderer);
+	SDL_RenderCopyEx(dkSdlWindow->renderer, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+	SDL_RenderPresent(dkSdlWindow->renderer);
 }
 
 //////////////////////////////////////
@@ -515,7 +515,7 @@ bool DKVncClient::handle(SDL_Event *e)
 					if(dkSdlWindow->width != e->window.data1 || dkSdlWindow->height != e->window.data2){
 						dkSdlWindow->width = e->window.data1;
 						dkSdlWindow->height = e->window.data2;
-						if(!SDL_GetWindowFlags(dkSdlWindow->sdlwin) & SDL_WINDOW_MAXIMIZED){
+						if(!SDL_GetWindowFlags(dkSdlWindow->window) & SDL_WINDOW_MAXIMIZED){
 							ValidateAspectRatio(cl);
 						}
 					}
@@ -544,10 +544,10 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	//client->updateRect.x = client->updateRect.y = 0;
 	//client->updateRect.w = width; client->updateRect.h = height;
 
-	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 	client->width = sdl->pitch / (depth / 8);
 	client->height = sdl->h;
-	tex = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+	tex = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 	client->frameBuffer = (uint8_t*)sdl->pixels;
 	client->format.bitsPerPixel=depth;
 	SetFormatAndEncodings(client);
@@ -561,7 +561,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 			//okay = SDL_VideoModeOK(width,height,depth,sdlFlags);
 	if(okay){
 		//SDL_Surface* sdl = SDL_SetVideoMode(width, height, depth, sdlFlags);
-		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+		SDL_Surface* sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 		rfbClientSetClientData(client, SDL_Init, sdl);
 		client->width = sdl->pitch / (depth / 8);
 		if(!sdl->pixels){
@@ -718,9 +718,9 @@ void DKVncClient::put(int x, int y, uint32_t v)
 
 	SDL_Surface* sdl;
 	switch (bytesPerPixel) {
-	case 1: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint8_t *)sdl->pixels)[x + y * rowStride] = v; break;
-	case 2: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint16_t *)sdl->pixels)[x + y * rowStride] = v; break;
-	case 4: sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin); ((uint32_t *)sdl->pixels)[x + y * rowStride] = v; break;
+	case 1: sdl = SDL_GetWindowSurface(dkSdlWindow->window); ((uint8_t *)sdl->pixels)[x + y * rowStride] = v; break;
+	case 2: sdl = SDL_GetWindowSurface(dkSdlWindow->window); ((uint16_t *)sdl->pixels)[x + y * rowStride] = v; break;
+	case 4: sdl = SDL_GetWindowSurface(dkSdlWindow->window); ((uint32_t *)sdl->pixels)[x + y * rowStride] = v; break;
 	default:
 		rfbClientErr("Unknown bytes/pixel: %d", bytesPerPixel);
 		exit(1);
@@ -736,13 +736,13 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 	SDL_Surface* sdl;
 
 	if(w < 0){
-		SDL_GetWindowSize(dkSdlWindow->sdlwin, &w, &h);
+		SDL_GetWindowSize(dkSdlWindow->window, &w, &h);
 	}
 
 	if (w == realWidth && h == realHeight)
 		return;
 
-	sdl = SDL_GetWindowSurface(dkSdlWindow->sdlwin);
+	sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 	if (!sdl) {
 		DKLog("ERROR: "+toString(SDL_GetError())+"\n",DKERROR);
 	}
@@ -899,7 +899,7 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	//DKWindow::SetHeight(300);
 
 	//TODO = test this
-	//SDL_SetWindowBordered(dkSdlWindow->sdlwin, SDL_FALSE);
+	//SDL_SetWindowBordered(dkSdlWindow->window, SDL_FALSE);
 
 	float delta = (float)cl->width / (float)dkSdlWindow->width;
 	DKLog("DKVncClient::ValidateAspectRatio(): "+toString(cl->width)+" / "+toString(dkSdlWindow->width)+" = "+toString(delta)+"\n", DKINFO);
@@ -910,11 +910,11 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	dkSdlWindow->height = (int)height;
 
 	int w, h;
-	SDL_GetWindowSize(dkSdlWindow->sdlwin, &w, &h);
+	SDL_GetWindowSize(dkSdlWindow->window, &w, &h);
 	DKLog("DKVncClient::ValidateAspectRatio(): width="+toString(w)+" height="+toString(h)+"\n", DKINFO);
 
 	//int top, left, bottom, right;
-	//SDL_GetWindowBordersSize(dkSdlWindow->sdlwin, &top, &left, &bottom, &right);
+	//SDL_GetWindowBordersSize(dkSdlWindow->window, &top, &left, &bottom, &right);
 	//DKLog("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n", DKINFO);
 
 	update(cl, 0, 0, cl->width, cl->height);
