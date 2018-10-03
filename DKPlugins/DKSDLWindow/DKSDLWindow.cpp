@@ -115,7 +115,7 @@ bool DKSDLWindow::Init()
 	
 	result = "OpenglES";
 	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n", DKINFO);
-	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &sdlwin, &sdlren) < 0){
+	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
 		return false;
 	}
@@ -129,25 +129,25 @@ bool DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
-	sdlwin = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-	if(!sdlwin){
+	window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+	if(!window){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
 		SDL_Quit();
 		return false;
 	}
 
-	sdlren = NULL;
+	renderer = NULL;
 	if(!same(sdl_renderer, "SOFTWARE")){
 		//result = "SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC";
 		result = "SDL_RENDERER_ACCELERATED";
-		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED /*| SDL_RENDERER_PRESENTVSYNC*/);
 	}
-	if(!sdlren){
+	if(!renderer){
 		result = "SDL_RENDERER_SOFTWARE";
-		sdlren = SDL_CreateRenderer(sdlwin, -1, SDL_RENDERER_SOFTWARE);	
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);	
 	}
-	if(!sdlren){
-		SDL_DestroyWindow(sdlwin);
+	if(!renderer){
+		SDL_DestroyWindow(window);
 		DKLog("SDL_CreateRenderer Error: "+DKString(SDL_GetError()), DKERROR);
 		SDL_Quit();
 		return false;
@@ -184,7 +184,7 @@ bool DKSDLWindow::Init()
 	SetIcon(&icon, NULL);
 
 	//DKLog(title+"\n", DKINFO);
-	SDL_SetWindowTitle(sdlwin, title2.c_str());
+	SDL_SetWindowTitle(window, title2.c_str());
 
 	DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
 	DKClass::RegisterFunc("DKSDLWindow::TestString", &DKSDLWindow::TestString, this);
@@ -223,8 +223,8 @@ bool DKSDLWindow::Init()
 	SDL_SetEventFilter(&DKSDLWindow::EventFilter, this);
 
 #if !defined(ANDROID) && !defined(IOS)
-	SDL_GLContext glcontext = SDL_GL_CreateContext(sdlwin);
-	SDL_GL_MakeCurrent(sdlwin, glcontext);
+	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
+	SDL_GL_MakeCurrent(window, glcontext);
 	gl_version = (char*)glGetString(GL_VERSION);
 	// these are only available with OpenGL 3.0+
 	// https://www.khronos.org/opengl/wiki/Get_Context_Info
@@ -273,7 +273,7 @@ bool DKSDLWindow::Init()
 	DKLog("Stencil Size = "+toString(stencil)+"\n", DKINFO);
 	
 	if(has(gl_vendor, "Microsoft")){
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", sdlwin);
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
 		DKApp::Exit();
 	}
 #endif
@@ -284,8 +284,8 @@ bool DKSDLWindow::Init()
 bool DKSDLWindow::End()
 {
 	//SDL_DestroyTexture(tex);
-	SDL_DestroyRenderer(sdlren);
-	SDL_DestroyWindow(sdlwin);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return true;
 }
@@ -329,7 +329,7 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSDLWindow::Fullscreen(const void* input, void* output)
 {
-	SDL_SetWindowFullscreen(sdlwin, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	return true;
 }
 
@@ -346,7 +346,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 {
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+	SDL_GetWindowWMInfo(window, &wmInfo);
 
 #ifdef WIN32
 	HWND hwnd = wmInfo.info.win.window;
@@ -379,7 +379,7 @@ bool DKSDLWindow::GetHeight(const void* input, void* output)
 {
 	//DKLog("DKSDLWindow::GetHeight()\n", DKINFO);
 	int h;
-	SDL_GetWindowSize(sdlwin, NULL, &h);
+	SDL_GetWindowSize(window, NULL, &h);
 	DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n", DKINFO);
 	if(h == 0){ h = height; }
 	*(int*)output = h;
@@ -416,7 +416,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output)
 {
 	//DKLog("DKSDLWindow::GetWidth()\n", DKINFO);
 	int w;
-	SDL_GetWindowSize(sdlwin, &w, NULL);
+	SDL_GetWindowSize(window, &w, NULL);
 	DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n", DKINFO);
 	if(w == 0){ w = width; }
 	*(int*)output = w;
@@ -427,7 +427,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output)
 bool DKSDLWindow::GetX(const void* input, void* output)
 {
 	int x;
-	SDL_GetWindowPosition(sdlwin, &x, NULL);
+	SDL_GetWindowPosition(window, &x, NULL);
 	*(int*)output = x;
 	return true;
 }
@@ -436,7 +436,7 @@ bool DKSDLWindow::GetX(const void* input, void* output)
 bool DKSDLWindow::GetY(const void* input, void* output)
 {
 	int y;
-	SDL_GetWindowPosition(sdlwin, NULL, &y);
+	SDL_GetWindowPosition(window, NULL, &y);
 	*(int*)output = y;
 	return true;
 }
@@ -444,7 +444,7 @@ bool DKSDLWindow::GetY(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::Hide(const void* input, void* output)
 {
-	SDL_HideWindow(sdlwin);
+	SDL_HideWindow(window);
 	return true;
 }
 
@@ -452,7 +452,7 @@ bool DKSDLWindow::Hide(const void* input, void* output)
 bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 {
 	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-	bool isFullscreen = ((SDL_GetWindowFlags(sdlwin) & FullscreenFlag) != 0);
+	bool isFullscreen = ((SDL_GetWindowFlags(window) & FullscreenFlag) != 0);
 	*(bool*)output = isFullscreen;
 	return true;
 }
@@ -461,7 +461,7 @@ bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 bool DKSDLWindow::IsVisible(const void* input, void* output)
 {
 	long IsVisibleFlag = SDL_WINDOW_SHOWN;
-	bool isVisible = ((SDL_GetWindowFlags(sdlwin) & IsVisibleFlag) != 0);
+	bool isVisible = ((SDL_GetWindowFlags(window) & IsVisibleFlag) != 0);
 	*(bool*)output = isVisible;
 	return true;
 }
@@ -470,21 +470,21 @@ bool DKSDLWindow::IsVisible(const void* input, void* output)
 bool DKSDLWindow::MessageBox(const void* input, void* output)
 {
 	DKString message = *(DKString*)input;
-	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), sdlwin);
+	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
 	return true;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::Minimize(const void* input, void* output)
 {
-	SDL_MinimizeWindow(sdlwin);
+	SDL_MinimizeWindow(window);
 	return true;
 }
 
 //////////////////////////////////////////////////////////
 bool DKSDLWindow::Restore(const void* input, void* output)
 {
-	SDL_RestoreWindow(sdlwin);
+	SDL_RestoreWindow(window);
 	return true;
 }
 
@@ -503,8 +503,8 @@ bool DKSDLWindow::SetHeight(const void* input, void* output)
 {
 	int h = *(int*)input;
 	int w;
-	SDL_GetWindowSize(sdlwin, &w, NULL);
-	SDL_SetWindowSize(sdlwin, w, h);
+	SDL_GetWindowSize(window, &w, NULL);
+	SDL_SetWindowSize(window, w, h);
 	return true;
 }
 
@@ -515,7 +515,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output)
 	DKString file = *(DKString*)input;
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
-	SDL_GetWindowWMInfo(sdlwin, &wmInfo);
+	SDL_GetWindowWMInfo(window, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
 	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
@@ -529,7 +529,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output)
 bool DKSDLWindow::SetTitle(const void* input, void* output)
 {
 	DKString title = *(DKString*)input;
-	SDL_SetWindowTitle(sdlwin, title.c_str());
+	SDL_SetWindowTitle(window, title.c_str());
 	DKLog("DKSDLWindow::SetTitle is not implemented on this OS. \n", DKWARN);
 	return false;
 }
@@ -539,8 +539,8 @@ bool DKSDLWindow::SetWidth(const void* input, void* output)
 {
 	int w = *(int*)input;
 	int h;
-	SDL_GetWindowSize(sdlwin, NULL, &h);
-	SDL_SetWindowSize(sdlwin, w, h);
+	SDL_GetWindowSize(window, NULL, &h);
+	SDL_SetWindowSize(window, w, h);
 	return true;
 }
 
@@ -549,8 +549,8 @@ bool DKSDLWindow::SetX(const void* input, void* output)
 {
 	int x = *(int*)input;
 	int y;
-	SDL_GetWindowPosition(sdlwin, NULL, &y);
-	SDL_SetWindowPosition(sdlwin, x, y);
+	SDL_GetWindowPosition(window, NULL, &y);
+	SDL_SetWindowPosition(window, x, y);
 	return true;
 }
 
@@ -559,22 +559,22 @@ bool DKSDLWindow::SetY(const void* input, void* output)
 {
 	int y = *(int*)input;
 	int x;
-	SDL_GetWindowPosition(sdlwin, &x, NULL);
-	SDL_SetWindowPosition(sdlwin, x, y);
+	SDL_GetWindowPosition(window, &x, NULL);
+	SDL_SetWindowPosition(window, x, y);
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::Show(const void* input, void* output)
 {
-	SDL_ShowWindow(sdlwin);
+	SDL_ShowWindow(window);
 	return true;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::Windowed(const void* input, void* output)
 {
-	SDL_SetWindowFullscreen(sdlwin, 0); 
+	SDL_SetWindowFullscreen(window, 0); 
 	return true;
 }
 
@@ -582,17 +582,17 @@ bool DKSDLWindow::Windowed(const void* input, void* output)
 ///////////////////////////
 void DKSDLWindow::Process()
 {
-	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_HIDDEN){ 
+	if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN){ 
 		DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
 	}
 	
-	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_SHOWN){ 
-		SDL_SetRenderTarget(sdlren, NULL); 
-		SDL_SetRenderDrawColor(sdlren, 178, 178, 220, 255); //light grey w/ blue tint
-		//SDL_SetRenderDrawColor(sdlren, 255, 255, 255, 255); //white
-		SDL_RenderClear(sdlren);
-		SDL_SetRenderDrawColor(sdlren, 0, 0, 0, 255); //black
-		SDL_RenderDrawLine(sdlren, 0, height / 2, width, height / 2 );
+	if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
+		SDL_SetRenderTarget(renderer, NULL); 
+		SDL_SetRenderDrawColor(renderer, 178, 178, 220, 255); //light grey w/ blue tint
+		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
+		SDL_RenderClear(renderer);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //black
+		SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
 	}
 
 	SDL_Event e;
@@ -604,12 +604,12 @@ void DKSDLWindow::Process()
 		}
 	}
 	
-	if(SDL_GetWindowFlags(sdlwin) & SDL_WINDOW_SHOWN){ 
+	if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
 		for(unsigned int i = 0; i < draw_funcs.size(); ++i){
 			draw_funcs[i](); //Call event functions
 		}
 
-		SDL_RenderPresent(sdlren);
+		SDL_RenderPresent(renderer);
 	}
 }
 
@@ -619,27 +619,27 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 	if(event->type == SDL_WINDOWEVENT){
 		switch(event->window.event){
 			case SDL_WINDOWEVENT_MOVED:{
-				DKSDLWindow* dksdlwindow = static_cast<DKSDLWindow*>(userdata);
-				dksdlwindow->winX = event->window.data1;
-				dksdlwindow->winY = event->window.data2;
-				dksdlwindow->Process();
-				DKEvent::SendEvent("GLOBAL", "move", toString(dksdlwindow->winX)+","+toString(dksdlwindow->winY));
+				DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+				dkwindowdow->winX = event->window.data1;
+				dkwindowdow->winY = event->window.data2;
+				dkwindowdow->Process();
+				DKEvent::SendEvent("GLOBAL", "move", toString(dkwindowdow->winX)+","+toString(dkwindowdow->winY));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_RESIZED:{
-				DKSDLWindow* dksdlwindow = static_cast<DKSDLWindow*>(userdata);
-				dksdlwindow->width = event->window.data1;
-				dksdlwindow->height = event->window.data2;
-				dksdlwindow->Process();
-				DKEvent::SendEvent("GLOBAL", "resize", toString(dksdlwindow->width)+","+toString(dksdlwindow->height));
+				DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+				dkwindowdow->width = event->window.data1;
+				dkwindowdow->height = event->window.data2;
+				dkwindowdow->Process();
+				DKEvent::SendEvent("GLOBAL", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_SIZE_CHANGED:{
-				DKSDLWindow* dksdlwindow = static_cast<DKSDLWindow*>(userdata);
-				dksdlwindow->width = event->window.data1;
-				dksdlwindow->height = event->window.data2;
-				dksdlwindow->Process();
-				DKEvent::SendEvent("GLOBAL", "resize", toString(dksdlwindow->width)+","+toString(dksdlwindow->height));
+				DKSDLWindow* dkwindowdow = static_cast<DKSDLWindow*>(userdata);
+				dkwindowdow->width = event->window.data1;
+				dkwindowdow->height = event->window.data2;
+				dkwindowdow->Process();
+				DKEvent::SendEvent("GLOBAL", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_MINIMIZED:{

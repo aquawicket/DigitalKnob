@@ -257,16 +257,16 @@ public:
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){
-				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
+				dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 			}
 
 			if (!dkSdlCef->background_image) {
-				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
 			int w2, h2;
 			SDL_QueryTexture(dkSdlCef->background_image, NULL, NULL, &w2, &h2);
 			if (w2 != width || h2 != height) {
-				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+				dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
 
 			unsigned char * texture_data = NULL;
@@ -282,12 +282,12 @@ public:
 			DKLog("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n", DKINFO);
 			//if(dirtyRects.size() == 0){ return; }
 			if(!dkSdlCef->popup_image){
-				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
 			int w, h;
 			SDL_QueryTexture(dkSdlCef->popup_image, NULL, NULL, &w, &h);
 			if(w != width || h != height){
-				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+				dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 			}
 			void* mPixels;
 			int mPitch;
@@ -299,17 +299,17 @@ public:
 		}
 
 		if(dkSdlCef->cef_image) {	
-			SDL_SetRenderTarget(dkSdlWindow->sdlren, dkSdlCef->cef_image);
-			SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->background_image, NULL, NULL);
+			SDL_SetRenderTarget(dkSdlWindow->renderer, dkSdlCef->cef_image);
+			SDL_RenderCopy(dkSdlWindow->renderer, dkSdlCef->background_image, NULL, NULL);
 			if(dkSdlCef->popup_image){
 				SDL_Rect popup;
 				popup.x = dkSdlCef->popup_rect.x;
 				popup.y = dkSdlCef->popup_rect.y;
 				popup.w = dkSdlCef->popup_rect.width;
 				popup.h = dkSdlCef->popup_rect.height;
-				SDL_RenderCopy(dkSdlWindow->sdlren, dkSdlCef->popup_image, NULL, &popup);	
+				SDL_RenderCopy(dkSdlWindow->renderer, dkSdlCef->popup_image, NULL, &popup);	
 			}
-			SDL_SetRenderTarget(dkSdlWindow->sdlren, NULL);
+			SDL_SetRenderTarget(dkSdlWindow->renderer, NULL);
 		}
 	}
 

@@ -90,7 +90,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
 	if(!cef_image){
-		cef_image = SDL_CreateTexture(dkSdlWindow->sdlren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
+		cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
 	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
@@ -407,5 +407,5 @@ void DKSDLCef::Draw()
 	texture_rect.w = dkCef->width; //the width of the texture
 	texture_rect.h = dkCef->height; //the height of the texture
 	//SDL_RenderClear(dkSdlWindow->sdlren);
-	SDL_RenderCopy(dkSdlWindow->sdlren, cef_image, NULL, &texture_rect);
+	SDL_RenderCopy(dkSdlWindow->renderer, cef_image, NULL, &texture_rect);
 }

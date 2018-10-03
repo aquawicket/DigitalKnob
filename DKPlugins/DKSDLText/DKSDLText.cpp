@@ -36,7 +36,7 @@ bool DKSDLText::End()
 bool DKSDLText::SetText(const DKString& text)
 {
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
-	texture = SDL_CreateTextureFromSurface(dkSdlWindow->sdlren, surface);
+	texture = SDL_CreateTextureFromSurface(dkSdlWindow->renderer, surface);
 	SDL_FreeSurface(surface);
 	return true;
 }
@@ -52,7 +52,7 @@ void DKSDLText::Draw()
 	int dleft = 0;
 	int dtop = 0;
 	SDL_Rect ddstrect = {dleft, dtop, dtexW, dtexH};
-	SDL_RenderCopy(dkSdlWindow->sdlren, texture, NULL, &ddstrect);
+	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &ddstrect);
 	SDL_DestroyTexture(texture);
 
 	return; //remove to turn fps counter on
@@ -68,6 +68,6 @@ void DKSDLText::Draw()
 	int left = 5;
 	int top = dkSdlWindow->height - texH;
 	SDL_Rect dstrect = {left, top, texW, texH};
-	SDL_RenderCopy(dkSdlWindow->sdlren, texture, NULL, &dstrect);
+	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);
 }

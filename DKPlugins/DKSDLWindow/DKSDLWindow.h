@@ -52,9 +52,9 @@ public:
 	static std::map<int,int> sdlMacCode;
 	void MapInputs();
 
-	SDL_Window* sdlwin;
-	SDL_Renderer* sdlren;
-	//SDL_GLContext sldcontext;
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	//SDL_GLContext context;
 	DKString gl_major_version;
 	DKString gl_minor_version;
 	DKString gl_version;

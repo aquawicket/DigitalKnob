@@ -21,7 +21,7 @@ bool DKSDLRocket::Init()
 #ifdef ROCKET_SHELL_RENDER
 	Renderer = new ShellRenderInterfaceOpenGL();
 #else
-	Renderer = new RocketSDL2Renderer(dkSdlWindow->sdlren, dkSdlWindow->sdlwin);
+	Renderer = new RocketSDL2Renderer(dkSdlWindow->renderer, dkSdlWindow->window);
 #endif
 
 	SystemInterface = new RocketSDL2SystemInterface();
@@ -142,8 +142,8 @@ void DKSDLRocket::Draw()
 	if(dkSdlWindow->width != dkRocket->context->GetDimensions().x || dkSdlWindow->height != dkRocket->context->GetDimensions().y){
 		dkRocket->context->SetDimensions(Rocket::Core::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
-		SDL_SetRenderDrawBlendMode(dkSdlWindow->sdlren, SDL_BLENDMODE_NONE);
-		SDL_RenderDrawPoint(dkSdlWindow->sdlren, -1, -1);
+		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
+		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
 	dkRocket->context->Render();
 	dkRocket->context->Update();
