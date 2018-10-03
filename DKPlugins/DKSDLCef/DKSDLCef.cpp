@@ -406,5 +406,6 @@ void DKSDLCef::Draw()
 	texture_rect.x = dkCef->left;  //the x coordinate
 	texture_rect.w = dkCef->width; //the width of the texture
 	texture_rect.h = dkCef->height; //the height of the texture
+	//SDL_RenderClear(dkSdlWindow->sdlren);
 	SDL_RenderCopy(dkSdlWindow->sdlren, cef_image, NULL, &texture_rect);
 }
