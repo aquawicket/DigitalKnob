@@ -243,7 +243,8 @@ public:
 		//DKLog("DKCefWindow::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
 		DKString string = message.ToString();
 		replace(string,"%c","");
-		DKLog("[CEF] "+string+"\n", DKINFO);
+		int identifier = browser->GetIdentifier();
+		DKLog("[CEF:"+toString(identifier)+"] "+string+"\n", DKINFO);
 		return true;
 	}
 

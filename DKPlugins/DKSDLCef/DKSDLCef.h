@@ -285,14 +285,15 @@ public:
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 	{
 		//DKLog("DKSDLCefHandler::OnConsoleMessage()\n", DKINFO);
-		
+
 		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
 		//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
 		DKString string = message.ToString();
 		replace(string,"%c","");
-		DKLog("[CEF] "+string+"\n", DKINFO);
+		int identifier = browser->GetIdentifier();
+		DKLog("[CEF:"+toString(identifier)+"] "+string+"\n", DKINFO);
 		return true;
 	}
 
