@@ -5,6 +5,7 @@
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
 #include "DKSDLCef/DKSDLCef.h"
+#include "DKSDLCef/DKSDLCefHandler.h"
 #ifdef WIN32
 #include <delayimp.h>
 #include "DK/DKWindows.h"
