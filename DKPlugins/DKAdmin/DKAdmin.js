@@ -5,6 +5,15 @@ function DKAdmin_Init()
 	
 	DKCreate("DKAdmin/DKAdmin.html");
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
+	
+	DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+	if(DK_GetBrowser() == "Rocket"){
+		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminRed.png");
+	}
+	else{
+		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminBlue.png");
+		DKWidget_SetProperty("DKAdmin/DKAdmin.html", "left", "40rem");
+	}
 }
 
 //////////////////////
