@@ -46,11 +46,6 @@ bool DKCef::Init()
 	fullscreen = false;
 	queue_new_browser = "";
 
-//FIXME - we need to grab the dll from the correct location
-//   assets/DKCef is not a good place
-//   the path needs more details, specifically OS/BuildType
-//   example:   assets/DKCef/win32Debug/libcef.dll
-//        or    assets/DKCef/win32Release/libcef.dll
 #if defined(WIN32) && !defined(WIN64)
 	DKString elf_dll;
 	DKString cef_dll;
@@ -68,7 +63,7 @@ bool DKCef::Init()
 		DKLog("Could not load " + elf_dll + ": " + error + "\n", DKERROR);
 		FreeLibrary(libelf);
 	}
-	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL to move it's locations
+	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL from another location
 
 	libcef = LoadLibrary(cef_dll.c_str());
 	if(!libcef){
@@ -77,7 +72,7 @@ bool DKCef::Init()
 		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
 		FreeLibrary(libcef);
 	}
-	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations  
+	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL from another location 
 #endif
 
 
@@ -150,7 +145,7 @@ bool DKCef::Init()
 	}
 	
 	if(same(DKV8::multi_threaded_message_loop, "ON")){
-	  settings.multi_threaded_message_loop = true;
+		settings.multi_threaded_message_loop = true;
 	}
 
 	if(same(DKV8::multi_process, "ON")){
@@ -507,7 +502,6 @@ bool DKCef::Reload(const int& browser)
 bool DKCef::SelectBrowser(int& browser)
 {
 	//DKLog("SelectBrowser: "+toString(browser)+"\n");
-	current_browser->GetHost()->Invalidate(PET_VIEW);
 	current_browser = browsers[browser];
 	current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
