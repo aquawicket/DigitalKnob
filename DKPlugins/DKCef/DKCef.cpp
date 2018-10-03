@@ -1,6 +1,11 @@
 #include "DK/stdafx.h"
+#include <sstream>
+#include <string>
 #include <include/cef_urlrequest.h>
 #include <include/cef_version.h>
+#include "include/base/cef_bind.h"
+#include "include/wrapper/cef_closure_task.h"
+#include "include/wrapper/cef_helpers.h"
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"
 #include "DK/DKFile.h"
@@ -550,13 +555,19 @@ bool DKCef::QueueDuktape(DKString& string)
 ///////////////////////////////////////////////////////////////
 bool DKCef::RunJavascript(const int& browser, DKString& string)
 {
-	//if(!DKUtil::InMainThread()){ return false; }
-	DKCef* dkcef = DKCef::Get("");
-	if(!dkcef){
+	//FIXME - get CefPostTask working
+	//if(!CefCurrentlyOn(TID_UI)){
+	//	CefPostTask(TID_UI, base::Bind(&DKCef::RunJavascript, this, string));
+	//	return false;
+	//}
+
+	if(!DKUtil::InMainThread()){ return false; }
+	DKCef* dkCef = DKCef::Get("");
+	if(!dkCef){
 		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid \n", DKERROR);
 		return false;
 	}
-	CefRefPtr<CefFrame> frame = dkcef->browsers[browser]->GetMainFrame();
+	CefRefPtr<CefFrame> frame = dkCef->browsers[browser]->GetMainFrame();
 	if(!frame){
 		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
 		return false;

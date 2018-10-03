@@ -63,9 +63,9 @@ public:
 	DKString queue_new_browser;
 
 	std::vector<CefRefPtr<CefBrowser> > browsers;
-	CefBrowser* current_browser;
+	CefRefPtr<CefBrowser> current_browser;
 	CefRefPtr<DKCefApp> cefApp;
-	CefClient* cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
+	CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 

@@ -686,7 +686,7 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
 	DKString code = args->GetString(2);
-	if(!DKCef::RunJavascript(browser, code)){ return false; }
+	if(!DKCef::Get(id)->RunJavascript(browser, code)){ return false; }
 	return true;
 }
 
