@@ -21,13 +21,20 @@ function DKMenu_OnEvent(event)
 function DKMenu_ValidatePosition(id)
 {
 	DKLog("DKMenu_ValidatePosition("+id+")\n");
-	DKLog("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
-	DKLog("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 
-	DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
-	DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"rem");
-	DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"px");
-	DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"rem");
+	//DKLog("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
+	//DKLog("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
+	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
+	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"rem");
+	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"px");
+	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"rem");
+	
+	DKLog("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
+	DKLog("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
+	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"px");
+	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"rem");
+	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"px");
+	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"rem");
 	
 	//make sure menu is within window
 	var win_width = Number(DKWidget_GetClientWidth("body"));
