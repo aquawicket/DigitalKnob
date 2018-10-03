@@ -34,7 +34,6 @@ function AdjustRems(id)
 */
 
 
-
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {

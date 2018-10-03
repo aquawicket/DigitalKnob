@@ -205,7 +205,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKLog(elements[i].src+": has no id\n", DKWARN);
+			DKLog(elements[i].src+": js object has no id\n", DKWARN);
 			continue; 
 		}
 		jsfiles += elements[i].id+",";
@@ -216,7 +216,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("link");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKLog(elements[i].href+": has no id\n", DKWARN);
+			DKLog(elements[i].href+": css object has no id\n", DKWARN);
 			continue; 
 		}
 		cssfiles += elements[i].id+",";
@@ -228,7 +228,7 @@ function DK_GetObjects()
 	for(var i = divs.length; i;){
 		var div = divs[--i];
 		if(!div.id){
-			DKLog(div+": has no id\n", DKWARN);
+			DKLog(div+": html object has no id\n", DKWARN);
 			continue; 
 		}
 		if(div.id.indexOf(".html") > -1){
