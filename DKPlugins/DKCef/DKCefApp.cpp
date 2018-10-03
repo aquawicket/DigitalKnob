@@ -352,6 +352,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	if(same(DKV8::enable_gpu, "ON")){
 		command_line->AppendSwitchWithValue("enable-gpu", "1");
 	}
+	command_line->AppendSwitchWithValue("disable-extensions", "1");
 #ifdef LINUX
 	command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
 	command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");

@@ -282,7 +282,9 @@ bool DKCef::End()
 		browsers.clear();
 	}
 	cefHandler = NULL;
+
 	if(instance_count == 1){
+		DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
 		CefShutdown();
 	}
 #ifdef WIN32
