@@ -507,6 +507,7 @@ bool DKCef::Reload(const int& browser)
 bool DKCef::SelectBrowser(int& browser)
 {
 	//DKLog("SelectBrowser: "+toString(browser)+"\n");
+	current_browser->GetHost()->Invalidate(PET_VIEW);
 	current_browser = browsers[browser];
 	current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
