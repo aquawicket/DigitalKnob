@@ -28,7 +28,7 @@ DKString DKUpdate::url;
 /////////////////////
 bool DKUpdate::Init()
 {
-	DKLog("DKUpdate::Init()\n", DKINFO);
+	DKLog("DKUpdate::Init()\n", DKDEBUG);
 
 	DKString app;
 	DKFile::GetExeName(app);

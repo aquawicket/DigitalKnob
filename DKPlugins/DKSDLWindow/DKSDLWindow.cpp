@@ -35,7 +35,7 @@ std::map<int,int> DKSDLWindow::sdlMacCode;
 ////////////////////////
 bool DKSDLWindow::Init()
 {
-	DKLog("DKSDLWindow::Init()\n", DKINFO);
+	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
 
 #ifdef ANDROID
 		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);

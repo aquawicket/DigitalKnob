@@ -10,7 +10,8 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 /////////////////////
 bool DKRocket::Init()
 {
-	DKLog("DKRocket::Init() \n", DKINFO);
+	DKLog("DKRocket::Init() \n", DKDEBUG);
+	
 	DKClass::DKCreate("DKRocketJS");
 	document = NULL;
 

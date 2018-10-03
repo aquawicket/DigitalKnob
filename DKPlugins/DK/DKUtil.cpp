@@ -836,7 +836,7 @@ bool DKUtil::SetClipboardFiles(const DKString& filelist)
 /////////////////////////////////////////
 bool DKUtil::SetFramerate(const int& fps)
 {
-	DKLog("DKApp::SetFramerate("+DKString(toString(fps))+")\n", DKINFO);
+	DKLog("DKUtil::SetFramerate("+DKString(toString(fps))+")\n", DKDEBUG);
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return true; }
 	ticksPerFrame = 1000 / _fps;

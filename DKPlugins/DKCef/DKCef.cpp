@@ -19,7 +19,7 @@
 //////////////////
 bool DKCef::Init()
 {
-	DKLog("DKCef::Init()\n", DKINFO);
+	DKLog("DKCef::Init()\n", DKDEBUG);
 	
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);

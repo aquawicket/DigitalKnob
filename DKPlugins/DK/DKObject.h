@@ -117,7 +117,7 @@ public:
 	/////////////////////////////////////
 	static void Close(const DKString& id)
 	{
-		DKLog("DKObject::Close("+id+")\n", DKINFO);
+		DKLog("DKObject::Close("+DKString(classname)+","+id+")\n", DKDEBUG);
 		
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
