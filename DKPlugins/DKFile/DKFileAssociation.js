@@ -48,7 +48,7 @@ function DKFileAssociation_OpenHtml(path)
 {
 	//DKLog("DKFileAssociation_OpenHtml("+path+")\n");
 	
-	path = path.replace(absolutepath, "");
+	//path = path.replace(absolutepath, "");
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	//var id = DKFile_GetFilename(path);
@@ -104,7 +104,7 @@ function DKFileAssociation_OpenJS(path)
 {
 	//DKLog("DKFileAssociation_OpenJS("+path+")\n");
 	
-	path = path.replace(absolutepath, "");
+	//path = path.replace(absolutepath, "");
 		
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
