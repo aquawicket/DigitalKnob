@@ -253,10 +253,19 @@ bool DKDuktape::Reload()
 	return true;
 }
 
+////////////////////////////////////////////////
+bool DKDuktape::RunDuktape(const DKString& code)
+{
+	DKLog("DKDuktape::RunDuktape("+code+")\n", DKINFO);
+	if(!DKUtil::InMainThread()){ return false; }
+	duk_eval_string(DKDuktape::ctx, code.c_str());
+	return true;
+}
+
 ////////////////////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
-	DKLog("DKDuktape::RunDuktape("+code+")\n", DKINFO);
+	DKLog("DKDuktape::RunDuktape("+code+", rval)\n", DKINFO);
 	if(!DKUtil::InMainThread()){ return false; }
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 
@@ -393,7 +402,7 @@ void DKDuktape::EventLoop()
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
 		DKString rval;
-		DKDuktape::RunDuktape(codeToRun[0], rval);
+		DKDuktape::RunDuktape(codeToRun[0]);
 		codeToRun.erase(codeToRun.begin());
 	}
 }

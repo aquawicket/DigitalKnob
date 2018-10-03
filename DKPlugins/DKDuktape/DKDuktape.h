@@ -19,6 +19,7 @@ public:
 	static bool LoadFile(const DKString& path);
 	static bool OnEvent(DKEvent* event);
 	static bool Reload();
+	static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
 	static bool QueueDuktape(const DKString& code);
 
