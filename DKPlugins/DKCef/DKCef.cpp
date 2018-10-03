@@ -285,7 +285,7 @@ bool DKCef::End()
 
 	if(instance_count == 1){
 		DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
-		CefShutdown();
+		CefShutdown(); //call on same thread as CefInitialize
 	}
 #ifdef WIN32
 	FreeLibrary(libcef);
