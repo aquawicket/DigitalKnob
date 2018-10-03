@@ -42,7 +42,7 @@ document.onmousemove = function(e){
 function DKCreate(data, callback)
 {
 	DKLog("DKCreate("+data+")\n");
-	
+		
 	var arry = data.split(",");
 	
 	if(arry[0].indexOf(".html") > -1){
@@ -76,15 +76,15 @@ function DKCreate(data, callback)
 	}
 	if(arry[0] == "DKWidget"){
 		//DKLog("DKCreate(data, callback)\n", DKINFO);
-		if(!DKWidget_NewWidget(arry[1], arry[2])){
-			return false;
-		}
-		if(callback){ 
-			callback(); 
-		}
-		else{
+			if(!DKWidget_NewWidget(arry[1], arry[2])){
+				return false;
+			}
+			if(callback){ 
+				callback(); 
+			}
+			else{
 			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
-		}
+			}
 	}
 	if(arry[0] == "DKCss"){
 		if(!LoadCss(arry[1])){
