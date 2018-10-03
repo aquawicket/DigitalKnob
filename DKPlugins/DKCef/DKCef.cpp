@@ -283,6 +283,7 @@ bool DKCef::End()
 	
 	current_browser = NULL;
 	for(unsigned int i = 0; i < browsers.size(); ++i){
+		CloseDevTools(i);
 		browsers[i]	= NULL;
 		browsers.clear();
 	}
