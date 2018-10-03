@@ -70,7 +70,7 @@ public:
 	/////////////////////////////////////////
 	static void DKClose(const DKString& data)
 	{
-		DKLog("DKClass::DKClose("+data+")\n", DKINFO);
+		DKLog("DKClass::DKClose("+data+")\n", DKDEBUG);
 		//data = (class,id)
 		DKClass::_Close(data);
 	}
