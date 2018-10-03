@@ -4,68 +4,7 @@ function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not avai
 function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKWARN); return color; }
 
 
-/////////////////////////////////
-function DKCreate(data, callback)
-{
-	DKLog("DKCreate("+data+")\n");
-	
-	var arry = data.split(",");
-	
-	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
-	}
-	else if(arry[0].indexOf(".js") > -1){
-		arry.splice(0, 0, "DKJavascript");
-	}
-	else if(arry[0].indexOf(".css") > -1){
-		arry.splice(0, 0, "DKCss");
-	}
-	else{
-		//DKLog("DKCreate("+data+"): requesting c++ plugin\n");
-		if(DK_GetBrowser() == "CEF"){
-			DKCreate_CPP(data);
-		}
-	}
-	
-	if(arry[0] == "DKJavascript"){
-		if(!LoadJs(arry[1], function(rval){
-			if(callback){ 
-				callback(rval); 
-			}
-			else{
-				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
-			}
-		})
-		){
-			return false;
-		}
-	}
-	if(arry[0] == "DKWidget"){
-		//DKLog("DKCreate(data, callback)\n", DKINFO);
-		if(!DKWidget_NewWidget(arry[1], arry[2])){
-			return false;
-		}
-		if(callback){ 
-			callback(); 
-		}
-		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
-		}
-	}
-	if(arry[0] == "DKCss"){
-		if(!LoadCss(arry[1])){
-			return false;
-		}
-		if(callback){ 
-			callback(); 
-		}
-		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
-		}
-	}
 
-	return true;
-}
 
 /*
 //Mobile device minimum font-size fix
@@ -94,72 +33,7 @@ function AdjustRems(id)
 }
 */
 
-//////////////////////
-function DKClose(data)
-{
-	DKLog("DKClose("+data+")\n");
-	
-	if(!data){
-		DKLog("DKClose("+data+"): data empty \n", DKERROR);
-		return false;
-	}
-	
-	var arry = data.split(",");
-	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
-	}
-	else if(arry[0].indexOf(".js") > -1){
-		arry.splice(0, 0, "DKJavascript");
-	}
-	else if(arry[0].indexOf(".css") > -1){
-		arry.splice(0, 0, "DKCss");
-	}
-	
-	var file = DKFile_GetFilename(arry[1]);
-	if(!file){ 
-		DKLog("DKClose("+data+"): file invalid \n", DKERROR);
-		return false; 
-	}
-	
-	if(arry[0] == "DKJavascript"){
-		var name = file.replace(".js", "");
-		name += "_End";
-		var func = window[name]; //End
-		if(typeof func == 'function'){ 
-			func(); // Call the jsclass_End() function
-		}
-		else{
-			DKLog(name+" is not callable \n", DKWARN);
-		}
-		var script = document.getElementById(arry[1]);
-		if(!script){
-			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
-			return false;
-		}
-		script.parentNode.removeChild(script);
-		//DKLog("Closed "+arry[1]+"\n");
-	}
-	if(arry[0] == "DKWidget"){
-		var element = document.getElementById(arry[1]);
-		if(!element){ 
-			//DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
-			return false; 
-		}
-		element.parentNode.removeChild(element);
-		//DKLog("Closed "+arry[1]+"\n");
-	}
-	if(arry[0] == "DKCss"){
-		var css = document.getElementById(arry[1]);
-		if(!css){ 
-			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
-			return false; 
-		}
-		css.parentNode.removeChild(css);
-		//DKLog("Closed "+arry[1]+"\n");
-	}
-	
-	return true;
-}
+
 
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
