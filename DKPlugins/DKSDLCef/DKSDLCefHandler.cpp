@@ -1,5 +1,65 @@
 #include "DK/stdafx.h"
+#include <sstream>
+#include <string>
 #include "DKSDLCef/DKSDLCefHandler.h"
+
+namespace{
+	DKSDLCefHandler* g_instance = NULL;
+}
+
+//////////////////////////////////////////////////////
+DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false) 
+{
+	DCHECK(!g_instance);
+	g_instance = this;
+}
+
+///////////////////////////////////
+DKSDLCefHandler::~DKSDLCefHandler() 
+{
+	g_instance = NULL;
+}
+
+///////////////////////////////////////////////
+DKSDLCefHandler* DKSDLCefHandler::GetInstance() 
+{
+	return g_instance;
+}
+
+////////////////////////////////////////////////////////
+void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
+{
+	if(!CefCurrentlyOn(TID_UI)){
+		// Execute on the UI thread.
+		//CefPostTask(TID_UI, base::Bind(&DKSDLCefHandler::CloseAllBrowsers, this, force_close));
+		return;
+	}
+
+	if(browser_list_.empty()){ return; }
+
+	BrowserList::const_iterator it = browser_list_.begin();
+	for(; it != browser_list_.end(); ++it){
+		(*it)->GetHost()->CloseBrowser(force_close);
+	}
+}
+
+////////////////////////////////////////////////////////////
+bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) 
+{
+	CEF_REQUIRE_UI_THREAD();
+
+	// Closing the main window requires special handling. See the DoClose()
+	// documentation in the CEF header for a detailed destription of this
+	// process.
+	if (browser_list_.size() == 1) {
+		// Set a flag to indicate that the window close should be allowed.
+		is_closing_ = true;
+	}
+
+	// Allow the close. For windowed browsers this will result in the OS close
+	// event being sent.
+	return false;
+}
 
 ///////////////////////////////
 void DKSDLCefHandler::DoFrame()
@@ -16,10 +76,33 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////////
+void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
+{
+	DKLog("DKSDLCefHandler::OnBeforeClose(browser)\n", DKDEBUG);
+	CEF_REQUIRE_UI_THREAD();
+
+	// Remove from the list of existing browsers.
+	BrowserList::iterator bit = browser_list_.begin();
+	for (; bit != browser_list_.end(); ++bit) {
+		if ((*bit)->IsSame(browser)) {
+			browser_list_.erase(bit);
+			break;
+		}
+	}
+
+	if(browser_list_.empty()){
+		//NOTE: disabled since we run our own message loop
+		//CefQuitMessageLoop(); // All browser windows have closed. Quit the application message loop.
+	}
+}
+
 ///////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
+	DKLog("DKSDLCefHandler::OnAfterCreated(browser)\n", DKDEBUG);
 	CEF_REQUIRE_UI_THREAD();
+	browser_list_.push_back(browser); //Add to the list of existing browsers.
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,6 +233,17 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 void DKSDLCefHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 { 
 	DKLog("DKSDLCefHandler::OnLoadError("+toString(errorCode)+","+errorText.ToString()+","+failedUrl.ToString()+")\n", DKDEBUG);
+	
+	if(errorCode == ERR_ABORTED){ return; } // Don't display an error for downloaded files.
+
+	// Display a load error message.
+	std::stringstream ss;
+	ss << "<html><body bgcolor=\"white\">"
+		"<h2>Failed to load URL "
+		<< std::string(failedUrl) << " with error " << std::string(errorText)
+		<< " (" << errorCode << ").</h2></body></html>";
+	frame->LoadString(ss.str(), failedUrl);
+	
 	DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadError", toString(errorCode));
 }
 

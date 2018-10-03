@@ -23,9 +23,16 @@ class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoa
 {
 public:
 
-	//static DKSDLCefHandler* GetInstance();
+	DKSDLCefHandler();
+	~DKSDLCefHandler();
+	static DKSDLCefHandler* GetInstance(); //Provide access to the single global instance of this object.
+	
+	//List of existing browser windows. Only accessed on the CEF UI thread.
+	typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
+	BrowserList browser_list_;
+	bool is_closing_;
 
-	DKSDLCefHandler(){}
+
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
@@ -38,9 +45,13 @@ public:
 	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
 	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
 
+	void CloseAllBrowsers(bool force_close);
+	bool DoClose(CefRefPtr<CefBrowser> browser);
 	void DoFrame();
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect);
+	bool IsClosing() const { return is_closing_; }
 	void OnAfterCreated(CefRefPtr<CefBrowser> browser);
+	void OnBeforeClose(CefRefPtr<CefBrowser> browser);
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model);
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback);
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access);
