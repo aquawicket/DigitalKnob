@@ -139,7 +139,7 @@ void DKClass::_Close(const DKString& data)
 ////////////////////////
 void DKClass::CloseAll()
 {
-	DKLog("DKClass::CloseAll()\n", DKINFO);
+	DKLog("DKClass::CloseAll()\n", DKDEBUG);
 	
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
