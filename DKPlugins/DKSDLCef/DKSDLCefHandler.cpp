@@ -1,6 +1,9 @@
 #include "DK/stdafx.h"
 #include <sstream>
 #include <string>
+#include "include/base/cef_bind.h"
+#include "include/wrapper/cef_closure_task.h"
+#include "include/wrapper/cef_helpers.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
 
 namespace{
@@ -31,7 +34,7 @@ void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 {
 	if(!CefCurrentlyOn(TID_UI)){
 		// Execute on the UI thread.
-		//CefPostTask(TID_UI, base::Bind(&DKSDLCefHandler::CloseAllBrowsers, this, force_close));
+		CefPostTask(TID_UI, base::Bind(&DKSDLCefHandler::CloseAllBrowsers, this, force_close));
 		return;
 	}
 
