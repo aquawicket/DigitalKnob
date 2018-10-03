@@ -235,8 +235,9 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 	{
-		CEF_REQUIRE_UI_THREAD();
 		//DKLog("DKCefWindow::OnConsoleMessage()\n", DKINFO);
+		
+		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
 		//DKLog("DKCefWindow::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n", DKDEBUG);
@@ -249,8 +250,21 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
 	{
-		CEF_REQUIRE_UI_THREAD();
-		DKLog("OnCursorChange()\n", DKINFO);
+		//FIXME
+		//DKLog("OnCursorChange()\n", DKINFO);
+#ifdef WIN32
+		HWND hwnd;
+		if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
+		if(!::IsWindow(hwnd)){ return; }
+		SetClassLongPtr(hwnd, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
+		SetCursor(cursor);
+#endif
+#ifdef LINUX
+		//Display* dpy;// = glfwGetX11Display();
+		//Cursor c;
+		//c = XCreateFontCursor(dpy, XC_xterm); 
+		//XDefineCursor(dpy, w, c);
+#endif
 	}
 
 	//////////////////////////////////////////////////
