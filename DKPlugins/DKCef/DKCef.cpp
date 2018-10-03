@@ -276,26 +276,15 @@ bool DKCef::End()
 	//FIXME - many crashes at CefShutdown
 	DKLog("DKCef::End()\n", DKDEBUG);
 	
-	/*
-	current_browser = NULL;
-	for(unsigned int i = 0; i < browsers.size(); ++i){
-		CloseDevTools(i);
-		browsers[i]	= NULL;
-		browsers.clear();
+	unsigned long threadId;
+	DKUtil::GetThreadId(threadId);
+	if(cefThreadId != threadId){
+		DKLog("DKCef::End(): Error: not in the main cef thread\n", DKERROR);
+		return false;
 	}
-	cefHandler = NULL;
-	*/
+	DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
+	CefShutdown(); //call on same thread as CefInitialize
 
-	//if(instance_count == 1){
-		DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
-		unsigned long threadId;
-		DKUtil::GetThreadId(threadId);
-		if(cefThreadId != threadId){
-			DKLog("DKCef::End(): Error: not in the main cef thread\n", DKERROR);
-			return false;
-		}
-		CefShutdown(); //call on same thread as CefInitialize
-	//}
 #ifdef WIN32
 	FreeLibrary(libcef);
 #endif
@@ -307,7 +296,7 @@ bool DKCef::End()
 ////////////////////////////////////////////
 bool DKCef::CloseBrowser(const int& browser)
 {
-	//DKLog("CloseBrowser: "+toString(browser)+"\n");
+	//DKLog("CloseBrowser: "+toString(browser)+"\n", DKINFO);
 	current_browser = browsers[0];
 	current_browser->GetHost()->Invalidate(PET_VIEW);
 
