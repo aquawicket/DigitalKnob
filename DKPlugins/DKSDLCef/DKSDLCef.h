@@ -2,6 +2,7 @@
 #ifndef DKSDLCef_H
 #define DKSDLCef_H
 
+#include <list>
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
@@ -61,6 +62,9 @@ class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoa
 						public CefDialogHandler
 {
 public:
+
+	//static DKSDLCefHandler* GetInstance();
+
 	DKSDLCefHandler(){}
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;
