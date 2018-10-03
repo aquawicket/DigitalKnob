@@ -16,6 +16,8 @@
 #include "DK/DKWindows.h"
 #endif
 
+unsigned long DKCef::cefThreadId;
+
 //////////////////
 bool DKCef::Init()
 {
@@ -236,7 +238,7 @@ bool DKCef::Init()
 
 	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
 	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
-	DKLog("User Agent: "+CefString(&settings.user_agent).ToString()+"\n", DKINFO);
+	DKLog("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n", DKINFO);
 
 
 	int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
@@ -244,6 +246,8 @@ bool DKCef::Init()
 		DKLog("CefInitialize error", DKERROR);
 		return false;
 	}
+
+	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
 
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
@@ -274,6 +278,7 @@ bool DKCef::Init()
 /////////////////
 bool DKCef::End()
 {
+	//FIXME - many crashes at CefShutdown
 	DKLog("DKCef::End()\n", DKDEBUG);
 	
 	current_browser = NULL;
@@ -285,6 +290,12 @@ bool DKCef::End()
 
 	if(instance_count == 1){
 		DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
+		unsigned long threadId;
+		DKUtil::GetThreadId(threadId);
+		if(cefThreadId != threadId){
+			DKLog("DKCef::End(): Error: not in the main cef thread\n", DKERROR);
+			return false;
+		}
 		CefShutdown(); //call on same thread as CefInitialize
 	}
 #ifdef WIN32

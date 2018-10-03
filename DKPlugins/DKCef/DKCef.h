@@ -67,6 +67,7 @@ public:
 	CefRefPtr<DKCefApp> cefApp;
 	CefClient* cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
+	static unsigned long cefThreadId;
 
 	DialogCallback* fileDialogCallback;
 
