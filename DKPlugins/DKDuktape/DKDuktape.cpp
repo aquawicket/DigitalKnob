@@ -282,7 +282,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 //////////////////////////////////////////////////
 bool DKDuktape::QueueDuktape(const DKString& code)
 {
-	DKLog("QueueDuktape("+code+")\n", DKINFO);
+	DKLog("DKDuktape::QueueDuktape("+code+")\n", DKINFO);
 	codeToRun.push_back(code);
 	return true;
 }
