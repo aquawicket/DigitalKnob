@@ -401,6 +401,44 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
 	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
 
+	std::string str = message->GetName();
+	str += "(";
+	for(unsigned int i=0; i<args->GetSize(); i++){
+		if(args->GetType(i) == VTYPE_INVALID){
+			str += "invalid";
+		}
+		if(args->GetType(i) == VTYPE_NULL){
+			str += "null";
+		}
+		if(args->GetType(i) == VTYPE_BOOL){
+			str += "bool";
+		}
+		if(args->GetType(i) == VTYPE_INT){
+			str += "int";
+		}
+		if(args->GetType(i) == VTYPE_DOUBLE){
+			str += "double";
+		}
+		if(args->GetType(i) == VTYPE_STRING){
+			str += "string";
+		}
+		if(args->GetType(i) == VTYPE_BINARY){
+			str += "binary";
+		}
+		if(args->GetType(i) == VTYPE_DICTIONARY){
+			str += "dictionary";
+		}
+		if(args->GetType(i) == VTYPE_LIST){
+			str += "list";
+		}
+
+		if(i < args->GetSize()-1){
+			str += ",";
+		}
+	}
+	str += ")";
+	DKLog(str+"\n", DKINFO);
+
 	/*
 	if(message->GetName() == "GetFunctions"){
 		DKV8::GetFunctions(browser);
