@@ -11,19 +11,6 @@
 #include "DK/DKWindows.h"
 #endif
 
-/*
-namespace
-{
-	DKSDLCefHandler* g_instance = NULL;
-}
-
-// static
-DKSDLCefHandler* DKSDLCefHandler::GetInstance()
-{
-	return g_instance;
-}
-*/
-
 
 /////////////////////
 bool DKSDLCef::Init()

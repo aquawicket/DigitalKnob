@@ -9,7 +9,6 @@
 #include "DKCef/DKCefApp.h"
 #include "DKCef/DKCefWindow.h"
 
-
 class DKCefWindow;
 
 //////////////////////////////////////////////////////
@@ -46,6 +45,7 @@ public:
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
 	bool Stop(const int& browser);
+	static void Test();
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	static bool RunDuktape(DKString& string);
@@ -64,12 +64,14 @@ public:
 
 	std::vector<CefRefPtr<CefBrowser> > browsers;
 	CefRefPtr<CefBrowser> current_browser;
-	CefRefPtr<DKCefApp> cefApp;
+	static CefRefPtr<DKCefApp> cefApp;
 	CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 
 	DialogCallback* fileDialogCallback;
+
+	static bool initialized;
 
 #ifdef WIN32
 	HMODULE libcef;

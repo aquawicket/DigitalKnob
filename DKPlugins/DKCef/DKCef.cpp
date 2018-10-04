@@ -22,6 +22,8 @@
 #endif
 
 unsigned long DKCef::cefThreadId;
+CefRefPtr<DKCefApp> DKCef::cefApp;
+bool DKCef::initialized = false;
 
 //////////////////
 bool DKCef::Init()
@@ -118,12 +120,15 @@ bool DKCef::Init()
 #else
 	CefMainArgs args(DKApp::argc, DKApp::argv);
 #endif
-	cefApp = new DKCefApp();
+	if(!initialized){
+		cefApp = new DKCefApp();
+		initialized = true;
+	}
 	
 	//int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
-	//if (exit_code >= 0) {
+	//if(exit_code >= 0) {
 	  // The sub-process has completed so return here.
-	  //return;
+	 // return false;
 	//}
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
@@ -682,4 +687,11 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 	replace(files, "\\", "\\\\");
 	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
 	return;
+}
+
+
+//////////////////
+void DKCef::Test()
+{
+	DKLog("DKCef::Test()\n", DKINFO);
 }

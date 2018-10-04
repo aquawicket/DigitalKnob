@@ -226,10 +226,14 @@ void DKSDLCefHandler::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
-	DKLog("DKSDLCefHandler::OnLoadEnd("+toString(httpStatusCode)+")\n", DKDEBUG);
+	DKLog("DKSDLCefHandler::OnLoadEnd("+toString(httpStatusCode)+")\n", DKINFO);
 	if(frame->IsMain()){
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadEnd", toString(httpStatusCode));
 	}
+
+	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("TestMessage");
+	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+	browser->SendProcessMessage(PID_BROWSER, msg);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -392,16 +396,13 @@ bool DKSDLCefHandler::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_sele
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 {
-	//DKLog("DKSDLCefHandler::OnProcessMessageReceived()\n", DKINFO);
+	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
 
 	if(message->GetName() == "GetFunctions"){
-		//DKLog("DKSDLCefHandler::OnProcessMessageReceived(GetFunctions)\n", DKINFO);
 		DKV8::GetFunctions(browser);
 	}
 
 	if(has(message->GetName(),"CallFunc(")){
-		//DKLog("DKSDLCefHandler::OnProcessMessageReceived(CallFunc)\n", DKINFO);
-
 		//get function name
 		DKString func = message->GetName();
 		replace(func,"CallFunc(", "");
