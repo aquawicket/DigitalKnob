@@ -28,7 +28,7 @@ bool DKCef::initialized = false;
 //////////////////
 bool DKCef::Init()
 {
-	DKLog("DKCef::Init()\n", DKDEBUG);
+	DKLog("DKCef::Init()\n", DKINFO);
 	
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
@@ -125,11 +125,12 @@ bool DKCef::Init()
 		initialized = true;
 	}
 	
-	//int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
-	//if(exit_code >= 0) {
+	int exit_code = CefExecuteProcess(args, cefApp.get(), NULL);
+	if(exit_code >= 0) {
 	  // The sub-process has completed so return here.
-	 // return false;
-	//}
+		return false;
+		DKClass::_Close("DKSDLWindow0");
+	}
 
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
