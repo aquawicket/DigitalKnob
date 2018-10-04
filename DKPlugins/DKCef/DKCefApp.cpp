@@ -412,6 +412,22 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 		return false;
 	}
 
+	CefRefPtr<CefListValue> args = message->GetArgumentList();
+	DKLog("DKCefApp::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
+
+	/*
+	if(message->GetName() == "OnContextCreated"){
+		//Load all of the c++ functions into the V8 context.
+		DKV8::ctx = context->GetGlobal();
+		for(unsigned int i=0; i<DKV8::funcs.size(); i++){
+			CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
+			if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+				DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKDEBUG);
+			}
+		}
+	}
+	*/
+
 	/*
 	if(message->GetName() == "GetFunctions"){
 	//printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");

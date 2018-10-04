@@ -398,6 +398,10 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 {
 	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
 
+	CefRefPtr<CefListValue> args = message->GetArgumentList();
+	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
+
+	/*
 	if(message->GetName() == "GetFunctions"){
 		DKV8::GetFunctions(browser);
 	}
@@ -412,6 +416,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 		CefRefPtr<CefListValue> arguments = message->GetArgumentList();
 		DKV8::Execute(browser, func, arguments);
 	}
+	*/
 
 	return false;
 }

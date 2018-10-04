@@ -4,6 +4,7 @@
 //#include "include/cef_sandbox_win.h"
 //#endif
 
+////////////////////////////////
 int main(int argc, char* argv[])
 {
 	printf("[cefchild] main()\n");
@@ -13,16 +14,115 @@ int main(int argc, char* argv[])
 	CefMainArgs main_args(argc, argv);
 #endif
 
-	//void* sandbox_info = NULL;
+//  void* sandbox_info = NULL;
 //#ifndef LINUX
 //	CefScopedSandboxInfo scoped_sandbox;
 //	sandbox_info = scoped_sandbox.sandbox_info();
 //#endif
 
 	CefRefPtr<DKCefApp> app(new DKCefApp);
-	//return CefExecuteProcess(main_args, app.get(), sandbox_info);
 	return CefExecuteProcess(main_args, app.get(), NULL);
+	//return CefExecuteProcess(main_args, app.get(), sandbox_info);
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)
+{
+	std::string func = name;
+	std::string text = "DKCefV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
+	printf(text.c_str());
+	
+
+	/*
+	std::string str = func.c_str();
+	str += "(";
+	CefRefPtr<CefListValue> args = CefListValue::Create();
+	for(unsigned int i=0; i<arguments.size(); i++){
+		if(arguments[i]->IsString()){
+			args->SetString(i, arguments[i]->GetStringValue());
+			str += std::string(args->GetString(i)).c_str();
+		}
+		if(arguments[i]->IsInt()){
+			args->SetInt(i, arguments[i]->GetIntValue());
+			str += args->GetInt(i);
+		}
+		if(arguments[i]->IsBool()){
+			args->SetBool(i, arguments[i]->GetBoolValue());
+			str += args->GetBool(i);
+		}
+		if(i < arguments.size() - 1){
+			str += ",";
+		}
+	}
+	str += ")";
+	printf(str.c_str());
+	printf("\n");
+	*/
+
+	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(func.c_str());
+	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+
+	std::string str = func.c_str();
+	str += "(";
+	for(unsigned int i=0; i<arguments.size(); i++){
+		if(arguments[i]->IsString()){
+			args->SetString(i, arguments[i]->GetStringValue());
+			str += std::string(args->GetString(i)).c_str();
+		}
+		if(arguments[i]->IsInt()){
+			args->SetInt(i, arguments[i]->GetIntValue());
+			str += args->GetInt(i);
+		}
+		if(arguments[i]->IsBool()){
+			args->SetBool(i, arguments[i]->GetBoolValue());
+			str += args->GetBool(i);
+		}
+		if(i < arguments.size() - 1){
+			str += ",";
+		}
+	}
+	str += ")";
+	printf(str.c_str());
+	printf("\n");
+
+	browser->SendProcessMessage(PID_RENDERER, msg);
+	return true;
+
+	//TODO
+	/*
+	std::string exec = "CallFunc("+func+")";
+	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
+
+	CefRefPtr<CefListValue> args = msg->GetArgumentList();
+	for(unsigned int i=0; i<arguments.size(); i++){
+		if(arguments[i]->IsString()){
+			args->SetString(i, arguments[i]->GetStringValue());
+		}
+		if(arguments[i]->IsInt()){
+			args->SetInt(i, arguments[i]->GetIntValue());
+		}
+		if(arguments[i]->IsBool()){
+			args->SetBool(i, arguments[i]->GetBoolValue());
+		}
+	}
+	browser->SendProcessMessage(PID_BROWSER, msg);
+	return true;
+	*/
+}
+
+///////////////////////////////////////////////////////////////
+void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
+{
+	std::string text = "DKCefV8Handler::SetBrowser()\n";
+	printf(text.c_str());
+
+	browser = _browser;
+}
+
+
+
 
 
 
@@ -85,7 +185,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 
 #endif //!DKCefChild
 
-	//DKV8::v8handler = new DKCefV8Handler();
+	cefV8Handler = new DKCefV8Handler();
 }
 
 //////////////////////////////////////////////////////////////
@@ -95,11 +195,9 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[cefchild] DKCefApp::OnBrowserCreated()\n");
-	/*
-	DKV8::_browser = browser;
-	DKV8::v8handler->SetBrowser(browser);
-	*/
-	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
+
+	cefV8Handler->SetBrowser(browser);
+	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnBrowserCreated");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 	browser->SendProcessMessage(PID_RENDERER, msg);
 }
@@ -121,6 +219,23 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[cefchild] DKCefApp::OnContextCreated()\n");
+	
+	if(!cefV8Handler){
+		printf("DKCefApp::OnContextCreated(): v8handler cefV8Handler\n");
+		return;
+	}
+
+	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnContextCreated");
+	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+	browser->SendProcessMessage(PID_RENDERER, msg);
+
+	std::string func = "TestFunction";
+	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), cefV8Handler);
+	CefRefPtr<CefV8Value> ctx = context->GetGlobal();
+	if(!ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+		printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
+		return; 
+	}
 
 	//Load all of the c++ functions into the V8 context.
 	/*
@@ -145,12 +260,10 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	printf(name.c_str());
 	printf(")\n");
 
-	/*
-	if(!DKV8::v8handler){
-		DKLog("DKCefApp::OnProcessMessageReceived(): v8handler invalid\n", DKINFO);
+	if(!cefV8Handler){
+		printf("DKCefApp::OnProcessMessageReceived(): v8handler cefV8Handler\n");
 		return false;
 	}
-	*/
 
 	/*
 	if(message->GetName() == "GetFunctions"){
