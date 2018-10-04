@@ -185,28 +185,28 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		return;
 	}
 
+	//cefV8Handler->SetBrowser(browser);
+	CefRefPtr<CefV8Value> ctx = context->GetGlobal();
+
+	//Send "OnContextCreated" message to main exe
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnContextCreated");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 	browser->SendProcessMessage(PID_RENDERER, msg);
 
+	//Load a TestFunction
 	std::string func = "TestFunction";
 	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(func.c_str(), cefV8Handler);
-	CefRefPtr<CefV8Value> ctx = context->GetGlobal();
 	if(!ctx->SetValue(func.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
 		printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
-		return; 
 	}
 
 	//Load all of the c++ functions into the V8 context.
-	/*
-	DKV8::ctx = context->GetGlobal();
-	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
-		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
-		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
-			DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKDEBUG);
+	for(unsigned int i=0; i<funcs.size(); i++){
+		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), cefV8Handler);
+		if(!ctx->SetValue(funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
+			printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
 		}
 	}
-	*/
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,6 +223,17 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	if(!cefV8Handler){
 		printf("DKCefApp::OnProcessMessageReceived(): v8handler cefV8Handler\n");
 		return false;
+	}
+
+	if(message->GetName() == "GetFunctions"){
+		printf("###### FUNCTIONS ######\n");
+		CefRefPtr<CefListValue> args = message->GetArgumentList();
+		for(unsigned int i=0; i<args->GetSize(); i++){
+			CefString func = args->GetString(i);
+			printf(std::string(func).c_str());
+			funcs.push_back(std::string(func));
+			printf("\n");
+		}
 	}
 
 	/*

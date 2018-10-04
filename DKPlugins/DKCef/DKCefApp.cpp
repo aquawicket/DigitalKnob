@@ -103,6 +103,7 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 	DKV8::funcs.push_back(name);
 	//DKV8::funcs2.insert(std::make_pair(name, false));
 
+	/*
 	if(!DKV8::ctx){ //multi process will fail
 		DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
 		return false;
@@ -110,6 +111,7 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 
 	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 	if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){ return false; }
+	*/
 
 	DKLog("DKV8::AttachFunction(): registered: "+name+"\n", DKINFO);
 	return true;

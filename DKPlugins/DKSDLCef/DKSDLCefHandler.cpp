@@ -439,6 +439,16 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	str += ")";
 	DKLog(str+"\n", DKINFO);
 
+
+
+
+
+	if(DKString(message->GetName()) == "OnBrowserCreated"){
+		DKV8::GetFunctions(browser);
+	}
+	if(DKString(message->GetName()) == "OnContextCreated"){
+
+	}
 	/*
 	if(message->GetName() == "GetFunctions"){
 		DKV8::GetFunctions(browser);
