@@ -396,7 +396,7 @@ bool DKSDLCefHandler::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_sele
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 {
-	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
+	//DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
 
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
 	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
@@ -411,16 +411,16 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 			str += "null";
 		}
 		if(args->GetType(i) == VTYPE_BOOL){
-			str += "bool";
+			str += toString(args->GetBool(i));
 		}
 		if(args->GetType(i) == VTYPE_INT){
-			str += "int";
+			str += toString(args->GetInt(i));
 		}
 		if(args->GetType(i) == VTYPE_DOUBLE){
-			str += "double";
+			str += toString(args->GetDouble(i));
 		}
 		if(args->GetType(i) == VTYPE_STRING){
-			str += "string";
+			str += toString(args->GetString(i));
 		}
 		if(args->GetType(i) == VTYPE_BINARY){
 			str += "binary";
