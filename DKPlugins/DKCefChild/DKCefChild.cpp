@@ -34,50 +34,31 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 	std::string text = "DKCefV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
 	printf(text.c_str());
 	
-
-	/*
-	std::string str = func.c_str();
-	str += "(";
-	CefRefPtr<CefListValue> args = CefListValue::Create();
-	for(unsigned int i=0; i<arguments.size(); i++){
-		if(arguments[i]->IsString()){
-			args->SetString(i, arguments[i]->GetStringValue());
-			str += std::string(args->GetString(i)).c_str();
-		}
-		if(arguments[i]->IsInt()){
-			args->SetInt(i, arguments[i]->GetIntValue());
-			str += args->GetInt(i);
-		}
-		if(arguments[i]->IsBool()){
-			args->SetBool(i, arguments[i]->GetBoolValue());
-			str += args->GetBool(i);
-		}
-		if(i < arguments.size() - 1){
-			str += ",";
-		}
-	}
-	str += ")";
-	printf(str.c_str());
-	printf("\n");
-	*/
-
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(func.c_str());
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 
 	std::string str = func.c_str();
 	str += "(";
 	for(unsigned int i=0; i<arguments.size(); i++){
-		if(arguments[i]->IsString()){
-			args->SetString(i, arguments[i]->GetStringValue());
-			str += std::string(args->GetString(i)).c_str();
+		if(arguments[i]->IsBool()){
+			args->SetBool(i, arguments[i]->GetBoolValue());
+			str += args->GetBool(i);
+		}
+		if(arguments[i]->IsDouble()){
+			args->SetInt(i, arguments[i]->GetDoubleValue());
+			str += args->GetDouble(i);
 		}
 		if(arguments[i]->IsInt()){
 			args->SetInt(i, arguments[i]->GetIntValue());
 			str += args->GetInt(i);
 		}
-		if(arguments[i]->IsBool()){
-			args->SetBool(i, arguments[i]->GetBoolValue());
-			str += args->GetBool(i);
+		if(arguments[i]->IsNull()){
+			args->SetNull(i);
+			str += "NULL";
+		}
+		if(arguments[i]->IsString()){
+			args->SetString(i, arguments[i]->GetStringValue());
+			str += std::string(args->GetString(i)).c_str();
 		}
 		if(i < arguments.size() - 1){
 			str += ",";
@@ -89,27 +70,6 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 
 	browser->SendProcessMessage(PID_RENDERER, msg);
 	return true;
-
-	//TODO
-	/*
-	std::string exec = "CallFunc("+func+")";
-	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create(exec.c_str());
-
-	CefRefPtr<CefListValue> args = msg->GetArgumentList();
-	for(unsigned int i=0; i<arguments.size(); i++){
-		if(arguments[i]->IsString()){
-			args->SetString(i, arguments[i]->GetStringValue());
-		}
-		if(arguments[i]->IsInt()){
-			args->SetInt(i, arguments[i]->GetIntValue());
-		}
-		if(arguments[i]->IsBool()){
-			args->SetBool(i, arguments[i]->GetBoolValue());
-		}
-	}
-	browser->SendProcessMessage(PID_BROWSER, msg);
-	return true;
-	*/
 }
 
 ///////////////////////////////////////////////////////////////
