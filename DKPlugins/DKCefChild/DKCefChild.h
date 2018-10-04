@@ -17,6 +17,7 @@ public:
 	void SetBrowser(CefRefPtr<CefBrowser> _browser);
 
 	CefRefPtr<CefBrowser> browser;
+	static CefRefPtr<CefListValue> myRetval;
 
 	IMPLEMENT_REFCOUNTING(DKCefV8Handler);
 };
@@ -35,9 +36,8 @@ public:
 	virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message);
 
 	CefRefPtr<DKCefV8Handler> cefV8Handler;
-	//CefRefPtr<CefV8Value> ctx;
 	std::vector<std::string> funcs;
-
+	
 	IMPLEMENT_REFCOUNTING(DKCefApp);
 };
 

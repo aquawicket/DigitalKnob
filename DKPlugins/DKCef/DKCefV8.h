@@ -12,6 +12,8 @@ public:
 	bool Init();
 	bool End();
 
+	static bool TestFunction(CefArgs args, CefReturn retval);
+
 	static bool _DKCreate(CefArgs args, CefReturn retval);
 	static bool _DKValid(CefArgs args, CefReturn retval);
 	static bool _SetLog(CefArgs args, CefReturn retval);

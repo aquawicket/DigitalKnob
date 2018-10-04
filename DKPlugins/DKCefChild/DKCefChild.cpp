@@ -4,6 +4,8 @@
 //#include "include/cef_sandbox_win.h"
 //#endif
 
+CefRefPtr<CefListValue> DKCefV8Handler::myRetval;
+
 ////////////////////////////////
 int main(int argc, char* argv[])
 {
@@ -67,8 +69,42 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 	str += ")";
 	printf(str.c_str());
 	printf("\n");
+	
+	//Here we send off the function to execute over in the app.
+	//How do we get the retval to fufill this;
+
+	//Synchronous 
+	//is there a way to block this until a return value is available?
+	/*
+	while(!myRetval){
+		
+	}
+	printf("myRetval has some value now\n");
+	*/
 
 	browser->SendProcessMessage(PID_RENDERER, msg);
+
+	/*
+
+	//Transfer retun value into &retval
+	if(myRetval->GetType(0) == VTYPE_STRING){
+		retval = CefV8Value::CreateString(myRetval->GetString(0));
+		//printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());
+	}
+	else if(myRetval->GetType(0) == VTYPE_INT){
+		retval = CefV8Value::CreateInt(myRetval->GetInt(0));
+		//printf("retval = %d\n", retval->GetIntValue());
+	}
+	else if(myRetval->GetType(0) == VTYPE_BOOL){
+		retval = CefV8Value::CreateBool(myRetval->GetBool(0));
+		//printf("retval = %d\n", retval->GetBoolValue());
+	}
+	else{
+		retval = CefV8Value::CreateNull();
+		//printf("retval = NULL\n");
+	}
+	*/
+
 	return true;
 }
 
@@ -200,6 +236,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
 	}
 
+	/*
 	//Load all of the c++ functions into the V8 context.
 	for(unsigned int i=0; i<funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(funcs[i].c_str(), cefV8Handler);
@@ -207,6 +244,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 			printf("DKCefApp::OnContextCreated(): ctx->SetValue() failed\n");
 		}
 	}
+	*/
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,7 +259,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	printf(")\n");
 
 	if(!cefV8Handler){
-		printf("DKCefApp::OnProcessMessageReceived(): v8handler cefV8Handler\n");
+		printf("DKCefApp::OnProcessMessageReceived(): cefV8Handler invalid\n");
 		return false;
 	}
 
@@ -235,16 +273,37 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 			printf("\n");
 		}
 	}
+	if(message->GetName() == "AttachFunction"){
+		//TODO
+	}
+	if(message->GetName() == "retval"){
+		printf("retval\n");
+
+		CefRefPtr<CefListValue> args = message->GetArgumentList();
+
+		std::string text = "retval = ";
+
+		if(args->GetType(0) == VTYPE_STRING){
+			text += std::string(args->GetString(0));
+		}
+		if(args->GetType(0) == VTYPE_INT){
+			text += "int";
+		}
+		if(args->GetType(0) == VTYPE_BOOL){
+			if(!args->GetBool(0)){
+				text += "false";
+			}
+			else{
+				text += "true";
+			}
+		}
+		printf(text.c_str());
+		cefV8Handler->myRetval = args;
+	}
+
+
 
 	/*
-	if(message->GetName() == "GetFunctions"){
-	//printf("DKCefApp::OnProcessMessageReceived(GetFunctions)\n");
-	CefRefPtr<CefListValue> args = message->GetArgumentList();
-	for(unsigned int i=0; i<args->GetSize(); i++){
-	CefString string = args->GetString(i);
-	DKV8::funcs.push_back(std::string(string));
-	}
-	}
 	if(message->GetName() == "AttachFunction"){
 	//printf("DKCefApp::OnProcessMessageReceived(AttachFunction)\n");
 	CefRefPtr<CefListValue> args = message->GetArgumentList();

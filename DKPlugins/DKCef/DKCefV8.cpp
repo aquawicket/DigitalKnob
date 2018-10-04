@@ -7,6 +7,8 @@ bool DKCefV8::Init()
 	DKClass::DKCreate("DKFileV8");
 	DKClass::DKCreate("DKAssetsV8");
 	
+	DKV8::AttachFunction("TestFunction", DKCefV8::TestFunction);
+
 	DKV8::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
 	
@@ -89,6 +91,17 @@ bool DKCefV8::End()
 }
 
 
+//////////////////////////////////////////////////////////
+bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
+{
+	int num = args->GetInt(0);
+	bool yn = args->GetBool(1);
+	DKString text = args->GetString(2);
+	DKLog("DKCefV8::TestFunction("+toString(num)+","+toString(yn)+","+text+")\n", DKINFO);
+	DKString result = "test string";
+	if(!retval->SetString(0, result)){ return false; }
+	return true;
+}
 
 //////////////////////////////////////////////////////////
 bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)

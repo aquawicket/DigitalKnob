@@ -136,8 +136,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 {
-	DKLog("DKV8::Execute(browser, "+func+", args)\n", DKERROR); //do we ever call this?
-	DKUtil::CallExit(); //TEST
+	DKLog("DKV8::Execute(browser, "+func+", args)\n", DKINFO);
 
 	_browser = browser;
 	DKLog("DKV8::Execute("+func+")\n", DKDEBUG);
@@ -146,44 +145,32 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 		return false;
 	}
 
-	/*
-	//Print function call
-	printf("%s(", func.c_str());
-	for(unsigned int i=0; i<args->GetSize(); i++){
-	if(args->GetType(i) == VTYPE_STRING){
-	printf("%s,", std::string(args->GetString(i)).c_str());
-	}
-	if(args->GetType(i) == VTYPE_INT){
-	printf("%d,", args->GetInt(i));
-	}
-	}
-	printf(")\n");
-	*/
+	//TODO - print full function here
 
-	CefRefPtr<CefListValue> retval = CefListValue::Create();
-	if(!functions[func](args,retval)){
+	CefRefPtr<CefListValue> rval = CefListValue::Create();
+	if(!functions[func](args,rval)){
 		printf("DKCefV8Handler::Execute() failed\n");
 		return false;
 	}
 
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("retval");
 	CefRefPtr<CefListValue> args2 = msg->GetArgumentList();
-	if(retval->GetType(0) == VTYPE_STRING){
-		//printf("retval = %s\n", std::string(retval->GetString(0)).c_str());
-		args2->SetString(0, retval->GetString(0));
+	if(rval->GetType(0) == VTYPE_STRING){
+		args2->SetString(0, rval->GetString(0));
 	}
-	else if(retval->GetType(0) == VTYPE_INT){
-		//printf("retval = %d\n", retval->GetInt(0));
-		args2->SetInt(0, retval->GetInt(0));
+	else if(rval->GetType(0) == VTYPE_INT){
+		args2->SetInt(0, rval->GetInt(0));
 	}
-	else if(retval->GetType(0) == VTYPE_BOOL){
-		//printf("retval = %d\n", retval->GetBool(0));
-		args2->SetBool(0, retval->GetBool(0));
+	else if(rval->GetType(0) == VTYPE_BOOL){
+		args2->SetBool(0, rval->GetBool(0));
 	}
 	else{
 		args2->SetBool(0, true);
 	}	
+
 	browser->SendProcessMessage(PID_RENDERER, msg);
+	//FIXME - not sure how to send this back to the sub-process
+
 	return true;
 }
 
@@ -224,7 +211,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			return false;
 		}
 
-		//Transfer retrun value into &retval
+		//Transfer retun value into &retval
 		if(rval->GetType(0) == VTYPE_STRING){
 			retval = CefV8Value::CreateString(rval->GetString(0));
 			//printf("retval = %s\n", std::string(retval->GetStringValue()).c_str());

@@ -399,9 +399,10 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	//DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
 
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
-	DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
+	//DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
 
-	std::string str = message->GetName();
+	std::string str = "DKSDLCefHandler::OnProcessMessageReceived(): "; 
+	str += message->GetName();
 	str += "(";
 	for(unsigned int i=0; i<args->GetSize(); i++){
 		if(args->GetType(i) == VTYPE_INVALID){
@@ -440,31 +441,15 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	DKLog(str+"\n", DKINFO);
 
 
-
-
-
 	if(DKString(message->GetName()) == "OnBrowserCreated"){
 		DKV8::GetFunctions(browser);
+		return false;
 	}
 	if(DKString(message->GetName()) == "OnContextCreated"){
-
+		return false;
 	}
-	/*
-	if(message->GetName() == "GetFunctions"){
-		DKV8::GetFunctions(browser);
-	}
+	DKV8::Execute(browser, DKString(message->GetName()), args);
 
-	if(has(message->GetName(),"CallFunc(")){
-		//get function name
-		DKString func = message->GetName();
-		replace(func,"CallFunc(", "");
-		replace(func,")", "");
-
-		//get arguments
-		CefRefPtr<CefListValue> arguments = message->GetArgumentList();
-		DKV8::Execute(browser, func, arguments);
-	}
-	*/
 
 	return false;
 }
