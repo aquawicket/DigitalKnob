@@ -1,8 +1,7 @@
 ///////////////////////////
 function LibraryMenu_Init()
 {
-	//DKLog("LibraryMenu_Init()");
-	
+	DKLog("LibraryMenu_Init()", DKDEBUG);
 	DKCreate("DKBuild/LibraryMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
 	DKAddEvent("Build Libraries", "click", LibraryMenu_OnEvent);
@@ -11,8 +10,7 @@ function LibraryMenu_Init()
 //////////////////////////
 function LibraryMenu_End()
 {
-	//DKLog("LibraryMenu_End()");
-	
+	DKLog("LibraryMenu_End()", DKDEBUG);
 	DKRemoveEvents(LibraryMenu_OnEvent);
 	DKClose("DKBuild/LibraryMenu.html");
 }
@@ -20,8 +18,7 @@ function LibraryMenu_End()
 ///////////////////////////////////
 function LibraryMenu_OnEvent(event)
 {
-	//DKLog("LibraryMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("LibraryMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event, "Build Libraries")){
 		DKLog("Clicked Build Libraries\n");
 	}

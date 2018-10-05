@@ -1,7 +1,7 @@
 //////////////////////////
 function DKBuildGUI_Init()
 {
-	//DKLog("DKBuildGUI_Init()\n");
+	DKLog("DKBuildGUI_Init()\n", DKDEBUG);
 	
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
@@ -52,7 +52,7 @@ function DKBuildGUI_Init()
 /////////////////////////
 function DKBuildGUI_End()
 {
-	//DKLog("DKBuildGUI_End()\n");
+	DKLog("DKBuildGUI_End()\n", DKDEBUG);
 	
 	DKRemoveEvents(DKBuildGUI_OnEvent);
 	DKClose("DKBuild/DKBuildGUI.html");
@@ -62,7 +62,7 @@ function DKBuildGUI_End()
 //////////////////////////////////
 function DKBuildGUI_OnEvent(event)
 {
-	//DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event,"AppList")){
 		//if(DK_Type(event,"click")){
@@ -110,6 +110,7 @@ function DKBuildGUI_OnEvent(event)
 ////////////////////////////////
 function DKBuildGUI_UpdateApps()
 {
+	DKLog("DKBuildGUI_UpdateApps()\n", DKDEBUG);
 	////////  Update App List /////////////
 	DKWidget_SetInnerHtml("AppList", "");
 	DKBuild_GetAppList();
@@ -123,9 +124,10 @@ function DKBuildGUI_UpdateApps()
 	}
 }
 
-/////////////////////////////////
+///////////////////////////////
 function DKBuildGUI_AppSelect()
 {
+	DKLog("DKBuildGUI_AppSelect()\n", DKDEBUG);
 	// We can send events to classes that are not of DKWidget as well.
 	if(DKWidget_GetValue("AppList") == "NEW APP"){
 		DKCreate("DKMessage/DKMessage.js", function(){
@@ -146,6 +148,7 @@ function DKBuildGUI_AppSelect()
 //////////////////////////////
 function DKBuildGUI_OsSelect()
 {
+	DKLog("DKBuildGUI_OsSelect()\n", DKDEBUG);
 	OS = DKWidget_GetValue("OSList");
 	DKLog("OS = "+OS+"\n");
 }
@@ -153,6 +156,7 @@ function DKBuildGUI_OsSelect()
 /////////////////////////////////
 function DKBuildGUI_BuildSelect()
 {
+	DKLog("DKBuildGUI_BuildSelect()\n", DKDEBUG);
 	TYPE = DKWidget_GetValue("BuildType");
 	DKLog("TYPE = "+TYPE+"\n");
 }
@@ -161,6 +165,7 @@ function DKBuildGUI_BuildSelect()
 //////////////////////////////////
 function DKBuildGUI_UpdateLibs()
 {
+	DKLog("DKBuildGUI_UpdateLibs()\n", DKDEBUG);
 	///// Update Libraries
 	DKWidget_SetInnerHtml("LibList", ""); //clear
 

@@ -3,8 +3,7 @@ var key_history = [];
 ///////////////////////
 function DKDebug_Init()
 {
-	//DKLog("DKDebug_Init()\n");
-	
+	DKLog("DKDebug_Init()\n", DKDEBUG);
 	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
 	DKAddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
 }
@@ -12,16 +11,14 @@ function DKDebug_Init()
 //////////////////////
 function DKDebug_End()
 {
-	//DKLog("DKDebug_End()\n");
-	
+	DKLog("DKDebug_End()\n", DKDEBUG);
 	DKRemoveEvents(DKDebug_OnEvent);
 }
 
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
-	//DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "keypress")){
 		//DKLog("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
 		DKDebug_LogKey(DK_GetValue(event));
@@ -41,8 +38,7 @@ function DKDebug_OnEvent(event)
 ////////////////////////////
 function DKDebug_LogKey(key)
 {
-	//DKLog("DKDebug_LogKey("+key+")\n");
-	
+	DKLog("DKDebug_LogKey("+key+")\n", DKDEBUG);
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = key;
 }
@@ -50,8 +46,7 @@ function DKDebug_LogKey(key)
 ////////////////////////////
 function DKDebug_CheckKeys()
 {
-	//DKLog("DKDebug_CheckKeys()\n");
-	
+	DKLog("DKDebug_CheckKeys()\n", DKDEBUG);
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
@@ -73,8 +68,7 @@ function DKDebug_CheckKeys()
 ///////////////////////////////
 function DKDebug_KeyToChar(key)
 {
-	//DKLog("DKDebug_KeyToChar("+key+")\n");
-	
+	DKLog("DKDebug_KeyToChar("+key+")\n", DKDEBUG);
 	if(key == 97){ return "a"};
 	if(key == 98){ return "b"};
 	if(key == 99){ return "c"};
@@ -107,15 +101,14 @@ function DKDebug_KeyToChar(key)
 /////////////////////////
 function DKDebug_Reload()
 {
+	DKLog("DKDebug_Reload(): TODO\n", DKDEBUG);
 	//TODO
-	DKLog("DKDebug_Reload(): TODO\n");
 }
 
 //////////////////////////
 function DKDebug_Refresh()
 {
-	//DKLog("DKDebug_Refresh()\n");
-	
+	DKLog("DKDebug_Refresh()\n", DKDEBUG);
 	//TODO - make this work for all variations 
 	if(DK_GetBrowser() != "Rocket"){
 		DK_Refresh(); //Call DK.js
@@ -128,8 +121,7 @@ function DKDebug_Refresh()
 //////////////////////////////
 function DKDebug_PushDKFiles()
 {
-	//DKLog("DKMenuRightApp_PushDKFiles()\n"); 
-	
+	DKLog("DKMenuRightApp_PushDKFiles()\n", DKDEBUG); 
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
@@ -200,8 +192,7 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	//DKLog("DKDebug_ClearConsole()\n");
-
+	DKLog("DKDebug_ClearConsole()\n", DKDEBUG);
 	if(DK_GetBrowser() == "Rocket"){
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
@@ -229,8 +220,7 @@ function DKDebug_ClearConsole()
 ////////////////////////////
 function DKDebug_PrintInfo()
 {
-	//DKLog("DKDebug_PrintInfo()\n");
-	
+	DKLog("DKDebug_PrintInfo()\n", DKDEBUG);
 	DKLog("\n"); 
 	DKLog("\n**** DKOBJECTS ****\n"); 
 	var objects = DK_GetObjects();
@@ -255,16 +245,14 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	//DKLog("DKDebug_ShowConsole()\n");
-	
+	DKLog("DKDebug_ShowConsole()\n", DKDEBUG);
 	DK_ShowConsole();
 }
 
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	//DKLog("DKDebug_GetSource()\n");
-	
+	DKLog("DKDebug_GetSource()\n", DKDEBUG);
 	DKCreate("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("body");
 	var assets = DKAssets_LocalAssets();
@@ -280,15 +268,13 @@ function DKDebug_GetSource()
 ////////////////////////
 function DKDebug_Crash()
 {
-	//DKLog("DKDebug_Crash()\n");
-	
+	DKLog("DKDebug_Crash()\n", DKDEBUG);
 	DK_Crash();
 }
 
 /////////////////////////
 function DKDebug_Editor()
 {
-	//DKLog("DKDebug_Editor()\n");
-	
+	DKLog("DKDebug_Editor()\n", DKDEBUG);
 	DKCreate("DKEditor/DKEditor.js", function(){});
 }

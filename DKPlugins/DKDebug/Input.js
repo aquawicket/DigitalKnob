@@ -1,8 +1,7 @@
 /////////////////////
 function Input_Init()
 {
-	//DKLog("Input_Init()\n");
-	
+	DKLog("Input_Init()\n", DKDEBUG);
 	DKCreate("DKDebug/Input.html");
 	DKAddEvent("Input_Text", "keydown", Input_OnEvent);
 }
@@ -10,8 +9,7 @@ function Input_Init()
 ////////////////////
 function Input_End()
 {
-	//DKLog("Input_End()\n");
-	
+	DKLog("Input_End()\n", DKDEBUG);
 	DKRemoveEvents(Input_OnEvent);
 	DKClose("DKDebug/Input.html");
 }
@@ -19,8 +17,7 @@ function Input_End()
 /////////////////////////////
 function Input_OnEvent(event)
 {
-	//DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event, "Input_Text")){
 		var key = DK_GetValue(event);
 		//DKLog("Input_Text: key="+key+"\n");
@@ -32,7 +29,6 @@ function Input_OnEvent(event)
 ///////////////////////////
 function Input_Run(command)
 {
-	//DKLog("Input_Run("+command+")\n");
-	
+	DKLog("Input_Run("+command+")\n", DKDEBUG);
 	DK_RunDuktape(command);
 }

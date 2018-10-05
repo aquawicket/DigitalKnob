@@ -3,6 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
+	DKLog("DKBuildConsole_Init()\n", DKDEBUG);
 	DKCreate("DKBuild/DKBuild.js", function(){
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
@@ -18,13 +19,14 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	//DKLog("DKBuildConsole_End()\n");
+	DKLog("DKBuildConsole_End()\n", DKDEBUG);
 	DKClose("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////
 function DKBuildConsole_ChooseUpdate()
 {
+	DKLog("DKBuildConsole_ChooseUpdate()\n", DKDEBUG);
 	DKLog("\n**** Update DigitalKnob ??? ****\n");
 	DKLog("Y. Update\n");
 	DKLog("C. Commit\n");
@@ -67,6 +69,7 @@ function DKBuildConsole_ChooseUpdate()
 //////////////////////////////////
 function DKBuildConsole_SelectOs()
 {
+	DKLog("DKBuildConsole_SelectOs()\n", DKDEBUG);
 	DKLog("\n**** SELECT OS TO BUILD ****\n");
 	DKLog("1. win32\n");
 	DKLog("2. win64\n");
@@ -134,6 +137,7 @@ function DKBuildConsole_SelectOs()
 /////////////////////////////////////
 function DKBuildConsole_SelectApp()
 {
+	DKLog("DKBuildConsole_SelectApp()\n", DKDEBUG);
 	DKLog("**** SELECT APP TO BUILD ****\n");
 	for(var i=0; i<APP_LIST.length; ++i){
 		DKLog(DKBuildConsole_TranslateOption(i)+":"+APP_LIST[i]+"\n");
@@ -159,6 +163,7 @@ function DKBuildConsole_SelectApp()
 //////////////////////////////////////
 function DKBuildConsole_SelectType()
 {
+	DKLog("DKBuildConsole_SelectType()\n", DKDEBUG);
 	DKLog("**** SELECT BUILD TYPE ****\n");
 	DKLog("1. Debug\n");
 	DKLog("2. Release\n");
@@ -187,9 +192,10 @@ function DKBuildConsole_SelectType()
 	}
 }
 
-///////////////////////////////////
+/////////////////////////////////
 function DKBuildConsole_Process()
 {
+	DKLog("DKBuildConsole_Process()\n", DKDEBUG);
 	OS = "";
 	APP = "";
 	TYPE = "";
@@ -234,6 +240,7 @@ function DKBuildConsole_Process()
 //////////////////////////////////////////////
 function DKBuildConsole_TranslateOption(num)
 {
+	DKLog("DKBuildConsole_TranslateOption("+num+")\n", DKDEBUG);
 	if(num == 0){return "1";}
 	if(num == 1){return "2";}
 	if(num == 2){return "3";}
@@ -274,6 +281,7 @@ function DKBuildConsole_TranslateOption(num)
 ///////////////////////////////////////
 function DKBuildConsole_KeyToApp(key)
 {
+	DKLog("DKBuildConsole_KeyToApp("+key+")\n", DKDEBUG);
 	if(key == 49){ APP = APP_LIST[0]; } //1
 	if(key == 50){ APP = APP_LIST[1]; } //2
 	if(key == 51){ APP = APP_LIST[2]; } //3 

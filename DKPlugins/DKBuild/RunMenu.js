@@ -1,8 +1,7 @@
 ///////////////////////
 function RunMenu_Init()
 {
-	//DKLog("RunMenu_Init()");
-	
+	DKLog("RunMenu_Init()", DKDEBUG);
 	DKCreate("DKBuild/RunMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", RunMenu_OnEvent);
 	DKAddEvent("Build App", "click", RunMenu_OnEvent);
@@ -17,8 +16,7 @@ function RunMenu_Init()
 //////////////////////
 function RunMenu_End()
 {
-	//DKLog("RunMenu_End()");
-	
+	DKLog("RunMenu_End()", DKDEBUG);
 	DKRemoveEvents(RunMenu_OnEvent);
 	DKClose("DKBuild/RunMenu.html");
 }
@@ -26,8 +24,7 @@ function RunMenu_End()
 ///////////////////////////////
 function RunMenu_OnEvent(event)
 {
-	//DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event, "Build App")){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
