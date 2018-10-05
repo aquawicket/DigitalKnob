@@ -674,7 +674,7 @@ int DKJS::GetValue(duk_context* ctx)
 			duk_push_string(ctx, rval.c_str());
 			return 1;
 		}
-		DKLog("DKJS::GetValue(" + evt + "): failed. \n", DKINFO);
+		//DKLog("DKJS::GetValue(" + evt + "): failed. \n", DKINFO);
 		return 0;
 	}
 	duk_push_string(ctx, arry[2].c_str());
