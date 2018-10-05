@@ -201,7 +201,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			}
 		}
 		text += ")";
-		DKLog(text+"\n", DKINFO);
+		DKLog(text+"\n", DKDEBUG);
 
 		CefRefPtr<CefListValue> rval = CefListValue::Create();
 		if(!DKV8::functions[name](args, rval)){
