@@ -30,7 +30,7 @@ function DKDebug_OnEvent(event)
 			DKCef_ShowDevTools("", DKCef_GetCurrentBrowser("DKBrowser_cef"));
 		}
 		if(typeof DKRocket_ToggleDebugger == 'function'){
-			DKRocket_ToggleDebugger();
+			//DKRocket_ToggleDebugger();
 		}
 	}
 }
