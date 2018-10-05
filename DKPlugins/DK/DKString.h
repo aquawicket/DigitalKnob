@@ -29,7 +29,6 @@ typedef std::string DKString;
 typedef std::vector<DKString> DKStringArray;
 typedef std::vector<DKStringArray> DKStringGrid;
 
-
 bool same(const DKString& str, const DKString& str2);
 bool samei(const DKString& str, const DKString& str2); //case insensitive
 bool has(const DKString& str, const DKString& str2);
