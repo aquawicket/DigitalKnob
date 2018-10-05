@@ -96,15 +96,14 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 
 	functions[name] = boost::bind(func, _1, _2);
 	if(!functions[name]){
-		printf("DKV8::AttachFunctions(%s): failed to register function\n", name.c_str());
+		DKLog("DKV8::AttachFunctions("+name+"): failed to register function\n", DKERROR);
 		return false;
 	}
 
 	DKV8::funcs.push_back(name);
-	//DKV8::funcs2.insert(std::make_pair(name, false));
 
 	if(!DKV8::ctx){ //multi process will fail
-		DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
+		//DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
 		return false;
 	}
 
