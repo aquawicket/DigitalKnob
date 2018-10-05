@@ -7,14 +7,14 @@ browser_js.setAttribute('src','DK/DKBrowser.js');
 document.body.appendChild(browser_js);
 */
 
-var LOG_DEBUG = true;
+var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
 var LOG_FILE = true;
 var LOG_SHOW = ""; //comma seperated
 var LOG_HIDE = ""; //comma seperated
-var LOG_LINES = true;
+var LOG_LINES = false;
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
