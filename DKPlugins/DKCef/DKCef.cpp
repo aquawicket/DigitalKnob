@@ -578,15 +578,18 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 	//	return false;
 	//}
 
-	if(!DKUtil::InMainThread()){ return false; }
+	if(!DKUtil::InMainThread()){ 
+		DKLog("DKCef::RunJavascript("+string+"): not in the main thread\n", DKWARN);
+		//return false; 
+	}
 	DKCef* dkCef = DKCef::Get("");
 	if(!dkCef){
-		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid \n", DKERROR);
+		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid\n", DKERROR);
 		return false;
 	}
 	CefRefPtr<CefFrame> frame = dkCef->browsers[browser]->GetMainFrame();
 	if(!frame){
-		DKLog("DKCef::RunJavascript("+string+"): frame invalid \n", DKERROR);
+		DKLog("DKCef::RunJavascript("+string+"): frame invalid\n", DKERROR);
 		return false;
 	}
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
