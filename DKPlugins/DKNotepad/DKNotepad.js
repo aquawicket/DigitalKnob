@@ -3,8 +3,7 @@ var currentFile;
 /////////////////////////
 function DKNotepad_Init()
 {
-	//DKLog("DKNotepad_Init() \n");
-	
+	DKLog("DKNotepad_Init()\n", DKDEBUG);
 	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
@@ -21,8 +20,7 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
-	//DKLog("DKNotepad_End() \n");
-	
+	DKLog("DKNotepad_End()\n", DKDEBUG);
 	DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
 	DKClose("DKNotepad/DKNotepad.css");
@@ -31,8 +29,7 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
-	//DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
@@ -71,8 +68,7 @@ function DKNotepad_OnEvent(event)
 /////////////////////////////
 function DKNotepad_Open(file)
 {
-	//DKLog("DKNotepad_Open("+file+")\n");
-	
+	DKLog("DKNotepad_Open("+file+")\n", DKDEBUG);
 	//TODO - only open files under 5mb
 	//TODO - set the frame title with the filename
 	currentFile = file;
@@ -83,9 +79,7 @@ function DKNotepad_Open(file)
 /////////////////////////////
 function DKNotepad_Save(file)
 {
-	
-	//DKLog("DKNotepad_Save("+file+")\n");
-	
+	DKLog("DKNotepad_Save("+file+")\n", DKDEBUG);
 	var text = DKWidget_GetAttribute("DKNotepad_Text", "value");
 	//DKLog("DKNotepad_Save("+file+"): text = "+text+"\n");
 	DKFile_StringToFile(text, file);

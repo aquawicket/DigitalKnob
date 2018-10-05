@@ -3,8 +3,7 @@ var currentFile;
 ///////////////////////
 function DKPaint_Init()
 {
-	//DKLog("DKPaint_Init()\n");
-	
+	DKLog("DKPaint_Init()\n", DKDEBUG);
 	DKCreate("DKPaint/DKPaint.css");
 	DKCreate("DKPaint/DKPaint.html");
 	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
@@ -16,8 +15,7 @@ function DKPaint_Init()
 //////////////////////
 function DKPaint_End()
 {
-	//DKLog("DKPaint_End()\n");
-	
+	DKLog("DKPaint_End()\n", DKDEBUG);
 	DKRemoveEvents(DKPaint_OnEvent);
 	DKClose("DKPaint/DKPaint.html");
 	DKClose("DKPaint/DKPaint.css");
@@ -26,8 +24,7 @@ function DKPaint_End()
 ///////////////////////////////
 function DKPaint_OnEvent(event)
 {
-	//DKLog("DKPaint_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKPaint_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event,"DKPaint_Save")){
 		//DKNotepad_Save();
 	}
@@ -47,6 +44,7 @@ function DKPaint_OnEvent(event)
 ///////////////////////
 function DKPaint_Save()
 {
+	DKLog("DKPaint_Save()\n", DKDEBUG);
 	var text = DKWidget_GetValue("DKPaint_Text");
 	
 	//TODO
@@ -57,8 +55,7 @@ function DKPaint_Save()
 ///////////////////////////
 function DKPaint_Open(file)
 {
-	//DKLog("DKPaint_Open("+file+") \n");
-	
+	DKLog("DKPaint_Open("+file+")\n", DKDEBUG);
 	file = file.replace(absolutepath, "");
 	currentFile = file;
 	
@@ -80,9 +77,9 @@ function DKPaint_Open(file)
 //////////////////////////////////
 function DKPaint_LoadTif(filename)
 {
+	DKLog("DKPaint_LoadTif("+filename+")\n", DKDEBUG);
 	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){
 	DKCreate("DKPaint/tiff.min.js", function(){
-	
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', filename);
 		xhr.responseType = 'arraybuffer';

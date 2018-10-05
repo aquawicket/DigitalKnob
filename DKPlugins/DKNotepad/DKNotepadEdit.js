@@ -1,8 +1,7 @@
 /////////////////////////////
 function DKNotepadEdit_Init()
 {
-	//DKLog("DKNotepadEdit_Init()\n");
-	
+	DKLog("DKNotepadEdit_Init()\n", DKDEBUG);
 	DKCreate("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
@@ -16,8 +15,7 @@ function DKNotepadEdit_Init()
 ////////////////////////////
 function DKNotepadEdit_End()
 {
-	//DKLog("DKNotepadEdit_End()\n");
-	
+	DKLog("DKNotepadEdit_End()\n", DKDEBUG);
 	DKRemoveEvents(DKNotepadEdit_OnEvent);
 	DKClose("DKNotepad/DKNotepadEdit.html");
 }
@@ -25,8 +23,7 @@ function DKNotepadEdit_End()
 /////////////////////////////////////
 function DKNotepadEdit_OnEvent(event)
 {
-	//DKLog("DKNotepadEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKNotepadEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event,"DKNotepadEdit_Undo")){
 		DKLog("DKNotepadEdit_Undo\n");
 	}

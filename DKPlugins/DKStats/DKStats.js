@@ -1,8 +1,7 @@
 ///////////////////////
 function DKStats_Init()
 {
-	//DKLog("DKStats_Init()\n");
-	
+	DKLog("DKStats_Init()\n", DKDEBUG);
 	DKCreate("DKStats/DKStats.html");
 	DKAddEvent("GLOBAL", "second", DKStats_OnEvent);
 	//DKAddEvent("DKStats/DKStats.html", "click", DKStats_OnEvent);
@@ -11,8 +10,7 @@ function DKStats_Init()
 //////////////////////
 function DKStats_End()
 {
-	//DKLog("DKStats_End()\n");
-	
+	DKLog("DKStats_End()\n", DKDEBUG);
 	DKRemoveEvents(DKStats_OnEvent);
 	DKClose("DKStats/DKStats.html");
 }
@@ -20,8 +18,7 @@ function DKStats_End()
 ///////////////////////////////
 function DKStats_OnEvent(event)
 {
-	//DKLog("DKStats_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKStats_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "second")){
 		DKStats_Update();
 	}
@@ -30,6 +27,7 @@ function DKStats_OnEvent(event)
 /////////////////////////
 function DKStats_Update()
 {
+	DKLog("DKStats_Update()\n", DKDEBUG);
 	//TIME
 	var currentdate = new Date(); 
 	var hours = currentdate.getHours();

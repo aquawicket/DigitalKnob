@@ -1,8 +1,7 @@
 /////////////////////////////
 function DKNotepadMenu_Init()
 {
-	//DKLog("DKNotepadMenu_Init()\n");
-	
+	DKLog("DKNotepadMenu_Init()\n", DKDEBUG);
 	DKCreate("DKNotepad/DKNotepadMenu.html");
 	//DKAddEvent("GLOBAL", "mousedown", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Cut", "mousedown", DKNotepadMenu_OnEvent);
@@ -13,8 +12,7 @@ function DKNotepadMenu_Init()
 ////////////////////////////
 function DKNotepadMenu_End()
 {
-	//DKLog("DKNotepadMenu_End()\n");
-	
+	DKLog("DKNotepadMenu_End()\n", DKDEBUG);
 	DKRemoveEvents(DKNotepadMenu_OnEvent);
 	DKClose("DKNotepad/DKNotepadMenu.html");
 }
@@ -22,8 +20,8 @@ function DKNotepadMenu_End()
 /////////////////////////////////////
 function DKNotepadMenu_OnEvent(event)
 {
-	DKLog("DKNotepadMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKNotepadMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+
 	if(DK_Id(event,"DKNotepadMenu_Cut")){
 		DKNotepadMenu_Cut();
 		PreventDefault(event);
@@ -46,23 +44,20 @@ function DKNotepadMenu_OnEvent(event)
 ////////////////////////////
 function DKNotepadMenu_Cut()
 {
-	//DKLog("DKNotepadMenu_Cut()\n");
-	
+	DKLog("DKNotepadMenu_Cut()\n", DKDEBUG);
 	DKWidget_Cut("DKNotepad_Text");
 }
 
 /////////////////////////////
 function DKNotepadMenu_Copy()
 {
-	//DKLog("DKNotepadMenu_Copy()\n");
-	
+	DKLog("DKNotepadMenu_Copy()\n", DKDEBUG);
 	DKWidget_Copy("DKNotepad_Text");
 }
 
 //////////////////////////////
 function DKNotepadMenu_Paste()
 {
-	//DKLog("DKNotepadMenu_Paste()\n");
-	
+	DKLog("DKNotepadMenu_Paste()\n", DKDEBUG);
 	DKWidget_Paste("DKNotepad_Text");
 }

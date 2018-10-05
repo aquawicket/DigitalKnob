@@ -4,8 +4,6 @@ function DKWidget_GetFocusElement(){ DKLog("DKWidget_GetFocusElement(): not avai
 function DKWidget_ValidateColor(color){ DKLog("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n", DKWARN); return color; }
 
 
-
-
 /*
 //Mobile device minimum font-size fix
 ///////////////////////
@@ -37,8 +35,7 @@ function AdjustRems(id)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	//DKLog("DKWidget_NewWidget("+url+","+parent+")\n");
-		
+	DKLog("DKWidget_NewWidget("+url+","+parent+")\n", DKDEBUG);
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
@@ -62,8 +59,7 @@ function DKWidget_NewWidget(url, parent)
 ////////////////////////////////////
 function DKWidget_GetAvailableId(id)
 {
-	//DKLog("DKWidget_GetAvailableId("+id+")\n");
-	
+	DKLog("DKWidget_GetAvailableId("+id+")\n", DKDEBUG);
 	out = id;
 	var i = 0;
 	
@@ -86,16 +82,14 @@ function DKWidget_GetAvailableId(id)
 /////////////////////////////
 function DKWidget_GetFile(id)
 {
-	//DKLog("DKWidget_GetFile("+id+")\n");
-	
+	DKLog("DKWidget_GetFile("+id+")\n", DKDEBUG);
 	return id;
 }
 
 //////////////////////////
 function DKWidget_Hide(id)
 {
-	//DKLog("DKWidget_Hide("+id+")\n");
-	
+	DKLog("DKWidget_Hide("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "none";
@@ -104,8 +98,7 @@ function DKWidget_Hide(id)
 //////////////////////////
 function DKWidget_Show(id)
 {
-	//DKLog("DKWidget_Show("+id+")\n");
-	
+	DKLog("DKWidget_Show("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "block";
@@ -115,8 +108,7 @@ function DKWidget_Show(id)
 ////////////////////////////
 function DKWidget_Toggle(id)
 {
-	//DKLog("DKWidget_Toggle("+id+")\n");
-	
+	DKLog("DKWidget_Toggle("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none" || element.style.visibility == "hidden"){
@@ -130,8 +122,7 @@ function DKWidget_Toggle(id)
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
 {
-	//DKLog("DKWidget_AttachDrags("+id+")\n");
-	
+	DKLog("DKWidget_AttachDrags("+id+")\n", DKDEBUG);
 	var parent = document.getElementById(id);
 	if(!parent){ return false; }
 	var elements = parent.getElementsByTagName('*');
@@ -156,8 +147,7 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
-	//DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n");
-	
+	DKLog("DKWidget_AddDragHandle("+id+","+drag+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
@@ -170,8 +160,7 @@ function DKWidget_AddDragHandle(id, drag)
 /////////////////////////////////////////////
 function DKWidget_AddResizeHandle(id, resize)
 {
-	//DKLog("DKWidget_AddResizeHandle("+id+","+resize+")\n");
-	
+	DKLog("DKWidget_AddResizeHandle("+id+","+resize+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!DK_IE()){
 		element.style.setProperty("pointer-events","all");
@@ -184,8 +173,7 @@ function DKWidget_AddResizeHandle(id, resize)
 //////////////////////////////////////
 function DKWidget_RemoveDragHandle(id)
 {
-	//DKLog("DKWidget_RemoveDragHandle("+id+")\n");
-	
+	DKLog("DKWidget_RemoveDragHandle("+id+")\n", DKDEBUG);
 	if(!id){ return; }
 	var element = document.getElementById(id);
 	if(!DK_IE()){
@@ -198,8 +186,7 @@ function DKWidget_RemoveDragHandle(id)
 ///////////////////////////////////
 function DKWidget_GetElement(event)
 {
-	//DKLog("DKWidget_GetElement("+event+")\n");
-	
+	DKLog("DKWidget_GetElement("+event+")\n", DKDEBUG);
 	if(!event){event = window.event;}
 	return (event.currentTarget) ? event.currentTarget : event.srcElement; //IE or other
 }
@@ -207,8 +194,7 @@ function DKWidget_GetElement(event)
 /////////////////////////////////
 function DKWidget_GetElements(id)
 {
-	//DKLog("DKWidget_GetElements("+id+")\n");
-	
+	DKLog("DKWidget_GetElements("+id+")\n", DKDEBUG);
 	var string = "";
 	//var nodes = document.getElementById(id).getElementsByTagName('*'); //all children recursively
 	var nodes = document.getElementById(id).childNodes;
@@ -225,8 +211,7 @@ function DKWidget_GetElements(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	//DKLog("DKWidget_GetValue("+variable+")\n");
-	
+	DKLog("DKWidget_GetValue("+variable+")\n", DKDEBUG);
 	if(!variable){ DKLog("variable empty \n"); return; }
 
 	if(typeof variable === "string"){ //id
@@ -342,8 +327,7 @@ function DKWidget_GetValue(variable)
 ////////////////////////////////
 function DKWidget_GetTagName(id)
 {
-	//DKLog("DKWidget_GetTagName("+id+")\n");
-	
+	DKLog("DKWidget_GetTagName("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.tag;
@@ -352,8 +336,7 @@ function DKWidget_GetTagName(id)
 ///////////////////////////////////////////////////
 function DKWidget_GetAttribute(variable, parameter)
 {
-	//DKLog("DKWidget_GetAttribute("+variable+","+parameter+")\n");
-	
+	DKLog("DKWidget_GetAttribute("+variable+","+parameter+")\n", DKDEBUG);
 	if(!variable){
 		DKLog("DKWidget_GetAttribute(): veriable empty\n", DKWARN);
 		return "";
@@ -372,8 +355,7 @@ function DKWidget_GetAttribute(variable, parameter)
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
-	//DKLog("DKWidget_SetAttribute("+variable+","+parameter+","+value+")\n");
-	
+	DKLog("DKWidget_SetAttribute("+variable+","+parameter+","+value+")\n", DKDEBUG);
 	if(!variable){ DKLog("DKWidget_SetAttribute(): variable not set \n", DKERROR); return false; }
 	//if(!value){ DKLog("DKWidget_SetAttribute(): value not set \n", DKWARN); return false; }
 	if(typeof variable == "object"){
@@ -408,8 +390,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
 {
-	//DKLog("DKWidget_GetProperty("+variable+","+parameter+")\n");
-	
+	DKLog("DKWidget_GetProperty("+variable+","+parameter+")\n", DKDEBUG);
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }
@@ -436,8 +417,7 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
-	//DKLog("DKWidget_SetProperty("+variable+","+parameter+","+value+")\n");
-	
+	DKLog("DKWidget_SetProperty("+variable+","+parameter+","+value+")\n", DKDEBUG);
 	if(!variable){ //FIXME: who called you?
 		DKLog("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set \n", DKERROR);
 		return false; 
@@ -479,8 +459,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
 {
-	//DKLog("DKWidget_HasProperty("+id+","+parameter+")\n");
-	
+	DKLog("DKWidget_HasProperty("+id+","+parameter+")\n", DKDEBUG);
 	if(document.getElementById(id).style[parameter]){
 		return true;
 	}
@@ -490,8 +469,7 @@ function DKWidget_HasProperty(id, parameter)
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
-	//DKLog("DKWidget_RemoveProperty("+id+","+parameter+")\n");
-	
+	DKLog("DKWidget_RemoveProperty("+id+","+parameter+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ 
 		DKLog("DKWidget_RemoveProperty(): element invalid. \n");
@@ -505,8 +483,7 @@ function DKWidget_RemoveProperty(id, parameter)
 ///////////////////////////////////////////
 function DKWidget_SetValue(variable, value)
 {
-	//DKLog("DKWidget_SetValue("+variable+","+value+")\n");
-	
+	DKLog("DKWidget_SetValue("+variable+","+value+")\n", DKDEBUG);
 	if(!variable){ return false; }
 	//if(!value){ value = ""; } //FIXME - sould be if(value == emptystring) so 0's can pass through
 	if(typeof variable == "object"){
@@ -538,8 +515,7 @@ function DKWidget_SetValue(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtml(variable)
 {
-	//DKLog("DKWidget_GetInnerHtml("+variable+")\n");
-	
+	DKLog("DKWidget_GetInnerHtml("+variable+")\n", DKDEBUG);
 	if(typeof variable == "object"){
 		return variable.innerHTML;
 	}
@@ -554,8 +530,7 @@ function DKWidget_GetInnerHtml(variable)
 ///////////////////////////////////////////////
 function DKWidget_SetInnerHtml(variable, value)
 {
-	//DKLog("DKWidget_SetInnerHtml("+variable+","+value+")\n");
-	
+	DKLog("DKWidget_SetInnerHtml("+variable+","+value+")\n", DKDEBUG);
 	if(typeof variable == "object"){
 		variable.innerHTML = value;
 		return true;
@@ -576,8 +551,7 @@ function DKWidget_SetInnerHtml(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
-	//DKLog("DKWidget_GetInnerHtmlString("+id+")\n");
-	
+	DKLog("DKWidget_GetInnerHtmlString("+id+")\n", DKDEBUG);
 	if(!id){ DKLog("DKWidget_GetInnerHtmlString(): empty id\n", DKWARN); return "";}
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
@@ -591,8 +565,7 @@ function DKWidget_GetInnerHtmlString(id)
 ////////////////////////////////////////////////
 function DKWidget_SetInnerHtmlString(id, string)
 {
-	//DKLog("DKWidget_SetInnerHtmlString("+id+","+string+")\n");
-	
+	DKLog("DKWidget_SetInnerHtmlString("+id+","+string+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
@@ -606,8 +579,7 @@ function DKWidget_SetInnerHtmlString(id, string)
 ////////////////////////////////////////
 function DKWidget_GetOuterHtml(variable)
 {
-	//DKLog("DKWidget_GetOuterHtml("+variable+")\n");
-	
+	DKLog("DKWidget_GetOuterHtml("+variable+")\n", DKDEBUG);
 	if(typeof variable == "object"){
 		return variable.outerHTML;
 	}
@@ -622,8 +594,7 @@ function DKWidget_GetOuterHtml(variable)
 ///////////////////////////////////////
 function DKWidget_IsChildOf(id, parent)
 {
-	//DKLog("DKWidget_IsChildOf("+id+","+parent+")\n");
-	
+	DKLog("DKWidget_IsChildOf("+id+","+parent+")\n", DKDEBUG);
 	if(!id){return false;}
 	if(!parent){return false;}
 	var ele = document.getElementById(id);
@@ -646,8 +617,7 @@ function DKWidget_IsChildOf(id, parent)
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {
-	//DKLog("DKWidget_CreateElement("+parent+","+tag+","+id+")\n");
-	
+	DKLog("DKWidget_CreateElement("+parent+","+tag+","+id+")\n", DKDEBUG);
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
 	//DKLog("DKWidget_CreateElement("+parent+", "+tag+", "+id+") \n");
 	
@@ -670,8 +640,7 @@ function DKWidget_CreateElement(parent, tag, id)
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
-	//DKLog("DKWidget_CreateElementBefore("+parent+","+tag+","+id+")\n");
-	
+	DKLog("DKWidget_CreateElementBefore("+parent+","+tag+","+id+")\n", DKDEBUG);
 	id = DKWidget_GetAvailableId(id);
 	var par = document.getElementById(parent);
 	var ele = document.createElement(tag);
@@ -690,8 +659,7 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 //////////////////////////////////////////////
 function DKWidget_AppendChild(parent, element)
 {
-	//DKLog("DKWidget_AppendChild("+parent+","+element+")\n");
-	
+	DKLog("DKWidget_AppendChild("+parent+","+element+")\n", DKDEBUG);
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -712,8 +680,7 @@ function DKWidget_AppendChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {
-	//DKLog("DKWidget_PrependChild("+parent+","+element+")\n");
-	
+	DKLog("DKWidget_PrependChild("+parent+","+element+")\n", DKDEBUG);
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -745,8 +712,7 @@ function DKWidget_PrependChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_InsertBefore(parent, element)
 {
-	//DKLog("DKWidget_InsertBefore("+parent+","+element+")\n");
-	
+	DKLog("DKWidget_InsertBefore("+parent+","+element+")\n", DKDEBUG);
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -773,8 +739,7 @@ function DKWidget_InsertBefore(parent, element)
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
-	//DKLog("DKWidget_GetParent("+id+")\n");
-	
+	DKLog("DKWidget_GetParent("+id+")\n", DKDEBUG);
 	if(!document.getElementById(id)){ return ""; }
 	return document.getElementById(id).parentNode.id;
 }
@@ -782,8 +747,7 @@ function DKWidget_GetParent(id)
 ///////////////////////////////////
 function DKWidget_GetFirstChild(id)
 {
-	//DKLog("DKWidget_GetFirstChild("+id+")\n");
-	
+	DKLog("DKWidget_GetFirstChild("+id+")\n", DKDEBUG);
 	var fc = document.getElementById(id).firstChild;
 	if(fc){
 		//DKLog("GetFirstChild("+id+"): -> "+fc.id+"\n");
@@ -795,24 +759,21 @@ function DKWidget_GetFirstChild(id)
 /////////////////////////////////////
 function DKWidget_GetMouseWindowX(id)
 {
-	//DKLog("DKWidget_GetMouseWindowX("+id+")\n");
-	
+	DKLog("DKWidget_GetMouseWindowX("+id+")\n", DKDEBUG);
 	return mouseX;
 }
 
 /////////////////////////////////////
 function DKWidget_GetMouseWindowY(id)
 {
-	//DKLog("DKWidget_GetMouseWindowY("+id+")\n");
-	
+	DKLog("DKWidget_GetMouseWindowY("+id+")\n", DKDEBUG);
 	return mouseY;
 }
 
 //////////////////////////////////////
 function DKWidget_GetMouseElementX(id)
 {
-	//DKLog("DKWidget_GetMouseElementX("+id+")\n");
-	
+	DKLog("DKWidget_GetMouseElementX("+id+")\n", DKDEBUG);
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(id);
@@ -828,8 +789,7 @@ function DKWidget_GetMouseElementX(id)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementY(id)
 {
-	//DKLog("DKWidget_GetMouseElementY("+id+")\n");
-	
+	DKLog("DKWidget_GetMouseElementY("+id+")\n", DKDEBUG);
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(element);
@@ -845,25 +805,21 @@ function DKWidget_GetMouseElementY(id)
 //////////////////////////////////////
 function DKWidget_GetClientWidth(id)
 {
-	//DKLog("DKWidget_GetClientWidth("+id+")\n");
-	
+	DKLog("DKWidget_GetClientWidth("+id+")\n", DKDEBUG);
 	return document.getElementById(id).clientWidth;
-		
 }
 
 ///////////////////////////////////////
 function DKWidget_GetClientHeight(id)
 {
-	//DKLog("DKWidget_GetClientHeight("+id+")\n");
-	
+	DKLog("DKWidget_GetClientHeight("+id+")\n", DKDEBUG);
 	return document.getElementById(id).clientHeight;
 }
 
 //////////////////////////////////
 function DKWidget_GetOffsetTop(id)
 {
-	//DKLog("DKWidget_GetOffsetTop("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetTop("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) != null){ 
@@ -876,8 +832,7 @@ function DKWidget_GetOffsetTop(id)
 //////////////////////////////////
 function DKWidget_GetOffsetLeft(id)
 {
-	//DKLog("DKWidget_GetOffsetLeft("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetLeft("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 
@@ -889,8 +844,7 @@ function DKWidget_GetOffsetLeft(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetRight(id)
 {
-	//DKLog("DKWidget_GetOffsetRight("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetRight("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
 	var right = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
@@ -903,8 +857,7 @@ function DKWidget_GetOffsetRight(id)
 /////////////////////////////////////
 function DKWidget_GetOffsetBottom(id)
 {
-	//DKLog("DKWidget_GetOffsetBottom("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetBottom("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
 	var bottom = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
@@ -917,32 +870,28 @@ function DKWidget_GetOffsetBottom(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetWidth(id)
 {
-	//DKLog("DKWidget_GetOffsetWidth("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetWidth("+id+")\n", DKDEBUG);
 	return document.getElementById(id).offsetWidth;
 }
 
 /////////////////////////////////////
 function DKWidget_GetOffsetHeight(id)
 {
-	//DKLog("DKWidget_GetOffsetHeight("+id+")\n");
-	
+	DKLog("DKWidget_GetOffsetHeight("+id+")\n", DKDEBUG);
 	return document.getElementById(id).offsetHeight;
 }
 
 ////////////////////////////////////
 function DKWidget_GetComputedTop(id)
 {
-	//DKLog("DKWidget_GetComputedTop("+id+")\n");
-	
+	DKLog("DKWidget_GetComputedTop("+id+")\n", DKDEBUG);
 	return window.getComputedStyle(document.getElementById(id)).top;
 }
 
 ///////////////////////////////////
 function DKWidget_ElementExists(id)
 {
-	//DKLog("DKWidget_ElementExists("+id+")\n");
-	
+	DKLog("DKWidget_ElementExists("+id+")\n", DKDEBUG);
 	if(document.getElementById(id)){
 		return true;
 	}
@@ -952,8 +901,7 @@ function DKWidget_ElementExists(id)
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
 {
-	//DKLog("DKWidget_RemoveElement("+id+")\n");
-	
+	DKLog("DKWidget_RemoveElement("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
 	if(!ele){
 		DKLog("RemoveElement("+id+"): element does not exist\n", DKWARN);
@@ -970,8 +918,7 @@ function DKWidget_RemoveElement(id)
 /////////////////////////////////////
 function DKWidget_ElementToString(id)
 {
-	//DKLog("DKWidget_ElementToString("+id+")\n");
-	
+	DKLog("DKWidget_ElementToString("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.outerHTML;
@@ -980,8 +927,7 @@ function DKWidget_ElementToString(id)
 /////////////////////////////
 function DKWidget_Visible(id)
 {
-	//DKLog("DKWidget_Visible("+id+")\n");
-	
+	DKLog("DKWidget_Visible("+id+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none"){ return false; }
@@ -992,8 +938,7 @@ function DKWidget_Visible(id)
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
-	//DKLog("DKWidget_RemoveAttribute("+id+","+attrib+")\n");
-	
+	DKLog("DKWidget_RemoveAttribute("+id+","+attrib+")\n", DKDEBUG);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.removeAttribute(attrib);
@@ -1002,8 +947,7 @@ function DKWidget_RemoveAttribute(id, attrib)
 ///////////////////////////////////
 function DKWidget_GetHoverElement()
 { 
-	//DKLog("DKWidget_GetHoverElement()\n");
-
+	DKLog("DKWidget_GetHoverElement()\n", DKDEBUG);
 	//DKLog("DKWidget_GetHoverElement() = "+document.elementFromPoint(mouseX, mouseY).id+"\n");
 	return document.elementFromPoint(mouseX, mouseY).id;
 }
@@ -1011,8 +955,7 @@ function DKWidget_GetHoverElement()
 ////////////////////////////
 function DKWidget_GetScale()
 {
-	//DKLog("DKWidget_GetScale()\n");
-	
+	DKLog("DKWidget_GetScale()\n", DKDEBUG);
 	var scale = getComputedStyle(document.documentElement).fontSize;
 	scale = scale.replace("px","");
 	//DKLog("DKWidget_GetScale() = "+scale+"\n");
@@ -1022,16 +965,14 @@ function DKWidget_GetScale()
 /////////////////////////////////
 function DKWidget_SetScale(scale)
 {
-	//DKLog("DKWidget_SetScale("+scale+")\n");
-	
+	DKLog("DKWidget_SetScale("+scale+")\n", DKDEBUG);
 	DKWidget_SetProperty("html", "font-size", scale+"px");
 }
 
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)
 {
-	//DKLog("DKWidget_OpenLink("+url+","+target+")\n");
-	
+	DKLog("DKWidget_OpenLink("+url+","+target+")\n", DKDEBUG);
 	//window.location = url;
 	window.open(url, target);
 }
@@ -1039,8 +980,7 @@ function DKWidget_OpenLink(url, target)
 ///////////////////////////////////
 function DKWidget_SetFile(id, file)
 { 
-	//DKLog("DKWidget_SetFile("+id+","+file+")\n");
-
+	DKLog("DKWidget_SetFile("+id+","+file+")\n", DKDEBUG);
 	DKLog("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n", DKWARN); 
 	return;
 	
@@ -1064,12 +1004,14 @@ function DKWidget_SetFile(id, file)
 //////////////////////////////////
 function DKWidget_GetLastChild(id)
 {
+	DKLog("DKWidget_GetLastChild("+id+")\n", DKDEBUG);
 	return document.getElementById("body").lastChild.id;
 }
 
 //////////////////////////////
 function DKWidget_SetFocus(id)
 {
+	DKLog("DKWidget_SetFocus("+id+")\n", DKDEBUG);
 	document.getElementById(id).focus();
 }
 
@@ -1077,8 +1019,7 @@ function DKWidget_SetFocus(id)
 /////////////////////////
 function DKWidget_Cut(id)
 {
-	//DKLog("DKWidget_Cut("+id+")\n");
-	
+	DKLog("DKWidget_Cut("+id+")\n", DKDEBUG);
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1094,8 +1035,7 @@ function DKWidget_Cut(id)
 //////////////////////////
 function DKWidget_Copy(id)
 {
-	//DKLog("DKWidget_Copy("+id+")\n");
-	
+	DKLog("DKWidget_Copy("+id+")\n", DKDEBUG);
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1111,8 +1051,7 @@ function DKWidget_Copy(id)
 ///////////////////////////
 function DKWidget_Paste(id)
 {
-	DKLog("DKWidget_Paste("+id+")\n");
-	
+	DKLog("DKWidget_Paste("+id+")\n", DKDEBUG);
 	//TODO
 	removeSelection(id);
 	var ele = document.getElementById(id);
@@ -1121,14 +1060,16 @@ function DKWidget_Paste(id)
 	document.execCommand('Paste');
 }
 
-
+//////////////////////////////
 function copyToClipboard(text) 
 {
-    if (window.clipboardData && window.clipboardData.setData) {
+	DKLog("copyToClipboard("+text+")\n", DKDEBUG);
+    if(window.clipboardData && window.clipboardData.setData){
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return clipboardData.setData("Text", text); 
 
-    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+    } 
+	else if (document.queryCommandSupported && document.queryCommandSupported("copy")){
         var textarea = document.createElement("textarea");
         textarea.textContent = text;
         textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
@@ -1145,8 +1086,10 @@ function copyToClipboard(text)
     }
 }
 
+////////////////////////////
 function removeSelection(id)
 {
+	DKLog("removeSelection("+id+")\n", DKDEBUG);
 	var ele = document.getElementById(id);
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
