@@ -18,6 +18,8 @@ void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
 //////////////////////////////////////////////////
 DKObject* DKClass::_Instance(const DKString& data)
 {
+	DKLog("DKClass::_Instance("+data+")\n", DKDEBUG);
+	
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 

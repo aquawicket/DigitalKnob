@@ -137,7 +137,7 @@ bool DKFile::CreateFile(const DKString& path)
 
 /////////////////////////////////////////
 bool DKFile::Delete(const DKString& path)
-{
+{	
 	DKLog("DKFile::Delete("+path+")\n", DKDEBUG);
 
 	if(!PathExists(path)){ return false; }
