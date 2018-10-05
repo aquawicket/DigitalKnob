@@ -29,7 +29,7 @@ public:
 	bool CloseBrowser(const int& browser);
 	bool CloseDevTools(const int& browser);
 	bool DownloadUrl(const DKString& url);
-	bool FileDialog();
+	bool FileDialog(const DKString& type, const DKString& title);
 	bool Find(const int& browser, const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);

@@ -576,7 +576,9 @@ bool DKCefV8::DownloadUrl(CefArgs args, CefReturn retval)
 bool DKCefV8::FileDialog(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
-	if(!DKCef::Get(id)->FileDialog()){ return false; }
+	DKString type = args->GetString(1);
+	DKString title = args->GetString(2);
+	if(!DKCef::Get(id)->FileDialog(type,title)){ return false; }
 	return true;
 }
 

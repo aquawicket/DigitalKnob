@@ -331,13 +331,24 @@ bool DKCef::DownloadUrl(const DKString& url)
 	return false;
 }
 
-////////////////////////
-bool DKCef::FileDialog()
+///////////////////////////////////////////////////////////////////
+bool DKCef::FileDialog(const DKString& type, const DKString& title)
 {
 	std::vector<CefString> file_types;
 	file_types.push_back("image/*");
 	fileDialogCallback = new DialogCallback;
-	current_browser->GetHost()->RunFileDialog(FILE_DIALOG_OPEN, "Open File", CefString(), file_types, 0, fileDialogCallback);
+
+	CefBrowserHost::FileDialogMode _type;
+	if(type == "FILE_DIALOG_OPEN"){ _type = FILE_DIALOG_OPEN; }
+	else if(type == "FILE_DIALOG_OPEN_MULTIPLE"){ _type = FILE_DIALOG_OPEN_MULTIPLE; }
+	else if(type == "FILE_DIALOG_OPEN_FOLDER"){ _type = FILE_DIALOG_OPEN_FOLDER; }
+	else if(type == "FILE_DIALOG_SAVE"){ _type = FILE_DIALOG_SAVE; }
+	else{
+		DKLog("DKCef::FileDialog(): type ("+toString(_type)+") is not a valid selector", DKERROR);
+		return false;
+	}
+
+	current_browser->GetHost()->RunFileDialog(_type, "Open File", CefString(), file_types, 0, fileDialogCallback);
 	return true;
 }
 
