@@ -623,12 +623,14 @@ bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////
 bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
 {
+	//DKLog("DKCefV8::GetUrl()\n", DKINFO);
 	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
 	DKString url;
 	if(!DKCef::Get(id)->GetUrl(browser, url)){ return false; }
-	if(url.empty()){ return false; }
-	if(!retval->SetString(0, url)){ return false; }
+	if(!url.empty()){ 
+		if(!retval->SetString(0, url)){ return false; }
+	}
 	return true;
 }
 

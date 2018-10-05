@@ -1,7 +1,7 @@
 ///////////////////////
 function DKAdmin_Init()
 {
-	//DKLog("DKAdmin_Init()\n");
+	DKLog("DKAdmin_Init()\n", DKDEBUG);
 	
 	DKCreate("DKAdmin/DKAdmin.html");
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
@@ -19,7 +19,7 @@ function DKAdmin_Init()
 //////////////////////
 function DKAdmin_End()
 {
-	//DKLog("DKAdmin_End()\n");
+	DKLog("DKAdmin_End()\n", DKDEBUG);
 	
 	DKRemoveEvents(DKAdmin_OnEvent);
 	DKClose("DKAdmin/DKAdmin.html");
@@ -28,7 +28,7 @@ function DKAdmin_End()
 ///////////////////////////////
 function DKAdmin_OnEvent(event)
 {
-	DKLog("DKAdmin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKAdmin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	
 	if(DK_Id(event, "AdminBadge")){
 		DKCreate("DKAdmin/DKAdminMenu.js", function(){});

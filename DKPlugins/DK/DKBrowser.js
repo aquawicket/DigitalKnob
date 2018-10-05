@@ -42,7 +42,7 @@ document.onmousemove = function(e){
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	DKLog("DKCreate("+data+")\n");
+	DKLog("DKCreate("+data+")\n", DKINFO);
 		
 	var arry = data.split(",");
 	
@@ -105,7 +105,7 @@ function DKCreate(data, callback)
 //////////////////////
 function DKClose(data)
 {
-	DKLog("DKClose("+data+")\n");
+	DKLog("DKClose("+data+")\n", DKINFO);
 	
 	if(!data){
 		DKLog("DKClose("+data+"): data empty \n", DKERROR);
@@ -172,7 +172,7 @@ function DKClose(data)
 /////////////////////
 function LoadCss(url)
 {
-	//DKLog("LoadCss("+url+")\n");
+	DKLog("LoadCss("+url+")\n", DKDEBUG);
 	
 	if(!url){ 
 		DKLog("LoadCss("+url+"): url invalid\n", DKERROR);
@@ -197,7 +197,7 @@ function LoadCss(url)
 //////////////////////////////
 function LoadJs(url, callback)
 {
-	//DKLog("LoadJs("+url+", callback)\n");
+	DKLog("LoadJs("+url+", callback)\n", DKDEBUG);
 	
 	if(!url){ 
 		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
@@ -266,7 +266,7 @@ function LoadJs(url, callback)
 //////////////////////////////
 function LoadHtml(url, parent)
 {
-	//DKLog("LoadHtml("+url+","+parent+")\n");
+	DKLog("LoadHtml("+url+","+parent+")\n", DKDEBUG);
 	
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
@@ -321,7 +321,7 @@ function LoadHtml(url, parent)
 ///////////////////////////
 function CheckFileSupport()
 {
-	//DKLog("CheckFileSupport()\n");
+	DKLog("CheckFileSupport()\n", DKDEBUG);
 	
 	if(window.File && window.FileReader && window.FileList && window.Blob){
 		DKLog("File support OK.");
@@ -334,7 +334,7 @@ function CheckFileSupport()
 ///////////////////////////
 function GetLeftPx(element)
 {
-	//DKLog("GetLeftPx("+element+")\n");
+	DKLog("GetLeftPx("+element+")\n", DKDEBUG);
 	
 	if(!element){ return 0; }
 	if(!element.style.left){ return 0; }
@@ -347,7 +347,7 @@ function GetLeftPx(element)
 //////////////////////////
 function GetTopPx(element)
 {
-	//DKLog("GetTopPx("+element+")\n");
+	DKLog("GetTopPx("+element+")\n", DKDEBUG);
 	
 	if(!element){ return 0; }
 	if(!element.style.top){ return 0; }
@@ -360,7 +360,7 @@ function GetTopPx(element)
 ////////////////////////////
 function GetWidthPx(element)
 {
-	//DKLog("GetWidthPx("+element+")\n");
+	DKLog("GetWidthPx("+element+")\n", DKDEBUG);
 	
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
@@ -373,7 +373,7 @@ function GetWidthPx(element)
 /////////////////////////////
 function GetHeightPx(element)
 {
-	//DKLog("GetHeightPx("+element+")\n");
+	DKLog("GetHeightPx("+element+")\n", DKDEBUG);
 	
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
@@ -386,7 +386,7 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	//DKLog("DragStart("+event+","+id+")\n");
+	DKLog("DragStart("+event+","+id+")\n", DKDEBUG);
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -412,7 +412,7 @@ function DragStart(event, id)
 ////////////////////////
 function DragMove(event)
 {
-	//DKLog("DragMove("+event+")\n");
+	DKLog("DragMove("+event+")\n", DKDEBUG);
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -467,7 +467,7 @@ function DragMove(event)
 ///////////////////////
 function DragStop(event)
 {
-	//DKLog("DragStop("+event+")\n");
+	DKLog("DragStop("+event+")\n", DKDEBUG);
 	
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
@@ -478,7 +478,7 @@ function DragStop(event)
 ///////////////////////////////
 function ResizeStart(event, id)
 {
-	//DKLog("ResizeStart("+event+","+id+")\n");
+	DKLog("ResizeStart("+event+","+id+")\n", DKDEBUG);
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -505,7 +505,7 @@ function ResizeStart(event, id)
 //////////////////////////
 function ResizeMove(event)
 {	
-	//DKLog("ResizeMove("+event+")\n");
+	DKLog("ResizeMove("+event+")\n", DKDEBUG);
 	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -534,7 +534,7 @@ function ResizeMove(event)
 ///////////////////////
 function ResizeStop(id)
 {
-	//DKLog("ResizeStop("+id+")\n");
+	DKLog("ResizeStop("+id+")\n", DKDEBUG);
 	
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
@@ -545,7 +545,7 @@ function ResizeStop(id)
 //////////////////////
 function Pos(position)
 {
-	//DKLog("Pos("+position+")\n");
+	DKLog("Pos("+position+")\n", DKDEBUG);
 	
 	if(position == ''){
 		return position;	
@@ -589,7 +589,7 @@ function Pos(position)
 /////////////////////////
 function GetKeyNum(event)
 {
-	//DKLog("GetKeyNum("+event+")\n");
+	DKLog("GetKeyNum("+event+")\n", DKDEBUG);
 	
 	return (event.charCode) ? event.charCode : event.keyCode; //IE or other
 }
@@ -597,7 +597,7 @@ function GetKeyNum(event)
 //////////////////////////////
 function PreventDefault(event)
 {
-	//DKLog("PreventDefault("+event+")\n");
+	DKLog("PreventDefault("+event+")\n", DKDEBUG);
 	
 	if(event.stopPropagation) {
         event.preventDefault();
@@ -610,7 +610,7 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+")\n");
+	DKLog("StopPropagation("+event+")\n", DKDEBUG);
 	
 	if(event.stopPropagation) {
         event.stopPropagation();
@@ -623,7 +623,7 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	//DKLog("addEvent("+elem+","+evnt+","+func+")\n");
+	DKLog("addEvent("+elem+","+evnt+","+func+")\n", DKDEBUG);
 	
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
@@ -646,7 +646,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	//DKLog("removeEvent("+elem+","+evnt+","+func.name+")\n");
+	DKLog("removeEvent("+elem+","+evnt+","+func.name+")\n", DKDEBUG);
 	
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
@@ -669,7 +669,7 @@ function removeEvent(elem, evnt, func)
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
-	//DKLog("setCookie("+cname+","+cvalue+","+exdays+")\n");
+	DKLog("setCookie("+cname+","+cvalue+","+exdays+")\n", DKDEBUG);
 	
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -680,7 +680,7 @@ function setCookie(cname, cvalue, exdays)
 /////////////////////////
 function getCookie(cname) 
 {
-	//DKLog("getCookie("+cname+")\n");
+	DKLog("getCookie("+cname+")\n", DKDEBUG);
 	
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -695,7 +695,7 @@ function getCookie(cname)
 //////////////////////
 function WindowWidth()
 {
-	//DKLog("WindowWidth()\n");
+	DKLog("WindowWidth()\n", DKDEBUG);
 	
 	return document.documentElement.clientWidth;
 }
@@ -703,7 +703,7 @@ function WindowWidth()
 ///////////////////////
 function WindowHeight()
 {
-	//DKLog("WindowHeight()\n");
+	DKLog("WindowHeight()\n", DKDEBUG);
 	
 	return document.documentElement.clientHeight;
 }
@@ -711,7 +711,7 @@ function WindowHeight()
 ////////////////////
 function GetMouseX()
 {
-	//DKLog("GetMouseX()\n");
+	DKLog("GetMouseX()\n", DKDEBUG);
 	
 	return mouseX;
 }
@@ -719,7 +719,7 @@ function GetMouseX()
 ////////////////////
 function GetMouseY()
 {
-	//DKLog("GetMouseY()\n");
+	DKLog("GetMouseY()\n", DKDEBUG);
 	
 	return mouseY;
 }
@@ -727,7 +727,7 @@ function GetMouseY()
 //////////////////////////
 function makeStruct(names)
 {
-	//DKLog("makeStruct("+names+")\n");
+	DKLog("makeStruct("+names+")\n", DKDEBUG);
 	
 	var names = names.split(' ');
 	var count = names.length;
@@ -747,7 +747,7 @@ function makeStruct(names)
 //////////////////////////////////
 function replace(str, old, newstr)
 {
-	//DKLog("replace("+str+","+old+","+newstr+")\n");
+	DKLog("replace("+str+","+old+","+newstr+")\n", DKDEBUG);
 	
 	var re = new RegExp(old, 'g');
 	return str.replace(re, newstr);
@@ -763,7 +763,7 @@ if(typeof String.prototype.trim !== 'function') {
 //////////////////
 function IsLocal()
 {
-	//DKLog("IsLocal()\n");
+	DKLog("IsLocal()\n", DKDEBUG);
 	
 	switch(window.location.protocol){
 		case 'http:':
@@ -801,7 +801,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	//DKLog("AjaxGet("+url+","+output+")\n");
+	DKLog("AjaxGet("+url+","+output+")\n", DKDEBUG);
 	
 	var request = "";
 	try {
@@ -857,7 +857,7 @@ function AjaxGet(url, output)
 ////////////////////////
 function ajaxGetUrl(url)
 {
-	//DKLog("ajaxGetUrl("+url+")\n");
+	DKLog("ajaxGetUrl("+url+")\n", DKDEBUG);
 	
 	var response = new Object();
 	AjaxGet(url, response);

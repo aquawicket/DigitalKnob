@@ -100,12 +100,14 @@ int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 /////////////////////////////////////
 int DKCefJS::GetUrl(duk_context* ctx)
 {
+	//DKLog("DKCefJS::GetUrl()\n", DKINFO);
 	DKString id = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
 	DKString url;
 	if(!DKCef::Get(id)->GetUrl(browser, url)){ return 0; }
-	if(url.empty()){ return 0; }
-	duk_push_string(ctx, url.c_str());
+	if(!url.empty()){
+		duk_push_string(ctx, url.c_str());
+	}
 	return 1;
 }
 

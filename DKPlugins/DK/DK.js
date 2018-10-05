@@ -7,14 +7,14 @@ browser_js.setAttribute('src','DK/DKBrowser.js');
 document.body.appendChild(browser_js);
 */
 
-var LOG_DEBUG = false;
+var LOG_DEBUG = true;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
 var LOG_FILE = true;
 var LOG_SHOW = ""; //comma seperated
 var LOG_HIDE = ""; //comma seperated
-var LOG_LINES = false;
+var LOG_LINES = true;
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
@@ -115,8 +115,9 @@ function DKLog(string, lvl)
 		};
 		
 		if(lvl == DKERROR){ 
-			alert("ERROR: "+string);
-			throw "ERROR: "+string;
+			//alert("ERROR: "+string);
+			//throw "ERROR: "+string;
+			console.log("%c"+getFileLine()+string, color);
 		}
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			console.log("%c"+getFileLine()+string, color);
@@ -136,7 +137,7 @@ DKLog(DK_GetJavascript()+"\n");
 /////////////////////
 function DK_GetTime()
 {
-	//DKLog("DK_GetTime()\n");
+	DKLog("DK_GetTime()\n", DKDEBUG);
 	
 	var d = new Date();
 	var hour = d.getHours();
@@ -157,7 +158,7 @@ function DK_GetTime()
 /////////////////////
 function DK_GetDate()
 {
-	//DKLog("DK_GetDate()\n");
+	DKLog("DK_GetDate()\n", DKDEBUG);
 	
 	var d = new Date();
 	var date = d.getMonth()+1;
@@ -172,7 +173,7 @@ function DK_GetDate()
 /////////////////////
 function DK_Refresh()
 {	
-	//DKLog("DK_Refresh()\n");
+	DKLog("DK_Refresh()\n", DKDEBUG);
 	
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
@@ -183,7 +184,7 @@ function DK_Refresh()
 //////////////////////////
 function DKAvailable(name)
 {
-	//DKLog("DKAvailable("+name+")\n");
+	DKLog("DKAvailable("+name+")\n", DKDEBUG);
 	
 	if(name == "DKWidget"){
 		return true; 
@@ -198,7 +199,7 @@ function DKAvailable(name)
 ////////////////////////
 function DK_GetObjects()
 {
-	//DKLog("DK_GetObjects()\n");
+	DKLog("DK_GetObjects()\n", DKDEBUG);
 	
 	// Search the Dom for all scripts (.js files)
 	var jsfiles = "";
@@ -242,7 +243,7 @@ function DK_GetObjects()
 ///////////////////////
 function DK_GetEvents()
 {
-	//DKLog("DK_GetEvents()\n");
+	DKLog("DK_GetEvents()\n", DKDEBUG);
 	
 	var out = "";
 	for(var i=0; i<events.length; i++){
@@ -261,7 +262,7 @@ function DK_GetEvents()
 ///////////////////
 function DK_GetOS()
 {
-	//DKLog("DK_GetOS()\n");
+	DKLog("DK_GetOS()\n", DKDEBUG);
 	
 	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -294,7 +295,7 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	//DKLog("DK_GetBrowser()\n");
+	//DKLog("DK_GetBrowser()\n", DKDEBUG);
 	
     if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
@@ -322,7 +323,7 @@ function DK_GetBrowser()
 ///////////////////////////
 function DK_GetJavascript()
 {
-	//DKLog("DK_GetJavascript()\n");
+	DKLog("DK_GetJavascript()\n", DKDEBUG);
 	
 	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
 
@@ -342,7 +343,7 @@ function DK_GetJavascript()
 //////////////////////////
 function DK_GetUserAgent()
 {
-	//DKLog("DK_GetUserAgent()\n");
+	DKLog("DK_GetUserAgent()\n", DKDEBUG);
 	
 	return navigator.userAgent;
 }
@@ -350,7 +351,7 @@ function DK_GetUserAgent()
 //////////////////////////
 function DK_GetNavigator()
 {
-	//DKLog("DK_GetNavigator()\n");
+	DKLog("DK_GetNavigator()\n", DKDEBUG);
 	
 	var txt = "";
 	txt += "Browser CodeName: " + navigator.appCodeName + "\n";
@@ -367,7 +368,7 @@ function DK_GetNavigator()
 ////////////////
 function DK_IE()
 {
-	//DKLog("DK_IE() \n");
+	//DKLog("DK_IE() \n", DKDEBUG);
 	
 	var rv = 0;
 	if(navigator.appName == 'Microsoft Internet Explorer'){
@@ -391,7 +392,7 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	//DKLog("GetType("+event+")\n");
+	DKLog("GetType("+event+")\n", DKDEBUG);
 	
 	if(!event){ return false; }
 	if(event.type){
@@ -409,7 +410,7 @@ function DK_GetType(event)
 ////////////////////////
 function DK_GetId(event)
 {
-	//DKLog("GetId("+event+")\n");
+	DKLog("GetId("+event+")\n", DKDEBUG);
 	
 	if(!event){ return false;}
 	if(event.type && event.type == "contextmenu"){ //rightclick
@@ -434,7 +435,7 @@ function DK_GetId(event)
 ///////////////////////////
 function DK_GetValue(event)
 {
-	//DKLog("DK_GetValue("+event+")\n");
+	DKLog("DK_GetValue("+event+")\n", DKDEBUG);
 	
 	return DKWidget_GetValue(event);
 }
@@ -442,7 +443,7 @@ function DK_GetValue(event)
 ////////////////////////////////
 function DK_Type(event, command)
 { 
-	//DKLog("DK_Type("+event+","+command+")\n");
+	DKLog("DK_Type("+event+","+command+")\n", DKDEBUG);
 	
 	if(!event){ return false;}
 	
@@ -465,7 +466,7 @@ function DK_Type(event, command)
 /////////////////////////
 function DK_Id(event, id)
 { 
-	//DKLog("DK_Id("+event+","+id+")\n");
+	DKLog("DK_Id("+event+","+id+")\n", DKDEBUG);
 	
 	var element = DKWidget_GetElement(event);
 	//DKLog("DK_Id(): element="+element.id+" \n");
@@ -478,7 +479,7 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_IdLike(event, id)
 { 
-	//DKLog("DK_IdLike("+event+","+id+")\n");
+	DKLog("DK_IdLike("+event+","+id+")\n", DKDEBUG);
 	
 	if(!id){ return; }
 	if(DK_GetType(event) == "keydown"){ return false; } //KeyboardEvent
@@ -494,7 +495,7 @@ function DK_IdLike(event, id)
 ////////////////////////////
 function DK_Value(event, id)
 { 
-	//DKLog("DK_Value("+event+","+id+")\n");
+	DKLog("DK_Value("+event+","+id+")\n", DKDEBUG);
 	
 	if(DKWidget_GetValue(event) == id){ return true; }
 	return false;
@@ -503,7 +504,7 @@ function DK_Value(event, id)
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
-	//DKLog("StopPropagation("+event+")\n");
+	DKLog("StopPropagation("+event+")\n", DKDEBUG);
 	
 	if(event.stopPropagation) {
         event.stopPropagation();
@@ -515,7 +516,7 @@ function DK_StopPropagation(event)
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
-	//DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n");
+	DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n", DKDEBUG);
 	
 	if(typeof id != "string"){
 		DKLog("DKAddEvent(id, type, Function): id invalid\n", DKWARN);
@@ -554,7 +555,7 @@ function DKAddEvent(id, type, Function)
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
-	//DKLog("+Function.name+")\n");
+	DKLog("DKRemoveEvent("+Function.name+")\n", DKDEBUG);
 	
 	if(typeof id != "string"){
 		DKLog("DKRemoveEvent(id, type, Function): id invalid\n", DKERROR);
@@ -599,7 +600,7 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
-	//DKLog("DKRemoveEvents("+Function.name+")\n");
+	DKLog("DKRemoveEvents("+Function.name+")\n", DKDEBUG);
 	
 	if(typeof Function != "function"){
 		DKLog("DKRemoveEvents(Function): Function invalid\n", DKERROR);
@@ -635,7 +636,7 @@ function DKRemoveEvents(Function)
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
-	//DKLog("SendEvent("+id+","+type+","+message+")\n");
+	DKLog("SendEvent("+id+","+type+","+message+")\n", DKDEBUG);
 	
 	if(typeof id != "string"){
 		DKLog("DKRemoveEvent(id, type, message): id invalid\n", DKERROR);
@@ -665,7 +666,7 @@ function DKSendEvent(id, type, message)
 ///////////////////////////
 function GetCharCode(event) 
 {
-	//DKLog("GetCharCode("+event+")\n");
+	DKLog("GetCharCode("+event+")\n", DKDEBUG);
 	
     var key = event.which || event.keyCode;
 	return key;
@@ -674,7 +675,7 @@ function GetCharCode(event)
 //////////////////////////
 function GetKeyCode(event) 
 {
-	//DKLog("GetKeyCode("+event+")\n");
+	DKLog("GetKeyCode("+event+")\n", DKDEBUG);
 	
     var key = event.keyCode;
     return key;
@@ -683,7 +684,7 @@ function GetKeyCode(event)
 //////////////////////////////
 function GetMouseButton(event) 
 {
-	//DKLog("GetMouseButton("+event+")\n");
+	DKLog("GetMouseButton("+event+")\n", DKDEBUG);
 	
     var button = event.which || event.button;
     return button;
@@ -693,7 +694,7 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////
 	function DK_SetClipboard(string)
 	{
-		//DKLog("DK_SetClipboard("+string+")\n");
+		DKLog("DK_SetClipboard("+string+")\n", DKDEBUG);
 		
 		//if(!document.queryCommandSupported('copy')){
 		//	DKLog("Javascript (Copy) not supported. \n", DKERROR);
@@ -708,7 +709,7 @@ if(DK_GetBrowser() != "CEF"){
 /////////////////////////////
 function DK_FileToString(url)
 {
-	//DKLog("DK_FileToString("+url+")\n");
+	DKLog("DK_FileToString("+url+")\n", DKDEBUG);
 	
 	return ajaxGetUrl(url);
 }
@@ -717,16 +718,14 @@ function DK_FileToString(url)
 /////////////////////////////
 function DK_GetMouseWindowX()
 {
-	//DKLog("DK_GetMouseWindowX()\n");
-	
+	DKLog("DK_GetMouseWindowX()\n", DKDEBUG);
 	return mouseX;
 }
 
 /////////////////////////////
 function DK_GetMouseWindowY()
 {
-	//DKLog("DK_GetMouseWindowY()\n");
-	
+	DKLog("DK_GetMouseWindowY()\n", DKDEBUG);
 	return mouseY;
 }
 */
@@ -734,7 +733,7 @@ function DK_GetMouseWindowY()
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
-	//DKLog("DK_Sleep("+milliseconds+")\n");
+	DKLog("DK_Sleep("+milliseconds+")\n", DKDEBUG);
 	
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
@@ -747,7 +746,7 @@ function DK_Sleep(milliseconds)
 ////////////////////////////
 function DK_ClearSelection()
 {
-	//DKLog("DK_ClearSelection()\n");
+	DKLog("DK_ClearSelection()\n", DKDEBUG);
 	
 	//Clear text selection
 	if(document.selection){
