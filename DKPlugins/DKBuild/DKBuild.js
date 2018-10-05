@@ -21,7 +21,7 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	DKLog("DKBuild_Init()\n", DKINFO);
+	DKLog("DKBuild_Init()\n", DKDEBUG);
 	DKCreate("DKCurl");
 	//DKCreate("DKGit/DKGit.js", function(){});
 
@@ -70,12 +70,13 @@ function DKBuild_Init()
 //////////////////////
 function DKBuild_End()
 {
-	//DKLog("DKBuild_End()\n");
+	DKLog("DKBuild_End()\n", DKDEBUG);
 }
 
 ////////////////////////////////
 function DKBuild_ValidateCmake()
 {
+	DKLog("DKBuild_ValidateCmake()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for CMake \n");
 	//DKLog(CMAKE+"\n");
@@ -92,6 +93,7 @@ function DKBuild_ValidateCmake()
 ///////////////////////////////
 function DKBuild_InstallCmake()
 {
+	DKLog("DKBuild_InstallCmake()\n", DKDEBUG);
 	DKLog("Installing CMake \n");
 	var datapath = DKAssets_LocalAssets();
 	
@@ -117,6 +119,7 @@ function DKBuild_InstallCmake()
 /////////////////////////////////
 function DKBuild_ValidateVC2015()
 {
+	DKLog("DKBuild_ValidateVC2015()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
@@ -132,6 +135,7 @@ function DKBuild_ValidateVC2015()
 ////////////////////////////////
 function DKBuild_InstallVC2015()
 {
+	DKLog("DKBuild_InstallVC2015()\n", DKDEBUG);
 	DKLog("Installing Visual Studio 2015 \n");
 	var datapath = DKAssets_LocalAssets();
 	
@@ -142,6 +146,7 @@ function DKBuild_InstallVC2015()
 //////////////////////////////
 function DKBuild_ValidateGcc()
 {
+	DKLog("DKBuild_ValidateGcc()\n", DKDEBUG);
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for GCC \n");
@@ -156,6 +161,7 @@ function DKBuild_ValidateGcc()
 ///////////////////////////////
 function DKBuild_InstallGcc()
 {
+	DKLog("DKBuild_InstallGcc()\n", DKDEBUG);
 	DKLog("Installing Gcc \n");
 	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
@@ -163,6 +169,7 @@ function DKBuild_InstallGcc()
 ////////////////////////////////
 function DKBuild_ValidateXcode()
 {
+	DKLog("DKBuild_ValidateXcode()\n", DKDEBUG);
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for Xcode \n");
@@ -176,6 +183,7 @@ function DKBuild_ValidateXcode()
 ///////////////////////////////
 function DKBuild_InstallXcode()
 {
+	DKLog("DKBuild_InstallXcode()\n", DKDEBUG);
 	DKLog("Installing Xcode \n");
 	var datapath = DKAssets_LocalAssets();
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
@@ -184,6 +192,7 @@ function DKBuild_InstallXcode()
 //////////////////////////
 function DKBuild_OsCheck()
 {
+	DKLog("DKBuild_OsCheck()\n", DKDEBUG);
 	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
 			DKLog(OS+" can only be build from a WIN64 machine.\n"); return false;
@@ -267,6 +276,7 @@ function DKBuild_OsCheck()
 ///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
+	DKLog("DKBuild_ResetAppsPlugins()\n", DKDEBUG);
 	DKLog("Deleting Apps and Plugins... \n");
 	
 	// Delete everything in DKApps except DKBuild
@@ -296,6 +306,7 @@ function DKBuild_ResetAppsPlugins()
 ////////////////////////////////
 function DKBuild_Reset3rdParty()
 {
+	DKLog("DKBuild_Reset3rdParty()\n", DKDEBUG);
 	//TODO
 	DKLog("Deleting 3rdParty... \n");
 	DKLog("Please wait. \n");
@@ -305,8 +316,7 @@ function DKBuild_Reset3rdParty()
 /////////////////////////////
 function DKBuild_GetAppList()
 {
-	//DKLog("DKBuild_GetAppList() \n");
-	
+	DKLog("DKBuild_GetAppList()\n", DKDEBUG);
 	//DKApps folder
 	var apps = DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
@@ -357,6 +367,7 @@ function DKBuild_GetAppList()
 ////////////////////////////
 function DKBuild_DoResults()
 {
+	DKLog("DKBuild_DoResults()\n", DKDEBUG);
 	DKLog("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n");
 	if(!DKBuild_OsCheck()){ return; }
 	
