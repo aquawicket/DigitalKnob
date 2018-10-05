@@ -138,7 +138,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 
 	_browser = browser;
 	if(!functions[func]) {
-		printf("DKCefV8Handler::Execute(): %s not registered\n", func.c_str());
+		DKLog("DKCefV8Handler::Execute(): "+func+" not registered\n", DKWARN);
 		return false;
 	}
 
@@ -146,7 +146,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 
 	CefRefPtr<CefListValue> rval = CefListValue::Create();
 	if(!functions[func](args,rval)){
-		printf("DKCefV8Handler::Execute() failed\n");
+		DKLog("DKCefV8Handler::Execute(): "+func+" failed\n", DKERROR);
 		return false;
 	}
 
@@ -179,12 +179,12 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name]) {
-			DKLog("DKCefV8Handler::Execute("+func+"): "+func+" not registered\n", DKWARN);
+			DKLog("DKCefV8Handler::Execute(): "+func+" not registered\n", DKWARN);
 			return false;
 		}
 
 		//Set the function arguments and show the function in log
-		DKString text = "DKCefV8Handler::Execute("+func+"):"+func+"(";
+		DKString text = "DKCefV8Handler::Execute(): "+func+"(";
 		CefRefPtr<CefListValue> args = CefListValue::Create();
 		for(unsigned int i=0; i<arguments.size(); i++){
 			if(arguments[i]->IsString()){
@@ -373,14 +373,51 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-	DKLog("DKCefApp::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKDEBUG);
-	if(!DKV8::v8handler){
-		DKLog("DKCefApp::OnProcessMessageReceived(): v8handler invalid\n", DKERROR);
+
+	if(DKV8::singleprocess){
+		DKLog("DKCefApp::OnProcessMessageReceived(): message system disabled in single-process mode\n", DKINFO);
 		return false;
 	}
 
-	//TODO - read out the full function and parameters
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
-	DKLog("DKCefApp::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
-	return true;
+	std::string str = "DKCefApp::OnProcessMessageReceived(): "; 
+	str += message->GetName();
+	str += "(";
+	for(unsigned int i=0; i<args->GetSize(); i++){
+		if(args->GetType(i) == VTYPE_INVALID){
+			str += "invalid";
+		}
+		if(args->GetType(i) == VTYPE_NULL){
+			str += "null";
+		}
+		if(args->GetType(i) == VTYPE_BOOL){
+			str += toString(args->GetBool(i));
+		}
+		if(args->GetType(i) == VTYPE_INT){
+			str += toString(args->GetInt(i));
+		}
+		if(args->GetType(i) == VTYPE_DOUBLE){
+			str += toString(args->GetDouble(i));
+		}
+		if(args->GetType(i) == VTYPE_STRING){
+			str += toString(args->GetString(i));
+		}
+		if(args->GetType(i) == VTYPE_BINARY){
+			str += "binary";
+		}
+		if(args->GetType(i) == VTYPE_DICTIONARY){
+			str += "dictionary";
+		}
+		if(args->GetType(i) == VTYPE_LIST){
+			str += "list";
+		}
+
+		if(i < args->GetSize()-1){
+			str += ",";
+		}
+	}
+	str += ")";
+	DKLog(str+"\n", DKDEBUG);
+
+	return false;
 }

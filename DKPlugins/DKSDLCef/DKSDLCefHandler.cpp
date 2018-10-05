@@ -32,6 +32,8 @@ DKSDLCefHandler* DKSDLCefHandler::GetInstance()
 ////////////////////////////////////////////////////////
 void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 {
+	DKLog("DKSDLCefHandler::CloseAllBrowsers()\n", DKDEBUG);
+
 	if(!CefCurrentlyOn(TID_UI)){
 		// Execute on the UI thread.
 		CefPostTask(TID_UI, base::Bind(&DKSDLCefHandler::CloseAllBrowsers, this, force_close));
@@ -50,6 +52,7 @@ void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) 
 {
 	CEF_REQUIRE_UI_THREAD();
+	DKLog("DKSDLCefHandler::DoClose()\n", DKDEBUG);
 
 	// Closing the main window requires special handling. See the DoClose()
 	// documentation in the CEF header for a detailed destription of this
@@ -154,7 +157,7 @@ bool DKSDLCefHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<Cef
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 {
-	//DKLog("DKSDLCefHandler::OnConsoleMessage()\n", DKINFO);
+	//DKLog("DKSDLCefHandler::OnConsoleMessage()\n", DKDEBUG);
 	CEF_REQUIRE_UI_THREAD();
 	DKString msg = message.ToString();
 	replace(msg, "%c", "");
@@ -226,7 +229,7 @@ void DKSDLCefHandler::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
-	DKLog("DKSDLCefHandler::OnLoadEnd("+toString(httpStatusCode)+")\n", DKINFO);
+	DKLog("DKSDLCefHandler::OnLoadEnd("+toString(httpStatusCode)+")\n", DKDEBUG);
 	if(frame->IsMain()){
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadEnd", toString(httpStatusCode));
 	}
@@ -396,11 +399,17 @@ bool DKSDLCefHandler::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_sele
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 {
-	//DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+")\n", DKINFO);
+#ifndef DEBUG
+	CEF_REQUIRE_UI_THREAD();
+#endif
+
+	//This area is only for multi-process messages, return if using single-process
+	if(DKV8::singleprocess){
+		DKLog("DKSDLCefHandler::OnProcessMessageReceived(): message system disabled in single-process mode\n", DKINFO);
+		return false;
+	}
 
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
-	//DKLog("DKSDLCefHandler::OnProcessMessageReceived("+DKString(message->GetName())+"): "+toString((int)args->GetSize())+" args\n", DKINFO);
-
 	std::string str = "DKSDLCefHandler::OnProcessMessageReceived(): "; 
 	str += message->GetName();
 	str += "(";
@@ -438,8 +447,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 		}
 	}
 	str += ")";
-	DKLog(str+"\n", DKINFO);
-
+	DKLog(str+"\n", DKDEBUG);
 
 	if(DKString(message->GetName()) == "OnBrowserCreated"){
 		DKV8::GetFunctions(browser);
@@ -448,8 +456,8 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 	if(DKString(message->GetName()) == "OnContextCreated"){
 		return false;
 	}
-	DKV8::Execute(browser, DKString(message->GetName()), args);
 
+	DKV8::Execute(browser, DKString(message->GetName()), args);
 
 	return false;
 }
@@ -459,7 +467,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 bool DKSDLCefHandler::OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr<CefGeolocationCallback> callback)
 {
 CEF_REQUIRE_UI_THREAD();
-DKLog("DKCefWindow::OnRequestGeolocationPermission()\n", DKINFO);
+DKLog("DKCefWindow::OnRequestGeolocationPermission()\n", DKDEBUG);
 
 callback->Continue(true);
 return true;
@@ -471,6 +479,6 @@ bool DKSDLCefHandler::OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
 {
 	//FIXME: this is never called
 	CEF_REQUIRE_UI_THREAD();
-	DKLog("DKCefWindow::OnTooltip()\n", DKINFO);
+	DKLog("DKCefWindow::OnTooltip()\n", DKDEBUG);
 	return true;
 }
