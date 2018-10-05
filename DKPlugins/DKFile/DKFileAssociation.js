@@ -1,26 +1,25 @@
 /////////////////////////////////
 function DKFileAssociation_Init()
 {
-	//DKLog("DKFileAssociation_Init()\n");
+	DKLog("DKFileAssociation_Init()\n", DKDEBUG);
 }
 
 ////////////////////////////////
 function DKFileAssociation_End()
 {
-	//DKLog("DKFileAssociation_End()\n");
+	DKLog("DKFileAssociation_End()\n", DKDEBUG);
 }
 
 /////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	//DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }
 
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	//DKLog("DKFileAssociation_Open("+file+")\n");
-	
+	DKLog("DKFileAssociation_Open("+file+")\n", DKDEBUG);
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
 	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
@@ -46,8 +45,7 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	//DKLog("DKFileAssociation_OpenHtml("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenHtml("+path+")\n", DKDEBUG);
 	//path = path.replace(absolutepath, "");
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -102,8 +100,7 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	//DKLog("DKFileAssociation_OpenJS("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenJS("+path+")\n", DKDEBUG);
 	//path = path.replace(absolutepath, "");
 		
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -117,8 +114,7 @@ function DKFileAssociation_OpenJS(path)
 ////////////////////////////////////////
 function DKFileAssociation_OpenCss(path)
 {
-	//DKLog("DKFileAssociation_OpenCss("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenCss("+path+")\n", DKDEBUG);
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
@@ -128,8 +124,7 @@ function DKFileAssociation_OpenCss(path)
 /////////////////////////////////////////
 function DKFileAssociation_OpenText(path)
 {
-	//DKLog("DKFileAssociation_OpenText("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenText("+path+")\n", DKDEBUG);
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
@@ -140,8 +135,7 @@ function DKFileAssociation_OpenText(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenImage(path)
 {
-	//DKLog("DKFileAssociation_OpenImage("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenImage("+path+")\n", DKDEBUG);
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
@@ -151,8 +145,7 @@ function DKFileAssociation_OpenImage(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenModel(path)
 {
-	//DKLog("DKFileAssociation_OpenModel("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenModel("+path+")\n", DKDEBUG);
 	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){});
 	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
 }
@@ -160,8 +153,7 @@ function DKFileAssociation_OpenModel(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenAudio(path)
 {
-	//DKLog("DKFileAssociation_OpenAudio("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenAudio("+path+")\n", DKDEBUG);
 	//var file = DKFile_GetFilename(path);
 	DKCreate("DKAudio", function(){
 		DKAudio_PlaySound(path);
@@ -177,8 +169,7 @@ function DKFileAssociation_OpenAudio(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenVideo(path)
 {
-	//DKLog("DKFileAssociation_OpenVideo("+path+")\n");
-	
+	DKLog("DKFileAssociation_OpenVideo("+path+")\n", DKDEBUG);
 	//FIXME
 	DKVideo_Play(path);
 }

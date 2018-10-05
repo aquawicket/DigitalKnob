@@ -3,7 +3,7 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	DKLog("GitMenu_Init()\n", DKINFO);
+	DKLog("GitMenu_Init()\n", DKDEBUG);
 	DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKThreadPool");
 
@@ -33,8 +33,7 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	//DKLog("GitMenu_End()");
-	
+	DKLog("GitMenu_End()\n", DKDEBUG);
 	DKRemoveEvents(GitMenu_OnEvent);
 	DKClose("DKGit/GitMenu.html");
 }
@@ -42,8 +41,7 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	//DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event,"Git Update")){
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
@@ -62,6 +60,7 @@ function GitMenu_OnEvent(event)
 //////////////////////////////
 function GitMenu_ValidateGit()
 {
+	DKLog("GitMenu_ValidateGit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for GIT \n");
 	//DKLog(GIT+"\n");
@@ -78,6 +77,7 @@ function GitMenu_ValidateGit()
 /////////////////////////////
 function GitMenu_InstallGit()
 {
+	DKLog("GitMenu_InstallGit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Installing Git \n");
 	var assets = DKAssets_LocalAssets();
@@ -104,6 +104,7 @@ function GitMenu_InstallGit()
 ////////////////////////////
 function GitMenu_GitUpdate()
 {
+	DKLog("GitMenu_GitUpdate()\n", DKDEBUG);
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
@@ -141,6 +142,7 @@ function GitMenu_GitUpdate()
 ////////////////////////////
 function GitMenu_GitCommit()
 {
+	DKLog("GitMenu_GitCommit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}

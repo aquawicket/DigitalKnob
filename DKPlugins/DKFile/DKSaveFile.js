@@ -10,8 +10,7 @@ var rPath;
 ////////////////////////////
 function DKSaveFile_Init()
 {	
-	//DKLog("DKSaveFile_Init()\n");
-
+	DKLog("DKSaveFile_Init()\n", DKDEBUG);
 	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
 	DKAddEvent("DKFile/DKSaveFile.html", "SetFile", DKSaveFile_OnEvent);
@@ -29,8 +28,7 @@ function DKSaveFile_Init()
 ///////////////////////////
 function DKSaveFile_End()
 {
-	//DKLog("DKSaveFile_End()\n");
-	
+	DKLog("DKSaveFile_End()\n", DKDEBUG);
 	DKRemoveEvents(DKSaveFile_OnEvent);
 	DKClose("DKFile/DKSaveFile.html");
 	DKClose("DKFile/DKSaveFile.css");
@@ -39,8 +37,7 @@ function DKSaveFile_End()
 ////////////////////////////////////
 function DKSaveFile_OnEvent(event)
 {	
-	//DKLog("DKSaveFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-
+	DKLog("DKSaveFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_IdLike(event, "DKSaveFileDrive")){
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
@@ -111,15 +108,15 @@ function DKSaveFile_OnEvent(event)
 //////////////////////////////////////
 function DKSaveFile_GetFIle(callback)
 {
-		DKSaveFile_callback = callback;
+	DKLog("DKSaveFile_GetFIle(callback)\n", DKDEBUG);
+	DKSaveFile_callback = callback;
 }
 */
 
 //////////////////////////////////////
 function DKSaveFile_OpenFolder(path)
 {
-	//DKLog("DKSaveFile_OpenFolder("+path+")\n");
-	
+	DKLog("DKSaveFile_OpenFolder("+path+")\n", DKDEBUG);
 	if(DKSaveFile_UpdatePath(path)){
 		return true;
 	}
@@ -129,8 +126,7 @@ function DKSaveFile_OpenFolder(path)
 ////////////////////////////////////
 function DKSaveFile_OpenFile(path)
 {
-	//DKLog("DKSaveFile_OpenFile("+path+")\n");
-	
+	DKLog("DKSaveFile_OpenFile("+path+")\n", DKDEBUG);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -148,8 +144,7 @@ function DKSaveFile_OpenFile(path)
 //////////////////////////////////////
 function DKSaveFile_UpdatePath(path)
 {
-	//DKLog("DKSaveFile_UpdatePath("+path+")\n");
-	
+	DKLog("DKSaveFile_UpdatePath("+path+")\n", DKDEBUG);
 	//if(!path){ return false; }
 	DKLog("DKSaveFile_UpdatePath("+path+") \n");
 	if(DK_GetOS() == "Android"){

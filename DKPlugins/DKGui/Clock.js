@@ -5,6 +5,7 @@ var second_flag = false;
 /////////////////////
 function Clock_Init()
 {
+	DKLog("Clock_Init()\n", DKDEBUG);
 	DKCreate("DKGui/Clock.html,DKGui/DKTaskbar/Taskbar.html");
 	DKAddEvent("GLOBAL", "second", Clock_OnEvent);
 	Clock_Update();
@@ -13,6 +14,7 @@ function Clock_Init()
 ////////////////////
 function Clock_End()
 {
+	DKLog("Clock_End()\n", DKDEBUG);
 	DKRemoveEvents(Clock_OnEvent);
 	DKClose("DKGui/Clock.html");
 }
@@ -20,8 +22,7 @@ function Clock_End()
 /////////////////////////////
 function Clock_OnEvent(event)
 {
-	//DKLog("Clock_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("Clock_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "second")){
 		Clock_Update();
 	}
@@ -30,7 +31,7 @@ function Clock_OnEvent(event)
 ///////////////////////
 function Clock_Update()
 {
-	//DKLog("tick\n");
+	DKLog("Clock_Update()\n", DKDEBUG);
 	if(second_flag){
 		DKWidget_SetProperty("time", "color", "rgb(255,255,255)");
 		second_flag = false;

@@ -8,8 +8,7 @@ var rPath;
 //////////////////////////
 function DKOpenFile_Init()
 {	
-	//DKLog("DKOpenFile_Init()\n");
-
+	DKLog("DKOpenFile_Init()\n", DKDEBUG);
 	DKCreate("DKFile/DKOpenFile.css");
 	DKCreate("DKFile/DKOpenFile.html");
 	DKAddEvent("DKFile/DKOpenFile.html", "GetFile", DKOpenFile_OnEvent);
@@ -29,8 +28,7 @@ function DKOpenFile_Init()
 /////////////////////////
 function DKOpenFile_End()
 {
-	//DKLog("DKOpenFile_End()\n");
-	
+	DKLog("DKOpenFile_End()\n", DKDEBUG);
 	DKRemoveEvents(DKOpenFile_OnEvent);
 	DKClose("DKFile/DKOpenFile.html");
 	DKClose("DKFile/DKOpenFile.css");
@@ -39,8 +37,7 @@ function DKOpenFile_End()
 //////////////////////////////////
 function DKOpenFile_OnEvent(event)
 {	
-	//DKLog("DKOpenFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-
+	DKLog("DKOpenFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_IdLike(event, "DKOpenFileDrive")){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
@@ -104,8 +101,7 @@ function DKOpenFile_OnEvent(event)
 ////////////////////////////////////
 function DKOpenFile_OpenFolder(path)
 {
-	//DKLog("DKOpenFile_OpenFolder("+path+")\n");
-	
+	DKLog("DKOpenFile_OpenFolder("+path+")\n", DKDEBUG);
 	if(DKOpenFile_UpdatePath(path)){
 		return true;
 	}
@@ -115,8 +111,7 @@ function DKOpenFile_OpenFolder(path)
 //////////////////////////////////
 function DKOpenFile_OpenFile(path)
 {
-	//DKLog("DKOpenFile_OpenFile("+path+")\n");
-	
+	DKLog("DKOpenFile_OpenFile("+path+")\n", DKDEBUG);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -134,8 +129,7 @@ function DKOpenFile_OpenFile(path)
 ////////////////////////////////////
 function DKOpenFile_UpdatePath(path)
 {
-	//DKLog("DKOpenFile_UpdatePath("+path+")\n");
-	
+	DKLog("DKOpenFile_UpdatePath("+path+")\n", DKDEBUG);
 	//if(!path){ return false; }
 	//DKLog("DKOpenFile_UpdatePath("+path+") \n");
 	if(DK_GetOS() == "Android"){

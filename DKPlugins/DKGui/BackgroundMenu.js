@@ -1,6 +1,7 @@
 //////////////////////////////
 function BackgroundMenu_Init()
 {
+	DKLog("BackgroundMenu_Init()\n", DKDEBUG);
 	DKCreate("DKGui/BackgroundMenu.html");
 	var file = DKWidget_GetAttribute("Background","src");
 	//DKLog("file="+file+"\n");
@@ -10,11 +11,12 @@ function BackgroundMenu_Init()
 /////////////////////////////
 function BackgroundMenu_End()
 {
+	DKLog("BackgroundMenu_End()\n", DKDEBUG);
 	DKClose("DKGui/BackgroundMenu.html");
 }
 
 //////////////////////////////////////
 function BackgroundMenu_OnEvent(event)
 {
-	DKLog("BackgroundMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("BackgroundMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }

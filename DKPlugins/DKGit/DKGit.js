@@ -3,7 +3,7 @@ var GIT = "";
 /////////////////////
 function DKGit_Init()
 {
-	DKLog("DKGit_Init()\n", DKINFO);
+	DKLog("DKGit_Init()\n", DKDEBUG);
 	DKCreate("DKThreadPool");
 
 	//DKLog(DK_GetOS()+"\n");
@@ -28,19 +28,20 @@ function DKGit_Init()
 ////////////////////
 function DKGit_End()
 {
-	//DKLog("DKGit_End()");
+	DKLog("DKGit_End()\n", DKDEBUG);
 	DKRemoveEvents(DKGit_OnEvent);
 }
 
 ///////////////////////////////
 function DKGit_OnEvent(event)
 {
-	//DKLog("DKGit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKGit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }
 
 ////////////////////////////
 function DKGit_ValidateGit()
 {
+	DKLog("DKGit_ValidateGit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Looking for GIT \n");
 	//DKLog(GIT+"\n");
@@ -57,6 +58,7 @@ function DKGit_ValidateGit()
 ///////////////////////////
 function DKGit_InstallGit()
 {
+	DKLog("DKGit_InstallGit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	DKLog("Installing Git \n");
 	var assets = DKAssets_LocalAssets();
@@ -83,6 +85,7 @@ function DKGit_InstallGit()
 //////////////////////////
 function DKGit_GitUpdate()
 {
+	DKLog("DKGit_GitUpdate()\n", DKDEBUG);
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
@@ -121,6 +124,7 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
+	DKLog("DKGit_GitCommit()\n", DKDEBUG);
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
@@ -165,8 +169,8 @@ function DKGit_GitCommit()
 ///////////////////////////////
 function DKGit_GitCredentials()
 {
+	DKLog("DKGit_GitCredentials()\n", DKDEBUG);
 	//TODO
-	DKLog("DKGit_GitCredentials\n");
 	//how do we let git remember out login for repositories
 	//we don't want to have to log in on every commit.
 }

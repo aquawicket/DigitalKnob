@@ -2,26 +2,25 @@
 //////////////////////
 function DKMenu_Init()
 {
-	//DKLog("DKMenu_Init()\n");
+	DKLog("DKMenu_Init()\n", DKDEBUG);
 }
 
 /////////////////////
 function DKMenu_End()
 {
-	//DKLog("DKMenu_End()\n");
+	DKLog("DKMenu_End()\n", DKDEBUG);
 }
 
 //////////////////////////////
 function DKMenu_OnEvent(event)
 {
-	//DKLog("DKMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 }
 
 ////////////////////////////////////
 function DKMenu_ValidatePosition(id)
 {
-	DKLog("DKMenu_ValidatePosition("+id+")\n");
-
+	DKLog("DKMenu_ValidatePosition("+id+")\n", DKDEBUG);
 	//DKLog("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//DKLog("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");

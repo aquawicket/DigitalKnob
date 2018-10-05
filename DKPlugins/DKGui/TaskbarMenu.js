@@ -5,6 +5,7 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
+	DKLog("TaskbarMenu_Init()\n", DKDEBUG);
 	DKCreate("DKGui/TaskbarMenu.html", function(){
 		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
@@ -30,6 +31,7 @@ function TaskbarMenu_Init()
 //////////////////////////
 function TaskbarMenu_End()
 {
+	DKLog("TaskbarMenu_End()\n", DKDEBUG);
 	DKRemoveEvents(TaskbarMenu_OnEvent);
 	DKClose("DKGui/TaskbarMenu.html");
 }
@@ -37,8 +39,7 @@ function TaskbarMenu_End()
 ///////////////////////////////////
 function TaskbarMenu_OnEvent(event)
 {
-	//DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Id(event, "FileExplorer")){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
@@ -157,6 +158,7 @@ function TaskbarMenu_OnEvent(event)
 /////////////////////////////////////
 function TaskbarMenu_Add(title, code)
 {
+	DKLog("TaskbarMenu_Add("+title+", "+code+")\n", DKDEBUG);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKGui/TaskbarMenu.html", "div", "TaskbarMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
@@ -165,7 +167,7 @@ function TaskbarMenu_Add(title, code)
 /////////////////////////////////
 function TaskbarMenu_Run(command)
 {
-	DKLog("TaskbarMenu_Run("+command+")\n", DKINFO);
+	DKLog("TaskbarMenu_Run("+command+")\n", DKDEBUG);
 	if(command.indexOf("http://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;

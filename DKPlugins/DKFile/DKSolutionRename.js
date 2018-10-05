@@ -4,8 +4,7 @@ DKSolutionRename_file = "";
 ////////////////////////////////
 function DKSolutionRename_Init()
 {
-	//DKLog("DKSolutionRename_Init()\n");
-	
+	DKLog("DKSolutionRename_Init()\n", DKDEBUG);
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
@@ -16,8 +15,7 @@ function DKSolutionRename_Init()
 ///////////////////////////////
 function DKSolutionRename_End()
 {
-	//DKLog("DKSolutionRename_End()\n");
-	
+	DKLog("DKSolutionRename_End()\n", DKDEBUG);
 	DKRemoveEvents(DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }
@@ -25,8 +23,7 @@ function DKSolutionRename_End()
 ////////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
-	//DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "keydown")){
 		if(DK_GetValue(event) != 13){
 			return;
@@ -44,24 +41,21 @@ function DKSolutionRename_OnEvent(event)
 ///////////////////////////////////
 function DKSolutionRename_SetId(id)
 {
-	//DKLog("DKSolutionRename_SetId("+id+")\n");
-	
+	DKLog("DKSolutionRename_SetId("+id+")\n", DKDEBUG);
 	DKSolutionRename_id = id;
 }
 
 ///////////////////////////////////////
 function DKSolutionRename_SetFile(file)
 {
-	//DKLog("DKSolutionRename_SetFile("+file+")\n");
-	
+	DKLog("DKSolutionRename_SetFile("+file+")\n", DKDEBUG);
 	DKSolutionRename_file = file;
 }
 
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	//DKLog("DKSolutionRename_Rename()\n");
-	
+	DKLog("DKSolutionRename_Rename()\n", DKDEBUG);
 	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
 	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
