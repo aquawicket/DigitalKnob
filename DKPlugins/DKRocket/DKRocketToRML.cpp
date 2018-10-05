@@ -85,6 +85,9 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
+	//Rocket does not recognize favicons, TODO
+	replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
+
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
@@ -118,11 +121,13 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 ///////////////////////////////////////////////////////////////
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
-	// <iframe> tags
+	DKLog("DKRocketToRML::PostProcess()\n", DKDEBUG);
 	if(!element){
 		DKLog("DKRocketToRML::PostProcess(): element invalid", DKWARN);
 		return false;
 	}
+
+	// Create cef contexts for iFrames
 	Rocket::Core::ElementList iframes;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
