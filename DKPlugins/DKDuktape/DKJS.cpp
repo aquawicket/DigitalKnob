@@ -14,7 +14,6 @@
 bool DKJS::Init()
 {
 	DKLog("DKJS::Init()\n", DKDEBUG);
-	
 	DKClass::DKCreate("DKFileJS");
 	DKClass::DKCreate("DKAssetsJS");
 	

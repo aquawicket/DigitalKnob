@@ -7,7 +7,6 @@
 bool DKJavascript::Init()
 {
 	DKLog("DKJavascript::Init()\n", DKDEBUG);
-
 	//data = ("DKJavascript", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");

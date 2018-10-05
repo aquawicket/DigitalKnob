@@ -22,7 +22,6 @@ extern int eventloop_run(duk_context *ctx);
 bool DKDuktape::Init()
 {
 	DKLog("DKDuktape::Init()\n", DKDEBUG);
-	
 	c_evloop = true;
 
 	if(!ctx){
@@ -70,6 +69,7 @@ bool DKDuktape::Init()
 /////////////////////
 bool DKDuktape::End()
 {
+	DKLog("DKDuktape::End()\n", DKDEBUG);
 	duk_destroy_heap(ctx);
 	ctx = NULL;
 	return true;
@@ -79,6 +79,7 @@ bool DKDuktape::End()
 /////////////////////////////////////////////////////////////////////////
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 {
+	DKLog("DKDuktape::AttachFunction("+name+")\n", DKDEBUG);
 	if(!ctx){
 		DKLog("DKDuktape::AttachFunction(): ctx invalid\n", DKWARN);
 		return false; 
@@ -93,8 +94,7 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 /////////////////////////////////////////////
 bool DKDuktape::CallEnd(const DKString& file)
 {
-	DKLog("DKDuktape::CallEnd(" + file + ")\n", DKDEBUG);
-	
+	DKLog("DKDuktape::CallEnd("+file+")\n", DKDEBUG);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -122,8 +122,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 //////////////////////////////////////////////
 bool DKDuktape::CallInit(const DKString& file)
 {
-	DKLog("DKDuktape::CallInit(" + file + ")\n", DKDEBUG);
-	
+	DKLog("DKDuktape::CallInit("+file+")\n", DKDEBUG);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -144,6 +143,7 @@ bool DKDuktape::CallInit(const DKString& file)
 ////////////////////////////////////////////////
 bool DKDuktape::FileLoaded(const DKString& path)
 {
+	DKLog("DKDuktape::FileLoaded("+path+")\n", DKDEBUG);
 	for(unsigned int i = 0; i < filelist.size(); ++i){
 		if(has(path, filelist[i])){
 			DKLog("DKDuktape::FileLoaded(): "+path+" already loaded.\n", DKWARN);
@@ -157,7 +157,6 @@ bool DKDuktape::FileLoaded(const DKString& path)
 bool DKDuktape::LoadFile(const DKString& path)
 {
 	DKLog("DKDuktape::LoadFile("+path+")\n", DKDEBUG);
-	
 	if(path.empty()){ return false; }
 	if(FileLoaded(path)){ return false; } //prevent file from loading twice
 
@@ -184,6 +183,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 ///////////////////////////////////////
 bool DKDuktape::OnEvent(DKEvent* event)
 {
+	DKLog("DKDuktape::OnEvent()\n", DKDEBUG);
 	DKString id = event->GetId();
 	if(id.empty()){ return false; } //we need an id
 	DKString type = event->GetType();
@@ -223,6 +223,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 ////////////////////////
 bool DKDuktape::Reload()
 {
+	DKLog("DKDuktape::Reload()\n", DKDEBUG);
 	DKEvent::events.clear();
 	filelist.clear();
 
