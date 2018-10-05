@@ -38,6 +38,7 @@ public:
 	bool GoForward(const int& browser);
 	bool NewBrowser();
 	bool Paste();
+	bool Popup(const DKString& url);
 	bool Print(const int& browser);
 	bool Reload(const int& browser);
 	static bool RunJavascript(const int& browser, DKString& string);

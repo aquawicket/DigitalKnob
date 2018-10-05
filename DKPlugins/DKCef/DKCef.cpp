@@ -496,6 +496,14 @@ bool DKCef::Paste()
 	return true;
 }
 
+//////////////////////////////////////
+bool DKCef::Popup(const DKString& url)
+{
+	DKLog("DKCef::Popup("+url+")\n", DKDEBUG);
+	//TODO
+	return false;
+}
+
 /////////////////////////////////////
 bool DKCef::Print(const int& browser)
 {
