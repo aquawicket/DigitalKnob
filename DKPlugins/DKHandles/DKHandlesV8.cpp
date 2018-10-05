@@ -346,7 +346,7 @@ bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
 	int timeout = args->GetInt(1);
 	if(!DKHandles::WaitForWindow(window, timeout)){
 		retval->SetBool(0, false);
-		return false;
+		return true;
 	}
 	retval->SetBool(0, true);
 	return true;
