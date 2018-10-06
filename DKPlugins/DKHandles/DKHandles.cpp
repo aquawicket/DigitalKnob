@@ -249,7 +249,8 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 {
 	DKLog("DKHandles::GetWindows()\n", DKDEBUG);
 	_windows.clear();
-	bool rval = (EnumWindows(GetWindows, NULL) != 0);
+	bool rval = (EnumChildWindows(NULL, GetWindows, NULL) != 0);
+	//bool rval = (EnumWindows(GetWindows, NULL) != 0);
 	windows = _windows;
 	return rval;
 }
