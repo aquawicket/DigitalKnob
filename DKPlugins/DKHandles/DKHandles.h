@@ -73,6 +73,7 @@ public:
 	static HWND hwndFoundWindow;
 	static std::map<HWND,HWND> handles;
 	static std::vector<HWND> winhandles;
+
 };
 
 REGISTER_OBJECT(DKHandles, true);
