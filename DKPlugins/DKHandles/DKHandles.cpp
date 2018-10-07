@@ -702,7 +702,7 @@ bool DKHandles::WindowExists(const DKString& title)
 	DKLog("DKHandles::WindowExists("+title+")\n", DKDEBUG);
 	HWNDname temp;
 	temp.caption = title.c_str();
-	if(EnumChildWindows(::GetDesktopWindow(), FindWindow, (LPARAM)&temp)){
+	if(EnumChildWindows(::GetDesktopWindow(), FindWindowPartial, (LPARAM)&temp)){
 		//TODO: GetLastError
 		return false;
 	}
@@ -767,7 +767,7 @@ BOOL CALLBACK DKHandles::FindWindowPartial(HWND hwnd, LPARAM lparam)
 	HWNDname *temp = (HWNDname*)lparam;
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
-	if(_tcsstr(buffer, temp->caption)) { 
+	if(_tcsstr(buffer, temp->caption)){ 
 		currentHandle = hwnd;
 		return FALSE;     
 	}      
