@@ -75,6 +75,7 @@ function DKHandles_OnEvent(event)
 	}
 	if(DK_Type(event, "DKHandles_WindowChanged")){
 		//DKLog("DKHandles_WindowChanged\n", DKINFO);
+		DKWidget_SetAttribute("search", "src", "DKHandles/win1.bmp");
 		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
 	}
