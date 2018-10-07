@@ -250,7 +250,6 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 	DKLog("DKHandles::GetWindows()\n", DKDEBUG);
 	_windows.clear();
 	bool rval = (EnumChildWindows(::GetDesktopWindow(), GetWindows, NULL) != 0);
-	//bool rval = (EnumWindows(GetWindows, NULL) != 0);
 	windows = _windows;
 	return rval;
 }
@@ -526,7 +525,6 @@ bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeou
 	HWNDname temp;
 	temp.caption = title.c_str();
 	unsigned int t = 0;
-	//while(EnumWindows(FindWindow, (LPARAM)&temp) && t < timeout, 0){
 	while(EnumChildWindows(::GetDesktopWindow(), FindWindow, (LPARAM)&temp) && t < timeout, 0){
 		Sleep(1000); //FIXME
 		++t;
@@ -686,7 +684,7 @@ bool DKHandles::WindowExists(const DKString& title)
 	DKLog("DKHandles::WindowExists("+title+")\n", DKDEBUG);
 	HWNDname temp;
 	temp.caption = title.c_str();
-	if(EnumWindows(FindWindow, (LPARAM)&temp)){
+	if(EnumChildWindows(::GetDesktopWindow(), FindWindow, (LPARAM)&temp)){
 		//TODO: GetLastError
 		return false;
 	}
@@ -711,6 +709,7 @@ BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam)
 	return TRUE;
 }
 
+/*
 //////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
@@ -719,18 +718,17 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 	GetClassName(hwnd,class_name, sizeof(class_name));
 	GetWindowText(hwnd,title,sizeof(title));
 
-	/*
-	if(!same("",title)){
-	DKLog("Window: ", DKINFO);
-	DKLog(title, DKINFO);
-	DKLog(" Class: ", DKINFO);
-	DKLog(class_name, DKINFO);
-	DKLog("\n", DKINFO);
+	//if(!same("",title)){
+	//DKLog("Window: ", DKINFO);
+	//DKLog(title, DKINFO);
+	//DKLog(" Class: ", DKINFO);
+	//DKLog(class_name, DKINFO);
+	//DKLog("\n", DKINFO);
 	}
-	*/
 
 	return TRUE;
 }
+*/
 
 /////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam) 
