@@ -123,4 +123,9 @@ function DKHandles_UpdateProperties(handle)
 	DKWidget_SetValue("index", index);
 	var windowindex = DKHandles_GetWindowIndex(handle);
 	DKWidget_SetValue("windowindex", windowindex);
+	
+	var top = DKHandles_GetTop(handle);
+	DKWidget_SetInnerHtml("Handle_top", "Top: "+top);
+	var left = DKHandles_GetLeft(handle);
+	DKWidget_SetInnerHtml("Handle_left", "Left: "+left);
 }
