@@ -72,7 +72,7 @@ bool DKHandlesV8::GetBottom(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	int bottom;
-	if(!DKHandles::GetLeft(toHWND(handle), bottom)){
+	if(!DKHandles::GetBottom(toHWND(handle), bottom)){
 		retval->SetBool(0, false);
 		return false;
 	}
@@ -137,7 +137,7 @@ bool DKHandlesV8::GetRight(CefArgs args, CefReturn retval)
 {
 	DKString handle = args->GetString(0);
 	int right;
-	if(!DKHandles::GetLeft(toHWND(handle), right)){
+	if(!DKHandles::GetRight(toHWND(handle), right)){
 		retval->SetBool(0, false);
 		return false;
 	}

@@ -145,6 +145,7 @@ bool DKHandles::GetBottom(HWND handle, int& bottom)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	bottom = rect.bottom;
+	DKLog("DKHandles::GetBottom(): bottom = "+toString(bottom)+"\n", DKINFO);
 	return true;
 }
 
@@ -184,6 +185,7 @@ bool DKHandles::GetLeft(HWND handle, int& left)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	left = rect.left;
+	DKLog("DKHandles::GetLeft(): left = "+toString(left)+"\n", DKINFO);
 	return true;
 }
 
@@ -209,6 +211,7 @@ bool DKHandles::GetRight(HWND handle, int& right)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	right = rect.right;
+	DKLog("DKHandles::GetRight(): right = "+toString(right)+"\n", DKINFO);
 	return true;
 }
 
@@ -230,6 +233,7 @@ bool DKHandles::GetTop(HWND handle, int& top)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	top = rect.top;
+	DKLog("DKHandles::GetTop(): top = "+toString(top)+"\n", DKINFO);
 	return true;
 }
 
