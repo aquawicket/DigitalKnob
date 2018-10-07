@@ -224,34 +224,30 @@ int DKHandlesJS::SendHook(duk_context* ctx)
 ////////////////////////////////////////////
 int DKHandlesJS::SetHandle(duk_context* ctx)
 {
-	//TODO- this is v8 code, needs to be rewritten for duktape
-	/*
 	int timeout = 1;
-	if(args->GetType(0) == VTYPE_INT){ //By handle number
-		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
-		if(!DKHandles::SetHandle(args->GetInt(0), timeout)){
+	if(duk_is_number(ctx, 0)){ //By handle number
+		if(duk_is_number(ctx, 1)){ timeout = duk_require_int(ctx, 1); }
+		if(!DKHandles::SetHandle(duk_require_int(ctx, 0), timeout)){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
-		if(args->GetType(2) == VTYPE_INT){ timeout = args->GetInt(2); }
-		if(!DKHandles::SetHandle(args->GetString(0), args->GetString(1), timeout)){
+	else if(duk_is_string(ctx, 0) && duk_is_string(ctx, 1)){ //By handle class, value
+		if(duk_is_number(ctx, 2)){ timeout = duk_require_int(ctx, 2); }
+		if(!DKHandles::SetHandle(duk_require_string(ctx, 0), duk_require_string(ctx, 1), timeout)){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
-		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
-		if(!DKHandles::SetHandle(args->GetString(0), timeout)){
+	else if(duk_is_string(ctx, 0)){ //By handle value
+		if(duk_is_number(ctx, 1)){ timeout = duk_require_int(ctx, 1); }
+		if(!DKHandles::SetHandle(duk_require_string(ctx, 0), timeout)){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
 	duk_push_boolean(ctx, true);
-	return true;
-	*/
-	return 0;
+	return 1;
 }
 
 ///////////////////////////////////////////
@@ -309,30 +305,26 @@ int DKHandlesJS::ToggleHighlight(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKHandlesJS::WaitForHandle(duk_context* ctx)
 {
-	//TODO - rewrite code to work with duktape
-	/*
-	if(args->GetType(0) == VTYPE_INT){ //By handle number
-		if(!DKHandles::WaitForHandle(args->GetInt(0), args->GetInt(1))){
+	if(duk_is_number(ctx, 0)){ //By handle number
+		if(!DKHandles::WaitForHandle(duk_require_int(ctx, 0), duk_require_int(ctx, 1))){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
-		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetString(1), args->GetInt(2))){
+	else if(duk_is_string(ctx, 0) && duk_is_string(ctx, 1)){ //By handle class, value
+		if(!DKHandles::WaitForHandle(duk_require_string(ctx, 0), duk_require_string(ctx, 1), duk_require_int(ctx, 2))){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
-		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetInt(1))){
+	else if(duk_require_string(ctx, 0)){ //By handle value
+		if(!DKHandles::WaitForHandle(duk_require_string(ctx, 0), duk_require_int(ctx, 1))){
 			duk_push_boolean(ctx, false);
 			return false;
 		}
 	}
 	duk_push_boolean(ctx, true);
-	return true;
-	*/
-	return false;
+	return 1;
 }
 
 ////////////////////////////////////////////////
