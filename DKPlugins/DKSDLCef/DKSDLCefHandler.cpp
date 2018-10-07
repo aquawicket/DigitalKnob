@@ -236,7 +236,9 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("TestMessage");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+#ifndef DEBUG
 	browser->SendProcessMessage(PID_BROWSER, msg);
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
