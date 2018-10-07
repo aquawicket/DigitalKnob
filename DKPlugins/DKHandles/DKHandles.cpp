@@ -249,7 +249,7 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 {
 	DKLog("DKHandles::GetWindows()\n", DKDEBUG);
 	_windows.clear();
-	bool rval = (EnumChildWindows(NULL, GetWindows, NULL) != 0);
+	bool rval = (EnumChildWindows(::GetDesktopWindow(), GetWindows, NULL) != 0);
 	//bool rval = (EnumWindows(GetWindows, NULL) != 0);
 	windows = _windows;
 	return rval;
@@ -526,7 +526,8 @@ bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeou
 	HWNDname temp;
 	temp.caption = title.c_str();
 	unsigned int t = 0;
-	while(EnumWindows(FindWindow, (LPARAM)&temp) && t < timeout){
+	//while(EnumWindows(FindWindow, (LPARAM)&temp) && t < timeout, 0){
+	while(EnumChildWindows(::GetDesktopWindow(), FindWindow, (LPARAM)&temp) && t < timeout, 0){
 		Sleep(1000); //FIXME
 		++t;
 	}
