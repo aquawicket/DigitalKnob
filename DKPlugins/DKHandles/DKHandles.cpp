@@ -138,6 +138,16 @@ bool DKHandles::DoMouseUp()
 	return true;
 }
 
+///////////////////////////////////////////////////
+bool DKHandles::GetBottom(HWND handle, int& bottom)
+{
+	DKLog("DKHandles::GetBottom()\n", DKDEBUG);
+	RECT rect;
+	GetWindowRect(handle, &rect);
+	bottom = rect.bottom;
+	return true;
+}
+
 /////////////////////////////////////////////////////
 bool DKHandles::GetClass(HWND handle, DKString& clas)
 {
@@ -189,6 +199,16 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 		return false; 
 	}
 	parent = toString(par);
+	return true;
+}
+
+/////////////////////////////////////////////////
+bool DKHandles::GetRight(HWND handle, int& right)
+{
+	DKLog("DKHandles::GetRight()\n", DKDEBUG);
+	RECT rect;
+	GetWindowRect(handle, &rect);
+	right = rect.right;
 	return true;
 }
 

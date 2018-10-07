@@ -9,10 +9,12 @@ bool DKHandlesV8::Init()
 	
 	DKV8::AttachFunction("DKHandles_Click", DKHandlesV8::Click);
 	DKV8::AttachFunction("DKHandles_CurrentHandle", DKHandlesV8::CurrentHandle);
+	DKV8::AttachFunction("DKHandles_GetBottom", DKHandlesV8::GetBottom);
 	DKV8::AttachFunction("DKHandles_GetClass", DKHandlesV8::GetClass);
 	DKV8::AttachFunction("DKHandles_GetIndex", DKHandlesV8::GetIndex);
 	DKV8::AttachFunction("DKHandles_GetLeft", DKHandlesV8::GetLeft);
 	DKV8::AttachFunction("DKHandles_GetParent", DKHandlesV8::GetParent);
+	DKV8::AttachFunction("DKHandles_GetRight", DKHandlesV8::GetRight);
 	DKV8::AttachFunction("DKHandles_GetTop", DKHandlesV8::GetTop);
 	DKV8::AttachFunction("DKHandles_GetValue", DKHandlesV8::GetValue);
 	DKV8::AttachFunction("DKHandles_GetWindow", DKHandlesV8::GetWindow);
@@ -65,6 +67,19 @@ bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 	return true;
 }
 
+///////////////////////////////////////////////////////////
+bool DKHandlesV8::GetBottom(CefArgs args, CefReturn retval)
+{
+	DKString handle = args->GetString(0);
+	int bottom;
+	if(!DKHandles::GetLeft(toHWND(handle), bottom)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetInt(0, bottom);
+	return true;
+}
+
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 {
@@ -114,6 +129,19 @@ bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 		return false;
 	}
 	retval->SetString(0, parent);
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKHandlesV8::GetRight(CefArgs args, CefReturn retval)
+{
+	DKString handle = args->GetString(0);
+	int right;
+	if(!DKHandles::GetLeft(toHWND(handle), right)){
+		retval->SetBool(0, false);
+		return false;
+	}
+	retval->SetInt(0, right);
 	return true;
 }
 

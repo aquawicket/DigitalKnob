@@ -14,10 +14,12 @@ public:
 
 	static int Click(duk_context* ctx);
 	static int CurrentHandle(duk_context* ctx);
+	static int GetBottom(duk_context* ctx);
 	static int GetClass(duk_context* ctx);
 	static int GetIndex(duk_context* ctx);
 	static int GetLeft(duk_context* ctx);
 	static int GetParent(duk_context* ctx);
+	static int GetRight(duk_context* ctx);
 	static int GetTop(duk_context* ctx);
 	static int GetValue(duk_context* ctx);
 	static int GetWindows(duk_context* ctx);

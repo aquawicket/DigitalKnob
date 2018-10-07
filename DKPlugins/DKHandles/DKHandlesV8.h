@@ -14,10 +14,12 @@ public:
 	
 	static bool Click(CefArgs args, CefReturn retval);
 	static bool CurrentHandle(CefArgs args, CefReturn retval);
+	static bool GetBottom(CefArgs args, CefReturn retval);
 	static bool GetClass(CefArgs args, CefReturn retval);
 	static bool GetIndex(CefArgs args, CefReturn retval);
 	static bool GetLeft(CefArgs args, CefReturn retval);
 	static bool GetParent(CefArgs args, CefReturn retval);
+	static bool GetRight(CefArgs args, CefReturn retval);
 	static bool GetTop(CefArgs args, CefReturn retval);
 	static bool GetValue(CefArgs args, CefReturn retval);
 	static bool GetWindow(CefArgs args, CefReturn retval);

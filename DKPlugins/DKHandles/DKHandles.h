@@ -25,10 +25,12 @@ public:
 	static bool Click(HWND handle);
 	static bool DoMouseMove();
 	static bool DoMouseUp();
+	static bool GetBottom(HWND handle, int& bottom);
 	static bool GetClass(HWND handle, DKString& clas);
 	static bool GetIndex(HWND handle, int& index);
 	static bool GetLeft(HWND handle, int& left);
 	static bool GetParent(HWND handle, DKString& parent);
+	static bool GetRight(HWND handle, int& right);
 	static bool GetString(HWND handle, DKString& text);
 	static bool GetTop(HWND handle, int& top);
 	static bool GetWindow(HWND handle, HWND& window);

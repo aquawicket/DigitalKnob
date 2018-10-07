@@ -9,6 +9,7 @@ bool DKHandlesJS::Init()
 {
 	DKDuktape::AttachFunction("DKHandles_Click", DKHandlesJS::Click);
 	DKDuktape::AttachFunction("DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
+	DKDuktape::AttachFunction("DKHandles_GetBottom", DKHandlesJS::GetBottom);
 	DKDuktape::AttachFunction("DKHandles_GetClass", DKHandlesJS::GetClass);
 	DKDuktape::AttachFunction("DKHandles_GetIndex", DKHandlesJS::GetIndex);
 	DKDuktape::AttachFunction("DKHandles_GetLeft", DKHandlesJS::GetLeft);
@@ -46,6 +47,19 @@ int DKHandlesJS::CurrentHandle(duk_context* ctx)
 	DKString handle = toString(DKHandles::currentHandle);
 	duk_push_string(ctx, handle.c_str());
 	return 1;
+}
+
+////////////////////////////////////////////
+int DKHandlesJS::GetBottom(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int bottom;
+	if(!DKHandles::GetBottom(toHWND(handle), bottom)){
+		duk_push_boolean(ctx, false);
+		return false;
+	}
+	duk_push_int(0, bottom);
+	return true;
 }
 
 ///////////////////////////////////////////
@@ -91,6 +105,19 @@ int DKHandlesJS::GetParent(duk_context* ctx)
 		return false;
 	}
 	duk_push_string(ctx, parent.c_str());
+	return true;
+}
+
+///////////////////////////////////////////
+int DKHandlesJS::GetRight(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int right;
+	if(!DKHandles::GetRight(toHWND(handle), right)){
+		duk_push_boolean(ctx, false);
+		return false;
+	}
+	duk_push_int(0, right);
 	return true;
 }
 
