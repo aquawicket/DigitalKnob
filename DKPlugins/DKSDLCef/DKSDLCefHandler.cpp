@@ -6,9 +6,13 @@
 #include "include/wrapper/cef_helpers.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
 
+/*
 namespace{
 	DKSDLCefHandler* g_instance = NULL;
 }
+*/
+
+DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
 
 //////////////////////////////////////////////////////
 DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false) 

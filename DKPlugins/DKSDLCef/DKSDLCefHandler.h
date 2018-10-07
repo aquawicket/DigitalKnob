@@ -25,6 +25,7 @@ public:
 
 	DKSDLCefHandler();
 	~DKSDLCefHandler();
+	static DKSDLCefHandler* g_instance;
 	static DKSDLCefHandler* GetInstance(); //Provide access to the single global instance of this object.
 	
 	//List of existing browser windows. Only accessed on the CEF UI thread.
