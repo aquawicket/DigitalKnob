@@ -259,6 +259,10 @@ bool DKDuktape::RunDuktape(const DKString& code)
 {
 	DKLog("DKDuktape::RunDuktape("+code+")\n", DKINFO);
 	if(!DKUtil::InMainThread()){ return false; }
+	if(!DKDuktape::ctx){
+		DKLog("DKDuktape::RunDuktape("+code+"): context is invalid\n", DKERROR);
+		return false;
+	}
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 	return true;
 }
@@ -268,6 +272,10 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
 	DKLog("DKDuktape::RunDuktape("+code+", rval)\n", DKINFO);
 	if(!DKUtil::InMainThread()){ return false; }
+	if(!DKDuktape::ctx){
+		DKLog("DKDuktape::RunDuktape("+code+", rval): context is invalid\n", DKERROR);
+		return false;
+	}
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 
 	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
