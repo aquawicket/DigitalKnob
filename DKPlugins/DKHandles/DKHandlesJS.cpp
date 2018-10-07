@@ -17,14 +17,19 @@ bool DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_GetRight", DKHandlesJS::GetRight);
 	DKDuktape::AttachFunction("DKHandles_GetTop", DKHandlesJS::GetTop);
 	DKDuktape::AttachFunction("DKHandles_GetValue", DKHandlesJS::GetValue);
+	DKDuktape::AttachFunction("DKHandles_GetWindow", DKHandlesJS::GetWindow);
+	DKDuktape::AttachFunction("DKHandles_GetWindowIndex", DKHandlesJS::GetWindowIndex);
 	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
 	DKDuktape::AttachFunction("DKHandles_NextHandle", DKHandlesJS::NextHandle);
 	DKDuktape::AttachFunction("DKHandles_PrevHandle", DKHandlesJS::PrevHandle);
 	//DKDuktape::AttachFunction("DKHandles_SendHook", DKHandlesJS::SendHook);
+	DKDuktape::AttachFunction("DKHandles_SetHandle", DKHandlesJS::SetHandle);
 	DKDuktape::AttachFunction("DKHandles_SetValue", DKHandlesJS::SetValue);
 	DKDuktape::AttachFunction("DKHandles_SetWindowHandle", DKHandlesJS::SetWindowHandle);
+	DKDuktape::AttachFunction("DKHandles_ShowWindow", DKHandlesJS::ShowWindow);
 	DKDuktape::AttachFunction("DKHandles_StartSearch", DKHandlesJS::StartSearch);
 	DKDuktape::AttachFunction("DKHandles_ToggleHighlight", DKHandlesJS::ToggleHighlight);
+	DKDuktape::AttachFunction("DKHandles_WaitForHandle", DKHandlesJS::WaitForHandle);
 	DKDuktape::AttachFunction("DKHandles_WaitForWindow", DKHandlesJS::WaitForWindow);
 	DKDuktape::AttachFunction("DKHandles_WindowExists", DKHandlesJS::WindowExists);
 	return true;
@@ -145,6 +150,32 @@ int DKHandlesJS::GetValue(duk_context* ctx)
 	return 1;
 }
 
+////////////////////////////////////////////
+int DKHandlesJS::GetWindow(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	HWND window;
+	if(!DKHandles::GetWindow(toHWND(handle), window)){
+		duk_push_boolean(ctx, false);
+		return 0;
+	}
+	duk_push_string(ctx, toString(window).c_str());
+	return 1;
+}
+
+/////////////////////////////////////////////////
+int DKHandlesJS::GetWindowIndex(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	int index;
+	if(!DKHandles::GetWindowIndex(toHWND(handle), index)){
+		duk_push_boolean(ctx, false);
+		return 0;
+	}
+	duk_push_int(ctx, index);
+	return 1;
+}
+
 /////////////////////////////////////////////
 int DKHandlesJS::GetWindows(duk_context* ctx)
 {
@@ -190,6 +221,39 @@ int DKHandlesJS::SendHook(duk_context* ctx)
 }
 */
 
+////////////////////////////////////////////
+int DKHandlesJS::SetHandle(duk_context* ctx)
+{
+	//TODO- this is v8 code, needs to be rewritten for duktape
+	/*
+	int timeout = 1;
+	if(args->GetType(0) == VTYPE_INT){ //By handle number
+		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
+		if(!DKHandles::SetHandle(args->GetInt(0), timeout)){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
+		if(args->GetType(2) == VTYPE_INT){ timeout = args->GetInt(2); }
+		if(!DKHandles::SetHandle(args->GetString(0), args->GetString(1), timeout)){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
+		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
+		if(!DKHandles::SetHandle(args->GetString(0), timeout)){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	duk_push_boolean(ctx, true);
+	return true;
+	*/
+	return 0;
+}
+
 ///////////////////////////////////////////
 int DKHandlesJS::SetValue(duk_context* ctx)
 {
@@ -213,6 +277,19 @@ int DKHandlesJS::SetWindowHandle(duk_context* ctx)
 	return 1;
 }
 
+/////////////////////////////////////////////
+int DKHandlesJS::ShowWindow(duk_context* ctx)
+{
+	DKString handle = duk_require_string(ctx, 0);
+	bool flag = duk_require_boolean(ctx, 1);
+	if(!DKHandles::ShowWindow(toHWND(handle), flag)){
+		duk_push_boolean(ctx, false);
+		return 0;
+	}
+	duk_push_boolean(ctx, true);
+	return 1;
+}
+
 //////////////////////////////////////////////
 int DKHandlesJS::StartSearch(duk_context* ctx)
 {
@@ -227,6 +304,35 @@ int DKHandlesJS::ToggleHighlight(duk_context* ctx)
 {
 	DKHandles::Instance("DKHandles")->ToggleHighlight();
 	return 1;
+}
+
+////////////////////////////////////////////////
+int DKHandlesJS::WaitForHandle(duk_context* ctx)
+{
+	//TODO - rewrite code to work with duktape
+	/*
+	if(args->GetType(0) == VTYPE_INT){ //By handle number
+		if(!DKHandles::WaitForHandle(args->GetInt(0), args->GetInt(1))){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
+		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetString(1), args->GetInt(2))){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
+		if(!DKHandles::WaitForHandle(args->GetString(0), args->GetInt(1))){
+			duk_push_boolean(ctx, false);
+			return false;
+		}
+	}
+	duk_push_boolean(ctx, true);
+	return true;
+	*/
+	return false;
 }
 
 ////////////////////////////////////////////////
