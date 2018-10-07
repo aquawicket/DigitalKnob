@@ -128,4 +128,8 @@ function DKHandles_UpdateProperties(handle)
 	DKWidget_SetInnerHtml("Handle_top", "Top: "+top);
 	var left = DKHandles_GetLeft(handle);
 	DKWidget_SetInnerHtml("Handle_left", "Left: "+left);
+	var right = DKHandles_GetRight(handle);
+	DKWidget_SetInnerHtml("Handle_right", "Right: "+right);
+	var bottom = DKHandles_GetBottom(handle);
+	DKWidget_SetInnerHtml("Handle_bottom", "Bottom: "+bottom);
 }

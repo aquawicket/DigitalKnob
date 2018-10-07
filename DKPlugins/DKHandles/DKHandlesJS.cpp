@@ -14,6 +14,7 @@ bool DKHandlesJS::Init()
 	DKDuktape::AttachFunction("DKHandles_GetIndex", DKHandlesJS::GetIndex);
 	DKDuktape::AttachFunction("DKHandles_GetLeft", DKHandlesJS::GetLeft);
 	DKDuktape::AttachFunction("DKHandles_GetParent", DKHandlesJS::GetParent);
+	DKDuktape::AttachFunction("DKHandles_GetRight", DKHandlesJS::GetRight);
 	DKDuktape::AttachFunction("DKHandles_GetTop", DKHandlesJS::GetTop);
 	DKDuktape::AttachFunction("DKHandles_GetValue", DKHandlesJS::GetValue);
 	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
