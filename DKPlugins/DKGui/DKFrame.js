@@ -24,16 +24,20 @@ function DKFrame_OnEvent(event)
 		var titlebar = DKWidget_GetParent(id);
 		DKFrame_MaximizeButton(titlebar);
 	}
+	if(DK_IdLike(event, "reload")){
+		DKFrame_Reload(DK_GetId(event));
+	}
 	if(DK_IdLike(event, "minimize")){
 		DKFrame_MinimizeButton(DK_GetId(event));
 	}
 	if(DK_IdLike(event, "maximize")){
-		DKFrame_MaximizeButton(DK_GetId(event));
+		// DKFrame_MaximizeButton(DK_GetId(event));
 	}
 	if(DK_IdLike(event, "close")){
 		DKFrame_CloseButton(DK_GetId(event));
 	}
-	/*   FIXME - does not fire
+	
+	// FIXME - does not fire
 	if(DK_Type(event, "resize")){
 		DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		var frame = document.getElementById(DK_GetId(event));
@@ -42,7 +46,6 @@ function DKFrame_OnEvent(event)
 		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
 	}
-	*/
 }
 
 ///////////////////////////
@@ -177,6 +180,14 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_AddDragHandle(titlebartext, frame);
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
+	var reload = DKWidget_CreateElement(frame, "img", "reload");
+	DKWidget_SetAttribute(reload, "src", "DKGui/reload.png");
+	DKWidget_SetProperty(reload, "position", "absolute");
+	DKWidget_SetProperty(reload, "top", "1rem");
+	DKWidget_SetProperty(reload, "right", "65rem");
+	DKWidget_SetProperty(reload, "height", "18rem");
+	DKAddEvent(reload, "click", DKFrame_OnEvent);
+	
 	var minimize = DKWidget_CreateElement(frame, "img", "minimize");
 	DKWidget_SetAttribute(minimize, "src", "DKGui/minimize.png");
 	DKWidget_SetProperty(minimize, "position", "absolute");
@@ -246,11 +257,19 @@ function DKFrame_BringToFront()
 	}
 }
 
+/////////////////////////////////
+function DKFrame_ReloadButton(id)
+{
+	DKLog("DKFrame_ReloadButton("+id+")\n", DKDEBUG);
+	//TODO
+}
+
 ///////////////////////////////////
 function DKFrame_MinimizeButton(id)
 {
 	DKLog("DKFrame_MinimizeButton("+id+")\n", DKDEBUG);
-	var frame = DKWidget_GetParent(id);
+	//TODO
+	//var frame = DKWidget_GetParent(id);
 }
 
 ///////////////////////////////////
@@ -319,7 +338,7 @@ function DKFrame_Close(id)
 		return;
 	}
 	
-	//remove frame events
+	//remove frame events 
 	var num = frame.replace("frame","");
 	DKRemoveEvent("frame"+num, "mousedown", DKFrame_OnEvent);
 	DKRemoveEvent("close"+num, "click", DKFrame_OnEvent);
@@ -380,4 +399,36 @@ function DKFrame_CloseAll()
 			DKWidget_RemoveElement(arry[i]);
 		}
 	}
+}
+
+///////////////////////////
+function DKFrame_Reload(id)
+{
+	DKLog("TODO: refresh the frame data. html, javascript and css all reloaded.");
+	
+	DKLog("id = "+id+"\n");
+	var saved_id = id; 
+	DKLog("saved_id = "+saved_id+"\n");
+	var jsfile;
+	var htmlfile;
+	
+	var frame = DKWidget_GetParent(id);
+	var children = DKWidget_GetElements(frame);
+	var arry = children.split(",");
+	for(var i=arry.length-1; i>0; i--){
+		if(arry[i].indexOf(".html") > -1){
+			var file = DKWidget_GetFile(arry[i]);
+			if(!file){ file = arry[i];}
+			jsfile = file.replace(".html", ".js");
+			htmlfile = file.replace(".js", ".html");
+		}
+	}
+	
+	DKLog("jsfile = "+jsfile+"\n");
+	DKLog("htmlfile = "+htmlfile+"\n");
+	
+	DKFrame_Close(id);
+	DKCreate(jsfile, function(){
+		DKFrame_Widget(htmlfile);
+	});
 }
