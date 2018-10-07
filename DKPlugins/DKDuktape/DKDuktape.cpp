@@ -257,12 +257,9 @@ bool DKDuktape::Reload()
 ////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code)
 {
-	DKLog("DKDuktape::RunDuktape("+code+")\n", DKINFO);
+	//DKLog("DKDuktape::RunDuktape("+code+")\n", DKDEBUG);
 	if(!DKUtil::InMainThread()){ return false; }
-	if(!DKDuktape::ctx){
-		DKLog("DKDuktape::RunDuktape("+code+"): context is invalid\n", DKERROR);
-		return false;
-	}
+	if(!DKDuktape::ctx){ DKLog("DKDuktape::RunDuktape("+code+"): context is invalid\n", DKERROR); return false; }
 	duk_eval_string(DKDuktape::ctx, code.c_str());
 	return true;
 }
@@ -270,7 +267,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 ////////////////////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
-	DKLog("DKDuktape::RunDuktape("+code+", rval)\n", DKINFO);
+	//DKLog("DKDuktape::RunDuktape("+code+", rval)\n", DKDEBUG);
 	if(!DKUtil::InMainThread()){ return false; }
 	if(!DKDuktape::ctx){
 		DKLog("DKDuktape::RunDuktape("+code+", rval): context is invalid\n", DKERROR);
@@ -281,7 +278,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
 		rval = duk_get_string(ctx, -1);
 		if(!rval.empty()){
-			DKLog("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n", DKINFO);
+			//DKLog("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n", DKDEBUG);
 		}
 	}
 
