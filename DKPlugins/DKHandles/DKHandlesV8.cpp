@@ -255,21 +255,21 @@ bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
 bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 {
 	int timeout = 1;
-	if(args->GetType(0) == VTYPE_INT){ //By handle number
+	if(args->GetType(0) == VTYPE_INT){ //By number
 		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
 		if(!DKHandles::SetHandle(args->GetInt(0), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By handle class, value
+	else if(args->GetType(0) == VTYPE_STRING && args->GetType(1) == VTYPE_STRING){ //By class, value
 		if(args->GetType(2) == VTYPE_INT){ timeout = args->GetInt(2); }
 		if(!DKHandles::SetHandle(args->GetString(0), args->GetString(1), timeout)){
 			retval->SetBool(0, false);
 			return false;
 		}
 	}
-	else if(args->GetType(0) == VTYPE_STRING){ //By handle value
+	else if(args->GetType(0) == VTYPE_STRING){ //By value
 		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
 		if(!DKHandles::SetHandle(args->GetString(0), timeout)){
 			retval->SetBool(0, false);
