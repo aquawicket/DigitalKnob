@@ -2,10 +2,7 @@
 #ifdef WIN32
 #include <tchar.h>
 #include <Commctrl.h>
-#include "DK/DKFile.h"
-#include "DKAssets/DKAssets.h"
 #include "DKHandles/DKHandles.h"
-#include "DKWindow/DKWindow.h"
 
 
 DKStringArray DKHandles::_windows;
@@ -52,6 +49,8 @@ bool DKHandles::Click(HWND handle)
 	SendMessage(handle, BM_CLICK, 0, 0);
 	return true;
 }
+
+
 
 /////////////////////////////
 bool DKHandles::DoMouseMove()
@@ -118,7 +117,15 @@ bool DKHandles::DoMouseUp()
 
 	//Bring back the main window
 	HWND hwnd = NULL;
-	DKWindow::GetHandle((void*&)hwnd);
+	
+	//DKWindow::GetHandle((void*&)hwnd);
+	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
+		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::GetHandle")){
+		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
+	}
+
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
 		return false;
@@ -571,7 +578,14 @@ bool DKHandles::StartSearch()
 	DKLog("DKHandles::StartSearch()\n", DKDEBUG);
 
 	HWND hwnd = NULL;
-	DKWindow::GetHandle((void*&)hwnd);
+	//DKWindow::GetHandle((void*&)hwnd);
+	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
+		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	}
+	if(DKClass::HasFunc("DKSDLWindow::GetHandle")){
+		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
+	}
+
 	if(!hwnd){
 		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
 		return false;

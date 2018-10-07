@@ -625,10 +625,10 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 //////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
+	if(same(id,"DKLog")){ return false; }
 	DKLog("DKCef::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
-	if(same(id,"DKLog")){ return false; }
 	if(same(type,"second")){ return false; }
 	if(same(type,"mousemove")){ return false; }
 	if(same(type,"mousedown")){ return false; }
@@ -644,8 +644,6 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"minimize")){ return false; }
 	if(same(type,"maximize")){ return false; }
 	if(same(type,"restore")){ return false; }
-	
-	DKLog("DKCef::SendEvent("+id+", "+type+", "+value+")\n", DKINFO);
 	
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){
