@@ -248,6 +248,7 @@ bool DKHandles::GetWindowIndex(HWND handle, int& index)
 bool DKHandles::GetWindows(DKStringArray& windows)
 {
 	DKLog("DKHandles::GetWindows()\n", DKDEBUG);
+	PopulateHandles();
 	_windows.clear();
 	bool rval = (EnumChildWindows(::GetDesktopWindow(), GetWindows, NULL) != 0);
 	windows = _windows;
@@ -342,13 +343,6 @@ bool DKHandles::PopulateHandles()
 
 	EnumChildWindows(::GetDesktopWindow(), EnumChildProc, 0);
 	
-	/*
-	std::map<HWND,HWND>::iterator it;
-	for(it=handles.begin(); it!=handles.end(); it++){
-		EnumChildWindows(it->first, EnumChildProc, 0);
-	}
-	*/
-
 	DKLog("hande size: "+toString(handles.size())+"\n", DKINFO);
 
 	/*
