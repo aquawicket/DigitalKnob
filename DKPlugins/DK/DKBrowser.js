@@ -301,9 +301,10 @@ function LoadHtml(url, parent)
 		return false;
 	}
 	if(nodes.length > 1){
-		DKLog("LoadHtml("+url+", "+parent+"): too many nodes in file \n", DKWARN);
 		DKLog("###############################################\n");
-		DKLog(temp.innerHTML+"\n");
+		DKLog("LoadHtml("+url+", "+parent+"): Too many nodes in file. \n", DKWARN);
+		//DKLog(temp.innerHTML+"\n");
+		DKLog("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n", DKWARN);
 		DKLog("###############################################\n");
 		//return false;
 	}
