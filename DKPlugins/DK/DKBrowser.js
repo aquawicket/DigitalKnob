@@ -301,7 +301,10 @@ function LoadHtml(url, parent)
 		return false;
 	}
 	if(nodes.length > 1){
-		//DKLog("LoadHtml("+url+", "+parent+"): too many nodes in file \n", DKERROR);
+		DKLog("LoadHtml("+url+", "+parent+"): too many nodes in file \n", DKWARN);
+		DKLog("###############################################\n");
+		DKLog(temp.innerHTML+"\n");
+		DKLog("###############################################\n");
 		//return false;
 	}
 
