@@ -39,9 +39,11 @@ function DKFrame_OnEvent(event)
 	
 	// FIXME - does not fire
 	if(DK_Type(event, "resize")){
-		DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 		var frame = document.getElementById(DK_GetId(event));
-		if(!frame){ return; }
+		if(!frame){ 
+			DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"): frame invalid\n", DKERROR);
+			return; 
+		}
 		var child = frame.childNodes[4];
 		DKWidget_SetProperty(child.id, "width", parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem");
 		DKWidget_SetProperty(child.id, "height", parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem");
