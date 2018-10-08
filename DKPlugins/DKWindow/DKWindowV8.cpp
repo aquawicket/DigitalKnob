@@ -155,7 +155,7 @@ bool DKWindowV8::GetX(CefArgs args, CefReturn retval)
 	int x;
 	if(!DKWindow::GetX(x)){ return false; }
 	if(!retval->SetInt(0, x)){ return false; }
-	return 1;
+	return true;
 }
 
 /////////////////////////////////////////////////////
@@ -164,7 +164,7 @@ bool DKWindowV8::GetY(CefArgs args, CefReturn retval)
 	int y;
 	if(!DKWindow::GetY(y)){ return false; }
 	if(!retval->SetInt(0, y)){ return false; }
-	return 1;
+	return true;
 }
 
 /////////////////////////////////////////////////////
