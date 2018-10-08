@@ -2,7 +2,7 @@
 
 //***** DigitalKnob *****
 document.body.style.backgroundColor = "rgb(200,200,200)";
-document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
+//document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
 
 document.getElementsByTagName('head')[0].id = "head";
