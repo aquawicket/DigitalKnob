@@ -287,6 +287,7 @@ function LoadHtml(url, parent)
 	}
 	
 	var string = DK_FileToString(url);
+	DKLog("\n\n"+string+"\n\n");
 	//Create an empty widget
 	if(!string || string == "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -305,6 +306,7 @@ function LoadHtml(url, parent)
 	}
 
 	if(nodes[0].id != url){
+		DKLog("LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n", DKWARN);
 		nodes[0].id = url;
 		DKLog("LoadHtml("+url+",parent): please fix the id", DKWARN);
 	}
