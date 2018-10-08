@@ -41,7 +41,7 @@ function DKFrame_OnEvent(event)
 	if(DK_Type(event, "resize")){
 		var frame = document.getElementById(DK_GetId(event));
 		if(!frame){ 
-			DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"): frame invalid\n", DKERROR);
+			//DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"): frame invalid\n", DKERROR);
 			return; 
 		}
 		var child = frame.childNodes[4];
