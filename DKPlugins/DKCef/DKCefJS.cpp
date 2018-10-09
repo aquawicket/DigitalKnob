@@ -27,6 +27,7 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
 	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
 	DKDuktape::AttachFunction("DKCef_Stop", DKCefJS::Stop);
+	DKDuktape::AttachFunction("DKCef_ViewPageSource", DKCefJS::ViewPageSource);
 	return true;
 }
 
@@ -100,7 +101,7 @@ int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 /////////////////////////////////////
 int DKCefJS::GetUrl(duk_context* ctx)
 {
-	//DKLog("DKCefJS::GetUrl()\n", DKINFO);
+	//DKLog("DKCefJS::GetUrl()\n", DKDEBUG);
 	DKString id = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
 	DKString url;
@@ -228,6 +229,16 @@ int DKCefJS::Stop(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
 	if(!DKCef::Get(id)->Stop(browser)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////
+int DKCefJS::ViewPageSource(duk_context* ctx)
+{
+	//DKLog("DKCefJS::ViewPageSource()\n", DKDEBUG);
+	DKString id = duk_require_string(ctx, 0);
+	int browser = duk_require_int(ctx, 1);
+	if(!DKCef::Get(id)->ViewPageSource(browser)){ return 0; }
 	return 1;
 }
 

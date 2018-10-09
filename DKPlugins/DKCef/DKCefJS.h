@@ -33,6 +33,7 @@ public:
 	static int SetUrl(duk_context* ctx);
 	static int ShowDevTools(duk_context* ctx);
 	static int Stop(duk_context* ctx);
+	static int ViewPageSource(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKCefJS, true)

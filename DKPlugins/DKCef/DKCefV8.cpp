@@ -80,6 +80,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("DKCef_Stop", DKCefV8::Stop);
+	DKV8::AttachFunction("DKCef_ViewPageSource", DKCefV8::ViewPageSource);
 
 	return true;
 }
@@ -753,6 +754,16 @@ bool DKCefV8::Stop(CefArgs args, CefReturn retval)
 	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
 	if(!DKCef::Get(id)->Stop(browser)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::ViewPageSource(CefArgs args, CefReturn retval)
+{
+	//DKLog("DKCefV8::ViewPageSource()\n", DKDEBUG);
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->ViewPageSource(browser)){ return false; }
 	return true;
 }
 

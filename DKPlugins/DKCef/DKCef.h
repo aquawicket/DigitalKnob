@@ -46,6 +46,7 @@ public:
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
 	bool Stop(const int& browser);
+	bool ViewPageSource(const int& browser);
 	static void Test();
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);

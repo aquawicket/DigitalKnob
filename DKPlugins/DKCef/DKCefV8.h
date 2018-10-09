@@ -85,6 +85,7 @@ public:
 	static bool SetUrl(CefArgs args, CefReturn retval);
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Stop(CefArgs args, CefReturn retval);
+	static bool ViewPageSource(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCefV8, false);

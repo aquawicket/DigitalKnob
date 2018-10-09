@@ -433,8 +433,6 @@ bool DKCef::NewBrowser()
 //#ifdef WIN32
 //		window_info.SetAsWindowless(DKWindow::GetHwnd(), false);
 //#else
-		//TODO: this function changed in later CEF builds
-		//window_info.SetAsWindowless(NULL, false);
 		window_info.SetAsWindowless(NULL);
 //#endif
 		CefRefPtr<CefBrowser> _browser;
@@ -522,12 +520,54 @@ bool DKCef::Print(const int& browser)
 	return true;
 }
 
+//////////////////////////////////////////
+bool DKCef::QueueDuktape(DKString& string)
+{
+	DKLog("DKCef::QueueDuktape("+string+")\n", DKDEBUG);
+	return DKDuktape::QueueDuktape(string);
+}
+
 //////////////////////////////////////
 bool DKCef::Reload(const int& browser)
 {
 	DKLog("DKCef::Reload("+toString(browser)+")\n", DKDEBUG);
 	if(browser > (int)browsers.size()-1){ return false; } //error
 	browsers[browser]->Reload();
+	return true;
+}
+
+////////////////////////////////////////
+bool DKCef::RunDuktape(DKString& string)
+{
+	DKLog("DKCef::RunDuktape("+string+")\n", DKDEBUG);
+	return DKDuktape::RunDuktape(string);
+}
+
+///////////////////////////////////////////////////////////////
+bool DKCef::RunJavascript(const int& browser, DKString& string)
+{
+	DKLog("DKCef::RunJavascript("+toString(browser)+","+string+")\n", DKDEBUG);
+	//FIXME - get CefPostTask working
+	//if(!CefCurrentlyOn(TID_UI)){
+	//	CefPostTask(TID_UI, base::Bind(&DKCef::RunJavascript, this, string));
+	//	return false;
+	//}
+
+	if(!DKUtil::InMainThread()){ 
+		DKLog("DKCef::RunJavascript("+string+"): not in the main thread\n", DKWARN);
+		//return false; 
+	}
+	DKCef* dkCef = DKCef::Get("");
+	if(!dkCef){
+		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid\n", DKERROR);
+		return false;
+	}
+	CefRefPtr<CefFrame> frame = dkCef->browsers[browser]->GetMainFrame();
+	if(!frame){
+		DKLog("DKCef::RunJavascript("+string+"): frame invalid\n", DKERROR);
+		return false;
+	}
+	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	return true;
 }
 
@@ -577,48 +617,6 @@ bool DKCef::Stop(const int& browser)
 	DKLog("DKCef::Stop("+toString(browser)+")\n", DKDEBUG);
 	if(browser > (int)browsers.size()-1){ return false; } //error
 	browsers[browser]->StopLoad();
-	return true;
-}
-
-////////////////////////////////////////
-bool DKCef::RunDuktape(DKString& string)
-{
-	DKLog("DKCef::RunDuktape("+string+")\n", DKDEBUG);
-	return DKDuktape::RunDuktape(string);
-}
-
-//////////////////////////////////////////
-bool DKCef::QueueDuktape(DKString& string)
-{
-	DKLog("DKCef::QueueDuktape("+string+")\n", DKDEBUG);
-	return DKDuktape::QueueDuktape(string);
-}
-
-///////////////////////////////////////////////////////////////
-bool DKCef::RunJavascript(const int& browser, DKString& string)
-{
-	DKLog("DKCef::RunJavascript("+toString(browser)+","+string+")\n", DKDEBUG);
-	//FIXME - get CefPostTask working
-	//if(!CefCurrentlyOn(TID_UI)){
-	//	CefPostTask(TID_UI, base::Bind(&DKCef::RunJavascript, this, string));
-	//	return false;
-	//}
-
-	if(!DKUtil::InMainThread()){ 
-		DKLog("DKCef::RunJavascript("+string+"): not in the main thread\n", DKWARN);
-		//return false; 
-	}
-	DKCef* dkCef = DKCef::Get("");
-	if(!dkCef){
-		DKLog("DKCef::RunJavascript("+string+"): dkcef invalid\n", DKERROR);
-		return false;
-	}
-	CefRefPtr<CefFrame> frame = dkCef->browsers[browser]->GetMainFrame();
-	if(!frame){
-		DKLog("DKCef::RunJavascript("+string+"): frame invalid\n", DKERROR);
-		return false;
-	}
-	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	return true;
 }
 
@@ -710,6 +708,14 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 	};
 
 	CefVisitWebPluginInfo(new Visitor(browser));
+}
+
+//////////////////////////////////////////////
+bool DKCef::ViewPageSource(const int& browser)
+{
+	DKLog("DKCef::ViewPageSource()\n", DKDEBUG);
+	browsers[browser]->GetMainFrame()->ViewSource();
+	return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
