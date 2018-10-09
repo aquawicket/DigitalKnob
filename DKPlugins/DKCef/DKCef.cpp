@@ -25,6 +25,29 @@ unsigned long DKCef::cefThreadId;
 CefRefPtr<DKCefApp> DKCef::cefApp;
 bool DKCef::initialized = false;
 
+////////////////////////////////////////////////////
+void RunGetSourceTest(CefRefPtr<CefBrowser> browser)
+{
+	///////////////////////////////////////
+	class Visitor : public CefStringVisitor 
+	{
+	public:
+		explicit Visitor(CefRefPtr<CefBrowser> browser) : browser_(browser) {}
+		virtual void Visit(const CefString& string) OVERRIDE {
+			DKString source = string.ToString();
+			replace(source, "<", "&lt;");
+			replace(source, ">", "&gt;");
+			std::stringstream ss;
+			ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
+			browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
+		}
+	private:
+		CefRefPtr<CefBrowser> browser_;
+		IMPLEMENT_REFCOUNTING(Visitor);
+	};
+	browser->GetMainFrame()->GetSource(new Visitor(browser));
+}
+
 //////////////////
 bool DKCef::Init()
 {
@@ -387,6 +410,14 @@ bool DKCef::GetCurrentBrowser(int& browser)
 		}
 	}
 	return false; //error
+}
+
+//////////////////////////////////////////////
+bool DKCef::GetPageSource(const int& browser)
+{
+	DKLog("DKCef::GetPageSource()\n", DKDEBUG);
+	RunGetSourceTest(browsers[browser]);
+	return true;
 }
 
 ///////////////////////////////////////////////

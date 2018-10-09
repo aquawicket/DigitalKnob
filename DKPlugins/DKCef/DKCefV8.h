@@ -71,6 +71,7 @@ public:
 	static bool Focused(CefArgs args, CefReturn retval);
 	static bool GetBrowsers(CefArgs args, CefReturn retval);
 	static bool GetCurrentBrowser(CefArgs args, CefReturn retval);
+	static bool GetPageSource(CefArgs args, CefReturn retval);
 	static bool GetUrl(CefArgs args, CefReturn retval);
 	static bool GoBack(CefArgs args, CefReturn retval);
 	static bool GoForward(CefArgs args, CefReturn retval);

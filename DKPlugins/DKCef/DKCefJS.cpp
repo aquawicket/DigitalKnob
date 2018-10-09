@@ -13,6 +13,7 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_Focused", DKCefJS::Focused);
 	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers);
 	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser);
+	DKDuktape::AttachFunction("DKCef_GetPageSource", DKCefJS::GetPageSource);
 	DKDuktape::AttachFunction("DKCef_GetUrl", DKCefJS::GetUrl);
 	DKDuktape::AttachFunction("DKCef_GoBack", DKCefJS::GoBack);
 	DKDuktape::AttachFunction("DKCef_GoForward", DKCefJS::GoForward);
@@ -95,6 +96,16 @@ int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 	int browser;
 	if(!DKCef::Get(id)->GetCurrentBrowser(browser)){ return 0; }
 	duk_push_int(ctx, browser);
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKCefJS::GetPageSource(duk_context* ctx)
+{
+	//DKLog("DKCefJS::GetPageSource()\n", DKDEBUG);
+	DKString id = duk_require_string(ctx, 0);
+	int browser = duk_require_int(ctx, 1);
+	if(!DKCef::Get(id)->GetPageSource(browser)){ return 0; }
 	return 1;
 }
 

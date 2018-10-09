@@ -19,6 +19,7 @@ public:
 	static int Focused(duk_context* ctx);
 	static int GetBrowsers(duk_context* ctx);
 	static int GetCurrentBrowser(duk_context* ctx);
+	static int GetPageSource(duk_context* ctx);
 	static int GetUrl(duk_context* ctx);
 	static int GoBack(duk_context* ctx);
 	static int GoForward(duk_context* ctx);

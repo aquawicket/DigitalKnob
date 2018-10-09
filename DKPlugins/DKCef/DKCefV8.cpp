@@ -66,6 +66,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_Focused", DKCefV8::Focused);
 	DKV8::AttachFunction("DKCef_GetBrowsers", DKCefV8::GetBrowsers);
 	DKV8::AttachFunction("DKCef_GetCurrentBrowser", DKCefV8::GetCurrentBrowser);
+	DKV8::AttachFunction("DKCef_GetPageSource", DKCefV8::GetPageSource);
 	DKV8::AttachFunction("DKCef_GetUrl", DKCefV8::GetUrl);
 	DKV8::AttachFunction("DKCef_GoBack", DKCefV8::GoBack);
 	DKV8::AttachFunction("DKCef_GoForward", DKCefV8::GoForward);
@@ -620,6 +621,16 @@ bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
 	int browser;
 	if(!DKCef::Get(id)->GetCurrentBrowser(browser)){ return false; }
 	if(!retval->SetInt(0, browser)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
+{
+	//DKLog("DKCefV8::GetPageSource()\n", DKDEBUG);
+	DKString id = args->GetString(0);
+	int browser = args->GetInt(1);
+	if(!DKCef::Get(id)->GetPageSource(browser)){ return false; }
 	return true;
 }
 

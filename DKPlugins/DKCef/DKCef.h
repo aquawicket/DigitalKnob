@@ -33,6 +33,7 @@ public:
 	bool Find(const int& browser, const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
+	bool GetPageSource(const int& browser);
 	bool GetUrl(int& browser, DKString& url);
 	bool GoBack(const int& browser);
 	bool GoForward(const int& browser);
