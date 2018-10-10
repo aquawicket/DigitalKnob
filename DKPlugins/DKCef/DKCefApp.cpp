@@ -241,6 +241,10 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 	browser = _browser;
 }
 
+
+
+
+
 /*
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value)
@@ -425,4 +429,32 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 	DKLog(str+"\n", DKDEBUG);
 
 	return false;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace)
+{
+	//DKLog("DKCefApp::OnUncaughtException()\n", DKDEBUG);
+
+	DKLog("#################### Uncaught Exception ####################\n", DKERROR);
+	DKString msg = exception->GetMessage().ToString();
+	DKLog("Exception: "+msg+"\n", DKERROR);
+	std::ostringstream stackFormatted;
+	for (int i = 0; i < stackTrace->GetFrameCount(); ++i) {
+			stackFormatted << "at "
+			<< stackTrace->GetFrame(i)->GetFunctionName().ToString()
+			<< "() in "
+			<< stackTrace->GetFrame(i)->GetScriptName().ToString()
+			<< " on line "
+			<< stackTrace->GetFrame(i)->GetLineNumber() << "\n";
+	}
+	DKLog(stackFormatted.str()+"\n", DKERROR);
+	DKLog("############################################################\n", DKERROR);
+
+	/*
+	const char* stackFormattedShouldBe =
+		"at test2() in http://tests/V8Test.OnUncaughtException on line 3\n"
+		"at test() in http://tests/V8Test.OnUncaughtException on line 2\n";
+		EXPECT_STREQ(stackFormattedShouldBe, stackFormatted.str().c_str());
+	*/
 }

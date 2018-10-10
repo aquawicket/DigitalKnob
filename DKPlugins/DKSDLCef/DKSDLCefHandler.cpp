@@ -265,7 +265,7 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	//FIXME - causes facebook to hang
 	//store the page source in dkCef->source
 	/*
-	if(httpStatusCode == 200){
+	if(httpStatusCode == 0){
 		dkCef->source.clear();
 		CefRefPtr<SourceCallback> sourceCallback = new SourceCallback(browser, dkCef->source);
 		browser->GetMainFrame()->GetSource(sourceCallback);
@@ -310,6 +310,14 @@ void DKSDLCefHandler::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool i
 			return;
 		}
 	}
+
+	/*
+	if(!isLoading){
+		dkCef->source.clear();
+		CefRefPtr<SourceCallback> sourceCallback = new SourceCallback(browser, dkCef->source);
+		browser->GetMainFrame()->GetSource(sourceCallback);
+	}
+	*/
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
