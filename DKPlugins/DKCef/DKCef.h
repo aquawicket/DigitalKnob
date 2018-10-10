@@ -19,6 +19,17 @@ public:
 	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
+///////////////////////////////////////////////
+class SourceCallback : public CefStringVisitor 
+{
+public:
+	explicit SourceCallback(CefRefPtr<CefBrowser> browser) : browser_(browser) {}
+	virtual void Visit(const CefString& string);
+private:
+	CefRefPtr<CefBrowser> browser_;
+	IMPLEMENT_REFCOUNTING(SourceCallback);
+};
+
 /////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
 {
@@ -62,6 +73,7 @@ public:
 	int height;
 	bool inFocus;
 	DKString homepage;
+	DKString source;
 	bool fullscreen;
 	DKString queue_new_browser;
 
@@ -73,6 +85,7 @@ public:
 	static unsigned long cefThreadId;
 
 	DialogCallback* fileDialogCallback;
+	//SourceCallback* sourceCallback;
 
 	static bool initialized;
 

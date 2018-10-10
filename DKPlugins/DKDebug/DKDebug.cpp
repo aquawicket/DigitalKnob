@@ -213,8 +213,9 @@ bool DKDebug::Init()
 	DKFile::GetAppPath(apppath);
 
 #ifndef DEBUG
-	DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n", DKINFO);
-	DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);
+	//TODO: we need to do this in the build script. The exe will be using the .pdb, so the file is locked. 
+	//DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n", DKINFO);
+	//DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);
 #endif
 
 	InitUnhandledExceptionFilter();

@@ -1,4 +1,4 @@
-#include "DK/stdafx.h"
+﻿#include "DK/stdafx.h"
 #include <sstream>
 #include <string>
 #include <include/cef_urlrequest.h>
@@ -25,28 +25,6 @@ unsigned long DKCef::cefThreadId;
 CefRefPtr<DKCefApp> DKCef::cefApp;
 bool DKCef::initialized = false;
 
-////////////////////////////////////////////////////
-void RunGetSourceTest(CefRefPtr<CefBrowser> browser)
-{
-	///////////////////////////////////////
-	class Visitor : public CefStringVisitor 
-	{
-	public:
-		explicit Visitor(CefRefPtr<CefBrowser> browser) : browser_(browser) {}
-		virtual void Visit(const CefString& string) OVERRIDE {
-			DKString source = string.ToString();
-			replace(source, "<", "&lt;");
-			replace(source, ">", "&gt;");
-			std::stringstream ss;
-			ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
-			browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
-		}
-	private:
-		CefRefPtr<CefBrowser> browser_;
-		IMPLEMENT_REFCOUNTING(Visitor);
-	};
-	browser->GetMainFrame()->GetSource(new Visitor(browser));
-}
 
 //////////////////
 bool DKCef::Init()
@@ -60,6 +38,7 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
+	source = "";
 	DKClass::DKCreate("DKCefJS");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
@@ -412,11 +391,11 @@ bool DKCef::GetCurrentBrowser(int& browser)
 	return false; //error
 }
 
-//////////////////////////////////////////////
+/////////////////////////////////////////////
 bool DKCef::GetPageSource(const int& browser)
 {
 	DKLog("DKCef::GetPageSource()\n", DKDEBUG);
-	RunGetSourceTest(browsers[browser]);
+	browsers[browser]->GetMainFrame()->GetSource(new SourceCallback(browsers[browser]));
 	return true;
 }
 
@@ -764,7 +743,27 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 
 	replace(files, "\\", "\\\\");
 	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
-	return;
+}
+
+///////////////////////////////////////////////////
+void SourceCallback::Visit(const CefString& string)
+{
+	DKString source = string.ToString();
+	//replace(source, "<", "&lt;");
+	//replace(source, ">", "&gt;");
+	//std::stringstream ss;
+	//ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
+	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
+	//DKLog(source+"\n", DKINFO);
+
+	//replace(source, "&", "&amp;");
+	//replace(source, "\"", "&quot;");
+	//replace(source, "\'", "&apos;");
+	//replace(source, "<", "&lt;");
+	//replace(source, ">", "&gt;");
+
+	//DKEvent::SendEvent("GLOBAL", "DKCef_SourceReceived", string);
+	DKFile::StringToFile(string, "source.html");
 }
 
 

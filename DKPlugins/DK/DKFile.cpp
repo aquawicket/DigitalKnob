@@ -42,9 +42,12 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 {
 	DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n", DKDEBUG);
 
-	if(!PathExists(src)){ return false; }
+	if(!PathExists(src)){ 
+		DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): The src path does not exits\n", DKERROR);
+		return false; 
+	}
 	if(boost::filesystem::is_directory(src)){
-		if(!CopyDirectory(src,dst,overwrite,recursive)){
+		if(!CopyDirectory(src, dst, overwrite, recursive)){
 			return false;
 		}
 	}
@@ -53,7 +56,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 			DKLog("DKFile::Copy("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): destination already exists. \n", DKWARN);
 			return false;
 		}
-		boost::filesystem::copy_file(src,dst,boost::filesystem::copy_option::overwrite_if_exists);
+		boost::filesystem::copy_file(src, dst, boost::filesystem::copy_option::overwrite_if_exists);
 	}
 
 	DKLog("Copied to "+dst+"\n", DKINFO);
@@ -90,7 +93,7 @@ bool DKFile::CopyDirectory(boost::filesystem::path const& source, boost::filesys
 			fs::path current(file->path());
 			if(fs::is_directory(current) && recursive){
 				// Found directory: Recursion
-				if( !CopyDirectory( current, destination / current.filename(), overwrite, recursive) ){
+				if(!CopyDirectory( current, destination / current.filename(), overwrite, recursive)){
 					return false;
 				}
 			}
@@ -117,9 +120,12 @@ bool DKFile::CopyFolder(const DKString& src, const DKString& dst, const bool ove
 {
 	DKLog("DKFile::CopyFolder("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+")\n", DKDEBUG);
 
-	if(!PathExists(src)){ return false; }
+	if(!PathExists(src)){ 
+		DKLog("DKFile::CopyFolder(): src is invalid\n", DKERROR);
+		return false; 
+	}
 	if(!CopyDirectory(src,dst,overwrite,recursive)){
-		DKLog("DKFile::CopyFolder() failed\n", DKERROR);
+		DKLog("DKFile::CopyFolder():  DKFile::CopyDirectory() failed\n", DKERROR);
 		return false;
 	}
 	return true;
