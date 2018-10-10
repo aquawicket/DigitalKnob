@@ -634,7 +634,6 @@ bool DKCef::Stop(const int& browser)
 bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
 	if(same(id,"DKLog")){ return false; }
-	DKLog("DKCef::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(same(type,"second")){ return false; }
@@ -652,6 +651,8 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"minimize")){ return false; }
 	if(same(type,"maximize")){ return false; }
 	if(same(type,"restore")){ return false; }
+
+	DKLog("DKCef::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
 	
 	DKCef* dkcef = DKCef::Get("");
 	if(!dkcef){
@@ -756,14 +757,18 @@ void SourceCallback::Visit(const CefString& string)
 	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
 	//DKLog(source+"\n", DKINFO);
 
-	//replace(source, "&", "&amp;");
-	//replace(source, "\"", "&quot;");
-	//replace(source, "\'", "&apos;");
-	//replace(source, "<", "&lt;");
-	//replace(source, ">", "&gt;");
+	replace(source, "\"", "\\\"");
+	replace(source, "\n", "");
+	/*
+	replace(source, "&", "\\\&");
+	replace(source, "\"", "\\\"");
+	replace(source, "\'", "\\\'");
+	replace(source, "<", "\\\<");
+	replace(source, ">", "\\\>");
+	*/
 
-	//DKEvent::SendEvent("GLOBAL", "DKCef_SourceReceived", string);
-	DKFile::StringToFile(string, "source.html");
+	DKEvent::SendEvent("GLOBAL", "DKCef_SourceReceived", source);
+	//DKFile::StringToFile(source, "source.html");
 }
 
 
