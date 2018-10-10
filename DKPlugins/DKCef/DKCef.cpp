@@ -391,11 +391,11 @@ bool DKCef::GetCurrentBrowser(int& browser)
 	return false; //error
 }
 
-/////////////////////////////////////////////
-bool DKCef::GetPageSource(const int& browser)
+////////////////////////////////////////////////////////////////
+bool DKCef::GetPageSource(const int& browser, DKString& _source)
 {
 	DKLog("DKCef::GetPageSource()\n", DKDEBUG);
-	browsers[browser]->GetMainFrame()->GetSource(new SourceCallback(browsers[browser]));
+	_source = source; 
 	return true;
 }
 
@@ -746,30 +746,7 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
 }
 
-///////////////////////////////////////////////////
-void SourceCallback::Visit(const CefString& string)
-{
-	DKString source = string.ToString();
-	//replace(source, "<", "&lt;");
-	//replace(source, ">", "&gt;");
-	//std::stringstream ss;
-	//ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
-	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
-	//DKLog(source+"\n", DKINFO);
 
-	replace(source, "\"", "\\\"");
-	replace(source, "\n", "");
-	/*
-	replace(source, "&", "\\\&");
-	replace(source, "\"", "\\\"");
-	replace(source, "\'", "\\\'");
-	replace(source, "<", "\\\<");
-	replace(source, ">", "\\\>");
-	*/
-
-	DKEvent::SendEvent("GLOBAL", "DKCef_SourceReceived", source);
-	//DKFile::StringToFile(source, "source.html");
-}
 
 
 //////////////////

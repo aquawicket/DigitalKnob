@@ -6,13 +6,36 @@
 #include "include/wrapper/cef_helpers.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
 
-/*
-namespace{
-	DKSDLCefHandler* g_instance = NULL;
-}
-*/
-
 DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
+
+
+///////////////////////////////////////////////////
+void SourceCallback::Visit(const CefString& string)
+{
+	source = string.ToString();
+	//replace(source, "<", "&lt;");
+	//replace(source, ">", "&gt;");
+	//std::stringstream ss;
+	//ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
+	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
+	//DKLog(source+"\n", DKINFO);
+
+	replace(source, "\"", "\\\"");
+	replace(source, "\n", "");
+	/*
+	replace(source, "&", "\\\&");
+	replace(source, "\"", "\\\"");
+	replace(source, "\'", "\\\'");
+	replace(source, "<", "\\\<");
+	replace(source, ">", "\\\>");
+	*/
+
+	//DKEvent::SendEvent("GLOBAL", "DKCef_SourceReceived", source);
+	//DKFile::StringToFile(source, "source.html");
+}
+
+
+
 
 //////////////////////////////////////////////////////
 DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false) 
@@ -238,11 +261,16 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadEnd", toString(httpStatusCode));
 	}
 
+	//store the page source in dkCef->source
+	//browser->GetMainFrame()->GetSource(new SourceCallback(browser, dkCef->source));
+
+/*
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("TestMessage");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 #ifndef DEBUG
 	browser->SendProcessMessage(PID_BROWSER, msg);
 #endif
+*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -630,7 +630,11 @@ bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 	//DKLog("DKCefV8::GetPageSource()\n", DKDEBUG);
 	DKString id = args->GetString(0);
 	int browser = args->GetInt(1);
-	if(!DKCef::Get(id)->GetPageSource(browser)){ return false; }
+	DKString source;
+	if(!DKCef::Get(id)->GetPageSource(browser, source)){ return false; }
+	if(!source.empty()){ 
+		if(!retval->SetString(0, source)){ return false; }
+	}
 	return true;
 }
 

@@ -19,17 +19,6 @@ public:
 	IMPLEMENT_REFCOUNTING(DialogCallback);
 };
 
-///////////////////////////////////////////////
-class SourceCallback : public CefStringVisitor 
-{
-public:
-	explicit SourceCallback(CefRefPtr<CefBrowser> browser) : browser_(browser) {}
-	virtual void Visit(const CefString& string);
-private:
-	CefRefPtr<CefBrowser> browser_;
-	IMPLEMENT_REFCOUNTING(SourceCallback);
-};
-
 /////////////////////////////////////
 class DKCef : public DKObjectT<DKCef>
 {
@@ -44,7 +33,7 @@ public:
 	bool Find(const int& browser, const DKString& text);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
-	bool GetPageSource(const int& browser);
+	bool GetPageSource(const int& browser, DKString& _source);
 	bool GetUrl(int& browser, DKString& url);
 	bool GoBack(const int& browser);
 	bool GoForward(const int& browser);
@@ -85,7 +74,6 @@ public:
 	static unsigned long cefThreadId;
 
 	DialogCallback* fileDialogCallback;
-	//SourceCallback* sourceCallback;
 
 	static bool initialized;
 

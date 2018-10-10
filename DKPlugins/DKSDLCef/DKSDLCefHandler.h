@@ -16,6 +16,19 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKSDLCef/DKSDLCef.h"
 
+///////////////////////////////////////////////
+class SourceCallback : public CefStringVisitor 
+{
+public:
+	SourceCallback(CefRefPtr<CefBrowser> browser, DKString& string) : browser_(browser), source(string){}
+	virtual void Visit(const CefString& string);
+	
+private:
+	DKString& source;
+	CefRefPtr<CefBrowser> browser_;
+	IMPLEMENT_REFCOUNTING(SourceCallback);
+};
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class DKSDLCefHandler : public CefClient, public CefRenderHandler, public CefLoadHandler, public CefLifeSpanHandler, 
 	public CefContextMenuHandler, public CefDownloadHandler, public CefDisplayHandler, 
@@ -32,7 +45,6 @@ public:
 	typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
 	BrowserList browser_list_;
 	bool is_closing_;
-
 
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;

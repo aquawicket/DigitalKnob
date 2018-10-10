@@ -105,7 +105,11 @@ int DKCefJS::GetPageSource(duk_context* ctx)
 	//DKLog("DKCefJS::GetPageSource()\n", DKDEBUG);
 	DKString id = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
-	if(!DKCef::Get(id)->GetPageSource(browser)){ return 0; }
+	DKString source;
+	if(!DKCef::Get(id)->GetPageSource(browser, source)){ return 0; }
+	if(!source.empty()){
+		duk_push_string(ctx, source.c_str());
+	}
 	return 1;
 }
 
