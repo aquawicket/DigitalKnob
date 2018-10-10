@@ -21,6 +21,7 @@ void SourceCallback::Visit(const CefString& string)
 	//DKLog(source+"\n", DKINFO);
 
 	replace(source, "\"", "\\\"");
+	replace(source, "\'", "\\\'");
 	replace(source, "\n", "");
 	/*
 	replace(source, "&", "\\\&");
@@ -261,8 +262,15 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadEnd", toString(httpStatusCode));
 	}
 
+	//FIXME - causes facebook to hang
 	//store the page source in dkCef->source
-	//browser->GetMainFrame()->GetSource(new SourceCallback(browser, dkCef->source));
+	/*
+	if(httpStatusCode == 200){
+		dkCef->source.clear();
+		CefRefPtr<SourceCallback> sourceCallback = new SourceCallback(browser, dkCef->source);
+		browser->GetMainFrame()->GetSource(sourceCallback);
+	}
+	*/
 
 /*
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("TestMessage");
