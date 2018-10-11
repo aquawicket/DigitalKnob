@@ -147,10 +147,11 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 
 	DKString data;
 	data += params->GetSelectionText();
-	data += ",";
+	data += ";";
 	data += params->GetSourceUrl();
-	data += ",";
+	data += ";";
 	data += params->GetLinkUrl();
+	DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+"): data = "+data+"\n", DKINFO);
 
 	DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 }
