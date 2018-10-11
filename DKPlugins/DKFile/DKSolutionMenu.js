@@ -18,6 +18,7 @@ function DKSolutionMenu_Init()
 	DKAddEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Import", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_GitAdd", "click", DKSolutionMenu_OnEvent);
+	DKAddEvent("DKSolutionMenu_UpxCompress", "click", DKSolutionMenu_OnEvent);
 }
 
 /////////////////////////////
@@ -64,6 +65,9 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	if(DK_Id(event,"DKSolutionMenu_GitAdd")){
 		DKSolutionMenu_GitAdd();
+	}
+	if(DK_Id(event,"DKSolutionMenu_UpxCompress")){
+		DKSolutionMenu_UpxCompress();
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
@@ -252,5 +256,22 @@ function DKSolutionMenu_GitAdd()
 		//DKLog("found .git\n", DKINFO);
 		DKFile_ChDir(search);
 		DK_Execute(git+" add "+DKSolutionMenu_file);	
+	});
+}
+
+/////////////////////////////////////
+function DKSolutionMenu_UpxCompress()
+{
+	DKLog("DKSolutionMenu_UpxCompress()\n", DKDEBUG);
+	DKCreate("DKBuild/DKBuild.js", function(){ //for DKPATH
+	
+		//upx compress the exe file
+		if(DKFile_Exists(DKPATH+"/3rdParty/upx392w/upx.exe")){
+			DKLog("UPX compressing exe... please wait \n", DKWARN);
+			DK_Execute(DKPATH+"/3rdParty/upx392w/upx.exe -9 -v "+DKSolutionMenu_file);
+		}
+		else{
+			DKLog("DKBuild_DoResults(): UPX does not exists \n", DKWARN);
+		}
 	});
 }
