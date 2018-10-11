@@ -1,0 +1,12 @@
+### INSTALL ###
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+IF(NOT EXISTS ${3RDPARTY}/upx-3.95-win64)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://digitalknob.com/Download/Tools/upx-3.95-win64.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/upx-3.95-win64.zip ${3RDPARTY})
+ENDIF()
+
+DKSET(UPX ${3RDPARTY}/upx-3.95-win64)
