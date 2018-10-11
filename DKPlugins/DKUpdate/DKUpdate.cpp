@@ -168,7 +168,9 @@ bool DKUpdate::DoUpdate()
 	//Apply .zip update
 	if(has(url,".zip")){
 		DKFile::Delete(apppath+"/"+filename+"_dl");
-		DKCurl::Get("DKCurlUpdate")->Download(url, apppath+"/"+filename+"_dl");
+		if(DKCurl::Get("DKCurlUpdate")->Download(url, apppath+"/"+filename+"_dl")){
+			return false;
+		}
 		DKFile::Rename(apppath+"/"+filename+"_dl", filename, true);
 		DKArchive::Extract(apppath+"/"+filename, apppath);
 		DKFile::Delete(apppath+"/"+filename);

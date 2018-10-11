@@ -60,8 +60,8 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 		//return false;
 	}
 
-	if(has(url,"http://") && HttpDownload(url, path)){return true;}
-	if(has(url,"ftp.") && FtpDownload(url, path)){return true;}
+	if(has(url,"http://") && HttpDownload(url, path)){ return true; }
+	if(has(url,"ftp.") && FtpDownload(url, path)){ return true; }
 	return false;
 }
 
