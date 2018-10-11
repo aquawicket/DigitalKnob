@@ -87,7 +87,7 @@ function DKLog(string, lvl)
 				}
 			}
 		}
-		if(flag == false){ 
+		if(!flag){ 
 			if(lvl == DKERROR && !LOG_ERRORS){ return; }
 			if(lvl == DKWARN && !LOG_WARNINGS){ return; }
 			if(lvl == DKINFO && !LOG_INFO){ return; }
