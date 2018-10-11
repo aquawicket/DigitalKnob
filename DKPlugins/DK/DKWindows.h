@@ -39,7 +39,7 @@ public:
 	static bool GetScreenHeight(int& h);
 	static bool GetThreadId(unsigned long int& id);
 	static bool GetVolume(float& volume);
-	static bool KeyIsDown(int& key);
+	static bool KeyIsDown(const int& key);
 	static bool LeftClick();
 	static bool LeftPress();
 	static bool LeftRelease();

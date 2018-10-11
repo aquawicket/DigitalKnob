@@ -18,6 +18,7 @@ int main(int argc, char **argv);
 //////////// WIN32 MAIN //////////////////////////////////////////////////////////////////////////
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) 
 {
+	DKLog("APIENTRY WinMain()\n", DKDEBUG);
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	DKWindows::hInstance = hInstance;
@@ -29,7 +30,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 {
 	//FIXME - this is not the main thread
-	//DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
+	DKLog("DKApp::ConsoleHandler(DWORD)\n", DKDEBUG);
 	switch(type){
 	case CTRL_CLOSE_EVENT:
 		//ExitThread(0);  //This is a hack
@@ -42,6 +43,7 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type)
 /////////////////////////
 bool DKWindows::CpuInit()
 {
+	DKLog("DKWindows::CpuInit()\n", DKDEBUG);
 	//Init for DKWindows::CpuUsed()
 	PdhOpenQuery(NULL, NULL, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
@@ -68,8 +70,8 @@ bool DKWindows::CpuInit()
 //////////////////////////////////
 bool DKWindows::CpuUsed(int& cpu)
 {
+	DKLog("DKWindows::CpuUsed()\n", DKDEBUG);
 	if(!cpuInit){ CpuInit(); }
-
 	PDH_FMT_COUNTERVALUE counterVal;
 	PdhCollectQueryData(cpuQuery);
 	PdhGetFormattedCounterValue(cpuTotal, PDH_FMT_DOUBLE, NULL, &counterVal);
@@ -80,8 +82,8 @@ bool DKWindows::CpuUsed(int& cpu)
 //////////////////////////////////////
 bool DKWindows::CpuUsedByApp(int& cpu)
 {
+	DKLog("DKWindows::CpuUsedByApp()\n", DKDEBUG);
 	if(!cpuInit){ CpuInit(); }
-
 	FILETIME ftime, fsys, fuser;
 	ULARGE_INTEGER now, sys, user;
 	float percent;
@@ -103,6 +105,7 @@ bool DKWindows::CpuUsedByApp(int& cpu)
 //////////////////////////////////////
 bool DKWindows::CreateConsoleHandler()
 {
+	DKLog("DKWindows::CreateConsoleHandler()\n", DKDEBUG);
 	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)DKWindows::ConsoleHandler, true)){
 		DKLog("Could not set Console Handler. \n", DKWARN);
 		return false;
@@ -115,6 +118,7 @@ bool DKWindows::CreateConsoleHandler()
 //////////////////////////////////////////////////////
 bool DKWindows::DrawTextOnScreen(const DKString& text)
 {
+	DKLog("DKWindows::DrawTextOnScreen("+text+")\n", DKDEBUG);
 	HDC screenDC = ::GetDC(GetDesktopWindow());
 	::SetBkColor(screenDC, TRANSPARENT);
 	::SetTextColor(screenDC, RGB(0, 255, 0));
@@ -126,6 +130,7 @@ bool DKWindows::DrawTextOnScreen(const DKString& text)
 ///////////////////////////////////////////////////////////////////////
 bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 {
+	DKLog("DKWindows::FindImageOnScreen("+file+")\n", DKDEBUG);
 	//// Screen to RGB ////
 	int SCREEN_WIDTH = 1280;
 	int SCREEN_HEIGHT = 1024;
@@ -259,7 +264,6 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 bool DKWindows::GetClipboard(DKString& text)
 {
 	DKLog("DKWindows::GetClipboard("+text+")\n", DKDEBUG);
-
 	char * buffer;
 	if(OpenClipboard(NULL)){
 		buffer = (char*)GetClipboardData(CF_TEXT);
@@ -276,7 +280,6 @@ bool DKWindows::GetClipboard(DKString& text)
 bool DKWindows::GetKey(int& key)
 {
 	DKLog("DKWindows::GetKey()\n", DKDEBUG);
-
 	//DKLog("Press a key...\n", DKINFO);
 	key = _getch();
 	return true;
@@ -285,6 +288,7 @@ bool DKWindows::GetKey(int& key)
 /////////////////////////////////////////////
 bool DKWindows::GetLastError(DKString& error)
 {
+	DKLog("DKWindows::GetLastError()\n", DKDEBUG);
 	//Get the error message, if any.
 	DWORD errorMessageID = ::GetLastError();
 	if (errorMessageID == 0)
@@ -305,6 +309,7 @@ bool DKWindows::GetLastError(DKString& error)
 ///////////////////////////////////////////
 bool DKWindows::GetMousePos(int& x, int& y)
 {
+	DKLog("DKWindows::GetMousePos()\n", DKDEBUG);
 	POINT p;
 	if(::GetCursorPos(&p)){
 		x = p.x;
@@ -318,7 +323,6 @@ bool DKWindows::GetMousePos(int& x, int& y)
 bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 {
 	DKLog("DKWindows::GetPixelFromImage("+image+","+toString(y)+","+toString(x)+","+toString(y)+")\n", DKDEBUG);
-
 	HANDLE hBmp = LoadImage(NULL, image.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	if(NULL == hBmp){
 		DKLog("Could not load file\n",DKERROR);
@@ -344,7 +348,6 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y)
 bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {
 	DKLog("DKWindows::GetPixelFromScreen("+toString(x)+","+toString(y)+",int&,int&,int&)\n", DKDEBUG);
-
 	HDC hdc_ = GetDC(GetDesktopWindow()) ;  //not sure if this is right or what exactly it does.
 	COLORREF color = GetPixel(hdc_, x, y);
 	r = GetRValue(color);
@@ -356,6 +359,7 @@ bool DKWindows::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 //////////////////////////////////////////////
 bool DKWindows::GetProcessList(DKString& list)
 {
+	DKLog("DKWindows::GetProcessList()\n", DKDEBUG);
 	//list = "this,is,a,test";
 
 	// Get the list of process identifiers.
@@ -401,6 +405,7 @@ bool DKWindows::GetProcessList(DKString& list)
 //////////////////////////////////////
 bool DKWindows::GetScreenWidth(int& w)
 {
+	DKLog("DKWindows::GetScreenWidth()\n", DKDEBUG);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
@@ -411,6 +416,7 @@ bool DKWindows::GetScreenWidth(int& w)
 ///////////////////////////////////////
 bool DKWindows::GetScreenHeight(int& h)
 {
+	DKLog("DKWindows::GetScreenHeight()\n", DKDEBUG);
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	if(!GetWindowRect(hDesktop, &desktop)){ return false; }
@@ -421,6 +427,7 @@ bool DKWindows::GetScreenHeight(int& h)
 //////////////////////////////////////////////////
 bool DKWindows::GetThreadId(unsigned long int& id)
 {
+	DKLog("DKWindows::GetThreadId()\n", DKDEBUG);
 	id = GetCurrentThreadId();
 	return true;
 }
@@ -429,7 +436,6 @@ bool DKWindows::GetThreadId(unsigned long int& id)
 bool DKWindows::GetVolume(float& volume)
 {
 	DKLog("DKWindows::GetVolume()\n", DKDEBUG);
-
 	bool bScalar = true;
 	HRESULT hr=NULL;
 	bool decibels = false;
@@ -458,9 +464,10 @@ bool DKWindows::GetVolume(float& volume)
 	return true;
 }
 
-///////////////////////////////////
-bool DKWindows::KeyIsDown(int& key)
+/////////////////////////////////////////
+bool DKWindows::KeyIsDown(const int& key)
 {
+	DKLog("DKWindows::KeyIsDown()\n", DKDEBUG);
 	if(GetKeyState(key) & 0x8000){ return true; }
 	return false;
 }
