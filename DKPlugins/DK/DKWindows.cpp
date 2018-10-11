@@ -111,7 +111,12 @@ bool DKWindows::CreateConsoleHandler()
 		return false;
 	}
 	DKWindows::consoleWindow = GetConsoleWindow();
-	SetWindowPos(DKWindows::consoleWindow, 0, 0, 0, 640, 1024, SWP_NOSIZE | SWP_NOZORDER);
+	RECT desktop;
+	const HWND hDesktop = GetDesktopWindow();
+	GetWindowRect(hDesktop, &desktop);
+	LONG horizontal = desktop.right;
+	LONG vertical = desktop.bottom - 35;
+	MoveWindow(DKWindows::consoleWindow, 0, 0, horizontal, vertical, TRUE);
 	return true;
 }
 
