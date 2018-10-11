@@ -130,9 +130,9 @@ function DKClose(data)
 	}
 	
 	if(arry[0] == "DKJavascript"){
-		var name = file.replace(".js", "");
-		name += "_End";
-		var func = window[name]; //End
+		var end = file.replace(".js", "");
+		end += "_End";
+		var func = window[end]; //Plugin_End()
 		if(typeof func == 'function'){ 
 			func(); // Call the jsclass_End() function
 		}
@@ -228,25 +228,24 @@ function LoadJs(url, callback)
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
 	script.id = url;
-	script.src = url;
 	script.async = true; // optionally
 	
-	if(typeof script == "undefined"){ 
-		DKLog("Cannot load "+url+" \n", DKERROR);
-		return false; 
-	}
+	//if(typeof script == "undefined"){ 
+	//	DKLog("Cannot load "+url+" \n", DKERROR);
+	//	return false; 
+	//}
 	
-	var name = file.replace(".js", "");
-	name += "_Init";
+	var init = file.replace(".js", "");
+	init += "_Init";
 	
 	head.appendChild(script);
 	
+	////////// CALLBACKS
 	var done = false;
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
-			
-			//DKLog("Loaded: "+url);
-			var func = window[name]; //Init    
+			DKLog("Loaded: "+url+"\n");
+			var func = window[init]; //Plugin_Init()    
 			if(typeof func == 'function'){ 
 				//DKLog("Calling: "+name+" \n");
 				func(); //Init
@@ -259,7 +258,12 @@ function LoadJs(url, callback)
 			callback && callback(true);
 		}
 	};
+	script.onerror = function(){
+		DKLog("LoadJs("+url+"): Could not load file\n", DKERROR);
+	}
+	////////////////////////
 	
+	script.src = url;
 	return true;
 }
 
