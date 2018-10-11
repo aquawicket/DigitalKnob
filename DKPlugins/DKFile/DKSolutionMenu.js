@@ -265,10 +265,13 @@ function DKSolutionMenu_UpxCompress()
 	DKLog("DKSolutionMenu_UpxCompress()\n", DKDEBUG);
 	DKCreate("DKBuild/DKBuild.js", function(){ //for DKPATH
 	
+		var dkpath = DKPATH; //from DKBuild.js
+		var upx = dkpath+"/DK/3rdParty/upx394w/upx.exe";
+		DKLog("upx = "+upx+"\n");
 		//upx compress the exe file
-		if(DKFile_Exists(DKPATH+"/3rdParty/upx392w/upx.exe")){
+		if(DKFile_Exists(upx)){
 			DKLog("UPX compressing exe... please wait \n", DKWARN);
-			DK_Execute(DKPATH+"/3rdParty/upx392w/upx.exe -9 -v "+DKSolutionMenu_file);
+			DK_Execute(upx+" -9 -v "+DKSolutionMenu_file);
 		}
 		else{
 			DKLog("DKBuild_DoResults(): UPX does not exists \n", DKWARN);
