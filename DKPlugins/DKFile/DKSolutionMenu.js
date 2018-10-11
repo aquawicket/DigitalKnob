@@ -266,7 +266,7 @@ function DKSolutionMenu_UpxCompress()
 	DKCreate("DKBuild/DKBuild.js", function(){ //for DKPATH
 	
 		var dkpath = DKPATH; //from DKBuild.js
-		var upx = dkpath+"/DK/3rdParty/upx-3.95-win64/upx.exe";
+		var upx = dkpath+"/DK/3rdParty/upx394w/upx.exe";
 		DKLog("upx = "+upx+"\n");
 		//upx compress the exe file
 		if(DKFile_Exists(upx)){
