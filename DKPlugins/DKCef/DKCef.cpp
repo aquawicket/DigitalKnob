@@ -171,6 +171,7 @@ bool DKCef::Init()
 	if(!same(DKV8::log_severity, "ON")){ //OFF
 		settings.log_severity = LOGSEVERITY_DISABLE;
 	}
+	settings.uncaught_exception_stack_size = 100;
 
 	//settings.accept_language_list;
 	//settings.background_color;
