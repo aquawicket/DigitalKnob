@@ -70,6 +70,6 @@ void SetLog(const int lvl, const DKString& text);
 #else
 #define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __PRETTY_FUNCTION__)
 #endif
-#define DKCHECK(_bool) {if(!_bool){DKLog("FAILURE: ", DKERROR);}}
+//#define DKCHECK(_bool) {if(!_bool){DKLog("FAILURE: ", DKERROR);}}
 
 #endif //DKLog_H

@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 	DKLog("DKFile::app_path = "+DKFile::app_path+"\n", DKINFO);
 	DKLog("DKFile::app_name = "+DKFile::app_name+"\n", DKINFO);
 
-	DKClass::DKCreate("DKAssets");
+	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here. 
 	DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
 	DKApp dkapp;

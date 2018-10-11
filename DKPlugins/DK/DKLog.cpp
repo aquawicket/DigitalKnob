@@ -61,7 +61,7 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	}
 #endif
 
-	//check for LOG_SHOW_n
+	//check for LOG_SHOW
 	bool flag = false;
 #ifdef WIN32
 	if(!log_show.empty()){
@@ -81,7 +81,6 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 		if(log_warnings == false && lvl == DKWARN){ return; }
 		if(log_errors == false && lvl == DKERROR){ return; }
 	}
-	
 	
 	if(log_file && !DKFile::local_assets.empty()){
 		std::ofstream file_log;
