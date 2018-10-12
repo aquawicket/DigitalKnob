@@ -50,6 +50,7 @@ public:
 	static bool RunDuktape(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
 	static bool SetClipboardFiles(CefArgs args, CefReturn retval);
+	static bool SetClipboardImage(CefArgs args, CefReturn retval);
 	static bool SetFramerate(CefArgs args, CefReturn retval);
 	static bool SetMousePos(CefArgs args, CefReturn retval);
 	static bool ShowConsole(CefArgs args, CefReturn retval);

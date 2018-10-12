@@ -67,6 +67,7 @@ public:
 	static bool SendTick();
 	static bool SetClipboard(const DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
+	static bool SetClipboardImage(const DKString& file);
 	static bool SetFramerate(const int& fps);
 	static bool SetMainThreadNow(); //ONLY SET THIS FROM THE MAIN THREAD ONCE
 	static bool SetMousePos(const int& x, const int& y);

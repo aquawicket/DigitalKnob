@@ -85,6 +85,7 @@ public:
 	static int RunDuktape(duk_context* ctx);
 	static int SetClipboard(duk_context* ctx);
 	static int SetClipboardFiles(duk_context* ctx);
+	static int SetClipboardImage(duk_context* ctx);
 	static int SetCursorPos(duk_context* ctx);
 	static int SetFramerate(duk_context* ctx);
 	static int SetVolume(duk_context* ctx);

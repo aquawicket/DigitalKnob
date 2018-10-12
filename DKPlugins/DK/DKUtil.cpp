@@ -833,6 +833,16 @@ bool DKUtil::SetClipboardFiles(const DKString& filelist)
 	return false;
 }
 
+////////////////////////////////////////////////////
+bool DKUtil::SetClipboardImage(const DKString& file)
+{
+#ifdef WIN32
+	return DKWindows::SetClipboardImage(file);
+#endif
+	DKLog("DKUtil::SetClipboardImage() not implemented on this OS \n", DKWARN);
+	return false;
+}
+
 /////////////////////////////////////////
 bool DKUtil::SetFramerate(const int& fps)
 {

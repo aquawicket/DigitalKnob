@@ -925,6 +925,14 @@ int DKJS::SetClipboardFiles(duk_context* ctx)
 	return 1;
 }
 
+/////////////////////////////////////////////
+int DKJS::SetClipboardImage(duk_context* ctx)
+{
+	DKString file = duk_require_string(ctx, 0);
+	if(!DKUtil::SetClipboardImage(file)){ return 0; }
+	return 1;
+}
+
 ////////////////////////////////////////
 int DKJS::SetCursorPos(duk_context* ctx)
 {

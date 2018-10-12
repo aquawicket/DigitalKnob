@@ -43,6 +43,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
+	DKV8::AttachFunction("DK_SetClipboardImage", DKCefV8::SetClipboardImage);
 	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
 	DKV8::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("DK_SetMousePos", DKCefV8::SetMousePos);
@@ -367,6 +368,13 @@ bool DKCefV8::SetClipboardFiles(CefArgs args, CefReturn retval)
 {
 	DKString filelist = args->GetString(0);
 	return DKUtil::SetClipboardFiles(filelist);
+}
+
+///////////////////////////////////////////////////////////////
+bool DKCefV8::SetClipboardImage(CefArgs args, CefReturn retval)
+{
+	DKString file = args->GetString(0);
+	return DKUtil::SetClipboardImage(file);
 }
 
 /////////////////////////////////////////////////////////
