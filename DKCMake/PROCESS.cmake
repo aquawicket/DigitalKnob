@@ -377,7 +377,7 @@ IF(WIN_32)
 	
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)  ## this may cause problems trying to run CEF app in debug 
 	DKZIP(${DKPROJECT}/assets)
 	
 	LIST(APPEND WIN_LIBS 
@@ -432,7 +432,7 @@ IF(WIN_64)
 	## copy icon
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug) ## this may cause problems trying to run CEF app in debug
 	DKZIP(${DKPROJECT}/assets)
 	
 	LIST(APPEND WIN_LIBS 
