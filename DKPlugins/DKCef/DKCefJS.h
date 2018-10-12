@@ -15,6 +15,7 @@ public:
 	static int CloseBrowser(duk_context* ctx);
 	static int CloseDevTools(duk_context* ctx);
 	static int Copy(duk_context* ctx);
+	static int CopyImage(duk_context* ctx);
 	static int Cut(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);
 	static int Find(duk_context* ctx);

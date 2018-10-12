@@ -334,6 +334,20 @@ bool DKCef::Copy()
 	return true;
 }
 
+
+//////////////////////////////////////////
+bool DKCef::CopyImage(const DKString& url)
+{
+	DKLog("DKCef::CopyImage("+url+")\n", DKDEBUG);
+	NewBrowser();
+	int num;
+	GetCurrentBrowser(num);
+	SetUrl(num, url);
+	current_browser->GetFocusedFrame()->Copy();
+	this->CloseBrowser(num);
+	return true;
+}
+
 /////////////////
 bool DKCef::Cut()
 {

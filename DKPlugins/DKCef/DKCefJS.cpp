@@ -9,6 +9,7 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_CloseBrowser", DKCefJS::CloseBrowser);
 	DKDuktape::AttachFunction("DKCef_CloseDevTools", DKCefJS::CloseDevTools);
 	DKDuktape::AttachFunction("DKCef_Copy", DKCefJS::Copy);
+	DKDuktape::AttachFunction("DKCef_CopyImage", DKCefJS::CopyImage);
 	DKDuktape::AttachFunction("DKCef_Cut", DKCefJS::Cut);
 	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl);
 	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
@@ -58,6 +59,15 @@ int DKCefJS::Copy(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKCef::Get(id)->Copy()){ return 0; }
+	return 1;
+}
+
+////////////////////////////////////////
+int DKCefJS::CopyImage(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString url = duk_require_string(ctx, 1);
+	if(!DKCef::Get(id)->CopyImage(url)){ return 0; }
 	return 1;
 }
 

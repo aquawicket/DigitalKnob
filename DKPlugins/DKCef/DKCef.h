@@ -29,6 +29,7 @@ public:
 	bool CloseBrowser(const int& browser);
 	bool CloseDevTools(const int& browser);
 	bool Copy();
+	bool CopyImage(const DKString& url);
 	bool Cut();
 	bool DownloadUrl(const DKString& url);
 	bool FileDialog(const DKString& type, const DKString& title);

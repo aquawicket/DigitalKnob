@@ -62,6 +62,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_CloseBrowser", DKCefV8::CloseBrowser);
 	DKV8::AttachFunction("DKCef_CloseDevTools", DKCefV8::CloseDevTools);
 	DKV8::AttachFunction("DKCef_Copy", DKCefV8::Copy);
+	DKV8::AttachFunction("DKCef_CopyImage", DKCefV8::CopyImage);
 	DKV8::AttachFunction("DKCef_Cut", DKCefV8::Cut);
 	DKV8::AttachFunction("DKCef_DownloadUrl", DKCefV8::DownloadUrl);
 	DKV8::AttachFunction("DKCef_FileDialog", DKCefV8::FileDialog);
@@ -581,6 +582,15 @@ bool DKCefV8::Copy(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
 	if(!DKCef::Get(id)->Copy()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::CopyImage(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString url = args->GetString(1);
+	if(!DKCef::Get(id)->CopyImage(url)){ return false; }
 	return true;
 }
 
