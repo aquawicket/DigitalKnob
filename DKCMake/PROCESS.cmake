@@ -382,6 +382,7 @@ IF(WIN_32)
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	DKCOPY(${DKPROJECT}/DKCef_win32Debug ${DKPROJECT}/assets/DKCEf/win32Debug TRUE) #put the debug dlls back so debug apps still work
+	DKREMOVE(${DKPROJECT}/DKCef_win32Debug)
 	
 	LIST(APPEND WIN_LIBS 
 		kernel32.lib
@@ -439,6 +440,7 @@ IF(WIN_64)
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	DKCOPY(${DKPROJECT}/DKCef_win64Debug ${DKPROJECT}/assets/DKCEf/win64Debug TRUE) #put the debug dlls back so debug apps still work
+	DKREMOVE(${DKPROJECT}/DKCef_win64Debug)
 	
 	LIST(APPEND WIN_LIBS 
 		kernel32.lib
