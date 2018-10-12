@@ -36,6 +36,7 @@ bool Trim(DKString& str);
 DKString toString(const int& num);
 DKString toString(const unsigned int& num);
 DKString toString(const long& num);
+DKString toString(const unsigned long int& num);
 DKString toString(const unsigned long long int& num);
 DKString toString(const float& num);
 DKString toString(const double& num); 

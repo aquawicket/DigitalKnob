@@ -480,6 +480,7 @@ bool DKWindows::KeyIsDown(const int& key)
 ///////////////////////////
 bool DKWindows::LeftClick()
 {
+	DKLog("DKWindows::LeftClick()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;	// We are setting left mouse button down.
@@ -495,6 +496,7 @@ bool DKWindows::LeftClick()
 ///////////////////////////
 bool DKWindows::LeftPress()
 {
+	DKLog("DKWindows::LeftPress()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;	// We are setting left mouse button down.
@@ -505,6 +507,7 @@ bool DKWindows::LeftPress()
 /////////////////////////////
 bool DKWindows::LeftRelease()
 {
+	DKLog("DKWindows::LeftRelease()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_LEFTUP;		// We are setting left mouse button up.
@@ -515,6 +518,7 @@ bool DKWindows::LeftRelease()
 /////////////////////////////////
 bool DKWindows::LowPowerMonitor()
 {
+	DKLog("DKWindows::LowPowerMonitor()\n", DKDEBUG);
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
 	return true;
 }
@@ -522,6 +526,7 @@ bool DKWindows::LowPowerMonitor()
 /////////////////////////////
 bool DKWindows::MiddlePress()
 {
+	DKLog("DKWindows::MiddlePress()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;	// We are setting middle mouse button down.
@@ -532,6 +537,7 @@ bool DKWindows::MiddlePress()
 ///////////////////////////////
 bool DKWindows::MiddleRelease()
 {
+	DKLog("DKWindows::MiddleRelease()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;	// We are setting middle mouse button up.
@@ -542,6 +548,7 @@ bool DKWindows::MiddleRelease()
 //////////////////////////////////////////////////////////////////
 bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory)
 {
+	DKLog("DKWindows::PhysicalMemory()\n", DKDEBUG);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
@@ -553,6 +560,7 @@ bool DKWindows::PhysicalMemory(unsigned long long& physicalMemory)
 //////////////////////////////////////////////////////////////////////
 bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
+	DKLog("DKWindows::PhysicalMemoryUsed()\n", DKDEBUG);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
@@ -564,6 +572,7 @@ bool DKWindows::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 /////////////////////////////////////////////////////////////////////
 bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
+	DKLog("DKWindows::PhysicalMemoryUsedByApp()\n", DKDEBUG);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
 	SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
@@ -575,7 +584,6 @@ bool DKWindows::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 bool DKWindows::PressKey(int key)
 {
 	DKLog("DKWindows::PressKey("+toString(key)+")\n", DKDEBUG);
-
 	INPUT ip;
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
@@ -592,7 +600,6 @@ bool DKWindows::PressKey(int key)
 bool DKWindows::RefreshWindowsEnvironment()
 {
 	DKLog("DKWindows::RefreshWindowsEnvironment()\n", DKDEBUG);
-
 #if !defined(WIN64)
 	DWORD dwReturnValue;
 	::SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, (LPARAM) "Environment", SMTO_ABORTIFHUNG, 5000, &dwReturnValue);
@@ -605,7 +612,6 @@ bool DKWindows::RefreshWindowsEnvironment()
 bool DKWindows::ReleaseKey(int key)
 {
 	DKLog("DKWindows::ReleaseKey("+toString(key)+")\n", DKDEBUG);
-
 	INPUT ip;
 	// Set up a generic keyboard event.
 	ip.type = INPUT_KEYBOARD;
@@ -621,6 +627,7 @@ bool DKWindows::ReleaseKey(int key)
 ////////////////////////////
 bool DKWindows::RightClick()
 {
+	DKLog("DKWindows::RightClick()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;	// We are setting right mouse button down.
@@ -636,6 +643,7 @@ bool DKWindows::RightClick()
 ////////////////////////////
 bool DKWindows::RightPress()
 {
+	DKLog("DKWindows::RightPress()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;	// We are setting right mouse button down.
@@ -646,6 +654,7 @@ bool DKWindows::RightPress()
 //////////////////////////////
 bool DKWindows::RightRelease()
 {
+	DKLog("DKWindows::RightRelease()\n", DKDEBUG);
 	INPUT Input={0};							// Create our input.
 	Input.type = INPUT_MOUSE;					// Let input know we are using the mouse.
 	Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;		// We are setting right mouse button up.
@@ -656,6 +665,7 @@ bool DKWindows::RightRelease()
 ////////////////////////////////////////////
 bool DKWindows::Run(const DKString& command)
 {
+	DKLog("DKWindows::Run("+command+")\n", DKDEBUG);
 	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
 	return true;
 }
@@ -664,7 +674,6 @@ bool DKWindows::Run(const DKString& command)
 bool DKWindows::SetClipboard(const DKString& text)
 {
 	DKLog("DKWindows::SetClipboard("+text+")\n", DKDEBUG);
-
 	if(OpenClipboard(NULL)){
 		HGLOBAL clipbuffer;
 		char * buffer;
@@ -685,7 +694,6 @@ bool DKWindows::SetClipboard(const DKString& text)
 bool DKWindows::SetClipboardFiles(const DKString& filelist)
 {
 	DKLog("DKWindows::SetClipboardFiles("+filelist+")\n", DKDEBUG);
-
 	//char sFiles[] = "C:/digitalknob/README.md\0";
 	DKString sFiles = filelist;
 	replace(sFiles, ",", "\0"); //not working
@@ -711,8 +719,17 @@ bool DKWindows::SetClipboardFiles(const DKString& filelist)
 }
 
 ///////////////////////////////////////////////////////
+bool DKWindows::SetClipboardImage(const DKString& file)
+{
+	DKLog("DKWindows::SetClipboardImage("+file+")\n", DKDEBUG);
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////
 bool DKWindows::SetMainThreadNow(unsigned long int& id)
 {
+	DKLog("DKWindows::SetMainThreadNow("+toString(id)+")\n", DKDEBUG);
 	id = GetCurrentThreadId();
 	return true;
 }
@@ -720,6 +737,7 @@ bool DKWindows::SetMainThreadNow(unsigned long int& id)
 ///////////////////////////////////////////////////////
 bool DKWindows::SetMousePos(const int& x, const int& y)
 {
+	DKLog("DKWindows::SetMousePos("+toString(x)+","+toString(y)+")\n", DKDEBUG);
 	::SetCursorPos(x, y);
 	return true;
 }
@@ -727,6 +745,8 @@ bool DKWindows::SetMousePos(const int& x, const int& y)
 //////////////////////////
 void DKWindows::SetTitle()
 {
+	//TODO - add string variable for title input
+	DKLog("DKWindows::SetTitle()\n", DKDEBUG);
 	/////  Set the window title
 	DKString title; 
 	DKFile::GetExeName(title);
@@ -748,7 +768,6 @@ void DKWindows::SetTitle()
 bool DKWindows::SetVolume(double nVolume) 
 {
 	DKLog("DKWindows::SetVolume("+toString(nVolume)+")\n", DKDEBUG);
-	
 	//Windows Vista and up only
 	if(nVolume > 1.0){nVolume = 1.0;}
 	if(nVolume < 0.0){nVolume = 0.0;}
@@ -803,6 +822,7 @@ bool DKWindows::SetVolume(double nVolume)
 ///////////////////////////////////////
 bool DKWindows::Sleep(int milliseconds)
 {
+	DKLog("DKWindows::Sleep("+toString(milliseconds)+")\n", DKDEBUG);
 	::Sleep(milliseconds);
 	return true;;
 }
@@ -810,6 +830,7 @@ bool DKWindows::Sleep(int milliseconds)
 ////////////////////////////////
 bool DKWindows::TurnOffMonitor()
 {
+	DKLog("DKWindows::TurnOffMonitor()\n", DKDEBUG);
 	Sleep(500); // Eliminate user's interaction for 500 ms
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 2);
 	return true;
@@ -818,6 +839,7 @@ bool DKWindows::TurnOffMonitor()
 ///////////////////////////////
 bool DKWindows::TurnOnMonitor()
 {
+	DKLog("DKWindows::TurnOnMonitor()\n", DKDEBUG);
 	SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) -1);
 	return true;
 }
@@ -825,6 +847,7 @@ bool DKWindows::TurnOnMonitor()
 ////////////////////////////////////////////////////////////////
 bool DKWindows::VirtualMemory(unsigned long long& virtualMemory)
 {
+	DKLog("DKWindows::VirtualMemory()\n", DKDEBUG);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
@@ -836,6 +859,7 @@ bool DKWindows::VirtualMemory(unsigned long long& virtualMemory)
 ////////////////////////////////////////////////////////////////////
 bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
+	DKLog("DKWindows::VirtualMemoryUsed()\n", DKDEBUG);
 	MEMORYSTATUSEX memInfo;
 	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
 	GlobalMemoryStatusEx(&memInfo);
@@ -847,6 +871,7 @@ bool DKWindows::VirtualMemoryUsed(unsigned long long& virtualMemory)
 ///////////////////////////////////////////////////////////////////
 bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
+	DKLog("DKWindows::VirtualMemoryUsedByApp()\n", DKDEBUG);
 	PROCESS_MEMORY_COUNTERS pmc;
 	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
 	SIZE_T virtualMemUsedByMe = pmc.PagefileUsage;
@@ -858,7 +883,6 @@ bool DKWindows::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 bool DKWindows::WaitForImage(const DKString& file, int timeout)
 {
 	DKLog("DKWindows::WaitForImage("+file+","+toString(timeout)+")\n", DKDEBUG);
-	
 	//FIXME - this is blocking,  thread this out
 	int i = 0;
 	int x,y;
@@ -873,8 +897,7 @@ bool DKWindows::WaitForImage(const DKString& file, int timeout)
 ///////////////////////////
 bool DKWindows::WheelDown()
 {
-	//DKLog("DKWindows::WheelDown()\n", DKINFO);
-
+	DKLog("DKWindows::WheelDown()\n", DKDEBUG);
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, -WHEEL_DELTA, NULL);
 	return true;
 }
@@ -882,8 +905,7 @@ bool DKWindows::WheelDown()
 /////////////////////////
 bool DKWindows::WheelUp()
 {
-	//DKLog("DKWindows::WheelUp()\n", DKINFO);
-
+	DKLog("DKWindows::WheelUp()\n", DKDEBUG);
 	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
 	return true;
 }
@@ -892,6 +914,7 @@ bool DKWindows::WheelUp()
 ////////////////////////////
 bool DKWindows::PrintStack()
 {
+	DKLog("DKWindows::PrintStack()\n", DKDEBUG);
 	unsigned int   i;
     void         * stack[ 100 ];
     unsigned short frames;

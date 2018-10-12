@@ -64,6 +64,16 @@ DKString toString(const long& num)
 	return s;
 }
 
+///////////////////////////////////////////////
+DKString toString(const unsigned long int& num)
+{
+	DKString s;
+	std::stringstream out;
+	out << num;
+	s = out.str();
+	return s;
+}
+
 ////////////////////////////////////////////////////
 DKString toString(const unsigned long long int& num)
 {

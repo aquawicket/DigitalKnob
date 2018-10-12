@@ -58,6 +58,7 @@ public:
 	static bool Run(const DKString& command);
 	static bool SetClipboard(const DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
+	static bool SetClipboardImage(const DKString& file);
 	static bool SetMainThreadNow(unsigned long int& id);
 	static bool SetMousePos(const int& x, const int& y);
 	static void SetTitle();
