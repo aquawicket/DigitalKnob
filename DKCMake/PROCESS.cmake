@@ -379,7 +379,8 @@ IF(WIN_32)
 	IF(NOT EXISTS ${DKPROJECT}/assets/USER)
 		FILE(MAKE_DIRECTORY ${DKPROJECT}/assets/USER)
 	ENDIF()
-	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug, ${DKPROJECT}/assets/USER, TRUE)
+	
+	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/assets/USER/win32Debug TRUE)
 	##DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)  ## this may cause problems trying to run CEF app in debug
 	##DKCOPY(${DKPROJECT}/assets/USER/win32Debug, ${DKPROJECT}/assets/DKCEf/win32Debug, TRUE)
 	##DKREMOVE(${DKPROJECT}/assets/USER)
