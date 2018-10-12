@@ -21,6 +21,7 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_GoForward", DKCefJS::GoForward);
 	DKDuktape::AttachFunction("DKCef_NewBrowser", DKCefJS::NewBrowser);
 	DKDuktape::AttachFunction("DKCef_Paste", DKCefJS::Paste);
+	DKDuktape::AttachFunction("DKCef_Popup", DKCefJS::Popup);
 	DKDuktape::AttachFunction("DKCef_Print", DKCefJS::Print);
 	DKDuktape::AttachFunction("DKCef_Reload", DKCefJS::Reload);
 	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus);
@@ -176,6 +177,15 @@ int DKCefJS::Paste(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKCef::Get(id)->Paste()){ return 0; }
+	return 1;
+}
+
+////////////////////////////////////
+int DKCefJS::Popup(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString url = duk_require_string(ctx, 1);
+	if(!DKCef::Get(id)->Popup(url)){ return 0; }
 	return 1;
 }
 

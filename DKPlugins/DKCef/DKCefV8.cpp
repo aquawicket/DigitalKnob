@@ -75,6 +75,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_GoForward", DKCefV8::GoForward);
 	DKV8::AttachFunction("DKCef_NewBrowser", DKCefV8::NewBrowser);
 	DKV8::AttachFunction("DKCef_Paste", DKCefV8::Paste);
+	DKV8::AttachFunction("DKCef_Popup", DKCefV8::Popup);
 	DKV8::AttachFunction("DKCef_Print", DKCefV8::Print);
 	DKV8::AttachFunction("DKCef_Reload", DKCefV8::Reload);
 	DKV8::AttachFunction("DKCef_RemoveFocus", DKCefV8::RemoveFocus);
@@ -709,6 +710,15 @@ bool DKCefV8::Paste(CefArgs args, CefReturn retval)
 {
 	DKString id = args->GetString(0);
 	if(!DKCef::Get(id)->Paste()){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////
+bool DKCefV8::Popup(CefArgs args, CefReturn retval)
+{
+	DKString id = args->GetString(0);
+	DKString url = args->GetString(1);
+	if(!DKCef::Get(id)->Popup(url)){ return false; }
 	return true;
 }
 

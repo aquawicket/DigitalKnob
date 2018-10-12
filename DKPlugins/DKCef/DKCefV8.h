@@ -80,6 +80,7 @@ public:
 	static bool GoForward(CefArgs args, CefReturn retval);
 	static bool NewBrowser(CefArgs args, CefReturn retval);
 	static bool Paste(CefArgs args, CefReturn retval);
+	static bool Popup(CefArgs args, CefReturn retval);
 	static bool Print(CefArgs args, CefReturn retval);
 	static bool Reload(CefArgs args, CefReturn retval);
 	static bool RemoveFocus(CefArgs args, CefReturn retval);

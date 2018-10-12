@@ -535,7 +535,10 @@ bool DKCef::Paste()
 bool DKCef::Popup(const DKString& url)
 {
 	DKLog("DKCef::Popup("+url+")\n", DKDEBUG);
-	//TODO
+	DKString string = "window.open('"+url+"', '_blank', 'width=800,height=600');";
+	int browser_num;
+	GetCurrentBrowser(browser_num);
+	RunJavascript(browser_num, string);
 	return false;
 }
 

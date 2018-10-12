@@ -27,6 +27,7 @@ public:
 	static int GoForward(duk_context* ctx);
 	static int NewBrowser(duk_context* ctx);
 	static int Paste(duk_context* ctx);
+	static int Popup(duk_context* ctx);
 	static int Print(duk_context* ctx);
 	static int Reload(duk_context* ctx);
 	static int RemoveFocus(duk_context* ctx);
