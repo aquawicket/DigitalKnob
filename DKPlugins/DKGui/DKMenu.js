@@ -20,7 +20,7 @@ function DKMenu_OnEvent(event)
 ////////////////////////////////////
 function DKMenu_ValidatePosition(id)
 {
-	DKLog("DKMenu_ValidatePosition("+id+")\n", DKDEBUG);
+	DKLog("DKMenu_ValidatePosition("+id+")\n");//, DKDEBUG);
 	//DKLog("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//DKLog("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
@@ -34,6 +34,7 @@ function DKMenu_ValidatePosition(id)
 	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"rem");
 	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"px");
 	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"rem");
+	DKWidget_RemoveProperty(id, "right");
 	
 	//make sure menu is within window
 	var win_width = Number(DKWidget_GetClientWidth("body"));
