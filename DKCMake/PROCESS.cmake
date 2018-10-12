@@ -375,16 +375,25 @@ IF(WIN_32)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
-	## copy icon and assets
+	#### TODO - need to save everything in a temporary location, zip the assets, then move them back
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
-	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/DKCef_win32Debug TRUE)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug) #remove debug dll files before packing exe with assets
+	
+	# backup files not going in the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# remove files before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
 	DKZIP(${DKPROJECT}/assets) #zip the assets
-	DKCOPY(${DKPROJECT}/DKCef_win32Debug ${DKPROJECT}/assets/DKCEf/win32Debug TRUE) #put the debug dlls back so debug apps still work
-	DKREMOVE(${DKPROJECT}/DKCef_win32Debug)
+	
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	DKREMOVE(${DKPROJECT}/Backup)
 	
 	LIST(APPEND WIN_LIBS 
 		kernel32.lib
