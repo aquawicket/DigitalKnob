@@ -375,12 +375,13 @@ IF(WIN_32)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
+	## copy icon and assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/DKCef_win32Debug TRUE)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
-	DKCOPY(${DKPROJECT}/DKCef_win32Debug ${DKPROJECT}/assets/DKCEf/win32Debug TRUE)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug) #remove debug dll files before packing exe with assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKZIP(${DKPROJECT}/assets)
+	DKZIP(${DKPROJECT}/assets) #zip the assets
+	DKCOPY(${DKPROJECT}/DKCef_win32Debug ${DKPROJECT}/assets/DKCEf/win32Debug TRUE) #put the debug dlls back so debug apps still work
 	
 	LIST(APPEND WIN_LIBS 
 		kernel32.lib
@@ -431,11 +432,13 @@ IF(WIN_64)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
-	## copy icon
+	## copy icon and assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/win64Debug ${DKPROJECT}/DKCef_win64Debug TRUE)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug) #remove debug dll files before packing exe with assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
-	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug) ## this may cause problems trying to run CEF app in debug
-	DKZIP(${DKPROJECT}/assets)
+	DKZIP(${DKPROJECT}/assets) #zip the assets
+	DKCOPY(${DKPROJECT}/DKCef_win64Debug ${DKPROJECT}/assets/DKCEf/win64Debug TRUE) #put the debug dlls back so debug apps still work
 	
 	LIST(APPEND WIN_LIBS 
 		kernel32.lib
