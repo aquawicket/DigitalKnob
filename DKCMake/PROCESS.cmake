@@ -381,7 +381,7 @@ IF(WIN_32)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug) #remove debug dll files before packing exe with assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
-	DKREMOVE(${DKPROJECT}/assets/cef.txt)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	DKCOPY(${DKPROJECT}/DKCef_win32Debug ${DKPROJECT}/assets/DKCEf/win32Debug TRUE) #put the debug dlls back so debug apps still work
 	DKREMOVE(${DKPROJECT}/DKCef_win32Debug)
@@ -441,7 +441,7 @@ IF(WIN_64)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win64Debug) #remove debug dll files before packing exe with assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
-	DKREMOVE(${DKPROJECT}/assets/cef.txt)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	DKCOPY(${DKPROJECT}/DKCef_win64Debug ${DKPROJECT}/assets/DKCEf/win64Debug TRUE) #put the debug dlls back so debug apps still work
 	DKREMOVE(${DKPROJECT}/DKCef_win64Debug)
