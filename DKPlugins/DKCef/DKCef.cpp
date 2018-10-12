@@ -341,11 +341,17 @@ bool DKCef::CopyImage(const DKString& url)
 	DKLog("DKCef::CopyImage("+url+")\n", DKDEBUG);
 	NewBrowser();
 	int num;
-	GetCurrentBrowser(num);
-	SetUrl(num, url);
-	current_browser->GetFocusedFrame()->Copy();
-	this->CloseBrowser(num);
-	return true;
+	GetBrowsers(num);
+	DKLog("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n", DKINFO);
+	SetUrl(num-1, url);
+
+	//FIXME - we can't copy until the frame is loaded with the image. 
+	//        need to use a callback or something. :P
+	//while(browsers[num-1]->IsLoading()){}
+	browsers[num-1]->GetMainFrame()->Copy();  //NOT WORKING, url not loaded yet. 
+
+	CloseBrowser(num-1);
+	return false; //return false until this is working
 }
 
 /////////////////
