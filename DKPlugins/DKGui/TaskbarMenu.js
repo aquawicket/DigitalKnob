@@ -71,7 +71,9 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenTetris")){
-		DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
+		DKCreate("DKGui/DKFrame.js", function(){
+			DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
+		});
 		/*
 		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
 		DKWidget_SetProperty(div, "position", "absolute");
