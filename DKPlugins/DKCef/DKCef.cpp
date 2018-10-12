@@ -326,6 +326,22 @@ bool DKCef::CloseDevTools(const int& browser)
 	return true;
 }
 
+//////////////////
+bool DKCef::Copy()
+{
+	DKLog("DKCef::Copy()\n", DKDEBUG);
+	current_browser->GetFocusedFrame()->Copy();
+	return true;
+}
+
+/////////////////
+bool DKCef::Cut()
+{
+	DKLog("DKCef::Cut()\n", DKDEBUG);
+	current_browser->GetFocusedFrame()->Cut();
+	return true;
+}
+
 ////////////////////////////////////////////
 bool DKCef::DownloadUrl(const DKString& url)
 {

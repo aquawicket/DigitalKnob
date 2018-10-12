@@ -66,6 +66,8 @@ public:
 	//Cef JS functions
 	static bool CloseBrowser(CefArgs args, CefReturn retval);
 	static bool CloseDevTools(CefArgs args, CefReturn retval);
+	static bool Copy(CefArgs args, CefReturn retval);
+	static bool Cut(CefArgs args, CefReturn retval);
 	static bool DownloadUrl(CefArgs args, CefReturn retval);
 	static bool FileDialog(CefArgs args, CefReturn retval);
 	static bool Find(CefArgs args, CefReturn retval);
