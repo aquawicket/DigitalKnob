@@ -154,7 +154,9 @@ bool DKUpdate::DoUpdate()
 		DKLog("android updates not setup yet", DKERROR);
 		DKFile::ChDir(DKFile::local_assets);
 		DKFile::Delete(DKFile::local_assets+filename+"_dl");
-		DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+filename+"_dl");
+		if(!DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+filename+"_dl")){
+			return false;
+		}
 		DKFile::Rename(DKFile::local_assets+filename+"_dl", filename, true);
 		DKFile::Delete(DKFile::local_assets+"ASSETS"); //reload assets
 #ifdef ANDROID
@@ -180,7 +182,9 @@ bool DKUpdate::DoUpdate()
 
 	//Apply .exe update
 	DKFile::Delete(file+"_dl");
-	DKCurl::Get("DKCurlUpdate")->Download(url,file+"_dl"); 
+	if(!DKCurl::Get("DKCurlUpdate")->Download(url,file+"_dl")){
+		return false;
+	}
 	DKFile::Delete(file+".old");
 	DKFile::Rename(file,file+".old",true); //we'll leave .old behind for backup 
 	//DKFile::Delete(file+".old");
