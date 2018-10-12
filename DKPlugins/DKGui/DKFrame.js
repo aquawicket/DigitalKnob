@@ -282,8 +282,8 @@ function DKFrame_MaximizeButton(id)
 		
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKWidget_SetProperty(arry[4], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
-		DKWidget_SetProperty(arry[4], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
+		DKWidget_SetProperty(arry[5], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
+		DKWidget_SetProperty(arry[5], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
 	}
 	else{
 		DKFrame_StoreSize(frame);
@@ -296,8 +296,8 @@ function DKFrame_MaximizeButton(id)
 		
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKWidget_SetProperty(arry[4], "width", "100%");
-		DKWidget_SetProperty(arry[4], "height", "100%");
+		DKWidget_SetProperty(arry[5], "width", "100%");
+		DKWidget_SetProperty(arry[5], "height", "100%");
 	}
 }
 
@@ -339,6 +339,7 @@ function DKFrame_Close(id)
 	DKRemoveEvent("DKFrame_close"+num, "click", DKFrame_OnEvent);
 	DKRemoveEvent("DKFrame_maximize"+num, "click", DKFrame_OnEvent);
 	DKRemoveEvent("DKFrame_minimize"+num, "click", DKFrame_OnEvent);
+	DKRemoveEvent("DKFrame_reload"+num, "click", DKFrame_OnEvent);
 	DKRemoveEvent("DKFrame_titlebartext"+num, "dblclick", DKFrame_OnEvent);
 	DKRemoveEvent("DKFrame_frame"+num, "resize", DKFrame_OnEvent);
 	
