@@ -113,6 +113,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_RunDuktape", DKJS::RunDuktape);
 	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard);
 	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles);
+	DKDuktape::AttachFunction("DK_SetClipboardImage", DKJS::SetClipboardImage);
 	DKDuktape::AttachFunction("DK_SetCursorPos", DKJS::SetCursorPos);
 	DKDuktape::AttachFunction("DK_SetFramerate", DKJS::SetFramerate);
 	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog);
