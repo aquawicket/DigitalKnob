@@ -4,6 +4,7 @@
 #include "DKWebSockets/DKWebSockets.h"
 
 uWS::WebSocket<true>* DKWebSockets::_ws;
+uWS::Hub DKWebSockets::h;
 char* DKWebSockets::_message;
 size_t DKWebSockets::_length;
 uWS::OpCode DKWebSockets::_opCode;

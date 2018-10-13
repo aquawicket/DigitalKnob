@@ -16,7 +16,7 @@ public:
 
 	static bool ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode);
 	static bool SendMessage(const DKString& message);
-	uWS::Hub h;
+	static uWS::Hub h;
 	static uWS::WebSocket<true>* _ws;
 	static char* _message;
 	static size_t _length;
