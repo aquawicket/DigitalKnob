@@ -111,6 +111,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_RightClick", DKJS::RightClick);
 	DKDuktape::AttachFunction("DK_Run", DKJS::Run);
 	DKDuktape::AttachFunction("DK_RunDuktape", DKJS::RunDuktape);
+	DKDuktape::AttachFunction("DK_SetBrightness", DKJS::SetBrightness);
 	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard);
 	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles);
 	DKDuktape::AttachFunction("DK_SetClipboardImage", DKJS::SetClipboardImage);
@@ -907,6 +908,14 @@ int DKJS::RunDuktape(duk_context* ctx)
 		return 0;
 	}
 	duk_push_string(ctx, rval.c_str());
+	return 1;
+}
+
+/////////////////////////////////////////
+int DKJS::SetBrightness(duk_context* ctx)
+{
+	int percent = duk_require_int(ctx, 0);
+	if(!DKUtil::SetBrightness(percent)){ return 0; }
 	return 1;
 }
 

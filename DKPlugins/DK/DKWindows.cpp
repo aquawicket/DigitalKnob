@@ -10,6 +10,10 @@
 #include <psapi.h>
 #include "shlobj.h"
 
+//Monitor brightness
+#include "PhysicalMonitorEnumerationAPI.h"
+#include "HighLevelMonitorConfigurationAPI.h"
+
 HINSTANCE DKWindows::hInstance = 0L;
 HWND DKWindows::consoleWindow;
 
@@ -667,6 +671,37 @@ bool DKWindows::Run(const DKString& command)
 {
 	DKLog("DKWindows::Run("+command+")\n", DKDEBUG);
 	ShellExecute(NULL,NULL,command.c_str(),NULL,NULL,SW_SHOWNORMAL); //TODO: error control
+	return true;
+}
+
+////////////////////////////////////////////////
+bool DKWindows::SetBrightness(const int& percent)
+{
+	// Prepare variables
+	HMONITOR hMonitor = NULL;
+	HMONITOR hMonitorTest = NULL;
+	DWORD cPhysicalMonitors;
+	LPPHYSICAL_MONITOR pPhysicalMonitors = NULL;
+
+	// Get the screen
+	HWND hWnd = GetDesktopWindow();
+	hMonitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTOPRIMARY);
+
+	_BOOL success = GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, &cPhysicalMonitors);
+	if(success){
+		pPhysicalMonitors = (LPPHYSICAL_MONITOR)malloc(cPhysicalMonitors* sizeof(PHYSICAL_MONITOR));        
+		if(pPhysicalMonitors != NULL){
+			success = GetPhysicalMonitorsFromHMONITOR(hMonitor,cPhysicalMonitors, pPhysicalMonitors);
+			HANDLE hPhysicalMonitor = pPhysicalMonitors[0].hPhysicalMonitor;
+
+			// Set brightness to 50%
+			DWORD dwNewBrightness = percent;
+			success = SetMonitorBrightness(hPhysicalMonitor, dwNewBrightness);
+
+			// Free resources
+			free(pPhysicalMonitors);
+		}
+	}
 	return true;
 }
 

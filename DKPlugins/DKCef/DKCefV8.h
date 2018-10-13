@@ -48,6 +48,7 @@ public:
 	static bool ReleaseKey(CefArgs args, CefReturn retval);
 	static bool Run(CefArgs args, CefReturn retval);
 	static bool RunDuktape(CefArgs args, CefReturn retval);
+	static bool SetBrightness(CefArgs args, CefReturn retval);
 	static bool SetClipboard(CefArgs args, CefReturn retval);
 	static bool SetClipboardFiles(CefArgs args, CefReturn retval);
 	static bool SetClipboardImage(CefArgs args, CefReturn retval);

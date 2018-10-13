@@ -56,6 +56,7 @@ public:
 	static bool RightPress();
 	static bool RightRelease();
 	static bool Run(const DKString& command);
+	static bool SetBrightness(const int& percent);
 	static bool SetClipboard(const DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
 	static bool SetClipboardImage(const DKString& file);

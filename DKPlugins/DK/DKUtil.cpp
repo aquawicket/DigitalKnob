@@ -797,6 +797,16 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 	return false;
 }
 
+//////////////////////////////////////////////
+bool DKUtil::SetBrightness(const int& percent)
+{
+#ifdef WIN32
+	return DKWindows::SetBrightness(percent);
+#endif
+	DKLog("DKUtil::SetBrightness() not implemented on this OS \n", DKWARN);
+	return false;
+}
+
 //TODO - This timer needs to be moved to DKRocket/DKRocket.js
 //       Duktape currently blocks when using timers, so we've placed it here for now.
 //       Send a timer event every second

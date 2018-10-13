@@ -64,6 +64,7 @@ public:
 	static bool RightRelease();
 	static bool Round(double& num);
 	static bool Run(const DKString& command, const DKString& params);
+	static bool SetBrightness(const int& percent);
 	static bool SendTick();
 	static bool SetClipboard(const DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);

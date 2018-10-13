@@ -41,6 +41,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
 	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
+	DKV8::AttachFunction("DK_SetBrightness", DKCefV8::SetBrightness);
 	DKV8::AttachFunction("DK_SetClipboard", DKCefV8::SetClipboard);
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
 	DKV8::AttachFunction("DK_SetClipboardImage", DKCefV8::SetClipboardImage);
@@ -358,6 +359,13 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 	}
 	*/
 	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::SetBrightness(CefArgs args, CefReturn retval)
+{
+	int percent = args->GetInt(0);
+	return DKUtil::SetBrightness(percent);
 }
 
 //////////////////////////////////////////////////////////
