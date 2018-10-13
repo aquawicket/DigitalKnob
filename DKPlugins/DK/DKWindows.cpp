@@ -924,7 +924,7 @@ bool DKWindows::SetVolume(int& percent)
 ///////////////////////////////////////
 bool DKWindows::Sleep(int milliseconds)
 {
-	DKLog("DKWindows::Sleep("+toString(milliseconds)+")\n", DKDEBUG);
+	//DKLog("DKWindows::Sleep("+toString(milliseconds)+")\n", DKDEBUG);
 	::Sleep(milliseconds);
 	return true;;
 }
