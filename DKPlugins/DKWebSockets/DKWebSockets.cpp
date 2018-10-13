@@ -6,7 +6,6 @@ bool DKWebSockets::Init()
 {
 	//DKClass::DKCreate("DKWebSocketsJS");
 	//DKClass::DKCreate("DKWebSocketsV8");
-/
 	return true;
 }
 
