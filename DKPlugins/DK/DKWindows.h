@@ -38,7 +38,7 @@ public:
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
 	static bool GetThreadId(unsigned long int& id);
-	static bool GetVolume(float& volume);
+	static bool GetVolume(int& percent);
 	static bool KeyIsDown(const int& key);
 	static bool LeftClick();
 	static bool LeftPress();
@@ -63,7 +63,7 @@ public:
 	static bool SetMainThreadNow(unsigned long int& id);
 	static bool SetMousePos(const int& x, const int& y);
 	static void SetTitle();
-	static bool SetVolume(double nVolume);
+	static bool SetVolume(int& percent);
 	static bool Sleep(int milliseconds);
 	static bool TurnOffMonitor();
 	static bool TurnOnMonitor();

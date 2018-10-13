@@ -441,8 +441,8 @@ bool DKWindows::GetThreadId(unsigned long int& id)
 	return true;
 }
 
-////////////////////////////////////////
-bool DKWindows::GetVolume(float& volume)
+///////////////////////////////////////
+bool DKWindows::GetVolume(int& percent)
 {
 	DKLog("DKWindows::GetVolume()\n", DKDEBUG);
 	bool bScalar = true;
@@ -452,8 +452,7 @@ bool DKWindows::GetVolume(float& volume)
 
 	CoInitialize(NULL);
 	IMMDeviceEnumerator *deviceEnumerator = NULL;
-	hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, 
-		__uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
+	hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
 	IMMDevice *defaultDevice = NULL;
 
 	hr = deviceEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &defaultDevice);
@@ -461,15 +460,14 @@ bool DKWindows::GetVolume(float& volume)
 	deviceEnumerator = NULL;
 
 	IAudioEndpointVolume *endpointVolume = NULL;
-	hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), 
-		CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
+	hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
 	defaultDevice->Release();
 	defaultDevice = NULL;
 
-	// -------------------------
-	volume = 0;
+	float volume;
 	endpointVolume->GetMasterVolumeLevel(&volume);
 	hr = endpointVolume->GetMasterVolumeLevelScalar(&volume);
+	percent = volume * 100;
 	return true;
 }
 
@@ -873,23 +871,22 @@ void DKWindows::SetTitle()
 	SetConsoleTitle(title.c_str());
 }
 
-/////////////////////////////////////////
-bool DKWindows::SetVolume(double nVolume) 
+///////////////////////////////////////
+bool DKWindows::SetVolume(int& percent)
 {
-	DKLog("DKWindows::SetVolume("+toString(nVolume)+")\n", DKDEBUG);
+	DKLog("DKWindows::SetVolume("+toString(percent)+")\n", DKDEBUG);
 	//Windows Vista and up only
-	if(nVolume > 1.0){nVolume = 1.0;}
-	if(nVolume < 0.0){nVolume = 0.0;}
+	if(percent > 100){percent = 100;}
+	if(percent < 0){percent = 0;}
 	bool bScalar = true;
     HRESULT hr=NULL;
     bool decibels = false;
     bool scalar = false;
-    double newVolume=nVolume;
+    double newVolume = (double)percent / 100;
  
     CoInitialize(NULL);
     IMMDeviceEnumerator *deviceEnumerator = NULL;
-    hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, 
-                          __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
+    hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IMMDeviceEnumerator), (LPVOID *)&deviceEnumerator);
     IMMDevice *defaultDevice = NULL;
  
     hr = deviceEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &defaultDevice);
@@ -897,12 +894,10 @@ bool DKWindows::SetVolume(double nVolume)
     deviceEnumerator = NULL;
  
     IAudioEndpointVolume *endpointVolume = NULL;
-    hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), 
-         CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
+    hr = defaultDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_INPROC_SERVER, NULL, (LPVOID *)&endpointVolume);
     defaultDevice->Release();
     defaultDevice = NULL;
  
-    // -------------------------
     float currentVolume = 0;
     endpointVolume->GetMasterVolumeLevel(&currentVolume);
     //printf("Current volume in dB is: %f\n", currentVolume);
@@ -913,18 +908,14 @@ bool DKWindows::SetVolume(double nVolume)
     //AfxMessageBox(strCur);
 
     // printf("Current volume as a scalar is: %f\n", currentVolume);
-    if (bScalar==false)
-    {
+    if (bScalar==false){
         hr = endpointVolume->SetMasterVolumeLevel((float)newVolume, NULL);
     }
-    else if (bScalar==true)
-    {
+    else if (bScalar==true){
         hr = endpointVolume->SetMasterVolumeLevelScalar((float)newVolume, NULL);
     }
     endpointVolume->Release();
- 
     CoUninitialize();
- 
     return true;
 }
 

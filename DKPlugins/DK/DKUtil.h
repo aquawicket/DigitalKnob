@@ -42,7 +42,7 @@ public:
 	static bool GetThreadId(unsigned long int& id);
 	static bool GetTicks(long& ticks);
 	static bool GetTime(DKString& _time);
-	static bool GetVolume(float& volume);
+	static bool GetVolume(int& percent);
 	static bool InMainThread();
 	static bool InitFps();
 	static bool InitFramerate();
@@ -72,7 +72,7 @@ public:
 	static bool SetFramerate(const int& fps);
 	static bool SetMainThreadNow(); //ONLY SET THIS FROM THE MAIN THREAD ONCE
 	static bool SetMousePos(const int& x, const int& y);
-	static bool SetVolume(const double& volume);
+	static bool SetVolume(int& percent);
 	static bool Sleep(const int& milliseconds);
 	static bool StrokeKey(const int& key);
 	static bool System(const DKString& command);

@@ -467,11 +467,11 @@ bool DKUtil::GetTime(DKString& _time)
 	return true;
 }
 
-/////////////////////////////////////
-bool DKUtil::GetVolume(float& volume)
+////////////////////////////////////
+bool DKUtil::GetVolume(int& percent)
 {
 #ifdef WIN32
-	return DKWindows::GetVolume(volume);
+	return DKWindows::GetVolume(percent);
 #endif
 #ifdef LINUX
 	return DKLinux::GetVolume(volume);
@@ -902,14 +902,14 @@ bool DKUtil::SetMousePos(const int& x, const int& y)
 	return false;
 }
 
-////////////////////////////////////////////
-bool DKUtil::SetVolume(const double& volume)
+////////////////////////////////////
+bool DKUtil::SetVolume(int& percent)
 {
 #ifdef WIN32
-	return DKWindows::SetVolume(volume);
+	return DKWindows::SetVolume(percent);
 #endif
 #ifdef LINUX
-	return DKLinux::SetVolume(volume);
+	return DKLinux::SetVolume(percent);
 #endif
 	DKLog("DKUtil::SetVolume() not implemented on this OS\n", DKWARN);
 	return false;

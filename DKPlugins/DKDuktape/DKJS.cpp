@@ -686,9 +686,9 @@ int DKJS::GetValue(duk_context* ctx)
 /////////////////////////////////////
 int DKJS::GetVolume(duk_context* ctx)
 {
-	float volume;
-	if(!DKUtil::GetVolume(volume)){ return 0; }
-	duk_push_number(ctx, volume);
+	int percent;
+	if(!DKUtil::GetVolume(percent)){ return 0; }
+	duk_push_number(ctx, percent);
 	return 1;
 }
 
@@ -963,8 +963,8 @@ int DKJS::SetFramerate(duk_context* ctx)
 /////////////////////////////////////
 int DKJS::SetVolume(duk_context* ctx)
 {
-	double volume = (double)duk_require_number(ctx, 0);
-	if(!DKUtil::SetVolume(volume)){ return 0; }
+	int percent = duk_require_int(ctx, 0);
+	if(!DKUtil::SetVolume(percent)){ return 0; }
 	return 1;
 }
 

@@ -261,19 +261,19 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////
 bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 {
-	float volume;
-	if(!DKUtil::GetVolume(volume)){ return false; }
-	DKLog("DKCefV8::GetVolume(): volume ="+toString(volume)+"\n", DKINFO);
-	if(!retval->SetDouble(0, volume)){ return false; }
+	int percent;
+	if(!DKUtil::GetVolume(percent)){ return false; }
+	DKLog("DKCefV8::GetVolume(): volume ="+toString(percent)+"\n", DKINFO);
+	if(!retval->SetInt(0, percent)){ return false; }
 	return 1;
 }
 
 ///////////////////////////////////////////////////////
 bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
 {
-	double volume = args->GetDouble(0);
-	DKLog("DKCefV8::SetVolume(): volume ="+toString(volume)+"\n", DKINFO);
-	if(!DKUtil::SetVolume(volume)){ return false; }
+	int percent = args->GetInt(0);
+	DKLog("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n", DKINFO);
+	if(!DKUtil::SetVolume(percent)){ return false; }
 	return 1;
 }
 
