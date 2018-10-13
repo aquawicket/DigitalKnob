@@ -27,4 +27,3 @@ public:
 REGISTER_OBJECT(DKWebSockets, true);
 
 #endif //DKWebSockets_H
-
