@@ -7,6 +7,7 @@
 #include "DKThread/DKThread.h"
 #include "DKRocket/DKRocketToRML.h"
 #include "DKWidget/DKWidget.h"
+#include "DKDebug/DKDebug.h"
 
 #define DRAG_FIX 1
 DKRocket* DKWidget::dkRocket;
@@ -1014,7 +1015,8 @@ bool DKWidget::GetProperty(DKElement* element, const DKString& name, DKString& v
 bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKString& value)
 {
 	if(!element){
-		DKLog("DKWidget::SetProperty(): element invalid. \n", DKWARN);
+		DKLog("DKWidget::SetProperty("+name+","+value+"): element invalid\n", DKWARN);
+		DKDebug::ShowStackTrace();
 		return false;
 	}
 	if(name.empty()){
