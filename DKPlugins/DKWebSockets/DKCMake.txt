@@ -2,3 +2,4 @@
 DKDEPEND(uWebSockets-master)
 
 DKPLUGIN(DKWebSockets)
+DKASSETS(DKWebSockets)
