@@ -30,6 +30,7 @@ bool DKWebSockets::End()
 bool DKWebSockets::CloseServer()
 {
 	h.getDefaultGroup<uWS::SERVER>().close();
+	DKLog("DKWebSockets::CreateServer(): Server closed\n", DKINFO);
 	return true;
 }
 
@@ -39,6 +40,7 @@ bool DKWebSockets::CreateServer()
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		ProcessMessage(ws, message, length, opCode);
 	});
+	DKLog("DKWebSockets::CreateServer(): Server started...\n", DKINFO);
 	return true;
 }
 
