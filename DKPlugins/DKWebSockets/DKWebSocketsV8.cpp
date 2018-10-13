@@ -1,7 +1,7 @@
 #ifdef USE_DKCef
 #include "DK/DKApp.h"
-#include "DKMidi/DKMidi.h"
-#include "DKMidi/DKWebSocketsV8.h"
+#include "DKWebSockets/DKWebSockets.h"
+#include "DKWebSockets/DKWebSocketsV8.h"
 
 ///////////////////////////
 bool DKWebSocketsV8::Init()

@@ -1,5 +1,5 @@
 #ifdef USE_DKDuktape 
-#include "DKMidi.h"
+#include "DKWebSockets.h"
 #include "DKWebSocketsJS.h"
 
 
