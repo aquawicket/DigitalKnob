@@ -7,8 +7,6 @@ bool DKWebSockets::Init()
 	//DKClass::DKCreate("DKWebSocketsJS");
 	//DKClass::DKCreate("DKWebSocketsV8");
 
-	uWS::Hub h;
-	
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode) {
 		ws->send(message, length, opCode);
 	});
