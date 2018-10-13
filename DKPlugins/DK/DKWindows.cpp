@@ -690,12 +690,14 @@ bool DKWindows::SetBrightness(const int& percent)
 		pPhysicalMonitors = (LPPHYSICAL_MONITOR)malloc(cPhysicalMonitors* sizeof(PHYSICAL_MONITOR));        
 		if(pPhysicalMonitors != NULL){
 			success = GetPhysicalMonitorsFromHMONITOR(hMonitor,cPhysicalMonitors, pPhysicalMonitors);
-			HANDLE hPhysicalMonitor = pPhysicalMonitors[0].hPhysicalMonitor;
-
-			// Set brightness to 50%
+			
+			int count = (int)cPhysicalMonitors;
 			DWORD dwNewBrightness = percent;
-			success = SetMonitorBrightness(hPhysicalMonitor, dwNewBrightness);
 
+			for(int i=0; i<count; i++){
+				HANDLE hPhysicalMonitor = pPhysicalMonitors[i].hPhysicalMonitor;
+				success = SetMonitorBrightness(hPhysicalMonitor, dwNewBrightness);
+			}
 			// Free resources
 			free(pPhysicalMonitors);
 		}
