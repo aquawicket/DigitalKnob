@@ -1,5 +1,9 @@
+//https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
+
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
+
+
 
 /////////////////////////
 bool DKWebSockets::Init()
@@ -7,8 +11,10 @@ bool DKWebSockets::Init()
 	//DKClass::DKCreate("DKWebSocketsJS");
 	//DKClass::DKCreate("DKWebSocketsV8");
 
-	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode) {
-		ws->send(message, length, opCode);
+	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
+		ProcessMessage(ws, message, length, opCode);
+		//ws->send(message, length, opCode); //echo
+		
 	});
 
 	DKApp::AppendLoopFunc(&DKWebSockets::Loop, this);
@@ -18,6 +24,7 @@ bool DKWebSockets::Init()
 ////////////////////////
 bool DKWebSockets::End()
 {
+	h.getDefaultGroup<uWS::SERVER>().close();
 	return true;
 }
 
@@ -27,4 +34,22 @@ void DKWebSockets::Loop()
 	if(h.listen(3000)){
 		h.poll();
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode)
+{
+	//TODO
+	DKLog("DKWebSockets::ProcessMessage()\n", DKINFO);
+	ws->send(message, length, opCode); //echo
+	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKWebSockets::SendMessage(const DKString& message)
+{
+	//TODO
+	DKLog("DKWebSockets::SendMessage("+message+")\n", DKINFO);
+	
+	return false;
 }
