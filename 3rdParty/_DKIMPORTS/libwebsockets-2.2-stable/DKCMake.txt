@@ -6,8 +6,8 @@ DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
 ### LINK ###
 DKINCLUDE(${WEBSOCKETS}/lib)
 DKINCLUDE(${WEBSOCKETS}/${OS}/Release)
-##WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/libwebsockets.lib)
-##WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/libwebsockets.lib)
+WIN_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/websockets_static.lib)
+WIN_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/websockets_static.lib)
 ##APPLE_DEBUG_LIB(${WEBSOCKETS}/${OS}/lib/Debug/libwebsockets.a)
 ##APPLE_RELEASE_LIB(${WEBSOCKETS}/${OS}/lib/Release/libwebsockets.a)
 LINUX_DEBUG_LIB(${WEBSOCKETS}/linux64/Debug/lib/libwebsockets.a)
@@ -17,10 +17,10 @@ LINUX_RELEASE_LIB(${WEBSOCKETS}/linux64/Release/lib/libwebsockets.a)
 
 
 ### COMPILE ###
-#DKSETPATH(${WEBSOCKETS}/${OS})
-#WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON ${WEBSOCKETS})
-#WIN32_VS_DEBUG(libwebsockets libwebsockets.sln WEBSOCKETS)
-#WIN32_VS_RELEASE(libwebsockets libwebsockets.sln WEBSOCKETS)
+DKSETPATH(${WEBSOCKETS}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON -LWS_WITH_SSL=OFF ${WEBSOCKETS})
+WIN32_VS_DEBUG(libwebsockets-2.2-stable libwebsockets.sln websockets)
+WIN32_VS_RELEASE(libwebsockets-2.2-stable libwebsockets.sln websockets)
 
 DKSETPATH(${WEBSOCKETS}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DLWS_WITH_SSL=OFF ${WEBSOCKETS})
