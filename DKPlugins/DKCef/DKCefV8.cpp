@@ -12,6 +12,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
 	
+	DKV8::AttachFunction("DK_Beep", DKCefV8::Beep);
 	DKV8::AttachFunction("DK_ClickImage", DKCefV8::ClickImage);
 	DKV8::AttachFunction("DK_CpuUsed", DKCefV8::CpuUsed);
 	DKV8::AttachFunction("DK_CpuUsedByApp", DKCefV8::CpuUsedByApp);
@@ -134,6 +135,13 @@ bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 }
 
 
+
+//////////////////////////////////////////////////
+bool DKCefV8::Beep(CefArgs args, CefReturn retval)
+{
+	DKUtil::Beep();
+	return true;
+}
 
 ////////////////////////////////////////////////////////
 bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
