@@ -16,7 +16,6 @@ function app_LoadPlugins()
 	}
 	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
-	DKCreate("DKWebSockets"); //Test
 }
 
 ///////////////////////
