@@ -2,7 +2,7 @@
 #include "DKWebSockets/DKWebSockets.h"
 
 //#include "libwebsockets.h"
-
+#include "src/uWS.h"
 
 /////////////////////////
 bool DKWebSockets::Init()
@@ -10,8 +10,16 @@ bool DKWebSockets::Init()
 	//DKClass::DKCreate("DKWebSocketsJS");
 	//DKClass::DKCreate("DKWebSocketsV8");
 
-	//TODO look into test-echo.c for details on how to build a simple echo server 
-	//C:\digitalknob\DK\3rdParty\libwebsockets-2.2-stable\test-server\test-echo.c
+	uWS::Hub h;
+	
+	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode) {
+		ws->send(message, length, opCode);
+	});
+
+	if (h.listen(3000)) {
+		h.run();
+	}
+
 	return true;
 }
 
