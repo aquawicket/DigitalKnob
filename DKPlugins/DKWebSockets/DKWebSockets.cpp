@@ -17,7 +17,6 @@ bool DKWebSockets::Init()
 
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		ProcessMessage(ws, message, length, opCode);
-		//ws->send(message, length, opCode); //echo
 	});
 
 	DKApp::AppendLoopFunc(&DKWebSockets::Loop, this);
@@ -37,19 +36,9 @@ void DKWebSockets::Loop()
 	if(h.listen(3000)){
 		h.poll();
 	}
-
-	// Test sending..   fails
-	/*
-	long ticks;
-	DKUtil::GetTicks(ticks);
-	DKLog("DKUtil::GetTicks() = "+toString(ticks)+"\n", DKINFO);
-	if(ticks > 26169041){
-		SendMessage("test");
-	}
-	*/
 }
 
-//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
 	//TODO
@@ -58,7 +47,7 @@ bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_
 	_message = message;
 	_length = length;
 	_opCode = opCode;
-	//ws->send(message, length, opCode); //echo
+	DKEvent::SendEvent("GLOBAL", "OnWebSocketMessage", DKString(message));
 	return false;
 }
 
