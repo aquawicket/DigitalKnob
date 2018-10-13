@@ -436,7 +436,7 @@ void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 {
 	//DKLog("DKCefApp::OnUncaughtException()\n", DKDEBUG);
 	DKString msg = exception->GetMessage().ToString();
-	if(has(msg,"DKSendEvent in not defined")){ return; } //ignore DKSendEvent not existing
+	if(has(msg,"DKSendEvent sn not defined")){ return; } //ignore DKSendEvent not existing
 
 	DKLog("#################### Uncaught Exception ####################\n", DKERROR);
 	DKLog("Exception: "+msg+"\n", DKERROR);
