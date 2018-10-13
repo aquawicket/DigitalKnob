@@ -435,9 +435,10 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace)
 {
 	//DKLog("DKCefApp::OnUncaughtException()\n", DKDEBUG);
+	DKString msg = exception->GetMessage().ToString();
+	if(has(msg,"DKSendEvent in not defined")){ return; } //ignore DKSendEvent not existing
 
 	DKLog("#################### Uncaught Exception ####################\n", DKERROR);
-	DKString msg = exception->GetMessage().ToString();
 	DKLog("Exception: "+msg+"\n", DKERROR);
 	std::ostringstream stackFormatted;
 	for (int i = 0; i < stackTrace->GetFrameCount(); ++i) {

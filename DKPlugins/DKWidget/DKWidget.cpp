@@ -598,6 +598,7 @@ bool DKWidget::GetProperty(const DKString& id, const DKString& name, DKString& v
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetProperty(const DKString& id, const DKString& name, const DKString& value)
 {
+	DKLog("DKWidget::SetProperty("+id+","+name+","+value+")\n", DKDEBUG);
 	return SetProperty(GetElementById(id), name, value);
 }
 
@@ -1014,9 +1015,9 @@ bool DKWidget::GetProperty(DKElement* element, const DKString& name, DKString& v
 ///////////////////////////////////////////////////////////////////////////////////////////
 bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKString& value)
 {
+	DKLog("DKWidget::SetProperty("+name+","+value+")\n", DKDEBUG);
 	if(!element){
 		DKLog("DKWidget::SetProperty("+name+","+value+"): element invalid\n", DKWARN);
-		DKDebug::ShowStackTrace();
 		return false;
 	}
 	if(name.empty()){
