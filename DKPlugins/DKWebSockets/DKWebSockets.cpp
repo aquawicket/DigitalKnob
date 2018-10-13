@@ -11,8 +11,8 @@ uWS::OpCode DKWebSockets::_opCode;
 /////////////////////////
 bool DKWebSockets::Init()
 {
-	//DKClass::DKCreate("DKWebSocketsJS");
-	//DKClass::DKCreate("DKWebSocketsV8");
+	DKClass::DKCreate("DKWebSocketsJS");
+	DKClass::DKCreate("DKWebSocketsV8");
 
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		ProcessMessage(ws, message, length, opCode);
