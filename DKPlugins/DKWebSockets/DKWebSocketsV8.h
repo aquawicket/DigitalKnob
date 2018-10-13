@@ -5,12 +5,14 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////
+///////////////////////////////////////////////////////
 class DKWebSocketsV8 : public DKObjectT<DKWebSocketsV8>
 {
 public:
 	bool Init();
 	bool End();
+
+	static bool SendMessage(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKWebSocketsV8, false);
