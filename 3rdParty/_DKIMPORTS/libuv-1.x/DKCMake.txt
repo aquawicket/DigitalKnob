@@ -3,6 +3,7 @@ DKINSTALL(${DKONLINE}/Libs/libuv-1.x.zip libuv-1.x)
 DKSET(UV ${3RDPARTY}/libuv-1.x)
 
 LIST(APPEND WIN_LIBS Iphlpapi.lib)
+LIST(APPEND WIN_LIBS Userenv.lib)
 
 ### LINK ###
 DKINCLUDE(${UV}/include)
