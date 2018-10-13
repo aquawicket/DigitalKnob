@@ -11,8 +11,9 @@ class DKWebSocketsJS : public DKObjectT<DKWebSocketsJS>
 public:
 	bool Init();
 
+	static int CloseServer(duk_context* ctx);
+	static int CreateServer(duk_context* ctx);
 	static int SendMessage(duk_context* ctx);
-
 };
 
 REGISTER_OBJECT(DKWebSocketsJS, true)

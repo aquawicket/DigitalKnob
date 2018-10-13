@@ -8,6 +8,8 @@ bool DKWebSocketsV8::Init()
 {
 	DKLog("DKWebSocketsV8::Init()\n", DKDEBUG);
 
+	DKV8::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsV8::CloseServer);
+	DKV8::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsV8::CreateServer);
 	DKV8::AttachFunction("DKWebSockets_SendMessage", DKWebSocketsV8::SendMessage);
 	return true;
 }
@@ -16,6 +18,20 @@ bool DKWebSocketsV8::Init()
 bool DKWebSocketsV8::End()
 {
 	DKLog("DKWebSocketsV8::End()\n", DKDEBUG);
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::CloseServer(CefArgs args, CefReturn retval)
+{
+	if(!DKWebSockets::CloseServer()){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::CreateServer(CefArgs args, CefReturn retval)
+{
+	if(!DKWebSockets::CreateServer()){ return false; }
 	return true;
 }
 

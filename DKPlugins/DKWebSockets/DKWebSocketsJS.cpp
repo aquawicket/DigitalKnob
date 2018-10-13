@@ -11,6 +11,20 @@ bool DKWebSocketsJS::Init()
 }
 
 /////////////////////////////////////////////////
+int DKWebSocketsJS::CloseServer(duk_context* ctx)
+{
+	if(!DKWebSockets::CloseServer()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////////////
+int DKWebSocketsJS::CreateServer(duk_context* ctx)
+{
+	if(!DKWebSockets::CreateServer()){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////////
 int DKWebSocketsJS::SendMessage(duk_context* ctx)
 {
 	DKString text = duk_require_string(ctx, 0);

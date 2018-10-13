@@ -14,6 +14,8 @@ public:
 	bool End();
 	void Loop();
 
+	static bool CloseServer();
+	static bool CreateServer();
 	static bool ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode);
 	static bool SendMessage(const DKString& message);
 	static uWS::Hub h;
