@@ -1,9 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
 
-//#include "libwebsockets.h"
-#include "src/uWS.h"
-
 /////////////////////////
 bool DKWebSockets::Init()
 {
@@ -16,10 +13,13 @@ bool DKWebSockets::Init()
 		ws->send(message, length, opCode);
 	});
 
-	if (h.listen(3000)) {
+	/*
+	if(h.listen(3000)){
 		h.run();
 	}
+	*/
 
+	DKApp::AppendLoopFunc(&DKWebSockets::Loop, this);
 	return true;
 }
 
@@ -27,4 +27,13 @@ bool DKWebSockets::Init()
 bool DKWebSockets::End()
 {
 	return true;
+}
+
+/////////////////////////
+void DKWebSockets::Loop()
+{
+	if(h.listen(3000)){
+		//h.run();
+		h.poll();
+	}
 }
