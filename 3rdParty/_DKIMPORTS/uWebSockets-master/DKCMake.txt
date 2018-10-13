@@ -1,3 +1,5 @@
+DKDEPEND(libuv-1.x)
+
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/uWebSockets-master.zip uWebSockets-master)
 DKSET(UWEBSOCKETS ${3RDPARTY}/uWebSockets-master)
