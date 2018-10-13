@@ -29,6 +29,7 @@ endif()
 target_include_directories(uWS PUBLIC src)
 
 target_include_directories(uWS PUBLIC ${LIBUV_INCLUDE_DIR})
+target_include_directories(uWS PUBLIC ${LIBUV_INCLUDE_DIR}/include)
 target_include_directories(uWS PUBLIC ${ZLIB_INCLUDE_DIRS})
 target_include_directories(uWS PUBLIC ${OPENSSL_INCLUDE_DIR})
 target_link_libraries (uWS LINK_PUBLIC ${LIBUV_LIBRARY})
