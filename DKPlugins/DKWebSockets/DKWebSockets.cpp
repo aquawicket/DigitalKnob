@@ -114,7 +114,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 /////////////////////////
 void DKWebSockets::Loop()
 {
-	if(!_address.empty() && _port && h.listen(_address, _port)){
+	if(!_address.empty() && _port && h.listen(_address.c_str(), _port)){
 		h.poll();
 	}
 	if(_address.empty() && _port && h.listen(_port)){
