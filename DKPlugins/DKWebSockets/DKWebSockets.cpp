@@ -159,7 +159,14 @@ void DKWebSockets::Loop()
 	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort)){
 		serverHub.poll();
 	}
-	//Do we have to poll the client too?
+	/*
+	if(!clientAddress.empty() && clientPort && clientHub.listen(clientAddress.c_str(), clientPort)){
+		clientHub.poll();
+	}
+	if(clientAddress.empty() && clientPort && clientHub.listen(clientPort)){
+		clientHub.poll();
+	}
+	*/
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
