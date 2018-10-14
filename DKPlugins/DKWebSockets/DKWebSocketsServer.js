@@ -63,6 +63,6 @@ function DKWebSocketsServer_SendMessage()
 //////////////////////////////////////////////
 function DKWebSocketsServer_OnMessage(message)
 {
-	DKLog("DKWebSocketsServer_OnWebSocketMessage()\n", DKDEBUG);
+	DKLog("DKWebSocketsServer_OnWebSocketMessage("+message+")\n", DKDEBUG);
 	DKWidget_SetValue("DKWebSocketsServer_receive", message);
 }
