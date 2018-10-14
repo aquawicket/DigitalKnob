@@ -43,6 +43,43 @@ bool DKWebSockets::CreateServer(const int& port)
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		ProcessMessage(ws, message, length, opCode);
 	});
+	h.onError([](void *user){
+		switch ((long) user){
+		case 1:
+			DKLog("Client emitted error on invalid URI\n", DKERROR);
+			break;
+		case 2:
+			DKLog("Client emitted error on resolve failure\n", DKERROR);
+			break;
+		case 3:
+			DKLog("Client emitted error on connection timeout (non-SSL)\n", DKERROR);
+			break;
+		case 5:
+			DKLog("Client emitted error on connection timeout (SSL)\n", DKERROR);
+			break;
+		case 6:
+			DKLog("Client emitted error on HTTP response without upgrade (non-SSL)\n", DKERROR);
+			break;
+		case 7:
+			DKLog("Client emitted error on HTTP response without upgrade (SSL)\n", DKERROR);
+			break;
+		case 10:
+			DKLog("Client emitted error on poll error\n", DKERROR);
+			break;
+		case 11:
+			static int protocolErrorCount = 0;
+			protocolErrorCount++;
+			DKLog("Client emitted error on invalid protocol\n", DKERROR);
+			if (protocolErrorCount > 1) {
+				DKLog("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection!\n", DKERROR);
+				exit(-1);
+			}
+			break;
+		//default:
+			//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
+			//exit(-1);
+		}
+	});
 	DKLog("DKWebSockets::CreateServer(): Server started...\n", DKINFO);
 	return true;
 }
