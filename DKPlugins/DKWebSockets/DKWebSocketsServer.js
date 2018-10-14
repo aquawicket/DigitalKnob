@@ -33,9 +33,9 @@ function DKWebSocketsServer_OnEvent(event)
 	if(DK_Id(event, "DKWebSocketsServer_SendMessage")){
 		DKWebSocketsServer_SendMessage();
 	}
-	//if(DK_Type(event, "DKWebSockets_OnMessage")){
-		//DKWebSocketsServer_OnMessage(DK_GetValue(event));
-	//}
+	if(DK_Type(event, "DKWebSockets_OnMessage")){
+		DKWebSocketsServer_OnMessage(DK_GetValue(event));
+	}
 }
 
 //////////////////////////////////////////
