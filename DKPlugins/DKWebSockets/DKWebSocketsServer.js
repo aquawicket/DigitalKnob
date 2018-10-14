@@ -45,7 +45,7 @@ function DKWebSocketsServer_CreateServer()
 	
 	if(!DKWidget_GetValue("DKWebSocketsServer_IpAddress")){
 		DKLog("DKWebSocketsServer_CreateServer(): Please enter an ip address\n", DKWARN);
-		return;
+		//return;
 	}
 	if(!DKWidget_GetValue("DKWebSocketsServer_Port")){
 		DKLog("DKWebSocketsServer_CreateServer(): Please enter a port number\n", DKWARN);

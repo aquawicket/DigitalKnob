@@ -51,12 +51,12 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
-	//DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKLog("DKInput_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(event.type){ //Browser
 		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
 		if(DK_GetType(event) != "mousemove"){
-			//DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
+			DKLog("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
 		}
 	}
 	else{ //App
@@ -102,9 +102,9 @@ function DKInput_OnEvent(event)
 	}
 	
 	//element events
-	//if(DK_Id(event, "esc")){
-	//	DKLog("esc\n")
-	//}
+	if(DK_Id(event, "esc")){
+		DKLog("esc\n")
+	}
 }
 
 /////////////////////////////////////////
