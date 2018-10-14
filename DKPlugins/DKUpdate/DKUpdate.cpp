@@ -217,11 +217,16 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 		DKLog("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n", DKERROR);
 		return false;
 	}
+	//DKLog("DKUpdate::UpdatePlugin("+url+"): we found it!\n", DKINFO);
 
-	DKLog("DKUpdate::UpdatePlugin("+url+"): we found it!\n", DKERROR);
-
-
-
-
+	DKString url2 = "/DKDebug";
+	DKString new_url = "http://digitalknob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
+	DKLog("new_url = "+new_url+"\n", DKINFO);
+	DKString output;
+	if(!DKCurl::Get("DKCurlUpdate")->HttpToString(new_url, output)){
+		DKLog("DKUpdate::UpdatePlugin("+url+"): HttpToString failed\n", DKERROR);
+		return false;
+	}
+	DKLog("HttpToString = "+output+"\n", DKINFO);
 	return false;
 }
