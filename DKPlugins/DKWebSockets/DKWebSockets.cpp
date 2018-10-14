@@ -62,7 +62,7 @@ bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_
 	_length = length;
 	_opCode = opCode;
 	DKEvent::SendEvent("GLOBAL", "OnWebSocketMessage", DKString(message));
-	return false;
+	return true;
 }
 
 ///////////////////////////////////////////////////////
@@ -70,8 +70,8 @@ bool DKWebSockets::SendMessage(const DKString& message)
 {
 	//TODO
 	DKLog("DKWebSockets::SendMessage("+message+")\n", DKDEBUG);
-	DKLog("DKWebSockets::SendMessage(): _message = "+DKString(message)+"\n", DKINFO);
+	DKLog("DKWebSockets::SendMessage(): _message = "+DKString(_message)+"\n", DKINFO);
 	DKLog("DKWebSockets::SendMessage(): _length = "+toString(_length)+"\n", DKINFO);
 	_ws->send(_message, _length, _opCode); //echo
-	return false;
+	return true;
 }
