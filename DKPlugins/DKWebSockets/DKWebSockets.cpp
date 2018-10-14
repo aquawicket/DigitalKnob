@@ -60,20 +60,22 @@ bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_
 	_message = message;
 	_length = length;
 	_opCode = opCode;
-	DKString message_  = DKString(_message).substr(0,_length);
 	DKLog("DKWebSockets::ProcessMessage(): _message = "+DKString(_message)+"\n", DKINFO);
 	DKLog("DKWebSockets::ProcessMessage(): _length = "+toString(_length)+"\n", DKINFO);
-	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessage", message);
+	DKString message_  = DKString(_message).substr(0,_length);
+	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessage", message_);
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKWebSockets::SendMessage(const DKString& message)
 {
-	DKLog("DKWebSockets::SendMessage("+message+")\n", DKDEBUG);
+	DKLog("DKWebSockets::SendMessage("+message+")\n", DKINFO);//, DKDEBUG);
 
 	DKString message_ = toString(_message);
-	message_ = message.substr(_length, message.length()); //strip the message
+	message_ = message_.substr(_length, message_.length()); //strip the message
+	DKLog("DKWebSockets::SendMessage(): message_ = "+message_+"\n", DKINFO);
+	message_ = message+message_;
 	size_t length_ = _length;
 	uWS::OpCode opCode_ = _opCode;
 
