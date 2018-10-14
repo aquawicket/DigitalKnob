@@ -40,6 +40,7 @@ function DKWebSocketsClient_Connect()
 {
 	DKLog("DKWebSocketsClient_Connect()\n", DKDEBUG);
 	
+	DKLog("Connecting to WebSocket...()\n");
 	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
 		DKLog("DKWebSocketsClient_Connect(): please enter an address\n", DKWARN);
 		return;

@@ -89,7 +89,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 /////////////////////////
 void DKWebSockets::Loop()
 {
-	if(_port && h.listen(_port)){
+	if(_port && h.listen(_address.c_str(), _port)){
 		h.poll();
 	}
 }

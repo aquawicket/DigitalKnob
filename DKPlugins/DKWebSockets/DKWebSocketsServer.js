@@ -43,12 +43,16 @@ function DKWebSocketsServer_CreateServer()
 {
 	DKLog("DKWebSocketsServer_CreateServer()\n", DKDEBUG);
 	
+	if(!DKWidget_GetValue("DKWebSocketsServer_IpAddress")){
+		DKLog("DKWebSocketsServer_CreateServer(): Please enter an ip address\n", DKWARN);
+		return;
+	}
 	if(!DKWidget_GetValue("DKWebSocketsServer_Port")){
 		DKLog("DKWebSocketsServer_CreateServer(): Please enter a port number\n", DKWARN);
 		return;
 	}
 	DKLog("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");
-	DKWebSockets_CreateServer(Number(DKWidget_GetValue("DKWebSocketsServer_Port")));
+	DKWebSockets_CreateServer(DKWidget_GetValue("DKWebSocketsServer_IpAddress"), Number(DKWidget_GetValue("DKWebSocketsServer_Port")));
 }
 
 /////////////////////////////////////////
