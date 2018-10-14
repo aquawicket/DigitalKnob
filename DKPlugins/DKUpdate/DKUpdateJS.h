@@ -21,6 +21,7 @@ public:
 	static int CheckForUpdate(duk_context* ctx);
 	static int CreateUpdate(duk_context* ctx);
 	static int DoUpdate(duk_context* ctx);
+	static int UpdatePlugin(duk_context* ctx);
 };
 
 

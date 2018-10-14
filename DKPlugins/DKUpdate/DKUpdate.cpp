@@ -82,6 +82,7 @@ bool DKUpdate::Init()
 	}
 	
 	DKClass::DKCreate("DKUpdateJS");
+	DKClass::DKCreate("DKUpdateV8");
 	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
 	return true;
 }
@@ -135,6 +136,13 @@ bool DKUpdate::CheckForUpdate()
 		return true;
 	}
 	DKLog("No Update Available \n", DKINFO);
+	return false;
+}
+
+/////////////////////////////
+bool DKUpdate::CreateUpdate()
+{
+	//TODO: create update and upload to ftp
 	return false;
 }
 
@@ -196,9 +204,15 @@ bool DKUpdate::DoUpdate()
 	return true;
 }
 
-/////////////////////////////
-bool DKUpdate::CreateUpdate()
+////////////////////////////////////////////////
+bool DKUpdate::UpdatePlugin(const DKString& url)
 {
-	//TODO: create update and upload to ftp
+	//ok, here we are going to copy the url to the assets folder
+	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/DKApps/TradePost/DKBrowser
+
+
+
+
+
 	return false;
 }

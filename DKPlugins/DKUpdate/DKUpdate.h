@@ -13,6 +13,7 @@ public:
 	static bool CheckForUpdate();
 	static bool CreateUpdate();
 	static bool DoUpdate();
+	static bool UpdatePlugin(const DKString& url);
 
 	static DKString url;
 };

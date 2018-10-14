@@ -65,14 +65,22 @@ int DKUpdateJS::CheckForUpdate(duk_context* ctx)
 //////////////////////////////////////////////
 int DKUpdateJS::CreateUpdate(duk_context* ctx)
 {
-	if (!DKUpdate::CreateUpdate()) { return 0; }
+	if(!DKUpdate::CreateUpdate()){ return 0; }
 	return 1;
 }
 
 //////////////////////////////////////////
 int DKUpdateJS::DoUpdate(duk_context* ctx)
 {
-	if (!DKUpdate::DoUpdate()) { return 0; }
+	if(!DKUpdate::DoUpdate()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////////
+int DKUpdateJS::UpdatePlugin(duk_context* ctx)
+{
+	DKString url = duk_require_string(ctx, 0);
+	if(!DKUpdate::UpdatePlugin(url)){ return 0; }
 	return 1;
 }
 
