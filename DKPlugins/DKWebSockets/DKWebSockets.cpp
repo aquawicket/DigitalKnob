@@ -35,34 +35,49 @@ bool DKWebSockets::Init()
 bool DKWebSockets::End()
 {
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
+	clientHub.getDefaultGroup<uWS::SERVER>().close();
 	return true;
 }
 
 ////////////////////////////////
 bool DKWebSockets::CloseClient()
 {
-	//TODO
-	return false;
+	DKLog("DKWebSockets::CloseClient()\n", DKDEBUG);
+	clientHub.getDefaultGroup<uWS::CLIENT>().close();
+	clientPort = NULL;
+	clientWebSocket = NULL;
+	clientMessage = NULL;
+	clientLength = NULL;
+	DKLog("DKWebSockets::CloseClient(): Client closed\n", DKINFO);
+	return true;
 }
 
 ////////////////////////////////
 bool DKWebSockets::CloseServer()
 {
-	DKLog("DKWebSockets::CreateServer()\n", DKDEBUG);
+	DKLog("DKWebSockets::CloseServer()\n", DKDEBUG);
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	serverPort = NULL;
 	serverWebSocket = NULL;
 	serverMessage = NULL;
 	serverLength = NULL;
-	DKLog("DKWebSockets::CreateServer(): Server closed\n", DKINFO);
+	DKLog("DKWebSockets::CloseServer(): Server closed\n", DKINFO);
 	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKWebSockets::CreateClient(const DKString& address)
 {
-	//TODO
-	return false;
+	clientAddress = address;
+	clientPort = 80;
+	DKLog("DKWebSockets::CreateClient("+address+")\n", DKINFO);
+
+	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
+		MessageFromServer(ws, message, length, opCode);
+	});
+
+	DKLog("DKWebSockets::CreateClient(): Client started...\n", DKINFO);
+	return true;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -144,52 +159,73 @@ void DKWebSockets::Loop()
 	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort)){
 		serverHub.poll();
 	}
+	//Do we have to poll the client too?
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	DKLog("DKWebSockets::ProcessMessage("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
+	DKLog("DKWebSockets::MessageFromClient("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
 	serverWebSocket = ws;
 	serverMessage = message;
 	serverLength = length;
 	serverOpCode = opCode;
-	//DKLog("DKWebSockets::ProcessMessage(): _message = "+DKString(_message)+"\n", DKINFO);
-	//DKLog("DKWebSockets::ProcessMessage(): _length = "+toString(_length)+"\n", DKINFO);
+	//DKLog("DKWebSockets::MessageFromClient(): _message = "+DKString(_message)+"\n", DKINFO);
+	//DKLog("DKWebSockets::MessageFromClient(): _length = "+toString(_length)+"\n", DKINFO);
 	DKString message_  = DKString(serverMessage).substr(0, serverLength);
-	//DKLog("DKWebSockets::ProcessMessage(): message_ = "+DKString(message_)+"\n", DKINFO);
-	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessage", message_);
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKWebSockets::MessageToClient(const DKString& message)
-{
-	DKLog("DKWebSockets::SendMessage("+message+")\n", DKINFO);//, DKDEBUG);
-
-	DKString message_ = toString(serverMessage);
-	message_ = message_.substr(serverLength, message_.length()); //strip the message
-	//DKLog("DKWebSockets::SendMessage(): message_ = "+message_+"\n", DKINFO);
-	message_ = message+message_;
-	size_t length_ = message.length();
-	uWS::OpCode opCode_ = serverOpCode;
-
-	//DKLog("DKWebSockets::SendMessage(): message_ = "+DKString(message_)+"\n", DKINFO);
-	//DKLog("DKWebSockets::SendMessage(): length_ = "+toString(length_)+"\n", DKINFO);
-	serverWebSocket->send(message_.c_str(), length_, opCode_);
+	//DKLog("DKWebSockets::MessageFromClient(): message_ = "+DKString(message_)+"\n", DKINFO);
+	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	//TODO
-	return false;
+	DKLog("DKWebSockets::MessageFromServer("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
+	clientWebSocket = ws;
+	clientMessage = message;
+	clientLength = length;
+	clientOpCode = opCode;
+	//DKLog("DKWebSockets::MessageFromServer(): _message = "+DKString(_message)+"\n", DKINFO);
+	//DKLog("DKWebSockets::MessageFromServer(): _length = "+toString(_length)+"\n", DKINFO);
+	DKString message_  = DKString(clientMessage).substr(0, clientLength);
+	//DKLog("DKWebSockets::MessageFromServer(): message_ = "+DKString(message_)+"\n", DKINFO);
+	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromServer", message_);
+	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKWebSockets::MessageToClient(const DKString& message)
+{
+	DKLog("DKWebSockets::MessageToClient("+message+")\n", DKINFO);//, DKDEBUG);
+
+	DKString message_ = toString(serverMessage);
+	message_ = message_.substr(serverLength, message_.length()); //strip the message
+	//DKLog("DKWebSockets::MessageToClient(): message_ = "+message_+"\n", DKINFO);
+	message_ = message+message_;
+	size_t length_ = message.length();
+	uWS::OpCode opCode_ = serverOpCode;
+
+	//DKLog("DKWebSockets::MessageToClient(): message_ = "+DKString(message_)+"\n", DKINFO);
+	//DKLog("DKWebSockets::MessageToClient(): length_ = "+toString(length_)+"\n", DKINFO);
+	serverWebSocket->send(message_.c_str(), length_, opCode_);
+	return true;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKWebSockets::MessageToServer(const DKString& message)
 {
-	//TODO
-	return false;
+	DKLog("DKWebSockets::MessageToServer("+message+")\n", DKINFO);//, DKDEBUG);
+
+	DKString message_ = toString(clientMessage);
+	message_ = message_.substr(clientLength, message_.length()); //strip the message
+	//DKLog("DKWebSockets::MessageToServer(): message_ = "+message_+"\n", DKINFO);
+	message_ = message+message_;
+	size_t length_ = message.length();
+	uWS::OpCode opCode_ = clientOpCode;
+
+	//DKLog("DKWebSockets::MessageToServer(): message_ = "+DKString(message_)+"\n", DKINFO);
+	//DKLog("DKWebSockets::MessageToServer(): length_ = "+toString(length_)+"\n", DKINFO);
+	clientWebSocket->send(message_.c_str(), length_, opCode_);
+	return true;
 }

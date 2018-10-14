@@ -7,7 +7,7 @@ function DKWebSocketsServer_Init()
 		DKAddEvent("DKWebSocketsServer_CreateServer", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("DKWebSocketsServer_CloseServer", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("DKWebSocketsServer_SendMessage", "click", DKWebSocketsServer_OnEvent);
-		DKAddEvent("GLOBAL", "DKWebSockets_OnMessage", DKWebSocketsServer_OnEvent);
+		DKAddEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
 	});
 }
 
@@ -33,8 +33,8 @@ function DKWebSocketsServer_OnEvent(event)
 	if(DK_Id(event, "DKWebSocketsServer_SendMessage")){
 		DKWebSocketsServer_SendMessage();
 	}
-	if(DK_Type(event, "DKWebSockets_OnMessage")){
-		DKWebSocketsServer_OnMessage(DK_GetValue(event));
+	if(DK_Type(event, "DKWebSockets_OnMessageFromClient")){
+		DKWebSocketsServer_OnMessageFromClient(DK_GetValue(event));
 	}
 }
 
@@ -70,9 +70,9 @@ function DKWebSocketsServer_SendMessage()
 	DKWebSockets_SendMessage(message);
 }
 
-//////////////////////////////////////////////
-function DKWebSocketsServer_OnMessage(message)
+////////////////////////////////////////////////////////
+function DKWebSocketsServer_OnMessageFromClient(message)
 {
-	DKLog("DKWebSocketsServer_OnWebSocketMessage("+message+")\n");
+	DKLog("DKWebSocketsServer_OnMessageFromClient("+message+")\n");
 	DKWidget_SetValue("DKWebSocketsServer_receive", message);
 }
