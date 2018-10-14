@@ -61,7 +61,7 @@ bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_
 	_message = message;
 	_length = length;
 	_opCode = opCode;
-	DKEvent::SendEvent("GLOBAL", "OnWebSocketMessage", DKString(message));
+	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessage", "test");//DKString(message));
 	return true;
 }
 
