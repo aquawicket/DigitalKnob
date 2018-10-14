@@ -3,75 +3,52 @@
 #include "DKUpdate/DKUpdate.h"
 #include "DKUpdate/DKUpdateV8.h"
 
-/////////////////////
+///////////////////////
 bool DKUpdateV8::Init()
 {
 	DKLog("DKUpdateV8::Init()\n", DKDEBUG);
-
-	DKV8::AttachFunction("DKUpdate_GetMidiInputs", DKUpdateV8::GetMidiInputs);
+	DKV8::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateV8::CheckForUpdate);
+	DKV8::AttachFunction("DKUpdate_CreateUpdate", DKUpdateV8::CreateUpdate);
+	DKV8::AttachFunction("DKUpdate_DoUpdate", DKUpdateV8::DoUpdate);
+	DKV8::AttachFunction("DKUpdate_UpdatePlugin", DKUpdateV8::UpdatePlugin);
 	return true;
 }
 
-////////////////////
+//////////////////////
 bool DKUpdateV8::End()
 {
 	DKLog("DKUpdateV8::End()\n", DKDEBUG);
 	return true;
 }
 
-/*
-////////////////////////////////////////////////////////////
-bool DKUpdateV8::GetMidiInputs(CefArgs args, CefReturn retval)
+///////////////////////////////////////////////////////////////
+bool DKUpdateV8::CheckForUpdate(CefArgs args, CefReturn retval)
 {
-	DKUpdate::Instance("DKUpdate");
-	DKStringArray inputs;
-	DKUpdate::Instance("DKUpdate")->GetInputs(inputs);
-	DKString final = toString(inputs,",");
-	if(!retval->SetString(0, final)){ return false; }
+	if(!DKUpdate::CheckForUpdate()){ return false; }
 	return true;
 }
 
 /////////////////////////////////////////////////////////////
-bool DKUpdateV8::GetMidiOutputs(CefArgs args, CefReturn retval)
+bool DKUpdateV8::CreateUpdate(CefArgs args, CefReturn retval)
 {
-	DKUpdate::Instance("DKUpdate");
-	DKStringArray outputs;
-	DKUpdate::Instance("DKUpdate")->GetOutputs(outputs);
-	DKString final = toString(outputs,",");
-	if(!retval->SetString(0, final)){ return false; }
+	if(!DKUpdate::CreateUpdate()){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKUpdateV8::SendMidi(CefArgs args, CefReturn retval)
+/////////////////////////////////////////////////////////
+bool DKUpdateV8::DoUpdate(CefArgs args, CefReturn retval)
 {
-	int var1 = args->GetInt(0);
-	int var2 = args->GetInt(1);
-	int var3 = args->GetInt(2);
-
-	std::vector<unsigned char> message;
-	message.push_back(var1);
-	message.push_back(var2);
-	message.push_back(var3);
-	DKUpdate::Instance("DKUpdate")->midiout->sendMessage(&message);
+	if(!DKUpdate::DoUpdate()){ return false; }
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKUpdateV8::ToggleMidiInput(CefArgs args, CefReturn retval)
+/////////////////////////////////////////////////////////////
+bool DKUpdateV8::UpdatePlugin(CefArgs args, CefReturn retval)
 {
-	DKString input = args->GetString(0);
-	if(!DKUpdate::Instance("DKUpdate")->ToggleInput(input)){ return false; }
+	DKString url = args->GetString(0);
+	if(!DKUpdate::UpdatePlugin(url)){ return false; }
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKUpdateV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
-{
-	DKString output = args->GetString(0);
-	if(!DKUpdate::Instance("DKUpdate")->ToggleOutput(output)){ return false; }
-	return true;
-}
-*/
 
 #endif //USE_DKCef

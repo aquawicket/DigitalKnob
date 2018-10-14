@@ -29,6 +29,9 @@ DKString DKUpdate::url;
 bool DKUpdate::Init()
 {
 	DKLog("DKUpdate::Init()\n", DKDEBUG);
+	
+	DKClass::DKCreate("DKUpdateJS");
+	DKClass::DKCreate("DKUpdateV8");
 
 	DKString app;
 	DKFile::GetExeName(app);
@@ -81,8 +84,6 @@ bool DKUpdate::Init()
 		return false;
 	}
 	
-	DKClass::DKCreate("DKUpdateJS");
-	DKClass::DKCreate("DKUpdateV8");
 	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
 	return true;
 }
@@ -210,6 +211,14 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 	//ok, here we are going to copy the url to the assets folder
 	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/DKApps/TradePost/DKBrowser
 
+	//first check that the url exists
+	DKCurl::Instance("DKCurlUpdate");
+	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
+		DKLog("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n", DKERROR);
+		return false;
+	}
+
+	DKLog("DKUpdate::UpdatePlugin("+url+"): we found it!\n", DKERROR);
 
 
 

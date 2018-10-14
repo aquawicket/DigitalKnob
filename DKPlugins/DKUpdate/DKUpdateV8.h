@@ -12,7 +12,10 @@ public:
 	bool Init();
 	bool End();
 
-	//static bool GetMidiInputs(CefArgs args, CefReturn retval);
+	static bool CheckForUpdate(CefArgs args, CefReturn retval);
+	static bool CreateUpdate(CefArgs args, CefReturn retval);
+	static bool DoUpdate(CefArgs args, CefReturn retval);
+	static bool UpdatePlugin(CefArgs args, CefReturn retval);
 
 };
 
