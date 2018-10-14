@@ -39,22 +39,27 @@ function DKWebSocketsClient_OnEvent(event)
 function DKWebSocketsClient_Connect()
 {
 	DKLog("DKWebSocketsClient_Connect()\n", DKDEBUG);
-	url = "ws://localhost:3000";
+	
+	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
+		DKLog("DKWebSocketsClient_Connect(): please enter an address\n", DKWARN);
+		return;
+	}
+	
+	url = DKWidget_GetValue("DKWebSocketsClient_Address"); //"ws://localhost:3000";
 	websocket = new WebSocket(url);
 	
 	websocket.onopen = function(){
-		console.log("open web socket");
-		//websocket.send("thank you for accepting this Web Socket request");
+		console.log("websocket.onopen");
 	}
 	websocket.onmessage = function(e){
-		//console.log("OpenWebSocket(): Message received: "+e.data.toString());
+		console.log("websocket.onmessage");
 		DKWebSocketsClient_OnWebSocketMessage(e.data.toString());
 	}
 	websocket.onclose = function(e){
-		console.log("closed");
+		console.log("websocket.onclose");
 	}
 	websocket.onerror = function(e){
-		console.log("error");
+		console.log("websocket.onerror");
 	}
 }
 
