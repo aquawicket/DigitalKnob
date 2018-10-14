@@ -2,7 +2,6 @@
 #ifndef DKWebSockets_H
 #define DKWebSockets_H
 
-//#include "libwebsockets.h"
 #include "src/uWS.h"
 #include "DK/DK.h"
 
@@ -22,13 +21,24 @@ public:
 	static bool MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode);
 	static bool MessageToClient(const DKString& message);
 	static bool MessageToServer(const DKString& message);
-	static DKString _address;
-	static int _port;
-	static uWS::Hub h;
-	static uWS::WebSocket<true>* _ws;
-	static char* _message;
-	static size_t _length;
-	static uWS::OpCode _opCode;
+
+	//SERVER
+	static DKString serverAddress;
+	static int serverPort;
+	static uWS::Hub serverHub;
+	static uWS::WebSocket<uWS::SERVER>* serverWebSocket;
+	static char* serverMessage;
+	static size_t serverLength;
+	static uWS::OpCode serverOpCode;
+
+	//CLIENT
+	static DKString clientAddress;
+	static int clientPort;
+	static uWS::Hub clientHub;
+	static uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
+	static char* clientMessage;
+	static size_t clientLength;
+	static uWS::OpCode clientOpCode;
 };
 
 
