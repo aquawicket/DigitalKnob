@@ -14,7 +14,9 @@ public:
 	bool End();
 	void Loop();
 
+	static bool CloseClient();
 	static bool CloseServer();
+	static bool CreateClient(const DKString& address);
 	static bool CreateServer(const DKString& address, const int& port);
 	static bool ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode);
 	static bool SendMessage(const DKString& message);

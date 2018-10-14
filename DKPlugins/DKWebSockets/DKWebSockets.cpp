@@ -29,6 +29,13 @@ bool DKWebSockets::End()
 }
 
 ////////////////////////////////
+bool DKWebSockets::CloseClient()
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////
 bool DKWebSockets::CloseServer()
 {
 	DKLog("DKWebSockets::CreateServer()\n", DKDEBUG);
@@ -39,6 +46,13 @@ bool DKWebSockets::CloseServer()
 	_length = NULL;
 	DKLog("DKWebSockets::CreateServer(): Server closed\n", DKINFO);
 	return true;
+}
+
+////////////////////////////////////////////////////////
+bool DKWebSockets::CreateClient(const DKString& address)
+{
+	//TODO
+	return false;
 }
 
 /////////////////////////////////////////////////////////////////////////

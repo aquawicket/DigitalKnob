@@ -7,15 +7,32 @@
 bool DKWebSocketsJS::Init()
 {
 	DKDuktape::AttachFunction("DKWebSockets_SendMessage", DKWebSocketsJS::SendMessage);
+	DKDuktape::AttachFunction("DKWebSockets_CloseClient", DKWebSocketsJS::CloseClient);
 	DKDuktape::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsJS::CloseServer);
+	DKDuktape::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsJS::CreateClient);
 	DKDuktape::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsJS::CreateServer);
 	return true;
+}
+
+/////////////////////////////////////////////////
+int DKWebSocketsJS::CloseClient(duk_context* ctx)
+{
+	if(!DKWebSockets::CloseClient()){ return 0; }
+	return 1;
 }
 
 /////////////////////////////////////////////////
 int DKWebSocketsJS::CloseServer(duk_context* ctx)
 {
 	if(!DKWebSockets::CloseServer()){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////////////
+int DKWebSocketsJS::CreateClient(duk_context* ctx)
+{
+	DKString address = duk_require_string(ctx, 0);
+	if(!DKWebSockets::CreateClient(address)){ return 0; }
 	return 1;
 }
 

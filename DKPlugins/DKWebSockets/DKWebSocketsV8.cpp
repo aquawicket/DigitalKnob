@@ -8,7 +8,9 @@ bool DKWebSocketsV8::Init()
 {
 	DKLog("DKWebSocketsV8::Init()\n", DKDEBUG);
 
+	DKV8::AttachFunction("DKWebSockets_CloseClient", DKWebSocketsV8::CloseClient);
 	DKV8::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsV8::CloseServer);
+	DKV8::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsV8::CreateClient);
 	DKV8::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsV8::CreateServer);
 	DKV8::AttachFunction("DKWebSockets_SendMessage", DKWebSocketsV8::SendMessage);
 	return true;
@@ -22,9 +24,24 @@ bool DKWebSocketsV8::End()
 }
 
 ////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::CloseClient(CefArgs args, CefReturn retval)
+{
+	if(!DKWebSockets::CloseClient()){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
 bool DKWebSocketsV8::CloseServer(CefArgs args, CefReturn retval)
 {
 	if(!DKWebSockets::CloseServer()){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::CreateClient(CefArgs args, CefReturn retval)
+{
+	DKString address = args->GetString(0);
+	if(!DKWebSockets::CreateClient(address)){ return false; }
 	return true;
 }
 

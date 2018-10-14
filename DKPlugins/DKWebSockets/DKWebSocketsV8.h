@@ -12,7 +12,9 @@ public:
 	bool Init();
 	bool End();
 
+	static bool CloseClient(CefArgs args, CefReturn retval);
 	static bool CloseServer(CefArgs args, CefReturn retval);
+	static bool CreateClient(CefArgs args, CefReturn retval);
 	static bool CreateServer(CefArgs args, CefReturn retval);
 	static bool SendMessage(CefArgs args, CefReturn retval);
 };
