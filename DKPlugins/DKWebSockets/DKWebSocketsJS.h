@@ -15,7 +15,8 @@ public:
 	static int CloseServer(duk_context* ctx);
 	static int CreateClient(duk_context* ctx);
 	static int CreateServer(duk_context* ctx);
-	static int SendMessage(duk_context* ctx);
+	static int MessageToClient(duk_context* ctx);
+	static int MessageToServer(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKWebSocketsJS, true)

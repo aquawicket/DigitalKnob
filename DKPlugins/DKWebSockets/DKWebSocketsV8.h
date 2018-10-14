@@ -16,7 +16,8 @@ public:
 	static bool CloseServer(CefArgs args, CefReturn retval);
 	static bool CreateClient(CefArgs args, CefReturn retval);
 	static bool CreateServer(CefArgs args, CefReturn retval);
-	static bool SendMessage(CefArgs args, CefReturn retval);
+	static bool MessageToClient(CefArgs args, CefReturn retval);
+	static bool MessageToServer(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKWebSocketsV8, false);

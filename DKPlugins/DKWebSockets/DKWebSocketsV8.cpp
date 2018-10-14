@@ -12,7 +12,7 @@ bool DKWebSocketsV8::Init()
 	DKV8::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsV8::CloseServer);
 	DKV8::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsV8::CreateClient);
 	DKV8::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsV8::CreateServer);
-	DKV8::AttachFunction("DKWebSockets_SendMessage", DKWebSocketsV8::SendMessage);
+	DKV8::AttachFunction("DKWebSockets_MessageToClient", DKWebSocketsV8::MessageToClient);
 	return true;
 }
 
@@ -54,14 +54,21 @@ bool DKWebSocketsV8::CreateServer(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
-bool DKWebSocketsV8::SendMessage(CefArgs args, CefReturn retval)
+////////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::MessageToClient(CefArgs args, CefReturn retval)
 {
 	DKString text = args->GetString(0);
-	if(!DKWebSockets::SendMessage(text)){ return false; }
+	if(!DKWebSockets::MessageToClient(text)){ return false; }
 	return true;
 }
 
+////////////////////////////////////////////////////////////////////
+bool DKWebSocketsV8::MessageToServer(CefArgs args, CefReturn retval)
+{
+	DKString text = args->GetString(0);
+	if(!DKWebSockets::MessageToServer(text)){ return false; }
+	return true;
+}
 
 
 #endif //USE_DKCef

@@ -118,7 +118,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 	});
 
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
-		ProcessMessage(ws, message, length, opCode);
+		MessageFromClient(ws, message, length, opCode);
 	});
 
 	DKLog("DKWebSockets::CreateServer(): Server started...\n", DKINFO);
@@ -136,8 +136,8 @@ void DKWebSockets::Loop()
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
 	DKLog("DKWebSockets::ProcessMessage("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
 	_ws = ws;
@@ -152,8 +152,8 @@ bool DKWebSockets::ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKWebSockets::SendMessage(const DKString& message)
+///////////////////////////////////////////////////////////
+bool DKWebSockets::MessageToClient(const DKString& message)
 {
 	DKLog("DKWebSockets::SendMessage("+message+")\n", DKINFO);//, DKDEBUG);
 
@@ -168,4 +168,18 @@ bool DKWebSockets::SendMessage(const DKString& message)
 	//DKLog("DKWebSockets::SendMessage(): length_ = "+toString(length_)+"\n", DKINFO);
 	_ws->send(message_.c_str(), length_, opCode_);
 	return true;
+}
+
+///////////////////////////////////////////////////////////
+bool DKWebSockets::MessageToServer(const DKString& message)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode)
+{
+	//TODO
+	return false;
 }

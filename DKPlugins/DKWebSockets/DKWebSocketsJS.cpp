@@ -6,11 +6,12 @@
 ///////////////////////////
 bool DKWebSocketsJS::Init()
 {
-	DKDuktape::AttachFunction("DKWebSockets_SendMessage", DKWebSocketsJS::SendMessage);
 	DKDuktape::AttachFunction("DKWebSockets_CloseClient", DKWebSocketsJS::CloseClient);
 	DKDuktape::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsJS::CloseServer);
 	DKDuktape::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsJS::CreateClient);
 	DKDuktape::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsJS::CreateServer);
+	DKDuktape::AttachFunction("DKWebSockets_MessageToClient", DKWebSocketsJS::MessageToClient);
+	DKDuktape::AttachFunction("DKWebSockets_MessageToServer", DKWebSocketsJS::MessageToServer);
 	return true;
 }
 
@@ -45,11 +46,19 @@ int DKWebSocketsJS::CreateServer(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWebSocketsJS::SendMessage(duk_context* ctx)
+/////////////////////////////////////////////////////
+int DKWebSocketsJS::MessageToClient(duk_context* ctx)
 {
 	DKString text = duk_require_string(ctx, 0);
-	if(!DKWebSockets::SendMessageA(text)){ return 0; }
+	if(!DKWebSockets::MessageToClient(text)){ return 0; }
+	return 1;
+}
+
+/////////////////////////////////////////////////////
+int DKWebSocketsJS::MessageToServer(duk_context* ctx)
+{
+	DKString text = duk_require_string(ctx, 0);
+	if(!DKWebSockets::MessageToServer(text)){ return 0; }
 	return 1;
 }
 
