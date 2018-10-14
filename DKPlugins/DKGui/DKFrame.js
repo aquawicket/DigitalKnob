@@ -18,6 +18,7 @@ function DKFrame_OnEvent(event)
 	DKLog("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
 	if(DK_Type(event, "mousedown")){
 		DKFrame_BringToFront();
+		//setTimeout( function(){ DKFrame_BringToFront(); }, 1000);
 	}
 	if(DK_Type(event, "dblclick")){
 		var id = DK_GetId(event);
