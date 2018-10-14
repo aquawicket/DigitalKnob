@@ -217,9 +217,20 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 		DKLog("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n", DKERROR);
 		return false;
 	}
-	//DKLog("DKUpdate::UpdatePlugin("+url+"): we found it!\n", DKINFO);
+	DKLog("DKUpdate::UpdatePlugin("+url+"): we found it!\n", DKINFO);
 
-	DKString url2 = "/DKDebug";
+	//now we have to find the folder relative to http://digitalknob.com/DKFile/DKFile.php
+	//I.E:  http://digitalknob.com/TradePost/TradePost = ../../TradePost/TradePost
+	//I.E:  http://digitalknob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
+	//I.E:  http://digitalknob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
+
+	if(!has(url, "http://digitalknob.com/")){
+		DKLog("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from digitalknob.com", DKERROR);
+		return false;
+	}
+
+	DKString url2 = url;
+	replace(url2, "http://digitalknob.com/", "../../");
 	DKString new_url = "http://digitalknob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
 	DKLog("new_url = "+new_url+"\n", DKINFO);
 	DKString output;
@@ -228,5 +239,40 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 		return false;
 	}
 	DKLog("HttpToString = "+output+"\n", DKINFO);
-	return false;
+
+	if(!has(output,"..,")){
+		DKLog("DKUpdate::UpdatePlugin("+url+"): HttpToString() did not return a directory list", DKERROR);
+		return false;
+	}
+
+	DKStringArray arry;
+	toStringArray(arry, output, ",");
+	replace(url2, "../../", "");
+	for(unsigned int i=0; i<arry.size(); i++){
+		arry[i] = "http://digitalknob.com/"+url2+"/"+arry[i];
+		DKLog("arry["+toString(i)+"] = "+arry[i]+"\n", DKINFO);
+	}
+
+	//now we need to get the download directory and create the folder if it does not exist
+	//just take the last / in url2 the end of the string for the plugin name.
+	std::size_t found = url2.find_last_of("/");
+	DKLog("found = "+toString(found)+"\n", DKINFO);
+
+	DKString plugin = url2.substr(found+1, url2.size());
+	DKLog("Plugin name is "+plugin+"\n", DKINFO);
+
+	//now get the assets path of this process
+	DKString plugin_path = DKFile::local_assets+plugin;
+	DKLog("local plugin path = "+plugin_path+"\n", DKINFO);
+	DKFile::MakeDir(plugin_path);
+
+	//now transfer the arry to plugin path
+	for(unsigned int i=1; i<arry.size(); i++){
+		if(!DKCurl::Get("DKCurlUpdate")->Download(arry[i], plugin_path)){
+			DKLog("DKUpdate::UpdatePlugin("+url+"): DKCurl::Download("+arry[i]+") failed\n", DKERROR);
+			return false;
+		}
+	}
+
+	return true;
 }
