@@ -4,9 +4,9 @@ function DKWebSocketsServer_Init()
 	DKLog("DKWebSocketsServer_Init()\n", DKDEBUG);
 	DKCreate("DKWebSockets");
 	DKCreate("DKWebSockets/DKWebSocketsServer.html", function(){
-		DKAddEvent("DKWebSocketsServer_CreateServer", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("DKWebSocketsServer_CloseServer", "click", DKWebSocketsServer_OnEvent);
-		DKAddEvent("DKWebSocketsServer_SendMessage", "click", DKWebSocketsServer_OnEvent);
+		DKAddEvent("DKWebSocketsServer_CreateServer", "click", DKWebSocketsServer_OnEvent);
+		DKAddEvent("DKWebSocketsServer_MessageToClient", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
 	});
 }
@@ -30,8 +30,8 @@ function DKWebSocketsServer_OnEvent(event)
 	if(DK_Id(event, "DKWebSocketsServer_CloseServer")){
 		DKWebSocketsServer_CloseServer();
 	}
-	if(DK_Id(event, "DKWebSocketsServer_SendMessage")){
-		DKWebSocketsServer_SendMessage();
+	if(DK_Id(event, "DKWebSocketsServer_MessageToClient")){
+		DKWebSocketsServer_MessageToClient();
 	}
 	if(DK_Type(event, "DKWebSockets_OnMessageFromClient")){
 		DKWebSocketsServer_OnMessageFromClient(DK_GetValue(event));
@@ -62,12 +62,12 @@ function DKWebSocketsServer_CloseServer()
 	DKWebSockets_CloseServer();
 }
 
-/////////////////////////////////////////
-function DKWebSocketsServer_SendMessage()
+/////////////////////////////////////////////
+function DKWebSocketsServer_MessageToClient()
 {
-	DKLog("DKWebSocketsServer_SendMessage()\n", DKDEBUG);
+	DKLog("DKWebSocketsServer_MessageToClient()\n", DKDEBUG);
 	var message = DKWidget_GetValue("DKWebSocketsServer_send");
-	DKWebSockets_SendMessage(message);
+	DKWebSockets_MessageToClient(message);
 }
 
 ////////////////////////////////////////////////////////

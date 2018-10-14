@@ -13,6 +13,7 @@ bool DKWebSocketsV8::Init()
 	DKV8::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsV8::CreateClient);
 	DKV8::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsV8::CreateServer);
 	DKV8::AttachFunction("DKWebSockets_MessageToClient", DKWebSocketsV8::MessageToClient);
+	DKV8::AttachFunction("DKWebSockets_MessageToServer", DKWebSocketsV8::MessageToServer);
 	return true;
 }
 
