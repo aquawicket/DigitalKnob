@@ -202,6 +202,10 @@ bool DKWebSockets::MessageToClient(const DKString& message)
 
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
+	if(!serverWebSocket){
+		DKLog("DKWebSockets::MessageToServer("+message+"): serverWebSocket is invalid\n", DKERROR);
+		return false;
+	}
 	uWS::WebSocket<uWS::SERVER>::PreparedMessage *prepared = serverWebSocket->prepareMessageBatch(messages, excludes, uWS::OpCode::TEXT, false, nullptr);
 	serverWebSocket->sendPrepared(prepared, nullptr);
 	serverWebSocket->finalizeMessage(prepared);
@@ -215,6 +219,10 @@ bool DKWebSockets::MessageToServer(const DKString& message)
 
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
+	if(!clientWebSocket){
+		DKLog("DKWebSockets::MessageToServer("+message+"): clientWebSocket is invalid\n", DKERROR);
+		return false;
+	}
 	uWS::WebSocket<uWS::CLIENT>::PreparedMessage *prepared = clientWebSocket->prepareMessageBatch(messages, excludes, uWS::OpCode::TEXT, false, nullptr);
 	clientWebSocket->sendPrepared(prepared, nullptr);
 	clientWebSocket->finalizeMessage(prepared);

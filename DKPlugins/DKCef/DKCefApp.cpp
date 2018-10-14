@@ -91,6 +91,7 @@ void DKV8::SetFlags()
 /////////////////////////////////////////////////////////////////////////////////
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 {
+	//FIXME - this is very unstable, not thread safe
 	//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 	DKLog("DKV8::AttachFunction("+name+")\n", DKDEBUG);
 
