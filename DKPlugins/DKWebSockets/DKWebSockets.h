@@ -27,18 +27,12 @@ public:
 	static int serverPort;
 	static uWS::Hub serverHub;
 	static uWS::WebSocket<uWS::SERVER>* serverWebSocket;
-	static char* serverMessage;
-	static size_t serverLength;
-	static uWS::OpCode serverOpCode;
 
 	//CLIENT
 	static DKString clientAddress;
 	static int clientPort;
 	static uWS::Hub clientHub;
 	static uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
-	static char* clientMessage;
-	static size_t clientLength;
-	static uWS::OpCode clientOpCode;
 };
 
 
