@@ -49,7 +49,7 @@ function DKWebSocketsClient_CreateClient()
 	}
 	url = DKWidget_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
 	
-	if(DK_GetBrowser == Rocket){
+	if(DK_GetBrowser == "Rocket"){
 		DKLog("Connecting to WebSocket via C++...\n");
 		DKWebSockets_CreateClient(url);
 		return;
@@ -86,7 +86,7 @@ function DKWebSocketsClient_MessageToServer()
 	DKLog("DKWebSocketsClient_MessageToServer()\n", DKDEBUG);
 	
 	var message = DKWidget_GetValue("DKWebSocketsClient_send");
-	if(DK_GetBrowser == Rocket){
+	if(DK_GetBrowser == "Rocket"){
 		DKWebSockets_MessageToServer(message);
 		return;
 	}
