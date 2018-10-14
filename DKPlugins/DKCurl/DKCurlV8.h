@@ -12,7 +12,12 @@ public:
 	bool Init();
 	bool End();
 
-	//static bool GetMidiInputs(CefArgs args, CefReturn retval);
+	static bool Download(CefArgs args, CefReturn retval);
+	static bool FileDate(CefArgs args, CefReturn retval);
+	static bool FtpConnect(CefArgs args, CefReturn retval);
+	static bool FtpUpload(CefArgs args, CefReturn retval);
+	static bool HttpFileExists(CefArgs args, CefReturn retval);
+	static bool HttpToString(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKCurlV8, false);

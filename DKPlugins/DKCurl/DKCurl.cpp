@@ -7,6 +7,7 @@
 bool DKCurl::Init()
 {
 	DKClass::DKCreate("DKCurlJS");
+	DKClass::DKCreate("DKCurlV8");
 	
 	//Curl inits are NOT thread safe. we must init within the given thread
 	/*
