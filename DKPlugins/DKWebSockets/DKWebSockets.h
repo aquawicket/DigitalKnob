@@ -15,9 +15,10 @@ public:
 	void Loop();
 
 	static bool CloseServer();
-	static bool CreateServer(const int& port);
+	static bool CreateServer(const DKString& address, const int& port);
 	static bool ProcessMessage(uWS::WebSocket<true>* ws, char *message, size_t length, uWS::OpCode opCode);
 	static bool SendMessage(const DKString& message);
+	static DKString _address;
 	static int _port;
 	static uWS::Hub h;
 	static uWS::WebSocket<true>* _ws;

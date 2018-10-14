@@ -3,6 +3,7 @@
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
 
+DKString DKWebSockets::_address;
 int DKWebSockets::_port = NULL;
 uWS::WebSocket<true>* DKWebSockets::_ws = NULL;
 uWS::Hub DKWebSockets::h;
@@ -35,9 +36,10 @@ bool DKWebSockets::CloseServer()
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKWebSockets::CreateServer(const int& port)
+/////////////////////////////////////////////////////////////////////////
+bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 {
+	_address = address;
 	_port = port;
 	DKLog("DKWebSockets::CreateServer("+toString(port)+")\n", DKINFO);
 	h.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
