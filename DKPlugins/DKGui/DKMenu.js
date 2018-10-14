@@ -20,7 +20,7 @@ function DKMenu_OnEvent(event)
 ////////////////////////////////////
 function DKMenu_ValidatePosition(id)
 {
-	DKLog("DKMenu_ValidatePosition("+id+")\n");//, DKDEBUG);
+	DKLog("DKMenu_ValidatePosition("+id+")\n", DKDEBUG);
 	//DKLog("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//DKLog("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
@@ -28,8 +28,8 @@ function DKMenu_ValidatePosition(id)
 	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"px");
 	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"rem");
 	
-	DKLog("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
-	DKLog("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
+	//DKLog("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
+	//DKLog("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
 	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"px");
 	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"rem");
 	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"px");
@@ -44,19 +44,18 @@ function DKMenu_ValidatePosition(id)
 	var width = Number(DKWidget_GetClientWidth(id));
 	var height = Number(DKWidget_GetClientHeight(id));
 	
-	DKLog("win_width = "+win_width+"\n");
-	DKLog("win_height = "+win_height+"\n");
-	DKLog("top = "+top+"\n");
-	DKLog("left = "+left+"\n");
-	DKLog("width = "+width+"\n");
-	DKLog("height = "+height+"\n");
+	//DKLog("win_width = "+win_width+"\n");
+	//DKLog("win_height = "+win_height+"\n");
+	//DKLog("top = "+top+"\n");
+	//DKLog("left = "+left+"\n");
+	//DKLog("width = "+width+"\n");
+	//DKLog("height = "+height+"\n");
 	
 	if(top + height > win_height){
 		top = win_height - height;
 		DKLog("new top = "+top+"\n");
 		DKWidget_SetProperty(id, "top", top+"px");
 	}
-	DKLog("##########:  "+left + width);
 	if(left + width > win_width){
 		DKLog("new left = "+left+"\n");
 		left = win_width - width;
