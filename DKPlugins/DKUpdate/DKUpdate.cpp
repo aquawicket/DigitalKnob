@@ -208,6 +208,8 @@ bool DKUpdate::DoUpdate()
 ////////////////////////////////////////////////
 bool DKUpdate::UpdatePlugin(const DKString& url)
 {
+	//TODO - recursive plugin file downloading
+	
 	//ok, here we are going to copy the url to the assets folder
 	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/DKApps/TradePost/DKBrowser
 
