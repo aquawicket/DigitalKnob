@@ -42,7 +42,13 @@ function DKWebSocketsServer_OnEvent(event)
 function DKWebSocketsServer_CreateServer()
 {
 	DKLog("DKWebSocketsServer_CreateServer()\n", DKDEBUG);
-	DKWebSockets_CreateServer();
+	
+	if(!DKWidget_GetValue("DKWebSocketsServer_Port")){
+		DKLog("DKWebSocketsServer_CreateServer(): Please enter a port number\n", DKWARN);
+		return;
+	}
+	DKLog("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");
+	DKWebSockets_CreateServer(Number(DKWidget_GetValue("DKWebSocketsServer_Port")));
 }
 
 /////////////////////////////////////////

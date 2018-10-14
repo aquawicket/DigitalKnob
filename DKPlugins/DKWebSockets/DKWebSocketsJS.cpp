@@ -20,7 +20,8 @@ int DKWebSocketsJS::CloseServer(duk_context* ctx)
 //////////////////////////////////////////////////
 int DKWebSocketsJS::CreateServer(duk_context* ctx)
 {
-	if(!DKWebSockets::CreateServer()){ return 0; }
+	int port = duk_require_int(ctx, 0);
+	if(!DKWebSockets::CreateServer(port)){ return 0; }
 	return 1;
 }
 

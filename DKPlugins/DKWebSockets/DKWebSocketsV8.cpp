@@ -31,7 +31,8 @@ bool DKWebSocketsV8::CloseServer(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////////
 bool DKWebSocketsV8::CreateServer(CefArgs args, CefReturn retval)
 {
-	if(!DKWebSockets::CreateServer()){ return false; }
+	int port = args->GetInt(0);
+	if(!DKWebSockets::CreateServer(port)){ return false; }
 	return true;
 }
 

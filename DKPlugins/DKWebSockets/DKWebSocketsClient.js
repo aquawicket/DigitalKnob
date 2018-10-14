@@ -45,7 +45,7 @@ function DKWebSocketsClient_Connect()
 		return;
 	}
 	
-	url = DKWidget_GetValue("DKWebSocketsClient_Address"); //"ws://localhost:3000";
+	url = DKWidget_GetValue("DKWebSocketsClient_Address"); // ws://localhost:3000
 	websocket = new WebSocket(url);
 	
 	websocket.onopen = function(){
