@@ -44,7 +44,7 @@ function DKWebSocketsClient_Connect()
 	
 	websocket.onopen = function(){
 		console.log("open web socket");
-		websocket.send("thank you for accepting this Web Socket request");
+		//websocket.send("thank you for accepting this Web Socket request");
 	}
 	websocket.onmessage = function(e){
 		//console.log("OpenWebSocket(): Message received: "+e.data.toString());
@@ -76,6 +76,6 @@ function DKWebSocketsClient_SendMessage()
 ///////////////////////////////////////////////////////
 function DKWebSocketsClient_OnWebSocketMessage(message)
 {
-	DKLog("DKWebSocketsClient_OnWebSocketMessage()\n", DKDEBUG);
-	DKWidget_SetValue("DKWebSocketsClient_receive", message);
+	DKLog("DKWebSocketsClient_OnWebSocketMessage("+message+")\n", DKDEBUG);
+	//DKWidget_SetValue("DKWebSocketsClient_receive", message);
 }
