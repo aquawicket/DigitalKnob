@@ -37,7 +37,6 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKCreate("DKWidget");
-		var assets = DKAssets_LocalAssets();
 		var iframe = DKWidget_CreateElement("body", "iframe", "DKCef_frame");
 		DKWidget_SetAttribute(iframe, "src", DKApp_url);
 		DKWidget_SetProperty(iframe, "position", "absolute");
