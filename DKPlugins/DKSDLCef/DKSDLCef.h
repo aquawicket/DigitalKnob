@@ -43,7 +43,7 @@ public:
 	
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;
-	DKString id;
+	//DKString id;
 	bool _mouseLMBdown;
 	DKSDLCefKeyboard _keyAdapter;
 	float _scrollFactor;

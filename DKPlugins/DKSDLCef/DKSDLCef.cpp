@@ -34,8 +34,8 @@ bool DKSDLCef::Init()
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
-	DKClass::RegisterFunc(id+"::OnResize", &DKSDLCef::OnResize, this);
-	DKClass::RegisterFunc("DKSDLCef::GetTexture::"+id, &DKSDLCef::GetTexture, this);
+	DKClass::RegisterFunc("DKSDLCef::OnResize", &DKSDLCef::OnResize, this);
+	DKClass::RegisterFunc("DKSDLCef::GetTexture", &DKSDLCef::GetTexture, this);
 	return true;
 }
 
@@ -45,8 +45,8 @@ bool DKSDLCef::End()
 	DKLog("DKSDLCef::End()\n", DKDEBUG);
 
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
-	DKClass::UnregisterFunc(id + "::OnResize");
-	DKClass::UnregisterFunc("DKSDLCef::GetTexture::" + id);
+	DKClass::UnregisterFunc("DKSDLCef::OnResize");
+	DKClass::UnregisterFunc("DKSDLCef::GetTexture");
 	cefHandler = NULL;
 	//cef_image = NULL;
 	return true;
