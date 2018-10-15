@@ -90,6 +90,9 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 //////////////////////////////////////////////////////////
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
+	DKString id = *(DKString*)input;
+	//DKLog("DKSDLCef::GetTexture("+id+")\n", DKINFO);
+
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->width, dkCef->height);
 	}
