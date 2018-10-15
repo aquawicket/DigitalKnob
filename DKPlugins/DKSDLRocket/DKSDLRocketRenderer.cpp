@@ -53,7 +53,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 			
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-			DKClass::CallFunc("DKSDLCef::GetTexture", NULL, &output);  //FIXME
+			DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output);
 			sdl_texture = output.texture;
 
 			if(!sdl_texture){ return; }
