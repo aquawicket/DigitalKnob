@@ -5,12 +5,14 @@ function Taskbar_Init()
 {
 	DKLog("Taskbar_Init()\n", DKDEBUG);
 	//DKCreate("DKGui/Taskbar.html,DKGui/DKOS.html");
-	DKCreate("DKGui/Taskbar.html");
+	DKCreate("DKGui/Taskbar.html", function(){});
 	DKCreate("DKGui/scale.js", function(){});
 	DKCreate("DKGui/Clock.js", function(){});
 	if(DK_GetBrowser() == "Rocket"){
 		DKCreate("DKDebug/BugReport.js", function(){});
-		DKWidget_AppendChild("DKGui/Taskbar.html","DKDebug/BugReport.html"); //reparent
+			DKWidget_AppendChild("DKGui/Taskbar.html","DKDebug/BugReport.html"); //reparent
+			
+		
 	}
 	DKAddEvent("start", "click", Taskbar_OnEvent);
 	DKAddEvent("test_animate", "click", Taskbar_OnEvent);

@@ -365,6 +365,7 @@ DKElement* DKWidget::CreateElement(const DKString& tag)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, const DKString& id)
 {
+	DKLog("DKWidget::CreateElement("+parent+","+tag+","+id+")\n", DKDEBUG);
 	DKElement* element = CreateElement(tag);
 	
 	DKString ele_id;
@@ -498,6 +499,7 @@ bool DKWidget::GetParent(const DKString& id, DKString& parent)
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::AppendChild(const DKString& parent, const DKString& id)
 {
+	DKLog("DKWidget::AppendChild("+parent+","+id+")\n", DKINFO);
 	return AppendChild(GetElementById(parent), GetElementById(id));
 }
 
@@ -510,6 +512,7 @@ bool DKWidget::PrependChild(const DKString& parent, const DKString& id)
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::AppendChild(const DKString& parent, DKElement* element)
 {
+	DKLog("DKWidget::AppendChild("+parent+")\n", DKINFO);
 	return AppendChild(GetElementById(parent), element);
 }
 
