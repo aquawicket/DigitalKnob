@@ -43,6 +43,7 @@ public:
 	static int GetFps(duk_context* ctx);
 	static int GetFramerate(duk_context* ctx);
 	static int GetFrames(duk_context* ctx);
+	static int GetFunctions(duk_context* ctx);
 	static int GetId(duk_context* ctx);
 	static int GetJavascript(duk_context* ctx);
 	static int GetKey(duk_context* ctx);
@@ -76,7 +77,6 @@ public:
 	static int PhysicalMemoryUsed(duk_context* ctx);
 	static int PhysicalMemoryUsedByApp(duk_context* ctx);
 	static int PressKey(duk_context* ctx);
-	static int PrintFunctions(duk_context* ctx);
 	static int QueueDuktape(duk_context* ctx);
 	static int ReleaseKey(duk_context* ctx);
 	static int Reload(duk_context* ctx);

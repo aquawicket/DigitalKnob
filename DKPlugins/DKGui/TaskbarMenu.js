@@ -124,6 +124,7 @@ function TaskbarMenu_OnEvent(event)
 			if(!arry[i]){ continue; }
 			DKLog(arry[i]+"\n");
 		}
+		DKLog("\n");
 		
 		DKLog("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
@@ -132,6 +133,16 @@ function TaskbarMenu_OnEvent(event)
 			if(!arry[i]){ continue; }
 			DKLog(arry[i]+"\n");
 		}
+		DKLog("\n");
+		
+		DKLog("**** DKFUNCTIONS ****\n");
+		var events = DK_GetFunctions();
+		var arry = events.split(",");
+		for(var i=0; i<arry.length; i++){
+			if(!arry[i]){ continue; }
+			DKLog(arry[i]+"\n");
+		}
+		DKLog("\n");
 	}
 	if(DK_Id(event, "Refresh")){
 		DKFrame_CloseAll();

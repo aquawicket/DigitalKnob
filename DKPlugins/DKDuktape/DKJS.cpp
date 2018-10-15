@@ -71,6 +71,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
 	DKDuktape::AttachFunction("DK_GetFramerate", DKJS::GetFramerate);
 	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
+	DKDuktape::AttachFunction("DK_GetFunctions", DKJS::GetFunctions);
 	DKDuktape::AttachFunction("DK_GetId", DKJS::GetId);
 	DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript);
 	DKDuktape::AttachFunction("DK_GetKey", DKJS::GetKey);
@@ -104,7 +105,6 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKJS::PhysicalMemoryUsed);
 	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
 	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey);
-	DKDuktape::AttachFunction("DK_PrintFunctions", DKJS::PrintFunctions);
 	DKDuktape::AttachFunction("DK_QueueDuktape", DKJS::QueueDuktape);
 	DKDuktape::AttachFunction("DK_ReleaseKey", DKJS::ReleaseKey);
 	DKDuktape::AttachFunction("DK_Reload", DKJS::Reload);
@@ -494,6 +494,18 @@ int DKJS::GetFrames(duk_context* ctx)
 	return 1;
 }
 
+////////////////////////////////////////
+int DKJS::GetFunctions(duk_context* ctx)
+{
+	DKStringArray list;
+	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
+		list.push_back(DKDuktape::functions[i]);
+	}
+	DKString str = toString(list, ",");
+	duk_push_string(ctx, str.c_str());
+	return 1;
+}
+
 /////////////////////////////////
 int DKJS::GetId(duk_context* ctx)
 {
@@ -843,16 +855,6 @@ int DKJS::PressKey(duk_context* ctx)
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::PressKey(key)){
 		return 0;
-	}
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKJS::PrintFunctions(duk_context* ctx)
-{
-	DKLog("\n**** Duktape Functions ****\n", DKINFO);
-	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
-		DKLog(DKDuktape::functions[i]+"\n", DKINFO);
 	}
 	return 1;
 }
