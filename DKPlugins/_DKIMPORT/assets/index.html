@@ -15,8 +15,17 @@
 		<script id="RunAppOrPlugin">
 			var url_string = window.location.href;
 			var url = new URL(url_string);
+			var frame = url.searchParams.get("frame");
 			var plugin = url.searchParams.get("plugin");
-			if(plugin){ DKCreate(plugin+".js", function(){}); }
+			DKLog("frame = "+frame+"\n");
+			DKLog("plugin = "+plugin+"\n");
+			if(plugin){ DKCreate(plugin+".js", function(){
+				if(frame){
+					DKCreate("DKGui/DKFrame.js", function(){
+						DKFrame_Widget(plugin+".html");
+					});
+				}
+			}); }
 			else{ DKCreate("app.js", function(){}); }
 		</script>
 	</body>
