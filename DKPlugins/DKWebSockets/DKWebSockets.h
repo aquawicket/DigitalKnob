@@ -29,9 +29,7 @@ public:
 	static uWS::WebSocket<uWS::SERVER>* serverWebSocket;
 
 	//CLIENT
-	static bool clientConnected;
 	static DKString clientAddress;
-	static int clientPort;
 	static uWS::Hub clientHub;
 	static uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
 };
