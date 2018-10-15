@@ -28,24 +28,8 @@ function DKInput_Init()
 //////////////////////
 function DKInput_End()
 {
-	DKRemoveEvent("GLOBAL", "keypress", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "keydown", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "keyup", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "mousedown", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "mouseup", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "click", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "dblclick", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "mousemove", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "mouseover", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "mouseout", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "wheel", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "resize", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "input", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "change", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "contextmenu", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "scroll", DKInput_OnEvent);
-	DKRemoveEvent("GLOBAL", "drag", DKInput_OnEvent);
-	DKClose("DKInput.html");
+	DKRemoveEvents(DKInput_OnEvent);
+	DKClose("DKInputTest/DKInput.html");
 }
 
 ///////////////////////////////
