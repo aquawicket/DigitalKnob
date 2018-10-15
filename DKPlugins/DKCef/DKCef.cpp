@@ -271,7 +271,7 @@ bool DKCef::Init()
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
-			NewBrowser(id, top, left, width, height, url);
+			NewBrowser(id, top, left, width, height, url); //FIXME: Not Working
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
@@ -491,7 +491,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url.c_str(), browserSettings, NULL);
 
 		if(!_browser){
 			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
