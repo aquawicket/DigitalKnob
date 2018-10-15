@@ -77,6 +77,12 @@ function DKWebSocketsClient_CreateClient()
 function DKWebSocketsClient_CloseClient()
 {
 	DKLog("DKWebSocketsClient_CloseClient()\n", DKDEBUG);
+	if(DK_GetBrowser() == "Rocket"){
+		DKWebSockets_CloseClient();
+		return;
+	}
+	
+	//else
 	websocket.close();
 }
 

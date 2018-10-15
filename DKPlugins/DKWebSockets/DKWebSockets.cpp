@@ -10,7 +10,7 @@ uWS::WebSocket<uWS::SERVER>* DKWebSockets::serverWebSocket = NULL;
 uWS::Hub DKWebSockets::serverHub;
 
 //CLIENT
-bool DKWebSockets::connected = NULL;
+bool DKWebSockets::clientConnected = NULL;
 DKString DKWebSockets::clientAddress;
 int DKWebSockets::clientPort = NULL;
 uWS::WebSocket<uWS::CLIENT>* DKWebSockets::clientWebSocket = NULL;
@@ -64,7 +64,7 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	DKLog("DKWebSockets::CreateClient("+address+")\n", DKINFO);
 
 	clientHub.onError([](void *user){
-		connected = false;
+		clientConnected = false;
 		DKLog("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n", DKINFO);
 		switch ((long) user){
 		case 1:
@@ -103,14 +103,15 @@ bool DKWebSockets::CreateClient(const DKString& address)
 		}
 	});
 
-	//FIXME - this is never called
 	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
 		DKLog("DKWebSockets::CreateClient(): clientHub.onConnection\n", DKINFO);
+		clientConnected = true;
 		clientWebSocket = ws;
 	});
 
 	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
 		DKLog("DKWebSockets::CreateClient(): clientHub.onDisconnection\n", DKINFO);
+		clientConnected = false;
 	});
 
 	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
@@ -208,9 +209,8 @@ void DKWebSockets::Loop()
 
 	if(!clientAddress.empty()){
 		clientHub.poll();
-		if(!connected){
+		if(!clientConnected){
 			clientHub.connect(clientAddress, NULL);
-			connected = true;
 		}
 	}
 }
