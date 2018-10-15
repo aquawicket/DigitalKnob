@@ -46,6 +46,7 @@ bool DKCef::Init()
 	cefHandler = NULL;
 	source = "";
 	DKClass::DKCreate("DKCefJS");
+	DKClass::DKCreate("DKCefV8");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
@@ -285,7 +286,6 @@ bool DKCef::Init()
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
-	DKClass::DKCreate("DKCefV8");
 	DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
 	return true;
 }
