@@ -1,6 +1,7 @@
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 
 //#ifdef USE_DKCef
+#include "DKDuktape/DKDuktape.h"
 #include "DKCef/DKCefV8.h"
 
 ////////////////////
@@ -43,6 +44,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
 	DKV8::AttachFunction("DK_QueueDuktape", DKCefV8::QueueDuktape);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
+	DKV8::AttachFunction("DK_Reload", DKCefV8::_Reload);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
 	DKV8::AttachFunction("DK_RunDuktape", DKCefV8::RunDuktape);
 	DKV8::AttachFunction("DK_SetBrightness", DKCefV8::SetBrightness);
@@ -121,6 +123,13 @@ bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
 	DKClass::DKCreate(data);
 	return true;
+}
+
+/////////////////////////////////////////////////////
+bool DKCefV8::_Reload(CefArgs args, CefReturn retval)
+{
+	DKDuktape::Reload();
+	return 1;
 }
 
 /////////////////////////////////////////////////////

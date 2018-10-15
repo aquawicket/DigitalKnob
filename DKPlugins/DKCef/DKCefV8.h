@@ -16,8 +16,9 @@ public:
 
 	static bool _DKCreate(CefArgs args, CefReturn retval);
 	static bool _DKValid(CefArgs args, CefReturn retval);
+	static bool _Reload(CefArgs args, CefReturn retval);
 	static bool _SetLog(CefArgs args, CefReturn retval);
-
+	
 	static bool Beep(CefArgs args, CefReturn retval);
 	static bool ClickImage(CefArgs args, CefReturn retval);
 	static bool CpuUsed(CefArgs args, CefReturn retval);
