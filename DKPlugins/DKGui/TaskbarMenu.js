@@ -107,8 +107,12 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenDebug")){
-		//DKRocket_ToggleDebugger();
-		DKCef_ShowDevTools(0);
+		if(DK_GetBrowser() == "Rocket"){
+			DKRocket_ToggleDebugger();
+		}
+		if(DK_GetBrowser() == "CEF"){
+			DKCef_ShowDevTools(0);
+		}
 	}
 	if(DK_Id(event, "PushDKFiles")){
 		DKDebug_PushDKFiles();
