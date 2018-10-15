@@ -39,20 +39,29 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
-	source = "";
+	//source = "";
+
+	DKString id;
+	int top;
+	int left;
+	int width;
+	int height;
+	DKString url;
+
+
 	DKClass::DKCreate("DKCefJS");
 	DKClass::DKCreate("DKCefV8");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
-		//id = data[1];
+		id = data[1];
 		top = toInt(data[2]);
 		left = toInt(data[3]);
 		width = toInt(data[4]);
 		height = toInt(data[5]);
 	}
 	if(data.size() > 5){
-		homepage = data[6];
+		url = data[6];
 	}
 	fullscreen = false;
 
@@ -262,18 +271,20 @@ bool DKCef::Init()
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
+			NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
 		if(DKClass::DKAvailable("DKOSGCef")){
 			DKClass::DKCreate("DKOSGCef");
+			NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else{
 		dkCefWindow = new DKCefWindow();
 		cefHandler = dkCefWindow;
 		dkCefWindow->dkCef = this;
-		NewBrowser();
+		NewBrowser(id, top, left, width, height, url);
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
 
 		DKString icon = DKFile::local_assets+"icon.ico";
@@ -338,6 +349,7 @@ bool DKCef::Copy()
 bool DKCef::CopyImage(const DKString& url)
 {
 	DKLog("DKCef::CopyImage("+url+")\n", DKDEBUG);
+	/*
 	NewBrowser();
 	int num;
 	GetBrowsers(num);
@@ -350,6 +362,7 @@ bool DKCef::CopyImage(const DKString& url)
 	dkBrowsers[num-1].browser->GetMainFrame()->Copy();  //NOT WORKING, url not loaded yet. 
 
 	CloseBrowser(num-1);
+	*/
 	return false; //return false until this is working
 }
 
@@ -431,7 +444,7 @@ bool DKCef::GetCurrentBrowser(int& browser)
 bool DKCef::GetPageSource(const int& browser, DKString& _source)
 {
 	DKLog("DKCef::GetPageSource()\n", DKDEBUG);
-	_source = source; 
+	//_source = source; 
 	return true;
 }
 
@@ -468,8 +481,8 @@ bool DKCef::GoForward(const int& browser)
 	return false;
 }
 
-////////////////////////
-bool DKCef::NewBrowser()
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
 	DKLog("DKCef::NewBrowser()\n", DKDEBUG);
 	CefWindowInfo window_info;
@@ -478,13 +491,18 @@ bool DKCef::NewBrowser()
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 
 		if(!_browser){
 			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
 			return false; 
 		}
 		DKBrowser dkBrowser;
+		dkBrowser.id = id;
+		dkBrowser.top = top;
+		dkBrowser.width = width;
+		dkBrowser.height = height;
+		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		current_browser = dkBrowsers[0].browser;
@@ -523,8 +541,13 @@ bool DKCef::NewBrowser()
 		window_info.width = 800;
 		window_info.height = 600;
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, homepage, browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 		DKBrowser dkBrowser;
+		dkBrowser.id = id;
+		dkBrowser.top = top;
+		dkBrowser.width = width;
+		dkBrowser.height = height;
+		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		current_browser = dkBrowsers[0].browser;
@@ -585,6 +608,14 @@ bool DKCef::Reload(const int& browser)
 	return true;
 }
 
+///////////////////////////////////////////
+bool DKCef::RemoveFocus(const int& browser)
+{
+	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
+	dkBrowsers[browser].focused = false;
+	return 1;
+}
+
 ////////////////////////////////////////
 bool DKCef::RunDuktape(DKString& string)
 {
@@ -622,6 +653,14 @@ bool DKCef::SelectBrowser(int& browser)
 	current_browser = dkBrowsers[browser].browser;
 	current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
+}
+
+////////////////////////////////////////
+bool DKCef::SetFocus(const int& browser)
+{
+	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
+	dkBrowsers[browser].focused = true;
+	return 1;
 }
 
 ///////////////////////////////////////////////////////////

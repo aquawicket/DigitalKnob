@@ -644,7 +644,8 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKCefV8::Focused(CefArgs args, CefReturn retval)
 {
-	bool focused = DKCef::Get()->inFocus;
+	int browser = args->GetInt(0);
+	bool focused = DKCef::Get()->dkBrowsers[browser].focused;
 	if(!focused){ return false; }
 	if(!retval->SetBool(0, true)){ return false; }
 	return true;
@@ -713,7 +714,13 @@ bool DKCefV8::GoForward(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKCefV8::NewBrowser(CefArgs args, CefReturn retval)
 {
-	if(!DKCef::Get()->NewBrowser()){ return false; }
+	DKString id = args->GetString(0);
+	int top = args->GetInt(1);
+	int left = args->GetInt(2);
+	int width = args->GetInt(3);
+	int height = args->GetInt(4);
+	DKString url = args->GetString(5);
+	if(!DKCef::Get()->NewBrowser(id, top, left, width, height, url)){ return false; }
 	return true;
 }
 
@@ -751,8 +758,8 @@ bool DKCefV8::Reload(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKCefV8::RemoveFocus(CefArgs args, CefReturn retval)
 {
-	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(false);
-	DKCef::Get()->inFocus = false;
+	int browser = args->GetInt(0);
+	if(!DKCef::Get()->RemoveFocus(browser)){ return false; }
 	return true;
 }
 
@@ -776,11 +783,8 @@ bool DKCefV8::SelectBrowser(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////
 bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
 {
-	//if(!DKCef::Get()->Valid("")){ return false; }
-	if(!DKCef::Get()->current_browser){ return false; }
-	if(!DKCef::Get()->current_browser->GetHost()){ return false; }
-	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(true);
-	DKCef::Get()->inFocus = true;
+	int browser = args->GetInt(0);
+	if(!DKCef::Get()->SetFocus(browser)){ return false; }
 	return true;
 }
 

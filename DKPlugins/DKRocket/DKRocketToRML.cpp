@@ -154,7 +154,11 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
+
+		//This is what RocketSDL2Renderer::LoadTexture and RocketSDL2Renderer::RenderGeometry
+		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
 		cef_texture->SetAttribute("src", cef_id.c_str());
+
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
 		iframes[i]->AppendChild(cef_texture);

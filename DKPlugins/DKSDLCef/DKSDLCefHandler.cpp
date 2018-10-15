@@ -106,7 +106,8 @@ void DKSDLCefHandler::DoFrame()
 bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 {
 	DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
-	rect = CefRect(0, 0, dkCef->width, dkCef->height);
+	if(dkCef->dkBrowsers.size() < 1){ return false; }
+	rect = CefRect(0, 0, dkCef->dkBrowsers[0].width, dkCef->dkBrowsers[0].height);
 	return true;
 }
 

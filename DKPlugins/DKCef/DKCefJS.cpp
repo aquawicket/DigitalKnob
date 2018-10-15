@@ -94,7 +94,8 @@ int DKCefJS::Find(duk_context* ctx)
 //////////////////////////////////////
 int DKCefJS::Focused(duk_context* ctx)
 {
-	bool focused = DKCef::Get()->inFocus;
+	int browser = duk_require_int(ctx, 0);
+	bool focused = DKCef::Get()->dkBrowsers[browser].focused;
 	if(!focused){ return 0; }
 	duk_push_true(ctx);
 	return 1;
@@ -163,7 +164,13 @@ int DKCefJS::GoForward(duk_context* ctx)
 /////////////////////////////////////////
 int DKCefJS::NewBrowser(duk_context* ctx)
 {
-	if(!DKCef::Get()->NewBrowser()){ return 0; }
+	DKString id = duk_require_string(ctx, 0);
+	int top = duk_require_int(ctx, 1);
+	int left = duk_require_int(ctx, 2);
+	int width = duk_require_int(ctx, 3);
+	int height = duk_require_int(ctx, 4);
+	DKString url = duk_require_string(ctx, 5);
+	if(!DKCef::Get()->NewBrowser(id, top, left, width, height, url)){ return 0; }
 	return 1;
 }
 
@@ -201,8 +208,8 @@ int DKCefJS::Reload(duk_context* ctx)
 //////////////////////////////////////////
 int DKCefJS::RemoveFocus(duk_context* ctx)
 {
-	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(false);
-	DKCef::Get()->inFocus = false;
+	int browser = duk_require_int(ctx, 0);
+	if(!DKCef::Get()->RemoveFocus(browser)){ return 0; }
 	return 1;
 }
 
@@ -226,11 +233,8 @@ int DKCefJS::SelectBrowser(duk_context* ctx)
 ///////////////////////////////////////
 int DKCefJS::SetFocus(duk_context* ctx)
 {
-	//if(!DKCef::Get()->Valid("")){ return 0; }
-	if(!DKCef::Get()->current_browser){ return 0; }
-	if(!DKCef::Get()->current_browser->GetHost()){ return 0; }
-	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(true);
-	DKCef::Get()->inFocus = true;
+	int browser = duk_require_int(ctx, 0);
+	if(!DKCef::Get()->SetFocus(browser)){ return 0; }
 	return 1;
 }
 

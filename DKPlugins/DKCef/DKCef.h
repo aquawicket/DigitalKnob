@@ -14,10 +14,13 @@ class DKCefWindow;
 ////////////////
 struct DKBrowser
 {
+	DKString id;
 	int top;
 	int left;
 	int width;
 	int height;
+	DKString url;
+	bool focused;
 	CefRefPtr<CefBrowser> browser;
 };
 
@@ -50,13 +53,15 @@ public:
 	bool GetUrl(int& browser, DKString& url);
 	bool GoBack(const int& browser);
 	bool GoForward(const int& browser);
-	bool NewBrowser();
+	bool NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url);
 	bool Paste();
 	bool Popup(const DKString& url);
 	bool Print(const int& browser);
 	bool Reload(const int& browser);
+	bool RemoveFocus(const int& browser);
 	bool RunJavascript(const int& browser, DKString& string);
 	bool SelectBrowser(int& browser);
+	bool SetFocus(const int& browser);
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
 	bool Stop(const int& browser);
@@ -68,13 +73,13 @@ public:
 	bool QueueDuktape(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
-	int top;
-	int left;
-	int width;
-	int height;
-	bool inFocus;
-	DKString homepage;
-	DKString source;
+	//int top;
+	//int left;
+	//int width;
+	//int height;
+	//int inFocus;
+	//DKString homepage;
+	//DKString source;
 	bool fullscreen;
 
 	//std::vector<CefRefPtr<CefBrowser> > browsers;

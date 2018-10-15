@@ -46,6 +46,9 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
         sdl_texture = (SDL_Texture*)texture;
 
 		//Cef
+		//The id is mapped to the texture in texture_name
+		//If the id contains iframe_ , it is a cef image
+		//Update the texture with DKSDLCef::GetTexture(id);
 		///////////////////////////////////////////////////////////
 		if(has(texture_name[texture],"iframe_")){
 			DKString id = texture_name[texture];
@@ -147,6 +150,8 @@ void RocketSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 bool RocketSDL2Renderer::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
 {
 	//CEF Texture
+	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
+	//We will map that id to the texture handle for later use. 
 	if(has(source.CString(),"iframe_")){
 		texture_handle = reinterpret_cast<Rocket::Core::TextureHandle>(&source);
 		texture_name[texture_handle] = source.CString();
