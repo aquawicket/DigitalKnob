@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 #ifdef USE_DKDuktape 
 #include "DKClient/DKClient.h"
 #include "DKClient/DKClientJS.h"

@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 #include "DK/stdafx.h"
 #include "DKServer/DKServerWebsockets.h"
 

@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 #pragma once
 #ifndef DKClient_H
 #define DKClient_H

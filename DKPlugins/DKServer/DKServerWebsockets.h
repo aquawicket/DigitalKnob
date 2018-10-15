@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 //http://stackoverflow.com/questions/30904560/libwebsocket-client-example
 //https://barkingbogart.wordpress.com/2014/10/07/test-drive-libwebsockets-library-a-simple-server/
 //http://usualcarrot.com/libwebsockets-simple-websocket-server   NOTE: 5 YEARS OLD!

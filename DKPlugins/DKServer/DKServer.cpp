@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 #include "DK/stdafx.h"
 #include "DKServer/DKServer.h"
 //#ifdef USE_Boost_Thread

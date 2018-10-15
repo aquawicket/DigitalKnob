@@ -1,3 +1,5 @@
+//########## THIS PLUGIN IS OBSOLETE, PLEASE USE DKWebSockets ##########
+
 // http://www.boost.org/doc/libs/1_41_0/doc/html/boost_asio/example/echo/async_tcp_echo_server.cpp
 
 //#ifdef USE_Boost_Thread
