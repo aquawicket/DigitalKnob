@@ -12,6 +12,12 @@
 		<script type="text/javascript" id="DKFile/DKFile.js" src="DKFile/DKFile.js"></script>
 		<script type="text/javascript" id="DKAssets/DKAssets.js" src="DKAssets/DKAssets.js"></script>
 		<script type="text/javascript" id="DKWidget/DKWidget.js" src="DKWidget/DKWidget.js"></script>
-		<script type="text/javascript" id="app.js" src="app.js"></script>
+		<script id="RunAppOrPlugin">
+			var url_string = window.location.href;
+			var url = new URL(url_string);
+			var plugin = url.searchParams.get("plugin");
+			if(plugin){ DKCreate(plugin+".js", function(){}); }
+			else{ DKCreate("app.js", function(){}); }
+		</script>
 	</body>
 </html>
