@@ -271,7 +271,7 @@ bool DKCef::Init()
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
-			NewBrowser(id, top, left, width, height, url); //FIXME: Not Working
+			NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
@@ -437,6 +437,7 @@ bool DKCef::GetCurrentBrowser(int& browser)
 			return true;
 		}
 	}
+	DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
 	return false; //error
 }
 
@@ -658,9 +659,13 @@ bool DKCef::SelectBrowser(int& browser)
 ////////////////////////////////////////
 bool DKCef::SetFocus(const int& browser)
 {
+	if(browser+1 > (int)dkBrowsers.size()){
+		DKLog("DKCef::SetFocus("+toString(browser)+"): browser invalid\n", DKERROR);
+		return false;
+	}
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	dkBrowsers[browser].focused = true;
-	return 1;
+	return true;
 }
 
 ///////////////////////////////////////////////////////////

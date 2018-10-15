@@ -92,6 +92,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 {
 	DKString id = *(DKString*)input;
 	//DKLog("DKSDLCef::GetTexture("+id+")\n", DKINFO);
+	if(dkCef->dkBrowsers.size() < 1){ return false; }
 
 	if(!cef_image){
 		cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[0].width, dkCef->dkBrowsers[0].height);
@@ -334,7 +335,9 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	//DKLog("DKSDLCef::OnResize("+str+")\n", DKWARN);
 
 	int i;
-	dkCef->GetCurrentBrowser(i);
+	if(!dkCef->GetCurrentBrowser(i)){
+		return false;
+	}
 
 	DKStringArray arry;
 	toStringArray(arry,str,",");

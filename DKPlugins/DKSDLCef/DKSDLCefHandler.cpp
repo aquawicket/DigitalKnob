@@ -327,7 +327,7 @@ void DKSDLCefHandler::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool i
 void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
 	//DKLog("DKSDLCefHandler::OnPaint()\n", DKDEBUG);
-	if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
+	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 	if(type == PET_VIEW){
 		if(dirtyRects.size() == 0){ return; }
 
