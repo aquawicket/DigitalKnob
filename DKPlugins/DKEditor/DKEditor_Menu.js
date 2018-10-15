@@ -82,7 +82,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKEditor_Menu_DevTools")){
 		if(typeof DKCef_ShowDevTools == 'function'){
-			DKCef_ShowDevTools("Cef", 0);
+			DKCef_ShowDevTools(0);
 		}
 		if(typeof DKRocket_ToggleDebugger == 'function'){
 			DKRocket_ToggleDebugger();

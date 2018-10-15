@@ -108,7 +108,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "OpenDebug")){
 		//DKRocket_ToggleDebugger();
-		DKCef_ShowDevTools();
+		DKCef_ShowDevTools(0);
 	}
 	if(DK_Id(event, "PushDKFiles")){
 		DKDebug_PushDKFiles();
