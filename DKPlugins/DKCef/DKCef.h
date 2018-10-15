@@ -58,7 +58,6 @@ public:
 	bool QueueDuktape(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
-	DKString id;
 	int top;
 	int left;
 	int width;

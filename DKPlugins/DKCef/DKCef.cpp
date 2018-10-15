@@ -49,7 +49,7 @@ bool DKCef::Init()
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
-		id = data[1];
+		//id = data[1];
 		top = toInt(data[2]);
 		left = toInt(data[3]);
 		width = toInt(data[4]);
@@ -266,12 +266,12 @@ bool DKCef::Init()
 
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
-			DKClass::DKCreate("DKSDLCef,"+id);
+			DKClass::DKCreate("DKSDLCef");
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
 		if(DKClass::DKAvailable("DKOSGCef")){
-			DKClass::DKCreate("DKOSGCef,"+id);
+			DKClass::DKCreate("DKOSGCef");
 		}
 	}
 	else{

@@ -142,7 +142,7 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 {
-	DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+")\n", DKDEBUG);
+	DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKDEBUG);
 	model->Clear(); //remove original context menu
 
 	DKString data;
@@ -151,7 +151,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 	data += params->GetSourceUrl();
 	data += ";";
 	data += params->GetLinkUrl();
-	DKLog("DKSDLCefHandler::OnBeforeContextMenu("+dkCef->id+"): data = "+data+"\n", DKINFO);
+	DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n", DKINFO);
 
 	DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 }

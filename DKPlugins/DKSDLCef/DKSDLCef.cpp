@@ -21,8 +21,8 @@ bool DKSDLCef::Init()
 	background_image = NULL;
 	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	id = data[1];
-	dkCef = DKCef::Get(id);
+	//id = data[1];
+	dkCef = DKCef::Get();
 	if(!dkSdlWindow || !dkCef){
 		DKLog("DKOSGRocket::Init(): INVALID OBJECTS \n", DKERROR);
 		return false;
