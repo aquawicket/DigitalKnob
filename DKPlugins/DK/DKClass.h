@@ -114,7 +114,11 @@ public:
 			DKLog("CallFunc("+name+") not registered\n", DKWARN);
 			return false;
 		}
-		return functions[name](input, output);
+		if(!functions[name](input, output)){
+			DKLog("CallFunc("+name+") failed\n", DKERROR);
+			return false;
+		}
+		return true;
 	}
 
 	static std::map<DKString, boost::function<bool (const void*, void*)> > functions;

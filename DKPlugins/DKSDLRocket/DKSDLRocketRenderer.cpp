@@ -56,12 +56,13 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 			
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-			DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output);
+			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output)){
+				return;
+			}
 			sdl_texture = output.texture;
-
-			if(!sdl_texture){ return; }
 		}
 
+		if(!sdl_texture){ return; }
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1){
 			DKLog("SDL_GL_BindTexture: "+DKString(SDL_GetError())+" \n", DKERROR);
 		}

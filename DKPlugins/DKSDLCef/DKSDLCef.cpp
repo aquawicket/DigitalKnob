@@ -90,6 +90,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 //////////////////////////////////////////////////////////
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
+	return false;
 	DKString id = *(DKString*)input;
 	//DKLog("DKSDLCef::GetTexture("+id+")\n", DKINFO);
 	if(dkCef->dkBrowsers.size() < 1){ return false; }
