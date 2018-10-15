@@ -58,7 +58,6 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
 	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
 	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
-	if(string.indexOf("dkfuncs") != -1){ DK_PrintFunctions(); key_history = []; }
 	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }
 	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }
 	if(string.indexOf("dkcrash") != -1){ DKDebug_Crash(); key_history = []; }	
@@ -229,8 +228,8 @@ function DKDebug_PrintInfo()
 		if(!arry[i]){ continue; }
 		DKLog(arry[i]+"\n"); 
 	}
-	
 	DKLog("\n"); 
+	
 	DKLog("**** DKEVENTS ****\n"); 
 	var events = DK_GetEvents();
 	var arry = events.split(",");
@@ -238,7 +237,15 @@ function DKDebug_PrintInfo()
 		if(!arry[i]){ continue; }
 		DKLog(arry[i]+"\n"); 
 	}
+	DKLog("\n"); 
 	
+	DKLog("**** DKEVENTS ****\n"); 
+	var events = DK_GetFunctions();
+	var arry = events.split(",");
+	for(var i=0; i<arry.length; i++){
+		if(!arry[i]){ continue; }
+		DKLog(arry[i]+"\n"); 
+	}
 	DKLog("\n"); 
 }
 
