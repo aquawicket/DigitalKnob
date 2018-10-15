@@ -13,6 +13,7 @@ bool DKRocket::Init()
 	DKLog("DKRocket::Init() \n", DKDEBUG);
 	
 	DKClass::DKCreate("DKRocketJS");
+	DKClass::DKCreate("DKRocketV8");
 	document = NULL;
 
 	if(!dkRocketFile){ 
