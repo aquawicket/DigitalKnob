@@ -171,11 +171,12 @@ bool DKSDLCefHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<Cef
 {
 	//TODO
 	DKLog("DKSDLCefHandler::OnBeforePopup("+target_url.ToString()+","+target_frame_name.ToString()+","+toString(target_disposition)+")\n", DKDEBUG);
+	
 	return false; //DISABLED
 
 	//DKEvent::SendEvent("GLOBAL", "DKCef_OnBeforePopup", target_url);
 	if(target_disposition == WOD_NEW_FOREGROUND_TAB){
-		dkCef->queue_new_browser = target_url;
+		//dkCef->queue_new_browser = target_url;
 	}
 	else{
 		dkCef->current_browser->GetMainFrame()->LoadURL(target_url.c_str());
@@ -305,8 +306,8 @@ void DKSDLCefHandler::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool i
 {
 	DKLog("DKSDLCefHandler::OnLoadingStateChange("+toString(isLoading)+","+toString(canGoBack)+","+toString(canGoForward)+")\n", DKDEBUG);
 
-	for(unsigned int i=0; i<dkCef->browsers.size(); ++i){
-		if(browser->GetIdentifier() == dkCef->browsers[i]->GetIdentifier()){
+	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); ++i){
+		if(browser->GetIdentifier() == dkCef->dkBrowsers[i].browser->GetIdentifier()){
 			DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", toString(i));
 			return;
 		}

@@ -11,6 +11,16 @@
 
 class DKCefWindow;
 
+////////////////
+struct DKBrowser
+{
+	int top;
+	int left;
+	int width;
+	int height;
+	CefRefPtr<CefBrowser> browser;
+};
+
 //////////////////////////////////////////////////////
 class DialogCallback : public CefRunFileDialogCallback 
 {
@@ -66,9 +76,9 @@ public:
 	DKString homepage;
 	DKString source;
 	bool fullscreen;
-	DKString queue_new_browser;
 
-	std::vector<CefRefPtr<CefBrowser> > browsers;
+	//std::vector<CefRefPtr<CefBrowser> > browsers;
+	std::vector<DKBrowser> dkBrowsers;
 	CefRefPtr<CefBrowser> current_browser;
 	static CefRefPtr<DKCefApp> cefApp;
 	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)

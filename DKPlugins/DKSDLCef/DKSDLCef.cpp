@@ -343,8 +343,8 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 		dkCef->height = toInt(arry[3]);
 	}
 
-	for(unsigned int i = 0; i < dkCef->browsers.size(); ++i){
-		dkCef->browsers[i]->GetHost()->WasResized();
+	for(unsigned int i = 0; i < dkCef->dkBrowsers.size(); ++i){
+		dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
 	}
 
 	return true;
@@ -392,18 +392,10 @@ void DKSDLCef::Draw()
 {
 	//DKLog("DKSDLCef::Draw()\n", DKDEBUG);
 
-	//NOTE: For single browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
-	//      and set url of the current_browser. All urls, will be directed to the same target.
-	//      For multiple browser apps, we need to intercept DKCef_OnQueueNewBrowser in javascript
-	//      and create a new browser(TAB) to put the url in.
-	if(!dkCef->queue_new_browser.empty()){
-		DKEvent::SendEvent("GLOBAL", "DKCef_OnQueueNewBrowser", dkCef->queue_new_browser);
-		dkCef->queue_new_browser = "";
-	}
+	///// Draw to DKRocket
+	if(DKClass::DKValid("DKRocket,DKRocket0")){ return; } 
 
-
-	if(DKClass::DKValid("DKRocket,DKRocket0")){ return; }
-	///// Draw to SDL Directly
+	///// Draw to DKSdlWindow
 	if(!cef_image){ return; }
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->top; // the y coordinate
