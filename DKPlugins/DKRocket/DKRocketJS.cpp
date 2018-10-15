@@ -15,19 +15,17 @@ bool DKRocketJS::Init()
 	return true;
 }
 
-
-
-/////////////////////////////////
+////////////////////////////////////////
 int DKRocketJS::Reload(duk_context* ctx)
 {
-	DKRocket::Get("DKRocket0")->Reload();
+	DKRocket::Get()->Reload();
 	return 1;
 }
 
 ////////////////////////////////////////////////
 int DKRocketJS::ToggleDebugger(duk_context* ctx)
 {
-	DKRocket::Get("DKRocket0")->ToggleDebugger();
+	DKRocket::Get()->ToggleDebugger();
 	return 1;
 }
 
