@@ -10,6 +10,7 @@ uWS::WebSocket<uWS::SERVER>* DKWebSockets::serverWebSocket = NULL;
 uWS::Hub DKWebSockets::serverHub;
 
 //CLIENT
+bool DKWebSockets::connected = NULL;
 DKString DKWebSockets::clientAddress;
 int DKWebSockets::clientPort = NULL;
 uWS::WebSocket<uWS::CLIENT>* DKWebSockets::clientWebSocket = NULL;
@@ -63,28 +64,63 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	DKLog("DKWebSockets::CreateClient("+address+")\n", DKINFO);
 
 	clientHub.onError([](void *user){
-		DKLog("DKWebSockets::CreateClient(): clientHub.onError\n", DKINFO);
-	});
-
-	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
-		clientWebSocket = ws;
-		switch ((long) ws->getUserData()) {
-		case 8:
-			DKLog("Client established a remote connection over non-SSL\n", DKINFO);
+		connected = false;
+		DKLog("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n", DKINFO);
+		switch ((long) user){
+		case 1:
+			DKLog("Client emitted error on invalid URI\n", DKERROR);
 			break;
-		case 9:
-			DKLog("Client established a remote connection over SSL\n", DKINFO);
+		case 2:
+			DKLog("Client emitted error on resolve failure\n", DKERROR);
 			break;
-		default:
-			DKLog("FAILURE: ws->getUserData() should not connect!\n", DKINFO);
+		case 3:
+			DKLog("Client emitted error on connection timeout (non-SSL)\n", DKERROR);
+			break;
+		case 5:
+			DKLog("Client emitted error on connection timeout (SSL)\n", DKERROR);
+			break;
+		case 6:
+			DKLog("Client emitted error on HTTP response without upgrade (non-SSL)\n", DKERROR);
+			break;
+		case 7:
+			DKLog("Client emitted error on HTTP response without upgrade (SSL)\n", DKERROR);
+			break;
+		case 10:
+			DKLog("Client emitted error on poll error\n", DKERROR);
+			break;
+		case 11:
+			static int protocolErrorCount = 0;
+			protocolErrorCount++;
+			DKLog("Client emitted error on invalid protocol\n", DKERROR);
+			if (protocolErrorCount > 1) {
+				DKLog("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection!\n", DKERROR);
+				exit(-1);
+			}
+			break;
+			//default:
+			//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
+			//exit(-1);
 		}
 	});
 
+	//FIXME - this is never called
+	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
+		DKLog("DKWebSockets::CreateClient(): clientHub.onConnection\n", DKINFO);
+		clientWebSocket = ws;
+	});
+
+	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
+		DKLog("DKWebSockets::CreateClient(): clientHub.onDisconnection\n", DKINFO);
+	});
+
 	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
+		DKLog("DKWebSockets::CreateClient(): clientHub.onMessage\n", DKINFO);
 		MessageFromServer(ws, message, length, opCode);
 	});
 
-	clientHub.connect(address, nullptr);
+	//clientHub.listen(80);
+	//clientHub.connect(address, NULL);
+	
 	DKLog("DKWebSockets::CreateClient(): Client started...\n", DKINFO);
 	return true;
 }
@@ -168,6 +204,14 @@ void DKWebSockets::Loop()
 	}
 	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort)){
 		serverHub.poll();
+	}
+
+	if(!clientAddress.empty()){
+		clientHub.poll();
+		if(!connected){
+			clientHub.connect(clientAddress, NULL);
+			connected = true;
+		}
 	}
 }
 
