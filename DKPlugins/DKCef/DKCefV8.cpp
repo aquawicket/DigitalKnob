@@ -1,3 +1,5 @@
+//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+
 //#ifdef USE_DKCef
 #include "DKCef/DKCefV8.h"
 
@@ -10,6 +12,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("TestFunction", DKCefV8::TestFunction);
 
 	DKV8::AttachFunction("DKCreate_CPP", DKCefV8::_DKCreate);
+	DKV8::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("DKValid", DKCefV8::_DKValid);
 	
 	DKV8::AttachFunction("DK_Beep", DKCefV8::Beep);
@@ -22,6 +25,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_GetClipboard", DKCefV8::GetClipboard);
 	DKV8::AttachFunction("DK_GetFps", DKCefV8::GetFps);
 	DKV8::AttachFunction("DK_GetFrames", DKCefV8::GetFrames);
+	DKV8::AttachFunction("DK_GetFunctions", DKCefV8::GetFunctions);
 	DKV8::AttachFunction("DK_GetLocalIP", DKCefV8::GetLocalIP);
 	DKV8::AttachFunction("DK_GetMouseX", DKCefV8::GetMouseX);
 	DKV8::AttachFunction("DK_GetMouseY", DKCefV8::GetMouseY);
@@ -37,7 +41,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_PhysicalMemoryUsed", DKCefV8::PhysicalMemoryUsed);
 	DKV8::AttachFunction("DK_PhysicalMemoryUsedByApp", DKCefV8::PhysicalMemoryUsedByApp);
 	DKV8::AttachFunction("DK_PressKey", DKCefV8::PressKey);
-	DKV8::AttachFunction("DK_PrintFunctions", DKCefV8::PrintFunctions);
 	DKV8::AttachFunction("DK_QueueDuktape", DKCefV8::QueueDuktape);
 	DKV8::AttachFunction("DK_ReleaseKey", DKCefV8::ReleaseKey);
 	DKV8::AttachFunction("DK_Run", DKCefV8::Run);
@@ -47,7 +50,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DK_SetClipboardFiles", DKCefV8::SetClipboardFiles);
 	DKV8::AttachFunction("DK_SetClipboardImage", DKCefV8::SetClipboardImage);
 	DKV8::AttachFunction("DK_SetFramerate", DKCefV8::SetFramerate);
-	DKV8::AttachFunction("DK_SetLog", DKCefV8::_SetLog);
 	DKV8::AttachFunction("DK_SetMousePos", DKCefV8::SetMousePos);
 	DKV8::AttachFunction("DK_SetVolume", DKCefV8::SetVolume);
 	DKV8::AttachFunction("DK_ShowConsole", DKCefV8::ShowConsole);
@@ -121,6 +123,16 @@ bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 	return true;
 }
 
+/////////////////////////////////////////////////////
+bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
+{
+	//TODO
+	int lvl = args->GetInt(0);
+	DKString string = args->GetString(1);
+	SetLog(lvl, string);
+	return true;
+}
+
 //////////////////////////////////////////////////////
 bool DKCefV8::_DKValid(CefArgs args, CefReturn retval)
 {
@@ -156,6 +168,23 @@ bool DKCefV8::ClickImage(CefArgs args, CefReturn retval)
 	return true;
 }
 
+/////////////////////////////////////////////////////
+bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
+{
+	int cpu;
+	if(!DKUtil::CpuUsed(cpu)){ return false; }
+	if(!retval->SetInt(0, cpu)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
+{
+	int cpu;
+	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
+	if(!retval->SetInt(0, cpu)){ return false; }
+	return true;
+}
 //////////////////////////////////////////////////////////////
 bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval)
 {
@@ -165,16 +194,6 @@ bool DKCefV8::DrawTextOnScreen(CefArgs args, CefReturn retval)
 		return false; 
 	}
 	retval->SetBool(0, true);
-	return true;
-}
-
-/////////////////////////////////////////////////////
-bool DKCefV8::_SetLog(CefArgs args, CefReturn retval)
-{
-	//TODO
-	int lvl = args->GetInt(0);
-	DKString string = args->GetString(1);
-	SetLog(lvl, string);
 	return true;
 }
 
@@ -202,6 +221,40 @@ bool DKCefV8::GetClipboard(CefArgs args, CefReturn retval)
 	if(!DKUtil::GetClipboard(string)){ return false; }
 	if(!retval->SetString(0, string)){ return false; } 
 	return true;
+}
+
+////////////////////////////////////////////////////
+bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
+{
+	unsigned int fps;
+	DKUtil::GetFps(fps);
+	if(!retval->SetInt(0, fps)){ return false; }
+	return true;
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
+{
+	long frames;
+	if(!DKUtil::GetFrames(frames)){ return false; }
+	if(!retval->SetInt(0, (int)frames)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////
+bool DKCefV8::GetFunctions(CefArgs args, CefReturn retval)
+{
+#ifndef MAC
+	DKStringArray list;
+	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
+	for(it_type iterator = DKV8::functions.begin(); iterator != DKV8::functions.end(); iterator++){
+		list.push_back(iterator->first);
+	}
+	DKString str = toString(list, ",");
+	if(!retval->SetString(0, str)){ return false; }
+	return true;
+#endif 
+	return false;
 }
 
 ////////////////////////////////////////////////////////
@@ -266,6 +319,15 @@ bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval)
 	return true;
 }
 
+//////////////////////////////////////////////////////
+bool DKCefV8::GetTicks(CefArgs args, CefReturn retval)
+{
+	long ticks;
+	if(!DKUtil::GetTicks(ticks)){ return false; }
+	if(!retval->SetInt(0, (int)ticks)){ return false; }
+	return true;
+}
+
 ///////////////////////////////////////////////////////
 bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 {
@@ -273,15 +335,6 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 	if(!DKUtil::GetVolume(percent)){ return false; }
 	DKLog("DKCefV8::GetVolume(): volume ="+toString(percent)+"\n", DKINFO);
 	if(!retval->SetInt(0, percent)){ return false; }
-	return 1;
-}
-
-///////////////////////////////////////////////////////
-bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
-{
-	int percent = args->GetInt(0);
-	DKLog("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n", DKINFO);
-	if(!DKUtil::SetVolume(percent)){ return false; }
 	return 1;
 }
 
@@ -301,25 +354,45 @@ bool DKCefV8::LeftClick(CefArgs args, CefReturn retval)
 	return DKUtil::LeftClick();
 }
 
+/////////////////////////////////////////////////////////////
+bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval)
+{
+	if(!DKUtil::LowPowerMonitor()){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
+{
+	unsigned long long physicalMemory;
+	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
+	return true;
+}
+
+////////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
+{
+	unsigned long long physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////////////////////
+bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
+{
+	unsigned int physicalMemory;
+	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
+	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
+	return true;
+}
+
 //////////////////////////////////////////////////////
 bool DKCefV8::PressKey(CefArgs args, CefReturn retval)
 {
 	int key = args->GetInt(0);
 	return DKUtil::PressKey(key);
-}
-
-////////////////////////////////////////////////////////////
-bool DKCefV8::PrintFunctions(CefArgs args, CefReturn retval)
-{
-#ifndef MAC
-	DKLog("\n**** V8 Functions ****\n", DKINFO);
-	typedef std::map<DKString, boost::function<bool(CefArgs, CefReturn)>>::iterator it_type;
-	for (it_type iterator = DKV8::functions.begin(); iterator != DKV8::functions.end(); iterator++) {
-		DKLog(iterator->first+"\n", DKINFO);
-	}
-	return true;
-#endif 
-	return false;
 }
 
 //////////////////////////////////////////////////////////
@@ -397,12 +470,29 @@ bool DKCefV8::SetClipboardImage(CefArgs args, CefReturn retval)
 	return DKUtil::SetClipboardImage(file);
 }
 
+//////////////////////////////////////////////////////////
+bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
+{
+	int fps = args->GetInt(0);
+	DKUtil::SetFramerate(fps);
+	return true;
+}
+
 /////////////////////////////////////////////////////////
 bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval)
 {
 	int x = args->GetInt(0);
 	int y = args->GetInt(1);
 	return DKUtil::SetMousePos(x,y);
+}
+
+///////////////////////////////////////////////////////
+bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
+{
+	int percent = args->GetInt(0);
+	DKLog("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n", DKINFO);
+	if(!DKUtil::SetVolume(percent)){ return false; }
+	return 1;
 }
 
 /////////////////////////////////////////////////////////
@@ -429,37 +519,20 @@ bool DKCefV8::System(CefArgs args, CefReturn retval)
 	return DKUtil::System(command);
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
+////////////////////////////////////////////////////////////
+bool DKCefV8::TurnOffMonitor(CefArgs args, CefReturn retval)
 {
-	DKString file = args->GetString(0);
-	int timeout = args->GetInt(1);
-	if(!DKUtil::WaitForImage(file, timeout)){
-		retval->SetBool(0, false); 
-		return false;
-	}
-	if(!retval->SetBool(0, true)){ return false; }
+	if(!DKUtil::TurnOffMonitor()){ return false; }
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKCefV8::SetFramerate(CefArgs args, CefReturn retval)
+///////////////////////////////////////////////////////////
+bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval)
 {
-	int fps = args->GetInt(0);
-	DKUtil::SetFramerate(fps);
+	if(!DKUtil::TurnOnMonitor()){ return false; }
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKCefV8::GetFps(CefArgs args, CefReturn retval)
-{
-	unsigned int fps;
-	DKUtil::GetFps(fps);
-	if(!retval->SetInt(0, fps)){ return false; }
-	return true;
-}
-
-//https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 ///////////////////////////////////////////////////////////
 bool DKCefV8::VirtualMemory(CefArgs args, CefReturn retval)
 {
@@ -487,91 +560,18 @@ bool DKCefV8::VirtualMemoryUsedByApp(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemory(CefArgs args, CefReturn retval)
-{
-	unsigned long long physicalMemory;
-	if(!DKUtil::PhysicalMemory(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
-	return true;
-}
-
-////////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemoryUsed(CefArgs args, CefReturn retval)
-{
-	unsigned long long physicalMemory;
-	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////////////////////
-bool DKCefV8::PhysicalMemoryUsedByApp(CefArgs args, CefReturn retval)
-{
-	unsigned int physicalMemory;
-	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return false; }
-	if(!retval->SetInt(0, (int)physicalMemory)){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////
-bool DKCefV8::CpuUsed(CefArgs args, CefReturn retval)
-{
-	int cpu;
-	if(!DKUtil::CpuUsed(cpu)){ return false; }
-	if(!retval->SetInt(0, cpu)){ return false; }
-	return true;
-}
-
 //////////////////////////////////////////////////////////
-bool DKCefV8::CpuUsedByApp(CefArgs args, CefReturn retval)
+bool DKCefV8::WaitForImage(CefArgs args, CefReturn retval)
 {
-	int cpu;
-	if(!DKUtil::CpuUsedByApp(cpu)){ return false; }
-	if(!retval->SetInt(0, cpu)){ return false; }
+	DKString file = args->GetString(0);
+	int timeout = args->GetInt(1);
+	if(!DKUtil::WaitForImage(file, timeout)){
+		retval->SetBool(0, false); 
+		return false;
+	}
+	if(!retval->SetBool(0, true)){ return false; }
 	return true;
 }
-
-////////////////////////////////////////////////////////////
-bool DKCefV8::TurnOffMonitor(CefArgs args, CefReturn retval)
-{
-	if(!DKUtil::TurnOffMonitor()){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKCefV8::TurnOnMonitor(CefArgs args, CefReturn retval)
-{
-	if(!DKUtil::TurnOnMonitor()){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////////////
-bool DKCefV8::LowPowerMonitor(CefArgs args, CefReturn retval)
-{
-	if(!DKUtil::LowPowerMonitor()){ return false; }
-	return true;
-}
-
-//////////////////////////////////////////////////////
-bool DKCefV8::GetTicks(CefArgs args, CefReturn retval)
-{
-	long ticks;
-	if(!DKUtil::GetTicks(ticks)){ return false; }
-	if(!retval->SetInt(0, (int)ticks)){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////
-bool DKCefV8::GetFrames(CefArgs args, CefReturn retval)
-{
-	long frames;
-	if(!DKUtil::GetFrames(frames)){ return false; }
-	if(!retval->SetInt(0, (int)frames)){ return false; }
-	return true;
-}
-
-
 
 
 
