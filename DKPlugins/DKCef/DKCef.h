@@ -87,6 +87,6 @@ public:
 };
 
 
-REGISTER_OBJECT(DKCef, false);
+REGISTER_OBJECT(DKCef, true);
 
 #endif //DKCef_H
