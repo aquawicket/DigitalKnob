@@ -37,7 +37,7 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 //#ifdef WIN32
 //	DKQueue(name, QueueItem, code); //Call in thread
 //#else
-	DKCef::RunJavascript(0, code); //Call directly
+	DKCef::Get()->RunJavascript(0, code); //Call directly
 //#endif
 	return true;
 }

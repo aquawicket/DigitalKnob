@@ -21,16 +21,16 @@
 #include "DK/DKWindows.h"
 #endif
 
-bool DKCef::inFocus;
-DKString DKCef::homepage;
-DKString DKCef::source;
+//bool DKCef::inFocus;
+//DKString DKCef::homepage;
+//DKString DKCef::source;
 CefRefPtr<CefClient> DKCef::cefHandler;
 unsigned long DKCef::cefThreadId;
 CefRefPtr<DKCefApp> DKCef::cefApp;
 bool DKCef::initialized = false;
-CefRefPtr<CefBrowser> DKCef::current_browser;
-std::vector<CefRefPtr<CefBrowser> > DKCef::browsers;
-DialogCallback* DKCef::fileDialogCallback;
+//CefRefPtr<CefBrowser> DKCef::current_browser;
+//std::vector<CefRefPtr<CefBrowser> > DKCef::browsers;
+//DialogCallback* DKCef::fileDialogCallback;
 
 //////////////////
 bool DKCef::Init()

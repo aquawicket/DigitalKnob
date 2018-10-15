@@ -26,57 +26,57 @@ public:
 	bool Init();
 	bool End();
 
-	static bool CloseBrowser(const int& browser);
-	static bool CloseDevTools(const int& browser);
-	static bool Copy();
-	static bool CopyImage(const DKString& url);
-	static bool Cut();
-	static bool DownloadUrl(const DKString& url);
-	static bool FileDialog(const DKString& type, const DKString& title);
-	static bool Find(const int& browser, const DKString& text);
-	static bool GetBrowsers(int& num);
-	static bool GetCurrentBrowser(int& browser);
-	static bool GetPageSource(const int& browser, DKString& _source);
-	static bool GetUrl(int& browser, DKString& url);
-	static bool GoBack(const int& browser);
-	static bool GoForward(const int& browser);
-	static bool NewBrowser();
-	static bool Paste();
-	static bool Popup(const DKString& url);
-	static bool Print(const int& browser);
-	static bool Reload(const int& browser);
-	static bool RunJavascript(const int& browser, DKString& string);
-	static bool SelectBrowser(int& browser);
-	static bool SetUrl(const int& browser, const DKString& url);
-	static bool ShowDevTools(const int& browser);
-	static bool Stop(const int& browser);
-	static bool ViewPageSource(const int& browser);
-	static void Test();
+	bool CloseBrowser(const int& browser);
+	bool CloseDevTools(const int& browser);
+	bool Copy();
+	bool CopyImage(const DKString& url);
+	bool Cut();
+	bool DownloadUrl(const DKString& url);
+	bool FileDialog(const DKString& type, const DKString& title);
+	bool Find(const int& browser, const DKString& text);
+	bool GetBrowsers(int& num);
+	bool GetCurrentBrowser(int& browser);
+	bool GetPageSource(const int& browser, DKString& _source);
+	bool GetUrl(int& browser, DKString& url);
+	bool GoBack(const int& browser);
+	bool GoForward(const int& browser);
+	bool NewBrowser();
+	bool Paste();
+	bool Popup(const DKString& url);
+	bool Print(const int& browser);
+	bool Reload(const int& browser);
+	bool RunJavascript(const int& browser, DKString& string);
+	bool SelectBrowser(int& browser);
+	bool SetUrl(const int& browser, const DKString& url);
+	bool ShowDevTools(const int& browser);
+	bool Stop(const int& browser);
+	bool ViewPageSource(const int& browser);
+	void Test();
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-	static bool RunDuktape(DKString& string);
-	static bool QueueDuktape(DKString& string);
-	static void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
+	bool RunDuktape(DKString& string);
+	bool QueueDuktape(DKString& string);
+	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	
 	DKString id;
 	int top;
 	int left;
 	int width;
 	int height;
-	static bool inFocus;
-	static DKString homepage;
-	static DKString source;
+	bool inFocus;
+	DKString homepage;
+	DKString source;
 	bool fullscreen;
 	DKString queue_new_browser;
 
-	static std::vector<CefRefPtr<CefBrowser> > browsers;
-	static CefRefPtr<CefBrowser> current_browser;
+	std::vector<CefRefPtr<CefBrowser> > browsers;
+	CefRefPtr<CefBrowser> current_browser;
 	static CefRefPtr<DKCefApp> cefApp;
 	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 
-	static DialogCallback* fileDialogCallback;
+	DialogCallback* fileDialogCallback;
 
 	static bool initialized;
 

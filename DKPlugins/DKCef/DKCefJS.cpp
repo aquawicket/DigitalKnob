@@ -40,7 +40,7 @@ bool DKCefJS::Init()
 int DKCefJS::CloseBrowser(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::CloseBrowser(browser)){ return 0; }
+	if(!DKCef::Get()->CloseBrowser(browser)){ return 0; }
 	return 1;
 }
 
@@ -48,14 +48,14 @@ int DKCefJS::CloseBrowser(duk_context* ctx)
 int DKCefJS::CloseDevTools(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::CloseDevTools(browser)){ return 0; }
+	if(!DKCef::Get()->CloseDevTools(browser)){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////////
 int DKCefJS::Copy(duk_context* ctx)
 {
-	if(!DKCef::Copy()){ return 0; }
+	if(!DKCef::Get()->Copy()){ return 0; }
 	return 1;
 }
 
@@ -63,14 +63,14 @@ int DKCefJS::Copy(duk_context* ctx)
 int DKCefJS::CopyImage(duk_context* ctx)
 {
 	DKString url = duk_require_string(ctx, 0);
-	if(!DKCef::CopyImage(url)){ return 0; }
+	if(!DKCef::Get()->CopyImage(url)){ return 0; }
 	return 1;
 }
 
 //////////////////////////////////
 int DKCefJS::Cut(duk_context* ctx)
 {
-	if(!DKCef::Cut()){ return 0; }
+	if(!DKCef::Get()->Cut()){ return 0; }
 	return 1;
 }
 
@@ -78,7 +78,7 @@ int DKCefJS::Cut(duk_context* ctx)
 int DKCefJS::DownloadUrl(duk_context* ctx)
 {
 	DKString url = duk_require_string(ctx, 0);
-	if(!DKCef::DownloadUrl(url)){ return 0; }
+	if(!DKCef::Get()->DownloadUrl(url)){ return 0; }
 	return 1;
 }
 
@@ -87,14 +87,14 @@ int DKCefJS::Find(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
 	DKString text = duk_require_string(ctx, 1);
-	if(!DKCef::Find(browser, text)){ return 0; }
+	if(!DKCef::Get()->Find(browser, text)){ return 0; }
 	return 1;
 }
 
 //////////////////////////////////////
 int DKCefJS::Focused(duk_context* ctx)
 {
-	bool focused = DKCef::inFocus;
+	bool focused = DKCef::Get()->inFocus;
 	if(!focused){ return 0; }
 	duk_push_true(ctx);
 	return 1;
@@ -104,7 +104,7 @@ int DKCefJS::Focused(duk_context* ctx)
 int DKCefJS::GetBrowsers(duk_context* ctx)
 {
 	int num;
-	if(!DKCef::GetBrowsers(num)){ return 0; }
+	if(!DKCef::Get()->GetBrowsers(num)){ return 0; }
 	duk_push_int(ctx, num);
 	return 1;
 }
@@ -113,7 +113,7 @@ int DKCefJS::GetBrowsers(duk_context* ctx)
 int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 {
 	int browser;
-	if(!DKCef::GetCurrentBrowser(browser)){ return 0; }
+	if(!DKCef::Get()->GetCurrentBrowser(browser)){ return 0; }
 	duk_push_int(ctx, browser);
 	return 1;
 }
@@ -124,7 +124,7 @@ int DKCefJS::GetPageSource(duk_context* ctx)
 	//DKLog("DKCefJS::GetPageSource()\n", DKDEBUG);
 	int browser = duk_require_int(ctx, 0);
 	DKString source;
-	if(!DKCef::GetPageSource(browser, source)){ return 0; }
+	if(!DKCef::Get()->GetPageSource(browser, source)){ return 0; }
 	if(!source.empty()){
 		duk_push_string(ctx, source.c_str());
 	}
@@ -137,7 +137,7 @@ int DKCefJS::GetUrl(duk_context* ctx)
 	//DKLog("DKCefJS::GetUrl()\n", DKDEBUG);
 	int browser = duk_require_int(ctx, 0);
 	DKString url;
-	if(!DKCef::GetUrl(browser, url)){ return 0; }
+	if(!DKCef::Get()->GetUrl(browser, url)){ return 0; }
 	if(!url.empty()){
 		duk_push_string(ctx, url.c_str());
 	}
@@ -148,7 +148,7 @@ int DKCefJS::GetUrl(duk_context* ctx)
 int DKCefJS::GoBack(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::GoBack(browser)){ return 0; }
+	if(!DKCef::Get()->GoBack(browser)){ return 0; }
 	return 1;
 }
 
@@ -156,21 +156,21 @@ int DKCefJS::GoBack(duk_context* ctx)
 int DKCefJS::GoForward(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::GoForward(browser)){ return 0; }
+	if(!DKCef::Get()->GoForward(browser)){ return 0; }
 	return 1;
 }
 
 /////////////////////////////////////////
 int DKCefJS::NewBrowser(duk_context* ctx)
 {
-	if(!DKCef::NewBrowser()){ return 0; }
+	if(!DKCef::Get()->NewBrowser()){ return 0; }
 	return 1;
 }
 
 ////////////////////////////////////
 int DKCefJS::Paste(duk_context* ctx)
 {
-	if(!DKCef::Paste()){ return 0; }
+	if(!DKCef::Get()->Paste()){ return 0; }
 	return 1;
 }
 
@@ -178,7 +178,7 @@ int DKCefJS::Paste(duk_context* ctx)
 int DKCefJS::Popup(duk_context* ctx)
 {
 	DKString url = duk_require_string(ctx, 0);
-	if(!DKCef::Popup(url)){ return 0; }
+	if(!DKCef::Get()->Popup(url)){ return 0; }
 	return 1;
 }
 
@@ -186,7 +186,7 @@ int DKCefJS::Popup(duk_context* ctx)
 int DKCefJS::Print(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::Print(browser)){ return 0; }
+	if(!DKCef::Get()->Print(browser)){ return 0; }
 	return 1;
 }
 
@@ -194,15 +194,15 @@ int DKCefJS::Print(duk_context* ctx)
 int DKCefJS::Reload(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::Reload(browser)){ return 0; }
+	if(!DKCef::Get()->Reload(browser)){ return 0; }
 	return 1;
 }
 
 //////////////////////////////////////////
 int DKCefJS::RemoveFocus(duk_context* ctx)
 {
-	DKCef::current_browser->GetHost()->SendFocusEvent(false);
-	DKCef::inFocus = false;
+	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(false);
+	DKCef::Get()->inFocus = false;
 	return 1;
 }
 
@@ -211,7 +211,7 @@ int DKCefJS::RunJavascript(duk_context* ctx)
 {
 	DKString string = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 2);
-	if(!DKCef::RunJavascript(browser, string)){ return 0; }
+	if(!DKCef::Get()->RunJavascript(browser, string)){ return 0; }
 	return 1;
 }
 
@@ -219,18 +219,18 @@ int DKCefJS::RunJavascript(duk_context* ctx)
 int DKCefJS::SelectBrowser(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::SelectBrowser(browser)){ return 0; }
+	if(!DKCef::Get()->SelectBrowser(browser)){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////////////
 int DKCefJS::SetFocus(duk_context* ctx)
 {
-	//if(!DKCef::Valid("")){ return 0; }
-	if(!DKCef::current_browser){ return 0; }
-	if(!DKCef::current_browser->GetHost()){ return 0; }
-	DKCef::current_browser->GetHost()->SendFocusEvent(true);
-	DKCef::inFocus = true;
+	//if(!DKCef::Get()->Valid("")){ return 0; }
+	if(!DKCef::Get()->current_browser){ return 0; }
+	if(!DKCef::Get()->current_browser->GetHost()){ return 0; }
+	DKCef::Get()->current_browser->GetHost()->SendFocusEvent(true);
+	DKCef::Get()->inFocus = true;
 	return 1;
 }
 
@@ -239,7 +239,7 @@ int DKCefJS::SetUrl(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
 	DKString url = duk_require_string(ctx, 1);
-	if(!DKCef::SetUrl(browser, url)){ return 0; }
+	if(!DKCef::Get()->SetUrl(browser, url)){ return 0; }
 	return 1;
 }
 
@@ -247,7 +247,7 @@ int DKCefJS::SetUrl(duk_context* ctx)
 int DKCefJS::ShowDevTools(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::ShowDevTools(browser)){ return 0; }
+	if(!DKCef::Get()->ShowDevTools(browser)){ return 0; }
 	return 1;
 }
 
@@ -255,7 +255,7 @@ int DKCefJS::ShowDevTools(duk_context* ctx)
 int DKCefJS::Stop(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::Stop(browser)){ return 0; }
+	if(!DKCef::Get()->Stop(browser)){ return 0; }
 	return 1;
 }
 
@@ -264,7 +264,7 @@ int DKCefJS::ViewPageSource(duk_context* ctx)
 {
 	//DKLog("DKCefJS::ViewPageSource()\n", DKDEBUG);
 	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::ViewPageSource(browser)){ return 0; }
+	if(!DKCef::Get()->ViewPageSource(browser)){ return 0; }
 	return 1;
 }
 

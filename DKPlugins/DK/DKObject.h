@@ -114,8 +114,8 @@ public:
 		return instances[instances.size()-1];
 	}
 
-	/////////////////////////////////////
-	static void Close(const DKString& id)
+	//////////////////////////////////////////
+	static void Close(const DKString& id = "")
 	{
 		DKLog("DKObject::Close("+DKString(classname)+","+id+")\n", DKINFO);
 		
@@ -139,8 +139,8 @@ public:
 		}
 	}
 
-	/////////////////////////////////////
-	static bool Valid(const DKString& id)
+	//////////////////////////////////////////
+	static bool Valid(const DKString& id = "")
 	{
 		//DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
 		
@@ -155,8 +155,8 @@ public:
 		return false;
 	}
 
-	/////////////////////////////////
-	static T* Get(const DKString& id)
+	//////////////////////////////////////
+	static T* Get(const DKString& id = "")
 	{
 		DKLog("DKObject::Get("+id+")\n", DKDEBUG);
 		
