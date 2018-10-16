@@ -379,7 +379,6 @@ bool DKSDLCef::SetupCef()
 	cefHandler->dkCef = dkCef;
 	cefHandler->dkSdlCef = this;
 	dkCef->cefHandler = cefHandler;
-	//dkCef->NewBrowser("Test",0,0,800,600,"http://google.com");
 	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
 	return true;
 }
