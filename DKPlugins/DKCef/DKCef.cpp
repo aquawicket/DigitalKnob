@@ -429,6 +429,14 @@ bool DKCef::Find(const int& browser, const DKString& text)
 	return true;
 }
 
+//////////////////////////////////////////////////////////
+bool DKCef::GetBrowserId(const int& browser, DKString& id)
+{
+	DKLog("DKCef:GetBrowserId("+toString(browser)+")\n", DKDEBUG);
+	id = dkBrowsers[browser].id;
+	return true;
+}
+
 /////////////////////////////////
 bool DKCef::GetBrowsers(int& num)
 {

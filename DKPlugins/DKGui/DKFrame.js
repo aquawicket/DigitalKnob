@@ -313,11 +313,17 @@ function DKFrame_CloseButton(id)
 function DKFrame_Close(id)
 {
 	DKLog("DKFrame_Close("+id+")\n", DKDEBUG);
+	
+	
+	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
+	
+	
 	var frame = DKWidget_GetParent(id);
 	//DKLog("DKFrame_Close("+id+"): frame = "+frame+"\n");
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
+		//DKLog("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
 		if(arry[i].indexOf(".html") > -1){
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
@@ -326,6 +332,18 @@ function DKFrame_Close(id)
 			DKClose(jsfile);
 			var htmlfile = file.replace(".js", ".html");
 			DKClose(htmlfile);
+		}
+		if(arry[i].indexOf("iframe_") > -1){
+			DKLog("DKFrame_Close("+id+"): we found a cef iframe ("+arry[i]+") to close\n");
+			var frameId = arry[i].replace("iframe_","");
+			for(var b=0; b<DKCef_GetBrowsers(); b++){
+				//DKLog("frameId = "+frameId+"\n");
+				//DKLog("DKCef_GetBrowserId("+b+") = "+DKCef_GetBrowserId(b)+"\n");
+				if(frameId == DKCef_GetBrowserId(b)){
+					//DKLog("We Know Which One To Close:\n");
+					DKCef_CloseBrowser(b);
+				}
+			}
 		}
 	}
 	
