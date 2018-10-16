@@ -119,9 +119,9 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 	if(!dkCef->current_browser){ return false; }
 	if(dkCef->dkBrowsers.size() <= 0){ return false; }
-	int i;
+	int i = -1;
 	dkCef->GetCurrentBrowser(i);
-	if(i <= 0){ return false; }
+	if(i < 0){ return false; }
 
 	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
 	//DKLog("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n", DKDEBUG);

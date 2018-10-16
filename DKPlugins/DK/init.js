@@ -64,6 +64,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(0);
 		DKAddEvent("GLOBAL", "resize", init_OnEvent);
+		DK_CallFunc("DKSDLCef::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
 	else if(USE_CEF){
 		DKLog("Creating CEF -> GUI \n");
