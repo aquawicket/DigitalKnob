@@ -133,15 +133,15 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes()){ continue; }
 		DKString id = iframes[i]->GetId().CString();
-		DKString iTop = "0";//toString(iframes[i]->GetAbsoluteTop());
-		DKString iLeft = "0";//toString(iframes[i]->GetAbsoluteLeft());
-		DKString iWidth = "100";//toString(iframes[i]->GetClientWidth());
-		DKString iHeight = "100";toString(iframes[i]->GetClientHeight());
+		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
+		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
+		DKString iWidth = toString(iframes[i]->GetClientWidth());
+		DKString iHeight = toString(iframes[i]->GetClientHeight());
 
 		DKString url;
 		if(!iframes[i]->GetAttribute("src")){
 			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKWARN);
-			 //return false;
+			 return false;
 		}
 		else{
 			url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();

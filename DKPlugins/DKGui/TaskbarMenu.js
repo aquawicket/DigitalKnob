@@ -153,10 +153,16 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DK_GetValue(event);
-		//DKLog("TaskbarMenu_Run: key="+key+"\n");
-		if(key != 13){ return; }
+		//DKLog("DKAdminMenu_Run: key="+key+"\n");
+		if(DK_GetBrowser() == "Rocket"){
+			if(key != 72){ return; } //FIXME: why is this key code not 13?
+		}
+		else{
+			if(key != 13){ return; }
+		}
 		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
+	
 	
 	if(DK_Id(event, "GLOBAL")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGui/TaskbarMenu.html")){

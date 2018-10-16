@@ -371,8 +371,8 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
 
-	DKWidget::SetAttribute(element, "id", ele_id);
-	DKWidget::AppendChild(parent, element);
+	SetAttribute(element, "id", ele_id);
+	AppendChild(parent, element);
 
 	DKRocketToRML dkRocketToRML;
 	dkRocketToRML.PostProcess(GetElementById(parent));
@@ -388,8 +388,8 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
 
-	DKWidget::SetAttribute(element, "id", ele_id);
-	DKWidget::PrependChild(GetElementById(parent), element);
+	SetAttribute(element, "id", ele_id);
+	PrependChild(GetElementById(parent), element);
 
 	DKRocketToRML dkRocketToRML;
 	dkRocketToRML.PostProcess(GetElementById(parent));
@@ -406,8 +406,8 @@ DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& 
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
 
-	DKWidget::SetAttribute(ele, "id", ele_id);
-	DKWidget::InsertBefore(element, ele);
+	SetAttribute(ele, "id", ele_id);
+	InsertBefore(element, ele);
 
 	DKRocketToRML dkRocketToRML;
 	dkRocketToRML.PostProcess(ele->GetParentNode());
@@ -421,7 +421,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 	out = id;
 	int i = 0;
 	
-	while(DKWidget::GetElementById(out)){
+	while(GetElementById(out)){
 		//if there is a .  the number must come before
 		std::size_t found = id.find_last_of(".");
 		if(found != -1){
@@ -996,6 +996,11 @@ bool DKWidget::SetAttribute(DKElement* element, const DKString& name, const DKSt
 	}
 	else{
 		element->SetAttribute(name.c_str(), value.c_str());
+	}
+
+	if(same(name,"src")){
+		DKRocketToRML dkRocketToRML;
+		dkRocketToRML.PostProcess(element->GetParentNode());
 	}
 	return true;
 }

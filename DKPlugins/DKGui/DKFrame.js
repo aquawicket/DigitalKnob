@@ -111,8 +111,8 @@ function DKFrame_Iframe(title, url, width, height)
 {
 	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+")\n", DKINFO);
 	var frame = DKFrame_CreateFrame(title, width, height);
-	var iframe = DKWidget_CreateElement(frame, "iframe", title); //FIXME: DKRocketToRML::PostProcess() is getting called before we can set the attributes.
-	DKWidget_SetAttribute(iframe, "src", url);
+	var iframe = DKWidget_CreateElement(frame, "iframe", title);
+	DKWidget_SetAttribute(iframe, "src", url); // This will call DKRocketToRML::PostProcess() again
 	DKWidget_SetAttribute(iframe, "width", "100%");
 	DKWidget_SetAttribute(iframe, "height", "100%");
 	DKWidget_SetProperty(iframe, "border-width", "0rem");
@@ -123,9 +123,7 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_SetProperty(iframe, "bottom", "0rem");
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
-	DKCef_SetUrl(DKCef_GetCurrentBrowser(), url);  //we have to set the url after because DKRocketToRML::PostProcess() didn't do it.
-	DKCef_SetFocus(DKCef_GetCurrentBrowser());
-
+	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
 	
 	//var currentBrowser = DKCef_GetCurrentBrowser();
 	//DKCef_SetUrl(currentBrowser, url);
