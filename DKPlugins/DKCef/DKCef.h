@@ -72,6 +72,7 @@ public:
 	bool RunDuktape(DKString& string);
 	bool QueueDuktape(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
+	bool NewBrowser(const void* input, void* output);
 	
 	//int top;
 	//int left;

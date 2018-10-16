@@ -46,7 +46,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "width", "100%");
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
 		DKCef_SetUrl(DKCef_GetCurrentBrowser(), DKApp_url);
-		DKCef_SetFocus(0);
+		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 		//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent); //NOTE: look into this
 	}
 	else if(USE_ROCKET){

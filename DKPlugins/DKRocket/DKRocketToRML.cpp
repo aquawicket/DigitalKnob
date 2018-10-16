@@ -151,7 +151,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//TODO
 		//DKCreate("DKRocketIframe,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
 		
-		DKClass::DKCreate("DKCef,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url);
+		DKClass::DKCreate("DKCef");
 		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
 		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
 
@@ -166,6 +166,8 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
 		iframes[i]->AppendChild(cef_texture);
+		DKString str = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
+		DKClass::CallFunc("DKCef::NewBrowser", &str, NULL);
 	}
 
 	// <a> tags with href attribute

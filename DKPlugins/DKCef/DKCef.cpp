@@ -41,6 +41,7 @@ bool DKCef::Init()
 	//cefHandler = NULL;
 	//source = "";
 
+	/*
 	DKString id;
 	int top;
 	int left;
@@ -60,6 +61,7 @@ bool DKCef::Init()
 	if(data.size() > 5){
 		url = data[6];
 	}
+	*/
 
 	/*
 	if(dkBrowsers.size() > 0){
@@ -279,20 +281,20 @@ bool DKCef::Init()
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
-			NewBrowser(id, top, left, width, height, url);
+			//NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
 		if(DKClass::DKAvailable("DKOSGCef")){
 			DKClass::DKCreate("DKOSGCef");
-			NewBrowser(id, top, left, width, height, url);
+			//NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else{
 		dkCefWindow = new DKCefWindow();
 		cefHandler = dkCefWindow;
 		dkCefWindow->dkCef = this;
-		NewBrowser(id, top, left, width, height, url);
+		//NewBrowser(id, top, left, width, height, url);
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
 
 		DKString icon = DKFile::local_assets+"icon.ico";
@@ -300,6 +302,7 @@ bool DKCef::Init()
 	}
 	
 	DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
+	DKClass::RegisterFunc("DKCef::NewBrowser", &DKCef::NewBrowser, this);
 	return true;
 }
 
@@ -490,6 +493,16 @@ bool DKCef::GoForward(const int& browser)
 	return false;
 }
 
+///////////////////////////////////////////////////////
+bool DKCef::NewBrowser(const void* input, void* output)
+{
+	DKString data = *(DKString*)input;
+	DKStringArray arry;
+	toStringArray(arry, data, ",");
+	NewBrowser(arry[0], toInt(arry[1]), toInt(arry[2]), toInt(arry[3]), toInt(arry[4]), arry[5]);
+	return false;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
@@ -500,7 +513,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url.c_str(), browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 
 		if(!_browser){
 			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
@@ -516,6 +529,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowsers.push_back(dkBrowser);
 		current_browser = dkBrowsers[0].browser;
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
+		//current_browser->GetMainFrame()->LoadURL(url.c_str());
 	}
 	else{
 		//Create window title
