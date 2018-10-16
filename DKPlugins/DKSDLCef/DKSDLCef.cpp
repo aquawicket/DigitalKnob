@@ -366,7 +366,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	}
 
 	for(unsigned int i = 0; i < dkCef->dkBrowsers.size(); ++i){
-		dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
+		//dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
 	}
 
 	return true;
