@@ -48,7 +48,7 @@ public:
 	DKSDLCefKeyboard _keyAdapter;
 	float _scrollFactor;
 
-	SDL_Texture* cef_image;
+	//SDL_Texture* cef_image;
 	SDL_Texture* background_image;
 	SDL_Texture* popup_image;
 	CefRect popup_rect;

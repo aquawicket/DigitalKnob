@@ -38,7 +38,7 @@ bool DKCef::Init()
 	//DKLog("Cef version "+version_string+"\n", DKINFO);
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
-	cefHandler = NULL;
+	//cefHandler = NULL;
 	//source = "";
 
 	DKString id;
@@ -48,9 +48,6 @@ bool DKCef::Init()
 	int height;
 	DKString url;
 
-
-	DKClass::DKCreate("DKCefJS");
-	DKClass::DKCreate("DKCefV8");
 	DKString _data = toString(data, ",");
 	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
 	if(data.size() > 4){
@@ -63,6 +60,17 @@ bool DKCef::Init()
 	if(data.size() > 5){
 		url = data[6];
 	}
+
+	/*
+	if(dkBrowsers.size() > 0){
+		NewBrowser(id,top,left,width,height,url);
+		return true;
+	}
+	*/
+
+	DKClass::DKCreate("DKCefJS");
+	DKClass::DKCreate("DKCefV8");
+
 	fullscreen = false;
 
 #if defined(WIN32) && !defined(WIN64)

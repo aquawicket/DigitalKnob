@@ -17,7 +17,7 @@ bool DKSDLCef::Init()
 {
 	DKLog("DKSDLCef::Init()\n",DKDEBUG);
 
-	cef_image = NULL;
+	//cef_image = NULL;
 	background_image = NULL;
 	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
@@ -93,15 +93,20 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	DKString id = *(DKString*)input;
 	//DKLog("DKSDLCef::GetTexture("+id+")\n", DKINFO);
 	if(dkCef->dkBrowsers.size() < 1){ return false; }
-
-	if(!cef_image){
-		cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[0].width, dkCef->dkBrowsers[0].height);
+	
+	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); i++){
+		if(dkCef->dkBrowsers[i].id == id){
+			if(!cefHandler->cef_images[i]){
+				cefHandler->cef_images[i] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
+			}
+			struct DKTexture{ SDL_Texture* texture; };
+			DKTexture out = *(DKTexture*)output;
+			out.texture = cefHandler->cef_images[i];
+			*(DKTexture*)output = out;
+			return true;
+		}
 	}
-	struct DKTexture{ SDL_Texture* texture; };
-	DKTexture out = *(DKTexture*)output;
-	out.texture = cef_image;
-	*(DKTexture*)output = out;
-	return true;
+	return false;
 }
 
 ///////////////////////////////////////
@@ -410,12 +415,12 @@ void DKSDLCef::Draw()
 	if(DKClass::DKValid("DKRocket,DKRocket0")){ return; } 
 
 	///// Draw to DKSdlWindow
-	if(!cef_image){ return; }
+	if(!cefHandler->cef_images[0]){ return; }
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
 	texture_rect.x = dkCef->dkBrowsers[0].left;  //the x coordinate
 	texture_rect.w = dkCef->dkBrowsers[0].width; //the width of the texture
 	texture_rect.h = dkCef->dkBrowsers[0].height; //the height of the texture
 	//SDL_RenderClear(dkSdlWindow->sdlren);
-	SDL_RenderCopy(dkSdlWindow->renderer, cef_image, NULL, &texture_rect);
+	SDL_RenderCopy(dkSdlWindow->renderer, cefHandler->cef_images[0], NULL, &texture_rect);
 }

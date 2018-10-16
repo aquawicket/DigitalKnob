@@ -118,10 +118,20 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 	CEF_REQUIRE_UI_THREAD();
 
 	// Remove from the list of existing browsers.
+	/*
 	BrowserList::iterator bit = browser_list_.begin();
 	for (; bit != browser_list_.end(); ++bit) {
 		if ((*bit)->IsSame(browser)) {
 			browser_list_.erase(bit);
+			break;
+		}
+	}
+	*/
+
+	for(unsigned int i=0; i<browser_list_.size(); i++){
+		if(browser_list_[i] == browser){
+			browser_list_.erase(browser_list_.begin()+i);
+			cef_images.erase(cef_images.begin()+i);
 			break;
 		}
 	}
@@ -138,6 +148,7 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	DKLog("DKSDLCefHandler::OnAfterCreated(browser)\n", DKDEBUG);
 	CEF_REQUIRE_UI_THREAD();
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
+	cef_images.push_back(NULL);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -328,13 +339,22 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 {
 	//DKLog("DKSDLCefHandler::OnPaint()\n", DKDEBUG);
 	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
+	bool found = false;
+	unsigned int b=0;
+	for(b=0; b<browser_list_.size(); ++b){
+		if(browser_list_[b]->IsSame(browser)){
+			found = true;
+			break; //i is not the cef_images number
+		}
+	}
+	if(!found){ return; }
+
 	if(type == PET_VIEW){
 		if(dirtyRects.size() == 0){ return; }
-
 		int w, h;
-		SDL_QueryTexture(dkSdlCef->cef_image, NULL, NULL, &w, &h);
+		SDL_QueryTexture(cef_images[b], NULL, NULL, &w, &h);
 		if(w != width || h != height){
-			dkSdlCef->cef_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
+			cef_images[b] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 		}
 
 		if (!dkSdlCef->background_image) {
@@ -375,8 +395,8 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 		}
 	}
 
-	if(dkSdlCef->cef_image) {	
-		SDL_SetRenderTarget(dkSdlWindow->renderer, dkSdlCef->cef_image);
+	if(cef_images[b]) {	
+		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_images[b]);
 		SDL_RenderCopy(dkSdlWindow->renderer, dkSdlCef->background_image, NULL, NULL);
 		if(dkSdlCef->popup_image){
 			SDL_Rect popup;

@@ -42,13 +42,15 @@ public:
 	static DKSDLCefHandler* GetInstance(); //Provide access to the single global instance of this object.
 	
 	//List of existing browser windows. Only accessed on the CEF UI thread.
-	typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
+	//typedef std::list<CefRefPtr<CefBrowser>> BrowserList;
+	typedef std::vector<CefRefPtr<CefBrowser>> BrowserList;
 	BrowserList browser_list_;
 	bool is_closing_;
 
 	DKSDLWindow* dkSdlWindow;
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
+	std::vector<SDL_Texture*> cef_images;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDialogHandler> GetDialogHandler(){ return this; }
