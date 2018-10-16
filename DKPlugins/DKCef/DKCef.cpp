@@ -271,7 +271,7 @@ bool DKCef::Init()
 	if(DKClass::DKValid("DKSDLWindow,DKSDLWindow0")){
 		if(DKClass::DKAvailable("DKSDLCef")){
 			DKClass::DKCreate("DKSDLCef");
-			//NewBrowser(id, top, left, width, height, url);
+			NewBrowser(id, top, left, width, height, url);
 		}
 	}
 	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){

@@ -56,9 +56,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 			
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output)){
-				return;
-			}
+			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output)){ return; }
 			sdl_texture = output.texture;
 		}
 

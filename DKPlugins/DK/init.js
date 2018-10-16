@@ -46,7 +46,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
 		DKCef_SetUrl(DKCef_GetCurrentBrowser(), DKApp_url);
 		DKCef_SetFocus(0);
-		DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
+		//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
 	}
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");

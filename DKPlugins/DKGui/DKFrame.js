@@ -112,7 +112,6 @@ function DKFrame_Iframe(title, url, width, height)
 	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+")\n", DKINFO);
 	var frame = DKFrame_CreateFrame(title, width, height);
 
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//FIXME: DKRocketToRML::PostProcess() is getting called before we can set the attributes.
 	var iframe = DKWidget_CreateElement(frame, "iframe", title);
 	DKWidget_SetAttribute(iframe, "src", url);
@@ -126,10 +125,9 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_SetProperty(iframe, "bottom", "0rem");
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
-	
-	//Test re-PostProcess since we added attributes after
-	var debug_test = DKWidget_CreateElement("body", "div", "div"); 
-	DKWidget_RemoveElement(debug_test )
+	DKCef_SetUrl(DKCef_GetCurrentBrowser(), url);
+	DKCef_SetFocus(0);
+	DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
 	
 	//var currentBrowser = DKCef_GetCurrentBrowser();
 	//DKCef_SetUrl(currentBrowser, url);

@@ -138,11 +138,14 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		DKString iWidth = toString(iframes[i]->GetClientWidth());
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
 
+		DKString url;
 		if(!iframes[i]->GetAttribute("src")){
-			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKERROR);
-			 return false;
+			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKWARN);
+			 //return false;
 		}
-		DKString url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+		else{
+			url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+		}
 		//DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
 		
 		//TODO
