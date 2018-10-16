@@ -147,6 +147,10 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				_mouseLMBdown = true;
 			}
 			CefMouseEvent mouse_event;
+
+			
+
+
 			int i;
 			dkCef->GetCurrentBrowser(i);
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
@@ -155,7 +159,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(mouse_event.x > dkCef->dkBrowsers[i].width){return false;}
 			if(mouse_event.y < 0){return false;}
 			if(mouse_event.y > dkCef->dkBrowsers[i].height){return false;}
-			dkCef->SetFocus(i);
+			//dkCef->SetFocus(i);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
@@ -181,7 +185,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(mouse_event.x > dkCef->dkBrowsers[i].width){return false;}
 			if(mouse_event.y < 0){return false;}
 			if(mouse_event.y > dkCef->dkBrowsers[i].height){return false;}
-			dkCef->SetFocus(i);
+			//dkCef->SetFocus(i);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
@@ -333,7 +337,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 bool DKSDLCef::OnResize(const void* input, void* output)
 {
 	DKLog("DKSDLCef::OnResize(void*)\n", DKDEBUG);
-
 	//DKString str = *static_cast<DKString*>(data);
 	DKString str = *(DKString*)input;
 
