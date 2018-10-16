@@ -97,7 +97,6 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].id == id){
 			if(!cefHandler->cef_images[i]){
-				return false;
 				cefHandler->cef_images[i] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[0].width, dkCef->dkBrowsers[0].height);
 			}
 			struct DKTexture{ SDL_Texture* texture; };

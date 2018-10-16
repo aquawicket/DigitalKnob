@@ -133,10 +133,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes()){ continue; }
 		DKString id = iframes[i]->GetId().CString();
-		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
-		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
-		DKString iWidth = toString(iframes[i]->GetClientWidth());
-		DKString iHeight = toString(iframes[i]->GetClientHeight());
+		DKString iTop = "0";//toString(iframes[i]->GetAbsoluteTop());
+		DKString iLeft = "0";//toString(iframes[i]->GetAbsoluteLeft());
+		DKString iWidth = "100";//toString(iframes[i]->GetClientWidth());
+		DKString iHeight = "100";toString(iframes[i]->GetClientHeight());
 
 		DKString url;
 		if(!iframes[i]->GetAttribute("src")){
@@ -152,6 +152,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//DKCreate("DKRocketIframe,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
 		
 		DKClass::DKCreate("DKCef");
+
 		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
 		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
 
@@ -162,9 +163,14 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//This is what RocketSDL2Renderer::LoadTexture and RocketSDL2Renderer::RenderGeometry
 		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
 		cef_texture->SetAttribute("src", cef_id.c_str());
-
+		
+		//cef_texture->SetProperty("top", "0px");
+		//cef_texture->SetProperty("bottom", "0px");
+		//cef_texture->SetProperty("left", "0px");
+		//cef_texture->SetProperty("right", "0px");
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
+		
 		iframes[i]->AppendChild(cef_texture);
 		DKString str = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
 		DKClass::CallFunc("DKCef::NewBrowser", &str, NULL);

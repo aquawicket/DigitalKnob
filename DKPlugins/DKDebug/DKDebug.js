@@ -62,6 +62,7 @@ function DKDebug_CheckKeys()
 	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }
 	if(string.indexOf("dkcrash") != -1){ DKDebug_Crash(); key_history = []; }	
 	if(string.indexOf("dkeditor") != -1){ DKDebug_Editor(); key_history = []; }
+	if(string.indexOf("dkdebug") != -1){ DKDebug_Debugger(); key_history = []; }
 }
 
 ///////////////////////////////
@@ -284,4 +285,15 @@ function DKDebug_Editor()
 {
 	DKLog("DKDebug_Editor()\n", DKDEBUG);
 	DKCreate("DKEditor/DKEditor.js", function(){});
+}
+
+///////////////////////////
+function DKDebug_Debugger()
+{
+	if(DK_GetBrowser() == "Rocket"){
+		DKRocket_ToggleDebugger();
+	}
+	if(DK_GetBrowser() == "CEF"){
+		//DKCef_ShowDevTools(0);
+	}
 }
