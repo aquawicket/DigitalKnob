@@ -47,6 +47,7 @@ public:
 	DKCef* dkCef;
 	//DKString id;
 	bool _mouseLMBdown;
+	int keyboardFocus;
 	DKSDLCefKeyboard _keyAdapter;
 	float _scrollFactor;
 

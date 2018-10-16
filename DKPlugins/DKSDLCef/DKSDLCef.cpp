@@ -30,6 +30,7 @@ bool DKSDLCef::Init()
 
 	SetupCef();
 	_mouseLMBdown = false;
+	keyboardFocus = 0;
 	_scrollFactor = 120.0f;
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
@@ -148,13 +149,11 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(event->button.button == 3){
 				_mouseLMBdown = true;
 			}
+
 			CefMouseEvent mouse_event;
-
-			
-
-
 			int i;
 			dkCef->GetCurrentBrowser(i);
+			keyboardFocus = i;
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			if(mouse_event.x < 0){return false;}
@@ -204,9 +203,9 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		*/
 		
 		case SDL_KEYDOWN:{
-			int i;
-			dkCef->GetCurrentBrowser(i);
-			if(!dkCef->dkBrowsers[i].focused){ return false; }
+			int i = keyboardFocus;
+			//dkCef->GetCurrentBrowser(i);
+			//if(!dkCef->dkBrowsers[i].focused){ return false; }
 			
 			//print SDL2 key data
 			/*
@@ -229,7 +228,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		
 			//DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("RAWKEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
-      		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
+			dkCef->dkBrowsers[i].browser->GetHost()->SendKeyEvent(KeyEvent);
 
 			CefKeyEvent charKeyEvent;
        		charKeyEvent.type = KEYEVENT_CHAR;
@@ -260,11 +259,12 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 			//DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("CHAR: modifiers = "+toString(charKeyEvent.modifiers)+"\n", DKINFO);
-			dkCef->current_browser->GetHost()->SendKeyEvent(charKeyEvent);
+			dkCef->dkBrowsers[i].browser->GetHost()->SendKeyEvent(charKeyEvent);
 			return true;
 		}
 
 		case SDL_KEYUP:{
+			int i = keyboardFocus;
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
@@ -277,7 +277,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
 #ifndef MAC
-      		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
+			dkCef->dkBrowsers[i].browser->GetHost()->SendKeyEvent(KeyEvent);
 #endif
 			return true;
 		}
@@ -294,9 +294,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			}
 			*/
 
-			//TODO - We want to detect which browser the mouse is over
-			//and 
-
+			/*
+			// detect which browser the mouse is over
 			CefMouseEvent mouse_event;
 			CefRefPtr<CefBrowser> browser;
 			for(int i=0; i<dkCef->dkBrowsers.size(); i++){
@@ -309,12 +308,13 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				browser = dkCef->dkBrowsers[i].browser;
 				break;
 			}
+			*/
 
-			
-			//int i;
-			//dkCef->GetCurrentBrowser(i);
-			//mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
-			//mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
+			CefMouseEvent mouse_event;
+			int i;
+			dkCef->GetCurrentBrowser(i);
+			mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
+			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);
 			uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
@@ -326,7 +326,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				modifiers |= EVENTFLAG_RIGHT_MOUSE_BUTTON;
 	
 			mouse_event.modifiers = modifiers;
-			browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
+			dkCef->dkBrowsers[i].browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
 			return true;
 		}
 
@@ -377,7 +377,7 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	DKLog("DKSDLCef::OnMouseOver(void*, void*): id = "+id+"\n", DKINFO);
 	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].id == id){
-			//dkCef->SelectBrowser(i);
+			dkCef->SelectBrowser(i);
 			return true;
 		}
 	}
