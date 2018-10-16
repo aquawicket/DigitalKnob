@@ -116,11 +116,10 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 bool DKSDLCef::Handle(SDL_Event* event)
 {
 	//DKLog("DKSDLCef::handle(SDL_Event*)\n", DKDEBUG);
-
-	if(!dkCef->current_browser){ return false; }
 	if(dkCef->dkBrowsers.size() <= 0){ return false; }
 	int i = -1;
 	dkCef->GetCurrentBrowser(i);
+	//DKLog("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n", DKINFO);
 	if(i < 0){ return false; }
 
 	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
@@ -146,6 +145,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 	switch(event->type){
 		case SDL_MOUSEBUTTONDOWN:{
+			//DKLog("DKSDLCef::Handle(): CurrentBrowser = "+toString(i)+"\n", DKINFO);
 			int clicks = 1;
 			if(event->button.clicks == 2){ // double click
 				clicks = 2;
@@ -350,7 +350,7 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	DKLog("DKSDLCef::OnClick(void*, void*)\n", DKDEBUG);
 	DKString id = *(DKString*)input;
 
-	DKLog("DKSDLCef::OnClick(void*, void*): id = "+id+"\n", DKINFO);
+	//DKLog("DKSDLCef::OnClick(void*, void*): id = "+id+"\n", DKINFO);
 	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].id == id){
 			dkCef->SelectBrowser(i);
@@ -367,7 +367,7 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	DKLog("DKSDLCef::OnMouseOver(void*, void*)\n", DKDEBUG);
 	DKString id = *(DKString*)input;
 
-	DKLog("DKSDLCef::OnMouseOver(void*, void*): id = "+id+"\n", DKINFO);
+	//DKLog("DKSDLCef::OnMouseOver(void*, void*): id = "+id+"\n", DKINFO);
 	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].id == id){
 			dkCef->SelectBrowser(i);
