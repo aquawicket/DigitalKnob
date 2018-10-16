@@ -262,6 +262,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 		case SDL_KEYUP:{
 			int i = keyboardFocus;
+			dkCef->SetFocus(i);
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
