@@ -107,7 +107,7 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 {
 	DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
 	if(dkCef->dkBrowsers.size() < 1){ 
-		rect = CefRect(0, 0, 0, 0);
+		rect = CefRect(0, 0, 0, 0); //DKCef::NewBrowser will trigger a breakpoint in debug without this. 
 		return true; 
 	}
 	int i=0;
