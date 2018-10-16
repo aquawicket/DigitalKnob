@@ -506,7 +506,7 @@ bool DKCef::NewBrowser(const void* input, void* output)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
-	DKLog("DKCef::NewBrowser()\n", DKDEBUG);
+	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n", DKINFO);
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -529,7 +529,6 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowsers.push_back(dkBrowser);
 		current_browser = dkBrowsers[0].browser;
 		current_browser->GetHost()->SetWindowlessFrameRate(60);
-		//current_browser->GetMainFrame()->LoadURL(url.c_str());
 	}
 	else{
 		//Create window title

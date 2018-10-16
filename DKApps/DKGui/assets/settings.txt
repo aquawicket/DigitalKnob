@@ -12,6 +12,7 @@
 [LOG_FILE] ON
 [LOG_LINES] OFF
 [LOG_SHOW]
+[LOG_HIDE] Failed to find cursor
 [SVN] https://github.com/aquawicket/DigitalKnob/trunk/
 [MYSVN]
 [DKPATH] C:/digitalknob
