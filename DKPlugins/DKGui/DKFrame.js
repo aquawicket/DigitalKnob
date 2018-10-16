@@ -127,7 +127,6 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_RemoveProperty(iframe, "right");
 	DKCef_SetUrl(DKCef_GetCurrentBrowser(), url);
 	DKCef_SetFocus(0);
-	//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
 	
 	//var currentBrowser = DKCef_GetCurrentBrowser();
 	//DKCef_SetUrl(currentBrowser, url);

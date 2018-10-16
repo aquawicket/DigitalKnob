@@ -19,6 +19,7 @@ function init_OnEvent(event)  //Duktape
 	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
+		DKLog("init_OnEvent(): DKCef_OnQueueNewBrowser\n", DKINFO);
 		DKCef_SetUrl(DKCef_GetCurrentBrowser(), DK_GetValue(event));
 	}
 	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
@@ -46,7 +47,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
 		DKCef_SetUrl(DKCef_GetCurrentBrowser(), DKApp_url);
 		DKCef_SetFocus(0);
-		//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent);
+		//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent); //NOTE: look into this
 	}
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");

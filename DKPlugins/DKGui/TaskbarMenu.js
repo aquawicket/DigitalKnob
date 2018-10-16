@@ -21,6 +21,7 @@ function TaskbarMenu_Init()
 		DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
+		DKAddEvent("OpenGoogle", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
 		DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
 		
@@ -74,18 +75,11 @@ function TaskbarMenu_OnEvent(event)
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 		});
-		/*
-		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
-		DKWidget_SetProperty(div, "position", "absolute");
-		DKWidget_SetProperty(div, "width", "100%");
-		DKWidget_SetProperty(div, "height", "100%");
-		var iframe = DKWidget_CreateElement(div, "iframe", "iframe");
-		DKWidget_SetAttribute(iframe, "src", "http://www.lutanho.net/play/tetris.html");
-		DKWidget_SetAttribute(iframe, "width", "100%");
-		DKWidget_SetAttribute(iframe, "height", "100%");
-		DKWidget_SetProperty(iframe, "border-width", "0px");
-		DKFrame_Widget(div);
-		*/
+	}
+	if(DK_Id(event, "OpenGoogle")){
+		DKCreate("DKGui/DKFrame.js", function(){
+			DKFrame_Iframe("Google","https://google.com",640,480);
+		});
 	}
 	
 	if(DK_Id(event,"Git")){
