@@ -296,7 +296,6 @@ bool DKCef::Init()
 		dkCefWindow->dkCef = this;
 		//NewBrowser(id, top, left, width, height, url);
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
-
 		DKString icon = DKFile::local_assets+"icon.ico";
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
@@ -506,6 +505,9 @@ bool DKCef::NewBrowser(const void* input, void* output)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
+#ifndef DEBUG
+	CEF_REQUIRE_UI_THREAD();
+#endif
 	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n", DKINFO);
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
@@ -514,7 +516,6 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
-
 		if(!_browser){
 			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
 			return false; 
