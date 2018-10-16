@@ -139,22 +139,18 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		DKString iHeight = toString(iframes[i]->GetClientHeight());
 
 		DKString url;
-		if(!iframes[i]->GetAttribute("src")){
+		if(!iframes[i]->GetAttribute("src")){ 
 			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKWARN);
 			 return false;
 		}
 		else{
 			url = iframes[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
 		}
-		//DKLog("DKCef Calculated: top:"+iTop+" left:"+iLeft+" width:"+iWidth+" height:"+iHeight+" \n", DKINFO);
-		
-		//TODO
-		//DKCreate("DKRocketIframe,"+id+","+iTop+","+iLeft+","+iWidth+","+iHeight);
 		
 		DKClass::DKCreate("DKCef");
-
 		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
-		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::ResizeIframe, this);
+		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::MouseOverIframe, this);
+		DKEvent::AddEvent(id, "click", &DKRocketToRML::ClickIframe, this);
 
 		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
 		DKString cef_id = "iframe_"+id;
@@ -163,14 +159,8 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		//This is what RocketSDL2Renderer::LoadTexture and RocketSDL2Renderer::RenderGeometry
 		//use to detect if the texture is a cef image. If will contain a iframe_ in the src.
 		cef_texture->SetAttribute("src", cef_id.c_str());
-		
-		//cef_texture->SetProperty("top", "0px");
-		//cef_texture->SetProperty("bottom", "0px");
-		//cef_texture->SetProperty("left", "0px");
-		//cef_texture->SetProperty("right", "0px");
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
-		
 		iframes[i]->AppendChild(cef_texture);
 		DKString str = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
 		DKClass::CallFunc("DKCef::NewBrowser", &str, NULL);
@@ -208,7 +198,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 ////////////////////////////////////////////////
 bool DKRocketToRML::ResizeIframe(DKEvent* event)
 {
-	//DKLog("DKWidget::ResizeIframe", DKDEBUG);
+	//DKLog("DKRocketToRML::ResizeIframe", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
@@ -219,6 +209,32 @@ bool DKRocketToRML::ResizeIframe(DKEvent* event)
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
+	return true;
+}
+
+///////////////////////////////////////////////
+bool DKRocketToRML::ClickIframe(DKEvent* event)
+{
+	DKString id = event->GetId();
+	DKClass::CallFunc("DKSDLCef::OnClick", &id, NULL); //call OnClick in DKCef window handler
+	return true;
+}
+
+////////////////////////////////////
+bool DKRocketToRML::MouseOverIframe(DKEvent* event)
+{
+	//DKLog("DKRocketToRML::MouseOverIframe", DKDEBUG);
+	DKString id = event->GetId();
+	DKRocket* dkRocket = DKRocket::Get("");
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
+	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
+	DKString iTop = toString(iframe->GetAbsoluteTop());
+	DKString iLeft = toString(iframe->GetAbsoluteLeft());
+	DKString iWidth = toString(iframe->GetClientWidth());
+	DKString iHeight = toString(iframe->GetClientHeight());
+	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnMouseOver", &id, NULL); //call OnMouseOver in DKCef window handler
 	DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 	return true;
 }

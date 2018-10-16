@@ -36,6 +36,8 @@ public:
 	bool GetScrollDeltas(SDL_Event *event, float &deltaX, float &deltaY);
 	bool GetTexture(const void* input, void* output);
 	bool Handle(SDL_Event *event);
+	bool OnClick(const void* input, void* output);
+	bool OnMouseOver(const void* input, void* output);
 	bool OnResize(const void* input, void* output);
 	bool SetupCef();
 	bool TransparentPixel(SDL_Event *event);

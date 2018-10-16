@@ -34,6 +34,8 @@ bool DKSDLCef::Init()
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
 	DKSDLWindow::AddDrawFuncFirst(&DKSDLCef::Draw, this);
+	DKClass::RegisterFunc("DKSDLCef::OnClick", &DKSDLCef::OnClick, this);
+	DKClass::RegisterFunc("DKSDLCef::OnMouseOver", &DKSDLCef::OnMouseOver, this);
 	DKClass::RegisterFunc("DKSDLCef::OnResize", &DKSDLCef::OnResize, this);
 	DKClass::RegisterFunc("DKSDLCef::GetTexture", &DKSDLCef::GetTexture, this);
 	return true;
@@ -292,11 +294,27 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			}
 			*/
 
+			//TODO - We want to detect which browser the mouse is over
+			//and 
+
 			CefMouseEvent mouse_event;
-			int i;
-			dkCef->GetCurrentBrowser(i);
-			mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
-			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
+			CefRefPtr<CefBrowser> browser;
+			for(int i=0; i<dkCef->dkBrowsers.size(); i++){
+				mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
+				mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
+				if(mouse_event.x < 0){continue;}
+				if(mouse_event.x > dkCef->dkBrowsers[i].width){continue;}
+				if(mouse_event.y < 0){continue;}
+				if(mouse_event.y > dkCef->dkBrowsers[i].height){continue;}
+				browser = dkCef->dkBrowsers[i].browser;
+				break;
+			}
+
+			
+			//int i;
+			//dkCef->GetCurrentBrowser(i);
+			//mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
+			//mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);
 			uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
@@ -308,7 +326,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				modifiers |= EVENTFLAG_RIGHT_MOUSE_BUTTON;
 	
 			mouse_event.modifiers = modifiers;
-			dkCef->dkBrowsers[i].browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
+			browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
 			return true;
 		}
 
@@ -331,6 +349,40 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		}
 	}
 	return false;
+}
+
+///////////////////////////////////////////////////////
+bool DKSDLCef::OnClick(const void* input, void* output)
+{
+	DKLog("DKSDLCef::OnClick(void*, void*)\n", DKDEBUG);
+	DKString id = *(DKString*)input;
+
+	DKLog("DKSDLCef::OnClick(void*, void*): id = "+id+"\n", DKINFO);
+	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
+		if(dkCef->dkBrowsers[i].id == id){
+			dkCef->SelectBrowser(i);
+			return true;
+		}
+	}
+
+	return false; //something went wrong
+}
+
+///////////////////////////////////////////////////////////
+bool DKSDLCef::OnMouseOver(const void* input, void* output)
+{
+	DKLog("DKSDLCef::OnMouseOver(void*, void*)\n", DKDEBUG);
+	DKString id = *(DKString*)input;
+
+	DKLog("DKSDLCef::OnMouseOver(void*, void*): id = "+id+"\n", DKINFO);
+	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
+		if(dkCef->dkBrowsers[i].id == id){
+			//dkCef->SelectBrowser(i);
+			return true;
+		}
+	}
+
+	return false; //something went wrong
 }
 
 ////////////////////////////////////////////////////////

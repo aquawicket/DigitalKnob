@@ -440,7 +440,7 @@ bool DKCef::GetBrowsers(int& num)
 ///////////////////////////////////////////
 bool DKCef::GetCurrentBrowser(int& browser)
 {
-	DKLog("DKCef::GetCurrentBrowser("+toString(browser)+")\n", DKDEBUG);
+	DKLog("DKCef::GetCurrentBrowser()\n", DKDEBUG);
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
 		if(dkBrowsers[i].browser == current_browser){
 			browser = i;

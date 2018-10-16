@@ -14,6 +14,8 @@ public:
 	bool IndexToRml(const DKString& html, DKString& rml);
 	bool PostProcess(Rocket::Core::Element* element);
 	bool ResizeIframe(DKEvent* event);
+	bool ClickIframe(DKEvent* event);
+	bool MouseOverIframe(DKEvent* event);
 };
 
 #endif //DKRocketToRML_H
