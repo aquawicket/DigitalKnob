@@ -18,10 +18,6 @@ function init_OnEvent(event)  //Duktape
 {
 	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Type(event, "DKCef_OnQueueNewBrowser")){ //NOTE: look into this
-		DKLog("init_OnEvent(): DKCef_OnQueueNewBrowser\n", DKINFO);
-		DKCef_SetUrl(DKCef_GetCurrentBrowser(), DK_GetValue(event));
-	}
 	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("DKSDLCef::OnResize", "0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
@@ -45,9 +41,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "left", "0rem");
 		DKWidget_SetProperty(iframe, "width", "100%");
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
-		//DKCef_SetUrl(DKCef_GetCurrentBrowser(), DKApp_url);
-		//DKCef_SetFocus(DKCef_GetCurrentBrowser());
-		//DKAddEvent("GLOBAL", "DKCef_OnQueueNewBrowser", init_OnEvent); //NOTE: look into this
+		DKCef_SelectBrowser(DKCef_GetCurrentBrowser());
 	}
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
@@ -75,11 +69,9 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKLog("Creating CEF -> GUI \n");
 		var width = 800;
 		var height = 600;
-		//DKCreate("DKCef,Cef,0,0,"+width+","+height+","+DKApp_url);
-		
 		DKCreate("DKCef");
 		DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
-		DKCef_SetFocus(0);
+		DKCef_SelectBrowser(DKCef_GetCurrentBrowser());
 		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
