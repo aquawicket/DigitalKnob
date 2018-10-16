@@ -109,11 +109,25 @@ function DKFrame_SetTitle(id, title)
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
+	// FIXME - THIS NEED REPAIRED.
+	// I've been using this section to test multiple cef browsers in one rocket contect.
+	//
+	//
+	//      Please Debug Me
+	//
+	//
+	//
+	
 	DKLog("DKFrame_Iframe("+title+","+url+","+width+","+height+")\n", DKINFO);
 	var frame = DKFrame_CreateFrame(title, width, height);
 
-	//FIXME: DKRocketToRML::PostProcess() is getting called before we can set the attributes.
-	var iframe = DKWidget_CreateElement(frame, "iframe", title);
+	var valid  = false;
+	if(DKValid("DKCef,Google")){
+		DKLog("######### DKCEF is valid\n");
+		valid = true;
+	}
+	
+	var iframe = DKWidget_CreateElement(frame, "iframe", title); //FIXME: DKRocketToRML::PostProcess() is getting called before we can set the attributes.
 	DKWidget_SetAttribute(iframe, "src", url);
 	DKWidget_SetAttribute(iframe, "width", "100%");
 	DKWidget_SetAttribute(iframe, "height", "100%");
@@ -125,8 +139,16 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_SetProperty(iframe, "bottom", "0rem");
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
-	DKCef_SetUrl(DKCef_GetCurrentBrowser(), url);
-	DKCef_SetFocus(0);
+	
+	if(!valid){
+		DKCef_SetUrl(DKCef_GetBrowsers()-1, url);
+		DKCef_SetFocus(DKCef_GetBrowsers()-1);
+	}
+	else{
+		DKCef_NewBrowser(iframe, 0, 0, width, height, url);
+		DKCef_SetUrl(DKCef_GetBrowsers()-1, url);
+		DKCef_SetFocus(DKCef_GetBrowsers()-1);
+	}
 	
 	//var currentBrowser = DKCef_GetCurrentBrowser();
 	//DKCef_SetUrl(currentBrowser, url);

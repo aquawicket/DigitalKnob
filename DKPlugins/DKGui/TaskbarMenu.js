@@ -79,7 +79,6 @@ function TaskbarMenu_OnEvent(event)
 	if(DK_Id(event, "OpenGoogle")){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Google","https://google.com",640,480);
-			DKCef_NewBrowser("Google", 0,0,640,480, "https://google.com");
 		});
 	}
 	
