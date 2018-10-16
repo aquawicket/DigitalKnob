@@ -20,7 +20,7 @@ struct DKBrowser
 	int width;
 	int height;
 	DKString url;
-	bool focused;
+	//bool focused;
 	CefRefPtr<CefBrowser> browser;
 };
 
@@ -50,6 +50,7 @@ public:
 	bool GetBrowserId(const int& browser, DKString& id);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
+	bool GetFocus(int& browser);
 	bool GetPageSource(const int& browser, DKString& _source);
 	bool GetUrl(int& browser, DKString& url);
 	bool GoBack(const int& browser);
@@ -83,6 +84,7 @@ public:
 	//DKString homepage;
 	//DKString source;
 	bool fullscreen;
+	int focused;
 
 	//std::vector<CefRefPtr<CefBrowser> > browsers;
 	std::vector<DKBrowser> dkBrowsers;

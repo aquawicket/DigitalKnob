@@ -73,7 +73,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_DownloadUrl", DKCefV8::DownloadUrl);
 	DKV8::AttachFunction("DKCef_FileDialog", DKCefV8::FileDialog);
 	DKV8::AttachFunction("DKCef_Find", DKCefV8::Find);
-	DKV8::AttachFunction("DKCef_Focused", DKCefV8::Focused);
 	DKV8::AttachFunction("DKCef_GetBrowserId", DKCefV8::GetBrowserId);
 	DKV8::AttachFunction("DKCef_GetBrowsers", DKCefV8::GetBrowsers);
 	DKV8::AttachFunction("DKCef_GetCurrentBrowser", DKCefV8::GetCurrentBrowser);
@@ -648,16 +647,6 @@ bool DKCefV8::Find(CefArgs args, CefReturn retval)
 	int browser = args->GetInt(0);
 	DKString text = args->GetString(1);
 	if(!DKCef::Get()->Find(browser, text)){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////
-bool DKCefV8::Focused(CefArgs args, CefReturn retval)
-{
-	int browser = args->GetInt(0);
-	bool focused = DKCef::Get()->dkBrowsers[browser].focused;
-	if(!focused){ return false; }
-	if(!retval->SetBool(0, true)){ return false; }
 	return true;
 }
 

@@ -30,7 +30,6 @@ bool DKSDLCef::Init()
 
 	SetupCef();
 	_mouseLMBdown = false;
-	keyboardFocus = 0;
 	_scrollFactor = 120.0f;
 
 	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
@@ -155,7 +154,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			}
 
 			CefMouseEvent mouse_event;
-			keyboardFocus = i;
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			if(mouse_event.x < 0){return false;}
@@ -203,7 +201,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		*/
 		
 		case SDL_KEYDOWN:{
-			int i = keyboardFocus;
 			//print SDL2 key data
 			/*
 			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
@@ -261,8 +258,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		}
 
 		case SDL_KEYUP:{
-			int i = keyboardFocus;
-			dkCef->SetFocus(i);
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];

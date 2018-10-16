@@ -39,6 +39,7 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
+	focused = -1;
 	//source = "";
 
 	/*
@@ -461,6 +462,14 @@ bool DKCef::GetCurrentBrowser(int& browser)
 	return false; //error
 }
 
+//////////////////////////////////
+bool DKCef::GetFocus(int& browser)
+{	
+	DKLog("DKCef::GetFocus()\n", DKDEBUG);
+	browser = focused;
+	return true;
+}
+
 ////////////////////////////////////////////////////////////////
 bool DKCef::GetPageSource(const int& browser, DKString& _source)
 {
@@ -643,7 +652,9 @@ bool DKCef::Reload(const int& browser)
 bool DKCef::RemoveFocus(const int& browser)
 {
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
-	dkBrowsers[browser].focused = false;
+	if(browser == focused){
+		focused = -1;
+	}
 	return 1;
 }
 
@@ -689,12 +700,23 @@ bool DKCef::SelectBrowser(int& browser)
 ////////////////////////////////////////
 bool DKCef::SetFocus(const int& browser)
 {
+	//Only one browser can be focused at a time
 	if(browser+1 > (int)dkBrowsers.size()){
 		DKLog("DKCef::SetFocus("+toString(browser)+"): browser invalid\n", DKERROR);
 		return false;
 	}
-	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
-	dkBrowsers[browser].focused = true;
+	focused = -1;
+	for(int i=0; i<dkBrowsers.size(); i++){
+		if(i == browser){
+			dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
+			dkBrowsers[browser].browser->GetHost()->SetFocus(true);
+			focused = browser;
+		}
+		else{
+			dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
+			dkBrowsers[browser].browser->GetHost()->SetFocus(false);
+		}
+	}
 	return true;
 }
 

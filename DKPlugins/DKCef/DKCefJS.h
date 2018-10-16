@@ -19,7 +19,6 @@ public:
 	static int Cut(duk_context* ctx);
 	static int DownloadUrl(duk_context* ctx);
 	static int Find(duk_context* ctx);
-	static int Focused(duk_context* ctx);
 	static int GetBrowserId(duk_context* ctx);
 	static int GetBrowsers(duk_context* ctx);
 	static int GetCurrentBrowser(duk_context* ctx);

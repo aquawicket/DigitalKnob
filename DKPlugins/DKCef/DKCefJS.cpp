@@ -13,7 +13,6 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_Cut", DKCefJS::Cut);
 	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl);
 	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
-	DKDuktape::AttachFunction("DKCef_Focused", DKCefJS::Focused);
 	DKDuktape::AttachFunction("DKCef_GetBrowserId", DKCefJS::GetBrowserId);
 	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers);
 	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser);
@@ -89,16 +88,6 @@ int DKCefJS::Find(duk_context* ctx)
 	int browser = duk_require_int(ctx, 0);
 	DKString text = duk_require_string(ctx, 1);
 	if(!DKCef::Get()->Find(browser, text)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////////
-int DKCefJS::Focused(duk_context* ctx)
-{
-	int browser = duk_require_int(ctx, 0);
-	bool focused = DKCef::Get()->dkBrowsers[browser].focused;
-	if(!focused){ return 0; }
-	duk_push_true(ctx);
 	return 1;
 }
 
