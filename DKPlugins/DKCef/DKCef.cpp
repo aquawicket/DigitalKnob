@@ -38,7 +38,7 @@ bool DKCef::Init()
 	//DKLog("Cef version "+version_string+"\n", DKINFO);
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
-	//cefHandler = NULL;
+	cefHandler = NULL;
 	//source = "";
 
 	/*
@@ -505,9 +505,6 @@ bool DKCef::NewBrowser(const void* input, void* output)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
-#ifndef DEBUG
-	CEF_REQUIRE_UI_THREAD();
-#endif
 	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n", DKINFO);
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
@@ -520,6 +517,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
 			return false; 
 		}
+
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
