@@ -513,6 +513,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
+		DKUtil::Sleep(2000);
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 
 		if(!_browser){
