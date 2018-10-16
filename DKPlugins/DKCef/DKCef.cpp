@@ -761,8 +761,10 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(same(type,"restore")){ return false; }
 
 	DKLog("DKCef::SendEvent("+id+","+type+","+value+")\n", DKDEBUG);
-	
-	//DKSendEvent to first browsers only
+	if(dkBrowsers.size() <= 0){ return false; }
+
+	//FIXME - make this work on all the browsers
+	//DKSendEvent to first browsers only for now. 
 	CefRefPtr<CefFrame> frame = dkBrowsers[0].browser->GetMainFrame();
 	if(!frame){
 		DKLog("DKCef::SendEvent(): frame invalid \n", DKERROR);
