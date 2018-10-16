@@ -135,16 +135,11 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 	*/
 
 	for(unsigned int i=0; i<browser_list_.size(); i++){
-		if(browser_list_[i] == browser){
+		if(browser_list_[i]->IsSame(browser)){
 			browser_list_.erase(browser_list_.begin()+i);
 			cef_images.erase(cef_images.begin()+i);
 			break;
 		}
-	}
-
-	if(browser_list_.empty()){
-		//NOTE: disabled since we run our own message loop
-		//CefQuitMessageLoop(); // All browser windows have closed. Quit the application message loop.
 	}
 }
 

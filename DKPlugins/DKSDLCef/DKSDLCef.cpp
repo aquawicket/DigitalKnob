@@ -118,7 +118,10 @@ bool DKSDLCef::Handle(SDL_Event* event)
 	//DKLog("DKSDLCef::handle(SDL_Event*)\n", DKDEBUG);
 
 	if(!dkCef->current_browser){ return false; }
-	if(dkCef->dkBrowsers.size() < 1){ return false; }
+	if(dkCef->dkBrowsers.size() <= 0){ return false; }
+	int i;
+	dkCef->GetCurrentBrowser(i);
+	if(i <= 0){ return false; }
 
 	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
 	//DKLog("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n", DKDEBUG);
@@ -152,8 +155,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			}
 
 			CefMouseEvent mouse_event;
-			int i;
-			dkCef->GetCurrentBrowser(i);
 			keyboardFocus = i;
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
@@ -179,8 +180,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				_mouseLMBdown = false;
 			}
 			CefMouseEvent mouse_event;
-			int i;
-			dkCef->GetCurrentBrowser(i);
             mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			if(mouse_event.x < 0){return false;}
@@ -205,9 +204,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		
 		case SDL_KEYDOWN:{
 			int i = keyboardFocus;
-			//dkCef->GetCurrentBrowser(i);
-			//if(!dkCef->dkBrowsers[i].focused){ return false; }
-			
 			//print SDL2 key data
 			/*
 			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
@@ -312,8 +308,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			*/
 
 			CefMouseEvent mouse_event;
-			int i;
-			dkCef->GetCurrentBrowser(i);
 			mouse_event.x = event->motion.x - dkCef->dkBrowsers[i].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[i].top;
 			//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);
@@ -338,8 +332,6 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				int mouseX;
 				int mouseY;
 				SDL_GetMouseState(&mouseX, &mouseY);
-				int i;
-				dkCef->GetCurrentBrowser(i);
 				mouse_event.x = mouseX - dkCef->dkBrowsers[i].left;
 				mouse_event.y = mouseY - dkCef->dkBrowsers[i].top;
 				//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);

@@ -331,10 +331,12 @@ bool DKCef::End()
 bool DKCef::CloseBrowser(const int& browser)
 {
 	DKLog("DKCef::CloseBrowser("+toString(browser)+")\n", DKDEBUG);
-	current_browser = dkBrowsers[0].browser;
-	current_browser->GetHost()->Invalidate(PET_VIEW);
+	dkBrowsers[browser].browser->GetHost()->CloseBrowser(true);
 	dkBrowsers[browser].browser = NULL;
 	dkBrowsers.erase(dkBrowsers.begin() + browser);
+
+	//current_browser = dkBrowsers[0].browser;
+	//current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
 }
 
