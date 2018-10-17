@@ -194,6 +194,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		*/
 		
 		case SDL_KEYDOWN:{
+			if(dkCef->keyboardFocus < 0){ return false; }
 			//print SDL2 key data
 			/*
 			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
@@ -251,6 +252,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		}
 
 		case SDL_KEYUP:{
+			if(dkCef->keyboardFocus < 0){ return false; }
+
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
@@ -380,7 +383,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
-	DKLog("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n", DKINFO);
+	//DKLog("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n", DKINFO);
 
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser)){
