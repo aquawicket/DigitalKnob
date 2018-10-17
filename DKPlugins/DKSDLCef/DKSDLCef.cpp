@@ -109,7 +109,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 	//DKLog("DKSDLCef::handle(SDL_Event*)\n", DKDEBUG);
 	int browser;
 	if(!dkCef->GetCurrentBrowser(browser)){
-		DKLog("DKSDLCef::Handle(): The browser is invalid\n", DKERROR);
+		//DKLog("DKSDLCef::Handle(): The browser is invalid\n", DKERROR);
 		return false;
 	}
 	//DKLog("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n", DKINFO);
