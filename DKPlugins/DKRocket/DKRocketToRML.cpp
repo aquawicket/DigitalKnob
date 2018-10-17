@@ -140,7 +140,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 
 		DKString url;
 		if(!iframes[i]->GetAttribute("src")){ 
-			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKWARN);
+			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n", DKDEBUG);
 			 return false;
 		}
 		else{
