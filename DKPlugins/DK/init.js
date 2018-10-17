@@ -54,7 +54,6 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		}
 	}
 	else if(USE_SDL && USE_CEF){
-		/////////////  FIXME: BROKEN /////////////////////
 		DKLog("Creating SDL -> CEF -> GUI \n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
