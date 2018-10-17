@@ -474,9 +474,9 @@ bool DKCef::GetCurrentBrowser(int& browser)
 			return true;
 		}
 	}
-	DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
+	//DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
 	browser = -1;
-	return false; //error
+	return false;
 }
 
 ////////////////////////////////////////////////////////////////
