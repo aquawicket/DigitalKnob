@@ -62,6 +62,7 @@ public:
 	bool RemoveFocus(const int& browser);
 	bool RunJavascript(const int& browser, DKString& string);
 	bool SetFocus(const int& browser);
+	bool SetKeyboardFocus(const int& browser);
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
 	bool Stop(const int& browser);
@@ -77,6 +78,7 @@ public:
 	bool fullscreen;
 	std::vector<DKBrowser> dkBrowsers;
 	CefRefPtr<CefBrowser> current_browser;
+	int keyboardFocus;
 	static CefRefPtr<DKCefApp> cefApp;
 	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;

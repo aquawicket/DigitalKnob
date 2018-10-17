@@ -39,6 +39,7 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
+	keyboardFocus = 0;
 	//source = "";
 
 	/*
@@ -701,6 +702,14 @@ bool DKCef::SetFocus(const int& browser)
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	current_browser = dkBrowsers[browser].browser;
 	current_browser->GetHost()->Invalidate(PET_VIEW);
+	return true;
+}
+
+////////////////////////////////////////////////
+bool DKCef::SetKeyboardFocus(const int& browser)
+{
+	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
+	keyboardFocus = browser;
 	return true;
 }
 

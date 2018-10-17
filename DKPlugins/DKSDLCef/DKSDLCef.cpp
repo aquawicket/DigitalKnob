@@ -215,7 +215,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		
 			//DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("RAWKEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendKeyEvent(KeyEvent);
+			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
 
 			CefKeyEvent charKeyEvent;
        		charKeyEvent.type = KEYEVENT_CHAR;
@@ -246,7 +246,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 			//DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("CHAR: modifiers = "+toString(charKeyEvent.modifiers)+"\n", DKINFO);
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendKeyEvent(charKeyEvent);
+			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(charKeyEvent);
 			return true;
 		}
 
@@ -263,7 +263,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
 			//DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
 #ifndef MAC
-			dkCef->dkBrowsers[browser].browser->GetHost()->SendKeyEvent(KeyEvent);
+			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
 #endif
 			return true;
 		}
@@ -347,7 +347,9 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 		return false;
 	}
 
+	OnResize(input, NULL);
 	dkCef->SetFocus(browser);
+	dkCef->SetKeyboardFocus(browser);
 	return false;
 }
 
@@ -367,7 +369,7 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 
 	//work with the browser here
 	OnResize(input, NULL);
-
+	dkCef->SetFocus(browser);
 	return true; 
 }
 
@@ -385,7 +387,6 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 		DKLog("DKSDLCef::OnResize(): browser is invalid\n", DKDEBUG);
 		return false;
 	}
-	
 	if(dkCef->fullscreen){
 		dkCef->dkBrowsers[browser].top = 0;
 		dkCef->dkBrowsers[browser].left = 0;
@@ -401,11 +402,6 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 		dkCef->dkBrowsers[browser].width = toInt(arry[3]); //width
 		dkCef->dkBrowsers[browser].height = toInt(arry[4]); //height
 	}
-
-	//for(unsigned int i = 0; i < dkCef->dkBrowsers.size(); ++i){
-	//	dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
-	//	dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
-	//}
 	dkCef->dkBrowsers[browser].browser->GetHost()->WasResized();
 	dkCef->dkBrowsers[browser].browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
