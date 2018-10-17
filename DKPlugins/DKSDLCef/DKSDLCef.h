@@ -48,7 +48,6 @@ public:
 	bool _mouseLMBdown;
 	DKSDLCefKeyboard _keyAdapter;
 	float _scrollFactor;
-	SDL_Texture* background_image;
 	SDL_Texture* popup_image;
 	CefRect popup_rect;
 	DKSDLCefHandler* cefHandler;

@@ -331,7 +331,7 @@ bool DKCef::End()
 bool DKCef::CloseBrowser(const int& browser)
 {
 	DKLog("DKCef::CloseBrowser("+toString(browser)+")\n", DKDEBUG);
-	if((unsigned)browser > dkBrowsers.size()){
+	if((unsigned)browser > dkBrowsers.size()-1){
 		DKLog("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n", DKERROR);
 		return false; 
 	}
@@ -697,10 +697,7 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 ////////////////////////////////////////
 bool DKCef::SetFocus(const int& browser)
 {
-	if(browser+1 > (int)dkBrowsers.size()){
-		DKLog("DKCef::SetFocus("+toString(browser)+"): browser invalid\n", DKERROR);
-		return false;
-	}
+	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	current_browser = dkBrowsers[browser].browser;
 	current_browser->GetHost()->Invalidate(PET_VIEW);

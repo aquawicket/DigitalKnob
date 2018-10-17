@@ -17,8 +17,6 @@ bool DKSDLCef::Init()
 {
 	DKLog("DKSDLCef::Init()\n",DKDEBUG);
 
-	//cef_image = NULL;
-	background_image = NULL;
 	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	//id = data[1];
@@ -96,6 +94,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 
 	if(!cefHandler->cef_images[browser]){
 		cefHandler->cef_images[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
+		cefHandler->background_images[browser] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, dkCef->dkBrowsers[browser].width, dkCef->dkBrowsers[browser].height);
 	}
 	struct DKTexture{ SDL_Texture* texture; };
 	DKTexture out = *(DKTexture*)output;
@@ -367,6 +366,8 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	}
 
 	//work with the browser here
+	OnResize(input, NULL);
+
 	return true; 
 }
 

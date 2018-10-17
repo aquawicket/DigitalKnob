@@ -107,13 +107,13 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
 	if(dkCef->dkBrowsers.size() < 1){ return true; }
 
-	int i=0;
-	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); i++){
-		if(dkCef->dkBrowsers[i].browser->IsSame(browser)){
-			break;
-		}
+	unsigned int i;
+	for(i=0; i<dkCef->dkBrowsers.size(); i++){
+		if(dkCef->dkBrowsers[i].browser->IsSame(browser)){ break; } //found
+		if(i >= dkCef->dkBrowsers.size()-1){ return true; } //not found
 	}
 	rect = CefRect(0, 0, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
+	//DKLog("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n", DKINFO);
 	return true;
 }
 
@@ -138,6 +138,7 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 		if(browser_list_[i]->IsSame(browser)){
 			browser_list_.erase(browser_list_.begin()+i);
 			cef_images.erase(cef_images.begin()+i);
+			background_images.erase(background_images.begin()+i);
 			break;
 		}
 	}
@@ -150,6 +151,7 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 	CEF_REQUIRE_UI_THREAD();
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
 	cef_images.push_back(NULL);
+	background_images.push_back(NULL);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -358,21 +360,18 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 			cef_images[b] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, width, height);
 		}
 
-		if (!dkSdlCef->background_image) {
-			dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		}
 		int w2, h2;
-		SDL_QueryTexture(dkSdlCef->background_image, NULL, NULL, &w2, &h2);
+		SDL_QueryTexture(background_images[b], NULL, NULL, &w2, &h2);
 		if (w2 != width || h2 != height) {
-			dkSdlCef->background_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+			background_images[b] = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 		}
 
 		unsigned char * texture_data = NULL;
 		int texture_pitch = 0;
-		if(SDL_LockTexture(dkSdlCef->background_image, NULL, (void **)&texture_data, &texture_pitch) == 0){
+		if(SDL_LockTexture(background_images[b], NULL, (void **)&texture_data, &texture_pitch) == 0){
 			//copies whole cef bitmap to sdl texture
 			std::memcpy(texture_data, buffer, width * height * 4);
-			SDL_UnlockTexture(dkSdlCef->background_image);
+			SDL_UnlockTexture(background_images[b]);
 		}
 	}
 
@@ -398,7 +397,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 
 	if(cef_images[b]) {	
 		SDL_SetRenderTarget(dkSdlWindow->renderer, cef_images[b]);
-		SDL_RenderCopy(dkSdlWindow->renderer, dkSdlCef->background_image, NULL, NULL);
+		SDL_RenderCopy(dkSdlWindow->renderer, background_images[b], NULL, NULL);
 		if(dkSdlCef->popup_image){
 			SDL_Rect popup;
 			popup.x = dkSdlCef->popup_rect.x;
@@ -553,6 +552,6 @@ bool DKSDLCefHandler::OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
 {
 	//FIXME: this is never called
 	CEF_REQUIRE_UI_THREAD();
-	DKLog("DKCefWindow::OnTooltip()\n", DKDEBUG);
+	DKLog("DKCefWindow::OnTooltip()\n", DKINFO);
 	return true;
 }

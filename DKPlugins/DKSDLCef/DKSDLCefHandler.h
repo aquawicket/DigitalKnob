@@ -51,6 +51,7 @@ public:
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_images;
+	std::vector<SDL_Texture*> background_images;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
 	virtual CefRefPtr<CefDialogHandler> GetDialogHandler(){ return this; }
