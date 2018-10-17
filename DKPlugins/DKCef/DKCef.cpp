@@ -553,8 +553,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
-		current_browser = dkBrowsers[0].browser;
-		current_browser->GetHost()->SetWindowlessFrameRate(60);
+		SetFocus(dkBrowsers.size()-1);
+		//current_browser->GetHost()->SetWindowlessFrameRate(60); //do we need this?
 	}
 	else{
 		//Create window title
@@ -598,7 +598,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
-		current_browser = dkBrowsers[0].browser;
+		SetFocus(dkBrowsers.size()-1);
 		
 #ifdef LINUX
 		gdk_init(NULL, NULL);

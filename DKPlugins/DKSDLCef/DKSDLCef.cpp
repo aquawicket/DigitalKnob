@@ -377,6 +377,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
+	DKLog("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n", DKINFO);
 
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser)){
@@ -400,10 +401,12 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 		dkCef->dkBrowsers[browser].height = toInt(arry[4]); //height
 	}
 
-	for(unsigned int i = 0; i < dkCef->dkBrowsers.size(); ++i){
-		//dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
-	}
-	//dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
+	//for(unsigned int i = 0; i < dkCef->dkBrowsers.size(); ++i){
+	//	dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
+	//	dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
+	//}
+	dkCef->dkBrowsers[browser].browser->GetHost()->WasResized();
+	dkCef->dkBrowsers[browser].browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
 }
 

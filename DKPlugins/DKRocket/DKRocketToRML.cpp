@@ -162,8 +162,9 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
 		iframes[i]->AppendChild(cef_texture);
-		DKString str = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
-		DKClass::CallFunc("DKCef::NewBrowser", &str, NULL);
+		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
+		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
+		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 	}
 
 	// <a> tags with href attribute
