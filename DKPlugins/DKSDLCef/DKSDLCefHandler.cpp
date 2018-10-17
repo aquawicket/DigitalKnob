@@ -166,7 +166,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 	data += params->GetSourceUrl();
 	data += ";";
 	data += params->GetLinkUrl();
-	DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n", DKINFO);
+	//DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n", DKINFO);
 
 	DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 }
