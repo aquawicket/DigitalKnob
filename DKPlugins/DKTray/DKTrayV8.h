@@ -13,6 +13,10 @@ public:
 	bool End();
 	
 	static bool AddItem(CefArgs args, CefReturn retval);
+	static bool GetIcon(CefArgs args, CefReturn retval);
+	static bool SetIcon(CefArgs args, CefReturn retval);
+	static bool SetTooltip(CefArgs args, CefReturn retval);
+	static bool ShowBalloon(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKTrayV8, false);
