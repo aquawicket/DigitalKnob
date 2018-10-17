@@ -342,10 +342,10 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
 	bool found = false;
 	unsigned int b=0;
-	for(b=0; b<browser_list_.size(); ++b){
-		if(browser_list_[b]->IsSame(browser)){
+	for(b=0; b<dkCef->dkBrowsers.size(); ++b){
+		if(dkCef->dkBrowsers[b].browser->IsSame(browser)){
 			found = true;
-			break; //i is not the cef_images number
+			break;
 		}
 	}
 	if(!found){ return; }

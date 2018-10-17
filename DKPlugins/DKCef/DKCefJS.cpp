@@ -27,7 +27,6 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_Reload", DKCefJS::Reload);
 	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus);
 	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
-	DKDuktape::AttachFunction("DKCef_SelectBrowser", DKCefJS::SelectBrowser);
 	DKDuktape::AttachFunction("DKCef_SetFocus", DKCefJS::SetFocus);
 	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
 	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
@@ -221,14 +220,6 @@ int DKCefJS::RunJavascript(duk_context* ctx)
 	DKString string = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 2);
 	if(!DKCef::Get()->RunJavascript(browser, string)){ return 0; }
-	return 1;
-}
-
-////////////////////////////////////////////
-int DKCefJS::SelectBrowser(duk_context* ctx)
-{
-	int browser = duk_require_int(ctx, 0);
-	if(!DKCef::Get()->SelectBrowser(browser)){ return 0; }
 	return 1;
 }
 

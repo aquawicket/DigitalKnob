@@ -33,7 +33,6 @@ public:
 	static int Reload(duk_context* ctx);
 	static int RemoveFocus(duk_context* ctx);
 	static int RunJavascript(duk_context* ctx);
-	static int SelectBrowser(duk_context* ctx);
 	static int SetFocus(duk_context* ctx);
 	static int SetUrl(duk_context* ctx);
 	static int ShowDevTools(duk_context* ctx);

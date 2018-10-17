@@ -160,7 +160,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(mouse_event.x > dkCef->dkBrowsers[i].width){return false;}
 			if(mouse_event.y < 0){return false;}
 			if(mouse_event.y > dkCef->dkBrowsers[i].height){return false;}
-			//dkCef->SetFocus(i);
+			dkCef->SetFocus(i);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
@@ -184,7 +184,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(mouse_event.x > dkCef->dkBrowsers[i].width){return false;}
 			if(mouse_event.y < 0){return false;}
 			if(mouse_event.y > dkCef->dkBrowsers[i].height){return false;}
-			//dkCef->SetFocus(i);
+			dkCef->SetFocus(i);
 			//mouse_event.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			CefBrowserHost::MouseButtonType type;
@@ -347,9 +347,10 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	DKString id = *(DKString*)input;
 
 	//DKLog("DKSDLCef::OnClick(void*, void*): id = "+id+"\n", DKINFO);
-	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
+	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].id == id){
-			dkCef->SelectBrowser(i);
+			dkCef->SetFocus(i);
+			//dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
 			return true;
 		}
 	}
@@ -364,9 +365,9 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	DKString id = *(DKString*)input;
 
 	//DKLog("DKSDLCef::OnMouseOver(void*, void*): id = "+id+"\n", DKINFO);
-	for(int i=0; i<dkCef->dkBrowsers.size(); i++){
-		if(dkCef->dkBrowsers[i].id == id){
-			dkCef->SelectBrowser(i);
+	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); i++){
+		if(dkCef->dkBrowsers[i].id != id){
+			//dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
 			return true;
 		}
 	}
@@ -410,6 +411,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 		//dkCef->dkBrowsers[i].browser->GetHost()->WasResized();
 	}
 
+	//dkCef->dkBrowsers[i].browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
 }
 

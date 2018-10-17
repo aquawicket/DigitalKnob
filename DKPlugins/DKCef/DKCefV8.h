@@ -89,7 +89,6 @@ public:
 	static bool Reload(CefArgs args, CefReturn retval);
 	static bool RemoveFocus(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);
-	static bool SelectBrowser(CefArgs args, CefReturn retval);
 	static bool SetFocus(CefArgs args, CefReturn retval);
 	static bool SetUrl(CefArgs args, CefReturn retval);
 	static bool ShowDevTools(CefArgs args, CefReturn retval);

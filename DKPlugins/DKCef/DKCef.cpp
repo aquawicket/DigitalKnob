@@ -39,7 +39,6 @@ bool DKCef::Init()
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
-	focused = -1;
 	//source = "";
 
 	/*
@@ -332,12 +331,13 @@ bool DKCef::End()
 bool DKCef::CloseBrowser(const int& browser)
 {
 	DKLog("DKCef::CloseBrowser("+toString(browser)+")\n", DKDEBUG);
+	if(browser > dkBrowsers.size()){
+		DKLog("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n", DKERROR);
+		return false; 
+	}
 	dkBrowsers[browser].browser->GetHost()->CloseBrowser(true);
 	dkBrowsers[browser].browser = NULL;
 	dkBrowsers.erase(dkBrowsers.begin() + browser);
-
-	//current_browser = dkBrowsers[0].browser;
-	//current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
 }
 
@@ -460,14 +460,6 @@ bool DKCef::GetCurrentBrowser(int& browser)
 	}
 	DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
 	return false; //error
-}
-
-//////////////////////////////////
-bool DKCef::GetFocus(int& browser)
-{	
-	DKLog("DKCef::GetFocus()\n", DKDEBUG);
-	browser = focused;
-	return true;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -652,9 +644,6 @@ bool DKCef::Reload(const int& browser)
 bool DKCef::RemoveFocus(const int& browser)
 {
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
-	if(browser == focused){
-		focused = -1;
-	}
 	return 1;
 }
 
@@ -688,35 +677,16 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 	return true;
 }
 
-///////////////////////////////////////
-bool DKCef::SelectBrowser(int& browser)
-{
-	DKLog("DKCef::SelectBrowser("+toString(browser)+")\n", DKDEBUG);
-	current_browser = dkBrowsers[browser].browser;
-	current_browser->GetHost()->Invalidate(PET_VIEW);
-	return true;
-}
-
 ////////////////////////////////////////
 bool DKCef::SetFocus(const int& browser)
 {
-	//Only one browser can be focused at a time
 	if(browser+1 > (int)dkBrowsers.size()){
 		DKLog("DKCef::SetFocus("+toString(browser)+"): browser invalid\n", DKERROR);
 		return false;
 	}
-	focused = -1;
-	for(int i=0; i<dkBrowsers.size(); i++){
-		if(i == browser){
-			dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
-			dkBrowsers[browser].browser->GetHost()->SetFocus(true);
-			focused = browser;
-		}
-		else{
-			dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
-			dkBrowsers[browser].browser->GetHost()->SetFocus(false);
-		}
-	}
+	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
+	current_browser = dkBrowsers[browser].browser;
+	current_browser->GetHost()->Invalidate(PET_VIEW);
 	return true;
 }
 

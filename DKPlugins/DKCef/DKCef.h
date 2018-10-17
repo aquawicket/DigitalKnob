@@ -20,7 +20,6 @@ struct DKBrowser
 	int width;
 	int height;
 	DKString url;
-	//bool focused;
 	CefRefPtr<CefBrowser> browser;
 };
 
@@ -50,7 +49,6 @@ public:
 	bool GetBrowserId(const int& browser, DKString& id);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
-	bool GetFocus(int& browser);
 	bool GetPageSource(const int& browser, DKString& _source);
 	bool GetUrl(int& browser, DKString& url);
 	bool GoBack(const int& browser);
@@ -62,7 +60,6 @@ public:
 	bool Reload(const int& browser);
 	bool RemoveFocus(const int& browser);
 	bool RunJavascript(const int& browser, DKString& string);
-	bool SelectBrowser(int& browser);
 	bool SetFocus(const int& browser);
 	bool SetUrl(const int& browser, const DKString& url);
 	bool ShowDevTools(const int& browser);
@@ -76,26 +73,14 @@ public:
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	bool NewBrowser(const void* input, void* output);
 	
-	//int top;
-	//int left;
-	//int width;
-	//int height;
-	//int inFocus;
-	//DKString homepage;
-	//DKString source;
 	bool fullscreen;
-	int focused;
-
-	//std::vector<CefRefPtr<CefBrowser> > browsers;
 	std::vector<DKBrowser> dkBrowsers;
 	CefRefPtr<CefBrowser> current_browser;
 	static CefRefPtr<DKCefApp> cefApp;
 	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
 	DKCefWindow* dkCefWindow;
 	static unsigned long cefThreadId;
-
 	DialogCallback* fileDialogCallback;
-
 	static bool initialized;
 
 #ifdef WIN32

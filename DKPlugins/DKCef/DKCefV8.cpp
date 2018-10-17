@@ -87,7 +87,6 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_Reload", DKCefV8::Reload);
 	DKV8::AttachFunction("DKCef_RemoveFocus", DKCefV8::RemoveFocus);
 	DKV8::AttachFunction("DKCef_RunJavascript", DKCefV8::RunJavascript);
-	DKV8::AttachFunction("DKCef_SelectBrowser", DKCefV8::SelectBrowser);
 	DKV8::AttachFunction("DKCef_SetFocus", DKCefV8::SetFocus);
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
@@ -778,14 +777,6 @@ bool DKCefV8::RunJavascript(CefArgs args, CefReturn retval)
 	int browser = args->GetInt(0);
 	DKString code = args->GetString(1);
 	if(!DKCef::Get()->RunJavascript(browser, code)){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////////
-bool DKCefV8::SelectBrowser(CefArgs args, CefReturn retval)
-{
-	int browser = args->GetInt(0);
-	if(!DKCef::Get()->SelectBrowser(browser)){ return false; }
 	return true;
 }
 
