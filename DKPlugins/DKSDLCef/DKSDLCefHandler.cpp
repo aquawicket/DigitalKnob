@@ -550,8 +550,7 @@ return true;
 ///////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
 {
-	//FIXME: this is never called
 	CEF_REQUIRE_UI_THREAD();
-	DKLog("DKCefWindow::OnTooltip()\n", DKINFO);
+	DKLog("DKSDLCefHandler::OnTooltip()\n", DKDEBUG);
 	return true;
 }
