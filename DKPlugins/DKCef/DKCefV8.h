@@ -90,6 +90,7 @@ public:
 	static bool RemoveFocus(CefArgs args, CefReturn retval);
 	static bool RunJavascript(CefArgs args, CefReturn retval);
 	static bool SetFocus(CefArgs args, CefReturn retval);
+	static bool SetKeyboardFocus(CefArgs args, CefReturn retval);
 	static bool SetUrl(CefArgs args, CefReturn retval);
 	static bool ShowDevTools(CefArgs args, CefReturn retval);
 	static bool Stop(CefArgs args, CefReturn retval);

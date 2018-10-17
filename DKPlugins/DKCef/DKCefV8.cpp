@@ -88,6 +88,7 @@ bool DKCefV8::Init()
 	DKV8::AttachFunction("DKCef_RemoveFocus", DKCefV8::RemoveFocus);
 	DKV8::AttachFunction("DKCef_RunJavascript", DKCefV8::RunJavascript);
 	DKV8::AttachFunction("DKCef_SetFocus", DKCefV8::SetFocus);
+	DKV8::AttachFunction("DKCef_SetKeyboardFocus", DKCefV8::SetKeyboardFocus);
 	DKV8::AttachFunction("DKCef_SetUrl", DKCefV8::SetUrl);
 	DKV8::AttachFunction("DKCef_ShowDevTools", DKCefV8::ShowDevTools);
 	DKV8::AttachFunction("DKCef_Stop", DKCefV8::Stop);
@@ -785,6 +786,14 @@ bool DKCefV8::SetFocus(CefArgs args, CefReturn retval)
 {
 	int browser = args->GetInt(0);
 	if(!DKCef::Get()->SetFocus(browser)){ return false; }
+	return true;
+}
+
+//////////////////////////////////////////////////////////////
+bool DKCefV8::SetKeyboardFocus(CefArgs args, CefReturn retval)
+{
+	int browser = args->GetInt(0);
+	if(!DKCef::Get()->SetKeyboardFocus(browser)){ return false; }
 	return true;
 }
 

@@ -28,6 +28,7 @@ bool DKCefJS::Init()
 	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus);
 	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
 	DKDuktape::AttachFunction("DKCef_SetFocus", DKCefJS::SetFocus);
+	DKDuktape::AttachFunction("DKCef_SetKeyboardFocus", DKCefJS::SetKeyboardFocus);
 	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
 	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
 	DKDuktape::AttachFunction("DKCef_Stop", DKCefJS::Stop);
@@ -228,6 +229,14 @@ int DKCefJS::SetFocus(duk_context* ctx)
 {
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->SetFocus(browser)){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////////
+int DKCefJS::SetKeyboardFocus(duk_context* ctx)
+{
+	int browser = duk_require_int(ctx, 0);
+	if(!DKCef::Get()->SetKeyboardFocus(browser)){ return 0; }
 	return 1;
 }
 

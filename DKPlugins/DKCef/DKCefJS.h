@@ -34,6 +34,7 @@ public:
 	static int RemoveFocus(duk_context* ctx);
 	static int RunJavascript(duk_context* ctx);
 	static int SetFocus(duk_context* ctx);
+	static int SetKeyboardFocus(duk_context* ctx);
 	static int SetUrl(duk_context* ctx);
 	static int ShowDevTools(duk_context* ctx);
 	static int Stop(duk_context* ctx);
