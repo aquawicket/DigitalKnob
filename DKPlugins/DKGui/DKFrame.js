@@ -125,6 +125,8 @@ function DKFrame_Iframe(title, url, width, height)
 	DKWidget_RemoveProperty(iframe, "right");
 	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
 	
+	DKFrame_CreateResize(frame);
+	
 	//var currentBrowser = DKCef_GetCurrentBrowser();
 	//DKCef_SetUrl(currentBrowser, url);
 	//DKFrame_CreateResize(frame);
@@ -223,15 +225,22 @@ function DKFrame_CreateResize(frame)
 {
 	DKLog("DKFrame_CreateResize("+frame+")\n", DKDEBUG);
 	var resize = DKWidget_CreateElement(frame, "div", "DKFrame_resize");
-	DKWidget_SetProperty(resize, "background-image", "url(\"DKGui/resize.png\")");
+	//DKWidget_SetProperty(resize, "background-image", "url(\"DKGui/resize.png\")");
 	DKWidget_RemoveProperty(resize, "top");
 	DKWidget_SetProperty(resize, "position", "absolute");
 	DKWidget_SetProperty(resize, "right", "0rem");
 	DKWidget_SetProperty(resize, "bottom", "0rem");
 	DKWidget_SetProperty(resize, "width", "16rem");
 	DKWidget_SetProperty(resize, "height", "16rem");
-	DKWidget_AddResizeHandle(resize, frame);
-	DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
+	//DKWidget_AddResizeHandle(resize, frame);
+	//DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
+	
+	var resizeImage = DKWidget_CreateElement(resize, "img", "DKFrame_resizeImage");
+	DKWidget_SetAttribute(resizeImage, "src", "DKGui/resize.png");
+	DKWidget_SetProperty(resizeImage, "position", "absolute");
+	DKWidget_SetProperty(resizeImage, "top", "0rem");
+	DKWidget_SetProperty(resizeImage, "right", "0rem");
+	DKWidget_AddResizeHandle(resizeImage, frame);
 	
 	return resize;
 }
