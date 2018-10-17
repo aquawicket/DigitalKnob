@@ -718,8 +718,8 @@ bool DKCef::SetUrl(const int& browser, const DKString& url)
 {
 	DKLog("DKCef::SetUrl("+toString(browser)+","+url+")\n", DKDEBUG);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
-	if (same(url, "plugins")){
-		RunPluginInfoTest(current_browser);
+	if(same(url, "chrome://plugins")){
+		RunPluginInfoTest(dkBrowsers[browser].browser);
 		return true;
 	}
 	dkBrowsers[browser].browser->GetMainFrame()->LoadURL(url.c_str());
