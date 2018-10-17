@@ -466,6 +466,7 @@ bool DKCef::GetBrowsers(int& num)
 bool DKCef::GetCurrentBrowser(int& browser)
 {
 	DKLog("DKCef::GetCurrentBrowser()\n", DKDEBUG);
+	if(!current_browser){ return false; }
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
 		if(dkBrowsers[i].browser->IsSame(current_browser)){
 			browser = i;
@@ -659,6 +660,7 @@ bool DKCef::Reload(const int& browser)
 bool DKCef::RemoveFocus(const int& browser)
 {
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
+	current_browser = NULL;
 	return 1;
 }
 
