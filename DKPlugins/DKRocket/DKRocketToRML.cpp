@@ -198,17 +198,16 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 ////////////////////////////////////////////////
 bool DKRocketToRML::ResizeIframe(DKEvent* event)
 {
-	//DKLog("DKRocketToRML::ResizeIframe", DKDEBUG);
+	DKLog("DKRocketToRML::ResizeIframe", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
-
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
-	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
 	DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
@@ -216,15 +215,7 @@ bool DKRocketToRML::ResizeIframe(DKEvent* event)
 ///////////////////////////////////////////////
 bool DKRocketToRML::ClickIframe(DKEvent* event)
 {
-	DKString id = event->GetId();
-	DKClass::CallFunc("DKSDLCef::OnClick", &id, NULL); //call OnClick in DKCef window handler
-	return true;
-}
-
-////////////////////////////////////
-bool DKRocketToRML::MouseOverIframe(DKEvent* event)
-{
-	//DKLog("DKRocketToRML::MouseOverIframe", DKDEBUG);
+	DKLog("DKRocketToRML::ClickIframe()", DKDEBUG);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
@@ -233,8 +224,24 @@ bool DKRocketToRML::MouseOverIframe(DKEvent* event)
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
-	DKString data = iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnMouseOver", &id, NULL); //call OnMouseOver in DKCef window handler
-	DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
+	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnClick", &data, NULL); //call OnResize in DKCef window handler
+	return true;
+}
+
+////////////////////////////////////
+bool DKRocketToRML::MouseOverIframe(DKEvent* event)
+{
+	DKLog("DKRocketToRML::MouseOverIframe", DKDEBUG);
+	DKString id = event->GetId();
+	DKRocket* dkRocket = DKRocket::Get("");
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
+	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
+	DKString iTop = toString(iframe->GetAbsoluteTop());
+	DKString iLeft = toString(iframe->GetAbsoluteLeft());
+	DKString iWidth = toString(iframe->GetClientWidth());
+	DKString iHeight = toString(iframe->GetClientHeight());
+	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnMouseOver", &data, NULL); //call OnResize in DKCef window handler
 	return true;
 }

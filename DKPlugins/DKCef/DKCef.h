@@ -47,6 +47,7 @@ public:
 	bool FileDialog(const DKString& type, const DKString& title);
 	bool Find(const int& browser, const DKString& text);
 	bool GetBrowserId(const int& browser, DKString& id);
+	bool GetBrowserNumber(const DKString& id, int& browser);
 	bool GetBrowsers(int& num);
 	bool GetCurrentBrowser(int& browser);
 	bool GetPageSource(const int& browser, DKString& _source);

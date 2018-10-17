@@ -331,7 +331,7 @@ bool DKCef::End()
 bool DKCef::CloseBrowser(const int& browser)
 {
 	DKLog("DKCef::CloseBrowser("+toString(browser)+")\n", DKDEBUG);
-	if(browser > dkBrowsers.size()){
+	if((unsigned)browser > dkBrowsers.size()){
 		DKLog("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n", DKERROR);
 		return false; 
 	}
@@ -440,6 +440,20 @@ bool DKCef::GetBrowserId(const int& browser, DKString& id)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////
+bool DKCef::GetBrowserNumber(const DKString& id, int& browser)
+{
+	DKLog("DKCef:GetBrowserNumber("+id+")\n", DKDEBUG);
+	for(unsigned int i=0; i<dkBrowsers.size(); i++){
+		if(id == dkBrowsers[i].id){
+			browser = i;
+			return true;
+		}
+	}
+	browser = -1;
+	return false;
+}
+
 /////////////////////////////////
 bool DKCef::GetBrowsers(int& num)
 {
@@ -453,12 +467,13 @@ bool DKCef::GetCurrentBrowser(int& browser)
 {
 	DKLog("DKCef::GetCurrentBrowser()\n", DKDEBUG);
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
-		if(dkBrowsers[i].browser == current_browser){
+		if(dkBrowsers[i].browser->IsSame(current_browser)){
 			browser = i;
 			return true;
 		}
 	}
 	DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
+	browser = -1;
 	return false; //error
 }
 
