@@ -155,7 +155,7 @@ function DKAdminMenu_Add(title, code)
 function DKAdminMenu_Run(command)
 {
 	DKLog("DKAdminMenu_Run("+command+")\n", DKDEBUG);
-	if(command.indexOf("http://") == 0 || command.indexOf("https://") == 0){
+	if(command.indexOf("http://") == 0 || command.indexOf("https://") == 0 || command.indexOf("file://") == 0){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe(command, command, 640, 480);
 		});
