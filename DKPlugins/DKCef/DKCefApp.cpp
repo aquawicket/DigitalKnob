@@ -136,6 +136,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 {
+	//Multi process Execute
 	DKLog("DKV8::Execute(browser, "+func+", args)\n", DKDEBUG);
 
 	_browser = browser;
@@ -178,6 +179,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)
 {
+	//Single process Execute
 	std::string func = name;
 	DKLog("DKCefV8Handler::Execute("+func+", object, arguments, retval, exception)\n", DKDEBUG);
 
@@ -202,6 +204,13 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			if(arguments[i]->IsBool()){
 				args->SetBool(i, arguments[i]->GetBoolValue());
 				text += toString(args->GetBool(i));
+			}
+			if(arguments[i]->IsFunction()){
+				text += arguments[i]->GetFunctionName();
+				text += "()";
+			}
+			if(i < arguments.size() - 1){
+				text += ",";
 			}
 		}
 		text += ")";
