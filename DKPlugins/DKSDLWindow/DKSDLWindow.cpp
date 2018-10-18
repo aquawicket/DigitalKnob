@@ -608,7 +608,7 @@ bool DKSDLWindow::Windowed(const void* input, void* output)
 ///////////////////////////
 void DKSDLWindow::Process()
 {
-	DKLog("DKSDLWindow::Process()", DKDEBUG);
+	//DKLog("DKSDLWindow::Process()", DKDEBUG);
 	if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN){ 
 		DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
 	}

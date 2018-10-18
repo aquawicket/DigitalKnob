@@ -436,7 +436,7 @@ bool DKWindows::GetScreenHeight(int& h)
 //////////////////////////////////////////////////
 bool DKWindows::GetThreadId(unsigned long int& id)
 {
-	DKLog("DKWindows::GetThreadId()\n", DKDEBUG);
+	//DKLog("DKWindows::GetThreadId()\n", DKDEBUG); //causes infinite loop
 	id = GetCurrentThreadId();
 	return true;
 }
