@@ -15,6 +15,7 @@ public:
 	static int FileDate(duk_context* ctx);
 	static int FtpConnect(duk_context* ctx);
 	static int FtpUpload(duk_context* ctx);
+	static int GetExternalIP(duk_context* ctx);
 	static int HttpFileExists(duk_context* ctx);
 	static int HttpToString(duk_context* ctx);
 };

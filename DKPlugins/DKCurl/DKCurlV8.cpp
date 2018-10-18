@@ -11,6 +11,7 @@ bool DKCurlV8::Init()
 	DKV8::AttachFunction("DKCurl_FileDate", DKCurlV8::FileDate);
 	DKV8::AttachFunction("DKCurl_FtpConnect", DKCurlV8::FtpConnect);
 	DKV8::AttachFunction("DKCurl_FtpUpload", DKCurlV8::FtpUpload);
+	DKV8::AttachFunction("DKCurl_GetExternalIP", DKCurlV8::FtpUpload);
 	DKV8::AttachFunction("DKCurl_HttpFileExists", DKCurlV8::HttpFileExists);
 	DKV8::AttachFunction("DKCurl_HttpToString", DKCurlV8::HttpToString);
 	return true;
@@ -74,6 +75,17 @@ bool DKCurlV8::FtpUpload(CefArgs args, CefReturn retval)
 	return true;
 }
 
+////////////////////////////////////////////////////////////
+bool DKCurlV8::GetExternalIP(CefArgs args, CefReturn retval)
+{
+	DKString ipaddress;
+	if(!DKCurl::Get()->GetExternalIP(ipaddress)){
+		return false;
+	}
+	if(!retval->SetString(0, ipaddress)){ return false; }
+	return true;
+}
+
 /////////////////////////////////////////////////////////////
 bool DKCurlV8::HttpFileExists(CefArgs args, CefReturn retval)
 {
@@ -96,59 +108,5 @@ bool DKCurlV8::HttpToString(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/*
-////////////////////////////////////////////////////////////
-bool DKCurlV8::GetMidiInputs(CefArgs args, CefReturn retval)
-{
-	DKCurl::Instance("DKCurl");
-	DKStringArray inputs;
-	DKCurl::Instance("DKCurl")->GetInputs(inputs);
-	DKString final = toString(inputs,",");
-	if(!retval->SetString(0, final)){ return false; }
-	return true;
-}
-
-/////////////////////////////////////////////////////////////
-bool DKCurlV8::GetMidiOutputs(CefArgs args, CefReturn retval)
-{
-	DKCurl::Instance("DKCurl");
-	DKStringArray outputs;
-	DKCurl::Instance("DKCurl")->GetOutputs(outputs);
-	DKString final = toString(outputs,",");
-	if(!retval->SetString(0, final)){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////
-bool DKCurlV8::SendMidi(CefArgs args, CefReturn retval)
-{
-	int var1 = args->GetInt(0);
-	int var2 = args->GetInt(1);
-	int var3 = args->GetInt(2);
-
-	std::vector<unsigned char> message;
-	message.push_back(var1);
-	message.push_back(var2);
-	message.push_back(var3);
-	DKCurl::Instance("DKCurl")->midiout->sendMessage(&message);
-	return true;
-}
-
-//////////////////////////////////////////////////////////////
-bool DKCurlV8::ToggleMidiInput(CefArgs args, CefReturn retval)
-{
-	DKString input = args->GetString(0);
-	if(!DKCurl::Instance("DKCurl")->ToggleInput(input)){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////////////
-bool DKCurlV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
-{
-	DKString output = args->GetString(0);
-	if(!DKCurl::Instance("DKCurl")->ToggleOutput(output)){ return false; }
-	return true;
-}
-*/
 
 #endif //USE_DKCef

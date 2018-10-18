@@ -26,6 +26,7 @@ public:
 	bool FtpFileExists(const DKString& url);
 	bool FtpFileSize(const DKString& url, long& size);
 	bool FtpUpload(const DKString& file, const DKString& url);
+	bool GetExternalIP(DKString& ipaddress);
 	bool HttpDownload(const DKString& url, const DKString& dest);
 	bool HttpFileDate(const DKString& url, DKString& filedate);
 	bool HttpFileExists(const DKString& url);

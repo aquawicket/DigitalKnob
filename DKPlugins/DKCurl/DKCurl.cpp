@@ -345,11 +345,21 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 	return true;
 }
 
+///////////////////////////////////////////////
+bool DKCurl::GetExternalIP(DKString& ipaddress)
+{
+	if(!DKCurl::FileExists("http://myexternalip.com/raw")){
+		DKLog("DKCurl::GetExternalIP(): http://myexternalip.com/raw not found \n", DKERROR);
+		return false;
+	}
+	return true;
+}
+
 ////////////////////////////////////////////////////////////////////
 bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 {
 	if(!DKCurl::FileExists(url)){
-		DKLog("url not found \n", DKERROR);
+		DKLog("DKCurl::HttpDownload(): url not found \n", DKERROR);
 		return false;
 	}
 

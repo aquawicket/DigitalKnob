@@ -16,6 +16,7 @@ public:
 	static bool FileDate(CefArgs args, CefReturn retval);
 	static bool FtpConnect(CefArgs args, CefReturn retval);
 	static bool FtpUpload(CefArgs args, CefReturn retval);
+	static bool GetExternalIP(CefArgs args, CefReturn retval);
 	static bool HttpFileExists(CefArgs args, CefReturn retval);
 	static bool HttpToString(CefArgs args, CefReturn retval);
 };
