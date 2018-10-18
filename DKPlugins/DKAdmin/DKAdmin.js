@@ -6,7 +6,7 @@ function DKAdmin_Init()
 	DKCreate("DKAdmin/DKAdmin.html");
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
 	
-	DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+	//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 	if(DK_GetBrowser() == "Rocket"){
 		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminRed.png");
 	}

@@ -55,7 +55,6 @@ if(DK_GetBrowser() != "CEF"){
 	absolutepath = absolutepath.replace("//","/");
 }
 else{
-	DKLog("########## absolutepath = online_assets\n");
 	absolutepath = online_assets;
 }
 //if(absolutepath){online_assets = absolutepath;}
