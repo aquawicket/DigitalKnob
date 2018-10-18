@@ -8,6 +8,8 @@ function DKWebSocketsServer_Init()
 		DKAddEvent("DKWebSocketsServer_CreateServer", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("DKWebSocketsServer_MessageToClient", "click", DKWebSocketsServer_OnEvent);
 		DKAddEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
+		DKWidget_SetAttribute("DKWebSocketsServer_IpAddress", "value", DK_GetLocalIP());
+		DKWidget_SetAttribute("DKWebSocketsServer_Port", "value", "80");
 	});
 }
 
