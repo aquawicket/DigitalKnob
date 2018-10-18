@@ -348,11 +348,8 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 ///////////////////////////////////////////////
 bool DKCurl::GetExternalIP(DKString& ipaddress)
 {
-	if(!DKCurl::FileExists("http://myexternalip.com/raw")){
-		DKLog("DKCurl::GetExternalIP(): http://myexternalip.com/raw not found \n", DKERROR);
-		return false;
-	}
-	return true;
+	DKString url = "http://myexternalip.com/raw";
+	return HttpToString(url, ipaddress);
 }
 
 ////////////////////////////////////////////////////////////////////

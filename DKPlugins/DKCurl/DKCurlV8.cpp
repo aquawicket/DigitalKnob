@@ -11,7 +11,7 @@ bool DKCurlV8::Init()
 	DKV8::AttachFunction("DKCurl_FileDate", DKCurlV8::FileDate);
 	DKV8::AttachFunction("DKCurl_FtpConnect", DKCurlV8::FtpConnect);
 	DKV8::AttachFunction("DKCurl_FtpUpload", DKCurlV8::FtpUpload);
-	DKV8::AttachFunction("DKCurl_GetExternalIP", DKCurlV8::FtpUpload);
+	DKV8::AttachFunction("DKCurl_GetExternalIP", DKCurlV8::GetExternalIP);
 	DKV8::AttachFunction("DKCurl_HttpFileExists", DKCurlV8::HttpFileExists);
 	DKV8::AttachFunction("DKCurl_HttpToString", DKCurlV8::HttpToString);
 	return true;
