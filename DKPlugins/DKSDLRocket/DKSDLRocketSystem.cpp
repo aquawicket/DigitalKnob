@@ -4,8 +4,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 Rocket::Core::Input::KeyIdentifier RocketSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
 {
+	DKDebug(sdlkey);
     using namespace Rocket::Core::Input;
-
     switch(sdlkey) {
         case SDLK_UNKNOWN:
             return KI_UNKNOWN;
@@ -346,8 +346,8 @@ Rocket::Core::Input::KeyIdentifier RocketSDL2SystemInterface::TranslateKey(SDL_K
 /////////////////////////////////////////////////////////////////
 int RocketSDL2SystemInterface::TranslateMouseButton(Uint8 button)
 {
-    switch(button)
-    {
+	DKDebug(button);
+    switch(button){
         case SDL_BUTTON_LEFT:
             return 0;
         case SDL_BUTTON_RIGHT:
@@ -362,10 +362,9 @@ int RocketSDL2SystemInterface::TranslateMouseButton(Uint8 button)
 ////////////////////////////////////////////////
 int RocketSDL2SystemInterface::GetKeyModifiers()
 {
+	DKDebug();
     SDL_Keymod sdlMods = SDL_GetModState();
-
     int retval = 0;
-
     if(sdlMods & KMOD_CTRL)
         retval |= Rocket::Core::Input::KM_CTRL;
 
@@ -384,16 +383,17 @@ int RocketSDL2SystemInterface::GetKeyModifiers()
 /////////////////////////////////////////////////
 float RocketSDL2SystemInterface::GetElapsedTime()
 {
+	//DKDebug();
 	return (float)SDL_GetTicks() / 1000;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RocketSDL2SystemInterface::LogMessage(Rocket::Core::Log::Type type, const Rocket::Core::String& message)
 {
+	//DKDebug(type, message);
 	if(has(message.CString(),"Loaded font face")){
 		type = Rocket::Core::Log::LT_DEBUG;
 	}
-
 	switch(type)
 	{
 	case Rocket::Core::Log::LT_ALWAYS:
@@ -418,6 +418,6 @@ bool RocketSDL2SystemInterface::LogMessage(Rocket::Core::Log::Type type, const R
 		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
         break;
 	};
-
+	
 	return true;
 };

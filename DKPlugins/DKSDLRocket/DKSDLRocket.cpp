@@ -7,6 +7,7 @@
 ////////////////////////
 bool DKSDLRocket::Init()
 {
+	DKDebug();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
@@ -37,12 +38,14 @@ bool DKSDLRocket::Init()
 ///////////////////////
 bool DKSDLRocket::End()
 {
+	DKDebug();
 	return true;
 }
 
 //////////////////////////////////////////
 bool DKSDLRocket::Handle(SDL_Event *event)
 {
+	//DKDebug(event);
 	Rocket::Core::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:
@@ -78,7 +81,7 @@ bool DKSDLRocket::Handle(SDL_Event *event)
 
 #ifndef ANDROID
         case SDL_KEYDOWN:
-			//DKLog("DKSDLRocket::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n", DKDEBUG);
+			//DKLog("DKSDLRocket::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRocket->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			if(event->key.keysym.sym == 13){ //enter
 				dkRocket->context->ProcessTextInput("\n");
@@ -86,7 +89,7 @@ bool DKSDLRocket::Handle(SDL_Event *event)
             break;
 #else
 		case SDL_KEYDOWN:{
-			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n", DKDEBUG);
+			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
@@ -116,12 +119,12 @@ bool DKSDLRocket::Handle(SDL_Event *event)
 		}
 #endif
 		case SDL_TEXTINPUT:
-			//DKLog("DKSDLRocket::SDL_TEXTINPUT("+DKString(event->text.text)+")\n", DKDEBUG);
+			//DKLog("DKSDLRocket::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
 			dkRocket->context->ProcessTextInput(event->text.text);
 			break;
 
 		case SDL_TEXTEDITING:
-			//DKLog("DKSDLRocket::SDL_TEXTEDITING()\n", DKDEBUG);
+			//DKLog("DKSDLRocket::SDL_TEXTEDITING()\n");
 			break;
 			
 		case SDL_KEYUP:
@@ -138,7 +141,7 @@ bool DKSDLRocket::Handle(SDL_Event *event)
 ////////////////////////
 void DKSDLRocket::Draw()
 {
-    //DKLog("DKSDLRocket::Draw()\n", DKDEBUG);
+    //DKDebug();
 	if(dkSdlWindow->width != dkRocket->context->GetDimensions().x || dkSdlWindow->height != dkRocket->context->GetDimensions().y){
 		dkRocket->context->SetDimensions(Rocket::Core::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
