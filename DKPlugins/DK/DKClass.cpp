@@ -67,7 +67,7 @@ DKObject* DKClass::_Get(const DKString& data)
 //////////////////////////////////////////
 bool DKClass::_Valid(const DKString& data)
 {
-	DKDebug(data);
+	//DKDebug(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){

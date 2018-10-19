@@ -83,7 +83,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 //////////////////////////////////////////////////////////
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
-	DKDebug(input, output);
+	//DKDebug(input, output);
 	DKString id = *(DKString*)input;
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser)){

@@ -58,7 +58,7 @@ public:
 	/////////////////////////////////////////
 	static bool DKValid(const DKString& data)
 	{
-		DKDebug(data); //data = (class,id)
+		//DKDebug(data); //data = (class,id)
 		return DKClass::_Valid(data);
 	}
 

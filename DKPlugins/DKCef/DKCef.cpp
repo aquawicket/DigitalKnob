@@ -443,7 +443,7 @@ bool DKCef::GetBrowserId(const int& browser, DKString& id)
 //////////////////////////////////////////////////////////////
 bool DKCef::GetBrowserNumber(const DKString& id, int& browser)
 {
-	DKDebug(id, browser);
+	//DKDebug(id, browser);
 	for(unsigned int i=0; i<dkBrowsers.size(); i++){
 		if(id == dkBrowsers[i].id){
 			browser = i;
