@@ -86,7 +86,7 @@ public:
 	//////////////////////////////////////////////////////////////
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 	{
-		DKDebug(browser, "rect");
+		DKDebug(browser, "CefRect&");
 		CEF_REQUIRE_UI_THREAD();
 		//rect = CefRect(0, 0, dkCef->width, dkCef->height);
 		return true;
@@ -110,7 +110,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 	{
-		DKDebug(browser, download_item, "suggested_name", callback);
+		DKDebug(browser, download_item, "const CefString&", callback);
 		CEF_REQUIRE_UI_THREAD();
 
 #ifdef WIN32
@@ -123,7 +123,7 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& target_url, const CefString& target_frame_name, CefLifeSpanHandler::WindowOpenDisposition target_disposition, bool user_gesture, const CefPopupFeatures& popupFeatures, CefWindowInfo& windowInfo, CefRefPtr<CefClient>& client, CefBrowserSettings& settings, bool* no_javascript_access)
 	{
-		DKDebug(browser, frame, "target_url", "target_frame_name", target_disposition, user_gesture, "popupFeatures", "windowInfo", client, "settings", no_javascript_access); 
+		DKDebug(browser, frame, "const CefString&", "const CefString&", target_disposition, user_gesture, "const CefPopupFeatures&", "CefWindowInfo&", client, "CefBrowserSettings&", no_javascript_access); 
 		CEF_REQUIRE_UI_THREAD();
 		return false;
 	}
@@ -131,7 +131,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 	{
-		//DKDebug(browser, level, message, source, line); // DON'T DO THIS
+		//DKDebug(browser, level, "const CefString&", "const CefString&", line); // DON'T DO THIS
 		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
@@ -154,7 +154,7 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
 	{
-		DKDebug(browser, cursor, type, "custom_cursor_info");
+		DKDebug(browser, cursor, type, "const CefCursorInfo&");
 #ifdef WIN32
 		HWND hwnd;
 		if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
@@ -173,14 +173,14 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
 	{
-		DKDebug(browser, identifier, count, "selectionRect", activeMatchOrdinal, finalUpdate);
+		DKDebug(browser, identifier, count, "const CefRect&", activeMatchOrdinal, finalUpdate);
 		CEF_REQUIRE_UI_THREAD();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
 	{
-		DKDebug(browser, mode, "title", default_file_path, "accept_filters", selected_accept_filter, callback);
+		DKDebug(browser, mode, "const CefString&", "const CefString&", "const std::vector<CefString>&", selected_accept_filter, callback);
 		return false;
 	}
 
@@ -242,7 +242,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl)
 	{ 
-		DKDebug(browser, frame, errorCode, "errorText", "failedUrl");
+		DKDebug(browser, frame, errorCode, "const CefString&", "const CefString&");
 		CEF_REQUIRE_UI_THREAD();
 	}
 
@@ -255,9 +255,9 @@ public:
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
+	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void *buffer, int width, int height)
 	{
-		DKDebug(browser, type, "dirtyRects", buffer, width, height);
+		DKDebug(browser, type, "const RectList&", buffer, width, height);
 		CEF_REQUIRE_UI_THREAD();
 	}
 
@@ -271,14 +271,14 @@ public:
 	////////////////////////////////////////////////////////////////////
 	void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect)
 	{
-		DKDebug(browser, "rect");
+		DKDebug(browser, "const CefRect&");
 		CEF_REQUIRE_UI_THREAD();
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
 	{
-		DKDebug(browser, "event", os_event, is_keyboard_shortcut);
+		DKDebug(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
 		CEF_REQUIRE_UI_THREAD();
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
@@ -345,7 +345,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr<CefGeolocationCallback> callback)
 	{
-		DKDebug(browser, requesting_url, request_id, callback);
+		DKDebug(browser, "const CefString&", request_id, callback);
 		CEF_REQUIRE_UI_THREAD();
 		callback->Continue(true);
 		return true;
@@ -355,7 +355,7 @@ public:
 	//////////////////////////////////////////////////////////////
 	bool OnTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
 	{
-		DKDebug(browser, "text");
+		DKDebug(browser, "CefString&");
 		CEF_REQUIRE_UI_THREAD();
 		return true;
 	}

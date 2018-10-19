@@ -179,7 +179,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)
 {
 	//Single process Execute
-	//DKDebug(name, object, retval, exception);
+	//DKDebug("const CefString&", object, "const CefV8ValueList&", retval, exception);
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name]) {
 			DKLog("DKCefV8Handler::Execute(): "+name.ToString()+" not registered\n", DKWARN);
