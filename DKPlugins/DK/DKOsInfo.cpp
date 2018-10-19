@@ -49,7 +49,7 @@ bool GetSystemOS(DKString& os)
 	os = "Android";
 #endif
 	if(os.empty()){
-		DKLog("ERROR GetSystemOS() cound not get the OS \n", DKERROR);
+		DKLog("ERROR GetSystemOS() cound not get the OS\n", DKERROR);
 		return false;
 	}
 	return true;
