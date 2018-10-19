@@ -11,8 +11,7 @@ DKString DKTray::icon;
 ///////////////////
 bool DKTray::Init()
 {
-	DKLog("DKTray::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::DKCreate("DKTrayJS");
 	DKClass::DKCreate("DKTrayV8");
 #ifdef WIN32
@@ -61,6 +60,7 @@ bool DKTray::Init()
 //////////////////
 bool DKTray::End()
 {
+	DKDebug();
 #ifdef WIN32
 	TrayIcon.RemoveIcon();
 #endif
@@ -72,7 +72,7 @@ bool DKTray::End()
 ///////////////////////////////////////////////////
 bool DKTray::AddItem(const DKString& name, int& id)
 {
-	DKLog("DKTray::AddItem("+name+")\n", DKDEBUG);
+	DKDebug(name, id);
 #ifdef WIN32
 	TrayIcon.AddItem(name, id);
 #endif
@@ -82,6 +82,7 @@ bool DKTray::AddItem(const DKString& name, int& id)
 ////////////////////////////////////
 bool DKTray::GetIcon(DKString& file)
 {
+	DKDebug(file);
 	file = icon;
 	return true;
 }
@@ -89,6 +90,7 @@ bool DKTray::GetIcon(DKString& file)
 //////////////////////////////////////////
 bool DKTray::SetIcon(const DKString& file)
 {
+	DKDebug(file);
 #ifdef WIN32
 	icon = file;
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
@@ -102,7 +104,7 @@ bool DKTray::SetIcon(const DKString& file)
 ///////////////////////////////////////////////
 bool DKTray::SetTooltip(const DKString& string)
 {
-	DKLog("DKTray::SetTooltip("+string+")\n", DKDEBUG);
+	DKDebug(string);
 #ifdef WIN32
 	if(!TrayIcon.SetTooltipText(string.c_str())){
 		return false;
@@ -115,6 +117,7 @@ bool DKTray::SetTooltip(const DKString& string)
 /////////////////////////////////////////////////////////////////
 bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 {
+	DKDebug(string);
 #ifdef WIN32
 	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 10);
 	return true;
@@ -125,6 +128,7 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 //////////////////////
 void DKTray::Process()
 {
+	DKDebug();
 #ifdef WIN32
     //Process Tray Icon Messages
     MSG msg;
@@ -140,27 +144,28 @@ void DKTray::Process()
 
 
 
-
 #ifdef WIN32
 /////////////////////////////////////////////////
 void DKTray::setCallback(DKTrayCallback callback)
 {
+	DKDebug(callback);
 	TrayIcon.userCallback = callback;
 }
 
 //////////////////////////////////////////////////////////////////////////////
 LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 {
+	DKDebug(message. wParam, lParam);
 	if(message == WM_ICON_NOTIFY){
 		//DKLog("WM_ICON_NOTIFY: ");
 		//DKLog(toString(LOWORD(wParam))+" : ");
 		//DKLog(toString(LOWORD(lParam))+"\n");
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
-			//DKLog("Tray Icon Clicked \n", DKDEBUG);
+			//DKLog("Tray Icon Clicked \n");
 			DKEvent::SendEvent("DKTray", "click", toString(1));
 		}
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515){
-			//DKLog("Tray Icon Double Clicked \n", DKDEBUG);
+			//DKLog("Tray Icon Double Clicked \n");
 			DKEvent::SendEvent("DKTray", "doubleclick", toString(1));
 		}
 	}

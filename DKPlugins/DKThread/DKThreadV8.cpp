@@ -49,7 +49,7 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 /////////////////////////////
 void DKThreadV8::QueueItem()
 {
-	DKDebug(args, retval);
+	DKDebug();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	//duk_context* ctx2 = DKDuktape::ctx;
 	//if(!ctx2){ return; }// post error here

@@ -36,10 +36,10 @@ int DKThreadJS::_DKQueue(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////
+////////////////////////////
 void DKThreadJS::QueueItem()
 {
-	DKDebug(ctx);
+	DKDebug();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	duk_context* ctx2 = DKDuktape::ctx;
 	if(!ctx2){ return; }// post error here
