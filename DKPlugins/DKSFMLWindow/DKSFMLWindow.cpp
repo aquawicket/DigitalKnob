@@ -9,10 +9,8 @@ std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
 /////////////////////////
 bool DKSFMLWindow::Init()
 {
-	DKLog("DKSFMLWindow::Init()\n", DKDEBUG);
-
+	DKDebug();
 	window.create(sf::VideoMode(800, 600), "My window");
-
 	DKClass::RegisterFunc("DKSFMLWindow::TestInt", &DKSFMLWindow::TestInt, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestString", &DKSFMLWindow::TestString, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestReturnInt", &DKSFMLWindow::TestReturnInt, this);
@@ -44,13 +42,13 @@ bool DKSFMLWindow::Init()
 
 	DKApp::AppendLoopFunc(&DKSFMLWindow::Process, this);
 	DKSFMLWindow::AddEventFunc(&DKSFMLWindow::handle, this);
-
 	return true;
 }
 
 ////////////////////////
 bool DKSFMLWindow::End()
 {
+	DKDebug();
 	window.close();
 	return true;
 }
@@ -58,6 +56,7 @@ bool DKSFMLWindow::End()
 ////////////////////////////
 void DKSFMLWindow::Process()
 {
+	DKDebug();
 	sf::Event e;
 	while(window.pollEvent(e)){
 		for(unsigned int i = 0; i < event_funcs.size(); ++i){
@@ -79,6 +78,7 @@ void DKSFMLWindow::Process()
 ///////////////////////////////////////
 bool DKSFMLWindow::handle(sf::Event& e)
 {
+	DKDebug(e);
 	if(e.type == sf::Event::Closed){
 		DKApp::Exit();
 		return false;
@@ -90,6 +90,7 @@ bool DKSFMLWindow::handle(sf::Event& e)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestInt(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int in = *(int*)input;
 	int out = in;
 	*(int*)output = out;
@@ -99,6 +100,7 @@ bool DKSFMLWindow::TestInt(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestString(const void* input, void* output)
 {
+	DKDebug(input, output);
 	std::string in = *(std::string*)input;
 	std::string out = in;
 	*(std::string*)output = out;
@@ -108,6 +110,7 @@ bool DKSFMLWindow::TestString(const void* input, void* output)
 /////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int var = 1234;
 	*(int*)output = var;
 	return true;
@@ -116,6 +119,7 @@ bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 ////////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 {
+	DKDebug(input, output);
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
@@ -125,6 +129,7 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
@@ -158,6 +163,7 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString text;
 	if(!DKUtil::GetClipboard(text)){ return false; }
 	*(DKString*)output = text;
@@ -167,6 +173,7 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHandle(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	*(HWND*)output = hwnd;
@@ -191,6 +198,7 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHeight(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.y;
 	return true;
@@ -199,6 +207,7 @@ bool DKSFMLWindow::GetHeight(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
@@ -225,6 +234,7 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
@@ -251,6 +261,7 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetWidth(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.x;
 	return true;
@@ -259,6 +270,7 @@ bool DKSFMLWindow::GetWidth(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetX(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
@@ -267,6 +279,7 @@ bool DKSFMLWindow::GetX(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetY(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
@@ -275,6 +288,7 @@ bool DKSFMLWindow::GetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Hide(const void* input, void* output)
 {
+	DKDebug(input, output);
 	window.setVisible(false);
 	return true;
 }
@@ -282,6 +296,7 @@ bool DKSFMLWindow::Hide(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	RECT a, b;
@@ -314,6 +329,7 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsVisible(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	*(bool*)output = (IsWindowVisible(hwnd) != 0);
@@ -338,6 +354,7 @@ bool DKSFMLWindow::IsVisible(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::MessageBox(const void* input, void* output)
 {
+	DKDebug(input, output);
 	//TODO
 	return false;
 }
@@ -345,6 +362,7 @@ bool DKSFMLWindow::MessageBox(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Minimize(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
@@ -368,6 +386,7 @@ bool DKSFMLWindow::Minimize(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::Restore(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd){ return false; }
@@ -393,6 +412,7 @@ bool DKSFMLWindow::Restore(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 {
+	DKDebug(input, output);
 	//TODO
 	return false;
 }
@@ -400,6 +420,7 @@ bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetHeight(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2u size = window.getSize();
 	size.y = *(int*)input;
 	window.setSize(size);
@@ -409,6 +430,7 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetIcon(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd){
@@ -447,6 +469,7 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetWidth(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2u size = window.getSize();
 	size.x = *(int*)input;
 	window.setSize(size);	
@@ -456,6 +479,7 @@ bool DKSFMLWindow::SetWidth(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetX(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.x = *(int*)input;
 	window.setPosition(position);	
@@ -465,6 +489,7 @@ bool DKSFMLWindow::SetX(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetY(const void* input, void* output)
 {
+	DKDebug(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.y = *(int*)input;
 	window.setPosition(position);	
@@ -474,6 +499,7 @@ bool DKSFMLWindow::SetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Show(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_SHOW);
@@ -497,6 +523,7 @@ bool DKSFMLWindow::Show(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Windowed(const void* input, void* output)
 {
+	DKDebug(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
