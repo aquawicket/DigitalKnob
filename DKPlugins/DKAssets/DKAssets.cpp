@@ -10,8 +10,7 @@
 /////////////////////
 bool DKAssets::Init()
 {
-	DKLog("DKAssets::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
@@ -91,8 +90,7 @@ bool DKAssets::Init()
 ////////////////////////////////////////////////
 bool DKAssets::AquireDataPath(DKString& exepath)
 {
-	DKLog("DKAssets::AquireDataPath("+exepath+")\n", DKDEBUG);
-	
+	DKDebug(exepath);
     unsigned found = 0;
 #ifdef WIN32
     exepath = DKFile::exe_path;
@@ -144,8 +142,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
-	DKLog("DKAssets::CheckAssetsPath("+path+")\n", DKDEBUG);
-	
+	DKDebug(path);;
 	DKFile::local_assets = path;
 
 	//if there is an assets directory under this, then we are in a development environment.
@@ -178,7 +175,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 #endif
 
 #ifdef IOS
-	DKLog("Searching for iOS assets path... \n", DKDEBUG);
+	DKLog("Searching for iOS assets path... \n");
 	
 	// /Users/aquawicket/Library/Application Support/iPhone Simulator/6.1/Applications/D4BEB636-716E-445D-8CD9-8722785D7EB7/GuiTest.app/GuiTest
 	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/GuiTest.app/GuiTest
@@ -212,8 +209,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 ///////////////////////////////////////////////////////
 bool DKAssets::AppendDataPath(const DKString& datapath)
 {
-	DKLog("DKAssets::AppendDataPath("+datapath+")\n", DKDEBUG);
-	
+	DKDebug(datapath);
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){
 		fl.push_back(datapath);
@@ -226,6 +222,7 @@ bool DKAssets::AppendDataPath(const DKString& datapath)
 ///////////////////////////////////////////////////////////////
 bool DKAssets::PackageAssets(DKString& input, DKString& output)
 {
+	DKDebug(input, output);
 #if !defined(ANDROID)
 	DKArchive::Compress(input, input+"/../assets.zip");
 #endif
@@ -256,6 +253,7 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 //////////////////////////////////////////////////////////////////////////////////
 bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_size)
 {
+	DKDebug();
 	if(has(DKFile::local_assets, "/assets")){ return false; }
 	if(has(DKFile::local_assets, "\\assets")){ return false; }
 	if(DKFile::PathExists(DKFile::local_assets+"ASSETS")){ return false; }

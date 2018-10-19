@@ -211,7 +211,6 @@ bool DKLinux::SetClipboard(const DKString& text)
 {
 	DKDebug(text);
 	//TODO
-	DKLog("DKLinux::SetClipboard("+text+")\n", DKDEBUG);
 	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
 }
 

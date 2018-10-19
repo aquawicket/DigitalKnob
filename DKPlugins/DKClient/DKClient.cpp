@@ -9,8 +9,7 @@
 /////////////////////
 bool DKClient::Init()
 {
-	//DKLog("DKClient::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::DKCreate("DKClientJS");
 	//DKClass::DKCreate("DKClientV8"); //TODO
 	thread = new DKThread();
@@ -22,8 +21,8 @@ bool DKClient::Init()
 //////////////////////////////////////////////
 void DKClient::Connect(const DKString address)
 {
+	DKDebug(address);
 	if(address.empty()){ return; }
-
 	try{
 		c->stop();
 		tcp::resolver resolver(thread->io_service);
@@ -39,6 +38,7 @@ void DKClient::Connect(const DKString address)
 ///////////////////////////////////////////
 void DKClient::Send(const DKString& string)
 {
+	DKDebug(string);
 	if(!c->socket_.is_open()){ 
 		Connect(_address);
 		if(!c->socket_.is_open()){ 
@@ -46,7 +46,6 @@ void DKClient::Send(const DKString& string)
 		  return; 
 		}
 	}
-
 	const char* z = string.c_str();
 	size_t request_length = std::strlen(z);
 	boost::asio::write(c->socket_, boost::asio::buffer(z, request_length));

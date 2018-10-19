@@ -6,7 +6,7 @@
 /////////////////////
 bool DKCurlV8::Init()
 {
-	DKLog("DKCurlV8::Init()\n", DKDEBUG);
+	DKDebug();
 	DKV8::AttachFunction("DKCurl_Download", DKCurlV8::Download);
 	DKV8::AttachFunction("DKCurl_FileDate", DKCurlV8::FileDate);
 	DKV8::AttachFunction("DKCurl_FtpConnect", DKCurlV8::FtpConnect);
@@ -20,16 +20,17 @@ bool DKCurlV8::Init()
 ////////////////////
 bool DKCurlV8::End()
 {
-	DKLog("DKCurlV8::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKCurlV8::Download(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString url = args->GetString(0);
 	DKString dest = args->GetString(1);
-	if(!DKCurl::Get("DKCurl0")->Download(url, dest)){
+	if(!DKCurl::Get()->Download(url, dest)){
 		return false;
 	}
 	return true;
@@ -38,9 +39,10 @@ bool DKCurlV8::Download(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////
 bool DKCurlV8::FileDate(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString url = args->GetString(0);
 	DKString filedate;
-	if(!DKCurl::Get("DKCurl0")->FileDate(url, filedate)){
+	if(!DKCurl::Get()->FileDate(url, filedate)){
 		return false;
 	}
 	char* pEnd;
@@ -52,12 +54,13 @@ bool DKCurlV8::FileDate(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKCurlV8::FtpConnect(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString server = args->GetString(0);
 	DKString name = args->GetString(1);
 	DKString pass = args->GetString(2);
 	DKString port = args->GetString(3);
 
-	if(!DKCurl::Get("DKCurl0")->FtpConnect(server, name, pass, port)){
+	if(!DKCurl::Get()->FtpConnect(server, name, pass, port)){
 		return false;
 	}
 	return true;
@@ -66,9 +69,10 @@ bool DKCurlV8::FtpConnect(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKCurlV8::FtpUpload(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString file = args->GetString(0);
 	DKString url = args->GetString(1);
-	if(!DKCurl::Get("DKCurl0")->FtpUpload(file, url)){
+	if(!DKCurl::Get()->FtpUpload(file, url)){
 		return false;
 	}
 	//DKQueue("FtpUpload", boost::bind(&DKCurl::FtpUpload, DKCurl::Get("DKCurl0"), file, url));
@@ -78,6 +82,7 @@ bool DKCurlV8::FtpUpload(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKCurlV8::GetExternalIP(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString ipaddress;
 	if(!DKCurl::Get()->GetExternalIP(ipaddress)){
 		return false;
@@ -89,8 +94,9 @@ bool DKCurlV8::GetExternalIP(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKCurlV8::HttpFileExists(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString url = args->GetString(0);
-	if(!DKCurl::Get("DKCurl0")->HttpFileExists(url)){
+	if(!DKCurl::Get()->HttpFileExists(url)){
 		return false;
 	}
 	return true;
@@ -99,14 +105,14 @@ bool DKCurlV8::HttpFileExists(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKCurlV8::HttpToString(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString url = args->GetString(0);
 	DKString output;
-	if(!DKCurl::Get("DKCurl0")->HttpToString(url, output)){
+	if(!DKCurl::Get()->HttpToString(url, output)){
 		return 0;
 	}
 	if(!retval->SetString(0, output)){ return false; }
 	return true;
 }
-
 
 #endif //USE_DKCef

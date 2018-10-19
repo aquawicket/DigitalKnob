@@ -379,7 +379,6 @@ bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 bool DKUtil::GetProcessList(DKString& list)
 {
 	DKDebug(list);
-	DKLog("DKUtil::GetProcessList("+list+")\n", DKDEBUG);
 #ifdef WIN32
 	return DKWindows::GetProcessList(list);
 #endif
@@ -480,7 +479,7 @@ bool DKUtil::GetTime(DKString& _time)
 	DKString minute = toString(now->tm_min);
 	Pad(2, '0', minute);
 	_time += minute;
-	//DKLog("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n", DKDEBUG);
+	//DKLog("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n");
 	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0){
 		_time += " PM";
 	}
@@ -903,7 +902,6 @@ bool DKUtil::SetClipboardImage(const DKString& file)
 bool DKUtil::SetFramerate(const int& fps)
 {
 	DKDebug(fps);
-	DKLog("DKUtil::SetFramerate("+DKString(toString(fps))+")\n", DKDEBUG);
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return true; }
 	ticksPerFrame = 1000 / _fps;
@@ -995,7 +993,7 @@ bool DKUtil::System(const DKString& command)
 	DKDebug(command);
 #if !defined(IOS)
 	int rval = system(command.c_str());
-	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n", DKDEBUG);
+	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n");
 	return true;
 #endif
 	return false;

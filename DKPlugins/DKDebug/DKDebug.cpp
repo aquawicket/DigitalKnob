@@ -199,8 +199,7 @@ void handler(int signum)
 ////////////////////
 bool DKDebug::Init()
 {
-	//DKLog("DKDebug::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::DKCreate("DKDebugJS");
 	DKClass::DKCreate("DKDebugV8");
 	
@@ -233,12 +232,14 @@ bool DKDebug::Init()
 ///////////////////
 bool DKDebug::End()
 {
+	DKDebug();
 	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKDebug::SendBugReport(const DKString& filename)
 {
+	DKDebug(filename);
 	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return false; }
 	DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
@@ -249,6 +250,7 @@ bool DKDebug::SendBugReport(const DKString& filename)
 //////////////////////////////
 bool DKDebug::ShowStackTrace()
 {
+	DKDebug();
 #ifdef WIN32
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), /*pExPtrs->ContextRecord*/ NULL);

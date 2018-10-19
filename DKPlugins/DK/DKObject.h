@@ -69,7 +69,7 @@ public:
 		}
 
 		DKString name(classname);
-		//DKLog("DKBaseT::classname = "+name+" \n", DKDEBUG);
+		//DKLog("DKBaseT::classname = "+name+" \n");
 		 
  		DKStringArray arry;
 		toStringArray(arry,data,",");
@@ -99,7 +99,7 @@ public:
 		}
 
 		//Create a new insance
-		DKLog("DKObject::Instance("+final_data+")\n", DKDEBUG);
+		DKLog("DKObject::Instance("+final_data+")\n");
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
@@ -124,7 +124,7 @@ public:
 				//}
 				//DKLog("Closing "+id+"\n");
 				if(instances.size() == 0) { return; }
-				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
+				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n");
 				if(!instances[i]->End()){ //FIXME - this can crash if End() does not exits in the instance. 
 					DKLog("DKBaseT::Close("+id+"): failed\n", DKWARN);
 				}

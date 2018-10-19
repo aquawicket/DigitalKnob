@@ -6,7 +6,7 @@
 //////////////////////
 bool DKDebugV8::Init()
 {
-	DKLog("DKDebugV8::Init()\n", DKDEBUG);
+	DKDebug();
 	DKV8::AttachFunction("DKDebug_SendBugReport", DKDebugV8::SendBugReport);
 	DKV8::AttachFunction("DKDebug_ShowStackTrace", DKDebugV8::ShowStackTrace);
 	return true;
@@ -15,15 +15,14 @@ bool DKDebugV8::Init()
 /////////////////////
 bool DKDebugV8::End()
 {
-	DKLog("DKDebugV8::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKDebugV8::SendBugReport(CefArgs args, CefReturn retval)
 {
-	DKLog("DKDebugV8::SendBugReport(CefArgs,CefReturn)\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	DKString filename = args->GetString(0);
 	if(!DKDebug::SendBugReport(filename)) { return false; }
 	return true;
@@ -32,8 +31,7 @@ bool DKDebugV8::SendBugReport(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKDebugV8::ShowStackTrace(CefArgs args, CefReturn retval)
 {
-	DKLog("DKDebugV8::ShowStackTrace(CefArgs,CefReturn)\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	if(!DKDebug::ShowStackTrace()){ return false; }
 	return true;
 }

@@ -20,7 +20,6 @@ static jobject theobj = 0;
 /////////////////////////////////////////////////////
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
-	//DKLog("JNI_OnLoad(JavaVM*,void*)\n", DKDEBUG);
 	DKDebug(vm, reserved);
 	thejvm = vm;
     return JNI_VERSION_1_6;
@@ -29,7 +28,6 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
 ////////////////////////////////////////////
 void initJNIBridge(JNIEnv* env, jobject obj)
 {
-	//DKLog("initJNIBridge(JNIEnv*,jobject)\n", DKDEBUG);
 	DKDebug(env, obj);
 	theobj = env->NewGlobalRef(obj);
 }
@@ -37,7 +35,6 @@ void initJNIBridge(JNIEnv* env, jobject obj)
 ////////////////////////////////////////////
 void exitJNIBridge(JNIEnv* env, jobject obj)
 {
-	//DKLog("exitJNIBridge(JNIEnv*,jobject)\n", DKDEBUG);
 	DKDebug(evn, obj);
 	env->DeleteGlobalRef(theobj);
 }
@@ -46,7 +43,6 @@ void exitJNIBridge(JNIEnv* env, jobject obj)
 //////////////////////////////////////////////////////////////////
 void CallJavaFunction(const DKString& name, const DKString& param)
 {
-	//DKLog("CallJavaFunction("+name+","+param+")\n", DKDEBUG);
 	DKDebug(name, param);
 	JNIEnv* env;
 	bool attached = false;
@@ -96,7 +92,6 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 ////////////////////////////////////////////////////
 void initSDL(JNIEnv* env, jclass cls, jobject array)
 {
-	//DKLog("initSDL(JNIEnv*,jclass,jobject)\n", DKDEBUG);
 	DKDebug(env, cls, array);
 	JavaData jdata;
 	jdata.env = env;
@@ -109,7 +104,6 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 {
-	//DKLog("CallCppFunction(JNIEnv*,jclass,jstring)\n", DKDEBUG);
 	DKDebug(env, cla, data);
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
@@ -127,7 +121,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	if(!DKApp::active){ return NULL; }
 
 	if(same(arry[0],"DKAndroid_exit")){
-		DKLog("DKAndroid::exit()\n", DKDEBUG);
+		DKLog("DKAndroid::exit()\n");
 		DKApp::Exit();
 		return NULL;
 	}
@@ -250,7 +244,6 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 //////////////////////
 void DKAndroid::init()
 {
-	//DKLog("DKAndroid::init()\n", DKDEBUG);
 	DKDebug();
 	
 	if(!DKApp::active){ //if ! android context resume	
@@ -275,10 +268,10 @@ void DKAndroid::init()
 		DKApp dkapp;
 
 		#ifdef DKAPP
-		DKLog("DKAPP defined \n", DKDEBUG);
+		DKLog("DKAPP defined \n");
 		#endif
 		
-		DKLog("Registered Classes \n", DKDEBUG);
+		DKLog("Registered Classes \n");
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
@@ -297,7 +290,6 @@ void DKAndroid::init()
 ///////////////////////////////////////////
 bool DKAndroid::GetMousePos(int& x, int& y)
 {
-	//DKLog("DKAndroid::GetMousePos("+toString(x)+","+toString(y)+")\n", DKDEBUG);
 	DKDebug(x, y);
 	x = android_mouseX;
 	y = android_mouseY;
@@ -308,7 +300,6 @@ bool DKAndroid::GetMousePos(int& x, int& y)
 ////////////////////////////////////////////////////////
 void DKAndroid::ProcessEvent(Rocket::Core::Event& event)
 {
-	//DKLog("DKAndroid::ProcessEvent(Rocket::Core::Event&)\n", DKDEBUG);
 	DKDebug(events);
 	//Toggle Keyboard on text element click
 	if(event.GetType() == "mousedown"){

@@ -119,8 +119,8 @@ bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKCefV8::_DKCreate(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString data = args->GetString(0);
-	DKLog("DKCefV8::DKCreate_CPP("+data+")\n", DKDEBUG);
 	DKClass::DKCreate(data);
 	return true;
 }
@@ -681,7 +681,7 @@ bool DKCefV8::GetCurrentBrowser(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 {
-	//DKLog("DKCefV8::GetPageSource()\n", DKDEBUG);
+	DKDebug(args, retval);
 	int browser = args->GetInt(0);
 	DKString source;
 	if(!DKCef::Get()->GetPageSource(browser, source)){ return false; }
@@ -694,7 +694,7 @@ bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////
 bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
 {
-	DKLog("DKCefV8::GetUrl()\n", DKDEBUG);
+	DKDebug(args, retval);
 	int browser = args->GetInt(0);
 	DKString url;
 	if(!DKCef::Get()->GetUrl(browser, url)){ return false; }
@@ -825,7 +825,7 @@ bool DKCefV8::Stop(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKCefV8::ViewPageSource(CefArgs args, CefReturn retval)
 {
-	//DKLog("DKCefV8::ViewPageSource()\n", DKDEBUG);
+	DKDebug(args, retval);
 	int browser = args->GetInt(0);
 	if(!DKCef::Get()->ViewPageSource(browser)){ return false; }
 	return true;

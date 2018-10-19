@@ -31,7 +31,7 @@ bool DKFile::ChDir(const DKString& dir)
 	DKDebug(dir);
 	if(!PathExists(dir)){ return false; }
 	boost::filesystem::current_path(dir);
-	DKLog("DKFile::ChDir("+dir+"): Path set to "+dir+"\n", DKDEBUG);
+	DKLog("DKFile::ChDir("+dir+"): Path set to "+dir+"\n");
 	return true;
 }
 
@@ -547,7 +547,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 #ifdef WIN32
 	replace(path2, "/", "\\");
 #endif
-	DKLog("DKFile::GetRelativePath("+file2+","+path2+",DKString&)\n", DKDEBUG);
+	DKLog("DKFile::GetRelativePath("+file2+","+path2+",DKString&)\n");
 
 	int MAX_FILENAME_LEN = 512;
 #ifdef WIN32
@@ -774,7 +774,7 @@ bool DKFile::PathExists(const DKString& path)
 		return true;
 	}
 
-	DKLog("DKFile::PathExists("+path+"): Path does not exist\n", DKDEBUG);
+	DKLog("DKFile::PathExists("+path+"): Path does not exist\n");
 	return false;
 }
 

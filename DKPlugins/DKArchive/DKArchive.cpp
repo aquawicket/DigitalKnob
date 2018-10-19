@@ -11,15 +11,14 @@
 //////////////////////
 bool DKArchive::Init()
 {
-	DKClass::DKCreate("DKArchiveJS");
+	DKDebug();
 	return true;	
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKArchive::Extract(const DKString& file, const DKString& path)
 {
-	DKLog("DKArchive::Extract("+file+","+path+")\n", DKDEBUG);
-	
+	DKDebug(file, path);
 	if(!DKFile::PathExists(file)){ return false; }
 
 	DKLog("Extracting "+file+" . . .\n");
@@ -101,8 +100,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
 ////////////////////////////////////////////////////////////////////
 bool DKArchive::Compress(const DKString& path, const DKString& file)
 {
-	DKLog("DKArchive::Compress("+path+","+file+")\n", DKDEBUG);
-	
+	DKDebug(path, file);	
 	if(!DKFile::PathExists(path)){ return false; }
 	DKStringArray files;
 	DKString _path;
@@ -169,10 +167,9 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 }
 
 ////////////////////////////////////////////////////////////////
-int DKArchive::copy_data(struct archive *ar, struct archive *aw)
+int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 {
-	//DKLog("DKArchive::copy_data(struct,struct)\n", DKDEBUG);
-	
+	//DKDebug(ar, aw);	
 	int r;
 	const void *buff;
 	size_t size;
