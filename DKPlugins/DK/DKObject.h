@@ -57,7 +57,7 @@ public:
 	////////////////////////////////////////
 	static T* Instance(const DKString& data)
     {
-		DKDebug(data);
+		//DKDebug(data);
 		//if(has(data, ".js")){
 		//	DKLog("DKObject::Instance(): this is a .js file. Can't work for Cef.\n", DKERROR);
 		//}
