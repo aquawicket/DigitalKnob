@@ -2,6 +2,7 @@
 DKLog("Loaded DKAssets.js\n", DKWARN);
 
 var href = document.location.href;
+href = href.substr(0, href.lastIndexOf("?")+1);
 href = href.substr(0, href.lastIndexOf("/")+1);
 local_assets = href;
 
