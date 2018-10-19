@@ -26,7 +26,7 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 		DKUtil::GetThreadId(threadId);
 		string += "TID:";
 		string += toString((unsigned int)threadId);
-		string += ":";
+		string += "  ";
 	}
 	if(log_lines){
 		DKString filename = file;
@@ -36,15 +36,16 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 		}
 		string += ":";
 		string += toString(line);
-		string += ":";
+		string += "  ";
 	}
 	if(log_funcs){
-		string += func;
-		string += ":";
+		if(strlen(func)){
+			string += func;
+			string += "()  ";
+		}
 	}
-	string += "  ";
-	string += text;
 
+	string += text;
 	int i=0;
 	DKString value;
 

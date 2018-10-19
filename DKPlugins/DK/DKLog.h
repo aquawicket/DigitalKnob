@@ -63,11 +63,31 @@ extern DKString log_hide;
 void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DKINFO);
 void SetLog(const int lvl, const DKString& text);
 
+template <typename... Args>
+void DEBUG_VARS(const char* file, int line, const char* func, Args&&... args)
+{
+	std::ostringstream out;
+	out << func;
+	out << "(";
+	using expander = int[];
+	(void) expander { 0, (void(out << args << ", "), 0) ...};
+	out << ")\n";
+	std::string text = out.str();
+	replace(text, ", )", ")");
+	Log(file, line, "", text);
+}
+
+#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+
+/*
 #ifdef WIN32
-#define DKLog(...) Log(__FILE__, __LINE__, __FUNCSIG__, __VA_ARGS__)
+#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
 #define DKLog(...) Log(__FILE__, __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__)
 #endif
 //#define DKCHECK(_bool) {if(!_bool){DKLog("FAILURE: ", DKERROR);}}
+*/
 
 #endif //DKLog_H
