@@ -1744,6 +1744,8 @@ FUNCTION(DKASSETS arg)
 	FILE(COPY ${PATHTOPLUGIN} DESTINATION ${DKPROJECT}/assets ${ASSETS})
 ENDFUNCTION()
 
+## FIXME: This only works on DK/3rdParty/_DKIMPORT, it needs to work on sibling folders as well
+## I.E.  MyApps/3rdParty/_DKIMPORT/libSomething_1.2b
 FUNCTION(DKSETPATHTOPLUGIN arg)
 	DKSET(PATHTOPLUGIN "")
 	IF(EXISTS ${DKPLUGINS}/${arg}/DKCMake.txt)
