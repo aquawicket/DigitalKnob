@@ -770,11 +770,8 @@ bool DKFile::MakeDir(const DKString& dir)
 bool DKFile::PathExists(const DKString& path)
 {
 	DKDebug(path);
-	if(boost::filesystem::exists(path)){
-		return true;
-	}
-
-	DKLog("DKFile::PathExists("+path+"): Path does not exist\n");
+	if(boost::filesystem::exists(path)){ return true; }
+	//DKLog("DKFile::PathExists("+path+"): Path does not exist\n");
 	return false;
 }
 

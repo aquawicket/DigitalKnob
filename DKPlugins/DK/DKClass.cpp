@@ -90,7 +90,7 @@ bool DKClass::_Available(const DKString& data)
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKLog("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance. \n");
+			DKLog("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance.\n", DKDEBUG);
 		}
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
 			DKLog("DKClass: "+arry[0]+","+arry[1]+" - id is already in use.\n", DKWARN);

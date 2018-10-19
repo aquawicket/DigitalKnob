@@ -99,7 +99,7 @@ public:
 		}
 
 		//Create a new insance
-		DKLog("DKObject::Instance("+final_data+")\n");
+		//DKLog("DKObject::Instance("+final_data+")\n");
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
