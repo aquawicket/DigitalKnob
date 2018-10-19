@@ -5,6 +5,7 @@
 ///////////////////////
 bool DKSDLAudio::Init()
 {
+	DKDebug();
 	if(SDL_Init(SDL_INIT_AUDIO) < 0){
 		DKLog("Could not Init SDL_Audio. \n",DKERROR);
 		return false;
@@ -35,6 +36,7 @@ bool DKSDLAudio::Init()
 //////////////////////
 bool DKSDLAudio::End()
 {
+	DKDebug();
 	DKApp::RemoveLoopFunc(&DKSDLAudio::Process, this);
 	Mix_CloseAudio();
 	return true;
@@ -45,6 +47,7 @@ bool DKSDLAudio::End()
 /////////////////////////////////////////////////////////////
 bool DKSDLAudio::GetDuration(const void* input, void* output)
 {
+	DKDebug(input, output);
 	//FIXME - TODO
 	return false;
 
@@ -70,6 +73,7 @@ bool DKSDLAudio::GetDuration(const void* input, void* output)
 /////////////////////////////////////////////////////////
 bool DKSDLAudio::GetTime(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int val = trk.position;
 	*(int*)output = val;
 	return true;
@@ -78,6 +82,7 @@ bool DKSDLAudio::GetTime(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLAudio::GetVolume(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int volume = Mix_VolumeMusic(-1);
 	*(int*)output = volume;
 	return true;
@@ -86,6 +91,7 @@ bool DKSDLAudio::GetVolume(const void* input, void* output)
 //////////////////////////////////////////////////////
 bool DKSDLAudio::Mute(const void* input, void* output)
 {
+	DKDebug(input, output);
 	_volume = Mix_VolumeMusic(-1);
 	Mix_VolumeMusic(0);
 	return true;
@@ -94,6 +100,7 @@ bool DKSDLAudio::Mute(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLAudio::OpenMusic(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return 0; }
 	
@@ -119,6 +126,7 @@ bool DKSDLAudio::OpenMusic(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLAudio::Pause(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	Mix_PauseMusic();
 	return true;
@@ -127,6 +135,7 @@ bool DKSDLAudio::Pause(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLAudio::PlaySound(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	
@@ -147,6 +156,7 @@ bool DKSDLAudio::PlaySound(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSDLAudio::Resume(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	trk.position = 0;
 	lastTime = SDL_GetTicks();
@@ -158,6 +168,7 @@ bool DKSDLAudio::Resume(const void* input, void* output)
 /////////////////////////////////////////////////////////
 bool DKSDLAudio::SetTime(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int time = *(int*)input;
 	Mix_SetMusicPosition(time);
 	return true;
@@ -166,6 +177,7 @@ bool DKSDLAudio::SetTime(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLAudio::SetVolume(const void* input, void* output)
 {
+	DKDebug(input, output);
 	int volume = *(int*)input;
 	Mix_VolumeMusic(volume);
 	return true;
@@ -175,6 +187,7 @@ bool DKSDLAudio::SetVolume(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSDLAudio::UnMute(const void* input, void* output)
 {
+	DKDebug(input, output);
 	Mix_VolumeMusic(_volume);
 	return true;
 }
@@ -184,11 +197,12 @@ bool DKSDLAudio::UnMute(const void* input, void* output)
 //////////////////////////
 void DKSDLAudio::Process()
 {
+	//DKDebug();
 	/*
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
-			//DKLog("trk.position = "+toString(trk.position)+"\n", DKDEBUG);
+			//DKLog("trk.position = "+toString(trk.position)+"\n");
 			DKEvent::SendEvent("GLOBAL", "timeupdate", "");
 		}
 	}
@@ -196,7 +210,7 @@ void DKSDLAudio::Process()
 	*/
 	if(!Mix_PlayingMusic()){
 		//FIXME: !!!  PlaySound will call this constantly !!!
-		//DKLog("!Mix_PlayingMusic()\n", DKDEBUG);
+		//DKLog("!Mix_PlayingMusic()\n");
 		Mix_RewindMusic();
 		if(trk.file.empty()){ return; }
 		Mix_PlayMusic(trk.snd, 0);

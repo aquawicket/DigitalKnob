@@ -6,7 +6,7 @@
 ///////////////////////
 bool DKRocketV8::Init()
 {
-	DKLog("DKRocketV8::Init()\n", DKDEBUG);
+	DKDebug();
 	DKV8::AttachFunction("DKRocket_Reload", DKRocketV8::Reload);
 	DKV8::AttachFunction("DKRocket_ToggleDebugger", DKRocketV8::ToggleDebugger);
 	return true;
@@ -15,13 +15,14 @@ bool DKRocketV8::Init()
 //////////////////////
 bool DKRocketV8::End()
 {
-	DKLog("DKRocketV8::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }
 
 ///////////////////////////////////////////////////////
 bool DKRocketV8::Reload(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKRocket::Get()->Reload();
 	return true;
 }
@@ -29,6 +30,7 @@ bool DKRocketV8::Reload(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKRocketV8::ToggleDebugger(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKRocket::Get()->ToggleDebugger();
 	return true;
 }

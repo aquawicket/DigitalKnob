@@ -6,8 +6,9 @@
 ///////////////////////////
 bool DKRocketIframe::Init()
 {
+	DKDebug();
 	DKString _data = toString(data, ",");
-	//DKLog("DKCef::Init("+_data+")\n", DKDEBUG);
+	//DKLog("DKCef::Init("+_data+")\n");
 	if(data.size() > 4){
 		//id = data[1];
 		//top = toInt(data[2]);
@@ -21,5 +22,6 @@ bool DKRocketIframe::Init()
 //////////////////////////
 bool DKRocketIframe::End()
 {
+	DKDebug();
 	return true;
 }

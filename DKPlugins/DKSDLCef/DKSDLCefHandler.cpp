@@ -12,6 +12,7 @@ DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
 ///////////////////////////////////////////////////
 void SourceCallback::Visit(const CefString& string)
 {
+	DKDebug(string);
 	source = string.ToString();
 	//replace(source, "<", "&lt;");
 	//replace(source, ">", "&gt;");
@@ -41,6 +42,7 @@ void SourceCallback::Visit(const CefString& string)
 //////////////////////////////////////////////////////
 DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false) 
 {
+	DKDebug();
 	DCHECK(!g_instance);
 	g_instance = this;
 }
@@ -48,20 +50,21 @@ DKSDLCefHandler::DKSDLCefHandler(): is_closing_(false)
 ///////////////////////////////////
 DKSDLCefHandler::~DKSDLCefHandler() 
 {
+	DKDebug();
 	g_instance = NULL;
 }
 
 ///////////////////////////////////////////////
 DKSDLCefHandler* DKSDLCefHandler::GetInstance() 
 {
+	DKDebug();
 	return g_instance;
 }
 
 ////////////////////////////////////////////////////////
 void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 {
-	DKLog("DKSDLCefHandler::CloseAllBrowsers()\n", DKDEBUG);
-
+	DKDebug(force_close);
 	if(!CefCurrentlyOn(TID_UI)){
 		// Execute on the UI thread.
 		CefPostTask(TID_UI, base::Bind(&DKSDLCefHandler::CloseAllBrowsers, this, force_close));
@@ -79,8 +82,8 @@ void DKSDLCefHandler::CloseAllBrowsers(bool force_close)
 ////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) 
 {
+	DKDebug(browser);
 	CEF_REQUIRE_UI_THREAD();
-	DKLog("DKSDLCefHandler::DoClose()\n", DKDEBUG);
 
 	// Closing the main window requires special handling. See the DoClose()
 	// documentation in the CEF header for a detailed destription of this
@@ -98,13 +101,14 @@ bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser)
 ///////////////////////////////
 void DKSDLCefHandler::DoFrame()
 { 
+	//DKDebug();
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 {
-	DKLog("DKSDLCefHandler::GetViewRect(CefBrowser, CefRect&)\n", DKDEBUG);
+	DKDebug(browser, "CefRect&");
 	if(dkCef->dkBrowsers.size() < 1){ return true; }
 
 	unsigned int i;
@@ -120,7 +124,7 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 //////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 {
-	DKLog("DKSDLCefHandler::OnBeforeClose(browser)\n", DKDEBUG);
+	DKDebug(browser);
 	CEF_REQUIRE_UI_THREAD();
 
 	// Remove from the list of existing browsers.
@@ -147,7 +151,7 @@ void DKSDLCefHandler::OnBeforeClose(CefRefPtr<CefBrowser> browser)
 ///////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 {
-	DKLog("DKSDLCefHandler::OnAfterCreated(browser)\n", DKDEBUG);
+	DKDebug(browser);
 	CEF_REQUIRE_UI_THREAD();
 	browser_list_.push_back(browser); //Add to the list of existing browsers.
 	cef_images.push_back(NULL);
@@ -157,7 +161,7 @@ void DKSDLCefHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model)
 {
-	DKLog("DKSDLCefHandler::OnBeforeContextMenu()\n", DKDEBUG);
+	DKDebug(browser, frame, params, model);
 	model->Clear(); //remove original context menu
 
 	DKString data;
@@ -174,7 +178,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKSDLCefHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 {
-	DKLog("DKSDLCefHandler::OnBeforeDownload("+suggested_name.ToString()+")\n", DKDEBUG);
+	DKDebug(browser, download_item, "const CefString&", callback);
 	//DKLog("OriginalUrl: "+download_item->GetOriginalUrl().ToString()+")\n", DKDEBUG);
 	UNREFERENCED_PARAMETER(browser);
 	UNREFERENCED_PARAMETER(download_item);
