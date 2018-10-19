@@ -1765,7 +1765,7 @@ FUNCTION(DKSETPATHTOPLUGIN arg)
     	ENDIF()
   	ENDFOREACH()
 	
-	MESSAGE(FATAL_ERROR "Could not find ${arg} Plugin.")
+	MESSAGE(FATAL_ERROR "Could not find ${arg} Plugin.")   ## FIXME - we only seem to look in the DK/3rdParty/_DKIMPORT for plugins
 ENDFUNCTION()
 
 
