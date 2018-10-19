@@ -704,7 +704,7 @@ public class SDLActivity extends Activity implements Runnable
 
     /**
      * This method was called by SDL using JNI.
-     * @deprecated because of an incorrect name
+     * deprecated because of an incorrect name
      */
     @Deprecated
     public InputStream openAPKExtensionInputStream(String fileName) throws IOException 
