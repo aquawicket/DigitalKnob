@@ -35,7 +35,7 @@ void initJNIBridge(JNIEnv* env, jobject obj)
 ////////////////////////////////////////////
 void exitJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKDebug(evn, obj);
+	DKDebug(env, obj);
 	env->DeleteGlobalRef(theobj);
 }
 
@@ -104,7 +104,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 {
-	DKDebug(env, cla, data);
+	DKDebug(env, cls, data);
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");

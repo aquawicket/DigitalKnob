@@ -77,17 +77,7 @@ void DEBUG_VARS(const char* file, int line, const char* func, Args&&... args)
 	Log(file, line, "", text, DKDEBUG);
 }
 
-#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-
-/*
-#ifdef WIN32
-#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#else
-#define DKLog(...) Log(__FILE__, __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__)
-#endif
-//#define DKCHECK(_bool) {if(!_bool){DKLog("FAILURE: ", DKERROR);}}
-*/
+#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, ## __VA_ARGS__)
+#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, ## __VA_ARGS__)
 
 #endif //DKLog_H

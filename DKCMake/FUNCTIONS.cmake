@@ -1538,6 +1538,7 @@ FUNCTION(DKPLUGIN arg)
 			"LOCAL_SRC_FILES := $(wildcard ${PATHTOPLUGIN}/*.cpp)\n"
 			"LOCAL_SRC_FILES += $(wildcard ${PATHTOPLUGIN}/*.c)\n\n"
 			"LOCAL_CPPFLAGS := -DANDROID\n"
+			"LOCAL_CPPFLAGS += -std=gnu++11\n"
 			"LOCAL_LDFLAGS :=\n\n")
 		DKINCLUDE(${PATHTOPLUGIN})
 
