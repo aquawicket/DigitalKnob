@@ -18,7 +18,7 @@ uWS::Hub DKWebSockets::clientHub;
 /////////////////////////
 bool DKWebSockets::Init()
 {
-	DKLog("DKWebSockets::Init()\n", DKDEBUG);
+	DKDebug();
 	DKClass::DKCreate("DKWebSocketsJS");
 	DKClass::DKCreate("DKWebSocketsV8");
 	DKApp::AppendLoopFunc(&DKWebSockets::Loop, this);
@@ -28,6 +28,7 @@ bool DKWebSockets::Init()
 ////////////////////////
 bool DKWebSockets::End()
 {
+	DKDebug();
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	return true;
@@ -36,7 +37,7 @@ bool DKWebSockets::End()
 ////////////////////////////////
 bool DKWebSockets::CloseClient()
 {
-	DKLog("DKWebSockets::CloseClient()\n", DKDEBUG);
+	DKDebug();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	clientWebSocket = NULL;
 	DKLog("DKWebSockets::CloseClient(): Client closed\n");
@@ -46,7 +47,7 @@ bool DKWebSockets::CloseClient()
 ////////////////////////////////
 bool DKWebSockets::CloseServer()
 {
-	DKLog("DKWebSockets::CloseServer()\n", DKDEBUG);
+	DKDebug();
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	serverPort = NULL;
 	serverWebSocket = NULL;
@@ -57,10 +58,8 @@ bool DKWebSockets::CloseServer()
 ////////////////////////////////////////////////////////
 bool DKWebSockets::CreateClient(const DKString& address)
 {
-	DKLog("DKWebSockets::CreateClient("+address+")\n", DKDEBUG);
-	
+	DKDebug(address);
 	clientAddress = address;
-
 	clientHub.onError([](void *user){
 		DKLog("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n", DKERROR);
 		clientWebSocket = NULL;
@@ -112,7 +111,7 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	});
 
 	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
-		DKLog("DKWebSockets::CreateClient(): clientHub.onMessage\n", DKDEBUG);
+		DKLog("DKWebSockets::CreateClient(): clientHub.onMessage\n");
 		MessageFromServer(ws, message, length, opCode);
 	});
 
@@ -126,10 +125,7 @@ bool DKWebSockets::CreateClient(const DKString& address)
 /////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 {
-	serverAddress = address;
-	serverPort = port;
-	DKLog("DKWebSockets::CreateServer("+address+","+toString(port)+")\n", DKDEBUG);
-
+	DKDebug(address, port);
 	serverHub.onError([](void *user){
 		DKLog("DKWebSockets::CreateServer(): serverHub.onError\n", DKERROR);
 		serverWebSocket = NULL;
@@ -191,7 +187,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 	});
 
 	serverHub.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
-		DKLog("DKWebSockets::CreateServer(): serverHub.serverHub.onMessage\n", DKDEBUG);
+		DKLog("DKWebSockets::CreateServer(): serverHub.serverHub.onMessage\n");
 		MessageFromClient(ws, message, length, opCode);
 	});
 
@@ -202,6 +198,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 /////////////////////////
 void DKWebSockets::Loop()
 {
+	//DKDebug();
 	if(!serverAddress.empty() && serverPort && serverHub.listen(serverAddress.c_str(), serverPort)){
 		serverHub.poll();
 	}
@@ -216,7 +213,7 @@ void DKWebSockets::Loop()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	DKLog("DKWebSockets::MessageFromClient("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
+	DKDebug(we, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
@@ -225,7 +222,7 @@ bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *mess
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	DKLog("DKWebSockets::MessageFromServer("+DKString(message)+","+toString(length)+")\n", DKDEBUG);
+	DKDebug(we, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromServer", message_);
 	return true;
@@ -234,7 +231,7 @@ bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *mess
 ///////////////////////////////////////////////////////////
 bool DKWebSockets::MessageToClient(const DKString& message)
 {
-	DKLog("DKWebSockets::MessageToClient("+message+")\n", DKDEBUG);
+	DKDebug(message);
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
 	if(!serverWebSocket){
@@ -250,7 +247,7 @@ bool DKWebSockets::MessageToClient(const DKString& message)
 ///////////////////////////////////////////////////////////
 bool DKWebSockets::MessageToServer(const DKString& message)
 {
-	DKLog("DKWebSockets::MessageToServer("+message+")\n", DKDEBUG);
+	DKDebug(message);
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;
 	if(!clientWebSocket){
