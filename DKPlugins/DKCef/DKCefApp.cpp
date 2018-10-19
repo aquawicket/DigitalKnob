@@ -376,7 +376,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
-			DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n");
+			DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKDEBUG);
 		}
 	}
 }
