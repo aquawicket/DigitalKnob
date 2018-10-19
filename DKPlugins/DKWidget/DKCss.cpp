@@ -8,7 +8,7 @@ DKRocket* DKCss::dkRocket;
 //////////////////
 bool DKCss::Init()
 {
-	DKLog("DKCss::Init()\n", DKDEBUG);
+	DKDebug();
 
 	//link objects
 	dkRocket = DKRocket::Get("DKRocket0");
@@ -59,6 +59,6 @@ bool DKCss::Init()
 /////////////////
 bool DKCss::End()
 {
-	DKLog("DKCss::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }

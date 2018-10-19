@@ -15,8 +15,7 @@ DKRocket* DKWidget::dkRocket;
 /////////////////////
 bool DKWidget::Init()
 {
-	DKLog("DKWidget::Init() \n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::DKCreate("DKWidgetJS");
 	DKClass::DKCreate("DKWidgetMySqlJS");
 	root = NULL;
@@ -58,6 +57,7 @@ bool DKWidget::Init()
 ////////////////////
 bool DKWidget::End()
 {
+	DKDebug();
 	RemoveWidget(this);
 	return true;
 }
@@ -65,6 +65,7 @@ bool DKWidget::End()
 /////////////////////////////////////////////
 void DKWidget::RemoveWidget(DKWidget* widget)
 {
+	DKDebug(widget);
 	//TODO - any child widgets need to be deleted first
 	if(!root){ return; }
 	DKString id = root->GetId().CString();
@@ -90,8 +91,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 ///////////////////////////////////////////
 bool DKWidget::CreateWidget(DKString& file)
 {
-	//DKLog("DKWidget::CreateWidget("+file+")\n", DKDEBUG);
-
+	DKDebug(file);
 	DKString id;
 	DKString html;
 	DKString path = file;
@@ -179,6 +179,7 @@ bool DKWidget::CreateWidget(DKString& file)
 /////////////////////////////
 bool DKWidget::AttachEvents()
 {
+	DKDebug();
 	DKElementList elements;
 	GetElements(root, elements);
 	for(unsigned int i=0; i<elements.size(); ++i){
@@ -199,6 +200,7 @@ bool DKWidget::AttachEvents()
 //////////////////////////////////////////////////////////
 bool DKWidget::Type(DKEvent* event, const DKString& type)
 {
+	DKDebug(event, type);
 	if(same(event->GetType(), type)){ return true; }
 	return false;
 }
@@ -206,6 +208,7 @@ bool DKWidget::Type(DKEvent* event, const DKString& type)
 /////////////////////////////////////////////////////
 bool DKWidget::Id(DKEvent* event, const DKString& id)
 {
+	DKDebug(event, id);
 	if(same(event->GetId(), id)){ return true; }
 	return false;
 }
@@ -213,6 +216,7 @@ bool DKWidget::Id(DKEvent* event, const DKString& id)
 /////////////////////////////////////////////////////////
 bool DKWidget::Id(DKElement* element, const DKString& id)
 {
+	DKDebug(element, id);
 	if(same(GetId(element), id)){ return true; }
 	return false;
 }
@@ -220,6 +224,7 @@ bool DKWidget::Id(DKElement* element, const DKString& id)
 /////////////////////////////////////////////////////////
 bool DKWidget::IdLike(DKEvent* event, const DKString& id)
 {
+	DKDebug(event, id);
 	if(has(event->GetId(), id)){ return true; }
 	return false;
 }
@@ -227,6 +232,7 @@ bool DKWidget::IdLike(DKEvent* event, const DKString& id)
 ///////////////////////////////////////////////////////////
 bool DKWidget::Value(DKEvent* event, const DKString& value)
 {
+	DKDebug(event, value);
 	if(same(event->GetValue(), value)){ return true; }
 	return false;
 }
@@ -234,6 +240,7 @@ bool DKWidget::Value(DKEvent* event, const DKString& value)
 ///////////////////////////////////////////////
 DKElement* DKWidget::GetElement(DKEvent* event)
 {
+	DKDebug(event);
 	DKString id = event->GetId();
 	DKElement* element = GetElementById(id);
 	return element;
@@ -243,6 +250,7 @@ DKElement* DKWidget::GetElement(DKEvent* event)
 /////////////////////////////////
 bool DKWidget::ClearReturnEvent()
 {
+	DKDebug();
 	event_type.clear();
 	event_id.clear();
 	event_data.clear();
@@ -252,6 +260,7 @@ bool DKWidget::ClearReturnEvent()
 ///////////////////////////////////////////////
 bool DKWidget::StoreReturnEvent(DKEvent* event)
 {
+	DKDebug(event);
 	event_id = event->GetValue(0);
 	event_type = event->GetValue(1);
 	
@@ -270,6 +279,7 @@ bool DKWidget::StoreReturnEvent(DKEvent* event)
 ////////////////////////////////////////////
 DKString DKWidget::GetId(DKElement* element)
 {
+	DKDebug(element);
 	if(!element){ return ""; }
 	return element->GetId().CString();
 }
@@ -277,6 +287,7 @@ DKString DKWidget::GetId(DKElement* element)
 ////////////////////////////////////////
 DKString DKWidget::GetId(DKEvent* event)
 {
+	DKDebug(event);
 	DKElement* element = GetElement(event);
 	if(!element){ return ""; }
 	return element->GetId().CString();
@@ -285,6 +296,7 @@ DKString DKWidget::GetId(DKEvent* event)
 ///////////////////////////////////////////
 DKString DKWidget::GetValue(DKEvent* event)
 {
+	DKDebug(event);
 	DKElement* element = GetElement(event);
 	return GetValue(element);
 }
@@ -292,6 +304,7 @@ DKString DKWidget::GetValue(DKEvent* event)
 ///////////////////////////////////////////////
 DKString DKWidget::GetValue(const DKString& id)
 {
+	DKDebug(id);
 	DKString value = "";
 	GetValue(id, value);
 	return value;
@@ -300,6 +313,7 @@ DKString DKWidget::GetValue(const DKString& id)
 ///////////////////////////////////////////////
 DKString DKWidget::GetValue(DKElement* element)
 {
+	DKDebug(element);
 	DKString value = "";
 	GetValue(element, value);
 	return value;
@@ -308,6 +322,7 @@ DKString DKWidget::GetValue(DKElement* element)
 ///////////////////////////////////////////////////
 DKElement* DKWidget::GetElement(const DKString& id)
 {
+	DKDebug(id);
 	return GetElementById(id);
 }
 
@@ -315,6 +330,7 @@ DKElement* DKWidget::GetElement(const DKString& id)
 /////////////////////////////////////////////////////////////////
 bool DKWidget::GetOuterHtml(const DKString& id, DKString& string)
 {
+	DKDebug(id, string);
 	return GetOuterHtml(GetElementById(id), string);
 }
 
