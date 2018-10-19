@@ -18,6 +18,7 @@ uWS::Hub DKWebSockets::clientHub;
 /////////////////////////
 bool DKWebSockets::Init()
 {
+	DKLog("DKWebSockets::Init()\n", DKDEBUG);
 	DKClass::DKCreate("DKWebSocketsJS");
 	DKClass::DKCreate("DKWebSocketsV8");
 	DKApp::AppendLoopFunc(&DKWebSockets::Loop, this);

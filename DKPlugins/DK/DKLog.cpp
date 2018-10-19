@@ -18,7 +18,7 @@ extern DKString log_hide = ""; //comma seperated
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-void Log(const DKString& text, const int lvl, const char* file, int line, const char* func)
+void Log(const char* file, int line, const char* func, const DKString& text, const int lvl)
 {
 	DKString string;
 	if(log_thread){
@@ -155,7 +155,7 @@ void Log(const DKString& text, const int lvl, const char* file, int line, const 
 	if(log_errors && (lvl == DKERROR/* || has(string,"Uncaught ")*/)){
 		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);  //TODO
 		DKString in = string;
-		DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
+		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
 
 }

@@ -60,15 +60,13 @@ extern bool log_funcs;
 extern DKString log_show;
 extern DKString log_hide;
 
-//TODO 
-//Having the filename and the line number make debudding much easier. 
-void Log(const DKString& text, const int lvl, const char* file, int line, const char* func);
+void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DKINFO);
 void SetLog(const int lvl, const DKString& text);
 
 #ifdef WIN32
-#define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __FUNCSIG__)
+#define DKLog(...) Log(__FILE__, __LINE__, __FUNCSIG__, __VA_ARGS__)
 #else
-#define DKLog(message, lvl) Log(message, lvl, __FILE__, __LINE__, __PRETTY_FUNCTION__)
+#define DKLog(...) Log(__FILE__, __LINE__, __PRETTY_FUNCTION__, __VA_ARGS__)
 #endif
 //#define DKCHECK(_bool) {if(!_bool){DKLog("FAILURE: ", DKERROR);}}
 
