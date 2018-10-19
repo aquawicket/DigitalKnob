@@ -7,6 +7,7 @@
 ////////////////////
 bool DKMySql::Init()
 {
+	DKDebug();
 	DKClass::DKCreate("DKMySqlJS");
 	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
@@ -21,6 +22,7 @@ bool DKMySql::Init()
 ///////////////////
 bool DKMySql::End()
 {
+	DKDebug();
 #ifdef USE_mysql
 	mysql_close(&mysql);
 #endif
@@ -32,8 +34,7 @@ bool DKMySql::End()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
 {
-	DKLog("DKMySql::Connect("+host+", "+name+", "+pass+", "+port+")\n", DKDEBUG);
-
+	DKDebug(host, name, pass, port);
 #ifdef USE_mysql
 	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
 		DKLog("Failed to connect to MySQL. \n", DKERROR);
@@ -67,6 +68,7 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 ////////////////////////////////////////////////
 bool DKMySql::Database(const DKString& database)
 {
+	DKDebug(database);
 #ifdef USE_mysql
 	//Not setup
 #else
@@ -86,6 +88,7 @@ bool DKMySql::Database(const DKString& database)
 ///////////////////////////////////////////////////////////
 bool DKMySql::Query(DKString query, DKStringArray& results)
 {
+	DKDebug(query, "DKStringArray&");
 	results.clear();
 #ifdef USE_mysql
 	//if(mysql_real_query(&mysql,query.c_str(),strlen(query.c_str())) != 0){

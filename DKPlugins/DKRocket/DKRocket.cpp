@@ -10,8 +10,7 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 /////////////////////
 bool DKRocket::Init()
 {
-	DKLog("DKRocket::Init() \n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::DKCreate("DKRocketJS");
 	DKClass::DKCreate("DKRocketV8");
 	document = NULL;
@@ -68,6 +67,7 @@ bool DKRocket::Init()
 ////////////////////
 bool DKRocket::End()
 {
+	DKDebug();
 	DKEvent::RemoveRegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::RemoveUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::RemoveSendEventFunc(&DKRocket::SendEvent, this);
@@ -87,6 +87,7 @@ bool DKRocket::End()
 /////////////////////////////////////////////
 bool DKRocket::LoadFont(const DKString& file)
 {
+	DKDebug(file);
 	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
 		DKLog("Could not load "+file+" \n", DKERROR);
 		return false;
@@ -98,7 +99,7 @@ bool DKRocket::LoadFont(const DKString& file)
 //////////////////////////
 bool DKRocket::LoadFonts()
 {
-	//DKLog("DKRocket::LoadFonts()\n", DKDEBUG);
+	DKDebug();
 	DKStringArray dkfiles;
 	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
@@ -128,6 +129,7 @@ bool DKRocket::LoadFonts()
 ////////////////////////////////////////////
 bool DKRocket::LoadGui(const DKString& file)
 {
+	DKDebug(file);
 	DKString path = file;
 	if(!DKFile::VerifyPath(path)){
 		DKLog("DKOSGRocket::LoadGui() "+path+" not found! \n", DKERROR);
@@ -173,6 +175,7 @@ bool DKRocket::LoadGui(const DKString& file)
 //////////////////////////////////////////////////////////////////////
 bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 {
+	DKDebug(id, type);
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	
@@ -207,12 +210,14 @@ bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 ///////////////////////
 bool DKRocket::Reload()
 {
+	DKDebug();
 	return LoadGui("index.html");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
+	//DKDebug(id, type, value);
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
@@ -229,6 +234,7 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 ///////////////////////////////
 bool DKRocket::ToggleDebugger()
 {
+	DKDebug();
 	if(Rocket::Debugger::IsVisible()){
 		Rocket::Debugger::SetVisible(false);
 		DKLog("Rocket Debugger OFF\n");
@@ -243,6 +249,7 @@ bool DKRocket::ToggleDebugger()
 ////////////////////////////////////////////////////////////////////////
 bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 {
+	DKDebug(id, type);
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	if(same(id,"GLOBAL")){ return false; }
@@ -263,6 +270,7 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 ///////////////////////////////////////////////////////
 void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 {
+	//DKDebug(event);
 	if(!event.GetCurrentElement()){return;} //MUST!
 	if(!event.GetTargetElement()){return;} //MUST!
 
@@ -287,7 +295,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	DKString target_tag = target->GetTagName().CString();
 	DKString hover_id = hover->GetId().CString();
 	DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" +hover_id+"\n";
-	DKLog(string, DKDEBUG);
+	DKLog(string);
 	*/
 
 #ifdef ANDROID

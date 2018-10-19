@@ -6,17 +6,15 @@
 ////////////////////
 bool DKOcrJS::Init()
 {
-	DKLog("DKOcrJS::Init()\n", DKDEBUG);
-
+	DKDebug();
 	DKDuktape::AttachFunction("DKOcr_ImageToText", DKOcrJS::ImageToText);
 	return true;
 }
 
-
-
 //////////////////////////////////////////
 int DKOcrJS::ImageToText(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	DKString text;
 	if(!DKOcr::ImageToText(file, text)){ return 0; }
