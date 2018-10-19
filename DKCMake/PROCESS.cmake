@@ -47,6 +47,9 @@ MESSAGE("**********************************************\n")
 ### Set the project name to the App folder name
 GET_FILENAME_COMPONENT(AppName ${DKPROJECT} NAME)
 STRING(REPLACE " " "_" AppName ${AppName})
+
+SET(CMAKE_CXX_STANDARD 11)
+
 PROJECT(${AppName})
 
 
