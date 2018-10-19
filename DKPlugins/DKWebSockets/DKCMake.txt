@@ -1,3 +1,7 @@
+IF(ANDROID)
+	RETURN()
+ENDIF()
+
 ##DKDEPEND(libwebsockets-2.2-stable)
 DKDEPEND(uWebSockets-master)
 
