@@ -1653,7 +1653,7 @@ bool DKWidget::ValidateColor(DKString &value)
 ///////////////////////////////////////////////////////////////////////
 bool DKWidget::GetElements(const DKString& id, DKStringArray& elements)
 {
-	DKDebug(id, elements);
+	DKDebug(id, "DKStringArray&");
 	DKElementList list;
 	if(!GetElements(GetElementById(id), list)){ return false;  }
 	DKString file;
@@ -1692,14 +1692,14 @@ bool DKWidget::GetElements(const DKString& id, DKStringArray& elements)
 ///////////////////////////////////////////////////////////////////////
 bool DKWidget::GetElements(const DKString& id, DKElementList& elements)
 {
-	DKDebug(id, elements);
+	DKDebug(id, "DKElementList&");
 	return GetElements(GetElementById(id), elements);
 }
 
 //////////////////////////////////////////////////////////////////////
 bool DKWidget::GetElements(DKElement* parent, DKElementList& elements)
 {
-	DKDebug(parent, elements);
+	DKDebug(parent, "DKElementList&");
 	if(!parent){ return false; }
 	typedef std::queue<DKElement*> SearchQueue;
 	SearchQueue search_queue;
