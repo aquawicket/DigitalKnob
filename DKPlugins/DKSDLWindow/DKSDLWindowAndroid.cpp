@@ -37,8 +37,7 @@ extern "C" {
 ///////////////////////////////
 bool DKSDLWindowAndroid::Init()
 {
-	DKLog("DKSDLWindowAndroid::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
 	DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
 	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
@@ -69,13 +68,14 @@ bool DKSDLWindowAndroid::Init()
 //////////////////////////////
 bool DKSDLWindowAndroid::End()
 {
+	DKDebug();
 	return true;
 }
 	
 ///////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 {
-	DKLog("DKSDLWindowAndroid::onInitSDL()\n", DKDEBUG);
+	DKDebug(input, output);
 	JavaData jd = *(JavaData*)input;
 
     int i;
@@ -142,6 +142,7 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 ////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onDropFile(const void* input, void* output)
 {
+	//DKDebug(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKLog("DKSDLWindowAndroid::onDropFile("+DKString(_data)+")\n", DKDEBUG);

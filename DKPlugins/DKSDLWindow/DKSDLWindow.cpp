@@ -35,10 +35,9 @@ std::map<int,int> DKSDLWindow::sdlMacCode;
 ////////////////////////
 bool DKSDLWindow::Init()
 {
-	DKLog("DKSDLWindow::Init()\n", DKDEBUG);
-
+	DKDebug();
 #ifdef ANDROID
-		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n", DKDEBUG);
+		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n");
 		//CallJavaFunction("OpenActivity","SDLActivity");
 #endif
 
@@ -283,7 +282,7 @@ bool DKSDLWindow::Init()
 ///////////////////////
 bool DKSDLWindow::End()
 {
-	DKLog("DKSDLWindow::End()", DKDEBUG);
+	DKDebug();
 	//SDL_DestroyTexture(tex);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -295,7 +294,7 @@ bool DKSDLWindow::End()
 //////////////////////////////////////////////////////////
 bool DKSDLWindow::TestInt(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::TestInt()", DKDEBUG);
+	DKDebug(input, output);
 	int in = *(int*)input;
 	int out = in;
 	*(int*)output = out;
@@ -305,7 +304,7 @@ bool DKSDLWindow::TestInt(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSDLWindow::TestString(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::TestString()", DKDEBUG);
+	DKDebug(input, output);
 	std::string in = *(std::string*)input;
 	std::string out = in;
 	*(std::string*)output = out;
@@ -315,7 +314,7 @@ bool DKSDLWindow::TestString(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnInt(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::TestReturnInt()", DKDEBUG);
+	DKDebug(input, output);
 	int var = 1234;
 	*(int*)output = var;
 	return true;
@@ -324,7 +323,7 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output)
 ///////////////////////////////////////////////////////////////////
 bool DKSDLWindow::TestReturnString(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::TestReturnString()", DKDEBUG);
+	DKDebug(input, output);
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
@@ -334,7 +333,7 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSDLWindow::Fullscreen(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Fullscreen()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	return true;
 }
@@ -342,7 +341,7 @@ bool DKSDLWindow::Fullscreen(const void* input, void* output)
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetClipboard(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetClipboard()", DKDEBUG);
+	DKDebug(input, output);
 	std::string out = SDL_GetClipboardText();
 	*(std::string*)output = out;
 	return true;
@@ -351,7 +350,7 @@ bool DKSDLWindow::GetClipboard(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetHandle(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetHandle()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(window, &wmInfo);
@@ -385,7 +384,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetHeight(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetHeight()\n", DKDEBUG);
+	DKDebug(input, output);
 	int h;
 	SDL_GetWindowSize(window, NULL, &h);
 	//DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
@@ -397,7 +396,7 @@ bool DKSDLWindow::GetHeight(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetMouseX(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetMouseX()", DKDEBUG);
+	DKDebug(input, output);
 	int mouseX;
 	SDL_GetMouseState(&mouseX, NULL);
 	*(int*)output = mouseX;
@@ -407,7 +406,7 @@ bool DKSDLWindow::GetMouseX(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetMouseY(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetMouseY()", DKDEBUG);
+	DKDebug(input, output);
 	int mouseY;
 	SDL_GetMouseState(NULL, &mouseY);
 	*(int*)output = mouseY;
@@ -417,7 +416,7 @@ bool DKSDLWindow::GetMouseY(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSDLWindow::GetPixelRatio(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetPixelRatio()", DKDEBUG);
+	DKDebug(input, output);
 	*(int*)output = 1;
 	return true;
 }
@@ -425,7 +424,7 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::GetWidth(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetWidth()\n", DKDEBUG);
+	DKDebug(input, output);
 	int w;
 	SDL_GetWindowSize(window, &w, NULL);
 	//DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
@@ -437,7 +436,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::GetX(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetX()", DKDEBUG);
+	DKDebug(input, output);
 	int x;
 	SDL_GetWindowPosition(window, &x, NULL);
 	*(int*)output = x;
@@ -447,7 +446,7 @@ bool DKSDLWindow::GetX(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::GetY(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::GetY()", DKDEBUG);
+	DKDebug(input, output);
 	int y;
 	SDL_GetWindowPosition(window, NULL, &y);
 	*(int*)output = y;
@@ -457,7 +456,7 @@ bool DKSDLWindow::GetY(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::Hide(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Hide()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_HideWindow(window);
 	return true;
 }
@@ -465,7 +464,7 @@ bool DKSDLWindow::Hide(const void* input, void* output)
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::IsFullscreen()", DKDEBUG);
+	DKDebug(input, output);
 	long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
 	bool isFullscreen = ((SDL_GetWindowFlags(window) & FullscreenFlag) != 0);
 	*(bool*)output = isFullscreen;
@@ -475,7 +474,7 @@ bool DKSDLWindow::IsFullscreen(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::IsVisible(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::IsVisible()", DKDEBUG);
+	DKDebug(input, output);
 	long IsVisibleFlag = SDL_WINDOW_SHOWN;
 	bool isVisible = ((SDL_GetWindowFlags(window) & IsVisibleFlag) != 0);
 	*(bool*)output = isVisible;
@@ -485,7 +484,7 @@ bool DKSDLWindow::IsVisible(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSDLWindow::MessageBox(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::MessageBox()", DKDEBUG);
+	DKDebug(input, output);
 	DKString message = *(DKString*)input;
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
 	return true;
@@ -494,7 +493,7 @@ bool DKSDLWindow::MessageBox(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::Minimize(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Minimize()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_MinimizeWindow(window);
 	return true;
 }
@@ -502,7 +501,7 @@ bool DKSDLWindow::Minimize(const void* input, void* output)
 //////////////////////////////////////////////////////////
 bool DKSDLWindow::Restore(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Restore()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_RestoreWindow(window);
 	return true;
 }
@@ -510,7 +509,7 @@ bool DKSDLWindow::Restore(const void* input, void* output)
 ///////////////////////////////////////////////////////////////
 bool DKSDLWindow::SetClipboard(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetClipboard()\n", DKDEBUG);
+	DKDebug(input, output);
 	std::string in = *(std::string*)input;
 	if(in.empty()){ return false; }
 	if(SDL_SetClipboardText(in.c_str()) < 0){ return false; }
@@ -520,7 +519,7 @@ bool DKSDLWindow::SetClipboard(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSDLWindow::SetHeight(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetHeight()", DKDEBUG);
+	DKDebug(input, output);
 	int h = *(int*)input;
 	int w;
 	SDL_GetWindowSize(window, &w, NULL);
@@ -531,7 +530,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output)
 //////////////////////////////////////////////////////////
 bool DKSDLWindow::SetIcon(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetIcon()", DKDEBUG);
+	DKDebug(input, output);
 #ifdef WIN32
 	DKString file = *(DKString*)input;
 	SDL_SysWMinfo wmInfo;
@@ -549,7 +548,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::SetTitle(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetTitle()", DKDEBUG);
+	DKDebug(input, output);
 	DKString title = *(DKString*)input;
 	SDL_SetWindowTitle(window, title.c_str());
 	DKLog("DKSDLWindow::SetTitle is not implemented on this OS. \n", DKWARN);
@@ -559,7 +558,7 @@ bool DKSDLWindow::SetTitle(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::SetWidth(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetWidth()", DKDEBUG);
+	DKDebug(input, output);
 	int w = *(int*)input;
 	int h;
 	SDL_GetWindowSize(window, NULL, &h);
@@ -570,7 +569,7 @@ bool DKSDLWindow::SetWidth(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::SetX(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetX()", DKDEBUG);
+	DKDebug(input, output);
 	int x = *(int*)input;
 	int y;
 	SDL_GetWindowPosition(window, NULL, &y);
@@ -581,7 +580,7 @@ bool DKSDLWindow::SetX(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::SetY(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::SetY()", DKDEBUG);
+	DKDebug(input, output);
 	int y = *(int*)input;
 	int x;
 	SDL_GetWindowPosition(window, &x, NULL);
@@ -592,7 +591,7 @@ bool DKSDLWindow::SetY(const void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKSDLWindow::Show(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Show()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_ShowWindow(window);
 	return true;
 }
@@ -600,7 +599,7 @@ bool DKSDLWindow::Show(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSDLWindow::Windowed(const void* input, void* output)
 {
-	DKLog("DKSDLWindow::Windowed()", DKDEBUG);
+	DKDebug(input, output);
 	SDL_SetWindowFullscreen(window, 0); 
 	return true;
 }
@@ -608,7 +607,7 @@ bool DKSDLWindow::Windowed(const void* input, void* output)
 ///////////////////////////
 void DKSDLWindow::Process()
 {
-	//DKLog("DKSDLWindow::Process()", DKDEBUG);
+	//DKDebug();
 	if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN){ 
 		DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
 	}
@@ -643,7 +642,7 @@ void DKSDLWindow::Process()
 //////////////////////////////////////////////////////////////
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 {
-	//DKLog("DKSDLWindow::EventFilter()", DKDEBUG);
+	//DKDebug(userdata, event);
 	if(event->type == SDL_WINDOWEVENT){
 		switch(event->window.event){
 			case SDL_WINDOWEVENT_MOVED:{
@@ -685,17 +684,17 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 		}
 	}
 	if(event->type == SDL_APP_WILLENTERBACKGROUND){
-		DKLog("DKSDLWindow::SDL_APP_WILLENTERBACKGROUND \n", DKDEBUG);
+		DKLog("DKSDLWindow::SDL_APP_WILLENTERBACKGROUND \n");
 		DKApp::paused = true;
 		return 1;
 	}
 	if(event->type == SDL_APP_DIDENTERFOREGROUND){
-		DKLog("DKSDLWindow::SDL_APP_DIDENTERFOREGROUND \n", DKDEBUG);
+		DKLog("DKSDLWindow::SDL_APP_DIDENTERFOREGROUND \n");
 		DKApp::paused = false;
 		return 1;
 	}
 	if(event->type == SDL_TEXTINPUT){
-		//DKLog("DKSDLWindow::SDL_TEXTINPUT \n", DKDEBUG);
+		//DKLog("DKSDLWindow::SDL_TEXTINPUT \n");
 		return 1;
 	}
 	return 1;
@@ -704,7 +703,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 //////////////////////////////////////////
 bool DKSDLWindow::handle(SDL_Event *event)
 {
-	//DKLog("DKSDLWindow::handle()", DKDEBUG);
+	//DKDebug(event);
 	switch(event->type){
 		case SDL_QUIT:{
 			DKApp::Exit();
@@ -747,7 +746,7 @@ bool DKSDLWindow::handle(SDL_Event *event)
 		}
 
         case SDL_KEYDOWN:{
-			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n", DKDEBUG);
+			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
@@ -782,7 +781,7 @@ bool DKSDLWindow::handle(SDL_Event *event)
 /////////////////////////////
 void DKSDLWindow::MapInputs()
 {
-	DKLog("DKSDLWindow::MapInputs()", DKDEBUG);
+	DKDebug();
 	//sdlKeyCode translates (SDL_Event->key.keysym.sym) to keycode
 	sdlKeyCode[27] = 27; //esc
 	sdlKeyCode[1073741882] = 112; //f1

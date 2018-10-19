@@ -7,6 +7,7 @@
 ///////////////////////
 void DKSDLVideo::Init()
 {
+	DKDebug();
 	stream = NULL;
 	streamObj = NULL;
 	DKSDLWindow::AddEventFunc(&DKSDLVideo::handle, this);
@@ -16,11 +17,12 @@ void DKSDLVideo::Init()
 //////////////////////
 void DKSDLVideo::End()
 {
-	if (stream)
+	DKDebug();
+	if(stream)
 		WV_closeStream(stream);
 
 	/* close the streaming object */
-	if (streamObj)
+	if(streamObj)
 		WV_freeStreamRendererObj(streamObj);
 
 	/* close the waave engine */
@@ -32,13 +34,14 @@ void DKSDLVideo::End()
 /////////////////////////////////////////
 bool DKSDLVideo::Handle(SDL_Event *event)
 {
-	if (event->type == WV_REFRESH_EVENT){
+	DKDebug(event);
+	if(event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
 		return true;
 	}
 	else if (event->type == WV_EOF_EVENT){
 		//closePlayer();
-		DKLog("DKSDLVideo::handle(): end of file\n", DKDEBUG);
+		DKLog("DKSDLVideo::handle(): end of file\n");
 		if (stream){
 			WV_closeStream(stream);
 		}
@@ -55,6 +58,7 @@ bool DKSDLVideo::Handle(SDL_Event *event)
 //////////////////////////////////////////////////////
 bool DKSDLVideo::Play(const void* input, void* output)
 {
+	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)) { return false; }
 
