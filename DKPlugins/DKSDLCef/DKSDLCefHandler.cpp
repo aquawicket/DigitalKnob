@@ -479,7 +479,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 #endif
 	//This area is only for multi-process messages, return if using single-process
 	if(DKV8::singleprocess){
-		DKLog("DKSDLCefHandler::OnProcessMessageReceived("+toString(message->GetName())+"): message system disabled in single-process mode\n");
+		DKLog("DKSDLCefHandler::OnProcessMessageReceived("+message->GetName().ToString()+"): message system disabled in single-process mode\n");
 		return false;
 	}
 
