@@ -151,7 +151,7 @@ bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
 //////////////////////////////////////////////////////////////
 bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 {
-	DKDebug(xpath, nodes);	
+	DKDebug(xpath, "DKXmlNodes&");	
 	nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
@@ -163,7 +163,7 @@ bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 ////////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 {
-	DKDebug(xpath, arry);	
+	DKDebug(xpath, "DKStringArray&");	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
@@ -180,7 +180,7 @@ bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 //////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttributeValues(const DKString& xpath, const DKString& attrib, DKStringArray& arry)
 {
-	DKDebug(xpath, attrib, arry);	
+	DKDebug(xpath, attrib, "DKStringArray&");	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
 		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
