@@ -6,7 +6,7 @@
 ///////////////////////
 bool DKWindowV8::Init()
 {
-	DKLog("DKWindowV8::Init()\n", DKDEBUG);
+	DKDebug();
 
 	DKV8::AttachFunction("DKWindow_TestInt", DKWindowV8::TestInt);
 	DKV8::AttachFunction("DKWindow_TestString", DKWindowV8::TestString);
@@ -43,7 +43,7 @@ bool DKWindowV8::Init()
 //////////////////////
 bool DKWindowV8::End()
 {
-	DKLog("DKWindowV8::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }
 
@@ -51,8 +51,7 @@ bool DKWindowV8::End()
 ////////////////////////////////////////////////////////
 bool DKWindowV8::TestInt(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestInt()\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	int data = args->GetInt(0);
 	int result = data;
 	if(!retval->SetInt(0, result)){ return false; }
@@ -62,8 +61,7 @@ bool DKWindowV8::TestInt(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKWindowV8::TestString(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestString()\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	DKString data = args->GetString(0);
 	DKString result = data;
 	if(!retval->SetString(0, result)){ return false; }
@@ -73,8 +71,7 @@ bool DKWindowV8::TestString(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::TestReturnInt(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestReturnInt(CefArgs,CefReturn)\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	int result = 12345;
 	if(!retval->SetInt(0, result)){ return false; }
 	return true;
@@ -83,8 +80,7 @@ bool DKWindowV8::TestReturnInt(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////////
 bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestReturnString(CefArgs,CefReturn)\n", DKDEBUG);
-
+	DKDebug(args, retval);
 	DKString result = "test string";
 	if(!retval->SetString(0, result)){ return false; }
 	return true;
@@ -93,6 +89,7 @@ bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////
 bool DKWindowV8::Create(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Create()){ return false; }
 	return true;
 }
@@ -100,6 +97,7 @@ bool DKWindowV8::Create(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKWindowV8::Fullscreen(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Fullscreen()){ return false; }
 	return true;
 }
@@ -107,6 +105,7 @@ bool DKWindowV8::Fullscreen(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int height;
 	if(!DKWindow::GetHeight(height)){ return false; }
 	if(!retval->SetInt(0, height)){	return false; }
@@ -116,6 +115,7 @@ bool DKWindowV8::GetHeight(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::GetMouseX(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int mouseX;
 	if(!DKWindow::GetMouseX(mouseX)){ return false; }
 	if(!retval->SetInt(0, mouseX)){ return false; }
@@ -125,6 +125,7 @@ bool DKWindowV8::GetMouseX(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::GetMouseY(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int mouseY;
 	if(!DKWindow::GetMouseY(mouseY)){ return false; }
 	if(!retval->SetInt(0, mouseY)){ return false; }
@@ -134,6 +135,7 @@ bool DKWindowV8::GetMouseY(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	float ratio;
 	if(!DKWindow::GetPixelRatio(ratio)){ return false; }
 	if(!retval->SetDouble(0, ratio)){ return false; }
@@ -143,6 +145,7 @@ bool DKWindowV8::GetPixelRatio(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int width;
 	if(!DKWindow::GetWidth(width)){	return false; }
 	if(!retval->SetInt(0, width)){ return false; }
@@ -152,6 +155,7 @@ bool DKWindowV8::GetWidth(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::GetX(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int x;
 	if(!DKWindow::GetX(x)){ return false; }
 	if(!retval->SetInt(0, x)){ return false; }
@@ -161,6 +165,7 @@ bool DKWindowV8::GetX(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::GetY(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int y;
 	if(!DKWindow::GetY(y)){ return false; }
 	if(!retval->SetInt(0, y)){ return false; }
@@ -170,6 +175,7 @@ bool DKWindowV8::GetY(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::Hide(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Hide()){ return false; }
 	return true;
 }
@@ -177,6 +183,7 @@ bool DKWindowV8::Hide(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKWindowV8::IsFullscreen(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	bool fullscreen;
 	if(!DKWindow::IsFullscreen(fullscreen)){ return false; }
 	if(!retval->SetInt(0, fullscreen)){ return false; }
@@ -186,6 +193,7 @@ bool DKWindowV8::IsFullscreen(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::IsVisible(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	bool visible;
 	if(!DKWindow::IsVisible(visible)){ return false; } 
 	if(!retval->SetInt(0, visible)){ return false; }
@@ -195,6 +203,7 @@ bool DKWindowV8::IsVisible(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::Maximize(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Maximize()){ return false; }
 	return true;
 }
@@ -202,6 +211,7 @@ bool DKWindowV8::Maximize(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKWindowV8::MessageBox(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString msg = args->GetString(0);
 	if(!DKWindow::MessageBox(msg)){ return false; }
 	return true;
@@ -210,6 +220,7 @@ bool DKWindowV8::MessageBox(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::Minimize(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Minimize()){ return false; }
 	return true;
 }
@@ -217,6 +228,7 @@ bool DKWindowV8::Minimize(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKWindowV8::Restore(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Restore()){ return false; }
 	return true;
 }
@@ -224,6 +236,7 @@ bool DKWindowV8::Restore(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKWindowV8::SetHeight(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int height = args->GetInt(0);
 	if(!DKWindow::SetHeight(height)){ return false; }
 	return true;
@@ -232,6 +245,7 @@ bool DKWindowV8::SetHeight(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString file = args->GetString(0);
 	if(!DKWindow::SetIcon(file)){ return false; }
 	return true;
@@ -240,6 +254,7 @@ bool DKWindowV8::SetIcon(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString string = args->GetString(0);
 	if(!DKWindow::SetTitle(string)){ return false; }
 	return true;
@@ -248,6 +263,7 @@ bool DKWindowV8::SetTitle(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::SetWidth(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int width = args->GetInt(0);
 	if(!DKWindow::SetWidth(width)){ return false; }
 	return true;
@@ -256,6 +272,7 @@ bool DKWindowV8::SetWidth(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::SetX(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int x = args->GetInt(0);
 	if(!DKWindow::SetX(x)){ return false; }
 	return true;
@@ -264,6 +281,7 @@ bool DKWindowV8::SetX(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::SetY(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int y = args->GetInt(0);
 	if(!DKWindow::SetY(y)){ return false; }
 	return true;
@@ -272,6 +290,7 @@ bool DKWindowV8::SetY(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKWindowV8::Show(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Show()){ return false; }
 	return true;
 }
@@ -279,6 +298,7 @@ bool DKWindowV8::Show(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKWindowV8::Windowed(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKWindow::Windowed()){ return false; }
 	return true;
 }

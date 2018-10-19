@@ -8,6 +8,7 @@
 ////////////////////////////
 bool DKWidgetMySqlJS::Init()
 {
+	DKDebug();
 	DKDuktape::AttachFunction("DKWidgetMySql_DeleteRecord", DKWidgetMySqlJS::DeleteRecord);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetFirstRecordNum", DKWidgetMySqlJS::GetFirstRecordNum);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetLastRecordNum", DKWidgetMySqlJS::GetLastRecordNum);
@@ -23,8 +24,9 @@ bool DKWidgetMySqlJS::Init()
 ///////////////////////////////////////////
 int DKWidgetMySqlJS::Prep(duk_context* ctx)
 {
+	DKDebug();
 	DKString id = duk_require_string(ctx, 0);
-	DKLog("DKWidgetMySql_Prep "+ id +"\n", DKDEBUG);
+	DKLog("DKWidgetMySql_Prep "+ id +"\n");
 
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
@@ -46,15 +48,13 @@ int DKWidgetMySqlJS::Prep(duk_context* ctx)
 			PrepField(arry[0], arry[1], arry[2]);
 		}
 	}
-
 	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, const DKString& field)
 {
-	DKLog("DKWidgetMySql_PrepField("+database+", "+table+", "+field+")\n", DKDEBUG);
-	
+	DKDebug(database, table, field);
 	// CHECK DATABASE //
 	/*
 	DKString query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '"+database+"'";
@@ -97,8 +97,8 @@ int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, 
 ////////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetFirstRecordNum(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -131,8 +131,8 @@ int DKWidgetMySqlJS::GetFirstRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetLastRecordNum(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -165,9 +165,9 @@ int DKWidgetMySqlJS::GetLastRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetPrevRecordNum(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -200,9 +200,9 @@ int DKWidgetMySqlJS::GetPrevRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetNextRecordNum(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -228,19 +228,17 @@ int DKWidgetMySqlJS::GetNextRecordNum(duk_context* ctx)
 			}
 		}
 	}
-
 	return 0;
 }
 
 /////////////////////////////////////////////////
 int DKWidgetMySqlJS::LoadRecord(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
-
 	DKStringArray fields;
 	DKString table;
 	for(unsigned int i=0; i<elements.size(); ++i){
@@ -286,9 +284,9 @@ int DKWidgetMySqlJS::LoadRecord(duk_context* ctx)
 /////////////////////////////////////////////////
 int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -319,16 +317,15 @@ int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 			}
 		}
 	}
-
 	return 1;
 }
 
 ///////////////////////////////////////////////////
 int DKWidgetMySqlJS::DeleteRecord(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
@@ -357,9 +354,9 @@ int DKWidgetMySqlJS::DeleteRecord(duk_context* ctx)
 /////////////////////////////////////////////
 int DKWidgetMySqlJS::Search(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
-
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
 
