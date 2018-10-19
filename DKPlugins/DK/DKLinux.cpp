@@ -217,7 +217,7 @@ bool DKLinux::SetClipboard(const DKString& text)
 ///////////////////////////////////////
 bool DKLinux::SetVolume(double nVolume)
 {
-	DKDebug(volume);
+	DKDebug(nVolume);
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -241,10 +241,10 @@ bool DKLinux::SetVolume(double nVolume)
 	return true;
 }
 
-//////////////////////////////////////
-bool DKLinux::GetVolume(float& volume)
+/////////////////////////////////////
+bool DKLinux::GetVolume(int& percent)
 {
-	DKDebug(volume);
+	DKDebug(percent);
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -265,9 +265,9 @@ bool DKLinux::GetVolume(float& volume)
 	DKLog("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n");
 	long int vol;
 	snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_FRONT_LEFT, &vol);
-	volume = vol;
+	percent = vol * 100;
 
-	DKLog("DKLinux::GetVolume(): returned "+toString(volume)+"\n");
+	DKLog("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
 	snd_mixer_close(handle);
 	return true;
 }

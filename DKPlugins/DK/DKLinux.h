@@ -20,7 +20,7 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
-	static bool GetVolume(float& volume);
+	static bool GetVolume(int& percent);
 	static bool KeyIsDown(int& key);
 	static bool LeftPress();
 	static bool LeftRelease();

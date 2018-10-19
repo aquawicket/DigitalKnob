@@ -498,7 +498,7 @@ bool DKUtil::GetVolume(int& percent)
 	return DKWindows::GetVolume(percent);
 #endif
 #ifdef LINUX
-	return DKLinux::GetVolume(volume);
+	return DKLinux::GetVolume(percent);
 #endif
 	DKLog("DKUtil::GetVolume() not implemented on this OS \n", DKWARN);
 	return false;
