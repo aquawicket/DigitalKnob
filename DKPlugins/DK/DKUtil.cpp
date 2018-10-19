@@ -854,7 +854,7 @@ bool DKUtil::SetBrightness(const int& percent)
 ///////////////////////
 bool DKUtil::SendTick()
 {
-	DKDebug();
+	//DKDebug();
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		DKEvent::SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
@@ -966,7 +966,7 @@ bool DKUtil::SetVolume(int& percent)
 ///////////////////////////////////////////
 bool DKUtil::Sleep(const int& milliseconds)
 {
-	DKDebug(milliseconds);
+	//DKDebug(milliseconds);
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
 #else
