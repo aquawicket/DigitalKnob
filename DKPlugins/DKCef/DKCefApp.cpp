@@ -211,7 +211,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			}
 		}
 		text += ")";
-		DKLog(text+"\n");
+		DKLog(text+"\n", DKDEBUG);
 
 		CefRefPtr<CefListValue> rval = CefListValue::Create();
 		if(!DKV8::functions[name](args, rval)){
@@ -222,19 +222,19 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 		//Transfer retun value into &retval
 		if(rval->GetType(0) == VTYPE_STRING){
 			retval = CefV8Value::CreateString(rval->GetString(0));
-			DKLog("retval = "+DKString(retval->GetStringValue())+"\n");
+			//DKLog("retval = "+DKString(retval->GetStringValue())+"\n");
 		}
 		else if(rval->GetType(0) == VTYPE_INT){
 			retval = CefV8Value::CreateInt(rval->GetInt(0));
-			DKLog("retval = "+toString(retval->GetIntValue())+"\n");
+			//DKLog("retval = "+toString(retval->GetIntValue())+"\n");
 		}
 		else if(rval->GetType(0) == VTYPE_BOOL){
 			retval = CefV8Value::CreateBool(rval->GetBool(0));
-			DKLog("retval = "+toString(retval->GetBoolValue())+"\n");
+			//DKLog("retval = "+toString(retval->GetBoolValue())+"\n");
 		}
 		else{
 			retval = CefV8Value::CreateNull();
-			DKLog("retval = NULL\n");
+			//DKLog("retval = NULL\n");
 		}
 	}
 
