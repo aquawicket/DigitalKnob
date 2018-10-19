@@ -5,6 +5,7 @@
 ///////////////////
 bool DKMidi::Init()
 {
+	DKDebug();
 	DKClass::DKCreate("DKMidiJS");
 	DKClass::DKCreate("DKMidiV8");
 	
@@ -24,14 +25,14 @@ bool DKMidi::Init()
 //////////////////
 bool DKMidi::End()
 {
+	DKDebug();
 	return true;
 }
-
-
 
 /////////////////////////////////////////////
 bool DKMidi::GetInputs(DKStringArray& inputs)
 {
+	DKDebug("DKStringArray&");
 	unsigned int nPorts = midiin->getPortCount();
 	if(nPorts == 0){
 		DKLog("No Input ports available!\n",DKERROR);
@@ -49,6 +50,7 @@ bool DKMidi::GetInputs(DKStringArray& inputs)
 ///////////////////////////////////////////////
 bool DKMidi::GetOutputs(DKStringArray& outputs)
 {
+	DKDebug("DKStringArray&");
 	unsigned int nPorts = midiout->getPortCount();
 	if(nPorts == 0){
 		DKLog("No Output ports available! \n", DKERROR);
@@ -66,6 +68,7 @@ bool DKMidi::GetOutputs(DKStringArray& outputs)
 //////////////////////////
 bool DKMidi::PrintInputs()
 {
+	DKDebug();
 	unsigned int nPorts = midiin->getPortCount();
 	if(nPorts == 0){
 		DKLog("No Input ports available!\n",DKERROR);
@@ -83,6 +86,7 @@ bool DKMidi::PrintInputs()
 ///////////////////////////
 bool DKMidi::PrintOutputs()
 {
+	DKDebug();
 	unsigned int nPorts = midiout->getPortCount();
 	if(nPorts == 0){
 		DKLog("No Output ports available!\n",DKERROR);
@@ -100,8 +104,7 @@ bool DKMidi::PrintOutputs()
 //////////////////////////////////////////////
 bool DKMidi::ToggleInput(const DKString& name)
 {
-	DKLog("DKMidi::ToggleInput("+name+")\n", DKDEBUG);
-	
+	DKDebug(name);
 	for(unsigned int i=0; i<midiin->getPortCount(); ++i){
 		if(same(name,midiin->getPortName(i))){
 			midiin->openPort(i);
@@ -115,8 +118,7 @@ bool DKMidi::ToggleInput(const DKString& name)
 ///////////////////////////////////////////////
 bool DKMidi::ToggleOutput(const DKString& name)
 {
-	DKLog("DKMidi::ToggleOutput("+name+")\n", DKDEBUG);
-	
+	DKDebug(name);
 	for(unsigned int i=0; i<midiout->getPortCount(); ++i){
 		if(same(name,midiout->getPortName(i))){
 			midiout->openPort(i);
@@ -129,8 +131,9 @@ bool DKMidi::ToggleOutput(const DKString& name)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-void DKMidi::midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData)
+void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message, void *userData)
 {
+	//DKDebug(deltatime, "std::vector<unsigned char>*", userData);
 	/*
 	unsigned int nBytes = message->size();
 	for ( unsigned int i=0; i<nBytes; i++ )

@@ -5,8 +5,7 @@
 ////////////////////////
 bool DKHandlesV8::Init()
 {
-	DKLog("DKHandlesV8::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKV8::AttachFunction("DKHandles_Click", DKHandlesV8::Click);
 	DKV8::AttachFunction("DKHandles_CurrentHandle", DKHandlesV8::CurrentHandle);
 	DKV8::AttachFunction("DKHandles_GetBottom", DKHandlesV8::GetBottom);
@@ -38,15 +37,14 @@ bool DKHandlesV8::Init()
 ///////////////////////
 bool DKHandlesV8::End()
 {
-	DKLog("DKHandlesV8::End()\n", DKDEBUG);
+	DKDebug();
 	return true;
 }
-
-
 
 ///////////////////////////////////////////////////////
 bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	if(!DKHandles::Click(toHWND(handle))){
 		retval->SetBool(0, false);
@@ -59,6 +57,7 @@ bool DKHandlesV8::Click(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKHandles::currentHandle){
 		retval->SetBool(0, false);
 		return false;
@@ -70,6 +69,7 @@ bool DKHandlesV8::CurrentHandle(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::GetBottom(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int bottom;
 	if(!DKHandles::GetBottom(toHWND(handle), bottom)){
@@ -83,6 +83,7 @@ bool DKHandlesV8::GetBottom(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	DKString clas;
 	if(!DKHandles::GetClass(toHWND(handle), clas)){
@@ -96,6 +97,7 @@ bool DKHandlesV8::GetClass(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetIndex(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int index;
 	if(!DKHandles::GetIndex(toHWND(handle), index)){
@@ -109,6 +111,7 @@ bool DKHandlesV8::GetIndex(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKHandlesV8::GetLeft(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int left;
 	if(!DKHandles::GetLeft(toHWND(handle), left)){
@@ -122,6 +125,7 @@ bool DKHandlesV8::GetLeft(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	DKString parent;
 	if(!DKHandles::GetParent(toHWND(handle), parent)){
@@ -135,6 +139,7 @@ bool DKHandlesV8::GetParent(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetRight(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int right;
 	if(!DKHandles::GetRight(toHWND(handle), right)){
@@ -148,6 +153,7 @@ bool DKHandlesV8::GetRight(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int top;
 	if(!DKHandles::GetTop(toHWND(handle), top)){
@@ -161,6 +167,7 @@ bool DKHandlesV8::GetTop(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	DKString value;
 	if(!DKHandles::GetString(toHWND(handle), value)){
@@ -174,6 +181,7 @@ bool DKHandlesV8::GetValue(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::GetWindow(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	HWND window;
 	if(!DKHandles::GetWindow(toHWND(handle), window)){
@@ -187,6 +195,7 @@ bool DKHandlesV8::GetWindow(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////////
 bool DKHandlesV8::GetWindowIndex(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	int index;
 	if(!DKHandles::GetWindowIndex(toHWND(handle), index)){
@@ -200,6 +209,7 @@ bool DKHandlesV8::GetWindowIndex(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKStringArray windows;
 	if(!DKHandles::GetWindows(windows)){
 		retval->SetBool(0, false);
@@ -213,6 +223,7 @@ bool DKHandlesV8::GetWindows(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	HWND next;
 	if(!DKHandles::NextHandle(toHWND(handle), next)){
@@ -226,6 +237,7 @@ bool DKHandlesV8::NextHandle(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	HWND prev;
 	if(!DKHandles::PrevHandle(toHWND(handle), prev)){
@@ -240,6 +252,7 @@ bool DKHandlesV8::PrevHandle(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString window = args->GetString(0);
 	DKString handle = args->GetString(1);
 	DKString data = args->GetString(2);
@@ -254,6 +267,7 @@ bool DKHandlesV8::SendHook(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int timeout = 1;
 	if(args->GetType(0) == VTYPE_INT){ //By number
 		if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
@@ -283,6 +297,7 @@ bool DKHandlesV8::SetHandle(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	DKString value = args->GetString(1);
 	if(!DKHandles::SetString(toHWND(handle), value)){
@@ -296,6 +311,7 @@ bool DKHandlesV8::SetValue(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////////
 bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	int timeout = 1;
 	HWND hwnd;
 	if(args->GetType(1) == VTYPE_INT){ timeout = args->GetInt(1); }
@@ -314,6 +330,7 @@ bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////
 bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString handle = args->GetString(0);
 	bool flag = args->GetBool(1);
 	if(!DKHandles::ShowWindow(toHWND(handle), flag)){
@@ -327,6 +344,7 @@ bool DKHandlesV8::ShowWindow(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKHandlesV8::StartSearch(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(!DKHandles::StartSearch()){
 		retval->SetBool(0, false);
 		return false;
@@ -338,6 +356,7 @@ bool DKHandlesV8::StartSearch(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////////
 bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKHandles::ToggleHighlight();
 	return true;
 }
@@ -345,6 +364,7 @@ bool DKHandlesV8::ToggleHighlight(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::WaitForHandle(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	if(args->GetType(0) == VTYPE_INT){ //By handle number
 		if(!DKHandles::WaitForHandle(args->GetInt(0), args->GetInt(1))){
 			retval->SetBool(0, false);
@@ -370,6 +390,7 @@ bool DKHandlesV8::WaitForHandle(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString window = args->GetString(0);
 	int timeout = args->GetInt(1);
 	if(!DKHandles::WaitForWindow(window, timeout)){
@@ -383,6 +404,7 @@ bool DKHandlesV8::WaitForWindow(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKHandlesV8::WindowExists(CefArgs args, CefReturn retval)
 {
+	DKDebug(args, retval);
 	DKString window = args->GetString(0);
 	if(!DKHandles::WindowExists(window)){
 		retval->SetBool(0, false);

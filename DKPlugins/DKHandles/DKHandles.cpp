@@ -212,7 +212,7 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 /////////////////////////////////////////////////
 bool DKHandles::GetRight(HWND handle, int& right)
 {
-	DKDebug(handle right);
+	DKDebug(handle, right);
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	right = rect.right;
