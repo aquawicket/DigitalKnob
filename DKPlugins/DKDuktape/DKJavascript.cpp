@@ -6,7 +6,7 @@
 /////////////////////////
 bool DKJavascript::Init()
 {
-	DKLog("DKJavascript::Init()\n", DKDEBUG);
+	DKDebug();
 	//data = ("DKJavascript", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
@@ -26,7 +26,7 @@ bool DKJavascript::Init()
 ////////////////////////
 bool DKJavascript::End()
 {
-	DKLog("DKJavascript::End()\n", DKDEBUG);
+	DKDebug();
     DKString file = DKFile::local_assets+data[1];
 	DKDuktape::CallEnd(file);
 	return true;

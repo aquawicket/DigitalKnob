@@ -496,7 +496,7 @@ bool DKCurl::HttpFileSize(const DKString& url, long& size)
 ////////////////////////////////////////////////////////////////
 bool DKCurl::HttpToString(const DKString& url, DKString& output)
 {
-	DKLog("DKCurl::HttpToString("+url+")\n", DKDEBUG);
+	DKDebug(url, output);
 	DKString _url = url;
 	DKLog("DKCurl::Http -> "+ _url +"\n");
 	replace(_url," ","%20");
@@ -535,15 +535,19 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream){
+//////////////////////////////////////////////////////////////////////////////
+size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream)
+{
+	//DKDebug(ptr, size, nmemb, stream);
     size_t written;
     written = fwrite(ptr, size, nmemb, stream);
     return written;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
-int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
+/////////////////////////////////////////////////////////////////////////////////////
+int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer)
+{
+	//DKDebug(data, size, nmemb, buffer);
     int result = 0;
     if (buffer != NULL) {
         buffer->append(data, size * nmemb);
@@ -555,6 +559,7 @@ int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *bu
 ////////////////////////////////////////////////////////////////////////////////
 size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 {
+	//DKDebug(ptr, size, nmemb, stream);
     curl_off_t nread;
     size_t retcode = fread(ptr, size, nmemb, (FILE *) stream);
     nread = (curl_off_t) retcode;
@@ -567,6 +572,7 @@ size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloaded, 
                     double TotalToUpload, double NowUploaded)
 {
+	//DKDebug(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
     // how wide you want the progress meter to be
     int totaldotz=40;
     double fractiondownloaded = NowDownloaded / TotalToDownload;

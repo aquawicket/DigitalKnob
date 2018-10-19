@@ -13,7 +13,7 @@
 /////////////////
 bool DKJS::Init()
 {
-	DKLog("DKJS::Init()\n", DKDEBUG);
+	DKDebug();
 	DKClass::DKCreate("DKFileJS");
 	DKClass::DKCreate("DKAssetsJS");
 	
@@ -192,8 +192,8 @@ int DKJS::_DKCreate(duk_context* ctx)
 
 	//Look for a callback function, and call it if one exists. FIXME
 	if(callback_found){
-		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n", DKDEBUG); }
-		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n", DKDEBUG); }
+		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n"); }
+		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n"); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
 			DKLog("DKJS::_DKCreate("+data+"): JsFunc call failed \n", DKERROR);
 			DKLog("Error: "+toString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
@@ -674,8 +674,8 @@ int DKJS::GetUsername(duk_context* ctx)
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
+	DKDebug(ctx);
 	DKString evt = duk_require_string(ctx, 0);
-	//DKLog("DKJS::GetValue("+evt+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
 	if(arry.size() < 3){ 
