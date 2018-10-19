@@ -504,7 +504,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 			str += toString(args->GetDouble(i));
 		}
 		if(args->GetType(i) == VTYPE_STRING){
-			str += toString(args->GetString(i));
+			str += args->GetString(i).ToString();
 		}
 		if(args->GetType(i) == VTYPE_BINARY){
 			str += "binary";
