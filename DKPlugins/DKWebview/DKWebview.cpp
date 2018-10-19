@@ -5,8 +5,7 @@
 //////////////////////
 bool DKWebview::Init()
 {
-	DKLog("DKWebview::Init()\n", DKDEBUG);
-	
+	DKDebug();
 	DKClass::RegisterFunc("DKWebview_PrintFunctions", &DKWebview::PrintFunctions, this);
 	DKClass::RegisterFunc("DKWebview_ReceiveValue", &DKWebview::ReceiveValue, this);
 	DKClass::RegisterFunc("DKWebview_SendValue", &DKWebview::SendValue, this);
@@ -22,6 +21,7 @@ bool DKWebview::Init()
 /////////////////////
 bool DKWebview::End()
 {
+	DKDebug();
 	return true;
 }
 
@@ -29,7 +29,7 @@ bool DKWebview::End()
 ///////////////////////////////////////////////////
 bool DKWebview::onCreate(void* input, void* output)
 {
-	DKLog("DKWebview::onCreate()\n", DKDEBUG);
+	DKDebug(input, output);
 #ifdef ANDROID
 	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
@@ -42,11 +42,11 @@ bool DKWebview::onCreate(void* input, void* output)
 ///////////////////////////////////////////////
 bool DKWebview::Test(void* input, void* output)
 {
-	DKLog("DKWebview::Test()\n", DKDEBUG);
+	DKDebug(input, output);
 #ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKWebview::Test("+DKString(_data)+")\n", DKDEBUG);
+	DKLog("DKWebview::Test("+DKString(_data)+")\n");
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
 	DKString rval = arry[0];
@@ -58,10 +58,10 @@ bool DKWebview::Test(void* input, void* output)
 ////////////////////////////////////////////////////
 bool DKWebview::SendValue(void* input, void* output)
 {
-	DKLog("DKWebview::SenndValue()\n", DKDEBUG);
+	DKDebug(input, output);
 #ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
-	DKLog("DKWebview::SendValue()\n", DKDEBUG);
+	DKLog("DKWebview::SendValue()\n");
 	DKString rval = "Test";
 	*(DKString*)output = rval;
 #endif
@@ -71,14 +71,14 @@ bool DKWebview::SendValue(void* input, void* output)
 ///////////////////////////////////////////////////////
 bool DKWebview::ReceiveValue(void* input, void* output)
 {
-	DKLog("DKWebview::ReceiveValue()\n", DKDEBUG);
+	DKDebug(input, output);
 #ifdef ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
-	DKLog("DKWebview::ReceiveValue("+DKString(_data)+")\n", DKDEBUG);
+	DKLog("DKWebview::ReceiveValue("+DKString(_data)+")\n");
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
-	DKLog("DKWebview::ReceiveValue("+DKString(_data)+"): value = "+arry[1]+"\n", DKDEBUG);
+	DKLog("DKWebview::ReceiveValue("+DKString(_data)+"): value = "+arry[1]+"\n");
 #endif
 	return true;
 }
@@ -86,6 +86,7 @@ bool DKWebview::ReceiveValue(void* input, void* output)
 /////////////////////////////////////////////////////////
 bool DKWebview::PrintFunctions(void* input, void* output)
 {
+	DKDebug(input, output);
 	DKLog("\n**** Webview Functions ****\n");
 	DKLog("TODO: DKWebview.cpp\n");
 	return true;

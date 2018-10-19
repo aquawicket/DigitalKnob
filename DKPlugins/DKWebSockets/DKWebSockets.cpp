@@ -213,7 +213,7 @@ void DKWebSockets::Loop()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	DKDebug(we, message, length, opCode);
+	DKDebug(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
@@ -222,7 +222,7 @@ bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *mess
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode)
 {
-	DKDebug(we, message, length, opCode);
+	DKDebug(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromServer", message_);
 	return true;
