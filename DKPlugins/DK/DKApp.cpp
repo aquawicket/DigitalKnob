@@ -14,6 +14,7 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 #ifndef ANDROID
 int main(int argc, char **argv)
 {
+	DKDebug(argc, argv);
 	DKUtil::SetMainThreadNow();
 	DKApp::argc = argc;
 	DKApp::argv = argv;
@@ -82,7 +83,7 @@ int main(int argc, char **argv)
 //////////////
 DKApp::DKApp()
 {
-	DKLog("DKApp::DKApp()\n", DKDEBUG);
+	DKDebug();
 
 #ifdef ANDROID
 	DKUtil::mainThreadId = (int)pthread_self();
@@ -92,13 +93,14 @@ DKApp::DKApp()
 //////////////////
 void DKApp::Init()
 {
-	DKLog("DKApp::Init()\n", DKDEBUG);
+	DKDebug();
 	active = true;
 }
 
 //////////////////
 void DKApp::Loop()
 {
+	DKDebug();
 	DKLog("DKApp::Loop()\n");
 	while(active){
 		DoFrame();
@@ -108,6 +110,7 @@ void DKApp::Loop()
 /////////////////////
 void DKApp::DoFrame()
 {
+	//DKDebug(); //DON'T DO THIS
 	if(paused){ 
 		DKUtil::Sleep(100);
 		return;
@@ -127,7 +130,8 @@ void DKApp::DoFrame()
 //////////////////
 void DKApp::Exit()
 {
-	DKLog("DKApp::Exit(): \n");
+	DKDebug();
+	DKLog("DKApp::Exit():\n");
 	active = false;
 	DKUtil::CallExit();
 	exit(0);

@@ -74,7 +74,7 @@ void DEBUG_VARS(const char* file, int line, const char* func, Args&&... args)
 	out << ")\n";
 	std::string text = out.str();
 	replace(text, ", )", ")");
-	Log(file, line, "", text);
+	Log(file, line, "", text, DKDEBUG);
 }
 
 #define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
