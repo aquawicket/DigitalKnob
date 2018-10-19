@@ -31,7 +31,7 @@ bool DKFile::ChDir(const DKString& dir)
 	DKDebug(dir);
 	if(!PathExists(dir)){ return false; }
 	boost::filesystem::current_path(dir);
-	DKLog("DKFile::ChDir("+dir+"): Path set to "+dir+"\n");
+	DKLog("DKFile::ChDir("+dir+"): Path set to "+dir+"\n", DKDEBUG);
 	return true;
 }
 
