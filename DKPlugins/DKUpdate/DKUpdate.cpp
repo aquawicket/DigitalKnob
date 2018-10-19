@@ -28,8 +28,7 @@ DKString DKUpdate::url;
 /////////////////////
 bool DKUpdate::Init()
 {
-	DKLog("DKUpdate::Init()\n", DKDEBUG);
-	
+	DKDebug();	
 	DKClass::DKCreate("DKUpdateJS");
 	DKClass::DKCreate("DKUpdateV8");
 
@@ -91,14 +90,14 @@ bool DKUpdate::Init()
 ////////////////////
 bool DKUpdate::End()
 {
+	DKDebug();	
 	return true;
 }
 
 ///////////////////////////////
 bool DKUpdate::CheckForUpdate()
 {
-	DKLog("DKUpdate::CheckForUpdate()\n", DKDEBUG);
-
+	DKDebug();
 	DKCurl::Instance("DKCurlUpdate");
 	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
 		DKLog(url+": NOT FOUND \n", DKERROR);
@@ -143,6 +142,7 @@ bool DKUpdate::CheckForUpdate()
 /////////////////////////////
 bool DKUpdate::CreateUpdate()
 {
+	DKDebug();	
 	//TODO: create update and upload to ftp
 	return false;
 }
@@ -150,7 +150,7 @@ bool DKUpdate::CreateUpdate()
 /////////////////////////
 bool DKUpdate::DoUpdate()
 {
-	DKLog("DKUpdate::DoUpdate("+url+")\n", DKDEBUG);
+	DKDebug();
 	DKString file;
 	DKFile::GetExeName(file);
 	DKString apppath;
@@ -208,6 +208,7 @@ bool DKUpdate::DoUpdate()
 ////////////////////////////////////////////////
 bool DKUpdate::UpdatePlugin(const DKString& url)
 {
+	DKDebug(url);
 	//TODO - recursive plugin file downloading
 	
 	//ok, here we are going to copy the url to the assets folder
@@ -275,6 +276,5 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 			return false;
 		}
 	}
-
 	return true;
 }

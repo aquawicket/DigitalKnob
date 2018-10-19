@@ -78,7 +78,7 @@ void DKSFMLWindow::Process()
 ///////////////////////////////////////
 bool DKSFMLWindow::handle(sf::Event& e)
 {
-	DKDebug(e);
+	DKDebug("sf::Event&");
 	if(e.type == sf::Event::Closed){
 		DKApp::Exit();
 		return false;
