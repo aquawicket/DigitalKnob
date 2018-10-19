@@ -155,7 +155,7 @@ void DKTray::setCallback(DKTrayCallback callback)
 //////////////////////////////////////////////////////////////////////////////
 LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	DKDebug(message. wParam, lParam);
+	DKDebug(message, wParam, lParam);
 	if(message == WM_ICON_NOTIFY){
 		//DKLog("WM_ICON_NOTIFY: ");
 		//DKLog(toString(LOWORD(wParam))+" : ");
