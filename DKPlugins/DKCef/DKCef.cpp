@@ -35,7 +35,7 @@ bool DKCef::Init()
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
 	//DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
-	//DKLog("Cef version "+version_string+"\n", DKINFO);
+	//DKLog("Cef version "+version_string+"\n");
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
@@ -264,11 +264,11 @@ bool DKCef::Init()
 	int build_version = cef_version_info(4);
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
-	DKLog("Cef Version: "+version_string+"\n", DKINFO);
+	DKLog("Cef Version: "+version_string+"\n");
 
 	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
 	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
-	DKLog("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n", DKINFO);
+	DKLog("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n");
 
 
 	int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
@@ -317,7 +317,7 @@ bool DKCef::End()
 		DKLog("DKCef::End(): Error: not in the main cef thread\n", DKERROR);
 		return false;
 	}
-	DKLog("DKCef::End(): CefShutdown();\n", DKINFO);
+	DKLog("DKCef::End(): CefShutdown();\n");
 	CefShutdown(); //call on same thread as CefInitialize
 
 #ifdef WIN32
@@ -367,7 +367,7 @@ bool DKCef::CopyImage(const DKString& url)
 	NewBrowser();
 	int num;
 	GetBrowsers(num);
-	DKLog("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n", DKINFO);
+	DKLog("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n");
 	SetUrl(num-1, url);
 
 	//FIXME - we can't copy until the frame is loaded with the image. 
@@ -392,7 +392,7 @@ bool DKCef::Cut()
 bool DKCef::DownloadUrl(const DKString& url)
 {
 	DKLog("DKCef::DownloadUrl("+url+")\n", DKDEBUG);
-	DKLog("Downloading... "+url+"\n", DKINFO);
+	DKLog("Downloading... "+url+"\n");
 	current_browser->GetHost()->StartDownload(url);
 	return false;
 }
@@ -533,7 +533,7 @@ bool DKCef::NewBrowser(const void* input, void* output)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
-	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n", DKINFO);
+	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -605,7 +605,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
-		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n", DKINFO);
+		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n");
 		      return false;
 		}
 		gdk_window_set_title(gdk_window, title.c_str());
@@ -854,7 +854,7 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 	DKLog("DialogCallback::OnFileDialogDismissed("+toString(selected_accept_filter)+")\n", DKDEBUG);
 	DKString files;
 	for(unsigned int i=0; i<file_paths.size(); ++i){
-		DKLog(file_paths[i].ToString()+"\n", DKINFO);
+		DKLog(file_paths[i].ToString()+"\n");
 		files += file_paths[i].ToString();
 		if(i<file_paths.size()-1){
 			files += ";";

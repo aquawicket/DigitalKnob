@@ -70,7 +70,7 @@ bool DKFileV8::CopyFolder(CefArgs args, CefReturn retval)
 	bool overwrite = args->GetBool(2);
 	//bool recursive = args[3]->GetBoolValue();
 	bool recursive = args->GetBool(3);
-	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n", DKINFO);
+	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n");
 	if (!DKFile::CopyFolder(src, dst, overwrite, recursive)){
 		DKLog("DKFile::CopyFolder(): failed. \n", DKERROR);
 		return false;

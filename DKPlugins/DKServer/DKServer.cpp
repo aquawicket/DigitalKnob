@@ -29,7 +29,7 @@ bool DKServer::End()
 ///////////////////////////////////////////////////////////////////////////
 session::session(boost::asio::io_service& io_service) : socket_(io_service)
 {
-	DKLog("Sever session created \n", DKINFO);
+	DKLog("Sever session created \n");
 }
 
 //////////////////////////////
@@ -52,7 +52,7 @@ void session::start()
 void session::handle_read(const boost::system::error_code& error, size_t bytes_transferred)
 { 
 	if(!error){
-	DKLog(DKString(data_,bytes_transferred) + "\n", DKINFO);
+	DKLog(DKString(data_,bytes_transferred) + "\n");
 	DKEvent::SendEvent("GLOBAL", "server", DKString(data_, bytes_transferred));
 
 	socket_.async_read_some(boost::asio::buffer(data_, max_length),

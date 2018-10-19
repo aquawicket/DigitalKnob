@@ -61,7 +61,7 @@ public:
     {
         if (thread) return; // running
 
-		DKLog("Starting new thread...\n", DKINFO);
+		DKLog("Starting new thread...\n");
         thread.reset(new boost::thread(
             boost::bind(&boost::asio::io_service::run, &io_service)
         ));

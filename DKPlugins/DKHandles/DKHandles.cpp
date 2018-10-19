@@ -26,7 +26,7 @@ bool DKHandles::Init()
 
 	rectanglePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
 	if(!rectanglePen){
-		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n", DKINFO);
+		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n");
 		return false;
 	}
 
@@ -65,16 +65,16 @@ bool DKHandles::DoMouseMove()
 	new_hwndFoundWindow = WindowFromPoint(screenpoint);
 	//new_hwndFoundWindow = RealChildWindowFromPoint(hwnd, screenpoint);
 	if(!new_hwndFoundWindow){
-		DKLog("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n", DKINFO);
+		DKLog("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n", DKERROR);
 		return false;
 	}
 
-	//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
-	//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
+	//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
+	//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
 
 	if(hwndFoundWindow != new_hwndFoundWindow){
-		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n", DKINFO);
-		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n", DKINFO);
+		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
+		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
 
 		//Display some information on this found window.
 		//DisplayInfoOnFoundWindow(new_hwndFoundWindow);
@@ -127,7 +127,7 @@ bool DKHandles::DoMouseUp()
 	}
 
 	if(!hwnd){
-		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
+		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKERROR);
 		return false;
 	}
 	::ShowWindow(hwnd, SW_SHOWNORMAL);
@@ -152,7 +152,7 @@ bool DKHandles::GetBottom(HWND handle, int& bottom)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	bottom = rect.bottom;
-	DKLog("DKHandles::GetBottom(): bottom = "+toString(bottom)+"\n", DKINFO);
+	DKLog("DKHandles::GetBottom(): bottom = "+toString(bottom)+"\n");
 	return true;
 }
 
@@ -192,7 +192,7 @@ bool DKHandles::GetLeft(HWND handle, int& left)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	left = rect.left;
-	DKLog("DKHandles::GetLeft(): left = "+toString(left)+"\n", DKINFO);
+	DKLog("DKHandles::GetLeft(): left = "+toString(left)+"\n");
 	return true;
 }
 
@@ -218,7 +218,7 @@ bool DKHandles::GetRight(HWND handle, int& right)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	right = rect.right;
-	DKLog("DKHandles::GetRight(): right = "+toString(right)+"\n", DKINFO);
+	DKLog("DKHandles::GetRight(): right = "+toString(right)+"\n");
 	return true;
 }
 
@@ -240,7 +240,7 @@ bool DKHandles::GetTop(HWND handle, int& top)
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	top = rect.top;
-	DKLog("DKHandles::GetTop(): top = "+toString(top)+"\n", DKINFO);
+	DKLog("DKHandles::GetTop(): top = "+toString(top)+"\n");
 	return true;
 }
 
@@ -374,7 +374,7 @@ bool DKHandles::PopulateHandles()
 
 	EnumChildWindows(::GetDesktopWindow(), EnumChildProc, 0);
 	
-	DKLog("hande size: "+toString(handles.size())+"\n", DKINFO);
+	DKLog("hande size: "+toString(handles.size())+"\n");
 
 	/*
 	//std::map<HWND,HWND>::iterator it;
@@ -385,11 +385,11 @@ bool DKHandles::PopulateHandles()
 		GetWindowText(it->first, title, sizeof(title));
 
 		if(!same("",title)){
-		DKLog("Window: ", DKINFO);
-		DKLog(title, DKINFO);
-		DKLog(" Class: ", DKINFO);
-		DKLog(class_name, DKINFO);
-		DKLog("\n", DKINFO);
+		DKLog("Window: ");
+		DKLog(title);
+		DKLog(" Class: ");
+		DKLog(class_name);
+		DKLog("\n");
 		}
 	}
 	*/
@@ -441,7 +441,7 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 	if(same(arry[0], "GetValue")){
 		DKString value;
 		GetString(value);
-		DKLog("Hook GetValue returned: "+value+"\n", DKINFO);
+		DKLog("Hook GetValue returned: "+value+"\n");
 	}
 	if(same(arry[0], "SetValue")){
 		SetString(arry[1]);
@@ -560,7 +560,7 @@ bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeou
 	}
 	
 	hwnd = currentHandle;
-	DKLog("Selected Window: "+title+"\n", DKINFO);
+	DKLog("Selected Window: "+title+"\n");
 	return true;
 }
 
@@ -587,7 +587,7 @@ bool DKHandles::StartSearch()
 	}
 
 	if(!hwnd){
-		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKINFO);
+		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKERROR);
 		return false;
 	}
 
@@ -751,11 +751,11 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 	GetWindowText(hwnd,title,sizeof(title));
 
 	//if(!same("",title)){
-	//DKLog("Window: ", DKINFO);
-	//DKLog(title, DKINFO);
-	//DKLog(" Class: ", DKINFO);
-	//DKLog(class_name, DKINFO);
-	//DKLog("\n", DKINFO);
+	//DKLog("Window: ");
+	//DKLog(title);
+	//DKLog(" Class: ");
+	//DKLog(class_name);
+	//DKLog("\n");
 	}
 
 	return TRUE;
@@ -803,7 +803,7 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 //////////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
-	//DKLog("DKHandles::SearchProc\n", DKINFO);
+	//DKLog("DKHandles::SearchProc\n", DKDEBUG);
 
 	if(wParam == WM_MOUSEMOVE){
 		if(searching){

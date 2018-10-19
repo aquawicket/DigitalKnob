@@ -306,7 +306,7 @@ bool DKHandlesV8::SetWindowHandle(CefArgs args, CefReturn retval)
 	std::stringstream ss;
 	ss << "0x" << hwnd;
 	DKString sval = ss.str();
-	DKLog("DKHandlesV8::SetWindowHandle() = "+sval+"\n", DKINFO);
+	DKLog("DKHandlesV8::SetWindowHandle() = "+sval+"\n");
 	retval->SetString(0, sval);
 	return true;
 }

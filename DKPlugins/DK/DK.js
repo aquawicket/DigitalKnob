@@ -14,7 +14,7 @@ var LOG_ERRORS = true;
 var LOG_FILE = true;
 var LOG_SHOW = ""; //comma seperated
 var LOG_HIDE = ""; //comma seperated
-var LOG_LINES = true;
+var LOG_LINES = false;
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }

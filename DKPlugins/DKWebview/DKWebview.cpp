@@ -86,7 +86,7 @@ bool DKWebview::ReceiveValue(void* input, void* output)
 /////////////////////////////////////////////////////////
 bool DKWebview::PrintFunctions(void* input, void* output)
 {
-	DKLog("\n**** Webview Functions ****\n", DKINFO);
-	DKLog("TODO: DKWebview.cpp\n", DKINFO);
+	DKLog("\n**** Webview Functions ****\n");
+	DKLog("TODO: DKWebview.cpp\n");
 	return true;
 }

@@ -165,7 +165,7 @@ bool DKRocket::LoadGui(const DKString& file)
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
-	DKLog("Loading GUI...\n", DKINFO);
+	DKLog("Loading GUI...\n");
 	//DKCreate("DKLoading.js");
 	return true;
 }
@@ -231,11 +231,11 @@ bool DKRocket::ToggleDebugger()
 {
 	if(Rocket::Debugger::IsVisible()){
 		Rocket::Debugger::SetVisible(false);
-		DKLog("Rocket Debugger OFF\n", DKINFO);
+		DKLog("Rocket Debugger OFF\n");
 	}
 	else{
 		Rocket::Debugger::SetVisible(true);
-		DKLog("Rocket Debugger ON\n", DKINFO);
+		DKLog("Rocket Debugger ON\n");
 	}
 	return true;
 }

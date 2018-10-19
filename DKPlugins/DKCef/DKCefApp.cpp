@@ -37,55 +37,55 @@ void DKV8::SetFlags()
 	DKLog("DKV8::SetFlags()\n", DKDEBUG);
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
-	DKLog("DKV8::homepage = "+homepage+"\n", DKINFO);
+	DKLog("DKV8::homepage = "+homepage+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
-	DKLog("DKV8::multi_process = "+multi_process+"\n", DKINFO);
+	DKLog("DKV8::multi_process = "+multi_process+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
-	DKLog("DKV8::sandbox = "+sandbox+"\n", DKINFO);
+	DKLog("DKV8::sandbox = "+sandbox+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_LOGSEVERITY]", log_severity);
-	DKLog("DKV8::log_severity = "+log_severity+"\n", DKINFO);
+	DKLog("DKV8::log_severity = "+log_severity+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTI_THREADED_MESSAGE_LOOP]", multi_threaded_message_loop);
-	DKLog("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n", DKINFO);
+	DKLog("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU]", disable_gpu);
-	DKLog("DKV8::disablegpu = "+disable_gpu+"\n", DKINFO);
+	DKLog("DKV8::disablegpu = "+disable_gpu+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU_COMPOSITING]", disable_gpu_compositing);
-	DKLog("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n", DKINFO);
+	DKLog("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_IGNORE_GPU_BLACKLIST]", ignore_gpu_blacklist);
-	DKLog("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n", DKINFO);
+	DKLog("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_SYSTEM_FLASH]", enable_system_flash);
-	DKLog("DKV8::enable_system_flash = "+enable_system_flash+"\n", DKINFO);
+	DKLog("DKV8::enable_system_flash = "+enable_system_flash+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_BEGIN_FRAME_SCHEDULING]", enable_begin_frame_scheduling);
-	DKLog("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n", DKINFO);
+	DKLog("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_WEBGL]", enable_webgl);
-	DKLog("DKV8::enable_webgl = "+enable_webgl+"\n", DKINFO);
+	DKLog("DKV8::enable_webgl = "+enable_webgl+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_RENDERER_PROCESS_LIMIT]", renderer_process_limit);
-	DKLog("DKV8::renderer_process_limit = "+renderer_process_limit+"\n", DKINFO);
+	DKLog("DKV8::renderer_process_limit = "+renderer_process_limit+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_GPU]", enable_gpu);
-	DKLog("DKV8::enable_gpu = "+enable_gpu+"\n", DKINFO);
+	DKLog("DKV8::enable_gpu = "+enable_gpu+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_WEB_SECURITY]", disable_web_security);
-	DKLog("DKV8::disable_web_security = "+disable_web_security+"\n", DKINFO);
+	DKLog("DKV8::disable_web_security = "+disable_web_security+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_NO_PROXY_SERVER]", no_proxy_server);
-	DKLog("DKV8::no_proxy_server = "+no_proxy_server+"\n", DKINFO);
+	DKLog("DKV8::no_proxy_server = "+no_proxy_server+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_REMOTE_DEBUGGING_PORT]", remote_debugging_port);
-	DKLog("DKV8::remote_debugging_port = "+remote_debugging_port+"\n", DKINFO);
+	DKLog("DKV8::remote_debugging_port = "+remote_debugging_port+"\n");
 
 	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_OFF_SCREEN_RENDERING_ENABLED]", off_screen_rendering_enabled);
-	//DKLog("DKV8::off_screen_rendering_enabled = "+off_screen_rendering_enabled+"\n", DKINFO);
+	//DKLog("DKV8::off_screen_rendering_enabled = "+off_screen_rendering_enabled+"\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -394,7 +394,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 #endif
 
 	if(DKV8::singleprocess){
-		DKLog("DKCefApp::OnProcessMessageReceived("+toString(message->GetName())+"): message system disabled in single-process mode\n", DKINFO);
+		DKLog("DKCefApp::OnProcessMessageReceived("+toString(message->GetName())+"): message system disabled in single-process mode\n");
 		return false;
 	}
 

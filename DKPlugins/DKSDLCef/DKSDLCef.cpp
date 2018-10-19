@@ -84,7 +84,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 //////////////////////////////////////////////////////////
 bool DKSDLCef::GetTexture(const void* input, void* output)
 {
-	//DKLog("DKSDLCef::GetTexture(void*, void*)\n", DKINFO);
+	//DKLog("DKSDLCef::GetTexture(void*, void*)\n", DKDEBUG);
 	DKString id = *(DKString*)input;
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser)){
@@ -112,7 +112,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 		//DKLog("DKSDLCef::Handle(): The browser is invalid\n", DKERROR);
 		return false;
 	}
-	//DKLog("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n", DKINFO);
+	//DKLog("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n");
 
 	//DKLog("number_of_browsers = " + toString(dkCef->GetBrowsers()) + "\n", DKDEBUG);
 	//DKLog("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n", DKDEBUG);
@@ -137,7 +137,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 	switch(event->type){
 		case SDL_MOUSEBUTTONDOWN:{
-			//DKLog("DKSDLCef::Handle(): CurrentBrowser = "+toString(i)+"\n", DKINFO);
+			//DKLog("DKSDLCef::Handle(): CurrentBrowser = "+toString(i)+"\n");
 			int clicks = 1;
 			if(event->button.clicks == 2){ // double click
 				clicks = 2;
@@ -189,7 +189,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 
 		/*
 		case SDL_TEXTINPUT:{
-			DKLog("SDL_TEXTINPUT: event->text.text = "+toString(event->text.text)+"\n", DKINFO);
+			DKLog("SDL_TEXTINPUT: event->text.text = "+toString(event->text.text)+"\n");
 		}
 		*/
 		
@@ -197,11 +197,11 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(dkCef->keyboardFocus < 0){ return false; }
 			//print SDL2 key data
 			/*
-			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n", DKINFO);
-			DKLog("SDL_KEYDOWN: event->key.keysym.scancode = "+toString(event->key.keysym.scancode)+"\n", DKINFO);
-			DKLog("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])+"\n", DKINFO);
-			DKLog("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])+"\n", DKINFO);
-			DKLog("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])+"\n", DKINFO);
+			DKLog("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n");
+			DKLog("SDL_KEYDOWN: event->key.keysym.scancode = "+toString(event->key.keysym.scancode)+"\n");
+			DKLog("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])+"\n");
+			DKLog("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])+"\n");
+			DKLog("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])+"\n");
 			*/
 			
 			CefKeyEvent KeyEvent;
@@ -214,8 +214,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
-			//DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
-			//DKLog("RAWKEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
+			//DKLog("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n");
+			//DKLog("RAWKEYDOWN: modifiers = "+toString(KeyEvent.modifiers)+"\n");
 			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
 
 			CefKeyEvent charKeyEvent;
@@ -245,8 +245,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
 			}
 
-			//DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n", DKINFO);
-			//DKLog("CHAR: modifiers = "+toString(charKeyEvent.modifiers)+"\n", DKINFO);
+			//DKLog("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n");
+			//DKLog("CHAR: modifiers = "+toString(charKeyEvent.modifiers)+"\n");
 			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(charKeyEvent);
 			return true;
 		}
@@ -263,8 +263,8 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
-			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n", DKINFO);
-			//DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n", DKINFO);
+			//DKLog("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n");
+			//DKLog("KEYUP: modifiers = "+toString(KeyEvent.modifiers)+"\n");
 #ifndef MAC
 			dkCef->dkBrowsers[dkCef->keyboardFocus].browser->GetHost()->SendKeyEvent(KeyEvent);
 #endif
@@ -275,11 +275,11 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			/*
 			if(event->motion.state & SDL_BUTTON_LMASK){
 				_mouseLMBdown = true;
-				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = true \n", DKINFO);
+				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = true \n");
 			}
 			else{
 				_mouseLMBdown = false;
-				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = false \n", DKINFO);
+				DKLog("SDL_MOUSEMOTION: _mouseLMBdown = false \n");
 			}
 			*/
 
@@ -302,7 +302,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			CefMouseEvent mouse_event;
 			mouse_event.x = event->motion.x - dkCef->dkBrowsers[browser].left;
 			mouse_event.y = event->motion.y - dkCef->dkBrowsers[browser].top;
-			//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);
+			//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n");
 			uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			if (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON_LMASK)
@@ -326,7 +326,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 				SDL_GetMouseState(&mouseX, &mouseY);
 				mouse_event.x = mouseX - dkCef->dkBrowsers[browser].left;
 				mouse_event.y = mouseY - dkCef->dkBrowsers[browser].top;
-				//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n", DKINFO);
+				//DKLog("Mouse: X="+toString(mouse_event.x)+" Y="+toString(mouse_event.y)+" \n");
 				//uint32 modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 				dkCef->dkBrowsers[browser].browser->GetHost()->SendMouseWheelEvent(mouse_event, (int)deltaX, (int)deltaY);
 			}
@@ -383,7 +383,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
-	//DKLog("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n", DKINFO);
+	//DKLog("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
 
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser)){

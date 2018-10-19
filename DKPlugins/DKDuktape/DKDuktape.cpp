@@ -164,7 +164,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 	DKString test;
 	DKFile::FileToString(path, test);
 	if(has(test,"//BROWSER")){
-		DKLog("Ignoring: "+path+" is a browser only file. \n", DKINFO);
+		DKLog("Ignoring: "+path+" is a browser only file. \n");
 		return false;
 	}
 	
@@ -288,7 +288,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 //////////////////////////////////////////////////
 bool DKDuktape::QueueDuktape(const DKString& code)
 {
-	DKLog("DKDuktape::QueueDuktape("+code+")\n", DKINFO);
+	DKLog("DKDuktape::QueueDuktape("+code+")\n", DKDEBUG);
 	codeToRun.push_back(code);
 	return true;
 }

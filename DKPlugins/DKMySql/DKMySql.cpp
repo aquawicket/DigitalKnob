@@ -55,7 +55,7 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 
 	DKCurl::Get("DKCurl0")->HttpToString(send,response);
 	if(response.empty()){
-		DKLog("Successfully connected to MySql server. \n", DKINFO);
+		DKLog("Successfully connected to MySql server. \n");
 		return true;
 	}	
 #endif
@@ -103,7 +103,7 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
     }
 #else
 
-	DKLog("Query: "+query+"\n", DKINFO);
+	DKLog("Query: "+query+"\n");
 	
 	DKString response;
 	DKString send = DKFile::online_assets+"/DKMySql/DKMySql.php?Query=";
@@ -123,8 +123,8 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 		results.push_back(string);
 	}
 
-	DKLog("\n Query succeeded\n", DKINFO);
-	DKLog("-> "+response+"+\n", DKINFO);
+	DKLog("\n Query succeeded\n");
+	DKLog("-> "+response+"+\n");
 	return true;
 #endif
 

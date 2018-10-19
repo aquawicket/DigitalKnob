@@ -71,12 +71,12 @@ bool DKMidi::PrintInputs()
 		DKLog("No Input ports available!\n",DKERROR);
 		return false;
 	}
-	DKLog("\nMIDI Input Ports\n", DKINFO);
-	DKLog("----------------\n", DKINFO);
+	DKLog("\nMIDI Input Ports\n");
+	DKLog("----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiin->getPortName(i)+"\n", DKINFO);
+		DKLog(midiin->getPortName(i)+"\n");
 	}
-	DKLog("\n\n", DKINFO);
+	DKLog("\n\n");
 	return true;
 }
 
@@ -88,12 +88,12 @@ bool DKMidi::PrintOutputs()
 		DKLog("No Output ports available!\n",DKERROR);
 		return false;
 	}
-	DKLog("MIDI Output Ports\n", DKINFO);
-	DKLog("-----------------\n", DKINFO);
+	DKLog("MIDI Output Ports\n");
+	DKLog("-----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiout->getPortName(i)+"\n", DKINFO);
+		DKLog(midiout->getPortName(i)+"\n");
 	}
-	DKLog("\n\n", DKINFO);
+	DKLog("\n\n");
 	return true;
 }
 

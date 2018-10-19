@@ -19,9 +19,9 @@ int main(int argc, char **argv)
 	DKApp::argv = argv;
 
 #if __cplusplus <= 199711L
-	DKLog("C++98 \n", DKINFO);
+	DKLog("C++98 \n");
 #else
-	DKLog("C++11 \n", DKINFO);
+	DKLog("C++11 \n");
 #endif
 
 #ifndef IOS
@@ -34,18 +34,18 @@ int main(int argc, char **argv)
 
 	DKString info;
 	GetOSInfo(info);
-	DKLog(info+"\n", DKINFO);
+	DKLog(info+"\n");
 
 	DKString date;
 	DKUtil::GetDate(date);
 	DKString time;
 	DKUtil::GetTime(time);
-	DKLog(date+" "+time+"\n", DKINFO);
+	DKLog(date+" "+time+"\n");
 	
 	//print args
 	if(DKApp::argc > 1){
 		for(int i = 1; i < DKApp::argc; ++i){
-			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
+			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
 	    }
     }
 	
@@ -54,10 +54,10 @@ int main(int argc, char **argv)
 	DKFile::GetExeName(DKFile::exe_name);
 	DKFile::GetAppPath(DKFile::app_path);
 	DKFile::GetAppName(DKFile::app_name);
-	DKLog("DKFile::exe_path = "+DKFile::exe_path+"\n", DKINFO);
-	DKLog("DKFile::exe_name = "+DKFile::exe_name+"\n", DKINFO);
-	DKLog("DKFile::app_path = "+DKFile::app_path+"\n", DKINFO);
-	DKLog("DKFile::app_name = "+DKFile::app_name+"\n", DKINFO);
+	DKLog("DKFile::exe_path = "+DKFile::exe_path+"\n");
+	DKLog("DKFile::exe_name = "+DKFile::exe_name+"\n");
+	DKLog("DKFile::app_path = "+DKFile::app_path+"\n");
+	DKLog("DKFile::app_name = "+DKFile::app_name+"\n");
 
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here. 
 	DKClass::DKCreate("DKDuktape");
@@ -99,7 +99,7 @@ void DKApp::Init()
 //////////////////
 void DKApp::Loop()
 {
-	DKLog("DKApp::Loop()\n", DKINFO);
+	DKLog("DKApp::Loop()\n");
 	while(active){
 		DoFrame();
 	}
@@ -127,7 +127,7 @@ void DKApp::DoFrame()
 //////////////////
 void DKApp::Exit()
 {
-	DKLog("DKApp::Exit(): \n", DKINFO);
+	DKLog("DKApp::Exit(): \n");
 	active = false;
 	DKUtil::CallExit();
 	exit(0);

@@ -179,7 +179,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n", DKINFO);
+		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n");
 		callback_found = true;
 	}
 	
@@ -223,7 +223,7 @@ int DKJS::_DKLog(duk_context* ctx)
 		DKLog(string, lvl);
 		return 1;
 	}
-	DKLog(string, DKINFO);
+	DKLog(string);
 	return 1;
 }
 
@@ -405,7 +405,7 @@ int DKJS::GetArgs(duk_context* ctx)
 	DKString args;
 	if(DKApp::argc > 1){
 		for(int i = 1; i < DKApp::argc; ++i){
-			//DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n", DKINFO);
+			//DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
 			args += toString(DKApp::argv[i]) += ";";
 		}
 	}
@@ -675,7 +675,7 @@ int DKJS::GetUsername(duk_context* ctx)
 int DKJS::GetValue(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
-	//DKLog("DKJS::GetValue("+evt+")\n", DKINFO);
+	//DKLog("DKJS::GetValue("+evt+")\n", DKDEBUG);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
 	if(arry.size() < 3){ 
@@ -688,7 +688,7 @@ int DKJS::GetValue(duk_context* ctx)
 			duk_push_string(ctx, rval.c_str());
 			return 1;
 		}
-		//DKLog("DKJS::GetValue(" + evt + "): failed. \n", DKINFO);
+		//DKLog("DKJS::GetValue(" + evt + "): failed. \n");
 		return 0;
 	}
 	duk_push_string(ctx, arry[2].c_str());

@@ -33,7 +33,7 @@ bool DKXml::LoadDocument(const DKString& file)
 		DKString offset = toString((int)result.offset);
 		DKLog("DKXml::LoadDocument("+file+"): "+description+" @ character: "+offset+" \n", DKERROR);
 		DKFile::StringToFile(filedata, DKFile::local_assets+"XMLlog.txt");
-		DKLog("Saved string to XMLlog.txt \n", DKINFO);
+		DKLog("Saved string to XMLlog.txt \n");
 		return false;
 	}
 	return true;
@@ -57,7 +57,7 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 		std::cout << "Error description: " << result.description() << "\n";
 		std::cout << "Error offset: " << result.offset << " (error at [..." << (temp.c_str() + result.offset) << "]\n\n";
 		DKFile::StringToFile(temp, DKFile::local_assets+"XMLlog.txt");
-		DKLog("Saved string to XMLlog.txt \n", DKINFO);
+		DKLog("Saved string to XMLlog.txt \n");
 		return false;
 	}
 	return true;
@@ -124,7 +124,7 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 		DKString filepath = path+"/"+file;
 		sub.SaveDocument(filepath);
 
-		DKLog("Saved "+path+"/"+file+"\n", DKINFO);
+		DKLog("Saved "+path+"/"+file+"\n");
     }
 	return true;
 }

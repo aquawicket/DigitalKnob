@@ -228,7 +228,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y)
 			}
 		}
 		if(match == true){
-			DKLog("image match!\n", DKINFO);
+			DKLog("image match!\n");
 			int cy = (s / (4 * SCREEN_WIDTH));
 			int cx = (s-(cy*4*SCREEN_WIDTH)) / 4;
 			x = cx + (bm.bmWidth / 2);
@@ -289,7 +289,7 @@ bool DKWindows::GetClipboard(DKString& text)
 bool DKWindows::GetKey(int& key)
 {
 	DKLog("DKWindows::GetKey()\n", DKDEBUG);
-	//DKLog("Press a key...\n", DKINFO);
+	//DKLog("Press a key...\n");
 	key = _getch();
 	return true;
 }

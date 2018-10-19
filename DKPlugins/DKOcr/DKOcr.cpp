@@ -156,7 +156,7 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 		return false; 
 	}
 	text = outText;
-	DKLog("OCR output:\n"+text+"\n", DKINFO);
+	DKLog("OCR output:\n"+text+"\n");
 	delete [] outText;
 	pixDestroy(&image);
 	return true;

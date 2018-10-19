@@ -152,7 +152,7 @@ int DKWidgetJS::SetAttribute(duk_context* ctx)
 int DKWidgetJS::GetValue(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
-	//DKLog("DKWidgetJS::GetValue("+evt+")\n", DKINFO);
+	//DKLog("DKWidgetJS::GetValue("+evt+")\n");
 	
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
@@ -705,7 +705,7 @@ int DKWidgetJS::Cut(duk_context* ctx)
 	widget->GetLineSelection(pre, selection, post, line, 1);
 	DKCString text;
 	text = selection.ToUTF8(text,0);
-	DKLog("DKWidgetJS::Cut("+toString(text.CString())+")\n", DKINFO);
+	DKLog("DKWidgetJS::Cut("+toString(text.CString())+")\n");
 	*/
 		
 	widget->CopySelection();  //TODO - use DKUtil::SetClipboard()

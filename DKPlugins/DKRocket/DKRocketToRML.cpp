@@ -42,11 +42,11 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	DKXmlNodes nodes;
 	xml.GetNodes("//a", nodes);
 	for(unsigned int i = 0; i<nodes.size(); ++i){
-		DKLog(DKString(nodes[i].node().name())+"\n", DKINFO);
+		DKLog(DKString(nodes[i].node().name())+"\n");
 		DKString value;
 		xml.GetAttribute(nodes[i].node(),"href",value);
 		if(!value.empty()){
-			DKLog("value="+value+"\n", DKINFO);
+			DKLog("value="+value+"\n");
 			DKString string = "color:rgb(0,0,255);text-decoration:underline;";
 			xml.SetAttribute(nodes[i].node(),"style",string);
 			
@@ -73,7 +73,7 @@ bool DKRocketToRML::Hyperlink(DKEvent* event)
 	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
 
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-	DKLog("DKWidget::Hyperlink: "+value+"\n", DKINFO);
+	DKLog("DKWidget::Hyperlink: "+value+"\n");
 	DKUtil::Run(value, "");
 	return true;
 }

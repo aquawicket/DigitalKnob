@@ -117,7 +117,7 @@ public:
 	//////////////////////////////////////////
 	static void Close(const DKString& id = "")
 	{
-		DKLog("DKObject::Close("+DKString(classname)+","+id+")\n", DKINFO);
+		DKLog("DKObject::Close("+DKString(classname)+","+id+")\n");
 		
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
@@ -125,7 +125,7 @@ public:
 				//if(has(id,"/")){
 				//	DKLog("Close(): "+id+" contains a / \n",DKERROR);
 				//}
-				//DKLog("Closing "+id+"\n", DKINFO);
+				//DKLog("Closing "+id+"\n");
 				if(instances.size() == 0) { return; }
 				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n", DKDEBUG);
 				if(!instances[i]->End()){ //FIXME - this can crash if End() does not exits in the instance. 
@@ -142,8 +142,7 @@ public:
 	//////////////////////////////////////////
 	static bool Valid(const DKString& id = "")
 	{
-		//DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
-		
+		DKLog("DKObject::Valid("+id+")\n", DKDEBUG);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -159,7 +158,6 @@ public:
 	static T* Get(const DKString& id = "")
 	{
 		DKLog("DKObject::Get("+id+")\n", DKDEBUG);
-		
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -174,8 +172,7 @@ public:
 	/////////////////////////////////////////////
 	static void GetInstances(DKStringArray& list)
 	{
-		//DKLog("DKObject::GetInstances()\n", DKINFO);
-
+		DKLog("DKObject::GetInstances()\n", DKDEBUG);
 		/*
 		if(list.empty()){
 			DKLog("DKObject::GetInstances(): list is empty\n", DKWARN);

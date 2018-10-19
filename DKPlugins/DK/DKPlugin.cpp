@@ -36,7 +36,7 @@ bool DKPlugins::LoadPlugin(const std::string& file)
     modules.push_back(mod);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
-	DKLog("Plugin Loaded: "+filename+"\n", DKINFO);
+	DKLog("Plugin Loaded: "+filename+"\n");
 	return true;
 #endif
 	return false;

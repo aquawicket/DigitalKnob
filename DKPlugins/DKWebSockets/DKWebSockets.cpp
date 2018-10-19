@@ -39,7 +39,7 @@ bool DKWebSockets::CloseClient()
 	DKLog("DKWebSockets::CloseClient()\n", DKDEBUG);
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	clientWebSocket = NULL;
-	DKLog("DKWebSockets::CloseClient(): Client closed\n", DKINFO);
+	DKLog("DKWebSockets::CloseClient(): Client closed\n");
 	return true;
 }
 
@@ -50,15 +50,16 @@ bool DKWebSockets::CloseServer()
 	serverHub.getDefaultGroup<uWS::SERVER>().close();
 	serverPort = NULL;
 	serverWebSocket = NULL;
-	DKLog("DKWebSockets::CloseServer(): Server closed\n", DKINFO);
+	DKLog("DKWebSockets::CloseServer(): Server closed\n");
 	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKWebSockets::CreateClient(const DKString& address)
 {
+	DKLog("DKWebSockets::CreateClient("+address+")\n", DKDEBUG);
+	
 	clientAddress = address;
-	DKLog("DKWebSockets::CreateClient("+address+")\n", DKINFO);
 
 	clientHub.onError([](void *user){
 		DKLog("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n", DKERROR);
@@ -101,12 +102,12 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	});
 
 	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
-		DKLog("DKWebSockets::CreateClient(): clientHub.onConnection\n", DKINFO);
+		DKLog("DKWebSockets::CreateClient(): clientHub.onConnection\n");
 		clientWebSocket = ws;
 	});
 
 	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
-		DKLog("DKWebSockets::CreateClient(): clientHub.onDisconnection\n", DKINFO);
+		DKLog("DKWebSockets::CreateClient(): clientHub.onDisconnection\n");
 		clientWebSocket = NULL;
 	});
 
@@ -118,7 +119,7 @@ bool DKWebSockets::CreateClient(const DKString& address)
 	clientHub.poll();
 	clientHub.connect(address, NULL);
 	
-	DKLog("DKWebSockets::CreateClient(): Client started...\n", DKINFO);
+	DKLog("DKWebSockets::CreateClient(): Client started...\n");
 	return true;
 }
 
@@ -170,23 +171,23 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 	});
 
 	serverHub.onConnection([](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
-		DKLog("DKWebSockets::CreateServer(): serverHub.onConnection\n", DKINFO);
+		DKLog("DKWebSockets::CreateServer(): serverHub.onConnection\n");
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
 		case 8:
-			DKLog("Client established a remote connection over non-SSL", DKINFO);
+			DKLog("Client established a remote connection over non-SSL");
 			break;
 		case 9:
-			DKLog("Client established a remote connection over SSL", DKINFO);
+			DKLog("Client established a remote connection over SSL");
 			break;
 		default:
-			DKLog("FAILURE: ws->getUserData() should not connect!", DKINFO);
+			DKLog("FAILURE: ws->getUserData() should not connect!");
 		}
 	});
 
 	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		serverWebSocket = NULL;
-		DKLog("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+">\n", DKINFO);
+		DKLog("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+">\n");
 	});
 
 	serverHub.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
@@ -194,7 +195,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	DKLog("DKWebSockets::CreateServer(): Server started...\n", DKINFO);
+	DKLog("DKWebSockets::CreateServer(): Server started...\n");
 	return true;
 }
 

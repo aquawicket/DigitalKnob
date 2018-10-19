@@ -31,7 +31,7 @@ bool DKAssets::Init()
 #endif		
 	}
 	
-	DKLog("DKFile::local_assets = "+DKFile::local_assets+"\n", DKINFO);
+	DKLog("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
 #ifdef WIN32
 	DKAssets::CopyAssets(NULL, NULL);
@@ -84,7 +84,7 @@ bool DKAssets::Init()
 		DKFile::online_assets = "http://digitalknob.com/"+app_name;
 	}
 
-	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n", DKINFO);
+	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n");
 	return true;
 }
 
@@ -259,11 +259,11 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	if(has(DKFile::local_assets, "/assets")){ return false; }
 	if(has(DKFile::local_assets, "\\assets")){ return false; }
 	if(DKFile::PathExists(DKFile::local_assets+"ASSETS")){ return false; }
-	DKLog("Copying Assets . . . \n", DKINFO);
+	DKLog("Copying Assets . . . \n");
 	
 	//Save User data
 	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
-		DKLog("Backing up user data \n", DKINFO);
+		DKLog("Backing up user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	}
 	
@@ -273,7 +273,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	
 	
 #if !defined(ANDROID) && !defined(WIN32)
-	DKLog("Extracting assets.zip form assets Header file. \n", DKINFO);	
+	DKLog("Extracting assets.zip form assets Header file. \n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKUtil::C2Bin((unsigned char *)assets, assets_size, DKFile::local_assets+"assets.zip");
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
@@ -282,14 +282,14 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 #endif
 
 #ifdef WIN32
-	DKLog("Extracting assets.zip form Windows resource. \n", DKINFO);
+	DKLog("Extracting assets.zip form Windows resource. \n");
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
 	HRSRC hRes;						// handle/ptr. to res. info. 
 	char *lpResLock;				// pointer to resource data 
 	DWORD dwSizeRes;
 
 	DKFile::MakeDir(DKFile::local_assets);
-	DKLog(DKFile::local_assets + "assets.zip \n", DKINFO);
+	DKLog(DKFile::local_assets + "assets.zip \n");
 	DKString strOutputLocation = DKFile::local_assets + "assets.zip";
 	hRes = FindResource(NULL, MAKEINTRESOURCE(321), RT_RCDATA); // find location of the resource and get handle to it
 	hResourceLoaded = LoadResource(NULL, hRes); // loads the specified resource into global memory. 
@@ -314,7 +314,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	//Restore User data
 	DKFile::MakeDir(DKFile::local_assets+"USER");
 	if (DKFile::PathExists(DKFile::local_assets + "../USER")){
-		DKLog("Restoring  user data \n", DKINFO);
+		DKLog("Restoring  user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "../USER", DKFile::local_assets + "USER", true, true);
 		DKFile::Delete(DKFile::local_assets + "../USER");
 	}

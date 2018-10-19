@@ -201,7 +201,7 @@ bool DKUtil::Execute(const DKString& command, DKString& rtn)
 	while(!feof(pipe)) {
 		if(fgets(buffer, 128, pipe) != NULL)
 			rtn += buffer;
-		DKLog(buffer, DKINFO);
+		DKLog(buffer);
 	}
 	_pclose(pipe);
 	return true;
@@ -215,7 +215,7 @@ bool DKUtil::Execute(const DKString& command, DKString& rtn)
 	while(!feof(pipe)) {
 		if(fgets(buffer, 128, pipe) != NULL)
 			rtn += buffer;
-		DKLog(buffer, DKINFO);
+		DKLog(buffer);
 	}
 	pclose(pipe);
 	return true;
@@ -484,11 +484,11 @@ bool DKUtil::GetVolume(int& percent)
 bool DKUtil::InMainThread()
 {
 	//DKString pid = "mainThreadId: "+toString(mainThreadId)+"\n";
-	//DKLog(pid, DKINFO); DO NOT DO THIS!
+	//DKLog(pid); DO NOT DO THIS! 
 
 #ifdef WIN32
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
-	//DKLog(tid, DKINFO); DO NOT DO THIS!
+	//DKLog(tid); DO NOT DO THIS!
 	return mainThreadId == GetCurrentThreadId();
 #endif
 #if defined(MAC) || defined(IOS)
@@ -496,7 +496,7 @@ bool DKUtil::InMainThread()
 #endif
 #if defined (ANDROID) //|| defined(LINUX)
 	DKString tid = "GetCurrentThreadId()(): "+toString((unsigned int)pthread_self())+"\n";
-	//DKLog(tid, DKINFO); DO NOT DO THIS!
+	//DKLog(tid); DO NOT DO THIS!
 	return mainThreadId == (unsigned long int)pthread_self();
 #endif
 	return false;

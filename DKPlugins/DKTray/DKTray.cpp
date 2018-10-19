@@ -152,9 +152,9 @@ void DKTray::setCallback(DKTrayCallback callback)
 LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if(message == WM_ICON_NOTIFY){
-		//DKLog("WM_ICON_NOTIFY: ", DKINFO);
-		//DKLog(toString(LOWORD(wParam))+" : ", DKINFO);
-		//DKLog(toString(LOWORD(lParam))+"\n", DKINFO);
+		//DKLog("WM_ICON_NOTIFY: ");
+		//DKLog(toString(LOWORD(wParam))+" : ");
+		//DKLog(toString(LOWORD(lParam))+"\n");
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
 			//DKLog("Tray Icon Clicked \n", DKDEBUG);
 			DKEvent::SendEvent("DKTray", "click", toString(1));
@@ -166,7 +166,7 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 	}
 
 	if(message == WM_COMMAND){
-		//DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n", DKINFO);
+		//DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n");
 		DKEvent::SendEvent("DKTray", toString(LOWORD(wParam)), "");
 	}
 	

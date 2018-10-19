@@ -45,7 +45,7 @@ bool DKSDLWindow::Init()
 	//Get values from settings.txt file
 	DKString sdl_renderer;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
-	DKLog("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n", DKINFO);
+	DKLog("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
 	
 	SDL_SetMainReady();
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
@@ -104,7 +104,7 @@ bool DKSDLWindow::Init()
 	DKString result;
 	
 #if defined(ANDROID) || defined(IOS)
-	DKLog("Creating SDLWindow for mobile device  \n", DKINFO);
+	DKLog("Creating SDLWindow for mobile device  \n");
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
@@ -114,7 +114,7 @@ bool DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	
 	result = "OpenglES";
-	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n", DKINFO);
+	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n");
 	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0){
 		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
 		return false;
@@ -122,7 +122,7 @@ bool DKSDLWindow::Init()
 #endif
 
 #if !defined(ANDROID) && !defined(IOS)
-	DKLog("Creating SDLWindow for Desktop \n", DKINFO);
+	DKLog("Creating SDLWindow for Desktop \n");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -183,7 +183,7 @@ bool DKSDLWindow::Init()
 	DKString icon = DKFile::local_assets+"icon.ico";
 	SetIcon(&icon, NULL);
 
-	//DKLog(title+"\n", DKINFO);
+	//DKLog(title+"\n");
 	SDL_SetWindowTitle(window, title2.c_str());
 
 	DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
@@ -235,42 +235,42 @@ bool DKSDLWindow::Init()
 	//gl_shading = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
 	gl_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 
-	DKLog("##############################\n", DKINFO);
-	DKLog("##### Window Information #####\n", DKINFO);
-	DKLog("##############################\n", DKINFO);
-	DKLog("GL_MAJOR_VERSION = "+gl_major_version+"\n", DKINFO);
-	DKLog("GL_MINOR_VERSION = "+gl_minor_version+"\n", DKINFO);
-	DKLog("GL_VERSION = "+gl_version+"\n", DKINFO);
-	DKLog("GL_VENDOR = "+gl_vendor+"\n", DKINFO);
-	DKLog("GL_RENDERER = "+gl_renderer+"\n", DKINFO);
-	//DKLog("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n", DKINFO);
-	//DKLog("GL_EXTENSIONS = "+gl_extensions+"\n", DKINFO);
-	DKLog("SDL Renderer = "+result+"\n", DKINFO);
-	DKLog("Resolution = "+toString(width)+"x"+toString(height)+"\n", DKINFO);
+	DKLog("##############################\n");
+	DKLog("##### Window Information #####\n");
+	DKLog("##############################\n");
+	DKLog("GL_MAJOR_VERSION = "+gl_major_version+"\n");
+	DKLog("GL_MINOR_VERSION = "+gl_minor_version+"\n");
+	DKLog("GL_VERSION = "+gl_version+"\n");
+	DKLog("GL_VENDOR = "+gl_vendor+"\n");
+	DKLog("GL_RENDERER = "+gl_renderer+"\n");
+	//DKLog("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
+	//DKLog("GL_EXTENSIONS = "+gl_extensions+"\n");
+	DKLog("SDL Renderer = "+result+"\n");
+	DKLog("Resolution = "+toString(width)+"x"+toString(height)+"\n");
 	int depth;
 	SDL_GL_GetAttribute(SDL_GL_DEPTH_SIZE, &depth);
-	DKLog("Depth = "+toString(depth)+"\n", DKINFO);
+	DKLog("Depth = "+toString(depth)+"\n");
 	int doublebuffer;
 	SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doublebuffer);
-	DKLog("Double buffer = "+toString(doublebuffer)+"\n", DKINFO);
+	DKLog("Double buffer = "+toString(doublebuffer)+"\n");
 	int red;
 	SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &red);
-	DKLog("Red Size = "+toString(red)+"\n", DKINFO);
+	DKLog("Red Size = "+toString(red)+"\n");
 	int green;
 	SDL_GL_GetAttribute(SDL_GL_GREEN_SIZE, &green);
-	DKLog("Green Size = "+toString(green)+"\n", DKINFO);
+	DKLog("Green Size = "+toString(green)+"\n");
 	int blue;
 	SDL_GL_GetAttribute(SDL_GL_BLUE_SIZE, &blue);
-	DKLog("Blue Size = "+toString(blue)+"\n", DKINFO);
+	DKLog("Blue Size = "+toString(blue)+"\n");
 	int alpha;
 	SDL_GL_GetAttribute(SDL_GL_ALPHA_SIZE, &alpha);
-	DKLog("Alpha Size = "+toString(alpha)+"\n", DKINFO);
+	DKLog("Alpha Size = "+toString(alpha)+"\n");
 	int buffer;
 	SDL_GL_GetAttribute(SDL_GL_BUFFER_SIZE, &buffer);
-	DKLog("Buffer Size = "+toString(buffer)+"\n", DKINFO);
+	DKLog("Buffer Size = "+toString(buffer)+"\n");
 	int stencil;
 	SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
-	DKLog("Stencil Size = "+toString(stencil)+"\n", DKINFO);
+	DKLog("Stencil Size = "+toString(stencil)+"\n");
 	
 	if(has(gl_vendor, "Microsoft")){
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
@@ -388,7 +388,7 @@ bool DKSDLWindow::GetHeight(const void* input, void* output)
 	DKLog("DKSDLWindow::GetHeight()\n", DKDEBUG);
 	int h;
 	SDL_GetWindowSize(window, NULL, &h);
-	//DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n", DKINFO);
+	//DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
 	if(h == 0){ h = height; }
 	*(int*)output = h;
 	return true;
@@ -428,7 +428,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output)
 	DKLog("DKSDLWindow::GetWidth()\n", DKDEBUG);
 	int w;
 	SDL_GetWindowSize(window, &w, NULL);
-	//DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n", DKINFO);
+	//DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
 	if(w == 0){ w = width; }
 	*(int*)output = w;
 	return true;

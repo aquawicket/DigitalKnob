@@ -56,7 +56,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 		boost::filesystem::copy_file(src, dst, boost::filesystem::copy_option::overwrite_if_exists);
 	}
 
-	DKLog("Copied to "+dst+"\n", DKINFO);
+	DKLog("Copied to "+dst+"\n");
 	return true;
 }
 
@@ -845,7 +845,7 @@ bool DKFile::Rename(const DKString& input, const DKString& output, const bool ov
 		return false;
 	}
 
-	DKLog("Renamed "+input+" to-> "+output+"\n", DKINFO);
+	DKLog("Renamed "+input+" to-> "+output+"\n");
 	return true;
 }
 
@@ -868,7 +868,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 		if(temp == std::string::npos){
 			filestring.append("\n" + setting + " " + value); //create entry
 			DKFile::StringToFile(filestring,path);
-			DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
+			DKLog("WROTE: "+filestring+" TO: "+path+" \n");
 			return true;
 		}
 		size_t start = filestring.find("]",temp);
@@ -879,7 +879,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 		DKString out = " "+value+"\n";
 		filestring.replace(start+1,end-start-1,out.c_str()); 
 		DKFile::StringToFile(filestring,path);
-		DKLog("WROTE: "+filestring+" TO: "+path+" \n", DKINFO);
+		DKLog("WROTE: "+filestring+" TO: "+path+" \n");
 		return true;
 	}
 
@@ -891,7 +891,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	if(temp == std::string::npos){
 		filestring.append("\n" + setting + " " + value); //create entry
 		DKFile::StringToFile(filestring,file);
-		DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+		DKLog("WROTE: "+filestring+" TO: "+file+" \n");
 		return true;
 	}
 	size_t start = filestring.find(" ",temp);
@@ -901,7 +901,7 @@ bool DKFile::SetSetting(const DKString& file, const DKString& setting, const DKS
 	filestring.replace(start+1,end-start-1,value.c_str()); 
 	DKFile::StringToFile(filestring,file);
 
-	DKLog("WROTE: "+filestring+" TO: "+file+" \n", DKINFO);
+	DKLog("WROTE: "+filestring+" TO: "+file+" \n");
 	return true;
 }
 
@@ -925,7 +925,7 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file)
 	std::ofstream t(file.c_str());
 	t << string;
 	t.close();
-	DKLog("Saved file "+file+"\n", DKINFO);
+	DKLog("Saved file "+file+"\n");
 	return true;
 }
 

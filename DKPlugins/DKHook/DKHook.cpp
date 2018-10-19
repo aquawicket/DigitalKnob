@@ -117,17 +117,17 @@ LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam)
 															 
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:
 		if(pMouseStruct != NULL){ // Mouse struct contain information?			
-			//DKLog("Mouse Coordinates: "+toString(pMouseStruct->pt.x)+","+toString(pMouseStruct->pt.y)+"\n", DKINFO);
+			//DKLog("Mouse Coordinates: "+toString(pMouseStruct->pt.x)+","+toString(pMouseStruct->pt.y)+"\n");
 			DKEvent::SendEvent("GLOBAL", "GLOBAL_mousemove", toString(pMouseStruct->pt.x)+","+toString(pMouseStruct->pt.y));
 		}
 
 		switch(wParam){
 			case WM_LBUTTONUP:{
-				//DKLog("LEFT CLICK UP\n", DKINFO);
+				//DKLog("LEFT CLICK UP\n");
 				DKEvent::SendEvent("GLOBAL", "GLOBAL_mousedown", toString(1));
 			}break;
 			case WM_LBUTTONDOWN:{
-				//DKLog("LEFT CLICK DOWN\n", DKINFO);
+				//DKLog("LEFT CLICK DOWN\n");
 				DKEvent::SendEvent("GLOBAL", "GLOBAL_mouseup", toString(1));
 			}break;
 		}
@@ -143,7 +143,7 @@ LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam)
 
 	if(nCode == 0){ // we have information in wParam/lParam ? If yes, let's check it:
 		if(pKeyboardStruct != NULL){ // Mouse struct contain information?			
-			//DKLog("keyboard event\n", DKINFO);
+			//DKLog("keyboard event\n");
 			DKEvent::SendEvent("GLOBAL", "GLOBAL_keypress", "");
 		}
 	}

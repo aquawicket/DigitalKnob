@@ -69,7 +69,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	if(!root){ return; }
 	DKString id = root->GetId().CString();
 	if(id.empty()){ return; }
-	//DKLog("DKWidget::RemoveWidget("+id+")\n", DKINFO);
+	//DKLog("DKWidget::RemoveWidget("+id+")\n");
 	
 	//Remove all child DKWidgets and events
 	RemoveAllEventListeners(id);
@@ -933,7 +933,7 @@ bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 	parent = par_store->GetFirstChild();
 	
 	DKLog("DKWidget::InsertBefore(): "+GetId(parent)+"->InsertBefore("+GetId(ele)+","+GetId(parent)+")\n", DKDEBUG);
-	//DKLog("par_store = "+GetId(par_store)+" \n", DKINFO);
+	//DKLog("par_store = "+GetId(par_store)+" \n");
 	par_store->InsertBefore(ele, parent);
 	return true;
 }
@@ -1046,15 +1046,15 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 	///// adjust background alpha from to 1-255 scale
 	if(same(name,"background-color")){
 		if(has(value,"rgba")){
-			//DKLog("DKWidget::SetProperty() background-color has rgba()\n", DKINFO);
-			//DKLog(value+"\n", DKINFO);
+			//DKLog("DKWidget::SetProperty() background-color has rgba()\n");
+			//DKLog(value+"\n");
 			std::size_t start = value.find_last_of(",")+1;
-			//DKLog("start:"+toString(start)+"\n", DKINFO);
+			//DKLog("start:"+toString(start)+"\n");
 			std::size_t end = value.find_last_of(")");
-			//DKLog("end:"+toString(end)+"\n", DKINFO);
+			//DKLog("end:"+toString(end)+"\n");
 			int newvalue = (int)(toFloat(value.substr(start,end-start)) * 255);
 			finalValue.replace(start,end-start,toString(newvalue));
-			//DKLog(finalValue+"\n", DKINFO);
+			//DKLog(finalValue+"\n");
 		}
 	}
 
@@ -1770,7 +1770,7 @@ bool DKWidget::GetOption(const DKString& id, int n)
 {
 	DKElement* element = DKWidget::GetElementById(id);
 	if(!same(element->GetTagName().CString(), "select")){
-		DKLog("DKWidget::SelectOption("+id+"): not a select element. \n", DKINFO);
+		DKLog("DKWidget::SelectOption("+id+"): not a select element. \n", DKWARN);
 		return false;
 	}
 
@@ -1784,7 +1784,7 @@ bool DKWidget::SetOption(const DKString& id, int n)
 {
 	DKElement* element = DKWidget::GetElementById(id);
 	if(!same(element->GetTagName().CString(), "select")){
-		DKLog("DKWidget::SelectOption("+id+"): not a select element. \n", DKINFO);
+		DKLog("DKWidget::SelectOption("+id+"): not a select element. \n", DKWARN);
 		return false;
 	}
 

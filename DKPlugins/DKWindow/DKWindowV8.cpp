@@ -51,7 +51,7 @@ bool DKWindowV8::End()
 ////////////////////////////////////////////////////////
 bool DKWindowV8::TestInt(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestInt(CefArgs,CefReturn)\n", DKINFO);
+	DKLog("DKWindowV8::TestInt()\n", DKDEBUG);
 
 	int data = args->GetInt(0);
 	int result = data;
@@ -62,7 +62,7 @@ bool DKWindowV8::TestInt(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKWindowV8::TestString(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestString(CefArgs,CefReturn)\n", DKINFO);
+	DKLog("DKWindowV8::TestString()\n", DKDEBUG);
 
 	DKString data = args->GetString(0);
 	DKString result = data;
@@ -73,7 +73,7 @@ bool DKWindowV8::TestString(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKWindowV8::TestReturnInt(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestReturnInt(CefArgs,CefReturn)\n", DKINFO);
+	DKLog("DKWindowV8::TestReturnInt(CefArgs,CefReturn)\n", DKDEBUG);
 
 	int result = 12345;
 	if(!retval->SetInt(0, result)){ return false; }
@@ -83,7 +83,7 @@ bool DKWindowV8::TestReturnInt(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////////
 bool DKWindowV8::TestReturnString(CefArgs args, CefReturn retval)
 {
-	DKLog("DKWindowV8::TestReturnString(CefArgs,CefReturn)\n", DKINFO);
+	DKLog("DKWindowV8::TestReturnString(CefArgs,CefReturn)\n", DKDEBUG);
 
 	DKString result = "test string";
 	if(!retval->SetString(0, result)){ return false; }

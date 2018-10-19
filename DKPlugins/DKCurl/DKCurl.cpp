@@ -149,7 +149,7 @@ bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKSt
 			ftpName = name;
 			ftpPass = pass;
 			ftpPort = port;
-			DKLog("FTP Connected \n", DKINFO);
+			DKLog("FTP Connected \n");
 		    return true;
 		}
 		DKLog("Could not connect to FTP \n", DKERROR);
@@ -174,7 +174,7 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 		return false; 
 	}
 
-	DKLog("Downloading "+url+"...\n", DKINFO);
+	DKLog("Downloading "+url+"...\n");
  
 	CurlInit();
 	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -303,7 +303,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
     
 	CurlInit();
     if(curl){
-		DKLog("Uploading "+filename, DKINFO);
+		DKLog("Uploading "+filename);
 		headerlist = curl_slist_append(headerlist, buff1.c_str());
 		headerlist = curl_slist_append(headerlist, buff2.c_str());
 		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -332,7 +332,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 		}
 
 		curl_slist_free_all(headerlist);
-		DKLog("\n", DKINFO);
+		DKLog("\n");
 
 		if(res != CURLE_OK){ 
 			fclose(hd_src);
@@ -366,7 +366,7 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 		return false; 
 	}
 
-	DKLog("Downloading "+url+"...\n", DKINFO);
+	DKLog("Downloading "+url+"...\n");
 
 	CurlInit();
 	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -387,7 +387,7 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 		return false;
 	}
 
-	DKLog("Download Complete: "+dest+"\n", DKINFO);
+	DKLog("Download Complete: "+dest+"\n");
 	return true;
 }
 
@@ -496,8 +496,9 @@ bool DKCurl::HttpFileSize(const DKString& url, long& size)
 ////////////////////////////////////////////////////////////////
 bool DKCurl::HttpToString(const DKString& url, DKString& output)
 {
+	DKLog("DKCurl::HttpToString("+url+")\n", DKDEBUG);
 	DKString _url = url;
-	DKLog("DKCurl::Http -> "+ _url +"\n", DKINFO);
+	DKLog("DKCurl::Http -> "+ _url +"\n");
 	replace(_url," ","%20");
 	replace(_url,"'","%27");
 	//replace(_url,"@","%40");

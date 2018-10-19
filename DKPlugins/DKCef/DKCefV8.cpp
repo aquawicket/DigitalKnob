@@ -110,7 +110,7 @@ bool DKCefV8::TestFunction(CefArgs args, CefReturn retval)
 	int num = args->GetInt(0);
 	bool yn = args->GetBool(1);
 	DKString text = args->GetString(2);
-	DKLog("DKCefV8::TestFunction("+toString(num)+","+toString(yn)+","+text+")\n", DKINFO);
+	DKLog("DKCefV8::TestFunction("+toString(num)+","+toString(yn)+","+text+")\n");
 	DKString result = "test string";
 	if(!retval->SetString(0, result)){ return false; }
 	return true;
@@ -342,7 +342,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval)
 {
 	int percent;
 	if(!DKUtil::GetVolume(percent)){ return false; }
-	DKLog("DKCefV8::GetVolume(): volume ="+toString(percent)+"\n", DKINFO);
+	DKLog("DKCefV8::GetVolume(): volume ="+toString(percent)+"\n");
 	if(!retval->SetInt(0, percent)){ return false; }
 	return 1;
 }
@@ -499,7 +499,7 @@ bool DKCefV8::SetMousePos(CefArgs args, CefReturn retval)
 bool DKCefV8::SetVolume(CefArgs args, CefReturn retval)
 {
 	int percent = args->GetInt(0);
-	DKLog("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n", DKINFO);
+	DKLog("DKCefV8::SetVolume(): volume ="+toString(percent)+"\n");
 	if(!DKUtil::SetVolume(percent)){ return false; }
 	return 1;
 }
@@ -694,7 +694,7 @@ bool DKCefV8::GetPageSource(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////
 bool DKCefV8::GetUrl(CefArgs args, CefReturn retval)
 {
-	//DKLog("DKCefV8::GetUrl()\n", DKINFO);
+	DKLog("DKCefV8::GetUrl()\n", DKDEBUG);
 	int browser = args->GetInt(0);
 	DKString url;
 	if(!DKCef::Get()->GetUrl(browser, url)){ return false; }

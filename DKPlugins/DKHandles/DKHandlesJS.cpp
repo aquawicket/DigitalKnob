@@ -268,7 +268,7 @@ int DKHandlesJS::SetWindowHandle(duk_context* ctx)
 	std::stringstream ss;
 	ss << "0x" << hwnd;
 	DKString sval = ss.str();
-	DKLog("DKHandlesJS::SetWindowHandle() = "+ss.str()+"\n", DKINFO);
+	DKLog("DKHandlesJS::SetWindowHandle() = "+ss.str()+"\n");
 	duk_push_string(ctx, sval.c_str());
 	return 1;
 }

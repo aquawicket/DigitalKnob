@@ -191,7 +191,7 @@ bool DKLinux::KeyIsDown(int& key)
 bool DKLinux::GetClipboard(DKString& text)
 {
 	//TODO
-	DKLog("DKLinux::GetClipboard()\n", DKINFO);
+	DKLog("DKLinux::GetClipboard()\n", DKDEBUG);
 	return DKClass::CallFunc("DKSDLWindow::GetClipboard", NULL, &text);
 }
 
@@ -199,14 +199,14 @@ bool DKLinux::GetClipboard(DKString& text)
 bool DKLinux::SetClipboard(const DKString& text)
 {
 	//TODO
-	DKLog("DKLinux::SetClipboard("+text+")\n", DKINFO);
+	DKLog("DKLinux::SetClipboard("+text+")\n", DKDEBUG);
 	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text, NULL);
 }
 
 ///////////////////////////////////////
 bool DKLinux::SetVolume(double nVolume)
 {
-	DKLog("DKLinux::SetVolume("+toString(nVolume)+")\n", DKINFO);
+	DKLog("DKLinux::SetVolume("+toString(nVolume)+")\n", DKDEBUG);
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -233,7 +233,7 @@ bool DKLinux::SetVolume(double nVolume)
 //////////////////////////////////////
 bool DKLinux::GetVolume(float& volume)
 {
-	//DKLog("DKLinux::GetVolume()\n", DKINFO);
+	DKLog("DKLinux::GetVolume()\n", DKDEBUG);
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -251,18 +251,18 @@ bool DKLinux::GetVolume(float& volume)
 	snd_mixer_elem_t* elem = snd_mixer_find_selem(handle, sid);
 
 	snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
-	DKLog("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n", DKINFO);
+	DKLog("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n");
 	long int vol;
 	snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_FRONT_LEFT, &vol);
 	volume = vol;
 
-	DKLog("DKLinux::GetVolume(): returned "+toString(volume)+"\n", DKINFO);
+	DKLog("DKLinux::GetVolume(): returned "+toString(volume)+"\n");
 	snd_mixer_close(handle);
 	return true;
 }
 
 
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 bool DKLinux::VirtualMemory(unsigned long long& virtualMemory)
 {
 	//TODO
@@ -280,7 +280,7 @@ bool DKLinux::VirtualMemory(unsigned long long& virtualMemory)
 	return false;
 }
 
-/////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
 	//TODO
@@ -294,7 +294,7 @@ bool DKLinux::VirtualMemoryUsed(unsigned long long& virtualMemory)
 	return false;
 }
 
-//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
 	//TODO
@@ -331,7 +331,7 @@ bool DKLinux::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory)
 {
 	//TODO
@@ -344,7 +344,7 @@ bool DKLinux::PhysicalMemory(unsigned long long& physicalMemory)
 	return false;
 }
 
-///////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
 	//TODO
@@ -357,7 +357,7 @@ bool DKLinux::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 	return false;
 }
 
-////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 bool DKLinux::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
 	//TODO

@@ -18,7 +18,7 @@ void SourceCallback::Visit(const CefString& string)
 	//std::stringstream ss;
 	//ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
 	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
-	//DKLog(source+"\n", DKINFO);
+	//DKLog(source+"\n");
 
 	replace(source, "\"", "\\\"");
 	replace(source, "\'", "\\\'");
@@ -113,7 +113,7 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 		if(i >= dkCef->dkBrowsers.size()-1){ return true; } //not found
 	}
 	rect = CefRect(0, 0, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
-	//DKLog("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n", DKINFO);
+	//DKLog("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n");
 	return true;
 }
 
@@ -166,7 +166,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 	data += params->GetSourceUrl();
 	data += ";";
 	data += params->GetLinkUrl();
-	//DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n", DKINFO);
+	//DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n");
 
 	DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 }
@@ -210,7 +210,7 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	DKString string = message.ToString();
 	replace(string,"%c","");
 	int identifier = browser->GetIdentifier();
-	DKLog("[CEF:"+toString(identifier)+"] "+string+"\n", DKINFO);
+	DKLog("[CEF:"+toString(identifier)+"] "+string+"\n");
 	return true;
 }
 
@@ -218,7 +218,7 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 bool DKSDLCefHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, int command_id, CefContextMenuHandler::EventFlags event_flags)
 {
 	CEF_REQUIRE_UI_THREAD();
-	//DKLog("DKCefWindow::OnContextMenuCommand()\n", DKINFO);
+	//DKLog("DKCefWindow::OnContextMenuCommand()\n", DKDEBUG);
 	return false;
 }
 
@@ -226,7 +226,7 @@ bool DKSDLCefHandler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser, CefRef
 void DKSDLCefHandler::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type, const CefCursorInfo& custom_cursor_info)
 {
 	//FIXME
-	//DKLog("OnCursorChange()\n", DKINFO);
+	//DKLog("DKCefWindow::OnCursorChange()\n", DKDEBUG);
 #ifdef WIN32
 	HWND hwnd;
 	if(!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)){ return; }
@@ -246,13 +246,13 @@ void DKSDLCefHandler::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHan
 void DKSDLCefHandler::OnFindResult(CefRefPtr<CefBrowser> browser, int identifier, int count, const CefRect& selectionRect, int activeMatchOrdinal, bool finalUpdate)
 {
 	CEF_REQUIRE_UI_THREAD();
-	DKLog("DKCefWindow::OnFindResult()\n", DKINFO);
+	DKLog("DKCefWindow::OnFindResult()\n", DKDEBUG);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnFileDialog(CefRefPtr<CefBrowser> browser, CefDialogHandler::FileDialogMode mode, const CefString& title, const CefString& default_file_path, const std::vector<CefString>& accept_filters, int selected_accept_filter, CefRefPtr<CefFileDialogCallback> callback)
 {
-	DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKINFO);
+	DKLog("DKSDLCefHandler::OnFileDialog("+title.ToString()+","+default_file_path.ToString()+")\n", DKDEBUG);
 	return false;
 }
 
@@ -376,7 +376,7 @@ void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType ty
 	}
 
 	else if(type == PET_POPUP){ //FIXME
-		DKLog("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n", DKINFO);
+		DKLog("DKSDLCefHandler::OnPaint(): type == PET_POPUP\n");
 		//if(dirtyRects.size() == 0){ return; }
 		if(!dkSdlCef->popup_image){
 			dkSdlCef->popup_image = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
@@ -438,10 +438,10 @@ void DKSDLCefHandler::OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& 
 bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyEvent& event, CefEventHandle os_event, bool* is_keyboard_shortcut)
 {
 	CEF_REQUIRE_UI_THREAD();
-	//DKLog("OnPreKeyEvent(): char="+toString(event.character)+", native="+toString(event.native_key_code)+", mods="+toString(event.modifiers)+"\n", DKINFO);
+	//DKLog("OnPreKeyEvent(): char="+toString(event.character)+", native="+toString(event.native_key_code)+", mods="+toString(event.modifiers)+"\n", DKDEBUG);
 
 	if(event.type == KEYEVENT_RAWKEYDOWN){
-		//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n", DKINFO);
+		//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
 		//#ifdef WIN32
 		DKEvent::SendEvent("GLOBAL", "keydown", toString(event.windows_key_code));
 		//#else
@@ -449,13 +449,13 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 		//#endif
 	}
 	if(event.type == KEYEVENT_KEYDOWN){
-		DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n", DKINFO);
+		DKLog("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n");
 	}
 	if(event.type == KEYEVENT_KEYUP){
-		//DKLog("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n", DKINFO);
+		//DKLog("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
 	}
 	if(event.type == KEYEVENT_CHAR){
-		//DKLog("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n", DKINFO);
+		//DKLog("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
 		DKEvent::SendEvent("GLOBAL", "keypress", toString(event.character));
 	}
 
@@ -465,7 +465,7 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKSDLCefHandler::OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback)
 {
-	DKLog("OnPrintDialog()\n", DKINFO);
+	DKLog("OnPrintDialog()\n", DKDEBUG);
 	return true;
 }
 
@@ -478,7 +478,7 @@ bool DKSDLCefHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, Ce
 
 	//This area is only for multi-process messages, return if using single-process
 	if(DKV8::singleprocess){
-		DKLog("DKSDLCefHandler::OnProcessMessageReceived("+toString(message->GetName())+"): message system disabled in single-process mode\n", DKINFO);
+		DKLog("DKSDLCefHandler::OnProcessMessageReceived("+toString(message->GetName())+"): message system disabled in single-process mode\n");
 		return false;
 	}
 

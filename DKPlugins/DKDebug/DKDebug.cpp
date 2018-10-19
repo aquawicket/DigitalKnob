@@ -68,7 +68,7 @@ protected:
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
 	virtual void OnOutput(LPCSTR szText){ 
-		DKLog(szText, DKINFO);
+		DKLog(szText);
 	}
 };
 
@@ -214,7 +214,7 @@ bool DKDebug::Init()
 
 #ifndef DEBUG
 	//TODO: we need to do this in the build script. The exe will be using the .pdb, so the file is locked. 
-	//DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n", DKINFO);
+	//DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n");
 	//DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);
 #endif
 

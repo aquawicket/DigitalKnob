@@ -22,7 +22,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
 	
 	if(!DKFile::PathExists(file)){ return false; }
 
-	DKLog("Extracting "+file+" . . .\n", DKINFO);
+	DKLog("Extracting "+file+" . . .\n");
 	DKFile::MakeDir(path);
 	DKFile::ChDir(path);
 
@@ -94,7 +94,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
     archive_write_free(ext);
 #endif
 
-	DKLog("Extract Complete: "+file+"\n", DKINFO);
+	DKLog("Extract Complete: "+file+"\n");
     return true;
 }
 

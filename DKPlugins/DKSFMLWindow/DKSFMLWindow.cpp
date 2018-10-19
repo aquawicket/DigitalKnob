@@ -9,7 +9,7 @@ std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
 /////////////////////////
 bool DKSFMLWindow::Init()
 {
-	DKLog("DKSFMLWindow::Init()\n", DKINFO);
+	DKLog("DKSFMLWindow::Init()\n", DKDEBUG);
 
 	window.create(sf::VideoMode(800, 600), "My window");
 

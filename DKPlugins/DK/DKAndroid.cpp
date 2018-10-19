@@ -148,7 +148,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	DKString rval;
 	DKClass::CallFunc(arry[0], &jdata, &rval);
 	if(rval.empty()){ return NULL; }
-	DKLog("CallCppFunction() rval = "+rval+"\n", DKINFO);
+	DKLog("CallCppFunction() rval = "+rval+"\n");
 	
 	jclass strClass = env->FindClass("java/lang/String"); 
 	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
@@ -281,7 +281,7 @@ void DKAndroid::init()
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
-			DKLog(classes[i]+"\n", DKINFO);
+			DKLog(classes[i]+"\n");
 		}
 
 		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
