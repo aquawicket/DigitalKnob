@@ -70,6 +70,7 @@ DKString DKVncServer::capture;
 ////////////////////////
 bool DKVncServer::Init()
 {
+	DKDebug();
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //DIRECT X
 
@@ -126,14 +127,14 @@ bool DKVncServer::Init()
 ///////////////////////
 bool DKVncServer::End()
 {
+	DKDebug();
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////
 enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 {
-	//DKLog("DKVncServer::newclient()\n", DKDEBUG);
-
+	DKDebug(cl);
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
 
@@ -162,6 +163,7 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 /////////////////////////////////////////////
 void DKVncServer::clientgone(rfbClientPtr cl)
 {
+	DKDebug(cl);
 	free(cl->clientData);
 	cl->clientData = NULL;
 }
@@ -169,6 +171,7 @@ void DKVncServer::clientgone(rfbClientPtr cl)
 ////////////////////////
 void DKVncServer::Loop()
 {
+	//DKDebug();
 	if(rfbProcessEvents(rfbScreen, 1)){
 		DrawBuffer();
 	}
@@ -177,6 +180,7 @@ void DKVncServer::Loop()
 ////////////////////////////////////////////////////////////////////////////////////////////
 rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len)
 {
+	DKDebug(cl, response, len);
 	char **passwds;
 	int i=0;
 
@@ -216,6 +220,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 //////////////////////////////
 void DKVncServer::DrawBuffer()
 {  
+	//DKDebug();
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
@@ -378,6 +383,7 @@ void DKVncServer::DrawBuffer()
 ////////////////////////////////////////////////////////////////////////////////
 void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 {
+	DKDebug(screen, width, height);
 	char *oldfb, *newfb;
 	oldfb = (char*)screen->frameBuffer;
 	newfb = (char*)malloc(width * height * bpp);
@@ -388,8 +394,7 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 ///////////////////////////////////////////////////////////////////////////
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-	//DKLog("mouseevent(): buttonMask="+toString(buttonMask)+" x="+toString(x)+" y="+toString(y)+"\n", DKDEBUG);
-
+	DKDebug(buttonMask, x, y, cl);
 	ClientData* cd = (ClientData*)cl->clientData;
 	if(same(cd->ipaddress,"127.0.0.1")){ return; }
 	
@@ -431,8 +436,7 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 ////////////////////////////////////////////////////////////////////////
 void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
-	//DKLog("keyevent(): key="+toString((int)key)+"\n", DKDEBUG);
-
+	DKDebug(down, key, cl);
 	int k = key;
 	switch(key){
 		case 65307: k = 27; break; //ESC
