@@ -448,12 +448,12 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 ////////////////////////////////////
 bool DKUtil::GetTicks(long& ticks)
 {
-	DKDebug(ticks);
+	//DKDebug(ticks);
+	
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::time_duration diff = tick - now;
 	//return (double)diff.total_milliseconds();
-
 #ifdef WIN32
 	ticks = GetTickCount();
 	return true;
@@ -604,7 +604,7 @@ bool DKUtil::LeftRelease()
 /////////////////////////////
 bool DKUtil::LimitFramerate()
 {
-	DKDebug();
+	//DKDebug();
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
@@ -1030,7 +1030,7 @@ bool DKUtil::TurnOnMonitor()
 ////////////////////////
 bool DKUtil::UpdateFps()
 {
-	DKDebug();
+	//DKDebug();
 	if(!frametimelast){ DKUtil::InitFps(); }
 	long frametimesindex;
 	long getticks;

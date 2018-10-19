@@ -128,7 +128,7 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 //////////////////////
 void DKTray::Process()
 {
-	DKDebug();
+	//DKDebug();
 #ifdef WIN32
     //Process Tray Icon Messages
     MSG msg;
