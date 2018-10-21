@@ -120,10 +120,38 @@ function DKLog(string, lvl)
 			console.log("%c"+getFileLine()+string, color);
 		}
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
-			console.log("%c"+getFileLine()+string, color);
+			if(lvl == DKERROR){
+				console.error(getFileLine()+string);
+			}
+			else if(lvl == DKWARN){
+				console.warn(getFileLine()+string);
+			}
+			else if(lvl == DKINFO){
+				console.info(getFileLine()+string);
+			}
+			else if(lvl == DKDEBUG){
+				console.log("%c"+getFileLine()+string, color);
+			}
+			else{
+				console.log("%c"+getFileLine()+string, color);
+			}
 		}
 		else{
-			console.log(getFileLine()+string);
+			if(lvl == DKERROR){
+				console.error(getFileLine()+string);
+			}
+			else if(lvl == DKWARN){
+				console.warn(getFileLine()+string);
+			}
+			else if(lvl == DKINFO){
+				console.info(getFileLine()+string);
+			}
+			else if(lvl == DKDEBUG){
+				console.log(getFileLine()+string);
+			}
+			else{
+				console.log(getFileLine()+string);
+			}
 		}
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
