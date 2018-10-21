@@ -1,5 +1,5 @@
 //BROWSER
-DKLog("Loaded DKAssets.js\n", DKWARN);
+DKLog("Loaded DKAssets.js\n", DKINFO);
 
 var href = document.location.href;
 href = href.substr(0, href.lastIndexOf("?")+1);

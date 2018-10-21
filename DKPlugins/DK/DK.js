@@ -114,13 +114,10 @@ function DKLog(string, lvl)
 			return fileline+"  ";
 		};
 		
-		if(lvl == DKERROR){ 
-			//alert("ERROR: "+string);
-			//throw "ERROR: "+string;
-			console.log("%c"+getFileLine()+string, color);
-		}
 		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
 			if(lvl == DKERROR){
+				//alert("ERROR: "+string);
+				//throw "ERROR: "+string;
 				console.error(getFileLine()+string);
 			}
 			else if(lvl == DKWARN){
@@ -138,6 +135,8 @@ function DKLog(string, lvl)
 		}
 		else{
 			if(lvl == DKERROR){
+				//alert("ERROR: "+string);
+				//throw "ERROR: "+string;
 				console.error(getFileLine()+string);
 			}
 			else if(lvl == DKWARN){
