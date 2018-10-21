@@ -17,8 +17,8 @@
 			var url = new URL(url_string);
 			var frame = url.searchParams.get("frame");
 			var plugin = url.searchParams.get("plugin");
-			DKLog("frame = "+frame+"\n");
-			DKLog("plugin = "+plugin+"\n");
+			//DKLog("frame = "+frame+"\n");
+			//DKLog("plugin = "+plugin+"\n");
 			if(plugin){ DKCreate(plugin+".js", function(){
 				if(frame){
 					DKCreate("DKGui/DKFrame.js", function(){
