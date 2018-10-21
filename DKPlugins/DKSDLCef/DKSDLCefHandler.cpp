@@ -215,14 +215,14 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	replace(string,"%c","");
 	int identifier = browser->GetIdentifier();
 
-	int lvl = 3;
-	if(lvl == LOGSEVERITY_DEFAULT){ lvl = DKINFO; }
-	if(lvl == LOGSEVERITY_VERBOSE){ lvl = DKDEBUG; }
-	if(lvl == LOGSEVERITY_DEBUG){ lvl = DKDEBUG; }
-	if(lvl == LOGSEVERITY_INFO){ lvl = DKINFO; }
-	if(lvl == LOGSEVERITY_WARNING){ lvl = DKWARN; }
-	if(lvl == LOGSEVERITY_ERROR){ lvl = DKERROR; }
-	if(lvl == LOGSEVERITY_DISABLE){ return true; }
+	int lvl = DKINFO;
+	if(level == LOGSEVERITY_DEFAULT){ lvl = DKINFO; }
+	else if(level == LOGSEVERITY_VERBOSE){ lvl = DKDEBUG; }
+	else if(level == LOGSEVERITY_DEBUG){ lvl = DKDEBUG; }
+	else if(level == LOGSEVERITY_INFO){ lvl = DKINFO; }
+	else if(level == LOGSEVERITY_WARNING){ lvl = DKWARN; }
+	else if(level == LOGSEVERITY_ERROR){ lvl = DKERROR; }
+	else if(level == LOGSEVERITY_DISABLE){ return true; }
 	DKLog("[CEF:"+toString(identifier)+"] "+string+"\n", lvl);
 	return true;
 }
