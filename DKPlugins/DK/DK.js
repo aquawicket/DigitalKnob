@@ -159,7 +159,21 @@ DKLog("*** DigitalKnob ***\n");
 DKLog(DK_GetBrowser()+"\n");
 DKLog(DK_GetJavascript()+"\n");
 
-
+//////////////////////
+function DKDebug(vars)
+{
+	var string = DKDebug.caller.name+"(";
+	if(vars){
+		for(var i = 0; i < arguments.length; i++){
+			string += arguments[i];
+			if(i < arguments.length-1){
+				string += ",";
+			}
+		}
+	}
+	string += ")";
+	DKLog(string+"\n", DKDEBUG);
+}
 
 /////////////////////
 function DK_GetTime()
@@ -522,8 +536,8 @@ function DK_IdLike(event, id)
 ////////////////////////////
 function DK_Value(event, id)
 { 
-	DKLog("DK_Value("+event+","+id+")\n", DKDEBUG);
-	
+	DKDebug(event, id);
+	//DKLog("DK_Value("+event+","+id+")\n", DKDEBUG);
 	if(DKWidget_GetValue(event) == id){ return true; }
 	return false;
 }
@@ -531,8 +545,8 @@ function DK_Value(event, id)
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
-	DKLog("StopPropagation("+event+")\n", DKDEBUG);
-	
+	DKDebug(event);
+	//DKLog("StopPropagation("+event+")\n", DKDEBUG);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -543,8 +557,8 @@ function DK_StopPropagation(event)
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
-	DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n", DKDEBUG);
-	
+	DKDebug(id, type, Function.name);
+	//DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n", DKDEBUG);	
 	if(typeof id != "string"){
 		DKLog("DKAddEvent(id, type, Function): id invalid\n", DKWARN);
 		return;
