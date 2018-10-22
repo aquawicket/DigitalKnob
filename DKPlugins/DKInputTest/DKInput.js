@@ -74,6 +74,7 @@ function DKInput_OnEvent(event)
 		}
 	}
 	if(DK_Type(event, "mousemove")){
+		//DKLog(DK_GetValue(event)+"\n");
 		var xy = DK_GetValue(event);
 		var arry = xy.split(",");
 		DKWidget_SetInnerHtml("mousex", "Mouse X: "+arry[0]);
