@@ -252,7 +252,7 @@ function LoadJs(url, callback)
 				func(); //Init
 			}
 			else{
-				DKLog(name+" is not callable \n", DKWARN);
+				DKLog(init+" is not defined\n", DKWARN);
 			}
 			
 			done = true;
