@@ -296,8 +296,8 @@ bool DKCef::Init()
 		dkCefWindow->dkCef = this;
 		//NewBrowser(id, top, left, width, height, url);
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
-		DKString icon = DKFile::local_assets+"icon.ico";
-		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
+		//DKString icon = DKFile::local_assets+"icon.ico";
+		//DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
 	DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
@@ -601,6 +601,10 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		SetFocus(dkBrowsers.size()-1);
+
+		//Set Icon
+		DKString icon = DKFile::local_assets+"icon.ico";
+		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 		
 #ifdef LINUX
 		gdk_init(NULL, NULL);
