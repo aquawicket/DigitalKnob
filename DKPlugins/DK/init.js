@@ -41,7 +41,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWidget_SetProperty(iframe, "left", "0rem");
 		DKWidget_SetProperty(iframe, "width", "100%");
 		DKWidget_SetProperty(iframe, "bottom", "0rem");
-		DKCef_SelectBrowser(DKCef_GetCurrentBrowser());
+		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 	}
 	else if(USE_ROCKET){
 		DKLog("Creating SDL -> ROCKET -> GUI \n");
@@ -71,7 +71,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		var height = 600;
 		DKCreate("DKCef");
 		DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
-		DKCef_SelectBrowser(DKCef_GetCurrentBrowser());
+		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
