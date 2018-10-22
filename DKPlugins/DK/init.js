@@ -67,8 +67,9 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 	}
 	else if(USE_CEF){
 		DKLog("Creating CEF -> GUI \n");
-		var width = 800;
-		var height = 600;
+		var assets = DKAssets_LocalAssets();
+		var width = Number(DKFile_GetSetting(assets+"settings.txt", "[WIDTH]"));
+		var height = Number(DKFile_GetSetting(assets+"settings.txt", "[HEIGHT]"));
 		DKCreate("DKCef");
 		DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
