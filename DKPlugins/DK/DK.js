@@ -124,10 +124,11 @@ function DKLog(string, lvl)
 				console.warn(getFileLine()+string);
 			}
 			else if(lvl == DKINFO){
-				console.info(getFileLine()+string);
+				console.log(getFileLine()+string);
 			}
 			else if(lvl == DKDEBUG){
-				console.log("%c"+getFileLine()+string, color);
+				//console.info("%c"+getFileLine()+string, color);
+				console.debug("%c"+getFileLine()+string, color);
 			}
 			else{
 				console.log("%c"+getFileLine()+string, color);
@@ -143,10 +144,10 @@ function DKLog(string, lvl)
 				console.warn(getFileLine()+string);
 			}
 			else if(lvl == DKINFO){
-				console.info(getFileLine()+string);
+				console.log(getFileLine()+string);
 			}
 			else if(lvl == DKDEBUG){
-				console.log(getFileLine()+string);
+				console.debug(getFileLine()+string);
 			}
 			else{
 				console.log(getFileLine()+string);
