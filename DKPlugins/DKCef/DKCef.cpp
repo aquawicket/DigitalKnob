@@ -588,8 +588,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 #ifdef WIN32
 		window_info.SetAsPopup(NULL, title.c_str());
 #endif
-		window_info.width = 800;
-		window_info.height = 600;
+		window_info.width = width;
+		window_info.height = height;
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 		DKBrowser dkBrowser;
