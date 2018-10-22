@@ -337,7 +337,7 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	DKDebug();
+	//DKDebug();
 	//DKLog("DK_GetBrowser()\n", DKDEBUG);
     if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
