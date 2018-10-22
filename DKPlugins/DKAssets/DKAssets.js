@@ -1,10 +1,13 @@
 //BROWSER
-DKLog("Loaded DKAssets.js\n", DKINFO);
+DKLog("Loaded DKAssets.js\n");
 
 var href = document.location.href;
-href = href.substr(0, href.lastIndexOf("?")+1);
+if(href.indexOf("?") > -1){
+	href = href.substr(0, href.lastIndexOf("?")+1);
+}
 href = href.substr(0, href.lastIndexOf("/")+1);
 local_assets = href;
+
 
 var log_debug = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_DEBUG]");
 if(log_debug == "ON"){ LOG_DEBUG = true; }

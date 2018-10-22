@@ -131,15 +131,24 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_severity_t level, const CefString& message, const CefString& source, int line)
 	{
-		//DKDebug(browser, level, "const CefString&", "const CefString&", line); // DON'T DO THIS
+		//DKDebug(browser, level, "const CefString&", "const CefString&", line);
 		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
-		//DKLog("DKCefWindow::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
+		//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
 		DKString string = message.ToString();
 		replace(string,"%c","");
 		int identifier = browser->GetIdentifier();
-		DKLog("[CEF:"+toString(identifier)+"] "+string+"\n");
+
+		int lvl = DKINFO;
+		if(level == LOGSEVERITY_DEFAULT){ lvl = DKINFO; }
+		else if(level == LOGSEVERITY_VERBOSE){ lvl = DKDEBUG; }
+		else if(level == LOGSEVERITY_DEBUG){ lvl = DKDEBUG; }
+		else if(level == LOGSEVERITY_INFO){ lvl = DKINFO; }
+		else if(level == LOGSEVERITY_WARNING){ lvl = DKWARN; }
+		else if(level == LOGSEVERITY_ERROR){ lvl = DKERROR; }
+		else if(level == LOGSEVERITY_DISABLE){ return true; }
+		DKLog("[CEF:"+toString(identifier)+"] "+string+"\n", lvl);
 		return true;
 	}
 
