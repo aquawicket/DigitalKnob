@@ -127,9 +127,9 @@ function DKSolution_OpenHere(path)
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
-		aPath = aPath.replace(absolutepath, "");
+		if(typeof(absolutepath) == 'function'){ aPath = aPath.replace(absolutepath, ""); }
 	}
-	//DKLog("aPath:"+aPath+"\n");
+	DKLog("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
