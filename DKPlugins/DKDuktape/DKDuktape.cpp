@@ -31,6 +31,8 @@ bool DKDuktape::Init()
 		    return false;
 		}
 
+		DKClass::DKCreate("DKJS");
+
 		//////////////////////////////////////////////////////////////////////////////////
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
 		poll_register(ctx);
@@ -53,8 +55,6 @@ bool DKDuktape::Init()
 			}
 		}
 		//////////////////////////////////////////////////////////////////////////////////
-
-		DKClass::DKCreate("DKJS");
 
 		DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
 		LoadFile(duktape);
@@ -84,6 +84,8 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 		DKLog("DKDuktape::AttachFunction(): ctx invalid\n", DKWARN);
 		return false; 
 	}
+
+	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_push_c_function(ctx, func, DUK_VARARGS);
 	duk_put_prop_string(ctx, -2, name.c_str());
@@ -190,7 +192,8 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	if(type.empty()){ return false; } //we need a type
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
-	//replace(jsreturn, "() {\"ecmascript\"}", "");
+	replace(jsreturn, "() { [ecmascript code] }", "");
+	//DKLog("jsreturn = "+jsreturn+"\n");
 	if(jsreturn.empty() || same(jsreturn,"0")){
 		DKLog("DKDuktape::OnEvent: jsreturn variable invalid. \n", DKERROR);
 		return false;
@@ -210,7 +213,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
-    if (duk_pcall(ctx, 1) != 0) {
+    if(duk_pcall(ctx, 1) != 0) {
 		DKLog("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n", DKERROR);
     }
 	else{

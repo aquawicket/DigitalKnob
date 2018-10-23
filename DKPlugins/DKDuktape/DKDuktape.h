@@ -3,6 +3,7 @@
 #define DKDuktape_H
 
 #include "DK/DK.h"
+
 #include "duktape.h"
 #include "duk_v1_compat.h"
 

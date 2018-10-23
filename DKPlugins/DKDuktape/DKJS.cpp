@@ -149,7 +149,7 @@ int DKJS::_DKAddEvent(duk_context* ctx)
 		replace(jsreturn, "function ", "");
 	}
 
-	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get("DKDuktape0"));
+	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
 	return 1;
 }
 
