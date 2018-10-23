@@ -67,8 +67,9 @@ protected:
 	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){}
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
-	virtual void OnOutput(LPCSTR szText){ 
-		DKLog(szText);
+	virtual void OnOutput(LPCSTR szText){
+		//DKLog("StackWalkerToConsole(): OnOutput\n");
+		DKLog(szText, DKWARN);
 	}
 };
 
@@ -87,12 +88,14 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 	}
 #endif
 
+	DKLog("########## C++ CALL STACK ##########\n", DKWARN);
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), pExPtrs->ContextRecord);
+	DKLog("\n");
   
 	TCHAR lString[500];
 	_stprintf_s(lString,
-		_T("*** Unhandled Exception! See console output for more infos!\n")
+		_T("*** Unhandled Exception! See console output for more info\n")
 		_T("   ExpCode: 0x%8.8X\n")
 		_T("   ExpFlags: %d\n")
 		_T("   ExpAddress: 0x%8.8X\n")
@@ -254,9 +257,11 @@ bool DKDebug::SendBugReport(const DKString& filename)
 bool DKDebug::ShowStackTrace(const void* input, void* output)
 {
 	DKDebug();
+	DKLog("########## C++ CALL STACK ##########\n", DKWARN);
 #ifdef WIN32
 	StackWalkerToConsole sw;  // output to console
-	sw.ShowCallstack(GetCurrentThread(), /*pExPtrs->ContextRecord*/ NULL);
+	sw.ShowCallstack(GetCurrentThread(), NULL);
+	DKLog("\n");
 	return true;
 #else
 	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);

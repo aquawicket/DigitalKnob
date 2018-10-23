@@ -123,7 +123,7 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 #endif
 
-	printf("%s",string.c_str());
+	printf("%s",string.c_str()); //THIS IS WHERE WE ACTUALLY PRINT TO THE CONSOLE
 
 #ifdef WIN32
 	SetConsoleTextAttribute(hConsole, saved_attributes);
