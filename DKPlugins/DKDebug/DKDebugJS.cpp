@@ -15,14 +15,14 @@ bool DKDebugJS::Init()
 int DKDebugJS::SendBugReport(duk_context* ctx)
 {
 	DKString filename = duk_require_string(ctx, 0);
-	if(!DKDebug::SendBugReport(filename)){ return 0; }
+	if(!DKDebug::Get()->SendBugReport(filename)){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////////////////////
 int DKDebugJS::ShowStackTrace(duk_context* ctx)
 {
-	if(!DKDebug::ShowStackTrace()){ return 0; }
+	if(!DKDebug::Get()->ShowStackTrace(NULL, NULL)){ return 0; }
 	return 1;
 }
 

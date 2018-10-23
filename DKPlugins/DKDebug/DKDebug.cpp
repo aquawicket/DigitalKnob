@@ -226,6 +226,9 @@ bool DKDebug::Init()
 	signal(SIGILL,  handler);
 	signal(SIGFPE,  handler);
 #endif
+
+	DKClass::RegisterFunc("DKDebug::ShowStackTrace", &DKDebug::ShowStackTrace, this);
+
 	return true;
 }
 
@@ -247,8 +250,8 @@ bool DKDebug::SendBugReport(const DKString& filename)
 	return true;
 }
 
-//////////////////////////////
-bool DKDebug::ShowStackTrace()
+/////////////////////////////////////////////////////////////
+bool DKDebug::ShowStackTrace(const void* input, void* output)
 {
 	DKDebug();
 #ifdef WIN32

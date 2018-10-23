@@ -209,18 +209,33 @@ bool DKDuktape::OnEvent(DKEvent* event)
 		evt += "," + value;
 	}
 
+	//DKLog("evt = "+evt+"\n");
+	//DKLog("jsreturn = "+jsreturn+"\n");
+
+	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKLog(err.stack, DKERROR); }";
+	//DKLog("Call = "+full_call+"\n");
+	duk_eval_string(DKDuktape::ctx, full_call.c_str());
+	
+	/*
 	//call JS_OnEvent(evt);
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
-    if(duk_pcall(ctx, 1) != 0) {
+    if(duk_pcall(ctx, 1) != 0){
 		DKLog("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n", DKERROR);
+		
+		//TODO - how can we print the call stack
+		//Javascript Example:
+		//try{
+		//	//put the code we are calling here
+		//}catch(err){DKLog("########## DUKTAPE CALL STACK ##########\n"+err.stack+"\n");}
     }
 	else{
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value??
     }
-    duk_pop(ctx);  /* pop result/error */
+    duk_pop(ctx);  // pop result/error
+	*/
 	return true;
 }
 

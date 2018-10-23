@@ -11,8 +11,8 @@ public:
 	bool Init();
 	bool End();
 	
-	static bool SendBugReport(const DKString& filename);
-	static bool ShowStackTrace();
+	bool SendBugReport(const DKString& filename);
+	bool ShowStackTrace(const void* input, void* output);
 };
 
 

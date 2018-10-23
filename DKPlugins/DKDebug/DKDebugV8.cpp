@@ -24,7 +24,7 @@ bool DKDebugV8::SendBugReport(CefArgs args, CefReturn retval)
 {
 	DKDebug(args, retval);
 	DKString filename = args->GetString(0);
-	if(!DKDebug::SendBugReport(filename)) { return false; }
+	if(!DKDebug::Get()->SendBugReport(filename)) { return false; }
 	return true;
 }
 
@@ -32,7 +32,7 @@ bool DKDebugV8::SendBugReport(CefArgs args, CefReturn retval)
 bool DKDebugV8::ShowStackTrace(CefArgs args, CefReturn retval)
 {
 	DKDebug(args, retval);
-	if(!DKDebug::ShowStackTrace()){ return false; }
+	if(!DKDebug::Get()->ShowStackTrace(NULL, NULL)){ return false; }
 	return true;
 }
 
