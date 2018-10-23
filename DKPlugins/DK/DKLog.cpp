@@ -152,9 +152,10 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 		DKEvent::SendEvent("DKLog", "string", string);
 	}
 
-	//send errors to a message box.
+	//On errors show the stack trace or open a message box
 	if(log_errors && (lvl == DKERROR/* || has(string,"Uncaught ")*/)){
-		DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);  //TODO
+		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
+		
 		//DKString in = string;
 		//DKClass::CallFunc("DKWindow::MessageBox", &in, NULL);
 	}
