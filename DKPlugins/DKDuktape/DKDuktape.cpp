@@ -240,7 +240,14 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
     if(duk_pcall(ctx, 1) != 0){
-		DKLog("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n", DKERROR);
+		//DKLog("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n", DKERROR);
+		DKString error = toString(duk_safe_to_string(ctx, -1));
+		replace(error, "'", "\\'");
+		DKString str = "var err = new Error();";
+		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += jsreturn+": "+error+"\\n";
+		str += "'+err.stack+'\\n', DKERROR);";
+		duk_eval_string(ctx, str.c_str());
     }
 	else{
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value??
