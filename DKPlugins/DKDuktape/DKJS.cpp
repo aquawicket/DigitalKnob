@@ -190,7 +190,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 		return 1;
 	}
 
-	//Look for a callback function, and call it if one exists.
+	//Call the callback
 	if(callback_found){
 		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n"); }
 		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n"); }
