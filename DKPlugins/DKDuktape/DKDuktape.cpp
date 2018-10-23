@@ -100,18 +100,17 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString init = filename+"_End";
-	DKFile::RemoveExtention(init);
+	DKString end = filename+"_End";
+	DKFile::RemoveExtention(end);
 
 	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
+	duk_get_prop_string(ctx, -1 /*index*/, end.c_str());
 	if(duk_pcall(ctx, 0 /*nargs*/) != 0){
-		//DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
 		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
-		str += error+"\\n";
+		str += end+": "+error+"\\n";
 		str += "'+err.stack+'\\n', DKERROR);";
 		duk_eval_string(ctx, str.c_str());
 	}
@@ -145,7 +144,7 @@ bool DKDuktape::CallInit(const DKString& file)
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
 		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
-		str += error+"\\n";
+		str += init+": "+error+"\\n";
 		str += "'+err.stack+'\\n', DKERROR);";
 		duk_eval_string(ctx, str.c_str());
 	}
@@ -190,7 +189,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
 		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
-		str += error+"\\n";
+		str += path+": "+error+"\\n";
 		str += "'+err.stack+'\\n', DKERROR);";
 		duk_eval_string(ctx, str.c_str());
     }
