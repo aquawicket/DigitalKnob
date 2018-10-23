@@ -23,6 +23,8 @@ function app_LoadPage()
 {
 	DKLog("app_LoadPage()\n");
 	
+	DKCreate("DKDebug");
+	
 	DKCreate("DK/DKBrowser.css");
 	DKCreate("DKWindow/DKWindow.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
@@ -31,8 +33,7 @@ function app_LoadPage()
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKGui/Desktop.js", function(){
 	DKCreate("DKGui/Taskbar.js", function(){
-		//DKCreate("DKDebug");
-		//Test();
+		Test();
 	});
 	});
 	});
