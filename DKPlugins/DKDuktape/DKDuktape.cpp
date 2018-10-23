@@ -103,9 +103,16 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString end = filename+"_End";
 	DKFile::RemoveExtention(end);
 
+	DKString full_call = "try{ "+end+"(); } catch(err){ DKLog('";
+	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
+	full_call += "'+err.stack+'\\n";
+	full_call += "', DKERROR); }";
+	duk_eval_string(DKDuktape::ctx, full_call.c_str());
+
+	/*
 	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1 /*index*/, end.c_str());
-	if(duk_pcall(ctx, 0 /*nargs*/) != 0){
+	duk_get_prop_string(ctx, -1, end.c_str());
+	if(duk_pcall(ctx, 0) != 0){
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
@@ -117,7 +124,8 @@ bool DKDuktape::CallEnd(const DKString& file)
 	else{
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
 	}
-	duk_pop(ctx);  /* pop result/error */
+	duk_pop(ctx);  // pop result/error
+	*/
 
 	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
 		if (has(DKDuktape::filelist[i], filename)) {
@@ -136,9 +144,16 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKFile::RemoveExtention(filename);
 	DKString init = filename+"_Init";
 
+	DKString full_call = "try{ "+init+"(); } catch(err){ DKLog('";
+	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
+	full_call += "'+err.stack+'\\n";
+	full_call += "', DKERROR); }";
+	duk_eval_string(DKDuktape::ctx, full_call.c_str());
+
+	/*
 	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
-	if(duk_pcall(ctx, 0 /*nargs*/) != 0) {
+	duk_get_prop_string(ctx, -1, init.c_str());
+	if(duk_pcall(ctx, 0) != 0) {
 		//DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
@@ -151,7 +166,8 @@ bool DKDuktape::CallInit(const DKString& file)
 	else {
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
 	}
-	duk_pop(ctx);  /* pop result/error */
+	duk_pop(ctx);  // pop result/error
+	*/
 	return true;
 }
 
