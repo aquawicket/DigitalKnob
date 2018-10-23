@@ -195,6 +195,12 @@ int DKJS::_DKCreate(duk_context* ctx)
 		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n"); }
 		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n"); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
+			/*
+			duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+			printf("%s\n", duk_get_string(ctx, -1));
+			duk_pop(ctx);  // pop `err.stack`
+			*/
+			
 			DKString error = toString(duk_safe_to_string(ctx, -1));
 			replace(error, "'", "\\'");
 			DKString str = "var err = new Error();";
@@ -203,7 +209,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 			str += "'+err.stack+'\\n', DKERROR);";
 			duk_eval_string(ctx, str.c_str());
 		}
-		duk_pop(ctx);
+		//duk_pop(ctx); // pop return value (or `err`)
     }
 
 	duk_push_string(ctx, obj->data[1].c_str());
