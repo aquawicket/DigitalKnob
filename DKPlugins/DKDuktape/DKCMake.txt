@@ -1,5 +1,5 @@
-DKDEPEND(duktape-1.5.0)
-##DKDEPEND(duktape-2.2.0) ##TODO
+##DKDEPEND(duktape-1.5.0)
+DKDEPEND(duktape-2.3.0)
 
 DKCOPY(${DUKTAPE}/src/duktape.c ${DKPLUGINS}/DKDuktape/duktape.cpp FALSE)
 DKCOPY(${DUKTAPE}/examples/eventloop/poll.c ${DKPLUGINS}/DKDuktape/poll.cpp FALSE)
