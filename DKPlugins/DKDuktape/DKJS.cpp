@@ -195,9 +195,13 @@ int DKJS::_DKCreate(duk_context* ctx)
 		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n"); }
 		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n"); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
-			DKLog("DKJS::_DKCreate("+data+"): JsFunc call failed \n", DKERROR);
-			DKLog("Error: "+toString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
+			//DKLog("DKJS::_DKCreate("+data+"): JsFunc call failed \n Error: "+toString(duk_safe_to_string(ctx, -1))+"\n", DKWARN);
 			//printf("Error: %s\n", duk_safe_to_string(ctx, -1));
+			DKString str = "DKLog('########## DUKTAPE STACK TRACE ##########\\n')";
+			str += "DKLog('ERROR: "+toString(duk_safe_to_string(ctx, -1))+"\\n');";
+			str += "var err = new Error();";
+			str += "DKLog(err.stack+'\\n', DKERROR);";
+			duk_eval_string(ctx, str.c_str());
 		}
 		duk_pop(ctx);
     }
