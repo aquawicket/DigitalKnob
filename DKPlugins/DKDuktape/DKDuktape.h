@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 #include "duktape.h"
+#include "duk_v1_compat.h"
 
 /////////////////////////////////////////////
 class DKDuktape : public DKObjectT<DKDuktape>
@@ -39,7 +40,7 @@ public:
 	static int c_evloop;
 	int handle_file(duk_context *ctx, const char *filename);
 	int handle_fh(duk_context *ctx, FILE *f, const char *filename);
-	static int wrapped_compile_execute(duk_context *ctx);
+	static int wrapped_compile_execute(duk_context *ctx, void *udata);
 };
 
 

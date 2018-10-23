@@ -293,6 +293,7 @@ bool DKDuktape::QueueDuktape(const DKString& code)
 	return true;
 }
 
+
 //////////////////////////////////////////////////////////////////
 ////////////// eventloop stuff  //////////////////////////////////
 //////////////////////////////////////////////////////////////////
@@ -347,7 +348,7 @@ int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename)
 	free(buf);
 	buf = NULL;
 
-	rc = duk_safe_call(ctx, wrapped_compile_execute, 2 /*nargs*/, 1 /*nret*/);
+	rc = duk_safe_call(ctx, wrapped_compile_execute, NULL, 2 /*nargs*/, 1 /*nret*/);
 	if (rc != DUK_EXEC_SUCCESS) {
 		DKLog("DKDuktape::handle_fh(): DUK_EXEC_SUCCESS failed \n", DKERROR);
 		return -1;
@@ -362,8 +363,8 @@ int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename)
 	return retval;
 }
 
-////////////////////////////////////////////////////////
-int DKDuktape::wrapped_compile_execute(duk_context *ctx)
+/////////////////////////////////////////////////////////////////////
+int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata)
 {
 	//DKDebug(ctx);
 	int comp_flags = 0;
