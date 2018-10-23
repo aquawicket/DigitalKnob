@@ -104,7 +104,10 @@ function DKSolutionMenu_OpenHere()
 {
 	DKLog("DKSolutionMenu_OpenHere("+DKSolutionMenu_file+")\n", DKDEBUG);
 	var path = DKSolutionMenu_file;
+	//DKLog("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
+	//DKLog("absolutepath = "+absolutepath+"\n");
 	//path = path.replace(absolutepath,"");
+	//DKLog("path = "+path+"\n");
 	DKSolution_OpenHere(path);
 }
 
