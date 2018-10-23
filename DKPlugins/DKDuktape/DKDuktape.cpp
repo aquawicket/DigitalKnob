@@ -105,10 +105,17 @@ bool DKDuktape::CallEnd(const DKString& file)
 
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
-	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
-		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+	if(duk_pcall(ctx, 0 /*nargs*/) != 0){
+		//DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+		DKString error = toString(duk_safe_to_string(ctx, -1));
+		replace(error, "'", "\\'");
+		DKString str = "var err = new Error();";
+		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += error+"\\n";
+		str += "'+err.stack+'\\n', DKERROR);";
+		duk_eval_string(ctx, str.c_str());
 	}
-	else {
+	else{
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
 	}
 	duk_pop(ctx);  /* pop result/error */
@@ -132,8 +139,15 @@ bool DKDuktape::CallInit(const DKString& file)
 
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1 /*index*/, init.c_str());
-	if (duk_pcall(ctx, 0 /*nargs*/) != 0) {
-		DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+	if(duk_pcall(ctx, 0 /*nargs*/) != 0) {
+		//DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+		DKString error = toString(duk_safe_to_string(ctx, -1));
+		replace(error, "'", "\\'");
+		DKString str = "var err = new Error();";
+		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += error+"\\n";
+		str += "'+err.stack+'\\n', DKERROR);";
+		duk_eval_string(ctx, str.c_str());
 	}
 	else {
 		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
@@ -172,7 +186,6 @@ bool DKDuktape::LoadFile(const DKString& path)
 	
 	if(duk_peval_file(ctx, path.c_str()) != 0){
 		DKLog(path+" "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
-		return false;
     }
     duk_pop(ctx);  /* ignore result ?? */
 
@@ -209,7 +222,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	}
 
 	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKLog('";
-	full_call += "########## DUCKTAPE CALL STACK ##########\\n";
+	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += "'+err.stack+'\\n";
 	full_call += "', DKERROR); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
