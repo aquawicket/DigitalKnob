@@ -210,6 +210,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	}
 
 	//call JS_OnEvent(evt);
+	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter

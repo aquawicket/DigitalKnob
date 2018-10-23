@@ -37,7 +37,7 @@ function Taskbar_OnEvent(event)
 		DKCreate("DKGui/TaskbarMenu.js", function(){});
 	}
 	if(DK_Id(event, "test_animate")){
-		//DKLog("Taskbar_OnEvent(): animate\n");
+		DKLog("Taskbar_OnEvent(): animate\n");
 		pos = -45;
 		animation = setInterval(Taskbar_Animate, 15);
 		//EventLoop.run();
@@ -47,7 +47,7 @@ function Taskbar_OnEvent(event)
 //////////////////////////
 function Taskbar_Animate()
 {
-	DKLog("Taskbar_Animate()\n", DKDEBUG);
+	DKLog("Taskbar_Animate()\n");//, DKDEBUG);
     if(pos == 0){
         clearInterval(animation);
     } 
