@@ -2,6 +2,7 @@
 function DKDom_init()
 {
 	DKDebug();
+	DKCreate("DKDom");
 	DKDom_Test();
 }
 
