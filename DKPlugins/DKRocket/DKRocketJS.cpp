@@ -9,11 +9,9 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload);
 	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
 	DKDuktape::AttachFunction("DKRocket_getElementById", DKRocketJS::getElementById);
+	DKDuktape::AttachFunction("DKRocket_getAttribute", DKRocketJS::getAttribute);
 	DKDuktape::AttachFunction("DKRocket_hasAttribute", DKRocketJS::hasAttribute);
-
-	//Note: moved to DKWidgetJS
-	//DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
-	//DKDuktape::LoadFile(jsfile);
+	DKDuktape::AttachFunction("DKRocket_setAttribute", DKRocketJS::setAttribute);
 	return true;
 }
 
@@ -46,7 +44,7 @@ int DKRocketJS::getElementById(duk_context* ctx)
 }
 
 //////////////////////////////////////////////
-int DKRocketJS::hasAttribute(duk_context* ctx)
+int DKRocketJS::getAttribute(duk_context* ctx)
 {
 	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
@@ -55,10 +53,48 @@ int DKRocketJS::hasAttribute(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	Rocket::Core::Variant* variant = element->GetAttribute(attribute.c_str());
+	if(!variant){ 
+		DKLog("DKRocketJS::getAttribute(): variant invalid", DKERROR);
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rocket::Core::String temp = element->GetAttribute(attribute.c_str())->Get<Rocket::Core::String>();
+	DKString value = temp.CString();
+	duk_push_string(ctx, value.c_str());
+	return true;
+}
+
+//////////////////////////////////////////////
+int DKRocketJS::hasAttribute(duk_context* ctx)
+{
+	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString attribute = duk_require_string(ctx, 1);
+	if(!element){
+		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		duk_push_boolean(ctx, false);
+		return true;
+	}
 	if(!element->HasAttribute(attribute.c_str())){ 
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	duk_push_boolean(ctx, true);
+	return true;
+}
+
+//////////////////////////////////////////////
+int DKRocketJS::setAttribute(duk_context* ctx)
+{
+	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString attribute = duk_require_string(ctx, 1);
+	DKString value = duk_require_string(ctx, 2);
+	if(!element){
+		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	element->SetAttribute(attribute.c_str(), value.c_str());
 	duk_push_boolean(ctx, true);
 	return true;
 }

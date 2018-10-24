@@ -89,7 +89,7 @@ function DKDom_Create(event)
 		this.style = new Style(pointer);
 
 		Element.prototype.getAttribute = function(attribute){
-			this[attribute] = DKWidget_GetAttribute(this.id, attribute);
+			this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
 			return this[attribute];
 		}
 		Element.prototype.hasAttribute = function(attribute){
@@ -97,7 +97,7 @@ function DKDom_Create(event)
 			else{ return false; }
 		}
 		Element.prototype.setAttribute = function(attribute, value){
-			DKWidget_SetAttribute(this.id, attribute, value);
+			DKRocket_setAttribute(this.pointer, attribute, value);
 			this[attribute] = value;
 		}
 		Element.prototype.toString = function(){
@@ -139,15 +139,15 @@ function DKDom_Create(event)
 			},
 			get: function (targ, key, recv){
 				//DKLog("targ[id] = "+targ["id"]+"\n");
-				if(key == "id"){ return true; }
+				//if(key == "id"){ return true; }
 				//if(key == "width"){ targ[key] = DKWidget_GetProperty(targ["id"], "width"); }
-				targ[key] = DKWidget_GetProperty(targ["id"], key);
+				targ[key] = DKWidget_GetProperty(this.pointer, key);
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
-				if(key == "id"){ return true; }
+				//if(key == "id"){ return true; }
 				//if(key == "width"){ targ[key] = DKWidget_SetProperty(targ["id"], "width", val); }
-				DKWidget_SetProperty(targ["id"], key, val);
+				DKWidget_SetProperty(this.pointer, key, val);
 				targ[key] = val;
 				return true;
 			},
@@ -166,7 +166,9 @@ function DKDom_Test()
 {
 	var element = document.getElementById("BugReport_Image");
 	DKLog("element.hasAttribute(id) = "+element.hasAttribute("id")+"\n");
-
+	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
+	element.setAttribute("id", "test_name");
+	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
 	/*
 	DKLog("\n");
 	//window tests
