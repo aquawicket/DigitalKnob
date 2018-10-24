@@ -1,7 +1,11 @@
+var window;
+var document;
+
 /////////////////////
 function DKDom_Init()
 {
 	//DKDebug();
+	DKDom_Create();
 	DKDom_Test();
 }
 
@@ -17,13 +21,14 @@ function DKDom_OnEvent(event)
 	//DKDebug(event);
 }
 
-//////////////////////////
-function DKDom_Test(event)
+////////////////////////////
+function DKDom_Create(event)
 {
 	//////////////////
 	function Window(){
-		this.document = new Document();
-		this.name = 'WindowName';
+		document = new Document();
+		this.document = document;
+		this.name;
 		this.innerWidth;
 		this.innerHeight;
 
@@ -33,25 +38,21 @@ function DKDom_Test(event)
 	
 		return new Proxy(this, { // Wrap it behind a proxy
 			has: function (targ, key) {
-				//DKLog('has called for key=' + key+'\n');
 				return key in targ;  // return unmodified existence status
 			},
-
 			get: function (targ, key, recv) {
-				//DKLog('get called for key=' + key+'\n');
-				if(key == "innerWidth"){ targ[key] = DKWindow_GetWidth(); }
 				if(key == "innerHeight"){ targ[key] = DKWindow_GetHeight(); }
+				if(key == "innerWidth"){ targ[key] = DKWindow_GetWidth(); }
 				return targ[key];  // return unmodified value
 			},
-
 			set: function (targ, key, val, recv) {
-				//DKLog('set called for key=' + key + ', val=' + val+'\n');
+				if(key == "innerHeight"){ DKWindow_SetHeight(Number(val)); }
+				if(key == "innerWidth"){ DKWindow_SetWidth(Number(val)); }
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
-		
+
 			deleteProperty: function (targ, key) {
-				//DKLog('deleteProperty called for key=' + key+'\n');
 				delete targ[key];  // must perform delete to target manually if 'deleteProperty' defined
 				return true;       // true: indicate that property delete was allowed
 			}
@@ -60,7 +61,7 @@ function DKDom_Test(event)
 	
 	////////////////////
 	function Document(){
-		this.title = 'DocumentTitle';
+		this.title;
 
 		Document.prototype.getElementById = function(id){
 			DKLog("document.getElementById("+id+")\n");
@@ -125,13 +126,19 @@ function DKDom_Test(event)
 			}
 		});
 	}
+	
+	window = new Window();
+}
 
-	var window = new Window();
-	var element = window.document.getElementById("BugReport_Image");
+/////////////////////
+function DKDom_Test()
+{
+	var element = document.getElementById("BugReport_Image");
 	DKLog("element.id = "+element.id+"\n");
 	DKLog("element.position = "+element.position+"\n");
 	DKLog("element.width = "+element.width+"\n");
 	DKLog("element.height = "+element.height+"\n");
+	//window.innerWidth = 100;
 	//element.height = "20px";
 	//DKLog("element.width = "+element.width+"\n");
 	
