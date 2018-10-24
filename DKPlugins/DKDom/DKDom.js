@@ -110,12 +110,12 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function(targ, key, recv){
-				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
 				targ[key] = DKRocket_getAttribute(targ["pointer"], key);
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
-				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
 				DKRocket_setAttribute(targ["pointer"], key, val);
 				targ[key] = val;
 				return true;
@@ -136,12 +136,12 @@ function DKDom_Create(event)
 			},
 			get: function (targ, key, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
-				targ[key] = DKWidget_GetProperty(targ["pointer"], key);
+				targ[key] = DKRocket_getProperty(targ["pointer"], key);
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
-				DKWidget_SetProperty(targ["pointer"], key, val);
+				DKRocket_setProperty(targ["pointer"], key, val);
 				targ[key] = val;
 				return true;
 			},
@@ -158,13 +158,6 @@ function DKDom_Create(event)
 /////////////////////
 function DKDom_Test()
 {
-	var element = document.getElementById("BugReport_Image");
-	DKLog("element.hasAttribute(id) = "+element.hasAttribute("id")+"\n");
-	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
-	element.setAttribute("id", "test_name");
-	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
-	
-	/*
 	DKLog("\n");
 	//window tests
 	DKLog("##### window tests #####\n");
@@ -193,5 +186,4 @@ function DKDom_Test()
 	DKLog("element.style.width = "+element.style.width+"\n");
 	DKLog("element.style.height = "+element.style.height+"\n");
 	DKLog("\n");
-	*/
 }
