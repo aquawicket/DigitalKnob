@@ -13,6 +13,12 @@ public:
 
 	static int Reload(duk_context* ctx);
 	static int ToggleDebugger(duk_context* ctx);
+	
+	//document
+	static int getElementById(duk_context* ctx);
+
+	//element
+	static int hasAttribute(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRocketJS, true)
