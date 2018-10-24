@@ -65,6 +65,16 @@ function DKDom_Create(event)
 			var element = new Element(pointer);
 			return element;
 		}
+		
+		Document.prototype.getElementsByClassName = function(name){
+			var nodeList = DKRocket_getElementsByClassName(name);
+			return nodeList;
+		}
+		
+		Document.prototype.getElementsByTagName = function(name){
+			var nodeList = DKRocket_getElementsByTagName(name);
+			return nodeList;
+		}
 	
 		return new Proxy(this, {
 			has: function (targ, key){
@@ -170,6 +180,8 @@ function DKDom_Test()
 	DKLog("##### document tests #####\n");
 	document.name = "test_doc_name";
 	DKLog("document.name = "+document.name+"\n");
+	var nodeList = document.getElementsByTagName("div");
+	DKLog(String(nodeList)+"\n");
 	DKLog("\n");
 	
 	//element tests 

@@ -14,6 +14,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_setAttribute", DKRocketJS::setAttribute);
 	DKDuktape::AttachFunction("DKRocket_getProperty", DKRocketJS::getProperty);
 	DKDuktape::AttachFunction("DKRocket_setProperty", DKRocketJS::setProperty);
+	DKDuktape::AttachFunction("DKRocket_getElementsByClassName", DKRocketJS::getElementsByClassName);
+	DKDuktape::AttachFunction("DKRocket_getElementsByTagName", DKRocketJS::getElementsByTagName);
 	return true;
 }
 
@@ -136,5 +138,31 @@ int DKRocketJS::setProperty(duk_context* ctx)
 	element->SetProperty(attribute.c_str(), value.c_str());
 	return true;
 }
+
+////////////////////////////////////////////////////////
+int DKRocketJS::getElementsByClassName(duk_context* ctx)
+{
+	DKString name = duk_require_string(ctx, 0);
+	Rocket::Core::ElementList elements;
+	DKRocket::Get()->document->GetElementsByClassName(elements, name.c_str());
+	if(elements.empty()){ return true; }
+	duk_push_pointer(ctx, &elements);
+	return true;	
+}
+
+//////////////////////////////////////////////////////
+int DKRocketJS::getElementsByTagName(duk_context* ctx)
+{
+	DKString name = duk_require_string(ctx, 0);
+	Rocket::Core::ElementList elements;
+	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
+	if(elements.empty()){ return true; }
+	//for(int i=0; i<elements.size(); i++){
+	//	elements[i];
+	//}
+	duk_push_pointer(ctx, &elements);
+	return true;	
+}
+
 
 #endif //USE_DKDuktape
