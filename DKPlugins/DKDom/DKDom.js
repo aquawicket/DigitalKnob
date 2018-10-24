@@ -166,26 +166,32 @@ function DKDom_Create(event)
 /////////////////////
 function DKDom_Test()
 {
-	/*
+	DKLog("\n");
+
 	//window tests
+	DKLog("##### window tests #####\n");
 	window.alert("test");
 	DKLog("window.innerHeight: "+window.innerHeight+"\n");
 	DKLog("window.innerWidth: "+window.innerWidth+"\n");
-	*/
+	DKLog("\n");
 	
 	//document tests
+	DKLog("##### document tests #####\n");
 	//TODO
+	DKLog("\n");
 	
 	//element tests 
+	DKLog("##### element tests #####\n");
 	var element = document.getElementById("BugReport_Image");
 	DKLog("element.id = "+element.id+"\n");
+	DKLog("element.hasAttribute(id) = "+element.hasAttribute("id")+"\n");
+	element.setAttribute("test", "http://digitalknob.com/image.png");
+	DKLog("element.getAttribute(test) = "+element.getAttribute("test")+"\n");
+	DKLog("\n");
+	
+	//style tests
+	DKLog("##### style tests #####\n");
 	DKLog("element.style.width = "+element.style.width+"\n");
-	
-	//DKLog("element.style.width = "+element.style.width+"\n");
-	//DKLog("element.style.height = "+element.style.height+"\n");
-	//DKLog("element.hasAttribute(id) = "+element.hasAttribute("id")+"\n");
-	
-	//element.setAttribute("test", "http://digitalknob.com/image.png");
-	//DKLog("element.getAttribute(test) = "+element.getAttribute("test")+"\n");
-
+	DKLog("element.style.height = "+element.style.height+"\n");
+	DKLog("\n");
 }
