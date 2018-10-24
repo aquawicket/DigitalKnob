@@ -20,11 +20,12 @@ function DKDom_OnEvent(event)
 //////////////////////////
 function DKDom_Test(event)
 {
-	
+	//////////////////
 	function Window(){
 		this.document = new Document();
 		this.name = 'WindowName';
-		this.innerWidth;// = 0;
+		this.innerWidth;
+		this.innerHeight;
 
 		Window.prototype.alert = function(str){
 			DKLog("alert: "+str+'\n');
@@ -39,6 +40,7 @@ function DKDom_Test(event)
 			get: function (targ, key, recv) {
 				//DKLog('get called for key=' + key+'\n');
 				if(key == "innerWidth"){ targ[key] = DKWindow_GetWidth(); }
+				if(key == "innerHeight"){ targ[key] = DKWindow_GetHeight(); }
 				return targ[key];  // return unmodified value
 			},
 
@@ -56,11 +58,17 @@ function DKDom_Test(event)
 		});
 	}
 	
+	////////////////////
 	function Document(){
 		this.title = 'DocumentTitle';
 
-		Document.prototype.getElementById = function(str){
-			DKLog("document.getElementById("+str+")\n");
+		Document.prototype.getElementById = function(id){
+			DKLog("document.getElementById("+id+")\n");
+			if(DKWidget_ElementExists(id)){
+				var element = new Element();
+				element.id = id;
+				return element;
+			}
 		}
 	
 		return new Proxy(this, {
@@ -80,8 +88,48 @@ function DKDom_Test(event)
 			}
 		});
 	}
+	
+	///////////////////
+	function Element(){
+		this.id;
+		this.position;
+		this.width;
+		this.height;
+
+		Element.prototype.toString = function(){
+			DKLog("element.toString()\n");
+		}
+	
+		return new Proxy(this, {
+			has: function (targ, key){
+				return key in targ;
+			},
+			get: function (targ, key, recv){
+				//if(key == "id"){ targ[key] = DKWidget_GetProperty(targ["id"], "id"); }
+				if(key == "height"){ targ[key] = DKWidget_GetProperty(targ["id"], "height"); }
+				if(key == "position"){ targ[key] = DKWidget_GetProperty(targ["id"], "position"); }
+				if(key == "width"){ targ[key] = DKWidget_GetProperty(targ["id"], "width"); }
+				return targ[key];
+			},
+			set: function (targ, key, val, recv){
+				targ[key] = val;
+				return true;
+			},
+			deleteProperty: function (targ, key){
+				delete targ[key];
+				return true;
+			}
+		});
+	}
 
 	var window = new Window();
+	var element = window.document.getElementById("body");
+	DKLog("element.id = "+element.id+"\n");
+	DKLog("element.position = "+element.position+"\n");
+	DKLog("element.width = "+element.width+"\n");
+	DKLog("element.height = "+element.height+"\n");
+	
+	/*
 	window.alert("This is a test alert");
 	if(!'name' in window){ DKLog("we could not find the property\n"); }
 	DKLog("window.name = "+window.name+'\n');
@@ -91,4 +139,5 @@ function DKDom_Test(event)
 	window.document.getElementById("ElementId");
 	DKLog("window.innerWidth = "+window.innerWidth+"\n");
 	delete window;
+	*/
 }
