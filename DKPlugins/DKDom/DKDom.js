@@ -22,14 +22,15 @@ function DKDom_Test(event)
 {
 	
 	function Window(){
+		this.document = new Document();
 		this.name = 'WindowName';
+		this.innerWidth;// = 0;
 
 		Window.prototype.alert = function(str){
 			DKLog("alert: "+str+'\n');
 		}
 	
 		return new Proxy(this, { // Wrap it behind a proxy
-			// proxy traps
 			has: function (targ, key) {
 				//DKLog('has called for key=' + key+'\n');
 				return key in targ;  // return unmodified existence status
@@ -37,6 +38,7 @@ function DKDom_Test(event)
 
 			get: function (targ, key, recv) {
 				//DKLog('get called for key=' + key+'\n');
+				if(key == "innerWidth"){ targ[key] = DKWindow_GetWidth(); }
 				return targ[key];  // return unmodified value
 			},
 
@@ -53,20 +55,40 @@ function DKDom_Test(event)
 			}
 		});
 	}
+	
+	function Document(){
+		this.title = 'DocumentTitle';
 
+		Document.prototype.getElementById = function(str){
+			DKLog("document.getElementById("+str+")\n");
+		}
+	
+		return new Proxy(this, {
+			has: function (targ, key){
+				return key in targ;
+			},
+			get: function (targ, key, recv){
+				return targ[key];
+			},
+			set: function (targ, key, val, recv){
+				targ[key] = val;
+				return true;
+			},
+			deleteProperty: function (targ, key){
+				delete targ[key];
+				return true;
+			}
+		});
+	}
 
 	var window = new Window();
-	
-	//Test object funtion
 	window.alert("This is a test alert");
-	
-	//Test object property
-	if(!'name' in window){
-		DKLog("we could not find the property\n");
-	}
+	if(!'name' in window){ DKLog("we could not find the property\n"); }
 	DKLog("window.name = "+window.name+'\n');
 	window.name = 321;
 	DKLog("window.name now = "+window.name+'\n');
-
-	delete window.name;
+	DKLog("window.document.title = "+window.document.title+"\n");
+	window.document.getElementById("ElementId");
+	DKLog("window.innerWidth = "+window.innerWidth+"\n");
+	delete window;
 }
