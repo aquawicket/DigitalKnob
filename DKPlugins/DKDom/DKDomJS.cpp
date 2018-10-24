@@ -3,7 +3,7 @@
 #include "DKDomJS.h"
 
 
-/////////////////////
+////////////////////
 bool DKDomJS::Init()
 {
 	DKDuktape::AttachFunction("DKDom_Test", DKDomJS::Test);
@@ -13,7 +13,7 @@ bool DKDomJS::Init()
 ///////////////////////////////////
 int DKDomJS::Test(duk_context* ctx)
 {
-	//TODO
+	DKDom::Get()->Test();
 	return 0;
 }
 

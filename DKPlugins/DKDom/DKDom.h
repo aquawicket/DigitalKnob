@@ -10,6 +10,8 @@ class DKDom : public DKObjectT<DKDom>
 public:
 	bool Init();
 	bool End();
+
+	bool Test();
 };
 
 ///////////////////
