@@ -228,6 +228,16 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 int DKJS::_DKLog(duk_context* ctx)
 {
 	DKString string = duk_require_string(ctx, 0);
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	
 	if(duk_get_int(ctx, 1)){
 		int lvl = duk_get_int(ctx, 1);
 		DKLog(string, lvl);

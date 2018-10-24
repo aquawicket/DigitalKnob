@@ -31,7 +31,7 @@ function app_LoadPage()
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKGui/Desktop.js", function(){
 	DKCreate("DKGui/Taskbar.js", function(){
-
+		DKCreate("DKDom/DKDom.js", function(){});
 	});
 	});
 	});
