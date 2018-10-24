@@ -49,13 +49,13 @@ int DKRocketJS::getAttribute(duk_context* ctx)
 	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	if(!element){
-		DKLog("DKRocketJS::getAttribute(): element invalid", DKERROR);
+		DKLog("DKRocketJS::getAttribute("+attribute+"): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	Rocket::Core::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		DKLog("DKRocketJS::getAttribute(): variant invalid", DKERROR);
+		DKLog("DKRocketJS::getAttribute("+attribute+"): variant invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true;
 	}

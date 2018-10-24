@@ -1,5 +1,6 @@
 var window;
 var document;
+var poin;
 
 /////////////////////
 function DKDom_Init()
@@ -108,18 +109,14 @@ function DKDom_Create(event)
 			has: function (targ, key){
 				return key in targ;
 			},
-			get: function (targ, key, recv){
-				//if(key == "height"){ targ[key] = DKWidget_GetProperty(targ["id"], "height"); }
-				//if(key == "id"){ targ[key] = DKWidget_GetAttribute(targ["id"], "id"); }
-				//if(key == "position"){ targ[key] = DKWidget_GetProperty(targ["id"], "position"); }
-				//if(key == "width"){ targ[key] = DKWidget_GetProperty(targ["id"], "width"); }
+			get: function(targ, key, recv){
+				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+				targ[key] = DKRocket_getAttribute(targ["pointer"], key);
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
-				//if(key == "height"){ targ[key] = DKWidget_SetProperty(targ["id"], "height", val); }
-				//if(key == "id"){ targ[key] = DKWidget_SetAttribute(targ["id"], "id", val); }
-				//if(key == "position"){ targ[key] = DKWidget_SetProperty(targ["id"], "position", val); }
-				//if(key == "width"){ targ[key] = DKWidget_SetProperty(targ["id"], "width", val); }
+				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+				DKRocket_setAttribute(targ["pointer"], key, val);
 				targ[key] = val;
 				return true;
 			},
@@ -138,16 +135,13 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function (targ, key, recv){
-				//DKLog("targ[id] = "+targ["id"]+"\n");
-				//if(key == "id"){ return true; }
-				//if(key == "width"){ targ[key] = DKWidget_GetProperty(targ["id"], "width"); }
-				targ[key] = DKWidget_GetProperty(this.pointer, key);
+				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+				targ[key] = DKWidget_GetProperty(targ["pointer"], key);
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
-				//if(key == "id"){ return true; }
-				//if(key == "width"){ targ[key] = DKWidget_SetProperty(targ["id"], "width", val); }
-				DKWidget_SetProperty(this.pointer, key, val);
+				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+				DKWidget_SetProperty(targ["pointer"], key, val);
 				targ[key] = val;
 				return true;
 			},
@@ -169,6 +163,7 @@ function DKDom_Test()
 	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
 	element.setAttribute("id", "test_name");
 	DKLog("element.getAttribute(id) = "+element.getAttribute("id")+"\n");
+	
 	/*
 	DKLog("\n");
 	//window tests
@@ -180,7 +175,8 @@ function DKDom_Test()
 	
 	//document tests
 	DKLog("##### document tests #####\n");
-	//TODO
+	document.name = "test_doc_name";
+	DKLog("document.name = "+document.name+"\n");
 	DKLog("\n");
 	
 	//element tests 
