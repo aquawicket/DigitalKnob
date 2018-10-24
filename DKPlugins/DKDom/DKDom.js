@@ -105,13 +105,17 @@ function DKDom_Test(event)
 				return key in targ;
 			},
 			get: function (targ, key, recv){
-				//if(key == "id"){ targ[key] = DKWidget_GetProperty(targ["id"], "id"); }
 				if(key == "height"){ targ[key] = DKWidget_GetProperty(targ["id"], "height"); }
+				if(key == "id"){ targ[key] = DKWidget_GetAttribute(targ["id"], "id"); }
 				if(key == "position"){ targ[key] = DKWidget_GetProperty(targ["id"], "position"); }
 				if(key == "width"){ targ[key] = DKWidget_GetProperty(targ["id"], "width"); }
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
+				if(key == "height"){ targ[key] = DKWidget_SetProperty(targ["id"], "height", val); }
+				//if(key == "id"){ targ[key] = DKWidget_SetAttribute(targ["id"], "id", val); }
+				if(key == "position"){ targ[key] = DKWidget_SetProperty(targ["id"], "position", val); }
+				if(key == "width"){ targ[key] = DKWidget_SetProperty(targ["id"], "width", val); }
 				targ[key] = val;
 				return true;
 			},
@@ -123,11 +127,13 @@ function DKDom_Test(event)
 	}
 
 	var window = new Window();
-	var element = window.document.getElementById("body");
+	var element = window.document.getElementById("BugReport_Image");
 	DKLog("element.id = "+element.id+"\n");
 	DKLog("element.position = "+element.position+"\n");
 	DKLog("element.width = "+element.width+"\n");
 	DKLog("element.height = "+element.height+"\n");
+	//element.height = "20px";
+	//DKLog("element.width = "+element.width+"\n");
 	
 	/*
 	window.alert("This is a test alert");
