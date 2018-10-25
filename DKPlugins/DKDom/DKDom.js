@@ -9,7 +9,7 @@ function DKDom_Init()
 {
 	//DKDebug();
 	DKDom_Create();
-	DKDom_Test();
+	//DKDom_Test();
 }
 
 ////////////////////

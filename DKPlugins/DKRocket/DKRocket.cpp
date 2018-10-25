@@ -60,7 +60,7 @@ bool DKRocket::Init()
 	DKEvent::AddUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
 
-	LoadGui("index.html");
+	//LoadGui("index.html");
 	return true;
 }
 

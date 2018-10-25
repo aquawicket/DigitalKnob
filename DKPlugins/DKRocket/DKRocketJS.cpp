@@ -6,6 +6,7 @@
 ///////////////////////
 bool DKRocketJS::Init()
 {
+	DKDuktape::AttachFunction("DKRocket_LoadGui", DKRocketJS::LoadGui);
 	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload);
 	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
 	DKDuktape::AttachFunction("DKRocket_getElementById", DKRocketJS::getElementById);
@@ -22,6 +23,14 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_innerHTML", DKRocketJS::innerHTML);
 	DKDuktape::AttachFunction("DKRocket_setInnerHTML", DKRocketJS::setInnerHTML);
 	return true;
+}
+
+/////////////////////////////////////////
+int DKRocketJS::LoadGui(duk_context* ctx)
+{
+	DKString file = duk_require_string(ctx, 0);
+	if(!DKRocket::Get()->LoadGui(file)){ return 0; }
+	return 1;
 }
 
 ////////////////////////////////////////
