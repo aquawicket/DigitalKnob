@@ -25,13 +25,15 @@ function app_LoadPage()
 	
 	DKCreate("DK/DKBrowser.css");
 	DKCreate("DKWindow/DKWindow.js", function(){
+	DKCreate("DKDom/DKDom.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
 	DKCreate("DKGui/DKFrame.js", function(){
 	DKCreate("DKGui/DKMenu.js", function(){
 	DKCreate("DKDebug/DKDebug.js", function(){
 	DKCreate("DKGui/Desktop.js", function(){
 	DKCreate("DKGui/Taskbar.js", function(){
-		DKCreate("DKDom/DKDom.js", function(){});
+	
+	});
 	});
 	});
 	});

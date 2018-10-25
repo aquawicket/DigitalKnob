@@ -194,8 +194,8 @@ function DKDom_Create(event)
 					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 				}
 				else{
-					DKLog("targ[key]: "+targ[key]+"\n")
-					DKLog("targ[pointer]: "+targ["pointer"]+"\n")
+					//DKLog("targ[key]: "+targ[key]+"\n")
+					//DKLog("targ[pointer]: "+targ["pointer"]+"\n")
 					targ[key] = DKRocket_getAttribute(targ["pointer"], key); 
 				}
 				return targ[key];
@@ -203,9 +203,9 @@ function DKDom_Create(event)
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
 				if(key == "innerHTML"){
-					DKLog("targ[pointer]: "+targ["pointer"]+"\n")
-					DKLog("key: "+key+"\n")
-					DKLog("val: "+val+"\n")
+					//DKLog("targ[pointer]: "+targ["pointer"]+"\n")
+					//DKLog("key: "+key+"\n")
+					//DKLog("val: "+val+"\n")
 					DKRocket_setInnerHTML(targ["pointer"], val);
 				}
 				else{
