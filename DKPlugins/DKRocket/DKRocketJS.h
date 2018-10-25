@@ -28,8 +28,12 @@ public:
 	static int getAttribute(duk_context* ctx);
 	static int hasAttribute(duk_context* ctx);
 	static int setAttribute(duk_context* ctx);
-	static int getProperty(duk_context* ctx);
+	//static int getProperty(duk_context* ctx);
+	//static int setProperty(duk_context* ctx);
+
+	//style
 	static int setProperty(duk_context* ctx);
+	static int getPropertyValue(duk_context* ctx);
 	
 	static Rocket::Core::Element* getElementByAddress(const DKString& address);
 	static bool GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements);
