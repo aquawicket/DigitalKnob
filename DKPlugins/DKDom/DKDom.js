@@ -1,5 +1,7 @@
 var window;
 var document;
+var location;
+var screen;
 var poin;
 
 /////////////////////
@@ -29,7 +31,10 @@ function DKDom_Create(event)
 	function Window(){
 		document = new Document();
 		location = new Location();
+		screen = new Screen();
 		this.document = document;
+		this.location = location;
+		this.screen = screen;
 
 		Window.prototype.alert = function(str){
 			DKLog("alert: "+str+'\n');
@@ -72,6 +77,29 @@ function DKDom_Create(event)
 			},
 			set: function (targ, key, val, recv) {
 				if(key == "hash"){ DKRocket_SetHash(val); }
+				targ[key] = val;  // must perform write to target manually if 'set' defined
+				return true;      // true: indicate that property write was allowed
+			},
+
+			deleteProperty: function (targ, key) {
+				delete targ[key];  // must perform delete to target manually if 'deleteProperty' defined
+				return true;       // true: indicate that property delete was allowed
+			}
+		});
+	}
+	
+	//////////////////
+	function Screen(){
+		
+		return new Proxy(this, { // Wrap it behind a proxy
+			has: function (targ, key) {
+				return key in targ;  // return unmodified existence status
+			},
+			get: function (targ, key, recv) {
+				if(key == "hash"){ targ[key] = DKRocket_GetHash(); }
+				return targ[key];  // return unmodified value
+			},
+			set: function (targ, key, val, recv) {
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
