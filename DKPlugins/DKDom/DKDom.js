@@ -72,7 +72,12 @@ function DKDom_Create(event)
 		}
 		
 		Document.prototype.getElementsByTagName = function(name){
-			var nodeList = DKRocket_getElementsByTagName(name);
+			var addressList = DKRocket_getElementsByTagName(name); 
+			var arry = addressList.split(",");
+			var nodeList = []; //creat array to hold element objects
+			for(var i=0; i<arry.length; i++){
+				nodeList.push(new Element(arry[i]))
+			}
 			return nodeList;
 		}
 	
@@ -97,6 +102,7 @@ function DKDom_Create(event)
 	//////////////////////////
 	function Element(pointer){
 		this.pointer = pointer;
+		//DKLog("this.pointer = "+this.pointer+"\n")
 		this.style = new Style(pointer);
 
 		Element.prototype.getAttribute = function(attribute){
@@ -120,6 +126,8 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function(targ, key, recv){
+				//DKLog("Element(): get:("+key+")\n");
+				//DKLog("targ[pointer]: "+targ["pointer"]+"\n");
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
 				targ[key] = DKRocket_getAttribute(targ["pointer"], key);
 				return targ[key];
@@ -168,6 +176,7 @@ function DKDom_Create(event)
 /////////////////////
 function DKDom_Test()
 {
+
 	DKLog("\n");
 	//window tests
 	DKLog("##### window tests #####\n");
@@ -175,13 +184,15 @@ function DKDom_Test()
 	DKLog("window.innerHeight: "+window.innerHeight+"\n");
 	DKLog("window.innerWidth: "+window.innerWidth+"\n");
 	DKLog("\n");
-	
+
 	//document tests
 	DKLog("##### document tests #####\n");
 	document.name = "test_doc_name";
 	DKLog("document.name = "+document.name+"\n");
 	var nodeList = document.getElementsByTagName("div");
-	DKLog(String(nodeList)+"\n");
+	for(var i=0; i<nodeList.length; i++){
+		DKLog(nodeList[i].id+'\n');
+	}
 	DKLog("\n");
 	
 	//element tests 

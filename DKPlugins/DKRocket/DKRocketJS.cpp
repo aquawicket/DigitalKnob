@@ -43,15 +43,23 @@ int DKRocketJS::getElementById(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	duk_push_pointer(ctx, element);
+
+	const void * address = static_cast<const void*>(element);
+	std::stringstream ss;
+	ss << address;  
+	DKString str = ss.str(); 
+
+	duk_push_string(ctx, str.c_str());
+	//duk_push_pointer(ctx, element);
 	return true;
 }
 
 //////////////////////////////////////////////
 int DKRocketJS::getAttribute(duk_context* ctx)
 {
-	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
+	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
 		DKLog("DKRocketJS::getAttribute("+attribute+"): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
@@ -72,8 +80,9 @@ int DKRocketJS::getAttribute(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::hasAttribute(duk_context* ctx)
 {
-	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
+	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
 		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
@@ -90,9 +99,10 @@ int DKRocketJS::hasAttribute(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::setAttribute(duk_context* ctx)
 {
-	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	DKString value = duk_require_string(ctx, 2);
+	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
 		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
@@ -106,8 +116,9 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 /////////////////////////////////////////////
 int DKRocketJS::getProperty(duk_context* ctx)
 {
-	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
+	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
 		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
@@ -127,9 +138,12 @@ int DKRocketJS::getProperty(duk_context* ctx)
 /////////////////////////////////////////////
 int DKRocketJS::setProperty(duk_context* ctx)
 {
-	Rocket::Core::Element* element = (Rocket::Core::Element*)duk_require_pointer(ctx, 0);
+	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	DKString value = duk_require_string(ctx, 2);
+
+	Rocket::Core::Element* element = getElementByAddress(address);
+	
 	if(!element){
 		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
@@ -157,12 +171,62 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
 	if(elements.empty()){ return true; }
-	//for(int i=0; i<elements.size(); i++){
-	//	elements[i];
-	//}
-	duk_push_pointer(ctx, &elements);
+	//pack element addresses in a string
+	DKString str;
+	for(int i=0; i<elements.size(); i++){
+		const void * address = static_cast<const void*>(elements[i]);
+		std::stringstream ss;
+		ss << address;  
+		str += ss.str(); 
+		if(i < elements.size()-1){ str += ","; }
+	}
+	duk_push_string(ctx, str.c_str());
 	return true;	
 }
 
+///////////////////////////////////////////////////////////////////////////////
+Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
+{
+	Rocket::Core::Element* body = DKRocket::Get()->document->GetElementById("body");
+	Rocket::Core::ElementList elements; //TODO, fill this with ALL elements
+	GetElements(body, elements);
+	for(int i=0; i<elements.size(); i++){
+		const void * addr = static_cast<const void*>(elements[i]);
+		std::stringstream ss;
+		ss << addr;  
+		DKString str = ss.str(); 
+		if(same(address, str)){
+			return elements[i];
+		}
+	}
+	DKLog("DKRocketJS::getElementByAddress(): element not found\n", DKERROR);
+	return NULL;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKRocketJS::GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements)
+{
+	DKDebug(parent, "DKElementList&");
+	if(!parent){ return false; }
+	typedef std::queue<Rocket::Core::Element*> SearchQueue;
+	SearchQueue search_queue;
+	for (int i = 0; i < parent->GetNumChildren(); ++i)
+		search_queue.push(parent->GetChild(i));
+
+	while(!search_queue.empty()){
+		Rocket::Core::Element* element = search_queue.front();
+		search_queue.pop();
+
+		if(!has(element->GetTagName().CString(), "#")){
+			elements.push_back(element);
+		}
+
+		// Add all children to search.
+		for (int i = 0; i < element->GetNumChildren(); i++){
+			search_queue.push(element->GetChild(i));
+		}
+	}
+	return true;
+}
 
 #endif //USE_DKDuktape

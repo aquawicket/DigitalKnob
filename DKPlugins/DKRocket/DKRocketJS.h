@@ -25,6 +25,9 @@ public:
 	static int setProperty(duk_context* ctx);
 	static int getElementsByClassName(duk_context* ctx);
 	static int getElementsByTagName(duk_context* ctx);
+
+	static Rocket::Core::Element* getElementByAddress(const DKString& address);
+	static bool GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements);
 };
 
 REGISTER_OBJECT(DKRocketJS, true)
