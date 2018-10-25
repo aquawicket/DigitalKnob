@@ -18,6 +18,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_getElementsByTagName", DKRocketJS::getElementsByTagName);
 	DKDuktape::AttachFunction("DKRocket_innerHeight", DKRocketJS::innerHeight);
 	DKDuktape::AttachFunction("DKRocket_innerWidth", DKRocketJS::innerWidth);
+	DKDuktape::AttachFunction("DKRocket_name", DKRocketJS::name);
 	return true;
 }
 
@@ -49,6 +50,14 @@ int DKRocketJS::innerWidth(duk_context* ctx)
 {
 	int x = DKRocket::Get()->context->GetDimensions().x;
 	duk_push_int(ctx, x);
+	return 1;
+}
+
+//////////////////////////////////////
+int DKRocketJS::name(duk_context* ctx)
+{
+	DKString name = DKRocket::Get()->context->GetName().CString();
+	duk_push_string(ctx, name.c_str());
 	return 1;
 }
 

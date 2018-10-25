@@ -17,6 +17,7 @@ public:
 	//window
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
+	static int name(duk_context* ctx);
 
 	//document
 	static int getElementById(duk_context* ctx);

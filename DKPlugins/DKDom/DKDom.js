@@ -42,6 +42,7 @@ function DKDom_Create(event)
 			get: function (targ, key, recv) {
 				if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
 				if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
+				if(key == "name"){ targ[key] = DKRocket_name(); }
 				return targ[key];  // return unmodified value
 			},
 			set: function (targ, key, val, recv) {
@@ -213,6 +214,7 @@ function DKDom_Test()
 	window.alert("test");
 	DKLog("window.innerHeight: "+window.innerHeight+"\n");
 	DKLog("window.innerWidth: "+window.innerWidth+"\n");
+	DKLog("window.name: "+window.name+"\n");
 	DKLog("\n");
 
 	//document tests
