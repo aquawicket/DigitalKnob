@@ -20,6 +20,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_setProperty", DKRocketJS::setProperty);
 	DKDuktape::AttachFunction("DKRocket_getPropertyValue", DKRocketJS::getPropertyValue);
 	DKDuktape::AttachFunction("DKRocket_innerHTML", DKRocketJS::innerHTML);
+	DKDuktape::AttachFunction("DKRocket_setInnerHTML", DKRocketJS::setInnerHTML);
 	return true;
 }
 
@@ -282,6 +283,21 @@ int DKRocketJS::innerHTML(duk_context* ctx)
 	DKString innerHtml = element->GetInnerRML().CString();
 	if(innerHtml.empty()){ return true; }
 	duk_push_string(ctx, innerHtml.c_str());
+	return true;
+}
+
+//////////////////////////////////////////////
+int DKRocketJS::setInnerHTML(duk_context* ctx)
+{
+	DKString address = duk_require_string(ctx, 0);
+	DKString innerHTML = duk_require_string(ctx, 1);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKLog("DKRocketJS::innerHTML(): element invalid", DKERROR);
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	element->SetInnerRML(innerHTML.c_str());
 	return true;
 }
 

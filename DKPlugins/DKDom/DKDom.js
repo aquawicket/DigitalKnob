@@ -202,7 +202,15 @@ function DKDom_Create(event)
 			},
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
-				DKRocket_setAttribute(targ["pointer"], key, val);
+				if(key == "innerHTML"){
+					DKLog("targ[pointer]: "+targ["pointer"]+"\n")
+					DKLog("key: "+key+"\n")
+					DKLog("val: "+val+"\n")
+					DKRocket_setInnerHTML(targ["pointer"], val);
+				}
+				else{
+					DKRocket_setAttribute(targ["pointer"], key, val);
+				}
 				targ[key] = val;
 				return true;
 			},
@@ -270,6 +278,11 @@ function DKDom_Test()
 	var nodeList = document.getElementsByTagName("body");
 	DKLog("nodeList.length: "+nodeList.length+"\n");
 	DKLog("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
+	
+	//TODO - we need to be able to set the innerHTML too
+	nodeList[0].innerHTML = "<div>This was replaced</div>";
+	DKLog("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
+	
 	/*
 	var nodeList = document.getElementsByTagName("div");
 	//DKLog("nodelist.length: "+nodeList.length+"\n");
