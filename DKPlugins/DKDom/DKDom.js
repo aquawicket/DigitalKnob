@@ -28,6 +28,7 @@ function DKDom_Create(event)
 	//////////////////
 	function Window(){
 		document = new Document();
+		location = new Location();
 		this.document = document;
 
 		Window.prototype.alert = function(str){
@@ -39,13 +40,37 @@ function DKDom_Create(event)
 				return key in targ;  // return unmodified existence status
 			},
 			get: function (targ, key, recv) {
-				if(key == "innerHeight"){ targ[key] = DKWindow_GetHeight(); }
-				if(key == "innerWidth"){ targ[key] = DKWindow_GetWidth(); }
+				if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
+				if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
 				return targ[key];  // return unmodified value
 			},
 			set: function (targ, key, val, recv) {
-				if(key == "innerHeight"){ DKWindow_SetHeight(Number(val)); }
-				if(key == "innerWidth"){ DKWindow_SetWidth(Number(val)); }
+				//if(key == "innerHeight"){ DKRocket_SetHeight(Number(val)); }  //TODO
+				//if(key == "innerWidth"){ DKRocket_SetWidth(Number(val)); }    //TODO
+				targ[key] = val;  // must perform write to target manually if 'set' defined
+				return true;      // true: indicate that property write was allowed
+			},
+
+			deleteProperty: function (targ, key) {
+				delete targ[key];  // must perform delete to target manually if 'deleteProperty' defined
+				return true;       // true: indicate that property delete was allowed
+			}
+		});
+	}
+	
+	////////////////////
+	function Location(){
+		
+		return new Proxy(this, { // Wrap it behind a proxy
+			has: function (targ, key) {
+				return key in targ;  // return unmodified existence status
+			},
+			get: function (targ, key, recv) {
+				if(key == "hash"){ targ[key] = DKRocket_GetHash(); }
+				return targ[key];  // return unmodified value
+			},
+			set: function (targ, key, val, recv) {
+				if(key == "hash"){ DKRocket_SetHash(val); }
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
@@ -67,16 +92,21 @@ function DKDom_Create(event)
 		}
 		
 		Document.prototype.getElementsByClassName = function(name){
-			var nodeList = DKRocket_getElementsByClassName(name);
+			var addressList = DKRocket_getElementsByClassName(name);
+			var arry = addressList.split(",");
+			var nodeList = [];
+			for(var i=0; i<arry.length; i++){
+				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
+			}
 			return nodeList;
 		}
 		
 		Document.prototype.getElementsByTagName = function(name){
 			var addressList = DKRocket_getElementsByTagName(name); 
 			var arry = addressList.split(",");
-			var nodeList = []; //creat array to hold element objects
+			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
-				nodeList.push(new Element(arry[i]))
+				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
 			}
 			return nodeList;
 		}

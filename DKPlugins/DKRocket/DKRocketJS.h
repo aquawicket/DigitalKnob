@@ -14,8 +14,14 @@ public:
 	static int Reload(duk_context* ctx);
 	static int ToggleDebugger(duk_context* ctx);
 	
+	//window
+	static int innerHeight(duk_context* ctx);
+	static int innerWidth(duk_context* ctx);
+
 	//document
 	static int getElementById(duk_context* ctx);
+	static int getElementsByClassName(duk_context* ctx);
+	static int getElementsByTagName(duk_context* ctx);
 
 	//element
 	static int getAttribute(duk_context* ctx);
@@ -23,9 +29,7 @@ public:
 	static int setAttribute(duk_context* ctx);
 	static int getProperty(duk_context* ctx);
 	static int setProperty(duk_context* ctx);
-	static int getElementsByClassName(duk_context* ctx);
-	static int getElementsByTagName(duk_context* ctx);
-
+	
 	static Rocket::Core::Element* getElementByAddress(const DKString& address);
 	static bool GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements);
 };

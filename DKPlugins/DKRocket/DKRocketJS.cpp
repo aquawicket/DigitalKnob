@@ -16,6 +16,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_setProperty", DKRocketJS::setProperty);
 	DKDuktape::AttachFunction("DKRocket_getElementsByClassName", DKRocketJS::getElementsByClassName);
 	DKDuktape::AttachFunction("DKRocket_getElementsByTagName", DKRocketJS::getElementsByTagName);
+	DKDuktape::AttachFunction("DKRocket_innerHeight", DKRocketJS::innerHeight);
+	DKDuktape::AttachFunction("DKRocket_innerWidth", DKRocketJS::innerWidth);
 	return true;
 }
 
@@ -30,6 +32,23 @@ int DKRocketJS::Reload(duk_context* ctx)
 int DKRocketJS::ToggleDebugger(duk_context* ctx)
 {
 	DKRocket::Get()->ToggleDebugger();
+	return 1;
+}
+
+
+/////////////////////////////////////////////
+int DKRocketJS::innerHeight(duk_context* ctx)
+{
+	int y = DKRocket::Get()->context->GetDimensions().y;
+	duk_push_int(ctx, y);
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKRocketJS::innerWidth(duk_context* ctx)
+{
+	int x = DKRocket::Get()->context->GetDimensions().x;
+	duk_push_int(ctx, x);
 	return 1;
 }
 
@@ -160,8 +179,16 @@ int DKRocketJS::getElementsByClassName(duk_context* ctx)
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByClassName(elements, name.c_str());
 	if(elements.empty()){ return true; }
-	duk_push_pointer(ctx, &elements);
-	return true;	
+	DKString str;
+	for(unsigned int i=0; i<elements.size(); i++){
+		const void * address = static_cast<const void*>(elements[i]);
+		std::stringstream ss;
+		ss << address;  
+		str += ss.str(); 
+		if(i < elements.size()-1){ str += ","; }
+	}
+	duk_push_string(ctx, str.c_str());
+	return true;
 }
 
 //////////////////////////////////////////////////////
@@ -171,9 +198,8 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
 	if(elements.empty()){ return true; }
-	//pack element addresses in a string
 	DKString str;
-	for(int i=0; i<elements.size(); i++){
+	for(unsigned int i=0; i<elements.size(); i++){
 		const void * address = static_cast<const void*>(elements[i]);
 		std::stringstream ss;
 		ss << address;  
@@ -181,16 +207,16 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
-	return true;	
+	return true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 {
-	Rocket::Core::Element* body = DKRocket::Get()->document->GetElementById("body");
-	Rocket::Core::ElementList elements; //TODO, fill this with ALL elements
+	Rocket::Core::Element* body = DKRocket::Get()->document->GetElementById("body"); //TEST: This needs to be recursive
+	Rocket::Core::ElementList elements;
 	GetElements(body, elements);
-	for(int i=0; i<elements.size(); i++){
+	for(unsigned int i=0; i<elements.size(); i++){
 		const void * addr = static_cast<const void*>(elements[i]);
 		std::stringstream ss;
 		ss << addr;  
