@@ -201,6 +201,8 @@ int DKJS::_DKCreate(duk_context* ctx)
 			duk_pop(ctx);  // pop `err.stack`
 			*/
 			
+			//TODO - can we get more info on the actuall callback to display here
+			// callback name, parameters, inner code, etc.
 			DKString error = toString(duk_safe_to_string(ctx, -1));
 			replace(error, "'", "\\'");
 			DKString str = "var err = new Error();";

@@ -105,6 +105,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 
 	DKString full_call = "try{ "+end+"(); } catch(err){ DKLog('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
+	full_call += end+"()\\n";
 	full_call += "'+err.stack+'\\n";
 	full_call += "', DKERROR); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
@@ -146,6 +147,7 @@ bool DKDuktape::CallInit(const DKString& file)
 
 	DKString full_call = "try{ "+init+"(); } catch(err){ DKLog('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
+	full_call += init+"()\\n";
 	full_call += "'+err.stack+'\\n";
 	full_call += "', DKERROR); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
@@ -205,7 +207,8 @@ bool DKDuktape::LoadFile(const DKString& path)
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
 		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
-		str += path+": "+error+"\\n";
+		str += path+"\\n";
+		str += error+"\\n";
 		str += "'+err.stack+'\\n', DKERROR);";
 		duk_eval_string(ctx, str.c_str());
     }
@@ -245,6 +248,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 
 	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKLog('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
+	full_call += jsreturn+"('"+evt+"')\\n";
 	full_call += "'+err.stack+'\\n";
 	full_call += "', DKERROR); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
