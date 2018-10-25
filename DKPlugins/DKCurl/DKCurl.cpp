@@ -439,7 +439,7 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 bool DKCurl::HttpFileExists(const DKString& url)
 {
 	DKString _url = url;
-	if (!has(url, "http://") && !has(url, "HTTP://")){
+	if(!has(url, "http://") && !has(url, "HTTP://") && !has(url, "https://") && !has(url, "HTTPS://")){
 		_url = "http://" + url;
 	}
 	CurlInit();
@@ -506,7 +506,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	//replace(_url,"=","%3D");
 
 	if(!DKCurl::FileExists(url)){
-		DKLog("url not found \n", DKERROR);
+		DKLog("DKCurl::HttpToString(): "+url+"  not found \n", DKERROR);
 		//return false;
 	}
 	
