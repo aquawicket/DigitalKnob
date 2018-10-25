@@ -7,7 +7,7 @@
 body
 {
 	font-family: "Times New Roman";
-	font-size: 1px;
+	font-size: 100%;
 	color: black;
 	height: 100%;
 	padding-left: 8px;
@@ -36,7 +36,6 @@ th
 p
 {
 	display:block;
-	height:18rem;
 	margin-top: 1em;
 	margin-bottom: 1em;	
 }
@@ -46,7 +45,6 @@ h1
 	display:block;
 	font-size: 2em;
 	font-weight: bold;
-	height:37rem;
 	margin-top: 0.67em;
 	margin-bottom: 0.67em;
 }
@@ -56,7 +54,6 @@ h2
 	display:block;
 	font-size: 1.5em;
 	font-weight: bold;
-	height:27rem;
 	margin-top: 0.83em;
 	margin-bottom: 0.83em;
 }
@@ -66,7 +63,6 @@ h3
 	display:block;
 	font-size: 1.17em;
 	font-weight: bold;
-	height:22rem;
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
@@ -75,7 +71,6 @@ h4
 {
 	display:block;
 	font-weight: bold;
-	height:18rem;
 	margin-top: 1.33em;
 	margin-bottom: 1.33em;
 }
@@ -85,7 +80,6 @@ h5
 	display:block;
 	font-size: 0.83em;
 	font-weight: bold;
-	height:16rem;
 	margin-top: 1.67em;
 	margin-bottom: 1.67em;
 }
@@ -95,7 +89,6 @@ h6
 	display:block;
 	font-size: 0.67em;
 	font-weight: bold;
-	height:12rem;
 	margin-top: 2.33em;
 	margin-bottom: 2.33em;
 }
