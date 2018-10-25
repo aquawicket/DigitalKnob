@@ -125,13 +125,15 @@ function DKDom_Create(event)
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
+				DKLog("arry["+i+"]: "+arry[i]+"\n")
 				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
 			}
 			return nodeList;
 		}
 		
 		Document.prototype.getElementsByTagName = function(name){
-			var addressList = DKRocket_getElementsByTagName(name); 
+			var addressList = DKRocket_getElementsByTagName(name);
+			if(!addressList){ return; }
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
@@ -188,7 +190,14 @@ function DKDom_Create(event)
 				//DKLog("Element(): get:("+key+")\n");
 				//DKLog("targ[pointer]: "+targ["pointer"]+"\n");
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
-				targ[key] = DKRocket_getAttribute(targ["pointer"], key);
+				if(key == "innerHTML"){ 
+					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
+				}
+				else{
+					DKLog("targ[key]: "+targ[key]+"\n")
+					DKLog("targ[pointer]: "+targ["pointer"]+"\n")
+					targ[key] = DKRocket_getAttribute(targ["pointer"], key); 
+				}
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
@@ -260,6 +269,7 @@ function DKDom_Test()
 	DKLog("document.name: "+document.name+"\n");
 	var nodeList = document.getElementsByTagName("body");
 	DKLog("nodeList.length: "+nodeList.length+"\n");
+	DKLog("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
 	/*
 	var nodeList = document.getElementsByTagName("div");
 	//DKLog("nodelist.length: "+nodeList.length+"\n");

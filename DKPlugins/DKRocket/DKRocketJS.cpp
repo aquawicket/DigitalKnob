@@ -167,7 +167,9 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	DKString name = duk_require_string(ctx, 0);
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
-	if(elements.empty()){ return true; }
+	if(same(name, "body")){
+		elements.push_back(DKRocket::Get()->document->GetFirstChild()->GetParentNode()); //body tag
+	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
 		const void * address = static_cast<const void*>(elements[i]);
@@ -195,7 +197,7 @@ Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 			return elements[i];
 		}
 	}
-	DKLog("DKRocketJS::getElementByAddress(): element not found\n", DKERROR);
+	DKLog("DKRocketJS::getElementByAddress("+address+"): element not found\n", DKERROR);
 	return NULL;
 }
 
@@ -206,7 +208,9 @@ bool DKRocketJS::GetElements(Rocket::Core::Element* parent, Rocket::Core::Elemen
 	if(!parent){ return false; }
 	typedef std::queue<Rocket::Core::Element*> SearchQueue;
 	SearchQueue search_queue;
-	for (int i = 0; i < parent->GetNumChildren(); ++i)
+
+	elements.push_back(DKRocket::Get()->document->GetFirstChild()->GetParentNode()); //add the body tag first
+	for(int i = 0; i < parent->GetNumChildren(); ++i)
 		search_queue.push(parent->GetChild(i));
 
 	while(!search_queue.empty()){
