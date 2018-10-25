@@ -51,8 +51,9 @@ function DKDom_Create(event)
 				return targ[key];  // return unmodified value
 			},
 			set: function (targ, key, val, recv) {
-				//if(key == "innerHeight"){ DKRocket_SetHeight(Number(val)); }  //TODO
-				//if(key == "innerWidth"){ DKRocket_SetWidth(Number(val)); }    //TODO
+				//if(key == "innerHeight"){ DKRocket_SetInnerHeight(val); }  //TODO
+				//if(key == "innerWidth"){ DKRocket_SetInnerWidth(val); }    //TODO
+				//if(key == "name"){ DKRocket_SetName(val); }    //TODO
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
