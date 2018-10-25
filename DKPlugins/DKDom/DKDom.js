@@ -258,12 +258,18 @@ function DKDom_Test()
 	DKLog("##### document tests #####\n");
 	document.name = "test_doc_name";
 	DKLog("document.name: "+document.name+"\n");
+	var nodeList = document.getElementsByTagName("body");
+	DKLog("nodeList.length: "+nodeList.length+"\n");
+	/*
 	var nodeList = document.getElementsByTagName("div");
+	//DKLog("nodelist.length: "+nodeList.length+"\n");
 	for(var i=0; i<nodeList.length; i++){
-		DKLog(nodeList[i].id+'\n');
+		DKLog(nodeList[i]+'\n');
 	}
+	*/
 	DKLog("\n");
 	
+	/*
 	//element tests 
 	DKLog("##### element tests #####\n");
 	var element = document.getElementById("BugReport_Image");
@@ -280,4 +286,5 @@ function DKDom_Test()
 	element.style.setProperty("position", "relative");
 	DKLog("element.style.getPropertyValue(position): "+element.style.getPropertyValue("position")+"\n");
 	DKLog("\n");
+	*/
 }

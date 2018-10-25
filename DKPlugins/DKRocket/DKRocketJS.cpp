@@ -19,6 +19,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_name", DKRocketJS::name);
 	DKDuktape::AttachFunction("DKRocket_setProperty", DKRocketJS::setProperty);
 	DKDuktape::AttachFunction("DKRocket_getPropertyValue", DKRocketJS::getPropertyValue);
+	DKDuktape::AttachFunction("DKRocket_innerHTML", DKRocketJS::innerHTML);
 	return true;
 }
 
@@ -132,7 +133,7 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 	DKString value = duk_require_string(ctx, 2);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		DKLog("DKRocketJS::setAttribute(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -140,47 +141,6 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 	duk_push_boolean(ctx, true);
 	return true;
 }
-
-/*
-/////////////////////////////////////////////
-int DKRocketJS::getProperty(duk_context* ctx)
-{
-	DKString address = duk_require_string(ctx, 0);
-	DKString attribute = duk_require_string(ctx, 1);
-	Rocket::Core::Element* element = getElementByAddress(address);
-	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	const Rocket::Core::Property* prop = element->GetProperty(attribute.c_str());
-	if(!prop){ 
-		DKLog("DKRocketJS::getProperty(): prop is invalid", DKERROR);
-		duk_push_boolean(ctx, false);
-		return true; 
-	}
-	DKString value = element->GetProperty(attribute.c_str())->ToString().CString();
-	duk_push_string(ctx, value.c_str());
-	return true;
-}
-
-/////////////////////////////////////////////
-int DKRocketJS::setProperty(duk_context* ctx)
-{
-	DKString address = duk_require_string(ctx, 0);
-	DKString attribute = duk_require_string(ctx, 1);
-	DKString value = duk_require_string(ctx, 2);
-
-	Rocket::Core::Element* element = getElementByAddress(address);
-	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	element->SetProperty(attribute.c_str(), value.c_str());
-	return true;
-}
-*/
 
 ////////////////////////////////////////////////////////
 int DKRocketJS::getElementsByClassName(duk_context* ctx)
@@ -275,7 +235,7 @@ int DKRocketJS::setProperty(duk_context* ctx)
 
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		DKLog("DKRocketJS::setProperty(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -290,18 +250,34 @@ int  DKRocketJS::getPropertyValue(duk_context* ctx)
 	DKString propertyName = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		DKLog("DKRocketJS::getPropertyValue(): element invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	const Rocket::Core::Property* prop = element->GetProperty(propertyName.c_str());
 	if(!prop){ 
-		DKLog("DKRocketJS::getProperty(): prop is invalid", DKERROR);
+		DKLog("DKRocketJS::getPropertyValue(): prop is invalid", DKERROR);
 		duk_push_boolean(ctx, false);
 		return true; 
 	}
 	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString().CString();
 	duk_push_string(ctx, propertyValue.c_str());
+	return true;
+}
+
+///////////////////////////////////////////
+int DKRocketJS::innerHTML(duk_context* ctx)
+{
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKLog("DKRocketJS::innerHTML(): element invalid", DKERROR);
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString innerHtml = element->GetInnerRML().CString();
+	if(innerHtml.empty()){ return true; }
+	duk_push_string(ctx, innerHtml.c_str());
 	return true;
 }
 
