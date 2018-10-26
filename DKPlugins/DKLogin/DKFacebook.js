@@ -3,12 +3,13 @@
 //////////////////////////
 function DKFacebook_Init()
 {
-	
+	DKDEBUGFUNC();
 }
 
 //////////////////////////////////
 function DKFacebookLogin(Function)
 {
+	DKDEBUGFUNC(Function);
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId      : '1514766155465090',
@@ -48,7 +49,10 @@ function DKFacebookLogin(Function)
 }
 
 // This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response){
+///////////////////////////////////////
+function statusChangeCallback(response)
+{
+	DKDEBUGFUNC(response);
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -61,7 +65,7 @@ function statusChangeCallback(response){
     }
 	else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      DKLog("Please log into this app\n");
+      DKINFO("Please log into this app\n");
 	  FB.login(function(response) {
 		// handle the response
 		}, {scope: 'public_profile,email'});
@@ -69,7 +73,7 @@ function statusChangeCallback(response){
 	else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-	  DKLog("Please log into facebook\n");
+	  DKINFO("Please log into facebook\n");
 	  FB.login(function(response) {
 		// handle the response
 		}, {scope: 'public_profile,email'});
@@ -80,7 +84,10 @@ function statusChangeCallback(response){
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-function checkLoginState() {
+//////////////////////////
+function checkLoginState()
+{
+	DKDEBUGFUNC();
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
     });
@@ -88,19 +95,23 @@ function checkLoginState() {
   
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function connected(){
-    DKLog("Facebook: Welcome!  Fetching your information....\n");
+////////////////////
+function connected()
+{
+	DKDEBUGFUNC();
+    DKINFO("Facebook: Welcome!  Fetching your information....\n");
     FB.api('/me', function(response) {
-		DKLog("Successful login for: " + response.name+"\n");
+		DKINFO("Successful login for: " + response.name+"\n");
     });
 }
 
 /////////////////////////////////////////////////////
 function DKFacebook_Query(query, parameter, Function)
 {
+	DKDEBUGFUNC(query, parameter, Function);
 	FB.api(query, function(response){
 		if (response.hasOwnProperty("error")) {
-			DKLog("Error: " + response.error.message+"\n");
+			DKINFO("Error: " + response.error.message+"\n");
 		}
 		else{
 			Function(parameter, response[parameter]);
