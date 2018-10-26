@@ -1,8 +1,7 @@
 ////////////////////////////
 function DKMidiDialog_Init()
 {
-	//DKLog("DKMidiDialog_Init()\n");
-	
+	DKDEBUGFUNC();	
 	DKCreate("DKMidi/DKMidiDialog.css");
 	DKCreate("DKMidi/DKMidiDialog.html");
 	//DKMidiDialog_UpdatePorts();
@@ -11,8 +10,7 @@ function DKMidiDialog_Init()
 ///////////////////////////
 function DKMidiDialog_End()
 {
-	//DKLog("DKMidiDialog_End()\n");
-	
+	DKDEBUGFUNC();	
 	DKRemoveEvents(DKMidiDialog_OnEvent);
 	DKClose("DKMidi/DKMidiDialog.html");
 	DKClose("DKMidi/DKMidiDialog.css");
@@ -21,8 +19,7 @@ function DKMidiDialog_End()
 ////////////////////////////////////
 function DKMidiDialog_OnEvent(event)
 {
-	//DKLog("DKMidiDialog_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-
+	DKDEBUGFUNC(event);
 	if(DK_IdLike(event, "DKMidiDialogInput")){
 		DKMidiDialog_ToggleInput(DK_GetValue(event));
 		return;
@@ -37,8 +34,7 @@ function DKMidiDialog_OnEvent(event)
 ///////////////////////////////////
 function DKMidiDialog_UpdatePorts()
 {
-	//DKLog("DKMidiDialog_UpdatePorts()\n");
-	
+	DKDEBUGFUNC();	
 	var inputs = DKMidi_GetMidiInputs();
 	var list = inputs.split(",");
 	DKWidget_SetInnerHtml("DKMidiDialogInputs","");
@@ -64,8 +60,7 @@ function DKMidiDialog_UpdatePorts()
 ///////////////////////////////////////
 function DKMidiDialog_ToggleInput(name)
 {
-	//DKLog("DKMidiDialog_ToggleInput("+name+")\n");
-	
+	DKDEBUGFUNC(name);	
 	if(!DKMidi_ToggleMidiInput(name)){ return false; }
 	return true;
 }
@@ -73,8 +68,7 @@ function DKMidiDialog_ToggleInput(name)
 ////////////////////////////////////////
 function DKMidiDialog_ToggleOutput(name)
 {
-	//DKLog("DKMidiDialog_ToggleOutput("+name+")\n");
-	
+	DKDEBUGFUNC(name);	
 	if(!DKMidi_ToggleMidiOutput(name)){ return false; }
 	return true;
 }
