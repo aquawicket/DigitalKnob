@@ -3,7 +3,7 @@ var currentFile;
 /////////////////////////
 function DKNotepad_Init()
 {
-	DKLog("DKNotepad_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
@@ -20,7 +20,7 @@ function DKNotepad_Init()
 ////////////////////////
 function DKNotepad_End()
 {
-	DKLog("DKNotepad_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
 	DKClose("DKNotepad/DKNotepad.css");
@@ -29,7 +29,7 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {
-	DKLog("DKNotepad_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
@@ -55,12 +55,12 @@ function DKNotepad_OnEvent(event)
 	}
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
-		//DKLog("OpenFile: "+file+" \n");
+		//DKINFO(("OpenFile: "+file+"\n");
 		DKNotepad_Open(file)
 	}
 	if(DK_Type(event, "SaveFile")){
 		var file = DK_GetValue(event);
-		//DKLog("SaveFile: "+file+" \n");
+		//DKINFO(("SaveFile: "+file+"\n");
 		DKNotepad_Save(file)
 	}
 }
@@ -68,7 +68,7 @@ function DKNotepad_OnEvent(event)
 /////////////////////////////
 function DKNotepad_Open(file)
 {
-	DKLog("DKNotepad_Open("+file+")\n", DKDEBUG);
+	DKDEBUGFUNC(file);
 	//TODO - only open files under 5mb
 	//TODO - set the frame title with the filename
 	currentFile = file;
@@ -79,8 +79,8 @@ function DKNotepad_Open(file)
 /////////////////////////////
 function DKNotepad_Save(file)
 {
-	DKLog("DKNotepad_Save("+file+")\n", DKDEBUG);
+	DKDEBUGFUNC(file);
 	var text = DKWidget_GetAttribute("DKNotepad_Text", "value");
-	//DKLog("DKNotepad_Save("+file+"): text = "+text+"\n");
+	//DKINFO(("DKNotepad_Save("+file+"): text = "+text+"\n");
 	DKFile_StringToFile(text, file);
 }

@@ -1,8 +1,7 @@
 /////////////////////
 function DKOcr_Init()
 {
-	DKLog("DKOcr_Init()\n");
-	
+	DKDEBUGFUNC();	
 	DKCreate("DKOcr");
 	DKCreate("DKOcr/DKOcr.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
@@ -15,8 +14,7 @@ function DKOcr_Init()
 ////////////////////
 function DKOcr_End()
 {
-	DKLog("DKOcr_End()\n");
-	
+	DKDEBUGFUNC();	
 	DKClose("DKNotepad/DKNotepad.js");
 	DKRemoveEvents(DKOcr_OnEvent);
 }
@@ -24,18 +22,17 @@ function DKOcr_End()
 /////////////////////////////
 function DKOcr_OnEvent(event)
 {
-	DKLog("DKOcr_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKDEBUGFUNC(event);	
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
-		DKLog("OpenFile: "+file+" \n");
+		DKINFO(("OpenFile: "+file+"\n");
 		
 		//if file is pdf, convert it to png
 		if(file.includes(".pdf") || file.includes(".PDF")){
-			DKLog("DKOcr_OnEvent(): file is a pdf\n", DKINFO);
+			DKINFO(("DKOcr_OnEvent(): file is a pdf\n");
 			var assets = DKAssets_LocalAssets();
 			var temp_file = assets+"temp.png";
-			DKLog("temp_file = "+temp_file+"\n", DKINFO);
+			DKINFO(("temp_file = "+temp_file+"\n");
 			
 			DKFile_Delete(assets+"/temp.png");
 			for(var i=0; i<1000; i++){

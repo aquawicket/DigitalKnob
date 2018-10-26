@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadFormat_Init()
 {
-	DKLog("DKNotepadFormat_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadFormat_OnEvent);
 	DKAddEvent("DKNotepadFormat_WordWrap", "click", DKNotepadFormat_OnEvent);
@@ -11,7 +11,7 @@ function DKNotepadFormat_Init()
 //////////////////////////////
 function DKNotepadFormat_End()
 {
-	DKLog("DKNotepadFormat_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKNotepadFormat_OnEvent);
 	DKClose("DKNotepad/DKNotepadFormat.html");
 }
@@ -19,12 +19,12 @@ function DKNotepadFormat_End()
 ///////////////////////////////////////
 function DKNotepadFormat_OnEvent(event)
 {
-	DKLog("DKNotepadFormat_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event,"DKNotepadFormat_WordWrap")){
 		DKNotepadFormat_WordWrap();
 	}
 	if(DK_Id(event,"DKNotepadFormat_Font")){
-		DKLog("DKNotepadFormat_Font\n");
+		DKINFO(("DKNotepadFormat_Font\n");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
@@ -38,7 +38,7 @@ function DKNotepadFormat_OnEvent(event)
 ///////////////////////////////////
 function DKNotepadFormat_WordWrap()
 {
-	DKLog("DKNotepadFormat_WordWrap()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DKWidget_GetProperty("DKNotepad_Text","white-space") == ""){
 		DKWidget_SetProperty("DKNotepad_Text","white-space","nowrap");
 	}

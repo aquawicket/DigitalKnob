@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadView_Init()
 {
-	DKLog("DKNotepadView_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadView.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadView_OnEvent);
 	DKAddEvent("DKNotepadView_StatusBar", "click", DKNotepadView_OnEvent);
@@ -10,7 +10,7 @@ function DKNotepadView_Init()
 ////////////////////////////
 function DKNotepadView_End()
 {
-	DKLog("DKNotepadView_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKNotepadView_OnEvent);
 	DKClose("DKNotepad/DKNotepadView.html");
 }
@@ -18,9 +18,9 @@ function DKNotepadView_End()
 /////////////////////////////////////
 function DKNotepadView_OnEvent(event)
 {
-	DKLog("DKNotepadView_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event,"DKNotepadView_StatusBar")){
-		DKLog("DKNotepadView_StatusBar\n");
+		DKINFO(("DKNotepadView_StatusBar\n");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////
 function DKMySql_Connect(host, name, pass, port)
 {
+	DKDEBUGFUNC(host, name, pass, port);
 	var send = online_assets+"/DKMySql/DKMySql.php?host=";
 	send += host;
 	if(port){
@@ -14,7 +15,7 @@ function DKMySql_Connect(host, name, pass, port)
 	send += ",";
 	send += pass;
 	var response = ajaxGetUrl(send);
-	DKLog(response);
+	DKINFO((response+"\n");
 	
 	//FIXME
 	//if(response.indexOf("DKERROR") != -1){
@@ -27,6 +28,7 @@ function DKMySql_Connect(host, name, pass, port)
 ///////////////////////////////
 function DKMySql_Database(name)
 {
+	DKDEBUGFUNC(name);
 	var send = online_assets+"/DKMySql/DKMySql.php?database=";
 	send += name;
 	return ajaxGetUrl(send);
@@ -35,6 +37,7 @@ function DKMySql_Database(name)
 /////////////////////////////
 function DKMySql_Query(query)
 {
+	DKDEBUGFUNC(query);
 	var send = online_assets+"/DKMySql/DKMySql.php?Query=";
 	send += query;
 	return ajaxGetUrl(send);
@@ -43,17 +46,17 @@ function DKMySql_Query(query)
 /////////////////////////
 function DKMySql_Prep(id)
 {
-	DKLog("DKMySqlPrep "+ id);
+	DKDEBUGFUNC(id);
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
 	var nodes = document.getElementById(id).getElementsByTagName("*");
-	DKLog("checking "+nodes.length+" nodes...\n");
+	DKINFO(("checking "+nodes.length+" nodes...\n");
 	
 	for(var i=0; i<nodes.length; i++){
 	
 		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
-			DKLog(nodes[i].id);
-			DKLog(nodes[i].getAttribute("sql"));
+			DKINFO((nodes[i].id+"\n");
+			DKINFO((nodes[i].getAttribute("sql")+"\n");
 			
 			var id = nodes[i].id;
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -65,21 +68,20 @@ function DKMySql_Prep(id)
 ////////////////////////////////////////
 function DKMySql_PrepField(table, field)
 {
-	DKLog("DKMySql_PrepField("+table+", "+field+")");
-	
+	DKDEBUGFUNC(table, field);
 	//TODO: put this somewhere else, gui elements will work with the current active database
 	// CHECK DATABASE //
 	/*
 	var query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '"+database+"'";
 	var result = DKMySqlQuery(query);
-	DKLog(result);
+	DKINFO((result+"\n");
 	var records = result.split(',');
 
 	if(records.length < 3){
-		DKLog("Creating Database "+database+"\n");
+		DKINFO(("Creating Database "+database+"\n");
 		var query = "CREATE DATABASE '"+database+"'"; //FIXME: NOT Working
 		var result = DKMySqlQuery(query);
-		DKLog(result);
+		DKINFO((result+"\n");
 	}
 	*/
 	
@@ -88,10 +90,10 @@ function DKMySql_PrepField(table, field)
 	var result = DKMySqlQuery(query);
 	var records = result.split(',');
 	if(records.length < 3){
-		DKLog("Creating Table "+table+"\n");
+		DKINFO(("Creating Table "+table+"\n");
 		var query = "CREATE TABLE "+table+" (ID INT(10) NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID))";
 		var result = DKMySql_Query(query);
-		DKLog(result);
+		DKINFO((result+"\n");
 	}
 	
 	// CHECK FIELD //
@@ -99,16 +101,17 @@ function DKMySql_PrepField(table, field)
 	var result = DKMySql_Query(query);
 	var records = result.split(',');
 	if(records.length < 3){
-		DKLog("Creating Field "+field+"\n");
+		DKINFO(("Creating Field "+field+"\n");
 		var query = "ALTER TABLE "+table+" ADD "+field+" VARCHAR(60) NOT NULL";
 		var result = DKMySql_Query(query);
-		DKLog(result);
+		DKINFO((result+"\n");
 	}
 }
 
 //////////////////////////////////////
 function DKMySql_GetFirstRecordNum(id)
 {
+	DKDEBUGFUNC(id);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -117,7 +120,7 @@ function DKMySql_GetFirstRecordNum(id)
 			
 			var query = "SELECT ID FROM "+sql[0]+" ORDER BY ID ASC LIMIT 1";
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 1){
 				return records[1];
@@ -130,6 +133,7 @@ function DKMySql_GetFirstRecordNum(id)
 /////////////////////////////////////
 function DKMySql_GetLastRecordNum(id)
 {
+	DKDEBUGFUNC(id);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -138,7 +142,7 @@ function DKMySql_GetLastRecordNum(id)
 			
 			var query = "SELECT ID FROM "+sql[0]+" ORDER BY ID DESC LIMIT 1";
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 1){
 				return records[1];
@@ -151,6 +155,7 @@ function DKMySql_GetLastRecordNum(id)
 ////////////////////////////////////////////////
 function DKMySql_GetPrevRecordNum(id, recordNum)
 {
+	DKDEBUGFUNC(id, recordNum);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -159,7 +164,7 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE ID = (SELECT min(ID) FROM "+sql[0]+" WHERE ID < "+recordNum+")";
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 2){
 				return records[1];
@@ -174,6 +179,7 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 ////////////////////////////////////////////////
 function DKMySql_GetNextRecordNum(id, recordNum)
 {
+	DKDEBUGFUNC(id, recordNum);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -182,7 +188,7 @@ function DKMySql_GetNextRecordNum(id, recordNum)
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE ID = (SELECT min(ID) FROM "+sql[0]+" WHERE ID > "+recordNum+")";
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 2){
 					return records[1];
@@ -197,6 +203,7 @@ function DKMySql_GetNextRecordNum(id, recordNum)
 //////////////////////////////////////////
 function DKMySql_LoadRecord(id, recordNum)
 {
+	DKDEBUGFUNC(id, recordNum);
 	if(!recordNum){ return; }
 	var table;
 	var fields = [];
@@ -222,7 +229,7 @@ function DKMySql_LoadRecord(id, recordNum)
 		
 	query += " FROM "+table+" WHERE ID="+recordNum;
 	var result = DKMySql_Query(query);
-	DKLog(result);
+	DKINFO((result+"\n");
 	var records = result.split(",");
 		
 	var r = 1;
@@ -238,6 +245,7 @@ function DKMySql_LoadRecord(id, recordNum)
 //////////////////////////////////////////
 function DKMySql_SaveRecord(id, recordNum)
 {
+	DKDEBUGFUNC(id, recordNum);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -247,15 +255,15 @@ function DKMySql_SaveRecord(id, recordNum)
 			
 			var query = "SELECT "+sql[1]+" FROM "+sql[0]+" WHERE ID="+recordNum;
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 1){
 				var value = GetValue(nodes[i]);
 				if(value != records[1] && sql[1] != "ID"){
-					DKLog("Update Record. value="+value+" record="+records[1]+" \n");
+					DKINFO(("Update Record. value="+value+" record="+records[1]+"\n");
 					var query = "UPDATE "+sql[0]+" SET "+sql[1]+"='"+value+"' WHERE ID="+recordNum;
 					var result = DKMySql_Query(query);
-					DKLog(result);
+					DKINFO((result+"\n");
 				}
 			}
 			
@@ -266,6 +274,7 @@ function DKMySql_SaveRecord(id, recordNum)
 ////////////////////////////////////////////
 function DKMySql_DeleteRecord(id, recordNum)
 {
+	DKDEBUGFUNC(id, recordNum);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -274,7 +283,7 @@ function DKMySql_DeleteRecord(id, recordNum)
 			var sql = nodes[i].getAttribute("sql").split(",");
 			var query = "DELETE FROM "+sql[0]+" WHERE ID="+recordNum;
 			var result = DKMySql_Query(query);
-			DKLog(result);	
+			DKINFO((result+"\n");	
 			return;
 		}
 	}
@@ -283,6 +292,7 @@ function DKMySql_DeleteRecord(id, recordNum)
 ///////////////////////////////////
 function DKMySql_Search(id, string)
 {
+	DKDEBUGFUNC(id, string);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -292,7 +302,7 @@ function DKMySql_Search(id, string)
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE "+sql[1]+" LIKE '"+string+"'";
 			var result = DKMySql_Query(query);
-			DKLog(result);
+			DKINFO((result+"\n");
 			var records = result.split(',');
 			if(records.length > 2){
 				return records[1];

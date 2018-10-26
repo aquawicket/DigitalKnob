@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadEdit_Init()
 {
-	DKLog("DKNotepadEdit_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
@@ -15,7 +15,7 @@ function DKNotepadEdit_Init()
 ////////////////////////////
 function DKNotepadEdit_End()
 {
-	DKLog("DKNotepadEdit_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKNotepadEdit_OnEvent);
 	DKClose("DKNotepad/DKNotepadEdit.html");
 }
@@ -23,24 +23,24 @@ function DKNotepadEdit_End()
 /////////////////////////////////////
 function DKNotepadEdit_OnEvent(event)
 {
-	DKLog("DKNotepadEdit_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event,"DKNotepadEdit_Undo")){
-		DKLog("DKNotepadEdit_Undo\n");
+		DKINFO(("DKNotepadEdit_Undo\n");
 	}
 	if(DK_Id(event,"DKNotepadEdit_Cut")){
-		DKLog("DKNotepadEdit_Cut\n");
+		DKINFO(("DKNotepadEdit_Cut\n");
 	}
 	if(DK_Id(event,"DKNotepadEdit_Copy")){
-		DKLog("DKNotepadEdit_Copy\n");
+		DKINFO(("DKNotepadEdit_Copy\n");
 	}
 	if(DK_Id(event,"DKNotepadEdit_Paste")){
-		DKLog("DKNotepadEdit_Paste\n");
+		DKINFO(("DKNotepadEdit_Paste\n");
 	}
 	if(DK_Id(event,"DKNotepadEdit_Delete")){
-		DKLog("DKNotepadEdit_Delete\n");
+		DKINFO(("DKNotepadEdit_Delete\n");
 	}
 	if(DK_Id(event,"DKNotepadEdit_Find")){
-		DKLog("DKNotepadEdit_Find\n");
+		DKINFO(("DKNotepadEdit_Find\n");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){

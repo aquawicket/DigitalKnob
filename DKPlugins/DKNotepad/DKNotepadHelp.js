@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadHelp_Init()
 {
-	DKLog("DKNotepadHelp_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadHelp.html,DKNotepad/DKNotepad.html");
 	DKAddEvent("GLOBAL", "mousedown", DKNotepadHelp_OnEvent);
 	DKAddEvent("DKNotepadHelp_ViewHelp", "click", DKNotepadHelp_OnEvent);
@@ -11,7 +11,7 @@ function DKNotepadHelp_Init()
 ////////////////////////////
 function DKNotepadHelp_End()
 {
-	DKLog("DKNotepadHelp_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKNotepadHelp_OnEvent);
 	DKClose("DKNotepad/DKNotepadHelp.html");
 }
@@ -19,12 +19,12 @@ function DKNotepadHelp_End()
 /////////////////////////////////////
 function DKNotepadHelp_OnEvent(event)
 {
-	DKLog("DKNotepadHelp_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event,"DKNotepadHelp_ViewHelp")){
-		DKLog("DKNotepadHelp_ViewHelp\n");
+		DKINFO(("DKNotepadHelp_ViewHelp\n");
 	}
 	if(DK_Id(event,"DKNotepadHelp_About")){
-		DKLog("DKNotepadHelp_About\n");
+		DKINFO(("DKNotepadHelp_About\n");
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
