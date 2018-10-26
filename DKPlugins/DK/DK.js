@@ -167,9 +167,9 @@ DKINFO(DK_GetJavascript()+"\n");
 //////////////////////////
 function DKDEBUGFUNC(vars)
 {
-	var string = DKDebug.caller.name+"(";
+	var string = DKDEBUGFUNC.caller.name+"(";
 	if(vars){
-		for(var i = 0; i < arguments.length; i++){
+		for(var i=0; i<arguments.length; i++){
 			string += arguments[i];
 			if(i < arguments.length-1){
 				string += ",";
@@ -178,6 +178,32 @@ function DKDEBUGFUNC(vars)
 	}
 	string += ")";
 	DKDEBUG(string+"\n");
+}
+
+//////////////////////////
+function DKDEBUGVARS(vars)
+{
+	function getFileLine(){
+		var stack = Error().stack;
+		if(!stack || !LOG_LINES){ return ""; }
+		var lines = stack.split("\n");
+		var n=0;
+		while(lines[n].indexOf("Log") == -1){ n++; }
+		var fileline = lines[n+1];
+		var start = fileline.lastIndexOf("/");
+		var end = fileline.lastIndexOf(":");
+		fileline = fileline.substring(start+1, end+1);
+		return fileline;
+	};
+		
+	var info = getFileLine()+" "+DKDEBUGVARS.caller.name+"()   ";
+	if(vars){
+		for(var i=0; i<arguments.length; i++){
+			var variable = "unknown_name: ";
+			variable += arguments[i];
+			DKDEBUG(info+variable+"\n");
+		}
+	}
 }
 
 /////////////////////
