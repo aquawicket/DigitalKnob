@@ -8,8 +8,9 @@ var poin;
 function DKDom_Init()
 {
 	DKDEBUGFUNC();
+	if(DK_GetBrowser() != "Rocket"){ return; }  //This class is a wrapper for libRocket only
 	DKDom_Create();
-	//DKDom_Test();
+	DKDom_Test();
 }
 
 ////////////////////
@@ -33,10 +34,10 @@ function DKDom_Create(event)
 	{
 		DKDEBUGFUNC();
 		document = new Document();
-		location = new Location();
-		screen = new Screen();
 		this.document = document;
+		location = new Location();
 		this.location = location;
+		screen = new Screen();
 		this.screen = screen;
 
 		Window.prototype.alert = function(str){
@@ -76,17 +77,18 @@ function DKDom_Create(event)
 			has: function (targ, key) {
 				return key in targ;  // return unmodified existence status
 			},
-			get: function (targ, key, recv) {
+			get: function (targ, key, recv){
+				//DKINFO("key = "+key+"\n");
 				if(key == "hash"){ targ[key] = DKRocket_GetHash(); }
 				return targ[key];  // return unmodified value
 			},
-			set: function (targ, key, val, recv) {
+			set: function (targ, key, val, recv){
 				if(key == "hash"){ DKRocket_SetHash(val); }
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
 
-			deleteProperty: function (targ, key) {
+			deleteProperty: function (targ, key){
 				delete targ[key];  // must perform delete to target manually if 'deleteProperty' defined
 				return true;       // true: indicate that property delete was allowed
 			}

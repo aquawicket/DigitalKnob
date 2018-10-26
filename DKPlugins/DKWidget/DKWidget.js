@@ -416,7 +416,7 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
-	DKDEBUGFUNC(variable, parameter, valule);
+	DKDEBUGFUNC(variable, parameter, value);
 	if(!variable){ //FIXME: who called you?
 		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
 		return false; 
