@@ -262,12 +262,12 @@ bool DKLinux::GetVolume(int& percent)
 	snd_mixer_elem_t* elem = snd_mixer_find_selem(handle, sid);
 
 	snd_mixer_selem_get_playback_volume_range(elem, &min, &max);
-	DKLog("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n");
+	DKINFO("DKLinux::GetVolume(): min="+toString(min)+" max="+toString(max)+"\n");
 	long int vol;
 	snd_mixer_selem_get_playback_volume(elem, SND_MIXER_SCHN_FRONT_LEFT, &vol);
 	percent = vol * 100;
 
-	DKLog("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
+	DKINFO("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
 	snd_mixer_close(handle);
 	return true;
 }

@@ -690,7 +690,7 @@ bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKString
 
 	DKString filestring;
 	if(!FileToString(file, filestring)){
-		DKLog("DKFile::FileToString failed! \n", DKERROR);
+		DKERROR("DKFile::FileToString failed!\n");
 		return false;
 	}
 
@@ -709,13 +709,13 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname)
 	TCHAR* buffer = NULL;
 	length = GetShortPathName(file.c_str(), NULL, 0);
 	if(length < 1){
-		//DKLog("DKFile::GetShortName(): length < 1 \n", DKERROR);
+		//DKERROR("DKFile::GetShortName(): length < 1\n");
 		return false;
 	}
 	buffer = new TCHAR[length];
 	length = GetShortPathName(file.c_str(), buffer, length);
 	if(length < 1){
-		//DKLog("DKFile::GetShortName(): length < 1 \n", DKERROR);
+		//DKERROR("DKFile::GetShortName(): length < 1\n");
 		return false;
 	}
 	DKString temp = buffer; 
@@ -771,7 +771,7 @@ bool DKFile::PathExists(const DKString& path)
 {
 	DKDEBUGFUNC(path);
 	if(boost::filesystem::exists(path)){ return true; }
-	//DKLog("DKFile::PathExists("+path+"): Path does not exist\n");
+	//DKWARN("DKFile::PathExists("+path+"): Path does not exist\n");
 	return false;
 }
 

@@ -59,17 +59,17 @@ public:
     {
 		//DKDEBUGFUNC(data);
 		//if(has(data, ".js")){
-		//	DKLog("DKObject::Instance(): this is a .js file. Can't work for Cef.\n", DKERROR);
+		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
 		//}
 		
 		//data = (id,var1,var2,var3,etc)
 		if(!instances.empty() && singleton){
-			//DKLog("DKClass singleton already created as "+instances[0]->data[0]+"\n", DKWARN);
+			//DKWARN("DKClass singleton already created as "+instances[0]->data[0]+"\n");
 			return instances[0];
 		}
 
 		DKString name(classname);
-		//DKLog("DKBaseT::classname = "+name+" \n");
+		//DKINFO("DKBaseT::classname = "+name+"\n");
 		 
  		DKStringArray arry;
 		toStringArray(arry,data,",");
@@ -99,7 +99,7 @@ public:
 		}
 
 		//Create a new insance
-		//DKLog("DKObject::Instance("+final_data+")\n");
+		//DKINFO("DKObject::Instance("+final_data+")\n");
 		instances.push_back(new R);
 		instance_count = instances.size();
 		instances[instances.size()-1]->SetData(final_data); 
@@ -120,11 +120,11 @@ public:
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/")){
-				//	DKLog("Close(): "+id+" contains a / \n",DKERROR);
+				//	DKERROR("Close(): "+id+" contains a /\n");
 				//}
-				//DKLog("Closing "+id+"\n");
+				//DKINFO("Closing "+id+"\n");
 				if(instances.size() == 0) { return; }
-				//DKLog("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n");
+				//DKINFO("Closing "+DKString(classname)+"::"+instances[i]->data[1]+"\n");
 				if(!instances[i]->End()){ //FIXME - this can crash if End() does not exits in the instance. 
 					DKWARN("DKBaseT::Close("+id+"): failed\n");
 				}
@@ -172,7 +172,7 @@ public:
 		DKDEBUGFUNC();
 		/*
 		if(list.empty()){
-			DKLog("DKObject::GetInstances(): list is empty\n", DKWARN);
+			DKWARN("DKObject::GetInstances(): list is empty\n");
 			return;
 		}
 		*/

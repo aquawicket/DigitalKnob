@@ -202,14 +202,13 @@ bool DKDuktape::LoadFile(const DKString& path)
 	}
 	
 	if(duk_peval_file(ctx, path.c_str()) != 0){
-		//DKLog(path+" "+DKString(duk_safe_to_string(ctx, -1))+"\n", DKERROR);
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
 		str += path+"\\n";
 		str += error+"\\n";
-		str += "'+err.stack+'\\n', DKERROR);";
+		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
     }
     duk_pop(ctx);  /* ignore result ?? */

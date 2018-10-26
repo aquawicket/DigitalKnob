@@ -222,7 +222,7 @@ bool DKUtil::Execute(const DKString& command, DKString& rtn)
 	while(!feof(pipe)) {
 		if(fgets(buffer, 128, pipe) != NULL)
 			rtn += buffer;
-		DKLog(buffer);
+		DKINFO(buffer);
 	}
 	pclose(pipe);
 	return true;
@@ -479,7 +479,7 @@ bool DKUtil::GetTime(DKString& _time)
 	DKString minute = toString(now->tm_min);
 	Pad(2, '0', minute);
 	_time += minute;
-	//DKLog("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n");
+	//DKINFO("DKUtil::GetTime(): now->tm_hour="+toString(now->tm_hour)+"\n");
 	if(now->tm_hour > 12 || (now->tm_hour % 12) == 0){
 		_time += " PM";
 	}
@@ -510,7 +510,7 @@ bool DKUtil::InMainThread()
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #ifdef WIN32
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
-	//DKLog(tid); DO NOT DO THIS!
+	//DKINFO(tid+"\n"); DO NOT DO THIS!
 	return mainThreadId == GetCurrentThreadId();
 #endif
 #if defined(MAC) || defined(IOS)
@@ -518,7 +518,7 @@ bool DKUtil::InMainThread()
 #endif
 #if defined (ANDROID) //|| defined(LINUX)
 	DKString tid = "GetCurrentThreadId()(): "+toString((unsigned int)pthread_self())+"\n";
-	//DKLog(tid); DO NOT DO THIS!
+	//DKINFO(tid+"\n"); DO NOT DO THIS!
 	return mainThreadId == (unsigned long int)pthread_self();
 #endif
 	return false;
@@ -993,7 +993,7 @@ bool DKUtil::System(const DKString& command)
 	DKDEBUGFUNC(command);
 #if !defined(IOS)
 	int rval = system(command.c_str());
-	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n");
+	//DKINFO("DKUtil::System(): returned "+toString(rval)+"\n");
 	return true;
 #endif
 	return false;

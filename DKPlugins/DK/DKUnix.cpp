@@ -20,7 +20,7 @@ bool DKUnix::GetThreadId(unsigned long int& id)
 /////////////////////////////
 bool DKUnix::GetKey(int& key)
 {
-	DKLog("Press any key to continue...\n");
+	DKINFO("Press any key to continue...\n");
 	key = getchar();
 	return true;
 }
@@ -39,12 +39,12 @@ bool DKUnix::GetUsername(DKString& username)
 	char szUserName[64] = {0};
 	int nGet = getlogin_r(szUserName, sizeof(szUserName)-1);
 	if(0 != nGet){
-		DKLog("DKUnix::GetUsername() failed. \n", DKERROR);
+		DKERROR("DKUnix::GetUsername() failed\n");
 		return false;
     }
-	DKLog("USERNAME: "+DKString(szUserName)+"\n");
+	DKINFO("USERNAME: "+DKString(szUserName)+"\n");
 	char* szHome = getlogin();
-	DKLog("LOGIN: "+DKString(szHome)+"\n");
+	DKINFO("LOGIN: "+DKString(szHome)+"\n");
 
 	username = szUserName;
 	return true;

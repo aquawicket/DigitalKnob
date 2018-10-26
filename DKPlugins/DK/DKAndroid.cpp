@@ -51,17 +51,17 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 			break;
 		case JNI_EDETACHED:
 			if (thejvm->AttachCurrentThread(&env, NULL)!=0){
-				DKLog("failed to attech jvm \n", DKERROR);
+				DKERROR("failed to attech jvm\n");
 			 }
 			attached = true;
 			break;
 		case JNI_EVERSION:
-			DKLog("jni version not supported \n", DKERROR);
+			DKERROR("jni version not supported\n");
 	}
 
 	jclass cls = env->GetObjectClass(theobj);
 	if (!cls) {
-		DKLog("Could not get cls \n", DKERROR);
+		DKERROR("Could not get cls\n");
         return;
     }
 
@@ -69,7 +69,7 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 	if(param.empty()){
 		jmethodID method = env->GetMethodID(cls, name.c_str(), "()V");
 		if(!method){
-			DKLog("Could not get method \n", DKERROR);
+			DKERROR("Could not get method\n");
 			return;
 		}
 
@@ -80,7 +80,7 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 	//Call function with string parameter
 	jmethodID method = env->GetMethodID(cls, name.c_str(), "(Ljava/lang/String;)V");
 	if (!method) {
-		DKLog("Could not get method \n", DKERROR);
+		DKERROR("Could not get method\n");
         return;
     }
 
@@ -121,7 +121,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	if(!DKApp::active){ return NULL; }
 
 	if(same(arry[0],"DKAndroid_exit")){
-		DKLog("DKAndroid::exit()\n");
+		DKINFO("DKAndroid::exit()\n");
 		DKApp::Exit();
 		return NULL;
 	}
@@ -142,7 +142,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 	DKString rval;
 	DKClass::CallFunc(arry[0], &jdata, &rval);
 	if(rval.empty()){ return NULL; }
-	DKLog("CallCppFunction() rval = "+rval+"\n");
+	DKINFO("CallCppFunction() rval = "+rval+"\n");
 	
 	jclass strClass = env->FindClass("java/lang/String"); 
 	jmethodID ctorID = env->GetMethodID(strClass, "<init>", "([BLjava/lang/String;)V"); 
@@ -268,14 +268,14 @@ void DKAndroid::init()
 		DKApp dkapp;
 
 		#ifdef DKAPP
-		DKLog("DKAPP defined \n");
+		DKINFO("DKAPP defined\n");
 		#endif
 		
-		DKLog("Registered Classes \n");
+		DKINFO("Registered Classes\n");
 		DKStringArray classes;
 		DKClass::GetClassList(classes);
 		for(int i=0; i<classes.size(); i++){
-			DKLog(classes[i]+"\n");
+			DKINFO(classes[i]+"\n");
 		}
 
 		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
