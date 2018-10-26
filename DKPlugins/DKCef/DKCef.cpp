@@ -535,6 +535,12 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 {
 	DKDEBUGFUNC(id, top, left, width, height, url);
 	DKINFO("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
+	
+	int _width = width;
+	int _height = height;
+	if(!_width){ _width = 800; }
+	if(!_height){ _height = 600; }
+
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -550,8 +556,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
-		dkBrowser.width = width;
-		dkBrowser.height = height;
+		dkBrowser.width = _width;
+		dkBrowser.height = _height;
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
@@ -588,15 +594,15 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 #ifdef WIN32
 		window_info.SetAsPopup(NULL, title.c_str());
 #endif
-		window_info.width = width;
-		window_info.height = height;
+		window_info.width = _width;
+		window_info.height = _height;
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
-		dkBrowser.width = width;
-		dkBrowser.height = height;
+		dkBrowser.width = _width;
+		dkBrowser.height = _height;
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
