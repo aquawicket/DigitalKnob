@@ -12,6 +12,7 @@
 /////////////////////////////////////////////////////
 int DKSDLCefKeyboard::getCefModifiers(int modKeyMask)
 {
+	DKDEBUGFUNC(modKeyMask);
 	int modifiers = 0;
     if (modKeyMask & KMOD_CTRL)
 		modifiers |= EVENTFLAG_CONTROL_DOWN;
@@ -43,4 +44,3 @@ int DKSDLCefKeyboard::getCefModifiers(int modKeyMask)
 
     return modifiers;
 }
-

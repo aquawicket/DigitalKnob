@@ -1,8 +1,7 @@
 ///////////////////////////
 function DKAdminMenu_Init()
 {
-	DKLog("DKAdminMenu_Init()\n", DKDEBUG);
-	
+	DKDEBUGFUNC();
 	DKCreate("DKAdmin/DKAdminMenu.html", function(){
 		DKAddEvent("GLOBAL", "mousedown", DKAdminMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", DKAdminMenu_OnEvent);
@@ -30,8 +29,7 @@ function DKAdminMenu_Init()
 //////////////////////////
 function DKAdminMenu_End()
 {
-	DKLog("DKAdminMenu_Init()\n", DKDEBUG);
-	
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKAdminMenu_OnEvent);
 	DKClose("DKAdmin/DKAdminMenu.html");
 }
@@ -39,7 +37,8 @@ function DKAdminMenu_End()
 ///////////////////////////////////
 function DKAdminMenu_OnEvent(event)
 {
-	DKLog("DKAdminMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKINFO("DKAdminMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	//selections
 	if(DK_Id(event, "FileExplorer")){
@@ -74,7 +73,7 @@ function DKAdminMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenSource")){
-		//DKLog("OpenSource\n");
+		//DKINFO("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
 		var assets = DKAssets_LocalAssets();
@@ -82,7 +81,7 @@ function DKAdminMenu_OnEvent(event)
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
-			//DKLog(source+"\n");
+			//DKINFO(source+"\n");
 		});
 	}
 	if(DK_Id(event, "OpenDebug")){
@@ -96,20 +95,20 @@ function DKAdminMenu_OnEvent(event)
 		DK_System("cls");
 	}
 	if(DK_Id(event, "Info")){
-		DKLog("\n**** DKOBJECTS ****\n");
+		DKINFO("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKLog(arry[i]+"\n");
+			DKINFO(arry[i]+"\n");
 		}
 		
-		DKLog("**** DKEVENTS ****\n");
+		DKINFO("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKLog(arry[i]+"\n");
+			DKINFO(arry[i]+"\n");
 		}
 	}
 	if(DK_Id(event, "Refresh")){
@@ -123,7 +122,7 @@ function DKAdminMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "DKAdminMenu_Run")){
 		var key = DK_GetValue(event);
-		//DKLog("DKAdminMenu_Run: key="+key+"\n");
+		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() == "Rocket"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}
@@ -144,8 +143,7 @@ function DKAdminMenu_OnEvent(event)
 /////////////////////////////////////
 function DKAdminMenu_Add(title, code)
 {
-	DKLog("DKAdminMenu_Add("+title+", "+code+")\n", DKDEBUG);
-	
+	DKDEBUGFUNC(title, code);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKAdmin/DKAdminMenu.html", "div", "DKAdminMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
@@ -154,7 +152,7 @@ function DKAdminMenu_Add(title, code)
 /////////////////////////////////
 function DKAdminMenu_Run(command)
 {
-	DKLog("DKAdminMenu_Run("+command+")\n", DKDEBUG);
+	DKDEBUGFUNC(command);
 	if(command.indexOf("http://") == 0 || command.indexOf("https://") == 0 || command.indexOf("file://") == 0 || command.indexOf("chrome://") == 0){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe(command, command, 640, 480);
