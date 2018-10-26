@@ -5,10 +5,10 @@
 /////////////////////////////////////////////////////////////////////////////
 Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 {
+	DKDEBUGFUNC("Rocket::Core::String&");
 	DKString abspath = path.CString();
-
 	if(!DKFile::VerifyPath(abspath)){
-		DKLog("DKRocketFile::Open("+abspath+") file does not exist.\n",DKERROR);
+		DKERROR("DKRocketFile::Open("+abspath+") file does not exist.\n");
 		return 0;
 	}
 
@@ -21,6 +21,7 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 ///////////////////////////////////////////////////////
 void DKRocketFile::Close(Rocket::Core::FileHandle file)
 {
+	DKDEBUGFUNC(file);
 	fclose((FILE*) file);
 }
 
@@ -32,6 +33,7 @@ void DKRocketFile::Close(Rocket::Core::FileHandle file)
 ///////////////////////////////////////////////////////////////////////////////////
 size_t DKRocketFile::Read(void* buffer, size_t size, Rocket::Core::FileHandle file)
 {
+	DKDEBUGFUNC(buffer, size, file);
 	return fread(buffer, 1, size, (FILE*) file);
 }
 
@@ -43,6 +45,7 @@ size_t DKRocketFile::Read(void* buffer, size_t size, Rocket::Core::FileHandle fi
 ///////////////////////////////////////////////////////////////////////////////
 bool DKRocketFile::Seek(Rocket::Core::FileHandle file, long offset, int origin)
 {
+	DKDEBUGFUNC(file, offset, origin);
 	return fseek((FILE*) file, offset, origin) == 0;
 }
 
@@ -52,5 +55,6 @@ bool DKRocketFile::Seek(Rocket::Core::FileHandle file, long offset, int origin)
 ////////////////////////////////////////////////////////
 size_t DKRocketFile::Tell(Rocket::Core::FileHandle file)
 {
+	DKDEBUGFUNC(file);
 	return ftell((FILE*) file);
 }

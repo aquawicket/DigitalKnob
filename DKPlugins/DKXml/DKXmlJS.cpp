@@ -6,7 +6,7 @@
 ////////////////////
 bool DKXmlJS::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
 	return true;
 }
@@ -14,7 +14,7 @@ bool DKXmlJS::Init()
 /////////////////////////////////////////
 int DKXmlJS::GetXmlNode(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);
 	DKXml xml;

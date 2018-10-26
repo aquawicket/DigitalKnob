@@ -10,7 +10,7 @@ DKRocketFile* DKRocket::dkRocketFile = NULL;
 /////////////////////
 bool DKRocket::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRocketJS");
 	DKClass::DKCreate("DKRocketV8");
 	document = NULL;
@@ -28,13 +28,13 @@ bool DKRocket::Init()
 		DKClass::DKCreate("DKOSGRocket");
 	}
 	else{
-		DKLog("DKRocket::Init(): No registered rocket window found\n", DKERROR);
+		DKERROR("DKRocket::Init(): No registered rocket window found\n");
 		return false;
 	}
 	
 	if(DKClass::DKAvailable("DKSDLRocket")){
 		if(!Rocket::Core::Initialise()){
-			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
+			DKERROR("Rocket::Core::Initialise(): failed\n");
 			return false;
 		}
 
@@ -51,7 +51,7 @@ bool DKRocket::Init()
 	
 	if(DKClass::DKAvailable("DKSDLRocket")){
 		if(!Rocket::Debugger::Initialise(context)){
-			DKLog("Rocket::Core::Initialise(): failed\n", DKERROR);
+			DKERROR("Rocket::Core::Initialise(): failed\n");
 			return false;
 		}
 	}
@@ -67,7 +67,7 @@ bool DKRocket::Init()
 ////////////////////
 bool DKRocket::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKEvent::RemoveRegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::RemoveUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::RemoveSendEventFunc(&DKRocket::SendEvent, this);
@@ -87,9 +87,9 @@ bool DKRocket::End()
 /////////////////////////////////////////////
 bool DKRocket::LoadFont(const DKString& file)
 {
-	DKDebug(file);
+	DKDEBUGFUNC(file);
 	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
-		DKLog("Could not load "+file+" \n", DKERROR);
+		DKERROR("Could not load "+file+"\n");
 		return false;
 	}
 	//fonts_loaded = true;
@@ -99,7 +99,7 @@ bool DKRocket::LoadFont(const DKString& file)
 //////////////////////////
 bool DKRocket::LoadFonts()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKStringArray dkfiles;
 	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRocket/", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
@@ -129,10 +129,10 @@ bool DKRocket::LoadFonts()
 ////////////////////////////////////////////
 bool DKRocket::LoadGui(const DKString& file)
 {
-	DKDebug(file);
+	DKDEBUGFUNC(file);
 	DKString path = file;
 	if(!DKFile::VerifyPath(path)){
-		DKLog("DKOSGRocket::LoadGui() "+path+" not found! \n", DKERROR);
+		DKERROR("DKOSGRocket::LoadGui() "+path+" not found!\n");
 		return false;
 	}
 
@@ -155,7 +155,7 @@ bool DKRocket::LoadGui(const DKString& file)
 	document = context->LoadDocumentFromMemory(rml.c_str());
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
-		DKLog("Could not load "+path+"\n", DKERROR);
+		DKERROR("Could not load "+path+"\n");
 	}
 
 	document->Show();
@@ -167,7 +167,7 @@ bool DKRocket::LoadGui(const DKString& file)
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
-	DKLog("Loading GUI...\n");
+	DKINFO("Loading GUI...\n");
 	//DKCreate("DKLoading.js");
 	return true;
 }
@@ -175,7 +175,7 @@ bool DKRocket::LoadGui(const DKString& file)
 //////////////////////////////////////////////////////////////////////
 bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 {
-	DKDebug(id, type);
+	DKDEBUGFUNC(id, type);
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	
@@ -210,14 +210,14 @@ bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 ///////////////////////
 bool DKRocket::Reload()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return LoadGui("index.html");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	//DKDebug(id, type, value);
+	//DKDEBUGFUNC(id, type, value);
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
@@ -234,14 +234,14 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 ///////////////////////////////
 bool DKRocket::ToggleDebugger()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if(Rocket::Debugger::IsVisible()){
 		Rocket::Debugger::SetVisible(false);
-		DKLog("Rocket Debugger OFF\n");
+		DKINFO("Rocket Debugger OFF\n");
 	}
 	else{
 		Rocket::Debugger::SetVisible(true);
-		DKLog("Rocket Debugger ON\n");
+		DKINFO("Rocket Debugger ON\n");
 	}
 	return true;
 }
@@ -249,7 +249,7 @@ bool DKRocket::ToggleDebugger()
 ////////////////////////////////////////////////////////////////////////
 bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 {
-	DKDebug(id, type);
+	DKDEBUGFUNC(id, type);
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	if(same(id,"GLOBAL")){ return false; }
@@ -270,7 +270,7 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 ///////////////////////////////////////////////////////
 void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 {
-	//DKDebug(event);
+	//DKDEBUGFUNC(event);
 	if(!event.GetCurrentElement()){return;} //MUST!
 	if(!event.GetTargetElement()){return;} //MUST!
 

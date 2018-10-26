@@ -6,6 +6,7 @@
 ///////////////////////
 bool DKRocketJS::Init()
 {
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKRocket_LoadGui", DKRocketJS::LoadGui);
 	DKDuktape::AttachFunction("DKRocket_Reload", DKRocketJS::Reload);
 	DKDuktape::AttachFunction("DKRocket_ToggleDebugger", DKRocketJS::ToggleDebugger);
@@ -28,6 +29,7 @@ bool DKRocketJS::Init()
 /////////////////////////////////////////
 int DKRocketJS::LoadGui(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	if(!DKRocket::Get()->LoadGui(file)){ return 0; }
 	return 1;
@@ -36,6 +38,7 @@ int DKRocketJS::LoadGui(duk_context* ctx)
 ////////////////////////////////////////
 int DKRocketJS::Reload(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKRocket::Get()->Reload();
 	return 1;
 }
@@ -43,14 +46,15 @@ int DKRocketJS::Reload(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKRocketJS::ToggleDebugger(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKRocket::Get()->ToggleDebugger();
 	return 1;
 }
 
-
 /////////////////////////////////////////////
 int DKRocketJS::innerHeight(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	int y = DKRocket::Get()->context->GetDimensions().y;
 	duk_push_int(ctx, y);
 	return 1;
@@ -59,6 +63,7 @@ int DKRocketJS::innerHeight(duk_context* ctx)
 ////////////////////////////////////////////
 int DKRocketJS::innerWidth(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	int x = DKRocket::Get()->context->GetDimensions().x;
 	duk_push_int(ctx, x);
 	return 1;
@@ -67,6 +72,7 @@ int DKRocketJS::innerWidth(duk_context* ctx)
 //////////////////////////////////////
 int DKRocketJS::name(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString name = DKRocket::Get()->context->GetName().CString();
 	duk_push_string(ctx, name.c_str());
 	return 1;
@@ -75,10 +81,11 @@ int DKRocketJS::name(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKRocketJS::getElementById(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKRocket::Get()->document->GetElementById(id.c_str());
 	if(!element){
-		DKLog("DKRocketJS::getElementById(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::getElementById(): element invalid");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -96,17 +103,18 @@ int DKRocketJS::getElementById(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::getAttribute(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::getAttribute("+attribute+"): element invalid", DKERROR);
+		DKERROR("DKRocketJS::getAttribute("+attribute+"): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	Rocket::Core::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		DKLog("DKRocketJS::getAttribute("+attribute+"): variant invalid", DKERROR);
+		DKERROR("DKRocketJS::getAttribute("+attribute+"): variant invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -119,11 +127,12 @@ int DKRocketJS::getAttribute(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::hasAttribute(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::hasAttribute(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::hasAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -138,12 +147,13 @@ int DKRocketJS::hasAttribute(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::setAttribute(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
 	DKString value = duk_require_string(ctx, 2);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::setAttribute(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::setAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -155,6 +165,7 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 ////////////////////////////////////////////////////////
 int DKRocketJS::getElementsByClassName(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString name = duk_require_string(ctx, 0);
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByClassName(elements, name.c_str());
@@ -174,6 +185,7 @@ int DKRocketJS::getElementsByClassName(duk_context* ctx)
 //////////////////////////////////////////////////////
 int DKRocketJS::getElementsByTagName(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString name = duk_require_string(ctx, 0);
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
@@ -195,6 +207,7 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 ///////////////////////////////////////////////////////////////////////////////
 Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 {
+	DKDEBUGFUNC(address);
 	Rocket::Core::Element* body = DKRocket::Get()->document->GetElementById("body"); //TEST: This needs to be recursive
 	Rocket::Core::ElementList elements;
 	GetElements(body, elements);
@@ -207,14 +220,14 @@ Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 			return elements[i];
 		}
 	}
-	DKLog("DKRocketJS::getElementByAddress("+address+"): element not found\n", DKERROR);
+	DKERROR("DKRocketJS::getElementByAddress("+address+"): element not found\n");
 	return NULL;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKRocketJS::GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements)
 {
-	DKDebug(parent, "DKElementList&");
+	DKDEBUGFUNC(parent, "DKElementList&");
 	if(!parent){ return false; }
 	typedef std::queue<Rocket::Core::Element*> SearchQueue;
 	SearchQueue search_queue;
@@ -242,6 +255,7 @@ bool DKRocketJS::GetElements(Rocket::Core::Element* parent, Rocket::Core::Elemen
 /////////////////////////////////////////////
 int DKRocketJS::setProperty(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
 	DKString propertyValue = duk_require_string(ctx, 2);
@@ -249,7 +263,7 @@ int DKRocketJS::setProperty(duk_context* ctx)
 
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::setProperty(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::setProperty(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -260,17 +274,18 @@ int DKRocketJS::setProperty(duk_context* ctx)
 ///////////////////////////////////////////////////
 int  DKRocketJS::getPropertyValue(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::getPropertyValue(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	const Rocket::Core::Property* prop = element->GetProperty(propertyName.c_str());
 	if(!prop){ 
-		DKLog("DKRocketJS::getPropertyValue(): prop is invalid", DKERROR);
+		DKERROR("DKRocketJS::getPropertyValue(): prop is invalid\n");
 		duk_push_boolean(ctx, false);
 		return true; 
 	}
@@ -282,10 +297,11 @@ int  DKRocketJS::getPropertyValue(duk_context* ctx)
 ///////////////////////////////////////////
 int DKRocketJS::innerHTML(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::innerHTML(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::innerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -298,11 +314,12 @@ int DKRocketJS::innerHTML(duk_context* ctx)
 //////////////////////////////////////////////
 int DKRocketJS::setInnerHTML(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString innerHTML = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKLog("DKRocketJS::innerHTML(): element invalid", DKERROR);
+		DKERROR("DKRocketJS::innerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}

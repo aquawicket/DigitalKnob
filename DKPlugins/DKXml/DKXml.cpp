@@ -5,21 +5,21 @@
 //////////////////
 bool DKXml::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 /////////////////
 bool DKXml::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 //////////////////////////////////////////////
 bool DKXml::LoadDocument(const DKString& file)
 {
-	DKDebug(file);	
+	DKDEBUGFUNC(file);	
 	DKString path = file;
 	if(!DKFile::VerifyPath(path)){ return false; } 
 
@@ -30,9 +30,9 @@ bool DKXml::LoadDocument(const DKString& file)
 	if(!result){
 		DKString description = result.description();
 		DKString offset = toString((int)result.offset);
-		DKLog("DKXml::LoadDocument("+file+"): "+description+" @ character: "+offset+" \n", DKERROR);
+		DKERROR("DKXml::LoadDocument("+file+"): "+description+" @ character: "+offset+"\n");
 		DKFile::StringToFile(filedata, DKFile::local_assets+"XMLlog.txt");
-		DKLog("Saved string to XMLlog.txt \n");
+		DKINFO("Saved string to XMLlog.txt\n");
 		return false;
 	}
 	return true;
@@ -41,7 +41,7 @@ bool DKXml::LoadDocument(const DKString& file)
 //////////////////////////////////////////////////////////
 bool DKXml::LoadDocumentFromString(const DKString& string)
 {
-	DKDebug(string);	
+	DKDEBUGFUNC(string);	
 	DKString temp = string;
 	Trim(temp);
 	replace(temp, "\n", "");
@@ -55,7 +55,7 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 		std::cout << "Error description: " << result.description() << "\n";
 		std::cout << "Error offset: " << result.offset << " (error at [..." << (temp.c_str() + result.offset) << "]\n\n";
 		DKFile::StringToFile(temp, DKFile::local_assets+"XMLlog.txt");
-		DKLog("Saved string to XMLlog.txt \n");
+		DKINFO("Saved string to XMLlog.txt\n");
 		return false;
 	}
 	return true;
@@ -64,9 +64,9 @@ bool DKXml::LoadDocumentFromString(const DKString& string)
 ////////////////////////////////////////
 bool DKXml::SaveDocument(DKString& file)
 {
-	DKDebug(file);	
+	DKDEBUGFUNC(file);	
 	if(!doc.save_file(file.c_str(), "\t", pugi::format_default | pugi::format_no_declaration | pugi::format_no_escapes)){
-		DKLog("Could not save xml\n", DKERROR);
+		DKERROR("Could not save xml\n");
 		return false;
 	}
 	return true;
@@ -75,7 +75,7 @@ bool DKXml::SaveDocument(DKString& file)
 //////////////////////////////////////////////////
 bool DKXml::SaveDocumentToString(DKString& string)
 {
-	DKDebug(string);	
+	DKDEBUGFUNC(string);	
 	std::ostringstream ss; 
 	doc.save(ss, "\t", pugi::format_default | pugi::format_no_declaration | pugi::format_no_escapes); 
 	string = ss.str();
@@ -85,10 +85,10 @@ bool DKXml::SaveDocumentToString(DKString& string)
 //////////////////////////////////////////////////////////////////
 bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 {
-	DKDebug(xpath, path);
+	DKDEBUGFUNC(xpath, path);
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 	for(DKXmlNodes::const_iterator it = nodes.begin(); it != nodes.end(); ++it){
@@ -118,7 +118,7 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 		DKString filepath = path+"/"+file;
 		sub.SaveDocument(filepath);
 
-		DKLog("Saved "+path+"/"+file+"\n");
+		DKINFO("Saved "+path+"/"+file+"\n");
     }
 	return true;
 }
@@ -127,10 +127,10 @@ bool DKXml::SaveNodes(const DKString& xpath, const DKString& path)
 ///////////////////////////////////////////
 bool DKXml::FindNode(const DKString& xpath)
 {
-	DKDebug(xpath);	
+	DKDEBUGFUNC(xpath);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 	return true;
@@ -139,10 +139,10 @@ bool DKXml::FindNode(const DKString& xpath)
 ///////////////////////////////////////////////////////////
 bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
 {
-	DKDebug(xpath, node);
+	DKDEBUGFUNC(xpath, node);
 	node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 	return true;
@@ -151,10 +151,10 @@ bool DKXml::GetNode(const DKString& xpath, DKXmlNode& node)
 //////////////////////////////////////////////////////////////
 bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 {
-	DKDebug(xpath, "DKXmlNodes&");	
+	DKDEBUGFUNC(xpath, "DKXmlNodes&");	
 	nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 	return true;
@@ -163,10 +163,10 @@ bool DKXml::GetNodes(const DKString& xpath, DKXmlNodes& nodes)
 ////////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 {
-	DKDebug(xpath, "DKStringArray&");	
+	DKDEBUGFUNC(xpath, "DKStringArray&");	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -180,10 +180,10 @@ bool DKXml::GetNodeNames(const DKString& xpath, DKStringArray& arry)
 //////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttributeValues(const DKString& xpath, const DKString& attrib, DKStringArray& arry)
 {
-	DKDebug(xpath, attrib, "DKStringArray&");	
+	DKDEBUGFUNC(xpath, attrib, "DKStringArray&");	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -197,10 +197,10 @@ bool DKXml::GetAttributeValues(const DKString& xpath, const DKString& attrib, DK
 ////////////////////////////////////////////////////////////////
 bool DKXml::GetFullNode(const DKString& xpath, DKString& string)
 {
-	DKDebug(xpath, string);	
+	DKDEBUGFUNC(xpath, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -216,10 +216,10 @@ bool DKXml::GetFullNode(const DKString& xpath, DKString& string)
 /////////////////////////////////////////////////////////////////
 bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
 {
-	DKDebug(xpath, string);	
+	DKDEBUGFUNC(xpath, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -233,10 +233,10 @@ bool DKXml::GetNodeValue(const DKString& xpath, DKString& string)
 ///////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetChildNodeValue(const DKString& xpath, int num, DKString& string)
 {
-	DKDebug(xpath, num, string);	
+	DKDEBUGFUNC(xpath, num, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -257,10 +257,10 @@ bool DKXml::GetChildNodeValue(const DKString& xpath, int num, DKString& string)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetChildAttribute(const DKString& xpath, int num, const DKString& attrib, DKString& string)
 {
-	DKDebug(xpath, num, attrib, string);	
+	DKDEBUGFUNC(xpath, num, attrib, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -279,7 +279,7 @@ bool DKXml::GetChildAttribute(const DKString& xpath, int num, const DKString& at
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttribute(const DKXmlNode& node, const DKString& attrib, DKString& string)
 {
-	DKDebug(node, attrib, string);	
+	DKDEBUGFUNC(node, attrib, string);	
 	string = node.attribute(attrib.c_str()).value();
 	return true;
 }
@@ -287,10 +287,10 @@ bool DKXml::GetAttribute(const DKXmlNode& node, const DKString& attrib, DKString
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::GetAttribute(const DKString& xpath, const DKString& attrib, DKString& string)
 {
-	DKDebug(xpath, attrib, string);	
+	DKDEBUGFUNC(xpath, attrib, string);	
 	DKXmlNode node = doc.select_single_node(xpath.c_str()).node();
 	if(node.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -301,7 +301,7 @@ bool DKXml::GetAttribute(const DKString& xpath, const DKString& attrib, DKString
 ////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::SetAttribute(DKXmlNode& node, const DKString& attrib, const DKString& value)
 {
-	DKDebug(node, attrib, value);	
+	DKDEBUGFUNC(node, attrib, value);	
 	if(!node.attribute(attrib.c_str()).as_bool()){
 		node.append_attribute(attrib.c_str());
 	}
@@ -312,10 +312,10 @@ bool DKXml::SetAttribute(DKXmlNode& node, const DKString& attrib, const DKString
 ///////////////////////////////////////////////////////////////////////////////////////////////
 bool DKXml::SetAttributes(const DKString& xpath, const DKString& attrib, const DKString& value)
 {
-	DKDebug(xpath, attrib, value);	
+	DKDEBUGFUNC(xpath, attrib, value);	
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -332,7 +332,7 @@ bool DKXml::SetAttributes(const DKString& xpath, const DKString& attrib, const D
 ///////////////////////////////////////////////////////////////////
 bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 {
-	DKDebug(xpath, type);	
+	DKDEBUGFUNC(xpath, type);	
 	DKXmlNode parent = doc.select_single_node(xpath.c_str()).node();
 	parent.append_child(type.c_str());
 	return true;
@@ -341,7 +341,7 @@ bool DKXml::AppendNode(const DKString& xpath, const DKString& type)
 ////////////////////////////////////////////////////////////////////
 bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
 {
-	DKDebug(xpath, type);
+	DKDEBUGFUNC(xpath, type);
 	DKXmlNode parent = doc.select_single_node(xpath.c_str()).node();
 	if(parent.first_child().empty()){
 		parent.append_child(type.c_str());
@@ -355,10 +355,10 @@ bool DKXml::PrependNode(const DKString& xpath, const DKString& type)
 //////////////////////////////////////////////
 bool DKXml::RemoveNodes(const DKString& xpath)
 {
-	DKDebug(xpath);
+	DKDEBUGFUNC(xpath);
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 	while(nodes.size()){
@@ -373,10 +373,10 @@ bool DKXml::RemoveNodes(const DKString& xpath)
 ///////////////////////////////////////////////////////////////////////////
 bool DKXml::RemoveAttributes(const DKString& xpath, const DKString& attrib)
 {
-	DKDebug(xpath, attrib);
+	DKDEBUGFUNC(xpath, attrib);
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 
@@ -390,10 +390,10 @@ bool DKXml::RemoveAttributes(const DKString& xpath, const DKString& attrib)
 ///////////////////////////////////////////////
 bool DKXml::RemoveInners(const DKString& xpath)
 {
-	DKDebug(xpath);
+	DKDEBUGFUNC(xpath);
 	DKXmlNodes nodes = doc.select_nodes(xpath.c_str());
 	if(nodes.empty()){
-		DKLog("Could not find xpath: "+xpath+"\n", DKWARN);
+		DKWARN("Could not find xpath: "+xpath+"\n");
 		return false;
 	}
 

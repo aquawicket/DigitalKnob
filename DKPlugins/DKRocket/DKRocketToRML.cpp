@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////
 bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 {
-	DKDebug(html, rml);
+	DKDEBUGFUNC(html, rml);
 	rml = html;
 	// :rgba(r,g,b,a)  <- convert a to 0-255
 	size_t end = 0;
@@ -29,7 +29,7 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 			//return true;
 			continue;
 		}
-		DKLog("Error: in HtmlToRml()\n", DKERROR);
+		DKERROR("Error: in HtmlToRml()\n");
 		return false;
 	}
 
@@ -67,14 +67,14 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 /////////////////////////////////////////////
 bool DKRocketToRML::Hyperlink(DKEvent* event)
 {
-	DKDebug(event);
+	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
 
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-	DKLog("DKWidget::Hyperlink: "+value+"\n");
+	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	DKUtil::Run(value, "");
 	return true;
 }
@@ -82,7 +82,7 @@ bool DKRocketToRML::Hyperlink(DKEvent* event)
 ///////////////////////////////////////////////////////////////////
 bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
-	DKDebug(html, rml);
+	DKDEBUGFUNC(html, rml);
 	rml = html;
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
@@ -97,7 +97,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 		xml.PrependNode("//rml", "head");
 	}
 	if (!xml.FindNode("//body")) {
-		DKLog("No body tag\n", DKERROR);
+		DKERROR("No body tag\n");
 		xml.PrependNode("//html", "body");
 		//todo, we need to move the rest of the content into the body node.
 	}
@@ -123,9 +123,9 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 ///////////////////////////////////////////////////////////////
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
-	DKDebug(element);
+	DKDEBUGFUNC(element);
 	if(!element){
-		DKLog("DKRocketToRML::PostProcess(): element invalid", DKWARN);
+		DKWARN("DKRocketToRML::PostProcess(): element invalid\n");
 		return false;
 	}
 
@@ -142,7 +142,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 
 		DKString url;
 		if(!iframes[i]->GetAttribute("src")){ 
-			 DKLog("DKRocketToRML::PostProcess(): iframe has no source tag\n");
+			 DKINFO("DKRocketToRML::PostProcess(): iframe has no source tag\n");
 			 return false;
 		}
 		else{
@@ -201,7 +201,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 ////////////////////////////////////////////////
 bool DKRocketToRML::ResizeIframe(DKEvent* event)
 {
-	DKDebug(event);
+	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
@@ -218,7 +218,7 @@ bool DKRocketToRML::ResizeIframe(DKEvent* event)
 ///////////////////////////////////////////////
 bool DKRocketToRML::ClickIframe(DKEvent* event)
 {
-	DKDebug(event);
+	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
@@ -235,7 +235,7 @@ bool DKRocketToRML::ClickIframe(DKEvent* event)
 ///////////////////////////////////////////////////
 bool DKRocketToRML::MouseOverIframe(DKEvent* event)
 {
-	DKDebug(event);
+	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
