@@ -56,8 +56,8 @@ bool DKDuktape::Init()
 		}
 		//////////////////////////////////////////////////////////////////////////////////
 
-		DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
-		LoadFile(duktape);
+		//DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
+		//LoadFile(duktape);
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
