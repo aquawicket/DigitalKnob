@@ -80,8 +80,8 @@ bool DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_WindowHeight", DKWidgetJS::WindowHeight);
 	DKDuktape::AttachFunction("DKWidget_WindowWidth", DKWidgetJS::WindowWidth);
 
-	DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
-	DKDuktape::LoadFile(jsfile);
+	//DKString jsfile = DKFile::local_assets + "DKRocket/DKRocket.js";
+	//DKDuktape::LoadFile(jsfile);
 	
 	return true;
 }
