@@ -45,7 +45,10 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
 	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate);
 	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKLog", DKJS::_DKLog);
+	DKDuktape::AttachFunction("DKERROR", DKJS::_DKERROR);
+	DKDuktape::AttachFunction("DKWARN", DKJS::_DKWARN);
+	DKDuktape::AttachFunction("DKINFO", DKJS::_DKINFO);
+	DKDuktape::AttachFunction("DKDEBUG", DKJS::_DKDEBUG);
 	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent);
 	DKDuktape::AttachFunction("DKRemoveEvents", DKJS::_DKRemoveEvents);
 	DKDuktape::AttachFunction("DKSendEvent", DKJS::_DKSendEvent);
@@ -226,10 +229,10 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////
-int DKJS::_DKLog(duk_context* ctx)
+////////////////////////////////////
+int DKJS::_DKERROR(duk_context* ctx)
 {
-	DKString string = duk_require_string(ctx, 0);
+	DKString string;
 	if(duk_is_string(ctx, 0)){
 		string = duk_require_string(ctx, 0);
 	}
@@ -239,15 +242,58 @@ int DKJS::_DKLog(duk_context* ctx)
 	if(duk_is_number(ctx, 0)){
 		string = toString(duk_require_int(ctx, 0));
 	}
-	
-	if(duk_get_int(ctx, 1)){
-		int lvl = duk_get_int(ctx, 1);
-		if(lvl == DK_INFO){ DKINFO(string); }
-		if(lvl == DK_WARN){ DKWARN(string); }
-		if(lvl == DK_ERROR){ DKERROR(string); }
-		return 1;
+	DKERROR(string);
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::_DKWARN(duk_context* ctx)
+{
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKWARN(string);
+	return 1;
+}
+
+///////////////////////////////////
+int DKJS::_DKINFO(duk_context* ctx)
+{
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
 	}
 	DKINFO(string);
+	return 1;
+}
+
+////////////////////////////////////
+int DKJS::_DKDEBUG(duk_context* ctx)
+{
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKDEBUG(string);
 	return 1;
 }
 
