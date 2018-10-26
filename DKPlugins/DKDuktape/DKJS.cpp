@@ -50,6 +50,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DKINFO", DKJS::_DKINFO);
 	DKDuktape::AttachFunction("DKDEBUG", DKJS::_DKDEBUG);
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
+	DKDuktape::AttachFunction("DKDEBUGVARS", DKJS::_DKDEBUGVARS);
 	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent);
 	DKDuktape::AttachFunction("DKRemoveEvents", DKJS::_DKRemoveEvents);
 	DKDuktape::AttachFunction("DKSendEvent", DKJS::_DKSendEvent);
@@ -313,6 +314,30 @@ int DKJS::_DKDEBUGFUNC(duk_context* ctx)
 	}
 	str += ")";
 	DKDEBUG(str+"\n");
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::_DKDEBUGVARS(duk_context* ctx)
+{
+	//TODO - we need to pull the function name and the variable names
+	DKString info = "unknown_file:unknown_line unknown_func()   ";
+	int i=0;
+	while(duk_is_valid_index(ctx, i)){
+		DKString var = "unknown_name: ";
+		if(duk_is_boolean(ctx, i)){ var += toString(duk_get_boolean(ctx, i)); }
+		if(duk_is_number(ctx, i)){ var += toString(duk_get_number(ctx, i)); }
+		if(duk_is_string(ctx, i)){ var += duk_get_string(ctx, i); }
+		if(!log_debug){
+			log_debug = true;
+			DKDEBUG(info+var+"\n");
+			log_debug = false;
+		}
+		else{
+			DKDEBUG(info+var+"\n");
+		}
+		i++;
+	}
 	return 1;
 }
 
