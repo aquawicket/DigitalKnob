@@ -49,6 +49,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DKWARN", DKJS::_DKWARN);
 	DKDuktape::AttachFunction("DKINFO", DKJS::_DKINFO);
 	DKDuktape::AttachFunction("DKDEBUG", DKJS::_DKDEBUG);
+	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent);
 	DKDuktape::AttachFunction("DKRemoveEvents", DKJS::_DKRemoveEvents);
 	DKDuktape::AttachFunction("DKSendEvent", DKJS::_DKSendEvent);
@@ -294,6 +295,14 @@ int DKJS::_DKDEBUG(duk_context* ctx)
 		string = toString(duk_require_int(ctx, 0));
 	}
 	DKDEBUG(string);
+	return 1;
+}
+
+////////////////////////////////////////
+int DKJS::_DKDEBUGFUNC(duk_context* ctx)
+{
+	int length = duk_get_length(ctx, NULL);
+	DKDEBUGVARS(length);
 	return 1;
 }
 

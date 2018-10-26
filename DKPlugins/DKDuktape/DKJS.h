@@ -20,6 +20,7 @@ public:
 	static int _DKWARN(duk_context* ctx);
 	static int _DKINFO(duk_context* ctx);
 	static int _DKDEBUG(duk_context* ctx);
+	static int _DKDEBUGFUNC(duk_context* ctx);
 	static int _DKRemoveEvent(duk_context* ctx);
 	static int _DKRemoveEvents(duk_context* ctx);
 	static int _DKSendEvent(duk_context* ctx);
