@@ -4,8 +4,7 @@ var event_id;
 /////////////////////////////
 function DKColorPicker_Init()
 {
-	//DKLog("DKColorPicker_Init()\n");
-	
+	DKDEBUGFUNC();
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
@@ -17,8 +16,7 @@ function DKColorPicker_Init()
 ////////////////////////////
 function DKColorPicker_End()
 {
-	//DKLog("DKColorPicker_End()\n");
-	
+	DKDEBUGFUNC();	
 	DKRemoveEvents(DKColorPicker_OnEvent);
 	DKClose("DKColorPicker/DKColorPicker.html");
 	DKClose("DKColorPicker/DKColorPicker.css");
@@ -27,14 +25,15 @@ function DKColorPicker_End()
 /////////////////////////////////////
 function DKColorPicker_OnEvent(event)
 {
-	//DKLog("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUGFUNC();
+	DKDEBUG("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
-		//DKLog("event_id:"+event_id);
-		//DKLog("event_type:"+event_type);
+		//DKINFO("event_id:"+event_id+"\n");
+		//DKINFO("event_type:"+event_type+"\n");
 	}
 	if(DK_Id(event, "DKColorPickerBar")){
 		DKColorPicker_ColorBar(); //hover
@@ -43,9 +42,9 @@ function DKColorPicker_OnEvent(event)
 		DKColorPicker_ColorBox();
 	}
 	if(DK_Id(event, "DKColorPickerOK")){
-		//DKLog("DKColorPickerOK");
-		//DKLog("event_id:"+event_id);
-		//DKLog("event_type:"+event_type);
+		//DKINFO("DKColorPickerOK\n");
+		//DKINFO("event_id:"+event_id+"\n");
+		//DKINFO("event_type:"+event_type+"\n");
 		if(event_id){
 			var color = DKWidget_GetProperty("DKColorSelected", "background-color");
 			DKSendEvent(event_id, event_type, color);
@@ -58,8 +57,7 @@ function DKColorPicker_OnEvent(event)
 /////////////////////////////////
 function DKColorPicker_ColorBar()
 {
-	//DKLog("DKColorPicker_ColorBar()\n");
-	
+	DKDEBUGFUNC();	
 	var temp = DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
@@ -78,8 +76,7 @@ function DKColorPicker_ColorBar()
 /////////////////////////////////
 function DKColorPicker_ColorBox()
 {
-	//DKLog("DKColorPicker_ColorBox()\n");
-	
+	DKDEBUGFUNC();	
 	var temp = DK_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
@@ -94,4 +91,3 @@ function DKColorPicker_ColorBox()
 	DKWidget_SetProperty("DKColorSelected", "background-color", rgb);
 	//event->Stop();
 }
-

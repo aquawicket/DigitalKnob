@@ -1,8 +1,7 @@
 /////////////////////////
 function DKDisplay_Init()
 {
-	//DKLog("DKDisplay_Init()\n");
-	
+	DKDEBUGFUNC();
 	DKCreate("DKDisplay/DKDisplay.html");
 	DKAddEvent("DKDisplay_Button", "click", DKDisplay_OnEvent);
 	//DKAddEvent("GLOBAL", "second", DKDisplay_OnEvent);
@@ -13,8 +12,7 @@ function DKDisplay_Init()
 ////////////////////////
 function DKDisplay_End()
 {
-	//DKLog("DKDisplay_End()\n");
-	
+	DKDEBUGFUNC();	
 	DKRemoveEvents(DKDisplay_OnEvent);
 	DKClose("DKDisplay/DKDisplay.html");
 }
@@ -22,8 +20,8 @@ function DKDisplay_End()
 /////////////////////////////////
 function DKDisplay_OnEvent(event)
 {
-	//DKLog("DKDisplay_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKDEBUGFUNC();
+	DKDEBUG("DKDisplay_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Id(event, "DKDisplay_Button")){
 		DK_TurnOffMonitor();
 	}

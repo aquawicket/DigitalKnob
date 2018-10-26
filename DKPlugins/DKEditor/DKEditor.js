@@ -1,8 +1,7 @@
 ////////////////////////
 function DKEditor_Init()
 {
-	//DKLog("DKEditor_Init()\n");
-	
+	DKDEBUGFUNC();
 	DKCreate("DKEditor/DKEditor.css");
 	DKCreate("DKEditor/DKEditor.html");
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
@@ -24,8 +23,7 @@ function DKEditor_Init()
 ///////////////////////
 function DKEditor_End()
 {
-	//DKLog("DKEditor_End()\n");
-	
+	DKDEBUGFUNC();
 	DKClose("DKEditor/DKEditor.html");
 	DKClose("DKEditor/DKEditor.css");
 }
@@ -33,8 +31,8 @@ function DKEditor_End()
 ////////////////////////////////
 function DKEditor_OnEvent(event)
 {
-	//DKLog("DKEditor_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKEditor_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Id(event, "DKEditor_edit")){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");

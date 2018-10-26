@@ -1,7 +1,7 @@
 /////////////////////
 function Input_Init()
 {
-	DKLog("Input_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKDebug/Input.html");
 	DKAddEvent("Input_Text", "keydown", Input_OnEvent);
 }
@@ -9,7 +9,7 @@ function Input_Init()
 ////////////////////
 function Input_End()
 {
-	DKLog("Input_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(Input_OnEvent);
 	DKClose("DKDebug/Input.html");
 }
@@ -17,10 +17,11 @@ function Input_End()
 /////////////////////////////
 function Input_OnEvent(event)
 {
-	DKLog("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("Input_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Id(event, "Input_Text")){
 		var key = DK_GetValue(event);
-		//DKLog("Input_Text: key="+key+"\n");
+		//DKINFO("Input_Text: key="+key+"\n");
 		if(key != 13 /*&& key != 72*/){ return; }
 		Input_Run(DKWidget_GetValue("Input_Text"))
 	}
@@ -29,6 +30,6 @@ function Input_OnEvent(event)
 ///////////////////////////
 function Input_Run(command)
 {
-	DKLog("Input_Run("+command+")\n", DKDEBUG);
+	DKDEBUGFUNC(command);
 	DK_RunDuktape(command);
 }

@@ -7,7 +7,7 @@ var poin;
 /////////////////////
 function DKDom_Init()
 {
-	//DKDebug();
+	DKDEBUGFUNC();
 	DKDom_Create();
 	//DKDom_Test();
 }
@@ -15,20 +15,23 @@ function DKDom_Init()
 ////////////////////
 function DKDom_End()
 {
-	//DKDebug();
+	DKDEBUGFUNC();
 }
 
 /////////////////////////////
 function DKDom_OnEvent(event)
 {
-	//DKDebug(event);
+	DKDEBUGFUNC(event);
 }
 
 ////////////////////////////
 function DKDom_Create(event)
 {
-	//////////////////
-	function Window(){
+	DKDEBUGFUNC();
+	/////////////////
+	function Window()
+	{
+		DKDEBUGFUNC();
 		document = new Document();
 		location = new Location();
 		screen = new Screen();
@@ -37,7 +40,7 @@ function DKDom_Create(event)
 		this.screen = screen;
 
 		Window.prototype.alert = function(str){
-			DKLog("alert: "+str+'\n');
+			DKINFO("alert: "+str+'\n');
 		}
 	
 		return new Proxy(this, { // Wrap it behind a proxy
@@ -65,9 +68,10 @@ function DKDom_Create(event)
 		});
 	}
 	
-	////////////////////
-	function Location(){
-		
+	///////////////////
+	function Location()
+	{
+		DKDEBUGFUNC();
 		return new Proxy(this, { // Wrap it behind a proxy
 			has: function (targ, key) {
 				return key in targ;  // return unmodified existence status
@@ -89,9 +93,10 @@ function DKDom_Create(event)
 		});
 	}
 	
-	//////////////////
-	function Screen(){
-		
+	/////////////////
+	function Screen()
+	{
+		DKDEBUGFUNC();
 		return new Proxy(this, { // Wrap it behind a proxy
 			has: function (targ, key) {
 				return key in targ;  // return unmodified existence status
@@ -112,9 +117,10 @@ function DKDom_Create(event)
 		});
 	}
 	
-	////////////////////
-	function Document(){
-
+	///////////////////
+	function Document()
+	{
+		DKDEBUGFUNC();
 		Document.prototype.getElementById = function(id){
 			var pointer = DKRocket_getElementById(id);
 			var element = new Element(pointer);
@@ -126,7 +132,7 @@ function DKDom_Create(event)
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
-				DKLog("arry["+i+"]: "+arry[i]+"\n")
+				DKINFO("arry["+i+"]: "+arry[i]+"\n")
 				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
 			}
 			return nodeList;
@@ -161,10 +167,12 @@ function DKDom_Create(event)
 		});
 	}
 	
-	//////////////////////////
-	function Element(pointer){
+	/////////////////////////
+	function Element(pointer)
+	{
+		DKDEBUGFUNC();
 		this.pointer = pointer;
-		//DKLog("this.pointer = "+this.pointer+"\n")
+		//DKINFO("this.pointer = "+this.pointer+"\n")
 		this.style = new Style(pointer);
 
 		Element.prototype.getAttribute = function(attribute){
@@ -180,7 +188,7 @@ function DKDom_Create(event)
 			this[attribute] = value;
 		}
 		Element.prototype.toString = function(){
-			DKLog("element.toString()\n");
+			DKINFO("element.toString()\n");
 		}
 		
 		return new Proxy(this, {
@@ -188,15 +196,15 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function(targ, key, recv){
-				//DKLog("Element(): get:("+key+")\n");
-				//DKLog("targ[pointer]: "+targ["pointer"]+"\n");
+				//DKINFO("Element(): get:("+key+")\n");
+				//DKINFO("targ[pointer]: "+targ["pointer"]+"\n");
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
 				if(key == "innerHTML"){ 
 					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 				}
 				else{
-					//DKLog("targ[key]: "+targ[key]+"\n")
-					//DKLog("targ[pointer]: "+targ["pointer"]+"\n")
+					//DKINFO("targ[key]: "+targ[key]+"\n")
+					//DKINFO("targ[pointer]: "+targ["pointer"]+"\n")
 					targ[key] = DKRocket_getAttribute(targ["pointer"], key); 
 				}
 				return targ[key];
@@ -204,9 +212,9 @@ function DKDom_Create(event)
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
 				if(key == "innerHTML"){
-					//DKLog("targ[pointer]: "+targ["pointer"]+"\n")
-					//DKLog("key: "+key+"\n")
-					//DKLog("val: "+val+"\n")
+					//DKINFO("targ[pointer]: "+targ["pointer"]+"\n")
+					//DKINFO("key: "+key+"\n")
+					//DKINFO("val: "+val+"\n")
 					DKRocket_setInnerHTML(targ["pointer"], val);
 				}
 				else{
@@ -222,8 +230,10 @@ function DKDom_Create(event)
 		});
 	}
 	
-	////////////////////////
-	function Style(pointer){
+	///////////////////////
+	function Style(pointer)
+	{
+		DKDEBUGFUNC();
 		this.pointer = pointer;
 		
 		Style.prototype.setProperty = function(propertyName, propertyValue, priority){
@@ -263,52 +273,53 @@ function DKDom_Create(event)
 /////////////////////
 function DKDom_Test()
 {
-	DKLog("\n");
+	DKDEBUGFUNC();
+	DKINFO("\n");
 	//window tests
-	DKLog("##### window tests #####\n");
+	DKINFO("##### window tests #####\n");
 	window.alert("test");
-	DKLog("window.innerHeight: "+window.innerHeight+"\n");
-	DKLog("window.innerWidth: "+window.innerWidth+"\n");
-	DKLog("window.name: "+window.name+"\n");
-	DKLog("\n");
+	DKINFO("window.innerHeight: "+window.innerHeight+"\n");
+	DKINFO("window.innerWidth: "+window.innerWidth+"\n");
+	DKINFO("window.name: "+window.name+"\n");
+	DKINFO("\n");
 
 	//document tests
-	DKLog("##### document tests #####\n");
+	DKINFO("##### document tests #####\n");
 	document.name = "test_doc_name";
-	DKLog("document.name: "+document.name+"\n");
+	DKINFO("document.name: "+document.name+"\n");
 	var nodeList = document.getElementsByTagName("body");
-	DKLog("nodeList.length: "+nodeList.length+"\n");
-	DKLog("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
+	DKINFO("nodeList.length: "+nodeList.length+"\n");
+	DKINFO("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
 	
 	//TODO - we need to be able to set the innerHTML too
 	nodeList[0].innerHTML = "<div>This was replaced</div>";
-	DKLog("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
+	DKINFO("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
 	
 	/*
 	var nodeList = document.getElementsByTagName("div");
-	//DKLog("nodelist.length: "+nodeList.length+"\n");
+	//DKINFO("nodelist.length: "+nodeList.length+"\n");
 	for(var i=0; i<nodeList.length; i++){
-		DKLog(nodeList[i]+'\n');
+		DKINFO(nodeList[i]+'\n');
 	}
 	*/
-	DKLog("\n");
+	DKINFO("\n");
 	
 	/*
 	//element tests 
-	DKLog("##### element tests #####\n");
+	DKINFO("##### element tests #####\n");
 	var element = document.getElementById("BugReport_Image");
-	DKLog("element.id: "+element.id+"\n");
-	DKLog("element.hasAttribute(id): "+element.hasAttribute("id")+"\n");
+	DKINFO("element.id: "+element.id+"\n");
+	DKINFO("element.hasAttribute(id): "+element.hasAttribute("id")+"\n");
 	element.setAttribute("test", "http://digitalknob.com/image.png");
-	DKLog("element.getAttribute(test): "+element.getAttribute("test")+"\n");
-	DKLog("\n");
+	DKINFO("element.getAttribute(test): "+element.getAttribute("test")+"\n");
+	DKINFO("\n");
 	
 	//style tests
-	DKLog("##### style tests #####\n");
-	DKLog("element.style.width: "+element.style.width+"\n");
-	DKLog("element.style.height: "+element.style.height+"\n");
+	DKINFO("##### style tests #####\n");
+	DKINFO("element.style.width: "+element.style.width+"\n");
+	DKINFO("element.style.height: "+element.style.height+"\n");
 	element.style.setProperty("position", "relative");
-	DKLog("element.style.getPropertyValue(position): "+element.style.getPropertyValue("position")+"\n");
-	DKLog("\n");
+	DKINFO("element.style.getPropertyValue(position): "+element.style.getPropertyValue("position")+"\n");
+	DKINFO("\n");
 	*/
 }

@@ -3,7 +3,7 @@ var key_history = [];
 ///////////////////////
 function DKDebug_Init()
 {
-	DKLog("DKDebug_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
 	DKAddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
 }
@@ -11,16 +11,17 @@ function DKDebug_Init()
 //////////////////////
 function DKDebug_End()
 {
-	DKLog("DKDebug_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKDebug_OnEvent);
 }
 
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
-	DKLog("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Type(event, "keypress")){
-		//DKLog("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
+		//DKINFO("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
 		DKDebug_LogKey(DK_GetValue(event));
 		DKDebug_CheckKeys();
 	}
@@ -38,7 +39,7 @@ function DKDebug_OnEvent(event)
 ////////////////////////////
 function DKDebug_LogKey(key)
 {
-	DKLog("DKDebug_LogKey("+key+")\n", DKDEBUG);
+	DKDEBUGFUNC(key);
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = key;
 }
@@ -46,7 +47,7 @@ function DKDebug_LogKey(key)
 ////////////////////////////
 function DKDebug_CheckKeys()
 {
-	DKLog("DKDebug_CheckKeys()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
@@ -68,7 +69,7 @@ function DKDebug_CheckKeys()
 ///////////////////////////////
 function DKDebug_KeyToChar(key)
 {
-	DKLog("DKDebug_KeyToChar("+key+")\n", DKDEBUG);
+	DKDEBUGFUNC(key);
 	if(key == 97){ return "a"};
 	if(key == 98){ return "b"};
 	if(key == 99){ return "c"};
@@ -101,14 +102,14 @@ function DKDebug_KeyToChar(key)
 /////////////////////////
 function DKDebug_Reload()
 {
-	DKLog("DKDebug_Reload(): TODO\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//TODO
 }
 
 //////////////////////////
 function DKDebug_Refresh()
 {
-	DKLog("DKDebug_Refresh()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//TODO - make this work for all variations 
 	if(DK_GetBrowser() != "Rocket"){
 		DK_Refresh(); //Call DK.js
@@ -121,48 +122,48 @@ function DKDebug_Refresh()
 //////////////////////////////
 function DKDebug_PushDKFiles()
 {
-	DKLog("DKMenuRightApp_PushDKFiles()\n", DKDEBUG); 
+	DKDEBUGFUNC();
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
-		DKLog("DKDebug_PushDKFiles() assets is invalid", DKERROR);
+		DKERROR("DKDebug_PushDKFiles() assets is invalid\n");
 		return false;
 	}
-	DKLog("assets = "+assets+"\n");
+	DKINFO("assets = "+assets+"\n");
 	
 	var search = assets;
 	while(!DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
 		if(n == -1){
-			DKLog("could not locate a DKPlugins folder\n", DKWARN);
+			DKWARN("could not locate a DKPlugins folder\n");
 			return false;
 		}
 		search = search.substring(0, n);
-		DKLog(search+"\n", DKINFO);
+		DKINFO(search+"\n");
 	}
 	
 	DKPATH = search;
 	
 	if(!DKFile_Exists(DKPATH)){
-		DKLog("Could not find search\n");
+		DKINFO("Could not find search\n");
 		return;
 	}
-	//DKLog("search = "+search+"\n");
+	//DKINFO("search = "+search+"\n");
 	
 	var temp = DKFile_DirectoryContents(DKPATH);
 	if(!temp){
-		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
+		DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
 		return false; 
 	}
 	var folders = temp.split(",");
-	//DKLog("folders = "+folders+"\n");
+	//DKINFO("folders = "+folders+"\n");
 	
 	var plugin_folders = [];
 	plugin_folders.push(DKPATH+"/DK/DKPlugins");
 	for(var i=0; i<folders.length; i++){
-		//DKLog("checking "+search+"/"+folders[i]+"/DKPlugins"+"\n");
+		//DKINFO("checking "+search+"/"+folders[i]+"/DKPlugins"+"\n");
 		if(DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
-			//DKLog("adding "+DKPATH+"/"+folders[i]+"/DKPlugins");
+			//DKINFO("adding "+DKPATH+"/"+folders[i]+"/DKPlugins\n");
 			plugin_folders.push(DKPATH+"/"+folders[i]+"/DKPlugins");
 		}
 	}
@@ -170,17 +171,17 @@ function DKDebug_PushDKFiles()
 	for(var i=0; i<plugin_folders.length; i++){
 		plugin_folders[i] = DKFile_GetAbsolutePath(plugin_folders[i]);
 	}
-	//DKLog("plugins_folders = "+plugin_folders+"\n");
+	//DKINFO("plugins_folders = "+plugin_folders+"\n");
 	
 	
 	var temp = DKFile_DirectoryContents(assets);
 	if(!temp){
-		DKLog("DKDebug_PushDKFiles() variable temp is invalid", DKERROR);
+		DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
 		return false; 
 	}
 	var folders = temp.split(",");
 	for(i=0; i<folders.length; i++){
-		//DKLog(folders[i]+"\n"); 
+		//DKINFO(folders[i]+"\n"); 
 		for(var b=0; b<plugin_folders.length; b++){
 			if(DKFile_Exists(plugin_folders[b]+"/"+folders[i])){
 				DKFile_CopyFolder(assets+"/"+folders[i], plugin_folders[b]+"/"+folders[i], true, true);
@@ -192,7 +193,7 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	DKLog("DKDebug_ClearConsole()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() == "Rocket"){
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
@@ -220,47 +221,47 @@ function DKDebug_ClearConsole()
 ////////////////////////////
 function DKDebug_PrintInfo()
 {
-	DKLog("DKDebug_PrintInfo()\n", DKDEBUG);
-	DKLog("\n"); 
-	DKLog("\n**** DKOBJECTS ****\n"); 
+	DKDEBUGFUNC();
+	DKINFO("\n"); 
+	DKINFO("\n**** DKOBJECTS ****\n"); 
 	var objects = DK_GetObjects();
 	var arry = objects.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKLog(arry[i]+"\n"); 
+		DKINFO(arry[i]+"\n"); 
 	}
-	DKLog("\n"); 
+	DKINFO("\n"); 
 	
-	DKLog("**** DKEVENTS ****\n"); 
+	DKINFO("**** DKEVENTS ****\n"); 
 	var events = DK_GetEvents();
 	var arry = events.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKLog(arry[i]+"\n"); 
+		DKINFO(arry[i]+"\n"); 
 	}
-	DKLog("\n"); 
+	DKINFO("\n"); 
 	
-	DKLog("**** DKEVENTS ****\n"); 
+	DKINFO("**** DKEVENTS ****\n"); 
 	var events = DK_GetFunctions();
 	var arry = events.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKLog(arry[i]+"\n"); 
+		DKINFO(arry[i]+"\n"); 
 	}
-	DKLog("\n"); 
+	DKINFO("\n"); 
 }
 
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	DKLog("DKDebug_ShowConsole()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DK_ShowConsole();
 }
 
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	DKLog("DKDebug_GetSource()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("body");
 	var assets = DKAssets_LocalAssets();
@@ -276,20 +277,21 @@ function DKDebug_GetSource()
 ////////////////////////
 function DKDebug_Crash()
 {
-	DKLog("DKDebug_Crash()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DK_Crash();
 }
 
 /////////////////////////
 function DKDebug_Editor()
 {
-	DKLog("DKDebug_Editor()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKEditor/DKEditor.js", function(){});
 }
 
 ///////////////////////////
 function DKDebug_Debugger()
 {
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() == "Rocket"){
 		DKRocket_ToggleDebugger();
 	}
