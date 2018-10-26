@@ -1,7 +1,7 @@
 //////////////////////////
 function DKSolution_Init()
 {	
-	DKLog("DKSolution_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolution.css");
 	DKCreate("DKFile/DKSolution.html");
 	DKCreate("DKFile/DKFileAssociation.js", function(){});
@@ -17,7 +17,7 @@ function DKSolution_Init()
 /////////////////////////
 function DKSolution_End()
 {
-	DKLog("DKSolution_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
 	DKClose("DKFile/DKSolution.css");
@@ -26,7 +26,8 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	DKLog("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	DKSolution_Select(DK_GetId(event));
 
 	if(DK_Type(event, "click")){
@@ -34,14 +35,14 @@ function DKSolution_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "contextmenu")){
-		//DKLog("DKSolution_OnEvent() contextmenu\n");
+		//DKINFO("DKSolution_OnEvent() contextmenu\n");
 		var id = DK_GetId(event);
-		//DKLog("id = "+id+"\n");
+		//DKINFO("id = "+id+"\n");
 		DK_StopPropagation(event);
 		DKCreate("DKFile/DKSolutionMenu.js", function(){
 			DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
 			var file = DKWidget_GetValue(id);
-			//DKLog("file = "+file+"\n");
+			//DKINFO("file = "+file+"\n");
 			if(!file){
 				file = DKWidget_GetValue("DKSolutionPath")+"/";
 			}
@@ -53,15 +54,15 @@ function DKSolution_OnEvent(event)
 		
 	if(DK_Id(event, "DKSolutionUp")){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/../";
-		//DKLog(up+"\n");
+		//DKINFO(up+"\n");
 		DKSolution_OpenFolder(up);
 	}
 	
 	if(DK_Type(event, "dblclick")){
-		//DKLog(DK_GetId(event)+"\n");
-		//DKLog(DKWidget_GetValue(DK_GetId(event))+"\n");
+		//DKINFO(DK_GetId(event)+"\n");
+		//DKINFO(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(DK_IdLike(event, "DKSolutionFolder")){
-			//DKLog("DKSolutionFolder");
+			//DKINFO("DKSolutionFolder\n");
 			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
 			return;
 		}
@@ -81,12 +82,12 @@ function DKSolution_OnEvent(event)
 //////////////////////////////
 function DKSolution_Select(id)
 {
-	DKLog("DKSolution_Select("+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(id);
 	var elements = DKWidget_GetElements("DKSolutionMenu");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length-1; i++){
 		if(!arry[i]){
-			DKLog("DKSolution_Select(id): arry["+i+"] invalid\n", DKERROR);
+			DKERROR("DKSolution_Select(id): arry["+i+"] invalid\n");
 		}
 		DKWidget_SetProperty(arry[i], "background-color", "rgb(255,255,255)");
 		DKWidget_SetProperty(arry[i], "color", "rgb(0,0,0)");
@@ -100,7 +101,7 @@ function DKSolution_Select(id)
 ////////////////////////////////////
 function DKSolution_OpenFolder(path)
 {
-	DKLog("DKSolution_OpenFolder("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	if(DKSolution_UpdatePath(path)){
 		return true;
 	}
@@ -110,12 +111,12 @@ function DKSolution_OpenFolder(path)
 //////////////////////////////////
 function DKSolution_OpenFile(path)
 {
-	DKLog("DKSolution_OpenFile("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	//DKLog("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
+	//DKINFO("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
 	if(!DK_Run(aPath, "")){ return false; }
 	return true;
 }
@@ -123,13 +124,13 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	DKLog("DKSolution_OpenHere("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) == 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
-	DKLog("aPath:"+aPath+"\n");
+	DKINFO("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
@@ -145,7 +146,7 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	DKLog("DKSolution_UpdatePath("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//reload events
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
@@ -157,9 +158,9 @@ function DKSolution_UpdatePath(path)
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	//DKLog("aPath:"+aPath+"\n");
+	//DKINFO("aPath:"+aPath+"\n");
 	//var rPath = DKFile_GetRelativePath(aPath, path);
-	//DKLog("rPath:"+rPath+"\n");
+	//DKINFO("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);
 	if(!temp){ return false; }

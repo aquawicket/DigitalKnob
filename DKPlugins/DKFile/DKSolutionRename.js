@@ -4,7 +4,7 @@ DKSolutionRename_file = "";
 ////////////////////////////////
 function DKSolutionRename_Init()
 {
-	DKLog("DKSolutionRename_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
@@ -15,7 +15,7 @@ function DKSolutionRename_Init()
 ///////////////////////////////
 function DKSolutionRename_End()
 {
-	DKLog("DKSolutionRename_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }
@@ -23,7 +23,8 @@ function DKSolutionRename_End()
 ////////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
-	DKLog("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Type(event, "keydown")){
 		if(DK_GetValue(event) != 13){
 			return;
@@ -41,30 +42,30 @@ function DKSolutionRename_OnEvent(event)
 ///////////////////////////////////
 function DKSolutionRename_SetId(id)
 {
-	DKLog("DKSolutionRename_SetId("+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(id);
 	DKSolutionRename_id = id;
 }
 
 ///////////////////////////////////////
 function DKSolutionRename_SetFile(file)
 {
-	DKLog("DKSolutionRename_SetFile("+file+")\n", DKDEBUG);
+	DKDEBUGFUNC(file);
 	DKSolutionRename_file = file;
 }
 
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	DKLog("DKSolutionRename_Rename()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
 	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
 	var newvalue = oldvalue;
 	newvalue = newvalue.replace(oldhtml, newhtml);
-	//DKLog("oldhtml = "+oldhtml+"\n");
-	//DKLog("oldvalue = "+oldvalue+"\n");
-	//DKLog("newhtml = "+newhtml+"\n");
-	//DKLog("newvalue = "+newvalue+"\n");
+	//DKINFO("oldhtml = "+oldhtml+"\n");
+	//DKINFO("oldvalue = "+oldvalue+"\n");
+	//DKINFO("newhtml = "+newhtml+"\n");
+	//DKINFO("newvalue = "+newvalue+"\n");
 	
 	if(DKFile_Rename(oldvalue, newvalue, true) == false){
 		return; 

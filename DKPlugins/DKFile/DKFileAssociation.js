@@ -1,25 +1,26 @@
 /////////////////////////////////
 function DKFileAssociation_Init()
 {
-	DKLog("DKFileAssociation_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 }
 
 ////////////////////////////////
 function DKFileAssociation_End()
 {
-	DKLog("DKFileAssociation_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 }
 
 /////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	DKLog("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 }
 
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	DKLog("DKFileAssociation_Open("+file+")\n", DKDEBUG);
+	DKDEBUGFUNC(file);
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
 	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
@@ -45,7 +46,7 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	DKLog("DKFileAssociation_OpenHtml("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//path = path.replace(absolutepath, "");
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -62,7 +63,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
 	//var the_path = path.replace(id, "");
-	//DKLog("DKWidget_AppendDataPath("+the_path+") \n");
+	//DKINFO("DKWidget_AppendDataPath("+the_path+")\n");
 	//AppendDataPath(the_path);
 
 	var filedata = DKFile_FileToString(path);
@@ -74,19 +75,19 @@ function DKFileAssociation_OpenHtml(path)
 	DKWidget_SetInnerHtml(temp, filedata);
 
 	//if(DKWidget_GetNumChildren(temp) == 0){
-	//	DKLog("Error loading path: "+id+": could not create node. \n", DKERROR);
+	//	DKERROR("Error loading path: "+id+": could not create node.\n");
 	//	return false;
 	//}
 
 	//Make sure there is only 1 child
 	//if(DKWidget_GetNumChildren(temp) > 1){
-	//	DKLog("Error loading path: "+id+" has more than one root node.\n", DKERROR);
+	//	DKERROR("Error loading path: "+id+" has more than one root node\n");
 	//	return false;
 	//}
 
-	DKLog("temp: "+temp+"\n");
+	DKINFO("temp: "+temp+"\n");
 	var element = DKWidget_GetFirstChild(temp);
-	DKLog("element = "+element+"\n");
+	DKINFO("element = "+element+"\n");
 	//DKElement* element = temp->GetFirstChild();
 	//DKWidget_SetAttribute(element, "id", id);
 	
@@ -100,7 +101,7 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	DKLog("DKFileAssociation_OpenJS("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//path = path.replace(absolutepath, "");
 		
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -114,7 +115,7 @@ function DKFileAssociation_OpenJS(path)
 ////////////////////////////////////////
 function DKFileAssociation_OpenCss(path)
 {
-	DKLog("DKFileAssociation_OpenCss("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
@@ -124,7 +125,7 @@ function DKFileAssociation_OpenCss(path)
 /////////////////////////////////////////
 function DKFileAssociation_OpenText(path)
 {
-	DKLog("DKFileAssociation_OpenText("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
@@ -135,7 +136,7 @@ function DKFileAssociation_OpenText(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenImage(path)
 {
-	DKLog("DKFileAssociation_OpenImage("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
@@ -145,7 +146,7 @@ function DKFileAssociation_OpenImage(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenModel(path)
 {
-	DKLog("DKFileAssociation_OpenModel("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){});
 	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
 }
@@ -153,7 +154,7 @@ function DKFileAssociation_OpenModel(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenAudio(path)
 {
-	DKLog("DKFileAssociation_OpenAudio("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//var file = DKFile_GetFilename(path);
 	DKCreate("DKAudio", function(){
 		DKAudio_PlaySound(path);
@@ -169,7 +170,7 @@ function DKFileAssociation_OpenAudio(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenVideo(path)
 {
-	DKLog("DKFileAssociation_OpenVideo("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//FIXME
 	DKVideo_Play(path);
 }

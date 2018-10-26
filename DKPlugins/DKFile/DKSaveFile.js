@@ -10,7 +10,7 @@ var rPath;
 ////////////////////////////
 function DKSaveFile_Init()
 {	
-	DKLog("DKSaveFile_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
 	DKAddEvent("DKFile/DKSaveFile.html", "SetFile", DKSaveFile_OnEvent);
@@ -22,13 +22,13 @@ function DKSaveFile_Init()
 	aPath = "";
 	rPath = "";
 	var drives = DKFile_GetDrives(); //TODO
-	DKLog(drives+"\n");
+	DKINFO(drives+"\n");
 }
 
 ///////////////////////////
 function DKSaveFile_End()
 {
-	DKLog("DKSaveFile_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKSaveFile_OnEvent);
 	DKClose("DKFile/DKSaveFile.html");
 	DKClose("DKFile/DKSaveFile.css");
@@ -37,12 +37,13 @@ function DKSaveFile_End()
 ////////////////////////////////////
 function DKSaveFile_OnEvent(event)
 {	
-	DKLog("DKSaveFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("DKSaveFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_IdLike(event, "DKSaveFileDrive")){
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKSaveFileFolder")){
-		//DKLog("DKSaveFileFolder");
+		//DKINFO("DKSaveFileFolder\n");
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
 	if(DK_IdLike(event, "DKSaveFileFile")){
@@ -51,7 +52,7 @@ function DKSaveFile_OnEvent(event)
 
 	if(DK_Id(event, "DKSaveFileUp")){
 		var up = DKWidget_GetValue("DKSaveFilePath")+"/..";
-		//DKLog(up+"\n");
+		//DKINFO(up+"\n");
 		DKSaveFile_OpenFolder(up);
 	}
 	
@@ -60,18 +61,18 @@ function DKSaveFile_OnEvent(event)
 			if(DKFile_IsDirectory(rPath)){
 				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");
 			}
-			DKLog("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
+			DKINFO("DKSendEvent("+event_id+","+event_type+","+rPath+")\n");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 == "absolute"){
 			if(DKFile_IsDirectory(aPath)){
 				aPath = aPath+"/"+DKWidget_GetValue("DKSaveFileName");
 			}
-			DKLog("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
+			DKINFO("DKSendEvent("+event_id+","+event_type+","+aPath+")\n");
 			DKSendEvent(event_id, event_type, aPath);
 		}
 		else{
-			//DKLog("DKSaveFile::ProcessEvent(): return_path_type incorrect. \n", DKERROR);
+			//DKERROR("DKSaveFile::ProcessEvent(): return_path_type incorrect\n");
 		}
 		
 		DKFrame_Close("DKFile/DKSaveFile.html");
@@ -89,16 +90,16 @@ function DKSaveFile_OnEvent(event)
 		event_type = params[1];
 		event_data1 = params[2];
 		event_data2 = params[3];
-		DKLog("event_type:"+event_type+"\n");
-		DKLog("event_id:"+event_id+"\n");
-		DKLog("event_data1:"+event_data1+"\n");
-		DKLog("event_data2:"+event_data2+"\n");
+		DKINFO("event_type:"+event_type+"\n");
+		DKINFO("event_id:"+event_id+"\n");
+		DKINFO("event_data1:"+event_data1+"\n");
+		DKINFO("event_data2:"+event_data2+"\n");
 	
 		DKSaveFile_UpdatePath(event_data1);
 	}
 	
 	if(DK_Id(event, "DKSaveFilePath")){
-		DKLog("DKSaveFilePath\n");
+		DKINFO("DKSaveFilePath\n");
 		//var path = DKWidget_GetAttribute("DKSaveFilePath", "value");
 		//DKSaveFile_UpdatePath(path);
 	}
@@ -108,7 +109,7 @@ function DKSaveFile_OnEvent(event)
 //////////////////////////////////////
 function DKSaveFile_GetFIle(callback)
 {
-	DKLog("DKSaveFile_GetFIle(callback)\n", DKDEBUG);
+	DKDEBUGFUNC(callback);
 	DKSaveFile_callback = callback;
 }
 */
@@ -116,7 +117,7 @@ function DKSaveFile_GetFIle(callback)
 //////////////////////////////////////
 function DKSaveFile_OpenFolder(path)
 {
-	DKLog("DKSaveFile_OpenFolder("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	if(DKSaveFile_UpdatePath(path)){
 		return true;
 	}
@@ -126,38 +127,38 @@ function DKSaveFile_OpenFolder(path)
 ////////////////////////////////////
 function DKSaveFile_OpenFile(path)
 {
-	DKLog("DKSaveFile_OpenFile("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	DKINFO("aPath:"+aPath+"\n");
 	var assets = DKAssets_LocalAssets();
-	//DKLog("assets:"+assets+"\n");
+	//DKINFO("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, assets);
-	DKLog("rPath:"+rPath+"\n");
+	DKINFO("rPath:"+rPath+"\n");
 	DKWidget_SetValue("DKSaveFilePath",aPath);
 }
 
 //////////////////////////////////////
 function DKSaveFile_UpdatePath(path)
 {
-	DKLog("DKSaveFile_UpdatePath("+path+")\n", DKDEBUG);
+	DKDEBUGFUNC(path);
 	//if(!path){ return false; }
-	DKLog("DKSaveFile_UpdatePath("+path+") \n");
+	DKINFO("DKSaveFile_UpdatePath("+path+")\n");
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
 	else{
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	DKLog("aPath:"+aPath+"\n");
+	DKINFO("aPath:"+aPath+"\n");
 	//var assets = DKAssets_LocalAssets();
-	//DKLog("assets:"+assets+"\n");
+	//DKINFO("assets:"+assets+"\n");
 	rPath = DKFile_GetRelativePath(aPath, path);
-	DKLog("rPath:"+rPath+"\n");
+	DKINFO("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
