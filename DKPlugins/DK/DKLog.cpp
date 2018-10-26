@@ -77,10 +77,10 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 #endif
 	if(!flag){
-		if(log_debug == false && lvl == DKDEBUG){ return; }
-		if(log_info == false && lvl == DKINFO){ return; }
-		if(log_warnings == false && lvl == DKWARN){ return; }
-		if(log_errors == false && lvl == DKERROR){ return; }
+		if(log_debug == false && lvl == DK_DEBUG){ return; }
+		if(log_info == false && lvl == DK_INFO){ return; }
+		if(log_warnings == false && lvl == DK_WARN){ return; }
+		if(log_errors == false && lvl == DK_ERROR){ return; }
 	}
 	
 	if(log_file && !DKFile::local_assets.empty()){
@@ -94,10 +94,10 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 
 #if defined(WIN32)
 	int color;
-	if(lvl == DKERROR){ color = DKRED; }
-	if(lvl == DKWARN){ color = DKYELLOW; }
-    if(lvl == DKINFO){ color = DKWHITE; }
-	if(lvl == DKDEBUG){ color = DKBLUE; }
+	if(lvl == DK_ERROR){ color = DKRED; }
+	if(lvl == DK_WARN){ color = DKYELLOW; }
+    if(lvl == DK_INFO){ color = DKWHITE; }
+	if(lvl == DK_DEBUG){ color = DKBLUE; }
 #elif !defined(LINUX)
     char color[10];// = 0;
 	if(lvl == DKERROR){ strcpy(color, DKRED); }
@@ -153,7 +153,7 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 
 	//On errors show the stack trace or open a message box
-	if(log_errors && (lvl == DKERROR/* || has(string,"Uncaught ")*/)){
+	if(log_errors && (lvl == DK_ERROR/* || has(string,"Uncaught ")*/)){
 		//DKClass::CallFunc("DKDebug::ShowStackTrace", NULL, NULL);
 		
 		//DKString in = string;
@@ -165,9 +165,9 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 ////////////////////////////////////////////////
 void SetLog(const int lvl, const DKString& text)
 {
-	DKLog("SetLog("+toString(lvl)+","+text+")\n", DKINFO);
+	DKDEBUG(lvl, text);
 
-	if(lvl == DKERROR){
+	if(lvl == DK_ERROR){
 		if(same(text,"OFF")){
 			log_errors = false;
 			return;
@@ -175,31 +175,31 @@ void SetLog(const int lvl, const DKString& text)
 		log_errors = true;
 		
 	}
-	if(lvl == DKWARN){
+	if(lvl == DK_WARN){
 		if(same(text,"OFF")){
 			log_warnings = false;
 			return;
 		}
 		log_warnings = true;
 	}
-	if(lvl == DKINFO){
+	if(lvl == DK_INFO){
 		if(same(text,"OFF")){
 			log_info = false;
 			return;
 		}
 		log_info = true;
 	}
-	if(lvl == DKDEBUG){
+	if(lvl == DK_DEBUG){
 		if(same(text,"ON")){
 			log_debug = true;
 			return;
 		}
 		log_debug = false;
 	}
-	if(lvl == DKSHOW){
+	if(lvl == DK_SHOW){
 		log_show = text;
 	}
-	if(lvl == DKHIDE){
+	if(lvl == DK_HIDE){
 		log_hide = text;
 	}
 }

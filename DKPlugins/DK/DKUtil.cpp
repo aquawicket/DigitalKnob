@@ -50,7 +50,7 @@ float DKUtil::framespersecond = 0;
 ///////////////////
 bool DKUtil::Beep()
 {
-	DKDebug();
+	DKDEBUG();
 	std::cout << '\a' << std::flush;
 	return true;
 }
@@ -58,7 +58,7 @@ bool DKUtil::Beep()
 /////////////////////////////////////////////////////////////////
 bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 {
-	DKDebug(input, output);
+	DKDEBUG(input, output);
 #ifndef MAC
 	char *buf;
 	const char* ident  = "assets";
@@ -110,7 +110,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKString& output)
 {
-	DKDebug(header, size, output);
+	DKDEBUG(header, size, output);
 #ifndef MAC
 	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
 	file.write(header, size);
@@ -123,13 +123,13 @@ bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKStr
 ///////////////////////
 bool DKUtil::CallExit()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
 #ifdef WIN32
 	if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
-		DKLog("DKApp::Exit(): attempting to call Exit() from another thread \n", DKWARN);
+		DKWARN("DKApp::Exit(): attempting to call Exit() from another thread \n");
 	}
 #endif
 
@@ -140,7 +140,7 @@ bool DKUtil::CallExit()
 ///////////////////////////////
 bool DKUtil::CpuUsed(int& cpu)
 {
-	DKDebug(cpu);
+	DKDEBUG(cpu);
 #ifdef WIN32
 	return DKWindows::CpuUsed(cpu);
 #endif
@@ -150,14 +150,14 @@ bool DKUtil::CpuUsed(int& cpu)
 #ifdef LINUX
 	return DKLinux::CpuUsed(cpu);
 #endif
-	DKLog("DKUtil::CpuUsed() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::CpuUsed() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////
 bool DKUtil::CpuUsedByApp(int& cpu)
 {
-	DKDebug(cpu);
+	DKDEBUG(cpu);
 #ifdef WIN32
 	return DKWindows::CpuUsedByApp(cpu);
 #endif
@@ -167,55 +167,55 @@ bool DKUtil::CpuUsedByApp(int& cpu)
 #ifdef LINUX
 	return DKLinux::CpuUsedByApp(cpu);
 #endif
-	DKLog("DKUtil::CpuUsedByApp() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::CpuUsedByApp() not implemented on this OS \n");
 	return false;
 }
 
 //////////////////////////
 bool DKUtil::DoubleClick()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	DKWindows::LeftClick();
 	return DKWindows::LeftClick();
 #endif
-	DKLog("DKUtil::DoubleClick() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::DoubleClick() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////////////
 bool DKUtil::DrawTextOnScreen(const DKString& text)
 {
-	DKDebug(text);
+	DKDEBUG(text);
 #ifdef WIN32
 	return DKWindows::DrawTextOnScreen(text);
 #endif
-	DKLog("DKUtil::DrawTextOnScreen() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::DrawTextOnScreen() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKUtil::Execute(const DKString& command, DKString& rtn)
 {
-	DKDebug(command, rtn);
+	DKDEBUG(command, rtn);
 #ifdef WIN32
 	FILE* pipe = _popen(command.c_str(), "r");
 	if(!pipe){
-		DKLog("DKUtil::Execute(): Error, pipe invalid.", DKERROR);
+		DKERROR("DKUtil::Execute(): Error, pipe invalid.");
 		return "ERROR";
 	}
 	char buffer[128];
 	while(!feof(pipe)) {
 		if(fgets(buffer, 128, pipe) != NULL)
 			rtn += buffer;
-		DKLog(buffer);
+		DKINFO(buffer);
 	}
 	_pclose(pipe);
 	return true;
 #else
 	FILE* pipe = popen(command.c_str(), "r");
 	if(!pipe){
-		DKLog("DKUtil::Execute(): Error, pipe invalid.", DKERROR);
+		DKERROR("DKUtil::Execute(): Error, pipe invalid.");
 		return "ERROR";
 	}
 	char buffer[128];
@@ -234,32 +234,32 @@ bool DKUtil::Execute(const DKString& command, DKString& rtn)
 /////////////////////////////////////////////////////////////////////
 bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y)
 {
-	DKDebug(file, x, y);
+	DKDEBUG(file, x, y);
 #ifdef WIN32
 	return DKWindows::FindImageOnScreen(file, x, y);
 #endif
-	DKLog("DKUtil::FindImageOnScreen() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::FindImageOnScreen() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////////
 bool DKUtil::GetClipboard(DKString& text)
 {
-	DKDebug(text);
+	DKDEBUG(text);
 #ifdef WIN32
 	return DKWindows::GetClipboard(text);
 #endif
 #ifdef LINUX
 	return DKLinux::GetClipboard(text);
 #endif
-	DKLog("DKUtil::GetClipboard() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetClipboard() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////
 bool DKUtil::GetDate(DKString& date)
 {
-	DKDebug(date);
+	DKDEBUG(date);
 	time_t t = time(0);   // get time now
 	struct tm * now = localtime(&t);
 
@@ -278,7 +278,7 @@ bool DKUtil::GetDate(DKString& date)
 //////////////////////////////////////
 bool DKUtil::GetFps(unsigned int& fps)
 {
-	DKDebug(fps);
+	DKDEBUG(fps);
 	fps = (unsigned int)framespersecond;
 	return true;
 }
@@ -286,7 +286,7 @@ bool DKUtil::GetFps(unsigned int& fps)
 /////////////////////////////////////////
 bool DKUtil::GetFramerate(int& framerate)
 {
-	DKDebug(framerate);
+	DKDEBUG(framerate);
 	framerate = DKUtil::_fps;
 	return true;
 }
@@ -294,7 +294,7 @@ bool DKUtil::GetFramerate(int& framerate)
 ////////////////////////////////////
 bool DKUtil::GetFrames(long& frames)
 {
-	DKDebug(frames);
+	DKDEBUG(frames);
 	frames = framecount;
 	return true;
 }
@@ -302,7 +302,7 @@ bool DKUtil::GetFrames(long& frames)
 /////////////////////////////
 bool DKUtil::GetKey(int& key)
 {
-	DKDebug(key);
+	DKDEBUG(key);
 #if defined(WIN32)
 	return DKWindows::GetKey(key);
 #endif
@@ -315,14 +315,14 @@ bool DKUtil::GetKey(int& key)
 #if defined(LINUX)
 	return DKUnix::GetKey(key);
 #endif
-	DKLog("DKUtil::GetKey(): not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetKey(): not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////
 bool DKUtil::GetLocalIP(DKString& ip)
 {
-	DKDebug(ip);
+	DKDEBUG(ip);
 	boost::asio::io_service io_service; 
 	boost::asio::ip::tcp::resolver resolver(io_service); 
 	boost::asio::ip::tcp::resolver::query query(boost::asio::ip::tcp::v4(), boost::asio::ip::host_name(), ""); 
@@ -336,7 +336,7 @@ bool DKUtil::GetLocalIP(DKString& ip)
 ////////////////////////////////////////
 bool DKUtil::GetMousePos(int& x, int& y)
 {
-	DKDebug(x, y);
+	DKDEBUG(x, y);
 #ifdef WIN32
 	return DKWindows::GetMousePos(x, y);
 #endif
@@ -349,47 +349,47 @@ bool DKUtil::GetMousePos(int& x, int& y)
 #ifdef ANDROID
 	return DKAndroid::GetMousePos(x, y);
 #endif
-	DKLog("DKUtil::GetMousePos() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetMousePos() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y)
 {
-	DKDebug(image, x, y);
+	DKDEBUG(image, x, y);
 #ifdef WIN32
 	return DKWindows::GetPixelFromImage(image, x, y);
 #endif
-	DKLog("DKUtil::GetPixelFromImage() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetPixelFromImage() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////////////////////////////////////
 bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {
-	DKDebug(x, y, r, g, b);
+	DKDEBUG(x, y, r, g, b);
 #ifdef WIN32
 	return DKWindows::GetPixelFromScreen(x, y, r, g, b);
 #endif
-	DKLog("DKUtil::GetPixelFromScreen() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetPixelFromScreen() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////
 bool DKUtil::GetProcessList(DKString& list)
 {
-	DKDebug(list);
+	DKDEBUG(list);
 #ifdef WIN32
 	return DKWindows::GetProcessList(list);
 #endif
-	DKLog("DKUtil::GetProcessList() not implemented on this OS. \n", DKWARN);
+	DKWARN("DKUtil::GetProcessList() not implemented on this OS. \n");
 	return false;
 }
 
 ////////////////////////////////////
 bool DKUtil::GetScreenHeight(int& h)
 {
-	DKDebug(h);
+	DKDEBUG(h);
 #ifdef WIN32
 	return DKWindows::GetScreenHeight(h);
 #endif
@@ -399,14 +399,14 @@ bool DKUtil::GetScreenHeight(int& h)
 #ifdef LINUX
 	return DKLinux::GetScreenHeight(h);
 #endif
-	DKLog("DKUtil::GetScreenHeight() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetScreenHeight() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////
 bool DKUtil::GetScreenWidth(int& w)
 {
-	DKDebug(w);
+	DKDEBUG(w);
 #ifdef WIN32
 	return DKWindows::GetScreenWidth(w);
 #endif
@@ -416,14 +416,14 @@ bool DKUtil::GetScreenWidth(int& w)
 #ifdef LINUX
 	return DKLinux::GetScreenWidth(w);
 #endif
-	DKLog("DKUtil::GetScreenWidth() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetScreenWidth() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////////
 bool DKUtil::GetThreadId(unsigned long int& id)
 {
-	DKDebug(id);
+	DKDEBUG(id);
 #ifdef WIN32
 	return DKWindows::GetThreadId(id);
 #endif
@@ -441,14 +441,14 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 	return true;
 	#endif
 	*/
-	DKLog("DKUtil::GetThreadId() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetThreadId() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////
 bool DKUtil::GetTicks(long& ticks)
 {
-	//DKDebug(ticks);
+	//DKDEBUG(ticks);
 	
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
@@ -468,7 +468,7 @@ bool DKUtil::GetTicks(long& ticks)
 /////////////////////////////////////
 bool DKUtil::GetTime(DKString& _time)
 {
-	DKDebug(_time);
+	DKDEBUG(_time);
 	time_t t = time(0);   // get time now
 	struct tm * now = localtime(&t);
 
@@ -493,21 +493,21 @@ bool DKUtil::GetTime(DKString& _time)
 ////////////////////////////////////
 bool DKUtil::GetVolume(int& percent)
 {
-	DKDebug(percent);
+	DKDEBUG(percent);
 #ifdef WIN32
 	return DKWindows::GetVolume(percent);
 #endif
 #ifdef LINUX
 	return DKLinux::GetVolume(percent);
 #endif
-	DKLog("DKUtil::GetVolume() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::GetVolume() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////
 bool DKUtil::InMainThread()
 {
-	//DKDebug(); // DON'T DO THIS
+	//DKDEBUG(); // DON'T DO THIS
 #ifdef WIN32
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
 	//DKLog(tid); DO NOT DO THIS!
@@ -527,7 +527,7 @@ bool DKUtil::InMainThread()
 //////////////////////
 bool DKUtil::InitFps()
 {
-	DKDebug();
+	DKDEBUG();
 	memset(frametimes, 0, sizeof(frametimes)); // Set all frame times to 0ms
 	return DKUtil::GetTicks(frametimelast);
 }
@@ -535,7 +535,7 @@ bool DKUtil::InitFps()
 ////////////////////////////
 bool DKUtil::InitFramerate()
 {
-	DKDebug();
+	DKDEBUG();
 	GetTicks(DKUtil::now);
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::GetTicks(DKUtil::lastSecond);
@@ -545,32 +545,32 @@ bool DKUtil::InitFramerate()
 ////////////////////////////////
 bool DKUtil::KeyIsDown(int& key)
 {
-	DKDebug(key);
+	DKDEBUG(key);
 #ifdef WIN32
 	return DKWindows::KeyIsDown(key);
 #endif
 #ifdef LINUX
 	return DKLinux::KeyIsDown(key);
 #endif	
-	DKLog("DKUtil::KeyIsDown() not implemented on this OS. \n", DKWARN);
+	DKWARN("DKUtil::KeyIsDown() not implemented on this OS. \n");
 	return false;
 }
 
 ////////////////////////
 bool DKUtil::LeftClick()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::LeftClick();
 #endif
-	DKLog("DKUtil::LeftClick() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::LeftClick() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////
 bool DKUtil::LeftPress()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::LeftPress();
 #endif
@@ -580,14 +580,14 @@ bool DKUtil::LeftPress()
 #ifdef LINUX
 	return DKLinux::LeftPress();
 #endif
-	DKLog("DKUtil::LeftPress() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::LeftPress() not implemented on this OS \n");
 	return false;
 }
 
 //////////////////////////
 bool DKUtil::LeftRelease()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::LeftRelease();
 #endif
@@ -597,14 +597,14 @@ bool DKUtil::LeftRelease()
 #ifdef LINUX
 	return DKLinux::LeftRelease();
 #endif
-	DKLog("DKUtil::LeftRelease() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::LeftRelease() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////
 bool DKUtil::LimitFramerate()
 {
-	//DKDebug();
+	//DKDEBUG();
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
@@ -621,18 +621,18 @@ bool DKUtil::LimitFramerate()
 //////////////////////////////
 bool DKUtil::LowPowerMonitor()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::LowPowerMonitor();
 #endif
-	DKLog("DKUtil::LowPowerMonitor() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::LowPowerMonitor() not implemented on this OS \n");
 	return false;
 }
 
 //////////////////////////
 bool DKUtil::MiddlePress()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::MiddlePress();
 #endif
@@ -642,14 +642,14 @@ bool DKUtil::MiddlePress()
 #ifdef LINUX
 	return DKLinux::MiddlePress();
 #endif
-	DKLog("DKUtil::MiddlePress() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::MiddlePress() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////
 bool DKUtil::MiddleRelease()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::MiddleRelease();
 #endif
@@ -659,14 +659,14 @@ bool DKUtil::MiddleRelease()
 #ifdef LINUX
 	return DKLinux::MiddleRelease();
 #endif
-	DKLog("DKUtil::MiddleRelease() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::MiddleRelease() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory)
 {
-	DKDebug(physicalMemory);
+	DKDEBUG(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemory(physicalMemory);
 #endif
@@ -676,14 +676,14 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory)
 #ifdef LINUX
 	return DKLinux::PhysicalMemory(physicalMemory);
 #endif
-	DKLog("DKUtil::PhysicalMemory() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::PhysicalMemory() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
-	DKDebug(physicalMemory);
+	DKDEBUG(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsed(physicalMemory);
 #endif
@@ -693,14 +693,14 @@ bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 #ifdef LINUX
 	return DKLinux::PhysicalMemoryUsed(physicalMemory);
 #endif
-	DKLog("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::PhysicalMemoryUsed() not implemented on this OS \n");
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
-	DKDebug(physicalMemory);
+	DKDEBUG(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
@@ -710,14 +710,14 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 #ifdef LINUX
 	return DKLinux::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
-	DKLog("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::PhysicalMemoryUsedByApp() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////
 bool DKUtil::PressKey(const int& key)
 {
-	DKDebug(key);
+	DKDEBUG(key);
 #ifdef WIN32
 	return DKWindows::PressKey(key);
 #endif
@@ -727,14 +727,14 @@ bool DKUtil::PressKey(const int& key)
 #ifdef LINUX
 	return DKLinux::PressKey(key);
 #endif
-	DKLog("DKUtil::PressKey(): not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::PressKey(): not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////////////
 bool DKUtil::ReleaseKey(const int& key)
 {
-	DKDebug(key);
+	DKDEBUG(key);
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
 #endif
@@ -744,25 +744,25 @@ bool DKUtil::ReleaseKey(const int& key)
 #ifdef LINUX
 	return DKLinux::ReleaseKey(key);
 #endif
-	DKLog("DKUtil::ReleaseKey(): not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::ReleaseKey(): not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////
 bool DKUtil::RightClick()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::RightClick();
 #endif
-	DKLog("DKUtil::RightClick() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::RightClick() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////
 bool DKUtil::RightPress()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::RightPress();
 #endif
@@ -772,14 +772,14 @@ bool DKUtil::RightPress()
 #ifdef LINUX
 	return DKLinux::RightPress();
 #endif
-	DKLog("DKUtil::RightPress() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::RightPress() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////
 bool DKUtil::RightRelease()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::RightRelease();
 #endif
@@ -789,14 +789,14 @@ bool DKUtil::RightRelease()
 #ifdef LINUX
 	return DKLinux::RightRelease();
 #endif
-	DKLog("DKUtil::RightRelease() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::RightRelease() not implemented on this OS \n");
 	return false;
 }
 
 ///////////////////////////////
 bool DKUtil::Round(double& num)
 {
-	DKDebug(num);
+	DKDEBUG(num);
 	num = (num < 0.0 ? ceil(num - 0.5) : floor(num + 0.5));
 	return true;
 }
@@ -804,28 +804,28 @@ bool DKUtil::Round(double& num)
 /////////////////////////////////////////////////////////////////
 bool DKUtil::Run(const DKString& command, const DKString& params)
 {
-	DKDebug(command, params);
+	DKDEBUG(command, params);
 #ifdef WIN32
 	DKString error;
 	PVOID OldValue = NULL;
 	//  Disable redirection immediately prior to the native API function call.
 	if(!Wow64DisableWow64FsRedirection(&OldValue)){
 		DKWindows::GetLastError(error);
-		DKLog("DKUtil::Run("+command+","+params+"): Disable redirection failed: "+error+"\n", DKERROR);
+		DKERROR("DKUtil::Run("+command+","+params+"): Disable redirection failed: "+error+"\n");
 		return false;
 	}
 
 	//https://msdn.microsoft.com/en-us/library/windows/desktop/bb762153(v=vs.85).aspx
 	if(ShellExecute(NULL, "open", command.c_str(), params.c_str(), NULL, SW_SHOWNORMAL) < (HINSTANCE)32){
 		DKWindows::GetLastError(error);
-		DKLog("DKUtil::Run("+command+","+params+"): "+error+"\n", DKERROR);
+		DKERROR("DKUtil::Run("+command+","+params+"): "+error+"\n");
 		return false;
 	}
 
 	//  Immediately re-enable redirection. 
 	if(Wow64RevertWow64FsRedirection(OldValue) == FALSE){
 		DKWindows::GetLastError(error);
-		DKLog("DKUtil::Run("+command+","+params+"): Enable redirection failed: "+error+"\n", DKERROR);    
+		DKERROR("DKUtil::Run("+command+","+params+"): Enable redirection failed: "+error+"\n");    
 		return false;
 	}
 	return true;
@@ -833,18 +833,18 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 #ifdef LINUX
 	return DKLinux::Run(command);
 #endif
-	DKLog("DKUtil::Run() not implemented on this OS. \n", DKWARN);
+	DKWARN("DKUtil::Run() not implemented on this OS. \n");
 	return false;
 }
 
 //////////////////////////////////////////////
 bool DKUtil::SetBrightness(const int& percent)
 {
-	DKDebug(percent);
+	DKDEBUG(percent);
 #ifdef WIN32
 	return DKWindows::SetBrightness(percent);
 #endif
-	DKLog("DKUtil::SetBrightness() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetBrightness() not implemented on this OS \n");
 	return false;
 }
 
@@ -854,7 +854,7 @@ bool DKUtil::SetBrightness(const int& percent)
 ///////////////////////
 bool DKUtil::SendTick()
 {
-	//DKDebug();
+	//DKDEBUG();
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		DKEvent::SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
@@ -865,43 +865,43 @@ bool DKUtil::SendTick()
 ///////////////////////////////////////////////
 bool DKUtil::SetClipboard(const DKString& text)
 {
-	DKDebug(text);
+	DKDEBUG(text);
 #ifdef WIN32
 	return DKWindows::SetClipboard(text);
 #endif
 #ifdef LINUX
 	return DKLinux::SetClipboard(text);
 #endif
-	DKLog("DKUtil::SetClipboard() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetClipboard() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////
 bool DKUtil::SetClipboardFiles(const DKString& filelist)
 {
-	DKDebug(filelist);
+	DKDEBUG(filelist);
 #ifdef WIN32
 	return DKWindows::SetClipboardFiles(filelist);
 #endif
-	DKLog("DKUtil::SetClipboardFiles() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetClipboardFiles() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKUtil::SetClipboardImage(const DKString& file)
 {
-	DKDebug(file);
+	DKDEBUG(file);
 #ifdef WIN32
 	return DKWindows::SetClipboardImage(file);
 #endif
-	DKLog("DKUtil::SetClipboardImage() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetClipboardImage() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////////
 bool DKUtil::SetFramerate(const int& fps)
 {
-	DKDebug(fps);
+	DKDEBUG(fps);
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return true; }
 	ticksPerFrame = 1000 / _fps;
@@ -911,7 +911,7 @@ bool DKUtil::SetFramerate(const int& fps)
 ///////////////////////////////
 bool DKUtil::SetMainThreadNow()
 {
-	DKDebug();
+	DKDEBUG();
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
 #ifdef WIN32
 	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
@@ -928,14 +928,14 @@ bool DKUtil::SetMainThreadNow()
 	DKUtil::mainThreadId = (unsigned long int)pthread_self();
 	#endif
 	*/
-	DKLog("DKUtil::SetMainThreadNow() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetMainThreadNow() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKUtil::SetMousePos(const int& x, const int& y)
 {
-	DKDebug(x, y);
+	DKDEBUG(x, y);
 #ifdef WIN32
 	return DKWindows::SetMousePos(x, y);
 #endif
@@ -945,28 +945,28 @@ bool DKUtil::SetMousePos(const int& x, const int& y)
 #ifdef LINUX
 	return DKLinux::SetMousePos(x, y);
 #endif
-	DKLog("DKUtil::SetMousePos() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::SetMousePos() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////
 bool DKUtil::SetVolume(int& percent)
 {
-	DKDebug(percent);
+	DKDEBUG(percent);
 #ifdef WIN32
 	return DKWindows::SetVolume(percent);
 #endif
 #ifdef LINUX
 	return DKLinux::SetVolume(percent);
 #endif
-	DKLog("DKUtil::SetVolume() not implemented on this OS\n", DKWARN);
+	DKWARN("DKUtil::SetVolume() not implemented on this OS\n");
 	return false;
 }
 
 ///////////////////////////////////////////
 bool DKUtil::Sleep(const int& milliseconds)
 {
-	//DKDebug(milliseconds);
+	//DKDEBUG(milliseconds);
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
 #else
@@ -978,19 +978,19 @@ bool DKUtil::Sleep(const int& milliseconds)
 //////////////////////////////////////
 bool DKUtil::StrokeKey(const int& key)
 {
-	DKDebug(key);
+	DKDEBUG(key);
 #ifdef WIN32
 	DKWindows::PressKey(key);
 	return DKWindows::ReleaseKey(key);
 #endif
-	DKLog("DKUtil::StrokeKey(): not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::StrokeKey(): not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////
 bool DKUtil::System(const DKString& command)
 {
-	DKDebug(command);
+	DKDEBUG(command);
 #if !defined(IOS)
 	int rval = system(command.c_str());
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n");
@@ -1002,7 +1002,7 @@ bool DKUtil::System(const DKString& command)
 /////////////////////////////
 bool DKUtil::TurnOffMonitor()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::TurnOffMonitor();
 #endif
@@ -1012,25 +1012,25 @@ bool DKUtil::TurnOffMonitor()
 #ifdef LINUX
 	return DKLinux::TurnOffMonitor();
 #endif
-	DKLog("DKUtil::TurnOffMonitor() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::TurnOffMonitor() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////
 bool DKUtil::TurnOnMonitor()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::TurnOnMonitor();
 #endif
-	DKLog("DKUtil::TurnOnMonitor() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::TurnOnMonitor() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////
 bool DKUtil::UpdateFps()
 {
-	//DKDebug();
+	//DKDEBUG();
 	if(!frametimelast){ DKUtil::InitFps(); }
 	long frametimesindex;
 	long getticks;
@@ -1066,7 +1066,7 @@ bool DKUtil::UpdateFps()
 ////////////////////////////////////////////////
 bool DKUtil::VirtualMemory(unsigned long long& virtualMemory)
 {
-	DKDebug(virtualMemory);
+	DKDEBUG(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
 #endif
@@ -1076,14 +1076,14 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory)
 #ifdef LINUX
 	return DKLinux::VirtualMemory(virtualMemory);
 #endif
-	DKLog("DKUtil::VirtualMemory() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::VirtualMemory() not implemented on this OS \n");
 	return false;
 }
 
 /////////////////////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
-	DKDebug(virtualMemory);
+	DKDEBUG(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
 #endif
@@ -1093,14 +1093,14 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory)
 #ifdef LINUX
 	return DKLinux::VirtualMemoryUsed(virtualMemory);
 #endif
-	DKLog("DKUtil::VirtualMemoryUsed() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::VirtualMemoryUsed() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
-	DKDebug(virtualMemory);
+	DKDEBUG(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
 #endif
@@ -1110,39 +1110,39 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 #ifdef LINUX
 	return DKLinux::VirtualMemoryUsedByApp(virtualMemory);
 #endif
-	DKLog("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::VirtualMemoryUsedByApp() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKUtil::WaitForImage(const DKString& file, int timeout)
 {
-	DKDebug(file, timeout);
+	DKDEBUG(file, timeout);
 #ifdef WIN32
 	return DKWindows::WaitForImage(file, timeout);
 #endif
-	DKLog("DKUtil::WaitForImage() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::WaitForImage() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////
 bool DKUtil::WheelDown()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::WheelDown();
 #endif
-	DKLog("DKUtil::WheelDown() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::WheelDown() not implemented on this OS \n");
 	return false;
 }
 
 //////////////////////
 bool DKUtil::WheelUp()
 {
-	DKDebug();
+	DKDEBUG();
 #ifdef WIN32
 	return DKWindows::WheelUp();
 #endif
-	DKLog("DKUtil::WheelUp() not implemented on this OS \n", DKWARN);
+	DKWARN("DKUtil::WheelUp() not implemented on this OS \n");
 	return false;
 }

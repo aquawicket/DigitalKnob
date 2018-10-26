@@ -14,15 +14,15 @@ std::vector<boost::function<void()> > DKApp::loop_funcs;
 #ifndef ANDROID
 int main(int argc, char **argv)
 {
-	DKDebug(argc, argv);
+	DKDEBUG(argc, argv);
 	DKUtil::SetMainThreadNow();
 	DKApp::argc = argc;
 	DKApp::argv = argv;
 
 #if __cplusplus <= 199711L
-	DKLog("C++98 \n");
+	DKINFO("C++98 \n");
 #else
-	DKLog("C++11 \n");
+	DKINFO("C++11 \n");
 #endif
 
 #ifndef IOS
@@ -35,18 +35,18 @@ int main(int argc, char **argv)
 
 	DKString info;
 	GetOSInfo(info);
-	DKLog(info+"\n");
+	DKINFO(info+"\n");
 
 	DKString date;
 	DKUtil::GetDate(date);
 	DKString time;
 	DKUtil::GetTime(time);
-	DKLog(date+" "+time+"\n");
+	DKINFO(date+" "+time+"\n");
 	
 	//print args
 	if(DKApp::argc > 1){
 		for(int i = 1; i < DKApp::argc; ++i){
-			DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
+			DKINFO("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
 	    }
     }
 	
@@ -55,10 +55,10 @@ int main(int argc, char **argv)
 	DKFile::GetExeName(DKFile::exe_name);
 	DKFile::GetAppPath(DKFile::app_path);
 	DKFile::GetAppName(DKFile::app_name);
-	DKLog("DKFile::exe_path = "+DKFile::exe_path+"\n");
-	DKLog("DKFile::exe_name = "+DKFile::exe_name+"\n");
-	DKLog("DKFile::app_path = "+DKFile::app_path+"\n");
-	DKLog("DKFile::app_name = "+DKFile::app_name+"\n");
+	DKINFO("DKFile::exe_path = "+DKFile::exe_path+"\n");
+	DKINFO("DKFile::exe_name = "+DKFile::exe_name+"\n");
+	DKINFO("DKFile::app_path = "+DKFile::app_path+"\n");
+	DKINFO("DKFile::app_name = "+DKFile::app_name+"\n");
 
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here. 
 	DKClass::DKCreate("DKDuktape");
@@ -66,6 +66,7 @@ int main(int argc, char **argv)
 	DKApp dkapp;
 	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
 	dkapp.Init();
+
 	dkapp.Loop();
 	dkapp.Exit();
 
@@ -83,7 +84,7 @@ int main(int argc, char **argv)
 //////////////
 DKApp::DKApp()
 {
-	DKDebug();
+	DKDEBUG();
 
 #ifdef ANDROID
 	DKUtil::mainThreadId = (int)pthread_self();
@@ -93,15 +94,15 @@ DKApp::DKApp()
 //////////////////
 void DKApp::Init()
 {
-	DKDebug();
+	DKDEBUG();
 	active = true;
 }
 
 //////////////////
 void DKApp::Loop()
 {
-	DKDebug();
-	DKLog("DKApp::Loop()\n");
+	DKDEBUG();
+	DKINFO("DKApp::Loop()\n");
 	while(active){
 		DoFrame();
 	}
@@ -110,7 +111,7 @@ void DKApp::Loop()
 /////////////////////
 void DKApp::DoFrame()
 {
-	//DKDebug(); //DON'T DO THIS
+	//DKDEBUG(); //DON'T DO THIS
 	if(paused){ 
 		DKUtil::Sleep(100);
 		return;
@@ -130,8 +131,8 @@ void DKApp::DoFrame()
 //////////////////
 void DKApp::Exit()
 {
-	DKDebug();
-	DKLog("DKApp::Exit():\n");
+	DKDEBUG();
+	DKINFO("DKApp::Exit():\n");
 	active = false;
 	DKUtil::CallExit();
 	exit(0);

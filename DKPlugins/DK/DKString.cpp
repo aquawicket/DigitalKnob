@@ -216,7 +216,7 @@ long toLong(const DKString& str)
 #if defined(WIN32) || defined(MAC)
 	return atol(str.c_str());
 #endif 
-    DKLog("toLong() not implemented for this OS \n", DKERROR);
+    DKERROR("toLong() not implemented for this OS \n");
 	return false;
 }
 
@@ -227,7 +227,7 @@ unsigned long long int toULongLong(const DKString& str)
 	//return atol(str.c_str());
 	return strtoull(str.c_str(), NULL, 0);
 #endif 
-    DKLog("toULongLong() not implemented for this OS \n", DKERROR);
+    DKERROR("toULongLong() not implemented for this OS \n");
 	return false;
 }
 

@@ -43,36 +43,36 @@ public:
 	///////////////////////////////////////////////
 	static DKObject* DKCreate(const DKString& data)
 	{
-		DKDebug(data); //data = (class,id,var1,var2,var3,etc)
-		DKLog("DKClass::DKCreate("+data+")\n");
+		DKDEBUG(data); //data = (class,id,var1,var2,var3,etc)
+		DKINFO("DKClass::DKCreate("+data+")\n");
 		return DKClass::_Instance(data);
 	}
 
 	////////////////////////////////////////////
 	static DKObject* DKGet(const DKString& data)
 	{
-		DKDebug(data); //data = (class,id)
+		DKDEBUG(data); //data = (class,id)
 		return DKClass::_Get(data);
 	}
 
 	/////////////////////////////////////////
 	static bool DKValid(const DKString& data)
 	{
-		//DKDebug(data); //data = (class,id)
+		//DKDEBUG(data); //data = (class,id)
 		return DKClass::_Valid(data);
 	}
 
 	/////////////////////////////////////////////
 	static bool DKAvailable(const DKString& data)
 	{
-		DKDebug(data); //data = (class,id)
+		DKDEBUG(data); //data = (class,id)
 		return DKClass::_Available(data);
 	}
 
 	/////////////////////////////////////////
 	static void DKClose(const DKString& data)
 	{
-		DKDebug(data); //data = (class,id)
+		DKDEBUG(data); //data = (class,id)
 		DKClass::_Close(data);
 	}
 
@@ -80,10 +80,10 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this)
 	{
-		DKDebug(name, func, _this);
+		DKDEBUG(name, func, _this);
 		functions[name] = boost::bind(func, _this, _1, _2);
 		if(!functions[name]){
-			DKLog("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
+			DKLOG("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
 			return;
 		}
 	}
@@ -91,10 +91,10 @@ public:
 	////////////////////////////////////////////////
 	static void UnregisterFunc(const DKString& name)
 	{
-		DKDebug(name);
+		DKDEBUG(name);
 		functions.erase(name);
 		if(functions[name]) {
-			DKLog("UnegisterFunc("+name+"): failed to unregister function \n", DKERROR);
+			DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
 			return;
 		}
 	}
@@ -102,16 +102,16 @@ public:
 	/////////////////////////////////////////
 	static bool HasFunc(const DKString& name)
 	{
-		DKDebug(name);
+		DKDEBUG(name);
 		return functions[name];
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	static bool CallFunc(const DKString& name, const void* input, void* output)
 	{
-		//DKDebug(name, input, output); //excessive logging
+		//DKDEBUG(name, input, output); //excessive logging
 		if(!functions[name]){ 
-			DKLog("CallFunc("+name+") not registered\n", DKWARN);
+			DKWARN("CallFunc("+name+") not registered\n");
 			return false;
 		}
 		return functions[name](input, output);

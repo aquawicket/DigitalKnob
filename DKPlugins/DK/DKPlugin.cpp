@@ -14,7 +14,7 @@ bool DKPlugins::LoadPlugin(const std::string& file)
 	// Load the library
     HINSTANCE mod = LoadLibrary(file.c_str());
 	if(!mod){ 
-		DKLog("DKPlugins::LoadPlugin("+file+"): failed to load plugin. \n", DKERROR);
+		DKERROR("DKPlugins::LoadPlugin("+file+"): failed to load plugin.\n");
 		return false; 
 	}
 
@@ -27,7 +27,7 @@ bool DKPlugins::LoadPlugin(const std::string& file)
     NameProc nameFunc = (NameProc) GetProcAddress(mod, "getName");
 
 	if (!objFunc || !nameFunc){
-		DKLog("DKPlugins::LoadPlugin("+file+"): failed to connect objFunc or nameFunc. \n", DKERROR);
+		DKERROR("DKPlugins::LoadPlugin("+file+"): failed to connect objFunc or nameFunc.\n");
 		return false;
 	}
 
@@ -36,7 +36,7 @@ bool DKPlugins::LoadPlugin(const std::string& file)
     modules.push_back(mod);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
-	DKLog("Plugin Loaded: "+filename+"\n");
+	DKINFO("Plugin Loaded: "+filename+"\n");
 	return true;
 #endif
 	return false;

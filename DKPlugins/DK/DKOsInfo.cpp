@@ -49,7 +49,7 @@ bool GetSystemOS(DKString& os)
 	os = "Android";
 #endif
 	if(os.empty()){
-		DKLog("ERROR GetSystemOS() cound not get the OS\n", DKERROR);
+		DKERROR("ERROR GetSystemOS() cound not get the OS\n");
 		return false;
 	}
 	return true;
@@ -74,7 +74,7 @@ bool GetOSCompany(DKString& oscompany)
 	oscompany = "Linux";
 	return true;
 #endif
-	DKLog("GetOSCompany() not implemented on this OS \n", DKERROR);
+	DKERROR("GetOSCompany() not implemented on this OS \n");
 	return false;
 }
 
@@ -89,7 +89,7 @@ bool GetOSName(DKString& osname)
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi);
+	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
 
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
@@ -163,7 +163,7 @@ bool GetOSName(DKString& osname)
 	osname = "Unknown";
 	return true;
 #endif
-	DKLog("GetOSName() not inplemented on this OS \n", DKERROR);
+	DKERROR("GetOSName() not inplemented on this OS \n");
 	return false;
 }
 
@@ -179,7 +179,7 @@ bool GetOSVersion(DKString& osversion)
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); 
+	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
 
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
@@ -383,7 +383,7 @@ bool GetOSVersion(DKString& osversion)
 	osversion = "Unknown";
 	return true;
 #endif
-	DKLog("GetOSVersion() not inplemented on this OS \n", DKERROR);
+	DKERROR("GetOSVersion() not inplemented on this OS \n");
 	return false;
 }
 
@@ -398,7 +398,7 @@ bool GetOSServicePack(DKString& osservicepack)
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); 
+	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
 
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
@@ -439,7 +439,7 @@ bool GetOSServicePack(DKString& osservicepack)
 	osservicepack = "";
 	return true;
 #endif
-	DKLog("GetOSServicePack() not inplemented on this OS \n", DKERROR);
+	DKERROR("GetOSServicePack() not inplemented on this OS \n");
 	return false;
 }
 
@@ -454,7 +454,7 @@ bool GetOSBuild(DKString& osbuild)
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); 
+	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
 
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
@@ -489,7 +489,7 @@ bool GetOSBuild(DKString& osbuild)
 	osbuild = "";
 	return true;
 #endif
-	DKLog("GetOSBuild() not inplemented on this OS \n", DKERROR);
+	DKERROR("GetOSBuild() not inplemented on this OS \n");
 	return false;
 }
 
@@ -504,7 +504,7 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); 
+	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
 
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
@@ -549,7 +549,7 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	osarchitecture = "";
 	return true;
 #endif
-	DKLog("GetOSArchitecture() not inplemented on this OS \n", DKERROR);
+	DKERROR("GetOSArchitecture() not inplemented on this OS \n");
 	return false;
 }
 
@@ -563,6 +563,6 @@ bool getComputerName(DKString& computername)
 	computername = (DKString)computerName;
 	return true;
 #endif
-	DKLog("getComputerName() not implemented on this OS \n", DKERROR);
+	DKERROR("getComputerName() not implemented on this OS \n");
 	return false;
 }

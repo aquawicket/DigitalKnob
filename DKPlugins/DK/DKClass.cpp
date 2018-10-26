@@ -7,7 +7,7 @@ std::map<DKString, boost::function<bool (const void*, void*)> > DKClass::functio
 //////////////////////////////////////////////////////////////////////////////
 void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
 {
-	DKDebug(klass, _class, singleton);
+	DKDEBUG(klass, _class, singleton);
 	if(!classes){ classes = new std::map<DKString, DKClass*>(); }
 	if((*classes)[klass]){ return; } //already exists
 	(*classes)[klass] = _class;
@@ -19,7 +19,7 @@ void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
 //////////////////////////////////////////////////
 DKObject* DKClass::_Instance(const DKString& data)
 {
-	DKDebug(data);
+	DKDEBUG(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 
@@ -41,73 +41,73 @@ DKObject* DKClass::_Instance(const DKString& data)
 		return (*classes)[arry[0]]->Instance("");
 	}
 
-	DKLog("DKClass::_Instance "+arry[0]+" not registered\n", DKWARN);
-	DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	DKWARN("DKClass::_Instance "+arry[0]+" not registered\n");
+	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
 	return NULL;
 }
 
 /////////////////////////////////////////////
 DKObject* DKClass::_Get(const DKString& data)
 {
-	DKDebug(data);
+	DKDEBUG(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKLog("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance.\n");
+			DKINFO("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance.\n");
 		}
 		return (*classes)[arry[0]]->Get(arry[1]);
 	}
 
-	DKLog("DKClass::_Get(): "+arry[0]+" not registered\n", DKWARN);
-	DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	DKWARN("DKClass::_Get(): "+arry[0]+" not registered\n");
+	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
 	return NULL;
 }
 
 //////////////////////////////////////////
 bool DKClass::_Valid(const DKString& data)
 {
-	//DKDebug(data);
+	//DKDEBUG(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKLog("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance.\n");
+			DKWARN("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance.\n");
 		}
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 
-	//DKLog("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
-	//DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	//DKLOG("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
+	//DKLOG("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
 	return NULL;
 }
 
 //////////////////////////////////////////////
 bool DKClass::_Available(const DKString& data)
 {
-	DKDebug(data);
+	DKDEBUG(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKLog("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance.\n", DKDEBUG);
+			DKWARN("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance.\n");
 		}
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
-			DKLog("DKClass: "+arry[0]+","+arry[1]+" - id is already in use.\n", DKWARN);
+			DKWARN("DKClass: "+arry[0]+","+arry[1]+" - id is already in use.\n");
 			return false;
 		}
 		return true;
 	}
 
-	//DKLog("DKClass::_Available(): "+arry[0]+" not registered\n", DKWARN);
-	//DKLog("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	//DKWARN("DKClass::_Available(): "+arry[0]+" not registered\n");
+	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
 	return false;
 }
 
 //////////////////////////////////////////
 void DKClass::_Close(const DKString& data)
 {
-	DKDebug(data);
+	DKDEBUG(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(has(arry[0],".html")){
@@ -136,11 +136,11 @@ void DKClass::_Close(const DKString& data)
 ////////////////////////
 void DKClass::CloseAll()
 {
-	DKDebug();
+	DKDEBUG();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
 		if((*classes)[rit->first]){
-			//DKLog("DKClass::CloseAll(): Closing " + rit->first + "\n");
+			//DKLOG("DKClass::CloseAll(): Closing " + rit->first + "\n");
 			(*classes)[rit->first]->Close("");
 		}
 	}
@@ -154,7 +154,7 @@ void DKClass::CloseAll()
 ///////////////////////////////////////////////
 void DKClass::GetClassList(DKStringArray& list)
 {
-	DKDebug();
+	DKDEBUG();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for (rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if ((*classes)[rit->first]){
@@ -166,7 +166,7 @@ void DKClass::GetClassList(DKStringArray& list)
 /////////////////////////////////////////////
 void DKClass::GetObjects(DKStringArray& list)
 {
-	DKDebug();
+	DKDEBUG();
 	
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;

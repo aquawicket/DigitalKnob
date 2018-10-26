@@ -39,12 +39,12 @@
 #define DKWHITE  "\x1B[37m"
 #endif
 
-#define DKERROR 1      //Red
-#define DKWARN 2       //Yellow
-#define DKINFO 3       //White
-#define DKDEBUG 4      //Blue
-#define DKSHOW 5
-#define DKHIDE 6
+#define DK_ERROR 1      //Red
+#define DK_WARN 2       //Yellow
+#define DK_INFO 3       //White
+#define DK_DEBUG 4      //Blue
+#define DK_SHOW 5
+#define DK_HIDE 6
 
 extern bool log_errors;
 extern bool log_warnings;
@@ -60,12 +60,13 @@ extern bool log_funcs;
 extern DKString log_show;
 extern DKString log_hide;
 
-void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DKINFO);
+void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
 void SetLog(const int lvl, const DKString& text);
 
 template <typename... Args>
-void DEBUG_VARS(const char* file, int line, const char* func, Args&&... args)
+void DebugFunc(const char* file, int line, const char* func, Args&&... args)
 {
+	if(log_show.empty() && !log_debug){ return; }
 	std::ostringstream out;
 	out << func;
 	out << "(";
@@ -74,10 +75,50 @@ void DEBUG_VARS(const char* file, int line, const char* func, Args&&... args)
 	out << ")\n";
 	std::string text = out.str();
 	replace(text, ", )", ")");
-	Log(file, line, "", text, DKDEBUG);
+	Log(file, line, "", text, DK_DEBUG);
 }
 
-#define DKLog(...) Log(__FILE__, __LINE__, __FUNCTION__, ## __VA_ARGS__)
-#define DKDebug(...) DEBUG_VARS(__FILE__, __LINE__, __FUNCTION__, ## __VA_ARGS__)
+template <typename... Args>
+void DebugVars(const char* file, int line, const char* func, const DKString& names, Args&&... args)
+{
+	std::stringstream names_ss;
+	for(const char& c : names){
+		if(c == ','){
+			names_ss << " ";
+			continue;
+		}
+		names_ss << c;
+	}
+
+	std::string name;
+	std::ostringstream ss;
+	
+	DKString filename = file;
+	unsigned found = filename.find_last_of("/\\");
+	if(found != std::string::npos && found < filename.length()){
+		filename = filename.substr(found+1);
+	}
+
+	using expander = int[];
+	(void) expander { 0, (
+		names_ss >> name, ss << "**DEBUG** " << filename << ":" << line << " " << func << "()   " << name << ": " << args << "\n"
+	,0) ...};
+
+	if(!log_debug){
+		log_debug = true;
+		Log("", 0, "", ss.str(), DK_DEBUG);
+		log_debug = false; 
+	}
+	else{
+		Log("", 0, "", ss.str(), DK_DEBUG);
+	}
+}
+
+//#define DKLOG(...) Log(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
+#define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
+#define DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
+#define DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
+#define DKDEBUG(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
+#define DKDEBUGARGS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
 
 #endif //DKLog_H
