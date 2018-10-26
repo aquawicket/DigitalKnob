@@ -3,15 +3,15 @@ var IMAGEMAGICK = "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-
 /////////////////////////
 function IconMaker_Init()
 {
-	DKLog("IconMaker_Init()()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	IMAGEMAGICK = DKFile_GetShortName(IMAGEMAGICK);
-	DKLog("IMAGEMAGICK="+IMAGEMAGICK+"\n");
+	DKINFO("IMAGEMAGICK="+IMAGEMAGICK+"\n");
 }
 
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	DKLog("IconMaker_Create("+AppPath+")\n", DKDEBUG);
+	DKDEBUGFUNC(AppPath);
 	DKCreate("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
@@ -63,29 +63,28 @@ function IconMaker_Create(AppPath)
 ////////////////////////////////////////
 function IconMaker_ValidateImageMagick()
 {
-	DKLog("IconMaker_ValidateImageMagick()\n", DKDEBUG);
-	DKLog("Looking for ImageMagick... \n");
-	//DKLog(SVN+"\n");
+	DKDEBUGFUNC();
+	DKINFO("Looking for ImageMagick...\n");
+	//DKINFO(SVN+"\n");
 	if(!DKFile_Exists(IMAGEMAGICK)){
-		DKLog("Installing ImageMagick... \n");
+		DKINFO("Installing ImageMagick...\n");
 		IconMaker_InstallImageMagick();
 	}
-	DKLog("Found ImageMagick \n");
+	DKINFO("Found ImageMagick\n");
 }
 
 ///////////////////////////////////////
 function IconMaker_InstallImageMagick()
 {
-	DKLog("IconMaker_InstallImageMagick()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKFile_MkDir("C:/digitalknob/Download");
 	var datapath = "C:/digitalknob/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip";
 	
 	//FIXME - we need to know if this fails.
 	//if(!DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath)){ 
-	//	DKLog("DKCurl_Download(): download failed\n", DKWARN);
+	//	DKWARN("DKCurl_Download(): download failed\n");
 	//	return false; 
 	//}
 	DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip");
-
 	DKArchive_Extract(datapath, "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86");
 }

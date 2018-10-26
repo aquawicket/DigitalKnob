@@ -35,10 +35,10 @@ bool DKJS::Init()
 	if(same(file,"ON")){ log_file = true; }
 	*/
 	
-	duk_eval_string(DKDuktape::ctx, "var DKERROR = 0;");
-	duk_eval_string(DKDuktape::ctx, "var DKWARN = 1;");
-	duk_eval_string(DKDuktape::ctx, "var DKINFO = 2;");
-	duk_eval_string(DKDuktape::ctx, "var DKDEBUG = 3;");
+	//duk_eval_string(DKDuktape::ctx, "var DK_ERROR = 0;");
+	//duk_eval_string(DKDuktape::ctx, "var DK_WARN = 1;");
+	//duk_eval_string(DKDuktape::ctx, "var DK_INFO = 2;");
+	//duk_eval_string(DKDuktape::ctx, "var DK_DEBUG = 3;");
 
 	DKDuktape::AttachFunction("DKAddEvent", DKJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable);
