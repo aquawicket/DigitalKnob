@@ -301,8 +301,18 @@ int DKJS::_DKDEBUG(duk_context* ctx)
 ////////////////////////////////////////
 int DKJS::_DKDEBUGFUNC(duk_context* ctx)
 {
-	int length = duk_get_length(ctx, NULL);
-	DKDEBUGVARS(length);
+	//TODO - we need to pull the function name
+	DKString str = "unknown_func(";
+	int i=0;
+	while(duk_is_valid_index(ctx, i)){
+		if(duk_is_boolean(ctx, i)){ str += toString(duk_get_boolean(ctx, i)); }
+		if(duk_is_number(ctx, i)){ str += toString(duk_get_number(ctx, i)); }
+		if(duk_is_string(ctx, i)){ str += duk_get_string(ctx, i); }
+		str += ","; //FIXME - no comma on the last argument
+		i++;
+	}
+	str += ")";
+	DKDEBUG(str+"\n");
 	return 1;
 }
 
