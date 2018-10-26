@@ -47,6 +47,7 @@ static int ticksPerFrame = 1000 / fps;
 /////////////////////////////
 bool DKScreenRecorder::Init()
 {
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKScreenRecorderJS");
 	DKClass::DKCreate("DKScreenRecorderV8");
 
@@ -79,6 +80,7 @@ bool DKScreenRecorder::Init()
 ////////////////////////////
 bool DKScreenRecorder::End()
 {
+	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
@@ -88,11 +90,12 @@ bool DKScreenRecorder::End()
 ///////////////////////////////////////////////////
 bool DKScreenRecorder::Record(const DKString& file)
 {
+	DKDEBUGFUNC(file);
 	//OpenCV
 	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
 	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cvSize(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened()){
-		DKLog("DKScreenRecorder::Init(): Could not open the output video for write\n", DKWARN);
+		DKWARN("DKScreenRecorder::Init(): Could not open the output video for write\n");
 		return false;
 	}
 	return true;
@@ -101,6 +104,7 @@ bool DKScreenRecorder::Record(const DKString& file)
 /////////////////////////////
 bool DKScreenRecorder::Stop()
 {
+	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
@@ -109,6 +113,7 @@ bool DKScreenRecorder::Stop()
 /////////////////////////////
 void DKScreenRecorder::Loop()
 {
+	//DKDEBUGFUNC();
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
 		//DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
@@ -145,6 +150,7 @@ void DKScreenRecorder::Loop()
 ///////////////////////////////////
 void DKScreenRecorder::DrawBuffer()
 {  
+	//DKDEBUGFUNC();
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
@@ -164,7 +170,7 @@ void DKScreenRecorder::DrawBuffer()
 		// init D3D and get screen size
 		d3d = Direct3DCreate9(D3D_SDK_VERSION);
 		if(!d3d){
-			DKLog("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n", DKERROR);
+			DKERROR("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n");
 			return;
 		}
 		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));

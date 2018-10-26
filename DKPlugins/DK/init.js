@@ -16,7 +16,7 @@ function init_End(){}
 ////////////////////////////
 function init_OnEvent(event)  //Duktape
 {
-	DKLog("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKINFO("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
@@ -29,7 +29,7 @@ function init_OnEvent(event)  //Duktape
 ////////////////////////////////////
 if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can support
 	if(USE_ROCKET && USE_CEF){
-		DKLog("Creating SDL -> Rocket -> Cef -> GUI \n");
+		DKINFO("Creating SDL -> Rocket -> Cef -> GUI\n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
 		DKCreate("DKRocket");
@@ -45,7 +45,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 	}
 	else if(USE_ROCKET){
-		DKLog("Creating SDL -> ROCKET -> GUI \n");
+		DKINFO("Creating SDL -> ROCKET -> GUI\n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
 		DKCreate("DKRocket");
@@ -56,7 +56,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		}
 	}
 	else if(USE_SDL && USE_CEF){
-		DKLog("Creating SDL -> CEF -> GUI \n");
+		DKINFO("Creating SDL -> CEF -> GUI\n");
 		DKCreate("DKWindow");
 		DKWindow_Create();
 		var width = DKWindow_GetWidth();
@@ -68,7 +68,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
 	else if(USE_CEF){
-		DKLog("Creating CEF -> GUI \n");
+		DKINFO("Creating CEF -> GUI\n");
 		var assets = DKAssets_LocalAssets();
 		var width = Number(DKFile_GetSetting(assets+"settings.txt", "[WIDTH]"));
 		var height = Number(DKFile_GetSetting(assets+"settings.txt", "[HEIGHT]"));
@@ -78,7 +78,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKCreate("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
-		DKLog("Creating WEBVIEW -> GUI \n");
+		DKINFO("Creating WEBVIEW -> GUI\n");
 		DKAddEvent("GLOBAL", "keydown", init_OnEvent);
 	}
 	

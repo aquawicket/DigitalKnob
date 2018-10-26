@@ -4,14 +4,12 @@
 document.body.style.backgroundColor = "rgb(200,200,200)";
 //document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 
-
 document.getElementsByTagName('head')[0].id = "head";
 document.body.id = "body";
 document.body.style.fontSize = "13em";
 document.documentElement.id = "html";
 document.documentElement.style.fontSize = "1px";
 document.body.style.cursor = "default";
-
 
 var mouseX;
 var mouseY;
@@ -79,11 +77,9 @@ document.onmousemove = function(e){
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	//DKDebug(data, callback);
-	DKLog("DKCreate("+data+")\n", DKINFO);
-		
+	DKDEBUGFUNC(data, callback);
+	DKINFO("DKCreate("+data+")\n");	
 	var arry = data.split(",");
-	
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
 	}
@@ -94,19 +90,18 @@ function DKCreate(data, callback)
 		arry.splice(0, 0, "DKCss");
 	}
 	else{
-		//DKLog("DKCreate("+data+"): requesting c++ plugin\n");
+		//DKINFO("DKCreate("+data+"): requesting c++ plugin\n");
 		if(DK_GetBrowser() == "CEF"){
 			DKCreate_CPP(data);
 		}
-	}
-	
+	}	
 	if(arry[0] == "DKJavascript"){
 		if(!LoadJs(arry[1], function(rval){
 			if(callback){ 
 				callback(rval); 
 			}
 			else{
-				DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
+				DKERROR("DKCreate("+data+"): does not have a callback\n");
 			}
 		})
 		){
@@ -114,7 +109,7 @@ function DKCreate(data, callback)
 		}
 	}
 	if(arry[0] == "DKWidget"){
-		//DKLog("DKCreate(data, callback)\n", DKINFO);
+		//DKINFO("DKCreate(data, callback)\n");
 			if(!DKWidget_NewWidget(arry[1], arry[2])){
 				return false;
 			}
@@ -122,7 +117,7 @@ function DKCreate(data, callback)
 				callback(); 
 			}
 			else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
+			//DKERROR("DKCreate("+data+"): does not have a callback\n");
 			}
 	}
 	if(arry[0] == "DKCss"){
@@ -133,20 +128,19 @@ function DKCreate(data, callback)
 			callback(); 
 		}
 		else{
-			//DKLog("DKCreate("+data+"): does not have a callback \n", DKERROR);
+			//DKERROR("DKCreate("+data+"): does not have a callback\n");
 		}
 	}
-
 	return true;
 }
 
 //////////////////////
 function DKClose(data)
 {
-	//DKDebug(data);
-	DKLog("DKClose("+data+")\n", DKINFO);
+	DKDEBUGFUNC(data);
+	DKINFO("DKClose("+data+")\n");
 	if(!data){
-		DKLog("DKClose("+data+"): data empty \n", DKERROR);
+		DKERROR("DKClose("+data+"): data empty\n");
 		return false;
 	}
 	
@@ -163,7 +157,7 @@ function DKClose(data)
 	
 	var file = DKFile_GetFilename(arry[1]);
 	if(!file){ 
-		DKLog("DKClose("+data+"): file invalid \n", DKERROR);
+		DKERROR("DKClose("+data+"): file invalid\n");
 		return false; 
 	}
 	
@@ -175,33 +169,33 @@ function DKClose(data)
 			func(); // Call the jsclass_End() function
 		}
 		else{
-			DKLog(name+" is not callable \n", DKWARN);
+			DKWARN(name+" is not callable\n");
 		}
 		var script = document.getElementById(arry[1]);
 		if(!script){
-			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKWARN);
+			//DKWARN("DKClose("+data+"): "+arry[1]+" does not exist\n");
 			return false;
 		}
 		script.parentNode.removeChild(script);
-		//DKLog("Closed "+arry[1]+"\n");
+		//DKINFO("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKWidget"){
 		var element = document.getElementById(arry[1]);
 		if(!element){ 
-			//DKLog("DKClose("+data+"): "+file+" does not exist \n", DKWARN);
+			//DKWARN("DKClose("+data+"): "+file+" does not exist\n");
 			return false; 
 		}
 		element.parentNode.removeChild(element);
-		//DKLog("Closed "+arry[1]+"\n");
+		//DKINFO("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKCss"){
 		var css = document.getElementById(arry[1]);
 		if(!css){ 
-			//DKLog("DKClose("+data+"): "+arry[1]+" does not exist \n", DKERROR);
+			//DKERROR("DKClose("+data+"): "+arry[1]+" does not exist\n");
 			return false; 
 		}
 		css.parentNode.removeChild(css);
-		//DKLog("Closed "+arry[1]+"\n");
+		//DKINFO("Closed "+arry[1]+"\n");
 	}
 	
 	return true;
@@ -210,15 +204,14 @@ function DKClose(data)
 /////////////////////
 function LoadCss(url)
 {
-	DKDebug(url);
-	//DKLog("LoadCss("+url+")\n", DKDEBUG);
+	DKDEBUGFUNC(url);
 	if(!url){ 
-		DKLog("LoadCss("+url+"): url invalid\n", DKERROR);
+		DKERROR("LoadCss("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("LoadCss("+url+"): url already loaded \n", DKWARN);
+		DKWARN("LoadCss("+url+"): url already loaded\n");
 		return false;
 	}
 	
@@ -235,15 +228,14 @@ function LoadCss(url)
 //////////////////////////////
 function LoadJs(url, callback)
 {
-	DKDebug(url, callback);
-	//DKLog("LoadJs("+url+", callback)\n", DKDEBUG);
+	DKDEBUGFUNC(url, callback);
 	if(!url){ 
-		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
+		DKERROR("LoadJs("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		//DKLog("LoadJs("+url+", callback): url already loaded \n", DKWARN);
+		//DKWARN("LoadJs("+url+", callback): url already loaded\n");
 		callback && callback(false);
 		return false;
 	}
@@ -257,7 +249,7 @@ function LoadJs(url, callback)
 	
 	// Call the js init function
 	if(!file){ 
-		DKLog("LoadJs("+url+"): file invalid\n", DKERROR);
+		DKERROR("LoadJs("+url+"): file invalid\n");
 		return false; 
 	}
 	
@@ -269,7 +261,7 @@ function LoadJs(url, callback)
 	script.async = true; // optionally
 	
 	//if(typeof script == "undefined"){ 
-	//	DKLog("Cannot load "+url+" \n", DKERROR);
+	//	DKERROR("Cannot load "+url+"\n");
 	//	return false; 
 	//}
 	
@@ -282,14 +274,14 @@ function LoadJs(url, callback)
 	var done = false;
 	script.onload = script.onreadystatechange = function(){
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
-			DKLog("Loaded: "+url+"\n");
+			DKINFO("Loaded: "+url+"\n");
 			var func = window[init]; //Plugin_Init()    
 			if(typeof func == 'function'){ 
-				//DKLog("Calling: "+name+" \n");
+				//DKINFO("Calling: "+name+"\n");
 				func(); //Init
 			}
 			else{
-				DKLog(init+" is not defined\n", DKWARN);
+				DKWARN(init+" is not defined\n");
 			}
 			
 			done = true;
@@ -297,7 +289,7 @@ function LoadJs(url, callback)
 		}
 	};
 	script.onerror = function(){
-		DKLog("LoadJs("+url+"): Could not load file\n", DKERROR);
+		DKERROR("LoadJs("+url+"): Could not load file\n");
 	}
 	////////////////////////
 	
@@ -308,28 +300,27 @@ function LoadJs(url, callback)
 //////////////////////////////
 function LoadHtml(url, parent)
 {
-	DKDebug(url, parent);
-	//DKLog("LoadHtml("+url+","+parent+")\n", DKDEBUG);
+	DKDEBUGFUNC(url, parent);
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		DKLog("LoadJs("+url+"): url invalid\n", DKERROR);
+		DKERROR("LoadJs("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(url.indexOf(".html") == -1){ 
-		DKLog("LoadHtml("+url+", parent): url is not a valid .html file \n", DKERROR);
+		DKERROR("LoadHtml("+url+", parent): url is not a valid .html file\n");
 		return false;
 	}
 	
 	if(url == ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKLog("LoadHtml("+url+", parent): url already loaded \n", DKWARN);
+		DKWARN("LoadHtml("+url+", parent): url already loaded\n");
 		return false;
 	}
 	
 	var string = DK_FileToString(url);
-	//DKLog(string+"\n");
+	//DKINFO(string+"\n");
 	//Create an empty widget
 	if(!string || string == "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -339,22 +330,22 @@ function LoadHtml(url, parent)
 	temp.innerHTML = string;
 	var nodes = temp.childNodes;
 	if(!nodes){
-		DKLog("LoadHtml("+url+", "+parent+"): Could not get nodes from file url \n", DKERROR);
+		DKERROR("LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
 		return false;
 	}
 	if(nodes.length > 1){
-		DKLog("###############################################\n");
-		DKLog("LoadHtml("+url+", "+parent+"): Too many nodes in file. \n", DKWARN);
-		//DKLog(temp.innerHTML+"\n");
-		DKLog("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n", DKWARN);
-		DKLog("###############################################\n");
+		DKWARN("###############################################\n");
+		DKWARN("LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
+		//DKINFO(temp.innerHTML+"\n");
+		DKWARN("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
+		DKWARN("###############################################\n");
 		//return false;
 	}
 
 	if(nodes[0].id != url){
-		DKLog("LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n", DKWARN);
+		DKWARN("LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
 		nodes[0].id = url;
-		DKLog("LoadHtml("+url+",parent): please fix the id", DKWARN);
+		DKWARN("LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
 		parent.appendChild(nodes[0]);
@@ -369,21 +360,19 @@ function LoadHtml(url, parent)
 ///////////////////////////
 function CheckFileSupport()
 {
-	DKDebug();
-	//DKLog("CheckFileSupport()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(window.File && window.FileReader && window.FileList && window.Blob){
-		DKLog("File support OK.");
+		DKINFO("File support OK\n");
 	}
 	else {
-		DKLog("The File APIs are not fully supported in this browser.", DKERROR);
+		DKERROR("The File APIs are not fully supported in this browser\n");
 	}
 }
 
 ///////////////////////////
 function GetLeftPx(element)
 {
-	DKDebug(element);
-	//DKLog("GetLeftPx("+element+")\n", DKDEBUG);
+	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.left){ return 0; }
 	if(element.style.left.indexOf("%") > -1){
@@ -395,8 +384,7 @@ function GetLeftPx(element)
 //////////////////////////
 function GetTopPx(element)
 {
-	DKDebug(element);
-	//DKLog("GetTopPx("+element+")\n", DKDEBUG);
+	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.top){ return 0; }
 	if(element.style.top.indexOf("%") > -1){
@@ -408,8 +396,7 @@ function GetTopPx(element)
 ////////////////////////////
 function GetWidthPx(element)
 {
-	DKDebug(element);
-	//DKLog("GetWidthPx("+element+")\n", DKDEBUG);
+	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
 	if(element.style.width.indexOf("%") > -1){
@@ -421,8 +408,7 @@ function GetWidthPx(element)
 /////////////////////////////
 function GetHeightPx(element)
 {
-	DKDebug(element);
-	//DKLog("GetHeightPx("+element+")\n", DKDEBUG);
+	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
 	if(element.style.height.indexOf("%") > -1){
@@ -434,8 +420,7 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	DKDebug(event, id);
-	//DKLog("DragStart("+event+","+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, id);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -460,8 +445,7 @@ function DragStart(event, id)
 ////////////////////////
 function DragMove(event)
 {
-	DKDebug(event);
-	//DKLog("DragMove("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -515,8 +499,7 @@ function DragMove(event)
 ////////////////////////
 function DragStop(event)
 {
-	DKDebug(event);
-	//DKLog("DragStop("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
 	document.body.removeEventListener('touchmove', DragMove, false);
@@ -526,8 +509,7 @@ function DragStop(event)
 ///////////////////////////////
 function ResizeStart(event, id)
 {
-	DKDebug(event, id);
-	//DKLog("ResizeStart("+event+","+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, id);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -553,8 +535,7 @@ function ResizeStart(event, id)
 //////////////////////////
 function ResizeMove(event)
 {	
-	DKDebug(event);
-	//DKLog("ResizeMove("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -581,8 +562,7 @@ function ResizeMove(event)
 ///////////////////////
 function ResizeStop(id)
 {
-	DKDebug(id);
-	//DKLog("ResizeStop("+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(id);
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
 	document.body.removeEventListener('touchmove', ResizeMove, false);
@@ -592,8 +572,7 @@ function ResizeStop(id)
 //////////////////////
 function Pos(position)
 {
-	DKDebug(position);
-	//DKLog("Pos("+position+")\n", DKDEBUG);
+	DKDEBUGFUNC(position);
 	if(position == ''){
 		return position;	
 	}
@@ -630,22 +609,20 @@ function Pos(position)
 		}	
 	}
 	
-	DKLog("Pos() ERROR", DKERROR);
+	DKERROR("Pos() ERROR\n");
 }
 
 /////////////////////////
 function GetKeyNum(event)
 {
-	DKDebug(event);
-	//DKLog("GetKeyNum("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	return (event.charCode) ? event.charCode : event.keyCode; //IE or other
 }
 
 //////////////////////////////
 function PreventDefault(event)
 {
-	DKDebug(event);
-	//DKLog("PreventDefault("+event+")\n", DKDEBUG);	
+	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.preventDefault();
     } else {
@@ -657,8 +634,7 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	DKDebug(event);
-	//DKLog("StopPropagation("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -670,8 +646,7 @@ function StopPropagation(event)
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
-	DKDebug(elem, evnt, func.name);
-	//DKLog("addEvent("+elem+","+evnt+","+func.name+")\n", DKDEBUG);
+	DKDEBUGFUNC(elem, evnt, func.name);
 	if (elem.addEventListener){  // W3C DOM
 		elem.addEventListener(evnt,func,false);
 	}
@@ -693,8 +668,7 @@ function addEvent(elem, evnt, func)
 //////////////////////////////////////
 function removeEvent(elem, evnt, func)
 {
-	DKDebug(elem, evnt, func.name);
-	//DKLog("removeEvent("+elem+","+evnt+","+func.name+")\n", DKDEBUG);
+	DKDEBUGFUNC(elem, evnt, func.name);
 	if (elem.removeEventListener){  // W3C DOM
 		elem.removeEventListener(evnt,func);
 	}
@@ -716,8 +690,7 @@ function removeEvent(elem, evnt, func)
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
-	DKDebug(cname, cvalue, exdays);
-	//DKLog("setCookie("+cname+","+cvalue+","+exdays+")\n", DKDEBUG);
+	DKDEBUGFUNC(cname, cvalue, exdays);
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
@@ -727,8 +700,7 @@ function setCookie(cname, cvalue, exdays)
 /////////////////////////
 function getCookie(cname) 
 {
-	DKDebug(cname);
-	//DKLog("getCookie("+cname+")\n", DKDEBUG);
+	DKDEBUGFUNC(cname);
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) {
@@ -742,40 +714,35 @@ function getCookie(cname)
 //////////////////////
 function WindowWidth()
 {
-	DKDebug();
-	//DKLog("WindowWidth()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return document.documentElement.clientWidth;
 }
 
 ///////////////////////
 function WindowHeight()
 {
-	DKDebug();
-	//DKLog("WindowHeight()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return document.documentElement.clientHeight;
 }
 
 ////////////////////
 function GetMouseX()
 {
-	DKDebug();
-	//DKLog("GetMouseX()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return mouseX;
 }
 
 ////////////////////
 function GetMouseY()
 {
-	DKDebug();
-	//DKLog("GetMouseY()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return mouseY;
 }
 
 //////////////////////////
 function makeStruct(names)
 {
-	DKDebug(names);
-	//DKLog("makeStruct("+names+")\n", DKDEBUG);
+	DKDEBUGFUNC(names);
 	var names = names.split(' ');
 	var count = names.length;
 	function constructor(){
@@ -794,8 +761,7 @@ function makeStruct(names)
 //////////////////////////////////
 function replace(str, old, newstr)
 {
-	DKDebug(str, old, newstr);
-	//DKLog("replace("+str+","+old+","+newstr+")\n", DKDEBUG);
+	DKDEBUGFUNC(str, old, newstr);
 	var re = new RegExp(old, 'g');
 	return str.replace(re, newstr);
 }
@@ -810,8 +776,7 @@ if(typeof String.prototype.trim !== 'function') {
 //////////////////
 function IsLocal()
 {
-	DKDebug();
-	//DKLog("IsLocal()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	switch(window.location.protocol){
 		case 'http:':
 		case 'https:':
@@ -848,8 +813,7 @@ function IsLocal()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKDebug(url, output);
-	//DKLog("AjaxGet("+url+","+output+")\n", DKDEBUG);
+	DKDEBUGFUNC(url, output);
 	var request = "";
 	try {
         request = new XMLHttpRequest();
@@ -871,7 +835,7 @@ function AjaxGet(url, output)
     }catch(e){}
 
 	if(!request){
-		DKLog("AJAX ERROR: Error creating request object", DKERROR);
+		DKERROR("AJAX ERROR: Error creating request object\n");
 		return false;
 	}
 
@@ -879,12 +843,12 @@ function AjaxGet(url, output)
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;
-				//DKLog("AJAX RETURN: "+output.value);
+				//DKINFO("AJAX RETURN: "+output.value+"\n");
 				return true;
 			}
 			else{
-				DKLog("AJAX ERROR: "+url+" "+request.statusText, DKWARN); //report error
-				DKLog("status: "+request.status, DKWARN);
+				DKWARN("AJAX ERROR: "+url+" "+request.statusText+"\n"); //report error
+				DKWARN("status: "+request.status+"\n");
 				return false;
 			}
 		}
@@ -904,8 +868,7 @@ function AjaxGet(url, output)
 ////////////////////////
 function ajaxGetUrl(url)
 {
-	DKDebug(url);
-	//DKLog("ajaxGetUrl("+url+")\n", DKDEBUG);
+	DKDEBUGFUNC(url);
 	var response = new Object();
 	AjaxGet(url, response);
 	
@@ -919,7 +882,7 @@ function ajaxGetUrl(url)
 		place = response.value.indexOf("}");
 		var res = response.value.substring(n+1, place);
 		response.value = response.value.replace("{"+res+"}", "");
-		//DKLog("PHPLog: "+res+"\n");
+		//DKINFO("PHPLog: "+res+"\n");
 		n = response.value.indexOf("{");
 	}
 
