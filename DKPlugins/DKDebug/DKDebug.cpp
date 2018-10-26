@@ -69,7 +69,7 @@ protected:
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
 	virtual void OnOutput(LPCSTR szText){
 		//DKLog("StackWalkerToConsole(): OnOutput\n");
-		DKLog(szText, DKWARN);
+		DKWARN(szText);
 	}
 };
 
@@ -88,10 +88,10 @@ static LONG __stdcall CrashHandlerExceptionFilter(EXCEPTION_POINTERS* pExPtrs)
 	}
 #endif
 
-	DKLog("########## C++ CALL STACK ##########\n", DKWARN);
+	DKWARN("########## C++ CALL STACK ##########\n");
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), pExPtrs->ContextRecord);
-	DKLog("\n");
+	DKINFO("\n");
   
 	TCHAR lString[500];
 	_stprintf_s(lString,
@@ -202,7 +202,7 @@ void handler(int signum)
 ////////////////////
 bool DKDebug::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKDebugJS");
 	DKClass::DKCreate("DKDebugV8");
 	
@@ -238,14 +238,14 @@ bool DKDebug::Init()
 ///////////////////
 bool DKDebug::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKDebug::SendBugReport(const DKString& filename)
 {
-	DKDebug(filename);
+	DKDEBUGFUNC(filename);
 	if(!DKFile::Copy(DKFile::local_assets+"log.txt", DKFile::local_assets+DKString(filename)+".log", true, false)){ return false; }
 	DKCurl* dkCurl = DKCurl::Instance("DKCurl0");
 	if(!dkCurl->FtpConnect("ftp.aquawicket.com","dkupload","DKPassword123!", "21")){ return false; }
@@ -256,12 +256,12 @@ bool DKDebug::SendBugReport(const DKString& filename)
 /////////////////////////////////////////////////////////////
 bool DKDebug::ShowStackTrace(const void* input, void* output)
 {
-	DKDebug();
-	DKLog("########## C++ CALL STACK ##########\n", DKWARN);
+	DKDEBUGFUNC();
+	DKWARN("########## C++ CALL STACK ##########\n");
 #ifdef WIN32
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), NULL);
-	DKLog("\n");
+	DKINFO("\n");
 	return true;
 #else
 	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);

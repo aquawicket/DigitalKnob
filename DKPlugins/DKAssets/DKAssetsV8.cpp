@@ -6,7 +6,7 @@
 ///////////////////////
 bool DKAssetsV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
 	return true;
 }
@@ -14,14 +14,14 @@ bool DKAssetsV8::Init()
 //////////////////////
 bool DKAssetsV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKAssetsV8::LocalAssets(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	retval->SetString(0, DKFile::local_assets);
 	return true;
 }

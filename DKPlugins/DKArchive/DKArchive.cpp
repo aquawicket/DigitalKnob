@@ -11,17 +11,17 @@
 //////////////////////
 bool DKArchive::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;	
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKArchive::Extract(const DKString& file, const DKString& path)
 {
-	DKDebug(file, path);
+	DKDEBUGFUNC(file, path);
 	if(!DKFile::PathExists(file)){ return false; }
 
-	DKLog("Extracting "+file+" . . .\n");
+	DKINFO("Extracting "+file+" . . .\n");
 	DKFile::MakeDir(path);
 	DKFile::ChDir(path);
 
@@ -49,7 +49,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
     archive_write_disk_set_options(ext, flags);
     archive_write_disk_set_standard_lookup(ext);
 	if ((r = archive_read_open_filename(a, file.c_str(), 10240))){
-		DKLog("r = archive_read_open_filename(a, file.c_str(), 10240)",DKERROR);    
+		DKERROR("r = archive_read_open_filename(a, file.c_str(), 10240)");    
 		return false;
 	}
      
@@ -60,7 +60,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
         if(r != ARCHIVE_OK)
 			fprintf(stderr, "%s\n", archive_error_string(a));
 		if(r < ARCHIVE_WARN){
-			DKLog("r < ARCHIVE_WARN ",DKERROR);  
+			DKERROR("r < ARCHIVE_WARN\n");  
 			return false;
 		}
         r = archive_write_header(ext, entry);
@@ -71,7 +71,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
 			if(r != ARCHIVE_OK)
 				fprintf(stderr, "%s\n", archive_error_string(ext));
 			if(r < ARCHIVE_WARN){
-				DKLog("r < ARCHIVE_WARN",DKERROR);    
+				DKERROR("r < ARCHIVE_WARN\n");    
 				return false;
 			}
 		}
@@ -79,7 +79,7 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
 		if(r != ARCHIVE_OK)
 			fprintf(stderr, "%s\n", archive_error_string(ext));
 		if(r < ARCHIVE_WARN){
-			DKLog("r < ARCHIVE_WARN",DKERROR);    
+			DKERROR("r < ARCHIVE_WARN\n");    
 			return false;
 		}
 	}
@@ -93,14 +93,14 @@ bool DKArchive::Extract(const DKString& file, const DKString& path)
     archive_write_free(ext);
 #endif
 
-	DKLog("Extract Complete: "+file+"\n");
+	DKINFO("Extract Complete: "+file+"\n");
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////
 bool DKArchive::Compress(const DKString& path, const DKString& file)
 {
-	DKDebug(path, file);	
+	DKDEBUGFUNC(path, file);	
 	if(!DKFile::PathExists(path)){ return false; }
 	DKStringArray files;
 	DKString _path;
@@ -169,7 +169,7 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 ////////////////////////////////////////////////////////////////
 int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 {
-	//DKDebug(ar, aw);	
+	//DKDEBUGFUNC(ar, aw);	
 	int r;
 	const void *buff;
 	size_t size;
@@ -191,8 +191,7 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw)
 			return (r);
 		r = archive_write_data_block(aw, buff, size, offset);
 		if (r != ARCHIVE_OK) {
-			DKLog("archive_write_data_block() - ",DKERROR);
-			DKLog(archive_error_string(aw),DKERROR);
+			DKERROR("archive_write_data_block() - "+DKString(archive_error_string(aw)));
 			return (r);
 		}
 	}

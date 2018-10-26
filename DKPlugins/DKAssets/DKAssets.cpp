@@ -10,7 +10,7 @@
 /////////////////////
 bool DKAssets::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKString datapath;
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
@@ -30,7 +30,7 @@ bool DKAssets::Init()
 #endif		
 	}
 	
-	DKLog("DKFile::local_assets = "+DKFile::local_assets+"\n");
+	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
 #ifdef WIN32
 	DKAssets::CopyAssets(NULL, NULL);
@@ -83,14 +83,14 @@ bool DKAssets::Init()
 		DKFile::online_assets = "http://digitalknob.com/"+app_name;
 	}
 
-	DKLog("DKFile::online_assets = "+DKFile::online_assets+"\n");
+	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
 	return true;
 }
 
 ////////////////////////////////////////////////
 bool DKAssets::AquireDataPath(DKString& exepath)
 {
-	DKDebug(exepath);
+	DKDEBUGFUNC(exepath);
     unsigned found = 0;
 #ifdef WIN32
     exepath = DKFile::exe_path;
@@ -135,14 +135,14 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 	return true;
 #endif
 	
-	DKLog("DKFile::AquireDataPath() not implemented on this OS \n", DKERROR);
+	DKERROR("DKFile::AquireDataPath() not implemented on this OS \n");
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
-	DKDebug(path);;
+	DKDEBUGFUNC(path);;
 	DKFile::local_assets = path;
 
 	//if there is an assets directory under this, then we are in a development environment.
@@ -209,7 +209,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 ///////////////////////////////////////////////////////
 bool DKAssets::AppendDataPath(const DKString& datapath)
 {
-	DKDebug(datapath);
+	DKDEBUGFUNC(datapath);
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){
 		fl.push_back(datapath);
@@ -222,7 +222,7 @@ bool DKAssets::AppendDataPath(const DKString& datapath)
 ///////////////////////////////////////////////////////////////
 bool DKAssets::PackageAssets(DKString& input, DKString& output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #if !defined(ANDROID)
 	DKArchive::Compress(input, input+"/../assets.zip");
 #endif
@@ -253,15 +253,15 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 //////////////////////////////////////////////////////////////////////////////////
 bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_size)
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if(has(DKFile::local_assets, "/assets")){ return false; }
 	if(has(DKFile::local_assets, "\\assets")){ return false; }
 	if(DKFile::PathExists(DKFile::local_assets+"ASSETS")){ return false; }
-	DKLog("Copying Assets . . . \n");
+	DKINFO("Copying Assets . . . \n");
 	
 	//Save User data
 	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
-		DKLog("Backing up user data \n");
+		DKINFO("Backing up user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	}
 	
@@ -280,14 +280,14 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 #endif
 
 #ifdef WIN32
-	DKLog("Extracting assets.zip form Windows resource. \n");
+	DKINFO("Extracting assets.zip form Windows resource. \n");
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
 	HRSRC hRes;						// handle/ptr. to res. info. 
 	char *lpResLock;				// pointer to resource data 
 	DWORD dwSizeRes;
 
 	DKFile::MakeDir(DKFile::local_assets);
-	DKLog(DKFile::local_assets + "assets.zip \n");
+	DKINFO(DKFile::local_assets + "assets.zip \n");
 	DKString strOutputLocation = DKFile::local_assets + "assets.zip";
 	hRes = FindResource(NULL, MAKEINTRESOURCE(321), RT_RCDATA); // find location of the resource and get handle to it
 	hResourceLoaded = LoadResource(NULL, hRes); // loads the specified resource into global memory. 
@@ -312,7 +312,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	//Restore User data
 	DKFile::MakeDir(DKFile::local_assets+"USER");
 	if (DKFile::PathExists(DKFile::local_assets + "../USER")){
-		DKLog("Restoring  user data \n");
+		DKINFO("Restoring  user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "../USER", DKFile::local_assets + "USER", true, true);
 		DKFile::Delete(DKFile::local_assets + "../USER");
 	}
