@@ -7,7 +7,7 @@ std::map<DKString, boost::function<bool (const void*, void*)> > DKClass::functio
 //////////////////////////////////////////////////////////////////////////////
 void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
 {
-	DKDEBUG(klass, _class, singleton);
+	DKDEBUGFUNC(klass, _class, singleton);
 	if(!classes){ classes = new std::map<DKString, DKClass*>(); }
 	if((*classes)[klass]){ return; } //already exists
 	(*classes)[klass] = _class;
@@ -19,7 +19,7 @@ void DKClass::Register(const DKString& klass, DKClass* _class, bool singleton)
 //////////////////////////////////////////////////
 DKObject* DKClass::_Instance(const DKString& data)
 {
-	DKDEBUG(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 
@@ -49,7 +49,7 @@ DKObject* DKClass::_Instance(const DKString& data)
 /////////////////////////////////////////////
 DKObject* DKClass::_Get(const DKString& data)
 {
-	DKDEBUG(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -67,7 +67,7 @@ DKObject* DKClass::_Get(const DKString& data)
 //////////////////////////////////////////
 bool DKClass::_Valid(const DKString& data)
 {
-	//DKDEBUG(data);
+	//DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -85,7 +85,7 @@ bool DKClass::_Valid(const DKString& data)
 //////////////////////////////////////////////
 bool DKClass::_Available(const DKString& data)
 {
-	DKDEBUG(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
@@ -107,7 +107,7 @@ bool DKClass::_Available(const DKString& data)
 //////////////////////////////////////////
 void DKClass::_Close(const DKString& data)
 {
-	DKDEBUG(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(has(arry[0],".html")){
@@ -136,7 +136,7 @@ void DKClass::_Close(const DKString& data)
 ////////////////////////
 void DKClass::CloseAll()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); rit++){
 		if((*classes)[rit->first]){
@@ -154,7 +154,7 @@ void DKClass::CloseAll()
 ///////////////////////////////////////////////
 void DKClass::GetClassList(DKStringArray& list)
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	std::map<DKString, DKClass*>::reverse_iterator rit;
 	for (rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if ((*classes)[rit->first]){
@@ -166,7 +166,7 @@ void DKClass::GetClassList(DKStringArray& list)
 /////////////////////////////////////////////
 void DKClass::GetObjects(DKStringArray& list)
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	
 	list.clear();
 	std::map<DKString, DKClass*>::iterator it;

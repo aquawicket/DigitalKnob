@@ -165,7 +165,7 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 ////////////////////////////////////////////////
 void SetLog(const int lvl, const DKString& text)
 {
-	DKDEBUG(lvl, text);
+	DKDEBUGFUNC(lvl, text);
 
 	if(lvl == DK_ERROR){
 		if(same(text,"OFF")){

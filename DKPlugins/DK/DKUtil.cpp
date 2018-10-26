@@ -50,7 +50,7 @@ float DKUtil::framespersecond = 0;
 ///////////////////
 bool DKUtil::Beep()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	std::cout << '\a' << std::flush;
 	return true;
 }
@@ -58,7 +58,7 @@ bool DKUtil::Beep()
 /////////////////////////////////////////////////////////////////
 bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 {
-	DKDEBUG(input, output);
+	DKDEBUGFUNC(input, output);
 #ifndef MAC
 	char *buf;
 	const char* ident  = "assets";
@@ -110,7 +110,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKString& output)
 {
-	DKDEBUG(header, size, output);
+	DKDEBUGFUNC(header, size, output);
 #ifndef MAC
 	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
 	file.write(header, size);
@@ -123,7 +123,7 @@ bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKStr
 ///////////////////////
 bool DKUtil::CallExit()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef ANDROID
 	CallJavaFunction("Exit","");
 #endif
@@ -140,7 +140,7 @@ bool DKUtil::CallExit()
 ///////////////////////////////
 bool DKUtil::CpuUsed(int& cpu)
 {
-	DKDEBUG(cpu);
+	DKDEBUGFUNC(cpu);
 #ifdef WIN32
 	return DKWindows::CpuUsed(cpu);
 #endif
@@ -157,7 +157,7 @@ bool DKUtil::CpuUsed(int& cpu)
 ///////////////////////////////////
 bool DKUtil::CpuUsedByApp(int& cpu)
 {
-	DKDEBUG(cpu);
+	DKDEBUGFUNC(cpu);
 #ifdef WIN32
 	return DKWindows::CpuUsedByApp(cpu);
 #endif
@@ -174,7 +174,7 @@ bool DKUtil::CpuUsedByApp(int& cpu)
 //////////////////////////
 bool DKUtil::DoubleClick()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	DKWindows::LeftClick();
 	return DKWindows::LeftClick();
@@ -186,7 +186,7 @@ bool DKUtil::DoubleClick()
 ///////////////////////////////////////////////////
 bool DKUtil::DrawTextOnScreen(const DKString& text)
 {
-	DKDEBUG(text);
+	DKDEBUGFUNC(text);
 #ifdef WIN32
 	return DKWindows::DrawTextOnScreen(text);
 #endif
@@ -197,7 +197,7 @@ bool DKUtil::DrawTextOnScreen(const DKString& text)
 ////////////////////////////////////////////////////////////
 bool DKUtil::Execute(const DKString& command, DKString& rtn)
 {
-	DKDEBUG(command, rtn);
+	DKDEBUGFUNC(command, rtn);
 #ifdef WIN32
 	FILE* pipe = _popen(command.c_str(), "r");
 	if(!pipe){
@@ -234,7 +234,7 @@ bool DKUtil::Execute(const DKString& command, DKString& rtn)
 /////////////////////////////////////////////////////////////////////
 bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y)
 {
-	DKDEBUG(file, x, y);
+	DKDEBUGFUNC(file, x, y);
 #ifdef WIN32
 	return DKWindows::FindImageOnScreen(file, x, y);
 #endif
@@ -245,7 +245,7 @@ bool DKUtil::FindImageOnScreen(const DKString& file, int& x, int& y)
 /////////////////////////////////////////
 bool DKUtil::GetClipboard(DKString& text)
 {
-	DKDEBUG(text);
+	DKDEBUGFUNC(text);
 #ifdef WIN32
 	return DKWindows::GetClipboard(text);
 #endif
@@ -259,7 +259,7 @@ bool DKUtil::GetClipboard(DKString& text)
 ////////////////////////////////////
 bool DKUtil::GetDate(DKString& date)
 {
-	DKDEBUG(date);
+	DKDEBUGFUNC(date);
 	time_t t = time(0);   // get time now
 	struct tm * now = localtime(&t);
 
@@ -278,7 +278,7 @@ bool DKUtil::GetDate(DKString& date)
 //////////////////////////////////////
 bool DKUtil::GetFps(unsigned int& fps)
 {
-	DKDEBUG(fps);
+	DKDEBUGFUNC(fps);
 	fps = (unsigned int)framespersecond;
 	return true;
 }
@@ -286,7 +286,7 @@ bool DKUtil::GetFps(unsigned int& fps)
 /////////////////////////////////////////
 bool DKUtil::GetFramerate(int& framerate)
 {
-	DKDEBUG(framerate);
+	DKDEBUGFUNC(framerate);
 	framerate = DKUtil::_fps;
 	return true;
 }
@@ -294,7 +294,7 @@ bool DKUtil::GetFramerate(int& framerate)
 ////////////////////////////////////
 bool DKUtil::GetFrames(long& frames)
 {
-	DKDEBUG(frames);
+	DKDEBUGFUNC(frames);
 	frames = framecount;
 	return true;
 }
@@ -302,7 +302,7 @@ bool DKUtil::GetFrames(long& frames)
 /////////////////////////////
 bool DKUtil::GetKey(int& key)
 {
-	DKDEBUG(key);
+	DKDEBUGFUNC(key);
 #if defined(WIN32)
 	return DKWindows::GetKey(key);
 #endif
@@ -322,7 +322,7 @@ bool DKUtil::GetKey(int& key)
 /////////////////////////////////////
 bool DKUtil::GetLocalIP(DKString& ip)
 {
-	DKDEBUG(ip);
+	DKDEBUGFUNC(ip);
 	boost::asio::io_service io_service; 
 	boost::asio::ip::tcp::resolver resolver(io_service); 
 	boost::asio::ip::tcp::resolver::query query(boost::asio::ip::tcp::v4(), boost::asio::ip::host_name(), ""); 
@@ -336,7 +336,7 @@ bool DKUtil::GetLocalIP(DKString& ip)
 ////////////////////////////////////////
 bool DKUtil::GetMousePos(int& x, int& y)
 {
-	DKDEBUG(x, y);
+	DKDEBUGFUNC(x, y);
 #ifdef WIN32
 	return DKWindows::GetMousePos(x, y);
 #endif
@@ -356,7 +356,7 @@ bool DKUtil::GetMousePos(int& x, int& y)
 ///////////////////////////////////////////////////////////////////
 bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y)
 {
-	DKDEBUG(image, x, y);
+	DKDEBUGFUNC(image, x, y);
 #ifdef WIN32
 	return DKWindows::GetPixelFromImage(image, x, y);
 #endif
@@ -367,7 +367,7 @@ bool DKUtil::GetPixelFromImage(const DKString& image, int x, int y)
 /////////////////////////////////////////////////////////////////////
 bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 {
-	DKDEBUG(x, y, r, g, b);
+	DKDEBUGFUNC(x, y, r, g, b);
 #ifdef WIN32
 	return DKWindows::GetPixelFromScreen(x, y, r, g, b);
 #endif
@@ -378,7 +378,7 @@ bool DKUtil::GetPixelFromScreen(int x, int y, int& r, int& g, int& b)
 ///////////////////////////////////////////
 bool DKUtil::GetProcessList(DKString& list)
 {
-	DKDEBUG(list);
+	DKDEBUGFUNC(list);
 #ifdef WIN32
 	return DKWindows::GetProcessList(list);
 #endif
@@ -389,7 +389,7 @@ bool DKUtil::GetProcessList(DKString& list)
 ////////////////////////////////////
 bool DKUtil::GetScreenHeight(int& h)
 {
-	DKDEBUG(h);
+	DKDEBUGFUNC(h);
 #ifdef WIN32
 	return DKWindows::GetScreenHeight(h);
 #endif
@@ -406,7 +406,7 @@ bool DKUtil::GetScreenHeight(int& h)
 ///////////////////////////////////
 bool DKUtil::GetScreenWidth(int& w)
 {
-	DKDEBUG(w);
+	DKDEBUGFUNC(w);
 #ifdef WIN32
 	return DKWindows::GetScreenWidth(w);
 #endif
@@ -423,7 +423,7 @@ bool DKUtil::GetScreenWidth(int& w)
 ///////////////////////////////////////////////
 bool DKUtil::GetThreadId(unsigned long int& id)
 {
-	DKDEBUG(id);
+	DKDEBUGFUNC(id);
 #ifdef WIN32
 	return DKWindows::GetThreadId(id);
 #endif
@@ -448,7 +448,7 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 ////////////////////////////////////
 bool DKUtil::GetTicks(long& ticks)
 {
-	//DKDEBUG(ticks);
+	//DKDEBUGFUNC(ticks);
 	
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
@@ -468,7 +468,7 @@ bool DKUtil::GetTicks(long& ticks)
 /////////////////////////////////////
 bool DKUtil::GetTime(DKString& _time)
 {
-	DKDEBUG(_time);
+	DKDEBUGFUNC(_time);
 	time_t t = time(0);   // get time now
 	struct tm * now = localtime(&t);
 
@@ -493,7 +493,7 @@ bool DKUtil::GetTime(DKString& _time)
 ////////////////////////////////////
 bool DKUtil::GetVolume(int& percent)
 {
-	DKDEBUG(percent);
+	DKDEBUGFUNC(percent);
 #ifdef WIN32
 	return DKWindows::GetVolume(percent);
 #endif
@@ -507,7 +507,7 @@ bool DKUtil::GetVolume(int& percent)
 ///////////////////////////
 bool DKUtil::InMainThread()
 {
-	//DKDEBUG(); // DON'T DO THIS
+	//DKDEBUGFUNC(); // DON'T DO THIS
 #ifdef WIN32
 	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
 	//DKLog(tid); DO NOT DO THIS!
@@ -527,7 +527,7 @@ bool DKUtil::InMainThread()
 //////////////////////
 bool DKUtil::InitFps()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	memset(frametimes, 0, sizeof(frametimes)); // Set all frame times to 0ms
 	return DKUtil::GetTicks(frametimelast);
 }
@@ -535,7 +535,7 @@ bool DKUtil::InitFps()
 ////////////////////////////
 bool DKUtil::InitFramerate()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	GetTicks(DKUtil::now);
 	DKUtil::GetTicks(DKUtil::lastFrame);
 	DKUtil::GetTicks(DKUtil::lastSecond);
@@ -545,7 +545,7 @@ bool DKUtil::InitFramerate()
 ////////////////////////////////
 bool DKUtil::KeyIsDown(int& key)
 {
-	DKDEBUG(key);
+	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::KeyIsDown(key);
 #endif
@@ -559,7 +559,7 @@ bool DKUtil::KeyIsDown(int& key)
 ////////////////////////
 bool DKUtil::LeftClick()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LeftClick();
 #endif
@@ -570,7 +570,7 @@ bool DKUtil::LeftClick()
 ////////////////////////
 bool DKUtil::LeftPress()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LeftPress();
 #endif
@@ -587,7 +587,7 @@ bool DKUtil::LeftPress()
 //////////////////////////
 bool DKUtil::LeftRelease()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LeftRelease();
 #endif
@@ -604,7 +604,7 @@ bool DKUtil::LeftRelease()
 /////////////////////////////
 bool DKUtil::LimitFramerate()
 {
-	//DKDEBUG();
+	//DKDEBUGFUNC();
 	if(!DKUtil::now){ DKUtil::InitFramerate(); }
 	//Framerate / cpu limiter
 	DKUtil::GetTicks(DKUtil::now);
@@ -621,7 +621,7 @@ bool DKUtil::LimitFramerate()
 //////////////////////////////
 bool DKUtil::LowPowerMonitor()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::LowPowerMonitor();
 #endif
@@ -632,7 +632,7 @@ bool DKUtil::LowPowerMonitor()
 //////////////////////////
 bool DKUtil::MiddlePress()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::MiddlePress();
 #endif
@@ -649,7 +649,7 @@ bool DKUtil::MiddlePress()
 ////////////////////////////
 bool DKUtil::MiddleRelease()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::MiddleRelease();
 #endif
@@ -666,7 +666,7 @@ bool DKUtil::MiddleRelease()
 ///////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory)
 {
-	DKDEBUG(physicalMemory);
+	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemory(physicalMemory);
 #endif
@@ -683,7 +683,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory)
 ///////////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 {
-	DKDEBUG(physicalMemory);
+	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsed(physicalMemory);
 #endif
@@ -700,7 +700,7 @@ bool DKUtil::PhysicalMemoryUsed(unsigned long long& physicalMemory)
 //////////////////////////////////////////////////////////////////
 bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 {
-	DKDEBUG(physicalMemory);
+	DKDEBUGFUNC(physicalMemory);
 #ifdef WIN32
 	return DKWindows::PhysicalMemoryUsedByApp(physicalMemory);
 #endif
@@ -717,7 +717,7 @@ bool DKUtil::PhysicalMemoryUsedByApp(unsigned int& physicalMemory)
 /////////////////////////////////////
 bool DKUtil::PressKey(const int& key)
 {
-	DKDEBUG(key);
+	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::PressKey(key);
 #endif
@@ -734,7 +734,7 @@ bool DKUtil::PressKey(const int& key)
 ///////////////////////////////////////
 bool DKUtil::ReleaseKey(const int& key)
 {
-	DKDEBUG(key);
+	DKDEBUGFUNC(key);
 #ifdef WIN32
 	return DKWindows::ReleaseKey(key);
 #endif
@@ -751,7 +751,7 @@ bool DKUtil::ReleaseKey(const int& key)
 /////////////////////////
 bool DKUtil::RightClick()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::RightClick();
 #endif
@@ -762,7 +762,7 @@ bool DKUtil::RightClick()
 /////////////////////////
 bool DKUtil::RightPress()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::RightPress();
 #endif
@@ -779,7 +779,7 @@ bool DKUtil::RightPress()
 ///////////////////////////
 bool DKUtil::RightRelease()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::RightRelease();
 #endif
@@ -796,7 +796,7 @@ bool DKUtil::RightRelease()
 ///////////////////////////////
 bool DKUtil::Round(double& num)
 {
-	DKDEBUG(num);
+	DKDEBUGFUNC(num);
 	num = (num < 0.0 ? ceil(num - 0.5) : floor(num + 0.5));
 	return true;
 }
@@ -804,7 +804,7 @@ bool DKUtil::Round(double& num)
 /////////////////////////////////////////////////////////////////
 bool DKUtil::Run(const DKString& command, const DKString& params)
 {
-	DKDEBUG(command, params);
+	DKDEBUGFUNC(command, params);
 #ifdef WIN32
 	DKString error;
 	PVOID OldValue = NULL;
@@ -840,7 +840,7 @@ bool DKUtil::Run(const DKString& command, const DKString& params)
 //////////////////////////////////////////////
 bool DKUtil::SetBrightness(const int& percent)
 {
-	DKDEBUG(percent);
+	DKDEBUGFUNC(percent);
 #ifdef WIN32
 	return DKWindows::SetBrightness(percent);
 #endif
@@ -854,7 +854,7 @@ bool DKUtil::SetBrightness(const int& percent)
 ///////////////////////
 bool DKUtil::SendTick()
 {
-	//DKDEBUG();
+	//DKDEBUGFUNC();
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		DKEvent::SendEvent("GLOBAL", "second", "");
 		DKUtil::GetTicks(lastSecond);
@@ -865,7 +865,7 @@ bool DKUtil::SendTick()
 ///////////////////////////////////////////////
 bool DKUtil::SetClipboard(const DKString& text)
 {
-	DKDEBUG(text);
+	DKDEBUGFUNC(text);
 #ifdef WIN32
 	return DKWindows::SetClipboard(text);
 #endif
@@ -879,7 +879,7 @@ bool DKUtil::SetClipboard(const DKString& text)
 ////////////////////////////////////////////////////////
 bool DKUtil::SetClipboardFiles(const DKString& filelist)
 {
-	DKDEBUG(filelist);
+	DKDEBUGFUNC(filelist);
 #ifdef WIN32
 	return DKWindows::SetClipboardFiles(filelist);
 #endif
@@ -890,7 +890,7 @@ bool DKUtil::SetClipboardFiles(const DKString& filelist)
 ////////////////////////////////////////////////////
 bool DKUtil::SetClipboardImage(const DKString& file)
 {
-	DKDEBUG(file);
+	DKDEBUGFUNC(file);
 #ifdef WIN32
 	return DKWindows::SetClipboardImage(file);
 #endif
@@ -901,7 +901,7 @@ bool DKUtil::SetClipboardImage(const DKString& file)
 /////////////////////////////////////////
 bool DKUtil::SetFramerate(const int& fps)
 {
-	DKDEBUG(fps);
+	DKDEBUGFUNC(fps);
 	_fps = fps;
 	if(_fps == 0){ ticksPerFrame = 0; return true; }
 	ticksPerFrame = 1000 / _fps;
@@ -911,7 +911,7 @@ bool DKUtil::SetFramerate(const int& fps)
 ///////////////////////////////
 bool DKUtil::SetMainThreadNow()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
 #ifdef WIN32
 	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
@@ -935,7 +935,7 @@ bool DKUtil::SetMainThreadNow()
 ////////////////////////////////////////////////////
 bool DKUtil::SetMousePos(const int& x, const int& y)
 {
-	DKDEBUG(x, y);
+	DKDEBUGFUNC(x, y);
 #ifdef WIN32
 	return DKWindows::SetMousePos(x, y);
 #endif
@@ -952,7 +952,7 @@ bool DKUtil::SetMousePos(const int& x, const int& y)
 ////////////////////////////////////
 bool DKUtil::SetVolume(int& percent)
 {
-	DKDEBUG(percent);
+	DKDEBUGFUNC(percent);
 #ifdef WIN32
 	return DKWindows::SetVolume(percent);
 #endif
@@ -966,7 +966,7 @@ bool DKUtil::SetVolume(int& percent)
 ///////////////////////////////////////////
 bool DKUtil::Sleep(const int& milliseconds)
 {
-	//DKDEBUG(milliseconds);
+	//DKDEBUGFUNC(milliseconds);
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
 #else
@@ -978,7 +978,7 @@ bool DKUtil::Sleep(const int& milliseconds)
 //////////////////////////////////////
 bool DKUtil::StrokeKey(const int& key)
 {
-	DKDEBUG(key);
+	DKDEBUGFUNC(key);
 #ifdef WIN32
 	DKWindows::PressKey(key);
 	return DKWindows::ReleaseKey(key);
@@ -990,7 +990,7 @@ bool DKUtil::StrokeKey(const int& key)
 ////////////////////////////////////////////
 bool DKUtil::System(const DKString& command)
 {
-	DKDEBUG(command);
+	DKDEBUGFUNC(command);
 #if !defined(IOS)
 	int rval = system(command.c_str());
 	//DKLog("DKUtil::System(): returned "+toString(rval)+"\n");
@@ -1002,7 +1002,7 @@ bool DKUtil::System(const DKString& command)
 /////////////////////////////
 bool DKUtil::TurnOffMonitor()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::TurnOffMonitor();
 #endif
@@ -1019,7 +1019,7 @@ bool DKUtil::TurnOffMonitor()
 ////////////////////////////
 bool DKUtil::TurnOnMonitor()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::TurnOnMonitor();
 #endif
@@ -1030,7 +1030,7 @@ bool DKUtil::TurnOnMonitor()
 ////////////////////////
 bool DKUtil::UpdateFps()
 {
-	//DKDEBUG();
+	//DKDEBUGFUNC();
 	if(!frametimelast){ DKUtil::InitFps(); }
 	long frametimesindex;
 	long getticks;
@@ -1066,7 +1066,7 @@ bool DKUtil::UpdateFps()
 ////////////////////////////////////////////////
 bool DKUtil::VirtualMemory(unsigned long long& virtualMemory)
 {
-	DKDEBUG(virtualMemory);
+	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemory(virtualMemory);
 #endif
@@ -1083,7 +1083,7 @@ bool DKUtil::VirtualMemory(unsigned long long& virtualMemory)
 /////////////////////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory)
 {
-	DKDEBUG(virtualMemory);
+	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsed(virtualMemory);
 #endif
@@ -1100,7 +1100,7 @@ bool DKUtil::VirtualMemoryUsed(unsigned long long& virtualMemory)
 ////////////////////////////////////////////////////////////////
 bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 {
-	DKDEBUG(virtualMemory);
+	DKDEBUGFUNC(virtualMemory);
 #ifdef WIN32
 	return DKWindows::VirtualMemoryUsedByApp(virtualMemory);
 #endif
@@ -1117,7 +1117,7 @@ bool DKUtil::VirtualMemoryUsedByApp(unsigned int& virtualMemory)
 ////////////////////////////////////////////////////////////
 bool DKUtil::WaitForImage(const DKString& file, int timeout)
 {
-	DKDEBUG(file, timeout);
+	DKDEBUGFUNC(file, timeout);
 #ifdef WIN32
 	return DKWindows::WaitForImage(file, timeout);
 #endif
@@ -1128,7 +1128,7 @@ bool DKUtil::WaitForImage(const DKString& file, int timeout)
 ////////////////////////
 bool DKUtil::WheelDown()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::WheelDown();
 #endif
@@ -1139,7 +1139,7 @@ bool DKUtil::WheelDown()
 //////////////////////
 bool DKUtil::WheelUp()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	return DKWindows::WheelUp();
 #endif

@@ -43,7 +43,7 @@ public:
 	///////////////////////////////////////////////
 	static DKObject* DKCreate(const DKString& data)
 	{
-		DKDEBUG(data); //data = (class,id,var1,var2,var3,etc)
+		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
 		DKINFO("DKClass::DKCreate("+data+")\n");
 		return DKClass::_Instance(data);
 	}
@@ -51,28 +51,28 @@ public:
 	////////////////////////////////////////////
 	static DKObject* DKGet(const DKString& data)
 	{
-		DKDEBUG(data); //data = (class,id)
+		DKDEBUGFUNC(data); //data = (class,id)
 		return DKClass::_Get(data);
 	}
 
 	/////////////////////////////////////////
 	static bool DKValid(const DKString& data)
 	{
-		//DKDEBUG(data); //data = (class,id)
+		//DKDEBUGFUNC(data); //data = (class,id)
 		return DKClass::_Valid(data);
 	}
 
 	/////////////////////////////////////////////
 	static bool DKAvailable(const DKString& data)
 	{
-		DKDEBUG(data); //data = (class,id)
+		DKDEBUGFUNC(data); //data = (class,id)
 		return DKClass::_Available(data);
 	}
 
 	/////////////////////////////////////////
 	static void DKClose(const DKString& data)
 	{
-		DKDEBUG(data); //data = (class,id)
+		DKDEBUGFUNC(data); //data = (class,id)
 		DKClass::_Close(data);
 	}
 
@@ -80,7 +80,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this)
 	{
-		DKDEBUG(name, func, _this);
+		DKDEBUGFUNC(name, func, _this);
 		functions[name] = boost::bind(func, _this, _1, _2);
 		if(!functions[name]){
 			DKLOG("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
@@ -91,7 +91,7 @@ public:
 	////////////////////////////////////////////////
 	static void UnregisterFunc(const DKString& name)
 	{
-		DKDEBUG(name);
+		DKDEBUGFUNC(name);
 		functions.erase(name);
 		if(functions[name]) {
 			DKERROR("UnegisterFunc("+name+"): failed to unregister function \n");
@@ -102,14 +102,14 @@ public:
 	/////////////////////////////////////////
 	static bool HasFunc(const DKString& name)
 	{
-		DKDEBUG(name);
+		DKDEBUGFUNC(name);
 		return functions[name];
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	static bool CallFunc(const DKString& name, const void* input, void* output)
 	{
-		//DKDEBUG(name, input, output); //excessive logging
+		//DKDEBUGFUNC(name, input, output); //excessive logging
 		if(!functions[name]){ 
 			DKWARN("CallFunc("+name+") not registered\n");
 			return false;

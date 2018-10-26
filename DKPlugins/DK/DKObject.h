@@ -23,7 +23,7 @@ public:
 	//////////////////////////////////////////
 	virtual void SetData(const DKString& data)
 	{
-		DKDEBUG(data);
+		DKDEBUGFUNC(data);
 		toStringArray(this->data, data, ",");
 	}
 };
@@ -38,7 +38,7 @@ public:
 	/////////////////////////////////////////
 	static void SetName(const DKString& name)
     {
-		DKDEBUG(name);
+		DKDEBUGFUNC(name);
 #ifdef WIN32
 		if(!classname){ classname = _strdup(name.c_str()); }
 #else
@@ -49,7 +49,7 @@ public:
 	///////////////////////
 	static void Singleton()
     {
-		DKDEBUG();
+		DKDEBUGFUNC();
 		singleton = true;
 		instances.clear();
 	}
@@ -57,7 +57,7 @@ public:
 	////////////////////////////////////////
 	static T* Instance(const DKString& data)
     {
-		//DKDEBUG(data);
+		//DKDEBUGFUNC(data);
 		//if(has(data, ".js")){
 		//	DKLog("DKObject::Instance(): this is a .js file. Can't work for Cef.\n", DKERROR);
 		//}
@@ -115,7 +115,7 @@ public:
 	//////////////////////////////////////////
 	static void Close(const DKString& id = "")
 	{
-		DKDEBUG(id);		
+		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
 		for(unsigned int i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
 			if(id.empty() || same(id, instances[i]->data[1])){
@@ -139,7 +139,7 @@ public:
 	//////////////////////////////////////////
 	static bool Valid(const DKString& id = "")
 	{
-		//DKDEBUG(id);
+		//DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -154,7 +154,7 @@ public:
 	//////////////////////////////////////
 	static T* Get(const DKString& id = "")
 	{
-		DKDEBUG(id);
+		DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if(instances[i]){ 
@@ -169,7 +169,7 @@ public:
 	/////////////////////////////////////////////
 	static void GetInstances(DKStringArray& list)
 	{
-		DKDEBUG();
+		DKDEBUGFUNC();
 		/*
 		if(list.empty()){
 			DKLog("DKObject::GetInstances(): list is empty\n", DKWARN);
@@ -189,7 +189,7 @@ public:
 	/////////////////////////////////////////////////////
 	static void GetInstances(std::vector<T*>& _instances)
 	{
-		DKDEBUG();
+		DKDEBUGFUNC();
 		_instances = instances;
 	}
 
