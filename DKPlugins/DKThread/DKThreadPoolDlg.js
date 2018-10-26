@@ -30,7 +30,7 @@ function DKThreadPoolDlg_OnUpdate()
 {
 	DKDEBUGFUNC();
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
-	SVN("Update DKThreadPool\n");
+	DKINFO("Update DKThreadPool\n");
 	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
 
 	var name = DKThread_GetThreadNames();
