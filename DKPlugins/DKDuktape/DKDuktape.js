@@ -1,7 +1,7 @@
 DKLog("*************  DKDuktape.js *******************\n");
-var DKERROR = 1;
-var DKWARN = 2;
-var DKINFO = 3;
-var DKDEBUG = 4;
-var DKSHOW = 5;
-var DKHIDE = 6;
+//var DK_ERROR = 1;
+//var DK_WARN = 2;
+//var DK_INFO = 3;
+//var DK_DEBUG = 4;
+//var DK_SHOW = 5;
+//var DK_HIDE = 6;
