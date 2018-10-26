@@ -1,7 +1,7 @@
 /////////////////////////
 function DKHandles_Init()
 {
-	DKLog("DKHandles_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKHandles");
 	DKCreate("DKHandles/DKHandles.html");
 	DKAddEvent("refresh", "click", DKHandles_OnEvent);
@@ -22,7 +22,7 @@ function DKHandles_Init()
 ////////////////////////
 function DKHandles_End()
 {
-	DKLog("DKHandles_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKHandles_OnEvent);
 	DKClose("DKHandles/DKHandles.html");
 }
@@ -30,7 +30,7 @@ function DKHandles_End()
 /////////////////////////////////
 function DKHandles_OnEvent(event)
 {
-	DKLog("DKHandles_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event, "window")){
 		var handle = DKWidget_GetInnerHtml("window");
 		DKHandles_UpdateProperties(handle);
@@ -43,7 +43,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateWindowList();
     }
 	if(DK_Id(event, "search")){
-		//DKLog("search\n", DKINFO);
+		//DKINFO("search\n");
 		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
 		DKHandles_StartSearch();
     }
@@ -74,7 +74,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateProperties(handle);
 	}
 	if(DK_Type(event, "DKHandles_WindowChanged")){
-		//DKLog("DKHandles_WindowChanged\n", DKINFO);
+		//DKINFO("DKHandles_WindowChanged\n");
 		DKWidget_SetAttribute("search", "src", "DKHandles/win1.bmp");
 		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
@@ -84,11 +84,11 @@ function DKHandles_OnEvent(event)
 /////////////////////////////////////
 function DKHandles_UpdateWindowList()
 {
-	DKLog("DKHandles_UpdateWindowList()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKWidget_SetInnerHtml("windows", "");
 	var str = DKHandles_GetWindows();
 	if(!str){ return; }
-	//DKLog("WINDOW LIST: "+str+"\n");
+	//DKINFO("WINDOW LIST: "+str+"\n");
 	var arry = str.split(",");
 	arry.sort();
 	
@@ -105,7 +105,7 @@ function DKHandles_UpdateWindowList()
 ///////////////////////////////////////////
 function DKHandles_UpdateProperties(handle)
 {
-	DKLog("DKHandles_UpdateProperties("+handle+")\n", DKDEBUG);
+	DKDEBUGFUNC(handle);
 	DKWidget_SetValue("currentHandle", "Handle: "+handle);
 	var win = DKHandles_GetWindow(handle);
 	DKWidget_SetValue("window", win);

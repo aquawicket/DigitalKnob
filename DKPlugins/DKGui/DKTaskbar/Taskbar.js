@@ -3,7 +3,7 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	DKLog("Taskbar_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//DKCreate("DKGui/Taskbar.html,DKGui/DKOS.html");
 	DKCreate("DKGui/DKTaskbar/Taskbar.html");
 	DKCreate("DKGui/scale.js", function(){});
@@ -19,7 +19,7 @@ function Taskbar_Init()
 //////////////////////
 function Taskbar_End()
 {
-	DKLog("Taskbar_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(Taskbar_OnEvent);
 	DKClose("DKGui/DKTaskbar/Taskbar.html");
 	DKClose("DKGui/scale.js");
@@ -30,12 +30,12 @@ function Taskbar_End()
 ///////////////////////////////
 function Taskbar_OnEvent(event)
 {
-	DKLog("Taskbar_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event, "start")){
 		DKCreate("DKGui/TaskbarMenu.js", function(){});
 	}
 	if(DK_Id(event, "test_animate")){
-		//DKLog("Taskbar_OnEvent(): animate\n");
+		//DKINFO("Taskbar_OnEvent(): animate\n");
 		pos = -45;
 		animation = setInterval(Taskbar_Animate, 15);
 		//EventLoop.run();
@@ -45,8 +45,8 @@ function Taskbar_OnEvent(event)
 //////////////////////////
 function Taskbar_Animate()
 {
-	DKLog("Taskbar_Animate()\n", DKDEBUG);
-	//DKLog("Taskbar_Animate(): frame()\n");
+	DKDEBUGFUNC();
+	//DKINFO("Taskbar_Animate(): frame()\n");
     if(pos == 0){
         clearInterval(animation);
     } 

@@ -5,7 +5,7 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DKLog("TaskbarMenu_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKGui/TaskbarMenu.html", function(){
 		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
@@ -32,7 +32,7 @@ function TaskbarMenu_Init()
 //////////////////////////
 function TaskbarMenu_End()
 {
-	DKLog("TaskbarMenu_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(TaskbarMenu_OnEvent);
 	DKClose("DKGui/TaskbarMenu.html");
 }
@@ -40,7 +40,7 @@ function TaskbarMenu_End()
 ///////////////////////////////////
 function TaskbarMenu_OnEvent(event)
 {
-	DKLog("TaskbarMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event, "FileExplorer")){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
@@ -89,7 +89,7 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(DK_Id(event, "OpenSource")){
-		//DKLog("OpenSource\n");
+		//DKINFO("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
 		var assets = DKAssets_LocalAssets();
@@ -97,7 +97,7 @@ function TaskbarMenu_OnEvent(event)
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
-			//DKLog(source+"\n");
+			//DKINFO(source+"\n");
 		});
 	}
 	if(DK_Id(event, "OpenDebug")){
@@ -115,32 +115,32 @@ function TaskbarMenu_OnEvent(event)
 		DK_System("cls");
 	}
 	if(DK_Id(event, "Info")){
-		DKLog("\n**** DKOBJECTS ****\n");
+		DKINFO("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKLog(arry[i]+"\n");
+			DKINFO(arry[i]+"\n");
 		}
-		DKLog("\n");
+		DKINFO("\n");
 		
-		DKLog("**** DKEVENTS ****\n");
+		DKINFO("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKLog(arry[i]+"\n");
+			DKINFO(arry[i]+"\n");
 		}
-		DKLog("\n");
+		DKINFO("\n");
 		
-		DKLog("**** DKFUNCTIONS ****\n");
+		DKINFO("**** DKFUNCTIONS ****\n");
 		var events = DK_GetFunctions();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKLog(arry[i]+"\n");
+			DKINFO(arry[i]+"\n");
 		}
-		DKLog("\n");
+		DKINFO("\n");
 	}
 	if(DK_Id(event, "Reload")){
 		DKFrame_CloseAll();
@@ -153,7 +153,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(DK_Id(event, "TaskbarMenu_Run")){
 		var key = DK_GetValue(event);
-		//DKLog("DKAdminMenu_Run: key="+key+"\n");
+		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() == "Rocket"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}
@@ -175,7 +175,7 @@ function TaskbarMenu_OnEvent(event)
 /////////////////////////////////////
 function TaskbarMenu_Add(title, code)
 {
-	DKLog("TaskbarMenu_Add("+title+", "+code+")\n", DKDEBUG);
+	DKDEBUGFUNC(title, code);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKGui/TaskbarMenu.html", "div", "TaskbarMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
@@ -184,7 +184,7 @@ function TaskbarMenu_Add(title, code)
 /////////////////////////////////
 function TaskbarMenu_Run(command)
 {
-	DKLog("TaskbarMenu_Run("+command+")\n", DKDEBUG);
+	DKDEBUGFUNC(command);
 	if(command.indexOf("http://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;

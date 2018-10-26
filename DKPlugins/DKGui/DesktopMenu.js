@@ -1,7 +1,7 @@
 ///////////////////////////
 function DesktopMenu_Init()
 {
-	DKCreate("DKGui/DesktopMenu.html");
+	DKDEBUGFUNC();
 	DKWidget_SetProperty("DKGui/DesktopMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKGui/DesktopMenu.html","left",DKWindow_GetMouseX()+"px");
 	
@@ -13,6 +13,7 @@ function DesktopMenu_Init()
 //////////////////////////
 function DesktopMenu_End()
 {
+	DKDEBUGFUNC();
 	DKRemoveEvents(DesktopMenu_OnEvent);
 	DKClose("DKGui/DesktopMenu.html");
 }
@@ -20,8 +21,7 @@ function DesktopMenu_End()
 ///////////////////////////////////
 function DesktopMenu_OnEvent(event)
 {
-	DKLog("DesktopMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
-	
+	DKDEBUGFUNC(event);	
 	if(DK_Id(event, "OpenBackgtoundMenu")){
 		DKCreate("DKGui/BackgroundMenu.js", function(){
 			DKFrame_Widget("DKGui/BackgroundMenu.html");
@@ -42,6 +42,7 @@ function DesktopMenu_OnEvent(event)
 ///////////////////////////////////
 function Desktop_ToggleFullscreen()
 {
+	DKDEBUGFUNC();
 	//TODO: move this function into DKWindow.js
 	//http://stackoverflow.com/questions/3900701/onclick-go-full-screen
 	if(DKWindow_IsFullscreen()){

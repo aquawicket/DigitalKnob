@@ -1,8 +1,8 @@
 //////////////////////
 function DKHook_Init()
 {
+	DKDEBUGFUNC();
 	DKCreate("DKHook");
-
 	DKAddEvent("GLOBAL", "GLOBAL_mousemove", DKHook_OnEvent);
 	DKAddEvent("GLOBAL", "GLOBAL_mousedown", DKHook_OnEvent);
 	DKAddEvent("GLOBAL", "GLOBAL_mouseup", DKHook_OnEvent);
@@ -14,11 +14,12 @@ function DKHook_Init()
 /////////////////////
 function DKHook_End()
 {
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKHook_OnEvent);
 }
 
 //////////////////////////////
 function DKHook_OnEvent(event)
 {
-	DKLog("DKHook_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUGFUNC(event);
 }
