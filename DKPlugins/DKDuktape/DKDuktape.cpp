@@ -248,7 +248,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 
 	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKLog('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
-	full_call += jsreturn+"('"+evt+"')\\n";
+	full_call += jsreturn+"("+evt+")\\n";
 	full_call += "'+err.stack+'\\n";
 	full_call += "', DKERROR); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
