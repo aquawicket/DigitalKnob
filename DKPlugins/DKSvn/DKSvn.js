@@ -3,10 +3,10 @@ var SVN = "";
 /////////////////////
 function DKSvn_Init()
 {
-	DKLog("DKSvn_Init()\n", DKINFO);
+	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
 
-	//DKLog(DK_GetOS()+"\n");
+	//DKINFO((DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		//GIT = "C:/Program Files/Git/bin/git.exe";
 		//GIT = DKFile_GetShortName(GIT);
@@ -28,27 +28,28 @@ function DKSvn_Init()
 ////////////////////
 function DKSvn_End()
 {
-	//DKLog("DKSvn_End()");
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKSvn_OnEvent);
 }
 
 ///////////////////////////////
 function DKSvn_OnEvent(event)
 {
-	//DKLog("DKSvn_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUGFUNC(event);
 }
 
 ////////////////////////////
 function DKSvn_ValidateSvn()
 {
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for SVN \n");
-	//DKLog(SVN+"\n");
+	DKINFO(("Looking for SVN\n");
+	//DKINFO((SVN+"\n");
 	if(!DKFile_Exists(SVN)){
-		DKLog("Please install SVN \n");
+		DKINFO(("Please install SVN\n");
 		DKBuild_InstallSvn();
 	}
-	DKLog("Found SVN \n");
+	DKINFO(("Found SVN\n");
 	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
 	}
@@ -57,8 +58,9 @@ function DKSvn_ValidateSvn()
 ///////////////////////////
 function DKSvn_InstallSvn()
 {
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Svn \n");
+	DKINFO(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -76,14 +78,15 @@ function DKSvn_InstallSvn()
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
+		DKINFO(("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
 	}
 }
 
 //////////////////////////
 function DKSvn_SvnUpdate()
 {
-	DKLog("Svn Update... \n");
+	DKDEBUGFUNC();
+	DKINFO(("Svn Update...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
@@ -103,7 +106,8 @@ function DKSvn_SvnUpdate()
 //////////////////////////
 function DKSvn_SvnCommit()
 {
-	DKLog("Svn Commit... \n");
+	DKDEBUGFUNC();
+	DKINFO(("Svn Commit...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	

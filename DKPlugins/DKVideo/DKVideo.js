@@ -8,12 +8,14 @@ var registered = 0;
 ///////////////////////
 function DKVideo_Init()
 {
+	DKDEBUGFUNC();
 	videojs.options.flash.swf = "video-js/video-js.swf";
 }
 
 ////////////////////////////////
 function DKVideo_Queue(id, src)
 {
+	DKDEBUGFUNC(is, src);
 	var myPlayer;
 	videojs(id).ready(function(){ myPlayer = this;});
 	
@@ -29,16 +31,17 @@ function DKVideo_Queue(id, src)
 	}
 	
 	if(!type){
-		DKLog("DKERROR: DKVideo_Queue(): Cannot determine video type.");
+		DKINFO("DKERROR: DKVideo_Queue(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});
-	DKLog("Queued video: "+src);
+	DKINFO("Queued video: "+src+"\n");
 }
 
 ////////////////////////////////
 function DKVideo_Change(id, src)
 {
+	DKDEBUGFUNC(is, src);
 	var myPlayer;
 	videojs(id).ready(function(){ myPlayer = this;});
 	
@@ -54,17 +57,18 @@ function DKVideo_Change(id, src)
 	}
 	
 	if(!type){
-		DKLog("DKERROR: DKVideo_Change(): Cannot determine video type.");
+		DKINFO("DKERROR: DKVideo_Change(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});
 	myPlayer.play();
-	DKLog("Playing video: "+src);
+	DKINFO("Playing video: "+src+"\n");
 }
 
 ///////////////////////////////////////////////
 function DKVideo_RegisterEndVideo(id, Function)
 {	
+	DKDEBUGFUNC(is, Function);
 	if(registered == 0){
 		var myPlayer;
 		videojs(id).ready(function(){ myPlayer = this;});

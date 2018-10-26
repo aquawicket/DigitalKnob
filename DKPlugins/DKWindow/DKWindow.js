@@ -4,19 +4,19 @@
 ////////////////////////
 function DKWindow_Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 }
 
 ///////////////////////
 function DKWindow_End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 }
 
 //////////////////////////////
 function DKWindow_Fullscreen()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if(document.documentElement.requestFullScreen){  
 		document.documentElement.requestFullScreen();  
 	} 
@@ -35,72 +35,72 @@ function DKWindow_Fullscreen()
 /////////////////////////////
 function DKWindow_GetHeight()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	var w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	//DKLog("DKWindow_GetHeight(): = "+y.toString());
+	//DKINFO("DKWindow_GetHeight(): = "+y.toString()+"\n");
 	return y;
 }
 
 /////////////////////////////
 function DKWindow_GetMouseX()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return mouseX;
 }
 
 /////////////////////////////
 function DKWindow_GetMouseY()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return mouseY;
 }
 
 /////////////////////////////////
 function DKWindow_GetPixelRatio()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return window.devicePixelRatio || 1;
 }
 
 ////////////////////////////
 function DKWindow_GetWidth()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	var w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-	//DKLog("DKWindow_GetWidth(): = "+x.toString());
+	//DKINFO("DKWindow_GetWidth(): = "+x.toString()+"\n");
 	return x;
 }
 
 ////////////////////////
 function DKWindow_GetX()
 {
-	DKDebug();
-	//DKLog("DKWindow_GetX() = "+window.screenX+"\n");
+	DKDEBUGFUNC();
+	//DKINFO("DKWindow_GetX() = "+window.screenX+"\n");
 	return window.screenX;
 }
 
 ////////////////////////
 function DKWindow_GetY()
 {
-	DKDebug();
-	//DKLog("DKWindow_GetY() = "+window.screenY+"\n");
+	DKDEBUGFUNC();
+	//DKINFO("DKWindow_GetY() = "+window.screenY+"\n");
 	return window.screenY;
 }
 
 ////////////////////////////////
 function DKWindow_IsFullscreen()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)){
 		return false;
 	}
@@ -111,7 +111,7 @@ function DKWindow_IsFullscreen()
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetHeight(h)
 	{
-		DKDebug(h);
+		DKDEBUGFUNC(h);
 		//FIXME - does not work
 		window.resizeTo(DKWindow_GetWidth(), h);  
 		return false;
@@ -122,7 +122,7 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetWidth(w)
 	{
-		DKDebug(w);
+		DKDEBUGFUNC(w);
 		//FIXME - does not work
 		window.resizeTo(w, DKWindow_GetHeight());
 		return false;
@@ -133,7 +133,7 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetX(x)
 	{
-		DKDebug(x);
+		DKDEBUGFUNC(x);
 		//FIXME - does not work
 		window.moveTo(x, DKWindow_GetY());
 		return false;
@@ -144,7 +144,7 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetY(y)
 	{
-		DKDebug(y);
+		DKDEBUGFUNC(y);
 		//FIXME - does not work
 		window.moveTo(DKWindow_GetX(), y);
 		return false;
@@ -154,7 +154,7 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////
 function DKWindow_Windowed()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if(document.cancelFullScreen){  
 		document.cancelFullScreen();  
 	} 

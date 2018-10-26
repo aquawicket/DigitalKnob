@@ -1,8 +1,8 @@
 ///////////////////////////////
 function DKThreadPoolDlg_Init()
 {
+	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
-	
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
 	DKCreate("DKThread/DKThreadPoolDlg.html"); 
 	DKAddEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
@@ -11,6 +11,7 @@ function DKThreadPoolDlg_Init()
 //////////////////////////////
 function DKThreadPoolDlg_End()
 {
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKThreadPoolDlg_OnEvent);
 	DKClose("DKThread/DKThreadPoolDlg.html");
 }
@@ -18,8 +19,7 @@ function DKThreadPoolDlg_End()
 ///////////////////////////////////////
 function DKThreadPoolDlg_OnEvent(event)
 {
-	DKLog("DKThreadPoolDlg_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKDEBUGFUNC(event);
 	if(DK_Type(event, "Update")){
 		DKThreadPoolDlg_OnUpdate();
 	}
@@ -28,8 +28,9 @@ function DKThreadPoolDlg_OnEvent(event)
 ///////////////////////////////////
 function DKThreadPoolDlg_OnUpdate()
 {
+	DKDEBUGFUNC();
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
-	DKLog("Update DKThreadPool \n");
+	SVN("Update DKThreadPool\n");
 	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
 
 	var name = DKThread_GetThreadNames();

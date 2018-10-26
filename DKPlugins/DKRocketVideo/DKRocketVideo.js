@@ -1,6 +1,7 @@
 /////////////////////////////
 function DKRocketVideo_Init()
 {
+	DKDEBUGFUNC();
 	DKCreate("DKRocketVideo/DKRocketVideo.html");
 	DKAddEvent("DKRocketVideo_playpause", "click", DKRocketVideo_OnEvent);
 	DKAddEvent("DKRocketVideo_position", "click", DKRocketVideo_OnEvent);
@@ -13,6 +14,7 @@ function DKRocketVideo_Init()
 ////////////////////////////
 function DKRocketVideo_End()
 {
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKRocketVideo_OnEvent);
 	DKClose("DKRocketVideo/DKRocketVideo.html");
 }
@@ -20,8 +22,7 @@ function DKRocketVideo_End()
 /////////////////////////////////////
 function DKRocketVideo_OnEvent(event)
 {
-	DKLog("DKRocketVideo_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	
+	DKDEBUGFUNC(event);
 	if(DK_Id(event, "DKRocketVideo_playpause")){
 		DKRocketVideo_playpause();
 	}
@@ -45,11 +46,10 @@ function DKRocketVideo_OnEvent(event)
 //////////////////////////////////
 function DKRocketVideo_playpause()
 {
-	//DKLog("DKRocketVideo_playpause() \n");
-	
+	DKDEBUGFUNC();
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketVideo_playpause", "src");
-	//DKLog("DKRocketVideo_playpause(): src="+src+"\n");
+	//DKINFO(("DKRocketVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_playpause", "src", "DKRocketVideo/pause.png");
@@ -62,23 +62,22 @@ function DKRocketVideo_playpause()
 /////////////////////////////////
 function DKRocketVideo_position()
 {
-	//DKLog("DKRocketVideo_position() \n");
+	DKDEBUGFUNC();
 }
 
 //////////////////////////////////////
 function DKRocketVideo_positiontrack()
 {
-	//DKLog("DKRocketVideo_positiontrack() \n");
+	DKDEBUGFUNC();
 }
 
 ////////////////////////////////
 function DKRocketVideo_speaker()
 {
-	//DKLog("DKRocketVideo_speaker() \n");
-	
+	DKDEBUGFUNC();
 	//toggle volume/mute
 	var src = DKWidget_GetAttribute("DKRocketVideo_speaker", "src");
-	DKLog("DKRocketVideo_speaker(): src="+src+"\n");
+	DKINFO(("DKRocketVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_speaker", "src", "DKRocketVideo/volume3.png");
@@ -91,12 +90,11 @@ function DKRocketVideo_speaker()
 ///////////////////////////////
 function DKRocketVideo_volume()
 {
-	//DKLog("DKRocketVideo_volume() \n");
+	DKDEBUGFUNC();
 }
 
 ////////////////////////////////////
 function DKRocketVideo_volumetrack()
 {
-	//DKLog("DKRocketVideo_volumetrack() \n");
+	DKDEBUGFUNC();
 }
-

@@ -3,7 +3,7 @@ var websocket;
 //////////////////////////////////
 function DKWebSocketsClient_Init()
 {
-	DKLog("DKWebSocketsClient_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKWebSockets/DKWebSocketsClient.html", function(){
 		DKAddEvent("DKWebSocketsClient_CreateClient", "click", DKWebSocketsClient_OnEvent);
 		DKAddEvent("DKWebSocketsClient_CloseClient", "click", DKWebSocketsClient_OnEvent);
@@ -15,7 +15,7 @@ function DKWebSocketsClient_Init()
 /////////////////////////////////
 function DKWebSocketsClient_End()
 {
-	DKLog("DKWebSocketsClient_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKWebSocketsClient_OnEvent);
 	DKClose("DKWebSockets/DKWebSocketsClient.html");
 }
@@ -23,8 +23,7 @@ function DKWebSocketsClient_End()
 //////////////////////////////////////////
 function DKWebSocketsClient_OnEvent(event)
 {
-	DKLog("DKWebSocketsClient_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
-	
+	DKDEBUGFUNC(event);	
 	if(DK_Id(event, "DKWebSocketsClient_CreateClient")){
 		DKWebSocketsClient_CreateClient();
 	}
@@ -42,21 +41,21 @@ function DKWebSocketsClient_OnEvent(event)
 //////////////////////////////////////////
 function DKWebSocketsClient_CreateClient()
 {
-	DKLog("DKWebSocketsClient_CreateClient()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
-		DKLog("DKWebSocketsClient_CreateClient(): please enter an address\n", DKWARN);
+		DKWARN("DKWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
 	}
 	url = DKWidget_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
 	
 	if(DK_GetBrowser() == "Rocket"){
-		DKLog("Connecting to WebSocket via C++...\n");
+		DKINFO("Connecting to WebSocket via C++...\n");
 		DKWebSockets_CreateClient(url);
 		return;
 	}
 	
 	//else
-	DKLog("Connecting to WebSocket via javascript...\n");
+	DKINFO("Connecting to WebSocket via javascript...\n");
 	websocket = new WebSocket(url);
 	websocket.onopen = function(){
 		console.log("websocket.onopen");
@@ -76,7 +75,7 @@ function DKWebSocketsClient_CreateClient()
 /////////////////////////////////////////
 function DKWebSocketsClient_CloseClient()
 {
-	DKLog("DKWebSocketsClient_CloseClient()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() == "Rocket"){
 		DKWebSockets_CloseClient();
 		return;
@@ -89,8 +88,7 @@ function DKWebSocketsClient_CloseClient()
 /////////////////////////////////////////////
 function DKWebSocketsClient_MessageToServer()
 {
-	DKLog("DKWebSocketsClient_MessageToServer()\n", DKDEBUG);
-	
+	DKDEBUGFUNC();	
 	var message = DKWidget_GetValue("DKWebSocketsClient_send");
 	if(DK_GetBrowser() == "Rocket"){
 		DKWebSockets_MessageToServer(message);
@@ -104,6 +102,6 @@ function DKWebSocketsClient_MessageToServer()
 ////////////////////////////////////////////////////////
 function DKWebSocketsClient_OnMessageFromServer(message)
 {
-	DKLog("DKWebSocketsClient_OnMessageFromServer("+message+")\n", DKDEBUG);
+	DKDEBUGFUNC(message);
 	DKWidget_SetAttribute("DKWebSocketsClient_receive","value", message);
 }
