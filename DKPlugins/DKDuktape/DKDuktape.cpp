@@ -21,7 +21,7 @@ extern int eventloop_run(duk_context *ctx);
 //////////////////////
 bool DKDuktape::Init()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	c_evloop = true;
 
 	if(!ctx){
@@ -69,7 +69,7 @@ bool DKDuktape::Init()
 /////////////////////
 bool DKDuktape::End()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	duk_destroy_heap(ctx);
 	ctx = NULL;
 	return true;
@@ -79,7 +79,7 @@ bool DKDuktape::End()
 /////////////////////////////////////////////////////////////////////////
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 {
-	DKDEBUG(name, func);
+	DKDEBUGFUNC(name, func);
 	if(!ctx){
 		DKWARN("DKDuktape::AttachFunction(): ctx invalid\n");
 		return false; 
@@ -96,7 +96,7 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 /////////////////////////////////////////////
 bool DKDuktape::CallEnd(const DKString& file)
 {
-	DKDEBUG(file);
+	DKDEBUGFUNC(file);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -139,7 +139,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 //////////////////////////////////////////////
 bool DKDuktape::CallInit(const DKString& file)
 {
-	DKDEBUG(file);
+	DKDEBUGFUNC(file);
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -176,7 +176,7 @@ bool DKDuktape::CallInit(const DKString& file)
 ////////////////////////////////////////////////
 bool DKDuktape::FileLoaded(const DKString& path)
 {
-	DKDEBUG(path);
+	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i){
 		if(has(path, filelist[i])){
 			DKWARN("DKDuktape::FileLoaded(): "+path+" already loaded.\n");
@@ -189,7 +189,7 @@ bool DKDuktape::FileLoaded(const DKString& path)
 //////////////////////////////////////////////
 bool DKDuktape::LoadFile(const DKString& path)
 {
-	DKDEBUG(path);
+	DKDEBUGFUNC(path);
 	if(path.empty()){ return false; }
 	if(FileLoaded(path)){ return false; } //prevent file from loading twice
 
@@ -223,7 +223,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 ///////////////////////////////////////
 bool DKDuktape::OnEvent(DKEvent* event)
 {
-	DKDEBUG(event);
+	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	if(id.empty()){ return false; } //we need an id
 	DKString type = event->GetType();
@@ -280,7 +280,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 ////////////////////////
 bool DKDuktape::Reload()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	DKEvent::events.clear();
 	filelist.clear();
 
@@ -314,7 +314,7 @@ bool DKDuktape::Reload()
 ////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code)
 {
-	//DKDEBUG(code);
+	//DKDEBUGFUNC(code);
 	if(!DKUtil::InMainThread()){ return false; }
 	if(!DKDuktape::ctx){
 		DKERROR("DKDuktape::RunDuktape("+code+"): context is invalid\n"); 
@@ -327,7 +327,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 ////////////////////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 {
-	//DKDEBUG(code, rval);
+	//DKDEBUGFUNC(code, rval);
 	if(!DKUtil::InMainThread()){ return false; }
 	if(!DKDuktape::ctx){
 		DKERROR("DKDuktape::RunDuktape("+code+", rval): context is invalid\n");
@@ -348,7 +348,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 //////////////////////////////////////////////////
 bool DKDuktape::QueueDuktape(const DKString& code)
 {
-	DKDEBUG(code);
+	DKDEBUGFUNC(code);
 	codeToRun.push_back(code);
 	return true;
 }
@@ -359,7 +359,7 @@ bool DKDuktape::QueueDuktape(const DKString& code)
 //////////////////////////////////////////////////////////////////
 int DKDuktape::handle_file(duk_context *ctx, const char *filename) 
 {
-	//DKDEBUG(ctx, filename);
+	//DKDEBUGFUNC(ctx, filename);
 	FILE *f = NULL;
 	int retval;
 
@@ -378,7 +378,7 @@ int DKDuktape::handle_file(duk_context *ctx, const char *filename)
 /////////////////////////////////////////////////////////////////////////
 int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename)
 {
-	//DKDEBUG(ctx, f, filename);
+	//DKDEBUGFUNC(ctx, f, filename);
 	char *buf = NULL;
 	int len;
 	int got;
@@ -426,7 +426,7 @@ int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename)
 /////////////////////////////////////////////////////////////////////
 int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata)
 {
-	//DKDEBUG(ctx);
+	//DKDEBUGFUNC(ctx);
 	int comp_flags = 0;
 	//int rc;
 
@@ -467,7 +467,7 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata)
 ///////////////////////////
 void DKDuktape::EventLoop()
 {
-	//DKDEBUG();
+	//DKDEBUGFUNC();
 	if(!DKUtil::InMainThread()){ return; }
 
 	//cycle through queue codeToRun
@@ -484,7 +484,7 @@ void DKDuktape::EventLoop()
 ///////////////////////////    OLD CODE
 void DKDuktape::EventLoop()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	int rc;
 	if(c_evloop){
 		DKLog("DKDuktape: calling eventloop_run()\n");
@@ -507,7 +507,7 @@ void DKDuktape::EventLoop()
 /*
 void DKDuktape::CreateObject(const DKString& name)
 {
-	DKDEBUG(name);
+	DKDEBUGFUNC(name);
 	DKString objname = "_"+name;
 	duk_put_global_string(ctx, objname.c_str());
 	DKString eval = "var "+name+" new "+objname+"()";

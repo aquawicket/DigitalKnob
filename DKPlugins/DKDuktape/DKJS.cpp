@@ -13,7 +13,7 @@
 /////////////////
 bool DKJS::Init()
 {
-	DKDEBUG();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKFileJS");
 	DKClass::DKCreate("DKAssetsJS");
 	
@@ -698,7 +698,7 @@ int DKJS::GetUsername(duk_context* ctx)
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
-	DKDEBUG(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");

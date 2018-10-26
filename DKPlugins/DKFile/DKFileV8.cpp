@@ -6,7 +6,7 @@
 /////////////////////
 bool DKFileV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKFile_ChDir", DKFileV8::ChDir);
 	DKV8::AttachFunction("DKFile_Copy", DKFileV8::Copy);
 	DKV8::AttachFunction("DKFile_CopyFolder", DKFileV8::CopyFolder);
@@ -28,7 +28,7 @@ bool DKFileV8::Init()
 ////////////////////
 bool DKFileV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
@@ -37,7 +37,7 @@ bool DKFileV8::End()
 ////////////////////////////////////////////////////
 bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString path = args->GetString(0);
 	DKFile::ChDir(path);
 	return true;
@@ -46,7 +46,7 @@ bool DKFileV8::ChDir(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////
 bool DKFileV8::Copy(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString src = args[0]->GetStringValue();
 	DKString src = args->GetString(0);
 	//DKString dest = args[1]->GetStringValue();
@@ -62,7 +62,7 @@ bool DKFileV8::Copy(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKFileV8::CopyFolder(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString src = args[0]->GetStringValue();
 	DKString src = args->GetString(0);
 	//DKString dst = args[1]->GetStringValue();
@@ -71,9 +71,9 @@ bool DKFileV8::CopyFolder(CefArgs args, CefReturn retval)
 	bool overwrite = args->GetBool(2);
 	//bool recursive = args[3]->GetBoolValue();
 	bool recursive = args->GetBool(3);
-	DKLog("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n");
+	DKINFO("CopyFolder(" + src + "," + dst + "," + toString(overwrite) + "," + toString(recursive) + ")\n");
 	if (!DKFile::CopyFolder(src, dst, overwrite, recursive)){
-		DKLog("DKFile::CopyFolder(): failed. \n", DKERROR);
+		DKERROR("DKFile::CopyFolder(): failed. \n");
 		return false;
 	}
 	return true;
@@ -82,7 +82,7 @@ bool DKFileV8::CopyFolder(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKFileV8::Delete(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	DKFile::Delete(path);
@@ -92,7 +92,7 @@ bool DKFileV8::Delete(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////////////
 bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	//DKLog("DKFileV8::DirectoryContents("+path+",CefReturn)\n");
@@ -109,7 +109,7 @@ bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKFileV8::Exists(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	if(!DKFile::PathExists(path)){
@@ -125,7 +125,7 @@ bool DKFileV8::Exists(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKFileV8::FileToString(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	DKString string;
@@ -138,7 +138,7 @@ bool DKFileV8::FileToString(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKFileV8::GetAbsolutePath(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	//DKLog("DKFileV8::GetAbsolutePath("+path+",CefReturn)\n");
@@ -152,7 +152,7 @@ bool DKFileV8::GetAbsolutePath(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKFileV8::GetSetting(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString file = args[0]->GetStringValue();
 	DKString file = args->GetString(0);
 	//DKString param = args[1]->GetStringValue();
@@ -169,7 +169,7 @@ bool DKFileV8::GetSetting(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	//DKLog("DKFileV8::GetShortName("+path+",CefReturn)\n");
@@ -189,7 +189,7 @@ bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////
 bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	//DKLog("DKFileV8::IsDirectory("+path+",CefReturn)\n");
@@ -206,7 +206,7 @@ bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////
 bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	DKFile::MakeDir(path);
@@ -216,7 +216,7 @@ bool DKFileV8::MkDir(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////
 bool DKFileV8::Rename(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString input = args[0]->GetStringValue();
 	DKString input = args->GetString(0);
 	//DKString output = args[1]->GetStringValue();
@@ -232,7 +232,7 @@ bool DKFileV8::Rename(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKFileV8::SetSetting(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString file = args[0]->GetStringValue();
 	DKString file = args->GetString(0);
 	//DKString param = args[1]->GetStringValue();
@@ -248,7 +248,7 @@ bool DKFileV8::SetSetting(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////
 bool DKFileV8::StringToFile(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString string = args[0]->GetStringValue();
 	DKString string = args->GetString(0);
 	//DKString file = args[1]->GetStringValue();

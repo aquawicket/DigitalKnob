@@ -34,90 +34,90 @@ DKString DKV8::no_proxy_server;
 /////////////////////
 void DKV8::SetFlags()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
-	DKLog("DKV8::homepage = "+homepage+"\n");
+	DKINFO("DKV8::homepage = "+homepage+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTIPROCESS]", multi_process);
-	DKLog("DKV8::multi_process = "+multi_process+"\n");
+	DKINFO("DKV8::multi_process = "+multi_process+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_SANDBOX]", sandbox);
-	DKLog("DKV8::sandbox = "+sandbox+"\n");
+	DKINFO("DKV8::sandbox = "+sandbox+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_LOGSEVERITY]", log_severity);
-	DKLog("DKV8::log_severity = "+log_severity+"\n");
+	DKINFO("DKV8::log_severity = "+log_severity+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_MULTI_THREADED_MESSAGE_LOOP]", multi_threaded_message_loop);
-	DKLog("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n");
+	DKINFO("DKV8::multithreadedmessageloops = "+multi_threaded_message_loop+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU]", disable_gpu);
-	DKLog("DKV8::disablegpu = "+disable_gpu+"\n");
+	DKINFO("DKV8::disablegpu = "+disable_gpu+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_GPU_COMPOSITING]", disable_gpu_compositing);
-	DKLog("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n");
+	DKINFO("DKV8::disable_gpu_compositing = "+disable_gpu_compositing+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_IGNORE_GPU_BLACKLIST]", ignore_gpu_blacklist);
-	DKLog("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n");
+	DKINFO("DKV8::ignore_gpu_blacklist = "+ignore_gpu_blacklist+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_SYSTEM_FLASH]", enable_system_flash);
-	DKLog("DKV8::enable_system_flash = "+enable_system_flash+"\n");
+	DKINFO("DKV8::enable_system_flash = "+enable_system_flash+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_BEGIN_FRAME_SCHEDULING]", enable_begin_frame_scheduling);
-	DKLog("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n");
+	DKINFO("DKV8::enable_begin_frame_scheduling = "+enable_begin_frame_scheduling+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_WEBGL]", enable_webgl);
-	DKLog("DKV8::enable_webgl = "+enable_webgl+"\n");
+	DKINFO("DKV8::enable_webgl = "+enable_webgl+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_RENDERER_PROCESS_LIMIT]", renderer_process_limit);
-	DKLog("DKV8::renderer_process_limit = "+renderer_process_limit+"\n");
+	DKINFO("DKV8::renderer_process_limit = "+renderer_process_limit+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_ENABLE_GPU]", enable_gpu);
-	DKLog("DKV8::enable_gpu = "+enable_gpu+"\n");
+	DKINFO("DKV8::enable_gpu = "+enable_gpu+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_DISABLE_WEB_SECURITY]", disable_web_security);
-	DKLog("DKV8::disable_web_security = "+disable_web_security+"\n");
+	DKINFO("DKV8::disable_web_security = "+disable_web_security+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_NO_PROXY_SERVER]", no_proxy_server);
-	DKLog("DKV8::no_proxy_server = "+no_proxy_server+"\n");
+	DKINFO("DKV8::no_proxy_server = "+no_proxy_server+"\n");
 
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_REMOTE_DEBUGGING_PORT]", remote_debugging_port);
-	DKLog("DKV8::remote_debugging_port = "+remote_debugging_port+"\n");
+	DKINFO("DKV8::remote_debugging_port = "+remote_debugging_port+"\n");
 
 	//DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_OFF_SCREEN_RENDERING_ENABLED]", off_screen_rendering_enabled);
-	//DKLog("DKV8::off_screen_rendering_enabled = "+off_screen_rendering_enabled+"\n");
+	//DKINFO("DKV8::off_screen_rendering_enabled = "+off_screen_rendering_enabled+"\n");
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn))
 {
-	//DKDebug(name, func);
+	//DKDEBUGFUNC(name, func);
 	//FIXME - this is very unstable, not thread safe
 	//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 
 	functions[name] = boost::bind(func, _1, _2);
 	if(!functions[name]){
-		DKLog("DKV8::AttachFunctions("+name+"): failed to register function\n", DKERROR);
+		DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
 		return false;
 	}
 
 	DKV8::funcs.push_back(name);
 
 	if(!DKV8::ctx){ //multi process will fail
-		//DKLog("DKV8::AttachFunction(): DKV8::ctx is invalid\n", DKWARN);
+		//DKWARN("DKV8::AttachFunction(): DKV8::ctx is invalid\n");
 		return false;
 	}
 
 	CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 	if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){ return false; }
 
-	DKLog("DKV8::AttachFunction(): registered: "+name+"\n");
+	DKINFO("DKV8::AttachFunction(): registered: "+name+"\n");
 	return true;
 }
 
 //////////////////////////////////////////////////////
 bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 	int i=0;
@@ -136,11 +136,11 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser)
 bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args)
 {
 	//Multi process Execute
-	DKDebug(browser, func);
+	DKDEBUGFUNC(browser, func);
 
 	_browser = browser;
 	if(!functions[func]) {
-		DKLog("DKCefV8Handler::Execute(): "+func+" not registered\n", DKWARN);
+		DKWARN("DKCefV8Handler::Execute(): "+func+" not registered\n");
 		return false;
 	}
 
@@ -148,7 +148,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 
 	CefRefPtr<CefListValue> rval = CefListValue::Create();
 	if(!functions[func](args,rval)){
-		DKLog("DKCefV8Handler::Execute(): "+func+" failed\n", DKERROR);
+		DKERROR("DKCefV8Handler::Execute(): "+func+" failed\n");
 		return false;
 	}
 
@@ -179,10 +179,10 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)
 {
 	//Single process Execute
-	//DKDebug("const CefString&", object, "const CefV8ValueList&", retval, exception);
+	//DKDEBUGFUNC("const CefString&", object, "const CefV8ValueList&", retval, exception);
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name]) {
-			DKLog("DKCefV8Handler::Execute(): "+name.ToString()+" not registered\n", DKWARN);
+			DKWARN("DKCefV8Handler::Execute(): "+name.ToString()+" not registered\n");
 			return false;
 		}
 
@@ -211,30 +211,30 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 			}
 		}
 		text += ")";
-		DKLog(text+"\n", DKDEBUG);
+		//DKINFO(text+"\n");
 
 		CefRefPtr<CefListValue> rval = CefListValue::Create();
 		if(!DKV8::functions[name](args, rval)){
-			DKLog("DKCefV8Handler::Execute("+name.ToString()+"): "+name.ToString()+" failed\n", DKERROR);
+			DKERROR("DKCefV8Handler::Execute("+name.ToString()+"): "+name.ToString()+" failed\n");
 			return false;
 		}
 
 		//Transfer retun value into &retval
 		if(rval->GetType(0) == VTYPE_STRING){
 			retval = CefV8Value::CreateString(rval->GetString(0));
-			//DKLog("retval = "+DKString(retval->GetStringValue())+"\n");
+			//DKINFO("retval = "+DKString(retval->GetStringValue())+"\n");
 		}
 		else if(rval->GetType(0) == VTYPE_INT){
 			retval = CefV8Value::CreateInt(rval->GetInt(0));
-			//DKLog("retval = "+toString(retval->GetIntValue())+"\n");
+			//DKINFO("retval = "+toString(retval->GetIntValue())+"\n");
 		}
 		else if(rval->GetType(0) == VTYPE_BOOL){
 			retval = CefV8Value::CreateBool(rval->GetBool(0));
-			//DKLog("retval = "+toString(retval->GetBoolValue())+"\n");
+			//DKINFO("retval = "+toString(retval->GetBoolValue())+"\n");
 		}
 		else{
 			retval = CefV8Value::CreateNull();
-			//DKLog("retval = NULL\n");
+			//DKINFO("retval = NULL\n");
 		}
 	}
 
@@ -244,7 +244,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 ///////////////////////////////////////////////////////////////
 void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	browser = _browser;
 }
 
@@ -256,7 +256,7 @@ void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser)
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
-	DKDebug(id, type, value);
+	DKDEBUGFUNC(id, type, value);
 	if(id.empty()){ return false; }
 	if(same(id,"DKLog")){ return false; }
 	if(type.empty()){ return false; }
@@ -280,7 +280,7 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line)
 {
-	//DKDebug(process_type, command_line);
+	//DKDEBUGFUNC(process_type, command_line);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -341,7 +341,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 //////////////////////////////////////////////////////////////
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser) 
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -357,7 +357,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 /////////////////////////////////////
 void DKCefApp::OnContextInitialized()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -367,7 +367,7 @@ void DKCefApp::OnContextInitialized()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
-	DKDebug(browser, frame, context);
+	DKDEBUGFUNC(browser, frame, context);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -376,7 +376,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE)){
-			DKLog("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n", DKDEBUG);
+			//DKINFO("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n");
 		}
 	}
 }
@@ -384,13 +384,13 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) 
 {
-	DKDebug(browser, source_process, message);
+	DKDEBUGFUNC(browser, source_process, message);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 
 	if(DKV8::singleprocess){
-		DKLog("DKCefApp::OnProcessMessageReceived("+message->GetName().ToString()+"): message system disabled in single-process mode\n");
+		DKWARN("DKCefApp::OnProcessMessageReceived("+message->GetName().ToString()+"): message system disabled in single-process mode\n");
 		return false;
 	}
 
@@ -432,7 +432,7 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 		}
 	}
 	str += ")";
-	DKLog(str+"\n");
+	DKINFO(str+"\n");
 
 	return false;
 }
@@ -440,12 +440,12 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace)
 {
-	//DKDebug(browser, frame, context, exception, stackTrace); //DON'T DO THIS
+	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
 	DKString msg = exception->GetMessage().ToString();
 	if(has(msg,"DKSendEvent is not defined")){ return; } //ignore DKSendEvent not existing
 
-	DKLog("#################### Uncaught Exception ####################\n", DKERROR);
-	DKLog("Exception: "+msg+"\n", DKERROR);
+	DKERROR("#################### Uncaught Exception ####################\n");
+	DKERROR("Exception: "+msg+"\n");
 	std::ostringstream stackFormatted;
 	for (int i = 0; i < stackTrace->GetFrameCount(); ++i) {
 			stackFormatted << "at "
@@ -455,8 +455,8 @@ void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 			<< " on line "
 			<< stackTrace->GetFrame(i)->GetLineNumber() << "\n";
 	}
-	DKLog(stackFormatted.str()+"\n", DKERROR);
-	DKLog("############################################################\n", DKERROR);
+	DKERROR(stackFormatted.str()+"\n");
+	DKERROR("############################################################\n");
 
 	/*
 	const char* stackFormattedShouldBe =

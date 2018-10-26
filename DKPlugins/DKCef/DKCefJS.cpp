@@ -124,7 +124,7 @@ int DKCefJS::GetCurrentBrowser(duk_context* ctx)
 ////////////////////////////////////////////
 int DKCefJS::GetPageSource(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	DKString source;
 	if(!DKCef::Get()->GetPageSource(browser, source)){ return 0; }
@@ -137,7 +137,7 @@ int DKCefJS::GetPageSource(duk_context* ctx)
 /////////////////////////////////////
 int DKCefJS::GetUrl(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	DKString url;
 	if(!DKCef::Get()->GetUrl(browser, url)){ return 0; }
@@ -268,7 +268,7 @@ int DKCefJS::Stop(duk_context* ctx)
 /////////////////////////////////////////////
 int DKCefJS::ViewPageSource(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->ViewPageSource(browser)){ return 0; }
 	return 1;

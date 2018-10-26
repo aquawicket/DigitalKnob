@@ -30,7 +30,7 @@ bool DKCef::initialized = false;
 //////////////////
 bool DKCef::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
 	//DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
@@ -89,7 +89,7 @@ bool DKCef::Init()
 	if (!libelf) {
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("Could not load " + elf_dll + ": " + error + "\n", DKERROR);
+		DKERROR("Could not load " + elf_dll + ": " + error + "\n");
 		FreeLibrary(libelf);
 	}
 	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL from another location
@@ -98,7 +98,7 @@ bool DKCef::Init()
 	if(!libcef){
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
+		DKERROR("Could not load "+cef_dll+": "+error+"\n");
 		FreeLibrary(libcef);
 	}
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL from another location 
@@ -234,7 +234,7 @@ bool DKCef::Init()
 		#endif
 	#endif
 	if(!DKFile::PathExists(ep)){
-        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKWARN);
+        DKWARN("DKCef::Init(): file not found: "+ep+"\n");
         //TODO: disable multi-process
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild.exe
@@ -263,16 +263,16 @@ bool DKCef::Init()
 	int build_version = cef_version_info(4);
 	DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
-	DKLog("Cef Version: "+version_string+"\n");
+	DKINFO("Cef Version: "+version_string+"\n");
 
 	DKString userAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 "+version_string;
 	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
-	DKLog("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n");
+	DKINFO("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n");
 
 
 	int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
-		DKLog("CefInitialize error", DKERROR);
+		DKERROR("CefInitialize error");
 		return false;
 	}
 
@@ -308,15 +308,15 @@ bool DKCef::Init()
 /////////////////
 bool DKCef::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//FIXME - many crashes at CefShutdown
 	unsigned long threadId;
 	DKUtil::GetThreadId(threadId);
 	if(cefThreadId != threadId){
-		DKLog("DKCef::End(): Error: not in the main cef thread\n", DKERROR);
+		DKERROR("DKCef::End(): Error: not in the main cef thread\n");
 		return false;
 	}
-	DKLog("DKCef::End(): CefShutdown();\n");
+	DKINFO("DKCef::End(): CefShutdown();\n");
 	CefShutdown(); //call on same thread as CefInitialize
 
 #ifdef WIN32
@@ -330,9 +330,9 @@ bool DKCef::End()
 ////////////////////////////////////////////
 bool DKCef::CloseBrowser(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if((unsigned)browser > dkBrowsers.size()-1){
-		DKLog("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n", DKERROR);
+		DKERROR("DKCef::CloseBrowser("+toString(browser)+"): ERROR: trying to delete a non-existent browser\n");
 		return false; 
 	}
 	dkBrowsers[browser].browser->GetHost()->CloseBrowser(true);
@@ -344,7 +344,7 @@ bool DKCef::CloseBrowser(const int& browser)
 /////////////////////////////////////////////
 bool DKCef::CloseDevTools(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	dkBrowsers[browser].browser->GetHost()->CloseDevTools();
 	return true;
 }
@@ -352,7 +352,7 @@ bool DKCef::CloseDevTools(const int& browser)
 //////////////////
 bool DKCef::Copy()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	current_browser->GetFocusedFrame()->Copy();
 	return true;
 }
@@ -361,7 +361,7 @@ bool DKCef::Copy()
 //////////////////////////////////////////
 bool DKCef::CopyImage(const DKString& url)
 {
-	DKDebug(url);
+	DKDEBUGFUNC(url);
 	/*
 	NewBrowser();
 	int num;
@@ -382,7 +382,7 @@ bool DKCef::CopyImage(const DKString& url)
 /////////////////
 bool DKCef::Cut()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	current_browser->GetFocusedFrame()->Cut();
 	return true;
 }
@@ -390,8 +390,8 @@ bool DKCef::Cut()
 ////////////////////////////////////////////
 bool DKCef::DownloadUrl(const DKString& url)
 {
-	DKDebug(url);
-	DKLog("Downloading... "+url+"\n");
+	DKDEBUGFUNC(url);
+	DKINFO("Downloading... "+url+"\n");
 	current_browser->GetHost()->StartDownload(url);
 	return false;
 }
@@ -399,7 +399,7 @@ bool DKCef::DownloadUrl(const DKString& url)
 ///////////////////////////////////////////////////////////////////
 bool DKCef::FileDialog(const DKString& type, const DKString& title)
 {
-	DKDebug(type, title);
+	DKDEBUGFUNC(type, title);
 	std::vector<CefString> file_types;
 	file_types.push_back("image/*");
 	fileDialogCallback = new DialogCallback;
@@ -410,7 +410,7 @@ bool DKCef::FileDialog(const DKString& type, const DKString& title)
 	else if(type == "FILE_DIALOG_OPEN_FOLDER"){ _type = FILE_DIALOG_OPEN_FOLDER; }
 	else if(type == "FILE_DIALOG_SAVE"){ _type = FILE_DIALOG_SAVE; }
 	else{
-		DKLog("DKCef::FileDialog(): type ("+toString(_type)+") is not a valid selector", DKERROR);
+		DKERROR("DKCef::FileDialog(): type ("+toString(_type)+") is not a valid selector");
 		return false;
 	}
 
@@ -421,7 +421,7 @@ bool DKCef::FileDialog(const DKString& type, const DKString& title)
 //////////////////////////////////////////////////////////
 bool DKCef::Find(const int& browser, const DKString& text)
 {
-	DKDebug(browser, text);
+	DKDEBUGFUNC(browser, text);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	if(!text.empty()){
 		dkBrowsers[browser].browser->GetHost()->Find(0, text.c_str(), true, false, false);
@@ -435,7 +435,7 @@ bool DKCef::Find(const int& browser, const DKString& text)
 //////////////////////////////////////////////////////////
 bool DKCef::GetBrowserId(const int& browser, DKString& id)
 {
-	DKDebug(browser, id);
+	DKDEBUGFUNC(browser, id);
 	id = dkBrowsers[browser].id;
 	return true;
 }
@@ -443,7 +443,7 @@ bool DKCef::GetBrowserId(const int& browser, DKString& id)
 //////////////////////////////////////////////////////////////
 bool DKCef::GetBrowserNumber(const DKString& id, int& browser)
 {
-	//DKDebug(id, browser);
+	//DKDEBUGFUNC(id, browser);
 	for(unsigned int i=0; i<dkBrowsers.size(); i++){
 		if(id == dkBrowsers[i].id){
 			browser = i;
@@ -457,7 +457,7 @@ bool DKCef::GetBrowserNumber(const DKString& id, int& browser)
 /////////////////////////////////
 bool DKCef::GetBrowsers(int& num)
 {
-	DKDebug(num);
+	DKDEBUGFUNC(num);
 	num = dkBrowsers.size();
 	return true;
 }
@@ -465,7 +465,7 @@ bool DKCef::GetBrowsers(int& num)
 ///////////////////////////////////////////
 bool DKCef::GetCurrentBrowser(int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(!current_browser){ return false; }
 	for(unsigned int i=0; i<dkBrowsers.size(); ++i){
 		if(dkBrowsers[i].browser->IsSame(current_browser)){
@@ -481,7 +481,7 @@ bool DKCef::GetCurrentBrowser(int& browser)
 ////////////////////////////////////////////////////////////////
 bool DKCef::GetPageSource(const int& browser, DKString& _source)
 {
-	DKDebug(browser, _source);
+	DKDEBUGFUNC(browser, _source);
 	//_source = source; 
 	return true;
 }
@@ -489,7 +489,7 @@ bool DKCef::GetPageSource(const int& browser, DKString& _source)
 ///////////////////////////////////////////////
 bool DKCef::GetUrl(int& browser, DKString& url)
 {
-	DKDebug(browser, url);
+	DKDEBUGFUNC(browser, url);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	url = dkBrowsers[browser].browser->GetMainFrame()->GetURL().ToString();
 	return true;
@@ -498,7 +498,7 @@ bool DKCef::GetUrl(int& browser, DKString& url)
 //////////////////////////////////////
 bool DKCef::GoBack(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	if (dkBrowsers[browser].browser->CanGoBack()){
 		dkBrowsers[browser].browser->GoBack();
@@ -510,7 +510,7 @@ bool DKCef::GoBack(const int& browser)
 /////////////////////////////////////////
 bool DKCef::GoForward(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	if (dkBrowsers[browser].browser->CanGoForward()){
 		dkBrowsers[browser].browser->GoForward();
@@ -522,7 +522,7 @@ bool DKCef::GoForward(const int& browser)
 ///////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	DKString data = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
@@ -533,8 +533,8 @@ bool DKCef::NewBrowser(const void* input, void* output)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, const int& width, const int& height, const DKString& url)
 {
-	DKDebug(id, top, left, width, height, url);
-	DKLog("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
+	DKDEBUGFUNC(id, top, left, width, height, url);
+	DKINFO("DKCef::NewBrowser("+id+","+toString(top)+","+toString(left)+","+toString(width)+","+toString(height)+","+url+")\n");
 	CefWindowInfo window_info;
 	CefBrowserSettings browserSettings;
 	if(DKClass::DKValid("DKWindow,DKWindow0")){
@@ -543,7 +543,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		CefRefPtr<CefBrowser> _browser;
 		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
 		if(!_browser){
-			DKLog("DKCef::NewBrowser(): _browser invalid\n", DKERROR);
+			DKERROR("DKCef::NewBrowser(): _browser invalid\n");
 			return false; 
 		}
 
@@ -622,7 +622,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 ///////////////////
 bool DKCef::Paste()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	current_browser->GetFocusedFrame()->Paste();
 	return true;
 }
@@ -630,7 +630,7 @@ bool DKCef::Paste()
 //////////////////////////////////////
 bool DKCef::Popup(const DKString& url)
 {
-	DKDebug(url);
+	DKDEBUGFUNC(url);
 	DKString string = "window.open('"+url+"', '_blank', 'width=800,height=600');";
 	int browser_num;
 	GetCurrentBrowser(browser_num);
@@ -641,7 +641,7 @@ bool DKCef::Popup(const DKString& url)
 /////////////////////////////////////
 bool DKCef::Print(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	dkBrowsers[browser].browser->GetHost()->Print();
 	return true;
 }
@@ -649,14 +649,14 @@ bool DKCef::Print(const int& browser)
 //////////////////////////////////////////
 bool DKCef::QueueDuktape(DKString& string)
 {
-	DKDebug(string);
+	DKDEBUGFUNC(string);
 	return DKDuktape::QueueDuktape(string);
 }
 
 //////////////////////////////////////
 bool DKCef::Reload(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	dkBrowsers[browser].browser->Reload();
 	return true;
@@ -665,7 +665,7 @@ bool DKCef::Reload(const int& browser)
 ///////////////////////////////////////////
 bool DKCef::RemoveFocus(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(false);
 	current_browser = NULL;
 	return 1;
@@ -674,14 +674,14 @@ bool DKCef::RemoveFocus(const int& browser)
 ////////////////////////////////////////
 bool DKCef::RunDuktape(DKString& string)
 {
-	DKDebug(string);
+	DKDEBUGFUNC(string);
 	return DKDuktape::RunDuktape(string);
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKCef::RunJavascript(const int& browser, DKString& string)
 {
-	DKDebug(browser, string);
+	DKDEBUGFUNC(browser, string);
 	//FIXME - get CefPostTask working
 	//if(!CefCurrentlyOn(TID_UI)){
 	//	CefPostTask(TID_UI, base::Bind(&DKCef::RunJavascript, this, string));
@@ -689,12 +689,12 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 	//}
 
 	if(!DKUtil::InMainThread()){ 
-		DKLog("DKCef::RunJavascript("+string+"): not in the main thread\n", DKWARN);
+		DKWARN("DKCef::RunJavascript("+string+"): not in the main thread\n");
 		//return false; 
 	}
 	CefRefPtr<CefFrame> frame = dkBrowsers[browser].browser->GetMainFrame();
 	if(!frame){
-		DKLog("DKCef::RunJavascript("+string+"): frame invalid\n", DKERROR);
+		DKERROR("DKCef::RunJavascript("+string+"): frame invalid\n");
 		return false;
 	}
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
@@ -704,7 +704,7 @@ bool DKCef::RunJavascript(const int& browser, DKString& string)
 ////////////////////////////////////////
 bool DKCef::SetFocus(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	current_browser = dkBrowsers[browser].browser;
@@ -715,7 +715,7 @@ bool DKCef::SetFocus(const int& browser)
 ////////////////////////////////////////////////
 bool DKCef::SetKeyboardFocus(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	keyboardFocus = browser;
 	return true;
@@ -724,7 +724,7 @@ bool DKCef::SetKeyboardFocus(const int& browser)
 ///////////////////////////////////////////////////////////
 bool DKCef::SetUrl(const int& browser, const DKString& url)
 {
-	DKDebug(browser, url);
+	DKDEBUGFUNC(browser, url);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	if(same(url, "chrome://plugins")){
 		RunPluginInfoTest(dkBrowsers[browser].browser);
@@ -737,7 +737,7 @@ bool DKCef::SetUrl(const int& browser, const DKString& url)
 ////////////////////////////////////////////
 bool DKCef::ShowDevTools(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	CefWindowInfo window_info;
 	CefBrowserSettings settings;
 	CefPoint inspectElementAt;
@@ -755,7 +755,7 @@ bool DKCef::ShowDevTools(const int& browser)
 ////////////////////////////////////
 bool DKCef::Stop(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
 	dkBrowsers[browser].browser->StopLoad();
 	return true;
@@ -765,7 +765,7 @@ bool DKCef::Stop(const int& browser)
 bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
 	if(same(id,"DKLog")){ return false; }
-	DKDebug(id, type, value);
+	DKDEBUGFUNC(id, type, value);
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(same(type,"second")){ return false; }
@@ -790,7 +790,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	//DKSendEvent to first browsers only for now. 
 	CefRefPtr<CefFrame> frame = dkBrowsers[0].browser->GetMainFrame();
 	if(!frame){
-		DKLog("DKCef::SendEvent(): frame invalid \n", DKERROR);
+		DKERROR("DKCef::SendEvent(): frame invalid \n");
 		return false;
 	}
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
@@ -814,7 +814,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 ////////////////////////////////////////////////////////////
 void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser) 
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	class Visitor : public CefWebPluginInfoVisitor {
 	public:
 		explicit Visitor(CefRefPtr<CefBrowser> browser)
@@ -851,7 +851,7 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 //////////////////////////////////////////////
 bool DKCef::ViewPageSource(const int& browser)
 {
-	DKDebug(browser);
+	DKDEBUGFUNC(browser);
 	dkBrowsers[browser].browser->GetMainFrame()->ViewSource();
 	return true;
 }
@@ -859,10 +859,10 @@ bool DKCef::ViewPageSource(const int& browser)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std::vector<CefString>& file_paths)
 {
-	DKDebug(selected_accept_filter);
+	DKDEBUGFUNC(selected_accept_filter);
 	DKString files;
 	for(unsigned int i=0; i<file_paths.size(); ++i){
-		DKLog(file_paths[i].ToString()+"\n");
+		DKINFO(file_paths[i].ToString()+"\n");
 		files += file_paths[i].ToString();
 		if(i<file_paths.size()-1){
 			files += ";";
@@ -879,5 +879,5 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 //////////////////
 void DKCef::Test()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 }

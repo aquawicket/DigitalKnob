@@ -6,7 +6,7 @@
 ///////////////////////
 bool DKThreadJS::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKThread_DKQueue", &DKThreadJS::_DKQueue);
 	DKDuktape::AttachFunction("DKThread_GetThreadNames", &DKThreadJS::GetThreadNames);
 	return true;
@@ -15,7 +15,7 @@ bool DKThreadJS::Init()
 ////////////////////////////////////////////////
 int DKThreadJS::GetThreadNames(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString names = toString(DKThreadPool::Instance("DKThreadPool")->names, ",");
 	duk_push_string(ctx, names.c_str());
 	return 1;
@@ -24,10 +24,10 @@ int DKThreadJS::GetThreadNames(duk_context* ctx)
 //////////////////////////////////////////
 int DKThreadJS::_DKQueue(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString name = duk_require_string(ctx, 0);
 	DKString code = duk_require_string(ctx, 1);
-	DKLog("DKThreadJS::DKQueue("+name+","+code+")\n");
+	DKINFO("DKThreadJS::DKQueue("+name+","+code+")\n");
 #ifdef WIN32
 	DKQueue(name, QueueItem, code); //Call in thread
 #else
@@ -39,7 +39,7 @@ int DKThreadJS::_DKQueue(duk_context* ctx)
 ////////////////////////////
 void DKThreadJS::QueueItem()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	duk_context* ctx2 = DKDuktape::ctx;
 	if(!ctx2){ return; }// post error here

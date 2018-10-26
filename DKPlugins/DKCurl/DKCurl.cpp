@@ -6,6 +6,7 @@
 ///////////////////
 bool DKCurl::Init()
 {
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKCurlJS");
 	DKClass::DKCreate("DKCurlV8");
 	
@@ -24,6 +25,7 @@ bool DKCurl::Init()
 //////////////////
 bool DKCurl::End()
 {
+	DKDEBUGFUNC();
 	if(curl){
 		curl_easy_cleanup(curl);
 	}
@@ -35,13 +37,14 @@ bool DKCurl::End()
 ///////////////////////
 bool DKCurl::CurlInit()
 {
+	DKDEBUGFUNC();
 	if(curl){
 		curl_easy_cleanup(curl);
 	}
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl = curl_easy_init(); // Get a curl handle
 	if(!curl){
-        DKLog("Curl did not initialize! \n", DKERROR);
+        DKERROR("Curl did not initialize! \n");
 		return false;
 	}
 	return true;
@@ -50,6 +53,7 @@ bool DKCurl::CurlInit()
 ////////////////////////////////////////////////////////////////
 bool DKCurl::Download(const DKString& url, const DKString& dest)
 {
+	DKDEBUGFUNC(url, dest);
 	DKString path = dest;
 	DKString filename;
 	DKFile::GetFileName(url, filename);
@@ -57,7 +61,7 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 		path += "/"+filename;
 	}
 	if(DKFile::PathExists(path)){
-		DKLog("DKWARNING: Download(): local file already exists. OVERWRITING "+filename+"\n", DKWARN);
+		DKWARN("DKCurl::Download(): local file already exists. OVERWRITING "+filename+"\n");
 	}
 
 	if(has(url,"http://") && HttpDownload(url, path)){ return true; }
@@ -68,6 +72,7 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 /////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKString& output)
 {
+	DKDEBUGFUNC(email, password, output);
 	// TODO: need a working facebook login 
 
 	CurlInit();
@@ -96,7 +101,7 @@ bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKSt
 
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code	
 	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		DKERROR("curl_easy_preform() failed \n"); 
 		return false; 
 	}
 
@@ -107,6 +112,7 @@ bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKSt
 /////////////////////////////////////////////////////////////////
 bool DKCurl::FileDate(const DKString& url, DKString& filedate)
 {
+	DKDEBUGFUNC(url, filedate);
 	if(has(url,"http://") && HttpFileDate(url, filedate)){return true;}
 	if(has(url,"ftp.") && FtpFileDate(url, filedate)){return true;}
 	return false;
@@ -115,6 +121,7 @@ bool DKCurl::FileDate(const DKString& url, DKString& filedate)
 ////////////////////////////////////////////
 bool DKCurl::FileExists(const DKString& url)
 {
+	DKDEBUGFUNC(url);
 	if(has(url,"ftp.") && FtpFileExists(url)){return true;}
 	if(HttpFileExists(url)){ return true; }
 	return false;
@@ -123,6 +130,7 @@ bool DKCurl::FileExists(const DKString& url)
 //////////////////////////////////////////////////////
 bool DKCurl::FileSize(const DKString& url, long& size)
 {
+	DKDEBUGFUNC(url, size);
 	if(has(url,"http://") && HttpFileSize(url, size)){return true;}
 	if(has(url,"ftp.") && FtpFileSize(url, size)){return true;}
 	return false;
@@ -131,6 +139,7 @@ bool DKCurl::FileSize(const DKString& url, long& size)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKString& pass, const DKString port)
 {
+	DKDEBUGFUNC(server, name, pass, port);
 	ftpServer.clear();
 	ftpName.clear();
 	ftpPass.clear();
@@ -149,20 +158,21 @@ bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKSt
 			ftpName = name;
 			ftpPass = pass;
 			ftpPort = port;
-			DKLog("FTP Connected \n");
+			DKINFO("FTP Connected\n");
 		    return true;
 		}
-		DKLog("Could not connect to FTP \n", DKERROR);
+		DKWARN("Could not connect to FTP\n");
 		return false;
 	}
 
-	DKLog("curl invalid \n", DKERROR);
+	DKERROR("curl invalid\n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 {
+	DKDEBUGFUNC(url, dest);
 	//if(!FtpFileExists(url)){
 	//	DKLog("url not found \n", DKERROR);
 	//	return false;
@@ -170,11 +180,11 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 
 	FILE *fp = fopen(dest.c_str(),"wb");
 	if(!fp){ 
-		DKLog("DKCurl::FtpDownload() *fp invalid \n", DKERROR);
+		DKERROR("DKCurl::FtpDownload() *fp invalid \n");
 		return false; 
 	}
 
-	DKLog("Downloading "+url+"...\n");
+	DKINFO("Downloading "+url+"...\n");
  
 	CurlInit();
 	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -187,11 +197,11 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 	fclose(fp);
  
 	if(res != CURLE_OK){ 
-		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
+		DKERROR(DKString(curl_easy_strerror(res))+"\n");
 		return false; 
 	}
 	if(!DKFile::PathExists(dest)){
-		DKLog("Download Failed: "+dest+"\n", DKERROR);
+		DKERROR("Download Failed: "+dest+"\n");
 		return false;
 	}
 
@@ -201,6 +211,7 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 /////////////////////////////////////////////////////////////////
 bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
 {
+	DKDEBUGFUNC(url, filedate);
 	//if(!FtpFileExists(url)){
 	//	DKLog("url not found\n", DKERROR);
 	//	return false;
@@ -216,7 +227,7 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
 	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
  	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
 	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		DKERROR("curl_easy_preform() failed\n"); 
 		return false; 
 	}
 
@@ -245,6 +256,7 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
 ///////////////////////////////////////////////
 bool DKCurl::FtpFileExists(const DKString& url)
 {
+	DKDEBUGFUNC(url);
 	CurlInit();
 	DKString login = ftpName+":"+ftpPass;
 	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
@@ -270,6 +282,7 @@ bool DKCurl::FtpFileExists(const DKString& url)
 /////////////////////////////////////////////////////////
 bool DKCurl::FtpFileSize(const DKString& url, long& size)
 {
+	DKDEBUGFUNC(url, size);
 	//TODO
 	return false;
 }
@@ -277,8 +290,9 @@ bool DKCurl::FtpFileSize(const DKString& url, long& size)
 /////////////////////////////////////////////////////////////////
 bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 {
+	DKDEBUGFUNC(file, url);
 	if(DKFile::IsDirectory(file)){
-		DKLog("DKCurl::FtpUpload() cannot upload recursive folders yet.\n", DKERROR);
+		DKERROR("DKCurl::FtpUpload() cannot upload recursive folders yet.\n");
 		return false;
 	}
 	DKString urlpath = url+"_ul";
@@ -293,7 +307,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 	DKString buff2 = "RNTO " + filename;
 
 	if(stat(file.c_str(), &file_info)){
-		DKLog("Couldn't open "+file+": "+strerror(errno)+" \n", DKERROR);
+		DKERROR("Couldn't open "+file+": "+strerror(errno)+"\n");
 		return false;
     }
 
@@ -303,7 +317,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
     
 	CurlInit();
     if(curl){
-		DKLog("Uploading "+filename);
+		DKINFO("Uploading "+filename);
 		headerlist = curl_slist_append(headerlist, buff1.c_str());
 		headerlist = curl_slist_append(headerlist, buff2.c_str());
 		curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -321,22 +335,22 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 
 		CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 		if(res != CURLE_OK){ 
-			DKLog(" :"+DKString(curl_easy_strerror(res))+"\n", DKWARN);
-			DKLog("2nd attempt.", DKWARN);
+			DKWARN(" :"+DKString(curl_easy_strerror(res))+"\n");
+			DKWARN("2nd attempt.");
 			res = curl_easy_perform(curl);
 		}
 		if(res != CURLE_OK){ 
-			DKLog(" :"+DKString(curl_easy_strerror(res))+"\n", DKWARN);
-			DKLog("3rd attempt.", DKWARN);
+			DKWARN(" :"+DKString(curl_easy_strerror(res))+"\n");
+			DKWARN("3rd attempt.");
 			res = curl_easy_perform(curl);
 		}
 
 		curl_slist_free_all(headerlist);
-		DKLog("\n");
+		DKINFO("\n");
 
 		if(res != CURLE_OK){ 
 			fclose(hd_src);
-			DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
+			DKERROR(DKString(curl_easy_strerror(res))+"\n");
 			return false; 
 		}
 	}
@@ -348,6 +362,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url)
 ///////////////////////////////////////////////
 bool DKCurl::GetExternalIP(DKString& ipaddress)
 {
+	DKDEBUGFUNC(ipaddress);
 	DKString url = "http://myexternalip.com/raw";
 	return HttpToString(url, ipaddress);
 }
@@ -355,18 +370,19 @@ bool DKCurl::GetExternalIP(DKString& ipaddress)
 ////////////////////////////////////////////////////////////////////
 bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 {
+	DKDEBUGFUNC(url, dest);
 	if(!DKCurl::FileExists(url)){
-		DKLog("DKCurl::HttpDownload(): url not found \n", DKERROR);
+		DKERROR("DKCurl::HttpDownload(): url not found \n");
 		return false;
 	}
 
 	FILE *fp = fopen(dest.c_str(),"wb");
 	if(!fp){ 
-		DKLog("DKCurl::Download() *fp invalid \n", DKERROR);
+		DKERROR("DKCurl::Download() *fp invalid \n");
 		return false; 
 	}
 
-	DKLog("Downloading "+url+"...\n");
+	DKINFO("Downloading "+url+"...\n");
 
 	CurlInit();
 	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
@@ -379,23 +395,24 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 	fclose(fp);
 
 	if(res != CURLE_OK){ 
-		DKLog(DKString(curl_easy_strerror(res))+"\n", DKERROR);
+		DKERROR(DKString(curl_easy_strerror(res))+"\n");
 		return false; 
 	}
 	if(!DKFile::PathExists(dest)){
-		DKLog("Download Failed: "+dest+"\n", DKERROR);
+		DKERROR("Download Failed: "+dest+"\n");
 		return false;
 	}
 
-	DKLog("Download Complete: "+dest+"\n");
+	DKINFO("Download Complete: "+dest+"\n");
 	return true;
 }
 
 //////////////////////////////////////////////////////////////////
 bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 {
+	DKDEBUGFUNC(url, filedate);
 	if(!HttpFileExists(url)){
-		DKLog("url not found\n", DKERROR);
+		DKERROR("url not found\n");
 		return false;
 	}
 
@@ -407,7 +424,7 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
  	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
 	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n",DKERROR); 
+		DKERROR("curl_easy_preform() failed \n"); 
 		curl_easy_cleanup(curl);
 		return false; 
 	}
@@ -438,6 +455,7 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 ////////////////////////////////////////////////
 bool DKCurl::HttpFileExists(const DKString& url)
 {
+	DKDEBUGFUNC(url);
 	DKString _url = url;
 	if(!has(url, "http://") && !has(url, "HTTP://") && !has(url, "https://") && !has(url, "HTTPS://")){
 		_url = "http://" + url;
@@ -451,7 +469,7 @@ bool DKCurl::HttpFileExists(const DKString& url)
 	long http_code = 0;
 	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
 	if (res == CURLE_ABORTED_BY_CALLBACK){
-		DKLog("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n", DKERROR);
+		DKERROR("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n");
 		return false; 
 	}
 	if (http_code == 200 || http_code == 301){
@@ -469,6 +487,7 @@ bool DKCurl::HttpFileExists(const DKString& url)
 //////////////////////////////////////////////////////////
 bool DKCurl::HttpFileSize(const DKString& url, long& size)
 {
+	DKDEBUGFUNC(url, size);
 	/*
 	double length = 0.0;
 	if(curl){
@@ -496,9 +515,9 @@ bool DKCurl::HttpFileSize(const DKString& url, long& size)
 ////////////////////////////////////////////////////////////////
 bool DKCurl::HttpToString(const DKString& url, DKString& output)
 {
-	DKDebug(url, output);
+	DKDEBUGFUNC(url, output);
 	DKString _url = url;
-	DKLog("DKCurl::Http -> "+ _url +"\n");
+	DKINFO("DKCurl::Http -> "+ _url +"\n");
 	replace(_url," ","%20");
 	replace(_url,"'","%27");
 	//replace(_url,"@","%40");
@@ -506,7 +525,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	//replace(_url,"=","%3D");
 
 	if(!DKCurl::FileExists(url)){
-		DKLog("DKCurl::HttpToString(): "+url+"  not found \n", DKERROR);
+		DKERROR("DKCurl::HttpToString(): "+url+"  not found \n");
 		//return false;
 	}
 	
@@ -527,7 +546,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 	
 	if(res != CURLE_OK){ 
-		DKLog("curl_easy_preform() failed \n", DKERROR); 
+		DKERROR("curl_easy_preform() failed \n"); 
 		return false; 
 	}
 
@@ -538,7 +557,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 //////////////////////////////////////////////////////////////////////////////
 size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
-	//DKDebug(ptr, size, nmemb, stream);
+	//DKDEBUGFUNC(ptr, size, nmemb, stream);
     size_t written;
     written = fwrite(ptr, size, nmemb, stream);
     return written;
@@ -547,7 +566,7 @@ size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream)
 /////////////////////////////////////////////////////////////////////////////////////
 int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer)
 {
-	//DKDebug(data, size, nmemb, buffer);
+	//DKDEBUGFUNC(data, size, nmemb, buffer);
     int result = 0;
     if (buffer != NULL) {
         buffer->append(data, size * nmemb);
@@ -559,7 +578,7 @@ int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *bu
 ////////////////////////////////////////////////////////////////////////////////
 size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 {
-	//DKDebug(ptr, size, nmemb, stream);
+	//DKDEBUGFUNC(ptr, size, nmemb, stream);
     curl_off_t nread;
     size_t retcode = fread(ptr, size, nmemb, (FILE *) stream);
     nread = (curl_off_t) retcode;
@@ -572,7 +591,7 @@ size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloaded, 
                     double TotalToUpload, double NowUploaded)
 {
-	//DKDebug(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
+	//DKDEBUGFUNC(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
     // how wide you want the progress meter to be
     int totaldotz=40;
     double fractiondownloaded = NowDownloaded / TotalToDownload;

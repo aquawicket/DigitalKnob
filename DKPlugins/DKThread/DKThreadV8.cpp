@@ -5,7 +5,7 @@
 ///////////////////////
 bool DKThreadV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
 	DKV8::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
 	return true;
@@ -14,14 +14,14 @@ bool DKThreadV8::Init()
 //////////////////////
 bool DKThreadV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 //////////////////////////////////////////////////////////////
 bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString names = toString(DKThreadPool::Instance("DKThreadPool")->names, ",");
 	//retval = CefV8Value::CreateString(names.c_str());
 	retval->SetString(0, names.c_str());
@@ -31,13 +31,13 @@ bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval)
 ////////////////////////////////////////////////////////
 bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	//DKString name = args[0]->GetStringValue();
 	DKString name = args->GetString(0);
 	//DKString code = args[1]->GetStringValue();
 	DKString code = args->GetString(1);
 	
-	DKLog("DKThreadJS::DKQueue("+name+","+code+")\n");
+	DKINFO("DKThreadJS::DKQueue("+name+","+code+")\n");
 //#ifdef WIN32
 //	DKQueue(name, QueueItem, code); //Call in thread
 //#else
@@ -49,7 +49,7 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 /////////////////////////////
 void DKThreadV8::QueueItem()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	//duk_context* ctx2 = DKDuktape::ctx;
 	//if(!ctx2){ return; }// post error here

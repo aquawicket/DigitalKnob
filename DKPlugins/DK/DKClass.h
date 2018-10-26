@@ -83,7 +83,7 @@ public:
 		DKDEBUGFUNC(name, func, _this);
 		functions[name] = boost::bind(func, _this, _1, _2);
 		if(!functions[name]){
-			DKLOG("RegisterFunc(" + name + "): failed to register function \n", DKERROR);
+			DKERROR("RegisterFunc(" + name + "): failed to register function \n");
 			return;
 		}
 	}

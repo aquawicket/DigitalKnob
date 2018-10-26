@@ -118,6 +118,7 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 #define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
 #define DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
+#define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
 #define DKDEBUGARGS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
 

@@ -6,6 +6,7 @@
 /////////////////////
 bool DKCurlJS::Init()
 {
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKCurl_Download", DKCurlJS::Download);
 	DKDuktape::AttachFunction("DKCurl_FileDate", DKCurlJS::FileDate);
 	DKDuktape::AttachFunction("DKCurl_FtpConnect", DKCurlJS::FtpConnect);
@@ -21,6 +22,7 @@ bool DKCurlJS::Init()
 ////////////////////////////////////////
 int DKCurlJS::Download(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	DKString dest = duk_require_string(ctx, 1);
 	if(!DKCurl::Get()->Download(url, dest)){
@@ -32,6 +34,7 @@ int DKCurlJS::Download(duk_context* ctx)
 ////////////////////////////////////////
 int DKCurlJS::FileDate(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	DKString filedate;
 	if (!DKCurl::Get()->FileDate(url, filedate)){
@@ -46,6 +49,7 @@ int DKCurlJS::FileDate(duk_context* ctx)
 //////////////////////////////////////////
 int DKCurlJS::FtpConnect(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString server = duk_require_string(ctx, 0);
 	DKString name = duk_require_string(ctx, 1);
 	DKString pass = duk_require_string(ctx, 2);
@@ -60,6 +64,7 @@ int DKCurlJS::FtpConnect(duk_context* ctx)
 /////////////////////////////////////////
 int DKCurlJS::FtpUpload(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	DKString url = duk_require_string(ctx, 1);
 	if (!DKCurl::Get()->FtpUpload(file, url)){
@@ -72,6 +77,7 @@ int DKCurlJS::FtpUpload(duk_context* ctx)
 /////////////////////////////////////////////
 int DKCurlJS::GetExternalIP(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString ipaddress;
 	if(!DKCurl::Get()->GetExternalIP(ipaddress)){
 		return 0;
@@ -83,6 +89,7 @@ int DKCurlJS::GetExternalIP(duk_context* ctx)
 ////////////////////////////////////////////
 int DKCurlJS::HttpToString(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	DKString output;
 	if(!DKCurl::Get()->HttpToString(url, output)){
@@ -95,6 +102,7 @@ int DKCurlJS::HttpToString(duk_context* ctx)
 //////////////////////////////////////////////
 int DKCurlJS::HttpFileExists(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	if(!DKCurl::Get()->HttpFileExists(url)){
 		return 0;
