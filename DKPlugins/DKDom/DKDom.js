@@ -10,7 +10,7 @@ function DKDom_Init()
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }  //This class is a wrapper for libRocket only
 	DKDom_Create();
-	DKDom_Test();
+	//DKDom_Test();
 }
 
 ////////////////////
