@@ -132,7 +132,7 @@ bool DKArchive::Compress(const DKString& path, const DKString& file)
 			for (unsigned int s = 0; s < subfiles.size(); ++s){
 				files.push_back(files[i]+"/"+subfiles[s]);
 			}
-			//DKLog("DKArchive::Compress() " + _path + files[i] + " :compressing recursive not supported \n");
+			//DKINFO("DKArchive::Compress() " + _path + files[i] + " :compressing recursive not supported\n");
 			continue; //can't compress inner folders at the moment
 		} 
 		stat((_path+files[i]).c_str(), &st);

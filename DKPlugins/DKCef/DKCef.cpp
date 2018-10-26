@@ -34,7 +34,7 @@ bool DKCef::Init()
 	//int major_version = cef_version_info(0);
 	//int build_version = cef_version_info(4);
 	//DKString version_string = "Cef/"+toString(major_version)+"."+toString(build_version);
-	//DKLog("Cef version "+version_string+"\n");
+	//DKINFO("Cef version "+version_string+"\n");
 	//CefString(&settings.product_version).FromASCII(version_string.c_str());
 
 	cefHandler = NULL;
@@ -50,7 +50,7 @@ bool DKCef::Init()
 	DKString url;
 
 	DKString _data = toString(data, ",");
-	//DKLog("DKCef::Init("+_data+")\n");
+	//DKINFO("DKCef::Init("+_data+")\n");
 	if(data.size() > 4){
 		id = data[1];
 		top = toInt(data[2]);
@@ -119,7 +119,7 @@ bool DKCef::Init()
 	if (!libelf) {
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("Could not load " + elf_dll + ": " + error + "\n", DKERROR);
+		DKERROR("Could not load "+elf_dll+": "+error+"\n");
 		FreeLibrary(libelf);
 	}
 	__HrLoadAllImportsForDll("chrome_elf.dll"); //delay loading the DLL to move it's locations
@@ -128,7 +128,7 @@ bool DKCef::Init()
 	if(!libcef){
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("Could not load "+cef_dll+": "+error+"\n", DKERROR);
+		DKERROR("Could not load "+cef_dll+": "+error+"\n");
 		FreeLibrary(libcef);
 	}
 	__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL to move it's locations  
@@ -243,7 +243,7 @@ bool DKCef::Init()
 #ifdef MAC
 	DKString exepath;
 	DKFile::GetExePath(exepath);
-	DKLog("exepath="+exepath+" \n");
+	DKINFO("exepath="+exepath+"\n");
 	DKString exename;
 	DKFile::GetExeName(exename);
 	DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
@@ -253,7 +253,7 @@ bool DKCef::Init()
 #ifdef LINUX
 	DKString ep = DKFile::local_assets + "DKCef/cefchild";
 	if(!DKFile::PathExists(ep)){
-        DKLog("DKCef::Init(): file not found: "+ep+"\n", DKERROR);
+        DKERROR("DKCef::Init(): file not found: "+ep+"\n");
         //TODO: disable multi-process
     }
 	CefString(&settings.browser_subprocess_path) = ep.c_str(); //cefchild
@@ -366,7 +366,7 @@ bool DKCef::CopyImage(const DKString& url)
 	NewBrowser();
 	int num;
 	GetBrowsers(num);
-	DKLog("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n");
+	DKINFO("DKCef::CopyImage("+url+"): num = "+toString(num)+"\n");
 	SetUrl(num-1, url);
 
 	//FIXME - we can't copy until the frame is loaded with the image. 
@@ -473,7 +473,7 @@ bool DKCef::GetCurrentBrowser(int& browser)
 			return true;
 		}
 	}
-	//DKLog("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n", DKERROR);
+	//DKERROR("DKCef::GetCurrentBrowser("+toString(browser)+"): failed\n");
 	browser = -1;
 	return false;
 }
@@ -610,7 +610,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
-		      DKLog("DKCef::NewBrowser(): gdk_window invalid\n");
+		      DKINFO("DKCef::NewBrowser(): gdk_window invalid\n");
 		      return false;
 		}
 		gdk_window_set_title(gdk_window, title.c_str());
@@ -801,7 +801,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	for(unsigned int i=0; i<dkcef->browsers.size(); ++i){
 		CefRefPtr<CefFrame> frame = dkcef->browsers[i]->GetMainFrame();
 		if(!frame){
-			DKLog("DKCef::SendEvent(): frame invalid \n", DKERROR);
+			DKERROR("DKCef::SendEvent(): frame invalid\n");
 			return false;
 		}
 		DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";

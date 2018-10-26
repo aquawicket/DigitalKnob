@@ -175,7 +175,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 #endif
 
 #ifdef IOS
-	DKLog("Searching for iOS assets path... \n");
+	DKINFO("Searching for iOS assets path...\n");
 	
 	// /Users/aquawicket/Library/Application Support/iPhone Simulator/6.1/Applications/D4BEB636-716E-445D-8CD9-8722785D7EB7/GuiTest.app/GuiTest
 	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/GuiTest.app/GuiTest
@@ -271,7 +271,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	
 	
 #if !defined(ANDROID) && !defined(WIN32)
-	DKLog("Extracting assets.zip form assets Header file. \n");	
+	DKINFO("Extracting assets.zip form assets Header file\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKUtil::C2Bin((unsigned char *)assets, assets_size, DKFile::local_assets+"assets.zip");
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
@@ -280,7 +280,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 #endif
 
 #ifdef WIN32
-	DKINFO("Extracting assets.zip form Windows resource. \n");
+	DKINFO("Extracting assets.zip form Windows resource\n");
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
 	HRSRC hRes;						// handle/ptr. to res. info. 
 	char *lpResLock;				// pointer to resource data 
@@ -306,7 +306,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	//}
 #endif
 #ifdef ANDROID
-	DKLog("TODO: DKAssets::CopyAssets() <-- link android CopyAssets to this", DKWARN);
+	DKWARN("TODO: DKAssets::CopyAssets() <-- link android CopyAssets to this\n");
 #endif
 
 	//Restore User data

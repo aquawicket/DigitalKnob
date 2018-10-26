@@ -268,7 +268,7 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	//CefRefPtr<CefFrame> frame = DKV8::v8handler->browser->GetMainFrame();
 	//CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
 	if(!frame){
-		DKLog("DKCefApp::SendEvent("+id+","+type+","+value+"): frame invalid\n", DKWARN);
+		DKWARN("DKCefApp::SendEvent("+id+","+type+","+value+"): frame invalid\n");
 		return false;
 	}
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";

@@ -26,14 +26,14 @@
     DKApp dkapp;
     
 	#ifdef DKAPP
-		DKLog("DKAPP defined \n",DKDEBUG);
+		DKINFO("DKAPP defined\n");
 	#endif
 		
-	DKLog("Registered Classes \n", DKDEBUG);
+	DKINFO("Registered Classes\n");
 	DKStringArray classes;
 	DKClass::GetClassList(classes);
 	for(int i=0; i<classes.size(); i++){
-		DKLog(classes[i]+"\n",DKDEBUG);
+		DKINFO(classes[i]+"\n");
 	}
 
 	//Attempt to preload these
