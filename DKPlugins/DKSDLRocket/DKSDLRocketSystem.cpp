@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 Rocket::Core::Input::KeyIdentifier RocketSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
 {
-	DKDebug(sdlkey);
+	DKDEBUGFUNC(sdlkey);
     using namespace Rocket::Core::Input;
     switch(sdlkey) {
         case SDLK_UNKNOWN:
@@ -346,7 +346,7 @@ Rocket::Core::Input::KeyIdentifier RocketSDL2SystemInterface::TranslateKey(SDL_K
 /////////////////////////////////////////////////////////////////
 int RocketSDL2SystemInterface::TranslateMouseButton(Uint8 button)
 {
-	DKDebug(button);
+	DKDEBUGFUNC(button);
     switch(button){
         case SDL_BUTTON_LEFT:
             return 0;
@@ -362,7 +362,7 @@ int RocketSDL2SystemInterface::TranslateMouseButton(Uint8 button)
 ////////////////////////////////////////////////
 int RocketSDL2SystemInterface::GetKeyModifiers()
 {
-	DKDebug();
+	DKDEBUGFUNC();
     SDL_Keymod sdlMods = SDL_GetModState();
     int retval = 0;
     if(sdlMods & KMOD_CTRL)
@@ -383,39 +383,39 @@ int RocketSDL2SystemInterface::GetKeyModifiers()
 /////////////////////////////////////////////////
 float RocketSDL2SystemInterface::GetElapsedTime()
 {
-	//DKDebug();
+	//DKDEBUGFUNC();
 	return (float)SDL_GetTicks() / 1000;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RocketSDL2SystemInterface::LogMessage(Rocket::Core::Log::Type type, const Rocket::Core::String& message)
 {
-	//DKDebug(type, message);
+	//DKDEBUGFUNC(type, message);
 	if(has(message.CString(),"Loaded font face")){
 		type = Rocket::Core::Log::LT_DEBUG;
 	}
 	switch(type)
 	{
 	case Rocket::Core::Log::LT_ALWAYS:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
+		DKINFO("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
 	case Rocket::Core::Log::LT_ERROR:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKERROR);
+		DKERROR("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
 	case Rocket::Core::Log::LT_ASSERT:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKERROR);
+		DKERROR("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
 	case Rocket::Core::Log::LT_WARNING:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKWARN);
+		DKWARN("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
 	case Rocket::Core::Log::LT_INFO:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
+		DKINFO("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
 	case Rocket::Core::Log::LT_DEBUG:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKDEBUG);
+		DKDEBUG("[ROCKET] "+DKString(message.CString())+"\n");
 		break;
     case Rocket::Core::Log::LT_MAX:
-		DKLog("[ROCKET] "+DKString(message.CString())+"\n", DKINFO);
+		DKINFO("[ROCKET] "+DKString(message.CString())+"\n");
         break;
 	};
 	

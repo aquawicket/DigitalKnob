@@ -7,7 +7,7 @@
 ////////////////////////
 bool DKSDLRocket::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
@@ -15,7 +15,7 @@ bool DKSDLRocket::Init()
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
 	dkRocket = DKRocket::Instance("DKRocket0");
 	if(!dkSdlWindow || !dkRocket){
-		DKLog("DKSDLRocket::Init(): INVALID OBJECTS \n", DKERROR);
+		DKERROR("DKSDLRocket::Init(): INVALID OBJECTS\n");
 		return false;
 	}
 
@@ -38,14 +38,14 @@ bool DKSDLRocket::Init()
 ///////////////////////
 bool DKSDLRocket::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 //////////////////////////////////////////
 bool DKSDLRocket::Handle(SDL_Event *event)
 {
-	//DKDebug(event);
+	//DKDEBUGFUNC(event);
 	Rocket::Core::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:
@@ -141,7 +141,7 @@ bool DKSDLRocket::Handle(SDL_Event *event)
 ////////////////////////
 void DKSDLRocket::Draw()
 {
-    //DKDebug();
+    //DKDEBUGFUNC();
 	if(dkSdlWindow->width != dkRocket->context->GetDimensions().x || dkSdlWindow->height != dkRocket->context->GetDimensions().y){
 		dkRocket->context->SetDimensions(Rocket::Core::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 

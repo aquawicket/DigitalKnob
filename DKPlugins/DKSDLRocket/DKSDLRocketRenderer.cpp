@@ -12,6 +12,7 @@ static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 //////////////////////////////////////////////////////////////////////////////////
 RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen)
 {
+	DKDEBUGFUNC(renderer, screen);
     mRenderer = renderer;
     mScreen = screen;
 }
@@ -20,6 +21,7 @@ RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* scree
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
+	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
 	DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
@@ -62,7 +64,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 
 		if(!sdl_texture){ return; }
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1){
-			DKLog("SDL_GL_BindTexture: "+DKString(SDL_GetError())+" \n", DKERROR);
+			DKERROR("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
 		}
     }
  
@@ -129,6 +131,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 /////////////////////////////////////////////////////////
 void RocketSDL2Renderer::EnableScissorRegion(bool enable)
 {
+	//DKDEBUGFUNC(enable);
     if (enable)
         glEnable(GL_SCISSOR_TEST);
     else
@@ -139,6 +142,7 @@ void RocketSDL2Renderer::EnableScissorRegion(bool enable)
 //////////////////////////////////////////////////////////////////////////////
 void RocketSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 {
+	//DKDEBUGFUNC(x, y, width, height);
     int w_width, w_height;
     SDL_GetWindowSize(mScreen, &w_width, &w_height);
     glScissor(x, w_height - (y + height), width, height);
@@ -148,6 +152,7 @@ void RocketSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RocketSDL2Renderer::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
 {
+	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rocket::Core::String&");
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
 	//We will map that id to the texture handle for later use. 
@@ -214,6 +219,7 @@ bool RocketSDL2Renderer::LoadTexture(Rocket::Core::TextureHandle& texture_handle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool RocketSDL2Renderer::GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions)
 {
+	DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
@@ -238,5 +244,6 @@ bool RocketSDL2Renderer::GenerateTexture(Rocket::Core::TextureHandle& texture_ha
 ///////////////////////////////////////////////////////////////////////////////////
 void RocketSDL2Renderer::ReleaseTexture(Rocket::Core::TextureHandle texture_handle)
 {
+	DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }

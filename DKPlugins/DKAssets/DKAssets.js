@@ -1,5 +1,7 @@
 //BROWSER
-DKLog("Loaded DKAssets.js\n");
+
+//FIXME - should all of this go into DKAssets_Init()?
+DKINFO("Loaded DKAssets.js\n");
 
 var href = document.location.href;
 if(href.indexOf("?") > -1){
@@ -63,34 +65,35 @@ else{
 }
 //if(absolutepath){online_assets = absolutepath;}
 
-DKLog("href: "+href+"\n");
-DKLog("hostname: "+hostname+"\n");
-DKLog("pathname: "+pathname+"\n");
-DKLog("protocol: "+protocol+"\n");
-DKLog("appfilename: "+appfilename+"\n");
-DKLog("local_assets: "+local_assets+"\n");
-DKLog("online_assets: "+online_assets+"\n");
-DKLog("absolutepath: "+absolutepath+"\n");
+DKINFO("href: "+href+"\n");
+DKINFO("hostname: "+hostname+"\n");
+DKINFO("pathname: "+pathname+"\n");
+DKINFO("protocol: "+protocol+"\n");
+DKINFO("appfilename: "+appfilename+"\n");
+DKINFO("local_assets: "+local_assets+"\n");
+DKINFO("online_assets: "+online_assets+"\n");
+DKINFO("absolutepath: "+absolutepath+"\n");
 
-DKLog("LOG_DEBUG: "+LOG_DEBUG+"\n");
-DKLog("LOG_INFO: "+LOG_INFO+"\n");
-DKLog("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
-DKLog("LOG_ERRORS: "+LOG_ERRORS+"\n");
-DKLog("LOG_FILE: "+LOG_FILE+"\n");
-DKLog("LOG_SHOW: "+LOG_SHOW+"\n");
-DKLog("LOG_HIDE: "+LOG_HIDE+"\n");
+DKINFO("LOG_DEBUG: "+LOG_DEBUG+"\n");
+DKINFO("LOG_INFO: "+LOG_INFO+"\n");
+DKINFO("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
+DKINFO("LOG_ERRORS: "+LOG_ERRORS+"\n");
+DKINFO("LOG_FILE: "+LOG_FILE+"\n");
+DKINFO("LOG_SHOW: "+LOG_SHOW+"\n");
+DKINFO("LOG_HIDE: "+LOG_HIDE+"\n");
 
 
 ////////////////////////
 function DKAssets_Init()
 {
-
+	DKDEBUGFUNC();
 }
 
 if(DK_GetBrowser() != "CEF"){
 	///////////////////////////////
 	function DKAssets_LocalAssets()
 	{
+		DKDEBUGFUNC();
 		return local_assets;
 	}
 }
@@ -98,17 +101,20 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////////
 function DKAssets_OnlineAssets()
 {
+	DKDEBUGFUNC();
 	return online_assets;
 }
 
 ////////////////////////////
 function DKAssets_Protocol()
 {
+	DKDEBUGFUNC();
 	return protocol;
 }
 
 ////////////////////////////////
 function DKAssets_AbsolutePath()
 {
+	DKDEBUGFUNC();
 	return absolutepath;
 }

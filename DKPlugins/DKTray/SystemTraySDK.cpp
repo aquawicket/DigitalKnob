@@ -107,7 +107,7 @@ void CSystemTray::Initialise()
 
 #ifdef SYSTEMTRAY_USEW2K
     OSVERSIONINFO os = { sizeof(os) };
-    GetVersionEx(&os);
+    GetVersionEx(&os); //warning C4996: 'GetVersionExA': was declared deprecated
     m_bWin2K = ( VER_PLATFORM_WIN32_NT == os.dwPlatformId && os.dwMajorVersion >= 5 );
 #else
     m_bWin2K = FALSE;
@@ -146,7 +146,7 @@ BOOL CSystemTray::Create(HINSTANCE hInst, HWND hParent, UINT uCallbackMessage,
     m_bEnabled = TRUE;
 #else
     // this is only for Windows 95 (or higher)
-    m_bEnabled = (GetVersion() & 0xff) >= 4;
+    m_bEnabled = (GetVersion() & 0xff) >= 4; //warning C4996: 'GetVersion': was declared deprecated
     if (!m_bEnabled) 
     {
         ASSERT(FALSE);

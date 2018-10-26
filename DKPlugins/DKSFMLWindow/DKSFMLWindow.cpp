@@ -9,7 +9,7 @@ std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
 /////////////////////////
 bool DKSFMLWindow::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	window.create(sf::VideoMode(800, 600), "My window");
 	DKClass::RegisterFunc("DKSFMLWindow::TestInt", &DKSFMLWindow::TestInt, this);
 	DKClass::RegisterFunc("DKSFMLWindow::TestString", &DKSFMLWindow::TestString, this);
@@ -48,7 +48,7 @@ bool DKSFMLWindow::Init()
 ////////////////////////
 bool DKSFMLWindow::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	window.close();
 	return true;
 }
@@ -56,7 +56,7 @@ bool DKSFMLWindow::End()
 ////////////////////////////
 void DKSFMLWindow::Process()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	sf::Event e;
 	while(window.pollEvent(e)){
 		for(unsigned int i = 0; i < event_funcs.size(); ++i){
@@ -78,7 +78,7 @@ void DKSFMLWindow::Process()
 ///////////////////////////////////////
 bool DKSFMLWindow::handle(sf::Event& e)
 {
-	DKDebug("sf::Event&");
+	DKDEBUGFUNC("sf::Event&");
 	if(e.type == sf::Event::Closed){
 		DKApp::Exit();
 		return false;
@@ -90,7 +90,7 @@ bool DKSFMLWindow::handle(sf::Event& e)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestInt(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	int in = *(int*)input;
 	int out = in;
 	*(int*)output = out;
@@ -100,7 +100,7 @@ bool DKSFMLWindow::TestInt(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestString(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	std::string in = *(std::string*)input;
 	std::string out = in;
 	*(std::string*)output = out;
@@ -110,7 +110,7 @@ bool DKSFMLWindow::TestString(const void* input, void* output)
 /////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	int var = 1234;
 	*(int*)output = var;
 	return true;
@@ -119,7 +119,7 @@ bool DKSFMLWindow::TestReturnInt(const void* input, void* output)
 ////////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
@@ -129,7 +129,7 @@ bool DKSFMLWindow::TestReturnString(const void* input, void* output)
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
@@ -156,14 +156,14 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output)
 	isFullscreen = true;
 	return true;
 #endif
-	DKLog("DKSFMLWindow::Fullscreen(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::Fullscreen(): not implemented on this OS\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	DKString text;
 	if(!DKUtil::GetClipboard(text)){ return false; }
 	*(DKString*)output = text;
@@ -173,7 +173,7 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHandle(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	*(HWND*)output = hwnd;
@@ -191,14 +191,14 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output)
 	*(GdkWindow*)output = gdk_window;
 	return true;
 #endif
-	DKLog("DKSFMLWindow::GetHandle(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::GetHandle(): not implemented on this OS\n");
 	return false;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetHeight(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.y;
 	return true;
@@ -207,7 +207,7 @@ bool DKSFMLWindow::GetHeight(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
@@ -227,14 +227,14 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false; }
 #endif
-	DKLog("DKSFMLWindow::GetMouseX(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::GetMouseX(): not implemented on this OS\n");
 	return false;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	POINT p;
 	if(!GetCursorPos(&p)){ return false; }
@@ -254,14 +254,14 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false; }
 #endif
-	DKLog("DKSFMLWindow::GetMouseY(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::GetMouseY(): not implemented on this OS\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetWidth(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.x;
 	return true;
@@ -270,7 +270,7 @@ bool DKSFMLWindow::GetWidth(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetX(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
@@ -279,7 +279,7 @@ bool DKSFMLWindow::GetX(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::GetY(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
@@ -288,7 +288,7 @@ bool DKSFMLWindow::GetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Hide(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	window.setVisible(false);
 	return true;
 }
@@ -296,7 +296,7 @@ bool DKSFMLWindow::Hide(const void* input, void* output)
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	RECT a, b;
@@ -322,14 +322,14 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output)
 	*(bool*)output = isFullscreen;
 	return true;
 #endif
-	DKLog("DKSFMLWindow::IsFullscreen(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::IsFullscreen(): not implemented on this OS\n");
 	return false;
 }
 
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::IsVisible(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	*(bool*)output = (IsWindowVisible(hwnd) != 0);
@@ -347,14 +347,14 @@ bool DKSFMLWindow::IsVisible(const void* input, void* output)
 	*(bool*)output = visible;
 	return true;
 #endif
-	DKLog("DKSFMLWindow::IsVisible(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::IsVisible(): not implemented on this OS\n");
 	return false;
 }
 
 //////////////////////////////////////////////////////////////
 bool DKSFMLWindow::MessageBox(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	//TODO
 	return false;
 }
@@ -362,7 +362,7 @@ bool DKSFMLWindow::MessageBox(const void* input, void* output)
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Minimize(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_MINIMIZE);
@@ -379,14 +379,14 @@ bool DKSFMLWindow::Minimize(const void* input, void* output)
 	gdk_window_iconify(gdk_window);
 	return true;
 #endif
-	DKLog("DKSFMLWindow::Minimize(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::Minimize(): not implemented on this OS\n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::Restore(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd){ return false; }
@@ -405,14 +405,14 @@ bool DKSFMLWindow::Restore(const void* input, void* output)
 	gdk_window_deiconify(gdk_window);
 	return true;
 #endif
-	DKLog("DKSFMLWindow::Restore(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::Restore(): not implemented on this OS\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	//TODO
 	return false;
 }
@@ -420,7 +420,7 @@ bool DKSFMLWindow::SetClipboard(const void* input, void* output)
 /////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetHeight(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	size.y = *(int*)input;
 	window.setSize(size);
@@ -430,22 +430,22 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output)
 ///////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetIcon(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	if(!hwnd){
-		DKLog("DKCefWindow::SetIcon(): hwnd is invalid \n", DKERROR);
+		DKERROR("DKCefWindow::SetIcon(): hwnd is invalid\n");
 		return false;
 	}
 	HINSTANCE hinstance = (HINSTANCE)GetWindowLong(hwnd, GWLP_HINSTANCE); //WIN32 may require GWL_HINSTANCE
 	if(!hinstance){
-		DKLog("DKCefWindow::SetIcon(): hinstance is invalid \n", DKERROR);
+		DKERROR("DKCefWindow::SetIcon(): hinstance is invalid\n");
 		return false;
 	}
 	DKString file = *(DKString*)input;
 	HANDLE icon = LoadImage(hinstance, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	if(!icon){
-		DKLog("DKCefWindow::SetIcon(): icon is invalid \n", DKERROR);
+		DKERROR("DKCefWindow::SetIcon(): icon is invalid\n");
 		return false;
 	}
 
@@ -462,14 +462,14 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output)
 	GdkWindow* gdk_window = gdk_window_foreign_new(window.getSystemHandle());
 	if(!gdk_window){ return false; }
 #endif
-	DKLog("DKSFMLWindow::SetIcon(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::SetIcon(): not implemented on this OS\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetWidth(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	size.x = *(int*)input;
 	window.setSize(size);	
@@ -479,7 +479,7 @@ bool DKSFMLWindow::SetWidth(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetX(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.x = *(int*)input;
 	window.setPosition(position);	
@@ -489,7 +489,7 @@ bool DKSFMLWindow::SetX(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::SetY(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.y = *(int*)input;
 	window.setPosition(position);	
@@ -499,7 +499,7 @@ bool DKSFMLWindow::SetY(const void* input, void* output)
 ////////////////////////////////////////////////////////
 bool DKSFMLWindow::Show(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	ShowWindow(hwnd, SW_SHOW);
@@ -516,14 +516,14 @@ bool DKSFMLWindow::Show(const void* input, void* output)
 	gdk_window_show(gdk_window);
 	return true;
 #endif
-	DKLog("DKSFMLWindow::Show(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::Show(): not implemented on this OS\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////
 bool DKSFMLWindow::Windowed(const void* input, void* output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
 	HWND hwnd = window.getSystemHandle();
 	DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
@@ -546,6 +546,6 @@ bool DKSFMLWindow::Windowed(const void* input, void* output)
 	isFullscreen = false;
 	return true;
 #endif
-	DKLog("DKSFMLWindow::Windowed(): not implemented on this OS\n", DKWARN);
+	DKWARN("DKSFMLWindow::Windowed(): not implemented on this OS\n");
 	return false;
 }

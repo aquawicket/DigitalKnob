@@ -11,7 +11,7 @@ DKString DKTray::icon;
 ///////////////////
 bool DKTray::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKTrayJS");
 	DKClass::DKCreate("DKTrayV8");
 #ifdef WIN32
@@ -27,7 +27,7 @@ bool DKTray::Init()
 
 	DKWindows::hInstance = GetModuleHandle(0);
 	if (!TrayIcon.Create(DKWindows::hInstance, NULL, WM_ICON_NOTIFY, _T("DKTray Icon"), hIcon/*::LoadIcon(DKApp::hInstance, (LPCTSTR)IDI_TASKBARDEMO)*/, IDR_POPUP_MENU)){
-		DKLog("DKTray::Init(): TrayIcon invalid \n", DKERROR);
+		DKERROR("DKTray::Init(): TrayIcon invalid\n");
 		return false;
 	}
 
@@ -45,7 +45,7 @@ bool DKTray::Init()
 			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
 		}
 		else{
-			DKLog("DKTray::Init(): DKWindow::Hide() - No function available \n", DKERROR);
+			DKERROR("DKTray::Init(): DKWindow::Hide() - No function available\n");
 		}
 	}
 	
@@ -53,14 +53,14 @@ bool DKTray::Init()
 	return true;
 #endif
 
-	DKLog("DKTray::Init() not implemented on this OS! \n", DKERROR);
+	DKERROR("DKTray::Init() not implemented on this OS\n");
 	return false; //TODO - double check this. 
 }
 
 //////////////////
 bool DKTray::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 #ifdef WIN32
 	TrayIcon.RemoveIcon();
 #endif
@@ -72,7 +72,7 @@ bool DKTray::End()
 ///////////////////////////////////////////////////
 bool DKTray::AddItem(const DKString& name, int& id)
 {
-	DKDebug(name, id);
+	DKDEBUGFUNC(name, id);
 #ifdef WIN32
 	TrayIcon.AddItem(name, id);
 #endif
@@ -82,7 +82,7 @@ bool DKTray::AddItem(const DKString& name, int& id)
 ////////////////////////////////////
 bool DKTray::GetIcon(DKString& file)
 {
-	DKDebug(file);
+	DKDEBUGFUNC(file);
 	file = icon;
 	return true;
 }
@@ -90,21 +90,21 @@ bool DKTray::GetIcon(DKString& file)
 //////////////////////////////////////////
 bool DKTray::SetIcon(const DKString& file)
 {
-	DKDebug(file);
+	DKDEBUGFUNC(file);
 #ifdef WIN32
 	icon = file;
 	HICON hIcon = (HICON)LoadImage(NULL, icon.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	TrayIcon.SetIcon(hIcon);
 	return true;
 #endif
-	DKLog("DKTray::SetIcon(): not implemented on this system\n", DKWARN);
+	DKWARN("DKTray::SetIcon(): not implemented on this system\n");
 	return false;
 }
 
 ///////////////////////////////////////////////
 bool DKTray::SetTooltip(const DKString& string)
 {
-	DKDebug(string);
+	DKDEBUGFUNC(string);
 #ifdef WIN32
 	if(!TrayIcon.SetTooltipText(string.c_str())){
 		return false;
@@ -117,7 +117,7 @@ bool DKTray::SetTooltip(const DKString& string)
 /////////////////////////////////////////////////////////////////
 bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 {
-	DKDebug(string);
+	DKDEBUGFUNC(string);
 #ifdef WIN32
 	TrayIcon.ShowBalloon(string.c_str(), NULL, 0UL, 10);
 	return true;
@@ -128,7 +128,7 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/)
 //////////////////////
 void DKTray::Process()
 {
-	//DKDebug();
+	//DKDEBUGFUNC();
 #ifdef WIN32
     //Process Tray Icon Messages
     MSG msg;
@@ -148,14 +148,14 @@ void DKTray::Process()
 /////////////////////////////////////////////////
 void DKTray::setCallback(DKTrayCallback callback)
 {
-	DKDebug(callback);
+	DKDEBUGFUNC(callback);
 	TrayIcon.userCallback = callback;
 }
 
 //////////////////////////////////////////////////////////////////////////////
 LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	DKDebug(message, wParam, lParam);
+	DKDEBUGFUNC(message, wParam, lParam);
 	if(message == WM_ICON_NOTIFY){
 		//DKLog("WM_ICON_NOTIFY: ");
 		//DKLog(toString(LOWORD(wParam))+" : ");

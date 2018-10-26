@@ -139,7 +139,7 @@ public:
 		item.dwTypeData = const_cast<char *>(string.c_str());
 
 		if(InsertMenuItem(subMenu, 1, true, &item) == 0){
-			DKLog("CSystemTray::AddItem(): InsertMenuItem returned error\n", DKERROR);
+			DKERROR("CSystemTray::AddItem(): InsertMenuItem returned error\n");
 		}
 
 		return TRUE;

@@ -6,7 +6,7 @@
 ///////////////////////
 bool DKUpdateV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateV8::CheckForUpdate);
 	DKV8::AttachFunction("DKUpdate_CreateUpdate", DKUpdateV8::CreateUpdate);
 	DKV8::AttachFunction("DKUpdate_DoUpdate", DKUpdateV8::DoUpdate);
@@ -17,14 +17,14 @@ bool DKUpdateV8::Init()
 //////////////////////
 bool DKUpdateV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKUpdateV8::CheckForUpdate(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	if(!DKUpdate::CheckForUpdate()){ return false; }
 	return true;
 }
@@ -32,7 +32,7 @@ bool DKUpdateV8::CheckForUpdate(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKUpdateV8::CreateUpdate(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	if(!DKUpdate::CreateUpdate()){ return false; }
 	return true;
 }
@@ -40,7 +40,7 @@ bool DKUpdateV8::CreateUpdate(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////
 bool DKUpdateV8::DoUpdate(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	if(!DKUpdate::DoUpdate()){ return false; }
 	return true;
 }
@@ -48,7 +48,7 @@ bool DKUpdateV8::DoUpdate(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKUpdateV8::UpdatePlugin(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
 	if(!DKUpdate::UpdatePlugin(url)){ return false; }
 	return true;

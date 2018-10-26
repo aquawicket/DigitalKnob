@@ -5,7 +5,7 @@
 ///////////////////////
 bool DKUpdateJS::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//DKDuktape::AttachFunction("DKUpdate_TestInt", DKUpdateJS::TestInt);
 	//DKDuktape::AttachFunction("DKUpdate_TestString", DKUpdateJS::TestString);
 	//DKDuktape::AttachFunction("DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt);
@@ -21,7 +21,7 @@ bool DKUpdateJS::Init()
 /////////////////////////////////////////
 int DKUpdateJS::TestInt(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int input = duk_require_int(ctx, 0);
 	int output = DKUpdate::TestInt(input);
 	duk_push_int(ctx, output);
@@ -31,7 +31,7 @@ int DKUpdateJS::TestInt(duk_context* ctx)
 ////////////////////////////////////////////
 int DKUpdateJS::TestString(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString input = duk_require_string(ctx, 0);
 	DKString output = DKUpdate::TestString(input);
 	duk_push_string(ctx, output.c_str());
@@ -41,7 +41,7 @@ int DKUpdateJS::TestString(duk_context* ctx)
 ///////////////////////////////////////////////
 int DKUpdateJS::TestReturnInt(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int rval = DKWindow::TestReturnInt();
 	duk_push_int(ctx, rval);
 	return 1;
@@ -50,7 +50,7 @@ int DKUpdateJS::TestReturnInt(duk_context* ctx)
 //////////////////////////////////////////////////
 int DKUpdateJS::TestReturnString(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString rval = DKUpdate::TestReturnString();
 	duk_push_string(ctx, rval.c_str());
 	return 1;
@@ -61,7 +61,7 @@ int DKUpdateJS::TestReturnString(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKUpdateJS::CheckForUpdate(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	if(!DKUpdate::CheckForUpdate()){ return 0; }
 	return 1;
 }
@@ -69,7 +69,7 @@ int DKUpdateJS::CheckForUpdate(duk_context* ctx)
 //////////////////////////////////////////////
 int DKUpdateJS::CreateUpdate(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	if(!DKUpdate::CreateUpdate()){ return 0; }
 	return 1;
 }
@@ -77,7 +77,7 @@ int DKUpdateJS::CreateUpdate(duk_context* ctx)
 //////////////////////////////////////////
 int DKUpdateJS::DoUpdate(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	if(!DKUpdate::DoUpdate()){ return 0; }
 	return 1;
 }
@@ -85,7 +85,7 @@ int DKUpdateJS::DoUpdate(duk_context* ctx)
 //////////////////////////////////////////////
 int DKUpdateJS::UpdatePlugin(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	if(!DKUpdate::UpdatePlugin(url)){ return 0; }
 	return 1;
