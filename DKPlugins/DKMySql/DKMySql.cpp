@@ -7,7 +7,7 @@
 ////////////////////
 bool DKMySql::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMySqlJS");
 	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
@@ -22,7 +22,7 @@ bool DKMySql::Init()
 ///////////////////
 bool DKMySql::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 #ifdef USE_mysql
 	mysql_close(&mysql);
 #endif
@@ -34,7 +34,7 @@ bool DKMySql::End()
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
 {
-	DKDebug(host, name, pass, port);
+	DKDEBUGFUNC(host, name, pass, port);
 #ifdef USE_mysql
 	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
 		DKLog("Failed to connect to MySQL. \n", DKERROR);
@@ -56,19 +56,19 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 
 	DKCurl::Get("DKCurl0")->HttpToString(send,response);
 	if(response.empty()){
-		DKLog("Successfully connected to MySql server. \n");
+		DKINFO("Successfully connected to MySql server\n");
 		return true;
 	}	
 #endif
 
-	DKLog("Could not connect to MySql server. \n", DKERROR);
+	DKERROR("Could not connect to MySql server\n");
 	return false;
 }
 
 ////////////////////////////////////////////////
 bool DKMySql::Database(const DKString& database)
 {
-	DKDebug(database);
+	DKDEBUGFUNC(database);
 #ifdef USE_mysql
 	//Not setup
 #else
@@ -88,7 +88,7 @@ bool DKMySql::Database(const DKString& database)
 ///////////////////////////////////////////////////////////
 bool DKMySql::Query(DKString query, DKStringArray& results)
 {
-	DKDebug(query, "DKStringArray&");
+	DKDEBUGFUNC(query, "DKStringArray&");
 	results.clear();
 #ifdef USE_mysql
 	//if(mysql_real_query(&mysql,query.c_str(),strlen(query.c_str())) != 0){
@@ -106,7 +106,7 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
     }
 #else
 
-	DKLog("Query: "+query+"\n");
+	DKINFO("Query: "+query+"\n");
 	
 	DKString response;
 	DKString send = DKFile::online_assets+"/DKMySql/DKMySql.php?Query=";
@@ -115,7 +115,7 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 	DKCurl::Get("DKCurl0")->HttpToString(send,response);
 
 	if(has(response, "DKERROR")){
-		DKLog(response+"\n", DKERROR);
+		DKERROR(response+"\n");
 		return false;
 	}
 
@@ -126,8 +126,8 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 		results.push_back(string);
 	}
 
-	DKLog("\n Query succeeded\n");
-	DKLog("-> "+response+"+\n");
+	DKINFO("\n Query succeeded\n");
+	DKINFO("-> "+response+"+\n");
 	return true;
 #endif
 

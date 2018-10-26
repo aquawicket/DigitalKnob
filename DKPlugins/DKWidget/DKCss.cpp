@@ -8,23 +8,22 @@ DKRocket* DKCss::dkRocket;
 //////////////////
 bool DKCss::Init()
 {
-	DKDebug();
-
+	DKDEBUGFUNC();
 	//link objects
-	dkRocket = DKRocket::Get("DKRocket0");
+	dkRocket = DKRocket::Get();
 	if(!dkRocket){
-		DKLog("DKWidget::Init(): INVALID OBJECTS \n", DKERROR);
+		DKERROR("DKWidget::Init(): INVALID OBJECTS\n");
 		return false;
 	}
 
 	//data = ("DKCss", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
-		DKLog("DKCss::Init("+_data+"): missing parameters. \n", DKERROR);
+		DKERROR("DKCss::Init("+_data+"): missing parameters\n");
 	}
 	if(data.size() > 2){
 		DKString _data = toString(data, ",");
-		DKLog("DKCss::Init("+_data+"): too many parameters. \n", DKERROR);
+		DKERROR("DKCss::Init("+_data+"): too many parameters\n");
 	}
 	
     DKString file = DKFile::local_assets+data[1];
@@ -59,6 +58,6 @@ bool DKCss::Init()
 /////////////////
 bool DKCss::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }

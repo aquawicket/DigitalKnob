@@ -8,7 +8,7 @@
 ////////////////////////////
 bool DKWidgetMySqlJS::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKWidgetMySql_DeleteRecord", DKWidgetMySqlJS::DeleteRecord);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetFirstRecordNum", DKWidgetMySqlJS::GetFirstRecordNum);
 	DKDuktape::AttachFunction("DKWidgetMySql_GetLastRecordNum", DKWidgetMySqlJS::GetLastRecordNum);
@@ -24,9 +24,9 @@ bool DKWidgetMySqlJS::Init()
 ///////////////////////////////////////////
 int DKWidgetMySqlJS::Prep(duk_context* ctx)
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKString id = duk_require_string(ctx, 0);
-	DKLog("DKWidgetMySql_Prep "+ id +"\n");
+	DKINFO("DKWidgetMySql_Prep "+ id +"\n");
 
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
@@ -37,10 +37,10 @@ int DKWidgetMySqlJS::Prep(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 
 		if( elements[i]->HasAttribute("sql") ){
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 			
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -54,7 +54,7 @@ int DKWidgetMySqlJS::Prep(duk_context* ctx)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, const DKString& field)
 {
-	DKDebug(database, table, field);
+	DKDEBUGFUNC(database, table, field);
 	// CHECK DATABASE //
 	/*
 	DKString query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '"+database+"'";
@@ -97,7 +97,7 @@ int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, 
 ////////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetFirstRecordNum(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
@@ -105,10 +105,10 @@ int DKWidgetMySqlJS::GetFirstRecordNum(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -131,7 +131,7 @@ int DKWidgetMySqlJS::GetFirstRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetLastRecordNum(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
@@ -139,10 +139,10 @@ int DKWidgetMySqlJS::GetLastRecordNum(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -165,7 +165,7 @@ int DKWidgetMySqlJS::GetLastRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetPrevRecordNum(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -174,10 +174,10 @@ int DKWidgetMySqlJS::GetPrevRecordNum(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -200,7 +200,7 @@ int DKWidgetMySqlJS::GetPrevRecordNum(duk_context* ctx)
 ///////////////////////////////////////////////////////
 int DKWidgetMySqlJS::GetNextRecordNum(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -209,10 +209,10 @@ int DKWidgetMySqlJS::GetNextRecordNum(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -234,7 +234,7 @@ int DKWidgetMySqlJS::GetNextRecordNum(duk_context* ctx)
 /////////////////////////////////////////////////
 int DKWidgetMySqlJS::LoadRecord(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -244,10 +244,10 @@ int DKWidgetMySqlJS::LoadRecord(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -284,7 +284,7 @@ int DKWidgetMySqlJS::LoadRecord(duk_context* ctx)
 /////////////////////////////////////////////////
 int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -293,10 +293,10 @@ int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -309,7 +309,7 @@ int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 			if(records.size() > 1){
 				DKString value = DKWidget::GetValue(elements[i]);
 				if(!same(value, records[1]) && !same(arry[2], "ID")){
-					DKLog("Update Record. value="+value+" record="+records[1]+" \n");
+					DKINFO("Update Record. value="+value+" record="+records[1]+" \n");
 					query = "UPDATE "+arry[1]+" SET "+arry[2]+"='"+value+"' WHERE ID="+recordNum;
 					DKMySql::Get("DKMySql")->Query(query, records);
 					//DKLog(result);
@@ -323,7 +323,7 @@ int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 ///////////////////////////////////////////////////
 int DKWidgetMySqlJS::DeleteRecord(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString recordNum = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -332,10 +332,10 @@ int DKWidgetMySqlJS::DeleteRecord(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
@@ -354,7 +354,7 @@ int DKWidgetMySqlJS::DeleteRecord(duk_context* ctx)
 /////////////////////////////////////////////
 int DKWidgetMySqlJS::Search(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString string = duk_require_string(ctx, 1);
 	DKElementList elements;
@@ -363,10 +363,10 @@ int DKWidgetMySqlJS::Search(duk_context* ctx)
 	for(unsigned int i=0; i<elements.size(); ++i){
 		if( elements[i]->HasAttribute("sql") ){
 
-			DKLog(elements[i]->GetId().CString());
+			DKINFO(elements[i]->GetId().CString());
 			DKString sql;
 			DKWidget::GetAttribute(elements[i], "sql", sql);
-			DKLog(sql);
+			DKINFO(sql);
 
 			DKString id = elements[i]->GetId().CString();
 			DKStringArray arry;
