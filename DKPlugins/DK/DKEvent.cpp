@@ -19,9 +19,8 @@ bool DKEvent::AddEvent(const DKString& id, const DKString& type, const DKString&
 {
 	DKDEBUGFUNC(id, type, jsreturn, func, object);
 	DKString _jsreturn = jsreturn;
-	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 
-	//DKLOG("DKEvent::AddEvent("+id+","+type+","+jsreturn+")\n");
 	if(id.empty()){
 		DKERROR("DKEvent::AddEvent("+id+","+type+","+_jsreturn+"): No Id Specified\n");
 		return false;
@@ -102,7 +101,7 @@ bool DKEvent::RemoveEvent(const DKString& id, const DKString& type, const DKStri
 {
 	DKDEBUGFUNC(id, type, jsreturn);
 	DKString _jsreturn = jsreturn;
-	replace(_jsreturn, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if(same(events[i]->id, id) && same(events[i]->type, type) && same(events[i]->jsreturn, _jsreturn)){
@@ -138,7 +137,7 @@ bool DKEvent::RemoveEvents(const DKString& variable)
 	DKDEBUGFUNC(variable);
 	//variable can be id or jsreturn
 	DKString _variable = variable;
-	replace(_variable, "() {\"ecmascript\"}", ""); //remove  () {\"ecmascript\"}
+	replace(_variable, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 	for(unsigned int i=0; i < events.size(); ++i){
 		if(same(events[i]->id, _variable) || same(events[i]->jsreturn, _variable)){
 			events.erase(events.begin()+i);
