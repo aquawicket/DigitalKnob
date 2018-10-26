@@ -201,7 +201,14 @@ function DKDEBUGVARS(vars)
 		for(var i=0; i<arguments.length; i++){
 			var variable = "unknown_name: ";
 			variable += arguments[i];
-			DKDEBUG(info+variable+"\n");
+			if(!LOG_DEBUG){
+				LOG_DEBUG = true;
+				DKDEBUG(info+variable+"\n");
+				LOG_DEBUG = false
+			}
+			else{
+				DKDEBUG(info+variable+"\n");
+			}
 		}
 	}
 }
