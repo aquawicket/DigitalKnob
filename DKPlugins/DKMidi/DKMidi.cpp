@@ -5,7 +5,7 @@
 ///////////////////
 bool DKMidi::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMidiJS");
 	DKClass::DKCreate("DKMidiV8");
 	
@@ -25,17 +25,17 @@ bool DKMidi::Init()
 //////////////////
 bool DKMidi::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 /////////////////////////////////////////////
 bool DKMidi::GetInputs(DKStringArray& inputs)
 {
-	DKDebug("DKStringArray&");
+	DKDEBUGFUNC("DKStringArray&");
 	unsigned int nPorts = midiin->getPortCount();
 	if(nPorts == 0){
-		DKLog("No Input ports available!\n",DKERROR);
+		DKERROR("No Input ports available!\n");
 		return false;
 	}
 
@@ -50,10 +50,10 @@ bool DKMidi::GetInputs(DKStringArray& inputs)
 ///////////////////////////////////////////////
 bool DKMidi::GetOutputs(DKStringArray& outputs)
 {
-	DKDebug("DKStringArray&");
+	DKDEBUGFUNC("DKStringArray&");
 	unsigned int nPorts = midiout->getPortCount();
 	if(nPorts == 0){
-		DKLog("No Output ports available! \n", DKERROR);
+		DKERROR("No Output ports available\n");
 		return false;
 	}
 
@@ -68,43 +68,43 @@ bool DKMidi::GetOutputs(DKStringArray& outputs)
 //////////////////////////
 bool DKMidi::PrintInputs()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	unsigned int nPorts = midiin->getPortCount();
 	if(nPorts == 0){
-		DKLog("No Input ports available!\n",DKERROR);
+		DKERROR("No Input ports available\n");
 		return false;
 	}
-	DKLog("\nMIDI Input Ports\n");
-	DKLog("----------------\n");
+	DKINFO("\nMIDI Input Ports\n");
+	DKINFO("----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiin->getPortName(i)+"\n");
+		DKINFO(midiin->getPortName(i)+"\n");
 	}
-	DKLog("\n\n");
+	DKINFO("\n\n");
 	return true;
 }
 
 ///////////////////////////
 bool DKMidi::PrintOutputs()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	unsigned int nPorts = midiout->getPortCount();
 	if(nPorts == 0){
-		DKLog("No Output ports available!\n",DKERROR);
+		DKERROR("No Output ports available\n");
 		return false;
 	}
-	DKLog("MIDI Output Ports\n");
-	DKLog("-----------------\n");
+	DKINFO("MIDI Output Ports\n");
+	DKINFO("-----------------\n");
 	for(unsigned int i=0; i<nPorts; ++i){
-		DKLog(midiout->getPortName(i)+"\n");
+		DKINFO(midiout->getPortName(i)+"\n");
 	}
-	DKLog("\n\n");
+	DKINFO("\n\n");
 	return true;
 }
 
 //////////////////////////////////////////////
 bool DKMidi::ToggleInput(const DKString& name)
 {
-	DKDebug(name);
+	DKDEBUGFUNC(name);
 	for(unsigned int i=0; i<midiin->getPortCount(); ++i){
 		if(same(name,midiin->getPortName(i))){
 			midiin->openPort(i);
@@ -118,7 +118,7 @@ bool DKMidi::ToggleInput(const DKString& name)
 ///////////////////////////////////////////////
 bool DKMidi::ToggleOutput(const DKString& name)
 {
-	DKDebug(name);
+	DKDEBUGFUNC(name);
 	for(unsigned int i=0; i<midiout->getPortCount(); ++i){
 		if(same(name,midiout->getPortName(i))){
 			midiout->openPort(i);
@@ -133,7 +133,7 @@ bool DKMidi::ToggleOutput(const DKString& name)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message, void *userData)
 {
-	//DKDebug(deltatime, "std::vector<unsigned char>*", userData);
+	//DKDEBUGFUNC(deltatime, "std::vector<unsigned char>*", userData);
 	/*
 	unsigned int nBytes = message->size();
 	for ( unsigned int i=0; i<nBytes; i++ )

@@ -6,6 +6,7 @@
 ////////////////////
 bool DKDomJS::Init()
 {
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDom_Test", DKDomJS::Test);
 	return true;
 }
@@ -13,6 +14,7 @@ bool DKDomJS::Init()
 ///////////////////////////////////
 int DKDomJS::Test(duk_context* ctx)
 {
+	DKDEBUGFUNC(ctx);
 	DKDom::Get()->Test();
 	return 0;
 }

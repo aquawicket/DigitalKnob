@@ -6,7 +6,7 @@
 /////////////////////
 bool DKMidiV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKMidi_GetMidiInputs", DKMidiV8::GetMidiInputs);
 	DKV8::AttachFunction("DKMidi_GetMidiOutputs", DKMidiV8::GetMidiOutputs);
 	DKV8::AttachFunction("DKMidi_SendMidi", DKMidiV8::SendMidi);
@@ -18,7 +18,7 @@ bool DKMidiV8::Init()
 ////////////////////
 bool DKMidiV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
@@ -26,7 +26,7 @@ bool DKMidiV8::End()
 ////////////////////////////////////////////////////////////
 bool DKMidiV8::GetMidiInputs(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKMidi::Instance("DKMidi");
 	DKStringArray inputs;
 	DKMidi::Instance("DKMidi")->GetInputs(inputs);
@@ -38,7 +38,7 @@ bool DKMidiV8::GetMidiInputs(CefArgs args, CefReturn retval)
 /////////////////////////////////////////////////////////////
 bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKMidi::Instance("DKMidi");
 	DKStringArray outputs;
 	DKMidi::Instance("DKMidi")->GetOutputs(outputs);
@@ -50,7 +50,7 @@ bool DKMidiV8::GetMidiOutputs(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////
 bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	int var1 = args->GetInt(0);
 	int var2 = args->GetInt(1);
 	int var3 = args->GetInt(2);
@@ -66,7 +66,7 @@ bool DKMidiV8::SendMidi(CefArgs args, CefReturn retval)
 //////////////////////////////////////////////////////////////
 bool DKMidiV8::ToggleMidiInput(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString input = args->GetString(0);
 	if(!DKMidi::Instance("DKMidi")->ToggleInput(input)){ return false; }
 	return true;
@@ -75,7 +75,7 @@ bool DKMidiV8::ToggleMidiInput(CefArgs args, CefReturn retval)
 ///////////////////////////////////////////////////////////////
 bool DKMidiV8::ToggleMidiOutput(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString output = args->GetString(0);
 	if(!DKMidi::Instance("DKMidi")->ToggleOutput(output)){ return false; }
 	return true;

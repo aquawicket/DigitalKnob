@@ -19,14 +19,14 @@ std::vector<HWND> DKHandles::winhandles;
 //////////////////////
 bool DKHandles::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKHandlesJS");
 	DKClass::DKCreate("DKHandlesV8");
 	highlight = false;
 
 	rectanglePen = CreatePen(PS_SOLID, 3, RGB(0, 0, 255));
 	if(!rectanglePen){
-		DKLog("DKHandles::Init(): g_hRectanglePen invalide\n");
+		DKERROR("DKHandles::Init(): g_hRectanglePen invalide\n");
 		return false;
 	}
 
@@ -36,7 +36,7 @@ bool DKHandles::Init()
 /////////////////////
 bool DKHandles::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
@@ -45,7 +45,7 @@ bool DKHandles::End()
 //////////////////////////////////
 bool DKHandles::Click(HWND handle)
 {
-	DKDebug(handle);
+	DKDEBUGFUNC(handle);
 	SendMessage(handle, BM_CLICK, 0, 0);
 	return true;
 }
@@ -55,7 +55,7 @@ bool DKHandles::Click(HWND handle)
 /////////////////////////////
 bool DKHandles::DoMouseMove()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	POINT screenpoint;
 	HWND new_hwndFoundWindow = NULL;
 	GetCursorPos(&screenpoint); //Must use GetCursorPos() instead of calculating from "lParam".
@@ -64,7 +64,7 @@ bool DKHandles::DoMouseMove()
 	new_hwndFoundWindow = WindowFromPoint(screenpoint);
 	//new_hwndFoundWindow = RealChildWindowFromPoint(hwnd, screenpoint);
 	if(!new_hwndFoundWindow){
-		DKLog("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n", DKERROR);
+		DKERROR("DKHandles::DoMouseMove(): new_hwndFoundWindow invalid\n");
 		return false;
 	}
 
@@ -95,7 +95,7 @@ bool DKHandles::DoMouseMove()
 ///////////////////////////
 bool DKHandles::DoMouseUp()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	// If we had a previous cursor, set the screen cursor to the previous one.
 	// The cursor is to stay exactly where it is currently located when the 
 	// left mouse button is lifted.
@@ -125,7 +125,7 @@ bool DKHandles::DoMouseUp()
 	}
 
 	if(!hwnd){
-		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKERROR);
+		DKERROR("DKHandles::StartSearch(): hwnd is NULL\n");
 		return false;
 	}
 	::ShowWindow(hwnd, SW_SHOWNORMAL);
@@ -146,21 +146,21 @@ bool DKHandles::DoMouseUp()
 ///////////////////////////////////////////////////
 bool DKHandles::GetBottom(HWND handle, int& bottom)
 {
-	DKDebug(handle, bottom);
+	DKDEBUGFUNC(handle, bottom);
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	bottom = rect.bottom;
-	DKLog("DKHandles::GetBottom(): bottom = "+toString(bottom)+"\n");
+	DKINFO("DKHandles::GetBottom(): bottom = "+toString(bottom)+"\n");
 	return true;
 }
 
 /////////////////////////////////////////////////////
 bool DKHandles::GetClass(HWND handle, DKString& clas)
 {
-	DKDebug(handle, clas);
+	DKDEBUGFUNC(handle, clas);
 	char classname[256];
 	if(!GetClassName(handle, classname, 256)){
-		DKLog("DKHandles::GetClass(): GetClassName failed\n", DKWARN);
+		DKWARN("DKHandles::GetClass(): GetClassName failed\n");
 		return false; 
 	}
 	clas = classname;
@@ -170,7 +170,7 @@ bool DKHandles::GetClass(HWND handle, DKString& clas)
 /////////////////////////////////////////////////
 bool DKHandles::GetIndex(HWND handle, int& index)
 {
-	DKDebug(handle, index);
+	DKDEBUGFUNC(handle, index);
 	int i = 0;
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
@@ -186,23 +186,23 @@ bool DKHandles::GetIndex(HWND handle, int& index)
 ///////////////////////////////////////////////
 bool DKHandles::GetLeft(HWND handle, int& left)
 {
-	DKDebug(handle, left);
+	DKDEBUGFUNC(handle, left);
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	left = rect.left;
-	DKLog("DKHandles::GetLeft(): left = "+toString(left)+"\n");
+	DKINFO("DKHandles::GetLeft(): left = "+toString(left)+"\n");
 	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKHandles::GetParent(HWND handle, DKString& parent)
 {
-	DKDebug(handle, parent);
+	DKDEBUGFUNC(handle, parent);
 	HWND par = ::GetAncestor(handle, GA_PARENT);
 	if(!par){
 		DKString error;
 		DKWindows::GetLastError(error);
-		DKLog("DKHandles::GetParent("+toString(handle)+"): "+error+"\n", DKWARN);
+		DKWARN("DKHandles::GetParent("+toString(handle)+"): "+error+"\n");
 		return false; 
 	}
 	parent = toString(par);
@@ -212,18 +212,18 @@ bool DKHandles::GetParent(HWND handle, DKString& parent)
 /////////////////////////////////////////////////
 bool DKHandles::GetRight(HWND handle, int& right)
 {
-	DKDebug(handle, right);
+	DKDEBUGFUNC(handle, right);
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	right = rect.right;
-	DKLog("DKHandles::GetRight(): right = "+toString(right)+"\n");
+	DKINFO("DKHandles::GetRight(): right = "+toString(right)+"\n");
 	return true;
 }
 
 //////////////////////////////////////////////////////
 bool DKHandles::GetString(HWND handle, DKString& text)
 {
-	DKDebug(handle, text);
+	DKDEBUGFUNC(handle, text);
 	int len = SendMessage(handle, WM_GETTEXTLENGTH, 0, 0);
 	char* buffer = new char[len];
 	SendMessage(handle, WM_GETTEXT, (WPARAM)len+1, (LPARAM)buffer);
@@ -234,18 +234,18 @@ bool DKHandles::GetString(HWND handle, DKString& text)
 /////////////////////////////////////////////
 bool DKHandles::GetTop(HWND handle, int& top)
 {
-	DKDebug(handle, top);
+	DKDEBUGFUNC(handle, top);
 	RECT rect;
 	GetWindowRect(handle, &rect);
 	top = rect.top;
-	DKLog("DKHandles::GetTop(): top = "+toString(top)+"\n");
+	DKINFO("DKHandles::GetTop(): top = "+toString(top)+"\n");
 	return true;
 }
 
 ////////////////////////////////////////////////////
 bool DKHandles::GetWindow(HWND handle, HWND& window)
 {
-	DKDebug(handle, window);
+	DKDEBUGFUNC(handle, window);
 	HWND win = handle;
 	static TCHAR buffer[50]; 
 	while(!GetWindowText(win, buffer, 50) && win != ::GetDesktopWindow()){
@@ -258,7 +258,7 @@ bool DKHandles::GetWindow(HWND handle, HWND& window)
 ///////////////////////////////////////////////////////
 bool DKHandles::GetWindowIndex(HWND handle, int& index)
 {
-	DKDebug(handle, index);
+	DKDEBUGFUNC(handle, index);
 	HWND window;
 	if(!GetWindow(handle, window)){ return false; }
 	winhandles.clear();
@@ -276,7 +276,7 @@ bool DKHandles::GetWindowIndex(HWND handle, int& index)
 //////////////////////////////////////////////////
 bool DKHandles::GetWindows(DKStringArray& windows)
 {
-	DKDebug("DKStringArray&");
+	DKDEBUGFUNC("DKStringArray&");
 	PopulateHandles();
 	_windows.clear();
 	bool rval = (EnumChildWindows(::GetDesktopWindow(), GetWindows, NULL) != 0);
@@ -287,7 +287,7 @@ bool DKHandles::GetWindows(DKStringArray& windows)
 ///////////////////////////////////////////////
 bool DKHandles::HighlightFoundWindow(HWND hwnd)
 {
-	DKDebug(hwnd);
+	DKDEBUGFUNC(hwnd);
 	HDC hWindowDC = NULL;  // The DC of the found window.
 	HGDIOBJ	hPrevPen = NULL;   // Handle of the existing pen in the DC of the found window.
 	HGDIOBJ	hPrevBrush = NULL; // Handle of the existing brush in the DC of the found window.
@@ -320,7 +320,7 @@ bool DKHandles::HighlightFoundWindow(HWND hwnd)
 ////////////////////////////////////////////
 bool DKHandles::HighlightWindow(HWND handle)
 {
-	DKDebug(handle);
+	DKDEBUGFUNC(handle);
 	//if(!highlight){ return false; }
 	RefreshWindow(handle);
 
@@ -347,7 +347,7 @@ bool DKHandles::HighlightWindow(HWND handle)
 /////////////////////////////////////////////////
 bool DKHandles::NextHandle(HWND hwnd, HWND& next)
 {
-	DKDebug(hwnd, next);
+	DKDEBUGFUNC(hwnd, next);
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(hwnd == it->first){
@@ -363,7 +363,7 @@ bool DKHandles::NextHandle(HWND hwnd, HWND& next)
 /////////////////////////////////
 bool DKHandles::PopulateHandles()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//TODO - get a hierarchy of all window handles
 	//std::map<HWND,HWND> DKHandles::handles;
 	handles.clear();
@@ -371,7 +371,7 @@ bool DKHandles::PopulateHandles()
 
 	EnumChildWindows(::GetDesktopWindow(), EnumChildProc, 0);
 	
-	DKLog("hande size: "+toString(handles.size())+"\n");
+	DKINFO("hande size: "+toString(handles.size())+"\n");
 
 	/*
 	//std::map<HWND,HWND>::iterator it;
@@ -397,7 +397,7 @@ bool DKHandles::PopulateHandles()
 /////////////////////////////////////////////////
 bool DKHandles::PrevHandle(HWND hwnd, HWND& prev)
 {
-	DKDebug(hwnd, prev);
+	DKDEBUGFUNC(hwnd, prev);
 	std::map<HWND,HWND>::iterator it;
 	for(it=handles.end(); it!=handles.begin(); it--){
 		if(hwnd == it->first){
@@ -413,7 +413,7 @@ bool DKHandles::PrevHandle(HWND hwnd, HWND& prev)
 ////////////////////////////////////////
 bool DKHandles::RefreshWindow(HWND hwnd)
 {
-	DKDebug(hwnd);
+	DKDEBUGFUNC(hwnd);
 	InvalidateRect(hwnd, NULL, TRUE);
 	UpdateWindow(hwnd);
 	RedrawWindow(hwnd, NULL, NULL, RDW_FRAME | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN);
@@ -424,7 +424,7 @@ bool DKHandles::RefreshWindow(HWND hwnd)
 //////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SendHook(const DKString& window, const DKString& handle, const DKString& data)
 {
-	DKDebug(window, handle, data);
+	DKDEBUGFUNC(window, handle, data);
 
 	if(!SetWindowHandle(window, 1)){ return false; }
 	if(!SetHandle(toInt(handle), 1)){ return false; }
@@ -450,7 +450,7 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned int timeout)
 {
-	DKDebug(clas, value, timeout);
+	DKDEBUGFUNC(clas, value, timeout);
 	unsigned int t = 0;
 	unsigned int h = 0;
 	DKString text;
@@ -469,7 +469,7 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 			}
 			if(text == value){
 				if(!GetClassName(it->first, classname, 256)){
-					DKLog("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
+					DKWARN("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed\n");
 					return false; 
 				}
 				if(clas == (DKString)classname){
@@ -482,14 +482,14 @@ bool DKHandles::SetHandle(const DKString& clas, const DKString& value, unsigned 
 		++t;
 	}
 	
-	DKLog("DKHandles::SetHandle("+clas+","+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+	DKWARN("DKHandles::SetHandle("+clas+","+value+","+toString(timeout)+"): timed out\n");
 	return false;
 }
 
 //////////////////////////////////////////////////////////////////////
 bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
 {
-	DKDebug(value, timeout);
+	DKDEBUGFUNC(value, timeout);
 	unsigned int t = 0;
 	unsigned int h = 0;
 	DKString text;
@@ -510,14 +510,14 @@ bool DKHandles::SetHandle(const DKString& value, unsigned int timeout)
 		++t;
 	}
 
-	DKLog("DKHandles::SetHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+	DKWARN("DKHandles::SetHandle("+value+","+toString(timeout)+"): timed out\n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////////
 bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 {
-	DKDebug(index, timeout);
+	DKDEBUGFUNC(index, timeout);
 	unsigned int t = 0;
 	while(index > handles.size() && t < timeout){
 		PopulateHandles();
@@ -525,7 +525,7 @@ bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 		++t;
 	}
 	if(index > handles.size()){
-		DKLog("DKHandles::SetHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::SetHandle("+toString(index)+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	//currentHandle = index;
@@ -535,7 +535,7 @@ bool DKHandles::SetHandle(unsigned int index, unsigned int timeout)
 //////////////////////////////////////////////////////////
 bool DKHandles::SetString(HWND hwnd, const DKString& text)
 {
-	DKDebug(hwnd, text);
+	DKDEBUGFUNC(hwnd, text);
 	SendMessage(hwnd, WM_SETTEXT, (WPARAM)text.size(), (LPARAM)text.c_str());
 	return true;
 }
@@ -543,7 +543,7 @@ bool DKHandles::SetString(HWND hwnd, const DKString& text)
 //////////////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeout, HWND& hwnd)
 {
-	DKDebug(title, hwnd);
+	DKDEBUGFUNC(title, hwnd);
 	HWNDname temp;
 	temp.caption = title.c_str();
 	unsigned int t = 0;
@@ -552,19 +552,19 @@ bool DKHandles::SetWindowHandle(const DKString& title, const unsigned int timeou
 		++t;
 	}
 	if(t >= timeout){
-		DKLog("DKHandles::SetWindowHandle("+title+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::SetWindowHandle("+title+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	
 	hwnd = currentHandle;
-	DKLog("Selected Window: "+title+"\n");
+	DKINFO("Selected Window: "+title+"\n");
 	return true;
 }
 
 ////////////////////////////////////////////////////////
 bool DKHandles::ShowWindow(HWND hwnd, unsigned int flag)
 {
-	DKDebug(hwnd, flag);
+	DKDEBUGFUNC(hwnd, flag);
 	::ShowWindow(hwnd, flag);
 	return true;
 }
@@ -572,7 +572,7 @@ bool DKHandles::ShowWindow(HWND hwnd, unsigned int flag)
 /////////////////////////////
 bool DKHandles::StartSearch()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	HWND hwnd = NULL;
 	//DKWindow::GetHandle((void*&)hwnd);
 	if(DKClass::HasFunc("DKCefWindow::GetHandle")){
@@ -583,7 +583,7 @@ bool DKHandles::StartSearch()
 	}
 
 	if(!hwnd){
-		DKLog("DKHandles::StartSearch(): hwnd is NULL\n", DKERROR);
+		DKERROR("DKHandles::StartSearch(): hwnd is NULL\n");
 		return false;
 	}
 
@@ -604,7 +604,7 @@ bool DKHandles::StartSearch()
 /////////////////////////////////
 bool DKHandles::ToggleHighlight()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	if(highlight){
 		highlight = false;
 		return true;
@@ -616,7 +616,7 @@ bool DKHandles::ToggleHighlight()
 ///////////////////////////////////////////////////////////////////////////////////////
 bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int timeout)
 {
-	DKDebug(clas, value, timeout);
+	DKDEBUGFUNC(clas, value, timeout);
 	int i = 0;
 	DKString text;
 	char classname[256];
@@ -631,7 +631,7 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 			DKString text = buffer;
 			if(text == value){
 				if(!GetClassName(it->first, classname, 256)){
-					DKLog("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed. \n", DKWARN);
+					DKWARN("DKHandles::SetHandle("+clas+","+value+"): GetClassName failed\n");
 					return false; 
 				}
 			}
@@ -640,7 +640,7 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 		++i;
 	}
 	if(i >= timeout){
-		DKLog("DKHandles::WaitForHandle("+clas+","+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::WaitForHandle("+clas+","+value+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	return true;
@@ -649,7 +649,7 @@ bool DKHandles::WaitForHandle(const DKString& clas, const DKString& value, int t
 /////////////////////////////////////////////////////////////////
 bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 {
-	DKDebug(value, timeout);
+	DKDEBUGFUNC(value, timeout);
 	int i = 0;
 	DKString text;
 	while(text != value && i < timeout){
@@ -665,7 +665,7 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 		++i;
 	}
 	if(i >= timeout){
-		DKLog("DKHandles::WaitForHandle("+value+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::WaitForHandle("+value+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	return true;
@@ -674,7 +674,7 @@ bool DKHandles::WaitForHandle(const DKString& value, int timeout)
 //////////////////////////////////////////////////////////////
 bool DKHandles::WaitForHandle(unsigned int index, int timeout)
 {
-	DKDebug(index, timeout);
+	DKDEBUGFUNC(index, timeout);
 	int i = 0;
 	while(index > handles.size() && i < timeout){
 		PopulateHandles();
@@ -682,7 +682,7 @@ bool DKHandles::WaitForHandle(unsigned int index, int timeout)
 		++i;
 	}
 	if(i >= timeout){
-		DKLog("DKHandles::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::WaitForHandle("+toString(index)+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	//currentHandle = index;
@@ -692,7 +692,7 @@ bool DKHandles::WaitForHandle(unsigned int index, int timeout)
 /////////////////////////////////////////////////////////////////
 bool DKHandles::WaitForWindow(const DKString& title, int timeout)
 {
-	DKDebug(title, timeout);
+	DKDEBUGFUNC(title, timeout);
 	//FIXME - this is blocking,  thread this out
 	int i = 0;
 	while(!WindowExists(title) && i < timeout){
@@ -700,7 +700,7 @@ bool DKHandles::WaitForWindow(const DKString& title, int timeout)
 		++i;
 	}
 	if(i >= timeout){
-		DKLog("DKHandles::WaitForWindow("+title+","+toString(timeout)+"): timed out.\n", DKWARN);
+		DKWARN("DKHandles::WaitForWindow("+title+","+toString(timeout)+"): timed out\n");
 		return false;
 	}
 	return true;
@@ -709,7 +709,7 @@ bool DKHandles::WaitForWindow(const DKString& title, int timeout)
 ///////////////////////////////////////////////////
 bool DKHandles::WindowExists(const DKString& title)
 {
-	DKDebug(title);
+	DKDEBUGFUNC(title);
 	HWNDname temp;
 	temp.caption = title.c_str();
 	if(EnumChildWindows(::GetDesktopWindow(), FindWindowPartial, (LPARAM)&temp)){
@@ -726,7 +726,7 @@ bool DKHandles::WindowExists(const DKString& title)
 ////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumChildProc(HWND hwnd, LPARAM lParam) 
 {
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	handles.insert(std::pair<HWND,HWND>(hwnd, ::GetParent(hwnd)));
 	return TRUE;
 }
@@ -734,7 +734,7 @@ BOOL CALLBACK DKHandles::EnumChildProc(HWND hwnd, LPARAM lParam)
 ////////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam) 
 {
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	winhandles.push_back(hwnd);
 	return TRUE;
 }
@@ -743,7 +743,7 @@ BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam)
 //////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 {
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	char class_name[80];
 	char title[80];
 	GetClassName(hwnd,class_name, sizeof(class_name));
@@ -764,7 +764,7 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 /////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam) 
 {   
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	HWNDname *temp = (HWNDname*)lparam;
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
@@ -778,7 +778,7 @@ BOOL CALLBACK DKHandles::FindWindow(HWND hwnd, LPARAM lparam)
 ////////////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::FindWindowPartial(HWND hwnd, LPARAM lparam) 
 {
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	HWNDname *temp = (HWNDname*)lparam;
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);     
@@ -792,7 +792,7 @@ BOOL CALLBACK DKHandles::FindWindowPartial(HWND hwnd, LPARAM lparam)
 /////////////////////////////////////////////////////////////
 BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam) 
 {
-	//DKDebug(hwnd, lParam);
+	//DKDEBUGFUNC(hwnd, lParam);
 	static TCHAR buffer[50];      
 	GetWindowText(hwnd, buffer, 50);
 	DKString title = buffer;
@@ -805,7 +805,7 @@ BOOL CALLBACK DKHandles::GetWindows(HWND hwnd, LPARAM lparam)
 //////////////////////////////////////////////////////////////////////////////
 LRESULT CALLBACK DKHandles::SearchProc(int code, WPARAM wParam, LPARAM lParam)
 {
-	//DKDebug(code, wParam, lParam);
+	//DKDEBUGFUNC(code, wParam, lParam);
 	if(wParam == WM_MOUSEMOVE){
 		if(searching){
 			DoMouseMove();

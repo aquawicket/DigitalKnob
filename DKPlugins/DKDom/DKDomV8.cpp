@@ -6,7 +6,7 @@
 /////////////////////
 bool DKDomV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKDom_Test", DKDomV8::Test);
 	return true;
 }
@@ -14,7 +14,7 @@ bool DKDomV8::Init()
 ////////////////////
 bool DKDomV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
@@ -22,6 +22,7 @@ bool DKDomV8::End()
 //////////////////////////////////////////////////
 bool DKDomV8::Test(CefArgs args, CefReturn retval)
 {
+	DKDEBUGFUNC(args, retval);
 	//TODO
 	return false;
 }

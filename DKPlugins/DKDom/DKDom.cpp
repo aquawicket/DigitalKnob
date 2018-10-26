@@ -9,6 +9,7 @@ DKString ElementObject::property;
 //////////////////
 bool DKDom::Init()
 {
+	DKDEBUGFUNC();
 	DKClass::DKCreate("DKDomJS");
 	return true;
 }
@@ -16,13 +17,14 @@ bool DKDom::Init()
 /////////////////
 bool DKDom::End()
 {
+	DKDEBUGFUNC();
 	return true;
 }
 
 //////////////////
 bool DKDom::Test()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//TODO
 	DKRocket::Get(); //access to rocket
 	DKString code;
@@ -65,6 +67,7 @@ bool DKDom::Test()
 //////////////////////////////
 ElementObject::ElementObject()
 {
+	DKDEBUGFUNC();
 	duk_push_string(DKDuktape::ctx, "Property");
 	duk_push_c_function(DKDuktape::ctx, ElementObject::duk_getter, 0 /*nargs*/);
 	duk_push_c_function(DKDuktape::ctx, ElementObject::duk_setter, 1 /*nargs*/);
@@ -76,6 +79,7 @@ ElementObject::ElementObject()
 ///////////////////////////////////////////////
 int ElementObject::duk_method(duk_context *ctx)
 {
+	DKDEBUGFUNC(ctx);
 	//MethodToBind();
 	return 0; //no args and no return value, no need to act on JS stack
 }
@@ -83,6 +87,7 @@ int ElementObject::duk_method(duk_context *ctx)
 ///////////////////////////////////////////////
 int ElementObject::duk_setter(duk_context *ctx)
 {
+	DKDEBUGFUNC(ctx);
 	property = toString(duk_get_string(ctx, 0)); //first arg to String
 	return 0;
 }
@@ -90,6 +95,7 @@ int ElementObject::duk_setter(duk_context *ctx)
 /////////////////////////////////////////////////////
 duk_ret_t ElementObject::duk_getter(duk_context *ctx)
 {
+	DKDEBUGFUNC(ctx);
 	duk_push_string(ctx, property.c_str());
 	return 1; //we pushed one return value
 }
