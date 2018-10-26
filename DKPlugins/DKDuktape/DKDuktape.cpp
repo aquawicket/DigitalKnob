@@ -97,6 +97,7 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func)
 bool DKDuktape::CallEnd(const DKString& file)
 {
 	DKDEBUGFUNC(file);
+	if(!FileLoaded(file)){ return false; }
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -140,6 +141,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 bool DKDuktape::CallInit(const DKString& file)
 {
 	DKDEBUGFUNC(file);
+	if(!FileLoaded(file)){ return false; }
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
@@ -179,7 +181,7 @@ bool DKDuktape::FileLoaded(const DKString& path)
 	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i){
 		if(has(path, filelist[i])){
-			DKWARN("DKDuktape::FileLoaded(): "+path+" already loaded.\n");
+			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
 			return true;
 		}
 	}
