@@ -135,6 +135,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "GLOBAL")){
+		if(!DKWidget_GetHoverElement()){ return; }
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/RunMenu.html")){
 			return;
 		}
