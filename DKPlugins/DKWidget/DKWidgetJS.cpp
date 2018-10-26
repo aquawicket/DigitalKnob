@@ -160,7 +160,7 @@ int DKWidgetJS::GetValue(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString evt = duk_require_string(ctx, 0);
-	//DKLog("DKWidgetJS::GetValue("+evt+")\n");
+	//DKINFO("DKWidgetJS::GetValue("+evt+")\n");
 	
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
@@ -692,7 +692,7 @@ int DKWidgetJS::GetOption(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	//DKLog("DKWidgetJS::GetOption("+id+")\n");
+	//DKINFO("DKWidgetJS::GetOption("+id+")\n");
 	int n = 0;
 	if(!DKWidget::GetOption(id,n)){ return 0; }
 	duk_push_int(ctx, n);
@@ -705,7 +705,7 @@ int DKWidgetJS::SetOption(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	int n = duk_require_int(ctx, 1);
-	//DKLog("DKWidgetJS::SelectOption("+id+")\n");
+	//DKINFO("DKWidgetJS::SelectOption("+id+")\n");
 	if(!DKWidget::SetOption(id,n)){ return 0; }
 	return 1;
 }
@@ -727,7 +727,7 @@ int DKWidgetJS::GetScale(duk_context* ctx)
 	DKString scale;
 	if(!DKWidget::GetProperty("html","font-size",scale)){ return 0; }
 	replace(scale, "px", "");
-	//DKLog("DKWidgetJS::GetScale() = "+scale+" \n");
+	//DKINFO("DKWidgetJS::GetScale() = "+scale+"\n");
 	duk_push_number(ctx, toFloat(scale));
 	return 1;
 }
@@ -737,7 +737,7 @@ int DKWidgetJS::SetScale(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	double scale = duk_require_number(ctx, 0);
-	//DKLog("DKWidgetJS::SetScale("+toString(scale)+")\n");
+	//DKINFO("DKWidgetJS::SetScale("+toString(scale)+")\n");
 	if(!DKWidget::SetProperty("html","font-size",toString(scale)+"px")){ return 0; }
 	if(!DKWidget::SetProperty("body","font-size",toString(scale)+"px")){ return 0; }
 	return 1;
@@ -765,7 +765,7 @@ int DKWidgetJS::Cut(duk_context* ctx)
 	widget->GetLineSelection(pre, selection, post, line, 1);
 	DKCString text;
 	text = selection.ToUTF8(text,0);
-	DKLog("DKWidgetJS::Cut("+toString(text.CString())+")\n");
+	DKINFO("DKWidgetJS::Cut("+toString(text.CString())+")\n");
 	*/
 		
 	widget->CopySelection();  //TODO - use DKUtil::SetClipboard()

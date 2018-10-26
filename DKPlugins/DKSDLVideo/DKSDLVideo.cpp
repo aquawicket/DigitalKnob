@@ -41,7 +41,7 @@ bool DKSDLVideo::Handle(SDL_Event *event)
 	}
 	else if (event->type == WV_EOF_EVENT){
 		//closePlayer();
-		DKLog("DKSDLVideo::handle(): end of file\n");
+		DKINFO("DKSDLVideo::handle(): end of file\n");
 		if (stream){
 			WV_closeStream(stream);
 		}

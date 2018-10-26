@@ -202,7 +202,7 @@ void DKSDLAudio::Process()
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
-			//DKLog("trk.position = "+toString(trk.position)+"\n");
+			//DKINFO("trk.position = "+toString(trk.position)+"\n");
 			DKEvent::SendEvent("GLOBAL", "timeupdate", "");
 		}
 	}
@@ -210,7 +210,7 @@ void DKSDLAudio::Process()
 	*/
 	if(!Mix_PlayingMusic()){
 		//FIXME: !!!  PlaySound will call this constantly !!!
-		//DKLog("!Mix_PlayingMusic()\n");
+		//DKINFO("!Mix_PlayingMusic()\n");
 		Mix_RewindMusic();
 		if(trk.file.empty()){ return; }
 		Mix_PlayMusic(trk.snd, 0);

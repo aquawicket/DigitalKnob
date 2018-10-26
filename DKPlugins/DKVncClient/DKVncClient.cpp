@@ -131,7 +131,7 @@ bool DKVncClient::Init()
     //cl->format.blueShift = 8;
 	
 	/*
-	DKLog("Connecting to "+server_ip+". . .\n");
+	DKINFO("Connecting to "+server_ip+". . .\n");
 	//if(!rfbInitClient(cl, &DKApp::argc, DKApp::argv)){
 	//	cl = NULL;
 	//	cleanup(cl);
@@ -334,7 +334,7 @@ void DKVncClient::draw()
 {
 	//DKDEBUGFUNC();
 	if(!cl->frameBuffer){
-		//DKLog("DKVncClient::draw(): cl->frameBuffer invalid\n", DKWARN);
+		//DKWARN("DKVncClient::draw(): cl->frameBuffer invalid\n");
 		return; 
 	}
 
@@ -375,7 +375,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 		return;
 	}
 	DKUtil::GetTicks(DKUtil::lastFrame);
-	//DKLog("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n");
+	//DKINFO("DKVncClient::update("+toString(cl->desktopName)+","+toString(x)+","+toString(y)+","+toString(w)+","+toString(h)+")\n");
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
@@ -459,19 +459,19 @@ bool DKVncClient::handle(SDL_Event *e)
 			//	break;
 			/*
 			if(e->key.keysym.sym == SDLK_LSHIFT && !rightShiftKeyDown){
-				DKLog("left shift down\n");
+				DKINFO("left shift down\n");
 				rightShiftKeyDown = TRUE;
 				SendKeyEvent(cl, XK_Shift_L, TRUE);
 			}
 			*/
 			/*
 			else if(e->key.keysym.sym != SDLK_LSHIFT && rightShiftKeyDown){
-				DKLog("left shift up\n");
+				DKINFO("left shift up\n");
 				rightShiftKeyDown = FALSE;
 				SendKeyEvent(cl, XK_Shift_L, FALSE);
 			}
 			*/
-			//DKLog(toString(SDL_key2rfbKeySym(&e->key))+", "+toString(e->type == SDL_KEYDOWN ? "down" : "up")+"\n");
+			//DKINFO(toString(SDL_key2rfbKeySym(&e->key))+", "+toString(e->type == SDL_KEYDOWN ? "down" : "up")+"\n");
 			SendKeyEvent(cl, SDL_key2rfbKeySym(&e->key), e->type == SDL_KEYDOWN ? TRUE : FALSE);
 			break;
 		}
@@ -508,7 +508,7 @@ bool DKVncClient::handle(SDL_Event *e)
 			//clipboard_filter(e);
 			break;
 		case SDL_WINDOWEVENT:
-			//DKLog("SDL_WINDOWEVENT\n");
+			//DKINFO("SDL_WINDOWEVENT\n");
 			switch(e->window.event){
 				//case SDL_WINDOWEVENT_SIZE_CHANGED:
 				case SDL_WINDOWEVENT_RESIZED:
@@ -540,7 +540,7 @@ bool DKVncClient::handle(SDL_Event *e)
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
 	DKDEBUGFUNC(client);
-	//DKLog("client->appData.scaleSetting="+toString(client->appData.scaleSetting)+"\n");
+	//DKINFO("client->appData.scaleSetting="+toString(client->appData.scaleSetting)+"\n");
 	int width = client->width;
 	int height = client->height;
 	int depth = client->format.bitsPerPixel;
@@ -555,7 +555,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 	client->frameBuffer = (uint8_t*)sdl->pixels;
 	client->format.bitsPerPixel=depth;
 	SetFormatAndEncodings(client);
-	DKLog("client->width="+toString(client->width)+",client->height="+toString(client->height)+"\n");
+	DKINFO("client->width="+toString(client->width)+",client->height="+toString(client->height)+"\n");
 	return true;
 
 
@@ -737,7 +737,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 
 	sdl = SDL_GetWindowSurface(dkSdlWindow->window);
 	if (!sdl) {
-		DKLog("ERROR: "+toString(SDL_GetError())+"\n",DKERROR);
+		DKERROR("ERROR: "+toString(SDL_GetError())+"\n");
 	}
 	if (!sdl->pixels) {
 		int size;
@@ -757,7 +757,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 
 	sdl = (SDL_Surface*)rfbClientGetClientData(client, SDL_Init);
 	if (!sdl) {
-		DKLog("ERROR: "+toString(SDL_GetError())+"\n",DKERROR);
+		DKERROR("ERROR: "+toString(SDL_GetError())+"\n");
 	}
 	if (sdl->w != w || sdl->h != h) {
 		int depth = sdl->format->BitsPerPixel;
@@ -887,7 +887,7 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	//FIXME
 	return true; //BYPASS
 
-	//DKLog("DKVncClient::ValidateAspectRatio(): cl->width="+toString(cl->width)+", cl->height="+toString(cl->height)+"\n");
+	//DKINFO("DKVncClient::ValidateAspectRatio(): cl->width="+toString(cl->width)+", cl->height="+toString(cl->height)+"\n");
 	//cl->width;
 	//cl->height;
 	//DKWindow::SetHeight(300);
@@ -909,7 +909,7 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 
 	//int top, left, bottom, right;
 	//SDL_GetWindowBordersSize(dkSdlWindow->window, &top, &left, &bottom, &right);
-	//DKLog("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n");
+	//DKINFO("DKVncClient::ValidateAspectRatio(): top="+toString(top)+" left="+toString(left)+" bottom="+toString(bottom)+" right="+toString(right)+"\n");
 
 	update(cl, 0, 0, cl->width, cl->height);
 

@@ -470,12 +470,12 @@ bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 	/*
 	DKString rval;
 	if(!DKCef::Get()->RunDuktape(code, rval)){
-		DKLog("DKCefV8::RunDuktape():  DKCef::Get()->RunDuktape(code, rval) failed", DKWARN);
+		DKWARN("DKCefV8::RunDuktape():  DKCef::Get()->RunDuktape(code, rval) failed\n");
 		return false; 
 	}
 	if(!rval.empty()){
 		if(!retval->SetString(0, rval)){ 
-			DKLog("DKCefV8::RunDuktape() retval->SetString(0, rval) failed", DKWARN);
+			DKWARN("DKCefV8::RunDuktape() retval->SetString(0, rval) failed\n");
 			return false; 
 		}
 	}

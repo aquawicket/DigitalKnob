@@ -37,7 +37,7 @@ bool DKSDLWindow::Init()
 {
 	DKDEBUGFUNC();
 #ifdef ANDROID
-		//DKLog("CallJavaFunction(OpenActivity,SDLActivity)\n");
+		//DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
 		//CallJavaFunction("OpenActivity","SDLActivity");
 #endif
 
@@ -103,7 +103,7 @@ bool DKSDLWindow::Init()
 	DKString result;
 	
 #if defined(ANDROID) || defined(IOS)
-	DKLog("Creating SDLWindow for mobile device  \n");
+	DKINFO("Creating SDLWindow for mobile device\n");
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
@@ -113,9 +113,9 @@ bool DKSDLWindow::Init()
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	
 	result = "OpenglES";
-	DKLog("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n");
+	DKINFO("DKSDLWindow Width: "+toString(width)+" Height: "+toString(height)+"\n");
 	if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0){
-		DKLog("SDL_CreateWindow Error: "+DKString(SDL_GetError()), DKERROR);
+		DKERROR("SDL_CreateWindow Error: "+DKString(SDL_GetError())+"\n");
 		return false;
 	}
 #endif
@@ -182,7 +182,7 @@ bool DKSDLWindow::Init()
 	DKString icon = DKFile::local_assets+"icon.ico";
 	SetIcon(&icon, NULL);
 
-	//DKLog(title+"\n");
+	//DKINFO(title+"\n");
 	SDL_SetWindowTitle(window, title2.c_str());
 
 	DKClass::RegisterFunc("DKSDLWindow::TestInt", &DKSDLWindow::TestInt, this);
@@ -387,7 +387,7 @@ bool DKSDLWindow::GetHeight(const void* input, void* output)
 	DKDEBUGFUNC(input, output);
 	int h;
 	SDL_GetWindowSize(window, NULL, &h);
-	//DKLog("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
+	//DKINFO("DKSDLWindow::GetHeight() = "+toString(h)+"\n");
 	if(h == 0){ h = height; }
 	*(int*)output = h;
 	return true;
@@ -427,7 +427,7 @@ bool DKSDLWindow::GetWidth(const void* input, void* output)
 	DKDEBUGFUNC(input, output);
 	int w;
 	SDL_GetWindowSize(window, &w, NULL);
-	//DKLog("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
+	//DKINFO("DKSDLWindow::GetWidth() = "+toString(w)+"\n");
 	if(w == 0){ w = width; }
 	*(int*)output = w;
 	return true;
@@ -694,7 +694,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 		return 1;
 	}
 	if(event->type == SDL_TEXTINPUT){
-		//DKLog("DKSDLWindow::SDL_TEXTINPUT \n");
+		//DKINFO("DKSDLWindow::SDL_TEXTINPUT\n");
 		return 1;
 	}
 	return 1;
@@ -746,7 +746,7 @@ bool DKSDLWindow::handle(SDL_Event *event)
 		}
 
         case SDL_KEYDOWN:{
-			//DKLog("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+			//DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase

@@ -295,7 +295,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	DKString target_tag = target->GetTagName().CString();
 	DKString hover_id = hover->GetId().CString();
 	DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" +hover_id+"\n";
-	DKLog(string);
+	DKINFO(string+"\n");
 	*/
 
 #ifdef ANDROID
@@ -348,7 +348,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 			}
 			//FIXME - we run the risk of having event function pointers that point to nowhere
 			ev->event_func(ev); //call the function linked to the event
-			//DKLog("Event: "+ev->type+", "+ev->id+"\n");
+			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
 			// we need to find a way to stop propagation of the event, while allowing drag events.

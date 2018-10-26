@@ -68,7 +68,7 @@ protected:
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){}
 	virtual void OnOutput(LPCSTR szText){
-		//DKLog("StackWalkerToConsole(): OnOutput\n");
+		//DKINFO("StackWalkerToConsole(): OnOutput\n");
 		DKWARN(szText);
 	}
 };
@@ -184,11 +184,11 @@ void handler(int signum)
 
 	if(name){
 		//fprintf( stderr, "Caught signal %d (%s)\n", signum, name );
-		DKLog("Caught signal "+toString(signum)+" "+name+"\n", DKERROR);
+		DKERROR("Caught signal "+toString(signum)+" "+name+"\n");
 	}
 	else{
 		//fprintf( stderr, "Caught signal %d\n", signum );
-		DKLog("Caught signal "+toString(signum)+" \n", DKERROR);
+		DKERROR("Caught signal "+toString(signum)+"\n");
 	}
  
 	printStackTrace();
@@ -216,7 +216,7 @@ bool DKDebug::Init()
 
 #ifndef DEBUG
 	//TODO: we need to do this in the build script. The exe will be using the .pdb, so the file is locked. 
-	//DKLog("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n");
+	//DKINFO("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n");
 	//DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);
 #endif
 
@@ -264,7 +264,7 @@ bool DKDebug::ShowStackTrace(const void* input, void* output)
 	DKINFO("\n");
 	return true;
 #else
-	DKLog("DKDebug::ShowStackTrace(): no implemented on this OS\n", DKERROR);
+	DKERROR("DKDebug::ShowStackTrace(): no implemented on this OS\n");
 	return false;
 #endif
 }

@@ -179,7 +179,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-		//DKLog("DKJS::_DKCreate("+data+"): Callback found in DKCreate :D \n");
+		//DKINFO("DKJS::_DKCreate("+data+"): Callback found in DKCreate\n");
 		callback_found = true;
 	}
 	
@@ -192,8 +192,8 @@ int DKJS::_DKCreate(duk_context* ctx)
 
 	//Call the callback
 	if(callback_found){
-		//if(duk_is_function(ctx, 0)){ DKLog("index 0 is function \n"); }
-		//if(duk_is_function(ctx, 1)) { DKLog("index 1 is function \n"); }
+		//if(duk_is_function(ctx, 0)){ DKINFO("index 0 is function \n"); }
+		//if(duk_is_function(ctx, 1)) { DKINFO("index 1 is function \n"); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
 			/*
 			duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
@@ -206,9 +206,9 @@ int DKJS::_DKCreate(duk_context* ctx)
 			DKString error = toString(duk_safe_to_string(ctx, -1));
 			replace(error, "'", "\\'");
 			DKString str = "var err = new Error();";
-			str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+			str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
 			str += error+"\\n";
-			str += "'+err.stack+'\\n', DKERROR);";
+			str += "'+err.stack+'\\n');";
 			duk_eval_string(ctx, str.c_str());
 		}
 		//duk_pop(ctx); // pop return value (or `err`)
@@ -429,7 +429,7 @@ int DKJS::GetArgs(duk_context* ctx)
 	DKString args;
 	if(DKApp::argc > 1){
 		for(int i = 1; i < DKApp::argc; ++i){
-			//DKLog("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
+			//DKINFO("argv["+toString(i)+"] = "+toString(DKApp::argv[i])+"\n");
 			args += toString(DKApp::argv[i]) += ";";
 		}
 	}
@@ -712,7 +712,7 @@ int DKJS::GetValue(duk_context* ctx)
 			duk_push_string(ctx, rval.c_str());
 			return 1;
 		}
-		//DKLog("DKJS::GetValue(" + evt + "): failed. \n");
+		//DKERROR("DKJS::GetValue(" + evt + "): failed\n");
 		return 0;
 	}
 	duk_push_string(ctx, arry[2].c_str());
@@ -1074,12 +1074,12 @@ int DKJS::Value(duk_context* ctx)
 	toStringArray(events, evt, ",");
 	
 	if(events.size() > 2){
-		//DKLog("Value:"+events[2]+"\n");
+		//DKINFO("Value:"+events[2]+"\n");
 		if(!same(events[2],value)){ return 0; }
 		return 1;
 	}
 	
-	//DKLog("Value:"+events[1]+"\n");
+	//DKINFO("Value:"+events[1]+"\n");
 	DKERROR("DKJS::Value(): We should not get here \n");
 	if(!same(events[1],value)){ return 0; }
 	return 1;

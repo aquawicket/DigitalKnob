@@ -154,7 +154,7 @@ void DKScreenRecorder::DrawBuffer()
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
-		//DKLog("DIRECTX\n");
+		//DKINFO("DIRECTX\n");
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
 
 		HRESULT hr = S_OK;

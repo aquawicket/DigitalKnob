@@ -42,11 +42,11 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	DKXmlNodes nodes;
 	xml.GetNodes("//a", nodes);
 	for(unsigned int i = 0; i<nodes.size(); ++i){
-		DKLog(DKString(nodes[i].node().name())+"\n");
+		DKINFO(DKString(nodes[i].node().name())+"\n");
 		DKString value;
 		xml.GetAttribute(nodes[i].node(),"href",value);
 		if(!value.empty()){
-			DKLog("value="+value+"\n");
+			DKINFO("value="+value+"\n");
 			DKString string = "color:rgb(0,0,255);text-decoration:underline;";
 			xml.SetAttribute(nodes[i].node(),"style",string);
 			
@@ -58,9 +58,9 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	//////////////////////////////////////////////////////
 	*/
 
-	//DKLog("\n##################### RML ####################\n");
-	//DKLog(rml+"\n");
-	//DKLog("\n##############################################\n\n");
+	//DKINFO("\n##################### RML ####################\n");
+	//DKINFO(rml+"\n");
+	//DKINFO("\n##############################################\n\n");
 	return true;
 }
 

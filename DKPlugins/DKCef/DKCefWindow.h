@@ -135,7 +135,7 @@ public:
 		CEF_REQUIRE_UI_THREAD();
 		DKString msg = message.ToString();
 		replace(msg, "%c", "");
-		//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
+		//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
 		DKString string = message.ToString();
 		replace(string,"%c","");
 		int identifier = browser->GetIdentifier();
@@ -237,7 +237,7 @@ public:
 #ifdef LINUX
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
-			DKLog("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
+			DKERROR("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
 			return;
 		}
 		if(fullscreen){
@@ -302,7 +302,7 @@ public:
 		DKDEBUGFUNC(browser, "const CefKeyEvent&", os_event, is_keyboard_shortcut);
 		CEF_REQUIRE_UI_THREAD();
 		if(event.type == KEYEVENT_RAWKEYDOWN){
-			//DKLog("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
+			//DKINFO("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
 			//#ifdef WIN32
 			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.windows_key_code));
 			//#else
@@ -313,10 +313,10 @@ public:
 			DKINFO("OnPreKeyEvent(): KeyDown: "+toString(event.character)+"\n");
 		}
 		if(event.type == KEYEVENT_KEYUP){
-			//DKLog("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
+			//DKINFO("OnPreKeyEvent(): KeyUp: "+toString(event.character)+"\n");
 		}
 		if(event.type == KEYEVENT_CHAR){
-			//DKLog("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
+			//DKINFO("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
 			DKEvent::SendEvent("GLOBAL", "keypress", toString(event.character));
 		}
 
@@ -342,12 +342,12 @@ public:
 		CEF_REQUIRE_UI_THREAD();
 
 		if(message->GetName() == "GetFunctions"){
-			//DKLog("DKCefWindow::OnProcessMessageReceived(GetFunctions)\n");
+			//DKINFO("DKCefWindow::OnProcessMessageReceived(GetFunctions)\n");
 			DKV8::GetFunctions(browser);
 		}
 
 		if(has(message->GetName(),"CallFunc(")){
-			//DKLog("DKCefWindow::OnProcessMessageReceived(CallFunc)\n");
+			//DKINFO("DKCefWindow::OnProcessMessageReceived(CallFunc)\n");
 
 			//get function name
 			DKString func = message->GetName();

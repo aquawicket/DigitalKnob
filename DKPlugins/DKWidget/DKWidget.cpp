@@ -28,7 +28,7 @@ bool DKWidget::Init()
 	}
 
 	DKString _data = toString(data, ",");
-	//DKLog("DKWidget::Init("+_data+")\n");
+	//DKINFO("DKWidget::Init("+_data+")\n");
 
 	//data = ("DKWidget, file, parent")
 	if(data.size() < 2){	
@@ -70,7 +70,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	if(!root){ return; }
 	DKString id = root->GetId().CString();
 	if(id.empty()){ return; }
-	//DKLog("DKWidget::RemoveWidget("+id+")\n");
+	//DKINFO("DKWidget::RemoveWidget("+id+")\n");
 	
 	//Remove all child DKWidgets and events
 	RemoveAllEventListeners(id);
@@ -144,7 +144,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	//FIXME - the id needs to be the path from the assets folder..  i.e.  MyPlugin/MyPlugin.js
 	/*
 	if(!same(_id,id)){
-		DKLog("DKWidget::CreateWidget("+path+"): fixing id... "+id+"\n", DKWARN);
+		DKWARN("DKWidget::CreateWidget("+path+"): fixing id... "+id+"\n");
 		DKString str;
 		GetInnerHtml(temp, str);
 		replace(str, "id=\""+_id+"\"", "id=\""+id+"\""); //Set the id to the filename (example.html)
@@ -157,7 +157,7 @@ bool DKWidget::CreateWidget(DKString& file)
 
 	int numChildren = temp->GetNumChildren();
 	for(int i = 0; i < numChildren; i++){
-		//DKLog("AppendChild("+data[2]+", temp->GetChild(0)\n");
+		//DKINFO("AppendChild("+data[2]+", temp->GetChild(0)\n");
 		AppendChild(data[2], temp->GetChild(0));
 	}
 
@@ -452,7 +452,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 		}
 		i++;
 	}
-	//DKLog("DKWidget::GetAvailableId("+id+")-> "+out+"\n");
+	//DKINFO("DKWidget::GetAvailableId("+id+")-> "+out+"\n");
 }
 
 ///////////////////////////////////////////////////////
@@ -469,7 +469,7 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 	}
 	DKElement* element = doc->GetElementById(id.c_str());
 	if(!element){
-		//DKLog("DKWidget::GetElementById("+id+"): could not find element. \n", DKWARN);
+		//DKWARN("DKWidget::GetElementById("+id+"): could not find element\n");
 		return 0;
 	}
 	return element;
@@ -846,7 +846,7 @@ bool DKWidget::Show(DKElement* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
-		//DKLog("DKWidget::Show(): element not valid \n", DKWARN);
+		//DKWARN("DKWidget::Show(): element not valid\n");
 		return false;
 	}
 	if(!SetProperty(element, "display", "block")){ return false; }
@@ -858,7 +858,7 @@ bool DKWidget::Hide(DKElement* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
-		//DKLog("DKWidget::Hide(): element not valid \n", DKWARN);
+		//DKWARN("DKWidget::Hide(): element not valid\n");
 		return false;
 	}
 	if(!SetProperty(element, "display", "none")){ return false; }
@@ -991,7 +991,7 @@ bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 	parent = par_store->GetFirstChild();
 	
 	DKINFO("DKWidget::InsertBefore(): "+GetId(parent)+"->InsertBefore("+GetId(ele)+","+GetId(parent)+")\n");
-	//DKLog("par_store = "+GetId(par_store)+" \n");
+	//DKINFO("par_store = "+GetId(par_store)+"\n");
 	par_store->InsertBefore(ele, parent);
 	return true;
 }
@@ -1109,15 +1109,15 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 	///// adjust background alpha from to 1-255 scale
 	if(same(name,"background-color")){
 		if(has(value,"rgba")){
-			//DKLog("DKWidget::SetProperty() background-color has rgba()\n");
-			//DKLog(value+"\n");
+			//DKINFO("DKWidget::SetProperty() background-color has rgba()\n");
+			//DKINFO(value+"\n");
 			std::size_t start = value.find_last_of(",")+1;
-			//DKLog("start:"+toString(start)+"\n");
+			//DKINFO("start:"+toString(start)+"\n");
 			std::size_t end = value.find_last_of(")");
-			//DKLog("end:"+toString(end)+"\n");
+			//DKINFO("end:"+toString(end)+"\n");
 			int newvalue = (int)(toFloat(value.substr(start,end-start)) * 255);
 			finalValue.replace(start,end-start,toString(newvalue));
-			//DKLog(finalValue+"\n");
+			//DKINFO(finalValue+"\n");
 		}
 	}
 
@@ -1766,11 +1766,11 @@ bool DKWidget::AddDragHandle(const DKString& id, const DKString& drag)
 		if(!element){return false;}
 		DKString tag = element->GetTagName().CString();
 		if(same(tag, "handle")){ return false; }
-		//DKLog("DKWidget::AddDragHandle(): CreateElementBefore("+GetFirstChild(id)+",handle, DKC-handle \n");
+		//DKINFO("DKWidget::AddDragHandle(): CreateElementBefore("+GetFirstChild(id)+",handle, DKC-handle\n");
 		handle = CreateElementBefore(GetFirstChild(id), "handle", "DKC-handle");
 	}
 	else{
-		//DKLog("DKWidget::AddDragHandle(): CreateElement("+id+",handle, DKC-handle \n");
+		//DKINFO("DKWidget::AddDragHandle(): CreateElement("+id+",handle, DKC-handle\n");
 		handle = CreateElement(id, "handle", "DKC-handle");
 	}
 
@@ -1808,11 +1808,11 @@ bool DKWidget::AddResizeHandle(const DKString& id, const DKString& resize)
 		if(!element){return false;}
 		DKString tag = element->GetTagName().CString();
 		if(same(tag, "handle")){ return false; }
-		//DKLog("DKWidget::AddDragHandle(): CreateElementBefore("+GetFirstChild(id)+",handle, DKC-handle \n");
+		//DKINFO("DKWidget::AddDragHandle(): CreateElementBefore("+GetFirstChild(id)+",handle, DKC-handle\n");
 		handle = CreateElementBefore(GetFirstChild(id), "handle", "DKC-handle");
 	}
 	else{
-		//DKLog("DKWidget::AddDragHandle(): CreateElement("+id+",handle, DKC-handle \n");
+		//DKINFO("DKWidget::AddDragHandle(): CreateElement("+id+",handle, DKC-handle\n");
 		handle = CreateElement(id, "handle", "DKC-handle");
 	}
 

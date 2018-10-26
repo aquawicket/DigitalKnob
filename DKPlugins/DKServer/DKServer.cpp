@@ -8,7 +8,7 @@
 /////////////////////
 bool DKServer::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	//DKCreate("DKServerJS");
 	thread = new DKThread();
 
@@ -21,7 +21,7 @@ bool DKServer::Init()
 ////////////////////
 bool DKServer::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	thread->stop();
 	return true;
 }
@@ -30,21 +30,21 @@ bool DKServer::End()
 ///////////////////////////////////////////////////////////////////////////
 session::session(boost::asio::io_service& io_service) : socket_(io_service)
 {
-	DKDebug();
-	DKLog("Sever session created \n");
+	DKDEBUGFUNC();
+	DKINFO("Sever session created\n");
 }
 
 //////////////////////////////
 tcp::socket& session::socket()
 {
-	DKDebug();
+	DKDEBUGFUNC();
     return socket_;
 }
 
 /////////////////////
 void session::start()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	socket_.async_read_some(boost::asio::buffer(data_, max_length),
 		boost::bind(&session::handle_read, this,
 		boost::asio::placeholders::error,
@@ -54,9 +54,9 @@ void session::start()
 ///////////////////////////////////////////////////////////////////////////////////////////
 void session::handle_read(const boost::system::error_code& error, size_t bytes_transferred)
 { 
-	//DKDebug(error, bytes_transferred);
+	//DKDEBUGFUNC(error, bytes_transferred);
 	if(!error){
-	DKLog(DKString(data_,bytes_transferred) + "\n");
+	DKINFO(DKString(data_,bytes_transferred)+"\n");
 	DKEvent::SendEvent("GLOBAL", "server", DKString(data_, bytes_transferred));
 
 	socket_.async_read_some(boost::asio::buffer(data_, max_length),
@@ -80,7 +80,7 @@ void session::handle_read(const boost::system::error_code& error, size_t bytes_t
 //////////////////////////////////////////////////////////////////
 void session::handle_write(const boost::system::error_code& error)
 {
-	//DKDebug(error);
+	//DKDEBUGFUNC(error);
 	if(!error){
       socket_.async_read_some(boost::asio::buffer(data_, max_length),
 		boost::bind(&session::handle_read, this,
@@ -98,14 +98,14 @@ server::server(boost::asio::io_service& io_service, short port)
 	: io_service_(io_service),
     acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	start_accept();
 }
 
 ///////////////////////////
 void server::start_accept()
 {
-	DKDebug();
+	DKDEBUGFUNC();
     new_session = new session(io_service_);
     acceptor_.async_accept(new_session->socket(),
         boost::bind(&server::handle_accept, this, new_session,
@@ -115,7 +115,7 @@ void server::start_accept()
 ////////////////////////////////////////////////////////////////////////////////////////
 void server::handle_accept(session* new_session, const boost::system::error_code& error)
 {
-	DKDebug(new_session, error);
+	DKDEBUGFUNC(new_session, error);
 	if(!error){
 		new_session->start();
     }

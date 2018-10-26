@@ -30,7 +30,7 @@ void DKClient::Connect(const DKString address)
 		if(_address != address){ _address = address; }
 	}
 	catch(boost::system::system_error& e){
-		DKLog(DKString(e.what())+"\n", DKERROR);
+		DKERROR(DKString(e.what())+"\n");
 		return;
 	}
 }
@@ -42,7 +42,7 @@ void DKClient::Send(const DKString& string)
 	if(!c->socket_.is_open()){ 
 		Connect(_address);
 		if(!c->socket_.is_open()){ 
-		  DKLog("DKClient::Send(): could not find open socket\n", DKWARN);
+		  DKWARN("DKClient::Send(): could not find open socket\n");
 		  return; 
 		}
 	}

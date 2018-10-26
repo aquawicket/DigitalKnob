@@ -103,11 +103,11 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString end = filename+"_End";
 	DKFile::RemoveExtention(end);
 
-	DKString full_call = "try{ "+end+"(); } catch(err){ DKLog('";
+	DKString full_call = "try{ "+end+"(); } catch(err){ DKERROR('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += end+"()\\n";
 	full_call += "'+err.stack+'\\n";
-	full_call += "', DKERROR); }";
+	full_call += "'); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
 
 	/*
@@ -117,13 +117,13 @@ bool DKDuktape::CallEnd(const DKString& file)
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
 		str += end+": "+error+"\\n";
-		str += "'+err.stack+'\\n', DKERROR);";
+		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
 	}
 	else{
-		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
+		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
 	}
 	duk_pop(ctx);  // pop result/error
 	*/
@@ -145,28 +145,28 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKFile::RemoveExtention(filename);
 	DKString init = filename+"_Init";
 
-	DKString full_call = "try{ "+init+"(); } catch(err){ DKLog('";
+	DKString full_call = "try{ "+init+"(); } catch(err){ DKERROR('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += init+"()\\n";
 	full_call += "'+err.stack+'\\n";
-	full_call += "', DKERROR); }";
+	full_call += "'); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
 
 	/*
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, init.c_str());
 	if(duk_pcall(ctx, 0) != 0) {
-		//DKLog(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n", DKWARN);
+		//DKWARN(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n");
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
 		str += init+": "+error+"\\n";
-		str += "'+err.stack+'\\n', DKERROR);";
+		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
 	}
 	else {
-		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
+		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
 	}
 	duk_pop(ctx);  // pop result/error
 	*/
@@ -245,11 +245,11 @@ bool DKDuktape::OnEvent(DKEvent* event)
 		evt += "," + value;
 	}
 
-	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKLog('";
+	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKERROR('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += jsreturn+"("+evt+")\\n";
 	full_call += "'+err.stack+'\\n";
-	full_call += "', DKERROR); }";
+	full_call += "'); }";
 	duk_eval_string(DKDuktape::ctx, full_call.c_str());
 	
 	/*
@@ -259,17 +259,17 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
     if(duk_pcall(ctx, 1) != 0){
-		//DKLog("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n", DKERROR);
+		//DKERROR("DKDuktape::OnEvent(): "+DKString(duk_safe_to_string(ctx, -1))+": "+jsreturn+" "+evt+"\n");
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKLog('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
 		str += jsreturn+": "+error+"\\n";
-		str += "'+err.stack+'\\n', DKERROR);";
+		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
     }
 	else{
-		//DKLog(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value??
+		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value??
     }
     duk_pop(ctx);  // pop result/error
 	*/
@@ -297,7 +297,7 @@ bool DKDuktape::Reload()
 			if(has(list[i],"DKCef")){ continue; }
 			if(has(list[i],"DKSDLCef")){ continue; }
 		}
-		//DKLog("DKDuktape::Reload(): "+list[i]+"\n",DKINFO); //DEBUG
+		//DKINFO("DKDuktape::Reload(): "+list[i]+"\n"); //DEBUG
 		DKClass::DKClose(list[i]);
 	}
 
@@ -337,7 +337,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
 		rval = duk_get_string(ctx, -1);
 		if(!rval.empty()){
-			//DKLog("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n");
+			//DKINFO("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n");
 		}
 	}
 
@@ -440,21 +440,21 @@ int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata)
 #endif
 
 	//Start a zero timer which will call _USERCODE from within the event loop.
-	//DKLog("DKDuktape: set _USERCODE timer\n");
+	//DKINFO("DKDuktape: set _USERCODE timer\n");
 	//duk_eval_string(ctx, "setTimeout(function() { _USERCODE(); }, 0);");
 	//duk_pop(ctx);
 
 	/*
 	if(c_evloop){
-		DKLog("DKDuktape: calling eventloop_run()\n");
+		DKINFO("DKDuktape: calling eventloop_run()\n");
 		rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
 		if (rc != 0) {
-			DKLog("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
+			DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
 		}
 		duk_pop(ctx);
 	} 
 	else{
-		//DKLog("DKDuktape: calling EventLoop.run()\n");
+		//DKINFO("DKDuktape: calling EventLoop.run()\n");
 		duk_eval_string(ctx, "EventLoop.run();");
 		duk_pop(ctx);
 	}
@@ -486,15 +486,15 @@ void DKDuktape::EventLoop()
 	DKDEBUGFUNC();
 	int rc;
 	if(c_evloop){
-		DKLog("DKDuktape: calling eventloop_run()\n");
+		DKINFO("DKDuktape: calling eventloop_run()\n");
 		rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
 		if (rc != 0) {
-			DKLog("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
+			DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
 		}
 		duk_pop(ctx);
 	} 
 	else{
-		//DKLog("DKDuktape: calling EventLoop.run()\n");
+		//DKINFO("DKDuktape: calling EventLoop.run()\n");
 		duk_eval_string(ctx, "EventLoop.run();");
 		duk_pop(ctx);
 	}

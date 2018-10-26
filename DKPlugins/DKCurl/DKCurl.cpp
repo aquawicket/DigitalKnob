@@ -174,7 +174,7 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest)
 {
 	DKDEBUGFUNC(url, dest);
 	//if(!FtpFileExists(url)){
-	//	DKLog("url not found \n", DKERROR);
+	//	DKERROR("url not found\n");
 	//	return false;
 	//}
 
@@ -213,7 +213,7 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate)
 {
 	DKDEBUGFUNC(url, filedate);
 	//if(!FtpFileExists(url)){
-	//	DKLog("url not found\n", DKERROR);
+	//	DKERROR("url not found\n");
 	//	return false;
 	//}
 
@@ -275,7 +275,7 @@ bool DKCurl::FtpFileExists(const DKString& url)
 		return true;
 	}
 
-	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
+	//DKERROR("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK\n");
 	return false;
 }
 
@@ -480,7 +480,7 @@ bool DKCurl::HttpFileExists(const DKString& url)
 	//	return true;
 	//}
 
-	//DKLog("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK \n", DKERROR);
+	//DKERROR("DKCurl::FileExists() CURLE_ABORTED_BY_CALLBACK\n");
 	return false;
 }
 

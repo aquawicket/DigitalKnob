@@ -12,7 +12,7 @@ bool DKMySql::Init()
 	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
 	if(mysql_init(&mysql)==NULL){
-		DKLog("Failed to initate MySQL connection\n",DKERROR);
+		DKERROR("Failed to initate MySQL connection\n");
 		return false;
 	}
 #endif
@@ -37,7 +37,7 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 	DKDEBUGFUNC(host, name, pass, port);
 #ifdef USE_mysql
 	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
-		DKLog("Failed to connect to MySQL. \n", DKERROR);
+		DKERROR("Failed to connect to MySQL\n");
 		return false;
 	}
 #else
@@ -93,7 +93,7 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 #ifdef USE_mysql
 	//if(mysql_real_query(&mysql,query.c_str(),strlen(query.c_str())) != 0){
 	if(mysql_query(&mysql,query.c_str()) != 0){
-		DKLog( "\n Query failed: %s\n"/*,mysql_error(&mysql)*/,DKERROR);
+		DKERROR( "\n Query failed: %s\n"/*,mysql_error(&mysql)*/);
 		return false;
 	}
 

@@ -19,7 +19,7 @@ void SourceCallback::Visit(const CefString& string)
 	//std::stringstream ss;
 	//ss << "<html><body bgcolor=\"white\">Source:<pre>" << source << "</pre></body></html>";
 	//browser_->GetMainFrame()->LoadString(ss.str(), "http://tests/getsource");
-	//DKLog(source+"\n");
+	//DKINFO(source+"\n");
 
 	replace(source, "\"", "\\\"");
 	replace(source, "\'", "\\\'");
@@ -117,7 +117,7 @@ bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 		if(i >= dkCef->dkBrowsers.size()-1){ return true; } //not found
 	}
 	rect = CefRect(0, 0, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
-	//DKLog("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n");
+	//DKINFO("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n");
 	return true;
 }
 
@@ -170,7 +170,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 	data += params->GetSourceUrl();
 	data += ";";
 	data += params->GetLinkUrl();
-	//DKLog("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n");
+	//DKINFO("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n");
 
 	DKEvent::SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 }
@@ -179,7 +179,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 void DKSDLCefHandler::OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback)
 {
 	DKDEBUGFUNC(browser, download_item, "const CefString&", callback);
-	//DKLog("OriginalUrl: "+download_item->GetOriginalUrl().ToString()+")\n");
+	//DKINFO("OriginalUrl: "+download_item->GetOriginalUrl().ToString()+")\n");
 	UNREFERENCED_PARAMETER(browser);
 	UNREFERENCED_PARAMETER(download_item);
 	callback->Continue(suggested_name, true);
@@ -210,7 +210,7 @@ bool DKSDLCefHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, cef_log_se
 	CEF_REQUIRE_UI_THREAD();
 	DKString msg = message.ToString();
 	replace(msg, "%c", "");
-	//DKLog("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
+	//DKINFO("DKSDLCefHandler::OnConsoleMessage("+msg+","+source.ToString()+","+toString(line)+")\n");
 	DKString string = message.ToString();
 	replace(string,"%c","");
 	int identifier = browser->GetIdentifier();

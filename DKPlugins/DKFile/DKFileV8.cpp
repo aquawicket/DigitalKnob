@@ -95,7 +95,7 @@ bool DKFileV8::DirectoryContents(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
-	//DKLog("DKFileV8::DirectoryContents("+path+",CefReturn)\n");
+	//DKINFO("DKFileV8::DirectoryContents("+path+",CefReturn)\n");
 	DKStringArray arry;
 	if(!DKFile::GetDirectoryContents(path, arry)){
 		return true;
@@ -141,7 +141,7 @@ bool DKFileV8::GetAbsolutePath(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
-	//DKLog("DKFileV8::GetAbsolutePath("+path+",CefReturn)\n");
+	//DKINFO("DKFileV8::GetAbsolutePath("+path+",CefReturn)\n");
 	DKString aPath;
 	if(!DKFile::GetAbsolutePath(path, aPath)){ return false; }
 	//retval = CefV8Value::CreateString(aPath);
@@ -172,7 +172,7 @@ bool DKFileV8::GetShortName(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
-	//DKLog("DKFileV8::GetShortName("+path+",CefReturn)\n");
+	//DKINFO("DKFileV8::GetShortName("+path+",CefReturn)\n");
 #ifdef WIN32
 	DKString shortname;
 	if(DKFile::GetShortName(path, shortname)){
@@ -192,7 +192,7 @@ bool DKFileV8::IsDirectory(CefArgs args, CefReturn retval)
 	DKDEBUGFUNC(args, retval);
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
-	//DKLog("DKFileV8::IsDirectory("+path+",CefReturn)\n");
+	//DKINFO("DKFileV8::IsDirectory("+path+",CefReturn)\n");
 	if(!DKFile::IsDirectory(path)){
 		//retval = CefV8Value::CreateBool(false);
 		retval->SetBool(0, false);

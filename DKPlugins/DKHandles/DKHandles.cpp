@@ -68,12 +68,12 @@ bool DKHandles::DoMouseMove()
 		return false;
 	}
 
-	//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
-	//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
+	//DKINFO("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
+	//DKINFO("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
 
 	if(hwndFoundWindow != new_hwndFoundWindow){
-		//DKLog("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
-		//DKLog("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
+		//DKINFO("DKHandles::DoMouseMove(): x = "+toString(screenpoint.x)+"\n");
+		//DKINFO("DKHandles::DoMouseMove(): y = "+toString(screenpoint.y)+"\n");
 
 		//Display some information on this found window.
 		//DisplayInfoOnFoundWindow(new_hwndFoundWindow);
@@ -382,11 +382,8 @@ bool DKHandles::PopulateHandles()
 		GetWindowText(it->first, title, sizeof(title));
 
 		if(!same("",title)){
-		DKLog("Window: ");
-		DKLog(title);
-		DKLog(" Class: ");
-		DKLog(class_name);
-		DKLog("\n");
+		DKINFO("Window: "+title+"\n");
+		DKINFO(" Class: "+class_name+"\n");
 		}
 	}
 	*/
@@ -438,7 +435,7 @@ bool DKHandles::SendHook(const DKString& window, const DKString& handle, const D
 	if(same(arry[0], "GetValue")){
 		DKString value;
 		GetString(value);
-		DKLog("Hook GetValue returned: "+value+"\n");
+		DKINFO("Hook GetValue returned: "+value+"\n");
 	}
 	if(same(arry[0], "SetValue")){
 		SetString(arry[1]);
@@ -750,11 +747,8 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam)
 	GetWindowText(hwnd,title,sizeof(title));
 
 	//if(!same("",title)){
-	//DKLog("Window: ");
-	//DKLog(title);
-	//DKLog(" Class: ");
-	//DKLog(class_name);
-	//DKLog("\n");
+	//DKINFO("Window: "+title+"\n");
+	//DKINFO(" Class: "+class_name+"\n");
 	}
 
 	return TRUE;

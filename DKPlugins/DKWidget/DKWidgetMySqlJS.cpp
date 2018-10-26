@@ -32,7 +32,7 @@ int DKWidgetMySqlJS::Prep(duk_context* ctx)
 	
 	DKElementList elements;
 	DKWidget::GetElements(id, elements);
-	//DKLog("checking "+toString(elements.size())+" nodes...\n");
+	//DKINFO("checking "+toString(elements.size())+" nodes...\n");
 	
 	for(unsigned int i=0; i<elements.size(); ++i){
 
@@ -62,10 +62,10 @@ int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, 
 	DKStringArray records;
 	DKMySql::Get()->Query(query, records);
 	if(records.size() < 3){ 
-		DKLog("Creating Database "+database+"\n");
+		DKINFO("Creating Database "+database+"\n");
 		query = "CREATE DATABASE '"+database+"'"; //FIXME: NOT Working
 		DKMySql::Get()->Query(query, records);
-		//DKLog(result);
+		//DKINFO(result+"\n");
 	}
 
 	// CHECK TABLE //
@@ -74,10 +74,10 @@ int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, 
 	DKMySql::Get()->Query(query, records);
 
 	if(records.size() < 3){
-		DKLog("Creating Table "+table+"\n");
+		DKINFO("Creating Table "+table+"\n");
 		query = "CREATE TABLE "+table+" (ID INT(10) NOT NULL AUTO_INCREMENT, PRIMARY KEY (ID))";
 		DKMySql::Get()->Query(query, records);
-		//DKLog(result);
+		//DKINFO(result+"\n");
 	}
 	
 	// CHECK FIELD //
@@ -85,10 +85,10 @@ int DKWidgetMySqlJS::PrepField(const DKString& database, const DKString& table, 
 	var result = Query(query);
 	var records = result.split(',');
 	if(records.length < 3){
-		DKLog("Creating Field "+field+"\n");
+		DKINFO("Creating Field "+field+"\n");
 		var query = "ALTER TABLE "+table+" ADD "+field+" VARCHAR(60) NOT NULL";
 		var result = Query(query);
-		DKLog(result);
+		DKINFO(result+"\n");
 	}
 	*/
 	return 1;
@@ -312,7 +312,7 @@ int DKWidgetMySqlJS::SaveRecord(duk_context* ctx)
 					DKINFO("Update Record. value="+value+" record="+records[1]+" \n");
 					query = "UPDATE "+arry[1]+" SET "+arry[2]+"='"+value+"' WHERE ID="+recordNum;
 					DKMySql::Get("DKMySql")->Query(query, records);
-					//DKLog(result);
+					//DKINFO(result+"\n");
 				}
 			}
 		}

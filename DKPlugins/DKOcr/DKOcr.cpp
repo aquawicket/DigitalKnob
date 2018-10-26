@@ -99,7 +99,7 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 					PoDoFo::PdfObject* pFont = pPage->GetFromResources(PoDoFo::PdfName("Font"), fontName);
 					if(!pFont){
 						//PoDoFo::PODOFO_RAISE_ERROR_INFO( ePdfError_InvalidHandle, "Cannot create font!" );
-						DKLog("DKOcr::ExtractPdfText(): Cannot create font.\n", DKWARN);
+						DKWARN("DKOcr::ExtractPdfText(): Cannot create font\n");
 						return false;
 					}
 					pCurFont = pDocument->GetFont(pFont);
@@ -135,7 +135,7 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 		else{
 			// Impossible; type must be keyword or variant
 			//PODOFO_RAISE_ERROR(ePdfError_InternalLogic);
-			DKLog("DKOcr::ExtractPdfText(): type must be keyword or variant.\n", DKWARN);
+			DKWARN("DKOcr::ExtractPdfText(): type must be keyword or variant\n");
 		}
 	}
 	return true;

@@ -45,7 +45,7 @@ typedef struct privateAudioDevice
 bool DKSDLWav::Init()
 {
 	if(SDL_Init(SDL_INIT_AUDIO) < 0){
-		DKLog("Could not Init SDL_Audio. \n",DKERROR);
+		DKERROR("Could not Init SDL_Audio\n");
 		return false;
 	}	
 

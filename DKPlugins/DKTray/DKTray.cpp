@@ -18,7 +18,7 @@ bool DKTray::Init()
 
 	//HWND hwnd = ::GetActiveWindow();
 	//if(!hwnd){
-	//	DKLog("DKTray::Init(): hWnd invalid!\n", DKERROR);
+	//	DKERROR("DKTray::Init(): hWnd invalid\n");
 		//return;
 	//}
 
@@ -157,21 +157,21 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	DKDEBUGFUNC(message, wParam, lParam);
 	if(message == WM_ICON_NOTIFY){
-		//DKLog("WM_ICON_NOTIFY: ");
-		//DKLog(toString(LOWORD(wParam))+" : ");
-		//DKLog(toString(LOWORD(lParam))+"\n");
+		//DKINFO("WM_ICON_NOTIFY:");
+		//DKINFO(toString(LOWORD(wParam))+" : ");
+		//DKINFO(toString(LOWORD(lParam))+"\n");
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513){
-			//DKLog("Tray Icon Clicked \n");
+			//DKINFO("Tray Icon Clicked\n");
 			DKEvent::SendEvent("DKTray", "click", toString(1));
 		}
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515){
-			//DKLog("Tray Icon Double Clicked \n");
+			//DKINFO("Tray Icon Double Clicked\n");
 			DKEvent::SendEvent("DKTray", "doubleclick", toString(1));
 		}
 	}
 
 	if(message == WM_COMMAND){
-		//DKLog("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n");
+		//DKINFO("DKTray::OnTrayNotification(): LOWORD(wParam) = "+toString(LOWORD(wParam))+"\n");
 		DKEvent::SendEvent("DKTray", toString(LOWORD(wParam)), "");
 	}
 	
