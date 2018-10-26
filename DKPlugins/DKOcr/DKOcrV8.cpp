@@ -6,7 +6,7 @@
 ////////////////////
 bool DKOcrV8::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKOcr_ImageToText", DKOcrV8::ImageToText);
 	return true;
 }
@@ -14,14 +14,14 @@ bool DKOcrV8::Init()
 ///////////////////
 bool DKOcrV8::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 /////////////////////////////////////////////////////////
 bool DKOcrV8::ImageToText(CefArgs args, CefReturn retval)
 {
-	DKDebug(args, retval);
+	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	DKString text;
 	if(!DKOcr::ImageToText(file, text)){ return false; }

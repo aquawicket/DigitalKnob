@@ -17,8 +17,8 @@ var LOG_HIDE = ""; //comma seperated
 var LOG_LINES = false;
 
 // Dummy functions only implemented in c++
-function DK_DoFrame(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
-function EventLoop(){ /*DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN);*/ }
+function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
+function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
 EventLoop.run = function(){};
 
 var myVar = setInterval(myTimer, 1000);
@@ -27,27 +27,27 @@ function myTimer() {
 }
 
 if(DK_GetBrowser() != "CEF"){
-	function DK_ClearEvents(){DKLog("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKRocket_Reload(){DKLog("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_CallFunc(var1, var2, var3){ DKLog("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_Queue(var1, var2, var3){ DKLog("DK_Queue(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_LeftClick(){DKLog("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_RightClick(){DKLog("DK_RightClick(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_SetCursorPos(){ DKLog("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DKHook_GetWindows(){DKLog("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_Crash(){DKLog("DK_Crash(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_LogGuiConsole(){DKLog("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_GetScreenWidth(){DKLog("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_GetScreenHeight(){DKLog("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_System(){DKLog("DK_System(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_PrintFunctions(){DKLog("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n", DKWARN); }
-	function DK_GetPixelUnderMouse(){DKLog("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_ShowConsole(){DKLog("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_HideConsole(){DKLog("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_CpuUsed(){DKLog("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_CpuUsedByApp(){DKLog("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_PhysicalMemory(){DKLog("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
-	function DK_PhysicalMemoryUsedByApp(){DKLog("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n", DKWARN); return ""; }
+	function DK_ClearEvents(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
+	function DKRocket_Reload(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_CallFunc(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_Queue(var1, var2, var3){ DKWARN("DK_Queue(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_LeftClick(){ DKWARN("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_RightClick(){ DKWARN("DK_RightClick(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_SetCursorPos(){ DKWARN("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n"); }
+	function DKHook_GetWindows(){ DKWARN("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_Crash(){ DKWARN("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_LogGuiConsole(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_GetScreenWidth(){ DKWARN("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_GetScreenHeight(){ DKWARN("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_System(){ DKWARN("DK_System(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_PrintFunctions(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
+	function DK_GetPixelUnderMouse(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_ShowConsole(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_HideConsole(){ DKWARN("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_CpuUsed(){DKWARN("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_CpuUsedByApp(){ DKWARN("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_PhysicalMemory(){ DKWARN("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	function DK_PhysicalMemoryUsedByApp(){ DKWARN("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
 }
 
 var DK_ERROR = 1;     //Red
@@ -67,7 +67,6 @@ function DKDEBUG(string){ Log(string, DK_DEBUG); }
 function Log(string, lvl)
 {
 	if(!lvl){
-		//alert("DKLog("+string+") missing lvl");
 		lvl = DK_INFO;
 	}
 	
@@ -111,7 +110,7 @@ function Log(string, lvl)
 			if(!stack || !LOG_LINES){ return ""; }
 			var lines = stack.split("\n");
 			var n=0;
-			while(lines[n].indexOf("DKLog") == -1){ n++; }
+			while(lines[n].indexOf("Log") == -1){ n++; }
 			var fileline = lines[n+1];
 			var start = fileline.lastIndexOf("/");
 			var end = fileline.lastIndexOf(":");
@@ -161,12 +160,12 @@ function Log(string, lvl)
 	}
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
-DKLog("*** DigitalKnob ***\n");
-DKLog(DK_GetBrowser()+"\n");
-DKLog(DK_GetJavascript()+"\n");
+DKINFO("*** DigitalKnob ***\n");
+DKINFO(DK_GetBrowser()+"\n");
+DKINFO(DK_GetJavascript()+"\n");
 
-//////////////////////
-function DKDebug(vars)
+//////////////////////////
+function DKDEBUGFUNC(vars)
 {
 	var string = DKDebug.caller.name+"(";
 	if(vars){
@@ -178,14 +177,13 @@ function DKDebug(vars)
 		}
 	}
 	string += ")";
-	DKLog(string+"\n", DKDEBUG);
+	DKDEBUG(string+"\n");
 }
 
 /////////////////////
 function DK_GetTime()
 {
-	DKDebug();
-	//DKLog("DK_GetTime()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var d = new Date();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
@@ -205,8 +203,7 @@ function DK_GetTime()
 /////////////////////
 function DK_GetDate()
 {
-	DKDebug();
-	//DKLog("DK_GetDate()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var d = new Date();
 	var date = d.getMonth()+1;
 	date += "/";
@@ -220,8 +217,7 @@ function DK_GetDate()
 /////////////////////
 function DK_Refresh()
 {	
-	DKDebug();
-	//DKLog("DK_Refresh()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
 	window.location.reload(true);
@@ -231,13 +227,12 @@ function DK_Refresh()
 //////////////////////////
 function DKAvailable(name)
 {
-	DKDebug(name);
-	//DKLog("DKAvailable("+name+")\n", DKDEBUG);
+	DKDEBUGFUNC(name);
 	if(name == "DKWidget"){
 		return true; 
 	}
 	if(name == "DKWidgetJS"){  //FIXME: is this needed?
-		DKLog("DKAvailable("+name+"): name == DKWidgetJS!  check DK.js line 191\n");
+		DKINFO("DKAvailable("+name+"): name == DKWidgetJS!  check DK.js line 235\n");
 		return true; 
 	}
 	return false;
@@ -246,14 +241,13 @@ function DKAvailable(name)
 ////////////////////////
 function DK_GetObjects()
 {
-	DKDebug();
-	//DKLog("DK_GetObjects()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	// Search the Dom for all scripts (.js files)
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKLog(elements[i].src+": js object has no id\n", DKWARN);
+			DKWARN(elements[i].src+": js object has no id\n");
 			continue; 
 		}
 		jsfiles += elements[i].id+",";
@@ -264,7 +258,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("link");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKLog(elements[i].href+": css object has no id\n", DKWARN);
+			DKWARN(elements[i].href+": css object has no id\n");
 			continue; 
 		}
 		cssfiles += elements[i].id+",";
@@ -276,7 +270,7 @@ function DK_GetObjects()
 	for(var i = divs.length; i;){
 		var div = divs[--i];
 		if(!div.id){
-			DKLog(div+": html object has no id\n", DKWARN);
+			DKWARN(div+": html object has no id\n");
 			continue; 
 		}
 		if(div.id.indexOf(".html") > -1){
@@ -290,17 +284,16 @@ function DK_GetObjects()
 ///////////////////////
 function DK_GetEvents()
 {
-	DKDebug();
-	//DKLog("DK_GetEvents()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var out = "";
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
 			out += events[i].name + ",";
-			//DKLog(events[i].name);
+			//DKINFO(events[i].name);
 		}
 		else{
 			out += events[i] + " : ";
-			//DKLog(events[i]);
+			//DKINFO(events[i]);
 		}
 	}
 	return out;
@@ -309,41 +302,32 @@ function DK_GetEvents()
 ///////////////////
 function DK_GetOS()
 {
-	DKDebug();
-	//DKLog("DK_GetOS()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
+     // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)){
         return "Windows Phone";
     }
-
-    if (/android/i.test(userAgent)) {
+    if (/android/i.test(userAgent)){
         return "Android";
     }
-
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream){
         return "iOS";
     }
-
 	var os_value = navigator.platform;
-	
 	if (navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1 ){
 		os_value = os_value.replace("32", "64");
 	}
-	
 	os_value = os_value.replace("Intel", ""); //Mac
 	os_value = os_value.replace(" x86_64", ""); //Linux
-	
 	return os_value;
 }
 
 ////////////////////////
 function DK_GetBrowser()
 {
-	//DKDebug();
-	//DKLog("DK_GetBrowser()\n", DKDEBUG);
+	//DKDEBUGFUNC();
     if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
     }
@@ -370,10 +354,8 @@ function DK_GetBrowser()
 ///////////////////////////
 function DK_GetJavascript()
 {
-	DKDebug();
-	//DKLog("DK_GetJavascript()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
-
 	if('WebkitAppearance' in document.documentElement.style){  //If (probably) WebKit browser
 		if (escape(navigator.javaEnabled.toString()) === v8string){
 			return "V8";
@@ -390,16 +372,14 @@ function DK_GetJavascript()
 //////////////////////////
 function DK_GetUserAgent()
 {
-	DKDebug();
-	//DKLog("DK_GetUserAgent()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return navigator.userAgent;
 }
 
 //////////////////////////
 function DK_GetNavigator()
 {
-	DKDebug();
-	//DKLog("DK_GetNavigator()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	var txt = "";
 	txt += "Browser CodeName: " + navigator.appCodeName + "\n";
 	txt += "Browser Name: " + navigator.appName + "\n";
@@ -415,8 +395,7 @@ function DK_GetNavigator()
 ////////////////
 function DK_IE()
 {
-	DKDebug();
-	//DKLog("DK_IE() \n", DKDEBUG);
+	DKDEBUGFUNC();
 	var rv = 0;
 	if(navigator.appName == 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
@@ -439,26 +418,24 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	DKDebug(event);
-	//DKLog("GetType("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(!event){ return false; }
 	if(event.type){
-		//DKLog("GetType("+event+") -> "+event.type+"\n");
+		//DKINFO("GetType("+event+") -> "+event.type+"\n");
 		return event.type 
 	}
 	if(event[1]){
-		//DKLog("GetType("+event+") -> "+event[1]+"\n");
+		//DKINFO("GetType("+event+") -> "+event[1]+"\n");
 		return event[1]; 
 	}
-	DKLog("DK_GetType("+event+"): could not get event type. \n", DKERROR);
+	DKERROR("DK_GetType("+event+"): could not get event type\n");
 	return false;
 }
 
 ////////////////////////
 function DK_GetId(event)
 {
-	DKDebug(event);
-	//DKLog("GetId("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(!event){ return false;}
 	if(event.type && event.type == "contextmenu"){ //rightclick
 		PreventDefault(event);
@@ -466,32 +443,30 @@ function DK_GetId(event)
 	
 	element = DKWidget_GetElement(event);
 	if(element){
-		//DKLog("GetId("+event+") -> "+element.id+"\n");
+		//DKINFO("GetId("+event+") -> "+element.id+"\n");
 		if(element == window || element == document){ return "GLOBAL"; }
 		return element.id; 
 	}
 	if(event[0]){ 
-		//DKLog("GetId("+event+") -> "+event[0]+"\n");
+		//DKINFO("GetId("+event+") -> "+event[0]+"\n");
 		return event[0]; 
 	}
 	
-	//DKLog("DK_GetId("+event+"): cannot match the id. \n", DKERROR);
+	//DKERROR("DK_GetId("+event+"): cannot match the id\n");
 	return;
 }
 
 ///////////////////////////
 function DK_GetValue(event)
 {
-	DKDebug(event);
-	//DKLog("DK_GetValue("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	return DKWidget_GetValue(event);
 }
 
 ////////////////////////////////
 function DK_Type(event, command)
 {
-	DKDebug(event, command);
-	//DKLog("DK_Type("+event+","+command+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, command);
 	if(!event){ return false;}
 	
 	if(event.type && event.type == "contextmenu"){ //rightclick
@@ -506,17 +481,16 @@ function DK_Type(event, command)
 	if(event[1] && event[1] == command){ 
 		return true;
 	}
-	//DKLog("DK_Type("+event+","+command+"): cannot match the type. \n", DKERROR);
+	//DKERROR("DK_Type("+event+","+command+"): cannot match the type\n");
 	return false;
 }
 
 /////////////////////////
 function DK_Id(event, id)
 { 
-	DKDebug(event, id);
-	//DKLog("DK_Id("+event+","+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, id);
 	var element = DKWidget_GetElement(event);
-	//DKLog("DK_Id(): element="+element.id+" \n");
+	//DKINFO("DK_Id(): element="+element.id+"\n");
 	if((element == window || element == document) && id == "GLOBAL"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
@@ -526,8 +500,7 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_IdLike(event, id)
 {
-	DKDebug(event, id);
-	//DKLog("DK_IdLike("+event+","+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, id);
 	if(!id){ return; }
 	if(DK_GetType(event) == "keydown"){ return false; } //KeyboardEvent
 	if(DK_GetType(event) == "keyup"){ return false; } //KeyboardEvent
@@ -542,8 +515,7 @@ function DK_IdLike(event, id)
 ////////////////////////////
 function DK_Value(event, id)
 { 
-	DKDebug(event, id);
-	//DKLog("DK_Value("+event+","+id+")\n", DKDEBUG);
+	DKDEBUGFUNC(event, id);
 	if(DKWidget_GetValue(event) == id){ return true; }
 	return false;
 }
@@ -551,8 +523,7 @@ function DK_Value(event, id)
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
-	DKDebug(event);
-	//DKLog("StopPropagation("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -563,18 +534,17 @@ function DK_StopPropagation(event)
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
-	DKDebug(id, type, Function.name);
-	//DKLog("DKAddEvent("+id+","+type+","+Function.name+")\n", DKDEBUG);	
+	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
-		DKLog("DKAddEvent(id, type, Function): id invalid\n", DKWARN);
+		DKWARN("DKAddEvent(id, type, Function): id invalid\n");
 		return;
 	}
 	if(typeof type != "string"){
-		DKLog("DKAddEvent(id, type, Function): type invalid\n", DKWARN);
+		DKWARN("DKAddEvent(id, type, Function): type invalid\n");
 		return;
 	}
 	if(typeof Function != "function"){
-		DKLog("DKAddEvent(id, type, Function): Function invalid\n", DKWARN);
+		DKWARN("DKAddEvent(id, type, Function): Function invalid\n");
 		return;
 	}
 	if(id == "GLOBAL"){
@@ -584,15 +554,15 @@ function DKAddEvent(id, type, Function)
 		element = document.getElementById(id);
 	}
 	if(!element){
-		DKLog("DKAddEvent("+id+","+type+","+Function.name+"): element invalid\n", DKWARN);
+		DKWARN("DKAddEvent("+id+","+type+","+Function.name+"): element invalid\n");
 		return;
 	}
 	
-	//DKLog("addEvent("+id+","+type+","+Function.name+") \n");
+	//DKINFO("addEvent("+id+","+type+","+Function.name+")\n");
 	addEvent(element, type, Function);
 	
 	//add event to array
-	//DKLog("events.length="+events.length+"\n");
+	//DKINFO("events.length="+events.length+"\n");
 	events[events.length] = id;
 	events[events.length] = type;
 	events[events.length] = Function;
@@ -602,18 +572,17 @@ function DKAddEvent(id, type, Function)
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
-	DKDebug(id, type, Function.name);
-	//DKLog("DKRemoveEvent("+Function.name+")\n", DKDEBUG);
+	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
-		DKLog("DKRemoveEvent(id, type, Function): id invalid\n", DKERROR);
+		DKERROR("DKRemoveEvent(id, type, Function): id invalid\n");
 		return false;
 	}
 	if(typeof type != "string"){
-		DKLog("DKRemoveEvent(id, type, Function): type invalid\n", DKERROR);
+		DKERROR("DKRemoveEvent(id, type, Function): type invalid\n");
 		return false;
 	}
 	if(typeof Function != "function"){
-		DKLog("DKRemoveEvent(id, type, Function): Function invalid\n", DKERROR);
+		DKERROR("DKRemoveEvent(id, type, Function): Function invalid\n");
 		return false;
 	}
 		
@@ -624,7 +593,7 @@ function DKRemoveEvent(id, type, Function)
 		element = document.getElementById(id);
 	}
 	if(!element){
-		DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): element invalid\n", DKWARN);
+		DKWARN("DKRemoveEvent("+id+","+type+","+Function.name+"): element invalid\n");
 		return false;
 	}
 	
@@ -632,7 +601,7 @@ function DKRemoveEvent(id, type, Function)
 		if(events[i] == id){
 			if(events[i+1] == type){
 				if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
-					//DKLog("DKRemoveEvent("+id+","+type+","+Function.name+"): Removing event \n");
+					//DKINFO("DKRemoveEvent("+id+","+type+","+Function.name+"): Removing event\n");
 					removeEvent(element, type, Function);
 					events.splice(i, 3);
 					i--;
@@ -647,16 +616,15 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
-	DKDebug(Function.name);
-	//DKLog("DKRemoveEvents("+Function.name+")\n", DKDEBUG);
+	DKDEBUGFUNC(Function.name);
 	if(typeof Function != "function"){
-		DKLog("DKRemoveEvents(Function): Function invalid\n", DKERROR);
+		DKERROR("DKRemoveEvents(Function): Function invalid\n");
 		return false;
 	}
 
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
-			//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
+			//DKINFO("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
 			//var element;
 			if(events[i] == "GLOBAL"){
 				element = window;
@@ -666,13 +634,13 @@ function DKRemoveEvents(Function)
 			}
 			
 			if(element){
-				//DKLog("DKRemoveEvent("+events[i]+","+events[i+1]+","+events[i+2].name+"): Removing Event \n");
+				//DKINFO("DKRemoveEvent("+events[i]+","+events[i+1]+","+events[i+2].name+"): Removing Event\n");
 				removeEvent(element, events[i+1], Function);
 				events.splice(i, 3);
 				i--;
 			}
 			else{
-				//DKLog("DKRemoveEvents("+Function.name+"): element "+events[i]+" is invalid\n", DKWARN);
+				//DKWARN("DKRemoveEvents("+Function.name+"): element "+events[i]+" is invalid\n");
 				events.splice(i, 3);
 				i--;
 			}
@@ -683,25 +651,24 @@ function DKRemoveEvents(Function)
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
-	DKDebug(id, type, message);
-	//DKLog("SendEvent("+id+","+type+","+message+")\n", DKDEBUG);
+	DKDEBUGFUNC(id, type, message);
 	if(typeof id != "string"){
-		DKLog("DKRemoveEvent(id, type, message): id invalid\n", DKERROR);
+		DKERROR("DKRemoveEvent(id, type, message): id invalid\n");
 		return false;
 	}
 	if(typeof type != "string"){
-		DKLog("DKRemoveEvent(id, type, message): type invalid\n", DKERROR);
+		DKERROR("DKRemoveEvent(id, type, message): type invalid\n");
 		return false;
 	}
 	//if(typeof message != "string"){
-	//	DKLog("DKRemoveEvents(id, type, message): message invalid\n", DKERROR);
+	//	DKERROR("DKRemoveEvents(id, type, message): message invalid\n");
 	//	return;
 	//}
 	
 	for(var i=0; i<events.length; i++){
 		if(events[i] == id){
 			if(events[i+1] == type){
-				//DKLog(events[i+2]+"(["+id+", "+type+", "+message+"]) \n");
+				//DKINFO(events[i+2]+"(["+id+", "+type+", "+message+"])\n");
 				events[i+2]([id, type, message]);
 				//return true;
 			}
@@ -713,8 +680,7 @@ function DKSendEvent(id, type, message)
 ///////////////////////////
 function GetCharCode(event) 
 {
-	DKDebug(event);
-	//DKLog("GetCharCode("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
     var key = event.which || event.keyCode;
 	return key;
 }
@@ -722,8 +688,7 @@ function GetCharCode(event)
 //////////////////////////
 function GetKeyCode(event) 
 {
-	DKDebug(event);
-	//DKLog("GetKeyCode("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
     var key = event.keyCode;
     return key;
 }
@@ -731,8 +696,7 @@ function GetKeyCode(event)
 //////////////////////////////
 function GetMouseButton(event) 
 {
-	DKDebug(event);
-	//DKLog("GetMouseButton("+event+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
     var button = event.which || event.button;
     return button;
 }
@@ -741,10 +705,9 @@ if(DK_GetBrowser() != "CEF"){
 	////////////////////////////////
 	function DK_SetClipboard(string)
 	{
-		DKDebug(string);
-		//DKLog("DK_SetClipboard("+string+")\n", DKDEBUG);
+		DKDEBUGFUNC(string);
 		//if(!document.queryCommandSupported('copy')){
-		//	DKLog("Javascript (Copy) not supported. \n", DKERROR);
+		//	DKERROR("Javascript (Copy) not supported\n");
 		//	return false;
 		//}
 		
@@ -756,8 +719,7 @@ if(DK_GetBrowser() != "CEF"){
 /////////////////////////////
 function DK_FileToString(url)
 {
-	DKDebug(url);
-	//DKLog("DK_FileToString("+url+")\n", DKDEBUG);
+	DKDEBUGFUNC(url);
 	return ajaxGetUrl(url);
 }
 
@@ -765,16 +727,14 @@ function DK_FileToString(url)
 /////////////////////////////
 function DK_GetMouseWindowX()
 {
-	DKDebug();
-	//DKLog("DK_GetMouseWindowX()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return mouseX;
 }
 
 /////////////////////////////
 function DK_GetMouseWindowY()
 {
-	DKDebug();
-	//DKLog("DK_GetMouseWindowY()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	return mouseY;
 }
 */
@@ -782,8 +742,7 @@ function DK_GetMouseWindowY()
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
-	DKDebug(milliseconds);
-	//DKLog("DK_Sleep("+milliseconds+")\n", DKDEBUG);
+	DKDEBUGFUNC(milliseconds);
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
 		if((new Date().getTime() - start) > milliseconds){
@@ -795,8 +754,7 @@ function DK_Sleep(milliseconds)
 ////////////////////////////
 function DK_ClearSelection()
 {
-	DKDebug();
-	//DKLog("DK_ClearSelection()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	//Clear text selection
 	if(document.selection){
 		document.selection.empty();
