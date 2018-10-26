@@ -13,7 +13,7 @@
 /////////////////
 bool DKJS::Init()
 {
-	DKDebug();
+	DKDEBUG();
 	DKClass::DKCreate("DKFileJS");
 	DKClass::DKCreate("DKAssetsJS");
 	
@@ -186,7 +186,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 	DKObject* obj = DKClass::DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
-		DKLog("DKJS::_DKCreate("+data+"): obj invalid \n", DKWARN);
+		DKWARN("DKJS::_DKCreate("+data+"): obj invalid \n");
 		return 1;
 	}
 
@@ -242,10 +242,12 @@ int DKJS::_DKLog(duk_context* ctx)
 	
 	if(duk_get_int(ctx, 1)){
 		int lvl = duk_get_int(ctx, 1);
-		DKLog(string, lvl);
+		if(lvl == DK_INFO){ DKINFO(string); }
+		if(lvl == DK_WARN){ DKWARN(string); }
+		if(lvl == DK_ERROR){ DKERROR(string); }
 		return 1;
 	}
-	DKLog(string);
+	DKINFO(string);
 	return 1;
 }
 
@@ -688,7 +690,7 @@ int DKJS::GetUsername(duk_context* ctx)
 	DKUnix::GetUsername(username);
 	duk_push_string(ctx, username.c_str());
 #else
-	DKLog("GetUsername: not implemented on this OS \n", DKERROR);
+	DKERROR("GetUsername: not implemented on this OS \n");
 #endif
 	return 1;
 }
@@ -696,7 +698,7 @@ int DKJS::GetUsername(duk_context* ctx)
 ////////////////////////////////////
 int DKJS::GetValue(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUG(ctx);
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
 	toStringArray(arry, evt, ",");
@@ -1078,7 +1080,7 @@ int DKJS::Value(duk_context* ctx)
 	}
 	
 	//DKLog("Value:"+events[1]+"\n");
-	DKLog("DKJS::Value(): We should not get here \n",DKERROR);
+	DKERROR("DKJS::Value(): We should not get here \n");
 	if(!same(events[1],value)){ return 0; }
 	return 1;
 
