@@ -1,12 +1,11 @@
 ///////////////////////
 function DKAdmin_Init()
 {
-	DKLog("DKAdmin_Init()\n", DKDEBUG);
-	
+	DKDEBUGFUNC();
 	DKCreate("DKAdmin/DKAdmin.html");
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
 	
-	//DKLog("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+	//DKINFO("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 	if(DK_GetBrowser() == "Rocket"){
 		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminRed.png");
 	}
@@ -19,8 +18,7 @@ function DKAdmin_Init()
 //////////////////////
 function DKAdmin_End()
 {
-	DKLog("DKAdmin_End()\n", DKDEBUG);
-	
+	DKDEBUGFUNC();
 	DKRemoveEvents(DKAdmin_OnEvent);
 	DKClose("DKAdmin/DKAdmin.html");
 }
@@ -28,7 +26,8 @@ function DKAdmin_End()
 ///////////////////////////////
 function DKAdmin_OnEvent(event)
 {
-	DKLog("DKAdmin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKINFO("DKAdmin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Id(event, "AdminBadge")){
 		DKCreate("DKAdmin/DKAdminMenu.js", function(){});
