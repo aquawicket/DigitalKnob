@@ -1,7 +1,7 @@
 ///////////////////////
 function SvnMenu_Init()
 {
-	DKLog("SvnMenu_Init()", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKBuild/SvnMenu.html");
 	DKWidget_SetProperty("SvnMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("SvnMenu.html","left",DKWindow_GetMouseX()+"px");
@@ -13,7 +13,7 @@ function SvnMenu_Init()
 //////////////////////
 function SvnMenu_End()
 {
-	DKLog("SvnMenu_End()", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(SvnMenu_OnEvent);
 	DKClose("DKBuild/SvnMenu.html");
 }
@@ -21,7 +21,8 @@ function SvnMenu_End()
 ///////////////////////////////
 function SvnMenu_OnEvent(event)
 {
-	DKLog("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
+	DKDEBUG("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Id(event,"Svn Update")){
 		DKThread_DKQueue("SvnUpdate","DKBuild_SvnUpdate();");
 	}
