@@ -1,8 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-///////////////////////
-function DKLog($string)
+////////////////////////
+function DKINFO($string)
 {
 	echo "{".$string."}"; //TODO - we may want to replace { } characters with something less used.
 }
