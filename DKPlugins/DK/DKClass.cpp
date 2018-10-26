@@ -42,7 +42,7 @@ DKObject* DKClass::_Instance(const DKString& data)
 	}
 
 	DKWARN("DKClass::_Instance "+arry[0]+" not registered\n");
-	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
+	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return NULL;
 }
 
@@ -54,13 +54,13 @@ DKObject* DKClass::_Get(const DKString& data)
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKINFO("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance.\n");
+			DKINFO("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance\n");
 		}
 		return (*classes)[arry[0]]->Get(arry[1]);
 	}
 
 	DKWARN("DKClass::_Get(): "+arry[0]+" not registered\n");
-	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
+	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return NULL;
 }
 
@@ -72,13 +72,13 @@ bool DKClass::_Valid(const DKString& data)
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKWARN("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance.\n");
+			DKWARN("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance\n");
 		}
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 
 	//DKLOG("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
-	//DKLOG("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n", DKWARN);
+	//DKLOG("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n", DKWARN);
 	return NULL;
 }
 
@@ -90,17 +90,17 @@ bool DKClass::_Available(const DKString& data)
 	toStringArray(arry, data, ",");
 	if((*classes)[arry[0]]){
 		if(arry.size() < 2){
-			DKWARN("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance.\n");
+			DKDEBUG("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance\n");
 		}
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
-			DKWARN("DKClass: "+arry[0]+","+arry[1]+" - id is already in use.\n");
+			DKWARN("DKClass: "+arry[0]+","+arry[1]+" - id is already in use\n");
 			return false;
 		}
 		return true;
 	}
 
 	//DKWARN("DKClass::_Available(): "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild.\n");
+	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return false;
 }
 
