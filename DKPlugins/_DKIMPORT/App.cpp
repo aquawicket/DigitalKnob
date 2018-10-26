@@ -7,7 +7,7 @@
 ////////////////
 bool App::Init()
 {
-	DKLog("App::Init()\n", DKDEBUG);
+	DKINFO("App::Init()\n");
 	return true;
 }
 
