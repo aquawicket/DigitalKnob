@@ -5,18 +5,18 @@ TYPE = DKWidget_GetValue("BuildType");
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DKLog("AndroidImport_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
-	DKLog("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
+	DKINFO("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
 
 ///////////////////////////////
 function AndroidImport_Import()
 {
-	DKLog("AndroidImport_Import()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(!APP){ 
-		DKLog("Please select an app.\n");
+		DKINFO("Please select an app\n");
 		return; 
 	}
 	
@@ -35,7 +35,7 @@ function AndroidImport_Import()
 	}
 		
 	if(!appdir){
-		DKLog("AndroidImport_Import(): cannot locate appdir.\n");
+		DKINFO("AndroidImport_Import(): cannot locate appdir\n");
 		return;
 	}
 	
@@ -45,36 +45,36 @@ function AndroidImport_Import()
 	DK_Run(ANDROIDSTUDIO);
 	
 	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 60)){ //Check for 60 seconds
-		DKLog("DKHandles_WaitForWindow(Welcome to Android Studio): failed\n", DKWARN);
+		DKWARN("DKHandles_WaitForWindow(Welcome to Android Studio): failed\n");
 		return; 
 	}  
-	DKLog("Window is ready.\n");
+	DKINFO("Window is ready.\n");
 	var assets = DKAssets_LocalAssets();
 	if(!DK_WaitForImage(assets+"DKBuild/import.bmp", 30)){ //Check for 30 seconds
-		DKLog("DK_WaitForImage("+assets+"DKBuild/import.bmp): failed\n", DKWARN);
+		DKWARN("DK_WaitForImage("+assets+"DKBuild/import.bmp): failed\n");
 		return;
 	}
 	if(!DK_ClickImage(assets+"DKBuild/import.bmp")){
-		DKLog("DK_ClickImage("+assets+"DKBuild/import.bmp): failed\n", DKWARN);
+		DKWARN("DK_ClickImage("+assets+"DKBuild/import.bmp): failed\n");
 		return; 
 	}
 
 	if(!DKHandles_WaitForWindow("Select Eclipse or Gradle Project to Import", 30)){ //Check for 30 seconds
-		DKLog("DKHandles_WaitForWindow(Select Eclipse or Gradle Project to Import): failed\n", DKWARN);
+		DKWARN("DKHandles_WaitForWindow(Select Eclipse or Gradle Project to Import): failed\n");
 		return; 
 	}
-	DKLog("Window is ready.\n");
+	DKINFO("Window is ready.\n");
 	
 	//Multipe user folders
 	/*
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
+	for(var i=0; i<files.length; i++){ //DKINFO("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n");
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
+		if(url){ //DKINFO("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKINFO("folder = "+folder+"\n");
 			if(DKFile_Exists(DKPATH+"/"+folder+"/DKApps/"+APP+"/DKCMake.txt")){
 				appdir = folder+"/DKApps";
 			}
@@ -91,7 +91,7 @@ function AndroidImport_Import()
 	}
 	
 	
-	DKLog(path+"\n");
+	DKINFO(path+"\n");
 	DK_SetClipboard(path);
 	DK_Sleep(3000);
 	DK_PressKey(17); //press ctrl
@@ -101,10 +101,10 @@ function AndroidImport_Import()
 	DK_StrokeKey(13) //stroke enter
 	
 	if(!DKHandles_WaitForWindow("Import Project from ADT (Eclipse Android)", 30)){ //Check for 30 seconds
-		DKLog("DKHandles_WaitForWindow(Import Project from ADT (Eclipse Android)): failed\n", DKWARN);
+		DKWARN("DKHandles_WaitForWindow(Import Project from ADT (Eclipse Android)): failed\n");
 		return; 
 	}
-	DKLog("Window is ready.\n");
+	DKINFO("Window is ready.\n");
 	path = WORKSPACE+"/"+APP+"_"+TYPE;
 	DK_SetClipboard(path);
 	DK_PressKey(17); //press ctrl
@@ -113,16 +113,16 @@ function AndroidImport_Import()
 	DK_Sleep(10000);
 	DK_StrokeKey(13) //stroke enter
 	DK_Sleep(10000);
-	DKLog("Pressing enter\n");
+	DKINFO("Pressing enter\n");
 	DK_StrokeKey(13) //stroke enter
 	
 	/*
 	if(!DK_WaitForImage(assets+"DKBuild/enableNdk.bmp", 500)){ //Check for 500 seconds
-		DKLog("DK_WaitForImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
+		DKWARN("DK_WaitForImage("+assets+"DKBuild/enableNdk.bmp): failed\n");
 		return; 
 	}
 	if(!DK_ClickImage(assets+"DKBuild/enableNdk.bmp")){
-		DKLog("DK_ClickImage("+assets+"DKBuild/enableNdk.bmp): failed\n", DKWARN);
+		DKWARN("DK_ClickImage("+assets+"DKBuild/enableNdk.bmp): failed\n");
 		return ; 
 	}
 	*/
@@ -170,7 +170,7 @@ function AndroidImport_Import()
 		DKFile_Copy(appdir+"/android32/Release/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
 	
-	DKLog("Import finished\n");
+	DKINFO("Import finished\n");
 	
 	DKCreate("DKAudio");
 	if(DKValid("DKAudioJS,DKAudioJS0")){

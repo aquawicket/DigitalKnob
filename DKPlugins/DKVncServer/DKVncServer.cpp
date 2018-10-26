@@ -70,14 +70,14 @@ DKString DKVncServer::capture;
 ////////////////////////
 bool DKVncServer::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty()){ capture = "GDI"; } //DIRECT X
 
 	static DKString password;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", password);
 	if(password.empty()){
-		DKLog("WARNING! No password set in settings file!\n", DKWARN);
+		DKWARN("WARNING! No password set in settings file!\n");
 	}
 
 	int desktopWidth;
@@ -99,7 +99,7 @@ bool DKVncServer::Init()
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen){
-		DKLog("DKVncServer::Init(): rfbScreen is invalid", DKERROR);
+		DKERROR("DKVncServer::Init(): rfbScreen is invalid\n");
 		return false;
 	}
 	rfbScreen->desktopName = "DKVncServer";
@@ -127,14 +127,14 @@ bool DKVncServer::Init()
 ///////////////////////
 bool DKVncServer::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	return true;
 }
 
 ///////////////////////////////////////////////////////////////
 enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 {
-	DKDebug(cl);
+	DKDEBUGFUNC(cl);
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
 
@@ -146,12 +146,12 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 	ip = ntohl(addr.sin_addr.s_addr);
 	ClientData* cd = (ClientData*)cl->clientData;
 	cd->ipaddress = toString((ip>>24)&0xff)+"."+toString((ip>>16)&0xff)+"."+toString((ip>>8)&0xff)+"."+toString(ip&0xff);
-	DKLog("Client ip address: "+cd->ipaddress+"\n");
+	DKINFO("Client ip address: "+cd->ipaddress+"\n");
 
 	for(unsigned int i=0; i<clientLog.size(); i++){
 		if(same(cd->ipaddress, clientLog[i].ipaddress)){
 			if(clientLog[i].failed_attempts > 2){
-				DKLog(cd->ipaddress+" is banned from this server\n", DKWARN);
+				DKWARN(cd->ipaddress+" is banned from this server\n");
 				return RFB_CLIENT_REFUSE;
 			}
 		}
@@ -163,7 +163,7 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl)
 /////////////////////////////////////////////
 void DKVncServer::clientgone(rfbClientPtr cl)
 {
-	DKDebug(cl);
+	DKDEBUGFUNC(cl);
 	free(cl->clientData);
 	cl->clientData = NULL;
 }
@@ -171,7 +171,7 @@ void DKVncServer::clientgone(rfbClientPtr cl)
 ////////////////////////
 void DKVncServer::Loop()
 {
-	//DKDebug();
+	//DKDEBUGFUNC();
 	if(rfbProcessEvents(rfbScreen, 1)){
 		DrawBuffer();
 	}
@@ -180,7 +180,7 @@ void DKVncServer::Loop()
 ////////////////////////////////////////////////////////////////////////////////////////////
 rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len)
 {
-	DKDebug(cl, response, len);
+	DKDEBUGFUNC(cl, response, len);
 	char **passwds;
 	int i=0;
 
@@ -220,7 +220,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 //////////////////////////////
 void DKVncServer::DrawBuffer()
 {  
-	//DKDebug();
+	//DKDEBUGFUNC();
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
@@ -240,7 +240,7 @@ void DKVncServer::DrawBuffer()
 		// init D3D and get screen size
 		d3d = Direct3DCreate9(D3D_SDK_VERSION);
 		if(!d3d){
-			DKLog("DKVncServer::DrawBuffer(): Direct3DCreate9() failed\n", DKERROR);
+			DKERROR("DKVncServer::DrawBuffer(): Direct3DCreate9() failed\n");
 			return;
 		}
 		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
@@ -383,7 +383,7 @@ void DKVncServer::DrawBuffer()
 ////////////////////////////////////////////////////////////////////////////////
 void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 {
-	DKDebug(screen, width, height);
+	DKDEBUGFUNC(screen, width, height);
 	char *oldfb, *newfb;
 	oldfb = (char*)screen->frameBuffer;
 	newfb = (char*)malloc(width * height * bpp);
@@ -394,7 +394,7 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 ///////////////////////////////////////////////////////////////////////////
 void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-	DKDebug(buttonMask, x, y, cl);
+	DKDEBUGFUNC(buttonMask, x, y, cl);
 	ClientData* cd = (ClientData*)cl->clientData;
 	if(same(cd->ipaddress,"127.0.0.1")){ return; }
 	
@@ -436,7 +436,7 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl)
 ////////////////////////////////////////////////////////////////////////
 void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
-	DKDebug(down, key, cl);
+	DKDEBUGFUNC(down, key, cl);
 	int k = key;
 	switch(key){
 		case 65307: k = 27; break; //ESC

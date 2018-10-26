@@ -6,7 +6,7 @@
 //////////////////////////
 bool DKVncClientJS::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKVncClient_TestInt", DKVncClientJS::TestInt);
 	DKDuktape::AttachFunction("DKVncClient_TestString", DKVncClientJS::TestString);
 	DKDuktape::AttachFunction("DKVncClient_TestReturnInt", DKVncClientJS::TestReturnInt);
@@ -17,7 +17,7 @@ bool DKVncClientJS::Init()
 ////////////////////////////////////////////
 int DKVncClientJS::TestInt(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int input = duk_require_int(ctx, 0);
 	int output;
 	if(!DKVncClient::TestInt(input, output)){ return 0; }
@@ -28,7 +28,7 @@ int DKVncClientJS::TestInt(duk_context* ctx)
 ///////////////////////////////////////////////
 int DKVncClientJS::TestString(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString input = duk_require_string(ctx, 0);
 	DKString output;
 	if(!DKVncClient::TestString(input, output)){ return 0; }
@@ -39,7 +39,7 @@ int DKVncClientJS::TestString(duk_context* ctx)
 //////////////////////////////////////////////////
 int DKVncClientJS::TestReturnInt(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	int rval;
 	if(!DKVncClient::TestReturnInt(rval)){ return 0; }
 	duk_push_int(ctx, rval);
@@ -49,7 +49,7 @@ int DKVncClientJS::TestReturnInt(duk_context* ctx)
 /////////////////////////////////////////////////////
 int DKVncClientJS::TestReturnString(duk_context* ctx)
 {
-	DKDebug(ctx);
+	DKDEBUGFUNC(ctx);
 	DKString rval;
 	if(!DKVncClient::TestReturnString(rval)){ return 0; }
 	duk_push_string(ctx, rval.c_str());

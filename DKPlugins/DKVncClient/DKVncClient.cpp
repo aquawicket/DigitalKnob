@@ -32,7 +32,7 @@ long DKVncClient::last_mouse_move = 0;
 ////////////////////////
 bool DKVncClient::Init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	DKString server_ip;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_SERVER]", server_ip);
 	if(server_ip.empty()){ server_ip = "127.0.0.1"; }
@@ -93,8 +93,8 @@ bool DKVncClient::Init()
 	cl = rfbGetClient(8,3,4); // 32-bit?
 
 	//Display extra info
-	DKLog("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n");
-	DKLog("canUseHextile = "+toString(cl->canUseHextile)+"\n");
+	DKINFO("canUseCoRRE = "+toString(cl->canUseCoRRE)+"\n");
+	DKINFO("canUseHextile = "+toString(cl->canUseHextile)+"\n");
 
 	//cl->appData.shareDesktop = true;
 	//cl->appData.viewOnly = false;
@@ -173,7 +173,7 @@ bool DKVncClient::Init()
 	}
 	
 	if(!Connect(server_ip, server_password)){
-		DKLog("DKVncClient::Init(): Connect() failed\n", DKWARN);
+		DKWARN("DKVncClient::Init(): Connect() failed\n");
 		return false; 
 	}
 	return true;
@@ -182,7 +182,7 @@ bool DKVncClient::Init()
 ///////////////////////
 bool DKVncClient::End()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	SDL_DestroyTexture(tex);
 	cl = NULL;
 	cleanup(cl);
@@ -193,77 +193,77 @@ bool DKVncClient::End()
 //////////////////////////////////////////////////
 bool DKVncClient::TestInt(int& input, int& output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSDLWindow::TestInt")){
 		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
 	}
 	if(DKClass::HasFunc("DKSFMLWindow::TestInt")){
 		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
 	}
-	DKLog("DKWindow::TestInt(): No function available \n", DKERROR);
+	DKERROR("DKWindow::TestInt(): No function available\n");
 	return false;
 }
 
 ///////////////////////////////////////////////////////////////
 bool DKVncClient::TestString(DKString& input, DKString& output)
 {
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSDLWindow::TestString")){
 		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
 	}
 	if(DKClass::HasFunc("DKSFMLWindow::TestString")){
 		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
 	}
-	DKLog("DKWindow::TestString(): No function available \n", DKERROR);
+	DKERROR("DKWindow::TestString(): No function available\n");
 	return false;
 }
 
 ////////////////////////////////////////////
 bool DKVncClient::TestReturnInt(int& output)
 {
-	DKDebug(output);
+	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt")){
 		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
 	}
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt")){
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
 	}
-	DKLog("DKWindow::TestReturnInt(): No function available \n", DKERROR);
+	DKERROR("DKWindow::TestReturnInt(): No function available\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////
 bool DKVncClient::TestReturnString(DKString& output)
 {
-	DKDebug(output);
+	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
 		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
 	}
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString")){
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
 	}
-	DKLog("DKWindow::TestReturnString(): No function available \n", DKERROR);
+	DKERROR("DKWindow::TestReturnString(): No function available\n");
 	return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 bool DKVncClient::Connect(const DKString& address, const DKString& password)
 {
-	DKDebug(address, password);
+	DKDEBUGFUNC(address, password);
 	cl->serverHost = (char*)address.c_str();
 	pass = password.c_str();
 	cl->GetPassword = DKVncClient::password; //Tell vnc to grab the password on connect.
 	if(!rfbInitConnection(cl)){
-		DKLog("DKVncClient::Connect(): rfbInitConnection() failed\n", DKWARN);
+		DKWARN("DKVncClient::Connect(): rfbInitConnection() failed\n");
 		return false; 
 	}
 	tex = SDL_CreateTexture(dkSdlWindow->renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, cl->width, cl->height);
 	if(!tex){
-		DKLog("DKVncClient::Connect(): tex invalid\n", DKWARN);
+		DKWARN("DKVncClient::Connect(): tex invalid\n");
 		return false; 
 	}
 	if(!ValidateAspectRatio(cl)){
-		DKLog("DKVncClient::Connect(): ValidateAspectRatio() failed\n", DKWARN);
+		DKWARN("DKVncClient::Connect(): ValidateAspectRatio() failed\n");
 		return false; 
 	}
 	return true;
@@ -272,23 +272,23 @@ bool DKVncClient::Connect(const DKString& address, const DKString& password)
 /////////////////////////////////////////////////////////
 rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 {
-	DKDebug(client);
+	DKDEBUGFUNC(client);
 	/* Unless we accepted an incoming connection, make a TCP connection to the given VNC server */
 	if(!client->listenSpecified){
 		if(!client->serverHost || !ConnectToRFBServer(client,client->serverHost,client->serverPort)){
-			DKLog("DKVncClient::rfbInitConnection(): ConnectToRFBServer() failed\n", DKWARN);
+			DKWARN("DKVncClient::rfbInitConnection(): ConnectToRFBServer() failed\n");
 			return FALSE;
 		}
 	}
 	
 	/* Initialise the VNC connection, including reading the password */
 	if(!InitialiseRFBConnection(client)){
-		DKLog("DKVncClient::rfbInitConnection(): InitialiseRFBConnection() failed\n", DKWARN);
+		DKWARN("DKVncClient::rfbInitConnection(): InitialiseRFBConnection() failed\n");
 		return FALSE;
 	}
 	
 	if(!SetFormatAndEncodings(client)){
-		DKLog("DKVncClient::rfbInitConnection(): SetFormatAndEncodings() failed\n", DKWARN);
+		DKWARN("DKVncClient::rfbInitConnection(): SetFormatAndEncodings() failed\n");
 		return FALSE;
 	}
 	
@@ -304,7 +304,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 	
 	if(client->appData.scaleSetting>1){
 		if(!SendScaleSetting(client, client->appData.scaleSetting)){
-			DKLog("DKVncClient::rfbInitConnection(): SendScaleSetting() failed\n", DKWARN);
+			DKWARN("DKVncClient::rfbInitConnection(): SendScaleSetting() failed\n");
 			return FALSE; 
 		} 
 		if(!SendFramebufferUpdateRequest(client,
@@ -313,7 +313,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 			client->updateRect.w / client->appData.scaleSetting,
 			client->updateRect.h / client->appData.scaleSetting,
 			FALSE)){
-				DKLog("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n", DKWARN);
+			DKWARN("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n");
 				return FALSE;
 		}
 	}
@@ -322,7 +322,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 			client->updateRect.x, client->updateRect.y,
 			client->updateRect.w, client->updateRect.h,
 			FALSE)){
-			DKLog("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n", DKWARN);
+			DKWARN("DKVncClient::rfbInitConnection(): SendFramebufferUpdateRequest() failed\n");
 			return FALSE;
 		}
 	}
@@ -332,7 +332,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client)
 ////////////////////////
 void DKVncClient::draw()
 {
-	//DKDebug();
+	//DKDEBUGFUNC();
 	if(!cl->frameBuffer){
 		//DKLog("DKVncClient::draw(): cl->frameBuffer invalid\n", DKWARN);
 		return; 
@@ -344,7 +344,7 @@ void DKVncClient::draw()
 	//}
 
 	if(!HandleRFBServerMessage(cl)){
-		DKLog("DKVncClient::draw(): HandleRFBServerMessage() failed\n", DKWARN);
+		DKWARN("DKVncClient::draw(): HandleRFBServerMessage() failed\n");
 		return;
 	}
 	SDL_Rect r;
@@ -353,11 +353,11 @@ void DKVncClient::draw()
 	r.w = cl->width;
 	r.h = cl->height;
 	if(SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4) == -1){
-		DKLog("DKVncClient::draw(): SDL_UpdateTexture() failed\n", DKWARN);
+		DKWARN("DKVncClient::draw(): SDL_UpdateTexture() failed\n");
 		return;
 	}
 	if(SDL_RenderCopyEx(dkSdlWindow->renderer, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1){
-		DKLog("DKVncClient::draw(): SDL_RenderCopyEx() failed\n", DKWARN);
+		DKWARN("DKVncClient::draw(): SDL_RenderCopyEx() failed\n");
 		return;
 	}
 }
@@ -365,7 +365,7 @@ void DKVncClient::draw()
 ///////////////////////////////////////////////////////////////////
 void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) 
 {
-	DKDebug(cl, x, y, w, h);
+	DKDEBUGFUNC(cl, x, y, w, h);
 	//Throttle the drawing to conserve cpu
 	DKUtil::GetTicks(DKUtil::now);
 	int delta = DKUtil::now - DKUtil::lastFrame;
@@ -394,7 +394,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h)
 //////////////////////////////////////
 bool DKVncClient::handle(SDL_Event *e)
 {
-	//DKDebug(e);
+	//DKDEBUGFUNC(e);
 	switch(e->type){
 		case SDL_MOUSEBUTTONUP:
 		case SDL_MOUSEBUTTONDOWN:
@@ -539,7 +539,7 @@ bool DKVncClient::handle(SDL_Event *e)
 //////////////////////////////////////////////
 rfbBool DKVncClient::resize(rfbClient* client) 
 {
-	DKDebug(client);
+	DKDEBUGFUNC(client);
 	//DKLog("client->appData.scaleSetting="+toString(client->appData.scaleSetting)+"\n");
 	int width = client->width;
 	int height = client->height;
@@ -604,7 +604,7 @@ rfbBool DKVncClient::resize(rfbClient* client)
 /////////////////////////////////////////////////////////////
 void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad)
 {
-	DKDebug(cl, value, pad);
+	DKDEBUGFUNC(cl, value, pad);
 	// note: pad is for future expansion 0=unused
 	fprintf(stderr,"Led State= 0x%02X\n", value);
 	fflush(stderr);
@@ -613,7 +613,7 @@ void DKVncClient::kbd_leds(rfbClient* cl, int value, int pad)
 /////////////////////////////////////////////////////////////////
 void DKVncClient::text_chat(rfbClient* cl, int value, char *text) 
 {
-	DKDebug(cl, value, text);
+	DKDEBUGFUNC(cl, value, text);
 	switch(value) {
 	case rfbTextChatOpen:
 		fprintf(stderr,"TextChat: We should open a textchat window!\n");
@@ -635,14 +635,14 @@ void DKVncClient::text_chat(rfbClient* cl, int value, char *text)
 /////////////////////////////////////////////////////////////////////////
 void DKVncClient::got_selection(rfbClient *cl, const char *text, int len)
 {
-	DKDebug(cl, text, len);
+	DKDEBUGFUNC(cl, text, len);
 	//put_scrap(T('T', 'E', 'X', 'T'), len, text);
 }
 
 ////////////////////////////////////////
 void DKVncClient::cleanup(rfbClient* cl)
 {
-	DKDebug(cl);
+	DKDEBUGFUNC(cl);
 	//just in case we're running in listenLoop:
 	//close viewer window by restarting SDL video subsystem
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
@@ -654,7 +654,7 @@ void DKVncClient::cleanup(rfbClient* cl)
 //////////////////////////////////////////////////////////////////////////////////
 void DKVncClient::resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int h)
 {
-	DKDebug(cl, x, y, w, h);
+	DKDEBUGFUNC(cl, x, y, w, h);
 	if(!realWidth || !realHeight){ return; }
 	int i0 = x * realWidth / cl->width;
 	int i1 = ((x + w) * realWidth - 1) / cl->width + 1;
@@ -695,7 +695,7 @@ void DKVncClient::resizeRectangleToReal(rfbClient *cl, int x, int y, int w, int 
 //////////////////////////////////////////////////////
 uint32_t DKVncClient::get(rfbClient *cl, int x, int y)
 {
-	DKDebug(cl, x, y);
+	DKDEBUGFUNC(cl, x, y);
 	switch (bytesPerPixel) {
 	case 1: return ((uint8_t *)cl->frameBuffer)[x + y * cl->width];
 	case 2: return ((uint16_t *)cl->frameBuffer)[x + y * cl->width];
@@ -709,7 +709,7 @@ uint32_t DKVncClient::get(rfbClient *cl, int x, int y)
 ///////////////////////////////////////////////
 void DKVncClient::put(int x, int y, uint32_t v)
 {
-	DKDebug(x, y, v);
+	DKDEBUGFUNC(x, y, v);
 	SDL_Surface* sdl;
 	switch (bytesPerPixel) {
 	case 1: sdl = SDL_GetWindowSurface(dkSdlWindow->window); ((uint8_t *)sdl->pixels)[x + y * rowStride] = v; break;
@@ -725,7 +725,7 @@ void DKVncClient::put(int x, int y, uint32_t v)
 ///////////////////////////////////////////////////////////////////
 void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 {
-	DKDebug(client, w, h);
+	DKDEBUGFUNC(client, w, h);
 	SDL_Surface* sdl;
 
 	if(w < 0){
@@ -776,7 +776,7 @@ void DKVncClient::setRealDimension(rfbClient *client, int w, int h)
 //////////////////////////////////////////////////////////////
 rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e)
 {
-	DKDebug(e);
+	DKDEBUGFUNC(e);
 	rfbKeySym k = 0;
 	SDL_Keycode sym = e->keysym.sym;
 
@@ -876,14 +876,14 @@ rfbKeySym DKVncClient::SDL_key2rfbKeySym(SDL_KeyboardEvent* e)
 //////////////////////////////////////////
 char* DKVncClient::password(rfbClient *cl)
 {
-	DKDebug(cl);
+	DKDEBUGFUNC(cl);
 	return (char*)pass;
 }
 
 ////////////////////////////////////////////////////
 bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 {
-	DKDebug(cl);
+	DKDEBUGFUNC(cl);
 	//FIXME
 	return true; //BYPASS
 
@@ -896,16 +896,16 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl)
 	//SDL_SetWindowBordered(dkSdlWindow->window, SDL_FALSE);
 
 	float delta = (float)cl->width / (float)dkSdlWindow->width;
-	DKLog("DKVncClient::ValidateAspectRatio(): "+toString(cl->width)+" / "+toString(dkSdlWindow->width)+" = "+toString(delta)+"\n");
+	DKINFO("DKVncClient::ValidateAspectRatio(): "+toString(cl->width)+" / "+toString(dkSdlWindow->width)+" = "+toString(delta)+"\n");
 
 	float height = (float)cl->height / delta;
-	DKLog("DKVncClient::ValidateAspectRatio(): "+toString(cl->height)+" / "+toString(delta)+" = "+toString(height)+"\n");
+	DKINFO("DKVncClient::ValidateAspectRatio(): "+toString(cl->height)+" / "+toString(delta)+" = "+toString(height)+"\n");
 	DKWindow::SetHeight((int&)height);
 	dkSdlWindow->height = (int)height;
 
 	int w, h;
 	SDL_GetWindowSize(dkSdlWindow->window, &w, &h);
-	DKLog("DKVncClient::ValidateAspectRatio(): width="+toString(w)+" height="+toString(h)+"\n");
+	DKINFO("DKVncClient::ValidateAspectRatio(): width="+toString(w)+" height="+toString(h)+"\n");
 
 	//int top, left, bottom, right;
 	//SDL_GetWindowBordersSize(dkSdlWindow->window, &top, &left, &bottom, &right);
