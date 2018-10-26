@@ -8,6 +8,12 @@ function IconMaker_Init()
 	DKINFO("IMAGEMAGICK="+IMAGEMAGICK+"\n");
 }
 
+////////////////////////
+function IconMaker_End()
+{
+	DKDEBUGFUNC();
+}
+
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
