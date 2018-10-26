@@ -3,11 +3,11 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	DKLog("GitMenu_Init()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKThreadPool");
 
-	//DKLog(DK_GetOS()+"\n");
+	//DKINFO(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = DKFile_GetShortName(GIT);
@@ -33,7 +33,7 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	DKLog("GitMenu_End()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(GitMenu_OnEvent);
 	DKClose("DKGit/GitMenu.html");
 }
@@ -41,7 +41,7 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	DKLog("GitMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC(event);
 	if(DK_Id(event,"Git Update")){
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
@@ -60,15 +60,15 @@ function GitMenu_OnEvent(event)
 //////////////////////////////
 function GitMenu_ValidateGit()
 {
-	DKLog("GitMenu_ValidateGit()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Looking for GIT \n");
-	//DKLog(GIT+"\n");
+	DKINFO("Looking for GIT\n");
+	//DKINFO(GIT+"\n");
 	if(!DKFile_Exists(GIT)){
-		DKLog("Please install GIT \n");
+		DKINFO("Please install GIT\n");
 		GitMenu_InstallGit();
 	}
-	DKLog("Found GIT \n");
+	DKINFO("Found GIT\n");
 	if(DK_GetOS() == "Mac"){
 		GIT = "git";
 	}
@@ -77,9 +77,9 @@ function GitMenu_ValidateGit()
 /////////////////////////////
 function GitMenu_InstallGit()
 {
-	DKLog("GitMenu_InstallGit()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKLog("Installing Git \n");
+	DKINFO("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -97,19 +97,19 @@ function GitMenu_InstallGit()
 		DK_Execute("sudo apt-get install git");
 	}
 	else{
-		DKLog("ERROR: unrecognied HOST OS: "+DK_GetOS(), DKINFO);
+		DKINFO("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
 	}
 }
 
 ////////////////////////////
 function GitMenu_GitUpdate()
 {
-	DKLog("GitMenu_GitUpdate()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
 	
-	DKLog("Git Update DigitalKnob... \n");
+	DKINFO("Git Update DigitalKnob...\n");
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
 	DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" checkout -- .");
@@ -118,13 +118,13 @@ function GitMenu_GitUpdate()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
+	for(var i=0; i<files.length; i++){ //DKINFO("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n");
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
-			DKLog("Git Update "+folder+"... \n");
+		if(url){ //DKINFO("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKINFO("folder = "+folder+"\n");
+			DKINFO("Git Update "+folder+"...\n");
 			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
 			DK_Execute(GIT +" checkout -- .");
 			DK_Execute(GIT +" pull origin master");
@@ -142,12 +142,12 @@ function GitMenu_GitUpdate()
 ////////////////////////////
 function GitMenu_GitCommit()
 {
-	DKLog("GitMenu_GitCommit()\n", DKDEBUG);
+	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
 	
-	DKLog("Git Commit DigitalKnob... \n");
+	DKINFO("Git Commit DigitalKnob...\n");
 	DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
@@ -159,13 +159,13 @@ function GitMenu_GitCommit()
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //DKLog("files["+i+"] = "+files[i]+"\n");
+	for(var i=0; i<files.length; i++){ //DKINFO("files["+i+"] = "+files[i]+"\n");
 		DKFile_ChDir(DKPATH);
 		if(DKFile_IsDirectory(files[i])){ continue; }
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //DKLog("url = "+url+"\n");
-			var folder = files[i].replace(".txt",""); //DKLog("folder = "+folder+"\n");
-			DKLog("Git Commit "+folder+"... \n");
+		if(url){ //DKINFO("url = "+url+"\n");
+			var folder = files[i].replace(".txt",""); //DKINFO("folder = "+folder+"\n");
+			DKINFO("Git Commit "+folder+"...\n");
 			DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");

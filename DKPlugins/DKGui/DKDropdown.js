@@ -1,17 +1,17 @@
 //////////////////////////
 function DKDropdown_Init()
 {
-	DKLog("DKDropdown_Init()\n");
+	DKDEBUGFUNC();
 }
 
 /////////////////////////
 function DKDropdown_End()
 {
-	DKLog("DKDropdown_End()\n");
+	DKDEBUGFUNC();
 }
 
 //////////////////////////////////
 function DKDropdown_OnEvent(event)
 {
-	DKLog("DKDropdown_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUGFUNC(event);
 }
