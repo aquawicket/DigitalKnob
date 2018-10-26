@@ -8,18 +8,18 @@ bool DKAudio::Init()
 	DKClass::DKCreate("DKAudioJS");
 	if(DKClass::DKAvailable("DKSDLAudio")){
 		DKClass::DKCreate("DKSDLAudio");
-		return false;
+		return true;
 	}
 	if(DKClass::DKAvailable("DKSDLWav")){
 		DKClass::DKCreate("DKSDLWav");
-		return false;
+		return true;
 	}
 	if(DKClass::DKAvailable("DKOSGAudio")){
 		DKClass::DKCreate("DKOSGAudio");
-		return false;
+		return true;
 	}
 	DKERROR("DKAudio::Init(): No audio interface available\n");
-	return true;
+	return false;
 }
 
 ///////////////////
