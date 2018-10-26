@@ -1,7 +1,7 @@
 ///////////////////////
 function RunMenu_Init()
 {
-	DKLog("RunMenu_Init()", DKDEBUG);
+	DKDEBUGFUNC();
 	DKCreate("DKBuild/RunMenu.html");
 	DKAddEvent("GLOBAL", "mousedown", RunMenu_OnEvent);
 	DKAddEvent("Build App", "click", RunMenu_OnEvent);
@@ -16,7 +16,7 @@ function RunMenu_Init()
 //////////////////////
 function RunMenu_End()
 {
-	DKLog("RunMenu_End()", DKDEBUG);
+	DKDEBUGFUNC();
 	DKRemoveEvents(RunMenu_OnEvent);
 	DKClose("DKBuild/RunMenu.html");
 }
@@ -24,7 +24,8 @@ function RunMenu_End()
 ///////////////////////////////
 function RunMenu_OnEvent(event)
 {
-	DKLog("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n", DKDEBUG);
+	DKDEBUGFUNC();
+	DKDEBUG("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Id(event, "Build App")){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
@@ -50,7 +51,7 @@ function RunMenu_OnEvent(event)
 		DKThread_DKQueue("BuildAll "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
 	if(DK_Id(event, "Copy Assets")){
-		DKLog("DKBuildGUI::Copy Assets: TODO", DKWARN);
+		DKWARN("DKBuildGUI::Copy Assets: TODO\n");
 	}
 	if(DK_Id(event, "Run App")){
 		OS = DKWidget_GetValue("OSList");
@@ -62,7 +63,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
+						//DKINFO(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 						return;
 					}
@@ -77,30 +78,30 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
+						//DKINFO(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 						return;
 					}
 				}
 			}
 			if(OS == "android"){
-				DKLog("TODO: Run android from Windows \n");
+				DKINFO("TODO: Run android from Windows\n");
 			}
 		}
 		if(DK_GetOS() == "Mac"){
 			if(OS == "mac"){
-				DKLog("TODO: Run mac apps from OSX \n");
+				DKINFO("TODO: Run mac apps from OSX\n");
 			}
 			if(OS = "ios"){
-				DKLog("TODO: Run iOS apps from OSX \n");
+				DKINFO("TODO: Run iOS apps from OSX\n");
 			}
 			if(OS = "ios-simulator"){
-				DKLog("TODO: Run iOS-simulator apps from OSX \n");
+				DKINFO("TODO: Run iOS-simulator apps from OSX\n");
 			}
 		}
 		if(DK_GetOS() == "Linux"){
 			//if(OS == "linux64"){
-				//DKLog("TODO: Run linux apps from Linux \n");
+				//DKINFO("TODO: Run linux apps from Linux\n");
 				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 					DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 				}
@@ -108,7 +109,7 @@ function RunMenu_OnEvent(event)
 				var files = contents.split(",");
 				for(var i=0; i<files.length; i++){
 					if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
-						//DKLog(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
+						//DKINFO(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop\n");
 						DK_Run(DKPATH+"/"+files[i]+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
 						return;
 					}
@@ -119,7 +120,7 @@ function RunMenu_OnEvent(event)
 	
 	//TODO
 	if(DK_Id(event, "Generate Docs")){
-		DKLog("Generate Docs: TODO \n");
+		DKINFO("Generate Docs: TODO\n");
 		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
 		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
 		var doxy_exe = DKFile_GetShortName(doxy_path);
@@ -128,7 +129,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event, "Export to Android Studio")){
-		DKLog("Export to Android Studio \n");
+		DKINFO("Export to Android Studio\n");
 		DKCreate("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});
