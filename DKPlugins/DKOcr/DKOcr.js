@@ -25,14 +25,14 @@ function DKOcr_OnEvent(event)
 	DKDEBUGFUNC(event);	
 	if(DK_Type(event, "OpenFile")){
 		var file = DK_GetValue(event);
-		DKINFO(("OpenFile: "+file+"\n");
+		DKINFO("OpenFile: "+file+"\n");
 		
 		//if file is pdf, convert it to png
 		if(file.includes(".pdf") || file.includes(".PDF")){
-			DKINFO(("DKOcr_OnEvent(): file is a pdf\n");
+			DKINFO("DKOcr_OnEvent(): file is a pdf\n");
 			var assets = DKAssets_LocalAssets();
 			var temp_file = assets+"temp.png";
-			DKINFO(("temp_file = "+temp_file+"\n");
+			DKINFO("temp_file = "+temp_file+"\n");
 			
 			DKFile_Delete(assets+"/temp.png");
 			for(var i=0; i<1000; i++){
