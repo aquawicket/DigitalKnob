@@ -25,12 +25,15 @@ var events = [];
 /////////////////////////////////////////////
 window.addEventListener('error', function(e){
     var errorText = [
-        e.message,
+        e.message + '\n',
         'URL: ' + e.filename,
         'Line: ' + e.lineno + ', Column: ' + e.colno,
         'Stack: ' + (e.error && e.error.stack || '(no stack trace)')
     ].join('\n');
 
+	DKERROR(errorText);
+	
+	/*
     // Example: log errors as visual output into the host page.
     // Note: you probably don’t want to show such errors to users, or
     //       have the errors get indexed by Googlebot; however, it may
@@ -46,7 +49,9 @@ window.addEventListener('error', function(e){
     } else {
         document.getElementById(DOM_ID).textContent += '\n\n' + errorText;
     }
+	(/
 
+	/*
     // Example: log the error to remote service.
     // Note: you can log errors to a remote service, to understand
     //       and monitor the types of errors encountered by regular users,
@@ -55,6 +60,7 @@ window.addEventListener('error', function(e){
     client.open('POST', 'https://example.com/logError');
     client.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
     client.send(errorText);
+	*/
 });
 
 ///////////////////////////////////

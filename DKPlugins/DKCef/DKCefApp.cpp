@@ -440,6 +440,10 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProces
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace)
 {
+	//This isn't working so well, another Error handler is located in DK/Browser.js
+	return;
+
+	/*
 	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
 	DKString msg = exception->GetMessage().ToString();
 	if(has(msg,"DKSendEvent is not defined")){ return; } //ignore DKSendEvent not existing
@@ -457,6 +461,7 @@ void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 	}
 	DKERROR(stackFormatted.str()+"\n");
 	DKERROR("############################################################\n");
+	*/
 
 	/*
 	const char* stackFormattedShouldBe =
