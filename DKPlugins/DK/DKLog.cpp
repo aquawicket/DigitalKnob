@@ -100,10 +100,10 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 	if(lvl == DK_DEBUG){ color = DKBLUE; }
 #elif !defined(LINUX)
     char color[10];// = 0;
-	if(lvl == DKERROR){ strcpy(color, DKRED); }
-	if(lvl == DKWARN){ strcpy(color, DKYELLOW); }
-    if(lvl == DKINFO){ strcpy(color, DKWHITE); }
-	if(lvl == DKDEBUG){ strcpy(color, DKBLUE); }
+	if(lvl == DK_ERROR){ strcpy(color, DKRED); }
+	if(lvl == DK_WARN){ strcpy(color, DKYELLOW); }
+    if(lvl == DK_INFO){ strcpy(color, DKWHITE); }
+	if(lvl == DK_DEBUG){ strcpy(color, DKBLUE); }
 #endif	
 
 #ifdef WIN32
@@ -130,16 +130,16 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 
 #ifdef ANDROID
-	if(lvl == DKERROR){
+	if(lvl == DK_ERROR){
 		__android_log_write(ANDROID_LOG_ERROR, "DKApp", string.c_str());
 	}
-	else if(lvl == DKWARN){
+	else if(lvl == DK_WARN){
 		__android_log_write(ANDROID_LOG_WARN, "DKApp", string.c_str());
 	}
-	else if(lvl == DKINFO){
+	else if(lvl == DK_INFO){
 		__android_log_write(ANDROID_LOG_INFO, "DKApp", string.c_str());
 	}
-	else if(lvl == DKDEBUG){
+	else if(lvl == DK_DEBUG){
 		__android_log_write(ANDROID_LOG_DEBUG, "DKApp", string.c_str());
 	}
 	else{

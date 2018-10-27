@@ -20,7 +20,7 @@ static jobject theobj = 0;
 /////////////////////////////////////////////////////
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
 {
-	DKDebug(vm, reserved);
+	DKDEBUGFUNC(vm, reserved);
 	thejvm = vm;
     return JNI_VERSION_1_6;
 }
@@ -28,14 +28,14 @@ JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved)
 ////////////////////////////////////////////
 void initJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKDebug(env, obj);
+	DKDEBUGFUNC(env, obj);
 	theobj = env->NewGlobalRef(obj);
 }
 
 ////////////////////////////////////////////
 void exitJNIBridge(JNIEnv* env, jobject obj)
 {
-	DKDebug(env, obj);
+	DKDEBUGFUNC(env, obj);
 	env->DeleteGlobalRef(theobj);
 }
 
@@ -43,7 +43,7 @@ void exitJNIBridge(JNIEnv* env, jobject obj)
 //////////////////////////////////////////////////////////////////
 void CallJavaFunction(const DKString& name, const DKString& param)
 {
-	DKDebug(name, param);
+	DKDEBUGFUNC(name, param);
 	JNIEnv* env;
 	bool attached = false;
 	switch(thejvm->GetEnv((void**)&env, JNI_VERSION_1_6)){
@@ -92,7 +92,7 @@ void CallJavaFunction(const DKString& name, const DKString& param)
 ////////////////////////////////////////////////////
 void initSDL(JNIEnv* env, jclass cls, jobject array)
 {
-	DKDebug(env, cls, array);
+	DKDEBUGFUNC(env, cls, array);
 	JavaData jdata;
 	jdata.env = env;
 	jdata.cls = cls;
@@ -104,7 +104,7 @@ void initSDL(JNIEnv* env, jclass cls, jobject array)
 //////////////////////////////////////////////////////////////
 jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 {
-	DKDebug(env, cls, data);
+	DKDEBUGFUNC(env, cls, data);
 	const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 	DKStringArray arry;
 	toStringArray(arry, _data, ",");
@@ -244,7 +244,7 @@ jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data)
 //////////////////////
 void DKAndroid::init()
 {
-	DKDebug();
+	DKDEBUGFUNC();
 	
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
@@ -290,7 +290,7 @@ void DKAndroid::init()
 ///////////////////////////////////////////
 bool DKAndroid::GetMousePos(int& x, int& y)
 {
-	DKDebug(x, y);
+	DKDEBUGFUNC(x, y);
 	x = android_mouseX;
 	y = android_mouseY;
 	return true;
@@ -300,7 +300,7 @@ bool DKAndroid::GetMousePos(int& x, int& y)
 ////////////////////////////////////////////////////////
 void DKAndroid::ProcessEvent(Rocket::Core::Event& event)
 {
-	DKDebug(events);
+	DKDEBUGFUNC(events);
 	//Toggle Keyboard on text element click
 	if(event.GetType() == "mousedown"){
 		if(same(event.GetCurrentElement()->GetTagName().CString(), "textarea") ||
