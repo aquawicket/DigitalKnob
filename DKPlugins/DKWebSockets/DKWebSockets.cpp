@@ -60,6 +60,17 @@ bool DKWebSockets::CreateClient(const DKString& address)
 {
 	DKDEBUGFUNC(address);
 	clientAddress = address;
+
+	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
+		DKINFO("DKWebSockets::CreateClient(): clientHub.onConnection\n");
+		clientWebSocket = ws;
+	});
+
+	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
+		DKINFO("DKWebSockets::CreateClient(): clientHub.onDisconnection\n");
+		clientWebSocket = NULL;
+	});
+
 	clientHub.onError([](void *user){
 		DKERROR("DKWebSockets::CreateClient(): clientHub.onError: "+toString((long)user)+"\n");
 		clientWebSocket = NULL;
@@ -100,16 +111,6 @@ bool DKWebSockets::CreateClient(const DKString& address)
 		}
 	});
 
-	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
-		DKINFO("DKWebSockets::CreateClient(): clientHub.onConnection\n");
-		clientWebSocket = ws;
-	});
-
-	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
-		DKINFO("DKWebSockets::CreateClient(): clientHub.onDisconnection\n");
-		clientWebSocket = NULL;
-	});
-
 	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
 		DKINFO("DKWebSockets::CreateClient(): clientHub.onMessage\n");
 		MessageFromServer(ws, message, length, opCode);
@@ -126,6 +127,9 @@ bool DKWebSockets::CreateClient(const DKString& address)
 bool DKWebSockets::CreateServer(const DKString& address, const int& port)
 {
 	DKDEBUGFUNC(address, port);
+	serverAddress = address;
+	serverPort = port;
+
 	serverHub.onError([](void *user){
 		DKERROR("DKWebSockets::CreateServer(): serverHub.onError\n");
 		serverWebSocket = NULL;
