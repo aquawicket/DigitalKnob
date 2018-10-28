@@ -18,6 +18,7 @@ function app_LoadPlugins()
 	DKCreate("DKDebug/DKDebug.js", function(){});
 }
 
+/*
 ///////////////////////
 function app_LoadPage()
 {
@@ -68,3 +69,4 @@ function app_LoadPage()
 	});
 	});
 }
+*/
