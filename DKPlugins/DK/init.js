@@ -86,10 +86,3 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		app_LoadPlugins();
 	}
 }
-/*
-else{  //Javascript: V8, WEBVIEW or Duktape
-	if(typeof app_LoadPage === "function"){
-		app_LoadPage();
-	}
-}
-*/
