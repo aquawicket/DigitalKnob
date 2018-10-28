@@ -32,7 +32,7 @@ function DKBuild_Init()
 		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
 		NDK = DKFile_GetShortName(NDK);
 	}
 	if(DK_GetOS() == "Win64"){
@@ -41,20 +41,20 @@ function DKBuild_Init()
 		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/3rdParty/android-ndk-r10d";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
 		NDK = DKFile_GetShortName(NDK);
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		//SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
-		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/aqualinux/Desktop/digitalknob";
 		//SVN = "/usr/bin/svn";
 		CMAKE = "/usr/bin/cmake";
-		NDK = DKPATH+"/3rdParty/android-ndk-r10e";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
 
 	/*
