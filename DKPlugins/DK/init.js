@@ -33,7 +33,7 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKCreate("DKWindow");
 		DKWindow_Create();
 		DKCreate("DKRocket");
-		DKRocket_LoadGui("index.html");
+		DKRocket_LoadGui("DKRocket/blank.html");
 		DKCreate("DKWidget");
 		var iframe = DKWidget_CreateElement("body", "iframe", "DKCef_frame");
 		DKWidget_SetAttribute(iframe, "src", DKApp_url);
@@ -50,10 +50,10 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKRocket_LoadGui("index.html");
-		DKCreate("DKWidget");
-		if(typeof app_LoadPage === "function"){
-			app_LoadPage();
-		}
+		//DKCreate("DKWidget");
+		//if(typeof app_LoadPage === "function"){
+		//	app_LoadPage();
+		//}
 	}
 	else if(USE_SDL && USE_CEF){
 		DKINFO("Creating SDL -> CEF -> GUI\n");
@@ -86,8 +86,10 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		app_LoadPlugins();
 	}
 }
+/*
 else{  //Javascript: V8, WEBVIEW or Duktape
 	if(typeof app_LoadPage === "function"){
 		app_LoadPage();
 	}
 }
+*/
