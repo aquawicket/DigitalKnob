@@ -1,2 +1,3 @@
-//This is run from the browser
+// browser app script, called from index.html
+
 DKINFO("Hello World!\n");
