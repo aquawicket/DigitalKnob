@@ -26,7 +26,7 @@ function AndroidImport_Import()
 	
 	for(var i=0; i<files.length; i++){ 
 		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
-			appdir = files[i]+"/DKApps";
+			appdir = DKPATH+"/"+files[i]+"/DKApps/"+APP;
 		}
 	}
 	
@@ -112,9 +112,9 @@ function AndroidImport_Import()
 	DK_PressKey(17); //press ctrl
 	DK_StrokeKey(86) //stroke v
 	DK_ReleaseKey(17); //release ctrl
-	DK_Sleep(10000);
+	DK_Sleep(5000);
 	DK_StrokeKey(13) //stroke enter
-	DK_Sleep(10000);
+	DK_Sleep(5000);
 	DKINFO("Pressing enter\n");
 	DK_StrokeKey(13) //stroke enter
 	
@@ -153,6 +153,7 @@ function AndroidImport_Import()
 	*/
 	
 	//update C:/AndroidStudio/"APP"/app/build.gradle
+	DK_Sleep(5000);
 	var gradle = DKFile_FileToString(WORKSPACE+"/"+APP+"_"+TYPE+"/app/build.gradle");
 
 	//replace buildTypes with 
