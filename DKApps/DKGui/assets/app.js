@@ -36,7 +36,8 @@ function app_LoadPage()
 	}); 
 	}
 	}
-					
+	
+	DKCreate("DK/DK.css");	
 	DKCreate("DK/DKBrowser.css");
 	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKWindow/DKWindow.js", function(){
