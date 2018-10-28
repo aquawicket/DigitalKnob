@@ -1208,7 +1208,7 @@ int DKJS::WaitForImage(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	int timeout = duk_require_int(ctx, 1);
-	if(!!DKUtil::WaitForImage(file, timeout)){
+	if(!DKUtil::WaitForImage(file, timeout)){
 		return 0;
 	}
 	duk_push_true(ctx);
