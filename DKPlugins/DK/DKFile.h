@@ -2,6 +2,7 @@
 #ifndef DKFile_H
 #define DKFile_H
 
+#define BOOST_NO_CXX11_SCOPED_ENUMS
 #include <boost/filesystem.hpp>
 #include "DK/DK.h"
 #include "DK/DKString.h"
