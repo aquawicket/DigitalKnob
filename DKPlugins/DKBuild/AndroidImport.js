@@ -23,16 +23,18 @@ function AndroidImport_Import()
 	var appdir = "";	
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	/*
+	
 	for(var i=0; i<files.length; i++){ 
 		if(DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){
 			appdir = files[i]+"/DKApps";
 		}
 	}
-	*/
+	
+	/*
 	if(DKFile_Exists(DKPATH+"/DKApps/"+APP)){
 		appdir = DKPATH+"/DKApps/"+APP;
 	}
+	*/
 		
 	if(!appdir){
 		DKINFO("AndroidImport_Import(): cannot locate appdir\n");
@@ -42,7 +44,7 @@ function AndroidImport_Import()
 	DKFile_MkDir(WORKSPACE);
 	DKFile_Delete(WORKSPACE+"/"+APP+"_"+TYPE);
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE);
-	DK_Run(ANDROIDSTUDIO);
+	DK_Run(ANDROIDSTUDIO, "");
 	
 	if(!DKHandles_WaitForWindow("Welcome to Android Studio", 60)){ //Check for 60 seconds
 		DKWARN("DKHandles_WaitForWindow(Welcome to Android Studio): failed\n");
