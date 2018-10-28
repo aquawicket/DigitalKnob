@@ -3,6 +3,7 @@
 #include "DKRocket/DKRocket.h"
 #include "DKRocket/DKRocketToRML.h"
 #include "DKWindow/DKWindow.h"
+#include "DKCurl/DKCurl.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
@@ -131,37 +132,49 @@ bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
 	DKString path = url;
-	if(!DKFile::VerifyPath(path)){
-		DKERROR("DKOSGRocket::LoadGui() "+path+" not found!\n");
-		return false;
+	DKString html;
+
+	if(has(path, "http://")){
+		DKClass::DKCreate("DKCurl");
+		if(!DKCurl::Get()->HttpFileExists(path)){
+			DKERROR("Could not locate "+path+"\n");
+			return false;
+		}
+		if(!DKCurl::Get()->HttpToString(path, html)){
+			DKERROR("Could not get html from url "+path+"\n");
+			return false;
+		}
+	}
+	else{
+		if(!DKFile::VerifyPath(path)){
+			DKERROR(path+" not found!\n");
+			return false;
+		}
+		if(!DKFile::FileToString(path, html)){
+			DKERROR("DKFile::FileToString failed on "+path+"\n");
+			return false;
+		}
 	}
 
-	DKDEBUGVARS(path);
+	//// Prepair the html document for rocket
+	DKString rml;
+	DKRocketToRML* dkRocketToRml = new DKRocketToRML();
+	dkRocketToRml->IndexToRml(html, rml);
 
+	//// Clear any document and load the rml into the document
 	if(document){ 
 		Rocket::Core::Factory::ClearStyleSheetCache();
 		document->Close(); 
 	}
-
-	//// Prepair the html document for rocket
-	DKString filename;
-	DKFile::GetFileName(path,filename);
-	DKString html;
-	DKFile::FileToString(path, html);
-	DKString rml;
-
-	DKRocketToRML* dkRocketToRml = new DKRocketToRML();
-	dkRocketToRml->IndexToRml(html, rml);
-
-	// Finnish loading the document
 	document = context->LoadDocumentFromMemory(rml.c_str());
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
 		DKERROR("Could not load "+path+"\n");
 	}
-
 	document->Show();
 	document->RemoveReference();
+
+	_url = path;
 	dkRocketToRml->PostProcess(document);
 
 #ifdef ANDROID
@@ -169,7 +182,6 @@ bool DKRocket::LoadUrl(const DKString& url)
 	LoadFonts();
 #endif
 
-	_url = path;
 	return true;
 }
 

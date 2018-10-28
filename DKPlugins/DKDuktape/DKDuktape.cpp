@@ -254,15 +254,15 @@ bool DKDuktape::LoadFile(const DKString& path)
 	if(path.empty()){ return false; }
 	if(FileLoaded(path)){ return false; } //prevent file from loading twice
 
-	//if the file contains a //BROWSER tag, it's broswer only
-	DKString test;
-	DKFile::FileToString(path, test);
-	if(has(test,"//BROWSER")){
+	DKString js;
+	DKFile::FileToString(path, js);
+	if(has(js,"//BROWSER")){
 		DKINFO("Ignoring: "+path+" is a browser only file. \n");
 		return false;
 	}
-	
-	if(duk_peval_file(ctx, path.c_str()) != 0){
+
+	//if(duk_peval_file(ctx, path.c_str()) != 0){
+	if(duk_peval_string_noresult(ctx, js.c_str()) != 0){
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
@@ -272,11 +272,39 @@ bool DKDuktape::LoadFile(const DKString& path)
 		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
     }
-    duk_pop(ctx);  /* ignore result ?? */
+    //duk_pop(ctx);  /* ignore result ?? */
 
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
 	filelist.push_back(path);
+	return true;
+}
+
+///////////////////////////////////////////////////////////////////////
+bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
+{
+	DKDEBUGFUNC(url, string);
+	if(url.empty()){ return false; }
+	if(string.empty()){ return false; }
+	if(FileLoaded(url)){ return false; } //prevent url from loading twice
+
+	if(has(string,"//BROWSER")){
+		DKINFO("Ignoring: "+url+" is a browser only file. \n");
+		return false;
+	}
+
+	if(duk_peval_string_noresult(ctx, string.c_str()) != 0){
+		DKString error = toString(duk_safe_to_string(ctx, -1));
+		replace(error, "'", "\\'");
+		DKString str = "var err = new Error();";
+		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
+		str += url+"\\n";
+		str += error+"\\n";
+		str += "'+err.stack+'\\n');";
+		duk_eval_string(ctx, str.c_str());
+	}
+
+	filelist.push_back(url);
 	return true;
 }
 

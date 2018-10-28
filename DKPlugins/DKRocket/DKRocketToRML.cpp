@@ -2,6 +2,7 @@
 #include "DK/DKLog.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
+#include "DKCurl/DKCurl.h"
 
 
 //////////////////////////////////////////////////////////////////
@@ -197,17 +198,29 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 
 	// <script> tags
 	//get the path from the url
-	DKString path = DKRocket::Get()->_url;
-	DKDEBUGVARS(path);
+	DKString path = DKRocket::Get()->_url+"/";
 
 	Rocket::Core::ElementList scripts;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
 	for(unsigned int i=0; i<scripts.size(); ++i){
+		if(!scripts[i]->HasAttribute("src")){ continue; }
 		DKString src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
-		DKINFO("scripts["+toString(i)+"].src = "+src+"\n");
+		if(src.empty()){ continue; }
 
-		DKString app = DKFile::local_assets+src;
-		DKDuktape::LoadFile(app);
+		if(has(path, "http://")){
+			DKString js;
+			DKClass::DKCreate("DKCurl");
+			DKDEBUGVARS(path, src);
+			if(!DKCurl::Get()->HttpToString(path+src, js)){
+				DKERROR("HttpToString failed on "+path+src+"\n");
+				continue;
+			}
+			DKDuktape::Get()->LoadJSString(path+src, js);
+		}
+		else{
+			DKString app = DKFile::local_assets+src;
+			DKDuktape::LoadFile(path+app);
+		}
 	}
 	return true;
 }
@@ -217,7 +230,7 @@ bool DKRocketToRML::ResizeIframe(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	DKRocket* dkRocket = DKRocket::Get("");
+	DKRocket* dkRocket = DKRocket::Get();
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
 	Rocket::Core::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
