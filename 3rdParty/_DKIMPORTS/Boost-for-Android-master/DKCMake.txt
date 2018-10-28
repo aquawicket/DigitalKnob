@@ -111,11 +111,20 @@ ENDIF()
 
 ### COMPILE ###
 IF(NOT UNIX)
+IF(ANDROID_32)
 ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a ${ANDROID_NDK}")
+ENDIF()
+IF(ANDROID_64)
+ANDROID_BASH("#!/bin/bash
+cd ${BOOST}
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
+./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --help ${ANDROID_NDK}")
+ENDIF()
 ENDIF()
 
 IF(UNIX)
