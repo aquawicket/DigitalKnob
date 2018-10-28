@@ -195,6 +195,16 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 	}
 
+	// <script> tags
+	Rocket::Core::ElementList scripts;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
+	for(unsigned int i=0; i<scripts.size(); ++i){
+		DKString src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+		DKINFO("scripts["+toString(i)+"].src = "+src+"\n");
+
+		DKString app = DKFile::local_assets+src;
+		DKDuktape::LoadFile(app);
+	}
 	return true;
 }
 
