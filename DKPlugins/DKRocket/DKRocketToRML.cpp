@@ -222,13 +222,13 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			}
 			else{
 				DKString app = DKFile::local_assets+src;
-				DKDuktape::LoadFile(path+app);
+				DKDuktape::LoadFile(app);
 			}
 		}
 		else{
 			if(inner.empty()){ continue; }
-			DKDEBUGVARS(inner);
-			DKDuktape::Get()->LoadJSString("testId", inner);
+			//DKDEBUGVARS(inner);
+			//DKDuktape::Get()->LoadJSString("testId", inner);
 		}
 	}
 	return true;
