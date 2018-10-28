@@ -136,6 +136,8 @@ bool DKRocket::LoadUrl(const DKString& url)
 		return false;
 	}
 
+	DKDEBUGVARS(path);
+
 	if(document){ 
 		Rocket::Core::Factory::ClearStyleSheetCache();
 		document->Close(); 

@@ -46,6 +46,8 @@ bool DKSDLRocket::End()
 bool DKSDLRocket::Handle(SDL_Event *event)
 {
 	//DKDEBUGFUNC(event);
+	if(!dkRocket->document){ return false; }
+
 	Rocket::Core::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:

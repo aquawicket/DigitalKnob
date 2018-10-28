@@ -196,6 +196,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	}
 
 	// <script> tags
+	//get the path from the url
+	DKString path = DKRocket::Get()->_url;
+	DKDEBUGVARS(path);
+
 	Rocket::Core::ElementList scripts;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
 	for(unsigned int i=0; i<scripts.size(); ++i){
