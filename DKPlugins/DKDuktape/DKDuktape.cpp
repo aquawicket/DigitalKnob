@@ -16,7 +16,66 @@ extern int eventloop_run(duk_context *ctx);
 //extern void socket_register(duk_context *ctx);
 //extern void fileio_register(duk_context *ctx);
 
+//////////////////////////////////////////////////////////////////////////////////////////
+const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) 
+{
+	FILE *f = NULL;
+	char *buf;
+	long sz;  /* ANSI C typing */
 
+	if (!path) {
+		goto fail;
+	}
+	f = fopen(path, "rb");
+	if (!f) {
+		goto fail;
+	}
+	if (fseek(f, 0, SEEK_END) < 0) {
+		goto fail;
+	}
+	sz = ftell(f);
+	if (sz < 0) {
+		goto fail;
+	}
+	if (fseek(f, 0, SEEK_SET) < 0) {
+		goto fail;
+	}
+	buf = (char *) duk_push_fixed_buffer(ctx, (duk_size_t) sz);
+	if ((size_t) fread(buf, 1, (size_t) sz, f) != (size_t) sz) {
+		duk_pop(ctx);
+		goto fail;
+	}
+	(void) fclose(f);  /* ignore fclose() error */
+	return duk_buffer_to_string(ctx, -1);
+
+fail:
+	if (f) {
+		(void) fclose(f);  /* ignore fclose() error */
+	}
+
+	if (flags & DUK_STRING_PUSH_SAFE) {
+		duk_push_undefined(ctx);
+	} else {
+		(void) duk_type_error(ctx, "read file error");
+	}
+	return NULL;
+}
+
+////////////////////////////////////////////////////////////
+duk_int_t duk_peval_file(duk_context *ctx, const char *path) 
+{
+	duk_int_t rc;
+
+	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
+	duk_push_string(ctx, path);
+	rc = duk_pcompile(ctx, DUK_COMPILE_EVAL);
+	if (rc != 0) {
+		return rc;
+	}
+	duk_push_global_object(ctx);  /* 'this' binding */
+	rc = duk_pcall_method(ctx, 0);
+	return rc;
+}
 
 //////////////////////
 bool DKDuktape::Init()

@@ -5,7 +5,12 @@
 #include "DK/DK.h"
 
 #include "duktape.h"
-#include "duk_v1_compat.h"
+//#include "duk_v1_compat.h"
+
+/* Flags for duk_push_string_file_raw() */
+#define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */
+const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags);
+duk_int_t duk_peval_file(duk_context *ctx, const char *path);
 
 /////////////////////////////////////////////
 class DKDuktape : public DKObjectT<DKDuktape>
