@@ -3,30 +3,10 @@
 	<head>
 		<meta name="referrer" content="no-referrer"></meta>
 		<meta http-equiv="cache-control" content="no-cache"></meta>
-		<link rel="stylesheet" type="text/css" id="DK/DK.css" href="DK/DK.css"></link>
 		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
 	</head>
 	<body>
-		<script type="text/javascript" id="DK/DKBrowser.js" src="DK/DKBrowser.js"></script>
 		<script type="text/javascript" id="DK/DK.js" src="DK/DK.js"></script>
-		<script id="RunAppOrPlugin">
-			DKCreate("DKFile/DKFile.js", function(){});
-			DKCreate("DKAssets/DKAssets.js", function(){});
-			DKCreate("DKWidget/DKWidget.js", function(){});
-			var url_string = window.location.href;
-			var url = new URL(url_string);
-			if(url.searchParams){
-				var frame = url.searchParams.get("frame");
-				var plugin = url.searchParams.get("plugin");
-				if(plugin){ DKCreate(plugin+".js", function(){
-					if(frame){
-						DKCreate("DKGui/DKFrame.js", function(){
-							DKFrame_Widget(plugin+".html");
-						});
-					}
-				}); }
-			}
-			else{ DKCreate("app.js", function(){}); }
-		</script>
+		<script type="text/javascript" id="app.js" src="app.js"></script>
 	</body>
 </html>
