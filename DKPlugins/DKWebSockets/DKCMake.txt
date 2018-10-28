@@ -1,5 +1,5 @@
 IF(ANDROID)
-	##RETURN()
+	RETURN()
 ENDIF()
 IF(LINUX)
 	##RETURN()
