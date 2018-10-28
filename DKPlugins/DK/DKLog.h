@@ -63,6 +63,7 @@ extern DKString log_hide;
 void Log(const char* file, int line, const char* func, const DKString& text, const int lvl = DK_INFO);
 void SetLog(const int lvl, const DKString& text);
 
+#ifndef ANDROID
 template <typename... Args>
 void DebugFunc(const char* file, int line, const char* func, Args&&... args)
 {
@@ -113,13 +114,19 @@ void DebugVars(const char* file, int line, const char* func, const DKString& nam
 		Log("", 0, "", ss.str(), DK_DEBUG);
 	}
 }
+#endif
 
 //#define DKLOG(...) Log(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
 #define DKINFO(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
 #define DKWARN(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
 #define DKERROR(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);
 #define DKDEBUG(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
-#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
-#define DKDEBUGVARS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
+#ifndef ANDROID
+	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__) //can be no args
+	#define DKDEBUGVARS(...) DebugVars(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__) //must have args
+#else
+	#define DKDEBUGFUNC(...) NULL
+	#define DKDEBUGVARS(...) NULL
+#endif
 
 #endif //DKLog_H
