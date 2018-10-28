@@ -1,6 +1,4 @@
-if(document.location.protocol == "http:"){ //redirect to https
-	window.location.href = "https://"+document.location.hostname+document.location.pathname;
-}
+//This is run from the exe (duktape) at startup 
 
 var USE_CEF     = 0; //Desktop
 var USE_WEBVIEW = 0; //TODO: Android, iOS
@@ -21,24 +19,3 @@ function app_LoadPlugins()
 	DKCreate("DKTray/DKTray.js", function(){});
 	DKCreate("DKDebug/DKDebug.js", function(){});
 }
-
-/*
-///////////////////////
-function app_LoadPage()
-{
-	DKDEBUGFUNC();
-	DKCreate("DKWindow/DKWindow.js", function(){
-	DKCreate("DKScale/DKScale.js", function(){
-	DKCreate("DKGui/DKFrame.js", function(){
-	DKCreate("DKGui/DKMenu.js", function(){
-	DKCreate("DKDebug/DKDebug.js", function(){
-	DKCreate("DKEditor/DKEditor.js", function(){
-		
-	});
-	});
-	});
-	});
-	});
-	});
-}
-*/
