@@ -18,15 +18,15 @@ public:
 
 	bool LoadFont(const DKString& file);
 	bool LoadFonts();
-	bool LoadGui(const DKString& file);
+	bool LoadUrl(const DKString& url);
 	bool RegisterEvent(const DKString& id, const DKString& type);
 	bool Reload();
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	bool ToggleDebugger();
-	bool UnregisterEvent(const DKString& id, const DKString& type);
-	
+	bool UnregisterEvent(const DKString& id, const DKString& type);	
 	void ProcessEvent(Rocket::Core::Event& event); //overwritten 
 
+	DKString _url;
 	Rocket::Core::Context* context;
 	Rocket::Core::ElementDocument* document;
 	static DKRocketFile* dkRocketFile;

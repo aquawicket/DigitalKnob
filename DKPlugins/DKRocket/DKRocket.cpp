@@ -60,7 +60,7 @@ bool DKRocket::Init()
 	DKEvent::AddUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
 
-	//LoadGui("index.html");
+	//LoadUrl("index.html");
 	return true;
 }
 
@@ -127,10 +127,10 @@ bool DKRocket::LoadFonts()
 }
 
 ////////////////////////////////////////////
-bool DKRocket::LoadGui(const DKString& file)
+bool DKRocket::LoadUrl(const DKString& url)
 {
-	DKDEBUGFUNC(file);
-	DKString path = file;
+	DKDEBUGFUNC(url);
+	DKString path = url;
 	if(!DKFile::VerifyPath(path)){
 		DKERROR("DKOSGRocket::LoadGui() "+path+" not found!\n");
 		return false;
@@ -160,15 +160,14 @@ bool DKRocket::LoadGui(const DKString& file)
 
 	document->Show();
 	document->RemoveReference();
-
 	dkRocketToRml->PostProcess(document);
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
-	DKINFO("Loading GUI...\n");
-	//DKCreate("DKLoading.js");
+
+	_url = path;
 	return true;
 }
 
@@ -211,7 +210,7 @@ bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 bool DKRocket::Reload()
 {
 	DKDEBUGFUNC();
-	return LoadGui("index.html");
+	return LoadUrl("index.html");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
