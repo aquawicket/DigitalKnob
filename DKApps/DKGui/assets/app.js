@@ -1,7 +1,7 @@
-var USE_CEF     = 0; //Desktop
+var USE_CEF     = 1; //Desktop
 var USE_WEBVIEW = 0; //TODO: Android, iOS
 var USE_SDL     = 0; //Use with caution
-var USE_ROCKET  = 1; //Use with caution
+var USE_ROCKET  = 0; //Use with caution
 var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html";
 //var DKApp_url = "http://google.com";
 //var DKApp_url   = "file:///"+DKAssets_LocalAssets()+"index.html?plugin=DKNotepad/DKNotepad.js";
@@ -22,8 +22,25 @@ function app_LoadPlugins()
 function app_LoadPage()
 {
 	DKDEBUGFUNC();
+	if(typeof window == "object"){
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var frame = url.searchParams.get("frame");
+	var plugin = url.searchParams.get("plugin");
+	if(plugin){ DKCreate(plugin+".js", function(){
+		if(frame){
+			DKCreate("DKGui/DKFrame.js", function(){
+				DKFrame_Widget(plugin+".html");
+			});
+		}
+	}); 
+	}
+	}
+					
 	DKCreate("DK/DKBrowser.css");
+	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKWindow/DKWindow.js", function(){
+	DKCreate("DKWidget/DKWidget.js", function(){
 	DKCreate("DKDom/DKDom.js", function(){
 	DKCreate("DKScale/DKScale.js", function(){
 	DKCreate("DKGui/DKFrame.js", function(){
@@ -32,6 +49,8 @@ function app_LoadPage()
 	DKCreate("DKGui/Desktop.js", function(){
 	DKCreate("DKGui/Taskbar.js", function(){
 	
+	});
+	});
 	});
 	});
 	});
