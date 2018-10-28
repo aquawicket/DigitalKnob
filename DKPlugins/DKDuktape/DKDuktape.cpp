@@ -260,8 +260,8 @@ bool DKDuktape::LoadFile(const DKString& path)
 		return false;
 	}
 
-	//if(duk_peval_file(ctx, path.c_str()) != 0){
-	if(duk_peval_string_noresult(ctx, js.c_str()) != 0){
+	if(duk_peval_file(ctx, path.c_str()) != 0){
+	//if(duk_peval_string_noresult(ctx, js.c_str()) != 0){
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
@@ -271,7 +271,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
     }
-    //duk_pop(ctx);  /* ignore result ?? */
+    duk_pop(ctx);  /* ignore result ?? */
 
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
