@@ -7,42 +7,20 @@ LOCAL_ARM_NEON := true
 endif
 
 LOCAL_SRC_FILES:= \
-	../../../src/base/ftbbox.c \
-	../../../src/base/ftbitmap.c \
-	../../../src/base/ftglyph.c \
-	../../../src/base/ftstroke.c \
-	../../../src/base/ftxf86.c \
-	../../../src/base/ftbase.c \
-	../../../src/base/ftsystem.c \
-	../../../src/base/ftinit.c \
-	../../../src/base/ftgasp.c \
-	../../../src/raster/raster.c \
-	../../../src/sfnt/sfnt.c \
-	../../../src/smooth/smooth.c \
-	../../../src/autofit/autofit.c \
-	../../../src/truetype/truetype.c \
-	../../../src/cff/cff.c \
-	../../../src/psnames/psnames.c \
-	../../../src/pshinter/pshinter.c \
-	../../../src/type1/type1.c \
-	../../../src/cid/type1cid.c \
-	../../../src/pfr/pfr.c \
-	../../../src/type42/type42.c \
-	../../../src/winfonts/winfnt.c \
-	../../../src/pcf/pcf.c \
-	../../../src/psaux/psaux.c \
-	../../../src/bdf/bdf.c	\
-	../../../src/gzip/ftgzip.c \
-	../../../src/lzw/ftlzw.c
+	../../../src/Extensions.cpp \
+	../../../src/Group.cpp \
+	../../../src/HTTPSocket.cpp \
+	../../../src/Hub.cpp \
+	../../../src/Networking.cpp \
+	../../../src/Node.cpp \
+	../../../src/Socket.cpp \
+	../../../src/WebSocket.cpp
 	
-
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../../../builds \
-	$(LOCAL_PATH)/../../../include
+	$(LOCAL_PATH)/../../../src
 
 LOCAL_CFLAGS += -W -Wall
 LOCAL_CFLAGS += -fPIC -DPIC
-LOCAL_CFLAGS += "-DDARWIN_NO_CARBON"
 
 LOCAL_CFLAGS += -O2
 

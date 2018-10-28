@@ -16,8 +16,8 @@ IOSSIM_DEBUG_LIB(${UWEBSOCKETS}/${OS}/${DEBUG}/lib/.libs/uWS.a)
 IOSSIM_RELEASE_LIB(${UWEBSOCKETS}/${OS}/${RELEASE}/lib/.libs/uWS.a)
 LINUX_DEBUG_LIB(${UWEBSOCKETS}/${OS}/Debug/uWS.a)
 LINUX_RELEASE_LIB(${UWEBSOCKETS}/${OS}/Release/uWS.a)
-##ANDROID_DEBUG_LIB(${UWEBSOCKETS}/${OS}/Debug/obj/local/armeabi-v7a/uWS.a)
-##ANDROID_RELEASE_LIB(${UWEBSOCKETS}/${OS}/Release/obj/local/armeabi-v7a/uWS.a)
+ANDROID_DEBUG_LIB(${UWEBSOCKETS}/${OS}/Debug/obj/local/armeabi-v7a/uWS.a)
+ANDROID_RELEASE_LIB(${UWEBSOCKETS}/${OS}/Release/obj/local/armeabi-v7a/uWS.a)
 
 
 
@@ -54,5 +54,5 @@ DKSETPATH(${UWEBSOCKETS}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${UWEBSOCKETS})
 LINUX_RELEASE_COMMAND(make uWebSockets)
 
-##ANDROID_NDK_DEBUG(uWebSockets-master)
-##ANDROID_NDK_RELEASE(uWebSockets-master)
+ANDROID_NDK_DEBUG(uWebSockets-master)
+ANDROID_NDK_RELEASE(uWebSockets-master)
