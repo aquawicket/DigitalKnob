@@ -203,23 +203,32 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	Rocket::Core::ElementList scripts;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
 	for(unsigned int i=0; i<scripts.size(); ++i){
-		if(!scripts[i]->HasAttribute("src")){ continue; }
-		DKString src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
-		if(src.empty()){ continue; }
+		DKString src;
+		if(scripts[i]->HasAttribute("src")){
+			src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
+		}
+		DKString inner = scripts[i]->GetInnerRML().CString();
 
-		if(has(path, "http://")){
-			DKString js;
-			DKClass::DKCreate("DKCurl");
-			DKDEBUGVARS(path, src);
-			if(!DKCurl::Get()->HttpToString(path+src, js)){
-				DKERROR("HttpToString failed on "+path+src+"\n");
-				continue;
+		if(!src.empty()){
+			if(has(path, "http://")){
+				DKString js;
+				DKClass::DKCreate("DKCurl");
+				DKDEBUGVARS(path, src);
+					if(!DKCurl::Get()->HttpToString(path+src, js)){
+						DKERROR("HttpToString failed on "+path+src+"\n");
+						continue;
+					}
+					DKDuktape::Get()->LoadJSString(path+src, js);
 			}
-			DKDuktape::Get()->LoadJSString(path+src, js);
+			else{
+				DKString app = DKFile::local_assets+src;
+				DKDuktape::LoadFile(path+app);
+			}
 		}
 		else{
-			DKString app = DKFile::local_assets+src;
-			DKDuktape::LoadFile(path+app);
+			if(inner.empty()){ continue; }
+			DKDEBUGVARS(inner);
+			DKDuktape::Get()->LoadJSString("testId", inner);
 		}
 	}
 	return true;
