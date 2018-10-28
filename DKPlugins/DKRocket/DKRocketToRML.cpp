@@ -3,7 +3,7 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 #include "DKCurl/DKCurl.h"
-
+#include "DKRocket/DKRocket.h"
 
 //////////////////////////////////////////////////////////////////
 bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
@@ -125,6 +125,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
+	processed;
 	if(!element){
 		DKWARN("DKRocketToRML::PostProcess(): element invalid\n");
 		return false;
@@ -136,6 +137,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes()){ continue; }
 		DKString id = iframes[i]->GetId().CString();
+		if(has(processed, id)){ continue; }
 		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
 		DKString iWidth = toString(iframes[i]->GetClientWidth());
@@ -151,9 +153,9 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 		
 		DKClass::DKCreate("DKCef");
-		DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
-		DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::MouseOverIframe, this);
-		DKEvent::AddEvent(id, "click", &DKRocketToRML::ClickIframe, this);
+		//DKEvent::AddEvent(id, "resize", &DKRocketToRML::ResizeIframe, this);
+		//DKEvent::AddEvent(id, "mouseover", &DKRocketToRML::MouseOverIframe, this);
+		//DKEvent::AddEvent(id, "click", &DKRocketToRML::ClickIframe, this);
 
 		Rocket::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
 		DKString cef_id = "iframe_"+id;
@@ -168,6 +170,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
+		processed += id+",";
 	}
 
 	// <a> tags with href attribute
@@ -178,7 +181,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId().CString();
-			DKEvent::AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
+			//DKEvent::AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
 		}
 	}
 
@@ -202,11 +205,12 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 
 	Rocket::Core::ElementList scripts;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
-	for(unsigned int i=0; i<scripts.size(); ++i){
+	for(unsigned int i=0; i<scripts.size(); i++){
 		DKString src;
 		if(scripts[i]->HasAttribute("src")){
 			src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
 		}
+		if(has(processed, src)){ continue; }
 		DKString inner = scripts[i]->GetInnerRML().CString();
 
 		if(!src.empty()){
@@ -218,10 +222,14 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 						DKERROR("HttpToString failed on "+path+src+"\n");
 						continue;
 					}
+					processed += src+",";
 					DKDuktape::Get()->LoadJSString(path+src, js);
+					//DKDuktape::Get()->QueueUrl(path+src, js);
 			}
 			else{
+				processed += src+",";
 				DKString app = DKFile::local_assets+src;
+				//DKDuktape::Get()->QueueFile(app);
 				DKDuktape::LoadFile(app);
 			}
 		}
@@ -231,6 +239,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			//DKDuktape::Get()->LoadJSString("testId", inner);
 		}
 	}
+
 	return true;
 }
 

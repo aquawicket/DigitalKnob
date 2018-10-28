@@ -8,6 +8,7 @@
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKRocket/DKRocketFile.h"
+#include "DKRocket/DKRocketToRML.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 class DKRocket : public Rocket::Core::EventListener, public DKObjectT<DKRocket>
@@ -31,6 +32,8 @@ public:
 	Rocket::Core::ElementDocument* document;
 	static DKRocketFile* dkRocketFile;
 	Rocket::Core::Element* hover;
+
+	DKRocketToRML dkRocketToRML;
 };
 
 REGISTER_OBJECT(DKRocket, true)

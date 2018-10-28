@@ -1,7 +1,6 @@
 #include "DK/stdafx.h"
 #include <Rocket/Debugger/Debugger.h>
 #include "DKRocket/DKRocket.h"
-#include "DKRocket/DKRocketToRML.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
 
@@ -14,6 +13,7 @@ bool DKRocket::Init()
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRocketJS");
 	DKClass::DKCreate("DKRocketV8");
+	//dkRocketToRML = new DKRocketToRML();
 	document = NULL;
 
 	if(!dkRocketFile){ 
@@ -158,8 +158,8 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	//// Prepair the html document for rocket
 	DKString rml;
-	DKRocketToRML* dkRocketToRml = new DKRocketToRML();
-	dkRocketToRml->IndexToRml(html, rml);
+	//DKRocketToRML* dkRocketToRml = new DKRocketToRML();
+	dkRocketToRML.IndexToRml(html, rml);
 
 	//// Clear any document and load the rml into the document
 	if(document){ 
@@ -175,7 +175,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	document->RemoveReference();
 
 	_url = path;
-	dkRocketToRml->PostProcess(document);
+	dkRocketToRML.PostProcess(document);
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID

@@ -5,7 +5,6 @@
 duk_context* DKDuktape::ctx = NULL;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
-
 DKStringArray DKDuktape::codeToRun;
 
 int DKDuktape::c_evloop = 0;
@@ -280,7 +279,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 {
 	DKDEBUGFUNC(url, string);
@@ -440,6 +439,7 @@ bool DKDuktape::QueueDuktape(const DKString& code)
 	codeToRun.push_back(code);
 	return true;
 }
+
 
 
 //////////////////////////////////////////////////////////////////

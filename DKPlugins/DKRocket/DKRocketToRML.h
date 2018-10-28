@@ -3,17 +3,20 @@
 #define DKRocketToRML_H
 
 #include "DK/DK.h"
-#include "DKRocket/DKRocket.h"
+#include <Rocket/Core/Core.h>
+#include <Rocket/Controls/Controls.h>
+#include <Rocket/Core/ElementUtilities.h>
 
-/////////////////////////////////////////////////////
-class DKRocketToRML : public DKObjectT<DKRocketToRML>
+///////////////////
+class DKRocketToRML
 {
 public:
+	DKString processed;
 	bool HtmlToRml(const DKString& html, DKString& rml);
 	bool Hyperlink(DKEvent* event);
 	bool IndexToRml(const DKString& html, DKString& rml);
 	bool PostProcess(Rocket::Core::Element* element);
-	bool ResizeIframe(DKEvent* event);
+	static bool ResizeIframe(DKEvent* event);
 	bool ClickIframe(DKEvent* event);
 	bool MouseOverIframe(DKEvent* event);
 };

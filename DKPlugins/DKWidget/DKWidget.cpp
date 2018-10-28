@@ -116,8 +116,8 @@ bool DKWidget::CreateWidget(DKString& file)
 
 	//Prep the string into rocket compatible code
 	DKString rml;
-	DKRocketToRML dkRocketToRML;
-	if(!dkRocketToRML.HtmlToRml(html, rml)){
+	//DKRocketToRML dkRocketToRML;
+	if(!dkRocket->dkRocketToRML.HtmlToRml(html, rml)){
 		return false;
 	}
 
@@ -165,7 +165,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	Trim(id);
 	root = dkRocket->document->GetElementById(_id.c_str());
 
-	dkRocketToRML.PostProcess(root);
+	dkRocket->dkRocketToRML.PostProcess(root);
 
 	AttachEvents();
 	AttachDrags();
@@ -392,8 +392,8 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 	SetAttribute(element, "id", ele_id);
 	AppendChild(parent, element);
 
-	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(GetElementById(parent));
+	//DKRocketToRML dkRocketToRML;
+	dkRocket->dkRocketToRML.PostProcess(GetElementById(parent));
 
 	return ele_id;
 }
@@ -410,8 +410,8 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 	SetAttribute(element, "id", ele_id);
 	PrependChild(GetElementById(parent), element);
 
-	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(GetElementById(parent));
+	//DKRocketToRML dkRocketToRML;
+	dkRocket->dkRocketToRML.PostProcess(GetElementById(parent));
 
 	return ele_id;
 }
@@ -428,8 +428,8 @@ DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& 
 	SetAttribute(ele, "id", ele_id);
 	InsertBefore(element, ele);
 
-	DKRocketToRML dkRocketToRML;
-	dkRocketToRML.PostProcess(ele->GetParentNode());
+	//DKRocketToRML dkRocketToRML;
+	dkRocket->dkRocketToRML.PostProcess(ele->GetParentNode());
 
 	return ele_id;
 }
@@ -1061,8 +1061,8 @@ bool DKWidget::SetAttribute(DKElement* element, const DKString& name, const DKSt
 	}
 
 	if(same(name,"src")){
-		DKRocketToRML dkRocketToRML;
-		dkRocketToRML.PostProcess(element->GetParentNode());
+		//DKRocketToRML dkRocketToRML;
+		dkRocket->dkRocketToRML.PostProcess(element->GetParentNode());
 	}
 	return true;
 }
