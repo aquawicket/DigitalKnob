@@ -97,6 +97,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	if(!xml.FindNode("//head")){
 		xml.PrependNode("//rml", "head");
 	}
+	
 	if (!xml.FindNode("//body")) {
 		DKERROR("No body tag\n");
 		xml.PrependNode("//html", "body");
@@ -113,6 +114,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	xml.PrependNode("//body", "html"); 
 
 	xml.SetAttributes("//body","id","body");
+	//xml.SetAttributes("//head","id","head");
 	xml.SetAttributes("//html","id","html");
 
 	xml.SaveDocumentToString(rml);

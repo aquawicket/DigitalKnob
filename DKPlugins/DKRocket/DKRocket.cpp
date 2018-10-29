@@ -4,6 +4,7 @@
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
 #include "DKDuktape/DKDuktape.h"
+#include "DKXml/DKXml.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
@@ -177,6 +178,18 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	//Set up the dom
 	DKClass::DKCreate("DKRocket/DKDom.js");
+
+	//get the html node
+	DKXml xml;
+	if(!xml.LoadDocumentFromString(rml)){ return false; }
+	DKString head_tag;
+	xml.GetFullNode("//head", head_tag);
+	replace(head_tag, "<head>", "");
+	replace(head_tag, "</head>", "");
+	Rocket::Core::Element* html_tag = document->GetFirstChild();
+	Rocket::Core::Element* head = document->CreateElement("head");
+	head->SetInnerRML(head_tag.c_str());
+	html_tag->AppendChild(head, true);
 
 	_url = path;
 	dkRocketToRML.PostProcess(document);

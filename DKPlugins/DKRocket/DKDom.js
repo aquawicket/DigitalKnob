@@ -208,7 +208,7 @@ function DKDom_Create(event)
 			},
 			get: function(targ, key, recv){
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
-				if(key == "innerHTML"){ 
+				if(key == "innerHTML"){
 					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 				}
 				else if(key == "parentNode"){
