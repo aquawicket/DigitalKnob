@@ -1,8 +1,9 @@
+//https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
+
 var window;
 var document;
 var location;
 var screen;
-var poin;
 
 /////////////////////
 function DKDom_Init()
@@ -126,7 +127,13 @@ function DKDom_Create(event)
 		
 		Document.prototype.createElement = function(tag){
 			var pointer = DKRocket_createElement(tag);
-			var element = new Element(pointer);
+			var element;
+			if(tag == "script"){
+				element = new Script(pointer);
+			}
+			else{
+				element = new Element(pointer);
+			}
 			return element;
 		}
 		
@@ -272,22 +279,14 @@ function DKDom_Create(event)
 			},
 			get: function (targ, key, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
-				if(key == "backgroundColor"){
-					targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color");
-				}
-				else{
-					targ[key] = DKRocket_getPropertyValue(targ["pointer"], key);
-				}
+				if(key == "backgroundColor"){ targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color"); }
+				else{ targ[key] = DKRocket_getPropertyValue(targ["pointer"], key); }
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
-				if(key == "backgroundColor"){
-					DKRocket_setProperty(targ["pointer"], "background-color", val);
-				}
-				else{
-					DKRocket_setProperty(targ["pointer"], key, val);
-				}
+				if(key == "backgroundColor"){ DKRocket_setProperty(targ["pointer"], "background-color", val); }
+				else{ DKRocket_setProperty(targ["pointer"], key, val); }
 				targ[key] = val;
 				return true;
 			},
@@ -297,6 +296,40 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	
+	
+	
+	////////////////////////
+	function Script(pointer)
+	{
+		DKDEBUGFUNC();
+		//this.prototype = new Element();
+		Element.call(this, pointer);
+		this.pointer = pointer;
+		
+		/*
+		return new Proxy(this, {
+			has: function (targ, key){
+				return key in targ;
+			},
+			get: function (targ, key, recv){
+				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+				return targ[key];
+			},
+			set: function (targ, key, val, recv){
+				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+				targ[key] = val;
+				return true;
+			},
+			deleteProperty: function (targ, key){
+				delete targ[key];
+				return true;
+			}
+		});
+		*/
+	}
+	
+	Script.prototype = new Element();
 	
 	window = new Window();
 }
