@@ -8,10 +8,12 @@ body
 {
 	font-family: "Times New Roman";
 	/*font-size: 1px;*/
+	/*font-size: 134%;*/
 	color: black;
-	height: 100%;
-	padding-left: 8px;
-	padding-right: 8px;
+	/* height: 100%; */
+	/* padding-left: 8px; */
+	/* padding-right: 8px; */
+	margin: 8px;
 	display: block;
 }
 
@@ -115,9 +117,9 @@ dataselect selectbox option
 button
 {
 	color: black;
-	width: 21rem;
-	height: 20rem;
-	padding-top:2rem;
+	width: 50px;
+	/* height: 20rem; */
+	/* padding-top:2rem; */
 	text-align: center;
 	
 	background-decorator: tiled-horizontal;

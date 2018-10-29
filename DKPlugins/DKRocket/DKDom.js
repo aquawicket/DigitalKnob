@@ -4,6 +4,7 @@ var window;
 var document;
 var location;
 var screen;
+var console;
 
 /////////////////////
 function DKDom_Init()
@@ -30,6 +31,16 @@ function DKDom_OnEvent(event)
 function DKDom_Create(event)
 {
 	DKDEBUGFUNC();
+	
+	//////////////////
+	function Console()
+	{
+		DKDEBUGFUNC();
+		Console.prototype.log = function(str){
+			DKINFO(str);
+		}
+	}
+	
 	/////////////////
 	function Window()
 	{
@@ -332,6 +343,7 @@ function DKDom_Create(event)
 	Script.prototype = new Element();
 	
 	window = new Window();
+	console = new Console();
 }
 
 /////////////////////
