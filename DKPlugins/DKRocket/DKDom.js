@@ -12,7 +12,6 @@ function DKDom_Init()
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }  //This class is a wrapper for libRocket only
 	DKDom_Create();
-	//DKDom_Test();
 }
 
 ////////////////////
@@ -233,11 +232,13 @@ function DKDom_Create(event)
 
 		Element.prototype.appendChild = function(element){
 			var pointer = DKRocket_appendChild(this.pointer, element.pointer);
+			if(!pointer){ return; }
 			var element = new Element(pointer);
 			return element;
 		}
 		Element.prototype.getAttribute = function(attribute){
 			this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
+			if(!this[attribute]){ return null; }
 			return this[attribute];
 		}
 		Element.prototype.hasAttribute = function(attribute){
@@ -246,6 +247,7 @@ function DKDom_Create(event)
 		}
 		Element.prototype.removeChild = function(element){
 			var pointer = DKRocket_removeChild(this.pointer, element.pointer);
+			if(!pointer){ return null; }
 			var element = new Element(pointer);
 			return element;
 		}
@@ -254,7 +256,7 @@ function DKDom_Create(event)
 			this[attribute] = value;
 		}
 		Element.prototype.toString = function(){
-			DKINFO("element.toString()\n");
+			DKERROR("Element.toString() is not implemented\n");
 		}
 		
 		return new Proxy(this, {
@@ -368,58 +370,4 @@ function DKDom_Create(event)
 	
 	window = new Window();
 	console = new Console();
-}
-
-/////////////////////
-function DKDom_Test()
-{
-	DKDEBUGFUNC();
-	DKINFO("\n");
-	//window tests
-	DKINFO("##### window tests #####\n");
-	window.alert("test");
-	DKINFO("window.innerHeight: "+window.innerHeight+"\n");
-	DKINFO("window.innerWidth: "+window.innerWidth+"\n");
-	DKINFO("window.name: "+window.name+"\n");
-	DKINFO("\n");
-
-	//document tests
-	DKINFO("##### document tests #####\n");
-	document.name = "test_doc_name";
-	DKINFO("document.name: "+document.name+"\n");
-	var nodeList = document.getElementsByTagName("body");
-	DKINFO("nodeList.length: "+nodeList.length+"\n");
-	DKINFO("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
-	
-	//TODO - we need to be able to set the innerHTML too
-	nodeList[0].innerHTML = "<div>This was replaced</div>";
-	DKINFO("nodeList[0].innerHTML: "+nodeList[0].innerHTML+"\n");
-	
-	/*
-	var nodeList = document.getElementsByTagName("div");
-	//DKINFO("nodelist.length: "+nodeList.length+"\n");
-	for(var i=0; i<nodeList.length; i++){
-		DKINFO(nodeList[i]+'\n');
-	}
-	*/
-	DKINFO("\n");
-	
-	/*
-	//element tests 
-	DKINFO("##### element tests #####\n");
-	var element = document.getElementById("BugReport_Image");
-	DKINFO("element.id: "+element.id+"\n");
-	DKINFO("element.hasAttribute(id): "+element.hasAttribute("id")+"\n");
-	element.setAttribute("test", "http://digitalknob.com/image.png");
-	DKINFO("element.getAttribute(test): "+element.getAttribute("test")+"\n");
-	DKINFO("\n");
-	
-	//style tests
-	DKINFO("##### style tests #####\n");
-	DKINFO("element.style.width: "+element.style.width+"\n");
-	DKINFO("element.style.height: "+element.style.height+"\n");
-	element.style.setProperty("position", "relative");
-	DKINFO("element.style.getPropertyValue(position): "+element.style.getPropertyValue("position")+"\n");
-	DKINFO("\n");
-	*/
 }
