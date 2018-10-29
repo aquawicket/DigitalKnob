@@ -23,6 +23,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_getPropertyValue", DKRocketJS::getPropertyValue);
 	DKDuktape::AttachFunction("DKRocket_innerHTML", DKRocketJS::innerHTML);
 	DKDuktape::AttachFunction("DKRocket_setInnerHTML", DKRocketJS::setInnerHTML);
+	DKDuktape::AttachFunction("DKRocket_parentNode", DKRocketJS::parentNode);
 	return true;
 }
 
@@ -319,11 +320,36 @@ int DKRocketJS::setInnerHTML(duk_context* ctx)
 	DKString innerHTML = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKERROR("DKRocketJS::innerHTML(): element invalid\n");
+		DKERROR("DKRocketJS::setInnerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	element->SetInnerRML(innerHTML.c_str());
+	return true;
+}
+
+////////////////////////////////////////////
+int DKRocketJS::parentNode(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::parentNode(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rocket::Core::Element* parentNode = element->GetParentNode();
+	if(!parentNode){
+		DKERROR("DKRocketJS::parentNode(): parentNode invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	const void* parentAddress = static_cast<const void*>(parentNode);
+	std::stringstream ss;
+	ss << parentAddress;  
+	DKString str = ss.str(); 
+	duk_push_string(ctx, str.c_str());
 	return true;
 }
 

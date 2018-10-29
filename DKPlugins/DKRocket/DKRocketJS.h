@@ -31,6 +31,7 @@ public:
 	static int setAttribute(duk_context* ctx);
 	static int innerHTML(duk_context* ctx);
 	static int setInnerHTML(duk_context* ctx);
+	static int parentNode(duk_context* ctx);
 
 	//style
 	static int setProperty(duk_context* ctx);

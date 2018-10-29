@@ -52,11 +52,6 @@ if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can suppo
 		DKWindow_Create();
 		DKCreate("DKRocket");
 		DKRocket_LoadUrl("index.html");
-		DKCreate("DKDom/DKDom.js");
-		//DKCreate("DKWidget");
-		//if(typeof app_LoadPage === "function"){
-		//	app_LoadPage();
-		//}
 	}
 	else if(USE_SDL && USE_CEF){
 		DKINFO("Creating SDL -> CEF -> GUI\n");

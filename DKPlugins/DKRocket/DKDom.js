@@ -124,12 +124,6 @@ function DKDom_Create(event)
 	{
 		DKDEBUGFUNC();
 		
-		//create document.body
-		var bodyList = DKRocket_getElementsByTagName("body");
-		if(!bodyList){ return; }
-		var arry = bodyList.split(",");
-		this.body = new Element(arry[0]);
-		
 		Document.prototype.getElementById = function(id){
 			var pointer = DKRocket_getElementById(id);
 			var element = new Element(pointer);
@@ -163,6 +157,12 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function (targ, key, recv){
+				if(key == "body"){ 
+					var bodyList = DKRocket_getElementsByTagName("body");
+					if(!bodyList){ return; }
+					var arry = bodyList.split(",");
+					targ[key] = new Element(arry[0]);
+				}
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
@@ -181,7 +181,6 @@ function DKDom_Create(event)
 	{
 		DKDEBUGFUNC();
 		this.pointer = pointer;
-		//DKINFO("this.pointer = "+this.pointer+"\n")
 		this.style = new Style(pointer);
 
 		Element.prototype.getAttribute = function(attribute){
@@ -205,15 +204,15 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function(targ, key, recv){
-				//DKINFO("Element(): get:("+key+")\n");
-				//DKINFO("targ[pointer]: "+targ["pointer"]+"\n");
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
 				if(key == "innerHTML"){ 
 					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 				}
+				else if(key == "parentNode"){
+					var parentNode = DKRocket_parentNode(targ["pointer"], key);
+					targ[key] = new Element(parentNode);
+				}
 				else{
-					//DKINFO("targ[key]: "+targ[key]+"\n")
-					//DKINFO("targ[pointer]: "+targ["pointer"]+"\n")
 					targ[key] = DKRocket_getAttribute(targ["pointer"], key); 
 				}
 				return targ[key];
@@ -221,9 +220,6 @@ function DKDom_Create(event)
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
 				if(key == "innerHTML"){
-					//DKINFO("targ[pointer]: "+targ["pointer"]+"\n")
-					//DKINFO("key: "+key+"\n")
-					//DKINFO("val: "+val+"\n")
 					DKRocket_setInnerHTML(targ["pointer"], val);
 				}
 				else{
