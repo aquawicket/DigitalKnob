@@ -289,14 +289,10 @@ int DKRocketJS::setProperty(duk_context* ctx)
 	DKString propertyName = duk_require_string(ctx, 1);
 	DKString propertyValue = duk_require_string(ctx, 2);
 	//DKString priority = duk_require_string(ctx, 3); //TODO
-
 	Rocket::Core::Element* element = getElementByAddress(address);
-	if(!element){
-		DKERROR("DKRocketJS::setProperty(): element invalid\n");
-		duk_push_boolean(ctx, false);
-		return true;
+	if(element){
+		element->SetProperty(propertyName.c_str(), propertyValue.c_str());
 	}
-	element->SetProperty(propertyName.c_str(), propertyValue.c_str());
 	return true;
 }
 
