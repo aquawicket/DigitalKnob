@@ -1,5 +1,0 @@
-http://stackoverflow.com/questions/36968914/duktape-exposing-a-c-object-methods-properties
-https://github.com/svaarala/duktape-wiki/blob/master/HowtoNativeConstructor.md
-http://stackoverflow.com/questions/30296953/export-c-class-to-duktape
-http://git.netsurf-browser.org/netsurf.git/plain/javascript/duktape/
-http://wiki.duktape.org/HowtoVirtualProperties.html
