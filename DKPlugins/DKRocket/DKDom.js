@@ -191,7 +191,7 @@ function DKDom_Create(event)
 		
 		Document.prototype.getElementsByTagName = function(name){
 			var addressList = DKRocket_getElementsByTagName(name);
-			if(!addressList){ return; }
+			if(!addressList){ return []; }
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){

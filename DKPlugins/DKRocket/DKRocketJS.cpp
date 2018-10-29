@@ -203,6 +203,10 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	if(same(name, "body")){
 		elements.push_back(DKRocket::Get()->document); //body tag
 	}
+	if(elements.empty()){
+		duk_push_null(ctx);
+		return true;
+	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
 		const void * address = static_cast<const void*>(elements[i]);
