@@ -1,5 +1,5 @@
 DKDEPEND(DKDuktape)
-DKDEPEND(DKRocket)
+##DKDEPEND(DKRocket)
 DKDEPEND(DKWidget)
 
 DKPLUGIN(DKDom)

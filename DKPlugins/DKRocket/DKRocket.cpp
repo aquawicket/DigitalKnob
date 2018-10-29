@@ -3,6 +3,7 @@
 #include "DKRocket/DKRocket.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
+#include "DKDuktape/DKDuktape.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
@@ -173,6 +174,9 @@ bool DKRocket::LoadUrl(const DKString& url)
 	}
 	document->Show();
 	document->RemoveReference();
+
+	//Set up the dom
+	DKClass::DKCreate("DKRocket/DKDom.js");
 
 	_url = path;
 	dkRocketToRML.PostProcess(document);
