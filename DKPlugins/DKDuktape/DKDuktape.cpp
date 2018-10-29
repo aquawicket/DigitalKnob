@@ -256,8 +256,8 @@ bool DKDuktape::LoadFile(const DKString& path)
 	DKString js;
 	DKFile::FileToString(path, js);
 	if(has(js,"//BROWSER")){
-		DKINFO("Ignoring: "+path+" is a browser only file. \n");
-		return false;
+		DKWARN("Ignoring: "+path+" is a browser only file. \n");
+		return true;
 	}
 
 	if(duk_peval_file(ctx, path.c_str()) != 0){
