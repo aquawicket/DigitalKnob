@@ -1,4 +1,5 @@
 DKDEPEND(libRocket-master)
+DKDEPEND(DKCurl)
 DKDEPEND(DKFile)
 DKDEPEND(DKWindow)
 DKDEPEND(DKXml)
