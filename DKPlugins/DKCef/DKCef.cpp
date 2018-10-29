@@ -606,7 +606,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
-		SetFocus(dkBrowsers.size()-1);
+		//SetFocus(dkBrowsers.size()-1);
 
 		//Set Icon
 		DKString icon = DKFile::local_assets+"icon.ico";
