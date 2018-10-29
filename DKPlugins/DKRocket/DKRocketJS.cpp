@@ -173,7 +173,10 @@ int DKRocketJS::getElementsByClassName(duk_context* ctx)
 	DKString name = duk_require_string(ctx, 0);
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByClassName(elements, name.c_str());
-	if(elements.empty()){ return true; }
+	if(elements.empty()){
+		duk_push_null(ctx);
+		return true;
+	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
 		const void * address = static_cast<const void*>(elements[i]);

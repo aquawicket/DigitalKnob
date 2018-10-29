@@ -53,12 +53,6 @@ function DKDom_Create(event)
 			DKINFO(str+"\n");
 		}
 		Console.prototype.log = function(str){
-			/*
-			if(str == null){
-				DKINFO("str == null\n\n");
-			}
-			//if(typeof str = "null"){ str = "null"; }
-			*/
 			DKINFO(str+"\n");
 		}
 		Console.prototype.trace = function(){
@@ -185,11 +179,12 @@ function DKDom_Create(event)
 		
 		Document.prototype.getElementsByClassName = function(name){
 			var addressList = DKRocket_getElementsByClassName(name);
+			if(!addressList){ return []; }
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
 				DKINFO("arry["+i+"]: "+arry[i]+"\n")
-				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
+				nodeList.push(new Element(arry[i]))
 			}
 			return nodeList;
 		}
@@ -200,7 +195,7 @@ function DKDom_Create(event)
 			var arry = addressList.split(",");
 			var nodeList = [];
 			for(var i=0; i<arry.length; i++){
-				nodeList.push(new Element(arry[i])) //Will these duplicate and grow memory usage?
+				nodeList.push(new Element(arry[i]))
 			}
 			return nodeList;
 		}
