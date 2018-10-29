@@ -191,6 +191,9 @@ function DKDom_Create(event)
 			if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
 			else{ return false; }
 		}
+		Element.prototype.removeChild = function(element){
+			DKRocket_removeChild(this.pointer, element.pointer);
+		}
 		Element.prototype.setAttribute = function(attribute, value){
 			DKRocket_setAttribute(this.pointer, attribute, value);
 			this[attribute] = value;

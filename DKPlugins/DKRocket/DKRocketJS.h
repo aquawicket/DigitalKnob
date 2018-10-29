@@ -28,11 +28,12 @@ public:
 	//element
 	static int getAttribute(duk_context* ctx);
 	static int hasAttribute(duk_context* ctx);
-	static int setAttribute(duk_context* ctx);
 	static int innerHTML(duk_context* ctx);
-	static int setInnerHTML(duk_context* ctx);
 	static int parentNode(duk_context* ctx);
-
+	static int removeChild(duk_context* ctx);
+	static int setAttribute(duk_context* ctx);
+	static int setInnerHTML(duk_context* ctx);
+	
 	//style
 	static int setProperty(duk_context* ctx);
 	static int getPropertyValue(duk_context* ctx);

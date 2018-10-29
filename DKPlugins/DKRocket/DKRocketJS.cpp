@@ -24,6 +24,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_innerHTML", DKRocketJS::innerHTML);
 	DKDuktape::AttachFunction("DKRocket_setInnerHTML", DKRocketJS::setInnerHTML);
 	DKDuktape::AttachFunction("DKRocket_parentNode", DKRocketJS::parentNode);
+	DKDuktape::AttachFunction("DKRocket_removeChild", DKRocketJS::removeChild);
 	return true;
 }
 
@@ -350,6 +351,32 @@ int DKRocketJS::parentNode(duk_context* ctx)
 	ss << parentAddress;  
 	DKString str = ss.str(); 
 	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
+/////////////////////////////////////////////
+int DKRocketJS::removeChild(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::removeChild(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString childAddress = duk_require_string(ctx, 1);
+	Rocket::Core::Element* child = getElementByAddress(childAddress);
+	if(!child){
+		DKERROR("DKRocketJS::removeChild(): child invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	if(!element->RemoveChild(child)){
+		DKERROR("DKRocketJS::removeChild(): element->RemoveChild failed\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
 	return true;
 }
 
