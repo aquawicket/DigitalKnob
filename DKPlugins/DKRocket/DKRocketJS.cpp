@@ -89,8 +89,8 @@ int DKRocketJS::getElementById(duk_context* ctx)
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKRocket::Get()->document->GetElementById(id.c_str());
 	if(!element){
-		DKERROR("DKRocketJS::getElementById(): element invalid");
-		duk_push_boolean(ctx, false);
+		//DKERROR("DKRocketJS::getElementById(): element invalid\n");
+		duk_push_null(ctx);
 		return true;
 	}
 

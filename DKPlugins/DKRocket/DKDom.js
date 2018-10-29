@@ -36,8 +36,36 @@ function DKDom_Create(event)
 	function Console()
 	{
 		DKDEBUGFUNC();
+		Console.prototype.assert = function(condition, str){
+			if(condition){ return; }
+			DKERROR(str+"\n");
+		}
+		Console.prototype.clear = function(){
+			DK_System("cls");
+		}
+		Console.prototype.debug = function(str){
+			DKDEBUG(str+"\n");
+		}
+		Console.prototype.error = function(str){
+			DKERROR(str+"\n");
+		}
+		Console.prototype.info = function(str){
+			DKINFO(str+"\n");
+		}
 		Console.prototype.log = function(str){
-			DKINFO(str);
+			/*
+			if(str == null){
+				DKINFO("str == null\n\n");
+			}
+			//if(typeof str = "null"){ str = "null"; }
+			*/
+			DKINFO(str+"\n");
+		}
+		Console.prototype.trace = function(){
+			DKERROR("console.trace() not implemented\n");
+		}
+		Console.prototype.warn = function(str){
+			DKWARN(str+"\n");
 		}
 	}
 	
@@ -150,6 +178,7 @@ function DKDom_Create(event)
 		
 		Document.prototype.getElementById = function(id){
 			var pointer = DKRocket_getElementById(id);
+			if(!pointer){ return null; }
 			var element = new Element(pointer);
 			return element;
 		}
