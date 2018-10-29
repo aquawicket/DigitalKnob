@@ -204,12 +204,9 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	// <script> tags
 	//get the path from the url
 	DKString path = DKRocket::Get()->_url;
-	DKDEBUGVARS(path);
-
 	std::size_t found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";
-	DKDEBUGVARS(path);
 
 	Rocket::Core::ElementList scripts;
 	Rocket::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
@@ -225,25 +222,21 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			if(has(path, "http://")){
 				DKString js;
 				DKClass::DKCreate("DKCurl");
-				DKDEBUGVARS(path, src);
 					if(!DKCurl::Get()->HttpToString(path+src, js)){
 						DKERROR("HttpToString failed on "+path+src+"\n");
 						continue;
 					}
 					processed += src+",";
 					DKDuktape::Get()->LoadJSString(path+src, js);
-					//DKDuktape::Get()->QueueUrl(path+src, js);
 			}
 			else{
 				processed += src+",";
 				DKString app = DKFile::local_assets+src;
-				//DKDuktape::Get()->QueueFile(app);
 				DKDuktape::LoadFile(app);
 			}
 		}
 		else{
 			if(inner.empty()){ continue; }
-			//DKDEBUGVARS(inner);
 			//DKDuktape::Get()->LoadJSString("testId", inner);
 		}
 	}
