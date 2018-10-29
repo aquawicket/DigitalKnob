@@ -21,11 +21,13 @@ public:
 	static int name(duk_context* ctx);
 
 	//document
+	static int createElement(duk_context* ctx);
 	static int getElementById(duk_context* ctx);
 	static int getElementsByClassName(duk_context* ctx);
 	static int getElementsByTagName(duk_context* ctx);
 
 	//element
+	static int appendChild(duk_context* ctx);
 	static int getAttribute(duk_context* ctx);
 	static int hasAttribute(duk_context* ctx);
 	static int innerHTML(duk_context* ctx);

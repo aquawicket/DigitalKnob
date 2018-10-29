@@ -25,6 +25,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_setInnerHTML", DKRocketJS::setInnerHTML);
 	DKDuktape::AttachFunction("DKRocket_parentNode", DKRocketJS::parentNode);
 	DKDuktape::AttachFunction("DKRocket_removeChild", DKRocketJS::removeChild);
+	DKDuktape::AttachFunction("DKRocket_createElement", DKRocketJS::createElement);
+	DKDuktape::AttachFunction("DKRocket_appendChild", DKRocketJS::appendChild);
 	return true;
 }
 
@@ -214,11 +216,24 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 {
 	DKDEBUGFUNC(address);
-	Rocket::Core::Element* body = DKRocket::Get()->document->GetElementById("body"); //TEST: This needs to be recursive
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address;
+	int tmp(0);
+	if(!(ss >> std::hex >> tmp)){
+		DKERROR("DKRocketJS::getElementByAddress("+address+"): invalide address\n");
+		return NULL;
+	}
+	Rocket::Core::Element* element = reinterpret_cast<Rocket::Core::Element*>(tmp);
+	return element;
+
+	/*
+	//get element from list of elements under body with mattching address
+	Rocket::Core::Element* body = DKRocket::Get()->document->GetParentNode(); //TEST: This needs to be recursive
 	Rocket::Core::ElementList elements;
 	GetElements(body, elements);
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void * addr = static_cast<const void*>(elements[i]);
+		const void* addr = static_cast<const void*>(elements[i]);
 		std::stringstream ss;
 		ss << addr;  
 		DKString str = ss.str(); 
@@ -228,6 +243,7 @@ Rocket::Core::Element* DKRocketJS::getElementByAddress(const DKString& address)
 	}
 	DKERROR("DKRocketJS::getElementByAddress("+address+"): element not found\n");
 	return NULL;
+	*/
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -381,6 +397,48 @@ int DKRocketJS::removeChild(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	duk_push_string(ctx, childAddress.c_str());
+	return true;
+}
+
+///////////////////////////////////////////////
+int DKRocketJS::createElement(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString tag = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = DKRocket::Get()->document->CreateElement(tag.c_str());
+	if(!element){
+		DKERROR("DKRocketJS::createElement(): element invalid\n");
+		return false;
+	}
+	const void* elementAddress = static_cast<const void*>(element);
+	std::stringstream ss;
+	ss << elementAddress;  
+	DKString str = ss.str(); 
+	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
+/////////////////////////////////////////////
+int DKRocketJS::appendChild(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::removeChild(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString childAddress = duk_require_string(ctx, 1);
+	Rocket::Core::Element* child = getElementByAddress(childAddress);
+	if(!child){
+		DKERROR("DKRocketJS::removeChild(): child invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	element->AppendChild(child, true);
+	duk_push_string(ctx, childAddress.c_str());
 	return true;
 }
 

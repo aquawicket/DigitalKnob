@@ -124,6 +124,12 @@ function DKDom_Create(event)
 	{
 		DKDEBUGFUNC();
 		
+		Document.prototype.createElement = function(tag){
+			var pointer = DKRocket_createElement(tag);
+			var element = new Element(pointer);
+			return element;
+		}
+		
 		Document.prototype.getElementById = function(id){
 			var pointer = DKRocket_getElementById(id);
 			var element = new Element(pointer);
@@ -183,6 +189,11 @@ function DKDom_Create(event)
 		this.pointer = pointer;
 		this.style = new Style(pointer);
 
+		Element.prototype.appendChild = function(element){
+			var pointer = DKRocket_appendChild(this.pointer, element.pointer);
+			var element = new Element(pointer);
+			return element;
+		}
 		Element.prototype.getAttribute = function(attribute){
 			this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
 			return this[attribute];
@@ -192,7 +203,9 @@ function DKDom_Create(event)
 			else{ return false; }
 		}
 		Element.prototype.removeChild = function(element){
-			DKRocket_removeChild(this.pointer, element.pointer);
+			var pointer = DKRocket_removeChild(this.pointer, element.pointer);
+			var element = new Element(pointer);
+			return element;
 		}
 		Element.prototype.setAttribute = function(attribute, value){
 			DKRocket_setAttribute(this.pointer, attribute, value);
@@ -259,12 +272,22 @@ function DKDom_Create(event)
 			},
 			get: function (targ, key, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
-				targ[key] = DKRocket_getPropertyValue(targ["pointer"], key);
+				if(key == "backgroundColor"){
+					targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color");
+				}
+				else{
+					targ[key] = DKRocket_getPropertyValue(targ["pointer"], key);
+				}
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
 				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
-				DKRocket_setProperty(targ["pointer"], key, val);
+				if(key == "backgroundColor"){
+					DKRocket_setProperty(targ["pointer"], "background-color", val);
+				}
+				else{
+					DKRocket_setProperty(targ["pointer"], key, val);
+				}
 				targ[key] = val;
 				return true;
 			},
