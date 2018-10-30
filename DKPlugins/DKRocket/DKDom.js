@@ -31,7 +31,7 @@ function DKDom_OnEvent(event)
 ////////////////////////////////////
 var EventTarget = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("EventTarget("+pointer+")\n");
+	//DKWARN("EventTarget("+pointer+")\n");
 	this.pointer = pointer;
 	this.listeners = {};
 };
@@ -69,7 +69,7 @@ EventTarget.prototype.dispatchEvent = function(event){
 /////////////////////////////
 var Node = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("Node("+pointer+")\n");
+	//DKWARN("Node("+pointer+")\n");
 	EventTarget.call(this, pointer);
 	
 	return new Proxy(this, { 
@@ -130,7 +130,7 @@ Node.prototype.removeChild = function(aChild){
 ////////////////////////////////
 var Element = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("Element("+pointer+")\n");
+	//DKWARN("Element("+pointer+")\n");
 	return Node.call(this, pointer);
 }
 Element.prototype = Node.prototype;
@@ -152,7 +152,7 @@ Element.prototype.setAttribute = function(attribute, value){
 ////////////////////////////////////
 var HTMLElement = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("HTMLElement("+pointer+")\n");
+	//DKWARN("HTMLElement("+pointer+")\n");
 	this.style = new CSSStyleDeclaration(pointer);
 	return Element.call(this, pointer);
 }
@@ -171,7 +171,7 @@ HTMLCollection.prototype.item = function(index){
 ////////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("CSSStyleDeclaration("+pointer+")\n");
+	//DKWARN("CSSStyleDeclaration("+pointer+")\n");
 	this.pointer = pointer;
 	
 	return new Proxy(this, {
@@ -212,7 +212,7 @@ CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
 /////////////////////////////////
 var Document = function(pointer){
 	//DKDEBUGFUNC();
-	DKWARN("Document("+pointer+")\n");
+	//DKWARN("Document("+pointer+")\n");
 	this.body = this.getElementsByTagName("body")[0];
 	return Node.call(this, pointer);
 }
@@ -253,7 +253,7 @@ Document.prototype.getElementsByTagName = function(name){
 ////////////////////////
 var Window = function(){
 	//DKDEBUGFUNC();
-	DKWARN("Window()\n");
+	//DKWARN("Window()\n");
 	document = new Document();
 	this.document = document;
 
@@ -289,8 +289,9 @@ Window.prototype.alert = function(msg){
 
 /////////////////////////
 var Console = function(){
-	DKWARN("Console()\n");
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
+	//DKWARN("Console()\n");
+	
 }
 Console.prototype.assert = function(assertion, msg){
 	if(assertion){ return; }
