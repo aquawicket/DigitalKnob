@@ -10,7 +10,7 @@ DKStringArray DKDuktape::codeToRun;
 int DKDuktape::c_evloop = 0;
 extern void poll_register(duk_context *ctx);
 extern void eventloop_register(duk_context *ctx);
-extern int eventloop_run(duk_context *ctx);
+extern int eventloop_run(duk_context *ctx, void *udata);
 //extern void ncurses_register(duk_context *ctx);
 //extern void socket_register(duk_context *ctx);
 //extern void fileio_register(duk_context *ctx);
@@ -564,41 +564,20 @@ void DKDuktape::EventLoop()
 		DKDuktape::RunDuktape(codeToRun[0]);
 		codeToRun.erase(codeToRun.begin());
 	}
-}
 
-
-
-/*
-///////////////////////////    OLD CODE
-void DKDuktape::EventLoop()
-{
-	DKDEBUGFUNC();
+	//run the duktape event loop for timers
 	int rc;
 	if(c_evloop){
-		DKINFO("DKDuktape: calling eventloop_run()\n");
-		rc = duk_safe_call(ctx, eventloop_run, 0 , 1 );
+		DKINFO("DKDuktape: calling c++ eventloop_run()\n");
+		rc = duk_safe_call(ctx, eventloop_run, NULL, 0, 1);
 		if (rc != 0) {
 			DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
 		}
 		duk_pop(ctx);
 	} 
 	else{
-		//DKINFO("DKDuktape: calling EventLoop.run()\n");
+		DKINFO("DKDuktape: calling javascript EventLoop.run()\n");
 		duk_eval_string(ctx, "EventLoop.run();");
 		duk_pop(ctx);
 	}
 }
-*/
-
-//TODO
-//////////////////////////////////////////////////
-/*
-void DKDuktape::CreateObject(const DKString& name)
-{
-	DKDEBUGFUNC(name);
-	DKString objname = "_"+name;
-	duk_put_global_string(ctx, objname.c_str());
-	DKString eval = "var "+name+" new "+objname+"()";
-	duk_eval_string(ctx, eval.c_str());
-}
-*/

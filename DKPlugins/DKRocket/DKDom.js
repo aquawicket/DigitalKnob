@@ -387,3 +387,8 @@ Console.prototype.warn = function(msg){
 //////////////////////	
 window = new Window();
 console = new Console();
+
+setTimeout(function(){
+  console.warn("setTimeout is working! :D");
+}, 500);
+
