@@ -1,4 +1,4 @@
-//BROWSER
+
 
 var LOG_DEBUG = false;
 var LOG_INFO = true;

@@ -10,8 +10,6 @@ var console;
 function DKDom_Init()
 {
 	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "Rocket"){ return; }  //This class is a wrapper for libRocket only
-	//DKDom_Create();
 }
 
 ////////////////////
@@ -214,6 +212,7 @@ var Document = function(pointer){
 	//DKDEBUGFUNC();
 	//DKWARN("Document("+pointer+")\n");
 	this.body = this.getElementsByTagName("body")[0];
+	this.documentElement = this.getElementsByTagName("html")[0];
 	return Node.call(this, pointer);
 }
 Document.prototype = Node.prototype;
@@ -254,9 +253,10 @@ Document.prototype.getElementsByTagName = function(name){
 var Window = function(){
 	//DKDEBUGFUNC();
 	//DKWARN("Window()\n");
+	EventTarget.call(this);
 	document = new Document();
 	this.document = document;
-
+	
 	return new Proxy(this, { // Wrap it behind a proxy
 		has: function (targ, key) {
 			return key in targ;  // return unmodified existence status
@@ -282,6 +282,7 @@ var Window = function(){
 		}
 	});
 }
+Window.prototype = EventTarget.prototype;
 Window.prototype.alert = function(msg){
 	DKINFO("alert: "+msg+'\n');
 }
