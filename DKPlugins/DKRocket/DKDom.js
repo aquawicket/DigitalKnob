@@ -2,8 +2,8 @@
 
 var window;
 var document;
-var location;
-var screen;
+//var location;
+//var screen;
 var console;
 
 /////////////////////
@@ -33,47 +33,191 @@ function DKDom_Create(event)
 	DKDEBUGFUNC();
 */	
 
-	//////////////////
-	function Console()
-	{
+	/////////////////////////////
+	var EventTarget = function(){
 		DKDEBUGFUNC();
-		Console.prototype.assert = function(condition, str){
-			if(condition){ return; }
-			DKERROR(str+"\n");
+		this.listeners = {};
+	};
+	EventTarget.prototype.listeners = null;
+	EventTarget.prototype.addEventListener = function(type, callback){
+		if(!(type in this.listeners)){
+			this.listeners[type] = [];
 		}
-		Console.prototype.clear = function(){
-			DK_System("cls");
+		this.listeners[type].push(callback);
+	};
+	EventTarget.prototype.removeEventListener = function(type, callback){
+		if(!(type in this.listeners)){
+			return;
 		}
-		Console.prototype.debug = function(str){
-			DKDEBUG(str+"\n");
+		var stack = this.listeners[type];
+		for(var i = 0, l = stack.length; i < l; i++){
+			if(stack[i] === callback){
+				stack.splice(i, 1);
+				return;
+			}
 		}
-		Console.prototype.error = function(str){
-			DKERROR(str+"\n");
+	};
+	EventTarget.prototype.dispatchEvent = function(event){
+		if(!(event.type in this.listeners)){
+			return true;
 		}
-		Console.prototype.info = function(str){
-			DKINFO(str+"\n");
+		var stack = this.listeners[event.type].slice();
+		for (var i = 0, l = stack.length; i < l; i++){
+			stack[i].call(this, event);
 		}
-		Console.prototype.log = function(str){
-			DKINFO(str+"\n");
-		}
-		Console.prototype.trace = function(){
-			DKERROR("console.trace() not implemented\n");
-		}
-		Console.prototype.warn = function(str){
-			DKWARN(str+"\n");
-		}
+		return !event.defaultPrevented;
+	};
+	
+	/////////////////////////////
+	var Node = function(pointer){
+		DKDEBUGFUNC();
+		this.pointer = pointer;
+		EventTarget.call(this);
 		
-		/*
+		return new Proxy(this, { 
+			has: function(targ, key){
+				return key in targ;
+			},
+			get: function(targ, key, recv){
+				return targ[key];
+			},
+			set: function(targ, key, val, recv){
+				targ[key] = val;
+				return true;
+			},
+			deleteProperty: function(targ, key){
+				delete targ[key];
+				return true;
+			}
+		});
+	};
+	Node.prototype = EventTarget.prototype;
+	Node.prototype.appendChild = function(aChild){
+		var pointer = DKRocket_appendChild(this.pointer, aChild.pointer);
+		if(!pointer){ return; }
+		var element = new Node(pointer);
+		return element;
+	}
+	
+	
+	////////////////////////////////
+	var Element = function(pointer){
+		DKDEBUGFUNC();
+		return Node.call(this, pointer);
+	}
+	Element.prototype = Node.prototype;
+	Element.prototype.hasAttribute = function(name){
+		return DKRocket_hasAttribute(name);
+	}
+	
+	///////////////////////////////
+	var HTMLCollection = function(){
+		
+	}
+	HTMLCollection.prototype = [];
+	HTMLCollection.prototype.item = function(index){
+		return this[index];
+	}
+	
+	////////////////////////////////////
+	var HTMLElement = function(pointer){
+		DKDEBUGFUNC();
+		this.style = new CSSStyleDeclaration(pointer);
+		return Element.call(this, pointer);
+	}
+	HTMLElement.prototype = Element.prototype;
+
+	////////////////////////////////////////////
+	var CSSStyleDeclaration = function(pointer){
+		DKDEBUGFUNC();
+		this.pointer = pointer;
+		
+		return new Proxy(this, {
+			has: function (targ, key){
+				return key in targ;
+			},
+			get: function (targ, key, recv){
+				DKINFO("Style:get("+targ+","+key+")\n");
+				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+				if(key == "backgroundColor"){ targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color"); }
+				else{ targ[key] = DKRocket_getPropertyValue(targ["pointer"], key); }
+				return targ[key];
+			},
+			set: function (targ, key, val, recv){
+				DKINFO("Style:set("+targ+","+key+","+val+")\n");
+				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+				if(key == "backgroundColor"){ DKRocket_setProperty(targ["pointer"], "background-color", val); }
+				else{ DKRocket_setProperty(targ["pointer"], key, val); }
+				targ[key] = val;
+				return true;
+			},
+			deleteProperty: function (targ, key){
+				delete targ[key];
+				return true;
+			}
+		});
+	}
+	CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
+		DKRocket_setProperty(this.pointer, propertyName, propertyValue);
+		this[propertyName] = propertyValue;
+	}
+	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
+		this[propertyName] = DKRocket_getPropertyValue(this.pointer, propertyName);
+		return this[propertyName];
+	}
+	
+	
+	////////////////////////////////
+	var Document = function(pointer){
+		DKDEBUGFUNC();
+		this.body = this.getElementsByTagName("body")[0];
+		return Node.call(this, pointer);
+	}
+	Document.prototype = Node.prototype;
+	Document.prototype.createElement = function(tagName){
+		var pointer = DKRocket_createElement(tag);
+		var htmlElement = new HTMLElement(pointer);
+		return htmlElement;
+	}
+	Document.prototype.getElementById = function(id){
+		var pointer = DKRocket_getElementById(id);
+		if(!pointer){ return null; }
+		var element = new Element(pointer);
+		return element;
+	}
+	Document.prototype.getElementsByTagName = function(name){
+		var addressList = DKRocket_getElementsByTagName(name);
+		var htmlCollection = new HTMLCollection();
+		if(!addressList){ return htmlCollection; }
+		var arry = addressList.split(",");
+		for(var i=0; i<arry.length; i++){
+			htmlCollection.push(new HTMLElement(arry[i]))
+		}
+		return htmlCollection;
+	}
+	
+
+	
+	////////////////////////
+	var Window = function(){
+		DKDEBUGFUNC();
+		document = new Document();
+		this.document = document;
+		
 		return new Proxy(this, { // Wrap it behind a proxy
 			has: function (targ, key) {
 				return key in targ;  // return unmodified existence status
 			},
 			get: function (targ, key, recv) {
-				DKINFO("Console:get("+targ+","+key+")\n");
+				if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
+				if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
+				if(key == "name"){ targ[key] = DKRocket_name(); }
 				return targ[key];  // return unmodified value
 			},
 			set: function (targ, key, val, recv) {
-				DKINFO("Console:set("+targ+","+key+","+val+")\n");
+				//if(key == "innerHeight"){ DKRocket_SetInnerHeight(val); }  //TODO
+				//if(key == "innerWidth"){ DKRocket_SetInnerWidth(val); }    //TODO
+				//if(key == "name"){ DKRocket_SetName(val); }    //TODO
 				targ[key] = val;  // must perform write to target manually if 'set' defined
 				return true;      // true: indicate that property write was allowed
 			},
@@ -83,19 +227,56 @@ function DKDom_Create(event)
 				return true;       // true: indicate that property delete was allowed
 			}
 		});
-		*/
+	}
+	Window.prototype.alert = function(msg){
+		DKINFO("alert: "+msg+'\n');
 	}
 	
+	
+	/////////////////////////
+	var Console = function(){
+		DKDEBUGFUNC();
+	}
+	Console.prototype.assert = function(assertion, msg){
+		if(condition){ return; }
+		DKERROR(msg+"\n");
+	}
+	Console.prototype.clear = function(){
+		DK_System("cls");
+	}
+	Console.prototype.debug = function(msg){
+		DKDEBUG(msg+"\n");
+	}
+	Console.prototype.error = function(msg){
+		DKERROR(msg+"\n");
+	}
+	Console.prototype.exception = Console.prototype.error; //alias
+	Console.prototype.info = function(msg){
+		DKINFO(str+"\n");
+	}
+	Console.prototype.log = function(msg){
+		DKINFO(msg+"\n");
+	}
+	Console.prototype.trace = function(){
+		DKERROR("console.trace() not implemented\n");
+	}
+	Console.prototype.warn = function(msg){
+			DKWARN(msg+"\n");
+	}
+	
+	
+	
+	/*
 	/////////////////
 	function Window()
 	{
 		DKDEBUGFUNC();
 		document = new Document();
 		this.document = document;
-		location = new Location();
-		this.location = location;
-		screen = new Screen();
-		this.screen = screen;
+		//location = new Location();
+		//this.location = location;
+		//screen = new Screen();
+		//this.screen = screen;
 
 		Window.prototype.alert = function(str){
 			DKINFO("alert: "+str+'\n');
@@ -125,6 +306,7 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	/*
 	
 	///////////////////
 	function Location()
@@ -151,7 +333,9 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	*/
 	
+	/*
 	/////////////////
 	function Screen()
 	{
@@ -174,7 +358,9 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	*/
 	
+	/*
 	///////////////////
 	function Document()
 	{
@@ -184,7 +370,6 @@ function DKDom_Create(event)
 			var pointer = DKRocket_createElement(tag);
 			var element;
 			if(tag === "script"){
-				new Element(pointer);
 				element = new Script(pointer);
 			}
 			else{
@@ -249,7 +434,9 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	*/
 	
+	/*
 	/////////////////////////
 	function Element(pointer)
 	{
@@ -286,15 +473,8 @@ function DKDom_Create(event)
 			DKRocket_setAttribute(this.pointer, attribute, value);
 			this[attribute] = value;
 		}
-		/*
-		Element.prototype.toString = function(){
-			//DKERROR("Element.toString() is not implemented\n");
-			return this;
-		}
-		*/
-		
+	
 		return new Proxy(this, {
-			/*
 			has: function (targ, key){
 				return key in targ;
 			},
@@ -328,10 +508,11 @@ function DKDom_Create(event)
 				delete targ[key];
 				return true;
 			}
-			*/
 		});
 	}
+	*/
 	
+	/*
 	///////////////////////
 	function Style(pointer)
 	{
@@ -372,7 +553,9 @@ function DKDom_Create(event)
 			}
 		});
 	}
+	*/
 	
+	/*
 	function Dummy(pointer)
 	{
 		this.pointer = pointer;
@@ -382,17 +565,20 @@ function DKDom_Create(event)
 	function Script(pointer)
 	{
 		DKDEBUGFUNC();
-		this.pointer = pointer;
+		return Element.call(this, pointer);
 		
-		return new Proxy(this, {
+
+		new Proxy(this, {
 			has: function (targ, key){
 				return key in targ;
 			},
 			get: function (targ, key, recv){
+				DKWARN("Script proxy get: called");
 				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
+				DKWARN("Script proxy set: called");
 				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
 				targ[key] = val;
 				return true;
@@ -402,8 +588,11 @@ function DKDom_Create(event)
 				return true;
 			}
 		});
+
+		
 	}
 	Script.prototype = Element.prototype;
+	*/
 	
 	window = new Window();
 	console = new Console();
