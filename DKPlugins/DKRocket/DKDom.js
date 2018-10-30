@@ -60,6 +60,28 @@ function DKDom_Create(event)
 		Console.prototype.warn = function(str){
 			DKWARN(str+"\n");
 		}
+		
+		/*
+		return new Proxy(this, { // Wrap it behind a proxy
+			has: function (targ, key) {
+				return key in targ;  // return unmodified existence status
+			},
+			get: function (targ, key, recv) {
+				DKINFO("Console:get("+targ+","+key+")\n");
+				return targ[key];  // return unmodified value
+			},
+			set: function (targ, key, val, recv) {
+				DKINFO("Console:set("+targ+","+key+","+val+")\n");
+				targ[key] = val;  // must perform write to target manually if 'set' defined
+				return true;      // true: indicate that property write was allowed
+			},
+
+			deleteProperty: function (targ, key) {
+				delete targ[key];  // must perform delete to target manually if 'deleteProperty' defined
+				return true;       // true: indicate that property delete was allowed
+			}
+		});
+		*/
 	}
 	
 	/////////////////
@@ -137,7 +159,6 @@ function DKDom_Create(event)
 				return key in targ;  // return unmodified existence status
 			},
 			get: function (targ, key, recv) {
-				if(key == "hash"){ targ[key] = DKRocket_GetHash(); }
 				return targ[key];  // return unmodified value
 			},
 			set: function (targ, key, val, recv) {
@@ -159,13 +180,7 @@ function DKDom_Create(event)
 		
 		Document.prototype.createElement = function(tag){
 			var pointer = DKRocket_createElement(tag);
-			var element;
-			if(tag == "script"){
-				element = new Script(pointer);
-			}
-			else{
-				element = new Element(pointer);
-			}
+			var element = new Element(pointer);
 			return element;
 		}
 		
@@ -204,6 +219,8 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function (targ, key, recv){
+				//DKINFO("Document:get("+targ+","+key+")\n");
+				if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer"){ return targ[key]; }
 				if(key == "body"){ 
 					var bodyList = DKRocket_getElementsByTagName("body");
 					if(!bodyList){ return; }
@@ -213,6 +230,7 @@ function DKDom_Create(event)
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
+				//DKINFO("Document:set("+targ+","+key+","+val+")\n");
 				targ[key] = val;
 				return true;
 			},
@@ -255,16 +273,19 @@ function DKDom_Create(event)
 			DKRocket_setAttribute(this.pointer, attribute, value);
 			this[attribute] = value;
 		}
+		/*
 		Element.prototype.toString = function(){
-			DKERROR("Element.toString() is not implemented\n");
+			//DKERROR("Element.toString() is not implemented\n");
+			return this;
 		}
+		*/
 		
 		return new Proxy(this, {
 			has: function (targ, key){
 				return key in targ;
 			},
 			get: function(targ, key, recv){
-				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return targ[key]; }
+				if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style"){ return targ[key]; }
 				if(key == "innerHTML"){
 					targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 				}
@@ -278,6 +299,7 @@ function DKDom_Create(event)
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
+				//DKINFO("Element:set("+targ+","+key+","+val+")\n");
 				if(typeof targ[key] === "function" || key == "pointer" || key == "style"){ return true; }
 				if(key == "innerHTML"){
 					DKRocket_setInnerHTML(targ["pointer"], val);
@@ -315,12 +337,14 @@ function DKDom_Create(event)
 				return key in targ;
 			},
 			get: function (targ, key, recv){
+				DKINFO("Style:get("+targ+","+key+")\n");
 				if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
 				if(key == "backgroundColor"){ targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color"); }
 				else{ targ[key] = DKRocket_getPropertyValue(targ["pointer"], key); }
 				return targ[key];
 			},
 			set: function (targ, key, val, recv){
+				DKINFO("Style:set("+targ+","+key+","+val+")\n");
 				if(typeof targ[key] === "function" || key == "pointer"){ return true; }
 				if(key == "backgroundColor"){ DKRocket_setProperty(targ["pointer"], "background-color", val); }
 				else{ DKRocket_setProperty(targ["pointer"], key, val); }
@@ -334,7 +358,10 @@ function DKDom_Create(event)
 		});
 	}
 	
-	
+	function Dummy(pointer)
+	{
+		this.pointer = pointer;
+	}
 	
 	////////////////////////
 	function Script(pointer)
@@ -366,7 +393,7 @@ function DKDom_Create(event)
 		*/
 	}
 	
-	Script.prototype = new Element();
+	//Script.prototype = new Element();
 	
 	window = new Window();
 	console = new Console();
