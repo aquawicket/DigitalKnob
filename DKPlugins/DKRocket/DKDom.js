@@ -11,7 +11,7 @@ function DKDom_Init()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }  //This class is a wrapper for libRocket only
-	DKDom_Create();
+	//DKDom_Create();
 }
 
 ////////////////////
@@ -26,11 +26,13 @@ function DKDom_OnEvent(event)
 	DKDEBUGFUNC(event);
 }
 
+/*
 ////////////////////////////
 function DKDom_Create(event)
 {
 	DKDEBUGFUNC();
-	
+*/	
+
 	//////////////////
 	function Console()
 	{
@@ -180,7 +182,14 @@ function DKDom_Create(event)
 		
 		Document.prototype.createElement = function(tag){
 			var pointer = DKRocket_createElement(tag);
-			var element = new Element(pointer);
+			var element;
+			if(tag === "script"){
+				new Element(pointer);
+				element = new Script(pointer);
+			}
+			else{
+				element = new Element(pointer);
+			}
 			return element;
 		}
 		
@@ -245,10 +254,13 @@ function DKDom_Create(event)
 	function Element(pointer)
 	{
 		DKDEBUGFUNC();
-		this.constructor.name = "Element";
 		this.pointer = pointer;
 		this.style = new Style(pointer);
 
+		Element.prototype.TEST = function(){
+			DKERROR("TEST\n");
+		}
+		
 		Element.prototype.appendChild = function(element){
 			var pointer = DKRocket_appendChild(this.pointer, element.pointer);
 			if(!pointer){ return; }
@@ -282,6 +294,7 @@ function DKDom_Create(event)
 		*/
 		
 		return new Proxy(this, {
+			/*
 			has: function (targ, key){
 				return key in targ;
 			},
@@ -315,6 +328,7 @@ function DKDom_Create(event)
 				delete targ[key];
 				return true;
 			}
+			*/
 		});
 	}
 	
@@ -368,11 +382,8 @@ function DKDom_Create(event)
 	function Script(pointer)
 	{
 		DKDEBUGFUNC();
-		//this.prototype = new Element();
-		Element.call(this, pointer);
 		this.pointer = pointer;
 		
-		/*
 		return new Proxy(this, {
 			has: function (targ, key){
 				return key in targ;
@@ -391,11 +402,9 @@ function DKDom_Create(event)
 				return true;
 			}
 		});
-		*/
 	}
-	
-	//Script.prototype = new Element();
+	Script.prototype = Element.prototype;
 	
 	window = new Window();
 	console = new Console();
-}
+//}
