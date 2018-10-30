@@ -245,6 +245,7 @@ function DKDom_Create(event)
 	function Element(pointer)
 	{
 		DKDEBUGFUNC();
+		this.constructor.name = "Element";
 		this.pointer = pointer;
 		this.style = new Style(pointer);
 
