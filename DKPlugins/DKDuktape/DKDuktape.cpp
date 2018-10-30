@@ -567,16 +567,16 @@ void DKDuktape::EventLoop()
 
 	//run the duktape event loop for timers
 	int rc;
-	if(c_evloop){
-		DKINFO("DKDuktape: calling c++ eventloop_run()\n");
+	if(c_evloop){ //c_eventloop.js
+		//DKINFO("DKDuktape: calling c++ eventloop_run()\n");
 		rc = duk_safe_call(ctx, eventloop_run, NULL, 0, 1);
-		if (rc != 0) {
-			DKINFO("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
+		if(rc != 0){
+			DKERROR("DKDuktape: eventloop_run() failed: "+toString(duk_to_string(ctx, -1))+"\n");
 		}
 		duk_pop(ctx);
 	} 
-	else{
-		DKINFO("DKDuktape: calling javascript EventLoop.run()\n");
+	else{ //ecma_eventloop.js
+		//DKINFO("DKDuktape: calling javascript EventLoop.run()\n");
 		duk_eval_string(ctx, "EventLoop.run();");
 		duk_pop(ctx);
 	}
