@@ -77,7 +77,7 @@ var Node = function(pointer){
 		},
 		get: function(targ, key, recv){
 			//DKINFO("Node:get("+targ+","+key+")\n");
-			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style"){ return targ[key]; }
+			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
 			if(key == "innerHTML"){
 				targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 			}
