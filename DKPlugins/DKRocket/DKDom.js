@@ -28,210 +28,42 @@ function DKDom_OnEvent(event)
 	DKDEBUGFUNC(event);
 }
 
-////////////////////////////////////////
-function EventFromRocket(pointer, event)
+
+
+////////////////////////
+var Console = function()
 {
-	for(var i=0; i<stored_events.length; i++){
-		if(pointer == stored_events[i].pointer){
-			stored_events[i].dispatchEvent(event);
-		}
+	//DKDEBUGFUNC();
+	//console.warn("Console()");
+	
+	Console.prototype.assert = function(assertion, msg){
+		if(assertion){ return; }
+		DKLogError(msg+"\n");
+	}
+	Console.prototype.clear = function(){
+		DK_System("cls");
+	}
+	Console.prototype.debug = function(msg){
+		DKLogDebug(msg+"\n");
+	}
+	Console.prototype.error = function(msg){
+		DKLogError(msg+"\n");
+	}
+	Console.prototype.exception = Console.prototype.error; //alias
+	Console.prototype.info = function(msg){
+		DKLogInfo(msg+"\n");
+	}
+	Console.prototype.log = function(msg){
+		DKLogInfo(msg+"\n");
+	}
+	Console.prototype.trace = function(){
+		DKLogError("console.trace() not implemented\n");
+	}
+	Console.prototype.warn = function(msg){
+			DKLogWarn(msg+"\n");
 	}
 }
 
-///////////////////////////////////
-var EventTarget = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("EventTarget("+pointer+")");
-	
-	this.pointer = pointer;
-	this.listeners = {};
-	
-	EventTarget.prototype.listeners = null;
-	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		var already_has = false;
-		for(var i=0; i < stored_events.length; i++){
-			if(stored_events[i] === this){
-				already_has = true;
-			}
-		}
-		if(!already_has){
-			stored_events.push(this);
-		}
-		if(this.pointer != "window"){
-			DKRocket_addEventListener(this.pointer, type, useCapture);
-		}
-		if(!(type in this.listeners)){
-			this.listeners[type] = [];
-		}
-		this.listeners[type].push(callback);
-	};
-	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
-		DKRocket_removeEventListener(this.pointer, type, useCapture);
-		if(!(type in this.listeners)){
-			return;
-		}
-		var stack = this.listeners[type];
-		for(var i = 0, l = stack.length; i < l; i++){
-			if(stack[i] === callback){
-				stack.splice(i, 1);
-				return;
-			}
-		}
-	};
-	EventTarget.prototype.dispatchEvent = function(event){
-		if(!(event.type in this.listeners)){
-			return true;
-		}
-		var stack = this.listeners[event.type].slice();
-		for (var i = 0, l = stack.length; i < l; i++){
-			stack[i].call(this, event);
-		}
-		return !event.defaultPrevented;
-	};
-};
-	
-	
-////////////////////////////
-var Node = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("Node("+pointer+")");
-	
-	Object.defineProperty(this, "baseURI",         { get: function(){ return DKRocket_baseURI(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKRocket_baseURIObject(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "childNodes",      { get: function(){ return DKRocket_childNodes(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "firstChild",      { get: function(){ return DKRocket_firstChild(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "isConnected",     { get: function(){ return DKRocket_isConnected(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "lastChild",       { get: function(){ return DKRocket_lastChild(this.pointer);       } });  //TODO
-	Object.defineProperty(this, "nextSibling",     { get: function(){ return DKRocket_nextSibling(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "nodeName",        { get: function(){ return DKRocket_nodeName(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "nodePrincipal",   { get: function(){ return DKRocket_nodePrincipal(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "nodeType",        { get: function(){ return DKRocket_nodeType(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "nodeValue",       { get: function(){ return DKRocket_nodeValue(this.pointer);       } });  //TODO
-	Object.defineProperty(this, "ownerDocument",   { get: function(){ return DKRocket_ownerDocument(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "parentNode",      { get: function(){ return DKRocket_parentNode(this.pointer);      } });
-	Object.defineProperty(this, "parentElement",   { get: function(){ return DKRocket_parentElement(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "previousSibling", { get: function(){ return DKRocket_previousSibling(this.pointer); } });  //TODO
-	Object.defineProperty(this, "textContent",     { get: function(){ return DKRocket_textContent(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "rootNode ",       { get: function(){ return DKRocket_rootNode (this.pointer);       } });  //Deprecated
-	
-	Node.prototype.appendChild = function(aChild){
-		var pointer = DKRocket_appendChild(this.pointer, aChild.pointer);
-		if(!pointer){ return; }
-		var element = new Node(pointer);
-		return element;
-	}
-	Node.prototype.cloneNode = function(){
-		//TODO
-	}
-	Node.prototype.compareDocumentPosition = function(){
-		//TODO
-	}
-	Node.prototype.contains = function(){
-		//TODO
-	}
-	Node.prototype.getRootNode = function(){
-		//TODO
-	}
-	Node.prototype.hasChildNodes = function(){
-		//TODO
-	}
-	Node.prototype.insertBefore = function(){
-		//TODO
-	}
-	Node.prototype.isDefaultNamespace = function(){
-		//TODO
-	}
-	Node.prototype.isEqualNode = function(){
-		//TODO
-	}
-	Node.prototype.isSameNode = function(){
-		//TODO
-	}
-	Node.prototype.lookupPrefix = function(){
-		//TODO
-	}
-	Node.prototype.lookupNamespaceURI = function(){
-		//TODO
-	}
-	Node.prototype.normalize = function(){
-		//TODO
-	}
-	Node.prototype.removeChild = function(aChild){
-		var pointer = DKRocket_removeChild(this.pointer, aChild.pointer);
-		if(!pointer){ return null; }
-		var node = new Node(pointer);
-		return node;
-	}
-	Node.prototype.replaceChild = function(){
-		//TODO
-	}
-
-	return EventTarget.call(this, pointer);
-};
-Node.prototype = EventTarget.prototype;
-
-
-///////////////////////////////
-var Element = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("Element("+pointer+")");
-	
-	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
-	Object.defineProperty(this, "clientHeight", { get: function(){ return DKRocket_clientHeight(this.pointer); } });
-	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
-	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKRocket_clientLeft(this.pointer);   } });
-	Object.defineProperty(this, "innerHTML", { 
-		get: function(){ return DKRocket_innerHTML(this.pointer); },
-		set: function(val){ return DKRocket_setInnerHTML(this.pointer, val); }
-	});
-	
-	Element.prototype.hasAttribute = function(attribute){
-		if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
-		else{ return false; }
-	}
-	Element.prototype.getAttribute = function(attribute){
-		this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
-		if(!this[attribute]){ return null; }
-		return this[attribute];
-	}
-	Element.prototype.setAttribute = function(attribute, value){
-		DKRocket_setAttribute(this.pointer, attribute, value);
-		this[attribute] = value;
-	}
-	
-	return Node.call(this, pointer);
-}
-Element.prototype = Node.prototype;	
-
-
-///////////////////////////////////
-var HTMLElement = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("HTMLElement("+pointer+")");
-	
-	this.style = new CSSStyleDeclaration(pointer);
-	
-	return Element.call(this, pointer);
-}
-HTMLElement.prototype = Element.prototype;
-
-
-///////////////////////////////
-var HTMLCollection = function()
-{
-	//DKDEBUGFUNC();
-	//console.warn("HTMLCollection()");
-	
-	HTMLCollection.prototype.item = function(index){
-		return this[index];
-	}
-}
-HTMLCollection.prototype = [];
-	
 
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
@@ -345,8 +177,8 @@ var CSSStyleDeclaration = function(pointer)
 		}
 	});
 }
-	
-	
+
+
 /////////////////////////////////
 var Document = function(pointer){
 	//DKDEBUGFUNC();
@@ -389,53 +221,127 @@ var Document = function(pointer){
 
 	return Node.call(this, pointer);
 }
-Document.prototype = Node.prototype;
 
 
 ///////////////////////////////
-var Window = function(pointer){
+var Element = function(pointer)
+{
 	//DKDEBUGFUNC();
-	console = new Console();
-	//console.warn("Window("+pointer+")");
+	//console.warn("Element("+pointer+")");
 	
-	Window.prototype.alert = function(msg){
-		console.warn("alert: "+msg); //TODO - create an actual popup window
+	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
+	Object.defineProperty(this, "clientHeight", { get: function(){ return DKRocket_clientHeight(this.pointer); } });
+	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
+	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKRocket_clientLeft(this.pointer);   } });
+	Object.defineProperty(this, "innerHTML", { 
+		get: function()   { return DKRocket_innerHTML(this.pointer);         },
+		set: function(val){ return DKRocket_setInnerHTML(this.pointer, val); }
+	});
+	
+	Element.prototype.hasAttribute = function(attribute){
+		if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
+		else{ return false; }
+	}
+	Element.prototype.getAttribute = function(attribute){
+		this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
+		if(!this[attribute]){ return null; }
+		return this[attribute];
+	}
+	Element.prototype.setAttribute = function(attribute, value){
+		DKRocket_setAttribute(this.pointer, attribute, value);
+		this[attribute] = value;
 	}
 	
-	this.console = console;
-	document = new Document("document");
-	this.document = document;
-	navigator = new Navigator();
-	this.navigator = navigator;
+	return Node.call(this, pointer);
+}
+
+
+//////////////////////////////////////////////
+var EventFromRocket = function(pointer, event)
+{
+	for(var i=0; i<stored_events.length; i++){
+		if(pointer == stored_events[i].pointer){
+			stored_events[i].dispatchEvent(event);
+		}
+	}
+}
+
+///////////////////////////////////
+var EventTarget = function(pointer)
+{
+	//DKDEBUGFUNC();
+	//console.warn("EventTarget("+pointer+")");
 	
-	EventTarget.call(this, pointer);
+	this.pointer = pointer;
+	this.listeners = {};
 	
-	return new Proxy(this, { // Wrap it behind a proxy
-		has: function (targ, key) {
-			return key in targ;  // return unmodified existence status
-		},
-		get: function(targ, key, recv){
-			//console.log("Window:get("+targ+","+key+")");
-			if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
-			if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
-			if(key == "name"){ targ[key] = DKRocket_name(); }
-			return targ[key];  // return unmodified value
-		},
-		set: function(targ, key, val, recv){
-			//console.log("Window:get("+targ+","+key+","+val+")");
-			//if(key == "innerHeight"){ DKRocket_SetInnerHeight(val); }  //TODO
-			//if(key == "innerWidth"){ DKRocket_SetInnerWidth(val); }    //TODO
-			//if(key == "name"){ DKRocket_SetName(val); }    //TODO
-			targ[key] = val;
-			return true;
-		},
-		deleteProperty: function(targ, key){
-			delete targ[key];
+	EventTarget.prototype.listeners = null;
+	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
+		var already_has = false;
+		for(var i=0; i < stored_events.length; i++){
+			if(stored_events[i] === this){
+				already_has = true;
+			}
+		}
+		if(!already_has){
+			stored_events.push(this);
+		}
+		if(this.pointer != "window"){
+			DKRocket_addEventListener(this.pointer, type, useCapture);
+		}
+		if(!(type in this.listeners)){
+			this.listeners[type] = [];
+		}
+		this.listeners[type].push(callback);
+	};
+	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+		DKRocket_removeEventListener(this.pointer, type, useCapture);
+		if(!(type in this.listeners)){
+			return;
+		}
+		var stack = this.listeners[type];
+		for(var i = 0, l = stack.length; i < l; i++){
+			if(stack[i] === callback){
+				stack.splice(i, 1);
+				return;
+			}
+		}
+	};
+	EventTarget.prototype.dispatchEvent = function(event){
+		if(!(event.type in this.listeners)){
 			return true;
 		}
-	});
+		var stack = this.listeners[event.type].slice();
+		for (var i = 0, l = stack.length; i < l; i++){
+			stack[i].call(this, event);
+		}
+		return !event.defaultPrevented;
+	};
+};
+
+
+///////////////////////////////
+var HTMLCollection = function()
+{
+	//DKDEBUGFUNC();
+	//console.warn("HTMLCollection()");
+	
+	HTMLCollection.prototype.item = function(index){
+		return this[index];
+	}
 }
-Window.prototype = EventTarget.prototype;
+
+
+///////////////////////////////////
+var HTMLElement = function(pointer)
+{
+	//DKDEBUGFUNC();
+	//console.warn("HTMLElement("+pointer+")");
+	
+	this.style = new CSSStyleDeclaration(pointer);
+	
+	return Element.call(this, pointer);
+}
 
 
 //////////////////////////
@@ -487,39 +393,198 @@ var Navigator = function()
 }
 
 
-////////////////////////
-var Console = function()
+////////////////////////////
+var Node = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Console()");
+	//console.warn("Node("+pointer+")");
 	
-	Console.prototype.assert = function(assertion, msg){
-		if(assertion){ return; }
-		DKLogError(msg+"\n");
+	Object.defineProperty(this, "baseURI",         { get: function(){ return DKRocket_baseURI(this.pointer);         } });  //TODO
+	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKRocket_baseURIObject(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "childNodes",      { get: function(){ return DKRocket_childNodes(this.pointer);      } });  //TODO
+	Object.defineProperty(this, "firstChild",      { get: function(){ return DKRocket_firstChild(this.pointer);      } });  //TODO
+	Object.defineProperty(this, "isConnected",     { get: function(){ return DKRocket_isConnected(this.pointer);     } });  //TODO
+	Object.defineProperty(this, "lastChild",       { get: function(){ return DKRocket_lastChild(this.pointer);       } });  //TODO
+	Object.defineProperty(this, "nextSibling",     { get: function(){ return DKRocket_nextSibling(this.pointer);     } });  //TODO
+	Object.defineProperty(this, "nodeName",        { get: function(){ return DKRocket_nodeName(this.pointer);        } });  //TODO
+	Object.defineProperty(this, "nodePrincipal",   { get: function(){ return DKRocket_nodePrincipal(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "nodeType",        { get: function(){ return DKRocket_nodeType(this.pointer);        } });  //TODO
+	Object.defineProperty(this, "nodeValue", { 
+		get: function()   { return DKRocket_nodeValue(this.pointer);         },
+		set: function(val){ return DKRocket_setNodeValue(this.pointer, val); }
+	});  //TODO
+	Object.defineProperty(this, "ownerDocument",   { get: function(){ return DKRocket_ownerDocument(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "parentNode",      { get: function(){ return DKRocket_parentNode(this.pointer);      } });
+	Object.defineProperty(this, "parentElement",   { get: function(){ return DKRocket_parentElement(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "previousSibling", { get: function(){ return DKRocket_previousSibling(this.pointer); } });  //TODO
+	Object.defineProperty(this, "textContent", { 
+		get: function()   { return DKRocket_textContent(this.pointer);         },
+		set: function(val){ return DKRocket_setTextContent(this.pointer, val); }
+	});  //TODO
+	Object.defineProperty(this, "rootNode ",       { get: function(){ return DKRocket_rootNode (this.pointer);       } });  //Deprecated
+	
+	Node.prototype.appendChild = function(aChild){
+		var pointer = DKRocket_appendChild(this.pointer, aChild.pointer);
+		if(!pointer){ return; }
+		var element = new Node(pointer);
+		return element;
 	}
-	Console.prototype.clear = function(){
-		DK_System("cls");
+	Node.prototype.cloneNode = function(){
+		//TODO
 	}
-	Console.prototype.debug = function(msg){
-		DKLogDebug(msg+"\n");
+	Node.prototype.compareDocumentPosition = function(){
+		//TODO
 	}
-	Console.prototype.error = function(msg){
-		DKLogError(msg+"\n");
+	Node.prototype.contains = function(){
+		//TODO
 	}
-	Console.prototype.exception = Console.prototype.error; //alias
-	Console.prototype.info = function(msg){
-		DKLogInfo(msg+"\n");
+	Node.prototype.getRootNode = function(){
+		//TODO
 	}
-	Console.prototype.log = function(msg){
-		DKLogInfo(msg+"\n");
+	Node.prototype.hasChildNodes = function(){
+		//TODO
 	}
-	Console.prototype.trace = function(){
-		DKLogError("console.trace() not implemented\n");
+	Node.prototype.insertBefore = function(){
+		//TODO
 	}
-	Console.prototype.warn = function(msg){
-			DKLogWarn(msg+"\n");
+	Node.prototype.isDefaultNamespace = function(){
+		//TODO
 	}
+	Node.prototype.isEqualNode = function(){
+		//TODO
+	}
+	Node.prototype.isSameNode = function(){
+		//TODO
+	}
+	Node.prototype.lookupPrefix = function(){
+		//TODO
+	}
+	Node.prototype.lookupNamespaceURI = function(){
+		//TODO
+	}
+	Node.prototype.normalize = function(){
+		//TODO
+	}
+	Node.prototype.removeChild = function(aChild){
+		var pointer = DKRocket_removeChild(this.pointer, aChild.pointer);
+		if(!pointer){ return null; }
+		var node = new Node(pointer);
+		return node;
+	}
+	Node.prototype.replaceChild = function(){
+		//TODO
+	}
+
+	return EventTarget.call(this, pointer);
+};
+
+
+///////////////////////////////
+var Window = function(pointer){
+	//DKDEBUGFUNC();
+	
+	console = new Console();
+	document = new Document("document");
+	navigator = new Navigator();
+	//screen = new Screen();
+	
+	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
+	Object.defineProperty(this, "controllers",           { get: function(){ return DKRocket_controllers(this.pointer);      } });  //TODO
+	Object.defineProperty(this, "customElements",        { get: function(){ return DKRocket_customElements(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "crypto",                { get: function(){ return DKRocket_crypto(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "devicePixelRatio",      { get: function(){ return DKRocket_devicePixelRatio(this.pointer); } });  //TODO
+	Object.defineProperty(this, "dialogArguments",       { get: function(){ return DKRocket_dialogArguments(this.pointer);  } });  //TODO
+	Object.defineProperty(this, "document",              { get: function(){ return document;                                } });
+	Object.defineProperty(this, "event",                 { get: function(){ return DKRocket_event(this.pointer);            } });  //TODO
+	Object.defineProperty(this, "frameElement",          { get: function(){ return DKRocket_frameElement(this.pointer);     } });  //TODO
+	Object.defineProperty(this, "frames",                { get: function(){ return DKRocket_frames(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "fullScreen", {
+		get: function()   { return DKRocket_fullScreen(this.pointer);      },
+		set: function(val){ return DKRocket_fullScreen(this.pointer, val); }
+	});  //TODO
+	Object.defineProperty(this, "history",               { get: function(){ return DKRocket_history(this.pointer);          } });  //TODO
+	Object.defineProperty(this, "innerHeight",           { get: function(){ return DKRocket_innerHeight();                  } });  //TODO
+	Object.defineProperty(this, "innerWidth",            { get: function(){ return DKRocket_innerWidth();                   } });  //TODO
+	Object.defineProperty(this, "isSecureContext",       { get: function(){ return DKRocket_isSecureContext();              } });  //TODO, Experimental
+	Object.defineProperty(this, "length",                { get: function(){ return DKRocket_length();                       } });  //TODO
+	Object.defineProperty(this, "location", { 
+		get: function()   { return DKRocket_location();       },
+		set: function(val){ return DKRocket_setLocation(val); }
+	});  //TODO
+	Object.defineProperty(this, "locationbar",           { get: function(){ return DKRocket_locationbar();                  } });  //TODO
+	Object.defineProperty(this, "localStorage",          { get: function(){ return DKRocket_localStorage();                 } });  //TODO
+	Object.defineProperty(this, "menubar",               { get: function(){ return DKRocket_menubar();                      } });  //TODO
+	Object.defineProperty(this, "messageManager",        { get: function(){ return DKRocket_messageManager();               } });  //TODO
+	Object.defineProperty(this, "mozAnimationStartTime", { get: function(){ return DKRocket_mozAnimationStartTime();        } });  //TODO, Deprecated
+	Object.defineProperty(this, "mozInnerScreenX",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
+	Object.defineProperty(this, "mozInnerScreenY",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
+	Object.defineProperty(this, "mozPaintCount",         { get: function(){ return DKRocket_mozPaintCount();                } });  //TODO
+	Object.defineProperty(this, "name", { 
+		get: function()   { return DKRocket_name();    },
+		set: function(val){ return DKRocket_setName(); }  
+	});  //TODO
+	Object.defineProperty(this, "navigator",             { get: function(){ return navigator;                               } });
+	Object.defineProperty(this, "opener",                { get: function(){ return DKRocket_opener();                       } });  //TODO
+	Object.defineProperty(this, "orientation",           { get: function(){ return DKRocket_orientation();                  } });  //TODO, Deprecated
+	Object.defineProperty(this, "outerHeight",           { get: function(){ return DKRocket_outerHeight();                  } });  //TODO
+	Object.defineProperty(this, "outerWidth",            { get: function(){ return DKRocket_outerWidth();                   } });  //TODO
+	Object.defineProperty(this, "pageXOffset",           { get: function(){ return DKRocket_pageXOffset();                  } });  //TODO
+	Object.defineProperty(this, "pageYOffset",           { get: function(){ return DKRocket_pageYOffset();                  } });  //TODO
+	Object.defineProperty(this, "parent",                { get: function(){ return DKRocket_parent ();                      } });  //TODO
+	Object.defineProperty(this, "performance",           { get: function(){ return DKRocket_performance();                  } });  //TODO
+	Object.defineProperty(this, "personalbar",           { get: function(){ return DKRocket_personalbar();                  } });  //TODO
+	Object.defineProperty(this, "returnValue",           { get: function(){ return DKRocket_returnValue();                  } });  //TODO
+	Object.defineProperty(this, "screen",                { get: function(){ return screen;                                  } });  //TODO
+	Object.defineProperty(this, "screenX",               { get: function(){ return DKRocket_screenX();                      } });  //TODO
+	Object.defineProperty(this, "screenY",               { get: function(){ return DKRocket_screenY();                      } });  //TODO
+	
+	
+	Window.prototype.alert = function(msg){
+		console.warn("alert: "+msg); //TODO - create an actual popup window
+	}
+	
+	
+	
+	return EventTarget.call(this, pointer);
+	
+	/*
+	return new Proxy(this, { // Wrap it behind a proxy
+		has: function (targ, key) {
+			return key in targ;  // return unmodified existence status
+		},
+		get: function(targ, key, recv){
+			//console.log("Window:get("+targ+","+key+")");
+			if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
+			if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
+			if(key == "name"){ targ[key] = DKRocket_name(); }
+			return targ[key];  // return unmodified value
+		},
+		set: function(targ, key, val, recv){
+			//console.log("Window:get("+targ+","+key+","+val+")");
+			//if(key == "innerHeight"){ DKRocket_SetInnerHeight(val); }  //TODO
+			//if(key == "innerWidth"){ DKRocket_SetInnerWidth(val); }    //TODO
+			//if(key == "name"){ DKRocket_SetName(val); }    //TODO
+			targ[key] = val;
+			return true;
+		},
+		deleteProperty: function(targ, key){
+			delete targ[key];
+			return true;
+		}
+	});
+	*/
 }
+
+
+//Global prototypes. Must be in order by dependency
+Window.prototype = EventTarget.prototype;
+Node.prototype = EventTarget.prototype;
+Document.prototype = Node.prototype;
+Element.prototype = Node.prototype;	
+HTMLElement.prototype = Element.prototype;
+HTMLCollection.prototype = [];
+
 
 
 ////// Create Dom /////////
