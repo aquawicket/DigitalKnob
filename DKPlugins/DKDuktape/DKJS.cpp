@@ -45,10 +45,10 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
 	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate);
 	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKERROR", DKJS::_DKERROR);
-	DKDuktape::AttachFunction("DKWARN", DKJS::_DKWARN);
-	DKDuktape::AttachFunction("DKINFO", DKJS::_DKINFO);
-	DKDuktape::AttachFunction("DKDEBUG", DKJS::_DKDEBUG);
+	DKDuktape::AttachFunction("DKLogError", DKJS::_DKERROR);
+	DKDuktape::AttachFunction("DKLogWarn", DKJS::_DKWARN);
+	DKDuktape::AttachFunction("DKLogInfo", DKJS::_DKINFO);
+	DKDuktape::AttachFunction("DKLogDebug", DKJS::_DKDEBUG);
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKDEBUGVARS", DKJS::_DKDEBUGVARS);
 	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent);
