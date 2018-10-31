@@ -31,6 +31,7 @@ function EventFromRocket(pointer, event)
 {
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
+			DKWARN("EventFromRocket(pointer, event): match!\n");
 			stored_events[i].dispatchEvent(event);
 		}
 	}
@@ -45,6 +46,7 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback, useCapture){
+	DKWARN("addEventListener("+type+")\n");
 	var already_has = false;
 	for(var i=0; i < stored_events.length; i++){
         if(stored_events[i] === this){
@@ -54,8 +56,9 @@ EventTarget.prototype.addEventListener = function(type, callback, useCapture){
 	if(!already_has){
 		stored_events.push(this);
 	}
-	
-	DKRocket_addEventListener(this.pointer, type, useCapture);
+	if(this.pointer != "window"){
+		DKRocket_addEventListener(this.pointer, type, useCapture);
+	}
 	if(!(type in this.listeners)){
 		this.listeners[type] = [];
 	}
@@ -75,11 +78,13 @@ EventTarget.prototype.removeEventListener = function(type, callback, useCapture)
 	}
 };
 EventTarget.prototype.dispatchEvent = function(event){
+	DKWARN("dispatchEvent("+event+")\n");
 	if(!(event.type in this.listeners)){
 		return true;
 	}
 	var stack = this.listeners[event.type].slice();
 	for (var i = 0, l = stack.length; i < l; i++){
+		DKWARN("dispatchEvent:call\n");
 		stack[i].call(this, event);
 	}
 	return !event.defaultPrevented;
@@ -271,11 +276,11 @@ Document.prototype.getElementsByTagName = function(name){
 }
 
 	
-////////////////////////
-var Window = function(){
+///////////////////////////////
+var Window = function(pointer){
 	//DKDEBUGFUNC();
 	//DKWARN("Window()\n");
-	EventTarget.call(this);
+	EventTarget.call(this, pointer);
 	document = new Document();
 	this.document = document;
 	navigator = new Navigator();
@@ -405,11 +410,6 @@ Console.prototype.warn = function(msg){
 		DKWARN(msg+"\n");
 }
 
-//////////////////////	
-window = new Window();
+//////////////////////////////
+window = new Window("window");
 console = new Console();
-
-setTimeout(function(){
-  console.warn("setTimeout is working! :D");
-}, 500);
-
