@@ -4,7 +4,7 @@ var console;
 var document;
 //var location;
 var navigator;
-//var screen;
+var screen;
 var window;
 
 var stored_events = [];
@@ -179,8 +179,8 @@ var CSSStyleDeclaration = function(pointer)
 }
 
 
-/////////////////////////////////
-var Document = function(pointer){
+//////////////////////////
+var Document = function(){
 	//DKDEBUGFUNC();
 	//console.warn("Document("+pointer+")");
 
@@ -219,7 +219,7 @@ var Document = function(pointer){
 	this.body = this.getElementsByTagName("body")[0];
 	this.documentElement = this.getElementsByTagName("html")[0];
 
-	return Node.call(this, pointer);
+	return Node.call(this);
 }
 
 
@@ -344,8 +344,8 @@ var HTMLElement = function(pointer)
 }
 
 
-//////////////////////////
-var Navigator = function()
+/////////////////////////////////
+var Navigator = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.warn("Navigator()");
@@ -479,14 +479,35 @@ var Node = function(pointer)
 };
 
 
+///////////////////////
+var Screen = function()
+{
+	//DKDEBUGFUNC();
+	//console.warn("Screen()");
+	
+	Object.defineProperty(this, "availTop",      { get: function(){ return DKRocket_availTop(this.pointer);      } });  //TODO
+	Object.defineProperty(this, "availLeft",     { get: function(){ return DKRocket_availLeft(this.pointer);     } });  //TODO
+	Object.defineProperty(this, "availHeight",   { get: function(){ return DKRocket_availHeight(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "availWidth",    { get: function(){ return DKRocket_availWidth(this.pointer);    } });  //TODO
+	Object.defineProperty(this, "colorDepth",    { get: function(){ return DKRocket_colorDepth(this.pointer);    } });  //TODO
+	Object.defineProperty(this, "height",        { get: function(){ return DKRocket_height(this.pointer);        } });  //TODO
+	Object.defineProperty(this, "left",          { get: function(){ return DKRocket_left(this.pointer);          } });  //TODO
+	Object.defineProperty(this, "orientation",   { get: function(){ return DKRocket_orientation(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "pixelDepth",    { get: function(){ return DKRocket_pixelDepth(this.pointer);    } });  //TODO
+	Object.defineProperty(this, "top",           { get: function(){ return DKRocket_top(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "width",         { get: function(){ return DKRocket_width(this.pointer);         } });  //TODO
+	Object.defineProperty(this, "mozEnabled",    { get: function(){ return DKRocket_mozEnabled(this.pointer);    } });  //TODO
+	Object.defineProperty(this, "mozBrightness", { get: function(){ return DKRocket_mozBrightness(this.pointer); } });  //TODO
+}
+
 ///////////////////////////////
 var Window = function(pointer){
 	//DKDEBUGFUNC();
 	
 	console = new Console();
-	document = new Document("document");
+	document = new Document();
 	navigator = new Navigator();
-	//screen = new Screen();
+	screen = new Screen();
 	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
 	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
@@ -680,7 +701,6 @@ var Window = function(pointer){
 	Window.prototype.updateCommands = function(){
 		//TODO
 	}
-	
 	
 	return EventTarget.call(this, pointer);
 }
