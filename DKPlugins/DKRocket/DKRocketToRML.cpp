@@ -94,15 +94,13 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 
-	if(!xml.FindNode("//head")){
-		xml.PrependNode("//rml", "head");
-	}
-	
+	/*
 	if (!xml.FindNode("//body")) {
 		DKERROR("No body tag\n");
 		xml.PrependNode("//html", "body");
 		//todo, we need to move the rest of the content into the body node.
 	}
+	*/
 
 	//Add the base DKRocket.css stylesheet
 	xml.PrependNode("//head","link");
@@ -113,9 +111,9 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	//Rocket cannot read nodes outside of the body, so add an html node we can work with.
 	xml.PrependNode("//body", "html"); 
 
-	xml.SetAttributes("//body","id","body");
+	//xml.SetAttributes("//body","id","body");
 	//xml.SetAttributes("//head","id","head");
-	xml.SetAttributes("//html","id","html");
+	//xml.SetAttributes("//html","id","html");
 
 	xml.SaveDocumentToString(rml);
 
@@ -215,10 +213,11 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		if(scripts[i]->HasAttribute("src")){
 			src = scripts[i]->GetAttribute("src")->Get<Rocket::Core::String>().CString();
 		}
-		if(has(processed, src)){ continue; }
+		
 		DKString inner = scripts[i]->GetInnerRML().CString();
 
 		if(!src.empty()){
+			if(has(processed, src)){ continue; }
 			if(has(path, "http://")){
 				DKString js;
 				DKClass::DKCreate("DKCurl");
@@ -237,7 +236,12 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 		else{
 			if(inner.empty()){ continue; }
-			//DKDuktape::Get()->LoadJSString("testId", inner);
+			
+			//replace(inner,"'","\\'");
+			replace(inner,"\n","");
+			replace(inner,"\t","");
+
+			DKDuktape::Get()->LoadJSString("testId", inner);
 		}
 	}
 

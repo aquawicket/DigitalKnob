@@ -163,6 +163,8 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//DKRocketToRML* dkRocketToRml = new DKRocketToRML();
 	dkRocketToRML.IndexToRml(html, rml);
 
+	//replace(rml,"\"","'");
+
 	//// Clear any document and load the rml into the document
 	if(document){ 
 		Rocket::Core::Factory::ClearStyleSheetCache();
@@ -179,6 +181,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//Set up the dom
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
+	//insert the head tag, rocket does not do this
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 	DKString head_tag;
