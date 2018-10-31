@@ -557,41 +557,132 @@ var Window = function(pointer){
 	Object.defineProperty(this, "visualViewport",        { get: function(){ return DKRocket_visualViewport();               } });  //TODO
 	Object.defineProperty(this, "window",                { get: function(){ return DKRocket_window();                       } });  //TODO
 	
-	
 	Window.prototype.alert = function(msg){
 		console.warn("alert: "+msg); //TODO - create an actual popup window
 	}
-	
+	Window.prototype.blur = function(){
+		//TODO
+	}
+	Window.prototype.cancelAnimationFrame = function(){
+		//TODO
+	}
+	Window.prototype.cancelIdleCallback = function(){
+		//TODO
+	}
+	Window.prototype.captureEvents = function(){
+		//TODO, deprecated
+	}
+	Window.prototype.clearImmediate = function(){
+		//TODO
+	}
+	Window.prototype.close = function(){
+		//TODO
+	}
+	Window.prototype.confirm = function(){
+		//TODO
+	}
+	Window.prototype.dispatchEvent = function(){
+		//TODO
+	}
+	Window.prototype.dump = function(){
+		//TODO
+	}
+	Window.prototype.find = function(){
+		//TODO
+	}
+	Window.prototype.focus = function(){
+		//TODO
+	}
+	Window.prototype.getAttentionWithCycleCount = function(){
+		//TODO
+	}
+	Window.prototype.getComputedStyle = function(){
+		//TODO
+	}
+	Window.prototype.getDefaultComputedStyle = function(){
+		//TODO
+	}
+	Window.prototype.getSelection = function(){
+		//TODO
+	}
+	Window.prototype.matchMedia = function(){
+		//TODO
+	}
+	Window.prototype.maximize = function(){
+		//TODO
+	}
+	Window.prototype.minimize = function(){
+		//TODO
+	}
+	Window.prototype.moveBy = function(){
+		//TODO
+	}
+	Window.prototype.moveTo = function(){
+		//TODO
+	}
+	Window.prototype.open = function(){
+		//TODO
+	}
+	Window.prototype.postMessage = function(){
+		//TODO
+	}
+	Window.prototype.print = function(){
+		//TODO
+	}
+	Window.prototype.prompt = function(){
+		//TODO
+	}
+	Window.prototype.releaseEvents = function(){
+		//TODO, deprecated
+	}
+	Window.prototype.requestAnimationFrame = function(){
+		//TODO
+	}
+	Window.prototype.requestIdleCallback = function(){
+		//TODO
+	}
+	Window.prototype.resizeBy = function(){
+		//TODO
+	}
+	Window.prototype.resizeTo = function(){
+		//TODO
+	}
+	Window.prototype.scroll = function(){
+		//TODO
+	}
+	Window.prototype.scrollBy = function(){
+		//TODO
+	}
+	Window.prototype.scrollByLines = function(){
+		//TODO
+	}
+	Window.prototype.scrollByPages = function(){
+		//TODO
+	}
+	Window.prototype.scrollTo = function(){
+		//TODO
+	}
+	Window.prototype.setCursor = function(){
+		//TODO
+	}
+	Window.prototype.setImmediate = function(){
+		//TODO
+	}
+	Window.prototype.setResizable = function(){
+		//TODO
+	}
+	Window.prototype.sizeToContent = function(){
+		//TODO
+	}
+	Window.prototype.stop = function(){
+		//TODO
+	}
+	Window.prototype.updateCommands = function(){
+		//TODO
+	}
 	
 	
 	return EventTarget.call(this, pointer);
-	
-	/*
-	return new Proxy(this, { // Wrap it behind a proxy
-		has: function (targ, key) {
-			return key in targ;  // return unmodified existence status
-		},
-		get: function(targ, key, recv){
-			//console.log("Window:get("+targ+","+key+")");
-			if(key == "innerHeight"){ targ[key] = DKRocket_innerHeight(); }
-			if(key == "innerWidth"){ targ[key] = DKRocket_innerWidth(); }
-			if(key == "name"){ targ[key] = DKRocket_name(); }
-			return targ[key];  // return unmodified value
-		},
-		set: function(targ, key, val, recv){
-			//console.log("Window:get("+targ+","+key+","+val+")");
-			//if(key == "innerHeight"){ DKRocket_SetInnerHeight(val); }  //TODO
-			//if(key == "innerWidth"){ DKRocket_SetInnerWidth(val); }    //TODO
-			//if(key == "name"){ DKRocket_SetName(val); }    //TODO
-			targ[key] = val;
-			return true;
-		},
-		deleteProperty: function(targ, key){
-			delete targ[key];
-			return true;
-		}
-	});
-	*/
 }
 
 
