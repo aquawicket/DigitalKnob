@@ -292,7 +292,7 @@ function DKDebug_Editor()
 function DKDebug_Debugger()
 {
 	DKDEBUGFUNC();
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "Rocket" || DK_GetJavascript() == "Duktape"){
 		DKRocket_ToggleDebugger();
 	}
 	if(DK_GetBrowser() == "CEF"){

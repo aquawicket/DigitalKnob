@@ -165,7 +165,7 @@ HTMLCollection.prototype.item = function(index){
 ////////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer){
 	//DKDEBUGFUNC();
-	console.warn("CSSStyleDeclaration("+pointer+")");
+	//console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
 	
 	/*
@@ -226,15 +226,35 @@ var CSSStyleDeclaration = function(pointer){
 		get: function (targ, key, recv){
 			//console.log("Style:get("+targ+","+key+")");
 			if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
-			if(key == "backgroundColor"){ targ[key] = DKRocket_getPropertyValue(targ["pointer"], "background-color"); }
-			else{ targ[key] = DKRocket_getPropertyValue(targ["pointer"], key); }
+			var realKey = key;
+			
+			//Replace characters ( C ) with ( -c )    I.E.  backgroundColor becomes background-color
+			for(var i=0; i < realKey.length; i++){
+				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
+					if(realKey.charAt(i) == "-"){ continue; }
+					realKey = realKey.substr(0, i)+"-"+realKey.charAt(i).toLowerCase()+realKey.substr(i+1, realKey.length);
+				}
+			}
+
+			targ[key] = DKRocket_getPropertyValue(targ["pointer"], realKey);
 			return targ[key];
 		},
 		set: function (targ, key, val, recv){
 			//console.log("Style:set("+targ+","+key+","+val+")");
 			if(typeof targ[key] === "function" || key == "pointer"){ return true; }
-			if(key == "backgroundColor"){ DKRocket_setProperty(targ["pointer"], "background-color", val); }
-			else{ DKRocket_setProperty(targ["pointer"], key, val); }
+			var realKey = key;
+			
+			
+			//Replace characters ( C ) with ( -c )    I.E.  backgroundColor becomes background-color
+			for(var i=0; i < realKey.length; i++){
+				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
+					if(realKey.charAt(i) == "-"){ continue; }
+					realKey = realKey.substr(0, i)+"-"+realKey.charAt(i).toLowerCase()+realKey.substr(i+1, realKey.length);
+				}
+			}
+			
+			DKWARN(realKey+" "+val)
+			DKRocket_setProperty(targ["pointer"], realKey, val);
 			targ[key] = val;
 			return true;
 		},
