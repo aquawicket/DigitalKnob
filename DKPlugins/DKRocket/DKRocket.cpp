@@ -326,11 +326,9 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	//TODO send this event back to duktape to be processed in javascript
 	DKString code = "EventFromRocket('"+str+"',"+evnt+");";
 	DKDuktape::Get()->RunDuktape(code);
+	//////////////////////////////////////////////////////////////////////
 
 
-
-
-	
 
 	//If the event bubbles up, ignore elements underneith 
 	Rocket::Core::Context* ctx = document->GetContext();

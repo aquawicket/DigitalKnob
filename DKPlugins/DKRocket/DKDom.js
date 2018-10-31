@@ -45,7 +45,17 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback){
-	stored_events.push(this);
+	
+	var already_has = false;
+	for(var i=0; i < stored_events.length; i++){
+        if(stored_events[i] === this){
+			already_has = true;
+        }
+    }
+	if(!already_has){
+		stored_events.push(this);
+	}
+	
 	DKRocket_addEventListener(this.pointer, type);
 	if(!(type in this.listeners)){
 		this.listeners[type] = [];
