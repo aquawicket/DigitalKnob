@@ -27,6 +27,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_removeChild", DKRocketJS::removeChild);
 	DKDuktape::AttachFunction("DKRocket_createElement", DKRocketJS::createElement);
 	DKDuktape::AttachFunction("DKRocket_appendChild", DKRocketJS::appendChild);
+	DKDuktape::AttachFunction("DKRocket_addEventListener", DKRocketJS::addEventListener);
+	DKDuktape::AttachFunction("DKRocket_removeEventListener", DKRocketJS::removeEventListener);
 	return true;
 }
 
@@ -442,6 +444,40 @@ int DKRocketJS::appendChild(duk_context* ctx)
 	}
 	element->AppendChild(child, true);
 	duk_push_string(ctx, childAddress.c_str());
+	return true;
+}
+
+//////////////////////////////////////////////////
+int DKRocketJS::addEventListener(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::addEventListener(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString type = duk_require_string(ctx, 1);
+	bool phase = false;
+	element->AddEventListener(type.c_str(), DKRocket::Get(), phase);
+	return true;
+}
+
+//////////////////////////////////////////////////
+int DKRocketJS::removeEventListener(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::removeEventListener(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString type = duk_require_string(ctx, 1);
+	bool phase = false;
+	element->RemoveEventListener(type.c_str(), DKRocket::Get(), phase);
 	return true;
 }
 

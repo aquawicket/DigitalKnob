@@ -36,12 +36,14 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback){
+	DKRocket_addEventListener(this.pointer, type);
 	if(!(type in this.listeners)){
 		this.listeners[type] = [];
 	}
 	this.listeners[type].push(callback);
 };
 EventTarget.prototype.removeEventListener = function(type, callback){
+	DKRocket_removeEventListener(this.pointer, type);
 	if(!(type in this.listeners)){
 		return;
 	}
