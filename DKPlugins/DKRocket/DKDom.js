@@ -286,21 +286,27 @@ var Element = function(pointer)
 	
 	this.pointer = pointer;
 	Node.call(this, pointer);
+	GlobalEventHandlers.call(this, pointer);
 	
 	return new Proxy(this, {
 		has: function (targ, key){
 			return key in targ;
 		},
 		get: function (targ, key, recv){
-			//console.log("Style:get("+targ+","+key+")");
+			//console.log("Element:get("+targ+","+key+")");
 			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
 			targ[key] = DKRocket_getAttribute(targ["pointer"], key);
 			return targ[key];
 		},
 		set: function (targ, key, val, recv){
-			//console.log("Style:set("+targ+","+key+","+val+")");
+			console.log("Element:set("+targ+","+key+","+val+")");
 			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
-			DKRocket_setAttribute(targ["pointer"], key, val);
+			if(key == "onclick"){ 
+				//return true; 
+			}
+			else{
+				DKRocket_setAttribute(targ["pointer"], key, val);
+			}
 			targ[key] = val;
 			return true;
 		},
@@ -368,6 +374,37 @@ var EventTarget = function(pointer)
 		return !event.defaultPrevented;
 	};
 };
+
+
+///////////////////////////////////////////
+var GlobalEventHandlers = function(pointer)
+{
+	//DKDEBUGFUNC();
+	console.warn("GlobalEventHandlers("+pointer+")");
+	
+	return new Proxy(this, {
+		has: function (targ, key){
+			return key in targ;
+		},
+		get: function (targ, key, recv){
+			console.log("Style:get("+targ+","+key+")");
+			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
+			//targ[key] = DKRocket_getAttribute(targ["pointer"], key);
+			return targ[key];
+		},
+		set: function (targ, key, val, recv){
+			console.log("Style:set("+targ+","+key+","+val+")");
+			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
+			//DKRocket_setAttribute(targ["pointer"], key, val);
+			targ[key] = val;
+			return true;
+		},
+		deleteProperty: function (targ, key){
+			delete targ[key];
+			return true;
+		}
+	});
+}
 
 
 ///////////////////////////////
@@ -787,6 +824,7 @@ Document.prototype = Node.prototype;
 Element.prototype = Node.prototype;	
 HTMLElement.prototype = Element.prototype;
 HTMLCollection.prototype = [];
+GlobalEventHandlers.prototype = EventTarget.prototype;
 
 
 
