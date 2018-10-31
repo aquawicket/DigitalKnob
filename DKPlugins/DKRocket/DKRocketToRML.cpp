@@ -88,7 +88,10 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
-	replace(rml,"\"","'"); //replace quotes with apostrophes, pugixml will remove quotes inside nodes
+	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
+	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
+	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
+	replace(rml,"\"","'");
 	
 	//Rocket does not recognize favicons, TODO
 	//replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
