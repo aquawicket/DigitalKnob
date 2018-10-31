@@ -305,7 +305,32 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	if(!event.GetTargetElement()){return;} //MUST!
 
 	Rocket::Core::Element* element = event.GetCurrentElement();
+	const void* address = static_cast<const void*>(element);
+	std::stringstream ss;
+	ss << address;  
+	DKString str = ss.str();
+
+	/*
+	Rocket::Core::Element* targ_element = event.GetCurrentElement();
+	const void* address2 = static_cast<const void*>(targ_element);
+	std::stringstream ss2;
+	ss2 << address2;  
+	DKString str2 = ss2.str();
+	*/
+
 	DKString type = event.GetType().CString();
+	int phase = event.GetPhase();
+
+	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
+
+	//TODO send this event back to duktape to be processed in javascript
+	DKString code = "EventFromRocket('"+str+"',"+evnt+");";
+	DKDuktape::Get()->RunDuktape(code);
+
+
+
+
+	
 
 	//If the event bubbles up, ignore elements underneith 
 	Rocket::Core::Context* ctx = document->GetContext();

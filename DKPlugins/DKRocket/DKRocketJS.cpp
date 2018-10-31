@@ -96,7 +96,7 @@ int DKRocketJS::getElementById(duk_context* ctx)
 		return true;
 	}
 
-	const void * address = static_cast<const void*>(element);
+	const void* address = static_cast<const void*>(element);
 	std::stringstream ss;
 	ss << address;  
 	DKString str = ss.str(); 
@@ -181,7 +181,7 @@ int DKRocketJS::getElementsByClassName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void * address = static_cast<const void*>(elements[i]);
+		const void* address = static_cast<const void*>(elements[i]);
 		std::stringstream ss;
 		ss << address;  
 		str += ss.str(); 
@@ -211,7 +211,7 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void * address = static_cast<const void*>(elements[i]);
+		const void* address = static_cast<const void*>(elements[i]);
 		std::stringstream ss;
 		ss << address;  
 		str += ss.str(); 

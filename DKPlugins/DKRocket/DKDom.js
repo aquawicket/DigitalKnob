@@ -6,6 +6,7 @@ var navigator;
 //var location;
 //var screen;
 var console;
+var stored_events = [];
 
 /////////////////////
 function DKDom_Init()
@@ -25,7 +26,15 @@ function DKDom_OnEvent(event)
 	DKDEBUGFUNC(event);
 }
 
-
+////////////////////////////////////////
+function EventFromRocket(pointer, event)
+{
+	for(var i=0; i<stored_events.length; i++){
+		if(pointer == stored_events[i].pointer){
+			stored_events[i].dispatchEvent(event);
+		}
+	}
+}
 
 ////////////////////////////////////
 var EventTarget = function(pointer){
@@ -36,6 +45,7 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback){
+	stored_events.push(this);
 	DKRocket_addEventListener(this.pointer, type);
 	if(!(type in this.listeners)){
 		this.listeners[type] = [];
@@ -57,6 +67,7 @@ EventTarget.prototype.removeEventListener = function(type, callback){
 };
 EventTarget.prototype.dispatchEvent = function(event){
 	if(!(event.type in this.listeners)){
+		DKWARN("event.type not in listeners\n");
 		return true;
 	}
 	var stack = this.listeners[event.type].slice();
