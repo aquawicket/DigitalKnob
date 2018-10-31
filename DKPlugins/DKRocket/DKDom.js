@@ -7,6 +7,7 @@ var navigator;
 var screen;
 var window;
 
+var stored_objects = [];
 var stored_events = [];
 
 
@@ -30,8 +31,8 @@ function DKDom_OnEvent(event)
 
 
 
-////////////////////////
-var Console = function()
+///////////////////////////////
+var Console = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.warn("Console()");
@@ -179,8 +180,9 @@ var CSSStyleDeclaration = function(pointer)
 }
 
 
-//////////////////////////
-var Document = function(){
+////////////////////////////////
+var Document = function(pointer)
+{
 	//DKDEBUGFUNC();
 	//console.warn("Document("+pointer+")");
 
@@ -219,7 +221,7 @@ var Document = function(){
 	this.body = this.getElementsByTagName("body")[0];
 	this.documentElement = this.getElementsByTagName("html")[0];
 
-	return Node.call(this);
+	return Node.call(this, pointer);
 }
 
 
@@ -277,6 +279,9 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
+		
+		
+		//TODO - make this shorter
 		var already_has = false;
 		for(var i=0; i < stored_events.length; i++){
 			if(stored_events[i] === this){
@@ -286,6 +291,10 @@ var EventTarget = function(pointer)
 		if(!already_has){
 			stored_events.push(this);
 		}
+		
+		
+		
+		
 		if(this.pointer != "window"){
 			DKRocket_addEventListener(this.pointer, type, useCapture);
 		}
@@ -324,10 +333,21 @@ var EventTarget = function(pointer)
 var HTMLCollection = function()
 {
 	//DKDEBUGFUNC();
-	//console.warn("HTMLCollection()");
+	console.warn("HTMLCollection()");
 	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
+	}
+	HTMLCollection.prototype.namedItem = function(name){
+		for(var i=0; i<this.length; i++){
+			if(this.id && this.id == name){
+				return this[i];
+			}
+			if(this.name && this.name == name){
+				return this[i];
+			}
+		}
+		return null;
 	}
 }
 
@@ -479,8 +499,8 @@ var Node = function(pointer)
 };
 
 
-///////////////////////
-var Screen = function()
+//////////////////////////////
+var Screen = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.warn("Screen()");
@@ -498,16 +518,28 @@ var Screen = function()
 	Object.defineProperty(this, "width",         { get: function(){ return DKRocket_width(this.pointer);         } });  //TODO
 	Object.defineProperty(this, "mozEnabled",    { get: function(){ return DKRocket_mozEnabled(this.pointer);    } });  //TODO
 	Object.defineProperty(this, "mozBrightness", { get: function(){ return DKRocket_mozBrightness(this.pointer); } });  //TODO
+	
+	Screen.prototype.lockOrientation = function(){
+		//TODO
+	}
+	Screen.prototype.unlockOrientation = function(){
+		//TODO
+	}
+	Screen.prototype.unlockOrientation = function(){
+		//TODO
+	}
+	
+	return EventTarget.call(this, pointer);
 }
 
 ///////////////////////////////
 var Window = function(pointer){
 	//DKDEBUGFUNC();
 	
-	console = new Console();
-	document = new Document();
-	navigator = new Navigator();
-	screen = new Screen();
+	console = new Console("console");
+	document = new Document("document");
+	navigator = new Navigator("navigator");
+	screen = new Screen("screen");
 	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
 	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
@@ -708,6 +740,7 @@ var Window = function(pointer){
 
 //Global prototypes. Must be in order by dependency
 Window.prototype = EventTarget.prototype;
+Screen.prototype = EventTarget.prototype;
 Node.prototype = EventTarget.prototype;
 Document.prototype = Node.prototype;
 Element.prototype = Node.prototype;	
