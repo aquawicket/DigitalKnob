@@ -91,47 +91,10 @@ EventTarget.prototype.dispatchEvent = function(event){
 var Node = function(pointer){
 	//DKDEBUGFUNC();
 	//console.warn("Node("+pointer+")");
-	EventTarget.call(this, pointer);
 	
-	return new Proxy(this, { 
-		has: function(targ, key){
-			return key in targ;
-		},
-		get: function(targ, key, recv){
-			//console.log("Node:get("+targ+","+key+")");
-			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style" || key == "listeners" || key == "clientWidth"){ return targ[key]; }
-			if(key == "innerHTML"){
-				targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
-			}
-			else if(key == "parentNode"){
-				var parentNode = DKRocket_parentNode(targ["pointer"], key);
-				targ[key] = new Node(parentNode);
-			}
-			else{
-				//console.warn("targ['pointer']: "+targ["pointer"]);
-				if(targ["pointer"]){
-					targ[key] = DKRocket_getAttribute(targ["pointer"], key); 
-				}
-			}
-			return targ[key];
-		},
-		set: function(targ, key, val, recv){
-			//console.log("Node:set("+targ+","+key+","+val+")");
-			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style"){ return true; }
-			if(key == "innerHTML"){
-				DKRocket_setInnerHTML(targ["pointer"], val);
-			}
-			else{
-				DKRocket_setAttribute(targ["pointer"], key, val);
-			}
-			targ[key] = val;
-			return true;
-		},
-		deleteProperty: function(targ, key){
-			delete targ[key];
-			return true;
-		}
-	});
+	Object.defineProperty(this, "parentNode", { get: function(){ return DKRocket_parentNode(this.pointer); } });
+	
+	return EventTarget.call(this, pointer);
 };
 Node.prototype = EventTarget.prototype;
 Node.prototype.appendChild = function(aChild){
@@ -152,13 +115,15 @@ Node.prototype.removeChild = function(aChild){
 var Element = function(pointer){
 	//DKDEBUGFUNC();
 	//console.warn("Element("+pointer+")");
-	
-	Object.defineProperty(this, "clientWidth", {
-		get: function(){
-			return DKRocket_clientWidth(this.pointer);
-		}
+		
+	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
+	Object.defineProperty(this, "clientHeight", { get: function(){ return DKRocket_clientHeight(this.pointer); } });
+	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
+	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKRocket_clientLeft(this.pointer);   } });
+	Object.defineProperty(this, "innerHTML", { 
+		get: function(){ return DKRocket_innerHTML(this.pointer); },
+		set: function(val){ return DKRocket_setInnerHTML(this.pointer, val); }
 	});
-	
 	
 	return Node.call(this, pointer);
 }
@@ -200,8 +165,59 @@ HTMLCollection.prototype.item = function(index){
 ////////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer){
 	//DKDEBUGFUNC();
-	//console.warn("CSSStyleDeclaration("+pointer+")");
+	console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
+	
+	/*
+	Object.defineProperty(this, "background-color", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "background-color"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "background-color", val); }
+	});
+	Object.defineProperty(this, "backgroundColor", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "background-color"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "background-color", val); }
+	});
+	Object.defineProperty(this, "border-width", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "border-width"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "border-width", val); }
+	});
+	Object.defineProperty(this, "borderWidth", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "border-width"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "border-width", val); }
+	});
+	Object.defineProperty(this, "color", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "color"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "color", val); }
+	});
+	Object.defineProperty(this, "height", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "height"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "height", val); }
+	});
+	Object.defineProperty(this, "left", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "left"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "left", val); }
+	});
+	Object.defineProperty(this, "margin", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "margin"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "margin", val); }
+	});
+	Object.defineProperty(this, "overflow", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "overflow"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "overflow", val); }
+	});
+	Object.defineProperty(this, "position", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "position"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "position", val); }
+	});
+	Object.defineProperty(this, "top", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "top"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "top", val); }
+	});
+	Object.defineProperty(this, "width", { 
+		get: function(){ return DKRocket_getPropertyValue(this.pointer, "width"); },
+		set: function(val){ return DKRocket_setProperty(this.pointer, "width", val); }
+	});
+	*/
 	
 	return new Proxy(this, {
 		has: function (targ, key){
@@ -229,6 +245,7 @@ var CSSStyleDeclaration = function(pointer){
 	});
 }
 CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
+	console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
 	DKRocket_setProperty(this.pointer, propertyName, propertyValue);
 	this[propertyName] = propertyValue;
 }
@@ -283,14 +300,15 @@ Document.prototype.getElementsByTagName = function(name){
 ///////////////////////////////
 var Window = function(pointer){
 	//DKDEBUGFUNC();
-	//console.warn("Window()");
 	console = new Console();
+	//console.warn("Window("+pointer+")");
 	this.console = console;
-	EventTarget.call(this, pointer);
-	document = new Document();
+	document = new Document("document");
 	this.document = document;
 	navigator = new Navigator();
 	this.navigator = navigator;
+	
+	EventTarget.call(this, pointer);
 	
 	return new Proxy(this, { // Wrap it behind a proxy
 		has: function (targ, key) {
