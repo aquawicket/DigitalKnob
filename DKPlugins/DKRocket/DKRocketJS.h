@@ -41,6 +41,8 @@ public:
 	static int setInnerHTML(duk_context* ctx);
 	static int clientWidth(duk_context* ctx);
 	static int clientHeight(duk_context* ctx);
+	static int clientTop(duk_context* ctx);
+	static int clientLeft(duk_context* ctx);
 	
 	//style
 	static int setProperty(duk_context* ctx);
