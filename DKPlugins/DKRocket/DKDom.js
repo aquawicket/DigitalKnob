@@ -45,7 +45,6 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-	
 	var already_has = false;
 	for(var i=0; i < stored_events.length; i++){
         if(stored_events[i] === this){
@@ -77,7 +76,6 @@ EventTarget.prototype.removeEventListener = function(type, callback, useCapture)
 };
 EventTarget.prototype.dispatchEvent = function(event){
 	if(!(event.type in this.listeners)){
-		DKWARN("event.type not in listeners\n");
 		return true;
 	}
 	var stack = this.listeners[event.type].slice();
