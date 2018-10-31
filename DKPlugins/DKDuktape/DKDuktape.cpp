@@ -269,6 +269,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
 		DKString message = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
 		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
 		DKString fileName = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.fileName`
@@ -279,31 +280,19 @@ bool DKDuktape::LoadFile(const DKString& path)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 		
+		DKERROR(message+"\n");
+
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
 		replace(message,"'","\\'");
 
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', name:'"+name+"', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
 		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);  // ignore result?
-
-	/*
-	if(duk_peval_file(ctx, path.c_str()) != 0){
-		DKString error = toString(duk_safe_to_string(ctx, -1));
-		replace(error, "'", "\\'");
-		DKString str = "var err = new Error();";
-		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
-		str += path+"\\n";
-		str += error+"\\n";
-		str += "'+err.stack+'\\n');";
-		duk_eval_string(ctx, str.c_str());
-    }
-    duk_pop(ctx);  // ignore result?
-	*/
 
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
@@ -324,24 +313,34 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		return false;
 	}
 
-	/*
-	if(duk_peval_string_noresult(ctx, string.c_str()) != 0){
-		DKString str = "var err = new Error();";
-		str += "var err_error = {stack:err.stack};";
-		str += "var err_event = {type:'error', name:err.name, message:err.message, filename:err.fileName, lineno:err.lineNumber, colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
-	}
-	*/
+	if(duk_peval_string(ctx, string.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
 
-	if(duk_peval_string_noresult(ctx, string.c_str()) != 0){
-		DKString error = toString(duk_safe_to_string(ctx, -1));
-		replace(error, "'", "\\'");
-		DKString str = "var err = new Error();";
-		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
-		str += url+"\\n";
-		str += error+"\\n";
-		str += "'+err.stack+'\\n');";
+		DKERROR(message+"\n");
+
+		replace(stack,"'","\\'");
+		replace(stack,"\n","\\n");
+		replace(message,"'","\\'");
+
+		DKString str;
+		str += "var err_error = {stack:'"+stack+"'};";
+		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 
@@ -449,7 +448,38 @@ bool DKDuktape::RunDuktape(const DKString& code)
 		DKERROR("DKDuktape::RunDuktape("+code+"): context is invalid\n"); 
 		return false; 
 	}
-	duk_eval_string(DKDuktape::ctx, code.c_str());
+
+	if(duk_peval_string(ctx, code.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
+
+		DKERROR(message+"\n");
+
+		replace(stack,"'","\\'");
+		replace(stack,"\n","\\n");
+		replace(message,"'","\\'");
+
+		DKString str;
+		str += "var err_error = {stack:'"+stack+"'};";
+		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
+		duk_eval_string(ctx, str.c_str());
+	}
+
 	return true;
 }
 
@@ -462,8 +492,39 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 		DKERROR("DKDuktape::RunDuktape("+code+", rval): context is invalid\n");
 		return false;
 	}
-	duk_eval_string(DKDuktape::ctx, code.c_str());
+	
+	if(duk_peval_string(ctx, code.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
 
+		DKERROR(message+"\n");
+
+		replace(stack,"'","\\'");
+		replace(stack,"\n","\\n");
+		replace(message,"'","\\'");
+
+		DKString str;
+		str += "var err_error = {stack:'"+stack+"'};";
+		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
+		duk_eval_string(ctx, str.c_str());
+	}
+
+	//TODO - complete this 
 	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
 		rval = duk_get_string(ctx, -1);
 		if(!rval.empty()){

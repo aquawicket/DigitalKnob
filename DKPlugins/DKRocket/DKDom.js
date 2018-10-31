@@ -31,7 +31,6 @@ function EventFromRocket(pointer, event)
 {
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
-			DKWARN("EventFromRocket(pointer, event): match!\n");
 			stored_events[i].dispatchEvent(event);
 		}
 	}
@@ -46,7 +45,6 @@ var EventTarget = function(pointer){
 };
 EventTarget.prototype.listeners = null;
 EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-	DKWARN("addEventListener("+type+")\n");
 	var already_has = false;
 	for(var i=0; i < stored_events.length; i++){
         if(stored_events[i] === this){
@@ -78,13 +76,11 @@ EventTarget.prototype.removeEventListener = function(type, callback, useCapture)
 	}
 };
 EventTarget.prototype.dispatchEvent = function(event){
-	DKWARN("dispatchEvent("+event+")\n");
 	if(!(event.type in this.listeners)){
 		return true;
 	}
 	var stack = this.listeners[event.type].slice();
 	for (var i = 0, l = stack.length; i < l; i++){
-		DKWARN("dispatchEvent:call\n");
 		stack[i].call(this, event);
 	}
 	return !event.defaultPrevented;
@@ -414,12 +410,5 @@ Console.prototype.warn = function(msg){
 window = new Window("window");
 console = new Console();
 
-window.addEventListener("error", function(err){
-	var errorText = [
-        err.name +': '+err.message,
-        'URL: ' + err.filename,
-        'Line: ' + err.lineno + ', Column: ' + err.colno,
-        'Stack: ' + (err.error && err.error.stack || '(no stack trace)')
-    ].join('\n');
-	console.error(errorText);
-});
+
+
