@@ -165,12 +165,12 @@ var CSSStyleDeclaration = function(pointer)
 	*/
 	
 	return new Proxy(this, {
-		has: function (targ, key){
-			return key in targ;
+		has: function (target, key){
+			return key in target;
 		},
-		get: function (targ, key, recv){
-			//console.log("Style:get("+targ+","+key+")");
-			if(typeof targ[key] === "function" || key == "pointer"){ return targ[key]; }
+		get: function (target, key, recv){
+			//console.log("Style:get("+target+","+key+")");
+			if(typeof target[key] === "function" || key == "pointer"){ return target[key]; }
 			var realKey = key;
 			
 			//Replace characters ( C ) with ( -c )    I.E.  backgroundColor becomes background-color
@@ -181,12 +181,12 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 
-			targ[key] = DKRocket_getPropertyValue(targ["pointer"], realKey);
-			return targ[key];
+			target[key] = DKRocket_getPropertyValue(target["pointer"], realKey);
+			return target[key];
 		},
-		set: function (targ, key, val, recv){
-			//console.log("Style:set("+targ+","+key+","+val+")");
-			if(typeof targ[key] === "function" || key == "pointer"){ return true; }
+		set: function (target, key, val, recv){
+			//console.log("Style:set("+target+","+key+","+val+")");
+			if(typeof target[key] === "function" || key == "pointer"){ return true; }
 			var realKey = key;
 			
 			
@@ -198,12 +198,12 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 			
-			DKRocket_setProperty(targ["pointer"], realKey, val);
-			targ[key] = val;
+			DKRocket_setProperty(target["pointer"], realKey, val);
+			target[key] = val;
 			return true;
 		},
-		deleteProperty: function (targ, key){
-			delete targ[key];
+		deleteProperty: function (target, key){
+			delete target[key];
 			return true;
 		}
 	});
@@ -289,29 +289,29 @@ var Element = function(pointer)
 	GlobalEventHandlers.call(this, pointer);
 	
 	return new Proxy(this, {
-		has: function (targ, key){
-			return key in targ;
+		has: function (target, key){
+			return key in target;
 		},
-		get: function (targ, key, recv){
-			//console.log("Element:get("+targ+","+key+")");
-			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
-			targ[key] = DKRocket_getAttribute(targ["pointer"], key);
-			return targ[key];
+		get: function (target, key, recv){
+			//console.log("Element:get("+target+","+key+","+recv+")");
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return target[key]; }
+			target[key] = DKRocket_getAttribute(target["pointer"], key);
+			return target[key];
 		},
-		set: function (targ, key, val, recv){
-			console.log("Element:set("+targ+","+key+","+val+")");
-			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
-			if(key == "onclick"){ 
-				//return true; 
+		set: function (target, key, val, recv){
+			//console.log("Element:set("+target+","+key+","+val+")");
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
+			if(key.substr(0,2) == "on"){ //onevent
+				target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{
-				DKRocket_setAttribute(targ["pointer"], key, val);
+				DKRocket_setAttribute(target["pointer"], key, val);
 			}
-			targ[key] = val;
+			target[key] = val;
 			return true;
 		},
-		deleteProperty: function (targ, key){
-			delete targ[key];
+		deleteProperty: function (target, key){
+			delete target[key];
 			return true;
 		}
 	});
@@ -329,16 +329,16 @@ var EventFromRocket = function(pointer, event)
 }
 
 ///////////////////////////////////
-var EventTarget = function(pointer)
+var Eventtargetet = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("EventTarget("+pointer+")");
+	//console.warn("Eventtargetet("+pointer+")");
 	
 	this.pointer = pointer;
 	this.listeners = {};
 	
-	EventTarget.prototype.listeners = null;
-	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
+	Eventtargetet.prototype.listeners = null;
+	Eventtargetet.prototype.addEventListener = function(type, callback, useCapture){
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
@@ -350,7 +350,7 @@ var EventTarget = function(pointer)
 		}
 		this.listeners[type].push(callback);
 	};
-	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+	Eventtargetet.prototype.removeEventListener = function(type, callback, useCapture){
 		DKRocket_removeEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			return;
@@ -363,7 +363,7 @@ var EventTarget = function(pointer)
 			}
 		}
 	};
-	EventTarget.prototype.dispatchEvent = function(event){
+	Eventtargetet.prototype.dispatchEvent = function(event){
 		if(!(event.type in this.listeners)){
 			return true;
 		}
@@ -383,24 +383,24 @@ var GlobalEventHandlers = function(pointer)
 	console.warn("GlobalEventHandlers("+pointer+")");
 	
 	return new Proxy(this, {
-		has: function (targ, key){
-			return key in targ;
+		has: function (target, key){
+			return key in target;
 		},
-		get: function (targ, key, recv){
-			console.log("Style:get("+targ+","+key+")");
-			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
-			//targ[key] = DKRocket_getAttribute(targ["pointer"], key);
-			return targ[key];
+		get: function (target, key, recv){
+			console.log("GlobalEventHandlers:get("+target+","+key+")");
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return target[key]; }
+			//target[key] = DKRocket_getAttribute(target["pointer"], key);
+			return target[key];
 		},
-		set: function (targ, key, val, recv){
-			console.log("Style:set("+targ+","+key+","+val+")");
-			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
-			//DKRocket_setAttribute(targ["pointer"], key, val);
-			targ[key] = val;
+		set: function (target, key, val, recv){
+			console.log("GlobalEventHandlers:set("+target+","+key+","+val+")");
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
+			//DKRocket_setAttribute(target["pointer"], key, val);
+			target[key] = val;
 			return true;
 		},
-		deleteProperty: function (targ, key){
-			delete targ[key];
+		deleteProperty: function (target, key){
+			delete target[key];
 			return true;
 		}
 	});
@@ -573,7 +573,7 @@ var Node = function(pointer)
 		//TODO
 	}
 
-	return EventTarget.call(this, pointer);
+	return Eventtargetet.call(this, pointer);
 };
 
 
@@ -607,7 +607,7 @@ var Screen = function(pointer)
 		//TODO
 	}
 	
-	return EventTarget.call(this, pointer);
+	return Eventtargetet.call(this, pointer);
 }
 
 ///////////////////////////////
@@ -812,19 +812,19 @@ var Window = function(pointer){
 		//TODO
 	}
 	
-	return EventTarget.call(this, pointer);
+	return Eventtargetet.call(this, pointer);
 }
 
 
 //Global prototypes. Must be in order by dependency
-Window.prototype = EventTarget.prototype;
-Screen.prototype = EventTarget.prototype;
-Node.prototype = EventTarget.prototype;
+Window.prototype = Eventtargetet.prototype;
+Screen.prototype = Eventtargetet.prototype;
+Node.prototype = Eventtargetet.prototype;
 Document.prototype = Node.prototype;
 Element.prototype = Node.prototype;	
 HTMLElement.prototype = Element.prototype;
 HTMLCollection.prototype = [];
-GlobalEventHandlers.prototype = EventTarget.prototype;
+GlobalEventHandlers.prototype = Eventtargetet.prototype;
 
 
 
