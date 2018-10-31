@@ -413,3 +413,13 @@ Console.prototype.warn = function(msg){
 //////////////////////////////
 window = new Window("window");
 console = new Console();
+
+window.addEventListener("error", function(err){
+	var errorText = [
+        err.name +': '+err.message,
+        'URL: ' + err.filename,
+        'Line: ' + err.lineno + ', Column: ' + err.colno,
+        'Stack: ' + (err.error && err.error.stack || '(no stack trace)')
+    ].join('\n');
+	console.error(errorText);
+});

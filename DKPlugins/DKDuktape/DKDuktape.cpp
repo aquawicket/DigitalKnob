@@ -22,25 +22,25 @@ const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uin
 	char *buf;
 	long sz;  /* ANSI C typing */
 
-	if (!path) {
+	if(!path){
 		goto fail;
 	}
 	f = fopen(path, "rb");
-	if (!f) {
+	if(!f){
 		goto fail;
 	}
-	if (fseek(f, 0, SEEK_END) < 0) {
+	if(fseek(f, 0, SEEK_END) < 0){
 		goto fail;
 	}
 	sz = ftell(f);
-	if (sz < 0) {
+	if(sz < 0){
 		goto fail;
 	}
-	if (fseek(f, 0, SEEK_SET) < 0) {
+	if(fseek(f, 0, SEEK_SET) < 0){
 		goto fail;
 	}
-	buf = (char *) duk_push_fixed_buffer(ctx, (duk_size_t) sz);
-	if ((size_t) fread(buf, 1, (size_t) sz, f) != (size_t) sz) {
+	buf = (char *)duk_push_fixed_buffer(ctx, (duk_size_t) sz);
+	if((size_t) fread(buf, 1, (size_t) sz, f) != (size_t) sz){
 		duk_pop(ctx);
 		goto fail;
 	}
@@ -48,13 +48,14 @@ const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uin
 	return duk_buffer_to_string(ctx, -1);
 
 fail:
-	if (f) {
+	if(f){
 		(void) fclose(f);  /* ignore fclose() error */
 	}
 
-	if (flags & DUK_STRING_PUSH_SAFE) {
+	if(flags & DUK_STRING_PUSH_SAFE){
 		duk_push_undefined(ctx);
-	} else {
+	}
+	else{
 		(void) duk_type_error(ctx, "read file error");
 	}
 	return NULL;
@@ -68,7 +69,7 @@ duk_int_t duk_peval_file(duk_context *ctx, const char *path)
 	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
 	duk_push_string(ctx, path);
 	rc = duk_pcompile(ctx, DUK_COMPILE_EVAL);
-	if (rc != 0) {
+	if(rc != 0){
 		return rc;
 	}
 	duk_push_global_object(ctx);  /* 'this' binding */
@@ -230,6 +231,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	}
 	duk_pop(ctx);  // pop result/error
 	*/
+	
 	return true;
 }
 
@@ -261,7 +263,32 @@ bool DKDuktape::LoadFile(const DKString& path)
 	}
 
 	if(duk_peval_file(ctx, path.c_str()) != 0){
-	//if(duk_peval_string_noresult(ctx, js.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		int lineNumber = duk_get_int(ctx, -1);
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
+		
+		DKString str;
+		str += "var err_error = {stack:'stack'};";
+		str += "var err_event = {type:'error', name:'name', message:'message', filename:'filename', lineno:'lineNumber', colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
+		duk_eval_string(ctx, str.c_str());
+	}
+	duk_pop(ctx);  // ignore result?
+
+	/*
+	if(duk_peval_file(ctx, path.c_str()) != 0){
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
@@ -271,7 +298,8 @@ bool DKDuktape::LoadFile(const DKString& path)
 		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
     }
-    duk_pop(ctx);  /* ignore result ?? */
+    duk_pop(ctx);  // ignore result?
+	*/
 
 	//DKString filename;
 	//DKFile::GetFileName(path, filename);
@@ -291,6 +319,16 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		DKINFO("Ignoring: "+url+" is a browser only file. \n");
 		return false;
 	}
+
+	/*
+	if(duk_peval_string_noresult(ctx, string.c_str()) != 0){
+		DKString str = "var err = new Error();";
+		str += "var err_error = {stack:err.stack};";
+		str += "var err_event = {type:'error', name:err.name, message:err.message, filename:err.fileName, lineno:err.lineNumber, colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
+		duk_eval_string(ctx, str.c_str());
+	}
+	*/
 
 	if(duk_peval_string_noresult(ctx, string.c_str()) != 0){
 		DKString error = toString(duk_safe_to_string(ctx, -1));
