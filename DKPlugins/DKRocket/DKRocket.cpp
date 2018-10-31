@@ -163,8 +163,6 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//DKRocketToRML* dkRocketToRml = new DKRocketToRML();
 	dkRocketToRML.IndexToRml(html, rml);
 
-	//replace(rml,"\"","'");
-
 	//// Clear any document and load the rml into the document
 	if(document){ 
 		Rocket::Core::Factory::ClearStyleSheetCache();

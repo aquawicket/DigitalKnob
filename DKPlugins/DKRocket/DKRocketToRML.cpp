@@ -88,8 +88,10 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
+	replace(rml,"\"","'"); //replace quotes with apostrophes, pugixml will remove quotes inside nodes
+	
 	//Rocket does not recognize favicons, TODO
-	replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
+	//replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
 
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
@@ -215,6 +217,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 		
 		DKString inner = scripts[i]->GetInnerRML().CString();
+		scripts[i]->SetProperty("display", "none");
 
 		if(!src.empty()){
 			if(has(processed, src)){ continue; }
@@ -296,5 +299,24 @@ bool DKRocketToRML::MouseOverIframe(DKEvent* event)
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
 	DKClass::CallFunc("DKSDLCef::OnMouseOver", &data, NULL); //call OnResize in DKCef window handler
+	return true;
+}
+
+/////////////////////////////////////////////
+bool DKRocketToRML::Encode(std::string& data)
+{
+	std::string buffer;
+	buffer.reserve(data.size());
+	for(size_t pos = 0; pos != data.size(); ++pos) {
+		switch(data[pos]) {
+		//case '&':  buffer.append("&amp;");       break;
+		case '\"': buffer.append("&quot;");      break;
+		//case '\'': buffer.append("&apos;");      break;
+		//case '<':  buffer.append("&lt;");        break;
+		//case '>':  buffer.append("&gt;");        break;
+		default:   buffer.append(&data[pos], 1); break;
+		}
+	}
+	data.swap(buffer);
 	return true;
 }
