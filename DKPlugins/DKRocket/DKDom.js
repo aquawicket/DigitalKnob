@@ -4,6 +4,7 @@ var console;
 var document;
 //var location;
 var navigator;
+var objectMap;
 var screen;
 var window;
 
@@ -29,7 +30,36 @@ function DKDom_OnEvent(event)
 	DKDEBUGFUNC(event);
 }
 
-
+/*
+//////////////////////////
+var ObjectMap = function()
+{
+	this.pointers = [];
+	this.objects = [];
+	
+	ObjectMap.prototype.add = function(pointer, obj){
+		if(this.objects.indexOf(obj) > -1){ return null; }
+		this.pointers.push(pointer);
+		this.objects.push(obj);
+	}
+	ObjectMap.prototype.get = function(pointer, type){
+		//DKWARN("objectMap:get("+pointer+")");
+		var i = this.pointers.indexOf(pointer);
+		if(i < 0){ return null; }
+		
+		if(this.objects[i] instanceof type){
+			DKWARN("objectMap:get found match");
+			return this.objects[i];
+		}
+		return null;
+	}
+	ObjectMap.prototype.print = function(){
+		for(var i=0; i<this.pointers.length; i++){
+			DKWARN(this.pointers[i]+" "+this.objects[i]);
+		}
+	}
+}
+*/
 
 ///////////////////////////////
 var Console = function(pointer)
@@ -254,7 +284,31 @@ var Element = function(pointer)
 		this[attribute] = value;
 	}
 	
-	return Node.call(this, pointer);
+	this.pointer = pointer;
+	Node.call(this, pointer);
+	
+	return new Proxy(this, {
+		has: function (targ, key){
+			return key in targ;
+		},
+		get: function (targ, key, recv){
+			//console.log("Style:get("+targ+","+key+")");
+			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
+			targ[key] = DKRocket_getAttribute(targ["pointer"], key);
+			return targ[key];
+		},
+		set: function (targ, key, val, recv){
+			//console.log("Style:set("+targ+","+key+","+val+")");
+			if(typeof targ[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
+			DKRocket_setAttribute(targ["pointer"], key, val);
+			targ[key] = val;
+			return true;
+		},
+		deleteProperty: function (targ, key){
+			delete targ[key];
+			return true;
+		}
+	});
 }
 
 
@@ -279,22 +333,9 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		
-		
-		//TODO - make this shorter
-		var already_has = false;
-		for(var i=0; i < stored_events.length; i++){
-			if(stored_events[i] === this){
-				already_has = true;
-			}
-		}
-		if(!already_has){
+		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
-		
-		
-		
-		
 		if(this.pointer != "window"){
 			DKRocket_addEventListener(this.pointer, type, useCapture);
 		}
@@ -750,4 +791,5 @@ HTMLCollection.prototype = [];
 
 
 ////// Create Dom /////////
+//objectMap = new ObjectMap();
 window = new Window("window");
