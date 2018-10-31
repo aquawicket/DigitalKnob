@@ -273,15 +273,19 @@ bool DKDuktape::LoadFile(const DKString& path)
 		DKString fileName = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.fileName`
 		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		int lineNumber = duk_get_int(ctx, -1);
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
 		duk_pop(ctx);  // pop `err.lineNumber`
 		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 		
+		replace(stack,"'","\\'");
+		replace(stack,"\n","\\n");
+		replace(message,"'","\\'");
+
 		DKString str;
-		str += "var err_error = {stack:'stack'};";
-		str += "var err_event = {type:'error', name:'name', message:'message', filename:'filename', lineno:'lineNumber', colno:'0', error:err_error};";
+		str += "var err_error = {stack:'"+stack+"'};";
+		str += "var err_event = {type:'error', name:'"+name+"', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
 		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
