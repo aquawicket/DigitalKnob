@@ -19,7 +19,6 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKDebug_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	if(DK_Type(event, "keypress")){
 		//DKINFO("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
 		DKDebug_LogKey(DK_GetValue(event));

@@ -1,12 +1,14 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-var window;
-var document;
-var navigator;
-//var location;
-//var screen;
 var console;
+var document;
+//var location;
+var navigator;
+//var screen;
+var window;
+
 var stored_events = [];
+
 
 /////////////////////
 function DKDom_Init()
@@ -36,54 +38,56 @@ function EventFromRocket(pointer, event)
 	}
 }
 
-////////////////////////////////////
-var EventTarget = function(pointer){
+///////////////////////////////////
+var EventTarget = function(pointer)
+{
 	//DKDEBUGFUNC();
 	//console.warn("EventTarget("+pointer+")");
 	this.pointer = pointer;
 	this.listeners = {};
-};
-EventTarget.prototype.listeners = null;
-EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-	var already_has = false;
-	for(var i=0; i < stored_events.length; i++){
-        if(stored_events[i] === this){
-			already_has = true;
-        }
-    }
-	if(!already_has){
-		stored_events.push(this);
-	}
-	if(this.pointer != "window"){
-		DKRocket_addEventListener(this.pointer, type, useCapture);
-	}
-	if(!(type in this.listeners)){
-		this.listeners[type] = [];
-	}
-	this.listeners[type].push(callback);
-};
-EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
-	DKRocket_removeEventListener(this.pointer, type, useCapture);
-	if(!(type in this.listeners)){
-		return;
-	}
-	var stack = this.listeners[type];
-	for(var i = 0, l = stack.length; i < l; i++){
-		if(stack[i] === callback){
-			stack.splice(i, 1);
+	
+	EventTarget.prototype.listeners = null;
+	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
+		var already_has = false;
+		for(var i=0; i < stored_events.length; i++){
+			if(stored_events[i] === this){
+				already_has = true;
+			}
+		}
+		if(!already_has){
+			stored_events.push(this);
+		}
+		if(this.pointer != "window"){
+			DKRocket_addEventListener(this.pointer, type, useCapture);
+		}
+		if(!(type in this.listeners)){
+			this.listeners[type] = [];
+		}
+		this.listeners[type].push(callback);
+	};
+	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+		DKRocket_removeEventListener(this.pointer, type, useCapture);
+		if(!(type in this.listeners)){
 			return;
 		}
-	}
-};
-EventTarget.prototype.dispatchEvent = function(event){
-	if(!(event.type in this.listeners)){
-		return true;
-	}
-	var stack = this.listeners[event.type].slice();
-	for (var i = 0, l = stack.length; i < l; i++){
-		stack[i].call(this, event);
-	}
-	return !event.defaultPrevented;
+		var stack = this.listeners[type];
+		for(var i = 0, l = stack.length; i < l; i++){
+			if(stack[i] === callback){
+				stack.splice(i, 1);
+				return;
+			}
+		}
+	};
+	EventTarget.prototype.dispatchEvent = function(event){
+		if(!(event.type in this.listeners)){
+			return true;
+		}
+		var stack = this.listeners[event.type].slice();
+		for (var i = 0, l = stack.length; i < l; i++){
+			stack[i].call(this, event);
+		}
+		return !event.defaultPrevented;
+	};
 };
 	
 	
@@ -94,28 +98,30 @@ var Node = function(pointer){
 	
 	Object.defineProperty(this, "parentNode", { get: function(){ return DKRocket_parentNode(this.pointer); } });
 	
+	Node.prototype.appendChild = function(aChild){
+		var pointer = DKRocket_appendChild(this.pointer, aChild.pointer);
+		if(!pointer){ return; }
+		var element = new Node(pointer);
+		return element;
+	}
+	Node.prototype.removeChild = function(aChild){
+		var pointer = DKRocket_removeChild(this.pointer, aChild.pointer);
+		if(!pointer){ return null; }
+		var node = new Node(pointer);
+		return node;
+	}
+
 	return EventTarget.call(this, pointer);
 };
 Node.prototype = EventTarget.prototype;
-Node.prototype.appendChild = function(aChild){
-	var pointer = DKRocket_appendChild(this.pointer, aChild.pointer);
-	if(!pointer){ return; }
-	var element = new Node(pointer);
-	return element;
-}
-Node.prototype.removeChild = function(aChild){
-	var pointer = DKRocket_removeChild(this.pointer, aChild.pointer);
-	if(!pointer){ return null; }
-	var node = new Node(pointer);
-	return node;
-}
 
-	
-////////////////////////////////
-var Element = function(pointer){
+
+///////////////////////////////
+var Element = function(pointer)
+{
 	//DKDEBUGFUNC();
 	//console.warn("Element("+pointer+")");
-		
+	
 	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
 	Object.defineProperty(this, "clientHeight", { get: function(){ return DKRocket_clientHeight(this.pointer); } });
 	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
@@ -125,48 +131,67 @@ var Element = function(pointer){
 		set: function(val){ return DKRocket_setInnerHTML(this.pointer, val); }
 	});
 	
+	Element.prototype.hasAttribute = function(attribute){
+		if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
+		else{ return false; }
+	}
+	Element.prototype.getAttribute = function(attribute){
+		this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
+		if(!this[attribute]){ return null; }
+		return this[attribute];
+	}
+	Element.prototype.setAttribute = function(attribute, value){
+		DKRocket_setAttribute(this.pointer, attribute, value);
+		this[attribute] = value;
+	}
+	
 	return Node.call(this, pointer);
 }
-Element.prototype = Node.prototype;
-Element.prototype.hasAttribute = function(attribute){
-	if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
-	else{ return false; }
-}
-Element.prototype.getAttribute = function(attribute){
-	this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
-	if(!this[attribute]){ return null; }
-	return this[attribute];
-}
-Element.prototype.setAttribute = function(attribute, value){
-	DKRocket_setAttribute(this.pointer, attribute, value);
-	this[attribute] = value;
-}
-	
+Element.prototype = Node.prototype;	
 
-////////////////////////////////////
-var HTMLElement = function(pointer){
+
+///////////////////////////////////
+var HTMLElement = function(pointer)
+{
 	//DKDEBUGFUNC();
 	//console.warn("HTMLElement("+pointer+")");
+	
 	this.style = new CSSStyleDeclaration(pointer);
+	
 	return Element.call(this, pointer);
 }
 HTMLElement.prototype = Element.prototype;
 
 
-/////////////////////////////////
-var HTMLCollection = function(){}
-HTMLCollection.prototype = [];
-HTMLCollection.prototype.item = function(index){
-	return this[index];
+///////////////////////////////
+var HTMLCollection = function()
+{
+	//DKDEBUGFUNC();
+	//console.warn("HTMLCollection()");
+	
+	HTMLCollection.prototype.item = function(index){
+		return this[index];
+	}
 }
+HTMLCollection.prototype = [];
 	
 
-
-////////////////////////////////////////////
-var CSSStyleDeclaration = function(pointer){
+///////////////////////////////////////////
+var CSSStyleDeclaration = function(pointer)
+{
 	//DKDEBUGFUNC();
 	//console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
+	
+	CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
+		console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
+		DKRocket_setProperty(this.pointer, propertyName, propertyValue);
+		this[propertyName] = propertyValue;
+	}
+	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
+		this[propertyName] = DKRocket_getPropertyValue(this.pointer, propertyName);
+		return this[propertyName];
+	}
 	
 	/*
 	Object.defineProperty(this, "background-color", { 
@@ -253,7 +278,6 @@ var CSSStyleDeclaration = function(pointer){
 				}
 			}
 			
-			DKWARN(realKey+" "+val)
 			DKRocket_setProperty(targ["pointer"], realKey, val);
 			targ[key] = val;
 			return true;
@@ -264,64 +288,63 @@ var CSSStyleDeclaration = function(pointer){
 		}
 	});
 }
-CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
-	console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
-	DKRocket_setProperty(this.pointer, propertyName, propertyValue);
-	this[propertyName] = propertyValue;
-}
-CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
-	this[propertyName] = DKRocket_getPropertyValue(this.pointer, propertyName);
-	return this[propertyName];
-}
 	
 	
 /////////////////////////////////
 var Document = function(pointer){
 	//DKDEBUGFUNC();
 	//console.warn("Document("+pointer+")");
+
+	Document.prototype.createElement = function(tagName){
+		var pointer = DKRocket_createElement(tagName);
+		var htmlElement = new HTMLElement(pointer);
+		return htmlElement;
+	}
+	Document.prototype.getElementById = function(id){
+		var pointer = DKRocket_getElementById(id);
+		if(!pointer){ return null; }
+		var element = new Element(pointer);
+		return element;
+	}
+	Document.prototype.getElementsByClassName = function(name){
+		var addressList = DKRocket_getElementsByTagName(name);
+		var htmlCollection = new HTMLCollection();
+		if(!addressList){ return htmlCollection; }
+		var arry = addressList.split(",");
+		for(var i=0; i<arry.length; i++){
+			htmlCollection.push(new HTMLElement(arry[i]))
+		}
+		return htmlCollection;
+	}
+	Document.prototype.getElementsByTagName = function(name){
+		var addressList = DKRocket_getElementsByTagName(name);
+		var htmlCollection = new HTMLCollection();
+		if(!addressList){ return htmlCollection; }
+		var arry = addressList.split(",");
+		for(var i=0; i<arry.length; i++){
+			htmlCollection.push(new HTMLElement(arry[i]))
+		}
+		return htmlCollection;
+	}
+	
 	this.body = this.getElementsByTagName("body")[0];
 	this.documentElement = this.getElementsByTagName("html")[0];
+
 	return Node.call(this, pointer);
 }
 Document.prototype = Node.prototype;
-Document.prototype.createElement = function(tagName){
-	var pointer = DKRocket_createElement(tagName);
-	var htmlElement = new HTMLElement(pointer);
-	return htmlElement;
-}
-Document.prototype.getElementById = function(id){
-	var pointer = DKRocket_getElementById(id);
-	if(!pointer){ return null; }
-	var element = new Element(pointer);
-	return element;
-}
-Document.prototype.getElementsByClassName = function(name){
-	var addressList = DKRocket_getElementsByTagName(name);
-	var htmlCollection = new HTMLCollection();
-	if(!addressList){ return htmlCollection; }
-	var arry = addressList.split(",");
-	for(var i=0; i<arry.length; i++){
-		htmlCollection.push(new HTMLElement(arry[i]))
-	}
-	return htmlCollection;
-}
-Document.prototype.getElementsByTagName = function(name){
-	var addressList = DKRocket_getElementsByTagName(name);
-	var htmlCollection = new HTMLCollection();
-	if(!addressList){ return htmlCollection; }
-	var arry = addressList.split(",");
-	for(var i=0; i<arry.length; i++){
-		htmlCollection.push(new HTMLElement(arry[i]))
-	}
-	return htmlCollection;
-}
 
-	
+
 ///////////////////////////////
 var Window = function(pointer){
 	//DKDEBUGFUNC();
 	console = new Console();
 	//console.warn("Window("+pointer+")");
+	
+	Window.prototype.alert = function(msg){
+		console.warn("alert: "+msg); //TODO - create an actual popup window
+	}
+	
 	this.console = console;
 	document = new Document("document");
 	this.document = document;
@@ -356,15 +379,14 @@ var Window = function(pointer){
 	});
 }
 Window.prototype = EventTarget.prototype;
-Window.prototype.alert = function(msg){
-	console.warn("alert: "+msg);
-}
 
 
-///////////////////////////
-var Navigator = function(){
+//////////////////////////
+var Navigator = function()
+{
 	//DKDEBUGFUNC();
 	//console.warn("Navigator()");
+	
 	Object.defineProperty(this, "appCodeName",{
 		value: "Mozilla",
 	});
@@ -408,37 +430,38 @@ var Navigator = function(){
 }
 
 
-/////////////////////////
-var Console = function(){
+////////////////////////
+var Console = function()
+{
 	//DKDEBUGFUNC();
 	//console.warn("Console()");
 	
-}
-Console.prototype.assert = function(assertion, msg){
-	if(assertion){ return; }
-	DKLogError(msg+"\n");
-}
-Console.prototype.clear = function(){
-	DK_System("cls");
-}
-Console.prototype.debug = function(msg){
-	DKLogDebug(msg+"\n");
-}
-Console.prototype.error = function(msg){
-	DKLogError(msg+"\n");
-}
-Console.prototype.exception = Console.prototype.error; //alias
-Console.prototype.info = function(msg){
-	DKLogInfo(msg+"\n");
-}
-Console.prototype.log = function(msg){
-	DKLogInfo(msg+"\n");
-}
-Console.prototype.trace = function(){
-	DKLogError("console.trace() not implemented\n");
-}
-Console.prototype.warn = function(msg){
-		DKLogWarn(msg+"\n");
+	Console.prototype.assert = function(assertion, msg){
+		if(assertion){ return; }
+		DKLogError(msg+"\n");
+	}
+	Console.prototype.clear = function(){
+		DK_System("cls");
+	}
+	Console.prototype.debug = function(msg){
+		DKLogDebug(msg+"\n");
+	}
+	Console.prototype.error = function(msg){
+		DKLogError(msg+"\n");
+	}
+	Console.prototype.exception = Console.prototype.error; //alias
+	Console.prototype.info = function(msg){
+		DKLogInfo(msg+"\n");
+	}
+	Console.prototype.log = function(msg){
+		DKLogInfo(msg+"\n");
+	}
+	Console.prototype.trace = function(){
+		DKLogError("console.trace() not implemented\n");
+	}
+	Console.prototype.warn = function(msg){
+			DKLogWarn(msg+"\n");
+	}
 }
 
 
