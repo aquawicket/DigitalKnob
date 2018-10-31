@@ -39,6 +39,8 @@ public:
 	static int removeChild(duk_context* ctx);
 	static int setAttribute(duk_context* ctx);
 	static int setInnerHTML(duk_context* ctx);
+	static int clientWidth(duk_context* ctx);
+	static int clientHeight(duk_context* ctx);
 	
 	//style
 	static int setProperty(duk_context* ctx);

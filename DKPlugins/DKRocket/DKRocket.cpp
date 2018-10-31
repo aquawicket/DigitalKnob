@@ -179,7 +179,6 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//Set up the dom
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
-	//get the html node
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
 	DKString head_tag;

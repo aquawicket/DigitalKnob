@@ -29,6 +29,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_appendChild", DKRocketJS::appendChild);
 	DKDuktape::AttachFunction("DKRocket_addEventListener", DKRocketJS::addEventListener);
 	DKDuktape::AttachFunction("DKRocket_removeEventListener", DKRocketJS::removeEventListener);
+	DKDuktape::AttachFunction("DKRocket_clientWidth", DKRocketJS::clientWidth);
+	DKDuktape::AttachFunction("DKRocket_clientHeight", DKRocketJS::clientHeight);
 	return true;
 }
 
@@ -484,6 +486,50 @@ int DKRocketJS::removeEventListener(duk_context* ctx)
 		phase = duk_require_boolean(ctx, 2);
 	}
 	element->RemoveEventListener(type.c_str(), DKRocket::Get(), phase);
+	return true;
+}
+
+/////////////////////////////////////////////
+int DKRocketJS::clientWidth(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	int clientWidth = 0;
+	if(element == DKRocket::Get()->document->GetFirstChild()){ //html node, get context size
+		clientWidth = DKRocket::Get()->context->GetDimensions().x; 
+	}
+	else{
+		clientWidth = (int)element->GetClientWidth();
+	}
+	duk_push_int(ctx, clientWidth);
+	return true;
+}
+
+//////////////////////////////////////////////
+int DKRocketJS::clientHeight(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	int clientHeight = 0;
+	if(element == DKRocket::Get()->document->GetFirstChild()){ //html node, get context size
+		clientHeight = DKRocket::Get()->context->GetDimensions().y; 
+	}
+	else{
+		clientHeight = (int)element->GetClientHeight();
+	}
+	duk_push_int(ctx, clientHeight);
 	return true;
 }
 

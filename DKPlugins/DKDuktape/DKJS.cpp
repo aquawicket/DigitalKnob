@@ -68,7 +68,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_Execute", DKJS::Execute);
 	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit);
 	DKDuktape::AttachFunction("DK_GetArgs", DKJS::GetArgs);
-	DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
+	//DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
 	DKDuktape::AttachFunction("DK_GetClipboard", DKJS::GetClipboard);
 	DKDuktape::AttachFunction("DK_GetData", DKJS::GetData);
 	DKDuktape::AttachFunction("DK_GetDate", DKJS::GetDate);
@@ -78,7 +78,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
 	DKDuktape::AttachFunction("DK_GetFunctions", DKJS::GetFunctions);
 	DKDuktape::AttachFunction("DK_GetId", DKJS::GetId);
-	DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript);
+	//DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript);
 	DKDuktape::AttachFunction("DK_GetKey", DKJS::GetKey);
 	DKDuktape::AttachFunction("DK_GetLocalIP", DKJS::GetLocalIP);
 	DKDuktape::AttachFunction("DK_GetMouseX", DKJS::GetMouseX); 

@@ -99,7 +99,7 @@ var Node = function(pointer){
 		},
 		get: function(targ, key, recv){
 			//console.log("Node:get("+targ+","+key+")");
-			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style" || key == "listeners"){ return targ[key]; }
+			if(typeof targ[key] === "function" || typeof key === "symbol" || key == "pointer" || key == "style" || key == "listeners" || key == "clientWidth"){ return targ[key]; }
 			if(key == "innerHTML"){
 				targ[key] = DKRocket_innerHTML(targ["pointer"], key); 
 			}
@@ -152,6 +152,14 @@ Node.prototype.removeChild = function(aChild){
 var Element = function(pointer){
 	//DKDEBUGFUNC();
 	//console.warn("Element("+pointer+")");
+	
+	Object.defineProperty(this, "clientWidth", {
+		get: function(){
+			return DKRocket_clientWidth(this.pointer);
+		}
+	});
+	
+	
 	return Node.call(this, pointer);
 }
 Element.prototype = Node.prototype;
@@ -321,51 +329,39 @@ var Navigator = function(){
 	//console.warn("Navigator()");
 	Object.defineProperty(this, "appCodeName",{
 		value: "Mozilla",
-		writable: false
 	});
 	Object.defineProperty(this, "appName",{
 		value: "Netscape",
-		writable: false
 	});
 	Object.defineProperty(this, "appVersion",{
-		value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-		writable: false
+		value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36", //TODO - pull this value from C++
 	});
 	Object.defineProperty(this, "cookieEnabled",{
 		value: "false",
-		writable: false
 	});
 	Object.defineProperty(this, "language",{
 		value: "en-US",
-		writable: false
 	});
 	Object.defineProperty(this, "mimeTypes",{
 		value: "",
-		writable: false
 	});
 	Object.defineProperty(this, "onLine",{
 		value: true, //TODO - pull this value from C++
-		writable: false
 	});
 	Object.defineProperty(this, "platform",{
 		value: "Win32", //TODO - pull this value from C++
-		writable: false
 	});
 	Object.defineProperty(this, "product",{
 		value: "Duktape",
-		writable: false
 	});
 	Object.defineProperty(this, "productSub",{
 		value: "1", //TODO - pull this value from C++
-		writable: false
 	});
 	Object.defineProperty(this, "userAgent",{
-		value: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rocket/1.0",
-		writable: false
+		value: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rocket/1.0", //TODO - pull this value from C++
 	});
 	Object.defineProperty(this, "vendor",{
 		value: "DigitalKnob.com",
-		writable: false
 	});
 	
 	Navigator.prototype.javaEnabled = function(){
