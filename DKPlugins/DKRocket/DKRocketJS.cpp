@@ -460,11 +460,14 @@ int DKRocketJS::addEventListener(duk_context* ctx)
 	}
 	DKString type = duk_require_string(ctx, 1);
 	bool phase = false;
+	if(duk_is_boolean(ctx, 2)){
+		phase = duk_require_boolean(ctx, 2);
+	}
 	element->AddEventListener(type.c_str(), DKRocket::Get(), phase);
 	return true;
 }
 
-//////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 int DKRocketJS::removeEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
@@ -477,6 +480,9 @@ int DKRocketJS::removeEventListener(duk_context* ctx)
 	}
 	DKString type = duk_require_string(ctx, 1);
 	bool phase = false;
+	if(duk_is_boolean(ctx, 2)){
+		phase = duk_require_boolean(ctx, 2);
+	}
 	element->RemoveEventListener(type.c_str(), DKRocket::Get(), phase);
 	return true;
 }

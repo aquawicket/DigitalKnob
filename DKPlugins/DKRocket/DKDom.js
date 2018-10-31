@@ -44,7 +44,7 @@ var EventTarget = function(pointer){
 	this.listeners = {};
 };
 EventTarget.prototype.listeners = null;
-EventTarget.prototype.addEventListener = function(type, callback){
+EventTarget.prototype.addEventListener = function(type, callback, useCapture){
 	
 	var already_has = false;
 	for(var i=0; i < stored_events.length; i++){
@@ -56,14 +56,14 @@ EventTarget.prototype.addEventListener = function(type, callback){
 		stored_events.push(this);
 	}
 	
-	DKRocket_addEventListener(this.pointer, type);
+	DKRocket_addEventListener(this.pointer, type, useCapture);
 	if(!(type in this.listeners)){
 		this.listeners[type] = [];
 	}
 	this.listeners[type].push(callback);
 };
-EventTarget.prototype.removeEventListener = function(type, callback){
-	DKRocket_removeEventListener(this.pointer, type);
+EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+	DKRocket_removeEventListener(this.pointer, type, useCapture);
 	if(!(type in this.listeners)){
 		return;
 	}
