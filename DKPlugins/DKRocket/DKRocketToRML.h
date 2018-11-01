@@ -20,6 +20,7 @@ public:
 	bool ClickIframe(DKEvent* event);
 	bool MouseOverIframe(DKEvent* event);
 	bool DKRocketToRML::Encode(std::string& data);
+	bool TidyFile(const DKString& in, DKString& out);
 };
 
 #endif //DKRocketToRML_H
