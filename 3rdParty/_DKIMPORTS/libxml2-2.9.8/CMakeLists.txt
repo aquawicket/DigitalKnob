@@ -1,22 +1,21 @@
 cmake_minimum_required(VERSION 2.8.10)
-project( xml2 )
+project(xml2)
 
 if(MINGW OR UNIX)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-attributes")
 endif()
 
 
-set(XML2_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libxml2)
-include_directories( "${XML2_SOURCE_DIR}/include" "${CMAKE_INSTALL_PREFIX}/include")
+set(XML2_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories("${XML2_SOURCE_DIR}/include" "${CMAKE_INSTALL_PREFIX}/include")
 LINK_DIRECTORIES("${CMAKE_INSTALL_PREFIX}/lib")
 
 #for windows only must fix later
 include_directories("${XML2_SOURCE_DIR}/win32/VC10")
 
-file( GLOB XML2_HEADERS ${XML2_SOURCE_DIR}/*.h )
-file( GLOB XML2_SOURCES ${XML2_SOURCE_DIR}/*.c )
-
-file( GLOB API_HEADERS ${XML2_SOURCE_DIR}/include/libxml/*.h )
+file(GLOB XML2_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+file(GLOB XML2_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+file(GLOB API_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/libxml/*.h)
 
 #source_group( libxml FILES ${GLEW_HEADERS} )
 #source_group( src    FILES ${GLEW_SOURCES} )
@@ -28,10 +27,10 @@ if(XML2_BUILD_SHARED)
 	set(XML2_LIBTYPE SHARED)
 else()
 	set(XML2_LIBTYPE STATIC)
-	add_definitions( "-DLIBXML_STATIC" )
+	add_definitions("-DLIBXML_STATIC")
 endif()
 
-add_library( xml2 ${XML2_LIBTYPE} ${XML2_SOURCES} ${XML2_HEADERS} )
+add_library(xml2 STATIC ${XML2_SOURCES} ${XML2_HEADERS})
 target_link_libraries(xml2 iconv ws2_32)
 
 set_target_properties(xml2 PROPERTIES PUBLIC_HEADER "${API_HEADERS}")
