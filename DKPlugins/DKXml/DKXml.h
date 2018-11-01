@@ -2,7 +2,7 @@
 #ifndef DKXml_H
 #define DKXml_H
 #include "DK/DKClass.h"
-#include "HTMLparser.h"
+#include "libxml/HTMLparser.h"
 #include "pugixml.hpp"
 
 typedef pugi::xml_node DKXmlNode;
