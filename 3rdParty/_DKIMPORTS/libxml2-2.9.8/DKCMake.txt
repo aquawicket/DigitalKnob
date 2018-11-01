@@ -21,13 +21,13 @@ ANDROID_RELEASE_LIB(${XML2}/${OS}/Release/obj/local/armeabi-v7a/libxml2.a)
 ### COMPILE ###
 DKSETPATH(${XML2}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${XML2})
-WIN32_VS_DEBUG(libxml2-2.9.8 jpeg.sln xml2-static)
-WIN32_VS_RELEASE(libxml2-2.9.8 jpeg.sln xml2-static)
+WIN32_VS_DEBUG(libxml2-2.9.8 libxml2.sln xml2-static)
+WIN32_VS_RELEASE(libxml2-2.9.8 libxml2.sln xml2-static)
 
 DKSETPATH(${XML2}/${OS})
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${XML2})
-WIN64_VS_DEBUG(libxml2-2.9.8 jpeg.sln xml2-static)
-WIN64_VS_RELEASE(libxml2-2.9.8 jpeg.sln xml2-static)
+WIN64_VS_DEBUG(libxml2-2.9.8 libxml2.sln xml2-static)
+WIN64_VS_RELEASE(libxml2-2.9.8 libxml2.sln xml2-static)
 
 DKSETPATH(${XML2}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${XML2})
