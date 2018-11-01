@@ -165,10 +165,10 @@ var CSSStyleDeclaration = function(pointer)
 	*/
 	
 	return new Proxy(this, {
-		has: function (target, key){
+		has: function(target, key){
 			return key in target;
 		},
-		get: function (target, key, recv){
+		get: function(target, key, recv){
 			//console.log("Style:get("+target+","+key+")");
 			if(typeof target[key] === "function" || key == "pointer"){ return target[key]; }
 			var realKey = key;
@@ -184,7 +184,7 @@ var CSSStyleDeclaration = function(pointer)
 			target[key] = DKRocket_getPropertyValue(target["pointer"], realKey);
 			return target[key];
 		},
-		set: function (target, key, val, recv){
+		set: function(target, key, val, recv){
 			//console.log("Style:set("+target+","+key+","+val+")");
 			if(typeof target[key] === "function" || key == "pointer"){ return true; }
 			var realKey = key;
@@ -202,7 +202,7 @@ var CSSStyleDeclaration = function(pointer)
 			target[key] = val;
 			return true;
 		},
-		deleteProperty: function (target, key){
+		deleteProperty: function(target, key){
 			delete target[key];
 			return true;
 		}
@@ -295,14 +295,19 @@ var Element = function(pointer)
 		get: function (target, key, recv){
 			//console.log("Element:get("+target+","+key+","+recv+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return target[key]; }
-			target[key] = DKRocket_getAttribute(target["pointer"], key);
+			if(key.substr(0,2) == "on"){ //onevent
+				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
+			}
+			else{
+				target[key] = DKRocket_getAttribute(target["pointer"], key);
+			}
 			return target[key];
 		},
 		set: function (target, key, val, recv){
 			//console.log("Element:set("+target+","+key+","+val+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
 			if(key.substr(0,2) == "on"){ //onevent
-				target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
+				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{
 				DKRocket_setAttribute(target["pointer"], key, val);
@@ -382,25 +387,15 @@ var GlobalEventHandlers = function(pointer)
 	//DKDEBUGFUNC();
 	console.warn("GlobalEventHandlers("+pointer+")");
 	
-	return new Proxy(this, {
-		has: function (target, key){
-			return key in target;
+	this.pointer = pointer;
+	
+	Object.defineProperty(this, "onclick", { 
+		get: function(){ 
+			return this.click;
 		},
-		get: function (target, key, recv){
-			console.log("GlobalEventHandlers:get("+target+","+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return target[key]; }
-			//target[key] = DKRocket_getAttribute(target["pointer"], key);
-			return target[key];
-		},
-		set: function (target, key, val, recv){
-			console.log("GlobalEventHandlers:set("+target+","+key+","+val+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners"){ return true; }
-			//DKRocket_setAttribute(target["pointer"], key, val);
-			target[key] = val;
-			return true;
-		},
-		deleteProperty: function (target, key){
-			delete target[key];
+		set: function(val){
+			this.addEventListener("click", val); //val is a callback, let's create and event for it. 
+			this.click = val;
 			return true;
 		}
 	});
@@ -824,7 +819,7 @@ Document.prototype = Node.prototype;
 Element.prototype = Node.prototype;	
 HTMLElement.prototype = Element.prototype;
 HTMLCollection.prototype = [];
-GlobalEventHandlers.prototype = Eventtargetet.prototype;
+//GlobalEventHandlers.prototype = Eventtargetet.prototype;
 
 
 
