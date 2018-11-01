@@ -17,6 +17,12 @@ file(GLOB XML2_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
 file(GLOB XML2_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
 file(GLOB API_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/libxml/*.h)
 
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
+find_package(ICONV REQUIRED)
+include_directories(${ICONV_INCLUDE_DIR})
+
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIR})
 #source_group( libxml FILES ${GLEW_HEADERS} )
 #source_group( src    FILES ${GLEW_SOURCES} )
 #include_directories(${ANDROID_NDK}/platforms/android-14/arch-arm/usr/include/asm)
