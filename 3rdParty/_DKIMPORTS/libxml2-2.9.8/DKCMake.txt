@@ -6,9 +6,9 @@ DKSET(XML2 ${3RDPARTY}/libxml2-2.9.8)
 
 
 ### LINK ###
+DKINCLUDE(${XML2}
 DKINCLUDE(${XML2}/include)
 DKINCLUDE(${XML2}/${OS})
-DKINCLUDE(${XML2}/${OS}/Release)
 ANDROID_INCLUDE(${XML2}/${OS}/$(BUILD_TYPE)/jni)
 WIN_DEBUG_LIB(${XML2}/${OS}/Debug/xml2.lib)
 WIN_RELEASE_LIB(${XML2}/${OS}/Release/xml2.lib)
