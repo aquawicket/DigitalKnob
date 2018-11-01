@@ -6,6 +6,7 @@
 bool DKXml::Init()
 {
 	DKDEBUGFUNC();
+	test_libxml();
 	return true;
 }
 
@@ -415,19 +416,17 @@ bool DKXml::traverse_dom_trees(xmlNode* a_node)
 {
 	xmlNode *cur_node = NULL;
 
-	if(NULL == a_node){
-		printf("Invalid argument a_node %p\n", a_node);
+	if(a_node == NULL){
+		//DKERROR("Invalid argument\n");
 		return false;
 	}
 
-	for (cur_node = a_node; cur_node; cur_node = cur_node->next) {
+	for(cur_node = a_node; cur_node; cur_node = cur_node->next){
 		if (cur_node->type == XML_ELEMENT_NODE) {
-			/* Check for if current node should be exclude or not */
-			printf("Node type: Text, name: %s\n", cur_node->name);
+			DKINFO("Node type: Text, name: "+toString((char*)cur_node->name)+"\n");
 		}
 		else if(cur_node->type == XML_TEXT_NODE){
-			/* Process here text node, It is available in cpStr :TODO: */
-			printf("node type: Text, node content: %s,  content length %d\n", (char *)cur_node->content, strlen((char *)cur_node->content));
+			DKINFO("node type: Text, node content: "+toString((char*)cur_node->content)+",  content length "+toString(strlen((char*)cur_node->content))+"\n");
 		}
 		traverse_dom_trees(cur_node->children);
 	}
@@ -442,21 +441,21 @@ bool DKXml::test_libxml()
 	/* Macro to check API for match with the DLL we are using */
 	//LIBXML_TEST_VERSION    
 	DKString file = DKFile::local_assets+"test.html";
-	doc = htmlReadFile(file.c_str(), NULL, HTML_PARSE_NOBLANKS | HTML_PARSE_NOERROR | HTML_PARSE_NOWARNING | HTML_PARSE_NONET);
+	doc = htmlReadFile(file.c_str(), NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);
 	if(doc == NULL) {
-		fprintf(stderr, "Document not parsed successfully.\n");
-		return 0;
+		DKERROR("Document did not parse successfully\n");
+		return false;
 	}
 
 	roo_element = xmlDocGetRootElement(doc);
 
 	if(roo_element == NULL) {
-		fprintf(stderr, "empty document\n");
+		DKERROR("empty document\n");
 		xmlFreeDoc(doc);
 		return 0;
 	}
 
-	printf("Root Node is %s\n", roo_element->name);
+	DKINFO("Root Node is "+toString((char*)roo_element->name)+"\n");
 	traverse_dom_trees(roo_element);
 
 	xmlFreeDoc(doc);       // free document
