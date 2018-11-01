@@ -1,5 +1,10 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libiconv-1.14.zip libiconv-1.14)
+IF(NOT EXISTS "${3RDPARTY}/libiconv-1.14")
+	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
+	DKDOWNLOAD(${DKONLINE}/Libs/libiconv-1.14.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/libiconv-1.14.zip ${3RDPARTY})
+	DKRENAME(${3RDPARTY}/libiconv ${3RDPARTY}/libiconv-1.14)
+ENDIF()
 DKSET(ICONV ${3RDPARTY}/libiconv-1.14)
 
 
