@@ -27,13 +27,13 @@ ANDROID_RELEASE_LIB(${ICONV}/${OS}/Release/obj/local/armeabi-v7a/libiconv.a)
 ### COMPILE ###
 DKSETPATH(${ICONV}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${ICONV})
-WIN32_VS_DEBUG(libiconv-1.14 iconv.sln iconv)
-WIN32_VS_RELEASE(libiconv-1.14 iconv.sln iconv)
+WIN32_VS_DEBUG(libiconv-1.14 libiconv.sln iconv)
+WIN32_VS_RELEASE(libiconv-1.14 libiconv.sln iconv)
 
 DKSETPATH(${ICONV}/${OS})
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${ICONV})
-WIN64_VS_DEBUG(libiconv-1.14 iconv.sln iconv)
-WIN64_VS_RELEASE(libiconv-1.14 iconv.sln iconv)
+WIN64_VS_DEBUG(libiconv-1.14 libiconv.sln iconv)
+WIN64_VS_RELEASE(libiconv-1.14 libiconv.sln iconv)
 
 DKSETPATH(${ICONV}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${ICONV})
