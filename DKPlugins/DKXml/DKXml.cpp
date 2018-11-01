@@ -9,7 +9,7 @@
 bool DKXml::Init()
 {
 	DKDEBUGFUNC();
-	test_libxml();
+	//test_libxml();
 	return true;
 }
 
