@@ -40,6 +40,11 @@ public:
 	bool SetAttributes(const DKString& xpath, const DKString& attrib, const DKString& value);
 	
 	pugi::xml_document doc;
+
+
+	//Test libmxl2
+	bool traverse_dom_trees(xmlNode* a_node);
+	bool test_libxml();
 };
 
 
