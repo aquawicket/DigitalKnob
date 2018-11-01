@@ -49,10 +49,12 @@ Internet Explorer (9.0+) <br>
 [ImageMagick++](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
 [Jpeg](https://github.com/LuaDist/libjpeg) <br>
 [Jpeg-Turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
+[libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
 [libtorrent](https://github.com/arvidn/libtorrent) <br>
 [libuv](https://github.com/libuv/libuv) <br>
 [libvncserver](https://github.com/LibVNC/libvncserver) <br>
 [libwebsockets](https://github.com/warmcat/libwebsockets) <br>
+[libxml2](http://xmlsoft.org/) <br>
 [Leptonica](https://github.com/DanBloomberg/leptonica) <br>
 [Msinttypes](https://github.com/chemeris/msinttypes)<br>
 [Ogg](https://github.com/gcp/libogg) <br>
@@ -80,6 +82,7 @@ Internet Explorer (9.0+) <br>
 [Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
 [Tesseract-ocr](https://github.com/tesseract-ocr/tesseract) <br>
 [ThreadPool](http://threadpool.sourceforge.net/) <br>
+[Tidy](http://tidy.sourceforge.net/) <br>
 [Tiff](https://github.com/LuaDist/libtiff) <br>
 [uWebSockets](https://github.com/uNetworking/uWebSockets) <br>
 [Vorbis](https://github.com/soundcloud/vorbis) <br>
