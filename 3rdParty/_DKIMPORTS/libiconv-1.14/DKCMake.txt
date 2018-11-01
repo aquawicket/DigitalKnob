@@ -4,6 +4,7 @@ IF(NOT EXISTS "${3RDPARTY}/libiconv-1.14")
 	DKDOWNLOAD(${DKONLINE}/Libs/libiconv-1.14.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/libiconv-1.14.zip ${3RDPARTY})
 	DKRENAME(${3RDPARTY}/libiconv ${3RDPARTY}/libiconv-1.14)
+	DKCOPY(${DKIMPORTS}/libiconv-1.14 ${3RDPARTY}/libiconv-1.14 TRUE)
 ENDIF()
 DKSET(ICONV ${3RDPARTY}/libiconv-1.14)
 
