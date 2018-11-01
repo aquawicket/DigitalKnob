@@ -2,6 +2,9 @@
 #include "DK/DKFile.h"
 #include "DKXml/DKXml.h"
 
+#define HEADER_ACCEPT "Accept:text/html,application/xhtml+xml,application/xml"
+#define HEADER_USER_AGENT "User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.70 Safari/537.17"
+
 //////////////////
 bool DKXml::Init()
 {
@@ -422,12 +425,28 @@ bool DKXml::traverse_dom_trees(xmlNode* a_node)
 	}
 
 	for(cur_node = a_node; cur_node; cur_node = cur_node->next){
+		if(!cur_node){ continue; }
+		if(cur_node->name){
+			DKINFO("Tag: "+toString((char*)cur_node->name)+"\n");
+		}
+		if(cur_node->properties){
+			if(cur_node->properties->atype){
+				DKINFO("  Properties: "+toString((char*)cur_node->properties->atype)+"\n");
+			}
+		}
+		if(cur_node->content){
+			DKINFO("    Content: "+toString((char*)cur_node->content)+"\n");
+			//DKINFO("Length: "+toString(strlen((char*)cur_node->content))+"\n");
+		}
+
+		/*
 		if (cur_node->type == XML_ELEMENT_NODE) {
 			DKINFO("Node type: Text, name: "+toString((char*)cur_node->name)+"\n");
 		}
 		else if(cur_node->type == XML_TEXT_NODE){
 			DKINFO("node type: Text, node content: "+toString((char*)cur_node->content)+",  content length "+toString(strlen((char*)cur_node->content))+"\n");
 		}
+		*/
 		traverse_dom_trees(cur_node->children);
 	}
 	return true;
@@ -441,7 +460,9 @@ bool DKXml::test_libxml()
 	/* Macro to check API for match with the DLL we are using */
 	//LIBXML_TEST_VERSION    
 	DKString file = DKFile::local_assets+"test.html";
-	doc = htmlReadFile(file.c_str(), NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);
+	
+	doc = htmlReadDoc((xmlChar*)file.c_str(), NULL, NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);
+	//doc = htmlReadFile(file.c_str(), NULL, HTML_PARSE_RECOVER | HTML_PARSE_NONET);
 	if(doc == NULL) {
 		DKERROR("Document did not parse successfully\n");
 		return false;
@@ -457,6 +478,7 @@ bool DKXml::test_libxml()
 
 	DKINFO("Root Node is "+toString((char*)roo_element->name)+"\n");
 	traverse_dom_trees(roo_element);
+
 
 	xmlFreeDoc(doc);       // free document
 	xmlCleanupParser();    // Free globals
