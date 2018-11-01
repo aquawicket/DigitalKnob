@@ -1,3 +1,5 @@
+DKDEPEND(libiconv-1.14)
+
 ### INSTALL ###
 DKINSTALL(${DKONLINE}/Libs/libxml2-2.9.8.zip libxml2-2.9.8)
 DKSET(XML2 ${3RDPARTY}/libxml2-2.9.8)
