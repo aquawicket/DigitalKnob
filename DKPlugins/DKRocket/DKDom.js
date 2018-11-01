@@ -113,57 +113,6 @@ var CSSStyleDeclaration = function(pointer)
 		return this[propertyName];
 	}
 	
-	/*
-	Object.defineProperty(this, "background-color", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "background-color"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "background-color", val); }
-	});
-	Object.defineProperty(this, "backgroundColor", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "background-color"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "background-color", val); }
-	});
-	Object.defineProperty(this, "border-width", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "border-width"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "border-width", val); }
-	});
-	Object.defineProperty(this, "borderWidth", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "border-width"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "border-width", val); }
-	});
-	Object.defineProperty(this, "color", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "color"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "color", val); }
-	});
-	Object.defineProperty(this, "height", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "height"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "height", val); }
-	});
-	Object.defineProperty(this, "left", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "left"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "left", val); }
-	});
-	Object.defineProperty(this, "margin", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "margin"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "margin", val); }
-	});
-	Object.defineProperty(this, "overflow", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "overflow"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "overflow", val); }
-	});
-	Object.defineProperty(this, "position", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "position"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "position", val); }
-	});
-	Object.defineProperty(this, "top", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "top"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "top", val); }
-	});
-	Object.defineProperty(this, "width", { 
-		get: function(){ return DKRocket_getPropertyValue(this.pointer, "width"); },
-		set: function(val){ return DKRocket_setProperty(this.pointer, "width", val); }
-	});
-	*/
-	
 	return new Proxy(this, {
 		has: function(target, key){
 			return key in target;
@@ -214,7 +163,7 @@ var CSSStyleDeclaration = function(pointer)
 var Document = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Document("+pointer+")");
+	console.warn("Document("+pointer+")");
 
 	Document.prototype.createElement = function(tagName){
 		var pointer = DKRocket_createElement(tagName);
@@ -227,31 +176,15 @@ var Document = function(pointer)
 		var element = new Element(pointer);
 		return element;
 	}
-	Document.prototype.getElementsByClassName = function(name){
-		var addressList = DKRocket_getElementsByTagName(name);
-		var htmlCollection = new HTMLCollection();
-		if(!addressList){ return htmlCollection; }
-		var arry = addressList.split(",");
-		for(var i=0; i<arry.length; i++){
-			htmlCollection.push(new HTMLElement(arry[i]))
-		}
-		return htmlCollection;
-	}
-	Document.prototype.getElementsByTagName = function(name){
-		var addressList = DKRocket_getElementsByTagName(name);
-		var htmlCollection = new HTMLCollection();
-		if(!addressList){ return htmlCollection; }
-		var arry = addressList.split(",");
-		for(var i=0; i<arry.length; i++){
-			htmlCollection.push(new HTMLElement(arry[i]))
-		}
-		return htmlCollection;
-	}
+	
+	
+	
+
+
+	Element.call(this, pointer);
 	
 	this.body = this.getElementsByTagName("body")[0];
 	this.documentElement = this.getElementsByTagName("html")[0];
-
-	return Node.call(this, pointer);
 }
 
 
@@ -261,41 +194,199 @@ var Element = function(pointer)
 	//DKDEBUGFUNC();
 	//console.warn("Element("+pointer+")");
 	
-	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
+	Object.defineProperty(this, "attributes",   { get: function(){ return DKRocket_attributes(this.pointer);   } });  //TODO
+	Object.defineProperty(this, "classList",    { get: function(){ return DKRocket_classList(this.pointer);    } });  //TODO
+	Object.defineProperty(this, "className", { 
+		get: function()   { return DKRocket_className(this.pointer);      },
+		set: function(val){ return DKRocket_setClassName(this.pointer, val); }
+	});  //TODO
 	Object.defineProperty(this, "clientHeight", { get: function(){ return DKRocket_clientHeight(this.pointer); } });
-	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
 	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKRocket_clientLeft(this.pointer);   } });
+	Object.defineProperty(this, "clientTop",    { get: function(){ return DKRocket_clientTop(this.pointer);    } });
+	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKRocket_clientWidth(this.pointer);  } });
+	Object.defineProperty(this, "computedName", { get: function(){ return DKRocket_computedName(this.pointer); } });  //TODO
+	Object.defineProperty(this, "computedRole", { get: function(){ return DKRocket_computedRole(this.pointer); } });  //TODO
+	/*
+	Object.defineProperty(this, "id", { 
+		get: function()   { return DKRocket_id(this.pointer);      },
+		set: function(val){ return DKRocket_id(this.pointer, val); }
+	});  //TODO
+	*/	
 	Object.defineProperty(this, "innerHTML", { 
 		get: function()   { return DKRocket_innerHTML(this.pointer);         },
 		set: function(val){ return DKRocket_setInnerHTML(this.pointer, val); }
 	});
+	Object.defineProperty(this, "localName",              { get: function(){ return DKRocket_localName(this.pointer);              } });  //TODO
+	Object.defineProperty(this, "namespaceURI",           { get: function(){ return DKRocket_namespaceURI(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "nextElementSibling",     { get: function(){ return DKRocket_nextElementSibling(this.pointer);     } });  //TODO, NonDocumentTypeChildNode
+	Object.defineProperty(this, "outerHTML", { 
+		get: function()   { return DKRocket_outerHTML(this.pointer);         },
+		set: function(val){ return DKRocket_setouterHTML(this.pointer, val); }
+	});
+	Object.defineProperty(this, "prefix",                 { get: function(){ return DKRocket_prefix(this.pointer);                 } });  //TODO
+	Object.defineProperty(this, "previousElementSibling", { get: function(){ return DKRocket_previousElementSibling(this.pointer); } });  //TODO, NonDocumentTypeChildNode
+	Object.defineProperty(this, "scrollHeight",           { get: function(){ return DKRocket_scrollHeight(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "scrollLeft", { 
+		get: function()   { return DKRocket_scrollLeft(this.pointer);         },
+		set: function(val){ return DKRocket_setScrollLeft(this.pointer, val); }
+	});
+	Object.defineProperty(this, "scrollLeftMax",          { get: function(){ return DKRocket_scrollLeftMax(this.pointer);          } });  //TODO
+	Object.defineProperty(this, "scrollTop", { 
+		get: function()   { return DKRocket_scrollTop(this.pointer);         },
+		set: function(val){ return DKRocket_setScrollTop(this.pointer, val); }
+	});
+	Object.defineProperty(this, "scrollTopMax",           { get: function(){ return DKRocket_scrollTopMax(this.pointer);           } });  //TODO
+	Object.defineProperty(this, "scrollWidth",            { get: function(){ return DKRocket_scrollWidth(this.pointer);            } });  //TODO
+	Object.defineProperty(this, "shadowRoot",             { get: function(){ return DKRocket_shadowRoot(this.pointer);             } });  //TODO
+	Object.defineProperty(this, "openOrClosedShadowRoot", { get: function(){ return DKRocket_openOrClosedShadowRoot(this.pointer); } });  //TODO
+	Object.defineProperty(this, "slot", { 
+		get: function()   { return DKRocket_slot(this.pointer);         },
+		set: function(val){ return DKRocket_setSlot(this.pointer, val); }
+	});
+	Object.defineProperty(this, "tabStop", { 
+		get: function()   { return DKRocket_tabStop(this.pointer);         },
+		set: function(val){ return DKRocket_setTabStop(this.pointer, val); }
+	});
+	Object.defineProperty(this, "tagName",                { get: function(){ return DKRocket_tagName(this.pointer);                } });  //TODO
+	Object.defineProperty(this, "undoManager",            { get: function(){ return DKRocket_undoManager(this.pointer);            } });  //TODO
+	Object.defineProperty(this, "undoScope ",             { get: function(){ return DKRocket_undoScope (this.pointer);             } });  //TODO
 	
-	Element.prototype.blur = function(){
+	
+	Object.defineProperty(this, "onfullscreenchange", {
+		get: function(){ return this.fullscreenchange; },
+		set: function(func){ this.addEventListener("fullscreenchange", func); this.fullscreenchange = func }
+	});
+	Object.defineProperty(this, "onfullscreenerror", {
+		get: function(){ return this.fullscreenerror; },
+		set: function(func){ this.addEventListener("fullscreenerror", func); this.fullscreenerror = func }
+	});
+	
+	
+	Element.prototype.attachShadow = function(){
 		//TODO
 	}
-	Element.prototype.click = function(){
+	Element.prototype.animate = function(){
 		//TODO
 	}
-	Element.prototype.focus = function(){
+	Element.prototype.closest = function(){
 		//TODO
 	}
-	Element.prototype.forceSpellCheck = function(){
+	Element.prototype.createShadowRoot = function(){
+		//TODO, Deprecated
+	}
+	Element.prototype.computedStyleMap = function(){
 		//TODO
 	}
-	Element.prototype.hasAttribute = function(attribute){
-		if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
-		else{ return false; }
+	Element.prototype.getAnimations = function(){
+		//TODO
 	}
 	Element.prototype.getAttribute = function(attribute){
 		this[attribute] = DKRocket_getAttribute(this.pointer, attribute);
 		if(!this[attribute]){ return null; }
 		return this[attribute];
 	}
+	Element.prototype.getAttributeNames = function(){
+		//TODO
+	}
+	Element.prototype.getAttributeNS = function(){
+		//TODO
+	}
+	Element.prototype.getBoundingClientRect = function(){
+		//TODO
+	}
+	Element.prototype.getClientRects = function(){
+		//TODO
+	}
+	Element.prototype.getElementsByClassName = function(name){
+		var addressList = DKRocket_getElementsByTagName(name);
+		var htmlCollection = new HTMLCollection();
+		if(!addressList){ return htmlCollection; }
+		var arry = addressList.split(",");
+		for(var i=0; i<arry.length; i++){
+			htmlCollection.push(new HTMLElement(arry[i]))
+		}
+		return htmlCollection;
+	}
+	Element.prototype.getElementsByTagName = function(name){
+		var addressList = DKRocket_getElementsByTagName(name);
+		var htmlCollection = new HTMLCollection();
+		if(!addressList){ return htmlCollection; }
+		var arry = addressList.split(",");
+		for(var i=0; i<arry.length; i++){
+			htmlCollection.push(new HTMLElement(arry[i]))
+		}
+		return htmlCollection;
+	}
+	Element.prototype.getElementsByTagNameNS = function(){
+		//TODO
+	}
+	Element.prototype.hasAttribute = function(attribute){
+		if(DKRocket_hasAttribute(this.pointer, attribute)){ return true; }
+		else{ return false; }
+	}
+	Element.prototype.hasAttributeNS = function(){
+		//TODO
+	}
+	Element.prototype.hasAttributes = function(){
+		//TODO
+	}
+	Element.prototype.insertAdjacentElement = function(){
+		//TODO
+	}
+	Element.prototype.insertAdjacentHTML = function(){
+		//TODO
+	}
+	Element.prototype.insertAdjacentText = function(){
+		//TODO
+	}
+	Element.prototype.matches = function(){
+		//TODO
+	}
+	Element.prototype.querySelector = function(){
+		//TODO
+	}
+	Element.prototype.querySelectorAll = function(){
+		//TODO
+	}
+	Element.prototype.releasePointerCapture = function(){
+		//TODO
+	}
+	Element.prototype.remove = function(){
+		//TODO
+	}
+	Element.prototype.removeAttribute = function(){
+		//TODO
+	}
+	Element.prototype.removeAttributeNS = function(){
+		//TODO
+	}
+	Element.prototype.requestFullscreen = function(){
+		//TODO
+	}
+	Element.prototype.requestPointerLock = function(){
+		//TODO
+	}
+	Element.prototype.scrollIntoView = function(){
+		//TODO
+	}
 	Element.prototype.setAttribute = function(attribute, value){
 		DKRocket_setAttribute(this.pointer, attribute, value);
 		this[attribute] = value;
 	}
+	Element.prototype.setAttributeNS = function(){
+		//TODO
+	}
+	Element.prototype.setCapture = function(){
+		//TODO
+	}
+	Element.prototype.setPointerCapture = function(){
+		//TODO
+	}
+	Element.prototype.toggleAttribute = function(){
+		//TODO
+	}
 	
+
 	this.pointer = pointer;
 	Node.call(this, pointer);
 	GlobalEventHandlers.call(this, pointer);
@@ -832,6 +923,7 @@ var HTMLElement = function(pointer)
 	});  //TODO
 	Object.defineProperty(this, "translate",         { get: function(){ return DKRocket_translate(this.pointer);         } });  //TODO
 	
+	
 	Object.defineProperty(this, "oncopy", {
 		get: function(){ return this.copy; },
 		set: function(func){ this.addEventListener("copy", func); this.copy = func }
@@ -844,6 +936,20 @@ var HTMLElement = function(pointer)
 		get: function(){ return this.paste; },
 		set: function(func){ this.addEventListener("paste", func); this.paste = func }
 	});
+	
+	
+	HTMLElement.prototype.blur = function(){
+		//TODO
+	}
+	HTMLElement.prototype.click = function(){
+		//TODO
+	}
+	HTMLElement.prototype.focus = function(){
+		//TODO
+	}
+	HTMLElement.prototype.forceSpellCheck = function(){
+		//TODO
+	}
 	
 	return Element.call(this, pointer);
 }
@@ -1227,8 +1333,8 @@ var Window = function(pointer){
 Window.prototype = Eventtargetet.prototype;
 Screen.prototype = Eventtargetet.prototype;
 Node.prototype = Eventtargetet.prototype;
-Document.prototype = Node.prototype;
 Element.prototype = Node.prototype;	
+Document.prototype = Element.prototype;
 HTMLElement.prototype = Element.prototype;
 HTMLCollection.prototype = [];
 GlobalEventHandlers.prototype = Eventtargetet.prototype;
