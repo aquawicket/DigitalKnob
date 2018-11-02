@@ -193,28 +193,18 @@ function DKDebug_PushDKFiles()
 function DKDebug_ClearConsole()
 {
 	DKDEBUGFUNC();
-	if(DK_GetBrowser() == "Rocket"){
-		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-			DK_System("cls");
-		}
-		if(DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
-			DK_System("clear");
-		}
+	var api;
+	if(typeof console === 'undefined'){ return; }
+	if(typeof console._commandLineAPI !== 'undefined'){
+		api = console._commandLineAPI; //chrome
 	}
-	else{
-		var api;
-		if(typeof console === 'undefined'){ return; }
-		if(typeof console._commandLineAPI !== 'undefined'){
-			api = console._commandLineAPI; //chrome
-		}
-		else if(typeof console._inspectorCommandLineAPI !== 'undefined'){
-			api = console._inspectorCommandLineAPI; //Safari
-		} 
-		else if(typeof console.clear !== 'undefined'){
-			api = console;
-		}
-		api.clear();
+	else if(typeof console._inspectorCommandLineAPI !== 'undefined'){
+		api = console._inspectorCommandLineAPI; //Safari
+	} 
+	else if(typeof console.clear !== 'undefined'){
+		api = console;
 	}
+	api.clear();
 }
 
 ////////////////////////////

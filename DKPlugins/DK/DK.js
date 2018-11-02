@@ -59,7 +59,6 @@ if(DK_GetBrowser() != "CEF"){
 	function DK_LogGuiConsole(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
 	function DK_GetScreenWidth(){ DKWARN("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n"); }
 	function DK_GetScreenHeight(){ DKWARN("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_System(){ DKWARN("DK_System(): not available for "+DK_GetBrowser()+"\n"); }
 	function DK_PrintFunctions(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
 	function DK_GetPixelUnderMouse(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
 	function DK_ShowConsole(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
@@ -1221,9 +1220,10 @@ function DK_GetJavascript()
 			return "JSC";
 		}
 	}
-	else{
-		return "UNKNOWN JAVASCRIPT ENGINE"
+	if(navigator.product == "Duktape"){
+		return "Duktape"
 	}
+	return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
 //////////////////////////

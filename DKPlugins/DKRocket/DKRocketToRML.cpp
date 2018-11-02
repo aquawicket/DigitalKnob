@@ -122,7 +122,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
 
 	//Rocket cannot read nodes outside of the body, so add a html node we can work with.
-	xml.PrependNode("//body", "html"); 
+	//xml.PrependNode("//body", "html"); 
 
 	xml.SaveDocumentToString(rml);
 

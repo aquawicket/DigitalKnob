@@ -183,6 +183,11 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//Set up the dom
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
+	//DKString root = document->GetContext()->GetRootElement()->GetTagName().CString(); //root tag
+	//DKString body = document->GetTagName().CString();
+	//DKINFO("body = "+body+"\n");
+
+	/*
 	//insert the head tag, rocket does not do this
 	DKXml xml;
 	if(!xml.LoadDocumentFromString(rml)){ return false; }
@@ -191,9 +196,12 @@ bool DKRocket::LoadUrl(const DKString& url)
 	replace(head_tag, "<head>", "");
 	replace(head_tag, "</head>", "");
 	Rocket::Core::Element* html_tag = document->GetFirstChild();
+	//Rocket::Core::Element* html_tag = document->GetContext()->GetRootElement();
 	Rocket::Core::Element* head = document->CreateElement("head");
+	head->SetProperty("display","none");
 	head->SetInnerRML(head_tag.c_str());
 	html_tag->AppendChild(head, true);
+	*/
 
 	_url = path;
 	dkRocketToRML.PostProcess(document);
@@ -203,8 +211,11 @@ bool DKRocket::LoadUrl(const DKString& url)
 	LoadFonts();
 #endif
 
+	//DKString code = document->GetInnerRML().CString();
+	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
+	replace(code, "<", "\n<");
 	DKINFO("########## ROCKET RML CODE ##########\n");
-	DKINFO(toString(document->GetInnerRML().CString())+"\n");
+	DKINFO(code+"\n");
 	DKINFO("#####################################\n");
 	return true;
 }

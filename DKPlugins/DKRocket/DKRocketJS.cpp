@@ -202,13 +202,14 @@ int DKRocketJS::getElementsByTagName(duk_context* ctx)
 	DKString name = duk_require_string(ctx, 0);
 	Rocket::Core::ElementList elements;
 	DKRocket::Get()->document->GetElementsByTagName(elements, name.c_str());
-	if(same(name, "head")){
-		Rocket::Core::Element* head = DKRocket::Get()->document;
-		int i=0;
+	if(same(name, "html")){
+		elements.push_back(DKRocket::Get()->document); //html tag
 	}
+	/*
 	if(same(name, "body")){
 		elements.push_back(DKRocket::Get()->document); //body tag
 	}
+	*/
 	if(elements.empty()){
 		duk_push_null(ctx);
 		return true;
