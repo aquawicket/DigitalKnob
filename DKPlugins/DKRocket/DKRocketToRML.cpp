@@ -87,7 +87,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 {
 	DKDEBUGFUNC(html, rml);
 	rml = html;
-	TidyFile(rml, rml);
+	TidyFile(rml, rml); //Tidy up the file (XHTML)
 	replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"", "");
 	replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">", "");
 	replace(rml,"<meta name=\"generator\" content=", "");
@@ -114,18 +114,15 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	}
 	*/
 
+
 	//Add the base DKRocket.css stylesheet
 	xml.PrependNode("//head","link");
 	xml.SetAttributes("//head/link[1]","rel","stylesheet");
 	xml.SetAttributes("//head/link[1]","type","text/css");
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
 
-	//Rocket cannot read nodes outside of the body, so add an html node we can work with.
+	//Rocket cannot read nodes outside of the body, so add a html node we can work with.
 	xml.PrependNode("//body", "html"); 
-
-	//xml.SetAttributes("//body","id","body");
-	//xml.SetAttributes("//head","id","head");
-	//xml.SetAttributes("//html","id","html");
 
 	xml.SaveDocumentToString(rml);
 

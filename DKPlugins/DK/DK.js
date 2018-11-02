@@ -27,22 +27,24 @@ var events = [];
 
 document.body.style.backgroundColor = "rgb(200,200,200)";
 //document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
-document.getElementsByTagName('head')[0].id = "head";
-document.body.id = "body";
-document.body.style.fontSize = "13em";
-document.documentElement.id = "html";
-document.documentElement.style.fontSize = "1px";
-document.body.style.cursor = "default";
+//document.getElementsByTagName('head')[0].id = "head";
+//document.body.id = "body";
+//document.body.style.fontSize = "13em";
+//document.documentElement.id = "html";
+//document.documentElement.style.fontSize = "1px";
+//document.body.style.cursor = "default";
 
 // Dummy functions only implemented in c++
 function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
 function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
 EventLoop.run = function(){};
 
+/*
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
     DKSendEvent("GLOBAL", "second", "");
 }
+*/
 
 if(DK_GetBrowser() != "CEF"){
 	function DK_ClearEvents(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
@@ -78,7 +80,6 @@ window.addEventListener('error', function(e){
         'Line: ' + e.lineno + ', Column: ' + e.colno,
         'Stack: ' + (e.error && e.error.stack || '(no stack trace)')
     ].join('\n');
-
 	DKERROR(errorText);
 	
 	/*
@@ -111,6 +112,7 @@ window.addEventListener('error', function(e){
 	*/
 });
 
+/*
 ///////////////////////////////////
 document.onmousemove = function(e){
   if(DK_IE()){ // grab the x-y pos.s if browser is IE
@@ -126,6 +128,7 @@ document.onmousemove = function(e){
 
   return true
 }
+*/
 
 function DKERROR(string){ Log(string, DK_ERROR); }
 function DKWARN(string){ Log(string, DK_WARN); }
@@ -956,7 +959,8 @@ function IsLocal()
 //////////////////////////
 function DKDEBUGFUNC(vars)
 {
-	var string = DKDEBUGFUNC.caller.name+"(";
+	/*
+	var string = DKDEBUGFUNC.caller.name+"(";  //func.caller.name not available in Duktape
 	if(vars){
 		for(var i=0; i<arguments.length; i++){
 			string += arguments[i];
@@ -967,8 +971,10 @@ function DKDEBUGFUNC(vars)
 	}
 	string += ")";
 	DKDEBUG(string+"\n");
+	*/
 }
 
+/*
 //////////////////////////
 function DKDEBUGVARS(vars)
 {
@@ -1120,6 +1126,7 @@ function DK_GetEvents()
 	}
 	return out;
 }
+*/
 
 ///////////////////
 function DK_GetOS()
@@ -1237,6 +1244,7 @@ function DK_IE()
 	return rv;
 }
 
+/*
 //////////////////////////
 function DK_GetType(event)
 {
@@ -1544,6 +1552,7 @@ function DK_FileToString(url)
 	DKDEBUGFUNC(url);
 	return ajaxGetUrl(url);
 }
+*/
 
 /*
 /////////////////////////////

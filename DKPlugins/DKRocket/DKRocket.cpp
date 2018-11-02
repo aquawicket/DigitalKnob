@@ -163,6 +163,10 @@ bool DKRocket::LoadUrl(const DKString& url)
 	//DKRocketToRML* dkRocketToRml = new DKRocketToRML();
 	dkRocketToRML.IndexToRml(html, rml);
 
+	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
+	DKINFO(rml+"\n");
+	DKINFO("#########################################\n");
+
 	//// Clear any document and load the rml into the document
 	if(document){ 
 		Rocket::Core::Factory::ClearStyleSheetCache();
@@ -199,6 +203,9 @@ bool DKRocket::LoadUrl(const DKString& url)
 	LoadFonts();
 #endif
 
+	DKINFO("########## ROCKET RML CODE ##########\n");
+	DKINFO(toString(document->GetInnerRML().CString())+"\n");
+	DKINFO("#####################################\n");
 	return true;
 }
 
