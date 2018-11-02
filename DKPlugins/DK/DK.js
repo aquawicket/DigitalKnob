@@ -238,6 +238,7 @@ DKINFO("*** DigitalKnob ***\n");
 DKINFO(DK_GetBrowser()+"\n");
 DKINFO(DK_GetJavascript()+"\n");
 
+/*
 /////////////////////////////////
 function DKCreate(data, callback)
 {
@@ -297,7 +298,9 @@ function DKCreate(data, callback)
 	}
 	return true;
 }
+*/
 
+/*
 //////////////////////
 function DKClose(data)
 {
@@ -364,7 +367,9 @@ function DKClose(data)
 	
 	return true;
 }
+*/
 
+/*
 /////////////////////
 function LoadCss(url)
 {
@@ -388,7 +393,9 @@ function LoadCss(url)
 	
 	return true;
 }
+*/
 
+/*
 //////////////////////////////
 function LoadJs(url, callback)
 {
@@ -460,7 +467,9 @@ function LoadJs(url, callback)
 	script.src = url;
 	return true;
 }
+*/
 
+/*
 //////////////////////////////
 function LoadHtml(url, parent)
 {
@@ -520,6 +529,7 @@ function LoadHtml(url, parent)
 	
 	return true;
 }
+*/
 
 ///////////////////////////
 function CheckFileSupport()
@@ -533,6 +543,7 @@ function CheckFileSupport()
 	}
 }
 
+/*
 ///////////////////////////
 function GetLeftPx(element)
 {
@@ -580,7 +591,9 @@ function GetHeightPx(element)
 	}
 	return parseInt(element.style.height);
 }
+*/
 
+/*
 /////////////////////////////
 function DragStart(event, id)
 {
@@ -669,7 +682,9 @@ function DragStop(event)
 	document.body.removeEventListener('touchmove', DragMove, false);
 	document.body.removeEventListener('touchend', DragStop, false);
 }
+*/
 
+/*
 ///////////////////////////////
 function ResizeStart(event, id)
 {
@@ -732,7 +747,9 @@ function ResizeStop(id)
 	document.body.removeEventListener('touchmove', ResizeMove, false);
 	document.body.removeEventListener('touchend', ResizeStop, false);
 }
+*/
 
+/*
 //////////////////////
 function Pos(position)
 {
@@ -793,6 +810,7 @@ function PreventDefault(event)
         event.cancelBubble = true;
     }
 }
+*/
 
 /*
 ///////////////////////////////
@@ -807,6 +825,7 @@ function StopPropagation(event)
 }
 */
 
+/*
 ///////////////////////////////////
 function addEvent(elem, evnt, func)
 {
@@ -850,7 +869,9 @@ function removeEvent(elem, evnt, func)
 		elem[evnt] = null;
 	}
 }
+*/
 
+/*
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
@@ -874,6 +895,7 @@ function getCookie(cname)
     }
     return "";
 }
+*/
 
 //////////////////////
 function WindowWidth()
@@ -889,6 +911,7 @@ function WindowHeight()
 	return document.documentElement.clientHeight;
 }
 
+/*
 ////////////////////
 function GetMouseX()
 {
@@ -921,7 +944,9 @@ function makeStruct(names)
 	//var row = new Item(1, 'john', 'au');
 	//alert(row.speaker); // displays: john
 }
+*/
 
+/*
 //////////////////////////////////
 function replace(str, old, newstr)
 {
@@ -936,7 +961,9 @@ if(typeof String.prototype.trim !== 'function') {
     return this.replace(/^\s+|\s+$/g, ''); 
   }
 }
+*/
 
+/*
 //////////////////
 function IsLocal()
 {
@@ -955,6 +982,7 @@ function IsLocal()
 			//some other protocol
 	}
 }
+*/
 
 //////////////////////////
 function DKDEBUGFUNC(vars)
@@ -1570,6 +1598,7 @@ function DK_GetMouseWindowY()
 }
 */
 
+/*
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
@@ -1594,7 +1623,9 @@ function DK_ClearSelection()
 		window.getSelection().removeAllRanges();
 	}
 }
+*/
 
+/*
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
 //
@@ -1691,3 +1722,4 @@ function ajaxGetUrl(url)
 
 	return response.value;
 }
+*/
