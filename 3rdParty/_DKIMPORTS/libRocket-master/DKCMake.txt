@@ -1,7 +1,13 @@
 DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libRocket-master.zip libRocket-master)
+##DKINSTALL(${DKONLINE}/Libs/libRocket-master.zip libRocket-master)
+
+MESSAGE("Pulling libRocket from aquawicket/linRocket git...")
+DKSET(GIT C:/Progra~1/Git/bin/git.exe)
+SET(STRING "${GIT} clone https://github.com/aquawicket/libRocket.git ${3RDPARTY}/libRocket-master")
+FILE(MAKE_DIRECTORY ${3RDPARTY}/libRocket-master)
+EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
 DKSET(ROCKET ${3RDPARTY}/libRocket-master)
 
 
