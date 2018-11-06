@@ -68,7 +68,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_Execute", DKJS::Execute);
 	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit);
 	DKDuktape::AttachFunction("DK_GetArgs", DKJS::GetArgs);
-	//DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
+	DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
 	DKDuktape::AttachFunction("DK_GetClipboard", DKJS::GetClipboard);
 	DKDuktape::AttachFunction("DK_GetData", DKJS::GetData);
 	DKDuktape::AttachFunction("DK_GetDate", DKJS::GetDate);

@@ -3,6 +3,10 @@
 /* http://www.w3schools.com/css/css_syntax.asp */
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
+html
+{
+	font-family: "Times New Roman";
+}
 
 body
 {
@@ -41,6 +45,7 @@ th
 
 p
 {
+	font-family: "Times New Roman";
 	display:block;
 	margin-top: 1em;
 	margin-bottom: 1em;	

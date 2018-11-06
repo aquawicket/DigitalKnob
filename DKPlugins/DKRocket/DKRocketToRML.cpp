@@ -98,7 +98,8 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
 	//add DKRocket.css to the head tag
-	replace(rml, "<head>", "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DKRocket.css\"></link>");
+	DKString rocket_css = DKFile::local_assets+"DKRocket/DKRocket.css";
+	replace(rml, "<head>", "<head><link type=\"text/css\" href=\""+rocket_css+"\"></link>");
 
 
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.

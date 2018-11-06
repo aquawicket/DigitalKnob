@@ -125,33 +125,39 @@ function DKDebug_PushDKFiles()
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
-		DKERROR("DKDebug_PushDKFiles() assets is invalid\n");
+		//DKERROR("DKDebug_PushDKFiles() assets is invalid\n");
+		console.error("DKDebug_PushDKFiles() assets is invalid");
 		return false;
 	}
-	DKINFO("assets = "+assets+"\n");
+	//DKINFO("assets = "+assets+"\n");
+	console.log("assets = "+assets+"\n");
 	
 	var search = assets;
 	while(!DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
 		if(n == -1){
-			DKWARN("could not locate a DKPlugins folder\n");
+			//DKWARN("could not locate a DKPlugins folder\n");
+			console.warn("could not locate a DKPlugins folder");
 			return false;
 		}
 		search = search.substring(0, n);
-		DKINFO(search+"\n");
+		//DKINFO(search+"\n");
+		console.log(search+"");
 	}
 	
 	DKPATH = search;
 	
 	if(!DKFile_Exists(DKPATH)){
-		DKINFO("Could not find search\n");
+		//DKINFO("Could not find search\n");
+		console.log("Could not find search");
 		return;
 	}
 	//DKINFO("search = "+search+"\n");
 	
 	var temp = DKFile_DirectoryContents(DKPATH);
 	if(!temp){
-		DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
+		//DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
+		console.log("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
 	}
 	var folders = temp.split(",");
@@ -175,7 +181,8 @@ function DKDebug_PushDKFiles()
 	
 	var temp = DKFile_DirectoryContents(assets);
 	if(!temp){
-		DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
+		//DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
+		console.error("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
 	}
 	var folders = temp.split(",");
