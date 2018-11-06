@@ -133,6 +133,8 @@ bool DKRocket::LoadFonts()
 bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
+	//DKClass::DKCreate("DKRocket/DKConsole.js");
+
 	DKString path = url;
 	_url = path;
 	int found = _url.find_last_of("/");
@@ -142,7 +144,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	DKString html;
 
-	if(has(path, "http://")){
+	if(has(path, "http://") || has(path, "https://")){
 		DKClass::DKCreate("DKCurl");
 		if(!DKCurl::Get()->HttpFileExists(path)){
 			DKERROR("Could not locate "+path+"\n");

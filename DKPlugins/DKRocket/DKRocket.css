@@ -7,6 +7,7 @@ html
 {
 	font-family: "Times New Roman";
 	/* font-size: 100%; */
+	overflow: auto;
 }
 
 body
@@ -20,6 +21,7 @@ body
 	/* padding-right: 8px; */
 	margin: 8px;
 	display: block;
+	
 }
 
 /*
