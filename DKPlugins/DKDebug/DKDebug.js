@@ -20,7 +20,7 @@ function DKDebug_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
 	if(DK_Type(event, "keypress")){
-		//DKINFO("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
+		//console.log("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
 		DKDebug_LogKey(DK_GetValue(event));
 		DKDebug_CheckKeys();
 	}
@@ -125,30 +125,25 @@ function DKDebug_PushDKFiles()
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
-		//DKERROR("DKDebug_PushDKFiles() assets is invalid\n");
 		console.error("DKDebug_PushDKFiles() assets is invalid");
 		return false;
 	}
-	//DKINFO("assets = "+assets+"\n");
-	console.log("assets = "+assets+"\n");
+	console.log("assets = "+assets);
 	
 	var search = assets;
 	while(!DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
 		if(n == -1){
-			//DKWARN("could not locate a DKPlugins folder\n");
 			console.warn("could not locate a DKPlugins folder");
 			return false;
 		}
 		search = search.substring(0, n);
-		//DKINFO(search+"\n");
 		console.log(search+"");
 	}
 	
 	DKPATH = search;
 	
 	if(!DKFile_Exists(DKPATH)){
-		//DKINFO("Could not find search\n");
 		console.log("Could not find search");
 		return;
 	}
@@ -156,19 +151,18 @@ function DKDebug_PushDKFiles()
 	
 	var temp = DKFile_DirectoryContents(DKPATH);
 	if(!temp){
-		//DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
 		console.log("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
 	}
 	var folders = temp.split(",");
-	//DKINFO("folders = "+folders+"\n");
+	//console.log("folders = "+folders);
 	
 	var plugin_folders = [];
 	plugin_folders.push(DKPATH+"/DK/DKPlugins");
 	for(var i=0; i<folders.length; i++){
-		//DKINFO("checking "+search+"/"+folders[i]+"/DKPlugins"+"\n");
+		//console.log("checking "+search+"/"+folders[i]+"/DKPlugins");
 		if(DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
-			//DKINFO("adding "+DKPATH+"/"+folders[i]+"/DKPlugins\n");
+			//console.log("adding "+DKPATH+"/"+folders[i]+"/DKPlugins");
 			plugin_folders.push(DKPATH+"/"+folders[i]+"/DKPlugins");
 		}
 	}
@@ -176,18 +170,17 @@ function DKDebug_PushDKFiles()
 	for(var i=0; i<plugin_folders.length; i++){
 		plugin_folders[i] = DKFile_GetAbsolutePath(plugin_folders[i]);
 	}
-	//DKINFO("plugins_folders = "+plugin_folders+"\n");
+	//console.log("plugins_folders = "+plugin_folders);
 	
 	
 	var temp = DKFile_DirectoryContents(assets);
 	if(!temp){
-		//DKERROR("DKDebug_PushDKFiles() variable temp is invalid\n");
 		console.error("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
 	}
 	var folders = temp.split(",");
 	for(i=0; i<folders.length; i++){
-		//DKINFO(folders[i]+"\n"); 
+		//console.log(folders[i]); 
 		for(var b=0; b<plugin_folders.length; b++){
 			if(DKFile_Exists(plugin_folders[b]+"/"+folders[i])){
 				DKFile_CopyFolder(assets+"/"+folders[i], plugin_folders[b]+"/"+folders[i], true, true);
@@ -218,33 +211,33 @@ function DKDebug_ClearConsole()
 function DKDebug_PrintInfo()
 {
 	DKDEBUGFUNC();
-	DKINFO("\n"); 
-	DKINFO("\n**** DKOBJECTS ****\n"); 
+	console.log("\n"); 
+	console.log("**** DKOBJECTS ****"); 
 	var objects = DK_GetObjects();
 	var arry = objects.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKINFO(arry[i]+"\n"); 
+		console.log(arry[i]); 
 	}
-	DKINFO("\n"); 
+	console.log("\n"); 
 	
-	DKINFO("**** DKEVENTS ****\n"); 
+	console.log("**** DKEVENTS ****"); 
 	var events = DK_GetEvents();
 	var arry = events.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKINFO(arry[i]+"\n"); 
+		console.log(arry[i]); 
 	}
-	DKINFO("\n"); 
+	console.log("\n"); 
 	
-	DKINFO("**** DKEVENTS ****\n"); 
+	console.log("**** DKEVENTS ****"); 
 	var events = DK_GetFunctions();
 	var arry = events.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(!arry[i]){ continue; }
-		DKINFO(arry[i]+"\n"); 
+		console.log(arry[i]); 
 	}
-	DKINFO("\n"); 
+	console.log("\n"); 
 }
 
 //////////////////////////////
