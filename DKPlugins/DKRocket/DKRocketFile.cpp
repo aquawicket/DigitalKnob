@@ -1,11 +1,17 @@
 #include "DK/stdafx.h"
 #include "DKRocketFile.h"
+#include "DKRocket.h"
 
 
 /////////////////////////////////////////////////////////////////////////////
 Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 {
 	DKDEBUGFUNC("Rocket::Core::String&");
+
+	if(!DKRocket::Get()->_path.empty()){
+		DKWARN("DKRocketFile::Open() _path = "+DKRocket::Get()->_path+"\n");
+	}
+
 	DKString abspath = path.CString();
 	if(!DKFile::VerifyPath(abspath)){
 		DKERROR("DKRocketFile::Open("+abspath+") file does not exist.\n");

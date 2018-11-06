@@ -134,6 +134,12 @@ bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
 	DKString path = url;
+	_url = path;
+	int found = _url.find_last_of("/");
+	_path = _url.substr(0,found+1);
+	//DKWARN("DKRocket::LoadUrl(): last / at "+toString(found)+"\n");
+	DKWARN("DKRocket::LoadUrl(): _path = "+_path+"\n");
+
 	DKString html;
 
 	if(has(path, "http://")){
@@ -181,8 +187,6 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	//Set up the dom
 	DKClass::DKCreate("DKRocket/DKDom.js");
-
-	_url = path;
 	dkRocketToRML.PostProcess(document);
 
 #ifdef ANDROID

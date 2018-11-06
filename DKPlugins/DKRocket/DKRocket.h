@@ -28,6 +28,7 @@ public:
 	void ProcessEvent(Rocket::Core::Event& event); //overwritten 
 
 	DKString _url;
+	DKString _path;
 	Rocket::Core::Context* context;
 	Rocket::Core::ElementDocument* document;
 	static DKRocketFile* dkRocketFile;
