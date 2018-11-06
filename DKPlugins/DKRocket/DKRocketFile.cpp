@@ -1,6 +1,7 @@
 #include "DK/stdafx.h"
 #include "DKRocketFile.h"
 #include "DKRocket.h"
+#include "DKCurl/DKCurl.h"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -8,11 +9,19 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 {
 	DKDEBUGFUNC("Rocket::Core::String&");
 
+	DKString partpath = path.CString();
 	DKString abspath = path.CString();
 	if(!DKFile::PathExists(abspath)){
 		if(!DKRocket::Get()->_path.empty()){
 			DKWARN("DKRocketFile::Open() fullpath = "+DKRocket::Get()->_path+abspath+"\n");
 			abspath = DKRocket::Get()->_path+abspath;
+			if(has(abspath,"://")){
+				DKFile::MakeDir(DKFile::local_assets+"Cache");
+				DKCurl::Get()->Download(abspath, DKFile::local_assets+"Cache");
+				DKString filename;
+				DKFile::GetFileName(abspath, filename);
+				abspath = DKFile::local_assets+"Cache/"+filename;
+			}
 		}
 	}
 
