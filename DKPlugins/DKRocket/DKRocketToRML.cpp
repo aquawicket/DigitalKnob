@@ -90,21 +90,27 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	TidyFile(rml, rml); //Tidy up the file (XHTML)
 	replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"", "");
 	replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">", "");
+	replace(rml, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"", "");
+	replace(rml, "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">", "");
 	replace(rml,"<meta name=\"generator\" content=", "");
 	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
 	rml = "<rml>\n"+rml+"</rml>";
 	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
 
+	//add DKRocket.css to the head tag
+	replace(rml, "<head>", "<head><link rel=\"stylesheet\" type=\"text/css\" href=\"DKRocket/DKRocket.css\"></link>");
+
+
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
 	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
-	replace(rml,"\"","'");
+	//replace(rml,"\"","'");
 	
 	//Rocket does not recognize favicons, TODO
 	//replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
 
-	DKXml xml;
-	if(!xml.LoadDocumentFromString(rml)){ return false; }
+	//DKXml xml;
+	//if(!xml.LoadDocumentFromString(rml)){ return false; }
 
 	/*
 	if (!xml.FindNode("//body")) {
@@ -114,17 +120,18 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	}
 	*/
 
-
+	/*
 	//Add the base DKRocket.css stylesheet
 	xml.PrependNode("//head","link");
 	xml.SetAttributes("//head/link[1]","rel","stylesheet");
 	xml.SetAttributes("//head/link[1]","type","text/css");
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
+	*/
 
 	//Rocket cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
 
-	xml.SaveDocumentToString(rml);
+	//xml.SaveDocumentToString(rml);
 
 	HtmlToRml(rml, rml);
 	return true;
