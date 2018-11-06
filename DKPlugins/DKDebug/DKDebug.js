@@ -252,7 +252,7 @@ function DKDebug_GetSource()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKWidgetJS");
-	var source = DKWidget_GetOuterHtml("body");
+	var source = DKWidget_GetOuterHtml("html");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetBrowser() == "Rocket"){
