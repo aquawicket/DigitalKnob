@@ -27,6 +27,11 @@ body, div, option, img, select, dataselect, input, textarea, button
 	display: block;
 }
 */
+style
+{
+	display:none;
+}
+
 title
 {
 	display:none;
