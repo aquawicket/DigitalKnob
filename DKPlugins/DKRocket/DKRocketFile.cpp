@@ -8,14 +8,12 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 {
 	DKDEBUGFUNC("Rocket::Core::String&");
 
-	if(!DKRocket::Get()->_path.empty()){
-		DKWARN("DKRocketFile::Open() _path = "+DKRocket::Get()->_path+"\n");
-	}
-
 	DKString abspath = path.CString();
-	if(!DKFile::VerifyPath(abspath)){
-		DKERROR("DKRocketFile::Open("+abspath+") file does not exist.\n");
-		return 0;
+	if(!DKFile::PathExists(abspath)){
+		if(!DKRocket::Get()->_path.empty()){
+			DKWARN("DKRocketFile::Open() fullpath = "+DKRocket::Get()->_path+abspath+"\n");
+			abspath = DKRocket::Get()->_path+abspath;
+		}
 	}
 
 	FILE* fp = fopen(abspath.c_str(), "rb");
