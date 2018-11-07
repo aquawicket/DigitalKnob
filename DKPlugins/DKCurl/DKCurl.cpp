@@ -479,6 +479,12 @@ bool DKCurl::HttpFileExists(const DKString& url)
 	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
 	//curl_easy_setopt(curl, CURLOPT_HEADER, 1L);
 	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+//#ifdef SKIP_PEER_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+//#endif
+//#ifdef SKIP_HOSTNAME_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+//#endif
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 	
 	long http_code = 0;
