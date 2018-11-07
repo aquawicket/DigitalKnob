@@ -65,6 +65,7 @@ bool DKCurl::Download(const DKString& url, const DKString& dest)
 	}
 
 	if(has(url,"http://") && HttpDownload(url, path)){ return true; }
+	if(has(url,"https://") && HttpDownload(url, path)){ return true; }
 	if(has(url,"ftp.") && FtpDownload(url, path)){ return true; }
 	return false;
 }
@@ -114,6 +115,7 @@ bool DKCurl::FileDate(const DKString& url, DKString& filedate)
 {
 	DKDEBUGFUNC(url, filedate);
 	if(has(url,"http://") && HttpFileDate(url, filedate)){return true;}
+	if(has(url,"https://") && HttpFileDate(url, filedate)){return true;}
 	if(has(url,"ftp.") && FtpFileDate(url, filedate)){return true;}
 	return false;
 }
@@ -132,6 +134,7 @@ bool DKCurl::FileSize(const DKString& url, long& size)
 {
 	DKDEBUGFUNC(url, size);
 	if(has(url,"http://") && HttpFileSize(url, size)){return true;}
+	if(has(url,"https://") && HttpFileSize(url, size)){return true;}
 	if(has(url,"ftp.") && FtpFileSize(url, size)){return true;}
 	return false;
 }
@@ -391,6 +394,12 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 	curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
 	curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &DKCurl::progress_func);
+//#ifdef SKIP_PEER_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+//#endif
+//#ifdef SKIP_HOSTNAME_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+//#endif
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 	fclose(fp);
 
@@ -422,7 +431,13 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate)
 	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
 	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
 	curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
- 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
+//#ifdef SKIP_PEER_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+//#endif
+//#ifdef SKIP_HOSTNAME_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+//#endif
+	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code		
 	if(res != CURLE_OK){ 
 		DKERROR("curl_easy_preform() failed \n"); 
 		curl_easy_cleanup(curl);
@@ -543,6 +558,12 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output)
 	//curl_easy_setopt(curl, CURLOPT_RETURNTRANSFER, 1);
 	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, true); // example.com is redirected, so we tell libcurl to follow redirection
  	//curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5000);
+//#ifdef SKIP_PEER_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+//#endif
+//#ifdef SKIP_HOSTNAME_VERIFICATION
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+//#endif
 	CURLcode res = curl_easy_perform(curl); //Perform the request, res will get the return code
 	
 	if(res != CURLE_OK){ 
