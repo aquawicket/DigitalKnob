@@ -1,5 +1,3 @@
-//BROWSER
-
 var appfilename;
 var local_assets;
 var online_assets;

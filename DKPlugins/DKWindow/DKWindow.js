@@ -1,6 +1,3 @@
-//BROWSER
-
-
 ////////////////////////
 function DKWindow_Init()
 {

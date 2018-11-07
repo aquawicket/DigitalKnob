@@ -99,7 +99,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 
 	//add DKRocket.css to the head tag
 	DKString rocket_css = DKFile::local_assets+"DKRocket/DKRocket.css";
-	replace(rml, "<head>", "<head><link type=\"text/css\" href=\""+rocket_css+"\"></link>");
+	replace(rml, "<head>", "<head><link id=\"DKRocket/DKRocket.css\" type=\"text/css\" href=\""+rocket_css+"\"></link>");
 
 
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
@@ -146,6 +146,11 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	if(!element){
 		DKWARN("DKRocketToRML::PostProcess(): element invalid\n");
 		return false;
+	}
+
+	//we actually want the parent if it has one
+	if(element->GetParentNode()){
+		element = element->GetParentNode();
 	}
 
 	// Create cef contexts for iFrames

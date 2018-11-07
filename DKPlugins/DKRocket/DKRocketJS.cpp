@@ -182,6 +182,13 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 	}
 	element->SetAttribute(attribute.c_str(), value.c_str());
 	duk_push_boolean(ctx, true);
+
+	//if the attribute is "src", then post process to load scripts or iframes
+	if(same(attribute,"src")){
+		DKRocketToRML dkRocketToRml;
+		dkRocketToRml.PostProcess(element);
+	}
+
 	return true;
 }
 
