@@ -238,7 +238,7 @@ DKINFO("*** DigitalKnob ***\n");
 DKINFO(DK_GetBrowser()+"\n");
 DKINFO(DK_GetJavascript()+"\n");
 
-/*
+
 /////////////////////////////////
 function DKCreate(data, callback)
 {
@@ -298,10 +298,7 @@ function DKCreate(data, callback)
 	}
 	return true;
 }
-*/
 
-
-/*
 //////////////////////
 function DKClose(data)
 {
@@ -368,9 +365,7 @@ function DKClose(data)
 	
 	return true;
 }
-*/
 
-/*
 /////////////////////
 function LoadCss(url)
 {
@@ -394,9 +389,7 @@ function LoadCss(url)
 	
 	return true;
 }
-*/
 
-/*
 //////////////////////////////
 function LoadJs(url, callback)
 {
@@ -468,9 +461,7 @@ function LoadJs(url, callback)
 	script.src = url;
 	return true;
 }
-*/
 
-/*
 //////////////////////////////
 function LoadHtml(url, parent)
 {
@@ -530,7 +521,6 @@ function LoadHtml(url, parent)
 	
 	return true;
 }
-*/
 
 ///////////////////////////
 function CheckFileSupport()

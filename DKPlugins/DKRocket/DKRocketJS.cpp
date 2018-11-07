@@ -160,7 +160,20 @@ int DKRocketJS::setAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	DKString value = duk_require_string(ctx, 2);
+	
+	DKString value;
+	if(duk_is_string(ctx, 2)){
+		value = duk_require_string(ctx, 2);
+	}
+	else if(duk_is_boolean(ctx, 2)){
+		value = toString(duk_require_boolean(ctx, 2));
+	}
+	else{
+		DKERROR("DKRocketJS::setAttribute(): value invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
 		DKERROR("DKRocketJS::setAttribute(): element invalid\n");
