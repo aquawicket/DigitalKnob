@@ -4,7 +4,7 @@
 #include "DKXml/DKXml.h"
 #include "DKCurl/DKCurl.h"
 #include "DKRocket/DKRocket.h"
-#include "tidy.h""
+#include "tidy.h"
 #include "tidybuffio.h"
 
 //////////////////////////////////////////////////////////////////
@@ -226,14 +226,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	Rocket::Core::ElementUtilities::GetElementsByTagName(links, element, "link");
 	for(unsigned int i=0; i<links.size(); i++){
 		if(!links[i]->HasAttribute("href")){ continue; }
-		//TODO - load the stylesheet in rocket
-		DKString file = DKRocket::Get()->_path + links[i]->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-		DKWARN("file = "+file+"\n");	
-
-		Rocket::Core::StyleSheet* styleSheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
-		//if(styleSheet == NULL){ continue; }
-		//DKRocket::Get()->document->SetStyleSheet(styleSheet);
-		//styleSheet->RemoveReference();
+		//load the stylesheet in rocket
+		DKString href = links[i]->GetAttribute("href")->Get<Rocket::Core::String>().CString();
+		replace(href, DKRocket::Get()->_path, "");
+		DKClass::DKCreate(href);
 	}
 
 	// <script> tags
