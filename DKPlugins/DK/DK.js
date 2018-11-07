@@ -114,20 +114,21 @@ window.addEventListener('error', function(e){
 /*
 ///////////////////////////////////
 document.onmousemove = function(e){
-  if(DK_IE()){ // grab the x-y pos.s if browser is IE
-    mouseX = e.clientX + document.body.scrollLeft
-    mouseY = e.clientY + document.body.scrollTop
-  } else {  // grab the x-y pos.s if browser is NS
-    mouseX = e.pageX
-    mouseY = e.pageY
-  }  
-  // catch possible negative values in NS4
-  if (mouseX < 0){mouseX = 0}
-  if (mouseY < 0){mouseY = 0}  
-
-  return true
+	if(DK_IE()){ // grab the x-y pos.s if browser is IE
+		mouseX = e.clientX + document.body.scrollLeft
+		mouseY = e.clientY + document.body.scrollTop
+	} 
+	else{  // grab the x-y pos.s if browser is NS
+		mouseX = e.pageX
+		mouseY = e.pageY
+	}  
+	// catch possible negative values in NS4
+	if (mouseX < 0){mouseX = 0}
+	if (mouseY < 0){mouseY = 0}  
+	return true;
 }
 */
+
 
 function DKERROR(string){ Log(string, DK_ERROR); }
 function DKWARN(string){ Log(string, DK_WARN); }
@@ -790,6 +791,7 @@ function Pos(position)
 	
 	DKERROR("Pos() ERROR\n");
 }
+*/
 
 /////////////////////////
 function GetKeyNum(event)
@@ -808,9 +810,7 @@ function PreventDefault(event)
         event.cancelBubble = true;
     }
 }
-*/
 
-/*
 ///////////////////////////////
 function StopPropagation(event)
 {
@@ -821,9 +821,7 @@ function StopPropagation(event)
         event.cancelBubble = true;
     }
 }
-*/
 
-/*
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
@@ -847,7 +845,6 @@ function getCookie(cname)
     }
     return "";
 }
-*/
 
 //////////////////////
 function WindowWidth()
@@ -877,7 +874,6 @@ function GetMouseY()
 	return mouseY;
 }
 
-/*
 //////////////////////////
 function makeStruct(names)
 {
@@ -896,9 +892,8 @@ function makeStruct(names)
 	//var row = new Item(1, 'john', 'au');
 	//alert(row.speaker); // displays: john
 }
-*/
 
-/*
+
 //////////////////////////////////
 function replace(str, old, newstr)
 {
@@ -913,9 +908,7 @@ if(typeof String.prototype.trim !== 'function') {
     return this.replace(/^\s+|\s+$/g, ''); 
   }
 }
-*/
 
-/*
 //////////////////
 function IsLocal()
 {
@@ -934,7 +927,6 @@ function IsLocal()
 			//some other protocol
 	}
 }
-*/
 
 //////////////////////////
 function DKDEBUGFUNC(vars)
@@ -954,7 +946,6 @@ function DKDEBUGFUNC(vars)
 	*/
 }
 
-/*
 //////////////////////////
 function DKDEBUGVARS(vars)
 {
@@ -1106,7 +1097,6 @@ function DK_GetEvents()
 	}
 	return out;
 }
-*/
 
 ///////////////////
 function DK_GetOS()
@@ -1225,7 +1215,6 @@ function DK_IE()
 	return rv;
 }
 
-/*
 //////////////////////////
 function DK_GetType(event)
 {
@@ -1341,7 +1330,6 @@ function DK_StopPropagation(event)
         event.cancelBubble = true;
     }
 }
-*/
 
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
@@ -1495,7 +1483,6 @@ function DKRemoveEvents(Function)
 	}
 }
 
-/*
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
@@ -1570,9 +1557,7 @@ function DK_FileToString(url)
 	DKDEBUGFUNC(url);
 	return ajaxGetUrl(url);
 }
-*/
 
-/*
 /////////////////////////////
 function DK_GetMouseWindowX()
 {
@@ -1586,9 +1571,7 @@ function DK_GetMouseWindowY()
 	DKDEBUGFUNC();
 	return mouseY;
 }
-*/
 
-/*
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
@@ -1613,7 +1596,6 @@ function DK_ClearSelection()
 		window.getSelection().removeAllRanges();
 	}
 }
-*/
 
 
 //////////////////////////////////////////////////////////////////
