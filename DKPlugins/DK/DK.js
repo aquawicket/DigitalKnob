@@ -824,52 +824,6 @@ function StopPropagation(event)
 */
 
 /*
-///////////////////////////////////
-function addEvent(elem, evnt, func)
-{
-	DKDEBUGFUNC(elem, evnt, func.name);
-	if (elem.addEventListener){  // W3C DOM
-		elem.addEventListener(evnt,func,false);
-	}
-	else if (elem.attachEvent){ // IE 8> DOM
-		if(elem == window && evnt != "resize"){
-			elem = document;
-		}
-		elem.attachEvent("on"+evnt,
-                     function(a){
-                         a.currentTarget = elem;
-                         func(a);
-                     });
-	}
-	else{
-		elem[evnt] = func;
-	}
-}
-
-//////////////////////////////////////
-function removeEvent(elem, evnt, func)
-{
-	DKDEBUGFUNC(elem, evnt, func.name);
-	if (elem.removeEventListener){  // W3C DOM
-		elem.removeEventListener(evnt,func);
-	}
-	else if (elem.detachEvent){ // IE 8> DOM
-		if(elem == window && evnt != "resize"){
-			elem = document;
-		}
-		elem.detachEvent("on"+evnt,
-                     function(a){
-                         a.currentTarget = elem;
-                         func(a);
-                     });
-	}
-	else{
-		elem[evnt] = null;
-	}
-}
-*/
-
-/*
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
@@ -1387,6 +1341,7 @@ function DK_StopPropagation(event)
         event.cancelBubble = true;
     }
 }
+*/
 
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
@@ -1415,15 +1370,49 @@ function DKAddEvent(id, type, Function)
 		return;
 	}
 	
-	//DKINFO("addEvent("+id+","+type+","+Function.name+")\n");
-	addEvent(element, type, Function);
+	if(element.addEventListener){  // W3C DOM
+		element.addEventListener(type, Function, false);
+	}
+	else if (element.attachEvent){ // IE 8> DOM
+		if(element == window && type != "resize"){
+			element = document;
+		}
+		element.attachEvent("on"+type,
+                     function(a){
+                         a.currentTarget = element;
+                         Function(a);
+                     });
+	}
+	else{
+		element[type] = Function;
+	}
 	
-	//add event to array
-	//DKINFO("events.length="+events.length+"\n");
+	//add event to array for reference
 	events[events.length] = id;
 	events[events.length] = type;
 	events[events.length] = Function;
 	return true;
+}
+
+/////////////////////////////////////////////
+function removeEvent(element, type, Function)
+{
+	DKDEBUGFUNC(element, type, Function.name);
+	if (element.removeEventListener){  // W3C DOM
+		element.removeEventListener(type, Function);
+	}
+	else if (element.detachEvent){ // IE 8> DOM
+		if(element == window && type != "resize"){
+			element = document;
+		}
+		element.detachEvent("on"+type, function(a){
+            a.currentTarget = element;
+            Function(a);
+		});
+	}
+	else{
+		element[type] = null;
+	}
 }
 
 //////////////////////////////////////////
@@ -1470,6 +1459,7 @@ function DKRemoveEvent(id, type, Function)
 	return true;
 }
 
+
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
@@ -1505,6 +1495,7 @@ function DKRemoveEvents(Function)
 	}
 }
 
+/*
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
