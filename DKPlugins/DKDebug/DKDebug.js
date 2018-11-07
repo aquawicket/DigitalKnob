@@ -4,28 +4,28 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
-	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
-	DKAddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
+	DKDuktape_AddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
+	DKDuktape_AddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
 }
 
 //////////////////////
 function DKDebug_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKDebug_OnEvent);
+	DKDuktape_RemoveEvents(DKDebug_OnEvent);
 }
 
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Type(event, "keypress")){
-		//console.log("Unicode CHARACTER code: "+DK_GetValue(event)+"\n"); 
-		DKDebug_LogKey(DK_GetValue(event));
+	if(DKDuktape_Type(event, "keypress")){
+		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
+		DKDebug_LogKey(DKDuktape_GetValue(event));
 		DKDebug_CheckKeys();
 	}
 	
-	if(DK_Type(event, "keydown") && DK_GetValue(event) == 123){ //F12
+	if(DKDuktape_Type(event, "keydown") && DKDuktape_GetValue(event) == 123){ //F12
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}

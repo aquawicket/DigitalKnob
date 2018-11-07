@@ -40,22 +40,22 @@ bool DKJS::Init()
 	//duk_eval_string(DKDuktape::ctx, "var DK_INFO = 2;");
 	//duk_eval_string(DKDuktape::ctx, "var DK_DEBUG = 3;");
 
-	DKDuktape::AttachFunction("DKAddEvent", DKJS::_DKAddEvent);
-	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable);
-	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
-	DKDuktape::AttachFunction("DKCreate", DKJS::_DKCreate);
-	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKLogError", DKJS::_DKERROR);
-	DKDuktape::AttachFunction("DKLogWarn", DKJS::_DKWARN);
-	DKDuktape::AttachFunction("DKLogInfo", DKJS::_DKINFO);
-	DKDuktape::AttachFunction("DKLogDebug", DKJS::_DKDEBUG);
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKDEBUGVARS", DKJS::_DKDEBUGVARS);
-	DKDuktape::AttachFunction("DKRemoveEvent", DKJS::_DKRemoveEvent);
-	DKDuktape::AttachFunction("DKRemoveEvents", DKJS::_DKRemoveEvents);
-	DKDuktape::AttachFunction("DKSendEvent", DKJS::_DKSendEvent);
-	DKDuktape::AttachFunction("DKValid", DKJS::_DKValid);
-	
+	DKDuktape::AttachFunction("DKDuktape_AddEvent", DKJS::_DKAddEvent);
+	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable);
+	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
+	DKDuktape::AttachFunction("DKDuktape_Create", DKJS::_DKCreate);
+	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
+	DKDuktape::AttachFunction("DKDuktape_LogError", DKJS::_DKERROR);
+	DKDuktape::AttachFunction("DKDuktape_LogWarn", DKJS::_DKWARN);
+	DKDuktape::AttachFunction("DKDuktape_LogInfo", DKJS::_DKINFO);
+	DKDuktape::AttachFunction("DKDuktape_LogDebug", DKJS::_DKDEBUG);
+	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKJS::_DKRemoveEvent);
+	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKJS::_DKRemoveEvents);
+	DKDuktape::AttachFunction("DK_SendEvent", DKJS::_DKSendEvent);
+	DKDuktape::AttachFunction("DK_Valid", DKJS::_DKValid);
+
 	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep);
 	DKDuktape::AttachFunction("DK_CallFunc", DKJS::CallFunc);
 	DKDuktape::AttachFunction("DK_ClearEvents", DKJS::ClearEvents);
@@ -93,7 +93,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime);
 	DKDuktape::AttachFunction("DK_GetType", DKJS::GetType);
 	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername);
-	DKDuktape::AttachFunction("DK_GetValue", DKJS::GetValue);
+	DKDuktape::AttachFunction("DKDuktape_GetValue", DKJS::GetValue);
 	DKDuktape::AttachFunction("DK_GetVolume", DKJS::GetVolume);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole);
 	DKDuktape::AttachFunction("DK_IE", DKJS::IE);
@@ -131,7 +131,7 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_System", DKJS::System);
 	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
 	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
-	DKDuktape::AttachFunction("DK_Type", DKJS::Type);
+	DKDuktape::AttachFunction("DKDuktape_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);

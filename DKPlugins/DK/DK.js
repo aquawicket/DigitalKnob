@@ -115,8 +115,8 @@ window.addEventListener('error', function(e){
 ///////////////////////////////////
 document.onmousemove = function(e){
   if(DK_IE()){ // grab the x-y pos.s if browser is IE
-    mouseX = event.clientX + document.body.scrollLeft
-    mouseY = event.clientY + document.body.scrollTop
+    mouseX = e.clientX + document.body.scrollLeft
+    mouseY = e.clientY + document.body.scrollTop
   } else {  // grab the x-y pos.s if browser is NS
     mouseX = e.pageX
     mouseY = e.pageY
@@ -298,6 +298,7 @@ function DKCreate(data, callback)
 	return true;
 }
 */
+
 
 /*
 //////////////////////
@@ -542,7 +543,6 @@ function CheckFileSupport()
 	}
 }
 
-/*
 ///////////////////////////
 function GetLeftPx(element)
 {
@@ -590,7 +590,6 @@ function GetHeightPx(element)
 	}
 	return parseInt(element.style.height);
 }
-*/
 
 /*
 /////////////////////////////
@@ -910,7 +909,6 @@ function WindowHeight()
 	return document.documentElement.clientHeight;
 }
 
-/*
 ////////////////////
 function GetMouseX()
 {
@@ -925,6 +923,7 @@ function GetMouseY()
 	return mouseY;
 }
 
+/*
 //////////////////////////
 function makeStruct(names)
 {
@@ -1625,7 +1624,7 @@ function DK_ClearSelection()
 }
 */
 
-/*
+
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
 //
@@ -1722,4 +1721,3 @@ function ajaxGetUrl(url)
 
 	return response.value;
 }
-*/

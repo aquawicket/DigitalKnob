@@ -117,11 +117,13 @@ bool DKDuktape::Init()
 
 		//DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
 		//LoadFile(duktape);
+		DKClass::DKCreate("DKDuktape/DKConsole.js");
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
 
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
+	
 	return true;
 }
 

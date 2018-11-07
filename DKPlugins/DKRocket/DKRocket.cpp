@@ -62,9 +62,6 @@ bool DKRocket::Init()
 	DKEvent::AddRegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::AddUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
-
-	//LoadUrl("index.html");
-	DKClass::DKCreate("DKRocket/DKConsole.js");
 	return true;
 }
 
