@@ -3,6 +3,7 @@ var currentFile;
 /////////////////////////
 function DKNotepad_Init()
 {
+	DKWARN("DKNotepad_Init()");
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");

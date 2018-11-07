@@ -441,7 +441,7 @@ function LoadJs(url, callback)
 			DKINFO("Loaded: "+url+"\n");
 			var func = window[init]; //Plugin_Init()    
 			if(typeof func == 'function'){ 
-				//DKINFO("Calling: "+name+"\n");
+				//DKINFO("Calling: "+init+"\n");
 				func(); //Init
 			}
 			else{
@@ -457,7 +457,21 @@ function LoadJs(url, callback)
 	}
 	////////////////////////
 	
-	script.src = url;
+	script.src = url;   //This will trigger DKRocket to load the script, but init or the callback will never be called. 
+						//This is because there is no onload function for scripts in DK yet.
+					  
+						//DK FIX
+						if(DK_GetJavascript() == "Duktape"){
+							DKINFO("Loaded: "+url+"\n");
+							var func = init; //Plugin_Init() 
+							if(eval("typeof "+func) === "function"){
+								DKINFO("Calling: "+init+"\n");
+								eval(func)(); //Init
+							}
+							else{
+								DKWARN(init+" is not defined\n");
+							}
+						}
 	return true;
 }
 
@@ -1035,7 +1049,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKWARN(elements[i].src+": js object has no id\n");
+			//DKWARN(elements[i].src+": script object has no id\n");
 			continue; 
 		}
 		jsfiles += elements[i].id+",";
@@ -1046,7 +1060,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("link");
 	for(var i=0; i<elements.length; i++){
 		if(!elements[i].id){
-			DKWARN(elements[i].href+": css object has no id\n");
+			//DKWARN(elements[i].href+": css object has no id\n");
 			continue; 
 		}
 		cssfiles += elements[i].id+",";
