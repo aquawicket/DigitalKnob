@@ -118,14 +118,14 @@ int DKRocketJS::getAttribute(duk_context* ctx)
 	DKString attribute = duk_require_string(ctx, 1);
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(!element){
-		DKERROR("DKRocketJS::getAttribute("+attribute+"): element invalid\n");
-		duk_push_boolean(ctx, false);
+		DKERROR("DKRocketJS::getAttribute("+address+","+attribute+"): element invalid\n");
+		duk_push_undefined(ctx);
 		return true;
 	}
 	Rocket::Core::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		DKERROR("DKRocketJS::getAttribute("+attribute+"): variant invalid\n");
-		duk_push_boolean(ctx, false);
+		//DKWARN("DKRocketJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
+		duk_push_undefined(ctx);
 		return true;
 	}
 	Rocket::Core::String temp = element->GetAttribute(attribute.c_str())->Get<Rocket::Core::String>();
