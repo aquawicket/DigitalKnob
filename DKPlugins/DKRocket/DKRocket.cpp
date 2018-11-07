@@ -133,8 +133,6 @@ bool DKRocket::LoadFonts()
 bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
-	//DKClass::DKCreate("DKRocket/DKConsole.js");
-
 	DKString path = url;
 	_url = path;
 	int found = _url.find_last_of("/");
@@ -188,6 +186,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	document->RemoveReference();
 
 	//Set up the dom
+	DKClass::DKCreate("DKRocket/DKConsole.js");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 	dkRocketToRML.PostProcess(document);
 

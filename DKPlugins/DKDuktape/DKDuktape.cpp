@@ -163,7 +163,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString end = filename+"_End";
 	DKFile::RemoveExtention(end);
 
-	DKString full_call = "try{ "+end+"(); } catch(err){ DKERROR('";
+	DKString full_call = "try{ "+end+"(); } catch(err){ console.error('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += end+"()\\n";
 	full_call += "'+err.stack+'\\n";
@@ -177,7 +177,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "console.error('########## DUKTAPE STACK TRACE ##########\\n";
 		str += end+": "+error+"\\n";
 		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
@@ -206,7 +206,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKFile::RemoveExtention(filename);
 	DKString init = filename+"_Init";
 
-	DKString full_call = "try{ "+init+"(); } catch(err){ DKERROR('";
+	DKString full_call = "try{ "+init+"(); } catch(err){ console.error('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += init+"()\\n";
 	full_call += "'+err.stack+'\\n";
@@ -221,7 +221,7 @@ bool DKDuktape::CallInit(const DKString& file)
 		DKString error = toString(duk_safe_to_string(ctx, -1));
 		replace(error, "'", "\\'");
 		DKString str = "var err = new Error();";
-		str += "DKERROR('########## DUKTAPE STACK TRACE ##########\\n";
+		str += "console.error('########## DUKTAPE STACK TRACE ##########\\n";
 		str += init+": "+error+"\\n";
 		str += "'+err.stack+'\\n');";
 		duk_eval_string(ctx, str.c_str());
@@ -375,7 +375,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	}
 
 	/*
-	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ DKERROR('";
+	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ console.error('";
 	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
 	full_call += jsreturn+"("+evt+")\\n";
 	//full_call += "'+err.stack+'\\n";

@@ -1,6 +1,6 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-var console;
+//var console;
 var document;
 //var location;
 var navigator;
@@ -61,6 +61,7 @@ var ObjectMap = function()
 }
 */
 
+/*
 ///////////////////////////////
 var Console = function(pointer)
 {
@@ -94,7 +95,7 @@ var Console = function(pointer)
 			DKLogWarn(msg+"\n");
 	}
 }
-
+*/
 
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
@@ -1127,7 +1128,7 @@ var Screen = function(pointer)
 var Window = function(pointer){
 	//DKDEBUGFUNC();
 	
-	console = new Console("console");
+	//console = new Console("console");
 	document = new Document("document");
 	navigator = new Navigator("navigator");
 	screen = new Screen("screen");
