@@ -123,7 +123,6 @@ bool DKDuktape::Init()
 	}
 
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
-	
 	return true;
 }
 
