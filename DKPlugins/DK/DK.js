@@ -26,6 +26,7 @@ var events = [];
 
 document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 document.body.style.fontSize = "13em";
+//document.body.style.fontSize = "1.0px";
 
 //document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 //document.documentElement.id = "html";
