@@ -1332,6 +1332,12 @@ var Window = function(pointer){
 }
 
 
+////////////////////////////////
+var XMLHttpRequest = function(){
+	//TODO
+}
+
+
 //Global prototypes. Must be in order by dependency
 Window.prototype = Eventtargetet.prototype;
 Screen.prototype = Eventtargetet.prototype;
