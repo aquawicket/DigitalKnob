@@ -142,7 +142,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
-	processed;
+	processed; //debug peek
 	if(!element){
 		DKWARN("DKRocketToRML::PostProcess(): element invalid\n");
 		return false;
@@ -219,6 +219,21 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			DKString rval;
 			DKDuktape::RunDuktape("DKRocketAudio_Open(\""+file+"\");", rval);
 		}
+	}
+
+	// <link> tags
+	Rocket::Core::ElementList links;
+	Rocket::Core::ElementUtilities::GetElementsByTagName(links, element, "link");
+	for(unsigned int i=0; i<links.size(); i++){
+		if(!links[i]->HasAttribute("href")){ continue; }
+		//TODO - load the stylesheet in rocket
+		DKString file = DKRocket::Get()->_path + links[i]->GetAttribute("href")->Get<Rocket::Core::String>().CString();
+		DKWARN("file = "+file+"\n");	
+
+		Rocket::Core::StyleSheet* styleSheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
+		//if(styleSheet == NULL){ continue; }
+		//DKRocket::Get()->document->SetStyleSheet(styleSheet);
+		//styleSheet->RemoveReference();
 	}
 
 	// <script> tags

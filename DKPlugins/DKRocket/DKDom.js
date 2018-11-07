@@ -1015,7 +1015,18 @@ var Node = function(pointer)
 	
 	Object.defineProperty(this, "baseURI",         { get: function(){ return DKRocket_baseURI(this.pointer);         } });  //TODO
 	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKRocket_baseURIObject(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "childNodes",      { get: function(){ return DKRocket_childNodes(this.pointer);      } });  //TODO
+	Object.defineProperty(this, "childNodes",      { 
+		get: function(){
+			var addressList = DKRocket_childNodes(this.pointer);
+			var htmlCollection = new HTMLCollection();   //TODO - switch htmlCollection over to NodeList
+			if(!addressList){ return htmlCollection; }
+			var arry = addressList.split(",");
+			for(var i=0; i<arry.length; i++){
+				htmlCollection.push(new HTMLElement(arry[i]))
+			}
+			return htmlCollection;	
+		} 
+	});  //TODO
 	Object.defineProperty(this, "firstChild",      { get: function(){ return DKRocket_firstChild(this.pointer);      } });  //TODO
 	Object.defineProperty(this, "isConnected",     { get: function(){ return DKRocket_isConnected(this.pointer);     } });  //TODO
 	Object.defineProperty(this, "lastChild",       { get: function(){ return DKRocket_lastChild(this.pointer);       } });  //TODO
@@ -1334,7 +1345,21 @@ var Window = function(pointer){
 
 ////////////////////////////////
 var XMLHttpRequest = function(){
-	//TODO
+	
+	XMLHttpRequest.prototype.open = function(method, url, async, user, password){
+		DKWARN("XMLHttpRequest.open("+method+","+url+","+async+")");
+		this.method = method;
+		this.url = url;
+		this.async = async;
+	}
+	XMLHttpRequest.prototype.send = function(){
+		DKWARN("XMLHttpRequest.send()");
+		this.readyState = 4;
+		this.status = 200;
+		this.statusText = "TODO";
+		this.responseText = DKRocket_send(this.method, this.url, this.async);
+		this.onreadystatechange();
+	}
 }
 
 

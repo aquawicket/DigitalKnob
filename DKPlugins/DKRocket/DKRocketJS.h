@@ -43,6 +43,10 @@ public:
 	static int clientHeight(duk_context* ctx);
 	static int clientTop(duk_context* ctx);
 	static int clientLeft(duk_context* ctx);
+	static int childNodes(duk_context* ctx);
+
+	//XMLHttpRequest
+	static int send(duk_context* ctx);
 	
 	//style
 	static int setProperty(duk_context* ctx);

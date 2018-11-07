@@ -33,6 +33,8 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_clientHeight", DKRocketJS::clientHeight);
 	DKDuktape::AttachFunction("DKRocket_clientTop", DKRocketJS::clientTop);
 	DKDuktape::AttachFunction("DKRocket_clientLeft", DKRocketJS::clientLeft);
+	DKDuktape::AttachFunction("DKRocket_childNodes", DKRocketJS::childNodes);
+	DKDuktape::AttachFunction("DKRocket_send", DKRocketJS::send);
 	return true;
 }
 
@@ -469,6 +471,14 @@ int DKRocketJS::appendChild(duk_context* ctx)
 	}
 	element->AppendChild(child, true);
 	duk_push_string(ctx, childAddress.c_str());
+
+	//post process if it's a link
+	if(same("link", child->GetTagName().CString())){
+		if(child->HasAttribute("href")){
+			DKRocketToRML dkRocketToRML;
+			dkRocketToRML.PostProcess(child);
+		}	
+	}
 	return true;
 }
 
@@ -591,6 +601,64 @@ int DKRocketJS::clientLeft(duk_context* ctx)
 		clientLeft = (int)element->GetClientLeft();
 	}
 	duk_push_int(ctx, clientLeft);
+	return true;
+}
+
+////////////////////////////////////////////
+int DKRocketJS::childNodes(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::childNodes(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
+	int num = element->GetNumChildren();
+	Rocket::Core::ElementList elements;
+	for(int i=0; i<num; i++){
+		elements.push_back(element->GetChild(i));
+	}
+	if(elements.empty()){
+		duk_push_null(ctx);
+		return true;
+	}
+	DKString str;
+	for(unsigned int i=0; i<elements.size(); i++){
+		const void* address = static_cast<const void*>(elements[i]);
+		std::stringstream ss;
+		ss << address;  
+		str += ss.str(); 
+		if(i < elements.size()-1){ str += ","; }
+	}
+	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
+//////////////////////////////////////
+int DKRocketJS::send(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//void* object = duk_require_pointer(ctx, 0);
+	DKString method = duk_require_string(ctx, 0);
+	DKString url = duk_require_string(ctx, 1);
+	bool async = duk_require_boolean(ctx, 2);
+	//DKString user; //TODO
+	//DKString password; //TODO
+	DKWARN("DKRocketJS::send("+method+","+url+","+toString(async)+")\n");
+	if(has(url,"http://") || has(url,"https://")){
+		DKERROR("DKRocketJS::send(): http/https not implemented yet\n");
+		return true;
+	}
+	
+	DKString file = DKRocket::Get()->_path+url;
+	DKString response;
+	DKFile::FileToString(file, response);
+	
+	//TODO - return JSON data
+	duk_push_string(ctx, response.c_str());
 	return true;
 }
 

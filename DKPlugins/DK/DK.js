@@ -479,6 +479,7 @@ function LoadJs(url, callback)
 function LoadHtml(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
+	DKWARN("LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
 		DKERROR("LoadJs("+url+"): url invalid\n");
@@ -498,7 +499,8 @@ function LoadHtml(url, parent)
 	}
 	
 	var string = DK_FileToString(url);
-	//DKINFO(string+"\n");
+	DKWARN("url = "+url+"\n");
+	DKWARN("string = "+string+"\n");
 	//Create an empty widget
 	if(!string || string == "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -512,6 +514,10 @@ function LoadHtml(url, parent)
 		return false;
 	}
 	if(nodes.length > 1){
+		for(var i=0; i < nodes.length; i++){
+			DKWARN("node["+i+"]: "+nodes[i]+"\n");
+		}
+		
 		DKWARN("###############################################\n");
 		DKWARN("LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
 		//DKINFO(temp.innerHTML+"\n");
@@ -1649,6 +1655,7 @@ function AjaxGet(url, output)
 	}
 
 	request.onreadystatechange=function(){
+		DKINFO("request.onreadystatechange")
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;
@@ -1656,21 +1663,21 @@ function AjaxGet(url, output)
 				return true;
 			}
 			else{
-				DKWARN("AJAX ERROR: "+url+" "+request.statusText+"\n"); //report error
+				DKERROR("AJAX ERROR: "+url+" "+request.statusText+"\n"); //report error
 				DKWARN("status: "+request.status+"\n");
 				return false;
 			}
 		}
 	}
 	
-	try{ 
-		request.open("GET",url,false); 
+	//try{ 
+		request.open("GET", url, false); 
 		request.send(); 
-	}
-	catch(err){
-		output.value = "";
-		return false;
-	}
+	//}
+	//catch(err){
+	//	output.value = "";
+	//	return false;
+	//}
 	return true;
 }
 
@@ -1685,6 +1692,7 @@ function ajaxGetUrl(url)
 	//php has a DKINFO() function that injects return messages with {"strings"}
 	//The response may contain {"log data"}, let's extract and print it.
 	//Also remove them and pass the remaining data on
+	//TODO - upgrade this to JSON date transfers
 	var place = 0;
 	var n = response.value.indexOf("{", place);
 	while(n != -1){
