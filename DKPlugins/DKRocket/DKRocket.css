@@ -6,16 +6,17 @@
 html
 {
 	font-family: "Times New Roman";
-	/* font-size: 100%; */
+	font-size: 130%;
 	overflow: auto;
 	height: 100%;
 	width: 100%;
+	top:0px;
+	left:0px;
 }
 
 body
 {
 	font-family: "Times New Roman";
-	/*font-size: 1px;*/
 	/*font-size: 134%;*/
 	color: black;
 	/* height: 100%; */
@@ -54,63 +55,84 @@ th
 
 p
 {
-	font-family: "Times New Roman";
+	/* font-family: "Times New Roman"; */
 	display:block;
-	margin-top: 1em;
-	margin-bottom: 1em;	
+	margin-bottom: 1em;
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
 }
 
 h1
 {
 	display:block;
 	font-size: 2em;
-	font-weight: bold;
-	margin-top: 0.67em;
 	margin-bottom: 0.67em;
+	/* margin-block-start: 0.67em; */
+    /* margin-block-end: 0.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 h2
 {
 	display:block;
 	font-size: 1.5em;
-	font-weight: bold;
-	margin-top: 0.83em;
 	margin-bottom: 0.83em;
+	/* margin-block-start: 0.83em; */
+    /* margin-block-end: 0.83em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 h3
 {
 	display:block;
 	font-size: 1.17em;
-	font-weight: bold;
-	margin-top: 1em;
 	margin-bottom: 1em;
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 h4
 {
 	display:block;
-	font-weight: bold;
-	margin-top: 1.33em;
 	margin-bottom: 1.33em;
+	/* margin-block-start: 1.33em; */
+    /* margin-block-end: 1.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 h5
 {
 	display:block;
 	font-size: 0.83em;
-	font-weight: bold;
-	margin-top: 1.67em;
 	margin-bottom: 1.67em;
+	/* margin-block-start: 1.67em; */
+    /* margin-block-end: 1.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 h6
 {
 	display:block;
 	font-size: 0.67em;
-	font-weight: bold;
-	margin-top: 2.33em;
 	margin-bottom: 2.33em;
+	/* margin-block-start: 2.33em; */
+    /* margin-block-end: 2.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
 }
 
 
