@@ -8,6 +8,8 @@ html
 	font-family: "Times New Roman";
 	/* font-size: 100%; */
 	overflow: auto;
+	height: 100%;
+	width: 100%;
 }
 
 body
@@ -21,7 +23,6 @@ body
 	/* padding-right: 8px; */
 	margin: 8px;
 	display: block;
-	
 }
 
 /*
@@ -43,7 +44,7 @@ title
 option, div, tr
 {
 	display:block;
-	font-size: 13rem;
+	font-size: 13px;
 }
 
 th
@@ -131,8 +132,8 @@ button
 {
 	color: black;
 	width: 50px;
-	/* height: 20rem; */
-	/* padding-top:2rem; */
+	/* height: 20px; */
+	/* padding-top:2px; */
 	text-align: center;
 	
 	background-decorator: tiled-horizontal;
@@ -159,8 +160,8 @@ button:active
 /* Checkboxes */
 input.checkbox
 {
-	width:12rem;
-	height:12rem;
+	width:12px;
+	height:12px;
 	icon-decorator: image;
 	icon-image: checkboxes.png 0px 0px 12px 12px;
 }
@@ -179,12 +180,12 @@ input.checkbox:checked
 /* Passwords */
 input.password
 {
-	width: 100rem;
-	height: 22rem;
+	width: 100px;
+	height: 22px;
 	background-color:white;
 	color:black;
 	border-style: solid;
-    border-width: 1rem;
+    border-width: 1px;
 	border-color: rgb(167,167,167);
 }
 
@@ -197,8 +198,8 @@ input.password:focus
 /* Radio Buttons */
 input.radio
 {
-	width:12rem;
-	height:12rem;
+	width:12px;
+	height:12px;
 	icon-decorator: image;
 	icon-image: radios.png 0px 0px 12px 12px;
 }
@@ -217,23 +218,23 @@ input.radio:checked
 /* Ranges */
 input.range
 {
-	width:150rem;
-	height:150rem;
+	width:150px;
+	height:150px;
 }
 
 input.range slidertrack
 {
-	height:4rem;
-	width:4rem;
-	margin-top:9rem;
+	height:4px;
+	width:4px;
+	margin-top:9px;
 	background-decorator: image;
 	background-image: rangetrack.png 0px 0px 4px 4px;
 }
 
 input.range sliderbar
 {
-	width:11rem;
-	height:21rem;
+	width:11px;
+	height:21px;
 	background-decorator: image;
 	background-image: rangebar.png 0px 0px 11px 21px;
 }
@@ -241,23 +242,23 @@ input.range sliderbar
 /* Position Ranges */
 input.range.position
 {
-	width:107rem;
-	height:14rem;
+	width:107px;
+	height:14px;
 }
 
 input.range.position slidertrack
 {
-	height:8rem;
-	width:107rem;
-	margin-top:3rem;
+	height:8px;
+	width:107px;
+	margin-top:3px;
 	background-decorator: image;
 	background-image: ../DKAudio/position_track.png 0px 0px 107px 8px;
 }
 
 input.range.position sliderbar
 {
-	width:22rem;
-	height:14rem;
+	width:22px;
+	height:14px;
 	background-decorator: image;
 	background-image: ../DKAudio/position.png 0px 0px 22px 14px;
 }
@@ -265,23 +266,23 @@ input.range.position sliderbar
 /* Volume Ranges */
 input.range.volume
 {
-	width:44rem;
-	height:14rem;
+	width:44px;
+	height:14px;
 }
 
 input.range.volume slidertrack
 {
-	height:8rem;
-	width:44rem;
-	margin-top:3rem;
+	height:8px;
+	width:44px;
+	margin-top:3px;
 	background-decorator: image;
 	background-image: ../DKAudio/volume_track.png 0px 0px 44px 8px;
 }
 
 input.range.volume sliderbar
 {
-	width:14rem;
-	height:14rem;
+	width:14px;
+	height:14px;
 	background-decorator: image;
 	background-image: ../DKAudio/volume.png 0px 0px 14px 14px;
 }
@@ -290,13 +291,13 @@ input.range.volume sliderbar
 /* Text Inputs */
 input.text
 {
-	width: 100rem;
-	height: 21rem;
+	width: 100px;
+	height: 21px;
 	min-height: 19px;
 	background-color:white;
 	color:black;
 	border-style: solid;
-    border-width: 1rem;
+    border-width: 1px;
 	border-color: rgb(167,167,167);
 }
 
@@ -309,12 +310,12 @@ input.text:focus
 /* Textareas */
 textarea
 {
-	width: 180rem;
-	height: 50rem;
+	width: 180px;
+	height: 50px;
 	background-color:white;
 	color:black;
 	border-style: solid;
-    border-width: 1rem;
+    border-width: 1px;
 	border-color: rgb(167,167,167);
 	resize: none;
 }
@@ -330,10 +331,10 @@ select
 {
 	background-color:white;
 	color:black;
-	width:80rem;
-	height:20rem;
+	width:80px;
+	height:20px;
 	border-style: solid;
-    border-width: 1rem;
+    border-width: 1px;
 	border-color: rgb(167,167,167);
 }
 
@@ -349,15 +350,15 @@ select:focus
 
 select selectvalue
 {
-	padding-left: 3rem;
+	padding-left: 3px;
 }
 
 select selectarrow
 {
-	width: 6rem;
-	height: 6rem;
-	margin-top: 6rem;
-	margin-right: 6rem;
+	width: 6px;
+	height: 6px;
+	margin-top: 6px;
+	margin-right: 6px;
 	icon-decorator: image;
 	icon-image: select.png 0px 0px 6px 6px;
 }
@@ -365,15 +366,15 @@ select selectarrow
 select selectbox
 {
 	border-style: solid;
-    border-left-width: 1rem;
-	border-right-width: 1rem;
-	border-bottom-width: 1rem;
+    border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
 	border-color: rgb(123,157,212);
 }
 
 select selectbox option
 {
-	padding-left: 3rem;
+	padding-left: 3px;
 	background-color:white;
 }
 
@@ -387,7 +388,7 @@ select selectbox option:hover
 /* Scrollbars */
 scrollbarvertical
 {
-	width: 17rem;
+	width: 17px;
 }
 
 scrollbarvertical slidertrack
@@ -398,7 +399,7 @@ scrollbarvertical slidertrack
 
 scrollbarvertical sliderbar
 {
-	min-height: 17rem;
+	min-height: 17px;
 	background-decorator: image;
 	background-image: scrollbars.png 0px 17px 17px 34px;
 }
@@ -417,8 +418,8 @@ scrollbarvertical sliderbar:active
 
 scrollbarvertical sliderarrowdec
 {
-	height: 17rem;
-	width: 17rem;
+	height: 17px;
+	width: 17px;
 	icon-decorator: image;
 	icon-image: scrollbars.png 17px 0px 34px 17px;
 }
@@ -437,8 +438,8 @@ scrollbarvertical sliderarrowdec:active
 
 scrollbarvertical sliderarrowinc
 {
-	height: 17rem;
-	width: 17rem;
+	height: 17px;
+	width: 17px;
 	icon-decorator: image;
 	icon-image: scrollbars.png 17px 34px 34px 51px;
 }
@@ -458,7 +459,7 @@ scrollbarvertical sliderarrowinc:active
 
 scrollbarhorizontal
 {
-	height: 17rem;
+	height: 17px;
 }
 
 scrollbarhorizontal slidertrack
@@ -469,7 +470,7 @@ scrollbarhorizontal slidertrack
 
 scrollbarhorizontal sliderbar
 {
-	min-width: 17rem;
+	min-width: 17px;
 	background-decorator: image;
 	background-image: scrollbars.png 17px 51px 34px 68px;
 }
@@ -488,8 +489,8 @@ scrollbarhorizontal sliderbar:active
 
 scrollbarhorizontal sliderarrowdec
 {
-	height: 17rem;
-	width: 17rem;
+	height: 17px;
+	width: 17px;
 	icon-decorator: image;
 	icon-image: scrollbars.png 0px 68px 17px 85px;
 }
@@ -508,8 +509,8 @@ scrollbarhorizontal sliderarrowdec:active
 
 scrollbarhorizontal sliderarrowinc
 {
-	height: 17rem;
-	width: 17rem;
+	height: 17px;
+	width: 17px;
 	icon-decorator: image;
 	icon-image: scrollbars.png 34px 68px 51px 85px;
 }

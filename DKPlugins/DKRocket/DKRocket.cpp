@@ -64,6 +64,7 @@ bool DKRocket::Init()
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
 
 	//LoadUrl("index.html");
+	DKClass::DKCreate("DKRocket/DKConsole.js");
 	return true;
 }
 
@@ -186,7 +187,6 @@ bool DKRocket::LoadUrl(const DKString& url)
 	document->RemoveReference();
 
 	//Set up the dom
-	DKClass::DKCreate("DKRocket/DKConsole.js");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 	dkRocketToRML.PostProcess(document);
 
