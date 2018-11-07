@@ -194,6 +194,11 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	//DKString code = document->GetInnerRML().CString();
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
+	
+	//find the last <html occurance
+	std::size_t n = code.rfind("<html");
+	code = code.substr(n);
+
 	replace(code, "<", "\n<");
 	DKINFO("########## ROCKET RML CODE ##########\n");
 	DKINFO(code+"\n");
