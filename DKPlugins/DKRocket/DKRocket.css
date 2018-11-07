@@ -14,6 +14,11 @@ html
 	left:0px;
 }
 
+head
+{
+	display:none;
+}
+
 body
 {
 	font-family: "Times New Roman";
@@ -26,12 +31,6 @@ body
 	display: block;
 }
 
-/*
-body, div, option, img, select, dataselect, input, textarea, button
-{
-	display: block;
-}
-*/
 style
 {
 	display:none;
@@ -67,6 +66,7 @@ p
 {
 	/* font-family: "Times New Roman"; */
 	display:block;
+	margin-top: 1em;
 	margin-bottom: 1em;
 	/* margin-block-start: 1em; */
     /* margin-block-end: 1em; */
@@ -78,6 +78,7 @@ h1
 {
 	display:block;
 	font-size: 2em;
+	margin-top: 0.67em;
 	margin-bottom: 0.67em;
 	/* margin-block-start: 0.67em; */
     /* margin-block-end: 0.67em; */
