@@ -388,6 +388,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 function DKWidget_GetProperty(variable, parameter)
 {
 	DKDEBUGFUNC(variable, parameter);
+	//DKWARN("DKWidget_GetProperty("+variable+","+parameter+")");
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }

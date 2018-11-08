@@ -317,11 +317,22 @@ int DKRocketJS::setProperty(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
-	DKString propertyValue = duk_require_string(ctx, 2);
+	DKString propertyValue;
+	if(duk_is_string(ctx, 2)){
+		propertyValue = duk_require_string(ctx, 2);
+	}
+	if(duk_is_boolean(ctx, 2)){
+		propertyValue = toString(duk_require_boolean(ctx, 2));
+	}
 	//DKString priority = duk_require_string(ctx, 3); //TODO
 	Rocket::Core::Element* element = getElementByAddress(address);
 	if(element){
-		element->SetProperty(propertyName.c_str(), propertyValue.c_str());
+		if(!propertyValue.empty()){
+			element->SetProperty(propertyName.c_str(), propertyValue.c_str());
+		}
+		else{
+			element->RemoveProperty(propertyName.c_str());
+		}
 	}
 	return true;
 }

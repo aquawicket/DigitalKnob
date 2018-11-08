@@ -140,8 +140,8 @@ var Document = function(pointer)
 	Document.prototype.getElementById = function(id){
 		var pointer = DKRocket_getElementById(id);
 		if(!pointer){ return null; }
-		var element = new Element(pointer);
-		return element;
+		var htmlElement = new HTMLElement(pointer); //MDN specs say getElementById returns an Element object, but then we have no access to .style
+		return htmlElement;
 	}
 	
 	Element.call(this, pointer);
