@@ -1301,7 +1301,7 @@ function DK_Id(event, id)
 { 
 	DKDEBUGFUNC(event, id);
 	var element = DKWidget_GetElement(event);
-	//DKINFO("DK_Id(): element="+element.id+"\n");
+	DKINFO("DK_Id(): element="+element.id+"\n");
 	if((element == window || element == document) && id == "GLOBAL"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
@@ -1376,11 +1376,10 @@ function DKAddEvent(id, type, Function)
 		if(element == window && type != "resize"){
 			element = document;
 		}
-		element.attachEvent("on"+type,
-                     function(a){
-                         a.currentTarget = element;
-                         Function(a);
-                     });
+		element.attachEvent("on"+type, function(a){
+			a.currentTarget = element;
+			Function(a);
+        });
 	}
 	else{
 		element[type] = Function;

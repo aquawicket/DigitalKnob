@@ -394,6 +394,7 @@ var Element = function(pointer)
 //////////////////////////////////////////////
 var EventFromRocket = function(pointer, event)
 {
+	DKWARN("EventFromRocket("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);
@@ -401,7 +402,7 @@ var EventFromRocket = function(pointer, event)
 	}
 }
 
-///////////////////////////////////
+/////////////////////////////////////
 var Eventtargetet = function(pointer)
 {
 	//DKDEBUGFUNC();
@@ -442,6 +443,10 @@ var Eventtargetet = function(pointer)
 		}
 		var stack = this.listeners[event.type].slice();
 		for (var i = 0, l = stack.length; i < l; i++){
+			DKWARN("dispatchEvent(): pointer = "+this.pointer);
+			if(this.pointer != "window"){
+				event.currentTarget = new HTMLElement(this.pointer);
+			}
 			stack[i].call(this, event);
 		}
 		return !event.defaultPrevented;

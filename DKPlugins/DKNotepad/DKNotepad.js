@@ -31,6 +31,8 @@ function DKNotepad_End()
 function DKNotepad_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
+	DKWARN("DKNotepad_OnEvent("+event.type+","+event.currentTarget.id+")");
+	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");

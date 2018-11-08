@@ -81,7 +81,6 @@ function DKFrame_Widget(id)
 	height = height.replace("rem", "");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
-	
 	DKWidget_AppendChild(frame, id);
 	DKWidget_SetProperty(id, "position", "absolute");
 	DKWidget_SetProperty(id, "top", "21rem");
@@ -138,8 +137,8 @@ function DKFrame_Iframe(title, url, width, height)
 function DKFrame_CreateFrame(title, width, height)
 {
 	DKDEBUGFUNC(title, width, height);
-	var window_width = parseInt(DKWindow_GetWidth());
-	var window_height = parseInt(DKWindow_GetHeight());
+	var window_width = parseInt(WindowWidth());
+	var window_height = parseInt(WindowHeight());
 	if(width == "100%"){ width = window_width-100; }
 	if(height == "100%"){ height = window_height-21-100; }
 	//if(!width){ width = "300"; }

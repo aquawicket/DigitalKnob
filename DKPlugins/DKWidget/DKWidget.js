@@ -349,6 +349,7 @@ function DKWidget_GetAttribute(variable, parameter)
 	return false;
 }
 
+/*
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
@@ -383,6 +384,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 	DKERROR("DKWidget_SetAttribute(): unknown type\n");
 	return false;
 }
+*/
 
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
