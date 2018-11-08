@@ -22,7 +22,7 @@ var Console = function(pointer)
 	Console.prototype.error = function(msg){
 		DKConsole_error(msg+"\n");
 	}
-	Console.prototype.exception = Console.prototype.error; //alias
+	Console.prototype.exception = Console.prototype.error; //Deprecated
 	Console.prototype.info = function(msg){
 		DKConsole_info(msg+"\n");
 	}
