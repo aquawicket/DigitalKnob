@@ -1,12 +1,11 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-//var console; //located @ /DKDuktape/DKConsole.js
 var document;
 var location;
-//var objectMap;
 var window;
 
-var stored_objects = [];
+//var objectMap;
+//var stored_objects = [];
 
 
 /////////////////////
