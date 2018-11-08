@@ -413,6 +413,7 @@ var Eventtargetet = function(pointer)
 	
 	Eventtargetet.prototype.listeners = null;
 	Eventtargetet.prototype.addEventListener = function(type, callback, useCapture){
+		DKWARN("addEventListener this.pointer = "+this.pointer);
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}

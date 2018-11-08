@@ -24,6 +24,7 @@ function DKNotepadFile_End()
 function DKNotepadFile_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
+	DKWARN("DKNotepadFile_OnEvent(event)");
 	if(DK_Id(event,"DKNotepadFile_New")){
 		DKNotepadFile_New();
 	}
