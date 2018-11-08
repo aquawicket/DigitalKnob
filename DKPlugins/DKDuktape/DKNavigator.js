@@ -1,40 +1,51 @@
-//https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
+var navigator;
 
-var console;
-
-
-///////////////////////////////
-var Console = function(pointer)
+/////////////////////////////////
+var Navigator = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Console()");
+	//console.warn("Navigator()");
 	
-	Console.prototype.assert = function(assertion, msg){
-		if(assertion){ return; }
-		DKNavigator_error(msg+"\n");
-	}
-	Console.prototype.clear = function(){
-		DKNavigator_clear();
-	}
-	Console.prototype.debug = function(msg){
-		DKNavigator_debug(msg+"\n");
-	}
-	Console.prototype.error = function(msg){
-		DKNavigator_error(msg+"\n");
-	}
-	Console.prototype.exception = Console.prototype.error; //Deprecated
-	Console.prototype.info = function(msg){
-		DKNavigator_info(msg+"\n");
-	}
-	Console.prototype.log = function(msg){
-		DKNavigator_info(msg+"\n");
-	}
-	Console.prototype.trace = function(){
-		DKNavigator_error("console.trace() not implemented\n");
-	}
-	Console.prototype.warn = function(msg){
-			DKNavigator_warn(msg+"\n");
+	Object.defineProperty(this, "appCodeName",{
+		value: "Mozilla",
+	});
+	Object.defineProperty(this, "appName",{
+		value: "Netscape",
+	});
+	Object.defineProperty(this, "appVersion",{
+		value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36", //TODO - pull this value from C++
+	});
+	Object.defineProperty(this, "cookieEnabled",{
+		value: "false",
+	});
+	Object.defineProperty(this, "language",{
+		value: "en-US",
+	});
+	Object.defineProperty(this, "mimeTypes",{
+		value: "",
+	});
+	Object.defineProperty(this, "onLine",{
+		value: true, //TODO - pull this value from C++
+	});
+	Object.defineProperty(this, "platform",{
+		value: "Win32", //TODO - pull this value from C++
+	});
+	Object.defineProperty(this, "product",{
+		value: "Duktape",
+	});
+	Object.defineProperty(this, "productSub",{
+		value: "1", //TODO - pull this value from C++
+	});
+	Object.defineProperty(this, "userAgent",{
+		value: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rocket/1.0", //TODO - pull this value from C++
+	});
+	Object.defineProperty(this, "vendor",{
+		value: "DigitalKnob.com",
+	});
+	
+	Navigator.prototype.javaEnabled = function(){
+		return false;
 	}
 }
 
-console = new Console("console");
+navigator = new Navigator("navigator");

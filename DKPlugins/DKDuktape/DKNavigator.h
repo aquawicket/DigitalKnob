@@ -5,17 +5,15 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
+/////////////////////////////////////////////////
 class DKNavigator : public DKObjectT<DKNavigator>
 {
 public:
 	bool Init();
 	
-	static int clear(duk_context* ctx);
-	static int debug(duk_context* ctx);
-	static int error(duk_context* ctx);
-	static int info(duk_context* ctx);
-	static int warn(duk_context* ctx);
+	static int onLine(duk_context* ctx);
+	static int platform(duk_context* ctx);
+	static int productSub(duk_context* ctx);
 };
 
 
