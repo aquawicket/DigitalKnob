@@ -4,8 +4,8 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
-	DKEventTarget_addEventListner("GLOBAL", "keypress", DKDebug_OnEvent);
-	DKEventTarget_addEventListner("GLOBAL", "keydown", DKDebug_OnEvent);
+	DKAddEvent("GLOBAL", "keypress", DKDebug_OnEvent);
+	DKAddEvent("GLOBAL", "keydown", DKDebug_OnEvent);
 }
 
 //////////////////////

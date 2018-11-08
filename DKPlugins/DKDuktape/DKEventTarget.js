@@ -22,13 +22,13 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		DKWARN("addEventListener this.pointer = "+this.pointer);
+		console.warn("addEventListener this.pointer = "+this.pointer);
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
 		if(this.pointer != "window"){
-			DKEventTarget_addEventListner(this.pointer, type, useCapture);
-			DKRocket_addEventListener(this.pointer, type, useCapture);
+			DKEventTarget_addEventListner(this.pointer, type, callback);
+			//DKRocket_addEventListener(this.pointer, type, useCapture);
 		}
 		if(!(type in this.listeners)){
 			this.listeners[type] = [];
@@ -36,8 +36,8 @@ var EventTarget = function(pointer)
 		this.listeners[type].push(callback);
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
-		DKEventTarget_removeEventListner(this.pointer, type, useCapture);
-		DKRocket_removeEventListener(this.pointer, type, useCapture);
+		DKEventTarget_removeEventListner(this.pointer, type, callback);
+		//DKRocket_removeEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			return;
 		}
@@ -55,7 +55,7 @@ var EventTarget = function(pointer)
 		}
 		var stack = this.listeners[event.type].slice();
 		for (var i = 0, l = stack.length; i < l; i++){
-			DKWARN("dispatchEvent(): pointer = "+this.pointer);
+			console.warn("dispatchEvent(): pointer = "+this.pointer);
 			if(this.pointer != "window"){
 				event.currentTarget = new HTMLElement(this.pointer);
 			}
@@ -64,3 +64,41 @@ var EventTarget = function(pointer)
 		return !event.defaultPrevented;
 	};
 };
+
+
+//These functions may be overwritten by DK/DK.js
+///////////////////////////////////////
+function DKAddEvent(id, type, Function)
+{
+	console.warn("DKAddEvent("+id+","+type+",Function)")
+	if(id == "GLOBAL"){
+		var global = new EventTarget("GLOBAL");
+		global.addEventListener(type, Function, false);
+		return true;
+	}
+	var element = document.getElementById(id);
+	if(element){
+		element.addEventListner(type, Function);
+	}
+}
+
+//////////////////////////////////////////
+function DKRemoveEvent(id, type, Function)
+{
+	console.warn("DKRemoveEvent("+id+","+type+",Function)")
+	if(id == "GLOBAL"){
+		var global = new EventTarget("GLOBAL");
+		global.removeEventListner(type, Function, false);
+		return true;
+	}
+	var element = document.getElementById(id);
+	if(element){
+		element.removeEventListner(type, Function);
+	}
+}
+
+/////////////////////////////////
+function DKRemoveEvents(Function)
+{
+	//TODO
+}
