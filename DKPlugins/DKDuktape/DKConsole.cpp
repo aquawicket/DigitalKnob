@@ -7,100 +7,90 @@
 bool DKConsole::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKConsole_availTop", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_availLeft", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_availHeight", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_availWidth", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_colorDepth", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_height", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_left", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_orientation", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_pixelDepth", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_top", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_width", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_mozEnabled", DKConsole::availTop);
-	DKDuktape::AttachFunction("DKConsole_mozBrightness", DKConsole::availTop);
-
+	DKDuktape::AttachFunction("DKConsole_clear", DKConsole::clear);
+	DKDuktape::AttachFunction("DKConsole_debug", DKConsole::debug);
+	DKDuktape::AttachFunction("DKConsole_error", DKConsole::error);
+	DKDuktape::AttachFunction("DKConsole_info", DKConsole::info);
+	DKDuktape::AttachFunction("DKConsole_warn", DKConsole::warn);
+	
 	DKClass::DKCreate("DKDuktape/DKConsole.js");
 	return true;
 }
 
-int DKConsole::availTop(duk_context* ctx)
+//////////////////////////////////////
+int DKConsole::clear(duk_context* ctx)
 {
-	//TODO
-	return false;
+	//FIXME - make this work on all OS's
+	if(!DKUtil::System("cls")){ return 0; }
+	return 1;
 }
 
-int DKConsole::availLeft(duk_context* ctx)
+//////////////////////////////////////
+int DKConsole::debug(duk_context* ctx)
 {
-	//TODO
-	return false;
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKDEBUG(string);
+	return 1;
 }
 
-int DKConsole::availHeight(duk_context* ctx)
+//////////////////////////////////////
+int DKConsole::error(duk_context* ctx)
 {
-	//TODO
-	return false;
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKERROR(string);
+	return 1;
 }
 
-int DKConsole::availWidth(duk_context* ctx)
+/////////////////////////////////////
+int DKConsole::info(duk_context* ctx)
 {
-	//TODO
-	return false;
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKINFO(string);
+	return 1;
 }
 
-int DKConsole::colorDepth(duk_context* ctx)
+/////////////////////////////////////
+int DKConsole::warn(duk_context* ctx)
 {
-	//TODO
-	return false;
-}
-
-int DKConsole::height(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::left(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::orientation(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::pixelDepth(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::top(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::width(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::mozEnabled(duk_context* ctx)
-{
-	//TODO
-	return false;
-}
-
-int DKConsole::mozBrightness(duk_context* ctx)
-{
-	//TODO
-	return false;
+	DKString string;
+	if(duk_is_string(ctx, 0)){
+		string = duk_require_string(ctx, 0);
+	}
+	if(duk_is_boolean(ctx, 0)){
+		string = toString(duk_require_boolean(ctx, 0));
+	}
+	if(duk_is_number(ctx, 0)){
+		string = toString(duk_require_int(ctx, 0));
+	}
+	DKWARN(string);
+	return 1;
 }
 
 

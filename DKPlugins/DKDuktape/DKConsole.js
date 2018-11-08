@@ -11,29 +11,29 @@ var Console = function(pointer)
 	
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }
-		DKDuktape_LogError(msg+"\n");
+		DKConsole_error(msg+"\n");
 	}
 	Console.prototype.clear = function(){
-		DKDuktape_System("cls");
+		DKConsole_clear();
 	}
 	Console.prototype.debug = function(msg){
-		DKDuktape_LogDebug(msg+"\n");
+		DKConsole_debug(msg+"\n");
 	}
 	Console.prototype.error = function(msg){
-		DKDuktape_LogError(msg+"\n");
+		DKConsole_error(msg+"\n");
 	}
 	Console.prototype.exception = Console.prototype.error; //alias
 	Console.prototype.info = function(msg){
-		DKDuktape_LogInfo(msg+"\n");
+		DKConsole_info(msg+"\n");
 	}
 	Console.prototype.log = function(msg){
-		DKDuktape_LogInfo(msg+"\n");
+		DKConsole_info(msg+"\n");
 	}
 	Console.prototype.trace = function(){
-		DKDuktape_LogError("console.trace() not implemented\n");
+		DKConsole_error("console.trace() not implemented\n");
 	}
 	Console.prototype.warn = function(msg){
-			DKDuktape_LogWarn(msg+"\n");
+			DKConsole_warn(msg+"\n");
 	}
 }
 
