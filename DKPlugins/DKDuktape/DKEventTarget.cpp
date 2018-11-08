@@ -11,7 +11,10 @@ bool DKEventTarget::Init()
 	DKDuktape::AttachFunction("DKEventTarget_removeEventListner", DKEventTarget::removeEventListner);
 
 	// non-standard
+	DKDuktape::AttachFunction("DKEventTarget_id", DKEventTarget::id);
+	DKDuktape::AttachFunction("DKEventTarget_idLike", DKEventTarget::idLike);
 	DKDuktape::AttachFunction("DKEventTarget_type", DKEventTarget::type);
+	DKDuktape::AttachFunction("DKEventTarget_value", DKEventTarget::value);
 	
 	DKClass::DKCreate("DKDuktape/DKEventTarget.js");
 	return true;
@@ -21,7 +24,7 @@ bool DKEventTarget::Init()
 bool DKEventTarget::OnEvent(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
-	DKWARN("DKEventTarget::OnEvent(DKEvent* event)\n");
+	//DKWARN("DKEventTarget::OnEvent(DKEvent* event)\n");
 	DKString id = event->GetId();
 	if(id.empty()){ return false; } //we need an id
 	DKString type = event->GetType();
@@ -118,6 +121,34 @@ int DKEventTarget::removeEventListner(duk_context* ctx)
 
 
 // non-standard
+////////////////////////////////////////
+int DKEventTarget::id(duk_context* ctx)
+{
+	DKString evt = duk_require_string(ctx, 0);
+	DKString id = duk_require_string(ctx, 1);
+
+	DKStringArray events;
+	toStringArray(events, evt, ",");
+
+	if(events.size() < 1){ return 0; }
+	if(!same(events[0],id)){ return 0; }
+	return 1;
+}
+
+///////////////////////////////////////////
+int DKEventTarget::idLike(duk_context* ctx)
+{
+	DKString evt = duk_require_string(ctx, 0);
+	DKString id = duk_require_string(ctx, 1);
+
+	DKStringArray events;
+	toStringArray(events, evt, ",");
+
+	if(events.size() < 1){ return 0; }
+	if(!has(events[0],id)){ return 0; }
+	return 1;
+}
+
 /////////////////////////////////////////
 int DKEventTarget::type(duk_context* ctx)
 {
@@ -129,6 +160,20 @@ int DKEventTarget::type(duk_context* ctx)
 
 	if(events.size() < 2){ return 0; }
 	if(!same(events[1],id)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKEventTarget::value(duk_context* ctx)
+{
+	DKString evt = duk_require_string(ctx, 0);
+	DKString value = duk_require_string(ctx, 1);
+
+	DKStringArray events;
+	toStringArray(events, evt, ",");
+
+	if(events.size() < 3){ return 0; }
+	if(!same(events[2],value)){ return 0; }
 	return 1;
 }
 

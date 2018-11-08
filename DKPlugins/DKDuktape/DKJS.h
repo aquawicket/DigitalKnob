@@ -64,8 +64,6 @@ public:
 	static int GetVolume(duk_context* ctx);
 	static int HideConsole(duk_context* ctx);
 	static int IE(duk_context* ctx);
-	static int Id(duk_context* ctx);
-	static int IdLike(duk_context* ctx);
 	static int Include(duk_context* ctx);
 	static int KeyIsDown(duk_context* ctx);
 	static int LeftClick(duk_context* ctx);

@@ -19,15 +19,13 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	//console.warn("DKDebug_OnEvent("+event+")");
 	if(DKEventTarget_type(event, "keypress")){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		console.warn("keypress")
 		DKDebug_LogKey(DKDuktape_GetValue(event));
 		DKDebug_CheckKeys();
 	}
 	
-	if(DKEventTarget_type(event, "keydown") && DKDuktape_GetValue(event) == 123){ //F12
+	if(DKEventTarget_type(event, "keydown") && DKEventTarget_value(event, "123")){ //F12
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}

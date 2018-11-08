@@ -16,7 +16,10 @@ public:
 	static int removeEventListner(duk_context* ctx);
 
 	// non-standard
+	static int id(duk_context* ctx);
+	static int idLike(duk_context* ctx);
 	static int type(duk_context* ctx);
+	static int value(duk_context* ctx);
 };
 
 

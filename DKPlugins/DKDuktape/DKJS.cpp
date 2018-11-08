@@ -93,8 +93,6 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_GetVolume", DKJS::GetVolume);
 	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole);
 	DKDuktape::AttachFunction("DK_IE", DKJS::IE);
-	DKDuktape::AttachFunction("DK_Id", DKJS::Id);
-	DKDuktape::AttachFunction("DK_IdLike", DKJS::IdLike);
 	DKDuktape::AttachFunction("DK_Include", DKJS::Include);
 	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown);
 	DKDuktape::AttachFunction("DK_LeftClick", DKJS::LeftClick);
@@ -760,34 +758,6 @@ int DKJS::HideConsole(duk_context* ctx)
 int DKJS::IE(duk_context* ctx)
 {
 	return 0;
-}
-
-//////////////////////////////
-int DKJS::Id(duk_context* ctx)
-{
-	DKString evt = duk_require_string(ctx, 0);
-	DKString id = duk_require_string(ctx, 1);
-
-	DKStringArray events;
-	toStringArray(events, evt, ",");
-	
-	if(events.size() < 1){ return 0; }
-	if(!same(events[0],id)){ return 0; }
-	return 1;
-}
-
-//////////////////////////////////
-int DKJS::IdLike(duk_context* ctx)
-{
-	DKString evt = duk_require_string(ctx, 0);
-	DKString id = duk_require_string(ctx, 1);
-
-	DKStringArray events;
-	toStringArray(events, evt, ",");
-	
-	if(events.size() < 1){ return 0; }
-	if(!has(events[0],id)){ return 0; }
-	return 1;
 }
 
 ///////////////////////////////////
