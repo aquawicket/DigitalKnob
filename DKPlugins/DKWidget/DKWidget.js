@@ -33,6 +33,7 @@ function AdjustRems(id)
 function DKWidget_NewWidget(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
+	DKWARN("DKWidget_NewWidget("+url+","+parent+")");
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
@@ -349,7 +350,6 @@ function DKWidget_GetAttribute(variable, parameter)
 	return false;
 }
 
-/*
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
@@ -384,7 +384,6 @@ function DKWidget_SetAttribute(variable, parameter, value)
 	DKERROR("DKWidget_SetAttribute(): unknown type\n");
 	return false;
 }
-*/
 
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)

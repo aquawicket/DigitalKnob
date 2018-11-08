@@ -481,7 +481,7 @@ function LoadJs(url, callback)
 function LoadHtml(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	DKWARN("LoadHtml("+url+","+parent+")");
+	//DKWARN("LoadHtml("+url+",parent)");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
 		DKERROR("LoadJs("+url+"): url invalid\n");
@@ -1301,7 +1301,7 @@ function DK_Id(event, id)
 { 
 	DKDEBUGFUNC(event, id);
 	var element = DKWidget_GetElement(event);
-	DKINFO("DK_Id(): element="+element.id+"\n");
+	//DKWARN("DK_Id(): element="+element.id+"\n");
 	if((element == window || element == document) && id == "GLOBAL"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
