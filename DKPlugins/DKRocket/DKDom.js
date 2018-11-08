@@ -394,7 +394,7 @@ var Element = function(pointer)
 //////////////////////////////////////////////
 var EventFromRocket = function(pointer, event)
 {
-	DKWARN("EventFromRocket("+pointer+","+event.type+")");
+	//DKWARN("EventFromRocket("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);

@@ -499,7 +499,13 @@ int DKRocketJS::addEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = getElementByAddress(address);
+	Rocket::Core::Element* element;
+	if(same(address,"document")){
+		element = DKRocket::Get()->document;
+	}
+	else{
+		element = getElementByAddress(address);
+	}
 	if(!element){
 		DKERROR("DKRocketJS::addEventListener(): element invalid\n");
 		duk_push_boolean(ctx, false);
