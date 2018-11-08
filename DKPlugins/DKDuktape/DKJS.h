@@ -11,7 +11,6 @@ class DKJS : public DKObjectT<DKJS>
 public:
 	bool Init();
 	
-	static int _DKAddEvent(duk_context* ctx);
 	static int _DKAvailable(duk_context* ctx);
 	static int _DKClose(duk_context* ctx);
 	static int _DKCreate(duk_context* ctx);
@@ -98,7 +97,6 @@ public:
 	static int System(duk_context* ctx);
 	static int TurnOffMonitor(duk_context* ctx);
 	static int TurnOnMonitor(duk_context* ctx);
-	static int Type(duk_context* ctx);
 	static int Value(duk_context* ctx);
 	static int VirtualMemory(duk_context* ctx);
 	static int VirtualMemoryUsed(duk_context* ctx);

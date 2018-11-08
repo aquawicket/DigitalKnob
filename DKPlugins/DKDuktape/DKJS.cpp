@@ -42,13 +42,13 @@ bool DKJS::Init()
 
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKDEBUGVARS", DKJS::_DKDEBUGVARS);
-	DKDuktape::AttachFunction("DKDuktape_AddEvent", DKJS::_DKAddEvent);
+	//DKDuktape::AttachFunction("DKDuktape_AddEvent", DKJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable);
 	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
 	DKDuktape::AttachFunction("DKDuktape_Create", DKJS::_DKCreate);
 	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKJS::_DKRemoveEvent);
-	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKJS::_DKRemoveEvents);
+	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKJS::_DKRemoveEvent);
+	//DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKJS::_DKRemoveEvents);
 	DKDuktape::AttachFunction("DK_SendEvent", DKJS::_DKSendEvent);
 	DKDuktape::AttachFunction("DK_Valid", DKJS::_DKValid);
 
@@ -127,7 +127,6 @@ bool DKJS::Init()
 	DKDuktape::AttachFunction("DK_System", DKJS::System);
 	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
 	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
-	DKDuktape::AttachFunction("DKDuktape_Type", DKJS::Type);
 	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
 	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
 	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
@@ -137,7 +136,7 @@ bool DKJS::Init()
 }
 
 
-
+/*
 ///////////////////////////////////////
 int DKJS::_DKAddEvent(duk_context* ctx)
 {
@@ -153,6 +152,7 @@ int DKJS::_DKAddEvent(duk_context* ctx)
 	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
 	return 1;
 }
+*/
 
 ////////////////////////////////////////
 int DKJS::_DKAvailable(duk_context* ctx)
@@ -1065,20 +1065,6 @@ int DKJS::TurnOffMonitor(duk_context* ctx)
 int DKJS::TurnOnMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOnMonitor()){ return 0; }
-	return 1;
-}
-
-////////////////////////////////
-int DKJS::Type(duk_context* ctx)
-{
-	DKString evt = duk_require_string(ctx, 0);
-	DKString id = duk_require_string(ctx, 1);
-
-	DKStringArray events;
-	toStringArray(events, evt, ",");
-	
-	if(events.size() < 2){ return 0; }
-	if(!same(events[1],id)){ return 0; }
 	return 1;
 }
 

@@ -2,7 +2,7 @@
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
 
-duk_context* DKDuktape::ctx = NULL;
+duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
 DKStringArray DKDuktape::codeToRun;
@@ -81,6 +81,7 @@ duk_int_t duk_peval_file(duk_context *ctx, const char *path)
 bool DKDuktape::Init()
 {
 	DKDEBUGFUNC();
+	ctx = NULL;
 	c_evloop = true;
 
 	if(!ctx){
@@ -212,7 +213,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString init = filename+"_Init";
+	DKString init = filename+"_Init()";
 
 	if(duk_peval_string(ctx, init.c_str()) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
@@ -234,7 +235,7 @@ bool DKDuktape::CallInit(const DKString& file)
 
 		DKERROR(message+"\n");
 	}
-	duk_pop(ctx);  // ignore result?
+	//duk_pop(ctx);  // ignore result?
 	
 	return true;
 }
@@ -352,6 +353,7 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	return true;
 }
 
+/*
 ///////////////////////////////////////
 bool DKDuktape::OnEvent(DKEvent* event)
 {
@@ -419,6 +421,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 
 	return true;
 }
+*/
 
 ////////////////////////
 bool DKDuktape::Reload()
