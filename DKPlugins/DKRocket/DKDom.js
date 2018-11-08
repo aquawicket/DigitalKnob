@@ -5,11 +5,9 @@ var document;
 var location;
 var navigator;
 var objectMap;
-var screen;
 var window;
 
 var stored_objects = [];
-var stored_events = [];
 
 
 /////////////////////
@@ -389,70 +387,6 @@ var Element = function(pointer)
 		}
 	});
 }
-
-
-//////////////////////////////////////////////
-var EventFromRocket = function(pointer, event)
-{
-	//DKWARN("EventFromRocket("+pointer+","+event.type+")");
-	for(var i=0; i<stored_events.length; i++){
-		if(pointer == stored_events[i].pointer){
-			stored_events[i].dispatchEvent(event);
-		}
-	}
-}
-
-/////////////////////////////////////
-var Eventtargetet = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("Eventtargetet("+pointer+")");
-	
-	this.pointer = pointer;
-	this.listeners = {};
-	
-	Eventtargetet.prototype.listeners = null;
-	Eventtargetet.prototype.addEventListener = function(type, callback, useCapture){
-		DKWARN("addEventListener this.pointer = "+this.pointer);
-		if(stored_events.indexOf(this) < 0){
-			stored_events.push(this);
-		}
-		if(this.pointer != "window"){
-			DKRocket_addEventListener(this.pointer, type, useCapture);
-		}
-		if(!(type in this.listeners)){
-			this.listeners[type] = [];
-		}
-		this.listeners[type].push(callback);
-	};
-	Eventtargetet.prototype.removeEventListener = function(type, callback, useCapture){
-		DKRocket_removeEventListener(this.pointer, type, useCapture);
-		if(!(type in this.listeners)){
-			return;
-		}
-		var stack = this.listeners[type];
-		for(var i = 0, l = stack.length; i < l; i++){
-			if(stack[i] === callback){
-				stack.splice(i, 1);
-				return;
-			}
-		}
-	};
-	Eventtargetet.prototype.dispatchEvent = function(event){
-		if(!(event.type in this.listeners)){
-			return true;
-		}
-		var stack = this.listeners[event.type].slice();
-		for (var i = 0, l = stack.length; i < l; i++){
-			DKWARN("dispatchEvent(): pointer = "+this.pointer);
-			if(this.pointer != "window"){
-				event.currentTarget = new HTMLElement(this.pointer);
-			}
-			stack[i].call(this, event);
-		}
-		return !event.defaultPrevented;
-	};
-};
 
 
 ///////////////////////////////////////////
@@ -1110,42 +1044,9 @@ var Node = function(pointer)
 		//TODO
 	}
 
-	return Eventtargetet.call(this, pointer);
+	return EventTarget.call(this, pointer);
 };
 
-
-//////////////////////////////
-var Screen = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("Screen()");
-	
-	Object.defineProperty(this, "availTop",      { get: function(){ return DKRocket_availTop(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "availLeft",     { get: function(){ return DKRocket_availLeft(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "availHeight",   { get: function(){ return DKRocket_availHeight(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "availWidth",    { get: function(){ return DKRocket_availWidth(this.pointer);    } });  //TODO
-	Object.defineProperty(this, "colorDepth",    { get: function(){ return DKRocket_colorDepth(this.pointer);    } });  //TODO
-	Object.defineProperty(this, "height",        { get: function(){ return DKRocket_height(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "left",          { get: function(){ return DKRocket_left(this.pointer);          } });  //TODO
-	Object.defineProperty(this, "orientation",   { get: function(){ return DKRocket_orientation(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "pixelDepth",    { get: function(){ return DKRocket_pixelDepth(this.pointer);    } });  //TODO
-	Object.defineProperty(this, "top",           { get: function(){ return DKRocket_top(this.pointer);           } });  //TODO
-	Object.defineProperty(this, "width",         { get: function(){ return DKRocket_width(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "mozEnabled",    { get: function(){ return DKRocket_mozEnabled(this.pointer);    } });  //TODO
-	Object.defineProperty(this, "mozBrightness", { get: function(){ return DKRocket_mozBrightness(this.pointer); } });  //TODO
-	
-	Screen.prototype.lockOrientation = function(){
-		//TODO
-	}
-	Screen.prototype.unlockOrientation = function(){
-		//TODO
-	}
-	Screen.prototype.unlockOrientation = function(){
-		//TODO
-	}
-	
-	return Eventtargetet.call(this, pointer);
-}
 
 ///////////////////////////////
 var Window = function(pointer){
@@ -1153,7 +1054,6 @@ var Window = function(pointer){
 	
 	document = new Document("document");
 	navigator = new Navigator("navigator");
-	screen = new Screen("screen");
 	location = new Location("location");
 	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
@@ -1346,7 +1246,7 @@ var Window = function(pointer){
 		//TODO
 	}
 	
-	return Eventtargetet.call(this, pointer);
+	return EventTarget.call(this, pointer);
 }
 
 
@@ -1371,14 +1271,13 @@ var XMLHttpRequest = function(){
 
 
 //Global prototypes. Must be in order by dependency
-Window.prototype = Eventtargetet.prototype;
-Screen.prototype = Eventtargetet.prototype;
-Node.prototype = Eventtargetet.prototype;
+Window.prototype = EventTarget.prototype;
+Node.prototype = EventTarget.prototype;
 Element.prototype = Node.prototype;	
 Document.prototype = Element.prototype;
 HTMLElement.prototype = Element.prototype;
 HTMLCollection.prototype = [];
-GlobalEventHandlers.prototype = Eventtargetet.prototype;
+GlobalEventHandlers.prototype = EventTarget.prototype;
 
 
 
