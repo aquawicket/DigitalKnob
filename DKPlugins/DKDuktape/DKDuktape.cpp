@@ -117,7 +117,9 @@ bool DKDuktape::Init()
 
 		//DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
 		//LoadFile(duktape);
+		DKClass::DKCreate("DKDuktape/DKEventTarget.js");
 		DKClass::DKCreate("DKDuktape/DKConsole.js");
+		DKClass::DKCreate("DKDuktape/DKScreen.js");
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
@@ -164,30 +166,37 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString end = filename+"_End";
 	DKFile::RemoveExtention(end);
 
-	DKString full_call = "try{ "+end+"(); } catch(err){ console.error('";
-	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
-	full_call += end+"()\\n";
-	full_call += "'+err.stack+'\\n";
-	full_call += "'); }";
-	duk_eval_string(DKDuktape::ctx, full_call.c_str());
+	if(duk_peval_string(ctx, end.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
 
-	/*
-	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1, end.c_str());
-	if(duk_pcall(ctx, 0) != 0){
-		DKString error = toString(duk_safe_to_string(ctx, -1));
-		replace(error, "'", "\\'");
-		DKString str = "var err = new Error();";
-		str += "console.error('########## DUKTAPE STACK TRACE ##########\\n";
-		str += end+": "+error+"\\n";
-		str += "'+err.stack+'\\n');";
+		DKERROR(message+"\n");
+
+		replace(stack,"'","\\'");
+		replace(stack,"\n","\\n");
+		replace(message,"'","\\'");
+
+		DKString str;
+		str += "var err_error = {stack:'"+stack+"'};";
+		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
-	else{
-		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //End function return value;
-	}
-	duk_pop(ctx);  // pop result/error
-	*/
+	duk_pop(ctx);  // ignore result?
 
 	for (unsigned int i = 0; i < DKDuktape::filelist.size(); ++i) {
 		if (has(DKDuktape::filelist[i], filename)) {
@@ -207,31 +216,27 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKFile::RemoveExtention(filename);
 	DKString init = filename+"_Init";
 
-	DKString full_call = "try{ "+init+"(); } catch(err){ console.error('";
-	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
-	full_call += init+"()\\n";
-	full_call += "'+err.stack+'\\n";
-	full_call += "'); }";
-	duk_eval_string(DKDuktape::ctx, full_call.c_str());
+	if(duk_peval_string(ctx, init.c_str()) != 0){
+		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+		DKString name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+		DKString message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+		message = name +": "+message;
+		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+		DKString fileName = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.fileName`
+		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+		DKString lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+		DKString stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
 
-	/*
-	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1, init.c_str());
-	if(duk_pcall(ctx, 0) != 0) {
-		//DKWARN(init + " " + DKString(duk_safe_to_string(ctx, -1)) + "\n");
-		DKString error = toString(duk_safe_to_string(ctx, -1));
-		replace(error, "'", "\\'");
-		DKString str = "var err = new Error();";
-		str += "console.error('########## DUKTAPE STACK TRACE ##########\\n";
-		str += init+": "+error+"\\n";
-		str += "'+err.stack+'\\n');";
-		duk_eval_string(ctx, str.c_str());
+		DKERROR(message+"\n");
 	}
-	else {
-		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //Init function return value;
-	}
-	duk_pop(ctx);  // pop result/error
-	*/
+	duk_pop(ctx);  // ignore result?
 	
 	return true;
 }
@@ -375,15 +380,6 @@ bool DKDuktape::OnEvent(DKEvent* event)
 		evt += "," + value;
 	}
 
-	/*
-	DKString full_call = "try{ "+jsreturn+"('"+evt+"'); } catch(err){ console.error('";
-	full_call += "########## DUKTAPE STACK TRACE ##########\\n";
-	full_call += jsreturn+"("+evt+")\\n";
-	//full_call += "'+err.stack+'\\n";
-	full_call += "'); }";
-	duk_eval_string(DKDuktape::ctx, full_call.c_str());
-	*/
-
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
@@ -460,6 +456,7 @@ bool DKDuktape::Reload()
 	return true;
 }
 
+/*
 ////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code)
 {
@@ -500,9 +497,11 @@ bool DKDuktape::RunDuktape(const DKString& code)
 		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
+	duk_pop(ctx);  // ignore result?
 
 	return true;
 }
+*/
 
 ////////////////////////////////////////////////////////////////
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
@@ -544,15 +543,16 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 		str += "EventFromRocket('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
+	duk_pop(ctx);
 
-	//TODO - complete this 
-	if(duk_check_type(ctx, -1, DUK_TYPE_STRING)){
+	//get return value
+	if(duk_is_string(ctx, -1)){
 		rval = duk_get_string(ctx, -1);
-		if(!rval.empty()){
-			//DKINFO("DKDuktape::RunDuktape(" + code + "): rval = "+rval+"\n");
-		}
 	}
-
+	if(duk_is_boolean(ctx, -1)){
+		rval = toString(duk_get_boolean(ctx, -1));
+	}
+	
 	return true;
 }
 
@@ -685,7 +685,10 @@ void DKDuktape::EventLoop()
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
 		DKString rval;
-		DKDuktape::RunDuktape(codeToRun[0]);
+		DKDuktape::RunDuktape(codeToRun[0], rval);
+		if(!rval.empty()){
+			DKWARN("DKDuktape::EventLoop(): rval = "+rval+"\n");
+		}
 		codeToRun.erase(codeToRun.begin());
 	}
 

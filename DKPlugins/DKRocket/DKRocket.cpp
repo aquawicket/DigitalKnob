@@ -256,7 +256,7 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
 	if(same(id,"GLOBAL")){
-		DKWARN("DKRocket::SendEvent(): recieved GLOBAL event\n");
+		//DKWARN("DKRocket::SendEvent(): recieved GLOBAL event\n");
 	}
 	
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());
@@ -330,11 +330,14 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
 
-	//TODO send this event back to duktape to be processed in javascript
+	//Send this event back to duktape to be processed in javascript
 	DKString code = "EventFromRocket('"+str+"',"+evnt+");";
-	DKDuktape::Get()->RunDuktape(code);
+	DKString rval;
+	DKDuktape::Get()->RunDuktape(code, rval);
+	if(!rval.empty()){
+		DKWARN("DKRocket::ProcessEvent(): rval = "+rval+"\n");
+	}
 	//////////////////////////////////////////////////////////////////////
-
 
 
 	//If the event bubbles up, ignore elements underneith 

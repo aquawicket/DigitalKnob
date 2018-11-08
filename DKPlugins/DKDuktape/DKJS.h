@@ -108,6 +108,21 @@ public:
 	static int VirtualMemoryUsed(duk_context* ctx);
 	static int VirtualMemoryUsedByApp(duk_context* ctx);
 	static int WaitForImage(duk_context* ctx);
+
+	//screen
+	static int availTop(duk_context* ctx);
+	static int availLeft(duk_context* ctx);
+	static int availHeight(duk_context* ctx);
+	static int availWidth(duk_context* ctx);
+	static int colorDepth(duk_context* ctx);
+	static int height(duk_context* ctx);
+	static int left(duk_context* ctx);
+	static int orientation(duk_context* ctx);
+	static int pixelDepth(duk_context* ctx);
+	static int top(duk_context* ctx);
+	static int width(duk_context* ctx);
+	static int mozEnabled(duk_context* ctx);
+	static int mozBrightness(duk_context* ctx);
 };
 
 

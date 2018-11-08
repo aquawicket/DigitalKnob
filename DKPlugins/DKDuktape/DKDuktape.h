@@ -27,7 +27,7 @@ public:
 	static bool LoadJSString(const DKString& url, const DKString& string);
 	static bool OnEvent(DKEvent* event);
 	static bool Reload();
-	static bool RunDuktape(const DKString& code);
+	//static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
 	static bool QueueDuktape(const DKString& code);
 

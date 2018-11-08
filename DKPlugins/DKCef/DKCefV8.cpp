@@ -462,24 +462,19 @@ bool DKCefV8::Run(CefArgs args, CefReturn retval)
 bool DKCefV8::RunDuktape(CefArgs args, CefReturn retval)
 {
 	DKDEBUGFUNC(args, retval);
-	DKString code = args->GetString(0);
-	if(!DKCef::Get()->RunDuktape(code)){ 
-		DKERROR("DKCefV8::RunDuktape(): DKCef::Get()->RunDuktape(code) failed");
-		return false; 
-	}
-	/*
 	DKString rval;
-	if(!DKCef::Get()->RunDuktape(code, rval)){
-		DKWARN("DKCefV8::RunDuktape():  DKCef::Get()->RunDuktape(code, rval) failed\n");
+	DKString code = args->GetString(0);
+	if(!DKCef::Get()->RunDuktape(code, rval)){ 
+		DKERROR("DKCefV8::RunDuktape(): DKCef::Get()->RunDuktape() failed");
 		return false; 
 	}
+
 	if(!rval.empty()){
 		if(!retval->SetString(0, rval)){ 
-			DKWARN("DKCefV8::RunDuktape() retval->SetString(0, rval) failed\n");
+			DKERROR("DKCefV8::RunDuktape() retval->SetString(0, rval) failed\n");
 			return false; 
 		}
 	}
-	*/
 	return true;
 }
 

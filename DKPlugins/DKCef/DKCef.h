@@ -70,7 +70,7 @@ public:
 	void Test();
 
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
-	bool RunDuktape(DKString& string);
+	bool RunDuktape(const DKString& string, DKString& rval);
 	bool QueueDuktape(DKString& string);
 	void RunPluginInfoTest(CefRefPtr<CefBrowser> browser);
 	bool NewBrowser(const void* input, void* output);

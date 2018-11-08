@@ -677,11 +677,11 @@ bool DKCef::RemoveFocus(const int& browser)
 	return 1;
 }
 
-////////////////////////////////////////
-bool DKCef::RunDuktape(DKString& string)
+//////////////////////////////////////////////////////////////
+bool DKCef::RunDuktape(const DKString& string, DKString& rval)
 {
-	DKDEBUGFUNC(string);
-	return DKDuktape::RunDuktape(string);
+	DKDEBUGFUNC(string, rval);
+	return DKDuktape::RunDuktape(string, rval);
 }
 
 ///////////////////////////////////////////////////////////////
