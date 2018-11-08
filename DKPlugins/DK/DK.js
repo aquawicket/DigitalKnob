@@ -472,6 +472,7 @@ function LoadJs(url, callback)
 							else{
 								DKWARN(init+" is not defined\n");
 							}
+							callback && callback(true);
 						}
 	return true;
 }

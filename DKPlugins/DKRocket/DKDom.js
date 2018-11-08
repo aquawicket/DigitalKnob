@@ -2,7 +2,7 @@
 
 //var console; //located @ /DKDuktape/DKConsole.js
 var document;
-//var location;
+var location;
 var navigator;
 var objectMap;
 var screen;
@@ -57,42 +57,6 @@ var ObjectMap = function()
 		for(var i=0; i<this.pointers.length; i++){
 			DKWARN(this.pointers[i]+" "+this.objects[i]);
 		}
-	}
-}
-*/
-
-/*
-///////////////////////////////
-var Console = function(pointer)
-{
-	//DKDEBUGFUNC();
-	//console.warn("Console()");
-	
-	Console.prototype.assert = function(assertion, msg){
-		if(assertion){ return; }
-		DKLogError(msg+"\n");
-	}
-	Console.prototype.clear = function(){
-		DK_System("cls");
-	}
-	Console.prototype.debug = function(msg){
-		DKLogDebug(msg+"\n");
-	}
-	Console.prototype.error = function(msg){
-		DKLogError(msg+"\n");
-	}
-	Console.prototype.exception = Console.prototype.error; //alias
-	Console.prototype.info = function(msg){
-		DKLogInfo(msg+"\n");
-	}
-	Console.prototype.log = function(msg){
-		DKLogInfo(msg+"\n");
-	}
-	Console.prototype.trace = function(){
-		DKLogError("console.trace() not implemented\n");
-	}
-	Console.prototype.warn = function(msg){
-			DKLogWarn(msg+"\n");
 	}
 }
 */
@@ -165,7 +129,9 @@ var Document = function(pointer)
 {
 	//DKDEBUGFUNC();
 	console.warn("Document("+pointer+")");
-
+	
+	Object.defineProperty(this, "location", { get: function(){ return location; } });
+	
 	Document.prototype.createElement = function(tagName){
 		var pointer = DKRocket_createElement(tagName);
 		var htmlElement = new HTMLElement(pointer);
@@ -178,10 +144,6 @@ var Document = function(pointer)
 		return element;
 	}
 	
-	
-	
-
-
 	Element.call(this, pointer);
 	
 	this.body = this.getElementsByTagName("body")[0];
@@ -957,6 +919,48 @@ var HTMLElement = function(pointer)
 	return Element.call(this, pointer);
 }
 
+////////////////////////////////
+var Location = function(pointer)
+{
+	Object.defineProperty(this, "hash",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "host",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "hostname",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "href", {
+		get: function()   { return DKRocket_href(this.pointer);      },
+		set: function(val){ return DKRocket_setHref(this.pointer, val); }
+	});  //TODO
+	Object.defineProperty(this, "origin",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "pathname",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "port",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "protocol",{
+		value: "TODO",
+	});
+	Object.defineProperty(this, "search",{
+		value: "TODO",
+	});
+	
+	Location.prototype.assign = function(url){
+		//TODO
+	}
+	Location.prototype.reload = function(forceGet){
+		//TODO
+	}
+	Location.prototype.replace = function(newUrl){
+		//TODO
+	}
+}
 
 /////////////////////////////////
 var Navigator = function(pointer)
@@ -1141,10 +1145,10 @@ var Screen = function(pointer)
 var Window = function(pointer){
 	//DKDEBUGFUNC();
 	
-	//console = new Console("console");
 	document = new Document("document");
 	navigator = new Navigator("navigator");
 	screen = new Screen("screen");
+	location = new Location("location");
 	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
 	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
@@ -1166,10 +1170,7 @@ var Window = function(pointer){
 	Object.defineProperty(this, "innerWidth",            { get: function(){ return DKRocket_innerWidth();                   } });  //TODO
 	Object.defineProperty(this, "isSecureContext",       { get: function(){ return DKRocket_isSecureContext();              } });  //TODO, Experimental
 	Object.defineProperty(this, "length",                { get: function(){ return DKRocket_length();                       } });  //TODO
-	Object.defineProperty(this, "location", { 
-		get: function()   { return DKRocket_location();       },
-		set: function(val){ return DKRocket_setLocation(val); }
-	});  //TODO
+	Object.defineProperty(this, "location",              { get: function(){ return location;                                } });
 	Object.defineProperty(this, "locationbar",           { get: function(){ return DKRocket_locationbar();                  } });  //TODO
 	Object.defineProperty(this, "localStorage",          { get: function(){ return DKRocket_localStorage();                 } });  //TODO
 	Object.defineProperty(this, "menubar",               { get: function(){ return DKRocket_menubar();                      } });  //TODO

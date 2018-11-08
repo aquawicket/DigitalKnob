@@ -24,6 +24,9 @@ public:
 	static int innerWidth(duk_context* ctx);
 	static int name(duk_context* ctx);
 
+	//location
+	static int href(duk_context* ctx);
+
 	//document
 	static int createElement(duk_context* ctx);
 	static int getElementById(duk_context* ctx);

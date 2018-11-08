@@ -54,7 +54,8 @@ function DKFrame_OnEvent(event)
 ///////////////////////////
 function DKFrame_Widget(id)
 {
-	DKDEBUGFUNC(id);	
+	DKDEBUGFUNC(id);
+	DKWARN("DKFrame_Widget("+id+")\n");
 	if(!DKWidget_ElementExists(id)){
 		DKERROR("DKFrame_Widget("+id+"): element does not exist\n");
 		return false;

@@ -35,6 +35,7 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_clientLeft", DKRocketJS::clientLeft);
 	DKDuktape::AttachFunction("DKRocket_childNodes", DKRocketJS::childNodes);
 	DKDuktape::AttachFunction("DKRocket_send", DKRocketJS::send);
+	DKDuktape::AttachFunction("DKRocket_href", DKRocketJS::href);
 	return true;
 }
 
@@ -662,4 +663,12 @@ int DKRocketJS::send(duk_context* ctx)
 	return true;
 }
 
+//////////////////////////////////////
+int DKRocketJS::href(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//DKString pointer = duk_require_string(ctx, 0);
+	duk_push_string(ctx, DKRocket::Get()->_url.c_str());
+	return true;
+}
 #endif //USE_DKDuktape
