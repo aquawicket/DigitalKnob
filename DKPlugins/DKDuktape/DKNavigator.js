@@ -27,9 +27,7 @@ var Navigator = function(pointer)
 	Object.defineProperty(this, "onLine",{
 		value: true, //TODO - pull this value from C++
 	});
-	Object.defineProperty(this, "platform",{
-		value: "Win32", //TODO - pull this value from C++
-	});
+	Object.defineProperty(this, "platform", { get: function(){ return DKNavigator_platform(); } });
 	Object.defineProperty(this, "product",{
 		value: "Duktape",
 	});

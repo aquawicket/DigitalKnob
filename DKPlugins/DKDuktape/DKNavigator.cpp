@@ -24,7 +24,20 @@ int DKNavigator::onLine(duk_context* ctx)
 ///////////////////////////////////////////
 int DKNavigator::platform(duk_context* ctx)
 {
-	//TODO
+	//TODO - complete this for all OS's
+#ifdef WIN64
+	duk_push_string(ctx, "Win32");
+	return true;
+#endif
+#ifdef WIN32
+	duk_push_string(ctx, "Win64");
+	return true;
+#endif
+#ifdef MAC
+	duk_push_string(ctx, "MacIntel");
+	return true;
+#endif
+	DKERROR("DKNavigator::platform(): platform invalid\n");
 	return false;
 }
 
