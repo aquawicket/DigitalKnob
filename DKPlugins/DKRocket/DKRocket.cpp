@@ -255,6 +255,9 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
+	if(same(id,"GLOBAL")){
+		DKWARN("DKRocket::SendEvent(): recieved GLOBAL event\n");
+	}
 	
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());
 	if(!element){ return false; }
