@@ -92,7 +92,7 @@ bool DKDuktape::Init()
 
 		DKClass::DKCreate("DKJS");
 		DKClass::DKCreate("DKConsole");
-		DKClass::DKCreate("DKDuktape/DKEventTarget.js");
+		DKClass::DKCreate("DKEventTarget");
 		DKClass::DKCreate("DKScreen");
 
 		//////////////////////////////////////////////////////////////////////////////////

@@ -27,6 +27,7 @@ var EventTarget = function(pointer)
 			stored_events.push(this);
 		}
 		if(this.pointer != "window"){
+			DKEventTarget_addEventListner(this.pointer, type, useCapture);
 			DKRocket_addEventListener(this.pointer, type, useCapture);
 		}
 		if(!(type in this.listeners)){
@@ -35,6 +36,7 @@ var EventTarget = function(pointer)
 		this.listeners[type].push(callback);
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+		DKEventTarget_removeEventListner(this.pointer, type, useCapture);
 		DKRocket_removeEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			return;

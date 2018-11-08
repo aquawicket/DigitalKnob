@@ -11,11 +11,8 @@ class DKEventTarget : public DKObjectT<DKEventTarget>
 public:
 	bool Init();
 	
-	static int clear(duk_context* ctx);
-	static int debug(duk_context* ctx);
-	static int error(duk_context* ctx);
-	static int info(duk_context* ctx);
-	static int warn(duk_context* ctx);
+	static int addEventListner(duk_context* ctx);
+	static int removeEventListner(duk_context* ctx);
 };
 
 
