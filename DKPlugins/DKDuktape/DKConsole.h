@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKScreen_H
-#define DKScreen_H
+#ifndef DKConsole_H
+#define DKConsole_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////
-class DKScreen : public DKObjectT<DKScreen>
+/////////////////////////////////////////////
+class DKConsole : public DKObjectT<DKConsole>
 {
 public:
 	bool Init();
@@ -27,7 +27,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKScreen, true)
+REGISTER_OBJECT(DKConsole, true)
 
-#endif //DKScreen_H
+#endif //DKConsole_H
 #endif //USE_DKDuktape

@@ -91,6 +91,9 @@ bool DKDuktape::Init()
 		}
 
 		DKClass::DKCreate("DKJS");
+		DKClass::DKCreate("DKConsole");
+		DKClass::DKCreate("DKDuktape/DKEventTarget.js");
+		DKClass::DKCreate("DKScreen");
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
@@ -115,11 +118,6 @@ bool DKDuktape::Init()
 		}
 		//////////////////////////////////////////////////////////////////////////////////
 
-		//DKString duktape = DKFile::local_assets+"DKDuktape/DKDuktape.js";
-		//LoadFile(duktape);
-		DKClass::DKCreate("DKDuktape/DKEventTarget.js");
-		DKClass::DKCreate("DKDuktape/DKConsole.js");
-		DKClass::DKCreate("DKDuktape/DKScreen.js");
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}

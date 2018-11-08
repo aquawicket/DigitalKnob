@@ -20,6 +20,8 @@ bool DKScreen::Init()
 	DKDuktape::AttachFunction("DKScreen_width", DKScreen::availTop);
 	DKDuktape::AttachFunction("DKScreen_mozEnabled", DKScreen::availTop);
 	DKDuktape::AttachFunction("DKScreen_mozBrightness", DKScreen::availTop);
+
+	DKClass::DKCreate("DKDuktape/DKScreen.js");
 	return true;
 }
 
