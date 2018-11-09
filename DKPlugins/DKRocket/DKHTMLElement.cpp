@@ -1,21 +1,21 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
+#include "DKRocket/DKHTMLElement.h"
 #include "DKRocket/DKRocket.h"
-#include "DKRocket/DKElement.h"
 
 
-//////////////////////
-bool DKElement::Init()
+///////////////////////
+bool DKHTMLElement::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKElement_href", DKElement::href);
+	DKDuktape::AttachFunction("DKHTMLElement_href", DKHTMLElement::href);
 	
-	DKClass::DKCreate("DKRocket/DKElement.js");
+	DKClass::DKCreate("DKRocket/DKHTMLElement.js");
 	return true;
 }
 
-/////////////////////////////////////
-int DKElement::href(duk_context* ctx)
+//////////////////////////////////////
+int DKHTMLElement::href(duk_context* ctx)
 {
 	if(duk_is_string(ctx, 0)){
 		DKString url = duk_get_string(ctx, 0);
