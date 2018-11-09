@@ -62,6 +62,15 @@ bool DKRocket::Init()
 	DKEvent::AddRegisterEventFunc(&DKRocket::RegisterEvent, this);
 	DKEvent::AddUnegisterEventFunc(&DKRocket::UnregisterEvent, this);
 	DKEvent::AddSendEventFunc(&DKRocket::SendEvent, this);
+
+	//Load the javascript DOM
+	DKClass::DKCreate("DKLocation");
+	DKClass::DKCreate("DKNode");
+	DKClass::DKCreate("DKElement");
+	DKClass::DKCreate("DKHTMLElement");
+	DKClass::DKCreate("DKCSSStyleDeclaration");
+	DKClass::DKCreate("DKDocument");
+	DKClass::DKCreate("DKRocket/DKDom.js");
 	return true;
 }
 
@@ -182,15 +191,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	}
 	document->Show();
 	document->RemoveReference();
-
-	//Set up the dom
-	DKClass::DKCreate("DKLocation");
-	DKClass::DKCreate("DKNode");
-	DKClass::DKCreate("DKElement");
-	DKClass::DKCreate("DKHTMLElement");
-	DKClass::DKCreate("DKCSSStyleDeclaration");
-	DKClass::DKCreate("DKDocument");
-	DKClass::DKCreate("DKRocket/DKDom.js");
+	
 	dkRocketToRML.PostProcess(document);
 
 #ifdef ANDROID

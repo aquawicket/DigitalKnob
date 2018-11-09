@@ -10,7 +10,7 @@ bool DKLocation::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKLocation_hash", DKLocation::hash);
 	//DKDuktape::AttachFunction("DKLocation_host", DKLocation::host); //TODO
-	//DKDuktape::AttachFunction("DKLocation_hostname", DKLocation::host); //TODO
+	//DKDuktape::AttachFunction("DKLocation_hostname", DKLocation::hostname); //TODO
 	DKDuktape::AttachFunction("DKLocation_href", DKLocation::href);
 	
 	DKClass::DKCreate("DKRocket/DKLocation.js");

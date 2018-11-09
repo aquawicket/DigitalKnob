@@ -1,11 +1,8 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-var document;
 var window;
-
 //var objectMap;
 //var stored_objects = [];
-
 
 /////////////////////
 function DKDom_Init()
@@ -57,10 +54,10 @@ var ObjectMap = function()
 */
 
 
-///////////////////////////////
-var Window = function(pointer){
+//////////////////////////////
+var Window = function(pointer)
+{
 	//DKDEBUGFUNC();
-	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
 	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
 	Object.defineProperty(this, "controllers",           { get: function(){ return DKRocket_controllers(this.pointer);      } });  //TODO
@@ -253,14 +250,9 @@ var Window = function(pointer){
 	
 	return EventTarget.call(this, pointer);
 }
-
-
-
-//Global prototypes. Must be in order by dependency
 Window.prototype = EventTarget.prototype;
 
 
-
-////// Create Dom /////////
+////// Create Global Window Object /////////
 //objectMap = new ObjectMap();
 window = new Window("window");
