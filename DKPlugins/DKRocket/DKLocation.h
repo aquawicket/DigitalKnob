@@ -11,11 +11,7 @@ class DKLocation : public DKObjectT<DKLocation>
 public:
 	bool Init();
 	
-	static int clear(duk_context* ctx);
-	static int debug(duk_context* ctx);
-	static int error(duk_context* ctx);
-	static int info(duk_context* ctx);
-	static int warn(duk_context* ctx);
+	static int href(duk_context* ctx);
 };
 
 

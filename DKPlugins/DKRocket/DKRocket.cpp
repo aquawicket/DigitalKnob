@@ -184,6 +184,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	document->RemoveReference();
 
 	//Set up the dom
+	DKClass::DKCreate("DKLocation");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 	dkRocketToRML.PostProcess(document);
 
