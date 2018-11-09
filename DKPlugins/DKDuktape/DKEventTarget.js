@@ -102,3 +102,44 @@ function DKRemoveEvents(Function)
 {
 	//TODO
 }
+
+/////////////////////////
+function DK_Id(event, id)
+{
+	DKDEBUGFUNC(event, id);
+	var element = DKWidget_GetElement(event);
+	//DKWARN("DK_Id(): element="+element.id+"\n");
+	if((element == window || element == document) && id == "GLOBAL"){ return true; }
+	if(element && element.id == id){ return true; }
+	if(event[0] && event[0] == id){ return true; }
+	return false;
+}
+
+/////////////////////////////
+function DK_Type(event, type)
+{
+	var arry = event.split(",");
+	if(arry[1] != type){ return false; }
+	return true;
+	
+	/*
+	DKDEBUGFUNC(event, type);
+	console.warn("DK_Type("+event+","+type+")");
+	if(!event){ return false;}
+	
+	if(event.type && event.type == "contextmenu"){ //rightclick
+		PreventDefault(event);
+	}
+	if(event.type && event.type == type){
+		return true;
+	}
+	if(event.type && "window_"+event.type == type){ //window_resize
+		return true;
+	}
+	if(event[1] && event[1] == type){ 
+		return true;
+	}
+	console.error("DK_Type("+event+","+type+"): cannot match the type");
+	return false;
+	*/
+}

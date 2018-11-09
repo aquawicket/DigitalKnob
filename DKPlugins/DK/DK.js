@@ -1273,6 +1273,7 @@ function DK_GetValue(event)
 	return DKWidget_GetValue(event);
 }
 
+/*
 ////////////////////////////////
 function DK_Type(event, command)
 {
@@ -1294,6 +1295,7 @@ function DK_Type(event, command)
 	//DKERROR("DK_Type("+event+","+command+"): cannot match the type\n");
 	return false;
 }
+*/
 
 /////////////////////////
 function DK_Id(event, id)
