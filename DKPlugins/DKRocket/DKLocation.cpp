@@ -8,19 +8,12 @@
 bool DKLocation::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKLocation_assign", DKLocation::assign);
 	DKDuktape::AttachFunction("DKLocation_hash", DKLocation::hash);
+	//DKDuktape::AttachFunction("DKLocation_host", DKLocation::host); //TODO
+	//DKDuktape::AttachFunction("DKLocation_hostname", DKLocation::host); //TODO
 	DKDuktape::AttachFunction("DKLocation_href", DKLocation::href);
 	
 	DKClass::DKCreate("DKRocket/DKLocation.js");
-	return true;
-}
-
-////////////////////////////////////////
-int DKLocation::assign(duk_context* ctx)
-{
-	DKString url = duk_get_string(ctx, 0);
-	DKRocket::Get()->LoadUrl(url);
 	return true;
 }
 
@@ -33,6 +26,22 @@ int DKLocation::hash(duk_context* ctx)
 		hash = DKRocket::Get()->_url.substr(found);
 	}
 	duk_push_string(ctx, hash.c_str());
+	return true;
+}
+
+//////////////////////////////////////
+int DKLocation::host(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKLocation::hostname(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
 	return true;
 }
 
