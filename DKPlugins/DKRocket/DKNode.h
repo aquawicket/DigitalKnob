@@ -11,7 +11,9 @@ class DKNode : public DKObjectT<DKNode>
 public:
 	bool Init();
 	
-	static int href(duk_context* ctx);
+	static int appendChild(duk_context* ctx);
+	static int childNodes(duk_context* ctx);
+	static int removeChild(duk_context* ctx);
 };
 
 

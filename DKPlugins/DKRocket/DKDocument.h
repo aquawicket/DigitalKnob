@@ -11,7 +11,8 @@ class DKDocument : public DKObjectT<DKDocument>
 public:
 	bool Init();
 	
-	static int href(duk_context* ctx);
+	static int createElement(duk_context* ctx);
+	static int getElementById(duk_context* ctx);
 };
 
 

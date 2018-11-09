@@ -11,7 +11,8 @@ class DKCSSStyleDeclaration : public DKObjectT<DKCSSStyleDeclaration>
 public:
 	bool Init();
 	
-	static int href(duk_context* ctx);
+	static int getPropertyValue(duk_context* ctx);
+	static int setProperty(duk_context* ctx);
 };
 
 

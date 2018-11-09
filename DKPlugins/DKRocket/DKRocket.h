@@ -26,6 +26,8 @@ public:
 	bool ToggleDebugger();
 	bool UnregisterEvent(const DKString& id, const DKString& type);	
 	void ProcessEvent(Rocket::Core::Event& event); //overwritten 
+	Rocket::Core::Element* getElementByAddress(const DKString& address);
+	bool GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements);
 
 	DKString _url;
 	DKString _path;

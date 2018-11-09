@@ -185,6 +185,11 @@ bool DKRocket::LoadUrl(const DKString& url)
 
 	//Set up the dom
 	DKClass::DKCreate("DKLocation");
+	DKClass::DKCreate("DKNode");
+	DKClass::DKCreate("DKElement");
+	DKClass::DKCreate("DKHTMLElement");
+	DKClass::DKCreate("DKCSSStyleDeclaration");
+	DKClass::DKCreate("DKDocument");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 	dkRocketToRML.PostProcess(document);
 
@@ -429,4 +434,66 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 			return;
 		}
 	}
+}
+
+/////////////////////////////////////////////////////////////////////////////
+Rocket::Core::Element* DKRocket::getElementByAddress(const DKString& address)
+{
+	DKDEBUGFUNC(address);
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address;
+	int tmp(0);
+	if(!(ss >> std::hex >> tmp)){
+		DKERROR("DKRocketJS::getElementByAddress("+address+"): invalide address\n");
+		return NULL;
+	}
+	Rocket::Core::Element* element = reinterpret_cast<Rocket::Core::Element*>(tmp);
+	return element;
+
+	/*
+	//get element from list of elements under body with mattching address
+	Rocket::Core::Element* body = DKRocket::Get()->document->GetParentNode(); //TEST: This needs to be recursive
+	Rocket::Core::ElementList elements;
+	GetElements(body, elements);
+	for(unsigned int i=0; i<elements.size(); i++){
+	const void* addr = static_cast<const void*>(elements[i]);
+	std::stringstream ss;
+	ss << addr;  
+	DKString str = ss.str(); 
+	if(same(address, str)){
+	return elements[i];
+	}
+	}
+	DKERROR("DKRocketJS::getElementByAddress("+address+"): element not found\n");
+	return NULL;
+	*/
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+bool DKRocket::GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements)
+{
+	DKDEBUGFUNC(parent, "DKElementList&");
+	if(!parent){ return false; }
+	typedef std::queue<Rocket::Core::Element*> SearchQueue;
+	SearchQueue search_queue;
+
+	elements.push_back(DKRocket::Get()->document->GetFirstChild()->GetParentNode()); //add the body tag first
+	for(int i = 0; i < parent->GetNumChildren(); ++i)
+		search_queue.push(parent->GetChild(i));
+
+	while(!search_queue.empty()){
+		Rocket::Core::Element* element = search_queue.front();
+		search_queue.pop();
+
+		if(!has(element->GetTagName().CString(), "#")){
+			elements.push_back(element);
+		}
+
+		// Add all children to search.
+		for (int i = 0; i < element->GetNumChildren(); i++){
+			search_queue.push(element->GetChild(i));
+		}
+	}
+	return true;
 }

@@ -5,13 +5,12 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
+/////////////////////////////////////////////////////
 class DKHTMLElement : public DKObjectT<DKHTMLElement>
 {
 public:
 	bool Init();
 	
-	static int href(duk_context* ctx);
 };
 
 
