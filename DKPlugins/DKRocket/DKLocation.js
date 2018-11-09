@@ -13,8 +13,8 @@ var Location = function(pointer)
 		value: "TODO",
 	});
 	Object.defineProperty(this, "href", {
-		get: function()   { return DKRocket_href(this.pointer);      },
-		set: function(val){ return DKRocket_setHref(this.pointer, val); }
+		get: function()   { return DKLocation_href();      },
+		set: function(val){ return DKLocation_href(val);   }
 	});  //TODO
 	Object.defineProperty(this, "origin",{
 		value: "TODO",

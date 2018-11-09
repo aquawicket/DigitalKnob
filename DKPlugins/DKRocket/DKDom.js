@@ -1,7 +1,6 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
 var document;
-var location;
 var window;
 
 //var objectMap;
@@ -501,49 +500,6 @@ var HTMLElement = function(pointer)
 	return Element.call(this, pointer);
 }
 
-////////////////////////////////
-var Location = function(pointer)
-{
-	Object.defineProperty(this, "hash",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "host",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "hostname",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "href", {
-		get: function()   { return DKRocket_href(this.pointer);      },
-		set: function(val){ return DKRocket_setHref(this.pointer, val); }
-	});  //TODO
-	Object.defineProperty(this, "origin",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "pathname",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "port",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "protocol",{
-		value: "TODO",
-	});
-	Object.defineProperty(this, "search",{
-		value: "TODO",
-	});
-	
-	Location.prototype.assign = function(url){
-		//TODO
-	}
-	Location.prototype.reload = function(forceGet){
-		//TODO
-	}
-	Location.prototype.replace = function(newUrl){
-		//TODO
-	}
-}
-
 ////////////////////////////
 var Node = function(pointer)
 {
@@ -646,7 +602,6 @@ var Window = function(pointer){
 	//DKDEBUGFUNC();
 	
 	document = new Document("document");
-	location = new Location("location");
 	
 	Object.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
 	Object.defineProperty(this, "console",               { get: function(){ return console;                                 } });
