@@ -9,9 +9,16 @@ bool DKLocation::Init()
 {
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKLocation_hash", DKLocation::hash);
-	//DKDuktape::AttachFunction("DKLocation_host", DKLocation::host); //TODO
-	//DKDuktape::AttachFunction("DKLocation_hostname", DKLocation::hostname); //TODO
+	DKDuktape::AttachFunction("DKLocation_host", DKLocation::host);
+	DKDuktape::AttachFunction("DKLocation_hostname", DKLocation::hostname);
 	DKDuktape::AttachFunction("DKLocation_href", DKLocation::href);
+	DKDuktape::AttachFunction("DKLocation_origin", DKLocation::origin);
+	DKDuktape::AttachFunction("DKLocation_password", DKLocation::password);
+	DKDuktape::AttachFunction("DKLocation_pathname", DKLocation::pathname);
+	DKDuktape::AttachFunction("DKLocation_port", DKLocation::port);
+	DKDuktape::AttachFunction("DKLocation_protocol", DKLocation::protocol);
+	DKDuktape::AttachFunction("DKLocation_search", DKLocation::search);
+	DKDuktape::AttachFunction("DKLocation_username", DKLocation::username);
 	
 	DKClass::DKCreate("DKRocket/DKLocation.js");
 	return true;
@@ -53,6 +60,62 @@ int DKLocation::href(duk_context* ctx)
 		DKRocket::Get()->LoadUrl(url);
 	}
 	duk_push_string(ctx, DKRocket::Get()->_url.c_str());
+	return true;
+}
+
+////////////////////////////////////////
+int DKLocation::origin(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKLocation::password(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKLocation::pathname(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////
+int DKLocation::port(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKLocation::protocol(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+////////////////////////////////////////
+int DKLocation::search(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKLocation::username(duk_context* ctx)
+{
+	DKString host = "TODO";
+	duk_push_string(ctx, host.c_str());
 	return true;
 }
 
