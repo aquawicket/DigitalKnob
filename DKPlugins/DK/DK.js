@@ -1273,7 +1273,6 @@ function DK_GetValue(event)
 	return DKWidget_GetValue(event);
 }
 
-/*
 ////////////////////////////////
 function DK_Type(event, command)
 {
@@ -1292,10 +1291,9 @@ function DK_Type(event, command)
 	if(event[1] && event[1] == command){ 
 		return true;
 	}
-	//DKERROR("DK_Type("+event+","+command+"): cannot match the type\n");
+	//DKWARN("DK_Type("+event+","+command+"): type does not match\n");
 	return false;
 }
-*/
 
 /////////////////////////
 function DK_Id(event, id)

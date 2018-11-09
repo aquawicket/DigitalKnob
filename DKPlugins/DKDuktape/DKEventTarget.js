@@ -118,13 +118,8 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_Type(event, type)
 {
-	var arry = event.split(",");
-	if(arry[1] != type){ return false; }
-	return true;
-	
-	/*
-	DKDEBUGFUNC(event, type);
-	console.warn("DK_Type("+event+","+type+")");
+	//DKDEBUGFUNC(event, type);
+	//console.warn("DK_Type("+event.type+","+type+")");
 	if(!event){ return false;}
 	
 	if(event.type && event.type == "contextmenu"){ //rightclick
@@ -139,7 +134,6 @@ function DK_Type(event, type)
 	if(event[1] && event[1] == type){ 
 		return true;
 	}
-	console.error("DK_Type("+event+","+type+"): cannot match the type");
+	//console.error("DK_Type("+event+","+type+"): cannot match the type");
 	return false;
-	*/
 }

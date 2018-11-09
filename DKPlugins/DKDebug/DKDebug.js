@@ -12,20 +12,22 @@ function DKDebug_Init()
 function DKDebug_End()
 {
 	DKDEBUGFUNC();
-	DKDuktape_RemoveEvents(DKDebug_OnEvent);
+	DKRemoveEvents(DKDebug_OnEvent);
 }
 
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	if(DK_Type(event, "keypress")){
+	//console.warn("DKDebug_OnEvent("+event.id+","+event.type+")");
+	
+	if(DK_Type(event,"keypress")){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		DKDebug_LogKey(DKDuktape_GetValue(event));
+		DKDebug_LogKey(event.value);
 		DKDebug_CheckKeys();
 	}
 	
-	if(DK_Type(event, "keydown") && DKEventTarget_value(event, "123")){ //F12
+	if(event.type == "keydown" && event.value == "123"){ //F12
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}
