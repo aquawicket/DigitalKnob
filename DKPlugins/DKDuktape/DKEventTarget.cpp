@@ -37,21 +37,25 @@ bool DKEventTarget::OnEvent(DKEvent* event)
 		return false;
 	}
 
-	DKString evt = id +","+ type;
-
 	if(same(type,"keydown")){
 		value = toString(event->GetKeyNum());
-	}
-
-	if(!value.empty()){
-		evt += "," + value;
 	}
 
 	duk_context* ctx = DKDuktape::Get()->ctx;
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
-	duk_push_string(ctx, evt.c_str()); //add id as string parameter
+
+	DKString json;
+	if(value.empty()){
+		json = "{\"id\": \""+id+"\",\"type\": \""+type+"\"}";
+	}
+	else{
+		json = "{\"id\": \""+id+"\",\"type\": \""+type+"\",\"value\": \""+value+"\"}";
+	}
+	duk_push_string(ctx, json.c_str());
+	duk_json_decode(ctx, -1);
+	
 	if(duk_pcall(ctx, 1) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
