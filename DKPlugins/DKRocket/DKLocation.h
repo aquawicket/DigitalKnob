@@ -11,6 +11,8 @@ class DKLocation : public DKObjectT<DKLocation>
 public:
 	bool Init();
 	
+	static int assign(duk_context* ctx);
+	static int hash(duk_context* ctx);
 	static int href(duk_context* ctx);
 };
 

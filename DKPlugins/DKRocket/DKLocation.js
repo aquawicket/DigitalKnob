@@ -3,9 +3,7 @@ var location;
 ////////////////////////////////
 var Location = function(pointer)
 {
-	Object.defineProperty(this, "hash",{
-		value: "TODO",
-	});
+	Object.defineProperty(this, "hash", { get: function(){ return DKLocation_hash(); } });
 	Object.defineProperty(this, "host",{
 		value: "TODO",
 	});
@@ -15,7 +13,7 @@ var Location = function(pointer)
 	Object.defineProperty(this, "href", {
 		get: function()   { return DKLocation_href();      },
 		set: function(val){ return DKLocation_href(val);   }
-	});  //TODO
+	});
 	Object.defineProperty(this, "origin",{
 		value: "TODO",
 	});
@@ -33,7 +31,7 @@ var Location = function(pointer)
 	});
 	
 	Location.prototype.assign = function(url){
-		//TODO
+		return DKLocation_assign(url);
 	}
 	Location.prototype.reload = function(forceGet){
 		//TODO
