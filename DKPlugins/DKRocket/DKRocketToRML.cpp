@@ -234,7 +234,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 
 	// <script> tags
 	//get the path from the url
-	DKString path = DKRocket::Get()->_url;
+	DKString path = DKRocket::Get()->href;
 	std::size_t found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";

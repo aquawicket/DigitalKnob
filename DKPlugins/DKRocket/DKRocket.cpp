@@ -140,33 +140,50 @@ bool DKRocket::LoadFonts()
 bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
-	DKString path = url;
-	_url = path;
-	int found = _url.find_last_of("/");
+	DKString _url = url;
+	if(has(_url,":/")){ //could be http:// , https:// or C:/
+		href = _url; //absolute path including protocol
+		DKWARN("DKRocket::LoadUrl(): href: "+href+"\n");
+	}
+	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
+		DKERROR("DKRocket::LoadUrl(): no protocol specified\n"); //absolute path without protocol
+		return false;
+	}
+	else{
+		DKERROR("DKRocket::LoadUrl(): cannot load relative paths\n");
+		return false;
+	}
+
+	//get the protocol
+	int n = _url.find(":");
+	protocol = _url.substr(0,n);
+	DKWARN("DKRocket::LoadUrl(): protocol: "+protocol+"\n");
+
+	int found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRocket::LoadUrl(): last / at "+toString(found)+"\n");
 	DKWARN("DKRocket::LoadUrl(): _path = "+_path+"\n");
 
 	DKString html;
 
-	if(has(path, "http://") || has(path, "https://")){
+	if(has(_url, "http://") || has(_url, "https://")){
 		DKClass::DKCreate("DKCurl");
-		if(!DKCurl::Get()->HttpFileExists(path)){
-			DKERROR("Could not locate "+path+"\n");
+		if(!DKCurl::Get()->HttpFileExists(_url)){
+			DKERROR("Could not locate "+_url+"\n");
 			return false;
 		}
-		if(!DKCurl::Get()->HttpToString(path, html)){
-			DKERROR("Could not get html from url "+path+"\n");
+		if(!DKCurl::Get()->HttpToString(_url, html)){
+			DKERROR("Could not get html from url "+_url+"\n");
 			return false;
 		}
 	}
 	else{
-		if(!DKFile::VerifyPath(path)){
-			DKERROR(path+" not found!\n");
-			return false;
-		}
-		if(!DKFile::FileToString(path, html)){
-			DKERROR("DKFile::FileToString failed on "+path+"\n");
+		//if(!DKFile::VerifyPath(href)){
+		//	DKERROR(href+" not found!\n");
+		//	return false;
+		//}
+		if(!DKFile::FileToString(_url, html)){
+			DKERROR("DKFile::FileToString failed on "+_url+"\n");
 			return false;
 		}
 	}
@@ -187,7 +204,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	document = context->LoadDocumentFromMemory(rml.c_str());
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
-		DKERROR("Could not load "+path+"\n");
+		DKERROR("Could not load "+_url+"\n");
 	}
 	document->Show();
 	document->RemoveReference();
@@ -203,7 +220,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
 	
 	//find the last <html occurance
-	std::size_t n = code.rfind("<html");
+	n = code.rfind("<html");
 	code = code.substr(n);
 
 	replace(code, "<", "\n<");

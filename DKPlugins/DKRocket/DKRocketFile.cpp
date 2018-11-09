@@ -9,32 +9,38 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 {
 	DKDEBUGFUNC("Rocket::Core::String&");
 
-	DKString partpath = path.CString();
-	DKString abspath = path.CString();
-	if(!DKFile::PathExists(abspath)){
-		if(!DKRocket::Get()->_path.empty()){
-			DKWARN("DKRocketFile::Open() fullpath = "+DKRocket::Get()->_path+abspath+"\n");
-			abspath = DKRocket::Get()->_path+abspath;
-
-			if(has(abspath,"://")){
-				DKFile::MakeDir(DKFile::local_assets+"Cache");
-
-				DKString filename;
-				DKFile::GetFileName(abspath, filename);
-
-				//remove everything after ? in the filename if there is one
-				int found = filename.rfind("?");
-				if(found > 0){
-					filename = filename.substr(0,found);
-				}
-
-				DKCurl::Get()->Download(abspath, DKFile::local_assets+"Cache/"+filename);
-				abspath = DKFile::local_assets+"Cache/"+filename;
-			}
-		}
+	DKString _url = path.CString();
+	if(has(_url,":/")){ //could be http:// , https:// or C:/
+		//absolute path
+	}
+	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
+		_url = DKRocket::Get()->protocol+":"+_url;
+		//DKERROR("DKRocket::LoadUrl(): no protocol specified\n"); //absolute path without protocol
+		//return false;
+	}
+	else{
+		_url = DKRocket::Get()->_path+_url;
+		//DKERROR("DKRocket::LoadUrl(): cannot load relative paths\n");
+		//return false;
 	}
 
-	FILE* fp = fopen(abspath.c_str(), "rb");
+	if(has(_url,"://")){
+		DKFile::MakeDir(DKFile::local_assets+"Cache");
+
+		DKString filename;
+		DKFile::GetFileName(_url, filename);
+
+		//remove everything after ? in the filename if there is one
+		int found = filename.rfind("?");
+		if(found > 0){
+			filename = filename.substr(0,found);
+		}
+
+		DKCurl::Get()->Download(_url, DKFile::local_assets+"Cache/"+filename);
+		_url = DKFile::local_assets+"Cache/"+filename;
+	}
+
+	FILE* fp = fopen(_url.c_str(), "rb");
 	return (Rocket::Core::FileHandle) fp;
 }
 

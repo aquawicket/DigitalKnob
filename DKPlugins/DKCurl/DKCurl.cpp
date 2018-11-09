@@ -388,7 +388,7 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 	DKINFO("Downloading "+url+"...\n");
 
 	CurlInit();
-	//curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
+	curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);

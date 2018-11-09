@@ -29,7 +29,8 @@ public:
 	Rocket::Core::Element* getElementByAddress(const DKString& address);
 	bool GetElements(Rocket::Core::Element* parent, Rocket::Core::ElementList& elements);
 
-	DKString _url;
+	DKString href;
+	DKString protocol;
 	DKString _path;
 	Rocket::Core::Context* context;
 	Rocket::Core::ElementDocument* document;

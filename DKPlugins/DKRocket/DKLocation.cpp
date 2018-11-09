@@ -27,10 +27,10 @@ bool DKLocation::Init()
 //////////////////////////////////////
 int DKLocation::hash(duk_context* ctx)
 {
-	int found = DKRocket::Get()->_url.find("#");
+	int found = DKRocket::Get()->href.find("#");
 	DKString hash;
 	if(found > 0){
-		hash = DKRocket::Get()->_url.substr(found);
+		hash = DKRocket::Get()->href.substr(found);
 	}
 	duk_push_string(ctx, hash.c_str());
 	return true;
@@ -59,7 +59,7 @@ int DKLocation::href(duk_context* ctx)
 		DKString url = duk_get_string(ctx, 0);
 		DKRocket::Get()->LoadUrl(url);
 	}
-	duk_push_string(ctx, DKRocket::Get()->_url.c_str());
+	duk_push_string(ctx, DKRocket::Get()->href.c_str());
 	return true;
 }
 
