@@ -1357,6 +1357,7 @@ function DKAddEvent(id, type, Function)
 		DKWARN("DKAddEvent(id, type, Function): Function invalid\n");
 		return;
 	}
+	/////////////////////////////////////////////////
 	if(id == "GLOBAL"){
 		element = window;
 	}
