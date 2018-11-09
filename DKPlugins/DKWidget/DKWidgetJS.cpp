@@ -429,7 +429,7 @@ int DKWidgetJS::HasAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	if(!element->HasAttribute(attrib.c_str())){ return 0; }
 	return 1;
@@ -441,7 +441,7 @@ int DKWidgetJS::HasProperty(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString property = duk_require_string(ctx, 1);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	if(!element->GetProperty(property.c_str())){ return 0; }
 	return 1;
@@ -452,7 +452,7 @@ int DKWidgetJS::GetTagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	duk_push_string(ctx, element->GetTagName().CString());
 	return 1;
@@ -540,7 +540,7 @@ int DKWidgetJS::GetOffsetTop(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	float offsetTop = element->GetOffsetTop();
 	duk_push_int(ctx, (int)offsetTop);
@@ -552,7 +552,7 @@ int DKWidgetJS::GetOffsetLeft(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	float offsetLeft = element->GetOffsetLeft();
 	duk_push_int(ctx, (int)offsetLeft);
@@ -564,7 +564,7 @@ int DKWidgetJS::GetOffsetHeight(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	float offsetHeight = element->GetOffsetHeight();
 	duk_push_int(ctx, (int)offsetHeight);
@@ -576,7 +576,7 @@ int DKWidgetJS::GetOffsetWidth(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
 	float offsetWidth = element->GetOffsetWidth();
 	duk_push_int(ctx, (int)offsetWidth);
@@ -600,7 +600,7 @@ int DKWidgetJS::RemoveAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
-	DKElement* ele = DKWidget::GetElementById(element);
+	Rocket::Core::Element* ele = DKWidget::GetElementById(element);
 	if(!ele){ return 0; }
 	ele->RemoveAttribute(attrib.c_str());
 	return 0;
@@ -612,7 +612,7 @@ int DKWidgetJS::RemoveProperty(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
-	DKElement* ele = DKWidget::GetElementById(element);
+	Rocket::Core::Element* ele = DKWidget::GetElementById(element);
 	if(!ele){ return 0; }
 	ele->RemoveProperty(attrib.c_str());
 	return 0;
@@ -748,7 +748,7 @@ int DKWidgetJS::Cut(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	Rocket::Controls::ElementTextSelection* ele = static_cast<Rocket::Controls::ElementTextSelection*>(element);
 	Rocket::Controls::WidgetTextInput* widget = NULL;
 	if(element->GetTagName() == "input"){
@@ -781,7 +781,7 @@ int DKWidgetJS::Copy(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	Rocket::Controls::ElementTextSelection* ele = static_cast<Rocket::Controls::ElementTextSelection*>(element);
 	Rocket::Controls::WidgetTextInput* widget = NULL;
 	if(element->GetTagName() == "input"){
@@ -802,7 +802,7 @@ int DKWidgetJS::Paste(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	Rocket::Controls::ElementTextSelection* ele = static_cast<Rocket::Controls::ElementTextSelection*>(element);
 	Rocket::Controls::WidgetTextInput* widget = NULL;
 	if(element->GetTagName() == "input"){

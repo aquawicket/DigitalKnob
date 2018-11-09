@@ -8,7 +8,7 @@
 #include "DKWindow/DKWindow.h"
 #include "DKXml/DKXml.h"
 
-typedef Rocket::Core::Element DKElement;
+//typedef Rocket::Core::Element DKElement;
 typedef Rocket::Core::Property DKProperty;
 typedef Rocket::Core::ElementList DKElementList;
 typedef Rocket::Controls::ElementFormControl DKElementFormControl;
@@ -25,7 +25,7 @@ public:
 
 protected:
 	static DKRocket* dkRocket;
-	DKElement* root;
+	Rocket::Core::Element* root;
 	
 	bool AttachDrags();
 	bool AttachEvents();
@@ -37,31 +37,31 @@ protected:
 public:
 	
 	//by event
-	static bool Id(DKElement* element, const DKString& id);
+	static bool Id(Rocket::Core::Element* element, const DKString& id);
 	static bool Id(DKEvent* event, const DKString& id);
 	static bool IdLike(DKEvent* event, const DKString& id);
 	static bool Type(DKEvent* event, const DKString& type);
 	static bool Value(DKEvent* event, const DKString& id);
-	static DKElement* GetElement(DKEvent* event);
+	static Rocket::Core::Element* GetElement(DKEvent* event);
 
 	//to string
-	static DKString GetId(DKElement* element);
+	static DKString GetId(Rocket::Core::Element* element);
 	static DKString GetId(DKEvent* event);
-	static DKString GetValue(DKElement* element);
+	static DKString GetValue(Rocket::Core::Element* element);
 	static DKString GetValue(DKEvent* event);
 	static DKString GetValue(const DKString& id);
-	static DKElement* GetElement(const DKString& id);
+	static Rocket::Core::Element* GetElement(const DKString& id);
 	static bool GetOuterHtml(const DKString& id, DKString& string);
-	static bool GetOuterHtml(DKElement* element, DKString& string);
+	static bool GetOuterHtml(Rocket::Core::Element* element, DKString& string);
 
 	//by string
-	static DKElement* CreateElement(const DKString& tag);
+	static Rocket::Core::Element* CreateElement(const DKString& tag);
 	static DKString CreateElement(const DKString& parent, const DKString& tag, const DKString& id);
 	static DKString CreateElementFirst(const DKString& parent, const DKString& tag, const DKString& id);
 	static DKString CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id);
-	static DKElement* GetElementById(const DKString& id);
+	static Rocket::Core::Element* GetElementById(const DKString& id);
 	static bool AddEventListener(const DKString& id, const DKString& type);
-	static bool AppendChild(const DKString& parent, DKElement* element);
+	static bool AppendChild(const DKString& parent, Rocket::Core::Element* element);
 	static bool AppendChild(const DKString& parent, const DKString& element);
 	static bool GetAttribute(const DKString& id, const DKString& name, DKString& value);
 	static void GetAvailableId(const DKString& id, DKString& out);
@@ -77,7 +77,7 @@ public:
 	static bool GetValue(const DKString& id, DKString& value);
 	static bool GetValue(const DKString& id, int& value);
 	static bool Hide(const DKString& id);
-	static bool InsertBefore(const DKString& parent, DKElement* element);
+	static bool InsertBefore(const DKString& parent, Rocket::Core::Element* element);
 	static bool InsertBefore(const DKString& parent, const DKString& id);
 	static bool PrependChild(const DKString& parent, const DKString& id);
 	static bool RemoveAllEventListeners(const DKString& id);
@@ -99,35 +99,35 @@ public:
 	static bool Visible(const DKString& id);
 	
 	//by element
-	static bool AddEventListener(DKElement* element, const DKString& type);
-	static bool AppendChild(DKElement* parent, DKElement* element);
-	static bool GetAttribute(DKElement* element, const DKString& name, DKString& value);
-	static bool GetClientHeight(DKElement* element, DKString& value);
-	static bool GetClientWidth(DKElement* element, DKString& value);
-	static bool GetFile(DKElement* element, DKString& file);
-	static bool GetInnerHtml(DKElement* element, DKString& value);
-	static bool GetInnerHtmlString(DKElement* element, DKString& value);
-	static bool GetParent(DKElement* element, DKString& parent);
-	static bool GetProperty(DKElement* element, const DKString& name, DKString& value);
-	static bool GetValue(DKElement* element, DKString& value);
-	static bool GetValue(DKElement* element, int& value);
-	static bool Hide(DKElement* element);
-	static bool InsertBefore(DKElement* parent, DKElement* element);
-	static bool PrependChild(DKElement* parent, DKElement* element);
-	static bool RemoveEventListener(DKElement* element, const DKString& type);
-	static bool ScrollToBottom(DKElement* element);
-	static bool ScrollToTop(DKElement* element);
-	static bool SetAttribute(DKElement* element, const DKString& name, const DKString& value);
-	static bool SetFile(DKElement* element, const DKString& file);
-	static bool SetInnerHtml(DKElement* element, const DKString& value);
-	static bool SetInnerHtmlString(DKElement* element, const DKString& value);
-	static bool SetProperty(DKElement* element, const DKString& name, const DKString& value);
-	static bool SetValue(DKElement* element, const DKProperty* prop);
-	static bool SetValue(DKElement* element, const DKString& value);
-	static bool SetValue(DKElement* element, const int& value);
-	static bool Show(DKElement* element);
-	static bool Toggle(DKElement* element);
-	static bool Visible(DKElement* element);
+	static bool AddEventListener(Rocket::Core::Element* element, const DKString& type);
+	static bool AppendChild(Rocket::Core::Element* parent, Rocket::Core::Element* element);
+	static bool GetAttribute(Rocket::Core::Element* element, const DKString& name, DKString& value);
+	static bool GetClientHeight(Rocket::Core::Element* element, DKString& value);
+	static bool GetClientWidth(Rocket::Core::Element* element, DKString& value);
+	static bool GetFile(Rocket::Core::Element* element, DKString& file);
+	static bool GetInnerHtml(Rocket::Core::Element* element, DKString& value);
+	static bool GetInnerHtmlString(Rocket::Core::Element* element, DKString& value);
+	static bool GetParent(Rocket::Core::Element* element, DKString& parent);
+	static bool GetProperty(Rocket::Core::Element* element, const DKString& name, DKString& value);
+	static bool GetValue(Rocket::Core::Element* element, DKString& value);
+	static bool GetValue(Rocket::Core::Element* element, int& value);
+	static bool Hide(Rocket::Core::Element* element);
+	static bool InsertBefore(Rocket::Core::Element* parent, Rocket::Core::Element* element);
+	static bool PrependChild(Rocket::Core::Element* parent, Rocket::Core::Element* element);
+	static bool RemoveEventListener(Rocket::Core::Element* element, const DKString& type);
+	static bool ScrollToBottom(Rocket::Core::Element* element);
+	static bool ScrollToTop(Rocket::Core::Element* element);
+	static bool SetAttribute(Rocket::Core::Element* element, const DKString& name, const DKString& value);
+	static bool SetFile(Rocket::Core::Element* element, const DKString& file);
+	static bool SetInnerHtml(Rocket::Core::Element* element, const DKString& value);
+	static bool SetInnerHtmlString(Rocket::Core::Element* element, const DKString& value);
+	static bool SetProperty(Rocket::Core::Element* element, const DKString& name, const DKString& value);
+	static bool SetValue(Rocket::Core::Element* element, const DKProperty* prop);
+	static bool SetValue(Rocket::Core::Element* element, const DKString& value);
+	static bool SetValue(Rocket::Core::Element* element, const int& value);
+	static bool Show(Rocket::Core::Element* element);
+	static bool Toggle(Rocket::Core::Element* element);
+	static bool Visible(Rocket::Core::Element* element);
 
 	//extra
 	static DKString Filter(const DKProperty* prop);
@@ -137,16 +137,16 @@ public:
 	static bool AddResizeHandle(const DKString& id, const DKString& resize);
 	static bool BuildOptionsString(const DKString& id, DKString &options);
 	static bool BuildStyleString(const DKString& id, DKString &style);
-	static bool GetElements(DKElement* parent, DKElementList& elements);
+	static bool GetElements(Rocket::Core::Element* parent, DKElementList& elements);
 	static bool GetElements(const DKString& id, DKElementList& elements);
 	static bool GetElements(const DKString& id, DKStringArray& elements);
-	static bool GetMouseElementPosition(DKElement* element, int& x_out, int& y_out);
+	static bool GetMouseElementPosition(Rocket::Core::Element* element, int& x_out, int& y_out);
 	static bool GetMouseElementPosition(const DKString& id, int& x_out, int& y_out);
 	static bool GetMouseWindowX(int& x_out);
 	static bool GetMouseWindowY(int& y_out);
 	static bool GetOption(const DKString& id, int n);
-	static bool IsChildOf(DKElement* element, DKElement* parent);
-	static bool IsChildOf(DKElement* element, const DKString& parent);
+	static bool IsChildOf(Rocket::Core::Element* element, Rocket::Core::Element* parent);
+	static bool IsChildOf(Rocket::Core::Element* element, const DKString& parent);
 	static bool IsChildOf(const DKString& id, const DKString& parent);
 	static bool MoveToFront(const DKString& id);
 	static bool RemoveDragHandle(const DKString& id);

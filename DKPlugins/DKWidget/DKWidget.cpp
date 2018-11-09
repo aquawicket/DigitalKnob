@@ -82,7 +82,7 @@ void DKWidget::RemoveWidget(DKWidget* widget)
 	}
 
 	if(DKApp::active){
-		DKElement* parent = root->GetParentNode();
+		Rocket::Core::Element* parent = root->GetParentNode();
 		if(!parent){ return; }
 		parent->RemoveChild(root);
 	}
@@ -127,14 +127,14 @@ bool DKWidget::CreateWidget(DKString& file)
 		DKERROR("DKWidget::CreateWidget("+path+"): could not find document\n");
 		return false;
 	}
-	DKElement* temp = doc->CreateElement("temp"); //FIXME - is the memory delt with properly?
+	Rocket::Core::Element* temp = doc->CreateElement("temp"); //FIXME - is the memory delt with properly?
 	if(!temp){
 		DKERROR("DKWidget::CreateWidget("+path+"): could not find firstChild\n");
 		return false;
 	}
 	SetInnerHtml(temp, rml);
 
-	DKElement* firstChild = temp->GetFirstChild();
+	Rocket::Core::Element* firstChild = temp->GetFirstChild();
 	if(!firstChild){
 		DKERROR("DKWidget::CreateWidget("+path+"): could not find firstChild\n");
 		return false;
@@ -214,7 +214,7 @@ bool DKWidget::Id(DKEvent* event, const DKString& id)
 }
 
 /////////////////////////////////////////////////////////
-bool DKWidget::Id(DKElement* element, const DKString& id)
+bool DKWidget::Id(Rocket::Core::Element* element, const DKString& id)
 {
 	DKDEBUGFUNC(element, id);
 	if(same(GetId(element), id)){ return true; }
@@ -238,11 +238,11 @@ bool DKWidget::Value(DKEvent* event, const DKString& value)
 }
 
 ///////////////////////////////////////////////
-DKElement* DKWidget::GetElement(DKEvent* event)
+Rocket::Core::Element* DKWidget::GetElement(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	DKElement* element = GetElementById(id);
+	Rocket::Core::Element* element = GetElementById(id);
 	return element;
 }
 
@@ -277,7 +277,7 @@ bool DKWidget::StoreReturnEvent(DKEvent* event)
 
 //to string
 ////////////////////////////////////////////
-DKString DKWidget::GetId(DKElement* element)
+DKString DKWidget::GetId(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){ return ""; }
@@ -288,7 +288,7 @@ DKString DKWidget::GetId(DKElement* element)
 DKString DKWidget::GetId(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
-	DKElement* element = GetElement(event);
+	Rocket::Core::Element* element = GetElement(event);
 	if(!element){ return ""; }
 	return element->GetId().CString();
 }
@@ -297,7 +297,7 @@ DKString DKWidget::GetId(DKEvent* event)
 DKString DKWidget::GetValue(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
-	DKElement* element = GetElement(event);
+	Rocket::Core::Element* element = GetElement(event);
 	return GetValue(element);
 }
 
@@ -311,7 +311,7 @@ DKString DKWidget::GetValue(const DKString& id)
 }
 
 ///////////////////////////////////////////////
-DKString DKWidget::GetValue(DKElement* element)
+DKString DKWidget::GetValue(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	DKString value = "";
@@ -320,7 +320,7 @@ DKString DKWidget::GetValue(DKElement* element)
 }
 
 ///////////////////////////////////////////////////
-DKElement* DKWidget::GetElement(const DKString& id)
+Rocket::Core::Element* DKWidget::GetElement(const DKString& id)
 {
 	DKDEBUGFUNC(id);
 	return GetElementById(id);
@@ -335,11 +335,11 @@ bool DKWidget::GetOuterHtml(const DKString& id, DKString& string)
 }
 
 /////////////////////////////////////////////////////////////////
-bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
+bool DKWidget::GetOuterHtml(Rocket::Core::Element* element, DKString& string)
 {
 	DKDEBUGFUNC(element, string);
 	if(!element){ return false; }
-	DKElement* parent = element->GetParentNode();
+	Rocket::Core::Element* parent = element->GetParentNode();
 	DKString htmlstring;
 	GetInnerHtml(parent, htmlstring);
 	if(htmlstring.empty()){return false;}
@@ -368,10 +368,10 @@ bool DKWidget::GetOuterHtml(DKElement* element, DKString& string)
 
 //by string
 ///////////////////////////////////////////////////////
-DKElement* DKWidget::CreateElement(const DKString& tag)
+Rocket::Core::Element* DKWidget::CreateElement(const DKString& tag)
 {
 	DKDEBUGFUNC(tag);
-	DKElement* element = dkRocket->document->CreateElement(tag.c_str());
+	Rocket::Core::Element* element = dkRocket->document->CreateElement(tag.c_str());
 	if(!element){
 		DKERROR("DKWidget::CreateElement("+tag+")\n");
 		return 0;
@@ -384,7 +384,7 @@ DKElement* DKWidget::CreateElement(const DKString& tag)
 DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, const DKString& id)
 {
 	DKDEBUGFUNC(parent, tag, id);
-	DKElement* element = CreateElement(tag);
+	Rocket::Core::Element* element = CreateElement(tag);
 	
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
@@ -402,7 +402,7 @@ DKString DKWidget::CreateElement(const DKString& parent, const DKString& tag, co
 DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& tag, const DKString& id)
 {
 	DKDEBUGFUNC(parent, tag, id);
-	DKElement* element = CreateElement(tag);
+	Rocket::Core::Element* element = CreateElement(tag);
 	
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
@@ -420,7 +420,7 @@ DKString DKWidget::CreateElementFirst(const DKString& parent, const DKString& ta
 DKString DKWidget::CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id)
 {
 	DKDEBUGFUNC(element, tag, id);
-	DKElement* ele = CreateElement(tag);
+	Rocket::Core::Element* ele = CreateElement(tag);
 	
 	DKString ele_id;
 	GetAvailableId(id, ele_id);
@@ -456,7 +456,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 }
 
 ///////////////////////////////////////////////////////
-DKElement* DKWidget::GetElementById(const DKString& id)
+Rocket::Core::Element* DKWidget::GetElementById(const DKString& id)
 {
 	DKDEBUGFUNC(id);
 	if(id.empty()){
@@ -467,7 +467,7 @@ DKElement* DKWidget::GetElementById(const DKString& id)
 	if(!doc){
 		return 0;
 	}
-	DKElement* element = doc->GetElementById(id.c_str());
+	Rocket::Core::Element* element = doc->GetElementById(id.c_str());
 	if(!element){
 		//DKWARN("DKWidget::GetElementById("+id+"): could not find element\n");
 		return 0;
@@ -539,7 +539,7 @@ bool DKWidget::PrependChild(const DKString& parent, const DKString& id)
 }
 
 //////////////////////////////////////////////////////////////////////
-bool DKWidget::AppendChild(const DKString& parent, DKElement* element)
+bool DKWidget::AppendChild(const DKString& parent, Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(parent, element);
 	return AppendChild(GetElementById(parent), element);
@@ -553,7 +553,7 @@ bool DKWidget::InsertBefore(const DKString& parent, const DKString& element)
 }
 
 ///////////////////////////////////////////////////////////////////////
-bool DKWidget::InsertBefore(const DKString& parent, DKElement* element)
+bool DKWidget::InsertBefore(const DKString& parent, Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(parent, element);
 	return InsertBefore(GetElementById(parent), element);
@@ -575,9 +575,9 @@ bool DKWidget::RemoveElement(const DKString& id)
 		RemoveAllEventListeners(elements[i]);
 	}                                        
 	
-	DKElement* element = GetElementById(id);
+	Rocket::Core::Element* element = GetElementById(id);
 	if(!element){ return false; }
-	DKElement* parent = element->GetParentNode();
+	Rocket::Core::Element* parent = element->GetParentNode();
 	if(!parent){ return false; }
 	parent->RemoveChild(element);
 	return true;
@@ -746,7 +746,7 @@ bool DKWidget::GetClientHeight(const DKString& id, DKString& value)
 
 //by element
 //////////////////////////////////////////////////////////
-bool DKWidget::GetFile(DKElement* element, DKString& file)
+bool DKWidget::GetFile(Rocket::Core::Element* element, DKString& file)
 {
 	DKDEBUGFUNC(element, file);
 	if(!element){ return false; }
@@ -767,7 +767,7 @@ bool DKWidget::GetFile(DKElement* element, DKString& file)
 }
 
 ////////////////////////////////////////////////////////////////
-bool DKWidget::SetFile(DKElement* element, const DKString& file)
+bool DKWidget::SetFile(Rocket::Core::Element* element, const DKString& file)
 {
 	DKDEBUGFUNC(element, file);
 	if(!element){ return false; }
@@ -790,7 +790,7 @@ bool DKWidget::SetFile(DKElement* element, const DKString& file)
 bool DKWidget::GetFocusElement(DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* focused = dkRocket->document->GetContext()->GetFocusElement();
+	Rocket::Core::Element* focused = dkRocket->document->GetContext()->GetFocusElement();
 	id = focused->GetId().CString();
 	if(id.empty()){ return false; }
 	return true;
@@ -800,7 +800,7 @@ bool DKWidget::GetFocusElement(DKString& id)
 bool DKWidget::SetFocus(DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* element = dkRocket->document->GetElementById(id.c_str());
+	Rocket::Core::Element* element = dkRocket->document->GetElementById(id.c_str());
 	if(!element){ 
 		DKERROR("DKWidget::SetFocus("+id+")\n");
 		return false; 
@@ -812,7 +812,7 @@ bool DKWidget::SetFocus(DKString& id)
 bool DKWidget::GetHoverElement(DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* hovered = dkRocket->document->GetContext()->GetHoverElement();
+	Rocket::Core::Element* hovered = dkRocket->document->GetContext()->GetHoverElement();
 	if(!hovered){ return false; }
 	id = hovered->GetId().CString();
 	if(id.empty()){ return false; }
@@ -820,7 +820,7 @@ bool DKWidget::GetHoverElement(DKString& id)
 }
 
 //////////////////////////////////////////
-bool DKWidget::Visible(DKElement* element)
+bool DKWidget::Visible(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){return false;}
@@ -828,7 +828,7 @@ bool DKWidget::Visible(DKElement* element)
 }
 
 /////////////////////////////////////////
-bool DKWidget::Toggle(DKElement* element)
+bool DKWidget::Toggle(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){return false;}
@@ -842,7 +842,7 @@ bool DKWidget::Toggle(DKElement* element)
 }
 
 ///////////////////////////////////////
-bool DKWidget::Show(DKElement* element)
+bool DKWidget::Show(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
@@ -854,7 +854,7 @@ bool DKWidget::Show(DKElement* element)
 }
 
 ///////////////////////////////////////
-bool DKWidget::Hide(DKElement* element)
+bool DKWidget::Hide(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
@@ -866,18 +866,18 @@ bool DKWidget::Hide(DKElement* element)
 }
 
 //////////////////////////////////////////////////////////////
-bool DKWidget::GetParent(DKElement* element, DKString& parent)
+bool DKWidget::GetParent(Rocket::Core::Element* element, DKString& parent)
 {
 	DKDEBUGFUNC(element, parent);
 	if(!element){return false;}
-	DKElement* par = element->GetParentNode();
+	Rocket::Core::Element* par = element->GetParentNode();
 	if(!par){return false;}
 	parent = GetId(par);
 	return true;
 }
 
 /////////////////////////////////////////////////////////////////
-bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
+bool DKWidget::AppendChild(Rocket::Core::Element* parent, Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(parent, element);
 	if(!parent){
@@ -890,7 +890,7 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 	}
 	
 	//remove the element from the previous owner first
-	DKElement* par = element->GetParentNode();
+	Rocket::Core::Element* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
 
 	//save scroll positions
@@ -940,7 +940,7 @@ bool DKWidget::AppendChild(DKElement* parent, DKElement* element)
 }
 
 //////////////////////////////////////////////////////////////////
-bool DKWidget::PrependChild(DKElement* parent, DKElement* element)
+bool DKWidget::PrependChild(Rocket::Core::Element* parent, Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(parent, element);
 	if(!parent){
@@ -953,11 +953,11 @@ bool DKWidget::PrependChild(DKElement* parent, DKElement* element)
 	}
 	
 	//remove the element from the previous owner first
-	DKElement* ele = element;
-	DKElement* par = element->GetParentNode();
+	Rocket::Core::Element* ele = element;
+	Rocket::Core::Element* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
 
-	DKElement* first_child = parent->GetFirstChild();
+	Rocket::Core::Element* first_child = parent->GetFirstChild();
 	if(first_child && !samei(first_child->GetTagName().CString(),"script")){
 		parent->InsertBefore(ele, first_child);
 		return true;
@@ -967,7 +967,7 @@ bool DKWidget::PrependChild(DKElement* parent, DKElement* element)
 }
 
 //////////////////////////////////////////////////////////////////
-bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
+bool DKWidget::InsertBefore(Rocket::Core::Element* parent, Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(parent, element);	
 	if(!parent){
@@ -980,11 +980,11 @@ bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 	}
 	
 	//Store store parent, it may get removed
-	DKElement* par_store = parent->GetParentNode();
+	Rocket::Core::Element* par_store = parent->GetParentNode();
 	
 	//remove the element from the previous owner first
-	DKElement* ele = element;
-	DKElement* par = element->GetParentNode();
+	Rocket::Core::Element* ele = element;
+	Rocket::Core::Element* par = element->GetParentNode();
 	if(par){ par->RemoveChild(element); }
 
 	//get child
@@ -997,7 +997,7 @@ bool DKWidget::InsertBefore(DKElement* parent, DKElement* element)
 }
 
 /////////////////////////////////////////////////////////////////////////
-bool DKWidget::AddEventListener(DKElement* element, const DKString& type)
+bool DKWidget::AddEventListener(Rocket::Core::Element* element, const DKString& type)
 {
 	DKDEBUGFUNC(element, type);
 	if(!element){return false;}
@@ -1011,7 +1011,7 @@ bool DKWidget::AddEventListener(DKElement* element, const DKString& type)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-bool DKWidget::RemoveEventListener(DKElement* element, const DKString& type)
+bool DKWidget::RemoveEventListener(Rocket::Core::Element* element, const DKString& type)
 {
 	DKDEBUGFUNC(element, type);
 	if(!element){return false;}
@@ -1025,7 +1025,7 @@ bool DKWidget::RemoveEventListener(DKElement* element, const DKString& type)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-bool DKWidget::GetAttribute(DKElement* element, const DKString& name, DKString& value)
+bool DKWidget::GetAttribute(Rocket::Core::Element* element, const DKString& name, DKString& value)
 {
 	DKDEBUGFUNC(element, name, value);
 	if(!element){return false;}
@@ -1037,7 +1037,7 @@ bool DKWidget::GetAttribute(DKElement* element, const DKString& name, DKString& 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-bool DKWidget::SetAttribute(DKElement* element, const DKString& name, const DKString& value)
+bool DKWidget::SetAttribute(Rocket::Core::Element* element, const DKString& name, const DKString& value)
 {
 	DKDEBUGFUNC(element, name, value);
 	if(!element){return false;}
@@ -1068,7 +1068,7 @@ bool DKWidget::SetAttribute(DKElement* element, const DKString& name, const DKSt
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-bool DKWidget::GetProperty(DKElement* element, const DKString& name, DKString& value)
+bool DKWidget::GetProperty(Rocket::Core::Element* element, const DKString& name, DKString& value)
 {
 	DKDEBUGFUNC(element, name, value);
 	value.clear();
@@ -1084,7 +1084,7 @@ bool DKWidget::GetProperty(DKElement* element, const DKString& name, DKString& v
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKString& value)
+bool DKWidget::SetProperty(Rocket::Core::Element* element, const DKString& name, const DKString& value)
 {
 	DKDEBUGFUNC(element, name, value);
 	if(!element){
@@ -1149,7 +1149,7 @@ bool DKWidget::SetProperty(DKElement* element, const DKString& name, const DKStr
 }
 
 ////////////////////////////////////////////////////////////////
-bool DKWidget::GetInnerHtml(DKElement* element, DKString& value)
+bool DKWidget::GetInnerHtml(Rocket::Core::Element* element, DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1158,7 +1158,7 @@ bool DKWidget::GetInnerHtml(DKElement* element, DKString& value)
 }
 
 //////////////////////////////////////////////////////////////////////
-bool DKWidget::GetInnerHtmlString(DKElement* element, DKString& value)
+bool DKWidget::GetInnerHtmlString(Rocket::Core::Element* element, DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1179,7 +1179,7 @@ bool DKWidget::GetInnerHtmlString(DKElement* element, DKString& value)
 }
 
 //////////////////////////////////////////////////////////////////////
-bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
+bool DKWidget::SetInnerHtml(Rocket::Core::Element* element, const DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	//FIXME - can't clear a select element ??
@@ -1195,7 +1195,7 @@ bool DKWidget::SetInnerHtml(DKElement* element, const DKString& value)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-bool DKWidget::SetInnerHtmlString(DKElement* element, const DKString& value)
+bool DKWidget::SetInnerHtmlString(Rocket::Core::Element* element, const DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1214,7 +1214,7 @@ bool DKWidget::SetInnerHtmlString(DKElement* element, const DKString& value)
 }
 
 ////////////////////////////////////////////////////////////
-bool DKWidget::GetValue(DKElement* element, DKString& value)
+bool DKWidget::GetValue(Rocket::Core::Element* element, DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){
@@ -1243,7 +1243,7 @@ bool DKWidget::GetValue(DKElement* element, DKString& value)
 }
 
 //////////////////////////////////////////////////////////////////
-bool DKWidget::SetValue(DKElement* element, const DKString& value)
+bool DKWidget::SetValue(Rocket::Core::Element* element, const DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1259,7 +1259,7 @@ bool DKWidget::SetValue(DKElement* element, const DKString& value)
 }
 
 ///////////////////////////////////////////////////////
-bool DKWidget::GetValue(DKElement* element, int& value)
+bool DKWidget::GetValue(Rocket::Core::Element* element, int& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1270,7 +1270,7 @@ bool DKWidget::GetValue(DKElement* element, int& value)
 }
 
 /////////////////////////////////////////////////////////////
-bool DKWidget::SetValue(DKElement* element, const int& value)
+bool DKWidget::SetValue(Rocket::Core::Element* element, const int& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){ return false; }
@@ -1280,7 +1280,7 @@ bool DKWidget::SetValue(DKElement* element, const int& value)
 }
 
 ///////////////////////////////////////////////////////////////////
-bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
+bool DKWidget::SetValue(Rocket::Core::Element* element, const DKProperty* prop)
 {
 	DKDEBUGFUNC(element, prop);
 	if(!element){ return false; }
@@ -1297,7 +1297,7 @@ bool DKWidget::SetValue(DKElement* element, const DKProperty* prop)
 }
 
 //////////////////////////////////////////////
-bool DKWidget::ScrollToTop(DKElement* element)
+bool DKWidget::ScrollToTop(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
 	element->SetScrollTop(0);
@@ -1305,10 +1305,10 @@ bool DKWidget::ScrollToTop(DKElement* element)
 }
 
 /////////////////////////////////////////////////
-bool DKWidget::ScrollToBottom(DKElement* element)
+bool DKWidget::ScrollToBottom(Rocket::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
-	DKElement* last_child = element->GetLastChild();
+	Rocket::Core::Element* last_child = element->GetLastChild();
 	if(!last_child){
 		DKERROR("DKWidget::ScrollToBottom(): last_child invalid\n");
 		return false;
@@ -1318,7 +1318,7 @@ bool DKWidget::ScrollToBottom(DKElement* element)
 }
 
 //////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
+bool DKWidget::GetClientWidth(Rocket::Core::Element* element, DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){
@@ -1331,7 +1331,7 @@ bool DKWidget::GetClientWidth(DKElement* element, DKString& value)
 }
 
 ///////////////////////////////////////////////////////////////////
-bool DKWidget::GetClientHeight(DKElement* element, DKString& value)
+bool DKWidget::GetClientHeight(Rocket::Core::Element* element, DKString& value)
 {
 	DKDEBUGFUNC(element, value);
 	if(!element){
@@ -1371,20 +1371,20 @@ bool DKWidget::IsChildOf(const DKString& id, const DKString& parent)
 }
 
 ////////////////////////////////////////////////////////////////////
-bool DKWidget::IsChildOf(DKElement* element, const DKString& parent)
+bool DKWidget::IsChildOf(Rocket::Core::Element* element, const DKString& parent)
 {
 	DKDEBUGFUNC(element, parent);
 	return IsChildOf(element, GetElementById(parent));
 }
 
 ///////////////////////////////////////////////////////////////
-bool DKWidget::IsChildOf(DKElement* element, DKElement* parent)
+bool DKWidget::IsChildOf(Rocket::Core::Element* element, Rocket::Core::Element* parent)
 {
 	DKDEBUGFUNC(element, parent);
 	if(!element){return false;}
 	if(!parent){return false;}
 
-	DKElement* ele = element;
+	Rocket::Core::Element* ele = element;
 	if(ele == parent){
 		return true;
 	}
@@ -1449,7 +1449,7 @@ bool DKWidget::GetMouseElementPosition(const DKString& id, int& x_out, int& y_ou
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_out)
+bool DKWidget::GetMouseElementPosition(Rocket::Core::Element* element, int& x_out, int& y_out)
 {
 	DKDEBUGFUNC(element, x_out, y_out);
 	if(!element){ return false; }
@@ -1461,8 +1461,8 @@ bool DKWidget::GetMouseElementPosition(DKElement* element, int& x_out, int& y_ou
 	int temp_x = 0;
 	int temp_y = 0;
 	
-	DKElement* ele = element;
-	DKElement* root = GetElementById("body");
+	Rocket::Core::Element* ele = element;
+	Rocket::Core::Element* root = GetElementById("body");
 	while(ele != root){
 
 		//When non absolute elements are involved, it's a little harder to get the actual position.
@@ -1521,7 +1521,7 @@ bool DKWidget::MoveToFront(const DKString& id)
 {
 	DKDEBUGFUNC(id);
 	/*
-	DKElement* temp = root->GetElementById(id.c_str());
+	Rocket::Core::Element* temp = root->GetElementById(id.c_str());
 	if(has(id,".html")){
 		temp->GetParentNode()->RemoveChild(temp);
 		root->GetOwnerDocument()->AppendChild(temp);
@@ -1530,7 +1530,7 @@ bool DKWidget::MoveToFront(const DKString& id)
 		DKString panel;
 		GetPanel(id, panel);
 		temp->GetParentNode()->RemoveChild(temp);
-		DKElement* the_panel = dkRocket->document->GetElementById(panel.c_str());
+		Rocket::Core::Element* the_panel = dkRocket->document->GetElementById(panel.c_str());
 		the_panel->AppendChild(temp);//items in .html files need to stay within the .html file
 	}
 	*/
@@ -1697,17 +1697,17 @@ bool DKWidget::GetElements(const DKString& id, DKElementList& elements)
 }
 
 //////////////////////////////////////////////////////////////////////
-bool DKWidget::GetElements(DKElement* parent, DKElementList& elements)
+bool DKWidget::GetElements(Rocket::Core::Element* parent, DKElementList& elements)
 {
 	DKDEBUGFUNC(parent, "DKElementList&");
 	if(!parent){ return false; }
-	typedef std::queue<DKElement*> SearchQueue;
+	typedef std::queue<Rocket::Core::Element*> SearchQueue;
 	SearchQueue search_queue;
 	for (int i = 0; i < parent->GetNumChildren(); ++i)
 		search_queue.push(parent->GetChild(i));
 
 	while(!search_queue.empty()){
-		DKElement* element = search_queue.front();
+		Rocket::Core::Element* element = search_queue.front();
 		search_queue.pop();
 
 		if(!has(element->GetTagName().CString(), "#")){
@@ -1737,7 +1737,7 @@ bool DKWidget::AttachDrags()
 
 		//add handle to elements with a "resize"
 		if (elements[i]->HasAttribute("resize")){
-			DKElement* handle = CreateElement("handle");
+			Rocket::Core::Element* handle = CreateElement("handle");
 			DKString file = elements[i]->GetParentNode()->GetId().CString();
 			DKFile::RemoveExtention(file);
 			elements[i]->GetParentNode()->GetId().CString();
@@ -1762,7 +1762,7 @@ bool DKWidget::AddDragHandle(const DKString& id, const DKString& drag)
 	DKString handle;
 	DKString first_child = GetFirstChild(id);
 	if (!first_child.empty()){
-		DKElement* element = DKWidget::GetElementById(first_child);
+		Rocket::Core::Element* element = DKWidget::GetElementById(first_child);
 		if(!element){return false;}
 		DKString tag = element->GetTagName().CString();
 		if(same(tag, "handle")){ return false; }
@@ -1787,7 +1787,7 @@ bool DKWidget::AddDragHandle(const DKString& id, const DKString& drag)
 bool DKWidget::RemoveDragHandle(const DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return false; }
 	DKString tag = element->GetTagName().CString();
 	if(same(tag, "handle")){
@@ -1804,7 +1804,7 @@ bool DKWidget::AddResizeHandle(const DKString& id, const DKString& resize)
 	DKString handle;
 	DKString first_child = GetFirstChild(id);
 	if (!first_child.empty()){
-		DKElement* element = DKWidget::GetElementById(first_child);
+		Rocket::Core::Element* element = DKWidget::GetElementById(first_child);
 		if(!element){return false;}
 		DKString tag = element->GetTagName().CString();
 		if(same(tag, "handle")){ return false; }
@@ -1829,7 +1829,7 @@ bool DKWidget::AddResizeHandle(const DKString& id, const DKString& resize)
 bool DKWidget::RemoveResizeHandle(const DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return false; }
 	DKString tag = element->GetTagName().CString();
 	if(same(tag, "handle")){
@@ -1842,9 +1842,9 @@ bool DKWidget::RemoveResizeHandle(const DKString& id)
 DKString DKWidget::GetFirstChild(const DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
-	DKElement* child = element->GetFirstChild();
+	Rocket::Core::Element* child = element->GetFirstChild();
 	if(!child){return "";}
 	return DKWidget::GetId(child);
 }
@@ -1853,9 +1853,9 @@ DKString DKWidget::GetFirstChild(const DKString& id)
 DKString DKWidget::GetLastChild(const DKString& id)
 {
 	DKDEBUGFUNC(id);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!element){ return 0; }
-	DKElement* child = element->GetLastChild();
+	Rocket::Core::Element* child = element->GetLastChild();
 	if(!child){return "";}
 	return DKWidget::GetId(child);
 }
@@ -1864,7 +1864,7 @@ DKString DKWidget::GetLastChild(const DKString& id)
 bool DKWidget::GetOption(const DKString& id, int n)
 {
 	DKDEBUGFUNC(id, n);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!same(element->GetTagName().CString(), "select")){
 		DKWARN("DKWidget::SelectOption("+id+"): not a select element\n");
 		return false;
@@ -1879,7 +1879,7 @@ bool DKWidget::GetOption(const DKString& id, int n)
 bool DKWidget::SetOption(const DKString& id, int n)
 {
 	DKDEBUGFUNC(id, n);
-	DKElement* element = DKWidget::GetElementById(id);
+	Rocket::Core::Element* element = DKWidget::GetElementById(id);
 	if(!same(element->GetTagName().CString(), "select")){
 		DKWARN("DKWidget::SelectOption("+id+"): not a select element\n");
 		return false;
@@ -1898,8 +1898,8 @@ bool DKWidget::BuildStyleString(const DKString& id, DKString &style)
 {
 	DKDEBUGFUNC(id, style);
 	//TODO: some properties, we only need to add a style if it's different from the elements parent 
-	DKElement* element = GetElementById(id);
-	DKElement* parent = element->GetParentNode();
+	Rocket::Core::Element* element = GetElementById(id);
+	Rocket::Core::Element* parent = element->GetParentNode();
 	DKString temp;
 	DKString par;
 
@@ -1976,9 +1976,9 @@ bool DKWidget::BuildStyleString(const DKString& id, DKString &style)
 bool DKWidget::BuildOptionsString(const DKString& id, DKString &options)
 {
 	DKDEBUGFUNC(id, options);
-	DKElement* element = GetElementById(id);
+	Rocket::Core::Element* element = GetElementById(id);
 	if(element->HasAttribute("nosave_inner")){ return false; }
-	DKElement* selectbox = element->GetChild(1);
+	Rocket::Core::Element* selectbox = element->GetChild(1);
 
 	GetInnerHtml(selectbox, options);
 
