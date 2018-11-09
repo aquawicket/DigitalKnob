@@ -23,9 +23,6 @@ public:
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
 	static int name(duk_context* ctx);
-
-	//element
-	static int parentNode(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRocketJS, true)

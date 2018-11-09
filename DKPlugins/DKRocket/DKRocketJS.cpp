@@ -13,7 +13,6 @@ bool DKRocketJS::Init()
 	DKDuktape::AttachFunction("DKRocket_innerHeight", DKRocketJS::innerHeight);
 	DKDuktape::AttachFunction("DKRocket_innerWidth", DKRocketJS::innerWidth);
 	DKDuktape::AttachFunction("DKRocket_name", DKRocketJS::name);
-	DKDuktape::AttachFunction("DKRocket_parentNode", DKRocketJS::parentNode);
 	DKDuktape::AttachFunction("DKRocket_addEventListener", DKRocketJS::addEventListener);
 	DKDuktape::AttachFunction("DKRocket_removeEventListener", DKRocketJS::removeEventListener);
 	
@@ -70,31 +69,6 @@ int DKRocketJS::name(duk_context* ctx)
 	DKString name = DKRocket::Get()->context->GetName().CString();
 	duk_push_string(ctx, name.c_str());
 	return 1;
-}
-
-////////////////////////////////////////////
-int DKRocketJS::parentNode(duk_context* ctx)
-{
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
-	if(!element){
-		DKERROR("DKRocketJS::parentNode(): element invalid\n");
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	Rocket::Core::Element* parentNode = element->GetParentNode();
-	if(!parentNode){
-		DKERROR("DKRocketJS::parentNode(): parentNode invalid\n");
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	const void* parentAddress = static_cast<const void*>(parentNode);
-	std::stringstream ss;
-	ss << parentAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
-	return true;
 }
 
 //////////////////////////////////////////////////

@@ -10,6 +10,7 @@ bool DKNode::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKNode_appendChild", DKNode::appendChild);
 	DKDuktape::AttachFunction("DKNode_childNodes", DKNode::childNodes);
+	DKDuktape::AttachFunction("DKNode_parentNode", DKNode::parentNode);
 	DKDuktape::AttachFunction("DKNode_removeChild", DKNode::removeChild);
 	
 	DKClass::DKCreate("DKRocket/DKNode.js");
@@ -76,6 +77,31 @@ int DKNode::childNodes(duk_context* ctx)
 		str += ss.str(); 
 		if(i < elements.size()-1){ str += ","; }
 	}
+	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
+////////////////////////////////////////
+int DKNode::parentNode(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	if(!element){
+		DKERROR("DKRocketJS::parentNode(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rocket::Core::Element* parentNode = element->GetParentNode();
+	if(!parentNode){
+		DKERROR("DKRocketJS::parentNode(): parentNode invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	const void* parentAddress = static_cast<const void*>(parentNode);
+	std::stringstream ss;
+	ss << parentAddress;  
+	DKString str = ss.str(); 
 	duk_push_string(ctx, str.c_str());
 	return true;
 }
