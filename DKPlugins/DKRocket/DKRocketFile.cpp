@@ -15,11 +15,20 @@ Rocket::Core::FileHandle DKRocketFile::Open(const Rocket::Core::String& path)
 		if(!DKRocket::Get()->_path.empty()){
 			DKWARN("DKRocketFile::Open() fullpath = "+DKRocket::Get()->_path+abspath+"\n");
 			abspath = DKRocket::Get()->_path+abspath;
+
 			if(has(abspath,"://")){
 				DKFile::MakeDir(DKFile::local_assets+"Cache");
-				DKCurl::Get()->Download(abspath, DKFile::local_assets+"Cache");
+
 				DKString filename;
 				DKFile::GetFileName(abspath, filename);
+
+				//remove everything after ? in the filename if there is one
+				int found = filename.rfind("?");
+				if(found > 0){
+					filename = filename.substr(0,found);
+				}
+
+				DKCurl::Get()->Download(abspath, DKFile::local_assets+"Cache/"+filename);
 				abspath = DKFile::local_assets+"Cache/"+filename;
 			}
 		}
