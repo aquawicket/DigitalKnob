@@ -1,10 +1,8 @@
-var screen;
-
 //////////////////////////////
 var Screen = function(pointer)
 {
 	//DKDEBUGFUNC();
-	console.warn("Screen("+pointer+")");
+	//console.warn("Screen("+pointer+")");
 	
 	Object.defineProperty(this, "availTop",      { get: function(){ return DKScreen_availTop(this.pointer);      } });  //TODO
 	Object.defineProperty(this, "availLeft",     { get: function(){ return DKScreen_availLeft(this.pointer);     } });  //TODO
@@ -31,4 +29,4 @@ var Screen = function(pointer)
 }
 Screen.prototype = EventTarget.prototype;
 
-screen = new Screen("screen");
+var screen = new Screen("screen");

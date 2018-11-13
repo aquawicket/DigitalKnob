@@ -1,8 +1,5 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-var console;
-
-
 ///////////////////////////////
 var Console = function(pointer)
 {
@@ -37,4 +34,4 @@ var Console = function(pointer)
 	}
 }
 
-console = new Console("console");
+var console = new Console("console");

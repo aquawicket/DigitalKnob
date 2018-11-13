@@ -1,5 +1,3 @@
-var window;
-
 //////////////////////////////
 var Window = function(pointer)
 {
@@ -8,4 +6,4 @@ var Window = function(pointer)
 Window.prototype = EventTarget.prototype;
 
 //Create the global window object
-window = new Window("window");
+var window = new Window("GLOBAL");

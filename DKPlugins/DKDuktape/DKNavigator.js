@@ -1,5 +1,3 @@
-var navigator;
-
 /////////////////////////////////
 var Navigator = function(pointer)
 {
@@ -46,4 +44,4 @@ var Navigator = function(pointer)
 	}
 }
 
-navigator = new Navigator("navigator");
+var navigator = new Navigator("navigator");

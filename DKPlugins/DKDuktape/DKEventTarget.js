@@ -3,7 +3,7 @@ var stored_events = [];
 //////////////////////////////////////////////
 var EventFromRocket = function(pointer, event)
 {
-	//DKWARN("EventFromRocket("+pointer+","+event.type+")");
+	console.warn("EventFromRocket("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);
@@ -15,7 +15,7 @@ var EventFromRocket = function(pointer, event)
 var EventTarget = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("EventTarget("+pointer+")");
+	console.warn("EventTarget("+pointer+")");
 	
 	this.pointer = pointer;
 	this.listeners = {};
@@ -26,16 +26,15 @@ var EventTarget = function(pointer)
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
-		if(this.pointer != "window"){
-			DKEventTarget_addEventListner(this.pointer, type, callback);
-			//DKRocket_addEventListener(this.pointer, type, useCapture);
-		}
+		DKEventTarget_addEventListner(this.pointer, type, callback);
+		//DKRocket_addEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			this.listeners[type] = [];
 		}
 		this.listeners[type].push(callback);
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
+		console.warn("removeEventListener this.pointer = "+this.pointer);
 		DKEventTarget_removeEventListner(this.pointer, type, callback);
 		//DKRocket_removeEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
@@ -50,15 +49,23 @@ var EventTarget = function(pointer)
 		}
 	};
 	EventTarget.prototype.dispatchEvent = function(event){
+		console.warn("dispatchEvent this.pointer = "+this.pointer);
 		if(!(event.type in this.listeners)){
 			return true;
 		}
 		var stack = this.listeners[event.type].slice();
-		for (var i = 0, l = stack.length; i < l; i++){
+		for(var i = 0, l = stack.length; i < l; i++){
 			console.warn("dispatchEvent(): pointer = "+this.pointer);
-			if(this.pointer != "window"){
+			
+			if(this.pointer == "window"){
+				event.currentTarget = window;
+			}
+			else{
 				event.currentTarget = new HTMLElement(this.pointer);
 			}
+				
+			//event.currentTarget = this;
+			
 			stack[i].call(this, event);
 		}
 		return !event.defaultPrevented;
