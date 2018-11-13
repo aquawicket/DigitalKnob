@@ -98,6 +98,7 @@ bool DKDuktape::Init()
 		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
 		DKClass::DKCreate("DKXMLHttpRequest");
 		DKClass::DKCreate("DKScreen");
+		DKClass::DKCreate("DKDuktape/DKWindow.js");
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
