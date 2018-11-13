@@ -1,70 +1,70 @@
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
-Window.defineProperty(this, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
-Window.defineProperty(this, "console",               { get: function(){ return console;                                 } });
-Window.defineProperty(this, "controllers",           { get: function(){ return DKRocket_controllers(this.pointer);      } });  //TODO
-Window.defineProperty(this, "customElements",        { get: function(){ return DKRocket_customElements(this.pointer);   } });  //TODO
-Window.defineProperty(this, "crypto",                { get: function(){ return DKRocket_crypto(this.pointer);           } });  //TODO
-Window.defineProperty(this, "devicePixelRatio",      { get: function(){ return DKRocket_devicePixelRatio(this.pointer); } });  //TODO
-Window.defineProperty(this, "dialogArguments",       { get: function(){ return DKRocket_dialogArguments(this.pointer);  } });  //TODO
-Window.defineProperty(this, "document",              { get: function(){ return document;                                } });
-Window.defineProperty(this, "event",                 { get: function(){ return DKRocket_event(this.pointer);            } });  //TODO
-Window.defineProperty(this, "frameElement",          { get: function(){ return DKRocket_frameElement(this.pointer);     } });  //TODO
-Window.defineProperty(this, "frames",                { get: function(){ return DKRocket_frames(this.pointer);           } });  //TODO
-Window.defineProperty(this, "fullScreen", {
+Object.defineProperty(window, "closed",                { get: function(){ return DKRocket_closed(this.pointer);           } });  //TODO
+Object.defineProperty(window, "console",               { get: function(){ return console;                                 } });
+Object.defineProperty(window, "controllers",           { get: function(){ return DKRocket_controllers(this.pointer);      } });  //TODO
+Object.defineProperty(window, "customElements",        { get: function(){ return DKRocket_customElements(this.pointer);   } });  //TODO
+Object.defineProperty(window, "crypto",                { get: function(){ return DKRocket_crypto(this.pointer);           } });  //TODO
+Object.defineProperty(window, "devicePixelRatio",      { get: function(){ return DKRocket_devicePixelRatio(this.pointer); } });  //TODO
+Object.defineProperty(window, "dialogArguments",       { get: function(){ return DKRocket_dialogArguments(this.pointer);  } });  //TODO
+Object.defineProperty(window, "document",              { get: function(){ return document;                                } });
+Object.defineProperty(window, "event",                 { get: function(){ return DKRocket_event(this.pointer);            } });  //TODO
+Object.defineProperty(window, "frameElement",          { get: function(){ return DKRocket_frameElement(this.pointer);     } });  //TODO
+Object.defineProperty(window, "frames",                { get: function(){ return DKRocket_frames(this.pointer);           } });  //TODO
+Object.defineProperty(window, "fullScreen", {
 	get: function()   { return DKRocket_fullScreen(this.pointer);      },
 	set: function(val){ return DKRocket_fullScreen(this.pointer, val); }
 });  //TODO
-Window.defineProperty(this, "history",               { get: function(){ return DKRocket_history(this.pointer);          } });  //TODO
-Window.defineProperty(this, "innerHeight",           { get: function(){ return DKRocket_innerHeight();                  } });  //TODO
-Window.defineProperty(this, "innerWidth",            { get: function(){ return DKRocket_innerWidth();                   } });  //TODO
-Window.defineProperty(this, "isSecureContext",       { get: function(){ return DKRocket_isSecureContext();              } });  //TODO, Experimental
-Window.defineProperty(this, "length",                { get: function(){ return DKRocket_length();                       } });  //TODO
-Window.defineProperty(this, "location",              { get: function(){ return location;                                } });
-Window.defineProperty(this, "locationbar",           { get: function(){ return DKRocket_locationbar();                  } });  //TODO
-Window.defineProperty(this, "localStorage",          { get: function(){ return DKRocket_localStorage();                 } });  //TODO
-Window.defineProperty(this, "menubar",               { get: function(){ return DKRocket_menubar();                      } });  //TODO
-Window.defineProperty(this, "messageManager",        { get: function(){ return DKRocket_messageManager();               } });  //TODO
-Window.defineProperty(this, "mozAnimationStartTime", { get: function(){ return DKRocket_mozAnimationStartTime();        } });  //TODO, Deprecated
-Window.defineProperty(this, "mozInnerScreenX",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
-Window.defineProperty(this, "mozInnerScreenY",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
-Window.defineProperty(this, "mozPaintCount",         { get: function(){ return DKRocket_mozPaintCount();                } });  //TODO
-Window.defineProperty(this, "name", { 
+Object.defineProperty(window, "history",               { get: function(){ return DKRocket_history(this.pointer);          } });  //TODO
+Object.defineProperty(window, "innerHeight",           { get: function(){ return DKRocket_innerHeight();                  } });  //TODO
+Object.defineProperty(window, "innerWidth",            { get: function(){ return DKRocket_innerWidth();                   } });  //TODO
+Object.defineProperty(window, "isSecureContext",       { get: function(){ return DKRocket_isSecureContext();              } });  //TODO, Experimental
+Object.defineProperty(window, "length",                { get: function(){ return DKRocket_length();                       } });  //TODO
+Object.defineProperty(window, "location",              { get: function(){ return location;                                } });
+Object.defineProperty(window, "locationbar",           { get: function(){ return DKRocket_locationbar();                  } });  //TODO
+Object.defineProperty(window, "localStorage",          { get: function(){ return DKRocket_localStorage();                 } });  //TODO
+Object.defineProperty(window, "menubar",               { get: function(){ return DKRocket_menubar();                      } });  //TODO
+Object.defineProperty(window, "messageManager",        { get: function(){ return DKRocket_messageManager();               } });  //TODO
+Object.defineProperty(window, "mozAnimationStartTime", { get: function(){ return DKRocket_mozAnimationStartTime();        } });  //TODO, Deprecated
+Object.defineProperty(window, "mozInnerScreenX",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
+Object.defineProperty(window, "mozInnerScreenY",       { get: function(){ return DKRocket_mozInnerScreenX();              } });  //TODO
+Object.defineProperty(window, "mozPaintCount",         { get: function(){ return DKRocket_mozPaintCount();                } });  //TODO
+Object.defineProperty(window, "name", { 
 	get: function()   { return DKRocket_name();    },
 	set: function(val){ return DKRocket_setName(); }  
 });  //TODO
-Window.defineProperty(this, "navigator",             { get: function(){ return navigator;                               } });
-Window.defineProperty(this, "opener",                { get: function(){ return DKRocket_opener();                       } });  //TODO
-Window.defineProperty(this, "orientation",           { get: function(){ return DKRocket_orientation();                  } });  //TODO, Deprecated
-Window.defineProperty(this, "outerHeight",           { get: function(){ return DKRocket_outerHeight();                  } });  //TODO
-Window.defineProperty(this, "outerWidth",            { get: function(){ return DKRocket_outerWidth();                   } });  //TODO
-Window.defineProperty(this, "pageXOffset",           { get: function(){ return DKRocket_pageXOffset();                  } });  //TODO
-Window.defineProperty(this, "pageYOffset",           { get: function(){ return DKRocket_pageYOffset();                  } });  //TODO
-Window.defineProperty(this, "parent",                { get: function(){ return DKRocket_parent ();                      } });  //TODO
-Window.defineProperty(this, "performance",           { get: function(){ return DKRocket_performance();                  } });  //TODO
-Window.defineProperty(this, "personalbar",           { get: function(){ return DKRocket_personalbar();                  } });  //TODO
-Window.defineProperty(this, "returnValue",           { get: function(){ return DKRocket_returnValue();                  } });  //TODO
-Window.defineProperty(this, "screen",                { get: function(){ return screen;                                  } });  //TODO
-Window.defineProperty(this, "screenX",               { get: function(){ return DKRocket_screenX();                      } });  //TODO
-Window.defineProperty(this, "screenY",               { get: function(){ return DKRocket_screenY();                      } });  //TODO
-Window.defineProperty(this, "scrollbars",            { get: function(){ return DKRocket_scrollbars();                   } });  //TODO
-Window.defineProperty(this, "scrollMaxX",            { get: function(){ return DKRocket_scrollMaxX();                   } });  //TODO
-Window.defineProperty(this, "scrollMaxY",            { get: function(){ return DKRocket_scrollMaxY();                   } });  //TODO
-Window.defineProperty(this, "scrollX",               { get: function(){ return DKRocket_scrollX();                      } });  //TODO
-Window.defineProperty(this, "scrollY",               { get: function(){ return DKRocket_scrollY();                      } });  //TODO
-Window.defineProperty(this, "self",                  { get: function(){ return DKRocket_self();                         } });  //TODO
-Window.defineProperty(this, "sessionStorage",        { get: function(){ return DKRocket_sessionStorage();               } });  //TODO
-Window.defineProperty(this, "sidebar",               { get: function(){ return DKRocket_sidebar();                      } });  //TODO
-Window.defineProperty(this, "speechSynthesis",       { get: function(){ return DKRocket_speechSynthesis();              } });  //TODO
-Window.defineProperty(this, "status", {
+Object.defineProperty(window, "navigator",             { get: function(){ return navigator;                               } });
+Object.defineProperty(window, "opener",                { get: function(){ return DKRocket_opener();                       } });  //TODO
+Object.defineProperty(window, "orientation",           { get: function(){ return DKRocket_orientation();                  } });  //TODO, Deprecated
+Object.defineProperty(window, "outerHeight",           { get: function(){ return DKRocket_outerHeight();                  } });  //TODO
+Object.defineProperty(window, "outerWidth",            { get: function(){ return DKRocket_outerWidth();                   } });  //TODO
+Object.defineProperty(window, "pageXOffset",           { get: function(){ return DKRocket_pageXOffset();                  } });  //TODO
+Object.defineProperty(window, "pageYOffset",           { get: function(){ return DKRocket_pageYOffset();                  } });  //TODO
+Object.defineProperty(window, "parent",                { get: function(){ return DKRocket_parent ();                      } });  //TODO
+Object.defineProperty(window, "performance",           { get: function(){ return DKRocket_performance();                  } });  //TODO
+Object.defineProperty(window, "personalbar",           { get: function(){ return DKRocket_personalbar();                  } });  //TODO
+Object.defineProperty(window, "returnValue",           { get: function(){ return DKRocket_returnValue();                  } });  //TODO
+Object.defineProperty(window, "screen",                { get: function(){ return screen;                                  } });  //TODO
+Object.defineProperty(window, "screenX",               { get: function(){ return DKRocket_screenX();                      } });  //TODO
+Object.defineProperty(window, "screenY",               { get: function(){ return DKRocket_screenY();                      } });  //TODO
+Object.defineProperty(window, "scrollbars",            { get: function(){ return DKRocket_scrollbars();                   } });  //TODO
+Object.defineProperty(window, "scrollMaxX",            { get: function(){ return DKRocket_scrollMaxX();                   } });  //TODO
+Object.defineProperty(window, "scrollMaxY",            { get: function(){ return DKRocket_scrollMaxY();                   } });  //TODO
+Object.defineProperty(window, "scrollX",               { get: function(){ return DKRocket_scrollX();                      } });  //TODO
+Object.defineProperty(window, "scrollY",               { get: function(){ return DKRocket_scrollY();                      } });  //TODO
+Object.defineProperty(window, "self",                  { get: function(){ return DKRocket_self();                         } });  //TODO
+Object.defineProperty(window, "sessionStorage",        { get: function(){ return DKRocket_sessionStorage();               } });  //TODO
+Object.defineProperty(window, "sidebar",               { get: function(){ return DKRocket_sidebar();                      } });  //TODO
+Object.defineProperty(window, "speechSynthesis",       { get: function(){ return DKRocket_speechSynthesis();              } });  //TODO
+Object.defineProperty(window, "status", {
 	get: function()   { return DKRocket_status();    },
 	set: function(val){ return DKRocket_setStatus(); }
 });  //TODO
-Window.defineProperty(this, "statusbar",             { get: function(){ return DKRocket_statusbar();                    } });  //TODO
-Window.defineProperty(this, "toolbar",               { get: function(){ return DKRocket_toolbar();                      } });  //TODO
-Window.defineProperty(this, "top",                   { get: function(){ return DKRocket_top();                          } });  //TODO
-Window.defineProperty(this, "visualViewport",        { get: function(){ return DKRocket_visualViewport();               } });  //TODO
-Window.defineProperty(this, "window",                { get: function(){ return DKRocket_window();                       } });  //TODO
+Object.defineProperty(window, "statusbar",             { get: function(){ return DKRocket_statusbar();                    } });  //TODO
+Object.defineProperty(window, "toolbar",               { get: function(){ return DKRocket_toolbar();                      } });  //TODO
+Object.defineProperty(window, "top",                   { get: function(){ return DKRocket_top();                          } });  //TODO
+Object.defineProperty(window, "visualViewport",        { get: function(){ return DKRocket_visualViewport();               } });  //TODO
+Object.defineProperty(window, "window",                { get: function(){ return DKRocket_window();                       } });  //TODO
 
 Window.prototype.alert = function(msg){
 	console.warn("alert: "+msg); //TODO - create an actual popup window
