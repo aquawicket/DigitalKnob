@@ -237,7 +237,8 @@ bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
 	
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	Rocket::Core::Element* element = getElementByAddress(id.c_str());
+	//Rocket::Core::Element* element = document->GetElementById(id.c_str());
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -463,7 +464,7 @@ Rocket::Core::Element* DKRocket::getElementByAddress(const DKString& address)
 	ss << address;
 	int tmp(0);
 	if(!(ss >> std::hex >> tmp)){
-		DKERROR("DKRocketJS::getElementByAddress("+address+"): invalide address\n");
+		DKERROR("DKRocketJS::getElementByAddress("+address+"): invalid address\n");
 		return NULL;
 	}
 	Rocket::Core::Element* element = reinterpret_cast<Rocket::Core::Element*>(tmp);
