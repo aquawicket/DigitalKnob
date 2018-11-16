@@ -356,7 +356,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
 
 	//Send this event back to duktape to be processed in javascript
-	DKString code = "EventFromRocket('"+str+"',"+evnt+");";
+	DKString code = "EventFromCPP('"+str+"',"+evnt+");";
 	DKString rval;
 	DKDuktape::Get()->RunDuktape(code, rval);
 	if(!rval.empty()){

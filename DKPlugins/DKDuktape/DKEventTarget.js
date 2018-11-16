@@ -1,9 +1,9 @@
 var stored_events = [];
 
-//////////////////////////////////////////////
-var EventFromRocket = function(pointer, event)
+///////////////////////////////////////////
+var EventFromCPP = function(pointer, event)
 {
-	console.warn("EventFromRocket("+pointer+","+event.type+")");
+	console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);

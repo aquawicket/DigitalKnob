@@ -83,7 +83,7 @@ bool DKEventTarget::OnEvent(DKEvent* event)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	else{

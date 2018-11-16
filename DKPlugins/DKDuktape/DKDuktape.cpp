@@ -196,7 +196,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);  // ignore result?
@@ -246,7 +246,7 @@ bool DKDuktape::CallInit(const DKString& file)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);  // ignore result?
@@ -308,7 +308,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);  // ignore result?
@@ -359,7 +359,7 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 
@@ -425,7 +425,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
     }
 	else{
@@ -509,7 +509,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);  // ignore result?
@@ -555,7 +555,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 		DKString str;
 		str += "var err_error = {stack:'"+stack+"'};";
 		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromRocket('window', err_event);";
+		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
 	duk_pop(ctx);
