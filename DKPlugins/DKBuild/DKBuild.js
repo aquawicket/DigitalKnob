@@ -22,8 +22,8 @@ var APP_LIST = [];
 function DKBuild_Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape_Create("DKCurl");
-	//DKDuktape_Create("DKGit/DKGit.js", function(){});
+	DKCreate("DKCurl");
+	//DKCreate("DKGit/DKGit.js", function(){});
 
 	//console.log(DK_GetOS()+"");
 	if(DK_GetOS() == "Win32"){
@@ -59,10 +59,10 @@ function DKBuild_Init()
 
 	/*
 	if(DKAvailable("DKWidget")){
-		DKDuktape_Create("DKBuild/DKBuildGUI.js", function(){});
+		DKCreate("DKBuild/DKBuildGUI.js", function(){});
 	}
 	else{
-		DKDuktape_Create("DKBuild/DKBuildConsole.js", function(){});
+		DKCreate("DKBuild/DKBuildConsole.js", function(){});
 	}
 	*/
 }
@@ -412,7 +412,7 @@ function DKBuild_DoResults()
 	
 	//// Create Icons
 	if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-		DKDuktape_Create("DKBuild/IconMaker.js", function(){
+		DKCreate("DKBuild/IconMaker.js", function(){
 			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 		});
 	}
@@ -851,7 +851,7 @@ function DKBuild_DoResults()
 	}
 	
 	if(DKAvailable("DKAudio")){
-		DKDuktape_Create("DKAudio");
+		DKCreate("DKAudio");
 	}
 	if(DKValid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

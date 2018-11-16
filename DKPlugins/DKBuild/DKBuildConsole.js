@@ -4,7 +4,7 @@ var working = true;
 function DKBuildConsole_Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape_Create("DKBuild/DKBuild.js", function(){
+	DKCreate("DKBuild/DKBuild.js", function(){
 		DKBuild_ValidateCmake();
 		DKBuild_ValidateVC2015();
 		DKBuild_ValidateGcc();
@@ -48,12 +48,12 @@ function DKBuildConsole_ChooseUpdate()
 		DK_Exit();
 	}
 	if(key == 121){ //y key
-		DKDuktape_Create("DKGit/DKGit.js", function(){
+		DKCreate("DKGit/DKGit.js", function(){
 			DKGit_GitUpdate();
 		});
 	}
 	if(key == 99){ //c key
-		DKDuktape_Create("DKGit/DKGit.js", function(){
+		DKCreate("DKGit/DKGit.js", function(){
 			DKGit_GitCommit();
 		});
 	}

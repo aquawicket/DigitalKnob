@@ -45,6 +45,7 @@ bool DKDuktapeJS::Init()
 	//DKDuktape::AttachFunction("DKDuktape_AddEvent", DKDuktapeJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
 	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
+	DKDuktape::AttachFunction("DKCreate", DKDuktapeJS::_DKCreate); //This will be overwritten by DK.js
 	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
 	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
 	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);

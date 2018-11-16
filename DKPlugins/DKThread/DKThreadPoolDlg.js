@@ -2,9 +2,9 @@
 function DKThreadPoolDlg_Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape_Create("DKThreadPool");
+	DKCreate("DKThreadPool");
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
-	DKDuktape_Create("DKThread/DKThreadPoolDlg.html"); 
+	DKCreate("DKThread/DKThreadPoolDlg.html"); 
 	DKAddEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
 }
 
