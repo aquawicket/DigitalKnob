@@ -136,7 +136,7 @@ bool DKHandles::DoMouseUp()
 	for(it=handles.begin(); it!=handles.end(); it++){
 		if(it->first == hwndFoundWindow){
 			currentHandle = it->first;
-			DKEvent::SendEvent("GLOBAL", "DKHandles_WindowChanged", toString(it->first));
+			DKEvent::SendEvent("window", "DKHandles_WindowChanged", toString(it->first));
 		}
 	}
 

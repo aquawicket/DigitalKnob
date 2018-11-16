@@ -856,7 +856,7 @@ bool DKUtil::SendTick()
 {
 	//DKDEBUGFUNC();
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
-		DKEvent::SendEvent("GLOBAL", "second", "");
+		DKEvent::SendEvent("window", "second", "");
 		DKUtil::GetTicks(lastSecond);
 	}
 	return true;

@@ -5,23 +5,23 @@ function DKInput_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKInputTest/DKInput.html");
-	DKAddEvent("GLOBAL", "keypress", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "keydown", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "keyup", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "mousedown", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "mouseup", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "click", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "dblclick", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "mousemove", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "mouseover", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "mouseout", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "wheel", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "resize", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "input", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "change", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "contextmenu", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "scroll", DKInput_OnEvent);
-	DKAddEvent("GLOBAL", "drag", DKInput_OnEvent);
+	DKAddEvent("window", "keypress", DKInput_OnEvent);
+	DKAddEvent("window", "keydown", DKInput_OnEvent);
+	DKAddEvent("window", "keyup", DKInput_OnEvent);
+	DKAddEvent("window", "mousedown", DKInput_OnEvent);
+	DKAddEvent("window", "mouseup", DKInput_OnEvent);
+	DKAddEvent("window", "click", DKInput_OnEvent);
+	DKAddEvent("window", "dblclick", DKInput_OnEvent);
+	DKAddEvent("window", "mousemove", DKInput_OnEvent);
+	DKAddEvent("window", "mouseover", DKInput_OnEvent);
+	DKAddEvent("window", "mouseout", DKInput_OnEvent);
+	DKAddEvent("window", "wheel", DKInput_OnEvent);
+	DKAddEvent("window", "resize", DKInput_OnEvent);
+	DKAddEvent("window", "input", DKInput_OnEvent);
+	DKAddEvent("window", "change", DKInput_OnEvent);
+	DKAddEvent("window", "contextmenu", DKInput_OnEvent);
+	DKAddEvent("window", "scroll", DKInput_OnEvent);
+	DKAddEvent("window", "drag", DKInput_OnEvent);
 	DKAddEvent("esc", "mousedown", DKInput_OnEvent);
 	DKAddEvent("esc", "mouseup", DKInput_OnEvent);
 }
@@ -64,13 +64,13 @@ function DKInput_OnEvent(event)
 	}
 	if(DK_Type(event, "mousedown")){
 		DKInput_ProcessMouseDown(DK_GetValue(event));
-		if(DK_GetId(event) != "GLOBAL"){
+		if(DK_GetId(event) != "window"){
 			DKInput_Highlight(DK_GetId(event));
 		}
 	}
 	if(DK_Type(event, "mouseup") || DK_Type(event, "click")){
 		DKInput_ProcessMouseUp(DK_GetValue(event));
-		if(DK_GetId(event) != "GLOBAL"){
+		if(DK_GetId(event) != "window"){
 			DKInput_UnHighlight(DK_GetId(event));
 		}
 	}

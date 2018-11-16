@@ -3,7 +3,7 @@ function LibraryMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKBuild/LibraryMenu.html");
-	DKAddEvent("GLOBAL", "mousedown", LibraryMenu_OnEvent);
+	DKAddEvent("window", "mousedown", LibraryMenu_OnEvent);
 	DKAddEvent("Build Libraries", "click", LibraryMenu_OnEvent);
 }
 
@@ -25,7 +25,7 @@ function LibraryMenu_OnEvent(event)
 		DKINFO("Clicked Build Libraries\n");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/LibraryMenu.html")){
 			return;
 		}

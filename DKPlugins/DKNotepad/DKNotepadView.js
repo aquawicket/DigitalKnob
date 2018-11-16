@@ -3,7 +3,7 @@ function DKNotepadView_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadView.html,DKNotepad/DKNotepad.html");
-	DKAddEvent("GLOBAL", "mousedown", DKNotepadView_OnEvent);
+	DKAddEvent("window", "mousedown", DKNotepadView_OnEvent);
 	DKAddEvent("DKNotepadView_StatusBar", "click", DKNotepadView_OnEvent);
 }
 
@@ -23,7 +23,7 @@ function DKNotepadView_OnEvent(event)
 		DKINFO(("DKNotepadView_StatusBar\n");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadView.html")){
 			return;
 		}

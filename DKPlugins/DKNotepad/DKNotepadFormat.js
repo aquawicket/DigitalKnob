@@ -3,7 +3,7 @@ function DKNotepadFormat_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
-	DKAddEvent("GLOBAL", "mousedown", DKNotepadFormat_OnEvent);
+	DKAddEvent("window", "mousedown", DKNotepadFormat_OnEvent);
 	DKAddEvent("DKNotepadFormat_WordWrap", "click", DKNotepadFormat_OnEvent);
 	DKAddEvent("DKNotepadFormat_Font", "click", DKNotepadFormat_OnEvent);
 }
@@ -27,7 +27,7 @@ function DKNotepadFormat_OnEvent(event)
 		DKINFO(("DKNotepadFormat_Font\n");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadFormat.html")){
 			return;
 		}

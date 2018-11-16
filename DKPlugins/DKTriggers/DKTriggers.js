@@ -41,12 +41,12 @@ function DKTriggers_Init()
 
 	//assets = DKAssets_LocalAssets();
 	DKTrigger_LoadTriggers("USER/triggers.txt");
-	DKAddEvent("GLOBAL", "gui", DKTrigger_OnEvent); //C++
-	DKAddEvent("GLOBAL", "midi", DKTrigger_OnEvent); //C++
-	DKAddEvent("GLOBAL", "keydown", DKTrigger_OnEvent);
-	DKAddEvent("GLOBAL", "keyup", DKTrigger_OnEvent);
-	DKAddEvent("GLOBAL", "resize", DKTrigger_OnEvent);
-	DKAddEvent("GLOBAL", "ToggleTriggers", DKTrigger_OnEvent); //JS
+	DKAddEvent("window", "gui", DKTrigger_OnEvent); //C++
+	DKAddEvent("window", "midi", DKTrigger_OnEvent); //C++
+	DKAddEvent("window", "keydown", DKTrigger_OnEvent);
+	DKAddEvent("window", "keyup", DKTrigger_OnEvent);
+	DKAddEvent("window", "resize", DKTrigger_OnEvent);
+	DKAddEvent("window", "ToggleTriggers", DKTrigger_OnEvent); //JS
 }
 
 /////////////////////////

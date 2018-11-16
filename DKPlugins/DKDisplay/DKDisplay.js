@@ -4,7 +4,7 @@ function DKDisplay_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKDisplay/DKDisplay.html");
 	DKAddEvent("DKDisplay_Button", "click", DKDisplay_OnEvent);
-	//DKAddEvent("GLOBAL", "second", DKDisplay_OnEvent);
+	//DKAddEvent("window", "second", DKDisplay_OnEvent);
 	
 	//DKAddEvent("DKDisplay/DKDisplay.html", "click", DKDisplay_OnEvent);
 }

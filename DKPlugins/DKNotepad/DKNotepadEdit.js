@@ -3,7 +3,7 @@ function DKNotepadEdit_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
-	DKAddEvent("GLOBAL", "mousedown", DKNotepadEdit_OnEvent);
+	DKAddEvent("window", "mousedown", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Cut", "click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Copy", "click", DKNotepadEdit_OnEvent);
@@ -43,7 +43,7 @@ function DKNotepadEdit_OnEvent(event)
 		DKINFO(("DKNotepadEdit_Find\n");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadEdit.html")){
 			return;
 		}

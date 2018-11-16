@@ -8,7 +8,7 @@ function DKWebSocketsClient_Init()
 		DKAddEvent("DKWebSocketsClient_CreateClient", "click", DKWebSocketsClient_OnEvent);
 		DKAddEvent("DKWebSocketsClient_CloseClient", "click", DKWebSocketsClient_OnEvent);
 		DKAddEvent("DKWebSocketsClient_MessageToServer", "click", DKWebSocketsClient_OnEvent);
-		DKAddEvent("GLOBAL", "DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
+		DKAddEvent("window", "DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
 	});
 }
 

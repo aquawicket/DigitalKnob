@@ -24,7 +24,7 @@ function GitMenu_Init()
 	}
 
 	DKCreate("DKGit/GitMenu.html", function(){
-		DKAddEvent("GLOBAL", "mousedown", GitMenu_OnEvent);
+		DKAddEvent("window", "mousedown", GitMenu_OnEvent);
 		DKAddEvent("Git Update", "click", GitMenu_OnEvent);
 		DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
 	});
@@ -49,7 +49,7 @@ function GitMenu_OnEvent(event)
 		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGit/GitMenu.html")){
 			return;
 		}

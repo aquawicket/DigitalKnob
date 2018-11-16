@@ -95,7 +95,7 @@ private:
 		if (!socket_.is_open()){
 			std::cout << "Connect timed out\n";
 
-			DKEvent::SendEvent("GLOBAL", "client", "disconnected");
+			DKEvent::SendEvent("window", "client", "disconnected");
 
 			// Try the next available endpoint.
 			start_connect(++endpoint_iter);
@@ -109,7 +109,7 @@ private:
 			// before starting a new one.
 			socket_.close();
 
-			DKEvent::SendEvent("GLOBAL", "client", "disconnected");
+			DKEvent::SendEvent("window", "client", "disconnected");
 
 			// Try the next available endpoint.
 			start_connect(++endpoint_iter);
@@ -126,7 +126,7 @@ private:
 			start_write();
 
 			/// Send connected message
-			DKEvent::SendEvent("GLOBAL", "client", "connected");
+			DKEvent::SendEvent("window", "client", "connected");
 		}
 	}
 
@@ -185,7 +185,7 @@ private:
 			heartbeat_timer_.expires_from_now(boost::posix_time::seconds(10));
 			heartbeat_timer_.async_wait(boost::bind(&client::start_write, this));
 
-			DKEvent::SendEvent("GLOBAL", "client", "connected");
+			DKEvent::SendEvent("window", "client", "connected");
 		}
 		else{
 			std::cout << "Error on heartbeat: " << ec.message() << "\n";

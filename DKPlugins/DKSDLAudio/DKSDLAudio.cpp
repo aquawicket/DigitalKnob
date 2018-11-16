@@ -203,7 +203,7 @@ void DKSDLAudio::Process()
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){
 			trk.position = (SDL_GetTicks() - lastTime) / 1000;
 			//DKINFO("trk.position = "+toString(trk.position)+"\n");
-			DKEvent::SendEvent("GLOBAL", "timeupdate", "");
+			DKEvent::SendEvent("window", "timeupdate", "");
 		}
 	}
 	else 
@@ -217,6 +217,6 @@ void DKSDLAudio::Process()
 		Mix_PauseMusic();
 		trk.position = 0;
 		lastTime = SDL_GetTicks();
-		DKEvent::SendEvent("DKGLOABL", "ended", "");
+		DKEvent::SendEvent("window", "ended", "");
 	}
 }

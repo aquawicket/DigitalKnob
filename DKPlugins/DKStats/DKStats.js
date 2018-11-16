@@ -3,7 +3,7 @@ function DKStats_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKStats/DKStats.html");
-	DKAddEvent("GLOBAL", "second", DKStats_OnEvent);
+	DKAddEvent("window", "second", DKStats_OnEvent);
 	//DKAddEvent("DKStats/DKStats.html", "click", DKStats_OnEvent);
 }
 

@@ -3,7 +3,7 @@ function DKPaintMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKPaint/DKPaintMenu.html");
-	DKAddEvent("GLOBAL", "mousedown", DKPaintMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DKPaintMenu_OnEvent);
 	DKAddEvent("DKPaintMenu_Cut", "click", DKPaintMenu_OnEvent);
 	DKAddEvent("DKPaintMenu_Copy", "click", DKPaintMenu_OnEvent);
 	DKAddEvent("DKPaintMenu_Paste", "click", DKPaintMenu_OnEvent);
@@ -31,7 +31,7 @@ function DKPaintMenu_OnEvent(event)
 		DKPaintMenu_Paste();
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaint/DKPaintMenu.html")){
 			return;
 		}

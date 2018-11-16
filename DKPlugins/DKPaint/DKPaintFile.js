@@ -3,7 +3,7 @@ function DKPaintFile_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
-	DKAddEvent("GLOBAL", "mousedown", DKPaintFile_OnEvent);
+	DKAddEvent("window", "mousedown", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Save", "click", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Save As", "click", DKPaintFile_OnEvent);
@@ -36,7 +36,7 @@ function DKPaintFile_OnEvent(event)
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaint/DKPaintFile.html")){
 			return;
 		}

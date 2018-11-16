@@ -5,7 +5,7 @@ function SvnMenu_Init()
 	DKCreate("DKBuild/SvnMenu.html");
 	DKWidget_SetProperty("SvnMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("SvnMenu.html","left",DKWindow_GetMouseX()+"px");
-	DKAddEvent("GLOBAL", "mousedown", SvnMenu_OnEvent);
+	DKAddEvent("window", "mousedown", SvnMenu_OnEvent);
 	DKAddEvent("Svn Update", "click", SvnMenu_OnEvent);
 	DKAddEvent("Svn Commit", "click", SvnMenu_OnEvent);
 }
@@ -30,7 +30,7 @@ function SvnMenu_OnEvent(event)
 		DKThread_DKQueue("SvnCommit","DKBuild_SvnCommit();");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "SvnMenu.html")){
 			return;
 		}

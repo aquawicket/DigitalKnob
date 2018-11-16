@@ -84,7 +84,7 @@ bool DKEvent::SendEvent(const DKString& id, const DKString& type, const DKString
 			if(i < events.size()){ 
 				events[i]->data.clear(); //clear data after send
 			}
-			if(!same(id,"GLOBAL")){ return true; }
+			if(!same(id,"window")){ return true; }
 		}
 	}
 

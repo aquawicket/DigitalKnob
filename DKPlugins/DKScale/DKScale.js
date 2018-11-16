@@ -4,7 +4,7 @@ var pixel_ratio = 1.0;
 function DKScale_Init()
 {
 	DKDEBUGFUNC();
-	DKAddEvent("GLOBAL", "resize", DKScale_OnEvent);
+	DKAddEvent("window", "resize", DKScale_OnEvent);
 	DKScale_Resize();
 }
 

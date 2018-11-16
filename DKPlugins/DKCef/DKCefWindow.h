@@ -256,7 +256,7 @@ public:
 	{
 		DKDEBUGFUNC(browser, frame, httpStatusCode);
 		if(frame->IsMain()){
-			DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadEnd", toString(httpStatusCode));
+			DKEvent::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
 		}
 	}
 
@@ -272,7 +272,7 @@ public:
 	{
 		DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
 		CEF_REQUIRE_UI_THREAD();
-		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", toString(browser->GetIdentifier()));
+		DKEvent::SendEvent("window", "DKCef_OnLoadingStateChange", toString(browser->GetIdentifier()));
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -304,9 +304,9 @@ public:
 		if(event.type == KEYEVENT_RAWKEYDOWN){
 			//DKINFO("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
 			//#ifdef WIN32
-			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.windows_key_code));
+			DKEvent::SendEvent("window", "keydown", toString(event.windows_key_code));
 			//#else
-			//			DKEvent::SendEvent("GLOBAL", "keydown", toString(event.character));
+			//			DKEvent::SendEvent("window", "keydown", toString(event.character));
 			//#endif
 		}
 		if(event.type == KEYEVENT_KEYDOWN){
@@ -317,7 +317,7 @@ public:
 		}
 		if(event.type == KEYEVENT_CHAR){
 			//DKINFO("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
-			DKEvent::SendEvent("GLOBAL", "keypress", toString(event.character));
+			DKEvent::SendEvent("window", "keypress", toString(event.character));
 		}
 
 		return false;

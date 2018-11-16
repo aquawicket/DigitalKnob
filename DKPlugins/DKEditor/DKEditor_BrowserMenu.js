@@ -3,7 +3,7 @@ function DKEditor_BrowserMenu_Init()
 {
 	DKDEBUGFUNC();	
 	DKCreate("DKEditor/DKEditor_BrowserMenu.html");
-	DKAddEvent("GLOBAL", "mousedown", DKEditor_BrowserMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DKEditor_BrowserMenu_OnEvent);
 	
 	DKEditor_BrowserMenu_Populate();
 }
@@ -39,7 +39,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	}
 	
 	///////////////////////////
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor/DKEditor_BrowserMenu.html")){
 			return;
 		}

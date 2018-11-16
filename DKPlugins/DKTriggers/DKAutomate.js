@@ -6,8 +6,8 @@ function DKAutomate_Init()
 	DKCreate("DKTriggers/DKAutomate.html");
 	DKCreate("DKTriggers/DKAutomate2.js", function(){
 		DKAddEvent("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
-		//DKAddEvent("GLOBAL", "midi", DKAutomate_OnEvent);
-		//DKAddEvent("GLOBAL", "gui", DKAutomate_OnEvent); //all events
+		//DKAddEvent("window", "midi", DKAutomate_OnEvent);
+		//DKAddEvent("window", "gui", DKAutomate_OnEvent); //all events
 		//DKAddEvent("DKA-Title", "click", DKAutomate_OnEvent);
 		DKAddEvent("DKA-NewButton", "click", DKAutomate_OnEvent);
 		DKAddEvent("DKA-DeleteButton", "click", DKAutomate_OnEvent);

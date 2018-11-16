@@ -7,7 +7,7 @@ function TaskbarMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKGui/TaskbarMenu.html", function(){
-		DKAddEvent("GLOBAL", "mousedown", TaskbarMenu_OnEvent);
+		DKAddEvent("window", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
@@ -164,7 +164,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGui/TaskbarMenu.html")){
 			return;
 		}

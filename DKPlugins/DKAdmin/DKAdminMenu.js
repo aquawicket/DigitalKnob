@@ -3,7 +3,7 @@ function DKAdminMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKAdmin/DKAdminMenu.html", function(){
-		DKAddEvent("GLOBAL", "mousedown", DKAdminMenu_OnEvent);
+		DKAddEvent("window", "mousedown", DKAdminMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", DKAdminMenu_OnEvent);
 		DKAddEvent("OpenDebug", "click", DKAdminMenu_OnEvent);
 		DKAddEvent("PushDKFiles", "click", DKAdminMenu_OnEvent);
@@ -132,7 +132,7 @@ function DKAdminMenu_OnEvent(event)
 		DKAdminMenu_Run(DKWidget_GetValue("DKAdminMenu_Run"));
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKAdmin/DKAdminMenu.html")){
 			return;
 		}

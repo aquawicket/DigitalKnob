@@ -95,27 +95,27 @@ bool DKSDLRocket::Handle(SDL_Event *event)
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
-					//DKEvent::SendEvent("GLOBAL", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym]));
+					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym]));
 					dkRocket->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
-					//DKEvent::SendEvent("GLOBAL", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]));
+					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]));
 					dkRocket->context->ProcessTextInput(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]);
 				}
 				else{
-					//DKEvent::SendEvent("GLOBAL", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //lowercase
+					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //lowercase
 					dkRocket->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
-				//DKEvent::SendEvent("GLOBAL", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+				//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
 				dkRocket->context->ProcessTextInput(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]);
 			}
 			else{
-				//DKEvent::SendEvent("GLOBAL", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //symbol
+				//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //symbol
 				dkRocket->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
 			}
-			//DKEvent::SendEvent("GLOBAL", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
+			//DKEvent::SendEvent("window", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
 			dkRocket->context->ProcessKeyDown((Rocket::Core::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			return false; //allow event to continue
 		}

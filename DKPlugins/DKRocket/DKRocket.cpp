@@ -280,7 +280,7 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(id.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
-	if(same(id,"GLOBAL")){
+	if(same(id,"window")){
 		//DKWARN("DKRocket::SendEvent(): recieved GLOBAL event\n");
 	}
 	
@@ -314,7 +314,7 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 	DKDEBUGFUNC(id, type);
 	if(id.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
-	if(same(id,"GLOBAL")){ return false; }
+	if(same(id,"window")){ return false; }
 	//if(!DKValid("DKRocket0")){ return false; }
 
 	Rocket::Core::Element* element = document->GetElementById(id.c_str());

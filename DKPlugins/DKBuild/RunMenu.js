@@ -3,7 +3,7 @@ function RunMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKBuild/RunMenu.html");
-	DKAddEvent("GLOBAL", "mousedown", RunMenu_OnEvent);
+	DKAddEvent("window", "mousedown", RunMenu_OnEvent);
 	DKAddEvent("Build App", "click", RunMenu_OnEvent);
 	DKAddEvent("Rebuild App", "click", RunMenu_OnEvent);
 	DKAddEvent("Rebuild All", "click", RunMenu_OnEvent);
@@ -135,7 +135,7 @@ function RunMenu_OnEvent(event)
 		});
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(!DKWidget_GetHoverElement()){ return; }
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/RunMenu.html")){
 			return;

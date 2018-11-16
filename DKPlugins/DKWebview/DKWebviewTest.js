@@ -3,8 +3,8 @@ function DKWebviewTest_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKWebview/DKWebviewTest.html");
-	DKAddEvent("GLOBAL", "mousedown", DKWebviewTest_OnEvent);
-	DKAddEvent("GLOBAL", "keydown", DKWebviewTest_OnEvent);
+	DKAddEvent("window", "mousedown", DKWebviewTest_OnEvent);
+	DKAddEvent("window", "keydown", DKWebviewTest_OnEvent);
 	DKAddEvent("DKWebviewTest.html", "mousedown", DKWebviewTest_OnEvent);
 }
 

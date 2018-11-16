@@ -42,7 +42,7 @@ EventLoop.run = function(){};
 /*
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
-    DKSendEvent("GLOBAL", "second", "");
+    DKSendEvent("window", "second", "");
 }
 */
 
@@ -1254,7 +1254,8 @@ function DK_GetId(event)
 	element = DKWidget_GetElement(event);
 	if(element){
 		//DKINFO("GetId("+event+") -> "+element.id+"\n");
-		if(element == window || element == document){ return "GLOBAL"; }
+		if(element == window){ return "window"; }
+		if(element == document){ return "document"; }
 		return element.id; 
 	}
 	if(event[0]){ 
@@ -1301,7 +1302,8 @@ function DK_Id(event, id)
 	DKDEBUGFUNC(event, id);
 	var element = DKWidget_GetElement(event);
 	//DKWARN("DK_Id(): element="+element.id+"\n");
-	if((element == window || element == document) && id == "GLOBAL"){ return true; }
+	if(element == window && id == "window"){ return true; }
+	if(element == document) && id == "document"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
 	return false;
@@ -1359,7 +1361,7 @@ function DKAddEvent(id, type, Function)
 		return;
 	}
 	/////////////////////////////////////////////////
-	if(id == "GLOBAL"){
+	if(id == "window"){
 		element = window;
 	}
 	else{
@@ -1432,7 +1434,7 @@ function DKRemoveEvent(id, type, Function)
 		return false;
 	}
 		
-	if(id == "GLOBAL"){
+	if(id == "window"){
 		element = window;
 	}
 	else{
@@ -1473,7 +1475,7 @@ function DKRemoveEvents(Function)
 		if(typeof events[i+2] == "function" && events[i+2].name == Function.name){
 			//DKINFO("DKRemoveEvent("+events[i]+","+events[i+1]+", Function): events[i+2] == Function\n");
 			//var element;
-			if(events[i] == "GLOBAL"){
+			if(events[i] == "window"){
 				element = window;
 			}
 			else{

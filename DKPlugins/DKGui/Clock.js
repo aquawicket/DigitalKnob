@@ -7,7 +7,7 @@ function Clock_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKGui/Clock.html,DKGui/Taskbar.html");
-	DKAddEvent("GLOBAL", "second", Clock_OnEvent);
+	DKAddEvent("window", "second", Clock_OnEvent);
 	Clock_Update();
 }
 

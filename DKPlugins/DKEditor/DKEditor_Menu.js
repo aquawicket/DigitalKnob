@@ -3,7 +3,7 @@ function DKEditor_Menu_Init()
 {
 	DKDEBUGFUNC();	
 	DKCreate("DKEditor/DKEditor_Menu.html");
-	DKAddEvent("GLOBAL", "mousedown", DKEditor_Menu_OnEvent);
+	DKAddEvent("window", "mousedown", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Refresh", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
@@ -167,7 +167,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 
 	///////////////////////////
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor/DKEditor_Menu.html")){
 			return;
 		}

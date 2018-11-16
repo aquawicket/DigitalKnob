@@ -31,7 +31,7 @@ function DKTooltip_Add(id, string)
 	DKWidget_SetAttribute(id, "tooltip", string);
 	DKAddEvent(id, "mouseenter", DKTooltip_OnEvent);
 	DKAddEvent(id, "mouseout", DKTooltip_OnEvent);
-	DKAddEvent("GLOBAL", "mousedown", DKTooltip_OnEvent);
+	DKAddEvent("window", "mousedown", DKTooltip_OnEvent);
 }
 
 ///////////////////////////

@@ -8,8 +8,8 @@ function DKConsole_Init()
 	DKCreate("DKConsole/DKConsole.html");
 	DKAddEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
 	DKAddEvent("DKConsole_Close", "click", DKConsole_OnEvent);
-	DKAddEvent("GLOBAL", "color", DKConsole_OnEvent);
-	DKAddEvent("GLOBAL", "notify", DKConsole_OnEvent);
+	DKAddEvent("window", "color", DKConsole_OnEvent);
+	DKAddEvent("window", "notify", DKConsole_OnEvent);
 }
 
 ////////////////////////

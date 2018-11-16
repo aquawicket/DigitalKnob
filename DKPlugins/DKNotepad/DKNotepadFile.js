@@ -3,7 +3,7 @@ function DKNotepadFile_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
-	DKAddEvent("GLOBAL", "mousedown", DKNotepadFile_OnEvent);
+	DKAddEvent("window", "mousedown", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_New", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);
 	DKAddEvent("DKNotepadFile_Save", "click", DKNotepadFile_OnEvent);
@@ -45,7 +45,7 @@ function DKNotepadFile_OnEvent(event)
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadFile.html")){
 			return;
 		}

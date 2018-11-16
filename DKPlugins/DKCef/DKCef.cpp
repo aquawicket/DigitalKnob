@@ -876,7 +876,7 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 	}
 
 	replace(files, "\\", "\\\\");
-	DKEvent::SendEvent("GLOBAL", "DKCef_OnFileDialogDismissed", files);
+	DKEvent::SendEvent("window", "DKCef_OnFileDialogDismissed", files);
 }
 
 

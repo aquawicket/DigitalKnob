@@ -23,7 +23,7 @@ function SvnMenu_Init()
 	}
 
 	DKCreate("DKGit/SvnMenu.html", function(){
-		DKAddEvent("GLOBAL", "mousedown", SvnMenu_OnEvent);
+		DKAddEvent("window", "mousedown", SvnMenu_OnEvent);
 		DKAddEvent("Git Update", "click", SvnMenu_OnEvent);
 		DKAddEvent("Git Commit", "click", SvnMenu_OnEvent);
 	});
@@ -48,7 +48,7 @@ function SvnMenu_OnEvent(event)
 		DKThread_DKQueue("GitCommit","SvnMenu_GitCommit();");
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGit/SvnMenu.html")){
 			return;
 		}

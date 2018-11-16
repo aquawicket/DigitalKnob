@@ -6,7 +6,7 @@ function DKSolutionRename_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
-	DKAddEvent("GLOBAL", "mousedown", DKSolutionRename_OnEvent);
+	DKAddEvent("window", "mousedown", DKSolutionRename_OnEvent);
 	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
 	
 	DKWidget_SetFocus("DKSolutionRename_box");
@@ -30,7 +30,7 @@ function DKSolutionRename_OnEvent(event)
 			return;
 		}
 	}
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionRename.html")){
 			return;
 		}

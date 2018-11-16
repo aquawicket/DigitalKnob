@@ -57,7 +57,7 @@ void session::handle_read(const boost::system::error_code& error, size_t bytes_t
 	//DKDEBUGFUNC(error, bytes_transferred);
 	if(!error){
 	DKINFO(DKString(data_,bytes_transferred)+"\n");
-	DKEvent::SendEvent("GLOBAL", "server", DKString(data_, bytes_transferred));
+	DKEvent::SendEvent("window", "server", DKString(data_, bytes_transferred));
 
 	socket_.async_read_some(boost::asio::buffer(data_, max_length),
         boost::bind(&session::handle_read, this,

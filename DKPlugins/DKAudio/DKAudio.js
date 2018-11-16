@@ -91,14 +91,14 @@ function DKAudio_SetTime(seconds)
 function DKAudio_TimeUpdate()
 {
 	DKDEBUGFUNC();
-	DKSendEvent("GLOBAL", "timeupdate");
+	DKSendEvent("window", "timeupdate");
 }
 
 ////////////////////////
 function DKAudio_Ended()
 {
 	DKDEBUGFUNC();
-	DKSendEvent("GLOBAL", "ended");
+	DKSendEvent("window", "ended");
 }
 
 //////////////////////////

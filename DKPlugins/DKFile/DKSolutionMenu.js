@@ -6,7 +6,7 @@ function DKSolutionMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionMenu.html");
-	DKAddEvent("GLOBAL", "mousedown", DKSolutionMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
@@ -71,7 +71,7 @@ function DKSolutionMenu_OnEvent(event)
 		DKSolutionMenu_UpxCompress();
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionMenu.html")){
 			return;
 		}

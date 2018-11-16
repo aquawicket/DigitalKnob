@@ -219,7 +219,7 @@ bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *mess
 {
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromClient", message_);
+	DKEvent::SendEvent("window", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
 }
 
@@ -228,7 +228,7 @@ bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *mess
 {
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKEvent::SendEvent("GLOBAL", "DKWebSockets_OnMessageFromServer", message_);
+	DKEvent::SendEvent("window", "DKWebSockets_OnMessageFromServer", message_);
 	return true;
 }
 

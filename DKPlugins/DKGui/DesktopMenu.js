@@ -5,7 +5,7 @@ function DesktopMenu_Init()
 	DKWidget_SetProperty("DKGui/DesktopMenu.html","top",DKWindow_GetMouseY()+"px");
 	DKWidget_SetProperty("DKGui/DesktopMenu.html","left",DKWindow_GetMouseX()+"px");
 	
-	DKAddEvent("GLOBAL", "mousedown", DesktopMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DesktopMenu_OnEvent);
 	DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
 	DKAddEvent("ToggleFullscreen", "click", DesktopMenu_OnEvent);
 }
@@ -31,7 +31,7 @@ function DesktopMenu_OnEvent(event)
 		Desktop_ToggleFullscreen();
 	}
 	
-	if(DK_Id(event, "GLOBAL")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGui/DesktopMenu.html")){
 			return;
 		}

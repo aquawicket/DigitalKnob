@@ -13,7 +13,7 @@ function DKHandles_Init()
 	DKAddEvent("Prev", "click", DKHandles_OnEvent);
 	DKAddEvent("Next", "click", DKHandles_OnEvent);
 	DKAddEvent("Highlight", "click", DKHandles_OnEvent);
-	DKAddEvent("GLOBAL", "DKHandles_WindowChanged", DKHandles_OnEvent);
+	DKAddEvent("window", "DKHandles_WindowChanged", DKHandles_OnEvent);
 	DKHandles_UpdateWindowList();
 	
 	document.getElementById("search").ondragstart = function() { return false; };
