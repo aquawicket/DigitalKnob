@@ -4,7 +4,7 @@ var GIT = "";
 function DKGit_Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape_Create("DKThreadPool");
+	//DKDuktape_Create("DKThreadPool");
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
