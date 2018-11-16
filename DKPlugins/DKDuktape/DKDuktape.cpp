@@ -217,17 +217,17 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString init = filename+"_Init()";
+	DKString func = filename+"_Init";
 
-	DKString input = "'test';";//typeof "+init;
-	replace(input,"(","");
-	replace(input,")","");
 	DKString rval;
-	DKWARN("DKDuktape::CallInit("+file+"): input = "+input+"\n");
-	RunDuktape(input, rval);
-	DKWARN("DKDuktape::CallInit("+file+"): rval = "+rval+"\n");
+	RunDuktape("(typeof "+func+" === 'function')", rval);
+	if(!toBool(rval)){
+		DKWARN(func+" undefined\n");
+		return true;
+	}
 
-	if(duk_peval_string(ctx, init.c_str()) != 0){
+	func += "()";
+	if(duk_peval_string(ctx, func.c_str()) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.name`
