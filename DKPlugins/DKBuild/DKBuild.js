@@ -25,7 +25,7 @@ function DKBuild_Init()
 	DKDuktape_Create("DKCurl");
 	//DKDuktape_Create("DKGit/DKGit.js", function(){});
 
-	//console.log(DK_GetOS()+"\n");
+	//console.log(DK_GetOS()+"");
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
 		//SVN = "C:/Program Files/Subversion/bin/svn.exe";
@@ -78,13 +78,13 @@ function DKBuild_ValidateCmake()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	console.log("Looking for CMake\n");
-	//console.log(CMAKE+"\n");
+	console.log("Looking for CMake");
+	//console.log(CMAKE);
 	if(!DKFile_Exists(CMAKE)){
-		console.log("Please install CMake\n");
+		console.log("Please install CMake");
 		DKBuild_InstallCmake();
 	}
-	console.log("Found CMake\n");
+	console.log("Found CMake");
 	if(DK_GetOS() == "Mac"){
 		CMAKE = "cmake";
 	}
@@ -94,7 +94,7 @@ function DKBuild_ValidateCmake()
 function DKBuild_InstallCmake()
 {
 	DKDEBUGFUNC();
-	console.log("Installing CMake\n");
+	console.log("Installing CMake");
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -112,7 +112,7 @@ function DKBuild_InstallCmake()
 		DK_Execute("sudo apt-get install cmake");
 	}
 	else{
-		console.log("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
+		console.log("ERROR: unrecognied HOST OS: "+DK_GetOS());
 	}
 }
 
@@ -124,19 +124,19 @@ function DKBuild_ValidateVC2015()
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
-	console.log("Looking for Visual Studio 2015\n");
-	//console.log(VC2015+"\n");
+	console.log("Looking for Visual Studio 2015");
+	//console.log(VC2015);
 	if(!DKFile_Exists(VC2015)){
 		DKBuild_InstallVC2015();
 	}
-	console.log("Found Visual Studio 2015\n");
+	console.log("Found Visual Studio 2015");
 }
 
 ////////////////////////////////
 function DKBuild_InstallVC2015()
 {
 	DKDEBUGFUNC();
-	console.log("Installing Visual Studio 2015\n");
+	console.log("Installing Visual Studio 2015");
 	var datapath = DKAssets_LocalAssets();
 	
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU__908841471.1484716364.exe", datapath);
@@ -149,20 +149,20 @@ function DKBuild_ValidateGcc()
 	DKDEBUGFUNC();
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	console.log("Looking for GCC\n");
-	//console.log(GCC+"\n");
+	console.log("Looking for GCC");
+	//console.log(GCC);
 	if(!DKFile_Exists(GCC)){
-		console.log("Please install GCC\n");
+		console.log("Please install GCC");
 		DKBuild_InstallGcc();
 	}
-	console.log("Found Gcc\n");
+	console.log("Found Gcc");
 }
 
 ///////////////////////////////
 function DKBuild_InstallGcc()
 {
 	DKDEBUGFUNC();
-	console.log("Installing Gcc\n");
+	console.log("Installing Gcc");
 	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
 
@@ -172,19 +172,19 @@ function DKBuild_ValidateXcode()
 	DKDEBUGFUNC();
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	console.log("Looking for Xcode\n");
-	//console.log(XCODE+"\n");
+	console.log("Looking for Xcode");
+	//console.log(XCODE);
 	if(!DKFile_Exists(XCODE)){
-		console.log("Please install Xcode\n");
+		console.log("Please install Xcode");
 		DKBuild_InstallXcode();
 	}
-	console.log("Found Xcode\n");
+	console.log("Found Xcode");
 }
 ///////////////////////////////
 function DKBuild_InstallXcode()
 {
 	DKDEBUGFUNC();
-	console.log("Installing Xcode\n");
+	console.log("Installing Xcode");
 	var datapath = DKAssets_LocalAssets();
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
 }
@@ -195,80 +195,80 @@ function DKBuild_OsCheck()
 	DKDEBUGFUNC();
 	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
-			console.error(OS+" can only be build from a WIN64 machine\n"); return false;
+			console.error(OS+" can only be build from a WIN64 machine"); return false;
 		}
 		if(OS == "mac"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "linux"){
-			console.error(OS+" can only be build from a LINUX machine\n"); return false;
+			console.error(OS+" can only be build from a LINUX machine"); return false;
 		}
 	}
 	if(DK_GetOS() == "Win64"){
 		if(OS == "mac"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "linux"){
-			console.error(OS+" can only be build from a LINUX machine\n"); return false;
+			console.error(OS+" can only be build from a LINUX machine"); return false;
 		}
 	}
 	if(DK_GetOS() == "Mac"){
 		if(OS == "win32"){
-			console.error(OS+" can only be build from a Windows machine\n"); return false;
+			console.error(OS+" can only be build from a Windows machine"); return false;
 		}
 		if(OS == "win64"){
-			console.error(OS+" can only be build from an WIN64 machine\n"); return false;
+			console.error(OS+" can only be build from an WIN64 machine"); return false;
 		}
 		if(OS == "linux"){
-			console.error(OS+" can only be build from a linux machine\n"); return false;
+			console.error(OS+" can only be build from a linux machine"); return false;
 		}
 		if(OS == "linux32"){
-			console.error(OS+" can only be build from a linux machine\n"); return false;
+			console.error(OS+" can only be build from a linux machine"); return false;
 		}
 		if(OS == "linux64"){
-			console.error(OS+" can only be build from a linux machine\n"); return false;
+			console.error(OS+" can only be build from a linux machine"); return false;
 		}
 		//if(OS == "andoroid"){
-		//	console.error(OS+" can only be build from a Windows machine\n"); return false;
+		//	console.error(OS+" can only be build from a Windows machine"); return false;
 		//}
 	}
 	if(DK_GetOS() == "Linux"){
 		if(OS == "win32"){
-			console.error(OS+" can only be build from a Windows machine\n"); return false;
+			console.error(OS+" can only be build from a Windows machine"); return false;
 		}
 		if(OS == "win64"){
-			console.error(OS+" can only be build from an WIN64 machine\n"); return false;
+			console.error(OS+" can only be build from an WIN64 machine"); return false;
 		}
 		if(OS == "mac"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		if(OS == "ios-simulator"){
-			console.error(OS+" can only be build from an OSX machine\n"); return false;
+			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
 		//if(OS == "andoroid"){
-		//	console.error(OS+" can only be build from a Windows machine\n"); return false;
+		//	console.error(OS+" can only be build from a Windows machine"); return false;
 		//}
 	}
 	if(DK_GetOS() == "Android"){
-		console.error("Android is not capable of compiling DKApps..  please use a desktop system\n"); return false;
+		console.error("Android is not capable of compiling DKApps..  please use a desktop system"); return false;
 	}
 	if(DK_GetOS() == "iOS"){
-		console.error("iOS is not capable of compiling DKApps..  please use a desktop system\n"); return false;
+		console.error("iOS is not capable of compiling DKApps..  please use a desktop system"); return false;
 	}
 	return true;
 }
@@ -277,24 +277,24 @@ function DKBuild_OsCheck()
 function DKBuild_ResetAppsPlugins()
 {
 	DKDEBUGFUNC();
-	console.log("Deleting Apps and Plugins... \n");
+	console.log("Deleting Apps and Plugins... ");
 	
 	// Delete everything in DKApps except DKBuild
 	var apps = DKFile_DirectoryContents(DKPATH+"/DKApps");
 	var list = apps.split(',');
 	for(var i=0; i<list.length; ++i){
 		if(list[i] == "DKBuilder"){ continue; }
-		//console.log("Deleting "+DKPATH+"/DKApps/"+list[i]+"\n");
+		//console.log("Deleting "+DKPATH+"/DKApps/"+list[i]);
 		DKFile_Delete(DKPATH+"/DKApps/"+list[i]);
 	}
 	
 	//Multipe user folders
 	var contents = DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
-	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
+	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]);
 		var url = DKFile_GetSetting(files[i], "[MYGIT]");
-		if(url){ //console.log("url = "+url+"\n");
-			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
+		if(url){ //console.log("url = "+url);
+			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder);
 			DKFile_Delete(DKPATH+"/"+folder);
 		}
 	}
@@ -308,8 +308,8 @@ function DKBuild_Reset3rdParty()
 {
 	DKDEBUGFUNC();
 	//TODO
-	console.log("Deleting 3rdParty... \n");
-	console.log("Please wait. \n");
+	console.log("Deleting 3rdParty... ");
+	console.log("Please wait. ");
 	DKFile_Delete(DKPATH+"/3rdParty");
 }
 
@@ -333,33 +333,33 @@ function DKBuild_GetAppList()
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
 		if(files[i].indexOf(".txt") <=1){ continue; }
-		//console.log("files["+i+"] = "+files[i]+"\n");
+		//console.log("files["+i+"] = "+files[i]);
 		var url = DKFile_GetSetting(DKPATH+"/"+files[i], "[MYGIT]");
 		if(url){ 
-			//console.log("url = "+url+"\n");
+			//console.log("url = "+url);
 			var folder = files[i].replace(".txt",""); 
-			//console.log("folder = "+folder+"\n");
+			//console.log("folder = "+folder);
 			var apps2 = DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
 			if(apps2){
-				//console.log("apps2 = "+apps2+"\n");
+				//console.log("apps2 = "+apps2);
 				var APP_LIST2 = apps2.split(",");
 				for(var b=0; b<APP_LIST2.length; b++){
-					//console.log("APP_LIST2["+b+"] = "+APP_LIST2[b]+"\n");
+					//console.log("APP_LIST2["+b+"] = "+APP_LIST2[b]);
 					if(!DKFile_IsDirectory(DKPATH+"/"+folder+"/DKApps/"+APP_LIST2[b]) || APP_LIST2[b] == ".svn" || APP_LIST2[b] == ".git"){
 						APP_LIST2.splice(b, 1);
 						b=0;
 					}
 				}
 				APP_LIST = APP_LIST.concat(APP_LIST2);
-				//console.log("apps = "+apps+"\n");
+				//console.log("apps = "+apps);
 			}
 		}
 	}
 	
 	/*
-	console.log("*****************\n");
+	console.log("*****************");
 	for(var i=0; i<APP_LIST.length; i++){
-		console.log(APP_LIST[i]+"\n");
+		console.log(APP_LIST[i]);
 	}
 	*/
 }
@@ -368,7 +368,7 @@ function DKBuild_GetAppList()
 function DKBuild_DoResults()
 {
 	DKDEBUGFUNC();
-	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL+"\n");
+	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL);
 	if(!DKBuild_OsCheck()){ return; }
 	
 	//Update the apps CmakeLists.txt file
@@ -455,11 +455,11 @@ function DKBuild_DoResults()
 		//upx compress the exe file
 		/*
 		if(DKFile_Exists(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe")){
-			console.warn("UPX compressing exe... please wait\n");
+			console.warn("UPX compressing exe... please wait");
 			DK_Execute(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release/"+APP+".exe");
 		}
 		else{
-			console.warn("DKBuild_DoResults(): UPX does not exists\n");
+			console.warn("DKBuild_DoResults(): UPX does not exists");
 		}
 		*/
 	}
@@ -504,11 +504,11 @@ function DKBuild_DoResults()
 		//upx compress the exe file
 		/*
 		if(DKFile_Exists(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe")){
-			console.warn("UPX compressing exe... please wait\n");
+			console.warn("UPX compressing exe... please wait");
 			DK_Execute(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win64/Release/"+APP+".exe");
 		}
 		else{
-			console.warn("DKBuild_DoResults(): UPX does not exists\n");
+			console.warn("DKBuild_DoResults(): UPX does not exists");
 		}
 		*/
 	}
@@ -564,22 +564,22 @@ function DKBuild_DoResults()
 			
 			//update install_name_tool if cef present
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
-				console.log("USING CHROMIUM EMBEDDED FRAMEWORK\n");
+				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/MacOS/"+APP+"\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 			}
 		}
@@ -593,22 +593,22 @@ function DKBuild_DoResults()
 			
 			//update install_name_tool if cef present
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/Chromium Embedded Framework.framework")){
-				console.log("USING CHROMIUM EMBEDDED FRAMEWORK\n");
+				console.log("USING CHROMIUM EMBEDDED FRAMEWORK");
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/MacOS/"+APP+"\"";
-				console.log(command+"\n");
+				console.log(command);
 				DK_Execute(command);
 			}
 		}
@@ -706,8 +706,8 @@ function DKBuild_DoResults()
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
 			string += "Terminal=true\n";
-			string += "Name="+APP+"\n";
-			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+"\n";
+			string += "Name="+APP;
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP;
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
 			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
 		}
@@ -728,8 +728,8 @@ function DKBuild_DoResults()
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
 			string += "Terminal=true\n";
-			string += "Name="+APP+"\n";
-			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+"\n";
+			string += "Name="+APP;
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP;
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
 			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Release/"+APP+".desktop");
 		}
@@ -755,8 +755,8 @@ function DKBuild_DoResults()
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
 			string += "Terminal=true\n";
-			string += "Name="+APP+"\n";
-			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+"\n";
+			string += "Name="+APP;
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP;
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
 			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug/"+APP+".desktop");
 		}
@@ -777,8 +777,8 @@ function DKBuild_DoResults()
 			string += "Version=1.0\n";
 			string += "Type=Application\n";
 			string += "Terminal=true\n";
-			string += "Name="+APP+"\n";
-			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+"\n";
+			string += "Name="+APP;
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP;
 			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
 			DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux64/Release/"+APP+".desktop");
 		}
