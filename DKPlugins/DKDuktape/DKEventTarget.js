@@ -3,6 +3,7 @@ var stored_events = [];
 ///////////////////////////////////////////
 var EventFromCPP = function(pointer, event)
 {
+	//DKDEBUGFUNC();
 	console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
@@ -15,7 +16,7 @@ var EventFromCPP = function(pointer, event)
 var EventTarget = function(pointer)
 {
 	//DKDEBUGFUNC();
-	console.warn("EventTarget("+pointer+")");
+	//console.warn("EventTarget("+pointer+")");
 	
 	this.pointer = pointer;
 	this.listeners = {};
@@ -27,7 +28,6 @@ var EventTarget = function(pointer)
 			stored_events.push(this);
 		}
 		DKEventTarget_addEventListner(this.pointer, type, callback);
-		//DKRocket_addEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			this.listeners[type] = [];
 		}
@@ -36,7 +36,6 @@ var EventTarget = function(pointer)
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
 		console.warn("removeEventListener this.pointer = "+this.pointer);
 		DKEventTarget_removeEventListner(this.pointer, type, callback);
-		//DKRocket_removeEventListener(this.pointer, type, useCapture);
 		if(!(type in this.listeners)){
 			return;
 		}
