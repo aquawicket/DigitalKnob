@@ -5,7 +5,7 @@ function IconMaker_Init()
 {
 	DKDEBUGFUNC();
 	IMAGEMAGICK = DKFile_GetShortName(IMAGEMAGICK);
-	console.log("IMAGEMAGICK="+IMAGEMAGICK+"\n");
+	console.log("IMAGEMAGICK="+IMAGEMAGICK);
 }
 
 ////////////////////////
@@ -70,13 +70,13 @@ function IconMaker_Create(AppPath)
 function IconMaker_ValidateImageMagick()
 {
 	DKDEBUGFUNC();
-	console.log("Looking for ImageMagick...\n");
-	//console.log(SVN+"\n");
+	console.log("Looking for ImageMagick...");
+	//console.log(SVN);
 	if(!DKFile_Exists(IMAGEMAGICK)){
-		console.log("Installing ImageMagick...\n");
+		console.log("Installing ImageMagick...");
 		IconMaker_InstallImageMagick();
 	}
-	console.log("Found ImageMagick\n");
+	console.log("Found ImageMagick");
 }
 
 ///////////////////////////////////////
@@ -88,7 +88,7 @@ function IconMaker_InstallImageMagick()
 	
 	//FIXME - we need to know if this fails.
 	//if(!DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath)){ 
-	//	console.warn("DKCurl_Download(): download failed\n");
+	//	console.warn("DKCurl_Download(): download failed");
 	//	return false; 
 	//}
 	DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip");
