@@ -219,6 +219,14 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKFile::RemoveExtention(filename);
 	DKString init = filename+"_Init()";
 
+	DKString input = "'test';";//typeof "+init;
+	replace(input,"(","");
+	replace(input,")","");
+	DKString rval;
+	DKWARN("DKDuktape::CallInit("+file+"): input = "+input+"\n");
+	RunDuktape(input, rval);
+	DKWARN("DKDuktape::CallInit("+file+"): rval = "+rval+"\n");
+
 	if(duk_peval_string(ctx, init.c_str()) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
@@ -431,7 +439,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 	else{
 		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value?
     }
-    duk_pop(ctx);  // pop result/error
+    duk_pop(ctx);
 
 	return true;
 }
@@ -512,7 +520,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
-	duk_pop(ctx);  // ignore result?
+	duk_pop(ctx);
 
 	return true;
 }
@@ -558,8 +566,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
-	duk_pop(ctx);
-
+	
 	//get return value
 	if(duk_is_string(ctx, -1)){
 		rval = duk_get_string(ctx, -1);
@@ -567,6 +574,8 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	if(duk_is_boolean(ctx, -1)){
 		rval = toString(duk_get_boolean(ctx, -1));
 	}
+
+	duk_pop(ctx);
 	
 	return true;
 }
