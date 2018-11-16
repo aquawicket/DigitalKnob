@@ -1,6 +1,3 @@
-//https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
-function DKConsole_Init(){}
-
 ///////////////////////////////
 var Console = function(pointer)
 {

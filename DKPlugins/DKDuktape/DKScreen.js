@@ -1,5 +1,3 @@
-function DKScreen_Init(){}
-
 //////////////////////////////
 var Screen = function(pointer)
 {

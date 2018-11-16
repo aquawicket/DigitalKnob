@@ -1,7 +1,5 @@
 var stored_events = [];
 
-function DKEventTarget_Init(){};
-
 ///////////////////////////////////////////
 var EventFromCPP = function(pointer, event)
 {
