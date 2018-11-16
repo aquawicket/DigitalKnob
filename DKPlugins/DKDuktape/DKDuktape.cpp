@@ -166,10 +166,17 @@ bool DKDuktape::CallEnd(const DKString& file)
 	DKString filename;
 	DKFile::GetFileName(file, filename);
 	DKFile::RemoveExtention(filename);
-	DKString end = filename+"_End";
-	DKFile::RemoveExtention(end);
+	DKString func = filename+"_End";
 
-	if(duk_peval_string(ctx, end.c_str()) != 0){
+	DKString rval;
+	RunDuktape("(typeof "+func+" === 'function')", rval);
+	if(!toBool(rval)){
+		DKWARN(func+" undefined\n");
+		return true;
+	}
+
+	func += "()";
+	if(duk_peval_string(ctx, func.c_str()) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 		DKString name = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.name`
