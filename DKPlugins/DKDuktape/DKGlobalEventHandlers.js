@@ -1,3 +1,5 @@
+function DKGlobalEventHandlers_Init(){}
+
 ///////////////////////////////////////////
 var GlobalEventHandlers = function(pointer)
 {

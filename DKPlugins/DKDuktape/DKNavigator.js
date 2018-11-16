@@ -1,3 +1,5 @@
+function DKNavigator_Init(){}
+
 /////////////////////////////////
 var Navigator = function(pointer)
 {

@@ -1,3 +1,5 @@
+function DKWindow_Init(){}
+
 //////////////////////////////
 var Window = function(pointer)
 {

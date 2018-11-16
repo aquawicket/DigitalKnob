@@ -1,3 +1,5 @@
+function DKXMLHttpRequest_Init(){}
+
 ////////////////////////////////
 var XMLHttpRequest = function(){
 	
