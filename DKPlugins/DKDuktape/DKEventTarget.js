@@ -23,7 +23,7 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		console.warn("addEventListener this.pointer = "+this.pointer+" type = "+type);
+		console.warn("addEventListener this.pointer = "+this.pointer+", type = "+type);
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
