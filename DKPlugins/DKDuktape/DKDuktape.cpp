@@ -91,7 +91,7 @@ bool DKDuktape::Init()
 		    return false;
 		}
 
-		DKClass::DKCreate("DKJS");
+		DKClass::DKCreate("DKDuktapeJS");
 		DKClass::DKCreate("DKConsole");
 		DKClass::DKCreate("DKNavigator");
 		DKClass::DKCreate("DKEventTarget");

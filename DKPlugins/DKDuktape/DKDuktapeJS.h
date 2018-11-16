@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKJS_H
-#define DKJS_H
+#ifndef DKDuktapeJS_H
+#define DKDuktapeJS_H
 
 #include "DKDuktape/DKDuktape.h"
 
-////////////////////////////////////
-class DKJS : public DKObjectT<DKJS>
+/////////////////////////////////////////////////
+class DKDuktapeJS : public DKObjectT<DKDuktapeJS>
 {
 public:
 	bool Init();
@@ -118,7 +118,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKJS, true)
+REGISTER_OBJECT(DKDuktapeJS, true)
 
-#endif //DKJS_H
+#endif //DKDuktapeJS_H
 #endif //USE_DKDuktape

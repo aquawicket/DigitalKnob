@@ -7,11 +7,11 @@
 #include "DK/DKPlugin.h"
 #include "DK/DKUnix.h"
 #include "DK/DKUtil.h"
-#include "DKDuktape/DKJS.h"
+#include "DKDuktape/DKDuktapeJS.h"
 #include <signal.h>
 
-/////////////////
-bool DKJS::Init()
+////////////////////////
+bool DKDuktapeJS::Init()
 {
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKFileJS");
@@ -40,103 +40,103 @@ bool DKJS::Init()
 	//duk_eval_string(DKDuktape::ctx, "var DK_INFO = 2;");
 	//duk_eval_string(DKDuktape::ctx, "var DK_DEBUG = 3;");
 
-	DKDuktape::AttachFunction("DKDEBUGFUNC", DKJS::_DKDEBUGFUNC);
-	DKDuktape::AttachFunction("DKDEBUGVARS", DKJS::_DKDEBUGVARS);
-	//DKDuktape::AttachFunction("DKDuktape_AddEvent", DKJS::_DKAddEvent);
-	DKDuktape::AttachFunction("DKAvailable", DKJS::_DKAvailable);
-	DKDuktape::AttachFunction("DKClose", DKJS::_DKClose);
-	DKDuktape::AttachFunction("DKDuktape_Create", DKJS::_DKCreate);
-	DKDuktape::AttachFunction("DKLoadPlugin", DKJS::_DKLoadPlugin);
-	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKJS::_DKRemoveEvent);
-	//DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKJS::_DKRemoveEvents);
-	DKDuktape::AttachFunction("DK_SendEvent", DKJS::_DKSendEvent);
-	DKDuktape::AttachFunction("DK_Valid", DKJS::_DKValid);
+	DKDuktape::AttachFunction("DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
+	DKDuktape::AttachFunction("DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
+	//DKDuktape::AttachFunction("DKDuktape_AddEvent", DKDuktapeJS::_DKAddEvent);
+	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
+	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
+	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
+	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
+	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
+	//DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
+	DKDuktape::AttachFunction("DK_SendEvent", DKDuktapeJS::_DKSendEvent);
+	DKDuktape::AttachFunction("DK_Valid", DKDuktapeJS::_DKValid);
 
-	DKDuktape::AttachFunction("DK_Beep", DKJS::Beep);
-	DKDuktape::AttachFunction("DK_CallFunc", DKJS::CallFunc);
-	DKDuktape::AttachFunction("DK_ClearEvents", DKJS::ClearEvents);
-	DKDuktape::AttachFunction("DK_ClickImage", DKJS::ClickImage);
-	DKDuktape::AttachFunction("DK_CpuUsed", DKJS::CpuUsed);
-	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKJS::CpuUsedByApp);
-	DKDuktape::AttachFunction("DK_Crash", DKJS::Crash);
-	DKDuktape::AttachFunction("DK_DoFrame", DKJS::DoFrame);
-	DKDuktape::AttachFunction("DK_DoubleClick", DKJS::DoubleClick);
-	DKDuktape::AttachFunction("DK_Execute", DKJS::Execute);
-	DKDuktape::AttachFunction("DK_Exit", DKJS::Exit);
-	DKDuktape::AttachFunction("DK_GetArgs", DKJS::GetArgs);
-	DKDuktape::AttachFunction("DK_GetBrowser", DKJS::GetBrowser);
-	DKDuktape::AttachFunction("DK_GetClipboard", DKJS::GetClipboard);
-	DKDuktape::AttachFunction("DK_GetData", DKJS::GetData);
-	DKDuktape::AttachFunction("DK_GetDate", DKJS::GetDate);
-	DKDuktape::AttachFunction("DK_GetEvents", DKJS::GetEvents);
-	DKDuktape::AttachFunction("DK_GetFps", DKJS::GetFps);
-	DKDuktape::AttachFunction("DK_GetFramerate", DKJS::GetFramerate);
-	DKDuktape::AttachFunction("DK_GetFrames", DKJS::GetFrames);
-	DKDuktape::AttachFunction("DK_GetFunctions", DKJS::GetFunctions);
-	DKDuktape::AttachFunction("DK_GetId", DKJS::GetId);
-	//DKDuktape::AttachFunction("DK_GetJavascript", DKJS::GetJavascript);
-	DKDuktape::AttachFunction("DK_GetKey", DKJS::GetKey);
-	DKDuktape::AttachFunction("DK_GetLocalIP", DKJS::GetLocalIP);
-	DKDuktape::AttachFunction("DK_GetMouseX", DKJS::GetMouseX); 
-	DKDuktape::AttachFunction("DK_GetMouseY", DKJS::GetMouseY);
-	DKDuktape::AttachFunction("DK_GetOS", DKJS::GetOS);
-	DKDuktape::AttachFunction("DK_GetObjects", DKJS::GetObjects);
-	DKDuktape::AttachFunction("DK_GetPixelUnderMouse", DKJS::GetPixelUnderMouse);
-	DKDuktape::AttachFunction("DK_GetProcessList", DKJS::GetProcessList);
-	DKDuktape::AttachFunction("DK_GetScreenHeight", DKJS::GetScreenHeight);
-	DKDuktape::AttachFunction("DK_GetScreenWidth", DKJS::GetScreenWidth);
-	DKDuktape::AttachFunction("DK_GetTicks", DKJS::GetTicks);
-	DKDuktape::AttachFunction("DK_GetTime", DKJS::GetTime);
-	DKDuktape::AttachFunction("DK_GetType", DKJS::GetType);
-	DKDuktape::AttachFunction("DK_GetUsername", DKJS::GetUsername);
-	DKDuktape::AttachFunction("DKDuktape_GetValue", DKJS::GetValue);
-	DKDuktape::AttachFunction("DK_GetVolume", DKJS::GetVolume);
-	DKDuktape::AttachFunction("DK_HideConsole", DKJS::HideConsole);
-	DKDuktape::AttachFunction("DK_IE", DKJS::IE);
-	DKDuktape::AttachFunction("DK_Include", DKJS::Include);
-	DKDuktape::AttachFunction("DK_KeyIsDown", DKJS::KeyIsDown);
-	DKDuktape::AttachFunction("DK_LeftClick", DKJS::LeftClick);
-	DKDuktape::AttachFunction("DK_LogGuiConsole", DKJS::LogGuiConsole);
-	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKJS::LowPowerMonitor);
-	DKDuktape::AttachFunction("DK_MessageBox", DKJS::MessageBox);
-	DKDuktape::AttachFunction("DK_MouseToImage", DKJS::MouseToImage);
-	DKDuktape::AttachFunction("DK_PhysicalMemory", DKJS::PhysicalMemory);
-	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKJS::PhysicalMemoryUsed);
-	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKJS::PhysicalMemoryUsedByApp);
-	DKDuktape::AttachFunction("DK_PressKey", DKJS::PressKey);
-	DKDuktape::AttachFunction("DK_QueueDuktape", DKJS::QueueDuktape);
-	DKDuktape::AttachFunction("DK_ReleaseKey", DKJS::ReleaseKey);
-	DKDuktape::AttachFunction("DK_Reload", DKJS::Reload);
-	DKDuktape::AttachFunction("DK_RightClick", DKJS::RightClick);
-	DKDuktape::AttachFunction("DK_Run", DKJS::Run);
-	DKDuktape::AttachFunction("DK_RunDuktape", DKJS::RunDuktape);
-	DKDuktape::AttachFunction("DK_SetBrightness", DKJS::SetBrightness);
-	DKDuktape::AttachFunction("DK_SetClipboard", DKJS::SetClipboard);
-	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKJS::SetClipboardFiles);
-	DKDuktape::AttachFunction("DK_SetClipboardImage", DKJS::SetClipboardImage);
-	DKDuktape::AttachFunction("DK_SetCursorPos", DKJS::SetCursorPos);
-	DKDuktape::AttachFunction("DK_SetFramerate", DKJS::SetFramerate);
-	DKDuktape::AttachFunction("DK_SetLog", DKJS::_SetLog);
-	DKDuktape::AttachFunction("DK_SetVolume", DKJS::SetVolume);
-	DKDuktape::AttachFunction("DK_ShowConsole", DKJS::ShowConsole);
-	DKDuktape::AttachFunction("DK_Sleep", DKJS::Sleep);
-	DKDuktape::AttachFunction("DK_StopPropagation", DKJS::StopPropagation);
-	DKDuktape::AttachFunction("DK_StrokeKey", DKJS::StrokeKey);
-	DKDuktape::AttachFunction("DK_System", DKJS::System);
-	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKJS::TurnOffMonitor);
-	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKJS::TurnOnMonitor);
-	DKDuktape::AttachFunction("DK_Value", DKJS::Value);
-	DKDuktape::AttachFunction("DK_VirtualMemory", DKJS::VirtualMemory);
-	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKJS::VirtualMemoryUsed);
-	DKDuktape::AttachFunction("DK_VirtualMemoryUsedByApp", DKJS::VirtualMemoryUsedByApp);
-	DKDuktape::AttachFunction("DK_WaitForImage", DKJS::WaitForImage);
+	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
+	DKDuktape::AttachFunction("DK_CallFunc", DKDuktapeJS::CallFunc);
+	DKDuktape::AttachFunction("DK_ClearEvents", DKDuktapeJS::ClearEvents);
+	DKDuktape::AttachFunction("DK_ClickImage", DKDuktapeJS::ClickImage);
+	DKDuktape::AttachFunction("DK_CpuUsed", DKDuktapeJS::CpuUsed);
+	DKDuktape::AttachFunction("DK_CpuUsedByApp", DKDuktapeJS::CpuUsedByApp);
+	DKDuktape::AttachFunction("DK_Crash", DKDuktapeJS::Crash);
+	DKDuktape::AttachFunction("DK_DoFrame", DKDuktapeJS::DoFrame);
+	DKDuktape::AttachFunction("DK_DoubleClick", DKDuktapeJS::DoubleClick);
+	DKDuktape::AttachFunction("DK_Execute", DKDuktapeJS::Execute);
+	DKDuktape::AttachFunction("DK_Exit", DKDuktapeJS::Exit);
+	DKDuktape::AttachFunction("DK_GetArgs", DKDuktapeJS::GetArgs);
+	DKDuktape::AttachFunction("DK_GetBrowser", DKDuktapeJS::GetBrowser);
+	DKDuktape::AttachFunction("DK_GetClipboard", DKDuktapeJS::GetClipboard);
+	DKDuktape::AttachFunction("DK_GetData", DKDuktapeJS::GetData);
+	DKDuktape::AttachFunction("DK_GetDate", DKDuktapeJS::GetDate);
+	DKDuktape::AttachFunction("DK_GetEvents", DKDuktapeJS::GetEvents);
+	DKDuktape::AttachFunction("DK_GetFps", DKDuktapeJS::GetFps);
+	DKDuktape::AttachFunction("DK_GetFramerate", DKDuktapeJS::GetFramerate);
+	DKDuktape::AttachFunction("DK_GetFrames", DKDuktapeJS::GetFrames);
+	DKDuktape::AttachFunction("DK_GetFunctions", DKDuktapeJS::GetFunctions);
+	DKDuktape::AttachFunction("DK_GetId", DKDuktapeJS::GetId);
+	//DKDuktape::AttachFunction("DK_GetJavascript", DKDuktapeJS::GetJavascript);
+	DKDuktape::AttachFunction("DK_GetKey", DKDuktapeJS::GetKey);
+	DKDuktape::AttachFunction("DK_GetLocalIP", DKDuktapeJS::GetLocalIP);
+	DKDuktape::AttachFunction("DK_GetMouseX", DKDuktapeJS::GetMouseX); 
+	DKDuktape::AttachFunction("DK_GetMouseY", DKDuktapeJS::GetMouseY);
+	DKDuktape::AttachFunction("DK_GetOS", DKDuktapeJS::GetOS);
+	DKDuktape::AttachFunction("DK_GetObjects", DKDuktapeJS::GetObjects);
+	DKDuktape::AttachFunction("DK_GetPixelUnderMouse", DKDuktapeJS::GetPixelUnderMouse);
+	DKDuktape::AttachFunction("DK_GetProcessList", DKDuktapeJS::GetProcessList);
+	DKDuktape::AttachFunction("DK_GetScreenHeight", DKDuktapeJS::GetScreenHeight);
+	DKDuktape::AttachFunction("DK_GetScreenWidth", DKDuktapeJS::GetScreenWidth);
+	DKDuktape::AttachFunction("DK_GetTicks", DKDuktapeJS::GetTicks);
+	DKDuktape::AttachFunction("DK_GetTime", DKDuktapeJS::GetTime);
+	DKDuktape::AttachFunction("DK_GetType", DKDuktapeJS::GetType);
+	DKDuktape::AttachFunction("DK_GetUsername", DKDuktapeJS::GetUsername);
+	DKDuktape::AttachFunction("DKDuktape_GetValue", DKDuktapeJS::GetValue);
+	DKDuktape::AttachFunction("DK_GetVolume", DKDuktapeJS::GetVolume);
+	DKDuktape::AttachFunction("DK_HideConsole", DKDuktapeJS::HideConsole);
+	DKDuktape::AttachFunction("DK_IE", DKDuktapeJS::IE);
+	DKDuktape::AttachFunction("DK_Include", DKDuktapeJS::Include);
+	DKDuktape::AttachFunction("DK_KeyIsDown", DKDuktapeJS::KeyIsDown);
+	DKDuktape::AttachFunction("DK_LeftClick", DKDuktapeJS::LeftClick);
+	DKDuktape::AttachFunction("DK_LogGuiConsole", DKDuktapeJS::LogGuiConsole);
+	DKDuktape::AttachFunction("DK_LowPowerMonitor", DKDuktapeJS::LowPowerMonitor);
+	DKDuktape::AttachFunction("DK_MessageBox", DKDuktapeJS::MessageBox);
+	DKDuktape::AttachFunction("DK_MouseToImage", DKDuktapeJS::MouseToImage);
+	DKDuktape::AttachFunction("DK_PhysicalMemory", DKDuktapeJS::PhysicalMemory);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsed", DKDuktapeJS::PhysicalMemoryUsed);
+	DKDuktape::AttachFunction("DK_PhysicalMemoryUsedByApp", DKDuktapeJS::PhysicalMemoryUsedByApp);
+	DKDuktape::AttachFunction("DK_PressKey", DKDuktapeJS::PressKey);
+	DKDuktape::AttachFunction("DK_QueueDuktape", DKDuktapeJS::QueueDuktape);
+	DKDuktape::AttachFunction("DK_ReleaseKey", DKDuktapeJS::ReleaseKey);
+	DKDuktape::AttachFunction("DK_Reload", DKDuktapeJS::Reload);
+	DKDuktape::AttachFunction("DK_RightClick", DKDuktapeJS::RightClick);
+	DKDuktape::AttachFunction("DK_Run", DKDuktapeJS::Run);
+	DKDuktape::AttachFunction("DK_RunDuktape", DKDuktapeJS::RunDuktape);
+	DKDuktape::AttachFunction("DK_SetBrightness", DKDuktapeJS::SetBrightness);
+	DKDuktape::AttachFunction("DK_SetClipboard", DKDuktapeJS::SetClipboard);
+	DKDuktape::AttachFunction("DK_SetClipboardFiles", DKDuktapeJS::SetClipboardFiles);
+	DKDuktape::AttachFunction("DK_SetClipboardImage", DKDuktapeJS::SetClipboardImage);
+	DKDuktape::AttachFunction("DK_SetCursorPos", DKDuktapeJS::SetCursorPos);
+	DKDuktape::AttachFunction("DK_SetFramerate", DKDuktapeJS::SetFramerate);
+	DKDuktape::AttachFunction("DK_SetLog", DKDuktapeJS::_SetLog);
+	DKDuktape::AttachFunction("DK_SetVolume", DKDuktapeJS::SetVolume);
+	DKDuktape::AttachFunction("DK_ShowConsole", DKDuktapeJS::ShowConsole);
+	DKDuktape::AttachFunction("DK_Sleep", DKDuktapeJS::Sleep);
+	DKDuktape::AttachFunction("DK_StopPropagation", DKDuktapeJS::StopPropagation);
+	DKDuktape::AttachFunction("DK_StrokeKey", DKDuktapeJS::StrokeKey);
+	DKDuktape::AttachFunction("DK_System", DKDuktapeJS::System);
+	DKDuktape::AttachFunction("DK_TurnOffMonitor", DKDuktapeJS::TurnOffMonitor);
+	DKDuktape::AttachFunction("DK_TurnOnMonitor", DKDuktapeJS::TurnOnMonitor);
+	DKDuktape::AttachFunction("DK_Value", DKDuktapeJS::Value);
+	DKDuktape::AttachFunction("DK_VirtualMemory", DKDuktapeJS::VirtualMemory);
+	DKDuktape::AttachFunction("DK_VirtualMemoryUsed", DKDuktapeJS::VirtualMemoryUsed);
+	DKDuktape::AttachFunction("DK_VirtualMemoryUsedByApp", DKDuktapeJS::VirtualMemoryUsedByApp);
+	DKDuktape::AttachFunction("DK_WaitForImage", DKDuktapeJS::WaitForImage);
 	return true;
 }
 
 
 /*
-///////////////////////////////////////
-int DKJS::_DKAddEvent(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -153,7 +153,7 @@ int DKJS::_DKAddEvent(duk_context* ctx)
 */
 
 ////////////////////////////////////////
-int DKJS::_DKAvailable(duk_context* ctx)
+int DKDuktapeJS::_DKAvailable(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	bool available = DKClass::DKAvailable(data);
@@ -164,7 +164,7 @@ int DKJS::_DKAvailable(duk_context* ctx)
 }
 
 ////////////////////////////////////
-int DKJS::_DKClose(duk_context* ctx)
+int DKDuktapeJS::_DKClose(duk_context* ctx)
 {
 	DKString value = duk_require_string(ctx, 0);
 	DKClass::DKClose(value);
@@ -172,20 +172,20 @@ int DKJS::_DKClose(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::_DKCreate(duk_context* ctx)
+int DKDuktapeJS::_DKCreate(duk_context* ctx)
 {	
 	DKString data = duk_require_string(ctx, 0);
 	
 	bool callback_found = false;
 	if (duk_is_function(ctx, -1)) {
-		//DKINFO("DKJS::_DKCreate("+data+"): Callback found in DKCreate\n");
+		//DKINFO("DKDuktapeJS::_DKCreate("+data+"): Callback found in DKCreate\n");
 		callback_found = true;
 	}
 	
 	DKObject* obj = DKClass::DKCreate(data);
 	if(!obj){
 		duk_push_string(ctx, "");
-		DKWARN("DKJS::_DKCreate("+data+"): obj invalid \n");
+		DKWARN("DKDuktapeJS::_DKCreate("+data+"): obj invalid \n");
 		return 1;
 	}
 
@@ -218,7 +218,7 @@ int DKJS::_DKCreate(duk_context* ctx)
 }
 
 /////////////////////////////////////////
-int DKJS::_DKLoadPlugin(duk_context* ctx)
+int DKDuktapeJS::_DKLoadPlugin(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	DKPlugins::LoadPlugin(file);
@@ -226,7 +226,7 @@ int DKJS::_DKLoadPlugin(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::_DKDEBUGFUNC(duk_context* ctx)
+int DKDuktapeJS::_DKDEBUGFUNC(duk_context* ctx)
 {
 	//TODO - we need to pull the function name
 	DKString str = "unknown_func(";
@@ -244,7 +244,7 @@ int DKJS::_DKDEBUGFUNC(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::_DKDEBUGVARS(duk_context* ctx)
+int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx)
 {
 	//TODO - we need to pull the function name and the variable names
 	DKString info = "unknown_file:unknown_line unknown_func()   ";
@@ -268,7 +268,7 @@ int DKJS::_DKDEBUGVARS(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKJS::_DKRemoveEvent(duk_context* ctx)
+int DKDuktapeJS::_DKRemoveEvent(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -283,7 +283,7 @@ int DKJS::_DKRemoveEvent(duk_context* ctx)
 }
 
 ///////////////////////////////////////////
-int DKJS::_DKRemoveEvents(duk_context* ctx)
+int DKDuktapeJS::_DKRemoveEvents(duk_context* ctx)
 {
 	//variable can be id or jsreturn
 	DKString variable = duk_to_string(ctx, 0);
@@ -293,7 +293,7 @@ int DKJS::_DKRemoveEvents(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::_DKSendEvent(duk_context* ctx)
+int DKDuktapeJS::_DKSendEvent(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -317,7 +317,7 @@ int DKJS::_DKSendEvent(duk_context* ctx)
 }
 
 ////////////////////////////////////
-int DKJS::_DKValid(duk_context* ctx)
+int DKDuktapeJS::_DKValid(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	bool valid = DKClass::DKValid(data);
@@ -328,7 +328,7 @@ int DKJS::_DKValid(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::_SetLog(duk_context* ctx)
+int DKDuktapeJS::_SetLog(duk_context* ctx)
 {
 	//TODO
 	int lvl = duk_require_int(ctx, 0);
@@ -340,14 +340,14 @@ int DKJS::_SetLog(duk_context* ctx)
 
 
 ////////////////////////////////
-int DKJS::Beep(duk_context* ctx)
+int DKDuktapeJS::Beep(duk_context* ctx)
 {
 	DKUtil::Beep();
 	return 1;
 }
 
 ////////////////////////////////////
-int DKJS::CallFunc(duk_context* ctx)
+int DKDuktapeJS::CallFunc(duk_context* ctx)
 {
 	DKString func = duk_require_string(ctx, 0);
 	DKString args = duk_require_string(ctx, 1);
@@ -360,14 +360,14 @@ int DKJS::CallFunc(duk_context* ctx)
 }
 
 ///////////////////////////////////////
-int DKJS::ClearEvents(duk_context* ctx)
+int DKDuktapeJS::ClearEvents(duk_context* ctx)
 {
 	DKEvent::events.clear();
 	return 1;
 }
 
 //////////////////////////////////////
-int DKJS::ClickImage(duk_context* ctx)
+int DKDuktapeJS::ClickImage(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	int x;
@@ -380,7 +380,7 @@ int DKJS::ClickImage(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::CpuUsed(duk_context* ctx)
+int DKDuktapeJS::CpuUsed(duk_context* ctx)
 {
 	int cpu;
 	if(!DKUtil::CpuUsed(cpu)){ return 0; }
@@ -389,7 +389,7 @@ int DKJS::CpuUsed(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::CpuUsedByApp(duk_context* ctx)
+int DKDuktapeJS::CpuUsedByApp(duk_context* ctx)
 {
 	int cpu;
 	if(!DKUtil::CpuUsedByApp(cpu)){ return 0; }
@@ -398,7 +398,7 @@ int DKJS::CpuUsedByApp(duk_context* ctx)
 }
 
 /////////////////////////////////
-int DKJS::Crash(duk_context* ctx)
+int DKDuktapeJS::Crash(duk_context* ctx)
 {
 #if !defined(WIN32)
 	raise(SIGSEGV);
@@ -409,21 +409,21 @@ int DKJS::Crash(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::DoFrame(duk_context* ctx)
+int DKDuktapeJS::DoFrame(duk_context* ctx)
 {
 	DKApp::DoFrame();
 	return 1;
 }
 
 ///////////////////////////////////////
-int DKJS::DoubleClick(duk_context* ctx)
+int DKDuktapeJS::DoubleClick(duk_context* ctx)
 {
 	if(!DKUtil::DoubleClick()){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////////
-int DKJS::Execute(duk_context* ctx)
+int DKDuktapeJS::Execute(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
 	DKString rtn;
@@ -433,14 +433,14 @@ int DKJS::Execute(duk_context* ctx)
 }
 
 ////////////////////////////////
-int DKJS::Exit(duk_context* ctx)
+int DKDuktapeJS::Exit(duk_context* ctx)
 {
 	DKApp::Exit();
 	return 1;
 }
 
 ///////////////////////////////////
-int DKJS::GetArgs(duk_context* ctx)
+int DKDuktapeJS::GetArgs(duk_context* ctx)
 {
 	DKString args;
 	if(DKApp::argc > 1){
@@ -454,7 +454,7 @@ int DKJS::GetArgs(duk_context* ctx)
 }
 
 //////////////////////////////////////
-int DKJS::GetBrowser(duk_context* ctx)
+int DKDuktapeJS::GetBrowser(duk_context* ctx)
 {
 	DKString browser = "Rocket";
 	duk_push_string(ctx, browser.c_str());
@@ -462,7 +462,7 @@ int DKJS::GetBrowser(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::GetClipboard(duk_context* ctx)
+int DKDuktapeJS::GetClipboard(duk_context* ctx)
 {
 	DKString string;
 	if(!DKUtil::GetClipboard(string)){ return 0; }
@@ -471,7 +471,7 @@ int DKJS::GetClipboard(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::GetData(duk_context* ctx)
+int DKDuktapeJS::GetData(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	if(!DKClass::DKValid(data)){ return 0; }
@@ -481,7 +481,7 @@ int DKJS::GetData(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::GetDate(duk_context* ctx)
+int DKDuktapeJS::GetDate(duk_context* ctx)
 {
 	DKString date;
 	if(!DKUtil::GetDate(date)){ return 0; }
@@ -490,7 +490,7 @@ int DKJS::GetDate(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::GetEvents(duk_context* ctx)
+int DKDuktapeJS::GetEvents(duk_context* ctx)
 {
 	DKString list;
 	for(unsigned int i = 0; i < DKEvent::events.size(); ++i){
@@ -508,7 +508,7 @@ int DKJS::GetEvents(duk_context* ctx)
 }
 
 //////////////////////////////////
-int DKJS::GetFps(duk_context* ctx)
+int DKDuktapeJS::GetFps(duk_context* ctx)
 {
 	unsigned int fps;
 	DKUtil::GetFps(fps);
@@ -517,7 +517,7 @@ int DKJS::GetFps(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::GetFramerate(duk_context* ctx)
+int DKDuktapeJS::GetFramerate(duk_context* ctx)
 {
 	int framerate;
 	if(!DKUtil::GetFramerate(framerate)){ return 0; }
@@ -526,7 +526,7 @@ int DKJS::GetFramerate(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::GetFrames(duk_context* ctx)
+int DKDuktapeJS::GetFrames(duk_context* ctx)
 {
 	long frames;
 	if(!DKUtil::GetFrames(frames)){ return 0; }
@@ -535,7 +535,7 @@ int DKJS::GetFrames(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::GetFunctions(duk_context* ctx)
+int DKDuktapeJS::GetFunctions(duk_context* ctx)
 {
 	DKStringArray list;
 	for(unsigned int i=0; i < DKDuktape::functions.size(); ++i){
@@ -547,7 +547,7 @@ int DKJS::GetFunctions(duk_context* ctx)
 }
 
 /////////////////////////////////
-int DKJS::GetId(duk_context* ctx)
+int DKDuktapeJS::GetId(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
@@ -558,7 +558,7 @@ int DKJS::GetId(duk_context* ctx)
 }
 
 /////////////////////////////////////////
-int DKJS::GetJavascript(duk_context* ctx)
+int DKDuktapeJS::GetJavascript(duk_context* ctx)
 {
 	DKString browser = "Duktape";
 	duk_push_string(ctx, browser.c_str());
@@ -566,7 +566,7 @@ int DKJS::GetJavascript(duk_context* ctx)
 }
 
 //////////////////////////////////
-int DKJS::GetKey(duk_context* ctx)
+int DKDuktapeJS::GetKey(duk_context* ctx)
 {
 	int key;
 	if(!DKUtil::GetKey(key)){ return 0; }
@@ -575,7 +575,7 @@ int DKJS::GetKey(duk_context* ctx)
 }
 
 //////////////////////////////////////
-int DKJS::GetLocalIP(duk_context* ctx)
+int DKDuktapeJS::GetLocalIP(duk_context* ctx)
 {
 	DKString ip;
 	if(!DKUtil::GetLocalIP(ip)){ return 0; }
@@ -584,7 +584,7 @@ int DKJS::GetLocalIP(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::GetMouseX(duk_context* ctx)
+int DKDuktapeJS::GetMouseX(duk_context* ctx)
 {
 	int mouseX = 0;
 	int mouseY = 0;
@@ -594,7 +594,7 @@ int DKJS::GetMouseX(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::GetMouseY(duk_context* ctx)
+int DKDuktapeJS::GetMouseY(duk_context* ctx)
 {
 	int mouseX = 0;
 	int mouseY = 0;
@@ -604,7 +604,7 @@ int DKJS::GetMouseY(duk_context* ctx)
 }
 
 /////////////////////////////////
-int DKJS::GetOS(duk_context* ctx)
+int DKDuktapeJS::GetOS(duk_context* ctx)
 {
 	DKString os;
 	if(!GetSystemOS(os)){
@@ -615,7 +615,7 @@ int DKJS::GetOS(duk_context* ctx)
 }
 
 //////////////////////////////////////
-int DKJS::GetObjects(duk_context* ctx)
+int DKDuktapeJS::GetObjects(duk_context* ctx)
 {
 	DKStringArray list;
 	DKClass::GetObjects(list);
@@ -628,7 +628,7 @@ int DKJS::GetObjects(duk_context* ctx)
 }
 
 //////////////////////////////////////////////
-int DKJS::GetPixelUnderMouse(duk_context* ctx)
+int DKDuktapeJS::GetPixelUnderMouse(duk_context* ctx)
 {
 	int mouseX = 0;
 	int mouseY = 0;
@@ -643,7 +643,7 @@ int DKJS::GetPixelUnderMouse(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKJS::GetProcessList(duk_context* ctx)
+int DKDuktapeJS::GetProcessList(duk_context* ctx)
 {
 	DKString list;
 	DKUtil::GetProcessList(list);
@@ -652,7 +652,7 @@ int DKJS::GetProcessList(duk_context* ctx)
 }
 
 ///////////////////////////////////////////
-int DKJS::GetScreenHeight(duk_context* ctx)
+int DKDuktapeJS::GetScreenHeight(duk_context* ctx)
 {
 	int h;
 	if(!DKUtil::GetScreenHeight(h)){ return 0; }
@@ -661,7 +661,7 @@ int DKJS::GetScreenHeight(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKJS::GetScreenWidth(duk_context* ctx)
+int DKDuktapeJS::GetScreenWidth(duk_context* ctx)
 {
 	int w;
 	if(!DKUtil::GetScreenWidth(w)){ return 0; }
@@ -670,7 +670,7 @@ int DKJS::GetScreenWidth(duk_context* ctx)
 }
 
 ////////////////////////////////////
-int DKJS::GetTicks(duk_context* ctx)
+int DKDuktapeJS::GetTicks(duk_context* ctx)
 {
 	long ticks;
 	if(!DKUtil::GetTicks(ticks)){ return 0; }
@@ -679,7 +679,7 @@ int DKJS::GetTicks(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::GetTime(duk_context* ctx)
+int DKDuktapeJS::GetTime(duk_context* ctx)
 {
 	DKString time;
 	if(!DKUtil::GetTime(time)){ return 0; }
@@ -688,7 +688,7 @@ int DKJS::GetTime(duk_context* ctx)
 }
 
 ///////////////////////////////////
-int DKJS::GetType(duk_context* ctx)
+int DKDuktapeJS::GetType(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKStringArray arry;
@@ -699,7 +699,7 @@ int DKJS::GetType(duk_context* ctx)
 }
 
 //////////////////////////////////////
-int DKJS::GetUsername(duk_context* ctx)
+int DKDuktapeJS::GetUsername(duk_context* ctx)
 {
 #ifdef LINUX
 	DKString username;
@@ -712,7 +712,7 @@ int DKJS::GetUsername(duk_context* ctx)
 }
 
 ////////////////////////////////////
-int DKJS::GetValue(duk_context* ctx)
+int DKDuktapeJS::GetValue(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString evt = duk_require_string(ctx, 0);
@@ -728,7 +728,7 @@ int DKJS::GetValue(duk_context* ctx)
 			duk_push_string(ctx, rval.c_str());
 			return 1;
 		}
-		//DKERROR("DKJS::GetValue(" + evt + "): failed\n");
+		//DKERROR("DKDuktapeJS::GetValue(" + evt + "): failed\n");
 		return 0;
 	}
 	duk_push_string(ctx, arry[2].c_str());
@@ -736,7 +736,7 @@ int DKJS::GetValue(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::GetVolume(duk_context* ctx)
+int DKDuktapeJS::GetVolume(duk_context* ctx)
 {
 	int percent;
 	if(!DKUtil::GetVolume(percent)){ return 0; }
@@ -745,7 +745,7 @@ int DKJS::GetVolume(duk_context* ctx)
 }
 
 ///////////////////////////////////////
-int DKJS::HideConsole(duk_context* ctx)
+int DKDuktapeJS::HideConsole(duk_context* ctx)
 {
 #ifdef WIN32
 	HWND consoleWindow = GetConsoleWindow();
@@ -755,20 +755,20 @@ int DKJS::HideConsole(duk_context* ctx)
 }
 
 //////////////////////////////
-int DKJS::IE(duk_context* ctx)
+int DKDuktapeJS::IE(duk_context* ctx)
 {
 	return 0;
 }
 
 ///////////////////////////////////
-int DKJS::Include(duk_context* ctx)
+int DKDuktapeJS::Include(duk_context* ctx)
 {
 	//ignore this for now
 	return 1;
 }
 
 /////////////////////////////////////
-int DKJS::KeyIsDown(duk_context* ctx)
+int DKDuktapeJS::KeyIsDown(duk_context* ctx)
 {
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::KeyIsDown(key)){ return 0; }
@@ -776,14 +776,14 @@ int DKJS::KeyIsDown(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::LeftClick(duk_context* ctx)
+int DKDuktapeJS::LeftClick(duk_context* ctx)
 {
 	if(!DKUtil::LeftClick()){ return 0; }
 	return 1;
 }
 
 /////////////////////////////////////////
-int DKJS::LogGuiConsole(duk_context* ctx)
+int DKDuktapeJS::LogGuiConsole(duk_context* ctx)
 {
 	int state = duk_require_boolean(ctx, 0);
 	if(state){
@@ -795,14 +795,14 @@ int DKJS::LogGuiConsole(duk_context* ctx)
 }
 
 ///////////////////////////////////////////
-int DKJS::LowPowerMonitor(duk_context* ctx)
+int DKDuktapeJS::LowPowerMonitor(duk_context* ctx)
 {
 	if(!DKUtil::LowPowerMonitor()){ return 0; }
 	return 1;
 }
 
 //////////////////////////////////////
-int DKJS::MessageBox(duk_context* ctx)
+int DKDuktapeJS::MessageBox(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString cmd = duk_require_string(ctx, 1);
@@ -824,7 +824,7 @@ int DKJS::MessageBox(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::MouseToImage(duk_context* ctx)
+int DKDuktapeJS::MouseToImage(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	int x;
@@ -835,7 +835,7 @@ int DKJS::MouseToImage(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKJS::PhysicalMemory(duk_context* ctx)
+int DKDuktapeJS::PhysicalMemory(duk_context* ctx)
 {
 	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemory(physicalMemory)){ return 0; }
@@ -844,7 +844,7 @@ int DKJS::PhysicalMemory(duk_context* ctx)
 }
 
 //////////////////////////////////////////////
-int DKJS::PhysicalMemoryUsed(duk_context* ctx)
+int DKDuktapeJS::PhysicalMemoryUsed(duk_context* ctx)
 {
 	unsigned long long physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsed(physicalMemory)){ return 0; }
@@ -853,7 +853,7 @@ int DKJS::PhysicalMemoryUsed(duk_context* ctx)
 }
 
 ///////////////////////////////////////////////////
-int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
+int DKDuktapeJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 {
 	unsigned int physicalMemory;
 	if(!DKUtil::PhysicalMemoryUsedByApp(physicalMemory)){ return 0; }
@@ -862,7 +862,7 @@ int DKJS::PhysicalMemoryUsedByApp(duk_context* ctx)
 }
 
 ////////////////////////////////////
-int DKJS::PressKey(duk_context* ctx)
+int DKDuktapeJS::PressKey(duk_context* ctx)
 {
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::PressKey(key)){
@@ -872,7 +872,7 @@ int DKJS::PressKey(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::QueueDuktape(duk_context* ctx)
+int DKDuktapeJS::QueueDuktape(duk_context* ctx)
 {
 	DKString code = duk_require_string(ctx, 0);
 	DKDuktape::QueueDuktape(code);
@@ -880,7 +880,7 @@ int DKJS::QueueDuktape(duk_context* ctx)
 }
 
 //////////////////////////////////////
-int DKJS::ReleaseKey(duk_context* ctx)
+int DKDuktapeJS::ReleaseKey(duk_context* ctx)
 {
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::ReleaseKey(key)){
@@ -890,21 +890,21 @@ int DKJS::ReleaseKey(duk_context* ctx)
 }
 
 //////////////////////////////////
-int DKJS::Reload(duk_context* ctx)
+int DKDuktapeJS::Reload(duk_context* ctx)
 {
 	DKDuktape::Reload();
 	return 1;
 }
 
 //////////////////////////////////////
-int DKJS::RightClick(duk_context* ctx)
+int DKDuktapeJS::RightClick(duk_context* ctx)
 {
 	if(!DKUtil::RightClick()){ return 0; }
 	return 1;
 }
 
 ///////////////////////////////
-int DKJS::Run(duk_context* ctx)
+int DKDuktapeJS::Run(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
 	DKString params = duk_require_string(ctx, 1);
@@ -913,7 +913,7 @@ int DKJS::Run(duk_context* ctx)
 }
 
 /////////////////////////////////////////
-int DKJS::RunDuktape(duk_context* ctx)
+int DKDuktapeJS::RunDuktape(duk_context* ctx)
 {
 	DKString code = duk_require_string(ctx, 0);
 	DKString rval;
@@ -926,7 +926,7 @@ int DKJS::RunDuktape(duk_context* ctx)
 }
 
 /////////////////////////////////////////
-int DKJS::SetBrightness(duk_context* ctx)
+int DKDuktapeJS::SetBrightness(duk_context* ctx)
 {
 	int percent = duk_require_int(ctx, 0);
 	if(!DKUtil::SetBrightness(percent)){ return 0; }
@@ -934,7 +934,7 @@ int DKJS::SetBrightness(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::SetClipboard(duk_context* ctx)
+int DKDuktapeJS::SetClipboard(duk_context* ctx)
 {
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKUtil::SetClipboard(string)){ return 0; }
@@ -942,7 +942,7 @@ int DKJS::SetClipboard(duk_context* ctx)
 }
 
 /////////////////////////////////////////////
-int DKJS::SetClipboardFiles(duk_context* ctx)
+int DKDuktapeJS::SetClipboardFiles(duk_context* ctx)
 {
 	DKString filelist = duk_require_string(ctx, 0);
 	if(!DKUtil::SetClipboardFiles(filelist)){ return 0; }
@@ -950,7 +950,7 @@ int DKJS::SetClipboardFiles(duk_context* ctx)
 }
 
 /////////////////////////////////////////////
-int DKJS::SetClipboardImage(duk_context* ctx)
+int DKDuktapeJS::SetClipboardImage(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	if(!DKUtil::SetClipboardImage(file)){ return 0; }
@@ -958,7 +958,7 @@ int DKJS::SetClipboardImage(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::SetCursorPos(duk_context* ctx)
+int DKDuktapeJS::SetCursorPos(duk_context* ctx)
 {
 	int x = duk_require_int(ctx, 0);
 	int y = duk_require_int(ctx, 1);
@@ -967,7 +967,7 @@ int DKJS::SetCursorPos(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::SetFramerate(duk_context* ctx)
+int DKDuktapeJS::SetFramerate(duk_context* ctx)
 {
 	int fps = duk_require_int(ctx, 0);
 	DKUtil::SetFramerate(fps);
@@ -975,7 +975,7 @@ int DKJS::SetFramerate(duk_context* ctx)
 }
 
 /////////////////////////////////////
-int DKJS::SetVolume(duk_context* ctx)
+int DKDuktapeJS::SetVolume(duk_context* ctx)
 {
 	int percent = duk_require_int(ctx, 0);
 	if(!DKUtil::SetVolume(percent)){ return 0; }
@@ -983,7 +983,7 @@ int DKJS::SetVolume(duk_context* ctx)
 }
 
 ///////////////////////////////////////
-int DKJS::ShowConsole(duk_context* ctx)
+int DKDuktapeJS::ShowConsole(duk_context* ctx)
 {
 #ifdef WIN32
 	HWND consoleWindow = GetConsoleWindow();
@@ -993,7 +993,7 @@ int DKJS::ShowConsole(duk_context* ctx)
 }
 
 /////////////////////////////////
-int DKJS::Sleep(duk_context* ctx)
+int DKDuktapeJS::Sleep(duk_context* ctx)
 {
 	int milliseconds = duk_require_int(ctx, 0);
 	if(!DKUtil::Sleep(milliseconds)){ return 0; }
@@ -1001,13 +1001,13 @@ int DKJS::Sleep(duk_context* ctx)
 }
 
 ///////////////////////////////////////////
-int DKJS::StopPropagation(duk_context* ctx)
+int DKDuktapeJS::StopPropagation(duk_context* ctx)
 {
 	return 0;
 }
 
 /////////////////////////////////////
-int DKJS::StrokeKey(duk_context* ctx)
+int DKDuktapeJS::StrokeKey(duk_context* ctx)
 {
 	int key = duk_require_int(ctx, 0);
 	if(!DKUtil::StrokeKey(key)){
@@ -1017,7 +1017,7 @@ int DKJS::StrokeKey(duk_context* ctx)
 }
 
 //////////////////////////////////
-int DKJS::System(duk_context* ctx)
+int DKDuktapeJS::System(duk_context* ctx)
 {
 	DKString command = duk_require_string(ctx, 0);
 	if(!DKUtil::System(command)){ return 0; }
@@ -1025,21 +1025,21 @@ int DKJS::System(duk_context* ctx)
 }
 
 //////////////////////////////////////////
-int DKJS::TurnOffMonitor(duk_context* ctx)
+int DKDuktapeJS::TurnOffMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOffMonitor()){ return 0; }
 	return 1;
 }
 
 /////////////////////////////////////////
-int DKJS::TurnOnMonitor(duk_context* ctx)
+int DKDuktapeJS::TurnOnMonitor(duk_context* ctx)
 {
 	if(!DKUtil::TurnOnMonitor()){ return 0; }
 	return 1;
 }
 
 /////////////////////////////////
-int DKJS::Value(duk_context* ctx)
+int DKDuktapeJS::Value(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
@@ -1054,14 +1054,14 @@ int DKJS::Value(duk_context* ctx)
 	}
 	
 	//DKINFO("Value:"+events[1]+"\n");
-	DKERROR("DKJS::Value(): We should not get here \n");
+	DKERROR("DKDuktapeJS::Value(): We should not get here \n");
 	if(!same(events[1],value)){ return 0; }
 	return 1;
 
 }
 
 /////////////////////////////////////////
-int DKJS::VirtualMemory(duk_context* ctx)
+int DKDuktapeJS::VirtualMemory(duk_context* ctx)
 {
 	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemory(virtualMemory)){ return 0; }
@@ -1070,7 +1070,7 @@ int DKJS::VirtualMemory(duk_context* ctx)
 }
 
 /////////////////////////////////////////////
-int DKJS::VirtualMemoryUsed(duk_context* ctx)
+int DKDuktapeJS::VirtualMemoryUsed(duk_context* ctx)
 {
 	unsigned long long virtualMemory;
 	if(!DKUtil::VirtualMemoryUsed(virtualMemory)){ return 0; }
@@ -1079,7 +1079,7 @@ int DKJS::VirtualMemoryUsed(duk_context* ctx)
 }
 
 //////////////////////////////////////////////////
-int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
+int DKDuktapeJS::VirtualMemoryUsedByApp(duk_context* ctx)
 {
 	unsigned int virtualMemory;
 	if(!DKUtil::VirtualMemoryUsedByApp(virtualMemory)){ return 0; }
@@ -1088,7 +1088,7 @@ int DKJS::VirtualMemoryUsedByApp(duk_context* ctx)
 }
 
 ////////////////////////////////////////
-int DKJS::WaitForImage(duk_context* ctx)
+int DKDuktapeJS::WaitForImage(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	int timeout = duk_require_int(ctx, 1);
