@@ -464,7 +464,7 @@ Rocket::Core::Element* DKRocket::getElementByAddress(const DKString& address)
 	ss << address;
 	int tmp(0);
 	if(!(ss >> std::hex >> tmp)){
-		DKERROR("DKRocketJS::getElementByAddress("+address+"): invalid address\n");
+		DKERROR("DKRocket::getElementByAddress("+address+"): invalid address\n");
 		return NULL;
 	}
 	Rocket::Core::Element* element = reinterpret_cast<Rocket::Core::Element*>(tmp);
