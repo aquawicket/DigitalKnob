@@ -50,7 +50,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
 	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
 	//DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
-	DKDuktape::AttachFunction("DK_SendEvent", DKDuktapeJS::_DKSendEvent);
+	//DKDuktape::AttachFunction("DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
 	DKDuktape::AttachFunction("DK_Valid", DKDuktapeJS::_DKValid);
 
 	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
@@ -296,6 +296,7 @@ int DKDuktapeJS::_DKRemoveEvents(duk_context* ctx)
 ////////////////////////////////////////
 int DKDuktapeJS::_DKSendEvent(duk_context* ctx)
 {
+	DKWARN("DKDuktapeJS::_DKSendEvent()\n");
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
 	DKString param;

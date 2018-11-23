@@ -69,7 +69,7 @@ var GlobalEventHandlers = function(pointer)
 	this.click = null;
 	Object.defineProperty(this, "onclick", {
 		get: function(){ return this.click; },
-		set: function(func){ console.warn("set:onclick"); this.addEventListener("click", func); this.click = func; }
+		set: function(func){ this.addEventListener("click", func); this.click = func; }
 	});
 	this.close = null;
 	Object.defineProperty(this, "onclose", {
