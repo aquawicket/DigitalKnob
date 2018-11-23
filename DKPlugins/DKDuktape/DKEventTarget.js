@@ -4,7 +4,7 @@ var stored_events = [];
 var EventFromCPP = function(pointer, event)
 {
 	//DKDEBUGFUNC();
-	console.warn("EventFromCPP("+pointer+","+event.type+")");
+	//console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);
@@ -23,7 +23,7 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		console.warn("addEventListener this.pointer = "+this.pointer+", type = "+type);
+		//console.warn("addEventListener this.pointer = "+this.pointer+", type = "+type);
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
@@ -34,7 +34,7 @@ var EventTarget = function(pointer)
 		this.listeners[type].push(callback);
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
-		console.warn("removeEventListener this.pointer = "+this.pointer);
+		//console.warn("removeEventListener this.pointer = "+this.pointer);
 		DKEventTarget_removeEventListner(this.pointer, type, callback);
 		if(!(type in this.listeners)){
 			return;
@@ -48,13 +48,13 @@ var EventTarget = function(pointer)
 		}
 	};
 	EventTarget.prototype.dispatchEvent = function(event){
-		console.warn("dispatchEvent this.pointer = "+this.pointer);
+		//console.warn("dispatchEvent this.pointer = "+this.pointer);
 		if(!(event.type in this.listeners)){
 			return true;
 		}
 		var stack = this.listeners[event.type].slice();
 		for(var i = 0, l = stack.length; i < l; i++){
-			console.warn("dispatchEvent(): pointer = "+this.pointer);
+			//console.warn("dispatchEvent(): pointer = "+this.pointer);
 			
 			if(this.pointer == "window"){
 				event.currentTarget = window;
