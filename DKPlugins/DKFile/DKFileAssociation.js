@@ -14,7 +14,7 @@ function DKFileAssociation_End()
 function DKFileAssociation_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	console.debug("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")");
 }
 
 /////////////////////////////////////
@@ -63,7 +63,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
 	//var the_path = path.replace(id, "");
-	//DKINFO("DKWidget_AppendDataPath("+the_path+")\n");
+	//console.log("DKWidget_AppendDataPath("+the_path+")");
 	//AppendDataPath(the_path);
 
 	var filedata = DKFile_FileToString(path);
@@ -75,19 +75,19 @@ function DKFileAssociation_OpenHtml(path)
 	DKWidget_SetInnerHtml(temp, filedata);
 
 	//if(DKWidget_GetNumChildren(temp) == 0){
-	//	DKERROR("Error loading path: "+id+": could not create node.\n");
+	//	console.error("Error loading path: "+id+": could not create node");
 	//	return false;
 	//}
 
 	//Make sure there is only 1 child
 	//if(DKWidget_GetNumChildren(temp) > 1){
-	//	DKERROR("Error loading path: "+id+" has more than one root node\n");
+	//	console.error("Error loading path: "+id+" has more than one root node");
 	//	return false;
 	//}
 
-	DKINFO("temp: "+temp+"\n");
+	console.log("temp: "+temp);
 	var element = DKWidget_GetFirstChild(temp);
-	DKINFO("element = "+element+"\n");
+	console.log("element = "+element);
 	//DKElement* element = temp->GetFirstChild();
 	//DKWidget_SetAttribute(element, "id", id);
 	
