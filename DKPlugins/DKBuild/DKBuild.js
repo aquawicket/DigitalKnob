@@ -850,10 +850,12 @@ function DKBuild_DoResults()
 		}
 	}
 	
+	/*
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
 	}
 	if(DKValid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
+	*/
 }
