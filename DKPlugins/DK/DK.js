@@ -1343,6 +1343,7 @@ function DK_StopPropagation(event)
     }
 }
 
+/*
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
@@ -1393,6 +1394,7 @@ function DKAddEvent(id, type, Function)
 	events[events.length] = Function;
 	return true;
 }
+*/
 
 /////////////////////////////////////////////
 function removeEvent(element, type, Function)
