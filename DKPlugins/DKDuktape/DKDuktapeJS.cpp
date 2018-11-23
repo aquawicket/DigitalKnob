@@ -172,14 +172,13 @@ int DKDuktapeJS::_DKClose(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
+////////////////////////////////////////////
 int DKDuktapeJS::_DKCreate(duk_context* ctx)
 {	
 	DKString data = duk_require_string(ctx, 0);
 	
 	bool callback_found = false;
-	if (duk_is_function(ctx, -1)) {
-		//DKINFO("DKDuktapeJS::_DKCreate("+data+"): Callback found in DKCreate\n");
+	if(duk_is_function(ctx, -1)){
 		callback_found = true;
 	}
 	
@@ -192,15 +191,8 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 
 	//Call the callback
 	if(callback_found){
-		//if(duk_is_function(ctx, 0)){ DKINFO("index 0 is function \n"); }
-		//if(duk_is_function(ctx, 1)) { DKINFO("index 1 is function \n"); }
 		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
 			/*
-			duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-			printf("%s\n", duk_get_string(ctx, -1));
-			duk_pop(ctx);  // pop `err.stack`
-			*/
-			
 			//TODO - can we get more info on the actuall callback to display here
 			// callback name, parameters, inner code, etc.
 			DKString error = toString(duk_safe_to_string(ctx, -1));
@@ -210,8 +202,38 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 			str += error+"\\n";
 			str += "'+err.stack+'\\n');";
 			duk_eval_string(ctx, str.c_str());
+			*/
+
+			duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+			DKString name = duk_get_string(ctx, -1);
+			duk_pop(ctx);  // pop `err.name`
+			duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+			DKString message = duk_get_string(ctx, -1);
+			duk_pop(ctx);  // pop `err.message`
+			message = name +": "+message;
+			duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+			DKString fileName = duk_get_string(ctx, -1);
+			duk_pop(ctx);  // pop `err.fileName`
+			duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+			DKString lineNumber = toString(duk_get_int(ctx, -1));
+			duk_pop(ctx);  // pop `err.lineNumber`
+			duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+			DKString stack = duk_get_string(ctx, -1);
+			duk_pop(ctx);  // pop `err.stack`
+
+			DKERROR(message+"\n");
+
+			replace(stack,"'","\\'");
+			replace(stack,"\n","\\n");
+			replace(message,"'","\\'");
+
+			DKString str;
+			str += "var err_error = {stack:'"+stack+"'};";
+			str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
+			str += "EventFromCPP('window', err_event);";
+			duk_eval_string(ctx, str.c_str());
 		}
-		//duk_pop(ctx); // pop return value (or `err`)
+		duk_pop(ctx);
     }
 
 	duk_push_string(ctx, obj->data[1].c_str());

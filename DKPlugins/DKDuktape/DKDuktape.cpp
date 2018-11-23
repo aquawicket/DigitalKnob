@@ -264,7 +264,7 @@ bool DKDuktape::CallInit(const DKString& file)
 		str += "EventFromCPP('window', err_event);";
 		duk_eval_string(ctx, str.c_str());
 	}
-	duk_pop(ctx);  // ignore result?
+	duk_pop(ctx);
 	
 	return true;
 }
