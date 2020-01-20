@@ -26,8 +26,8 @@ function init_OnEvent(event)  //Duktape
 	}
 }
 
-////////////////////////////////////
-if(DK_GetJavascript() == "Duktape"){ //C++: Create a window LoadPage() can support
+//////////////////////////////////
+if(DK_GetJSEngine() == "Duktape"){ //C++: Create a window LoadPage() can support
 	if(USE_ROCKET && USE_CEF){
 		DKINFO("Creating SDL -> Rocket -> Cef -> GUI\n");
 		DKCreate("DKWindow");

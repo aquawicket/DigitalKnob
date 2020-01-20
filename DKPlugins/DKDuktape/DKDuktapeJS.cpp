@@ -75,7 +75,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_GetFrames", DKDuktapeJS::GetFrames);
 	DKDuktape::AttachFunction("DK_GetFunctions", DKDuktapeJS::GetFunctions);
 	DKDuktape::AttachFunction("DK_GetId", DKDuktapeJS::GetId);
-	//DKDuktape::AttachFunction("DK_GetJavascript", DKDuktapeJS::GetJavascript);
+	//DKDuktape::AttachFunction("DK_GetJSEngine", DKDuktapeJS::GetJSEngine);
 	DKDuktape::AttachFunction("DK_GetKey", DKDuktapeJS::GetKey);
 	DKDuktape::AttachFunction("DK_GetLocalIP", DKDuktapeJS::GetLocalIP);
 	DKDuktape::AttachFunction("DK_GetMouseX", DKDuktapeJS::GetMouseX); 
@@ -581,11 +581,11 @@ int DKDuktapeJS::GetId(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKDuktapeJS::GetJavascript(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDuktapeJS::GetJSEngine(duk_context* ctx)
 {
-	DKString browser = "Duktape";
-	duk_push_string(ctx, browser.c_str());
+	DKString engine = "Duktape";
+	duk_push_string(ctx, engine.c_str());
 	return 1;
 }
 

@@ -235,7 +235,7 @@ function Log(string, lvl)
 
 DKINFO("*** DigitalKnob ***\n");
 DKINFO(DK_GetBrowser()+"\n");
-DKINFO(DK_GetJavascript()+"\n");
+DKINFO(DK_GetJSEngine()+"\n");
 
 
 /////////////////////////////////
@@ -461,7 +461,7 @@ function LoadJs(url, callback)
 						//This is because there is no onload function for scripts in DK yet.
 					  
 						//DK FIX
-						if(DK_GetJavascript() == "Duktape"){
+						if(DK_GetJSEngine() == "Duktape"){
 							DKINFO("Loaded: "+url+"\n");
 							var func = init; //Plugin_Init() 
 							if(eval("typeof "+func) === "function"){
@@ -1160,8 +1160,8 @@ function DK_GetBrowser()
     }
 }
 
-///////////////////////////
-function DK_GetJavascript()
+/////////////////////////
+function DK_GetJSEngine()
 {
 	DKDEBUGFUNC();
 	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
