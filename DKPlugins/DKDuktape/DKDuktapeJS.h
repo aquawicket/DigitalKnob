@@ -45,7 +45,7 @@ public:
 	static int GetFrames(duk_context* ctx);
 	static int GetFunctions(duk_context* ctx);
 	static int GetId(duk_context* ctx);
-	static int GetJavascript(duk_context* ctx);
+	static int GetJSEngine(duk_context* ctx);
 	static int GetKey(duk_context* ctx);
 	static int GetLocalIP(duk_context* ctx);
 	static int GetMouseX(duk_context* ctx);
