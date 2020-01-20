@@ -75,7 +75,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_GetFrames", DKDuktapeJS::GetFrames);
 	DKDuktape::AttachFunction("DK_GetFunctions", DKDuktapeJS::GetFunctions);
 	DKDuktape::AttachFunction("DK_GetId", DKDuktapeJS::GetId);
-	//DKDuktape::AttachFunction("DK_GetJSEngine", DKDuktapeJS::GetJSEngine);
+	DKDuktape::AttachFunction("DK_GetJSEngine", DKDuktapeJS::GetJSEngine);
 	DKDuktape::AttachFunction("DK_GetKey", DKDuktapeJS::GetKey);
 	DKDuktape::AttachFunction("DK_GetLocalIP", DKDuktapeJS::GetLocalIP);
 	DKDuktape::AttachFunction("DK_GetMouseX", DKDuktapeJS::GetMouseX); 
