@@ -141,7 +141,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
 	DKString _url = url;
-	if(has(_url,":/")){ //could be http:// , https:// or C:/
+	if(has(_url,":/")){ //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
 		DKWARN("DKRocket::LoadUrl(): href: "+href+"\n");
 	}
@@ -150,6 +150,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 		return false;
 	}
 	else{
+		//_url = DKFile::local_assets += _url;
 		DKERROR("DKRocket::LoadUrl(): cannot load relative paths\n");
 		return false;
 	}

@@ -171,7 +171,7 @@ bool DKWidget::CreateWidget(DKString& file)
 	AttachDrags();
 
 	//force refresh of rocket for overflow fixes
-	root->SetContentBox(Rocket::Core::Vector2f(0,0), Rocket::Core::Vector2f(0,0));
+	//root->SetContentBox(Rocket::Core::Vector2f(0,0), Rocket::Core::Vector2f(0,0));
 
 	return true;
 }
