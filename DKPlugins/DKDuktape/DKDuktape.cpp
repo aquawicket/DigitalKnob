@@ -430,7 +430,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message+"\n"+fileName+"\n"+lineNumber+"\n"+stack+"\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
