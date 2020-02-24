@@ -42,15 +42,15 @@ bool DKDuktapeJS::Init()
 
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
-	//DKDuktape::AttachFunction("DKDuktape_AddEvent", DKDuktapeJS::_DKAddEvent);
+	DKDuktape::AttachFunction("DKDuktape_AddEvent", DKDuktapeJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
 	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
 	DKDuktape::AttachFunction("DKCreate", DKDuktapeJS::_DKCreate); //This will be overwritten by DK.js
 	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
 	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
-	//DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
-	//DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
-	//DKDuktape::AttachFunction("DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
+	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
+	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
+	DKDuktape::AttachFunction("DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
 	DKDuktape::AttachFunction("DK_Valid", DKDuktapeJS::_DKValid);
 
 	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
@@ -135,7 +135,6 @@ bool DKDuktapeJS::Init()
 }
 
 
-/*
 //////////////////////////////////////////////
 int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
 {
@@ -151,7 +150,6 @@ int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
 	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
 	return 1;
 }
-*/
 
 ////////////////////////////////////////
 int DKDuktapeJS::_DKAvailable(duk_context* ctx)

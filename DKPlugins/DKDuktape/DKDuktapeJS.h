@@ -11,6 +11,7 @@ class DKDuktapeJS : public DKObjectT<DKDuktapeJS>
 public:
 	bool Init();
 	
+	static int _DKAddEvent(duk_context* ctx);
 	static int _DKAvailable(duk_context* ctx);
 	static int _DKClose(duk_context* ctx);
 	static int _DKCreate(duk_context* ctx);

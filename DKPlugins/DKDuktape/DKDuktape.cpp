@@ -382,7 +382,6 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	return true;
 }
 
-/*
 ///////////////////////////////////////
 bool DKDuktape::OnEvent(DKEvent* event)
 {
@@ -450,7 +449,6 @@ bool DKDuktape::OnEvent(DKEvent* event)
 
 	return true;
 }
-*/
 
 ////////////////////////
 bool DKDuktape::Reload()

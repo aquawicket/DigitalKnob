@@ -25,7 +25,7 @@ public:
 	static bool FileLoaded(const DKString& path);
 	static bool LoadFile(const DKString& path);
 	static bool LoadJSString(const DKString& url, const DKString& string);
-	//static bool OnEvent(DKEvent* event);
+	static bool OnEvent(DKEvent* event);
 	static bool Reload();
 	//static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
