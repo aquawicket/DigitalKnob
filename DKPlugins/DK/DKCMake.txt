@@ -1,6 +1,6 @@
 IF(WIN)
-	DKDEPEND(boost_1_66_0 Boost_System)
-	DKDEPEND(boost_1_66_0 Boost_Filesystem)
+	DKDEPEND(boost_1_72_0 Boost_System)
+	DKDEPEND(boost_1_72_0 Boost_Filesystem)
 	DKDEPEND(upx-3.95-win64)
 	
 	LIST(APPEND WIN_LIBS shell32.lib)
