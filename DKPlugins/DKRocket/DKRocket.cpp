@@ -72,7 +72,8 @@ bool DKRocket::Init()
 	DKClass::DKCreate("DKDocument");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
-	//document = context->GetDocument(0);
+	//START DEBUGGING FROM HERE
+	LoadUrl("C:/digitalknob/DKTestApps/DKApps/DKSDLRocket/assets/test.html");
 
 	return true;
 }
