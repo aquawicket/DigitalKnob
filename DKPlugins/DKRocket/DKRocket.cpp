@@ -71,6 +71,9 @@ bool DKRocket::Init()
 	DKClass::DKCreate("DKCSSStyleDeclaration");
 	DKClass::DKCreate("DKDocument");
 	DKClass::DKCreate("DKRocket/DKDom.js");
+
+	//document = context->GetDocument(0);
+
 	return true;
 }
 
@@ -477,13 +480,13 @@ Rocket::Core::Element* DKRocket::getElementByAddress(const DKString& address)
 	Rocket::Core::ElementList elements;
 	GetElements(body, elements);
 	for(unsigned int i=0; i<elements.size(); i++){
-	const void* addr = static_cast<const void*>(elements[i]);
-	std::stringstream ss;
-	ss << addr;  
-	DKString str = ss.str(); 
-	if(same(address, str)){
-	return elements[i];
-	}
+		const void* addr = static_cast<const void*>(elements[i]);
+		std::stringstream ss;
+		ss << addr;  
+		DKString str = ss.str(); 
+		if(same(address, str)){
+			return elements[i];
+		}
 	}
 	DKERROR("DKRocketJS::getElementByAddress("+address+"): element not found\n");
 	return NULL;
