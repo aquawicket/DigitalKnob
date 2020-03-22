@@ -73,6 +73,7 @@ bool DKRocket::Init()
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
 	//START DEBUGGING FROM HERE
+	LoadUrl("C:/digitalknob/DKTestApps/DKApps/DKSDLRocket/assets/test2.html");
 	LoadUrl("C:/digitalknob/DKTestApps/DKApps/DKSDLRocket/assets/test.html");
 
 	return true;
