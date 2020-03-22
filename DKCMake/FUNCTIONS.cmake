@@ -1837,11 +1837,11 @@ ENDFUNCTION()
 ## DKDEPEND() IF() ELSE() and ENDIF() commands from the DKCmake.txt file
 ##########################
 FUNCTION(DKRUNDEPENDS arg)
-	#MESSAGE("DKRUNDEPENDS(${arg})")
 	DKSETPATHTOPLUGIN(${arg})
 	IF(NOT PATHTOPLUGIN)
 		RETURN()
 	ENDIF()
+	MESSAGE("PATHTOPLUGIN = ${arg}")
 	
 	FILE(STRINGS ${PATHTOPLUGIN}/DKCMake.txt lines)
 	UNSET(ModifiedContents)

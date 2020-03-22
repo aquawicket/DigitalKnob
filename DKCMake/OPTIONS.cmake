@@ -12,7 +12,7 @@
 IF(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##what is this for?
 ENDIF(COMMAND cmake_policy)
-SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
+##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
 
 SET(DKONLINE "http://DigitalKnob.com/Download")
 
@@ -350,38 +350,9 @@ ENDIF(RELEASE)
 ###########################################################################
 ## Set variables for Generator
 ###########################################################################
-##### Microsoft Visual C++ 2013 #####
-IF(CMAKE_GENERATOR STREQUAL "Visual Studio 12 2013")
-	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
-	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
-	IF(STATIC)
-		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-	ENDIF()
-	IF(DYNAMIC)
-		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MDd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MD /O2 /Ob2 /DNDEBUG")
-	ENDIF()
-	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
-	
-	DKSET(FLAGS 
-	"/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
-ENDIF()
 
-##### Microsoft Visual Studio 2013 Win64 #####
-IF(CMAKE_GENERATOR STREQUAL "Visual Studio 12 2013 Win64")
-	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
-	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600")
-	DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
-	DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
-	
-	DKSET(FLAGS 
-	"/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
-ENDIF()
-
-##### Microsoft Visual C++ 2015 #####
-IF(CMAKE_GENERATOR STREQUAL "Visual Studio 14 2015")
+##### Microsoft Visual Studio 2019 #####
+IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
 	IF(STATIC)
@@ -397,8 +368,8 @@ IF(CMAKE_GENERATOR STREQUAL "Visual Studio 14 2015")
 	"/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 ENDIF()
 
-##### Microsoft Visual Studio 2015 Win64 #####
-IF(CMAKE_GENERATOR STREQUAL "Visual Studio 14 2015 Win64")
+##### Microsoft Visual Studio 2019 Win64 #####
+IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
 	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
@@ -407,6 +378,7 @@ IF(CMAKE_GENERATOR STREQUAL "Visual Studio 14 2015 Win64")
 	DKSET(FLAGS 
 	"/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 ENDIF()
+
 
 ##### Apple Xcode #####
 IF(CMAKE_GENERATOR STREQUAL "Xcode")
