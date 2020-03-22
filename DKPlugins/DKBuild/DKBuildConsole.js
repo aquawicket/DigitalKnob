@@ -6,7 +6,8 @@ function DKBuildConsole_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKBuild/DKBuild.js", function(){
 		DKBuild_ValidateCmake();
-		DKBuild_ValidateVC2015();
+		//DKBuild_ValidateVC2015();
+		DKBuild_ValidateVC2019();
 		DKBuild_ValidateGcc();
 		DKBuild_ValidateXcode();
 	

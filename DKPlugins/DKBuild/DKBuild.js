@@ -12,7 +12,7 @@ var DKPATH = "";
 //var SVN = "";
 var CMAKE = "";
 var NDK = "";
-var VC2015 = "C:/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe";
+var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
 var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
@@ -98,12 +98,12 @@ function DKBuild_InstallCmake()
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.4.1-win32-x86.exe", datapath);
-		DK_System(datapath+"/cmake-3.4.1-win32-x86.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.0-win32-x86.msi", datapath);
+		DK_System(datapath+"/cmake-3.17.0-win32-x86.msi");
 	}
 	else if(DK_GetOS() == "Win64"){
-		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.4.1-win32-x86.exe", datapath);
-		DK_System(datapath+"/cmake-3.4.1-win32-x86.exe");
+		DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.0-win32-x86.msi", datapath);
+		DK_System(datapath+"/cmake-3.17.0-win32-x86.msi");
 	}
 	else if(DK_GetOS() == "Mac"){
 		//TODO
@@ -117,30 +117,30 @@ function DKBuild_InstallCmake()
 }
 
 /////////////////////////////////
-function DKBuild_ValidateVC2015()
+function DKBuild_ValidateVC2019()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
-	console.log("Looking for Visual Studio 2015");
-	//console.log(VC2015);
-	if(!DKFile_Exists(VC2015)){
-		DKBuild_InstallVC2015();
+	console.log("Looking for Visual Studio 2019");
+	//console.log(VC2019);
+	if(!DKFile_Exists(VC2019)){
+		DKBuild_InstallVC2019();
 	}
-	console.log("Found Visual Studio 2015");
+	console.log("Found Visual Studio 2019");
 }
 
 ////////////////////////////////
-function DKBuild_InstallVC2015()
+function DKBuild_InstallVC2019()
 {
 	DKDEBUGFUNC();
-	console.log("Installing Visual Studio 2015");
+	console.log("Installing Visual Studio 2019");
 	var datapath = DKAssets_LocalAssets();
 	
-	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_community_ENU__908841471.1484716364.exe", datapath);
-	DK_System(datapath+"vs_community_ENU__908841471.1484716364.exe");
+	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
+	DK_System(datapath+"vs_Community.exe");
 }
 
 //////////////////////////////
@@ -433,7 +433,8 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH+"/DK");
+		
+		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
@@ -482,7 +483,7 @@ function DKBuild_DoResults()
 		}
 		DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015 Win64\" "+cmake_string+DKPATH+"/DK");
+		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019 Win64\" "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE == "Debug" || TYPE == "ALL"){
@@ -806,7 +807,7 @@ function DKBuild_DoResults()
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			var rtvalue;
 			if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(DK_GetOS() == "Linux" || DK_GetOS() == "Mac"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
@@ -839,7 +840,7 @@ function DKBuild_DoResults()
 			DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			var rtvalue;
 			if(DK_GetOS() == "Win64" || DK_GetOS() == "Win64"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 14 2015\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(DK_GetOS() == "Linux" || DK_GetOS() == "Mac"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
