@@ -1,2 +1,6 @@
+Windows SDK and emulator archive
 https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/
+
+C2118 error with Windows Kits 10.0.18362.0 in winnt.h
+https://developercommunity.visualstudio.com/content/problem/739697/c2118-error-with-windows-kits-100183620-in-winnth.html
 
