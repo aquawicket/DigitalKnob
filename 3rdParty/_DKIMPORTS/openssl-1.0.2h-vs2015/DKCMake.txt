@@ -3,7 +3,7 @@ IF(NOT WIN32)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/openssl-1.0.2h-vs2015.7z openssl-1.0.2h-vs2015)
+DKINSTALL(${DKWEB}/Download/Libs/openssl-1.0.2h-vs2015.7z openssl-1.0.2h-vs2015)
 DKSET(OPENSSL ${3RDPARTY}/openssl-1.0.2h-vs2015)
 
 
