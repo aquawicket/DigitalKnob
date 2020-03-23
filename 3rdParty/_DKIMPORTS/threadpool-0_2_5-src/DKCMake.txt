@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/threadpool-0_2_5-src.zip threadpool-0_2_5-src)
+DKINSTALL(${DKWEB}/Download/Libs/threadpool-0_2_5-src.zip threadpool-0_2_5-src)
 DKSET(THREADPOOL ${3RDPARTY}/threadpool-0_2_5-src)
 
 
