@@ -4,7 +4,7 @@ ENDIF()
 
 IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Tools/doxygen-1.8.13-setup.exe)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/doxygen-1.8.13-setup.exe)
 	DKSET(QUEUE_BUILD ON)
 	WIN32_COMMAND(${DIGITALKNOB}/Download/doxygen-1.8.13-setup.exe)
 ENDIF()
