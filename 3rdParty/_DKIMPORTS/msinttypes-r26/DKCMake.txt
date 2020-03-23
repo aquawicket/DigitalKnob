@@ -3,7 +3,7 @@ IF(EXISTS ${3RDPARTY}/msinttypes-r26)
 	###
 ELSE()
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(http://digitalknob.com/Download/Libs/msinttypes-r26.zip)
+	DKDOWNLOAD(${DKWEB}/Download/Libs/msinttypes-r26.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/msinttypes-r26.zip ${3RDPARTY}/msinttypes-r26)
 ENDIF()
 DKSET(STDINT ${3RDPARTY}/msinttypes-r26)

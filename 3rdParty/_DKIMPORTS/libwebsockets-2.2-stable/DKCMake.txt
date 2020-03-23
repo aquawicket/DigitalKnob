@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/libwebsockets-2.2-stable.zip libwebsockets-2.2-stable)
+DKINSTALL(${DKWEB}/Download/Libs/libwebsockets-2.2-stable.zip libwebsockets-2.2-stable)
 DKSET(WEBSOCKETS ${3RDPARTY}/libwebsockets-2.2-stable)
 
 
@@ -18,7 +18,7 @@ LINUX_RELEASE_LIB(${WEBSOCKETS}/linux64/Release/lib/libwebsockets.a)
 
 ### COMPILE ###
 DKSETPATH(${WEBSOCKETS}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON -LWS_WITH_SSL=OFF ${WEBSOCKETS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON -LWS_WITH_SSL=OFF ${WEBSOCKETS})
 WIN32_VS_DEBUG(libwebsockets-2.2-stable libwebsockets.sln websockets)
 WIN32_VS_RELEASE(libwebsockets-2.2-stable libwebsockets.sln websockets)
 

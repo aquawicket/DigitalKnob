@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/lighttpd1.4-lighttpd-1.4.45.zip lighttpd1.4-lighttpd-1.4.45)
+DKINSTALL(${DKWEB}/Download/Libs/lighttpd1.4-lighttpd-1.4.45.zip lighttpd1.4-lighttpd-1.4.45)
 DKSET(LIGHTTPD ${3RDPARTY}/lighttpd1.4-lighttpd-1.4.45)
 
 
@@ -18,7 +18,7 @@ LINUX_RELEASE_LIB(${LIGHTTPD}/linux64/Release/lib/liblighttpd.a)
 
 ### COMPILE ###
 DKSETPATH(${LIGHTTPD}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON ${LIGHTTPD})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /D__FLTUSED__" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWIN_32=ON ${LIGHTTPD})
 WIN32_VS_DEBUG(liblighttpd liblighttpd.sln LIGHTTPD)
 WIN32_VS_RELEASE(liblighttpd liblighttpd.sln LIGHTTPD)
 
