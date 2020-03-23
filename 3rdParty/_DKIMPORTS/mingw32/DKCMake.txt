@@ -5,7 +5,7 @@
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw32)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(http://digitalknob.com/Download/Tools/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z)
 	DKEXTRACT(${DIGITALKNOB}/Download/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z ${3RDPARTY}/mingw)
 ENDIF()
 

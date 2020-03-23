@@ -5,7 +5,7 @@
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw64)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(http://digitalknob.com/Download/Tools/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
 	DKEXTRACT(${DIGITALKNOB}/Download/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z ${3RDPARTY}/mingw)
 ENDIF()
 
