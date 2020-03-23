@@ -9,7 +9,7 @@ IF(WIN)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/xz-5.2.0.tar.gz xz-5.2.0) 
+DKINSTALL(${DKWEB}/Download/Libs/xz-5.2.0.tar.gz xz-5.2.0) 
 DKSET(XZ ${3RDPARTY}/xz-5.2.0)
 
 

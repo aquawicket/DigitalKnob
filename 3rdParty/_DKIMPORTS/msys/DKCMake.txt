@@ -2,7 +2,7 @@
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/msys)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(http://digitalknob.com/Download/Tools/MSYS-20111123.zip)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/MSYS-20111123.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/MSYS-20111123.zip ${3RDPARTY}/mingw)
 ENDIF()
 
