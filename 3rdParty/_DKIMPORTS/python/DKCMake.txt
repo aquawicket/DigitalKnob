@@ -5,7 +5,7 @@ ENDIF()
 
 IF(NOT EXISTS C:/Python27/python.exe)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(http://digitalknob.com/Download/Tools/python-2.7.10.msi)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/python-2.7.10.msi)
 	DKSETPATH(C:/)
 	DKSET(QUEUE_BUILD ON)
 	WIN32_COMMAND(${DIGITALKNOB}/Download/python-2.7.10.msi)
