@@ -1,0 +1,16 @@
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+IF(NOT EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/2019")
+	MESSAGE(STATUS "Installing Visual Studio 2019")
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://DigitalKnob.com/Download/Tools/vs_Community.exe)
+	#DKEXTRACT(${DIGITALKNOB}/Download/MSYS-20111123.zip)
+	DKSET(QUEUE_BUILD ON)
+	WIN32_COMMAND(${DIGITALKNOB}/Download/vs_Community.exe)
+ENDIF()
+
+DKSET(VC_EXE C:/Progra~2/Micros~1/2019/Community/MSBuild/Current/Bin/MSBuild.exe)
+DKSET(GENERATOR "Visual Studio 16 2019")
