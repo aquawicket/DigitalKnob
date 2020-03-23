@@ -4,7 +4,7 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/cef_binary_3.3538.1850.ge710be4_windows32.tar.bz2 cef_binary_3.3538.1850.ge710be4_windows32)
+DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1850.ge710be4_windows32.tar.bz2 cef_binary_3.3538.1850.ge710be4_windows32)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3538.1850.ge710be4_windows32)
 
 
