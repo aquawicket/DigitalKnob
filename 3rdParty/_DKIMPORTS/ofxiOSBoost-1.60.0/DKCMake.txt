@@ -10,7 +10,7 @@ IF(EXISTS ${3RDPARTY}/ofxiOSBoost-1.60.0)
 	###
 ELSE()
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Libs/ofxiOSBoost-1.60.0.zip)
+	DKDOWNLOAD(${DKWEB}/Download/Libs/ofxiOSBoost-1.60.0.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/ofxiOSBoost-1.60.0.zip ${3RDPARTY})
 ENDIF()
 

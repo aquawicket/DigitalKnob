@@ -2,7 +2,7 @@ DKDEPEND(boost_1_57_0 Boost_System)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3)
+DKINSTALL(${DKWEB}/Download/Libs/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3)
 DKSET(TORRENT ${3RDPARTY}/libtorrent-libtorrent-1_1_3)
 
 
@@ -22,12 +22,12 @@ ANDROID_RELEASE_LIB(${TORRENT}/${OS}/Release/obj/local/armeabi-v7a/libtorrent.a)
 
 ### COMPILE ###
 DKSETPATH(${TORRENT}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON -DOPENSSL_ROOT_DIR=${OPENSSL} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/win32/lib ${TORRENT})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON -DOPENSSL_ROOT_DIR=${OPENSSL} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/win32/lib ${TORRENT})
 WIN32_VS_DEBUG(libtorrent-libtorrent-1_1_3 libtorrent.sln torrent-rasterbar)
 WIN32_VS_RELEASE(libtorrent-libtorrent-1_1_3 libtorrent.sln torrent-rasterbar)
 
 DKSETPATH(${TORRENT}/${OS})
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${TORRENT})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${TORRENT})
 WIN64_VS_DEBUG(libtorrent-master libtorrent.sln torrent)
 WIN64_VS_RELEASE(libtorrent-master libtorrent.sln torrent)
 

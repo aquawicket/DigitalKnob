@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/flac-1.3.2.zip flac-1.3.2)
+DKINSTALL(${DKWEB}/Download/Libs/flac-1.3.2.zip flac-1.3.2)
 DKSET(FLAC ${3RDPARTY}/flac-1.3.2)
 
 

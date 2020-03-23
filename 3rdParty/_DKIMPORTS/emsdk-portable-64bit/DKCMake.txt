@@ -3,7 +3,7 @@
 IF(WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable-64bit/emscripten")
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-		DKDOWNLOAD(${DKONLINE}/Tools/emsdk-portable-64bit.zip)
+		DKDOWNLOAD(${DKWEB}/Download/Tools/emsdk-portable-64bit.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)

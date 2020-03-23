@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/duktape-2.2.0.tar.xz duktape-2.2.0)
+DKINSTALL(${DKWEB}/Download/Libs/duktape-2.2.0.tar.xz duktape-2.2.0)
 DKSET(DUKTAPE ${3RDPARTY}/duktape-2.2.0)
 
 IF(WIN)

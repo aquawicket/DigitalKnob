@@ -10,7 +10,7 @@ IF(EXISTS ${3RDPARTY}/ofxiOSBoost-1.60.0-libc-bitcode)
 	###
 ELSE()
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Libs/ofxiOSBoost-1.60.0-libc-bitcode.zip)
+	DKDOWNLOAD(${DKWEB}/Download/Libs/ofxiOSBoost-1.60.0-libc-bitcode.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/ofxiOSBoost-1.60.0-libc-bitcode.zip ${3RDPARTY})
 ENDIF()
 

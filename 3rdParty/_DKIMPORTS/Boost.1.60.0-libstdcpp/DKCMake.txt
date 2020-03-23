@@ -10,7 +10,7 @@ IF(EXISTS ${3RDPARTY}/Boost.1.60.0-libstdcpp)
 	###
 ELSE()
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Libs/Boost.1.60.0-libstdcpp.zip)
+	DKDOWNLOAD(${DKWEB}/Download/Libs/Boost.1.60.0-libstdcpp.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/Boost.1.60.0-libstdcpp.zip ${3RDPARTY}/Boost.1.60.0-libstdcpp)
 ENDIF()
 

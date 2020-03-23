@@ -8,7 +8,7 @@ ENDIF()
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libvncserver-master-win.zip libvncserver-master-win)
+DKINSTALL(${DKWEB}/Download/Libs/libvncserver-master-win.zip libvncserver-master-win)
 DKSET(VNCSERVER ${3RDPARTY}/libvncserver-master-win)
 
 
@@ -24,14 +24,14 @@ WIN_RELEASE_LIB(${VNCSERVER}/${OS}/Release/vncclient.lib)
 
 
 DKSETPATH(${VNCSERVER}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS} /I${PNG}/${OS} /I${JPEG}/${OS}" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib -DPNG_PNG_INCLUDE_DIR=${PNG} -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/Debug/libpng17_staticd.lib -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/Release/libpng17_static.lib -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_LIBRARY=${JPEG}/${OS}/Release/turbojpeg-static.lib -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib -DWITH_JPEG=ON ${VNCSERVER})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /I${ZLIB}/${OS} /I${PNG}/${OS} /I${JPEG}/${OS}" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DCMAKE_USE_OPENSSL=ON -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib -DPNG_PNG_INCLUDE_DIR=${PNG} -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/Debug/libpng17_staticd.lib -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/Release/libpng17_static.lib -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_LIBRARY=${JPEG}/${OS}/Release/turbojpeg-static.lib -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib -DWITH_JPEG=ON ${VNCSERVER})
 WIN32_VS_DEBUG(libvncserver-master-win LibVNCServer.sln vncserver)
 WIN32_VS_RELEASE(libvncserver-master-win LibVNCServer.sln vncserver)
 WIN32_VS_DEBUG(libvncserver-master-win LibVNCServer.sln vncclient)
 WIN32_VS_RELEASE(libvncserver-master-win LibVNCServer.sln vncclient)
 
 DKSETPATH(${VNCSERVER}/${OS})
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${VNCSERVER})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${VNCSERVER})
 WIN64_VS_DEBUG(libvncserver-master-win LibVNCServer.sln vncserver)
 WIN64_VS_RELEASE(libvncserver-master-win LibVNCServer.sln vncserver)
 WIN64_VS_DEBUG(libvncserver-master-win LibVNCServer.sln vncclient)

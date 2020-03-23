@@ -3,7 +3,7 @@
 IF(MAC OR LINUX)
 	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable/emscripten")
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-		DKDOWNLOAD(${DKONLINE}/Tools/emsdk-portable.tar.gz)
+		DKDOWNLOAD(${DKWEB}/Download/Tools/emsdk-portable.tar.gz)
 		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
 		DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable)

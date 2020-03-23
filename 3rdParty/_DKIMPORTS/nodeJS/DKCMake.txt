@@ -5,6 +5,6 @@ ENDIF()
 
 IF(NOT EXISTS "C:/Program Files/nodejs")
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKONLINE}/Tools/node-v4.4.7-x64.msi)
+	DKDOWNLOAD(${DKWEB}/Download/Tools/node-v4.4.7-x64.msi)
 	WIN32_COMMAND(${DIGITALKNOB}/Download/node-v4.4.7-x64.msi)
 ENDIF()

@@ -3,7 +3,7 @@ IF(NOT WIN_64)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/cef_binary_3.3538.1850.ge710be4_windows64.tar.bz2 cef_binary_3.3538.1850.ge710be4_windows64)
+DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1850.ge710be4_windows64.tar.bz2 cef_binary_3.3538.1850.ge710be4_windows64)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3538.1850.ge710be4_windows64)
 
 
