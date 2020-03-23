@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/giflib-5.1.1.tar.gz giflib-5.1.1)
+DKINSTALL(${DKWEB}/Download/Libs/giflib-5.1.1.tar.gz giflib-5.1.1)
 DKSET(GIF ${3RDPARTY}/giflib-5.1.1)
 
 
