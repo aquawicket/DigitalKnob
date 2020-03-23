@@ -14,8 +14,6 @@ IF(COMMAND cmake_policy)
 ENDIF(COMMAND cmake_policy)
 ##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
 
-SET(DKONLINE "http://DigitalKnob.com/Download")
-
 
 ########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
