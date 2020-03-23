@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/bzip2-1.0.6.tar.gz bzip2-1.0.6)
+DKINSTALL(${DKWEB}/Download/Libs/bzip2-1.0.6.tar.gz bzip2-1.0.6)
 DKSET(BZIP2 ${3RDPARTY}/bzip2-1.0.6)
 IF(NOT EXISTS ${3RDPARTY}/bzip2-temp)
 	DKCOPY(${BZIP2} ${3RDPARTY}/bzip2-temp TRUE)

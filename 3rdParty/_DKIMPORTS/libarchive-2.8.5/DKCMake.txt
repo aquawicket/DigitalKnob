@@ -7,7 +7,7 @@ DKDEPEND(zlib-1.2.11)
 DKDEPEND(xz-5.2.0)
 
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libarchive-2.8.5.zip libarchive-2.8.5)
+DKINSTALL(${DKWEB}/Download/Libs/libarchive-2.8.5.zip libarchive-2.8.5)
 DKSET(ARCHIVE ${3RDPARTY}/libarchive-2.8.5)
 
 
