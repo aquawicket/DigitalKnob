@@ -1,5 +1,5 @@
 ### INSTALL ###
-DKINSTALL(${DKONLINE}/Libs/libjpeg-turbo-1.5.3.zip libjpeg-turbo-1.5.3)
+DKINSTALL(${DKWEB}/Download/Libs/libjpeg-turbo-1.5.3.zip libjpeg-turbo-1.5.3)
 DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-1.5.3)
 
 
@@ -19,12 +19,12 @@ ANDROID_RELEASE_LIB(${JPEG}/${OS}/Release/obj/local/armeabi-v7a/libturbojpeg.a)
 
 ### COMPILE ###
 DKSETPATH(${JPEG}/${OS})
-WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWITH_SIMD=OFF ${JPEG})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DWITH_SIMD=OFF ${JPEG})
 WIN32_VS_DEBUG(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 WIN32_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 
 DKSETPATH(${JPEG}/${OS})
-WIN64_COMMAND(${CMAKE_COMMAND} -G ${X64GENERATOR} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEG})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${JPEG})
 WIN64_VS_DEBUG(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 WIN64_VS_RELEASE(libjpeg-turbo-1.5.3 libjpeg-turbo.sln turbojpeg-static)
 
