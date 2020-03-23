@@ -1,3 +1,3 @@
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/pugixml-1.6.zip pugixml-1.6)
+DKINSTALL(${DKWEB}/Download/Libs/pugixml-1.6.zip pugixml-1.6)
 DKSET(PUGIXML ${3RDPARTY}/pugixml-1.6)
