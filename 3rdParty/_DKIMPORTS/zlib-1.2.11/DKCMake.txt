@@ -3,7 +3,7 @@ IF(ANDROID)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(http://digitalknob.com/Download/Libs/zlib1211.zip zlib-1.2.11)
+DKINSTALL(${DKWEB}/Download/Libs/zlib1211.zip zlib-1.2.11)
 DKSET(ZLIB ${3RDPARTY}/zlib-1.2.11)
 
 
