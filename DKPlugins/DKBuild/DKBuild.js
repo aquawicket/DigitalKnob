@@ -492,13 +492,13 @@ function DKBuild_DoResults()
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe")){
 				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
-			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
+			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE == "Release" || TYPE == "ALL"){
 			if(DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
 				DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
-			DK_Execute("C:/Progra~2/MSBuild/14.0/Bin/MSBuild.exe "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
+			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
 		//copy .pdb file to assets
