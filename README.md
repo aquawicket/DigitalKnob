@@ -1,6 +1,3 @@
-NOTICE:  I am in need of a mirror for the assets of this project.  15 gigs or so.  
-         text me at 714-=631-=6285.     ref. DigitalKnob         thanks you.
-
 ![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
 # DigitalKnob
 
