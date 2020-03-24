@@ -75,7 +75,8 @@ bool DKRocket::Init()
 	//START DEBUGGING FROM HERE
 	//ERROR.  this sets rocket's directory to assets/DKRocket... 
 	//        we need it to reference from the assets folder.
-	LoadUrl(DKFile::local_assets+"DKRocket/blank.html");
+	LoadUrl(DKFile::local_assets+"blank.html");
+	DKFile::ChDir(DKFile::local_assets);
 
 	return true;
 }
