@@ -174,7 +174,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	document->Show();
 	//document->RemoveReference();
 
-	dkRmlToRML.PostProcess(document);
+	//dkRmlToRML.PostProcess(document);
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
