@@ -1,3 +1,5 @@
+//https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
 {

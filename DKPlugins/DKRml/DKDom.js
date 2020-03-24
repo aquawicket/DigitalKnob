@@ -1,3 +1,5 @@
+//https://developer.mozilla.org/en-US/docs/Web/API/Window
+
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
 
 Object.defineProperty(window, "closed",                { get: function(){ return DKRml_closed(this.pointer);           } });  //TODO
