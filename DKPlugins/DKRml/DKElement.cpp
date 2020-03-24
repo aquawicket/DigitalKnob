@@ -217,7 +217,7 @@ int DKElement::innerHTML(duk_context* ctx)
 
 	//get
 	if(!duk_is_string(ctx, 1)){
-		DKString innerHtml = element->GetInnerRML();//.CString();
+		DKString innerHtml = element->GetInnerRML();
 		if(innerHtml.empty()){ return true; }
 		duk_push_string(ctx, innerHtml.c_str());
 	}

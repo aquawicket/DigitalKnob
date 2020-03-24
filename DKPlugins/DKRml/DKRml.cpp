@@ -47,19 +47,17 @@ bool DKRml::Init()
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::Core::CreateContext("default", Rml::Core::Vector2i(w, h));
 
-		//Rml::Controls::Initialise();
+		Rml::Controls::Initialise();
 	}
 	
 	LoadFonts();
 	
-	/*
 	if(DKClass::DKAvailable("DKSDLRml")){
 		if(!Rml::Debugger::Initialise(context)){
-			DKERROR("Rml::Core::Initialise(): failed\n");
+			DKERROR("Rml::Debugger::Initialise(): failed\n");
 			return false;
 		}
 	}
-	*/
 
 	DKEvent::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvent::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
@@ -74,14 +72,8 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKDocument");
 	DKClass::DKCreate("DKRml/DKDom.js");
 
-	//START DEBUGGING FROM HERE
-	//ERROR.  this sets rocket's directory to assets/DKRml... 
-	//        we need it to reference from the assets folder.
-	//LoadUrl(DKFile::local_assets+"blank.html");
-	
 	DKString html;
 	DKFile::FileToString(DKFile::local_assets+"DKRml/blank.html", html);
-	//DKFile::FileToString(DKFile::local_assets+"test.html", html);
 	DKFile::ChDir(DKFile::local_assets);
 	LoadHtml(html);
 
@@ -182,16 +174,14 @@ bool DKRml::LoadHtml(const DKString& html)
 	LoadFonts();
 #endif
 
-	/*
 	//find the last <html occurance
-	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
-	n = code.rfind("<html");
-	code = code.substr(n);
-	replace(code, "<", "\n<");
+	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
+	//int n = code.rfind("<html");
+	//code = code.substr(n);
+	//replace(code, "<", "\n<");
 	DKINFO("########## POST DKRml::LoadUrl CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
-	*/
 	
 	return true;
 }
@@ -316,12 +306,11 @@ bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	return true;
 }
 
-///////////////////////////////
+////////////////////////////
 bool DKRml::ToggleDebugger()
 {
 	DKDEBUGFUNC();
-	/*
-	if(Rml::Debugger::IsVisible()){
+	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns true
 		Rml::Debugger::SetVisible(false);
 		DKINFO("Rml Debugger OFF\n");
 	}
@@ -329,7 +318,6 @@ bool DKRml::ToggleDebugger()
 		Rml::Debugger::SetVisible(true);
 		DKINFO("Rml Debugger ON\n");
 	}
-	*/
 	return true;
 }
 

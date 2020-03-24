@@ -11,7 +11,7 @@ bool DKDocument::Init()
 	DKDuktape::AttachFunction("DKDocument_createElement", DKDocument::createElement);
 	DKDuktape::AttachFunction("DKDocument_getElementById", DKDocument::getElementById);
 	
-	//DKClass::DKCreate("DKRml/DKDocument.js");
+	DKClass::DKCreate("DKRml/DKDocument.js");
 	return true;
 }
 
