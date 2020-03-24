@@ -13,6 +13,9 @@ bool DKSDLRml::Init()
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
 	
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+
+	return true;
+
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml){
 		DKERROR("DKSDLRml::Init(): INVALID OBJECTS\n");

@@ -47,17 +47,19 @@ bool DKRml::Init()
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::Core::CreateContext("default", Rml::Core::Vector2i(w, h));
 
-		Rml::Controls::Initialise();
+		//Rml::Controls::Initialise();
 	}
 	
 	LoadFonts();
 	
+	/*
 	if(DKClass::DKAvailable("DKSDLRml")){
 		if(!Rml::Debugger::Initialise(context)){
 			DKERROR("Rml::Core::Initialise(): failed\n");
 			return false;
 		}
 	}
+	*/
 
 	DKEvent::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvent::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
@@ -317,6 +319,7 @@ bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& 
 bool DKRml::ToggleDebugger()
 {
 	DKDEBUGFUNC();
+	/*
 	if(Rml::Debugger::IsVisible()){
 		Rml::Debugger::SetVisible(false);
 		DKINFO("Rml Debugger OFF\n");
@@ -325,6 +328,7 @@ bool DKRml::ToggleDebugger()
 		Rml::Debugger::SetVisible(true);
 		DKINFO("Rml Debugger ON\n");
 	}
+	*/
 	return true;
 }
 
