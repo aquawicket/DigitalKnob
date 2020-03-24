@@ -60,6 +60,7 @@ public:
 	static DKString CreateElementFirst(const DKString& parent, const DKString& tag, const DKString& id);
 	static DKString CreateElementBefore(const DKString& element, const DKString& tag, const DKString& id);
 	static Rocket::Core::Element* GetElementById(const DKString& id);
+	static Rocket::Core::Element* GetElementByTag(const DKString& tag);
 	static bool AddEventListener(const DKString& id, const DKString& type);
 	static bool AppendChild(const DKString& parent, Rocket::Core::Element* element);
 	static bool AppendChild(const DKString& parent, const DKString& element);

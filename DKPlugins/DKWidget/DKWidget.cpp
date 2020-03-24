@@ -158,12 +158,17 @@ bool DKWidget::CreateWidget(DKString& file)
 	int numChildren = temp->GetNumChildren();
 	for(int i = 0; i < numChildren; i++){
 		//DKINFO("AppendChild("+data[2]+", temp->GetChild(0)\n");
-		AppendChild(data[2], temp->GetChild(0));
+		Rocket::Core::Element* body = GetElementByTag("body");
+		AppendChild(body, temp->GetChild(0));
 	}
 
 	//Set the root element of this widget
 	Trim(id);
 	root = dkRocket->document->GetElementById(_id.c_str());
+	if(!root){
+		DKERROR("DKWidget::CreateWidget("+path+"): root is NULL\n");
+		return false;
+	}
 
 	dkRocket->dkRocketToRML.PostProcess(root);
 
@@ -455,7 +460,7 @@ void DKWidget::GetAvailableId(const DKString& id, DKString& out)
 	//DKINFO("DKWidget::GetAvailableId("+id+")-> "+out+"\n");
 }
 
-///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 Rocket::Core::Element* DKWidget::GetElementById(const DKString& id)
 {
 	DKDEBUGFUNC(id);
@@ -473,6 +478,28 @@ Rocket::Core::Element* DKWidget::GetElementById(const DKString& id)
 		return 0;
 	}
 	return element;
+}
+
+/////////////////////////////////////////////////////////////////////
+Rocket::Core::Element* DKWidget::GetElementByTag(const DKString& tag)
+{
+	DKDEBUGFUNC(tag);
+	if(tag.empty()){
+		DKWARN("DKWidget::GetElementById(): tag empty\n");
+		return NULL;
+	}
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
+	if(!doc){
+		return 0;
+	}
+	//Rocket::Core::Element* element;
+	Rocket::Core::ElementList elements;
+	doc->GetElementsByTagName(elements, tag.c_str());
+	if(!elements[0]){
+		//DKWARN("DKWidget::GetElementById("+id+"): could not find element\n");
+		return 0;
+	}
+	return elements[0];
 }
 
 //////////////////////////////////////////////////////////
