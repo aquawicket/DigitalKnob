@@ -73,6 +73,8 @@ bool DKRocket::Init()
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
 	//START DEBUGGING FROM HERE
+	//ERROR.  this sets rocket's directory to assets/DKRocket... 
+	//        we need it to reference from the assets folder.
 	LoadUrl(DKFile::local_assets+"DKRocket/blank.html");
 
 	return true;
@@ -221,17 +223,16 @@ bool DKRocket::LoadUrl(const DKString& url)
 	LoadFonts();
 #endif
 
-	//DKString code = document->GetInnerRML().CString();
-	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
-	
+	/*
 	//find the last <html occurance
+	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
 	n = code.rfind("<html");
 	code = code.substr(n);
-
 	replace(code, "<", "\n<");
-	DKINFO("########## ROCKET RML CODE ##########\n");
+	DKINFO("########## POST DKRocket::LoadUrl CODE ##########\n");
 	DKINFO(code+"\n");
-	DKINFO("#####################################\n");
+	DKINFO("#################################################\n");
+	*/
 	return true;
 }
 

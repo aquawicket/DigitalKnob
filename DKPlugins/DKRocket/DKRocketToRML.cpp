@@ -279,6 +279,19 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		}
 	}
 
+
+	//DEBUG - Lets see the code
+	DKRocket* dkRocket = DKRocket::Get();
+	Rocket::Core::ElementDocument* doc = dkRocket->document;
+	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML().CString();
+	int n = code.rfind("<html");
+	code = code.substr(n);
+	replace(code, "<", "\n<");
+	DKINFO("########## Post DKRocketToRML::PostProcess CODE ##########\n");
+	DKINFO(code+"\n");
+	DKINFO("##########################################################\n");
+	return true;
+
 	return true;
 }
 
