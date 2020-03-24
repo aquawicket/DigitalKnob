@@ -20,6 +20,7 @@ public:
 	bool LoadFont(const DKString& file);
 	bool LoadFonts();
 	bool LoadUrl(const DKString& url);
+	bool LoadHtml(const DKString& url);
 	bool RegisterEvent(const DKString& id, const DKString& type);
 	bool Reload();
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);

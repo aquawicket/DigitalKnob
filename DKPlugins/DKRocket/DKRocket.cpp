@@ -75,8 +75,12 @@ bool DKRocket::Init()
 	//START DEBUGGING FROM HERE
 	//ERROR.  this sets rocket's directory to assets/DKRocket... 
 	//        we need it to reference from the assets folder.
-	LoadUrl(DKFile::local_assets+"blank.html");
+	//LoadUrl(DKFile::local_assets+"blank.html");
+	
+	DKString html;
+	DKFile::FileToString(DKFile::local_assets+"DKRocket/blank.html", html);
 	DKFile::ChDir(DKFile::local_assets);
+	LoadHtml(html);
 
 	return true;
 }
@@ -143,6 +147,52 @@ bool DKRocket::LoadFonts()
 	return true;
 }
 
+/////////////////////////////////////////////
+bool DKRocket::LoadHtml(const DKString& html)
+{
+	//// Prepair the html document for rocket
+	DKString rml;
+	dkRocketToRML.IndexToRml(html, rml);
+
+	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
+	DKINFO(rml+"\n");
+	DKINFO("#########################################\n");
+
+	//// Clear any document and load the rml into the document
+	if(document){ 
+		Rocket::Core::Factory::ClearStyleSheetCache();
+		document->Close(); 
+	}
+	document = context->LoadDocumentFromMemory(rml.c_str());
+	if(!document){
+		document = context->LoadDocumentFromMemory("");
+		DKERROR("DKRocket::LoadHtml(): document invalid\n");
+		return false;
+	}
+	document->Show();
+	document->RemoveReference();
+
+	dkRocketToRML.PostProcess(document);
+
+#ifdef ANDROID
+	//We have to make sure the fonts are loaded on ANDROID
+	LoadFonts();
+#endif
+
+	/*
+	//find the last <html occurance
+	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
+	n = code.rfind("<html");
+	code = code.substr(n);
+	replace(code, "<", "\n<");
+	DKINFO("########## POST DKRocket::LoadUrl CODE ##########\n");
+	DKINFO(code+"\n");
+	DKINFO("#################################################\n");
+	*/
+	
+	return true;
+}
+
 ////////////////////////////////////////////
 bool DKRocket::LoadUrl(const DKString& url)
 {
@@ -196,44 +246,7 @@ bool DKRocket::LoadUrl(const DKString& url)
 		}
 	}
 
-	//// Prepair the html document for rocket
-	DKString rml;
-	dkRocketToRML.IndexToRml(html, rml);
-
-	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
-	DKINFO(rml+"\n");
-	DKINFO("#########################################\n");
-
-	//// Clear any document and load the rml into the document
-	if(document){ 
-		Rocket::Core::Factory::ClearStyleSheetCache();
-		document->Close(); 
-	}
-	document = context->LoadDocumentFromMemory(rml.c_str());
-	if(!document){
-		document = context->LoadDocumentFromMemory("");
-		DKERROR("Could not load "+_url+"\n");
-	}
-	document->Show();
-	document->RemoveReference();
-	
-	dkRocketToRML.PostProcess(document);
-
-#ifdef ANDROID
-	//We have to make sure the fonts are loaded on ANDROID
-	LoadFonts();
-#endif
-
-	/*
-	//find the last <html occurance
-	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
-	n = code.rfind("<html");
-	code = code.substr(n);
-	replace(code, "<", "\n<");
-	DKINFO("########## POST DKRocket::LoadUrl CODE ##########\n");
-	DKINFO(code+"\n");
-	DKINFO("#################################################\n");
-	*/
+	LoadHtml(html);
 	return true;
 }
 
