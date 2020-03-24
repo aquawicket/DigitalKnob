@@ -5,7 +5,6 @@
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
 #include <RmlUi/Controls.h>
-//#include <RmlUi/Core/ElementUtilities.h>
 
 ///////////////////
 class DKRmlToRML

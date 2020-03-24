@@ -104,11 +104,10 @@ bool DKRml::End()
 bool DKRml::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
-	//if(!Rml::Core::FontDatabase::LoadFontFace(file.c_str())){
-	//	DKERROR("Could not load "+file+"\n");
-	//	return false;
-	//}
-	//fonts_loaded = true;
+	if(!Rml::Core::LoadFontFace(file.c_str())){
+		DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
+		return false;
+	}
 	return true;
 }
 
