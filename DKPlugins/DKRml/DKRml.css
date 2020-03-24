@@ -1,0 +1,526 @@
+/* libRml user agent stylesheet */
+
+/* http://www.w3schools.com/css/css_syntax.asp */
+/* http://librocket.com/wiki/documentation/RCSS/Selectors */
+
+html{
+	font-family: "Times New Roman";
+	font-size: 130%;
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+	top:0px;
+	left:0px;
+}
+
+head{
+	display:none;
+}
+
+body{
+	font-family: "Times New Roman";
+	/*font-size: 13em;*/
+	color: black;
+	margin: 8px;
+	display: block;
+}
+
+style{
+	display:none;
+}
+
+title{
+	display:none;
+}
+
+option, div, tr{
+	display:block;
+}
+
+th{
+	font-weight: bold;
+}
+
+strong, b{
+	font-weight: bold;
+}
+
+i, cite, em, var, address{
+	font-style: italic;
+}
+
+p{
+	/* font-family: "Times New Roman"; */
+	display:block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+}
+
+h1{
+	display:block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	/* margin-block-start: 0.67em; */
+    /* margin-block-end: 0.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+h2{
+	display:block;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	/* margin-block-start: 0.83em; */
+    /* margin-block-end: 0.83em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+h3{
+	display:block;
+	font-size: 1.17em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+h4{
+	display:block;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	/* margin-block-start: 1.33em; */
+    /* margin-block-end: 1.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+h5{
+	display:block;
+	font-size: 0.83em;
+	margin-top: 1.67em;
+	margin-bottom: 1.67em;
+	/* margin-block-start: 1.67em; */
+    /* margin-block-end: 1.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+h6{
+	display:block;
+	font-size: 0.67em;
+	margin-top: 2.33em;
+	margin-bottom: 2.33em;
+	/* margin-block-start: 2.33em; */
+    /* margin-block-end: 2.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+
+ol{
+	display: block;
+    /* list-style-type: decimal; */
+	margin-top: 1em; 
+	margin-bottom: 1em;    
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	padding-bottom: 40px;
+    /* padding-inline-start: 40px; */
+}
+
+ul{
+	display: block;
+    /* list-style-type: disc; */
+	margin-top: 1em;  
+	margin-bottom: 1em;  
+    /* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+    padding-bottom: 40px;
+    /* padding-inline-start: 40px; */
+}
+
+li{
+	/* display: list-item; */
+    /* text-align: -webkit-match-parent; */
+}
+
+
+
+/**********************************/
+/******  libRml elements  ******/
+/**********************************/
+dataselect,
+dataselect selectvalue,
+dataselect selectbox option{
+	background-color:white;
+	color:black;
+}
+
+
+/* Buttons */
+button{
+	color: black;
+	width: 50px;
+	/* height: 20px; */
+	/* padding-top:2px; */
+	text-align: center;
+	
+	background-decorator: tiled-horizontal;
+	background-left-image: buttons.png 0px 0px 1px 21px;
+	background-center-image: buttons.png 1px 0px 20px 21px;
+	background-right-image: buttons.png 20px 0px 21px 21px;
+}
+
+button:hover{
+	background-left-image: buttons.png 21px 0px 22px 21px;
+	background-center-image: buttons.png 22px 0px 41px 21px;
+	background-right-image: buttons.png 41px 0px 42px 21px;
+}
+
+button:active{
+	background-left-image: buttons.png 42px 0px 43px 21px;
+	background-center-image: buttons.png 43px 0px 62px 21px;
+	background-right-image: buttons.png 62px 0px 63px 21px;
+}
+
+
+/* Checkboxes */
+input.checkbox{
+	width:12px;
+	height:12px;
+	icon-decorator: image;
+	icon-image: checkboxes.png 0px 0px 12px 12px;
+}
+
+input.checkbox:active{
+	icon-image: checkboxes.png 12px 0px 24px 12px;
+}
+
+input.checkbox:checked{
+	icon-image: checkboxes.png 24px 0px 36px 12px;
+}
+
+
+/* Passwords */
+input.password{
+	width: 100px;
+	height: 22px;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+
+input.password:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Radio Buttons */
+input.radio{
+	width:12px;
+	height:12px;
+	icon-decorator: image;
+	icon-image: radios.png 0px 0px 12px 12px;
+}
+
+input.radio:hover{
+	icon-image: radios.png 12px 0px 24px 12px;
+}
+
+input.radio:checked{
+	icon-image: radios.png 24px 0px 36px 12px;
+}
+
+
+/* Ranges */
+input.range{
+	width:150px;
+	height:150px;
+}
+
+input.range slidertrack{
+	height:4px;
+	width:4px;
+	margin-top:9px;
+	background-decorator: image;
+	background-image: rangetrack.png 0px 0px 4px 4px;
+}
+
+input.range sliderbar{
+	width:11px;
+	height:21px;
+	background-decorator: image;
+	background-image: rangebar.png 0px 0px 11px 21px;
+}
+
+/* Position Ranges */
+input.range.position{
+	width:107px;
+	height:14px;
+}
+
+input.range.position slidertrack{
+	height:8px;
+	width:107px;
+	margin-top:3px;
+	background-decorator: image;
+	background-image: ../DKAudio/position_track.png 0px 0px 107px 8px;
+}
+
+input.range.position sliderbar{
+	width:22px;
+	height:14px;
+	background-decorator: image;
+	background-image: ../DKAudio/position.png 0px 0px 22px 14px;
+}
+
+/* Volume Ranges */
+input.range.volume{
+	width:44px;
+	height:14px;
+}
+
+input.range.volume slidertrack{
+	height:8px;
+	width:44px;
+	margin-top:3px;
+	background-decorator: image;
+	background-image: ../DKAudio/volume_track.png 0px 0px 44px 8px;
+}
+
+input.range.volume sliderbar{
+	width:14px;
+	height:14px;
+	background-decorator: image;
+	background-image: ../DKAudio/volume.png 0px 0px 14px 14px;
+}
+
+
+/* Text Inputs */
+input.text{
+	width: 100px;
+	height: 21px;
+	min-height: 19px;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+
+input.text:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Textareas */
+textarea{
+	width: 180px;
+	height: 50px;
+	background-color:white;
+	color:black;
+	border-style: solid;
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+	resize: none;
+}
+
+textarea:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Selects */
+select{
+	background-color:white;
+	color:black;
+	width:80px;
+	height:20px;
+	border-style: solid;
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+
+select:hover{
+	border-color: rgb(120,120,120);
+}
+
+select:focus{
+	border-color: rgb(123,157,212);
+}
+
+select selectvalue{
+	padding-left: 3px;
+}
+
+select selectarrow{
+	width: 6px;
+	height: 6px;
+	margin-top: 6px;
+	margin-right: 6px;
+	icon-decorator: image;
+	icon-image: select.png 0px 0px 6px 6px;
+}
+
+select selectbox{
+	border-style: solid;
+    border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-color: rgb(123,157,212);
+}
+
+select selectbox option{
+	padding-left: 3px;
+	background-color:white;
+}
+
+select selectbox option:hover{
+	background-color: rgb(123,157,212);
+	color:white;
+}
+
+
+/* Scrollbars */
+scrollbarvertical{
+	width: 17px;
+}
+
+scrollbarvertical slidertrack{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 52px 68px 68px;
+}
+
+scrollbarvertical sliderbar{
+	min-height: 17px;
+	background-decorator: image;
+	background-image: scrollbars.png 0px 17px 17px 34px;
+}
+
+scrollbarvertical sliderbar:hover{
+	background-decorator: image;
+	background-image: scrollbars.png 34px 17px 51px 34px;
+}
+
+scrollbarvertical sliderbar:active{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 17px 68px 34px;
+}
+
+scrollbarvertical sliderarrowdec{
+	height: 17px;
+	width: 17px;
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 0px 34px 17px;
+}
+
+scrollbarvertical sliderarrowdec:hover{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 0px 51px 17px;
+}
+
+scrollbarvertical sliderarrowdec:active{
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 0px 68px 17px;
+}
+
+scrollbarvertical sliderarrowinc{
+	height: 17px;
+	width: 17px;
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 34px 34px 51px;
+}
+
+scrollbarvertical sliderarrowinc:hover{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 34px 51px 51px;
+}
+
+scrollbarvertical sliderarrowinc:active{
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 34px 68px 51px;
+}
+
+
+scrollbarhorizontal{
+	height: 17px;
+}
+
+scrollbarhorizontal slidertrack{
+	background-decorator: image;
+	background-image: scrollbars.png 51px 51px 51px 68px;
+}
+
+scrollbarhorizontal sliderbar{
+	min-width: 17px;
+	background-decorator: image;
+	background-image: scrollbars.png 17px 51px 34px 68px;
+}
+
+scrollbarhorizontal sliderbar:hover{
+	background-decorator: image;
+	background-image: scrollbars.png 17px 85px 34px 102px;
+}
+
+scrollbarhorizontal sliderbar:active{
+	background-decorator: image;
+	background-image: scrollbars.png 17px 102px 34px 119px;
+}
+
+scrollbarhorizontal sliderarrowdec{
+	height: 17px;
+	width: 17px;
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 68px 17px 85px;
+}
+
+scrollbarhorizontal sliderarrowdec:hover{
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 85px 17px 102px;
+}
+
+scrollbarhorizontal sliderarrowdec:active{
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 102px 17px 119px;
+}
+
+scrollbarhorizontal sliderarrowinc{
+	height: 17px;
+	width: 17px;
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 68px 51px 85px;
+}
+
+scrollbarhorizontal sliderarrowinc:hover{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 85px 51px 102px;
+}
+
+scrollbarhorizontal sliderarrowinc:active{
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 102px 51px 119px;
+}
+
+scrollbarcorner{
+	background-color: rgb(220,220,220);
+}
