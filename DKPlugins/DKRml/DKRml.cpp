@@ -80,8 +80,8 @@ bool DKRml::Init()
 	//LoadUrl(DKFile::local_assets+"blank.html");
 	
 	DKString html;
-	//DKFile::FileToString(DKFile::local_assets+"DKRml/blank.html", html);
-	DKFile::FileToString(DKFile::local_assets+"test.html", html);
+	DKFile::FileToString(DKFile::local_assets+"DKRml/blank.html", html);
+	//DKFile::FileToString(DKFile::local_assets+"test.html", html);
 	DKFile::ChDir(DKFile::local_assets);
 	LoadHtml(html);
 
