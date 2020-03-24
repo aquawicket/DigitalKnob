@@ -228,7 +228,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		if(!links[i]->HasAttribute("href")){ continue; }
 		//load the stylesheet in rocket
 		DKString href = links[i]->GetAttribute("href")->Get<Rocket::Core::String>().CString();
-		replace(href, DKRocket::Get()->_path, "");
+		//replace(href, DKRocket::Get()->_path, "");
 		DKClass::DKCreate(href);
 	}
 
