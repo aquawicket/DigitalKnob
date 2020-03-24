@@ -1,0 +1,90 @@
+##DKDEPEND(freetype-2.5.5)
+
+### INSTALL ###
+##DKINSTALL(${DKWEB}/Download/Libs/litehtml-master.zip litehtml-master)
+
+MESSAGE("Pulling litehtml-master from litehtml/litehtml git...")
+DKSET(GIT C:/Progra~1/Git/bin/git.exe)
+SET(STRING "${GIT} clone https://github.com/litehtml/litehtml.git ${3RDPARTY}/litehtml-master")
+FILE(MAKE_DIRECTORY ${3RDPARTY}/litehtml-master)
+EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
+DKSET(LITEHTML ${3RDPARTY}/litehtml-master)
+
+
+
+### LINK ###
+DKINCLUDE(${LITEHTML}/Include)
+DKINCLUDE(${LITEHTML}/Source)
+
+WIN_DEBUG_LIB(${LITEHTML}/${OS}/Debug/RmlDebugger.lib)
+WIN_RELEASE_LIB(${LITEHTML}/${OS}/Release/RmlDebugger.lib)
+MAC_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlDebugger.a)
+MAC_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlDebugger.a)
+IOSSIM_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlDebugger_d.a)
+IOSSIM_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlDebugger.a)
+LINUX_DEBUG_LIB(${LITEHTML}/${OS}/Debug/libRmlDebugger.a)
+LINUX_RELEASE_LIB(${LITEHTML}/${OS}/Release/libRmlDebugger.a)
+ANDROID_DEBUG_LIB(${LITEHTML}/${OS}/Debug/obj/local/armeabi-v7a/libRmlDebugger.a)
+ANDROID_RELEASE_LIB(${LITEHTML}/${OS}/Release/obj/local/armeabi-v7a/libRmlDebugger.a)
+
+WIN_DEBUG_LIB(${LITEHTML}/${OS}/Debug/RmlControls.lib)
+WIN_RELEASE_LIB(${LITEHTML}/${OS}/Release/RmlControls.lib)
+MAC_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlControls.a)
+MAC_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlControls.a)
+IOSSIM_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlControls_d.a)
+IOSSIM_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlControls.a)
+LINUX_DEBUG_LIB(${LITEHTML}/${OS}/Debug/libRmlControls.a)
+LINUX_RELEASE_LIB(${LITEHTML}/${OS}/Release/libRmlControls.a)
+ANDROID_DEBUG_LIB(${LITEHTML}/${OS}/Debug/obj/local/armeabi-v7a/libRmlControls.a)
+ANDROID_RELEASE_LIB(${LITEHTML}/${OS}/Release/obj/local/armeabi-v7a/libRmlControls.a)
+
+WIN_DEBUG_LIB(${LITEHTML}/${OS}/Debug/RmlCore.lib)
+WIN_RELEASE_LIB(${LITEHTML}/${OS}/Release/RmlCore.lib)
+MAC_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlCore.a)
+MAC_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlCore.a)
+IOSSIM_DEBUG_LIB(${LITEHTML}/${OS}/${DEBUG}/libRmlCore_d.a)
+IOSSIM_RELEASE_LIB(${LITEHTML}/${OS}/${RELEASE}/libRmlCore.a)
+LINUX_DEBUG_LIB(${LITEHTML}/${OS}/Debug/libRmlCore.a)
+LINUX_RELEASE_LIB(${LITEHTML}/${OS}/Release/libRmlCore.a)
+ANDROID_DEBUG_LIB(${LITEHTML}/${OS}/Debug/obj/local/armeabi-v7a/libRmlCore.a)
+ANDROID_RELEASE_LIB(${LITEHTML}/${OS}/Release/obj/local/armeabi-v7a/libRmlCore.a)
+
+
+
+### COMPILE ###
+DKSETPATH(${LITEHTML}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${LITEHTML}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${LITEHTML})
+WIN32_VS_DEBUG(litehtml-master litehtml.sln)
+WIN32_VS_RELEASE(litehtml-master litehtml.sln)
+
+DKSETPATH(${LITEHTML}/${OS})
+WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /I${LITEHTML}/Include" "-DCMAKE_CXX_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_CXX_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/freetype.lib ${LITEHTML})
+WIN64_VS_DEBUG(litehtml-master litehtml.sln)
+WIN64_VS_RELEASE(litehtml-master litehtml.sln)
+
+DKSETPATH(${LITEHTML}/${OS})
+MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/mac/Release/libfreetype.a ${LITEHTML})
+MAC_XCODE_DEBUG(litehtml-master)
+MAC_XCODE_RELEASE(litehtml-master)
+
+DKSETPATH(${LITEHTML}/${OS})
+IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/${RELEASE}/libfreetype.a ${LITEHTML})
+IOS_XCODE_DEBUG(litehtml-master)
+IOS_XCODE_RELEASE(litehtml-master)
+
+DKSETPATH(${LITEHTML}/${OS})
+IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/${RELEASE}/libfreetype.a ${LITEHTML})
+IOSSIM_XCODE_DEBUG(litehtml-master)
+IOSSIM_XCODE_RELEASE(litehtml-master)
+
+
+DKSETPATH(${LITEHTML}/${OS}/Debug)
+LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=DEBUG -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Debug/libfreetype.a ${LITEHTML})
+LINUX_DEBUG_COMMAND(make)
+
+DKSETPATH(${LITEHTML}/${OS}/Release)
+LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=RELEASE -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Release/libfreetype.a ${LITEHTML})
+LINUX_RELEASE_COMMAND(make)
+
+ANDROID_NDK_DEBUG(litehtml-master)
+ANDROID_NDK_RELEASE(litehtml-master)
