@@ -1,5 +1,5 @@
 #include "DK/stdafx.h"
-#include <Rml/Debugger/Debugger.h>
+#include <RmlUi/Debugger.h>
 #include "DKRml/DKRml.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
@@ -97,7 +97,7 @@ bool DKRml::End()
 	//	document->Close(); 
 	//}
 	if(context){
-		context->RemoveReference();
+		//context->RemoveReference();
 		Rml::Core::Shutdown();
 	}
 	return true;
@@ -109,10 +109,10 @@ bool DKRml::End()
 bool DKRml::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
-	if(!Rml::Core::FontDatabase::LoadFontFace(file.c_str())){
-		DKERROR("Could not load "+file+"\n");
-		return false;
-	}
+	//if(!Rml::Core::FontDatabase::LoadFontFace(file.c_str())){
+	//	DKERROR("Could not load "+file+"\n");
+	//	return false;
+	//}
 	//fonts_loaded = true;
 	return true;
 }
@@ -170,7 +170,7 @@ bool DKRml::LoadHtml(const DKString& html)
 		return false;
 	}
 	document->Show();
-	document->RemoveReference();
+	//document->RemoveReference();
 
 	dkRmlToRML.PostProcess(document);
 
@@ -308,7 +308,7 @@ bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& 
 	if(!element){ return false; }
 	
 	Rml::Core::Dictionary parameters;
-	parameters.Set("msg0", value.c_str());
+	//parameters.Set("msg0", value.c_str());
 	element->DispatchEvent(type.c_str(), parameters, false);
 	return true;
 }
@@ -370,10 +370,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	DKString str2 = ss2.str();
 	*/
 
-	DKString type = event.GetType().CString();
-	int phase = event.GetPhase();
+	DKString type = event.GetType(); //.CString();
+	Rml::Core::EventPhase phase = event.GetPhase();
 
-	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
+	DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}";
 
 	//Send this event back to duktape to be processed in javascript
 	DKString code = "EventFromCPP('"+str+"',"+evnt+");";
@@ -392,7 +392,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	if(ctx){ ele = ctx->GetHoverElement(); }
 	if(ele){ _hover = ele->GetParentNode(); }
 	if(_hover){ hover = _hover; }
-	if(event.GetPhase() == 1 && element != hover){ return; }
+	//if(event.GetPhase() == 1 && element != hover){ return; }
 
 	/*
 	//Event Monitor
@@ -442,7 +442,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 		if(same(_type,"input")){ _type = "change"; }
 		
 		//// PROCESS ELEMENT EVENTS //////
-		if(same(ev->GetId(), element->GetId().CString()) && same(_type, type)){
+		if(same(ev->GetId(), element->GetId()) && same(_type, type)){ //.CString()
 			//ev->rEvent = &event;
 
 			//pass the value
@@ -525,7 +525,7 @@ bool DKRml::GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elem
 		Rml::Core::Element* element = search_queue.front();
 		search_queue.pop();
 
-		if(!has(element->GetTagName().CString(), "#")){
+		if(!has(element->GetTagName(), "#")){ //.CString()
 			elements.push_back(element);
 		}
 

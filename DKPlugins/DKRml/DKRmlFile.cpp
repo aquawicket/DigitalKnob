@@ -9,7 +9,7 @@ Rml::Core::FileHandle DKRmlFile::Open(const Rml::Core::String& path)
 {
 	DKDEBUGFUNC("Rml::Core::String&");
 
-	DKString _url = path.CString();
+	DKString _url = path;//.CString();
 	if(has(_url,":/")){ //could be http:// , https:// or C:/
 		//absolute path
 	}

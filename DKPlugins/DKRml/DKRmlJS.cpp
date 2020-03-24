@@ -66,7 +66,7 @@ int DKRmlJS::innerWidth(duk_context* ctx)
 int DKRmlJS::name(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKString name = DKRml::Get()->context->GetName().CString();
+	DKString name = DKRml::Get()->context->GetName();//.CString();
 	duk_push_string(ctx, name.c_str());
 	return 1;
 }

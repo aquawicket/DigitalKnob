@@ -124,7 +124,7 @@ int DKElement::getAttribute(duk_context* ctx)
 		return true;
 	}
 	Rml::Core::String temp = element->GetAttribute(attribute.c_str())->Get<Rml::Core::String>();
-	DKString value = temp.CString();
+	DKString value = temp;//.CString();
 	duk_push_string(ctx, value.c_str());
 	return true;
 }
@@ -217,7 +217,7 @@ int DKElement::innerHTML(duk_context* ctx)
 
 	//get
 	if(!duk_is_string(ctx, 1)){
-		DKString innerHtml = element->GetInnerRML().CString();
+		DKString innerHtml = element->GetInnerRML();//.CString();
 		if(innerHtml.empty()){ return true; }
 		duk_push_string(ctx, innerHtml.c_str());
 	}

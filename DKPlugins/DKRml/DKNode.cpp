@@ -35,11 +35,11 @@ int DKNode::appendChild(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	element->AppendChild(child, true);
+	//element->AppendChild(child, true);
 	duk_push_string(ctx, childAddress.c_str());
 
 	//post process if it's a link
-	if(same("link", child->GetTagName().CString())){
+	if(same("link", child->GetTagName())){ //.CString()
 		if(child->HasAttribute("href")){
 			DKRmlToRML dkRmlToRML;
 			dkRmlToRML.PostProcess(child);

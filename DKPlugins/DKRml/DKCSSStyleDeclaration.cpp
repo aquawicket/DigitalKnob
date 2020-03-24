@@ -33,7 +33,7 @@ int  DKCSSStyleDeclaration::getPropertyValue(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true; 
 	}
-	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString().CString();
+	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString();//.CString();
 	duk_push_string(ctx, propertyValue.c_str());
 	return true;
 }

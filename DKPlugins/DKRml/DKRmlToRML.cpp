@@ -76,7 +76,7 @@ bool DKRmlToRML::Hyperlink(DKEvent* event)
 	Rml::Core::ElementDocument* doc = dkRml->document;
 	Rml::Core::Element* aElement = doc->GetElementById(id.c_str());
 
-	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>().CString();
+	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();//.CString();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	DKUtil::Run(value, "");
 	return true;
@@ -158,7 +158,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	Rml::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes()){ continue; }
-		DKString id = iframes[i]->GetId().CString();
+		DKString id = iframes[i]->GetId();//.CString();
 		if(has(processed, id)){ continue; }
 		DKString iTop = toString(iframes[i]->GetAbsoluteTop());
 		DKString iLeft = toString(iframes[i]->GetAbsoluteLeft());
@@ -171,7 +171,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			 return false;
 		}
 		else{
-			url = iframes[i]->GetAttribute("src")->Get<Rml::Core::String>().CString();
+			url = iframes[i]->GetAttribute("src")->Get<Rml::Core::String>();//.CString();
 		}
 		
 		DKClass::DKCreate("DKCef");
@@ -179,7 +179,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		//DKEvent::AddEvent(id, "mouseover", &DKRmlToRML::MouseOverIframe, this);
 		//DKEvent::AddEvent(id, "click", &DKRmlToRML::ClickIframe, this);
 
-		Rml::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img");
+		Rml::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
 
@@ -188,7 +188,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		cef_texture->SetAttribute("src", cef_id.c_str());
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
-		iframes[i]->AppendChild(cef_texture);
+		//iframes[i]->AppendChild(cef_texture);
 		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
@@ -202,7 +202,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		if(aElements[i]->HasAttribute("href")){
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
-			DKString id = aElements[i]->GetId().CString();
+			DKString id = aElements[i]->GetId();//.CString();
 			//DKEvent::AddEvent(id, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}
@@ -215,7 +215,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		Rml::Core::ElementList sources;
 		Rml::Core::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
 		for(unsigned int s=0; s<sources.size(); ++s){
-			DKString file = sources[s]->GetAttribute("src")->Get<Rml::Core::String>().CString();
+			DKString file = sources[s]->GetAttribute("src")->Get<Rml::Core::String>();//.CString();
 			DKString rval;
 			DKDuktape::RunDuktape("DKRmlAudio_Open(\""+file+"\");", rval);
 		}
@@ -227,7 +227,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	for(unsigned int i=0; i<links.size(); i++){
 		if(!links[i]->HasAttribute("href")){ continue; }
 		//load the stylesheet in rocket
-		DKString href = links[i]->GetAttribute("href")->Get<Rml::Core::String>().CString();
+		DKString href = links[i]->GetAttribute("href")->Get<Rml::Core::String>();//.CString();
 		//replace(href, DKRml::Get()->_path, "");
 		DKClass::DKCreate(href);
 	}
@@ -244,10 +244,10 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	for(unsigned int i=0; i<scripts.size(); i++){
 		DKString src;
 		if(scripts[i]->HasAttribute("src")){
-			src = scripts[i]->GetAttribute("src")->Get<Rml::Core::String>().CString();
+			src = scripts[i]->GetAttribute("src")->Get<Rml::Core::String>();//.CString();
 		}
 		
-		DKString inner = scripts[i]->GetInnerRML().CString();
+		DKString inner = scripts[i]->GetInnerRML();//.CString();
 		scripts[i]->SetProperty("display", "none");
 
 		if(!src.empty()){
@@ -283,7 +283,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	//DEBUG - Lets see the code
 	DKRml* dkRml = DKRml::Get();
 	Rml::Core::ElementDocument* doc = dkRml->document;
-	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML().CString();
+	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();//.CString();
 	int n = code.rfind("<html");
 	code = code.substr(n);
 	replace(code, "<", "\n<");
