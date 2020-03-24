@@ -2,7 +2,7 @@
 #ifndef DKSDLRml_H
 #define DKSDLRml_H
 
-#include <Rml/Core/Core.h>
+#include <RmlUi/Core.h>
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRml/DKRml.h"
@@ -12,7 +12,7 @@
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////
 class DKSDLRml : public DKObjectT<DKSDLRml>
 {
 public:

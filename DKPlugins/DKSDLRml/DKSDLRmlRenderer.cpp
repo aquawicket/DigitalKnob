@@ -1,4 +1,4 @@
-#include <Rml/Core/Core.h>
+#include <RmlUi/Core.h>
 #include <SDL_image.h>
 #include "DK/DK.h"
 #include "DK/DKString.h"
@@ -156,9 +156,9 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
 	//We will map that id to the texture handle for later use. 
-	if(has(source.CString(),"iframe_")){
+	if(has(source,"iframe_")){//.CString()
 		texture_handle = reinterpret_cast<Rml::Core::TextureHandle>(&source);
-		texture_name[texture_handle] = source.CString();
+		texture_name[texture_handle] = source;//.CString();
 		return true;
 	}
 
@@ -176,7 +176,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
     file_interface->Close(file_handle);
 
 #ifdef USE_SDL2_gif
-	std::string src = source.CString();
+	std::string src = source;//.CString();
 	if(has(src,".gif")){
 		animations.push_back(SDL_GIFAnimLoad_RW(SDL_RWFromMem(buffer, buffer_size), mRenderer));
 		SDL_Texture *texture = SDL_GIFTexture(animations[animations.size()-1]);
@@ -191,7 +191,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 			return false;
 		}
 
-		texture_name[texture_handle] = source.CString();
+		texture_name[texture_handle] = source;//.CString();
 		return true;
 	}
 	else{
@@ -206,7 +206,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 		else{
 			return false;
 		}
-		texture_name[texture_handle] = source.CString();
+		texture_name[texture_handle] = source;//.CString();
 		return true;
 
 #ifdef USE_SDL2_gif

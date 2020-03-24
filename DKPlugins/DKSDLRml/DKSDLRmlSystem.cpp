@@ -1,4 +1,4 @@
-#include <Rml/Core.h>
+#include <RmlUi/Core.h>
 #include "DKSDLRml/DKSDLRmlSystem.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -380,8 +380,8 @@ int RmlSDL2SystemInterface::GetKeyModifiers()
     return retval;
 }
 
-/////////////////////////////////////////////////
-float RmlSDL2SystemInterface::GetElapsedTime()
+///////////////////////////////////////////////
+double RmlSDL2SystemInterface::GetElapsedTime()
 {
 	//DKDEBUGFUNC();
 	return (float)SDL_GetTicks() / 1000;
@@ -391,31 +391,31 @@ float RmlSDL2SystemInterface::GetElapsedTime()
 bool RmlSDL2SystemInterface::LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message)
 {
 	//DKDEBUGFUNC(type, message);
-	if(has(message.CString(),"Loaded font face")){
+	if(has(message,"Loaded font face")){//.CString()
 		type = Rml::Core::Log::LT_DEBUG;
 	}
 	switch(type)
 	{
 	case Rml::Core::Log::LT_ALWAYS:
-		DKINFO("[Rml] "+DKString(message.CString())+"\n");
+		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
 	case Rml::Core::Log::LT_ERROR:
-		DKERROR("[Rml] "+DKString(message.CString())+"\n");
+		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
 	case Rml::Core::Log::LT_ASSERT:
-		DKERROR("[Rml] "+DKString(message.CString())+"\n");
+		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
 	case Rml::Core::Log::LT_WARNING:
-		DKWARN("[Rml] "+DKString(message.CString())+"\n");
+		DKWARN("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
 	case Rml::Core::Log::LT_INFO:
-		DKINFO("[Rml] "+DKString(message.CString())+"\n");
+		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
 	case Rml::Core::Log::LT_DEBUG:
-		DKDEBUG("[Rml] "+DKString(message.CString())+"\n");
+		DKDEBUG("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
     case Rml::Core::Log::LT_MAX:
-		DKINFO("[Rml] "+DKString(message.CString())+"\n");
+		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
         break;
 	};
 	

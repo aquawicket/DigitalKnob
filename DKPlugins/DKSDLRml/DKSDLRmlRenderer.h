@@ -2,7 +2,8 @@
 #ifndef DKSDLRmlRenderer_H
 #define DKSDLRmlRenderer_H
 
-#include <Rml/Core/RenderInterface.h>
+#include <RmlUi/Core.h>
+//#include <RmlUi/Core/RenderInterface.h>
 #include <SDL.h>
 
 #if !defined(ANDROID) && !defined(IOS)
