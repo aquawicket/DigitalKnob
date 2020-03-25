@@ -1,3 +1,4 @@
+//https://www.w3schools.com/js/js_htmldom_navigation.asp
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
 //https://hackernoon.com/inheritance-in-javascript-21d2b82ffa6f
