@@ -152,7 +152,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	replace(rml,"<meta name=\"generator\" content=", "");
 	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
 
-	rml = "<rml>\n"+rml+"</rml>";
+	rml = "<rml id=\"rml\">\n"+rml+"</rml>";
 	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css";
 	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 	//dkRmlToRML.IndexToRml(html, rml);
@@ -188,13 +188,12 @@ bool DKRml::LoadHtml(const DKString& html)
 	DKINFO("#################################################\n");
 
 	//find the last <body occurance
-	int n = code.rfind("<body");
+	int n = code.rfind("<html");
 	code = code.substr(n);
 	replace(code, "<", "\n<");
-	DKINFO("################ last body CODE FROM RmlUi ################\n");
+	DKINFO("################ last html tag CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("###########################################################\n");
-	
 	return true;
 }
 
@@ -330,6 +329,7 @@ bool DKRml::ToggleDebugger()
 		Rml::Debugger::SetVisible(true);
 		DKINFO("Rml Debugger ON\n");
 	}
+	Rml::Debugger::SetVisible(true); //Temporary Fix
 	return true;
 }
 
