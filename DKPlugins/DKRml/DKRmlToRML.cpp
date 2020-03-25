@@ -371,7 +371,7 @@ bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
 {
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");
-	DKINFO("#########################################\n");
+	DKINFO("#######################################\n");
 
 	const char* input = in.c_str();
 	TidyBuffer output = {0};
@@ -380,7 +380,7 @@ bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
 	Bool ok;
 
 	TidyDoc tdoc = tidyCreate();                     // Initialize "document"
-	printf("Tidying:\t%s\n", input);
+	//printf("Tidying:\t%s\n", input);
 
 	ok = tidyOptSetBool(tdoc, TidyXhtmlOut, yes);  // Convert to XHTML
 	if(ok){
@@ -404,12 +404,12 @@ bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
 
 	if(rc >= 0){
 		if(rc > 0){
-			DKERROR("Tidy Error\n");
 			//printf( "\nDiagnostics:\n\n%s", errbuf.bp );
-		//printf( "\nAnd here is the result:\n\n%s", output.bp );
+			//printf( "\nAnd here is the result:\n\n%s", output.bp );
 		}
 	}
 	else{
+		DKERROR("Tidy Error\n");
 		//printf( "A severe error (%d) occurred.\n", rc );
 	}
 

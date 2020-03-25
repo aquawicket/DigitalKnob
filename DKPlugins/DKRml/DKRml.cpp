@@ -9,7 +9,7 @@
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
 
-/////////////////////
+//////////////////
 bool DKRml::Init()
 {
 	DKDEBUGFUNC();
@@ -80,7 +80,7 @@ bool DKRml::Init()
 	return true;
 }
 
-////////////////////
+/////////////////
 bool DKRml::End()
 {
 	DKDEBUGFUNC();
@@ -100,7 +100,7 @@ bool DKRml::End()
 
 
 
-/////////////////////////////////////////////
+//////////////////////////////////////////
 bool DKRml::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
@@ -111,7 +111,7 @@ bool DKRml::LoadFont(const DKString& file)
 	return true;
 }
 
-//////////////////////////
+///////////////////////
 bool DKRml::LoadFonts()
 {
 	DKDEBUGFUNC();
@@ -149,6 +149,8 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	dkRmlToRML.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+	replace(rml,"<meta name=\"generator\" content=", "");
+	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
 
 	rml = "<rml>\n"+rml+"</rml>";
 	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css";
@@ -180,19 +182,23 @@ bool DKRml::LoadHtml(const DKString& html)
 	LoadFonts();
 #endif
 
-	//find the last <html occurance
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
-	//int n = code.rfind("<html");
-	//code = code.substr(n);
-	//replace(code, "<", "\n<");
-	DKINFO("########## POST DKRml::LoadUrl CODE ##########\n");
+	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
+
+	//find the last <body occurance
+	int n = code.rfind("<body");
+	code = code.substr(n);
+	replace(code, "<", "\n<");
+	DKINFO("################ last body CODE FROM RmlUi ################\n");
+	DKINFO(code+"\n");
+	DKINFO("###########################################################\n");
 	
 	return true;
 }
 
-////////////////////////////////////////////
+////////////////////////////////////////
 bool DKRml::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
@@ -249,7 +255,7 @@ bool DKRml::LoadUrl(const DKString& url)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 bool DKRml::RegisterEvent(const DKString& id, const DKString& type)
 {
 	DKDEBUGFUNC(id, type);
@@ -292,7 +298,7 @@ bool DKRml::Reload()
 	return LoadUrl("index.html");
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& value)
 {
 	//DKDEBUGFUNC(id, type, value);
@@ -327,7 +333,7 @@ bool DKRml::ToggleDebugger()
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 bool DKRml::UnregisterEvent(const DKString& id, const DKString& type)
 {
 	DKDEBUGFUNC(id, type);
@@ -348,7 +354,7 @@ bool DKRml::UnregisterEvent(const DKString& id, const DKString& type)
 
 
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////
 void DKRml::ProcessEvent(Rml::Core::Event& event)
 {
 	//DKDEBUGFUNC(event);
@@ -474,7 +480,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 Rml::Core::Element* DKRml::getElementByAddress(const DKString& address)
 {
 	DKDEBUGFUNC(address);
@@ -508,7 +514,7 @@ Rml::Core::Element* DKRml::getElementByAddress(const DKString& address)
 	*/
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 bool DKRml::GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elements)
 {
 	DKDEBUGFUNC(parent, "DKElementList&");
