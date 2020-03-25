@@ -369,6 +369,10 @@ bool DKRmlToRML::Encode(std::string& data)
 ///////////////////////////////////////////////////////////////
 bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
 {
+	DKINFO("####### CODE GOING INTO TIDY ##########\n");
+	DKINFO(in+"\n");
+	DKINFO("#########################################\n");
+
 	const char* input = in.c_str();
 	TidyBuffer output = {0};
 	TidyBuffer errbuf = {0};

@@ -141,12 +141,19 @@ bool DKRml::LoadFonts()
 	return true;
 }
 
-/////////////////////////////////////////////
+//////////////////////////////////////////
 bool DKRml::LoadHtml(const DKString& html)
 {
 	//// Prepair the html document for rocket
-	DKString rml;
-	dkRmlToRML.IndexToRml(html, rml);
+	DKString rml = html;
+
+	dkRmlToRML.TidyFile(rml,rml);
+	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+
+	rml = "<rml>\n"+rml+"</rml>";
+	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css";
+	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
+	//dkRmlToRML.IndexToRml(html, rml);
 
 	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
 	DKINFO(rml+"\n");
