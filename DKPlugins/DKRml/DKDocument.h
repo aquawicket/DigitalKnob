@@ -12,6 +12,7 @@ public:
 	bool Init();
 	
 	static int createElement(duk_context* ctx);
+	static int documentElement(duk_context* ctx);
 	static int getElementById(duk_context* ctx);
 };
 

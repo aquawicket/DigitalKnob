@@ -9,6 +9,7 @@ bool DKDocument::Init()
 {
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDocument_createElement", DKDocument::createElement);
+	DKDuktape::AttachFunction("DKDocument_documentElement", DKDocument::documentElement);
 	DKDuktape::AttachFunction("DKDocument_getElementById", DKDocument::getElementById);
 	
 	DKClass::DKCreate("DKRml/DKDocument.js");
@@ -33,6 +34,24 @@ int DKDocument::createElement(duk_context* ctx)
 	return true;
 }
 
+/////////////////////////////////////////////////
+int DKDocument::documentElement(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	Rml::Core::Element* element = DKRml::Get()->document->GetOwnerDocument()->GetFirstChild();
+	if(!element){
+		DKERROR("documentElement(): element invalid\n");
+		duk_push_null(ctx);
+		return false;
+	}
+	const void* elementAddress = static_cast<const void*>(element);
+	std::stringstream ss;
+	ss << elementAddress;  
+	DKString str = ss.str(); 
+	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
 ////////////////////////////////////////////////
 int DKDocument::getElementById(duk_context* ctx)
 {
@@ -44,14 +63,11 @@ int DKDocument::getElementById(duk_context* ctx)
 		duk_push_null(ctx);
 		return true;
 	}
-
 	const void* address = static_cast<const void*>(element);
 	std::stringstream ss;
 	ss << address;  
 	DKString str = ss.str(); 
-
 	duk_push_string(ctx, str.c_str());
-	//duk_push_pointer(ctx, element);
 	return true;
 }
 
