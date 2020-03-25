@@ -11,6 +11,10 @@ var Document = function(pointer)
 			if(!pointer){ return; }
 			var element = new HTMLElement(pointer);
 			return element;
+		},
+		set: function(){
+			if(!pointer){ return; }
+			return DKDocument_body(pointer); //TODO
 		} 
 	});
 	

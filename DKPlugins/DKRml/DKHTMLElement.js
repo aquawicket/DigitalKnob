@@ -29,8 +29,6 @@ var HTMLElement = function(pointer)
 	//DKDEBUGFUNC();
 	//console.warn("HTMLElement("+pointer+")");
 	
-	//this.style = new CSSStyleDeclaration(pointer);
-	
 	Object.defineProperty(this, "accessKey",        { get: function(){ return DKHTMLElement_accessKey(this.pointer);          } });  //TODO
 	Object.defineProperty(this, "accessKeyLabel",   { get: function(){ return DKHTMLElement_accessKeyLabel(this.pointer);     } });  //TODO
 	Object.defineProperty(this, "contentEditable", { 
