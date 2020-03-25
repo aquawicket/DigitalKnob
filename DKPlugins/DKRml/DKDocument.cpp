@@ -8,11 +8,31 @@
 bool DKDocument::Init()
 {
 	DKDEBUGFUNC();
+	DKDuktape::AttachFunction("DKDocument_body", DKDocument::body);
 	DKDuktape::AttachFunction("DKDocument_createElement", DKDocument::createElement);
 	DKDuktape::AttachFunction("DKDocument_documentElement", DKDocument::documentElement);
 	DKDuktape::AttachFunction("DKDocument_getElementById", DKDocument::getElementById);
 	
 	DKClass::DKCreate("DKRml/DKDocument.js");
+	return true;
+}
+
+//////////////////////////////////////
+int DKDocument::body(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	Rml::Core::ElementList elements;
+	DKRml::Get()->document->GetElementsByTagName(elements, "body");
+	if(!elements[0]){
+		DKERROR("DKDocument::body(): element invalid\n");
+		duk_push_null(ctx);
+		return false;
+	}
+	const void* elementAddress = static_cast<const void*>(elements[0]);
+	std::stringstream ss;
+	ss << elementAddress;  
+	DKString str = ss.str(); 
+	duk_push_string(ctx, str.c_str());
 	return true;
 }
 
@@ -23,7 +43,7 @@ int DKDocument::createElement(duk_context* ctx)
 	DKString tag = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->document->CreateElement(tag.c_str()).get();
 	if(!element){
-		DKERROR("DKRmlJS::createElement(): element invalid\n");
+		DKERROR("DKDocument::createElement(): element invalid\n");
 		return false;
 	}
 	const void* elementAddress = static_cast<const void*>(element);
@@ -38,9 +58,9 @@ int DKDocument::createElement(duk_context* ctx)
 int DKDocument::documentElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	Rml::Core::Element* element = DKRml::Get()->document->GetOwnerDocument()->GetFirstChild();
+	Rml::Core::Element* element = DKRml::Get()->document;
 	if(!element){
-		DKERROR("documentElement(): element invalid\n");
+		DKERROR("DKDocument::documentElement(): element invalid\n");
 		duk_push_null(ctx);
 		return false;
 	}

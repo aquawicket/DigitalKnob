@@ -11,6 +11,7 @@ class DKDocument : public DKObjectT<DKDocument>
 public:
 	bool Init();
 	
+	static int body(duk_context* ctx);
 	static int createElement(duk_context* ctx);
 	static int documentElement(duk_context* ctx);
 	static int getElementById(duk_context* ctx);
