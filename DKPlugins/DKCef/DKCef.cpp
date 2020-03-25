@@ -294,7 +294,7 @@ bool DKCef::Init()
 		dkCefWindow = new DKCefWindow();
 		cefHandler = dkCefWindow;
 		dkCefWindow->dkCef = this;
-		//NewBrowser(id, top, left, width, height, url);
+		//NewBrowser("default", 10, 10, 800, 600, "http://www.google.com");
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
 		//DKString icon = DKFile::local_assets+"icon.ico";
 		//DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);

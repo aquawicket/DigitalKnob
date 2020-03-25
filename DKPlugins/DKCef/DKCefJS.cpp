@@ -219,7 +219,7 @@ int DKCefJS::RemoveFocus(duk_context* ctx)
 int DKCefJS::RunJavascript(duk_context* ctx)
 {
 	DKString string = duk_require_string(ctx, 0);
-	int browser = duk_require_int(ctx, 2);
+	int browser = duk_require_int(ctx, 1);
 	if(!DKCef::Get()->RunJavascript(browser, string)){ return 0; }
 	return 1;
 }
