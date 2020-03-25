@@ -15,7 +15,6 @@ bool DKRml::Init()
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
-	//dkRmlToRML = new DKRmlToRML();
 	document = NULL;
 
 	if(!dkRmlFile){ 
@@ -31,7 +30,7 @@ bool DKRml::Init()
 		DKClass::DKCreate("DKOSGRml");
 	}
 	else{
-		DKERROR("DKRml::Init(): No registered rocket window found\n");
+		DKERROR("DKRml::Init(): No registered window found\n");
 		return false;
 	}
 	
@@ -147,7 +146,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	//// Prepair the html document for rocket
 	DKString rml = html;
 
-	dkRmlToRML.TidyFile(rml,rml);
+	//dkRmlToRML.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 	replace(rml,"<meta name=\"generator\" content=", "");
 	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");

@@ -19,18 +19,18 @@ public:
 	bool Init();
 	bool End();
 
+	Rml::Core::Element* getElementByAddress(const DKString& address);
+	bool GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elements);
 	bool LoadFont(const DKString& file);
 	bool LoadFonts();
-	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& url);
+	bool LoadUrl(const DKString& url);
 	bool RegisterEvent(const DKString& id, const DKString& type);
 	bool Reload();
 	bool SendEvent(const DKString& id, const DKString& type, const DKString& value);
 	bool ToggleDebugger();
 	bool UnregisterEvent(const DKString& id, const DKString& type);	
-	void ProcessEvent(Rml::Core::Event& event); //overwritten 
-	Rml::Core::Element* getElementByAddress(const DKString& address);
-	bool GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elements);
+	void ProcessEvent(Rml::Core::Event& event); //overwritten
 
 	DKString href;
 	DKString protocol;
