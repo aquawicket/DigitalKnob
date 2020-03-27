@@ -1,3 +1,5 @@
+//https://developer.mozilla.org/en-US/docs/Web/API/Screen
+
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktape/DKScreen.h"
@@ -7,6 +9,8 @@
 bool DKScreen::Init()
 {
 	DKDEBUGFUNC();
+
+	//Properties
 	DKDuktape::AttachFunction("DKScreen_availTop", DKScreen::availTop);
 	DKDuktape::AttachFunction("DKScreen_availLeft", DKScreen::availLeft);
 	DKDuktape::AttachFunction("DKScreen_availHeight", DKScreen::availHeight);
@@ -21,10 +25,17 @@ bool DKScreen::Init()
 	DKDuktape::AttachFunction("DKScreen_mozEnabled", DKScreen::mozEnabled);
 	DKDuktape::AttachFunction("DKScreen_mozBrightness", DKScreen::mozBrightness);
 
+	//Methods
+	DKDuktape::AttachFunction("DKScreen_lockOrientation", DKScreen::lockOrientation);
+	DKDuktape::AttachFunction("DKScreen_unlockOrientations", DKScreen::unlockOrientation);
+
 	DKClass::DKCreate("DKDuktape/DKScreen.js");
 	return true;
 }
 
+
+//Properties
+////////////////////////////////////////
 int DKScreen::availTop(duk_context* ctx)
 {
 	//TODO
@@ -92,7 +103,7 @@ int DKScreen::top(duk_context* ctx)
 int DKScreen::width(duk_context* ctx)
 {
 	int width;
-	if (!DKUtil::GetScreenWidth(width)) { return 0; }
+	if(!DKUtil::GetScreenWidth(width)) { return 0; }
 	duk_push_number(ctx, width);
 	return 1;
 }
@@ -109,5 +120,22 @@ int DKScreen::mozBrightness(duk_context* ctx)
 	return false;
 }
 
+
+
+//Methods
+///////////////////////////////////////////////
+int DKScreen::lockOrientation(duk_context* ctx) 
+{
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
+	DKString orientation = duk_require_string(ctx, 0);
+	return false;
+}
+
+/////////////////////////////////////////////////
+int DKScreen::unlockOrientation(duk_context* ctx)
+{
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/unlockOrientation
+	return false;
+}
 
 #endif //USE_DKDuktape
