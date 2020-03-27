@@ -4,7 +4,6 @@
 var Navigator = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Navigator()");
 	
 	Object.defineProperty(this, "appCodeName",{
 		value: "Mozilla",
