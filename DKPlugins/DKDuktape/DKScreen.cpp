@@ -8,18 +8,18 @@ bool DKScreen::Init()
 {
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKScreen_availTop", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_availLeft", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_availHeight", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_availWidth", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_colorDepth", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_height", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_left", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_orientation", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_pixelDepth", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_top", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_width", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_mozEnabled", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_mozBrightness", DKScreen::availTop);
+	DKDuktape::AttachFunction("DKScreen_availLeft", DKScreen::availLeft);
+	DKDuktape::AttachFunction("DKScreen_availHeight", DKScreen::availHeight);
+	DKDuktape::AttachFunction("DKScreen_availWidth", DKScreen::availWidth);
+	DKDuktape::AttachFunction("DKScreen_colorDepth", DKScreen::colorDepth);
+	DKDuktape::AttachFunction("DKScreen_height", DKScreen::height);
+	DKDuktape::AttachFunction("DKScreen_left", DKScreen::left);
+	DKDuktape::AttachFunction("DKScreen_orientation", DKScreen::orientation);
+	DKDuktape::AttachFunction("DKScreen_pixelDepth", DKScreen::pixelDepth);
+	DKDuktape::AttachFunction("DKScreen_top", DKScreen::top);
+	DKDuktape::AttachFunction("DKScreen_width", DKScreen::width);
+	DKDuktape::AttachFunction("DKScreen_mozEnabled", DKScreen::mozEnabled);
+	DKDuktape::AttachFunction("DKScreen_mozBrightness", DKScreen::mozBrightness);
 
 	DKClass::DKCreate("DKDuktape/DKScreen.js");
 	return true;
@@ -55,10 +55,13 @@ int DKScreen::colorDepth(duk_context* ctx)
 	return false;
 }
 
+//////////////////////////////////////
 int DKScreen::height(duk_context* ctx)
 {
-	//TODO
-	return false;
+	int height;
+	if(!DKUtil::GetScreenHeight(height)){ return 0; }
+	duk_push_number(ctx, height);
+	return 1;
 }
 
 int DKScreen::left(duk_context* ctx)
@@ -85,10 +88,13 @@ int DKScreen::top(duk_context* ctx)
 	return false;
 }
 
+/////////////////////////////////////
 int DKScreen::width(duk_context* ctx)
 {
-	//TODO
-	return false;
+	int width;
+	if (!DKUtil::GetScreenWidth(width)) { return 0; }
+	duk_push_number(ctx, width);
+	return 1;
 }
 
 int DKScreen::mozEnabled(duk_context* ctx)
