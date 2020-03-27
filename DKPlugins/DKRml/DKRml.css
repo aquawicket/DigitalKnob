@@ -14,11 +14,9 @@ html{
 	top:0px;
 	left:0px;
 }
-
 head{
 	display:none;
 }
-
 body{
 	font-family: "Times New Roman";
 	/*font-size: 13em;*/
@@ -26,7 +24,6 @@ body{
 	margin: 8px;
 	display: block;
 }
-
 style{
 	display:none;
 }
@@ -34,23 +31,18 @@ style{
 title{
 	display:none;
 }
-
 option, div, tr{
 	display:block;
 }
-
 th{
 	font-weight: bold;
 }
-
 strong, b{
 	font-weight: bold;
 }
-
 i, cite, em, var, address{
 	font-style: italic;
 }
-
 p{
 	/* font-family: "Times New Roman"; */
 	display:block;
@@ -61,7 +53,110 @@ p{
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
 }
+h1{
+	display:block;
+	font-size: 2em;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+	/* margin-block-start: 0.67em; */
+    /* margin-block-end: 0.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+h2{
+	display:block;
+	font-size: 1.5em;
+	margin-top: 0.83em;
+	margin-bottom: 0.83em;
+	/* margin-block-start: 0.83em; */
+    /* margin-block-end: 0.83em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+h3{
+	display:block;
+	font-size: 1.17em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+h4{
+	display:block;
+	margin-top: 1.33em;
+	margin-bottom: 1.33em;
+	/* margin-block-start: 1.33em; */
+    /* margin-block-end: 1.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+h5{
+	display:block;
+	font-size: 0.83em;
+	margin-top: 1.67em;
+	margin-bottom: 1.67em;
+	/* margin-block-start: 1.67em; */
+    /* margin-block-end: 1.67em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+h6{
+	display:block;
+	font-size: 0.67em;
+	margin-top: 2.33em;
+	margin-bottom: 2.33em;
+	/* margin-block-start: 2.33em; */
+    /* margin-block-end: 2.33em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	font-weight: bold;
+}
+ol{
+	display: block;
+    /* list-style-type: decimal; */
+	margin-top: 1em; 
+	margin-bottom: 1em;    
+	/* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+	padding-bottom: 40px;
+    /* padding-inline-start: 40px; */
+}
+ul{
+	display: block;
+    /* list-style-type: disc; */
+	margin-top: 1em;  
+	margin-bottom: 1em;  
+    /* margin-block-start: 1em; */
+    /* margin-block-end: 1em; */
+    /* margin-inline-start: 0px; */
+    /* margin-inline-end: 0px; */
+    padding-bottom: 40px;
+    /* padding-inline-start: 40px; */
+}
+li{
+	/* display: list-item; */
+    /* text-align: -webkit-match-parent; */
+}
 
+
+/**********************************/
+/********  RmlUi elements  ********/
+/**********************************/
+dataselect,
+dataselect selectvalue,
+dataselect selectbox option{
+	background-color:white;
+	color:black;
+}
 
 
 /* Buttons */
@@ -126,6 +221,152 @@ input.checkbox:active{
 }
 input.checkbox:checked{
 	decorator: image(checkbox-checked);
+}
+
+
+/* Passwords */
+input.password{
+	width: 100px;
+	height: 22px;
+	background-color:white;
+	color:black;
+	/*border-style: solid;*/
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+input.password:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Radio Buttons */
+@spritesheet radios
+{
+	src: radios.png;
+	radio: 0px 0px 12px 12px;
+	radio-hover: 12px 0px 12px 12px;
+	radio-checked: 24px 0px 12px 12px;
+}
+input.radio{
+	width:12px;
+	height:12px;
+	decorator: image(radio);
+}
+
+input.radio:hover{
+	decorator: image(radio-hover);
+}
+
+input.radio:checked{
+	decorator: image(radio-checked);
+}
+
+
+/* Ranges */
+@spritesheet rangetrack
+{
+	src: rangetrack.png;
+	rangetrack: 0px 0px 4px 4px;
+}
+@spritesheet rangebar
+{
+	src: rangebar.png;
+	rangebar: 0px 0px 11px 21px;
+}
+input.range{
+	width:150px;
+	/*height:150px;*/
+}
+input.range slidertrack{
+	height:4px;
+	width:4px;
+	margin-top:9px;
+	decorator: image(rangetrack);
+}
+input.range sliderbar{
+	width:11px;
+	height:21px;
+	decorator: image(rangebar);
+}
+
+
+/* Text Inputs */
+input.text{
+	width: 100px;
+	height: 21px;
+	min-height: 19px;
+	background-color:white;
+	color:black;
+	/*border-style: solid;*/
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+input.text:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Textareas */
+textarea{
+	width: 180px;
+	height: 50px;
+	background-color:white;
+	color:black;
+	/*border-style: solid;*/
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+	/*resize: none;*/
+}
+textarea:focus{
+	border-color: rgb(123,157,212);
+}
+
+
+/* Selects */
+@spritesheet selects
+{
+	src: select.png;
+	selectarrow: 0px 0px 6px 6px;
+}
+select{
+	background-color:white;
+	color:black;
+	width:80px;
+	height:20px;
+	/*border-style: solid;*/
+    border-width: 1px;
+	border-color: rgb(167,167,167);
+}
+select:hover{
+	border-color: rgb(120,120,120);
+}
+select:focus{
+	border-color: rgb(123,157,212);
+}
+select selectvalue{
+	padding-left: 3px;
+}
+select selectarrow{
+	width: 6px;
+	height: 6px;
+	margin-top: 6px;
+	margin-right: 6px;
+	decorator: image(selectarrow);
+}
+select selectbox{
+	/*border-style: solid;*/
+    border-left-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-color: rgb(123,157,212);
+}
+select selectbox option{
+	padding-left: 3px;
+	background-color:white;
+}
+select selectbox option:hover{
+	background-color: rgb(123,157,212);
+	color:white;
 }
 
 
