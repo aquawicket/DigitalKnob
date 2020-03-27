@@ -60,3 +60,37 @@ p{
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
 }
+
+
+
+/* Buttons */
+@spritesheet theme 
+{
+	src: buttons.png;
+	
+	button-left: 0px 0px 1px 21px;
+	button-center: 1px 0px 19px 21px;
+	button-right: 20px 0px 1px 21px;
+	
+	button-hover-left: 21px 0px 1px 21px;
+	button-hover-center: 22px 0px 19px 21px;
+	button-hover-right: 41px 0px 1px 21px;
+	
+	button-active-left: 42px 0px 1px 21px;
+	button-active-center: 43px 0px 19px 21px;
+	button-active-right: 62px 0px 1px 21px;
+}
+button{
+	color: black;
+	width: 50px;
+	text-align: center;
+	padding: 1px 6px;
+	border-width: 2px;
+	decorator: tiled-horizontal(button-left, button-center, button-right);
+}
+button:hover{
+	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
+}
+button:active{
+	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+}
