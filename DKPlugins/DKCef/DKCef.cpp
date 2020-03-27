@@ -556,12 +556,14 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
+		dkBrowser.left = left;
 		dkBrowser.width = _width;
 		dkBrowser.height = _height;
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		SetFocus(dkBrowsers.size()-1);
+		current_browser = _browser;
 		//current_browser->GetHost()->SetWindowlessFrameRate(60); //do we need this?
 	}
 	else{
@@ -594,6 +596,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 #ifdef WIN32
 		window_info.SetAsPopup(NULL, title.c_str());
 #endif
+		window_info.y = top;
+		window_info.x = left;
 		window_info.width = _width;
 		window_info.height = _height;
 		CefRefPtr<CefBrowser> _browser;
@@ -601,12 +605,14 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
+		dkBrowser.left = left;
 		dkBrowser.width = _width;
 		dkBrowser.height = _height;
 		dkBrowser.url = url;
 		dkBrowser.browser = _browser;
 		dkBrowsers.push_back(dkBrowser);
 		//SetFocus(dkBrowsers.size()-1);
+		current_browser = _browser;
 
 		//Set Icon
 		DKString icon = DKFile::local_assets+"icon.ico";
