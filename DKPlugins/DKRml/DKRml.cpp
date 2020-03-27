@@ -148,17 +148,14 @@ bool DKRml::LoadHtml(const DKString& html)
 {
 	//// Prepair the html document for rocket
 	DKString rml = html;
+	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
 
 	//dkRmlToRML.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 	replace(rml, "<meta name=\"generator\" content=", "");
 	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
 
-	//DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
-	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
-	
-	//dkRmlToRML.IndexToRml(html, rml);
-
+	DKINFO("\n");
 	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
 	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
@@ -181,7 +178,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	document = static_cast<Rml::Core::ElementDocument*>(element.get());
 	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
 
-	//////////////////////////////////////////////////////////////
+	//Make sure we have <head> and <body> tags
 	Rml::Core::ElementList heads;
 	Rml::Core::ElementList bodys;
 	Rml::Core::Element* head = NULL;
@@ -205,24 +202,25 @@ bool DKRml::LoadHtml(const DKString& html)
 	else if (!head && body) {
 		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
 	}
-	/////////////////////////////////////////////////////////////
-
+	
+	//Load user agent style sheet
 	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
 	document->SetStyleSheet(Rml::Core::Factory::InstanceStyleSheetFile(rml_css));
 
+	//Finish loading the document
 	Rml::Core::ElementUtilities::BindEventAttributes(document);
 	Rml::Core::PluginRegistry::NotifyDocumentLoad(document);
 	document->DispatchEvent(Rml::Core::EventId::Load, Rml::Core::Dictionary());
 	document->UpdateDocument();
 
-	if (!document) {
+	if(!document){
 		document = context->LoadDocumentFromMemory("");
 		DKERROR("DKRml::LoadHtml(): document invalid\n");
 		return false;
 	}
 
-	document->Show();
 	dkRmlToRML.PostProcess(document);
+	document->Show();
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
@@ -230,6 +228,7 @@ bool DKRml::LoadHtml(const DKString& html)
 #endif
 
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
+	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
@@ -238,9 +237,10 @@ bool DKRml::LoadHtml(const DKString& html)
 	int n = code.rfind("<html");
 	code = code.substr(n);
 	replace(code, "<", "\n<");
-	DKINFO("################ last html tag CODE FROM RmlUi ################\n");
+	DKINFO("\n");
+	DKINFO("############## last <html> element CODE FROM RmlUi ##############\n");
 	DKINFO(code+"\n");
-	DKINFO("###########################################################\n");
+	DKINFO("#################################################################\n");
 	return true;
 }
 

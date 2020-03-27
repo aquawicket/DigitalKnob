@@ -6,8 +6,8 @@
 #include <RmlUi/Core.h>
 #include <RmlUi/Controls.h>
 
-///////////////////
-class DKRmlToRML
+///////////////////////////////////
+class DKRmlToRML  : public DKObject
 {
 public:
 	DKString processed;
@@ -18,7 +18,7 @@ public:
 	static bool ResizeIframe(DKEvent* event);
 	bool ClickIframe(DKEvent* event);
 	bool MouseOverIframe(DKEvent* event);
-	bool DKRmlToRML::Encode(std::string& data);
+	bool Encode(std::string& data);
 	bool TidyFile(const DKString& in, DKString& out);
 };
 

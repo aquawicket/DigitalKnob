@@ -7,7 +7,7 @@
 #include "tidy.h"
 #include "tidybuffio.h"
 
-//////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
 {
 	DKDEBUGFUNC(html, rml);
@@ -67,7 +67,7 @@ bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
-/////////////////////////////////////////////
+//////////////////////////////////////////
 bool DKRmlToRML::Hyperlink(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
@@ -139,7 +139,7 @@ bool DKRmlToRML::IndexToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
@@ -203,8 +203,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		if(aElements[i]->HasAttribute("href")){
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
-			DKString id = aElements[i]->GetId();//.CString();
-			//DKEvent::AddEvent(id, "click", &DKRmlToRML::Hyperlink, this);
+			DKString id = aElements[i]->GetId();
+			DKEvent::AddEvent(id, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}
 
@@ -296,7 +296,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	return true;
 }
 
-////////////////////////////////////////////////
+/////////////////////////////////////////////
 bool DKRmlToRML::ResizeIframe(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
@@ -313,7 +313,7 @@ bool DKRmlToRML::ResizeIframe(DKEvent* event)
 	return true;
 }
 
-///////////////////////////////////////////////
+////////////////////////////////////////////
 bool DKRmlToRML::ClickIframe(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
@@ -330,7 +330,7 @@ bool DKRmlToRML::ClickIframe(DKEvent* event)
 	return true;
 }
 
-///////////////////////////////////////////////////
+////////////////////////////////////////////////
 bool DKRmlToRML::MouseOverIframe(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
@@ -347,7 +347,7 @@ bool DKRmlToRML::MouseOverIframe(DKEvent* event)
 	return true;
 }
 
-/////////////////////////////////////////////
+//////////////////////////////////////////
 bool DKRmlToRML::Encode(std::string& data)
 {
 	std::string buffer;
@@ -367,7 +367,7 @@ bool DKRmlToRML::Encode(std::string& data)
 }
 
 
-///////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
 {
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
