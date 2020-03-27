@@ -65,7 +65,7 @@ p{
 
 
 /* Buttons */
-@spritesheet theme 
+@spritesheet buttons
 {
 	src: buttons.png;
 	button-left: 0px 0px 1px 21px;
@@ -92,10 +92,45 @@ button:hover{
 button:active{
 	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
 }
+input.button{
+	color: black;
+	width: 50px;
+	text-align: center;
+	padding: 1px 6px;
+	border-width: 2px;
+	decorator: tiled-horizontal(button-left, button-center, button-right);
+}
+input.button:hover{
+	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
+}
+input.button:active{
+	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+}
+
+
+/* Checkboxes */
+@spritesheet checkboxs
+{
+	src: checkboxes.png;
+	checkbox: 0px 0px 12px 12px;
+	checkbox-active: 12px 0px 12px 12px;
+	checkbox-checked: 24px 0px 12px 12px;
+}
+input.checkbox{
+	width:12px;
+	height:12px;
+	decorator: image(checkbox);
+}
+input.checkbox:active{
+	decorator: image(checkbox-active);
+}
+input.checkbox:checked{
+	decorator: image(checkbox-checked);
+}
 
 
 /* Scrollbars */
-@spritesheet theme2 
+@spritesheet scrollbars
 {
 	src: scrollbars.png;
 	slidertrack: 51px 52px 17px 17px;
