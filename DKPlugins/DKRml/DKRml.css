@@ -6,8 +6,9 @@
 html{
 	font-family: "Times New Roman";
 	font-size: 130%;
-	overflow-x: auto;
-	/*overflow-y: visible;*/
+	overflow: auto;
+	/* overflow-x: scroll; */
+	/* overflow-y: scroll; */
 	height: 100%;
 	width: 100%;
 	top:0px;
@@ -67,15 +68,12 @@ p{
 @spritesheet theme 
 {
 	src: buttons.png;
-	
 	button-left: 0px 0px 1px 21px;
 	button-center: 1px 0px 19px 21px;
 	button-right: 20px 0px 1px 21px;
-	
 	button-hover-left: 21px 0px 1px 21px;
 	button-hover-center: 22px 0px 19px 21px;
 	button-hover-right: 41px 0px 1px 21px;
-	
 	button-active-left: 42px 0px 1px 21px;
 	button-active-center: 43px 0px 19px 21px;
 	button-active-right: 62px 0px 1px 21px;
@@ -93,4 +91,115 @@ button:hover{
 }
 button:active{
 	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+}
+
+
+/* Scrollbars */
+@spritesheet theme2 
+{
+	src: scrollbars.png;
+	slidertrack: 51px 52px 17px 17px;
+	sliderbar: 0px 17px 17px 17px;
+	sliderbar-hover: 34px 17px 17px 17px;
+	sliderbar-active: 51px 17px 17px 17px;
+	sliderarrowdec: 17px 0px 17px 17px;
+	sliderarrowdec-hover: 34px 0px 17px 17px;
+	sliderarrowdec-active: 51px 0px 17px 17px;
+	sliderarrowinc: 17px 34px 17px 17px;
+	sliderarrowinc-hover: 34px 34px 17px 17px;
+	sliderarrowinc-active: 51px 34px 17px 17px;
+	
+	/*fixme*/
+	slidertrack2: 51px 52px 17px 17px;
+	sliderbar2: 17px 51px 17px 17px;
+	sliderbar-hover2: 17px 85px 17px 17px;
+	sliderbar-active2: 17px 102px 17px 17px;
+	sliderarrowdec2: 0px 68px 17px 17px;
+	sliderarrowdec-hover2: 0px 85px 17px 17px;
+	sliderarrowdec-active2: 0px 102px 17px 17px;
+	sliderarrowinc2: 34px 68px 17px 17px;
+	sliderarrowinc-hover2: 34px 85px 17px 17px;
+	sliderarrowinc-active2: 34px 102px 17px 17px;
+}
+scrollbarvertical{
+	width: 17px;
+}
+scrollbarvertical slidertrack{
+	decorator: image(slidertrack);
+}
+scrollbarvertical sliderbar{
+	min-height: 17px;
+	decorator: image(sliderbar);
+}
+scrollbarvertical sliderbar:hover{
+	decorator: image(sliderbar-hover);
+}
+scrollbarvertical sliderbar:active{
+	decorator: image(sliderbar-active);
+}
+scrollbarvertical sliderarrowdec{
+	height: 17px;
+	width: 17px;
+	decorator: image(sliderarrowdec);
+}
+scrollbarvertical sliderarrowdec:hover{
+	decorator: image(sliderarrowdec-hover);
+}
+scrollbarvertical sliderarrowdec:active{
+	decorator: image(sliderarrowdec-active);
+}
+scrollbarvertical sliderarrowinc{
+	height: 17px;
+	width: 17px;
+	decorator: image(sliderarrowinc);
+}
+scrollbarvertical sliderarrowinc:hover{
+	decorator: image(sliderarrowinc-hover);
+}
+scrollbarvertical sliderarrowinc:active{
+	decorator: image(sliderarrowinc-active);
+}
+
+
+scrollbarhorizontal{
+	width: 17px;
+}
+scrollbarhorizontal slidertrack{
+	decorator: image(slidertrack2);
+}
+scrollbarhorizontal sliderbar{
+	min-height: 17px;
+	decorator: image(sliderbar2);
+}
+scrollbarhorizontal sliderbar:hover{
+	decorator: image(sliderbar-hover2);
+}
+scrollbarhorizontal sliderbar:active{
+	decorator: image(sliderbar-active2);
+}
+scrollbarhorizontal sliderarrowdec{
+	height: 17px;
+	width: 17px;
+	decorator: image(sliderarrowdec2);
+}
+scrollbarhorizontal sliderarrowdec:hover{
+	decorator: image(sliderarrowdec-hover2);
+}
+scrollbarhorizontal sliderarrowdec:active{
+	decorator: image(sliderarrowdec-active2);
+}
+scrollbarhorizontal sliderarrowinc{
+	height: 17px;
+	width: 17px;
+	decorator: image(sliderarrowinc2);
+}
+scrollbarhorizontal sliderarrowinc:hover{
+	decorator: image(sliderarrowinc-hover2);
+}
+scrollbarhorizontal sliderarrowinc:active{
+	decorator: image(sliderarrowinc-active2);
+}
+
+scrollbarcorner{
+	background-color: rgb(220,220,220);
 }
