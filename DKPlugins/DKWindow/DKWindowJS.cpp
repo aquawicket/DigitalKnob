@@ -27,6 +27,8 @@ bool DKWindowJS::Init()
 	DKDuktape::AttachFunction("DKWindow_Maximize", DKWindowJS::Maximize);
 	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox);
 	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize);
+	DKDuktape::AttachFunction("DKWindow_moveTo", DKWindowJS::moveTo);
+	DKDuktape::AttachFunction("DKWindow_resizeTo", DKWindowJS::resizeTo);
 	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore);
 	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight);
 	DKDuktape::AttachFunction("DKWindow_SetIcon", DKWindowJS::SetIcon);
@@ -220,6 +222,28 @@ int DKWindowJS::Minimize(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Minimize()){ return 0; }
+	return 1;
+}
+
+////////////////////////////////////////
+int DKWindowJS::moveTo(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	int x = duk_require_int(ctx, 0);
+	int y = duk_require_int(ctx, 1);
+	if(!DKWindow::SetX(x)){ return 0; }
+	if(!DKWindow::SetY(y)){ return 0; }
+	return 1;
+}
+
+//////////////////////////////////////////
+int DKWindowJS::resizeTo(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	int width = duk_require_int(ctx, 0);
+	int height = duk_require_int(ctx, 1);
+	if (!DKWindow::SetWidth(width)) { return 0; }
+	if (!DKWindow::SetHeight(height)) { return 0; }
 	return 1;
 }
 

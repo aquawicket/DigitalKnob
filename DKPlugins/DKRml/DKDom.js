@@ -129,8 +129,8 @@ Window.prototype.minimize = function(){
 Window.prototype.moveBy = function(){
 	//TODO
 }
-Window.prototype.moveTo = function(){
-	//TODO
+Window.prototype.moveTo = function(x,y){
+	DKWindow_moveTo(x,y);
 }
 Window.prototype.open = function(){
 	//TODO
@@ -156,8 +156,8 @@ Window.prototype.requestIdleCallback = function(){
 Window.prototype.resizeBy = function(){
 	//TODO
 }
-Window.prototype.resizeTo = function(){
-	//TODO
+Window.prototype.resizeTo = function(width, height){
+	DKWindow_resizeTo(width,height);
 }
 Window.prototype.scroll = function(){
 	//TODO

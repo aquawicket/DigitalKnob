@@ -37,6 +37,8 @@ public:
 	static int Maximize(duk_context* ctx);
 	static int MessageBox(duk_context* ctx);
 	static int Minimize(duk_context* ctx);
+	static int moveTo(duk_context* ctx);
+	static int resizeTo(duk_context* ctx);
 	static int Restore(duk_context* ctx);
 	static int SetHeight(duk_context* ctx);
 	static int SetIcon(duk_context* ctx);

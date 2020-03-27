@@ -408,9 +408,9 @@ bool DKWindow::Restore()
 bool DKWindow::SetHeight(int& h)
 {
 	DKDEBUGFUNC(h);
-	if(DKClass::HasFunc("DKCefWindow::SetHeight")){
-		return DKClass::CallFunc("DKCefWindow::SetHeight", &h, NULL);
-	}
+	//if(DKClass::HasFunc("DKCefWindow::SetHeight")){
+	//	return DKClass::CallFunc("DKCefWindow::SetHeight", &h, NULL);
+	//}
 	if(DKClass::HasFunc("DKSDLWindow::SetHeight")){
 		return DKClass::CallFunc("DKSDLWindow::SetHeight", &h, NULL);
 	}
@@ -459,9 +459,9 @@ bool DKWindow::SetTitle(DKString& string)
 bool DKWindow::SetWidth(int& w)
 {
 	DKDEBUGFUNC(w);
-	if(DKClass::HasFunc("DKCefWindow::SetWidth")){
-		return DKClass::CallFunc("DKCefWindow::SetWidth", &w, NULL);
-	}
+	//if(DKClass::HasFunc("DKCefWindow::SetWidth")){
+	//	return DKClass::CallFunc("DKCefWindow::SetWidth", &w, NULL);
+	//}
 	if(DKClass::HasFunc("DKSDLWindow::SetWidth")){
 		return DKClass::CallFunc("DKSDLWindow::SetWidth", &w, NULL);
 	}
@@ -476,9 +476,9 @@ bool DKWindow::SetWidth(int& w)
 bool DKWindow::SetX(int& x)
 {
 	DKDEBUGFUNC(x);
-	if(DKClass::HasFunc("DKCefWindow::SetX")){
-		return DKClass::CallFunc("DKCefWindow::SetX", &x, NULL);
-	}
+	//if(DKClass::HasFunc("DKCefWindow::SetX")){
+	//	return DKClass::CallFunc("DKCefWindow::SetX", &x, NULL);
+	//}
 	if(DKClass::HasFunc("DKSDLWindow::SetX")){
 		return DKClass::CallFunc("DKSDLWindow::SetX", &x, NULL);
 	}
@@ -493,9 +493,9 @@ bool DKWindow::SetX(int& x)
 bool DKWindow::SetY(int& y)
 {
 	DKDEBUGFUNC(y);
-	if(DKClass::HasFunc("DKCefWindow::SetY")){
-		return DKClass::CallFunc("DKCefWindow::SetY", &y, NULL);
-	}
+	//if(DKClass::HasFunc("DKCefWindow::SetY")){
+	//	return DKClass::CallFunc("DKCefWindow::SetY", &y, NULL);
+	//}
 	if(DKClass::HasFunc("DKSDLWindow::SetY")){
 		return DKClass::CallFunc("DKSDLWindow::SetY", &y, NULL);
 	}
