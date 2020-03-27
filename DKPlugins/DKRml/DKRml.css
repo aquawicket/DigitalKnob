@@ -6,7 +6,8 @@
 html{
 	font-family: "Times New Roman";
 	font-size: 130%;
-	overflow: auto;
+	overflow-x: auto;
+	/*overflow-y: visible;*/
 	height: 100%;
 	width: 100%;
 	top:0px;
