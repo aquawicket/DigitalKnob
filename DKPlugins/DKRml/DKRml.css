@@ -160,8 +160,7 @@ dataselect selectbox option{
 
 
 /* Buttons */
-@spritesheet buttons
-{
+@spritesheet buttons{
 	src: buttons.png;
 	button-left: 0px 0px 1px 21px;
 	button-center: 1px 0px 19px 21px;
@@ -204,8 +203,7 @@ input.button:active{
 
 
 /* Checkboxes */
-@spritesheet checkboxs
-{
+@spritesheet checkboxs{
 	src: checkboxes.png;
 	checkbox: 0px 0px 12px 12px;
 	checkbox-active: 12px 0px 12px 12px;
@@ -240,8 +238,7 @@ input.password:focus{
 
 
 /* Radio Buttons */
-@spritesheet radios
-{
+@spritesheet radios{
 	src: radios.png;
 	radio: 0px 0px 12px 12px;
 	radio-hover: 12px 0px 12px 12px;
@@ -263,13 +260,11 @@ input.radio:checked{
 
 
 /* Ranges */
-@spritesheet rangetrack
-{
+@spritesheet rangetrack{
 	src: rangetrack.png;
 	rangetrack: 0px 0px 4px 4px;
 }
-@spritesheet rangebar
-{
+@spritesheet rangebar{
 	src: rangebar.png;
 	rangebar: 0px 0px 11px 21px;
 }
@@ -290,6 +285,35 @@ input.range sliderbar{
 }
 
 
+/* Resets */
+@spritesheet resets{
+	src: buttons.png;
+	reset-left: 0px 0px 1px 21px;
+	reset-center: 1px 0px 19px 21px;
+	reset-right: 20px 0px 1px 21px;
+	reset-hover-left: 21px 0px 1px 21px;
+	reset-hover-center: 22px 0px 19px 21px;
+	reset-hover-right: 41px 0px 1px 21px;
+	reset-active-left: 42px 0px 1px 21px;
+	reset-active-center: 43px 0px 19px 21px;
+	reset-active-right: 62px 0px 1px 21px;
+}
+input.reset{
+	color: black;
+	width: 50px;
+	text-align: center;
+	padding: 1px 6px;
+	border-width: 2px;
+	decorator: tiled-horizontal(reset-left, reset-center, reset-right);
+}
+input.reset:hover{
+	decorator: tiled-horizontal(reset-hover-left, reset-hover-center, reset-hover-right);
+}
+input.reset:active{
+	decorator: tiled-horizontal(reset-active-left, reset-active-center, reset-active-right);
+}
+
+
 /* Text Inputs */
 input.text{
 	width: 100px;
@@ -297,7 +321,6 @@ input.text{
 	min-height: 19px;
 	background-color:white;
 	color:black;
-	/*border-style: solid;*/
     border-width: 1px;
 	border-color: rgb(167,167,167);
 }
@@ -323,8 +346,7 @@ textarea:focus{
 
 
 /* Selects */
-@spritesheet selects
-{
+@spritesheet selects{
 	src: select.png;
 	selectarrow: 0px 0px 6px 6px;
 }
@@ -371,8 +393,7 @@ select selectbox option:hover{
 
 
 /* Scrollbars */
-@spritesheet scrollbars
-{
+@spritesheet scrollbars{
 	src: scrollbars.png;
 	slidertrack: 51px 52px 17px 17px;
 	sliderbar: 0px 17px 17px 17px;
@@ -385,7 +406,6 @@ select selectbox option:hover{
 	sliderarrowinc-hover: 34px 34px 17px 17px;
 	sliderarrowinc-active: 51px 34px 17px 17px;
 	
-	/*fixme*/
 	slidertrack2: 51px 52px 17px 17px;
 	sliderbar2: 17px 51px 17px 17px;
 	sliderbar-hover2: 17px 85px 17px 17px;
@@ -397,7 +417,7 @@ select selectbox option:hover{
 	sliderarrowinc-hover2: 34px 85px 17px 17px;
 	sliderarrowinc-active2: 34px 102px 17px 17px;
 }
-scrollbarvertical{
+scrollbarvertical{ 
 	width: 17px;
 }
 scrollbarvertical slidertrack{
@@ -435,8 +455,6 @@ scrollbarvertical sliderarrowinc:hover{
 scrollbarvertical sliderarrowinc:active{
 	decorator: image(sliderarrowinc-active);
 }
-
-
 scrollbarhorizontal{
 	width: 17px;
 }
