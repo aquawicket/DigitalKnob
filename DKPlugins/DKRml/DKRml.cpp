@@ -6,6 +6,9 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 
+#include <RmlUi/Core/StreamMemory.h>
+#include "C:/digitalknob/DK/3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
+
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
 
@@ -148,32 +151,51 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//dkRmlToRML.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
-	replace(rml,"<meta name=\"generator\" content=", "");
-	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
+	replace(rml, "<meta name=\"generator\" content=", "");
+	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
 
-	rml = "<rml id=\"rml\">\n"+rml+"</rml>";
-	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css";
-	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
+	//DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
+	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
+	
 	//dkRmlToRML.IndexToRml(html, rml);
 
 	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
-	DKINFO(rml+"\n");
+	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
 
 	//// Clear any document and load the rml into the document
-	if(document){ 
+	if (document) {
 		Rml::Core::Factory::ClearStyleSheetCache();
-		document->Close(); 
+		document->Close();
 	}
-	document = context->LoadDocumentFromMemory(rml.c_str());
-	if(!document){
+
+	//document = context->LoadDocumentFromMemory(rml.c_str());
+	auto stream = std::make_unique<Rml::Core::StreamMemory>((Rml::Core::byte*)rml.c_str(), rml.size());
+	stream->SetSourceURL("[document from memory]");
+	
+	//document = context->LoadDocument(stream.get());
+	Rml::Core::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
+	Rml::Core::ElementPtr element = Rml::Core::Factory::InstanceDocumentStream(context, stream.get());
+	if (!element)
+		return nullptr;
+	document = static_cast<Rml::Core::ElementDocument*>(element.get());
+	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
+
+	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
+	document->SetStyleSheet(Rml::Core::Factory::InstanceStyleSheetFile(rml_css));
+
+	Rml::Core::ElementUtilities::BindEventAttributes(document);
+	Rml::Core::PluginRegistry::NotifyDocumentLoad(document);
+	document->DispatchEvent(Rml::Core::EventId::Load, Rml::Core::Dictionary());
+	document->UpdateDocument();
+
+	if (!document) {
 		document = context->LoadDocumentFromMemory("");
 		DKERROR("DKRml::LoadHtml(): document invalid\n");
 		return false;
 	}
-	document->Show();
-	//document->RemoveReference();
 
+	document->Show();
 	dkRmlToRML.PostProcess(document);
 
 #ifdef ANDROID
