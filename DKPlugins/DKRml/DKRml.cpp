@@ -181,6 +181,32 @@ bool DKRml::LoadHtml(const DKString& html)
 	document = static_cast<Rml::Core::ElementDocument*>(element.get());
 	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
 
+	//////////////////////////////////////////////////////////////
+	Rml::Core::ElementList heads;
+	Rml::Core::ElementList bodys;
+	Rml::Core::Element* head = NULL;
+	Rml::Core::Element* body = NULL;
+	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
+	if (!heads.empty()) {
+		head = heads[0];
+	}
+	document->GetOwnerDocument()->GetElementsByTagName(bodys, "body");
+	if (!bodys.empty()) {
+		body = bodys[0];
+	}
+
+	if (!head && !body) {
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("head"), true);
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
+	}
+	else if (head && !body) {
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
+	}
+	else if (!head && body) {
+		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
+	}
+	/////////////////////////////////////////////////////////////
+
 	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
 	document->SetStyleSheet(Rml::Core::Factory::InstanceStyleSheetFile(rml_css));
 
