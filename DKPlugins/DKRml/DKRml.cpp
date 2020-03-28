@@ -368,7 +368,7 @@ bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& 
 bool DKRml::ToggleDebugger()
 {
 	DKDEBUGFUNC();
-	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns true
+	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns false
 		Rml::Debugger::SetVisible(false);
 		DKINFO("Rml Debugger OFF\n");
 	}
@@ -376,7 +376,6 @@ bool DKRml::ToggleDebugger()
 		Rml::Debugger::SetVisible(true);
 		DKINFO("Rml Debugger ON\n");
 	}
-	Rml::Debugger::SetVisible(true); //Temporary Fix
 	return true;
 }
 
