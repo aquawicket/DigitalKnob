@@ -78,7 +78,8 @@ bool DKRmlToRML::Hyperlink(DKEvent* event)
 
 	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();//.CString();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
-	DKUtil::Run(value, "");
+	//DKUtil::Run(value, "");
+	dkRml->LoadUrl(DKFile::local_assets+value);
 	return true;
 }
 
@@ -204,6 +205,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
+
+			aElements[i]->AddEventListener("click", DKRml::Get(), false);
 			DKEvent::AddEvent(id, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}
