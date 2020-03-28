@@ -301,15 +301,14 @@ bool DKRml::LoadUrl(const DKString& url)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
-bool DKRml::RegisterEvent(const DKString& id, const DKString& type)
+///////////////////////////////////////////////////////////////////////////////
+bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 {
-	DKDEBUGFUNC(id, type);
-	if(id.empty()){ return false; } //no id
+	DKDEBUGFUNC(elementAddress, type);
+	if(elementAddress.empty()){ return false; } //no elementAddress
 	if(type.empty()){ return false; } //no type
 	
-	Rml::Core::Element* element = getElementByAddress(id.c_str());
-	//Rml::Core::Element* element = document->GetElementById(id.c_str());
+	Rml::Core::Element* element = addressToElement(elementAddress.c_str());
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -344,18 +343,18 @@ bool DKRml::Reload()
 	return LoadUrl("index.html");
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
-bool DKRml::SendEvent(const DKString& id, const DKString& type, const DKString& value)
+//////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value)
 {
 	//DKDEBUGFUNC(id, type, value);
-	if(id.empty()){ return false; }
+	if(elementAddress.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
-	if(same(id,"window")){
-		//DKWARN("DKRml::SendEvent(): recieved GLOBAL event\n");
-	}
+	//if(same(addressToElement(elementAddress)->GetId(),"window")){
+		//DKWARN("DKRml::SendEvent(): recieved global window event\n");
+	//}
 	
-	Rml::Core::Element* element = document->GetElementById(id.c_str());
+	Rml::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; }
 	
 	Rml::Core::Dictionary parameters;
@@ -379,16 +378,16 @@ bool DKRml::ToggleDebugger()
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////
-bool DKRml::UnregisterEvent(const DKString& id, const DKString& type)
+/////////////////////////////////////////////////////////////////////////////////
+bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type)
 {
-	DKDEBUGFUNC(id, type);
-	if(id.empty()){ return false; } //no id
+	DKDEBUGFUNC(elementAddress, type);
+	if(elementAddress.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
-	if(same(id,"window")){ return false; }
+	if (same(addressToElement(elementAddress)->GetId(), "window")) { return false; }
 	//if(!DKValid("DKRml0")){ return false; }
 
-	Rml::Core::Element* element = document->GetElementById(id.c_str());
+	Rml::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -408,18 +407,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	if(!event.GetTargetElement()){return;} //MUST!
 
 	Rml::Core::Element* element = event.GetCurrentElement();
-	const void* address = static_cast<const void*>(element);
-	std::stringstream ss;
-	ss << address;  
-	DKString str = ss.str();
-
-	/*
-	Rml::Core::Element* targ_element = event.GetCurrentElement();
-	const void* address2 = static_cast<const void*>(targ_element);
-	std::stringstream ss2;
-	ss2 << address2;  
-	DKString str2 = ss2.str();
-	*/
+	DKString address = elementToAddress(element);
 
 	DKString type = event.GetType(); //.CString();
 	Rml::Core::EventPhase phase = event.GetPhase();
@@ -427,7 +415,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}";
 
 	//Send this event back to duktape to be processed in javascript
-	DKString code = "EventFromCPP('"+str+"',"+evnt+");";
+	DKString code = "EventFromCPP('"+address+"',"+evnt+");";
 	DKString rval;
 	DKDuktape::Get()->RunDuktape(code, rval);
 	if(!rval.empty()){
@@ -493,7 +481,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 		if(same(_type,"input")){ _type = "change"; }
 		
 		//// PROCESS ELEMENT EVENTS //////
-		if(same(ev->GetId(), element->GetId()) && same(_type, type)){ //.CString()
+		if(same(ev->GetId(), address) && same(_type, type)){ //.CString()
 			//ev->rEvent = &event;
 
 			//pass the value
@@ -526,38 +514,39 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	}
 }
 
-///////////////////////////////////////////////////////////////////////
-Rml::Core::Element* DKRml::getElementByAddress(const DKString& address)
+////////////////////////////////////////////////////////////////////
+Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 {
 	DKDEBUGFUNC(address);
+
+	if(address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
+		//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
+		return NULL;
+	}
+
 	//Convert a string of an address back into a pointer
 	std::stringstream ss;
-	ss << address;
+	ss << address.substr(2, address.size() - 2);
 	int tmp(0);
 	if(!(ss >> std::hex >> tmp)){
-		DKERROR("DKRml::getElementByAddress("+address+"): invalid address\n");
+		DKERROR("DKRml::addressToElement("+address+"): invalid address\n");
 		return NULL;
 	}
 	Rml::Core::Element* element = reinterpret_cast<Rml::Core::Element*>(tmp);
 	return element;
+}
 
-	/*
-	//get element from list of elements under body with mattching address
-	Rml::Core::Element* body = DKRml::Get()->document->GetParentNode(); //TEST: This needs to be recursive
-	Rml::Core::ElementList elements;
-	GetElements(body, elements);
-	for(unsigned int i=0; i<elements.size(); i++){
-		const void* addr = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << addr;  
-		DKString str = ss.str(); 
-		if(same(address, str)){
-			return elements[i];
-		}
+/////////////////////////////////////////////////////////////
+DKString DKRml::elementToAddress(Rml::Core::Element* element)
+{
+	if(!element){
+		DKERROR("DKRml::elementToAddress(): invalid element\n");
+		return NULL;
 	}
-	DKERROR("DKRmlJS::getElementByAddress("+address+"): element not found\n");
-	return NULL;
-	*/
+	const void* address = static_cast<const void*>(element);
+	std::stringstream ss;
+	ss << "0x" << address;
+	return ss.str();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////

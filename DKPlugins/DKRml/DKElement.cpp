@@ -28,7 +28,7 @@ int DKElement::clientHeight(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -50,7 +50,7 @@ int DKElement::clientLeft(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -69,7 +69,7 @@ int DKElement::clientTop(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -88,7 +88,7 @@ int DKElement::clientWidth(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -111,7 +111,7 @@ int DKElement::getAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::getAttribute("+address+","+attribute+"): element invalid\n");
 		duk_push_undefined(ctx);
@@ -142,10 +142,8 @@ int DKElement::getElementsByClassName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRml::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -173,10 +171,8 @@ int DKElement::getElementsByTagName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRml::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -189,7 +185,7 @@ int DKElement::hasAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::hasAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -208,7 +204,7 @@ int DKElement::innerHTML(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::innerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -250,7 +246,7 @@ int DKElement::setAttribute(duk_context* ctx)
 		return true;
 	}
 
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::setAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);

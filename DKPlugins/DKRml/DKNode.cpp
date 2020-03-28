@@ -22,14 +22,14 @@ int DKNode::appendChild(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::removeChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rml::Core::Element* child = DKRml::Get()->getElementByAddress(childAddress);
+	Rml::Core::Element* child = DKRml::Get()->addressToElement(childAddress);
 	if(!child){
 		DKERROR("DKRmlJS::removeChild(): child invalid\n");
 		duk_push_boolean(ctx, false);
@@ -53,7 +53,7 @@ int DKNode::childNodes(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::childNodes(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -71,10 +71,8 @@ int DKNode::childNodes(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRml::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -86,7 +84,7 @@ int DKNode::parentNode(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::parentNode(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -98,11 +96,8 @@ int DKNode::parentNode(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	const void* parentAddress = static_cast<const void*>(parentNode);
-	std::stringstream ss;
-	ss << parentAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString parentAddress = DKRml::Get()->elementToAddress(parentNode);
+	duk_push_string(ctx, parentAddress.c_str());
 	return true;
 }
 
@@ -111,14 +106,14 @@ int DKNode::removeChild(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->getElementByAddress(address);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::removeChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rml::Core::Element* child = DKRml::Get()->getElementByAddress(childAddress);
+	Rml::Core::Element* child = DKRml::Get()->addressToElement(childAddress);
 	if(!child){
 		DKERROR("DKRmlJS::removeChild(): child invalid\n");
 		duk_push_boolean(ctx, false);

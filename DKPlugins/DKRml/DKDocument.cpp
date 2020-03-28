@@ -28,11 +28,8 @@ int DKDocument::body(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	const void* elementAddress = static_cast<const void*>(elements[0]);
-	std::stringstream ss;
-	ss << elementAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString elementAddress = DKRml::Get()->elementToAddress(elements[0]);
+	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
@@ -46,11 +43,8 @@ int DKDocument::createElement(duk_context* ctx)
 		DKERROR("DKDocument::createElement(): element invalid\n");
 		return false;
 	}
-	const void* elementAddress = static_cast<const void*>(element);
-	std::stringstream ss;
-	ss << elementAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
@@ -64,11 +58,8 @@ int DKDocument::documentElement(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	const void* elementAddress = static_cast<const void*>(element);
-	std::stringstream ss;
-	ss << elementAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
@@ -83,11 +74,8 @@ int DKDocument::getElementById(duk_context* ctx)
 		duk_push_null(ctx);
 		return true;
 	}
-	const void* address = static_cast<const void*>(element);
-	std::stringstream ss;
-	ss << address;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 

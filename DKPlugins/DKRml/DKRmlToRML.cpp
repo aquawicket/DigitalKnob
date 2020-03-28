@@ -71,12 +71,11 @@ bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
 bool DKRmlToRML::Hyperlink(DKEvent* event)
 {
 	DKDEBUGFUNC(event);
-	DKString id = event->GetId();
+	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
 	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* aElement = doc->GetElementById(id.c_str());
-
-	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();//.CString();
+	Rml::Core::Element* aElement = dkRml->addressToElement(elementAddress);
+	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
 	dkRml->LoadUrl(DKFile::local_assets+value);
@@ -207,7 +206,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			DKString id = aElements[i]->GetId();
 
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
-			DKEvent::AddEvent(id, "click", &DKRmlToRML::Hyperlink, this);
+			DKString elementAddress = DKRml::Get("")->elementToAddress(aElements[i]);
+			DKEvent::AddEvent(elementAddress, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}
 
