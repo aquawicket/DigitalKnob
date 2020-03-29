@@ -44,7 +44,7 @@ public:
 	void EventLoop();
 
 	//other eventloop stuff
-	static int c_evloop;
+	static bool c_evloop;
 	int handle_file(duk_context *ctx, const char *filename);
 	int handle_fh(duk_context *ctx, FILE *f, const char *filename);
 	static int wrapped_compile_execute(duk_context *ctx, void *udata);

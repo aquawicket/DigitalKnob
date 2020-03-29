@@ -7,7 +7,7 @@ DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
 DKStringArray DKDuktape::codeToRun;
 
-int DKDuktape::c_evloop = 0;
+bool DKDuktape::c_evloop = true;
 extern void poll_register(duk_context *ctx);
 extern void eventloop_register(duk_context *ctx);
 extern int eventloop_run(duk_context *ctx, void *udata);
@@ -82,7 +82,7 @@ bool DKDuktape::Init()
 {
 	DKDEBUGFUNC();
 	ctx = NULL;
-	c_evloop = true;
+	//c_evloop = true;
 
 	if(!ctx){
 		ctx = duk_create_heap_default();
