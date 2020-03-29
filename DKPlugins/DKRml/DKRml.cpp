@@ -202,6 +202,18 @@ bool DKRml::LoadHtml(const DKString& html)
 		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
 	}
 
+	//Load user agent style sheet
+	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
+	Rml::Core::SharedPtr<Rml::Core::StyleSheet> sheet = document->GetOwnerDocument()->GetStyleSheet();
+	Rml::Core::SharedPtr<Rml::Core::StyleSheet> rcss = Rml::Core::Factory::InstanceStyleSheetFile(rml_css.c_str());
+	if(sheet) {
+		Rml::Core::SharedPtr<Rml::Core::StyleSheet> new_style_sheet = rcss->CombineStyleSheet(*sheet);
+		document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet));
+	}
+	else {
+		document->GetOwnerDocument()->SetStyleSheet(std::move(rcss));
+	}
+
 	//Finish loading the document
 	Rml::Core::ElementUtilities::BindEventAttributes(document);
 	Rml::Core::PluginRegistry::NotifyDocumentLoad(document);
@@ -216,18 +228,6 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	dkRmlToRML.PostProcess(document);
 	document->Show();
-
-	//Load user agent style sheet
-	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
-	Rml::Core::SharedPtr<Rml::Core::StyleSheet> sheet = document->GetOwnerDocument()->GetStyleSheet();
-	Rml::Core::SharedPtr<Rml::Core::StyleSheet> rcss = Rml::Core::Factory::InstanceStyleSheetFile(rml_css.c_str());
-	if(sheet){
-		Rml::Core::SharedPtr<Rml::Core::StyleSheet> new_style_sheet = rcss->CombineStyleSheet(*sheet);
-		document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet));
-	}
-	else{
-		document->GetOwnerDocument()->SetStyleSheet(std::move(rcss));
-	}
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
