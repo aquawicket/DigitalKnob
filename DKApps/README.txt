@@ -5,6 +5,3 @@ DKBuilder
 	
 	*It will download automatically, install automatically, and build automatically.  Hopefully ;)
 	
-DKTemplate
-	A blank DKApp with gui. 
-	More to do. 
