@@ -87,12 +87,7 @@ function IconMaker_InstallImageMagick()
 	DKFile_MkDir("C:/digitalknob/DK/Download");
 	var datapath = "C:/digitalknob/DK/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip";
 	
-	//FIXME - we need to know if this fails.
-	//if(!DKCurl_Download("http://digitalknob.com/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath)){ 
-	//	console.warn("DKCurl_Download(): download failed");
-	//	return false; 
-	//}
-	console.log("Downloading: "+DKWEB+"/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip");
-	DKCurl_Download(DKWEB+"/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip");
-	DKArchive_Extract(datapath, "C:/digitalknob/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86");
+	// http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.0.2-10-portable-Q16-x86.zip
+	DKCurl_Download(DKWEB+"/Download/Tools/ImageMagick-7.0.2-10-portable-Q16-x86.zip", datapath);
+	DKArchive_Extract(datapath, "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-x86");
 }

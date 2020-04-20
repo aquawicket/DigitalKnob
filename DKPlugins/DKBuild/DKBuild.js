@@ -100,18 +100,14 @@ function DKBuild_InstallCmake()
 	
 	if(DK_GetOS() == "Win32"){
 		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi", datapath);
-		}
-		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
+			// https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi
 			DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.1-win32-x86.msi", datapath);
 		}
 		DK_System(datapath+"/cmake-3.17.1-win32-x86.msi");
 	}
 	else if(DK_GetOS() == "Win64"){
 		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi", datapath);
-		}
-		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
+			// https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi
 			DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.1-win32-x86.msi", datapath);
 		}
 		DK_System(datapath+"/cmake-3.17.1-win32-x86.msi");
