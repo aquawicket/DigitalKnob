@@ -16,6 +16,7 @@ IF(WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/build-4.2.0/b2.exe)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)
+		## https://github.com/boostorg/build/archive/4.2.0.zip
 		DKDOWNLOAD(${DKWEB}/Download/Tools/build-4.2.0.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/build-4.2.0.zip ${3RDPARTY})
 		DKSETPATH(${3RDPARTY}/build-4.2.0)
