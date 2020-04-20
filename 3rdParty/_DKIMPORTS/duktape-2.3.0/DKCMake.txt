@@ -1,4 +1,6 @@
 ### INSTALL ###
+
+## https://duktape.org/duktape-2.3.0.tar.xz
 DKINSTALL(${DKWEB}/Download/Libs/duktape-2.3.0.tar duktape-2.3.0)
 DKSET(DUKTAPE ${3RDPARTY}/duktape-2.3.0)
 
