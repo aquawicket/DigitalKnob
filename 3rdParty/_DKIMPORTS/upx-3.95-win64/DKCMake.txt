@@ -5,6 +5,7 @@ ENDIF()
 
 IF(NOT EXISTS ${3RDPARTY}/upx-3.95-win64)
 	DKSETPATH(${DIGITALKNOB}/Download)
+	## https://github.com/upx/upx/releases/download/v3.95/upx-3.95-win64.zip
 	DKDOWNLOAD(${DKWEB}/Download/Tools/upx-3.95-win64.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/upx-3.95-win64.zip ${3RDPARTY})
 ENDIF()
