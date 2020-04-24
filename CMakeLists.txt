@@ -3,9 +3,6 @@
 ### This will be the ONLY CMakeLists.txt file in DigitalKnob
 ### All Apps will be build from here.
 ### The required Tools, libraries and plugins will optionaly build from here. 
-### 
-### This script will become smart enough to determine what needs to be built. 
-### A flag shall determine weather or not to build libs.
 ###
 ### TODO
 ### Build App - just the app (do not delete cmake files, do not do anything with dependencies)
@@ -14,4 +11,5 @@
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
+PROJECT(DigitalKnob)
 INCLUDE(DKCMake/PROCESS.cmake)
