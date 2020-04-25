@@ -1,5 +1,6 @@
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/libjpeg-turbo-1.5.3.zip libjpeg-turbo-1.5.3)
+## https://sourceforge.net/projects/libjpeg-turbo/files/1.5.3/libjpeg-turbo-1.5.3.tar.gz/download
+DKINSTALL(${DKWEB}/Download/Libs/libjpeg-turbo-1.5.3.tar.gz libjpeg-turbo-1.5.3)
 DKSET(JPEG ${3RDPARTY}/libjpeg-turbo-1.5.3)
 
 

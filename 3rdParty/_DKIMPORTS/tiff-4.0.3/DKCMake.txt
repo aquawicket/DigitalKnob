@@ -1,4 +1,5 @@
 ### INSTALL ###
+## https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip
 DKINSTALL(${DKWEB}/Download/Libs/tiff-4.0.3.zip tiff-4.0.3)
 DKSET(TIFF ${3RDPARTY}/tiff-4.0.3)
 
