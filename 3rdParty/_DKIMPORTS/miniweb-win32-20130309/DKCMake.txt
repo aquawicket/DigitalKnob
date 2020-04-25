@@ -1,6 +1,7 @@
 IF(WIN)
 	IF(NOT EXISTS ${3RDPARTY}/miniweb-win32-20130309)
 		DKSETPATH(${DIGITALKNOB}/Download)
+		## https://osdn.net/frs/g_redir.php?m=kent&f=miniweb%2Fminiweb%2F0.8%2Fminiweb-win32-20130309.zip
 		DKDOWNLOAD(${DKWEB}/Download/Tools/miniweb-win32-20130309.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/miniweb-win32-20130309.zip ${3RDPARTY})
 	ENDIF()
