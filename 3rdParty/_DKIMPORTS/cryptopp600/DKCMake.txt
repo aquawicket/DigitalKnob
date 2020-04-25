@@ -1,6 +1,7 @@
 ### INSTALL ###
 IF(NOT EXISTS "${3RDPARTY}/cryptopp600")
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
+	## https://src.fedoraproject.org/lookaside/pkgs/rpms/cryptopp/cryptopp600.zip/sha512/7a60c28be1fc9418adeabe8c66d868b46e65fb3d77d308b9431b16905cde7faa670180619150e849ae44d70f44aa8501a0a0c4354ec84f194fd8138d14aca9bf/cryptopp600.zip
 	DKDOWNLOAD(${DKWEB}/Download/Libs/cryptopp600.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/cryptopp600.zip ${3RDPARTY}/cryptopp600)
 ENDIF()
