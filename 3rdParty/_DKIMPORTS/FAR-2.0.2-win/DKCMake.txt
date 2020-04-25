@@ -1,6 +1,7 @@
 IF(WIN)
 	IF(NOT EXISTS ${3RDPARTY}/far)
 		DKSETPATH(${DIGITALKNOB}/Download)
+		## https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip/download
 		DKDOWNLOAD(${DKWEB}/Download/Tools/FAR-2.0.2-win.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/FAR-2.0.2-win.zip ${3RDPARTY})
 	ENDIF()
