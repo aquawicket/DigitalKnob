@@ -1,4 +1,5 @@
 ### INSTALL ###
+## https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz/download
 DKINSTALL(${DKWEB}/Download/Libs/freetype-2.5.5.tar.gz freetype-2.5.5)
 DKSET(FREETYPE ${3RDPARTY}/freetype-2.5.5)
 
