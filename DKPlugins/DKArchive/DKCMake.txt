@@ -1,9 +1,9 @@
 DKDEPEND(DKDuktape)
 
 ##IF(NOT APPLE)
-	DKDEPEND(libarchive-master)
+##	DKDEPEND(libarchive-master)
 ##ELSE()
-##	DKDEPEND(libarchive-2.8.5)
+	DKDEPEND(libarchive-3.4.2)
 ##ENDIF()
 
 LIST(APPEND WIN_LIBS AdvAPI32.lib)
