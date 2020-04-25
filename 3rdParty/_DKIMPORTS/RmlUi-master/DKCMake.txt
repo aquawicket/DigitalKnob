@@ -4,7 +4,7 @@ DKDEPEND(freetype-2.5.5)
 ##DKINSTALL(${DKWEB}/Download/Libs/RmlUi-master.zip RmlUi-master)
 
 MESSAGE("Pulling RmlUi-master from aquawicket2/RmlUi git...")
-DKSET(GIT C:/Progra~1/Git/bin/git.exe)
+## DKSET(GIT C:/Progra~1/Git/bin/git.exe) "This GIT variable should be set from a master settings file, not here"
 SET(STRING "${GIT} clone https://github.com/aquawicket2/RmlUi.git ${3RDPARTY}/RmlUi-master")
 FILE(MAKE_DIRECTORY ${3RDPARTY}/RmlUi-master)
 EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
