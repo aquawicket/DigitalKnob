@@ -4,6 +4,7 @@ DKDEPEND(tiff-4.0.3)
 DKDEPEND(libpng-1.7.0beta34)
 
 ### INSTALL ###
+## https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip/download
 DKINSTALL(${DKWEB}/Download/Libs/opencv-3.4.1.zip opencv-3.4.1)
 DKSET(OPENCV ${3RDPARTY}/opencv-3.4.1)
 
