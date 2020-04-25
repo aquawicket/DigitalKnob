@@ -1,4 +1,5 @@
 ### INSTALL ###
+## https://sourceforge.net/projects/libpng/files/libpng17/1.7.0-oldbetas/libpng-1.7.0beta34.tar.gz/download
 DKINSTALL(${DKWEB}/Download/Libs/libpng-1.7.0beta34.tar.gz libpng-1.7.0beta34)
 DKSET(PNG ${3RDPARTY}/libpng-1.7.0beta34)
 
