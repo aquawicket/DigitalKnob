@@ -20,6 +20,7 @@ ENDIF()
 ##DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
+## https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
 DKINSTALL(${DKWEB}/Download/Libs/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
 DKSET(SDLIMAGE ${3RDPARTY}/SDL2_image-2.0.1)
 
