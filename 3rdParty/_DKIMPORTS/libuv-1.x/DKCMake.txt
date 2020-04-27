@@ -1,4 +1,5 @@
 ### INSTALL ###
+## https://github.com/libuv/libuv/archive/v1.x.zip
 DKINSTALL(${DKWEB}/Download/Libs/libuv-1.x.zip libuv-1.x)
 DKSET(UV ${3RDPARTY}/libuv-1.x)
 
