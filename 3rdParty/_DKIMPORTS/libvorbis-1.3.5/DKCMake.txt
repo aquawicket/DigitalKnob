@@ -1,4 +1,5 @@
 ### INSTALL ###
+## https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.5.zip
 DKINSTALL(${DKWEB}/Download/Libs/libvorbis-1.3.5.zip libvorbis-1.3.5)
 DKSET(VORBIS ${3RDPARTY}/libvorbis-1.3.5)
 
