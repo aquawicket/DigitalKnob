@@ -9,8 +9,8 @@ IF(WIN)
 ENDIF()
 
 ### INSTALL ###
-## https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-5.2.0.tar.gz
-DKINSTALL(https://github.com/xz-mirror/xz/archive/v5.2.0.zip xz-5.2.0)
+DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-5.2.0.tar.gz xz-5.2.0)
+##DKINSTALL(https://github.com/xz-mirror/xz/archive/v5.2.0.zip xz-5.2.0)
 ##DKINSTALL(${DKWEB}/Download/Libs/xz-5.2.0.tar.gz xz-5.2.0)
 DKSET(XZ ${3RDPARTY}/xz-5.2.0)
 
