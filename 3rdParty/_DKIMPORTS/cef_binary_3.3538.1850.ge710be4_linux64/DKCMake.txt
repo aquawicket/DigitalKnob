@@ -3,8 +3,8 @@ IF(NOT LINUX)
 ENDIF()
 
 ### INSTALL ###
-## http://opensource.spotify.com/cefbuilds/cef_binary_3.3538.1850.ge710be4_linux64.tar.bz2
-DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1850.ge710be4_linux64.tar.bz2 cef_binary_3.3538.1850.ge710be4_linux64)
+DKINSTALL(http://opensource.spotify.com/cefbuilds/cef_binary_3.3538.1850.ge710be4_linux64.tar.bz2 cef_binary_3.3538.1850.ge710be4_linux64)
+## DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1850.ge710be4_linux64.tar.bz2 cef_binary_3.3538.1850.ge710be4_linux64)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3538.1850.ge710be4_linux64)
 
 
@@ -21,8 +21,8 @@ LINUX_DEBUG_LIB(${CEF}/Debug/libcef.so)
 LINUX_RELEASE_LIB(${CEF}/Release/libcef.so)
 LINUX_DEBUG_LIB(${CEF}/${OS}/Debug/libcef_dll_wrapper/libcef_dll_wrapper.a)
 LINUX_RELEASE_LIB(${CEF}/${OS}/Release/libcef_dll_wrapper/libcef_dll_wrapper.a)
-##LINUX_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
-##LINUX_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
+## LINUX_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
+## LINUX_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
 
 
 ### COMPILE ###

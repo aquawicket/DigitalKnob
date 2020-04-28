@@ -3,8 +3,8 @@ IF(NOT MAC)
 ENDIF()
 
 ### INSTALL ###
-## http://opensource.spotify.com/cefbuilds/cef_binary_3.3538.1849.g458cc98_macosx64.tar.bz2
-DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1849.g458cc98_macosx64.tar.bz2 cef_binary_3.3538.1849.g458cc98_macosx64)
+DKINSTALL(http://opensource.spotify.com/cefbuilds/cef_binary_3.3538.1849.g458cc98_macosx64.tar.bz2 cef_binary_3.3538.1849.g458cc98_macosx64)
+## DKINSTALL(${DKWEB}/Download/Libs/cef_binary_3.3538.1849.g458cc98_macosx64.tar.bz2 cef_binary_3.3538.1849.g458cc98_macosx64)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3538.1849.g458cc98_macosx64)
 
 
@@ -21,8 +21,8 @@ MAC_DEBUG_LIB("${CEF}/Debug/Chromium Embedded Framework.framework")
 MAC_RELEASE_LIB("${CEF}/Release/Chromium Embedded Framework.framework")
 MAC_DEBUG_LIB(${CEF}/${OS}/libcef_dll_wrapper/${DEBUG}/libcef_dll_wrapper.a)
 MAC_RELEASE_LIB(${CEF}/${OS}/libcef_dll_wrapper/${RELEASE}/libcef_dll_wrapper.a)
-##MAC_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
-##MAC_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
+## MAC_DEBUG_LIB(${CEF}/Debug/cef_sandbox.a)
+## MAC_RELEASE_LIB(${CEF}/Release/cef_sandbox.a)
 
 
 ### COMPILE ###
