@@ -1,3 +1,4 @@
+### DEPENDS ###
 IF(ANDROID)
 	DKDEPEND(zlib-1.2.8)
 ENDIF()
@@ -10,9 +11,10 @@ IF(NOT WIN_64)
 	DKDEPEND(bzip2-1.0.6)
 ENDIF()
 
+
 ### INSTALL ###
 DKINSTALL(https://www.libarchive.org/downloads/libarchive-3.4.2.zip libarchive-3.4.2)
-##DKINSTALL(${DKWEB}/Download/Libs/libarchive-3.4.2.zip libarchive-3.4.2)
+## DKINSTALL(${DKWEB}/Download/libarchive-3.4.2.zip libarchive-3.4.2)
 DKSET(ARCHIVE ${3RDPARTY}/libarchive-3.4.2)
 
 

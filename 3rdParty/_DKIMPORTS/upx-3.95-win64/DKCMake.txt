@@ -1,11 +1,10 @@
-### INSTALL ###
 IF(NOT WIN32)
 	RETURN()
 ENDIF()
 
+### INSTALL ###
 IF(NOT EXISTS ${3RDPARTY}/upx-3.95-win64)	
-	## DKINSTALL(${DKWEB}/Download/Tools/upx-3.95-win64.zip upx-3.95-win64)
 	DKINSTALL(https://github.com/upx/upx/releases/download/v3.95/upx-3.95-win64.zip upx-3.95-win64)
+	## DKINSTALL(${DKWEB}/Download/upx-3.95-win64.zip upx-3.95-win64)
 ENDIF()
-
 DKSET(UPX ${3RDPARTY}/upx-3.95-win64)

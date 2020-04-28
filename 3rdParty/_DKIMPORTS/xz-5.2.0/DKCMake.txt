@@ -1,3 +1,4 @@
+### DEPENDS ###
 IF(WIN_32)
 	DKDEPEND(mingw32)
 ENDIF()
@@ -8,10 +9,10 @@ IF(WIN)
 	DKDEPEND(msys)
 ENDIF()
 
+
 ### INSTALL ###
 DKINSTALL(https://astuteinternet.dl.sourceforge.net/project/lzmautils/xz-5.2.0.tar.gz xz-5.2.0)
-##DKINSTALL(https://github.com/xz-mirror/xz/archive/v5.2.0.zip xz-5.2.0)
-##DKINSTALL(${DKWEB}/Download/Libs/xz-5.2.0.tar.gz xz-5.2.0)
+## DKINSTALL(${DKWEB}/Download/xz-5.2.0.tar.gz xz-5.2.0)
 DKSET(XZ ${3RDPARTY}/xz-5.2.0)
 
 
@@ -24,8 +25,8 @@ MAC_DEBUG_LIB(${XZ}/${OS}/${DEBUG}/src/liblzma/.libs/liblzma.a)
 MAC_RELEASE_LIB(${XZ}/${OS}/${RELEASE}/src/liblzma/.libs/liblzma.a)
 LINUX_DEBUG_LIB(${XZ}/${OS}/Debug/src/liblzma/.libs/liblzma.a)
 LINUX_RELEASE_LIB(${XZ}/${OS}/Release/src/liblzma/.libs/liblzma.a)
-#ANDROID_DEBUG_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
-#ANDROID_RELEASE_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
+## ANDROID_DEBUG_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
+## ANDROID_RELEASE_LIB(${XZ}/${OS}/obj/local/armeabi-v7a/liblzma.a)
 
 
 ### COMPILE ###
@@ -70,7 +71,6 @@ make\;
 exit\;")
 DKRENAME(${XZ}/win64/Release/src/liblzma/.libs/liblzma.a ${XZ}/win64/Release/src/liblzma/.libs/liblzma.lib)
 
-### MAC
 DKSETPATH(${XZ}/${OS}/Debug)
 MAC_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
 MAC_DEBUG_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
@@ -80,14 +80,13 @@ MAC_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 MAC_RELEASE_COMMAND(make "CXXFLAGS=-arch x86_64" "CFLAGS=-arch x86_64" "LDFLAGS=-arch x86_64")
 
 
-### IOSSIM
-#DKSETPATH(${XZ}/${OS}/Debug)
-#IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
-#IOSSIM_DEBUG_COMMAND(make)
+## DKSETPATH(${XZ}/${OS}/Debug)
+## IOSSIM_DEBUG_COMMAND(../../configure --disable-shared --enable-static)
+## IOSSIM_DEBUG_COMMAND(make)
 
-#DKSETPATH(${XZ}/${OS}/Release)
-#IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
-#IOSSIM_RELEASE_COMMAND(make)
+## DKSETPATH(${XZ}/${OS}/Release)
+## IOSSIM_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
+## IOSSIM_RELEASE_COMMAND(make)
 
 
 DKSETPATH(${XZ}/${OS}/Debug)
@@ -99,5 +98,5 @@ LINUX_RELEASE_COMMAND(../../configure --disable-shared --enable-static)
 LINUX_RELEASE_COMMAND(make)
 
 
-#ANDROID_NDK_DEBUG(xz-5.2.0)
-#ANDROID_NDK_RELEASE(xz-5.2.0)
+## ANDROID_NDK_DEBUG(xz-5.2.0)
+## ANDROID_NDK_RELEASE(xz-5.2.0)
