@@ -2,11 +2,14 @@ IF(ANDROID)
 	RETURN()
 ENDIF()
 
+### DEPENDS ###
 DKDEPEND(msinttypes-r26)
 DKDEPEND(openal)
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/freealut-1.1.0-src.zip freealut-1.1.0-src)
+## DKINSTALL(www.internet.com/freealut-1.1.0-src.zip freealut-1.1.0-src) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/freealut-1.1.0-src.zip freealut-1.1.0-src)
 DKSET(FREEALUT ${3RDPARTY}/freealut-1.1.0-src)
 
 
@@ -35,7 +38,6 @@ DKSETPATH(${FREEALUT}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DOPENAL_INCLUDE_DIR=${OPENAL}/include -DOPENAL_LIB_DIR=${OPENAL}/${OS} ${FREEALUT})
 MAC_XCODE_DEBUG(freealut-1.1.0-src alut_static)
 MAC_XCODE_RELEASE(freealut-1.1.0-src alut_static)
-
 
 DKSETPATH(${FREEALUT}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC -DOPENAL_INCLUDE_DIR=${OPENAL}/include -DOPENAL_LIB_DIR=${OPENAL}/${OS}/Debug ${FREEALUT})

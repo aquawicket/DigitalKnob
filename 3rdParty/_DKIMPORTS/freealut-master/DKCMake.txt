@@ -2,8 +2,10 @@ IF(NOT ANDROID)
 	RETURN()
 ENDIF()
 
+
 ### INSTALL ###
-DKINSTALL(${DKDOWNLOAD}/Libs/freealut-master.zip freealut-master)
+## DKINSTALL(www.internet.com/freealut-master.zip freealut-master) ## find an online link
+## DKINSTALL(${DKWEB}/download/freealut-master.zip freealut-master)
 DKSET(FREEALUT ${3RDPARTY}/freealut-master)
 
 
