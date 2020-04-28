@@ -16,18 +16,18 @@ IF(WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/build-4.2.0/b2.exe)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)
-		## https://github.com/boostorg/build/archive/4.2.0.zip
-		DKDOWNLOAD(${DKWEB}/Download/Tools/build-4.2.0.zip)
-		DKEXTRACT(${DIGITALKNOB}/Download/build-4.2.0.zip ${3RDPARTY})
-		DKSETPATH(${3RDPARTY}/build-4.2.0)
-		##EXECUTE_PROCESS(COMMAND cmd /c bootstrap.bat vc14 WORKING_DIRECTORY ${CURRENT_DIR})
+		DKDOWNLOAD(https://github.com/boostorg/build/archive/4.2.0.zip)
+		## DKDOWNLOAD(${DKWEB}/Download/build-4.2.0.zip)
+		DKEXTRACT(${DIGITALKNOB}/Download/4.2.0.zip ${3RDPARTY})
+		## DKSETPATH(${3RDPARTY}/build-4.2.0)
+		## EXECUTE_PROCESS(COMMAND cmd /c bootstrap.bat vc14 WORKING_DIRECTORY ${CURRENT_DIR})
 	ENDIF()
 	DKSET(BOOSTBUILD ${3RDPARTY}/build-4.2.0)
 	DKSET(BJAM ${BOOSTBUILD}/src/engine/bjam.exe)
 ENDIF()
 
-## https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.zip
-DKINSTALL(${DKWEB}/Download/Libs/boost_1_72_0.zip boost_1_72_0)
+DKINSTALL(https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.zip boost_1_72_0)
+## DKINSTALL(${DKWEB}/Download/boost_1_72_0.zip boost_1_72_0)
 DKSET(BOOST ${3RDPARTY}/boost_1_72_0)
 
 ### LINK ###
