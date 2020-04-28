@@ -1,15 +1,15 @@
+### DEPENDS ###
 ##DKDEPEND(freetype-2.5.5)
 
-### INSTALL ###
-##DKINSTALL(${DKWEB}/Download/Libs/litehtml-master.zip litehtml-master)
 
+### INSTALL ###
 MESSAGE("Pulling litehtml-master from litehtml/litehtml git...")
 DKSET(GIT C:/Progra~1/Git/bin/git.exe)
 SET(STRING "${GIT} clone https://github.com/litehtml/litehtml.git ${3RDPARTY}/litehtml-master")
 FILE(MAKE_DIRECTORY ${3RDPARTY}/litehtml-master)
 EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
+##DKINSTALL(${DKWEB}/Download/litehtml-master.zip litehtml-master)
 DKSET(LITEHTML ${3RDPARTY}/litehtml-master)
-
 
 
 ### LINK ###

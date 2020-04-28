@@ -2,11 +2,13 @@ IF(NOT LINUX)
 	RETURN()
 ENDIF()
 
+
 ### INSTALL ###
 DKSET(QUEUE_BUILD ON)
 DKSET(CURRENT_DIR /usr)
 LINUX_COMMAND(sudo apt install libxrandr-dev)
 
+
 ### LINK ###
-##DKINCLUDE(/usr/include/X11)
+## DKINCLUDE(/usr/include/X11)
 SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXrandr")
