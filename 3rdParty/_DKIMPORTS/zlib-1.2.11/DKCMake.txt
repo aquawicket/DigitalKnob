@@ -4,7 +4,8 @@ ENDIF()
 
 ### INSTALL ###
 ## https://www.zlib.net/zlib-1.2.11.tar.gz
-DKINSTALL(${DKWEB}/Download/Libs/zlib1211.zip zlib-1.2.11)
+DKINSTALL(https://github.com/madler/zlib/archive/v1.2.11.zip zlib-1.2.11)
+##DKINSTALL(${DKWEB}/Download/Libs/zlib1211.zip zlib-1.2.11)
 DKSET(ZLIB ${3RDPARTY}/zlib-1.2.11)
 
 
