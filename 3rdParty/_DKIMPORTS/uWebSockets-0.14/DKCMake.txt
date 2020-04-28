@@ -1,4 +1,4 @@
-DKDEPEND(libuv-1.x)
+DKDEPEND(libuv-v1.37.0)
 
 ### INSTALL ###
 DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/v0.14.zip uWebSockets-0.14)
