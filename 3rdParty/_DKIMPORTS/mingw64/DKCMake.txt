@@ -5,8 +5,8 @@
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw64)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	## https://pilotfiber.dl.sourceforge.net/project/mingw-w64/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip
-	DKDOWNLOAD(${DKWEB}/Download/Tools/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
+	##DKDOWNLOAD(${DKWEB}/Download/Tools/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
+	DKDOWNLOAD(https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.9.2/threads-posix/seh/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z)
 	DKEXTRACT(${DIGITALKNOB}/Download/x86_64-4.9.2-release-posix-seh-rt_v3-rev1.7z ${3RDPARTY}/mingw)
 ENDIF()
 
