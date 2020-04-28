@@ -1,5 +1,6 @@
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/jpegsr6b.zip jpeg-6b)
+## DKINSTALL(www.internet.com/jpegsr6b.zip jpeg-6b) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/jpegsr6b.zip jpeg-6b)
 DKSET(JPEG ${3RDPARTY}/jpeg-6b)
 
 
