@@ -1,15 +1,17 @@
+IF(ANDROID OR IPHONE OR IPHONESIMULATOR)
+	RETURN()
+ENDIF()
+
+
+### DEPENDS ###
 IF(WIN)
 	DKDEPEND(python)
 	DKDEPEND(vc2019)
 ENDIF()
-
 IF(LINUX)
 	DKDEPEND(libboost1.58-tools-dev)
 ENDIF()
 
-IF(ANDROID OR IPHONE OR IPHONESIMULATOR)
-	RETURN()
-ENDIF()
 
 ### INSTALL ###
 IF(WIN32)
@@ -23,9 +25,10 @@ IF(WIN32)
 	ENDIF()
 	DKSET(BOOSTBUILD ${3RDPARTY}/boost-build)
 ENDIF()
-
-DKINSTALL(${DKWEB}/Download/Libs/boost_1_66_0.zip boost_1_66_0)
+## DKINSTALL(www.internet.com/boost_1_66_0.zip boost_1_66_0)
+## DKINSTALL(${DKWEB}/Download/boost_1_66_0.zip boost_1_66_0)
 DKSET(BOOST ${3RDPARTY}/boost_1_66_0)
+
 
 ### LINK ###
 DKINCLUDE(${BOOST})
@@ -170,24 +173,23 @@ ENDIF()
 IF(WIN_32)
 	DKSETPATH(${BOOSTBUILD})
 ENDIF()
-	WIN32_COMMAND(b2 install toolset=msvc-14.0 --prefix=${BOOSTBUILD})
-	DKSETPATH(${BOOST})
-	WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
-	WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
 	
-	DKRENAME(${BOOST}/${OS}/lib/boost_system-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_system-vc140-mt-gd-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_filesystem-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_filesystem-vc140-mt-gd-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_date_time-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_date_time-vc140-mt-gd-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_regex-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_regex-vc140-mt-gd-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_thread-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_thread-vc140-mt-gd-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_chrono-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_chrono-vc140-mt-gd-x32-1_66.lib)
+WIN32_COMMAND(b2 install toolset=msvc-14.0 --prefix=${BOOSTBUILD})
+DKSETPATH(${BOOST})
+WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
+WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
 	
-	DKRENAME(${BOOST}/${OS}/lib/boost_system-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_system-vc140-mt-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_filesystem-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_filesystem-vc140-mt-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_date_time-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_date_time-vc140-mt-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_regex-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_regex-vc140-mt-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_thread-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_thread-vc140-mt-x32-1_66.lib)
-	DKRENAME(${BOOST}/${OS}/lib/boost_chrono-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_chrono-vc140-mt-x32-1_66.lib)
-
-
+DKRENAME(${BOOST}/${OS}/lib/boost_system-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_system-vc140-mt-gd-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_filesystem-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_filesystem-vc140-mt-gd-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_date_time-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_date_time-vc140-mt-gd-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_regex-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_regex-vc140-mt-gd-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_thread-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_thread-vc140-mt-gd-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_chrono-vc140-mt-gd-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_chrono-vc140-mt-gd-x32-1_66.lib)
+	
+DKRENAME(${BOOST}/${OS}/lib/boost_system-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_system-vc140-mt-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_filesystem-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_filesystem-vc140-mt-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_date_time-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_date_time-vc140-mt-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_regex-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_regex-vc140-mt-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_thread-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_thread-vc140-mt-x32-1_66.lib)
+DKRENAME(${BOOST}/${OS}/lib/boost_chrono-vc140-mt-x32-1_66.lib ${BOOST}/${OS}/lib/libboost_chrono-vc140-mt-x32-1_66.lib)
 ENDIF(DYNAMIC)
