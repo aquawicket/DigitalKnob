@@ -1,5 +1,6 @@
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/tidy-html5-5.0.0.zip tidy-html5-5.0.0)
+## DKINSTALL(www.internet.com/tidy-html5-5.0.0.zip tidy-html5-5.0.0) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/tidy-html5-5.0.0.zip tidy-html5-5.0.0)
 DKSET(TIDY ${3RDPARTY}/tidy-html5-5.0.0)
 
 

@@ -1,9 +1,8 @@
 ### INSTALL ###
-IF(EXISTS ${3RDPARTY}/msinttypes-r26)
-	###
-ELSE()
+IF(NOT EXISTS ${3RDPARTY}/msinttypes-r26)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKWEB}/Download/Libs/msinttypes-r26.zip)
+	## DKDOWNLOAD(www.internet.com/msinttypes-r26.zip) ## find an online link
+	## DKDOWNLOAD(${DKWEB}/Download/msinttypes-r26.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/msinttypes-r26.zip ${3RDPARTY}/msinttypes-r26)
 ENDIF()
 DKSET(STDINT ${3RDPARTY}/msinttypes-r26)

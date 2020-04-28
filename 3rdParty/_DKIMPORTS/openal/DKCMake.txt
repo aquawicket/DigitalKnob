@@ -5,7 +5,8 @@ IF(ANDROID)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/openal-1.15.1.zip openal)
+## DKINSTALL(www.internet.com/openal-1.15.1.zip openal) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/openal-1.15.1.zip openal)
 
 
 ### LINK ###
@@ -42,7 +43,6 @@ DKSETPATH(${OPENAL}/${OS})
 MAC_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 -DLIBTYPE=STATIC -DEXAMPLES=OFF -DFORCE_STATIC_VCRT=ON ${OPENAL})
 MAC_XCODE_DEBUG(openal openal)
 MAC_XCODE_RELEASE(openal openal)
-
 
 DKSETPATH(${OPENAL}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC -DLIBTYPE=STATIC -DEXAMPLES=OFF -DFORCE_STATIC_VCRT=ON ${OPENAL})

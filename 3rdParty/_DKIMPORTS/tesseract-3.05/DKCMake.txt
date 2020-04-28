@@ -1,7 +1,10 @@
+### DEPENDS ###
 DKDEPEND(leptonica-1.74.4)
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/tesseract-3.05.zip tesseract-3.05)
+## DKINSTALL(www.internet.com/tesseract-3.05.zip tesseract-3.05) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/tesseract-3.05.zip tesseract-3.05)
 DKSET(TESSERACT ${3RDPARTY}/tesseract-3.05)
 
 

@@ -1,6 +1,8 @@
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/openFrameworks-master.zip openFrameworks-master)
+## DKINSTALL(www.internet.com/openFrameworks-master.zip openFrameworks-master) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/openFrameworks-master.zip openFrameworks-master)
 DKSET(OPENFRAMEWORKS ${3RDPARTY}/openFrameworks-master)
+
 
 ### LINK ###
 DKINCLUDE(${OPENFRAMEWORKS})
@@ -26,9 +28,9 @@ WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/sound)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/fmodex/include)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/video)
 WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/videoInput/include)
-
 WIN_DEBUG_LIB(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG}/openFrameworks.lib)
 WIN_RELEASE_LIB(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE}/openFrameworks.lib)
+
 
 ### COMPILE ###
 DKSETPATH(${OPENFRAMEWORKS}/${OS})

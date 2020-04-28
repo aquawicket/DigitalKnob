@@ -1,9 +1,11 @@
+### DKDEPENDS ###
 DKDEPEND(zlib-1.2.8)
 DKDEPEND(freetype-2.5.5)
 DKDEPEND(libpng-1.7.0beta34)
 
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/podofo-0.9.5.tar.gz podofo-0.9.5)
+## DKINSTALL(www.internet.com/podofo-0.9.5.tar.gz podofo-0.9.5) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/podofo-0.9.5.tar.gz podofo-0.9.5)
 DKSET(PODOFO ${3RDPARTY}/podofo-0.9.5)
 
 
@@ -52,14 +54,13 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(podofo-0.9.5 podofo_static)
 IOSSIM_XCODE_RELEASE(podofo-0.9.5 podofo_static)
 
-##DKSETPATH(${PODOFO}/${OS}/${DEBUG})
-##IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
-##IOSSIM_DEBUG_COMMAND(make)
+## DKSETPATH(${PODOFO}/${OS}/${DEBUG})
+## IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
+## IOSSIM_DEBUG_COMMAND(make)
 
-##DKSETPATH(${PODOFO}/${OS}/${RELEASE})
-##IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
-##IOSSIM_RELEASE_COMMAND(make)
-
+## DKSETPATH(${PODOFO}/${OS}/${RELEASE})
+## IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
+## IOSSIM_RELEASE_COMMAND(make)
 
 DKSETPATH(${PODOFO}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DPODOFO_BUILD_STATIC=ON -DZLIB_INCLUDE_DIR=${ZLIB} -DZLIB_LIBRARY_DEBUG=${ZLIB}/${OS}/Debug/zlibstatic.lib -DZLIB_LIBRARY_RELEASE=${ZLIB}/${OS}/Release/zlibstatic.lib -DFREETYPE_INCLUDE_DIR_FTHEADER=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_FT2BUILD=${FREETYPE}/include -DFREETYPE_LIBRARY_DEBUG=${FREETYPE}/${OS}/Debug/freetype.lib -DFREETYPE_LIBRARY_RELEASE=${FREETYPE}/${OS}/Release/freetype.lib -DPNG_LIBRARY_DEBUG=${PNG}/${OS}/Debug/libpng17_staticd.lib -DPNG_LIBRARY_RELEASE=${PNG}/${OS}/Release/libpng17_static.lib ${PODOFO})
