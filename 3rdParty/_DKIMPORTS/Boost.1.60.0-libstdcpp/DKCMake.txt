@@ -5,16 +5,16 @@ IF(MAC)
 	RETURN()
 ENDIF()
 
+
 ### INSTALL ###
-IF(EXISTS ${3RDPARTY}/Boost.1.60.0-libstdcpp)
-	###
-ELSE()
+IF(NOT EXISTS ${3RDPARTY}/Boost.1.60.0-libstdcpp)
 	DKSETPATH(${DIGITALKNOB}/Download)
-	DKDOWNLOAD(${DKWEB}/Download/Libs/Boost.1.60.0-libstdcpp.zip)
+	## DKDOWNLOAD(internet/Boost.1.60.0-libstdcpp.zip)
+	## DKDOWNLOAD(${DKWEB}/Download/Boost.1.60.0-libstdcpp.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/Boost.1.60.0-libstdcpp.zip ${3RDPARTY}/Boost.1.60.0-libstdcpp)
 ENDIF()
-
 DKSET(BOOST ${3RDPARTY}/Boost.1.60.0-libstdcpp)
+
 
 ### LINK ###
 DKINCLUDE(${BOOST})
@@ -24,6 +24,3 @@ IOS_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
 IOS_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)
 IOSSIM_DEBUG_LIB(${BOOST}/libs/boost/ios/libboost.a)
 IOSSIM_RELEASE_LIB(${BOOST}/libs/boost/ios/libboost.a)
-
-
-### COMPILE ###

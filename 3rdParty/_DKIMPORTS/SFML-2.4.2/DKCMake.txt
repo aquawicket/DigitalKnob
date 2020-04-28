@@ -1,10 +1,13 @@
+### DEPENDS ###
 IF(LINUX)
 	DKDEPEND(openal)
 	DKDEPEND(flac-1.3.2)
 ENDIF()
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/SFML-2.4.2.zip SFML-2.4.2)
+## DKINSTALL(www.internet.com/SFML-2.4.2.zip SFML-2.4.2)
+## DKINSTALL(${DKWEB}/Download/SFML-2.4.2.zip SFML-2.4.2)
 DKSET(SFML ${3RDPARTY}/SFML-2.4.2)
 
 
@@ -39,7 +42,6 @@ LINUX_DEBUG_LIB(${SFML}/${OS}/Debug/libSFML.a)
 LINUX_RELEASE_LIB(${SFML}/${OS}/Release/libSFML.a)
 ANDROID_DEBUG_LIB(${SFML}/${OS}/Debug/obj/local/armeabi-v7a/libSFML.so)
 ANDROID_RELEASE_LIB(${SFML}/${OS}/Release/obj/local/armeabi-v7a/libSFML.so)
-
 LIST(APPEND WIN_LIBS winmm.lib)
 
 

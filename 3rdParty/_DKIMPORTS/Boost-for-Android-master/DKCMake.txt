@@ -1,5 +1,5 @@
+### DEPENDS ###
 DKDEPEND(android-ndk-r18)
-
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
@@ -7,7 +7,8 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/Boost-for-Android-master.zip Boost-for-Android-master)
+## DKINSTALL(www.internet.com/Boost-for-Android-master.zip Boost-for-Android-master)
+## DKINSTALL(${DKWEB}/Download/Boost-for-Android-master.zip Boost-for-Android-master)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
 ##FIXME: this get's overwritten
@@ -15,7 +16,8 @@ IF(EXISTS ${BOOST}/boost_1_68_0)
 	###
 ELSE()
 	DKSETPATH(${BOOST})
-	DKDOWNLOAD(${DKWEB}/Download/Libs/boost_1_68_0.tar.bz2)
+	## DKDOWNLOAD(www.internet.com/boost_1_68_0.tar.bz2)
+	## DKDOWNLOAD(${DKWEB}/Download/boost_1_68_0.tar.bz2)
 ENDIF()
 
 

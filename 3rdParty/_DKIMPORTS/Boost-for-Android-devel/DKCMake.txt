@@ -1,6 +1,6 @@
+### DEPENDS ###
 DKDEPEND(android-ndk-r10d)
-##DKDEPEND(android-ndk-r10e)
-
+## DKDEPEND(android-ndk-r10e)
 IF(NOT UNIX)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
@@ -8,7 +8,8 @@ ENDIF()
 
 
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/Boost-for-Android-devel.zip Boost-for-Android-devel)
+## DKINSTALL(www.internet.com/Boost-for-Android-devel.zip Boost-for-Android-devel)
+## DKINSTALL(${DKWEB}/Download/Boost-for-Android-devel.zip Boost-for-Android-devel)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-devel)
 
 ##FIXME: this get's overwritten
@@ -16,8 +17,10 @@ IF(EXISTS ${BOOST}/boost_1_53_0)
 	###
 ELSE()
 	DKSETPATH(${BOOST})
-	DKDOWNLOAD(${DKWEB}/Download/Libs/boost_1_53_0.tar.bz2)
+	## DKDOWNLOAD(www.internet.com/boost_1_53_0.tar.bz2)
+	## DKDOWNLOAD(${DKWEB}/Download/boost_1_53_0.tar.bz2)
 ENDIF()
+
 
 ### LINK ###
 ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53)

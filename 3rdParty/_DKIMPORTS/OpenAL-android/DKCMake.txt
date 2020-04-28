@@ -2,8 +2,10 @@ IF(NOT ANDROID)
 	RETURN()
 ENDIF()
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/OpenAL-android.zip OpenAL-android)
+## DKINSTALL(www.internet.com/OpenAL-android.zip OpenAL-android)
+## DKINSTALL(${DKWEB}/Download/OpenAL-android.zip OpenAL-android)
 
 
 ### LINK ###
