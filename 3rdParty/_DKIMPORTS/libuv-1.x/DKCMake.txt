@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKINSTALL(https://github.com/libuv/libuv/archive/v1.x.zip libuv-1.x)
-##DKINSTALL(https://dist.libuv.org/dist/v1.37.0/libuv-v1.37.0.tar.gz libuv-1.x)
+## DKINSTALL(${DKWEB}/Download/libuv-v1.37.0.tar.gz libuv-1.x)
 DKSET(UV ${3RDPARTY}/libuv-1.x)
 
 LIST(APPEND WIN_LIBS Iphlpapi.lib)

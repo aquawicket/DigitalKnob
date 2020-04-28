@@ -1,11 +1,8 @@
-IF(WIN)
-	##IF(NOT EXISTS ${3RDPARTY}/far)
-		##DKSETPATH(${DIGITALKNOB}/Download)
-		## https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip/download
-		##DKDOWNLOAD(${DKWEB}/Download/Tools/FAR-2.0.2-win.zip)
-		##DKEXTRACT(${DIGITALKNOB}/Download/FAR-2.0.2-win.zip ${3RDPARTY})
-	##ENDIF()
-
-	DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip far)
-	DKSET(FAR ${3RDPARTY}/far)
+IF(NOT WIN32)
+	RETURN()
 ENDIF()
+
+### INSTALL ###
+DKINSTALL(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.2/FAR-2.0.2-win.zip far)
+## DKINSTALL(${DKWEB}/Download/FAR-2.0.2-win.zip far)
+DKSET(FAR ${3RDPARTY}/far)

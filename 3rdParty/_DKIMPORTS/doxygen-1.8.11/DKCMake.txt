@@ -2,10 +2,11 @@ IF(NOT WIN32)
 	RETURN()
 ENDIF()
 
+### INSTALL ###
 IF(NOT EXISTS "C:/Program Files/doxygen/bin/doxygen.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	DKDOWNLOAD(https://sourceforge.net/projects/doxygen/files/rel-1.8.13/doxygen-1.8.13-setup.exe)
-	##DKDOWNLOAD(${DKWEB}/Download/Tools/doxygen-1.8.13-setup.exe)
+	## DKDOWNLOAD(${DKWEB}/Download/doxygen-1.8.13-setup.exe)
 	DKSET(QUEUE_BUILD ON)
 	WIN32_COMMAND(${DIGITALKNOB}/Download/doxygen-1.8.13-setup.exe)
 ENDIF()

@@ -1,14 +1,6 @@
 ### INSTALL ###
-
-##IF(NOT EXISTS ${3RDPARTY}/threadpool-0_2_5-src)
-##	DKSETPATH(${DIGITALKNOB}/Download)
-	##DKDOWNLOAD(${DKWEB}/Download/Tools/threadpool-0_2_5-src.zip)
-##	DKDOWNLOAD(https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip)
-	##DKRENAME(${DIGITALKNOB}/Download/download ${DIGITALKNOB}/Download/threadpool-0_2_5-src.zip)
-##	DKEXTRACT(${DIGITALKNOB}/Download/threadpool-0_2_5-src.zip ${3RDPARTY})
-##ENDIF()
-
 DKINSTALL(https://sourceforge.net/projects/threadpool/files/threadpool/0.2.5%20%28Stable%29/threadpool-0_2_5-src.zip threadpool-0_2_5-src)
+## DKINSTALL(${DKWEB}/Download/threadpool-0_2_5-src.zip threadpool-0_2_5-src)
 DKSET(THREADPOOL ${3RDPARTY}/threadpool-0_2_5-src)
 
 

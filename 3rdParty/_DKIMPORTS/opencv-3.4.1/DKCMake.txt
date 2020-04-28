@@ -3,8 +3,10 @@ DKDEPEND(libjpeg-turbo-1.5.3)
 DKDEPEND(tiff-4.0.3)
 DKDEPEND(libpng-1.7.0beta34)
 
+
 ### INSTALL ###
 DKINSTALL(https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip opencv-3.4.1)
+## DKINSTALL(${DKWEB}/Download/opencv-3.4.1.zip opencv-3.4.1)
 DKSET(OPENCV ${3RDPARTY}/opencv-3.4.1)
 
 
@@ -83,8 +85,6 @@ LINUX_RELEASE_LIB(${OPENCV}/${OS}/${RELEASE}/lib/libopencv_videoio.a)
 
 ANDROID_DEBUG_LIB(${OPENCV}/${OS}/lib/${DEBUG}/obj/local/armeabi-v7a/libopencv_core.a)
 ANDROID_RELEASE_LIB(${OPENCV}/${OS}/lib/${RELEASE}/obj/local/armeabi-v7a/libopencv_core.a)
-
-
 
 
 ### COMPILE ###

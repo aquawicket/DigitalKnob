@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKINSTALL(https://github.com/htacg/tidy-html5/archive/5.7.28.zip tidy-html5-5.7.28)
-##DKINSTALL(${DKWEB}/Download/Libs/tidy-html5-5.7.28.zip tidy-html5-5.7.28)
+## DKINSTALL(${DKWEB}/Download/tidy-html5-5.7.28.zip tidy-html5-5.7.28)
 DKSET(TIDY ${3RDPARTY}/tidy-html5-5.7.28)
 
 

@@ -1,8 +1,10 @@
+### DEPENDS ###
 DKDEPEND(libiconv-1.14)
+
 
 ### INSTALL ###
 DKINSTALL(http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz libxml2-2.9.8)
-##DKINSTALL(${DKWEB}/Download/Libs/libxml2-2.9.8.tar.gz libxml2-2.9.8)
+## DKINSTALL(${DKWEB}/Download/libxml2-2.9.8.tar.gz libxml2-2.9.8)
 DKSET(XML2 ${3RDPARTY}/libxml2-2.9.8)
 
 

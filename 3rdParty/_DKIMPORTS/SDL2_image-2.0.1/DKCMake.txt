@@ -1,3 +1,4 @@
+### DEPENDS ###
 DKDEPEND(DKSDLWindow)
 IF(ANDROID)
 	DKDEPEND(zlib-1.2.8)
@@ -17,11 +18,11 @@ ENDIF()
 IF(NOT MAC)
 	DKDEPEND(tiff-4.0.3)
 ENDIF()
-##DKDEPEND(freetype-2.5.5)
+## DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
 DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
-##DKINSTALL(${DKWEB}/Download/Libs/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
+## DKINSTALL(${DKWEB}/Download/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
 DKSET(SDLIMAGE ${3RDPARTY}/SDL2_image-2.0.1)
 
 

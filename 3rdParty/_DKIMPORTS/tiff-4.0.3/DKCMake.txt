@@ -1,6 +1,6 @@
 ### INSTALL ###
 DKINSTALL(https://download.osgeo.org/libtiff/old/tiff-4.0.3.zip tiff-4.0.3)
-##DKINSTALL(${DKWEB}/Download/Libs/tiff-4.0.3.zip tiff-4.0.3)
+## DKINSTALL(${DKWEB}/Download/tiff-4.0.3.zip tiff-4.0.3)
 DKSET(TIFF ${3RDPARTY}/tiff-4.0.3)
 
 
@@ -42,7 +42,6 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(tiff-4.0.3 tiff-static)
 IOSSIM_XCODE_RELEASE(tiff-4.0.3 tiff-static)
 
-
 DKSETPATH(${TIFF}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Debug" ${TIFF})
 LINUX_DEBUG_COMMAND(make tiff-static)
@@ -50,7 +49,6 @@ LINUX_DEBUG_COMMAND(make tiff-static)
 DKSETPATH(${TIFF}/${OS}/Release)
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE "-DCMAKE_C_FLAGS=-I${ZLIB} -I${ZLIB}/${OS}/Release" ${TIFF})
 LINUX_RELEASE_COMMAND(make tiff-static)
-
 
 ANDROID_NDK_DEBUG(tiff-4.0.3)
 ANDROID_NDK_RELEASE(tiff-4.0.3)

@@ -1,14 +1,6 @@
 ### INSTALL ###
-##IF(NOT EXISTS "${3RDPARTY}/libiconv-1.14")
-##	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-##	DKDOWNLOAD(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz)
-##	##DKDOWNLOAD(${DKWEB}/Download/Libs/libiconv-1.14.zip)
-##	DKEXTRACT(${DIGITALKNOB}/Download/libiconv-1.14.zip ${3RDPARTY})
-##	DKRENAME(${3RDPARTY}/libiconv ${3RDPARTY}/libiconv-1.14)
-##	DKCOPY(${DKIMPORTS}/libiconv-1.14 ${3RDPARTY}/libiconv-1.14 TRUE)
-##ENDIF()
-
 DKINSTALL(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz libiconv-1.14)
+## DKINSTALL(${DKWEB}/Download/libiconv-1.14.tar.gz libiconv-1.14)
 DKSET(ICONV ${3RDPARTY}/libiconv-1.14)
 
 

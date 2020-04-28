@@ -1,13 +1,6 @@
 ### INSTALL ###
-
-##IF(NOT EXISTS ${3RDPARTY}/freetype-2.5.5)
-	##DKSETPATH(${DIGITALKNOB}/Download)
-	##DKDOWNLOAD(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz)
-	##DKRENAME(${DIGITALKNOB}/Download/download ${DIGITALKNOB}/Download/freetype-2.5.5.tar.gz)
-	##DKEXTRACT(${DIGITALKNOB}/Download/freetype-2.5.5.tar.gz ${3RDPARTY})
-##ENDIF()
-
 DKINSTALL(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz freetype-2.5.5)
+## DKINSTALL(${DKWEB}/Download/freetype-2.5.5.tar.gz freetype-2.5.5)
 DKSET(FREETYPE ${3RDPARTY}/freetype-2.5.5)
 
 
@@ -52,14 +45,13 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(freetype-2.5.5 freetype)
 IOSSIM_XCODE_RELEASE(freetype-2.5.5 freetype)
 
-##DKSETPATH(${FREETYPE}/${OS}/${DEBUG})
-##IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
-##IOSSIM_DEBUG_COMMAND(make)
+## DKSETPATH(${FREETYPE}/${OS}/${DEBUG})
+## IOSSIM_DEBUG_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
+## IOSSIM_DEBUG_COMMAND(make)
 
-##DKSETPATH(${FREETYPE}/${OS}/${RELEASE})
-##IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
-##IOSSIM_RELEASE_COMMAND(make)
-
+## DKSETPATH(${FREETYPE}/${OS}/${RELEASE})
+## IOSSIM_RELEASE_COMMAND(../../configure --enable-static=yes --enable-shared=no --without-bzip2 "CFLAGS=-arch x86_64")
+## IOSSIM_RELEASE_COMMAND(make)
 
 DKSETPATH(${FREETYPE}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${FREETYPE})
