@@ -4,8 +4,6 @@
 #ENDIF()
 
 IF(NOT EXISTS ${3RDPARTY}/mingw/mingw32)
-	
-	## https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z/download
 	DKSETPATH(${DIGITALKNOB}/Download)
 	##DKDOWNLOAD(${DKWEB}/Download/Tools/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z)
 	DKDOWNLOAD(https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z/download)

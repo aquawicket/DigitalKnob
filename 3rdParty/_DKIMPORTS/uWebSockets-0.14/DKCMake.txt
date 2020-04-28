@@ -1,8 +1,8 @@
 DKDEPEND(libuv-1.x)
 
 ### INSTALL ###
-##DKINSTALL(${DKWEB}/Download/Libs/uWebSockets-0.14.zip uWebSockets-0.14)
 DKINSTALL(https://github.com/uNetworking/uWebSockets/archive/v0.14.zip uWebSockets-0.14)
+##DKINSTALL(${DKWEB}/Download/Libs/uWebSockets-0.14.zip uWebSockets-0.14)
 DKSET(UWEBSOCKETS ${3RDPARTY}/uWebSockets-0.14)
 
 

@@ -1,6 +1,12 @@
 ### INSTALL ###
-## https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz/download
-DKINSTALL(${DKWEB}/Download/Libs/freetype-2.5.5.tar.gz freetype-2.5.5)
+IF(NOT EXISTS ${3RDPARTY}/freetype-2.5.5)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz/download)
+	DKRENAME(${DIGITALKNOB}/Download/download ${DIGITALKNOB}/Download/freetype-2.5.5.tar.gz)
+	DKEXTRACT(${DIGITALKNOB}/Download/freetype-2.5.5.tar.gz ${3RDPARTY}/freetype-2.5.5)
+ENDIF()
+
+##DKINSTALL(${DKWEB}/Download/Libs/freetype-2.5.5.tar.gz freetype-2.5.5)
 DKSET(FREETYPE ${3RDPARTY}/freetype-2.5.5)
 
 

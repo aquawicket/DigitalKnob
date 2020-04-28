@@ -2,8 +2,8 @@ DKDEPEND(DKSDLWindow)
 
 
 ### INSTALL ###
-## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
-DKINSTALL(${DKWEB}/Download/Libs/smpeg2-2.0.0.tar.gz smpeg2-2.0.0)
+DKINSTALL(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz smpeg2-2.0.0)
+##DKINSTALL(${DKWEB}/Download/Libs/smpeg2-2.0.0.tar.gz smpeg2-2.0.0)
 DKSET(SMPEG2 ${3RDPARTY}/smpeg2-2.0.0)
 
 

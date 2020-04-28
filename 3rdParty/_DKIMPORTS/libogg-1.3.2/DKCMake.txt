@@ -1,6 +1,6 @@
 ### INSTALL ###
-## https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip
-DKINSTALL(${DKWEB}/Download/Libs/libogg-1.3.2.zip libogg-1.3.2)
+DKINSTALL(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.2.zip libogg-1.3.2)
+##DKINSTALL(${DKWEB}/Download/Libs/libogg-1.3.2.zip libogg-1.3.2)
 DKSET(OGG ${3RDPARTY}/libogg-1.3.2)
 
 

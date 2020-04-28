@@ -2,8 +2,8 @@ DKDEPEND(zlib-1.2.11)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 ### INSTALL ###
-## https://curl.haxx.se/download/curl-7.34.0.zip
-DKINSTALL(${DKWEB}/Download/Libs/curl-7.34.0.zip curl-7.34.0)
+DKINSTALL(https://curl.haxx.se/download/curl-7.34.0.zip curl-7.34.0)
+##DKINSTALL(${DKWEB}/Download/Libs/curl-7.34.0.zip curl-7.34.0)
 DKSET(CURL ${3RDPARTY}/curl-7.34.0)
 
 

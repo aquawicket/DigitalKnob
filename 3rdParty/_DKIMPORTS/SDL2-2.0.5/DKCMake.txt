@@ -1,6 +1,6 @@
 ### INSTALL ###
-## https://www.libsdl.org/release/SDL2-2.0.5.zip
-DKINSTALL(${DKWEB}/Download/Libs/SDL2-2.0.5.zip SDL2-2.0.5)
+DKINSTALL(https://www.libsdl.org/release/SDL2-2.0.5.zip SDL2-2.0.5)
+##DKINSTALL(${DKWEB}/Download/Libs/SDL2-2.0.5.zip SDL2-2.0.5)
 DKSET(SDL ${3RDPARTY}/SDL2-2.0.5)
 
 

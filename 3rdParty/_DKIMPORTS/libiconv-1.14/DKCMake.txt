@@ -1,8 +1,8 @@
 ### INSTALL ###
 IF(NOT EXISTS "${3RDPARTY}/libiconv-1.14")
 	DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-	## http://hobbes.nmsu.edu/download/pub/os2/dev/misc/libiconv-1.14.zip
-	DKDOWNLOAD(${DKWEB}/Download/Libs/libiconv-1.14.zip)
+	DKDOWNLOAD(http://hobbes.nmsu.edu/download/pub/os2/dev/misc/libiconv-1.14.zip)
+	##DKDOWNLOAD(${DKWEB}/Download/Libs/libiconv-1.14.zip)
 	DKEXTRACT(${DIGITALKNOB}/Download/libiconv-1.14.zip ${3RDPARTY})
 	DKRENAME(${3RDPARTY}/libiconv ${3RDPARTY}/libiconv-1.14)
 	DKCOPY(${DKIMPORTS}/libiconv-1.14 ${3RDPARTY}/libiconv-1.14 TRUE)
