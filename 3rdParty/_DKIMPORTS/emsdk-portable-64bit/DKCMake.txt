@@ -3,7 +3,8 @@
 IF(WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable-64bit/emscripten")
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
-		DKDOWNLOAD(${DKWEB}/Download/Tools/emsdk-portable-64bit.zip)
+		## DKDOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
+		## DKDOWNLOAD(${DKWEB}/Download/emsdk-portable-64bit.zip)
 		DKEXTRACT(${DIGITALKNOB}/Download/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
 		DKCOPY(${3RDPARTY}/_DKIMPORTS/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten true)
 		DKSET(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
@@ -13,6 +14,5 @@ IF(WIN32)
 		WIN32_COMMAND(${3RDPARTY}/emsdk-portable-64bit/emsdk install activate latest)
 		WIN32_COMMAND(${3RDPARTY}/emsdk-portable-64bit/emsdk_env.bat)
 	ENDIF()
-	
 	DKSET(EMSCRIPTEN ${3RDPARTY}/emsdk-portable-64bit)
 ENDIF()

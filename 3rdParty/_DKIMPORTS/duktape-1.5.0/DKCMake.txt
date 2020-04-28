@@ -1,7 +1,10 @@
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/duktape-1.5.0.tar duktape-1.5.0)
+## DKINSTALL(www.internet.com/duktape-1.5.0.tar duktape-1.5.0) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/duktape-1.5.0.tar duktape-1.5.0)
 DKSET(DUKTAPE ${3RDPARTY}/duktape-1.5.0)
 
+
+### LINK ###
 IF(WIN)
 	DKDEFINE(DUK_F_VBCC)
 ENDIF()
