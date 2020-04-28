@@ -1,11 +1,14 @@
+### DEPENDS ###
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-dev)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win32-shared)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-dev)
 DKDEPEND(ffmpeg-20150905-git-a87ada5-win64-shared)
 DKDEPEND(SDL2-2.0.4)
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/waave-3.01.tar waave-3.01)
+## DKINSTALL(www.internet.com/waave-3.01.tar waave-3.01) ## find an online link
+## DKINSTALL(${DKWEB}/Download/waave-3.01.tar waave-3.01)
 DKSET(WAAVE ${3RDPARTY}/waave-3.01)
 
 
@@ -47,7 +50,6 @@ IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS
 IOSSIM_XCODE_DEBUG(waave-3.01 waave)
 IOSSIM_XCODE_RELEASE(waave-3.01 waave)
 
-
 DKSETPATH(${WAAVE}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG ${WAAVE})
 LINUX_DEBUG_COMMAND(make waave)
@@ -55,7 +57,6 @@ LINUX_DEBUG_COMMAND(make waave)
 DKSETPATH(${WAAVE}/${OS}/Release)
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE ${WAAVE})
 LINUX_RELEASE_COMMAND(make waave)
-
 
 ANDROID_NDK_DEBUG(waave-3.01)
 ANDROID_NDK_RELEASE(waave-3.01)

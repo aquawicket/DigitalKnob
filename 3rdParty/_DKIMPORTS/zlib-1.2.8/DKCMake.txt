@@ -1,4 +1,5 @@
 ### INSTALL ###
+## DKINSTALL(www.internet.com/zlib128.zip zlib-1.2.8) ## find online link
 DKINSTALL(${DKWEB}/Download/Libs/zlib128.zip zlib-1.2.8)
 DKSET(ZLIB ${3RDPARTY}/zlib-1.2.8)
 
