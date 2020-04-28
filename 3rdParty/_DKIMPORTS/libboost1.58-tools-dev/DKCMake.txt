@@ -2,6 +2,7 @@ IF(NOT LINUX)
 	RETURN()
 ENDIF()
 
+### INSTALL ###
 DKSET(QUEUE_BUILD ON)
 DKSET(CURRENT_DIR /usr)
 LINUX_COMMAND(sudo apt install libboost1.58-tools-dev)

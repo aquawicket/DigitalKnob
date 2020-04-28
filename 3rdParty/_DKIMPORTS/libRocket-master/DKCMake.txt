@@ -1,15 +1,15 @@
+### DEPENDS ###
 DKDEPEND(freetype-2.5.5)
 
-### INSTALL ###
-##DKINSTALL(${DKWEB}/Download/Libs/libRocket-master.zip libRocket-master)
 
+### INSTALL ###
 MESSAGE("Pulling libRocket from aquawicket/libRocket git...")
 DKSET(GIT C:/Progra~1/Git/bin/git.exe)
 SET(STRING "${GIT} clone https://github.com/aquawicket/libRocket.git ${3RDPARTY}/libRocket-master")
 FILE(MAKE_DIRECTORY ${3RDPARTY}/libRocket-master)
 EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
+## DKINSTALL(${DKWEB}/Download/Libs/libRocket-master.zip libRocket-master)
 DKSET(ROCKET ${3RDPARTY}/libRocket-master)
-
 
 
 ### LINK ###
@@ -27,7 +27,6 @@ LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketDebugger.a)
 LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketDebugger.a)
 ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketDebugger.a)
 ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketDebugger.a)
-
 WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketControls.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketControls.lib)
 MAC_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketControls.a)
@@ -38,7 +37,6 @@ LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketControls.a)
 LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketControls.a)
 ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketControls.a)
 ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketControls.a)
-
 WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketCore.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketCore.lib)
 MAC_DEBUG_LIB(${ROCKET}/${OS}/${DEBUG}/libRocketCore.a)
@@ -49,7 +47,6 @@ LINUX_DEBUG_LIB(${ROCKET}/${OS}/Debug/libRocketCore.a)
 LINUX_RELEASE_LIB(${ROCKET}/${OS}/Release/libRocketCore.a)
 ANDROID_DEBUG_LIB(${ROCKET}/${OS}/Debug/obj/local/armeabi-v7a/libRocketCore.a)
 ANDROID_RELEASE_LIB(${ROCKET}/${OS}/Release/obj/local/armeabi-v7a/libRocketCore.a)
-
 
 
 ### COMPILE ###
@@ -77,7 +74,6 @@ DKSETPATH(${ROCKET}/${OS})
 IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/${RELEASE}/libfreetype.a ${ROCKET})
 IOSSIM_XCODE_DEBUG(libRocket-master)
 IOSSIM_XCODE_RELEASE(libRocket-master)
-
 
 DKSETPATH(${ROCKET}/${OS}/Debug)
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=DEBUG -DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE}/include -DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE}/include -DFREETYPE_LIBRARY=${FREETYPE}/${OS}/Debug/libfreetype.a ${ROCKET}/Build)

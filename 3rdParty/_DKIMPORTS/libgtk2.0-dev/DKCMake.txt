@@ -2,10 +2,12 @@ IF(NOT LINUX)
 	RETURN()
 ENDIF()
 
+
 ### INSTALL ###
 DKSET(QUEUE_BUILD ON)
 DKSET(CURRENT_DIR /usr)
 LINUX_COMMAND(sudo apt install libgtk2.0-dev)
+
 
 ### LINK ###
 DKINCLUDE(/usr/include/gtk-2.0)

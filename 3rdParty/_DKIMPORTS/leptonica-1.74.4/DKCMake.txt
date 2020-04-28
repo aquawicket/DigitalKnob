@@ -1,3 +1,4 @@
+### DEPENDS ###
 DKDEPEND(zlib-1.2.11)
 IF(NOT MAC)
 	DKDEPEND(tiff-4.0.3)
@@ -10,8 +11,10 @@ ELSE()
 ENDIF()
 DKDEPEND(giflib-5.1.1)
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/leptonica-1.74.4.zip leptonica-1.74.4)
+## DKINSTALL(www.internet.com/leptonica-1.74.4.zip leptonica-1.74.4) ## find an online link
+## DKINSTALL(${DKWEB}/Download/Libs/leptonica-1.74.4.zip leptonica-1.74.4)
 DKSET(LEPTONICA ${3RDPARTY}/leptonica-1.74.4)
 
 
