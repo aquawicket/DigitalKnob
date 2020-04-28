@@ -1,3 +1,4 @@
+### DEPENDS ###
 DKDEPEND(zlib-1.2.11)
 DKDEPEND(libpng-1.7.0beta34)
 IF(ANDROID)
@@ -10,8 +11,10 @@ IF(LINUX)
 	DKDEPEND(libsystemd-dev)
 ENDIF()
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/libvncserver-master.zip libvncserver-master)
+## DKINSTALL(www.internet.com/libvncserver-master.zip libvncserver-master) ## find an online link
+## DKINSTALL(${DKWEB}/Download/libvncserver-master.zip libvncserver-master)
 DKSET(VNCSERVER ${3RDPARTY}/libvncserver-master)
 
 

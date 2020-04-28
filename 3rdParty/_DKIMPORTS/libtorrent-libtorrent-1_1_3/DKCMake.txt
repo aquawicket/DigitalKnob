@@ -1,8 +1,11 @@
+### DEPENDS ###
 DKDEPEND(boost_1_57_0 Boost_System)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
+
 ### INSTALL ###
-DKINSTALL(${DKWEB}/Download/Libs/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3)
+## DKINSTALL(www.internet.com/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3) ## find an online link
+## DKINSTALL(${DKWEB}/Download/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3)
 DKSET(TORRENT ${3RDPARTY}/libtorrent-libtorrent-1_1_3)
 
 
