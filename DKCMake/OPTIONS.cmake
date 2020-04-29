@@ -14,6 +14,15 @@ IF(COMMAND cmake_policy)
 ENDIF(COMMAND cmake_policy)
 ##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
 
+#########################################################################
+## Set variables for paths
+###############################################################
+GET_FILENAME_COMPONENT(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
+DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
+DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
+DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
+DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
+DKSET(DKWEB http://127.0.0.1)
 
 ########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
@@ -98,18 +107,6 @@ ENDIF()
 ## if they are present, remove them and let DEBUG and RELEASE flags deal with that later.
 STRING(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
 STRING(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
-
-#########################################################################
-## Set variables for paths
-###############################################################
-GET_FILENAME_COMPONENT(DIGITALKNOB ${CMAKE_SOURCE_DIR} ABSOLUTE)
-DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
-DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
-DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
-DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
-DKSET(DKWEB http://127.0.0.1)
-
-
 
 ###########################################################################
 ## Get variables for Build Type
