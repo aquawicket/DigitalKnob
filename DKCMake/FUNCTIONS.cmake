@@ -178,7 +178,7 @@ FUNCTION(DKDEFINE arg)
 	ENDIF()
 ENDFUNCTION()
 
-######################
+#######################
 FUNCTION(DKINCLUDE arg)
 	STRING(FIND "${DKINCLUDES}" "LOCAL_C_INCLUDES += ${arg}" _indexa)
 	IF(${_indexa} GREATER -1)
@@ -198,13 +198,8 @@ FUNCTION(DKINCLUDE arg)
 	ENDIF()
 ENDFUNCTION()
 
-######################
+#######################
 FUNCTION(DKLINKDIR arg)
-	#STRING(FIND "${DKLINKDIRS}" "LOCAL_LINK_INCLUDES += ${arg}" _indexa)
-	#IF(${_indexa} GREATER -1)
-	#	RETURN() ## already exists
-	#ENDIF()
-	##MESSAGE("Adding ${arg} to DKLINKDIRS")
 	STRING(FIND "${DKLINKDIRS}" "LINK_DIRECTORIES(${arg})" _indexa)
 	IF(${_indexa} GREATER -1)
 		RETURN() ## already exists
