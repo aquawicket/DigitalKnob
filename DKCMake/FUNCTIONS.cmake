@@ -204,6 +204,7 @@ FUNCTION(DKLINKDIR arg)
 	#IF(${_indexa} GREATER -1)
 	#	RETURN() ## already exists
 	#ENDIF()
+	##MESSAGE("Adding ${arg} to DKLINKDIRS")
 	STRING(FIND "${DKLINKDIRS}" "LINK_DIRECTORIES(${arg})" _indexa)
 	IF(${_indexa} GREATER -1)
 		RETURN() ## already exists

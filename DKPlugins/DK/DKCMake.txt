@@ -46,8 +46,6 @@ IF(IOS OR IOSSIM)
 	LIST(APPEND DK_SRC DK/DKiPhone.mm)
 ENDIF()
 
-##TODO - make optional
-##DKDEPEND(DKDuktape)
 
 DKPLUGIN(DK)
 DKASSETS(DK)
