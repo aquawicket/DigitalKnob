@@ -10,7 +10,8 @@ IF(WIN)
 	DKDEPEND(build-4.2.0)
 ENDIF()
 IF(LINUX)
-	DKDEPEND(libboost1.58-tools-dev)
+	## DKDEPEND(libboost1.58-tools-dev)
+	DKDEPEND(libboost-tools-dev)
 ENDIF()
 
 

@@ -687,7 +687,7 @@ IF(LINUX)
 	LIST(APPEND DEBUG_LIBS dl)
 	LIST(APPEND RELEASE_LIBS dl)
 	
-	SET(CMAKE_CXX_FLAGS "-g -std=c++11")
+	SET(CMAKE_CXX_FLAGS "-g -std=c++11 -no-pie")
 	ADD_EXECUTABLE(${AppName} ${App_SRC})
 	
 	IF(DEBUG)

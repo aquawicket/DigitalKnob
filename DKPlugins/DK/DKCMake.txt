@@ -19,8 +19,10 @@ IF(MAC)
 ENDIF()
 
 IF(LINUX)
-	DKDEPEND(boost_1_66_0 Boost_System)
-	DKDEPEND(boost_1_66_0 Boost_Filesystem)
+	## DKDEPEND(boost_1_66_0 Boost_System)
+	## DKDEPEND(boost_1_66_0 Boost_Filesystem)
+	DKDEPEND(boost_1_72_0 Boost_System)
+	DKDEPEND(boost_1_72_0 Boost_Filesystem)
 	
 	DKDEPEND(libx11-dev)
 	DKDEPEND(mesa-common-dev)
