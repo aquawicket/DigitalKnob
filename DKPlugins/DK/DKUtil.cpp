@@ -303,16 +303,10 @@ bool DKUtil::GetFrames(long& frames)
 bool DKUtil::GetKey(int& key)
 {
 	DKDEBUGFUNC(key);
-#if defined(WIN32)
+#ifdef WIN32
 	return DKWindows::GetKey(key);
 #endif
-#if defined(MAC)
-	return DKUnix::GetKey(key);
-#endif
-#if defined(IOS)
-	return DKUnix::GetKey(key);
-#endif
-#if defined(LINUX)
+#if defined(MAC) || defined(IOS) || defined(LINUX)
 	return DKUnix::GetKey(key);
 #endif
 	DKWARN("DKUtil::GetKey(): not implemented on this OS \n");
@@ -427,20 +421,9 @@ bool DKUtil::GetThreadId(unsigned long int& id)
 #ifdef WIN32
 	return DKWindows::GetThreadId(id);
 #endif
-#ifdef UNIX
+#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
 	return DKUnix::GetThreadId(id);
 #endif
-	/*
-	#if defined(MAC)
-	//id = (unsigned long int)pthread_self();
-	//return true;
-	return DKMac::GetThreadId(id);
-	#endif
-	#if defined(LINUX) || defined (IOS)
-	id = (unsigned long int)pthread_self();
-	return true;
-	#endif
-	*/
 	DKWARN("DKUtil::GetThreadId() not implemented on this OS \n");
 	return false;
 }
@@ -509,17 +492,10 @@ bool DKUtil::InMainThread()
 {
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #ifdef WIN32
-	DKString tid = "GetCurrentThreadId()(): "+toString((int)GetCurrentThreadId())+"\n";
-	//DKINFO(tid+"\n"); DO NOT DO THIS!
 	return mainThreadId == GetCurrentThreadId();
 #endif
-#if defined(MAC) || defined(IOS)
-	return mainThreadId == (unsigned long int)pthread_self();
-#endif
-#if defined (ANDROID) //|| defined(LINUX)
-	DKString tid = "GetCurrentThreadId()(): "+toString((unsigned int)pthread_self())+"\n";
-	//DKINFO(tid+"\n"); DO NOT DO THIS!
-	return mainThreadId == (unsigned long int)pthread_self();
+#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+	return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
 #endif
 	return false;
 }
@@ -916,18 +892,9 @@ bool DKUtil::SetMainThreadNow()
 #ifdef WIN32
 	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
 #endif
-#ifdef UNIX
-	return DKUnix::::SetMainThreadNow(DKUtil::mainThreadId);
+#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+	return DKUnix::SetMainThreadNow(DKUtil::mainThreadId);
 #endif
-	/*/
-	#if defined(MAC)
-	//DKUtil::mainThreadId = (unsigned long int)pthread_self();
-	return DKMac::::SetMainThreadNow(DKUtil::mainThreadId);
-	#endif
-	#if defined(LINUX) || defined (IOS)
-	DKUtil::mainThreadId = (unsigned long int)pthread_self();
-	#endif
-	*/
 	DKWARN("DKUtil::SetMainThreadNow() not implemented on this OS \n");
 	return false;
 }
@@ -966,12 +933,14 @@ bool DKUtil::SetVolume(int& percent)
 ///////////////////////////////////////////
 bool DKUtil::Sleep(const int& milliseconds)
 {
-	//DKDEBUGFUNC(milliseconds);
+	DKDEBUGFUNC(milliseconds);
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
-#else
+#endif
+#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
 	return DKUnix::Sleep(milliseconds);
 #endif
+	DKWARN("DKUtil::Sleep(): not implemented on this OS \n");
 	return false;
 }
 

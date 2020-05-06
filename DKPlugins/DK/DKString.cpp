@@ -241,6 +241,7 @@ int toInt(const DKString& str)
 ////////////////////////////////
 bool toBool(const DKString& str)
 {
+    if(str.empty()){ return false; }
 	return str != "0";
 }
 
