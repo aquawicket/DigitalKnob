@@ -52,7 +52,7 @@ function DKBuild_Init()
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
 	if(DK_GetOS() == "Linux"){
-		DKPATH = "/home/aqualinux/Desktop/digitalknob";
+		DKPATH = "/home/paul/digitalknob";
 		//SVN = "/usr/bin/svn";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
