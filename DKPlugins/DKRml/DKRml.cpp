@@ -7,7 +7,8 @@
 #include "DKXml/DKXml.h"
 
 #include <RmlUi/Core/StreamMemory.h>
-#include "C:/digitalknob/DK/3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
+//#include "C:/digitalknob/DK/3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
+#include "Core/PluginRegistry.h"
 
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
