@@ -21,7 +21,7 @@
 */
 
 #ifdef LINUX
-#include <gdk/gdk.h>
+//#include <gdk/gdk.h>
 #endif
 
 
@@ -372,10 +372,10 @@ bool DKSDLWindow::GetHandle(const void* input, void* output)
 #endif
 #ifdef LINUX
 	//FIXME
-	GdkWindow* gdk_window = NULL; //TODO - from SDL
-	if(!gdk_window){ return false; }
-	*(GdkWindow**)output = gdk_window;
-	return true;
+	//GdkWindow* gdk_window = NULL; //TODO - from SDL
+	//if(!gdk_window){ return false; }
+	//*(GdkWindow**)output = gdk_window;
+	//return true;
 #endif
 	DKWARN("DKSDLWindow::GetHandle(): not implemented on this OS\n");
 	return false;
