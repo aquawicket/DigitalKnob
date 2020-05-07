@@ -48,7 +48,7 @@ MESSAGE("**********************************************\n")
 GET_FILENAME_COMPONENT(AppName ${DKPROJECT} NAME)
 STRING(REPLACE " " "_" AppName ${AppName})
 
-SET(CMAKE_CXX_STANDARD 11)
+SET(CMAKE_CXX_STANDARD 14)
 
 PROJECT(${AppName})
 
