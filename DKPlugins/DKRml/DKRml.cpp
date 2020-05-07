@@ -174,7 +174,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	//document = context->LoadDocument(stream.get());
 	Rml::Core::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	Rml::Core::ElementPtr element = Rml::Core::Factory::InstanceDocumentStream(context, stream.get());
-	if (!element){ return nullptr; }
+	if (!element){ return false; }
 
 	document = static_cast<Rml::Core::ElementDocument*>(element.get());
 	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
