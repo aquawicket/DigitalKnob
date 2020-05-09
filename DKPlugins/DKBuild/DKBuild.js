@@ -9,7 +9,6 @@ var TYPE = "";  //Debug, Release, ALL
 var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
-//var SVN = "";
 var CMAKE = "";
 var NDK = "";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
@@ -24,13 +23,9 @@ function DKBuild_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKCurl");
-	//DKCreate("DKGit/DKGit.js", function(){});
 
-	//console.log(DK_GetOS()+"");
 	if(DK_GetOS() == "Win32"){
 		DKPATH = "C:/digitalknob";
-		//SVN = "C:/Program Files/Subversion/bin/svn.exe";
-		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
@@ -38,8 +33,6 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Win64"){
 		DKPATH = "C:/digitalknob";
-		//SVN = "C:/Program Files (x86)/Subversion/bin/svn.exe";
-		//SVN = DKFile_GetShortName(SVN);
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
@@ -47,25 +40,14 @@ function DKBuild_Init()
 	}
 	if(DK_GetOS() == "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
-		//SVN = "svn";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
 	if(DK_GetOS() == "Linux"){
 		DKPATH = "/home/paul/digitalknob";
-		//SVN = "/usr/bin/svn";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
-
-	/*
-	if(DKAvailable("DKWidget")){
-		DKCreate("DKBuild/DKBuildGUI.js", function(){});
-	}
-	else{
-		DKCreate("DKBuild/DKBuildConsole.js", function(){});
-	}
-	*/
 }
 
 //////////////////////
@@ -80,7 +62,6 @@ function DKBuild_ValidateCmake()
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for CMake");
-	//console.log(CMAKE);
 	if(!DKFile_Exists(CMAKE)){
 		console.log("Please install CMake");
 		DKBuild_InstallCmake();
@@ -99,18 +80,18 @@ function DKBuild_InstallCmake()
 	var datapath = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
-		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
-			// https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi
-			DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.1-win32-x86.msi", datapath);
+		if(!DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
+			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
+			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.1-win32-x86.msi");
+		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
 	else if(DK_GetOS() == "Win64"){
-		if(!DKFile_Exists(datapath+"/cmake-3.17.1-win32-x86.msi")){
-			// https://cmake.org/files/v3.17/cmake-3.17.1-win32-x86.msi
-			DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.1-win32-x86.msi", datapath);
+		if(!DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
+			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
+			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.1-win32-x86.msi");
+		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
 	else if(DK_GetOS() == "Mac"){
 		//TODO
@@ -132,7 +113,6 @@ function DKBuild_ValidateVC2019()
 		return;
 	}
 	console.log("Looking for Visual Studio 2019");
-	//console.log(VC2019);
 	if(!DKFile_Exists(VC2019)){
 		DKBuild_InstallVC2019();
 	}
@@ -146,7 +126,8 @@ function DKBuild_InstallVC2019()
 	console.log("Installing Visual Studio 2019");
 	var datapath = DKAssets_LocalAssets();
 	
-	DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
+	DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", datapath);
+	//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
 	DK_System(datapath+"vs_Community.exe");
 }
 
@@ -157,7 +138,6 @@ function DKBuild_ValidateGcc()
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for GCC");
-	//console.log(GCC);
 	if(!DKFile_Exists(GCC)){
 		console.log("Please install GCC");
 		DKBuild_InstallGcc();
@@ -180,7 +160,6 @@ function DKBuild_ValidateXcode()
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for Xcode");
-	//console.log(XCODE);
 	if(!DKFile_Exists(XCODE)){
 		console.log("Please install Xcode");
 		DKBuild_InstallXcode();
