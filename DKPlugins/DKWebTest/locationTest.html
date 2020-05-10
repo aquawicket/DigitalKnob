@@ -1,0 +1,56 @@
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Location -->
+
+<html>
+<head>
+<title>Location Test</title>
+</head>
+<body>
+
+<!-- Object -->
+<a style="font-weight:bold;font-size:20px;">Location Test</a><br />
+<strong>location: </strong><a id="location">error</a><br />
+<br />
+
+<!-- Properties -->
+<a style="font-weight:bold;">Location Properties</a><br />
+<strong>location.ancestorOrigins: </strong><a id="location.ancestorOrigins">error</a><br />
+<strong>location.href: </strong><a id="location.href">error</a><br />
+<strong>location.protocol: </strong><a id="location.protocol">error</a><br />
+<strong>location.host: </strong><a id="location.host">error</a><br />
+<strong>location.hostname: </strong><a id="location.hostname">error</a><br />
+<strong>location.port: </strong><a id="location.port">error</a><br />
+<strong>location.pathname: </strong><a id="location.pathname">error</a><br />
+<strong>location.search: </strong><a id="location.search">error</a><br />
+<strong>location.hash: </strong><a id="location.hash">error</a><br />
+<strong>location.origin: </strong><a id="location.origin">error</a><br />
+<br />
+
+<!-- Methods -->
+<a style="font-weight:bold;">Location Methods</a><br />
+<strong>location.assign(): </strong><a id="location.assign()">error</a><br />
+<strong>location.reload(): </strong><a id="location.reload()">error</a><br />
+<strong>location.replace(): </strong><a id="location.replace()">error</a><br />
+<strong>location.toString(): </strong><a id="location.toString()">error</a><br />
+<br />
+
+
+<script>
+<!-- Object -->
+document.getElementById("location").innerHTML = location;
+
+<!-- Properties -->
+document.getElementById("location.ancestorOrigins").innerHTML = location.ancestorOrigins;
+document.getElementById("location.href").innerHTML = location.href;
+document.getElementById("location.protocol").innerHTML = location.protocol;
+document.getElementById("location.host").innerHTML = location.host;
+document.getElementById("location.hostname").innerHTML = location.hostname;
+document.getElementById("location.port").innerHTML = location.port;
+document.getElementById("location.pathname").innerHTML = location.pathname;
+document.getElementById("location.search").innerHTML = location.search;
+document.getElementById("location.hash").innerHTML = location.hash;
+document.getElementById("location.origin").innerHTML = location.origin;
+
+<!-- Methods -->
+</script>
+</body>
+</html>
