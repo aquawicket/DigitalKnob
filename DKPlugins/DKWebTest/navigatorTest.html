@@ -1,0 +1,136 @@
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Navigator -->
+
+<html>
+<head>
+<title>Navigator Test</title>
+</head>
+<body>
+<a style="font-weight:bold;font-size:20px;">Navigator Test</a><br />
+<strong>navigator: </strong><a id="navigator">error</a><br />
+<br />
+
+<!-- Properties (Standard)-->
+<a style="font-weight:bold;">Navigator Properties (Standard)</a><br />
+<strong>navigator.activeVRDisplays: </strong><a id="navigator.activeVRDisplays">error</a><br />
+<strong>navigator.appCodeName: </strong><a id="navigator.appCodeName">error</a><br />
+<strong>navigator.appName: </strong><a id="navigator.appName">error</a><br />
+<strong>navigator.appVersion: </strong><a id="navigator.appVersion">error</a><br />
+<strong>navigator.battery: </strong><a id="navigator.battery">error</a><br />
+<strong>navigator.connection: </strong><a id="navigator.connection">error</a><br />
+<strong>navigator.cookieEnabled: </strong><a id="navigator.cookieEnabled">error</a><br />
+<strong>navigator.geolocation: </strong><a id="navigator.geolocation">error</a><br />
+<strong>navigator.hardwareConcurrency: </strong><a id="navigator.hardwareConcurrency">error</a><br />
+<strong>navigator.javaEnabled: </strong><a id="navigator.javaEnabled">error</a><br />
+<strong>navigator.keyboard: </strong><a id="navigator.keyboard">error</a><br />
+<strong>navigator.language: </strong><a id="navigator.language">error</a><br />
+<strong>navigator.languages: </strong><a id="navigator.languages">error</a><br />
+<strong>navigator.locks: </strong><a id="navigator.locks">error</a><br />
+<strong>navigator.mediaCapabilities: </strong><a id="navigator.mediaCapabilities">error</a><br />
+<strong>navigator.maxTouchPoints: </strong><a id="navigator.maxTouchPoints">error</a><br />
+<strong>navigator.mimeTypes: </strong><a id="navigator.mimeTypes">error</a><br />
+<strong>navigator.onLine: </strong><a id="navigator.onLine">error</a><br />
+<strong>navigator.permissions: </strong><a id="navigator.permissions">error</a><br />
+<strong>navigator.platform: </strong><a id="navigator.platform">error</a><br />
+<strong>navigator.plugins: </strong><a id="navigator.plugins">error</a><br />
+<strong>navigator.product: </strong><a id="navigator.product">error</a><br />
+<strong>navigator.serviceWorker: </strong><a id="navigator.serviceWorker">error</a><br />
+<strong>navigator.storage: </strong><a id="navigator.storage">error</a><br />
+<strong>navigator.userAgent: </strong><a id="navigator.userAgent">error</a><br />
+<strong>navigator.webdriver: </strong><a id="navigator.webdriver">error</a><br />
+<strong>navigator.xr: </strong><a id="navigator.xr">error</a><br />
+<br />
+
+<!-- Properties (Non-standard)-->
+<a style="font-weight:bold;">Navigator Properties (Non-standard)</a><br />
+<strong>navigator.buildID: </strong><a id="navigator.buildID">error</a><br />
+<strong>navigator.credentials: </strong><a id="navigator.credentials">error</a><br />
+<strong>navigator.deviceMemory: </strong><a id="navigator.deviceMemory">error</a><br />
+<strong>navigator.doNotTrack: </strong><a id="navigator.doNotTrack">error</a><br />
+<strong>navigator.mediaDevices: </strong><a id="navigator.mediaDevices">error</a><br />
+<strong>navigator.mediaSession: </strong><a id="navigator.mediaSession">error</a><br />
+<strong>navigator.mozNotification: </strong><a id="navigator.mozNotification">error</a><br />
+<strong>navigator.mozSocial : </strong><a id="navigator.mozSocial ">error</a><br />
+<strong>navigator.oscpu: </strong><a id="navigator.oscpu">error</a><br />
+<strong>navigator.presentation: </strong><a id="navigator.presentation">error</a><br />
+<strong>navigator.productSub: </strong><a id="navigator.productSub">error</a><br />
+<strong>navigator.securitypolicy: </strong><a id="navigator.securitypolicy">error</a><br />
+<strong>navigator.standalone: </strong><a id="navigator.standalone">error</a><br />
+<strong>navigator.storageQuota: </strong><a id="navigator.storageQuota">error</a><br />
+<strong>navigator.vendor: </strong><a id="navigator.vendor">error</a><br />
+<strong>navigator.vendorSub: </strong><a id="navigator.vendorSub">error</a><br />
+<strong>navigator.webkitPointer: </strong><a id="navigator.webkitPointer">error</a><br />
+<br />
+
+<!-- Methods (Standard) -->
+<a style="font-weight:bold;">Navigator Methods (Standard)</a><br />
+<strong>navigator.canShare(): </strong><a id="navigator.canShare()">error</a><br />
+<strong>navigator.getVRDisplays(): </strong><a id="navigator.getVRDisplays()">error</a><br />
+<strong>navigator.getUserMedia(): </strong><a id="navigator.getUserMedia()">error</a><br />
+<strong>navigator.registerContentHandler(): </strong><a id="navigator.registerContentHandler()">error</a><br />
+<strong>navigator.registerProtocolHandler(): </strong><a id="navigator.registerProtocolHandler()">error</a><br />
+<strong>navigator.requestMediaKeySystemAccess(): </strong><a id="navigator.requestMediaKeySystemAccess()">error</a><br />
+<strong>navigator.sendBeacon(): </strong><a id="navigator.sendBeacon()">error</a><br />
+<strong>navigator.share(): </strong><a id="navigator.share()">error</a><br />
+<strong>navigator.taintEnabled(): </strong><a id="navigator.taintEnabled()">error</a><br />
+<strong>navigator.vibrate(): </strong><a id="navigator.vibrate()">error</a><br />
+<br />
+
+<!-- Methods (Non-standard) -->
+<a style="font-weight:bold;">Navigator Methods (Non-standard)</a><br />
+<strong>navigator.mozIsLocallyAvailable(): </strong><a id="navigator.mozIsLocallyAvailable()">error</a><br />
+<strong>navigator.mozPay(): </strong><a id="navigator.mozPay()">error</a><br />
+<br />
+
+<script>
+<!-- Properties (Standard)-->
+document.getElementById("navigator").innerHTML = navigator;
+document.getElementById("navigator.activeVRDisplays").innerHTML = navigator.activeVRDisplays;
+document.getElementById("navigator.appCodeName").innerHTML = navigator.appCodeName;
+document.getElementById("navigator.appName").innerHTML = navigator.appName;
+document.getElementById("navigator.appVersion").innerHTML = navigator.appVersion;
+document.getElementById("navigator.battery").innerHTML = navigator.battery;
+document.getElementById("navigator.connection").innerHTML = navigator.connection;
+document.getElementById("navigator.cookieEnabled").innerHTML = navigator.cookieEnabled;
+document.getElementById("navigator.geolocation").innerHTML = navigator.geolocation;
+document.getElementById("navigator.hardwareConcurrency").innerHTML = navigator.hardwareConcurrency;
+document.getElementById("navigator.javaEnabled").innerHTML = navigator.javaEnabled;
+document.getElementById("navigator.keyboard").innerHTML = navigator.keyboard;
+document.getElementById("navigator.language").innerHTML = navigator.language;
+document.getElementById("navigator.languages").innerHTML = navigator.languages;
+document.getElementById("navigator.locks").innerHTML = navigator.locks;
+document.getElementById("navigator.mediaCapabilities").innerHTML = navigator.mediaCapabilities;
+document.getElementById("navigator.maxTouchPoints").innerHTML = navigator.maxTouchPoints;
+document.getElementById("navigator.mimeTypes").innerHTML = navigator.mimeTypes;
+document.getElementById("navigator.onLine").innerHTML = navigator.onLine;
+document.getElementById("navigator.permissions").innerHTML = navigator.permissions;
+document.getElementById("navigator.platform").innerHTML = navigator.platform;
+document.getElementById("navigator.plugins").innerHTML = navigator.plugins;
+document.getElementById("navigator.product").innerHTML = navigator.product;
+document.getElementById("navigator.serviceWorker").innerHTML = navigator.serviceWorker;
+document.getElementById("navigator.storage").innerHTML = navigator.storage;
+document.getElementById("navigator.userAgent").innerHTML = navigator.userAgent;
+document.getElementById("navigator.webdriver").innerHTML = navigator.webdriver;
+document.getElementById("navigator.xr").innerHTML = navigator.xr;
+
+<!-- Properties (Non-standard)-->
+document.getElementById("navigator.buildID").innerHTML = navigator.buildID;
+document.getElementById("navigator.credentials").innerHTML = navigator.credentials;
+document.getElementById("navigator.deviceMemory").innerHTML = navigator.deviceMemory;
+document.getElementById("navigator.doNotTrack").innerHTML = navigator.doNotTrack;
+document.getElementById("navigator.mediaDevices").innerHTML = navigator.mediaDevices;
+document.getElementById("navigator.mediaSession").innerHTML = navigator.mediaSession;
+document.getElementById("navigator.mozNotification").innerHTML = navigator.mozNotification;
+document.getElementById("navigator.mozSocial ").innerHTML = navigator.mozSocial ;
+document.getElementById("navigator.oscpu").innerHTML = navigator.oscpu;
+document.getElementById("navigator.presentation").innerHTML = navigator.presentation;
+document.getElementById("navigator.productSub").innerHTML = navigator.productSub;
+document.getElementById("navigator.securitypolicy").innerHTML = navigator.securitypolicy;
+document.getElementById("navigator.standalone").innerHTML = navigator.standalone;
+document.getElementById("navigator.storageQuota").innerHTML = navigator.storageQuota;
+document.getElementById("navigator.vendor").innerHTML = navigator.vendor;
+document.getElementById("navigator.vendorSub").innerHTML = navigator.vendorSub;
+document.getElementById("navigator.webkitPointer").innerHTML = navigator.webkitPointer;
+
+</script>
+</body>
+</html>
