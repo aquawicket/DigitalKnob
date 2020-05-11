@@ -36,6 +36,7 @@ public:
 	DKString href;
 	DKString protocol;
 	DKString _path;
+	DKString workingPath;
 	Rml::Core::Context* context;
 	Rml::Core::ElementDocument* document;
 	static DKRmlFile* dkRmlFile;

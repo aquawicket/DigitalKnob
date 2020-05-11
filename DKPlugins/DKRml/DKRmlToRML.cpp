@@ -78,7 +78,7 @@ bool DKRmlToRML::Hyperlink(DKEvent* event)
 	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
-	dkRml->LoadUrl(DKFile::local_assets+value);
+	dkRml->LoadUrl(value);
 	return true;
 }
 

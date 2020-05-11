@@ -75,8 +75,9 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKRml/DKDom.js");
 
 	DKString html;
-	DKFile::FileToString(DKFile::local_assets+"DKRml/blank.html", html);
-	DKFile::ChDir(DKFile::local_assets);
+	DKString workingPath = DKFile::local_assets;
+	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
+	DKFile::ChDir(workingPath);
 	LoadHtml(html);
 
 	return true;
@@ -258,6 +259,10 @@ bool DKRml::LoadUrl(const DKString& url)
 	DKString _url = url;
 	if(has(_url,":/")){ //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
+		//Get the working path;
+		std::size_t found = _url.find_last_of("/");
+		workingPath = _url.substr(0, found+1);
+		DKWARN("DKRml::LoadUrl(): workingPath: "+workingPath+"\n");
 		DKWARN("DKRml::LoadUrl(): href: "+href+"\n");
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
@@ -265,9 +270,9 @@ bool DKRml::LoadUrl(const DKString& url)
 		return false;
 	}
 	else{
-		//_url = DKFile::local_assets += _url;
-		DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
-		return false;
+		_url = workingPath += _url;
+		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
+		//return false;
 	}
 
 	//get the protocol
