@@ -1,4 +1,4 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Location
+//https://developer.mozilla.org/en-US/docs/Web/API/Locationc
 
 var location;
 
@@ -44,12 +44,6 @@ var Location = function(pointer)
 	}
 	Location.prototype.replace = function(url){
 		DKLocation_href(url); //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
-	}
-	Location.prototype.toString = function(){
-		return DKLocation_href(); 
-	}
-	Location.prototype.valueOf = function(){
-		return DKLocation_href(); 
 	}
 }
 
