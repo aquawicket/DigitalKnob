@@ -8,7 +8,9 @@
 
 <strong>location: </strong><a id="location">error</a><br />
 <script>
-document.getElementById("location").innerHTML = location;
+var loc = window.location.href;
+var dir = loc.substring(0, loc.lastIndexOf('/'));
+document.getElementById("location").innerHTML = dir;
 </script>
 
 <!-- -------------------------- -->

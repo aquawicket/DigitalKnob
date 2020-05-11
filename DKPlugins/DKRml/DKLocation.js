@@ -48,6 +48,9 @@ var Location = function(pointer)
 	Location.prototype.toString = function(){
 		return DKLocation_href(); 
 	}
+	Location.prototype.valueOf = function(){
+		return DKLocation_href(); 
+	}
 }
 
 location = new Location("location");

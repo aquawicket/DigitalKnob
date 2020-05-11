@@ -43,6 +43,10 @@ var Navigator = function(pointer)
 	Navigator.prototype.javaEnabled = function(){
 		return false;
 	}
+	
+	Navigator.prototype.valueOf = function(){
+		return "test";
+	}
 }
 
 var navigator = new Navigator("navigator");
