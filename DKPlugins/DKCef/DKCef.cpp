@@ -547,7 +547,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		browserSettings.windowless_frame_rate = 60;
 		window_info.SetAsWindowless(NULL);
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
 		if(!_browser){
 			DKERROR("DKCef::NewBrowser(): _browser invalid\n");
 			return false; 
@@ -601,7 +601,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		window_info.width = _width;
 		window_info.height = _height;
 		CefRefPtr<CefBrowser> _browser;
-		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL);
+		_browser = CefBrowserHost::CreateBrowserSync(window_info, cefHandler, url, browserSettings, NULL, NULL);
 		DKBrowser dkBrowser;
 		dkBrowser.id = id;
 		dkBrowser.top = top;
@@ -827,6 +827,7 @@ bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& 
 void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser) 
 {
 	DKDEBUGFUNC(browser);
+	/*  FIXME
 	class Visitor : public CefWebPluginInfoVisitor {
 	public:
 		explicit Visitor(CefRefPtr<CefBrowser> browser)
@@ -858,6 +859,7 @@ void DKCef::RunPluginInfoTest(CefRefPtr<CefBrowser> browser)
 	};
 
 	CefVisitWebPluginInfo(new Visitor(browser));
+	*/
 }
 
 //////////////////////////////////////////////
