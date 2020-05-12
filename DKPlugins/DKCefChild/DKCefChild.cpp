@@ -82,7 +82,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 	printf("myRetval has some value now\n");
 	*/
 
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 
 	/*
 
@@ -195,7 +195,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 	cefV8Handler->SetBrowser(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnBrowserCreated");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 }
 
 /////////////////////////////////////
@@ -205,7 +205,7 @@ void DKCefApp::OnContextInitialized()
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[cefchild] DKCefApp::OnContextInitialized()\n");
-	CefRefreshWebPlugins();
+	//CefRefreshWebPlugins(); //FIXME
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -227,7 +227,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	//Send "OnContextCreated" message to main exe
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("OnContextCreated");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 
 	//Load a TestFunction
 	std::string func = "TestFunction";
