@@ -43,9 +43,7 @@ function DKGit_ValidateGit()
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for GIT\n");
-	//console.log(GIT+"\n");
 	if(!DKFile_Exists(GIT)){
-		console.log("Please install GIT\n");
 		DKGit_InstallGit();
 	}
 	console.log("Found GIT\n");
@@ -59,7 +57,7 @@ function DKGit_InstallGit()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	console.log("Installing Git\n");
+	console.log("Installing Git...\n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
