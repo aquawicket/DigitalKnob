@@ -127,7 +127,7 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser)
 		i++;
 	}
 #ifndef DEBUG
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 #endif
 	return true;
 }
@@ -168,7 +168,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 	}	
 
 #ifndef DEBUG
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 #endif
 	//FIXME - not sure how to send this back to a waiting sub-process
 
@@ -350,7 +350,7 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser)
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
 #ifndef DEBUG
-	browser->SendProcessMessage(PID_RENDERER, msg);
+	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 #endif
 }
 
