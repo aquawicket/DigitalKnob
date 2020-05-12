@@ -1,3 +1,0 @@
-IF(NOT WIN_64)
-	RETURN()
-ENDIF()
