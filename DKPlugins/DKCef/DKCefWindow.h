@@ -1,10 +1,13 @@
 #pragma once
 #ifndef DKCefWindow_H
 #define DKCefWindow_H
+//#define USE_GDK
 
 #ifdef LINUX
-//#include <gdk/gdk.h>
-#endif
+#ifdef USE_GDK
+#include <gdk/gdk.h>
+#endif //USE_GDK
+#endif //LINUX
 
 #include "DKCef/DKCef.h"
 
@@ -234,7 +237,7 @@ public:
 #endif
 
 #ifdef LINUX
-		/* FIXME
+#ifdef USE_GDK
 		GdkWindow* gdk_window = gdk_window_foreign_new(browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
 			DKERROR("DKCefWindow::OnFullscreenModeChange(): gdk_window invalid\n");
@@ -248,7 +251,7 @@ public:
 			gdk_window_unfullscreen(gdk_window);
 			isFullscreen = false;
 		}
-		*/
+#endif //USE_GDK
 #endif //LINUX
 	}
 

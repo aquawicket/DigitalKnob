@@ -619,7 +619,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 		
 #ifdef LINUX
-		/* FIXME
+#ifdef USE_GDK
 		gdk_init(NULL, NULL);
 		GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 		if(!gdk_window){
@@ -627,8 +627,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		      return false;
 		}
 		gdk_window_set_title(gdk_window, title.c_str());
-		*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	}
 	return true;
 }

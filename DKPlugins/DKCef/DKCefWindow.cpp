@@ -132,14 +132,14 @@ bool DKCefWindow::Fullscreen(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_fullscreen(gdk_window);
 	isFullscreen = true;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Fullscreen(): not implemented on this OS\n");
 	return false;
 }
@@ -161,13 +161,13 @@ bool DKCefWindow::GetHandle(const void* input, void* output)
 	return true;
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	*(GdkWindow**)output = gdk_window;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 
 	return false;
 }
@@ -193,14 +193,14 @@ bool DKCefWindow::GetHeight(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int height = gdk_window_get_height(gdk_window);
 	*(int*)output = height;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetHeight(): not implemented on this OS\n");
 	return false;
 }
@@ -224,11 +224,11 @@ bool DKCefWindow::GetMouseX(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetMouseX(): not implemented on this OS\n");
 	return false;
 }
@@ -252,11 +252,11 @@ bool DKCefWindow::GetMouseY(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetMouseY(): not implemented on this OS\n");
 	return false;
 }
@@ -279,14 +279,14 @@ bool DKCefWindow::GetWidth(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int width = gdk_window_get_width(gdk_window);
 	*(int*)output = width;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetWidth(): not implemented on this OS\n");
 	return false;
 }
@@ -309,7 +309,7 @@ bool DKCefWindow::GetX(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gint x, y;
@@ -317,8 +317,8 @@ bool DKCefWindow::GetX(const void* input, void* output)
 	DKINFO("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n");
 	*(int*)output = (int)x;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetX(): not implemented on this OS\n");
 	return false;
 }
@@ -341,7 +341,7 @@ bool DKCefWindow::GetY(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gint x, y;
@@ -349,8 +349,8 @@ bool DKCefWindow::GetY(const void* input, void* output)
 	DKINFO("gdk_window_get_position(): x="+toString((int)x)+" y="+toString((int)y)+"\n");
 	*(int*)output = (int)y;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::GetY(): not implemented on this OS\n");
 	return false;
 }
@@ -370,13 +370,13 @@ bool DKCefWindow::Hide(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/*
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_hide(gdk_window);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Hide(): not implemented on this OS\n");
 	return false;
 }
@@ -400,7 +400,7 @@ bool DKCefWindow::IsFullscreen(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	GdkWindowState state = gdk_window_get_state(gdk_window);
@@ -408,8 +408,8 @@ bool DKCefWindow::IsFullscreen(const void* input, void* output)
 	*(bool*)output = fullscreen;
 	*(bool*)output = isFullscreen;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::IsFullscreen(): not implemented on this OS\n");
 	return false;
 }
@@ -429,14 +429,14 @@ bool DKCefWindow::IsVisible(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/*
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	bool visible = gdk_window_is_visible(gdk_window);
 	*(bool*)output = visible;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::IsVisible(): not implemented on this OS\n");
 	return false;
 }
@@ -456,13 +456,13 @@ bool DKCefWindow::Maximize(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_maximize(gdk_window);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Maximize(): not implemented on this OS\n");
 	return false;
 }
@@ -499,13 +499,13 @@ bool DKCefWindow::Minimize(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_iconify(gdk_window);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Minimize(): not implemented on this OS\n");
 	return false;
 }
@@ -527,13 +527,13 @@ bool DKCefWindow::Restore(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_deiconify(gdk_window);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Restore(): not implemented on this OS\n");
 	return false;
 }
@@ -557,7 +557,7 @@ bool DKCefWindow::SetHeight(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int width;
@@ -565,8 +565,8 @@ bool DKCefWindow::SetHeight(const void* input, void* output)
 	int height = *(int*)input;
 	gdk_window_resize(gdk_window, width, height);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetHeight(): not implemented on this OS\n");
 	return false;
 }
@@ -619,11 +619,11 @@ bool DKCefWindow::SetIcon(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetIcon(): not implemented on this OS\n");
 	return false;
 }
@@ -644,13 +644,13 @@ bool DKCefWindow::SetTitle(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/*
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	gdk_window_set_title(gdk_window, "test");
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetTitle(): not implemented on this OS\n");
 	return false;
 }
@@ -675,7 +675,7 @@ bool DKCefWindow::SetWidth(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/*
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int height;
@@ -683,8 +683,8 @@ bool DKCefWindow::SetWidth(const void* input, void* output)
 	int width = *(int*)input;
 	gdk_window_resize(gdk_window, width, height);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetWidth(): not implemented on this OS\n");
 	return false;
 }
@@ -711,7 +711,7 @@ bool DKCefWindow::SetX(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* fixme
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int y;
@@ -719,8 +719,8 @@ bool DKCefWindow::SetX(const void* input, void* output)
 	int x = *(int*)input;
 	gdk_window_move(gdk_window, x, y);
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetX(): not implemented on this OS\n");
 	return false;
 }
@@ -746,15 +746,15 @@ bool DKCefWindow::SetY(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false; }
 	int x;
 	if(!GetX(NULL, &x)){ return false; }
 	int y = *(int*)input;
 	gdk_window_move(gdk_window, x, y);
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::SetY(): not implemented on this OS\n");
 	return false;
 }
@@ -805,14 +805,14 @@ bool DKCefWindow::Windowed(const void* input, void* output)
 	if(!nsview){ return false; }
 #endif
 #ifdef LINUX
-	/* FIXME
+#ifdef USE_GDK
 	GdkWindow* gdk_window = gdk_window_foreign_new(dkCef->current_browser->GetHost()->GetWindowHandle());
 	if(!gdk_window){ return false;}
 	gdk_window_unfullscreen(gdk_window);
 	isFullscreen = false;
 	return true;
-	*/
-#endif
+#endif //USE_GDK
+#endif //LINUX
 	DKWARN("DKCefWindow::Windowed(): not implemented on this OS\n");
 	return false;
 }
