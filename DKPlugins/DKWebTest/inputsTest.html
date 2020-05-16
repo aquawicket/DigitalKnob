@@ -13,15 +13,25 @@
 <br />
 
 <a style="font-weight:bold;">input type="button"</a><br />
-<input type="button"></input><br />
+<input id="button" type="button"></input><br />
+<script>
+document.getElementById("button").addEventListener("click", function(){ console.log("button clicked"); });
+</script>
 <br />
 
 <a style="font-weight:bold;">input type="checkbox"</a><br />
-<input type="checkbox"></input><br />
+<input id="checkbox" type="checkbox"></input><br />
+<script>
+document.getElementById("checkbox").addEventListener("click", function(){ console.log("checkbox clicked"); });
+</script>
 <br />
 
 <a style="font-weight:bold;">input type="color"</a><br />
-<input type="color"></input><br />
+<input id="color" type="color"></input><br />
+<script>
+document.getElementById("color").addEventListener("click", function(){ console.log("color clicked"); });
+document.getElementById("color").addEventListener("change", function(){ console.log("color changed"); });
+</script>
 <br />
 
 <a style="font-weight:bold;">input type="date"</a><br />
