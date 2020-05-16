@@ -270,7 +270,7 @@ bool DKRml::LoadUrl(const DKString& url)
 		return false;
 	}
 	else{
-		_url = workingPath += _url;
+		_url = workingPath + _url;
 		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 		//return false;
 	}
