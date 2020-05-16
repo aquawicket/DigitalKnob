@@ -279,7 +279,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			replace(inner,"\n","");
 			replace(inner,"\t","");
 
-			DKDuktape::Get()->LoadJSString("testId", inner);
+			DKDuktape::Get()->LoadJSString("inlineScript", inner);
 		}
 	}
 

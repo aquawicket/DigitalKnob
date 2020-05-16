@@ -287,7 +287,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 {
 	DKDEBUGFUNC(path);
 	if(path.empty()){ return false; }
-	if(FileLoaded(path)){ return false; } //prevent file from loading twice
+	//if(FileLoaded(path)){ return false; }
 
 	DKString js;
 	DKFile::FileToString(path, js);
@@ -340,7 +340,7 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	DKDEBUGFUNC(url, string);
 	if(url.empty()){ return false; }
 	if(string.empty()){ return false; }
-	if(FileLoaded(url)){ return false; } //prevent url from loading twice
+	//if(FileLoaded(url)){ return false; } //prevent url from loading twice
 
 	if(has(string,"//BROWSER")){
 		DKINFO("Ignoring: "+url+" is a browser only file. \n");
@@ -378,7 +378,9 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		duk_eval_string(ctx, str.c_str());
 	}
 
-	filelist.push_back(url);
+	//if(url != "inlineScript"){
+	//	filelist.push_back(url);
+	//}
 	return true;
 }
 
@@ -593,7 +595,23 @@ bool DKDuktape::QueueDuktape(const DKString& code)
 	return true;
 }
 
+////////////////////////////////////////////////
+bool DKDuktape::UnloadFile(const DKString& path)
+{
+	DKDEBUGFUNC(path);
+	if(path.empty()) { return false; }
+	if(!FileLoaded(path)){ return false; }
 
+	DKDEBUGFUNC(path);
+	for(unsigned int i = 0; i < filelist.size(); ++i) {
+		if(has(path, filelist[i])) {
+			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
+			filelist.erase(filelist.begin() + i); //TODO: error control
+			return true;
+		}
+	}
+	return false;
+}
 
 //////////////////////////////////////////////////////////////////
 ////////////// eventloop stuff  //////////////////////////////////

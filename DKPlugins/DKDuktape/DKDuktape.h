@@ -30,6 +30,7 @@ public:
 	//static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
 	static bool QueueDuktape(const DKString& code);
+	static bool UnloadFile(const DKString& path);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);
