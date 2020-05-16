@@ -269,8 +269,8 @@ bool DKCef::Init()
 	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
 	DKINFO("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n");
 
-
-	int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
+    //FIXME - crashes on linux
+    int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2){
 		DKERROR("CefInitialize error");
 		return false;
