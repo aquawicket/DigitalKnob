@@ -268,7 +268,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			}
 			else{
 				processed += src+",";
-				DKString app = DKFile::local_assets+src;
+				DKString app = DKRml::Get()->workingPath +src;
 				DKDuktape::LoadFile(app);
 			}
 		}
