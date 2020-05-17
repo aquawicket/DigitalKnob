@@ -5,14 +5,15 @@
 <body>
 
 <!-- Home -->
-<a href="index.html">home</a><br /><br />
+<a id="home" href="index.html">home</a><br /><br />
 
-<a style="font-weight:bold;font-size:20px;">Scratch Pad</a><br /><br />
+<a id="scratchPad" style="font-weight:bold;font-size:20px;">Scratch Pad</a><br /><br />
 <!-- Place scratch code in here -->
 
 <script>
 var addresses = document.getElementsByTagName("a");
-//console.log(addresses);
+console.log(addresses[0].id);
+console.log(addresses[1].id);
 </script>
 
 <!-- Place scratch code before here -->

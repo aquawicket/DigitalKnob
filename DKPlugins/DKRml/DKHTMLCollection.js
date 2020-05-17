@@ -30,8 +30,9 @@ var HTMLCollection = function(pointers)
 	
 	var arry = pointers.split(",");
 	for(var i=0; i<arry.length; i++){
-		console.log(arry[i]);
-		this.push(new HTMLElement(arry[i])) //TypeError: setter undefined
+		//console.log(arry[i]);
+		this[i] = new HTMLElement(arry[i]);
 	}
+	//return this;
 }
 HTMLCollection.prototype = [];
