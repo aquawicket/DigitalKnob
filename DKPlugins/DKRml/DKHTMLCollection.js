@@ -1,10 +1,10 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 
-///////////////////////////////
-var HTMLCollection = function()
+///////////////////////////////////////
+var HTMLCollection = function(pointers)
 {
 	//DKDEBUGFUNC();
-	//console.warn("HTMLCollection()");
+	//console.warn("HTMLCollection()");	
 	
 	Object.defineProperty(this, "length", { 
 		get: function(){ 
@@ -26,6 +26,12 @@ var HTMLCollection = function()
 			}
 		}
 		return null;
+	}
+	
+	var arry = pointers.split(",");
+	for(var i=0; i<arry.length; i++){
+		console.log(arry[i]);
+		this.push(new HTMLElement(arry[i])) //TypeError: setter undefined
 	}
 }
 HTMLCollection.prototype = [];

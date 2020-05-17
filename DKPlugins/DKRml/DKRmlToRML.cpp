@@ -285,16 +285,17 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 
 
 	//DEBUG - Lets see the code
+	/*
 	DKRml* dkRml = DKRml::Get();
 	Rml::Core::ElementDocument* doc = dkRml->document;
-	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();//.CString();
+	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
 	int n = code.rfind("<html");
 	code = code.substr(n);
 	replace(code, "<", "\n<");
 	DKINFO("########## Post DKRmlToRML::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
-	return true;
+	*/
 
 	return true;
 }

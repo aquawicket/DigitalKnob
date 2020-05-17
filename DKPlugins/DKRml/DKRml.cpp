@@ -157,10 +157,12 @@ bool DKRml::LoadHtml(const DKString& html)
 	replace(rml, "<meta name=\"generator\" content=", "");
 	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
 
+	/*
 	DKINFO("\n");
 	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
 	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
+	*/
 
 	//// Clear any document and load the rml into the document
 	if (document) {
@@ -237,19 +239,26 @@ bool DKRml::LoadHtml(const DKString& html)
 #endif
 
 	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML();
+	
+	/*
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
+	*/
 
 	//find the last <body occurance
 	int n = code.rfind("<html");
 	code = code.substr(n);
 	replace(code, "<", "\n<");
+	
+	/*
 	DKINFO("\n");
 	DKINFO("############## last <html> element CODE FROM RmlUi ##############\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################################\n");
+	*/
+
 	return true;
 }
 
