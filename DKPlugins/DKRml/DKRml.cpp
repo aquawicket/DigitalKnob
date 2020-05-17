@@ -555,7 +555,9 @@ Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 		return NULL;
 	}
 	Rml::Core::Element* element = reinterpret_cast<Rml::Core::Element*>(tmp);
-	if(element->GetTagName().empty()){ return NULL; }
+	if(element->GetTagName().empty()){ 
+		return NULL; 
+	}
 	return element;
 }
 
