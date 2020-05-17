@@ -1303,7 +1303,7 @@ function DK_Id(event, id)
 	var element = DKWidget_GetElement(event);
 	//DKWARN("DK_Id(): element="+element.id+"\n");
 	if(element == window && id == "window"){ return true; }
-	if(element == document) && id == "document"){ return true; }
+	//if(element == document) && id == "document"){ return true; }
 	if(element && element.id == id){ return true; }
 	if(event[0] && event[0] == id){ return true; }
 	return false;
