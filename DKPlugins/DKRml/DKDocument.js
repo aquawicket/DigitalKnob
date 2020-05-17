@@ -17,7 +17,6 @@ var Document = function(pointer)
 			return DKDocument_body(pointer); //TODO
 		} 
 	});
-	
 	Object.defineProperty(this, "documentElement",   { 
 		get: function(){ 
 			var pointer = DKDocument_documentElement();
@@ -32,6 +31,12 @@ var Document = function(pointer)
 		if(!pointer){ return; }
 		var element = new HTMLElement(pointer);
 		return element;
+	}
+	Document.prototype.getElementsByTagName = function(tag){
+		var elements = DKDocument_getElementsByTagName(tag);
+		if(!elements){ return; }
+		var elementList = new HTMLElements(elements);
+		return elementList;
 	}
 }
 

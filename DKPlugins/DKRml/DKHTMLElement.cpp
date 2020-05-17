@@ -4,7 +4,7 @@
 #include "DKRml/DKRml.h"
 
 
-///////////////////////
+//////////////////////////
 bool DKHTMLElement::Init()
 {
 	DKDEBUGFUNC();

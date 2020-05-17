@@ -1,28 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 
-///////////////////////////////
-var HTMLCollection = function()
-{
-	//DKDEBUGFUNC();
-	//console.warn("HTMLCollection()");
-	
-	HTMLCollection.prototype.item = function(index){
-		return this[index];
-	}
-	HTMLCollection.prototype.namedItem = function(name){
-		for(var i=0; i<this.length; i++){
-			if(this.id && this.id == name){
-				return this[i];
-			}
-			if(this.name && this.name == name){
-				return this[i];
-			}
-		}
-		return null;
-	}
-}
-
-
 ///////////////////////////////////
 var HTMLElement = function(pointer)
 {
@@ -113,4 +90,3 @@ var HTMLElement = function(pointer)
 	return Element.call(this, pointer);
 }
 HTMLElement.prototype = Element.prototype;
-HTMLCollection.prototype = [];
