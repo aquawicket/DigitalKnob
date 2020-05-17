@@ -6,13 +6,6 @@ var HTMLCollection = function(pointers)
 	//DKDEBUGFUNC();
 	//console.warn("HTMLCollection()");	
 	
-	Object.defineProperty(this, "length", { 
-		get: function(){ 
-			var length = "TODO";
-			return length;
-		} 
-	});
-	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
 	}
@@ -29,10 +22,9 @@ var HTMLCollection = function(pointers)
 	}
 	
 	var arry = pointers.split(",");
+	this.length = arry.length;
 	for(var i=0; i<arry.length; i++){
-		//console.log(arry[i]);
 		this[i] = new HTMLElement(arry[i]);
 	}
-	//return this;
 }
 HTMLCollection.prototype = [];
