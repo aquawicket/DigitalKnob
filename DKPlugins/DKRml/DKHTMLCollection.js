@@ -6,6 +6,13 @@ var HTMLCollection = function()
 	//DKDEBUGFUNC();
 	//console.warn("HTMLCollection()");
 	
+	Object.defineProperty(this, "length", { 
+		get: function(){ 
+			var length = "TODO";
+			return length;
+		} 
+	});
+	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
 	}

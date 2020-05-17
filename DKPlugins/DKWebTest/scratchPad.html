@@ -10,11 +10,10 @@
 <a style="font-weight:bold;font-size:20px;">Scratch Pad</a><br /><br />
 <!-- Place scratch code in here -->
 
-<strong>location: </strong><a id="location">error</a><br />
+<strong>a elements: </strong><a id="aElements">error</a><br />
 <script>
-var loc = window.location.href;
-var dir = loc.substring(0, loc.lastIndexOf('/'));
-document.getElementById("location").innerHTML = dir;
+var addresses = document.getElementsByTagName("a");
+console.log(addresses);
 </script>
 
 <!-- Place scratch code before here -->

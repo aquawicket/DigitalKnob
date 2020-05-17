@@ -12,6 +12,7 @@ bool DKDocument::Init()
 	DKDuktape::AttachFunction("DKDocument_createElement", DKDocument::createElement);
 	DKDuktape::AttachFunction("DKDocument_documentElement", DKDocument::documentElement);
 	DKDuktape::AttachFunction("DKDocument_getElementById", DKDocument::getElementById);
+	DKDuktape::AttachFunction("DKDocument_getElementsByTagName", DKDocument::getElementsByTagName);
 	
 	DKClass::DKCreate("DKRml/DKDocument.js");
 	return true;
@@ -76,6 +77,27 @@ int DKDocument::getElementById(duk_context* ctx)
 	}
 	DKString elementAddress = DKRml::Get()->elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
+	return true;
+}
+
+//////////////////////////////////////////////////////
+int DKDocument::getElementsByTagName(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString tag = duk_require_string(ctx, 0);
+	Rml::Core::ElementList elements;
+	DKRml::Get()->document->GetElementsByTagName(elements, tag.c_str());
+	if(elements.empty()){
+		//DKERROR("DKRmlJS::getElementsByTagName(): element list invalid\n");
+		duk_push_null(ctx);
+		return true;
+	}
+	DKStringArray elementAddresses;
+	for(unsigned int i = 0; i<elements.size(); i++){
+		elementAddresses.push_back(DKRml::Get()->elementToAddress(elements[i]));
+	}
+	DKString list = toString(elementAddresses, ",");
+	duk_push_string(ctx, list.c_str());
 	return true;
 }
 

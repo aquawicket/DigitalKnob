@@ -35,8 +35,9 @@ var Document = function(pointer)
 	Document.prototype.getElementsByTagName = function(tag){
 		var elements = DKDocument_getElementsByTagName(tag);
 		if(!elements){ return; }
-		var elementList = new HTMLElements(elements);
-		return elementList;
+		console.log(elements);
+		//var elementList = new HTMLCollection(elements);
+		//return elementList;
 	}
 }
 
