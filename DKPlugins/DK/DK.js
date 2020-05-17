@@ -1065,25 +1065,29 @@ function DK_GetObjects()
 	// Search the Dom for all css (.css files)
 	var cssfiles = "";
 	var elements = document.getElementsByTagName("link");
-	for(var i=0; i<elements.length; i++){
-		if(!elements[i].id){
-			//DKWARN(elements[i].href+": css object has no id\n");
-			continue; 
+	if(elements){
+		for(var i=0; i<elements.length; i++){
+			if(!elements[i].id){
+				//DKWARN(elements[i].href+": css object has no id\n");
+				continue; 
+			}
+			cssfiles += elements[i].id+",";
 		}
-		cssfiles += elements[i].id+",";
 	}
 	
 	// Search the Dom for all widgets (.html id's)
 	var htmlfiles = "";
 	var divs = document.getElementsByTagName("div");
-	for(var i = divs.length; i;){
-		var div = divs[--i];
-		if(!div.id){
-			DKWARN(div+": html object has no id\n");
-			continue; 
-		}
-		if(div.id.indexOf(".html") > -1){
-			htmlfiles += div.id+",";
+	if(divs){
+		for(var i = divs.length; i;){
+			var div = divs[--i];
+			if(!div.id){
+				DKWARN(div+": html object has no id\n");
+				continue; 
+			}
+			if(div.id.indexOf(".html") > -1){
+				htmlfiles += div.id+",";
+			}
 		}
 	}
 	

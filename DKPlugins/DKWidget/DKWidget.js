@@ -42,13 +42,13 @@ function DKWidget_NewWidget(url, parent)
 		if(!LoadHtml(url, element)){ 
 			return false;
 		}
-		DKWidget_AttachDrags(filename); //Attach Drags
+		//DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	else{
 		if(!LoadHtml(url)){
 			return false;
 		}
-		DKWidget_AttachDrags(filename); //Attach Drags
+		//DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	
 	return true;

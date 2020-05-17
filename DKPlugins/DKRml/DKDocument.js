@@ -26,6 +26,12 @@ var Document = function(pointer)
 		} 
 	});
 	
+	Document.prototype.createElement = function(tag){
+		var pointer = DKDocument_createElement(tag);
+		if(!pointer){ return; }
+		var element = new HTMLElement(pointer);
+		return element;
+	}
 	Document.prototype.getElementById = function(id){
 		var pointer = DKDocument_getElementById(id);
 		if(!pointer){ return; }
