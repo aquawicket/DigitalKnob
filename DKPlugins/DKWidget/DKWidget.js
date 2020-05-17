@@ -1,3 +1,5 @@
+console.log("Loading DKWidget.js");
+
 function DKWidget_GetFocusElement(){ DKWARN("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
 function DKWidget_ValidateColor(color){ DKWARN("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
 
