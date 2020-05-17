@@ -24,8 +24,8 @@ var drag_id;
 var events = [];
 
 
-document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
-document.body.style.fontSize = "13em";
+//document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
+//document.body.style.fontSize = "13em";
 //document.body.style.fontSize = "1.0px";
 
 //document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
@@ -1164,6 +1164,9 @@ function DK_GetBrowser()
 function DK_GetJSEngine()
 {
 	DKDEBUGFUNC();
+	if(navigator.product == "Duktape"){
+		return "Duktape"
+	}
 	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
 	if('WebkitAppearance' in document.documentElement.style){  //If (probably) WebKit browser
 		if (escape(navigator.javaEnabled.toString()) === v8string){
@@ -1172,9 +1175,6 @@ function DK_GetJSEngine()
 		else{
 			return "JSC";
 		}
-	}
-	if(navigator.product == "Duktape"){
-		return "Duktape"
 	}
 	return "UNKNOWN JAVASCRIPT ENGINE"
 }
