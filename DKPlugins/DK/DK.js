@@ -1,3 +1,5 @@
+console.log("Loading DK.js");
+
 var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
