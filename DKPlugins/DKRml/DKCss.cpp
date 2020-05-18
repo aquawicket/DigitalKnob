@@ -1,17 +1,17 @@
 #include "DK/stdafx.h"
-#include "Rocket/Core/Factory.h"
+#include "RmlUi/Core/Factory.h"
 #include "DK/DKFile.h"
-#include "DKWidget/DKCss.h"
+#include "DKRml/DKCss.h"
 
-DKRocket* DKCss::dkRocket;
+DKRml* DKCss::dkRml;
 
 //////////////////
 bool DKCss::Init()
 {
 	DKDEBUGFUNC();
-	dkRocket = DKRocket::Get();
-	if(!dkRocket){
-		DKERROR("DKWidget::Init(): INVALID OBJECTS\n");
+	dkRml = DKRml::Get();
+	if(!dkRml){
+		DKERROR("DKCss::Init(): INVALID OBJECTS\n");
 		return false;
 	}
 
@@ -28,10 +28,10 @@ bool DKCss::Init()
 	replace(data[1], DKFile::local_assets, "");
     DKString file = DKFile::local_assets+data[1];
 
-	Rocket::Core::StyleSheet* current_sheet = dkRocket->document->GetStyleSheet();
-	Rocket::Core::StyleSheet* new_sheet = Rocket::Core::Factory::InstanceStyleSheetFile(file.c_str());
-	current_sheet = current_sheet->CombineStyleSheet(new_sheet);
-	dkRocket->document->SetStyleSheet(current_sheet);
+	Rml::Core::SharedPtr<Rml::Core::StyleSheet> current_sheet = dkRml->document->GetStyleSheet();
+	Rml::Core::SharedPtr<Rml::Core::StyleSheet> new_sheet = Rml::Core::Factory::InstanceStyleSheetFile(file.c_str());
+	current_sheet = current_sheet->CombineStyleSheet(*new_sheet);
+	dkRml->document->SetStyleSheet(current_sheet);
 	return true;
 }
 

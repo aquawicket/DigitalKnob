@@ -241,7 +241,7 @@ DKINFO(DK_GetJSEngine()+"\n");
 
 
 /////////////////////////////////
-function DKLoad(data, callback)
+function DKCreate(data, callback)
 {
 	DKDEBUGFUNC(data, callback);
 	DKINFO("DK.js:DKCreate("+data+")\n");	

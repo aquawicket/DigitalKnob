@@ -2,7 +2,7 @@
 #ifndef DKCss_H
 #define DKCss_H
 #include "DK/DK.h"
-#include "DKRocket/DKRocket.h"
+#include "DKRml/DKRml.h"
 
 /////////////////////////////////////
 class DKCss : public DKObjectT<DKCss>
@@ -11,7 +11,7 @@ public:
 	bool Init();
 	bool End();
 
-	static DKRocket* dkRocket;
+	static DKRml* dkRml;
 };
 
 
