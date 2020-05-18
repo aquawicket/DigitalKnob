@@ -241,10 +241,10 @@ DKINFO(DK_GetJSEngine()+"\n");
 
 
 /////////////////////////////////
-function DKCreate(data, callback)
+function DKLoad(data, callback)
 {
 	DKDEBUGFUNC(data, callback);
-	DKINFO("DKCreate("+data+")\n");	
+	DKINFO("DK.js:DKCreate("+data+")\n");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
