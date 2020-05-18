@@ -39,7 +39,7 @@ int DKDocument::createElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->document->CreateElement(tag.c_str()).get();
+	Rml::Core::Element* element = DKRml::Get()->document->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 	if(!element){
 		DKERROR("DKDocument::createElement(): element invalid\n");
 		return false;
