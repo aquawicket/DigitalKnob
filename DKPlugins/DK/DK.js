@@ -41,7 +41,7 @@ function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBro
 function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
 EventLoop.run = function(){};
 
-//https://stackoverflow.com/questions/11034997/how-can-i-conditionally-define-a-function-in-javascript
+//https://stackoverflow.com/a/11035042/688352
 if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DK_ClearEvents = function(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
 	var DKRocket_Reload = function(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
@@ -1565,9 +1565,9 @@ function GetMouseButton(event)
     return button;
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////
-	function DK_SetClipboard(string)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	//////////////////////////////////////
+	var DK_SetClipboard = function(string)
 	{
 		DKDEBUGFUNC(string);
 		//if(!document.queryCommandSupported('copy')){
