@@ -35,12 +35,13 @@ int DKNode::appendChild(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	// FIXME
-	//if(!element->AppendChild((Rml::Core::ElementPtr)child, true)){
-	//	DKERROR("DKNode::appendChild(): AppendChild failed\n");
-	//	duk_push_boolean(ctx, false);
-	//	return true;
-	//}
+
+	if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true)){
+		DKERROR("DKNode::appendChild(): AppendChild failed\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
 	duk_push_string(ctx, childAddress.c_str());
 
 	//post process if it's a link
