@@ -5,6 +5,7 @@ var Node = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.warn("Node("+pointer+")");
+	this.pointer = pointer;
 	
 	Object.defineProperty(this, "baseURI",         { get: function(){ return DKNode_baseURI(this.pointer);         } });  //TODO
 	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKNode_baseURIObject(this.pointer);   } });  //TODO
@@ -84,6 +85,7 @@ var Node = function(pointer)
 		//TODO
 	}
 	Node.prototype.removeChild = function(aChild){
+		console.log("Node.removeChild("+this.pointer+","+aChild.pointer+")");
 		var pointer = DKNode_removeChild(this.pointer, aChild.pointer);
 		if(!pointer){ return null; }
 		var node = new Node(pointer);
