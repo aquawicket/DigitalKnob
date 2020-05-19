@@ -48,7 +48,7 @@ function myTimer() {
 }
 */
 
-if(DK_GetBrowser() != "CEF"){
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	function DK_ClearEvents(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
 	function DKRocket_Reload(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
 	function DK_CallFunc(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
@@ -540,6 +540,12 @@ function LoadHtml(url, parent)
 	else{
 		document.body.appendChild(nodes[0]);
 	}
+	
+	var elements = document.getElementsByTagName("temp");
+	if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
+	if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
+	if(elements[0]){ document.removeChild(elements[0]); }
+    //elements[0].parentNode.removeChild(elements[0]);
 	
 	return true;
 }
@@ -1143,22 +1149,25 @@ function DK_GetOS()
 function DK_GetBrowser()
 {
 	//DKDEBUGFUNC();
-    if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
+	if(navigator.userAgent.indexOf("Rml") != -1){
+        return "RML";
+    }
+    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
     }
     else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") == -1){
 		return "CHROME";
     }
-	else if(navigator.userAgent.indexOf("Cef") != -1 ) {
+	else if(navigator.userAgent.indexOf("Cef") != -1){
         return "CEF";
     }
     else if(navigator.userAgent.indexOf("Safari") != -1){
         return "SAFARI";
     }
-    else if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+    else if(navigator.userAgent.indexOf("Firefox") != -1){
         return "FIREFOX";
     }
-    else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )){ //IF IE > 10
+    else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true )){ //IF IE > 10
 		return "IE";
     }
     else {

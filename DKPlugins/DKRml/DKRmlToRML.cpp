@@ -285,7 +285,6 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 
 
 	//DEBUG - Lets see the code
-	/*
 	DKRml* dkRml = DKRml::Get();
 	Rml::Core::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
@@ -295,7 +294,6 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	DKINFO("########## Post DKRmlToRML::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
-	*/
 
 	return true;
 }

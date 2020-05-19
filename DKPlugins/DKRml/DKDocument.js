@@ -44,6 +44,8 @@ var Document = function(pointer)
 		var elements = new HTMLCollection(pointers);
 		return elements;
 	}
+	
+	Node.call(this, pointer);
 }
-
+Document.prototype = Node.prototype;	
 document = new Document("document");

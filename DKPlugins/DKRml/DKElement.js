@@ -110,24 +110,20 @@ var Element = function(pointer)
 		//TODO
 	}
 	Element.prototype.getElementsByClassName = function(name){
-		var addressList = DKElement_getElementsByTagName(name);
-		var htmlCollection = new HTMLCollection();
-		if(!addressList){ return htmlCollection; }
-		var arry = addressList.split(",");
-		for(var i=0; i<arry.length; i++){
-			htmlCollection.push(new HTMLElement(arry[i]))
-		}
-		return htmlCollection;
+		//FIXME: only search within the element
+		//DKElements_getElementsByClassName(this.pointer, name)
+		var pointers = DKElement_getElementsByClassName(name);
+		if(!pointers){ return; }
+		var elements = new HTMLCollection(pointers);
+		return elements;
 	}
-	Element.prototype.getElementsByTagName = function(name){
-		var addressList = DKElement_getElementsByTagName(name);
-		var htmlCollection = new HTMLCollection();
-		if(!addressList){ return htmlCollection; }
-		var arry = addressList.split(",");
-		for(var i=0; i<arry.length; i++){
-			htmlCollection.push(new HTMLElement(arry[i]))
-		}
-		return htmlCollection;
+	Element.prototype.getElementsByTagName = function(tag){
+		//FIXME: only search within the element
+		//DKElements_getElementsByTagName(this.pointer, tag)
+		var pointers = DKElement_getElementsByTagName(tag);
+		if(!pointers){ return; }
+		var elements = new HTMLCollection(pointers);
+		return elements;
 	}
 	Element.prototype.getElementsByTagNameNS = function(){
 		//TODO
