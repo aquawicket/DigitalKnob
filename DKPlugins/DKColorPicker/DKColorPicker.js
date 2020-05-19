@@ -7,10 +7,10 @@ function DKColorPicker_Init()
 	//DKDEBUGFUNC();
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
-	//DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
+	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
+	DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
+	DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
+	DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
 }
 
 ////////////////////////////

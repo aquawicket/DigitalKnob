@@ -18,6 +18,7 @@ bool DKElement::Init()
 	DKDuktape::AttachFunction("DKElement_hasAttribute", DKElement::hasAttribute);
 	DKDuktape::AttachFunction("DKElement_innerHTML", DKElement::innerHTML);
 	DKDuktape::AttachFunction("DKElement_setAttribute", DKElement::setAttribute);
+	DKDuktape::AttachFunction("DKElement_tagName", DKElement::tagName);
 	
 	DKClass::DKCreate("DKRml/DKElement.js");
 	return true;
@@ -264,4 +265,18 @@ int DKElement::setAttribute(duk_context* ctx)
 	return true;
 }
 
+////////////////////////////////////////
+int DKElement::tagName(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
+	if(!element){
+		DKERROR("DKElement::tagName(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	duk_push_string(ctx, element->GetTagName().c_str());
+	return true;
+}
 #endif //USE_DKDuktape
