@@ -41,36 +41,36 @@ function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBro
 function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
 EventLoop.run = function(){};
 
+//https://stackoverflow.com/questions/11034997/how-can-i-conditionally-define-a-function-in-javascript
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	var DK_ClearEvents = function(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
+	var DKRocket_Reload = function(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_CallFunc = function(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_Queue = function(var1, var2, var3){ DKWARN("DK_Queue(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_LeftClick = function(){ DKWARN("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_RightClick = function(){ DKWARN("DK_RightClick(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_SetCursorPos = function(){ DKWARN("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n"); }
+	var DKHook_GetWindows = function(){ DKWARN("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_Crash = function(){ DKWARN("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_LogGuiConsole = function(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_GetScreenWidth = function(){ DKWARN("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_GetScreenHeight = function(){ DKWARN("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_PrintFunctions = function(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_GetPixelUnderMouse = function(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_ShowConsole = function(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_HideConsole = function(){ DKWARN("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_CpuUsed = function(){DKWARN("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_CpuUsedByApp = function(){ DKWARN("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_PhysicalMemory = function(){ DKWARN("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_PhysicalMemoryUsedByApp = function(){ DKWARN("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+}
+
 /*
 var myVar = setInterval(myTimer, 1000);
 function myTimer() {
     DKSendEvent("window", "second", "");
 }
 */
-
-if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
-	function DK_ClearEvents(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
-	function DKRocket_Reload(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_CallFunc(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_Queue(var1, var2, var3){ DKWARN("DK_Queue(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_LeftClick(){ DKWARN("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_RightClick(){ DKWARN("DK_RightClick(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_SetCursorPos(){ DKWARN("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n"); }
-	function DKHook_GetWindows(){ DKWARN("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_Crash(){ DKWARN("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_LogGuiConsole(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_GetScreenWidth(){ DKWARN("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_GetScreenHeight(){ DKWARN("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_PrintFunctions(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
-	function DK_GetPixelUnderMouse(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_ShowConsole(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_HideConsole(){ DKWARN("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_CpuUsed(){DKWARN("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_CpuUsedByApp(){ DKWARN("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_PhysicalMemory(){ DKWARN("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	function DK_PhysicalMemoryUsedByApp(){ DKWARN("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-}
-
 
 //This function is used to debug googlebot crawling
 /////////////////////////////////////////////
