@@ -482,7 +482,7 @@ function LoadJs(url, callback)
 function LoadHtml(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	//DKWARN("LoadHtml("+url+",parent)");
+	DKWARN("LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
 		DKERROR("LoadJs("+url+"): url invalid\n");
@@ -535,16 +535,18 @@ function LoadHtml(url, parent)
 		DKWARN("LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
+		console.log("LoadHtml(): appending to parent");
 		parent.appendChild(nodes[0]);
 	}
 	else{
+		console.log("LoadHtml(): appending to document.body");
 		document.body.appendChild(nodes[0]);
 	}
 	
 	var elements = document.getElementsByTagName("temp");
 	if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
 	if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
-	//if(elements[0]){ document.removeChild(elements[0]); }
+	if(elements[0]){ document.removeChild(elements[0]); }
 	
 	return true;
 }

@@ -24,18 +24,23 @@ int DKNode::appendChild(duk_context* ctx)
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRmlJS::removeChild(): element invalid\n");
+		DKERROR("DKNode::appendChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Core::Element* child = DKRml::Get()->addressToElement(childAddress);
 	if(!child){
-		DKERROR("DKRmlJS::removeChild(): child invalid\n");
+		DKERROR("DKNode::appendChild(): child invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//element->AppendChild(child, true);
+	// FIXME
+	//if(!element->AppendChild((Rml::Core::ElementPtr)child, true)){
+	//	DKERROR("DKNode::appendChild(): AppendChild failed\n");
+	//	duk_push_boolean(ctx, false);
+	//	return true;
+	//}
 	duk_push_string(ctx, childAddress.c_str());
 
 	//post process if it's a link
@@ -55,7 +60,7 @@ int DKNode::childNodes(duk_context* ctx)
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRmlJS::childNodes(): element invalid\n");
+		DKERROR("DKNode::childNodes(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -86,13 +91,13 @@ int DKNode::parentNode(duk_context* ctx)
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRmlJS::parentNode(): element invalid\n");
+		DKERROR("DKNode::parentNode(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	Rml::Core::Element* parentNode = element->GetParentNode();
 	if(!parentNode){
-		DKERROR("DKRmlJS::parentNode(): parentNode invalid\n");
+		DKERROR("DKNode::parentNode(): parentNode invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -108,20 +113,20 @@ int DKNode::removeChild(duk_context* ctx)
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRmlJS::removeChild(): element invalid\n");
+		DKERROR("DKNode::removeChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
 	Rml::Core::Element* child = DKRml::Get()->addressToElement(childAddress);
 	if(!child){
-		DKERROR("DKRmlJS::removeChild(): child invalid\n");
+		DKERROR("DKNode::removeChild(): child invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
 	if(!element->RemoveChild(child)){
-		DKERROR("DKRmlJS::removeChild(): element->RemoveChild failed\n");
+		DKERROR("DKNode::removeChild(): element->RemoveChild failed\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
