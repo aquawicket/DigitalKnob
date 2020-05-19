@@ -88,8 +88,8 @@ var Node = function(pointer)
 		console.log("Node.removeChild("+this.pointer+","+aChild.pointer+")");
 		var pointer = DKNode_removeChild(this.pointer, aChild.pointer);
 		if(!pointer){ return null; }
-		var node = new Node(pointer);
-		return node;
+		//var node = new Node(pointer);
+		//return node;
 	}
 	Node.prototype.replaceChild = function(){
 		//TODO

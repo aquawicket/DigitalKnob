@@ -541,20 +541,26 @@ Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 {
 	DKDEBUGFUNC(address);
 
-	if(address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
-		//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
-		return NULL;
+	Rml::Core::Element* element;
+	if(address == "document"){
+		element = document;
 	}
+	else{
+		if(address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
+			//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
+			return NULL;
+		}
 
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address.substr(2, address.size() - 2);
-	int tmp(0);
-	if(!(ss >> std::hex >> tmp)){
-		DKERROR("DKRml::addressToElement("+address+"): invalid address\n");
-		return NULL;
+		//Convert a string of an address back into a pointer
+		std::stringstream ss;
+		ss << address.substr(2, address.size() - 2);
+		int tmp(0);
+		if(!(ss >> std::hex >> tmp)){
+			DKERROR("DKRml::addressToElement("+address+"): invalid address\n");
+			return NULL;
+		}
+		element = reinterpret_cast<Rml::Core::Element*>(tmp);
 	}
-	Rml::Core::Element* element = reinterpret_cast<Rml::Core::Element*>(tmp);
 	if(element->GetTagName().empty()){ 
 		return NULL; 
 	}
@@ -568,9 +574,14 @@ DKString DKRml::elementToAddress(Rml::Core::Element* element)
 		DKERROR("DKRml::elementToAddress(): invalid element\n");
 		return NULL;
 	}
-	const void* address = static_cast<const void*>(element);
 	std::stringstream ss;
-	ss << "0x" << address;
+	if(element == document){
+		ss << "document";
+	}
+	else{
+		const void* address = static_cast<const void*>(element);
+		ss << "0x" << address;
+	}
 	return ss.str();
 }
 

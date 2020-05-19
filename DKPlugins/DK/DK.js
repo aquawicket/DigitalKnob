@@ -544,8 +544,7 @@ function LoadHtml(url, parent)
 	var elements = document.getElementsByTagName("temp");
 	if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
 	if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
-	if(elements[0]){ document.removeChild(elements[0]); }
-    //elements[0].parentNode.removeChild(elements[0]);
+	//if(elements[0]){ document.removeChild(elements[0]); }
 	
 	return true;
 }

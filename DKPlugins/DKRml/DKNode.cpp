@@ -119,6 +119,7 @@ int DKNode::removeChild(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
 	if(!element->RemoveChild(child)){
 		DKERROR("DKRmlJS::removeChild(): element->RemoveChild failed\n");
 		duk_push_boolean(ctx, false);
