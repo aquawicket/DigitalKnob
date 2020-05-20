@@ -269,11 +269,6 @@ bool DKRml::LoadUrl(const DKString& url)
 	DKString _url = url;
 	if(has(_url,":/")){ //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
-		//Get the working path;
-		std::size_t found = _url.find_last_of("/");
-		workingPath = _url.substr(0, found+1);
-		DKWARN("DKRml::LoadUrl(): workingPath: "+workingPath+"\n");
-		DKWARN("DKRml::LoadUrl(): href: "+href+"\n");
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
 		DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
@@ -285,12 +280,18 @@ bool DKRml::LoadUrl(const DKString& url)
 		//return false;
 	}
 
+	//Get the working path;
+	std::size_t found = _url.find_last_of("/");
+	workingPath = _url.substr(0, found + 1);
+	DKWARN("DKRml::LoadUrl(): workingPath: " + workingPath + "\n");
+	DKWARN("DKRml::LoadUrl(): href: " + href + "\n");
+
 	//get the protocol
 	int n = _url.find(":");
 	protocol = _url.substr(0,n);
 	DKWARN("DKRml::LoadUrl(): protocol: "+protocol+"\n");
 
-	int found = _url.rfind("/");
+	found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRml::LoadUrl(): last / at "+toString(found)+"\n");
 	DKWARN("DKRml::LoadUrl(): _path = "+_path+"\n");

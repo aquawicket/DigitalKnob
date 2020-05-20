@@ -4,6 +4,7 @@
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
 html{
+	display: block;
 	font-family: "Times New Roman";
 	font-size: 130%;
 	overflow: auto;
