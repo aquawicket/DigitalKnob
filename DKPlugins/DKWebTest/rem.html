@@ -23,12 +23,13 @@ document.getElementById("scaleDown").addEventListener("click", ScaleDown);
 document.getElementById("scaleUp").addEventListener("click", ScaleUp);
 
 function ScaleDown(){
-    scale -= 0.5;
+    scale -= 0.1;
     Update_Scale();
 }
 
 function ScaleUp(){
-    scale += 0.5;
+	console.log("ScaleUp()");
+    scale += 0.1;
     Update_Scale();
 }
 

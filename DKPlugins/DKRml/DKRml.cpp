@@ -436,6 +436,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}";
 
+	/*
 	//Send this event back to duktape to be processed in javascript
 	DKString code = "EventFromCPP('"+address+"',"+evnt+");";
 	DKString rval;
@@ -444,7 +445,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 		DKWARN("DKRml::ProcessEvent(): rval = "+rval+"\n");
 	}
 	//////////////////////////////////////////////////////////////////////
-
+	*/
 
 	//If the event bubbles up, ignore elements underneith 
 	Rml::Core::Context* ctx = document->GetContext();

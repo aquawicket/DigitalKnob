@@ -316,6 +316,7 @@ bool DKCef::End()
 		DKERROR("DKCef::End(): Error: not in the main cef thread\n");
 		return false;
 	}
+
 	DKINFO("DKCef::End(): CefShutdown();\n");
 	CefShutdown(); //call on same thread as CefInitialize
 
