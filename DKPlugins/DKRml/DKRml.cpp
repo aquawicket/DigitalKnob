@@ -516,7 +516,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 				ev->data.push_back(toString(event.GetParameter<int>("button", 0)));
 			}
 			//FIXME - we run the risk of having event function pointers that point to nowhere
-			ev->event_func(ev); //call the function linked to the event
+			if(!ev->event_func(ev)){
+				DKERROR("DKRml::ProcessEvent failed");
+				return;
+			} //call the function linked to the event
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag

@@ -32,7 +32,7 @@ bool DKEventTarget::OnEvent(DKEvent* event)
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
-	if(jsreturn.empty() || same(jsreturn,"0")){
+	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
 		DKERROR("DKEventTarget::OnEvent: jsreturn variable invalid\n");
 		return false;
 	}

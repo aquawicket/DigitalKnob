@@ -21,7 +21,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var pointer = DKDocument_documentElement();
 			if(!pointer){ return; }
-			var element = new Element(pointer);
+			var element = new HTMLElement(pointer);
 			return element;
 		} 
 	});

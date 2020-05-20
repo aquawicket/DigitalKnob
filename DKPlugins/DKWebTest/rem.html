@@ -2,10 +2,10 @@
 <html style="font-size:1.0px;">
 <head>
 </head>
-<body style="font-size:16em;">
+<body style="font-size:1em;">
 
-<button style="position:absolute;width:100px;height:100px;font-size:60px;" onclick="ScaleDown()">-</button>
-<button style="position:absolute;left:110px;width:100px;height:100px;font-size:60px;" onclick="ScaleUp()">+</button>
+<button id="scaleDown" style="position:absolute;width:100px;height:100px;font-size:60px;">-</button>
+<button id="scaleUp" style="position:absolute;left:110px;width:100px;height:100px;font-size:60px;">+</button>
 <a id="text" style="position:absolute;top:20px;left:220px;font-size:60px;">1.0px</a>
 
 <!-- FIXME: rem units appear 8 times too large and out of place in Android Webview. 
@@ -16,8 +16,11 @@
 </div>
 
 <script>
-var scale = window.devicePixelRatio;
+var scale = 1.0;//window.devicePixelRatio;
 Update_Scale();
+
+document.getElementById("scaleDown").addEventListener("click", ScaleDown);
+document.getElementById("scaleUp").addEventListener("click", ScaleUp);
 
 function ScaleDown(){
     scale -= 0.5;

@@ -276,8 +276,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			if(inner.empty()){ continue; }
 			
 			//replace(inner,"'","\\'");
-			replace(inner,"\n","");
-			replace(inner,"\t","");
+			//replace(inner,"\n","");
+			//replace(inner,"\t","");
 
 			DKDuktape::Get()->LoadJSString("inlineScript", inner);
 		}
