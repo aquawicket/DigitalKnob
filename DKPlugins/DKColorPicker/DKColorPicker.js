@@ -26,7 +26,7 @@ function DKColorPicker_End()
 function DKColorPicker_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	DKDEBUG("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");
@@ -66,7 +66,7 @@ function DKColorPicker_ColorBar()
 	rgb += String(rgb_arry[1]) + ",";
 	rgb += String(rgb_arry[2]) + ")";
 		
-	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
+	DKWidget_SetValue("DKColorR", "test"/*String(rgb_arry[0])*/);
 	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
 	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
 	DKWidget_SetProperty("DKColorHover", "background-color", rgb);
