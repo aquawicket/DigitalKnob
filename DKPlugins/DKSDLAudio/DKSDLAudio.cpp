@@ -217,6 +217,6 @@ void DKSDLAudio::Process()
 		Mix_PauseMusic();
 		trk.position = 0;
 		lastTime = SDL_GetTicks();
-		DKEvent::SendEvent("window", "ended", "");
+		DKEvents::SendEvent("window", "ended", "");
 	}
 }
