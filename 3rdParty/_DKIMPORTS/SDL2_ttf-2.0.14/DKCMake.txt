@@ -4,7 +4,7 @@ DKDEPEND(freetype-2.5.5)
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/SDL2_ttf-2.0.14.zip SDL2_ttf-2.0.14)
+DKINSTALL(https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.zip SDL2_ttf-2.0.14)
 ## DKINSTALL(${DKWEB}/Download/SDL2_ttf-2.0.14.zip SDL2_ttf-2.0.14)
 DKSET(SDLTTF ${3RDPARTY}/SDL2_ttf-2.0.14)
 
