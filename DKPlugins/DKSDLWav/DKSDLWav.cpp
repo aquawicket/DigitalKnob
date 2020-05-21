@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKSDLWav.h"
-#include "DKFile.h"
+#include "DK/DKFile.h"
 
 #include <stdint.h>
 #include <stdlib.h>
