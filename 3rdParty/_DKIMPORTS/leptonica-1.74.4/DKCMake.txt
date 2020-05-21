@@ -13,7 +13,7 @@ DKDEPEND(giflib-5.1.1)
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/leptonica-1.74.4.zip leptonica-1.74.4) ## find an online link
+DKINSTALL(https://github.com/DanBloomberg/leptonica/releases/download/1.74.4/leptonica-1.74.4.tar.gz leptonica-1.74.4)
 ## DKINSTALL(${DKWEB}/Download/Libs/leptonica-1.74.4.zip leptonica-1.74.4)
 DKSET(LEPTONICA ${3RDPARTY}/leptonica-1.74.4)
 
