@@ -1,3 +1,4 @@
+/*
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 #ifdef USE_DKDuktape 
@@ -39,3 +40,4 @@ int DKEvent::createEvent(duk_context* ctx)
 }
 
 #endif //USE_DKDuktape
+*/
