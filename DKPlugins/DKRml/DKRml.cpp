@@ -61,9 +61,9 @@ bool DKRml::Init()
 		}
 	}
 
-	DKEvent::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
-	DKEvent::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
-	DKEvent::AddSendEventFunc(&DKRml::SendEvent, this);
+	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
+	DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
+	DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
 
 	//Load the javascript DOM
 	DKClass::DKCreate("DKLocation");
@@ -88,9 +88,9 @@ bool DKRml::Init()
 bool DKRml::End()
 {
 	DKDEBUGFUNC();
-	DKEvent::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
-	DKEvent::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
-	DKEvent::RemoveSendEventFunc(&DKRml::SendEvent, this);
+	DKEvents::RemoveRegisterEventFunc(&DKRml::RegisterEvent, this);
+	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
+	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
 	//if(document){ 
 	//	Rml::Core::Factory::ClearStyleSheetCache();
 	//	document->Close(); 
@@ -497,9 +497,9 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 		type = "contextmenu";
 	}
 
-	for(unsigned int i = 0; i < DKEvent::events.size(); ++i){
+	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
 		
-		DKEvent* ev = DKEvent::events[i];
+		DKEvents* ev = DKEvents::events[i];
 		//certain stored events are altered before comparison 
 		DKString _type = ev->GetType();
 		if(same(_type,"input")){ _type = "change"; }

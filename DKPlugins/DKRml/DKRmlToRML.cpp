@@ -67,8 +67,8 @@ bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
-//////////////////////////////////////////
-bool DKRmlToRML::Hyperlink(DKEvent* event)
+///////////////////////////////////////////
+bool DKRmlToRML::Hyperlink(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
@@ -207,7 +207,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
 			DKString elementAddress = DKRml::Get("")->elementToAddress(aElements[i]);
-			DKEvent::AddEvent(elementAddress, "click", &DKRmlToRML::Hyperlink, this);
+			DKEvents::AddEvent(elementAddress, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}
 
@@ -298,8 +298,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKRmlToRML::ResizeIframe(DKEvent* event)
+//////////////////////////////////////////////
+bool DKRmlToRML::ResizeIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -315,8 +315,8 @@ bool DKRmlToRML::ResizeIframe(DKEvent* event)
 	return true;
 }
 
-////////////////////////////////////////////
-bool DKRmlToRML::ClickIframe(DKEvent* event)
+/////////////////////////////////////////////
+bool DKRmlToRML::ClickIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -332,8 +332,8 @@ bool DKRmlToRML::ClickIframe(DKEvent* event)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKRmlToRML::MouseOverIframe(DKEvent* event)
+/////////////////////////////////////////////////
+bool DKRmlToRML::MouseOverIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();

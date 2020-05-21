@@ -12,12 +12,12 @@ class DKRmlToRML  : public DKObject
 public:
 	DKString processed;
 	bool HtmlToRml(const DKString& html, DKString& rml);
-	bool Hyperlink(DKEvent* event);
+	bool Hyperlink(DKEvents* event);
 	bool IndexToRml(const DKString& html, DKString& rml);
 	bool PostProcess(Rml::Core::Element* element);
-	static bool ResizeIframe(DKEvent* event);
-	bool ClickIframe(DKEvent* event);
-	bool MouseOverIframe(DKEvent* event);
+	static bool ResizeIframe(DKEvents* event);
+	bool ClickIframe(DKEvents* event);
+	bool MouseOverIframe(DKEvents* event);
 	bool Encode(std::string& data);
 	bool TidyFile(const DKString& in, DKString& out);
 };
