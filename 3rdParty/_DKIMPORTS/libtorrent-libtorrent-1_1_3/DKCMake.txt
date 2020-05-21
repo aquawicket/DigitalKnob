@@ -1,5 +1,5 @@
 ### DEPENDS ###
-DKDEPEND(boost_1_57_0 Boost_System)
+DKDEPEND(boost_1_72_0 Boost_System)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 
