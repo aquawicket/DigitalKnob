@@ -20,8 +20,8 @@ bool DKEventTarget::Init()
 	return true;
 }
 
-///////////////////////////////////////////
-bool DKEventTarget::OnEvent(DKEvent* event)
+////////////////////////////////////////////
+bool DKEventTarget::OnEvent(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	//DKWARN("DKEventTarget::OnEvent(DKEvent* event)\n");
@@ -105,7 +105,7 @@ int DKEventTarget::addEventListner(duk_context* ctx)
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if(!DKEvent::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
+	if(!DKEvents::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
 	return true;
 }
 
@@ -119,7 +119,7 @@ int DKEventTarget::removeEventListner(duk_context* ctx)
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if(!DKEvent::RemoveEvent(id, type, jsreturn)){ return false; }
+	if(!DKEvents::RemoveEvent(id, type, jsreturn)){ return false; }
 	return true;
 }
 

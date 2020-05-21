@@ -10,7 +10,7 @@ class DKEventTarget : public DKObjectT<DKEventTarget>
 {
 public:
 	bool Init();
-	static bool OnEvent(DKEvent* event);
+	static bool OnEvent(DKEvents* event);
 
 	static int addEventListner(duk_context* ctx);
 	static int removeEventListner(duk_context* ctx);

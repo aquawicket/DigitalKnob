@@ -384,8 +384,8 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	return true;
 }
 
-///////////////////////////////////////
-bool DKDuktape::OnEvent(DKEvent* event)
+////////////////////////////////////////
+bool DKDuktape::OnEvent(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -456,7 +456,7 @@ bool DKDuktape::OnEvent(DKEvent* event)
 bool DKDuktape::Reload()
 {
 	DKDEBUGFUNC();
-	DKEvent::events.clear();
+	DKEvents::events.clear();
 	filelist.clear();
 
 	DKStringArray list;

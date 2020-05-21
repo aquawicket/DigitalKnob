@@ -147,7 +147,7 @@ int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
 		replace(jsreturn, "function ", "");
 	}
 
-	DKEvent::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
+	DKEvents::AddEvent(id, type, jsreturn, &DKDuktape::OnEvent, DKDuktape::Get());
 	return 1;
 }
 
@@ -299,7 +299,7 @@ int DKDuktapeJS::_DKRemoveEvent(duk_context* ctx)
 		replace(jsreturn, "function ", "");
 	}
 
-	if(!DKEvent::RemoveEvent(id, type, jsreturn)){ return 0; }
+	if(!DKEvents::RemoveEvent(id, type, jsreturn)){ return 0; }
 	return 1;
 }
 
@@ -309,7 +309,7 @@ int DKDuktapeJS::_DKRemoveEvents(duk_context* ctx)
 	//variable can be id or jsreturn
 	DKString variable = duk_to_string(ctx, 0);
 	replace(variable, "function ", ""); //jsreturn type
-	if(!DKEvent::RemoveEvents(variable)){ return 0; } //sending id or jsreturn
+	if(!DKEvents::RemoveEvents(variable)){ return 0; } //sending id or jsreturn
 	return 1;
 }
 
@@ -330,11 +330,11 @@ int DKDuktapeJS::_DKSendEvent(duk_context* ctx)
 	}
 
 	if(!param.empty()){
-		DKEvent::SendEvent(id, type, param);
+		DKEvents::SendEvent(id, type, param);
 		return 1;
 	}
 
-	DKEvent::SendEvent(id, type, "");
+	DKEvents::SendEvent(id, type, "");
 	return 1;
 }
 
@@ -384,7 +384,7 @@ int DKDuktapeJS::CallFunc(duk_context* ctx)
 ///////////////////////////////////////
 int DKDuktapeJS::ClearEvents(duk_context* ctx)
 {
-	DKEvent::events.clear();
+	DKEvents::events.clear();
 	return 1;
 }
 
@@ -515,13 +515,13 @@ int DKDuktapeJS::GetDate(duk_context* ctx)
 int DKDuktapeJS::GetEvents(duk_context* ctx)
 {
 	DKString list;
-	for(unsigned int i = 0; i < DKEvent::events.size(); ++i){
+	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
 			
-		list += DKEvent::events[i]->GetId();
+		list += DKEvents::events[i]->GetId();
 		list += " : ";
-		list += DKEvent::events[i]->GetType();
+		list += DKEvents::events[i]->GetType();
 		list += " : ";
-		list += DKEvent::events[i]->GetJSReturn();
+		list += DKEvents::events[i]->GetJSReturn();
 		list += ",";
 	}
 
@@ -839,7 +839,7 @@ int DKDuktapeJS::MessageBox(duk_context* ctx)
 		value = arry[2];
 	}
 
-	if(value.empty()){ DKEvent::SendEvent("DKMessage.html", cmd, id+","+type+","+message); return 0; }
+	if(value.empty()){ DKEvents::SendEvent("DKMessage.html", cmd, id+","+type+","+message); return 0; }
 	if(same(value,"CANCEL")){ return 0; }
 	duk_push_string(ctx, value.c_str());
 	return 1;
