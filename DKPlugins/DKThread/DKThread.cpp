@@ -36,7 +36,7 @@ void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func)
 		dkThreadPool->schedule(func);
 		tdata.push_back("");
 		names.push_back(name);
-		DKEvent::SendEvent("DKThreadPoolDlg.html", "Update", "");
+		DKEvents::SendEvent("DKThreadPoolDlg.html", "Update", "");
 		return;
 	}
 	func();
@@ -49,7 +49,7 @@ void DKThreadPool::Queue(const DKString& name, boost::function<void ()> func, co
 		dkThreadPool->schedule(func);
 		tdata.push_back(data);
 		names.push_back(name);
-		DKEvent::SendEvent("DKThreadPoolDlg.html", "Update", "");
+		DKEvents::SendEvent("DKThreadPoolDlg.html", "Update", "");
 		return;
 	}
 	func();
@@ -63,6 +63,6 @@ void DKThreadPool::Process()
 	if(dkThreadPool->active() + dkThreadPool->pending() != names.size()){
 		names.erase(names.begin());
 		tdata.erase(tdata.begin());
-		DKEvent::SendEvent("DKThreadPoolDlg.html", "Update", "");
+		DKEvents::SendEvent("DKThreadPoolDlg.html", "Update", "");
 	}
 }
