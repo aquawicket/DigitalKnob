@@ -300,7 +300,7 @@ bool DKCef::Init()
 		//DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
-	DKEvent::AddSendEventFunc(&DKCef::SendEvent, this);
+	DKEvents::AddSendEventFunc(&DKCef::SendEvent, this);
 	DKClass::RegisterFunc("DKCef::NewBrowser", &DKCef::NewBrowser, this);
 	return true;
 }
@@ -887,7 +887,7 @@ void DialogCallback::OnFileDialogDismissed(int selected_accept_filter, const std
 	}
 
 	replace(files, "\\", "\\\\");
-	DKEvent::SendEvent("window", "DKCef_OnFileDialogDismissed", files);
+	DKEvents::SendEvent("window", "DKCef_OnFileDialogDismissed", files);
 }
 
 
