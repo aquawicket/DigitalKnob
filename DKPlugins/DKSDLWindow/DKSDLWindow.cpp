@@ -650,7 +650,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 				dkwindowdow->winX = event->window.data1;
 				dkwindowdow->winY = event->window.data2;
 				dkwindowdow->Process();
-				DKEvent::SendEvent("window", "move", toString(dkwindowdow->winX)+","+toString(dkwindowdow->winY));
+				DKEvents::SendEvent("window", "move", toString(dkwindowdow->winX)+","+toString(dkwindowdow->winY));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_RESIZED:{
@@ -658,7 +658,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 				dkwindowdow->width = event->window.data1;
 				dkwindowdow->height = event->window.data2;
 				dkwindowdow->Process();
-				DKEvent::SendEvent("window", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
+				DKEvents::SendEvent("window", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_SIZE_CHANGED:{
@@ -666,19 +666,19 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event)
 				dkwindowdow->width = event->window.data1;
 				dkwindowdow->height = event->window.data2;
 				dkwindowdow->Process();
-				DKEvent::SendEvent("window", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
+				DKEvents::SendEvent("window", "resize", toString(dkwindowdow->width)+","+toString(dkwindowdow->height));
 				return 1;
 			}
 			case SDL_WINDOWEVENT_MINIMIZED:{
-				DKEvent::SendEvent("window", "minimize", "");
+				DKEvents::SendEvent("window", "minimize", "");
 				return 1;
 			}
 			case SDL_WINDOWEVENT_MAXIMIZED:{
-				DKEvent::SendEvent("window", "maximize", "");
+				DKEvents::SendEvent("window", "maximize", "");
 				return 1;
 			}
 			case SDL_WINDOWEVENT_RESTORED:{
-				DKEvent::SendEvent("window", "restore", "");
+				DKEvents::SendEvent("window", "restore", "");
 				return 1;
 			}							   
 		}
@@ -714,34 +714,34 @@ bool DKSDLWindow::handle(SDL_Event *event)
 			if(event->motion.x != last_mouseX || event->motion.y != last_mouseY){
 				last_mouseX = event->motion.x;
 				last_mouseY = event->motion.y;
-				DKEvent::SendEvent("window", "mousemove", toString(last_mouseX)+","+toString(last_mouseY)+","+toString(winX+last_mouseX)+","+toString(winY+last_mouseY));
+				DKEvents::SendEvent("window", "mousemove", toString(last_mouseX)+","+toString(last_mouseY)+","+toString(winX+last_mouseX)+","+toString(winY+last_mouseY));
 			}
             return false; //allow event to continue
 		}
                 
 		case SDL_MOUSEBUTTONDOWN:{
-			DKEvent::SendEvent("window", "mousedown", toString(event->button.button));
+			DKEvents::SendEvent("window", "mousedown", toString(event->button.button));
             return false; //allow event to continue
 		}
 
         case SDL_MOUSEBUTTONUP:{
-			DKEvent::SendEvent("window", "mouseup", toString(event->button.button));
+			DKEvents::SendEvent("window", "mouseup", toString(event->button.button));
 			if(event->button.button == 3){
-				DKEvent::SendEvent("window", "contextmenu", toString(event->button.button));
+				DKEvents::SendEvent("window", "contextmenu", toString(event->button.button));
 			}
 			else{
 				if(event->button.clicks == 2){
-					DKEvent::SendEvent("window", "dblclick", toString(event->button.button));
+					DKEvents::SendEvent("window", "dblclick", toString(event->button.button));
 				}
 				else{
-					DKEvent::SendEvent("window", "click", toString(event->button.button));
+					DKEvents::SendEvent("window", "click", toString(event->button.button));
 				}
 			}
             return false; //allow event to continue
 		}
 
         case SDL_MOUSEWHEEL:{
-			DKEvent::SendEvent("window", "wheel", toString(event->wheel.y));
+			DKEvents::SendEvent("window", "wheel", toString(event->wheel.y));
             return false; //allow event to continue
 		}
 
@@ -750,28 +750,28 @@ bool DKSDLWindow::handle(SDL_Event *event)
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
-					DKEvent::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym]));
+					DKEvents::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym]));
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
-					DKEvent::SendEvent("window", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym]));
+					DKEvents::SendEvent("window", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym]));
 				}
 				else{
-					DKEvent::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //lowercase
+					DKEvents::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //lowercase
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
-				DKEvent::SendEvent("window", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+				DKEvents::SendEvent("window", "keypress", toString(sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
 			}
 			else{
-				DKEvent::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
+				DKEvents::SendEvent("window", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
 			}
-			DKEvent::SendEvent("window", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
+			DKEvents::SendEvent("window", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
 			return false; //allow event to continue
 		}
 		
 		case SDL_KEYUP:{
 			if(event->key.keysym.sym == 0){ return true; }
-			DKEvent::SendEvent("window", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
+			DKEvents::SendEvent("window", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
             return false; //allow event to continue
 		}
 	}
