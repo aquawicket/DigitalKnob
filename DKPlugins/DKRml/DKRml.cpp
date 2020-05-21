@@ -426,8 +426,8 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 void DKRml::ProcessEvent(Rml::Core::Event& event)
 {
 	//DKDEBUGFUNC(event);
-	if(!event.GetCurrentElement()){return;} //MUST!
-	if(!event.GetTargetElement()){return;} //MUST!
+	if(!event.GetCurrentElement()){return;} //MUST BE VALID!
+	if(!event.GetTargetElement()){return;} //MUST BE VALID!
 
 	Rml::Core::Element* element = event.GetCurrentElement();
 	DKString address = elementToAddress(element);
@@ -439,7 +439,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 
 	/*
 	//Send this event back to duktape to be processed in javascript
-	DKString code = "EventFromCPP('"+address+"',"+evnt+");";
+	DKString code = "EventFromCPP('"+address+"',"+ev nt+");";
 	DKString rval;
 	DKDuktape::Get()->RunDuktape(code, rval);
 	if(!rval.empty()){

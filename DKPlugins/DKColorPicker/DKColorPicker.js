@@ -8,9 +8,11 @@ function DKColorPicker_Init()
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
-	DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
+	//DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
+	
+	document.getElementById("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_OnEvent);
 }
 
 ////////////////////////////
@@ -26,7 +28,9 @@ function DKColorPicker_End()
 function DKColorPicker_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	console.log("event.currentTarget: "+event.currentTarget);
+	console.log("event.type: "+event.type);
+	//console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");

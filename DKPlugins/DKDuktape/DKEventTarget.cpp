@@ -48,10 +48,10 @@ bool DKEventTarget::OnEvent(DKEvent* event)
 
 	DKString json;
 	if(value.empty()){
-		json = "{\"id\": \""+id+"\",\"type\": \""+type+"\"}";
+		json = "{\"currentTarget\": \""+id+"\",\"type\": \""+type+"\"}";
 	}
 	else{
-		json = "{\"id\": \""+id+"\",\"type\": \""+type+"\",\"value\": \""+value+"\"}";
+		json = "{\"currentTarget\": \""+id+"\",\"type\": \""+type+"\",\"value\": \""+value+"\"}";
 	}
 	duk_push_string(ctx, json.c_str());
 	duk_json_decode(ctx, -1);
