@@ -4,7 +4,7 @@ DKDEPEND(openssl-1.0.2h-vs2015)
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3) ## find an online link
+DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz libtorrent-libtorrent-1_1_3)
 ## DKINSTALL(${DKWEB}/Download/libtorrent-libtorrent-1_1_3.zip libtorrent-libtorrent-1_1_3)
 DKSET(TORRENT ${3RDPARTY}/libtorrent-libtorrent-1_1_3)
 
