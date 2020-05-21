@@ -1,19 +1,16 @@
 ### DEPENDS ###
-DKDEPEND(boost_1_57_0 Boost_System)
-DKDEPEND(boost_1_57_0 Boost_Filesystem)
+DKDEPEND(boost_1_72_0 Boost_System)
 DKDEPEND(openssl-1.0.2h-vs2015)
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/libtorrent-master.zip libtorrent-master) ## find an online link
-## DKINSTALL(${DKWEB}/Download/Libs/libtorrent-master.zip libtorrent-master)
-DKSET(TORRENT ${3RDPARTY}/libtorrent-master)
+DKINSTALL(https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1_3/libtorrent-rasterbar-1.1.3.tar.gz libtorrent-rasterbar-1.1.3)
+## DKINSTALL(${DKWEB}/Download/libtorrent-rasterbar-1.1.3.zip libtorrent-rasterbar-1.1.3)
+DKSET(TORRENT ${3RDPARTY}/libtorrent-rasterbar-1.1.3)
 
 
 ### LINK ###
-DKINCLUDE(${TORRENT})
-DKINCLUDE(${TORRENT}/examples)
-DKINCLUDE(${TORRENT}/${OS}/Release)
+DKINCLUDE(${TORRENT}/include)
 WIN_DEBUG_LIB(${TORRENT}/${OS}/Debug/torrent.lib)
 WIN_RELEASE_LIB(${TORRENT}/${OS}/Release/torrent.lib)
 MAC_DEBUG_LIB(${TORRENT}/${OS}/lib/${DEBUG}/libtorrent.a)
@@ -29,28 +26,28 @@ ANDROID_RELEASE_LIB(${TORRENT}/${OS}/Release/obj/local/armeabi-v7a/libtorrent.a)
 ### COMPILE ###
 DKSETPATH(${TORRENT}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DTEST /DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON -DOPENSSL_ROOT_DIR=${OPENSSL} -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/win32/lib ${TORRENT})
-WIN32_VS_DEBUG(libtorrent-master libtorrent.sln torrent-rasterbar)
-WIN32_VS_RELEASE(libtorrent-master libtorrent.sln torrent-rasterbar)
+WIN32_VS_DEBUG(libtorrent-rasterbar-1.1.3 libtorrent.sln torrent)
+WIN32_VS_RELEASE(libtorrent-rasterbar-1.1.3 libtorrent.sln torrent)
 
 DKSETPATH(${TORRENT}/${OS})
 WIN64_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A x64 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${TORRENT})
 WIN64_VS_DEBUG(libtorrent-master libtorrent.sln torrent)
-WIN64_VS_RELEASE(libtorrent-master libtorrent.sln torrent)
+WIN64_VS_RELEASE(libtorrent-rasterbar-1.1.3 libtorrent.sln torrent)
 
 DKSETPATH(${TORRENT}/${OS})
 MAC64_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_OSX_ARCHITECTURES=x86_64 ${TORRENT})
-MAC64_XCODE_DEBUG(libtorrent-master libtorrent)
-MAC64_XCODE_RELEASE(libtorrent-master libtorrent)
+MAC64_XCODE_DEBUG(libtorrent-rasterbar-1.1.3 libtorrent)
+MAC64_XCODE_RELEASE(libtorrent-rasterbar-1.1.3 libtorrent)
 
 DKSETPATH(${TORRENT}/${OS})
 IOS_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=OS ${TORRENT})
-IOS_XCODE_DEBUG(libtorrent-master libtorrent)
-IOS_XCODE_RELEASE(libtorrent-master libtorrent)
+IOS_XCODE_DEBUG(libtorrent-rasterbar-1.1.3 libtorrent)
+IOS_XCODE_RELEASE(libtorrent-rasterbar-1.1.3 libtorrent)
 
 DKSETPATH(${TORRENT}/${OS})
 IOSSIM_COMMAND(${CMAKE_COMMAND} -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/iOS.cmake -DIOS_PLATFORM=SIMULATOR ${TORRENT})
-IOSSIM_XCODE_DEBUG(libtorrent-master libtorrent)
-IOSSIM_XCODE_RELEASE(libtorrent-master libtorrent)
+IOSSIM_XCODE_DEBUG(libtorrent-rasterbar-1.1.3 libtorrent)
+IOSSIM_XCODE_RELEASE(libtorrent-rasterbar-1.1.3 libtorrent)
 
 DKSETPATH(${TORRENT}/${OS}/${DEBUG})
 LINUX_DEBUG_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
@@ -60,5 +57,5 @@ DKSETPATH(${TORRENT}/${OS}/${RELEASE})
 LINUX_RELEASE_COMMAND(${CMAKE_COMMAND} -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_C_FLAGS=-fPIC ${TORRENT})
 LINUX_RELEASE_COMMAND(make torrent)
 
-ANDROID_NDK_DEBUG(libtorrent-master)
-ANDROID_NDK_RELEASE(libtorrent-master)
+ANDROID_NDK_DEBUG(libtorrent-rasterbar-1.1.3)
+ANDROID_NDK_RELEASE(libtorrent-rasterbar-1.1.3)
