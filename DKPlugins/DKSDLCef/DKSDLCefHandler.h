@@ -64,7 +64,7 @@ public:
 	void CloseAllBrowsers(bool force_close);
 	bool DoClose(CefRefPtr<CefBrowser> browser);
 	void DoFrame();
-	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect);
+	void GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect);
 	bool IsClosing() const { return is_closing_; }
 	void OnAfterCreated(CefRefPtr<CefBrowser> browser);
 	void OnBeforeClose(CefRefPtr<CefBrowser> browser);

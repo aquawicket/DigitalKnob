@@ -106,19 +106,24 @@ void DKSDLCefHandler::DoFrame()
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
+void DKSDLCefHandler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect& rect)
 {
 	//DKDEBUGFUNC(browser, "CefRect&");
-	if(dkCef->dkBrowsers.size() < 1){ return true; }
+	if(dkCef->dkBrowsers.size() < 1){ //No Browsers
+		DKERROR("DKSDLCefHandler::GetViewRect: No browsers found.");
+		return; 
+	}
 
 	unsigned int i;
 	for(i=0; i<dkCef->dkBrowsers.size(); i++){
 		if(dkCef->dkBrowsers[i].browser->IsSame(browser)){ break; } //found
-		if(i >= dkCef->dkBrowsers.size()-1){ return true; } //not found
+		if(i >= dkCef->dkBrowsers.size()-1){ //not found
+			DKERROR("DKSDLCefHandler::GetViewRect: browser not found.");
+			return; 
+		} 
 	}
 	rect = CefRect(0, 0, dkCef->dkBrowsers[i].width, dkCef->dkBrowsers[i].height);
 	//DKINFO("DKSDLCefHandler::GetViewRect(): "+dkCef->dkBrowsers[i].id+": 0,0,"+toString(dkCef->dkBrowsers[i].width)+","+toString(dkCef->dkBrowsers[i].height)+"\n");
-	return true;
 }
 
 //////////////////////////////////////////////////////////////////
@@ -172,7 +177,7 @@ void DKSDLCefHandler::OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefP
 	data += params->GetLinkUrl();
 	//DKINFO("DKSDLCefHandler::OnBeforeContextMenu(): data = "+data+"\n");
 
-	DKEvent::SendEvent("window", "DKCef_ContextMenu", data);
+	DKEvents::SendEvent("window", "DKCef_ContextMenu", data);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,7 +298,7 @@ void DKSDLCefHandler::OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool
 		dkCef->fullscreen = false;
 		//SDL_SetWindowFullscreen(dkSdlWindow->sdlwin, 0);
 	}
-	DKEvent::SendEvent("window", "DKCef_OnFullscreen", toString(fullscreen));
+	DKEvents::SendEvent("window", "DKCef_OnFullscreen", toString(fullscreen));
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -301,7 +306,7 @@ void DKSDLCefHandler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 {
 	DKDEBUGFUNC(browser, frame, httpStatusCode);
 	if(frame->IsMain()){
-		DKEvent::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
+		DKEvents::SendEvent("window", "DKCef_OnLoadEnd", toString(httpStatusCode));
 	}
 
 	//FIXME - causes facebook to hang
@@ -335,9 +340,9 @@ void DKSDLCefHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFr
 		"<h2>Failed to load URL "
 		<< std::string(failedUrl) << " with error " << std::string(errorText)
 		<< " (" << errorCode << ").</h2></body></html>";
-	frame->LoadString(ss.str(), failedUrl);
+	//frame->LoadString(ss.str(), failedUrl); //FIXME
 	
-	DKEvent::SendEvent("window", "DKCef_OnLoadError", toString(errorCode));
+	DKEvents::SendEvent("window", "DKCef_OnLoadError", toString(errorCode));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -346,7 +351,7 @@ void DKSDLCefHandler::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool i
 	DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
 	for(unsigned int i=0; i<dkCef->dkBrowsers.size(); ++i){
 		if(browser->GetIdentifier() == dkCef->dkBrowsers[i].browser->GetIdentifier()){
-			DKEvent::SendEvent("window", "DKCef_OnLoadingStateChange", toString(i));
+			DKEvents::SendEvent("window", "DKCef_OnLoadingStateChange", toString(i));
 			return;
 		}
 	}
@@ -465,7 +470,7 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 	if(event.type == KEYEVENT_RAWKEYDOWN){
 		//DKINFO("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
 		//#ifdef WIN32
-		DKEvent::SendEvent("window", "keydown", toString(event.windows_key_code));
+		DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code));
 		//#else
 		//			DKEvent::SendEvent("window", "keydown", toString(event.character));
 		//#endif
@@ -478,7 +483,7 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 	}
 	if(event.type == KEYEVENT_CHAR){
 		//DKINFO("OnPreKeyEvent(): KeyChar: "+toString(event.character)+"\n");
-		DKEvent::SendEvent("window", "keypress", toString(event.character));
+		DKEvents::SendEvent("window", "keypress", toString(event.character));
 	}
 
 	return false;
