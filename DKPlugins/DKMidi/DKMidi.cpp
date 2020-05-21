@@ -143,9 +143,9 @@ void DKMidi::midiCallback(double deltatime, std::vector<unsigned char>* message,
 	*/
 
 	if(message->size() > 2){
-		DKEvent::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+","+toString((int)message->at(2)) );
+		DKEvents::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+","+toString((int)message->at(2)) );
 	}
 	else{
-		DKEvent::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+",0");
+		DKEvents::SendEvent("window", "midi", toString((int)message->at(0))+","+toString((int)message->at(1))+",0");
 	}
 }
