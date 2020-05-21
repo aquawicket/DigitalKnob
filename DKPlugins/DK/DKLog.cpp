@@ -148,8 +148,8 @@ void Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 
 	if(log_gui_console && DKUtil::InMainThread() && DKApp::active){
-		DKEvent::SendEvent("DKLog", "level", toString(lvl));
-		DKEvent::SendEvent("DKLog", "string", string);
+		DKEvents::SendEvent("DKLog", "level", toString(lvl));
+		DKEvents::SendEvent("DKLog", "string", string);
 	}
 
 	//On errors show the stack trace or open a message box
