@@ -4,8 +4,8 @@
 #include <string.h>
 #include <errno.h>
 #include <SDL.h>
-#include "SDL2_gifToSurface.h"
-#include "SDL2_gif.h"
+#include "CEV_gifToSurface.h"
+#include "CEV_gif.h"
 
 
 

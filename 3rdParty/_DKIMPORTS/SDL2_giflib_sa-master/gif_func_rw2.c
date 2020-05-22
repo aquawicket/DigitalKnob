@@ -3,10 +3,10 @@
 #include <string.h>
 #include <errno.h>
 #include <SDL.h>
-#include "SDL2_gif.h"
-#include "SDL2_gifRwtypes.h"
-#include "SDL2_gifDecomp.h"
-#include "SDL2_gifToSurface.h"
+#include "CEV_gif.h"
+#include "CEV_gifRwtypes.h"
+#include "CEV_gifDecomp.h"
+#include "CEV_gifToSurface.h"
 
 
 
