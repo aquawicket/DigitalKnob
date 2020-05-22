@@ -22,6 +22,7 @@ DKSET(DKCMAKE ${DIGITALKNOB}/DKCMake)
 DKSET(DKPLUGINS ${DIGITALKNOB}/DKPlugins)
 DKSET(3RDPARTY ${DIGITALKNOB}/3rdParty)
 DKSET(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
+DKSET(DKDOWNLOAD ${DIGITALKNOB}/Download)
 DKSET(DKWEB http://127.0.0.1)
 
 ########### Determine the OS we are building for ####################

@@ -8,6 +8,7 @@ DKDEPEND(freetype-2.5.5)
 ##FILE(MAKE_DIRECTORY ${3RDPARTY}/RmlUi-master)
 ##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
 DKINSTALL(https://github.com/aquawicket2/RmlUi/archive/master.zip RmlUi-master)
+DKRENAME(${DKDOWNLOAD}/master.zip RmlUi-master.zip)
 ## DKINSTALL(${DKWEB}/Download/Libs/RmlUi-master.zip RmlUi-master)
 DKSET(RMLUI ${3RDPARTY}/RmlUi-master)
 
