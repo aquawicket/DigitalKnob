@@ -4,36 +4,36 @@
 #include <string.h>
 #include <errno.h>
 #include <SDL.h>
-#include "CEV_gifRwtypes.h"
-#include "CEV_gifDecomp.h"
+//#include "CEV_gifRwtypes.h"
+//#include "CEV_gifDecomp.h"
 #include "CEV_gifToSurface.h"
 #include "CEV_gif.h"
 
 
 
 
-SDL_GifAnim * SDL_GIFAnimLoad(const char* filename, SDL_Renderer *renderer)
+CEV_GifAnim * SDL_GIFAnimLoad(const char* filename, SDL_Renderer *renderer)
 {/* TODO (cedric#1#): check errors / fitness */
     int i;
     uint8_t * pixels        = NULL;
-    CEV_gifFile *gif        = NULL;
-    SDL_GifAnim *anim       = NULL;
+    CEV_gifFile *gif        = NULL; //FIXME
+    CEV_GifAnim *anim       = NULL;
     SDL_Texture *newTexture = NULL;
 
     /**perform compatibiliy control**/
     /* TODO (cedric#1#): à implémenter */
 
 
-    anim = malloc(sizeof(SDL_GifAnim));
+    anim = malloc(sizeof(CEV_GifAnim));
     if (!anim)
         goto err_exit;
 
-    readWriteErr = 0;
+    readWriteErr = 0; //FIXME
 
     /*extracting datas from gif file*/
-    gif = CEV_LoadGIF(filename);
+    gif = CEV_LoadGIF(filename); //FIXME
 
-    if(!gif)
+    if(!gif) //FIXME
         goto err_1;
 
     /*CREATING MAIN TEXTURE AKA the user one*/
@@ -125,23 +125,23 @@ err_exit :
     return NULL;
 }
 
-SDL_GifAnim * SDL_GIFAnimLoad_RW(SDL_RWops* rwops, SDL_Renderer *renderer)
+CEV_GifAnim * SDL_GIFAnimLoad_RW(SDL_RWops* rwops, SDL_Renderer *renderer)
 {/* TODO (cedric#1#): check errors / fitness */
     int i;
     uint8_t * pixels        = NULL;
-    CEV_gifFile *gif        = NULL;
-    SDL_GifAnim *anim       = NULL;
+    CEV_gifFile *gif        = NULL; //FIXME
+    CEV_GifAnim *anim       = NULL;
     SDL_Texture *newTexture = NULL;
 
     /**perform compatibiliy control**/
     /* TODO (cedric#1#): à implémenter */
 
 
-    anim = malloc(sizeof(SDL_GifAnim));
+    anim = malloc(sizeof(CEV_GifAnim));
     if (!anim)
         goto err_exit;
 
-    readWriteErr = 0;
+    readWriteErr = 0; //FIXME
 
     /*extracting datas from gif file*/
     gif = CEV_LoadGIF_RW(rwops);
@@ -238,43 +238,43 @@ err_exit :
     return NULL;
 }
 
-char *SDL_GIFComment(SDL_GifAnim *anim)
+char *SDL_GIFComment(CEV_GifAnim *anim)
 {
     return anim->status.comment;
 }
 
 
-char *SDL_GIFVersion(SDL_GifAnim *anim)
+char *SDL_GIFVersion(CEV_GifAnim *anim)
 {
     return anim->status.version;
 }
 
 
-char *SDL_GIFsignature(SDL_GifAnim *anim)
+char *SDL_GIFsignature(CEV_GifAnim *anim)
 {
     return anim->status.signature;
 }
 
 
-SDL_Texture *SDL_GIFTexture(SDL_GifAnim *anim)
+SDL_Texture *SDL_GIFTexture(CEV_GifAnim *anim)
 {
     return anim->display.surface;
 }
 
 
-int SDL_GIFFrameNum(SDL_GifAnim *anim)
+int SDL_GIFFrameNum(CEV_GifAnim *anim)
 {
     return anim->status.imgNum;
 }
 
 
-void SDL_GIFNextFrame(SDL_GifAnim *anim)
+void SDL_GIFNextFrame(CEV_GifAnim *anim)
 {
     CEV_Blit(anim);
 }
 
 
-void SDL_GIFSpeedSet(SDL_GifAnim *anim, int num, int speed)
+void SDL_GIFSpeedSet(CEV_GifAnim *anim, int num, int speed)
 {
     int i;
 
@@ -290,7 +290,7 @@ void SDL_GIFSpeedSet(SDL_GifAnim *anim, int num, int speed)
 }
 
 
-void SDL_GIFLoopMode(SDL_GifAnim *anim, unsigned int loopMode)
+void SDL_GIFLoopMode(CEV_GifAnim *anim, unsigned int loopMode)
 {
     if(loopMode > GIF_STOP)
         return;/*nothing to be done*/
@@ -313,7 +313,7 @@ void SDL_GIFLoopMode(SDL_GifAnim *anim, unsigned int loopMode)
     anim->status.time    = SDL_GetTicks();  /*restart from now*/
 }
 
-void SDL_GIFLoopReset(SDL_GifAnim *anim)
+void SDL_GIFLoopReset(CEV_GifAnim *anim)
 {
     switch (anim->status.loopMode)
     {
@@ -339,7 +339,7 @@ void SDL_GIFLoopReset(SDL_GifAnim *anim)
 }
 
 
-char SDL_GIFAnimAuto(SDL_GifAnim *anim)
+char SDL_GIFAnimAuto(CEV_GifAnim *anim)
 {
     char sts = 0;
 
@@ -368,7 +368,7 @@ char SDL_GIFAnimAuto(SDL_GifAnim *anim)
 }
 
 
-void SDL_GIFReverse(SDL_GifAnim *anim)
+void SDL_GIFReverse(CEV_GifAnim *anim)
 {
     switch (anim->status.loopMode)
     {
@@ -398,7 +398,7 @@ void SDL_GIFReverse(SDL_GifAnim *anim)
 }
 
 
-void SDL_GIFAnimFree(SDL_GifAnim *anim)
+void SDL_GIFAnimFree(CEV_GifAnim *anim)
 {
     int i;
 
@@ -412,13 +412,13 @@ void SDL_GIFAnimFree(SDL_GifAnim *anim)
 }
 
 
-char SDL_GifLoopStatus(SDL_GifAnim* anim)
+char SDL_GifLoopStatus(CEV_GifAnim* anim)
 {
     return !(anim->status.loopDone || (anim->status.loopMode==GIF_STOP));
 }
 
 
-char SDL_GifMethod(SDL_GifAnim* anim, uint8_t num)
+char SDL_GifMethod(CEV_GifAnim* anim, uint8_t num)
 {
     if(num>anim->status.imgNum-1)
         num = 0;
@@ -427,7 +427,7 @@ char SDL_GifMethod(SDL_GifAnim* anim, uint8_t num)
 }
 
 
-void SDL_GifMethodSet(SDL_GifAnim* anim, int num, uint8_t method)
+void SDL_GifMethodSet(CEV_GifAnim* anim, int num, uint8_t method)
 {
     int i;
 

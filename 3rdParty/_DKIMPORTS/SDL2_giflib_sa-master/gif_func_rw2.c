@@ -4,8 +4,8 @@
 #include <errno.h>
 #include <SDL.h>
 #include "CEV_gif.h"
-#include "CEV_gifRwtypes.h"
-#include "CEV_gifDecomp.h"
+//#include "CEV_gifRwtypes.h"
+//#include "CEV_gifDecomp.h"
 #include "CEV_gifToSurface.h"
 
 

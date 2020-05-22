@@ -218,7 +218,7 @@ char CEV_IsInBox(int x, int y, const SDL_Rect *rect)
 
 
 
-char CEV_Blit(SDL_GifAnim *anim)
+char CEV_Blit(CEV_GifAnim *anim)
 {
 
     if(!anim->status.refresh)/*if not refresh only*/
@@ -301,7 +301,7 @@ char CEV_AddLim(int mode, int *val, int num)
 }
 
 
-void CEV_SelectNxt(SDL_GifAnim *anim)
+void CEV_SelectNxt(CEV_GifAnim *anim)
 {/*selects next frame to be displayed*/
 
     int *imgAct = &anim->status.imgAct;
@@ -379,7 +379,7 @@ void CEV_FitBoxInto(SDL_Rect *adapt , const SDL_Rect *ref)
 }
 
 
-char CEV_InitAnim(SDL_GifAnim * anim, CEV_gifFile* gif)
+char CEV_InitAnim(CEV_GifAnim * anim, CEV_gifFile* gif)
 {
     int i;
     SDL_Rect base = {0, 0, 0, 0};/*lazy me..*/
