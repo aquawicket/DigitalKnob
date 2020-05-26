@@ -67,8 +67,8 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 	return true;
 }
 
-/////////////////////////////////////////////
-bool DKRocketToRML::Hyperlink(DKEvent* event)
+//////////////////////////////////////////////
+bool DKRocketToRML::Hyperlink(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -295,8 +295,8 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKRocketToRML::ResizeIframe(DKEvent* event)
+/////////////////////////////////////////////////
+bool DKRocketToRML::ResizeIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -312,8 +312,8 @@ bool DKRocketToRML::ResizeIframe(DKEvent* event)
 	return true;
 }
 
-///////////////////////////////////////////////
-bool DKRocketToRML::ClickIframe(DKEvent* event)
+////////////////////////////////////////////////
+bool DKRocketToRML::ClickIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -329,8 +329,8 @@ bool DKRocketToRML::ClickIframe(DKEvent* event)
 	return true;
 }
 
-///////////////////////////////////////////////////
-bool DKRocketToRML::MouseOverIframe(DKEvent* event)
+////////////////////////////////////////////////////
+bool DKRocketToRML::MouseOverIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
