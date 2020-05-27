@@ -4,20 +4,19 @@
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
 html{
-	display: block;
 	font-family: "Times New Roman";
 	font-size: 130%;
 	overflow: auto;
-	/* overflow-x: scroll; */
-	/* overflow-y: scroll; */
 	height: 100%;
 	width: 100%;
 	top:0px;
 	left:0px;
 }
+
 head{
 	display:none;
 }
+
 body{
 	font-family: "Times New Roman";
 	/*font-size: 13em;*/
@@ -25,6 +24,7 @@ body{
 	margin: 8px;
 	display: block;
 }
+
 style{
 	display:none;
 }
@@ -32,18 +32,23 @@ style{
 title{
 	display:none;
 }
+
 option, div, tr{
 	display:block;
 }
+
 th{
 	font-weight: bold;
 }
+
 strong, b{
 	font-weight: bold;
 }
+
 i, cite, em, var, address{
 	font-style: italic;
 }
+
 p{
 	/* font-family: "Times New Roman"; */
 	display:block;
@@ -54,6 +59,7 @@ p{
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
 }
+
 h1{
 	display:block;
 	font-size: 2em;
@@ -65,6 +71,7 @@ h1{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 h2{
 	display:block;
 	font-size: 1.5em;
@@ -76,6 +83,7 @@ h2{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 h3{
 	display:block;
 	font-size: 1.17em;
@@ -87,6 +95,7 @@ h3{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 h4{
 	display:block;
 	margin-top: 1.33em;
@@ -97,6 +106,7 @@ h4{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 h5{
 	display:block;
 	font-size: 0.83em;
@@ -108,6 +118,7 @@ h5{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 h6{
 	display:block;
 	font-size: 0.67em;
@@ -119,6 +130,7 @@ h6{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
+
 ol{
 	display: block;
     /* list-style-type: decimal; */
@@ -131,6 +143,7 @@ ol{
 	padding-bottom: 40px;
     /* padding-inline-start: 40px; */
 }
+
 ul{
 	display: block;
     /* list-style-type: disc; */
@@ -143,14 +156,16 @@ ul{
     padding-bottom: 40px;
     /* padding-inline-start: 40px; */
 }
+
 li{
 	/* display: list-item; */
     /* text-align: -webkit-match-parent; */
 }
 
 
+
 /**********************************/
-/********  RmlUi elements  ********/
+/******  libRocket elements  ******/
 /**********************************/
 dataselect,
 dataselect selectvalue,
@@ -161,65 +176,46 @@ dataselect selectbox option{
 
 
 /* Buttons */
-@spritesheet buttons{
-	src: buttons.png;
-	button-left: 0px 0px 1px 21px;
-	button-center: 1px 0px 19px 21px;
-	button-right: 20px 0px 1px 21px;
-	button-hover-left: 21px 0px 1px 21px;
-	button-hover-center: 22px 0px 19px 21px;
-	button-hover-right: 41px 0px 1px 21px;
-	button-active-left: 42px 0px 1px 21px;
-	button-active-center: 43px 0px 19px 21px;
-	button-active-right: 62px 0px 1px 21px;
-}
 button{
 	color: black;
 	width: 50px;
+	/* height: 20px; */
+	/* padding-top:2px; */
 	text-align: center;
-	padding: 1px 6px;
-	border-width: 2px;
-	decorator: tiled-horizontal(button-left, button-center, button-right);
+	
+	background-decorator: tiled-horizontal;
+	background-left-image: buttons.png 0px 0px 1px 21px;
+	background-center-image: buttons.png 1px 0px 20px 21px;
+	background-right-image: buttons.png 20px 0px 21px 21px;
 }
+
 button:hover{
-	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
+	background-left-image: buttons.png 21px 0px 22px 21px;
+	background-center-image: buttons.png 22px 0px 41px 21px;
+	background-right-image: buttons.png 41px 0px 42px 21px;
 }
+
 button:active{
-	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
-}
-input.button{
-	color: black;
-	width: 50px;
-	text-align: center;
-	padding: 1px 6px;
-	border-width: 2px;
-	decorator: tiled-horizontal(button-left, button-center, button-right);
-}
-input.button:hover{
-	decorator: tiled-horizontal(button-hover-left, button-hover-center, button-hover-right);
-}
-input.button:active{
-	decorator: tiled-horizontal(button-active-left, button-active-center, button-active-right);
+	background-left-image: buttons.png 42px 0px 43px 21px;
+	background-center-image: buttons.png 43px 0px 62px 21px;
+	background-right-image: buttons.png 62px 0px 63px 21px;
 }
 
 
 /* Checkboxes */
-@spritesheet checkboxs{
-	src: checkboxes.png;
-	checkbox: 0px 0px 12px 12px;
-	checkbox-active: 12px 0px 12px 12px;
-	checkbox-checked: 24px 0px 12px 12px;
-}
 input.checkbox{
 	width:12px;
 	height:12px;
-	decorator: image(checkbox);
+	icon-decorator: image;
+	icon-image: checkboxes.png 0px 0px 12px 12px;
 }
+
 input.checkbox:active{
-	decorator: image(checkbox-active);
+	icon-image: checkboxes.png 12px 0px 24px 12px;
 }
+
 input.checkbox:checked{
-	decorator: image(checkbox-checked);
+	icon-image: checkboxes.png 24px 0px 36px 12px;
 }
 
 
@@ -229,89 +225,94 @@ input.password{
 	height: 22px;
 	background-color:white;
 	color:black;
-	/*border-style: solid;*/
+	border-style: solid;
     border-width: 1px;
 	border-color: rgb(167,167,167);
 }
+
 input.password:focus{
 	border-color: rgb(123,157,212);
 }
 
 
 /* Radio Buttons */
-@spritesheet radios{
-	src: radios.png;
-	radio: 0px 0px 12px 12px;
-	radio-hover: 12px 0px 12px 12px;
-	radio-checked: 24px 0px 12px 12px;
-}
 input.radio{
 	width:12px;
 	height:12px;
-	decorator: image(radio);
+	icon-decorator: image;
+	icon-image: radios.png 0px 0px 12px 12px;
 }
 
 input.radio:hover{
-	decorator: image(radio-hover);
+	icon-image: radios.png 12px 0px 24px 12px;
 }
 
 input.radio:checked{
-	decorator: image(radio-checked);
+	icon-image: radios.png 24px 0px 36px 12px;
 }
 
 
 /* Ranges */
-@spritesheet rangetrack{
-	src: rangetrack.png;
-	rangetrack: 0px 0px 4px 4px;
-}
-@spritesheet rangebar{
-	src: rangebar.png;
-	rangebar: 0px 0px 11px 21px;
-}
 input.range{
 	width:150px;
-	/*height:150px;*/
+	height:150px;
 }
+
 input.range slidertrack{
 	height:4px;
 	width:4px;
 	margin-top:9px;
-	decorator: image(rangetrack);
+	background-decorator: image;
+	background-image: rangetrack.png 0px 0px 4px 4px;
 }
+
 input.range sliderbar{
 	width:11px;
 	height:21px;
-	decorator: image(rangebar);
+	background-decorator: image;
+	background-image: rangebar.png 0px 0px 11px 21px;
 }
 
+/* Position Ranges */
+input.range.position{
+	width:107px;
+	height:14px;
+}
 
-/* Resets */
-@spritesheet resets{
-	src: buttons.png;
-	reset-left: 0px 0px 1px 21px;
-	reset-center: 1px 0px 19px 21px;
-	reset-right: 20px 0px 1px 21px;
-	reset-hover-left: 21px 0px 1px 21px;
-	reset-hover-center: 22px 0px 19px 21px;
-	reset-hover-right: 41px 0px 1px 21px;
-	reset-active-left: 42px 0px 1px 21px;
-	reset-active-center: 43px 0px 19px 21px;
-	reset-active-right: 62px 0px 1px 21px;
+input.range.position slidertrack{
+	height:8px;
+	width:107px;
+	margin-top:3px;
+	background-decorator: image;
+	background-image: ../DKAudio/position_track.png 0px 0px 107px 8px;
 }
-input.reset{
-	color: black;
-	width: 50px;
-	text-align: center;
-	padding: 1px 6px;
-	border-width: 2px;
-	decorator: tiled-horizontal(reset-left, reset-center, reset-right);
+
+input.range.position sliderbar{
+	width:22px;
+	height:14px;
+	background-decorator: image;
+	background-image: ../DKAudio/position.png 0px 0px 22px 14px;
 }
-input.reset:hover{
-	decorator: tiled-horizontal(reset-hover-left, reset-hover-center, reset-hover-right);
+
+/* Volume Ranges */
+input.range.volume{
+	width:44px;
+	height:14px;
 }
-input.reset:active{
-	decorator: tiled-horizontal(reset-active-left, reset-active-center, reset-active-right);
+
+input.range.volume slidertrack{
+	height:8px;
+	width:44px;
+	margin-top:3px;
+	background-decorator: image;
+	background-image: ../DKAudio/volume_track.png 0px 0px 44px 8px;
+}
+
+input.range.volume sliderbar{
+	width:14px;
+	height:14px;
+	background-decorator: image;
+	background-image: ../DKAudio/volume.png 0px 0px 14px 14px;
 }
 
 
@@ -322,9 +323,11 @@ input.text{
 	min-height: 19px;
 	background-color:white;
 	color:black;
+	border-style: solid;
     border-width: 1px;
 	border-color: rgb(167,167,167);
 }
+
 input.text:focus{
 	border-color: rgb(123,157,212);
 }
@@ -336,57 +339,62 @@ textarea{
 	height: 50px;
 	background-color:white;
 	color:black;
-	/*border-style: solid;*/
+	border-style: solid;
     border-width: 1px;
 	border-color: rgb(167,167,167);
-	/*resize: none;*/
+	resize: none;
 }
+
 textarea:focus{
 	border-color: rgb(123,157,212);
 }
 
 
 /* Selects */
-@spritesheet selects{
-	src: select.png;
-	selectarrow: 0px 0px 6px 6px;
-}
 select{
 	background-color:white;
 	color:black;
 	width:80px;
 	height:20px;
-	/*border-style: solid;*/
+	border-style: solid;
     border-width: 1px;
 	border-color: rgb(167,167,167);
 }
+
 select:hover{
 	border-color: rgb(120,120,120);
 }
+
 select:focus{
 	border-color: rgb(123,157,212);
 }
+
 select selectvalue{
 	padding-left: 3px;
 }
+
 select selectarrow{
 	width: 6px;
 	height: 6px;
 	margin-top: 6px;
 	margin-right: 6px;
-	decorator: image(selectarrow);
+	icon-decorator: image;
+	icon-image: select.png 0px 0px 6px 6px;
 }
+
 select selectbox{
-	/*border-style: solid;*/
+	border-style: solid;
     border-left-width: 1px;
 	border-right-width: 1px;
 	border-bottom-width: 1px;
 	border-color: rgb(123,157,212);
 }
+
 select selectbox option{
 	padding-left: 3px;
 	background-color:white;
 }
+
 select selectbox option:hover{
 	background-color: rgb(123,157,212);
 	color:white;
@@ -394,105 +402,123 @@ select selectbox option:hover{
 
 
 /* Scrollbars */
-@spritesheet scrollbars{
-	src: scrollbars.png;
-	slidertrack: 51px 52px 17px 17px;
-	sliderbar: 0px 17px 17px 17px;
-	sliderbar-hover: 34px 17px 17px 17px;
-	sliderbar-active: 51px 17px 17px 17px;
-	sliderarrowdec: 17px 0px 17px 17px;
-	sliderarrowdec-hover: 34px 0px 17px 17px;
-	sliderarrowdec-active: 51px 0px 17px 17px;
-	sliderarrowinc: 17px 34px 17px 17px;
-	sliderarrowinc-hover: 34px 34px 17px 17px;
-	sliderarrowinc-active: 51px 34px 17px 17px;
-	
-	slidertrack2: 51px 52px 17px 17px;
-	sliderbar2: 17px 51px 17px 17px;
-	sliderbar-hover2: 17px 85px 17px 17px;
-	sliderbar-active2: 17px 102px 17px 17px;
-	sliderarrowdec2: 0px 68px 17px 17px;
-	sliderarrowdec-hover2: 0px 85px 17px 17px;
-	sliderarrowdec-active2: 0px 102px 17px 17px;
-	sliderarrowinc2: 34px 68px 17px 17px;
-	sliderarrowinc-hover2: 34px 85px 17px 17px;
-	sliderarrowinc-active2: 34px 102px 17px 17px;
-}
-scrollbarvertical{ 
+scrollbarvertical{
 	width: 17px;
 }
+
 scrollbarvertical slidertrack{
-	decorator: image(slidertrack);
+	background-decorator: image;
+	background-image: scrollbars.png 51px 52px 68px 68px;
 }
+
 scrollbarvertical sliderbar{
 	min-height: 17px;
-	decorator: image(sliderbar);
+	background-decorator: image;
+	background-image: scrollbars.png 0px 17px 17px 34px;
 }
+
 scrollbarvertical sliderbar:hover{
-	decorator: image(sliderbar-hover);
+	background-decorator: image;
+	background-image: scrollbars.png 34px 17px 51px 34px;
 }
+
 scrollbarvertical sliderbar:active{
-	decorator: image(sliderbar-active);
+	background-decorator: image;
+	background-image: scrollbars.png 51px 17px 68px 34px;
 }
+
 scrollbarvertical sliderarrowdec{
 	height: 17px;
 	width: 17px;
-	decorator: image(sliderarrowdec);
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 0px 34px 17px;
 }
+
 scrollbarvertical sliderarrowdec:hover{
-	decorator: image(sliderarrowdec-hover);
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 0px 51px 17px;
 }
+
 scrollbarvertical sliderarrowdec:active{
-	decorator: image(sliderarrowdec-active);
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 0px 68px 17px;
 }
+
 scrollbarvertical sliderarrowinc{
 	height: 17px;
 	width: 17px;
-	decorator: image(sliderarrowinc);
+	icon-decorator: image;
+	icon-image: scrollbars.png 17px 34px 34px 51px;
 }
+
 scrollbarvertical sliderarrowinc:hover{
-	decorator: image(sliderarrowinc-hover);
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 34px 51px 51px;
 }
+
 scrollbarvertical sliderarrowinc:active{
-	decorator: image(sliderarrowinc-active);
+	icon-decorator: image;
+	icon-image: scrollbars.png 51px 34px 68px 51px;
 }
+
+
 scrollbarhorizontal{
-	width: 17px;
+	height: 17px;
 }
+
 scrollbarhorizontal slidertrack{
-	decorator: image(slidertrack2);
+	background-decorator: image;
+	background-image: scrollbars.png 51px 51px 51px 68px;
 }
+
 scrollbarhorizontal sliderbar{
-	min-height: 17px;
-	decorator: image(sliderbar2);
+	min-width: 17px;
+	background-decorator: image;
+	background-image: scrollbars.png 17px 51px 34px 68px;
 }
+
 scrollbarhorizontal sliderbar:hover{
-	decorator: image(sliderbar-hover2);
+	background-decorator: image;
+	background-image: scrollbars.png 17px 85px 34px 102px;
 }
+
 scrollbarhorizontal sliderbar:active{
-	decorator: image(sliderbar-active2);
+	background-decorator: image;
+	background-image: scrollbars.png 17px 102px 34px 119px;
 }
+
 scrollbarhorizontal sliderarrowdec{
 	height: 17px;
 	width: 17px;
-	decorator: image(sliderarrowdec2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 68px 17px 85px;
 }
+
 scrollbarhorizontal sliderarrowdec:hover{
-	decorator: image(sliderarrowdec-hover2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 85px 17px 102px;
 }
+
 scrollbarhorizontal sliderarrowdec:active{
-	decorator: image(sliderarrowdec-active2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 0px 102px 17px 119px;
 }
+
 scrollbarhorizontal sliderarrowinc{
 	height: 17px;
 	width: 17px;
-	decorator: image(sliderarrowinc2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 68px 51px 85px;
 }
+
 scrollbarhorizontal sliderarrowinc:hover{
-	decorator: image(sliderarrowinc-hover2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 85px 51px 102px;
 }
+
 scrollbarhorizontal sliderarrowinc:active{
-	decorator: image(sliderarrowinc-active2);
+	icon-decorator: image;
+	icon-image: scrollbars.png 34px 102px 51px 119px;
 }
 
 scrollbarcorner{
