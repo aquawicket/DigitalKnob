@@ -247,7 +247,7 @@ bool DKRocket::LoadHtml(const DKString& html)
 	DKINFO("#################################################\n");
 	*/
 
-	//find the last <body occurance
+	//find the last <html occurance
 	int n = code.rfind("<html");
 	if(n > 0){
 		code = code.substr(n);
