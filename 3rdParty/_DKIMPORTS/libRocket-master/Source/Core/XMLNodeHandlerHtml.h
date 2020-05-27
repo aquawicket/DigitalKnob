@@ -39,11 +39,11 @@ namespace Core {
 	@author Lloyd Weehuizen
  */
 
-class XMLNodeHandlerBody : public XMLNodeHandler
+class XMLNodeHandlerHtml : public XMLNodeHandler
 {
 public:
-	XMLNodeHandlerBody();
-	~XMLNodeHandlerBody();
+	XMLNodeHandlerHtml();
+	~XMLNodeHandlerHtml();
 
 	/// Called when a new element start is opened
 	virtual Element* ElementStart(XMLParser* parser, const String& name, const XMLAttributes& attributes);

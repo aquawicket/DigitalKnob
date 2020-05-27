@@ -47,27 +47,27 @@ Element* XMLNodeHandlerBody::ElementStart(XMLParser* parser, const String& name,
 	//ROCKET_ASSERT(name == "body");
 
 	// Determine the parent
-	Element* element = parser->GetParseFrame()->element;
+	Element* parent = parser->GetParseFrame()->element;
 
 	// Check for and apply any template
 	String template_name = attributes.Get<String>("template", "");
 	if (!template_name.Empty())
 	{
-		element = XMLParseTools::ParseTemplate(parent, template_name);
+		parent = XMLParseTools::ParseTemplate(parent, template_name);
 	}
 
 	// Attempt to instance the element with the instancer
-    ElementPtr element = Factory::InstanceElement(parent, name, name, attributes);
+    Element* element = Factory::InstanceElement(parent, name, name, attributes);
     if (!element)
     {
-        Log::Message(Log::LT_ERROR, "Failed to create element for tag %s, instancer returned nullptr.", name.c_str());
+        Log::Message(Log::LT_ERROR, "Failed to create element for tag %s, instancer returned nullptr.", name);
         return nullptr;
     }
 
     // Add the element to its parent and remove the reference
-    Element* result = parent->AppendChild(std::move(element));
+    parent->AppendChild(element);
 
-	return result;
+	return element;
 }
 
 bool XMLNodeHandlerBody::ElementEnd(XMLParser* ROCKET_UNUSED_PARAMETER(parser), const String& ROCKET_UNUSED_PARAMETER(name))

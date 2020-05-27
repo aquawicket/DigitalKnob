@@ -99,17 +99,17 @@ Element* XMLNodeHandlerHead::ElementStart(XMLParser* parser, const String& name,
 	Element* parent = parser->GetParseFrame()->element;
 
 	// Attempt to instance the element with the instancer
-	ElementPtr element = Factory::InstanceElement(parent, name, name, attributes);
+	Element* element = Factory::InstanceElement(parent, name, name, attributes);
 	if (!element)
 	{
-		Log::Message(Log::LT_ERROR, "Failed to create element for tag %s, instancer returned nullptr.", name.c_str());
+		Log::Message(Log::LT_ERROR, "Failed to create element for tag %s, instancer returned nullptr.", name);
 		return nullptr;
 	}
 
 	// Add the element to its parent and remove the reference
-	Element* result = parent->AppendChild(std::move(element));
+	parent->AppendChild(element, false);
 
-	return result;
+	return element;
 }
 
 bool XMLNodeHandlerHead::ElementEnd(XMLParser* parser, const String& name)
@@ -125,7 +125,7 @@ bool XMLNodeHandlerHead::ElementEnd(XMLParser* parser, const String& name)
 		if (document)
 			document->ProcessHeader(parser->GetDocumentHeader());
 	}
-	return Factory::InstanceElementText(parser->GetParseFrame()->element, data);
+	return true;
 }
 
 bool XMLNodeHandlerHead::ElementData(XMLParser* parser, const String& data)
