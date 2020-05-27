@@ -1064,7 +1064,7 @@ function DK_GetObjects()
 	// Search the Dom for all scripts (.js files)
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
-	for(var i=0; i<elements.length; i++){
+	for(var i=0; elements && i<elements.length; i++){
 		if(!elements[i].id){
 			//DKWARN(elements[i].src+": script object has no id\n");
 			continue; 

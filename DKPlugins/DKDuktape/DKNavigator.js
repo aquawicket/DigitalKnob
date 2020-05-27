@@ -68,7 +68,7 @@ var Navigator = function(pointer)
 		value: "TODO",
 	});
 	Object.defineProperty(this, "product",{ //Read only
-		value: "Gecko",
+		value: "Duktape",
 	});
 	Object.defineProperty(this, "serviceWorker",{ //Read only
 		value: "TODO",
