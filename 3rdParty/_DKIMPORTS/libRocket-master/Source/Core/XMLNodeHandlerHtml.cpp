@@ -45,7 +45,7 @@ XMLNodeHandlerHtml::~XMLNodeHandlerHtml()
 
 Element* XMLNodeHandlerHtml::ElementStart(XMLParser* parser, const String& name, const XMLAttributes& attributes)
 {
-	ROCKET_UNUSED_ASSERT(name);
+	//ROCKET_UNUSED(name);
 	ROCKET_ASSERT(name == "html");
 
 	// Determine the parent
