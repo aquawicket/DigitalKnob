@@ -17,7 +17,6 @@ DKSET(ROCKET ${3RDPARTY}/libRocket-master)
 ### LINK ###
 DKDEFINE(ROCKET_STATIC_LIB)
 DKINCLUDE(${ROCKET}/Include)
-DKINCLUDE(${ROCKET}/Source)
 
 WIN_DEBUG_LIB(${ROCKET}/${OS}/Debug/RocketDebugger.lib)
 WIN_RELEASE_LIB(${ROCKET}/${OS}/Release/RocketDebugger.lib)

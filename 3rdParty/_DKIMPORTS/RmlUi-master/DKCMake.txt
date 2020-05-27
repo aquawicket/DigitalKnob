@@ -15,7 +15,6 @@ DKSET(RMLUI ${3RDPARTY}/RmlUi-master)
 ### LINK ###
 DKDEFINE(RMLUI_STATIC_LIB)
 DKINCLUDE(${RMLUI}/Include)
-DKINCLUDE(${RMLUI}/Source)
 
 WIN_DEBUG_LIB(${RMLUI}/${OS}/Debug/RmlDebugger.lib)
 WIN_RELEASE_LIB(${RMLUI}/${OS}/Release/RmlDebugger.lib)
