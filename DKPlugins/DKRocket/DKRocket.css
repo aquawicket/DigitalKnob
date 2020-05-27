@@ -4,19 +4,20 @@
 /* http://librocket.com/wiki/documentation/RCSS/Selectors */
 
 html{
+	display: block;
 	font-family: "Times New Roman";
 	font-size: 130%;
 	overflow: auto;
+	/* overflow-x: scroll; */
+	/* overflow-y: scroll; */
 	height: 100%;
 	width: 100%;
 	top:0px;
 	left:0px;
 }
-
 head{
 	display:none;
 }
-
 body{
 	font-family: "Times New Roman";
 	/*font-size: 13em;*/
@@ -24,31 +25,24 @@ body{
 	margin: 8px;
 	display: block;
 }
-
 style{
 	display:none;
 }
-
 title{
 	display:none;
 }
-
 option, div, tr{
 	display:block;
 }
-
 th{
 	font-weight: bold;
 }
-
 strong, b{
 	font-weight: bold;
 }
-
 i, cite, em, var, address{
 	font-style: italic;
 }
-
 p{
 	/* font-family: "Times New Roman"; */
 	display:block;
@@ -59,7 +53,6 @@ p{
     /* margin-inline-start: 0px; */
     /* margin-inline-end: 0px; */
 }
-
 h1{
 	display:block;
 	font-size: 2em;
@@ -71,7 +64,6 @@ h1{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 h2{
 	display:block;
 	font-size: 1.5em;
@@ -83,7 +75,6 @@ h2{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 h3{
 	display:block;
 	font-size: 1.17em;
@@ -95,7 +86,6 @@ h3{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 h4{
 	display:block;
 	margin-top: 1.33em;
@@ -106,7 +96,6 @@ h4{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 h5{
 	display:block;
 	font-size: 0.83em;
@@ -118,7 +107,6 @@ h5{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 h6{
 	display:block;
 	font-size: 0.67em;
@@ -130,7 +118,6 @@ h6{
     /* margin-inline-end: 0px; */
 	font-weight: bold;
 }
-
 ol{
 	display: block;
     /* list-style-type: decimal; */
@@ -143,7 +130,6 @@ ol{
 	padding-bottom: 40px;
     /* padding-inline-start: 40px; */
 }
-
 ul{
 	display: block;
     /* list-style-type: disc; */
@@ -156,12 +142,10 @@ ul{
     padding-bottom: 40px;
     /* padding-inline-start: 40px; */
 }
-
 li{
 	/* display: list-item; */
     /* text-align: -webkit-match-parent; */
 }
-
 
 
 /**********************************/
