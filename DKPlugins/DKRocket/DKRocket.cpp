@@ -108,10 +108,10 @@ bool DKRocket::End()
 bool DKRocket::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
-	//if(!Rocket::Core::LoadFontFace(file.c_str())){ //FIXME
+	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
 		DKERROR("DKRocket::LoadFont(): Could not load "+file+"\n");
 		return false;
-	//}
+	}
 	return true;
 }
 
@@ -249,8 +249,10 @@ bool DKRocket::LoadHtml(const DKString& html)
 
 	//find the last <body occurance
 	int n = code.rfind("<html");
-	code = code.substr(n);
-	replace(code, "<", "\n<");
+	if(n > 0){
+		code = code.substr(n);
+		replace(code, "<", "\n<");
+	}
 	
 	/*
 	DKINFO("\n");
@@ -433,9 +435,9 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	DKString address = elementToAddress(element);
 
 	DKString type = event.GetType().CString();
-	//Rocket::Core::EventPhase phase = event.GetPhase(); //FIXME
+	int phase = event.GetPhase();
 
-	//DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}"; //FIXME
+	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
 
 	/*
 	//Send this event back to duktape to be processed in javascript
