@@ -4,7 +4,7 @@
 #include "DKRocket/DKRocket.h"
 
 
-///////////////////////
+//////////////////////////
 bool DKHTMLElement::Init()
 {
 	DKDEBUGFUNC();

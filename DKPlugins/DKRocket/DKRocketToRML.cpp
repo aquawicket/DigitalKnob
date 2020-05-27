@@ -71,14 +71,14 @@ bool DKRocketToRML::HtmlToRml(const DKString& html, DKString& rml)
 bool DKRocketToRML::Hyperlink(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
-	DKString id = event->GetId();
+	DKString elementAddress = event->GetId();
 	DKRocket* dkRocket = DKRocket::Get("");
 	Rocket::Core::ElementDocument* doc = dkRocket->document;
-	Rocket::Core::Element* aElement = doc->GetElementById(id.c_str());
-
+	Rocket::Core::Element* aElement = dkRocket->addressToElement(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rocket::Core::String>().CString();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
-	DKUtil::Run(value, "");
+	//DKUtil::Run(value, "");
+	dkRocket->LoadUrl(value);
 	return true;
 }
 
@@ -95,11 +95,12 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml,"<meta name=\"generator\" content=", "");
 	replace(rml,"\"HTML Tidy for HTML5 for Windows version 5.0.0\" />", "");
 	rml = "<rml>\n"+rml+"</rml>";
-	replace(rml, "<!DOCTYPE html>", ""); //Rocket doesn't like <!DOCTYPE html> tags
+	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 
 	//add DKRocket.css to the head tag
-	DKString rocket_css = DKFile::local_assets+"DKRocket/DKRocket.css";
-	replace(rml, "<head>", "<head><link id=\"DKRocket/DKRocket.css\" type=\"text/css\" href=\""+rocket_css+"\"></link>");
+	DKString rml_css = DKFile::local_assets+"DKRocket/DKRocket.css";
+	replace(rml, "<head />", "<head></head>");
+	replace(rml, "<head>", "<head><link id=\"DKRocket/DKRocket.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 
 
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
@@ -107,7 +108,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	//Other Examples: alert("It's \"game\" time."); or alert('It\'s "game" time.');
 	//replace(rml,"\"","'");
 	
-	//Rocket does not recognize favicons, TODO
+	//Rml does not recognize favicons, TODO
 	//replace(rml, "<link rel=\"shortcut icon\" id=\"favicon.ico\" href=\"favicon.ico\"></link>", "");
 
 	//DKXml xml;
@@ -129,7 +130,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	xml.SetAttributes("//head/link[1]","href","DKRocket/DKRocket.css");
 	*/
 
-	//Rocket cannot read nodes outside of the body, so add a html node we can work with.
+	//Rml cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
 
 	//xml.SaveDocumentToString(rml);
@@ -188,7 +189,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 		cef_texture->SetAttribute("src", cef_id.c_str());
 		cef_texture->SetProperty("width", "100%");
 		cef_texture->SetProperty("height", "100%");
-		iframes[i]->AppendChild(cef_texture);
+		//iframes[i]->AppendChild(cef_texture);
 		DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight+","+url;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
@@ -203,7 +204,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId().CString();
-			//DKEvent::AddEvent(id, "click", &DKRocketToRML::Hyperlink, this);
+
+			aElements[i]->AddEventListener("click", DKRocket::Get(), false);
+			DKString elementAddress = DKRocket::Get("")->elementToAddress(aElements[i]);
+			DKEvents::AddEvent(elementAddress, "click", &DKRocketToRML::Hyperlink, this);
 		}
 	}
 
@@ -264,7 +268,7 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			}
 			else{
 				processed += src+",";
-				DKString app = DKFile::local_assets+src;
+				DKString app = DKRocket::Get()->workingPath +src;
 				DKDuktape::LoadFile(app);
 			}
 		}
@@ -272,10 +276,10 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 			if(inner.empty()){ continue; }
 			
 			//replace(inner,"'","\\'");
-			replace(inner,"\n","");
-			replace(inner,"\t","");
+			//replace(inner,"\n","");
+			//replace(inner,"\t","");
 
-			DKDuktape::Get()->LoadJSString("testId", inner);
+			DKDuktape::Get()->LoadJSString("inlineScript", inner);
 		}
 	}
 
@@ -290,7 +294,6 @@ bool DKRocketToRML::PostProcess(Rocket::Core::Element* element)
 	DKINFO("########## Post DKRocketToRML::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
-	return true;
 
 	return true;
 }
@@ -366,9 +369,13 @@ bool DKRocketToRML::Encode(std::string& data)
 }
 
 
-///////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 bool DKRocketToRML::TidyFile(const DKString& in, DKString& out)
 {
+	DKINFO("####### CODE GOING INTO TIDY ##########\n");
+	DKINFO(in+"\n");
+	DKINFO("#######################################\n");
+
 	const char* input = in.c_str();
 	TidyBuffer output = {0};
 	TidyBuffer errbuf = {0};
@@ -376,7 +383,7 @@ bool DKRocketToRML::TidyFile(const DKString& in, DKString& out)
 	Bool ok;
 
 	TidyDoc tdoc = tidyCreate();                     // Initialize "document"
-	printf("Tidying:\t%s\n", input);
+	//printf("Tidying:\t%s\n", input);
 
 	ok = tidyOptSetBool(tdoc, TidyXhtmlOut, yes);  // Convert to XHTML
 	if(ok){
@@ -400,12 +407,12 @@ bool DKRocketToRML::TidyFile(const DKString& in, DKString& out)
 
 	if(rc >= 0){
 		if(rc > 0){
-			DKERROR("Tidy Error\n");
 			//printf( "\nDiagnostics:\n\n%s", errbuf.bp );
-		//printf( "\nAnd here is the result:\n\n%s", output.bp );
+			//printf( "\nAnd here is the result:\n\n%s", output.bp );
 		}
 	}
 	else{
+		DKERROR("Tidy Error\n");
 		//printf( "A severe error (%d) occurred.\n", rc );
 	}
 

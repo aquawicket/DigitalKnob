@@ -81,7 +81,7 @@ int DKRocketJS::addEventListener(duk_context* ctx)
 		element = DKRocket::Get()->document;
 	}
 	else{
-		element = DKRocket::Get()->getElementByAddress(address);
+		element = DKRocket::Get()->addressToElement(address);
 	}
 	if(!element){
 		DKERROR("DKRocketJS::addEventListener(): element invalid\n");
@@ -102,7 +102,7 @@ int DKRocketJS::removeEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
 		DKERROR("DKRocketJS::removeEventListener(): element invalid\n");
 		duk_push_boolean(ctx, false);

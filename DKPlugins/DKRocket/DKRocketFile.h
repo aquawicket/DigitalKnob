@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKRocketFile_H
 #define DKRocketFile_H
-#include <Rocket/Core/Core.h>
+#include <Rocket/Core.h>
 #include "DK/DKFile.h"
 
 ///////////////////////////////////////////////////////

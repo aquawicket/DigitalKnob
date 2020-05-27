@@ -22,20 +22,27 @@ int DKNode::appendChild(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::removeChild(): element invalid\n");
+		DKERROR("DKNode::appendChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rocket::Core::Element* child = DKRocket::Get()->getElementByAddress(childAddress);
+	Rocket::Core::Element* child = DKRocket::Get()->addressToElement(childAddress);
 	if(!child){
-		DKERROR("DKRocketJS::removeChild(): child invalid\n");
+		DKERROR("DKNode::appendChild(): child invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+
+	//if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true)){
 	element->AppendChild(child, true);
+		//DKERROR("DKNode::appendChild(): AppendChild failed\n");
+		//duk_push_boolean(ctx, false);
+		//return true;
+	//}
+
 	duk_push_string(ctx, childAddress.c_str());
 
 	//post process if it's a link
@@ -53,9 +60,9 @@ int DKNode::childNodes(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::childNodes(): element invalid\n");
+		DKERROR("DKNode::childNodes(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -71,10 +78,8 @@ int DKNode::childNodes(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRocket::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -86,23 +91,20 @@ int DKNode::parentNode(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::parentNode(): element invalid\n");
+		DKERROR("DKNode::parentNode(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	Rocket::Core::Element* parentNode = element->GetParentNode();
 	if(!parentNode){
-		DKERROR("DKRocketJS::parentNode(): parentNode invalid\n");
+		DKERROR("DKNode::parentNode(): parentNode invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	const void* parentAddress = static_cast<const void*>(parentNode);
-	std::stringstream ss;
-	ss << parentAddress;  
-	DKString str = ss.str(); 
-	duk_push_string(ctx, str.c_str());
+	DKString parentAddress = DKRocket::Get()->elementToAddress(parentNode);
+	duk_push_string(ctx, parentAddress.c_str());
 	return true;
 }
 
@@ -111,21 +113,22 @@ int DKNode::removeChild(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::removeChild(): element invalid\n");
+		DKERROR("DKNode::removeChild(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rocket::Core::Element* child = DKRocket::Get()->getElementByAddress(childAddress);
+	Rocket::Core::Element* child = DKRocket::Get()->addressToElement(childAddress);
 	if(!child){
-		DKERROR("DKRocketJS::removeChild(): child invalid\n");
+		DKERROR("DKNode::removeChild(): child invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
 	if(!element->RemoveChild(child)){
-		DKERROR("DKRocketJS::removeChild(): element->RemoveChild failed\n");
+		DKERROR("DKNode::removeChild(): element->RemoveChild failed\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}

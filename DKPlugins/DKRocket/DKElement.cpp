@@ -18,6 +18,7 @@ bool DKElement::Init()
 	DKDuktape::AttachFunction("DKElement_hasAttribute", DKElement::hasAttribute);
 	DKDuktape::AttachFunction("DKElement_innerHTML", DKElement::innerHTML);
 	DKDuktape::AttachFunction("DKElement_setAttribute", DKElement::setAttribute);
+	DKDuktape::AttachFunction("DKElement_tagName", DKElement::tagName);
 	
 	DKClass::DKCreate("DKRocket/DKElement.js");
 	return true;
@@ -28,9 +29,9 @@ int DKElement::clientHeight(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		DKERROR("DKElement::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -50,9 +51,9 @@ int DKElement::clientLeft(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		DKERROR("DKElement::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -69,9 +70,9 @@ int DKElement::clientTop(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		DKERROR("DKElement::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -88,9 +89,9 @@ int DKElement::clientWidth(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::clientWidth(): element invalid\n");
+		DKERROR("DKElement::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -111,15 +112,15 @@ int DKElement::getAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::getAttribute("+address+","+attribute+"): element invalid\n");
+		DKERROR("DKElement::getAttribute("+address+","+attribute+"): element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
 	Rocket::Core::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		//DKWARN("DKRocketJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
+		//DKWARN("DKElement::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
@@ -142,10 +143,8 @@ int DKElement::getElementsByClassName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRocket::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -173,10 +172,8 @@ int DKElement::getElementsByTagName(duk_context* ctx)
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		const void* address = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << address;  
-		str += ss.str(); 
+		DKString elementAddress = DKRocket::Get()->elementToAddress(elements[i]);
+		str += elementAddress;
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
@@ -189,9 +186,9 @@ int DKElement::hasAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::hasAttribute(): element invalid\n");
+		DKERROR("DKElement::hasAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -208,9 +205,9 @@ int DKElement::innerHTML(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::innerHTML(): element invalid\n");
+		DKERROR("DKElement::innerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -245,14 +242,14 @@ int DKElement::setAttribute(duk_context* ctx)
 		value = toString(duk_require_boolean(ctx, 2));
 	}
 	else{
-		DKERROR("DKRocketJS::setAttribute(): value invalid\n");
+		DKERROR("DKElement::setAttribute(): value invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::setAttribute(): element invalid\n");
+		DKERROR("DKElement::setAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -268,4 +265,18 @@ int DKElement::setAttribute(duk_context* ctx)
 	return true;
 }
 
+////////////////////////////////////////
+int DKElement::tagName(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
+	if(!element){
+		DKERROR("DKElement::tagName(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	duk_push_string(ctx, element->GetTagName().CString());
+	return true;
+}
 #endif //USE_DKDuktape

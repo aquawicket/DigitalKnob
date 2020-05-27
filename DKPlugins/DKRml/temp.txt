@@ -1,6 +1,0 @@
-DKDEPEND(RmlUi-master)
-DKDEPEND(DKCurl)
-DKDEPEND(DKFile)
-DKDEPEND(DKWindow)
-DKDEPEND(DKXml)
-DKDEPEND(tidy-html5-5.7.28)

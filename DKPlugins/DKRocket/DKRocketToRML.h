@@ -3,12 +3,11 @@
 #define DKRocketToRML_H
 
 #include "DK/DK.h"
-#include <Rocket/Core/Core.h>
-#include <Rocket/Controls/Controls.h>
-#include <Rocket/Core/ElementUtilities.h>
+#include <Rocket/Core.h>
+#include <Rocket/Controls.h>
 
-///////////////////
-class DKRocketToRML
+//////////////////////////////////////
+class DKRocketToRML  : public DKObject
 {
 public:
 	DKString processed;
@@ -19,7 +18,7 @@ public:
 	static bool ResizeIframe(DKEvents* event);
 	bool ClickIframe(DKEvents* event);
 	bool MouseOverIframe(DKEvents* event);
-	bool DKRocketToRML::Encode(std::string& data);
+	bool Encode(std::string& data);
 	bool TidyFile(const DKString& in, DKString& out);
 };
 

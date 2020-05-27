@@ -21,15 +21,15 @@ int  DKCSSStyleDeclaration::getPropertyValue(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(!element){
-		DKERROR("DKRocketJS::getPropertyValue(): element invalid\n");
+		DKERROR("DKCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	const Rocket::Core::Property* prop = element->GetProperty(propertyName.c_str());
 	if(!prop){ 
-		DKERROR("DKRocketJS::getPropertyValue(): prop is invalid\n");
+		DKERROR("DKCSSStyleDeclaration::getPropertyValue(): prop is invalid\n");
 		duk_push_boolean(ctx, false);
 		return true; 
 	}
@@ -52,7 +52,7 @@ int DKCSSStyleDeclaration::setProperty(duk_context* ctx)
 		propertyValue = toString(duk_require_boolean(ctx, 2));
 	}
 	//DKString priority = duk_require_string(ctx, 3); //TODO
-	Rocket::Core::Element* element = DKRocket::Get()->getElementByAddress(address);
+	Rocket::Core::Element* element = DKRocket::Get()->addressToElement(address);
 	if(element){
 		if(!propertyValue.empty()){
 			element->SetProperty(propertyName.c_str(), propertyValue.c_str());

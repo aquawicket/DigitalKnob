@@ -1,10 +1,13 @@
 #include "DK/stdafx.h"
-#include <Rocket/Debugger/Debugger.h>
+#include <Rocket/Debugger.h>
 #include "DKRocket/DKRocket.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
+
+#include <Rocket/Core/StreamMemory.h>
+#include "Core/PluginRegistry.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
@@ -15,7 +18,6 @@ bool DKRocket::Init()
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRocketJS");
 	DKClass::DKCreate("DKRocketV8");
-	//dkRocketToRML = new DKRocketToRML();
 	document = NULL;
 
 	if(!dkRocketFile){ 
@@ -31,7 +33,7 @@ bool DKRocket::Init()
 		DKClass::DKCreate("DKOSGRocket");
 	}
 	else{
-		DKERROR("DKRocket::Init(): No registered rocket window found\n");
+		DKERROR("DKRocket::Init(): No registered window found\n");
 		return false;
 	}
 	
@@ -54,7 +56,7 @@ bool DKRocket::Init()
 	
 	if(DKClass::DKAvailable("DKSDLRocket")){
 		if(!Rocket::Debugger::Initialise(context)){
-			DKERROR("Rocket::Core::Initialise(): failed\n");
+			DKERROR("Rocket::Debugger::Initialise(): failed\n");
 			return false;
 		}
 	}
@@ -68,18 +70,15 @@ bool DKRocket::Init()
 	DKClass::DKCreate("DKNode");
 	DKClass::DKCreate("DKElement");
 	DKClass::DKCreate("DKHTMLElement");
+	DKClass::DKCreate("DKHTMLCollection");
 	DKClass::DKCreate("DKCSSStyleDeclaration");
 	DKClass::DKCreate("DKDocument");
 	DKClass::DKCreate("DKRocket/DKDom.js");
 
-	//START DEBUGGING FROM HERE
-	//ERROR.  this sets rocket's directory to assets/DKRocket... 
-	//        we need it to reference from the assets folder.
-	//LoadUrl(DKFile::local_assets+"blank.html");
-	
 	DKString html;
-	DKFile::FileToString(DKFile::local_assets+"DKRocket/blank.html", html);
-	DKFile::ChDir(DKFile::local_assets);
+	DKString workingPath = DKFile::local_assets;
+	DKFile::FileToString(workingPath +"DKRocket/blank.html", html);
+	DKFile::ChDir(workingPath);
 	LoadHtml(html);
 
 	return true;
@@ -97,7 +96,7 @@ bool DKRocket::End()
 	//	document->Close(); 
 	//}
 	if(context){
-		context->RemoveReference();
+		//context->RemoveReference();
 		Rocket::Core::Shutdown();
 	}
 	return true;
@@ -109,11 +108,10 @@ bool DKRocket::End()
 bool DKRocket::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
-	if(!Rocket::Core::FontDatabase::LoadFontFace(file.c_str())){
-		DKERROR("Could not load "+file+"\n");
+	//if(!Rocket::Core::LoadFontFace(file.c_str())){ //FIXME
+		DKERROR("DKRocket::LoadFont(): Could not load "+file+"\n");
 		return false;
-	}
-	//fonts_loaded = true;
+	//}
 	return true;
 }
 
@@ -151,73 +149,149 @@ bool DKRocket::LoadFonts()
 bool DKRocket::LoadHtml(const DKString& html)
 {
 	//// Prepair the html document for rocket
-	DKString rml;
-	dkRocketToRML.IndexToRml(html, rml);
+	DKString rml = html;
+	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
 
+	//dkRocketToRML.TidyFile(rml,rml);
+	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
+	replace(rml, "<meta name=\"generator\" content=", "");
+	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
+
+	/*
+	DKINFO("\n");
 	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
-	DKINFO(rml+"\n");
+	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
+	*/
 
 	//// Clear any document and load the rml into the document
-	if(document){ 
+	if (document) {
 		Rocket::Core::Factory::ClearStyleSheetCache();
-		document->Close(); 
+		document->Close();
 	}
-	document = context->LoadDocumentFromMemory(rml.c_str());
+
+	//document = context->LoadDocumentFromMemory(rml.c_str());
+	auto stream = std::make_unique<Rocket::Core::StreamMemory>((Rocket::Core::byte*)rml.c_str(), rml.size());
+	stream->SetSourceURL("[document from memory]");
+	
+	//document = context->LoadDocument(stream.get());
+	Rocket::Core::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
+	Rocket::Core::Element* element = Rocket::Core::Factory::InstanceDocumentStream(context, stream.get());
+	if (!element){ return false; }
+
+	document = static_cast<Rocket::Core::ElementDocument*>(element);
+	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
+	
+	//Make sure we have <head> and <body> tags
+	Rocket::Core::ElementList heads;
+	Rocket::Core::ElementList bodys;
+	Rocket::Core::Element* head = NULL;
+	Rocket::Core::Element* body = NULL;
+	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
+	if (!heads.empty()) {
+		head = heads[0];
+	}
+	document->GetOwnerDocument()->GetElementsByTagName(bodys, "body");
+	if (!bodys.empty()) {
+		body = bodys[0];
+	}
+	if (!head && !body) {
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("head"), true);
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
+	}
+	else if (head && !body) {
+		document->GetOwnerDocument()->AppendChild(document->CreateElement("body"), true);
+	}
+	else if (!head && body) {
+		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
+	}
+
+	//Load user agent style sheet
+	DKString rml_css = DKFile::local_assets + "DKRocket/DKRocket.css";
+	Rocket::Core::StyleSheet* sheet = document->GetOwnerDocument()->GetStyleSheet();
+	Rocket::Core::StyleSheet* rcss = Rocket::Core::Factory::InstanceStyleSheetFile(rml_css.c_str());
+	if(sheet) {
+		Rocket::Core::StyleSheet* new_style_sheet = rcss->CombineStyleSheet(sheet);
+		document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet));
+	}
+	else {
+		document->GetOwnerDocument()->SetStyleSheet(std::move(rcss));
+	}
+
+	//Finish loading the document
+	Rocket::Core::ElementUtilities::BindEventAttributes(document);
+	Rocket::Core::PluginRegistry::NotifyDocumentLoad(document);
+	//document->DispatchEvent(Rocket::Core::EventId::Load, Rocket::Core::Dictionary()); //FIXME
+	//document->UpdateDocument(); //FIXME
+
 	if(!document){
 		document = context->LoadDocumentFromMemory("");
 		DKERROR("DKRocket::LoadHtml(): document invalid\n");
 		return false;
 	}
-	document->Show();
-	document->RemoveReference();
 
 	dkRocketToRML.PostProcess(document);
+	document->Show();
 
 #ifdef ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts();
 #endif
 
+	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML().CString();
+	
 	/*
-	//find the last <html occurance
-	DKString code = document->GetContext()->GetRootElement()->GetInnerRML().CString();
-	n = code.rfind("<html");
-	code = code.substr(n);
-	replace(code, "<", "\n<");
-	DKINFO("########## POST DKRocket::LoadUrl CODE ##########\n");
+	DKINFO("\n");
+	DKINFO("################ CODE FROM Rocket ###############\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
 	*/
+
+	//find the last <body occurance
+	int n = code.rfind("<html");
+	code = code.substr(n);
+	replace(code, "<", "\n<");
 	
+	/*
+	DKINFO("\n");
+	DKINFO("############## last <html> element CODE FROM Rocket #############\n");
+	DKINFO(code+"\n");
+	DKINFO("#################################################################\n");
+	*/
+
 	return true;
 }
 
-////////////////////////////////////////////
+///////////////////////////////////////////
 bool DKRocket::LoadUrl(const DKString& url)
 {
 	DKDEBUGFUNC(url);
 	DKString _url = url;
 	if(has(_url,":/")){ //could be http:// , https://, file:/// or C:/
 		href = _url; //absolute path including protocol
-		DKWARN("DKRocket::LoadUrl(): href: "+href+"\n");
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
 		DKERROR("DKRocket::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 		return false;
 	}
 	else{
-		//_url = DKFile::local_assets += _url;
-		DKERROR("DKRocket::LoadUrl(): cannot load relative paths\n");
-		return false;
+		_url = workingPath + _url;
+		//DKERROR("DKRocket::LoadUrl(): cannot load relative paths\n");
+		//return false;
 	}
+
+	//Get the working path;
+	std::size_t found = _url.find_last_of("/");
+	workingPath = _url.substr(0, found + 1);
+	DKWARN("DKRocket::LoadUrl(): workingPath: " + workingPath + "\n");
+	DKWARN("DKRocket::LoadUrl(): href: " + href + "\n");
 
 	//get the protocol
 	int n = _url.find(":");
 	protocol = _url.substr(0,n);
 	DKWARN("DKRocket::LoadUrl(): protocol: "+protocol+"\n");
 
-	int found = _url.rfind("/");
+	found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
 	//DKWARN("DKRocket::LoadUrl(): last / at "+toString(found)+"\n");
 	DKWARN("DKRocket::LoadUrl(): _path = "+_path+"\n");
@@ -250,15 +324,14 @@ bool DKRocket::LoadUrl(const DKString& url)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
-bool DKRocket::RegisterEvent(const DKString& id, const DKString& type)
+//////////////////////////////////////////////////////////////////////////////////
+bool DKRocket::RegisterEvent(const DKString& elementAddress, const DKString& type)
 {
-	DKDEBUGFUNC(id, type);
-	if(id.empty()){ return false; } //no id
+	DKDEBUGFUNC(elementAddress, type);
+	if(elementAddress.empty()){ return false; } //no elementAddress
 	if(type.empty()){ return false; } //no type
 	
-	Rocket::Core::Element* element = getElementByAddress(id.c_str());
-	//Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	Rocket::Core::Element* element = addressToElement(elementAddress.c_str());
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -293,22 +366,22 @@ bool DKRocket::Reload()
 	return LoadUrl("index.html");
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKString& value)
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DKRocket::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value)
 {
 	//DKDEBUGFUNC(id, type, value);
-	if(id.empty()){ return false; }
+	if(elementAddress.empty()){ return false; }
 	if(type.empty()){ return false; }
 	if(!document){ return false; }
-	if(same(id,"window")){
-		//DKWARN("DKRocket::SendEvent(): recieved GLOBAL event\n");
-	}
+	//if(same(addressToElement(elementAddress)->GetId(),"window")){
+		//DKWARN("DKRocket::SendEvent(): recieved global window event\n");
+	//}
 	
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	Rocket::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; }
 	
 	Rocket::Core::Dictionary parameters;
-	parameters.Set("msg0", value.c_str());
+	//parameters.Set("msg0", value.c_str());
 	element->DispatchEvent(type.c_str(), parameters, false);
 	return true;
 }
@@ -317,7 +390,7 @@ bool DKRocket::SendEvent(const DKString& id, const DKString& type, const DKStrin
 bool DKRocket::ToggleDebugger()
 {
 	DKDEBUGFUNC();
-	if(Rocket::Debugger::IsVisible()){
+	if(Rocket::Debugger::IsVisible()){ //FIXME:  always returns false
 		Rocket::Debugger::SetVisible(false);
 		DKINFO("Rocket Debugger OFF\n");
 	}
@@ -328,16 +401,16 @@ bool DKRocket::ToggleDebugger()
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////
-bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
+////////////////////////////////////////////////////////////////////////////////////
+bool DKRocket::UnregisterEvent(const DKString& elementAddress, const DKString& type)
 {
-	DKDEBUGFUNC(id, type);
-	if(id.empty()){ return false; } //no id
+	DKDEBUGFUNC(elementAddress, type);
+	if(elementAddress.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
-	if(same(id,"window")){ return false; }
+	if (same(addressToElement(elementAddress)->GetId().CString(), "window")) { return false; }
 	//if(!DKValid("DKRocket0")){ return false; }
 
-	Rocket::Core::Element* element = document->GetElementById(id.c_str());
+	Rocket::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -353,37 +426,27 @@ bool DKRocket::UnregisterEvent(const DKString& id, const DKString& type)
 void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 {
 	//DKDEBUGFUNC(event);
-	if(!event.GetCurrentElement()){return;} //MUST!
-	if(!event.GetTargetElement()){return;} //MUST!
+	if(!event.GetCurrentElement()){return;} //MUST BE VALID!
+	if(!event.GetTargetElement()){return;} //MUST BE VALID!
 
 	Rocket::Core::Element* element = event.GetCurrentElement();
-	const void* address = static_cast<const void*>(element);
-	std::stringstream ss;
-	ss << address;  
-	DKString str = ss.str();
-
-	/*
-	Rocket::Core::Element* targ_element = event.GetCurrentElement();
-	const void* address2 = static_cast<const void*>(targ_element);
-	std::stringstream ss2;
-	ss2 << address2;  
-	DKString str2 = ss2.str();
-	*/
+	DKString address = elementToAddress(element);
 
 	DKString type = event.GetType().CString();
-	int phase = event.GetPhase();
+	//Rocket::Core::EventPhase phase = event.GetPhase(); //FIXME
 
-	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
+	//DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}"; //FIXME
 
+	/*
 	//Send this event back to duktape to be processed in javascript
-	DKString code = "EventFromCPP('"+str+"',"+evnt+");";
+	DKString code = "EventFromCPP('"+address+"',"+ev nt+");";
 	DKString rval;
 	DKDuktape::Get()->RunDuktape(code, rval);
 	if(!rval.empty()){
 		DKWARN("DKRocket::ProcessEvent(): rval = "+rval+"\n");
 	}
 	//////////////////////////////////////////////////////////////////////
-
+	*/
 
 	//If the event bubbles up, ignore elements underneith 
 	Rocket::Core::Context* ctx = document->GetContext();
@@ -392,7 +455,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	if(ctx){ ele = ctx->GetHoverElement(); }
 	if(ele){ _hover = ele->GetParentNode(); }
 	if(_hover){ hover = _hover; }
-	if(event.GetPhase() == 1 && element != hover){ return; }
+	//if(event.GetPhase() == 1 && element != hover){ return; }
 
 	/*
 	//Event Monitor
@@ -442,7 +505,7 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 		if(same(_type,"input")){ _type = "change"; }
 		
 		//// PROCESS ELEMENT EVENTS //////
-		if(same(ev->GetId(), element->GetId().CString()) && same(_type, type)){
+		if(same(ev->GetId(), address) && same(_type, type)){ //.CString()
 			//ev->rEvent = &event;
 
 			//pass the value
@@ -455,7 +518,10 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 				ev->data.push_back(toString(event.GetParameter<int>("button", 0)));
 			}
 			//FIXME - we run the risk of having event function pointers that point to nowhere
-			ev->event_func(ev); //call the function linked to the event
+			if(!ev->event_func(ev)){
+				DKERROR("DKRocket::ProcessEvent failed");
+				return;
+			} //call the function linked to the event
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
@@ -475,38 +541,53 @@ void DKRocket::ProcessEvent(Rocket::Core::Event& event)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////
-Rocket::Core::Element* DKRocket::getElementByAddress(const DKString& address)
+//////////////////////////////////////////////////////////////////////////
+Rocket::Core::Element* DKRocket::addressToElement(const DKString& address)
 {
 	DKDEBUGFUNC(address);
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address;
-	int tmp(0);
-	if(!(ss >> std::hex >> tmp)){
-		DKERROR("DKRocket::getElementByAddress("+address+"): invalid address\n");
+
+	Rocket::Core::Element* element;
+	if(address == "document"){
+		element = document;
+	}
+	else{
+		if(address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos){
+			//DKERROR("NOTE: DKRocket::addressToElement(): the address is not a valid hex notation");
+			return NULL;
+		}
+
+		//Convert a string of an address back into a pointer
+		std::stringstream ss;
+		ss << address.substr(2, address.size() - 2);
+		int tmp(0);
+		if(!(ss >> std::hex >> tmp)){
+			DKERROR("DKRocket::addressToElement("+address+"): invalid address\n");
+			return NULL;
+		}
+		element = reinterpret_cast<Rocket::Core::Element*>(tmp);
+	}
+	if(element->GetTagName().Empty()){ 
+		return NULL; 
+	}
+	return element;
+}
+
+///////////////////////////////////////////////////////////////////
+DKString DKRocket::elementToAddress(Rocket::Core::Element* element)
+{
+	if(!element){
+		DKERROR("DKRocket::elementToAddress(): invalid element\n");
 		return NULL;
 	}
-	Rocket::Core::Element* element = reinterpret_cast<Rocket::Core::Element*>(tmp);
-	return element;
-
-	/*
-	//get element from list of elements under body with mattching address
-	Rocket::Core::Element* body = DKRocket::Get()->document->GetParentNode(); //TEST: This needs to be recursive
-	Rocket::Core::ElementList elements;
-	GetElements(body, elements);
-	for(unsigned int i=0; i<elements.size(); i++){
-		const void* addr = static_cast<const void*>(elements[i]);
-		std::stringstream ss;
-		ss << addr;  
-		DKString str = ss.str(); 
-		if(same(address, str)){
-			return elements[i];
-		}
+	std::stringstream ss;
+	if(element == document){
+		ss << "document";
 	}
-	DKERROR("DKRocketJS::getElementByAddress("+address+"): element not found\n");
-	return NULL;
-	*/
+	else{
+		const void* address = static_cast<const void*>(element);
+		ss << "0x" << address;
+	}
+	return ss.str();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
