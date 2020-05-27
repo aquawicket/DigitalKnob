@@ -66,14 +66,14 @@ bool DKRocket::Init()
 	DKEvents::AddSendEventFunc(&DKRocket::SendEvent, this);
 
 	//Load the javascript DOM
-	DKClass::DKCreate("DKLocation");
-	DKClass::DKCreate("DKNode");
-	DKClass::DKCreate("DKElement");
-	DKClass::DKCreate("DKHTMLElement");
-	DKClass::DKCreate("DKHTMLCollection");
-	DKClass::DKCreate("DKCSSStyleDeclaration");
-	DKClass::DKCreate("DKDocument");
-	DKClass::DKCreate("DKRocket/DKDom.js");
+	DKClass::DKCreate("DKRocketLocation");
+	DKClass::DKCreate("DKRocketNode");
+	DKClass::DKCreate("DKRocketElement");
+	DKClass::DKCreate("DKRocketHTMLElement");
+	DKClass::DKCreate("DKRocketHTMLCollection");
+	DKClass::DKCreate("DKRocketCSSStyleDeclaration");
+	DKClass::DKCreate("DKRocketDocument");
+	DKClass::DKCreate("DKRocket/DKRocketDom.js");
 
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
