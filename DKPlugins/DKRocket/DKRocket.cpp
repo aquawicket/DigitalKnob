@@ -7,7 +7,7 @@
 #include "DKXml/DKXml.h"
 
 #include <Rocket/Core/StreamMemory.h>
-#include "Core/PluginRegistry.h"
+#include "../../3rdParty/libRocket-master/Source/Core/PluginRegistry.h"
 
 #define DRAG_FIX 1
 DKRocketFile* DKRocket::dkRocketFile = NULL;
