@@ -43,7 +43,7 @@ XMLNodeHandlerHtml::~XMLNodeHandlerHtml()
 {
 }
 
-Element* XMLNodeHandlerHtml::ElementStart(XMLParser* parser, const String& RMLUI_UNUSED_ASSERT_PARAMETER(name), const XMLAttributes& attributes)
+Element* XMLNodeHandlerHtml::ElementStart(XMLParser* parser, const String& name, const XMLAttributes& attributes)
 {
 	ROCKET_UNUSED_ASSERT(name);
 	ROCKET_ASSERT(name == "html");
@@ -61,7 +61,7 @@ Element* XMLNodeHandlerHtml::ElementStart(XMLParser* parser, const String& RMLUI
 	// Apply any attributes to the document
 	ElementDocument* document = parser->GetParseFrame()->element->GetOwnerDocument();
 	if (document)
-		document->SetAttributes(attributes);
+		//document->SetAttributes(attributes); //FIXME
 	
 	// Tell the parser to use the element handler for all children
 	parser->PushDefaultHandler();
@@ -69,7 +69,7 @@ Element* XMLNodeHandlerHtml::ElementStart(XMLParser* parser, const String& RMLUI
 	return element;
 }
 
-bool XMLNodeHandlerBody::ElementEnd(XMLParser* ROCKET_UNUSED_PARAMETER(parser), const String& ROCKET_UNUSED_PARAMETER(name))
+bool XMLNodeHandlerHtml::ElementEnd(XMLParser* ROCKET_UNUSED_PARAMETER(parser), const String& ROCKET_UNUSED_PARAMETER(name))
 {
 	ROCKET_UNUSED(parser);
 	ROCKET_UNUSED(name);
@@ -77,12 +77,12 @@ bool XMLNodeHandlerBody::ElementEnd(XMLParser* ROCKET_UNUSED_PARAMETER(parser), 
 	return true;
 }
 
-bool XMLNodeHandlerBody::ElementData(XMLParser* parser, const String& data)
+bool XMLNodeHandlerHtml::ElementData(XMLParser* parser, const String& data)
 {
 	return Factory::InstanceElementText(parser->GetParseFrame()->element, data);
 }
 
-void XMLNodeHandlerBody::Release()
+void XMLNodeHandlerHtml::Release()
 {
 	delete this;
 }
