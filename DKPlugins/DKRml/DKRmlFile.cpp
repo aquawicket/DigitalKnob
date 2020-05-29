@@ -14,12 +14,12 @@ Rml::Core::FileHandle DKRmlFile::Open(const Rml::Core::String& path)
 		//absolute path
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
-		_url = DKRml::Get()->protocol+":"+_url;
-		//DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
-		//return false;
+		//_url = DKRml::Get()->protocol+":"+_url;
+		DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
+		return false;
 	}
 	else{
-		_url = DKRml::Get()->_path+_url;
+		_url = DKRml::Get()->workingPath+_url;
 		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 		//return false;
 	}
@@ -40,8 +40,7 @@ Rml::Core::FileHandle DKRmlFile::Open(const Rml::Core::String& path)
 		_url = DKFile::local_assets+"Cache/"+filename;
 	}
 
-	//FILE* fp = fopen(_url.c_str(), "rb");
-    FILE* fp = fopen(path.c_str(), "rb");
+	FILE* fp = fopen(_url.c_str(), "rb");
 	return (Rml::Core::FileHandle) fp;
 }
 
