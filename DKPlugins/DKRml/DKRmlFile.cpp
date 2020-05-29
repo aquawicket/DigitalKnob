@@ -40,7 +40,8 @@ Rml::Core::FileHandle DKRmlFile::Open(const Rml::Core::String& path)
 		_url = DKFile::local_assets+"Cache/"+filename;
 	}
 
-	FILE* fp = fopen(_url.c_str(), "rb");
+	//FILE* fp = fopen(_url.c_str(), "rb");
+    FILE* fp = fopen(path.c_str(), "rb");
 	return (Rml::Core::FileHandle) fp;
 }
 
