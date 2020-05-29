@@ -585,12 +585,11 @@ DKString DKRml::elementToAddress(Rml::Core::Element* element)
 	}
 	else{
 		const void* address = static_cast<const void*>(element);
-        std::stringstream test;
-        test << address;
-        if(test.str().compare(0, 2, "0x") == 0){
-            ss << "0x";
-        }
-        ss << address;
+#ifdef WIN32
+		ss << "0x" << address;
+#else 
+		ss << address;
+#endif
 	}
 	return ss.str();
 }
