@@ -19,7 +19,9 @@ Rml::Core::FileHandle DKRmlFile::Open(const Rml::Core::String& path)
 		return false;
 	}
 	else{
-		_url = DKRml::Get()->workingPath+_url;
+		if(_url.find("/home") == std::string::npos){ //url already has linux working directory
+			_url = DKRml::Get()->workingPath+_url;
+		}
 		//DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
 		//return false;
 	}
