@@ -1,0 +1,76 @@
+## TODO - create simple DKDEPEND_ALL() to add all plugins.
+
+DKSET(USE_DKCef ON) ##FIXME: Find a way to remove this requirement
+
+DKDEPEND(DK)
+DKDEPEND(DKAdmin)
+DKDEPEND(DKArchive)
+DKDEPEND(DKAssets)
+DKDEPEND(DKAudio)
+DKDEPEND(DKBuild)
+DKDEPEND(DKCef)
+DKDEPEND(DKCefChild)
+## DKDEPEND(DKClient) ##Obsolete, DKWebSockets
+DKDEPEND(DKColorPicker)
+DKDEPEND(DKConsole)
+DKDEPEND(DKCrypto)
+DKDEPEND(DKCurl)
+DKDEPEND(DKDebug)
+DKDEPEND(DKDisplay)
+DKDEPEND(DKDuktape)
+## DKDEPEND(FAR-2.0.2-win) ##FIXME: This breaks DKCmake, why?
+DKDEPEND(DKEditor)
+DKDEPEND(DKEmscripten)
+DKDEPEND(DKFile)
+DKDEPEND(DKFpsTest)
+DKDEPEND(DKGit)
+DKDEPEND(DKGui)
+DKDEPEND(DKHandles)
+DKDEPEND(DKHook)
+DKDEPEND(DKImageMagick)
+DKDEPEND(DKInputTest)
+DKDEPEND(DKLoading)
+DKDEPEND(DKLogin)
+DKDEPEND(DKMessage)
+DKDEPEND(DKMidi)
+DKDEPEND(DKMySql)
+DKDEPEND(DKNotepad)
+## DKDEPEND(DKOcr) ##FIXME: 3rdParty libraries not compiling
+## DKDEPEND(DKOFWindow) ##FIXME: 3rdParty libraries not compiling
+DKDEPEND(DKPaint)
+## DKDEPEND(DKPlugin1) ##FIXME: Not compiling
+## DKDEPEND(DKPlugin2) ##FIXME: Not compiling
+DKDEPEND(DKRml)
+DKDEPEND(DKRocket) ##Deprecated
+## DKDEPEND(DKRocketIframe) ##Deprecated
+## DKDEPEND(DKRocketVideo) ##Deprecated
+DKDEPEND(DKScale)
+DKDEPEND(DKScreenRecorder)
+DKDEPEND(DKSDLAudio)
+DKDEPEND(DKSDLCef)
+DKDEPEND(DKSDLRml)
+DKDEPEND(DKSDLRocket) ##Deprecated
+DKDEPEND(DKSDLText)
+## DKDEPEND(DKSDLVideo) ##FIXME: 3rdParty libraries not compiling
+## DKDEPEND(DKSDLWav) ##FIXME: 3rdParty libraries not compiling
+DKDEPEND(DKSDLWindow)
+## DKDEPEND(DKServer) ##Obsolete, use DKWebSockets
+## DKDEPEND(DKSFMLWindow) ##FIXME: 3rdParty libraries not compiling
+DKDEPEND(DKStats)
+DKDEPEND(DKSvn)
+DKDEPEND(DKThread)
+DKDEPEND(DKTooltip)
+## DKDEPEND(DKTorrent) ##FIXME: 3rdParty libraries not compiling
+DKDEPEND(DKTray)
+DKDEPEND(DKTriggers)
+DKDEPEND(DKUpdate)
+DKDEPEND(DKVideo)
+## DKDEPEND(DKVncClient) ##FIXME: 3rdParty libraries not compiling
+IF(NOT LINUX)
+	DKDEPEND(DKWebSockets) ##FIXME: 3rdParty libraries not compiling on linux
+ENDIF(NOT LINUX)
+DKDEPEND(DKWebTest)
+DKDEPEND(DKWebview)
+DKDEPEND(DKWidget)
+DKDEPEND(DKWindow)
+DKDEPEND(DKXml)
