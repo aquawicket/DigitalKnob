@@ -19,11 +19,11 @@ int main(int argc, char **argv)
 	DKApp::argc = argc;
 	DKApp::argv = argv;
 
-#if __cplusplus <= 199711L
-	DKINFO("C++98 \n");
-#else
-	DKINFO("C++11 \n");
-#endif
+if(__cplusplus == 201703L){ DKINFO("C++17 \n"); }
+else if(__cplusplus == 201402L){ DKINFO("C++14 \n"); }
+else if(__cplusplus == 201103L){ DKINFO("C++11 \n"); }
+else if(__cplusplus == 199711L){ DKINFO("C++98 \n"); }
+else DKINFO("pre-standard C++ \n");
 
 #ifndef IOS
 	DKFile::exe_path = argv[0];

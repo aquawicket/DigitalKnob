@@ -362,7 +362,7 @@ IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
 	ENDIF()
 	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
 	DKSET(FLAGS 
-	"/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+	"/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 ENDIF()
 
 ##### Microsoft Visual Studio 2019 Win64 #####
@@ -373,7 +373,7 @@ IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
 	DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
 	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
 	DKSET(FLAGS 
-	"/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+	"/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 ENDIF()
 
 
