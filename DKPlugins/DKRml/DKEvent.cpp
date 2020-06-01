@@ -102,10 +102,181 @@ int DKEvent::bubbles(duk_context* ctx)
 	return false;
 }
 
+///////////////////////////////////////////
+int DKEvent::cancelBubble(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////
+int DKEvent::cancelable(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////
+int DKEvent::composed(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////
+int DKEvent::currentTarget(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////
+int DKEvent::deepPath(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////
+int DKEvent::defaultPrevented(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////
+int DKEvent::eventPhase(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////
+int DKEvent::explicitOriginalTarget(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////
+int DKEvent::originalTarget(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////
+int DKEvent::returnValue(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////
+int DKEvent::srcElement(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////
+int DKEvent::target(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////
+int DKEvent::timeStamp(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////
+int DKEvent::type(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////
+int DKEvent::isTrusted(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+
+//Obsolete method
+/////////////////////////////////////
+int DKEvent::scoped(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
 
 //Methods
 //////////////////////////////////////////
 int DKEvent::createEvent(duk_context* ctx) 
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////
+int DKEvent::composedPath(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////
+int DKEvent::initEvent(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////
+int DKEvent::preventDefault(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////
+int DKEvent::stopImmediatePropagation(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////
+int DKEvent::stopPropagation(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+//Obsolete methods
+////////////////////////////////////////////////
+int DKEvent::getPreventDefault(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////
+int DKEvent::preventBubble(duk_context* ctx)
+{
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////
+int DKEvent::preventCapture(duk_context* ctx)
 {
 	//TODO
 	return false;
