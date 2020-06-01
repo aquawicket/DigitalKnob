@@ -7,8 +7,8 @@
 bool DKEventTarget::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKEventTarget_addEventListner", DKEventTarget::addEventListner);
-	DKDuktape::AttachFunction("DKEventTarget_removeEventListner", DKEventTarget::removeEventListner);
+	DKDuktape::AttachFunction("DKEventTarget_addEventListener", DKEventTarget::addEventListener);
+	DKDuktape::AttachFunction("DKEventTarget_removeEventListener", DKEventTarget::removeEventListener);
 
 	// non-standard
 	DKDuktape::AttachFunction("DKEventTarget_id", DKEventTarget::id);
@@ -95,8 +95,8 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 }
 
 
-////////////////////////////////////////////////////
-int DKEventTarget::addEventListner(duk_context* ctx)
+/////////////////////////////////////////////////////
+int DKEventTarget::addEventListener(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -109,8 +109,8 @@ int DKEventTarget::addEventListner(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-int DKEventTarget::removeEventListner(duk_context* ctx)
+////////////////////////////////////////////////////////
+int DKEventTarget::removeEventListener(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);

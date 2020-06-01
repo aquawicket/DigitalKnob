@@ -432,7 +432,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& event)
 	Rml::Core::Element* element = event.GetCurrentElement();
 	DKString address = elementToAddress(element);
 
-	DKString type = event.GetType(); //.CString();
+	DKString type = event.GetType();
 	Rml::Core::EventPhase phase = event.GetPhase();
 
 	DKString evnt = "{type:'"+type+"', eventPhase:"+toString((int)phase)+"}";
