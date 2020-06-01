@@ -7,10 +7,64 @@
 <!-- Home -->
 <a id="home" href="index.html">home</a><br /><br />
 
+<!-- Object -->
 <a id="eventTest" style="font-weight:bold;font-size:20px;">Event Test</a><br /><br />
+<a id="clickMe" style="color:blue;"><strong>CLICK ME</strong></a><br />
+<strong>event: </strong><a id="event">error</a><br />
+<br />
+
+<!-- Properties -->
+<a style="font-weight:bold;">Event Properties</a><br />
+<strong>event.bubbles: </strong><a id="event.bubbles">error</a><br />
+<strong>event.cancelBubble: </strong><a id="event.cancelBubble">error</a><br />
+<strong>event.cancelable: </strong><a id="event.cancelable">error</a><br />
+<strong>event.composed: </strong><a id="event.composed">error</a><br />
+<strong>event.currentTarget: </strong><a id="event.currentTarget">error</a><br />
+<strong>event.deepPath: </strong><a id="event.deepPath">error</a><br />
+<strong>event.defaultPrevented: </strong><a id="event.defaultPrevented">error</a><br />
+<strong>event.eventPhase: </strong><a id="event.eventPhase">error</a><br />
+<strong>event.explicitOriginalTarget: </strong><a id="event.explicitOriginalTarget">error</a><br />
+<strong>event.originalTarget: </strong><a id="event.originalTarget">error</a><br />
+<strong>event.returnValue: </strong><a id="event.returnValue">error</a><br />
+<strong>event.srcElement: </strong><a id="event.srcElement">error</a><br />
+<strong>event.target: </strong><a id="event.target">error</a><br />
+<strong>event.timeStamp: </strong><a id="event.timeStamp">error</a><br />
+<strong>event.type: </strong><a id="event.type">error</a><br />
+<strong>event.isTrusted: </strong><a id="event.isTrusted">error</a><br />
+
+<!-- Obsolete Poperties -->
+<strong>event.scoped: </strong><a id="event.scoped">error</a><br />
 
 <script>
-//TODO
+document.getElementById("clickMe").addEventListener("click", clickFunc, true);
+
+function clickFunc(event){
+console.log("Click Me was clicked!");
+
+<!-- Object -->
+document.getElementById("event").innerHTML = ""+event;
+	
+<!-- Properties -->
+document.getElementById("event.bubbles").innerHTML = event.bubbles;
+document.getElementById("event.cancelBubble").innerHTML = event.cancelBubble;
+document.getElementById("event.cancelable").innerHTML = event.cancelable;
+document.getElementById("event.composed").innerHTML = event.composed;
+document.getElementById("event.currentTarget").innerHTML = event.currentTarget;
+document.getElementById("event.deepPath").innerHTML = event.deepPath;
+document.getElementById("event.defaultPrevented").innerHTML = event.defaultPrevented;
+document.getElementById("event.eventPhase").innerHTML = event.eventPhase;
+document.getElementById("event.explicitOriginalTarget").innerHTML = event.explicitOriginalTarget;
+document.getElementById("event.originalTarget").innerHTML = event.originalTarget;
+document.getElementById("event.returnValue").innerHTML = event.returnValue;
+document.getElementById("event.srcElement").innerHTML = event.srcElement;
+document.getElementById("event.target").innerHTML = event.target;
+document.getElementById("event.timeStamp").innerHTML = event.timeStamp;
+document.getElementById("event.type").innerHTML = event.type;
+document.getElementById("event.isTrusted").innerHTML = event.isTrusted;
+
+<!-- Obsolete Properties -->
+document.getElementById("event.scoped").innerHTML = event.scoped;
+}
 </script>
 
 </body>
