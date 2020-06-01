@@ -4,6 +4,7 @@
 #include "DKXml/DKXml.h"
 #include "DKCurl/DKCurl.h"
 #include "DKRml/DKRml.h"
+#include "DKRml/DKElement.h"
 #include "tidy.h"
 #include "tidybuffio.h"
 
@@ -74,7 +75,7 @@ bool DKRmlToRML::Hyperlink(DKEvents* event)
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
 	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* aElement = dkRml->addressToElement(elementAddress);
+	Rml::Core::Element* aElement = DKElement::addressToElement(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
@@ -206,7 +207,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			DKString id = aElements[i]->GetId();
 
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
-			DKString elementAddress = DKRml::Get("")->elementToAddress(aElements[i]);
+			DKString elementAddress = DKElement::elementToAddress(aElements[i]);
 			DKEvents::AddEvent(elementAddress, "click", &DKRmlToRML::Hyperlink, this);
 		}
 	}

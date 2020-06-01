@@ -5,14 +5,13 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////
+/////////////////////////////////////////
 class DKRmlV8 : public DKObjectT<DKRmlV8>
 {
 public:
 	bool Init();
 	bool End();
 
-	static bool Reload(CefArgs args, CefReturn retval);
 	static bool ToggleDebugger(CefArgs args, CefReturn retval);
 };
 

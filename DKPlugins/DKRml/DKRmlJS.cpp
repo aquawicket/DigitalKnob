@@ -1,6 +1,7 @@
 #ifdef USE_DKDuktape
-#include "DKRml.h"
-#include "DKRmlJS.h"
+#include "DKRml/DKRml.h"
+#include "DKRml/DKRmlJS.h"
+#include "DKRml/DKElement.h"
 
 
 ///////////////////////
@@ -8,7 +9,6 @@ bool DKRmlJS::Init()
 {
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKRml_LoadUrl", DKRmlJS::LoadUrl);
-	DKDuktape::AttachFunction("DKRml_Reload", DKRmlJS::Reload);
 	DKDuktape::AttachFunction("DKRml_ToggleDebugger", DKRmlJS::ToggleDebugger);
 	DKDuktape::AttachFunction("DKRml_innerHeight", DKRmlJS::innerHeight);
 	DKDuktape::AttachFunction("DKRml_innerWidth", DKRmlJS::innerWidth);
@@ -25,14 +25,6 @@ int DKRmlJS::LoadUrl(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	if(!DKRml::Get()->LoadUrl(file)){ return 0; }
-	return 1;
-}
-
-////////////////////////////////////////
-int DKRmlJS::Reload(duk_context* ctx)
-{
-	DKDEBUGFUNC(ctx);
-	DKRml::Get()->Reload();
 	return 1;
 }
 
@@ -81,7 +73,7 @@ int DKRmlJS::addEventListener(duk_context* ctx)
 		element = DKRml::Get()->document;
 	}
 	else{
-		element = DKRml::Get()->addressToElement(address);
+		element = DKElement::addressToElement(address);
 	}
 	if(!element){
 		DKERROR("DKRmlJS::addEventListener(): element invalid\n");
@@ -102,7 +94,7 @@ int DKRmlJS::removeEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->addressToElement(address);
+	Rml::Core::Element* element = DKElement::addressToElement(address);
 	if(!element){
 		DKERROR("DKRmlJS::removeEventListener(): element invalid\n");
 		duk_push_boolean(ctx, false);

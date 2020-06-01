@@ -2,6 +2,7 @@
 #include "DK/DKApp.h"
 #include "DKRml/DKDocument.h"
 #include "DKRml/DKRml.h"
+#include "DKRml/DKElement.h"
 
 
 ///////////////////////
@@ -29,7 +30,7 @@ int DKDocument::body(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	DKString elementAddress = DKRml::Get()->elementToAddress(elements[0]);
+	DKString elementAddress = DKElement::elementToAddress(elements[0]);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -45,7 +46,7 @@ int DKDocument::createElement(duk_context* ctx)
 		DKERROR("DKDocument::createElement(): element invalid\n");
 		return false;
 	}
-	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	DKString elementAddress = DKElement::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -60,7 +61,7 @@ int DKDocument::documentElement(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	DKString elementAddress = DKElement::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -76,7 +77,7 @@ int DKDocument::getElementById(duk_context* ctx)
 		duk_push_null(ctx);
 		return true;
 	}
-	DKString elementAddress = DKRml::Get()->elementToAddress(element);
+	DKString elementAddress = DKElement::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -95,7 +96,7 @@ int DKDocument::getElementsByTagName(duk_context* ctx)
 	}
 	DKStringArray elementAddresses;
 	for(unsigned int i = 0; i<elements.size(); i++){
-		elementAddresses.push_back(DKRml::Get()->elementToAddress(elements[i]));
+		elementAddresses.push_back(DKElement::elementToAddress(elements[i]));
 	}
 	DKString list = toString(elementAddresses, ",");
 	duk_push_string(ctx, list.c_str());

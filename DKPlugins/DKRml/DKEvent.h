@@ -6,12 +6,15 @@
 #define DKEvent_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "RmlUi/Core/Event.h"
 
-//////////////////////////////////////////
+/////////////////////////////////////////
 class DKEvent : public DKObjectT<DKEvent>
 {
 public:
 	bool Init();
+	static Rml::Core::Event* addressToEvent(const DKString& address);
+	static DKString eventToAddress(Rml::Core::Event* event);
 	
 	//Properties
 	static int bubbles(duk_context* ctx);

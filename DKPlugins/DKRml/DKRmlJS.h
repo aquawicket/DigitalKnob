@@ -12,7 +12,6 @@ public:
 	bool Init();
 
 	static int LoadUrl(duk_context* ctx);
-	static int Reload(duk_context* ctx);
 	static int ToggleDebugger(duk_context* ctx);
 
 	//events

@@ -3,13 +3,18 @@
 #ifndef DKElement_H
 #define DKElement_H
 
+#include <RmlUi/Core.h>
 #include "DKDuktape/DKDuktape.h"
+#include "DKRml/DKElement.h"
 
 /////////////////////////////////////////////
 class DKElement : public DKObjectT<DKElement>
 {
 public:
 	bool Init();
+	static Rml::Core::Element* addressToElement(const DKString& address);
+	static DKString elementToAddress(Rml::Core::Element* element);
+	//static bool GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elements);
 	
 	static int clientHeight(duk_context* ctx);
 	static int clientLeft(duk_context* ctx);
