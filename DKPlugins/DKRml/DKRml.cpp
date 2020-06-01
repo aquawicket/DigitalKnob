@@ -425,7 +425,9 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 ////////////////////////////////////////////////////
 void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 {
-	//TODO - inject all event data in to a javascript Event object
+	//TODO - make rmlEvent accessable through javascript
+	//1. Create Javascript Event object that references the rmlEvent
+
 
 	//DKDEBUGFUNC(event);
 	if(!rmlEvent.GetCurrentElement()){return;} //MUST BE VALID!
