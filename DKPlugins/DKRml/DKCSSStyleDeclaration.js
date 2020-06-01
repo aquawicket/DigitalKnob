@@ -1,4 +1,4 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+// https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
 
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
@@ -7,6 +7,8 @@ var CSSStyleDeclaration = function(pointer)
 	//console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
 	
+	
+	// Methods
 	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
 		this[propertyName] = DKCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 		return this[propertyName];

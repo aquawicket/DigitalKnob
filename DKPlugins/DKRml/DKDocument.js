@@ -1,10 +1,11 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Document
+// https://developer.mozilla.org/en-US/docs/Web/API/Document
 
 var document;
 
 ////////////////////////////////
 var Document = function(pointer)
 {
+	// Properties
 	Object.defineProperty(this, "body", { 
 		get: function(){ 
 			var pointer = DKDocument_body();
@@ -26,6 +27,8 @@ var Document = function(pointer)
 		} 
 	});
 	
+	
+	// Methods
 	Document.prototype.createElement = function(tag){
 		var pointer = DKDocument_createElement(tag);
 		if(!pointer){ return; }
