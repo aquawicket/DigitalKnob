@@ -31,7 +31,7 @@ public:
 	bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
 	bool ToggleDebugger();
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
-	void ProcessEvent(Rml::Core::Event& event); //overwritten
+	void ProcessEvent(Rml::Core::Event& rmlEvent); //overwritten
 
 	DKString href;
 	DKString protocol;
