@@ -1,4 +1,4 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Event
+// https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 #ifdef USE_DKDuktape 
 #pragma once
@@ -16,7 +16,7 @@ public:
 	static Rml::Core::Event* addressToEvent(const DKString& address);
 	static DKString eventToAddress(Rml::Core::Event* event);
 	
-	//Properties
+	// Properties
 	static int bubbles(duk_context* ctx); //Read Only
 	static int cancelBubble(duk_context* ctx);
 	static int cancelable(duk_context* ctx); //Read Only
@@ -34,10 +34,10 @@ public:
 	static int type(duk_context* ctx); //Read Only
 	static int isTrusted(duk_context* ctx); //Read Only
 
-	//Obsolete properties
+	// Obsolete properties
 	static int scoped(duk_context* ctx); //Read Only, Obsolete
 
-	//Methods
+	// Methods
 	static int createEvent(duk_context* ctx); //Deprecated
 	static int composedPath(duk_context* ctx);
 	static int initEvent(duk_context* ctx); //Deprecated
@@ -45,7 +45,7 @@ public:
 	static int stopImmediatePropagation(duk_context* ctx);
 	static int stopPropagation(duk_context* ctx);
 
-	//Obsolete methods
+	// Obsolete methods
 	static int getPreventDefault(duk_context* ctx); //Not standardized
 	static int preventBubble(duk_context* ctx); //Not standardized, Obsolete
 	static int preventCapture(duk_context* ctx); //Not standardized, Obsolete
