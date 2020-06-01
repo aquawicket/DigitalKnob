@@ -1,4 +1,3 @@
-/*
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 #ifdef USE_DKDuktape 
@@ -26,4 +25,3 @@ REGISTER_OBJECT(DKEvent, true)
 
 #endif //DKEvent_H
 #endif //USE_DKDuktape
-*/

@@ -73,6 +73,7 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKHTMLCollection");
 	DKClass::DKCreate("DKCSSStyleDeclaration");
 	DKClass::DKCreate("DKDocument");
+	DKClass::DKCreate("DKEvent");
 	DKClass::DKCreate("DKRml/DKDom.js");
 
 	DKString html;
