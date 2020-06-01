@@ -12,9 +12,37 @@ bool DKEvent::Init()
 
 	//Properties
 	DKDuktape::AttachFunction("DKEvent_bubbles", DKEvent::bubbles);
+	//DKDuktape::AttachFunction("DKEvent_cancelBubble", DKEvent::cancelBubble);
+	//DKDuktape::AttachFunction("DKEvent_cancelable", DKEvent::cancelable);
+	//DKDuktape::AttachFunction("DKEvent_composed", DKEvent::composed);
+	//DKDuktape::AttachFunction("DKEvent_currentTarget", DKEvent::currentTarget);
+	//DKDuktape::AttachFunction("DKEvent_deepPath", DKEvent::deepPath);
+	//DKDuktape::AttachFunction("DKEvent_defaultPrevented", DKEvent::defaultPrevented);
+	//DKDuktape::AttachFunction("DKEvent_eventPhase", DKEvent::eventPhase);
+	//DKDuktape::AttachFunction("DKEvent_explicitOriginalTarget", DKEvent::explicitOriginalTarget);
+	//DKDuktape::AttachFunction("DKEvent_originalTarget", DKEvent::originalTarget);
+	//DKDuktape::AttachFunction("DKEvent_returnValue", DKEvent::returnValue);
+	//DKDuktape::AttachFunction("DKEvent_srcElement", DKEvent::srcElement);
+	//DKDuktape::AttachFunction("DKEvent_target", DKEvent::target);
+	//DKDuktape::AttachFunction("DKEvent_timeStamp", DKEvent::timeStamp);
+	//DKDuktape::AttachFunction("DKEvent_type", DKEvent::type);
+	//DKDuktape::AttachFunction("DKEvent_isTrusted", DKEvent::isTrusted);
+
+	//Obsolete properties
+	//DKDuktape::AttachFunction("DKEvent_scoped", DKEvent::scoped);
 
 	//Methods
-	DKDuktape::AttachFunction("DKEvent_createEvent", DKEvent::createEvent);
+	//DKDuktape::AttachFunction("DKEvent_createEvent", DKEvent::createEvent);
+	//DKDuktape::AttachFunction("DKEvent_composedPath", DKEvent::composedPath);
+	//DKDuktape::AttachFunction("DKEvent_initEvent", DKEvent::initEvent);
+	//DKDuktape::AttachFunction("DKEvent_preventDefault", DKEvent::preventDefault);
+	//DKDuktape::AttachFunction("DKEvent_stopImmediatePropagation", DKEvent::stopImmediatePropagation);
+	//DKDuktape::AttachFunction("DKEvent_stopPropagation", DKEvent::stopPropagation);
+
+	//Obsolete methods
+	//DKDuktape::AttachFunction("DKEvent_getPreventDefault", DKEvent::getPreventDefault);
+	//DKDuktape::AttachFunction("DKEvent_preventBubble", DKEvent::preventBubble);
+	//DKDuktape::AttachFunction("DKEvent_preventCapture", DKEvent::preventCapture);
 
 	DKClass::DKCreate("DKDuktape/DKEvent.js");
 	return true;
