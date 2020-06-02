@@ -3,6 +3,7 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKRml/DKUIEvent.h"
+#include "DKRml/DKEvent.h"
 
 
 //////////////////////
@@ -14,7 +15,7 @@ bool DKUIEvent::Init()
 	DKDuktape::AttachFunction("DKUIEvent_cancelBubble", DKUIEvent::cancelBubble);
 
 	// Methods
-	DKDuktape::AttachFunction("DKUIEvent_initUIEvent", DKEvent::initUIEvent);
+	DKDuktape::AttachFunction("DKUIEvent_initUIEvent", DKUIEvent::initUIEvent);
 
 	DKClass::DKCreate("DKRml/DKUIEvent.js");
 	return true;
@@ -43,8 +44,8 @@ int DKUIEvent::cancelBubble(duk_context* ctx)
 
 
 // Methods
-//////////////////////////////////////////
-int DKUIEvent::initEvent(duk_context* ctx)
+////////////////////////////////////////////
+int DKUIEvent::initUIEvent(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
