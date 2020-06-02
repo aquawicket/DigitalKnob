@@ -28,8 +28,22 @@ var Event = function(pointer)
 	Object.defineProperty(this, "explicitOriginalTarget", { get: function(){ return DKEvent_explicitOriginalTarget(this.pointer); } }); //Not standardized, Read Only
 	Object.defineProperty(this, "originalTarget",         { get: function(){ return DKEvent_originalTarget(this.pointer);         } }); //Not standardized, Read only
 	Object.defineProperty(this, "returnValue",            { get: function(){ return DKEvent_returnValue(this.pointer);            } });
-	Object.defineProperty(this, "srcElement",             { get: function(){ return DKEvent_srcElement(this.pointer);             } }); //Not standardized
-	Object.defineProperty(this, "target",                 { get: function(){ return DKEvent_target(this.pointer);                 } }); //Read Only
+	Object.defineProperty(this, "srcElement", { //Not standardized
+		get: function(){ 
+			var elementPointer = DKEvent_srcElement(this.pointer);
+			if(!elementPointer){ return; }
+			var element = new HTMLElement(elementPointer);
+			return element;
+		} 
+	}); //Read Only
+	Object.defineProperty(this, "target", { //Read Only
+		get: function(){ 
+			var elementPointer = DKEvent_target(this.pointer);
+			if(!elementPointer){ return; }
+			var element = new HTMLElement(elementPointer);
+			return element;
+		} 
+	}); //Read Only
 	Object.defineProperty(this, "timeStamp",              { get: function(){ return DKEvent_timeStamp(this.pointer);              } }); //Read Only
 	Object.defineProperty(this, "type",                   { get: function(){ return DKEvent_type(this.pointer);                   } }); //Read Only
 	Object.defineProperty(this, "isTrusted",              { get: function(){ return DKEvent_isTrusted(this.pointer);              } }); //Read Only
