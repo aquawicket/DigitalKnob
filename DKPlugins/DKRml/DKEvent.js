@@ -7,14 +7,18 @@ var Event = function(pointer)
 	
 	//Properties
 	Object.defineProperty(this, "bubbles",                { get: function(){ return DKEvent_bubbles(this.pointer);                } }); //Read Only
-	Object.defineProperty(this, "cancelBubble",           { get: function(){ return DKEvent_cancelBubble(this.pointer);           } });
+	Object.defineProperty(this, "cancelBubble", { 
+		set: function(flag){ 
+			return DKEvent_cancelBubble(this.pointer, flag);
+		}
+	});
 	Object.defineProperty(this, "cancelable",             { get: function(){ return DKEvent_cancelable(this.pointer);             } }); //Read Only
 	Object.defineProperty(this, "composed",               { get: function(){ return DKEvent_composed(this.pointer);               } }); //Read Only
 	Object.defineProperty(this, "currentTarget", { 
 		get: function(){ 
-			var pointer = DKEvent_currentTarget(this.pointer);
-			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var elementPointer = DKEvent_currentTarget(this.pointer);
+			if(!elementPointer){ return; }
+			var element = new HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
@@ -35,33 +39,33 @@ var Event = function(pointer)
 	
 	//Methods
 	Event.prototype.createEvent = function(){ //Deprecated
-		//TODO
+		DKEvent_createEvent(this.pointer);
 	};
 	Event.prototype.composedPath = function(){
-		//TODO
+		DKEvent_composedPath(this.pointer);
 	};
 	Event.prototype.initEvent = function(){ //Deprecated
-		//TODO
+		DKEvent_initEvent(this.pointer);
 	};
 	Event.prototype.preventDefault = function(){
-		//TODO
+		DKEvent_preventDefault(this.pointer);
 	};
 	Event.prototype.stopImmediatePropagation = function(){
-		//TODO
+		DKEvent_stopImmediatePropagation(this.pointer);
 	};
 	Event.prototype.stopPropagation = function(){
-		//TODO
+		DKEvent_stopPropagation(this.pointer);
 	};
 	
 	//Obsolete methods
 	Event.prototype.getPreventDefault = function(){ //Not standardized
-		//TODO
+		DKEvent_getPreventDefault(this.pointer);
 	};
 	Event.prototype.preventBubble = function(){ //Not standardized, Obsolete
-		//TODO
+		DKEvent_preventBubble(this.pointer);
 	};
 	Event.prototype.preventCapture = function(){ //Not standardized, Obsolete
-		//TODO
+		DKEvent_preventCapture(this.pointer);
 	};
 	
 	return this;
