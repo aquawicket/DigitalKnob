@@ -5,7 +5,7 @@ var Node = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.warn("Node("+pointer+")");
-	this.pointer = pointer;
+	//this.pointer = pointer;
 	
 	Object.defineProperty(this, "baseURI",         { get: function(){ return DKNode_baseURI(this.pointer);         } });  //TODO
 	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKNode_baseURIObject(this.pointer);   } });  //TODO

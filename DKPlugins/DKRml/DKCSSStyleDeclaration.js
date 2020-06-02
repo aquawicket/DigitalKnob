@@ -4,9 +4,7 @@
 var CSSStyleDeclaration = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
-	
 	
 	// Methods
 	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){

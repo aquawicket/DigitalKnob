@@ -4,8 +4,9 @@
 var Element = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Element("+pointer+")");
+	this.pointer = pointer;
 	
+	// Properties
 	Object.defineProperty(this, "attributes",   { get: function(){ return DKElement_attributes(this.pointer);   } });
 	Object.defineProperty(this, "classList",    { get: function(){ return DKElement_classList(this.pointer);    } });
 	Object.defineProperty(this, "className", { 
