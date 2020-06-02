@@ -10,7 +10,14 @@ var Event = function(pointer)
 	Object.defineProperty(this, "cancelBubble",           { get: function(){ return DKEvent_cancelBubble(this.pointer);           } });
 	Object.defineProperty(this, "cancelable",             { get: function(){ return DKEvent_cancelable(this.pointer);             } }); //Read Only
 	Object.defineProperty(this, "composed",               { get: function(){ return DKEvent_composed(this.pointer);               } }); //Read Only
-	Object.defineProperty(this, "currentTarget",          { get: function(){ return DKEvent_currentTarget(this.pointer);          } }); //Read Only
+	Object.defineProperty(this, "currentTarget", { 
+		get: function(){ 
+			var pointer = DKEvent_currentTarget(this.pointer);
+			if(!pointer){ return; }
+			var element = new HTMLElement(pointer);
+			return element;
+		} 
+	}); //Read Only
 	Object.defineProperty(this, "deepPath",               { get: function(){ return DKEvent_deepPath(this.pointer);               } }); //Not standardized
 	Object.defineProperty(this, "defaultPrevented",       { get: function(){ return DKEvent_defaultPrevented(this.pointer);       } }); //Read Only
 	Object.defineProperty(this, "eventPhase",             { get: function(){ return DKEvent_eventPhase(this.pointer);             } }); //Read Only
@@ -56,4 +63,6 @@ var Event = function(pointer)
 	Event.prototype.preventCapture = function(){ //Not standardized, Obsolete
 		//TODO
 	};
+	
+	return this;
 };

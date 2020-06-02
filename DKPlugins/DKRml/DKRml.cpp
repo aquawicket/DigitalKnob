@@ -333,10 +333,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 	//TODO - make rmlEvent accessable through javascript
 	//1. Create Javascript Event object that references the rmlEvent
 	DKString rmlEventAddress = DKEvent::eventToAddress(&rmlEvent);
-	DKString code = "new Event("+rmlEventAddress+")";
-	DKString rval;
-	DKDuktape::Get()->RunDuktape(code, rval);
-	DKINFO("DKRml::ProcessEvent(): "+code+": rval="+rval+"\n");
+	//DKString code = "new Event("+rmlEventAddress+")";
+	//DKString rval;
+	//DKDuktape::Get()->RunDuktape(code, rval);
+	//DKINFO("DKRml::ProcessEvent(): "+code+": rval="+rval+"\n");
 
 	//DKDEBUGFUNC(event);
 	if (!rmlEvent.GetCurrentElement()) { return; } //MUST BE VALID!
@@ -412,8 +412,11 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 
 		//// PROCESS ELEMENT EVENTS //////
 		if (same(ev->GetId(), currentElementAddress) && same(_type, type)) {
+			ev->data.clear();
+			ev->data.push_back(rmlEventAddress);
 			//ev->rEvent = &rmlEvent;
 
+			/*
 			//pass the value
 			if (same(type, "keydown") || same(type, "keyup")) {
 				ev->data.clear();
@@ -423,6 +426,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 				ev->data.clear();
 				ev->data.push_back(toString(rmlEvent.GetParameter<int>("button", 0)));
 			}
+			*/
 			//FIXME - we run the risk of having event function pointers that point to nowhere
 			if (!ev->event_func(ev)) {
 				DKERROR("DKRml::ProcessEvent failed");

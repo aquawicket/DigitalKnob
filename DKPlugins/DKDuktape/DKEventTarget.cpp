@@ -46,6 +46,11 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	duk_push_global_object(ctx);
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 
+	DKString rmlEventAddress = event->data[0];
+	DKString newEvent = "new Event(\""+rmlEventAddress+"\")";
+	DKINFO("DKEventTarget::OnEvent(): "+newEvent+"\n");
+	duk_eval_string(ctx, newEvent.c_str());
+	/*
 	DKString json;
 	if(value.empty()){
 		json = "{\"currentTarget\": \""+id+"\",\"type\": \""+type+"\"}";
@@ -55,6 +60,7 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	}
 	duk_push_string(ctx, json.c_str());
 	duk_json_decode(ctx, -1);
+	*/
 	
 	if(duk_pcall(ctx, 1) != 0){
 		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
