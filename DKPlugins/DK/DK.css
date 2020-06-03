@@ -1,25 +1,23 @@
 html{
-	height:100%;
 	font-size: 1.0px;
 }
 
 body{
-	font-family: Arial;
+	font-size: 13em;
+	/*
+	margin: 0px;
+	padding: 0px;
 	top: 0px;
 	left: 0px;
 	height: 100%;
 	min-height: 100%;
 	width: 100%;
-	padding: 0px;
-	margin: 0px;
 	overflow-x: hidden;
 	overflow-y: hidden;
+	*/
 }
 
-button{
-	font-size: 13rem;
-}
-
+/*
 textarea{
 	resize: none;
 }
@@ -44,3 +42,4 @@ div.option:hover{
 	background-color: rgb(123,157,212);
 	color:white;
 }
+*/
