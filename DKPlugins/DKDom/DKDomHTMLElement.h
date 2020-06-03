@@ -1,20 +1,19 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKHTMLElement_H
-#define DKHTMLElement_H
+#ifndef DKDomHTMLElement_H
+#define DKDomHTMLElement_H
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////
-class DKHTMLElement : public DKObjectT<DKHTMLElement>
+///////////////////////////////////////////////////////////
+class DKDomHTMLElement : public DKObjectT<DKDomHTMLElement>
 {
 public:
 	bool Init();
-	
 };
 
 
-REGISTER_OBJECT(DKHTMLElement, true)
+REGISTER_OBJECT(DKDomHTMLElement, true)
 
-#endif //DKHTMLElement_H
+#endif //DKDomHTMLElement_H
 #endif //USE_DKDuktape

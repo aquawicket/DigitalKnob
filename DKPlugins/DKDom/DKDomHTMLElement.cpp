@@ -1,15 +1,14 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKRml/DKHTMLElement.h"
-#include "DKRml/DKRml.h"
+#include "DKDom/DKDomHTMLElement.h"
 
 
-//////////////////////////
-bool DKHTMLElement::Init()
+/////////////////////////////
+bool DKDomHTMLElement::Init()
 {
 	DKDEBUGFUNC();
 	
-	DKClass::DKCreate("DKRml/DKHTMLElement.js");
+	DKClass::DKCreate("DKDom/DKDomHTMLElement.js");
 	return true;
 }
 

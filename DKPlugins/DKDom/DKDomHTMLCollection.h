@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKHTMLCollection_H
-#define DKHTMLCollection_H
+#ifndef DKDomHTMLCollection_H
+#define DKDomHTMLCollection_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////////
-class DKHTMLCollection : public DKObjectT<DKHTMLCollection>
+/////////////////////////////////////////////////////////////////
+class DKDomHTMLCollection : public DKObjectT<DKDomHTMLCollection>
 {
 public:
 	bool Init();
@@ -14,7 +14,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKHTMLCollection, true)
+REGISTER_OBJECT(DKDomHTMLCollection, true)
 
-#endif //DKHTMLCollection_H
+#endif //DKDomHTMLCollection_H
 #endif //USE_DKDuktape

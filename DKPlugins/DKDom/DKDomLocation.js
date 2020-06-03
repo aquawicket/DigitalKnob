@@ -1,50 +1,48 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Locationc
 
-var location;
-
 ////////////////////////////////
 var Location = function(pointer)
 {
-	Object.defineProperty(this, "hash", { get: function(){ return DKLocation_hash(); } });
+	Object.defineProperty(this, "hash", { get: function(){ return DKDomLocation_hash(); } });
 	Object.defineProperty(this, "host", {
-		get: function()   { return DKLocation_host();      },
-		set: function(val){ return DKLocation_host(val);   }
+		get: function()   { return DKDomLocation_host();      },
+		set: function(val){ return DKDomLocation_host(val);   }
 	});
 	Object.defineProperty(this, "hostname", {
-		get: function()   { return DKLocation_hostname();      },
-		set: function(val){ return DKLocation_hostname(val);   }
+		get: function()   { return DKDomLocation_hostname();      },
+		set: function(val){ return DKDomLocation_hostname(val);   }
 	});
 	Object.defineProperty(this, "href", {
-		get: function()   { return DKLocation_href();      },
-		set: function(val){ return DKLocation_href(val);   }
+		get: function()   { return DKDomLocation_href();      },
+		set: function(val){ return DKDomLocation_href(val);   }
 	});
-	Object.defineProperty(this, "origin", { get: function(){ return DKLocation_origin(); } });
+	Object.defineProperty(this, "origin", { get: function(){ return DKDomLocation_origin(); } });
 	Object.defineProperty(this, "pathname", {
-		get: function()   { return DKLocation_pathname();      },
-		set: function(val){ return DKLocation_pathname(val);   }
+		get: function()   { return DKDomLocation_pathname();      },
+		set: function(val){ return DKDomLocation_pathname(val);   }
 	});
 	Object.defineProperty(this, "port", {
-		get: function()   { return DKLocation_port();      },
-		set: function(val){ return DKLocation_port(val);   }
+		get: function()   { return DKDomLocation_port();      },
+		set: function(val){ return DKDomLocation_port(val);   }
 	});
 	Object.defineProperty(this, "protocol", {
-		get: function()   { return DKLocation_protocol();      },
-		set: function(val){ return DKLocation_protocol(val);   }
+		get: function()   { return DKDomLocation_protocol();      },
+		set: function(val){ return DKDomLocation_protocol(val);   }
 	});
 	Object.defineProperty(this, "search", {
-		get: function()   { return DKLocation_search();      },
-		set: function(val){ return DKLocation_search(val);   }
+		get: function()   { return DKDomLocation_search();      },
+		set: function(val){ return DKDomLocation_search(val);   }
 	});
 	
 	Location.prototype.assign = function(url){
-		DKLocation_href(url); 
+		DKDomLocation_href(url); 
 	}
 	Location.prototype.reload = function(forcedReload){
-		DKLocation_reload(forcedReload); 
+		DKDomLocation_reload(forcedReload); 
 	}
 	Location.prototype.replace = function(url){
-		DKLocation_href(url); //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
+		DKDomLocation_href(url); //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
 	}
 }
 
-location = new Location("location");
+var location = new Location("location");

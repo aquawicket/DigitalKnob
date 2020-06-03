@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKLocation_H
-#define DKLocation_H
+#ifndef DKDomLocation_H
+#define DKDomLocation_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
-class DKLocation : public DKObjectT<DKLocation>
+/////////////////////////////////////////////////////
+class DKDomLocation : public DKObjectT<DKDomLocation>
 {
 public:
 	bool Init();
@@ -24,8 +24,7 @@ public:
 	static int username(duk_context* ctx);
 };
 
+REGISTER_OBJECT(DKDomLocation, true)
 
-REGISTER_OBJECT(DKLocation, true)
-
-#endif //DKLocation_H
+#endif //DKDomLocation_H
 #endif //USE_DKDuktape
