@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKDocument_H
-#define DKDocument_H
+#ifndef DKDomDocument_H
+#define DKDomDocument_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
-class DKDocument : public DKObjectT<DKDocument>
+/////////////////////////////////////////////////////
+class DKDomDocument : public DKObjectT<DKDomDocument>
 {
 public:
 	bool Init();
@@ -19,7 +19,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKDocument, true)
+REGISTER_OBJECT(DKDomDocument, true)
 
-#endif //DKDocument_H
+#endif //DKDomDocument_H
 #endif //USE_DKDuktape

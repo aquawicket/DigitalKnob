@@ -1,14 +1,14 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKElement_H
-#define DKElement_H
+#ifndef DKDomElement_H
+#define DKDomElement_H
 
 #include <RmlUi/Core.h>
 #include "DKDuktape/DKDuktape.h"
-#include "DKRml/DKElement.h"
+#include "DKDom/DKDomElement.h"
 
-/////////////////////////////////////////////
-class DKElement : public DKObjectT<DKElement>
+///////////////////////////////////////////////////
+class DKDomElement : public DKObjectT<DKDomElement>
 {
 public:
 	bool Init();
@@ -30,7 +30,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKElement, true)
+REGISTER_OBJECT(DKDomElement, true)
 
-#endif //DKElement_H
+#endif //DKDomElement_H
 #endif //USE_DKDuktape

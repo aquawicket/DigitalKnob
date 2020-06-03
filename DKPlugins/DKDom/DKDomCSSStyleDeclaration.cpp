@@ -1,45 +1,45 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKRml/DKCSSStyleDeclaration.h"
+#include "DKRml/DKDomCSSStyleDeclaration.h"
 #include "DKRml/DKElement.h"
 
 
-//////////////////////////////////
-bool DKCSSStyleDeclaration::Init()
+/////////////////////////////////////
+bool DKDomCSSStyleDeclaration::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCSSStyleDeclaration_getPropertyValue", DKCSSStyleDeclaration::getPropertyValue);
-	DKDuktape::AttachFunction("DKCSSStyleDeclaration_setProperty", DKCSSStyleDeclaration::setProperty);
+	DKDuktape::AttachFunction("DKDomCSSStyleDeclaration_getPropertyValue", DKDomCSSStyleDeclaration::getPropertyValue);
+	DKDuktape::AttachFunction("DKDomCSSStyleDeclaration_setProperty", DKDomCSSStyleDeclaration::setProperty);
 
-	DKClass::DKCreate("DKRml/DKCSSStyleDeclaration.js");
+	DKClass::DKCreate("DKDom/DKDomCSSStyleDeclaration.js");
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-int  DKCSSStyleDeclaration::getPropertyValue(duk_context* ctx)
+////////////////////////////////////////////////////////////////
+int DKDomCSSStyleDeclaration::getPropertyValue(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
 	Rml::Core::Element* element = DKElement::addressToElement(address);
 	if(!element){
-		DKERROR("DKRmlJS::getPropertyValue(): element invalid\n");
+		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	const Rml::Core::Property* prop = element->GetProperty(propertyName.c_str());
 	if(!prop){ 
-		DKERROR("DKRmlJS::getPropertyValue(): prop is invalid\n");
+		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue: prop is invalid\n");
 		duk_push_boolean(ctx, false);
 		return true; 
 	}
-	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString();//.CString();
+	DKString propertyValue = element->GetProperty(propertyName.c_str())->ToString();
 	duk_push_string(ctx, propertyValue.c_str());
 	return true;
 }
 
-////////////////////////////////////////////////////////
-int DKCSSStyleDeclaration::setProperty(duk_context* ctx)
+///////////////////////////////////////////////////////////
+int DKDomCSSStyleDeclaration::setProperty(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);

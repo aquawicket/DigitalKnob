@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKCSSStyleDeclaration_H
-#define DKCSSStyleDeclaration_H
+#ifndef DKDomCSSStyleDeclaration_H
+#define DKDomCSSStyleDeclaration_H
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////////////////////
-class DKCSSStyleDeclaration : public DKObjectT<DKCSSStyleDeclaration>
+///////////////////////////////////////////////////////////////////////////
+class DKDomCSSStyleDeclaration : public DKObjectT<DKDomCSSStyleDeclaration>
 {
 public:
 	bool Init();
@@ -16,7 +16,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKCSSStyleDeclaration, true)
+REGISTER_OBJECT(DKDomCSSStyleDeclaration, true)
 
-#endif //DKCSSStyleDeclaration_H
+#endif //DKDomCSSStyleDeclaration_H
 #endif //USE_DKDuktape

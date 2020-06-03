@@ -8,12 +8,12 @@ var CSSStyleDeclaration = function(pointer)
 	
 	// Methods
 	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
-		this[propertyName] = DKCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
+		this[propertyName] = DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 		return this[propertyName];
 	}
 	CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
 		console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
-		DKCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
+		DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
 		this[propertyName] = propertyValue;
 	}
 	
@@ -34,7 +34,7 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 
-			target[key] = DKCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey);
+			target[key] = DKDomCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey);
 			return target[key];
 		},
 		set: function(target, key, val, recv){
@@ -51,7 +51,7 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 			
-			DKCSSStyleDeclaration_setProperty(target["pointer"], realKey, val);
+			DKDomCSSStyleDeclaration_setProperty(target["pointer"], realKey, val);
 			target[key] = val;
 			return true;
 		},

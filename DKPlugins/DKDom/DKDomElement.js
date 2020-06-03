@@ -7,62 +7,62 @@ var Element = function(pointer)
 	this.pointer = pointer;
 	
 	// Properties
-	Object.defineProperty(this, "attributes",   { get: function(){ return DKElement_attributes(this.pointer);   } });
-	Object.defineProperty(this, "classList",    { get: function(){ return DKElement_classList(this.pointer);    } });
+	Object.defineProperty(this, "attributes",   { get: function(){ return DKDomElement_attributes(this.pointer);   } });
+	Object.defineProperty(this, "classList",    { get: function(){ return DKDomElement_classList(this.pointer);    } });
 	Object.defineProperty(this, "className", { 
-		get: function()   { return DKElement_className(this.pointer);      },
-		set: function(val){ return DKElement_className(this.pointer, val); }
+		get: function()   { return DKDomElement_className(this.pointer);      },
+		set: function(val){ return DKDomElement_className(this.pointer, val); }
 	});  //TODO
-	Object.defineProperty(this, "clientHeight", { get: function(){ return DKElement_clientHeight(this.pointer); } });
-	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKElement_clientLeft(this.pointer);   } });
-	Object.defineProperty(this, "clientTop",    { get: function(){ return DKElement_clientTop(this.pointer);    } });
-	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKElement_clientWidth(this.pointer);  } });
-	Object.defineProperty(this, "computedName", { get: function(){ return DKElement_computedName(this.pointer); } });
-	Object.defineProperty(this, "computedRole", { get: function(){ return DKElement_computedRole(this.pointer); } });
+	Object.defineProperty(this, "clientHeight", { get: function(){ return DKDomElement_clientHeight(this.pointer); } });
+	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKDomElement_clientLeft(this.pointer);   } });
+	Object.defineProperty(this, "clientTop",    { get: function(){ return DKDomElement_clientTop(this.pointer);    } });
+	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKDomElement_clientWidth(this.pointer);  } });
+	Object.defineProperty(this, "computedName", { get: function(){ return DKDomElement_computedName(this.pointer); } });
+	Object.defineProperty(this, "computedRole", { get: function(){ return DKDomElement_computedRole(this.pointer); } });
 	/*
 	Object.defineProperty(this, "id", { 
-		get: function()   { return DKElement_id(this.pointer);      },
-		set: function(val){ return DKElement_id(this.pointer, val); }
+		get: function()   { return DKDomElement_id(this.pointer);      },
+		set: function(val){ return DKDomElement_id(this.pointer, val); }
 	});  //TODO
 	*/	
 	Object.defineProperty(this, "innerHTML",    { 
-		get: function()   { return DKElement_innerHTML(this.pointer);      },
-		set: function(val){ return DKElement_innerHTML(this.pointer, val); }
+		get: function()   { return DKDomElement_innerHTML(this.pointer);      },
+		set: function(val){ return DKDomElement_innerHTML(this.pointer, val); }
 	});
-	Object.defineProperty(this, "localName",          { get: function(){ return DKElement_localName(this.pointer);              } });
-	Object.defineProperty(this, "namespaceURI",       { get: function(){ return DKElement_namespaceURI(this.pointer);           } });
-	Object.defineProperty(this, "nextElementSibling", { get: function(){ return DKElement_nextElementSibling(this.pointer);     } });
+	Object.defineProperty(this, "localName",          { get: function(){ return DKDomElement_localName(this.pointer);              } });
+	Object.defineProperty(this, "namespaceURI",       { get: function(){ return DKDomElement_namespaceURI(this.pointer);           } });
+	Object.defineProperty(this, "nextElementSibling", { get: function(){ return DKDomElement_nextElementSibling(this.pointer);     } });
 	Object.defineProperty(this, "outerHTML", { 
-		get: function()   { return DKElement_outerHTML(this.pointer);      },
-		set: function(val){ return DKElement_outerHTML(this.pointer, val); }
+		get: function()   { return DKDomElement_outerHTML(this.pointer);      },
+		set: function(val){ return DKDomElement_outerHTML(this.pointer, val); }
 	});
-	Object.defineProperty(this, "prefix",                 { get: function(){ return DKElement_prefix(this.pointer);                 } });
-	Object.defineProperty(this, "previousElementSibling", { get: function(){ return DKElement_previousElementSibling(this.pointer); } });
-	Object.defineProperty(this, "scrollHeight",           { get: function(){ return DKElement_scrollHeight(this.pointer);           } });
+	Object.defineProperty(this, "prefix",                 { get: function(){ return DKDomElement_prefix(this.pointer);                 } });
+	Object.defineProperty(this, "previousElementSibling", { get: function(){ return DKDomElement_previousElementSibling(this.pointer); } });
+	Object.defineProperty(this, "scrollHeight",           { get: function(){ return DKDomElement_scrollHeight(this.pointer);           } });
 	Object.defineProperty(this, "scrollLeft", { 
-		get: function()   { return DKElement_scrollLeft(this.pointer);      },
-		set: function(val){ return DKElement_scrollLeft(this.pointer, val); }
+		get: function()   { return DKDomElement_scrollLeft(this.pointer);      },
+		set: function(val){ return DKDomElement_scrollLeft(this.pointer, val); }
 	});   //TODO
-	Object.defineProperty(this, "scrollLeftMax",          { get: function(){ return DKElement_scrollLeftMax(this.pointer);          } });
+	Object.defineProperty(this, "scrollLeftMax",          { get: function(){ return DKDomElement_scrollLeftMax(this.pointer);          } });
 	Object.defineProperty(this, "scrollTop", { 
-		get: function()   { return DKElement_scrollTop(this.pointer);      },
-		set: function(val){ return DKElement_scrollTop(this.pointer, val); }
+		get: function()   { return DKDomElement_scrollTop(this.pointer);      },
+		set: function(val){ return DKDomElement_scrollTop(this.pointer, val); }
 	});   //TODO
-	Object.defineProperty(this, "scrollTopMax",           { get: function(){ return DKElement_scrollTopMax(this.pointer);           } });
-	Object.defineProperty(this, "scrollWidth",            { get: function(){ return DKElement_scrollWidth(this.pointer);            } });
-	Object.defineProperty(this, "shadowRoot",             { get: function(){ return DKElement_shadowRoot(this.pointer);             } });
-	Object.defineProperty(this, "openOrClosedShadowRoot", { get: function(){ return DKElement_openOrClosedShadowRoot(this.pointer); } });
+	Object.defineProperty(this, "scrollTopMax",           { get: function(){ return DKDomElement_scrollTopMax(this.pointer);           } });
+	Object.defineProperty(this, "scrollWidth",            { get: function(){ return DKDomElement_scrollWidth(this.pointer);            } });
+	Object.defineProperty(this, "shadowRoot",             { get: function(){ return DKDomElement_shadowRoot(this.pointer);             } });
+	Object.defineProperty(this, "openOrClosedShadowRoot", { get: function(){ return DKDomElement_openOrClosedShadowRoot(this.pointer); } });
 	Object.defineProperty(this, "slot", { 
-		get: function()   { return DKElement_slot(this.pointer);      },
-		set: function(val){ return DKElement_slot(this.pointer, val); }
+		get: function()   { return DKDomElement_slot(this.pointer);      },
+		set: function(val){ return DKDomElement_slot(this.pointer, val); }
 	});   //TODO
 	Object.defineProperty(this, "tabStop", { 
-		get: function()   { return DKElement_tabStop(this.pointer);      },
-		set: function(val){ return DKElement_tabStop(this.pointer, val); }
+		get: function()   { return DKDomElement_tabStop(this.pointer);      },
+		set: function(val){ return DKDomElement_tabStop(this.pointer, val); }
 	});  //TODO
-	Object.defineProperty(this, "tagName",                { get: function(){ return DKElement_tagName(this.pointer);                } });
-	Object.defineProperty(this, "undoManager",            { get: function(){ return DKElement_undoManager(this.pointer);            } });
-	Object.defineProperty(this, "undoScope ",             { get: function(){ return DKElement_undoScope (this.pointer);             } });
+	Object.defineProperty(this, "tagName",                { get: function(){ return DKDomElement_tagName(this.pointer);                } });
+	Object.defineProperty(this, "undoManager",            { get: function(){ return DKDomElement_undoManager(this.pointer);            } });
+	Object.defineProperty(this, "undoScope ",             { get: function(){ return DKDomElement_undoScope (this.pointer);             } });
 	
 	
 	Object.defineProperty(this, "onfullscreenchange", {
@@ -94,7 +94,7 @@ var Element = function(pointer)
 		//TODO
 	}
 	Element.prototype.getAttribute = function(attribute){
-		this[attribute] = DKElement_getAttribute(this.pointer, attribute);
+		this[attribute] = DKDomElement_getAttribute(this.pointer, attribute);
 		if(!this[attribute]){ return null; }
 		return this[attribute];
 	}
@@ -112,16 +112,16 @@ var Element = function(pointer)
 	}
 	Element.prototype.getElementsByClassName = function(name){
 		//FIXME: only search within the element
-		//DKElements_getElementsByClassName(this.pointer, name)
-		var pointers = DKElement_getElementsByClassName(name);
+		//DKDomElements_getElementsByClassName(this.pointer, name)
+		var pointers = DKDomElement_getElementsByClassName(name);
 		if(!pointers){ return; }
 		var elements = new HTMLCollection(pointers);
 		return elements;
 	}
 	Element.prototype.getElementsByTagName = function(tag){
 		//FIXME: only search within the element
-		//DKElements_getElementsByTagName(this.pointer, tag)
-		var pointers = DKElement_getElementsByTagName(tag);
+		//DKDomElements_getElementsByTagName(this.pointer, tag)
+		var pointers = DKDomElement_getElementsByTagName(tag);
 		if(!pointers){ return; }
 		var elements = new HTMLCollection(pointers);
 		return elements;
@@ -130,7 +130,7 @@ var Element = function(pointer)
 		//TODO
 	}
 	Element.prototype.hasAttribute = function(attribute){
-		if(DKElement_hasAttribute(this.pointer, attribute)){ return true; }
+		if(DKDomElement_hasAttribute(this.pointer, attribute)){ return true; }
 		else{ return false; }
 	}
 	Element.prototype.hasAttributeNS = function(){
@@ -179,7 +179,7 @@ var Element = function(pointer)
 		//TODO
 	}
 	Element.prototype.setAttribute = function(attribute, value){
-		DKElement_setAttribute(this.pointer, attribute, value);
+		DKDomElement_setAttribute(this.pointer, attribute, value);
 		this[attribute] = value;
 	}
 	Element.prototype.setAttributeNS = function(){
@@ -212,7 +212,7 @@ var Element = function(pointer)
 				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{
-				target[key] = DKElement_getAttribute(target["pointer"], key);
+				target[key] = DKDomElement_getAttribute(target["pointer"], key);
 			}
 			return target[key];
 		},
@@ -224,7 +224,7 @@ var Element = function(pointer)
 				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{
-				DKElement_setAttribute(target["pointer"], key, val);
+				DKDomElement_setAttribute(target["pointer"], key, val);
 			}
 			target[key] = val;
 			return true;

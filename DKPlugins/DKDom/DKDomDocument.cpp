@@ -1,32 +1,32 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKRml/DKDocument.h"
 #include "DKRml/DKRml.h"
-#include "DKRml/DKElement.h"
+#include "DKDom/DKDomDocument.h"
+#include "DKDom/DKDomElement.h"
 
 
-///////////////////////
-bool DKDocument::Init()
+//////////////////////////
+bool DKDomDocument::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDocument_body", DKDocument::body);
-	DKDuktape::AttachFunction("DKDocument_createElement", DKDocument::createElement);
-	DKDuktape::AttachFunction("DKDocument_documentElement", DKDocument::documentElement);
-	DKDuktape::AttachFunction("DKDocument_getElementById", DKDocument::getElementById);
-	DKDuktape::AttachFunction("DKDocument_getElementsByTagName", DKDocument::getElementsByTagName);
+	DKDuktape::AttachFunction("DKDomDocument_body", DKDomDocument::body);
+	DKDuktape::AttachFunction("DKDomDocument_createElement", DKDomDocument::createElement);
+	DKDuktape::AttachFunction("DKDomDocument_documentElement", DKDomDocument::documentElement);
+	DKDuktape::AttachFunction("DKDomDocument_getElementById", DKDomDocument::getElementById);
+	DKDuktape::AttachFunction("DKDomDocument_getElementsByTagName", DKDomDocument::getElementsByTagName);
 	
-	DKClass::DKCreate("DKRml/DKDocument.js");
+	DKClass::DKCreate("DKDom/DKDomDocument.js");
 	return true;
 }
 
-//////////////////////////////////////
-int DKDocument::body(duk_context* ctx)
+/////////////////////////////////////////
+int DKDomDocument::body(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	Rml::Core::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0]){
-		DKERROR("DKDocument::body(): element invalid\n");
+		DKERROR("DKDomDocument::body(): element invalid\n");
 		duk_push_null(ctx);
 		return false;
 	}
@@ -36,14 +36,14 @@ int DKDocument::body(duk_context* ctx)
 }
 
 ///////////////////////////////////////////////
-int DKDocument::createElement(duk_context* ctx)
+int DKDomDocument::createElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
 	Rml::Core::Element* doc = DKRml::Get()->document;
 	Rml::Core::Element* element = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 	if(!element){
-		DKERROR("DKDocument::createElement(): element invalid\n");
+		DKERROR("DKDomDocument::createElement(): element invalid\n");
 		return false;
 	}
 	DKString elementAddress = DKElement::elementToAddress(element);
@@ -51,13 +51,13 @@ int DKDocument::createElement(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////////////
-int DKDocument::documentElement(duk_context* ctx)
+////////////////////////////////////////////////////
+int DKDomDocument::documentElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	Rml::Core::Element* element = DKRml::Get()->document;
 	if(!element){
-		DKERROR("DKDocument::documentElement(): element invalid\n");
+		DKERROR("DKDomDocument::documentElement(): element invalid\n");
 		duk_push_null(ctx);
 		return false;
 	}
@@ -66,14 +66,14 @@ int DKDocument::documentElement(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////////
-int DKDocument::getElementById(duk_context* ctx)
+///////////////////////////////////////////////////
+int DKDomDocument::getElementById(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rml::Core::Element* element = DKRml::Get()->document->GetElementById(id.c_str());
 	if(!element){
-		//DKERROR("DKRmlJS::getElementById(): element invalid\n");
+		//DKERROR("DKDomDocument::getElementById(): element invalid\n");
 		duk_push_null(ctx);
 		return true;
 	}
@@ -82,15 +82,15 @@ int DKDocument::getElementById(duk_context* ctx)
 	return true;
 }
 
-//////////////////////////////////////////////////////
-int DKDocument::getElementsByTagName(duk_context* ctx)
+/////////////////////////////////////////////////////////
+int DKDomDocument::getElementsByTagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
 	Rml::Core::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, tag.c_str());
 	if(elements.empty()){
-		//DKERROR("DKRmlJS::getElementsByTagName(): element list invalid\n");
+		//DKERROR("DKDomDocument::getElementsByTagName(): element list invalid\n");
 		duk_push_null(ctx);
 		return true;
 	}
