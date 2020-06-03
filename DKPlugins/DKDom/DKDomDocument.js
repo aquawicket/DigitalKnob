@@ -1,7 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Document
 
-var document;
-
 ////////////////////////////////
 var Document = function(pointer)
 {
@@ -50,5 +48,6 @@ var Document = function(pointer)
 	
 	Node.call(this, pointer);
 }
+
 Document.prototype = Node.prototype;	
-document = new Document("document");
+var document = new Document("document");  //Create the global document object
