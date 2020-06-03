@@ -15,6 +15,8 @@ bool DKDomWindow::Init()
 	DKDuktape::AttachFunction("DKDomWindow_addEventListener", DKDomWindow::addEventListener);
 	DKDuktape::AttachFunction("DKDomWindow_removeEventListener", DKDomWindow::removeEventListener);
 	
+	DKClass::DKCreate("DKDom/DKDomWindow.js");
+	
 	return true;
 }
 
