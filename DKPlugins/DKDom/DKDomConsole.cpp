@@ -1,32 +1,32 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKConsole.h"
+#include "DKDuktape/DKDomConsole.h"
 
 
-//////////////////////
-bool DKConsole::Init()
+/////////////////////////
+bool DKDomConsole::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKConsole_clear", DKConsole::clear);
-	DKDuktape::AttachFunction("DKConsole_debug", DKConsole::debug);
-	DKDuktape::AttachFunction("DKConsole_error", DKConsole::error);
-	DKDuktape::AttachFunction("DKConsole_info", DKConsole::info);
-	DKDuktape::AttachFunction("DKConsole_warn", DKConsole::warn);
+	DKDuktape::AttachFunction("DKDomConsole_clear", DKDomConsole::clear);
+	DKDuktape::AttachFunction("DKDomConsole_debug", DKDomConsole::debug);
+	DKDuktape::AttachFunction("DKDomConsole_error", DKDomConsole::error);
+	DKDuktape::AttachFunction("DKDomConsole_info",  DKDomConsole::info);
+	DKDuktape::AttachFunction("DKDomConsole_warn",  DKDomConsole::warn);
 	
-	DKClass::DKCreate("DKDuktape/DKConsole.js");
+	DKClass::DKCreate("DKDom/DKDomConsole.js");
 	return true;
 }
 
-//////////////////////////////////////
-int DKConsole::clear(duk_context* ctx)
+/////////////////////////////////////////
+int DKDomConsole::clear(duk_context* ctx)
 {
 	//FIXME - make this work on all OS's
 	if(!DKUtil::System("cls")){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////
-int DKConsole::debug(duk_context* ctx)
+/////////////////////////////////////////
+int DKDomConsole::debug(duk_context* ctx)
 {
 	DKString string;
 	if(duk_is_string(ctx, 0)){
@@ -42,8 +42,8 @@ int DKConsole::debug(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
-int DKConsole::error(duk_context* ctx)
+/////////////////////////////////////////
+int DKDomConsole::error(duk_context* ctx)
 {
 	DKString string;
 	if(duk_is_string(ctx, 0)){
@@ -59,8 +59,8 @@ int DKConsole::error(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
-int DKConsole::info(duk_context* ctx)
+////////////////////////////////////////
+int DKDomConsole::info(duk_context* ctx)
 {
 	DKString string;
 	if(duk_is_string(ctx, 0)){
@@ -76,8 +76,8 @@ int DKConsole::info(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
-int DKConsole::warn(duk_context* ctx)
+////////////////////////////////////////
+int DKDomConsole::warn(duk_context* ctx)
 {
 	DKString string;
 	if(duk_is_string(ctx, 0)){
