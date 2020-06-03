@@ -2,14 +2,14 @@
 
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKEvent_H
-#define DKEvent_H
+#ifndef DKDomEvent_H
+#define DKDomEvent_H
 
 #include "DKDuktape/DKDuktape.h"
 #include "RmlUi/Core/Event.h"
 
-/////////////////////////////////////////
-class DKEvent : public DKObjectT<DKEvent>
+///////////////////////////////////////////////
+class DKDomEvent : public DKObjectT<DKDomEvent>
 {
 public:
 	bool Init();
@@ -52,7 +52,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKEvent, true)
+REGISTER_OBJECT(DKDomEvent, true)
 
-#endif //DKEvent_H
+#endif //DKDomEvent_H
 #endif //USE_DKDuktape
