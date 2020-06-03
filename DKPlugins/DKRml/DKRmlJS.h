@@ -13,16 +13,6 @@ public:
 
 	static int LoadUrl(duk_context* ctx);
 	static int ToggleDebugger(duk_context* ctx);
-
-	//events
-	static int addEventListener(duk_context* ctx);
-	static int removeEventListener(duk_context* ctx);
-	
-	//window
-	static int devicePixelRatio(duk_context* ctx);
-	static int innerHeight(duk_context* ctx);
-	static int innerWidth(duk_context* ctx);
-	static int name(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRmlJS, true)

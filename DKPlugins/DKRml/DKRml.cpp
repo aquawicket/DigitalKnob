@@ -66,19 +66,27 @@ bool DKRml::Init()
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
+	
+	DKClass::DKCreate("DKRmlJS");
 
 	//Load the javascript DOM
-	DKClass::DKCreate("DKLocation");
-	DKClass::DKCreate("DKNode");
-	DKClass::DKCreate("DKElement");
-	DKClass::DKCreate("DKHTMLElement");
-	DKClass::DKCreate("DKHTMLCollection");
-	DKClass::DKCreate("DKCSSStyleDeclaration");
-	DKClass::DKCreate("DKDocument");
-	DKClass::DKCreate("DKEvent");
-	DKClass::DKCreate("DKUIEvent");
-	DKClass::DKCreate("DKMouseEvent");
-	DKClass::DKCreate("DKRml/DKDom.js");
+	DKClass::DKCreate("DKDomConsole");
+	DKClass::DKCreate("DKDomNavigator");
+	DKClass::DKCreate("DKDomEventTarget");
+	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
+	DKClass::DKCreate("DKDomXMLHttpRequest");
+	DKClass::DKCreate("DKDomScreen");
+	DKClass::DKCreate("DKDomWindow");
+	DKClass::DKCreate("DKDomLocation");
+	DKClass::DKCreate("DKDomNode");
+	DKClass::DKCreate("DKDomElement");
+	DKClass::DKCreate("DKDomHTMLElement");
+	DKClass::DKCreate("DKDomHTMLCollection");
+	DKClass::DKCreate("DKDomCSSStyleDeclaration");
+	DKClass::DKCreate("DKDomDocument");
+	DKClass::DKCreate("DKDomEvent");
+	DKClass::DKCreate("DKDomUIEvent");
+	DKClass::DKCreate("DKDomMouseEvent");
 
 	DKString html;
 	DKString workingPath = DKFile::local_assets;

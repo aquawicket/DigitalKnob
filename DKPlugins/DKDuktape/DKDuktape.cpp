@@ -92,13 +92,13 @@ bool DKDuktape::Init()
 		}
 
 		DKClass::DKCreate("DKDuktapeJS");
-		DKClass::DKCreate("DKConsole");
-		DKClass::DKCreate("DKNavigator");
-		DKClass::DKCreate("DKEventTarget");
-		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
-		DKClass::DKCreate("DKXMLHttpRequest");
-		DKClass::DKCreate("DKScreen");
-		DKClass::DKCreate("DKDuktape/DKWindow.js");
+		//DKClass::DKCreate("DKConsole");
+		//DKClass::DKCreate("DKNavigator");
+		//DKClass::DKCreate("DKEventTarget");
+		//DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+		//DKClass::DKCreate("DKXMLHttpRequest");
+		//DKClass::DKCreate("DKScreen");
+		//DKClass::DKCreate("DKDuktape/DKWindow.js");
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
