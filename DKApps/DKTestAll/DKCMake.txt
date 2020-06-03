@@ -17,6 +17,7 @@ DKDEPEND(DKCrypto)
 DKDEPEND(DKCurl)
 DKDEPEND(DKDebug)
 DKDEPEND(DKDisplay)
+## DKDEPEND(DKDom) ##TODO:
 DKDEPEND(DKDuktape)
 ## DKDEPEND(FAR-2.0.2-win) ##FIXME: This breaks DKCmake, why?
 DKDEPEND(DKEditor)
