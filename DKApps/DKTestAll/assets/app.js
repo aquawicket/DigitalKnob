@@ -1,7 +1,7 @@
 DKCreate("DKDomConsole");
 DKCreate("DKDomNavigator");
 DKCreate("DKDomEventTarget");
-DKCreate("DKDom/DKGlobalEventHandlers.js");
+DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 DKCreate("DKDomXMLHttpRequest");
 DKCreate("DKDomScreen");
 DKCreate("DKDomWindow");

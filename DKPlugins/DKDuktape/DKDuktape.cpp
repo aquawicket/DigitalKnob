@@ -97,7 +97,7 @@ bool DKDuktape::Init()
 		//DKClass::DKCreate("DKDomConsole");
 		//DKClass::DKCreate("DKDomNavigator");
 		//DKClass::DKCreate("DKDomEventTarget");
-		//DKClass::DKCreate("DKDom/DKGlobalEventHandlers.js");
+		//DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 		//DKClass::DKCreate("DKDomXMLHttpRequest");
 		//DKClass::DKCreate("DKDomScreen");
 		//DKClass::DKCreate("DKDomWindow");
