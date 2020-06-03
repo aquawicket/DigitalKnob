@@ -12,7 +12,7 @@ bool DKUIEvent::Init()
 	DKDEBUGFUNC();
 
 	// Properties
-	DKDuktape::AttachFunction("DKUIEvent_cancelBubble", DKUIEvent::cancelBubble);
+	//DKDuktape::AttachFunction("DKUIEvent_cancelBubble", DKUIEvent::cancelBubble);
 
 	// Methods
 	DKDuktape::AttachFunction("DKUIEvent_initUIEvent", DKUIEvent::initUIEvent);
@@ -23,6 +23,7 @@ bool DKUIEvent::Init()
 
 
 // Properties
+/*
 /////////////////////////////////////////////
 int DKUIEvent::cancelBubble(duk_context* ctx)
 {
@@ -41,7 +42,7 @@ int DKUIEvent::cancelBubble(duk_context* ctx)
 	}
 	return true;
 }
-
+*/
 
 // Methods
 ////////////////////////////////////////////

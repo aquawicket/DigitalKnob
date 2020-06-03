@@ -15,7 +15,7 @@ public:
 	bool Init();
 	
 	// Properties
-	static int cancelBubble(duk_context* ctx); //Not standardized, Deprecated
+	//static int cancelBubble(duk_context* ctx); //Not standardized, Deprecated
 
 	// Methods
 	static int initUIEvent(duk_context* ctx); //Deprecated

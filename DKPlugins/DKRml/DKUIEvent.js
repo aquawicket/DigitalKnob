@@ -4,11 +4,13 @@
 var UIEvent = function(pointer)
 {
 	// Properties
+	/*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
 		set: function(flag){ 
 			return DKUIEvent_cancelBubble(this.pointer, flag);
 		}
 	});
+	*/
 
 
 	// Methods
