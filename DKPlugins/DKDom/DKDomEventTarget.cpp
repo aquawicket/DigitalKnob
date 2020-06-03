@@ -1,27 +1,27 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKEventTarget.h"
+#include "DKDom/DKDomEventTarget.h"
 
 
 //////////////////////////
-bool DKEventTarget::Init()
+bool DKDomEventTarget::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKEventTarget_addEventListener", DKEventTarget::addEventListener);
-	DKDuktape::AttachFunction("DKEventTarget_removeEventListener", DKEventTarget::removeEventListener);
+	DKDuktape::AttachFunction("DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);
+	DKDuktape::AttachFunction("DKDomEventTarget_removeEventListener", DKDomEventTarget::removeEventListener);
 
 	// non-standard
-	DKDuktape::AttachFunction("DKEventTarget_id", DKEventTarget::id);
-	DKDuktape::AttachFunction("DKEventTarget_idLike", DKEventTarget::idLike);
-	DKDuktape::AttachFunction("DKEventTarget_type", DKEventTarget::type);
-	DKDuktape::AttachFunction("DKEventTarget_value", DKEventTarget::value);
+	DKDuktape::AttachFunction("DKDomEventTarget_id", DKDomEventTarget::id);
+	DKDuktape::AttachFunction("DKDomEventTarget_idLike", DKDomEventTarget::idLike);
+	DKDuktape::AttachFunction("DKDomEventTarget_type", DKDomEventTarget::type);
+	DKDuktape::AttachFunction("DKDomEventTarget_value", DKDomEventTarget::value);
 	
-	DKClass::DKCreate("DKDuktape/DKEventTarget.js");
+	DKClass::DKCreate("DKDom/DKDomEventTarget.js");
 	return true;
 }
 
-////////////////////////////////////////////
-bool DKEventTarget::OnEvent(DKEvents* event)
+///////////////////////////////////////////////
+bool DKDomEventTarget::OnEvent(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -32,7 +32,7 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
 	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
-		DKERROR("DKEventTarget::OnEvent(): jsreturn invalid\n");
+		DKERROR("DKDomEventTarget::OnEvent(): jsreturn invalid\n");
 		return false;
 	}
 
@@ -49,7 +49,7 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 	else{
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
-	DKINFO("DKEventTarget::OnEvent(): "+newEvent+"\n");
+	DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
 	duk_eval_string(ctx, newEvent.c_str());
 	
 	if(duk_pcall(ctx, 1) != 0){
@@ -91,8 +91,8 @@ bool DKEventTarget::OnEvent(DKEvents* event)
 }
 
 
-/////////////////////////////////////////////////////
-int DKEventTarget::addEventListener(duk_context* ctx)
+////////////////////////////////////////////////////////
+int DKDomEventTarget::addEventListener(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -101,12 +101,12 @@ int DKEventTarget::addEventListener(duk_context* ctx)
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
-	if(!DKEvents::AddEvent(id, type, jsreturn, &DKEventTarget::OnEvent, DKEventTarget::Get())){ return false; }
+	if(!DKEvents::AddEvent(id, type, jsreturn, &DKDomEventTarget::OnEvent, DKDomEventTarget::Get())){ return false; }
 	return true;
 }
 
-////////////////////////////////////////////////////////
-int DKEventTarget::removeEventListener(duk_context* ctx)
+///////////////////////////////////////////////////////////
+int DKDomEventTarget::removeEventListener(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -121,8 +121,8 @@ int DKEventTarget::removeEventListener(duk_context* ctx)
 
 
 // non-standard
-////////////////////////////////////////
-int DKEventTarget::id(duk_context* ctx)
+//////////////////////////////////////////
+int DKDomEventTarget::id(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
@@ -135,8 +135,8 @@ int DKEventTarget::id(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKEventTarget::idLike(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDomEventTarget::idLike(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
@@ -149,8 +149,8 @@ int DKEventTarget::idLike(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKEventTarget::type(duk_context* ctx)
+////////////////////////////////////////////
+int DKDomEventTarget::type(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString id = duk_require_string(ctx, 1);
@@ -163,8 +163,8 @@ int DKEventTarget::type(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKEventTarget::value(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomEventTarget::value(duk_context* ctx)
 {
 	DKString evt = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);

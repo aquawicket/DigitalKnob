@@ -2,6 +2,7 @@
 
 var stored_events = [];
 
+/*
 ///////////////////////////////////////////
 var EventFromCPP = function(pointer, event)
 {
@@ -13,13 +14,12 @@ var EventFromCPP = function(pointer, event)
 		}
 	}
 }
+*/
 
 ///////////////////////////////////
 var EventTarget = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("EventTarget("+pointer+")");
-	
 	this.pointer = pointer;
 	this.listeners = {};
 	
@@ -29,7 +29,7 @@ var EventTarget = function(pointer)
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
-		DKEventTarget_addEventListener(this.pointer, type, callback);
+		DKDomEventTarget_addEventListener(this.pointer, type, callback);
 		if(!(type in this.listeners)){
 			this.listeners[type] = [];
 		}
@@ -37,7 +37,7 @@ var EventTarget = function(pointer)
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
 		//console.warn("removeEventListener this.pointer = "+this.pointer);
-		DKEventTarget_removeEventListener(this.pointer, type, callback);
+		DKDomEventTarget_removeEventListener(this.pointer, type, callback);
 		if(!(type in this.listeners)){
 			return;
 		}

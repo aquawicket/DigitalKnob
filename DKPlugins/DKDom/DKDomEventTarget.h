@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKEventTarget_H
-#define DKEventTarget_H
+#ifndef DKDomEventTarget_H
+#define DKDomEventTarget_H
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////
-class DKEventTarget : public DKObjectT<DKEventTarget>
+///////////////////////////////////////////////////////////
+class DKDomEventTarget : public DKObjectT<DKDomEventTarget>
 {
 public:
 	bool Init();
@@ -23,7 +23,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKEventTarget, true)
+REGISTER_OBJECT(DKDomEventTarget, true)
 
-#endif //DKEventTarget_H
+#endif //DKDomEventTarget_H
 #endif //USE_DKDuktape
