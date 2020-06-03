@@ -1,6 +1,6 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKDomConsole.h"
+#include "DKDom/DKDomConsole.h"
 
 
 /////////////////////////
