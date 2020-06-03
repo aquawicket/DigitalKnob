@@ -70,13 +70,13 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKRmlJS");
 
 	//Load the javascript DOM
-	DKClass::DKCreate("DKDomConsole");
-	DKClass::DKCreate("DKDomNavigator");
-	DKClass::DKCreate("DKDomEventTarget");
-	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
-	DKClass::DKCreate("DKDomXMLHttpRequest");
-	DKClass::DKCreate("DKDomScreen");
-	DKClass::DKCreate("DKDomWindow");
+	//DKClass::DKCreate("DKDomConsole");
+	//DKClass::DKCreate("DKDomNavigator");
+	//DKClass::DKCreate("DKDomEventTarget");
+	//DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
+	//DKClass::DKCreate("DKDomXMLHttpRequest");
+	//DKClass::DKCreate("DKDomScreen");
+	//DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");
