@@ -10,6 +10,7 @@ bool DKRmlJS::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKRml_LoadUrl", DKRmlJS::LoadUrl);
 	DKDuktape::AttachFunction("DKRml_ToggleDebugger", DKRmlJS::ToggleDebugger);
+	DKDuktape::AttachFunction("DKRml_devicePixelRatio", DKRmlJS::devicePixelRatio);
 	DKDuktape::AttachFunction("DKRml_innerHeight", DKRmlJS::innerHeight);
 	DKDuktape::AttachFunction("DKRml_innerWidth", DKRmlJS::innerWidth);
 	DKDuktape::AttachFunction("DKRml_name", DKRmlJS::name);
@@ -36,6 +37,23 @@ int DKRmlJS::ToggleDebugger(duk_context* ctx)
 	return 1;
 }
 
+///////////////////////////////////////////////
+int DKRmlJS::devicePixelRatio(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+
+	//get
+	if (!duk_is_number(ctx, 1)) {
+		float ratio = DKRml::Get()->context->GetDensityIndependentPixelRatio();
+		duk_push_number(ctx, ratio);
+		return true;
+	}
+	//set
+	float ratio = duk_require_number(ctx, 1);
+	DKRml::Get()->context->SetDensityIndependentPixelRatio(ratio);
+	return true;
+}
+
 /////////////////////////////////////////////
 int DKRmlJS::innerHeight(duk_context* ctx)
 {
@@ -58,7 +76,7 @@ int DKRmlJS::innerWidth(duk_context* ctx)
 int DKRmlJS::name(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKString name = DKRml::Get()->context->GetName();//.CString();
+	DKString name = DKRml::Get()->context->GetName();
 	duk_push_string(ctx, name.c_str());
 	return 1;
 }

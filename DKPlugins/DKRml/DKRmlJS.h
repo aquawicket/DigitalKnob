@@ -5,7 +5,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
+/////////////////////////////////////////
 class DKRmlJS : public DKObjectT<DKRmlJS>
 {
 public:
@@ -19,6 +19,7 @@ public:
 	static int removeEventListener(duk_context* ctx);
 	
 	//window
+	static int devicePixelRatio(duk_context* ctx);
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
 	static int name(duk_context* ctx);

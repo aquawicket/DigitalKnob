@@ -7,7 +7,10 @@ Object.defineProperty(window, "console",               { get: function(){ return
 Object.defineProperty(window, "controllers",           { get: function(){ /* return DKRml_controllers(this.pointer); */      } });
 Object.defineProperty(window, "customElements",        { get: function(){ /* return DKRml_customElements(this.pointer); */   } });
 Object.defineProperty(window, "crypto",                { get: function(){ /* return DKRml_crypto(this.pointer); */           } });
-Object.defineProperty(window, "devicePixelRatio",      { get: function(){ /* return DKRml_devicePixelRatio(this.pointer); */ } });
+Object.defineProperty(window, "devicePixelRatio",      { 
+	get: function()   {  return DKRml_devicePixelRatio(this.pointer);      },
+	set: function(val){  return DKRml_devicePixelRatio(this.pointer, val); }
+});
 Object.defineProperty(window, "dialogArguments",       { get: function(){ /* return DKRml_dialogArguments(this.pointer); */  } });
 Object.defineProperty(window, "document",              { get: function(){ return document;                                   } });
 Object.defineProperty(window, "event",                 { get: function(){ /* return DKRml_event(this.pointer); */            } });
@@ -18,8 +21,8 @@ Object.defineProperty(window, "fullScreen", {
 	set: function(val){ /* return DKRml_fullScreen(this.pointer, val); */ }
 });
 Object.defineProperty(window, "history",               { get: function(){ /* return DKRml_history(this.pointer); */          } });
-Object.defineProperty(window, "innerHeight",           { get: function(){ /* return DKRml_innerHeight(); */                  } });
-Object.defineProperty(window, "innerWidth",            { get: function(){ /* return DKRml_innerWidth(); */                   } });
+Object.defineProperty(window, "innerHeight",           { get: function(){ return DKRml_innerHeight();                        } });
+Object.defineProperty(window, "innerWidth",            { get: function(){ return DKRml_innerWidth();                         } });
 Object.defineProperty(window, "isSecureContext",       { get: function(){ /* return DKRml_isSecureContext(); */              } });
 Object.defineProperty(window, "length",                { get: function(){ /* return DKRml_length(); */                       } });
 Object.defineProperty(window, "location",              { get: function(){ return location;                                   } });
@@ -32,8 +35,8 @@ Object.defineProperty(window, "mozInnerScreenX",       { get: function(){ /* ret
 Object.defineProperty(window, "mozInnerScreenY",       { get: function(){ /* return DKRml_mozInnerScreenX(); */              } });
 Object.defineProperty(window, "mozPaintCount",         { get: function(){ /* return DKRml_mozPaintCount(); */                } });
 Object.defineProperty(window, "name", { 
-	get: function()   { /* return DKRml_name(); */   },
-	set: function(val){ /* return DKRml_setName(); */ }  
+	get: function()   { return DKRml_name();    },
+	set: function(val){ return DKRml_name(val); }  
 });
 Object.defineProperty(window, "navigator",             { get: function(){ return navigator;                                  } });
 Object.defineProperty(window, "opener",                { get: function(){ /* return DKRml_opener(); */                       } });
