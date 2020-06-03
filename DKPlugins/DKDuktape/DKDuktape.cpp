@@ -94,13 +94,13 @@ bool DKDuktape::Init()
 		DKClass::DKCreate("DKDuktapeJS");
 		
 		//Load the javascript DOM
-		DKClass::DKCreate("DKDomConsole");
-		DKClass::DKCreate("DKDomNavigator");
-		DKClass::DKCreate("DKDomEventTarget");
-		DKClass::DKCreate("DKDom/DKGlobalEventHandlers.js");
-		DKClass::DKCreate("DKDomXMLHttpRequest");
-		DKClass::DKCreate("DKDomScreen");
-		DKClass::DKCreate("DKDomWindow");
+		//DKClass::DKCreate("DKDomConsole");
+		//DKClass::DKCreate("DKDomNavigator");
+		//DKClass::DKCreate("DKDomEventTarget");
+		//DKClass::DKCreate("DKDom/DKGlobalEventHandlers.js");
+		//DKClass::DKCreate("DKDomXMLHttpRequest");
+		//DKClass::DKCreate("DKDomScreen");
+		//DKClass::DKCreate("DKDomWindow");
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
