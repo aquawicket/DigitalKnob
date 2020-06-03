@@ -2,14 +2,14 @@
 
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKMouseEvent_H
-#define DKMouseEvent_H
+#ifndef DKDomMouseEvent_H
+#define DKDomMouseEvent_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "RmlUi/Core/Event.h"
 
-///////////////////////////////////////////////////
-class DKMouseEvent : public DKObjectT<DKMouseEvent>
+
+/////////////////////////////////////////////////////////
+class DKDomMouseEvent : public DKObjectT<DKDomMouseEvent>
 {
 public:
 	bool Init();
@@ -23,7 +23,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKMouseEvent, true)
+REGISTER_OBJECT(DKDomMouseEvent, true)
 
-#endif //DKMouseEvent_H
+#endif //DKDomMouseEvent_H
 #endif //USE_DKDuktape

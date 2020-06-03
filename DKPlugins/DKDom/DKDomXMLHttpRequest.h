@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKXMLHttpRequest_H
-#define DKXMLHttpRequest_H
+#ifndef DKDomXMLHttpRequest_H
+#define DKDomXMLHttpRequest_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////////
-class DKXMLHttpRequest : public DKObjectT<DKXMLHttpRequest>
+/////////////////////////////////////////////////////////////////
+class DKDomXMLHttpRequest : public DKObjectT<DKDomXMLHttpRequest>
 {
 public:
 	bool Init();
@@ -15,7 +15,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKXMLHttpRequest, true)
+REGISTER_OBJECT(DKDomXMLHttpRequest, true)
 
-#endif //DKXMLHttpRequest_H
+#endif //DKDomXMLHttpRequest_H
 #endif //USE_DKDuktape

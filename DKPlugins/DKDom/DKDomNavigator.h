@@ -1,12 +1,12 @@
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKNavigator_H
-#define DKNavigator_H
+#ifndef DKDomNavigator_H
+#define DKDomNavigator_H
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
-class DKNavigator : public DKObjectT<DKNavigator>
+///////////////////////////////////////////////////////
+class DKDomNavigator : public DKObjectT<DKDomNavigator>
 {
 public:
 	bool Init();
@@ -17,7 +17,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKNavigator, true)
+REGISTER_OBJECT(DKDomNavigator, true)
 
-#endif //DKNavigator_H
+#endif //DKDomNavigator_H
 #endif //USE_DKDuktape

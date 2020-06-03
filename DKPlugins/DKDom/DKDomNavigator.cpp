@@ -1,28 +1,28 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKNavigator.h"
+#include "DKDom/DKDomNavigator.h"
 
-////////////////////////
-bool DKNavigator::Init()
+///////////////////////////
+bool DKDomNavigator::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKNavigator_onLine", DKNavigator::onLine);
-	DKDuktape::AttachFunction("DKNavigator_platform", DKNavigator::platform);
-	DKDuktape::AttachFunction("DKNavigator_productSub", DKNavigator::productSub);
+	DKDuktape::AttachFunction("DKDomNavigator_onLine", DKDomNavigator::onLine);
+	DKDuktape::AttachFunction("DKDomNavigator_platform", DKDomNavigator::platform);
+	DKDuktape::AttachFunction("DKDomNavigator_productSub", DKDomNavigator::productSub);
 	
-	DKClass::DKCreate("DKDuktape/DKNavigator.js");
+	DKClass::DKCreate("DKDom/DKDomNavigator.js");
 	return true;
 }
 
-/////////////////////////////////////////
-int DKNavigator::onLine(duk_context* ctx)
+////////////////////////////////////////////
+int DKDomNavigator::onLine(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-///////////////////////////////////////////
-int DKNavigator::platform(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDomNavigator::platform(duk_context* ctx)
 {
 	//TODO - complete this for all OS's
 #ifdef WIN64
@@ -37,12 +37,12 @@ int DKNavigator::platform(duk_context* ctx)
 	duk_push_string(ctx, "MacIntel");
 	return true;
 #endif
-	DKERROR("DKNavigator::platform(): platform invalid\n");
+	DKERROR("DKDomNavigator::platform(): platform invalid\n");
 	return false;
 }
 
-/////////////////////////////////////////////
-int DKNavigator::productSub(duk_context* ctx)
+////////////////////////////////////////////////
+int DKDomNavigator::productSub(duk_context* ctx)
 {
 	//TODO
 	return false;

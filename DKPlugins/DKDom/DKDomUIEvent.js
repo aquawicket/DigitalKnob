@@ -7,7 +7,7 @@ var UIEvent = function(pointer)
 	/*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
 		set: function(flag){ 
-			return DKUIEvent_cancelBubble(this.pointer, flag);
+			return DKDomUIEvent_cancelBubble(this.pointer, flag);
 		}
 	});
 	*/
@@ -15,7 +15,7 @@ var UIEvent = function(pointer)
 
 	// Methods
 	Event.prototype.initUIEvent = function(){ //Deprecated
-		DKUIEvent_initUIEvent(this.pointer);
+		DKDomUIEvent_initUIEvent(this.pointer);
 	};
 	
 	return Event.call(this, pointer);

@@ -2,72 +2,76 @@
 
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKScreen.h"
+#include "DKDom/DKDomScreen.h"
 
 
-/////////////////////
-bool DKScreen::Init()
+////////////////////////
+bool DKDomScreen::Init()
 {
 	DKDEBUGFUNC();
 
 	//Properties
-	DKDuktape::AttachFunction("DKScreen_availTop", DKScreen::availTop);
-	DKDuktape::AttachFunction("DKScreen_availLeft", DKScreen::availLeft);
-	DKDuktape::AttachFunction("DKScreen_availHeight", DKScreen::availHeight);
-	DKDuktape::AttachFunction("DKScreen_availWidth", DKScreen::availWidth);
-	DKDuktape::AttachFunction("DKScreen_colorDepth", DKScreen::colorDepth);
-	DKDuktape::AttachFunction("DKScreen_height", DKScreen::height);
-	DKDuktape::AttachFunction("DKScreen_left", DKScreen::left);
-	DKDuktape::AttachFunction("DKScreen_orientation", DKScreen::orientation);
-	DKDuktape::AttachFunction("DKScreen_pixelDepth", DKScreen::pixelDepth);
-	DKDuktape::AttachFunction("DKScreen_top", DKScreen::top);
-	DKDuktape::AttachFunction("DKScreen_width", DKScreen::width);
-	DKDuktape::AttachFunction("DKScreen_mozEnabled", DKScreen::mozEnabled);
-	DKDuktape::AttachFunction("DKScreen_mozBrightness", DKScreen::mozBrightness);
+	DKDuktape::AttachFunction("DKDomScreen_availTop", DKDomScreen::availTop);
+	DKDuktape::AttachFunction("DKDomScreen_availLeft", DKDomScreen::availLeft);
+	DKDuktape::AttachFunction("DKDomScreen_availHeight", DKDomScreen::availHeight);
+	DKDuktape::AttachFunction("DKDomScreen_availWidth", DKDomScreen::availWidth);
+	DKDuktape::AttachFunction("DKDomScreen_colorDepth", DKDomScreen::colorDepth);
+	DKDuktape::AttachFunction("DKDomScreen_height", DKDomScreen::height);
+	DKDuktape::AttachFunction("DKDomScreen_left", DKDomScreen::left);
+	DKDuktape::AttachFunction("DKDomScreen_orientation", DKDomScreen::orientation);
+	DKDuktape::AttachFunction("DKDomScreen_pixelDepth", DKDomScreen::pixelDepth);
+	DKDuktape::AttachFunction("DKDomScreen_top", DKDomScreen::top);
+	DKDuktape::AttachFunction("DKDomScreen_width", DKDomScreen::width);
+	DKDuktape::AttachFunction("DKDomScreen_mozEnabled", DKDomScreen::mozEnabled);
+	DKDuktape::AttachFunction("DKDomScreen_mozBrightness", DKDomScreen::mozBrightness);
 
 	//Methods
-	DKDuktape::AttachFunction("DKScreen_lockOrientation", DKScreen::lockOrientation);
-	DKDuktape::AttachFunction("DKScreen_unlockOrientations", DKScreen::unlockOrientation);
+	DKDuktape::AttachFunction("DKDomScreen_lockOrientation", DKDomScreen::lockOrientation);
+	DKDuktape::AttachFunction("DKDomScreen_unlockOrientations", DKDomScreen::unlockOrientation);
 
-	DKClass::DKCreate("DKDuktape/DKScreen.js");
+	DKClass::DKCreate("DKDom/DKDomScreen.js");
 	return true;
 }
 
 
 //Properties
-////////////////////////////////////////
-int DKScreen::availTop(duk_context* ctx)
+///////////////////////////////////////////
+int DKDomScreen::availTop(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::availLeft(duk_context* ctx)
+////////////////////////////////////////////
+int DKDomScreen::availLeft(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::availHeight(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDomScreen::availHeight(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::availWidth(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomScreen::availWidth(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::colorDepth(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomScreen::colorDepth(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////
-int DKScreen::height(duk_context* ctx)
+/////////////////////////////////////////
+int DKDomScreen::height(duk_context* ctx)
 {
 	int height;
 	if(!DKUtil::GetScreenHeight(height)){ return 0; }
@@ -75,32 +79,36 @@ int DKScreen::height(duk_context* ctx)
 	return 1;
 }
 
-int DKScreen::left(duk_context* ctx)
+///////////////////////////////////////
+int DKDomScreen::left(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::orientation(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDomScreen::orientation(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::pixelDepth(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomScreen::pixelDepth(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::top(duk_context* ctx)
+//////////////////////////////////////
+int DKDomScreen::top(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-/////////////////////////////////////
-int DKScreen::width(duk_context* ctx)
+////////////////////////////////////////
+int DKDomScreen::width(duk_context* ctx)
 {
 	int width;
 	if(!DKUtil::GetScreenWidth(width)) { return 0; }
@@ -108,13 +116,15 @@ int DKScreen::width(duk_context* ctx)
 	return 1;
 }
 
-int DKScreen::mozEnabled(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomScreen::mozEnabled(duk_context* ctx)
 {
 	//TODO
 	return false;
 }
 
-int DKScreen::mozBrightness(duk_context* ctx)
+////////////////////////////////////////////////
+int DKDomScreen::mozBrightness(duk_context* ctx)
 {
 	//TODO
 	return false;
@@ -123,16 +133,16 @@ int DKScreen::mozBrightness(duk_context* ctx)
 
 
 //Methods
-///////////////////////////////////////////////
-int DKScreen::lockOrientation(duk_context* ctx) 
+//////////////////////////////////////////////////
+int DKDomScreen::lockOrientation(duk_context* ctx) 
 {
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
 	DKString orientation = duk_require_string(ctx, 0);
 	return false;
 }
 
-/////////////////////////////////////////////////
-int DKScreen::unlockOrientation(duk_context* ctx)
+////////////////////////////////////////////////////
+int DKDomScreen::unlockOrientation(duk_context* ctx)
 {
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/unlockOrientation
 	return false;

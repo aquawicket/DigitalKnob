@@ -1,21 +1,21 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKXMLHttpRequest.h"
 #include "DK/DKFile.h"
+#include "DKDom/DKDomXMLHttpRequest.h"
 
 
-/////////////////////////////
-bool DKXMLHttpRequest::Init()
+////////////////////////////////
+bool DKDomXMLHttpRequest::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKXMLHttpRequest_send", DKXMLHttpRequest::send);
+	DKDuktape::AttachFunction("DKDomXMLHttpRequest_send", DKDomXMLHttpRequest::send);
 	
-	DKClass::DKCreate("DKDuktape/DKXMLHttpRequest.js");
+	DKClass::DKCreate("DKDom/DKDomXMLHttpRequest.js");
 	return true;
 }
 
-////////////////////////////////////////////
-int DKXMLHttpRequest::send(duk_context* ctx)
+///////////////////////////////////////////////
+int DKDomXMLHttpRequest::send(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	//void* object = duk_require_pointer(ctx, 0);
@@ -24,9 +24,9 @@ int DKXMLHttpRequest::send(duk_context* ctx)
 	bool async = duk_require_boolean(ctx, 2);
 	//DKString user; //TODO
 	//DKString password; //TODO
-	DKWARN("DKRocketJS::send("+method+","+url+","+toString(async)+")\n");
+	DKWARN("DKDomXMLHttpRequest::send("+method+","+url+","+toString(async)+")\n");
 	if(has(url,"http://") || has(url,"https://")){
-		DKERROR("DKRocketJS::send(): http/https not implemented yet\n");
+		DKERROR("DKDomXMLHttpRequest::send(): http/https not implemented yet\n");
 		return true;
 	}
 

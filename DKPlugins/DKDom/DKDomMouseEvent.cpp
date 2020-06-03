@@ -2,36 +2,36 @@
 
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKRml/DKMouseEvent.h"
-#include "DKRml/DKEvent.h"
+#include "DKDom/DKDomEvent.h"
+#include "DKDom/DKDomMouseEvent.h"
 
 
-/////////////////////////
-bool DKMouseEvent::Init()
+////////////////////////////
+bool DKDomMouseEvent::Init()
 {
 	DKDEBUGFUNC();
 
 	// Properties
-	DKDuktape::AttachFunction("DKMouseEvent_altKey", DKMouseEvent::altKey);
-	DKDuktape::AttachFunction("DKMouseEvent_button", DKMouseEvent::button);
+	DKDuktape::AttachFunction("DKDomMouseEvent_altKey", DKDomMouseEvent::altKey);
+	DKDuktape::AttachFunction("DKDomMouseEvent_button", DKDomMouseEvent::button);
 
 	// Methods
-	DKDuktape::AttachFunction("DKMouseEvent_getModifierState", DKMouseEvent::getModifierState);
+	DKDuktape::AttachFunction("DKDomMouseEvent_getModifierState", DKDomMouseEvent::getModifierState);
 
-	DKClass::DKCreate("DKRml/DKMouseEvent.js");
+	DKClass::DKCreate("DKDom/DKDomMouseEvent.js");
 	return true;
 }
 
 
 // Properties
-//////////////////////////////////////////
-int DKMouseEvent::altKey(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomMouseEvent::altKey(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Core::Event* event = DKEvent::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKMouseEvent::altKey(): event invalid\n");
+		DKERROR("DKDomMouseEvent::altKey(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -40,14 +40,14 @@ int DKMouseEvent::altKey(duk_context* ctx)
 	return false;
 }
 
-//////////////////////////////////////////
-int DKMouseEvent::button(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDomMouseEvent::button(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Core::Event* event = DKEvent::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKMouseEvent::button(): event invalid\n");
+		DKERROR("DKDomMouseEvent::button(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
@@ -58,14 +58,14 @@ int DKMouseEvent::button(duk_context* ctx)
 
 
 // Methods
-////////////////////////////////////////////////////
-int DKMouseEvent::getModifierState(duk_context* ctx)
+///////////////////////////////////////////////////////
+int DKDomMouseEvent::getModifierState(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Core::Event* event = DKEvent::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKMouseEvent::getModifierState(): event invalid\n");
+		DKERROR("DKDomMouseEvent::getModifierState(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
