@@ -8,5 +8,5 @@ window.addEventListener('error', function(e){
 	console.error(errorText);
 });
 
-DKDuktape_Create("DKBuild/DKBuildConsole.js");
+DKCreate("DKBuild/DKBuildConsole.js", function(){});
 //DKCreate("DKUpdate");
