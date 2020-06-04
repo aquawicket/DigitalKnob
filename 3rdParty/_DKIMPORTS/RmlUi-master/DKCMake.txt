@@ -3,10 +3,10 @@ DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
 ##DKSET(GIT C:/Progra~1/Git/bin/git.exe)
-##SET(STRING "${GIT} clone https://github.com/aquawicket2/RmlUi.git ${3RDPARTY}/RmlUi-master")
+##SET(STRING "${GIT} clone https://github.com/aquawicket/RmlUi.git ${3RDPARTY}/RmlUi-master")
 ##FILE(MAKE_DIRECTORY ${3RDPARTY}/RmlUi-master)
 ##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
-DKINSTALL(https://github.com/aquawicket2/RmlUi/archive/master.zip RmlUi-master)
+DKINSTALL(https://github.com/aquawicket/RmlUi/archive/master.zip RmlUi-master)
 DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)
 ## DKINSTALL(${DKWEB}/Download/RmlUi-master.zip RmlUi-master)
 DKSET(RMLUI ${3RDPARTY}/RmlUi-master)
