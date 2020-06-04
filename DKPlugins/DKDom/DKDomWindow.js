@@ -3,74 +3,74 @@
 //////////////////////////////
 var Window = function(pointer)
 {
-	Object.defineProperty(window, "closed",                { get: function(){ /* return DKDomWindow_closed(this.pointer); */           } });
-	Object.defineProperty(window, "console",               { get: function(){ return console;                                    } });
-	Object.defineProperty(window, "controllers",           { get: function(){ /* return DKDomWindow_controllers(this.pointer); */      } });
-	Object.defineProperty(window, "customElements",        { get: function(){ /* return DKDomWindow_customElements(this.pointer); */   } });
-	Object.defineProperty(window, "crypto",                { get: function(){ /* return DKDomWindow_crypto(this.pointer); */           } });
-	Object.defineProperty(window, "devicePixelRatio",      { 
+	Object.defineProperty(this, "closed",                { get: function(){ /* return DKDomWindow_closed(this.pointer); */           } });
+	Object.defineProperty(this, "console",               { get: function(){ return console;                                    } });
+	Object.defineProperty(this, "controllers",           { get: function(){ /* return DKDomWindow_controllers(this.pointer); */      } });
+	Object.defineProperty(this, "customElements",        { get: function(){ /* return DKDomWindow_customElements(this.pointer); */   } });
+	Object.defineProperty(this, "crypto",                { get: function(){ /* return DKDomWindow_crypto(this.pointer); */           } });
+	Object.defineProperty(this, "devicePixelRatio",      { 
 		get: function()   {  return DKDomWindow_devicePixelRatio(this.pointer);      },
 		set: function(val){  return DKDomWindow_devicePixelRatio(this.pointer, val); }
 	});
-	Object.defineProperty(window, "dialogArguments",       { get: function(){ /* return DKDomWindow_dialogArguments(this.pointer); */  } });
-	Object.defineProperty(window, "document",              { get: function(){ return document;                                   } });
-	Object.defineProperty(window, "event",                 { get: function(){ /* return DKDomWindow_event(this.pointer); */            } });
-	Object.defineProperty(window, "frameElement",          { get: function(){ /* return DKDomWindow_frameElement(this.pointer); */     } });
-	Object.defineProperty(window, "frames",                { get: function(){ /* return DKDomWindow_frames(this.pointer); */           } });
-	Object.defineProperty(window, "fullScreen", {
+	Object.defineProperty(this, "dialogArguments",       { get: function(){ /* return DKDomWindow_dialogArguments(this.pointer); */  } });
+	Object.defineProperty(this, "document",              { get: function(){ return document;                                   } });
+	Object.defineProperty(this, "event",                 { get: function(){ /* return DKDomWindow_event(this.pointer); */            } });
+	Object.defineProperty(this, "frameElement",          { get: function(){ /* return DKDomWindow_frameElement(this.pointer); */     } });
+	Object.defineProperty(this, "frames",                { get: function(){ /* return DKDomWindow_frames(this.pointer); */           } });
+	Object.defineProperty(this, "fullScreen", {
 		get: function()   { /* return DKDomWindow_fullScreen(this.pointer); */      },
 		set: function(val){ /* return DKDomWindow_fullScreen(this.pointer, val); */ }
 	});
-	Object.defineProperty(window, "history",               { get: function(){ /* return DKDomWindow_history(this.pointer); */          } });
-	Object.defineProperty(window, "innerHeight",           { get: function(){ return DKDomWindow_innerHeight();                        } });
-	Object.defineProperty(window, "innerWidth",            { get: function(){ return DKDomWindow_innerWidth();                         } });
-	Object.defineProperty(window, "isSecureContext",       { get: function(){ /* return DKDomWindow_isSecureContext(); */              } });
-	Object.defineProperty(window, "length",                { get: function(){ /* return DKDomWindow_length(); */                       } });
-	Object.defineProperty(window, "location",              { get: function(){ return location;                                   } });
-	Object.defineProperty(window, "locationbar",           { get: function(){ /* return DKDomWindow_locationbar(); */                  } });
-	Object.defineProperty(window, "localStorage",          { get: function(){ /* return DKDomWindow_localStorage(); */                 } });
-	Object.defineProperty(window, "menubar",               { get: function(){ /* return DKDomWindow_menubar(); */                      } });
-	Object.defineProperty(window, "messageManager",        { get: function(){ /* return DKDomWindow_messageManager(); */               } });
-	Object.defineProperty(window, "mozAnimationStartTime", { get: function(){ /* return DKDomWindow_mozAnimationStartTime(); */        } });
-	Object.defineProperty(window, "mozInnerScreenX",       { get: function(){ /* return DKDomWindow_mozInnerScreenX(); */              } });
-	Object.defineProperty(window, "mozInnerScreenY",       { get: function(){ /* return DKDomWindow_mozInnerScreenX(); */              } });
-	Object.defineProperty(window, "mozPaintCount",         { get: function(){ /* return DKDomWindow_mozPaintCount(); */                } });
-	Object.defineProperty(window, "name", { 
+	Object.defineProperty(this, "history",               { get: function(){ /* return DKDomWindow_history(this.pointer); */          } });
+	Object.defineProperty(this, "innerHeight",           { get: function(){ return DKDomWindow_innerHeight();                        } });
+	Object.defineProperty(this, "innerWidth",            { get: function(){ return DKDomWindow_innerWidth();                         } });
+	Object.defineProperty(this, "isSecureContext",       { get: function(){ /* return DKDomWindow_isSecureContext(); */              } });
+	Object.defineProperty(this, "length",                { get: function(){ /* return DKDomWindow_length(); */                       } });
+	Object.defineProperty(this, "location",              { get: function(){ return location;                                   } });
+	Object.defineProperty(this, "locationbar",           { get: function(){ /* return DKDomWindow_locationbar(); */                  } });
+	Object.defineProperty(this, "localStorage",          { get: function(){ /* return DKDomWindow_localStorage(); */                 } });
+	Object.defineProperty(this, "menubar",               { get: function(){ /* return DKDomWindow_menubar(); */                      } });
+	Object.defineProperty(this, "messageManager",        { get: function(){ /* return DKDomWindow_messageManager(); */               } });
+	Object.defineProperty(this, "mozAnimationStartTime", { get: function(){ /* return DKDomWindow_mozAnimationStartTime(); */        } });
+	Object.defineProperty(this, "mozInnerScreenX",       { get: function(){ /* return DKDomWindow_mozInnerScreenX(); */              } });
+	Object.defineProperty(this, "mozInnerScreenY",       { get: function(){ /* return DKDomWindow_mozInnerScreenX(); */              } });
+	Object.defineProperty(this, "mozPaintCount",         { get: function(){ /* return DKDomWindow_mozPaintCount(); */                } });
+	Object.defineProperty(this, "name", { 
 		get: function()   { return DKDomWindow_name();    },
 		set: function(val){ return DKDomWindow_name(val); }  
 	});
-	Object.defineProperty(window, "navigator",             { get: function(){ return navigator;                                  } });
-	Object.defineProperty(window, "opener",                { get: function(){ /* return DKDomWindow_opener(); */                       } });
-	Object.defineProperty(window, "orientation",           { get: function(){ /* return DKDomWindow_orientation(); */                  } });
-	Object.defineProperty(window, "outerHeight",           { get: function(){ /* return DKDomWindow_outerHeight(); */                  } });
-	Object.defineProperty(window, "outerWidth",            { get: function(){ /* return DKDomWindow_outerWidth(); */                   } });
-	Object.defineProperty(window, "pageXOffset",           { get: function(){ /* return DKDomWindow_pageXOffset(); */                  } });
-	Object.defineProperty(window, "pageYOffset",           { get: function(){ /* return DKDomWindow_pageYOffset(); */                  } });
-	Object.defineProperty(window, "parent",                { get: function(){ /* return DKDomWindow_parent(); */                       } });
-	Object.defineProperty(window, "performance",           { get: function(){ /* return DKDomWindow_performance(); */                  } });
-	Object.defineProperty(window, "personalbar",           { get: function(){ /* return DKDomWindow_personalbar(); */                  } });
-	Object.defineProperty(window, "returnValue",           { get: function(){ /* return DKDomWindow_returnValue(); */                  } });
-	Object.defineProperty(window, "screen",                { get: function(){ return screen;                                     } });
-	Object.defineProperty(window, "screenX",               { get: function(){ /* return DKDomWindow_screenX(); */                      } });
-	Object.defineProperty(window, "screenY",               { get: function(){ /* return DKDomWindow_screenY(); */                      } });
-	Object.defineProperty(window, "scrollbars",            { get: function(){ /* return DKDomWindow_scrollbars(); */                   } });
-	Object.defineProperty(window, "scrollMaxX",            { get: function(){ /* return DKDomWindow_scrollMaxX(); */                   } });
-	Object.defineProperty(window, "scrollMaxY",            { get: function(){ /* return DKDomWindow_scrollMaxY(); */                   } });
-	Object.defineProperty(window, "scrollX",               { get: function(){ /* return DKDomWindow_scrollX(); */                      } });
-	Object.defineProperty(window, "scrollY",               { get: function(){ /* return DKDomWindow_scrollY(); */                      } });
-	Object.defineProperty(window, "self",                  { get: function(){ /* return DKDomWindow_self(); */                         } });
-	Object.defineProperty(window, "sessionStorage",        { get: function(){ /* return DKDomWindow_sessionStorage(); */               } });
-	Object.defineProperty(window, "sidebar",               { get: function(){ /* return DKDomWindow_sidebar(); */                      } });
-	Object.defineProperty(window, "speechSynthesis",       { get: function(){ /* return DKDomWindow_speechSynthesis(); */              } });
-	Object.defineProperty(window, "status", {
+	Object.defineProperty(this, "navigator",             { get: function(){ return navigator;                                  } });
+	Object.defineProperty(this, "opener",                { get: function(){ /* return DKDomWindow_opener(); */                       } });
+	Object.defineProperty(this, "orientation",           { get: function(){ /* return DKDomWindow_orientation(); */                  } });
+	Object.defineProperty(this, "outerHeight",           { get: function(){ /* return DKDomWindow_outerHeight(); */                  } });
+	Object.defineProperty(this, "outerWidth",            { get: function(){ /* return DKDomWindow_outerWidth(); */                   } });
+	Object.defineProperty(this, "pageXOffset",           { get: function(){ /* return DKDomWindow_pageXOffset(); */                  } });
+	Object.defineProperty(this, "pageYOffset",           { get: function(){ /* return DKDomWindow_pageYOffset(); */                  } });
+	Object.defineProperty(this, "parent",                { get: function(){ /* return DKDomWindow_parent(); */                       } });
+	Object.defineProperty(this, "performance",           { get: function(){ /* return DKDomWindow_performance(); */                  } });
+	Object.defineProperty(this, "personalbar",           { get: function(){ /* return DKDomWindow_personalbar(); */                  } });
+	Object.defineProperty(this, "returnValue",           { get: function(){ /* return DKDomWindow_returnValue(); */                  } });
+	Object.defineProperty(this, "screen",                { get: function(){ return screen;                                     } });
+	Object.defineProperty(this, "screenX",               { get: function(){ /* return DKDomWindow_screenX(); */                      } });
+	Object.defineProperty(this, "screenY",               { get: function(){ /* return DKDomWindow_screenY(); */                      } });
+	Object.defineProperty(this, "scrollbars",            { get: function(){ /* return DKDomWindow_scrollbars(); */                   } });
+	Object.defineProperty(this, "scrollMaxX",            { get: function(){ /* return DKDomWindow_scrollMaxX(); */                   } });
+	Object.defineProperty(this, "scrollMaxY",            { get: function(){ /* return DKDomWindow_scrollMaxY(); */                   } });
+	Object.defineProperty(this, "scrollX",               { get: function(){ /* return DKDomWindow_scrollX(); */                      } });
+	Object.defineProperty(this, "scrollY",               { get: function(){ /* return DKDomWindow_scrollY(); */                      } });
+	Object.defineProperty(this, "self",                  { get: function(){ /* return DKDomWindow_self(); */                         } });
+	Object.defineProperty(this, "sessionStorage",        { get: function(){ /* return DKDomWindow_sessionStorage(); */               } });
+	Object.defineProperty(this, "sidebar",               { get: function(){ /* return DKDomWindow_sidebar(); */                      } });
+	Object.defineProperty(this, "speechSynthesis",       { get: function(){ /* return DKDomWindow_speechSynthesis(); */              } });
+	Object.defineProperty(this, "status", {
 		get: function()   { /* return DKDomWindow_status(); */   },
 		set: function(val){ /* return DKDomWindow_setStatus(); */ }
 	});
-	Object.defineProperty(window, "statusbar",             { get: function(){ /* return DKDomWindow_statusbar(); */                    } });
-	Object.defineProperty(window, "toolbar",               { get: function(){ /* return DKDomWindow_toolbar(); */                      } });
-	Object.defineProperty(window, "top",                   { get: function(){ /* return DKDomWindow_top(); */                          } });
-	Object.defineProperty(window, "visualViewport",        { get: function(){ /* return DKDomWindow_visualViewport(); */               } });
-	Object.defineProperty(window, "window",                { get: function(){ /* return DKDomWindow_window(); */                       } }); 
+	Object.defineProperty(this, "statusbar",             { get: function(){ /* return DKDomWindow_statusbar(); */                    } });
+	Object.defineProperty(this, "toolbar",               { get: function(){ /* return DKDomWindow_toolbar(); */                      } });
+	Object.defineProperty(this, "top",                   { get: function(){ /* return DKDomWindow_top(); */                          } });
+	Object.defineProperty(this, "visualViewport",        { get: function(){ /* return DKDomWindow_visualViewport(); */               } });
+	Object.defineProperty(this, "window",                { get: function(){ /* return DKDomWindow_window(); */                       } }); 
 	
 	Window.prototype.alert = function(msg){ console.warn("alert: "+msg); }
 	Window.prototype.blur = function(){}

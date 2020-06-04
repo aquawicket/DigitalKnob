@@ -2,7 +2,6 @@
 
 var stored_events = [];
 
-/*
 ///////////////////////////////////////////
 var EventFromCPP = function(pointer, event)
 {
@@ -14,7 +13,6 @@ var EventFromCPP = function(pointer, event)
 		}
 	}
 }
-*/
 
 ///////////////////////////////////
 var EventTarget = function(pointer)
