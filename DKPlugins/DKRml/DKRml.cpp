@@ -262,6 +262,10 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//find the last <body occurance
 	int n = code.rfind("<html");
+	if(n < 0){
+		DKERROR("DKRml::LoadHtml(): html tag not found\n");
+		return true;
+	}
 	code = code.substr(n);
 	replace(code, "<", "\n<");
 	

@@ -290,6 +290,10 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	Rml::Core::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
 	int n = code.rfind("<html");
+	if(n < 0){
+		DKERROR("DKRmlToRML::PostProcess(): html tag not found\n");
+		return true;
+	}
 	code = code.substr(n);
 	replace(code, "<", "\n<");
 	DKINFO("########## Post DKRmlToRML::PostProcess CODE ##########\n");
