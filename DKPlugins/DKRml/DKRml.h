@@ -26,7 +26,9 @@ public:
 	void ProcessEvent(Rml::Core::Event& rmlEvent); //overwritten
 	bool RegisterEvent(const DKString& elementAddress, const DKString& type);
 	bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
-	bool ToggleDebugger();
+	bool DebuggerOff();
+	bool DebuggerOn();
+	bool DebuggerToggle();
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
 
 	DKString href;

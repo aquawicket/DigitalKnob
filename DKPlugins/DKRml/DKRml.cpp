@@ -525,17 +525,31 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 	return true;
 }
 
+/////////////////////////
+bool DKRml::DebuggerOff()
+{
+	Rml::Debugger::SetVisible(false);
+	DKINFO("Rml Debugger OFF\n");
+	return true;
+}
+
+////////////////////////
+bool DKRml::DebuggerOn()
+{
+	Rml::Debugger::SetVisible(true);
+	DKINFO("Rml Debugger ON\n");
+	return true;
+}
+
 ////////////////////////////
-bool DKRml::ToggleDebugger()
+bool DKRml::DebuggerToggle()
 {
 	DKDEBUGFUNC();
 	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns false
-		Rml::Debugger::SetVisible(false);
-		DKINFO("Rml Debugger OFF\n");
+		DKRml::DebuggerOff();
 	}
 	else{
-		Rml::Debugger::SetVisible(true);
-		DKINFO("Rml Debugger ON\n");
+		DKRml::DebuggerOn();
 	}
 	return true;
 }

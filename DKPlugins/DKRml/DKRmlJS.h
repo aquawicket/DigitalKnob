@@ -12,7 +12,9 @@ public:
 	bool Init();
 
 	static int LoadUrl(duk_context* ctx);
-	static int ToggleDebugger(duk_context* ctx);
+	static int DebuggerOff(duk_context* ctx);
+	static int DebuggerOn(duk_context* ctx);
+	static int DebuggerToggle(duk_context* ctx);
 };
 
 REGISTER_OBJECT(DKRmlJS, true)
