@@ -838,6 +838,9 @@ function DKBuild_DoResults()
 		}
 	}
 	
+	//* The build is done
+	console.log("THE APP IS DONE BUILDING");
+	
 	/*
 	if(DKAvailable("DKAudio")){
 		DKCreate("DKAudio");
