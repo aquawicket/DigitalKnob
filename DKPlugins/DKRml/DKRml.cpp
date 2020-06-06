@@ -77,6 +77,7 @@ bool DKRml::Init()
 	//DKClass::DKCreate("DKDomXMLHttpRequest");
 	//DKClass::DKCreate("DKDomScreen");
 	//DKClass::DKCreate("DKDomWindow");
+	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");
 	DKClass::DKCreate("DKDomElement");
