@@ -840,9 +840,11 @@ function DKBuild_DoResults()
 	
 	//* The build is done
 	console.log("\n");
-	console.log("************************");
-	console.log(APP+" IS DONE BUILDING");
-	console.log("************************");
+	console.log("********************************************");
+	console.log("********************************************");
+	console.log("  "+APP+" IS DONE BUILDING");
+	console.log("********************************************");
+	console.log("********************************************");
 	
 	/*
 	if(DKAvailable("DKAudio")){
