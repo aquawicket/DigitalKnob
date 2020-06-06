@@ -1,11 +1,3 @@
-DKCreate("DKDomConsole");
-DKCreate("DKDomNavigator");
-DKCreate("DKDomEventTarget");
-DKCreate("DKDom/DKDomGlobalEventHandlers.js", function(){});
-DKCreate("DKDomXMLHttpRequest");
-DKCreate("DKDomScreen");
-DKCreate("DKDomWindow");
-		
 //var url = DKAssets_LocalAssets()+"index.html";
 //var url = DKAssets_LocalAssets()+"DKWebTest/index.html";
 var url = DKAssets_LocalAssets()+"DKWebTest/rem2.html";
