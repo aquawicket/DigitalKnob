@@ -842,7 +842,7 @@ function DKBuild_DoResults()
 	console.log("\n");
 	console.log("********************************************");
 	console.log("********************************************");
-	console.log("  "+APP+" IS DONE BUILDING");
+	console.log("   "+APP+" IS DONE BUILDING");
 	console.log("********************************************");
 	console.log("********************************************");
 	
