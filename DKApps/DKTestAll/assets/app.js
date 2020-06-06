@@ -14,4 +14,4 @@ DKCreate("DKRml");
 location.href = url;
 window.moveTo(screen.width/2, 36);
 window.resizeTo(screen.width / 2 - 10, screen.height-84);
-DKRml_ToggleDebugger(); //FIXME
+DKRml_DebuggerOn();
