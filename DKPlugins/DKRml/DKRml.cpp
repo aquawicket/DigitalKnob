@@ -69,7 +69,9 @@ bool DKRml::Init()
 	
 	DKClass::DKCreate("DKRmlJS");
 
-	//Load the javascript DOM
+	//* Load the javascript DOM
+	
+	//* Dom thats doesn't need a screen
 	//DKClass::DKCreate("DKDomConsole");
 	//DKClass::DKCreate("DKDomNavigator");
 	//DKClass::DKCreate("DKDomEventTarget");
@@ -77,6 +79,8 @@ bool DKRml::Init()
 	//DKClass::DKCreate("DKDomXMLHttpRequest");
 	//DKClass::DKCreate("DKDomScreen");
 	//DKClass::DKCreate("DKDomWindow");
+	
+	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");
 	DKClass::DKCreate("DKDomNode");

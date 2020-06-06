@@ -1,8 +1,8 @@
 ///// DK.h /////
 
-// NOTE:
-// This is the core of DigitalKnob. 
-// Anything that is an absolute for the core to work, starts in this header file.
+//* NOTE:
+//* This is the core of DigitalKnob. 
+//* Anything that is an absolute for the core to work, starts in this header file.
 
 #pragma once
 #ifndef DK_H
@@ -22,7 +22,7 @@
 #error NO KNOWN OS FLAG WAS STATED (WIN32,MAC,LINUX,ANDROID,IOS)
 #endif
 
-//DK
+//* DK
 #include "DK/DKClass.h"
 #include "DK/DKEvents.h"
 #include "DK/DKUtil.h"
@@ -32,4 +32,4 @@
 	#include "DKPlugins.h"
 #endif
 
-#endif //DK_H
+#endif
