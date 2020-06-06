@@ -12,7 +12,7 @@ public:
 	bool Init();
 	bool End();
 
-	static bool ToggleDebugger(CefArgs args, CefReturn retval);
+	static bool DebuggerToggle(CefArgs args, CefReturn retval);
 };
 
 REGISTER_OBJECT(DKRmlV8, false);
