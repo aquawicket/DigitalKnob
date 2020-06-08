@@ -8,11 +8,9 @@ function DKColorPicker_Init()
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
+	DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
 	DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
-	
-	document.getElementById("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_OnEvent);
 }
 
 ////////////////////////////
@@ -68,7 +66,7 @@ function DKColorPicker_ColorBar()
 	rgb += String(rgb_arry[1]) + ",";
 	rgb += String(rgb_arry[2]) + ")";
 		
-	DKWidget_SetValue("DKColorR", "test"/*String(rgb_arry[0])*/);
+	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
 	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
 	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
 	DKWidget_SetProperty("DKColorHover", "background-color", rgb);

@@ -30,6 +30,10 @@ public:
 	bool DebuggerOn();
 	bool DebuggerToggle();
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
+	static Rml::Core::Event* addressToEvent(const DKString& address);
+	static DKString eventToAddress(Rml::Core::Event* event);
+	static Rml::Core::Element* addressToElement(const DKString& address);
+	static DKString elementToAddress(Rml::Core::Element* element);
 
 	DKString href;
 	DKString protocol;

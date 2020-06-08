@@ -4,6 +4,7 @@ var sizes = [];
 function DKFrame_Init()
 {
 	DKDEBUGFUNC();
+	document.body.id = "body";
 }
 
 //////////////////////

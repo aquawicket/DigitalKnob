@@ -30,7 +30,7 @@ int DKDomDocument::body(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	DKString elementAddress = DKDomElement::elementToAddress(elements[0]);
+	DKString elementAddress = DKRml::elementToAddress(elements[0]);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -46,7 +46,7 @@ int DKDomDocument::createElement(duk_context* ctx)
 		DKERROR("DKDomDocument::createElement(): element invalid\n");
 		return false;
 	}
-	DKString elementAddress = DKDomElement::elementToAddress(element);
+	DKString elementAddress = DKRml::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -61,7 +61,7 @@ int DKDomDocument::documentElement(duk_context* ctx)
 		duk_push_null(ctx);
 		return false;
 	}
-	DKString elementAddress = DKDomElement::elementToAddress(element);
+	DKString elementAddress = DKRml::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -77,7 +77,7 @@ int DKDomDocument::getElementById(duk_context* ctx)
 		duk_push_null(ctx);
 		return true;
 	}
-	DKString elementAddress = DKDomElement::elementToAddress(element);
+	DKString elementAddress = DKRml::elementToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -96,7 +96,7 @@ int DKDomDocument::getElementsByTagName(duk_context* ctx)
 	}
 	DKStringArray elementAddresses;
 	for(unsigned int i = 0; i<elements.size(); i++){
-		elementAddresses.push_back(DKDomElement::elementToAddress(elements[i]));
+		elementAddresses.push_back(DKRml::elementToAddress(elements[i]));
 	}
 	DKString list = toString(elementAddresses, ",");
 	duk_push_string(ctx, list.c_str());

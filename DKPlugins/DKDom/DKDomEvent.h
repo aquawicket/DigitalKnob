@@ -13,8 +13,6 @@ class DKDomEvent : public DKObjectT<DKDomEvent>
 {
 public:
 	bool Init();
-	static Rml::Core::Event* addressToEvent(const DKString& address);
-	static DKString eventToAddress(Rml::Core::Event* event);
 	
 	// Properties
 	static int bubbles(duk_context* ctx); //Read Only

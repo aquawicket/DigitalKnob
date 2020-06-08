@@ -2,8 +2,9 @@
 
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDom/DKDomEvent.h"
 #include "DKDom/DKDomUIEvent.h"
+#include "DKDom/DKDomEvent.h"
+#include "DKRml/DKRml.h"
 
 
 /////////////////////////
@@ -50,7 +51,7 @@ int DKDomUIEvent::initUIEvent(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Core::Event* event = DKDomEvent::addressToEvent(eventAddress);
+	Rml::Core::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKDomUIEvent::initEvent(): event invalid\n");
 		duk_push_boolean(ctx, false);

@@ -1,7 +1,8 @@
 #ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDom/DKDomCSSStyleDeclaration.h"
-#include "DKDom/DKDomElement.h"
+//#include "DKDom/DKDomElement.h"
+#include "DKRml/DKRml.h"
 
 
 /////////////////////////////////////
@@ -21,7 +22,7 @@ int DKDomCSSStyleDeclaration::getPropertyValue(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString propertyName = duk_require_string(ctx, 1);
-	Rml::Core::Element* element = DKDomElement::addressToElement(address);
+	Rml::Core::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -52,7 +53,7 @@ int DKDomCSSStyleDeclaration::setProperty(duk_context* ctx)
 		propertyValue = toString(duk_require_boolean(ctx, 2));
 	}
 	//DKString priority = duk_require_string(ctx, 3); //TODO
-	Rml::Core::Element* element = DKDomElement::addressToElement(address);
+	Rml::Core::Element* element = DKRml::addressToElement(address);
 	if(element){
 		if(!propertyValue.empty()){
 			element->SetProperty(propertyName.c_str(), propertyValue.c_str());

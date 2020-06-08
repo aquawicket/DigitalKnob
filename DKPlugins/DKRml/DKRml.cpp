@@ -1,8 +1,6 @@
 #include "DK/stdafx.h"
 #include <RmlUi/Debugger.h>
 #include "DKRml/DKRml.h"
-#include "DKRml/DKElement.h"
-#include "DKRml/DKEvent.h"
 #include "DKWindow/DKWindow.h"
 #include "DKCurl/DKCurl.h"
 #include "DKDuktape/DKDuktape.h"
@@ -351,7 +349,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 {
 	//TODO - make rmlEvent accessable through javascript
 	//1. Create Javascript Event object that references the rmlEvent
-	DKString rmlEventAddress = DKEvent::eventToAddress(&rmlEvent);
+	DKString rmlEventAddress = eventToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
@@ -362,10 +360,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 	if (!rmlEvent.GetTargetElement()) { return; } //MUST BE VALID!
 
 	Rml::Core::Element* currentElement = rmlEvent.GetCurrentElement();
-	DKString currentElementAddress = DKElement::elementToAddress(currentElement);
+	DKString currentElementAddress = elementToAddress(currentElement);
 
 	Rml::Core::Element* targetElement = rmlEvent.GetTargetElement();
-	DKString targetElementAddress = DKElement::elementToAddress(targetElement);
+	DKString targetElementAddress = elementToAddress(targetElement);
 
 	DKString type = rmlEvent.GetType();
 	int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
@@ -477,7 +475,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 	if(elementAddress.empty()){ return false; } //no elementAddress
 	if(type.empty()){ return false; } //no type
 	
-	Rml::Core::Element* element = DKElement::addressToElement(elementAddress.c_str());
+	Rml::Core::Element* element = addressToElement(elementAddress.c_str());
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -516,7 +514,7 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 		//DKWARN("DKRml::SendEvent(): recieved global window event\n");
 	//}
 	
-	Rml::Core::Element* element = DKElement::addressToElement(elementAddress);
+	Rml::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; }
 	
 	Rml::Core::Dictionary parameters;
@@ -560,10 +558,10 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty()){ return false; } //no id
 	if(type.empty()){ return false; } //no type
-	if (same(DKElement::addressToElement(elementAddress)->GetId(), "window")) { return false; }
+	if (same(addressToElement(elementAddress)->GetId(), "window")) { return false; }
 	//if(!DKValid("DKRml0")){ return false; }
 
-	Rml::Core::Element* element = DKElement::addressToElement(elementAddress);
+	Rml::Core::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -571,4 +569,102 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	if(same(type, "input")){ _type = "change"; 	}
 	element->RemoveEventListener(_type.c_str(), this, false);
 	return true;
+}
+
+////////////////////////////////////////////////////////////////
+Rml::Core::Event* DKRml::addressToEvent(const DKString& address)
+{
+	DKDEBUGFUNC(address);
+
+	Rml::Core::Event* event;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("NOTE: DKRml::addressToEvent(): the address is not a valid hex notation");
+		return NULL;
+	}
+
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	int tmp(0);
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
+		return NULL;
+	}
+	event = reinterpret_cast<Rml::Core::Event*>(tmp);
+	if (!event->GetCurrentElement()) {
+		DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
+		return NULL;
+	}
+	return event;
+}
+
+///////////////////////////////////////////////////////
+DKString DKRml::eventToAddress(Rml::Core::Event* event)
+{
+	if (!event) {
+		DKERROR("DKRml::eventToAddress(): invalid event\n");
+		return NULL;
+	}
+	std::stringstream ss;
+
+	const void* address = static_cast<const void*>(event);
+#ifdef WIN32
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	return ss.str();
+}
+
+////////////////////////////////////////////////////////////////////
+Rml::Core::Element* DKRml::addressToElement(const DKString& address)
+{
+	DKDEBUGFUNC(address);
+
+	Rml::Core::Element* element;
+	if (address == "document") {
+		element = DKRml::Get()->document;
+	}
+	else {
+		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+			//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
+			return NULL;
+		}
+
+		//Convert a string of an address back into a pointer
+		std::stringstream ss;
+		ss << address.substr(2, address.size() - 2);
+		int tmp(0);
+		if (!(ss >> std::hex >> tmp)) {
+			DKERROR("DKRml::addressToElement(" + address + "): invalid address\n");
+			return NULL;
+		}
+		element = reinterpret_cast<Rml::Core::Element*>(tmp);
+	}
+	if (element->GetTagName().empty()) {
+		return NULL;
+	}
+	return element;
+}
+
+/////////////////////////////////////////////////////////////
+DKString DKRml::elementToAddress(Rml::Core::Element* element)
+{
+	if (!element) {
+		DKERROR("DKRml::elementToAddress(): invalid element\n");
+		return NULL;
+	}
+	std::stringstream ss;
+	if (element == DKRml::Get()->document) {
+		ss << "document";
+	}
+	else {
+		const void* address = static_cast<const void*>(element);
+#ifdef WIN32
+		ss << "0x" << address;
+#else 
+		ss << address;
+#endif
+	}
+	return ss.str();
 }
