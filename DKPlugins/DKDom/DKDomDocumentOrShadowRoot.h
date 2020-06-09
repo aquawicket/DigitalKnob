@@ -13,6 +13,7 @@ public:
 	
 	static int activeElement(duk_context* ctx);
 	static int caretPositionFromPoint(duk_context* ctx);
+	static int elementFromPoint(duk_context* ctx);
 };
 
 

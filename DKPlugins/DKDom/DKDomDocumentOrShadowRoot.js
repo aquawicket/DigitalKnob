@@ -6,9 +6,9 @@ var DocumentOrShadowRoot = function(pointer)
 	// Properties
 	Object.defineProperty(this, "activeElement", { 
 		get: function(){ 
-			var pointer = DKDomDocumentOrShadowRoot_activeElement();
-			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var elementAddress = DKDomDocumentOrShadowRoot_activeElement();
+			if(!elementAddress){ return; }
+			var element = new HTMLElement(elementAddress);
 			return element;
 		},
 	});
@@ -18,6 +18,12 @@ var DocumentOrShadowRoot = function(pointer)
 		var caretPosition = DKDomDocumentOrShadowRoot_caretPositionFromPoint();
 		if(!CaretPosition ){ return; }
 		//TODO
+	}
+	Document.prototype.elementFromPoint = function(){
+		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
+		if(!elementAddress ){ return; }
+		var element = new HTMLElement(elementAddress);
+		return element;
 	}
 	
 	//Node.call(this, pointer);

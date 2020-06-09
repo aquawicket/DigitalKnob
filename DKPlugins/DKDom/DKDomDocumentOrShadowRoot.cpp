@@ -11,7 +11,7 @@ bool DKDomDocumentOrShadowRoot::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDomDocumentOrShadowRoot_activeElement", DKDomDocumentOrShadowRoot::activeElement);
 	DKDuktape::AttachFunction("DKDomDocumentOrShadowRoot_caretPositionFromPoint", DKDomDocumentOrShadowRoot::caretPositionFromPoint);
-	
+	DKDuktape::AttachFunction("DKDomDocumentOrShadowRoot_elementFromPoint", DKDomDocumentOrShadowRoot::elementFromPoint);
 	DKClass::DKCreate("DKDom/DKDomDocumentOrShadowRoot.js");
 	return true;
 }
@@ -37,6 +37,17 @@ int DKDomDocumentOrShadowRoot::caretPositionFromPoint(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	//TODO
 	return false;
+}
+
+/////////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	Rml::Core::Element* hoverElement = DKRml::Get()->document->GetContext()->GetHoverElement();
+	if(!hoverElement){ return false; }
+	DKString elementAddress = DKRml::elementToAddress(hoverElement);
+	duk_push_string(ctx, elementAddress.c_str());
+	return true;
 }
 
 #endif //USE_DKDuktape
