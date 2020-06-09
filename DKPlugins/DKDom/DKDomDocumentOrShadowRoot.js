@@ -1,4 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot
+// https://javascript.info/mixins
 
 ////////////////////////////////////////////
 var DocumentOrShadowRoot = function(pointer)
@@ -25,8 +26,4 @@ var DocumentOrShadowRoot = function(pointer)
 		var element = new HTMLElement(elementAddress);
 		return element;
 	}
-	
-	//Node.call(this, pointer);
 }
-
-//DocumentOrShadowRoot.prototype = Node.prototype;	
