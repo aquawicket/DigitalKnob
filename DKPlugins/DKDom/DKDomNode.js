@@ -23,7 +23,14 @@ var Node = function(pointer)
 	});  //TODO
 	Object.defineProperty(this, "firstChild",      { get: function(){ return DKDomNode_firstChild(this.pointer);      } });  //TODO
 	Object.defineProperty(this, "isConnected",     { get: function(){ return DKDomNode_isConnected(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "lastChild",       { get: function(){ return DKDomNode_lastChild(this.pointer);       } });  //TODO
+	Object.defineProperty(this, "lastChild",       { 
+		get: function(){ 
+			var pointer = DKDomNode_lastChild(this.pointer);
+			if(!pointer){ return; }
+			var element = new HTMLElement(pointer);
+			return element;	
+		} 
+	});  //TODO
 	Object.defineProperty(this, "nextSibling",     { get: function(){ return DKDomNode_nextSibling(this.pointer);     } });  //TODO
 	Object.defineProperty(this, "nodeName",        { get: function(){ return DKDomNode_nodeName(this.pointer);        } });  //TODO
 	Object.defineProperty(this, "nodePrincipal",   { get: function(){ return DKDomNode_nodePrincipal(this.pointer);   } });  //TODO

@@ -11,6 +11,7 @@ bool DKDomNode::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDomNode_appendChild", DKDomNode::appendChild);
 	DKDuktape::AttachFunction("DKDomNode_childNodes", DKDomNode::childNodes);
+	DKDuktape::AttachFunction("DKDomNode_lastChild", DKDomNode::lastChild);
 	DKDuktape::AttachFunction("DKDomNode_parentNode", DKDomNode::parentNode);
 	DKDuktape::AttachFunction("DKDomNode_removeChild", DKDomNode::removeChild);
 	
@@ -83,6 +84,28 @@ int DKDomNode::childNodes(duk_context* ctx)
 		if(i < elements.size()-1){ str += ","; }
 	}
 	duk_push_string(ctx, str.c_str());
+	return true;
+}
+
+//////////////////////////////////////////
+int DKDomNode::lastChild(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Core::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomNode::lastChild(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rml::Core::Element* lastChild = element->GetLastChild();
+	if(!lastChild){
+		DKERROR("DKDomNode::lastChild(): lastChild invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString elementAddress = DKRml::elementToAddress(lastChild);
+	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
 
