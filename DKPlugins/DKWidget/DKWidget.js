@@ -603,17 +603,16 @@ function DKWidget_IsChildOf(id, parent)
 	if(!ele){return false;}
 	if(!par){return false;}
 	
-	while(ele && (ele != par)){
+	while(ele && (ele.id != par.id)){
 		console.log("ele.id: "+ele.id+" par.id:"+par.id);
-		if(ele == window.top.document.body){ return false; }
-		console.log("ele.id: "+ele.id);
+		if(ele.id == "body"){ return false; }
 		ele = ele.parentNode;
-		console.log("ele.id: "+ele.id);
 	}
 	
-	console.log("made it past while loop");
-	
-	if(ele == par){
+	if(ele.id == par.id){
+		//console.log("ele: " +ele);
+		//console.log("par: " +par);
+		//console.log("DKWidget_IsChildOf(): returned true");
 		return true;
 	}
 	

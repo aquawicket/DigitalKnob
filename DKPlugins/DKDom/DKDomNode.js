@@ -37,7 +37,7 @@ var Node = function(pointer)
 		get: function(){ 
 			var pointer = DKDomNode_parentNode(this.pointer); 
 			if(!pointer){ return; }
-			var element = new Node(pointer);
+			var element = new HTMLElement(pointer);
 			return element;			
 		} 
 	});
@@ -52,7 +52,7 @@ var Node = function(pointer)
 	Node.prototype.appendChild = function(aChild){
 		var pointer = DKDomNode_appendChild(this.pointer, aChild.pointer);
 		if(!pointer){ return; }
-		var element = new Node(pointer);
+		var element = new HTMLElement(pointer);
 		return element;
 	}
 	Node.prototype.cloneNode = function(){
