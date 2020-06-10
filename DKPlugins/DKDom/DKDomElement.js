@@ -206,7 +206,7 @@ var Element = function(pointer)
 		},
 		get: function (target, key, recv){
 			//console.warn("Element:get("+target+","+key+","+recv+")");
-			console.warn("Element:get("+key+")");
+			//console.warn("Element:get("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ return target[key]; }
 			if(key.substr(0,2) == "on"){ //onevent
 				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 

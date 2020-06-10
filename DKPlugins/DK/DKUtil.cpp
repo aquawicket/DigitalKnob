@@ -933,7 +933,7 @@ bool DKUtil::SetVolume(int& percent)
 ///////////////////////////////////////////
 bool DKUtil::Sleep(const int& milliseconds)
 {
-	DKDEBUGFUNC(milliseconds);
+	//DKDEBUGFUNC(milliseconds);
 #ifdef WIN32
 	return DKWindows::Sleep(milliseconds);
 #endif

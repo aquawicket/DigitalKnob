@@ -575,7 +575,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 ////////////////////////////////////////////////////////////////
 Rml::Core::Event* DKRml::addressToEvent(const DKString& address)
 {
-	DKDEBUGFUNC(address);
+	//DKDEBUGFUNC(address);
 
 	Rml::Core::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
@@ -620,7 +620,7 @@ DKString DKRml::eventToAddress(Rml::Core::Event* event)
 ////////////////////////////////////////////////////////////////////
 Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 {
-	DKDEBUGFUNC(address);
+	//DKDEBUGFUNC(address);
 
 	Rml::Core::Element* element;
 	if (address == "document") {

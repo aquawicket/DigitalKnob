@@ -33,7 +33,14 @@ var Node = function(pointer)
 		set: function(val){ return DKDomNode_nodeValue(this.pointer, val); }
 	});  //TODO
 	Object.defineProperty(this, "ownerDocument",   { get: function(){ return DKDomNode_ownerDocument(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "parentNode",      { get: function(){ return DKDomNode_parentNode(this.pointer);      } });
+	Object.defineProperty(this, "parentNode",      { 
+		get: function(){ 
+			var pointer = DKDomNode_parentNode(this.pointer); 
+			if(!pointer){ return; }
+			var element = new Node(pointer);
+			return element;			
+		} 
+	});
 	Object.defineProperty(this, "parentElement",   { get: function(){ return DKDomNode_parentElement(this.pointer);   } });  //TODO
 	Object.defineProperty(this, "previousSibling", { get: function(){ return DKDomNode_previousSibling(this.pointer); } });  //TODO
 	Object.defineProperty(this, "textContent", { 
