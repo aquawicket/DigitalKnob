@@ -335,7 +335,7 @@ function DKClose(data)
 			func(); // Call the jsclass_End() function
 		}
 		else{
-			DKWARN(name+" is not callable\n");
+			DKWARN("DKClose(data): "+func+" is not a function\n");
 		}
 		var script = document.getElementById(arry[1]);
 		if(!script){
