@@ -68,7 +68,7 @@ var Window = function(pointer)
 	});
 	Object.defineProperty(this, "statusbar",             { get: function(){ /* return DKDomWindow_statusbar(); */                    } });
 	Object.defineProperty(this, "toolbar",               { get: function(){ /* return DKDomWindow_toolbar(); */                      } });
-	Object.defineProperty(this, "top",                   { get: function(){ /* return DKDomWindow_top(); */                          } });
+	Object.defineProperty(this, "top",                   { get: function(){ return this;                                              } });
 	Object.defineProperty(this, "visualViewport",        { get: function(){ /* return DKDomWindow_visualViewport(); */               } });
 	Object.defineProperty(this, "window",                { get: function(){ /* return DKDomWindow_window(); */                       } }); 
 	

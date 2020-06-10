@@ -46,8 +46,9 @@ var Document = function(pointer)
 		return elements;
 	}
 	
-	Object.assign(this, DocumentOrShadowRoot); //FIXME
+	
 	Node.call(this, pointer);
 }
 Document.prototype = Node.prototype;
+Object.assign(Document.prototype, DocumentOrShadowRoot);
 var document = new Document("document");  //Create the global document object

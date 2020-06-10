@@ -604,7 +604,7 @@ function DKWidget_IsChildOf(id, parent)
 	if(!par){return false;}
 	
 	while(ele && (ele != par)){
-		if(ele == top.document.body){ return false; }
+		if(ele == window.top.document.body){ return false; }
 		ele = ele.parentNode;
 	}
 	
