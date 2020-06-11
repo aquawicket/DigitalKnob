@@ -8,16 +8,24 @@
 <a id="home" href="index.html">home</a><br /><br />
 
 <a id="scratchPad" style="font-weight:bold;font-size:20px;">Scratch Pad</a><br /><br />
+
 <!-- Place scratch code in here -->
-
+<a id="element1">Element1</a><br />
 <script>
-var elements = document.getElementsByTagName("a");
-console.log("elements.length: "+elements.length);
-console.log("elements[0].id: "+elements[0].id);
-console.log("elements.item(1).id: "+elements.item(1).id);
-console.log("elements.item(2): "+elements.item(2));
+//make 2 objects of the same element and compair them. 
+var a = document.getElementsById("element1");
+var b = document.getElementsById("element1");
+if(a == b){
+	console.log("a == b");
+}
+else if(a === b){
+	console.log("a === b");
+}
+else{
+	console.log("a != b");
+}
 </script>
-
 <!-- Place scratch code before here -->
+
 </body>
 </html>
