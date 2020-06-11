@@ -4,13 +4,20 @@
 </head>
 <body>
 	<script type="text/javascript" id="../DK/DK.js" src="../DK/DK.js"></script>
-	<script type="text/javascript" id="../DKWidget/DKWidget.js" src="../DKWidget/DKWidget.js"></script>
 	DK API Test
 	<script>
-		DKCreate("../DKColorPicker/DKColorPicker.js", function(){
-
+		DKCreate("DK/DK.css", function(){
+		DKCreate("DKFile/DKFile.js", function(){
+		DKCreate("DKWidget/DKWidget.js", function(){
+		DKCreate("DKGui/DKFrame.js", function(){
+		DKCreate("DKColorPicker/DKColorPicker.js", function(){
+			DKFrame_Widget("DKColorPicker/DKColorPicker.html");
 		});
-		console.log("done");
+		});
+		});
+		});
+		});
+//DKCreate("DKNotepad/DKNotepad.js", function(){});		
 	</script>
 </body>
 </html>
