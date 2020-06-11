@@ -179,13 +179,13 @@ button{
 	display: inline-block;
 	font-family: "Arial";
 	font-size: 13.3333px;
-	letter-spacing: normal;
+	/* letter-spacing: normal; */
 	margin: 0em;
 	padding: 1px 6px;
 	text-align: center;
 	text-rendering: auto;
 	width: 50px;
-	word-spacing: normal;
+	/* word-spacing: normal; */
 	decorator: tiled-horizontal(button-left, button-center, button-right);
 }
 button:hover{
