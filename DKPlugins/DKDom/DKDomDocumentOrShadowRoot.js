@@ -10,27 +10,29 @@ var DocumentOrShadowRoot = {
 	//styleSheets =        { console.log("styleSheets");        } //FIXME
 	
 	// Methods
-	caretPositionFromPoint(){ /* TODO */ }
+	caretPositionFromPoint(){
+		//TODO
+	},
 	
 	elementFromPoint(){
 		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){ return; }
 		var element = new HTMLElement(elementAddress);
 		return element;
-	}
+	},
 	
 	elementsFromPoint(){ 
 		//TODO
 		DKDomDocumentOrShadowRoot_elementsFromPoint();
-	}
+	},
 	getSelection(){
 		//TODO
 		DKDomDocumentOrShadowRoot_getSelection();
-	}
+	},
 	nodeFromPoint(){
 		//TODO
 		DKDomDocumentOrShadowRoot_nodeFromPoint();
-	}
+	},
 	nodesFromPoint(){
 		//TODO
 		DKDomDocumentOrShadowRoot_nodesFromPoint();

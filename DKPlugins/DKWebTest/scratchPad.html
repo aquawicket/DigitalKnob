@@ -13,9 +13,14 @@
 <a id="element1">Element1</a><br />
 <a id="output">Output: </a><br />
 <script>
-//make 2 objects of the same element and compair them. 
+function Test(){
+  //this.name = "Paul";
+  return;
+}
+//make 2 objects of the same element and compair them.
 var a = document.getElementById("element1");
-var b = document.getElementById("element1");
+var b = a;
+//var b = document.getElementById("element1");
 if(a == b){
 	console.log("a == b");
 	document.getElementById("output").innerHTML = "a == b";
