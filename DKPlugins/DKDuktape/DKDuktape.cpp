@@ -2,6 +2,10 @@
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
 
+#include <string>
+#include <iostream>
+#include <sstream>
+
 duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
@@ -232,9 +236,9 @@ bool DKDuktape::DumpError(const DKString& code)
 	//TODO: if the filename is eval, can we show the code here?
 	duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
 	DKString fileName = duk_get_string(ctx, -1);
-	if (same(fileName, "eval")) {
-		fileName = "EVAL:\n" + code;
-	}
+	//if(same(fileName, "eval")) {
+		//fileName = "EVAL:\n" + code;
+	//}
 	duk_pop(ctx);  // pop `err.fileName`
 	duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
 	DKString lineNumber = toString(duk_get_int(ctx, -1));
@@ -243,7 +247,23 @@ bool DKDuktape::DumpError(const DKString& code)
 	DKString stack = duk_get_string(ctx, -1);
 	duk_pop(ctx);  // pop `err.stack`
 
-	DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
+	DKString lineString;
+	unsigned int currentLine = 1;
+	std::istringstream f(code);
+	std::string line;
+	while(std::getline(f, line)){
+		if(same(lineNumber, toString(currentLine))) {
+			lineString = line;
+		}
+		std::cout << line << std::endl;
+		currentLine++;
+	}
+
+	DKERROR(message+"\n");
+	DKERROR(fileName+"\n");
+	DKERROR(lineNumber+": "+lineString+"\n");
+	DKERROR("*** SOURCE CODE ***\n" + code + "\n");
+	DKERROR("*** CALL STACK ***\n" + stack + "\n");
 
 	// Send error event to javascript
 	/*
@@ -287,7 +307,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 	}
 
 	if(duk_peval_file(ctx, path.c_str()) != 0){
-		DKDuktape::DumpError(path);
+		DKDuktape::DumpError(js);
 	}
 	duk_pop(ctx);  // ignore result?
 
