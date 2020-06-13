@@ -262,8 +262,8 @@ bool DKDuktape::DumpError(const DKString& code)
 	DKERROR(message+"\n");
 	DKERROR(fileName+"\n");
 	DKERROR(lineNumber+": "+lineString+"\n");
-	DKERROR("*** SOURCE CODE ***\n" + code + "\n");
-	DKERROR("*** CALL STACK ***\n" + stack + "\n");
+	DKERROR("\n\n*** SOURCE CODE ***\n" + code + "\n");
+	DKERROR("\n*** CALL STACK ***\n" + stack + "\n");
 
 	// Send error event to javascript
 	/*
