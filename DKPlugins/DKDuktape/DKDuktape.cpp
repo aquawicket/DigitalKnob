@@ -196,7 +196,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
@@ -254,7 +254,7 @@ bool DKDuktape::CallInit(const DKString& file)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
@@ -367,7 +367,7 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
@@ -517,7 +517,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message+"\n"+fileName+"\n"+lineNumber+"\n"+stack+"\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");
@@ -563,7 +563,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 		DKString stack = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.stack`
 
-		DKERROR(message+"\n");
+		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
 
 		replace(stack,"'","\\'");
 		replace(stack,"\n","\\n");

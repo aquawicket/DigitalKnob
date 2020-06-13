@@ -1,4 +1,4 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Locationc
+//https://developer.mozilla.org/en-US/docs/Web/API/Location
 
 ////////////////////////////////
 var Location = function(pointer)

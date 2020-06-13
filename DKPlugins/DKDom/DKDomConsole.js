@@ -33,4 +33,4 @@ var Console = function(pointer)
 	}
 }
 
-var console = new Console("console");
+var console = Console("console");
