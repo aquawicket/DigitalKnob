@@ -359,8 +359,12 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 		DKString message = duk_get_string(ctx, -1);
 		duk_pop(ctx);  // pop `err.message`
 		message = name +": "+message;
+		//TODO: if the filename is eval, can we show the code here?
 		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
 		DKString fileName = duk_get_string(ctx, -1);
+		if (same(fileName, "eval")) {
+			fileName = "EVAL:\n"+string; 
+		}
 		duk_pop(ctx);  // pop `err.fileName`
 		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
 		DKString lineNumber = toString(duk_get_int(ctx, -1));

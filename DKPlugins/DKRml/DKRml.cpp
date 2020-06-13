@@ -256,13 +256,12 @@ bool DKRml::LoadHtml(const DKString& html)
 #endif
 
 	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML();
-	
-	/*
+
+#ifdef DEBUG
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
-	*/
 
 	//find the last <body occurance
 	int n = code.rfind("<html");
@@ -273,12 +272,11 @@ bool DKRml::LoadHtml(const DKString& html)
 	code = code.substr(n);
 	replace(code, "<", "\n<");
 	
-	/*
 	DKINFO("\n");
 	DKINFO("############## last <html> element CODE FROM RmlUi ##############\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################################\n");
-	*/
+#endif
 
 	return true;
 }
