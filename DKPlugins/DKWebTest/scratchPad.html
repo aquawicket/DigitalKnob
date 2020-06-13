@@ -13,10 +13,11 @@
 <a id="element1">Element1</a><br />
 <a id="output">Output: </a><br />
 <script>
-/*
+
+// Basic object comparison functions
 var TESTHTMLElement = function(pointer)
 {
-
+	//TODO: add some flavor here
 }
 
 var TESTDocument = function(pointer)
@@ -35,23 +36,37 @@ var TESTDocument = function(pointer)
 		}
 	});
 }
-*/
-//make 2 objects of the same element and compair them.
-//var a = TESTDocument();
-//var b = TESTDocument();
-var a = document.getElementById("element1");
-var b = document.getElementById("element1");
+
+// Basic object comparison:
+var a = TESTDocument("abc");
+var b = TESTDocument("abc");
 if(a == b){
-	console.log("a == b");
-	document.getElementById("output").innerHTML = "a == b";
+	console.log("Basic object comparison: a == b");
+	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a == b";
 }
 else if(a === b){
-	console.log("a === b");
-	document.getElementById("output").innerHTML = "a === b";
+	console.log("Basic object comparison: a === b");
+	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a === b";
 }
 else{
-	console.log("a != b");
-	document.getElementById("output").innerHTML = "a != b";
+	console.log("Basic object comparison: a != b");
+	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a != b";
+}
+
+// DKDom object comparison
+var c = document.getElementById("element1");
+var d = document.getElementById("element1");
+if(c == d){
+	console.log("DKDom object comparison: c == d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c == d";
+}
+else if(c === d){
+	console.log("DKDom object comparison: c === d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c === d";
+}
+else{
+	console.log("DKDom object comparison: c != d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c != d";
 }
 </script>
 <!-- Place scratch code before here -->
