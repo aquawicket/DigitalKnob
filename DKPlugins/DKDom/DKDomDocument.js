@@ -9,7 +9,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var pointer = DKDomDocument_body();
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;
 		},
 		set: function(){
@@ -22,7 +22,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var pointer = DKDomDocument_documentElement();
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;
 		} 
 	});
@@ -32,19 +32,19 @@ var Document = function(pointer)
 	Document.prototype.createElement = function(tag){
 		var pointer = DKDomDocument_createElement(tag);
 		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
+		var element = HTMLElement(pointer);
 		return element;
 	}
 	Document.prototype.getElementById = function(id){
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
+		var element = HTMLElement(pointer);
 		return element;
 	}
 	Document.prototype.getElementsByTagName = function(tag){
 		var pointers = DKDomDocument_getElementsByTagName(tag);
 		if(!pointers){ return; }
-		var elements = new HTMLCollection(pointers);
+		var elements = HTMLCollection(pointers);
 		return elements;
 	}
 	
@@ -53,4 +53,4 @@ var Document = function(pointer)
 }
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot);
-var document = new Document("document");  //Create the global document object
+var document = new Document("document");

@@ -18,8 +18,6 @@ var EventFromCPP = function(pointer, event)
 var EventTarget = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("EventTarget("+pointer+")");
-	
 	this.pointer = pointer;
 	this.listeners = {};
 	
@@ -62,7 +60,7 @@ var EventTarget = function(pointer)
 				event.currentTarget = window;
 			}
 			else{
-				event.currentTarget = new HTMLElement(this.pointer);
+				event.currentTarget = HTMLElement(this.pointer);
 			}
 				
 			//event.currentTarget = this;

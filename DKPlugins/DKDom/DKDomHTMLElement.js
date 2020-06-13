@@ -47,7 +47,7 @@ var HTMLElement = function(pointer)
 		configurable: true,
 		get: function(){ return DKDomHTMLElement_hidden(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_hidden(this.pointer, val); } 
-	});  //TODO
+	});
 	Object.defineProperty(this, "inert", { 
 		configurable: true,
 		get: function(){ return DKDomHTMLElement_inert(this.pointer); }
@@ -120,7 +120,7 @@ var HTMLElement = function(pointer)
 	});
 	Object.defineProperty(this, "style", {
 		configurable: true,
-		get: function(){ return new CSSStyleDeclaration(this.pointer); }
+		get: function(){ return CSSStyleDeclaration(this.pointer); }
 	});
 	Object.defineProperty(this, "tabIndex", {
 		configurable: true,

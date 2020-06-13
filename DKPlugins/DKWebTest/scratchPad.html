@@ -13,6 +13,7 @@
 <a id="element1">Element1</a><br />
 <a id="output">Output: </a><br />
 <script>
+/*
 var TESTHTMLElement = function(pointer)
 {
 
@@ -34,9 +35,12 @@ var TESTDocument = function(pointer)
 		}
 	});
 }
+*/
 //make 2 objects of the same element and compair them.
-var a = TESTDocument();
-var b = TESTDocument();
+//var a = TESTDocument();
+//var b = TESTDocument();
+var a = document.getElementById("element1");
+var b = document.getElementById("element1");
 if(a == b){
 	console.log("a == b");
 	document.getElementById("output").innerHTML = "a == b";

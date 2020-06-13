@@ -19,11 +19,11 @@ var Node = function(pointer)
 		configurable: true,
 		get: function(){
 			var addressList = DKDomNode_childNodes(this.pointer);
-			var htmlCollection = new HTMLCollection();   //TODO - switch htmlCollection over to NodeList
+			var htmlCollection = HTMLCollection();   //TODO - switch htmlCollection over to NodeList
 			if(!addressList){ return htmlCollection; }
 			var arry = addressList.split(",");
 			for(var i=0; i<arry.length; i++){
-				htmlCollection.push(new HTMLElement(arry[i]))
+				htmlCollection.push(HTMLElement(arry[i]))
 			}
 			return htmlCollection;	
 		} 
@@ -41,7 +41,7 @@ var Node = function(pointer)
 		get: function(){ 
 			var pointer = DKDomNode_lastChild(this.pointer);
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;	
 		} 
 	});
@@ -75,7 +75,7 @@ var Node = function(pointer)
 		get: function(){ 
 			var pointer = DKDomNode_parentNode(this.pointer); 
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;			
 		} 
 	});
@@ -100,7 +100,7 @@ var Node = function(pointer)
 	Node.prototype.appendChild = function(aChild){
 		var pointer = DKDomNode_appendChild(this.pointer, aChild.pointer);
 		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
+		var element = HTMLElement(pointer);
 		return element;
 	}
 	Node.prototype.cloneNode = function(){
@@ -143,7 +143,7 @@ var Node = function(pointer)
 		console.log("Node.removeChild("+this.pointer+","+aChild.pointer+")");
 		var pointer = DKDomNode_removeChild(this.pointer, aChild.pointer);
 		if(!pointer){ return null; }
-		//var node = new Node(pointer);
+		//var node = Node(pointer);
 		//return node;
 	}
 	Node.prototype.replaceChild = function(){

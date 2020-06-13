@@ -4,7 +4,6 @@
 var Console = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Console()");
 	
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }

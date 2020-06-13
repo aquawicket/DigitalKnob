@@ -14,7 +14,8 @@ var Event = function(pointer)
 			return DKDomEvent_cancelBubble(pointer, flag);
 		}
 	});
-	Object.defineProperty(this, "cancelable", { 
+	Object.defineProperty(this, "cancelable", {
+		configurable: true,
 		get: function(){ return DKDomEvent_cancelable(pointer); }
 	}); //Read Only
 	Object.defineProperty(this, "composed", { 
@@ -26,7 +27,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_currentTarget(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
@@ -59,7 +60,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_srcElement(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
@@ -68,7 +69,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_target(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only

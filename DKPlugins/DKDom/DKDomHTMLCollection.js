@@ -24,7 +24,7 @@ var HTMLCollection = function(pointers)
 	var arry = pointers.split(",");
 	this.length = arry.length;
 	for(var i=0; i<arry.length; i++){
-		this[i] = new HTMLElement(arry[i]);
+		this[i] = HTMLElement(arry[i]);
 	}
 }
 HTMLCollection.prototype = [];
