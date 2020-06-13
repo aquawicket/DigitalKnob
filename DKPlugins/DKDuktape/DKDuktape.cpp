@@ -247,6 +247,7 @@ bool DKDuktape::DumpError(const DKString& code)
 	DKString stack = duk_get_string(ctx, -1);
 	duk_pop(ctx);  // pop `err.stack`
 
+	DKString codeWithLineNumbers;
 	DKString lineString;
 	unsigned int currentLine = 1;
 	std::istringstream f(code);
@@ -256,14 +257,15 @@ bool DKDuktape::DumpError(const DKString& code)
 			lineString = line;
 		}
 		std::cout << line << std::endl;
+		codeWithLineNumbers += toString(currentLine)+"  "+line+"\n";
 		currentLine++;
 	}
 
 	DKERROR(message+"\n");
 	DKERROR(fileName+"\n");
 	DKERROR(lineNumber+": "+lineString+"\n");
-	DKERROR("\n\n*** SOURCE CODE ***\n" + code + "\n");
-	DKERROR("\n*** CALL STACK ***\n" + stack + "\n");
+	DKERROR("\n\n*** SOURCE CODE ***\n" + codeWithLineNumbers + "\n");
+	DKERROR("\n*** CALL STACK ***\n" + stack + "\n\n");
 
 	// Send error event to javascript
 	/*
