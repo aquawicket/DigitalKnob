@@ -181,34 +181,7 @@ bool DKDuktape::CallEnd(const DKString& file)
 
 	func += "()";
 	if(duk_peval_string(ctx, func.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(func);
 	}
 	duk_pop(ctx);  // ignore result?
 
@@ -239,37 +212,50 @@ bool DKDuktape::CallInit(const DKString& file)
 
 	func += "()";
 	if(duk_peval_string(ctx, func.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(func);
 	}
 	duk_pop(ctx);
 	
+	return true;
+}
+
+///////////////////////////////////////////////
+bool DKDuktape::DumpError(const DKString& code)
+{
+	duk_get_prop_string(ctx, -1, "name");  // push `err.name`
+	DKString name = duk_get_string(ctx, -1);
+	duk_pop(ctx);  // pop `err.name`
+	duk_get_prop_string(ctx, -1, "message");  // push `err.message`
+	DKString message = duk_get_string(ctx, -1);
+	duk_pop(ctx);  // pop `err.message`
+	message = name + ": " + message;
+	//TODO: if the filename is eval, can we show the code here?
+	duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
+	DKString fileName = duk_get_string(ctx, -1);
+	if (same(fileName, "eval")) {
+		fileName = "EVAL:\n" + code;
+	}
+	duk_pop(ctx);  // pop `err.fileName`
+	duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
+	DKString lineNumber = toString(duk_get_int(ctx, -1));
+	duk_pop(ctx);  // pop `err.lineNumber`
+	duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
+	DKString stack = duk_get_string(ctx, -1);
+	duk_pop(ctx);  // pop `err.stack`
+
+	DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
+
+	// Send error event to javascript
+	/*
+	replace(stack, "'", "\\'");
+	replace(stack, "\n", "\\n");
+	replace(message, "'", "\\'");
+	DKString str;
+	str += "var err_error = {stack:'" + stack + "'};";
+	str += "var err_event = {type:'error', message:'" + message + "', filename:'" + fileName + "', lineno:'" + lineNumber + "', colno:'0', error:err_error};";
+	str += "EventFromCPP('window', err_event);";
+	duk_eval_string(ctx, str.c_str());
+	*/
 	return true;
 }
 
@@ -301,34 +287,7 @@ bool DKDuktape::LoadFile(const DKString& path)
 	}
 
 	if(duk_peval_file(ctx, path.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-		
-		DKERROR(message+"\n"+fileName+"\n"+lineNumber+"\n"+stack+"\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(path);
 	}
 	duk_pop(ctx);  // ignore result?
 
@@ -352,38 +311,7 @@ bool DKDuktape::LoadJSString(const DKString& url, const DKString& string)
 	}
 
 	if(duk_peval_string(ctx, string.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		//TODO: if the filename is eval, can we show the code here?
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		if (same(fileName, "eval")) {
-			fileName = "EVAL:\n"+string; 
-		}
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(string);
 	}
 
 	//if(url != "inlineScript"){
@@ -423,34 +351,7 @@ bool DKDuktape::OnEvent(DKEvents* event)
 	duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	duk_push_string(ctx, evt.c_str()); //add id as string parameter
     if(duk_pcall(ctx, 1) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message+"\n"+fileName+"\n"+lineNumber+"\n"+stack+"\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(evt);
     }
 	else{
 		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value?
@@ -506,34 +407,7 @@ bool DKDuktape::RunDuktape(const DKString& code)
 	}
 
 	if(duk_peval_string(ctx, code.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message+"\n"+fileName+"\n"+lineNumber+"\n"+stack+"\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(code);
 	}
 	duk_pop(ctx);
 
@@ -552,34 +426,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	}
 	
 	if(duk_peval_string(ctx, code.c_str()) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message + "\n" + fileName + "\n" + lineNumber + "\n" + stack + "\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+		DKDuktape::DumpError(code);
 	}
 	
 	//get return value
