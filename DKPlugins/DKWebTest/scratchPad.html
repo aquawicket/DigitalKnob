@@ -13,14 +13,30 @@
 <a id="element1">Element1</a><br />
 <a id="output">Output: </a><br />
 <script>
-function Test(){
-  //this.name = "Paul";
-  return;
+var TESTHTMLElement = function(pointer)
+{
+
+}
+
+var TESTDocument = function(pointer)
+{
+	TESTDocument.prototype.getElementById = function(id){
+		var pointer = DKDomDocument_getElementById(id);
+		if(!pointer){ return; }
+		var element = TESTHTMLElement(pointer);
+		return element;
+	}
+	
+	Object.defineProperty(this, "testProperty", {
+		configurable: true,
+		get: function(){ 
+			return false;
+		}
+	});
 }
 //make 2 objects of the same element and compair them.
-var a = document.getElementById("element1");
-var b = a;
-//var b = document.getElementById("element1");
+var a = TESTDocument();
+var b = TESTDocument();
 if(a == b){
 	console.log("a == b");
 	document.getElementById("output").innerHTML = "a == b";

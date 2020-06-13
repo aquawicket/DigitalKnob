@@ -7,72 +7,146 @@ var Element = function(pointer)
 	this.pointer = pointer;
 	
 	// Properties
-	Object.defineProperty(this, "attributes",   { get: function(){ return DKDomElement_attributes(this.pointer);   } });
-	Object.defineProperty(this, "classList",    { get: function(){ return DKDomElement_classList(this.pointer);    } });
-	Object.defineProperty(this, "className", { 
+	Object.defineProperty(this, "attributes", {
+		configurable: true,
+		get: function(){ return DKDomElement_attributes(this.pointer); }
+	});
+	Object.defineProperty(this, "classList", { 
+		configurable: true,
+		get: function(){ return DKDomElement_classList(this.pointer); }
+	});
+	Object.defineProperty(this, "className", {
+		configurable: true,
 		get: function()   { return DKDomElement_className(this.pointer);      },
 		set: function(val){ return DKDomElement_className(this.pointer, val); }
-	});  //TODO
-	Object.defineProperty(this, "clientHeight", { get: function(){ return DKDomElement_clientHeight(this.pointer); } });
-	Object.defineProperty(this, "clientLeft",   { get: function(){ return DKDomElement_clientLeft(this.pointer);   } });
-	Object.defineProperty(this, "clientTop",    { get: function(){ return DKDomElement_clientTop(this.pointer);    } });
-	Object.defineProperty(this, "clientWidth",  { get: function(){ return DKDomElement_clientWidth(this.pointer);  } });
-	Object.defineProperty(this, "computedName", { get: function(){ return DKDomElement_computedName(this.pointer); } });
-	Object.defineProperty(this, "computedRole", { get: function(){ return DKDomElement_computedRole(this.pointer); } });
+	});
+	Object.defineProperty(this, "clientHeight", { 
+		configurable: true,
+		get: function(){ return DKDomElement_clientHeight(this.pointer); }
+	});
+	Object.defineProperty(this, "clientLeft", { 
+		configurable: true,
+		get: function(){ return DKDomElement_clientLeft(this.pointer); }
+	});
+	Object.defineProperty(this, "clientTop", { 
+		configurable: true,
+		get: function(){ return DKDomElement_clientTop(this.pointer); }
+	});
+	Object.defineProperty(this, "clientWidth", { 
+		configurable: true,
+		get: function(){ return DKDomElement_clientWidth(this.pointer); }
+	});
+	Object.defineProperty(this, "computedName", { 
+		configurable: true,
+		get: function(){ return DKDomElement_computedName(this.pointer); } 
+	});
+	Object.defineProperty(this, "computedRole", { 
+		configurable: true,
+		get: function(){ return DKDomElement_computedRole(this.pointer); }
+	});
 	/*
 	Object.defineProperty(this, "id", { 
+		configurable: true,
 		get: function()   { return DKDomElement_id(this.pointer);      },
 		set: function(val){ return DKDomElement_id(this.pointer, val); }
-	});  //TODO
+	});
 	*/	
-	Object.defineProperty(this, "innerHTML",    { 
-		get: function()   { return DKDomElement_innerHTML(this.pointer);      },
+	Object.defineProperty(this, "innerHTML", {
+		configurable: true,
+		get: function(){ return DKDomElement_innerHTML(this.pointer); },
 		set: function(val){ return DKDomElement_innerHTML(this.pointer, val); }
 	});
-	Object.defineProperty(this, "localName",          { get: function(){ return DKDomElement_localName(this.pointer);              } });
-	Object.defineProperty(this, "namespaceURI",       { get: function(){ return DKDomElement_namespaceURI(this.pointer);           } });
-	Object.defineProperty(this, "nextElementSibling", { get: function(){ return DKDomElement_nextElementSibling(this.pointer);     } });
-	Object.defineProperty(this, "outerHTML", { 
-		get: function()   { return DKDomElement_outerHTML(this.pointer);      },
+	Object.defineProperty(this, "localName", { 
+		configurable: true,
+		get: function(){ return DKDomElement_localName(this.pointer); }
+	});
+	Object.defineProperty(this, "namespaceURI", {
+		configurable: true,
+		get: function(){ return DKDomElement_namespaceURI(this.pointer); } 
+	});
+	Object.defineProperty(this, "nextElementSibling", { 
+		configurable: true,
+		get: function(){ return DKDomElement_nextElementSibling(this.pointer); }
+	});
+	Object.defineProperty(this, "outerHTML", {
+		configurable: true,
+		get: function(){ return DKDomElement_outerHTML(this.pointer); },
 		set: function(val){ return DKDomElement_outerHTML(this.pointer, val); }
 	});
-	Object.defineProperty(this, "prefix",                 { get: function(){ return DKDomElement_prefix(this.pointer);                 } });
-	Object.defineProperty(this, "previousElementSibling", { get: function(){ return DKDomElement_previousElementSibling(this.pointer); } });
-	Object.defineProperty(this, "scrollHeight",           { get: function(){ return DKDomElement_scrollHeight(this.pointer);           } });
+	Object.defineProperty(this, "prefix", { 
+		configurable: true,
+		get: function(){ return DKDomElement_prefix(this.pointer); } 
+	});
+	Object.defineProperty(this, "previousElementSibling", {
+		configurable: true,
+		get: function(){ return DKDomElement_previousElementSibling(this.pointer); }
+	});
+	Object.defineProperty(this, "scrollHeight", { 
+		configurable: true,
+		get: function(){ return DKDomElement_scrollHeight(this.pointer); } 
+	});
 	Object.defineProperty(this, "scrollLeft", { 
-		get: function()   { return DKDomElement_scrollLeft(this.pointer);      },
+		configurable: true,
+		get: function(){ return DKDomElement_scrollLeft(this.pointer); },
 		set: function(val){ return DKDomElement_scrollLeft(this.pointer, val); }
-	});   //TODO
-	Object.defineProperty(this, "scrollLeftMax",          { get: function(){ return DKDomElement_scrollLeftMax(this.pointer);          } });
+	});
+	Object.defineProperty(this, "scrollLeftMax", { 
+		configurable: true,
+		get: function(){ return DKDomElement_scrollLeftMax(this.pointer); } 
+	});
 	Object.defineProperty(this, "scrollTop", { 
-		get: function()   { return DKDomElement_scrollTop(this.pointer);      },
+		configurable: true,
+		get: function(){ return DKDomElement_scrollTop(this.pointer); },
 		set: function(val){ return DKDomElement_scrollTop(this.pointer, val); }
-	});   //TODO
-	Object.defineProperty(this, "scrollTopMax",           { get: function(){ return DKDomElement_scrollTopMax(this.pointer);           } });
-	Object.defineProperty(this, "scrollWidth",            { get: function(){ return DKDomElement_scrollWidth(this.pointer);            } });
-	Object.defineProperty(this, "shadowRoot",             { get: function(){ return DKDomElement_shadowRoot(this.pointer);             } });
-	Object.defineProperty(this, "openOrClosedShadowRoot", { get: function(){ return DKDomElement_openOrClosedShadowRoot(this.pointer); } });
-	Object.defineProperty(this, "slot", { 
-		get: function()   { return DKDomElement_slot(this.pointer);      },
+	});
+	Object.defineProperty(this, "scrollTopMax", { 
+		configurable: true,
+		get: function(){ return DKDomElement_scrollTopMax(this.pointer); } 
+	});
+	Object.defineProperty(this, "scrollWidth", { 
+		configurable: true,
+		get: function(){ return DKDomElement_scrollWidth(this.pointer); }
+	});
+	Object.defineProperty(this, "shadowRoot", { 
+		configurable: true,
+		get: function(){ return DKDomElement_shadowRoot(this.pointer); }
+	});
+	Object.defineProperty(this, "openOrClosedShadowRoot", { 
+		configurable: true,
+		get: function(){ return DKDomElement_openOrClosedShadowRoot(this.pointer); }
+	});
+	Object.defineProperty(this, "slot", {
+		configurable: true,
+		get: function(){ return DKDomElement_slot(this.pointer); },
 		set: function(val){ return DKDomElement_slot(this.pointer, val); }
-	});   //TODO
+	});
 	Object.defineProperty(this, "tabStop", { 
-		get: function()   { return DKDomElement_tabStop(this.pointer);      },
+		configurable: true,
+		get: function(){ return DKDomElement_tabStop(this.pointer); },
 		set: function(val){ return DKDomElement_tabStop(this.pointer, val); }
-	});  //TODO
-	Object.defineProperty(this, "tagName",                { get: function(){ return DKDomElement_tagName(this.pointer);                } });
-	Object.defineProperty(this, "undoManager",            { get: function(){ return DKDomElement_undoManager(this.pointer);            } });
-	Object.defineProperty(this, "undoScope ",             { get: function(){ return DKDomElement_undoScope (this.pointer);             } });
-	
-	
+	});
+	Object.defineProperty(this, "tagName", { 
+		configurable: true,
+		get: function(){ return DKDomElement_tagName(this.pointer); } 
+	});
+	Object.defineProperty(this, "undoManager", {
+		configurable: true,
+		get: function(){ return DKDomElement_undoManager(this.pointer); }
+	});
+	Object.defineProperty(this, "undoScope", { 
+		configurable: true,
+		get: function(){ return DKDomElement_undoScope (this.pointer); }
+	});
 	Object.defineProperty(this, "onfullscreenchange", {
+		configurable: true,
 		get: function(){ return this.fullscreenchange; },
 		set: function(func){ this.addEventListener("fullscreenchange", func); this.fullscreenchange = func }
-	});   //TODO
+	});
 	Object.defineProperty(this, "onfullscreenerror", {
+		configurable: true,
 		get: function(){ return this.fullscreenerror; },
 		set: function(func){ this.addEventListener("fullscreenerror", func); this.fullscreenerror = func }
-	});   //TODO
+	});
 	
 	
 	Element.prototype.attachShadow = function(){

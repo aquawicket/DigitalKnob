@@ -7,9 +7,16 @@ var Node = function(pointer)
 	//console.warn("Node("+pointer+")");
 	//this.pointer = pointer;
 	
-	Object.defineProperty(this, "baseURI",         { get: function(){ return DKDomNode_baseURI(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "baseURIObject",   { get: function(){ return DKDomNode_baseURIObject(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "childNodes",      { 
+	Object.defineProperty(this, "baseURI", { 
+		configurable: true,
+		get: function(){ return DKDomNode_baseURI(this.pointer); }
+	});
+	Object.defineProperty(this, "baseURIObject", { 
+		configurable: true,
+		get: function(){ return DKDomNode_baseURIObject(this.pointer); }
+	});
+	Object.defineProperty(this, "childNodes", { 
+		configurable: true,
 		get: function(){
 			var addressList = DKDomNode_childNodes(this.pointer);
 			var htmlCollection = new HTMLCollection();   //TODO - switch htmlCollection over to NodeList
@@ -20,27 +27,51 @@ var Node = function(pointer)
 			}
 			return htmlCollection;	
 		} 
-	});  //TODO
-	Object.defineProperty(this, "firstChild",      { get: function(){ return DKDomNode_firstChild(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "isConnected",     { get: function(){ return DKDomNode_isConnected(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "lastChild",       { 
+	});
+	Object.defineProperty(this, "firstChild", { 
+		configurable: true,
+		get: function(){ return DKDomNode_firstChild(this.pointer); } 
+	});
+	Object.defineProperty(this, "isConnected", { 
+		configurable: true,
+		get: function(){ return DKDomNode_isConnected(this.pointer); } 
+	});
+	Object.defineProperty(this, "lastChild", { 
+		configurable: true,
 		get: function(){ 
 			var pointer = DKDomNode_lastChild(this.pointer);
 			if(!pointer){ return; }
 			var element = new HTMLElement(pointer);
 			return element;	
 		} 
-	});  //TODO
-	Object.defineProperty(this, "nextSibling",     { get: function(){ return DKDomNode_nextSibling(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "nodeName",        { get: function(){ return DKDomNode_nodeName(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "nodePrincipal",   { get: function(){ return DKDomNode_nodePrincipal(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "nodeType",        { get: function(){ return DKDomNode_nodeType(this.pointer);        } });  //TODO
+	});
+	Object.defineProperty(this, "nextSibling", { 
+		configurable: true,
+		get: function(){ return DKDomNode_nextSibling(this.pointer); }
+	});
+	Object.defineProperty(this, "nodeName", { 
+		configurable: true,
+		get: function(){ return DKDomNode_nodeName(this.pointer); } 
+	});
+	Object.defineProperty(this, "nodePrincipal", { 
+		configurable: true,
+		get: function(){ return DKDomNode_nodePrincipal(this.pointer); } 
+	});
+	Object.defineProperty(this, "nodeType", { 
+		configurable: true,
+		get: function(){ return DKDomNode_nodeType(this.pointer); } 
+	});
 	Object.defineProperty(this, "nodeValue", { 
-		get: function()   { return DKDomNode_nodeValue(this.pointer);         },
+		configurable: true,
+		get: function(){ return DKDomNode_nodeValue(this.pointer); },
 		set: function(val){ return DKDomNode_nodeValue(this.pointer, val); }
-	});  //TODO
-	Object.defineProperty(this, "ownerDocument",   { get: function(){ return DKDomNode_ownerDocument(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "parentNode",      { 
+	});
+	Object.defineProperty(this, "ownerDocument", { 
+		configurable: true,
+		get: function(){ return DKDomNode_ownerDocument(this.pointer); } 
+	});
+	Object.defineProperty(this, "parentNode", { 
+		configurable: true,
 		get: function(){ 
 			var pointer = DKDomNode_parentNode(this.pointer); 
 			if(!pointer){ return; }
@@ -48,13 +79,23 @@ var Node = function(pointer)
 			return element;			
 		} 
 	});
-	Object.defineProperty(this, "parentElement",   { get: function(){ return DKDomNode_parentElement(this.pointer);   } });  //TODO
-	Object.defineProperty(this, "previousSibling", { get: function(){ return DKDomNode_previousSibling(this.pointer); } });  //TODO
+	Object.defineProperty(this, "parentElement", { 
+		configurable: true,
+		get: function(){ return DKDomNode_parentElement(this.pointer); } 
+	});
+	Object.defineProperty(this, "previousSibling", { 
+		configurable: true,
+		get: function(){ return DKDomNode_previousSibling(this.pointer); } 
+	});
 	Object.defineProperty(this, "textContent", { 
-		get: function()   { return DKDomNode_textContent(this.pointer);         },
+		configurable: true,
+		get: function(){ return DKDomNode_textContent(this.pointer); },
 		set: function(val){ return DKDomNode_textContent(this.pointer, val); }
-	});  //TODO
-	Object.defineProperty(this, "rootNode ",       { get: function(){ return DKDomNode_rootNode (this.pointer);       } });  //Deprecated
+	});
+	Object.defineProperty(this, "rootNode", { //Deprecated
+		configurable: true,
+		get: function(){ return DKDomNode_rootNode (this.pointer); } 
+	}); 
 	
 	Node.prototype.appendChild = function(aChild){
 		var pointer = DKDomNode_appendChild(this.pointer, aChild.pointer);

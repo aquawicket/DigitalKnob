@@ -6,6 +6,7 @@ var UIEvent = function(pointer)
 	// Properties
 	/*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
+		configurable: true,
 		set: function(flag){ 
 			return DKDomUIEvent_cancelBubble(this.pointer, flag);
 		}

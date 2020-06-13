@@ -5,69 +5,149 @@ var HTMLElement = function(pointer)
 {
 	//DKDEBUGFUNC();
 	
-	Object.defineProperty(this, "accessKey",        { get: function(){ return DKDomHTMLElement_accessKey(this.pointer);          } });  //TODO
-	Object.defineProperty(this, "accessKeyLabel",   { get: function(){ return DKDomHTMLElement_accessKeyLabel(this.pointer);     } });  //TODO
-	Object.defineProperty(this, "contentEditable", { 
-		get: function()   { return DKDomHTMLElement_contentEditable(this.pointer);         },
+	Object.defineProperty(this, "accessKey", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_accessKey(this.pointer); } 
+	});
+	Object.defineProperty(this, "accessKeyLabel", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_accessKeyLabel(this.pointer); }
+	});
+	Object.defineProperty(this, "contentEditable", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_contentEditable(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_setContentEditable(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "isContentEditable", { get: function(){ return DKDomHTMLElement_isContentEditable(this.pointer); } });  //TODO
-	Object.defineProperty(this, "contextMenu",       { get: function(){ return DKDomHTMLElement_contextMenu(this.pointer);       } });  //TODO
-	Object.defineProperty(this, "dataset",           { get: function(){ return DKDomHTMLElement_dataset(this.pointer);           } });  //TODO
-	Object.defineProperty(this, "dir", { 
-		get: function()   { return DKDomHTMLElement_dir(this.pointer);      },
+	});
+	Object.defineProperty(this, "isContentEditable", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_isContentEditable(this.pointer); } 
+	});
+	Object.defineProperty(this, "contextMenu", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_contextMenu(this.pointer); }
+	});
+	Object.defineProperty(this, "dataset", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_dataset(this.pointer); }
+	});
+	Object.defineProperty(this, "dir", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_dir(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_dir(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "draggable",         { get: function(){ return DKDomHTMLElement_draggable(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "dropzone",          { get: function(){ return DKDomHTMLElement_dropzone(this.pointer);          } });  //TODO
-	Object.defineProperty(this, "hidden", { 
-		get: function()   { return DKDomHTMLElement_hidden(this.pointer);      },
+	});
+	Object.defineProperty(this, "draggable", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_draggable(this.pointer); }
+	});
+	Object.defineProperty(this, "dropzone", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_dropzone(this.pointer); } 
+	});
+	Object.defineProperty(this, "hidden", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_hidden(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_hidden(this.pointer, val); } 
 	});  //TODO
-	Object.defineProperty(this, "inert",             { get: function(){ return DKDomHTMLElement_inert(this.pointer);             } });  //TODO
-	Object.defineProperty(this, "itemScope",         { get: function(){ return DKDomHTMLElement_itemScope(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "itemType",          { get: function(){ return DKDomHTMLElement_itemType(this.pointer);          } });  //TODO
-	Object.defineProperty(this, "itemId",            { get: function(){ return DKDomHTMLElement_itemId(this.pointer);            } });  //TODO
-	Object.defineProperty(this, "itemRef",           { get: function(){ return DKDomHTMLElement_itemRef(this.pointer);           } });  //TODO
-	Object.defineProperty(this, "itemProp",          { get: function(){ return DKDomHTMLElement_itemProp(this.pointer);          } });  //TODO
-	Object.defineProperty(this, "itemValue",         { get: function(){ return DKDomHTMLElement_itemValue(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "lang", { 
-		get: function()   { return DKDomHTMLElement_lang(this.pointer);      },
+	Object.defineProperty(this, "inert", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_inert(this.pointer); }
+	});
+	Object.defineProperty(this, "itemScope", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemScope(this.pointer); } 
+	});
+	Object.defineProperty(this, "itemType", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemType(this.pointer); }
+	});
+	Object.defineProperty(this, "itemId", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemId(this.pointer); }
+	});
+	Object.defineProperty(this, "itemRef", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemRef(this.pointer); }
+	});
+	Object.defineProperty(this, "itemProp", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemProp(this.pointer); }
+	});
+	Object.defineProperty(this, "itemValue", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_itemValue(this.pointer); }
+	});
+	Object.defineProperty(this, "lang", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_lang(this.pointer);      },
 		set: function(val){ return DKDomHTMLElement_lang(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "noModule",          { get: function(){ return DKDomHTMLElement_noModule(this.pointer);          } });  //TODO
+	});
+	Object.defineProperty(this, "noModule", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_noModule(this.pointer); }
+	});
 	Object.defineProperty(this, "nonce", { 
-		get: function()   { return DKDomHTMLElement_nonce(this.pointer);      },
+		configurable: true,
+		get: function()   { return DKDomHTMLElement_nonce(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_nonce(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "offsetHeight",      { get: function(){ return DKDomHTMLElement_offsetHeight(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "offsetLeft",        { get: function(){ return DKDomHTMLElement_offsetLeft(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "offsetParent",      { get: function(){ return DKDomHTMLElement_offsetParent(this.pointer);      } });  //TODO
-	Object.defineProperty(this, "offsetTop",         { get: function(){ return DKDomHTMLElement_offsetTop(this.pointer);         } });  //TODO
-	Object.defineProperty(this, "offsetWidth",       { get: function(){ return DKDomHTMLElement_offsetWidth(this.pointer);       } });  //TODO
-	Object.defineProperty(this, "properties",        { get: function(){ return DKDomHTMLElement_properties(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "spellcheck",        { get: function(){ return DKDomHTMLElement_spellcheck(this.pointer);        } });  //TODO
-	Object.defineProperty(this, "style",             { get: function(){ return new CSSStyleDeclaration(this.pointer);    } });  //TODO
-	Object.defineProperty(this, "tabIndex", { 
-		get: function()   { return DKDomHTMLElement_tabIndex(this.pointer);      },
+	});
+	Object.defineProperty(this, "offsetHeight", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_offsetHeight(this.pointer); }
+	});
+	Object.defineProperty(this, "offsetLeft", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_offsetLeft(this.pointer); }
+	});
+	Object.defineProperty(this, "offsetParent", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_offsetParent(this.pointer); }
+	});
+	Object.defineProperty(this, "offsetTop", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_offsetTop(this.pointer); }
+	});
+	Object.defineProperty(this, "offsetWidth", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_offsetWidth(this.pointer); }
+	});
+	Object.defineProperty(this, "properties", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_properties(this.pointer); }
+	});
+	Object.defineProperty(this, "spellcheck", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_spellcheck(this.pointer); }
+	});
+	Object.defineProperty(this, "style", {
+		configurable: true,
+		get: function(){ return new CSSStyleDeclaration(this.pointer); }
+	});
+	Object.defineProperty(this, "tabIndex", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_tabIndex(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_tabIndex(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "title", { 
-		get: function()   { return DKDomHTMLElement_title(this.pointer);      },
+	});
+	Object.defineProperty(this, "title", {
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_title(this.pointer); },
 		set: function(val){ return DKDomHTMLElement_title(this.pointer, val); } 
-	});  //TODO
-	Object.defineProperty(this, "translate",         { get: function(){ return DKDomHTMLElement_translate(this.pointer);         } });  //TODO
-	
-	
+	});
+	Object.defineProperty(this, "translate", { 
+		configurable: true,
+		get: function(){ return DKDomHTMLElement_translate(this.pointer); }
+	});
 	Object.defineProperty(this, "oncopy", {
+		configurable: true,
 		get: function(){ return this.copy; },
 		set: function(func){ this.addEventListener("copy", func); this.copy = func }
 	});
 	Object.defineProperty(this, "oncut", {
+		configurable: true,
 		get: function(){ return this.cut; },
 		set: function(func){ this.addEventListener("cut", func); this.cut = func }
 	});
 	Object.defineProperty(this, "onpaste", {
+		configurable: true,
 		get: function(){ return this.paste; },
 		set: function(func){ this.addEventListener("paste", func); this.paste = func }
 	});

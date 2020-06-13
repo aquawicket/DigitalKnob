@@ -4,7 +4,8 @@
 var Document = function(pointer)
 {
 	// Properties
-	Object.defineProperty(this, "body", { 
+	Object.defineProperty(this, "body", {
+		configurable: true,
 		get: function(){ 
 			var pointer = DKDomDocument_body();
 			if(!pointer){ return; }
@@ -16,7 +17,8 @@ var Document = function(pointer)
 			return DKDomDocument_body(pointer); //TODO
 		} 
 	});
-	Object.defineProperty(this, "documentElement", { 
+	Object.defineProperty(this, "documentElement", {
+		configurable: true,
 		get: function(){ 
 			var pointer = DKDomDocument_documentElement();
 			if(!pointer){ return; }

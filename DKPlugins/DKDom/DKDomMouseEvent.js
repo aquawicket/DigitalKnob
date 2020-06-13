@@ -5,11 +5,13 @@ var MouseEvent = function(pointer)
 {
 	// Properties
 	Object.defineProperty(this, "altKey", {
+		configurable: true,
 		get: function(){ 
 			return DKDomMouseEvent_altKey(this.pointer);
 		}
 	});
 	Object.defineProperty(this, "button", {
+		configurable: true,
 		get: function(){ 
 			return DKDomMouseEvent_button(pointer);
 		}
