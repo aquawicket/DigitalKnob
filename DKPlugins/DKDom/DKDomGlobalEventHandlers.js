@@ -4,7 +4,6 @@
 var GlobalEventHandlers = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("GlobalEventHandlers("+pointer+")");
 	
 	this.pointer = pointer;
 	
@@ -501,11 +500,13 @@ var GlobalEventHandlers = function(pointer)
 		set: function(func){ this.addEventListener("touchmove", func); this.touchmove = func }
 	});
 	this.ontouchstart = null;
+	/*
 	Object.defineProperty(this, "ontouchstart", {
 		configurable: true,
 		get: function(){ return this.touchstart; },
 		set: function(func){ this.addEventListener("touchstart", func); this.touchstart = func }
 	});
+	*/
 	this.transitioncancel = null;
 	Object.defineProperty(this, "ontransitioncancel", {
 		configurable: true,
