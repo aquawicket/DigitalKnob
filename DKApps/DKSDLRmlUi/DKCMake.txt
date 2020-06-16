@@ -11,3 +11,4 @@ DKDEPEND(DKSDLWindow)
 DKDEPEND(DKThread)
 DKDEPEND(DKWebTest)
 DKDEPEND(DKWindow)
+If there are conflicts, resolve them.

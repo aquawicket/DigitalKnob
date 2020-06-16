@@ -101,3 +101,10 @@ Internet Explorer (9.0+) <br>
 
 <br><br><br>
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+
+"If there are conflicts, resolve them."
+"All will be well"
+" :) "
+" return <3 "
+
