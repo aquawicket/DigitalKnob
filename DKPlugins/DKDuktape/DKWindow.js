@@ -8,4 +8,4 @@ var Window = function(pointer)
 Window.prototype = EventTarget.prototype;
 
 //Create the global window object
-var window = Window("window");
+var window = new Window("window");

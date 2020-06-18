@@ -4,8 +4,6 @@
 var GlobalEventHandlers = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("GlobalEventHandlers("+pointer+")");
-	
 	this.pointer = pointer;
 	
 	this.abort = null;

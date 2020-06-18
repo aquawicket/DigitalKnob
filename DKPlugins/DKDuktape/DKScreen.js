@@ -65,4 +65,4 @@ var Screen = function(pointer)
 }
 Screen.prototype = EventTarget.prototype;
 
-var screen = Screen("screen");
+var screen = new Screen("screen");

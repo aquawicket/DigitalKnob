@@ -228,4 +228,4 @@ var Navigator = function(pointer)
 	}
 }
 
-var navigator = Navigator("navigator");
+var navigator = new Navigator("navigator");
