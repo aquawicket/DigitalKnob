@@ -1,3 +1,4 @@
+/*
 window.addEventListener('error', function(e){
     var errorText = [
         e.message + '\n',
@@ -7,6 +8,7 @@ window.addEventListener('error', function(e){
     ].join('\n');
 	console.error(errorText);
 });
+*/
 
 DKCreate("DKBuild/DKBuildConsole.js", function(){});
 //DKCreate("DKUpdate");
