@@ -189,7 +189,7 @@ var Element = function(pointer)
 		//DKDomElements_getElementsByClassName(this.pointer, name)
 		var pointers = DKDomElement_getElementsByClassName(name);
 		if(!pointers){ return; }
-		var elements = HTMLCollection(pointers);
+		var elements = new HTMLCollection(pointers);
 		return elements;
 	}
 	Element.prototype.getElementsByTagName = function(tag){
@@ -197,7 +197,7 @@ var Element = function(pointer)
 		//DKDomElements_getElementsByTagName(this.pointer, tag)
 		var pointers = DKDomElement_getElementsByTagName(tag);
 		if(!pointers){ return; }
-		var elements = HTMLCollection(pointers);
+		var elements = new HTMLCollection(pointers);
 		return elements;
 	}
 	Element.prototype.getElementsByTagNameNS = function(){

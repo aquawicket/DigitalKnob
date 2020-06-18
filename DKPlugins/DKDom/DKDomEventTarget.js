@@ -60,7 +60,7 @@ var EventTarget = function(pointer)
 				event.currentTarget = window;
 			}
 			else{
-				event.currentTarget = HTMLElement(this.pointer);
+				event.currentTarget = new HTMLElement(this.pointer);
 			}
 				
 			//event.currentTarget = this;
