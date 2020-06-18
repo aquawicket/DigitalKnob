@@ -189,7 +189,9 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 
 	//Call the callback
 	if(callback_found){
-		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
+		//if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
+		if(duk_pcall(ctx, 0) != 0) { // JsFunc call failed
+			DKDuktape::DumpError(obj->data[1].c_str());
 			/*
 			//TODO - can we get more info on the actuall callback to display here
 			// callback name, parameters, inner code, etc.
@@ -202,6 +204,7 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 			duk_eval_string(ctx, str.c_str());
 			*/
 
+			/*
 			duk_get_prop_string(ctx, -1, "name");  // push `err.name`
 			DKString name = duk_get_string(ctx, -1);
 			duk_pop(ctx);  // pop `err.name`
@@ -230,6 +233,7 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 			str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
 			str += "EventFromCPP('window', err_event);";
 			duk_eval_string(ctx, str.c_str());
+			*/
 		}
 		duk_pop(ctx);
     }
