@@ -189,8 +189,8 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 
 	//Call the callback
 	if(callback_found){
-		//if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
-		if(duk_pcall(ctx, 0) != 0) { // JsFunc call failed
+		if(duk_pcall(ctx, 0) != 0 && duk_pcall(ctx, 1) != 0){ // JsFunc call failed
+		//if(duk_pcall(ctx, 0) != 0) { // JsFunc call failed
 			DKDuktape::DumpError(obj->data[1].c_str());
 			/*
 			//TODO - can we get more info on the actuall callback to display here
