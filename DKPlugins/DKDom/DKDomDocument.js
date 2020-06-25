@@ -32,7 +32,7 @@ var Document = function(pointer)
 	Document.prototype.createElement = function(tag){
 		var pointer = DKDomDocument_createElement(tag);
 		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
+		var element = HTMLElement(pointer);
 		return element;
 	}
 	Document.prototype.getElementById = function(id){

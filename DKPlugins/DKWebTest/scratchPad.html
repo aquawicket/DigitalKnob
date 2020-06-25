@@ -27,11 +27,35 @@ else if(a === b){
 	console.log("DKDom object comparison: a === b");
 	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: a === b";
 }
-else{
+else if(a != b){
 	console.log("DKDom object comparison: a != b");
 	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: a != b";
 }
+else{
+	console.log("ERROR: we should not have landed here");
+	document.getElementById("output").innerHTML += "<br></br>ERROR: we should not have landed here";
+}
 document.getElementById("output").style.color = "blue";
+
+
+var c = document.createElement("div");
+c.id = "c";
+c.innerHTML = "C Element";
+c.style.color = "red";
+
+var d = document.getElementById("c");
+if(c == d){
+	console.log("DKDom object comparison: c == d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c == d";
+}
+else if(c === d){
+	console.log("DKDom object comparison: c === d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c === d";
+}
+else{
+	console.log("DKDom object comparison: c != d");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c != d";
+}
 </script>
 <!-- Place scratch code before here -->
 
