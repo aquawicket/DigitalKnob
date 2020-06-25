@@ -15,60 +15,23 @@
 <a id="output" style=""></a><br />
 <script>
 
-// Basic object comparison functions
-var TESTHTMLElement = function(pointer)
-{
-	//TODO: add some flavor here
-}
-
-var TESTDocument = function(pointer)
-{
-	TESTDocument.prototype.getElementById = function(id){
-		var pointer = DKDomDocument_getElementById(id);
-		if(!pointer){ return; }
-		var element = TESTHTMLElement(pointer);
-		return element;
-	}
-	
-	Object.defineProperty(this, "testProperty", {
-		configurable: true,
-		get: function(){ 
-			return false;
-		}
-	});
-}
-
-// Basic object comparison:
-var a = TESTDocument("abc");
-var b = TESTDocument("abc");
-if(a == b){
-	console.log("Basic object comparison: a == b");
-	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a == b";
-}
-else if(a === b){
-	console.log("Basic object comparison: a === b");
-	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a === b";
-}
-else{
-	console.log("Basic object comparison: a != b");
-	document.getElementById("output").innerHTML += "<br></br>Basic object comparison: a != b";
-}
 
 // DKDom object comparison
-var c = document.getElementById("element1");
-var d = document.getElementById("element1");
-if(c == d){
-	console.log("DKDom object comparison: c == d");
-	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c == d";
+var a = document.getElementById("element1");
+var b = document.getElementById("element1");
+if(a == b){
+	console.log("DKDom object comparison: a == b");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: a == b";
 }
-else if(c === d){
-	console.log("DKDom object comparison: c === d");
-	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c === d";
+else if(a === b){
+	console.log("DKDom object comparison: a === b");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: a === b";
 }
 else{
-	console.log("DKDom object comparison: c != d");
-	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: c != d";
+	console.log("DKDom object comparison: a != b");
+	document.getElementById("output").innerHTML += "<br></br>DKDom object comparison: a != b";
 }
+document.getElementById("output").style.color = "blue";
 </script>
 <!-- Place scratch code before here -->
 

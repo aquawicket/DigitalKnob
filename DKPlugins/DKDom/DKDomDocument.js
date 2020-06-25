@@ -36,7 +36,6 @@ var Document = function(pointer)
 		return element;
 	}
 	Document.prototype.getElementById = function(id){
-		//console.log("called Document.prototype.getElementById("+id+")");
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
 		var element = HTMLElement(pointer);

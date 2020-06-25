@@ -310,9 +310,7 @@ var Element = function(pointer)
 	});
 	
 	//FIXME: we only want to return the proxy if it's used
-	//if(proxy.innerHTML == this.pointer){
-		//console.log("proxy.innerHTML: "+proxy.innerHTML);
-		return proxy;
-	//}
+	//return proxy;
+	return this;
 }
 Element.prototype = Node.prototype;
