@@ -22,7 +22,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var pointer = DKDomDocument_documentElement();
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;
 		} 
 	});
@@ -38,7 +38,7 @@ var Document = function(pointer)
 	Document.prototype.getElementById = function(id){
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
-		var element = HTMLElement(pointer);
+		var element = HTMLElement(pointer); //FIXME: if we don't declare new, addEventListener doesn't work. 
 		return element;
 	}
 	Document.prototype.getElementsByTagName = function(tag){
@@ -49,7 +49,7 @@ var Document = function(pointer)
 	}
 	
 	
-	Node.call(this, pointer);
+	return Node.call(this, pointer);
 }
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot);
