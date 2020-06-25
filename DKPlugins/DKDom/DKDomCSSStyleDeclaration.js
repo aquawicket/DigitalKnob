@@ -17,7 +17,7 @@ var CSSStyleDeclaration = function(pointer)
 		this[propertyName] = propertyValue;
 	}
 	
-	return new Proxy(this, {
+	const proxy = new Proxy(this, {
 		has: function(target, key){
 			return key in target;
 		},
@@ -60,4 +60,8 @@ var CSSStyleDeclaration = function(pointer)
 			return true;
 		}
 	});
+	
+	//FIXME: we only want to return the proxy if it's used
+	//return proxy;
+	return this;
 }
