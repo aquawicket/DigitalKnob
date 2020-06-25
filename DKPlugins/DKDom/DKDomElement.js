@@ -4,7 +4,7 @@
 var Element = function(pointer)
 {
 	//DKDEBUGFUNC();
-	this.pointer = pointer;
+	//this.pointer = pointer;
 	
 	// Properties
 	Object.defineProperty(this, "attributes", {
@@ -274,7 +274,7 @@ var Element = function(pointer)
 	Node.call(this, pointer);
 	GlobalEventHandlers.call(this, pointer);
 	
-	return new Proxy(this, {
+	const proxy = new Proxy(this, {
 		has: function (target, key){
 			return key in target;
 		},
@@ -308,5 +308,11 @@ var Element = function(pointer)
 			return true;
 		}
 	});
+	
+	//FIXME: we only want to return the proxy if it's used
+	//if(proxy.innerHTML == this.pointer){
+		//console.log("proxy.innerHTML: "+proxy.innerHTML);
+		return proxy;
+	//}
 }
-Element.prototype = Node.prototype;	
+Element.prototype = Node.prototype;

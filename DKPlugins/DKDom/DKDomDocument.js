@@ -36,9 +36,10 @@ var Document = function(pointer)
 		return element;
 	}
 	Document.prototype.getElementById = function(id){
+		//console.log("called Document.prototype.getElementById("+id+")");
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
+		var element = HTMLElement(pointer);
 		return element;
 	}
 	Document.prototype.getElementsByTagName = function(tag){
