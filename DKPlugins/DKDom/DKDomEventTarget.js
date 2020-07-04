@@ -18,6 +18,7 @@ var EventFromCPP = function(pointer, event)
 var EventTarget = function(pointer)
 {
 	//DKDEBUGFUNC();
+	//console.log("var EventTarget = function("+pointer+")");
 	this.pointer = pointer;
 	this.listeners = {};
 	

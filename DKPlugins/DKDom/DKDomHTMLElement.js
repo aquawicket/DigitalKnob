@@ -4,7 +4,8 @@
 var HTMLElement = function(pointer)
 {
 	//DKDEBUGFUNC();
-	Element.call(this, pointer);
+	//console.log("var HTMLElement = function("+pointer+")");
+	//Element.call(this, pointer);
 	
 	Object.defineProperty(this, "accessKey", { 
 		configurable: true,
@@ -121,7 +122,7 @@ var HTMLElement = function(pointer)
 	});
 	Object.defineProperty(this, "style", {
 		configurable: true,
-		get: function(){ return CSSStyleDeclaration(this.pointer); }
+		get: function(){ return CSSStyleDeclaration(pointer); }
 	});
 	Object.defineProperty(this, "tabIndex", {
 		configurable: true,
@@ -167,6 +168,7 @@ var HTMLElement = function(pointer)
 		//TODO
 	}
 	
-	return this;
+	return Element.call(this, pointer);
+	//return this;
 }
 HTMLElement.prototype = Element.prototype;

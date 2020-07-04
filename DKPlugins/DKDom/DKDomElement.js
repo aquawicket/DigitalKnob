@@ -4,6 +4,7 @@
 var Element = function(pointer)
 {
 	//DKDEBUGFUNC();
+	//console.log("var Element = function("+pointer+")");
 	this.pointer = pointer;
 	Node.call(this, pointer);
 	GlobalEventHandlers.call(this, pointer);
@@ -277,7 +278,7 @@ var Element = function(pointer)
 		},
 		get: function (target, key, recv){
 			//console.warn("Element:get("+target+","+key+","+recv+")");
-			//console.warn("Element:get("+key+")");
+			console.warn("Element:get("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
 				console.warn("tyoeof target[key] == "+typeof target[key]);
 				return target[key]; 

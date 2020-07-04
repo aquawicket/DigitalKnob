@@ -4,7 +4,7 @@
 var Node = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//console.warn("Node("+pointer+")");
+	//console.log("var Node = function("+pointer+")");
 	//this.pointer = pointer;
 	EventTarget.call(this, pointer);
 	
