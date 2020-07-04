@@ -3,6 +3,8 @@
 ////////////////////////////////
 var Document = function(pointer)
 {
+	Node.call(this, pointer);
+	
 	// Properties
 	Object.defineProperty(this, "body", {
 		configurable: true,
@@ -38,7 +40,7 @@ var Document = function(pointer)
 	Document.prototype.getElementById = function(id){
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
-		var element = HTMLElement(pointer); //FIXME: if we don't declare new, addEventListener doesn't work. 
+		var element = new HTMLElement(pointer); //FIXME: if we don't declare new, addEventListener doesn't work. 
 		return element;
 	}
 	Document.prototype.getElementsByTagName = function(tag){
@@ -48,8 +50,7 @@ var Document = function(pointer)
 		return elements;
 	}
 	
-	
-	return Node.call(this, pointer);
+	return this;
 }
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot);

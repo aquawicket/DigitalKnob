@@ -6,6 +6,7 @@ var Node = function(pointer)
 	//DKDEBUGFUNC();
 	//console.warn("Node("+pointer+")");
 	//this.pointer = pointer;
+	EventTarget.call(this, pointer);
 	
 	Object.defineProperty(this, "baseURI", { 
 		configurable: true,
@@ -150,6 +151,6 @@ var Node = function(pointer)
 		//TODO
 	}
 
-	return EventTarget.call(this, pointer);
+	return this;
 };
 Node.prototype = EventTarget.prototype;

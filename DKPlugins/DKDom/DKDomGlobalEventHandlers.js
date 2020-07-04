@@ -4,7 +4,6 @@
 var GlobalEventHandlers = function(pointer)
 {
 	//DKDEBUGFUNC();
-	
 	this.pointer = pointer;
 	
 	this.abort = null;
@@ -525,5 +524,7 @@ var GlobalEventHandlers = function(pointer)
 		get: function(){ return this.waiting; },
 		set: function(func){ this.addEventListener("waiting", func); this.waiting = func }
 	});
+	
+	return this;
 }
 GlobalEventHandlers.prototype = EventTarget.prototype;

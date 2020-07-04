@@ -23,7 +23,7 @@ var EventTarget = function(pointer)
 	
 	EventTarget.prototype.listeners = null;
 	EventTarget.prototype.addEventListener = function(type, callback, useCapture){
-		//console.warn("addEventListener this.pointer = "+this.pointer+", type = "+type);
+		console.warn("addEventListener this.pointer = "+this.pointer+", type = "+type);
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
@@ -60,7 +60,7 @@ var EventTarget = function(pointer)
 				event.currentTarget = window;
 			}
 			else{
-				event.currentTarget = new HTMLElement(this.pointer);
+				event.currentTarget = HTMLElement(this.pointer);
 			}
 				
 			//event.currentTarget = this;
@@ -69,4 +69,6 @@ var EventTarget = function(pointer)
 		}
 		return !event.defaultPrevented;
 	};
+	
+	return this;
 };

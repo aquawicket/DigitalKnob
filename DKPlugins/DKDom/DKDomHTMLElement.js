@@ -4,6 +4,7 @@
 var HTMLElement = function(pointer)
 {
 	//DKDEBUGFUNC();
+	Element.call(this, pointer);
 	
 	Object.defineProperty(this, "accessKey", { 
 		configurable: true,
@@ -166,6 +167,6 @@ var HTMLElement = function(pointer)
 		//TODO
 	}
 	
-	return Element.call(this, pointer);
+	return this;
 }
 HTMLElement.prototype = Element.prototype;

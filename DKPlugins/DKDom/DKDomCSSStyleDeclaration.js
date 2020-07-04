@@ -26,7 +26,7 @@ var CSSStyleDeclaration = function(pointer)
 			if(typeof target[key] === "function" || key == "pointer"){ return target[key]; }
 			var realKey = key;
 			
-			//Replace characters ( C ) with ( -c )    I.E.  backgroundColor becomes background-color
+			//Replace characters ( C ) with ( -c )    EXAMPLE:  backgroundColor becomes background-color
 			for(var i=0; i < realKey.length; i++){
 				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
 					if(realKey.charAt(i) == "-"){ continue; }
@@ -42,8 +42,7 @@ var CSSStyleDeclaration = function(pointer)
 			if(typeof target[key] === "function" || key == "pointer"){ return true; }
 			var realKey = key;
 			
-			
-			//Replace characters ( C ) with ( -c )    I.E.  backgroundColor becomes background-color
+			//Replace characters ( C ) with ( -c )    EXAMPLE:  backgroundColor becomes background-color
 			for(var i=0; i < realKey.length; i++){
 				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
 					if(realKey.charAt(i) == "-"){ continue; }
@@ -62,6 +61,6 @@ var CSSStyleDeclaration = function(pointer)
 	});
 	
 	//FIXME: we only want to return the proxy if it's used
-	//return proxy;
-	return this;
+	return proxy;
+	//return this;
 }

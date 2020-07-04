@@ -4,7 +4,9 @@
 var Element = function(pointer)
 {
 	//DKDEBUGFUNC();
-	//this.pointer = pointer;
+	this.pointer = pointer;
+	Node.call(this, pointer);
+	GlobalEventHandlers.call(this, pointer);
 	
 	// Properties
 	Object.defineProperty(this, "attributes", {
@@ -269,11 +271,6 @@ var Element = function(pointer)
 		//TODO
 	}
 	
-
-	this.pointer = pointer;
-	Node.call(this, pointer);
-	GlobalEventHandlers.call(this, pointer);
-	
 	const proxy = new Proxy(this, {
 		has: function (target, key){
 			return key in target;
@@ -281,9 +278,9 @@ var Element = function(pointer)
 		get: function (target, key, recv){
 			//console.warn("Element:get("+target+","+key+","+recv+")");
 			//console.warn("Element:get("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ return target[key]; }
-			if(key.substr(0,2) == "on"){ //onevent
-				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
+				console.warn("tyoeof target[key] == "+typeof target[key]);
+				return target[key]; 
 			}
 			else{
 				target[key] = DKDomElement_getAttribute(target["pointer"], key);
@@ -291,13 +288,14 @@ var Element = function(pointer)
 			return target[key];
 		},
 		set: function (target, key, val, recv){
-			//console.warn("Element:set("+target+","+key+","+val+")");
+			console.warn("Element:set("+target+","+key+","+val+")");
 			//console.warn("Element:set("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ return true; }
-			if(key.substr(0,2) == "on"){ //onevent
-				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
+			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
+				console.warn("tyoeof target[key] == "+typeof target[key]);
+				return true; 
 			}
 			else{
+				console.warn("DKDomElement_setAttribute(target[pointer], key, val);");
 				DKDomElement_setAttribute(target["pointer"], key, val);
 			}
 			target[key] = val;
