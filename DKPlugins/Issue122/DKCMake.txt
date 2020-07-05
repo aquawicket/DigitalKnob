@@ -1,1 +1,1 @@
-DKASSETS(DKWebTest)
+DKASSETS(Issue122)
