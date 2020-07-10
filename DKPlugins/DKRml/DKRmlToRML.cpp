@@ -231,7 +231,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	for(unsigned int i=0; i<links.size(); i++){
 		if(!links[i]->HasAttribute("href")){ continue; }
 		//load the stylesheet in rocket
-		DKString href = links[i]->GetAttribute("href")->Get<Rml::Core::String>();//.CString();
+		DKString href = links[i]->GetAttribute("href")->Get<Rml::Core::String>();
 		//replace(href, DKRml::Get()->_path, "");
 		DKClass::DKCreate(href);
 	}
@@ -269,7 +269,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			else{
 				processed += src+",";
 				DKString app = DKRml::Get()->workingPath +src;
-				DKDuktape::LoadFile(app);
+				//DKDuktape::LoadFile(app);
+				DKClass::DKCreate(src);
 			}
 		}
 		else{

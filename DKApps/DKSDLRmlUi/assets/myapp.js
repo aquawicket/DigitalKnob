@@ -1,5 +1,3 @@
-// browser app script, called from index.html
-
 DKCreate("DK/DK.css", function(){
 DKCreate("DKFile/DKFile.js", function(){
 DKCreate("DKWidget/DKWidget.js", function(){
@@ -11,4 +9,3 @@ DKCreate("DKColorPicker/DKColorPicker.js", function(){
 });
 });
 });
-//DKCreate("DKNotepad/DKNotepad.js", function(){});

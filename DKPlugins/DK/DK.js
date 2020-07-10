@@ -1,5 +1,3 @@
-console.log("Loading DK.js");
-
 var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
@@ -236,8 +234,9 @@ function Log(string, lvl)
 }
 
 DKINFO("*** DigitalKnob ***\n");
-DKINFO(DK_GetBrowser()+"\n");
-DKINFO(DK_GetJSEngine()+"\n");
+DKINFO("Browser = "+DK_GetBrowser()+"\n");
+DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
+document.body.setAttribute("id", "body");
 
 
 /////////////////////////////////
@@ -257,7 +256,7 @@ function DKCreate(data, callback)
 	}
 	else{
 		//DKINFO("DKCreate("+data+"): requesting c++ plugin\n");
-		if(DK_GetBrowser() == "CEF"){
+		if(DK_GetBrowser() == "CEF" || DK_GetBrowser() == "RML"){
 			DKCreate_CPP(data);
 		}
 	}	
@@ -371,6 +370,7 @@ function DKClose(data)
 function LoadCss(url)
 {
 	DKDEBUGFUNC(url);
+	console.log("DK.js:LoadCss("+url+")");
 	if(!url){ 
 		DKERROR("LoadCss("+url+"): url invalid\n");
 		return false; 
@@ -385,6 +385,7 @@ function LoadCss(url)
 	//console.log("link = "+link.POINTER);
 	link.setAttribute('href', url);
 	link.setAttribute('id', url);
+	//link.id = url;
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
 	var elements = document.getElementsByTagName('head');
@@ -407,7 +408,7 @@ function LoadJs(url, callback)
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		//DKWARN("LoadJs("+url+", callback): url already loaded\n");
+		DKWARN("LoadJs("+url+", callback): url already loaded\n");
 		callback && callback(false);
 		return false;
 	}
@@ -428,9 +429,15 @@ function LoadJs(url, callback)
 	// Adding the script tag to the head as suggested before
 	var head = document.getElementsByTagName('head')[0];
 	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.id = url;
-	script.async = true; // optionally
+	//script.type = 'text/javascript';
+	script.setAttribute('type', 'text/javascript');
+	//script.id = url;
+	script.setAttribute('id', url);
+	//script.async = true; // optionally
+	script.setAttribute('async', true);
+	script.setAttribute('src', url);
+	
+	//console.log("script.type = "+script.type);
 	
 	//if(typeof script == "undefined"){ 
 	//	DKERROR("Cannot load "+url+"\n");
@@ -444,7 +451,7 @@ function LoadJs(url, callback)
 	
 	////////// CALLBACKS
 	var done = false;
-	script.onload = script.onreadystatechange = function(){
+	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
 			DKINFO("Loaded: "+url+"\n");
 			var func = window[init]; //Plugin_Init()    
@@ -465,22 +472,20 @@ function LoadJs(url, callback)
 	}
 	////////////////////////
 	
-	script.src = url;   //This will trigger DKRocket to load the script, but init or the callback will never be called. 
-						//This is because there is no onload function for scripts in DK yet.
-					  
-						//DK FIX
-						if(DK_GetJSEngine() == "Duktape"){
-							DKINFO("Loaded: "+url+"\n");
-							var func = init; //Plugin_Init() 
-							if(eval("typeof "+func) === "function"){
-								DKINFO("Calling: "+init+"\n");
-								eval(func)(); //Init
-							}
-							else{
-								DKWARN(init+" is not defined\n");
-							}
-							callback && callback(true);
-						}
+	//FIXME - DigitalKnob can't trigger onload yet, so we do this
+	if(DK_GetJSEngine() == "Duktape"){
+		DKINFO("Loaded: "+url+"\n");
+		var func = init; //Plugin_Init() 
+		if(eval("typeof "+func) === "function"){
+			DKINFO("Calling: "+init+"\n");
+			eval(func)(); //Init
+		}
+		else{
+			DKWARN(init+" is not defined\n");
+		}
+		callback && callback(true);
+	}
+	
 	return true;
 }
 
@@ -488,22 +493,22 @@ function LoadJs(url, callback)
 function LoadHtml(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	DKWARN("LoadHtml("+url+","+parent+")");
+	DKWARN("DK.js:LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		DKERROR("LoadJs("+url+"): url invalid\n");
+		DKERROR("DK.js:LoadJs("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(url.indexOf(".html") == -1){ 
-		DKERROR("LoadHtml("+url+", parent): url is not a valid .html file\n");
+		DKERROR("DK.js:LoadHtml("+url+", parent): url is not a valid .html file\n");
 		return false;
 	}
 	
 	if(url == ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKWARN("LoadHtml("+url+", parent): url already loaded\n");
+		DKWARN("DK.js:LoadHtml("+url+", parent): url already loaded\n");
 		return false;
 	}
 	
@@ -516,10 +521,13 @@ function LoadHtml(url, parent)
 	}
 
 	var temp = document.createElement("temp");
+	//console.log("temp.id = "+temp.id);
 	temp.innerHTML = string;
+	//console.log("temp.innerHTML = "+temp.innerHTML);
+	//console.log("temp.id = "+temp.id);
 	var nodes = temp.childNodes;
 	if(!nodes){
-		DKERROR("LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
+		DKERROR("DK.js:LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
 		return false;
 	}
 	if(nodes.length > 1){
@@ -528,24 +536,25 @@ function LoadHtml(url, parent)
 		}
 		
 		DKWARN("###############################################\n");
-		DKWARN("LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
+		DKWARN("DK.js:LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
 		//DKINFO(temp.innerHTML+"\n");
 		DKWARN("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
 		DKWARN("###############################################\n");
 		//return false;
 	}
 
-	if(nodes[0].id != url){
-		DKWARN("LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
+	//if(nodes[0].id != url){
+	if(nodes[0].getAttribute('id') != url){
+		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
 		nodes[0].id = url;
-		DKWARN("LoadHtml("+url+",parent): please fix the id\n");
+		DKWARN("DK.js:LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
-		console.log("LoadHtml(): appending to parent");
+		console.log("DK.js:LoadHtml(): appending to parent");
 		parent.appendChild(nodes[0]);
 	}
 	else{
-		console.log("LoadHtml(): appending to document.body");
+		console.log("DK.js:LoadHtml(): appending to document.body");
 		document.body.appendChild(nodes[0]);
 	}
 	

@@ -4,7 +4,7 @@
 var Element = function(pointer)
 {
 	Node.call(this, pointer);
-	GlobalEventHandlers.call(this, pointer);
+	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
 	
 	// Properties
 	Object.defineProperty(this, "attributes", {
@@ -47,10 +47,10 @@ var Element = function(pointer)
 	/*
 	Object.defineProperty(this, "id", { 
 		configurable: true,
-		get: function()   { return DKDomElement_id(pointer);      },
-		set: function(val){ return DKDomElement_id(pointer, val); }
+		get: function()   { return DKDomElement_getAttribute(pointer, "id"); },
+		set: function(val){ return DKDomElement_setAttribute(pointer, "id", val); }
 	});
-	*/	
+	*/
 	Object.defineProperty(this, "innerHTML", {
 		configurable: true,
 		get: function(){ return DKDomElement_innerHTML(pointer); },
@@ -167,11 +167,14 @@ var Element = function(pointer)
 	Element.prototype.getAnimations = function(){
 		//TODO
 	}
-	Element.prototype.getAttribute = function(attribute){
-		this[attribute] = DKDomElement_getAttribute(pointer, attribute);
-		if(!this[attribute]){ return null; }
-		return this[attribute];
-	}
+	Object.defineProperty(this, "getAttribute", {
+		configurable: true,
+		value: function(attribute){ 
+			this[attribute] = DKDomElement_getAttribute(pointer, attribute);
+			if(!this[attribute]){ return null; }
+			return this[attribute];
+		} 
+	});
 	Element.prototype.getAttributeNames = function(){
 		//TODO
 	}
@@ -255,12 +258,6 @@ var Element = function(pointer)
 	Element.prototype.scrollIntoView = function(){
 		//TODO
 	}
-	/*
-	Element.prototype.setAttribute = function(attribute, value){
-		DKDomElement_setAttribute(pointer, attribute, value);
-		this[attribute] = value;
-	}
-	*/
 	Object.defineProperty(this, "setAttribute", {
 		configurable: true,
 		value: function(attribute, value){ 
@@ -281,15 +278,16 @@ var Element = function(pointer)
 		//TODO
 	}
 	
-	const proxy = new Proxy(this, {
+	return new Proxy(this, {
+	//const proxy = new Proxy(this, {
 		has: function (target, key){
+			console.log("Element:has("+key+")");
 			return key in target;
 		},
 		get: function (target, key, recv){
-			//console.warn("Element:get("+target+","+key+","+recv+")");
-			console.warn("Element:get("+key+")");
+			console.log("Element:get("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
-				console.warn("tyoeof target[key] == "+typeof target[key]);
+				console.log("tyoeof target[key] == "+typeof target[key]);
 				return target[key]; 
 			}
 			else{
@@ -298,20 +296,20 @@ var Element = function(pointer)
 			return target[key];
 		},
 		set: function (target, key, val, recv){
-			console.warn("Element:set("+target+","+key+","+val+")");
-			//console.warn("Element:set("+key+")");
+			console.log("Element:set("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
 				console.warn("tyoeof target[key] == "+typeof target[key]);
 				return true; 
 			}
 			else{
-				console.warn("DKDomElement_setAttribute(target[pointer], key, val);");
+				console.log("DKDomElement_setAttribute(target[pointer], key, val);");
 				DKDomElement_setAttribute(target["pointer"], key, val);
 			}
 			target[key] = val;
 			return true;
 		},
 		deleteProperty: function (target, key){
+			console.log("Element:deleteProperty("+key+")");
 			delete target[key];
 			return true;
 		}
@@ -319,6 +317,6 @@ var Element = function(pointer)
 	
 	//FIXME: we only want to return the proxy if it's used
 	//return proxy;
-	return this;
+	//return this;
 }
 Element.prototype = Node.prototype;

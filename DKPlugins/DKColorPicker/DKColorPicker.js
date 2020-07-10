@@ -1,3 +1,5 @@
+console.log("Loading DKColorPicker.js");
+
 var event_type;
 var event_id;
 
@@ -5,6 +7,7 @@ var event_id;
 function DKColorPicker_Init()
 {
 	//DKDEBUGFUNC();
+	console.log("DKColorPicker_Init()");
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
 	DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);

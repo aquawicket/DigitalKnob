@@ -35,7 +35,7 @@ function AdjustRems(id)
 function DKWidget_NewWidget(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	DKWARN("DKWidget_NewWidget("+url+","+parent+")");
+	console.log("DKWidget_NewWidget("+url+","+parent+")");
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
@@ -419,6 +419,7 @@ function DKWidget_GetProperty(variable, parameter)
 function DKWidget_SetProperty(variable, parameter, value)
 {
 	DKDEBUGFUNC(variable, parameter, value);
+	console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
 	if(!variable){ //FIXME: who called you?
 		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
 		return false; 
@@ -624,15 +625,16 @@ function DKWidget_CreateElement(parent, tag, id)
 {
 	DKDEBUGFUNC(parent, tag, id);
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
-	//DKINFO("DKWidget_CreateElement("+parent+", "+tag+", "+id+")\n");
+	console.log("DKWidget_CreateElement("+parent+", "+tag+", "+id+")");
 	
 	id = DKWidget_GetAvailableId(id);
 	
 	var par = document.getElementById(parent);
-	if(!par){ DKERROR("CreateElement(): parent invalid ("+parent+")\n"); return false;}
+	if(!par){ DKERROR("DKWidget_CreateElement(): parent invalid ("+parent+")\n"); return false;}
 	var ele = document.createElement(tag);
-	if(!ele){ DKERROR("CreateElement(): ele invalid ("+tag+")\n"); return false;}
-	ele.id = id;
+	if(!ele){ DKERROR("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
+	//ele.id = id;
+	ele.setAttribute("id", id);
 	
 	//DKINFO("DKWidget_CreateElement(): par = "+par+"\n");
 	//DKINFO("DKWidget_CreateElement(): ele = "+ele+"\n");

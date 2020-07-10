@@ -1,4 +1,4 @@
-console.log("DKFrame.js");
+console.log("Loading DKFrame.js");
 
 var sizes = [];
 
@@ -58,9 +58,9 @@ function DKFrame_OnEvent(event)
 function DKFrame_Widget(id)
 {
 	DKDEBUGFUNC(id);
-	DKWARN("DKFrame_Widget("+id+")\n");
+	console.log("DKFrame_Widget("+id+")");
 	if(!DKWidget_ElementExists(id)){
-		DKERROR("DKFrame_Widget("+id+"): element does not exist\n");
+		console.error("DKFrame_Widget("+id+"): element does not exist\n");
 		return false;
 	}
 	

@@ -150,7 +150,7 @@ var Node = function(pointer)
 	Object.defineProperty(this, "removeChild", {
 		configurable: true,
 		value: function(child){
-			console.log("Node.removeChild("+pointer+","+child.POINTER+")");
+			//console.log("Node.removeChild("+pointer+","+child.POINTER+")");
 			var address = DKDomNode_removeChild(pointer, child.POINTER);
 			if(!address){ return null; }
 			//var node = Node(pointer);
