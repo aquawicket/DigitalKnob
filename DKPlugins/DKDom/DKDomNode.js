@@ -40,9 +40,9 @@ var Node = function(pointer)
 	Object.defineProperty(this, "lastChild", { 
 		configurable: true,
 		get: function(){ 
-			var pointer = DKDomNode_lastChild(this.pointer);
-			if(!pointer){ return; }
-			var element = HTMLElement(pointer);
+			var address = DKDomNode_lastChild(this.pointer);
+			if(!address){ return; }
+			var element = HTMLElement(address);
 			return element;	
 		} 
 	});

@@ -1080,11 +1080,11 @@ function DK_GetObjects()
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; elements && i<elements.length; i++){
-		if(!elements[i].id){
+		if(!elements[i].getAttribute("id")){
 			//DKWARN(elements[i].src+": script object has no id\n");
 			continue; 
 		}
-		jsfiles += elements[i].id+",";
+		jsfiles += elements[i].getAttribute("id")+",";
 	}
 	
 	// Search the Dom for all css (.css files)
@@ -1092,11 +1092,11 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("link");
 	if(elements){
 		for(var i=0; i<elements.length; i++){
-			if(!elements[i].id){
+			if(!elements[i].getAttribute("id")){
 				//DKWARN(elements[i].href+": css object has no id\n");
 				continue; 
 			}
-			cssfiles += elements[i].id+",";
+			cssfiles += elements[i].getAttribute("id")+",";
 		}
 	}
 	
@@ -1106,12 +1106,12 @@ function DK_GetObjects()
 	if(divs){
 		for(var i = divs.length; i;){
 			var div = divs[--i];
-			if(!div.id){
+			if(!div.getAttribute("id")){
 				DKWARN(div+": html object has no id\n");
 				continue; 
 			}
-			if(div.id.indexOf(".html") > -1){
-				htmlfiles += div.id+",";
+			if(div.getAttribute("id").indexOf(".html") > -1){
+				htmlfiles += div.getAttribute("id")+",";
 			}
 		}
 	}
