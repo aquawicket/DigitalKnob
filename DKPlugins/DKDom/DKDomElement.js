@@ -206,10 +206,13 @@ var Element = function(pointer)
 	Element.prototype.getElementsByTagNameNS = function(){
 		//TODO
 	}
-	Element.prototype.hasAttribute = function(attribute){
-		if(DKDomElement_hasAttribute(this.pointer, attribute)){ return true; }
-		else{ return false; }
-	}
+	Object.defineProperty(this, "hasAttribute", {
+		configurable: true,
+		value: function(attribute){ 
+			if(DKDomElement_hasAttribute(pointer, attribute)){ return true; }
+			else{ return false; }
+		}
+	});
 	Element.prototype.hasAttributeNS = function(){
 		//TODO
 	}

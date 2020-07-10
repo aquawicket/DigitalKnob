@@ -170,14 +170,6 @@ var HTMLElement = function(pointer)
 		console.log("HTMLElement.prototype.focus");
 		return true;
 	}
-	/*
-	HTMLElement.prototype.forceSpellCheck = function(){
-		//TODO
-		console.log("HTMLElement.prototype.forceSpellCheck");
-		return true;
-	}
-	*/
-	
 	Object.defineProperty(this, "forceSpellCheck", {
 		configurable: true,
 		value: function(){ console.log("forceSpellCheck"); }
