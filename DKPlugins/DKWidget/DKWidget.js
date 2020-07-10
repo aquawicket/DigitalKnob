@@ -129,7 +129,7 @@ function DKWidget_AttachDrags(id)
 	for (var i=0; i<elements.length; i++) {	
 		var x = elements[i];
 		
-		if(!DK_IE()){
+		if(!DK_IE() && DK_GetBrowser() != "RML"){
 			x.style.setProperty("pointer-events","all");
 		}
 		
@@ -149,7 +149,7 @@ function DKWidget_AddDragHandle(id, drag)
 {
 	DKDEBUGFUNC(id, drag);
 	var element = document.getElementById(id);
-	if(!DK_IE()){
+	if(!DK_IE() && DK_GetBrowser() != "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ DragStart(event, drag);}
@@ -162,7 +162,7 @@ function DKWidget_AddResizeHandle(id, resize)
 {
 	DKDEBUGFUNC(id, resize);
 	var element = document.getElementById(id);
-	if(!DK_IE()){
+	if(!DK_IE() && DK_GetBrowser() != "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ ResizeStart(event, resize); }

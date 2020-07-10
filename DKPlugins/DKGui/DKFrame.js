@@ -161,7 +161,9 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_SetProperty(frame, "height", newheight.toString()+"rem");
 	DKWidget_SetProperty(frame, "background-color", "rgb(150,150,150)");
 	DKWidget_SetProperty(frame, "border-color", "rgb(0,0,0)");
-	DKWidget_SetProperty(frame, "border-style", "solid");
+	if(DK_GetBrowser() != "RML"){
+		DKWidget_SetProperty(frame, "border-style", "solid");
+	}
 	DKWidget_SetProperty(frame, "border-width", "1rem");
 	DKWidget_SetProperty(frame, "min-width", "62rem");
 	DKWidget_SetProperty(frame, "min-height", "30rem");
