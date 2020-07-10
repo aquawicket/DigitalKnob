@@ -42,7 +42,7 @@ var Document = function(pointer)
 	Document.prototype.getElementById = function(id){
 		var pointer = DKDomDocument_getElementById(id);
 		if(!pointer){ return; }
-		var element = HTMLElement(pointer); //FIXME: if we don't declare new, addEventListener doesn't work. 
+		var element = HTMLElement(pointer); //FIXME: if we don't declare new, properties don't work. 
 		return element;
 	}
 	Document.prototype.getElementsByTagName = function(tag){

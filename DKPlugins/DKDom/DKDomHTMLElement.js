@@ -5,7 +5,7 @@ var HTMLElement = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.log("var HTMLElement = function("+pointer+")");
-	//Element.call(this, pointer);
+	Element.call(this, pointer);
 	
 	Object.defineProperty(this, "accessKey", { 
 		configurable: true,
@@ -153,22 +153,37 @@ var HTMLElement = function(pointer)
 		get: function(){ return this.paste; },
 		set: function(func){ this.addEventListener("paste", func); this.paste = func }
 	});
-	
-	
+
+
 	HTMLElement.prototype.blur = function(){
 		//TODO
+		console.log("HTMLElement.prototype.blur");
+		return true;
 	}
 	HTMLElement.prototype.click = function(){
 		//TODO
+		console.log("HTMLElement.prototype.click");
+		return true;
 	}
 	HTMLElement.prototype.focus = function(){
 		//TODO
+		console.log("HTMLElement.prototype.focus");
+		return true;
 	}
+	/*
 	HTMLElement.prototype.forceSpellCheck = function(){
 		//TODO
+		console.log("HTMLElement.prototype.forceSpellCheck");
+		return true;
 	}
+	*/
 	
-	return Element.call(this, pointer);
-	//return this;
+	Object.defineProperty(this, "forceSpellCheck", {
+		configurable: true,
+		value: function(){ console.log("forceSpellCheck"); }
+	});
+	
+	//return Element.call(this, pointer);
+	return this;
 }
 HTMLElement.prototype = Element.prototype;
