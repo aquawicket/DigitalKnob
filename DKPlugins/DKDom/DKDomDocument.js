@@ -60,9 +60,9 @@ var Document = function(pointer)
 		} 
 	});
 	
-	
+	Object.assign(this, DocumentOrShadowRoot);
 	return this;
 }
 Document.prototype = Node.prototype;
-Object.assign(Document.prototype, DocumentOrShadowRoot);
+//Object.assign(Document.prototype, DocumentOrShadowRoot);
 var document = Document("document");

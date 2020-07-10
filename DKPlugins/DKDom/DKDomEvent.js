@@ -27,7 +27,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_currentTarget(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
@@ -60,7 +60,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_srcElement(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
@@ -69,7 +69,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_target(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
+			var element = HTMLElement(elementPointer);
 			return element;
 		} 
 	}); //Read Only
