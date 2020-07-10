@@ -3,9 +3,11 @@
 //////////////////////////////
 var Window = function(pointer)
 {
+	EventTarget.call(this, pointer);
+	
 	Object.defineProperty(this, "closed", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_closed(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_closed(pointer); */ } 
 	});
 	Object.defineProperty(this, "console", { 
 		configurable: true,
@@ -13,24 +15,24 @@ var Window = function(pointer)
 	});
 	Object.defineProperty(this, "controllers", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_controllers(this.pointer); */ }
+		get: function(){ /* return DKDomWindow_controllers(pointer); */ }
 	});
 	Object.defineProperty(this, "customElements", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_customElements(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_customElements(pointer); */ } 
 	});
 	Object.defineProperty(this, "crypto", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_crypto(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_crypto(pointer); */ } 
 	});
 	Object.defineProperty(this, "devicePixelRatio", {
 		configurable: true,
-		get: function()   {  return DKDomWindow_devicePixelRatio(this.pointer);      },
-		set: function(val){  return DKDomWindow_devicePixelRatio(this.pointer, val); }
+		get: function()   {  return DKDomWindow_devicePixelRatio(pointer);      },
+		set: function(val){  return DKDomWindow_devicePixelRatio(pointer, val); }
 	});
 	Object.defineProperty(this, "dialogArguments", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_dialogArguments(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_dialogArguments(pointer); */ } 
 	});
 	Object.defineProperty(this, "document", { 
 		configurable: true,
@@ -38,24 +40,24 @@ var Window = function(pointer)
 	});
 	Object.defineProperty(this, "event", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_event(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_event(pointer); */ } 
 	});
 	Object.defineProperty(this, "frameElement", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_frameElement(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_frameElement(pointer); */ } 
 	});
 	Object.defineProperty(this, "frames", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_frames(this.pointer); */ }
+		get: function(){ /* return DKDomWindow_frames(pointer); */ }
 	});
 	Object.defineProperty(this, "fullScreen", {
 		configurable: true,
-		get: function()   { /* return DKDomWindow_fullScreen(this.pointer); */      },
-		set: function(val){ /* return DKDomWindow_fullScreen(this.pointer, val); */ }
+		get: function()   { /* return DKDomWindow_fullScreen(pointer); */      },
+		set: function(val){ /* return DKDomWindow_fullScreen(pointer, val); */ }
 	});
 	Object.defineProperty(this, "history", { 
 		configurable: true,
-		get: function(){ /* return DKDomWindow_history(this.pointer); */ } 
+		get: function(){ /* return DKDomWindow_history(pointer); */ } 
 	});
 	Object.defineProperty(this, "innerHeight", { 
 		configurable: true,
@@ -274,7 +276,7 @@ var Window = function(pointer)
 	Window.prototype.stop = function(){}
 	Window.prototype.updateCommands = function(){}
 
-	return EventTarget.call(this, pointer);
+	return this;
 }
 
 Window.prototype = EventTarget.prototype;

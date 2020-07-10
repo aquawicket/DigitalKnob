@@ -382,11 +382,17 @@ function LoadCss(url)
 	}
 	
 	var link = document.createElement('link');
+	//console.log("link = "+link.POINTER);
 	link.setAttribute('href', url);
 	link.setAttribute('id', url);
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
-	document.getElementsByTagName('head')[0].appendChild(link);
+	var elements = document.getElementsByTagName('head');
+	
+	//console.log("LoadCss("+url+"): link = "+link.POINTER);
+	//console.log("LoadCss("+url+"): link.id = "+link.id);
+	//console.log("LoadCss("+url+"): elements[0].id = "+elements[0].id);
+	elements[0].appendChild(link);
 	
 	return true;
 }

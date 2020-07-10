@@ -1,3 +1,5 @@
+console.log("DKFrame.js");
+
 var sizes = [];
 
 ///////////////////////

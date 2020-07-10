@@ -5,7 +5,7 @@ var Node = function(pointer)
 {
 	//DKDEBUGFUNC();
 	//console.log("var Node = function("+pointer+")");
-	//this.pointer = pointer;
+	this.POINTER = pointer;
 	EventTarget.call(this, pointer);
 	
 	Object.defineProperty(this, "baseURI", { 
@@ -19,7 +19,7 @@ var Node = function(pointer)
 	Object.defineProperty(this, "childNodes", { 
 		configurable: true,
 		get: function(){
-			var addressList = DKDomNode_childNodes(this.pointer);
+			var addressList = DKDomNode_childNodes(pointer);
 			var htmlCollection = new HTMLCollection();   //TODO - switch htmlCollection over to NodeList
 			if(!addressList){ return htmlCollection; }
 			var arry = addressList.split(",");
@@ -42,7 +42,7 @@ var Node = function(pointer)
 		get: function(){ 
 			var pointer = DKDomNode_lastChild(this.pointer);
 			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var element = HTMLElement(pointer);
 			return element;	
 		} 
 	});
@@ -74,9 +74,9 @@ var Node = function(pointer)
 	Object.defineProperty(this, "parentNode", { 
 		configurable: true,
 		get: function(){ 
-			var pointer = DKDomNode_parentNode(this.pointer); 
-			if(!pointer){ return; }
-			var element = new HTMLElement(pointer);
+			var address = DKDomNode_parentNode(this.pointer); 
+			if(!address){ return; }
+			var element = new HTMLElement(address);
 			return element;			
 		} 
 	});
@@ -98,12 +98,19 @@ var Node = function(pointer)
 		get: function(){ return DKDomNode_rootNode (this.pointer); } 
 	}); 
 	
-	Node.prototype.appendChild = function(aChild){
-		var pointer = DKDomNode_appendChild(this.pointer, aChild.pointer);
-		if(!pointer){ return; }
-		var element = new HTMLElement(pointer);
-		return element;
-	}
+	
+
+	Object.defineProperty(this, "appendChild", {
+		configurable: true,
+		value: function(child){
+			//console.log("Node.appendChild("+pointer+","+child.POINTER+")");
+			if(pointer == child.POINTER){ return; }
+			var address = DKDomNode_appendChild(pointer, child.POINTER);
+			if(!address){ return; }
+			var element = HTMLElement(address);
+			return element;
+		} 
+	}); 
 	Node.prototype.cloneNode = function(){
 		//TODO
 	}
@@ -140,13 +147,16 @@ var Node = function(pointer)
 	Node.prototype.normalize = function(){
 		//TODO
 	}
-	Node.prototype.removeChild = function(aChild){
-		console.log("Node.removeChild("+this.pointer+","+aChild.pointer+")");
-		var pointer = DKDomNode_removeChild(this.pointer, aChild.pointer);
-		if(!pointer){ return null; }
-		//var node = Node(pointer);
-		//return node;
-	}
+	Object.defineProperty(this, "removeChild", {
+		configurable: true,
+		value: function(child){
+			console.log("Node.removeChild("+pointer+","+child.POINTER+")");
+			var address = DKDomNode_removeChild(pointer, child.POINTER);
+			if(!address){ return null; }
+			//var node = Node(pointer);
+			//return node;
+		} 
+	});
 	Node.prototype.replaceChild = function(){
 		//TODO
 	}

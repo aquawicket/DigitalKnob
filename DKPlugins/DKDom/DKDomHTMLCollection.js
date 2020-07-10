@@ -3,8 +3,8 @@
 ///////////////////////////////////////
 var HTMLCollection = function(pointers)
 {
-	//DKDEBUGFUNC();
 	if(!pointers){ return; }
+	//console.log("HTMLCollection("+pointers+")");
 	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
@@ -24,7 +24,9 @@ var HTMLCollection = function(pointers)
 	var arry = pointers.split(",");
 	this.length = arry.length;
 	for(var i=0; i<arry.length; i++){
-		this[i] = new HTMLElement(arry[i]);
+		//console.log("adding "+arry[i]);
+		this[i] = new HTMLElement(arry[i]); //FIXME: using 'new' might create problems
 	}
+	return this;
 }
 HTMLCollection.prototype = [];
