@@ -8,7 +8,8 @@ var Document = function(pointer)
 	// Properties
 	Object.defineProperty(this, "body", {
 		configurable: true,
-		get: function(){ 
+		get: function(){
+			console.log("Document.body");
 			var address = DKDomDocument_body();
 			if(!address){ return; }
 			var element = HTMLElement(address);
@@ -52,15 +53,15 @@ var Document = function(pointer)
 	Object.defineProperty(this, "getElementsByTagName", {
 		configurable: true,
 		value: function(tag){
-			//console.log("Document.getElementsByTagName("+tag+")");
+			console.log("Document.getElementsByTagName("+tag+")");
 			var addresses = DKDomDocument_getElementsByTagName(tag);
 			if(!addresses){ /*console.log("Document.getElementsByTagName("+tag+"): addresses invalid");*/ return; }
-			var elements = HTMLCollection(addresses);
+			var elements = new HTMLCollection(addresses);
 			return elements;
 		} 
 	});
 	
-	Object.assign(this, DocumentOrShadowRoot);
+	//Object.assign(this, DocumentOrShadowRoot);
 	return this;
 }
 Document.prototype = Node.prototype;

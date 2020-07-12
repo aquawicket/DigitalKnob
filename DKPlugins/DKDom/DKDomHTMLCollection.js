@@ -3,8 +3,8 @@
 ///////////////////////////////////////
 var HTMLCollection = function(pointers)
 {
-	if(!pointers){ return; }
-	//console.log("HTMLCollection("+pointers+")");
+	//if(!pointers){ return; }
+	console.log("HTMLCollection("+pointers+")");
 	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
@@ -22,11 +22,12 @@ var HTMLCollection = function(pointers)
 	}
 	
 	var arry = pointers.split(",");
-	this.length = arry.length;
+	//this.length = arry.length;
 	for(var i=0; i<arry.length; i++){
-		//console.log("adding "+arry[i]);
-		this[i] = new HTMLElement(arry[i]); //FIXME: using 'new' might create problems
+		this.push(new HTMLElement(arry[i])); //FIXME: using 'new' might create problems
+		console.log("HTMLCollection added "+arry[i]+","+this[i].getAttribute("id"));
 	}
+	
 	return this;
 }
 HTMLCollection.prototype = [];

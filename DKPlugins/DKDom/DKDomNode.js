@@ -20,12 +20,12 @@ var Node = function(pointer)
 		configurable: true,
 		get: function(){
 			var addressList = DKDomNode_childNodes(pointer);
-			var htmlCollection = new HTMLCollection();   //TODO - switch htmlCollection over to NodeList
-			if(!addressList){ return htmlCollection; }
-			var arry = addressList.split(",");
-			for(var i=0; i<arry.length; i++){
-				htmlCollection.push(HTMLElement(arry[i]))
-			}
+			var htmlCollection = new HTMLCollection(addressList);   //TODO - switch htmlCollection over to NodeList
+			//if(!addressList){ return htmlCollection; }
+			//var arry = addressList.split(",");
+			//for(var i=0; i<arry.length; i++){
+			//	htmlCollection.push(HTMLElement(arry[i]))
+			//}
 			return htmlCollection;	
 		} 
 	});
@@ -103,7 +103,7 @@ var Node = function(pointer)
 	Object.defineProperty(this, "appendChild", {
 		configurable: true,
 		value: function(child){
-			//console.log("Node.appendChild("+pointer+","+child.POINTER+")");
+			console.log("Node.appendChild("+pointer+","+child.POINTER+")");
 			if(pointer == child.POINTER){ return; }
 			var address = DKDomNode_appendChild(pointer, child.POINTER);
 			if(!address){ return; }

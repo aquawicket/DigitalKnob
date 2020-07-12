@@ -382,7 +382,7 @@ function LoadCss(url)
 	}
 	
 	var link = document.createElement('link');
-	//console.log("link = "+link.POINTER);
+	console.log("link = "+link.POINTER);
 	link.setAttribute('href', url);
 	link.setAttribute('id', url);
 	//link.id = url;
@@ -390,9 +390,10 @@ function LoadCss(url)
 	link.setAttribute('type', 'text/css');
 	var elements = document.getElementsByTagName('head');
 	
-	//console.log("LoadCss("+url+"): link = "+link.POINTER);
-	//console.log("LoadCss("+url+"): link.id = "+link.id);
-	//console.log("LoadCss("+url+"): elements[0].id = "+elements[0].id);
+	console.log("LoadCss("+url+"): link = "+link.POINTER);
+	console.log("LoadCss("+url+"): link = "+link);
+	console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
+	console.log("DK.js:LoadCss("+url+") appending link");
 	elements[0].appendChild(link);
 	
 	return true;
@@ -553,17 +554,17 @@ function LoadHtml(url, parent)
 		parent.appendChild(nodes[0]);
 	}
 	else{
-		console.log("DK.js:LoadHtml(): appending to document.body");
-		//console.log("DK.js:LoadHtml(): document.body.getAttribute('id') = "+document.body.getAttribute('id'));
-		//console.log("DK.js:LoadHtml(): nodes[0].innerHTML = "+nodes[0].innerHTML);
-		document.body.appendChild(nodes[0]);
+		console.log("DK.js:LoadHtml(): appending to body");
+		var elements = document.getElementsByTagName("temp");
+		document.body.appendChild(elements[0].childNodes[0]);
+		document.removeChild(elements[0]); //remove temp
 	}
 	
 	//FIXME - CEF seems to do this automatically. DKRml need to act the same.
-	var elements = document.getElementsByTagName("temp");
-	if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
-	if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
-	if(elements[0]){ document.removeChild(elements[0]); }
+	//var elements = document.getElementsByTagName("temp");
+	//if(elements){ console.log("getElementsByTagName(temp).length: "+elements.length); }
+	//if(elements[0]){ console.log("elements[0].innerHTML: "+elements[0].innerHTML); }
+	//if(elements[0]){ document.removeChild(elements[0]); }
 	
 	return true;
 }
