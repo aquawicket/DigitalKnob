@@ -543,10 +543,9 @@ function LoadHtml(url, parent)
 		//return false;
 	}
 
-	//if(nodes[0].id != url){
 	if(nodes[0].getAttribute('id') != url){
-		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
-		nodes[0].id = url;
+		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].getAttribute('id')+")\n");
+		nodes[0].setAttribute('id', url);
 		DKWARN("DK.js:LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
@@ -555,6 +554,8 @@ function LoadHtml(url, parent)
 	}
 	else{
 		console.log("DK.js:LoadHtml(): appending to document.body");
+		//console.log("DK.js:LoadHtml(): document.body.getAttribute('id') = "+document.body.getAttribute('id'));
+		//console.log("DK.js:LoadHtml(): nodes[0].innerHTML = "+nodes[0].innerHTML);
 		document.body.appendChild(nodes[0]);
 	}
 	
