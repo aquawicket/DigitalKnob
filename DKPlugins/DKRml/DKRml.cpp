@@ -258,12 +258,14 @@ bool DKRml::LoadHtml(const DKString& html)
 	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML();
 
 #ifdef DEBUG
+	/*
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
+	*/
 
-	//find the last <body occurance
+	//find the last <html occurance
 	int n = code.rfind("<html");
 	if(n < 0){
 		DKERROR("DKRml::LoadHtml(): html tag not found\n");
