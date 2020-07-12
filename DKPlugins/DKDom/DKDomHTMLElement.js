@@ -153,23 +153,19 @@ var HTMLElement = function(pointer)
 
 
 	// Methods
-	Object.defineProperty(this, "blur", {
-		configurable: true,
-		value: function(){ console.log("HTMLElement.blur(): TODO"); }
-	});
-	Object.defineProperty(this, "click", {
-		configurable: true,
-		value: function(){ console.log("HTMLElement.click(): TODO"); }
-	});
-	Object.defineProperty(this, "focus", {
-		configurable: true,
-		value: function(){ console.log("HTMLElement.focus(): TODO"); }
-	});
-	Object.defineProperty(this, "forceSpellCheck", {
-		configurable: true,
-		value: function(){ console.log("HTMLElement.forceSpellCheck(): TODO"); }
-	});
-	
+	HTMLElement.prototype.blur = function(){
+		console.log("HTMLElement.blur(): TODO");
+	}
+	HTMLElement.prototype.click = function(){
+		console.log("HTMLElement.click(): TODO");
+	}
+	HTMLElement.prototype.focus = function(){
+		console.log("HTMLElement.focus(): TODO");
+	}
+	HTMLElement.prototype.forceSpellCheck = function(){
+		console.log("HTMLElement.forceSpellCheck(): TODO");
+	}
+
 	
 	return Element.call(this, pointer);
 }

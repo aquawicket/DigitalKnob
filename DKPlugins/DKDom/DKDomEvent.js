@@ -27,8 +27,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_currentTarget(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
-			return element;
+			return new HTMLElement(elementPointer);
 		} 
 	}); //Read Only
 	Object.defineProperty(this, "deepPath", { 
@@ -60,8 +59,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_srcElement(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
-			return element;
+			return new HTMLElement(elementPointer);
 		} 
 	}); //Read Only
 	Object.defineProperty(this, "target", { //Read Only
@@ -69,8 +67,7 @@ var Event = function(pointer)
 		get: function(){ 
 			var elementPointer = DKDomEvent_target(pointer);
 			if(!elementPointer){ return; }
-			var element = new HTMLElement(elementPointer);
-			return element;
+			return new HTMLElement(elementPointer);
 		} 
 	}); //Read Only
 	Object.defineProperty(this, "timeStamp", { 

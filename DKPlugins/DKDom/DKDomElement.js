@@ -164,14 +164,11 @@ var Element = function(pointer)
 	Element.prototype.getAnimations = function(){
 		//TODO
 	}
-	Object.defineProperty(this, "getAttribute", {
-		configurable: true,
-		value: function(attribute){ 
-			this[attribute] = DKDomElement_getAttribute(pointer, attribute);
-			if(!this[attribute]){ return null; }
-			return this[attribute];
-		} 
-	});
+	Element.prototype.getAttribute = function(attribute){
+		this[attribute] = DKDomElement_getAttribute(this.pointer, attribute);
+		if(!this[attribute]){ return null; }
+		return this[attribute];
+	}
 	Element.prototype.getAttributeNames = function(){
 		//TODO
 	}
@@ -189,27 +186,22 @@ var Element = function(pointer)
 		//DKDomElements_getElementsByClassName(pointer, name)
 		var addresses = DKDomElement_getElementsByClassName(name);
 		if(!addresses){ return; }
-		var elements = new HTMLCollection(paddresses);
-		return elements;
+		return new HTMLCollection(addresses);
 	}
 	Element.prototype.getElementsByTagName = function(tag){
 		//FIXME: only search within the element
 		//DKDomElements_getElementsByTagName(pointer, tag)
 		var addresses = DKDomElement_getElementsByTagName(tag);
 		if(!addresses){ return; }
-		var elements = new HTMLCollection(addresses);
-		return elements;
+		return new HTMLCollection(addresses);
 	}
 	Element.prototype.getElementsByTagNameNS = function(){
 		//TODO
 	}
-	Object.defineProperty(this, "hasAttribute", {
-		configurable: true,
-		value: function(attribute){ 
-			if(DKDomElement_hasAttribute(pointer, attribute)){ return true; }
-			else{ return false; }
-		}
-	});
+	Element.prototype.hasAttribute = function(attribute){
+		if(DKDomElement_hasAttribute(this.pointer, attribute)){ return true; }
+		else{ return false; }
+	}
 	Element.prototype.hasAttributeNS = function(){
 		//TODO
 	}
@@ -255,13 +247,10 @@ var Element = function(pointer)
 	Element.prototype.scrollIntoView = function(){
 		//TODO
 	}
-	Object.defineProperty(this, "setAttribute", {
-		configurable: true,
-		value: function(attribute, value){ 
-			DKDomElement_setAttribute(pointer, attribute, value);
-			this[attribute] = value;
-		} 
-	});
+	Element.prototype.setAttribute = function(attribute, value){
+		DKDomElement_setAttribute(this.pointer, attribute, value);
+		this[attribute] = value;
+	}
 	Element.prototype.setAttributeNS = function(){
 		//TODO
 	}

@@ -3,7 +3,6 @@
 ///////////////////////////////
 var XMLHttpRequest = function()
 {
-	
 	XMLHttpRequest.prototype.open = function(method, url, async, user, password){
 		DKWARN("XMLHttpRequest.open("+method+","+url+","+async+")");
 		this.method = method;

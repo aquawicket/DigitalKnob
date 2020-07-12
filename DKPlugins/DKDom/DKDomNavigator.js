@@ -226,8 +226,6 @@ var Navigator = function(pointer)
 	Navigator.prototype.mozPay = function(){ //Not standardized
 		return "TODO";
 	}
-	
-
 }
 
 var navigator = new Navigator("navigator");
