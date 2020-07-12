@@ -143,7 +143,6 @@ bool DKRmlToRML::IndexToRml(const DKString& html, DKString& rml)
 bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 {
 	DKDEBUGFUNC(element);
-	processed; //debug peek
 	if(!element){
 		DKWARN("DKRmlToRML::PostProcess(): element invalid\n");
 		return false;

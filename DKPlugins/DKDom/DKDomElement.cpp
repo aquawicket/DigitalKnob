@@ -288,8 +288,7 @@ int DKDomElement::setAttribute(duk_context* ctx)
 
 	//if the attribute is "src", then post process to load scripts or iframes
 	if(same(attribute,"src")){
-		DKRmlToRML dkRmlToRml;
-		dkRmlToRml.PostProcess(element);
+		DKRml::Get()->dkRmlToRML.PostProcess(element);
 	}
 
 	return true;
