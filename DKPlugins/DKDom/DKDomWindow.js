@@ -3,8 +3,6 @@
 //////////////////////////////
 var Window = function(pointer)
 {
-	EventTarget.call(this, pointer);
-	
 	Object.defineProperty(this, "closed", { 
 		configurable: true,
 		get: function(){ /* return DKDomWindow_closed(pointer); */ } 
@@ -276,7 +274,7 @@ var Window = function(pointer)
 	Window.prototype.stop = function(){}
 	Window.prototype.updateCommands = function(){}
 
-	return this;
+	return EventTarget.call(this, pointer);
 }
 
 Window.prototype = EventTarget.prototype;

@@ -10,8 +10,7 @@ var Document = function(pointer)
 			console.log("Document.body");
 			var address = DKDomDocument_body();
 			if(!address){ return; }
-			var element = new HTMLElement(address);
-			return element;
+			return new HTMLElement(address);
 		},
 		set: function(){
 			if(!address){ return; }
@@ -23,41 +22,29 @@ var Document = function(pointer)
 		get: function(){ 
 			var address = DKDomDocument_documentElement();
 			if(!address){ return; }
-			var element = new HTMLElement(address);
-			return element;
+			return new HTMLElement(address);
 		} 
 	});
 	
 	
 	// Methods
-	Object.defineProperty(this, "createElement", {
-		configurable: true,
-		value: function(tag){ 
-			var address = DKDomDocument_createElement(tag);
-			if(!address){ return; }
-			var element = new HTMLElement(address);
-			return element;
-		} 
-	});
-	Object.defineProperty(this, "getElementById", {
-		configurable: true,
-		value: function(id){ 
-			var address = DKDomDocument_getElementById(id);
-			if(!address){ return; }
-			var element = new HTMLElement(address);
-			return element;
-		} 
-	});
-	Object.defineProperty(this, "getElementsByTagName", {
-		configurable: true,
-		value: function(tag){
-			console.log("Document.getElementsByTagName("+tag+")");
-			var addresses = DKDomDocument_getElementsByTagName(tag);
-			if(!addresses){ /*console.log("Document.getElementsByTagName("+tag+"): addresses invalid");*/ return; }
-			var elements = new HTMLCollection(addresses);
-			return elements;
-		} 
-	});
+	Document.prototype.createElement = function(tag){
+		var address = DKDomDocument_createElement(tag);
+		if(!address){ return; }
+		return new HTMLElement(address);
+	}
+	Document.prototype.getElementById = function(id){
+		var address = DKDomDocument_getElementById(id);
+		if(!address){ return; }
+		return new HTMLElement(address);
+	}
+
+	Document.prototype.getElementsByTagName = function(tag){
+		var addresses = DKDomDocument_getElementsByTagName(tag);
+		if(!addresses){ return; }
+		return new HTMLCollection(addresses);
+	}
+	
 	
 	return Node.call(this, pointer);
 }

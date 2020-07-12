@@ -3,8 +3,13 @@
 ///////////////////////////////////////
 var HTMLCollection = function(pointers)
 {
-	//if(!pointers){ return; }
-	console.log("HTMLCollection("+pointers+")");
+	//console.log("HTMLCollection("+pointers+")");
+	
+	var arry = pointers.split(",");
+	for(var i=0; i<arry.length; i++){
+		this.push(new HTMLElement(arry[i]));
+		//console.log("HTMLCollection added "+arry[i]+","+this[i].getAttribute("id"));
+	}
 	
 	HTMLCollection.prototype.item = function(index){
 		return this[index];
@@ -20,13 +25,7 @@ var HTMLCollection = function(pointers)
 		}
 		return null;
 	}
-	
-	var arry = pointers.split(",");
-	for(var i=0; i<arry.length; i++){
-		this.push(new HTMLElement(arry[i]));
-		console.log("HTMLCollection added "+arry[i]+","+this[i].getAttribute("id"));
-	}
-	
+
 	return this;
 }
 HTMLCollection.prototype = [];

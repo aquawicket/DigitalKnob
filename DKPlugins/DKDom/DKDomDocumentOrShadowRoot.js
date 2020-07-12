@@ -18,8 +18,7 @@ var DocumentOrShadowRoot = {
 		console.log("DocumentOrShadowRoot.elementFromPoint()");
 		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){ return; }
-		var element = new HTMLElement(elementAddress);
-		return element;
+		return new HTMLElement(elementAddress);
 	},
 	
 	elementsFromPoint(){ 
