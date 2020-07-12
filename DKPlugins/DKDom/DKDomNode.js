@@ -1,11 +1,21 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Node
 
+nodeInstances = [];
 ////////////////////////////
 var Node = function(pointer)
 {
-	//DKDEBUGFUNC();
-	//console.log("var Node = function("+pointer+")");
 	this.POINTER = pointer;
+	for(var i=0; i<nodeInstances.length; i++){
+        if(nodeInstances[i].POINTER == pointer){
+			console.log("return existing instance "+pointer);
+            return nodeInstances[i];
+        }
+    }
+	
+	console.log("creating instance "+pointer);
+	nodeInstances.push(this);
+	
+	
 	EventTarget.call(this, pointer);
 	
 	Object.defineProperty(this, "baseURI", { 
@@ -42,7 +52,7 @@ var Node = function(pointer)
 		get: function(){ 
 			var address = DKDomNode_lastChild(this.pointer);
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;	
 		} 
 	});
@@ -107,7 +117,7 @@ var Node = function(pointer)
 			if(pointer == child.POINTER){ return; }
 			var address = DKDomNode_appendChild(pointer, child.POINTER);
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;
 		} 
 	}); 

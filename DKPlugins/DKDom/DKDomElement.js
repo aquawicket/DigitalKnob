@@ -3,9 +3,6 @@
 ///////////////////////////////
 var Element = function(pointer)
 {
-	Node.call(this, pointer);
-	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
-	
 	// Properties
 	Object.defineProperty(this, "attributes", {
 		configurable: true,
@@ -278,8 +275,8 @@ var Element = function(pointer)
 		//TODO
 	}
 	
-	return new Proxy(this, {
-	//const proxy = new Proxy(this, {
+	//return new Proxy(this, {
+	const proxy = new Proxy(this, {
 		has: function (target, key){
 			console.log("Element:has("+key+")");
 			return key in target;
@@ -315,8 +312,7 @@ var Element = function(pointer)
 		}
 	});
 	
-	//FIXME: we only want to return the proxy if it's used
-	//return proxy;
-	//return this;
+	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
+	return Node.call(this, pointer);
 }
 Element.prototype = Node.prototype;

@@ -2,9 +2,7 @@
 
 ///////////////////////////////////
 var HTMLElement = function(pointer)
-{
-	Element.call(this, pointer);
-	
+{	
 	// Properties
 	Object.defineProperty(this, "accessKey", { 
 		configurable: true,
@@ -173,6 +171,6 @@ var HTMLElement = function(pointer)
 	});
 	
 	
-	return this;
+	return Element.call(this, pointer);
 }
 HTMLElement.prototype = Element.prototype;

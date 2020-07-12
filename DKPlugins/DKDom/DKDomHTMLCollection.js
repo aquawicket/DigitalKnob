@@ -22,9 +22,8 @@ var HTMLCollection = function(pointers)
 	}
 	
 	var arry = pointers.split(",");
-	//this.length = arry.length;
 	for(var i=0; i<arry.length; i++){
-		this.push(new HTMLElement(arry[i])); //FIXME: using 'new' might create problems
+		this.push(new HTMLElement(arry[i]));
 		console.log("HTMLCollection added "+arry[i]+","+this[i].getAttribute("id"));
 	}
 	

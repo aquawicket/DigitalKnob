@@ -3,8 +3,6 @@
 ////////////////////////////////
 var Document = function(pointer)
 {
-	Node.call(this, pointer);
-	
 	// Properties
 	Object.defineProperty(this, "body", {
 		configurable: true,
@@ -12,7 +10,7 @@ var Document = function(pointer)
 			console.log("Document.body");
 			var address = DKDomDocument_body();
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;
 		},
 		set: function(){
@@ -25,7 +23,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var address = DKDomDocument_documentElement();
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;
 		} 
 	});
@@ -37,7 +35,7 @@ var Document = function(pointer)
 		value: function(tag){ 
 			var address = DKDomDocument_createElement(tag);
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;
 		} 
 	});
@@ -46,7 +44,7 @@ var Document = function(pointer)
 		value: function(id){ 
 			var address = DKDomDocument_getElementById(id);
 			if(!address){ return; }
-			var element = HTMLElement(address);
+			var element = new HTMLElement(address);
 			return element;
 		} 
 	});
@@ -61,9 +59,8 @@ var Document = function(pointer)
 		} 
 	});
 	
-	//Object.assign(this, DocumentOrShadowRoot);
-	return this;
+	return Node.call(this, pointer);
 }
 Document.prototype = Node.prototype;
-//Object.assign(Document.prototype, DocumentOrShadowRoot);
-var document = Document("document");
+Object.assign(Document.prototype, DocumentOrShadowRoot);
+var document = new Document("document");
