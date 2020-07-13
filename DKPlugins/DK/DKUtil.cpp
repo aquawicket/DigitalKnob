@@ -824,7 +824,7 @@ bool DKUtil::SetBrightness(const int& percent)
 	return false;
 }
 
-//TODO - This timer needs to be moved to DKRocket/DKRocket.js
+//TODO - This timer needs to be moved to DKRml
 //       Duktape currently blocks when using timers, so we've placed it here for now.
 //       Send a timer event every second
 ///////////////////////

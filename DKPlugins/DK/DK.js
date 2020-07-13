@@ -35,9 +35,9 @@ var events = [];
 //document.body.style.cursor = "default";
 
 // Dummy functions only implemented in c++
-function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
-function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
-EventLoop.run = function(){};
+//function DK_DoFrame(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
+//function EventLoop(){ /*DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
+//EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
 if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
