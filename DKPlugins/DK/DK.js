@@ -555,9 +555,10 @@ function LoadHtml(url, parent)
 	}
 	else{
 		console.log("DK.js:LoadHtml(): appending to body");
-		var elements = document.getElementsByTagName("temp");
-		document.body.appendChild(elements[0].childNodes[0]);
-		document.removeChild(elements[0]); //remove temp
+		//var elements = document.getElementsByTagName("temp");
+		//document.body.appendChild(elements[0].childNodes[0]);
+		//document.removeChild(elements[0]); //remove temp
+		document.body.appendChild(nodes[0]);
 	}
 	
 	//FIXME - CEF seems to do this automatically. DKRml need to act the same.
@@ -1290,7 +1291,7 @@ function DK_GetId(event)
 		//DKINFO("GetId("+event+") -> "+element.id+"\n");
 		if(element == window){ return "window"; }
 		if(element == document){ return "document"; }
-		return element.id; 
+		return element.getAttribute("id"); 
 	}
 	if(event[0]){ 
 		//DKINFO("GetId("+event+") -> "+event[0]+"\n");
