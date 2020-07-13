@@ -236,7 +236,6 @@ function Log(string, lvl)
 DKINFO("*** DigitalKnob ***\n");
 DKINFO("Browser = "+DK_GetBrowser()+"\n");
 DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
-//document.body.setAttribute("id", "body");
 
 
 /////////////////////////////////
@@ -384,8 +383,7 @@ function LoadCss(url)
 	var link = document.createElement('link');
 	console.log("link = "+link.POINTER);
 	link.setAttribute('href', url);
-	link.setAttribute('id', url);
-	//link.id = url;
+	link.id = url;
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
 	var elements = document.getElementsByTagName('head');
@@ -432,8 +430,7 @@ function LoadJs(url, callback)
 	var script = document.createElement('script');
 	//script.type = 'text/javascript';
 	script.setAttribute('type', 'text/javascript');
-	//script.id = url;
-	script.setAttribute('id', url);
+	script.id = url;
 	//script.async = true; // optionally
 	script.setAttribute('async', true);
 	script.setAttribute('src', url);
@@ -544,9 +541,9 @@ function LoadHtml(url, parent)
 		//return false;
 	}
 
-	if(nodes[0].getAttribute('id') != url){
-		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].getAttribute('id')+")\n");
-		nodes[0].setAttribute('id', url);
+	if(nodes[0].id != url){
+		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
+		nodes[0].id = url;
 		DKWARN("DK.js:LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
@@ -555,9 +552,6 @@ function LoadHtml(url, parent)
 	}
 	else{
 		console.log("DK.js:LoadHtml(): appending to body");
-		//var elements = document.getElementsByTagName("temp");
-		//document.body.appendChild(elements[0].childNodes[0]);
-		//document.removeChild(elements[0]); //remove temp
 		document.body.appendChild(nodes[0]);
 	}
 	
@@ -1083,11 +1077,11 @@ function DK_GetObjects()
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; elements && i<elements.length; i++){
-		if(!elements[i].getAttribute("id")){
+		if(!elements[i].id){
 			//DKWARN(elements[i].src+": script object has no id\n");
 			continue; 
 		}
-		jsfiles += elements[i].getAttribute("id")+",";
+		jsfiles += elements[i].id+",";
 	}
 	
 	// Search the Dom for all css (.css files)
@@ -1095,11 +1089,11 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("link");
 	if(elements){
 		for(var i=0; i<elements.length; i++){
-			if(!elements[i].getAttribute("id")){
+			if(!elements[i].id){
 				//DKWARN(elements[i].href+": css object has no id\n");
 				continue; 
 			}
-			cssfiles += elements[i].getAttribute("id")+",";
+			cssfiles += elements[i].id+",";
 		}
 	}
 	
@@ -1109,12 +1103,12 @@ function DK_GetObjects()
 	if(divs){
 		for(var i = divs.length; i;){
 			var div = divs[--i];
-			if(!div.getAttribute("id")){
+			if(!div.id){
 				DKWARN(div+": html object has no id\n");
 				continue; 
 			}
-			if(div.getAttribute("id").indexOf(".html") > -1){
-				htmlfiles += div.getAttribute("id")+",";
+			if(div.id.indexOf(".html") > -1){
+				htmlfiles += div.id+",";
 			}
 		}
 	}
@@ -1291,7 +1285,7 @@ function DK_GetId(event)
 		//DKINFO("GetId("+event+") -> "+element.id+"\n");
 		if(element == window){ return "window"; }
 		if(element == document){ return "document"; }
-		return element.getAttribute("id"); 
+		return element.id; 
 	}
 	if(event[0]){ 
 		//DKINFO("GetId("+event+") -> "+event[0]+"\n");
