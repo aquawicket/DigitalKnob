@@ -419,7 +419,7 @@ function DKWidget_GetProperty(variable, parameter)
 function DKWidget_SetProperty(variable, parameter, value)
 {
 	DKDEBUGFUNC(variable, parameter, value);
-	console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
+	//console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
 	if(!variable){ //FIXME: who called you?
 		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
 		return false; 
