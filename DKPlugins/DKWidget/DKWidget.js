@@ -374,12 +374,12 @@ function DKWidget_SetAttribute(variable, parameter, value)
 			DKERROR("DKWidget_SetAttribute(): element invalid\n");
 			return false;
 		}
-		//element.setAttribute(parameter, value);
 		if(parameter == "class"){
 			element.className = value;
 		}
 		else{
-			element[parameter] = value;
+			//element[parameter] = value;
+			element.setAttribute(parameter, value);
 		}
 		return true;
 	}
