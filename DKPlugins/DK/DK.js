@@ -236,7 +236,7 @@ function Log(string, lvl)
 DKINFO("*** DigitalKnob ***\n");
 DKINFO("Browser = "+DK_GetBrowser()+"\n");
 DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
-document.body.setAttribute("id", "body");
+//document.body.setAttribute("id", "body");
 
 
 /////////////////////////////////

@@ -41,13 +41,11 @@ var Element = function(pointer)
 		configurable: true,
 		get: function(){ return DKDomElement_computedRole(pointer); }
 	});
-	/*
 	Object.defineProperty(this, "id", { 
 		configurable: true,
 		get: function()   { return DKDomElement_getAttribute(pointer, "id"); },
 		set: function(val){ return DKDomElement_setAttribute(pointer, "id", val); }
 	});
-	*/
 	Object.defineProperty(this, "innerHTML", {
 		configurable: true,
 		get: function(){ return DKDomElement_innerHTML(pointer); },
@@ -264,16 +262,20 @@ var Element = function(pointer)
 		//TODO
 	}
 	
-	//return new Proxy(this, {
-	const proxy = new Proxy(this, {
+	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
+	return Node.call(this, pointer);
+	
+	/*
+	return new Proxy(this, {
+	//const proxy = new Proxy(this, {
 		has: function (target, key){
-			console.log("Element:has("+key+")");
+			//console.log("Element:has("+key+")");
 			return key in target;
 		},
 		get: function (target, key, recv){
-			console.log("Element:get("+key+")");
+			//console.log("Element:get("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
-				console.log("tyoeof target[key] == "+typeof target[key]);
+				//console.log("tyoeof target[key] == "+typeof target[key]);
 				return target[key]; 
 			}
 			else{
@@ -282,26 +284,24 @@ var Element = function(pointer)
 			return target[key];
 		},
 		set: function (target, key, val, recv){
-			console.log("Element:set("+key+")");
+			//console.log("Element:set("+key+")");
 			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
-				console.warn("tyoeof target[key] == "+typeof target[key]);
+				//console.warn("tyoeof target[key] == "+typeof target[key]);
 				return true; 
 			}
 			else{
-				console.log("DKDomElement_setAttribute(target[pointer], key, val);");
+				console.log("DKDomElement_setAttribute(target[pointer], "+key+", "+val+");");
 				DKDomElement_setAttribute(target["pointer"], key, val);
 			}
 			target[key] = val;
 			return true;
 		},
 		deleteProperty: function (target, key){
-			console.log("Element:deleteProperty("+key+")");
+			//console.log("Element:deleteProperty("+key+")");
 			delete target[key];
 			return true;
 		}
 	});
-	
-	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
-	return Node.call(this, pointer);
+	*/
 }
 Element.prototype = Node.prototype;
