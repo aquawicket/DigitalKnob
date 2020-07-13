@@ -6,7 +6,7 @@ var sizes = [];
 function DKFrame_Init()
 {
 	DKDEBUGFUNC();
-	document.body.id = "body";
+	document.body.id = "body"; //FIXME - remove this requirement
 }
 
 //////////////////////
@@ -140,17 +140,13 @@ function DKFrame_Iframe(title, url, width, height)
 function DKFrame_CreateFrame(title, width, height)
 {
 	DKDEBUGFUNC(title, width, height);
-	var window_width = parseInt(WindowWidth());
-	var window_height = parseInt(WindowHeight());
-	if(width == "100%"){ width = window_width-100; }
-	if(height == "100%"){ height = window_height-21-100; }
-	//if(!width){ width = "300"; }
-	//if(!height){ height = "300"; }
-	if(!width){ width = window_width / 2; }
-	if(!height){ height = window_height / 2; }
+	if(width == "100%"){ width = window.innerWidth-100; }
+	if(height == "100%"){ height = window.innerHeight-21-100; }
+	if(!width){ width = window.innerWidth / 2; }
+	if(!height){ height = window.innerHeight / 2; }
 	var newheight = parseFloat(height)+21;
-	var newtop = parseFloat((window_height / 2) - (newheight / 2) - 1);
-	var newleft = parseFloat((window_width / 2) - (width / 2) - 1);
+	var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
+	var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1);
 	
 	var frame = DKWidget_CreateElement("body", "div", "DKFrame_frame");
 	DKWidget_SetProperty(frame, "position", "absolute");
