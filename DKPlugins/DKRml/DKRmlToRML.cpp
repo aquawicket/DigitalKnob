@@ -73,9 +73,9 @@ bool DKRmlToRML::Hyperlink(DKEvents* event)
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
-	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* aElement = DKRml::addressToElement(elementAddress);
-	DKString value = aElement->GetAttribute("href")->Get<Rml::Core::String>();
+	Rml::ElementDocument* doc = dkRml->document;
+	Rml::Element* aElement = DKRml::addressToElement(elementAddress);
+	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
 	dkRml->LoadUrl(value);
@@ -140,7 +140,7 @@ bool DKRmlToRML::IndexToRml(const DKString& html, DKString& rml)
 }
 
 /////////////////////////////////////////////////////////
-bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
+bool DKRmlToRML::PostProcess(Rml::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
@@ -154,8 +154,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	}
 
 	// Create cef contexts for iFrames
-	Rml::Core::ElementList iframes;
-	Rml::Core::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
+	Rml::ElementList iframes;
+	Rml::ElementUtilities::GetElementsByTagName(iframes, element, "iframe");
 	for(unsigned int i=0; i<iframes.size(); ++i){
 		if(iframes[i]->HasChildNodes()){ continue; }
 		DKString id = iframes[i]->GetId();//.CString();
@@ -171,7 +171,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 			 return false;
 		}
 		else{
-			url = iframes[i]->GetAttribute("src")->Get<Rml::Core::String>();//.CString();
+			url = iframes[i]->GetAttribute("src")->Get<Rml::String>();//.CString();
 		}
 		
 		DKClass::DKCreate("DKCef");
@@ -179,7 +179,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 		//DKEvent::AddEvent(id, "mouseover", &DKRmlToRML::MouseOverIframe, this);
 		//DKEvent::AddEvent(id, "click", &DKRmlToRML::ClickIframe, this);
 
-		Rml::Core::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
+		Rml::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
 		DKString cef_id = "iframe_"+id;
 		cef_texture->SetAttribute("id", cef_id.c_str());
 
@@ -196,8 +196,8 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	}
 
 	// <a> tags with href attribute
-	Rml::Core::ElementList aElements;
-	Rml::Core::ElementUtilities::GetElementsByTagName(aElements, element, "a");
+	Rml::ElementList aElements;
+	Rml::ElementUtilities::GetElementsByTagName(aElements, element, "a");
 	for(unsigned int i=0; i<aElements.size(); ++i){
 		if(aElements[i]->HasAttribute("href")){
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
@@ -211,25 +211,25 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	}
 
 	// <audio> tags
-	Rml::Core::ElementList audios;
-	Rml::Core::ElementUtilities::GetElementsByTagName(audios, element, "audio");
+	Rml::ElementList audios;
+	Rml::ElementUtilities::GetElementsByTagName(audios, element, "audio");
 	for(unsigned int i=0; i<audios.size(); ++i){
 		DKClass::DKCreate("DKRmlAudio/DKRmlAudio.js");
-		Rml::Core::ElementList sources;
-		Rml::Core::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
+		Rml::ElementList sources;
+		Rml::ElementUtilities::GetElementsByTagName(sources, audios[i], "source");
 		for(unsigned int s=0; s<sources.size(); ++s){
-			DKString file = sources[s]->GetAttribute("src")->Get<Rml::Core::String>();//.CString();
+			DKString file = sources[s]->GetAttribute("src")->Get<Rml::String>();//.CString();
 			DKString rval;
 			DKDuktape::RunDuktape("DKRmlAudio_Open(\""+file+"\");", rval);
 		}
 	}
 
 	// <link> tags
-	Rml::Core::ElementList links;
-	Rml::Core::ElementUtilities::GetElementsByTagName(links, element, "link");
+	Rml::ElementList links;
+	Rml::ElementUtilities::GetElementsByTagName(links, element, "link");
 	for(unsigned int i=0; i<links.size(); i++){
 		if(!links[i]->HasAttribute("href")){ continue; }
-		DKString href = links[i]->GetAttribute("href")->Get<Rml::Core::String>();
+		DKString href = links[i]->GetAttribute("href")->Get<Rml::String>();
 		if(has(processed, href)){ continue; }
 		//replace(href, DKRml::Get()->_path, "");
 		processed += href + ",";
@@ -243,12 +243,12 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 	path = path.substr(0,found);
 	path += "/";
 
-	Rml::Core::ElementList scripts;
-	Rml::Core::ElementUtilities::GetElementsByTagName(scripts, element, "script");
+	Rml::ElementList scripts;
+	Rml::ElementUtilities::GetElementsByTagName(scripts, element, "script");
 	for(unsigned int i=0; i<scripts.size(); i++){
 		DKString src;
 		if(scripts[i]->HasAttribute("src")){
-			src = scripts[i]->GetAttribute("src")->Get<Rml::Core::String>();
+			src = scripts[i]->GetAttribute("src")->Get<Rml::String>();
 		}
 		
 		DKString inner = scripts[i]->GetInnerRML();
@@ -288,7 +288,7 @@ bool DKRmlToRML::PostProcess(Rml::Core::Element* element)
 //DEBUG - Lets see the code
 #ifdef DEBUG
 	DKRml* dkRml = DKRml::Get();
-	Rml::Core::ElementDocument* doc = dkRml->document;
+	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
 	int n = code.rfind("<html");
 	if(n < 0){
@@ -311,8 +311,8 @@ bool DKRmlToRML::ResizeIframe(DKEvents* event)
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get();
-	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* iframe = doc->GetElementById(id.c_str());
+	Rml::ElementDocument* doc = dkRml->document;
+	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
@@ -328,8 +328,8 @@ bool DKRmlToRML::ClickIframe(DKEvents* event)
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
-	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* iframe = doc->GetElementById(id.c_str());
+	Rml::ElementDocument* doc = dkRml->document;
+	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
@@ -345,8 +345,8 @@ bool DKRmlToRML::MouseOverIframe(DKEvents* event)
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
-	Rml::Core::ElementDocument* doc = dkRml->document;
-	Rml::Core::Element* iframe = doc->GetElementById(id.c_str());
+	Rml::ElementDocument* doc = dkRml->document;
+	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());

@@ -69,7 +69,7 @@ int DKDomWindow::addEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element;
+	Rml::Element* element;
 	if(same(address,"document")){
 		element = DKRml::Get()->document;
 	}
@@ -95,7 +95,7 @@ int DKDomWindow::removeEventListener(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomWindow::removeEventListener(): element invalid\n");
 		duk_push_boolean(ctx, false);

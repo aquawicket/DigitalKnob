@@ -54,6 +54,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_Valid", DKDuktapeJS::_DKValid);
 
 	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
+	DKDuktape::AttachFunction("DK_CallLoops", DKDuktapeJS::CallLoops);
 	DKDuktape::AttachFunction("DK_CallFunc", DKDuktapeJS::CallFunc);
 	DKDuktape::AttachFunction("DK_ClearEvents", DKDuktapeJS::ClearEvents);
 	DKDuktape::AttachFunction("DK_ClickImage", DKDuktapeJS::ClickImage);
@@ -369,6 +370,13 @@ int DKDuktapeJS::_SetLog(duk_context* ctx)
 int DKDuktapeJS::Beep(duk_context* ctx)
 {
 	DKUtil::Beep();
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKDuktapeJS::CallLoops(duk_context* ctx)
+{
+	DKApp::CallLoops();
 	return 1;
 }
 

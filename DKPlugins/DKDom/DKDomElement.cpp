@@ -26,11 +26,11 @@ bool DKDomElement::Init()
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////
-bool DKDomElement::GetElements(Rml::Core::Element* parent, Rml::Core::ElementList& elements)
+bool DKDomElement::GetElements(Rml::Element* parent, Rml::ElementList& elements)
 {
 	DKDEBUGFUNC(parent, "DKDomElementList&");
 	if(!parent){ return false; }
-	typedef std::queue<Rml::Core::Element*> SearchQueue;
+	typedef std::queue<Rml::Element*> SearchQueue;
 	SearchQueue search_queue;
 
 	elements.push_back(DKRml::Get()->document->GetFirstChild()->GetParentNode()); //add the body tag first
@@ -38,7 +38,7 @@ bool DKDomElement::GetElements(Rml::Core::Element* parent, Rml::Core::ElementLis
 		search_queue.push(parent->GetChild(i));
 
 	while(!search_queue.empty()){
-		Rml::Core::Element* element = search_queue.front();
+		Rml::Element* element = search_queue.front();
 		search_queue.pop();
 
 		if(!has(element->GetTagName(), "#")){ //.CString()
@@ -59,7 +59,7 @@ int DKDomElement::clientHeight(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::clientHeight(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -81,7 +81,7 @@ int DKDomElement::clientLeft(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::clientLeft(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -100,7 +100,7 @@ int DKDomElement::clientTop(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::clientTop(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -119,7 +119,7 @@ int DKDomElement::clientWidth(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::clientWidth(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -142,19 +142,19 @@ int DKDomElement::getAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::getAttribute("+address+","+attribute+"): element invalid\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
-	Rml::Core::Variant* variant = element->GetAttribute(attribute.c_str());
+	Rml::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
 		//DKWARN("DKRmlJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
-	Rml::Core::String temp = element->GetAttribute(attribute.c_str())->Get<Rml::Core::String>();
+	Rml::String temp = element->GetAttribute(attribute.c_str())->Get<Rml::String>();
 	DKString value = temp;//.CString();
 	duk_push_string(ctx, value.c_str());
 	return true;
@@ -165,7 +165,7 @@ int DKDomElement::getElementsByClassName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString name = duk_require_string(ctx, 0);
-	Rml::Core::ElementList elements;
+	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByClassName(elements, name.c_str());
 	if(elements.empty()){
 		duk_push_null(ctx);
@@ -186,7 +186,7 @@ int DKDomElement::getElementsByTagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString name = duk_require_string(ctx, 0);
-	Rml::Core::ElementList elements;
+	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, name.c_str());
 	if(same(name, "html")){
 		elements.push_back(DKRml::Get()->document); //html tag
@@ -216,7 +216,7 @@ int DKDomElement::hasAttribute(duk_context* ctx)
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::hasAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -235,7 +235,7 @@ int DKDomElement::innerHTML(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::innerHTML(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -277,7 +277,7 @@ int DKDomElement::setAttribute(duk_context* ctx)
 		return true;
 	}
 
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::setAttribute(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -299,7 +299,7 @@ int DKDomElement::tagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::tagName(): element invalid\n");
 		duk_push_boolean(ctx, false);

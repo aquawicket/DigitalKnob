@@ -19,7 +19,7 @@ RmlSDL2Renderer::RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen)
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void RmlSDL2Renderer::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::Core::TextureHandle texture, const Rml::Core::Vector2f& translation)
+void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation)
 {
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
 #if !defined(IOS) && !defined(ANDROID)
@@ -34,9 +34,9 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertic
     glPushMatrix();
     glTranslatef(translation.x, translation.y, 0);
  
-    std::vector<Rml::Core::Vector2f> Positions(num_vertices);
-    std::vector<Rml::Core::Colourb> Colors(num_vertices);
-    std::vector<Rml::Core::Vector2f> TexCoords(num_vertices);
+    std::vector<Rml::Vector2f> Positions(num_vertices);
+    std::vector<Rml::Colourb> Colors(num_vertices);
+    std::vector<Rml::Vector2f> TexCoords(num_vertices);
     float texw, texh;
  
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);    
@@ -150,20 +150,20 @@ void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 
 // Called by Rml when a texture is required by the library.
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::Core::Vector2i& texture_dimensions, const Rml::Core::String& source)
+bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
 {
-	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::Core::String&");
+	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
 	//We will map that id to the texture handle for later use. 
 	if(has(source,"iframe_")){//.CString()
-		texture_handle = reinterpret_cast<Rml::Core::TextureHandle>(&source);
+		texture_handle = reinterpret_cast<Rml::TextureHandle>(&source);
 		texture_name[texture_handle] = source;//.CString();
 		return true;
 	}
 
-	Rml::Core::FileInterface* file_interface = Rml::Core::GetFileInterface();
-    Rml::Core::FileHandle file_handle = file_interface->Open(source);
+	Rml::FileInterface* file_interface = Rml::GetFileInterface();
+    Rml::FileHandle file_handle = file_interface->Open(source);
     if (!file_handle)
         return false;
 
@@ -182,10 +182,10 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 		SDL_Texture *texture = SDL_GIFTexture(animations[animations.size()-1]);
 		SDL_GIFLoopMode(animations[animations.size()-1], GIF_REPEAT_FOR);
 		if(texture){
-		    texture_handle = (Rml::Core::TextureHandle) texture;
+		    texture_handle = (Rml::TextureHandle) texture;
 			int w, h;
 			SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-		    texture_dimensions = Rml::Core::Vector2i(w, h);
+		    texture_dimensions = Rml::Vector2i(w, h);
 		}
 		else{
 			return false;
@@ -198,10 +198,10 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 #endif
 		SDL_Texture *texture = IMG_LoadTexture_RW(mRenderer, SDL_RWFromMem(buffer, buffer_size), 1);
 	    if(texture){
-		    texture_handle = (Rml::Core::TextureHandle) texture;
+		    texture_handle = (Rml::TextureHandle) texture;
 			int w, h;
 			SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-		    texture_dimensions = Rml::Core::Vector2i(w, h);
+		    texture_dimensions = Rml::Vector2i(w, h);
 		}
 		else{
 			return false;
@@ -217,7 +217,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml:
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool RmlSDL2Renderer::GenerateTexture(Rml::Core::TextureHandle& texture_handle, const Rml::Core::byte* source, const Rml::Core::Vector2i& source_dimensions)
+bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
 {
 	DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -236,13 +236,13 @@ bool RmlSDL2Renderer::GenerateTexture(Rml::Core::TextureHandle& texture_handle, 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(mRenderer, surface);
     SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     SDL_FreeSurface(surface);
-    texture_handle = (Rml::Core::TextureHandle) texture;
+    texture_handle = (Rml::TextureHandle) texture;
     return true;
 }
 
 // Called by Rml when a loaded texture is no longer required.
 ///////////////////////////////////////////////////////////////////////////////////
-void RmlSDL2Renderer::ReleaseTexture(Rml::Core::TextureHandle texture_handle)
+void RmlSDL2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle)
 {
 	DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);

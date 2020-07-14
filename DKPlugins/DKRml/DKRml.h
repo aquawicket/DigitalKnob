@@ -6,14 +6,14 @@
 #define DKRml_H
 
 #include <RmlUi/Core.h>
-#include <RmlUi/Controls.h>
+//#include <RmlUi/Controls.h>
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKRml/DKRmlFile.h"
 #include "DKRml/DKRmlToRML.h"
 
 ///////////////////////////////////////////////////////////////////////
-class DKRml : public Rml::Core::EventListener, public DKObjectT<DKRml>
+class DKRml : public Rml::EventListener, public DKObjectT<DKRml>
 {
 public:
 	bool Init();
@@ -23,26 +23,26 @@ public:
 	bool LoadFonts();
 	bool LoadHtml(const DKString& url);
 	bool LoadUrl(const DKString& url);
-	void ProcessEvent(Rml::Core::Event& rmlEvent); //overwritten
+	void ProcessEvent(Rml::Event& rmlEvent); //overwritten
 	bool RegisterEvent(const DKString& elementAddress, const DKString& type);
 	bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
 	bool DebuggerOff();
 	bool DebuggerOn();
 	bool DebuggerToggle();
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
-	static Rml::Core::Event* addressToEvent(const DKString& address);
-	static DKString eventToAddress(Rml::Core::Event* event);
-	static Rml::Core::Element* addressToElement(const DKString& address);
-	static DKString elementToAddress(Rml::Core::Element* element);
+	static Rml::Event* addressToEvent(const DKString& address);
+	static DKString eventToAddress(Rml::Event* event);
+	static Rml::Element* addressToElement(const DKString& address);
+	static DKString elementToAddress(Rml::Element* element);
 
 	DKString href;
 	DKString protocol;
 	DKString _path;
 	DKString workingPath;
-	Rml::Core::Context* context;
-	Rml::Core::ElementDocument* document;
+	Rml::Context* context;
+	Rml::ElementDocument* document;
 	static DKRmlFile* dkRmlFile;
-	Rml::Core::Element* hover;
+	Rml::Element* hover;
 
 	DKRmlToRML dkRmlToRML;
 };

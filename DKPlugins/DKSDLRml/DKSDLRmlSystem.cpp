@@ -2,10 +2,10 @@
 #include "DKSDLRml/DKSDLRmlSystem.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-Rml::Core::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
+Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
 {
 	DKDEBUGFUNC(sdlkey);
-    using namespace Rml::Core::Input;
+    using namespace Rml::Input;
     switch(sdlkey) {
         case SDLK_UNKNOWN:
             return KI_UNKNOWN;
@@ -366,16 +366,16 @@ int RmlSDL2SystemInterface::GetKeyModifiers()
     SDL_Keymod sdlMods = SDL_GetModState();
     int retval = 0;
     if(sdlMods & KMOD_CTRL)
-        retval |= Rml::Core::Input::KM_CTRL;
+        retval |= Rml::Input::KM_CTRL;
 
     if(sdlMods & KMOD_SHIFT)
-        retval |= Rml::Core::Input::KM_SHIFT;
+        retval |= Rml::Input::KM_SHIFT;
 
     if(sdlMods & KMOD_ALT)
-        retval |= Rml::Core::Input::KM_ALT;
+        retval |= Rml::Input::KM_ALT;
 
 	if(sdlMods & KMOD_NUM)
-        retval |= Rml::Core::Input::KM_NUMLOCK;
+        retval |= Rml::Input::KM_NUMLOCK;
 
     return retval;
 }
@@ -388,33 +388,33 @@ double RmlSDL2SystemInterface::GetElapsedTime()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool RmlSDL2SystemInterface::LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message)
+bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message)
 {
 	//DKDEBUGFUNC(type, message);
 	if(has(message,"Loaded font face")){//.CString()
-		type = Rml::Core::Log::LT_DEBUG;
+		type = Rml::Log::LT_DEBUG;
 	}
 	switch(type)
 	{
-	case Rml::Core::Log::LT_ALWAYS:
+	case Rml::Log::LT_ALWAYS:
 		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-	case Rml::Core::Log::LT_ERROR:
+	case Rml::Log::LT_ERROR:
 		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-	case Rml::Core::Log::LT_ASSERT:
+	case Rml::Log::LT_ASSERT:
 		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-	case Rml::Core::Log::LT_WARNING:
+	case Rml::Log::LT_WARNING:
 		DKWARN("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-	case Rml::Core::Log::LT_INFO:
+	case Rml::Log::LT_INFO:
 		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-	case Rml::Core::Log::LT_DEBUG:
+	case Rml::Log::LT_DEBUG:
 		DKDEBUG("[Rml] "+DKString(message)+"\n");//.CString()
 		break;
-    case Rml::Core::Log::LT_MAX:
+    case Rml::Log::LT_MAX:
 		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
         break;
 	};

@@ -22,7 +22,7 @@ bool DKRml::Init()
 
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
-		Rml::Core::SetFileInterface(dkRmlFile);
+		Rml::SetFileInterface(dkRmlFile);
 	}
 
 	//Create DKSDLRml or DKOSGRml
@@ -38,8 +38,8 @@ bool DKRml::Init()
 	}
 	
 	if(DKClass::DKAvailable("DKSDLRml")){
-		if(!Rml::Core::Initialise()){
-			DKERROR("Rml::Core::Initialise(): failed\n");
+		if(!Rml::Initialise()){
+			DKERROR("Rml::Initialise(): failed\n");
 			return false;
 		}
 
@@ -47,18 +47,18 @@ bool DKRml::Init()
 		if(!DKWindow::GetWidth(w)){ return false; }
 		int h;
 		if(!DKWindow::GetHeight(h)){ return false; }
-		context = Rml::Core::CreateContext("default", Rml::Core::Vector2i(w, h));
+		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 
-		Rml::Controls::Initialise();
+		//Rml::Controls::Initialise();
 	}
 	
 	LoadFonts();
 	
 	if(DKClass::DKAvailable("DKSDLRml")){
-		if(!Rml::Debugger::Initialise(context)){
-			DKERROR("Rml::Debugger::Initialise(): failed\n");
-			return false;
-		}
+		//if(!Rml::Debugger::Initialise(context)){
+		//	DKERROR("Rml::Debugger::Initialise(): failed\n");
+		//	return false;
+		//}
 	}
 
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
@@ -109,12 +109,12 @@ bool DKRml::End()
 	DKEvents::RemoveUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::RemoveSendEventFunc(&DKRml::SendEvent, this);
 	//if(document){ 
-	//	Rml::Core::Factory::ClearStyleSheetCache();
+	//	Rml::Factory::ClearStyleSheetCache();
 	//	document->Close(); 
 	//}
 	if(context){
 		//context->RemoveReference();
-		Rml::Core::Shutdown();
+		Rml::Shutdown();
 	}
 	return true;
 }
@@ -125,7 +125,7 @@ bool DKRml::End()
 bool DKRml::LoadFont(const DKString& file)
 {
 	DKDEBUGFUNC(file);
-	if(!Rml::Core::LoadFontFace(file.c_str())){
+	if(!Rml::LoadFontFace(file.c_str())){
 		DKERROR("DKRml::LoadFont(): Could not load "+file+"\n");
 		return false;
 	}
@@ -183,27 +183,27 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//// Clear any document and load the rml into the document
 	if (document) {
-		Rml::Core::Factory::ClearStyleSheetCache();
+		Rml::Factory::ClearStyleSheetCache();
 		document->Close();
 	}
 
 	//document = context->LoadDocumentFromMemory(rml.c_str());
-	auto stream = std::make_unique<Rml::Core::StreamMemory>((Rml::Core::byte*)rml.c_str(), rml.size());
+	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
 	
 	//document = context->LoadDocument(stream.get());
-	Rml::Core::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
-	Rml::Core::ElementPtr element = Rml::Core::Factory::InstanceDocumentStream(context, stream.get());
+	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
+	Rml::ElementPtr element = Rml::Factory::InstanceDocumentStream(context, stream.get());
 	if (!element){ return false; }
 
-	document = static_cast<Rml::Core::ElementDocument*>(element.get());
+	document = static_cast<Rml::ElementDocument*>(element.get());
 	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
 	
 	//Make sure we have <head> and <body> tags
-	Rml::Core::ElementList heads;
-	Rml::Core::ElementList bodys;
-	Rml::Core::Element* head = NULL;
-	Rml::Core::Element* body = NULL;
+	Rml::ElementList heads;
+	Rml::ElementList bodys;
+	Rml::Element* head = NULL;
+	Rml::Element* body = NULL;
 	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
 	if (!heads.empty()) {
 		head = heads[0];
@@ -225,10 +225,10 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//Load user agent style sheet
 	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
-	Rml::Core::SharedPtr<Rml::Core::StyleSheet> sheet = document->GetOwnerDocument()->GetStyleSheet();
-	Rml::Core::SharedPtr<Rml::Core::StyleSheet> rcss = Rml::Core::Factory::InstanceStyleSheetFile(rml_css.c_str());
+	Rml::SharedPtr<Rml::StyleSheet> sheet = document->GetOwnerDocument()->GetStyleSheet();
+	Rml::SharedPtr<Rml::StyleSheet> rcss = Rml::Factory::InstanceStyleSheetFile(rml_css.c_str());
 	if(sheet) {
-		Rml::Core::SharedPtr<Rml::Core::StyleSheet> new_style_sheet = rcss->CombineStyleSheet(*sheet);
+		Rml::SharedPtr<Rml::StyleSheet> new_style_sheet = rcss->CombineStyleSheet(*sheet);
 		document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet));
 	}
 	else {
@@ -236,9 +236,9 @@ bool DKRml::LoadHtml(const DKString& html)
 	}
 
 	//Finish loading the document
-	Rml::Core::ElementUtilities::BindEventAttributes(document);
-	Rml::Core::PluginRegistry::NotifyDocumentLoad(document);
-	document->DispatchEvent(Rml::Core::EventId::Load, Rml::Core::Dictionary());
+	Rml::ElementUtilities::BindEventAttributes(document);
+	Rml::PluginRegistry::NotifyDocumentLoad(document);
+	document->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
 	document->UpdateDocument();
 
 	if(!document){
@@ -346,7 +346,7 @@ bool DKRml::LoadUrl(const DKString& url)
 }
 
 ////////////////////////////////////////////////////
-void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
+void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 {
 	//TODO - make rmlEvent accessable through javascript
 	//1. Create Javascript Event object that references the rmlEvent
@@ -360,10 +360,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 	if (!rmlEvent.GetCurrentElement()) { return; } //MUST BE VALID!
 	if (!rmlEvent.GetTargetElement()) { return; } //MUST BE VALID!
 
-	Rml::Core::Element* currentElement = rmlEvent.GetCurrentElement();
+	Rml::Element* currentElement = rmlEvent.GetCurrentElement();
 	DKString currentElementAddress = elementToAddress(currentElement);
 
-	Rml::Core::Element* targetElement = rmlEvent.GetTargetElement();
+	Rml::Element* targetElement = rmlEvent.GetTargetElement();
 	DKString targetElementAddress = elementToAddress(targetElement);
 
 	DKString type = rmlEvent.GetType();
@@ -379,10 +379,10 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 	*/
 
 	// If the event bubbles up, ignore elements underneith 
-	Rml::Core::Context* context = document->GetContext();
-	Rml::Core::Element* hoverElement = NULL;
+	Rml::Context* context = document->GetContext();
+	Rml::Element* hoverElement = NULL;
 	if (context) { hoverElement = context->GetHoverElement(); }
-	Rml::Core::Element* hoverParent = NULL;
+	Rml::Element* hoverParent = NULL;
 	if (hoverElement) { hoverParent = hoverElement->GetParentNode(); }
 	if (hoverParent) { hover = hoverParent; }
 	//if(rmlEvent.GetPhase() == 1 && currentElement != hover){ return; }
@@ -411,7 +411,7 @@ void DKRml::ProcessEvent(Rml::Core::Event& rmlEvent)
 	//Hide Keyboard on input Enter
 	if (type == "keydown" && currentElement->GetTagName() == "input") {
 		int key = rmlEvent.GetParameter<int>("key_identifier", 0);
-		if (key == Rml::Core::Input::KI_RETURN) { //Enter
+		if (key == Rml::Input::KI_RETURN) { //Enter
 			CallJavaFunction("toggleKeyboard", "");
 			return;
 		}
@@ -476,7 +476,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 	if(elementAddress.empty()){ return false; } //no elementAddress
 	if(type.empty()){ return false; } //no type
 	
-	Rml::Core::Element* element = addressToElement(elementAddress.c_str());
+	Rml::Element* element = addressToElement(elementAddress.c_str());
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -515,10 +515,10 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 		//DKWARN("DKRml::SendEvent(): recieved global window event\n");
 	//}
 	
-	Rml::Core::Element* element = addressToElement(elementAddress);
+	Rml::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; }
 	
-	Rml::Core::Dictionary parameters;
+	Rml::Dictionary parameters;
 	//parameters.Set("msg0", value.c_str());
 	element->DispatchEvent(type.c_str(), parameters, false);
 	return true;
@@ -562,7 +562,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	if (same(addressToElement(elementAddress)->GetId(), "window")) { return false; }
 	//if(!DKValid("DKRml0")){ return false; }
 
-	Rml::Core::Element* element = addressToElement(elementAddress);
+	Rml::Element* element = addressToElement(elementAddress);
 	if(!element){ return false; } //no element
 
 	DKString _type = type;
@@ -573,11 +573,11 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 }
 
 ////////////////////////////////////////////////////////////////
-Rml::Core::Event* DKRml::addressToEvent(const DKString& address)
+Rml::Event* DKRml::addressToEvent(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
 
-	Rml::Core::Event* event;
+	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR("NOTE: DKRml::addressToEvent(): the address is not a valid hex notation");
 		return NULL;
@@ -591,7 +591,7 @@ Rml::Core::Event* DKRml::addressToEvent(const DKString& address)
 		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
 		return NULL;
 	}
-	event = reinterpret_cast<Rml::Core::Event*>(tmp);
+	event = reinterpret_cast<Rml::Event*>(tmp);
 	if (!event->GetCurrentElement()) {
 		DKERROR("DKRml::addressToEvent(" + address + "): currentElement invalid\n");
 		return NULL;
@@ -600,7 +600,7 @@ Rml::Core::Event* DKRml::addressToEvent(const DKString& address)
 }
 
 ///////////////////////////////////////////////////////
-DKString DKRml::eventToAddress(Rml::Core::Event* event)
+DKString DKRml::eventToAddress(Rml::Event* event)
 {
 	if (!event) {
 		DKERROR("DKRml::eventToAddress(): invalid event\n");
@@ -618,11 +618,11 @@ DKString DKRml::eventToAddress(Rml::Core::Event* event)
 }
 
 ////////////////////////////////////////////////////////////////////
-Rml::Core::Element* DKRml::addressToElement(const DKString& address)
+Rml::Element* DKRml::addressToElement(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
 
-	Rml::Core::Element* element;
+	Rml::Element* element;
 	if (address == "document") {
 		element = DKRml::Get()->document;
 	}
@@ -640,7 +640,7 @@ Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 			DKERROR("DKRml::addressToElement(" + address + "): invalid address\n");
 			return NULL;
 		}
-		element = reinterpret_cast<Rml::Core::Element*>(tmp);
+		element = reinterpret_cast<Rml::Element*>(tmp);
 	}
 	if (element->GetTagName().empty()) {
 		return NULL;
@@ -649,7 +649,7 @@ Rml::Core::Element* DKRml::addressToElement(const DKString& address)
 }
 
 /////////////////////////////////////////////////////////////
-DKString DKRml::elementToAddress(Rml::Core::Element* element)
+DKString DKRml::elementToAddress(Rml::Element* element)
 {
 	if (!element) {
 		DKERROR("DKRml::elementToAddress(): invalid element\n");

@@ -26,6 +26,7 @@ public:
 	
 	static int Beep(duk_context* ctx);
 	static int CallFunc(duk_context* ctx);
+	static int CallLoops(duk_context* ctx);
 	static int ClearEvents(duk_context* ctx);
 	static int ClickImage(duk_context* ctx);
 	static int CpuUsed(duk_context* ctx);

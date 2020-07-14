@@ -7,14 +7,14 @@
 #include "DK/DK.h"
 
 ////////////////////////////////////////////////////////////////
-class RmlSDL2SystemInterface : public Rml::Core::SystemInterface
+class RmlSDL2SystemInterface : public Rml::SystemInterface
 {
 public:
-    Rml::Core::Input::KeyIdentifier TranslateKey(SDL_Keycode sdlkey);
+    Rml::Input::KeyIdentifier TranslateKey(SDL_Keycode sdlkey);
     int TranslateMouseButton(Uint8 button);
 	int GetKeyModifiers();
     double GetElapsedTime();
-    bool LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message);
+    bool LogMessage(Rml::Log::Type type, const Rml::String& message);
 };
 
 #endif //DKSDLRmlSystem_H

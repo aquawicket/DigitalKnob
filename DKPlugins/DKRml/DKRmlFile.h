@@ -5,13 +5,13 @@
 #include "DK/DKFile.h"
 
 /////////////////////////////////////////////////
-class DKRmlFile : public Rml::Core::FileInterface
+class DKRmlFile : public Rml::FileInterface
 {
-	virtual Rml::Core::FileHandle Open(const Rml::Core::String& path);
-	virtual void Close(Rml::Core::FileHandle file);
-	virtual size_t Read(void* buffer, size_t size, Rml::Core::FileHandle file);
-	virtual bool Seek(Rml::Core::FileHandle file, long offset, int origin);
-	virtual size_t Tell(Rml::Core::FileHandle file);
+	virtual Rml::FileHandle Open(const Rml::String& path);
+	virtual void Close(Rml::FileHandle file);
+	virtual size_t Read(void* buffer, size_t size, Rml::FileHandle file);
+	virtual bool Seek(Rml::FileHandle file, long offset, int origin);
+	virtual size_t Tell(Rml::FileHandle file);
 };
 
 #endif //DKRmlFile_H

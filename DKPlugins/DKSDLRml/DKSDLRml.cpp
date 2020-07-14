@@ -27,8 +27,8 @@ bool DKSDLRml::Init()
 
 	SystemInterface = new RmlSDL2SystemInterface();
 
-	Rml::Core::SetRenderInterface(Renderer);
-    Rml::Core::SetSystemInterface(SystemInterface);
+	Rml::SetRenderInterface(Renderer);
+    Rml::SetSystemInterface(SystemInterface);
 
 	DKSDLWindow::AddEventFunc(&DKSDLRml::Handle, this);
 	DKSDLWindow::AddDrawFunc(&DKSDLRml::Draw, this);
@@ -48,7 +48,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
 	//DKDEBUGFUNC(event);
 	if(!dkRml->document){ return false; }
 
-	Rml::Core::Element* hover;
+	Rml::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:
 			dkRml->context->ProcessMouseMove(event->motion.x, event->motion.y, SystemInterface->GetKeyModifiers());
@@ -116,7 +116,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
 				dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
 			}
 			//DKEvent::SendEvent("window", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
-			dkRml->context->ProcessKeyDown((Rml::Core::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			return false; //allow event to continue
 		}
 #endif
@@ -145,7 +145,7 @@ void DKSDLRml::Draw()
 {
     //DKDEBUGFUNC();
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
-		dkRml->context->SetDimensions(Rml::Core::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
+		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
 		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);

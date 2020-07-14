@@ -120,10 +120,15 @@ void DKApp::DoFrame()
 	DKUtil::LimitFramerate();
 	//DKUtil::SendTick();
 
-	//Call loop functions
+	CallLoops(); //Call loop functions
+}
+
+///////////////////////
+void DKApp::CallLoops()
+{
 	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
-		if (active){
-			loop_funcs[i](); 
+		if(active){
+			loop_funcs[i]();
 		}
 	}
 }

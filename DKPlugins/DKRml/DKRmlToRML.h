@@ -4,7 +4,7 @@
 
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
-#include <RmlUi/Controls.h>
+//#include <RmlUi/Controls.h>
 
 ///////////////////////////////////
 class DKRmlToRML  : public DKObject
@@ -14,7 +14,7 @@ public:
 	bool HtmlToRml(const DKString& html, DKString& rml);
 	bool Hyperlink(DKEvents* event);
 	bool IndexToRml(const DKString& html, DKString& rml);
-	bool PostProcess(Rml::Core::Element* element);
+	bool PostProcess(Rml::Element* element);
 	static bool ResizeIframe(DKEvents* event);
 	bool ClickIframe(DKEvents* event);
 	bool MouseOverIframe(DKEvents* event);

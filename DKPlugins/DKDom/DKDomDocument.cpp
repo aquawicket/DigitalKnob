@@ -23,7 +23,7 @@ bool DKDomDocument::Init()
 int DKDomDocument::body(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	Rml::Core::ElementList elements;
+	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0]){
 		DKERROR("DKDomDocument::body(): element invalid\n");
@@ -40,8 +40,8 @@ int DKDomDocument::createElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
-	Rml::Core::Element* doc = DKRml::Get()->document;
-	Rml::Core::Element* element = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
+	Rml::Element* doc = DKRml::Get()->document;
+	Rml::Element* element = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
 	if(!element){
 		DKERROR("DKDomDocument::createElement(): element invalid\n");
 		return false;
@@ -55,7 +55,7 @@ int DKDomDocument::createElement(duk_context* ctx)
 int DKDomDocument::documentElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	Rml::Core::Element* element = DKRml::Get()->document;
+	Rml::Element* element = DKRml::Get()->document;
 	if(!element){
 		DKERROR("DKDomDocument::documentElement(): element invalid\n");
 		duk_push_null(ctx);
@@ -71,7 +71,7 @@ int DKDomDocument::getElementById(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	Rml::Core::Element* element = DKRml::Get()->document->GetElementById(id.c_str());
+	Rml::Element* element = DKRml::Get()->document->GetElementById(id.c_str());
 	if(!element){
 		//DKERROR("DKDomDocument::getElementById(): element invalid\n");
 		duk_push_null(ctx);
@@ -87,7 +87,7 @@ int DKDomDocument::getElementsByTagName(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
-	Rml::Core::ElementList elements;
+	Rml::ElementList elements;
 	DKRml::Get()->document->GetElementsByTagName(elements, tag.c_str());
 	if(elements.empty()){
 		//DKERROR("DKDomDocument::getElementsByTagName(): element list invalid\n");

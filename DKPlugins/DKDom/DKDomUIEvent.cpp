@@ -30,7 +30,7 @@ int DKDomUIEvent::cancelBubble(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Core::Event* event = DKEvent::addressToEvent(eventAddress);
+	Rml::Event* event = DKEvent::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKDomUIEvent::cencelBubble(): event invalid\n");
 		duk_push_boolean(ctx, false);
@@ -51,7 +51,7 @@ int DKDomUIEvent::initUIEvent(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Core::Event* event = DKRml::addressToEvent(eventAddress);
+	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
 		DKERROR("DKDomUIEvent::initEvent(): event invalid\n");
 		duk_push_boolean(ctx, false);

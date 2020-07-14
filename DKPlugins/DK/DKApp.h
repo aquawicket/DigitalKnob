@@ -14,6 +14,7 @@ public:
 	static void Load(){};
 	static void Loop();
 	static void DoFrame();
+	static void CallLoops();
 	static void Exit();
 
 	static bool active;

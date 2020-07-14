@@ -29,7 +29,7 @@ bool DKDomDocumentOrShadowRoot::Init()
 int DKDomDocumentOrShadowRoot::activeElement(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	Rml::Core::Element* element;// = DKRml::Get()->document->GetActiveElement(); //TODO
+	Rml::Element* element;// = DKRml::Get()->document->GetActiveElement(); //TODO
 	if(element){
 		DKERROR("DKDomDocumentOrShadowRoot::activeElement(): element invalid\n");
 		duk_push_null(ctx);
@@ -52,7 +52,7 @@ int DKDomDocumentOrShadowRoot::caretPositionFromPoint(duk_context* ctx)
 int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	Rml::Core::Element* hoverElement = DKRml::Get()->document->GetContext()->GetHoverElement();
+	Rml::Element* hoverElement = DKRml::Get()->document->GetContext()->GetHoverElement();
 	if(!hoverElement){ return false; }
 	DKString elementAddress = DKRml::elementToAddress(hoverElement);
 	duk_push_string(ctx, elementAddress.c_str());
