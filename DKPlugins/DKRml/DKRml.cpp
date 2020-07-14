@@ -55,10 +55,10 @@ bool DKRml::Init()
 	LoadFonts();
 	
 	if(DKClass::DKAvailable("DKSDLRml")){
-		//if(!Rml::Debugger::Initialise(context)){
-		//	DKERROR("Rml::Debugger::Initialise(): failed\n");
-		//	return false;
-		//}
+		if(!Rml::Debugger::Initialise(context)){
+			DKERROR("Rml::Debugger::Initialise(): failed\n");
+			return false;
+		}
 	}
 
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
