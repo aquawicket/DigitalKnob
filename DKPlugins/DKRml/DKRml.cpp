@@ -204,6 +204,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	Rml::ElementList bodys;
 	Rml::Element* head = NULL;
 	Rml::Element* body = NULL;
+	Rml::ElementDocument* elementDocument = document->GetOwnerDocument();
 	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
 	if (!heads.empty()) {
 		head = heads[0];
