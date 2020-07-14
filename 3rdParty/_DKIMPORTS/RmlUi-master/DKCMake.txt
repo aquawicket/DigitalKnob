@@ -8,8 +8,8 @@ DKDEPEND(freetype-2.5.5)
 ##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
 ##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
 
-DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
-##DKINSTALL(https://github.com/aquawicket/RmlUi/archive/master.zip RmlUi-master)
+##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
+DKINSTALL(https://github.com/aquawicket/RmlUi/archive/master.zip RmlUi-master)
 DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)
 
 ## DKINSTALL(${DKWEB}/Download/RmlUi-master.zip RmlUi-master)
@@ -41,18 +41,6 @@ LINUX_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlCore.a)
 LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlCore.a)
 ANDROID_DEBUG_LIB(${RMLUI}/${OS}/Debug/obj/local/armeabi-v7a/libRmlCore.a)
 ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlCore.a)
-
-##WIN_DEBUG_LIB(${RMLUI}/${OS}/Debug/RmlControls.lib)
-##WIN_RELEASE_LIB(${RMLUI}/${OS}/Release/RmlControls.lib)
-##MAC_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG}/libRmlControls.a)
-##MAC_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE}/libRmlControls.a)
-##IOSSIM_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG}/libRmlControls_d.a)
-##IOSSIM_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE}/libRmlControls.a)
-##LINUX_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlControls.a)
-##LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlControls.a)
-##ANDROID_DEBUG_LIB(${RMLUI}/${OS}/Debug/obj/local/armeabi-v7a/libRmlControls.a)
-##ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlControls.a)
-
 
 
 ### COMPILE ###
