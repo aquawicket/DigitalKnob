@@ -51,11 +51,12 @@ bool DKRml::Init()
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-	
+#ifndef LINUX
 	if (!Rml::Debugger::Initialise(context)) {
 		DKERROR("Rml::Debugger::Initialise(): failed\n");
 		return false;
 	}
+#endif
 
 	context->SetBaseTag("html");
 	LoadFonts();
@@ -535,22 +536,27 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 /////////////////////////
 bool DKRml::DebuggerOff()
 {
+#ifndef LINUX
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
+#endif
 	return true;
 }
 
 ////////////////////////
 bool DKRml::DebuggerOn()
 {
+#ifndef LINUX
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
+#endif
 	return true;
 }
 
 ////////////////////////////
 bool DKRml::DebuggerToggle()
 {
+#ifndef LINUX
 	DKDEBUGFUNC();
 	if(Rml::Debugger::IsVisible()){ //FIXME:  always returns false
 		DKRml::DebuggerOff();
@@ -558,6 +564,7 @@ bool DKRml::DebuggerToggle()
 	else{
 		DKRml::DebuggerOn();
 	}
+#endif
 	return true;
 }
 
