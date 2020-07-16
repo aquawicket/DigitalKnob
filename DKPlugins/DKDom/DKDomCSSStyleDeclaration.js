@@ -3,22 +3,21 @@
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
 {
-	//DKDEBUGFUNC();
 	this.pointer = pointer;
 	
 	// Methods
 	Object.defineProperty(this, "getPropertyValue", {
 		configurable: true,
 		value: function(propertyName){ 
-			this[propertyName] = DKDomCSSStyleDeclaration_getPropertyValue(pointer, propertyName);
+			this[propertyName] = DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 			return this[propertyName];
 		} 
 	});
 	Object.defineProperty(this, "setProperty", {
 		configurable: true,
 		value: function(propertyName, propertyValue, priority){ 
-			console.warn("CSSStyleDeclaration:setProperty("+pointer+","+propertyName+","+propertyValue+")");
-			DKDomCSSStyleDeclaration_setProperty(pointer, propertyName, propertyValue);
+			console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
+			DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
 			this[propertyName] = propertyValue;
 		} 
 	});
@@ -66,7 +65,5 @@ var CSSStyleDeclaration = function(pointer)
 		}
 	});
 	
-	//FIXME: we only want to return the proxy if it's used
 	return proxy;
-	//return this;
 }

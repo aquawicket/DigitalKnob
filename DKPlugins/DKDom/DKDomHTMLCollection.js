@@ -3,12 +3,9 @@
 ///////////////////////////////////////
 var HTMLCollection = function(pointers)
 {
-	//console.log("HTMLCollection("+pointers+")");
-	
 	var arry = pointers.split(",");
 	for(var i=0; i<arry.length; i++){
 		this.push(new HTMLElement(arry[i]));
-		//console.log("HTMLCollection added "+arry[i]+","+this[i].getAttribute("id"));
 	}
 	
 	HTMLCollection.prototype.item = function(index){

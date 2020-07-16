@@ -3,8 +3,6 @@
 ///////////////////////////////
 var Console = function(pointer)
 {
-	//DKDEBUGFUNC();
-	
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }
 		DKDomConsole_error(msg+"\n");

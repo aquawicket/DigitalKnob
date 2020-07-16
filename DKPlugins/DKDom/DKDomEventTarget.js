@@ -14,9 +14,21 @@ var EventFromCPP = function(pointer, event)
 	}
 }
 
+instances = [];
 ///////////////////////////////////
 var EventTarget = function(pointer)
 {
+	this.pointer = pointer;
+	for(var i=0; i<instances.length; i++){
+        if(instances[i].pointer == pointer){
+			//console.log("return existing instance "+pointer);
+            return instances[i];
+        }
+    }
+	
+	//console.log("creating instance "+pointer);
+	instances.push(this);
+	
 	this.listeners = {};
 	
 	//EventTarget.prototype.listeners = null;

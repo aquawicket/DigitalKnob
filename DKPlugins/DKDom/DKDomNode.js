@@ -1,21 +1,9 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Node
 
-nodeInstances = [];
+
 ////////////////////////////
 var Node = function(pointer)
 {
-	this.pointer = pointer;
-	for(var i=0; i<nodeInstances.length; i++){
-        if(nodeInstances[i].pointer == pointer){
-			//console.log("return existing instance "+pointer);
-            return nodeInstances[i];
-        }
-    }
-	
-	//console.log("creating instance "+pointer);
-	nodeInstances.push(this);
-	
-	
 	Object.defineProperty(this, "baseURI", { 
 		configurable: true,
 		get: function(){ return DKDomNode_baseURI(this.pointer); }
@@ -151,7 +139,6 @@ var Node = function(pointer)
 		//TODO
 	}
 
-	EventTarget.call(this, pointer);
-	return this;
+	return EventTarget.call(this, pointer);
 };
 Node.prototype = EventTarget.prototype;

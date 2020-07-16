@@ -16,7 +16,6 @@ var GlobalEventHandlers = {
 ///////////////////////////////////////////
 var GlobalEventHandlers = function(pointer)
 {
-	//DKDEBUGFUNC();
 	this.pointer = pointer;
 	
 	this.abort = null;
