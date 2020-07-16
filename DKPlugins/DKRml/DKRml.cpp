@@ -58,7 +58,7 @@ bool DKRml::Init()
 	}
 #endif
 
-	context->SetBaseTag("html");
+	context->SetDocumentsBaseTag("html");
 	LoadFonts();
 
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
