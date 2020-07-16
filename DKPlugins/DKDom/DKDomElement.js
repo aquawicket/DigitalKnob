@@ -262,7 +262,7 @@ var Element = function(pointer)
 		//TODO
 	}
 	
-	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
+	GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
 	return Node.call(this, pointer);
 	
 	/*

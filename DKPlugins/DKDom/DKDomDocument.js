@@ -46,7 +46,8 @@ var Document = function(pointer)
 	}
 	
 	
-	return Node.call(this, pointer);
+	//return Node.call(this, pointer);
+	return HTMLElement.call(this, pointer);
 }
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot);

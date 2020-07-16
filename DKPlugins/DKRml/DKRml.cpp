@@ -67,8 +67,8 @@ bool DKRml::Init()
 	
 	DKClass::DKCreate("DKRmlJS");
 
-	Rml::Factory::RegisterElementInstancer("head", new Rml::ElementInstancerElement);
-	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<Rml::XMLNodeHandlerDefault>());
+	//Rml::Factory::RegisterElementInstancer("head", new Rml::ElementInstancerElement);
+	//Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
