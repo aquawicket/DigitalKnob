@@ -456,7 +456,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 			*/
 			//FIXME - we run the risk of having event function pointers that point to nowhere
 			if (!ev->event_func(ev)) {
-				DKERROR("DKRml::ProcessEvent failed");
+				DKERROR("DKRml::ProcessEvent failed \n");
 				return;
 			} //call the function linked to the event
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");

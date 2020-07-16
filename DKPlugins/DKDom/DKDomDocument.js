@@ -50,5 +50,6 @@ var Document = function(pointer)
 	return HTMLElement.call(this, pointer);
 }
 Document.prototype = Node.prototype;
-Object.assign(Document.prototype, DocumentOrShadowRoot);
+Object.assign(Document.prototype, DocumentOrShadowRoot); //mixin
+//Object.assign(Document.prototype, GlobalEventHandlers); //mixin
 var document = new Document("document");
