@@ -8,6 +8,8 @@
 
 #include <RmlUi/Core/StreamMemory.h>
 #include "../../3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
+#include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerDefault.h"
+#include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerBody.h"
 
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
@@ -48,18 +50,16 @@ bool DKRml::Init()
 		int h;
 		if(!DKWindow::GetHeight(h)){ return false; }
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
+		
+	}
+	
+	if (!Rml::Debugger::Initialise(context)) {
+		DKERROR("Rml::Debugger::Initialise(): failed\n");
+		return false;
+	}
 
-		//Rml::Controls::Initialise();
-	}
-	
+	context->SetBaseTag("html");
 	LoadFonts();
-	
-	if(DKClass::DKAvailable("DKSDLRml")){
-		if(!Rml::Debugger::Initialise(context)){
-			DKERROR("Rml::Debugger::Initialise(): failed\n");
-			return false;
-		}
-	}
 
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
@@ -67,8 +67,17 @@ bool DKRml::Init()
 	
 	DKClass::DKCreate("DKRmlJS");
 
-	//* Load the javascript DOM
+	Rml::Factory::RegisterElementInstancer("head", new Rml::ElementInstancerElement);
+	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
+	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
+	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
+
+	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
+	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
+
+
+	//* Load the javascript DOM	
 	//* Dom thats doesn't need a screen
 	DKClass::DKCreate("DKDomConsole");
 	DKClass::DKCreate("DKDomNavigator");
@@ -77,7 +86,7 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomScreen");
 	DKClass::DKCreate("DKDomWindow");
-	
+
 	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindow");
 	DKClass::DKCreate("DKDomLocation");
@@ -97,7 +106,7 @@ bool DKRml::Init()
 	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
-
+	
 	return true;
 }
 
@@ -176,7 +185,7 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	/*
 	DKINFO("\n");
-	DKINFO("####### CODE GOING INTO ROCKET ##########\n");
+	DKINFO("####### CODE GOING INTO RML ##########\n");
 	DKINFO(rml + "\n");
 	DKINFO("#########################################\n");
 	*/
@@ -187,18 +196,16 @@ bool DKRml::LoadHtml(const DKString& html)
 		document->Close();
 	}
 
-	//document = context->LoadDocumentFromMemory(rml.c_str());
+
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
-	
-	//document = context->LoadDocument(stream.get());
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
-	Rml::ElementPtr element = Rml::Factory::InstanceDocumentStream(context, stream.get());
-	if (!element){ return false; }
+	document = context->CreateDocument("html");
+	Rml::Element* ele = document;
+	Rml::XMLParser parser(ele);
+	parser.Parse(stream.get());
 
-	document = static_cast<Rml::ElementDocument*>(element.get());
-	document->GetContext()->GetRootElement()->AppendChild(std::move(element));
-	
+
 	//Make sure we have <head> and <body> tags
 	Rml::ElementList heads;
 	Rml::ElementList bodys;
@@ -259,12 +266,10 @@ bool DKRml::LoadHtml(const DKString& html)
 	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML();
 
 #ifdef DEBUG
-	/*
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
 	DKINFO("#################################################\n");
-	*/
 
 	//find the last <html occurance
 	int n = code.rfind("<html");
