@@ -71,7 +71,7 @@ Internet Explorer (9.0+) <br>
 [Png](https://github.com/coapp-packages/libpng) <br>
 [Pofodo](http://podofo.sourceforge.net) <br>
 [Pugixml](https://github.com/zeux/pugixml) <br>
-[Rocket](https://github.com/libRocket/libRocket) <br>
+[RmlUi](https://github.com/mikke89/RmlUi) <br>
 [RtMidi](https://github.com/thestk/rtmidi) <br>
 [SDL2](https://www.libsdl.org/) <br>
 [SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
