@@ -34,7 +34,10 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 
 	duk_context* ctx = DKDuktape::Get()->ctx;
 
-	//Allow DKDomEvent.js to dispatch events
+	//FIXME: calling jsreturn only works if a function name is passed in.
+	//Example:  document.onmousemove = function(e){} does not work since the function has no name
+	//For this reason we currently let DKDomEvent.js dispatch the events it receives.
+	//https://wiki.duktape.org/howtonativepersistentreferences
 	/*
 	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
 		DKERROR("DKDomEventTarget::OnEvent("+id+","+type+","+value+"): jsreturn invalid\n");
@@ -56,14 +59,11 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
 	
-	//DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
-	duk_eval_string(ctx, newEvent.c_str());
 	if(duk_peval_string(ctx, newEvent.c_str()) != 0){
 		DKDuktape::DumpError(newEvent);
 	}
 
 	duk_pop(ctx);  // pop result/error
-
 	return true;
 }
 
