@@ -7,13 +7,14 @@ var KeyboardEvent = function(pointer)
 	Object.defineProperty(this, "key", {
 		configurable: true,
 		get: function(){ 
-			return DKDomKeyboardEvent_key(this.pointer);
+			console.log("KeyboardEvent.key("+pointer+")");
+			return DKDomKeyboardEvent_key(pointer);
 		}
 	});
 
 	// Methods
 	Event.prototype.getModifierState = function(){
-		DKDomKeyboardEvent_getModifierState(this.pointer);
+		DKDomKeyboardEvent_getModifierState(pointer);
 	};
 	
 	return UIEvent.call(this, pointer);

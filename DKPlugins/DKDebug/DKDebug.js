@@ -25,8 +25,9 @@ function DKDebug_OnEvent(event)
 	
 	if(event.type == "keydown"){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		DKDebug_LogKey(event.value);
-		DKDebug_CheckKeys();
+		console.log("event.key = "+event.key);
+		//DKDebug_LogKey(event.key);
+		//DKDebug_CheckKeys();
 	}
 	
 	if(event.type == "keydown" && event.value == "123"){ //F12
@@ -43,6 +44,7 @@ function DKDebug_OnEvent(event)
 function DKDebug_LogKey(key)
 {
 	DKDEBUGFUNC(key);
+	console.log("DKDebug_LogKey("+key+")");
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = key;
 }

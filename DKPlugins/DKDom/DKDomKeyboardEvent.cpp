@@ -31,7 +31,7 @@ int DKDomKeyboardEvent::key(duk_context* ctx)
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomKeyboardEvent::altKey(): event invalid\n");
+		DKERROR("DKDomKeyboardEvent::key(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}

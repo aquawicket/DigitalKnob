@@ -7,7 +7,7 @@ var MouseEvent = function(pointer)
 	Object.defineProperty(this, "altKey", {
 		configurable: true,
 		get: function(){ 
-			return DKDomMouseEvent_altKey(this.pointer);
+			return DKDomMouseEvent_altKey(pointer);
 		}
 	});
 	Object.defineProperty(this, "button", {
@@ -20,7 +20,7 @@ var MouseEvent = function(pointer)
 
 	// Methods
 	Event.prototype.getModifierState = function(){
-		DKDomMouseEvent_getModifierState(this.pointer);
+		DKDomMouseEvent_getModifierState(pointer);
 	};
 	
 	return UIEvent.call(this, pointer);
