@@ -8,7 +8,7 @@ var KeyboardEvent = function(pointer)
 	Object.defineProperty(this, "key", {
 		configurable: true,
 		get: function(){ 
-			console.log("KeyboardEvent.key("+pointer+")");
+			//console.log("KeyboardEvent.key("+pointer+")");
 			return DKDomKeyboardEvent_key(pointer);
 		}
 	});

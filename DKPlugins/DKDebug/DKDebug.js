@@ -21,7 +21,7 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	console.warn("DKDebug_OnEvent("+event+","+event.id+","+event.type+","+event.value+")");
+	//console.warn("DKDebug_OnEvent("+event+","+event.id+","+event.type+","+event.value+")");
 	
 	if(event.type == "keydown"){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
@@ -55,7 +55,7 @@ function DKDebug_CheckKeys()
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
-		console.log(DKDebug_KeyToChar(key_history[i]));
+		//console.log(DKDebug_KeyToChar(key_history[i]));
 		string += DKDebug_KeyToChar(key_history[i]);
 	}
 	
