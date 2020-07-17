@@ -1,3 +1,4 @@
+console.log("test duktape console");
 DKCreate("DKWindow");
 DKCreate("DKRml");
 
