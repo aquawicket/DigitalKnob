@@ -54,7 +54,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
 			dkRml->context->ProcessMouseMove(event->motion.x, event->motion.y, SystemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
-			if(hover && (!has(hover->GetId(), "iframe_"))){ //.CString()
+			if(hover && (!has(hover->GetId(), "iframe_"))){
 				return true;
 			}
             break;
@@ -63,7 +63,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
             dkRml->context->ProcessMouseButtonDown(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
             //if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
-			if(hover && (!has(hover->GetId(), "iframe_"))){ //.CString()
+			if(hover && (!has(hover->GetId(), "iframe_"))){
 				return true;
 			}
 			break;
@@ -72,7 +72,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
             dkRml->context->ProcessMouseButtonUp(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
-			if(hover && (!has(hover->GetId(), "iframe_"))){ //.CString()
+			if(hover && (!has(hover->GetId(), "iframe_"))){
 				//return true;
 			}
 			break;
@@ -81,7 +81,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
             dkRml->context->ProcessMouseWheel(event->wheel.y * -1, SystemInterface->GetKeyModifiers());
             break;
 
-#ifndef ANDROID
+#ifdef ANDROID
         case SDL_KEYDOWN:
 			//DKINFO("DKSDLRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());

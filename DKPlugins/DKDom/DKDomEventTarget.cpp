@@ -55,6 +55,10 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")){
 		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
 	}
+	else if (same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
+	{
+		newEvent = "new KeyboardEvent(\"" + rmlEventAddress + "\")";
+	}
 	else{
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}

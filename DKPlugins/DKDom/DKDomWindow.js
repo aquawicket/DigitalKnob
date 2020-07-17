@@ -274,6 +274,7 @@ var Window = function(pointer)
 	Window.prototype.stop = function(){}
 	Window.prototype.updateCommands = function(){}
 
+	GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
 	return EventTarget.call(this, pointer);
 }
 

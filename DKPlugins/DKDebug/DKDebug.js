@@ -4,8 +4,10 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
-	DKAddEvent("window", "keypress", DKDebug_OnEvent);
-	DKAddEvent("window", "keydown", DKDebug_OnEvent);
+	//DKAddEvent("document", "keypress", DKDebug_OnEvent);
+	//DKAddEvent("document", "keydown", DKDebug_OnEvent);
+	
+	document.onkeydown = DKDebug_OnEvent;
 }
 
 //////////////////////
@@ -19,10 +21,10 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	//console.warn("DKDebug_OnEvent("+event.id+","+event.type+")");
+	console.warn("DKDebug_OnEvent("+event+","+event.id+","+event.type+","+event.value+")");
 	
-	if(DK_Type(event,"keypress")){
-		console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
+	if(event.type == "keydown"){
+		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
 		DKDebug_LogKey(event.value);
 		DKDebug_CheckKeys();
 	}

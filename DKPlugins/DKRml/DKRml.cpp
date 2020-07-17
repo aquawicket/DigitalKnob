@@ -99,6 +99,7 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKDomDocument");
 	DKClass::DKCreate("DKDomEvent");
 	DKClass::DKCreate("DKDomUIEvent");
+	DKClass::DKCreate("DKDomKeybaordEvent");
 	DKClass::DKCreate("DKDomMouseEvent");
 
 	DKString html;

@@ -1,3 +1,4 @@
+/*
 DKCreate("DK/DK.css", function(){
 DKCreate("DKFile/DKFile.js", function(){
 DKCreate("DKWidget/DKWidget.js", function(){
@@ -9,6 +10,7 @@ DKCreate("DKColorPicker/DKColorPicker.js", function(){
 });
 });
 });
+*/
 
 /*
 document.onmousemove = function(e){
@@ -20,5 +22,11 @@ document.onmousemove = function(e){
 document.onmousemove = gomousemove;
 function gomousemove(e){
 	console.log("gomousemove(e)");
+}
+*/
+
+/*
+document.onkeydown = function(e){
+	console.log("keydown");
 }
 */
