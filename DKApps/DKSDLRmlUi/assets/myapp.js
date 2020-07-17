@@ -1,3 +1,4 @@
+/*
 DKCreate("DK/DK.css", function(){
 DKCreate("DKFile/DKFile.js", function(){
 DKCreate("DKWidget/DKWidget.js", function(){
@@ -9,3 +10,19 @@ DKCreate("DKColorPicker/DKColorPicker.js", function(){
 });
 });
 });
+*/
+
+///////////////////////////////////
+console.log("document.onmousemove");
+document.onmousemove = function(e){
+	console.log("onmousemove");
+}
+
+//document.onmousemove;
+
+/*
+document.onmousemove = gomousemove;
+function gomousemove(e){
+	console.log("gomousemove(e) = "+e.currentTarget.tagName);
+}
+*/

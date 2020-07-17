@@ -224,26 +224,37 @@ bool DKDuktape::CallInit(const DKString& file)
 ///////////////////////////////////////////////
 bool DKDuktape::DumpError(const DKString& code)
 {
-	duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-	DKString name = duk_get_string(ctx, -1);
-	duk_pop(ctx);  // pop `err.name`
-	duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-	DKString message = duk_get_string(ctx, -1);
-	duk_pop(ctx);  // pop `err.message`
+	DKString name;
+	DKString message;
+	DKString fileName;
+	DKString lineNumber;
+	DKString stack;
+	if(duk_get_prop_string(ctx, -1, "name")){  // push `err.name`
+		name = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.name`
+	}
+	if(duk_get_prop_string(ctx, -1, "message")){  // push `err.message`
+		message = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.message`
+	}
 	message = name + ": " + message;
 	//TODO: if the filename is eval, can we show the code here?
-	duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-	DKString fileName = duk_get_string(ctx, -1);
-	//if(same(fileName, "eval")) {
-		//fileName = "EVAL:\n" + code;
-	//}
-	duk_pop(ctx);  // pop `err.fileName`
-	duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-	DKString lineNumber = toString(duk_get_int(ctx, -1));
-	duk_pop(ctx);  // pop `err.lineNumber`
-	duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-	DKString stack = duk_get_string(ctx, -1);
-	duk_pop(ctx);  // pop `err.stack`
+	if(duk_get_prop_string(ctx, -1, "fileName")){  // push `err.fileName`
+		//fileName = duk_get_string(ctx, -1);
+		fileName = duk_get_string_default(ctx, -1, "noFile");
+		//if(same(fileName, "eval")) {
+			//fileName = "EVAL:\n" + code;
+		//}
+		duk_pop(ctx);  // pop `err.fileName`
+	}
+	if(duk_get_prop_string(ctx, -1, "lineNumber")){  // push `err.lineNumber`
+		lineNumber = toString(duk_get_int(ctx, -1));
+		duk_pop(ctx);  // pop `err.lineNumber`
+	}
+	if(duk_get_prop_string(ctx, -1, "stack")){  // push `err.stack`
+		stack = duk_get_string(ctx, -1);
+		duk_pop(ctx);  // pop `err.stack`
+	}
 
 	DKString codeWithLineNumbers;
 	DKString lineString;

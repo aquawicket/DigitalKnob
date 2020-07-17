@@ -31,60 +31,33 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 	DKString value = event->GetValue();
 	DKString jsreturn = event->GetJSReturn();
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
-	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
-		DKERROR("DKDomEventTarget::OnEvent("+id+","+type+","+value+"): jsreturn invalid\n");
-		return false;
-	}
 
 	duk_context* ctx = DKDuktape::Get()->ctx;
-	duk_require_stack(ctx, 1);
-	duk_push_global_object(ctx);
-	duk_get_prop_string(ctx, -1, jsreturn.c_str());
+	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
+		DKERROR("DKDomEventTarget::OnEvent("+id+","+type+","+value+"): jsreturn invalid\n");
+		//return false;
+	}
+	else{
+		duk_require_stack(ctx, 1);
+		duk_push_global_object(ctx);
+		duk_get_prop_string(ctx, -1, jsreturn.c_str());
+	}
 
 	DKString rmlEventAddress = event->data[0];
 	DKString newEvent;
-	if(same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")){
+	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")){
 		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
 	}
 	else{
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
-	DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
-	duk_eval_string(ctx, newEvent.c_str());
 	
-	if(duk_pcall(ctx, 1) != 0){
-		duk_get_prop_string(ctx, -1, "name");  // push `err.name`
-		DKString name = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.name`
-		duk_get_prop_string(ctx, -1, "message");  // push `err.message`
-		DKString message = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.message`
-		message = name +": "+message;
-		duk_get_prop_string(ctx, -1, "fileName");  // push `err.fileName`
-		DKString fileName = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.fileName`
-		duk_get_prop_string(ctx, -1, "lineNumber");  // push `err.lineNumber`
-		DKString lineNumber = toString(duk_get_int(ctx, -1));
-		duk_pop(ctx);  // pop `err.lineNumber`
-		duk_get_prop_string(ctx, -1, "stack");  // push `err.stack`
-		DKString stack = duk_get_string(ctx, -1);
-		duk_pop(ctx);  // pop `err.stack`
-
-		DKERROR(message+"\n");
-
-		replace(stack,"'","\\'");
-		replace(stack,"\n","\\n");
-		replace(message,"'","\\'");
-
-		DKString str;
-		str += "var err_error = {stack:'"+stack+"'};";
-		str += "var err_event = {type:'error', message:'"+message+"', filename:'"+fileName+"', lineno:'"+lineNumber+"', colno:'0', error:err_error};";
-		str += "EventFromCPP('window', err_event);";
-		duk_eval_string(ctx, str.c_str());
+	DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
+	//duk_eval_string(ctx, newEvent.c_str());
+	if(duk_peval_file(ctx, newEvent.c_str()) != 0){
+		DKDuktape::DumpError(newEvent);
 	}
-	else{
-		//DKINFO(DKString(duk_safe_to_string(ctx, -1))+"\n"); //return value?
-	}
+
 	duk_pop(ctx);  // pop result/error
 
 	return true;

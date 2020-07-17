@@ -68,17 +68,11 @@ bool DKRml::Init()
 	
 	DKClass::DKCreate("DKRmlJS");
 
-	//TODO - We need to use XMLNodeHandlerHead while also makeing it accessable to the DOM
-	//This instancer does not compute <title>, <link> or <script> tags like XMLNodeHandlerHead does.
-	//And XMLNodeHandlerHead does not add the head code to the DOM. We need both
-	//Rml::Factory::RegisterElementInstancer("head", new Rml::ElementInstancerElement);
-	//Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<Rml::XMLNodeHandlerDefault>());
-
-	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
-	
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
-
+	
+	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
+	
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 
