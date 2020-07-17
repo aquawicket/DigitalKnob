@@ -33,6 +33,9 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 	//replace(jsreturn, "() { [ecmascript code] }", ""); //remove () { [ecmascript code] }
 
 	duk_context* ctx = DKDuktape::Get()->ctx;
+
+	//Allow DKDomEvent.js to dispatch events
+	/*
 	if(jsreturn.empty() || same(jsreturn,"0") || same(jsreturn,"undefined")){
 		DKERROR("DKDomEventTarget::OnEvent("+id+","+type+","+value+"): jsreturn invalid\n");
 		//return false;
@@ -42,6 +45,7 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 		duk_push_global_object(ctx);
 		duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	}
+	*/
 
 	DKString rmlEventAddress = event->data[0];
 	DKString newEvent;
@@ -52,9 +56,9 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
 	
-	DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
-	//duk_eval_string(ctx, newEvent.c_str());
-	if(duk_peval_file(ctx, newEvent.c_str()) != 0){
+	//DKINFO("DKDomEventTarget::OnEvent(): "+newEvent+"\n");
+	duk_eval_string(ctx, newEvent.c_str());
+	if(duk_peval_string(ctx, newEvent.c_str()) != 0){
 		DKDuktape::DumpError(newEvent);
 	}
 

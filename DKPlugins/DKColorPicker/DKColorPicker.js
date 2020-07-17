@@ -29,7 +29,7 @@ function DKColorPicker_End()
 function DKColorPicker_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
 	if(DK_Type(event, "GetColor")){
 		var params = DK_GetValue(event).split(",");

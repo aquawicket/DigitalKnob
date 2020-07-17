@@ -64,21 +64,26 @@ var EventTarget = function(pointer)
 	});
 	Object.defineProperty(this, "dispatchEvent", {
 		configurable: true,
-		value: function(event){ 
+		value: function(event){
+			//console.log("dispatchEvent("+event.currentTarget+")")
 			if(!(event.type in this.listeners)){
 				return true;
 			}
 			var stack = this.listeners[event.type].slice();
 			for(var i = 0, l = stack.length; i < l; i++){
+				/*
 				if(pointer == "window"){
 					event.currentTarget = window;
 				}
 				else{
 					event.currentTarget = new HTMLElement(pointer);
 				}
+				*/
 				
 				//event.currentTarget = this;
+				//console.log(i);
 				stack[i].call(this, event);
+				return;
 			}
 			return !event.defaultPrevented;
 		} 

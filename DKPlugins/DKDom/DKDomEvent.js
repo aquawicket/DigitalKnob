@@ -120,5 +120,7 @@ var Event = function(pointer)
 		DKDomEvent_preventCapture(pointer);
 	};
 	
-	return this;
+	//console.log("dispatching event");
+	this.currentTarget.dispatchEvent(this);
+	//return this;
 };

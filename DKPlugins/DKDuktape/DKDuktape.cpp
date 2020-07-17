@@ -230,29 +230,24 @@ bool DKDuktape::DumpError(const DKString& code)
 	DKString lineNumber;
 	DKString stack;
 	if(duk_get_prop_string(ctx, -1, "name")){  // push `err.name`
-		name = duk_get_string(ctx, -1);
+		name = duk_get_string_default(ctx, -1, "no name");
 		duk_pop(ctx);  // pop `err.name`
 	}
 	if(duk_get_prop_string(ctx, -1, "message")){  // push `err.message`
-		message = duk_get_string(ctx, -1);
+		message = duk_get_string_default(ctx, -1, "no message");
 		duk_pop(ctx);  // pop `err.message`
 	}
 	message = name + ": " + message;
-	//TODO: if the filename is eval, can we show the code here?
 	if(duk_get_prop_string(ctx, -1, "fileName")){  // push `err.fileName`
-		//fileName = duk_get_string(ctx, -1);
-		fileName = duk_get_string_default(ctx, -1, "noFile");
-		//if(same(fileName, "eval")) {
-			//fileName = "EVAL:\n" + code;
-		//}
+		fileName = duk_get_string_default(ctx, -1, "no file");
 		duk_pop(ctx);  // pop `err.fileName`
 	}
 	if(duk_get_prop_string(ctx, -1, "lineNumber")){  // push `err.lineNumber`
-		lineNumber = toString(duk_get_int(ctx, -1));
+		lineNumber = toString(duk_get_int_default(ctx, -1, 0));
 		duk_pop(ctx);  // pop `err.lineNumber`
 	}
 	if(duk_get_prop_string(ctx, -1, "stack")){  // push `err.stack`
-		stack = duk_get_string(ctx, -1);
+		stack = duk_get_string_default(ctx, -1, "no stack");
 		duk_pop(ctx);  // pop `err.stack`
 	}
 
