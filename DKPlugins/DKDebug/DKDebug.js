@@ -25,9 +25,9 @@ function DKDebug_OnEvent(event)
 	
 	if(event.type == "keydown"){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		console.log("event.key = "+event.key);
-		//DKDebug_LogKey(event.key);
-		//DKDebug_CheckKeys();
+		//console.log("event.key = "+event.key);
+		DKDebug_LogKey(event.key);
+		DKDebug_CheckKeys();
 	}
 	
 	if(event.type == "keydown" && event.value == "123"){ //F12
@@ -44,7 +44,6 @@ function DKDebug_OnEvent(event)
 function DKDebug_LogKey(key)
 {
 	DKDEBUGFUNC(key);
-	console.log("DKDebug_LogKey("+key+")");
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = key;
 }
@@ -56,6 +55,7 @@ function DKDebug_CheckKeys()
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
+		console.log(DKDebug_KeyToChar(key_history[i]));
 		string += DKDebug_KeyToChar(key_history[i]);
 	}
 	
@@ -75,6 +75,35 @@ function DKDebug_CheckKeys()
 function DKDebug_KeyToChar(key)
 {
 	DKDEBUGFUNC(key);
+	
+	if(key == 65){ return "a"};
+	if(key == 66){ return "b"};
+	if(key == 67){ return "c"};
+	if(key == 68){ return "d"};
+	if(key == 69){ return "e"};
+	if(key == 70){ return "f"};
+	if(key == 71){ return "g"};
+	if(key == 72){ return "h"};
+	if(key == 73){ return "i"};
+	if(key == 74){ return "j"};
+	if(key == 75){ return "k"};
+	if(key == 76){ return "l"};
+	if(key == 77){ return "m"};
+	if(key == 78){ return "n"};
+	if(key == 79){ return "o"};
+	if(key == 80){ return "p"};
+	if(key == 81){ return "q"};
+	if(key == 82){ return "r"};
+	if(key == 83){ return "s"};
+	if(key == 84){ return "t"};
+	if(key == 85){ return "u"};
+	if(key == 86){ return "v"};
+	if(key == 87){ return "w"};
+	if(key == 88){ return "x"};
+	if(key == 89){ return "y"};
+	if(key == 90){ return "z"};
+	
+	/*
 	if(key == 97){ return "a"};
 	if(key == 98){ return "b"};
 	if(key == 99){ return "c"};
@@ -101,6 +130,8 @@ function DKDebug_KeyToChar(key)
 	if(key == 120){ return "x"};
 	if(key == 121){ return "y"};
 	if(key == 122){ return "z"};
+	*/
+	
 	return " ";
 }
 

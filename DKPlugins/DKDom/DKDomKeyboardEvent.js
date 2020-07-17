@@ -4,6 +4,7 @@
 var KeyboardEvent = function(pointer)
 {
 	// Properties
+	// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 	Object.defineProperty(this, "key", {
 		configurable: true,
 		get: function(){ 

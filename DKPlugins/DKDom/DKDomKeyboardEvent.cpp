@@ -35,7 +35,16 @@ int DKDomKeyboardEvent::key(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	int key = event->GetParameter<int>("key", 0);
+
+	//TEST: list event parameters
+	/*
+	Rml::Dictionary dictionary = event->GetParameters();
+	for (int i = 0; i < dictionary.size(); ++i) {
+		//dictionary  //TODO
+	}
+	*/
+
+	int key = event->GetParameter<int>("key_identifier", 0);
 	duk_push_int(ctx, key);
 	return true;
 }
