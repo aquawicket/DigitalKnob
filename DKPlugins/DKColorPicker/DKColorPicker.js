@@ -20,9 +20,11 @@ function DKColorPicker_Init()
 function DKColorPicker_End()
 {
 	DKDEBUGFUNC();	
-	DKRemoveEvents(DKColorPicker_OnEvent);
-	DKClose("DKColorPicker/DKColorPicker.html");
-	DKClose("DKColorPicker/DKColorPicker.css");
+	
+	//FIXME - Crash
+	//DKRemoveEvents(DKColorPicker_OnEvent);
+	//DKClose("DKColorPicker/DKColorPicker.html");
+	//DKClose("DKColorPicker/DKColorPicker.css");
 }
 
 /////////////////////////////////////

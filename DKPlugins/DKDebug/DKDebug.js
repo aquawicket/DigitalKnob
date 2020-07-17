@@ -22,7 +22,7 @@ function DKDebug_OnEvent(event)
 	//console.warn("DKDebug_OnEvent("+event.id+","+event.type+")");
 	
 	if(DK_Type(event,"keypress")){
-		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
+		console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
 		DKDebug_LogKey(event.value);
 		DKDebug_CheckKeys();
 	}

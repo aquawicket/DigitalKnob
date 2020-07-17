@@ -71,7 +71,8 @@ int DKDomDocument::getElementById(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-	Rml::Element* element = DKRml::Get()->document->GetElementById(id.c_str());
+
+	Rml::Element* element = DKRml::Get()->document->GetElementById(id.c_str()); //FIXME - Crash: invalid DKRml
 	if(!element){
 		//DKERROR("DKDomDocument::getElementById(): element invalid\n");
 		duk_push_null(ctx);
