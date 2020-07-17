@@ -60,15 +60,42 @@ function DKDebug_CheckKeys()
 	}
 	
 	//check for commands
-	if(string.indexOf("dkrefresh") != -1){ DKDebug_Refresh(); key_history = []; }
-	if(string.indexOf("dkpush") != -1){ DKDebug_PushDKFiles(); key_history = []; }
-	if(string.indexOf("dkclear") != -1){ DKDebug_ClearConsole(); key_history = []; }
-	if(string.indexOf("dkinfo") != -1){ DKDebug_PrintInfo(); key_history = []; }
-	if(string.indexOf("dkconsole") != -1){ DKDebug_ShowConsole(); key_history = []; }
-	if(string.indexOf("dksource") != -1){ DKDebug_GetSource(); key_history = []; }
-	if(string.indexOf("dkcrash") != -1){ DKDebug_Crash(); key_history = []; }	
-	if(string.indexOf("dkeditor") != -1){ DKDebug_Editor(); key_history = []; }
-	if(string.indexOf("dkdebug") != -1){ DKDebug_Debugger(); key_history = []; }
+	if(string.indexOf("dkrefresh") != -1){ 
+		console.log("*** DKDebug_Refresh() ***");
+		DKDebug_Refresh(); key_history = []; 
+	}
+	if(string.indexOf("dkpush") != -1){ 
+		console.log("*** DKDebug_PushDKFiles() ***");
+		DKDebug_PushDKFiles(); key_history = []; 
+	}
+	if(string.indexOf("dkclear") != -1){
+		console.log("*** DKDebug_ClearConsole() ***");
+		DKDebug_ClearConsole(); key_history = []; 
+	}
+	if(string.indexOf("dkinfo") != -1){ 
+		console.log("*** DKDebug_PrintInfo() ***");
+		DKDebug_PrintInfo(); key_history = []; 
+	}
+	if(string.indexOf("dkconsole") != -1){
+		console.log("*** DKDebug_ShoeConsole() ***");
+		DKDebug_ShowConsole(); key_history = []; 
+	}
+	if(string.indexOf("dksource") != -1){
+		console.log("*** DKDebug_GetSource() ***");
+		DKDebug_GetSource(); key_history = []; 
+	}
+	if(string.indexOf("dkcrash") != -1){ 
+		console.log("*** DKDebug_Crash() ***");
+		DKDebug_Crash(); key_history = []; 
+	}	
+	if(string.indexOf("dkeditor") != -1){
+		console.log("*** DKDebug_Editor() ***");
+		DKDebug_Editor(); key_history = []; 
+	}
+	if(string.indexOf("dkdebug") != -1){ 
+		console.log("*** DKDebug_Debugger() ***");
+		DKDebug_Debugger(); key_history = []; 
+	}
 }
 
 ///////////////////////////////
