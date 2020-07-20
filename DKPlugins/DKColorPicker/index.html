@@ -7,6 +7,18 @@
 	</head>
 	<body>
 		<script type="text/javascript" id="DK/DK.js" src="DK/DK.js"></script>
-		<script type="text/javascript" id="myapp.js" src="myapp.js"></script>
+		<script>
+		DKCreate("DK/DK.css", function(){
+		DKCreate("DKFile/DKFile.js", function(){
+		DKCreate("DKWidget/DKWidget.js", function(){
+		DKCreate("DKGui/DKFrame.js", function(){
+		DKCreate("DKColorPicker/DKColorPicker.js", function(){
+		DKFrame_Widget("DKColorPicker/DKColorPicker.html");
+		});
+		});
+		});
+		});
+		});
+		</script>
 	</body>
 </html>
