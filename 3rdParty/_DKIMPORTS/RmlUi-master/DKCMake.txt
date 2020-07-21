@@ -8,11 +8,10 @@ DKDEPEND(freetype-2.5.5)
 ##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
 ##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
 
-##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
-##DKINSTALL(https://github.com/aquawicket/RmlUi/archive/master.zip RmlUi-master)
-##DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)
-DKINSTALL(https://github.com/aquawicket/RmlUi/archive/documents_base_tag.zip RmlUi-master)
-DKRENAME(${DKDOWNLOAD}/documents_base_tag.zip ${DKDOWNLOAD}/RmlUi-master.zip)
+DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi-master)
+DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)
+##DKINSTALL(https://github.com/aquawicket/RmlUi/archive/documents_base_tag.zip RmlUi-master)
+##DKRENAME(${DKDOWNLOAD}/documents_base_tag.zip ${DKDOWNLOAD}/RmlUi-master.zip)
 
 
 ## DKINSTALL(${DKWEB}/Download/RmlUi-master.zip RmlUi-master)

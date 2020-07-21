@@ -85,7 +85,6 @@ bool DKRml::Init()
 	DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
 	DKClass::DKCreate("DKDomXMLHttpRequest");
 	DKClass::DKCreate("DKDomScreen");
-	DKClass::DKCreate("DKDomWindow");
 
 	//* Dom that needs a screen
 	DKClass::DKCreate("DKDomWindow");
