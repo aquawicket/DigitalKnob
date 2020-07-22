@@ -15,6 +15,7 @@ public:
 	bool Init();
 
 	static int focus(duk_context* ctx);
+	static int offsetTop(duk_context* ctx);
 };
 
 

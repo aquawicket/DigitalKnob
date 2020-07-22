@@ -9,6 +9,7 @@ bool DKDomHTMLElement::Init()
 {
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDomHTMLElement_focus", DKDomHTMLElement::focus);
+	DKDuktape::AttachFunction("DKDomHTMLElement_offsetTop", DKDomHTMLElement::offsetTop);
 
 	DKClass::DKCreate("DKDom/DKDomHTMLElement.js");
 	return true;
@@ -31,5 +32,21 @@ int DKDomHTMLElement::focus(duk_context* ctx)
 		return true;
 	}
 	duk_push_boolean(ctx, true);
+	return true;
+}
+
+/////////////////////////////////////////////////
+int DKDomHTMLElement::offsetTop(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomElement::offsetTop(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	float offsetTop = element->GetOffsetTop();
+	duk_push_number(ctx, offsetTop);
 	return true;
 }
