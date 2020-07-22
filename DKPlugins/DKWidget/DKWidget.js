@@ -415,6 +415,7 @@ function DKWidget_GetProperty(variable, parameter)
 	return false;
 }
 
+/*
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
@@ -461,6 +462,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 	DKERROR("ERROR: SetProperty(): unknown type\n");
 	return false;
 }
+*/
 
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
