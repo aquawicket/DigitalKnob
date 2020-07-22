@@ -63,6 +63,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_Crash", DKDuktapeJS::Crash);
 	DKDuktape::AttachFunction("DK_DoFrame", DKDuktapeJS::DoFrame);
 	DKDuktape::AttachFunction("DK_DoubleClick", DKDuktapeJS::DoubleClick);
+	DKDuktape::AttachFunction("DK_DumpError", DKDuktapeJS::DumpError);
 	DKDuktape::AttachFunction("DK_Execute", DKDuktapeJS::Execute);
 	DKDuktape::AttachFunction("DK_Exit", DKDuktapeJS::Exit);
 	DKDuktape::AttachFunction("DK_GetArgs", DKDuktapeJS::GetArgs);
@@ -449,10 +450,18 @@ int DKDuktapeJS::DoFrame(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////
+//////////////////////////////////////////////
 int DKDuktapeJS::DoubleClick(duk_context* ctx)
 {
 	if(!DKUtil::DoubleClick()){ return 0; }
+	return 1;
+}
+
+
+////////////////////////////////////////////
+int DKDuktapeJS::DumpError(duk_context* ctx)
+{
+	if(!DKDuktape::DumpError("")){ return 0; }
 	return 1;
 }
 

@@ -418,6 +418,10 @@ function DKWidget_GetProperty(variable, parameter)
 /////////////////////////////////////////////////////////
 function DKWidget_SetProperty(variable, parameter, value)
 {
+	console.error("Replace DKWidget_SetProperty with document.getElementsById().style.property");
+	//DK_DumpError();
+	
+	
 	DKDEBUGFUNC(variable, parameter, value);
 	//console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
 	if(!variable){ //FIXME: who called you?
