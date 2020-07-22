@@ -45,8 +45,12 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
 	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
+	
+	//FIXME: we have three different js function pointing to _DKCreate
+	DKDuktape::AttachFunction("DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
 	DKDuktape::AttachFunction("DKCreate_CPP", DKDuktapeJS::_DKCreate);
 	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
+	
 	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
 	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
 	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
