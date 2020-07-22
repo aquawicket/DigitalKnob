@@ -34,7 +34,6 @@ var EventTarget = function(pointer)
 	//EventTarget.prototype.listeners = null;
 
 	Object.defineProperty(this, "addEventListener", {
-		configurable: true,
 		value: function(type, callback, useCapture){ 
 			if(stored_events.indexOf(this) < 0){
 				stored_events.push(this);
@@ -47,7 +46,6 @@ var EventTarget = function(pointer)
 		} 
 	});
 	Object.defineProperty(this, "removeEventListener", {
-		configurable: true,
 		value: function(type, callback, useCapture){ 
 			DKDomEventTarget_removeEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
@@ -63,7 +61,6 @@ var EventTarget = function(pointer)
 		} 
 	});
 	Object.defineProperty(this, "dispatchEvent", {
-		configurable: true,
 		value: function(event){
 			//console.log("dispatchEvent("+event.currentTarget+")")
 			if(!(event.type in this.listeners)){

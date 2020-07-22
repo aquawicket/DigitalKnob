@@ -5,57 +5,45 @@ var Event = function(pointer)
 {
 	//Properties
 	Object.defineProperty(this, "bubbles", { //Read Only
-		configurable: true,
 		get: function(){ return DKDomEvent_bubbles(pointer); } 
 	});
 	Object.defineProperty(this, "cancelBubble", {
-		configurable: true,
 		set: function(flag){ 
 			return DKDomEvent_cancelBubble(pointer, flag);
 		}
 	});
 	Object.defineProperty(this, "cancelable", {
-		configurable: true,
 		get: function(){ return DKDomEvent_cancelable(pointer); }
 	}); //Read Only
-	Object.defineProperty(this, "composed", { 
-		configurable: true,
+	Object.defineProperty(this, "composed", {
 		get: function(){ return DKDomEvent_composed(pointer); }
 	}); //Read Only
-	Object.defineProperty(this, "currentTarget", { 
-		configurable: true,
+	Object.defineProperty(this, "currentTarget", {
 		get: function(){ 
 			var elementPointer = DKDomEvent_currentTarget(pointer);
 			if(!elementPointer){ return; }
 			return new HTMLElement(elementPointer);
 		} 
 	}); //Read Only
-	Object.defineProperty(this, "deepPath", { 
-		configurable: true,
+	Object.defineProperty(this, "deepPath", {
 		get: function(){ return DKDomEvent_deepPath(pointer); } 
 	}); //Not standardized
-	Object.defineProperty(this, "defaultPrevented", { 
-		configurable: true,
+	Object.defineProperty(this, "defaultPrevented", {
 		get: function(){ return DKDomEvent_defaultPrevented(pointer); } 
 	}); //Read Only
-	Object.defineProperty(this, "eventPhase", { 
-		configurable: true,
+	Object.defineProperty(this, "eventPhase", {
 		get: function(){ return DKDomEvent_eventPhase(pointer); } 
 	}); //Read Only
-	Object.defineProperty(this, "explicitOriginalTarget", { 
-		configurable: true,
+	Object.defineProperty(this, "explicitOriginalTarget", {
 		get: function(){ return DKDomEvent_explicitOriginalTarget(pointer); } 
 	}); //Not standardized, Read Only
-	Object.defineProperty(this, "originalTarget", { 
-		configurable: true,
+	Object.defineProperty(this, "originalTarget", {
 		get: function(){ return DKDomEvent_originalTarget(pointer); } 
 	}); //Not standardized, Read only
-	Object.defineProperty(this, "returnValue", { 
-		configurable: true,
+	Object.defineProperty(this, "returnValue", {
 		get: function(){ return DKDomEvent_returnValue(pointer); } 
 	});
 	Object.defineProperty(this, "srcElement", { //Not standardized
-		configurable: true,
 		get: function(){ 
 			var elementPointer = DKDomEvent_srcElement(pointer);
 			if(!elementPointer){ return; }
@@ -63,31 +51,27 @@ var Event = function(pointer)
 		} 
 	}); //Read Only
 	Object.defineProperty(this, "target", { //Read Only
-		configurable: true,
 		get: function(){ 
 			var elementPointer = DKDomEvent_target(pointer);
 			if(!elementPointer){ return; }
 			return new HTMLElement(elementPointer);
 		} 
 	}); //Read Only
-	Object.defineProperty(this, "timeStamp", { 
-		configurable: true,
+	Object.defineProperty(this, "timeStamp", {
 		get: function(){ return DKDomEvent_timeStamp(pointer); } 
 	}); //Read Only
-	Object.defineProperty(this, "type", { 
-		configurable: true,
+	Object.defineProperty(this, "type", {
 		get: function(){ return DKDomEvent_type(pointer); } 
 	}); //Read Only
-	Object.defineProperty(this, "isTrusted", { 
-		configurable: true,
+	Object.defineProperty(this, "isTrusted", {
 		get: function(){ return DKDomEvent_isTrusted(pointer); } 
 	}); //Read Only
 	
 	//Obsolete properties
-	Object.defineProperty(this, "scoped", { 
-		configurable: true,
+	Object.defineProperty(this, "scoped", {
 		get: function(){ return DKDomEvent_scoped(pointer); } 
 	}); //Read Only, Obsolete
+	
 	
 	//Methods
 	Event.prototype.createEvent = function(){ //Deprecated

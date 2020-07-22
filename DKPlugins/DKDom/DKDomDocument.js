@@ -5,7 +5,6 @@ var Document = function(pointer)
 {
 	// Properties
 	Object.defineProperty(this, "body", {
-		configurable: true,
 		get: function(){
 			console.log("Document.body");
 			var address = DKDomDocument_body();
@@ -18,7 +17,6 @@ var Document = function(pointer)
 		} 
 	});
 	Object.defineProperty(this, "documentElement", {
-		configurable: true,
 		get: function(){ 
 			var address = DKDomDocument_documentElement();
 			if(!address){ return; }

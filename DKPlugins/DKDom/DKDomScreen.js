@@ -5,55 +5,42 @@ var Screen = function(pointer)
 {
 	//DKDEBUGFUNC();
 	Object.defineProperty(this, "availTop", { 
-		configurable: true,
 		get: function(){ return DKDomScreen_availTop(this.pointer); } 
 	});
-	Object.defineProperty(this, "availLeft", { 
-		configurable: true,
+	Object.defineProperty(this, "availLeft", {
 		get: function(){ return DKDomScreen_availLeft(this.pointer); } 
 	});
-	Object.defineProperty(this, "availHeight", { 
-		configurable: true,
+	Object.defineProperty(this, "availHeight", {
 		get: function(){ return DKDomScreen_availHeight(this.pointer); } 
 	});
-	Object.defineProperty(this, "availWidth", { 
-		configurable: true,
+	Object.defineProperty(this, "availWidth", {
 		get: function(){ return DKDomScreen_availWidth(this.pointer); } 
 	});
-	Object.defineProperty(this, "colorDepth", { 
-		configurable: true,
+	Object.defineProperty(this, "colorDepth", {
 		get: function(){ return DKDomScreen_colorDepth(this.pointer); } 
 	});
 	Object.defineProperty(this, "height", { 
-		configurable: true,
 		get: function(){ return DKDomScreen_height(this.pointer); } 
 	});
-	Object.defineProperty(this, "left", { 
-		configurable: true,
+	Object.defineProperty(this, "left", {
 		get: function(){ return DKDomScreen_left(this.pointer); } 
 	});
-	Object.defineProperty(this, "orientation", { 
-		configurable: true,
+	Object.defineProperty(this, "orientation", {
 		get: function(){ return DKDomScreen_orientation(this.pointer); } 
 	});
-	Object.defineProperty(this, "pixelDepth", { 
-		configurable: true,
+	Object.defineProperty(this, "pixelDepth", {
 		get: function(){ return DKDomScreen_pixelDepth(this.pointer); } 
 	});
-	Object.defineProperty(this, "top", { 
-		configurable: true,
+	Object.defineProperty(this, "top", {
 		get: function(){ return DKDomScreen_top(this.pointer); } 
 	});
-	Object.defineProperty(this, "width", { 
-		configurable: true,
+	Object.defineProperty(this, "width", {
 		get: function(){ return DKDomScreen_width(this.pointer); } 
 	});
-	Object.defineProperty(this, "mozEnabled", { 
-		configurable: true,
+	Object.defineProperty(this, "mozEnabled", {
 		get: function(){ return DKDomScreen_mozEnabled(this.pointer); } 
 	});
-	Object.defineProperty(this, "mozBrightness", { 
-		configurable: true,
+	Object.defineProperty(this, "mozBrightness", {
 		get: function(){ return DKDomScreen_mozBrightness(this.pointer); } 
 	});
 	

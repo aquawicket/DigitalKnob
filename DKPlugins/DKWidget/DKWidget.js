@@ -1024,7 +1024,7 @@ function DKWidget_SetFocus(id)
 	console.log("DKWidget_SetFocus("+id+")");
 	var element = document.getElementById(id);
 	console.log("DKWidget_SetFocus("+id+"): element = "+element);
-	element.focus;
+	element.focus();
 }
 
 

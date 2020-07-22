@@ -7,14 +7,12 @@ var CSSStyleDeclaration = function(pointer)
 	
 	// Methods
 	Object.defineProperty(this, "getPropertyValue", {
-		configurable: true,
 		value: function(propertyName){ 
 			this[propertyName] = DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 			return this[propertyName];
 		} 
 	});
 	Object.defineProperty(this, "setProperty", {
-		configurable: true,
 		value: function(propertyName, propertyValue, priority){ 
 			console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
 			DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);

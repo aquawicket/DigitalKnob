@@ -5,140 +5,108 @@ var Element = function(pointer)
 {
 	// Properties
 	Object.defineProperty(this, "attributes", {
-		configurable: true,
 		get: function(){ return DKDomElement_attributes(pointer); }
 	});
-	Object.defineProperty(this, "classList", { 
-		configurable: true,
+	Object.defineProperty(this, "classList", {
 		get: function(){ return DKDomElement_classList(pointer); }
 	});
 	Object.defineProperty(this, "className", {
-		configurable: true,
 		get: function()   { return DKDomElement_className(pointer);      },
 		set: function(val){ return DKDomElement_className(pointer, val); }
 	});
-	Object.defineProperty(this, "clientHeight", { 
-		configurable: true,
+	Object.defineProperty(this, "clientHeight", {
 		get: function(){ return DKDomElement_clientHeight(pointer); }
 	});
-	Object.defineProperty(this, "clientLeft", { 
-		configurable: true,
+	Object.defineProperty(this, "clientLeft", {
 		get: function(){ return DKDomElement_clientLeft(pointer); }
 	});
-	Object.defineProperty(this, "clientTop", { 
-		configurable: true,
+	Object.defineProperty(this, "clientTop", {
 		get: function(){ return DKDomElement_clientTop(pointer); }
 	});
-	Object.defineProperty(this, "clientWidth", { 
-		configurable: true,
+	Object.defineProperty(this, "clientWidth", {
 		get: function(){ return DKDomElement_clientWidth(pointer); }
 	});
-	Object.defineProperty(this, "computedName", { 
-		configurable: true,
+	Object.defineProperty(this, "computedName", {
 		get: function(){ return DKDomElement_computedName(pointer); } 
 	});
-	Object.defineProperty(this, "computedRole", { 
-		configurable: true,
+	Object.defineProperty(this, "computedRole", {
 		get: function(){ return DKDomElement_computedRole(pointer); }
 	});
-	Object.defineProperty(this, "id", { 
-		configurable: true,
+	Object.defineProperty(this, "id", {
 		get: function()   { return DKDomElement_getAttribute(pointer, "id"); },
 		set: function(val){ return DKDomElement_setAttribute(pointer, "id", val); }
 	});
 	Object.defineProperty(this, "innerHTML", {
-		configurable: true,
 		get: function(){ return DKDomElement_innerHTML(pointer); },
 		set: function(val){ return DKDomElement_innerHTML(pointer, val); }
 	});
-	Object.defineProperty(this, "localName", { 
-		configurable: true,
+	Object.defineProperty(this, "localName", {
 		get: function(){ return DKDomElement_localName(pointer); }
 	});
 	Object.defineProperty(this, "namespaceURI", {
-		configurable: true,
 		get: function(){ return DKDomElement_namespaceURI(pointer); } 
 	});
-	Object.defineProperty(this, "nextElementSibling", { 
-		configurable: true,
+	Object.defineProperty(this, "nextElementSibling", {
 		get: function(){ return DKDomElement_nextElementSibling(pointer); }
 	});
 	Object.defineProperty(this, "outerHTML", {
-		configurable: true,
 		get: function(){ return DKDomElement_outerHTML(pointer); },
 		set: function(val){ return DKDomElement_outerHTML(pointer, val); }
 	});
-	Object.defineProperty(this, "prefix", { 
-		configurable: true,
+	Object.defineProperty(this, "prefix", {
 		get: function(){ return DKDomElement_prefix(pointer); } 
 	});
 	Object.defineProperty(this, "previousElementSibling", {
-		configurable: true,
 		get: function(){ return DKDomElement_previousElementSibling(pointer); }
 	});
-	Object.defineProperty(this, "scrollHeight", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollHeight", {
 		get: function(){ return DKDomElement_scrollHeight(pointer); } 
 	});
-	Object.defineProperty(this, "scrollLeft", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollLeft", {
 		get: function(){ return DKDomElement_scrollLeft(pointer); },
 		set: function(val){ return DKDomElement_scrollLeft(pointer, val); }
 	});
-	Object.defineProperty(this, "scrollLeftMax", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollLeftMax", {
 		get: function(){ return DKDomElement_scrollLeftMax(pointer); } 
 	});
-	Object.defineProperty(this, "scrollTop", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollTop", {
 		get: function(){ return DKDomElement_scrollTop(pointer); },
 		set: function(val){ return DKDomElement_scrollTop(pointer, val); }
 	});
-	Object.defineProperty(this, "scrollTopMax", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollTopMax", {
 		get: function(){ return DKDomElement_scrollTopMax(pointer); } 
 	});
-	Object.defineProperty(this, "scrollWidth", { 
-		configurable: true,
+	Object.defineProperty(this, "scrollWidth", {
 		get: function(){ return DKDomElement_scrollWidth(pointer); }
 	});
-	Object.defineProperty(this, "shadowRoot", { 
-		configurable: true,
+	Object.defineProperty(this, "shadowRoot", {
 		get: function(){ return DKDomElement_shadowRoot(pointer); }
 	});
-	Object.defineProperty(this, "openOrClosedShadowRoot", { 
-		configurable: true,
+	Object.defineProperty(this, "openOrClosedShadowRoot", {
 		get: function(){ return DKDomElement_openOrClosedShadowRoot(pointer); }
 	});
 	Object.defineProperty(this, "slot", {
-		configurable: true,
 		get: function(){ return DKDomElement_slot(pointer); },
 		set: function(val){ return DKDomElement_slot(pointer, val); }
 	});
-	Object.defineProperty(this, "tabStop", { 
-		configurable: true,
+	Object.defineProperty(this, "tabStop", {
 		get: function(){ return DKDomElement_tabStop(pointer); },
 		set: function(val){ return DKDomElement_tabStop(pointer, val); }
 	});
-	Object.defineProperty(this, "tagName", { 
-		configurable: true,
+	Object.defineProperty(this, "tagName", {
 		get: function(){ return DKDomElement_tagName(pointer); } 
 	});
 	Object.defineProperty(this, "undoManager", {
-		configurable: true,
 		get: function(){ return DKDomElement_undoManager(pointer); }
 	});
-	Object.defineProperty(this, "undoScope", { 
-		configurable: true,
+	Object.defineProperty(this, "undoScope", {
 		get: function(){ return DKDomElement_undoScope (pointer); }
 	});
 	Object.defineProperty(this, "onfullscreenchange", {
-		configurable: true,
 		get: function(){ return this.fullscreenchange; },
 		set: function(func){ this.addEventListener("fullscreenchange", func); this.fullscreenchange = func }
 	});
 	Object.defineProperty(this, "onfullscreenerror", {
-		configurable: true,
 		get: function(){ return this.fullscreenerror; },
 		set: function(func){ this.addEventListener("fullscreenerror", func); this.fullscreenerror = func }
 	});
