@@ -314,6 +314,11 @@ int DKDomEvent::type(duk_context* ctx)
 		DKERROR("DKDomEvent::type(): event type invalid\n");
 		return true; 
 	}
+
+	if(same(type, "mouseup") && event->GetParameter<int>("button", 0) == 1){
+		type = "contextmenu";
+	}
+
 	duk_push_string(ctx, type.c_str());
 	return true;
 }
