@@ -452,7 +452,7 @@ function LoadJs(url, callback)
 	var done = false;
 	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
 		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
-			DKINFO("Loaded: "+url+"\n");
+			//DKINFO("Loaded: "+url+"\n");
 			var func = window[init]; //Plugin_Init()    
 			if(typeof func == 'function'){ 
 				//DKINFO("Calling: "+init+"\n");
@@ -476,7 +476,7 @@ function LoadJs(url, callback)
 		DKINFO("Loaded: "+url+"\n");
 		var func = init; //Plugin_Init() 
 		if(eval("typeof "+func) === "function"){
-			DKINFO("Calling: "+init+"\n");
+			//DKINFO("Calling: "+init+"\n");
 			eval(func)(); //Init
 		}
 		else{
@@ -492,7 +492,7 @@ function LoadJs(url, callback)
 function LoadHtml(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	DKWARN("DK.js:LoadHtml("+url+","+parent+")");
+	//DKWARN("DK.js:LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
 		DKERROR("DK.js:LoadJs("+url+"): url invalid\n");
