@@ -160,7 +160,8 @@ var HTMLElement = function(pointer)
 		console.log("HTMLElement.click(): TODO");
 	}
 	HTMLElement.prototype.focus = function(){
-		console.log("HTMLElement.focus(): TODO");
+		console.log("HTMLElement.focus()");
+		DKDomHTMLElement_focus(this.pointer);
 	}
 	HTMLElement.prototype.forceSpellCheck = function(){
 		console.log("HTMLElement.forceSpellCheck(): TODO");
