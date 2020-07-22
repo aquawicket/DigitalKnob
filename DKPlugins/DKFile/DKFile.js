@@ -2,15 +2,15 @@ var appfilename;
 var local_assets;
 var online_assets;
 
-if(DK_GetBrowser() != "CEF"){
-	function DKFile_ChDir(){ console.warn("DKFile_ChDir(): not available for "+DK_GetBrowser()); }
-	function DKFile_CopyFolder(src,dst,overwrite,recursive){ console.warn("DKFile_CopyDirectory(): not available for "+DK_GetBrowser()); }
-	function DKFile_GetExeName(){ console.warn("DKFile_GetExeName(): not available for "+DK_GetBrowser()); }
-	function DKFile_GetFullExeName(){ console.warn("DKFile_GetFullExeName(): not available for "+DK_GetBrowser()); }
-	function DKFile_GetModifiedTime(){ console.warn("DKFile_GetModifiedTime(): not available for "+DK_GetBrowser()); }
-	function DKFile_GetShortName(){ console.warn("DKFile_GetShortName(): not available for "+DK_GetBrowser()); }
-	function DKFile_MkDir(){ console.warn("DKFile_MkDir(): not available for "+DK_GetBrowser()); }
-	function DKFile_GetDrives(){ console.warn("DKFile_GetDrives(): not available for "+DK_GetBrowser()); }
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	var DKFile_ChDir = function(){ console.warn("DKFile_ChDir(): not available for "+DK_GetBrowser()); }
+	var DKFile_CopyFolder = function(src,dst,overwrite,recursive){ console.warn("DKFile_CopyDirectory(): not available for "+DK_GetBrowser()); }
+	var DKFile_GetExeName = function(){ console.warn("DKFile_GetExeName(): not available for "+DK_GetBrowser()); }
+	var DKFile_GetFullExeName = function(){ console.warn("DKFile_GetFullExeName(): not available for "+DK_GetBrowser()); }
+	var DKFile_GetModifiedTime = function(){ console.warn("DKFile_GetModifiedTime(): not available for "+DK_GetBrowser()); }
+	var DKFile_GetShortName = function(){ console.warn("DKFile_GetShortName(): not available for "+DK_GetBrowser()); }
+	var DKFile_MkDir = function(){ console.warn("DKFile_MkDir(): not available for "+DK_GetBrowser()); }
+	var DKFile_GetDrives = function(){ console.warn("DKFile_GetDrives(): not available for "+DK_GetBrowser()); }
 }
 
 //////////////////////
@@ -76,9 +76,9 @@ function UrlExists(url, fn)
 	//return;// true;
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////
-	function DKFile_Exists(path, fn)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	//////////////////////////////////////
+	var DKFile_Exists = function(path, fn)
 	{
 		DKDEBUGFUNC(path, fn);
 		if(!path){ return false; }
@@ -101,6 +101,7 @@ function DKFile_VerifyPath(path)
 {
 	DKDEBUGFUNC(path);	
 	//FIXME
+	console.log("DKFile_VerifyPath("+path+"): FIXME");
 	return true;
 	
 	if(!path){ return false; }
@@ -169,9 +170,9 @@ function DKFile_SaveFile(path, data)
 	return true;
 }
 
-if(DK_GetBrowser() != "CEF"){
-	///////////////////////////////////////
-	function DKFile_GetSetting(file, param)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	/////////////////////////////////////////////
+	var DKFile_GetSetting = function(file, param)
 	{
 		DKDEBUGFUNC(file, param);
 		//file is ignored in browser. We use cookie instead.
@@ -218,9 +219,9 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-if(DK_GetBrowser() != "CEF"){
-	//////////////////////////////////////////////
-	function DKFile_SetSetting(file, param, value)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	////////////////////////////////////////////////////
+	var DKFile_SetSetting = function(file, param, value)
 	{
 		DKDEBUGFUNC(file, param, value);
 		//file is ignored in browser. We use cookie instead.
@@ -280,9 +281,9 @@ if(DK_GetBrowser() != "CEF"){
 	}	
 }
 
-if(DK_GetBrowser() != "CEF"){
-	/////////////////////////////////
-	function DKFile_FileToString(url)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	///////////////////////////////////////
+	var DKFile_FileToString = function(url)
 	{
 		DKDEBUGFUNC(url);
 		url = url.replace(absolutepath, "");
@@ -296,9 +297,9 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////////////
-	function DKFile_StringToFile(data, path)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	/////////////////////////////////////////////
+	var DKFile_StringToFile= function(data, path)
 	{
 		DKDEBUGFUNC(data, path);
 		if(!path.includes(absolutepath)){
@@ -316,9 +317,9 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-if(DK_GetBrowser() != "CEF"){
-	//////////////////////////////////////
-	function DKFile_DirectoryContents(url)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	////////////////////////////////////////////
+	var DKFile_DirectoryContents = function(url)
 	{
 		DKDEBUGFUNC(url);
 		if(url.indexOf(":") > -1){ return; }
@@ -336,9 +337,9 @@ if(DK_GetBrowser() != "CEF"){
 	}
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////////
-	function DKFile_GetAbsolutePath(url)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	//////////////////////////////////////////
+	var DKFile_GetAbsolutePath = function(url)
 	{
 		DKDEBUGFUNC(url);
 		if(!url){ url = "/"; }
@@ -369,9 +370,9 @@ function DKFile_GetRelativePath(apath, datapath)
 	return apath;
 }
 
-if(DK_GetBrowser() != "CEF"){
-	////////////////////////////////
-	function DKFile_IsDirectory(url)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	//////////////////////////////////////
+	var DKFile_IsDirectory = function(url)
 	{
 		DKDEBUGFUNC(url);
 		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
@@ -391,9 +392,9 @@ function DKFile_GetExtention(url)
 	return out;
 }
 
-if(DK_GetBrowser() != "CEF"){
-	///////////////////////////
-	function DKFile_Delete(url)
+if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	/////////////////////////////
+var DKFile_Delete = function(url)
 	{
 		DKDEBUGFUNC(url);
 		console.log("Deleting: "+url);
