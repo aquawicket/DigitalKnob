@@ -3,9 +3,9 @@ function BackgroundMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKOS/BackgroundMenu.html");
-	var file = DKWidget_GetAttribute("Background","src");
+	var file = document.getElementById("Background").getAttribute("src");
 	//DKINFO("file="+file+"\n");
-	DKWidget_SetAttribute("BackgroundMenu_Image","src",file);
+	document.getElementById("BackgroundMenu_Image").setAttribute("src", file);
 }
 
 /////////////////////////////

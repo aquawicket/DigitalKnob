@@ -42,10 +42,10 @@ function Clock_Update()
 	}
 	if(DK_GetTime() != clock_time){
 		clock_time = DK_GetTime();
-		DKWidget_SetInnerHtml("time", clock_time);
+		document.getElementById("time").innerHTML = clock_time;
 	}
 	if(DK_GetDate() != clock_date){
 		clock_date = DK_GetDate();
-		DKWidget_SetInnerHtml("date", clock_date);
+		document.getElementById("date").innerHTML = clock_date;
 	}
 }

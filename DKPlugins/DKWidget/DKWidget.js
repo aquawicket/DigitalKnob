@@ -324,6 +324,7 @@ function DKWidget_GetValue(variable)
 	return false;
 }
 
+/*
 ////////////////////////////////
 function DKWidget_GetTagName(id)
 {
@@ -332,7 +333,9 @@ function DKWidget_GetTagName(id)
 	if(!element){ return false; }
 	return element.tag;
 }
+*/
 
+/*
 ///////////////////////////////////////////////////
 function DKWidget_GetAttribute(variable, parameter)
 {
@@ -351,7 +354,9 @@ function DKWidget_GetAttribute(variable, parameter)
 	DKERROR("ERROR: GetAttribute(): unknown type\n");
 	return false;
 }
+*/
 
+/*
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
@@ -386,7 +391,9 @@ function DKWidget_SetAttribute(variable, parameter, value)
 	DKERROR("DKWidget_SetAttribute(): unknown type\n");
 	return false;
 }
+*/
 
+/*
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
 {
@@ -414,6 +421,7 @@ function DKWidget_GetProperty(variable, parameter)
 	DKERROR("ERROR: GetProperty(): unknown type\n");
 	return false;
 }
+*/
 
 /*
 /////////////////////////////////////////////////////////
@@ -464,6 +472,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 }
 */
 
+/*
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
 {
@@ -473,6 +482,8 @@ function DKWidget_HasProperty(id, parameter)
 	}
 	return false;
 }
+*/
+
 
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
@@ -487,6 +498,7 @@ function DKWidget_RemoveProperty(id, parameter)
 		element.style[parameter] = null;
 	}
 }
+
 
 ///////////////////////////////////////////
 function DKWidget_SetValue(variable, value)
@@ -520,6 +532,7 @@ function DKWidget_SetValue(variable, value)
 	return false;
 }
 
+/*
 ////////////////////////////////////////
 function DKWidget_GetInnerHtml(variable)
 {
@@ -534,7 +547,9 @@ function DKWidget_GetInnerHtml(variable)
 	DKERROR("ERROR: GetInnerHtml(): unknown type\n");
 	return false;
 }
+*/
 
+/*
 ///////////////////////////////////////////////
 function DKWidget_SetInnerHtml(variable, value)
 {
@@ -555,6 +570,7 @@ function DKWidget_SetInnerHtml(variable, value)
 	DKERROR("ERROR: SetInnerHtml(): unknown type\n");
 	return false;
 }
+*/
 
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)

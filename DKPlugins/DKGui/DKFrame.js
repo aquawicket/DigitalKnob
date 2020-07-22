@@ -74,8 +74,8 @@ function DKFrame_Widget(id)
 	//	return;
 	//}
 	
-	var width = DKWidget_GetProperty(id, "width");
-	var height = DKWidget_GetProperty(id, "height");
+	var width = document.getElementById(id).style.width;
+	var height = document.getElementById(id).style.height;
 	//DKINFO("DKFrame_Widget("+id+"): width="+width+" , height="+height+"\n");
 
 	width = width.replace("px", "");
@@ -181,12 +181,12 @@ function DKFrame_CreateFrame(title, width, height)
 	document.getElementById(titlebartext).style.width = "100%";
 	document.getElementById(titlebartext).style.height = "100%";
 	document.getElementById(titlebartext).style.color = "rgb(25,25,25)";
-	DKWidget_SetInnerHtml(titlebartext, title);	
+	document.getElementById(titlebartext).innerHTML = title;
 	DKWidget_AddDragHandle(titlebartext, frame);
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
 	var reload = DKWidget_CreateElement(frame, "img", "DKFrame_reload");
-	DKWidget_SetAttribute(reload, "src", "DKGui/reload.png");
+	document.getElementById(reload).setAttribute("src", "DKGui/reload.png");
 	document.getElementById(reload).style.position = "absolute";
 	document.getElementById(reload).style.top = "1rem";
 	document.getElementById(reload).style.right = "65rem";
@@ -194,7 +194,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(reload, "click", DKFrame_OnEvent);
 	
 	var minimize = DKWidget_CreateElement(frame, "img", "DKFrame_minimize");
-	DKWidget_SetAttribute(minimize, "src", "DKGui/minimize.png");
+	document.getElementById(minimize).setAttribute("src", "DKGui/minimize.png");
 	document.getElementById(minimize).style.position = "absolute";
 	document.getElementById(minimize).style.top = "0rem";
 	document.getElementById(minimize).style.right = "42rem";
@@ -202,7 +202,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
 	var maximize = DKWidget_CreateElement(frame, "img", "DKFrame_maximize");
-	DKWidget_SetAttribute(maximize, "src", "DKGui/maximize.png");
+	document.getElementById(maximize).setAttribute("src", "DKGui/maximize.png");
 	document.getElementById(maximize).style.position = "absolute";
 	document.getElementById(maximize).style.top = "0rem";
 	document.getElementById(maximize).style.right = "21rem";
@@ -210,7 +210,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
 	var close = DKWidget_CreateElement(frame, "img", "DKFrame_close");
-	DKWidget_SetAttribute(close, "src", "DKGui/close.png");
+	document.getElementById(close).setAttribute("src", "DKGui/close.png");
 	document.getElementById(close).style.position = "absolute";
 	document.getElementById(close).style.top = "0rem";
 	document.getElementById(close).style.right = "0rem";
@@ -236,7 +236,7 @@ function DKFrame_CreateResize(frame)
 	//DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
 	
 	var resizeImage = DKWidget_CreateElement(resize, "img", "DKFrame_resizeImage");
-	DKWidget_SetAttribute(resizeImage, "src", "DKGui/resize.png");
+	document.getElementById(resizeImage).setAttribute("src", "DKGui/resize.png");
 	document.getElementById(resizeImage).style.position = "absolute";
 	document.getElementById(resizeImage).style.top = "0rem";
 	document.getElementById(resizeImage).style.right = "0rem";
