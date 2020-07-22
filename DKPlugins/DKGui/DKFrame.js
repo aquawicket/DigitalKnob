@@ -105,7 +105,7 @@ function DKFrame_SetTitle(id, title)
 	var frame = DKWidget_GetParent(id);
 	var titlebar = DKWidget_GetFirstChild(frame);
 	var titlebartext = DKWidget_GetFirstChild(titlebar);
-	DKWidget_SetInnerHtml(titlebartext, title);
+	document.getElementById(titlebartext).innerHTML = title;
 }
 
 //////////////////////////////////////////////////

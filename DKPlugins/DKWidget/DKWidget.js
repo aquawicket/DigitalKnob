@@ -525,7 +525,7 @@ function DKWidget_SetValue(variable, value)
 			element.value = value;
 			return true;
 		}
-		DKWidget_SetInnerHtml(variable, value);
+		document.getElementById(variable).innerHTML = value;
 		return true;
 	}
 	DKERROR("ERROR: SetValue(): unknown type\n");
