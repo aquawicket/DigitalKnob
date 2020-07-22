@@ -963,7 +963,9 @@ function DKWidget_GetHoverElement()
 function DKWidget_GetScale()
 {
 	DKDEBUGFUNC();
-	var scale = getComputedStyle(document.documentElement).fontSize;
+	//var scale = getComputedStyle(document.documentElement).fontSize;
+	var scale = document.documentElement.style.fontSize;
+	console.log(scale);
 	scale = scale.replace("px","");
 	//DKINFO("DKWidget_GetScale() = "+scale+"\n");
 	return parseFloat(scale);
@@ -973,7 +975,7 @@ function DKWidget_GetScale()
 function DKWidget_SetScale(scale)
 {
 	DKDEBUGFUNC(scale);
-	DKWidget_SetProperty("html", "font-size", scale+"px");
+	document.documentElement.style.fontSize = scale+"px";
 }
 
 ///////////////////////////////////////
