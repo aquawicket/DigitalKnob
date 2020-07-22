@@ -30,10 +30,10 @@ function DKMenu_ValidatePosition(id)
 	
 	//DKINFO("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
 	//DKINFO("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
-	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"px");
-	DKWidget_SetProperty(id,"top",DKWidget_GetMouseWindowY()+"rem");
-	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"px");
-	DKWidget_SetProperty(id,"left",DKWidget_GetMouseWindowX()+"rem");
+	document.getElementById(id).style.top = DKWidget_GetMouseWindowY()+"px";
+	document.getElementById(id).style.top = DKWidget_GetMouseWindowY()+"rem";
+	document.getElementById(id).style.left = DKWidget_GetMouseWindowX()+"px";
+	document.getElementById(id).style.left = DKWidget_GetMouseWindowX()+"rem";
 	DKWidget_RemoveProperty(id, "right");
 	
 	//make sure menu is within window

@@ -83,9 +83,11 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	if(DK_Id(event,"Git")){
+		DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 			DKWidget_SetProperty("DKGit/GitMenu.html","top",DKWindow_GetMouseY()-30+"px");
+		});
 		});
 	}
 	if(DK_Id(event, "OpenSource")){
