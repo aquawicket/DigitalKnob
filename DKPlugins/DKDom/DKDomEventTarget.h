@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
 #pragma once
 #ifndef DKDomEventTarget_H
 #define DKDomEventTarget_H
@@ -26,4 +27,3 @@ public:
 REGISTER_OBJECT(DKDomEventTarget, true)
 
 #endif //DKDomEventTarget_H
-#endif //USE_DKDuktape

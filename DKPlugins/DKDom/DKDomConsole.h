@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Console
+
 #pragma once
 #ifndef DKDomConsole_H
 #define DKDomConsole_H
@@ -22,4 +23,3 @@ public:
 REGISTER_OBJECT(DKDomConsole, true)
 
 #endif //DKDomConsole_H
-#endif //USE_DKDuktape

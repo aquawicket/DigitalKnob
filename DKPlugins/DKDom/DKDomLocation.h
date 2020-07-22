@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Location
+
 #pragma once
 #ifndef DKDomLocation_H
 #define DKDomLocation_H
@@ -27,4 +28,3 @@ public:
 REGISTER_OBJECT(DKDomLocation, true)
 
 #endif //DKDomLocation_H
-#endif //USE_DKDuktape

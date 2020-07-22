@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 
-#ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKDomKeyboardEvent_H
 #define DKDomKeyboardEvent_H
@@ -25,4 +24,3 @@ public:
 REGISTER_OBJECT(DKDomKeyboardEvent, true)
 
 #endif //DKDomKeyboardEvent_H
-#endif //USE_DKDuktape

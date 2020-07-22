@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Console
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomConsole.h"
 
@@ -92,6 +93,3 @@ int DKDomConsole::warn(duk_context* ctx)
 	DKWARN(string);
 	return 1;
 }
-
-
-#endif //USE_DKDuktape

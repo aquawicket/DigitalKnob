@@ -1,6 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Screen
 
-#ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDom/DKDomScreen.h"
 
@@ -147,5 +146,3 @@ int DKDomScreen::unlockOrientation(duk_context* ctx)
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/API/Screen/unlockOrientation
 	return false;
 }
-
-#endif //USE_DKDuktape

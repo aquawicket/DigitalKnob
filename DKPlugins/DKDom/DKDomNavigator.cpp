@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomNavigator.h"
 
@@ -47,6 +48,3 @@ int DKDomNavigator::productSub(duk_context* ctx)
 	//TODO
 	return false;
 }
-
-
-#endif //USE_DKDuktape

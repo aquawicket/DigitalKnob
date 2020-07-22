@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
-#ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDom/DKDomEvent.h"
 #include "DKDom/DKDomMouseEvent.h"
@@ -74,6 +73,3 @@ int DKDomMouseEvent::getModifierState(duk_context* ctx)
 	//TODO
 	return false;
 }
-
-
-#endif //USE_DKDuktape

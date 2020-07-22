@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Event
 
-#ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKDomEvent_H
 #define DKDomEvent_H
@@ -53,4 +52,3 @@ public:
 REGISTER_OBJECT(DKDomEvent, true)
 
 #endif //DKDomEvent_H
-#endif //USE_DKDuktape

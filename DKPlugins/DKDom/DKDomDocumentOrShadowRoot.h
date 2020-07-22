@@ -1,4 +1,6 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot
+// https://javascript.info/mixins
+
 #pragma once
 #ifndef DKDomDocumentOrShadowRootOrShadowRoot_H
 #define DKDomDocumentOrShadowRoot_H
@@ -30,4 +32,3 @@ public:
 REGISTER_OBJECT(DKDomDocumentOrShadowRoot, true)
 
 #endif //DKDomDocumentOrShadowRoot_H
-#endif //USE_DKDuktape

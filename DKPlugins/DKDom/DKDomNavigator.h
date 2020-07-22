@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+
 #pragma once
 #ifndef DKDomNavigator_H
 #define DKDomNavigator_H
@@ -20,4 +21,3 @@ public:
 REGISTER_OBJECT(DKDomNavigator, true)
 
 #endif //DKDomNavigator_H
-#endif //USE_DKDuktape

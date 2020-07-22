@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomCSSStyleDeclaration.h"
 //#include "DKDom/DKDomElement.h"
@@ -64,5 +65,3 @@ int DKDomCSSStyleDeclaration::setProperty(duk_context* ctx)
 	}
 	return true;
 }
-
-#endif //USE_DKDuktape

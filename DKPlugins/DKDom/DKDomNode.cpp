@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Node
+
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKDom/DKDomElement.h"
@@ -188,5 +189,3 @@ int DKDomNode::removeChild(duk_context* ctx)
 	duk_push_string(ctx, childAddress.c_str());
 	return true;
 }
-
-#endif //USE_DKDuktape

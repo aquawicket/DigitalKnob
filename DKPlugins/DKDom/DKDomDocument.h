@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/Document
+
 #pragma once
 #ifndef DKDomDocument_H
 #define DKDomDocument_H
@@ -22,4 +23,3 @@ public:
 REGISTER_OBJECT(DKDomDocument, true)
 
 #endif //DKDomDocument_H
-#endif //USE_DKDuktape

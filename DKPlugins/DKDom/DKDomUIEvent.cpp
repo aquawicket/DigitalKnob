@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-#ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDom/DKDomUIEvent.h"
 #include "DKDom/DKDomEvent.h"
@@ -61,6 +60,3 @@ int DKDomUIEvent::initUIEvent(duk_context* ctx)
 	//TODO
 	return false;
 }
-
-
-#endif //USE_DKDuktape

@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomHTMLElement.h"
 
@@ -32,6 +33,3 @@ int DKDomHTMLElement::focus(duk_context* ctx)
 	duk_push_boolean(ctx, true);
 	return true;
 }
-
-
-#endif //USE_DKDuktape

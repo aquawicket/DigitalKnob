@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomEventTarget.h"
 
@@ -157,5 +158,3 @@ int DKDomEventTarget::value(duk_context* ctx)
 	if(!same(events[2],value)){ return 0; }
 	return 1;
 }
-
-#endif //USE_DKDuktape

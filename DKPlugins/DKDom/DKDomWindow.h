@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape
+//https://developer.mozilla.org/en-US/docs/Web/API/Window
+
 #pragma once
 #ifndef DKDomWindow_H
 #define DKDomWindow_H
@@ -25,4 +26,3 @@ public:
 REGISTER_OBJECT(DKDomWindow, true)
 
 #endif //DKDomWindow_H
-#endif //USE_DKDuktape

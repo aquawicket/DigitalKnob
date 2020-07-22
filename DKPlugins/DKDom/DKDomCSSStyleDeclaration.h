@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
+
 #pragma once
 #ifndef DKDomCSSStyleDeclaration_H
 #define DKDomCSSStyleDeclaration_H
@@ -19,4 +20,3 @@ public:
 REGISTER_OBJECT(DKDomCSSStyleDeclaration, true)
 
 #endif //DKDomCSSStyleDeclaration_H
-#endif //USE_DKDuktape

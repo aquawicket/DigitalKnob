@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
+
 #pragma once
 #ifndef DKDomHTMLCollection_H
 #define DKDomHTMLCollection_H
@@ -17,4 +18,3 @@ public:
 REGISTER_OBJECT(DKDomHTMLCollection, true)
 
 #endif //DKDomHTMLCollection_H
-#endif //USE_DKDuktape

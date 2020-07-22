@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape
+//https://developer.mozilla.org/en-US/docs/Web/API/Window
+
 #include "DKRml/DKRml.h"
 #include "DKDom/DKDomWindow.h"
 #include "DKDom/DKDomElement.h"
@@ -109,5 +110,3 @@ int DKDomWindow::removeEventListener(duk_context* ctx)
 	element->RemoveEventListener(type.c_str(), DKRml::Get(), phase);
 	return true;
 }
-
-#endif //USE_DKDuktape

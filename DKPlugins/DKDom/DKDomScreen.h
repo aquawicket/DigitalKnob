@@ -1,6 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Screen
 
-#ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKDomScreen_H
 #define DKDomScreen_H
@@ -37,4 +36,3 @@ public:
 REGISTER_OBJECT(DKDomScreen, true)
 
 #endif //DKDomScreen_H
-#endif //USE_DKDuktape

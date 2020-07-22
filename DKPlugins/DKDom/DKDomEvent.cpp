@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Event
 
-#ifdef USE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDom/DKDomEvent.h"
 #include "DKDom/DKDomElement.h"
@@ -501,5 +500,3 @@ int DKDomEvent::preventCapture(duk_context* ctx)
 	//TODO
 	return false;
 }
-
-#endif //USE_DKDuktape

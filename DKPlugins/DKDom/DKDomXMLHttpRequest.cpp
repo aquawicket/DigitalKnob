@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DKDom/DKDomXMLHttpRequest.h"
@@ -37,5 +38,3 @@ int DKDomXMLHttpRequest::send(duk_context* ctx)
 	duk_push_string(ctx, response.c_str());
 	return true;
 }
-
-#endif //USE_DKDuktape

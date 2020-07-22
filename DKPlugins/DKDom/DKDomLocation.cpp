@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Location
+
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKDom/DKDomLocation.h"
@@ -118,5 +119,3 @@ int DKDomLocation::username(duk_context* ctx)
 	duk_push_string(ctx, host.c_str());
 	return true;
 }
-
-#endif //USE_DKDuktape

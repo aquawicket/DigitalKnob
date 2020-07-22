@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/Document
+
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKDom/DKDomDocument.h"
@@ -103,5 +104,3 @@ int DKDomDocument::getElementsByTagName(duk_context* ctx)
 	duk_push_string(ctx, list.c_str());
 	return true;
 }
-
-#endif //USE_DKDuktape

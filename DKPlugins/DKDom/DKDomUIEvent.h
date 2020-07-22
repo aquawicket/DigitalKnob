@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-#ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKDomUIEvent_H
 #define DKDomUIEvent_H
@@ -24,4 +23,3 @@ public:
 REGISTER_OBJECT(DKDomUIEvent, true)
 
 #endif //DKDomUIEvent_H
-#endif //USE_DKDuktape

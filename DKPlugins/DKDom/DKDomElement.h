@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/Element
+
 #pragma once
 #ifndef DKDomElement_H
 #define DKDomElement_H
@@ -32,4 +33,3 @@ public:
 REGISTER_OBJECT(DKDomElement, true)
 
 #endif //DKDomElement_H
-#endif //USE_DKDuktape

@@ -1,4 +1,5 @@
-#ifdef USE_DKDuktape 
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
+
 #include "DK/DKApp.h"
 #include "DKDom/DKDomHTMLCollection.h"
 
@@ -11,6 +12,3 @@ bool DKDomHTMLCollection::Init()
 	DKClass::DKCreate("DKDom/DKDomHTMLCollection.js");
 	return true;
 }
-
-
-#endif //USE_DKDuktape

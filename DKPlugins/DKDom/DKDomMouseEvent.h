@@ -1,6 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
-#ifdef USE_DKDuktape 
 #pragma once
 #ifndef DKDomMouseEvent_H
 #define DKDomMouseEvent_H
@@ -26,4 +25,3 @@ public:
 REGISTER_OBJECT(DKDomMouseEvent, true)
 
 #endif //DKDomMouseEvent_H
-#endif //USE_DKDuktape

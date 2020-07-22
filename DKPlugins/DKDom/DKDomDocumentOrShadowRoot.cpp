@@ -1,4 +1,6 @@
-#ifdef USE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot
+// https://javascript.info/mixins
+
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKDom/DKDomDocumentOrShadowRoot.h"
@@ -58,5 +60,3 @@ int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx)
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
-
-#endif //USE_DKDuktape
