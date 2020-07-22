@@ -155,12 +155,12 @@ function DKOpenFile_UpdatePath(path)
 			var element2 = DKWidget_CreateElement("DKOpenFileMenu2", "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
 			DKWidget_SetAttribute(element2,"value", value);
-			DKWidget_SetProperty(element2, "white-space", "nowrap");
+			document.getElementById(element2).style.whiteSpace = "nowrap";
 			DKAddEvent(element2, "click", DKOpenFile_OnEvent);
-			DKWidget_SetProperty(element2, "padding-left", "17px");
+			document.getElementById(element2).style.paddingLeft = "17px";
 			DKWidget_SetInnerHtml(element2,files[d]);
-			DKWidget_SetProperty(element2, "background-image", "url(\"DKFile/folder.png\")");
-			DKWidget_SetProperty(element2, "background-repeat", "no-repeat");
+			document.getElementById(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
+			document.getElementById(element2).style.backgroundRepeat = "no-repeat";
 		}
 	}
 

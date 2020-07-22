@@ -48,8 +48,8 @@ function DKConsole_Notify(string)
 {
 	DKDEBUGFUNC();
 	var line = DKWidget_CreateElement("DKConsole_Content", "a", "DKConsole_line");
-	DKWidget_SetProperty(line,"display","block");
-	DKWidget_SetProperty(line,"color",DKConsole_color);
+	document.getElementById(line).style.display = "block";
+	document.getElementById(line).style.color = DKConsole_color;
 	DKWidget_SetInnerHtml(line, string);
 	DKWidget_ScrollToBottom(line);
 }
