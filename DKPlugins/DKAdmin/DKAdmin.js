@@ -6,12 +6,12 @@ function DKAdmin_Init()
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
 	
 	//DKINFO("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "RML"){
 		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminRed.png");
 	}
 	else{
 		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminBlue.png");
-		DKWidget_SetProperty("DKAdmin/DKAdmin.html", "left", "40rem");
+		document.getElementById("DKAdmin/DKAdmin.html").style.left = "40rem";
 	}
 }
 

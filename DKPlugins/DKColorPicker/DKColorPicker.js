@@ -74,8 +74,8 @@ function DKColorPicker_ColorBar()
 	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
 	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
 	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
-	DKWidget_SetProperty("DKColorHover", "background-color", rgb);
-	DKWidget_SetProperty("DKColorSelected", "background-color", rgb);
+	document.getElementById("DKColorHover").style.backgroundColor = rgb;
+	document.getElementById("DKColorSelected").style.backgroundColor = rgb;
 }
 
 /////////////////////////////////
@@ -93,6 +93,6 @@ function DKColorPicker_ColorBox()
 	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
 	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
 	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
-	DKWidget_SetProperty("DKColorSelected", "background-color", rgb);
+	document.getElementById("DKColorSelected").style.backgroundColor = rgb;
 	//event->Stop();
 }
