@@ -243,7 +243,7 @@ DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
 function DKCreate(data, callback)
 {
 	DKDEBUGFUNC(data, callback);
-	DKINFO("DK.js:DKCreate("+data+")\n");	
+	//console.log("DK.js:DKCreate("+data+")\n");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
@@ -370,7 +370,7 @@ function DKClose(data)
 function LoadCss(url)
 {
 	DKDEBUGFUNC(url);
-	console.log("DK.js:LoadCss("+url+")");
+	//console.log("DK.js:LoadCss("+url+")");
 	if(!url){ 
 		DKERROR("LoadCss("+url+"): url invalid\n");
 		return false; 
@@ -382,17 +382,17 @@ function LoadCss(url)
 	}
 	
 	var link = document.createElement('link');
-	console.log("link = "+link.POINTER);
+	//console.log("link = "+link.POINTER);
 	link.setAttribute('href', url);
 	link.id = url;
 	link.setAttribute('rel', 'stylesheet');
 	link.setAttribute('type', 'text/css');
 	var elements = document.getElementsByTagName('head');
 	
-	console.log("LoadCss("+url+"): link = "+link.POINTER);
-	console.log("LoadCss("+url+"): link = "+link);
-	console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
-	console.log("DK.js:LoadCss("+url+") appending link");
+	//console.log("LoadCss("+url+"): link = "+link.POINTER);
+	//console.log("LoadCss("+url+"): link = "+link);
+	//console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
+	//console.log("DK.js:LoadCss("+url+") appending link");
 	elements[0].appendChild(link);
 	
 	return true;
@@ -548,11 +548,11 @@ function LoadHtml(url, parent)
 		DKWARN("DK.js:LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
-		console.log("DK.js:LoadHtml(): appending to parent");
+		//console.log("DK.js:LoadHtml(): appending to parent");
 		parent.appendChild(nodes[0]);
 	}
 	else{
-		console.log("DK.js:LoadHtml(): appending to body");
+		//console.log("DK.js:LoadHtml(): appending to body");
 		document.body.appendChild(nodes[0]);
 	}
 	
