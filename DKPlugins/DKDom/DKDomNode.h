@@ -13,6 +13,7 @@ public:
 	
 	static int appendChild(duk_context* ctx);
 	static int childNodes(duk_context* ctx);
+	static int firstChild(duk_context* ctx);
 	static int lastChild(duk_context* ctx);
 	static int parentNode(duk_context* ctx);
 	static int removeChild(duk_context* ctx);

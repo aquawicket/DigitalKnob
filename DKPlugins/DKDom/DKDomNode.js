@@ -17,7 +17,11 @@ var Node = function(pointer)
 		} 
 	});
 	Object.defineProperty(this, "firstChild", {
-		get: function(){ return DKDomNode_firstChild(this.pointer); } 
+		get: function(){ 
+			var address = DKDomNode_firstChild(this.pointer);
+			if(!address){ return; }
+			return new HTMLElement(address);	
+		}
 	});
 	Object.defineProperty(this, "isConnected", {
 		get: function(){ return DKDomNode_isConnected(this.pointer); } 
