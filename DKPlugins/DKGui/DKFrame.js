@@ -225,21 +225,21 @@ function DKFrame_CreateResize(frame)
 {
 	DKDEBUGFUNC(frame);
 	var resize = DKWidget_CreateElement(frame, "div", "DKFrame_resize");
-	//DKWidget_SetProperty(resize, "background-image", "url(\"DKGui/resize.png\")");
+	//document.getElementById(resize).style.backgroundImage = "url(\"DKGui/resize.png\")";
 	DKWidget_RemoveProperty(resize, "top");
-	DKWidget_SetProperty(resize, "position", "absolute");
-	DKWidget_SetProperty(resize, "right", "0rem");
-	DKWidget_SetProperty(resize, "bottom", "0rem");
-	DKWidget_SetProperty(resize, "width", "16rem");
-	DKWidget_SetProperty(resize, "height", "16rem");
+	document.getElementById(resize).style.position = "absolute";
+	document.getElementById(resize).style.right = "0rem";
+	document.getElementById(resize).style.bottom = "0rem";
+	document.getElementById(resize).style.width = "16rem";
+	document.getElementById(resize).style.height = "16rem";
 	//DKWidget_AddResizeHandle(resize, frame);
 	//DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
 	
 	var resizeImage = DKWidget_CreateElement(resize, "img", "DKFrame_resizeImage");
 	DKWidget_SetAttribute(resizeImage, "src", "DKGui/resize.png");
-	DKWidget_SetProperty(resizeImage, "position", "absolute");
-	DKWidget_SetProperty(resizeImage, "top", "0rem");
-	DKWidget_SetProperty(resizeImage, "right", "0rem");
+	document.getElementById(resizeImage).style.position = "absolute";
+	document.getElementById(resizeImage).style.top = "0rem";
+	document.getElementById(resizeImage).style.right = "0rem";
 	DKWidget_AddResizeHandle(resizeImage, frame);
 	
 	return resize;
@@ -292,22 +292,22 @@ function DKFrame_MaximizeButton(id)
 		
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKWidget_SetProperty(arry[5], "width", parseInt(DKWidget_GetProperty(frame, "width")) + "rem");
-		DKWidget_SetProperty(arry[5], "height", parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem");
+		document.getElementById(arry[5]).style.width = parseInt(DKWidget_GetProperty(frame, "width")) + "rem";
+		document.getElementById(arry[5]).style.height = parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem";
 	}
 	else{
 		DKFrame_StoreSize(frame);
-		DKWidget_SetProperty(frame, "top", "0rem");
-		DKWidget_SetProperty(frame, "left", "0rem");
-		DKWidget_SetProperty(frame, "right", "0rem");
-		DKWidget_SetProperty(frame, "bottom", "0rem");
+		document.getElementById(frame).style.top = "0rem";
+		document.getElementById(frame).style.left = "0rem";
+		document.getElementById(frame).style.right = "0rem";
+		document.getElementById(frame).style.bottom = "0rem";
 		DKWidget_RemoveProperty(frame, "width");
 		DKWidget_RemoveProperty(frame, "height");
 		
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		DKWidget_SetProperty(arry[5], "width", "100%");
-		DKWidget_SetProperty(arry[5], "height", "100%");
+		document.getElementById(arry[5]).style.width = "100%";
+		document.getElementById(arry[5]).style.height = "100%";
 	}
 }
 
@@ -397,12 +397,12 @@ function DKFrame_RestoreSize(id)
 	for(var i=0; i<sizes.length; i++){
 		if(sizes[i].indexOf(id) > -1){
 			var arry = sizes[i].split(":");
-			DKWidget_SetProperty(id, "top", arry[1]);
-			DKWidget_SetProperty(id, "bottom", arry[2]);
-			DKWidget_SetProperty(id, "left", arry[3]);
-			DKWidget_SetProperty(id, "right", arry[4]);
-			DKWidget_SetProperty(id, "width", arry[5]);
-			DKWidget_SetProperty(id, "height", arry[6]);
+			document.getElementById(id).style.top = arry[1];
+			document.getElementById(id).style.bottom = arry[2];
+			document.getElementById(id).style.left = arry[3];
+			document.getElementById(id).style.right = arry[4];
+			document.getElementById(id).style.width = arry[5];
+			document.getElementById(id).style.height = arry[6];
 			return;
 		}
 	}
