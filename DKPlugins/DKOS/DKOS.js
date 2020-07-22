@@ -3,12 +3,7 @@ function DKOS_Init()
 {
 	DKCreate("DKOS/DKOS.html", function(){
 		document.body.style.margin = "0px";
-		//document.getElementById("DKOS/DKOS.html").style.left = "0px";
-		DKWidget_SetProperty("DKOS/DKOS.html", "left", "0px");
-		DKWidget_SetProperty("DKOS/DKOS.html", "top", "0px");
-		DKWidget_SetProperty("DKOS/DKOS.html", "width", "100%");
-		DKWidget_SetProperty("DKOS/DKOS.html", "height", "100%");
-		DKWidget_SetProperty("DKOS/DKOS.html", "overflow", "hidden");
+		document.body.style.overflow = "hidden";
 		var OS = DK_GetOS();
 		if(OS != "iOS" && OS != "Android"){
 			var screenwidth = DK_GetScreenWidth();
