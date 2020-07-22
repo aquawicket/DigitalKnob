@@ -272,14 +272,14 @@ int DKDomElement::setAttribute(duk_context* ctx)
 		value = toString(duk_require_boolean(ctx, 2));
 	}
 	else{
-		DKERROR("DKDomElement::setAttribute(): value invalid\n");
+		DKERROR("DKDomElement::setAttribute("+address+","+attribute+"): value invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 
 	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
-		DKERROR("DKDomElement::setAttribute(): element invalid\n");
+		DKERROR("DKDomElement::setAttribute("+address+","+attribute+"): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
