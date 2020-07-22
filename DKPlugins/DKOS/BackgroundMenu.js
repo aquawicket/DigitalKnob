@@ -2,7 +2,7 @@
 function BackgroundMenu_Init()
 {
 	DKDEBUGFUNC();
-	DKCreate("DKGui/BackgroundMenu.html");
+	DKCreate("DKOS/BackgroundMenu.html");
 	var file = DKWidget_GetAttribute("Background","src");
 	//DKINFO("file="+file+"\n");
 	DKWidget_SetAttribute("BackgroundMenu_Image","src",file);
@@ -12,7 +12,7 @@ function BackgroundMenu_Init()
 function BackgroundMenu_End()
 {
 	DKDEBUGFUNC();
-	DKClose("DKGui/BackgroundMenu.html");
+	DKClose("DKOS/BackgroundMenu.html");
 }
 
 //////////////////////////////////////

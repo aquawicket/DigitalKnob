@@ -6,7 +6,7 @@
 function TaskbarMenu_Init()
 {
 	DKDEBUGFUNC();
-	DKCreate("DKGui/TaskbarMenu.html", function(){
+	DKCreate("DKOS/TaskbarMenu.html", function(){
 		DKAddEvent("window", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
@@ -34,7 +34,7 @@ function TaskbarMenu_End()
 {
 	DKDEBUGFUNC();
 	DKRemoveEvents(TaskbarMenu_OnEvent);
-	DKClose("DKGui/TaskbarMenu.html");
+	DKClose("DKOS/TaskbarMenu.html");
 }
 
 ///////////////////////////////////
@@ -165,11 +165,11 @@ function TaskbarMenu_OnEvent(event)
 	
 	
 	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGui/TaskbarMenu.html")){
+		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/TaskbarMenu.html")){
 			return;
 		}
 	}
-	DKClose("DKGui/TaskbarMenu.js");
+	DKClose("DKOS/TaskbarMenu.js");
 }
 
 /////////////////////////////////////
@@ -177,7 +177,7 @@ function TaskbarMenu_Add(title, code)
 {
 	DKDEBUGFUNC(title, code);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
-	var ele = DKWidget_CreateElement("DKGui/TaskbarMenu.html", "div", "TaskbarMenu_item");
+	var ele = DKWidget_CreateElement("DKOS/TaskbarMenu.html", "div", "TaskbarMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
 }
 

@@ -6,7 +6,7 @@ var second_flag = false;
 function Clock_Init()
 {
 	DKDEBUGFUNC();
-	DKCreate("DKGui/Clock.html,DKGui/Taskbar.html");
+	DKCreate("DKOS/Clock.html,DKIS/Taskbar.html");
 	DKAddEvent("window", "second", Clock_OnEvent);
 	Clock_Update();
 }
@@ -16,7 +16,7 @@ function Clock_End()
 {
 	DKDEBUGFUNC();
 	DKRemoveEvents(Clock_OnEvent);
-	DKClose("DKGui/Clock.html");
+	DKClose("DKOS/Clock.html");
 }
 
 /////////////////////////////
