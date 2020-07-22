@@ -52,7 +52,7 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 
 	DKString rmlEventAddress = event->data[0];
 	DKString newEvent;
-	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick")){
+	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick") || same(type, "contextmenu")){
 		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
 	}
 	else if (same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
