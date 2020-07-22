@@ -33,11 +33,11 @@ function Clock_Update()
 {
 	DKDEBUGFUNC();
 	if(second_flag){
-		DKWidget_SetProperty("time", "color", "rgb(255,255,255)");
+		document.getElementById("time").style.color = "rgb(255,255,255)";
 		second_flag = false;
 	}
 	else{
-		DKWidget_SetProperty("time", "color", "rgb(220,220,220)");
+		document.getElementById("time").style.color = "rgb(220,220,220)";
 		second_flag = true;
 	}
 	if(DK_GetTime() != clock_time){

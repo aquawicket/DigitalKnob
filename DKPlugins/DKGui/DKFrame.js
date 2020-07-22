@@ -149,20 +149,20 @@ function DKFrame_CreateFrame(title, width, height)
 	var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1);
 	
 	var frame = DKWidget_CreateElement("body", "div", "DKFrame_frame");
-	DKWidget_SetProperty(frame, "position", "absolute");
-	DKWidget_SetProperty(frame, "overflow", "hidden");
-	DKWidget_SetProperty(frame, "top", newtop.toString()+"px");
-	DKWidget_SetProperty(frame, "left", newleft.toString()+"px");
-	DKWidget_SetProperty(frame, "width", width.toString()+"rem");
-	DKWidget_SetProperty(frame, "height", newheight.toString()+"rem");
-	DKWidget_SetProperty(frame, "background-color", "rgb(150,150,150)");
-	DKWidget_SetProperty(frame, "border-color", "rgb(0,0,0)");
+	document.getElementById(frame).style.position = "absolute";
+	document.getElementById(frame).style.overflow = "hidden";
+	document.getElementById(frame).style.top = newtop.toString()+"px";
+	document.getElementById(frame).style.left = newleft.toString()+"px";
+	document.getElementById(frame).style.width = width.toString()+"rem";
+	document.getElementById(frame).style.height = newheight.toString()+"rem";
+	document.getElementById(frame).style.backgroundColor = "rgb(150,150,150)";
+	document.getElementById(frame).style.borderColor = "rgb(0,0,0)";
 	if(DK_GetBrowser() != "RML"){
-		DKWidget_SetProperty(frame, "border-style", "solid");
+		document.getElementById(frame).style.borderStyle = "solid";
 	}
-	DKWidget_SetProperty(frame, "border-width", "1rem");
-	DKWidget_SetProperty(frame, "min-width", "62rem");
-	DKWidget_SetProperty(frame, "min-height", "30rem");
+	document.getElementById(frame).style.borderWidth = "1rem";
+	document.getElementById(frame).style.minWidth = "62rem";
+	document.getElementById(frame).style.minHeight = "30rem";
 	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
 	
 	//DKINFO("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");

@@ -2,11 +2,11 @@
 function DesktopMenu_Init()
 {
 	DKDEBUGFUNC();
-	//DKWidget_SetProperty("DKOS/DesktopMenu.html","top",DKWindow_GetMouseY()+"px");
-	//DKWidget_SetProperty("DKOS/DesktopMenu.html","left",DKWindow_GetMouseX()+"px");
 	DKCreate("DKOS/DesktopMenu.html");
-	DKWidget_SetProperty("DKOS/DesktopMenu.html","top","100px");
-	DKWidget_SetProperty("DKOS/DesktopMenu.html","left","100px");
+	//document.getElementById("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
+	//document.getElementById("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
+	document.getElementById("DKOS/DesktopMenu.html").style.top = "100px";
+	document.getElementById("DKOS/DesktopMenu.html").style.left = "100px";
 	
 	DKAddEvent("document", "mousedown", DesktopMenu_OnEvent);
 	DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
