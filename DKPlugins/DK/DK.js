@@ -329,13 +329,21 @@ function DKClose(data)
 	if(arry[0] == "DKJavascript"){
 		var end = file.replace(".js", "");
 		end += "_End";
-		var func = window[end]; //Plugin_End()
-		if(typeof func == 'function'){ 
+		eval(end+"()");
+		
+		//FIXME
+		/*
+		console.log(end);
+		var func = window[end]; //Plugin_End() //FIXME
+		if(typeof func === 'function'){
+			
 			func(); // Call the jsclass_End() function
 		}
 		else{
 			DKWARN("DKClose(data): "+func+" is not a function\n");
 		}
+		*/
+		
 		var script = document.getElementById(arry[1]);
 		if(!script){
 			//DKWARN("DKClose("+data+"): "+arry[1]+" does not exist\n");

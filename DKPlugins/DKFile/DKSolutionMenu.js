@@ -6,7 +6,7 @@ function DKSolutionMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionMenu.html");
-	DKAddEvent("window", "mousedown", DKSolutionMenu_OnEvent);
+	DKAddEvent("document", "mousedown", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
