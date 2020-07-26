@@ -4,20 +4,29 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	    <!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script> -->
+		<meta name="referrer" content="no-referrer"></meta>
+		<meta http-equiv="cache-control" content="no-cache"></meta>
+		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
+	    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 	    <!-- <script>eruda.init();</script> -->
 	</head>
 	<body>
 		<script type="text/javascript" id="DK/DK.js" src="DK/DK.js"></script>
 		<script>
+		    var app = "DKEditor/DKEditor";
+		    //var app = "DKDisplay/DKDisplay";
+		    //var app = "DKConsole/DKConsole";
+		    //var app = "DKAdmin/DKAdmin";
+		    //var app = "DKBuild/DKBuildGUI";
+		    //var app = "DKNotepad/DKNotepad";
+		    //var app = "DKColorPicker/DKColorPicker";
+		    //var app = "DKOS/DKOS";
 			DKCreate("DK/DK.css", function(){
 			DKCreate("DKFile/DKFile.js", function(){
 			DKCreate("DKWidget/DKWidget.js", function(){
 			DKCreate("DKGui/DKFrame.js", function(){
-			DKCreate("DKOS/DKOS.js", function(){
-			//DKCreate("DKColorPicker/DKColorPicker.js", function(){
-			//	DKFrame_Widget("DKColorPicker/DKColorPicker.html");
-			//});
+			DKCreate(app+".js", function(){
+				DKFrame_Widget(app+".html");
 			});
 			});
 			});
