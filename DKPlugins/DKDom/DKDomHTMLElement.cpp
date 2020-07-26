@@ -43,11 +43,15 @@ int DKDomHTMLElement::offsetParent(duk_context* ctx)
 	DKString address = duk_require_string(ctx, 0);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if (!element) {
-		DKERROR("DKDomElement::offsetParrent(): element invalid\n");
+		DKERROR("DKDomElement::offsetParent(): element invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	Rml::Element* offsetParent = element->GetOffsetParent();
+	if(!offsetParent){ 
+		DKERROR("DKDomElement::offsetParent(): offsetParent invalid, setting to parent");
+		offsetParent = element->GetParentNode();
+	}
 	const DKString string = DKRml::elementToAddress(offsetParent);
 	duk_push_string(ctx, string.c_str());
 	return true;
