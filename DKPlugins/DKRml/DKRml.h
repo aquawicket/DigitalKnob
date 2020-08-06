@@ -44,7 +44,7 @@ public:
 	static DKRmlFile* dkRmlFile;
 	Rml::Element* hover;
 
-	DKRmlToRML dkRmlToRML;
+	DKHtmlToRml dkHtmlToRml;
 };
 
 REGISTER_OBJECT(DKRml, true)
