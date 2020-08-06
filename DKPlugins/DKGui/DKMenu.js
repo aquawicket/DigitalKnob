@@ -21,6 +21,7 @@ function DKMenu_OnEvent(event)
 function DKMenu_ValidatePosition(id)
 {
 	DKDEBUGFUNC(id);
+	console.log("DKMenu_ValidatePosition("+id+")");
 	//DKINFO("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//DKINFO("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
