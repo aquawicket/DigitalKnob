@@ -51,14 +51,14 @@ int DKDomNode::appendChild(duk_context* ctx)
 	//post process if it's a <link>
 	if(same("link", child->GetTagName())){
 		if(child->HasAttribute("href")){
-			DKRml::Get()->dkRmlToRML.PostProcess(child);
+			DKRml::Get()->dkHtmlToRmL.PostProcess(child);
 		}	
 	}
 
 	//post process if it's a <script>
 	if (same("script", child->GetTagName())) {
 		if(child->HasAttribute("src")) {
-			DKRml::Get()->dkRmlToRML.PostProcess(child);
+			DKRml::Get()->dkHtmlToRml.PostProcess(child);
 		}
 	}
 
