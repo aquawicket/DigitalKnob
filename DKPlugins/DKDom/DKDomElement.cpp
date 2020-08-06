@@ -18,6 +18,7 @@ bool DKDomElement::Init()
 	DKDuktape::AttachFunction("DKDomElement_getElementsByTagName", DKDomElement::getElementsByTagName);
 	DKDuktape::AttachFunction("DKDomElement_hasAttribute", DKDomElement::hasAttribute);
 	DKDuktape::AttachFunction("DKDomElement_innerHTML", DKDomElement::innerHTML);
+	DKDuktape::AttachFunction("DKDomElement_outerHTML", DKDomElement::outerHTML);
 	DKDuktape::AttachFunction("DKDomElement_setAttribute", DKDomElement::setAttribute);
 	DKDuktape::AttachFunction("DKDomElement_tagName", DKDomElement::tagName);
 	
@@ -253,6 +254,34 @@ int DKDomElement::innerHTML(duk_context* ctx)
 	else{
 		DKString innerHTML = duk_require_string(ctx, 1);
 		element->SetInnerRML(innerHTML.c_str());
+	}
+
+	return true;
+}
+
+/////////////////////////////////////////////
+int DKDomElement::outerHTML(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomElement::outerHTML(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
+	//get
+	if (!duk_is_string(ctx, 1)) {
+		DKERROR("DKDomElement::outerHTML(): FIXME: TODO\n"); return false;
+		DKString outerHtml = element->GetInnerRML(); //FIXME: element has bot GetOuterRml
+		if (outerHtml.empty()) { return true; }
+		duk_push_string(ctx, outerHtml.c_str());
+	}
+	//set
+	else {
+		DKString outerHTML = duk_require_string(ctx, 1);
+		element->SetInnerRML(outerHTML.c_str());
 	}
 
 	return true;

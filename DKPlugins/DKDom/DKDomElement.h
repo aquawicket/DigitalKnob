@@ -25,6 +25,7 @@ public:
 	static int getElementsByTagName(duk_context* ctx);
 	static int hasAttribute(duk_context* ctx);
 	static int innerHTML(duk_context* ctx);
+	static int outerHTML(duk_context* ctx);
 	static int setAttribute(duk_context* ctx);
 	static int tagName(duk_context* ctx);
 };
