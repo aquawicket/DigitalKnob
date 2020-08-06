@@ -178,7 +178,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	DKString rml = html;
 	rml = "<rml id=\"rml\">\n" + rml + "</rml>";
 
-	//dkRmlToRML.TidyFile(rml,rml);
+	//dkHtmlToRml.TidyFile(rml,rml);
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 	replace(rml, "<meta name=\"generator\" content=", "");
 	replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");
@@ -255,7 +255,7 @@ bool DKRml::LoadHtml(const DKString& html)
 		return false;
 	}
 
-	dkRmlToRML.PostProcess(document);
+	dkHtmlToRml.PostProcess(document);
 	document->Show();
 
 #ifdef ANDROID

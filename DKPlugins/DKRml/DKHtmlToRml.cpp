@@ -1,4 +1,4 @@
-#include "DKRmlToRML.h"
+#include "DKHtmlToRml.h"
 #include "DK/DKLog.h"
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
@@ -8,7 +8,7 @@
 #include "tidybuffio.h"
 
 ///////////////////////////////////////////////////////////////
-bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
+bool DKHtmlToRml::HtmlToRml(const DKString& html, DKString& rml)
 {
 	DKDEBUGFUNC(html, rml);
 	rml = html;
@@ -68,7 +68,7 @@ bool DKRmlToRML::HtmlToRml(const DKString& html, DKString& rml)
 }
 
 ///////////////////////////////////////////
-bool DKRmlToRML::Hyperlink(DKEvents* event)
+bool DKHtmlToRml::Hyperlink(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
@@ -83,7 +83,7 @@ bool DKRmlToRML::Hyperlink(DKEvents* event)
 }
 
 ////////////////////////////////////////////////////////////////
-bool DKRmlToRML::IndexToRml(const DKString& html, DKString& rml)
+bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml)
 {
 	DKDEBUGFUNC(html, rml);
 	rml = html;
@@ -140,11 +140,11 @@ bool DKRmlToRML::IndexToRml(const DKString& html, DKString& rml)
 }
 
 /////////////////////////////////////////////////////////
-bool DKRmlToRML::PostProcess(Rml::Element* element)
+bool DKHtmlToRml::PostProcess(Rml::Element* element)
 {
 	DKDEBUGFUNC(element);
 	if(!element){
-		DKWARN("DKRmlToRML::PostProcess(): element invalid\n");
+		DKWARN("DKHtmlToRml::PostProcess(): element invalid\n");
 		return false;
 	}
 
@@ -167,7 +167,7 @@ bool DKRmlToRML::PostProcess(Rml::Element* element)
 
 		DKString url;
 		if(!iframes[i]->GetAttribute("src")){ 
-			 DKINFO("DKRmlToRML::PostProcess(): iframe has no source tag\n");
+			 DKINFO("DKHtmlToRml::PostProcess(): iframe has no source tag\n");
 			 return false;
 		}
 		else{
@@ -175,9 +175,9 @@ bool DKRmlToRML::PostProcess(Rml::Element* element)
 		}
 		
 		DKClass::DKCreate("DKCef");
-		//DKEvent::AddEvent(id, "resize", &DKRmlToRML::ResizeIframe, this);
-		//DKEvent::AddEvent(id, "mouseover", &DKRmlToRML::MouseOverIframe, this);
-		//DKEvent::AddEvent(id, "click", &DKRmlToRML::ClickIframe, this);
+		//DKEvent::AddEvent(id, "resize", &DKHtmlToRml::ResizeIframe, this);
+		//DKEvent::AddEvent(id, "mouseover", &DKHtmlToRml::MouseOverIframe, this);
+		//DKEvent::AddEvent(id, "click", &DKHtmlToRml::ClickIframe, this);
 
 		Rml::Element* cef_texture = element->GetOwnerDocument()->CreateElement("img").get();
 		DKString cef_id = "iframe_"+id;
@@ -206,7 +206,7 @@ bool DKRmlToRML::PostProcess(Rml::Element* element)
 
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
 			DKString elementAddress = DKRml::elementToAddress(aElements[i]);
-			DKEvents::AddEvent(elementAddress, "click", &DKRmlToRML::Hyperlink, this);
+			DKEvents::AddEvent(elementAddress, "click", &DKHtmlToRml::Hyperlink, this);
 		}
 	}
 
@@ -292,12 +292,12 @@ bool DKRmlToRML::PostProcess(Rml::Element* element)
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
 	int n = code.rfind("<html");
 	if(n < 0){
-		DKERROR("DKRmlToRML::PostProcess(): html tag not found\n");
+		DKERROR("DKHtmlToRml::PostProcess(): html tag not found\n");
 		return true;
 	}
 	code = code.substr(n);
 	replace(code, "<", "\n<");
-	DKINFO("########## Post DKRmlToRML::PostProcess CODE ##########\n");
+	DKINFO("########## Post DKHtmlToRml::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
 #endif
@@ -306,7 +306,7 @@ bool DKRmlToRML::PostProcess(Rml::Element* element)
 }
 
 //////////////////////////////////////////////
-bool DKRmlToRML::ResizeIframe(DKEvents* event)
+bool DKHtmlToRml::ResizeIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -323,7 +323,7 @@ bool DKRmlToRML::ResizeIframe(DKEvents* event)
 }
 
 /////////////////////////////////////////////
-bool DKRmlToRML::ClickIframe(DKEvents* event)
+bool DKHtmlToRml::ClickIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -340,7 +340,7 @@ bool DKRmlToRML::ClickIframe(DKEvents* event)
 }
 
 /////////////////////////////////////////////////
-bool DKRmlToRML::MouseOverIframe(DKEvents* event)
+bool DKHtmlToRml::MouseOverIframe(DKEvents* event)
 {
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
@@ -357,7 +357,7 @@ bool DKRmlToRML::MouseOverIframe(DKEvents* event)
 }
 
 //////////////////////////////////////////
-bool DKRmlToRML::Encode(std::string& data)
+bool DKHtmlToRml::Encode(std::string& data)
 {
 	std::string buffer;
 	buffer.reserve(data.size());
@@ -377,7 +377,7 @@ bool DKRmlToRML::Encode(std::string& data)
 
 
 ////////////////////////////////////////////////////////////
-bool DKRmlToRML::TidyFile(const DKString& in, DKString& out)
+bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 {
 	DKINFO("####### CODE GOING INTO TIDY ##########\n");
 	DKINFO(in+"\n");

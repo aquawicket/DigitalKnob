@@ -1,13 +1,12 @@
 #pragma once
-#ifndef DKRmlToRML_H
-#define DKRmlToRML_H
+#ifndef DKHtmlToRml_H
+#define DKHtmlToRml_H
 
 #include "DK/DK.h"
 #include <RmlUi/Core.h>
-//#include <RmlUi/Controls.h>
 
 ///////////////////////////////////
-class DKRmlToRML  : public DKObject
+class DKHtmlToRml  : public DKObject
 {
 public:
 	DKString processed;
@@ -22,4 +21,4 @@ public:
 	bool TidyFile(const DKString& in, DKString& out);
 };
 
-#endif //DKRmlToRML_H
+#endif //DKHtmlToRml_H
