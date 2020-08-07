@@ -72,10 +72,14 @@ int DKDomDocument::getElementById(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
-
+	if(!DKRml::Get()){ 
+		DKERROR("DKDomDocument::getElementById(): DKRml::Get() invalid\n");
+		duk_push_null(ctx);
+		return true;
+	}
 	Rml::Element* element = DKRml::Get()->document->GetElementById(id.c_str()); //FIXME - Crash: invalid DKRml
 	if(!element){
-		//DKERROR("DKDomDocument::getElementById(): element invalid\n");
+		DKERROR("DKDomDocument::getElementById(): element invalid\n");
 		duk_push_null(ctx);
 		return true;
 	}
