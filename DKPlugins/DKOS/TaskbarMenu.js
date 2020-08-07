@@ -86,7 +86,7 @@ function TaskbarMenu_OnEvent(event)
 		DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
-			DKWidget_SetProperty("DKGit/GitMenu.html","top",DKWindow_GetMouseY()-30+"px");
+			document.getElementById("DKGit/GitMenu.html").style.top = DKWindow_GetMouseY()-30+"px";
 		});
 		});
 	}
