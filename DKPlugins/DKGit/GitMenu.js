@@ -46,8 +46,7 @@ function GitMenu_OnEvent(event)
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
 	if(DK_Id(event,"Git Commit")){
-		//DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
-		GitMenu_GitCommit();
+		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
 	if(DK_Id(event, "window")){
@@ -106,7 +105,7 @@ function GitMenu_InstallGit()
 function GitMenu_GitUpdate()
 {
 	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
 	
