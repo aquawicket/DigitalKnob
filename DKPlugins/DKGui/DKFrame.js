@@ -281,14 +281,10 @@ function DKFrame_MinimizeButton(id)
 function DKFrame_MaximizeButton(id)
 {
 	DKDEBUGFUNC(id);
-	var frame = DKWidget_GetParent(id);
-	//var top = DKWidget_GetProperty(frame, "top");
+	var frame = document.getElementById(id).parentNode.id;
 	var top = document.getElementById(frame).style.top;
-	//var bottom = DKWidget_GetProperty(frame, "bottom");
 	var bottom = document.getElementById(frame).style.bottom;
-	//var left = DKWidget_GetProperty(frame, "left");
 	var left = document.getElementById(frame).style.left;
-	//var right = DKWidget_GetProperty(frame, "right");
 	var right = document.getElementById(frame).style.right;
 	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem" ||
 		top == "0px" && bottom == "0px" && left == "0px" && right == "0px" ){
@@ -378,17 +374,11 @@ function DKFrame_Close(id)
 function DKFrame_StoreSize(id)
 {
 	DKDEBUGFUNC(id);
-	//var top = DKWidget_GetProperty(id, "top");
 	var top = document.getElementById(id).style.top;
-	//var bottom = DKWidget_GetProperty(id, "bottom");
 	var bottom = document.getElementById(id).style.bottom;
-	//var left = DKWidget_GetProperty(id, "left");
 	var left = document.getElementById(id).style.left;
-	//var right = DKWidget_GetProperty(id, "right");
 	var right = document.getElementById(id).style.right;
-	//var width = DKWidget_GetProperty(id, "width");
 	var width = document.getElementById(id).style.width;
-	//var height = DKWidget_GetProperty(id, "height");
 	var height = document.getElementById(id).style.height;
 	
 	for(var i=0; i<sizes.length; i++){
