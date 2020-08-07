@@ -341,6 +341,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	//////////////////////////////////////////
 	var DKFile_GetAbsolutePath = function(url)
 	{
+		console.log("DKFile_GetAbsolutePath("+url+")");
 		DKDEBUGFUNC(url);
 		if(!url){ url = "/"; }
 		if(url.indexOf("file:///") > -1){ url = pathname; }

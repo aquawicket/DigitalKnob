@@ -59,7 +59,8 @@ function DKMessage_Message(message)
 function DKMessage_Confirm(message, callback)
 {
 	DKDEBUGFUNC(message, callback);
-	DKWidget_SetInnerHtml("DKMessageText", message);
+	//DKWidget_SetInnerHtml("DKMessageText", message);
+	document.getElementById("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageCancel");
