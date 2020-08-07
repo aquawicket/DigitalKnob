@@ -430,3 +430,40 @@ bool DKHtmlToRml::TidyFile(const DKString& in, DKString& out)
 	return rc;
 	return true;
 }
+
+///////////////////////////////////////////////////////////////////////
+bool DKHtmlToRml::GetOuterHtml(Rml::Element* element, DKString& string)
+{
+	DKDEBUGFUNC(element, string);
+
+	/*
+	if (!element) { return false; }
+	Rml::Element* parent = element->GetParentNode();
+	DKString htmlstring;
+	//GetInnerHtml(parent, htmlstring);
+	htmlstring = parent->GetInnerRML();
+	if (htmlstring.empty()) { return false; }
+
+	DKXml xml;
+	if (!xml.LoadDocumentFromString(htmlstring)) { return false; }
+	xml.RemoveNodes("handle");
+	DKString id = element->GetId();
+	DKString style;
+	DKWidget::BuildStyleString(id, style);  //FIXME
+	xml.SetAttributes("//*[@id=\"" + id + "\"]", "style", style); //Update the style string
+	style = "";
+
+	DKStringArray ids;
+	GetElements(id, ids); //FIXME
+	for (unsigned int i = 0; i < ids.size(); ++i) {
+		BuildStyleString(ids[i], style); //FIXME
+		xml.SetAttributes("//*[@id=\"" + ids[i] + "\"]", "style", style); //Update the style string
+		style = "";
+		//TODO - rebuild options string for <select> elements
+	}
+
+	if (!xml.GetFullNode("//*[@id=\"" + id + "\"]", string)) { return false; }
+	return true;
+	*/
+	return false;
+}

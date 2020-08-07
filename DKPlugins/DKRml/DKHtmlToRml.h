@@ -19,6 +19,7 @@ public:
 	bool MouseOverIframe(DKEvents* event);
 	bool Encode(std::string& data);
 	bool TidyFile(const DKString& in, DKString& out);
+	bool GetOuterHtml(Rml::Element* element, DKString& string);
 };
 
 #endif //DKHtmlToRml_H
