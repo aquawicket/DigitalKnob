@@ -147,18 +147,18 @@ function DKOpenFile_UpdatePath(path)
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
-	DKWidget_SetInnerHtml("DKOpenFileMenu", ""); //Clear it
-	DKWidget_SetInnerHtml("DKOpenFileMenu2", ""); //Clear it
+	document.getElementById("DKOpenFileMenu").innerHTML = ""; //Clear it
+	document.getElementById("DKOpenFileMenu2").innerHTML = ""; //Clear it
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement("DKOpenFileMenu2", "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
-			DKWidget_SetAttribute(element2,"value", value);
+			document.getElementById(element2).value = value;
 			document.getElementById(element2).style.whiteSpace = "nowrap";
 			DKAddEvent(element2, "click", DKOpenFile_OnEvent);
 			document.getElementById(element2).style.paddingLeft = "17px";
-			DKWidget_SetInnerHtml(element2,files[d]);
+			document.getElementById(element2).innerHTML = files[d];
 			document.getElementById(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
 			document.getElementById(element2).style.backgroundRepeat = "no-repeat";
 		}
@@ -168,11 +168,16 @@ function DKOpenFile_UpdatePath(path)
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement("DKOpenFileMenu2", "option", "DKOpenFileFile");
 			var value = aPath+"/"+files[f];
-			DKWidget_SetAttribute(element3, "value", value);
-			DKWidget_SetProperty(element3, "white-space", "nowrap");
-			DKWidget_SetProperty(element3, "padding-left", "17px");
-			DKWidget_SetProperty(element3, "background-repeat", "no-repeat");
-			DKWidget_SetInnerHtml(element3,files[f]);
+			//DKWidget_SetAttribute(element3, "value", value);
+			document.getElementById(element3).value = value;
+			//DKWidget_SetProperty(element3, "white-space", "nowrap");
+			document.getElementById(element3).style.whiteSpace = "nowrap";
+			//DKWidget_SetProperty(element3, "padding-left", "17px");
+			document.getElementById(element3).style.paddingLeft = "17px";
+			//DKWidget_SetProperty(element3, "background-repeat", "no-repeat");
+			document.getElementById(element3).style.backgroundRepeat = "no-repeat";
+			//DKWidget_SetInnerHtml(element3,files[f]);
+			document.getElementById(element3).innerHTML = files[f];
 			DKAddEvent(element3, "click", DKOpenFile_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
@@ -180,7 +185,8 @@ function DKOpenFile_UpdatePath(path)
 				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
 				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
+				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
+				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 
 			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
@@ -194,15 +200,18 @@ function DKOpenFile_UpdatePath(path)
 				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
 				(extension == "ztl")
 			){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
+				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
+				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 
 			else if((extension == "html") || (extension == "htm")){
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
+				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
+				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 
 			else{
-				DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/file.png\")");
+				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/file.png\")");
+				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}
 	}
