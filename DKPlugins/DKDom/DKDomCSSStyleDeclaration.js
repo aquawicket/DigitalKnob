@@ -53,6 +53,13 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 			
+			if(realKey == "background-image"){
+				realKey = "decorator";
+				var img = val.replace("url(\"","");
+				img = img.replace("\")","");
+				val = "image("+img+" scale-none left top)";
+			}
+			
 			DKDomCSSStyleDeclaration_setProperty(target["pointer"], realKey, val);
 			target[key] = val;
 			return true;
