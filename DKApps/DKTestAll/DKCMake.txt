@@ -2,6 +2,7 @@
 
 DKSET(USE_DKCef ON) ##FIXME: Find a way to remove this requirement
 
+DKDEPEND(sdl2vs-master)
 DKDEPEND(DK)
 DKDEPEND(DKAdmin)
 DKDEPEND(DKArchive)
