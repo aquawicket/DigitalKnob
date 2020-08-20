@@ -2,7 +2,7 @@
 
 ### INSTALL ###
 DKINSTALL(https://codeload.github.com/fallahn/sdl2vs/zip/master sdl2vs-master)
-DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/sdl2vs-master.zip)
+DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/sdl2vs-master.zip)
 DKSET(SDL2VS ${3RDPARTY}/sdl2vs-master)
 
 ### LINK ###
