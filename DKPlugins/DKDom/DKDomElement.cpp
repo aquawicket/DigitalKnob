@@ -141,9 +141,10 @@ int DKDomElement::clientWidth(duk_context* ctx)
 ////////////////////////////////////////////////
 int DKDomElement::getAttribute(duk_context* ctx)
 {
-	DKDEBUGFUNC(ctx);
+	//DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
+	DKDEBUGFUNC(address, attribute);
 	Rml::Element* element = DKRml::addressToElement(address);
 	if(!element){
 		DKERROR("DKDomElement::getAttribute("+address+","+attribute+"): element invalid\n");
@@ -152,7 +153,7 @@ int DKDomElement::getAttribute(duk_context* ctx)
 	}
 	Rml::Variant* variant = element->GetAttribute(attribute.c_str());
 	if(!variant){ 
-		DKWARN("DKRmlJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
+		DKERROR("DKRmlJS::getAttribute("+address+","+attribute+"): element does not contain the requested attribute\n");
 		duk_push_undefined(ctx);
 		return true;
 	}
