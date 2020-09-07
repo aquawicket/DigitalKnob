@@ -6,7 +6,7 @@
 #include "DKRml/DKRml.h"
 
 
-////////////////////////////
+///////////////////////////////
 bool DKDomKeyboardEvent::Init()
 {
 	DKDEBUGFUNC();
@@ -36,9 +36,8 @@ int DKDomKeyboardEvent::altKey(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	//int altKey = event->GetParameter<int>("key_identifier", 0);
-	//duk_push_int(ctx, altKey);
+	bool altKey = event->GetParameter<bool>("alt_key", 0);
+	duk_push_boolean(ctx, altKey);
 	return true;
 }
 
@@ -52,16 +51,6 @@ int DKDomKeyboardEvent::key(duk_context* ctx)
 		DKERROR("DKDomKeyboardEvent::key(): event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
-	}
-
-	//TEST: list event parameters
-	const auto& p = event->GetParameters();
-	//Rml::String output = "<p>";
-	DKINFO("LISTING EVENT PARAMETERS\n");
-	for (auto& entry : p) {
-		auto value = Rml::StringUtilities::EncodeRml(entry.second.Get<Rml::String>());
-		DKString output = entry.first + ": " + value + "\n";
-		DKINFO(output);
 	}
 
 	int key = event->GetParameter<int>("key_identifier", 0);

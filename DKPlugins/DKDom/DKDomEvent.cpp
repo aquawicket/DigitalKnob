@@ -44,6 +44,9 @@ bool DKDomEvent::Init()
 	DKDuktape::AttachFunction("DKDomEvent_preventBubble", DKDomEvent::preventBubble);
 	DKDuktape::AttachFunction("DKDomEvent_preventCapture", DKDomEvent::preventCapture);
 
+	// Extra
+	DKDuktape::AttachFunction("DKDomEvent_getParameters", DKDomEvent::getParameters);
+
 	DKClass::DKCreate("DKDom/DKDomEvent.js");
 	return true;
 }
@@ -499,4 +502,30 @@ int DKDomEvent::preventCapture(duk_context* ctx)
 
 	//TODO
 	return false;
+}
+
+
+// Extra
+///////////////////////////////////////////////
+int DKDomEvent::getParameters(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString eventAddress = duk_require_string(ctx, 0);
+	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	if (!event) {
+		DKERROR("DKDomEvent::getParameters(): event invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
+	//List event parameters and values
+	DKINFO("LISTING EVENT PARAMETERS\n");
+	const auto& p = event->GetParameters();
+	DKString output = "";
+	for(auto& entry : p){
+		output += entry.first + ": " + entry.second.Get<Rml::String>() + "\n";
+	}
+	DKINFO(output);
+	duk_push_string(ctx, output.c_str());
+	return true;
 }

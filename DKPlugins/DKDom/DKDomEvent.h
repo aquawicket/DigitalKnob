@@ -46,6 +46,9 @@ public:
 	static int getPreventDefault(duk_context* ctx); //Not standardized
 	static int preventBubble(duk_context* ctx); //Not standardized, Obsolete
 	static int preventCapture(duk_context* ctx); //Not standardized, Obsolete
+
+	// Extra
+	static int getParameters(duk_context* ctx);
 };
 
 
