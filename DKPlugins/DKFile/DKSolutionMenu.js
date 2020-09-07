@@ -188,7 +188,7 @@ function DKSolutionMenu_Rename()
 		DKSolutionRename_SetId(DKSolutionMenu_id);
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
 		document.getElementById("DKFile/DKSolutionRename.html").style.top = top+"rem";
-		var value = DKWidget_GetInnerHtml(DKSolutionMenu_id);
+		var value = document.getElementById(DKSolutionMenu_id).innerHTML;
 		DKWidget_SetValue("DKSolutionRename_box", value);
 	});
 }

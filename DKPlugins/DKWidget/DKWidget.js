@@ -223,10 +223,10 @@ function DKWidget_GetValue(variable)
 				return ele.checked;
 			}
 			if(!ele.value){
-				DKERROR("DKWidget_GetValue("+variable+"): Could not get ele.value\n");
+				//console.log("DKWidget_GetValue("+variable+"): Could not get ele.value\n");
 				return ele.innerHTML;
 			}
-			//DKINFO("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
+			//console.log("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value; 
 		}
 		
