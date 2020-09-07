@@ -14,6 +14,7 @@ public:
 	bool Init();
 	
 	// Properties
+	static int altKey(duk_context* ctx);
 	static int key(duk_context* ctx);
 
 	// Methods
