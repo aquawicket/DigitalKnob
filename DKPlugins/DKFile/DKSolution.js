@@ -147,6 +147,8 @@ function DKSolution_OpenHere(path)
 function DKSolution_UpdatePath(path)
 {
 	DKDEBUGFUNC(path);
+	console.log("DKSolution_UpdatePath("+path+")");
+	
 	//reload events
 	DKRemoveEvents(DKSolution_OnEvent);
 	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
@@ -154,13 +156,14 @@ function DKSolution_UpdatePath(path)
 	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
 	
-	var aPath = path;
+	if(!path){ path = ""; }
+	var aPath;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	//DKINFO("aPath:"+aPath+"\n");
+	//console.log("aPath:"+aPath+"\n");
 	//var rPath = DKFile_GetRelativePath(aPath, path);
-	//DKINFO("rPath:"+rPath+"\n");
+	//console.log("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);
 	if(!temp){ return false; }
