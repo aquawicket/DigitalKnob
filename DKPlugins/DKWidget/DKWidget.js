@@ -215,16 +215,16 @@ function DKWidget_GetValue(variable)
 	if(!variable){ DKINFO("variable empty\n"); return; }
 
 	if(typeof variable === "string"){ //id
-		//DKINFO("GetValue("+variable+") -> typeof variable === string\n");
+		//console.log("GetValue("+variable+") -> typeof variable === string\n");
 		var ele = document.getElementById(variable);
-		if(!ele){ DKINFO("DKWidget_GetValue("+variable+"): Cannot find element\n"); /*return false;*/ }
+		if(!ele){ console.log("DKWidget_GetValue("+variable+"): Cannot find element\n"); /*return false;*/ }
 		if(ele){
 			if(ele.type && ele.type === "checkbox"){
 				return ele.checked;
 			}
 			if(!ele.value){
-				//DKERROR("DKWidget_GetValue("+variable+"): Could not get value\n");
-				return false;
+				DKERROR("DKWidget_GetValue("+variable+"): Could not get ele.value\n");
+				return ele.innerHTML;
 			}
 			//DKINFO("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value; 
@@ -245,7 +245,7 @@ function DKWidget_GetValue(variable)
 				//DKINFO("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
-			return DKWidget_GetInnerHtml(variable);
+			return variable.innerHTML;
 		}
 		if(variable.type){ //event
 			//DKINFO("GetValue("+variable+") -> variable.type == true\n");
