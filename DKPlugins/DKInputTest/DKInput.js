@@ -8,7 +8,9 @@ function DKInput_Init()
 	DKAddEvent("window", "keypress", DKInput_OnEvent);
 	DKAddEvent("window", "keydown", DKInput_OnEvent);
 	DKAddEvent("window", "keyup", DKInput_OnEvent);
-	DKAddEvent("window", "mousedown", DKInput_OnEvent);
+	//DKAddEvent("window", "mousedown", DKInput_OnEvent);
+	window.addEventListener("mousedown", DKInput_OnEvent);
+	//document.addEventListener("mousedown", DKInput_OnEvent);
 	DKAddEvent("window", "mouseup", DKInput_OnEvent);
 	DKAddEvent("window", "click", DKInput_OnEvent);
 	DKAddEvent("window", "dblclick", DKInput_OnEvent);
@@ -23,6 +25,7 @@ function DKInput_Init()
 	DKAddEvent("window", "scroll", DKInput_OnEvent);
 	DKAddEvent("window", "drag", DKInput_OnEvent);
 	DKAddEvent("esc", "mousedown", DKInput_OnEvent);
+	//document.getElementById("esc").addEventListener("mousedown", DKInput_OnEvent);
 	DKAddEvent("esc", "mouseup", DKInput_OnEvent);
 }
 
@@ -38,8 +41,10 @@ function DKInput_End()
 function DKInput_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
+	console.log("DKInput_OnEvent(event)");
 	if(event.type){ //Browser
-		DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
+		document.getElementById("lastevent").innerHTML = "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event);
+		//DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
 		if(DK_GetType(event) != "mousemove"){
 			//DKINFO("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
 		}
@@ -64,7 +69,7 @@ function DKInput_OnEvent(event)
 	}
 	if(DK_Type(event, "mousedown")){
 		DKInput_ProcessMouseDown(DK_GetValue(event));
-		if(DK_GetId(event) != "window"){
+		if(DK_GetId(event) != "document"){
 			DKInput_Highlight(DK_GetId(event));
 		}
 	}
@@ -235,7 +240,8 @@ function DKInput_KeyToDiv(key)
 function DKInput_Highlight(div)
 {
 	DKDEBUGFUNC(div);
-	DKWidget_SetProperty(div, "background-color", "rgba(0,255,0,0.5)");
+	console.log("DKInput_Highlight("+div+")");
+	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0.5)";
 	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,0.5)"); }
 	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,0.5)"); }
 	if(div == "leftctrl"){ DKWidget_SetProperty("rightctrl", "background-color", "rgba(0,255,0,0.5)"); }
@@ -250,7 +256,7 @@ function DKInput_Highlight(div)
 function DKInput_UnHighlight(div)
 {
 	DKDEBUGFUNC(div);
-	DKWidget_SetProperty(div, "background-color", "rgba(0,255,0,0)");
+	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0)";
 	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,0)"); }
 	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,0)"); }
 	if(div == "leftctrl"){ DKWidget_SetProperty("rightctrl", "background-color", "rgba(0,255,0,0)"); }
