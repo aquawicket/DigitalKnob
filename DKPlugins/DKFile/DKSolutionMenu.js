@@ -120,7 +120,7 @@ function DKSolutionMenu_NewFile()
 		DKERROR("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
 		return;
 	}
-	var value = gettElementById("DKSolutionPath").value;
+	var value = document.getElementById("DKSolutionPath").value;
 	DKSolutionMenu_SetFile(value+"/New.txt");
 	DKFile_StringToFile("", DKSolutionMenu_file);
 	DKSolution_UpdatePath(value);
