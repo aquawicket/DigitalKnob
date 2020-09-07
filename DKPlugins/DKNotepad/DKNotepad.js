@@ -31,7 +31,7 @@ function DKNotepad_End()
 function DKNotepad_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKWARN("DKNotepad_OnEvent("+event.type+","+event.currentTarget.id+")");
+	//DKWARN("DKNotepad_OnEvent("+event.type+","+event.currentTarget.id+")");
 	
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
@@ -72,11 +72,14 @@ function DKNotepad_OnEvent(event)
 function DKNotepad_Open(file)
 {
 	DKDEBUGFUNC(file);
+	console.log("DKNotepad_Open("+file+")");
 	//TODO - only open files under 5mb
 	//TODO - set the frame title with the filename
 	currentFile = file;
 	var text = DKFile_FileToString(file);
-	DKWidget_SetAttribute("DKNotepad_Text", "value", text);
+	console.log("DKNotepad_Open(file): = "+text);
+	//DKWidget_SetAttribute("DKNotepad_Text", "value", text);
+	document.getElementById("DKNotepad_Text").value = text;
 }
 
 /////////////////////////////
