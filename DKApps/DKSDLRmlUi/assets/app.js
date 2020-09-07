@@ -9,4 +9,4 @@ location.href = DKAssets_LocalAssets()+"index.html";
 DKRml_DebuggerOn();
 //DKRml_DebuggerToggle(); //FIXME
 
-DKCreate("DKDebug/DKDebug.js", function(){});
+DKCreate("DKDebug/DKDebug.js", function(){});  

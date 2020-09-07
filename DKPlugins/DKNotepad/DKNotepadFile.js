@@ -57,7 +57,7 @@ function DKNotepadFile_OnEvent(event)
 function DKNotepadFile_New()
 {
 	DKDEBUGFUNC();
-	DKWidget_SetAttribute("DKNotepad_Text", "value", "");
+	document.getElementById("DKNotepad_Text").value = "";
 	currentFile = "";
 }
 
@@ -81,6 +81,7 @@ function DKNotepadFile_Save()
 	}
 	var text = DKWidget_GetValue("DKNotepad_Text");
 	//var assets = DKAssets_LocalAssets();
+	console.log("DKNotepadFile_Save(): text = "+text);
 	DKFile_StringToFile(text, currentFile);
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
