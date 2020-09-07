@@ -55,8 +55,8 @@ function DKSaveFile_OnEvent(event)
 		//console.log(up);
 		DKSaveFile_OpenFolder(up);
 	}
-	
 	if(DK_Id(event, "DKSaveFileOK")){
+	//if(event.currentTarget.id == "DKSaveFileOK"){
 		if(rPath && event_data2 == "relative"){
 			if(DKFile_IsDirectory(rPath)){
 				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");

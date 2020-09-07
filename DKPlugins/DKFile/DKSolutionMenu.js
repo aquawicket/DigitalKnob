@@ -121,6 +121,7 @@ function DKSolutionMenu_NewFile()
 		return;
 	}
 	var value = document.getElementById("DKSolutionPath").value;
+	console.log("DKSolutionMenu_NewFile(): value = "+value);
 	DKSolutionMenu_SetFile(value+"/New.txt");
 	DKFile_StringToFile("", DKSolutionMenu_file);
 	DKSolution_UpdatePath(value);
