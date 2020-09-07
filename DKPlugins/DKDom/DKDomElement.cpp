@@ -157,7 +157,7 @@ int DKDomElement::getAttribute(duk_context* ctx)
 		return true;
 	}
 	Rml::String temp = element->GetAttribute(attribute.c_str())->Get<Rml::String>();
-	DKString value = temp;//.CString();
+	DKString value = temp;
 	duk_push_string(ctx, value.c_str());
 	return true;
 }
