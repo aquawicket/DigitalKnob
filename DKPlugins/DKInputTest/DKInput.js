@@ -58,11 +58,11 @@ function DKInput_OnEvent(event)
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keydown")){
-		document.getElementById("keycode").innerHTML = "Unicode KEY code: "+DK_GetValue(event);
-		DKInput_ProcessKeyDown(DK_GetValue(event));
+		document.getElementById("keycode").innerHTML = "Unicode KEY code: "+event.key;
+		DKInput_ProcessKeyDown(event.key);
 	}
 	if(DK_Type(event, "keyup")){
-		DKInput_ProcessKeyUp(DK_GetValue(event));
+		DKInput_ProcessKeyUp(event.key);
 	}
 	if(DK_Type(event, "mousedown")){
 		DKInput_ProcessMouseDown(DK_GetValue(event));
@@ -113,7 +113,6 @@ function DKInput_ProcessMouseUp(button)
 function DKInput_ProcessKeyDown(key)
 {
 	DKDEBUGFUNC(key);
-	console.log("DKInput_ProcessKeyDown("+key+")");
 	DKInput_Highlight(DKInput_KeyToDiv(key));
 }
 
