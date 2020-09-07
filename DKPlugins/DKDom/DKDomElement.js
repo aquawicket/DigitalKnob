@@ -110,6 +110,10 @@ var Element = function(pointer)
 		get: function(){ return this.fullscreenerror; },
 		set: function(func){ this.addEventListener("fullscreenerror", func); this.fullscreenerror = func }
 	});
+	Object.defineProperty(this, "value", {
+		get: function()   { return DKDomElement_getAttribute(pointer, "value"); },
+		set: function(val){ return DKDomElement_setAttribute(pointer, "value", val); }
+	});
 	
 	
 	Element.prototype.attachShadow = function(){
