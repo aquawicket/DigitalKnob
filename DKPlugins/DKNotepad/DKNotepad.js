@@ -86,7 +86,7 @@ function DKNotepad_Open(file)
 function DKNotepad_Save(file)
 {
 	DKDEBUGFUNC(file);
-	var text = DKWidget_GetAttribute("DKNotepad_Text", "value");
-	//DKINFO(("DKNotepad_Save("+file+"): text = "+text+"\n");
+	var text = document.getElementById("DKNotepad_Text").value;
+	//console.log(("DKNotepad_Save("+file+"): text = "+text+"\n");
 	DKFile_StringToFile(text, file);
 }
