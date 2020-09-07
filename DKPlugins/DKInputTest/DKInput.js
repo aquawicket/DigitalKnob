@@ -9,8 +9,6 @@ function DKInput_Init()
 	DKAddEvent("window", "keydown", DKInput_OnEvent);
 	DKAddEvent("window", "keyup", DKInput_OnEvent);
 	DKAddEvent("window", "mousedown", DKInput_OnEvent);
-	//window.addEventListener("mousedown", DKInput_OnEvent);
-	//document.addEventListener("mousedown", DKInput_OnEvent);
 	DKAddEvent("window", "mouseup", DKInput_OnEvent);
 	DKAddEvent("window", "click", DKInput_OnEvent);
 	DKAddEvent("window", "dblclick", DKInput_OnEvent);
@@ -25,7 +23,6 @@ function DKInput_Init()
 	DKAddEvent("window", "scroll", DKInput_OnEvent);
 	DKAddEvent("window", "drag", DKInput_OnEvent);
 	DKAddEvent("esc", "mousedown", DKInput_OnEvent);
-	//document.getElementById("esc").addEventListener("mousedown", DKInput_OnEvent);
 	DKAddEvent("esc", "mouseup", DKInput_OnEvent);
 }
 
@@ -57,11 +54,11 @@ function DKInput_OnEvent(event)
 	}
 	
 	if(DK_Type(event, "keypress")){
-		DKWidget_SetInnerHtml("charcode", "Unicode CHARACTER code: "+DK_GetValue(event));
+		document.getElementById("charcode").innerHTML = "Unicode CHARACTER code: "+DK_GetValue(event);
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keydown")){
-		DKWidget_SetInnerHtml("keycode", "Unicode KEY code: "+DK_GetValue(event));
+		document.getElementById("keycode").innerHTML = "Unicode KEY code: "+DK_GetValue(event);
 		DKInput_ProcessKeyDown(DK_GetValue(event));
 	}
 	if(DK_Type(event, "keyup")){
@@ -69,7 +66,7 @@ function DKInput_OnEvent(event)
 	}
 	if(DK_Type(event, "mousedown")){
 		DKInput_ProcessMouseDown(DK_GetValue(event));
-		if(DK_GetId(event) != "document"){
+		if(DK_GetId(event) != "window"){
 			DKInput_Highlight(DK_GetId(event));
 		}
 	}
@@ -116,6 +113,7 @@ function DKInput_ProcessMouseUp(button)
 function DKInput_ProcessKeyDown(key)
 {
 	DKDEBUGFUNC(key);
+	console.log("DKInput_ProcessKeyDown("+key+")");
 	DKInput_Highlight(DKInput_KeyToDiv(key));
 }
 
