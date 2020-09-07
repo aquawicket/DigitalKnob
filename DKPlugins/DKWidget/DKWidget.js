@@ -248,6 +248,7 @@ function DKWidget_GetValue(variable)
 			return variable.innerHTML;
 		}
 		if(variable.type){ //event
+			var event = variable;
 			//DKINFO("GetValue("+variable+") -> variable.type == true\n");
 			//DKINFO("GetValue("+variable+") -> "+variable.type+"\n");
 			if(variable.type == "mousedown"){
@@ -273,10 +274,12 @@ function DKWidget_GetValue(variable)
 			}
 			if(variable.type == "mouseover"){
 				if(!event.target){ return window.event.srcElement.id; }
+				//if(!event.target){ return event.srcElement.id; }
 				return event.target.id;
 			}
 			if(variable.type == "mouseout"){
 				if(!event.target){ return window.event.srcElement.id; }
+				//if(!event.target){ return event.srcElement.id; }
 				return event.target.id;
 			}
 			if(variable.type == "wheel"){

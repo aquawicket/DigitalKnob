@@ -479,11 +479,20 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent)
 bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type)
 {
 	DKDEBUGFUNC(elementAddress, type);
-	if(elementAddress.empty()){ return false; } //no elementAddress
-	if(type.empty()){ return false; } //no type
+	if(elementAddress.empty()){ 
+		DKERROR("DKRml::RegisterEvent(): elementAddress empty\n"); 
+		return false; 
+	}
+	if(type.empty()){ 
+		DKERROR("DKRml::RegisterEvent("+elementAddress+"): type empty\n");
+		return false; 
+	}
 	
 	Rml::Element* element = addressToElement(elementAddress.c_str());
-	if(!element){ return false; } //no element
+	if(!element){ 
+		DKERROR("DKRml::RegisterEvent("+elementAddress+","+type+"): element invalid\n");
+		return false; 
+	}
 
 	DKString _type = type;
 	if(same(type, "contextmenu")){ _type = "mouseup"; }
@@ -584,14 +593,14 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 Rml::Event* DKRml::addressToEvent(const DKString& address)
 {
 	//DKDEBUGFUNC(address);
 
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("NOTE: DKRml::addressToEvent(): the address is not a valid hex notation");
+		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
 		return NULL;
 	}
 
@@ -611,7 +620,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address)
 	return event;
 }
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////
 DKString DKRml::eventToAddress(Rml::Event* event)
 {
 	if (!event) {
@@ -635,7 +644,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 	//DKDEBUGFUNC(address);
 
 	Rml::Element* element;
-	if (address == "document") {
+	if(address == "window"/* || address == "document"*/){
 		element = DKRml::Get()->document;
 	}
 	else {
@@ -669,7 +678,8 @@ DKString DKRml::elementToAddress(Rml::Element* element)
 	}
 	std::stringstream ss;
 	if (element == DKRml::Get()->document) {
-		ss << "document";
+		ss << "window";
+		//ss << "document";
 	}
 	else {
 		const void* address = static_cast<const void*>(element);

@@ -8,8 +8,8 @@ function DKInput_Init()
 	DKAddEvent("window", "keypress", DKInput_OnEvent);
 	DKAddEvent("window", "keydown", DKInput_OnEvent);
 	DKAddEvent("window", "keyup", DKInput_OnEvent);
-	//DKAddEvent("window", "mousedown", DKInput_OnEvent);
-	window.addEventListener("mousedown", DKInput_OnEvent);
+	DKAddEvent("window", "mousedown", DKInput_OnEvent);
+	//window.addEventListener("mousedown", DKInput_OnEvent);
 	//document.addEventListener("mousedown", DKInput_OnEvent);
 	DKAddEvent("window", "mouseup", DKInput_OnEvent);
 	DKAddEvent("window", "click", DKInput_OnEvent);
@@ -83,10 +83,10 @@ function DKInput_OnEvent(event)
 		//DKINFO(DK_GetValue(event)+"\n");
 		var xy = DK_GetValue(event);
 		var arry = xy.split(",");
-		DKWidget_SetInnerHtml("mousex", "Mouse X: "+arry[0]);
-		DKWidget_SetInnerHtml("mousey", "Mouse Y: "+arry[1]);
-		DKWidget_SetInnerHtml("screenx", "Screen X: "+arry[2]);
-		DKWidget_SetInnerHtml("screeny", "Screen Y: "+arry[3]);
+		document.getElementById("mousex").innerHTML = "Mouse X: "+arry[0];
+		document.getElementById("mousey").innerHTML = "Mouse Y: "+arry[1];
+		document.getElementById("screenx").innerHTML = "Screen X: "+arry[2];
+		document.getElementById("screeny").innerHTML = "Screen Y: "+arry[3];
 	}
 	if(DK_Type(event, "wheel")){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
