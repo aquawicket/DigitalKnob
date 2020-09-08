@@ -39,33 +39,32 @@ function DKInput_OnEvent(event)
 {
 	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
-	document.getElementById("lastevent").innerHTML = "Last Event: "+event.id+","+event.type+","+event.key;
+	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type+","+event.key;
 		
-	if(DK_Type(event, "keypress")){
+	if(event.type == "keypress"){
 		document.getElementById("charcode").innerHTML = "Unicode CHARACTER code: "+DK_GetValue(event);
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
-	if(DK_Type(event, "keydown")){
+	if(event.type == "keydown"){
 		document.getElementById("keycode").innerHTML = "Unicode KEY code: "+event.key;
 		DKInput_ProcessKeyDown(event.key);
 	}
-	if(DK_Type(event, "keyup")){
+	if(event.type == "keyup"){
 		DKInput_ProcessKeyUp(event.key);
 	}
-	if(DK_Type(event, "mousedown")){
+	if(event.type == "mousedown"){
 		DKInput_ProcessMouseDown(DK_GetValue(event));
-		if(DK_GetId(event) != "window"){
+		if(event.currentTarget.id != "window"){
 			DKInput_Highlight(DK_GetId(event));
 		}
 	}
-	if(DK_Type(event, "mouseup") || DK_Type(event, "click")){
+	if(event.type == "mouseup" || event.type == "click"){
 		DKInput_ProcessMouseUp(DK_GetValue(event));
-		if(DK_GetId(event) != "window"){
+		if(event.currentTarget.id != "window"){
 			DKInput_UnHighlight(DK_GetId(event));
 		}
 	}
-	if(DK_Type(event, "mousemove")){
-		//DKINFO(DK_GetValue(event)+"\n");
+	if(event.type == "mousemove"){
 		var xy = DK_GetValue(event);
 		var arry = xy.split(",");
 		document.getElementById("mousex").innerHTML = "Mouse X: "+arry[0];
@@ -73,12 +72,12 @@ function DKInput_OnEvent(event)
 		document.getElementById("screenx").innerHTML = "Screen X: "+arry[2];
 		document.getElementById("screeny").innerHTML = "Screen Y: "+arry[3];
 	}
-	if(DK_Type(event, "wheel")){
+	if(event.type == "wheel"){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
 	}
 	
 	//element events
-	if(DK_Id(event, "esc")){
+	if(event.currentTarget.id == "esc"){
 		//DKINFO("esc\n")
 	}
 }
@@ -220,6 +219,7 @@ function DKInput_KeyToDiv(key)
 	if(key == 37){ return "left"; }
 	if(key == 39){ return "right"; }
 	if(key == 12){ return "kp_5"; }
+	return key;
 }
 
 ///////////////////////////////
