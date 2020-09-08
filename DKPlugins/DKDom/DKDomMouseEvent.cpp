@@ -305,8 +305,10 @@ int DKDomMouseEvent::screenX(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int x, y;
+	DKUtil::GetMousePos(x, y);
+	duk_push_int(ctx, x);
+	return true;
 }
 
 //////////////////////////////////////////////
@@ -321,8 +323,10 @@ int DKDomMouseEvent::screenY(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int x, y;
+	DKUtil::GetMousePos(x, y);
+	duk_push_int(ctx, y);
+	return true;
 }
 
 ///////////////////////////////////////////////
