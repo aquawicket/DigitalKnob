@@ -16,6 +16,9 @@ public:
 	// Properties
 	static int altKey(duk_context* ctx);
 	static int key(duk_context* ctx);
+	static int ctrlKey(duk_context* ctx);
+	static int metaKey(duk_context* ctx);
+	static int shiftKey(duk_context* ctx);
 
 	// Methods
 	static int getModifierState(duk_context* ctx);
