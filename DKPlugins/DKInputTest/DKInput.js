@@ -35,7 +35,7 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
-	//DKDomEvent_getParameters(event.pointer);
+	DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
 	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type+","+event.key;
 		
@@ -63,12 +63,16 @@ function DKInput_OnEvent(event)
 		}
 	}
 	if(event.type == "mousemove"){
+		/*
 		var xy = DK_GetValue(event);
 		var arry = xy.split(",");
 		document.getElementById("mousex").innerHTML = "Mouse X: "+arry[0];
 		document.getElementById("mousey").innerHTML = "Mouse Y: "+arry[1];
 		document.getElementById("screenx").innerHTML = "Screen X: "+arry[2];
 		document.getElementById("screeny").innerHTML = "Screen Y: "+arry[3];
+		*/
+		console.log("Mouse X: "+event.x);
+		console.log("Mouse Y: "+event.y);
 	}
 	if(event.type == "wheel"){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));

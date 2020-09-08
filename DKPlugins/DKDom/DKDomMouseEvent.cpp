@@ -60,8 +60,9 @@ int DKDomMouseEvent::altKey(duk_context* ctx)
 		return true;
 	}
 	
-	//TODO
-	return false;
+	bool altKey = event->GetParameter<bool>("alt_key", 0);
+	duk_push_boolean(ctx, altKey);
+	return true;
 }
 
 /////////////////////////////////////////////
@@ -108,8 +109,9 @@ int DKDomMouseEvent::clientX(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int clientX = event->GetParameter<int>("mouse_x", 0);
+	duk_push_int(ctx, clientX);
+	return true;
 }
 
 //////////////////////////////////////////////
@@ -124,8 +126,9 @@ int DKDomMouseEvent::clientY(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int clientY = event->GetParameter<int>("mouse_y", 0);
+	duk_push_int(ctx, clientY);
+	return true;
 }
 
 /////////////////////////////////////////////
@@ -140,8 +143,9 @@ int DKDomMouseEvent::ctrlKey(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
+	duk_push_boolean(ctx, ctrlKey);
+	return true;
 }
 
 /////////////////////////////////////////////
@@ -156,8 +160,9 @@ int DKDomMouseEvent::metaKey(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	bool metaKey = event->GetParameter<bool>("meta_key", 0);
+	duk_push_boolean(ctx, metaKey);
+	return true;
 }
 
 ////////////////////////////////////////////////
@@ -332,8 +337,9 @@ int DKDomMouseEvent::shiftKey(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	bool shiftKey = event->GetParameter<bool>("shift_key", 0);
+	duk_push_boolean(ctx, shiftKey);
+	return true;
 }
 
 ////////////////////////////////////////////
@@ -412,8 +418,9 @@ int DKDomMouseEvent::x(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int clientX = event->GetParameter<int>("mouse_x", 0);
+	duk_push_int(ctx, clientX);
+	return true;
 }
 
 ////////////////////////////////////////
@@ -428,8 +435,9 @@ int DKDomMouseEvent::y(duk_context* ctx)
 		return true;
 	}
 
-	//TODO
-	return false;
+	int clientY = event->GetParameter<int>("mouse_y", 0);
+	duk_push_int(ctx, clientY);
+	return true;
 }
 
 
