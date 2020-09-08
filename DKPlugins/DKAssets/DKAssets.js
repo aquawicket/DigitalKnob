@@ -56,13 +56,15 @@ if(protocol != "file:"){
 appfilename = pathname.replace("/","");
 appfilename = appfilename.replace("/","");
 
-if(DK_GetBrowser() != "CEF"){
+/*
+if(DK_GetBrowser() != "RML"){
 	var absolutepath = ajaxGetUrl(online_assets+"/DKFile/DKFile.php?GetAbsolutePath="+pathname);
 	absolutepath = absolutepath.replace("//","/");
 }
 else{
 	absolutepath = online_assets;
 }
+*/
 //if(absolutepath){online_assets = absolutepath;}
 
 DKINFO("href: "+href+"\n");
@@ -72,7 +74,7 @@ DKINFO("protocol: "+protocol+"\n");
 DKINFO("appfilename: "+appfilename+"\n");
 DKINFO("local_assets: "+local_assets+"\n");
 DKINFO("online_assets: "+online_assets+"\n");
-DKINFO("absolutepath: "+absolutepath+"\n");
+//DKINFO("absolutepath: "+absolutepath+"\n");
 
 DKINFO("LOG_DEBUG: "+LOG_DEBUG+"\n");
 DKINFO("LOG_INFO: "+LOG_INFO+"\n");
