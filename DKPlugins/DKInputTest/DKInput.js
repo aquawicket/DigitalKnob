@@ -51,15 +51,15 @@ function DKInput_OnEvent(event)
 		DKInput_ProcessKeyUp(event.key);
 	}
 	if(event.type == "mousedown"){
-		DKInput_ProcessMouseDown(DK_GetValue(event));
+		DKInput_ProcessMouseDown(event.button);
 		if(event.currentTarget.id != "window"){
-			DKInput_Highlight(DK_GetId(event));
+			DKInput_Highlight(event.currentTarget.id);
 		}
 	}
 	if(event.type == "mouseup" || event.type == "click"){
-		DKInput_ProcessMouseUp(DK_GetValue(event));
+		DKInput_ProcessMouseUp(event.button);
 		if(event.currentTarget.id != "window"){
-			DKInput_UnHighlight(DK_GetId(event));
+			DKInput_UnHighlight(event.currentTarget.id);
 		}
 	}
 	if(event.type == "mousemove"){
@@ -221,6 +221,7 @@ function DKInput_KeyToDiv(key)
 function DKInput_Highlight(div)
 {
 	DKDEBUGFUNC(div);
+	if(!div){ return; }
 	if(!document.getElementById(div)){ return; }
 	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,127)";
 	if(div == "leftshift"){ document.getElementById("rightshift").style.backgroundColor = "rgba(0,255,0,127)"; }
@@ -237,6 +238,7 @@ function DKInput_Highlight(div)
 function DKInput_UnHighlight(div)
 {
 	DKDEBUGFUNC(div);
+	if(!div){ return; }
 	if(!document.getElementById(div)){ return; }
 	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0)";
 	if(div == "leftshift"){ document.getElementById("rightshift").style.backgroundColor = "rgba(0,255,0,0)"; }
