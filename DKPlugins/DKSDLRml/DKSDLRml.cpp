@@ -92,6 +92,7 @@ bool DKSDLRml::Handle(SDL_Event *event)
 #else
 		case SDL_KEYDOWN:{
 			//DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+			/*
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
@@ -115,6 +116,8 @@ bool DKSDLRml::Handle(SDL_Event *event)
 				//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //symbol
 				dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
 			}
+			*/
+
 			//DKEvent::SendEvent("window", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
 			dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			return false; //allow event to continue
