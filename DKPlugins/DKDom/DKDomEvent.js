@@ -1,8 +1,11 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
+//event_instances = [];
 /////////////////////////////
 var Event = function(pointer)
 {
+	this.pointer = pointer;
+	
 	//Properties
 	Object.defineProperty(this, "bubbles", { //Read Only
 		get: function(){ return DKDomEvent_bubbles(pointer); } 

@@ -37,6 +37,7 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
+	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
 	console.log("DKInput_OnEvent(event)");
 	if(event.type){ //Browser
