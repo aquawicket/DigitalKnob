@@ -8,7 +8,7 @@ function DesktopMenu_Init()
 	document.getElementById("DKOS/DesktopMenu.html").style.top = "100px";
 	document.getElementById("DKOS/DesktopMenu.html").style.left = "100px";
 	
-	DKAddEvent("document", "mousedown", DesktopMenu_OnEvent);
+	window.onmousedown = DesktopMenu_OnEvent;
 	DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
 	DKAddEvent("ToggleFullscreen", "click", DesktopMenu_OnEvent);
 }
@@ -34,13 +34,12 @@ function DesktopMenu_OnEvent(event)
 		Desktop_ToggleFullscreen();
 	}
 	
-	if(DK_Id(event, "document")){
+	if(DK_Id(event, "window")){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/DesktopMenu.html")){
 			return;
 		}
 	}
 	DKClose("DKOS/DesktopMenu.js");
-	DKClose("DKOS/DesktopMenu.html");
 }
 
 ///////////////////////////////////

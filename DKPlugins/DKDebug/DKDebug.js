@@ -4,8 +4,6 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
-	//DKAddEvent("document", "keypress", DKDebug_OnEvent);
-	//DKAddEvent("document", "keydown", DKDebug_OnEvent);
 	
 	window.onkeydown = DKDebug_OnEvent;
 }
@@ -21,7 +19,7 @@ function DKDebug_End()
 function DKDebug_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	//console.warn("DKDebug_OnEvent("+event+","+event.id+","+event.type+","+event.value+")");
+	//console.warn("DKDebug_OnEvent("+event+","+event.currentTarget.id+","+event.type+","+event.value+")");
 	
 	if(event.type == "keydown"){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
@@ -34,8 +32,8 @@ function DKDebug_OnEvent(event)
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}
-		if(typeof DKRocket_ToggleDebugger == 'function'){
-			//DKRocket_ToggleDebugger();
+		if(typeof DKRml_ToggleDebugger == 'function'){
+			DKRml_DebuggerToggle();
 		}
 	}
 }
@@ -345,8 +343,8 @@ function DKDebug_Editor()
 function DKDebug_Debugger()
 {
 	DKDEBUGFUNC();
-	if(DK_GetBrowser() == "Rocket" || DK_GetJSEngine() == "Duktape"){
-		DKRocket_ToggleDebugger();
+	if(DK_GetBrowser() == "RML" || DK_GetJSEngine() == "Duktape"){
+		DKRml_DebuggerToggle();
 	}
 	if(DK_GetBrowser() == "CEF"){
 		//DKCef_ShowDevTools(0);
