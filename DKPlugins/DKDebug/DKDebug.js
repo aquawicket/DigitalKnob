@@ -7,7 +7,7 @@ function DKDebug_Init()
 	//DKAddEvent("document", "keypress", DKDebug_OnEvent);
 	//DKAddEvent("document", "keydown", DKDebug_OnEvent);
 	
-	document.onkeydown = DKDebug_OnEvent;
+	window.onkeydown = DKDebug_OnEvent;
 }
 
 //////////////////////
