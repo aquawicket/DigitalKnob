@@ -39,21 +39,8 @@ function DKInput_OnEvent(event)
 {
 	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
-	console.log("DKInput_OnEvent(event)");
-	if(event.type){ //Browser
-		document.getElementById("lastevent").innerHTML = "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event);
-		//DKWidget_SetInnerHtml("lastevent", "Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event));
-		if(DK_GetType(event) != "mousemove"){
-			//DKINFO("Last Event: "+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"\n");
-		}
-	}
-	else{ //App
-		DKWidget_SetInnerHtml("lastevent", "Last Event: "+event);
-		if(DK_GetType(event) != "mousemove"){
-			//DKINFO("Last Event: "+event+"\n");
-		}
-	}
-	
+	document.getElementById("lastevent").innerHTML = "Last Event: "+event.id+","+event.type+","+event.key;
+		
 	if(DK_Type(event, "keypress")){
 		document.getElementById("charcode").innerHTML = "Unicode CHARACTER code: "+DK_GetValue(event);
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
@@ -121,6 +108,7 @@ function DKInput_ProcessKeyDown(key)
 function DKInput_ProcessKeyUp(key)
 {
 	DKDEBUGFUNC(key);
+	console.log("DKInput_ProcessKeyUp("+key+")");
 	DKInput_UnHighlight(DKInput_KeyToDiv(key));
 }
 
@@ -238,7 +226,7 @@ function DKInput_KeyToDiv(key)
 function DKInput_Highlight(div)
 {
 	DKDEBUGFUNC(div);
-	console.log("DKInput_Highlight("+div+")");
+	//console.log("DKInput_Highlight("+div+")");
 	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0.5)";
 	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,0.5)"); }
 	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,0.5)"); }
