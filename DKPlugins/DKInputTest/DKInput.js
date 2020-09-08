@@ -227,21 +227,22 @@ function DKInput_Highlight(div)
 {
 	DKDEBUGFUNC(div);
 	//console.log("DKInput_Highlight("+div+")");
-	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0.5)";
-	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "leftctrl"){ DKWidget_SetProperty("rightctrl", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "rightctrl"){ DKWidget_SetProperty("leftctrl", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "leftalt"){ DKWidget_SetProperty("rightalt", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "rightalt"){ DKWidget_SetProperty("leftalt", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "enter"){ DKWidget_SetProperty("kp_enter", "background-color", "rgba(0,255,0,0.5)"); }
-	if(div == "kp_enter"){ DKWidget_SetProperty("enter", "background-color", "rgba(0,255,0,0.5)"); }
+	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,127)";
+	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "leftctrl"){ DKWidget_SetProperty("rightctrl", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "rightctrl"){ DKWidget_SetProperty("leftctrl", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "leftalt"){ DKWidget_SetProperty("rightalt", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "rightalt"){ DKWidget_SetProperty("leftalt", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "enter"){ DKWidget_SetProperty("kp_enter", "background-color", "rgba(0,255,0,127)"); }
+	if(div == "kp_enter"){ DKWidget_SetProperty("enter", "background-color", "rgba(0,255,0,127)"); }
 }
 
 /////////////////////////////////
 function DKInput_UnHighlight(div)
 {
 	DKDEBUGFUNC(div);
+	//console.log("DKInput_UnHighlight("+div+")");
 	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0)";
 	if(div == "leftshift"){ DKWidget_SetProperty("rightshift", "background-color", "rgba(0,255,0,0)"); }
 	if(div == "rightshift"){ DKWidget_SetProperty("leftshift", "background-color", "rgba(0,255,0,0)"); }
