@@ -980,8 +980,7 @@ function DKWidget_RemoveAttribute(id, attrib)
 function DKWidget_GetHoverElement()
 { 
 	DKDEBUGFUNC();
-	//DKINFO("DKWidget_GetHoverElement() = "+document.elementFromPoint(mouseX, mouseY).id+"\n");
-	return document.elementFromPoint(mouseX, mouseY).id;
+	return document.elementFromPoint(window.mouseX, window.mouseY).id;
 }
 
 ////////////////////////////

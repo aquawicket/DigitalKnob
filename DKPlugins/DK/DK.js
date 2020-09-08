@@ -14,8 +14,6 @@ var DK_DEBUG = 4;     //Blue
 var DK_SHOW = 5;
 var DK_HIDE = 6;
 
-var mouseX;
-var mouseY;
 var mouseStartX;
 var mouseStartY;
 var objectX;
@@ -111,23 +109,22 @@ window.addEventListener('error', function(e){
 	*/
 });
 
-/*
-///////////////////////////////////
-document.onmousemove = function(e){
+
+/////////////////////////////////
+window.onmousemove = function(e){
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
-		mouseX = e.clientX + document.body.scrollLeft
-		mouseY = e.clientY + document.body.scrollTop
+		window.mouseX = e.clientX + document.body.scrollLeft
+		window.mouseY = e.clientY + document.body.scrollTop
 	} 
 	else{  // grab the x-y pos.s if browser is NS
-		mouseX = e.pageX
-		mouseY = e.pageY
+		window.mouseX = e.pageX
+		window.mouseY = e.pageY
 	}  
 	// catch possible negative values in NS4
-	if (mouseX < 0){mouseX = 0}
-	if (mouseY < 0){mouseY = 0}  
+	if (window.mouseX < 0){window.mouseX = 0}
+	if (window.mouseY < 0){window.mouseY = 0}  
 	return true;
 }
-*/
 
 
 function DKERROR(string){ Log(string, DK_ERROR); }
