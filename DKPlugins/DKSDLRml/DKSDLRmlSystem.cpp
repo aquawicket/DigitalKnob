@@ -124,6 +124,9 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
         case SDLK_SEMICOLON:
             return KI_OEM_1;
             break;
+        case SDLK_EQUALS:
+            return KI_OEM_PLUS;
+            break;
         case SDLK_PLUS:
             return KI_OEM_PLUS;
             break;
@@ -153,6 +156,9 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
             break;
         case SDLK_QUOTEDBL:
             return KI_OEM_7;
+            break;
+        case SDLK_ESCAPE:
+            return KI_ESCAPE;
             break;
         case SDLK_KP_0:
             return KI_NUMPAD0;
