@@ -619,7 +619,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "Pause";
 			break;
 		case Rml::Input::KI_CAPITAL:
-			value = "Capslock";
+			value = "CapsLock";
 			break;			// Capslock key.
 		case Rml::Input::KI_KANA:
 			value = "";
@@ -826,10 +826,10 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "ControlRight";
 			break;
 		case Rml::Input::KI_LMENU:
-			value = "MenuLeft";
+			value = "AltLeft";
 			break;
 		case Rml::Input::KI_RMENU:
-			value = "MenuRight";
+			value = "AltRight";
 			break;
 		case Rml::Input::KI_BROWSER_BACK:
 			value = "";
@@ -928,10 +928,10 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;
 		case Rml::Input::KI_LMETA:
-			value = "";
+			value = "KI_LMETA";
 			break;
 		case Rml::Input::KI_RMETA:
-			value = "";
+			value = "KI_RMETA";
 			break;
 		default:
 			return "";
