@@ -362,12 +362,20 @@ int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button)
     switch(button){
         case SDL_BUTTON_LEFT:
             return 0;
-        case SDL_BUTTON_RIGHT:
-            return 1;
         case SDL_BUTTON_MIDDLE:
+            return 1;
+        case SDL_BUTTON_RIGHT:
             return 2;
-        default:
+        case SDL_BUTTON(3):
             return 3;
+        case SDL_BUTTON(4):
+            return 4;
+        case SDL_BUTTON(5):
+            return 5;
+        case SDL_BUTTON(6):
+            return 6;
+        default:
+            return 99; //FIXME
     }
 }
 
