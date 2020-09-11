@@ -790,7 +790,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "F24";
 			break;
 		case Rml::Input::KI_NUMLOCK:
-			value = "Numlock";
+			value = "NumLock";
 			break;			// Numlock key.
 		case Rml::Input::KI_SCROLL:
 			value = "ScrollLock";
