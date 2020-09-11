@@ -508,7 +508,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "KeyZ";
 			break;
 		case Rml::Input::KI_OEM_1:
-			value = "";
+			value = "KI_OEM_1";
 			break;				// US standard keyboard; the ';:' key.
 		case Rml::Input::KI_OEM_PLUS:
 			value = "";
