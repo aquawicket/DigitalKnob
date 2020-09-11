@@ -74,7 +74,8 @@ int DKDomKeyboardEvent::code(duk_context* ctx)
 		return true;
 	}
 
-	int key = event->GetParameter<int>("key_identifier", 0);
+	//int key = event->GetParameter<int>("key_identifier", 0);
+	Rml::Input::KeyIdentifier key = (Rml::Input::KeyIdentifier) event->GetParameter<int>("key_identifier", 0);
 	DKString code;
 	TranslateKey(key, code);
 	duk_push_string(ctx, code.c_str());
