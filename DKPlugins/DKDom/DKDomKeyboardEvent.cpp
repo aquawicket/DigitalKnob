@@ -394,7 +394,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 {
 	switch (key) {
 		case Rml::Input::KI_UNKNOWN:
-			value = "";
+			value = "KI_UNKNOWN";
 			break;
 		case Rml::Input::KI_SPACE:
 			value = "Space";
@@ -541,10 +541,10 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "Quote";
 			break;				// US standard keyboard; the ''"' key.
 		case Rml::Input::KI_OEM_8:
-			value = "";
+			value = "KI_OEM_8";
 			break;
 		case Rml::Input::KI_OEM_102:
-			value = "";
+			value = "KI_OEM_102";
 			break;			// RT 102-key keyboard; the '<>' or '\|' key.
 		case Rml::Input::KI_NUMPAD0:
 			value = "Numpad0";
@@ -601,7 +601,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 	 * NEC PC-9800 kbd definitions
 	 */
 		case Rml::Input::KI_OEM_NEC_EQUAL:
-			value = "";
+			value = "KI_OEM_NEC_EQUAL";
 			break;		// Equals key on the numeric keypad.
 		case Rml::Input::KI_BACK:
 			value = "Backspace";
@@ -610,7 +610,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "Tab";
 			break;				// Tab key.
 		case Rml::Input::KI_CLEAR:
-			value = "";
+			value = "KI_CLEAR";
 			break;
 		case Rml::Input::KI_RETURN:
 			value = "Enter";
@@ -622,39 +622,39 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "CapsLock";
 			break;			// Capslock key.
 		case Rml::Input::KI_KANA:
-			value = "";
+			value = "KI_KANA";
 			break;				// IME Kana mode.
 		case Rml::Input::KI_HANGUL:
-			value = "";
+			value = "KI_HANGUL";
 			break;				// IME Hangul mode.
 		case Rml::Input::KI_JUNJA:
-			value = "";
+			value = "KI_JUNJA";
 			break;				// IME Junja mode.
 		case Rml::Input::KI_FINAL:
-			value = "";
+			value = "KI_FINAL";
 			break;				// IME final mode.
 		case Rml::Input::KI_HANJA:
-			value = "";
+			value = "KI_HANJA";
 			break;				// IME Hanja mode.
 		case Rml::Input::KI_KANJI:
-			value = "";
+			value = "KI_KANJI";
 			break;				// IME Kanji mode.
 		case Rml::Input::KI_ESCAPE:
 			value = "Escape";
 			break;				// Escape key.
 		case Rml::Input::KI_CONVERT:
-			value = "";
+			value = "KI_CONVERT";
 			break;			// IME convert.
 		case Rml::Input::KI_NONCONVERT:
-			value = "";
+			value = "KI_NONCONVERT";
 			break;			// IME nonconvert.
 		case Rml::Input::KI_ACCEPT:
-			value = "";
+			value = "KI_ACCEPT";
 			break;				// IME accept.
 		case Rml::Input::KI_MODECHANGE:
-			value = "";
+			value = "KI_MODECHANGE";
 			break;			// IME mode change request.
-		case Rml::Input::KI_PRIOR:
+		case Rml::Input::KI_MODECHANGE:
 			value = "PageUp";
 			break;				// Page Up key.
 		case Rml::Input::KI_NEXT:
@@ -679,16 +679,16 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "ArrowDown";
 			break;				// Down Arrow key.
 		case Rml::Input::KI_SELECT:
-			value = "";
+			value = "KI_SELECT";
 			break;
 		case Rml::Input::KI_PRINT:
 			value = "PrintScreen";
 			break;
 		case Rml::Input::KI_EXECUTE:
-			value = "";
+			value = "KI_EXECUTE";
 			break;
 		case Rml::Input::KI_SNAPSHOT:
-			value = "";
+			value = "KI_SNAPSHOT";
 			break;			// Print Screen key.
 		case Rml::Input::KI_INSERT:
 			value = "Insert";
@@ -697,25 +697,25 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "Delete";
 			break;
 		case Rml::Input::KI_HELP:
-			value = "";
+			value = "KI_HELP";
 			break;
 		case Rml::Input::KI_LWIN:
-			value = "MetaLeft";
+			value = "KI_LWIN";
 			break;				// Left Windows key.
 		case Rml::Input::KI_RWIN:
-			value = "MetaRight";
+			value = "KI_RWIN";
 			break;				// Right Windows key.
 		case Rml::Input::KI_APPS:
-			value = "";
+			value = "KI_APPS";
 			break;				// Applications key.
 		case Rml::Input::KI_POWER:
-			value = "";
+			value = "KI_POWER";
 			break;
 		case Rml::Input::KI_SLEEP:
-			value = "";
+			value = "KI_SLEEP";
 			break;
 		case Rml::Input::KI_WAKE:
-			value = "";
+			value = "KI_WAKE";
 			break;
 		case Rml::Input::KI_F1:
 			value = "F1";
@@ -799,19 +799,19 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 	 * Fujitsu/OASYS kbd definitions
 	 */
 		case Rml::Input::KI_OEM_FJ_JISHO:
-			value = "";
+			value = "KI_OEM_FJ_JISHO";
 			break;		// 'Dictionary' key.
 		case Rml::Input::KI_OEM_FJ_MASSHOU:
-			value = "";
+			value = "KI_OEM_FJ_MASSHOU";
 			break;	// 'Unregister word' key.
 		case Rml::Input::KI_OEM_FJ_TOUROKU:
-			value = "";
+			value = "KI_OEM_FJ_TOUROKU";
 			break;	// 'Register word' key.
 		case Rml::Input::KI_OEM_FJ_LOYA:
-			value = "";
+			value = "KI_OEM_FJ_LOYA";
 			break;		// 'Left OYAYUBI' key.
 		case Rml::Input::KI_OEM_FJ_ROYA:
-			value = "";
+			value = "KI_OEM_FJ_ROYA";
 			break;		// 'Right OYAYUBI' key.
 		case Rml::Input::KI_LSHIFT:
 			value = "ShiftLeft";
@@ -832,100 +832,100 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "AltRight";
 			break;
 		case Rml::Input::KI_BROWSER_BACK:
-			value = "";
+			value = "KI_BROWSER_BACK";
 			break;
 		case Rml::Input::KI_BROWSER_FORWARD:
-			value = "";
+			value = "KI_BROWSER_FORWARD";
 			break;
 		case Rml::Input::KI_BROWSER_REFRESH:
-			value = "";
+			value = "KI_BROWSER_REFRESH";
 			break;
 		case Rml::Input::KI_BROWSER_STOP:
-			value = "";
+			value = "KI_BROWSER_STOP";
 			break;
 		case Rml::Input::KI_BROWSER_SEARCH:
-			value = "";
+			value = "KI_BROWSER_SEARCH";
 			break;
 		case Rml::Input::KI_BROWSER_FAVORITES:
-			value = "";
+			value = "KI_BROWSER_FAVORITES";
 			break;
 		case Rml::Input::KI_BROWSER_HOME:
-			value = "";
+			value = "KI_BROWSER_HOME";
 			break;
 		case Rml::Input::KI_VOLUME_MUTE:
-			value = "";
+			value = "KI_VOLUME_MUTE";
 			break;
 		case Rml::Input::KI_VOLUME_DOWN:
-			value = "";
+			value = "KI_VOLUME_DOWN";
 			break;
 		case Rml::Input::KI_VOLUME_UP:
-			value = "";
+			value = "KI_VOLUME_UP";
 			break;
 		case Rml::Input::KI_MEDIA_NEXT_TRACK:
-			value = "";
+			value = "KI_MEDIA_NEXT_TRACK";
 			break;
 		case Rml::Input::KI_MEDIA_PREV_TRACK:
-			value = "";
+			value = "KI_MEDIA_PREV_TRACK";
 			break;
 		case Rml::Input::KI_MEDIA_STOP:
-			value = "";
+			value = "KI_MEDIA_STOP";
 			break;
 		case Rml::Input::KI_MEDIA_PLAY_PAUSE:
-			value = "";
+			value = "KI_MEDIA_PLAY_PAUSE";
 			break;
 		case Rml::Input::KI_LAUNCH_MAIL:
-			value = "";
+			value = "KI_LAUNCH_MAIL";
 			break;
 		case Rml::Input::KI_LAUNCH_MEDIA_SELECT:
-			value = "";
+			value = "KI_LAUNCH_MEDIA_SELECT";
 			break;
 		case Rml::Input::KI_LAUNCH_APP1:
-			value = "";
+			value = "KI_LAUNCH_APP1";
 			break;
 		case Rml::Input::KI_LAUNCH_APP2:
-			value = "";
+			value = "KI_LAUNCH_APP2";
 			break;
 	/*
 	 * Various extended or enhanced keyboards
 	 */
 		case Rml::Input::KI_OEM_AX:
-			value = "";
+			value = "KI_OEM_AX";
 			break;
 		case Rml::Input::KI_ICO_HELP:
-			value = "";
+			value = "KI_ICO_HELP";
 			break;
 		case Rml::Input::KI_ICO_00:
-			value = "";
+			value = "KI_ICO_00";
 			break;
 		case Rml::Input::KI_PROCESSKEY:
-			value = "";
+			value = "KI_PROCESSKEY";
 			break;		// IME Process key.
 		case Rml::Input::KI_ICO_CLEAR:
-			value = "";
+			value = "KI_ICO_CLEAR";
 			break;
 		case Rml::Input::KI_ATTN:
-			value = "";
+			value = "KI_ATTN";
 			break;
 		case Rml::Input::KI_CRSEL:
-			value = "";
+			value = "KI_CRSEL";
 			break;
 		case Rml::Input::KI_EXSEL:
-			value = "";
+			value = "KI_EXSEL";
 			break;
 		case Rml::Input::KI_EREOF:
-			value = "";
+			value = "KI_EREOF";
 			break;
 		case Rml::Input::KI_PLAY:
-			value = "";
+			value = "KI_PLAY";
 			break;
 		case Rml::Input::KI_ZOOM:
-			value = "";
+			value = "KI_ZOOM";
 			break;
 		case Rml::Input::KI_PA1:
-			value = "";
+			value = "KI_PA1";
 			break;
 		case Rml::Input::KI_OEM_CLEAR:
-			value = "";
+			value = "KI_OEM_CLEAR";
 			break;
 		case Rml::Input::KI_LMETA:
 			value = "KI_LMETA";
