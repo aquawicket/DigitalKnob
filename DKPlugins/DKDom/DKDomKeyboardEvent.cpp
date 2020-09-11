@@ -400,112 +400,112 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "Space";
 			break;
 		case Rml::Input::KI_0:
-			value = "KI_0";
+			value = "Digit0";
 			break;
 		case Rml::Input::KI_1:
-			value = "";
+			value = "Digit1";
 			break;
 		case Rml::Input::KI_2:
-			value = "";
+			value = "Digit2";
 			break;
 		case Rml::Input::KI_3:
-			value = "";
+			value = "Digit3";
 			break;
 		case Rml::Input::KI_4:
-			value = "";
+			value = "Digit4";
 			break;
 		case Rml::Input::KI_5:
-			value = "";
+			value = "Digit5";
 			break;
 		case Rml::Input::KI_6:
-			value = "";
+			value = "Digit6";
 			break;
 		case Rml::Input::KI_7:
-			value = "";
+			value = "Digit7";
 			break;
 		case Rml::Input::KI_8:
-			value = "";
+			value = "Digit8";
 			break;
 		case Rml::Input::KI_9:
-			value = "";
+			value = "Digit9";
 			break;
 		case Rml::Input::KI_A:
-			value = "KI_A";
+			value = "KeyA";
 			break;
 		case Rml::Input::KI_B:
-			value = "";
+			value = "KeyB";
 			break;
 		case Rml::Input::KI_C:
-			value = "";
+			value = "KeyC";
 			break;
 		case Rml::Input::KI_D:
-			value = "";
+			value = "KeyD";
 			break;
 		case Rml::Input::KI_E:
-			value = "";
+			value = "KeyE";
 			break;
 		case Rml::Input::KI_F:
-			value = "";
+			value = "KeyF";
 			break;
 		case Rml::Input::KI_G:
-			value = "";
+			value = "KeyG";
 			break;
 		case Rml::Input::KI_H:
-			value = "";
+			value = "KeyH";
 			break;
 		case Rml::Input::KI_I:
-			value = "";
+			value = "KeyI";
 			break;
 		case Rml::Input::KI_J:
-			value = "";
+			value = "KeyJ";
 			break;
 		case Rml::Input::KI_K:
-			value = "";
+			value = "KeyK";
 			break;
 		case Rml::Input::KI_L:
-			value = "";
+			value = "KeyL";
 			break;
 		case Rml::Input::KI_M:
-			value = "";
+			value = "KeyM";
 			break;
 		case Rml::Input::KI_N:
-			value = "";
+			value = "KeyN";
 			break;
 		case Rml::Input::KI_O:
-			value = "";
+			value = "KeyO";
 			break;
 		case Rml::Input::KI_P:
-			value = "";
+			value = "KeyP";
 			break;
 		case Rml::Input::KI_Q:
-			value = "";
+			value = "KeyQ";
 			break;
 		case Rml::Input::KI_R:
-			value = "";
+			value = "KeyR";
 			break;
 		case Rml::Input::KI_S:
-			value = "";
+			value = "KeyS";
 			break;
 		case Rml::Input::KI_T:
-			value = "";
+			value = "KeyT";
 			break;
 		case Rml::Input::KI_U:
-			value = "";
+			value = "KeyU";
 			break;
 		case Rml::Input::KI_V:
-			value = "";
+			value = "KeyV";
 			break;
 		case Rml::Input::KI_W:
-			value = "";
+			value = "KeyW";
 			break;
 		case Rml::Input::KI_X:
-			value = "";
+			value = "KeyX";
 			break;
 		case Rml::Input::KI_Y:
-			value = "";
+			value = "KeyY";
 			break;
 		case Rml::Input::KI_Z:
-			value = "";
+			value = "KeyZ";
 			break;
 		case Rml::Input::KI_OEM_1:
 			value = "";
