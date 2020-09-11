@@ -592,7 +592,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "NumpadSubtract";
 			break;			// Minus on the numeric keypad.
 		case Rml::Input::KI_DECIMAL:
-			value = "NumpadPeriod";
+			value = "NumpadDecimal";
 			break;			// Period on the numeric keypad.
 		case Rml::Input::KI_DIVIDE:
 			value = "NumpadDivide";
