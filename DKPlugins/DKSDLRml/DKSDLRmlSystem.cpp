@@ -391,7 +391,7 @@ double RmlSDL2SystemInterface::GetElapsedTime()
 bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message)
 {
 	//DKDEBUGFUNC(type, message);
-	if(has(message,"Loaded font face")){/
+	if(has(message,"Loaded font face")){
 		type = Rml::Log::LT_DEBUG;
 	}
 	switch(type)
