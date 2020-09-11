@@ -682,13 +682,13 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "KI_SELECT";
 			break;
 		case Rml::Input::KI_PRINT:
-			value = "PrintScreen";
+			value = "KI_PRINT";
 			break;
 		case Rml::Input::KI_EXECUTE:
 			value = "KI_EXECUTE";
 			break;
 		case Rml::Input::KI_SNAPSHOT:
-			value = "KI_SNAPSHOT";
+			value = "PrintScreen";
 			break;			// Print Screen key.
 		case Rml::Input::KI_INSERT:
 			value = "Insert";
