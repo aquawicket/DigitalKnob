@@ -654,7 +654,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 		case Rml::Input::KI_MODECHANGE:
 			value = "KI_MODECHANGE";
 			break;			// IME mode change request.
-		case Rml::Input::KI_MODECHANGE:
+		case Rml::Input::KI_PRIOR:
 			value = "PageUp";
 			break;				// Page Up key.
 		case Rml::Input::KI_NEXT:
