@@ -2,6 +2,7 @@
 function DKInput_Init()
 {
 	DKDEBUGFUNC();
+	window.id = "window";
 	DKCreate("DKInputTest/DKInput.html");
 	DKAddEvent("window", "keypress", DKInput_OnEvent);
 	DKAddEvent("window", "keydown", DKInput_OnEvent);
@@ -38,17 +39,21 @@ function DKInput_OnEvent(event)
 	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
 	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type+","+event.key;
-		
-	if(event.type == "keypress"){
-		document.getElementById("charcode").innerHTML = "Unicode CHARACTER code: "+DK_GetValue(event);
+	document.getElementById("event_char").innerHTML = "event.char: "+event.char;
+	document.getElementById("event_charCode").innerHTML = "event.charCode: "+event.charCode;
+	document.getElementById("event_code").innerHTML = "event.code: "+event.code;
+	document.getElementById("event_key").innerHTML = "event.key: "+event.key;
+	document.getElementById("event_keyCode").innerHTML = "event.keyCode: "+event.keyCode;
+	document.getElementById("event_which").innerHTML = "event.which: "+event.which;
+
+	if(event.type == "keypress"){	
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
 	if(event.type == "keydown"){
-		document.getElementById("keycode").innerHTML = "Unicode KEY code: "+event.key;
-		DKInput_ProcessKeyDown(event.key);
+		DKInput_ProcessKeyDown(event.code);
 	}
 	if(event.type == "keyup"){
-		DKInput_ProcessKeyUp(event.key);
+		DKInput_ProcessKeyUp(event.code);
 	}
 	if(event.type == "mousedown"){
 		DKInput_ProcessMouseDown(event.button);
@@ -73,9 +78,9 @@ function DKInput_OnEvent(event)
 	}
 	
 	//element events
-	//if(event.currentTarget.id == "esc"){
-	//	//DKINFO("esc\n")
-	//}
+	if(event.currentTarget.id == "esc"){
+		console.log("event.currentTarget.id == 'esc'");
+	}
 }
 
 /////////////////////////////////////////
@@ -110,19 +115,20 @@ function DKInput_ProcessKeyUp(key)
 function DKInput_KeyToDiv(key)
 {
 	DKDEBUGFUNC(key);
-	if(key == 27){ return "esc"; }
-	if(key == 112){ return "f1"; }
-	if(key == 113){ return "f2"; }
-	if(key == 114){ return "f3"; }
-	if(key == 115){ return "f4"; }
-	if(key == 116){ return "f5"; }
-	if(key == 117){ return "f6"; }
-	if(key == 118){ return "f7"; }
-	if(key == 119){ return "f8"; }
-	if(key == 120){ return "f9"; }
-	if(key == 121){ return "f10"; }
-	if(key == 122){ return "f11"; }
-	if(key == 123){ return "f12"; }
+	//if(key == 27){ return "esc"; }
+	if(key == 27){ return "Escape"; }
+	if(key == 112){ return "F1"; }
+	if(key == 113){ return "F2"; }
+	if(key == 114){ return "F3"; }
+	if(key == 115){ return "F4"; }
+	if(key == 116){ return "F5"; }
+	if(key == 117){ return "F6"; }
+	if(key == 118){ return "F7"; }
+	if(key == 119){ return "F8"; }
+	if(key == 120){ return "F9"; }
+	if(key == 121){ return "F10"; }
+	if(key == 122){ return "F11"; }
+	if(key == 123){ return "F12"; }
 	if(key == 44){ return "printscreen"; }
 	if(key == 145){ return "scrolllock"; }
 	if(key == 19){ return "pause"; }
@@ -223,15 +229,12 @@ function DKInput_Highlight(div)
 	DKDEBUGFUNC(div);
 	if(!div){ return; }
 	if(!document.getElementById(div)){ return; }
-	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,127)";
-	if(div == "leftshift"){ document.getElementById("rightshift").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "rightshift"){ document.getElementById("leftshift").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "leftctrl"){ document.getElementById("rightctrl").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "rightctrl"){ document.getElementById("leftctrl").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "leftalt"){ document.getElementById("rightalt").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "rightalt"){ document.getElementById("leftalt").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "enter"){ document.getElementById("kp_enter").style.backgroundColor = "rgba(0,255,0,127)"; }
-	if(div == "kp_enter"){ document.getElementById("enter").style.backgroundColor = "rgba(0,255,0,127)"; }
+	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0.5)";
+	if(div == "Shift"){ document.getElementById("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Meta"){ document.getElementById("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Control"){ document.getElementById("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Alt"){ document.getElementById("Alt2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Enter"){ document.getElementById("Enter2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
 }
 
 /////////////////////////////////
@@ -241,12 +244,9 @@ function DKInput_UnHighlight(div)
 	if(!div){ return; }
 	if(!document.getElementById(div)){ return; }
 	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0)";
-	if(div == "leftshift"){ document.getElementById("rightshift").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "rightshift"){ document.getElementById("leftshift").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "leftctrl"){ document.getElementById("rightctrl").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "rightctrl"){ document.getElementById("leftctrl").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "leftalt"){ document.getElementById("rightalt").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "rightalt"){ document.getElementById("leftalt").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "enter"){ document.getElementById("kp_enter").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "kp_enter"){ document.getElementById("enter").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Shift"){ document.getElementById("Shift2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Meta"){ document.getElementById("Meta2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Control"){ document.getElementById("Control2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Alt"){ document.getElementById("Alt2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Enter"){ document.getElementById("Enter2").style.backgroundColor = "rgba(0,255,0,0)"; }
 }
