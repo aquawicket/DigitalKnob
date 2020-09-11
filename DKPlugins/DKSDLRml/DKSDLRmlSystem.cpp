@@ -1,7 +1,7 @@
 #include <RmlUi/Core.h>
 #include "DKSDLRml/DKSDLRmlSystem.h"
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey)
 {
 	DKDEBUGFUNC(sdlkey);
@@ -343,7 +343,7 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
     }
 }
 
-/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button)
 {
 	DKDEBUGFUNC(button);
@@ -359,7 +359,7 @@ int RmlSDL2SystemInterface::TranslateMouseButton(Uint8 button)
     }
 }
 
-////////////////////////////////////////////////
+/////////////////////////////////////////////
 int RmlSDL2SystemInterface::GetKeyModifiers()
 {
 	DKDEBUGFUNC();
@@ -387,35 +387,35 @@ double RmlSDL2SystemInterface::GetElapsedTime()
 	return (float)SDL_GetTicks() / 1000;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message)
 {
 	//DKDEBUGFUNC(type, message);
-	if(has(message,"Loaded font face")){//.CString()
+	if(has(message,"Loaded font face")){/
 		type = Rml::Log::LT_DEBUG;
 	}
 	switch(type)
 	{
 	case Rml::Log::LT_ALWAYS:
-		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
+		DKINFO("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_ERROR:
-		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
+		DKERROR("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_ASSERT:
-		DKERROR("[Rml] "+DKString(message)+"\n");//.CString()
+		DKERROR("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_WARNING:
-		DKWARN("[Rml] "+DKString(message)+"\n");//.CString()
+		DKWARN("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_INFO:
-		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
+		DKINFO("[Rml] "+DKString(message)+"\n");
 		break;
 	case Rml::Log::LT_DEBUG:
-		DKDEBUG("[Rml] "+DKString(message)+"\n");//.CString()
+		DKDEBUG("[Rml] "+DKString(message)+"\n");
 		break;
     case Rml::Log::LT_MAX:
-		DKINFO("[Rml] "+DKString(message)+"\n");//.CString()
+		DKINFO("[Rml] "+DKString(message)+"\n");
         break;
 	};
 	
