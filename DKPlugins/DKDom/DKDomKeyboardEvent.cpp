@@ -508,37 +508,37 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "KeyZ";
 			break;
 		case Rml::Input::KI_OEM_1:
-			value = "KI_OEM_1";
+			value = "Semicolon";
 			break;				// US standard keyboard; the ';:' key.
 		case Rml::Input::KI_OEM_PLUS:
-			value = "";
+			value = "Equal";
 			break;			// Any region; the '=+' key.
 		case Rml::Input::KI_OEM_COMMA:
-			value = "";
+			value = "Comma";
 			break;			// Any region; the ',<' key.
 		case Rml::Input::KI_OEM_MINUS:
-			value = "";
+			value = "Minus";
 			break; 		// Any region; the '-_' key.
 		case Rml::Input::KI_OEM_PERIOD:
-			value = "";
+			value = "Period";
 			break;			// Any region; the '.>' key.
 		case Rml::Input::KI_OEM_2:
-			value = "";
+			value = "Slash";
 			break;				// Any region; the '/?' key.
 		case Rml::Input::KI_OEM_3:
-			value = "";
+			value = "Backquote";
 			break;				// Any region; the '`~' key.
 		case Rml::Input::KI_OEM_4:
-			value = "";
+			value = "BracketLeft";
 			break;				// US standard keyboard; the '[{' key.
 		case Rml::Input::KI_OEM_5:
-			value = "";
+			value = "Backslash";
 			break;				// US standard keyboard; the '\|' key.
 		case Rml::Input::KI_OEM_6:
-			value = "";
+			value = "BracketRight";
 			break;				// US standard keyboard; the ']}' key.
 		case Rml::Input::KI_OEM_7:
-			value = "";
+			value = "Quote";
 			break;				// US standard keyboard; the ''"' key.
 		case Rml::Input::KI_OEM_8:
 			value = "";
@@ -547,55 +547,55 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;			// RT 102-key keyboard; the '<>' or '\|' key.
 		case Rml::Input::KI_NUMPAD0:
-			value = "";
+			value = "Numpad0";
 			break;
 		case Rml::Input::KI_NUMPAD1:
-			value = "";
+			value = "Numpad1";
 			break;
 		case Rml::Input::KI_NUMPAD2:
-			value = "";
+			value = "Numpad2";
 			break;
 		case Rml::Input::KI_NUMPAD3:
-			value = "";
+			value = "Numpad3";
 			break;
 		case Rml::Input::KI_NUMPAD4:
-			value = "";
+			value = "Numpad4";
 			break;
 		case Rml::Input::KI_NUMPAD5:
-			value = "";
+			value = "Numpad5";
 			break;
 		case Rml::Input::KI_NUMPAD6:
-			value = "";
+			value = "Numpad6";
 			break;
 		case Rml::Input::KI_NUMPAD7:
-			value = "";
+			value = "Numpad7";
 			break;
 		case Rml::Input::KI_NUMPAD8:
-			value = "";
+			value = "Numpad8";
 			break;
 		case Rml::Input::KI_NUMPAD9:
-			value = "";
+			value = "Numpad9";
 			break;
 		case Rml::Input::KI_NUMPADENTER:
-			value = "";
+			value = "NumpadEnter";
 			break;
 		case Rml::Input::KI_MULTIPLY:
-			value = "";
+			value = "NumpadMultiply";
 			break;			// Asterisk on the numeric keypad.
 		case Rml::Input::KI_ADD:
-			value = "";
+			value = "NumpadAdd";
 			break;				// Plus on the numeric keypad.
 		case Rml::Input::KI_SEPARATOR:
-			value = "";
+			value = "NumpadMinus";
 			break;
 		case Rml::Input::KI_SUBTRACT:
-			value = "";
+			value = "NumpadSubtract";
 			break;			// Minus on the numeric keypad.
 		case Rml::Input::KI_DECIMAL:
-			value = "";
+			value = "NumpadPeriod";
 			break;			// Period on the numeric keypad.
 		case Rml::Input::KI_DIVIDE:
-			value = "";
+			value = "NumpadDivide";
 			break;				// Forward Slash on the numeric keypad.
 	/*
 	 * NEC PC-9800 kbd definitions
@@ -604,22 +604,22 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;		// Equals key on the numeric keypad.
 		case Rml::Input::KI_BACK:
-			value = "";
+			value = "Backspace";
 			break;				// Backspace key.
 		case Rml::Input::KI_TAB:
-			value = "";
+			value = "Tab";
 			break;				// Tab key.
 		case Rml::Input::KI_CLEAR:
 			value = "";
 			break;
 		case Rml::Input::KI_RETURN:
-			value = "";
+			value = "Enter";
 			break;
 		case Rml::Input::KI_PAUSE:
-			value = "";
+			value = "Pause";
 			break;
 		case Rml::Input::KI_CAPITAL:
-			value = "";
+			value = "Capslock";
 			break;			// Capslock key.
 		case Rml::Input::KI_KANA:
 			value = "";
@@ -640,7 +640,7 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;				// IME Kanji mode.
 		case Rml::Input::KI_ESCAPE:
-			value = "";
+			value = "Escape";
 			break;				// Escape key.
 		case Rml::Input::KI_CONVERT:
 			value = "";
@@ -655,34 +655,34 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;			// IME mode change request.
 		case Rml::Input::KI_PRIOR:
-			value = "";
+			value = "PageUp";
 			break;				// Page Up key.
 		case Rml::Input::KI_NEXT:
-			value = "";
+			value = "PageDown";
 			break;				// Page Down key.
 		case Rml::Input::KI_END:
-			value = "";
+			value = "End";
 			break;
 		case Rml::Input::KI_HOME:
-			value = "";
+			value = "Home";
 			break;
 		case Rml::Input::KI_LEFT:
-			value = "";
+			value = "ArrowLeft";
 			break;				// Left Arrow key.
 		case Rml::Input::KI_UP:
-			value = "";
+			value = "ArrowUp";
 			break;					// Up Arrow key.
 		case Rml::Input::KI_RIGHT:
-			value = "";
+			value = "ArrowRight";
 			break;				// Right Arrow key.
 		case Rml::Input::KI_DOWN:
-			value = "";
+			value = "ArrowDown";
 			break;				// Down Arrow key.
 		case Rml::Input::KI_SELECT:
 			value = "";
 			break;
 		case Rml::Input::KI_PRINT:
-			value = "";
+			value = "PrintScreen";
 			break;
 		case Rml::Input::KI_EXECUTE:
 			value = "";
@@ -691,19 +691,19 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;			// Print Screen key.
 		case Rml::Input::KI_INSERT:
-			value = "";
+			value = "Insert";
 			break;
 		case Rml::Input::KI_DELETE:
-			value = "";
+			value = "Delete";
 			break;
 		case Rml::Input::KI_HELP:
 			value = "";
 			break;
 		case Rml::Input::KI_LWIN:
-			value = "";
+			value = "MetaLeft";
 			break;				// Left Windows key.
 		case Rml::Input::KI_RWIN:
-			value = "";
+			value = "MetaRight";
 			break;				// Right Windows key.
 		case Rml::Input::KI_APPS:
 			value = "";
@@ -718,82 +718,82 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;
 		case Rml::Input::KI_F1:
-			value = "";
+			value = "F1";
 			break;
 		case Rml::Input::KI_F2:
-			value = "";
+			value = "F2";
 			break;
 		case Rml::Input::KI_F3:
-			value = "";
+			value = "F3";
 			break;
 		case Rml::Input::KI_F4:
-			value = "";
+			value = "F4";
 			break;
 		case Rml::Input::KI_F5:
-			value = "";
+			value = "F5";
 			break;
 		case Rml::Input::KI_F6:
-			value = "";
+			value = "F6";
 			break;
 		case Rml::Input::KI_F7:
-			value = "";
+			value = "F7";
 			break;
 		case Rml::Input::KI_F8:
-			value = "";
+			value = "F8";
 			break;
 		case Rml::Input::KI_F9:
-			value = "";
+			value = "F9";
 			break;
 		case Rml::Input::KI_F10:
-			value = "";
+			value = "F10";
 			break;
 		case Rml::Input::KI_F11:
-			value = "";
+			value = "F11";
 			break;
 		case Rml::Input::KI_F12:
-			value = "";
+			value = "F12";
 			break;
 		case Rml::Input::KI_F13:
-			value = "";
+			value = "F13";
 			break;
 		case Rml::Input::KI_F14:
-			value = "";
+			value = "F14";
 			break;
 		case Rml::Input::KI_F15:
-			value = "";
+			value = "F15";
 			break;
 		case Rml::Input::KI_F16:
-			value = "";
+			value = "F16";
 			break;
 		case Rml::Input::KI_F17:
-			value = "";
+			value = "F17";
 			break;
 		case Rml::Input::KI_F18:
-			value = "";
+			value = "F18";
 			break;
 		case Rml::Input::KI_F19:
-			value = "";
+			value = "F19";
 			break;
 		case Rml::Input::KI_F20:
-			value = "";
+			value = "F20";
 			break;
 		case Rml::Input::KI_F21:
-			value = "";
+			value = "F21";
 			break;
 		case Rml::Input::KI_F22:
-			value = "";
+			value = "F22";
 			break;
 		case Rml::Input::KI_F23:
-			value = "";
+			value = "F23";
 			break;
 		case Rml::Input::KI_F24:
-			value = "";
+			value = "F24";
 			break;
 		case Rml::Input::KI_NUMLOCK:
-			value = "";
+			value = "Numlock";
 			break;			// Numlock key.
 		case Rml::Input::KI_SCROLL:
-			value = "";
+			value = "ScrollLock";
 			break;			// Scroll Lock key.
 	/*
 	 * Fujitsu/OASYS kbd definitions
@@ -814,22 +814,22 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "";
 			break;		// 'Right OYAYUBI' key.
 		case Rml::Input::KI_LSHIFT:
-			value = "";
+			value = "ShiftLeft";
 			break;
 		case Rml::Input::KI_RSHIFT:
-			value = "";
+			value = "ShiftRight";
 			break;
 		case Rml::Input::KI_LCONTROL:
-			value = "";
+			value = "ControlLeft";
 			break;
 		case Rml::Input::KI_RCONTROL:
-			value = "";
+			value = "ControlRight";
 			break;
 		case Rml::Input::KI_LMENU:
-			value = "";
+			value = "MenuLeft";
 			break;
 		case Rml::Input::KI_RMENU:
-			value = "";
+			value = "MenuRight";
 			break;
 		case Rml::Input::KI_BROWSER_BACK:
 			value = "";
