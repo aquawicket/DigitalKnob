@@ -928,10 +928,10 @@ bool DKDomKeyboardEvent::TranslateKey(int key, DKString& value)
 			value = "KI_OEM_CLEAR";
 			break;
 		case Rml::Input::KI_LMETA:
-			value = "KI_LMETA";
+			value = "MetaLeft";
 			break;
 		case Rml::Input::KI_RMETA:
-			value = "KI_RMETA";
+			value = "MetaRight";
 			break;
 		default:
 			return "";
