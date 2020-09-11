@@ -313,6 +313,9 @@ Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlke
         case SDLK_NUMLOCKCLEAR:
             return KI_NUMLOCK;
             break;
+        case SDLK_PRINTSCREEN:
+            return KI_SNAPSHOT;
+            break;
         case SDLK_SCROLLLOCK:
             return KI_SCROLL;
             break;
