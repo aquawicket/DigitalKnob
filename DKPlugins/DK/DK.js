@@ -109,7 +109,7 @@ window.addEventListener('error', function(e){
 	*/
 });
 
-
+/*
 /////////////////////////////////
 window.onmousemove = function(e){
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
@@ -125,6 +125,7 @@ window.onmousemove = function(e){
 	if (window.mouseY < 0){window.mouseY = 0}  
 	return true;
 }
+*/
 
 
 function DKERROR(string){ Log(string, DK_ERROR); }

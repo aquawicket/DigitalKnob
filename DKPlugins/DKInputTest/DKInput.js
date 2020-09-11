@@ -76,6 +76,7 @@ function DKInput_OnEvent(event)
 		document.getElementById("event.clientY").innerHTML = "event.clientY: "+event.clientY;
 		document.getElementById("event.screenX").innerHTML = "event.screenX: "+event.screenX;
 		document.getElementById("event.screenY").innerHTML = "event.screenY: "+event.screenY;
+		document.getElementById("event.button").innerHTML = "event.button: "+event.button;
 	//}
 	if(event.type == "wheel"){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
