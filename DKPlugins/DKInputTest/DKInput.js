@@ -42,13 +42,13 @@ function DKInput_OnEvent(event)
 {
 	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
-	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type+","+event.key;
-	document.getElementById("event_char").innerHTML = "event.char: "+event.char;
-	document.getElementById("event_charCode").innerHTML = "event.charCode: "+event.charCode;
-	document.getElementById("event_code").innerHTML = "event.code: "+event.code;
-	document.getElementById("event_key").innerHTML = "event.key: "+event.key;
-	document.getElementById("event_keyCode").innerHTML = "event.keyCode: "+event.keyCode;
-	document.getElementById("event_which").innerHTML = "event.which: "+event.which;
+	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type;
+	document.getElementById("event.char").innerHTML = "event.char: "+event.char;
+	document.getElementById("event.charCode").innerHTML = "event.charCode: "+event.charCode;
+	document.getElementById("event.code").innerHTML = "event.code: "+event.code;
+	document.getElementById("event.key").innerHTML = "event.key: "+event.key;
+	document.getElementById("event.keyCode").innerHTML = "event.keyCode: "+event.keyCode;
+	document.getElementById("event.which").innerHTML = "event.which: "+event.which;
 
 	if(event.type == "keypress"){	
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
@@ -61,22 +61,22 @@ function DKInput_OnEvent(event)
 	}
 	if(event.type == "mousedown"){
 		DKInput_ProcessMouseDown(event.button);
-		if(event.currentTarget.id != "window"){
+		if(event.currentTarget != window){
 			DKInput_Highlight(event.currentTarget.id);
 		}
 	}
 	if(event.type == "mouseup" || event.type == "click"){
 		DKInput_ProcessMouseUp(event.button);
-		if(event.currentTarget.id != "window"){
+		if(event.currentTarget != window){
 			DKInput_UnHighlight(event.currentTarget.id);
 		}
 	}
-	if(event.type == "mousemove"){
-		document.getElementById("mousex").innerHTML = "Mouse X: "+event.clientX;
-		document.getElementById("mousey").innerHTML = "Mouse Y: "+event.clientY;
-		document.getElementById("screenx").innerHTML = "Screen X: "+event.screenX;
-		document.getElementById("screeny").innerHTML = "Screen Y: "+event.screenY;
-	}
+	//if(event.type == "mousemove"){
+		document.getElementById("event.clientX").innerHTML = "event.clientX: "+event.clientX;
+		document.getElementById("event.clientY").innerHTML = "event.clientY: "+event.clientY;
+		document.getElementById("event.screenX").innerHTML = "event.screenX: "+event.screenX;
+		document.getElementById("event.screenY").innerHTML = "event.screenY: "+event.screenY;
+	//}
 	if(event.type == "wheel"){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
 	}
