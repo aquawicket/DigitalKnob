@@ -1,3 +1,7 @@
+var rgba = "0";
+if(DK_GetBrowser() == "RML"){ rgba = "127"; }
+else{ rgba = "0.5"; }
+
 ///////////////////////
 function DKInput_Init()
 {
@@ -22,7 +26,7 @@ function DKInput_Init()
 	DKAddEvent("window", "scroll", DKInput_OnEvent);
 	DKAddEvent("window", "drag", DKInput_OnEvent);
 	DKAddEvent("esc", "mousedown", DKInput_OnEvent);
-	DKAddEvent("esc", "mouseup", DKInput_OnEvent);
+	DKAddEvent("esc", "mouseup", DKInput_OnEvent); 
 }
 
 //////////////////////
@@ -101,14 +105,14 @@ function DKInput_ProcessMouseUp(button)
 function DKInput_ProcessKeyDown(key)
 {
 	DKDEBUGFUNC(key);
-	DKInput_Highlight(DKInput_KeyToDiv(key));
+	DKInput_Highlight(key);
 }
 
 //////////////////////////////////
 function DKInput_ProcessKeyUp(key)
 {
 	DKDEBUGFUNC(key);
-	DKInput_UnHighlight(DKInput_KeyToDiv(key));
+	DKInput_UnHighlight(key);
 }
 
 //////////////////////////////
@@ -229,7 +233,7 @@ function DKInput_Highlight(div)
 	DKDEBUGFUNC(div);
 	if(!div){ return; }
 	if(!document.getElementById(div)){ return; }
-	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0.5)";
+	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,"+rgba+")";
 	if(div == "Shift"){ document.getElementById("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
 	if(div == "Meta"){ document.getElementById("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
 	if(div == "Control"){ document.getElementById("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
