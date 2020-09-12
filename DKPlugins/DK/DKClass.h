@@ -44,7 +44,7 @@ public:
 	static DKObject* DKCreate(const DKString& data)
 	{
 		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
-		DKINFO("DKClass::DKCreate("+data+")\n");
+		//DKINFO("DKClass::DKCreate("+data+")\n");
 		return DKClass::_Instance(data);
 	}
 
