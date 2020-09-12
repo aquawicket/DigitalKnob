@@ -41,7 +41,7 @@ function TaskbarMenu_End()
 function TaskbarMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "FileExplorer")){
+	if(event.currentTarget.id == "FileExplorer"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
@@ -49,40 +49,40 @@ function TaskbarMenu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(DK_Id(event, "OpenBuilder")){
+	if(event.currentTarget.id == "OpenBuilder"){
 		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
-	if(DK_Id(event, "OpenNotepad")){
+	if(event.currentTarget.id == "OpenNotepad"){
 		DKCreate("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKNotepad/DKNotepad.js");
 		});
 	}
-	if(DK_Id(event, "InputTest")){
+	if(event.currentTarget.id == "InputTest"){
 		DKCreate("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKInputTest/DKInput.js");
 		});
 	}
-	if(DK_Id(event, "OpenMessage")){
+	if(event.currentTarget.id == "OpenMessage"){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			//DKMessage("", "ShowMessage", "test message");
 		});
 	}
-	if(DK_Id(event, "OpenTetris")){
+	if(event.currentTarget.id == "OpenTetris"){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 		});
 	}
-	if(DK_Id(event, "OpenGoogle")){
+	if(event.currentTarget.id == "OpenGoogle"){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Google","https://google.com",640,480);
 		});
 	}
 	
-	if(DK_Id(event,"Git")){
+	if(event.currentTarget.id == "Git"){
 		DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
@@ -90,7 +90,7 @@ function TaskbarMenu_OnEvent(event)
 		});
 		});
 	}
-	if(DK_Id(event, "OpenSource")){
+	if(event.currentTarget.id == "OpenSource"){
 		//DKINFO("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
@@ -102,7 +102,7 @@ function TaskbarMenu_OnEvent(event)
 			//DKINFO(source+"\n");
 		});
 	}
-	if(DK_Id(event, "OpenDebug")){
+	if(event.currentTarget.id == "OpenDebug"){
 		if(DK_GetBrowser() == "Rocket"){
 			DKRocket_ToggleDebugger();
 		}
@@ -110,13 +110,13 @@ function TaskbarMenu_OnEvent(event)
 			DKCef_ShowDevTools(0);
 		}
 	}
-	if(DK_Id(event, "PushDKFiles")){
+	if(event.currentTarget.id == "PushDKFiles"){
 		DKDebug_PushDKFiles();
 	}
-	if(DK_Id(event, "ClearConsole")){
+	if(event.currentTarget.id == "ClearConsole"){
 		DK_System("cls");
 	}
-	if(DK_Id(event, "Info")){
+	if(event.currentTarget.id == "Info"){
 		DKINFO("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
@@ -144,16 +144,16 @@ function TaskbarMenu_OnEvent(event)
 		}
 		DKINFO("\n");
 	}
-	if(DK_Id(event, "Reload")){
+	if(event.currentTarget.id == "Reload"){
 		DKFrame_CloseAll();
 		DK_Reload();
 	}
-	if(DK_Id(event, "CloseDKGui")){
+	if(event.currentTarget.id == "CloseDKGui"){
 		DKClose("TaskbarMenu.js")
 		DK_Exit();
 		return;
 	}
-	if(DK_Id(event, "TaskbarMenu_Run")){
+	if(event.currentTarget.id == "TaskbarMenu_Run"){
 		var key = DK_GetValue(event);
 		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() == "Rocket"){
@@ -166,7 +166,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	
-	if(DK_Id(event, "window")){
+	if(event.currentTarget == window){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/TaskbarMenu.html")){
 			return;
 		}
