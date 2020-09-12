@@ -466,7 +466,7 @@ function LoadJs(url, callback)
 				func(); //Init
 			}
 			else{
-				DKWARN(init+" is not defined\n");
+				//DKWARN(init+" is not defined\n");
 			}
 			
 			done = true;
@@ -480,7 +480,7 @@ function LoadJs(url, callback)
 	
 	//FIXME - DigitalKnob can't trigger onload yet, so we do this
 	if(DK_GetJSEngine() == "Duktape"){
-		DKINFO("Loaded: "+url+"\n");
+		//DKINFO("Loaded: "+url+"\n");
 		var func = init; //Plugin_Init() 
 		if(eval("typeof "+func) === "function"){
 			//DKINFO("Calling: "+init+"\n");

@@ -33,7 +33,7 @@ function AdjustRems(id)
 function DKWidget_NewWidget(url, parent)
 {
 	DKDEBUGFUNC(url, parent);
-	console.log("DKWidget_NewWidget("+url+","+parent+")");
+	//console.log("DKWidget_NewWidget("+url+","+parent+")");
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
