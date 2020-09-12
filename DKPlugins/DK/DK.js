@@ -519,7 +519,7 @@ function LoadHtml(url, parent)
 	
 	var string = DK_FileToString(url);
 	DKWARN("url = "+url+"\n");
-	DKWARN("string = "+string+"\n");
+	//DKWARN("string = "+string+"\n");
 	//Create an empty widget
 	if(!string || string == "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";

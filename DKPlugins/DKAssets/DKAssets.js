@@ -1,4 +1,4 @@
-if(DK_GetBrowser() != "RML"){ return; } //This is for browser only.
+if(DK_GetBrowser() != "RML"){ //This is for browser only.
 
 //FIXME - should all of this go into DKAssets_Init()?
 DKINFO("Loaded DKAssets.js\n");
@@ -92,8 +92,8 @@ function DKAssets_Init()
 }
 
 if(DK_GetBrowser() != "CEF"){
-	///////////////////////////////
-	function DKAssets_LocalAssets()
+	/////////////////////////////////////
+	var DKAssets_LocalAssets = function()
 	{
 		DKDEBUGFUNC();
 		return local_assets;
@@ -119,4 +119,6 @@ function DKAssets_AbsolutePath()
 {
 	DKDEBUGFUNC();
 	return absolutepath;
+}
+
 }
