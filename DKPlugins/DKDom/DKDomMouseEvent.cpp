@@ -76,7 +76,9 @@ int DKDomMouseEvent::button(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	int button = event->GetParameter<int>("button", 0); //FIXME: returns the incorrect button numbers, check CEF
+	int button = event->GetParameter<int>("button", 0);
+	if(button == 1){ button = 2; } //renumber right button to 2
+	if(button == 2){ button = 1; } //renunmber middle button to 1
 	duk_push_int(ctx, button);
 	return true;
 }
