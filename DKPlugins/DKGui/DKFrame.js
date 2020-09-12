@@ -112,8 +112,8 @@ function DKFrame_SetTitle(id, title)
 function DKFrame_Iframe(title, url, width, height)
 {
 	DKDEBUGFUNC(title, url, width, height);
-	var frame = DKFrame_CreateFrame(title, width, height);
-	var iframe = DKWidget_CreateElement(frame, "iframe", title);
+	var frame = DKFrame_CreateFrame(byId(title), width, height);
+	var iframe = DKWidget_CreateElement(byId(frame), "iframe", title);
 	DKWidget_SetAttribute(iframe, "src", url); // This will call DKRocketToRML::PostProcess() again
 	DKWidget_SetAttribute(iframe, "width", "100%");
 	DKWidget_SetAttribute(iframe, "height", "100%");
