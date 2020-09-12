@@ -56,7 +56,7 @@ function DKFrame_Widget(id)
 {
 	DKDEBUGFUNC(id);
 	console.log("DKFrame_Widget("+id+")");
-	if(!DKWidget_ElementExists(id)){
+	if(!byId(id)){
 		console.error("DKFrame_Widget("+id+"): element does not exist\n");
 		return false;
 	}
@@ -99,9 +99,12 @@ function DKFrame_SetTitle(id, title)
 {
 	DKDEBUGFUNC(id, title);
 	//TODO - add protection	
-	var frame = DKWidget_GetParent(id);
-	var titlebar = DKWidget_GetFirstChild(frame);
-	var titlebartext = DKWidget_GetFirstChild(titlebar);
+	//var frame = DKWidget_GetParent(id);
+	var frame = byId(id).parentNode.id
+	//var titlebar = DKWidget_GetFirstChild(frame);
+	var titlebar = byId(frame).firstChild.id;
+	//var titlebartext = DKWidget_GetFirstChild(titlebar);
+	var titlebartext = byId(titlebar).firstChild.id;
 	byId(titlebartext).innerHTML = title;
 }
 
@@ -321,7 +324,8 @@ function DKFrame_Close(id)
 {
 	DKDEBUGFUNC(id);	
 	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
-		var frame = DKWidget_GetParent(id);
+	//var frame = DKWidget_GetParent(id);
+	var frame = byId(id).parentNode.id;
 	//DKINFO("DKFrame_Close("+id+"): frame = "+frame+"\n");
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");

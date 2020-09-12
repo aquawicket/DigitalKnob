@@ -61,7 +61,8 @@ function DKWidget_GetAvailableId(id)
 	out = id;
 	var i = 0;
 	
-	while(DKWidget_ElementExists(out)){
+	//while(DKWidget_ElementExists(out)){
+	while( byId(out)){
 		//if there is a .  the number must come before
 		var n = id.lastIndexOf(".");
 		if(n > 0){
