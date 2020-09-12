@@ -10,7 +10,7 @@ var XMLHttpRequest = function()
 		this.async = async;
 	}
 	XMLHttpRequest.prototype.send = function(){
-		DKWARN("XMLHttpRequest.send()");
+		//DKWARN("XMLHttpRequest.send()");
 		this.readyState = 4;
 		this.status = 200;
 		this.statusText = "TODO";

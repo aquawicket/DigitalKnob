@@ -6,7 +6,6 @@ var Document = function(pointer)
 	// Properties
 	Object.defineProperty(this, "body", {
 		get: function(){
-			console.log("Document.body");
 			var address = DKDomDocument_body();
 			if(!address){ return; }
 			return new HTMLElement(address);

@@ -25,7 +25,7 @@ int DKDomXMLHttpRequest::send(duk_context* ctx)
 	bool async = duk_require_boolean(ctx, 2);
 	//DKString user; //TODO
 	//DKString password; //TODO
-	DKWARN("DKDomXMLHttpRequest::send("+method+","+url+","+toString(async)+")\n");
+	//DKWARN("DKDomXMLHttpRequest::send("+method+","+url+","+toString(async)+")\n");
 	if(has(url,"http://") || has(url,"https://")){
 		DKERROR("DKDomXMLHttpRequest::send(): http/https not implemented yet\n");
 		return true;

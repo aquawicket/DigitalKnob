@@ -1,7 +1,5 @@
 if(DK_GetBrowser() != "RML"){ //This is for browser only.
 
-//FIXME - should all of this go into DKAssets_Init()?
-DKINFO("Loaded DKAssets.js\n");
 
 var href = document.location.href;
 if(href.indexOf("?") > -1){

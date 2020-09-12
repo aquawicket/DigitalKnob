@@ -1,12 +1,10 @@
-console.log("Loading DKFrame.js");
-
 var sizes = [];
 
 ///////////////////////
 function DKFrame_Init()
 {
 	DKDEBUGFUNC();
-	document.body.id = "body"; //FIXME - remove this requirement
+	//document.body.id = "body"; //FIXME - remove this requirement
 }
 
 //////////////////////
@@ -148,7 +146,7 @@ function DKFrame_CreateFrame(title, width, height)
 	var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
 	var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1);
 	
-	var frame = DKWidget_CreateElement("body", "div", "DKFrame_frame");
+	var frame = DKWidget_CreateElement(document.body, "div", "DKFrame_frame");
 	document.getElementById(frame).style.position = "absolute";
 	document.getElementById(frame).style.overflow = "hidden";
 	document.getElementById(frame).style.top = newtop.toString()+"px";
@@ -170,13 +168,13 @@ function DKFrame_CreateFrame(title, width, height)
 	//DKINFO("DKFrame_Widget("+id+"): frame width="+width+"\n");
 	//DKINFO("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
 	
-	var titlebar = DKWidget_CreateElement(frame, "div", "DKFrame_titlebar");
+	var titlebar = DKWidget_CreateElement(document.getElementById(frame), "div", "DKFrame_titlebar");
 	document.getElementById(titlebar).style.position = "absolute";
 	document.getElementById(titlebar).style.width = "100%";
 	document.getElementById(titlebar).style.height = "21rem";
 	document.getElementById(titlebar).style.backgroundColor = "rgb(200,200,200)";
 	
-	var titlebartext = DKWidget_CreateElement(titlebar, "div", "DKFrame_titlebartext");
+	var titlebartext = DKWidget_CreateElement(document.getElementById(titlebar), "div", "DKFrame_titlebartext");
 	document.getElementById(titlebartext).style.position = "absolute";
 	document.getElementById(titlebartext).style.width = "100%";
 	document.getElementById(titlebartext).style.height = "100%";
@@ -185,7 +183,7 @@ function DKFrame_CreateFrame(title, width, height)
 	DKWidget_AddDragHandle(titlebartext, frame);
 	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
 	
-	var reload = DKWidget_CreateElement(frame, "img", "DKFrame_reload");
+	var reload = DKWidget_CreateElement(document.getElementById(frame), "img", "DKFrame_reload");
 	document.getElementById(reload).setAttribute("src", "DKGui/reload.png");
 	document.getElementById(reload).style.position = "absolute";
 	document.getElementById(reload).style.top = "1rem";
@@ -193,7 +191,7 @@ function DKFrame_CreateFrame(title, width, height)
 	document.getElementById(reload).style.height = "18rem";
 	DKAddEvent(reload, "click", DKFrame_OnEvent);
 	
-	var minimize = DKWidget_CreateElement(frame, "img", "DKFrame_minimize");
+	var minimize = DKWidget_CreateElement(document.getElementById(frame), "img", "DKFrame_minimize");
 	document.getElementById(minimize).setAttribute("src", "DKGui/minimize.png");
 	document.getElementById(minimize).style.position = "absolute";
 	document.getElementById(minimize).style.top = "0rem";
@@ -201,7 +199,7 @@ function DKFrame_CreateFrame(title, width, height)
 	document.getElementById(minimize).style.height = "20rem;"
 	DKAddEvent(minimize, "click", DKFrame_OnEvent);
 	
-	var maximize = DKWidget_CreateElement(frame, "img", "DKFrame_maximize");
+	var maximize = DKWidget_CreateElement(document.getElementById(frame), "img", "DKFrame_maximize");
 	document.getElementById(maximize).setAttribute("src", "DKGui/maximize.png");
 	document.getElementById(maximize).style.position = "absolute";
 	document.getElementById(maximize).style.top = "0rem";
@@ -209,7 +207,7 @@ function DKFrame_CreateFrame(title, width, height)
 	document.getElementById(maximize).style.height = "20rem";
 	DKAddEvent(maximize, "click", DKFrame_OnEvent);
 	
-	var close = DKWidget_CreateElement(frame, "img", "DKFrame_close");
+	var close = DKWidget_CreateElement(document.getElementById(frame), "img", "DKFrame_close");
 	document.getElementById(close).setAttribute("src", "DKGui/close.png");
 	document.getElementById(close).style.position = "absolute";
 	document.getElementById(close).style.top = "0rem";
@@ -224,7 +222,7 @@ function DKFrame_CreateFrame(title, width, height)
 function DKFrame_CreateResize(frame)
 {
 	DKDEBUGFUNC(frame);
-	var resize = DKWidget_CreateElement(frame, "div", "DKFrame_resize");
+	var resize = DKWidget_CreateElement(document.getElementById(frame), "div", "DKFrame_resize");
 	//document.getElementById(resize).style.backgroundImage = "url(\"DKGui/resize.png\")";
 	DKWidget_RemoveProperty(resize, "top");
 	document.getElementById(resize).style.position = "absolute";
@@ -235,7 +233,7 @@ function DKFrame_CreateResize(frame)
 	//DKWidget_AddResizeHandle(resize, frame);
 	//DKAddEvent(frame, "resize", DKFrame_OnEvent);  //FIXME - does not fire.
 	
-	var resizeImage = DKWidget_CreateElement(resize, "img", "DKFrame_resizeImage");
+	var resizeImage = DKWidget_CreateElement(document.getElementById(resize), "img", "DKFrame_resizeImage");
 	document.getElementById(resizeImage).setAttribute("src", "DKGui/resize.png");
 	document.getElementById(resizeImage).style.position = "absolute";
 	document.getElementById(resizeImage).style.top = "0rem";
@@ -353,7 +351,7 @@ function DKFrame_Close(id)
 	}
 	
 	//DKINFO("DKFrame_Close("+id+"): frame="+frame+"\n");
-	if(frame == "body"){
+	if(frame == "body" || frame == document.body){
 		return;
 	}
 	

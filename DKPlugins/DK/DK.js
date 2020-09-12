@@ -518,7 +518,7 @@ function LoadHtml(url, parent)
 	}
 	
 	var string = DK_FileToString(url);
-	DKWARN("url = "+url+"\n");
+	//DKWARN("url = "+url+"\n");
 	//DKWARN("string = "+string+"\n");
 	//Create an empty widget
 	if(!string || string == "ERROR"){ 

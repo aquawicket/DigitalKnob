@@ -1,5 +1,3 @@
-console.log("Loading DKWidget.js");
-
 function DKWidget_GetFocusElement(){ DKWARN("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
 function DKWidget_ValidateColor(color){ DKWARN("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
 
@@ -649,12 +647,19 @@ function DKWidget_IsChildOf(id, parent)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	DKDEBUGFUNC(parent, tag, id);
+	if( !(parent instanceof HTMLElement) ){
+		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
+		return;
+	}
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
 	console.log("DKWidget_CreateElement("+parent+", "+tag+", "+id+")");
 	
 	id = DKWidget_GetAvailableId(id);
 	
-	var par = document.getElementById(parent);
+	var par = parent;
+	//var par = document.getElementById(parent);
+	//if(parent == "body"){ par = document.body; }
+	
 	if(!par){ DKERROR("DKWidget_CreateElement(): parent invalid ("+parent+")\n"); return false;}
 	var ele = document.createElement(tag);
 	if(!ele){ DKERROR("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
