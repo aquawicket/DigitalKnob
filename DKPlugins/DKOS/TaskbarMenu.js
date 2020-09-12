@@ -7,8 +7,7 @@ function TaskbarMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKOS/TaskbarMenu.html", function(){
-		DKAddEvent("document", "mousedown", TaskbarMenu_OnEvent);
-		window.onmousedown = TaskbarMenu_OnEvent;
+		DKAddEvent("window", "mousedown", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
 		DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
