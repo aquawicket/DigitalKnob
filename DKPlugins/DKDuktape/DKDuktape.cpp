@@ -216,7 +216,7 @@ bool DKDuktape::CallInit(const DKString& file)
 	DKString rval;
 	RunDuktape("(typeof "+func+" === 'function')", rval);
 	if(!toBool(rval)){
-		DKWARN(func+" undefined\n");
+		//DKWARN(func+" undefined\n");
 		return true;
 	}
 
