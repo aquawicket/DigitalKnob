@@ -652,7 +652,7 @@ function DKWidget_CreateElement(parent, tag, id)
 		return;
 	}
 	if(tag == "handle"){ return ""; } //we don't make handles for browsers
-	console.log("DKWidget_CreateElement("+parent+", "+tag+", "+id+")");
+	//console.log("DKWidget_CreateElement("+parent+", "+tag+", "+id+")");
 	
 	id = DKWidget_GetAvailableId(id);
 	

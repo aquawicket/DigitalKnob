@@ -3,8 +3,8 @@ function SvnMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKBuild/SvnMenu.html");
-	document.getElementById("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
-	document.getElementById("SvnMenu.html").style.left = DKWindow_GetMouseX()+"px";
+	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
+	byId("SvnMenu.html").style.left = DKWindow_GetMouseX()+"px";
 	DKAddEvent("window", "mousedown", SvnMenu_OnEvent);
 	DKAddEvent("Svn Update", "click", SvnMenu_OnEvent);
 	DKAddEvent("Svn Commit", "click", SvnMenu_OnEvent);

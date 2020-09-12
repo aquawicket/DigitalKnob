@@ -163,20 +163,20 @@ function DKSaveFile_UpdatePath(path)
 	var temp = DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
-	document.getElementById("DKSaveFileMenu").innerHTML = "";
-	document.getElementById("DKSaveFileMenu2").innerHTML = "";
+	byId("DKSaveFileMenu").innerHTML = "";
+	byId("DKSaveFileMenu2").innerHTML = "";
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement("DKSaveFileMenu2", "option", "DKSaveFileFolder");
 			var value = aPath+"/"+files[d];
-			document.getElementById(element2).value = value;
-			document.getElementById(element2).style.whiteSpace = "nowrap";
+			byId(element2).value = value;
+			byId(element2).style.whiteSpace = "nowrap";
 			DKAddEvent(element2, "click", DKSaveFile_OnEvent);
-			document.getElementById(element2).style.paddingLeft = "17px";
-			document.getElementById(element2).innerHTML = files[d];
-			document.getElementById(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
-			document.getElementById(element2).style.backgroundRepeat = "no-repeat";
+			byId(element2).style.paddingLeft = "17px";
+			byId(element2).innerHTML = files[d];
+			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
+			byId(element2).style.backgroundRepeat = "no-repeat";
 		}
 	}
 
@@ -184,11 +184,11 @@ function DKSaveFile_UpdatePath(path)
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement("DKSaveFileMenu2", "option", "DKSaveFileFile");
 			var value = aPath+"/"+files[f];
-			document.getElementById(element3).value = value;
-			document.getElementById(element3).style.whiteSpace = "nowrap";
-			document.getElementById(element3).style.paddingLeft = "17px";
-			document.getElementById(element3).style.backgroundRepeat = "no-repeat";
-			document.getElementById(element3).innerHTML = files[f];
+			byId(element3).value = value;
+			byId(element3).style.whiteSpace = "nowrap";
+			byId(element3).style.paddingLeft = "17px";
+			byId(element3).style.backgroundRepeat = "no-repeat";
+			byId(element3).innerHTML = files[f];
 			DKAddEvent(element3, "click", DKSaveFile_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
@@ -196,7 +196,7 @@ function DKSaveFile_UpdatePath(path)
 				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
 				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 
 			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
@@ -210,19 +210,19 @@ function DKSaveFile_UpdatePath(path)
 				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
 				(extension == "ztl")
 			){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 
 			else if((extension == "html") || (extension == "htm")){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 
 			else{
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}
 	}
 	
-	document.getElementById("DKSaveFilePath").value = aPath;
+	byId("DKSaveFilePath").value = aPath;
 	return true;
 }

@@ -79,14 +79,14 @@ function DKNotepad_Open(file)
 	var text = DKFile_FileToString(file);
 	console.log("DKNotepad_Open(file): = "+text);
 	//DKWidget_SetAttribute("DKNotepad_Text", "value", text);
-	document.getElementById("DKNotepad_Text").value = text;
+	byId("DKNotepad_Text").value = text;
 }
 
 /////////////////////////////
 function DKNotepad_Save(file)
 {
 	DKDEBUGFUNC(file);
-	var text = document.getElementById("DKNotepad_Text").value;
+	var text = byId("DKNotepad_Text").value;
 	//console.log(("DKNotepad_Save("+file+"): text = "+text+"\n");
 	DKFile_StringToFile(text, file);
 }

@@ -89,12 +89,12 @@ function DKSolution_Select(id)
 		if(!arry[i]){
 			DKERROR("DKSolution_Select(id): arry["+i+"] invalid\n");
 		}
-		document.getElementById(arry[i]).style.backgroundColor = "rgb(255,255,255)";
-		document.getElementById(arry[i]).style.color = "rgb(0,0,0)";
+		byId(arry[i]).style.backgroundColor = "rgb(255,255,255)";
+		byId(arry[i]).style.color = "rgb(0,0,0)";
 	}
 	if(id.indexOf("DKSolutionFolder") > -1 || id.indexOf("DKSolutionFile") > -1){
-		document.getElementById(id).style.backgroundColor = "rgb(123,157,212)";
-		document.getElementById(id).style.color = "rgb(255,255,255)";
+		byId(id).style.backgroundColor = "rgb(123,157,212)";
+		byId(id).style.color = "rgb(255,255,255)";
 	}
 }
 
@@ -169,20 +169,20 @@ function DKSolution_UpdatePath(path)
 	if(!temp){ return false; }
 	var files = temp.split(",");
 
-	document.getElementById("DKSolutionMenu").innerHTML = ""; //Clear it
+	byId("DKSolutionMenu").innerHTML = ""; //Clear it
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement(document.getElementById("DKSolutionMenu"), "div", "DKSolutionFolder");
-			document.getElementById(element2).setAttribute("class", "option");
+			var element2 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
+			byId(element2).setAttribute("class", "option");
 			var value = aPath+"/"+files[d]+"/";
-			document.getElementById(element2).setAttribute("value", value);
-			document.getElementById(element2).style.whiteSpace = "nowrap";
+			byId(element2).setAttribute("value", value);
+			byId(element2).style.whiteSpace = "nowrap";
 			DKAddEvent(element2, "click", DKSolution_OnEvent);
-			document.getElementById(element2).style.paddingLeft = "17px";
-			document.getElementById(element2).innerHTML = files[d];
-			document.getElementById(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
-			document.getElementById(element2).style.backgroundRepeat = "no-repeat";
+			byId(element2).style.paddingLeft = "17px";
+			byId(element2).innerHTML = files[d];
+			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
+			byId(element2).style.backgroundRepeat = "no-repeat";
 			DKAddEvent(element2, "click", DKSolution_OnEvent);
 			DKAddEvent(element2, "dblclick", DKSolution_OnEvent);
 			DKAddEvent(element2, "contextmenu", DKSolution_OnEvent);
@@ -191,14 +191,14 @@ function DKSolution_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement(document.getElementById("DKSolutionMenu"), "div", "DKSolutionFile");
-			document.getElementById(element3).setAttribute("class", "option");
+			var element3 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
+			byId(element3).setAttribute("class", "option");
 			var value = aPath+"/"+files[f];
-			document.getElementById(element3).setAttribute("value", value);
-			document.getElementById(element3).style.whiteSpace = "nowrap";
-			document.getElementById(element3).style.paddingLeft = "17px";
-			document.getElementById(element3).style.backgroundRepeat = "no-repeat";
-			document.getElementById(element3).innerHTML = files[f];
+			byId(element3).setAttribute("value", value);
+			byId(element3).style.whiteSpace = "nowrap";
+			byId(element3).style.paddingLeft = "17px";
+			byId(element3).style.backgroundRepeat = "no-repeat";
+			byId(element3).innerHTML = files[f];
 			DKAddEvent(element3, "click", DKSolution_OnEvent);
 			DKAddEvent(element3, "dblclick", DKSolution_OnEvent);
 			DKAddEvent(element3, "contextmenu", DKSolution_OnEvent);
@@ -208,7 +208,7 @@ function DKSolution_UpdatePath(path)
 				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
 				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
 				(extension == "3dm") || (extension == "3ds") || (extension == "ac") ||
@@ -221,19 +221,19 @@ function DKSolution_UpdatePath(path)
 				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
 				(extension == "ztl")
 			){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 			else if((extension == "js")){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/js.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/js.png\")";
 			}
 			else if((extension == "sln")){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/sln.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/sln.png\")";
 			}
 			else if((extension == "html") || (extension == "htm")){
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 			else{
-				document.getElementById(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
+				byId(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}
 	}

@@ -21,7 +21,8 @@ var objectY;
 var drag_id;
 var events = [];
 
-
+var byId = function(id){ return document.getElementById(id); } //shortcut alias
+ 
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
 //document.body.style.fontSize = "1.0px";
@@ -85,7 +86,7 @@ window.addEventListener('error', function(e){
     //       have the errors get indexed by Googlebot; however, it may
     //       be a useful feature while actively debugging the page.
     var DOM_ID = 'rendering-debug-pre';
-    if(!document.getElementById(DOM_ID)){
+    if(!byId(DOM_ID)){
         var log = document.createElement('pre');
         log.id = DOM_ID;
         log.style.whiteSpace = 'pre-wrap';
@@ -93,7 +94,7 @@ window.addEventListener('error', function(e){
         if (!document.body) document.body = document.createElement('body');
         document.body.insertBefore(log, document.body.firstChild);
     } else {
-        document.getElementById(DOM_ID).textContent += '\n\n' + errorText;
+        byId(DOM_ID).textContent += '\n\n' + errorText;
     }
 	(/
 
@@ -342,7 +343,7 @@ function DKClose(data)
 		}
 		*/
 		
-		var script = document.getElementById(arry[1]);
+		var script = byId(arry[1]);
 		if(!script){
 			//DKWARN("DKClose("+data+"): "+arry[1]+" does not exist\n");
 			return false;
@@ -351,7 +352,7 @@ function DKClose(data)
 		//DKINFO("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKWidget"){
-		var element = document.getElementById(arry[1]);
+		var element = byId(arry[1]);
 		if(!element){ 
 			//DKWARN("DKClose("+data+"): "+file+" does not exist\n");
 			return false; 
@@ -360,7 +361,7 @@ function DKClose(data)
 		//DKINFO("Closed "+arry[1]+"\n");
 	}
 	if(arry[0] == "DKCss"){
-		var css = document.getElementById(arry[1]);
+		var css = byId(arry[1]);
 		if(!css){ 
 			//DKERROR("DKClose("+data+"): "+arry[1]+" does not exist\n");
 			return false; 
@@ -420,8 +421,8 @@ function LoadJs(url, callback)
 	}
 	
 	//TEST: already loaded, remove it first
-	if(document.getElementById(url)){
-		document.getElementById(url).parentNode.removeChild(document.getElementById(url));
+	if(byId(url)){
+		byId(url).parentNode.removeChild(byId(url));
 	}
 	
 	var file = url.substring(url.lastIndexOf("/") + 1);
@@ -646,7 +647,7 @@ function DragStart(event, id)
 		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 	drag_id = id;
-	element = document.getElementById(drag_id);
+	element = byId(drag_id);
 	
 	objectX = GetLeftPx(element);
 	objectY = GetTopPx(element);
@@ -671,7 +672,7 @@ function DragMove(event)
 		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 
-	element = document.getElementById(drag_id);
+	element = byId(drag_id);
 
 	if(element.style.left){
 		element.style.left = Pos(objectX + x - mouseStartX);
@@ -738,7 +739,7 @@ function ResizeStart(event, id)
 	}
 	
 	drag_id = id;
-	element = document.getElementById(id);
+	element = byId(id);
 	
 	objectX = GetWidthPx(element);
 	objectY = GetHeightPx(element);
@@ -763,7 +764,7 @@ function ResizeMove(event)
 		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
 	
-	element = document.getElementById(drag_id);
+	element = byId(drag_id);
 	if((objectX + x - mouseStartX) > 1){
   		element.style.width = Pos(objectX + x - mouseStartX);
 		
@@ -1400,7 +1401,7 @@ function DKAddEvent(id, type, Function)
 		element = window;
 	}
 	else{
-		element = document.getElementById(id);
+		element = byId(id);
 	}
 	if(!element){
 		DKWARN("DKAddEvent("+id+","+type+","+Function.name+"): element invalid\n");
@@ -1472,7 +1473,7 @@ function DKRemoveEvent(id, type, Function)
 		element = window;
 	}
 	else{
-		element = document.getElementById(id);
+		element = byId(id);
 	}
 	if(!element){
 		DKWARN("DKRemoveEvent("+id+","+type+","+Function.name+"): element invalid\n");
@@ -1513,7 +1514,7 @@ function DKRemoveEvents(Function)
 				element = window;
 			}
 			else{
-				element = document.getElementById(events[i]);
+				element = byId(events[i]);
 			}
 			
 			if(element){

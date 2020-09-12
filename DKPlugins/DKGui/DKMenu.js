@@ -31,10 +31,10 @@ function DKMenu_ValidatePosition(id)
 	
 	//DKINFO("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
 	//DKINFO("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
-	document.getElementById(id).style.top = "100px";//DKWidget_GetMouseWindowY()+"px";
-	document.getElementById(id).style.top = "100rem";//DKWidget_GetMouseWindowY()+"rem";
-	document.getElementById(id).style.left = "100px";//DKWidget_GetMouseWindowX()+"px";
-	document.getElementById(id).style.left = "100rem";//DKWidget_GetMouseWindowX()+"rem";
+	byId(id).style.top = "100px";//DKWidget_GetMouseWindowY()+"px";
+	byId(id).style.top = "100rem";//DKWidget_GetMouseWindowY()+"rem";
+	byId(id).style.left = "100px";//DKWidget_GetMouseWindowX()+"px";
+	byId(id).style.left = "100rem";//DKWidget_GetMouseWindowX()+"rem";
 	DKWidget_RemoveProperty(id, "right");
 	
 	//make sure menu is within window

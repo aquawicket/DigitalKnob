@@ -120,7 +120,7 @@ function DKSolutionMenu_NewFile()
 		DKERROR("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
 		return;
 	}
-	//var value = document.getElementById("DKSolutionPath").value;
+	//var value = byId("DKSolutionPath").value;
 	var value = DKWidget_GetValue("DKSolutionPath");
 	console.log("DKSolutionMenu_NewFile(): value = "+value);
 	DKSolutionMenu_SetFile(value+"/New.txt");
@@ -187,8 +187,8 @@ function DKSolutionMenu_Rename()
 	DKCreate("DKFile/DKSolutionRename.js", function(){
 		DKSolutionRename_SetId(DKSolutionMenu_id);
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
-		document.getElementById("DKFile/DKSolutionRename.html").style.top = top+"rem";
-		var value = document.getElementById(DKSolutionMenu_id).innerHTML;
+		byId("DKFile/DKSolutionRename.html").style.top = top+"rem";
+		var value = byId(DKSolutionMenu_id).innerHTML;
 		DKWidget_SetValue("DKSolutionRename_box", value);
 	});
 }

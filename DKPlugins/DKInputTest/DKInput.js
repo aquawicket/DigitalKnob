@@ -42,13 +42,13 @@ function DKInput_OnEvent(event)
 {
 	//DKDomEvent_getParameters(event.pointer);
 	DKDEBUGFUNC(event);
-	document.getElementById("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type;
-	document.getElementById("event.char").innerHTML = "event.char: "+event.char;
-	document.getElementById("event.charCode").innerHTML = "event.charCode: "+event.charCode;
-	document.getElementById("event.code").innerHTML = "event.code: "+event.code;
-	document.getElementById("event.key").innerHTML = "event.key: "+event.key;
-	document.getElementById("event.keyCode").innerHTML = "event.keyCode: "+event.keyCode;
-	document.getElementById("event.which").innerHTML = "event.which: "+event.which;
+	byId("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type;
+	byId("event.char").innerHTML = "event.char: "+event.char;
+	byId("event.charCode").innerHTML = "event.charCode: "+event.charCode;
+	byId("event.code").innerHTML = "event.code: "+event.code;
+	byId("event.key").innerHTML = "event.key: "+event.key;
+	byId("event.keyCode").innerHTML = "event.keyCode: "+event.keyCode;
+	byId("event.which").innerHTML = "event.which: "+event.which;
 
 	if(event.type == "keypress"){	
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
@@ -72,11 +72,11 @@ function DKInput_OnEvent(event)
 		}
 	}
 	//if(event.type == "mousemove"){
-		document.getElementById("event.clientX").innerHTML = "event.clientX: "+event.clientX;
-		document.getElementById("event.clientY").innerHTML = "event.clientY: "+event.clientY;
-		document.getElementById("event.screenX").innerHTML = "event.screenX: "+event.screenX;
-		document.getElementById("event.screenY").innerHTML = "event.screenY: "+event.screenY;
-		document.getElementById("event.button").innerHTML = "event.button: "+event.button;
+		byId("event.clientX").innerHTML = "event.clientX: "+event.clientX;
+		byId("event.clientY").innerHTML = "event.clientY: "+event.clientY;
+		byId("event.screenX").innerHTML = "event.screenX: "+event.screenX;
+		byId("event.screenY").innerHTML = "event.screenY: "+event.screenY;
+		byId("event.button").innerHTML = "event.button: "+event.button;
 	//}
 	if(event.type == "wheel"){
 		DKWidget_SetInnerHtml("wheeldelta", "Wheel Delta: "+DK_GetValue(event));
@@ -121,13 +121,13 @@ function DKInput_Highlight(div)
 {
 	DKDEBUGFUNC(div);
 	if(!div){ return; }
-	if(!document.getElementById(div)){ return; }
-	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,"+rgba+")";
-	if(div == "Shift"){ document.getElementById("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Meta"){ document.getElementById("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Control"){ document.getElementById("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Alt"){ document.getElementById("Alt2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Enter"){ document.getElementById("Enter2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(!byId(div)){ return; }
+	byId(div).style.backgroundColor = "rgba(0,255,0,"+rgba+")";
+	if(div == "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div == "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
 }
 
 /////////////////////////////////
@@ -135,11 +135,11 @@ function DKInput_UnHighlight(div)
 {
 	DKDEBUGFUNC(div);
 	if(!div){ return; }
-	if(!document.getElementById(div)){ return; }
-	document.getElementById(div).style.backgroundColor = "rgba(0,255,0,0)";
-	if(div == "Shift"){ document.getElementById("Shift2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Meta"){ document.getElementById("Meta2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Control"){ document.getElementById("Control2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Alt"){ document.getElementById("Alt2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Enter"){ document.getElementById("Enter2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(!byId(div)){ return; }
+	byId(div).style.backgroundColor = "rgba(0,255,0,0)";
+	if(div == "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div == "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0)"; }
 }
