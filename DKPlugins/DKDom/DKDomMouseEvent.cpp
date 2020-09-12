@@ -78,7 +78,7 @@ int DKDomMouseEvent::button(duk_context* ctx)
 	}
 	int button = event->GetParameter<int>("button", 0);
 	if(button == 1){ button = 2; } //renumber right button to 2
-	if(button == 2){ button = 1; } //renunmber middle button to 1
+	else if(button == 2){ button = 1; } //renunmber middle button to 1
 	duk_push_int(ctx, button);
 	return true;
 }

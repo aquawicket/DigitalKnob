@@ -276,7 +276,7 @@ bool DKDuktape::DumpError(const DKString& code)
 	DKERROR(message+"\n");
 	DKERROR(fileName+"\n");
 	DKERROR(lineNumber+": "+lineString+"\n");
-	DKERROR("\n\n*** SOURCE CODE ***\n" + codeWithLineNumbers + "\n");
+	//DKERROR("\n\n*** SOURCE CODE ***\n" + codeWithLineNumbers + "\n");
 	DKERROR("\n*** CALL STACK ***\n" + stack + "\n\n");
 
 	// Send error event to javascript
@@ -315,10 +315,11 @@ bool DKDuktape::LoadFile(const DKString& path)
 
 	DKString js;
 	DKFile::FileToString(path, js);
-	if(has(js,"//BROWSER")){
-		DKWARN("Ignoring: "+path+" is a browser only file. \n");
-		return true;
-	}
+	
+	//if(has(js,"//BROWSER")){
+	//	DKWARN("Ignoring: "+path+" is a browser only file. \n");
+	//	return true;
+	//}
 
 	if(duk_peval_file(ctx, path.c_str()) != 0){
 		DKDuktape::DumpError(js);

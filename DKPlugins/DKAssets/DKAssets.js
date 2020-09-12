@@ -1,4 +1,4 @@
-//BROWSER
+if(DK_GetBrowser() != "RML"){ return; } //This is for browser only.
 
 //FIXME - should all of this go into DKAssets_Init()?
 DKINFO("Loaded DKAssets.js\n");
