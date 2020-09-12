@@ -1695,7 +1695,6 @@ function AjaxGet(url, output)
 	}
 
 	request.onreadystatechange=function(){
-		DKINFO("request.onreadystatechange")
 		if(request.readyState==4){
 			if(request.status==200 || request.status==0){
 				output.value = request.responseText;

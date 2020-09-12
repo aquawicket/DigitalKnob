@@ -38,12 +38,13 @@ function DKMenu_ValidatePosition(id)
 	DKWidget_RemoveProperty(id, "right");
 	
 	//make sure menu is within window
-	var win_width = Number(DKWidget_GetClientWidth("body"));
-	var win_height = Number(DKWidget_GetClientHeight("body"));
-	var top = Number(DKWidget_GetOffsetTop(id));
-	var left = Number(DKWidget_GetOffsetLeft(id));
-	var width = Number(DKWidget_GetClientWidth(id));
-	var height = Number(DKWidget_GetClientHeight(id));
+	var win_width = Number(document.body.clientWidth);
+	var win_height = Number(document.body.clientHeight);
+	//var top = Number(DKWidget_GetOffsetTop(id));
+	var top = Number(byId(id).offsetTop);
+	var left = Number(byId(id).offsetLeft);
+	var width = Number(byId(id).clientWidth);
+	var height = Number(byId(id).clientHeight);
 	
 	//DKINFO("win_width = "+win_width+"\n");
 	//DKINFO("win_height = "+win_height+"\n");

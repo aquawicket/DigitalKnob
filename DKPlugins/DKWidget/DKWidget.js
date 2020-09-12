@@ -651,26 +651,16 @@ function DKWidget_CreateElement(parent, tag, id)
 		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
 		return;
 	}
-	if(tag == "handle"){ return ""; } //we don't make handles for browsers
-	//console.log("DKWidget_CreateElement("+parent+", "+tag+", "+id+")");
 	
 	id = DKWidget_GetAvailableId(id);
-	
-	var par = parent;
-	//var par = document.getElementById(parent);
-	//if(parent == "body"){ par = document.body; }
-	
-	if(!par){ DKERROR("DKWidget_CreateElement(): parent invalid ("+parent+")\n"); return false;}
+		
 	var ele = document.createElement(tag);
 	if(!ele){ DKERROR("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
-	//ele.id = id;
-	ele.setAttribute("id", id);
+	ele.id = id;
+	//ele.setAttribute("id", id);
 	
-	//DKINFO("DKWidget_CreateElement(): par = "+par+"\n");
-	//DKINFO("DKWidget_CreateElement(): ele = "+ele+"\n");
-	par.appendChild(ele); //This is not working on IE
+	parent.appendChild(ele); //This is not working on IE
 	
-	//DKINFO("DKWidget_CreateElement(parent, tag, id): return = "+id+"\n");
 	return id;
 }
 
@@ -773,6 +763,7 @@ function DKWidget_InsertBefore(parent, element)
 	node.insertBefore(ele, par);
 }
 
+/*
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
@@ -806,6 +797,7 @@ function DKWidget_GetMouseWindowY(id)
 	DKDEBUGFUNC(id);
 	return mouseY;
 }
+*/
 
 //////////////////////////////////////
 function DKWidget_GetMouseElementX(id)
@@ -839,7 +831,8 @@ function DKWidget_GetMouseElementY(id)
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
 
-//////////////////////////////////////
+/*
+////////////////////////////////////
 function DKWidget_GetClientWidth(id)
 {
 	DKDEBUGFUNC(id);
@@ -934,6 +927,7 @@ function DKWidget_ElementExists(id)
 	}
 	return false;
 }
+*/
 
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
@@ -1050,9 +1044,9 @@ function DKWidget_GetLastChild(id)
 function DKWidget_SetFocus(id)
 {
 	DKDEBUGFUNC(id);
-	console.log("DKWidget_SetFocus("+id+")");
+	//console.log("DKWidget_SetFocus("+id+")");
 	var element = document.getElementById(id);
-	console.log("DKWidget_SetFocus("+id+"): element = "+element);
+	//console.log("DKWidget_SetFocus("+id+"): element = "+element);
 	element.focus();
 }
 
