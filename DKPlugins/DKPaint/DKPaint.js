@@ -25,13 +25,13 @@ function DKPaint_End()
 function DKPaint_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKPaint_Save")){
+	if(event.currentTarget.id == "DKPaint_Save"){
 		//DKNotepad_Save();
 	}
 	if(DK_Type(event, "contextmenu")){
 		DKCreate("DKPaint/DKPaintMenu.js", function(){});
 	}
-	if(DK_Id(event,"DKPaint_File")){
+	if(event.currentTarget.id == "DKPaint_File"){
 		DKCreate("DKPaint/DKPaintFile.js", function(){});
 	}
 	if(DK_Type(event, "OpenFile")){

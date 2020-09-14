@@ -22,22 +22,22 @@ function DKPaintFile_End()
 function DKPaintFile_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKPaintFile_Open")){
+	if(event.currentTarget.id == "DKPaintFile_Open"){
 		DKPaintFile_Open();
 	}
-	if(DK_Id(event,"DKPaintFile_Save")){
+	if(event.currentTarget.id == "DKPaintFile_Save"){
 		DKPaintFile_Save();
 	}
-	if(DK_Id(event,"DKPaintFile_Save As")){
+	if(event.currentTarget.id == "DKPaintFile_SaveAs"){
 		DKPaintFile_SaveAs();
 	}
-	if(DK_Id(event,"DKPaintFile_Exit")){
+	if(event.currentTarget.id == "DKPaintFile_Exit"){
 		DKClose("DKPaint/DKPaintFile.js");
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaint/DKPaintFile.html")){
+	if(event.currentTarget == window){
+		if(byId("DKPaint/DKPaintFile.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

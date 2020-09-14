@@ -23,7 +23,7 @@ function DKLogin_End()
 function DKLogin_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "DKLoginFacebook")){
+	if(event.currentTarget.id == "DKLoginFacebook"){
 		DKINFO("DKLogin_OnEvent(): DKLoginFacebook\n");
 		DKCreate("DKLogin/DKFacebook.js", function(){
 			DKFacebookLogin(DKLogin_OnConnect);

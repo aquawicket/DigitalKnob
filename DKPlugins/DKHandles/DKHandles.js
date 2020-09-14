@@ -31,45 +31,45 @@ function DKHandles_End()
 function DKHandles_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "window")){
+	if(event.currentTarget.id == "window"){
 		var handle = DKWidget_GetInnerHtml("window");
 		DKHandles_UpdateProperties(handle);
     }
-	if(DK_Id(event, "parent")){
+	if(event.currentTarget.id == "parent"){
 		var handle = DKWidget_GetInnerHtml("parent");
 		DKHandles_UpdateProperties(handle);
     }
-	if(DK_Id(event, "refresh")){
+	if(event.currentTarget.id == "refresh"){
 		DKHandles_UpdateWindowList();
     }
-	if(DK_Id(event, "search")){
+	if(event.currentTarget.id == "search"){
 		//DKINFO("search\n");
 		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
 		DKHandles_StartSearch();
     }
-	if(DK_Id(event, "setvalue")){
+	if(event.currentTarget.id == "setvalue"){
 		var value = DKWidget_GetValue("SetValueBox");
 		var currentHandle = DKHandles_CurrentHandle();
 		DKHandles_SetValue(currentHandle, value);
     }
-	if(DK_Id(event, "doclick")){
+	if(event.currentTarget.id == "doclick"){
 		var currentHandle = DKHandles_CurrentHandle();
 		DKHandles_Click(currentHandle);
     }
-	if(DK_Id(event, "Prev")){
+	if(event.currentTarget.id == "Prev"){
 		var currentHandle = DKHandles_CurrentHandle();
 		var handle = DKHandles_PrevHandle(currentHandle);
 		DKHandles_UpdateProperties(handle);
 	}
-	if(DK_Id(event, "Next")){
+	if(event.currentTarget.id == "Next"){
 		var currentHandle = DKHandles_CurrentHandle();
 		var handle = DKHandles_NextHandle(currentHandle);
 		DKHandles_UpdateProperties(handle);
 	}
-	if(DK_Id(event, "Highlight")){
+	if(event.currentTarget.id == "Highlight"){
 		DKHandles_ToggleHighlight();
 	}
-	if(DK_IdLike(event, "wintitle")){
+	if(event.currentTarget.id == "wintitle"){
 		var handle = DKHandles_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 		DKHandles_UpdateProperties(handle);
 	}

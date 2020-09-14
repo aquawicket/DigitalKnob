@@ -18,10 +18,10 @@ function scale_End()
 function scale_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"scale_minus")){
+	if(event.currentTarget.id == "scale_minus"){
 		scale_minus();
 	}
-	if(DK_Id(event,"scale_plus")){
+	if(event.currentTarget.id == "scale_plus"){
 		scale_plus();
 	}
 }
