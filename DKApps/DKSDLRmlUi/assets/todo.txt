@@ -1,3 +1,5 @@
 //TODO
 
 * Fix DKNotepad_Save from the DKNotepad File menu
+* Change all occurances of DK_Type to event.type 
+     some contextmenu events need PreventDefault(event); to halt the browser rightclick.
