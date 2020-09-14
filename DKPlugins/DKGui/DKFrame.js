@@ -82,6 +82,7 @@ function DKFrame_Widget(id)
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
 	DKWidget_AppendChild(frame, id);
+	//byId(frame).appendChild(byId(frame));
 	byId(id).style.position = "absolute";
 	byId(id).style.top = "21rem";
 	byId(id).style.left = "0rem";
