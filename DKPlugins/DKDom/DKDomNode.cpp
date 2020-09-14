@@ -345,8 +345,31 @@ int DKDomNode::compareDocumentPosition(duk_context* ctx)
 int DKDomNode::contains(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKERROR("DKDomNode::contains not implemented\n");
-	return false;
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomNode::contains(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	DKString nodeAddress = duk_require_string(ctx, 1);
+	Rml::Element* node = DKRml::addressToElement(nodeAddress);
+	if(!node){
+		DKERROR("DKDomNode::contains(): node invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+
+	node = element->GetParentNode();
+	while(node){
+		if(node == element){ 
+			duk_push_boolean(ctx, true);
+			return true; 
+		}
+		node = node->GetParentNode();
+	}
+	duk_push_boolean(ctx, false);
+	return true;
 }
 
 ////////////////////////////////////////////
