@@ -18,10 +18,10 @@ function init_OnEvent(event)  //Duktape
 {
 	console.log("Init_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Type(event, "resize")){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
+	if(event.type == "resize"){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
-	if(DK_Type(event, "keydown") && DK_GetValue(event) == "4"){ //NOTE: this is the back button on Android
+	if(event.type == "keydown" && DK_GetValue(event) == "4"){ //NOTE: this is the back button on Android
 		DK_Exit();
 	}
 }

@@ -61,7 +61,7 @@ function DKBuildGUI_End()
 function DKBuildGUI_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	//DKINFO("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//console.log("DKBuildGUI_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	
 	if(event.currentTarget.id == "AppList"){
 		//if(DK_Type(event,"click")){

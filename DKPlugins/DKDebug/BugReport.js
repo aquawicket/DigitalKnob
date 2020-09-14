@@ -19,8 +19,8 @@ function BugReport_End()
 function BugReport_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("BugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Type(event, "click")){
+	console.log("BugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	if(event.type == "click"){
 		BugReport_SendBugReport();
 	}
 }

@@ -21,12 +21,12 @@ function DKDisplay_End()
 function DKDisplay_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	console.lod("DKDisplay_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	console.log("DKDisplay_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "DKDisplay_Button"){
 		DK_TurnOffMonitor();
 	}
 		
-	//if(DK_Type(event, "second")){
+	//if(event.type == "second"){
 	//	//tick
 	//}
 }
