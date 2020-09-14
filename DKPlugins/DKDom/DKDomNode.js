@@ -86,8 +86,9 @@ var Node = function(pointer)
 	Node.prototype.compareDocumentPosition = function(){
 		//TODO
 	}
-	Node.prototype.contains = function(){
-		//TODO
+	Node.prototype.contains = function(node){
+		var contains = DKDomNode_contains(this.pointer, node.pointer);
+		return contains;
 	}
 	Node.prototype.getRootNode = function(){
 		//TODO
