@@ -64,7 +64,7 @@ function DKBuildGUI_OnEvent(event)
 	//console.log("DKBuildGUI_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	
 	if(event.currentTarget.id == "AppList"){
-		//if(DK_Type(event,"click")){
+		//if(event.type == "click"){
 		//	DKBuildGUI_UpdateApps();
 		//}
 		if(event.type == "change"){

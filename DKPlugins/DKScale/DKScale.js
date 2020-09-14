@@ -19,7 +19,7 @@ function DKScale_End()
 function DKScale_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Type(event, "resize")){
+	if(event.type == "resize"){
 		DKScale_Resize();
 	}
 }

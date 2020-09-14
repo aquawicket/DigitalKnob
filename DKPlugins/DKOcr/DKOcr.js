@@ -23,7 +23,7 @@ function DKOcr_End()
 function DKOcr_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Type(event, "OpenFile")){
+	if(event.type == "OpenFile"){
 		var file = DK_GetValue(event);
 		DKINFO("OpenFile: "+file+"\n");
 		

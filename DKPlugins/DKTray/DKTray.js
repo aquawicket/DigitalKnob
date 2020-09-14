@@ -36,21 +36,21 @@ function DKTray_End()
 function DKTray_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Type(event, "doubleclick")){
+	if(event.type == "doubleclick"){
 		DKTray_ToggleWindow();
 	}
-	if(DK_Type(event, "1000")){
+	if(event.type == (event, "1000"){
 		DK_ShowConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Show();
 		DKWindow_Restore();
 	}
-	if(DK_Type(event, "1001")){
+	if(event.type == "1001"){
 		DK_HideConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Hide();
 	}
-	if(DK_Type(event, "1002")){
+	if(event.type == "1002"){
 		DK_Exit();
 	}
 }

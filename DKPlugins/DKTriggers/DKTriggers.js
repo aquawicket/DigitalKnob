@@ -60,42 +60,42 @@ function DKTriggers_End()
 function DKTrigger_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Type(event, "gui")){ //C++
+	if(event.type == "gui"){ //C++
 		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessGui(arry[0], arry[1]);
 	}
-	if(DK_Type(event, "midi")){ //C++
+	if(event.type == "midi"){ //C++
 		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessMidi(arry[0], arry[1], arry[2]);
 	}
-	if(DK_Type(event, "keydown")){
+	if(event.type == "keydown"){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
-	if(DK_Type(event, "keyup")){
+	if(event.type == "keyup"){
 		DKTrigger_ProcessKeyUp(DK_GetValue(event)); //JS keydown
 	}
-	if(DK_Type(event, "resize")){
+	if(event.type == "resize"){
 		DKTrigger_ProcessWindowResize(); 
 	}
-	if(DK_Type(event, "click")){
+	if(event.type == "click"){
 		DKTrigger_ProcessGui("click", DK_GetId(event));
 	}
-	if(DK_Type(event, "mousedown")){
+	if(event.type == "mousedown"){
 		DKTrigger_ProcessGui("mousedown", DK_GetId(event));
 	}
-	if(DK_Type(event, "mouseup")){
+	if(event.type == "mouseup"){
 		DKTrigger_ProcessGui("mouseup", DK_GetId(event));
 	}
-	if(DK_Type(event, "contextmenu")){ //JS
+	if(event.type == "contextmenu"){ //JS
 		DKTrigger_ProcessGui("contextmenu", DK_GetId(event));
 	}
-	if(DK_Type(event, "mouseover")){ //JS
+	if(event.type == "mouseover"){ //JS
 		DKTrigger_ProcessGui("mouseover", DK_GetId(event));
 	}
-	if(DK_Type(event, "mouseout")){ //JS
+	if(event.type == "mouseout"){ //JS
 		DKTrigger_ProcessGui("mouseout", DK_GetId(event));
 	}
-	if(DK_Type(event, "ToggleTriggers")){ //JS
+	if(event.type == "ToggleTriggers"){ //JS
 		if(DK_Value(event, "ON")){
 			DKTrigger_On();
 		}
