@@ -60,7 +60,7 @@ DKObject* DKClass::_Get(const DKString& data)
 	}
 
 	DKWARN("DKClass::_Get(): "+arry[0]+" not registered\n");
-	DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	//DKWARN("   Open DKCMake.txt and add DKDEPEND("+arry[0]+"), and rebuild\n");
 	return NULL;
 }
 
