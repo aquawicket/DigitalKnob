@@ -27,10 +27,10 @@ function DKSolution_End()
 function DKSolution_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKSolution_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUG("DKSolution_OnEvent("+event.currentTarget.is+","+event.type+","+event.value+")");
 	DKSolution_Select(DK_GetId(event));
 
-	if(DK_Type(event, "click")){
+	if(event.currentTarget.id == "click"){
 		DK_StopPropagation(event);
 	}
 	

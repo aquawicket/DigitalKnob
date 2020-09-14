@@ -24,14 +24,14 @@ function DKSolutionRename_End()
 function DKSolutionRename_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKSolutionRename_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Type(event, "keydown")){
+	DKDEBUG("DKSolutionRename_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	if(event.type == "keydown"){
 		if(DK_GetValue(event) != 13){
 			return;
 		}
 	}
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionRename.html")){
+	if(event.currentTarget == window){
+		if()byId("DKFile/DKSolutionRename.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}
