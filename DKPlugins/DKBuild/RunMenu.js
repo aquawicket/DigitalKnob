@@ -26,7 +26,7 @@ function RunMenu_OnEvent(event)
 {
 	DKDEBUGFUNC();
 	DKDEBUG("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event, "Build App")){
+	if(event.currentTarget.id == "Build App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -34,7 +34,7 @@ function RunMenu_OnEvent(event)
 		LEVEL = "Build";
 		DKThread_DKQueue("BuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(DK_Id(event, "Rebuild App")){
+	if(event.currentTarget.id == "Rebuild App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -42,7 +42,7 @@ function RunMenu_OnEvent(event)
 		LEVEL = "Rebuild";
 		DKThread_DKQueue("RebuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(DK_Id(event, "Rebuild All")){
+	if(event.currentTarget.id == "Rebuild All"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -50,10 +50,10 @@ function RunMenu_OnEvent(event)
 		LEVEL = "RebuildAll";
 		DKThread_DKQueue("BuildAll "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(DK_Id(event, "Copy Assets")){
+	if(event.currentTarget.id == "Copy Assets"){
 		DKWARN("DKBuildGUI::Copy Assets: TODO\n");
 	}
-	if(DK_Id(event, "Run App")){
+	if(event.currentTarget.id == "Run App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
@@ -119,7 +119,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	//TODO
-	if(DK_Id(event, "Generate Docs")){
+	if(event.currentTarget.id == "Generate Docs"){
 		DKINFO("Generate Docs: TODO\n");
 		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
 		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
@@ -128,16 +128,15 @@ function RunMenu_OnEvent(event)
 		DK_Execute(doxy_exe+" "+doxy_file);		
 	}
 	
-	if(DK_Id(event, "Export to Android Studio")){
+	if(event.currentTarget.id == "Export to Android Studio"){
 		DKINFO("Export to Android Studio\n");
 		DKCreate("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});
 	}
 	
-	if(DK_Id(event, "window")){
-		if(!DKWidget_GetHoverElement()){ return; }
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/RunMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKBuild/RunMenu.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

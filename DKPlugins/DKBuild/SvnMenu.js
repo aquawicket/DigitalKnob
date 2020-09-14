@@ -22,16 +22,16 @@ function SvnMenu_End()
 function SvnMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("SvnMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event,"Svn Update")){
+	DKDEBUG("SvnMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	if(event.currentTarget.id == "Svn Update"){
 		DKThread_DKQueue("SvnUpdate","DKBuild_SvnUpdate();");
 	}
-	if(DK_Id(event,"Svn Commit")){
+	if(event.currentTarget.id == "Svn Commit"){
 		DKThread_DKQueue("SvnCommit","DKBuild_SvnCommit();");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "SvnMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("SvnMenu.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

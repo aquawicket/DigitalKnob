@@ -31,22 +31,22 @@ function DKColorPicker_End()
 function DKColorPicker_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	//console.log("DKColorPicker_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//console.log("DKColorPicker_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(DK_Type(event, "GetColor")){
+	if(event.currentTarget.id == "GetColor"){
 		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		//DKINFO("event_id:"+event_id+"\n");
 		//DKINFO("event_type:"+event_type+"\n");
 	}
-	if(DK_Id(event, "DKColorPickerBar")){
+	if(event.currentTarget.id == "DKColorPickerBar"){
 		DKColorPicker_ColorBar(); //hover
 	}
-	if(DK_Id(event, "DKColorHover")){
+	if(event.currentTarget.id == "DKColorHover"){
 		DKColorPicker_ColorBox();
 	}
-	if(DK_Id(event, "DKColorPickerOK")){
+	if(event.currentTarget.id == "DKColorPickerOK"){
 		//DKINFO("DKColorPickerOK\n");
 		//DKINFO("event_id:"+event_id+"\n");
 		//DKINFO("event_type:"+event_type+"\n");
