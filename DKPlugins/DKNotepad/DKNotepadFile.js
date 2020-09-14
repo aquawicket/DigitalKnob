@@ -46,7 +46,7 @@ function DKNotepadFile_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKNotepad/DKNotepadFile.html").contains(byId(DKWidget_GetHoverElement()))){
+		if(byId("DKNotepad/DKNotepadFile.html").contains()){
 			return;
 		}
 	}

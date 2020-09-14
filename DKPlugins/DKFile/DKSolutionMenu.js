@@ -72,7 +72,7 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKFile/DKSolutionMenu.html").contains(byId(DKWidget_GetHoverElement()))){
+		if(byId("DKFile/DKSolutionMenu.html").contains()){
 			return;
 		}
 	}

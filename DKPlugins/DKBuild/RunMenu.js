@@ -136,7 +136,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKBuild/RunMenu.html").contains(byId(DKWidget_GetHoverElement()))){	
+		if(byId("DKBuild/RunMenu.html").contains()){	
 			return;
 		}
 	}

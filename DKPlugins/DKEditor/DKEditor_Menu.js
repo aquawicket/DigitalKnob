@@ -166,7 +166,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 
 	if(event.currentTarget == window){
-		if(byId("DKEditor/DKEditor_Menu.html").contains(byId(DKWidget_GetHoverElement()))){	
+		if(byId("DKEditor/DKEditor_Menu.html").contains()){	
 			return;
 		}
 	}
