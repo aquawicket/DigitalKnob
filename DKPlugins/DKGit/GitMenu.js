@@ -50,7 +50,7 @@ function GitMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKGit/GitMenu.html").contains()){	
+		if(byId("DKGit/GitMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
 	}

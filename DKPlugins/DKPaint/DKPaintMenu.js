@@ -32,7 +32,7 @@ function DKPaintMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKPaint/DKPaintMenu.html").contains()){
+		if(byId("DKPaint/DKPaintMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}

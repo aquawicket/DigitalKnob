@@ -28,7 +28,7 @@ function DKNotepadFormat_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKNotepad/DKNotepadFormat.html").contains()){	
+		if(byId("DKNotepad/DKNotepadFormat.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
 	}

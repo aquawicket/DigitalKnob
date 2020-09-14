@@ -31,7 +31,7 @@ function SvnMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("SvnMenu.html").contains()){	
+		if(byId("SvnMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
 	}

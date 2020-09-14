@@ -31,7 +31,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	if(event.currentTarget == window){
-		if()byId("DKFile/DKSolutionRename.html").contains()){
+		if()byId("DKFile/DKSolutionRename.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}

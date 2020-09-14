@@ -40,7 +40,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 	
 	///////////////////////////
 	if(event.currentTarget == window){
-		if(byId("DKEditor/DKEditor_BrowserMenu.html").contains()){
+		if(byId("DKEditor/DKEditor_BrowserMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}

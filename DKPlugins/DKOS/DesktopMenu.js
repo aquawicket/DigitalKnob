@@ -35,7 +35,7 @@ function DesktopMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKOS/DesktopMenu.html").contains()){
+		if(byId("DKOS/DesktopMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}

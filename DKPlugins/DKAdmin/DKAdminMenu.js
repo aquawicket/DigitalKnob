@@ -133,7 +133,7 @@ function DKAdminMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKAdmin/DKAdminMenu.html").contains()){
+		if(byId("DKAdmin/DKAdminMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}

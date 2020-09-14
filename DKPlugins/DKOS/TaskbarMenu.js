@@ -167,7 +167,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(byId("DKOS/TaskbarMenu.html").contains()){
+		if(byId("DKOS/TaskbarMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}
