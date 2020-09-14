@@ -20,8 +20,8 @@ function SendBugReport_End()
 function SendBugReport_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("SendBugReport_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event, "SendBugReport_Button")){
+	console.log("SendBugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	if(event.currentTarget.id == "SendBugReport_Button"){
 		SendBugReport_CreateReport();
 	}
 }

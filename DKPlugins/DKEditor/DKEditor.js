@@ -32,8 +32,8 @@ function DKEditor_End()
 function DKEditor_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKEditor_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event, "DKEditor_edit")){
+	DKDEBUG("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	if(event.currentTarget.id == "DKEditor_edit"){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");
 		});

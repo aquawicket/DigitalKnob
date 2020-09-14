@@ -46,25 +46,25 @@ function DKEditor_Menu_End()
 function DKEditor_Menu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKEditor_Menu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");	
-	if(DK_Id(event, "DKEditor_Menu_Command_Input")){
+	DKDEBUG("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
+	if(event.currentTarget.id == "DKEditor_Menu_Command_Input"){
 		//TODO
 		DKINFO("TODO\n");
 	}
-	if(DK_Id(event, "DKEditor_Menu_Reload")){
+	if(event.currentTarget.id == "DKEditor_Menu_Reload"){
 		DKDebug_Reload();
 	}
-	if(DK_Id(event, "DKEditor_Menu_Refresh")){
+	if(event.currentTarget.id == "DKEditor_Menu_Refresh"){
 		DKDebug_Refresh();
 	}
-	if(DK_Id(event, "DKEditor_Menu_Notes")){
+	if(event.currentTarget.id == "DKEditor_Menu_Notes"){
 		DKCreate("DKNotepad/DKNotepad.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_Assets")){
+	if(event.currentTarget.id == "DKEditor_Menu_Assets"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
@@ -72,13 +72,13 @@ function DKEditor_Menu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_TestBrowserApp")){
+	if(event.currentTarget.id == "DKEditor_Menu_TestBrowserApp"){
 		DKCreate("DKEditor/DKEditor_BrowserMenu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_BrowserMenu.html");
 		});
 		return;
 	}
-	if(DK_Id(event, "DKEditor_Menu_DevTools")){
+	if(event.currentTarget.id == "DKEditor_Menu_DevTools"){
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}
@@ -86,7 +86,7 @@ function DKEditor_Menu_OnEvent(event)
 			DKRocket_ToggleDebugger();
 		}
 	}
-	if(DK_Id(event, "DKEditor_Menu_ClearConsole")){
+	if(event.currentTarget.id == "DKEditor_Menu_ClearConsole"){
 		DKDebug_ClearConsole();
 		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
 			DK_System("cls");
@@ -95,13 +95,13 @@ function DKEditor_Menu_OnEvent(event)
 			DK_System("clear");
 		}
 	}
-	if(DK_Id(event, "DKEditor_Menu_ShowConsole")){
+	if(event.currentTarget.id == "DKEditor_Menu_ShowConsole"){
 		DK_ShowConsole();
 	}
-	if(DK_Id(event, "DKEditor_Menu_HideConsole")){
+	if(event.currentTarget.id == "DKEditor_Menu_HideConsole"){
 		DK_HideConsole();
 	}
-	if(DK_Id(event, "DKEditor_Menu_NewFrame")){
+	if(event.currentTarget.id == "DKEditor_Menu_NewFrame"){
 		DKCreate("DKMessage/DKMessage.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKMessage/DKMessage.html");
@@ -112,29 +112,29 @@ function DKEditor_Menu_OnEvent(event)
 			});
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_Builder")){
+	if(event.currentTarget.id == "DKEditor_Menu_Builder"){
 		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_Info")){
+	if(event.currentTarget.id == "DKEditor_Menu_Info"){
 		DKDebug_PrintInfo();
 	}
-	if(DK_Id(event, "DKEditor_Menu_PushFiles")){
+	if(event.currentTarget.id == "DKEditor_Menu_PushFiles"){
 		DKDebug_PushDKFiles();
 	}
-	if(DK_Id(event, "DKEditor_Menu_GitUpdate")){
+	if(event.currentTarget.id == "DKEditor_Menu_GitUpdate"){
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitUpdate();
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_GitCommit")){
+	if(event.currentTarget.id == "DKEditor_Menu_GitCommit"){
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitCommit();
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_RefreshIcons")){
+	if(event.currentTarget.id == "DKEditor_Menu_RefreshIcons"){
 		//FIXME - not working
 		//DK_Execute("C:/Windows/System32/ie4uinit.exe -ClearIconCache");
 		
@@ -142,12 +142,12 @@ function DKEditor_Menu_OnEvent(event)
 		DK_Run("C:/Windows/System32/ie4uinit.exe","-ClearIconCache");
 		//NOTE: For Windows 10, use: "ie4uinit.exe -show"
 	}
-	if(DK_Id(event, "DKEditor_Menu_Report")){
+	if(event.currentTarget.id == "DKEditor_Menu_Report"){
 		DKCreate("DKDebug/SendBugReport.js", function(){
 			DKFrame_Widget("DKDebug/SendBugReport.html");
 		});
 	}
-	if(DK_Id(event, "DKEditor_Menu_Web")){
+	if(event.currentTarget.id == "DKEditor_Menu_Web"){
 		DKINFO("DKEditor_Menu_Web()\n");
 		//TODO - Create an iFrame and display digitalknob.com
 		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
@@ -165,9 +165,8 @@ function DKEditor_Menu_OnEvent(event)
 		DKFrame_Widget(div);
 	}
 
-	///////////////////////////
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKEditor/DKEditor_Menu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKEditor/DKEditor_Menu.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

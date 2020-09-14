@@ -21,8 +21,8 @@ function DKDisplay_End()
 function DKDisplay_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	DKDEBUG("DKDisplay_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event, "DKDisplay_Button")){
+	console.lod("DKDisplay_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	if(event.currentTarget.id == "DKDisplay_Button"){
 		DK_TurnOffMonitor();
 	}
 		
