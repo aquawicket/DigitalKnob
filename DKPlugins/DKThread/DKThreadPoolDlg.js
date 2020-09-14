@@ -20,7 +20,7 @@ function DKThreadPoolDlg_End()
 function DKThreadPoolDlg_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(event.type == "Update"){
+	if(DK_Type(event, "Update")){
 		DKThreadPoolDlg_OnUpdate();
 	}
 }

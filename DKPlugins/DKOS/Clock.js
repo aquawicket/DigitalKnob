@@ -23,7 +23,7 @@ function Clock_End()
 function Clock_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(event.type == "second"){
+	if(DK_Type(event, "second")){
 		Clock_Update();
 	}
 }

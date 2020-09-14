@@ -19,7 +19,7 @@ function DKStats_End()
 function DKStats_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(event.type == "second"){
+	if(DK_Type(event, "second")){
 		DKStats_Update();
 	}
 }
