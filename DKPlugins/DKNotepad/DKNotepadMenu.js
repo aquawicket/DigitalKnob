@@ -33,7 +33,7 @@ function DKNotepadMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadMenu.html")){
+		if(byId("DKNotepad/DKNotepadMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

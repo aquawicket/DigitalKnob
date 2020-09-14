@@ -20,15 +20,15 @@ function DKNotepadHelp_End()
 function DKNotepadHelp_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKNotepadHelp_ViewHelp")){
-		DKINFO(("DKNotepadHelp_ViewHelp\n");
+	if(event.currentTarget.id == "DKNotepadHelp_ViewHelp"){
+		console.log("DKNotepadHelp_ViewHelpn");
 	}
-	if(DK_Id(event,"DKNotepadHelp_About")){
-		DKINFO(("DKNotepadHelp_About\n");
+	if(event.currentTarget.id == "DKNotepadHelp_About"){
+		console.log("DKNotepadHelp_About");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadHelp.html")){
+	if(event.currentTarget == window){
+		if(byId("DKNotepad/DKNotepadHelp.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

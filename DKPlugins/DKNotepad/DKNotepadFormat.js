@@ -20,15 +20,15 @@ function DKNotepadFormat_End()
 function DKNotepadFormat_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKNotepadFormat_WordWrap")){
+	if(event.currentTarget.id == "DKNotepadFormat_WordWrap"){
 		DKNotepadFormat_WordWrap();
 	}
-	if(DK_Id(event,"DKNotepadFormat_Font")){
-		DKINFO(("DKNotepadFormat_Font\n");
+	if(event.currentTarget.id == "DKNotepadFormat_Font"){
+		console.log("DKNotepadFormat_Fontn");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadFormat.html")){
+	if(event.currentTarget == window){
+		if(byId("DKNotepad/DKNotepadFormat.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

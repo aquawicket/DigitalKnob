@@ -24,29 +24,29 @@ function DKNotepadFile_End()
 function DKNotepadFile_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKWARN("DKNotepadFile_OnEvent(event)");
-	if(DK_Id(event,"DKNotepadFile_New")){
+	//DKWARN("DKNotepadFile_OnEvent(event)");
+	if(event.currentTarget.id == "DKNotepadFile_New"){
 		DKNotepadFile_New();
 	}
-	if(DK_Id(event,"DKNotepadFile_Open")){
+	if(event.currentTarget.id == "DKNotepadFile_Open"){
 		DKNotepadFile_Open();
 	}
-	if(DK_Id(event,"DKNotepadFile_Save")){
+	if(event.currentTarget.id == "DKNotepadFile_Save"){
 		DKNotepadFile_Save();
 	}
-	if(DK_Id(event,"DKNotepadFile_SaveAs")){
+	if(event.currentTarget.id == "DKNotepadFile_SaveAs"){
 		DKNotepadFile_SaveAs();
 	}
-	if(DK_Id(event,"DKNotepadFile_Print")){
+	if(event.currentTarget.id == "DKNotepadFile_Print"){
 		DKNotepadFile_Print();
 	}
-	if(DK_Id(event,"DKNotepadFile_Exit")){
+	if(event.currentTarget.id == "DKNotepadFile_Exit"){
 		DKClose("DKNotepad/DKNotepadFile.js");
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadFile.html")){
+	if(event.curretnTarget == window){
+		if(byId("DKNotepad/DKNotepadFile.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

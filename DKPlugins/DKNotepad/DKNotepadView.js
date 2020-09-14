@@ -19,12 +19,12 @@ function DKNotepadView_End()
 function DKNotepadView_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKNotepadView_StatusBar")){
+	if(event.currentTarget.id == "DKNotepadView_StatusBar"){
 		DKINFO(("DKNotepadView_StatusBar\n");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadView.html")){
+	if(event.currentTarget == window){
+		if(byId("DKNotepad/DKNotepadView.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

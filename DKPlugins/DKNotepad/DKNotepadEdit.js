@@ -24,27 +24,27 @@ function DKNotepadEdit_End()
 function DKNotepadEdit_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKNotepadEdit_Undo")){
-		DKINFO(("DKNotepadEdit_Undo\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Undo"){
+		console.log("DKNotepadEdit_Undo\n");
 	}
-	if(DK_Id(event,"DKNotepadEdit_Cut")){
-		DKINFO(("DKNotepadEdit_Cut\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Cut"){
+		console.log("DKNotepadEdit_Cut\n");
 	}
-	if(DK_Id(event,"DKNotepadEdit_Copy")){
-		DKINFO(("DKNotepadEdit_Copy\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Copy"){
+		console.log("DKNotepadEdit_Copy\n");
 	}
-	if(DK_Id(event,"DKNotepadEdit_Paste")){
-		DKINFO(("DKNotepadEdit_Paste\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Paste"){
+		console.log("DKNotepadEdit_Paste\n");
 	}
-	if(DK_Id(event,"DKNotepadEdit_Delete")){
-		DKINFO(("DKNotepadEdit_Delete\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Delete"){
+		console.log("DKNotepadEdit_Delete\n");
 	}
-	if(DK_Id(event,"DKNotepadEdit_Find")){
-		DKINFO(("DKNotepadEdit_Find\n");
+	if(event.currentTarget.id == "DKNotepadEdit_Find"){
+		console.log("DKNotepadEdit_Find\n");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadEdit.html")){
+	if(event.currentTarget == window){
+		if(byId("DKNotepad/DKNotepadEdit.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}
