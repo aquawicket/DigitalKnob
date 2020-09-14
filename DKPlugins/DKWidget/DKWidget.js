@@ -617,35 +617,6 @@ function DKWidget_GetOuterHtml(variable)
 	return false;
 }
 
-/*
-///////////////////////////////////////
-function DKWidget_IsChildOf(id, parent)
-{
-	DKDEBUGFUNC(id, parent);
-	if(!id){return false;}
-	if(!parent){return false;}
-	var ele = document.getElementById(id);
-	var par = document.getElementById(parent);
-	if(!ele){return false;}
-	if(!par){return false;}
-	
-	while(ele && (ele.id != par.id)){
-		//console.log("ele.id: "+ele.id+" par.id:"+par.id);
-		if(ele.id == "body"){ return false; }
-		ele = ele.parentNode;
-	}
-	
-	if(ele.id == par.id){
-		//console.log("ele: " +ele);
-		//console.log("par: " +par);
-		//console.log("DKWidget_IsChildOf(): returned true");
-		return true;
-	}
-	
-	return false;
-}
-*/
-
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {
