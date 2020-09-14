@@ -958,7 +958,7 @@ function DKWidget_GetHoverElement()
 { 
 	DKDEBUGFUNC();
 	if(!document.elementFromPoint(window.mouseX, window.mouseY)){ 
-		console.log("DKWidget_GetHoverElement(): document.elementFromPoint invalid");
+		console.log("DKWidget_GetHoverElement(): document.elementFromPoint("+window.mouseX+","+window.mouseY+") invalid");
 		return false;
 	}
 	return document.elementFromPoint(window.mouseX, window.mouseY).id;
