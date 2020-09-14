@@ -257,8 +257,9 @@ function DKFrame_BringToFront()
 	
 	//if(DKWidget_IsChildOf(id, "DKFrame_frame")){
 	if(byId("DKFrame_frame").contains(byId(id))){
-		document.body.id = "body"; //TEMPORARY FIX
-		if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
+		//document.body.id = "body"; //TEMPORARY FIX
+		//if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
+		if(document.body.lastchild != byId("DKFrame_frame")){	
 			DKWidget_AppendChild("body", "DKFrame_frame");
 			return;
 		}
