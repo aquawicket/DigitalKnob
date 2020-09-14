@@ -53,7 +53,7 @@ bool DKWidgetJS::Init()
 	DKDuktape::AttachFunction("DKWidget_HasProperty", DKWidgetJS::HasProperty);
 	DKDuktape::AttachFunction("DKWidget_Hide", DKWidgetJS::Hide);
 	DKDuktape::AttachFunction("DKWidget_InsertBefore", DKWidgetJS::InsertBefore);
-	DKDuktape::AttachFunction("DKWidget_IsChildOf", DKWidgetJS::IsChildOf);
+	//DKDuktape::AttachFunction("DKWidget_IsChildOf", DKWidgetJS::IsChildOf);
 	DKDuktape::AttachFunction("DKWidget_OpenLink", DKWidgetJS::OpenLink);
 	DKDuktape::AttachFunction("DKWidget_Paste", DKWidgetJS::Paste);
 	DKDuktape::AttachFunction("DKWidget_PrependChild", DKWidgetJS::PrependChild);
@@ -404,6 +404,7 @@ int DKWidgetJS::GetMouseElementY(duk_context* ctx)
 	return 1;
 }
 
+/*
 ///////////////////////////////////////////
 int DKWidgetJS::IsChildOf(duk_context* ctx)
 {
@@ -413,6 +414,7 @@ int DKWidgetJS::IsChildOf(duk_context* ctx)
 	if(!DKWidget::IsChildOf(element, parent)){ return 0; }
 	return 1;
 }
+*/
 
 ///////////////////////////////////////////////
 int DKWidgetJS::ElementExists(duk_context* ctx)

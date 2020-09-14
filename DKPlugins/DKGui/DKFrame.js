@@ -256,7 +256,6 @@ function DKFrame_BringToFront()
 	var id = DKWidget_GetHoverElement();
 	if(!id){ return; }
 	
-	//if(DKWidget_IsChildOf(id, "DKFrame_frame")){
 	if(byId("DKFrame_frame").contains(byId(id))){
 		//document.body.id = "body"; //TEMPORARY FIX
 		//if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
@@ -268,7 +267,6 @@ function DKFrame_BringToFront()
 	for(var i=0; i<100; i++){
 		var frame = "DKFrame_frame"+i.toString();
 		if(!byId(frame)){ continue; }
-		//if(DKWidget_IsChildOf(id, frame)){
 		if(byId(frame).contains(byId(id))){
 		//if(DKWidget_GetLastChild("body") != frame){
 		if(document.body.lastChild != byId(frame)){

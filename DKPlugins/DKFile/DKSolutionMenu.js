@@ -72,7 +72,6 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		//if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionMenu.html")){
 		if(byId("DKFile/DKSolutionMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
