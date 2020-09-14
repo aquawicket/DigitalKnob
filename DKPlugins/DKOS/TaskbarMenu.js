@@ -103,7 +103,7 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id == "OpenDebug"){
-		if(DK_GetBrowser() == "Rocket"){
+		if(DK_GetBrowser() == "RML"){
 			DKRocket_ToggleDebugger();
 		}
 		if(DK_GetBrowser() == "CEF"){

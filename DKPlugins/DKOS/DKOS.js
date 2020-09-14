@@ -6,12 +6,14 @@ function DKOS_Init()
 		document.body.style.overflow = "hidden";
 		var OS = DK_GetOS();
 		if(OS != "iOS" && OS != "Android"){
-			var screenwidth = DK_GetScreenWidth();
-			var screenheight = DK_GetScreenHeight();
+			/*
+			var screenwidth = screen.width;
+			var screenheight = screen.height;
 			var newwidth = parseInt(screenwidth)-100;
 			var newheight = parseInt(screenheight)-150;
 			//DKWindow_SetWidth(newwidth);
 			//DKWindow_SetHeight(newheight);
+			*/
 		}
 
 		//DKCreate("DKGui/DKFrame.js", function(){

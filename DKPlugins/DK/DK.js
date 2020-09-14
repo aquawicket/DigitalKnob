@@ -50,8 +50,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DKHook_GetWindows = function(){ DKWARN("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_Crash = function(){ DKWARN("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_LogGuiConsole = function(){ DKWARN("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetScreenWidth = function(){ DKWARN("DK_GetScreenWidth(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetScreenHeight = function(){ DKWARN("DK_GetScreenHeight(): not available for "+DK_GetBrowser()+"\n"); }
+	var DK_GetFunctions = function(){ DKWARN("DK_GetFunctions(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_PrintFunctions = function(){ DKWARN("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_GetPixelUnderMouse = function(){ DKWARN("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
 	var DK_ShowConsole = function(){ DKWARN("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
@@ -1132,11 +1131,9 @@ function DK_GetEvents()
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
 			out += events[i].name + ",";
-			//DKINFO(events[i].name);
 		}
 		else{
 			out += events[i] + " : ";
-			//DKINFO(events[i]);
 		}
 	}
 	return out;
