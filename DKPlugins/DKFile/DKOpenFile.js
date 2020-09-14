@@ -38,6 +38,7 @@ function DKOpenFile_End()
 function DKOpenFile_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
+	if(!event.currentTarget){ return; }
 	if(event.currentTarget.id == "DKOpenFileDrive"){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}

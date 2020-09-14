@@ -24,7 +24,7 @@ function DKNotepadFile_End()
 function DKNotepadFile_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	//DKWARN("DKNotepadFile_OnEvent(event)");
+	//DKWARN("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id == "DKNotepadFile_New"){
 		DKNotepadFile_New();
 	}
@@ -45,7 +45,7 @@ function DKNotepadFile_OnEvent(event)
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
-	if(event.curretnTarget == window){
+	if(event.currentTarget == window){
 		if(byId("DKNotepad/DKNotepadFile.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
@@ -85,7 +85,7 @@ function DKNotepadFile_Save()
 	DKFile_StringToFile(text, currentFile);
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
-		DKMessageBox_Message("File Saved");
+		DKMessage_Message("File Saved");
 	});
 }
 

@@ -48,7 +48,8 @@ function DKMessage_OnEvent(event)
 function DKMessage_Message(message)
 {
 	DKDEBUGFUNC(message);
-	DKWidget_SetInnerHtml("DKMessageText", message);
+	//DKWidget_SetInnerHtml("DKMessageText", message);
+	byId("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Hide("DKMessageCancel");
 	DKWidget_Show("DKMessageText");
