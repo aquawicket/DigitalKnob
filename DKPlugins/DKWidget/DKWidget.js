@@ -690,6 +690,9 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 function DKWidget_AppendChild(parent, element)
 {
 	DKDEBUGFUNC(parent, element);
+	if(!parent){ console.log("DKWidget_AppendChild(): parent invalid"); return false; }
+	if(!element){ console.log("DKWidget_AppendChild(): element invalid"); return false; }
+	
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
