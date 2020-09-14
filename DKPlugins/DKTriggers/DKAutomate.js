@@ -36,11 +36,11 @@ function DKAutomate_End()
 function DKAutomate_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Type(event, "keydown")){
+	if(event.type == "keydown"){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	
-	if(DK_Id(event, "DKA-NewButton")){
+	if(event.currentTarget.id == "DKA-NewButton"){
 		//DKINFO("DKA-NewButton\n");
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
@@ -52,7 +52,7 @@ function DKAutomate_OnEvent(event)
 		});
 	}
 	
-	if(DK_Id(event, "DKA-DeleteButton")){
+	if(event.currentTarget.id == "DKA-DeleteButton"){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
@@ -67,29 +67,29 @@ function DKAutomate_OnEvent(event)
 		});		
 	}
 	
-	if(DK_IdLike(event, "Trigger")){
+	if(event.currentTarget.id == "Trigger"){
 		DKAutomate_SelectValue(DK_GetValue(event));
 		DKAutomate_UpdateSelection(DK_GetValue(event));
 	}
 	
-	if(DK_Id(event, "CancelButton")){
+	if(event.currentTarget.id == "CancelButton"){
 		DKAutomate_CancelSave();
 	}
 	
-	if(DK_Id(event, "SaveButton")){
+	if(event.currentTarget.id == "SaveButton"){
 		//var value = MessageBox(event, "Confirm", "Save Triggers?");
 		//if(!value){ return; }
 		//var assets = DKAssets_LocalAssets();
 		DKTrigger_SaveTriggers("USER/triggers.txt");
 	}
 	
-	if(DK_Id(event, "MidiDevices")){
+	if(event.currentTarget.id == "MidiDevices"){
 		DKCreate("DKMidi/DKMidiDialog.js", function(){
 			DKWidget_Show("DKMidi/DKMidiDialog.html");
 		});
 	}
 	
-	if(DK_Type(event, "UpdateValues")){
+	if(event.type == "UpdateValues"){
 		DKAutomate_UpdateValues();
 	}
 }

@@ -20,7 +20,7 @@ function DKAutomate2_End()
 function DKAutomate2_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"NewCause")){
+	if(event.currentTarget.id == "NewCause"){
 		DKTrigger_NewCause();
 		DKAutomate2_SelectTrigger();
 	}
@@ -29,7 +29,7 @@ function DKAutomate2_OnEvent(event)
 		DKTrigger_DeleteCause(num)
 		DKAutomate2_SelectTrigger();
 	}
-	if(DK_Id(event,"NewEffect")){
+	if(event.currentTarget.id == "NewEffect"){
 		DKTrigger_NewEffect();
 		DKAutomate2_SelectTrigger();
 	}
@@ -38,7 +38,7 @@ function DKAutomate2_OnEvent(event)
 		DKTrigger_DeleteEffect(num);
 		DKAutomate2_SelectTrigger();
 	}
-	if(DK_Id(event,"TriggerName")){
+	if(event.currentTarget.id == "TriggerName"){
 		if(!current_trigger){ return; }
 		DKTrigger_RenameTrigger(current_trigger, DK_GetValue(event))
 		current_trigger = DK_GetValue(event);
@@ -77,7 +77,7 @@ function DKAutomate2_OnEvent(event)
 		effects[Number(num)].var3 = DK_GetValue(event);
 	}
 	
-	if(DK_Type(event,"SelectTrigger")){
+	if(event.type == "SelectTrigger"){
 		DKAutomate2_SelectTrigger();
 	}
 }
