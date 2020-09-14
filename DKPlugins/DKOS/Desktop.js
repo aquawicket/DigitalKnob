@@ -18,7 +18,7 @@ function Desktop_End()
 function Desktop_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
-	console.log("Desktop_OnEvent("+event+")");
+	//console.log("Desktop_OnEvent("+event+")");
 	if(DK_Id(event, "Background") && DK_Type(event, "contextmenu")){
 		DKCreate("DKOS/DesktopMenu.js", function(){});
 	}

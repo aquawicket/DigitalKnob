@@ -8,7 +8,7 @@ function DesktopMenu_Init()
 	document.getElementById("DKOS/DesktopMenu.html").style.top = "100px";
 	document.getElementById("DKOS/DesktopMenu.html").style.left = "100px";
 	
-	window.onmousedown = DesktopMenu_OnEvent;
+	DKAddEvent("window", "mousedown", DesktopMenu_OnEvent);
 	DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
 	DKAddEvent("ToggleFullscreen", "click", DesktopMenu_OnEvent);
 }
@@ -25,17 +25,17 @@ function DesktopMenu_End()
 function DesktopMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Id(event, "OpenBackgtoundMenu")){
+	if(event.currentTarget.id == "OpenBackgtoundMenu"){
 		DKCreate("DKOS/BackgroundMenu.js", function(){
 			DKFrame_Widget("DKOS/BackgroundMenu.html");
 		});
 	}
-	if(DK_Id(event, "ToggleFullscreen")){
+	if(event.currentTarget.id == "ToggleFullscreen"){
 		Desktop_ToggleFullscreen();
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/DesktopMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKOS/DesktopMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

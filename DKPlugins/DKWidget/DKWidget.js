@@ -617,6 +617,7 @@ function DKWidget_GetOuterHtml(variable)
 	return false;
 }
 
+/*
 ///////////////////////////////////////
 function DKWidget_IsChildOf(id, parent)
 {
@@ -643,6 +644,7 @@ function DKWidget_IsChildOf(id, parent)
 	
 	return false;
 }
+*/
 
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
