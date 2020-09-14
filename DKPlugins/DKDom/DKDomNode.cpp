@@ -360,7 +360,6 @@ int DKDomNode::contains(duk_context* ctx)
 		return true;
 	}
 
-	node = element->GetParentNode();
 	while(node){
 		if(node == element){ 
 			duk_push_boolean(ctx, true);
