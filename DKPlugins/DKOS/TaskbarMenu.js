@@ -156,7 +156,7 @@ function TaskbarMenu_OnEvent(event)
 	if(event.currentTarget.id == "TaskbarMenu_Run"){
 		var key = DK_GetValue(event);
 		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
-		if(DK_GetBrowser() == "Rocket"){
+		if(DK_GetBrowser() == "RML"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}
 		else{
@@ -168,6 +168,7 @@ function TaskbarMenu_OnEvent(event)
 	
 	if(event.currentTarget == window){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKOS/TaskbarMenu.html")){
+		//if(byId("DKOS/TaskbarMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

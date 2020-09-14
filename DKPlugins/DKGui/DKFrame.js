@@ -265,6 +265,7 @@ function DKFrame_BringToFront()
 	}
 	for(var i=0; i<100; i++){
 		var frame = "DKFrame_frame"+i.toString();
+		if(!byId(frame)){ continue; }
 		//if(DKWidget_IsChildOf(id, frame)){
 		if(byId(frame).contains(byId(id))){
 		if(DKWidget_GetLastChild("body") != frame){
