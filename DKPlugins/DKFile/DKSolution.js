@@ -34,8 +34,10 @@ function DKSolution_OnEvent(event)
 		DK_StopPropagation(event);
 	}
 	
-	if(DK_Type(event, "contextmenu")){
+	if(event.type == "contextmenu"){
 		//DKINFO("DKSolution_OnEvent() contextmenu\n");
+		//PreventDefault(event);
+		
 		var id = DK_GetId(event);
 		//DKINFO("id = "+id+"\n");
 		DK_StopPropagation(event);
@@ -58,7 +60,7 @@ function DKSolution_OnEvent(event)
 		DKSolution_OpenFolder(up);
 	}
 	
-	if(DK_Type(event, "dblclick")){
+	if(event.type == "dblclick"){
 		//DKINFO(DK_GetId(event)+"\n");
 		//DKINFO(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(DK_IdLike(event, "DKSolutionFolder")){
