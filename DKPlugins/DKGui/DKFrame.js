@@ -16,11 +16,11 @@ function DKFrame_End()
 function DKFrame_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Type(event, "mousedown")){
+	if(event.type == "mousedown"){
 		DKFrame_BringToFront();
 		//setTimeout( function(){ DKFrame_BringToFront(); }, 1000);
 	}
-	if(DK_Type(event, "dblclick")){
+	if(event.type == "dblclick"){
 		var id = DK_GetId(event);
 		var titlebar = DKWidget_GetParent(id);
 		DKFrame_MaximizeButton(titlebar);
@@ -39,7 +39,7 @@ function DKFrame_OnEvent(event)
 	}
 	
 	// FIXME - does not always fire
-	if(DK_Type(event, "DKFrame_resize")){
+	if(event.type == "DKFrame_resize"){
 		var frame = byId(DK_GetId(event));
 		if(!frame){ 
 			//DKERROR("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"): frame invalid\n");
