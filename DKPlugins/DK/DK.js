@@ -1330,6 +1330,7 @@ function DK_Type(event, command)
 	return false;
 }
 
+/*
 /////////////////////////
 function DK_Id(event, id)
 { 
@@ -1342,6 +1343,7 @@ function DK_Id(event, id)
 	if(event[0] && event[0] == id){ return true; }
 	return false;
 }
+*/
 
 /////////////////////////////
 function DK_IdLike(event, id)

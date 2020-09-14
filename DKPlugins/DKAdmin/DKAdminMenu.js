@@ -38,10 +38,10 @@ function DKAdminMenu_End()
 function DKAdminMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKINFO("DKAdminMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKINFO("DKAdminMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	//selections
-	if(DK_Id(event, "FileExplorer")){
+	if(event.currentTarget.id == "FileExplorer"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
@@ -49,30 +49,30 @@ function DKAdminMenu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(DK_Id(event, "OpenNotepad")){
+	if(event.currentTarget.id == "OpenNotepad"){
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 		});
 	}
-	if(DK_Id(event, "OpenStats")){
+	if(event.currentTarget.id == "OpenStats"){
 		DKCreate("DKStats/DKStats.js", function(){
 			DKFrame_Widget("DKStats/DKStats.html");
 		});
 	}
-	if(DK_Id(event, "TestIframe")){
+	if(event.currentTarget.id == "TestIframe"){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("iframe Test", "https://google.com", 640, 480);
 		});
 	}
 
 	//bottom row selections
-	if(DK_Id(event,"Git")){
+	if(event.currentTarget.id == "Git"){
 		DKCreate("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 			document.getElementById("DKGit/GitMenu.html").style.top = DKWindow_GetMouseY()-30+"px";
 		});
 	}
-	if(DK_Id(event, "OpenSource")){
+	if(event.currentTarget.id == "OpenSource"){
 		//DKINFO("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
@@ -84,17 +84,17 @@ function DKAdminMenu_OnEvent(event)
 			//DKINFO(source+"\n");
 		});
 	}
-	if(DK_Id(event, "OpenDebug")){
+	if(event.currentTarget.id == "OpenDebug"){
 		//DKRocket_ToggleDebugger();
 		DKCef_ShowDevTools(0);
 	}
-	if(DK_Id(event, "PushDKFiles")){
+	if(event.currentTarget.id == "PushDKFiles"){
 		DKDebug_PushDKFiles();
 	}
-	if(DK_Id(event, "ClearConsole")){
+	if(event.currentTarget.id == "ClearConsole"){
 		DK_System("cls");
 	}
-	if(DK_Id(event, "Info")){
+	if(event.currentTarget.id == "Info"){
 		DKINFO("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
@@ -111,16 +111,16 @@ function DKAdminMenu_OnEvent(event)
 			DKINFO(arry[i]+"\n");
 		}
 	}
-	if(DK_Id(event, "Refresh")){
+	if(event.currentTarget.id == "Refresh"){
 		DKFrame_CloseAll();
 		DK_Refresh();
 	}
-	if(DK_Id(event, "CloseDKGui")){
+	if(event.currentTarget.id == "CloseDKGui"){
 		DKClose("DKAdminMenu.js")
 		DK_Exit();
 		return;
 	}
-	if(DK_Id(event, "DKAdminMenu_Run")){
+	if(event.currentTarget.id == "DKAdminMenu_Run"){
 		var key = DK_GetValue(event);
 		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() == "Rocket"){
@@ -132,8 +132,8 @@ function DKAdminMenu_OnEvent(event)
 		DKAdminMenu_Run(DKWidget_GetValue("DKAdminMenu_Run"));
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKAdmin/DKAdminMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKAdmin/DKAdminMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

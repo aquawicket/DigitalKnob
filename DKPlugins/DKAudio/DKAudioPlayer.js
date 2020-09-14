@@ -27,26 +27,26 @@ function DKAudioPlayer_End()
 function DKAudioPlayer_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	//DKINFO("DKAudioPlayer_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//DKINFO("DKAudioPlayer_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(DK_Id(event, "DKAudioPlayer_playpause")){
+	if(event.currentTarget.id == "DKAudioPlayer_playpause"){
 		DKAudioPlayer_playpause();
 	}
-	if(DK_Id(event, "DKAudioPlayer_position")){
+	if(event.currentTarget.id == "DKAudioPlayer_position"){
 		DKAudioPlayer_SetTime(DKWidget_GetValue("DKAudioPlayer_position"));
 	}
-	if(DK_Id(event, "DKAudioPlayer_speaker")){
+	if(event.currentTarget.id == "DKAudioPlayer_speaker"){
 		DKAudioPlayer_speaker();
 	}
-	if(DK_Id(event, "DKAudioPlayer_volume")){
+	if(event.currentTarget.id == "DKAudioPlayer_volume"){
 		var volume = DKWidget_GetValue("DKAudioPlayer_volume");
 		DKAudio_SetVolume(parseInt(volume));
 		DKAudioPlayer_UpdateVolume(parseInt(volume));
 	}
-	if(DK_Type(event, "finnished")){
+	if(event.type == "finnished"){
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
 	}
-	if(DK_Type(event, "timeupdate")){
+	if(event.type == "timeupdate"){
 		DKAudioPlayer_TimeUpdate();
 	}
 }

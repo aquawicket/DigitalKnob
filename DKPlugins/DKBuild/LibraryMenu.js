@@ -19,14 +19,14 @@ function LibraryMenu_End()
 function LibraryMenu_OnEvent(event)
 {
 	DKDEBUGFUNC();
-	DKDEBUG("LibraryMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUG("LibraryMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(DK_Id(event, "Build Libraries")){
-		DKINFO("Clicked Build Libraries\n");
+	if(event.currentTarget.id == "Build Libraries"){
+		console.log("Clicked Build Librariesn");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKBuild/LibraryMenu.html")){
+	if(eventCurrentTarget == window)){
+		if(byId("DKBuild/LibraryMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}

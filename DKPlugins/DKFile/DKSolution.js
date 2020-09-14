@@ -52,7 +52,7 @@ function DKSolution_OnEvent(event)
 		return;
 	}
 		
-	if(DK_Id(event, "DKSolutionUp")){
+	if(event.currentTarget.id == "DKSolutionUp"){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/../";
 		//DKINFO(up+"\n");
 		DKSolution_OpenFolder(up);
@@ -72,7 +72,7 @@ function DKSolution_OnEvent(event)
 		return;
 	}
 	
-	if(DK_Id(event, "DKSolutionPath")){
+	if(event.currentTarget.id == "DKSolutionPath"){
 		if(DKWidget_GetValue(event) == 13){ //enter
 			DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
 		}

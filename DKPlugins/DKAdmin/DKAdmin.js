@@ -26,10 +26,10 @@ function DKAdmin_End()
 ///////////////////////////////
 function DKAdmin_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
-	DKINFO("DKAdmin_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	DKDEBUGFUNC(event
+	DKINFO("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(DK_Id(event, "AdminBadge")){
+	if(event.currentTarget.id == "AdminBadge"){
 		DKCreate("DKAdmin/DKAdminMenu.js", function(){});
 	}
 }

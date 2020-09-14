@@ -8,7 +8,7 @@ function Taskbar_Init()
 	DKCreate("DKOS/Taskbar.html", function(){});
 	DKCreate("DKOS/scale.js", function(){});
 	DKCreate("DKOS/Clock.js", function(){});
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "RML"){
 		DKCreate("DKDebug/BugReport.js", function(){});
 			DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
 			
@@ -33,11 +33,11 @@ function Taskbar_End()
 function Taskbar_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "start")){
+	if(event.currentTarget.id == "start"){
 		DKCreate("DKOS/TaskbarMenu.js", function(){});
 	}
-	if(DK_Id(event, "test_animate")){
-		DKINFO("Taskbar_OnEvent(): animate\n");
+	if(event.currentTarget.id == "test_animate"){
+		console.log("Taskbar_OnEvent(): animate");
 		pos = -45;
 		animation = setInterval(Taskbar_Animate, 15);
 		//EventLoop.run();

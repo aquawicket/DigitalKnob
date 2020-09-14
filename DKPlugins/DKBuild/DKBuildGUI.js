@@ -63,38 +63,38 @@ function DKBuildGUI_OnEvent(event)
 	DKDEBUGFUNC(event);
 	//DKINFO("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
 	
-	if(DK_Id(event,"AppList")){
+	if(event.currentTarget.id == "AppList"){
 		//if(DK_Type(event,"click")){
 		//	DKBuildGUI_UpdateApps();
 		//}
-		if(DK_Type(event,"change")){
+		if(event.type == "change"){
 			DKBuildGUI_AppSelect();
 		}
 	}
-	if(DK_Id(event,"OSList")){
+	if(event.currentTarget.id == "OSList"){
 		DKBuildGUI_OsSelect();
 	}
-	if(DK_Id(event,"BuildType")){
+	if(event.currentTarget.id == "BuildType"){
 		DKBuildGUI_BuildSelect();
 	}
-	if(DK_Id(event,"git")){
+	if(event.currentTarget.id == "git"){
 		DKCreate("DKBuild/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/GitMenu.html");
 		});
 	}
-	if(DK_Id(event,"libraries")){
+	if(event.currentTarget.id == "libraries"){
 		DKCreate("DKBuild/LibraryMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
 		});
 	}
-	if(DK_Id(event,"build")){
+	if(event.currentTarget.id == "build"){
 		DKCreate("DKBuild/RunMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/RunMenu.html");
 		});
 	}		
 	
 	/*
-	if(DK_Type(event,"NewApp")){
+	if(event.type == "NewApp"){
 		DKSendEvent("DKBuildGUI", "NewApp", DK_GetValue(event));
 		DKWidget_SetValue("AppList", DK_GetValue(event));
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");

@@ -22,7 +22,7 @@ function DKMessage_End()
 function DKMessage_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "DKMessageOk")){
+	if(event.currentTarget.id == "DKMessageOk"){
 		if(DKMessage_callback){
 			if(DKWidget_Visible("DKMessageInput")){
 				DKMessage_callback(DKWidget_GetValue("DKMessageInput"));
@@ -35,7 +35,7 @@ function DKMessage_OnEvent(event)
 		return;
 	}
 	
-	if(DK_Id(event, "DKMessageCancel")){
+	if(event.currentTarget.id == "DKMessageCancel"){
 		if(DKMessage_callback){
 			DKMessage_callback(false);
 		}
