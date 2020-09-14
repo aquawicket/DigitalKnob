@@ -3,7 +3,7 @@ function DKNotepadMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadMenu.html");
-	//DKAddEvent("window", "mousedown", DKNotepadMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Cut", "mousedown", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Copy", "mousedown", DKNotepadMenu_OnEvent);
 	DKAddEvent("DKNotepadMenu_Paste", "mousedown", DKNotepadMenu_OnEvent);
@@ -21,18 +21,18 @@ function DKNotepadMenu_End()
 function DKNotepadMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKNotepadMenu_Cut")){
+	if(event.currentTarget.id == "DKNotepadMenu_Cut"){
 		DKNotepadMenu_Cut();
 		PreventDefault(event);
 	}
-	if(DK_Id(event,"DKNotepadMenu_Copy")){
+	if(event.currentTarget.id == "DKNotepadMenu_Copy"){
 		DKNotepadMenu_Copy();
 	}
-	if(DK_Id(event,"DKNotepadMenu_Paste")){
+	if(event.currentTarget.id == "DKNotepadMenu_Paste"){
 		DKNotepadMenu_Paste();
 	}
 	
-	if(DK_Id(event, "window")){
+	if(event.currentTarget == window){
 		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKNotepad/DKNotepadMenu.html")){
 			return;
 		}

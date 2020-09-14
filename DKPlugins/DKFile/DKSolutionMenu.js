@@ -6,7 +6,7 @@ function DKSolutionMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionMenu.html");
-	DKAddEvent("document", "mousedown", DKSolutionMenu_OnEvent);
+	DKAddEvent("window", "mousedown", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
@@ -33,46 +33,47 @@ function DKSolutionMenu_End()
 function DKSolutionMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKSolutionMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
-	if(DK_Id(event,"DKSolutionMenu_Open")){
+	DKDEBUG("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	if(event.currentTarget.id == "DKSolutionMenu_Open"){
 		DKSolutionMenu_Open();
 	}
-	if(DK_Id(event,"DKSolutionMenu_OpenHere")){
+	if(event.currentTarget.id == "DKSolutionMenu_OpenHere"){
 		DKSolutionMenu_OpenHere();
 	}
-	if(DK_Id(event,"DKSolutionMenu_NewFile")){
+	if(event.currentTarget.id == "DKSolutionMenu_NewFile"){
 		DKSolutionMenu_NewFile();
 	}
-	if(DK_Id(event,"DKSolutionMenu_NewFolder")){
+	if(event.currentTarget.id == "DKSolutionMenu_NewFolder"){
 		DKSolutionMenu_NewFolder();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Rename")){
+	if(event.currentTarget.id == "DKSolutionMenu_Rename"){
 		DKSolutionMenu_Rename();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Delete")){
+	if(event.currentTarget.id == "DKSolutionMenu_Delete"){
 		DKSolutionMenu_Delete();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Copy")){
+	if(event.currentTarget.id == "DKSolutionMenu_Copy"){
 		DKSolutionMenu_Copy();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Cut")){
+	if(event.currentTarget.id == "DKSolutionMenu_Cut"){
 		DKSolutionMenu_Cut();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Paste")){
+	if(event.currentTarget.id == "DKSolutionMenu_Paste"){
 		DKSolutionMenu_Paste();
 	}
-	if(DK_Id(event,"DKSolutionMenu_Import")){
+	if(event.currentTarget.id == "DKSolutionMenu_Import"){
 		DKSolutionMenu_Import();
 	}
-	if(DK_Id(event,"DKSolutionMenu_GitAdd")){
+	if(event.currentTarget.id == "DKSolutionMenu_GitAdd"){
 		DKSolutionMenu_GitAdd();
 	}
-	if(DK_Id(event,"DKSolutionMenu_UpxCompress")){
+	if(event.currentTarget.id == "DKSolutionMenu_UpxCompress"){
 		DKSolutionMenu_UpxCompress();
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionMenu.html")){
+	if(event.currentTarget == window){
+		//if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKFile/DKSolutionMenu.html")){
+		if(byId("DKFile/DKSolutionMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}
