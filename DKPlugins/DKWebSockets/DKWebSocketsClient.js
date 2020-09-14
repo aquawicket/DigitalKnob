@@ -24,16 +24,16 @@ function DKWebSocketsClient_End()
 function DKWebSocketsClient_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Id(event, "DKWebSocketsClient_CreateClient")){
+	if(event.currentTarget.id == "DKWebSocketsClient_CreateClient"){
 		DKWebSocketsClient_CreateClient();
 	}
-	if(DK_Id(event, "DKWebSocketsClient_CloseClient")){
+	if(event.currentTarget.id == "DKWebSocketsClient_CloseClient"){
 		DKWebSocketsClient_CloseClient();
 	}
-	if(DK_Id(event, "DKWebSocketsClient_MessageToServer")){
+	if(event.currentTarget.id == "DKWebSocketsClient_MessageToServer"){
 		DKWebSocketsClient_MessageToServer();
 	}
-	if(DK_Type(event, "DKWebSockets_OnMessageFromServer")){
+	if(event.currentTarget.id == "DKWebSockets_OnMessageFromServer"){
 		DKWebSocketsClient_OnMessageFromServer(DK_GetValue(event));
 	}
 }
