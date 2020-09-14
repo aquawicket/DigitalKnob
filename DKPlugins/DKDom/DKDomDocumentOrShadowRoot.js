@@ -14,8 +14,9 @@ var DocumentOrShadowRoot = {
 		//TODO
 	},
 	
-	elementFromPoint(){
-		//console.log("DocumentOrShadowRoot.elementFromPoint()");
+	elementFromPoint(x, y){
+		console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")");
+		//TODO - add x, y to DKDomDocumentOrShadowRoot_elementFromPoint()
 		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){ return; }
 		return new HTMLElement(elementAddress);
