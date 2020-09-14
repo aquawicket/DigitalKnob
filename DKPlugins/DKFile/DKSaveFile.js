@@ -38,7 +38,7 @@ function DKSaveFile_End()
 function DKSaveFile_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	console.debug("DKSaveFile_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")");
+	console.debug("DKSaveFile_OnEvent("+event.currentTarget.is+","+event.type+","+event.value+")");
 	if(DK_IdLike(event, "DKSaveFileDrive")){
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
@@ -50,12 +50,12 @@ function DKSaveFile_OnEvent(event)
 		DKSaveFile_OpenFile(DK_GetValue(event));
 	}
 
-	if(DK_Id(event, "DKSaveFileUp")){
+	if(event.currentTarget.id == "DKSaveFileUp"){
 		var up = DKWidget_GetValue("DKSaveFilePath")+"/..";
 		//console.log(up);
 		DKSaveFile_OpenFolder(up);
 	}
-	if(DK_Id(event, "DKSaveFileOK")){
+	if(event.currentTarget.id == "DKSaveFileOK"){
 	//if(event.currentTarget.id == "DKSaveFileOK"){
 		if(rPath && event_data2 == "relative"){
 			if(DKFile_IsDirectory(rPath)){
@@ -79,12 +79,12 @@ function DKSaveFile_OnEvent(event)
 		return;
 	}
 	
-	if(DK_Id(event, "DKSaveFileCancel")){
+	if(event.currentTarget.id == "DKSaveFileCancel"){
 		DKFrame_Close("DKFile/DKSaveFile.html");
 		return;
 	}
 	
-	if(DK_Type(event, "SetFile")){
+	if(event.type == "SetFile"){
 		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
@@ -98,7 +98,7 @@ function DKSaveFile_OnEvent(event)
 		DKSaveFile_UpdatePath(event_data1);
 	}
 	
-	if(DK_Id(event, "DKSaveFilePath")){
+	if(event.currentTarget.id == "DKSaveFilePath"){
 		console.log("DKSaveFilePath");
 		//var path = DKWidget_GetAttribute("DKSaveFilePath", "value");
 		//DKSaveFile_UpdatePath(path);

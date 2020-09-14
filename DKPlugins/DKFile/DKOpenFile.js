@@ -38,24 +38,24 @@ function DKOpenFile_End()
 function DKOpenFile_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	if(DK_IdLike(event, "DKOpenFileDrive")){
+	if(event.currentTarget.id == "DKOpenFileDrive"){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
-	if(DK_IdLike(event, "DKOpenFileFolder")){
+	if(event.currentTarget.id == "DKOpenFileFolder"){
 		//console.log("DKOpenFileFolder");
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
-	if(DK_IdLike(event, "DKOpenFileFile")){
+	if(event.currentTarget.id == "DKOpenFileFile"){
 		DKOpenFile_OpenFile(DK_GetValue(event));
 	}
 
-	if(DK_Id(event, "DKOpenFileUp")){
+	if(event.currentTarget.id == "DKOpenFileUp"){
 		var up = DKWidget_GetValue("DKOpenFilePath")+"/..";
 		//console.log(up);
 		DKOpenFile_OpenFolder(up);
 	}
 	
-	if(DK_Id(event, "DKOpenFileOK")){
+	if(event.currentTarget.id == "DKOpenFileOK"){
 		if(rPath && event_data2 == "relative"){
 			//console.log("DKSendEvent("+event_id+","+event_type+","+rPath+")");
 			DKSendEvent(event_id, event_type, rPath);
@@ -72,12 +72,12 @@ function DKOpenFile_OnEvent(event)
 		return;
 	}
 	
-	if(DK_Id(event, "DKOpenFileCancel")){
+	if(event.currentTarget.id == "DKOpenFileCancel"){
 		DKFrame_Close("DKFile/DKOpenFile.html");
 		return;
 	}
 	
-	if(DK_Type(event, "GetFile")){
+	if(event.currentTarget.id == "GetFile"){
 		var params = DKWidget_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
@@ -91,7 +91,7 @@ function DKOpenFile_OnEvent(event)
 		DKOpenFile_UpdatePath(event_data1);
 	}
 	
-	if(DK_Id(event, "DKOpenFilePath")){
+	if(event.currentTarget.id == "DKOpenFilePath"){
 		console.log("DKOpenFilePath");
 		//var path = DKWidget_GetAttribute("DKOpenFilePath", "value");
 		//DKOpenFile_UpdatePath(path);
