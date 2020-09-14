@@ -23,22 +23,22 @@ function DKRocketVideo_End()
 function DKRocketVideo_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event, "DKRocketVideo_playpause")){
+	if(event.currentTarget.id == "DKRocketVideo_playpause"){
 		DKRocketVideo_playpause();
 	}
-	if(DK_Id(event, "DKRocketVideo_position")){
+	if(event.currentTarget.id == "DKRocketVideo_position"){
 		DKRocketVideo_position();
 	}
-	if(DK_Id(event, "DKRocketVideo_positiontrack")){
+	if(event.currentTarget.id == "DKRocketVideo_positiontrack"){
 		DKRocketVideo_positiontrack();
 	}
-	if(DK_Id(event, "DKRocketVideo_speaker", "click")){
+	if(event.currentTarget.id == "DKRocketVideo_speaker"){
 		DKRocketVideo_speaker();
 	}
-	if(DK_Id(event, "DKRocketVideo_volume", "click")){
+	if(event.currentTarget.id == "DKRocketVideo_volume"){
 		DKRocketVideo_volume();
 	}
-	if(DK_Id(event, "DKRocketVideo_volumetrack", "click")){
+	if(event.currentTarget.id == "DKRocketVideo_volumetrack"){
 		DKRocketVideo_volumetrack();
 	}
 }

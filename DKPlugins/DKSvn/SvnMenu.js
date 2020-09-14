@@ -41,15 +41,15 @@ function SvnMenu_End()
 function SvnMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);	
-	if(DK_Id(event,"Git Update")){
+	if(event.currentTarget.id == "Git Update"){
 		DKThread_DKQueue("GitUpdate","SvnMenu_GitUpdate();");
 	}
-	if(DK_Id(event,"Git Commit")){
+	if(event.currentTarget.id == "Git Commit"){
 		DKThread_DKQueue("GitCommit","SvnMenu_GitCommit();");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGit/SvnMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKGit/SvnMenu.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}

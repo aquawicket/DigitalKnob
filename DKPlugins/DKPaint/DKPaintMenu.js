@@ -21,18 +21,18 @@ function DKPaintMenu_End()
 function DKPaintMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"DKPaintMenu_Cut")){
+	if(event.currentTarget.id == "DKPaintMenu_Cut"){
 		DKPaintMenu_Cut();
 	}
-	if(DK_Id(event,"DKPaintMenu_Copy")){
+	if(event.currentTarget.id == "DKPaintMenu_Copy"){
 		DKPaintMenu_Copy();
 	}
-	if(DK_Id(event,"DKPaintMenu_Paste")){
+	if(event.currentTarget.id == "DKPaintMenu_Paste"){
 		DKPaintMenu_Paste();
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKPaint/DKPaintMenu.html")){
+	if(event.currentTarget == window){
+		if(byId("DKPaint/DKPaintMenu.html").contains(byId(DKWidget_GetHoverElement()))){
 			return;
 		}
 	}
