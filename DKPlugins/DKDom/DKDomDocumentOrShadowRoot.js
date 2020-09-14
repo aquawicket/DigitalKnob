@@ -16,7 +16,7 @@ var DocumentOrShadowRoot = {
 	
 	elementFromPoint(x, y){
 		console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")");
-		//TODO - add x, y to DKDomDocumentOrShadowRoot_elementFromPoint()
+		//NOTE: Rml uses GetHoverElement and gets mouse x, y on it's own.
 		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){ return; }
 		return new HTMLElement(elementAddress);
