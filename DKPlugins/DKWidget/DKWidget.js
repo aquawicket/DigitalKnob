@@ -961,7 +961,7 @@ function DKWidget_GetHoverElement()
 		console.log("DKWidget_GetHoverElement(): document.elementFromPoint("+window.mouseX+","+window.mouseY+") invalid");
 		return false;
 	}
-	return document.elementFromPoint(window.mouseX, window.mouseY).id;
+	return document.elementFromPoint(window.mouseX, window.mouseY);
 }
 
 ////////////////////////////
