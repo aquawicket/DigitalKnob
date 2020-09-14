@@ -38,9 +38,20 @@ function DKNotepad_OnEvent(event)
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
 		});
 	}
+	if(event.type == "OpenFile"){
+		var file = DK_GetValue(event);
+		console.log("OpenFile: "+file);
+		DKNotepad_Open(file)
+	}
+	if(event.type == "SaveFile"){
+		var file = DK_GetValue(event);
+		//DKINFO(("SaveFile: "+file+"\n");
+		DKNotepad_Save(file)
+	}
 	//if(event.type == "SetFile"){
 	//	DKNotepad_Open(DK_GetValue(event));
 	//}
+	if(!event.currentTarget){ return; }
 	if(event.currentTarget.id == "DKNotepad_File"){
 		DKCreate("DKNotepad/DKNotepadFile.js", function(){});
 	}
@@ -55,16 +66,6 @@ function DKNotepad_OnEvent(event)
 	}
 	if(event.currentTarget.id == "DKNotepad_Help"){
 		DKCreate("DKNotepad/DKNotepadHelp.js", function(){});
-	}
-	if(event.type == "OpenFile"){
-		var file = DK_GetValue(event);
-		//DKINFO(("OpenFile: "+file+"\n");
-		DKNotepad_Open(file)
-	}
-	if(event.type == "SaveFile"){
-		var file = DK_GetValue(event);
-		//DKINFO(("SaveFile: "+file+"\n");
-		DKNotepad_Save(file)
 	}
 }
 
