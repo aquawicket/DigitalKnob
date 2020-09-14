@@ -115,7 +115,11 @@ window.onmousemove = function(e){
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
 		window.mouseX = e.clientX + document.body.scrollLeft
 		window.mouseY = e.clientY + document.body.scrollTop
-	} 
+	}
+	if(DK_GetBrowser() == "RML"){
+		window.mouseX = e.clientX;
+		window.mouseY = e.clientY;
+	}
 	else{  // grab the x-y pos.s if browser is NS
 		window.mouseX = e.pageX
 		window.mouseY = e.pageY
