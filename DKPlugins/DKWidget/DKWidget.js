@@ -1036,12 +1036,14 @@ function DKWidget_SetFile(id, file)
 	*/
 }
 
+/*
 //////////////////////////////////
 function DKWidget_GetLastChild(id)
 {
 	DKDEBUGFUNC(id);
 	return document.getElementById("body").lastChild.id;
 }
+*/
 
 //////////////////////////////
 function DKWidget_SetFocus(id)

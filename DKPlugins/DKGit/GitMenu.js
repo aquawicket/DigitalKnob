@@ -42,15 +42,16 @@ function GitMenu_End()
 function GitMenu_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	if(DK_Id(event,"Git Update")){
+	if(event.currentTarget.id == "Git Update"){
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
-	if(DK_Id(event,"Git Commit")){
+	if(event.currentTarget.id == "Git Commit"){
 		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
-	if(DK_Id(event, "window")){
-		if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGit/GitMenu.html")){
+	if(event.currentTarget == window){
+		//if(DKWidget_IsChildOf(DKWidget_GetHoverElement(), "DKGit/GitMenu.html")){
+		if(byId("DKGit/GitMenu.html").contains(byId(DKWidget_GetHoverElement()))){	
 			return;
 		}
 	}
