@@ -114,9 +114,12 @@ function DKFrame_Iframe(title, url, width, height)
 	DKDEBUGFUNC(title, url, width, height);
 	var frame = DKFrame_CreateFrame(byId(title), width, height);
 	var iframe = DKWidget_CreateElement(byId(frame), "iframe", title);
-	DKWidget_SetAttribute(iframe, "src", url); // This will call DKRocketToRML::PostProcess() again
-	DKWidget_SetAttribute(iframe, "width", "100%");
-	DKWidget_SetAttribute(iframe, "height", "100%");
+	//DKWidget_SetAttribute(iframe, "src", url);
+	byId(iframe).src = url; // This will call DKRocketToRML::PostProcess() again
+	//DKWidget_SetAttribute(iframe, "width", "100%");
+	byId(iframe).width = "100%";
+	//DKWidget_SetAttribute(iframe, "height", "100%");
+	byId(iframe).height = "100%";
 	byId(iframe).style.borderWidth = "0rem";
 	byId(iframe).style.position = "absolute";
 	byId(iframe).style.top = "21rem";
