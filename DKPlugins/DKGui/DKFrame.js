@@ -253,10 +253,10 @@ function DKFrame_CreateResize(frame)
 function DKFrame_BringToFront()
 {
 	DKDEBUGFUNC();
-	var id = DKWidget_GetHoverElement();
-	if(!id){ return; }
+	var ele = DKWidget_GetHoverElement();
+	if(!ele){ return; }
 	
-	if(byId("DKFrame_frame").contains(byId(id))){
+	if(byId("DKFrame_frame").contains(ele)){
 		//document.body.id = "body"; //TEMPORARY FIX
 		//if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
 		if(document.body.lastchild != byId("DKFrame_frame")){	
@@ -267,7 +267,7 @@ function DKFrame_BringToFront()
 	for(var i=0; i<100; i++){
 		var frame = "DKFrame_frame"+i.toString();
 		if(!byId(frame)){ continue; }
-		if(byId(frame).contains(byId(id))){
+		if(byId(frame).contains(ele)){
 		//if(DKWidget_GetLastChild("body") != frame){
 		if(document.body.lastChild != byId(frame)){
 				DKWidget_AppendChild("body", frame);
