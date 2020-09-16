@@ -5,7 +5,7 @@ function DKDebug_Init()
 {
 	DKDEBUGFUNC();
 	
-	window.onkeydown = DKDebug_OnEvent;
+	DKAddEvent("window", "keydown", DKDebug_OnEvent);
 }
 
 //////////////////////
@@ -23,17 +23,17 @@ function DKDebug_OnEvent(event)
 	
 	if(event.type == "keydown"){
 		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		//console.log("event.key = "+event.key);
+		console.log("event.code = "+event.code);
 		DKDebug_LogKey(event.key);
 		DKDebug_CheckKeys();
 	}
 	
-	if(event.type == "keydown" && event.value == "123"){ //F12
+	if(event.type == "keydown" && event.code == "F12"){ //F12
 		if(typeof DKCef_ShowDevTools == 'function'){
 			DKCef_ShowDevTools(0);
 		}
-		if(typeof DKRml_ToggleDebugger == 'function'){
-			DKRml_DebuggerToggle();
+		if(typeof DKRml_DebuggerOn == 'function'){
+			DKRml_DebuggerOn();
 		}
 	}
 }
