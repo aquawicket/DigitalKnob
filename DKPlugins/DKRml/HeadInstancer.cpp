@@ -44,7 +44,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 			}
 
 			// If its an template, add to the template fields
-			else (type == "text/template")
+			else if(type == "text/template")
 			{
 				parser->GetDocumentHeader()->template_resources.push_back(href);
 			}
