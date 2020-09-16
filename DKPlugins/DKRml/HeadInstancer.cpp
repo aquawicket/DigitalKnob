@@ -34,7 +34,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 		Rml::String type = Rml::StringUtilities::ToLower(Rml::Get<Rml::String>(attributes, "type", ""));
 		Rml::String href = Rml::Get<Rml::String>(attributes, "href", "");
 
-		if (!type.empty() && !href.empty())
+		if (/*!type.empty() && */!href.empty())
 		{
 			// If its RCSS (... or CSS!), add to the RCSS fields.
 			if (type == "text/rcss" ||
@@ -56,7 +56,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 		}
 		else
 		{
-			Rml::Log::ParseError(parser->GetSourceURL().GetURL(), parser->GetLineNumber(), "Link tag requires type and href attributes");
+			Rml::Log::ParseError(parser->GetSourceURL().GetURL(), parser->GetLineNumber(), "Link tag requires href attributes");
 		}
 	}
 
