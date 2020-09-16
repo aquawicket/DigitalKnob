@@ -442,7 +442,8 @@ function DKFrame_Reload(id)
 	var jsfile;
 	var htmlfile;
 	
-	var frame = DKWidget_GetParent(id);
+	//var frame = DKWidget_GetParent(id);
+	var frame = byId(id).parentNode.id;
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
