@@ -44,15 +44,16 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 			}
 
 			// If its an template, add to the template fields
-			else if (type == "text/template")
+			else (type == "text/template")
 			{
 				parser->GetDocumentHeader()->template_resources.push_back(href);
 			}
-
+			/*
 			else
 			{
 				Rml::Log::ParseError(parser->GetSourceURL().GetURL(), parser->GetLineNumber(), "Invalid link type '%s'", type.c_str());
 			}
+			*/
 		}
 		else
 		{
