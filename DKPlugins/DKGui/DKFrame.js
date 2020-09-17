@@ -256,7 +256,7 @@ function DKFrame_BringToFront()
 	var ele = DKWidget_GetHoverElement();
 	if(!ele){ return; }
 	
-	if(byId("DKFrame_frame").contains(ele)){
+	if(byId("DKFrame_frame") && byId("DKFrame_frame").contains(ele)){
 		//document.body.id = "body"; //TEMPORARY FIX
 		//if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
 		if(document.body.lastchild != byId("DKFrame_frame")){	

@@ -42,7 +42,7 @@ function SendBugReport_CreateReport()
 	//TODO: say thank you here
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
-		DKMessageMessage("Thank You :)");	
+		DKMessage_Message("Thank You :)");	
 		DKFrame_Close("DKDebug/SendBugReport.html");
 	});
 }
