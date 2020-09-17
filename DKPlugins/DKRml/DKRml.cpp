@@ -59,6 +59,13 @@ bool DKRml::Init()
 	}
 #endif
 
+	//Add missing stylesheet properties
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
+		.AddParser("keyword", "repeat, space, round, no-repeat")
+		.AddParser("string")
+		.GetId(); //this supresses background-repeat warnings temporarily 
+
 	context->SetDocumentsBaseTag("html");
 	LoadFonts();
 
