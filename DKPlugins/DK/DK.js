@@ -382,12 +382,12 @@ function LoadCss(url)
 	DKDEBUGFUNC(url);
 	//console.log("DK.js:LoadCss("+url+")");
 	if(!url){ 
-		DKERROR("LoadCss("+url+"): url invalid\n");
+		DKERROR("DK.js: LoadCss("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKWARN("LoadCss("+url+"): url already loaded\n");
+		DKWARN("DK.js: LoadCss("+url+"): url already loaded\n");
 		return false;
 	}
 	
@@ -413,12 +413,12 @@ function LoadJs(url, callback)
 {
 	DKDEBUGFUNC(url, callback);
 	if(!url){ 
-		DKERROR("LoadJs("+url+"): url invalid\n");
+		DKERROR("DK.js: LoadJs("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKWARN("LoadJs("+url+", callback): url already loaded\n");
+		DKWARN("DK.js: LoadJs("+url+", callback): url already loaded\n");
 		callback && callback(false);
 		return false;
 	}
@@ -432,7 +432,7 @@ function LoadJs(url, callback)
 	
 	// Call the js init function
 	if(!file){ 
-		DKERROR("LoadJs("+url+"): file invalid\n");
+		DKERROR("DK.js: LoadJs("+url+"): file invalid\n");
 		return false; 
 	}
 	
@@ -477,7 +477,7 @@ function LoadJs(url, callback)
 		}
 	};
 	script.onerror = function(){
-		DKERROR("LoadJs("+url+"): Could not load file\n");
+		DKERROR("DK.js: LoadJs("+url+"): Could not load file\n");
 	}
 	////////////////////////
 	
@@ -505,19 +505,19 @@ function LoadHtml(url, parent)
 	//DKWARN("DK.js:LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		DKERROR("DK.js:LoadJs("+url+"): url invalid\n");
+		DKERROR("DK.js: LoadJs("+url+"): url invalid\n");
 		return false; 
 	}
 	
 	if(url.indexOf(".html") == -1){ 
-		DKERROR("DK.js:LoadHtml("+url+", parent): url is not a valid .html file\n");
+		DKERROR("DK.js: LoadHtml("+url+", parent): url is not a valid .html file\n");
 		return false;
 	}
 	
 	if(url == ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) != -1){
-		DKWARN("DK.js:LoadHtml("+url+", parent): url already loaded\n");
+		DKWARN("DK.js: LoadHtml("+url+", parent): url already loaded\n");
 		return false;
 	}
 	
@@ -536,7 +536,7 @@ function LoadHtml(url, parent)
 	//console.log("temp.id = "+temp.id);
 	var nodes = temp.childNodes;
 	if(!nodes){
-		DKERROR("DK.js:LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
+		DKERROR("DK.js: LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
 		return false;
 	}
 	if(nodes.length > 1){
@@ -545,7 +545,7 @@ function LoadHtml(url, parent)
 		}
 		
 		DKWARN("###############################################\n");
-		DKWARN("DK.js:LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
+		DKWARN("DK.js: LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
 		//DKINFO(temp.innerHTML+"\n");
 		DKWARN("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
 		DKWARN("###############################################\n");
@@ -553,9 +553,9 @@ function LoadHtml(url, parent)
 	}
 
 	if(nodes[0].id != url){
-		DKWARN("DK.js:LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
+		DKWARN("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
 		nodes[0].id = url;
-		DKWARN("DK.js:LoadHtml("+url+",parent): please fix the id\n");
+		DKWARN("DK.js: LoadHtml("+url+",parent): please fix the id\n");
 	}
 	if(parent){
 		//console.log("DK.js:LoadHtml(): appending to parent");
@@ -580,10 +580,10 @@ function CheckFileSupport()
 {
 	DKDEBUGFUNC();
 	if(window.File && window.FileReader && window.FileList && window.Blob){
-		DKINFO("File support OK\n");
+		DKINFO("DK.js: File support OK\n");
 	}
 	else {
-		DKERROR("The File APIs are not fully supported in this browser\n");
+		DKERROR("DK.js: The File APIs are not fully supported in this browser\n");
 	}
 }
 
