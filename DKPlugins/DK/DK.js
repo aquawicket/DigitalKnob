@@ -1433,6 +1433,16 @@ function DKAddEvent(id, type, Function)
 	events[events.length] = id;
 	events[events.length] = type;
 	events[events.length] = Function;
+	
+	/* NEW METHOD
+	var event = new Object();
+	event.currentTarget = element;
+	event.type = type;
+	event.callback = Function;
+	events.push(event);
+	//console.log("CREATED EVENT: currentTarget.id:"+events[events.length-1].currentTarget.id);
+	*/
+	
 	return true;
 }
 
@@ -1541,16 +1551,17 @@ function DKRemoveEvents(Function)
 function DKSendEvent(id, type, message)
 {
 	DKDEBUGFUNC(id, type, message);
+	console.log("DKSendEvent("+id+","+type+","+message+")");
 	if(typeof id != "string"){
-		DKERROR("DKRemoveEvent(id, type, message): id invalid\n");
+		DKERROR("DKSendEvent(id, type, message): id invalid\n");
 		return false;
 	}
 	if(typeof type != "string"){
-		DKERROR("DKRemoveEvent(id, type, message): type invalid\n");
+		DKERROR("DKSendEvent(id, type, message): type invalid\n");
 		return false;
 	}
 	//if(typeof message != "string"){
-	//	DKERROR("DKRemoveEvents(id, type, message): message invalid\n");
+	//	DKERROR("DKSendEvents(id, type, message): message invalid\n");
 	//	return;
 	//}
 	
@@ -1563,6 +1574,19 @@ function DKSendEvent(id, type, message)
 			}
 		}
 	}
+	
+	/* NEW METHOD
+	for(var i=0; i<events.length; i++){
+		if(events[i].currentTarget.id == id){
+			if(events[i].type == type){
+				console.warn("Attempted to call custom event callback");
+				events[i].callback(events[i]);
+				//return true;
+			}
+		}
+	}
+	*/
+	
 	return true;
 }
 

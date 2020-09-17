@@ -7,7 +7,7 @@ var rPath;
 
 //var DKSaveFile_callback;
 
-////////////////////////////
+//////////////////////////
 function DKSaveFile_Init()
 {	
 	DKDEBUGFUNC();
@@ -21,11 +21,13 @@ function DKSaveFile_Init()
 	
 	aPath = "";
 	rPath = "";
-	var drives = DKFile_GetDrives(); //TODO
+	
+	//TODO
+	var drives = DKFile_GetDrives();
 	console.log(drives);
 }
 
-///////////////////////////
+/////////////////////////
 function DKSaveFile_End()
 {
 	DKDEBUGFUNC();
@@ -34,11 +36,14 @@ function DKSaveFile_End()
 	DKClose("DKFile/DKSaveFile.css");
 }
 
-////////////////////////////////////
+//////////////////////////////////
 function DKSaveFile_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	console.debug("DKSaveFile_OnEvent("+event.currentTarget.is+","+event.type+","+event.value+")");
+	//console.log("DKSaveFile_OnEvent("+event+")"); 
+	//console.log("DKSaveFile_OnEvent("+event.type+","+event.value+")");
+	if(!event.currentTarget){ return; }
+	console.log("DKSaveFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(DK_IdLike(event, "DKSaveFileDrive")){
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}

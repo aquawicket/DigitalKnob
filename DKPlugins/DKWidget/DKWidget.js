@@ -151,8 +151,8 @@ function DKWidget_AddDragHandle(id, drag)
 	if(!DK_IE() && DK_GetBrowser() != "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
-	element.onmousedown = function(event){ DragStart(event, drag);}
-	element.addEventListener('touchstart', function(event){ DragStart(event, drag);}, false);
+	element.onmousedown = function(event){ DragStart(event, drag); }
+	element.addEventListener('touchstart', function(event){ DragStart(event, drag); }, false);
 	return true;
 }
 
