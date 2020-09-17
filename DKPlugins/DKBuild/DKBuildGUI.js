@@ -2,6 +2,7 @@
 function DKBuildGUI_Init()
 {
 	DKDEBUGFUNC();
+	//DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKBuild/DKBuild.js", function(rval){
@@ -19,7 +20,7 @@ function DKBuildGUI_Init()
 			//DKGit_ValidateGit();
 		});
 		DKBuild_ValidateCmake();
-		DKBuild_ValidateVC2015();
+		DKBuild_ValidateVC2019();
 
 		/*
 		if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
@@ -111,14 +112,16 @@ function DKBuildGUI_UpdateApps()
 {
 	DKDEBUGFUNC();
 	////////  Update App List /////////////
-	DKWidget_SetInnerHtml("AppList", "");
+	byId("AppList").innerHTML == "";	
 	DKBuild_GetAppList();
 	
 	for(var i=0; i<APP_LIST.length; ++i){
 		//DKINFO(APP_LIST[i]+"\n");
-		var ele = DKWidget_CreateElement("AppList", "option", "al");
-		DKWidget_SetInnerHtml(ele, APP_LIST[i]);
-		DKWidget_SetAttribute(ele, "value", APP_LIST[i]);
+		var ele = DKWidget_CreateElement(byId("AppList"), "option", "al");
+		//DKWidget_SetInnerHtml(ele, APP_LIST[i]);
+		byId(ele).innerHTML = APP_LIST[i];
+		//DKWidget_SetAttribute(ele, "value", APP_LIST[i]);
+		byId(ele).value = APP_LIST[i];
 		//DKWidget_SetValue("AppList", "DKBuilder");
 	}
 }
