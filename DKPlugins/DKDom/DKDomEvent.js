@@ -2,7 +2,7 @@
 
 //event_instances = [];
 /////////////////////////////
-var Event = function(pointer)
+var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 {
 	this.pointer = pointer;
 	
@@ -108,6 +108,14 @@ var Event = function(pointer)
 	};
 	
 	//console.log("dispatching event");
-	this.currentTarget.dispatchEvent(this);
+	//this.currentTarget.dispatchEvent(this);
 	//return this;
 };
+
+
+function DispatchEvent(pointer)
+{
+	//console.log("DispatchEvent("+pointer+")");
+	var event = new Event(pointer);
+	event.currentTarget.dispatchEvent(event);
+}

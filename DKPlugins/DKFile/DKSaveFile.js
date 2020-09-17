@@ -61,7 +61,6 @@ function DKSaveFile_OnEvent(event)
 		DKSaveFile_OpenFolder(up);
 	}
 	if(event.currentTarget.id == "DKSaveFileOK"){
-	//if(event.currentTarget.id == "DKSaveFileOK"){
 		if(rPath && event_data2 == "relative"){
 			if(DKFile_IsDirectory(rPath)){
 				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");
@@ -73,8 +72,13 @@ function DKSaveFile_OnEvent(event)
 			if(DKFile_IsDirectory(aPath)){
 				aPath = aPath+"/"+DKWidget_GetValue("DKSaveFileName");
 			}
-			console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
-			DKSendEvent(event_id, event_type, aPath);
+			//console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
+			var event = new Object();
+			event.currentTarget = byId(event_id);
+			event.type = event_type;
+			event.value = aPath;
+			event.currentTarget.dispatchEvent(event);
+			//DKSendEvent(event_id, event_type, aPath);
 		}
 		else{
 			//console.error("DKSaveFile::ProcessEvent(): return_path_type incorrect");
@@ -90,16 +94,18 @@ function DKSaveFile_OnEvent(event)
 	}
 	
 	if(event.type == "SetFile"){
-		var params = DK_GetValue(event).split(",");
+		//console.log("event.value = "+event.value);
+		
+		//var params = DK_GetValue(event).split(",");
+		var params = event.value.split(",");
 		event_id = params[0];
 		event_type = params[1];
 		event_data1 = params[2];
 		event_data2 = params[3];
-		console.log("event_type:"+event_type);
 		console.log("event_id:"+event_id);
+		console.log("event_type:"+event_type);
 		console.log("event_data1:"+event_data1);
 		console.log("event_data2:"+event_data2);
-	
 		DKSaveFile_UpdatePath(event_data1);
 	}
 	
@@ -173,7 +179,7 @@ function DKSaveFile_UpdatePath(path)
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement("DKSaveFileMenu2", "option", "DKSaveFileFolder");
+			var element2 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
 			byId(element2).style.whiteSpace = "nowrap";
@@ -187,7 +193,7 @@ function DKSaveFile_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement("DKSaveFileMenu2", "option", "DKSaveFileFile");
+			var element3 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFile");
 			var value = aPath+"/"+files[f];
 			byId(element3).value = value;
 			byId(element3).style.whiteSpace = "nowrap";

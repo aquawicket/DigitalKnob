@@ -10,6 +10,7 @@ bool DKDomEventTarget::Init()
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);
 	DKDuktape::AttachFunction("DKDomEventTarget_removeEventListener", DKDomEventTarget::removeEventListener);
+	DKDuktape::AttachFunction("DKDomEventTarget_dispatchEvent", DKDomEventTarget::dispatchEvent);
 
 	// non-standard
 	DKDuktape::AttachFunction("DKDomEventTarget_id", DKDomEventTarget::id);
@@ -64,8 +65,15 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 		newEvent = "new Event(\"" + rmlEventAddress + "\")";
 	}
 	
+	//create the event
 	if(duk_peval_string(ctx, newEvent.c_str()) != 0){
 		DKDuktape::DumpError(newEvent);
+	}
+
+	//dispatch the event
+	DKString dispatchEvent = "DispatchEvent(\""+rmlEventAddress+"\")";
+	if(duk_peval_string(ctx, dispatchEvent.c_str()) != 0){
+		DKDuktape::DumpError(dispatchEvent);
 	}
 
 	duk_pop(ctx);  // pop result/error
@@ -94,10 +102,25 @@ int DKDomEventTarget::removeEventListener(duk_context* ctx)
 	DKString type = duk_require_string(ctx, 1);
 	DKString jsreturn;
 	if(duk_to_string(ctx, 2)){
+	
 		jsreturn = duk_to_string(ctx, 2);
 		replace(jsreturn, "function ", "");
 	}
 	if(!DKEvents::RemoveEvent(id, type, jsreturn)){ return false; }
+	return true;
+}
+
+/////////////////////////////////////////////////////
+int DKDomEventTarget::dispatchEvent(duk_context* ctx)
+{
+	DKString id = duk_require_string(ctx, 0);
+	DKString type = duk_require_string(ctx, 1);
+	DKString jsreturn;
+	if(duk_to_string(ctx, 2)){
+		jsreturn = duk_to_string(ctx, 2);
+		replace(jsreturn, "function ", "");
+	}
+	if (!DKEvents::SendEvent(id, type, jsreturn)) { return false; }
 	return true;
 }
 

@@ -95,7 +95,17 @@ function DKNotepadFile_SaveAs()
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSaveFile.js", function(){
 		DKFrame_Widget("DKFile/DKSaveFile.html");
-		DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "DKNotepad/DKNotepad.html,SaveFile,/,absolute"); // To -> DKFileDialog
+		
+		var event = new Object("SetFile");
+		//var event = new Event("SetFile"); //FIXME
+		event.currentTarget = byId("DKFile/DKSaveFile.html");
+		event.type = "SetFile";
+		event.value = "DKNotepad/DKNotepad.html,SaveFile,/,absolute";
+		window.addEventListener("SetFile", function(){ console.log("Creating events is working!") }, false);
+		window.dispatchEvent(event);
+		byId("DKFile/DKSaveFile.html").dispatchEvent(event);
+		
+		//DKSendEvent("DKFile/DKSaveFile.html", "SetFile", "DKNotepad/DKNotepad.html,SaveFile,/,absolute"); // To -> DKFileDialog
 	});
 }
 

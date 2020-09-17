@@ -1547,6 +1547,7 @@ function DKRemoveEvents(Function)
 	}
 }
 
+/*
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
@@ -1575,20 +1576,9 @@ function DKSendEvent(id, type, message)
 		}
 	}
 	
-	/* NEW METHOD
-	for(var i=0; i<events.length; i++){
-		if(events[i].currentTarget.id == id){
-			if(events[i].type == type){
-				console.warn("Attempted to call custom event callback");
-				events[i].callback(events[i]);
-				//return true;
-			}
-		}
-	}
-	*/
-	
 	return true;
 }
+*/
 
 ///////////////////////////
 function GetCharCode(event) 

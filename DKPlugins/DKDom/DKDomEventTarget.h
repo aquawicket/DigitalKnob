@@ -15,6 +15,7 @@ public:
 
 	static int addEventListener(duk_context* ctx);
 	static int removeEventListener(duk_context* ctx);
+	static int dispatchEvent(duk_context* ctx);
 
 	// non-standard
 	static int id(duk_context* ctx);
