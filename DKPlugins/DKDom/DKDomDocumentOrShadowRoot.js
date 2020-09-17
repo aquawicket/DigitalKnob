@@ -15,11 +15,11 @@ var DocumentOrShadowRoot = {
 	},
 	
 	elementFromPoint(x, y){
-		console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")");
+		//console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")");
 		//NOTE: Rml uses GetHoverElement and gets mouse x, y on it's own.
 		var elementAddress = DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){
-			console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+"): elementAddress invalid");
+			console.error("DocumentOrShadowRoot.elementFromPoint("+x+","+y+"): elementAddress invalid");
 			return; 
 		}
 		return new HTMLElement(elementAddress);

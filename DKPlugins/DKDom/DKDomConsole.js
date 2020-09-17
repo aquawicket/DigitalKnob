@@ -3,6 +3,7 @@
 ///////////////////////////////
 var Console = function(pointer)
 {
+	// Methods
 	Console.prototype.assert = function(assertion, msg){
 		if(assertion){ return; }
 		DKDomConsole_error("[JS] "+msg+"\n");
@@ -10,18 +11,62 @@ var Console = function(pointer)
 	Console.prototype.clear = function(){
 		DKDomConsole_clear();
 	}
+	Console.prototype.count = function(){
+		DKDomConsole_count();
+	}
+	Console.prototype.countReset = function(){
+		DKDomConsole_countReset();
+	}
 	Console.prototype.debug = function(msg){
 		DKDomConsole_debug("[JS] "+msg+"\n");
+	}
+	Console.prototype.dir = function(){
+		DKDomConsole_dir();
+	}
+	Console.prototype.dirxml = function(){
+		DKDomConsole_dirxml();
 	}
 	Console.prototype.error = function(msg){
 		DKDomConsole_error("[JS] "+msg+"\n");
 	}
-	Console.prototype.exception = Console.prototype.error; //Deprecated
+	Console.prototype.exception = function(){
+		DKDomConsole_exception();
+	}
+	Console.prototype.group = function(){
+		DKDomConsole_group();
+	}
+	Console.prototype.groupCollapsed = function(){
+		DKDomConsole_groupCollapsed();
+	}
+	Console.prototype.groupEnd = function(){
+		DKDomConsole_groupEnd();
+	}
 	Console.prototype.info = function(msg){
 		DKDomConsole_info("[JS] "+msg+"\n");
 	}
 	Console.prototype.log = function(msg){
 		DKDomConsole_info("[JS] "+msg+"\n");
+	}
+	Console.prototype.profile = function(){
+		DKDomConsole_profile();
+	}
+	Console.prototype.profileEnd = function(){
+		DKDomConsole_profileEnd();
+	}
+	Console.prototype.table = function(){
+		DKDomConsole_table();
+	}
+	Console.prototype.time = function(){
+		DKDomConsole_time();
+	}
+	Console.prototype.timeEnd = function(){
+		DKDomConsole_timeEnd();
+	}
+	Console.prototype.timeLog = function(){
+		DKDomConsole_timeLog();
+	}
+	Console.prototype.timeStamp = function(){
+		DKDomConsole_timeStamp();
 	}
 	Console.prototype.trace = function(){
 		DKDomConsole_error("[JS] console.trace() not implemented\n");
