@@ -78,7 +78,7 @@ function DKNotepad_Open(file)
 	//TODO - set the frame title with the filename
 	currentFile = file;
 	var text = DKFile_FileToString(file);
-	console.log("DKNotepad_Open(file): = "+text);
+	//console.log("DKNotepad_Open(file): = "+text);
 	//DKWidget_SetAttribute("DKNotepad_Text", "value", text);
 	byId("DKNotepad_Text").value = text;
 }

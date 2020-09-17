@@ -64,7 +64,12 @@ bool DKRml::Init()
 	Rml::PropertyId background_repeat = Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
 		.AddParser("keyword", "repeat, space, round, no-repeat")
 		.AddParser("string")
-		.GetId(); //this supresses background-repeat warnings temporarily 
+		.GetId(); //this supresses background-repeat warnings temporarily
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+	Rml::PropertyId border_style = Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
+		.AddParser("keyword", "none, hidden")
+		.AddParser("string")
+		.GetId(); //this supresses border-style warnings temporarily
 
 	context->SetDocumentsBaseTag("html");
 	LoadFonts();
