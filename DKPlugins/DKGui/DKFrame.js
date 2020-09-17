@@ -55,7 +55,7 @@ function DKFrame_OnEvent(event)
 function DKFrame_Widget(id)
 {
 	DKDEBUGFUNC(id);
-	console.log("DKFrame_Widget("+id+")");
+	//console.log("DKFrame_Widget("+id+")");
 	if(!byId(id)){
 		console.error("DKFrame_Widget("+id+"): element does not exist\n");
 		return false;

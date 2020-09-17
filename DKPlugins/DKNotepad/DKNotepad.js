@@ -40,7 +40,7 @@ function DKNotepad_OnEvent(event)
 	}
 	if(event.type == "OpenFile"){
 		var file = DK_GetValue(event);
-		console.log("OpenFile: "+file);
+		//console.log("OpenFile: "+file);
 		DKNotepad_Open(file)
 	}
 	if(event.type == "SaveFile"){
@@ -73,7 +73,7 @@ function DKNotepad_OnEvent(event)
 function DKNotepad_Open(file)
 {
 	DKDEBUGFUNC(file);
-	console.log("DKNotepad_Open("+file+")");
+	//console.log("DKNotepad_Open("+file+")");
 	//TODO - only open files under 5mb
 	//TODO - set the frame title with the filename
 	currentFile = file;

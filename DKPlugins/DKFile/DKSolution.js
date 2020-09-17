@@ -132,7 +132,7 @@ function DKSolution_OpenHere(path)
 		aPath = DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) == 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
-	DKINFO("aPath:"+aPath+"\n");
+	//DKINFO("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
