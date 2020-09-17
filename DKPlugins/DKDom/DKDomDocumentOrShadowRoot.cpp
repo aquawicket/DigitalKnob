@@ -54,7 +54,7 @@ int DKDomDocumentOrShadowRoot::caretPositionFromPoint(duk_context* ctx)
 int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx)
 {
 	DKDEBUGFUNC(ctx);
-	DKINFO("DKDomDocumentOrShadowRoot::elementFromPoint()\n");
+	//DKINFO("DKDomDocumentOrShadowRoot::elementFromPoint()\n");
 	Rml::Element* hoverElement = DKRml::Get()->document->GetContext()->GetHoverElement();
 	if(!hoverElement){ return false; }
 	DKString elementAddress = DKRml::elementToAddress(hoverElement);
