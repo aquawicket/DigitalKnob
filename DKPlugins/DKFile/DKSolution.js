@@ -22,7 +22,7 @@ function DKSolution_Init()
 function DKSolution_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKSolution_OnEvent);
+	//DKRemoveEvents(DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
 	DKClose("DKFile/DKSolution.css");
 }
@@ -156,11 +156,15 @@ function DKSolution_UpdatePath(path)
 	console.log("DKSolution_UpdatePath("+path+")");
 	
 	//reload events
-	DKRemoveEvents(DKSolution_OnEvent);
-	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	//DKRemoveEvents(DKSolution_OnEvent); //FIXME: DOUBLE CHECK THIS
+	//DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
+	byId("DKSolutionUp").addEventListener("click", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
+	byId("DKSolutionMenu").addEventListener("click", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
+	byId("DKSolutionMenu").addEventListener("contextmenu", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	byId("DKSolutionPath").addEventListener("keypress", DKSolution_OnEvent);
 	
 	if(!path){ path = ""; }
 	var aPath;
@@ -184,14 +188,18 @@ function DKSolution_UpdatePath(path)
 			var value = aPath+"/"+files[d]+"/";
 			byId(element2).setAttribute("value", value);
 			byId(element2).style.whiteSpace = "nowrap";
-			DKAddEvent(element2, "click", DKSolution_OnEvent);
+			//DKAddEvent(element2, "click", DKSolution_OnEvent);
+			byId(element2).addEventListener("click", DKSolution_OnEvent);
 			byId(element2).style.paddingLeft = "17px";
 			byId(element2).innerHTML = files[d];
 			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
 			byId(element2).style.backgroundRepeat = "no-repeat";
-			DKAddEvent(element2, "click", DKSolution_OnEvent);
-			DKAddEvent(element2, "dblclick", DKSolution_OnEvent);
-			DKAddEvent(element2, "contextmenu", DKSolution_OnEvent);
+			//DKAddEvent(element2, "click", DKSolution_OnEvent);
+			byId(element2).addEventListener("click", DKSolution_OnEvent);
+			//DKAddEvent(element2, "dblclick", DKSolution_OnEvent);
+			byId(element2).addEventListener("dblclick", DKSolution_OnEvent);
+			//DKAddEvent(element2, "contextmenu", DKSolution_OnEvent);
+			byId(element2).addEventListener("contextmenu", DKSolution_OnEvent);
 		}
 	}
 

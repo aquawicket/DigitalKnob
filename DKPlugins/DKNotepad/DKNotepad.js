@@ -30,7 +30,7 @@ function DKNotepad_Init()
 function DKNotepad_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKNotepad_OnEvent);
+	//DKRemoveEvents(DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
 	DKClose("DKNotepad/DKNotepad.css");
 }
