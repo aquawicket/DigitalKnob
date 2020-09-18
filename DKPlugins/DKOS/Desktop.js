@@ -12,6 +12,7 @@ function Desktop_Init()
 function Desktop_End()
 {
 	DKDEBUGFUNC();
+	byId("Background").removeEventListener("contextmenu", Desktop_OnEvent);
 	DKClose("DKOS/Desktop.html");
 }
 
@@ -20,7 +21,7 @@ function Desktop_OnEvent(event)
 {
 	//DKDEBUGFUNC(event);
 	//console.log("Desktop_OnEvent("+event+")");
-	if(event.currentTarget.id == "Background" && DK_Type(event, "contextmenu")){
+	if(event.currentTarget.id == "Background" && event.type == "contextmenu"){
 		DKCreate("DKOS/DesktopMenu.js", function(){});
 	}
 }

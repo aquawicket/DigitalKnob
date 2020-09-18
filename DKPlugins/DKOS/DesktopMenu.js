@@ -8,16 +8,22 @@ function DesktopMenu_Init()
 	document.getElementById("DKOS/DesktopMenu.html").style.top = "100px";
 	document.getElementById("DKOS/DesktopMenu.html").style.left = "100px";
 	
-	DKAddEvent("window", "mousedown", DesktopMenu_OnEvent);
-	DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
-	DKAddEvent("ToggleFullscreen", "click", DesktopMenu_OnEvent);
+	//DKAddEvent("window", "mousedown", DesktopMenu_OnEvent);
+	window.addEventListener("mousedown", DesktopMenu_OnEvent);
+	//DKAddEvent("OpenBackgtoundMenu", "click", DesktopMenu_OnEvent);
+	byId("OpenBackgtoundMenu").addEventListener("click", DesktopMenu_OnEvent);
+	//DKAddEvent("ToggleFullscreen", "click", DesktopMenu_OnEvent);
+	byId("ToggleFullscreen").addEventListener("click", DesktopMenu_OnEvent);
 }
 
 //////////////////////////
 function DesktopMenu_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DesktopMenu_OnEvent);
+	//DKRemoveEvents(DesktopMenu_OnEvent);
+	window.removeEventListener("mousedown", DesktopMenu_OnEvent);
+	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_OnEvent);
+	byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_OnEvent);
 	DKClose("DKOS/DesktopMenu.html");
 }
 
