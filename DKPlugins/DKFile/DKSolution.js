@@ -6,10 +6,14 @@ function DKSolution_Init()
 	DKCreate("DKFile/DKSolution.html");
 	DKCreate("DKFile/DKFileAssociation.js", function(){});
 	
-	DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
-	DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
+	byId("DKSolutionUp").addEventListener("click", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
+	byId("DKSolutionMenu").addEventListener("click", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
+	byId("DKSolutionMenu").addEventListener("contextmenu", DKSolution_OnEvent);
+	//DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
+	byId("DKSolutionPath").addEventListener("keypress", DKSolution_OnEvent);
 	
 	//DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
 }

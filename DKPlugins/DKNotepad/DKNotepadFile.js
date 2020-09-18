@@ -24,7 +24,13 @@ function DKNotepadFile_End()
 {
 	DKDEBUGFUNC();
 	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
-	DKRemoveEvents(DKNotepadFile_OnEvent);
+	//DKRemoveEvents(DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_Save").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_SaveAs").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_Print").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_Exit").removeEventListener("click", DKNotepadFile_OnEvent);
 	DKClose("DKNotepad/DKNotepadFile.html");
 }
 

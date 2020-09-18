@@ -16,7 +16,7 @@ function DKMessage_Init()
 function DKMessage_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKMessage_OnEvent);
+	//DKRemoveEvents(DKMessage_OnEvent);
 	DKClose("DKMessage/DKMessage.html");
 }
 

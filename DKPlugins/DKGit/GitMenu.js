@@ -37,7 +37,7 @@ function GitMenu_Init()
 function GitMenu_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(GitMenu_OnEvent);
+	//DKRemoveEvents(GitMenu_OnEvent);
 	DKClose("DKGit/GitMenu.html");
 }
 
