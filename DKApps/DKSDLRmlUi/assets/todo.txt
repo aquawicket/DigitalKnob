@@ -1,3 +1,4 @@
 //TODO
 * Keep working on events.
 * add removeEventListener everywhere neccesary
+* FIXME: I don't think removeEventListener is removing everything

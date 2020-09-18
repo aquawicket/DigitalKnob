@@ -4,12 +4,9 @@ var DKMessage_callback;
 function DKMessage_Init()
 {	
 	DKDEBUGFUNC();
-	DKCreate("DKMessage/DKMessage.html");//, function(){
-		//DKAddEvent("DKMessageOk", "click", DKMessage_OnEvent);
-		byId("DKMessageOk").addEventListener("click", DKMessage_OnEvent);
-		//DKAddEvent("DKMessageCancel", "click", DKMessage_OnEvent);
-		byId("DKMessageCancel").addEventListener("click", DKMessage_OnEvent);
-	//});
+	DKCreate("DKMessage/DKMessage.html");
+	byId("DKMessageOk").addEventListener("click", DKMessage_OnEvent);
+	byId("DKMessageCancel").addEventListener("click", DKMessage_OnEvent);
 }
 
 ////////////////////////

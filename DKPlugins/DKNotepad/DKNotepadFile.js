@@ -23,16 +23,18 @@ function DKNotepadFile_Init()
 function DKNotepadFile_End()
 {
 	DKDEBUGFUNC();
+	if(!byId("DKNotepad/DKNotepadFile.html")){ 
+		console.error("DKNotepadFile_End(): byId(\"DKNotepad/DKNotepadFile.html\") invalid");
+		return; 
+	}
 	//DKRemoveEvents(DKNotepadFile_OnEvent);
 	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
-	/*
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Save").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_SaveAs").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Print").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Exit").removeEventListener("click", DKNotepadFile_OnEvent);
-	*/
 	DKClose("DKNotepad/DKNotepadFile.html");
 }
 
