@@ -34,7 +34,8 @@ var EventTarget = function(pointer)
 	//EventTarget.prototype.listeners = null;
 
 	Object.defineProperty(this, "addEventListener", {
-		value: function(type, callback, useCapture){ 
+		value: function(type, callback, useCapture){
+			//console.log("EventTarget.addEventListener("+type+")");
 			if(stored_events.indexOf(this) < 0){
 				stored_events.push(this);
 			}
@@ -46,7 +47,8 @@ var EventTarget = function(pointer)
 		} 
 	});
 	Object.defineProperty(this, "removeEventListener", {
-		value: function(type, callback, useCapture){ 
+		value: function(type, callback, useCapture){
+			console.log("EventTarget.removeEventListener("+type+")");
 			DKDomEventTarget_removeEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
 				return;

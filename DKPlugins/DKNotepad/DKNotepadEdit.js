@@ -3,8 +3,10 @@ function DKNotepadEdit_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
-	DKAddEvent("window", "mousedown", DKNotepadEdit_OnEvent);
-	DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
+	//DKAddEvent("window", "mousedown", DKNotepadEdit_OnEvent);
+	window.addEventListener("mousedown", DKNotepadEdit_OnEvent);
+	//DKAddEvent("DKNotepadEdit_Undo", "click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Undo").addEventListener("click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Cut", "click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Copy", "click", DKNotepadEdit_OnEvent);
 	DKAddEvent("DKNotepadEdit_Paste", "click", DKNotepadEdit_OnEvent);

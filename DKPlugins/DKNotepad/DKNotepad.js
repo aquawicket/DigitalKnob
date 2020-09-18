@@ -31,6 +31,14 @@ function DKNotepad_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKNotepad_OnEvent);
+	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKNotepad_OnEvent);
+	byId("DKNotepad/DKNotepad.html").removeEventListener("SaveFile", DKNotepad_OnEvent);
+	byId("DKNotepad_Text").removeEventListener("contextmenu", DKNotepad_OnEvent);
+	byId("DKNotepad_File").removeEventListener("click", DKNotepad_OnEvent);
+	byId("DKNotepad_Edit").removeEventListener("click", DKNotepad_OnEvent);
+	byId("DKNotepad_Format").removeEventListener("click", DKNotepad_OnEvent);
+	byId("DKNotepad_View").removeEventListener("click", DKNotepad_OnEvent);
+	byId("DKNotepad_Help").removeEventListener("click", DKNotepad_OnEvent);
 	DKClose("DKNotepad/DKNotepad.html");
 	DKClose("DKNotepad/DKNotepad.css");
 }
