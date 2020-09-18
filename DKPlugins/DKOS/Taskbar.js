@@ -23,7 +23,9 @@ function Taskbar_Init()
 function Taskbar_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(Taskbar_OnEvent);
+	//DKRemoveEvents(Taskbar_OnEvent);
+	byId("start").removeEventListener("click", Taskbar_OnEvent);
+	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
 	DKClose("DKOS/Taskbar.html");
 	DKClose("DKOS/scale.js");
 	DKClose("DKOS/Clock.js");
