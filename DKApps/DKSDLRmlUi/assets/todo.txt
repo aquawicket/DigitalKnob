@@ -1,4 +1,4 @@
 //TODO
-* Keep working on events. "Don't add anything..  Just get DKNotepad working 100%"
+* Keep working on Event
 * add removeEventListener everywhere neccesary
 * FIXME: I don't think removeEventListener is removing everything
