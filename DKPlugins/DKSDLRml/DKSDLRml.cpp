@@ -120,7 +120,10 @@ bool DKSDLRml::Handle(SDL_Event *event)
 
 			//DKEvent::SendEvent("window", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
 			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+			//TODO: If enter is pressed, send enter event on ProcessTextInput
+			
 			return false; //allow event to continue
 		}
 #endif
