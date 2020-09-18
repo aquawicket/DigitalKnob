@@ -21,8 +21,7 @@ var EventTarget = function(pointer)
 	this.pointer = pointer;
 	for(var i=0; i<instances.length; i++){
         if(instances[i].pointer == pointer){
-			//console.log("return existing instance "+pointer);
-            return instances[i];
+            return instances[i]; //return already existing instance
         }
     }
 	
@@ -70,17 +69,6 @@ var EventTarget = function(pointer)
 			}
 			var stack = this.listeners[event.type].slice();
 			for(var i = 0, l = stack.length; i < l; i++){
-				/*
-				if(pointer == "window"){
-					event.currentTarget = window;
-				}
-				else{
-					event.currentTarget = new HTMLElement(pointer);
-				}
-				*/
-				
-				//event.currentTarget = this;
-				//console.log(i);
 				stack[i].call(this, event);
 				return;
 			}
