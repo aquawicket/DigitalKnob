@@ -122,8 +122,12 @@ bool DKSDLRml::Handle(SDL_Event *event)
 			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
-			//TODO: If enter is pressed, send enter event on ProcessTextInput
 			
+			//TODO: If enter is pressed, send enter event on ProcessTextInput
+			if(event->key.keysym.sym == 13) //Enter key
+			//dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]); //TEST
+			dkRml->context->ProcessTextInput("\n"); //TEST2
+
 			return false; //allow event to continue
 		}
 #endif
