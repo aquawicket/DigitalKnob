@@ -1385,9 +1385,18 @@ function DK_StopPropagation(event)
     }
 }
 
+
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
+	var ele;
+	if(id == "window"){ ele = window; }
+	else{ ele = byId(id); }
+	if(!ele){ return; }
+	ele.addEventListener(type, Function);
+}
+/*
+////  Old 
 	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
 		DKWARN("DKAddEvent(id, type, Function): id invalid\n");
@@ -1434,17 +1443,17 @@ function DKAddEvent(id, type, Function)
 	events[events.length] = type;
 	events[events.length] = Function;
 	
-	/* NEW METHOD
-	var event = new Object();
-	event.currentTarget = element;
-	event.type = type;
-	event.callback = Function;
-	events.push(event);
+	// NEW METHOD
+	//var event = new Object();
+	//event.currentTarget = element;
+	//event.type = type;
+	//event.callback = Function;
+	//events.push(event);
 	//console.log("CREATED EVENT: currentTarget.id:"+events[events.length-1].currentTarget.id);
-	*/
 	
 	return true;
 }
+*/
 
 /////////////////////////////////////////////
 function removeEvent(element, type, Function)

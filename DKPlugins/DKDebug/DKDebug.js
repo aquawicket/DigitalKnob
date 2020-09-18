@@ -5,7 +5,8 @@ function DKDebug_Init()
 {
 	DKDEBUGFUNC();
 	
-	DKAddEvent("window", "keydown", DKDebug_OnEvent);
+	//DKAddEvent("window", "keydown", DKDebug_OnEvent);
+	window.addEventListener("keydown", DKDebug_OnEvent);
 }
 
 //////////////////////

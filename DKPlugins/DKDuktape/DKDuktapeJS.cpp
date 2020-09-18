@@ -42,7 +42,7 @@ bool DKDuktapeJS::Init()
 
 	DKDuktape::AttachFunction("DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
-	DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
+	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
 	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
 	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
 	

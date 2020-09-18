@@ -3,8 +3,10 @@ function BugReport_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKDebug/BugReport.html");
-	DKAddEvent("BugReport_Image", "click", BugReport_OnEvent);
-	DKAddEvent("BugReport_Text", "click", BugReport_OnEvent);
+	//DKAddEvent("BugReport_Image", "click", BugReport_OnEvent);
+	byId("BugReport_Image").addEventListener("click", BugReport_OnEvent);
+	//DKAddEvent("BugReport_Text", "click", BugReport_OnEvent);
+	byId("BugReport_Text").addEventListener("click", BugReport_OnEvent);
 }
 
 ////////////////////////

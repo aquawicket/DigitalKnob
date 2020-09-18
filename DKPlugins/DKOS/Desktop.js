@@ -4,7 +4,8 @@ function Desktop_Init()
 	DKDEBUGFUNC();
 	//DKCreate("DKOS/Desktop.html,DKOS/DKOS.html");
 	DKCreate("DKOS/Desktop.html");
-	DKAddEvent("Background", "contextmenu", Desktop_OnEvent);
+	//DKAddEvent("Background", "contextmenu", Desktop_OnEvent)"
+	byId("Background").addEventListener("contextmenu", Desktop_OnEvent);
 }
 
 //////////////////////

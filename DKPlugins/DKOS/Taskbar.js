@@ -13,8 +13,10 @@ function Taskbar_Init()
 			//DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
 			byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
 	}
-	DKAddEvent("start", "click", Taskbar_OnEvent);
-	DKAddEvent("test_animate", "click", Taskbar_OnEvent);
+	//DKAddEvent("start", "click", Taskbar_OnEvent);
+	byId("start").addEventListener("click", Taskbar_OnEvent);
+	//DKAddEvent("test_animate", "click", Taskbar_OnEvent);
+	byId("test_animate").addEventListener("click", Taskbar_OnEvent);
 }
 
 //////////////////////

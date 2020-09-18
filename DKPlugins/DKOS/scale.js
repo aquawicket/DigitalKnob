@@ -3,8 +3,10 @@ function scale_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKOS/scale.html,DKOS/Taskbar.html");
-	DKAddEvent("scale_minus", "mousedown", scale_OnEvent);
-	DKAddEvent("scale_plus", "mousedown", scale_OnEvent);
+	//DKAddEvent("scale_minus", "mousedown", scale_OnEvent);
+	byId("scale_minus").addEventListener("mousedown", scale_OnEvent);
+	//DKAddEvent("scale_plus", "mousedown", scale_OnEvent);
+	byId("scale_plus").addEventListener("mousedown", scale_OnEvent);
 }
 
 ////////////////////

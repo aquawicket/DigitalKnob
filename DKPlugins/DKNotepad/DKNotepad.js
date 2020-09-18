@@ -8,14 +8,22 @@ function DKNotepad_Init()
 	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");
 	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad/DKNotepad.html", "OpenFile", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad/DKNotepad.html", "SaveFile", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_File", "click", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_Edit", "click", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_Format", "click", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_View", "click", DKNotepad_OnEvent);
-	DKAddEvent("DKNotepad_Help", "click", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad/DKNotepad.html", "OpenFile", DKNotepad_OnEvent);
+	byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad/DKNotepad.html", "SaveFile", DKNotepad_OnEvent);
+	byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_Text", "contextmenu", DKNotepad_OnEvent);
+	byId("DKNotepad_Text").addEventListener("contextmenu", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_File", "click", DKNotepad_OnEvent);
+	byId("DKNotepad_File").addEventListener("click", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_Edit", "click", DKNotepad_OnEvent);
+	byId("DKNotepad_Edit").addEventListener("click", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_Format", "click", DKNotepad_OnEvent);
+	byId("DKNotepad_Format").addEventListener("click", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_View", "click", DKNotepad_OnEvent);
+	byId("DKNotepad_View").addEventListener("click", DKNotepad_OnEvent);
+	//DKAddEvent("DKNotepad_Help", "click", DKNotepad_OnEvent);
+	byId("DKNotepad_Help").addEventListener("click", DKNotepad_OnEvent);
 }
 
 ////////////////////////

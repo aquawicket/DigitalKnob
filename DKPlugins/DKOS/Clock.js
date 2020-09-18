@@ -7,7 +7,8 @@ function Clock_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKOS/Clock.html,DKOS/Taskbar.html");
-	DKAddEvent("window", "second", Clock_OnEvent);
+	//DKAddEvent("window", "second", Clock_OnEvent);
+	window.addEventListener("second", Clock_OnEvent);
 	Clock_Update();
 }
 
