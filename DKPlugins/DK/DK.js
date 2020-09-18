@@ -111,8 +111,8 @@ window.addEventListener('error', function(e){
 
 
 /////////////////////////////////
-//window.onmousemove = function(e){
-window.addEventListener("mousemove", function(e){	
+window.onmousemove = function(e){
+//window.addEventListener("mousemove", function(e){	
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
 		window.mouseX = e.clientX + document.body.scrollLeft
 		window.mouseY = e.clientY + document.body.scrollTop
@@ -129,7 +129,8 @@ window.addEventListener("mousemove", function(e){
 	if (window.mouseX < 0){window.mouseX = 0}
 	if (window.mouseY < 0){window.mouseY = 0}  
 	return true;
-});
+//});
+}
 
 
 
