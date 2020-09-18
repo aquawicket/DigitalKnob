@@ -19,7 +19,7 @@ var mouseStartY;
 var objectX;
 var objectY;
 var drag_id;
-var events = [];
+//var events = [];
 
 var byId = function(id){ return document.getElementById(id); } //shortcut alias
  
@@ -1462,6 +1462,7 @@ function DKAddEvent(id, type, Function)
 }
 */
 
+/*
 /////////////////////////////////////////////
 function removeEvent(element, type, Function)
 {
@@ -1482,7 +1483,9 @@ function removeEvent(element, type, Function)
 		element[type] = null;
 	}
 }
+*/
 
+/*
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
@@ -1526,6 +1529,7 @@ function DKRemoveEvent(id, type, Function)
 	
 	return true;
 }
+*/
 
 /*
 /////////////////////////////////
