@@ -59,7 +59,13 @@ function DKBuildGUI_Init()
 function DKBuildGUI_End()
 {
 	DKDEBUGFUNC();	
-	DKRemoveEvents(DKBuildGUI_OnEvent);
+	//DKRemoveEvents(DKBuildGUI_OnEvent);
+	byId("AppList").removeEventListener("change", DKBuildGUI_OnEvent);
+	byId("OSList").removeEventListener("change", DKBuildGUI_OnEvent);
+	byId("BuildType").removeEventListener("change", DKBuildGUI_OnEvent);
+	byId("git").removeEventListener("click", DKBuildGUI_OnEvent);
+	byId("libraries").removeEventListener("click", DKBuildGUI_OnEvent);
+	byId("build").removeEventListener("click", DKBuildGUI_OnEvent);
 	DKClose("DKBuild/DKBuildGUI.html");
 	DKClose("DKBuild/DKBuild.js");
 }
