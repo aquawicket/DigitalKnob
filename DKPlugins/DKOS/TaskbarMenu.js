@@ -124,7 +124,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id == "OpenDebug"){
 		if(DK_GetBrowser() == "RML"){
-			DKRocket_ToggleDebugger();
+			DKRml_DebuggerOn(); //FIXME
 		}
 		if(DK_GetBrowser() == "CEF"){
 			DKCef_ShowDevTools(0);

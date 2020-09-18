@@ -40,6 +40,20 @@ function DKSolutionMenu_End()
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKSolutionMenu_OnEvent);
 	window.removeEventListener("mousedown", DKSolutionMenu_OnEvent);
+	/*
+	byId("DKSolutionMenu_Open").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_OpenHere").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_NewFile").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_NewFolder").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Rename").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Delete").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Copy").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Cut").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Paste").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_Import").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_GitAdd").removeEventListener("click", DKSolutionMenu_OnEvent);
+	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", DKSolutionMenu_OnEvent);
+	*/
 	DKClose("DKFile/DKSolutionMenu.html");
 }
 
@@ -85,7 +99,8 @@ function DKSolutionMenu_OnEvent(event)
 		DKSolutionMenu_UpxCompress();
 	}
 	
-	if(event.currentTarget == window){
+	//FIXME
+	if(event.currentTarget == window && byId("DKFile/DKSolutionMenu.html")){
 		if(byId("DKFile/DKSolutionMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

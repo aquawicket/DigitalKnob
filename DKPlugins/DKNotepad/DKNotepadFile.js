@@ -59,7 +59,8 @@ function DKNotepadFile_OnEvent(event)
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
-	if(event.currentTarget == window){
+	//FIXME
+	if(event.currentTarget == window && byId("DKNotepad/DKNotepadFile.html")){
 		if(byId("DKNotepad/DKNotepadFile.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
