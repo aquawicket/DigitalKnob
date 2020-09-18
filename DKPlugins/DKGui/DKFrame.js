@@ -129,7 +129,8 @@ function DKFrame_Iframe(title, url, width, height)
 	byId(iframe).style.botttom = "0rem";
 	DKWidget_RemoveProperty(iframe, "height");
 	DKWidget_RemoveProperty(iframe, "right");
-	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
+	//DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
+	byId(frame).addEventListener("mousedown", DKFrame_OnEvent);
 	
 	DKFrame_CreateResize(frame);
 	
