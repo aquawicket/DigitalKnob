@@ -5,7 +5,8 @@ function DKThreadPoolDlg_Init()
 	DKCreate("DKThreadPool");
 	//if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
 	DKCreate("DKThread/DKThreadPoolDlg.html"); 
-	DKAddEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
+	//DKAddEvent("DKThreadPoolDlg.html", "Update", DKThreadPoolDlg_OnEvent);
+	byId("DKThread/DKThreadPoolDlg.html").addEventListener("Update", DKThreadPoolDlg_OnEvent);
 }
 
 //////////////////////////////

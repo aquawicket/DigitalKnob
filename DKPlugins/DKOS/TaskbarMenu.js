@@ -50,6 +50,7 @@ function TaskbarMenu_Init()
 function TaskbarMenu_End()
 {
 	DKDEBUGFUNC();
+	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
 	DKRemoveEvents(TaskbarMenu_OnEvent);
 	DKClose("DKOS/TaskbarMenu.html");
 }
@@ -102,7 +103,8 @@ function TaskbarMenu_OnEvent(event)
 	if(event.currentTarget.id == "Git"){
 		DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKGit/GitMenu.js", function(){
-			//DKMenu_ValidatePosition("DKGit/GitMenu.html");
+			//DKMenu_ValidatePosition("DKGit/GitMenu.html")
+			if(!window.mouseX){ window.mouseX = "10", window.mouseY = "10"; }
 			byId("DKGit/GitMenu.html").style.left = window.mouseX+"px";
 			byId("DKGit/GitMenu.html").style.top = window.mouseY+"px";
 		});
