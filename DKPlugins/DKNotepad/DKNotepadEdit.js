@@ -50,7 +50,8 @@ function DKNotepadEdit_OnEvent(event)
 		console.log("DKNotepadEdit_Find\n");
 	}
 	
-	if(event.currentTarget == window){
+	// FIXME
+	if(event.currentTarget == window && byId("DKNotepad/DKNotepadEdit.html")){
 		if(byId("DKNotepad/DKNotepadEdit.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

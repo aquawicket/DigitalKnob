@@ -48,7 +48,7 @@ var EventTarget = function(pointer)
 	});
 	Object.defineProperty(this, "removeEventListener", {
 		value: function(type, callback, useCapture){
-			console.log("EventTarget.removeEventListener("+type+")");
+			console.log("EventTarget.removeEventListener("+this.id+","+type+")");
 			DKDomEventTarget_removeEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
 				return;
