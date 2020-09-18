@@ -47,15 +47,18 @@ var EventTarget = function(pointer)
 	});
 	Object.defineProperty(this, "removeEventListener", {
 		value: function(type, callback, useCapture){
-			console.log("EventTarget.removeEventListener("+this.id+","+type+")");
+			//console.log("EventTarget.removeEventListener("+this.id+","+type+")");
 			DKDomEventTarget_removeEventListener(pointer, type, callback);
+			//console.log("DKDomEventTarget_removeEventListener("+pointer+", "+type+", "+callback+")");
 			if(!(type in this.listeners)){
 				return;
 			}
 			var stack = this.listeners[type];
 			for(var i = 0, l = stack.length; i < l; i++){
 				if(stack[i] === callback){
+					//console.log(stack[i]);
 					stack.splice(i, 1);
+					this.listeners[type].splice(i, 1);
 					return;
 				}
 			}

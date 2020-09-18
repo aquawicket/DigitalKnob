@@ -42,6 +42,7 @@ function DKNotepadMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
+		console.log("DKNotepadMenu_OnEvent(): event.type = "+event.type);
 		if(byId("DKNotepad/DKNotepadMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
