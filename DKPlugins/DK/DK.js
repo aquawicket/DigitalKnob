@@ -1385,7 +1385,7 @@ function DK_StopPropagation(event)
     }
 }
 
-
+/*
 ///////////////////////////////////////
 function DKAddEvent(id, type, Function)
 {
@@ -1395,8 +1395,12 @@ function DKAddEvent(id, type, Function)
 	if(!ele){ return; }
 	ele.addEventListener(type, Function);
 }
+*/
+
 /*
 ////  Old 
+function DKAddEvent(id, type, Function)
+{
 	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
 		DKWARN("DKAddEvent(id, type, Function): id invalid\n");

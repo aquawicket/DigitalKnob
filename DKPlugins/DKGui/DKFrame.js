@@ -167,7 +167,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(frame).style.borderWidth = "1rem";
 	byId(frame).style.minWidth = "62rem";
 	byId(frame).style.minHeight = "30rem";
-	DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
+	//DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
+	byId(frame).addEventListener("mousedown", DKFrame_OnEvent);
 	
 	//DKINFO("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
 	//DKINFO("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
@@ -187,7 +188,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(titlebartext).style.color = "rgb(25,25,25)";
 	byId(titlebartext).innerHTML = title;
 	DKWidget_AddDragHandle(titlebartext, frame);
-	DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
+	//DKAddEvent(titlebartext, "dblclick", DKFrame_OnEvent);
+	byId(titlebartext).addEventListener("dblclick", DKFrame_OnEvent);
 	
 	var reload = DKWidget_CreateElement(byId(frame), "img", "DKFrame_reload");
 	byId(reload).setAttribute("src", "DKGui/reload.png");
@@ -195,7 +197,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(reload).style.top = "1rem";
 	byId(reload).style.right = "65rem";
 	byId(reload).style.height = "18rem";
-	DKAddEvent(reload, "click", DKFrame_OnEvent);
+	//DKAddEvent(reload, "click", DKFrame_OnEvent);
+	byId(reload).addEventListener("click", DKFrame_OnEvent);
 	
 	var minimize = DKWidget_CreateElement(byId(frame), "img", "DKFrame_minimize");
 	byId(minimize).setAttribute("src", "DKGui/minimize.png");
@@ -203,7 +206,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(minimize).style.top = "0rem";
 	byId(minimize).style.right = "42rem";
 	byId(minimize).style.height = "20rem;"
-	DKAddEvent(minimize, "click", DKFrame_OnEvent);
+	//DKAddEvent(minimize, "click", DKFrame_OnEvent);
+	byId(minimize).addEventListener("click", DKFrame_OnEvent);
 	
 	var maximize = DKWidget_CreateElement(byId(frame), "img", "DKFrame_maximize");
 	byId(maximize).setAttribute("src", "DKGui/maximize.png");
@@ -211,7 +215,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(maximize).style.top = "0rem";
 	byId(maximize).style.right = "21rem";
 	byId(maximize).style.height = "20rem";
-	DKAddEvent(maximize, "click", DKFrame_OnEvent);
+	//DKAddEvent(maximize, "click", DKFrame_OnEvent);
+	byId(maximize).addEventListener("click", DKFrame_OnEvent);
 	
 	var close = DKWidget_CreateElement(byId(frame), "img", "DKFrame_close");
 	byId(close).setAttribute("src", "DKGui/close.png");
@@ -219,7 +224,8 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(close).style.top = "0rem";
 	byId(close).style.right = "0rem";
 	byId(close).style.height = "20rem";
-	DKAddEvent(close, "click", DKFrame_OnEvent);
+	//DKAddEvent(close, "click", DKFrame_OnEvent);
+	byId(close).addEventListener("click", DKFrame_OnEvent);
 	
 	return frame;
 }
