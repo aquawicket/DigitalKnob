@@ -24,7 +24,7 @@ function DKNotepadView_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKNotepadView_StatusBar"){
-		DKINFO(("DKNotepadView_StatusBar\n");
+		console.log("DKNotepadView_StatusBar\n");
 	}
 	
 	if(event.currentTarget == window){

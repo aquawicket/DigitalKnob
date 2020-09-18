@@ -17,35 +17,35 @@ function DKInput_Init()
 	//DKAddEvent("window", "mousedown", DKInput_OnEvent);
 	window.addEventListener("mousedown", DKInput_OnEvent);
 	//DKAddEvent("window", "mouseup", DKInput_OnEvent);
-	window.addEventListener{"mouseup", DKInput_OnEvent);
+	window.addEventListener("mouseup", DKInput_OnEvent);
 	//DKAddEvent("window", "click", DKInput_OnEvent);
-	window.addEventListener{"click", DKInput_OnEvent);
+	window.addEventListener("click", DKInput_OnEvent);
 	//DKAddEvent("window", "dblclick", DKInput_OnEvent);
-	window.addEventListener{"dblclick", DKInput_OnEvent);
+	window.addEventListener("dblclick", DKInput_OnEvent);
 	//DKAddEvent("window", "mousemove", DKInput_OnEvent);
-	window.addEventListener{"mousemove", DKInput_OnEvent);
+	window.addEventListener("mousemove", DKInput_OnEvent);
 	//DKAddEvent("window", "mouseover", DKInput_OnEvent);
-	window.addEventListener{"mouseover", DKInput_OnEvent);
+	window.addEventListener("mouseover", DKInput_OnEvent);
 	//DKAddEvent("window", "mouseout", DKInput_OnEvent);
-	window.addEventListener{"mouseout", DKInput_OnEvent);
+	window.addEventListener("mouseout", DKInput_OnEvent);
 	//DKAddEvent("window", "wheel", DKInput_OnEvent);
-	window.addEventListener{"wheel", DKInput_OnEvent);
+	window.addEventListener("wheel", DKInput_OnEvent);
 	//DKAddEvent("window", "resize", DKInput_OnEvent);
-	window.addEventListener{"resize", DKInput_OnEvent);
+	window.addEventListener("resize", DKInput_OnEvent);
 	//DKAddEvent("window", "input", DKInput_OnEvent);
-	window.addEventListener{"input", DKInput_OnEvent);
+	window.addEventListener("input", DKInput_OnEvent);
 	//DKAddEvent("window", "change", DKInput_OnEvent);
-	window.addEventListener{"change", DKInput_OnEvent);
+	window.addEventListener("change", DKInput_OnEvent);
 	//DKAddEvent("window", "contextmenu", DKInput_OnEvent);
-	window.addEventListener{"contextmenu", DKInput_OnEvent);
+	window.addEventListener("contextmenu", DKInput_OnEvent);
 	//DKAddEvent("window", "scroll", DKInput_OnEvent);
-	window.addEventListener{"scroll", DKInput_OnEvent);
+	window.addEventListener("scroll", DKInput_OnEvent);
 	//DKAddEvent("window", "drag", DKInput_OnEvent);
-	window.addEventListener{"drag", DKInput_OnEvent);
+	window.addEventListener("drag", DKInput_OnEvent);
 	//DKAddEvent("esc", "mousedown", DKInput_OnEvent);
-	byId("esc").addEventListener("mousedown", DKInput_OnEvent);
+	//byId("esc").addEventListener("mousedown", DKInput_OnEvent);
 	//DKAddEvent("esc", "mouseup", DKInput_OnEvent); 
-	byId("esc").addEventListener("mouseup", DKInput_OnEvent);
+	//byId("esc").addEventListener("mouseup", DKInput_OnEvent);
 }
 
 //////////////////////
@@ -53,6 +53,25 @@ function DKInput_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKInput_OnEvent);
+	window.removeEventListener("keypress", DKInput_OnEvent);
+	window.removeEventListener("keydown", DKInput_OnEvent);
+	window.removeEventListener("keyup", DKInput_OnEvent);
+	window.removeEventListener("mousedown", DKInput_OnEvent);
+	window.removeEventListener("mouseup", DKInput_OnEvent);
+	window.removeEventListener("click", DKInput_OnEvent);
+	window.removeEventListener("dblclick", DKInput_OnEvent);
+	window.removeEventListener("mousemove", DKInput_OnEvent);
+	window.removeEventListener("mouseover", DKInput_OnEvent);
+	window.removeEventListener("mouseout", DKInput_OnEvent);
+	window.removeEventListener("wheel", DKInput_OnEvent);
+	window.removeEventListener("resize", DKInput_OnEvent);
+	window.removeEventListener("input", DKInput_OnEvent);
+	window.removeEventListener("change", DKInput_OnEvent);
+	window.removeEventListener("contextmenu", DKInput_OnEvent);
+	window.removeEventListener("scroll", DKInput_OnEvent);
+	window.removeEventListener("drag", DKInput_OnEvent);
+	//byId("esc").removeEventListener("mousedown", DKInput_OnEvent);
+	//byId("esc").removeEventListener("mouseup", DKInput_OnEvent);
 	DKClose("DKInputTest/DKInput.html");
 }
 

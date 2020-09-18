@@ -2,8 +2,8 @@
 
 * KEEP WORKING ON Event
 * add removeEventListener everywhere neccesary  
-* FIXME: I don't think removeEventListener is removing everything
 * Make EVERY event go through DKDomEventTarget.js
+* keep track of events in DKDomEventTarget.js
 
 
 * Get console.trace() working
