@@ -1527,7 +1527,7 @@ function DKRemoveEvent(id, type, Function)
 	return true;
 }
 
-
+/*
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
@@ -1562,6 +1562,7 @@ function DKRemoveEvents(Function)
 		}
 	}
 }
+*/
 
 /*
 ///////////////////////////////////////

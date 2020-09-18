@@ -51,7 +51,7 @@ function TaskbarMenu_End()
 {
 	DKDEBUGFUNC();
 	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
-	DKRemoveEvents(TaskbarMenu_OnEvent);
+	//DKRemoveEvents(TaskbarMenu_OnEvent);
 	DKClose("DKOS/TaskbarMenu.html");
 }
 
