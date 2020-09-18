@@ -6,13 +6,18 @@ else{ rgba = "0.5"; }
 function DKInput_Init()
 {
 	DKDEBUGFUNC();
-	window.id = "window";
+	//window.id = "window";
 	DKCreate("DKInputTest/DKInput.html");
-	DKAddEvent("window", "keypress", DKInput_OnEvent);
-	DKAddEvent("window", "keydown", DKInput_OnEvent);
-	DKAddEvent("window", "keyup", DKInput_OnEvent);
-	DKAddEvent("window", "mousedown", DKInput_OnEvent);
-	DKAddEvent("window", "mouseup", DKInput_OnEvent);
+	//DKAddEvent("window", "keypress", DKInput_OnEvent);
+	window.addEventListener("keypress", DKInput_OnEvent);
+	//DKAddEvent("window", "keydown", DKInput_OnEvent);
+	window.addEventListener("keydown", DKInput_OnEvent);
+	//DKAddEvent("window", "keyup", DKInput_OnEvent);
+	window.addEventListener("keyup", DKInput_OnEvent);
+	//DKAddEvent("window", "mousedown", DKInput_OnEvent);
+	window.addEventListener("mousedown", DKInput_OnEvent);
+	//DKAddEvent("window", "mouseup", DKInput_OnEvent);
+	window.addEventListener{"mouseup", DKInput_OnEvent);
 	DKAddEvent("window", "click", DKInput_OnEvent);
 	DKAddEvent("window", "dblclick", DKInput_OnEvent);
 	DKAddEvent("window", "mousemove", DKInput_OnEvent);

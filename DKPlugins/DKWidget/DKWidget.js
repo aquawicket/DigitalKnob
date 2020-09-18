@@ -621,7 +621,7 @@ function DKWidget_GetOuterHtml(variable)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	DKDEBUGFUNC(parent, tag, id);
-	if( !(parent instanceof HTMLElement) ){
+	if(!(parent instanceof HTMLElement)){
 		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
 		return;
 	}
@@ -678,7 +678,7 @@ function DKWidget_AppendChild(parent, element)
 	else{
 		ele = element;
 	}
-	if(!par){ console.log("DKWidget_AppendChild(): par invalid"); return false; } 
+	if(!par){ console.log("DKWidget_AppendChild("+parent+","+child+"): par invalid"); return false; } 
 	par.appendChild(ele);
 }
 
