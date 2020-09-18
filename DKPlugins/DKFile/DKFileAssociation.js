@@ -14,7 +14,7 @@ function DKFileAssociation_End()
 function DKFileAssociation_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	console.debug("DKFileAssociation_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")");
+	console.debug("DKFileAssociation_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 }
 
 /////////////////////////////////////

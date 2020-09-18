@@ -23,6 +23,10 @@ function DKSolution_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKSolution_OnEvent);
+	byId("DKSolutionUp").removeEventListener("click", DKSolution_OnEvent);
+	byId("DKSolutionMenu").removeEventListener("click", DKSolution_OnEvent);
+	byId("DKSolutionMenu").removeEventListener("contextmenu", DKSolution_OnEvent);
+	byId("DKSolutionPath").removeEventListener("keypress", DKSolution_OnEvent);
 	DKClose("DKFile/DKSolution.html");
 	DKClose("DKFile/DKSolution.css");
 }

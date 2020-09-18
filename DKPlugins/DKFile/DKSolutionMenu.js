@@ -40,7 +40,6 @@ function DKSolutionMenu_End()
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKSolutionMenu_OnEvent);
 	window.removeEventListener("mousedown", DKSolutionMenu_OnEvent);
-	/*
 	byId("DKSolutionMenu_Open").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_OpenHere").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_NewFile").removeEventListener("click", DKSolutionMenu_OnEvent);
@@ -53,7 +52,6 @@ function DKSolutionMenu_End()
 	byId("DKSolutionMenu_Import").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_GitAdd").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", DKSolutionMenu_OnEvent);
-	*/
 	DKClose("DKFile/DKSolutionMenu.html");
 }
 
