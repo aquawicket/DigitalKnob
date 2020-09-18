@@ -24,6 +24,13 @@ function DKNotepadEdit_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKNotepadEdit_OnEvent);
+	window.removeEventListener("mousedown", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Undo").removeEventListener("click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Cut").removeEventListener("click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Copy").removeEventListener("click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Paste").removeEventListener("click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Delete").removeEventListener("click", DKNotepadEdit_OnEvent);
+	byId("DKNotepadEdit_Find").removeEventListener("click", DKNotepadEdit_OnEvent);
 	DKClose("DKNotepad/DKNotepadEdit.html");
 }
 
@@ -51,7 +58,7 @@ function DKNotepadEdit_OnEvent(event)
 	}
 	
 	// FIXME
-	if(event.currentTarget == window && byId("DKNotepad/DKNotepadEdit.html")){
+	if(event.currentTarget == window){
 		if(byId("DKNotepad/DKNotepadEdit.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

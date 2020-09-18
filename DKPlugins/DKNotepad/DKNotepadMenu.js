@@ -22,7 +22,6 @@ function DKNotepadMenu_End()
 	byId("DKNotepadMenu_Cut").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
 	byId("DKNotepadMenu_Copy").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
 	byId("DKNotepadMenu_Paste").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
-	//DK_DumpError();
 	DKClose("DKNotepad/DKNotepadMenu.html");
 }
 
@@ -42,7 +41,6 @@ function DKNotepadMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget == window){
-		console.log("DKNotepadMenu_OnEvent(): event.type = "+event.type);
 		if(byId("DKNotepad/DKNotepadMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

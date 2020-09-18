@@ -30,10 +30,6 @@ function DKNotepad_Init()
 function DKNotepad_End()
 {
 	DKDEBUGFUNC();
-	if(!byId("DKNotepad/DKNotepad.html")){
-		console.log("DKNotepad_End(): DKNotepad/DKNotepad.html invalid");
-		return;
-	} 
 	//DKRemoveEvents(DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").removeEventListener("SaveFile", DKNotepad_OnEvent);
