@@ -1,4 +1,5 @@
-//TODO
-* Keep working on Event
-* add removeEventListener everywhere neccesary
-* FIXME: I don't think removeEventListener is removing everything
+// TODO //
+
+1. KEEP WORKING ON Event
+2. add removeEventListener everywhere neccesary  
+3. FIXME: I don't think removeEventListener is removing everything
