@@ -101,8 +101,7 @@ Internet Explorer (9.0+) <br>
 [Digitalknob Forum](http://digitalknob.freeforums.net)
 
 ### Online Test <br>
-[Online Test]
-(http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
+[Online Test](http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
 
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
