@@ -16,7 +16,8 @@ function Clock_Init()
 function Clock_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(Clock_OnEvent);
+	//DKRemoveEvents(Clock_OnEvent);
+	window.removeEventListener("second", Clock_OnEvent);
 	DKClose("DKOS/Clock.html");
 }
 

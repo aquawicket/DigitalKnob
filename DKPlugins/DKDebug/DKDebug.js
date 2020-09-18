@@ -13,7 +13,8 @@ function DKDebug_Init()
 function DKDebug_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKDebug_OnEvent);
+	//DKRemoveEvents(DKDebug_OnEvent);
+	window.removeEventListener("keydown", DKDebug_OnEvent);
 }
 
 ///////////////////////////////
