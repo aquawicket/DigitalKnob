@@ -678,7 +678,7 @@ function DKWidget_AppendChild(parent, element)
 	else{
 		ele = element;
 	}
-	if(!par){ console.log("DKWidget_AppendChild("+parent+","+child+"): par invalid"); return false; } 
+	if(!par){ console.log("DKWidget_AppendChild("+parent+","+element+"): par invalid"); return false; } 
 	par.appendChild(ele);
 }
 

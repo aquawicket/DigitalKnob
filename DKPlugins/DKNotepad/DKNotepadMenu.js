@@ -3,17 +3,25 @@ function DKNotepadMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadMenu.html");
-	DKAddEvent("window", "mousedown", DKNotepadMenu_OnEvent);
-	DKAddEvent("DKNotepadMenu_Cut", "mousedown", DKNotepadMenu_OnEvent);
-	DKAddEvent("DKNotepadMenu_Copy", "mousedown", DKNotepadMenu_OnEvent);
-	DKAddEvent("DKNotepadMenu_Paste", "mousedown", DKNotepadMenu_OnEvent);
+	//DKAddEvent("window", "mousedown", DKNotepadMenu_OnEvent);
+	window.addEventListener("mousedown", DKNotepadMenu_OnEvent);
+	//DKAddEvent("DKNotepadMenu_Cut", "mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Cut").addEventListener("mousedown", DKNotepadMenu_OnEvent);
+	//DKAddEvent("DKNotepadMenu_Copy", "mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Copy").addEventListener("mousedown", DKNotepadMenu_OnEvent);
+	//DKAddEvent("DKNotepadMenu_Paste", "mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Paste").addEventListener("mousedown", DKNotepadMenu_OnEvent);
 }
 
 ////////////////////////////
 function DKNotepadMenu_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKNotepadMenu_OnEvent);
+	//DKRemoveEvents(DKNotepadMenu_OnEvent);
+	window.removeEventListener("mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Cut").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Copy").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
+	byId("DKNotepadMenu_Paste").removeEventListener("mousedown", DKNotepadMenu_OnEvent);
 	DKClose("DKNotepad/DKNotepadMenu.html");
 }
 

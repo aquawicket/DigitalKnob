@@ -18,27 +18,41 @@ function DKInput_Init()
 	window.addEventListener("mousedown", DKInput_OnEvent);
 	//DKAddEvent("window", "mouseup", DKInput_OnEvent);
 	window.addEventListener{"mouseup", DKInput_OnEvent);
-	DKAddEvent("window", "click", DKInput_OnEvent);
-	DKAddEvent("window", "dblclick", DKInput_OnEvent);
-	DKAddEvent("window", "mousemove", DKInput_OnEvent);
-	DKAddEvent("window", "mouseover", DKInput_OnEvent);
-	DKAddEvent("window", "mouseout", DKInput_OnEvent);
-	DKAddEvent("window", "wheel", DKInput_OnEvent);
-	DKAddEvent("window", "resize", DKInput_OnEvent);
-	DKAddEvent("window", "input", DKInput_OnEvent);
-	DKAddEvent("window", "change", DKInput_OnEvent);
-	DKAddEvent("window", "contextmenu", DKInput_OnEvent);
-	DKAddEvent("window", "scroll", DKInput_OnEvent);
-	DKAddEvent("window", "drag", DKInput_OnEvent);
-	DKAddEvent("esc", "mousedown", DKInput_OnEvent);
-	DKAddEvent("esc", "mouseup", DKInput_OnEvent); 
+	//DKAddEvent("window", "click", DKInput_OnEvent);
+	window.addEventListener{"click", DKInput_OnEvent);
+	//DKAddEvent("window", "dblclick", DKInput_OnEvent);
+	window.addEventListener{"dblclick", DKInput_OnEvent);
+	//DKAddEvent("window", "mousemove", DKInput_OnEvent);
+	window.addEventListener{"mousemove", DKInput_OnEvent);
+	//DKAddEvent("window", "mouseover", DKInput_OnEvent);
+	window.addEventListener{"mouseover", DKInput_OnEvent);
+	//DKAddEvent("window", "mouseout", DKInput_OnEvent);
+	window.addEventListener{"mouseout", DKInput_OnEvent);
+	//DKAddEvent("window", "wheel", DKInput_OnEvent);
+	window.addEventListener{"wheel", DKInput_OnEvent);
+	//DKAddEvent("window", "resize", DKInput_OnEvent);
+	window.addEventListener{"resize", DKInput_OnEvent);
+	//DKAddEvent("window", "input", DKInput_OnEvent);
+	window.addEventListener{"input", DKInput_OnEvent);
+	//DKAddEvent("window", "change", DKInput_OnEvent);
+	window.addEventListener{"change", DKInput_OnEvent);
+	//DKAddEvent("window", "contextmenu", DKInput_OnEvent);
+	window.addEventListener{"contextmenu", DKInput_OnEvent);
+	//DKAddEvent("window", "scroll", DKInput_OnEvent);
+	window.addEventListener{"scroll", DKInput_OnEvent);
+	//DKAddEvent("window", "drag", DKInput_OnEvent);
+	window.addEventListener{"drag", DKInput_OnEvent);
+	//DKAddEvent("esc", "mousedown", DKInput_OnEvent);
+	byId("esc").addEventListener("mousedown", DKInput_OnEvent);
+	//DKAddEvent("esc", "mouseup", DKInput_OnEvent); 
+	byId("esc").addEventListener("mouseup", DKInput_OnEvent);
 }
 
 //////////////////////
 function DKInput_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKInput_OnEvent);
+	//DKRemoveEvents(DKInput_OnEvent);
 	DKClose("DKInputTest/DKInput.html");
 }
 
