@@ -213,9 +213,12 @@ function DKSolution_UpdatePath(path)
 			byId(element3).style.paddingLeft = "17px";
 			byId(element3).style.backgroundRepeat = "no-repeat";
 			byId(element3).innerHTML = files[f];
-			DKAddEvent(element3, "click", DKSolution_OnEvent);
-			DKAddEvent(element3, "dblclick", DKSolution_OnEvent);
-			DKAddEvent(element3, "contextmenu", DKSolution_OnEvent);
+			//DKAddEvent(element3, "click", DKSolution_OnEvent);
+			byId(element3).addEventListener("click", DKSolution_OnEvent);
+			//DKAddEvent(element3, "dblclick", DKSolution_OnEvent);
+			byId(element3).addEventListener("dblclick", DKSolution_OnEvent);
+			//DKAddEvent(element3, "contextmenu", DKSolution_OnEvent);
+			byId(element3).addEventListener("contextmenu", DKSolution_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
