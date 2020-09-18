@@ -110,6 +110,7 @@ window.addEventListener('error', function(e){
 });
 
 
+// FIXME: not working
 /////////////////////////////////
 window.onmousemove = function(e){
 //window.addEventListener("mousemove", function(e){	
