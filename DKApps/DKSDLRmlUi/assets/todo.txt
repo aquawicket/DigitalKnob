@@ -1,2 +1,3 @@
 //TODO
 * Keep working on events.
+* add removeEventListener everywhere neccesary
