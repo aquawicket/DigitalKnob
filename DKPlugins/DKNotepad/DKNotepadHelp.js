@@ -16,7 +16,7 @@ function DKNotepadHelp_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(DKNotepadHelp_OnEvent);
-	window.addEventListener("mousedown", DKNotepadHelp_OnEvent);
+	window.removeEventListener("mousedown", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_ViewHelp").removeEventListener("click", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_About").removeEventListener("click", DKNotepadHelp_OnEvent);
 	DKClose("DKNotepad/DKNotepadHelp.html");
