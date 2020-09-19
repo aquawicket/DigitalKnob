@@ -3,5 +3,10 @@ IF(NOT WIN32)
 ENDIF()
 
 ### INSTALL ###
-DKINSTALL(https://windows.php.net/downloads/releases/php-7.4.10-nts-Win32-vc15-x64.zip php-7.4.10-nts-Win32-vc15-x64)
+IF(NOT EXISTS ${3RDPARTY}/php-7.4.10-nts-Win32-vc15-x64)
+	## DKINSTALL(https://windows.php.net/downloads/releases/php-7.4.10-nts-Win32-vc15-x64.zip php-7.4.10-nts-Win32-vc15-x64)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(https://windows.php.net/downloads/releases/php-7.4.10-nts-Win32-vc15-x64.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/php-7.4.10-nts-Win32-vc15-x64.zip ${3RDPARTY}/php-7.4.10-nts-Win32-vc15-x64)
+ENDIF()
 DKSET(PHP ${3RDPARTY}/php-7.4.10-nts-Win32-vc15-x64)
