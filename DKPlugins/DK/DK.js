@@ -1134,6 +1134,7 @@ function DK_GetObjects()
 function DK_GetEvents()
 {
 	DKDEBUGFUNC();
+	/*
 	var out = "";
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
@@ -1144,6 +1145,8 @@ function DK_GetEvents()
 		}
 	}
 	return out;
+	*/
+	console.error("DK_GetEvents not implemented");
 }
 
 ///////////////////
