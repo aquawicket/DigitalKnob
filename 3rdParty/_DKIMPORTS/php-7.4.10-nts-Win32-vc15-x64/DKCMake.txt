@@ -1,0 +1,7 @@
+IF(NOT WIN32)
+	RETURN()
+ENDIF()
+
+### INSTALL ###
+DKINSTALL(https://windows.php.net/downloads/releases/php-7.4.10-nts-Win32-vc15-x64.zip php-7.4.10-nts-Win32-vc15-x64)
+DKSET(PHP ${3RDPARTY}/php-7.4.10-nts-Win32-vc15-x64)

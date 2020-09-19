@@ -327,7 +327,11 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DKFile_DirectoryContents = function(url)
 	{
 		DKDEBUGFUNC(url);
-		if(url.indexOf(":") > -1){ return; }
+		console.log("DKFile_DirectoryContents("+url+")");
+		if(url.indexOf(":") > -1){
+			console.error("DKFile_DirectoryContents("+url+"): url has :");
+			return; 
+		}
 		if(!online_assets){
 			console.error("DKFile_DirectoryContents(url): online_assets not set")
 		}
