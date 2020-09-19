@@ -9,6 +9,7 @@ href = href.substr(0, href.lastIndexOf("/")+1);
 local_assets = href;
 
 
+if(DKFile_Exists(local_assets+"settings.txt")){
 var log_debug = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_DEBUG]");
 if(log_debug == "ON"){ LOG_DEBUG = true; }
 
@@ -35,6 +36,8 @@ if(!hostname){ hostname = document.location.hostname; }
 if(!hostname){ hostname = "digitalknob.com"; }
 
 var pathname = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
+}
+
 if(!pathname){ pathname = document.location.pathname; }
 if(pathname.lastIndexOf("DKApps") > 0){
 	pathname = pathname.substring(pathname.lastIndexOf("DKApps")+6, pathname.lastIndexOf("assets"));
