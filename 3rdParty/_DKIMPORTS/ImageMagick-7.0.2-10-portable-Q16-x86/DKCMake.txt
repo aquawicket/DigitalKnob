@@ -7,6 +7,10 @@ DKDEPEND(gs922w64)
 
 
 ### INSTALL ###
-DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.0.2-10-portable-Q16-x86.zip ImageMagick-7.0.2-10-portable-Q16-x86)
-## DKINSTALL(${DKWEB}/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip ImageMagick-7.0.2-10-portable-Q16-x86)
+IF(NOT EXISTS ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
+	## DKINSTALL(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.0.2-10-portable-Q16-x86.zip ImageMagick-7.0.2-10-portable-Q16-x86)
+	DKSETPATH(${DIGITALKNOB}/Download)
+	DKDOWNLOAD(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.0.2-10-portable-Q16-x86.zip)
+	DKEXTRACT(${DIGITALKNOB}/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
+ENDIF()
 DKSET(IMAGEMAGICK ${3RDPARTY}/ImageMagick-7.0.2-10-portable-Q16-x86)
