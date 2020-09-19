@@ -130,7 +130,8 @@ function TaskbarMenu_OnEvent(event)
 	if(event.currentTarget.id == "OpenSource"){
 		//DKINFO("OpenSource\n");
 		DKCreate("DKWidgetJS");
-		var source = DKWidget_GetOuterHtml("body");
+		//var source = DKWidget_GetOuterHtml("body");
+		var source = document.body.outerHTML;
 		var assets = DKAssets_LocalAssets();
 		DKFile_StringToFile(source, assets+"source.html");
 		DKCreate("DKNotepad/DKNotepad.js", function(){

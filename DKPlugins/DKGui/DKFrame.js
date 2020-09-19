@@ -21,7 +21,6 @@ function DKFrame_OnEvent(event)
 		//setTimeout( function(){ DKFrame_BringToFront(); }, 1000);
 	}
 	if(event.type == "dblclick"){
-		//var id = DK_GetId(event);
 		var id = event.currentTarget.id;
 		var titlebar = byId(id).parentNode;
 		DKFrame_MaximizeButton(titlebar.id);

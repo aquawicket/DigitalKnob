@@ -291,8 +291,8 @@ function DKWidget_GetValue(variable)
 				// Quadratic scale if |d| > 1
 				d = d < 1 ? d < -1 ? (-Math.pow(d, 2) - n1) / n : d : (Math.pow(d, 2) + n1) / n;
 				// Delta *should* not be greater than 2...
-				e.delta = Math.min(Math.max(d / 2, -1), 1) * 2;
-				return e.delta;
+				event.delta = Math.min(Math.max(d / 2, -1), 1) * 2;
+				return event.delta;
 			}
 			if(variable.type == "keypress"){
 				return GetCharCode(variable);
@@ -610,7 +610,7 @@ function DKWidget_GetOuterHtml(variable)
 		return variable.outerHTML;
 	}
 	if(typeof variable == "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		return element.outerHTML;
 	}
 	DKERROR("ERROR: GetInnerHtml(): unknown type\n");

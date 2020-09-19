@@ -24,10 +24,6 @@ function Taskbar_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(Taskbar_OnEvent);
-	if(!byId("DKOS/Taskbar.html")){
-		console.error("Taskbar_End(): DKOS/Taskbar.html invalid");
-		return;
-	}
 	byId("start").removeEventListener("click", Taskbar_OnEvent);
 	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
 	DKClose("DKOS/Taskbar.html");
@@ -60,7 +56,7 @@ function Taskbar_Animate()
     } 
 	else{
         pos++; 
-		DKWidget_SetProperty("DKOS/Taskbar.html","bottom",pos+"rem");
-		DK_DoFrame();
+		byId("DKOS/Taskbar.html").style.bottom = pos+"rem";
+		//DK_DoFrame();
     }
 }
