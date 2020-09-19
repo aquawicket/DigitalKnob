@@ -171,10 +171,12 @@ function DKSolution_UpdatePath(path)
 	byId("DKSolutionPath").addEventListener("keypress", DKSolution_OnEvent);
 	
 	if(!path){ path = ""; }
+	//var aPath = path;
 	var aPath;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
+	
 	//console.log("aPath:"+aPath+"\n");
 	//var rPath = DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath+"\n");

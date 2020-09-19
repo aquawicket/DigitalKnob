@@ -14,7 +14,7 @@ DKCreate("DKDebug/DKDebug.js", function(){
 	
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
-		DKNotepad_Open("C:/digitalknob/DK/DKApps/DKSDLRmlUi/assets/todo.txt");
+		DKNotepad_Open("todo.txt");
 	});
 	
 });
