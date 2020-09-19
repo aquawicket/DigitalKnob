@@ -286,7 +286,9 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DKFile_FileToString = function(url)
 	{
 		DKDEBUGFUNC(url);
-		url = url.replace(absolutepath, "");
+		if(typeof absolutepath !== "undefined"){
+			url = url.replace(absolutepath, "");
+		}
 		
 		//var path = DKFile_VerifyPath(url);
 		if(!url){ return; }
