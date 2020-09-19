@@ -304,8 +304,10 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DKFile_StringToFile= function(data, path)
 	{
 		DKDEBUGFUNC(data, path);
-		if(!path.includes(absolutepath)){
-			path = absolutepath+path;
+		if(typeof absolutepath !== "undefined"){
+		    if(!path.includes(absolutepath)){
+			    path = absolutepath+path;
+		    }
 		}
 		
 		data = replace(data, ": ", ":");
