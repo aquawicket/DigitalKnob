@@ -50,8 +50,25 @@ function TaskbarMenu_Init()
 function TaskbarMenu_End()
 {
 	DKDEBUGFUNC();
-	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
 	//DKRemoveEvents(TaskbarMenu_OnEvent);
+	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
+	byId("OpenSource").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenDebug").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("PushDKFiles").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("ClearConsole").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("Info").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("Reload").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("CloseDKGui").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("FileExplorer").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenBuilder").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenNotepad").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("InputTest").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenMessage").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenTetris").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("OpenGoogle").removeEventListener("click", TaskbarMenu_OnEvent);
+	byId("TaskbarMenu_Run").removeEventListener("keydown", TaskbarMenu_OnEvent);
+	byId("Git").removeEventListener("click", TaskbarMenu_OnEvent);
+		
 	DKClose("DKOS/TaskbarMenu.html");
 }
 
@@ -134,7 +151,7 @@ function TaskbarMenu_OnEvent(event)
 		DKDebug_PushDKFiles();
 	}
 	if(event.currentTarget.id == "ClearConsole"){
-		DK_System("cls");
+		console.clear();
 	}
 	if(event.currentTarget.id == "Info"){
 		DKINFO("\n**** DKOBJECTS ****\n");
