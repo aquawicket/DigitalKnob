@@ -38,6 +38,9 @@ function GitMenu_End()
 {
 	DKDEBUGFUNC();
 	//DKRemoveEvents(GitMenu_OnEvent);
+	window.removeEventListener("mousedown", GitMenu_OnEvent);
+	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
+	byId("Git Commit").removeEventListener("click", GitMenu_OnEvent);
 	DKClose("DKGit/GitMenu.html");
 }
 
