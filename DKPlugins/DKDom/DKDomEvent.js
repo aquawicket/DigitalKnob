@@ -117,5 +117,17 @@ function DispatchEvent(pointer)
 {
 	//console.log("DispatchEvent("+pointer+")");
 	var event = new Event(pointer);
-	event.currentTarget.dispatchEvent(event);
+	
+	if(event.type === "mousemove" || event.type === "mouseover" || event.type === "mousedown" || event.type === "mouseup" || event.type === "click" || event.type === "dblclick" || event.type === "contextmenu"){
+		var mouseEvent = new MouseEvent(pointer);
+		mouseEvent.currentTarget.dispatchEvent(mouseEvent);
+	}
+	else if(event.type === "keydown" || event.type === "keyup" || event.type === "keypress")
+	{
+		var keyboardEvent = new KeyboardEvent(pointer);
+		keyboardEvent.currentTarget.dispatchEvent(keyboardEvent);
+	}
+	else{
+		event.currentTarget.dispatchEvent(event);
+	}
 }

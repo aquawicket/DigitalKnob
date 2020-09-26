@@ -53,6 +53,9 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 	*/
 
 	DKString rmlEventAddress = event->data[0];
+	
+	//This is current evaluated javascript side at DKDomEvent.js: DispatchEvent(pointer)
+	/*
 	DKString newEvent;
 	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick") || same(type, "contextmenu")){
 		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
@@ -69,6 +72,7 @@ bool DKDomEventTarget::OnEvent(DKEvents* event)
 	if(duk_peval_string(ctx, newEvent.c_str()) != 0){
 		DKDuktape::DumpError(newEvent);
 	}
+	*/
 
 	//dispatch the event
 	DKString dispatchEvent = "DispatchEvent(\""+rmlEventAddress+"\")";
