@@ -115,8 +115,8 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
 
 function DispatchEvent(pointer)
 {
-	//console.log("DispatchEvent("+pointer+")");
 	var event = new Event(pointer);
+	console.log("DispatchEvent("+pointer+"): event.type = "+event.type);
 	
 	if(event.type === "mousemove" || event.type === "mouseover" || event.type === "mousedown" || event.type === "mouseup" || event.type === "click" || event.type === "dblclick" || event.type === "contextmenu"){
 		var mouseEvent = new MouseEvent(pointer);
