@@ -4,8 +4,6 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
-	
-	//DKAddEvent("window", "keydown", DKDebug_OnEvent);
 	window.addEventListener("keydown", DKDebug_OnEvent);
 }
 
@@ -13,7 +11,6 @@ function DKDebug_Init()
 function DKDebug_End()
 {
 	DKDEBUGFUNC();
-	//DKRemoveEvents(DKDebug_OnEvent);
 	window.removeEventListener("keydown", DKDebug_OnEvent);
 }
 
@@ -24,9 +21,7 @@ function DKDebug_OnEvent(event)
 	//console.warn("DKDebug_OnEvent("+event+","+event.currentTarget.id+","+event.type+","+event.value+")");
 	
 	if(event.type == "keydown"){
-		//console.log("Unicode CHARACTER code: "+DKDuktape_GetValue(event)+"\n"); 
-		console.log("event.code = "+event.code);
-		DKDebug_LogKey(event.key);
+		DKDebug_LogKey(event.code);
 		DKDebug_CheckKeys();
 	}
 	
@@ -40,12 +35,14 @@ function DKDebug_OnEvent(event)
 	}
 }
 
-////////////////////////////
-function DKDebug_LogKey(key)
+/////////////////////////////
+function DKDebug_LogKey(code)
 {
-	DKDEBUGFUNC(key);
+	DKDEBUGFUNC(code);
+	console.log("DKDebug_LogKey("+code+")");
+	console.trace();
 	if(key_history.length > 20){ key_history.shift(); }
-	key_history[key_history.length] = key;
+	key_history[key_history.length] = code;
 }
 
 ////////////////////////////
@@ -55,7 +52,7 @@ function DKDebug_CheckKeys()
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
-		//console.log(DKDebug_KeyToChar(key_history[i]));
+		console.log(DKDebug_KeyToChar(key_history[i]));
 		string += DKDebug_KeyToChar(key_history[i]);
 	}
 	
@@ -102,63 +99,32 @@ function DKDebug_CheckKeys()
 function DKDebug_KeyToChar(key)
 {
 	DKDEBUGFUNC(key);
-	
-	if(key == 65){ return "a"};
-	if(key == 66){ return "b"};
-	if(key == 67){ return "c"};
-	if(key == 68){ return "d"};
-	if(key == 69){ return "e"};
-	if(key == 70){ return "f"};
-	if(key == 71){ return "g"};
-	if(key == 72){ return "h"};
-	if(key == 73){ return "i"};
-	if(key == 74){ return "j"};
-	if(key == 75){ return "k"};
-	if(key == 76){ return "l"};
-	if(key == 77){ return "m"};
-	if(key == 78){ return "n"};
-	if(key == 79){ return "o"};
-	if(key == 80){ return "p"};
-	if(key == 81){ return "q"};
-	if(key == 82){ return "r"};
-	if(key == 83){ return "s"};
-	if(key == 84){ return "t"};
-	if(key == 85){ return "u"};
-	if(key == 86){ return "v"};
-	if(key == 87){ return "w"};
-	if(key == 88){ return "x"};
-	if(key == 89){ return "y"};
-	if(key == 90){ return "z"};
-	
-	/*
-	if(key == 97){ return "a"};
-	if(key == 98){ return "b"};
-	if(key == 99){ return "c"};
-	if(key == 100){ return "d"};
-	if(key == 101){ return "e"};
-	if(key == 102){ return "f"};
-	if(key == 103){ return "g"};
-	if(key == 104){ return "h"};
-	if(key == 105){ return "i"};
-	if(key == 106){ return "j"};
-	if(key == 107){ return "k"};
-	if(key == 108){ return "l"};
-	if(key == 109){ return "m"};
-	if(key == 110){ return "n"};
-	if(key == 111){ return "o"};
-	if(key == 112){ return "p"};
-	if(key == 113){ return "q"};
-	if(key == 114){ return "r"};
-	if(key == 115){ return "s"};
-	if(key == 116){ return "t"};
-	if(key == 117){ return "u"};
-	if(key == 118){ return "v"};
-	if(key == 119){ return "w"};
-	if(key == 120){ return "x"};
-	if(key == 121){ return "y"};
-	if(key == 122){ return "z"};
-	*/
-	
+	if(key == "KeyA"){ return "a"};
+	if(key == "KeyB"){ return "b"};
+	if(key == "KeyC"){ return "c"};
+	if(key == "KeyD"){ return "d"};
+	if(key == "KeyE"){ return "e"};
+	if(key == "KeyF"){ return "f"};
+	if(key == "KeyG"){ return "g"};
+	if(key == "KeyH"){ return "h"};
+	if(key == "KeyI"){ return "i"};
+	if(key == "KeyJ"){ return "j"};
+	if(key == "KeyK"){ return "k"};
+	if(key == "KeyL"){ return "l"};
+	if(key == "KeyM"){ return "m"};
+	if(key == "KeyN"){ return "n"};
+	if(key == "KeyO"){ return "o"};
+	if(key == "KeyP"){ return "p"};
+	if(key == "KeyQ"){ return "q"};
+	if(key == "KeyR"){ return "r"};
+	if(key == "KeyS"){ return "s"};
+	if(key == "KeyT"){ return "t"};
+	if(key == "KeyU"){ return "u"};
+	if(key == "KeyV"){ return "v"};
+	if(key == "KeyW"){ return "w"};
+	if(key == "KeyX"){ return "x"};
+	if(key == "KeyY"){ return "y"};
+	if(key == "KeyZ"){ return "z"};
 	return " ";
 }
 

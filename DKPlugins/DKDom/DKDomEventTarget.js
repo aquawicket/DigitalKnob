@@ -35,9 +35,6 @@ var EventTarget = function(pointer)
 	Object.defineProperty(this, "addEventListener", {
 		value: function(type, callback, useCapture){
 			//console.log("EventTarget.addEventListener("+type+")");
-			if(stored_events.indexOf(this) < 0){
-				stored_events.push(this);
-			}
 			DKDomEventTarget_addEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
 				this.listeners[type] = [];
@@ -49,7 +46,6 @@ var EventTarget = function(pointer)
 		value: function(type, callback, useCapture){
 			//console.log("EventTarget.removeEventListener("+this.id+","+type+")");
 			DKDomEventTarget_removeEventListener(pointer, type, callback);
-			//console.log("DKDomEventTarget_removeEventListener("+pointer+", "+type+", "+callback+")");
 			if(!(type in this.listeners)){
 				return;
 			}
@@ -66,14 +62,12 @@ var EventTarget = function(pointer)
 	});
 	Object.defineProperty(this, "dispatchEvent", {
 		value: function(event){
-			//console.log("dispatchEvent("+event.currentTarget+")")
 			if(!(event.type in this.listeners)){
 				return true;
 			}
 			var stack = this.listeners[event.type].slice();
 			for(var i = 0, l = stack.length; i < l; i++){
 				stack[i].call(this, event);
-				return;
 			}
 			return !event.defaultPrevented;
 		} 

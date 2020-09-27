@@ -477,6 +477,44 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval)
 	return true;
 }
 
+///////////////////////
+bool DKDuktape::Trace()
+{
+	/*
+	duk_inspect_callstack_entry(ctx, -1);
+	duk_get_prop_string(ctx, -1, "lineNumber");
+	long lineNumber = (long)duk_to_int(ctx, -1);
+	duk_pop_2(ctx);
+	*/
+
+	DKERROR("*** TRACE STACK ***\n");
+	for (int level = -1; level > -10; level--) {
+		duk_inspect_callstack_entry(ctx, level);
+		if(duk_is_undefined(ctx, -1)){
+			duk_pop(ctx);
+			continue;
+		}
+
+		duk_get_prop_string(ctx, -1, "function");
+		DKString function = duk_to_string(ctx, -1);
+		duk_pop(ctx);
+
+		duk_get_prop_string(ctx, -1, "pc");
+		DKString pc = toString(duk_to_int(ctx, -1));
+		duk_pop(ctx);
+
+		duk_get_prop_string(ctx, -1, "line");
+		DKString line = toString(duk_to_int(ctx, -1));
+		duk_pop(ctx);
+
+		replace(function, "function ", "");
+		replace(function, "{ [ecmascript code] }", "");
+		DKERROR(function+"@"+pc+":"+line+"\n");
+		duk_pop(ctx);
+	}
+	return true;
+}
+
 //////////////////////////////////////////////////
 bool DKDuktape::QueueDuktape(const DKString& code)
 {

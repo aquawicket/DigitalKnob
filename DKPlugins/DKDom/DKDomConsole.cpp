@@ -243,9 +243,8 @@ int DKDomConsole::timeStamp(duk_context* ctx)
 /////////////////////////////////////////
 int DKDomConsole::trace(duk_context* ctx)
 {
-	//TODO
-	DKERROR("DKDomConsole::trace not implemented\n");
-	return false;
+	if(!DKDuktape::Trace()){ return false; }
+	return true;
 }
 
 ////////////////////////////////////////

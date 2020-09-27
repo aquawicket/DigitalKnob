@@ -69,7 +69,7 @@ var Console = function(pointer)
 		DKDomConsole_timeStamp();
 	}
 	Console.prototype.trace = function(){
-		DKDomConsole_error("[JS] console.trace() not implemented\n");
+		DKDomConsole_trace();
 	}
 	Console.prototype.warn = function(msg){
 		DKDomConsole_warn("[JS] "+msg+"\n");

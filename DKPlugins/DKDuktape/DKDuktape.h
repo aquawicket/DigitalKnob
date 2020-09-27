@@ -30,6 +30,7 @@ public:
 	static bool Reload();
 	//static bool RunDuktape(const DKString& code);
 	static bool RunDuktape(const DKString& code, DKString& rval);
+	static bool Trace();
 	static bool QueueDuktape(const DKString& code);
 	static bool UnloadFile(const DKString& path);
 

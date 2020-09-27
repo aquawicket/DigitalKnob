@@ -12,10 +12,18 @@ DKCreate("DKDebug/DKDebug.js", function(){
 	window.moveTo(window.screen.width/2, 30);
 	//DKRml_DebuggerOn();
 	
+	/*
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
 		DKNotepad_Open("todo.txt");
 	});
+	*/
+	
+	/*
+	DKCreate("DKInputTest/DKInput.js", function(){
+		DKFrame_Widget("DKInputTest/DKInput.html");
+	});
+	*/
 	
 });
 });
