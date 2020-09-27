@@ -4,6 +4,7 @@ var key_history = [];
 function DKDebug_Init()
 {
 	DKDEBUGFUNC();
+	console.log("DKDebug_Init()");
 	window.addEventListener("keydown", DKDebug_OnEvent);
 }
 
@@ -40,7 +41,7 @@ function DKDebug_LogKey(code)
 {
 	DKDEBUGFUNC(code);
 	console.log("DKDebug_LogKey("+code+")");
-	console.trace();
+	//console.trace();
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = code;
 }

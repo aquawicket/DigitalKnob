@@ -24,28 +24,25 @@ var EventTarget = function(pointer)
             return instances[i]; //return already existing instance
         }
     }
-	
 	//console.log("creating instance "+pointer);
 	instances.push(this);
 	
-	this.listeners = {};
-	
 	//EventTarget.prototype.listeners = null;
+	this.listeners = {};
 
 	Object.defineProperty(this, "addEventListener", {
 		value: function(type, callback, useCapture){
-			//console.log("EventTarget.addEventListener("+type+")");
-			DKDomEventTarget_addEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
 				this.listeners[type] = [];
 			}
-			this.listeners[type].push(callback);
+			if(this.listeners[type].indexOf(callback) == -1){ //Do not allow duplicate entries
+				this.listeners[type].push(callback);
+			}
+			DKDomEventTarget_addEventListener(pointer, type, callback); //Add or overwrite the event in RmlUi
 		} 
 	});
 	Object.defineProperty(this, "removeEventListener", {
 		value: function(type, callback, useCapture){
-			//console.log("EventTarget.removeEventListener("+this.id+","+type+")");
-			DKDomEventTarget_removeEventListener(pointer, type, callback);
 			if(!(type in this.listeners)){
 				return;
 			}
@@ -55,6 +52,7 @@ var EventTarget = function(pointer)
 					//console.log(stack[i]);
 					stack.splice(i, 1);
 					this.listeners[type].splice(i, 1);
+					DKDomEventTarget_removeEventListener(pointer, type, callback); //Remove the event in RmlUi
 					return;
 				}
 			}
@@ -66,7 +64,7 @@ var EventTarget = function(pointer)
 				return true;
 			}
 			var stack = this.listeners[event.type].slice();
-			for(var i = 0, l = stack.length; i < l; i++){
+			for(var i = 0; i < stack.length; i++){
 				stack[i].call(this, event);
 			}
 			return !event.defaultPrevented;
