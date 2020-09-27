@@ -13,11 +13,11 @@ function DKSaveFile_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
-	DKAddEvent("DKFile/DKSaveFile.html", "SetFile", DKSaveFile_OnEvent);
-	DKAddEvent("DKSaveFileCancel", "click", DKSaveFile_OnEvent);
-	DKAddEvent("DKSaveFileOK", "click", DKSaveFile_OnEvent);
-	DKAddEvent("DKSaveFileUp", "click", DKSaveFile_OnEvent);
-	DKAddEvent("DKSaveFilePath", "input", DKSaveFile_OnEvent);
+	byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_OnEvent);
+	byId("DKSaveFileCancel").addEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFileOK").addEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFileUp").addEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFilePath").addEventListener("input", DKSaveFile_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -31,7 +31,11 @@ function DKSaveFile_Init()
 function DKSaveFile_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKSaveFile_OnEvent);
+	byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_OnEvent);
+	byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFileUp").removeEventListener("click", DKSaveFile_OnEvent);
+	byId("DKSaveFilePath").removeEventListener("input", DKSaveFile_OnEvent);
 	DKClose("DKFile/DKSaveFile.html");
 	DKClose("DKFile/DKSaveFile.css");
 }
@@ -44,14 +48,14 @@ function DKSaveFile_OnEvent(event)
 	//console.log("DKSaveFile_OnEvent("+event.type+","+event.value+")");
 	if(!event.currentTarget){ return; }
 	console.log("DKSaveFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
-	if(DK_IdLike(event, "DKSaveFileDrive")){
+	if(event.currentTarget.id.includes("DKSaveFileDrive")){
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
-	if(DK_IdLike(event, "DKSaveFileFolder")){
+	if(event.currentTarget.id.includes("DKSaveFileFolder")){
 		//console.log("DKSaveFileFolder");
 		DKSaveFile_OpenFolder(DK_GetValue(event));
 	}
-	if(DK_IdLike(event, "DKSaveFileFile")){
+	if(event.currentTarget.id.includes("DKSaveFileFile")){
 		DKSaveFile_OpenFile(DK_GetValue(event));
 	}
 
@@ -183,7 +187,7 @@ function DKSaveFile_UpdatePath(path)
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
 			byId(element2).style.whiteSpace = "nowrap";
-			DKAddEvent(element2, "click", DKSaveFile_OnEvent);
+			byId(element2).addEventListener("click", DKSaveFile_OnEvent);
 			byId(element2).style.paddingLeft = "17px";
 			byId(element2).innerHTML = files[d];
 			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
@@ -200,7 +204,7 @@ function DKSaveFile_UpdatePath(path)
 			byId(element3).style.paddingLeft = "17px";
 			byId(element3).style.backgroundRepeat = "no-repeat";
 			byId(element3).innerHTML = files[f];
-			DKAddEvent(element3, "click", DKSaveFile_OnEvent);
+			byId(element3).addEventListener("click", DKSaveFile_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
