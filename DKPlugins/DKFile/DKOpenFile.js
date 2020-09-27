@@ -11,11 +11,12 @@ function DKOpenFile_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKOpenFile.css");
 	DKCreate("DKFile/DKOpenFile.html");
-	DKAddEvent("DKFile/DKOpenFile.html", "GetFile", DKOpenFile_OnEvent);
-	DKAddEvent("DKOpenFileCancel", "click", DKOpenFile_OnEvent);
-	DKAddEvent("DKOpenFileOK", "click", DKOpenFile_OnEvent);
-	DKAddEvent("DKOpenFileUp", "click", DKOpenFile_OnEvent);
-	DKAddEvent("DKOpenFilePath", "change", DKOpenFile_OnEvent);
+	byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
+	byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
+	byId("DKOpenFileCancel").addEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFileOK").addEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFileUp").addEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFilePath").addEventListener("change", DKOpenFile_OnEvent);
 	
 	aPath = "";
 	rPath = "";
@@ -29,7 +30,12 @@ function DKOpenFile_Init()
 function DKOpenFile_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKOpenFile_OnEvent);
+	byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
+	byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
+	byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFileOK").removeEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFileUp").removeEventListener("click", DKOpenFile_OnEvent);
+	byId("DKOpenFilePath").removeEventListener("change", DKOpenFile_OnEvent);
 	DKClose("DKFile/DKOpenFile.html");
 	DKClose("DKFile/DKOpenFile.css");
 }
@@ -39,14 +45,13 @@ function DKOpenFile_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
 	if(!event.currentTarget){ return; }
-	if(event.currentTarget.id == "DKOpenFileDrive"){
+	if(event.currentTarget.id.includes("DKOpenFileDrive")){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
-	if(event.currentTarget.id == "DKOpenFileFolder"){
-		//console.log("DKOpenFileFolder");
+	if(event.currentTarget.id.includes("DKOpenFileFolder")){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
-	if(event.currentTarget.id == "DKOpenFileFile"){
+	if(event.currentTarget.id.includes("DKOpenFileFile")){
 		DKOpenFile_OpenFile(DK_GetValue(event));
 	}
 
@@ -79,7 +84,8 @@ function DKOpenFile_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id == "GetFile"){
-		var params = DKWidget_GetValue(event).split(",");
+		console.log("GetFile was called");
+		var params = event.value.split(",");
 		event_id = params[0];
 		event_type = params[1];
 		event_data1 = params[2];
@@ -97,6 +103,15 @@ function DKOpenFile_OnEvent(event)
 		//var path = DKWidget_GetAttribute("DKOpenFilePath", "value");
 		//DKOpenFile_UpdatePath(path);
 	}
+}
+
+///////////////////////////////////////////
+function DKOpenFile_GetFile(path, callback)
+{
+	//TODO
+	//DKDEBUGFUNC(message, callback);
+	//DKOpenFile_UpdatePath(path);
+	//DKOpenFile_callback = callback;
 }
 
 ////////////////////////////////////
@@ -153,11 +168,11 @@ function DKOpenFile_UpdatePath(path)
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement("DKOpenFileMenu2", "option", "DKOpenFileFolder");
+			var element2 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
 			byId(element2).style.whiteSpace = "nowrap";
-			DKAddEvent(element2, "click", DKOpenFile_OnEvent);
+			byId(element2).addEventListener("click", DKOpenFile_OnEvent);
 			byId(element2).style.paddingLeft = "17px";
 			byId(element2).innerHTML = files[d];
 			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
@@ -167,26 +182,20 @@ function DKOpenFile_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement("DKOpenFileMenu2", "option", "DKOpenFileFile");
+			var element3 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFile");
 			var value = aPath+"/"+files[f];
-			//DKWidget_SetAttribute(element3, "value", value);
 			byId(element3).value = value;
-			//DKWidget_SetProperty(element3, "white-space", "nowrap");
 			byId(element3).style.whiteSpace = "nowrap";
-			//DKWidget_SetProperty(element3, "padding-left", "17px");
 			byId(element3).style.paddingLeft = "17px";
-			//DKWidget_SetProperty(element3, "background-repeat", "no-repeat");
 			byId(element3).style.backgroundRepeat = "no-repeat";
-			//DKWidget_SetInnerHtml(element3,files[f]);
 			byId(element3).innerHTML = files[f];
-			DKAddEvent(element3, "click", DKOpenFile_OnEvent);
+			byId(element3).addEventListener("click", DKOpenFile_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
 				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
 				(extension == "gif") || (extension == "tga") || (extension == "ico")
 				){
-				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/picture.png\")");
 				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 
@@ -201,17 +210,14 @@ function DKOpenFile_UpdatePath(path)
 				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
 				(extension == "ztl")
 			){
-				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/cube.png\")");
 				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 
 			else if((extension == "html") || (extension == "htm")){
-				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/html.png\")");
 				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 
 			else{
-				//DKWidget_SetProperty(element3, "background-image", "url(\"DKFile/file.png\")");
 				byId(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}

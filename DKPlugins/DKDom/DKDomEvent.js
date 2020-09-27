@@ -64,7 +64,7 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
 		get: function(){ return DKDomEvent_timeStamp(pointer); } 
 	}); //Read Only
 	Object.defineProperty(this, "type", {
-		get: function(){ return DKDomEvent_type(pointer); } 
+		get: function(){ return DKDomEvent_type(pointer); },
 	}); //Read Only
 	Object.defineProperty(this, "isTrusted", {
 		get: function(){ return DKDomEvent_isTrusted(pointer); } 

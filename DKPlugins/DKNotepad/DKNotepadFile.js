@@ -3,19 +3,12 @@ function DKNotepadFile_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
-	//DKAddEvent("window", "mousedown", DKNotepadFile_OnEvent);
 	window.addEventListener("mousedown", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_New", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").addEventListener("click", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_Open", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Open").addEventListener("click", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_Save", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Save").addEventListener("click", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_SaveAs", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_SaveAs").addEventListener("click", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_Print", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Print").addEventListener("click", DKNotepadFile_OnEvent);
-	//DKAddEvent("DKNotepadFile_Exit", "click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Exit").addEventListener("click", DKNotepadFile_OnEvent);
 }
 
@@ -23,7 +16,6 @@ function DKNotepadFile_Init()
 function DKNotepadFile_End()
 {
 	DKDEBUGFUNC();
-	//DKRemoveEvents(DKNotepadFile_OnEvent);
 	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
@@ -82,7 +74,8 @@ function DKNotepadFile_Open()
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKOpenFile.js", function(){
 		DKFrame_Widget("DKFile/DKOpenFile.html");
-		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKNotepad/DKNotepad.html,OpenFile,/,absolute"); // To -> DKOpenFile
+		DKOpenFile_UpdatePath("/");
+		//DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKNotepad/DKNotepad.html,OpenFile,/,absolute"); // To -> DKOpenFile
 	});
 }
 

@@ -6,31 +6,18 @@ function DKSolutionMenu_Init()
 {
 	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolutionMenu.html");
-	//DKAddEvent("window", "mousedown", DKSolutionMenu_OnEvent);
 	window.addEventListener("mousedown", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Open", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_OpenHere", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_NewFile", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_NewFile").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_NewFolder", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_NewFolder").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Rename", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Rename").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Delete", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Delete").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Copy", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Copy").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Cut", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Cut").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Paste", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Paste").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_Import", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Import").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_GitAdd", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_GitAdd").addEventListener("click", DKSolutionMenu_OnEvent);
-	//DKAddEvent("DKSolutionMenu_UpxCompress", "click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_UpxCompress").addEventListener("click", DKSolutionMenu_OnEvent);
 }
 
@@ -38,7 +25,6 @@ function DKSolutionMenu_Init()
 function DKSolutionMenu_End()
 {
 	DKDEBUGFUNC();
-	//DKRemoveEvents(DKSolutionMenu_OnEvent);
 	window.removeEventListener("mousedown", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Open").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_OpenHere").removeEventListener("click", DKSolutionMenu_OnEvent);
@@ -98,7 +84,7 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	
 	//FIXME
-	if(event.currentTarget == window && byId("DKFile/DKSolutionMenu.html")){
+	if(event.currentTarget == window){
 		if(byId("DKFile/DKSolutionMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
