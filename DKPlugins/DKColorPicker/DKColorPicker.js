@@ -6,17 +6,13 @@ var event_id;
 /////////////////////////////
 function DKColorPicker_Init()
 {
-	//DKDEBUGFUNC();
+	DKDEBUGFUNC();
 	console.log("DKColorPicker_Init()");
 	DKCreate("DKColorPicker/DKColorPicker.css");
 	DKCreate("DKColorPicker/DKColorPicker.html");
-	//DKAddEvent("DKColorPicker/DKColorPicker.html", "GetColor", DKColorPicker_OnEvent);
 	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
 	byId("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
 	byId("DKColorHover").addEventListener("mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
 	byId("DKColorPickerOK").addEventListener("click", DKColorPicker_OnEvent);
 }
 
@@ -24,13 +20,9 @@ function DKColorPicker_Init()
 function DKColorPicker_End()
 {
 	DKDEBUGFUNC();	
-	
 	byId("DKColorPicker/DKColorPicker.html").removeEventListener("GetColor", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerBar", "mousedown", DKColorPicker_OnEvent);
 	byId("DKColorPickerBar").removeEventListener("mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorHover", "mousedown", DKColorPicker_OnEvent);
 	byId("DKColorHover").removeEventListener("mousedown", DKColorPicker_OnEvent);
-	//DKAddEvent("DKColorPickerOK", "click", DKColorPicker_OnEvent);
 	byId("DKColorPickerOK").removeEventListener("click", DKColorPicker_OnEvent);
 	
 	//FIXME - Crash
