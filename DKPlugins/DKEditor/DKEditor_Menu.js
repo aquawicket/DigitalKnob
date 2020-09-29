@@ -2,27 +2,27 @@
 function DKEditor_Menu_Init()
 {
 	DKCreate("DKEditor/DKEditor_Menu.html");
-	DKAddEvent("window", "mousedown", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Refresh", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Reload", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Notes", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Assets", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_TestBrowserApp", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_DevTools", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_ClearConsole", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_ShowConsole", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_HideConsole", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_PushFiles", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_GitUpdate", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_GitCommit", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_NewFrame", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Builder", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Info", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_RefreshIcons", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Report", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Web", "click", DKEditor_Menu_OnEvent);
-	DKAddEvent("DKEditor_Menu_Command_Input", "change", DKEditor_Menu_OnEvent);
+	window.addEventListener("mousedown", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Refresh").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Reload").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Notes").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Assets").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_TestBrowserApp").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_DevTools").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_ClearConsole").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_ShowConsole").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_HideConsole").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_PushFiles").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_GitUpdate").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_GitCommit").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_NewFrame").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Builder").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Info").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_RefreshIcons").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Report").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Web").addEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Command_Input").addEventListener("change", DKEditor_Menu_OnEvent);
 	
 	/*
 	DKCreate("DKTooltip/DKTooltip.js", function(){});
@@ -36,14 +36,34 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	DKRemoveEvents(DKEditor_Menu_OnEvent);
+	window.removeEventListener("mousedown", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Refresh").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Reload").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Notes").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Assets").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_TestBrowserApp").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_DevTools").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_ClearConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_ShowConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_HideConsole").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_PushFiles").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_GitUpdate").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_GitCommit").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_NewFrame").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Builder").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Info").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_RefreshIcons").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Report").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
+	byId("DKEditor_Menu_Command_Input").removeEventListener("change", DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
 
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	DKDEBUG("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
+	console.debug("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
 	if(event.currentTarget.id == "DKEditor_Menu_Command_Input"){
 		//TODO
 		console.log("TODO\n");

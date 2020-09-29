@@ -5,8 +5,8 @@ DKSolutionRename_file = "";
 function DKSolutionRename_Init()
 {
 	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
-	DKAddEvent("window", "mousedown", DKSolutionRename_OnEvent);
-	DKAddEvent("DKSolutionRename_box", "keydown", DKSolutionRename_OnEvent);
+	window.addEventListener("mousedown", DKSolutionRename_OnEvent);
+	byId("DKSolutionRename_box").addEventListener("keydown", DKSolutionRename_OnEvent);
 	
 	DKWidget_SetFocus("DKSolutionRename_box");
 }
@@ -14,21 +14,22 @@ function DKSolutionRename_Init()
 ///////////////////////////////
 function DKSolutionRename_End()
 {
-	DKRemoveEvents(DKSolutionRename_OnEvent);
+	window.removeEventListener("mousedown", DKSolutionRename_OnEvent);
+	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_OnEvent);
 	DKClose("DKFile/DKSolutionRename.html");
 }
 
 ////////////////////////////////////////
 function DKSolutionRename_OnEvent(event)
 {
-	DKDEBUG("DKSolutionRename_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	console.debug("DKSolutionRename_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.type == "keydown"){
 		if(DK_GetValue(event) != 13){
 			return;
 		}
 	}
 	if(event.currentTarget == window){
-		if()byId("DKFile/DKSolutionRename.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKFile/DKSolutionRename.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
 	}
