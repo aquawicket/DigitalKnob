@@ -2,14 +2,17 @@
 function DKWebviewTest_Init()
 {
 	DKCreate("DKWebview/DKWebviewTest.html");
-	DKAddEvent("window", "mousedown", DKWebviewTest_OnEvent);
-	DKAddEvent("window", "keydown", DKWebviewTest_OnEvent);
-	DKAddEvent("DKWebviewTest.html", "mousedown", DKWebviewTest_OnEvent);
+	window.addEventListener("mousedown", DKWebviewTest_OnEvent);
+	window.addEventListener("keydown", DKWebviewTest_OnEvent);
+	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_OnEvent);
 }
 
 ////////////////////////////
 function DKWebviewTest_End()
 {
+	window.addEventListener("mousedown", DKWebviewTest_OnEvent);
+	window.addEventListener("keydown", DKWebviewTest_OnEvent);
+	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_OnEvent);
 	DKClose("DKWebviewTest.html");
 }
 

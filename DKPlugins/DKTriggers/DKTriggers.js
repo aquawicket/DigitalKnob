@@ -437,7 +437,7 @@ function DKTrigger_AddEvents()
 	console.log("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].command == "gui"){
-			DKAddEvent(causes[c].var1, causes[c].var2, DKTrigger_OnEvent);
+			byId(causes[c].var1).addEventListener(causes[c].var2, DKTrigger_OnEvent);
 		}
 	}
 }

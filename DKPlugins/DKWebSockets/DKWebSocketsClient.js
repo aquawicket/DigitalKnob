@@ -4,17 +4,20 @@ var websocket;
 function DKWebSocketsClient_Init()
 {
 	DKCreate("DKWebSockets/DKWebSocketsClient.html", function(){
-		DKAddEvent("DKWebSocketsClient_CreateClient", "click", DKWebSocketsClient_OnEvent);
-		DKAddEvent("DKWebSocketsClient_CloseClient", "click", DKWebSocketsClient_OnEvent);
-		DKAddEvent("DKWebSocketsClient_MessageToServer", "click", DKWebSocketsClient_OnEvent);
-		DKAddEvent("window", "DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
+		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
+		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_OnEvent);
+		byId("DKWebSocketsClient_CloseClient").addEventListener("click", DKWebSocketsClient_OnEvent);
+		byId("DKWebSocketsClient_MessageToServer").addEventListener("click", DKWebSocketsClient_OnEvent);
 	});
 }
 
 /////////////////////////////////
 function DKWebSocketsClient_End()
 {
-	DKRemoveEvents(DKWebSocketsClient_OnEvent);
+	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
+	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
+	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
+	byId("DKWebSocketsClient_MessageToServer").removeEventListener("click", DKWebSocketsClient_OnEvent);
 	DKClose("DKWebSockets/DKWebSocketsClient.html");
 }
 
