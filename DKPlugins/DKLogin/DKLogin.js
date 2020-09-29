@@ -6,13 +6,13 @@ function DKLogin_Init()
 {
 	DKCreate("DKLogin/DKLogin.css");
 	DKCreate("DKLogin/DKLogin.html");
-	DKAddEvent("DKLoginFacebook", "click", DKLogin_OnEvent);
+	byId("DKLoginFacebook").addEventListener("click", DKLogin_OnEvent);
 }
 
 //////////////////////
 function DKLogin_End()
 {
-	DKRemoveEvents(DKLogin_OnEvent);
+	byId("DKLoginFacebook").addEventListener("click", DKLogin_OnEvent);
 	DKClose("DKLogin/DKLogin.html");
 	DKClose("DKLogin/DKLogin.css");
 }

@@ -5,7 +5,7 @@ function DKBuildGUI_Init()
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKBuild/DKBuild.js", function(rval){
-		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
+		//byId("AppList").addEventListener("click", DKBuildGUI_OnEvent);
 		byId("AppList").addEventListener("change", DKBuildGUI_OnEvent);
 		byId("OSList").addEventListener("change", DKBuildGUI_OnEvent);
 		byId("BuildType").addEventListener("change", DKBuildGUI_OnEvent);
@@ -177,13 +177,13 @@ function DKBuildGUI_UpdateLibs()
 	var id = DKWidget_CreateElement("LibList", "option", "BuildLibraries");
 	DKWidget_SetAttribute(id, "value", "Build All Libraries");
 	DKWidget_SetInnerHtml(id, "Build All Libraries");
-	DKAddEvent(id, "click", DKBuildGUI_OnEvent);
+	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
 		var id2 = DKWidget_CreateElement("LibList", "option", "LIBRARY");
 		DKWidget_SetAttribute(id2, "value", libs[i]);
 		DKWidget_SetInnerHtml(id2, libs[i]);
-		DKAddEvent(id2, "click", DKBuildGUI_OnEvent);
+		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);
 	}
 }
 */

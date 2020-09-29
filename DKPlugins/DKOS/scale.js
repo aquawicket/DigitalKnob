@@ -2,15 +2,15 @@
 function scale_Init()
 {
 	DKCreate("DKOS/scale.html,DKOS/Taskbar.html");
-	//DKAddEvent("scale_minus", "mousedown", scale_OnEvent);
 	byId("scale_minus").addEventListener("mousedown", scale_OnEvent);
-	//DKAddEvent("scale_plus", "mousedown", scale_OnEvent);
 	byId("scale_plus").addEventListener("mousedown", scale_OnEvent);
 }
 
 ////////////////////
 function scale_End()
 {
+	byId("scale_minus").removeEventListener("mousedown", scale_OnEvent);
+	byId("scale_plus").removeEventListener("mousedown", scale_OnEvent);
 	DKClose("scale.html");
 }
 

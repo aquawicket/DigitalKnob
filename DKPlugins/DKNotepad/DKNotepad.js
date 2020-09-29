@@ -6,7 +6,7 @@ function DKNotepad_Init()
 	//DKWARN("DKNotepad_Init()");
 	DKCreate("DKNotepad/DKNotepad.css");
 	DKCreate("DKNotepad/DKNotepad.html");
-	//DKAddEvent("DKNotepad.html", "SetFile", DKNotepad_OnEvent);
+	//byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
 	byId("DKNotepad_Text").addEventListener("contextmenu", DKNotepad_OnEvent);

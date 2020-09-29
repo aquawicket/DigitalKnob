@@ -2,18 +2,23 @@
 function DKHook_Init()
 {
 	DKCreate("DKHook");
-	DKAddEvent("window", "GLOBAL_mousemove", DKHook_OnEvent);
-	DKAddEvent("window", "GLOBAL_mousedown", DKHook_OnEvent);
-	DKAddEvent("window", "GLOBAL_mouseup", DKHook_OnEvent);
-	DKAddEvent("window", "GLOBAL_keypress", DKHook_OnEvent);
-	DKAddEvent("window", "GLOBAL_keydown", DKHook_OnEvent);
-	DKAddEvent("window", "GLOBAL_keyup", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_mousemove", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_mousedown", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_mouseup", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_keypress", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_keydown", DKHook_OnEvent);
+	window.addEventListener("GLOBAL_keyup", DKHook_OnEvent);
 }
 
 /////////////////////
 function DKHook_End()
 {
-	DKRemoveEvents(DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_mousemove", DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_mousedown", DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_mouseup", DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_keypress", DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_keydown", DKHook_OnEvent);
+	window.removeEventListener("GLOBAL_keyup", DKHook_OnEvent
 }
 
 //////////////////////////////

@@ -3,16 +3,16 @@ function DKHandles_Init()
 {
 	DKCreate("DKHandles");
 	DKCreate("DKHandles/DKHandles.html");
-	DKAddEvent("refresh", "click", DKHandles_OnEvent);
-	DKAddEvent("window", "click", DKHandles_OnEvent);
-	DKAddEvent("parent", "click", DKHandles_OnEvent);
-	DKAddEvent("search", "mousedown", DKHandles_OnEvent);
-	DKAddEvent("setvalue", "click", DKHandles_OnEvent);
-	DKAddEvent("doclick", "click", DKHandles_OnEvent);
-	DKAddEvent("Prev", "click", DKHandles_OnEvent);
-	DKAddEvent("Next", "click", DKHandles_OnEvent);
-	DKAddEvent("Highlight", "click", DKHandles_OnEvent);
-	DKAddEvent("window", "DKHandles_WindowChanged", DKHandles_OnEvent);
+	window.addEventListener("click", DKHandles_OnEvent);
+	window.addEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
+	byId("refresh").addEventListener("click", DKHandles_OnEvent);
+	byId("parent").addEventListener("click", DKHandles_OnEvent);
+	byId("search").addEventListener("mousedown", DKHandles_OnEvent);
+	byId("setvalue").addEventListener("click", DKHandles_OnEvent);
+	byId("doclick").addEventListener("click", DKHandles_OnEvent);
+	byId("Prev").addEventListener("click", DKHandles_OnEvent);
+	byId("Next").addEventListener("click", DKHandles_OnEvent);
+	byId("Highlight").addEventListener("click", DKHandles_OnEvent);
 	DKHandles_UpdateWindowList();
 	
 	document.getElementById("search").ondragstart = function() { return false; };
@@ -21,14 +21,23 @@ function DKHandles_Init()
 ////////////////////////
 function DKHandles_End()
 {
-	DKRemoveEvents(DKHandles_OnEvent);
+	window.removeEventListener("click", DKHandles_OnEvent);
+	window.removeEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
+	byId("refresh").removeEventListener("click", DKHandles_OnEvent);
+	byId("parent").removeEventListener("click", DKHandles_OnEvent);
+	byId("search").removeEventListener("mousedown", DKHandles_OnEvent);
+	byId("setvalue").removeEventListener("click", DKHandles_OnEvent);
+	byId("doclick").removeEventListener("click", DKHandles_OnEvent);
+	byId("Prev").removeEventListener("click", DKHandles_OnEvent);
+	byId("Next").removeEventListener("click", DKHandles_OnEvent);
+	byId("Highlight").removeEventListener("click", DKHandles_OnEvent);
 	DKClose("DKHandles/DKHandles.html");
 }
 
 /////////////////////////////////
 function DKHandles_OnEvent(event)
 {
-	if(event.currentTarget.id == "window"){
+	if(event.currentTarget === window){
 		var handle = DKWidget_GetInnerHtml("window");
 		DKHandles_UpdateProperties(handle);
     }
@@ -93,7 +102,7 @@ function DKHandles_UpdateWindowList()
 		var element = DKWidget_CreateElement("windows", "option", "wintitle");
 		DKWidget_SetAttribute(element, "value", arry[i]);
 		DKWidget_SetProperty(element, "white-space", "nowrap");
-		DKAddEvent(element, "click", DKHandles_OnEvent);
+		byId(element, "click", DKHandles_OnEvent);
 		DKWidget_SetInnerHtml(element,arry[i]);
 	}
 }
