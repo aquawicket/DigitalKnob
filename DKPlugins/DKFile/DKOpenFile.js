@@ -97,7 +97,7 @@ function DKOpenFile_OnEvent(event)
 	
 	if(event.currentTarget.id == "DKOpenFilePath"){
 		console.log("DKOpenFilePath");
-		//var path = DKWidget_GetAttribute("DKOpenFilePath", "value");
+		//var path = byId("DKOpenFilePath").value;
 		//DKOpenFile_UpdatePath(path);
 	}
 }

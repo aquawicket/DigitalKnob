@@ -112,7 +112,7 @@ function DKSaveFile_OnEvent(event)
 	
 	if(event.currentTarget.id == "DKSaveFilePath"){
 		console.log("DKSaveFilePath");
-		//var path = DKWidget_GetAttribute("DKSaveFilePath", "value");
+		//var path = byId("DKSaveFilePath").value;
 		//DKSaveFile_UpdatePath(path);
 	}
 }

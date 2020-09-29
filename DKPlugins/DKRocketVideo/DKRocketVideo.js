@@ -49,7 +49,7 @@ function DKRocketVideo_OnEvent(event)
 function DKRocketVideo_playpause()
 {
 	//toggle play/pause
-	var src = DKWidget_GetAttribute("DKRocketVideo_playpause", "src");
+	var src = byId("DKRocketVideo_playpause").src;
 	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
@@ -76,7 +76,7 @@ function DKRocketVideo_positiontrack()
 function DKRocketVideo_speaker()
 {
 	//toggle volume/mute
-	var src = DKWidget_GetAttribute("DKRocketVideo_speaker", "src");
+	var src = byId("DKRocketVideo_speaker").src;
 	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){

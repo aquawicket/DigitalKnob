@@ -64,7 +64,7 @@ function DKAudioPlayer_Open(file)
 //////////////////////////////////
 function DKAudioPlayer_playpause()
 {
-	var src = DKWidget_GetAttribute("DKAudioPlayer_playpause", "src");
+	var src = byId("DKAudioPlayer_playpause").src;
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/pause.png");
 		DKAudio_Resume(DKAudioPlayer_file);
@@ -98,7 +98,7 @@ function DKAudioPlayer_TimeUpdate()
 ////////////////////////////////
 function DKAudioPlayer_speaker()
 {
-	var src = DKWidget_GetAttribute("DKAudioPlayer_speaker", "src");
+	var src = byId("DKAudioPlayer_speaker").src;
 	if(src.indexOf("mute.png") != -1){
 		DKAudio_UnMute();
 		DKAudioPlayer_UpdateVolume(DKAudio_GetVolume());

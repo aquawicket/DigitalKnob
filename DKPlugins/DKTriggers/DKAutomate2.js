@@ -23,7 +23,7 @@ function DKAutomate2_OnEvent(event)
 		DKAutomate2_SelectTrigger();
 	}
 	if(DK_IdLike(event,"DeleteCause")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		DKTrigger_DeleteCause(num)
 		DKAutomate2_SelectTrigger();
 	}
@@ -32,7 +32,7 @@ function DKAutomate2_OnEvent(event)
 		DKAutomate2_SelectTrigger();
 	}
 	if(DK_IdLike(event,"DeleteEffect")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		DKTrigger_DeleteEffect(num);
 		DKAutomate2_SelectTrigger();
 	}
@@ -43,35 +43,35 @@ function DKAutomate2_OnEvent(event)
 		DKSendEvent("DKAutomate.html", "UpdateValues", "");
 	}
 	if(DK_IdLike(event,"CauseCommand")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		causes[Number(num)].command = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar1")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		causes[Number(num)].var1 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar2")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		causes[Number(num)].var2 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar3")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		causes[Number(num)].var3 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectCommand")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		effects[Number(num)].command = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar1")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		effects[Number(num)].var1 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar2")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		effects[Number(num)].var2 = DK_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar3")){
-		var num = DKWidget_GetAttribute(DK_GetId(event), "num");
+		var num = byId(event.currentTarget.id).num;
 		effects[Number(num)].var3 = DK_GetValue(event);
 	}
 	
