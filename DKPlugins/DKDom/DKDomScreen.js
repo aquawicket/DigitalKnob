@@ -3,7 +3,6 @@
 //////////////////////////////
 var Screen = function(pointer)
 {
-	//DKDEBUGFUNC();
 	Object.defineProperty(this, "availTop", { 
 		get: function(){ return DKDomScreen_availTop(this.pointer); } 
 	});

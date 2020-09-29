@@ -5,7 +5,6 @@ var stored_events = [];
 ///////////////////////////////////////////
 var EventFromCPP = function(pointer, event)
 {
-	//DKDEBUGFUNC();
 	//console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
 		if(pointer == stored_events[i].pointer){
