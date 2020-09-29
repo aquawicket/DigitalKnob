@@ -1,7 +1,6 @@
 ///////////////////////
 function RunMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKBuild/RunMenu.html");
 	DKAddEvent("window", "mousedown", RunMenu_OnEvent);
 	DKAddEvent("Build App", "click", RunMenu_OnEvent);
@@ -16,16 +15,14 @@ function RunMenu_Init()
 //////////////////////
 function RunMenu_End()
 {
-	DKDEBUGFUNC();
-	DKRemoveEvents(RunMenu_OnEvent);
+	//DKRemoveEvents(RunMenu_OnEvent);
 	DKClose("DKBuild/RunMenu.html");
 }
 
 ///////////////////////////////
 function RunMenu_OnEvent(event)
 {
-	DKDEBUGFUNC();
-	DKDEBUG("RunMenu_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	console.log("RunMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "Build App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");

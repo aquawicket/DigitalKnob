@@ -3,8 +3,8 @@ function DKAutomate2_Init()
 {
 	DKDEBUGFUNC();	
 	DKCreate("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
-		DKAddEvent("DKTriggers/DKAutomate2.html", "SelectTrigger", DKAutomate2_OnEvent);
-		DKAddEvent("TriggerName", "input", DKAutomate2_OnEvent);
+		byId("DKTriggers/DKAutomate2.html").addEventListener("SelectTrigger", DKAutomate2_OnEvent);
+		byId("DKTriggers/DKAutomate2.html").addEventListener("input", DKAutomate2_OnEvent);
 	});
 }
 
@@ -12,7 +12,8 @@ function DKAutomate2_Init()
 function DKAutomate2_End()
 {
 	DKDEBUGFUNC();	
-	DKRemoveEvents(DKAutomate2_OnEvent);
+	byId("DKTriggers/DKAutomate2.html").removeEventListener("SelectTrigger", DKAutomate2_OnEvent);
+	byId("DKTriggers/DKAutomate2.html").removeEventListener("input", DKAutomate2_OnEvent);
 	DKClose("DKTriggers/DKAutomate2.html");
 }
 

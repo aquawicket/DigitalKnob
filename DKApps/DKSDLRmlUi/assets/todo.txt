@@ -1,5 +1,7 @@
 // TODO //
 
+*** Remove  DKDEBUGFUNC in all .js files.   
+ 
 *** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 
 *** Create FAR 
