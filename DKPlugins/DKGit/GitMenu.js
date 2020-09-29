@@ -23,11 +23,8 @@ function GitMenu_Init()
 	}
 
 	DKCreate("DKGit/GitMenu.html", function(){
-		//DKAddEvent("window", "mousedown", GitMenu_OnEvent);
 		window.addEventListener("mousedown", GitMenu_OnEvent);
-		//DKAddEvent("Git Update", "click", GitMenu_OnEvent);
 		byId("Git Update").addEventListener("click", GitMenu_OnEvent);
-		//DKAddEvent("Git Commit", "click", GitMenu_OnEvent);
 		byId("Git Commit").addEventListener("click", GitMenu_OnEvent);
 	});
 }
@@ -35,7 +32,6 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	//DKRemoveEvents(GitMenu_OnEvent);
 	window.removeEventListener("mousedown", GitMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
 	byId("Git Commit").removeEventListener("click", GitMenu_OnEvent);

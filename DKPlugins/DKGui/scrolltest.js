@@ -11,7 +11,13 @@ function scrolltest_Init()
 	});
 
 	//DKCreate("DKMessage/DKMessage.js", function(){});
-	DKAddEvent("bottomdiv", "mousedown", scrolltest_OnEvent);
+	byId("bottomdiv").addEventListener("mousedown", scrolltest_OnEvent);
+}
+
+/////////////////////////
+function scrolltest_End()
+{
+	byId("bottomdiv").removeEventListener("mousedown", scrolltest_OnEvent);
 }
 
 //////////////////////////////////
