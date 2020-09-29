@@ -7,7 +7,6 @@ function DKWidget_ValidateColor(color){ DKWARN("DKWidget_ValidateColor(): not av
 ///////////////////////
 function AdjustRems(id)
 {
-	DKDEBUGFUNC();
 	var nodelist = document.getElementById(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
@@ -32,7 +31,6 @@ function AdjustRems(id)
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
-	DKDEBUGFUNC(url, parent);
 	//console.log("DKWidget_NewWidget("+url+","+parent+")");
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
@@ -57,7 +55,6 @@ function DKWidget_NewWidget(url, parent)
 ////////////////////////////////////
 function DKWidget_GetAvailableId(id)
 {
-	DKDEBUGFUNC(id);
 	out = id;
 	var i = 0;
 	
@@ -81,14 +78,12 @@ function DKWidget_GetAvailableId(id)
 /////////////////////////////
 function DKWidget_GetFile(id)
 {
-	DKDEBUGFUNC(id);
 	return id;
 }
 
 //////////////////////////
 function DKWidget_Hide(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "none";
@@ -97,7 +92,6 @@ function DKWidget_Hide(id)
 //////////////////////////
 function DKWidget_Show(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.style.display = "block";
@@ -107,7 +101,6 @@ function DKWidget_Show(id)
 ////////////////////////////
 function DKWidget_Toggle(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none" || element.style.visibility == "hidden"){
@@ -121,7 +114,6 @@ function DKWidget_Toggle(id)
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
 {
-	DKDEBUGFUNC(id);
 	var parent = document.getElementById(id);
 	if(!parent){ return false; }
 	var elements = parent.getElementsByTagName('*');
@@ -146,7 +138,6 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
-	DKDEBUGFUNC(id, drag);
 	var element = document.getElementById(id);
 	if(!DK_IE() && DK_GetBrowser() != "RML"){
 		element.style.setProperty("pointer-events","all");
@@ -159,7 +150,6 @@ function DKWidget_AddDragHandle(id, drag)
 /////////////////////////////////////////////
 function DKWidget_AddResizeHandle(id, resize)
 {
-	DKDEBUGFUNC(id, resize);
 	var element = document.getElementById(id);
 	if(!DK_IE() && DK_GetBrowser() != "RML"){
 		element.style.setProperty("pointer-events","all");
@@ -172,7 +162,6 @@ function DKWidget_AddResizeHandle(id, resize)
 //////////////////////////////////////
 function DKWidget_RemoveDragHandle(id)
 {
-	DKDEBUGFUNC(id);
 	if(!id){ return; }
 	var element = document.getElementById(id);
 	if(!DK_IE()){
@@ -185,7 +174,6 @@ function DKWidget_RemoveDragHandle(id)
 ///////////////////////////////////
 function DKWidget_GetElement(event)
 {
-	DKDEBUGFUNC(event);
 	if(!event){event = window.event;}
 	return (event.currentTarget) ? event.currentTarget : event.srcElement; //IE or other
 }
@@ -193,7 +181,6 @@ function DKWidget_GetElement(event)
 /////////////////////////////////
 function DKWidget_GetElements(id)
 {
-	DKDEBUGFUNC(id);
 	var string = "";
 	//var nodes = document.getElementById(id).getElementsByTagName('*'); //all children recursively
 	var nodes = document.getElementById(id).childNodes;
@@ -210,7 +197,6 @@ function DKWidget_GetElements(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	DKDEBUGFUNC(variable);
 	if(!variable){ console.log("variable empty\n"); return; }
 
 	if(typeof variable === "string"){ //id
@@ -330,7 +316,6 @@ function DKWidget_GetValue(variable)
 ////////////////////////////////
 function DKWidget_GetTagName(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.tag;
@@ -341,7 +326,6 @@ function DKWidget_GetTagName(id)
 ///////////////////////////////////////////////////
 function DKWidget_GetAttribute(variable, parameter)
 {
-	DKDEBUGFUNC(variable, parameter);
 	if(!variable){
 		DKWARN("DKWidget_GetAttribute(): veriable empty\n");
 		return "";
@@ -362,7 +346,6 @@ function DKWidget_GetAttribute(variable, parameter)
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
-	DKDEBUGFUNC(variable, parameter, value);
 	if(!variable){ DKERROR("DKWidget_SetAttribute(): variable not set\n"); return false; }
 	//if(!value){ DKWARN("DKWidget_SetAttribute(): value not set\n"); return false; }
 	if(typeof variable == "object"){
@@ -399,7 +382,6 @@ function DKWidget_SetAttribute(variable, parameter, value)
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
 {
-	DKDEBUGFUNC(variable, parameter);
 	//DKWARN("DKWidget_GetProperty("+variable+","+parameter+")");
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
@@ -432,8 +414,6 @@ function DKWidget_SetProperty(variable, parameter, value)
 	console.error("Replace DKWidget_SetProperty with document.getElementsById().style.property");
 	//DK_DumpError();
 	
-	
-	DKDEBUGFUNC(variable, parameter, value);
 	//console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
 	if(!variable){ //FIXME: who called you?
 		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
@@ -478,7 +458,6 @@ function DKWidget_SetProperty(variable, parameter, value)
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
 {
-	DKDEBUGFUNC(id, parameter);
 	if(document.getElementById(id).style[parameter]){
 		return true;
 	}
@@ -490,7 +469,6 @@ function DKWidget_HasProperty(id, parameter)
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
-	DKDEBUGFUNC(id, parameter);
 	var element = document.getElementById(id);
 	if(!element){ 
 		DKERROR("DKWidget_RemoveProperty(): element invalid\n");
@@ -505,7 +483,6 @@ function DKWidget_RemoveProperty(id, parameter)
 ///////////////////////////////////////////
 function DKWidget_SetValue(variable, value)
 {
-	DKDEBUGFUNC(variable, value);
 	if(!variable){ return false; }
 	//if(!value){ value = ""; } //FIXME - sould be if(value == emptystring) so 0's can pass through
 	if(typeof variable == "object"){
@@ -538,7 +515,6 @@ function DKWidget_SetValue(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtml(variable)
 {
-	DKDEBUGFUNC(variable);
 	if(typeof variable == "object"){
 		return variable.innerHTML;
 	}
@@ -555,7 +531,6 @@ function DKWidget_GetInnerHtml(variable)
 ///////////////////////////////////////////////
 function DKWidget_SetInnerHtml(variable, value)
 {
-	DKDEBUGFUNC(variable, value);
 	if(typeof variable == "object"){
 		variable.innerHTML = value;
 		return true;
@@ -577,7 +552,6 @@ function DKWidget_SetInnerHtml(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
-	DKDEBUGFUNC(id);
 	if(!id){ DKWARN("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
@@ -591,7 +565,6 @@ function DKWidget_GetInnerHtmlString(id)
 ////////////////////////////////////////////////
 function DKWidget_SetInnerHtmlString(id, string)
 {
-	DKDEBUGFUNC(id, string);
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
@@ -605,7 +578,6 @@ function DKWidget_SetInnerHtmlString(id, string)
 ////////////////////////////////////////
 function DKWidget_GetOuterHtml(variable)
 {
-	DKDEBUGFUNC(variable);
 	if(typeof variable == "object"){
 		return variable.outerHTML;
 	}
@@ -620,7 +592,6 @@ function DKWidget_GetOuterHtml(variable)
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {
-	DKDEBUGFUNC(parent, tag, id);
 	if(!(parent instanceof HTMLElement)){
 		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
 		return;
@@ -641,7 +612,6 @@ function DKWidget_CreateElement(parent, tag, id)
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
-	DKDEBUGFUNC(parent, tag, id);
 	id = DKWidget_GetAvailableId(id);
 	var par = document.getElementById(parent);
 	var ele = document.createElement(tag);
@@ -660,7 +630,6 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 //////////////////////////////////////////////
 function DKWidget_AppendChild(parent, element)
 {
-	DKDEBUGFUNC(parent, element);
 	if(!parent){ console.log("DKWidget_AppendChild(): parent invalid"); return false; }
 	if(!element){ console.log("DKWidget_AppendChild(): element invalid"); return false; }
 	
@@ -685,7 +654,6 @@ function DKWidget_AppendChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {
-	DKDEBUGFUNC(parent, element);
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -717,7 +685,6 @@ function DKWidget_PrependChild(parent, element)
 ///////////////////////////////////////////////
 function DKWidget_InsertBefore(parent, element)
 {
-	DKDEBUGFUNC(parent, element);
 	var par;
 	if(typeof parent == "string"){
 		par = document.getElementById(parent);
@@ -745,7 +712,6 @@ function DKWidget_InsertBefore(parent, element)
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
-	DKDEBUGFUNC(id);
 	if(!document.getElementById(id)){ return ""; }
 	return document.getElementById(id).parentNode.id;
 }
@@ -753,7 +719,6 @@ function DKWidget_GetParent(id)
 ///////////////////////////////////
 function DKWidget_GetFirstChild(id)
 {
-	DKDEBUGFUNC(id);
 	var fc = document.getElementById(id).firstChild;
 	if(fc){
 		//console.log("GetFirstChild("+id+"): -> "+fc.id+"\n");
@@ -765,14 +730,12 @@ function DKWidget_GetFirstChild(id)
 /////////////////////////////////////
 function DKWidget_GetMouseWindowX(id)
 {
-	DKDEBUGFUNC(id);
 	return mouseX;
 }
 
 /////////////////////////////////////
 function DKWidget_GetMouseWindowY(id)
 {
-	DKDEBUGFUNC(id);
 	return mouseY;
 }
 */
@@ -780,7 +743,6 @@ function DKWidget_GetMouseWindowY(id)
 //////////////////////////////////////
 function DKWidget_GetMouseElementX(id)
 {
-	DKDEBUGFUNC(id);
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(id);
@@ -796,7 +758,6 @@ function DKWidget_GetMouseElementX(id)
 ///////////////////////////////////////////
 function DKWidget_GetMouseElementY(id)
 {
-	DKDEBUGFUNC(id);
 	if(!id){ id = "body"; }
 	/*
 	var ele = document.getElementById(element);
@@ -813,21 +774,18 @@ function DKWidget_GetMouseElementY(id)
 ////////////////////////////////////
 function DKWidget_GetClientWidth(id)
 {
-	DKDEBUGFUNC(id);
 	return document.getElementById(id).clientWidth;
 }
 
 ///////////////////////////////////////
 function DKWidget_GetClientHeight(id)
 {
-	DKDEBUGFUNC(id);
 	return document.getElementById(id).clientHeight;
 }
 
 //////////////////////////////////
 function DKWidget_GetOffsetTop(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) != null){ 
@@ -840,7 +798,6 @@ function DKWidget_GetOffsetTop(id)
 //////////////////////////////////
 function DKWidget_GetOffsetLeft(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) != null){ 
@@ -852,7 +809,6 @@ function DKWidget_GetOffsetLeft(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetRight(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
 	var right = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
@@ -865,7 +821,6 @@ function DKWidget_GetOffsetRight(id)
 /////////////////////////////////////
 function DKWidget_GetOffsetBottom(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
 	var bottom = ele.offsetRight;
 	while((ele=ele.offsetParent) != null){ 
@@ -878,28 +833,24 @@ function DKWidget_GetOffsetBottom(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetWidth(id)
 {
-	DKDEBUGFUNC(id);
 	return document.getElementById(id).offsetWidth;
 }
 
 /////////////////////////////////////
 function DKWidget_GetOffsetHeight(id)
 {
-	DKDEBUGFUNC(id);
 	return document.getElementById(id).offsetHeight;
 }
 
 ////////////////////////////////////
 function DKWidget_GetComputedTop(id)
 {
-	DKDEBUGFUNC(id);
 	return window.getComputedStyle(document.getElementById(id)).top;
 }
 
 ///////////////////////////////////
 function DKWidget_ElementExists(id)
 {
-	DKDEBUGFUNC(id);
 	if(document.getElementById(id)){
 		return true;
 	}
@@ -910,7 +861,6 @@ function DKWidget_ElementExists(id)
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
 	if(!ele){
 		DKWARN("RemoveElement("+id+"): element does not exist\n");
@@ -927,7 +877,6 @@ function DKWidget_RemoveElement(id)
 /////////////////////////////////////
 function DKWidget_ElementToString(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	return element.outerHTML;
@@ -936,7 +885,6 @@ function DKWidget_ElementToString(id)
 /////////////////////////////
 function DKWidget_Visible(id)
 {
-	DKDEBUGFUNC(id);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display == "none"){ return false; }
@@ -947,7 +895,6 @@ function DKWidget_Visible(id)
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
-	DKDEBUGFUNC(id, attrib);
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	element.removeAttribute(attrib);
@@ -956,7 +903,6 @@ function DKWidget_RemoveAttribute(id, attrib)
 ///////////////////////////////////
 function DKWidget_GetHoverElement()
 { 
-	DKDEBUGFUNC();
 	if(!document.elementFromPoint(window.mouseX, window.mouseY)){ 
 		console.log("DKWidget_GetHoverElement(): document.elementFromPoint("+window.mouseX+","+window.mouseY+") invalid");
 		return false;
@@ -967,7 +913,6 @@ function DKWidget_GetHoverElement()
 ////////////////////////////
 function DKWidget_GetScale()
 {
-	DKDEBUGFUNC();
 	//var scale = getComputedStyle(document.documentElement).fontSize;
 	var scale = document.documentElement.style.fontSize;
 	console.log(scale);
@@ -979,14 +924,12 @@ function DKWidget_GetScale()
 /////////////////////////////////
 function DKWidget_SetScale(scale)
 {
-	DKDEBUGFUNC(scale);
 	document.documentElement.style.fontSize = scale+"px";
 }
 
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)
 {
-	DKDEBUGFUNC(url, target);
 	//window.location = url;
 	window.open(url, target);
 }
@@ -994,7 +937,6 @@ function DKWidget_OpenLink(url, target)
 ///////////////////////////////////
 function DKWidget_SetFile(id, file)
 { 
-	DKDEBUGFUNC(id, file);
 	DKWARN("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n"); 
 	return;
 	
@@ -1019,7 +961,6 @@ function DKWidget_SetFile(id, file)
 //////////////////////////////////
 function DKWidget_GetLastChild(id)
 {
-	DKDEBUGFUNC(id);
 	return document.getElementById("body").lastChild.id;
 }
 */
@@ -1027,7 +968,6 @@ function DKWidget_GetLastChild(id)
 //////////////////////////////
 function DKWidget_SetFocus(id)
 {
-	DKDEBUGFUNC(id);
 	//console.log("DKWidget_SetFocus("+id+")");
 	var element = document.getElementById(id);
 	//console.log("DKWidget_SetFocus("+id+"): element = "+element);
@@ -1038,7 +978,6 @@ function DKWidget_SetFocus(id)
 /////////////////////////
 function DKWidget_Cut(id)
 {
-	DKDEBUGFUNC(id);
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1054,7 +993,6 @@ function DKWidget_Cut(id)
 //////////////////////////
 function DKWidget_Copy(id)
 {
-	DKDEBUGFUNC(id);
 	var text = "";
     if(window.getSelection){
         text = window.getSelection().toString();
@@ -1070,7 +1008,6 @@ function DKWidget_Copy(id)
 ///////////////////////////
 function DKWidget_Paste(id)
 {
-	DKDEBUGFUNC(id);
 	//TODO
 	removeSelection(id);
 	var ele = document.getElementById(id);
@@ -1082,7 +1019,6 @@ function DKWidget_Paste(id)
 //////////////////////////////
 function copyToClipboard(text) 
 {
-	DKDEBUGFUNC(text);
     if(window.clipboardData && window.clipboardData.setData){
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return clipboardData.setData("Text", text); 
@@ -1108,7 +1044,6 @@ function copyToClipboard(text)
 ////////////////////////////
 function removeSelection(id)
 {
-	DKDEBUGFUNC(id);
 	var ele = document.getElementById(id);
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);

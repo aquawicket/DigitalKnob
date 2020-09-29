@@ -3,7 +3,6 @@ var websocket;
 //////////////////////////////////
 function DKWebSocketsClient_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKWebSockets/DKWebSocketsClient.html", function(){
 		DKAddEvent("DKWebSocketsClient_CreateClient", "click", DKWebSocketsClient_OnEvent);
 		DKAddEvent("DKWebSocketsClient_CloseClient", "click", DKWebSocketsClient_OnEvent);
@@ -15,7 +14,6 @@ function DKWebSocketsClient_Init()
 /////////////////////////////////
 function DKWebSocketsClient_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKWebSocketsClient_OnEvent);
 	DKClose("DKWebSockets/DKWebSocketsClient.html");
 }
@@ -23,7 +21,6 @@ function DKWebSocketsClient_End()
 //////////////////////////////////////////
 function DKWebSocketsClient_OnEvent(event)
 {
-	DKDEBUGFUNC(event);	
 	if(event.currentTarget.id == "DKWebSocketsClient_CreateClient"){
 		DKWebSocketsClient_CreateClient();
 	}
@@ -41,7 +38,6 @@ function DKWebSocketsClient_OnEvent(event)
 //////////////////////////////////////////
 function DKWebSocketsClient_CreateClient()
 {
-	DKDEBUGFUNC();
 	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
 		DKWARN("DKWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
@@ -75,8 +71,7 @@ function DKWebSocketsClient_CreateClient()
 /////////////////////////////////////////
 function DKWebSocketsClient_CloseClient()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "RML"){
 		DKWebSockets_CloseClient();
 		return;
 	}
@@ -88,7 +83,6 @@ function DKWebSocketsClient_CloseClient()
 /////////////////////////////////////////////
 function DKWebSocketsClient_MessageToServer()
 {
-	DKDEBUGFUNC();	
 	var message = DKWidget_GetValue("DKWebSocketsClient_send");
 	if(DK_GetBrowser() == "Rocket"){
 		DKWebSockets_MessageToServer(message);
@@ -102,6 +96,5 @@ function DKWebSocketsClient_MessageToServer()
 ////////////////////////////////////////////////////////
 function DKWebSocketsClient_OnMessageFromServer(message)
 {
-	DKDEBUGFUNC(message);
 	DKWidget_SetAttribute("DKWebSocketsClient_receive","value", message);
 }

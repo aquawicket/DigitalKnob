@@ -8,14 +8,12 @@ var registered = 0;
 ///////////////////////
 function DKVideo_Init()
 {
-	DKDEBUGFUNC();
 	videojs.options.flash.swf = "video-js/video-js.swf";
 }
 
 ////////////////////////////////
 function DKVideo_Queue(id, src)
 {
-	DKDEBUGFUNC(is, src);
 	var myPlayer;
 	videojs(id).ready(function(){ myPlayer = this;});
 	
@@ -41,7 +39,6 @@ function DKVideo_Queue(id, src)
 ////////////////////////////////
 function DKVideo_Change(id, src)
 {
-	DKDEBUGFUNC(is, src);
 	var myPlayer;
 	videojs(id).ready(function(){ myPlayer = this;});
 	
@@ -68,7 +65,6 @@ function DKVideo_Change(id, src)
 ///////////////////////////////////////////////
 function DKVideo_RegisterEndVideo(id, Function)
 {	
-	DKDEBUGFUNC(is, Function);
 	if(registered == 0){
 		var myPlayer;
 		videojs(id).ready(function(){ myPlayer = this;});

@@ -1,19 +1,18 @@
 ////////////////////////
 function DKWindow_Init()
 {
-	DKDEBUGFUNC();
+
 }
 
 ///////////////////////
 function DKWindow_End()
 {
-	DKDEBUGFUNC();
+
 }
 
 //////////////////////////////
 function DKWindow_Fullscreen()
 {
-	DKDEBUGFUNC();
 	if(document.documentElement.requestFullScreen){  
 		document.documentElement.requestFullScreen();  
 	} 
@@ -32,7 +31,6 @@ function DKWindow_Fullscreen()
 /////////////////////////////
 function DKWindow_GetHeight()
 {
-	DKDEBUGFUNC();
 	var w = window,
     d = document,
     e = d.documentElement,
@@ -46,28 +44,24 @@ function DKWindow_GetHeight()
 /////////////////////////////
 function DKWindow_GetMouseX()
 {
-	DKDEBUGFUNC();
 	return mouseX;
 }
 
 /////////////////////////////
 function DKWindow_GetMouseY()
 {
-	DKDEBUGFUNC();
 	return mouseY;
 }
 
 /////////////////////////////////
 function DKWindow_GetPixelRatio()
 {
-	DKDEBUGFUNC();
 	return window.devicePixelRatio || 1;
 }
 
 ////////////////////////////
 function DKWindow_GetWidth()
 {
-	DKDEBUGFUNC();
 	var w = window,
     d = document,
     e = d.documentElement,
@@ -81,7 +75,6 @@ function DKWindow_GetWidth()
 ////////////////////////
 function DKWindow_GetX()
 {
-	DKDEBUGFUNC();
 	//console.log("DKWindow_GetX() = "+window.screenX+"\n");
 	return window.screenX;
 }
@@ -89,7 +82,6 @@ function DKWindow_GetX()
 ////////////////////////
 function DKWindow_GetY()
 {
-	DKDEBUGFUNC();
 	//console.log("DKWindow_GetY() = "+window.screenY+"\n");
 	return window.screenY;
 }
@@ -97,7 +89,6 @@ function DKWindow_GetY()
 ////////////////////////////////
 function DKWindow_IsFullscreen()
 {
-	DKDEBUGFUNC();
 	if((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)){
 		return false;
 	}
@@ -108,7 +99,6 @@ function DKWindow_IsFullscreen()
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetHeight(h)
 	{
-		DKDEBUGFUNC(h);
 		//FIXME - does not work
 		window.resizeTo(DKWindow_GetWidth(), h);  
 		return false;
@@ -119,7 +109,6 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetWidth(w)
 	{
-		DKDEBUGFUNC(w);
 		//FIXME - does not work
 		window.resizeTo(w, DKWindow_GetHeight());
 		return false;
@@ -130,7 +119,6 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetX(x)
 	{
-		DKDEBUGFUNC(x);
 		//FIXME - does not work
 		window.moveTo(x, DKWindow_GetY());
 		return false;
@@ -141,7 +129,6 @@ if(DK_GetBrowser() != "CEF"){
 if(DK_GetBrowser() != "CEF"){
 	function DKWindow_SetY(y)
 	{
-		DKDEBUGFUNC(y);
 		//FIXME - does not work
 		window.moveTo(DKWindow_GetX(), y);
 		return false;
@@ -151,7 +138,6 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////
 function DKWindow_Windowed()
 {
-	DKDEBUGFUNC();
 	if(document.cancelFullScreen){  
 		document.cancelFullScreen();  
 	} 
