@@ -3,7 +3,6 @@ var DKMessage_callback;
 /////////////////////////
 function DKMessage_Init()
 {	
-	DKDEBUGFUNC();
 	DKCreate("DKMessage/DKMessage.html");
 	byId("DKMessageOk").addEventListener("click", DKMessage_OnEvent);
 	byId("DKMessageCancel").addEventListener("click", DKMessage_OnEvent);
@@ -12,7 +11,6 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	DKDEBUGFUNC();
 	//DKRemoveEvents(DKMessage_OnEvent);
 	byId("DKMessageOk").removeEventListener("click", DKMessage_OnEvent);
 	byId("DKMessageCancel").removeEventListener("click", DKMessage_OnEvent);
@@ -22,7 +20,6 @@ function DKMessage_End()
 /////////////////////////////////
 function DKMessage_OnEvent(event)
 {	
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKMessageOk"){
 		if(DKMessage_callback){
 			if(DKWidget_Visible("DKMessageInput")){
@@ -48,7 +45,6 @@ function DKMessage_OnEvent(event)
 ///////////////////////////////////
 function DKMessage_Message(message)
 {
-	DKDEBUGFUNC(message);
 	//DKWidget_SetInnerHtml("DKMessageText", message);
 	byId("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
@@ -60,7 +56,6 @@ function DKMessage_Message(message)
 /////////////////////////////////////////////
 function DKMessage_Confirm(message, callback)
 {
-	DKDEBUGFUNC(message, callback);
 	//DKWidget_SetInnerHtml("DKMessageText", message);
 	byId("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
@@ -74,7 +69,6 @@ function DKMessage_Confirm(message, callback)
 //////////////////////////////////////////////
 function DKMessage_GetValue(message, callback)
 {
-	DKDEBUGFUNC(message, callback);
 	DKWidget_SetInnerHtml("DKMessageText", message);
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageInput");

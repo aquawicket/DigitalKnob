@@ -1,7 +1,6 @@
 /////////////////////////////
 function DKNotepadFile_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
 	window.addEventListener("mousedown", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").addEventListener("click", DKNotepadFile_OnEvent);
@@ -15,7 +14,6 @@ function DKNotepadFile_Init()
 ////////////////////////////
 function DKNotepadFile_End()
 {
-	DKDEBUGFUNC();
 	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
@@ -29,7 +27,6 @@ function DKNotepadFile_End()
 /////////////////////////////////////
 function DKNotepadFile_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	//DKWARN("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id == "DKNotepadFile_New"){
 		DKNotepadFile_New();
@@ -63,7 +60,6 @@ function DKNotepadFile_OnEvent(event)
 /////////////////////////////
 function DKNotepadFile_New()
 {
-	DKDEBUGFUNC();
 	document.getElementById("DKNotepad_Text").value = "";
 	currentFile = "";
 }
@@ -71,7 +67,6 @@ function DKNotepadFile_New()
 /////////////////////////////
 function DKNotepadFile_Open()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKOpenFile.js", function(){
 		DKFrame_Widget("DKFile/DKOpenFile.html");
 		DKOpenFile_UpdatePath("/");
@@ -82,7 +77,6 @@ function DKNotepadFile_Open()
 /////////////////////////////
 function DKNotepadFile_Save()
 {
-	DKDEBUGFUNC();
 	if(!currentFile){
 		DKNotepadFile_SaveAs();
 		return;
@@ -100,7 +94,6 @@ function DKNotepadFile_Save()
 ///////////////////////////////
 function DKNotepadFile_SaveAs()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSaveFile.js", function(){
 		DKFrame_Widget("DKFile/DKSaveFile.html");
 		
@@ -120,13 +113,11 @@ function DKNotepadFile_SaveAs()
 //////////////////////////////
 function DKNotepadFile_Print()
 {
-	DKDEBUGFUNC();
 	DKCef_Print(0);
 }
 
 /////////////////////////////////////
 function DKNotepadFile_CheckForSave()
 {
-	DKDEBUGFUNC();
 	console.log("TODO\n");
 }

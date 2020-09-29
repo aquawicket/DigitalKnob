@@ -4,7 +4,6 @@ var FACEBOOK_NAME;
 ///////////////////////
 function DKLogin_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKLogin/DKLogin.css");
 	DKCreate("DKLogin/DKLogin.html");
 	DKAddEvent("DKLoginFacebook", "click", DKLogin_OnEvent);
@@ -13,7 +12,6 @@ function DKLogin_Init()
 //////////////////////
 function DKLogin_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKLogin_OnEvent);
 	DKClose("DKLogin/DKLogin.html");
 	DKClose("DKLogin/DKLogin.css");
@@ -22,7 +20,6 @@ function DKLogin_End()
 ///////////////////////////////
 function DKLogin_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKLoginFacebook"){
 		console.log("DKLogin_OnEvent(): DKLoginFacebook\n");
 		DKCreate("DKLogin/DKFacebook.js", function(){
@@ -34,7 +31,6 @@ function DKLogin_OnEvent(event)
 /////////////////////////////////
 function DKLogin_OnConnect(value)
 {
-	DKDEBUGFUNC(value);
 	if(value.status === 'connected'){
 		DKFacebook_Query('/me', "name", DKLogin_FBresponse);
 		DKFacebook_Query('/me', "id", DKLogin_FBresponse);
@@ -45,7 +41,6 @@ function DKLogin_OnConnect(value)
 ////////////////////////////////////////////
 function DKLogin_FBresponse(param, response)
 {
-	DKDEBUGFUNC(param, response);	
 	if(param == "name"){
 		FACEBOOK_NAME = response;
 		

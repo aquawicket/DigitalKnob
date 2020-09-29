@@ -3,7 +3,6 @@
 ////////////////////////////////////////////////
 function DKMySql_Connect(host, name, pass, port)
 {
-	DKDEBUGFUNC(host, name, pass, port);
 	var send = online_assets+"/DKMySql/DKMySql.php?host=";
 	send += host;
 	if(port){
@@ -28,7 +27,6 @@ function DKMySql_Connect(host, name, pass, port)
 ///////////////////////////////
 function DKMySql_Database(name)
 {
-	DKDEBUGFUNC(name);
 	var send = online_assets+"/DKMySql/DKMySql.php?database=";
 	send += name;
 	return ajaxGetUrl(send);
@@ -37,7 +35,6 @@ function DKMySql_Database(name)
 /////////////////////////////
 function DKMySql_Query(query)
 {
-	DKDEBUGFUNC(query);
 	var send = online_assets+"/DKMySql/DKMySql.php?Query=";
 	send += query;
 	return ajaxGetUrl(send);
@@ -46,7 +43,6 @@ function DKMySql_Query(query)
 /////////////////////////
 function DKMySql_Prep(id)
 {
-	DKDEBUGFUNC(id);
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -68,7 +64,6 @@ function DKMySql_Prep(id)
 ////////////////////////////////////////
 function DKMySql_PrepField(table, field)
 {
-	DKDEBUGFUNC(table, field);
 	//TODO: put this somewhere else, gui elements will work with the current active database
 	// CHECK DATABASE //
 	/*
@@ -111,7 +106,6 @@ function DKMySql_PrepField(table, field)
 //////////////////////////////////////
 function DKMySql_GetFirstRecordNum(id)
 {
-	DKDEBUGFUNC(id);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -133,7 +127,6 @@ function DKMySql_GetFirstRecordNum(id)
 /////////////////////////////////////
 function DKMySql_GetLastRecordNum(id)
 {
-	DKDEBUGFUNC(id);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -155,7 +148,6 @@ function DKMySql_GetLastRecordNum(id)
 ////////////////////////////////////////////////
 function DKMySql_GetPrevRecordNum(id, recordNum)
 {
-	DKDEBUGFUNC(id, recordNum);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -179,7 +171,6 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 ////////////////////////////////////////////////
 function DKMySql_GetNextRecordNum(id, recordNum)
 {
-	DKDEBUGFUNC(id, recordNum);
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -203,7 +194,6 @@ function DKMySql_GetNextRecordNum(id, recordNum)
 //////////////////////////////////////////
 function DKMySql_LoadRecord(id, recordNum)
 {
-	DKDEBUGFUNC(id, recordNum);
 	if(!recordNum){ return; }
 	var table;
 	var fields = [];
@@ -245,7 +235,6 @@ function DKMySql_LoadRecord(id, recordNum)
 //////////////////////////////////////////
 function DKMySql_SaveRecord(id, recordNum)
 {
-	DKDEBUGFUNC(id, recordNum);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -274,7 +263,6 @@ function DKMySql_SaveRecord(id, recordNum)
 ////////////////////////////////////////////
 function DKMySql_DeleteRecord(id, recordNum)
 {
-	DKDEBUGFUNC(id, recordNum);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
@@ -292,7 +280,6 @@ function DKMySql_DeleteRecord(id, recordNum)
 ///////////////////////////////////
 function DKMySql_Search(id, string)
 {
-	DKDEBUGFUNC(id, string);
 	//save any unmatching record fields
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");

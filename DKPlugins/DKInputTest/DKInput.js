@@ -5,7 +5,6 @@ else{ rgba = "0.5"; }
 ///////////////////////
 function DKInput_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKInputTest/DKInput.html", function(){
 	window.addEventListener("keypress", DKInput_OnEvent);
 	window.addEventListener("keydown", DKInput_OnEvent);
@@ -32,7 +31,6 @@ function DKInput_Init()
 //////////////////////
 function DKInput_End()
 {
-	DKDEBUGFUNC();
 	window.removeEventListener("keypress", DKInput_OnEvent);
 	window.removeEventListener("keydown", DKInput_OnEvent);
 	window.removeEventListener("keyup", DKInput_OnEvent);
@@ -58,7 +56,6 @@ function DKInput_End()
 ///////////////////////////////
 function DKInput_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	byId("lastevent").innerHTML = "Last Event: "+event.currentTarget.id+","+event.type;
 	byId("event.char").innerHTML = "event.char: "+event.char;
 	byId("event.charCode").innerHTML = "event.charCode: "+event.charCode;
@@ -109,35 +106,30 @@ function DKInput_OnEvent(event)
 /////////////////////////////////////////
 function DKInput_ProcessMouseDown(button)
 {
-	DKDEBUGFUNC(button);
 	DKWidget_Show(button+"button");	
 }
 
 ///////////////////////////////////////
 function DKInput_ProcessMouseUp(button)
 {
-	DKDEBUGFUNC(button);
 	DKWidget_Hide(button+"button");	
 }
 		
 ////////////////////////////////////
 function DKInput_ProcessKeyDown(key)
 {
-	DKDEBUGFUNC(key);
 	DKInput_Highlight(key);
 }
 
 //////////////////////////////////
 function DKInput_ProcessKeyUp(key)
 {
-	DKDEBUGFUNC(key);
 	DKInput_UnHighlight(key);
 }
 
 ///////////////////////////////
 function DKInput_Highlight(div)
 {
-	DKDEBUGFUNC(div);
 	if(!div){ return; }
 	if(!byId(div)){ return; }
 	byId(div).style.backgroundColor = "rgba(0,255,0,"+rgba+")";
@@ -151,7 +143,6 @@ function DKInput_Highlight(div)
 /////////////////////////////////
 function DKInput_UnHighlight(div)
 {
-	DKDEBUGFUNC(div);
 	if(!div){ return; }
 	if(!byId(div)){ return; }
 	byId(div).style.backgroundColor = "rgba(0,255,0,0)";

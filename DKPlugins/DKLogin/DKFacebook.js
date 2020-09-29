@@ -3,13 +3,12 @@
 //////////////////////////
 function DKFacebook_Init()
 {
-	DKDEBUGFUNC();
+
 }
 
 //////////////////////////////////
 function DKFacebookLogin(Function)
 {
-	DKDEBUGFUNC(Function);
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId      : '1514766155465090',
@@ -52,7 +51,6 @@ function DKFacebookLogin(Function)
 ///////////////////////////////////////
 function statusChangeCallback(response)
 {
-	DKDEBUGFUNC(response);
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -87,7 +85,6 @@ function statusChangeCallback(response)
 //////////////////////////
 function checkLoginState()
 {
-	DKDEBUGFUNC();
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
     });
@@ -98,7 +95,6 @@ function checkLoginState()
 ////////////////////
 function connected()
 {
-	DKDEBUGFUNC();
     console.log("Facebook: Welcome!  Fetching your information....\n");
     FB.api('/me', function(response) {
 		console.log("Successful login for: " + response.name+"\n");
@@ -108,7 +104,6 @@ function connected()
 /////////////////////////////////////////////////////
 function DKFacebook_Query(query, parameter, Function)
 {
-	DKDEBUGFUNC(query, parameter, Function);
 	FB.api(query, function(response){
 		if (response.hasOwnProperty("error")) {
 			console.log("Error: " + response.error.message+"\n");
