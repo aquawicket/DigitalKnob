@@ -4,16 +4,16 @@ function DKAutomate_Init()
 	DKCreate("DKAssets");
 	DKCreate("DKTriggers/DKAutomate.html");
 	DKCreate("DKTriggers/DKAutomate2.js", function(){
-		DKAddEvent("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
-		//DKAddEvent("window", "midi", DKAutomate_OnEvent);
-		//DKAddEvent("window", "gui", DKAutomate_OnEvent); //all events
-		//DKAddEvent("DKA-Title", "click", DKAutomate_OnEvent);
-		DKAddEvent("DKA-NewButton", "click", DKAutomate_OnEvent);
-		DKAddEvent("DKA-DeleteButton", "click", DKAutomate_OnEvent);
-		DKAddEvent("CancelButton", "click", DKAutomate_OnEvent);
-		DKAddEvent("SaveButton", "click", DKAutomate_OnEvent);
-		DKAddEvent("MidiDevices", "click", DKAutomate_OnEvent);
-		DKAddEvent("DKTriggers/DKAutomate.html", "UpdateValues", DKAutomate_OnEvent);
+		byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
+		//window.addEventListener("midi", DKAutomate_OnEvent);
+		//window.addEventListener("gui", DKAutomate_OnEvent); //all events
+		//byId("DKA-Title").addEventListener("click", DKAutomate_OnEvent);
+		byId("DKA-NewButton").addEventListener("click", DKAutomate_OnEvent);
+		byId("DKA-DeleteButton").addEventListener("click", DKAutomate_OnEvent);
+		byId("CancelButton").addEventListener("click", DKAutomate_OnEvent);
+		byId("SaveButton").addEventListener("click", DKAutomate_OnEvent);
+		byId("MidiDevices").addEventListener("click", DKAutomate_OnEvent);
+		byId("DKTriggers/DKAutomate.html").addEventListener("UpdateValues", DKAutomate_OnEvent);
 
 		DKCreate("DKTriggers/DKTriggers.js", function(){
 			DKAutomate_UpdateValues();
@@ -24,7 +24,17 @@ function DKAutomate_Init()
 /////////////////////////
 function DKAutomate_End()
 {
-	DKRemoveEvents(DKAutomate_OnEvent);
+	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
+	//window.removeEventListener("midi", DKAutomate_OnEvent);
+	//window.removeEventListener("gui", DKAutomate_OnEvent); //all events
+	//byId("DKA-Title").removeEventListener("click", DKAutomate_OnEvent);
+	byId("DKA-NewButton").removeEventListener("click", DKAutomate_OnEvent);
+	byId("DKA-DeleteButton").removeEventListener("click", DKAutomate_OnEvent);
+	byId("CancelButton").removeEventListener("click", DKAutomate_OnEvent);
+	byId("SaveButton").removeEventListener("click", DKAutomate_OnEvent);
+	byId("MidiDevices").removeEventListener("click", DKAutomate_OnEvent);
+	byId("DKTriggers/DKAutomate.html").removeEventListener("UpdateValues", DKAutomate_OnEvent);
+
 	DKClose("DKTriggers/DKTriggers.js");
 	DKClose("DKTriggers/DKAutomate2.js");
 	DKClose("DKTriggers/DKAutomate.html");
@@ -109,7 +119,7 @@ function DKAutomate_UpdateValues()
 		var option = DKWidget_CreateElement("DKA-TriggerList", "option", "Trigger");
 		DKWidget_SetAttribute(option, "value", triggers[i]);
 		DKWidget_SetInnerHtml(option, triggers[i]);
-		DKAddEvent(option, "click", DKAutomate_OnEvent);
+		byId(option, "click", DKAutomate_OnEvent);
 	}
 }
 

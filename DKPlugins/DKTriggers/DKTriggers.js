@@ -39,18 +39,23 @@ function DKTriggers_Init()
 
 	//assets = DKAssets_LocalAssets();
 	DKTrigger_LoadTriggers("USER/triggers.txt");
-	DKAddEvent("window", "gui", DKTrigger_OnEvent); //C++
-	DKAddEvent("window", "midi", DKTrigger_OnEvent); //C++
-	DKAddEvent("window", "keydown", DKTrigger_OnEvent);
-	DKAddEvent("window", "keyup", DKTrigger_OnEvent);
-	DKAddEvent("window", "resize", DKTrigger_OnEvent);
-	DKAddEvent("window", "ToggleTriggers", DKTrigger_OnEvent); //JS
+	window.addEventListener("gui", DKTrigger_OnEvent); //C++
+	window.addEventListener("midi", DKTrigger_OnEvent); //C++
+	window.addEventListener("keydown", DKTrigger_OnEvent);
+	window.addEventListener("keyup", DKTrigger_OnEvent);
+	window.addEventListener("resize", DKTrigger_OnEvent);
+	window.addEventListener("ToggleTriggers", DKTrigger_OnEvent); //JS
 }
 
 /////////////////////////
 function DKTriggers_End()
 {
-	DKRemoveEvents(DKTrigger_OnEvent);
+	window.removeEventListener("gui", DKTrigger_OnEvent); //C++
+	window.removeEventListener("midi", DKTrigger_OnEvent); //C++
+	window.removeEventListener("keydown", DKTrigger_OnEvent);
+	window.removeEventListener("keyup", DKTrigger_OnEvent);
+	window.removeEventListener("resize", DKTrigger_OnEvent);
+	window.removeEventListener("ToggleTriggers", DKTrigger_OnEvent); //JS
 }
 
 /////////////////////////////////
