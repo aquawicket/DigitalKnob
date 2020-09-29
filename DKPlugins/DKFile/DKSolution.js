@@ -1,7 +1,6 @@
 //////////////////////////
 function DKSolution_Init()
 {	
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSolution.css");
 	DKCreate("DKFile/DKSolution.html");
 	DKCreate("DKFile/DKFileAssociation.js", function(){});

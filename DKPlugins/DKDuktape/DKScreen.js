@@ -2,9 +2,7 @@
 
 //////////////////////////////
 var Screen = function(pointer)
-{
-	//DKDEBUGFUNC();
-	
+{	
 	Object.defineProperty(this, "availTop", { 
 		configurable: true,
 		get: function(){ return DKScreen_availTop(this.pointer); } 

@@ -1,7 +1,6 @@
 ////////////////////////
 function DKEditor_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKEditor/DKEditor.css");
 	DKCreate("DKEditor/DKEditor.html");
 	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
@@ -23,7 +22,6 @@ function DKEditor_Init()
 ///////////////////////
 function DKEditor_End()
 {
-	DKDEBUGFUNC();
 	DKClose("DKEditor/DKEditor.html");
 	DKClose("DKEditor/DKEditor.css");
 }
@@ -31,7 +29,6 @@ function DKEditor_End()
 ////////////////////////////////
 function DKEditor_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	DKDEBUG("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "DKEditor_edit"){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){

@@ -1,7 +1,6 @@
 /////////////////////////////
 function DKEditor_Menu_Init()
 {
-	DKDEBUGFUNC();	
 	DKCreate("DKEditor/DKEditor_Menu.html");
 	DKAddEvent("window", "mousedown", DKEditor_Menu_OnEvent);
 	DKAddEvent("DKEditor_Menu_Refresh", "click", DKEditor_Menu_OnEvent);
@@ -37,7 +36,6 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	DKDEBUGFUNC();	
 	DKRemoveEvents(DKEditor_Menu_OnEvent);
 	DKClose("DKEditor/DKEditor_Menu.html");
 }
@@ -45,7 +43,6 @@ function DKEditor_Menu_End()
 /////////////////////////////////////
 function DKEditor_Menu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	DKDEBUG("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
 	if(event.currentTarget.id == "DKEditor_Menu_Command_Input"){
 		//TODO

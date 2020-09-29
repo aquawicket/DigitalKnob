@@ -16,13 +16,12 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 //////////////////////
 function DKFile_Init()
 {
-	DKDEBUGFUNC();
+
 }
 
 ///////////////////////////
 function UrlExists(url, fn)
 {
-	DKDEBUGFUNC(url, fn);
 	var request = "";
 	try {
         request = new XMLHttpRequest();
@@ -80,7 +79,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	//////////////////////////////////////
 	var DKFile_Exists = function(path, fn)
 	{
-		DKDEBUGFUNC(path, fn);
 		if(!path){ return false; }
 	
 		dir = DKFile_GetAbsolutePath(path);
@@ -99,7 +97,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 ////////////////////////////////
 function DKFile_VerifyPath(path)
 {
-	DKDEBUGFUNC(path);	
 	//FIXME
 	console.log("DKFile_VerifyPath("+path+"): FIXME");
 	return true;
@@ -126,14 +123,12 @@ function DKFile_VerifyPath(path)
 ////////////////////////////
 function DKFile_PrintFiles()
 {
-	DKDEBUGFUNC();
 	return ajaxGetUrl(online_assets+"/DKFile/DKFile.php?PrintFiles=1");
 }
 
 /////////////////////////////////
 function DKFile_GetFilename(path)
 {
-	DKDEBUGFUNC(path);
 	if(!path){ return; }
 	var n = path.lastIndexOf("/");
 	var out = path.substring(n+1,path.length);
@@ -144,7 +139,6 @@ function DKFile_GetFilename(path)
 ////////////////////////////////////
 function DKFile_SaveFile(path, data)
 {
-	DKDEBUGFUNC(path, data);
 	//var send = phpurl;
 	//if(realpath){
 		//var filename = DKFile_GetFilename(path);
@@ -174,7 +168,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	/////////////////////////////////////////////
 	var DKFile_GetSetting = function(file, param)
 	{
-		DKDEBUGFUNC(file, param);
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
 			return getCookie(param);
@@ -223,7 +216,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	////////////////////////////////////////////////////
 	var DKFile_SetSetting = function(file, param, value)
 	{
-		DKDEBUGFUNC(file, param, value);
 		//file is ignored in browser. We use cookie instead.
 		if(!file){
 			setCookie(param, value, 9999);
@@ -285,7 +277,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	///////////////////////////////////////
 	var DKFile_FileToString = function(url)
 	{
-		DKDEBUGFUNC(url);
 		console.log("DKFile_FileToString("+url+")");
 		if(typeof absolutepath !== "undefined"){
 			url = url.replace(absolutepath, "");
@@ -304,7 +295,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	/////////////////////////////////////////////
 	var DKFile_StringToFile= function(data, path)
 	{
-		DKDEBUGFUNC(data, path);
 		if(typeof absolutepath !== "undefined"){
 		    if(!path.includes(absolutepath)){
 			    path = absolutepath+path;
@@ -326,7 +316,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	////////////////////////////////////////////
 	var DKFile_DirectoryContents = function(url)
 	{
-		DKDEBUGFUNC(url);
 		console.log("DKFile_DirectoryContents("+url+")");
 		if(url.indexOf(":") > -1){
 			console.error("DKFile_DirectoryContents("+url+"): url has :");
@@ -351,7 +340,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	var DKFile_GetAbsolutePath = function(url)
 	{
 		console.log("DKFile_GetAbsolutePath("+url+")");
-		DKDEBUGFUNC(url);
 		if(!url){ url = "/"; }
 		if(url.indexOf("file:///") > -1){ url = pathname; }
 		
@@ -371,7 +359,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 ////////////////////////////////////////////////
 function DKFile_GetRelativePath(apath, datapath)
 {
-	DKDEBUGFUNC(apath, datapath);
 	//var rpath = apath.replace(pathname,"");
 	//var rpath = rpath.replace("/home/content/a/q/u/aquawicket1/html/DigitalKnob.com/DKApp/","");
 	//send = online_assets+"/DKFile/DKFile.php?GetRelativePath="+url;
@@ -384,7 +371,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	//////////////////////////////////////
 	var DKFile_IsDirectory = function(url)
 	{
-		DKDEBUGFUNC(url);
 		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
 		var result = ajaxGetUrl(send);
 		//console.log("DKFile_IsDirectory("+url+") ->"+result);
@@ -396,7 +382,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 /////////////////////////////////
 function DKFile_GetExtention(url)
 {
-	DKDEBUGFUNC(url);
 	var n = url.lastIndexOf(".");
 	var out = url.substring(n+1,url.length);
 	return out;
@@ -406,7 +391,6 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 	/////////////////////////////
 var DKFile_Delete = function(url)
 	{
-		DKDEBUGFUNC(url);
 		console.log("Deleting: "+url);
 		send = online_assets+"/DKFile/DKFile.php?Delete="+url;
 		var result = ajaxGetUrl(send);

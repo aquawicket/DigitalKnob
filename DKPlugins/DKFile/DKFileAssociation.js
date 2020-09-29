@@ -1,26 +1,24 @@
 /////////////////////////////////
 function DKFileAssociation_Init()
 {
-	DKDEBUGFUNC();
+
 }
 
 ////////////////////////////////
 function DKFileAssociation_End()
 {
-	DKDEBUGFUNC();
+
 }
 
 /////////////////////////////////////////
 function DKFileAssociation_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	console.debug("DKFileAssociation_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 }
 
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	DKDEBUGFUNC(file);
 	if(file.indexOf(".") == -1 ){ return false; }
 	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
 	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
@@ -46,7 +44,6 @@ function DKFileAssociation_Open(file)
 /////////////////////////////////////////
 function DKFileAssociation_OpenHtml(path)
 {
-	DKDEBUGFUNC(path);
 	//path = path.replace(absolutepath, "");
 	
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -101,7 +98,6 @@ function DKFileAssociation_OpenHtml(path)
 ///////////////////////////////////////
 function DKFileAssociation_OpenJS(path)
 {
-	DKDEBUGFUNC(path);
 	//path = path.replace(absolutepath, "");
 		
 	var id = path.replace(DKAssets_LocalAssets(),"");
@@ -115,7 +111,6 @@ function DKFileAssociation_OpenJS(path)
 ////////////////////////////////////////
 function DKFileAssociation_OpenCss(path)
 {
-	DKDEBUGFUNC(path);
 	var id = path.replace(DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
@@ -125,7 +120,6 @@ function DKFileAssociation_OpenCss(path)
 /////////////////////////////////////////
 function DKFileAssociation_OpenText(path)
 {
-	DKDEBUGFUNC(path);
 	DKWidget_Toggle("DKNotepad.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
@@ -136,7 +130,6 @@ function DKFileAssociation_OpenText(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenImage(path)
 {
-	DKDEBUGFUNC(path);
 	DKCreate("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
@@ -146,7 +139,6 @@ function DKFileAssociation_OpenImage(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenModel(path)
 {
-	DKDEBUGFUNC(path);
 	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){});
 	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
 }
@@ -154,7 +146,6 @@ function DKFileAssociation_OpenModel(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenAudio(path)
 {
-	DKDEBUGFUNC(path);
 	//var file = DKFile_GetFilename(path);
 	DKCreate("DKAudio", function(){
 		DKAudio_PlaySound(path);
@@ -170,7 +161,6 @@ function DKFileAssociation_OpenAudio(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenVideo(path)
 {
-	DKDEBUGFUNC(path);
 	//FIXME
 	DKVideo_Play(path);
 }

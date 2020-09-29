@@ -10,7 +10,6 @@ var rPath;
 //////////////////////////
 function DKSaveFile_Init()
 {	
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKSaveFile.css");
 	DKCreate("DKFile/DKSaveFile.html");
 	byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_OnEvent);
@@ -30,7 +29,6 @@ function DKSaveFile_Init()
 /////////////////////////
 function DKSaveFile_End()
 {
-	DKDEBUGFUNC();
 	byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_OnEvent);
 	byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_OnEvent);
 	byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_OnEvent);
@@ -43,7 +41,6 @@ function DKSaveFile_End()
 //////////////////////////////////
 function DKSaveFile_OnEvent(event)
 {	
-	DKDEBUGFUNC(event);
 	//console.log("DKSaveFile_OnEvent("+event+")"); 
 	//console.log("DKSaveFile_OnEvent("+event.type+","+event.value+")");
 	if(!event.currentTarget){ return; }
@@ -124,7 +121,6 @@ function DKSaveFile_OnEvent(event)
 //////////////////////////////////////
 function DKSaveFile_GetFIle(callback)
 {
-	DKDEBUGFUNC(callback);
 	DKSaveFile_callback = callback;
 }
 */
@@ -132,7 +128,6 @@ function DKSaveFile_GetFIle(callback)
 //////////////////////////////////////
 function DKSaveFile_OpenFolder(path)
 {
-	DKDEBUGFUNC(path);
 	if(DKSaveFile_UpdatePath(path)){
 		return true;
 	}
@@ -142,7 +137,6 @@ function DKSaveFile_OpenFolder(path)
 ////////////////////////////////////
 function DKSaveFile_OpenFile(path)
 {
-	DKDEBUGFUNC(path);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -160,7 +154,6 @@ function DKSaveFile_OpenFile(path)
 //////////////////////////////////////
 function DKSaveFile_UpdatePath(path)
 {
-	DKDEBUGFUNC(path);
 	//if(!path){ return false; }
 	console.log("DKSaveFile_UpdatePath("+path+")");
 	if(DK_GetOS() == "Android"){

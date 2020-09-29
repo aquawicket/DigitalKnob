@@ -8,7 +8,6 @@ var rPath;
 //////////////////////////
 function DKOpenFile_Init()
 {	
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKOpenFile.css");
 	DKCreate("DKFile/DKOpenFile.html");
 	byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
@@ -29,7 +28,6 @@ function DKOpenFile_Init()
 /////////////////////////
 function DKOpenFile_End()
 {
-	DKDEBUGFUNC();
 	byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
 	byId("DKFile/DKOpenFile.html").removeEventListener("GetFile", DKOpenFile_OnEvent);
 	byId("DKOpenFileCancel").removeEventListener("click", DKOpenFile_OnEvent);
@@ -43,7 +41,6 @@ function DKOpenFile_End()
 //////////////////////////////////
 function DKOpenFile_OnEvent(event)
 {	
-	DKDEBUGFUNC(event);
 	if(!event.currentTarget){ return; }
 	if(event.currentTarget.id.includes("DKOpenFileDrive")){
 		DKOpenFile_OpenFolder(DK_GetValue(event));
@@ -109,7 +106,6 @@ function DKOpenFile_OnEvent(event)
 function DKOpenFile_GetFile(path, callback)
 {
 	//TODO
-	//DKDEBUGFUNC(message, callback);
 	//DKOpenFile_UpdatePath(path);
 	//DKOpenFile_callback = callback;
 }
@@ -117,7 +113,6 @@ function DKOpenFile_GetFile(path, callback)
 ////////////////////////////////////
 function DKOpenFile_OpenFolder(path)
 {
-	DKDEBUGFUNC(path);
 	if(DKOpenFile_UpdatePath(path)){
 		return true;
 	}
@@ -127,7 +122,6 @@ function DKOpenFile_OpenFolder(path)
 //////////////////////////////////
 function DKOpenFile_OpenFile(path)
 {
-	DKDEBUGFUNC(path);
 	if(DK_GetOS() == "Android"){
 		aPath = path;
 	}
@@ -145,7 +139,6 @@ function DKOpenFile_OpenFile(path)
 ////////////////////////////////////
 function DKOpenFile_UpdatePath(path)
 {
-	DKDEBUGFUNC(path);
 	//if(!path){ return false; }
 	//console.log("DKOpenFile_UpdatePath("+path+")");
 	if(DK_GetOS() == "Android"){
