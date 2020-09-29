@@ -25,24 +25,24 @@ function DKFrame_OnEvent(event)
 		var titlebar = byId(id).parentNode;
 		DKFrame_MaximizeButton(titlebar.id);
 	}
-	if(DK_IdLike(event, "DKFrame_reload")){
-		DKFrame_Reload(DK_GetId(event));
+	if(event.currentTarget.id && event.currentTarget.id.includes("DKFrame_reload")){
+		DKFrame_Reload(event.currentTarget.id);
 	}
-	if(DK_IdLike(event, "DKFrame_minimize")){
-		DKFrame_MinimizeButton(DK_GetId(event));
+	if(event.currentTarget.id && event.currentTarget.id.includes("DKFrame_minimize")){
+		DKFrame_MinimizeButton(event.currentTarget.id);
 	}
-	if(DK_IdLike(event, "DKFrame_maximize")){
-		DKFrame_MaximizeButton(DK_GetId(event));
+	if(event.currentTarget.id && event.currentTarget.id.includes("DKFrame_maximize")){
+		DKFrame_MaximizeButton(event.currentTarget.id);
 	}
-	if(DK_IdLike(event, "DKFrame_close")){
-		DKFrame_CloseButton(DK_GetId(event));
+	if(event.currentTarget.id && event.currentTarget.id.includes("DKFrame_close")){
+		DKFrame_CloseButton(event.currentTarget.id);
 	}
 	
 	// FIXME - does not always fire
 	if(event.type == "DKFrame_resize"){
-		var frame = byId(DK_GetId(event));
+		var frame = byId(event.currentTarget.id);
 		if(!frame){ 
-			//DKERROR("DKFrame_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+"): frame invalid\n");
+			//DKERROR("DKFrame_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+"): frame invalid\n");
 			return; 
 		}
 		var child = frame.childNodes[4];

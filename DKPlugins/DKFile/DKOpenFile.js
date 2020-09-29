@@ -49,10 +49,10 @@ function DKOpenFile_OnEvent(event)
 		DKOpenFile_OpenFolder(DK_GetValue(event));
 	}
 	if(event.currentTarget.id.includes("DKOpenFileFolder")){
-		DKOpenFile_OpenFolder(DK_GetValue(event));
+		DKOpenFile_OpenFolder(DKWidget_GetValue(event));
 	}
-	if(event.currentTarget.id.includes("DKOpenFileFile")){
-		DKOpenFile_OpenFile(DK_GetValue(event));
+	if(event.currentTarget.id && event.currentTarget.id.includes("DKOpenFileFile")){
+		DKOpenFile_OpenFile(DKWidget_GetValue(event));
 	}
 
 	if(event.currentTarget.id == "DKOpenFileUp"){
