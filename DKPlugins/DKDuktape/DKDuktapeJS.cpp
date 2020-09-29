@@ -40,22 +40,22 @@ bool DKDuktapeJS::Init()
 	//duk_eval_string(DKDuktape::ctx, "var DK_INFO = 2;");
 	//duk_eval_string(DKDuktape::ctx, "var DK_DEBUG = 3;");
 
-	DKDuktape::AttachFunction("DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
-	DKDuktape::AttachFunction("DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
+	DKDuktape::AttachFunction("DKDuktape_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
+	DKDuktape::AttachFunction("DKDuktape_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
 	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
-	DKDuktape::AttachFunction("DKAvailable", DKDuktapeJS::_DKAvailable);
-	DKDuktape::AttachFunction("DKClose", DKDuktapeJS::_DKClose);
+	DKDuktape::AttachFunction("DKDuktape_DKAvailable", DKDuktapeJS::_DKAvailable);
+	DKDuktape::AttachFunction("DKDuktape_DKClose", DKDuktapeJS::_DKClose);
 	
 	//FIXME: we have three different js function pointing to _DKCreate
-	DKDuktape::AttachFunction("DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
-	DKDuktape::AttachFunction("DKCreate_CPP", DKDuktapeJS::_DKCreate);
+	DKDuktape::AttachFunction("DKDuktape_DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
+	DKDuktape::AttachFunction("DKDuktape_DKCreate_CPP", DKDuktapeJS::_DKCreate);
 	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
 	
-	DKDuktape::AttachFunction("DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
+	DKDuktape::AttachFunction("DKDuktape_DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
 	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
 	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
 	DKDuktape::AttachFunction("DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
-	DKDuktape::AttachFunction("DK_Valid", DKDuktapeJS::_DKValid);
+	DKDuktape::AttachFunction("DKDuktape_DK_Valid", DKDuktapeJS::_DKValid);
 
 	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
 	DKDuktape::AttachFunction("DK_CallLoops", DKDuktapeJS::CallLoops);
@@ -80,7 +80,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_GetFramerate", DKDuktapeJS::GetFramerate);
 	DKDuktape::AttachFunction("DK_GetFrames", DKDuktapeJS::GetFrames);
 	DKDuktape::AttachFunction("DK_GetFunctions", DKDuktapeJS::GetFunctions);
-	DKDuktape::AttachFunction("DK_GetId", DKDuktapeJS::GetId);
+	//DKDuktape::AttachFunction("DK_GetId", DKDuktapeJS::GetId);
 	DKDuktape::AttachFunction("DK_GetJSEngine", DKDuktapeJS::GetJSEngine);
 	DKDuktape::AttachFunction("DK_GetKey", DKDuktapeJS::GetKey);
 	DKDuktape::AttachFunction("DK_GetLocalIP", DKDuktapeJS::GetLocalIP);
@@ -94,7 +94,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DK_GetScreenWidth", DKDuktapeJS::GetScreenWidth);
 	DKDuktape::AttachFunction("DK_GetTicks", DKDuktapeJS::GetTicks);
 	DKDuktape::AttachFunction("DK_GetTime", DKDuktapeJS::GetTime);
-	DKDuktape::AttachFunction("DK_GetType", DKDuktapeJS::GetType);
+	//DKDuktape::AttachFunction("DK_GetType", DKDuktapeJS::GetType);
 	DKDuktape::AttachFunction("DK_GetUsername", DKDuktapeJS::GetUsername);
 	DKDuktape::AttachFunction("DKDuktape_GetValue", DKDuktapeJS::GetValue);
 	DKDuktape::AttachFunction("DK_GetVolume", DKDuktapeJS::GetVolume);

@@ -1,6 +1,6 @@
 //console.log("test duktape console");
-DKCreate_CPP("DKWindow");
-DKCreate_CPP("DKRml");
+DKDuktape_DKCreate_CPP("DKWindow");
+DKDuktape_DKCreate_CPP("DKRml");
 
 location.href = DKAssets_LocalAssets()+"index.html";
 //location.href = DKAssets_LocalAssets()+"DKWebTest/index.html";

@@ -5,14 +5,9 @@ function DKSolution_Init()
 	DKCreate("DKFile/DKSolution.css");
 	DKCreate("DKFile/DKSolution.html");
 	DKCreate("DKFile/DKFileAssociation.js", function(){});
-	
-	//DKAddEvent("DKSolutionUp", "click", DKSolution_OnEvent);
 	byId("DKSolutionUp").addEventListener("click", DKSolution_OnEvent);
-	//DKAddEvent("DKSolutionMenu", "click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").addEventListener("click", DKSolution_OnEvent);
-	//DKAddEvent("DKSolutionMenu", "contextmenu", DKSolution_OnEvent);
 	byId("DKSolutionMenu").addEventListener("contextmenu", DKSolution_OnEvent);
-	//DKAddEvent("DKSolutionPath", "keypress", DKSolution_OnEvent);
 	byId("DKSolutionPath").addEventListener("keypress", DKSolution_OnEvent);
 	
 	//DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
@@ -22,7 +17,6 @@ function DKSolution_Init()
 function DKSolution_End()
 {
 	DKDEBUGFUNC();
-	//DKRemoveEvents(DKSolution_OnEvent);
 	byId("DKSolutionUp").removeEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").removeEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").removeEventListener("contextmenu", DKSolution_OnEvent);
@@ -35,24 +29,24 @@ function DKSolution_End()
 function DKSolution_OnEvent(event)
 {	
 	DKDEBUGFUNC(event);
-	DKDEBUG("DKSolution_OnEvent("+event.currentTarget.is+","+event.type+","+event.value+")");
-	DKSolution_Select(DK_GetId(event));
+	DKDEBUG("DKSolution_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	DKSolution_Select(event.currentTarget.id);
 
 	if(event.currentTarget.id == "click"){
 		DK_StopPropagation(event);
 	}
 	
 	if(event.type == "contextmenu"){
-		//DKINFO("DKSolution_OnEvent() contextmenu\n");
+		//console.log("DKSolution_OnEvent() contextmenu\n");
 		//PreventDefault(event);
 		
 		var id = DK_GetId(event);
-		//DKINFO("id = "+id+"\n");
+		//console.log("id = "+id+"\n");
 		DK_StopPropagation(event);
 		DKCreate("DKFile/DKSolutionMenu.js", function(){
 			DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
 			var file = DKWidget_GetValue(id);
-			//DKINFO("file = "+file+"\n");
+			//console.log("file = "+file+"\n");
 			if(!file){
 				file = DKWidget_GetValue("DKSolutionPath")+"/";
 			}
@@ -64,15 +58,15 @@ function DKSolution_OnEvent(event)
 		
 	if(event.currentTarget.id == "DKSolutionUp"){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/../";
-		//DKINFO(up+"\n");
+		//console.log(up+"\n");
 		DKSolution_OpenFolder(up);
 	}
 	
 	if(event.type == "dblclick"){
-		//DKINFO(DK_GetId(event)+"\n");
-		//DKINFO(DKWidget_GetValue(DK_GetId(event))+"\n");
+		//console.log(DK_GetId(event)+"\n");
+		//console.log(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(DK_IdLike(event, "DKSolutionFolder")){
-			//DKINFO("DKSolutionFolder\n");
+			//console.log("DKSolutionFolder\n");
 			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
 			return;
 		}
@@ -126,7 +120,7 @@ function DKSolution_OpenFile(path)
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
-	//DKINFO("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
+	//console.log("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
 	if(!DK_Run(aPath, "")){ return false; }
 	return true;
 }
@@ -140,7 +134,7 @@ function DKSolution_OpenHere(path)
 		aPath = DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) == 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
-	//DKINFO("aPath:"+aPath+"\n");
+	//console.log("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
