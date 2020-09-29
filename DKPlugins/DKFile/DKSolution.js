@@ -16,7 +16,6 @@ function DKSolution_Init()
 /////////////////////////
 function DKSolution_End()
 {
-	DKDEBUGFUNC();
 	byId("DKSolutionUp").removeEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").removeEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").removeEventListener("contextmenu", DKSolution_OnEvent);
@@ -28,8 +27,7 @@ function DKSolution_End()
 //////////////////////////////////
 function DKSolution_OnEvent(event)
 {	
-	DKDEBUGFUNC(event);
-	DKDEBUG("DKSolution_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	console.debug("DKSolution_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	DKSolution_Select(event.currentTarget.id);
 
 	if(event.currentTarget.id == "click"){
@@ -40,7 +38,7 @@ function DKSolution_OnEvent(event)
 		//console.log("DKSolution_OnEvent() contextmenu\n");
 		//PreventDefault(event);
 		
-		var id = DK_GetId(event);
+		var id = event.currentTarget.id;
 		//console.log("id = "+id+"\n");
 		DK_StopPropagation(event);
 		DKCreate("DKFile/DKSolutionMenu.js", function(){
@@ -65,13 +63,13 @@ function DKSolution_OnEvent(event)
 	if(event.type == "dblclick"){
 		//console.log(DK_GetId(event)+"\n");
 		//console.log(DKWidget_GetValue(DK_GetId(event))+"\n");
-		if(DK_IdLike(event, "DKSolutionFolder")){
+		if(event.currentTarget.id.includes("DKSolutionFolder")){
 			//console.log("DKSolutionFolder\n");
-			DKSolution_OpenFolder(DKWidget_GetValue(DK_GetId(event)));
+			DKSolution_OpenFolder(DKWidget_GetValue(event.currentTarget.id));
 			return;
 		}
 	
-		DKSolution_OpenFile(DKWidget_GetValue(DK_GetId(event)));
+		DKSolution_OpenFile(DKWidget_GetValue(event.currentTarget.id));
 		//DK_ClearSelection();
 		return;
 	}
@@ -86,12 +84,11 @@ function DKSolution_OnEvent(event)
 //////////////////////////////
 function DKSolution_Select(id)
 {
-	DKDEBUGFUNC(id);
 	var elements = DKWidget_GetElements("DKSolutionMenu");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length-1; i++){
 		if(!arry[i]){
-			DKERROR("DKSolution_Select(id): arry["+i+"] invalid\n");
+			console.error("DKSolution_Select(id): arry["+i+"] invalid\n");
 		}
 		byId(arry[i]).style.backgroundColor = "rgb(255,255,255)";
 		byId(arry[i]).style.color = "rgb(0,0,0)";
@@ -105,7 +102,6 @@ function DKSolution_Select(id)
 ////////////////////////////////////
 function DKSolution_OpenFolder(path)
 {
-	DKDEBUGFUNC(path);
 	if(DKSolution_UpdatePath(path)){
 		return true;
 	}
@@ -115,7 +111,6 @@ function DKSolution_OpenFolder(path)
 //////////////////////////////////
 function DKSolution_OpenFile(path)
 {
-	DKDEBUGFUNC(path);
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
@@ -128,7 +123,6 @@ function DKSolution_OpenFile(path)
 //////////////////////////////////
 function DKSolution_OpenHere(path)
 {
-	DKDEBUGFUNC(path);
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
@@ -150,7 +144,6 @@ function DKSolution_OpenHere(path)
 ////////////////////////////////////
 function DKSolution_UpdatePath(path)
 {
-	DKDEBUGFUNC(path);
 	console.log("DKSolution_UpdatePath("+path+")");
 	
 	//reload events

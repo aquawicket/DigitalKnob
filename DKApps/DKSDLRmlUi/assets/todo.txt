@@ -1,5 +1,8 @@
 // TODO //
 
+***** CODE CLEANUP ******
+** remove shortcut type functions in all code. I.E. DKAddEvent, DKGetId, etc.
+
 * KEEP WORKING ON Event
 * add removeEventListener everywhere neccesary  
 * Make EVERY event go through DKDomEventTarget.js
