@@ -3,7 +3,6 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	DKDEBUGFUNC();
 	//DKCreate("DKOS/Taskbar.html,DKOS/DKOS.html");
 	DKCreate("DKOS/Taskbar.html", function(){});
 	DKCreate("DKOS/scale.js", function(){});
@@ -22,7 +21,6 @@ function Taskbar_Init()
 //////////////////////
 function Taskbar_End()
 {
-	DKDEBUGFUNC();
 	//DKRemoveEvents(Taskbar_OnEvent);
 	byId("start").removeEventListener("click", Taskbar_OnEvent);
 	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
@@ -35,7 +33,6 @@ function Taskbar_End()
 ///////////////////////////////
 function Taskbar_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "start"){
 		DKCreate("DKOS/TaskbarMenu.js", function(){});
 	}
@@ -50,7 +47,6 @@ function Taskbar_OnEvent(event)
 //////////////////////////
 function Taskbar_Animate()
 {
-	DKDEBUGFUNC();
     if(pos == 0){
         clearInterval(animation);
     } 

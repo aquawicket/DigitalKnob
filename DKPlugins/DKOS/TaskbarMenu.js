@@ -191,7 +191,6 @@ function TaskbarMenu_OnEvent(event)
 /////////////////////////////////////
 function TaskbarMenu_Add(title, code)
 {
-	DKDEBUGFUNC(title, code);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKOS/TaskbarMenu.html", "div", "TaskbarMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
@@ -200,7 +199,6 @@ function TaskbarMenu_Add(title, code)
 /////////////////////////////////
 function TaskbarMenu_Run(command)
 {
-	DKDEBUGFUNC(command);
 	if(command.indexOf("http://") == 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;
