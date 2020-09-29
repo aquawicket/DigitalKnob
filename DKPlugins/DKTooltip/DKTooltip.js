@@ -1,13 +1,12 @@
 /////////////////////////
 function DKTooltip_Init()
 {
-	DKDEBUGFUNC();
+
 }
 
 ////////////////////////
 function DKTooltip_End()
 {
-	DKDEBUGFUNC();	
 	DKRemoveEvents(DKTooltip_OnEvent);
 	DKClose("DKTooltip/DKTooltip.html");
 }
@@ -15,7 +14,6 @@ function DKTooltip_End()
 /////////////////////////////////
 function DKTooltip_OnEvent(event)
 {
-	DKDEBUGFUNC(event);	
 	if(event.type == "mouseenter"){
 		DKTooltip_Show(DK_GetId(event));
 		return;
@@ -27,7 +25,6 @@ function DKTooltip_OnEvent(event)
 //////////////////////////////////
 function DKTooltip_Add(id, string)
 {
-	DKDEBUGFUNC(id, string);	
 	DKWidget_SetAttribute(id, "tooltip", string);
 	DKAddEvent(id, "mouseenter", DKTooltip_OnEvent);
 	DKAddEvent(id, "mouseout", DKTooltip_OnEvent);
@@ -37,7 +34,6 @@ function DKTooltip_Add(id, string)
 ///////////////////////////
 function DKTooltip_Show(id)
 {
-	DKDEBUGFUNC(id);	
 	setTimeout(function(){
 		var hover = DKWidget_GetHoverElement();
 		if(hover != id){

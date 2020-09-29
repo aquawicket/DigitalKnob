@@ -1,7 +1,6 @@
 ///////////////////////////
 function DKAutomate2_Init()
 {
-	DKDEBUGFUNC();	
 	DKCreate("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
 		byId("DKTriggers/DKAutomate2.html").addEventListener("SelectTrigger", DKAutomate2_OnEvent);
 		byId("DKTriggers/DKAutomate2.html").addEventListener("input", DKAutomate2_OnEvent);
@@ -11,7 +10,6 @@ function DKAutomate2_Init()
 //////////////////////////
 function DKAutomate2_End()
 {
-	DKDEBUGFUNC();	
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("SelectTrigger", DKAutomate2_OnEvent);
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("input", DKAutomate2_OnEvent);
 	DKClose("DKTriggers/DKAutomate2.html");
@@ -20,7 +18,6 @@ function DKAutomate2_End()
 ///////////////////////////////////
 function DKAutomate2_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "NewCause"){
 		DKTrigger_NewCause();
 		DKAutomate2_SelectTrigger();
@@ -86,7 +83,6 @@ function DKAutomate2_OnEvent(event)
 ////////////////////////////////////
 function DKAutomate2_SelectTrigger()
 {
-	DKDEBUGFUNC();	
 	DKWidget_SetValue("TriggerName", current_trigger);
 	DKWidget_SetInnerHtml("Causes", "");
 	

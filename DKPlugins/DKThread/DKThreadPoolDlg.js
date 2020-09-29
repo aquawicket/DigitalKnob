@@ -1,7 +1,6 @@
 ///////////////////////////////
 function DKThreadPoolDlg_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
 	//if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }  //FIXME: This was here for a reason.
 	DKCreate("DKThread/DKThreadPoolDlg.html"); 
@@ -12,7 +11,6 @@ function DKThreadPoolDlg_Init()
 //////////////////////////////
 function DKThreadPoolDlg_End()
 {
-	DKDEBUGFUNC();
 	//DKRemoveEvents(DKThreadPoolDlg_OnEvent);
 	DKClose("DKThread/DKThreadPoolDlg.html");
 }
@@ -20,7 +18,6 @@ function DKThreadPoolDlg_End()
 ///////////////////////////////////////
 function DKThreadPoolDlg_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(DK_Type(event, "Update")){
 		DKThreadPoolDlg_OnUpdate();
 	}
@@ -29,7 +26,6 @@ function DKThreadPoolDlg_OnEvent(event)
 ///////////////////////////////////
 function DKThreadPoolDlg_OnUpdate()
 {
-	DKDEBUGFUNC();
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
 	console.log("Update DKThreadPool\n");
 	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
