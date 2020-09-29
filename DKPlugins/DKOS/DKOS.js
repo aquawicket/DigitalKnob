@@ -1,6 +1,5 @@
 ////////////////////
-function DKOS_Init()
-{
+function DKOS_Init() {
 	console.log("DKOS_Init()");
 	DKCreate("DKOS/DKOS.html", function(){
 		//document.documentElement.style.backgroundColor = "black"; //FIXME
@@ -22,7 +21,7 @@ function DKOS_Init()
 		//DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKOS/Desktop.js", function(){
 		DKCreate("DKOS/Taskbar.js", function(){
-			if(OS == "iOS" || OS == "Android"){
+			if(OS === "iOS" || OS === "Android"){
 				//DKWidget_SetScale(2);   FIXME
 			}
 		});

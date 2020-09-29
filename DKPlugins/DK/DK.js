@@ -839,12 +839,14 @@ function Pos(position)
 }
 */
 
+/*
 /////////////////////////
 function GetKeyNum(event)
 {
 	DKDEBUGFUNC(event);
 	return (event.charCode) ? event.charCode : event.keyCode; //IE or other
 }
+*/
 
 //////////////////////////////
 function PreventDefault(event)
@@ -892,33 +894,41 @@ function getCookie(cname)
     return "";
 }
 
+/*
 //////////////////////
 function WindowWidth()
 {
 	DKDEBUGFUNC();
 	return document.documentElement.clientWidth;
 }
+*/
 
+/*
 ///////////////////////
 function WindowHeight()
 {
 	DKDEBUGFUNC();
 	return document.documentElement.clientHeight;
 }
+*/
 
+/*
 ////////////////////
 function GetMouseX()
 {
 	DKDEBUGFUNC();
 	return mouseX;
 }
+*/
 
+/*
 ////////////////////
 function GetMouseY()
 {
 	DKDEBUGFUNC();
 	return mouseY;
 }
+*/
 
 //////////////////////////
 function makeStruct(names)
@@ -1130,11 +1140,11 @@ function DK_GetObjects()
 	return jsfiles+cssfiles+htmlfiles;
 }
 
+/*
 ///////////////////////
 function DK_GetEvents()
 {
 	DKDEBUGFUNC();
-	/*
 	var out = "";
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
@@ -1145,9 +1155,9 @@ function DK_GetEvents()
 		}
 	}
 	return out;
-	*/
 	console.error("DK_GetEvents not implemented");
 }
+*/
 
 ///////////////////
 function DK_GetOS()
@@ -1223,13 +1233,16 @@ function DK_GetJSEngine()
 	return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
+/*
 //////////////////////////
 function DK_GetUserAgent()
 {
 	DKDEBUGFUNC();
 	return navigator.userAgent;
 }
+*/
 
+/*
 //////////////////////////
 function DK_GetNavigator()
 {
@@ -1245,6 +1258,7 @@ function DK_GetNavigator()
 	txt += "User-agent header: " + navigator.userAgent + "\n";
 	return txt;
 }
+*/
 
 ////////////////
 function DK_IE()
@@ -1269,6 +1283,7 @@ function DK_IE()
 	return rv;
 }
 
+/*
 //////////////////////////
 function DK_GetType(event)
 {
@@ -1285,7 +1300,9 @@ function DK_GetType(event)
 	DKERROR("DK_GetType("+event+"): could not get event type\n");
 	return false;
 }
+*/
 
+/*
 ////////////////////////
 function DK_GetId(event)
 {
@@ -1310,13 +1327,16 @@ function DK_GetId(event)
 	//DKERROR("DK_GetId("+event+"): cannot match the id\n");
 	return;
 }
+*/
 
+/*
 ///////////////////////////
 function DK_GetValue(event)
 {
 	DKDEBUGFUNC(event);
 	return DKWidget_GetValue(event);
 }
+*/
 
 /*
 ////////////////////////////////
@@ -1357,6 +1377,7 @@ function DK_Id(event, id)
 }
 */
 
+/*
 /////////////////////////////
 function DK_IdLike(event, id)
 {
@@ -1371,7 +1392,9 @@ function DK_IdLike(event, id)
 	if(event[0] && event[0].indexOf(id) != -1){ return true; }
 	return false;
 }
+*/
 
+/*
 ////////////////////////////
 function DK_Value(event, id)
 { 
@@ -1379,7 +1402,9 @@ function DK_Value(event, id)
 	if(DKWidget_GetValue(event) == id){ return true; }
 	return false;
 }
+*/
 
+/*
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
@@ -1390,6 +1415,7 @@ function DK_StopPropagation(event)
         event.cancelBubble = true;
     }
 }
+*/
 
 /*
 ///////////////////////////////////////
@@ -1604,6 +1630,7 @@ function DKSendEvent(id, type, message)
 }
 */
 
+/*
 ///////////////////////////
 function GetCharCode(event) 
 {
@@ -1611,7 +1638,9 @@ function GetCharCode(event)
     var key = event.which || event.keyCode;
 	return key;
 }
+*/
 
+/*
 //////////////////////////
 function GetKeyCode(event) 
 {
@@ -1619,7 +1648,9 @@ function GetKeyCode(event)
     var key = event.keyCode;
     return key;
 }
+*/
 
+/*
 //////////////////////////////
 function GetMouseButton(event) 
 {
@@ -1642,7 +1673,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return true;
 	}
 }
-
+*/
 /////////////////////////////
 function DK_FileToString(url)
 {
@@ -1650,19 +1681,23 @@ function DK_FileToString(url)
 	return ajaxGetUrl(url);
 }
 
+/*
 /////////////////////////////
 function DK_GetMouseWindowX()
 {
 	DKDEBUGFUNC();
 	return mouseX;
 }
+*/
 
+/*
 /////////////////////////////
 function DK_GetMouseWindowY()
 {
 	DKDEBUGFUNC();
 	return mouseY;
 }
+*/
 
 ///////////////////////////////
 function DK_Sleep(milliseconds)
