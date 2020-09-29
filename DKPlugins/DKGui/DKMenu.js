@@ -2,25 +2,24 @@
 //////////////////////
 function DKMenu_Init()
 {
-	DKDEBUGFUNC();
+	
 }
 
 /////////////////////
 function DKMenu_End()
 {
-	DKDEBUGFUNC();
+
 }
 
 //////////////////////////////
 function DKMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
+
 }
 
 ////////////////////////////////////
 function DKMenu_ValidatePosition(id)
 {
-	DKDEBUGFUNC(id);
 	console.log("DKMenu_ValidatePosition("+id+")");
 	//console.log("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//console.log("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");

@@ -3,19 +3,18 @@ var sizes = [];
 ///////////////////////
 function DKFrame_Init()
 {
-	DKDEBUGFUNC();
+	
 }
 
 //////////////////////
 function DKFrame_End()
 {
-	DKDEBUGFUNC();
+
 }
 
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.type == "mousedown"){
 		DKFrame_BringToFront();
 		//setTimeout( function(){ DKFrame_BringToFront(); }, 1000);
@@ -54,7 +53,6 @@ function DKFrame_OnEvent(event)
 ///////////////////////////
 function DKFrame_Widget(id)
 {
-	DKDEBUGFUNC(id);
 	//console.log("DKFrame_Widget("+id+")");
 	if(!byId(id)){
 		console.error("DKFrame_Widget("+id+"): element does not exist\n");
@@ -98,7 +96,6 @@ function DKFrame_Widget(id)
 ////////////////////////////////////
 function DKFrame_SetTitle(id, title)
 {
-	DKDEBUGFUNC(id, title);
 	//TODO - add protection	
 	//var frame = DKWidget_GetParent(id);
 	var frame = byId(id).parentNode.id
@@ -112,7 +109,6 @@ function DKFrame_SetTitle(id, title)
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height)
 {
-	DKDEBUGFUNC(title, url, width, height);
 	var frame = DKFrame_CreateFrame(byId(title), width, height);
 	var iframe = DKWidget_CreateElement(byId(frame), "iframe", title);
 	//DKWidget_SetAttribute(iframe, "src", url);
@@ -144,7 +140,6 @@ function DKFrame_Iframe(title, url, width, height)
 //////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	DKDEBUGFUNC(title, width, height);
 	if(width == "100%"){ width = window.innerWidth-100; }
 	if(height == "100%"){ height = window.innerHeight-21-100; }
 	if(!width){ width = window.innerWidth / 2; }
@@ -234,7 +229,6 @@ function DKFrame_CreateFrame(title, width, height)
 ////////////////////////////////////
 function DKFrame_CreateResize(frame)
 {
-	DKDEBUGFUNC(frame);
 	var resize = DKWidget_CreateElement(byId(frame), "div", "DKFrame_resize");
 	//byId(resize).style.backgroundImage = "url(\"DKGui/resize.png\")";
 	DKWidget_RemoveProperty(resize, "top");
@@ -259,7 +253,6 @@ function DKFrame_CreateResize(frame)
 ///////////////////////////////
 function DKFrame_BringToFront()
 {
-	DKDEBUGFUNC();
 	var ele = DKWidget_GetHoverElement();
 	if(!ele){ return; }
 	
@@ -287,7 +280,6 @@ function DKFrame_BringToFront()
 ///////////////////////////////////
 function DKFrame_MinimizeButton(id)
 {
-	DKDEBUGFUNC(id);
 	//TODO
 	//var frame = DKWidget_GetParent(id);
 }
@@ -295,7 +287,6 @@ function DKFrame_MinimizeButton(id)
 ///////////////////////////////////
 function DKFrame_MaximizeButton(id)
 {
-	DKDEBUGFUNC(id);
 	var frame = byId(id).parentNode.id;
 	var top = byId(frame).style.top;
 	var bottom = byId(frame).style.bottom;
@@ -331,14 +322,12 @@ function DKFrame_MaximizeButton(id)
 ////////////////////////////////
 function DKFrame_CloseButton(id)
 {
-	DKDEBUGFUNC(id);
 	DKFrame_Close(id);
 }
 
 //////////////////////////
 function DKFrame_Close(id)
 {
-	DKDEBUGFUNC(id);	
 	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
 	//var frame = DKWidget_GetParent(id);
 	var frame = byId(id).parentNode.id;
@@ -398,7 +387,6 @@ function DKFrame_Close(id)
 //////////////////////////////
 function DKFrame_StoreSize(id)
 {
-	DKDEBUGFUNC(id);
 	var top = byId(id).style.top;
 	var bottom = byId(id).style.bottom;
 	var left = byId(id).style.left;
@@ -418,7 +406,6 @@ function DKFrame_StoreSize(id)
 ////////////////////////////////
 function DKFrame_RestoreSize(id)
 {
-	DKDEBUGFUNC(id);
 	for(var i=0; i<sizes.length; i++){
 		if(sizes[i].indexOf(id) > -1){
 			var arry = sizes[i].split(":");
@@ -436,7 +423,6 @@ function DKFrame_RestoreSize(id)
 ///////////////////////////
 function DKFrame_CloseAll()
 {
-	DKDEBUGFUNC();
 	var children = DKWidget_GetElements("body");
 	var arry = children.split(",");
 	for(var i=0; i<arry.length; i++){
@@ -449,7 +435,6 @@ function DKFrame_CloseAll()
 ///////////////////////////
 function DKFrame_Reload(id)
 {
-	DKDEBUGFUNC(id);
 	console.log("TODO: refresh the frame data. html, javascript and css all reloaded\n");
 	
 	console.log("id = "+id+"\n");

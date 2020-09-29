@@ -3,7 +3,6 @@ var GIT = "";
 /////////////////////
 function DKGit_Init()
 {
-	DKDEBUGFUNC();
 	//DKCreate("DKThreadPool");
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
@@ -27,20 +26,18 @@ function DKGit_Init()
 ////////////////////
 function DKGit_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKGit_OnEvent);
 }
 
 ///////////////////////////////
 function DKGit_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
+
 }
 
 ////////////////////////////
 function DKGit_ValidateGit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for GIT\n");
 	if(!DKFile_Exists(GIT)){
@@ -55,7 +52,6 @@ function DKGit_ValidateGit()
 ///////////////////////////
 function DKGit_InstallGit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Installing Git...\n");
 	var assets = DKAssets_LocalAssets();
@@ -84,7 +80,6 @@ function DKGit_InstallGit()
 //////////////////////////
 function DKGit_GitUpdate()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
@@ -123,7 +118,6 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
 		return;
 	}
@@ -170,7 +164,6 @@ function DKGit_GitCommit()
 ///////////////////////////////
 function DKGit_GitCredentials()
 {
-	DKDEBUGFUNC();
 	//TODO
 	//how do we let git remember out login for repositories
 	//we don't want to have to log in on every commit.

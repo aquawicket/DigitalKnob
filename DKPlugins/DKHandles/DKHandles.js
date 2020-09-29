@@ -1,7 +1,6 @@
 /////////////////////////
 function DKHandles_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKHandles");
 	DKCreate("DKHandles/DKHandles.html");
 	DKAddEvent("refresh", "click", DKHandles_OnEvent);
@@ -22,7 +21,6 @@ function DKHandles_Init()
 ////////////////////////
 function DKHandles_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKHandles_OnEvent);
 	DKClose("DKHandles/DKHandles.html");
 }
@@ -30,7 +28,6 @@ function DKHandles_End()
 /////////////////////////////////
 function DKHandles_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "window"){
 		var handle = DKWidget_GetInnerHtml("window");
 		DKHandles_UpdateProperties(handle);
@@ -84,7 +81,6 @@ function DKHandles_OnEvent(event)
 /////////////////////////////////////
 function DKHandles_UpdateWindowList()
 {
-	DKDEBUGFUNC();
 	DKWidget_SetInnerHtml("windows", "");
 	var str = DKHandles_GetWindows();
 	if(!str){ return; }
@@ -105,7 +101,6 @@ function DKHandles_UpdateWindowList()
 ///////////////////////////////////////////
 function DKHandles_UpdateProperties(handle)
 {
-	DKDEBUGFUNC(handle);
 	DKWidget_SetValue("currentHandle", "Handle: "+handle);
 	var win = DKHandles_GetWindow(handle);
 	DKWidget_SetValue("window", win);

@@ -1,7 +1,6 @@
 //////////////////////////
 function scrolltest_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKGui/scrolltest.html", function(){
 	DKCreate("DKGui/scrolltest1.html", function(){
 	DKCreate("DKGui/scrolltest2.html", function(){
@@ -18,6 +17,5 @@ function scrolltest_Init()
 //////////////////////////////////
 function scrolltest_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	DKMessageBox(0, "ShowMessage", "bottomdiv clicked");
 }

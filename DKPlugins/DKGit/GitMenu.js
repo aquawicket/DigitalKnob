@@ -3,7 +3,6 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKThreadPool");
 
@@ -36,7 +35,6 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	DKDEBUGFUNC();
 	//DKRemoveEvents(GitMenu_OnEvent);
 	window.removeEventListener("mousedown", GitMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
@@ -47,7 +45,6 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "Git Update"){
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
@@ -66,7 +63,6 @@ function GitMenu_OnEvent(event)
 //////////////////////////////
 function GitMenu_ValidateGit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
@@ -83,7 +79,6 @@ function GitMenu_ValidateGit()
 /////////////////////////////
 function GitMenu_InstallGit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
@@ -110,7 +105,6 @@ function GitMenu_InstallGit()
 ////////////////////////////
 function GitMenu_GitUpdate()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
@@ -148,7 +142,6 @@ function GitMenu_GitUpdate()
 ////////////////////////////
 function GitMenu_GitCommit()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
