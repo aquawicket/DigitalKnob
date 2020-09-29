@@ -2,20 +2,20 @@
 function DKAdminMenu_Init()
 {
 	DKCreate("DKAdmin/DKAdminMenu.html", function(){
-		DKAddEvent("window", "mousedown", DKAdminMenu_OnEvent);
-		DKAddEvent("OpenSource", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("OpenDebug", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("PushDKFiles", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("ClearConsole", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("Info", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("Refresh", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("CloseDKGui", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("FileExplorer", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("OpenStats", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("TestIframe", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("OpenNotepad", "click", DKAdminMenu_OnEvent);
-		DKAddEvent("DKAdminMenu_Run", "keydown", DKAdminMenu_OnEvent);
-		DKAddEvent("Git", "click", DKAdminMenu_OnEvent);
+		window.addEventListener("mousedown", DKAdminMenu_OnEvent);
+		byId("OpenSource").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("OpenDebug").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("PushDKFiles").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("ClearConsole").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("Info").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("Refresh").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("CloseDKGui").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("FileExplorer").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("OpenStats").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("TestIframe").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("OpenNotepad").addEventListener("click", DKAdminMenu_OnEvent);
+		byId("DKAdminMenu_Run").addEventListener("keydown", DKAdminMenu_OnEvent);
+		byId("Git").addEventListener("click", DKAdminMenu_OnEvent);
 		
 		DKWidget_SetFocus("DKAdminMenu_Run");
 	});
@@ -28,7 +28,20 @@ function DKAdminMenu_Init()
 //////////////////////////
 function DKAdminMenu_End()
 {
-	DKRemoveEvents(DKAdminMenu_OnEvent);
+	window.removeEventListener("mousedown", DKAdminMenu_OnEvent);
+	byId("OpenSource").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("OpenDebug").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("PushDKFiles").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("ClearConsole").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("Info").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("Refresh").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("CloseDKGui").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("FileExplorer").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("OpenStats").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("TestIframe").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("OpenNotepad").removeEventListener("click", DKAdminMenu_OnEvent);
+	byId("DKAdminMenu_Run").removeEventListener("keydown", DKAdminMenu_OnEvent);
+	byId("Git").removeEventListener("click", DKAdminMenu_OnEvent);
 	DKClose("DKAdmin/DKAdminMenu.html");
 }
 

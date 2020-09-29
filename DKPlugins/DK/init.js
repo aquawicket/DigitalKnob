@@ -62,7 +62,7 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		DKCreate("DKCef");
 		DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(0);
-		DKAddEvent("window", "resize", init_OnEvent);
+		window.addEventListener("resize", init_OnEvent);
 		DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
 	else if(USE_CEF){
@@ -77,7 +77,7 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 	}
 	else if(USE_WEBVIEW){ //TODO
 		console.log("Creating WEBVIEW -> GUI\n");
-		DKAddEvent("window", "keydown", init_OnEvent);
+		window.addEventListener("keydown", init_OnEvent);
 	}
 	
 	if(typeof app_LoadPlugins === "function"){
