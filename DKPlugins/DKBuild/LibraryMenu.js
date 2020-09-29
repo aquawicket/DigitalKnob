@@ -2,14 +2,15 @@
 function LibraryMenu_Init()
 {
 	DKCreate("DKBuild/LibraryMenu.html");
-	DKAddEvent("window", "mousedown", LibraryMenu_OnEvent);
-	DKAddEvent("Build Libraries", "click", LibraryMenu_OnEvent);
+	window.addEventListener("mousedown", LibraryMenu_OnEvent);
+	byId("Build Libraries").addEventListener("click", LibraryMenu_OnEvent);
 }
 
 //////////////////////////
 function LibraryMenu_End()
 {
-	DKRemoveEvents(LibraryMenu_OnEvent);
+	window.removeEventListener("mousedown", LibraryMenu_OnEvent);
+	byId("Build Libraries").removeEventListener("click", LibraryMenu_OnEvent);
 	DKClose("DKBuild/LibraryMenu.html");
 }
 

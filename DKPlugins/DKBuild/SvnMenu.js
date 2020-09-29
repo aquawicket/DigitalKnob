@@ -4,15 +4,17 @@ function SvnMenu_Init()
 	DKCreate("DKBuild/SvnMenu.html");
 	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
 	byId("SvnMenu.html").style.left = DKWindow_GetMouseX()+"px";
-	DKAddEvent("window", "mousedown", SvnMenu_OnEvent);
-	DKAddEvent("Svn Update", "click", SvnMenu_OnEvent);
-	DKAddEvent("Svn Commit", "click", SvnMenu_OnEvent);
+	window.addEventListener("mousedown", SvnMenu_OnEvent);
+	byId("Svn Update").addEventListener("click", SvnMenu_OnEvent);
+	byId("Svn Commit").addEventListener("click", SvnMenu_OnEvent);
 }
 
 //////////////////////
 function SvnMenu_End()
 {
-	DKRemoveEvents(SvnMenu_OnEvent);
+	window.addEventListener("mousedown", SvnMenu_OnEvent);
+	byId("Svn Update").addEventListener("click", SvnMenu_OnEvent);
+	byId("Svn Commit").addEventListener("click", SvnMenu_OnEvent);
 	DKClose("DKBuild/SvnMenu.html");
 }
 

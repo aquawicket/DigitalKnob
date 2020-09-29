@@ -2,20 +2,27 @@
 function RunMenu_Init()
 {
 	DKCreate("DKBuild/RunMenu.html");
-	DKAddEvent("window", "mousedown", RunMenu_OnEvent);
-	DKAddEvent("Build App", "click", RunMenu_OnEvent);
-	DKAddEvent("Rebuild App", "click", RunMenu_OnEvent);
-	DKAddEvent("Rebuild All", "click", RunMenu_OnEvent);
-	DKAddEvent("Copy Assets", "click", RunMenu_OnEvent);
-	DKAddEvent("Run App", "click", RunMenu_OnEvent);
-	DKAddEvent("Generate Docs", "click", RunMenu_OnEvent);
-	DKAddEvent("Export to Android Studio", "click", RunMenu_OnEvent);
+	window.addEventListener("mousedown", RunMenu_OnEvent);
+	byId("Build App").addEventListener("click", RunMenu_OnEvent);
+	byId("Rebuild App").addEventListener("click", RunMenu_OnEvent);
+	byId("Rebuild All").addEventListener("click", RunMenu_OnEvent);
+	byId("Copy Assets").addEventListener("click", RunMenu_OnEvent);
+	byId("Run App").addEventListener("click", RunMenu_OnEvent);
+	byId("Generate Docs").addEventListener("click", RunMenu_OnEvent);
+	byId("Export to Android Studio").addEventListener("click", RunMenu_OnEvent);
 }
 
 //////////////////////
 function RunMenu_End()
 {
-	//DKRemoveEvents(RunMenu_OnEvent);
+	window.removeEventListener("mousedown", RunMenu_OnEvent);
+	byId("Build App").removeEventListener("click", RunMenu_OnEvent);
+	byId("Rebuild App").removeEventListener("click", RunMenu_OnEvent);
+	byId("Rebuild All").removeEventListener("click", RunMenu_OnEvent);
+	byId("Copy Assets").removeEventListener("click", RunMenu_OnEvent);
+	byId("Run App").removeEventListener("click", RunMenu_OnEvent);
+	byId("Generate Docs").removeEventListener("click", RunMenu_OnEvent);
+	byId("Export to Android Studio").removeEventListener("click", RunMenu_OnEvent);
 	DKClose("DKBuild/RunMenu.html");
 }
 

@@ -5,19 +5,24 @@ function DKAudioPlayer_Init()
 {
 	DKCreate("DKAudio");
 	DKCreate("DKAudio/DKAudioPlayer.html");
-	DKAddEvent("DKAudioPlayer_playpause", "click", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudioPlayer_position", "input", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudioPlayer_speaker", "click", DKAudioPlayer_OnEvent);
-	DKAddEvent("DKAudioPlayer_volume", "input", DKAudioPlayer_OnEvent);
-	DKAddEvent("window", "ended", DKAudioPlayer_OnEvent);
-	DKAddEvent("window", "timeupdate", DKAudioPlayer_OnEvent);
+	window.addEventListener("timeupdate", DKAudioPlayer_OnEvent);
+	window.addEventListener("ended", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_playpause").addEventListener("click", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_position").addEventListener("input", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_speaker").addEventListener("click", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_volume").addEventListener("input", DKAudioPlayer_OnEvent);
 	DKWidget_SetValue("DKAudioPlayer_volume", "128");
 }
 
 ////////////////////////////
 function DKAudioPlayer_End()
 {
-	DKRemoveEvents(DKAudioPlayer_OnEvent);
+	window.removeEventListener("timeupdate", DKAudioPlayer_OnEvent);
+	window.removeEventListener("ended", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_playpause").removeEventListener("click", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_position").removeEventListener("input", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_speaker").removeEventListener("click", DKAudioPlayer_OnEvent);
+	byId("DKAudioPlayer_volume").removeEventListener("input", DKAudioPlayer_OnEvent);
 	DKClose("DKAudio/DKAudioPlayer.html");
 }
 
