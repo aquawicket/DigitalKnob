@@ -247,7 +247,6 @@ DKINFO("JSEngine = "+DK_GetJSEngine()+"\n\n");
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	DKDEBUGFUNC(data, callback);
 	//console.log("DK.js:DKCreate("+data+")\n");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
@@ -307,10 +306,9 @@ function DKCreate(data, callback)
 //////////////////////
 function DKClose(data)
 {
-	DKDEBUGFUNC(data);
-	DKINFO("DKClose("+data+")\n");
+	console.log("DKClose("+data+")\n");
 	if(!data){
-		DKERROR("DKClose("+data+"): data empty\n");
+		console.error("DKClose("+data+"): data empty\n");
 		return false;
 	}
 	
@@ -327,7 +325,7 @@ function DKClose(data)
 	
 	var file = DKFile_GetFilename(arry[1]);
 	if(!file){ 
-		DKERROR("DKClose("+data+"): file invalid\n");
+		console.error("DKClose("+data+"): file invalid\n");
 		return false; 
 	}
 	
@@ -345,7 +343,7 @@ function DKClose(data)
 			func(); // Call the jsclass_End() function
 		}
 		else{
-			DKWARN("DKClose(data): "+func+" is not a function\n");
+			console.warn("DKClose(data): "+func+" is not a function\n");
 		}
 		*/
 		
@@ -382,7 +380,6 @@ function DKClose(data)
 /////////////////////
 function LoadCss(url)
 {
-	DKDEBUGFUNC(url);
 	//console.log("DK.js:LoadCss("+url+")");
 	if(!url){ 
 		DKERROR("DK.js: LoadCss("+url+"): url invalid\n");
@@ -414,7 +411,6 @@ function LoadCss(url)
 //////////////////////////////
 function LoadJs(url, callback)
 {
-	DKDEBUGFUNC(url, callback);
 	if(!url){ 
 		DKERROR("DK.js: LoadJs("+url+"): url invalid\n");
 		return false; 
@@ -504,7 +500,6 @@ function LoadJs(url, callback)
 //////////////////////////////
 function LoadHtml(url, parent)
 {
-	DKDEBUGFUNC(url, parent);
 	//DKWARN("DK.js:LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
@@ -581,7 +576,6 @@ function LoadHtml(url, parent)
 ///////////////////////////
 function CheckFileSupport()
 {
-	DKDEBUGFUNC();
 	if(window.File && window.FileReader && window.FileList && window.Blob){
 		DKINFO("DK.js: File support OK\n");
 	}
@@ -593,7 +587,6 @@ function CheckFileSupport()
 ///////////////////////////
 function GetLeftPx(element)
 {
-	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.left){ return 0; }
 	if(element.style.left.indexOf("%") > -1){
@@ -605,7 +598,6 @@ function GetLeftPx(element)
 //////////////////////////
 function GetTopPx(element)
 {
-	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.top){ return 0; }
 	if(element.style.top.indexOf("%") > -1){
@@ -617,7 +609,6 @@ function GetTopPx(element)
 ////////////////////////////
 function GetWidthPx(element)
 {
-	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.width){ return 0; }
 	if(element.style.width.indexOf("%") > -1){
@@ -629,7 +620,6 @@ function GetWidthPx(element)
 /////////////////////////////
 function GetHeightPx(element)
 {
-	DKDEBUGFUNC(element);
 	if(!element){ return 0; }
 	if(!element.style.height){ return 0; }
 	if(element.style.height.indexOf("%") > -1){
@@ -642,7 +632,6 @@ function GetHeightPx(element)
 /////////////////////////////
 function DragStart(event, id)
 {
-	DKDEBUGFUNC(event, id);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -667,7 +656,6 @@ function DragStart(event, id)
 ////////////////////////
 function DragMove(event)
 {
-	DKDEBUGFUNC(event);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -721,7 +709,6 @@ function DragMove(event)
 ////////////////////////
 function DragStop(event)
 {
-	DKDEBUGFUNC(event);
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
 	document.body.removeEventListener('touchmove', DragMove, false);
@@ -733,7 +720,6 @@ function DragStop(event)
 ///////////////////////////////
 function ResizeStart(event, id)
 {
-	DKDEBUGFUNC(event, id);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -759,7 +745,6 @@ function ResizeStart(event, id)
 //////////////////////////
 function ResizeMove(event)
 {	
-	DKDEBUGFUNC(event);
 	if(!event){event = window.event;}
 	if(DK_IE()){
 		x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
@@ -786,7 +771,6 @@ function ResizeMove(event)
 ///////////////////////
 function ResizeStop(id)
 {
-	DKDEBUGFUNC(id);
 	document.body.onmousemove = function(){};
 	document.body.onmouseup = function(){};
 	document.body.removeEventListener('touchmove', ResizeMove, false);
@@ -798,7 +782,6 @@ function ResizeStop(id)
 //////////////////////
 function Pos(position)
 {
-	DKDEBUGFUNC(position);
 	if(position == ''){
 		return position;	
 	}
@@ -843,7 +826,6 @@ function Pos(position)
 /////////////////////////
 function GetKeyNum(event)
 {
-	DKDEBUGFUNC(event);
 	return (event.charCode) ? event.charCode : event.keyCode; //IE or other
 }
 */
@@ -851,7 +833,6 @@ function GetKeyNum(event)
 //////////////////////////////
 function PreventDefault(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.preventDefault();
     } else {
@@ -862,7 +843,6 @@ function PreventDefault(event)
 ///////////////////////////////
 function StopPropagation(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -873,7 +853,6 @@ function StopPropagation(event)
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
 {
-	DKDEBUGFUNC(cname, cvalue, exdays);
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
@@ -883,7 +862,6 @@ function setCookie(cname, cvalue, exdays)
 /////////////////////////
 function getCookie(cname) 
 {
-	DKDEBUGFUNC(cname);
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) {
@@ -894,46 +872,9 @@ function getCookie(cname)
     return "";
 }
 
-/*
-//////////////////////
-function WindowWidth()
-{
-	DKDEBUGFUNC();
-	return document.documentElement.clientWidth;
-}
-*/
-
-/*
-///////////////////////
-function WindowHeight()
-{
-	DKDEBUGFUNC();
-	return document.documentElement.clientHeight;
-}
-*/
-
-/*
-////////////////////
-function GetMouseX()
-{
-	DKDEBUGFUNC();
-	return mouseX;
-}
-*/
-
-/*
-////////////////////
-function GetMouseY()
-{
-	DKDEBUGFUNC();
-	return mouseY;
-}
-*/
-
 //////////////////////////
 function makeStruct(names)
 {
-	DKDEBUGFUNC(names);
 	var names = names.split(' ');
 	var count = names.length;
 	function constructor(){
@@ -953,7 +894,6 @@ function makeStruct(names)
 //////////////////////////////////
 function replace(str, old, newstr)
 {
-	DKDEBUGFUNC(str, old, newstr);
 	var re = new RegExp(old, 'g');
 	return str.replace(re, newstr);
 }
@@ -968,7 +908,6 @@ if(typeof String.prototype.trim !== 'function') {
 //////////////////
 function IsLocal()
 {
-	DKDEBUGFUNC();
 	switch(window.location.protocol){
 		case 'http:':
 		case 'https:':
@@ -1038,7 +977,6 @@ function DKDEBUGVARS(vars)
 /////////////////////
 function DK_GetTime()
 {
-	DKDEBUGFUNC();
 	var d = new Date();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
@@ -1058,7 +996,6 @@ function DK_GetTime()
 /////////////////////
 function DK_GetDate()
 {
-	DKDEBUGFUNC();
 	var d = new Date();
 	var date = d.getMonth()+1;
 	date += "/";
@@ -1072,7 +1009,6 @@ function DK_GetDate()
 /////////////////////
 function DK_Refresh()
 {	
-	DKDEBUGFUNC();
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
 	window.location.reload(true);
@@ -1082,7 +1018,6 @@ function DK_Refresh()
 //////////////////////////
 function DKAvailable(name)
 {
-	DKDEBUGFUNC(name);
 	if(name == "DKWidget"){
 		return true; 
 	}
@@ -1096,7 +1031,6 @@ function DKAvailable(name)
 ////////////////////////
 function DK_GetObjects()
 {
-	DKDEBUGFUNC();
 	// Search the Dom for all scripts (.js files)
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
@@ -1144,7 +1078,6 @@ function DK_GetObjects()
 ///////////////////////
 function DK_GetEvents()
 {
-	DKDEBUGFUNC();
 	var out = "";
 	for(var i=0; i<events.length; i++){
 		if(typeof events[i] == "function"){
@@ -1162,7 +1095,6 @@ function DK_GetEvents()
 ///////////////////
 function DK_GetOS()
 {
-	DKDEBUGFUNC();
 	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
      // Windows Phone must come first because its UA also contains "Android"
     if (/windows phone/i.test(userAgent)){
@@ -1187,7 +1119,6 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	//DKDEBUGFUNC();
 	if(navigator.userAgent.indexOf("Rml") != -1){
         return "RML";
     }
@@ -1217,7 +1148,6 @@ function DK_GetBrowser()
 /////////////////////////
 function DK_GetJSEngine()
 {
-	DKDEBUGFUNC();
 	if(navigator.product == "Duktape"){
 		return "Duktape"
 	}
@@ -1233,37 +1163,9 @@ function DK_GetJSEngine()
 	return "UNKNOWN JAVASCRIPT ENGINE"
 }
 
-/*
-//////////////////////////
-function DK_GetUserAgent()
-{
-	DKDEBUGFUNC();
-	return navigator.userAgent;
-}
-*/
-
-/*
-//////////////////////////
-function DK_GetNavigator()
-{
-	DKDEBUGFUNC();
-	var txt = "";
-	txt += "Browser CodeName: " + navigator.appCodeName + "\n";
-	txt += "Browser Name: " + navigator.appName + "\n";
-	txt += "Browser Version: " + navigator.appVersion + "\n";
-	txt += "Cookies Enabled: " + navigator.cookieEnabled + "\n";
-	txt += "Browser Language: " + navigator.language + "\n";
-	txt += "Browser Online: " + navigator.onLine + "\n";
-	txt += "Platform: " + navigator.platform + "\n";
-	txt += "User-agent header: " + navigator.userAgent + "\n";
-	return txt;
-}
-*/
-
 ////////////////
 function DK_IE()
 {
-	DKDEBUGFUNC();
 	var rv = 0;
 	if(navigator.appName == 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
@@ -1287,7 +1189,6 @@ function DK_IE()
 //////////////////////////
 function DK_GetType(event)
 {
-	DKDEBUGFUNC(event);
 	if(!event){ return false; }
 	if(event.type){
 		//DKINFO("GetType("+event+") -> "+event.type+"\n");
@@ -1306,7 +1207,6 @@ function DK_GetType(event)
 ////////////////////////
 function DK_GetId(event)
 {
-	DKDEBUGFUNC(event);
 	if(!event){ return false;}
 	if(event.type && event.type == "contextmenu"){ //rightclick
 		PreventDefault(event);
@@ -1333,7 +1233,6 @@ function DK_GetId(event)
 ///////////////////////////
 function DK_GetValue(event)
 {
-	DKDEBUGFUNC(event);
 	return DKWidget_GetValue(event);
 }
 */
@@ -1342,7 +1241,6 @@ function DK_GetValue(event)
 ////////////////////////////////
 function DK_Type(event, command)
 {
-	DKDEBUGFUNC(event, command);
 	if(!event){ return false;}
 	
 	if(event.type && event.type == "contextmenu"){ //rightclick
@@ -1366,9 +1264,8 @@ function DK_Type(event, command)
 /////////////////////////
 function DK_Id(event, id)
 { 
-	DKDEBUGFUNC(event, id);
 	var element = DKWidget_GetElement(event);
-	//DKWARN("DK_Id(): element="+element.id+"\n");
+	//console.warn("DK_Id(): element="+element.id+"\n");
 	if(element == window && id == "window"){ return true; }
 	//if(element == document) && id == "document"){ return true; }
 	if(element && element.id == id){ return true; }
@@ -1381,10 +1278,9 @@ function DK_Id(event, id)
 /////////////////////////////
 function DK_IdLike(event, id)
 {
-	DKDEBUGFUNC(event, id);
 	if(!id){ return; }
-	if(DK_GetType(event) == "keydown"){ return false; } //KeyboardEvent
-	if(DK_GetType(event) == "keyup"){ return false; } //KeyboardEvent
+	if(event.type == "keydown"){ return false; } //KeyboardEvent
+	if(event.type == "keyup"){ return false; } //KeyboardEvent
 	var element = DKWidget_GetElement(event);
 	if(!element){ return; }
 	if(!element.id){ return; }
@@ -1398,7 +1294,6 @@ function DK_IdLike(event, id)
 ////////////////////////////
 function DK_Value(event, id)
 { 
-	DKDEBUGFUNC(event, id);
 	if(DKWidget_GetValue(event) == id){ return true; }
 	return false;
 }
@@ -1408,7 +1303,6 @@ function DK_Value(event, id)
 //////////////////////////////////
 function DK_StopPropagation(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.stopPropagation) {
         event.stopPropagation();
     } else {
@@ -1433,7 +1327,6 @@ function DKAddEvent(id, type, Function)
 ////  Old 
 function DKAddEvent(id, type, Function)
 {
-	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
 		DKWARN("DKAddEvent(id, type, Function): id invalid\n");
 		return;
@@ -1495,7 +1388,6 @@ function DKAddEvent(id, type, Function)
 /////////////////////////////////////////////
 function removeEvent(element, type, Function)
 {
-	DKDEBUGFUNC(element, type, Function.name);
 	if (element.removeEventListener){  // W3C DOM
 		element.removeEventListener(type, Function);
 	}
@@ -1518,7 +1410,6 @@ function removeEvent(element, type, Function)
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
-	DKDEBUGFUNC(id, type, Function.name);
 	if(typeof id != "string"){
 		DKERROR("DKRemoveEvent(id, type, Function): id invalid\n");
 		return false;
@@ -1564,7 +1455,6 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
-	DKDEBUGFUNC(Function.name);
 	if(typeof Function != "function"){
 		DKERROR("DKRemoveEvents(Function): Function invalid\n");
 		return false;
@@ -1601,7 +1491,6 @@ function DKRemoveEvents(Function)
 ///////////////////////////////////////
 function DKSendEvent(id, type, message)
 {
-	DKDEBUGFUNC(id, type, message);
 	console.log("DKSendEvent("+id+","+type+","+message+")");
 	if(typeof id != "string"){
 		DKERROR("DKSendEvent(id, type, message): id invalid\n");
@@ -1634,7 +1523,6 @@ function DKSendEvent(id, type, message)
 ///////////////////////////
 function GetCharCode(event) 
 {
-	DKDEBUGFUNC(event);
     var key = event.which || event.keyCode;
 	return key;
 }
@@ -1644,7 +1532,6 @@ function GetCharCode(event)
 //////////////////////////
 function GetKeyCode(event) 
 {
-	DKDEBUGFUNC(event);
     var key = event.keyCode;
     return key;
 }
@@ -1654,7 +1541,6 @@ function GetKeyCode(event)
 //////////////////////////////
 function GetMouseButton(event) 
 {
-	DKDEBUGFUNC(event);
     var button = event.which || event.button;
     return button;
 }
@@ -1677,32 +1563,12 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 /////////////////////////////
 function DK_FileToString(url)
 {
-	DKDEBUGFUNC(url);
 	return ajaxGetUrl(url);
 }
-
-/*
-/////////////////////////////
-function DK_GetMouseWindowX()
-{
-	DKDEBUGFUNC();
-	return mouseX;
-}
-*/
-
-/*
-/////////////////////////////
-function DK_GetMouseWindowY()
-{
-	DKDEBUGFUNC();
-	return mouseY;
-}
-*/
 
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
-	DKDEBUGFUNC(milliseconds);
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
 		if((new Date().getTime() - start) > milliseconds){
@@ -1714,7 +1580,6 @@ function DK_Sleep(milliseconds)
 ////////////////////////////
 function DK_ClearSelection()
 {
-	DKDEBUGFUNC();
 	//Clear text selection
 	if(document.selection){
 		document.selection.empty();
@@ -1746,7 +1611,6 @@ function DK_ClearSelection()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKDEBUGFUNC(url, output);
 	var request = "";
 	try {
         request = new XMLHttpRequest();
@@ -1801,7 +1665,6 @@ function AjaxGet(url, output)
 ////////////////////////
 function ajaxGetUrl(url)
 {
-	DKDEBUGFUNC(url);
 	var response = new Object();
 	AjaxGet(url, response);
 	

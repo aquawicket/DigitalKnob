@@ -7,19 +7,12 @@ function DKBuildGUI_Init()
 	DKCreate("DKFile/DKFile.js", function(){
 	DKCreate("DKBuild/DKBuild.js", function(rval){
 		//DKAddEvent("AppList", "click", DKBuildGUI_OnEvent);
-		//DKAddEvent("AppList", "change", DKBuildGUI_OnEvent);
 		byId("AppList").addEventListener("change", DKBuildGUI_OnEvent);
-		//DKAddEvent("OSList", "change", DKBuildGUI_OnEvent);
 		byId("OSList").addEventListener("change", DKBuildGUI_OnEvent);
-		//DKAddEvent("BuildType", "change", DKBuildGUI_OnEvent);
 		byId("BuildType").addEventListener("change", DKBuildGUI_OnEvent);
-		//DKAddEvent("git", "click", DKBuildGUI_OnEvent);
 		byId("git").addEventListener("click", DKBuildGUI_OnEvent);
-		//DKAddEvent("libraries", "click", DKBuildGUI_OnEvent);
 		byId("libraries").addEventListener("click", DKBuildGUI_OnEvent);
-		//DKAddEvent("build", "click", DKBuildGUI_OnEvent);
 		byId("build").addEventListener("click", DKBuildGUI_OnEvent);
-		//DKAddEvent("DKBuildGUI.html", "NewApp", DKBuildGUI_OnEvent);
 	
 		//DKBuild_ValidateSvn();
 		DKCreate("DKGit/DKGit.js", function(){
@@ -58,8 +51,6 @@ function DKBuildGUI_Init()
 /////////////////////////
 function DKBuildGUI_End()
 {
-	DKDEBUGFUNC();	
-	//DKRemoveEvents(DKBuildGUI_OnEvent);
 	byId("AppList").removeEventListener("change", DKBuildGUI_OnEvent);
 	byId("OSList").removeEventListener("change", DKBuildGUI_OnEvent);
 	byId("BuildType").removeEventListener("change", DKBuildGUI_OnEvent);
@@ -73,8 +64,7 @@ function DKBuildGUI_End()
 //////////////////////////////////
 function DKBuildGUI_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
-	//console.lof("DKBuildGUI_OnEvent("+DK_GetId(event)+","+DK_GetType(event)+","+DK_GetValue(event)+")\n");
+	//console.lof("DKBuildGUI_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id == "AppList"){
 		//if(DK_Type(event,"click")){

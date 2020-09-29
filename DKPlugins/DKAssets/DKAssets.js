@@ -88,14 +88,13 @@ console.lof("LOG_HIDE: "+LOG_HIDE+"\n");
 ////////////////////////
 function DKAssets_Init()
 {
-	DKDEBUGFUNC();
+	
 }
 
 if(DK_GetBrowser() != "CEF"){
 	/////////////////////////////////////
 	var DKAssets_LocalAssets = function()
 	{
-		DKDEBUGFUNC();
 		return local_assets;
 	}
 }
@@ -103,21 +102,18 @@ if(DK_GetBrowser() != "CEF"){
 ////////////////////////////////
 function DKAssets_OnlineAssets()
 {
-	DKDEBUGFUNC();
 	return online_assets;
 }
 
 ////////////////////////////
 function DKAssets_Protocol()
 {
-	DKDEBUGFUNC();
 	return protocol;
 }
 
 ////////////////////////////////
 function DKAssets_AbsolutePath()
 {
-	DKDEBUGFUNC();
 	return absolutepath;
 }
 

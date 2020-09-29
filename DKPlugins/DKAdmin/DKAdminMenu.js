@@ -1,7 +1,6 @@
 ///////////////////////////
 function DKAdminMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKAdmin/DKAdminMenu.html", function(){
 		DKAddEvent("window", "mousedown", DKAdminMenu_OnEvent);
 		DKAddEvent("OpenSource", "click", DKAdminMenu_OnEvent);
@@ -29,7 +28,6 @@ function DKAdminMenu_Init()
 //////////////////////////
 function DKAdminMenu_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKAdminMenu_OnEvent);
 	DKClose("DKAdmin/DKAdminMenu.html");
 }
@@ -37,8 +35,7 @@ function DKAdminMenu_End()
 ///////////////////////////////////
 function DKAdminMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
-	console.lof("DKAdminMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	console.log("DKAdminMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	//selections
 	if(event.currentTarget.id == "FileExplorer"){
@@ -143,7 +140,6 @@ function DKAdminMenu_OnEvent(event)
 /////////////////////////////////////
 function DKAdminMenu_Add(title, code)
 {
-	DKDEBUGFUNC(title, code);
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKAdmin/DKAdminMenu.html", "div", "DKAdminMenu_item");
 	DKWidget_SetInnerHtml(ele, title);
@@ -152,7 +148,6 @@ function DKAdminMenu_Add(title, code)
 /////////////////////////////////
 function DKAdminMenu_Run(command)
 {
-	DKDEBUGFUNC(command);
 	if(command.indexOf("http://") == 0 || command.indexOf("https://") == 0 || command.indexOf("file://") == 0 || command.indexOf("chrome://") == 0){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe(command, command, 640, 480);
