@@ -3,8 +3,8 @@ function DKEditor_Init()
 {
 	DKCreate("DKEditor/DKEditor.css");
 	DKCreate("DKEditor/DKEditor.html");
-	DKAddEvent("DKEditor_edit", "click", DKEditor_OnEvent);
-	DKAddEvent("DKEditor_edit", "contextmenu", DKEditor_OnEvent);
+	byId("DKEditor_edit").addEventListener("click", DKEditor_OnEvent);
+	byId("DKEditor_edit").addEventListener("contextmenu", DKEditor_OnEvent);
 	
 	/*
 	if(DK_GetBrowser() != "Rocket"){
@@ -22,6 +22,8 @@ function DKEditor_Init()
 ///////////////////////
 function DKEditor_End()
 {
+	byId("DKEditor_edit").removeEventListener("click", DKEditor_OnEvent);
+	byId("DKEditor_edit").removeEventListener("contextmenu", DKEditor_OnEvent);
 	DKClose("DKEditor/DKEditor.html");
 	DKClose("DKEditor/DKEditor.css");
 }
@@ -29,7 +31,7 @@ function DKEditor_End()
 ////////////////////////////////
 function DKEditor_OnEvent(event)
 {
-	DKDEBUG("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	console.debug("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "DKEditor_edit"){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");

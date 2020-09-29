@@ -2,13 +2,13 @@
 function Input_Init()
 {
 	DKCreate("DKDebug/Input.html");
-	DKAddEvent("Input_Text", "keydown", Input_OnEvent);
+	byId("Input_Text").addEventListener("keydown", Input_OnEvent);
 }
 
 ////////////////////
 function Input_End()
 {
-	DKRemoveEvents(Input_OnEvent);
+	byId("Input_Text").removeEventListener("keydown", Input_OnEvent);
 	DKClose("DKDebug/Input.html");
 }
 

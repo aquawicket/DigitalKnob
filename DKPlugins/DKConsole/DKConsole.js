@@ -5,16 +5,19 @@ function DKConsole_Init()
 {
 	DKCreate("DKConsole/DKConsole.css");
 	DKCreate("DKConsole/DKConsole.html");
-	DKAddEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
-	DKAddEvent("DKConsole_Close", "click", DKConsole_OnEvent);
-	DKAddEvent("window", "color", DKConsole_OnEvent);
-	DKAddEvent("window", "notify", DKConsole_OnEvent);
+	window.addEventListener("color", DKConsole_OnEvent);
+	window.addEventListener("notify", DKConsole_OnEvent);
+	byId("DKConsole_Clear").addEventListener("click", DKConsole_OnEvent);
+	byId("DKConsole_Close").addEventListener("click", DKConsole_OnEvent);
 }
 
 ////////////////////////
 function DKConsole_End()
 {
-	DKRemoveEvents(DKConsole_OnEvent);
+	window.removeEventListener("color", DKConsole_OnEvent);
+	window.removeEventListener("notify", DKConsole_OnEvent);
+	byId("DKConsole_Clear").removeEventListener("click", DKConsole_OnEvent);
+	byId("DKConsole_Close").removeEventListener("click", DKConsole_OnEvent);
 	DKClose("DKConsole/DKConsole.html");
 	DKClose("DKConsole/DKConsole.css");
 }

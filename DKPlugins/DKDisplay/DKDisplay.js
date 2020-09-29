@@ -2,16 +2,17 @@
 function DKDisplay_Init()
 {
 	DKCreate("DKDisplay/DKDisplay.html");
-	DKAddEvent("DKDisplay_Button", "click", DKDisplay_OnEvent);
-	//DKAddEvent("window", "second", DKDisplay_OnEvent);
-	
-	//DKAddEvent("DKDisplay/DKDisplay.html", "click", DKDisplay_OnEvent);
+	byId("DKDisplay_Button").addEventListener("click", DKDisplay_OnEvent);
+	//window.addEventListener("second", DKDisplay_OnEvent);
+	//byId("DKDisplay/DKDisplay.html").addEventListener("click", DKDisplay_OnEvent);
 }
 
 ////////////////////////
 function DKDisplay_End()
 {
-	DKRemoveEvents(DKDisplay_OnEvent);
+	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_OnEvent);
+	//window.removeEventListener("second", DKDisplay_OnEvent);
+	//byId("DKDisplay/DKDisplay.html").removeEventListener("click", DKDisplay_OnEvent);
 	DKClose("DKDisplay/DKDisplay.html");
 }
 
