@@ -3,7 +3,6 @@ var SVN = "";
 ///////////////////////
 function SvnMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
 
 	//SVN(DK_GetOS()+"\n");
@@ -32,7 +31,6 @@ function SvnMenu_Init()
 //////////////////////
 function SvnMenu_End()
 {
-	DKDEBUGFUNC();	
 	DKRemoveEvents(SvnMenu_OnEvent);
 	DKClose("DKGit/SvnMenu.html");
 }
@@ -40,7 +38,6 @@ function SvnMenu_End()
 ///////////////////////////////
 function SvnMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);	
 	if(event.currentTarget.id == "Git Update"){
 		DKThread_DKQueue("GitUpdate","SvnMenu_GitUpdate();");
 	}
@@ -59,8 +56,7 @@ function SvnMenu_OnEvent(event)
 //////////////////////////////
 function SvnMenu_ValidateGit()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	SVN("Looking for SVN\n");
 	//SVN(SVN+"\n");
 	if(!DKFile_Exists(SVN)){
@@ -76,8 +72,7 @@ function SvnMenu_ValidateGit()
 /////////////////////////////
 function SvnMenu_InstallGit()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	SVN("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -103,8 +98,7 @@ function SvnMenu_InstallGit()
 ////////////////////////////
 function SvnMenu_GitUpdate()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
 	
@@ -141,8 +135,7 @@ function SvnMenu_GitUpdate()
 ////////////////////////////
 function SvnMenu_GitCommit()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
 	

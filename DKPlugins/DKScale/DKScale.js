@@ -3,7 +3,6 @@ var pixel_ratio = 1.0;
 ///////////////////////
 function DKScale_Init()
 {
-	DKDEBUGFUNC();
 	DKAddEvent("window", "resize", DKScale_OnEvent);
 	DKScale_Resize();
 }
@@ -11,14 +10,12 @@ function DKScale_Init()
 //////////////////////
 function DKScale_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKScale_OnEvent);
 }
 
 ///////////////////////////////
 function DKScale_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.type == "resize"){
 		DKScale_Resize();
 	}
@@ -27,7 +24,6 @@ function DKScale_OnEvent(event)
 /////////////////////////
 function DKScale_Resize()
 {
-	DKDEBUGFUNC();
 	//console.log(("DKScale_Resize()\n");
     //console.log(("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
 	//console.log(("DKWindow_GetWidth() = "+DKWindow_GetWidth()+"\n");

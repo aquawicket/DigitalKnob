@@ -3,7 +3,6 @@ var SVN = "";
 /////////////////////
 function DKSvn_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
 
 	//console.log((DK_GetOS()+"\n");
@@ -28,21 +27,19 @@ function DKSvn_Init()
 ////////////////////
 function DKSvn_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKSvn_OnEvent);
 }
 
 ///////////////////////////////
 function DKSvn_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
+
 }
 
 ////////////////////////////
 function DKSvn_ValidateSvn()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log(("Looking for SVN\n");
 	//console.log((SVN+"\n");
 	if(!DKFile_Exists(SVN)){
@@ -58,8 +55,7 @@ function DKSvn_ValidateSvn()
 ///////////////////////////
 function DKSvn_InstallSvn()
 {
-	DKDEBUGFUNC();
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -85,7 +81,6 @@ function DKSvn_InstallSvn()
 //////////////////////////
 function DKSvn_SvnUpdate()
 {
-	DKDEBUGFUNC();
 	console.log(("Svn Update...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
@@ -106,7 +101,6 @@ function DKSvn_SvnUpdate()
 //////////////////////////
 function DKSvn_SvnCommit()
 {
-	DKDEBUGFUNC();
 	console.log(("Svn Commit...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);

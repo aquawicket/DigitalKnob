@@ -1,7 +1,6 @@
 ///////////////////////
 function DKStats_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKStats/DKStats.html");
 	DKAddEvent("window", "second", DKStats_OnEvent);
 	//DKAddEvent("DKStats/DKStats.html", "click", DKStats_OnEvent);
@@ -10,7 +9,6 @@ function DKStats_Init()
 //////////////////////
 function DKStats_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKStats_OnEvent);
 	DKClose("DKStats/DKStats.html");
 }
@@ -18,7 +16,6 @@ function DKStats_End()
 ///////////////////////////////
 function DKStats_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(DK_Type(event, "second")){
 		DKStats_Update();
 	}
@@ -27,7 +24,6 @@ function DKStats_OnEvent(event)
 /////////////////////////
 function DKStats_Update()
 {
-	DKDEBUGFUNC();
 	//TIME
 	var currentdate = new Date(); 
 	var hours = currentdate.getHours();
