@@ -49,7 +49,7 @@ function DKEditor_Menu_OnEvent(event)
 	DKDEBUG("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
 	if(event.currentTarget.id == "DKEditor_Menu_Command_Input"){
 		//TODO
-		DKINFO("TODO\n");
+		console.log("TODO\n");
 	}
 	if(event.currentTarget.id == "DKEditor_Menu_Reload"){
 		DKDebug_Reload();
@@ -106,9 +106,9 @@ function DKEditor_Menu_OnEvent(event)
 			if(!rval){ return; }
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
-				//DKINFO("DKMessageBox_GetValue() rval = "+rval+"\n");
+				//console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
-				//DKINFO("Frame name: "+rval+"\n");
+				//console.log("Frame name: "+rval+"\n");
 			});
 		});
 	}
@@ -148,7 +148,7 @@ function DKEditor_Menu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id == "DKEditor_Menu_Web"){
-		DKINFO("DKEditor_Menu_Web()\n");
+		console.log("DKEditor_Menu_Web()\n");
 		//TODO - Create an iFrame and display digitalknob.com
 		var div = DKWidget_CreateElement("body", "div", "DKIframe.html");
 		document.getElementById(div).style.position = "absolute";

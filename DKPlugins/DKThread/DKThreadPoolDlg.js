@@ -13,7 +13,7 @@ function DKThreadPoolDlg_Init()
 function DKThreadPoolDlg_End()
 {
 	DKDEBUGFUNC();
-	DKRemoveEvents(DKThreadPoolDlg_OnEvent);
+	//DKRemoveEvents(DKThreadPoolDlg_OnEvent);
 	DKClose("DKThread/DKThreadPoolDlg.html");
 }
 
@@ -31,7 +31,7 @@ function DKThreadPoolDlg_OnUpdate()
 {
 	DKDEBUGFUNC();
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
-	DKINFO("Update DKThreadPool\n");
+	console.log("Update DKThreadPool\n");
 	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
 
 	var name = DKThread_GetThreadNames();

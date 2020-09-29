@@ -43,7 +43,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateWindowList();
     }
 	if(event.currentTarget.id == "search"){
-		//DKINFO("search\n");
+		//console.log("search\n");
 		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
 		DKHandles_StartSearch();
     }
@@ -74,7 +74,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_UpdateProperties(handle);
 	}
 	if(event.type == "DKHandles_WindowChanged"){
-		//DKINFO("DKHandles_WindowChanged\n");
+		//console.log("DKHandles_WindowChanged\n");
 		DKWidget_SetAttribute("search", "src", "DKHandles/win1.bmp");
 		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
@@ -88,7 +88,7 @@ function DKHandles_UpdateWindowList()
 	DKWidget_SetInnerHtml("windows", "");
 	var str = DKHandles_GetWindows();
 	if(!str){ return; }
-	//DKINFO("WINDOW LIST: "+str+"\n");
+	//console.log("WINDOW LIST: "+str+"\n");
 	var arry = str.split(",");
 	arry.sort();
 	

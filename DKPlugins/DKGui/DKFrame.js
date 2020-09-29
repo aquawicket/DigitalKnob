@@ -73,7 +73,7 @@ function DKFrame_Widget(id)
 	
 	var width = byId(id).style.width;
 	var height = byId(id).style.height;
-	//DKINFO("DKFrame_Widget("+id+"): width="+width+" , height="+height+"\n");
+	//console.log("DKFrame_Widget("+id+"): width="+width+" , height="+height+"\n");
 
 	width = width.replace("px", "");
 	height = height.replace("px", "");
@@ -171,10 +171,10 @@ function DKFrame_CreateFrame(title, width, height)
 	//DKAddEvent(frame, "mousedown", DKFrame_OnEvent);
 	byId(frame).addEventListener("mousedown", DKFrame_OnEvent);
 	
-	//DKINFO("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
-	//DKINFO("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
-	//DKINFO("DKFrame_Widget("+id+"): frame width="+width+"\n");
-	//DKINFO("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
+	//console.log("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
+	//console.log("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
+	//console.log("DKFrame_Widget("+id+"): frame width="+width+"\n");
+	//console.log("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
 	
 	var titlebar = DKWidget_CreateElement(byId(frame), "div", "DKFrame_titlebar");
 	byId(titlebar).style.position = "absolute";
@@ -342,35 +342,35 @@ function DKFrame_Close(id)
 	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
 	//var frame = DKWidget_GetParent(id);
 	var frame = byId(id).parentNode.id;
-	//DKINFO("DKFrame_Close("+id+"): frame = "+frame+"\n");
+	//console.log("DKFrame_Close("+id+"): frame = "+frame+"\n");
 	var children = DKWidget_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
-		//DKINFO("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
+		//console.log("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
 		if(arry[i].indexOf(".html") > -1){
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
 			var jsfile = file.replace(".html", ".js");
-			//DKINFO("DKClose("+jsfile+")\n");
+			//console.log("DKClose("+jsfile+")\n");
 			DKClose(jsfile);
 			var htmlfile = file.replace(".js", ".html");
 			DKClose(htmlfile);
 		}
 		if(arry[i].indexOf("iframe_") > -1){
-			DKINFO("DKFrame_Close("+id+"): we found a cef iframe ("+arry[i]+") to close\n");
+			console.log("DKFrame_Close("+id+"): we found a cef iframe ("+arry[i]+") to close\n");
 			var frameId = arry[i].replace("iframe_","");
 			for(var b=0; b<DKCef_GetBrowsers(); b++){
-				//DKINFO("frameId = "+frameId+"\n");
-				//DKINFO("DKCef_GetBrowserId("+b+") = "+DKCef_GetBrowserId(b)+"\n");
+				//console.log("frameId = "+frameId+"\n");
+				//console.log("DKCef_GetBrowserId("+b+") = "+DKCef_GetBrowserId(b)+"\n");
 				if(frameId == DKCef_GetBrowserId(b)){
-					//DKINFO("We Know Which One To Close:\n");
+					//console.log("We Know Which One To Close:\n");
 					DKCef_CloseBrowser(b);
 				}
 			}
 		}
 	}
 	
-	//DKINFO("DKFrame_Close("+id+"): frame="+frame+"\n");
+	//console.log("DKFrame_Close("+id+"): frame="+frame+"\n");
 	if(frame == "body" || frame == document.body){
 		return;
 	}
@@ -450,11 +450,11 @@ function DKFrame_CloseAll()
 function DKFrame_Reload(id)
 {
 	DKDEBUGFUNC(id);
-	DKINFO("TODO: refresh the frame data. html, javascript and css all reloaded\n");
+	console.log("TODO: refresh the frame data. html, javascript and css all reloaded\n");
 	
-	DKINFO("id = "+id+"\n");
+	console.log("id = "+id+"\n");
 	var saved_id = id; 
-	DKINFO("saved_id = "+saved_id+"\n");
+	console.log("saved_id = "+saved_id+"\n");
 	var jsfile;
 	var htmlfile;
 	
@@ -471,8 +471,8 @@ function DKFrame_Reload(id)
 		}
 	}
 	
-	DKINFO("jsfile = "+jsfile+"\n");
-	DKINFO("htmlfile = "+htmlfile+"\n");
+	console.log("jsfile = "+jsfile+"\n");
+	console.log("htmlfile = "+htmlfile+"\n");
 	
 	DKFrame_Close(id);
 	DKCreate(jsfile, function(){

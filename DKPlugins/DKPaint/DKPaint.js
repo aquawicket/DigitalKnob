@@ -36,7 +36,7 @@ function DKPaint_OnEvent(event)
 	}
 	if(event.type == "OpenFile"){
 		var file = DK_GetValue(event);
-		//DKINFO(("OpenFile: "+file+"\n");
+		//console.log(("OpenFile: "+file+"\n");
 		DKPaint_Open(file)
 	}
 }

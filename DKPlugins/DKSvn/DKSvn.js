@@ -6,7 +6,7 @@ function DKSvn_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKThreadPool");
 
-	//DKINFO((DK_GetOS()+"\n");
+	//console.log((DK_GetOS()+"\n");
 	if(DK_GetOS() == "Win32"){
 		//GIT = "C:/Program Files/Git/bin/git.exe";
 		//GIT = DKFile_GetShortName(GIT);
@@ -43,13 +43,13 @@ function DKSvn_ValidateSvn()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKINFO(("Looking for SVN\n");
-	//DKINFO((SVN+"\n");
+	console.log(("Looking for SVN\n");
+	//console.log((SVN+"\n");
 	if(!DKFile_Exists(SVN)){
-		DKINFO(("Please install SVN\n");
+		console.log(("Please install SVN\n");
 		DKBuild_InstallSvn();
 	}
-	DKINFO(("Found SVN\n");
+	console.log(("Found SVN\n");
 	if(DK_GetOS() == "Mac"){
 		SVN = "svn";
 	}
@@ -60,7 +60,7 @@ function DKSvn_InstallSvn()
 {
 	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
-	DKINFO(("Installing Svn\n");
+	console.log(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
 	
 	if(DK_GetOS() == "Win32"){
@@ -78,7 +78,7 @@ function DKSvn_InstallSvn()
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{
-		DKINFO(("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
+		console.log(("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
 	}
 }
 
@@ -86,7 +86,7 @@ function DKSvn_InstallSvn()
 function DKSvn_SvnUpdate()
 {
 	DKDEBUGFUNC();
-	DKINFO(("Svn Update...\n");
+	console.log(("Svn Update...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DKPATH);
 	
@@ -107,7 +107,7 @@ function DKSvn_SvnUpdate()
 function DKSvn_SvnCommit()
 {
 	DKDEBUGFUNC();
-	DKINFO(("Svn Commit...\n");
+	console.log(("Svn Commit...\n");
 	DK_Execute(SVN +" cleanup "+DKPATH);
 	DK_Execute(SVN +" commit -m update "+DKPATH);
 	

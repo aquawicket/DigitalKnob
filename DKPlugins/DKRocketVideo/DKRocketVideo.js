@@ -49,7 +49,7 @@ function DKRocketVideo_playpause()
 	DKDEBUGFUNC();
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketVideo_playpause", "src");
-	//DKINFO(("DKRocketVideo_playpause(): src="+src+"\n");
+	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_playpause", "src", "DKRocketVideo/pause.png");
@@ -77,7 +77,7 @@ function DKRocketVideo_speaker()
 	DKDEBUGFUNC();
 	//toggle volume/mute
 	var src = DKWidget_GetAttribute("DKRocketVideo_speaker", "src");
-	DKINFO(("DKRocketVideo_speaker(): src="+src+"\n");
+	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){
 		DKWidget_SetAttribute("DKRocketVideo_speaker", "src", "DKRocketVideo/volume3.png");

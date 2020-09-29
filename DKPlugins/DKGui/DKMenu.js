@@ -22,15 +22,15 @@ function DKMenu_ValidatePosition(id)
 {
 	DKDEBUGFUNC(id);
 	console.log("DKMenu_ValidatePosition("+id+")");
-	//DKINFO("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
-	//DKINFO("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
+	//console.log("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
+	//console.log("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
 	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"rem");
 	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"px");
 	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"rem");
 	
-	//DKINFO("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
-	//DKINFO("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
+	//console.log("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
+	//console.log("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
 	byId(id).style.top = "100px";//DKWidget_GetMouseWindowY()+"px";
 	byId(id).style.top = "100rem";//DKWidget_GetMouseWindowY()+"rem";
 	byId(id).style.left = "100px";//DKWidget_GetMouseWindowX()+"px";
@@ -46,20 +46,20 @@ function DKMenu_ValidatePosition(id)
 	var width = Number(byId(id).clientWidth);
 	var height = Number(byId(id).clientHeight);
 	
-	//DKINFO("win_width = "+win_width+"\n");
-	//DKINFO("win_height = "+win_height+"\n");
-	//DKINFO("top = "+top+"\n");
-	//DKINFO("left = "+left+"\n");
-	//DKINFO("width = "+width+"\n");
-	//DKINFO("height = "+height+"\n");
+	//console.log("win_width = "+win_width+"\n");
+	//console.log("win_height = "+win_height+"\n");
+	//console.log("top = "+top+"\n");
+	//console.log("left = "+left+"\n");
+	//console.log("width = "+width+"\n");
+	//console.log("height = "+height+"\n");
 	
 	if(top + height > win_height){
 		top = win_height - height;
-		DKINFO("new top = "+top+"\n");
+		console.log("new top = "+top+"\n");
 		DKWidget_SetProperty(id, "top", top+"px");
 	}
 	if(left + width > win_width){
-		DKINFO("new left = "+left+"\n");
+		console.log("new left = "+left+"\n");
 		left = win_width - width;
 		DKWidget_SetProperty(id, "left", left+"px");
 	}

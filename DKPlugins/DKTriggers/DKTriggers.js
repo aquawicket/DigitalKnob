@@ -155,7 +155,7 @@ function DKTrigger_SelectTrigger(name)
 	for(var i = 0; i < triggers.length; i++){
 		if(name == triggers[i]){
 			current_trigger = triggers[i];
-			DKINFO("Current Trigger: "+current_trigger+"\n");
+			console.log("Current Trigger: "+current_trigger+"\n");
 		}
 	}
 }
@@ -285,7 +285,7 @@ function DKTrigger_FireTrigger(trigger)
 {
 	DKDEBUGFUNC(trigger);	
 	if(trigger_events != true){ return; }
-	DKINFO("Fire Trigger: "+trigger+"\n");
+	console.log("Fire Trigger: "+trigger+"\n");
 	
 	for(var i=0; i < effects.length; ++i){
 		if(effects[i].trigger != trigger){ continue; }
@@ -294,10 +294,10 @@ function DKTrigger_FireTrigger(trigger)
 		var var1 = effects[i].var1;
 		var var2 = effects[i].var2;
 		var var3 = effects[i].var3;
-		DKINFO("     Command: "+command+"\n");
-		DKINFO("        Var1: "+var1+"\n");
-		DKINFO("        Var2: "+var2+"\n");
-		DKINFO("        Var3: "+var3+"\n");
+		console.log("     Command: "+command+"\n");
+		console.log("        Var1: "+var1+"\n");
+		console.log("        Var2: "+var2+"\n");
+		console.log("        Var3: "+var3+"\n");
 
 		////  Commands  ////
 		if(command == "DoubleClick"){
@@ -315,7 +315,7 @@ function DKTrigger_FireTrigger(trigger)
 			out += " ";
 			out += var3;
 			out += "\n";
-			DKINFO(out+"\n");
+			console.log(out+"\n");
 			continue;
 		}
 		if(command == "LeftClick"){
@@ -337,16 +337,16 @@ function DKTrigger_FireTrigger(trigger)
 			out += " ";
 			out += var3;
 			out += "\n";
-			DKINFO(out+"\n");
+			console.log(out+"\n");
 			continue;
 		}
 		if(command == "MouseTo"){
-			DKINFO("DK_SetCursorPos("+Number(var1)+","+Number(var2)+")\n");
+			console.log("DK_SetCursorPos("+Number(var1)+","+Number(var2)+")\n");
 			DK_SetCursorPos(Number(var1), Number(var2));
 			continue;
 		}
 		if(command == "MouseToImage"){
-			//DKINFO("MouseToImage\n");
+			//console.log("MouseToImage\n");
 			DK_MouseToImage(var1);
 			continue;
 		}
@@ -371,7 +371,7 @@ function DKTrigger_LoadTriggers(file)
 	DKDEBUGFUNC(file);	
 	var assets = DKAssets_LocalAssets();
 	if(!DKFile_Exists(assets+file)){
-		DKINFO("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file\n");
+		console.log("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file\n");
 		return;
 	}
 	
@@ -443,7 +443,7 @@ function DKTrigger_SaveTriggers(file)
 		DKFile_SetSetting(assets+file, "[EFFECT_"+String(e)+"_VAR3]", effects[e].var3);
 	}
 
-	DKINFO("Saved Triggers.\n");
+	console.log("Saved Triggers.\n");
 	
 	DKTrigger_AddEvents();
 }
@@ -452,7 +452,7 @@ function DKTrigger_SaveTriggers(file)
 function DKTrigger_AddEvents()
 {
 	DKDEBUGFUNC();	
-	DKINFO("Adding events to gui causes . . .\n");
+	console.log("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].command == "gui"){
 			DKAddEvent(causes[c].var1, causes[c].var2, DKTrigger_OnEvent);

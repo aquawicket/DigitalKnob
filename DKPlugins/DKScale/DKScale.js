@@ -28,10 +28,10 @@ function DKScale_OnEvent(event)
 function DKScale_Resize()
 {
 	DKDEBUGFUNC();
-	//DKINFO(("DKScale_Resize()\n");
-    //DKINFO(("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
-	//DKINFO(("DKWindow_GetWidth() = "+DKWindow_GetWidth()+"\n");
-	//DKINFO(("DKWindow_GetHeight() = "+DKWindow_GetHeight()+"\n");
+	//console.log(("DKScale_Resize()\n");
+    //console.log(("DKWindow_GetPixelRatio() = "+DKWindow_GetPixelRatio()+"\n");
+	//console.log(("DKWindow_GetWidth() = "+DKWindow_GetWidth()+"\n");
+	//console.log(("DKWindow_GetHeight() = "+DKWindow_GetHeight()+"\n");
 	
 	if(pixel_ratio == DKWindow_GetPixelRatio()){ return true; } //nothing to be done
 	pixel_ratio = DKWindow_GetPixelRatio();
@@ -42,12 +42,12 @@ function DKScale_Resize()
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
 			var ratio = 2.0;
 			DKWidget_SetProperty("html", "font-size", ratio+"px");
-			DKINFO(("DKScale_Resize(): scale set to "+ratio+"px\n");
+			console.log(("DKScale_Resize(): scale set to "+ratio+"px\n");
 		}
 	}
 	else{
 		DKWidget_SetProperty("html", "font-size", "1px");
-		DKINFO(("DKScale_Resize(): scale set to 1px\n");
+		console.log(("DKScale_Resize(): scale set to 1px\n");
 	}
 	*/
 }

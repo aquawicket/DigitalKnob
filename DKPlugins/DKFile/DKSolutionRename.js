@@ -62,10 +62,10 @@ function DKSolutionRename_Rename()
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
 	var newvalue = oldvalue;
 	newvalue = newvalue.replace(oldhtml, newhtml);
-	//DKINFO("oldhtml = "+oldhtml+"\n");
-	//DKINFO("oldvalue = "+oldvalue+"\n");
-	//DKINFO("newhtml = "+newhtml+"\n");
-	//DKINFO("newvalue = "+newvalue+"\n");
+	//console.log("oldhtml = "+oldhtml+"\n");
+	//console.log("oldvalue = "+oldvalue+"\n");
+	//console.log("newhtml = "+newhtml+"\n");
+	//console.log("newvalue = "+newvalue+"\n");
 	
 	if(DKFile_Rename(oldvalue, newvalue, true) == false){
 		return; 

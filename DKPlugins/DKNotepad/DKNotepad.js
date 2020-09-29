@@ -51,7 +51,7 @@ function DKNotepad_OnEvent(event)
 	}
 	if(event.type == "SaveFile"){
 		var file = event.value;//DK_GetValue(event);
-		//DKINFO(("SaveFile: "+file+"\n");
+		//console.log(("SaveFile: "+file+"\n");
 		DKNotepad_Save(file)
 	}
 	//if(event.type == "SetFile"){

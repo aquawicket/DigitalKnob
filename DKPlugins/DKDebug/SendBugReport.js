@@ -32,7 +32,7 @@ function SendBugReport_CreateReport()
 {
 	DKDEBUGFUNC();
 	var str = DKWidget_GetValue("SendBugReport_Textarea");
-	DKINFO(str+"\n");
+	console.log(str+"\n");
 	
 	var assets = DKAssets_LocalAssets();
 	var log = DKFile_FileToString(assets+"log.txt");

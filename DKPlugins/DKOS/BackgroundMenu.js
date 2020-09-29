@@ -4,7 +4,7 @@ function BackgroundMenu_Init()
 	DKDEBUGFUNC();
 	DKCreate("DKOS/BackgroundMenu.html");
 	var file = document.getElementById("Background").getAttribute("src");
-	//DKINFO("file="+file+"\n");
+	//console.log("file="+file+"\n");
 	document.getElementById("BackgroundMenu_Image").setAttribute("src", file);
 }
 

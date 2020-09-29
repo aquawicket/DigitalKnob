@@ -31,11 +31,11 @@ function DKVideo_Queue(id, src)
 	}
 	
 	if(!type){
-		DKINFO("DKERROR: DKVideo_Queue(): Cannot determine video type\n");
+		console.log("DKERROR: DKVideo_Queue(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});
-	DKINFO("Queued video: "+src+"\n");
+	console.log("Queued video: "+src+"\n");
 }
 
 ////////////////////////////////
@@ -57,12 +57,12 @@ function DKVideo_Change(id, src)
 	}
 	
 	if(!type){
-		DKINFO("DKERROR: DKVideo_Change(): Cannot determine video type\n");
+		console.log("DKERROR: DKVideo_Change(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});
 	myPlayer.play();
-	DKINFO("Playing video: "+src+"\n");
+	console.log("Playing video: "+src+"\n");
 }
 
 ///////////////////////////////////////////////

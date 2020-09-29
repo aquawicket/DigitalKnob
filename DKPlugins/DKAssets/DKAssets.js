@@ -67,22 +67,22 @@ else{
 */
 //if(absolutepath){online_assets = absolutepath;}
 
-DKINFO("href: "+href+"\n");
-DKINFO("hostname: "+hostname+"\n");
-DKINFO("pathname: "+pathname+"\n");
-DKINFO("protocol: "+protocol+"\n");
-DKINFO("appfilename: "+appfilename+"\n");
-DKINFO("local_assets: "+local_assets+"\n");
-DKINFO("online_assets: "+online_assets+"\n");
-//DKINFO("absolutepath: "+absolutepath+"\n");
+console.lof("href: "+href+"\n");
+console.lof("hostname: "+hostname+"\n");
+console.lof("pathname: "+pathname+"\n");
+console.lof("protocol: "+protocol+"\n");
+console.lof("appfilename: "+appfilename+"\n");
+console.lof("local_assets: "+local_assets+"\n");
+console.lof("online_assets: "+online_assets+"\n");
+//console.lof("absolutepath: "+absolutepath+"\n");
 
-DKINFO("LOG_DEBUG: "+LOG_DEBUG+"\n");
-DKINFO("LOG_INFO: "+LOG_INFO+"\n");
-DKINFO("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
-DKINFO("LOG_ERRORS: "+LOG_ERRORS+"\n");
-DKINFO("LOG_FILE: "+LOG_FILE+"\n");
-DKINFO("LOG_SHOW: "+LOG_SHOW+"\n");
-DKINFO("LOG_HIDE: "+LOG_HIDE+"\n");
+console.lof("LOG_DEBUG: "+LOG_DEBUG+"\n");
+console.lof("LOG_INFO: "+LOG_INFO+"\n");
+console.lof("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
+console.lof("LOG_ERRORS: "+LOG_ERRORS+"\n");
+console.lof("LOG_FILE: "+LOG_FILE+"\n");
+console.lof("LOG_SHOW: "+LOG_SHOW+"\n");
+console.lof("LOG_HIDE: "+LOG_HIDE+"\n");
 
 
 ////////////////////////

@@ -27,7 +27,7 @@ function DKAudioPlayer_End()
 function DKAudioPlayer_OnEvent(event)
 {
 	DKDEBUGFUNC(event);
-	//DKINFO("DKAudioPlayer_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	//console.lof("DKAudioPlayer_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id == "DKAudioPlayer_playpause"){
 		DKAudioPlayer_playpause();
@@ -80,7 +80,7 @@ function DKAudioPlayer_SetTime(value)
 {
 	DKDEBUGFUNC(value);
 	var time = (value * DKAudio_GetDuration() / 1000);
-	DKINFO("time = "+time+"\n");
+	console.lof("time = "+time+"\n");
 	DKAudio_SetTime(time);
 }
 
@@ -111,7 +111,7 @@ function DKAudioPlayer_speaker()
 		DKAudio_Mute();
 	}
 	
-	DKINFO("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n");
+	console.lof("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n");
 	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume());
 }
 

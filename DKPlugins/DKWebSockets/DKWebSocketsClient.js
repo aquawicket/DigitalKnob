@@ -49,13 +49,13 @@ function DKWebSocketsClient_CreateClient()
 	url = DKWidget_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
 	
 	if(DK_GetBrowser() == "Rocket"){
-		DKINFO("Connecting to WebSocket via C++...\n");
+		console.log("Connecting to WebSocket via C++...\n");
 		DKWebSockets_CreateClient(url);
 		return;
 	}
 	
 	//else
-	DKINFO("Connecting to WebSocket via javascript...\n");
+	console.log("Connecting to WebSocket via javascript...\n");
 	websocket = new WebSocket(url);
 	websocket.onopen = function(){
 		console.log("websocket.onopen");

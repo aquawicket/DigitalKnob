@@ -5,43 +5,24 @@
 ///////////////////////////
 function TaskbarMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKOS/TaskbarMenu.html", function(){
-		//DKAddEvent("window", "mousedown", TaskbarMenu_OnEvent);
 		window.addEventListener("mousedown", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenSource", "click", TaskbarMenu_OnEvent);
 		byId("OpenSource").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenDebug", "click", TaskbarMenu_OnEvent);
 		byId("OpenDebug").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("PushDKFiles", "click", TaskbarMenu_OnEvent);
 		byId("PushDKFiles").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("ClearConsole", "click", TaskbarMenu_OnEvent);
 		byId("ClearConsole").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("Info", "click", TaskbarMenu_OnEvent);
 		byId("Info").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("Reload", "click", TaskbarMenu_OnEvent);
 		byId("Reload").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("CloseDKGui", "click", TaskbarMenu_OnEvent);
 		byId("CloseDKGui").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("FileExplorer", "click", TaskbarMenu_OnEvent);
 		byId("FileExplorer").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenBuilder", "click", TaskbarMenu_OnEvent);
 		byId("OpenBuilder").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenNotepad", "click", TaskbarMenu_OnEvent);
 		byId("OpenNotepad").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("InputTest", "click", TaskbarMenu_OnEvent);
 		byId("InputTest").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenMessage", "click", TaskbarMenu_OnEvent);
 		byId("OpenMessage").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenTetris", "click", TaskbarMenu_OnEvent);
 		byId("OpenTetris").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("OpenGoogle", "click", TaskbarMenu_OnEvent);
 		byId("OpenGoogle").addEventListener("click", TaskbarMenu_OnEvent);
-		//DKAddEvent("TaskbarMenu_Run", "keydown", TaskbarMenu_OnEvent);
 		byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu_OnEvent);
-		//DKAddEvent("Git", "click", TaskbarMenu_OnEvent);
 		byId("Git").addEventListener("click", TaskbarMenu_OnEvent);
-		
 		DKWidget_SetFocus("TaskbarMenu_Run");
 	});
 }
@@ -49,8 +30,6 @@ function TaskbarMenu_Init()
 //////////////////////////
 function TaskbarMenu_End()
 {
-	DKDEBUGFUNC();
-	//DKRemoveEvents(TaskbarMenu_OnEvent);
 	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
 	byId("OpenSource").removeEventListener("click", TaskbarMenu_OnEvent);
 	byId("OpenDebug").removeEventListener("click", TaskbarMenu_OnEvent);
@@ -68,14 +47,12 @@ function TaskbarMenu_End()
 	byId("OpenGoogle").removeEventListener("click", TaskbarMenu_OnEvent);
 	byId("TaskbarMenu_Run").removeEventListener("keydown", TaskbarMenu_OnEvent);
 	byId("Git").removeEventListener("click", TaskbarMenu_OnEvent);
-		
 	DKClose("DKOS/TaskbarMenu.html");
 }
 
 ///////////////////////////////////
 function TaskbarMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "FileExplorer"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
@@ -128,7 +105,7 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id == "OpenSource"){
-		//DKINFO("OpenSource\n");
+		//console.log("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		//var source = DKWidget_GetOuterHtml("body");
 		var source = document.body.outerHTML;
@@ -137,7 +114,7 @@ function TaskbarMenu_OnEvent(event)
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
-			//DKINFO(source+"\n");
+			//console.log(source+"\n");
 		});
 	}
 	if(event.currentTarget.id == "OpenDebug"){
@@ -155,32 +132,32 @@ function TaskbarMenu_OnEvent(event)
 		console.clear();
 	}
 	if(event.currentTarget.id == "Info"){
-		DKINFO("\n**** DKOBJECTS ****\n");
+		console.log("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKINFO(arry[i]+"\n");
+			console.log(arry[i]+"\n");
 		}
-		DKINFO("\n");
+		console.log("\n");
 		
-		DKINFO("**** DKEVENTS ****\n");
+		console.log("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKINFO(arry[i]+"\n");
+			console.log(arry[i]+"\n");
 		}
-		DKINFO("\n");
+		console.log("\n");
 		
-		DKINFO("**** DKFUNCTIONS ****\n");
+		console.log("**** DKFUNCTIONS ****\n");
 		var events = DK_GetFunctions();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			DKINFO(arry[i]+"\n");
+			console.log(arry[i]+"\n");
 		}
-		DKINFO("\n");
+		console.log("\n");
 	}
 	if(event.currentTarget.id == "Reload"){
 		DKFrame_CloseAll();
@@ -193,7 +170,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id == "TaskbarMenu_Run"){
 		var key = DK_GetValue(event);
-		//DKINFO("DKAdminMenu_Run: key="+key+"\n");
+		//console.log("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() == "RML"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}

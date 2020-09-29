@@ -128,5 +128,5 @@ function DKNotepadFile_Print()
 function DKNotepadFile_CheckForSave()
 {
 	DKDEBUGFUNC();
-	DKINFO("TODO\n");
+	console.log("TODO\n");
 }

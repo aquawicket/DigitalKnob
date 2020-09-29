@@ -51,7 +51,7 @@ function DKWebSocketsServer_CreateServer()
 		DKWARN("DKWebSocketsServer_CreateServer(): Please enter a port number\n");
 		return;
 	}
-	DKINFO("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");
+	console.log("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");
 	DKWebSockets_CreateServer(DKWidget_GetValue("DKWebSocketsServer_IpAddress"), Number(DKWidget_GetValue("DKWebSocketsServer_Port")));
 }
 

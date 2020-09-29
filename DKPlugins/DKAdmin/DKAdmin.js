@@ -5,7 +5,7 @@ function DKAdmin_Init()
 	DKCreate("DKAdmin/DKAdmin.html");
 	DKAddEvent("AdminBadge", "click", DKAdmin_OnEvent);
 	
-	//DKINFO("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
+	//console.lof("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
 	if(DK_GetBrowser() == "RML"){
 		DKWidget_SetAttribute("AdminBadge", "src", "DKAdmin/adminRed.png");
 	}
@@ -27,7 +27,7 @@ function DKAdmin_End()
 function DKAdmin_OnEvent(event)
 {
 	DKDEBUGFUNC(event
-	DKINFO("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	console.lof("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id == "AdminBadge"){
 		DKCreate("DKAdmin/DKAdminMenu.js", function(){});

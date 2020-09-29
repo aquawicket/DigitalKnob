@@ -12,16 +12,16 @@ function AdjustRems(id)
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
 	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
 	for(var i=0; i<elements.length; i++){
-		//DKINFO("\n");
-		//DKINFO(elements[i].id+"\n");
+		//console.log("\n");
+		//console.log(elements[i].id+"\n");
 		for(var s=0; s<elements[i].style.length; s++){
 			var style_name = elements[i].style[s];
 			var style_value = elements[i].style[elements[i].style[s]];
-			//DKINFO(style_name+" : "+style_value+"\n");
+			//console.log(style_name+" : "+style_value+"\n");
 			
 			if(style_value.indexOf("rem") > -1){
 				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";  //NOTE: 10 = scale factor
-				//DKINFO(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem"+"\n");
+				//console.log(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem"+"\n");
 			}
         }
 	}	
@@ -75,7 +75,7 @@ function DKWidget_GetAvailableId(id)
 		i++;
 	}
 	return out;
-	//DKINFO("GetAvailableId("+id+")-> "+out+"\n");
+	//console.log("GetAvailableId("+id+")-> "+out+"\n");
 }
 
 /////////////////////////////
@@ -203,7 +203,7 @@ function DKWidget_GetElements(id)
 			string += ",";
 		}
 	}
-	//DKINFO("GetElements("+id+"): -> "+string+"\n");
+	//console.log("GetElements("+id+"): -> "+string+"\n");
 	return string;
 }
 
@@ -211,7 +211,7 @@ function DKWidget_GetElements(id)
 function DKWidget_GetValue(variable)
 {
 	DKDEBUGFUNC(variable);
-	if(!variable){ DKINFO("variable empty\n"); return; }
+	if(!variable){ console.log("variable empty\n"); return; }
 
 	if(typeof variable === "string"){ //id
 		//console.log("GetValue("+variable+") -> typeof variable === string\n");
@@ -234,22 +234,22 @@ function DKWidget_GetValue(variable)
 	}
 	
 	if(typeof variable === "object"){
-		//DKINFO("DKWidget_GetValue("+variable+") -> typeof variable === object\n");
-		//DKINFO("DKWidget_GetValue("+variable+") -> variable.nodeType == "+variable.nodeType+"\n");
-		//DKINFO("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n");
-		//DKINFO("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n");
+		//console.log("DKWidget_GetValue("+variable+") -> typeof variable === object\n");
+		//console.log("DKWidget_GetValue("+variable+") -> variable.nodeType == "+variable.nodeType+"\n");
+		//console.log("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n");
+		//console.log("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n");
 		if(variable.nodeType == 1){
-			//DKINFO("variable.tagName: "+variable.tagName+"\n");
+			//console.log("variable.tagName: "+variable.tagName+"\n");
 			if(variable.tagName == "INPUT"){
-				//DKINFO("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
+				//console.log("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
 			return variable.innerHTML;
 		}
 		if(variable.type){ //event
 			var event = variable;
-			//DKINFO("GetValue("+variable+") -> variable.type == true\n");
-			//DKINFO("GetValue("+variable+") -> "+variable.type+"\n");
+			//console.log("GetValue("+variable+") -> variable.type == true\n");
+			//console.log("GetValue("+variable+") -> "+variable.type+"\n");
 			if(variable.type == "mousedown"){
 				return GetMouseButton(variable);
 			}
@@ -309,15 +309,15 @@ function DKWidget_GetValue(variable)
 				return width+","+height;
 			}
 			var ele = DKWidget_GetElement(event);
-			//DKINFO("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
+			//console.log("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value;
 		}
 		else{ //element or other object
 			if(variable.value){
-				//DKINFO("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
+				//console.log("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
-			//DKINFO("DKWidget_GetValue("+variable+") -> "+variable[2]+"\n");
+			//console.log("DKWidget_GetValue("+variable+") -> "+variable[2]+"\n");
 			return variable[2];
 		}
 	}
@@ -449,7 +449,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 	} 
 	
 	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
-	//DKINFO("DK_IE() = "+DK_IE()+"\n");
+	//console.log("DK_IE() = "+DK_IE()+"\n");
 	if(DK_IE() && DK_IE() < 9){
 		value = value.replace("rem", "px"); //IE 8- fix
 	}
@@ -756,7 +756,7 @@ function DKWidget_GetFirstChild(id)
 	DKDEBUGFUNC(id);
 	var fc = document.getElementById(id).firstChild;
 	if(fc){
-		//DKINFO("GetFirstChild("+id+"): -> "+fc.id+"\n");
+		//console.log("GetFirstChild("+id+"): -> "+fc.id+"\n");
 		return fc.id;
 	}
 	return false;
@@ -789,7 +789,7 @@ function DKWidget_GetMouseElementX(id)
 		left += ele.offsetLeft; 
 	}
 	*/
-	//DKINFO("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n");
+	//console.log("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n");
 	return mouseX - DKWidget_GetOffsetLeft(id);//parseInt(left);
 }
 
@@ -805,7 +805,7 @@ function DKWidget_GetMouseElementY(id)
 		top += ele.offsetTop; 
 	}
 	*/
-	//DKINFO("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n");
+	//console.log("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n");
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
 
@@ -833,7 +833,7 @@ function DKWidget_GetOffsetTop(id)
 	while((ele=ele.offsetParent) != null){ 
 		top += ele.offsetTop; 
 	}
-	//DKINFO("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
+	//console.log("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
 	return parseInt(top);
 }
 
@@ -858,7 +858,7 @@ function DKWidget_GetOffsetRight(id)
 	while((ele=ele.offsetParent) != null){ 
 		right += ele.offsetRight; 
 	}
-	//DKINFO("DKWidget_GetOffsetRight("+id+") = "+top+"\n");
+	//console.log("DKWidget_GetOffsetRight("+id+") = "+top+"\n");
 	return parseInt(right);
 }
 
@@ -871,7 +871,7 @@ function DKWidget_GetOffsetBottom(id)
 	while((ele=ele.offsetParent) != null){ 
 		bottom += ele.offsetBottom; 
 	}
-	//DKINFO("DKWidget_GetOffsetBottom("+id+") = "+top+"\n");
+	//console.log("DKWidget_GetOffsetBottom("+id+") = "+top+"\n");
 	return parseInt(bottom);
 }
 
@@ -972,7 +972,7 @@ function DKWidget_GetScale()
 	var scale = document.documentElement.style.fontSize;
 	console.log(scale);
 	scale = scale.replace("px","");
-	//DKINFO("DKWidget_GetScale() = "+scale+"\n");
+	//console.log("DKWidget_GetScale() = "+scale+"\n");
 	return parseFloat(scale);
 }
 
@@ -1046,7 +1046,7 @@ function DKWidget_Cut(id)
 	else if(document.selection && document.selection.type != "Control"){
         text = document.selection.createRange().text;
     }
-	//DKINFO("DKWidget_Cut("+id+"): text = "+text+"\n");
+	//console.log("DKWidget_Cut("+id+"): text = "+text+"\n");
 	copyToClipboard(text);
 	removeSelection(id);
 }
@@ -1063,7 +1063,7 @@ function DKWidget_Copy(id)
         text = document.selection.createRange().text;
     }
 	
-	//DKINFO("DKWidget_Cut("+id+"): text = "+text+"\n");
+	//console.log("DKWidget_Cut("+id+"): text = "+text+"\n");
 	copyToClipboard(text);
 }
 

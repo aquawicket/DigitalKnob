@@ -113,10 +113,10 @@ function DKSolutionMenu_Open()
 function DKSolutionMenu_OpenHere()
 {
 	var path = DKSolutionMenu_file;
-	//DKINFO("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
-	//DKINFO("absolutepath = "+absolutepath+"\n");
+	//console.log("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
+	//console.log("absolutepath = "+absolutepath+"\n");
 	//path = path.replace(absolutepath,"");
-	//DKINFO("path = "+path+"\n");
+	//console.log("path = "+path+"\n");
 	DKSolution_OpenHere(path);
 }
 
@@ -136,15 +136,15 @@ function DKSolutionMenu_NewFile()
 	
 	//Find the id
 	var elements = DKWidget_GetElements("DKSolutionMenu");
-	//DKINFO("elements = "+elements+"\n");
+	//console.log("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){
-		//DKINFO("arry["+i+"] ="+arry[i]+"\n");
+		//console.log("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
-		//DKINFO("arry["+i+"] ="+value+"\n");
+		//console.log("arry["+i+"] ="+value+"\n");
 		if(value == DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
-			//DKINFO("id = "+arry[i]+"\n");
+			//console.log("id = "+arry[i]+"\n");
 			break;
 		}
 	}
@@ -166,15 +166,15 @@ function DKSolutionMenu_NewFolder()
 	
 	//Find the id
 	var elements = DKWidget_GetElements("DKSolutionMenu");
-	//DKINFO("elements = "+elements+"\n");
+	//console.log("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){
-		//DKINFO("arry["+i+"] ="+arry[i]+"\n");
+		//console.log("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
-		//DKINFO("arry["+i+"] ="+value+"\n");
+		//console.log("arry["+i+"] ="+value+"\n");
 		if(value == DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
-			//DKINFO("id = "+arry[i]+"\n");
+			//console.log("id = "+arry[i]+"\n");
 			break;
 		}
 	}
@@ -205,7 +205,7 @@ function DKSolutionMenu_Delete()
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessage_Confirm("delete this file?", function(rval){
-			//DKINFO("DKMessage_Confirm(): rval = "+rval+"\n");
+			//console.log("DKMessage_Confirm(): rval = "+rval+"\n");
 			if(rval == true){
 				DKFile_Delete(DKSolutionMenu_file);
 				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
@@ -244,9 +244,9 @@ function DKSolutionMenu_GitAdd()
 	DKCreate("DKBuild/DKBuild.js", function(){
 		var git = GIT;       //from DKBuild.js
 		var dkpath = DKPATH; //from DKBuild.js
-		//DKINFO("DKSolutionMenu_GitAdd(): git = "+git+"\n");
+		//console.log("DKSolutionMenu_GitAdd(): git = "+git+"\n");
 		
-		DKINFO("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
+		console.log("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
 		var search = DKSolutionMenu_file;
 		while(!DKFile_Exists(search+"/.git")){
 			var n = search.lastIndexOf("/");
@@ -255,10 +255,10 @@ function DKSolutionMenu_GitAdd()
 				return false;
 			}
 			search = search.substring(0, n);
-			DKINFO(search+"\n");
+			console.log(search+"\n");
 		}
 		
-		//DKINFO("found .git\n");
+		//console.log("found .git\n");
 		DKFile_ChDir(search);
 		DK_Execute(git+" add "+DKSolutionMenu_file);	
 	});
@@ -271,7 +271,7 @@ function DKSolutionMenu_UpxCompress()
 	
 		var dkpath = DKPATH; //from DKBuild.js
 		var upx = dkpath+"/DK/3rdParty/upx-3.95-win64/upx.exe";
-		DKINFO("upx = "+upx+"\n");
+		console.log("upx = "+upx+"\n");
 		//upx compress the exe file
 		if(DKFile_Exists(upx)){
 			DKWARN("UPX compressing exe... please wait\n");

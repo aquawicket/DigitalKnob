@@ -1,5 +1,7 @@
 // TODO //
 
+*** Create FAR 
+
 ***** CODE CLEANUP ******
 ** remove shortcut type functions in all code. I.E. DKAddEvent, DKGetId, etc.
 
