@@ -871,61 +871,9 @@ function IsLocal()
 	}
 }
 
-//////////////////////////
-function DKDEBUGFUNC(vars)
-{
-	/*
-	var string = DKDEBUGFUNC.caller.name+"(";  //func.caller.name not available in Duktape
-	if(vars){
-		for(var i=0; i<arguments.length; i++){
-			string += arguments[i];
-			if(i < arguments.length-1){
-				string += ",";
-			}
-		}
-	}
-	string += ")";
-	DKDEBUG(string+"\n");
-	*/
-}
-
-//////////////////////////
-function DKDEBUGVARS(vars)
-{
-	function getFileLine(){
-		var stack = Error().stack;
-		if(!stack || !LOG_LINES){ return ""; }
-		var lines = stack.split("\n");
-		var n=0;
-		while(lines[n].indexOf("Log") == -1){ n++; }
-		var fileline = lines[n+1];
-		var start = fileline.lastIndexOf("/");
-		var end = fileline.lastIndexOf(":");
-		fileline = fileline.substring(start+1, end+1);
-		return fileline;
-	};
-		
-	var info = getFileLine()+" "+DKDEBUGVARS.caller.name+"()   ";
-	if(vars){
-		for(var i=0; i<arguments.length; i++){
-			var variable = "unknown_name: ";
-			variable += arguments[i];
-			if(!LOG_DEBUG){
-				LOG_DEBUG = true;
-				DKDEBUG(info+variable+"\n");
-				LOG_DEBUG = false
-			}
-			else{
-				DKDEBUG(info+variable+"\n");
-			}
-		}
-	}
-}
-
 /////////////////////
 function DK_GetTime()
 {
-	DKDEBUGFUNC();
 	var d = new Date();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
@@ -945,7 +893,6 @@ function DK_GetTime()
 /////////////////////
 function DK_GetDate()
 {
-	DKDEBUGFUNC();
 	var d = new Date();
 	var date = d.getMonth()+1;
 	date += "/";
@@ -959,7 +906,6 @@ function DK_GetDate()
 /////////////////////
 function DK_Refresh()
 {	
-	DKDEBUGFUNC();
 	//window.location.href = href+"index.html";
 	window.location.hash = "";
 	window.location.reload(true);
@@ -969,7 +915,6 @@ function DK_Refresh()
 //////////////////////////
 function DKAvailable(name)
 {
-	DKDEBUGFUNC(name);
 	if(name == "DKWidget"){
 		return true; 
 	}
@@ -983,7 +928,6 @@ function DKAvailable(name)
 ////////////////////////
 function DK_GetObjects()
 {
-	DKDEBUGFUNC();
 	// Search the Dom for all scripts (.js files)
 	var jsfiles = "";
 	var elements = document.getElementsByTagName("script");
@@ -1031,7 +975,6 @@ function DK_GetObjects()
 ///////////////////
 function DK_GetOS()
 {
-	DKDEBUGFUNC();
 	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
      // Windows Phone must come first because its UA also contains "Android"
     if (/windows phone/i.test(userAgent)){
@@ -1056,7 +999,6 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	//DKDEBUGFUNC();
 	if(navigator.userAgent.indexOf("Rml") != -1){
         return "RML";
     }
@@ -1086,7 +1028,6 @@ function DK_GetBrowser()
 /////////////////////////
 function DK_GetJSEngine()
 {
-	DKDEBUGFUNC();
 	if(navigator.product == "Duktape"){
 		return "Duktape"
 	}
@@ -1105,7 +1046,6 @@ function DK_GetJSEngine()
 ////////////////
 function DK_IE()
 {
-	DKDEBUGFUNC();
 	var rv = 0;
 	if(navigator.appName == 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
@@ -1128,14 +1068,12 @@ function DK_IE()
 /////////////////////////////
 function DK_FileToString(url)
 {
-	DKDEBUGFUNC(url);
 	return ajaxGetUrl(url);
 }
 
 ///////////////////////////////
 function DK_Sleep(milliseconds)
 {
-	DKDEBUGFUNC(milliseconds);
 	var start = new Date().getTime();
 	for (var i = 0; i < 1e7; i++) {
 		if((new Date().getTime() - start) > milliseconds){
@@ -1147,7 +1085,6 @@ function DK_Sleep(milliseconds)
 ////////////////////////////
 function DK_ClearSelection()
 {
-	DKDEBUGFUNC();
 	//Clear text selection
 	if(document.selection){
 		document.selection.empty();
@@ -1179,7 +1116,6 @@ function DK_ClearSelection()
 /////////////////////////////
 function AjaxGet(url, output)
 {
-	DKDEBUGFUNC(url, output);
 	var request = "";
 	try {
         request = new XMLHttpRequest();
@@ -1234,7 +1170,6 @@ function AjaxGet(url, output)
 ////////////////////////
 function ajaxGetUrl(url)
 {
-	DKDEBUGFUNC(url);
 	var response = new Object();
 	AjaxGet(url, response);
 	

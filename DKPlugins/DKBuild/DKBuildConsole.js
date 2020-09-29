@@ -3,7 +3,6 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKBuild/DKBuild.js", function(){
 		DKBuild_ValidateCmake();
 		//DKBuild_ValidateVC2015();
@@ -20,14 +19,12 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	DKDEBUGFUNC();
 	DKClose("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////
 function DKBuildConsole_ChooseUpdate()
 {
-	DKDEBUGFUNC();
 	console.log("\n");
 	console.log("**** Update DigitalKnob ??? ****");
 	console.log("Y. Update");
@@ -72,7 +69,6 @@ function DKBuildConsole_ChooseUpdate()
 //////////////////////////////////
 function DKBuildConsole_SelectOs()
 {
-	DKDEBUGFUNC();
 	console.log("\n");
 	console.log("**** SELECT OS TO BUILD ****");
 	console.log("1. win32");
@@ -142,7 +138,6 @@ function DKBuildConsole_SelectOs()
 /////////////////////////////////////
 function DKBuildConsole_SelectApp()
 {
-	DKDEBUGFUNC();
 	console.log("**** SELECT APP TO BUILD ****");
 	for(var i=0; i<APP_LIST.length; ++i){
 		console.log(DKBuildConsole_TranslateOption(i)+":"+APP_LIST[i]+"");
@@ -169,7 +164,6 @@ function DKBuildConsole_SelectApp()
 //////////////////////////////////////
 function DKBuildConsole_SelectType()
 {
-	DKDEBUGFUNC();
 	console.log("**** SELECT BUILD TYPE ****");
 	console.log("1. Debug");
 	console.log("2. Release");
@@ -202,7 +196,6 @@ function DKBuildConsole_SelectType()
 /////////////////////////////////
 function DKBuildConsole_Process()
 {
-	DKDEBUGFUNC();
 	OS = "";
 	APP = "";
 	TYPE = "";
@@ -247,7 +240,6 @@ function DKBuildConsole_Process()
 //////////////////////////////////////////////
 function DKBuildConsole_TranslateOption(num)
 {
-	DKDEBUGFUNC();
 	if(num == 0){return "1";}
 	if(num == 1){return "2";}
 	if(num == 2){return "3";}
@@ -288,7 +280,6 @@ function DKBuildConsole_TranslateOption(num)
 ///////////////////////////////////////
 function DKBuildConsole_KeyToApp(key)
 {
-	DKDEBUGFUNC();
 	if(key == 49){ APP = APP_LIST[0]; } //1
 	if(key == 50){ APP = APP_LIST[1]; } //2
 	if(key == 51){ APP = APP_LIST[2]; } //3 
