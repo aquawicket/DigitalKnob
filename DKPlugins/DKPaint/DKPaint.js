@@ -5,16 +5,19 @@ function DKPaint_Init()
 {
 	DKCreate("DKPaint/DKPaint.css");
 	DKCreate("DKPaint/DKPaint.html");
-	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
-	DKAddEvent("DKPaint/DKPaint.html", "contextmenu", DKPaint_OnEvent);
-	DKAddEvent("DKPaint_File", "click", DKPaint_OnEvent);
-	DKAddEvent("DKPaint/DKPaint.html", "OpenFile", DKPaint_OnEvent);
+	//byId("DKPaint_Save").addEventListener("click", DKPaint_OnEvent);
+	byId("DKPaint/DKPaint.html").addEventListener("contextmenu", DKPaint_OnEvent);
+	byId("DKPaint_File").addEventListener("click", DKPaint_OnEvent);
+	byId("DKPaint/DKPaint.html").addEventListener("OpenFile", DKPaint_OnEvent);
 }
 
 //////////////////////
 function DKPaint_End()
 {
-	DKRemoveEvents(DKPaint_OnEvent);
+	//byId("DKPaint_Save").removeEventListener("click", DKPaint_OnEvent);
+	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_OnEvent);
+	byId("DKPaint_File").removeEventListener("click", DKPaint_OnEvent);
+	byId("DKPaint/DKPaint.html").removeEventListener("OpenFile", DKPaint_OnEvent);
 	DKClose("DKPaint/DKPaint.html");
 	DKClose("DKPaint/DKPaint.css");
 }

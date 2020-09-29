@@ -5,16 +5,16 @@ function DKOcr_Init()
 	DKCreate("DKOcr/DKOcr.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
 		DKWidget_AppendChild("DKOcr/DKOcr.html", "DKNotepad/DKNotepad.html");
-		DKRemoveEvent("DKNotepad/DKNotepad.html", "OpenFile", DKNotepad_OnEvent);
-		DKAddEvent("DKNotepad/DKNotepad.html", "OpenFile", DKOcr_OnEvent);
+		byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKNotepad_OnEvent);
+		byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKOcr_OnEvent);
 	});
 }
 
 ////////////////////
 function DKOcr_End()
 {
+	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_OnEvent);
 	DKClose("DKNotepad/DKNotepad.js");
-	DKRemoveEvents(DKOcr_OnEvent);
 }
 
 /////////////////////////////
