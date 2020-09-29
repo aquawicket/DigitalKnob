@@ -7,7 +7,7 @@ function DKTooltip_Init()
 ////////////////////////
 function DKTooltip_End()
 {
-	DKRemoveEvents(DKTooltip_OnEvent);
+	D//KRemoveEvents(DKTooltip_OnEvent);
 	DKClose("DKTooltip/DKTooltip.html");
 }
 
@@ -26,9 +26,9 @@ function DKTooltip_OnEvent(event)
 function DKTooltip_Add(id, string)
 {
 	DKWidget_SetAttribute(id, "tooltip", string);
-	DKAddEvent(id, "mouseenter", DKTooltip_OnEvent);
-	DKAddEvent(id, "mouseout", DKTooltip_OnEvent);
-	DKAddEvent("window", "mousedown", DKTooltip_OnEvent);
+	window.addEventListener("mousedown", DKTooltip_OnEvent);
+	byId(id).addEventListener("mouseenter", DKTooltip_OnEvent);
+	byId(id).addEventListener("mouseout", DKTooltip_OnEvent);
 }
 
 ///////////////////////////

@@ -8,11 +8,11 @@ function DKTray_Init()
 		return;
 	}
 	DKCreate("DKTray");
-	DKAddEvent("DKTray", "1000", DKTray_OnEvent);
-	DKAddEvent("DKTray", "1001", DKTray_OnEvent);
-	DKAddEvent("DKTray", "1002", DKTray_OnEvent);
-	DKAddEvent("DKTray", "click", DKTray_OnEvent);
-	DKAddEvent("DKTray", "doubleclick", DKTray_OnEvent);
+	ById("DKTray").addEventListener("1000", DKTray_OnEvent);
+	byId("DKTray").addEventListener("1001", DKTray_OnEvent);
+	byId("DKTray").addEventListener("1002", DKTray_OnEvent);
+	byId("DKTray").addEventListener("click", DKTray_OnEvent);
+	byId("DKTray").addEventListener("doubleclick", DKTray_OnEvent);
 	
 	DKTray_AddItem("Exit", 1002);
 	DKTray_AddItem("Minimize", 1001);
@@ -27,7 +27,11 @@ function DKTray_Init()
 /////////////////////
 function DKTray_End()
 {
-	DKRemoveEvents(DKTray_OnEvent);
+	ById("DKTray").removeEventListener("1000", DKTray_OnEvent);
+	byId("DKTray").removeEventListener("1001", DKTray_OnEvent);
+	byId("DKTray").removeEventListener("1002", DKTray_OnEvent);
+	byId("DKTray").removeEventListener("click", DKTray_OnEvent);
+	byId("DKTray").removeEventListener("doubleclick", DKTray_OnEvent);
 }
 
 //////////////////////////////
