@@ -2,17 +2,21 @@
 function DKPaintFile_Init()
 {
 	DKCreate("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
-	DKAddEvent("window", "mousedown", DKPaintFile_OnEvent);
-	DKAddEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
-	DKAddEvent("DKPaintFile_Save", "click", DKPaintFile_OnEvent);
-	DKAddEvent("DKPaintFile_Save As", "click", DKPaintFile_OnEvent);
-	DKAddEvent("DKPaintFile_Exit", "click", DKPaintFile_OnEvent);
+	window.addEventListener("mousedown", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Open").addEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Save").addEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Save As").addEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Exit").addEventListener("click", DKPaintFile_OnEvent);
 }
 
 //////////////////////////
 function DKPaintFile_End()
 {
-	DKRemoveEvents(DKPaintFile_OnEvent);
+	window.removeEventListener("mousedown", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Open").removeEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Save").removeEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Save As").removeEventListener("click", DKPaintFile_OnEvent);
+	byId("DKPaintFile_Exit").removeEventListener("click", DKPaintFile_OnEvent);
 	DKClose("DKPaint/DKPaintFile.html");
 }
 

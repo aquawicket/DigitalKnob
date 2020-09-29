@@ -2,21 +2,22 @@
 function DKStats_Init()
 {
 	DKCreate("DKStats/DKStats.html");
-	DKAddEvent("window", "second", DKStats_OnEvent);
-	//DKAddEvent("DKStats/DKStats.html", "click", DKStats_OnEvent);
+	window.addEventListener("second", DKStats_OnEvent);
+	//byId("DKStats/DKStats.html").addEventListener("click", DKStats_OnEvent);
 }
 
 //////////////////////
 function DKStats_End()
 {
-	DKRemoveEvents(DKStats_OnEvent);
+	window.removeEventListener("second", DKStats_OnEvent);
+	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_OnEvent);
 	DKClose("DKStats/DKStats.html");
 }
 
 ///////////////////////////////
 function DKStats_OnEvent(event)
 {
-	if(DK_Type(event, "second")){
+	if(event.type === "second")){
 		DKStats_Update();
 	}
 }

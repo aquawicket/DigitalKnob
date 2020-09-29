@@ -2,16 +2,19 @@
 function DKPaintMenu_Init()
 {
 	DKCreate("DKPaint/DKPaintMenu.html");
-	DKAddEvent("window", "mousedown", DKPaintMenu_OnEvent);
-	DKAddEvent("DKPaintMenu_Cut", "click", DKPaintMenu_OnEvent);
-	DKAddEvent("DKPaintMenu_Copy", "click", DKPaintMenu_OnEvent);
-	DKAddEvent("DKPaintMenu_Paste", "click", DKPaintMenu_OnEvent);
+	window.addEventListener("mousedown", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Cut").addEventListener("click", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Copy").addEventListener("click", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Paste").addEventListener("click", DKPaintMenu_OnEvent);
 }
 
 //////////////////////////
 function DKPaintMenu_End()
 {
-	DKRemoveEvents(DKPaintMenu_OnEvent);
+	window.removeEventListener("mousedown", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Cut").removeEventListener("click", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Copy").removeEventListener("click", DKPaintMenu_OnEvent);
+	byId("DKPaintMenu_Paste").removeEventListener("click", DKPaintMenu_OnEvent);
 	DKClose("DKPaint/DKPaintMenu.html");
 }
 

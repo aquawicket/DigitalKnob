@@ -3,14 +3,14 @@ var pixel_ratio = 1.0;
 ///////////////////////
 function DKScale_Init()
 {
-	DKAddEvent("window", "resize", DKScale_OnEvent);
+	window.addEventListener("resize", DKScale_OnEvent);
 	DKScale_Resize();
 }
 
 //////////////////////
 function DKScale_End()
 {
-	DKRemoveEvents(DKScale_OnEvent);
+	window.removeEventListener("resize", DKScale_OnEvent);
 }
 
 ///////////////////////////////

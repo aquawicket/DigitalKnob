@@ -9,6 +9,9 @@
  ..
  ..
 
+*** replace all == with ===
+*** replace all != with !==
+
  
 *** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 

@@ -2,18 +2,23 @@
 function DKRocketVideo_Init()
 {
 	DKCreate("DKRocketVideo/DKRocketVideo.html");
-	DKAddEvent("DKRocketVideo_playpause", "click", DKRocketVideo_OnEvent);
-	DKAddEvent("DKRocketVideo_position", "click", DKRocketVideo_OnEvent);
-	DKAddEvent("DKRocketVideo_positiontrack", "click", DKRocketVideo_OnEvent);
-	DKAddEvent("DKRocketVideo_speaker", "click", DKRocketVideo_OnEvent);
-	DKAddEvent("DKRocketVideo_volume", "click", DKRocketVideo_OnEvent);
-	DKAddEvent("DKRocketVideo_volumetrack", "click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_playpause").addEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_position").addEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_positiontrack").addEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_speaker").addEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_volume").addEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_volumetrack").addEventListener("click", DKRocketVideo_OnEvent);
 }
 
 ////////////////////////////
 function DKRocketVideo_End()
 {
-	DKRemoveEvents(DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_playpause").removeEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_position").removeEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_positiontrack").removeEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_speaker").removeEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_volume").removeEventListener("click", DKRocketVideo_OnEvent);
+	byId("DKRocketVideo_volumetrack").removeEventListener("click", DKRocketVideo_OnEvent);
 	DKClose("DKRocketVideo/DKRocketVideo.html");
 }
 
