@@ -1,7 +1,6 @@
 //////////////////////////
 function DKBuildGUI_Init()
 {
-	DKDEBUGFUNC();
 	//DKCreate("DKBuild/DKBuild.js", function(){});
 	DKCreate("DKBuild/DKBuildGUI.html", function(){
 	DKCreate("DKFile/DKFile.js", function(){
@@ -112,7 +111,6 @@ function DKBuildGUI_OnEvent(event)
 ////////////////////////////////
 function DKBuildGUI_UpdateApps()
 {
-	DKDEBUGFUNC();
 	////////  Update App List /////////////
 	byId("AppList").innerHTML == "";	
 	DKBuild_GetAppList();
@@ -131,7 +129,6 @@ function DKBuildGUI_UpdateApps()
 ///////////////////////////////
 function DKBuildGUI_AppSelect()
 {
-	DKDEBUGFUNC();
 	// We can send events to classes that are not of DKWidget as well.
 	if(DKWidget_GetValue("AppList") == "NEW APP"){
 		DKCreate("DKMessage/DKMessage.js", function(){
@@ -152,7 +149,6 @@ function DKBuildGUI_AppSelect()
 //////////////////////////////
 function DKBuildGUI_OsSelect()
 {
-	DKDEBUGFUNC();
 	OS = DKWidget_GetValue("OSList");
 	console.lof("OS = "+OS+"\n");
 }
@@ -160,7 +156,6 @@ function DKBuildGUI_OsSelect()
 /////////////////////////////////
 function DKBuildGUI_BuildSelect()
 {
-	DKDEBUGFUNC();
 	TYPE = DKWidget_GetValue("BuildType");
 	console.lof("TYPE = "+TYPE+"\n");
 }
@@ -169,7 +164,6 @@ function DKBuildGUI_BuildSelect()
 //////////////////////////////////
 function DKBuildGUI_UpdateLibs()
 {
-	DKDEBUGFUNC();
 	///// Update Libraries
 	DKWidget_SetInnerHtml("LibList", ""); //clear
 

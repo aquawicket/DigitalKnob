@@ -4,7 +4,6 @@ var IMAGEMAGICK = "C:/digitalknob/DK/3rdParty/ImageMagick-7.0.2-10-portable-Q16-
 /////////////////////////
 function IconMaker_Init()
 {
-	DKDEBUGFUNC();
 	IMAGEMAGICK = DKFile_GetShortName(IMAGEMAGICK);
 	console.log("IMAGEMAGICK="+IMAGEMAGICK);
 }
@@ -12,13 +11,12 @@ function IconMaker_Init()
 ////////////////////////
 function IconMaker_End()
 {
-	DKDEBUGFUNC();
+
 }
 
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	DKDEBUGFUNC(AppPath);
 	DKCreate("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
@@ -70,7 +68,6 @@ function IconMaker_Create(AppPath)
 ////////////////////////////////////////
 function IconMaker_ValidateImageMagick()
 {
-	DKDEBUGFUNC();
 	console.log("Looking for ImageMagick...");
 	//console.log(SVN);
 	if(!DKFile_Exists(IMAGEMAGICK)){
@@ -83,7 +80,6 @@ function IconMaker_ValidateImageMagick()
 ///////////////////////////////////////
 function IconMaker_InstallImageMagick()
 {
-	DKDEBUGFUNC();
 	DKFile_MkDir("C:/digitalknob/DK/Download");
 	var datapath = "C:/digitalknob/DK/Download/ImageMagick-7.0.2-10-portable-Q16-x86.zip";
 	

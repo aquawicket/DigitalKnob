@@ -3,7 +3,6 @@ var key_history = [];
 ///////////////////////
 function DKDebug_Init()
 {
-	DKDEBUGFUNC();
 	console.log("DKDebug_Init()");
 	window.addEventListener("keydown", DKDebug_OnEvent);
 }
@@ -11,14 +10,12 @@ function DKDebug_Init()
 //////////////////////
 function DKDebug_End()
 {
-	DKDEBUGFUNC();
 	window.removeEventListener("keydown", DKDebug_OnEvent);
 }
 
 ///////////////////////////////
 function DKDebug_OnEvent(event)
 {
-	//DKDEBUGFUNC(event);
 	//console.warn("DKDebug_OnEvent("+event+","+event.currentTarget.id+","+event.type+","+event.value+")");
 	
 	if(event.type == "keydown"){
@@ -39,7 +36,6 @@ function DKDebug_OnEvent(event)
 /////////////////////////////
 function DKDebug_LogKey(code)
 {
-	DKDEBUGFUNC(code);
 	console.log("DKDebug_LogKey("+code+")");
 	//console.trace();
 	if(key_history.length > 20){ key_history.shift(); }
@@ -49,7 +45,6 @@ function DKDebug_LogKey(code)
 ////////////////////////////
 function DKDebug_CheckKeys()
 {
-	DKDEBUGFUNC();
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
@@ -99,7 +94,6 @@ function DKDebug_CheckKeys()
 ///////////////////////////////
 function DKDebug_KeyToChar(key)
 {
-	DKDEBUGFUNC(key);
 	if(key == "KeyA"){ return "a"};
 	if(key == "KeyB"){ return "b"};
 	if(key == "KeyC"){ return "c"};
@@ -132,14 +126,12 @@ function DKDebug_KeyToChar(key)
 /////////////////////////
 function DKDebug_Reload()
 {
-	DKDEBUGFUNC();
 	//TODO
 }
 
 //////////////////////////
 function DKDebug_Refresh()
 {
-	DKDEBUGFUNC();
 	//TODO - make this work for all variations 
 	if(DK_GetBrowser() != "Rocket"){
 		DK_Refresh(); //Call DK.js
@@ -152,7 +144,6 @@ function DKDebug_Refresh()
 //////////////////////////////
 function DKDebug_PushDKFiles()
 {
-	DKDEBUGFUNC();
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
 	var assets = DKAssets_LocalAssets();
 	if(!assets){
@@ -223,7 +214,6 @@ function DKDebug_PushDKFiles()
 ///////////////////////////////
 function DKDebug_ClearConsole()
 {
-	DKDEBUGFUNC();
 	var api;
 	if(typeof console === 'undefined'){ return; }
 	if(typeof console._commandLineAPI !== 'undefined'){
@@ -241,7 +231,6 @@ function DKDebug_ClearConsole()
 ////////////////////////////
 function DKDebug_PrintInfo()
 {
-	DKDEBUGFUNC();
 	console.log("\n"); 
 	console.log("**** DKOBJECTS ****"); 
 	var objects = DK_GetObjects();
@@ -274,14 +263,12 @@ function DKDebug_PrintInfo()
 //////////////////////////////
 function DKDebug_ShowConsole()
 {
-	DKDEBUGFUNC();
 	DK_ShowConsole();
 }
 
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("html");
 	var assets = DKAssets_LocalAssets();
@@ -297,21 +284,18 @@ function DKDebug_GetSource()
 ////////////////////////
 function DKDebug_Crash()
 {
-	DKDEBUGFUNC();
 	DK_Crash();
 }
 
 /////////////////////////
 function DKDebug_Editor()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKEditor/DKEditor.js", function(){});
 }
 
 ///////////////////////////
 function DKDebug_Debugger()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() == "RML" || DK_GetJSEngine() == "Duktape"){
 		DKRml_DebuggerToggle();
 	}

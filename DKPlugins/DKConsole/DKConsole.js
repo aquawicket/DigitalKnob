@@ -3,7 +3,6 @@ var DKConsole_color = "black";
 /////////////////////////
 function DKConsole_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKConsole/DKConsole.css");
 	DKCreate("DKConsole/DKConsole.html");
 	DKAddEvent("DKConsole_Clear", "click", DKConsole_OnEvent);
@@ -15,7 +14,6 @@ function DKConsole_Init()
 ////////////////////////
 function DKConsole_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKConsole_OnEvent);
 	DKClose("DKConsole/DKConsole.html");
 	DKClose("DKConsole/DKConsole.css");
@@ -24,7 +22,6 @@ function DKConsole_End()
 /////////////////////////////////
 function DKConsole_OnEvent(event)
 {	
-	DKDEBUGFUNC();
 	DKDEBUG("DKConsole_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "DKConsole_Clear"){
 		DKWidget_SetInnerHtml("DKConsole_Content","");
@@ -46,7 +43,6 @@ function DKConsole_OnEvent(event)
 /////////////////////////////////
 function DKConsole_Notify(string)
 {
-	DKDEBUGFUNC();
 	var line = DKWidget_CreateElement("DKConsole_Content", "a", "DKConsole_line");
 	document.getElementById(line).style.display = "block";
 	document.getElementById(line).style.color = DKConsole_color;
