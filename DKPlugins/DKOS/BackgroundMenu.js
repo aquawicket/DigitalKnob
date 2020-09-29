@@ -1,7 +1,6 @@
 //////////////////////////////
 function BackgroundMenu_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKOS/BackgroundMenu.html");
 	var file = document.getElementById("Background").getAttribute("src");
 	//console.log("file="+file+"\n");
@@ -11,12 +10,11 @@ function BackgroundMenu_Init()
 /////////////////////////////
 function BackgroundMenu_End()
 {
-	DKDEBUGFUNC();
 	DKClose("DKOS/BackgroundMenu.html");
 }
 
 //////////////////////////////////////
 function BackgroundMenu_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
+	
 }

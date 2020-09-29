@@ -5,7 +5,6 @@ var second_flag = false;
 /////////////////////
 function Clock_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKOS/Clock.html,DKOS/Taskbar.html");
 	//DKAddEvent("window", "second", Clock_OnEvent);
 	window.addEventListener("second", Clock_OnEvent);
@@ -15,7 +14,6 @@ function Clock_Init()
 ////////////////////
 function Clock_End()
 {
-	DKDEBUGFUNC();
 	//DKRemoveEvents(Clock_OnEvent);
 	window.removeEventListener("second", Clock_OnEvent);
 	DKClose("DKOS/Clock.html");
@@ -24,7 +22,6 @@ function Clock_End()
 /////////////////////////////
 function Clock_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(DK_Type(event, "second")){
 		Clock_Update();
 	}
@@ -33,7 +30,6 @@ function Clock_OnEvent(event)
 ///////////////////////
 function Clock_Update()
 {
-	DKDEBUGFUNC();
 	if(second_flag){
 		document.getElementById("time").style.color = "rgb(255,255,255)";
 		second_flag = false;
