@@ -2,6 +2,7 @@
 
 *** Remove These terms from all ,js files
  DKDEBUGFUNC
+ DKAddEvent
 ..
 .add more as you find them
  
