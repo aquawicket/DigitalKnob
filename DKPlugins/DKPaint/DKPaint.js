@@ -3,7 +3,6 @@ var currentFile;
 ///////////////////////
 function DKPaint_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKPaint/DKPaint.css");
 	DKCreate("DKPaint/DKPaint.html");
 	//DKAddEvent("DKPaint_Save", "click", DKPaint_OnEvent);
@@ -15,7 +14,6 @@ function DKPaint_Init()
 //////////////////////
 function DKPaint_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKPaint_OnEvent);
 	DKClose("DKPaint/DKPaint.html");
 	DKClose("DKPaint/DKPaint.css");
@@ -24,7 +22,6 @@ function DKPaint_End()
 ///////////////////////////////
 function DKPaint_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKPaint_Save"){
 		//DKNotepad_Save();
 	}
@@ -44,7 +41,6 @@ function DKPaint_OnEvent(event)
 ///////////////////////
 function DKPaint_Save()
 {
-	DKDEBUGFUNC();
 	var text = DKWidget_GetValue("DKPaint_Text");
 	
 	//TODO
@@ -55,7 +51,6 @@ function DKPaint_Save()
 ///////////////////////////
 function DKPaint_Open(file)
 {
-	DKDEBUGFUNC(file);
 	file = file.replace(absolutepath, "");
 	currentFile = file;
 	
@@ -77,7 +72,6 @@ function DKPaint_Open(file)
 //////////////////////////////////
 function DKPaint_LoadTif(filename)
 {
-	DKDEBUGFUNC(filename);
 	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){
 	DKCreate("DKPaint/tiff.min.js", function(){
 		var xhr = new XMLHttpRequest();

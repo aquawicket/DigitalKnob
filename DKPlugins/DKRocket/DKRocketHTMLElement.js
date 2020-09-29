@@ -3,7 +3,6 @@
 ///////////////////////////////////
 var HTMLElement = function(pointer)
 {
-	//DKDEBUGFUNC();
 	//console.warn("HTMLElement("+pointer+")");
 	
 	Object.defineProperty(this, "accessKey",        { get: function(){ return DKRocketHTMLElement_accessKey(this.pointer);          } });  //TODO

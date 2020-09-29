@@ -3,7 +3,6 @@
 ///////////////////////////////////////////
 var CSSStyleDeclaration = function(pointer)
 {
-	//DKDEBUGFUNC();
 	//console.warn("CSSStyleDeclaration("+pointer+")");
 	this.pointer = pointer;
 	

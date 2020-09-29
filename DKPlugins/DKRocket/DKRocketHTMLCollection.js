@@ -3,7 +3,6 @@
 ///////////////////////////////////////
 var HTMLCollection = function(pointers)
 {
-	//DKDEBUGFUNC();
 	//console.warn("HTMLCollection()");	
 	if(!pointers){ return; }
 	

@@ -3,7 +3,6 @@
 ///////////////////////////////
 var Element = function(pointer)
 {
-	//DKDEBUGFUNC();
 	//console.warn("Element("+pointer+")");
 	
 	Object.defineProperty(this, "attributes",   { get: function(){ return DKRocketElement_attributes(this.pointer);   } });  //TODO

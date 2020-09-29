@@ -1,7 +1,6 @@
 /////////////////////////////
 function DKPaintFile_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
 	DKAddEvent("window", "mousedown", DKPaintFile_OnEvent);
 	DKAddEvent("DKPaintFile_Open", "click", DKPaintFile_OnEvent);
@@ -13,7 +12,6 @@ function DKPaintFile_Init()
 //////////////////////////
 function DKPaintFile_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKPaintFile_OnEvent);
 	DKClose("DKPaint/DKPaintFile.html");
 }
@@ -21,7 +19,6 @@ function DKPaintFile_End()
 ///////////////////////////////////
 function DKPaintFile_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKPaintFile_Open"){
 		DKPaintFile_Open();
 	}
@@ -47,7 +44,6 @@ function DKPaintFile_OnEvent(event)
 ///////////////////////////
 function DKPaintFile_Open()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKFile/DKOpenFile.js", function(){
 		DKFrame_Widget("DKFile/DKOpenFile.html");
 		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKPaint/DKPaint.html,OpenFile,/,absolute"); // To -> DKOpenFile
@@ -57,11 +53,11 @@ function DKPaintFile_Open()
 ///////////////////////////
 function DKPaintFile_Save()
 {
-	DKDEBUGFUNC();
+
 }
 
 /////////////////////////////
 function DKPaintFile_SaveAs()
 {
-	DKDEBUGFUNC();
+	
 }

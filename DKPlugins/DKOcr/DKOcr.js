@@ -1,7 +1,6 @@
 /////////////////////
 function DKOcr_Init()
 {
-	DKDEBUGFUNC();	
 	DKCreate("DKOcr");
 	DKCreate("DKOcr/DKOcr.html");
 	DKCreate("DKNotepad/DKNotepad.js", function(){
@@ -14,7 +13,6 @@ function DKOcr_Init()
 ////////////////////
 function DKOcr_End()
 {
-	DKDEBUGFUNC();	
 	DKClose("DKNotepad/DKNotepad.js");
 	DKRemoveEvents(DKOcr_OnEvent);
 }
@@ -22,7 +20,6 @@ function DKOcr_End()
 /////////////////////////////
 function DKOcr_OnEvent(event)
 {
-	DKDEBUGFUNC(event);	
 	if(event.type == "OpenFile"){
 		var file = DK_GetValue(event);
 		console.log("OpenFile: "+file+"\n");

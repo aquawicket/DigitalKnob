@@ -1,7 +1,6 @@
 /////////////////////////////
 function DKRocketVideo_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKRocketVideo/DKRocketVideo.html");
 	DKAddEvent("DKRocketVideo_playpause", "click", DKRocketVideo_OnEvent);
 	DKAddEvent("DKRocketVideo_position", "click", DKRocketVideo_OnEvent);
@@ -14,7 +13,6 @@ function DKRocketVideo_Init()
 ////////////////////////////
 function DKRocketVideo_End()
 {
-	DKDEBUGFUNC();
 	DKRemoveEvents(DKRocketVideo_OnEvent);
 	DKClose("DKRocketVideo/DKRocketVideo.html");
 }
@@ -22,7 +20,6 @@ function DKRocketVideo_End()
 /////////////////////////////////////
 function DKRocketVideo_OnEvent(event)
 {
-	DKDEBUGFUNC(event);
 	if(event.currentTarget.id == "DKRocketVideo_playpause"){
 		DKRocketVideo_playpause();
 	}
@@ -46,7 +43,6 @@ function DKRocketVideo_OnEvent(event)
 //////////////////////////////////
 function DKRocketVideo_playpause()
 {
-	DKDEBUGFUNC();
 	//toggle play/pause
 	var src = DKWidget_GetAttribute("DKRocketVideo_playpause", "src");
 	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
@@ -62,19 +58,18 @@ function DKRocketVideo_playpause()
 /////////////////////////////////
 function DKRocketVideo_position()
 {
-	DKDEBUGFUNC();
+
 }
 
 //////////////////////////////////////
 function DKRocketVideo_positiontrack()
 {
-	DKDEBUGFUNC();
+	
 }
 
 ////////////////////////////////
 function DKRocketVideo_speaker()
 {
-	DKDEBUGFUNC();
 	//toggle volume/mute
 	var src = DKWidget_GetAttribute("DKRocketVideo_speaker", "src");
 	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
@@ -90,11 +85,11 @@ function DKRocketVideo_speaker()
 ///////////////////////////////
 function DKRocketVideo_volume()
 {
-	DKDEBUGFUNC();
+
 }
 
 ////////////////////////////////////
 function DKRocketVideo_volumetrack()
 {
-	DKDEBUGFUNC();
+	
 }

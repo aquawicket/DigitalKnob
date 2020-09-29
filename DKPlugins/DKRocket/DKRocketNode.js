@@ -3,7 +3,6 @@
 ////////////////////////////
 var Node = function(pointer)
 {
-	//DKDEBUGFUNC();
 	//console.warn("Node("+pointer+")");
 	this.pointer = pointer;
 	
