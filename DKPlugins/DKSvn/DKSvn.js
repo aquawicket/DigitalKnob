@@ -27,7 +27,7 @@ function DKSvn_Init()
 ////////////////////
 function DKSvn_End()
 {
-	DKRemoveEvents(DKSvn_OnEvent);
+
 }
 
 ///////////////////////////////

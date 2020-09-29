@@ -359,19 +359,12 @@ function DKFrame_Close(id)
 	
 	//remove frame events 
 	var num = frame.replace("DKFrame_frame","");
-	//DKRemoveEvent("DKFrame_frame"+num, "mousedown", DKFrame_OnEvent);
 	byId("DKFrame_frame"+num).removeEventListener("mousedown", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_close"+num, "click", DKFrame_OnEvent);
 	byId("DKFrame_close"+num).removeEventListener("click", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_maximize"+num, "click", DKFrame_OnEvent);
 	byId("DKFrame_maximize"+num).removeEventListener("click", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_minimize"+num, "click", DKFrame_OnEvent);
 	byId("DKFrame_minimize"+num).removeEventListener("click", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_reload"+num, "click", DKFrame_OnEvent);
 	byId("DKFrame_reload"+num).removeEventListener("click", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_titlebartext"+num, "dblclick", DKFrame_OnEvent);
 	byId("DKFrame_titlebartext"+num).removeEventListener("dblclick", DKFrame_OnEvent);
-	//DKRemoveEvent("DKFrame_frame"+num, "resize", DKFrame_OnEvent);
 	byId("DKFrame_frame"+num).removeEventListener("resize", DKFrame_OnEvent);
 	
 	DKWidget_RemoveElement(frame);

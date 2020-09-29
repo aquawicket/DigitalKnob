@@ -11,7 +11,6 @@ function DKMessage_Init()
 ////////////////////////
 function DKMessage_End()
 {
-	//DKRemoveEvents(DKMessage_OnEvent);
 	byId("DKMessageOk").removeEventListener("click", DKMessage_OnEvent);
 	byId("DKMessageCancel").removeEventListener("click", DKMessage_OnEvent);
 	DKClose("DKMessage/DKMessage.html");

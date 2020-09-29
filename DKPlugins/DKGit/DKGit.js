@@ -26,7 +26,7 @@ function DKGit_Init()
 ////////////////////
 function DKGit_End()
 {
-	DKRemoveEvents(DKGit_OnEvent);
+
 }
 
 ///////////////////////////////
