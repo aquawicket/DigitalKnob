@@ -1,5 +1,7 @@
 // TODO //
 
+*** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
+
 *** Create FAR 
 
 ***** CODE CLEANUP ******
