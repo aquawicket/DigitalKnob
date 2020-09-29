@@ -5,7 +5,6 @@ TYPE = DKWidget_GetValue("BuildType");
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
 	console.log("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
@@ -14,7 +13,6 @@ function AndroidImport_Init()
 ///////////////////////////////
 function AndroidImport_Import()
 {
-	DKDEBUGFUNC();
 	if(!APP){ 
 		console.log("Please select an app\n");
 		return; 

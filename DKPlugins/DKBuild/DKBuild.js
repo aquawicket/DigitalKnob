@@ -21,7 +21,6 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	DKDEBUGFUNC();
 	DKCreate("DKCurl");
 
 	if(DK_GetOS() == "Win32"){
@@ -53,13 +52,12 @@ function DKBuild_Init()
 //////////////////////
 function DKBuild_End()
 {
-	DKDEBUGFUNC();
+	
 }
 
 ////////////////////////////////
 function DKBuild_ValidateCmake()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for CMake");
 	if(!DKFile_Exists(CMAKE)){
@@ -75,7 +73,6 @@ function DKBuild_ValidateCmake()
 ///////////////////////////////
 function DKBuild_InstallCmake()
 {
-	DKDEBUGFUNC();
 	console.log("Installing CMake");
 	var datapath = DKAssets_LocalAssets();
 	
@@ -107,7 +104,6 @@ function DKBuild_InstallCmake()
 /////////////////////////////////
 function DKBuild_ValidateVC2019()
 {
-	DKDEBUGFUNC();
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
@@ -122,7 +118,6 @@ function DKBuild_ValidateVC2019()
 ////////////////////////////////
 function DKBuild_InstallVC2019()
 {
-	DKDEBUGFUNC();
 	console.log("Installing Visual Studio 2019");
 	var datapath = DKAssets_LocalAssets();
 	
@@ -134,7 +129,6 @@ function DKBuild_InstallVC2019()
 //////////////////////////////
 function DKBuild_ValidateGcc()
 {
-	DKDEBUGFUNC();
 	if(DK_GetOS() != "Linux"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for GCC");
@@ -145,10 +139,9 @@ function DKBuild_ValidateGcc()
 	console.log("Found Gcc");
 }
 
-///////////////////////////////
+/////////////////////////////
 function DKBuild_InstallGcc()
 {
-	DKDEBUGFUNC();
 	console.log("Installing Gcc");
 	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
@@ -156,7 +149,6 @@ function DKBuild_InstallGcc()
 ////////////////////////////////
 function DKBuild_ValidateXcode()
 {
-	DKDEBUGFUNC();
 	if(DK_GetOS() != "Mac"){ return; }
 	if(DK_GetBrowser() != "Rocket"){ return; }
 	console.log("Looking for Xcode");
@@ -169,7 +161,6 @@ function DKBuild_ValidateXcode()
 ///////////////////////////////
 function DKBuild_InstallXcode()
 {
-	DKDEBUGFUNC();
 	console.log("Installing Xcode");
 	var datapath = DKAssets_LocalAssets();
 	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
@@ -178,7 +169,6 @@ function DKBuild_InstallXcode()
 //////////////////////////
 function DKBuild_OsCheck()
 {
-	DKDEBUGFUNC();
 	if(DK_GetOS() == "Win32"){
 		if(OS == "win64"){
 			console.error(OS+" can only be build from a WIN64 machine"); return false;
@@ -262,7 +252,6 @@ function DKBuild_OsCheck()
 ///////////////////////////////////
 function DKBuild_ResetAppsPlugins()
 {
-	DKDEBUGFUNC();
 	console.log("Deleting Apps and Plugins... ");
 	
 	// Delete everything in DKApps except DKBuild
@@ -292,7 +281,6 @@ function DKBuild_ResetAppsPlugins()
 ////////////////////////////////
 function DKBuild_Reset3rdParty()
 {
-	DKDEBUGFUNC();
 	//TODO
 	console.log("Deleting 3rdParty... ");
 	console.log("Please wait. ");
@@ -302,7 +290,6 @@ function DKBuild_Reset3rdParty()
 /////////////////////////////
 function DKBuild_GetAppList()
 {
-	DKDEBUGFUNC();
 	//DKApps folder
 	var apps = DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
@@ -353,7 +340,6 @@ function DKBuild_GetAppList()
 ////////////////////////////
 function DKBuild_DoResults()
 {
-	DKDEBUGFUNC();
 	console.log("DKBuild_DoResults(): OS="+OS+" APP="+APP+" TYPE="+TYPE+" LEVEL="+LEVEL);
 	if(!DKBuild_OsCheck()){ return; }
 	
