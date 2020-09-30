@@ -51,7 +51,7 @@ function DKColorPicker_OnEvent(event)
 		//console.lof("event_id:"+event_id+"\n");
 		//console.lof("event_type:"+event_type+"\n");
 		if(event_id){
-			var color = DKWidget_GetProperty("DKColorSelected", "background-color");
+			var color = byId("DKColorSelected").style.backgroundColor;
 			DKSendEvent(event_id, event_type, color);
 		}
 		DKFrame_Close("DKColorPicker/DKColorPicker.html");

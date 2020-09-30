@@ -45,8 +45,8 @@ function DKFrame_OnEvent(event)
 			return; 
 		}
 		var child = frame.childNodes[4];
-		byId(child.id).style.width = parseInt(DKWidget_GetProperty(frame.id, "width")) + "rem";
-		byId(child.id).style.height = parseInt(DKWidget_GetProperty(frame.id, "height")) - 21 + "rem";
+		byId(child.id).style.width = parseInt(byId(frame.id).style.width) + "rem";
+		byId(child.id).style.height = parseInt(byId(frame.id).style.height) - 21 + "rem";
 	}
 }
 
@@ -288,9 +288,7 @@ function DKFrame_MaximizeButton(id)
 		
 		var elements = DKWidget_GetElements(frame);
 		var arry = elements.split(",");
-		//byId(arry[5]).style.width = parseInt(DKWidget_GetProperty(frame, "width")) + "rem";
 		byId(arry[5]).style.width = parseInt(byId(frame).style.width) + "rem";
-		//byId(arry[5]).style.height = parseInt(DKWidget_GetProperty(frame, "height")) - 21 + "rem";
 		byId(arry[5]).style.height = parseInt(byId(frame).style.height) - 21 + "rem";
 	}
 	else{
