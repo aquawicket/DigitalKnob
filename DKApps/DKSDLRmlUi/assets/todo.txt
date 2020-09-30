@@ -7,6 +7,10 @@ DKCPP_Functions can never run in a browser.
 DKCPP_Functions require native code to burn the cd
 DKCPP_Functions are the right way to divide JS calls from DKCPP_Calls
 All javascript functions in c++ will have a DKCPP_ header.
+** What about
+DKCreate...    we must now choose betewwn DKCPP_DKCreate and DKCreate
+i'm ok with that
+It's Final..  All C++ javascript function will have a DKCPP_ header
 
 *** FUN ***
 Make the Atari tank game  :D
