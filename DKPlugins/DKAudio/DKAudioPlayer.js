@@ -29,7 +29,7 @@ function DKAudioPlayer_End()
 /////////////////////////////////////
 function DKAudioPlayer_OnEvent(event)
 {
-	//console.lof("DKAudioPlayer_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	//console.log("DKAudioPlayer_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "DKAudioPlayer_playpause"){
 		DKAudioPlayer_playpause();
@@ -79,7 +79,7 @@ function DKAudioPlayer_playpause()
 function DKAudioPlayer_SetTime(value)
 {
 	var time = (value * DKAudio_GetDuration() / 1000);
-	console.lof("time = "+time+"\n");
+	console.log("time = "+time+"\n");
 	DKAudio_SetTime(time);
 }
 
@@ -108,7 +108,7 @@ function DKAudioPlayer_speaker()
 		DKAudio_Mute();
 	}
 	
-	console.lof("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n");
+	console.log("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n");
 	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume());
 }
 

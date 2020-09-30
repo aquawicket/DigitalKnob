@@ -65,7 +65,7 @@ function DKDebug_CheckKeys()
 		console.log("*** DKDebug_ClearConsole() ***");
 		DKDebug_ClearConsole(); key_history = []; 
 	}
-	if(string.indexOf("console.lof") !== -1){ 
+	if(string.indexOf("console.log") !== -1){ 
 		console.log("*** DKDebug_PrintInfo() ***");
 		DKDebug_PrintInfo(); key_history = []; 
 	}
@@ -169,7 +169,7 @@ function DKDebug_PushDKFiles()
 		console.log("Could not find search");
 		return;
 	}
-	//console.lof("search = "+search+"\n");
+	//console.log("search = "+search+"\n");
 	
 	var temp = DKFile_DirectoryContents(DKPATH);
 	if(!temp){

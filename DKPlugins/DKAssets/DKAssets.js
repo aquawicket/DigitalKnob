@@ -67,22 +67,22 @@ else{
 */
 //if(absolutepath){online_assets = absolutepath;}
 
-console.lof("href: "+href+"\n");
-console.lof("hostname: "+hostname+"\n");
-console.lof("pathname: "+pathname+"\n");
-console.lof("protocol: "+protocol+"\n");
-console.lof("appfilename: "+appfilename+"\n");
-console.lof("local_assets: "+local_assets+"\n");
-console.lof("online_assets: "+online_assets+"\n");
-//console.lof("absolutepath: "+absolutepath+"\n");
+console.log("href: "+href+"\n");
+console.log("hostname: "+hostname+"\n");
+console.log("pathname: "+pathname+"\n");
+console.log("protocol: "+protocol+"\n");
+console.log("appfilename: "+appfilename+"\n");
+console.log("local_assets: "+local_assets+"\n");
+console.log("online_assets: "+online_assets+"\n");
+//console.log("absolutepath: "+absolutepath+"\n");
 
-console.lof("LOG_DEBUG: "+LOG_DEBUG+"\n");
-console.lof("LOG_INFO: "+LOG_INFO+"\n");
-console.lof("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
-console.lof("LOG_ERRORS: "+LOG_ERRORS+"\n");
-console.lof("LOG_FILE: "+LOG_FILE+"\n");
-console.lof("LOG_SHOW: "+LOG_SHOW+"\n");
-console.lof("LOG_HIDE: "+LOG_HIDE+"\n");
+console.log("LOG_DEBUG: "+LOG_DEBUG+"\n");
+console.log("LOG_INFO: "+LOG_INFO+"\n");
+console.log("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
+console.log("LOG_ERRORS: "+LOG_ERRORS+"\n");
+console.log("LOG_FILE: "+LOG_FILE+"\n");
+console.log("LOG_SHOW: "+LOG_SHOW+"\n");
+console.log("LOG_HIDE: "+LOG_HIDE+"\n");
 
 
 ////////////////////////

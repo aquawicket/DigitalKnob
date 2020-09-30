@@ -83,7 +83,7 @@ function DKAdminMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenSource"){
-		//console.lof("OpenSource\n");
+		//console.log("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		var source = DKWidget_GetOuterHtml("body");
 		var assets = DKAssets_LocalAssets();
@@ -91,7 +91,7 @@ function DKAdminMenu_OnEvent(event)
 		DKCreate("DKNotepad/DKNotepad.js", function(){
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
-			//console.lof(source+"\n");
+			//console.log(source+"\n");
 		});
 	}
 	if(event.currentTarget.id === "OpenDebug"){
@@ -105,20 +105,20 @@ function DKAdminMenu_OnEvent(event)
 		DK_System("cls");
 	}
 	if(event.currentTarget.id === "Info"){
-		console.lof("\n**** DKOBJECTS ****\n");
+		console.log("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			console.lof(arry[i]+"\n");
+			console.log(arry[i]+"\n");
 		}
 		
-		console.lof("**** DKEVENTS ****\n");
+		console.log("**** DKEVENTS ****\n");
 		var events = DK_GetEvents();
 		var arry = events.split(",");
 		for(var i=0; i<arry.length; i++){
 			if(!arry[i]){ continue; }
-			console.lof(arry[i]+"\n");
+			console.log(arry[i]+"\n");
 		}
 	}
 	if(event.currentTarget.id === "Refresh"){
@@ -132,7 +132,7 @@ function DKAdminMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKAdminMenu_Run"){
 		var key = DK_GetValue(event);
-		//console.lof("DKAdminMenu_Run: key="+key+"\n");
+		//console.log("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() === "RML"){
 			if(key !== 72){ return; } //FIXME: why is this key code not 13?
 		}
