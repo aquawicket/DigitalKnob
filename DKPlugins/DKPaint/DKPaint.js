@@ -60,15 +60,15 @@ function DKPaint_Open(file)
 	byId("DKPaint_content").innerHTML = "";
 	if(file.includes(".pdf") || file.includes(".PDF")){
 		byId("DKPaint_content").innerHTML = "<embed id=\"DKPaint_Embed\" width=\"100%\" height=\"100%\" type='application/pdf' src=\""+file+"\"></embed>";
-		DKWidget_SetProperty("DKPaint_content", "overflow-y", "none");
+		byId("DKPaint_content").style.overflowY = "none";
 	}
 	else if(file.includes(".tif")){
 		DKPaint_LoadTif(file);
-		DKWidget_SetProperty("DKPaint_content", "overflow-y", "auto");
+		byId("DKPaint_content").style.overflowY = "auto";
 	}
 	else{
 		byId("DKPaint_content").innerHTML = "<img id=\"DKPaint_Image\" src="+file+"></img>";
-		DKWidget_SetProperty("DKPaint_content", "overflow-y", "auto");
+		byId("DKPaint_content").style.overflowY = "auto";
 	}
 }
 

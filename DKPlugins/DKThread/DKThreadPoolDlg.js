@@ -39,9 +39,9 @@ function DKThreadPoolDlg_OnUpdate()
 	}
 	for(var i=0; i<names.length; ++i){
 		var div = DKWidget_CreateElement("DKThreadPoolDlg.html", "div", "Thread");
-		DKWidget_SetProperty(div, "width", "100%");
-		DKWidget_SetProperty(div, "height", "20rem");
-		DKWidget_SetProperty(div, "white-space", "nowrap");
+		byId(div).style.width = "100%";
+		byId(div).style.height = "20rem";
+		byId(div).style.whiteSpace = "nowrap";
 
 		if(i == 0){
 			byId(div).innerHTML = "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i];

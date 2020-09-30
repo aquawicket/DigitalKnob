@@ -37,12 +37,12 @@ function DKScale_Resize()
 	if((parseInt(DKWindow_GetHeight()) > parseInt(DKWindow_GetWidth()))){
 		if(pixel_ratio > 1.0){//= Math.min(2, pixel_ratio);
 			var ratio = 2.0;
-			DKWidget_SetProperty("html", "font-size", ratio+"px");
+			byId("html").style.fontSize = ratio+"px";
 			console.log(("DKScale_Resize(): scale set to "+ratio+"px\n");
 		}
 	}
 	else{
-		DKWidget_SetProperty("html", "font-size", "1px");
+		byId("html").style.fontSize = "1px";
 		console.log(("DKScale_Resize(): scale set to 1px\n");
 	}
 	*/

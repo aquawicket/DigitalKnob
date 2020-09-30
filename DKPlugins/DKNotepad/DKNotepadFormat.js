@@ -38,7 +38,7 @@ function DKNotepadFormat_OnEvent(event)
 function DKNotepadFormat_WordWrap()
 {
 	if(byId("DKNotepad_Text").style.whiteSpace === ""){
-		DKWidget_SetProperty("DKNotepad_Text","white-space","nowrap");
+		byId("DKNotepad_Text").style.whiteSpace = "nowrap";
 	}
 	else{
 		DKWidget_RemoveProperty("DKNotepad_Text","white-space");

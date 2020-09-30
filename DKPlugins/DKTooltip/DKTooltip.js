@@ -42,7 +42,7 @@ function DKTooltip_Show(id)
 		}
 		DKCreate("DKTooltip/DKTooltip.html");
 		byId("DKTooltip/DKTooltip.html").innerHTML = byId(id).tooltip;
-		DKWidget_SetProperty("DKTooltip/DKTooltip.html", "top", mouseX+"px");
-		DKWidget_SetProperty("DKTooltip/DKTooltip.html", "left", mouseY+"px");
+		byId("DKTooltip/DKTooltip.html").style.top = mouseX+"px";
+		byId("DKTooltip/DKTooltip.html").style.left = mouseY+"px";
 	}, 1000); 
 }

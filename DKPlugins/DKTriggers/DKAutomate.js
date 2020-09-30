@@ -147,12 +147,12 @@ function DKAutomate_UpdateSelection(value)
 	var options = temp.split(",");
 	for(var i = 0; i < options.length; ++i){
 		if(value == DKWidget_GetValue(options[i])){
-			DKWidget_SetProperty(options[i], "background-color", "rgb(60,60,60)");
-			DKWidget_SetProperty(options[i], "color", "rgb(200,200,200)");
+			byId(options[i]).style.backgroundColor = "rgb(60,60,60)";
+			byId(options[i]).style.color = "rgb(200,200,200)";
 		}
 		else{
-			DKWidget_SetProperty(options[i], "background-color", "rgb(255,255,255)");
-			DKWidget_SetProperty(options[i], "color", "rgb(0,0,0)");
+			byId(options[i]).style.backgroundColor = "rgb(255,255,255)";
+			byId(options[i]).style.color = "rgb(0,0,0)";
 		}
 	}
 }
