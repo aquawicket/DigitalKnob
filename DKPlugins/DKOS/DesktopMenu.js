@@ -2,10 +2,10 @@
 function DesktopMenu_Init()
 {
 	DKCreate("DKOS/DesktopMenu.html");
-	//document.getElementById("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
-	//document.getElementById("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
-	document.getElementById("DKOS/DesktopMenu.html").style.top = "100px";
-	document.getElementById("DKOS/DesktopMenu.html").style.left = "100px";
+	//byId("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
+	//byId("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
+	byId("DKOS/DesktopMenu.html").style.top = "100px";
+	byId("DKOS/DesktopMenu.html").style.left = "100px";
 	
 	window.addEventListener("mousedown", DesktopMenu_OnEvent);
 	byId("OpenBackgtoundMenu").addEventListener("click", DesktopMenu_OnEvent);

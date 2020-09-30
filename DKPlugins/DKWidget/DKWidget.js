@@ -7,9 +7,9 @@ function DKWidget_ValidateColor(color){ console.warn("DKWidget_ValidateColor(): 
 ///////////////////////
 function AdjustRems(id)
 {
-	var nodelist = document.getElementById(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
+	var nodelist = byId(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
 	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
-	elements.unshift(document.getElementById(id)); //add the root element to the beginning of the array
+	elements.unshift(byId(id)); //add the root element to the beginning of the array
 	for(var i=0; i<elements.length; i++){
 		//console.log("\n");
 		//console.log(elements[i].id+"\n");
@@ -35,7 +35,7 @@ function DKWidget_NewWidget(url, parent)
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
 		//if(parent.indexOf(".html") === -1){ parent+=".html"; }
-		var element = document.getElementById(parent);
+		var element = byId(parent);
 		if(!element){ console.error("DKWidget(): could not get parent ("+parent+")\n"); return false; }
 		if(!LoadHtml(url, element)){ 
 			return false;
@@ -84,7 +84,7 @@ function DKWidget_GetFile(id)
 //////////////////////////
 function DKWidget_Hide(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	element.style.display = "none";
 }
@@ -92,7 +92,7 @@ function DKWidget_Hide(id)
 //////////////////////////
 function DKWidget_Show(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	element.style.display = "block";
 	element.style.visibility = "visible";
@@ -101,7 +101,7 @@ function DKWidget_Show(id)
 ////////////////////////////
 function DKWidget_Toggle(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	if(element.style.display === "none" || element.style.visibility === "hidden"){
 		DKWidget_Show(id);
@@ -114,7 +114,7 @@ function DKWidget_Toggle(id)
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
 {
-	var parent = document.getElementById(id);
+	var parent = byId(id);
 	if(!parent){ return false; }
 	var elements = parent.getElementsByTagName('*');
 	for (var i=0; i<elements.length; i++) {	
@@ -138,7 +138,7 @@ function DKWidget_AttachDrags(id)
 /////////////////////////////////////////
 function DKWidget_AddDragHandle(id, drag)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
@@ -150,7 +150,7 @@ function DKWidget_AddDragHandle(id, drag)
 /////////////////////////////////////////////
 function DKWidget_AddResizeHandle(id, resize)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
@@ -163,7 +163,7 @@ function DKWidget_AddResizeHandle(id, resize)
 function DKWidget_RemoveDragHandle(id)
 {
 	if(!id){ return; }
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!DK_IE()){
 		//element.style.setProperty("pointer-events","none");
 	}
@@ -182,8 +182,8 @@ function DKWidget_GetElement(event)
 function DKWidget_GetElements(id)
 {
 	var string = "";
-	//var nodes = document.getElementById(id).getElementsByTagName('*'); //all children recursively
-	var nodes = document.getElementById(id).childNodes;
+	//var nodes = byId(id).getElementsByTagName('*'); //all children recursively
+	var nodes = byId(id).childNodes;
 	for(var i=0; i<nodes.length; i++){
 		if(nodes[i].id){
 			string += nodes[i].id;
@@ -201,7 +201,7 @@ function DKWidget_GetValue(variable)
 
 	if(typeof variable === "string"){ //id
 		//console.log("GetValue("+variable+") -> typeof variable === string\n");
-		var ele = document.getElementById(variable);
+		var ele = byId(variable);
 		if(!ele){ console.log("DKWidget_GetValue("+variable+"): Cannot find element\n"); /*return false;*/ }
 		if(ele){
 			if(ele.type && ele.type === "checkbox"){
@@ -316,7 +316,7 @@ function DKWidget_GetValue(variable)
 ////////////////////////////////
 function DKWidget_GetTagName(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	return element.tag;
 }
@@ -334,7 +334,7 @@ function DKWidget_GetAttribute(variable, parameter)
 		return variable[parameter];
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		return element[parameter];
 	}
 	console.error("ERROR: GetAttribute(): unknown type\n");
@@ -359,7 +359,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 		return true;
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		if(!element){
 			console.error("DKWidget_SetAttribute(): element invalid\n");
 			return false;
@@ -391,7 +391,7 @@ function DKWidget_GetProperty(variable, parameter)
 		return variable.style[parameter];
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		if(!element){
 			console.error("DKWidget_GetProperty(): element is null\n");
 			return;
@@ -439,7 +439,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 		return true;
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		if(variable === "body"){ element = document.body; }
 		if(!element){ 
 			console.error("ERROR: SetProperty(): element("+variable+") invalid\n");
@@ -458,7 +458,7 @@ function DKWidget_SetProperty(variable, parameter, value)
 ////////////////////////////////////////////
 function DKWidget_HasProperty(id, parameter)
 {
-	if(document.getElementById(id).style[parameter]){
+	if(byId(id).style[parameter]){
 		return true;
 	}
 	return false;
@@ -469,7 +469,7 @@ function DKWidget_HasProperty(id, parameter)
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ 
 		console.error("DKWidget_RemoveProperty(): element invalid\n");
 		return; 
@@ -494,7 +494,7 @@ function DKWidget_SetValue(variable, value)
 		return true;
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		if(!element){ console.error("SetValue("+variable+"): Cannot find element\n"); return false; }
 		if(element.type && element.type === "checkbox"){
 			element.checked = value;
@@ -504,7 +504,7 @@ function DKWidget_SetValue(variable, value)
 			element.value = value;
 			return true;
 		}
-		document.getElementById(variable).innerHTML = value;
+		byId(variable).innerHTML = value;
 		return true;
 	}
 	console.error("ERROR: SetValue(): unknown type\n");
@@ -519,7 +519,7 @@ function DKWidget_GetInnerHtml(variable)
 		return variable.innerHTML;
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		return element.innerHTML;
 	}
 	console.error("ERROR: GetInnerHtml(): unknown type\n");
@@ -536,7 +536,7 @@ function DKWidget_SetInnerHtml(variable, value)
 		return true;
 	}
 	if(typeof variable === "string"){
-		var element = document.getElementById(variable);
+		var element = byId(variable);
 		if(!element){ 
 			console.error("ERROR: SetInnerHtml(): element invalid\n");
 			return false; 
@@ -553,7 +553,7 @@ function DKWidget_SetInnerHtml(variable, value)
 function DKWidget_GetInnerHtmlString(id)
 {
 	if(!id){ console.warn("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
-	var element = document.getElementById(id);
+	var element = byId(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
 		if(curNode.nodeName === "#text"){
@@ -565,7 +565,7 @@ function DKWidget_GetInnerHtmlString(id)
 ////////////////////////////////////////////////
 function DKWidget_SetInnerHtmlString(id, string)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
 		if(curNode.nodeName === "#text"){
@@ -613,7 +613,7 @@ function DKWidget_CreateElement(parent, tag, id)
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
 	id = DKWidget_GetAvailableId(id);
-	var par = document.getElementById(parent);
+	var par = byId(parent);
 	var ele = document.createElement(tag);
 	ele.id = id;
 	
@@ -635,14 +635,14 @@ function DKWidget_AppendChild(parent, element)
 	
 	var par;
 	if(typeof parent === "string"){
-		par = document.getElementById(parent);
+		par = byId(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
 	if(typeof element === "string"){
-		ele = document.getElementById(element);
+		ele = byId(element);
 	}
 	else{
 		ele = element;
@@ -656,14 +656,14 @@ function DKWidget_PrependChild(parent, element)
 {
 	var par;
 	if(typeof parent === "string"){
-		par = document.getElementById(parent);
+		par = byId(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
 	if(typeof element === "string"){
-		ele = document.getElementById(element);
+		ele = byId(element);
 	}
 	else{
 		ele = element;
@@ -687,14 +687,14 @@ function DKWidget_InsertBefore(parent, element)
 {
 	var par;
 	if(typeof parent === "string"){
-		par = document.getElementById(parent);
+		par = byId(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
 	if(typeof element === "string"){
-		ele = document.getElementById(element);
+		ele = byId(element);
 	}
 	else{
 		ele = element;
@@ -712,14 +712,14 @@ function DKWidget_InsertBefore(parent, element)
 ///////////////////////////////
 function DKWidget_GetParent(id)
 {
-	if(!document.getElementById(id)){ return ""; }
-	return document.getElementById(id).parentNode.id;
+	if(!byId(id)){ return ""; }
+	return byId(id).parentNode.id;
 }
 
 ///////////////////////////////////
 function DKWidget_GetFirstChild(id)
 {
-	var fc = document.getElementById(id).firstChild;
+	var fc = byId(id).firstChild;
 	if(fc){
 		//console.log("GetFirstChild("+id+"): -> "+fc.id+"\n");
 		return fc.id;
@@ -745,7 +745,7 @@ function DKWidget_GetMouseElementX(id)
 {
 	if(!id){ id = "body"; }
 	/*
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) !== null){ 
 		left += ele.offsetLeft; 
@@ -760,7 +760,7 @@ function DKWidget_GetMouseElementY(id)
 {
 	if(!id){ id = "body"; }
 	/*
-	var ele = document.getElementById(element);
+	var ele = byId(element);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) !== null){ 
 		top += ele.offsetTop; 
@@ -774,19 +774,19 @@ function DKWidget_GetMouseElementY(id)
 ////////////////////////////////////
 function DKWidget_GetClientWidth(id)
 {
-	return document.getElementById(id).clientWidth;
+	return byId(id).clientWidth;
 }
 
 ///////////////////////////////////////
 function DKWidget_GetClientHeight(id)
 {
-	return document.getElementById(id).clientHeight;
+	return byId(id).clientHeight;
 }
 
 //////////////////////////////////
 function DKWidget_GetOffsetTop(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	var top = ele.offsetTop;
 	while((ele=ele.offsetParent) !== null){ 
 		top += ele.offsetTop; 
@@ -798,7 +798,7 @@ function DKWidget_GetOffsetTop(id)
 //////////////////////////////////
 function DKWidget_GetOffsetLeft(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	var left = ele.offsetLeft;
 	while((ele=ele.offsetParent) !== null){ 
 		left += ele.offsetLeft; 
@@ -809,7 +809,7 @@ function DKWidget_GetOffsetLeft(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetRight(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	var right = ele.offsetRight;
 	while((ele=ele.offsetParent) !== null){ 
 		right += ele.offsetRight; 
@@ -821,7 +821,7 @@ function DKWidget_GetOffsetRight(id)
 /////////////////////////////////////
 function DKWidget_GetOffsetBottom(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	var bottom = ele.offsetRight;
 	while((ele=ele.offsetParent) !== null){ 
 		bottom += ele.offsetBottom; 
@@ -833,25 +833,25 @@ function DKWidget_GetOffsetBottom(id)
 ////////////////////////////////////
 function DKWidget_GetOffsetWidth(id)
 {
-	return document.getElementById(id).offsetWidth;
+	return byId(id).offsetWidth;
 }
 
 /////////////////////////////////////
 function DKWidget_GetOffsetHeight(id)
 {
-	return document.getElementById(id).offsetHeight;
+	return byId(id).offsetHeight;
 }
 
 ////////////////////////////////////
 function DKWidget_GetComputedTop(id)
 {
-	return window.getComputedStyle(document.getElementById(id)).top;
+	return window.getComputedStyle(byId(id)).top;
 }
 
 ///////////////////////////////////
 function DKWidget_ElementExists(id)
 {
-	if(document.getElementById(id)){
+	if(byId(id)){
 		return true;
 	}
 	return false;
@@ -861,7 +861,7 @@ function DKWidget_ElementExists(id)
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	if(!ele){
 		console.warn("RemoveElement("+id+"): element does not exist\n");
 		return false;
@@ -877,7 +877,7 @@ function DKWidget_RemoveElement(id)
 /////////////////////////////////////
 function DKWidget_ElementToString(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	return element.outerHTML;
 }
@@ -885,7 +885,7 @@ function DKWidget_ElementToString(id)
 /////////////////////////////
 function DKWidget_Visible(id)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	if(element.style.display === "none"){ return false; }
 	if(element.style.visibility !== "visible"){ return false; }
@@ -895,7 +895,7 @@ function DKWidget_Visible(id)
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
-	var element = document.getElementById(id);
+	var element = byId(id);
 	if(!element){ return false; }
 	element.removeAttribute(attrib);
 }
@@ -961,7 +961,7 @@ function DKWidget_SetFile(id, file)
 //////////////////////////////////
 function DKWidget_GetLastChild(id)
 {
-	return document.getElementById("body").lastChild.id;
+	return byId("body").lastChild.id;
 }
 */
 
@@ -969,7 +969,7 @@ function DKWidget_GetLastChild(id)
 function DKWidget_SetFocus(id)
 {
 	//console.log("DKWidget_SetFocus("+id+")");
-	var element = document.getElementById(id);
+	var element = byId(id);
 	//console.log("DKWidget_SetFocus("+id+"): element = "+element);
 	element.focus();
 }
@@ -1010,7 +1010,7 @@ function DKWidget_Paste(id)
 {
 	//TODO
 	removeSelection(id);
-	var ele = document.getElementById(id);
+	var ele = byId(id);
 	ele.focus();
 	ele.select();
 	document.execCommand('Paste');
@@ -1044,7 +1044,7 @@ function copyToClipboard(text)
 ////////////////////////////
 function removeSelection(id)
 {
-	var ele = document.getElementById(id);
+	var ele = byId(id);
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;

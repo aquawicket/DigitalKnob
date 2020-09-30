@@ -168,16 +168,16 @@ function DKEditor_Menu_OnEvent(event)
 		console.log("DKEditor_Menu_Web()\n");
 		//TODO - Create an iFrame and display digitalknob.com
 		var div = DKWidget_CreateElement(document.body, "div", "DKIframe.html");
-		document.getElementById(div).style.position = "absolute";
-		document.getElementById(div).style.width = "100%";
-		document.getElementById(div).style.height = "100%";
+		byId(div).style.position = "absolute";
+		byId(div).style.width = "100%";
+		byId(div).style.height = "100%";
 		
 		var iframe = DKWidget_CreateElement(byId(div), "iframe", "iframe");
 		byId(iframe).src = "http://digitalknob.com";
 		byId(iframe).width = "100%";
 		byId(iframe).height = "100%";
-		document.getElementById(iframe).style.borderWidth = "0px";
-		document.getElementById(iframe).style.overflow = "auto";
+		byId(iframe).style.borderWidth = "0px";
+		byId(iframe).style.overflow = "auto";
 		
 		DKFrame_Widget(div);
 	}

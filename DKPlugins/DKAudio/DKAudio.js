@@ -17,21 +17,21 @@ function DKAudio_End()
 /////////////////////////////
 function DKAudio_Resume(file)
 { 
-	var x = document.getElementById("audio");
+	var x = byId("audio");
     x.play(); 
 }
 
 ////////////////////////////
 function DKAudio_Pause(file)
 { 
-	var x = document.getElementById("audio");
+	var x = byId("audio");
 	x.pause(); 
 }
 
 ////////////////////////////////
 function DKAudio_PlaySound(file)
 { 
-	var x = document.getElementById("audio");
+	var x = byId("audio");
     x.play(); 
 }
 
@@ -55,7 +55,7 @@ function DKAudio_SetVolume(num)
 ////////////////////////////
 function DKAudio_GetVolume()
 {
-	return document.getElementById("audio").volume * 128;
+	return byId("audio").volume * 128;
 }
 
 ///////////////////////
@@ -74,7 +74,7 @@ function DKAudio_UnMute()
 /////////////////////////////////
 function DKAudio_SetTime(seconds)
 {
-	document.getElementById("audio").currentTime = seconds;
+	byId("audio").currentTime = seconds;
 }
 
 /////////////////////////////
@@ -92,11 +92,11 @@ function DKAudio_Ended()
 //////////////////////////
 function DKAudio_GetTime()
 {
-	return document.getElementById("audio").currentTime;
+	return byId("audio").currentTime;
 }
 
 //////////////////////////////
 function DKAudio_GetDuration()
 {
-	return document.getElementById("audio").duration;
+	return byId("audio").duration;
 }

@@ -36,13 +36,13 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		DKRocket_LoadUrl("DKRocket/blank.html");
 		DKCreate("DKWidget");
 		var iframe = DKWidget_CreateElement(byId("body"), "iframe", "DKCef_frame");
-		document.getElementById(iframe).style.position = "absolute";
-		document.getElementById(iframe).style.top = "0rem";
-		document.getElementById(iframe).style.left = "0rem";
-		document.getElementById(iframe).style.width = "100%";
-		document.getElementById(iframe).style.height = "100%";
-		//document.getElementById(iframe).style.right = "0rem";
-		//document.getElementById(iframe).style.bottom = "0rem";
+		byId(iframe).style.position = "absolute";
+		byId(iframe).style.top = "0rem";
+		byId(iframe).style.left = "0rem";
+		byId(iframe).style.width = "100%";
+		byId(iframe).style.height = "100%";
+		//byId(iframe).style.right = "0rem";
+		//byId(iframe).style.bottom = "0rem";
 		byId(iframe).src = DKApp_url;
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 	}

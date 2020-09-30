@@ -45,7 +45,7 @@ function DKMySql_Prep(id)
 {
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	var nodes = byId(id).getElementsByTagName("*");
 	console.log("checking "+nodes.length+" nodes...\n");
 	
 	for(var i=0; i<nodes.length; i++){
@@ -106,8 +106,8 @@ function DKMySql_PrepField(table, field)
 //////////////////////////////////////
 function DKMySql_GetFirstRecordNum(id)
 {
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -127,8 +127,8 @@ function DKMySql_GetFirstRecordNum(id)
 /////////////////////////////////////
 function DKMySql_GetLastRecordNum(id)
 {
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -148,8 +148,8 @@ function DKMySql_GetLastRecordNum(id)
 ////////////////////////////////////////////////
 function DKMySql_GetPrevRecordNum(id, recordNum)
 {
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -171,8 +171,8 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 ////////////////////////////////////////////////
 function DKMySql_GetNextRecordNum(id, recordNum)
 {
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -198,8 +198,8 @@ function DKMySql_LoadRecord(id, recordNum)
 	var table;
 	var fields = [];
 	//load the first record into the gui
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -236,8 +236,8 @@ function DKMySql_LoadRecord(id, recordNum)
 function DKMySql_SaveRecord(id, recordNum)
 {
 	//save any unmatching record fields
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -264,8 +264,8 @@ function DKMySql_SaveRecord(id, recordNum)
 function DKMySql_DeleteRecord(id, recordNum)
 {
 	//save any unmatching record fields
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
@@ -281,8 +281,8 @@ function DKMySql_DeleteRecord(id, recordNum)
 function DKMySql_Search(id, string)
 {
 	//save any unmatching record fields
-	//var nodes = document.getElementById(id).childNodes;
-	var nodes = document.getElementById(id).getElementsByTagName("*");
+	//var nodes = byId(id).childNodes;
+	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
 		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");

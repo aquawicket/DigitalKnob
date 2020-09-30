@@ -15,7 +15,7 @@ function DKHandles_Init()
 	byId("Highlight").addEventListener("click", DKHandles_OnEvent);
 	DKHandles_UpdateWindowList();
 	
-	document.getElementById("search").ondragstart = function() { return false; };
+	byId("search").ondragstart = function() { return false; };
 }
 
 ////////////////////////

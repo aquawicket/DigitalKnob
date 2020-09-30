@@ -60,7 +60,7 @@ function DKNotepadFile_OnEvent(event)
 /////////////////////////////
 function DKNotepadFile_New()
 {
-	document.getElementById("DKNotepad_Text").value = "";
+	byId("DKNotepad_Text").value = "";
 	currentFile = "";
 }
 

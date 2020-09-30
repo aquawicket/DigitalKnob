@@ -87,7 +87,7 @@ function DKPaint_LoadTif(filename)
 			var width = tiff.width();
 			var height = tiff.height();
 			if(canvas){
-				document.getElementById("DKPaint_content").append(canvas);
+				byId("DKPaint_content").append(canvas);
 			}
 		};
 		xhr.send();

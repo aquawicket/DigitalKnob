@@ -47,8 +47,8 @@ function DKConsole_OnEvent(event)
 function DKConsole_Notify(string)
 {
 	var line = DKWidget_CreateElement(byId("DKConsole_Content"), "a", "DKConsole_line");
-	document.getElementById(line).style.display = "block";
-	document.getElementById(line).style.color = DKConsole_color;
+	byId(line).style.display = "block";
+	byId(line).style.color = DKConsole_color;
 	byId(line).innerHTML = string;
 	DKWidget_ScrollToBottom(line);
 }

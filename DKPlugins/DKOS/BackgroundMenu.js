@@ -2,9 +2,9 @@
 function BackgroundMenu_Init()
 {
 	DKCreate("DKOS/BackgroundMenu.html");
-	var file = document.getElementById("Background").getAttribute("src");
+	var file = byId("Background").getAttribute("src");
 	//console.log("file="+file+"\n");
-	document.getElementById("BackgroundMenu_Image").setAttribute("src", file);
+	byId("BackgroundMenu_Image").setAttribute("src", file);
 }
 
 /////////////////////////////
