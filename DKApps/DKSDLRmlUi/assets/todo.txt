@@ -10,6 +10,8 @@ DKWidget_GetAttribute
 DKWidget_SetAttribute
 DKWidget_GetInnerHtml
 DKWidget_SetInnerHtml
+DKWidget_GetProperty
+DKWidget_SetProperty
  ..
  ..
 
