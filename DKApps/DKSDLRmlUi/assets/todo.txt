@@ -1,5 +1,7 @@
 // TODO //
 
+ALL C++ Javascript functions should have a DKCPP_ prefix
+
 *** DK Javascript ****
 All Duktape c++ js functions should be labeled DKCPP_Function
 Now we always know when we step outside of browsedr bounds. 
