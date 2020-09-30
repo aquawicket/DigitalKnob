@@ -172,13 +172,13 @@ function DKBuildGUI_UpdateLibs()
 	var libs = result.split(",");
 	
 	//Add Libraries
-	var id = DKWidget_CreateElement("LibList", "option", "BuildLibraries");
+	var id = DKWidget_CreateElement(byId("LibList"), "option", "BuildLibraries");
 	byId(id).value = "Build All Libraries";
 	byId(id).innerHTML = "Build All Libraries";
 	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
-		var id2 = DKWidget_CreateElement("LibList", "option", "LIBRARY");
+		var id2 = DKWidget_CreateElement(byId("LibList"), "option", "LIBRARY");
 		byId(id2).value = libs[i]);
 		byId(id2).innerHTML = libs[i];
 		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);

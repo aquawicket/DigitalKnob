@@ -86,7 +86,7 @@ function DKEditor_BrowserMenu_AddIE()
 ////////////////////////////////////////
 function DKEditor_BrowserMenu_AddOpera()
 {
-	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Opera");
+	DKWidget_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Opera");
 	byId("DKEditor_BrowserMenu_Opera").class = "option";
 	byId("DKEditor_BrowserMenu_Opera").innerHTML = "Opera";
 	byId("DKEditor_BrowserMenu_Opera").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
@@ -95,7 +95,7 @@ function DKEditor_BrowserMenu_AddOpera()
 /////////////////////////////////////////
 function DKEditor_BrowserMenu_AddSafari()
 {
-	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Safari");
+	DKWidget_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Safari");
 	byId("DKEditor_BrowserMenu_Safari").class = "option";
 	byId("DKEditor_BrowserMenu_Safari").innerHTML = "Safari";
 	byId("DKEditor_BrowserMenu_Safari").addEventListener("click", DKEditor_BrowserMenu_OnEvent);

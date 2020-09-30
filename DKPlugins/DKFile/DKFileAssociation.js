@@ -68,7 +68,7 @@ function DKFileAssociation_OpenHtml(path)
 	//if(!HtmlToRml(filedata)){ return false; }
 
 	//Parse the sting into an element
-	var temp = DKWidget_CreateElement("body", "temp", "temporary");
+	var temp = DKWidget_CreateElement(document.body, "temp", "temporary");
 	byId(temp).innerHTML = filedata;
 
 	//if(DKWidget_GetNumChildren(temp) == 0){

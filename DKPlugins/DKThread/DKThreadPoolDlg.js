@@ -38,7 +38,7 @@ function DKThreadPoolDlg_OnUpdate()
 		DKWidget_Hide("DKThreadPoolDlg.html");
 	}
 	for(var i=0; i<names.length; ++i){
-		var div = DKWidget_CreateElement("DKThreadPoolDlg.html", "div", "Thread");
+		var div = DKWidget_CreateElement(byId("DKThreadPoolDlg.html"), "div", "Thread");
 		byId(div).style.width = "100%";
 		byId(div).style.height = "20rem";
 		byId(div).style.whiteSpace = "nowrap";
