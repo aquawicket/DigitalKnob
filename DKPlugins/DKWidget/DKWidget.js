@@ -2,32 +2,6 @@ function DKWidget_GetFocusElement(){ console.warn("DKWidget_GetFocusElement(): n
 function DKWidget_ValidateColor(color){ console.warn("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
 
 
-/*
-//Mobile device minimum font-size fix
-///////////////////////
-function AdjustRems(id)
-{
-	var nodelist = byId(id).getElementsByTagName('*'); //NOTE: nodelist is read-only
-	var elements = Array.prototype.slice.call(nodelist); //put nodelist into a writable array
-	elements.unshift(byId(id)); //add the root element to the beginning of the array
-	for(var i=0; i<elements.length; i++){
-		//console.log("\n");
-		//console.log(elements[i].id+"\n");
-		for(var s=0; s<elements[i].style.length; s++){
-			var style_name = elements[i].style[s];
-			var style_value = elements[i].style[elements[i].style[s]];
-			//console.log(style_name+" : "+style_value+"\n");
-			
-			if(style_value.indexOf("rem") > -1){
-				elements[i].style[elements[i].style[s]] = (parseFloat(style_value) / 10)+"rem";  //NOTE: 10 = scale factor
-				//console.log(style_name+" changed to:"+(parseFloat(style_value) / 10)+"rem"+"\n");
-			}
-        }
-	}	
-}
-*/
-
-
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
@@ -312,160 +286,6 @@ function DKWidget_GetValue(variable)
 	return false;
 }
 
-/*
-////////////////////////////////
-function DKWidget_GetTagName(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	return element.tag;
-}
-*/
-
-/*
-///////////////////////////////////////////////////
-function DKWidget_GetAttribute(variable, parameter)
-{
-	if(!variable){
-		console.warn("DKWidget_GetAttribute(): veriable empty\n");
-		return "";
-	}
-	if(typeof variable === "object"){
-		return variable[parameter];
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		return element[parameter];
-	}
-	console.error("ERROR: GetAttribute(): unknown type\n");
-	return false;
-}
-*/
-
-/*
-//////////////////////////////////////////////////////////
-function DKWidget_SetAttribute(variable, parameter, value)
-{
-	if(!variable){ console.error("DKWidget_SetAttribute(): variable not set\n"); return false; }
-	//if(!value){ console.warn("DKWidget_SetAttribute(): value not set\n"); return false; }
-	if(typeof variable === "object"){
-		//variable.setAttribute(parameter, value);
-		if(parameter === "class"){
-			variable.className = value;
-		}
-		else{
-			variable[parameter] = value;
-		}
-		return true;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		if(!element){
-			console.error("DKWidget_SetAttribute(): element invalid\n");
-			return false;
-		}
-		if(parameter === "class"){
-			element.className = value;
-		}
-		else{
-			//element[parameter] = value;
-			element.setAttribute(parameter, value);
-		}
-		return true;
-	}
-	console.error("DKWidget_SetAttribute(): unknown type\n");
-	return false;
-}
-*/
-
-/*
-//////////////////////////////////////////////////
-function DKWidget_GetProperty(variable, parameter)
-{
-	//console.warn("DKWidget_GetProperty("+variable+","+parameter+")");
-	if(!variable){ return ""; }
-	if(!parameter){ return ""; }
-	if(parameter === "background-color"){ parameter = "backgroundColor"; }
-
-	if(typeof variable === "object"){
-		return variable.style[parameter];
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		if(!element){
-			console.error("DKWidget_GetProperty(): element is null\n");
-			return;
-		}
-		//if(!element.hasOwnProperty(parameter)){
-			//console.warn("DKWidget_GetProperty(): parameter is null\n");
-			//return false; 
-		//}
-		return element.style[parameter];
-	}
-	console.error("ERROR: GetProperty(): unknown type\n");
-	return false;
-}
-*/
-
-/*
-/////////////////////////////////////////////////////////
-function DKWidget_SetProperty(variable, parameter, value)
-{
-	console.error("Replace DKWidget_SetProperty with document.getElementsById().style.property");
-	//DK_DumpError();
-	
-	//console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
-	if(!variable){ //FIXME: who called you?
-		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
-		return false; 
-	}
-	if(!parameter){
-		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): parameter not set\n");
-		return false; 
-	}
-	if(!value){
-		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set\n");
-		return false; 
-	} 
-	
-	if(parameter === "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
-	//console.log("DK_IE() = "+DK_IE()+"\n");
-	if(DK_IE() && DK_IE() < 9){
-		value = value.replace("rem", "px"); //IE 8- fix
-	}
-
-	if(typeof variable === "object"){
-		variable.style[parameter] = value;
-		return true;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		if(variable === "body"){ element = document.body; }
-		if(!element){ 
-			console.error("ERROR: SetProperty(): element("+variable+") invalid\n");
-			return false;
-		}
-
-		element.style[parameter] = value; //FIXME: how to deal with failure here? (IE8)
-		return true;
-	}
-	console.error("ERROR: SetProperty(): unknown type\n");
-	return false;
-}
-*/
-
-/*
-////////////////////////////////////////////
-function DKWidget_HasProperty(id, parameter)
-{
-	if(byId(id).style[parameter]){
-		return true;
-	}
-	return false;
-}
-*/
-
-
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
@@ -510,44 +330,6 @@ function DKWidget_SetValue(variable, value)
 	console.error("ERROR: SetValue(): unknown type\n");
 	return false;
 }
-
-/*
-////////////////////////////////////////
-function DKWidget_GetInnerHtml(variable)
-{
-	if(typeof variable === "object"){
-		return variable.innerHTML;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		return element.innerHTML;
-	}
-	console.error("ERROR: GetInnerHtml(): unknown type\n");
-	return false;
-}
-*/
-
-/*
-///////////////////////////////////////////////
-function DKWidget_SetInnerHtml(variable, value)
-{
-	if(typeof variable === "object"){
-		variable.innerHTML = value;
-		return true;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		if(!element){ 
-			console.error("ERROR: SetInnerHtml(): element invalid\n");
-			return false; 
-		}
-		element.innerHTML = value;
-		return true;
-	}
-	console.error("ERROR: SetInnerHtml(): unknown type\n");
-	return false;
-}
-*/
 
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
@@ -708,38 +490,6 @@ function DKWidget_InsertBefore(parent, element)
 	node.insertBefore(ele, par);
 }
 
-/*
-///////////////////////////////
-function DKWidget_GetParent(id)
-{
-	if(!byId(id)){ return ""; }
-	return byId(id).parentNode.id;
-}
-
-///////////////////////////////////
-function DKWidget_GetFirstChild(id)
-{
-	var fc = byId(id).firstChild;
-	if(fc){
-		//console.log("GetFirstChild("+id+"): -> "+fc.id+"\n");
-		return fc.id;
-	}
-	return false;
-}
-
-/////////////////////////////////////
-function DKWidget_GetMouseWindowX(id)
-{
-	return mouseX;
-}
-
-/////////////////////////////////////
-function DKWidget_GetMouseWindowY(id)
-{
-	return mouseY;
-}
-*/
-
 //////////////////////////////////////
 function DKWidget_GetMouseElementX(id)
 {
@@ -769,94 +519,6 @@ function DKWidget_GetMouseElementY(id)
 	//console.log("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n");
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
-
-/*
-////////////////////////////////////
-function DKWidget_GetClientWidth(id)
-{
-	return byId(id).clientWidth;
-}
-
-///////////////////////////////////////
-function DKWidget_GetClientHeight(id)
-{
-	return byId(id).clientHeight;
-}
-
-//////////////////////////////////
-function DKWidget_GetOffsetTop(id)
-{
-	var ele = byId(id);
-	var top = ele.offsetTop;
-	while((ele=ele.offsetParent) !== null){ 
-		top += ele.offsetTop; 
-	}
-	//console.log("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
-	return parseInt(top);
-}
-
-//////////////////////////////////
-function DKWidget_GetOffsetLeft(id)
-{
-	var ele = byId(id);
-	var left = ele.offsetLeft;
-	while((ele=ele.offsetParent) !== null){ 
-		left += ele.offsetLeft; 
-	}
-	return parseInt(left);
-}
-
-////////////////////////////////////
-function DKWidget_GetOffsetRight(id)
-{
-	var ele = byId(id);
-	var right = ele.offsetRight;
-	while((ele=ele.offsetParent) !== null){ 
-		right += ele.offsetRight; 
-	}
-	//console.log("DKWidget_GetOffsetRight("+id+") = "+top+"\n");
-	return parseInt(right);
-}
-
-/////////////////////////////////////
-function DKWidget_GetOffsetBottom(id)
-{
-	var ele = byId(id);
-	var bottom = ele.offsetRight;
-	while((ele=ele.offsetParent) !== null){ 
-		bottom += ele.offsetBottom; 
-	}
-	//console.log("DKWidget_GetOffsetBottom("+id+") = "+top+"\n");
-	return parseInt(bottom);
-}
-
-////////////////////////////////////
-function DKWidget_GetOffsetWidth(id)
-{
-	return byId(id).offsetWidth;
-}
-
-/////////////////////////////////////
-function DKWidget_GetOffsetHeight(id)
-{
-	return byId(id).offsetHeight;
-}
-
-////////////////////////////////////
-function DKWidget_GetComputedTop(id)
-{
-	return window.getComputedStyle(byId(id)).top;
-}
-
-///////////////////////////////////
-function DKWidget_ElementExists(id)
-{
-	if(byId(id)){
-		return true;
-	}
-	return false;
-}
-*/
 
 ///////////////////////////////////
 function DKWidget_RemoveElement(id)
@@ -956,14 +618,6 @@ function DKWidget_SetFile(id, file)
 	}
 	*/
 }
-
-/*
-//////////////////////////////////
-function DKWidget_GetLastChild(id)
-{
-	return byId("body").lastChild.id;
-}
-*/
 
 //////////////////////////////
 function DKWidget_SetFocus(id)
