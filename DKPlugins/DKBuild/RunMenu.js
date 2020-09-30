@@ -55,7 +55,7 @@ function RunMenu_OnEvent(event)
 		DKThread_DKQueue("BuildAll "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
 	if(event.currentTarget.id == "Copy Assets"){
-		DKWARN("DKBuildGUI::Copy Assets: TODO\n");
+		console.warn("DKBuildGUI::Copy Assets: TODO\n");
 	}
 	if(event.currentTarget.id == "Run App"){
 		OS = DKWidget_GetValue("OSList");

@@ -29,7 +29,7 @@ function DKVideo_Queue(id, src)
 	}
 	
 	if(!type){
-		console.log("DKERROR: DKVideo_Queue(): Cannot determine video type\n");
+		console.error("DKVideo_Queue(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});
@@ -54,7 +54,7 @@ function DKVideo_Change(id, src)
 	}
 	
 	if(!type){
-		console.log("DKERROR: DKVideo_Change(): Cannot determine video type\n");
+		console.log("console.error: DKVideo_Change(): Cannot determine video type\n");
 	}
 	
 	myPlayer.src({"type":type, "src":src});

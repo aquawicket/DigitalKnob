@@ -17,7 +17,7 @@ function DKMySql_Connect(host, name, pass, port)
 	console.log(response+"\n");
 	
 	//FIXME
-	//if(response.indexOf("DKERROR") != -1){
+	//if(response.indexOf("console.error") != -1){
 	//	return false;
 	//}
 	

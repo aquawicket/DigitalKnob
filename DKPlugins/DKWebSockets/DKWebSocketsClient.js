@@ -42,7 +42,7 @@ function DKWebSocketsClient_OnEvent(event)
 function DKWebSocketsClient_CreateClient()
 {
 	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
-		DKWARN("DKWebSocketsClient_CreateClient(): please enter an address\n");
+		console.warn("DKWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
 	}
 	url = DKWidget_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000

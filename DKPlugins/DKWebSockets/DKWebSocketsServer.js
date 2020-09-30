@@ -43,11 +43,11 @@ function DKWebSocketsServer_OnEvent(event)
 function DKWebSocketsServer_CreateServer()
 {
 	if(!DKWidget_GetValue("DKWebSocketsServer_IpAddress")){
-		DKWARN("DKWebSocketsServer_CreateServer(): Please enter an ip address\n");
+		console.warn("DKWebSocketsServer_CreateServer(): Please enter an ip address\n");
 		//return;
 	}
 	if(!DKWidget_GetValue("DKWebSocketsServer_Port")){
-		DKWARN("DKWebSocketsServer_CreateServer(): Please enter a port number\n");
+		console.warn("DKWebSocketsServer_CreateServer(): Please enter a port number\n");
 		return;
 	}
 	console.log("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");

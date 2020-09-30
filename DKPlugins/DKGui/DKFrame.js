@@ -41,7 +41,7 @@ function DKFrame_OnEvent(event)
 	if(event.type == "DKFrame_resize"){
 		var frame = byId(event.currentTarget.id);
 		if(!frame){ 
-			//DKERROR("DKFrame_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+"): frame invalid\n");
+			//console.error("DKFrame_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+"): frame invalid\n");
 			return; 
 		}
 		var child = frame.childNodes[4];
@@ -65,7 +65,7 @@ function DKFrame_Widget(id)
 	//stop if frame already exsists, multiple windows not ready yet.
 	//FIXME
 	//if(DKWidget_ElementExists(title+"_frame")){
-	//	DKWARN("DKFrame_Widget("+id+"): frame already exists\n");
+	//	console.warn("DKFrame_Widget("+id+"): frame already exists\n");
 	//	return;
 	//}
 	

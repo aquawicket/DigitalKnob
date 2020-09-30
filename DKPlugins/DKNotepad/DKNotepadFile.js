@@ -27,7 +27,7 @@ function DKNotepadFile_End()
 /////////////////////////////////////
 function DKNotepadFile_OnEvent(event)
 {
-	//DKWARN("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
+	//console.warn("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id == "DKNotepadFile_New"){
 		DKNotepadFile_New();
 	}

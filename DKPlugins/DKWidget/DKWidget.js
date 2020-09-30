@@ -1,5 +1,5 @@
-function DKWidget_GetFocusElement(){ DKWARN("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
-function DKWidget_ValidateColor(color){ DKWARN("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
+function DKWidget_GetFocusElement(){ console.warn("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
+function DKWidget_ValidateColor(color){ console.warn("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
 
 
 /*
@@ -36,7 +36,7 @@ function DKWidget_NewWidget(url, parent)
 	if(parent){
 		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
-		if(!element){ DKERROR("DKWidget(): could not get parent ("+parent+")\n"); return false; }
+		if(!element){ console.error("DKWidget(): could not get parent ("+parent+")\n"); return false; }
 		if(!LoadHtml(url, element)){ 
 			return false;
 		}
@@ -215,7 +215,7 @@ function DKWidget_GetValue(variable)
 			return ele.value; 
 		}
 		
-		DKERROR("DKWidget_GetValue("+variable+"): Could not get value\n");
+		console.error("DKWidget_GetValue("+variable+"): Could not get value\n");
 		return false;
 	}
 	
@@ -308,7 +308,7 @@ function DKWidget_GetValue(variable)
 		}
 	}
 	
-	DKERROR("ERROR: DKWidget_GetValue(): unknown type\n");
+	console.error("ERROR: DKWidget_GetValue(): unknown type\n");
 	return false;
 }
 
@@ -327,7 +327,7 @@ function DKWidget_GetTagName(id)
 function DKWidget_GetAttribute(variable, parameter)
 {
 	if(!variable){
-		DKWARN("DKWidget_GetAttribute(): veriable empty\n");
+		console.warn("DKWidget_GetAttribute(): veriable empty\n");
 		return "";
 	}
 	if(typeof variable == "object"){
@@ -337,7 +337,7 @@ function DKWidget_GetAttribute(variable, parameter)
 		var element = document.getElementById(variable);
 		return element[parameter];
 	}
-	DKERROR("ERROR: GetAttribute(): unknown type\n");
+	console.error("ERROR: GetAttribute(): unknown type\n");
 	return false;
 }
 */
@@ -346,8 +346,8 @@ function DKWidget_GetAttribute(variable, parameter)
 //////////////////////////////////////////////////////////
 function DKWidget_SetAttribute(variable, parameter, value)
 {
-	if(!variable){ DKERROR("DKWidget_SetAttribute(): variable not set\n"); return false; }
-	//if(!value){ DKWARN("DKWidget_SetAttribute(): value not set\n"); return false; }
+	if(!variable){ console.error("DKWidget_SetAttribute(): variable not set\n"); return false; }
+	//if(!value){ console.warn("DKWidget_SetAttribute(): value not set\n"); return false; }
 	if(typeof variable == "object"){
 		//variable.setAttribute(parameter, value);
 		if(parameter == "class"){
@@ -361,7 +361,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
 		if(!element){
-			DKERROR("DKWidget_SetAttribute(): element invalid\n");
+			console.error("DKWidget_SetAttribute(): element invalid\n");
 			return false;
 		}
 		if(parameter == "class"){
@@ -373,7 +373,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 		}
 		return true;
 	}
-	DKERROR("DKWidget_SetAttribute(): unknown type\n");
+	console.error("DKWidget_SetAttribute(): unknown type\n");
 	return false;
 }
 */
@@ -382,7 +382,7 @@ function DKWidget_SetAttribute(variable, parameter, value)
 //////////////////////////////////////////////////
 function DKWidget_GetProperty(variable, parameter)
 {
-	//DKWARN("DKWidget_GetProperty("+variable+","+parameter+")");
+	//console.warn("DKWidget_GetProperty("+variable+","+parameter+")");
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
 	if(parameter == "background-color"){ parameter = "backgroundColor"; }
@@ -393,16 +393,16 @@ function DKWidget_GetProperty(variable, parameter)
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
 		if(!element){
-			DKERROR("DKWidget_GetProperty(): element is null\n");
+			console.error("DKWidget_GetProperty(): element is null\n");
 			return;
 		}
 		//if(!element.hasOwnProperty(parameter)){
-			//DKWARN("DKWidget_GetProperty(): parameter is null\n");
+			//console.warn("DKWidget_GetProperty(): parameter is null\n");
 			//return false; 
 		//}
 		return element.style[parameter];
 	}
-	DKERROR("ERROR: GetProperty(): unknown type\n");
+	console.error("ERROR: GetProperty(): unknown type\n");
 	return false;
 }
 */
@@ -416,15 +416,15 @@ function DKWidget_SetProperty(variable, parameter, value)
 	
 	//console.log("DKWidget_SetProperty("+variable+", "+parameter+", "+value+")");
 	if(!variable){ //FIXME: who called you?
-		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
+		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): variable not set\n");
 		return false; 
 	}
 	if(!parameter){
-		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): parameter not set\n");
+		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): parameter not set\n");
 		return false; 
 	}
 	if(!value){
-		DKERROR("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set\n");
+		console.error("DKWidget_SetProperty("+variable+", "+parameter+", "+value+"): value not set\n");
 		return false; 
 	} 
 	
@@ -442,14 +442,14 @@ function DKWidget_SetProperty(variable, parameter, value)
 		var element = document.getElementById(variable);
 		if(variable == "body"){ element = document.body; }
 		if(!element){ 
-			DKERROR("ERROR: SetProperty(): element("+variable+") invalid\n");
+			console.error("ERROR: SetProperty(): element("+variable+") invalid\n");
 			return false;
 		}
 
 		element.style[parameter] = value; //FIXME: how to deal with failure here? (IE8)
 		return true;
 	}
-	DKERROR("ERROR: SetProperty(): unknown type\n");
+	console.error("ERROR: SetProperty(): unknown type\n");
 	return false;
 }
 */
@@ -471,7 +471,7 @@ function DKWidget_RemoveProperty(id, parameter)
 {
 	var element = document.getElementById(id);
 	if(!element){ 
-		DKERROR("DKWidget_RemoveProperty(): element invalid\n");
+		console.error("DKWidget_RemoveProperty(): element invalid\n");
 		return; 
 	}
 	if(element.style[parameter]){
@@ -495,7 +495,7 @@ function DKWidget_SetValue(variable, value)
 	}
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
-		if(!element){ DKERROR("SetValue("+variable+"): Cannot find element\n"); return false; }
+		if(!element){ console.error("SetValue("+variable+"): Cannot find element\n"); return false; }
 		if(element.type && element.type === "checkbox"){
 			element.checked = value;
 			return true;
@@ -507,7 +507,7 @@ function DKWidget_SetValue(variable, value)
 		document.getElementById(variable).innerHTML = value;
 		return true;
 	}
-	DKERROR("ERROR: SetValue(): unknown type\n");
+	console.error("ERROR: SetValue(): unknown type\n");
 	return false;
 }
 
@@ -522,7 +522,7 @@ function DKWidget_GetInnerHtml(variable)
 		var element = document.getElementById(variable);
 		return element.innerHTML;
 	}
-	DKERROR("ERROR: GetInnerHtml(): unknown type\n");
+	console.error("ERROR: GetInnerHtml(): unknown type\n");
 	return false;
 }
 */
@@ -538,13 +538,13 @@ function DKWidget_SetInnerHtml(variable, value)
 	if(typeof variable == "string"){
 		var element = document.getElementById(variable);
 		if(!element){ 
-			DKERROR("ERROR: SetInnerHtml(): element invalid\n");
+			console.error("ERROR: SetInnerHtml(): element invalid\n");
 			return false; 
 		}
 		element.innerHTML = value;
 		return true;
 	}
-	DKERROR("ERROR: SetInnerHtml(): unknown type\n");
+	console.error("ERROR: SetInnerHtml(): unknown type\n");
 	return false;
 }
 */
@@ -552,7 +552,7 @@ function DKWidget_SetInnerHtml(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
-	if(!id){ DKWARN("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
+	if(!id){ console.warn("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
 	var element = document.getElementById(id);
 	for(var i = 0; i < element.childNodes.length; i++){
 		var curNode = element.childNodes[i];
@@ -585,7 +585,7 @@ function DKWidget_GetOuterHtml(variable)
 		var element = byId(variable);
 		return element.outerHTML;
 	}
-	DKERROR("ERROR: GetInnerHtml(): unknown type\n");
+	console.error("ERROR: GetInnerHtml(): unknown type\n");
 	return false;
 }
 
@@ -600,7 +600,7 @@ function DKWidget_CreateElement(parent, tag, id)
 	id = DKWidget_GetAvailableId(id);
 		
 	var ele = document.createElement(tag);
-	if(!ele){ DKERROR("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
+	if(!ele){ console.error("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
 	ele.id = id;
 	//ele.setAttribute("id", id);
 	
@@ -619,7 +619,7 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 	
 	var node = par.parentNode;
 	if(!node){
-		DKERROR("InsertBefore(): could not get parent of "+parent+"\n");
+		console.error("InsertBefore(): could not get parent of "+parent+"\n");
 		return false;
 	}
 	
@@ -670,7 +670,7 @@ function DKWidget_PrependChild(parent, element)
 	}
 	
 	if(!par){
-		DKERROR("PrependChild("+parent+", "+element+"): par invalid\n");
+		console.error("PrependChild("+parent+", "+element+"): par invalid\n");
 		return false;
 	}
 	var first_child = par.firstChild;
@@ -701,7 +701,7 @@ function DKWidget_InsertBefore(parent, element)
 	}
 	var node = par.parentNode;
 	if(!node){
-		DKERROR("InsertBefore(): could not get parent of "+parent+"\n");
+		console.error("InsertBefore(): could not get parent of "+parent+"\n");
 		return false;
 	}
 	
@@ -863,7 +863,7 @@ function DKWidget_RemoveElement(id)
 {
 	var ele = document.getElementById(id);
 	if(!ele){
-		DKWARN("RemoveElement("+id+"): element does not exist\n");
+		console.warn("RemoveElement("+id+"): element does not exist\n");
 		return false;
 	}
 	var par = ele.parentNode;
@@ -937,11 +937,11 @@ function DKWidget_OpenLink(url, target)
 ///////////////////////////////////
 function DKWidget_SetFile(id, file)
 { 
-	DKWARN("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n"); 
+	console.warn("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n"); 
 	return;
 	
 	//TODO
-	if(!id){ DKWARN("DKWidget_SetFile(): id empty\n"); return; }
+	if(!id){ console.warn("DKWidget_SetFile(): id empty\n"); return; }
 	while(id.indexOf(".html") == -1 && id.indexOf("body") == -1){
 		id = DKWidget_GetParent(id);
 	}

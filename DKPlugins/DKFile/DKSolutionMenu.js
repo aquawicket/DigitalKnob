@@ -122,7 +122,7 @@ function DKSolutionMenu_OpenHere()
 function DKSolutionMenu_NewFile()
 {
 	if(!DKSolutionMenu_file){
-		DKERROR("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
+		console.error("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
 		return;
 	}
 	//var value = byId("DKSolutionPath").value;
@@ -154,7 +154,7 @@ function DKSolutionMenu_NewFile()
 function DKSolutionMenu_NewFolder()
 {
 	if(!DKSolutionMenu_file){
-		DKERROR("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
+		console.error("DKSolutionMenu_NewFile(): DKSolutionMenu_file is invalid\n");
 		return;
 	}
 	
@@ -249,7 +249,7 @@ function DKSolutionMenu_GitAdd()
 		while(!DKFile_Exists(search+"/.git")){
 			var n = search.lastIndexOf("/");
 			if(n == -1){
-				DKWARN("could not locate a .git folder\n");
+				console.warn("could not locate a .git folder\n");
 				return false;
 			}
 			search = search.substring(0, n);
@@ -272,11 +272,11 @@ function DKSolutionMenu_UpxCompress()
 		console.log("upx = "+upx+"\n");
 		//upx compress the exe file
 		if(DKFile_Exists(upx)){
-			DKWARN("UPX compressing exe... please wait\n");
+			console.warn("UPX compressing exe... please wait\n");
 			DK_Execute(upx+" -9 -v "+DKSolutionMenu_file);
 		}
 		else{
-			DKWARN("DKBuild_DoResults(): UPX does not exists\n");
+			console.warn("DKBuild_DoResults(): UPX does not exists\n");
 		}
 	});
 }
