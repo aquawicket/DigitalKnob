@@ -35,7 +35,7 @@ if(!hostname){ hostname = document.location.hostname; }
 //if(!hostname){ hostname = "digitalknob.com"; }
 if(!hostname){ hostname = "127.0.0.1"; }
 
-var pathname = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
+var pathname;// = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
 
 if(!pathname){ pathname = document.location.pathname; }
 if(pathname.lastIndexOf("DKApps") > 0){
