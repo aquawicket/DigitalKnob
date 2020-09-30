@@ -60,6 +60,6 @@ function DKMenu_ValidatePosition(id)
 	if(left + width > win_width){
 		console.log("new left = "+left+"\n");
 		left = win_width - width;
-		byId(id)style.left = left+"px";
+		byId(id).style.left = left+"px";
 	}
 }
