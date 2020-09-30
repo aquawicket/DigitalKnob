@@ -286,7 +286,7 @@ bool DKHtmlToRml::PostProcess(Rml::Element* element)
 
 
 //DEBUG - Lets see the code
-#ifdef DEBUG
+#ifdef DKTODO
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();

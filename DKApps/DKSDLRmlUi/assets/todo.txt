@@ -1,10 +1,13 @@
 // TODO //
 
-*** Lose DKWidget
+*** CONSOLE ***
+It seems like all [JS] "console.warn" text has an extra newline character
+
+** Lose DKWidget
 It's down to one file with a bunch of helper functions. not a class..  push it into main or something
 
-*** CODE CLEANUP ***
-*** Remove These terms from all ,js files
+*** DKWidget ***
+ Remove These terms from all ,js files
  DKDEBUGFUNC
  DKAddEvent
  DKRemoveEvent
@@ -18,17 +21,20 @@ DKWidget_SetProperty
 DKWidget_GetValue
 DKWidget_Visible
 
+*** ALL .js files ***
  replace all == with ===
  replace all != with !==
 
 *** DKNotepad ***
  Make "Ctrl+Shift+S" save the file in DKNotepad
+ Get Copy and Paste working
 
-*** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
+*** DKDuktape ***
+Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 
-*** Create FAR 
+*** DKFar ***
 
-*** KEEP WORKING ON Event
+*** DKDomEvent ***
 * add removeEventListener everywhere neccesary 
 * Make EVERY event go through DKDomEventTarget.js
 * keep track of events in DKDomEventTarget.js

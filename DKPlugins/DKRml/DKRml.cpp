@@ -277,7 +277,7 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	DKString code = document->GetOwnerDocument()->GetContext()->GetRootElement()->GetInnerRML();
 
-#ifdef DEBUG
+#ifdef DEBUG_TEST
 	DKINFO("\n");
 	DKINFO("################ CODE FROM RmlUi ################\n");
 	DKINFO(code+"\n");
