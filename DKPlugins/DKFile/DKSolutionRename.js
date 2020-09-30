@@ -65,6 +65,6 @@ function DKSolutionRename_Rename()
 	if(DKFile_Rename(oldvalue, newvalue, true) == false){
 		return; 
 	}
-	DKWidget_SetAttribute(DKSolutionRename_id, "value", newvalue);
+	byId(DKSolutionRename_id).value = newvalue;
 	DKWidget_SetInnerHtml(DKSolutionRename_id, newhtml);
 }

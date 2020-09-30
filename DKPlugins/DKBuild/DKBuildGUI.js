@@ -118,9 +118,7 @@ function DKBuildGUI_UpdateApps()
 	for(var i=0; i<APP_LIST.length; ++i){
 		//console.lof(APP_LIST[i]+"\n");
 		var ele = DKWidget_CreateElement(byId("AppList"), "option", "al");
-		//DKWidget_SetInnerHtml(ele, APP_LIST[i]);
 		byId(ele).innerHTML = APP_LIST[i];
-		//DKWidget_SetAttribute(ele, "value", APP_LIST[i]);
 		byId(ele).value = APP_LIST[i];
 		//DKWidget_SetValue("AppList", "DKBuilder");
 	}
@@ -175,13 +173,13 @@ function DKBuildGUI_UpdateLibs()
 	
 	//Add Libraries
 	var id = DKWidget_CreateElement("LibList", "option", "BuildLibraries");
-	DKWidget_SetAttribute(id, "value", "Build All Libraries");
+	byId(id).value = "Build All Libraries";
 	DKWidget_SetInnerHtml(id, "Build All Libraries");
 	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
 		var id2 = DKWidget_CreateElement("LibList", "option", "LIBRARY");
-		DKWidget_SetAttribute(id2, "value", libs[i]);
+		byId(id2).value = libs[i]);
 		DKWidget_SetInnerHtml(id2, libs[i]);
 		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);
 	}

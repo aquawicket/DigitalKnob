@@ -43,7 +43,7 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		document.getElementById(iframe).style.height = "100%";
 		//document.getElementById(iframe).style.right = "0rem";
 		//document.getElementById(iframe).style.bottom = "0rem";
-		DKWidget_SetAttribute(iframe, "src", DKApp_url);
+		byId(iframe).src = DKApp_url;
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 	}
 	else if(USE_ROCKET){

@@ -52,6 +52,6 @@ function DKLogin_FBresponse(param, response)
 		FACEBOOK_ID = response;
 		
 		var id = DKWidget_CreateElement("DKLogin/DKLogin.html", "img", "fbpic");
-		DKWidget_SetAttribute(id, "src", "http://graph.facebook.com/"+FACEBOOK_ID+"/picture");
+		byId(id).src = "http://graph.facebook.com/"+FACEBOOK_ID+"/picture";
 	}
 }

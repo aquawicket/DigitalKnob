@@ -38,18 +38,18 @@ function DKAudio_PlaySound(file)
 ////////////////////////////////
 function DKAudio_OpenMusic(file)
 { 
-	var audio = DKWidget_CreateElement("body", "audio", "audio");
-	var source = DKWidget_CreateElement(audio, "source", "source");
-	DKWidget_SetAttribute(source, "type", "audio/ogg");
-	DKWidget_SetAttribute(source, "src", file);
-	document.getElementById("audio").ontimeupdate = function(){ DKAudio_TimeUpdate() };
-	document.getElementById("audio").onended = function(){ DKAudio_Ended() };
+	var audio = DKWidget_CreateElement(document.body, "audio", "audio");
+	var source = DKWidget_CreateElement(byId(audio), "source", "source");
+	byId(source).type = "audio/ogg";
+	byId(source).src = file;
+	byId("audio").ontimeupdate = function(){ DKAudio_TimeUpdate() };
+	byId("audio").onended = function(){ DKAudio_Ended() };
 }
 
 ///////////////////////////////
 function DKAudio_SetVolume(num)
 {
-	document.getElementById("audio").volume = parseFloat(num / 128);
+	byId("audio").volume = parseFloat(num / 128);
 }
 
 ////////////////////////////

@@ -46,7 +46,7 @@ function DKAudioPlayer_OnEvent(event)
 		DKAudioPlayer_UpdateVolume(parseInt(volume));
 	}
 	if(event.type == "finnished"){
-		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
+		byId("DKAudioPlayer_playpause").src = "DKAudio/play.png";
 	}
 	if(event.type == "timeupdate"){
 		DKAudioPlayer_TimeUpdate();
@@ -66,11 +66,11 @@ function DKAudioPlayer_playpause()
 {
 	var src = byId("DKAudioPlayer_playpause").src;
 	if(src.indexOf("play.png") != -1){
-		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/pause.png");
+		byId("DKAudioPlayer_playpause").src = "DKAudio/pause.png";
 		DKAudio_Resume(DKAudioPlayer_file);
 	}
 	else{
-		DKWidget_SetAttribute("DKAudioPlayer_playpause", "src", "DKAudio/play.png");
+		byId("DKAudioPlayer_playpause").src = "DKAudio/play.png";
 		DKAudio_Pause(DKAudioPlayer_file);
 	}
 }
@@ -104,7 +104,7 @@ function DKAudioPlayer_speaker()
 		DKAudioPlayer_UpdateVolume(DKAudio_GetVolume());
 	}
 	else{
-		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/mute.png");
+		byId("DKAudioPlayer_speaker").src = "DKAudio/mute.png";
 		DKAudio_Mute();
 	}
 	
@@ -117,15 +117,15 @@ function DKAudioPlayer_UpdateVolume(volume)
 {
 	var num = parseInt(volume);
 	if(num < 1){
-		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/mute.png");
+		byId("DKAudioPlayer_speaker").src = "DKAudio/mute.png";
 	}
 	if(num > 0 && num < 42){
-		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/volume1.png");
+		byId("DKAudioPlayer_speaker").src = "DKAudio/volume1.png";
 	}
 	if(num > 42 && num < 84){
-		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/volume2.png");
+		byId("DKAudioPlayer_speaker").src = "DKAudio/volume2.png";
 	}
 	if(num > 84){
-		DKWidget_SetAttribute("DKAudioPlayer_speaker", "src", "DKAudio/volume3.png");
+		byId("DKAudioPlayer_speaker").src = "DKAudio/volume3.png";
 	}
 }

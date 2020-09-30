@@ -25,7 +25,7 @@ function DKTooltip_OnEvent(event)
 //////////////////////////////////
 function DKTooltip_Add(id, string)
 {
-	DKWidget_SetAttribute(id, "tooltip", string);
+	byId(id).tooltip = string;
 	window.addEventListener("mousedown", DKTooltip_OnEvent);
 	byId(id).addEventListener("mouseenter", DKTooltip_OnEvent);
 	byId(id).addEventListener("mouseout", DKTooltip_OnEvent);

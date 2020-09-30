@@ -7,8 +7,8 @@ function DKWebSocketsServer_Init()
 		byId("DKWebSocketsServer_CloseServer").addEventListener("click", DKWebSocketsServer_OnEvent);
 		byId("DKWebSocketsServer_CreateServer").addEventListener("click", DKWebSocketsServer_OnEvent);
 		byId("DKWebSocketsServer_MessageToClient").addEventListener("click", DKWebSocketsServer_OnEvent);
-		DKWidget_SetAttribute("DKWebSocketsServer_IpAddress", "value", DK_GetLocalIP());
-		DKWidget_SetAttribute("DKWebSocketsServer_Port", "value", "80");
+		byId("DKWebSocketsServer_IpAddress").value = DK_GetLocalIP();
+		byId("DKWebSocketsServer_Port").value = "80";
 	});
 }
 
@@ -70,6 +70,6 @@ function DKWebSocketsServer_MessageToClient()
 ////////////////////////////////////////////////////////
 function DKWebSocketsServer_OnMessageFromClient(message)
 {
-	DKWidget_SetAttribute("DKWebSocketsServer_receive","value", message);
+	byId("DKWebSocketsServer_receive").value = message;
 	//DKWidget_SetValue("DKWebSocketsServer_receive", message);
 }

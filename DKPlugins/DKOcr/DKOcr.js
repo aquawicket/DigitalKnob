@@ -49,7 +49,7 @@ function DKOcr_OnEvent(event)
 			for(var i=0; i<1000; i++){
 				if(DKFile_Exists(assets+"/temp-"+i+".png")){
 					pages += DKOcr_ImageToText(assets+"/temp-"+i+".png");
-					DKWidget_SetAttribute("DKNotepad_Text", "value", pages);
+					byId("DKNotepad_Text").value = pages;
 				}
 				else{
 					i=1000;
@@ -61,7 +61,7 @@ function DKOcr_OnEvent(event)
 		
 		var text;
 		if(text = DKOcr_ImageToText(file)){
-			DKWidget_SetAttribute("DKNotepad_Text", "value", text);
+			byId("DKNotepad_Text").value = text;
 		}
 		else{
 			DKNotepad_Open(file);

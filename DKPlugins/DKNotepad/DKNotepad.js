@@ -80,7 +80,7 @@ function DKNotepad_Open(file)
 	currentFile = file;
 	var text = DKFile_FileToString(file);
 	//console.log("DKNotepad_Open(file): = "+text);
-	//DKWidget_SetAttribute("DKNotepad_Text", "value", text);
+	//byId("DKNotepad_Text").value = text;
 	byId("DKNotepad_Text").value = text;
 }
 

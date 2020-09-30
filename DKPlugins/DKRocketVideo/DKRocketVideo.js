@@ -53,10 +53,10 @@ function DKRocketVideo_playpause()
 	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") != -1){
-		DKWidget_SetAttribute("DKRocketVideo_playpause", "src", "DKRocketVideo/pause.png");
+		byId("DKRocketVideo_playpause").src = "DKRocketVideo/pause.png";
 	}
 	else{
-		DKWidget_SetAttribute("DKRocketVideo_playpause", "src", "DKRocketVideo/play.png");
+		byId("DKRocketVideo_playpause").src = "DKRocketVideo/play.png";
 	}
 }
 
@@ -80,10 +80,10 @@ function DKRocketVideo_speaker()
 	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") != -1){
-		DKWidget_SetAttribute("DKRocketVideo_speaker", "src", "DKRocketVideo/volume3.png");
+		byId("DKRocketVideo_speaker").src = "DKRocketVideo/volume3.png";
 	}
 	else{
-		DKWidget_SetAttribute("DKRocketVideo_speaker", "src", "DKRocketVideo/mute.png");
+		byId("DKRocketVideo_speaker").src = "DKRocketVideo/mute.png";
 	}
 }
 

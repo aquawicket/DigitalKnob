@@ -50,7 +50,7 @@ function DKHandles_OnEvent(event)
     }
 	if(event.currentTarget.id == "search"){
 		//console.log("search\n");
-		DKWidget_SetAttribute("search", "src", "DKHandles/win2.bmp");
+		byId("search").src = "DKHandles/win2.bmp";
 		DKHandles_StartSearch();
     }
 	if(event.currentTarget.id == "setvalue"){
@@ -81,7 +81,7 @@ function DKHandles_OnEvent(event)
 	}
 	if(event.type == "DKHandles_WindowChanged"){
 		//console.log("DKHandles_WindowChanged\n");
-		DKWidget_SetAttribute("search", "src", "DKHandles/win1.bmp");
+		byId("search").src = "DKHandles/win1.bmp";
 		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
 	}
@@ -100,7 +100,7 @@ function DKHandles_UpdateWindowList()
 	//RemoveDuplicates(arry);
 	for(var i=0; i<arry.length; i++){
 		var element = DKWidget_CreateElement("windows", "option", "wintitle");
-		DKWidget_SetAttribute(element, "value", arry[i]);
+		byId(element).value = arry[i];
 		DKWidget_SetProperty(element, "white-space", "nowrap");
 		byId(element, "click", DKHandles_OnEvent);
 		DKWidget_SetInnerHtml(element,arry[i]);

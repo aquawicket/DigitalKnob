@@ -173,9 +173,9 @@ function DKEditor_Menu_OnEvent(event)
 		document.getElementById(div).style.height = "100%";
 		
 		var iframe = DKWidget_CreateElement(div, "iframe", "iframe");
-		DKWidget_SetAttribute(iframe, "src", "http://digitalknob.com");
-		DKWidget_SetAttribute(iframe, "width", "100%");
-		DKWidget_SetAttribute(iframe, "height", "100%");
+		byId(iframe).src = "http://digitalknob.com";
+		byId(iframe).width = "100%";
+		byId(iframe).height = "100%";
 		document.getElementById(iframe).style.borderWidth = "0px";
 		document.getElementById(iframe).style.overflow = "auto";
 		

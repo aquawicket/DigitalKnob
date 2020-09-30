@@ -86,7 +86,7 @@ function DKFileAssociation_OpenHtml(path)
 	var element = DKWidget_GetFirstChild(temp);
 	console.log("element = "+element);
 	//DKElement* element = temp->GetFirstChild();
-	//DKWidget_SetAttribute(element, "id", id);
+	//byId(element).id = id;
 	
 	DKWidget_AppendChild("body", element);
 	DKWidget_RemoveElement("temporary");

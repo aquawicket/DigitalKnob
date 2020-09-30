@@ -99,5 +99,5 @@ function DKWebSocketsClient_MessageToServer()
 ////////////////////////////////////////////////////////
 function DKWebSocketsClient_OnMessageFromServer(message)
 {
-	DKWidget_SetAttribute("DKWebSocketsClient_receive","value", message);
+	byId("DKWebSocketsClient_receive").value = message;
 }
