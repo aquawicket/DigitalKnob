@@ -544,6 +544,18 @@ function DKWidget_ElementToString(id)
 	return element.outerHTML;
 }
 
+/*
+/////////////////////////////
+function DKWidget_Visible(id)
+{
+	var element = byId(id);
+	if(!element){ return false; }
+	if(element.style.display === "none"){ return false; }
+	if(element.style.visibility !== "visible"){ return false; }
+	return true;
+}
+*/
+
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {

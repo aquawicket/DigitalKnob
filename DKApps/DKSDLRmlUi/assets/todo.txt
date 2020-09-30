@@ -1,5 +1,8 @@
 // TODO //
 
+*** Lose DKWidget
+It's down to one file with a bunch of helper functions. not a class..  push it into main or something
+
 *** CODE CLEANUP ***
 *** Remove These terms from all ,js files
  DKDEBUGFUNC
