@@ -12,11 +12,12 @@ DKWidget_GetInnerHtml
 DKWidget_SetInnerHtml
 DKWidget_GetProperty
 DKWidget_SetProperty
- ..
- ..
+DKWidget_GetValue
 
 *** replace all == with ===
 *** replace all != with !==
+
+*** Make "Ctrl+Shift+S" save the file in DKNotepad
 
  
 *** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
