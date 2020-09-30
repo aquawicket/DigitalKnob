@@ -15,10 +15,11 @@ DKWidget_SetProperty
 DKWidget_GetValue
 DKWidget_Visible
 
-*** replace all == with ===
-*** replace all != with !==
+ replace all == with ===
+ replace all != with !==
 
-*** Make "Ctrl+Shift+S" save the file in DKNotepad
+*** DKNotepad ***
+ Make "Ctrl+Shift+S" save the file in DKNotepad
 
 *** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 
