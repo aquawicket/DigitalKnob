@@ -23,10 +23,10 @@ function DKMenu_ValidatePosition(id)
 	console.log("DKMenu_ValidatePosition("+id+")");
 	//console.log("DKWindow_GetMouseX() = "+DKWindow_GetMouseX()+"\n");
 	//console.log("DKWindow_GetMouseY() = "+DKWindow_GetMouseY()+"\n");
-	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"px");
-	//DKWidget_SetProperty(id,"top",DKWindow_GetMouseY()+"rem");
-	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"px");
-	//DKWidget_SetProperty(id,"left",DKWindow_GetMouseX()+"rem");
+	//byId(id).style.top = DKWindow_GetMouseY()+"px";
+	//byId(id).style.top = DKWindow_GetMouseY()+"rem";
+	//byId(id).style.left = DKWindow_GetMouseX()+"px";
+	//byId(id).style.left = DKWindow_GetMouseX()+"rem";
 	
 	//console.log("DKWidget_GetMouseWindowX() = "+DKWidget_GetMouseWindowX()+"\n");
 	//console.log("DKWidget_GetMouseWindowY() = "+DKWidget_GetMouseWindowY()+"\n");
@@ -55,11 +55,11 @@ function DKMenu_ValidatePosition(id)
 	if(top + height > win_height){
 		top = win_height - height;
 		console.log("new top = "+top+"\n");
-		DKWidget_SetProperty(id, "top", top+"px");
+		byId(id).style.top = top+"px";
 	}
 	if(left + width > win_width){
 		console.log("new left = "+left+"\n");
 		left = win_width - width;
-		DKWidget_SetProperty(id, "left", left+"px");
+		byId(id)style.left = "left+"px";
 	}
 }

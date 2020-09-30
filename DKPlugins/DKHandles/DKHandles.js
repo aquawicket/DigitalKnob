@@ -101,7 +101,7 @@ function DKHandles_UpdateWindowList()
 	for(var i=0; i<arry.length; i++){
 		var element = DKWidget_CreateElement("windows", "option", "wintitle");
 		byId(element).value = arry[i];
-		DKWidget_SetProperty(element, "white-space", "nowrap");
+		byId(element).style.whiteSpace = "nowrap";
 		byId(element, "click", DKHandles_OnEvent);
 		byId(element).innerHTML = arry[i];
 	}
