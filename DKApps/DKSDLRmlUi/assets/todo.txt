@@ -1,5 +1,13 @@
 // TODO //
 
+*** DK Javascript ****
+All Duktape c++ js functions should be labeled DKCPP_Function
+Now we always know when we step outside of browsedr bounds. 
+DKCPP_Functions can never run in a browser. 
+DKCPP_Functions require native code to burn the cd
+DKCPP_Functions are the right way to divide JS calls from DKCPP_Calls
+All javascript functions in c++ will have a DKCPP_ header.
+
 *** FUN ***
 Make the Atari tank game  :D
 
