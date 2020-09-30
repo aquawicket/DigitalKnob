@@ -93,58 +93,58 @@ function DKAutomate2_SelectTrigger()
 		
 		var command = DKWidget_CreateElement(cause, "input", "CauseCommand");
 		byId(command).type = "text";
-		DKWidget_SetProperty(command, "width", "100px");
-		DKWidget_SetProperty(command, "height", "18px");
-		DKWidget_SetProperty(command, "display", "inline-block");
-		DKWidget_SetProperty(command, "border-width", "1px");
+		byId(command).stylewidth = "100px";
+		byId(command).style.height = "18px";
+		byId(command).style.display = "inline-block";
+		byId(command).style.borderWidth = "1px";
 		byId(command).num = String(c);
 		DKWidget_SetValue(command, causes[c].command);
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var1 = DKWidget_CreateElement(cause, "input", "CauseVar1");
 		byId(var1).type = "text";
-		DKWidget_SetProperty(var1, "width", "100px");
-		DKWidget_SetProperty(var1, "height", "18px");
-		DKWidget_SetProperty(var1, "display", "inline-block");
-		DKWidget_SetProperty(var1, "border-width", "1px");
+		byId(var1).style.width = "100px";
+		byId(var1).style.height = "18px";
+		byId(var1).style.display = "inline-block";
+		byId(var1).style.borderWidth = "1px";
 		byId(var1).num = String(c);
 		DKWidget_SetValue(var1, causes[c].var1);
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var2 = DKWidget_CreateElement(cause, "input", "CauseVar2");
 		byId(var2).type = "text";
-		DKWidget_SetProperty(var2, "width", "100px");
-		DKWidget_SetProperty(var2, "height", "18px");
-		DKWidget_SetProperty(var2, "display", "inline-block");
-		DKWidget_SetProperty(var2, "border-width", "1px");
+		byId(var2).style.width = "100px;
+		byId(var2).style.height = "18px";
+		byId(var2).style.display = "inline-block";
+		byId(var2).style.borderWidth = "1px";
 		byId(var2).num = String(c);
 		DKWidget_SetValue(var2, causes[c].var2);
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var3 = DKWidget_CreateElement(cause, "input", "CauseVar3");
 		byId(var3).type = "text";
-		DKWidget_SetProperty(var3, "width", "100px");
-		DKWidget_SetProperty(var3, "height", "18px");
-		DKWidget_SetProperty(var3, "display", "inline-block");
-		DKWidget_SetProperty(var3, "border-width", "1px");
+		byId(var3).style.width = "100px";
+		byId(var3).style.height = "18px";
+		byId(var3).style.display = "inline-block";
+		byId(var3).style.borderWidth = "1px";
 		byId(var3).num = String(c);
 		DKWidget_SetValue(var3, causes[c].var3);
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
 		var button = DKWidget_CreateElement(cause, "button", "DeleteCause");
-		DKWidget_SetProperty(button, "width", "50px");
-		DKWidget_SetProperty(button, "height", "18px");
-		DKWidget_SetProperty(button, "display", "inline-block");
-		DKWidget_SetProperty(button, "border-width", "1px");
+		byId(button).style.width = "50px";
+		byId(button).style.height = "18px";
+		byId(button).style.display = "inline-block";
+		byId(button).style.borderWidth = "1px";
 		byId(button).num = String(c);
 		byId(button).innerHTML = "Delete";
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
 	var button = DKWidget_CreateElement(byId("Causes"), "button", "NewCause");
-	DKWidget_SetProperty(button, "width", "50px");
-	DKWidget_SetProperty(button, "height", "18px");
-	DKWidget_SetProperty(button, "border-width", "1px");
+	byId(button, "width", "50px");
+	byId(button, "height", "18px");
+	byId(button, "border-width", "1px");
 	byId(button).innerHTML = "New";
 	byId(button).addEventListener("click", DKAutomate2_OnEvent);
 
@@ -157,58 +157,58 @@ function DKAutomate2_SelectTrigger()
 
 		var command = DKWidget_CreateElement(effect, "input", "EffectCommand");
 		byId(command).type = "text";
-		DKWidget_SetProperty(command, "width", "100px");
-		DKWidget_SetProperty(command, "height", "18px");
-		DKWidget_SetProperty(command, "display", "inline-block");
-		DKWidget_SetProperty(command, "border-width", "1px");
+		byId(command, "width", "100px");
+		byId(command, "height", "18px");
+		byId(command, "display", "inline-block");
+		byId(command, "border-width", "1px");
 		byId(command).num = String(e);
 		DKWidget_SetValue(command, effects[e].command);
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var1 = DKWidget_CreateElement(effect, "input", "EffectVar1");
 		byId(var1).type = "text";
-		DKWidget_SetProperty(var1, "width", "100px");
-		DKWidget_SetProperty(var1, "height", "18px");
-		DKWidget_SetProperty(var1, "display", "inline-block");
-		DKWidget_SetProperty(var1, "border-width", "1px");
+		byId(var1, "width", "100px");
+		byId(var1, "height", "18px");
+		byId(var1, "display", "inline-block");
+		byId(var1, "border-width", "1px");
 		byId(var1).num = String(e);
 		DKWidget_SetValue(var1, effects[e].var1);
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var2 = DKWidget_CreateElement(effect, "input", "EffectVar2");
 		byId(var2).type = "text";
-		DKWidget_SetProperty(var2, "width", "100px");
-		DKWidget_SetProperty(var2, "height", "18px");
-		DKWidget_SetProperty(var2, "display", "inline-block");
-		DKWidget_SetProperty(var2, "border-width", "1px");
+		byId(var2).style  "width", "100px");
+		byId(var2).style  "height", "18px");
+		byId(var2).style  "display", "inline-block");
+		byId(var2).style  "border-width", "1px");
 		ById(var2).num = String(e);
 		DKWidget_SetValue(var2, effects[e].var2);
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var3 = DKWidget_CreateElement(effect, "input", "EffectVar3");
 		byId(var3).type = "text";
-		DKWidget_SetProperty(var3, "width", "100px");
-		DKWidget_SetProperty(var3, "height", "18px");
-		DKWidget_SetProperty(var3, "display", "inline-block");
-		DKWidget_SetProperty(var3, "border-width", "1px");
+		byId(var3, "width", "100px");
+		byId(var3, "height", "18px");
+		byId(var3, "display", "inline-block");
+		byId(var3, "border-width", "1px");
 		byId(var3).num = String(e);
 		DKWidget_SetValue(var3, effects[e].var3);
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
 		var button = DKWidget_CreateElement(effect, "button", "DeleteEffect");
-		DKWidget_SetProperty(button, "width", "50px");
-		DKWidget_SetProperty(button, "height", "18px");
-		DKWidget_SetProperty(button, "display", "inline-block");
-		DKWidget_SetProperty(button, "border-width", "1px");
+		byId(button, "width", "50px");
+		byId(button, "height", "18px");
+		byId(button, "display", "inline-block");
+		byId(button, "border-width", "1px");
 		byId(button).num = String(e);
 		byId(button).innerHTML = "Delete";
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
 	var button2 = DKWidget_CreateElement("Effects", "button", "NewEffect");
-	DKWidget_SetProperty(button2, "width", "50px");
-	DKWidget_SetProperty(button2, "height", "18px");
-	DKWidget_SetProperty(button2, "border-width", "1px");
+	byId(button2, "width", "50px");
+	byId(button2, "height", "18px");
+	byId(button2, "border-width", "1px");
 	byId(button2).innerHTML = "New";
 	byId(button2).addEventListener("click", DKAutomate2_OnEvent);
 }
