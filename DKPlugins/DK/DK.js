@@ -118,7 +118,7 @@ window.onmousemove = function(e){
 		window.mouseX = e.clientX + document.body.scrollLeft
 		window.mouseY = e.clientY + document.body.scrollTop
 	}
-	if(DK_GetBrowser() == "RML"){
+	if(DK_GetBrowser() ==== "RML"){
 		window.mouseX = e.clientX;
 		window.mouseY = e.clientY;
 	}
@@ -170,16 +170,16 @@ function Log(string, lvl)
 			}
 		}
 		if(!flag){ 
-			if(lvl == DK_ERROR && !LOG_ERRORS){ return; }
-			if(lvl == DK_WARN && !LOG_WARNINGS){ return; }
-			if(lvl == DK_INFO && !LOG_INFO){ return; }
-			if(lvl == DK_DEBUG && !LOG_DEBUG){ return; }
+			if(lvl ==== DK_ERROR && !LOG_ERRORS){ return; }
+			if(lvl ==== DK_WARN && !LOG_WARNINGS){ return; }
+			if(lvl ==== DK_INFO && !LOG_INFO){ return; }
+			if(lvl ==== DK_DEBUG && !LOG_DEBUG){ return; }
 		}
 		var color = "";
-		if(lvl == DK_ERROR){ color = "color:red";}
-		if(lvl == DK_WARN){ color = "color:#B8860B"; }
-		if(lvl == DK_INFO){ color = "color:grey"; }
-		if(lvl == DK_DEBUG){ color = "color:blue"; }
+		if(lvl ==== DK_ERROR){ color = "color:red";}
+		if(lvl ==== DK_WARN){ color = "color:#B8860B"; }
+		if(lvl ==== DK_INFO){ color = "color:grey"; }
+		if(lvl ==== DK_DEBUG){ color = "color:blue"; }
 		if(!color){ color = "color:grey"; }
 		string = string.replace("\n","");
 		
@@ -188,7 +188,7 @@ function Log(string, lvl)
 			if(!stack || !LOG_LINES){ return ""; }
 			var lines = stack.split("\n");
 			var n=0;
-			while(lines[n].indexOf("Log") == -1){ n++; }
+			while(lines[n].indexOf("Log") ==== -1){ n++; }
 			var fileline = lines[n+1];
 			var start = fileline.lastIndexOf("/");
 			var end = fileline.lastIndexOf(":");
@@ -196,19 +196,19 @@ function Log(string, lvl)
 			return fileline+"  ";
 		};
 		
-		if(DK_GetBrowser() == "CHROME" || DK_GetBrowser() == "CEF"){
-			if(lvl == DK_ERROR){
+		if(DK_GetBrowser() ==== "CHROME" || DK_GetBrowser() ==== "CEF"){
+			if(lvl ==== DK_ERROR){
 				//alert("ERROR: "+string);
 				//throw "ERROR: "+string;
 				console.error(getFileLine()+string);
 			}
-			else if(lvl == DK_WARN){
+			else if(lvl ==== DK_WARN){
 				console.warn(getFileLine()+string);
 			}
-			else if(lvl == DK_INFO){
+			else if(lvl ==== DK_INFO){
 				console.log(getFileLine()+string);
 			}
-			else if(lvl == DK_DEBUG){
+			else if(lvl ==== DK_DEBUG){
 				//console.info("%c"+getFileLine()+string, color);
 				console.debug("%c"+getFileLine()+string, color);
 			}
@@ -217,18 +217,18 @@ function Log(string, lvl)
 			}
 		}
 		else{
-			if(lvl == DK_ERROR){
+			if(lvl ==== DK_ERROR){
 				//alert("ERROR: "+string);
 				//throw "ERROR: "+string;
 				console.error(getFileLine()+string);
 			}
-			else if(lvl == DK_WARN){
+			else if(lvl ==== DK_WARN){
 				console.warn(getFileLine()+string);
 			}
-			else if(lvl == DK_INFO){
+			else if(lvl ==== DK_INFO){
 				console.log(getFileLine()+string);
 			}
-			else if(lvl == DK_DEBUG){
+			else if(lvl ==== DK_DEBUG){
 				console.debug(getFileLine()+string);
 			}
 			else{
@@ -260,11 +260,11 @@ function DKCreate(data, callback)
 	}
 	else{
 		//console.log("DKCreate("+data+"): requesting c++ plugin\n");
-		if(DK_GetBrowser() == "CEF" || DK_GetBrowser() == "RML"){
+		if(DK_GetBrowser() ==== "CEF" || DK_GetBrowser() ==== "RML"){
 			DKDuktape_DKCreate_CPP(data);
 		}
 	}	
-	if(arry[0] == "DKJavascript"){
+	if(arry[0] ==== "DKJavascript"){
 		if(!LoadJs(arry[1], function(rval){
 			if(callback){ 
 				callback(rval); 
@@ -277,7 +277,7 @@ function DKCreate(data, callback)
 			return false;
 		}
 	}
-	if(arry[0] == "DKWidget"){
+	if(arry[0] ==== "DKWidget"){
 		//console.log("DKCreate(data, callback)\n");
 			if(!DKWidget_NewWidget(arry[1], arry[2])){
 				return false;
@@ -289,7 +289,7 @@ function DKCreate(data, callback)
 			//console.error("DKCreate("+data+"): does not have a callback\n");
 			}
 	}
-	if(arry[0] == "DKCss"){
+	if(arry[0] ==== "DKCss"){
 		if(!LoadCss(arry[1])){
 			return false;
 		}
@@ -329,7 +329,7 @@ function DKClose(data)
 		return false; 
 	}
 	
-	if(arry[0] == "DKJavascript"){
+	if(arry[0] ==== "DKJavascript"){
 		var end = file.replace(".js", "");
 		end += "_End";
 		eval(end+"()");
@@ -338,7 +338,7 @@ function DKClose(data)
 		/*
 		console.log(end);
 		var func = window[end]; //Plugin_End() //FIXME
-		if(typeof func === 'function'){
+		if(typeof func ====== 'function'){
 			
 			func(); // Call the jsclass_End() function
 		}
@@ -355,7 +355,7 @@ function DKClose(data)
 		script.parentNode.removeChild(script);
 		//console.log("Closed "+arry[1]+"\n");
 	}
-	if(arry[0] == "DKWidget"){
+	if(arry[0] ==== "DKWidget"){
 		var element = byId(arry[1]);
 		if(!element){ 
 			//console.warn("DKClose("+data+"): "+file+" does not exist\n");
@@ -364,7 +364,7 @@ function DKClose(data)
 		element.parentNode.removeChild(element);
 		//console.log("Closed "+arry[1]+"\n");
 	}
-	if(arry[0] == "DKCss"){
+	if(arry[0] ==== "DKCss"){
 		var css = byId(arry[1]);
 		if(!css){ 
 			//console.error("DKClose("+data+"): "+arry[1]+" does not exist\n");
@@ -447,7 +447,7 @@ function LoadJs(url, callback)
 	
 	//console.log("script.type = "+script.type);
 	
-	//if(typeof script == "undefined"){ 
+	//if(typeof script ==== "undefined"){ 
 	//	console.error("Cannot load "+url+"\n");
 	//	return false; 
 	//}
@@ -460,10 +460,10 @@ function LoadJs(url, callback)
 	////////// CALLBACKS
 	var done = false;
 	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
-		if(!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")){
+		if(!done && (!this.readyState || this.readyState ==== "loaded" || this.readyState ==== "complete")){
 			//console.log("Loaded: "+url+"\n");
 			var func = window[init]; //Plugin_Init()    
-			if(typeof func == 'function'){ 
+			if(typeof func ==== 'function'){ 
 				//console.log("Calling: "+init+"\n");
 				func(); //Init
 			}
@@ -481,10 +481,10 @@ function LoadJs(url, callback)
 	////////////////////////
 	
 	//FIXME - DigitalKnob can't trigger onload yet, so we do this
-	if(DK_GetJSEngine() == "Duktape"){
+	if(DK_GetJSEngine() ==== "Duktape"){
 		//console.log("Loaded: "+url+"\n");
 		var func = init; //Plugin_Init() 
-		if(eval("typeof "+func) === "function"){
+		if(eval("typeof "+func) ====== "function"){
 			//console.log("Calling: "+init+"\n");
 			eval(func)(); //Init
 		}
@@ -507,12 +507,12 @@ function LoadHtml(url, parent)
 		return false; 
 	}
 	
-	if(url.indexOf(".html") == -1){ 
+	if(url.indexOf(".html") ==== -1){ 
 		console.error("DK.js: LoadHtml("+url+", parent): url is not a valid .html file\n");
 		return false;
 	}
 	
-	if(url == ".html"){ url = "New.html"; }
+	if(url ==== ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) != -1){
 		console.warn("DK.js: LoadHtml("+url+", parent): url already loaded\n");
@@ -523,7 +523,7 @@ function LoadHtml(url, parent)
 	//console.warn("url = "+url+"\n");
 	//console.warn("string = "+string+"\n");
 	//Create an empty widget
-	if(!string || string == "ERROR"){ 
+	if(!string || string ==== "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
 	}
 
@@ -814,8 +814,8 @@ function getCookie(cname)
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+        while (c.charAt(0)===' ') c = c.substring(1);
+        if (c.indexOf(name) === 0) return c.substring(name.length,c.length);
     }
     return "";
 }
@@ -847,7 +847,7 @@ function replace(str, old, newstr)
 }
 
 // trim for IE8
-if(typeof String.prototype.trim !== 'function') {
+if(typeof String.prototype.trim !=== 'function') {
   String.prototype.trim = function() {
     return this.replace(/^\s+|\s+$/g, ''); 
   }
@@ -915,11 +915,11 @@ function DK_Refresh()
 //////////////////////////
 function DKAvailable(name)
 {
-	if(name == "DKWidget"){
+	if(name === "DKWidget"){
 		return true; 
 	}
-	if(name == "DKWidgetJS"){  //FIXME: is this needed?
-		console.log("DKAvailable("+name+"): name == DKWidgetJS!  check DK.js line 235\n");
+	if(name === "DKWidgetJS"){  //FIXME: is this needed?
+		console.log("DKAvailable("+name+"): name === DKWidgetJS!  check DK.js line 235\n");
 		return true; 
 	}
 	return false;
@@ -1005,7 +1005,7 @@ function DK_GetBrowser()
     else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
         return "OPERA";
     }
-    else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") == -1){
+    else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") === -1){
 		return "CHROME";
     }
 	else if(navigator.userAgent.indexOf("Cef") != -1){
@@ -1017,7 +1017,7 @@ function DK_GetBrowser()
     else if(navigator.userAgent.indexOf("Firefox") != -1){
         return "FIREFOX";
     }
-    else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true )){ //IF IE > 10
+    else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode === true )){ //IF IE > 10
 		return "IE";
     }
     else {
@@ -1028,12 +1028,12 @@ function DK_GetBrowser()
 /////////////////////////
 function DK_GetJSEngine()
 {
-	if(navigator.product == "Duktape"){
+	if(navigator.product === "Duktape"){
 		return "Duktape"
 	}
 	var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
 	if('WebkitAppearance' in document.documentElement.style){  //If (probably) WebKit browser
-		if (escape(navigator.javaEnabled.toString()) === v8string){
+		if (escape(navigator.javaEnabled.toString()) ==== v8string){
 			return "V8";
 		}
 		else{
@@ -1047,13 +1047,13 @@ function DK_GetJSEngine()
 function DK_IE()
 {
 	var rv = 0;
-	if(navigator.appName == 'Microsoft Internet Explorer'){
+	if(navigator.appName === 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
 		if(re.exec(ua) != null)
 		rv = parseFloat( RegExp.$1 );
 	}
-	else if (navigator.appName == 'Netscape'){
+	else if (navigator.appName === 'Netscape'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
 		if(re.exec(ua) != null)
@@ -1142,8 +1142,8 @@ function AjaxGet(url, output)
 	}
 
 	request.onreadystatechange=function(){
-		if(request.readyState==4){
-			if(request.status==200 || request.status==0){
+		if(request.readyState===4){
+			if(request.status===200 || request.status===0){
 				output.value = request.responseText;
 				//console.log("AJAX RETURN: "+output.value+"\n");
 				return true;
