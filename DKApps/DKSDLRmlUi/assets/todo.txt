@@ -15,6 +15,9 @@ i'm ok with that
 It's Final..  All C++ javascript function will have a DKCPP_ header
 Look at DKDomConsole for clues on DKCPP_
 
+*** DKBuilder ***
+Make sure dkbuilder recognizes the new web standard key codes
+
 *** FUN ***
 Make the Atari tank game  :D
 
