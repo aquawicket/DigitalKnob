@@ -1,7 +1,10 @@
 // TODO //
 
+*** FUN ***
+Make the Atari tank game  :D
+
 *** CONSOLE ***
-It seems like all [JS] "console.warn" text has an extra newline character
+It seems like all [JS] "console" text has an extra newline character
 
 ** Lose DKWidget
 It's down to one file with a bunch of helper functions. not a class..  push it into main or something
@@ -28,11 +31,13 @@ DKWidget_Visible
 *** DKNotepad ***
  Make "Ctrl+Shift+S" save the file in DKNotepad
  Get Copy and Paste working
+ Remove save comfrimation or make a sparkle or something
 
 *** DKDuktape ***
 Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 
 *** DKFar ***
+create a replica of the win32 program FAR
 
 *** DKDomEvent ***
 * add removeEventListener everywhere neccesary 
