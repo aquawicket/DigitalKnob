@@ -21,17 +21,17 @@ function DKPaintMenu_End()
 ///////////////////////////////////
 function DKPaintMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKPaintMenu_Cut"){
+	if(event.currentTarget.id === "DKPaintMenu_Cut"){
 		DKPaintMenu_Cut();
 	}
-	if(event.currentTarget.id == "DKPaintMenu_Copy"){
+	if(event.currentTarget.id === "DKPaintMenu_Copy"){
 		DKPaintMenu_Copy();
 	}
-	if(event.currentTarget.id == "DKPaintMenu_Paste"){
+	if(event.currentTarget.id === "DKPaintMenu_Paste"){
 		DKPaintMenu_Paste();
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKPaint/DKPaintMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

@@ -19,11 +19,11 @@ function LibraryMenu_OnEvent(event)
 {
 	DKDEBUG("LibraryMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(event.currentTarget.id == "Build Libraries"){
+	if(event.currentTarget.id === "Build Libraries"){
 		console.log("Clicked Build Librariesn");
 	}
 	
-	if(eventCurrentTarget == window)){
+	if(eventCurrentTarget === window)){
 		if(byId("DKBuild/LibraryMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

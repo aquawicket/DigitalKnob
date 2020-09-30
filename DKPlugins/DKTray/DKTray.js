@@ -37,21 +37,21 @@ function DKTray_End()
 //////////////////////////////
 function DKTray_OnEvent(event)
 {
-	if(event.type == "dblclick"){
+	if(event.type === "dblclick"){
 		DKTray_ToggleWindow();
 	}
-	if(event.type == (event, "1000"){
+	if(event.type === (event, "1000"){
 		DK_ShowConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Show();
 		DKWindow_Restore();
 	}
-	if(event.type == "1001"){
+	if(event.type === "1001"){
 		DK_HideConsole();
 		DKCreate("DKWindowJS");
 		DKWindow_Hide();
 	}
-	if(event.type == "1002"){
+	if(event.type === "1002"){
 		DK_Exit();
 	}
 }

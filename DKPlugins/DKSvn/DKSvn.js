@@ -6,18 +6,18 @@ function DKSvn_Init()
 	DKCreate("DKThreadPool");
 
 	//console.log((DK_GetOS()+"\n");
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		//GIT = "C:/Program Files/Git/bin/git.exe";
 		//GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Win64"){
+	if(DK_GetOS() === "Win64"){
 		//GIT = "C:/Program Files/Git/bin/git.exe";
 		//GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		//GIT = "git";
 	}
-	if(DK_GetOS() == "Linux"){
+	if(DK_GetOS() === "Linux"){
 		//GIT = "/usr/bin/git";
 	}
 	
@@ -47,7 +47,7 @@ function DKSvn_ValidateSvn()
 		DKBuild_InstallSvn();
 	}
 	console.log(("Found SVN\n");
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		SVN = "svn";
 	}
 }
@@ -59,18 +59,18 @@ function DKSvn_InstallSvn()
 	console.log(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
 		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
-	else if(DK_GetOS() == "Win64"){
+	else if(DK_GetOS() === "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Setup-Subversion-1.8.10.msi", assets);
 		DK_System(assets+"/Setup-Subversion-1.8.10.msi");
 	}
-	else if(DK_GetOS() == "Mac"){
+	else if(DK_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "Linux"){
+	else if(DK_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install subversion");
 	}
 	else{

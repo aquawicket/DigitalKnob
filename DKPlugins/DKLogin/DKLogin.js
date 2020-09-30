@@ -20,7 +20,7 @@ function DKLogin_End()
 ///////////////////////////////
 function DKLogin_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKLoginFacebook"){
+	if(event.currentTarget.id === "DKLoginFacebook"){
 		console.log("DKLogin_OnEvent(): DKLoginFacebook\n");
 		DKCreate("DKLogin/DKFacebook.js", function(){
 			DKFacebookLogin(DKLogin_OnConnect);
@@ -41,14 +41,14 @@ function DKLogin_OnConnect(value)
 ////////////////////////////////////////////
 function DKLogin_FBresponse(param, response)
 {
-	if(param == "name"){
+	if(param === "name"){
 		FACEBOOK_NAME = response;
 		
 		var id = DKWidget_CreateElement(byId("DKLogin/DKLogin.html"), "div", "fbname");
 		byId(id).style.fontSize = "18rem";
 		byId(id).innerHTML = FACEBOOK_NAME;
 	}
-	if(param == "id"){
+	if(param === "id"){
 		FACEBOOK_ID = response;
 		
 		var id = DKWidget_CreateElement(byId("DKLogin/DKLogin.html"), "img", "fbpic");

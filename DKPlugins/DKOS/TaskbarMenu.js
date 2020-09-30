@@ -53,7 +53,7 @@ function TaskbarMenu_End()
 ///////////////////////////////////
 function TaskbarMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "FileExplorer"){
+	if(event.currentTarget.id === "FileExplorer"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
@@ -61,40 +61,40 @@ function TaskbarMenu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(event.currentTarget.id == "OpenBuilder"){
+	if(event.currentTarget.id === "OpenBuilder"){
 		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
-	if(event.currentTarget.id == "OpenNotepad"){
+	if(event.currentTarget.id === "OpenNotepad"){
 		DKCreate("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKNotepad/DKNotepad.js");
 		});
 	}
-	if(event.currentTarget.id == "InputTest"){
+	if(event.currentTarget.id === "InputTest"){
 		DKCreate("DKFile/DKFileAssociation.js", function(){
 			DKFileAssociation_Open("DKInputTest/DKInput.js");
 		});
 	}
-	if(event.currentTarget.id == "OpenMessage"){
+	if(event.currentTarget.id === "OpenMessage"){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			//DKMessage("", "ShowMessage", "test message");
 		});
 	}
-	if(event.currentTarget.id == "OpenTetris"){
+	if(event.currentTarget.id === "OpenTetris"){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Tetris","http://www.lutanho.net/play/tetris.html",440,560);
 		});
 	}
-	if(event.currentTarget.id == "OpenGoogle"){
+	if(event.currentTarget.id === "OpenGoogle"){
 		DKCreate("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe("Google","https://google.com",640,480);
 		});
 	}
 	
-	if(event.currentTarget.id == "Git"){
+	if(event.currentTarget.id === "Git"){
 		DKCreate("DKGui/DKMenu.js", function(){
 		DKCreate("DKGit/GitMenu.js", function(){
 			//DKMenu_ValidatePosition("DKGit/GitMenu.html")
@@ -104,7 +104,7 @@ function TaskbarMenu_OnEvent(event)
 		});
 		});
 	}
-	if(event.currentTarget.id == "OpenSource"){
+	if(event.currentTarget.id === "OpenSource"){
 		//console.log("OpenSource\n");
 		DKCreate("DKWidgetJS");
 		//var source = DKWidget_GetOuterHtml("body");
@@ -117,21 +117,21 @@ function TaskbarMenu_OnEvent(event)
 			//console.log(source+"\n");
 		});
 	}
-	if(event.currentTarget.id == "OpenDebug"){
-		if(DK_GetBrowser() == "RML"){
+	if(event.currentTarget.id === "OpenDebug"){
+		if(DK_GetBrowser() === "RML"){
 			DKRml_DebuggerOn(); //FIXME
 		}
-		if(DK_GetBrowser() == "CEF"){
+		if(DK_GetBrowser() === "CEF"){
 			DKCef_ShowDevTools(0);
 		}
 	}
-	if(event.currentTarget.id == "PushDKFiles"){
+	if(event.currentTarget.id === "PushDKFiles"){
 		DKDebug_PushDKFiles();
 	}
-	if(event.currentTarget.id == "ClearConsole"){
+	if(event.currentTarget.id === "ClearConsole"){
 		console.clear();
 	}
-	if(event.currentTarget.id == "Info"){
+	if(event.currentTarget.id === "Info"){
 		console.log("\n**** DKOBJECTS ****\n");
 		var objects = DK_GetObjects();
 		var arry = objects.split(",");
@@ -159,19 +159,19 @@ function TaskbarMenu_OnEvent(event)
 		}
 		console.log("\n");
 	}
-	if(event.currentTarget.id == "Reload"){
+	if(event.currentTarget.id === "Reload"){
 		DKFrame_CloseAll();
 		DK_Reload();
 	}
-	if(event.currentTarget.id == "CloseDKGui"){
+	if(event.currentTarget.id === "CloseDKGui"){
 		DKClose("TaskbarMenu.js")
 		DK_Exit();
 		return;
 	}
-	if(event.currentTarget.id == "TaskbarMenu_Run"){
+	if(event.currentTarget.id === "TaskbarMenu_Run"){
 		var key = DK_GetValue(event);
 		//console.log("DKAdminMenu_Run: key="+key+"\n");
-		if(DK_GetBrowser() == "RML"){
+		if(DK_GetBrowser() === "RML"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}
 		else{
@@ -180,7 +180,7 @@ function TaskbarMenu_OnEvent(event)
 		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKOS/TaskbarMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
@@ -199,15 +199,15 @@ function TaskbarMenu_Add(title, code)
 /////////////////////////////////
 function TaskbarMenu_Run(command)
 {
-	if(command.indexOf("http://") == 0){
+	if(command.indexOf("http://") === 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;
 	}
-	if(command.indexOf("https://") == 0){
+	if(command.indexOf("https://") === 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;
 	}
-	if(command.indexOf("file://") == 0){
+	if(command.indexOf("file://") === 0){
 		DKFrame_Iframe(command,command,"100%","100%");
 		return true;
 	}

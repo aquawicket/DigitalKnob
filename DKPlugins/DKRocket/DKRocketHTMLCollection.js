@@ -11,10 +11,10 @@ var HTMLCollection = function(pointers)
 	}
 	HTMLCollection.prototype.namedItem = function(name){
 		for(var i=0; i<this.length; i++){
-			if(this.id && this.id == name){
+			if(this.id && this.id === name){
 				return this[i];
 			}
-			if(this.name && this.name == name){
+			if(this.name && this.name === name){
 				return this[i];
 			}
 		}

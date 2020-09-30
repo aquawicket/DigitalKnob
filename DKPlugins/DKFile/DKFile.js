@@ -179,11 +179,11 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 			if(!str){ return ""; }
 			if(param.indexOf("[") != -1 && param.indexOf("]") != -1 ){
 				var begin = str.indexOf(param);
-				if(begin == -1){ return ""; }
+				if(begin === -1){ return ""; }
 
 				var start = str.indexOf("]", begin);
 				var end = str.indexOf("[",start);
-				if(end == -1){end = str.length;}
+				if(end === -1){end = str.length;}
 	
 				var out = str.substr(start+1, end-start-1);
 	
@@ -198,7 +198,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 			//then we return the rest of the line
 			var string = param + " ";
 			var begin = str.indexOf(string,0);
-			if(begin == -1){return "";}
+			if(begin === -1){return "";}
 			var start = str.indexOf(" ",begin);
 			var end = str.indexOf("\n",start);
 
@@ -231,7 +231,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 			//then we return everything up to the next [VARIABLE] or to the end of the file.
 			if(param.indexOf("[") != -1 && param.indexOf("]") != -1){
 				var begin = filestring.indexOf(param);
-				if(begin == -1){
+				if(begin === -1){
 					filestring = filestring.concat("\n" + param + " " + value); //create entry
 					DKFile_StringToFile(filestring, path);
 					console.log("WROTE: "+filestring+" TO: "+path);
@@ -239,7 +239,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 				}
 				var start = filestring.indexOf("]", begin);
 				var end = filestring.indexOf("[", start);
-				if(end == -1){end = filestring.length;}
+				if(end === -1){end = filestring.length;}
 
 				var out = " "+value;
 				var oldstr = filestring.substr(start+1, end-start-1);
@@ -254,7 +254,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 			var string = setting + " ";
 	
 			var begin = filestring.indexOf(string,0);
-			if(temp == -1){
+			if(temp === -1){
 				filestring = filestring.concat("\n" + setting + " " + value); //create entry
 				DKFile_StringToFile(filestring,file);
 				console.log("WROTE: "+filestring+" TO: "+file);
@@ -284,7 +284,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		
 		//var path = DKFile_VerifyPath(url);
 		if(!url){ return; }
-		//if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") == -1){
+		//if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") === -1){
 		//	return ajaxGetUrl("http://cors.io/?u="+url);
 		//}
 		return ajaxGetUrl(url);
@@ -374,7 +374,7 @@ if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
 		var result = ajaxGetUrl(send);
 		//console.log("DKFile_IsDirectory("+url+") ->"+result);
-		if(result == "0"){ return false; }
+		if(result === "0"){ return false; }
 		return true;
 	}
 }

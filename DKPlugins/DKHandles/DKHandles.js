@@ -41,45 +41,45 @@ function DKHandles_OnEvent(event)
 		var handle = byId("window").innerHTML;
 		DKHandles_UpdateProperties(handle);
     }
-	if(event.currentTarget.id == "parent"){
+	if(event.currentTarget.id === "parent"){
 		var handle = byId("parent").innerHTML;
 		DKHandles_UpdateProperties(handle);
     }
-	if(event.currentTarget.id == "refresh"){
+	if(event.currentTarget.id === "refresh"){
 		DKHandles_UpdateWindowList();
     }
-	if(event.currentTarget.id == "search"){
+	if(event.currentTarget.id === "search"){
 		//console.log("search\n");
 		byId("search").src = "DKHandles/win2.bmp";
 		DKHandles_StartSearch();
     }
-	if(event.currentTarget.id == "setvalue"){
+	if(event.currentTarget.id === "setvalue"){
 		var value = DKWidget_GetValue("SetValueBox");
 		var currentHandle = DKHandles_CurrentHandle();
 		DKHandles_SetValue(currentHandle, value);
     }
-	if(event.currentTarget.id == "doclick"){
+	if(event.currentTarget.id === "doclick"){
 		var currentHandle = DKHandles_CurrentHandle();
 		DKHandles_Click(currentHandle);
     }
-	if(event.currentTarget.id == "Prev"){
+	if(event.currentTarget.id === "Prev"){
 		var currentHandle = DKHandles_CurrentHandle();
 		var handle = DKHandles_PrevHandle(currentHandle);
 		DKHandles_UpdateProperties(handle);
 	}
-	if(event.currentTarget.id == "Next"){
+	if(event.currentTarget.id === "Next"){
 		var currentHandle = DKHandles_CurrentHandle();
 		var handle = DKHandles_NextHandle(currentHandle);
 		DKHandles_UpdateProperties(handle);
 	}
-	if(event.currentTarget.id == "Highlight"){
+	if(event.currentTarget.id === "Highlight"){
 		DKHandles_ToggleHighlight();
 	}
-	if(event.currentTarget.id == "wintitle"){
+	if(event.currentTarget.id === "wintitle"){
 		var handle = DKHandles_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
 		DKHandles_UpdateProperties(handle);
 	}
-	if(event.type == "DKHandles_WindowChanged"){
+	if(event.type === "DKHandles_WindowChanged"){
 		//console.log("DKHandles_WindowChanged\n");
 		byId("search").src = "DKHandles/win1.bmp";
 		var handle = DK_GetValue(event);

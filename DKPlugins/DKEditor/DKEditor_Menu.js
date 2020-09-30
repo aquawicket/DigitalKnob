@@ -64,24 +64,24 @@ function DKEditor_Menu_End()
 function DKEditor_Menu_OnEvent(event)
 {
 	console.debug("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
-	if(event.currentTarget.id == "DKEditor_Menu_Command_Input"){
+	if(event.currentTarget.id === "DKEditor_Menu_Command_Input"){
 		//TODO
 		console.log("TODO\n");
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Reload"){
+	if(event.currentTarget.id === "DKEditor_Menu_Reload"){
 		DKDebug_Reload();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Refresh"){
+	if(event.currentTarget.id === "DKEditor_Menu_Refresh"){
 		DKDebug_Refresh();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Notes"){
+	if(event.currentTarget.id === "DKEditor_Menu_Notes"){
 		DKCreate("DKNotepad/DKNotepad.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Assets"){
+	if(event.currentTarget.id === "DKEditor_Menu_Assets"){
 		DKCreate("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
@@ -89,36 +89,36 @@ function DKEditor_Menu_OnEvent(event)
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_TestBrowserApp"){
+	if(event.currentTarget.id === "DKEditor_Menu_TestBrowserApp"){
 		DKCreate("DKEditor/DKEditor_BrowserMenu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_BrowserMenu.html");
 		});
 		return;
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_DevTools"){
-		if(typeof DKCef_ShowDevTools == 'function'){
+	if(event.currentTarget.id === "DKEditor_Menu_DevTools"){
+		if(typeof DKCef_ShowDevTools === 'function'){
 			DKCef_ShowDevTools(0);
 		}
-		if(typeof DKRocket_ToggleDebugger == 'function'){
+		if(typeof DKRocket_ToggleDebugger === 'function'){
 			DKRocket_ToggleDebugger();
 		}
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_ClearConsole"){
+	if(event.currentTarget.id === "DKEditor_Menu_ClearConsole"){
 		DKDebug_ClearConsole();
-		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
+		if(DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
 			DK_System("cls");
 		}
-		if(DK_GetOS() == "Mac" || DK_GetOS() == "Linux"){
+		if(DK_GetOS() === "Mac" || DK_GetOS() === "Linux"){
 			DK_System("clear");
 		}
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_ShowConsole"){
+	if(event.currentTarget.id === "DKEditor_Menu_ShowConsole"){
 		DK_ShowConsole();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_HideConsole"){
+	if(event.currentTarget.id === "DKEditor_Menu_HideConsole"){
 		DK_HideConsole();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_NewFrame"){
+	if(event.currentTarget.id === "DKEditor_Menu_NewFrame"){
 		DKCreate("DKMessage/DKMessage.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKMessage/DKMessage.html");
@@ -129,29 +129,29 @@ function DKEditor_Menu_OnEvent(event)
 			});
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Builder"){
+	if(event.currentTarget.id === "DKEditor_Menu_Builder"){
 		DKCreate("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
 			DKFrame_Widget("DKBuild/DKBuildGUI.html");
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Info"){
+	if(event.currentTarget.id === "DKEditor_Menu_Info"){
 		DKDebug_PrintInfo();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_PushFiles"){
+	if(event.currentTarget.id === "DKEditor_Menu_PushFiles"){
 		DKDebug_PushDKFiles();
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_GitUpdate"){
+	if(event.currentTarget.id === "DKEditor_Menu_GitUpdate"){
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitUpdate();
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_GitCommit"){
+	if(event.currentTarget.id === "DKEditor_Menu_GitCommit"){
 		DKCreate("DKBuild/DKBuild.js", function(){
 			DKBuild_GitCommit();
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_RefreshIcons"){
+	if(event.currentTarget.id === "DKEditor_Menu_RefreshIcons"){
 		//FIXME - not working
 		//DK_Execute("C:/Windows/System32/ie4uinit.exe -ClearIconCache");
 		
@@ -159,12 +159,12 @@ function DKEditor_Menu_OnEvent(event)
 		DK_Run("C:/Windows/System32/ie4uinit.exe","-ClearIconCache");
 		//NOTE: For Windows 10, use: "ie4uinit.exe -show"
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Report"){
+	if(event.currentTarget.id === "DKEditor_Menu_Report"){
 		DKCreate("DKDebug/SendBugReport.js", function(){
 			DKFrame_Widget("DKDebug/SendBugReport.html");
 		});
 	}
-	if(event.currentTarget.id == "DKEditor_Menu_Web"){
+	if(event.currentTarget.id === "DKEditor_Menu_Web"){
 		console.log("DKEditor_Menu_Web()\n");
 		//TODO - Create an iFrame and display digitalknob.com
 		var div = DKWidget_CreateElement(document.body, "div", "DKIframe.html");
@@ -182,7 +182,7 @@ function DKEditor_Menu_OnEvent(event)
 		DKFrame_Widget(div);
 	}
 
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKEditor/DKEditor_Menu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

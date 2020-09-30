@@ -26,18 +26,18 @@ function DKConsole_End()
 function DKConsole_OnEvent(event)
 {	
 	DKDEBUG("DKConsole_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
-	if(event.currentTarget.id == "DKConsole_Clear"){
+	if(event.currentTarget.id === "DKConsole_Clear"){
 		byId("DKConsole_Content").innerHTML = ""; //clear
 	}
-	if(event.currentTarget.id == "DKConsole_Close"){
+	if(event.currentTarget.id === "DKConsole_Close"){
 		DKClose("DKConsole/DKConsole.js");
 	}
 	
-	if(event.type == "color"){
+	if(event.type === "color"){
 		DKConsole_color = DK_GetValue(event);
 	}
 	
-	if(event.type == "notify"){
+	if(event.type === "notify"){
 		DKConsole_Notify(DK_GetValue(event));
 	}
 }

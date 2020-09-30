@@ -7,7 +7,7 @@ var EventFromCPP = function(pointer, event)
 {
 	//console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
-		if(pointer == stored_events[i].pointer){
+		if(pointer === stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);
 		}
 	}
@@ -19,7 +19,7 @@ var EventTarget = function(pointer)
 {
 	this.pointer = pointer;
 	for(var i=0; i<instances.length; i++){
-        if(instances[i].pointer == pointer){
+        if(instances[i].pointer === pointer){
             return instances[i]; //return already existing instance
         }
     }
@@ -34,7 +34,7 @@ var EventTarget = function(pointer)
 			if(!(type in this.listeners)){
 				this.listeners[type] = [];
 			}
-			if(this.listeners[type].indexOf(callback) == -1){ //Do not allow duplicate entries
+			if(this.listeners[type].indexOf(callback) === -1){ //Do not allow duplicate entries
 				this.listeners[type].push(callback);
 			}
 			DKDomEventTarget_addEventListener(pointer, type, callback); //Add or overwrite the event in RmlUi

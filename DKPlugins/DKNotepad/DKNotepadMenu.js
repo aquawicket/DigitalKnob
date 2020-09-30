@@ -21,18 +21,18 @@ function DKNotepadMenu_End()
 /////////////////////////////////////
 function DKNotepadMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKNotepadMenu_Cut"){
+	if(event.currentTarget.id === "DKNotepadMenu_Cut"){
 		DKNotepadMenu_Cut();
 		PreventDefault(event);
 	}
-	if(event.currentTarget.id == "DKNotepadMenu_Copy"){
+	if(event.currentTarget.id === "DKNotepadMenu_Copy"){
 		DKNotepadMenu_Copy();
 	}
-	if(event.currentTarget.id == "DKNotepadMenu_Paste"){
+	if(event.currentTarget.id === "DKNotepadMenu_Paste"){
 		DKNotepadMenu_Paste();
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKNotepad/DKNotepadMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

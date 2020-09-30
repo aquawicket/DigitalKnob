@@ -17,10 +17,10 @@ function scale_End()
 /////////////////////////////
 function scale_OnEvent(event)
 {
-	if(event.currentTarget.id == "scale_minus"){
+	if(event.currentTarget.id === "scale_minus"){
 		scale_minus();
 	}
-	if(event.currentTarget.id == "scale_plus"){
+	if(event.currentTarget.id === "scale_plus"){
 		scale_plus();
 	}
 }

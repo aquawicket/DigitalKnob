@@ -34,7 +34,7 @@ function DKWidget_NewWidget(url, parent)
 	//console.log("DKWidget_NewWidget("+url+","+parent+")");
 	var filename = url.replace(/^.*[\\\/]/, '');
 	if(parent){
-		//if(parent.indexOf(".html") == -1){ parent+=".html"; }
+		//if(parent.indexOf(".html") === -1){ parent+=".html"; }
 		var element = document.getElementById(parent);
 		if(!element){ console.error("DKWidget(): could not get parent ("+parent+")\n"); return false; }
 		if(!LoadHtml(url, element)){ 
@@ -103,7 +103,7 @@ function DKWidget_Toggle(id)
 {
 	var element = document.getElementById(id);
 	if(!element){ return false; }
-	if(element.style.display == "none" || element.style.visibility == "hidden"){
+	if(element.style.display === "none" || element.style.visibility === "hidden"){
 		DKWidget_Show(id);
 	}
 	else{
@@ -221,12 +221,12 @@ function DKWidget_GetValue(variable)
 	
 	if(typeof variable === "object"){
 		//console.log("DKWidget_GetValue("+variable+") -> typeof variable === object\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.nodeType == "+variable.nodeType+"\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.tagName == "+variable.tagName+"\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.type == "+variable.type+"\n");
-		if(variable.nodeType == 1){
+		//console.log("DKWidget_GetValue("+variable+") -> variable.nodeType === "+variable.nodeType+"\n");
+		//console.log("DKWidget_GetValue("+variable+") -> variable.tagName === "+variable.tagName+"\n");
+		//console.log("DKWidget_GetValue("+variable+") -> variable.type === "+variable.type+"\n");
+		if(variable.nodeType === 1){
 			//console.log("variable.tagName: "+variable.tagName+"\n");
-			if(variable.tagName == "INPUT"){
+			if(variable.tagName === "INPUT"){
 				//console.log("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
@@ -234,40 +234,40 @@ function DKWidget_GetValue(variable)
 		}
 		if(variable.type){ //event
 			var event = variable;
-			//console.log("GetValue("+variable+") -> variable.type == true\n");
+			//console.log("GetValue("+variable+") -> variable.type === true\n");
 			//console.log("GetValue("+variable+") -> "+variable.type+"\n");
-			if(variable.type == "mousedown"){
+			if(variable.type === "mousedown"){
 				return GetMouseButton(variable);
 			}
-			if(variable.type == "mouseup"){
+			if(variable.type === "mouseup"){
 				return GetMouseButton(variable);
 			}
-			if(variable.type == "click"){
+			if(variable.type === "click"){
 				if(variable.target && variable.target.value){
 					return variable.target.value;
 				}
 				return GetMouseButton(variable);
 			}
-			if(variable.type == "dblclick"){
+			if(variable.type === "dblclick"){
 				return GetMouseButton(variable);
 			}
-			if(variable.type == "contextmenu"){
+			if(variable.type === "contextmenu"){
 				return GetMouseButton(variable);
 			}
-			if(variable.type == "mousemove"){
+			if(variable.type === "mousemove"){
 				return event.clientX+","+event.clientY+","+event.screenX+","+event.screenY;
 			}
-			if(variable.type == "mouseover"){
+			if(variable.type === "mouseover"){
 				if(!event.target){ return window.event.srcElement.id; }
 				//if(!event.target){ return event.srcElement.id; }
 				return event.target.id;
 			}
-			if(variable.type == "mouseout"){
+			if(variable.type === "mouseout"){
 				if(!event.target){ return window.event.srcElement.id; }
 				//if(!event.target){ return event.srcElement.id; }
 				return event.target.id;
 			}
-			if(variable.type == "wheel"){
+			if(variable.type === "wheel"){
 				var o = variable//.originalEvent,
 				d = o.detail, w = o.wheelDelta,
 				n = 225, n1 = n-1;
@@ -280,16 +280,16 @@ function DKWidget_GetValue(variable)
 				event.delta = Math.min(Math.max(d / 2, -1), 1) * 2;
 				return event.delta;
 			}
-			if(variable.type == "keypress"){
+			if(variable.type === "keypress"){
 				return GetCharCode(variable);
 			}
-			if(variable.type == "keydown"){
+			if(variable.type === "keydown"){
 				return GetKeyCode(variable);
 			}
-			if(variable.type == "keyup"){
+			if(variable.type === "keyup"){
 				return GetKeyCode(variable);
 			}
-			if(variable.type == "resize"){
+			if(variable.type === "resize"){
 				var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 				return width+","+height;
@@ -330,10 +330,10 @@ function DKWidget_GetAttribute(variable, parameter)
 		console.warn("DKWidget_GetAttribute(): veriable empty\n");
 		return "";
 	}
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		return variable[parameter];
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		return element[parameter];
 	}
@@ -348,9 +348,9 @@ function DKWidget_SetAttribute(variable, parameter, value)
 {
 	if(!variable){ console.error("DKWidget_SetAttribute(): variable not set\n"); return false; }
 	//if(!value){ console.warn("DKWidget_SetAttribute(): value not set\n"); return false; }
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		//variable.setAttribute(parameter, value);
-		if(parameter == "class"){
+		if(parameter === "class"){
 			variable.className = value;
 		}
 		else{
@@ -358,13 +358,13 @@ function DKWidget_SetAttribute(variable, parameter, value)
 		}
 		return true;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		if(!element){
 			console.error("DKWidget_SetAttribute(): element invalid\n");
 			return false;
 		}
-		if(parameter == "class"){
+		if(parameter === "class"){
 			element.className = value;
 		}
 		else{
@@ -385,12 +385,12 @@ function DKWidget_GetProperty(variable, parameter)
 	//console.warn("DKWidget_GetProperty("+variable+","+parameter+")");
 	if(!variable){ return ""; }
 	if(!parameter){ return ""; }
-	if(parameter == "background-color"){ parameter = "backgroundColor"; }
+	if(parameter === "background-color"){ parameter = "backgroundColor"; }
 
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		return variable.style[parameter];
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		if(!element){
 			console.error("DKWidget_GetProperty(): element is null\n");
@@ -428,19 +428,19 @@ function DKWidget_SetProperty(variable, parameter, value)
 		return false; 
 	} 
 	
-	if(parameter == "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
+	if(parameter === "background-color"){ parameter = "backgroundColor"; } //IE 8- fix
 	//console.log("DK_IE() = "+DK_IE()+"\n");
 	if(DK_IE() && DK_IE() < 9){
 		value = value.replace("rem", "px"); //IE 8- fix
 	}
 
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		variable.style[parameter] = value;
 		return true;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
-		if(variable == "body"){ element = document.body; }
+		if(variable === "body"){ element = document.body; }
 		if(!element){ 
 			console.error("ERROR: SetProperty(): element("+variable+") invalid\n");
 			return false;
@@ -484,23 +484,23 @@ function DKWidget_RemoveProperty(id, parameter)
 function DKWidget_SetValue(variable, value)
 {
 	if(!variable){ return false; }
-	//if(!value){ value = ""; } //FIXME - sould be if(value == emptystring) so 0's can pass through
-	if(typeof variable == "object"){
-		if(variable.tagName == "INPUT"){
+	//if(!value){ value = ""; } //FIXME - sould be if(value === emptystring) so 0's can pass through
+	if(typeof variable === "object"){
+		if(variable.tagName === "INPUT"){
 			variable.value = value;
 			return true;
 		}
 		byId(variable).innerHTML = value;
 		return true;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		if(!element){ console.error("SetValue("+variable+"): Cannot find element\n"); return false; }
 		if(element.type && element.type === "checkbox"){
 			element.checked = value;
 			return true;
 		}
-		if(element.tagName == "INPUT"){
+		if(element.tagName === "INPUT"){
 			element.value = value;
 			return true;
 		}
@@ -515,10 +515,10 @@ function DKWidget_SetValue(variable, value)
 ////////////////////////////////////////
 function DKWidget_GetInnerHtml(variable)
 {
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		return variable.innerHTML;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		return element.innerHTML;
 	}
@@ -531,11 +531,11 @@ function DKWidget_GetInnerHtml(variable)
 ///////////////////////////////////////////////
 function DKWidget_SetInnerHtml(variable, value)
 {
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		variable.innerHTML = value;
 		return true;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = document.getElementById(variable);
 		if(!element){ 
 			console.error("ERROR: SetInnerHtml(): element invalid\n");
@@ -578,10 +578,10 @@ function DKWidget_SetInnerHtmlString(id, string)
 ////////////////////////////////////////
 function DKWidget_GetOuterHtml(variable)
 {
-	if(typeof variable == "object"){
+	if(typeof variable === "object"){
 		return variable.outerHTML;
 	}
-	if(typeof variable == "string"){
+	if(typeof variable === "string"){
 		var element = byId(variable);
 		return element.outerHTML;
 	}
@@ -634,14 +634,14 @@ function DKWidget_AppendChild(parent, element)
 	if(!element){ console.log("DKWidget_AppendChild(): element invalid"); return false; }
 	
 	var par;
-	if(typeof parent == "string"){
+	if(typeof parent === "string"){
 		par = document.getElementById(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
-	if(typeof element == "string"){
+	if(typeof element === "string"){
 		ele = document.getElementById(element);
 	}
 	else{
@@ -655,14 +655,14 @@ function DKWidget_AppendChild(parent, element)
 function DKWidget_PrependChild(parent, element)
 {
 	var par;
-	if(typeof parent == "string"){
+	if(typeof parent === "string"){
 		par = document.getElementById(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
-	if(typeof element == "string"){
+	if(typeof element === "string"){
 		ele = document.getElementById(element);
 	}
 	else{
@@ -686,14 +686,14 @@ function DKWidget_PrependChild(parent, element)
 function DKWidget_InsertBefore(parent, element)
 {
 	var par;
-	if(typeof parent == "string"){
+	if(typeof parent === "string"){
 		par = document.getElementById(parent);
 	}
 	else{
 		par = parent;
 	}
 	var ele;
-	if(typeof element == "string"){
+	if(typeof element === "string"){
 		ele = document.getElementById(element);
 	}
 	else{
@@ -887,7 +887,7 @@ function DKWidget_Visible(id)
 {
 	var element = document.getElementById(id);
 	if(!element){ return false; }
-	if(element.style.display == "none"){ return false; }
+	if(element.style.display === "none"){ return false; }
 	if(element.style.visibility != "visible"){ return false; }
 	return true;
 }
@@ -942,7 +942,7 @@ function DKWidget_SetFile(id, file)
 	
 	//TODO
 	if(!id){ console.warn("DKWidget_SetFile(): id empty\n"); return; }
-	while(id.indexOf(".html") == -1 && id.indexOf("body") == -1){
+	while(id.indexOf(".html") === -1 && id.indexOf("body") === -1){
 		id = DKWidget_GetParent(id);
 	}
 	

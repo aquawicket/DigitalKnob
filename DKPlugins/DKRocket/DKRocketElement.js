@@ -205,8 +205,8 @@ var Element = function(pointer)
 		get: function (target, key, recv){
 			//console.warn("Element:get("+target+","+key+","+recv+")");
 			//console.warn("Element:get("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ return target[key]; }
-			if(key.substr(0,2) == "on"){ //onevent
+			if(typeof target[key] === "function" || key === "pointer" || key === "style" || key === "listeners" || key === "create"){ return target[key]; }
+			if(key.substr(0,2) === "on"){ //onevent
 				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{
@@ -217,8 +217,8 @@ var Element = function(pointer)
 		set: function (target, key, val, recv){
 			//console.warn("Element:set("+target+","+key+","+val+")");
 			//console.warn("Element:set("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ return true; }
-			if(key.substr(0,2) == "on"){ //onevent
+			if(typeof target[key] === "function" || key === "pointer" || key === "style" || key === "listeners" || key === "create"){ return true; }
+			if(key.substr(0,2) === "on"){ //onevent
 				//target.addEventListener(key.substr(2, key.length), val); //val is a callback, let's create and event for it. 
 			}
 			else{

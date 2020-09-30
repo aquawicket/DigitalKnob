@@ -1,5 +1,5 @@
 var rgba = "0";
-if(DK_GetBrowser() == "RML"){ rgba = "127"; }
+if(DK_GetBrowser() === "RML"){ rgba = "127"; }
 else{ rgba = "0.5"; }
 
 ///////////////////////
@@ -64,42 +64,42 @@ function DKInput_OnEvent(event)
 	byId("event.keyCode").innerHTML = "event.keyCode: "+event.keyCode;
 	byId("event.which").innerHTML = "event.which: "+event.which;
 
-	if(event.type == "keypress"){	
+	if(event.type === "keypress"){	
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
-	if(event.type == "keydown"){
+	if(event.type === "keydown"){
 		console.log("keydown");
 		DKInput_ProcessKeyDown(event.code);
 	}
-	if(event.type == "keyup"){
+	if(event.type === "keyup"){
 		DKInput_ProcessKeyUp(event.code);
 	}
-	if(event.type == "mousedown"){
+	if(event.type === "mousedown"){
 		DKInput_ProcessMouseDown(event.button);
 		if(event.currentTarget != window){
 			DKInput_Highlight(event.currentTarget.id);
 		}
 	}
-	if(event.type == "mouseup" || event.type == "click"){
+	if(event.type === "mouseup" || event.type === "click"){
 		DKInput_ProcessMouseUp(event.button);
 		if(event.currentTarget != window){
 			DKInput_UnHighlight(event.currentTarget.id);
 		}
 	}
-	//if(event.type == "mousemove"){
+	//if(event.type === "mousemove"){
 		byId("event.clientX").innerHTML = "event.clientX: "+event.clientX;
 		byId("event.clientY").innerHTML = "event.clientY: "+event.clientY;
 		byId("event.screenX").innerHTML = "event.screenX: "+event.screenX;
 		byId("event.screenY").innerHTML = "event.screenY: "+event.screenY;
 		byId("event.button").innerHTML = "event.button: "+event.button;
 	//}
-	if(event.type == "wheel"){
+	if(event.type === "wheel"){
 		byId("wheeldelta").innerHTML = "Wheel Delta: "+DK_GetValue(event);
 	}
 	
 	//element events
-	if(event.currentTarget.id == "esc"){
-		console.log("event.currentTarget.id == 'esc'");
+	if(event.currentTarget.id === "esc"){
+		console.log("event.currentTarget.id === 'esc'");
 	}
 }
 
@@ -133,11 +133,11 @@ function DKInput_Highlight(div)
 	if(!div){ return; }
 	if(!byId(div)){ return; }
 	byId(div).style.backgroundColor = "rgba(0,255,0,"+rgba+")";
-	if(div == "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
-	if(div == "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div === "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div === "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div === "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div === "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
+	if(div === "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0.5)"; }
 }
 
 /////////////////////////////////
@@ -146,9 +146,9 @@ function DKInput_UnHighlight(div)
 	if(!div){ return; }
 	if(!byId(div)){ return; }
 	byId(div).style.backgroundColor = "rgba(0,255,0,0)";
-	if(div == "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0)"; }
-	if(div == "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div === "Shift"){ byId("Shift2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div === "Meta"){ byId("Meta2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div === "Control"){ byId("Control2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div === "Alt"){ byId("Alt2").style.backgroundColor = "rgba(0,255,0,0)"; }
+	if(div === "Enter"){ byId("Enter2").style.backgroundColor = "rgba(0,255,0,0)"; }
 }

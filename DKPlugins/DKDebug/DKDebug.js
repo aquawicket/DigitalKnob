@@ -18,16 +18,16 @@ function DKDebug_OnEvent(event)
 {
 	//console.warn("DKDebug_OnEvent("+event+","+event.currentTarget.id+","+event.type+","+event.value+")");
 	
-	if(event.type == "keydown"){
+	if(event.type === "keydown"){
 		DKDebug_LogKey(event.code);
 		DKDebug_CheckKeys();
 	}
 	
-	if(event.type == "keydown" && event.code == "F12"){ //F12
-		if(typeof DKCef_ShowDevTools == 'function'){
+	if(event.type === "keydown" && event.code === "F12"){ //F12
+		if(typeof DKCef_ShowDevTools === 'function'){
 			DKCef_ShowDevTools(0);
 		}
-		if(typeof DKRml_DebuggerOn == 'function'){
+		if(typeof DKRml_DebuggerOn === 'function'){
 			DKRml_DebuggerOn();
 		}
 	}
@@ -94,32 +94,32 @@ function DKDebug_CheckKeys()
 ///////////////////////////////
 function DKDebug_KeyToChar(key)
 {
-	if(key == "KeyA"){ return "a"};
-	if(key == "KeyB"){ return "b"};
-	if(key == "KeyC"){ return "c"};
-	if(key == "KeyD"){ return "d"};
-	if(key == "KeyE"){ return "e"};
-	if(key == "KeyF"){ return "f"};
-	if(key == "KeyG"){ return "g"};
-	if(key == "KeyH"){ return "h"};
-	if(key == "KeyI"){ return "i"};
-	if(key == "KeyJ"){ return "j"};
-	if(key == "KeyK"){ return "k"};
-	if(key == "KeyL"){ return "l"};
-	if(key == "KeyM"){ return "m"};
-	if(key == "KeyN"){ return "n"};
-	if(key == "KeyO"){ return "o"};
-	if(key == "KeyP"){ return "p"};
-	if(key == "KeyQ"){ return "q"};
-	if(key == "KeyR"){ return "r"};
-	if(key == "KeyS"){ return "s"};
-	if(key == "KeyT"){ return "t"};
-	if(key == "KeyU"){ return "u"};
-	if(key == "KeyV"){ return "v"};
-	if(key == "KeyW"){ return "w"};
-	if(key == "KeyX"){ return "x"};
-	if(key == "KeyY"){ return "y"};
-	if(key == "KeyZ"){ return "z"};
+	if(key === "KeyA"){ return "a"};
+	if(key === "KeyB"){ return "b"};
+	if(key === "KeyC"){ return "c"};
+	if(key === "KeyD"){ return "d"};
+	if(key === "KeyE"){ return "e"};
+	if(key === "KeyF"){ return "f"};
+	if(key === "KeyG"){ return "g"};
+	if(key === "KeyH"){ return "h"};
+	if(key === "KeyI"){ return "i"};
+	if(key === "KeyJ"){ return "j"};
+	if(key === "KeyK"){ return "k"};
+	if(key === "KeyL"){ return "l"};
+	if(key === "KeyM"){ return "m"};
+	if(key === "KeyN"){ return "n"};
+	if(key === "KeyO"){ return "o"};
+	if(key === "KeyP"){ return "p"};
+	if(key === "KeyQ"){ return "q"};
+	if(key === "KeyR"){ return "r"};
+	if(key === "KeyS"){ return "s"};
+	if(key === "KeyT"){ return "t"};
+	if(key === "KeyU"){ return "u"};
+	if(key === "KeyV"){ return "v"};
+	if(key === "KeyW"){ return "w"};
+	if(key === "KeyX"){ return "x"};
+	if(key === "KeyY"){ return "y"};
+	if(key === "KeyZ"){ return "z"};
 	return " ";
 }
 
@@ -136,7 +136,7 @@ function DKDebug_Refresh()
 	if(DK_GetBrowser() != "RML"){
 		DK_Refresh(); //Call DK.js
 	}
-	if(DK_GetBrowser() == "RML" && !USE_CEF){
+	if(DK_GetBrowser() === "RML" && !USE_CEF){
 		DK_Reload(); //Call DKDuktape.cpp
 	}
 }
@@ -155,7 +155,7 @@ function DKDebug_PushDKFiles()
 	var search = assets;
 	while(!DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
-		if(n == -1){
+		if(n === -1){
 			console.warn("could not locate a DKPlugins folder");
 			return false;
 		}
@@ -273,7 +273,7 @@ function DKDebug_GetSource()
 	var source = DKWidget_GetOuterHtml("html");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetBrowser() == "RML"){
+	if(DK_GetBrowser() === "RML"){
 		DKFile_StringToFile(source, assets+"Rocket_Source.html");
 	}
 	else{
@@ -296,10 +296,10 @@ function DKDebug_Editor()
 ///////////////////////////
 function DKDebug_Debugger()
 {
-	if(DK_GetBrowser() == "RML" || DK_GetJSEngine() == "Duktape"){
+	if(DK_GetBrowser() === "RML" || DK_GetJSEngine() === "Duktape"){
 		DKRml_DebuggerToggle();
 	}
-	if(DK_GetBrowser() == "CEF"){
+	if(DK_GetBrowser() === "CEF"){
 		//DKCef_ShowDevTools(0);
 	}
 }

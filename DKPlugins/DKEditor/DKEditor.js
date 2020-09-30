@@ -32,7 +32,7 @@ function DKEditor_End()
 function DKEditor_OnEvent(event)
 {
 	console.debug("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
-	if(event.currentTarget.id == "DKEditor_edit"){
+	if(event.currentTarget.id === "DKEditor_edit"){
 		DKCreate("DKEditor/DKEditor_Menu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");
 		});

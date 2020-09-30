@@ -43,7 +43,7 @@ function DKThreadPoolDlg_OnUpdate()
 		byId(div).style.height = "20rem";
 		byId(div).style.whiteSpace = "nowrap";
 
-		if(i == 0){
+		if(i === 0){
 			byId(div).innerHTML = "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i];
 		}
 		else{

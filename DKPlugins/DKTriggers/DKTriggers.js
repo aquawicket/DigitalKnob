@@ -61,42 +61,42 @@ function DKTriggers_End()
 /////////////////////////////////
 function DKTrigger_OnEvent(event)
 {
-	if(event.type == "gui"){ //C++
+	if(event.type === "gui"){ //C++
 		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessGui(arry[0], arry[1]);
 	}
-	if(event.type == "midi"){ //C++
+	if(event.type === "midi"){ //C++
 		var arry = DK_GetValue(event).split(",");
 		DKTrigger_ProcessMidi(arry[0], arry[1], arry[2]);
 	}
-	if(event.type == "keydown"){
+	if(event.type === "keydown"){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
-	if(event.type == "keyup"){
+	if(event.type === "keyup"){
 		DKTrigger_ProcessKeyUp(DK_GetValue(event)); //JS keydown
 	}
-	if(event.type == "resize"){
+	if(event.type === "resize"){
 		DKTrigger_ProcessWindowResize(); 
 	}
-	if(event.type == "click"){
+	if(event.type === "click"){
 		DKTrigger_ProcessGui("click", DK_GetId(event));
 	}
-	if(event.type == "mousedown"){
+	if(event.type === "mousedown"){
 		DKTrigger_ProcessGui("mousedown", DK_GetId(event));
 	}
-	if(event.type == "mouseup"){
+	if(event.type === "mouseup"){
 		DKTrigger_ProcessGui("mouseup", DK_GetId(event));
 	}
-	if(event.type == "contextmenu"){ //JS
+	if(event.type === "contextmenu"){ //JS
 		DKTrigger_ProcessGui("contextmenu", DK_GetId(event));
 	}
-	if(event.type == "mouseover"){ //JS
+	if(event.type === "mouseover"){ //JS
 		DKTrigger_ProcessGui("mouseover", DK_GetId(event));
 	}
-	if(event.type == "mouseout"){ //JS
+	if(event.type === "mouseout"){ //JS
 		DKTrigger_ProcessGui("mouseout", DK_GetId(event));
 	}
-	if(event.type == "ToggleTriggers"){ //JS
+	if(event.type === "ToggleTriggers"){ //JS
 		if(DK_Value(event, "ON")){
 			DKTrigger_On();
 		}
@@ -128,17 +128,17 @@ function DKTrigger_AddTrigger(name)
 function DKTrigger_RemoveTrigger(name)
 {
 	for(var i = 0; i < triggers.length; i++){
-		if(name == triggers[i]){
+		if(name === triggers[i]){
 			triggers.splice(i, 1);
 		}
 	}
 	for(var c = 0; c < causes.length; c++){
-		if(name == causes[c].trigger){
+		if(name === causes[c].trigger){
 			causes.splice(c, 1);
 		}
 	}
 	for(var e = 0; e < effects.length; e++){
-		if(name == effects[e].trigger){
+		if(name === effects[e].trigger){
 			effects.splice(e, 1);
 		}
 	}
@@ -149,7 +149,7 @@ function DKTrigger_SelectTrigger(name)
 {
 	current_trigger = "";
 	for(var i = 0; i < triggers.length; i++){
-		if(name == triggers[i]){
+		if(name === triggers[i]){
 			current_trigger = triggers[i];
 			console.log("Current Trigger: "+current_trigger+"\n");
 		}
@@ -160,19 +160,19 @@ function DKTrigger_SelectTrigger(name)
 function DKTrigger_RenameTrigger(name, newname)
 {
 	for(var c=0; c < causes.length; c++){
-		if(name == causes[c].trigger){
+		if(name === causes[c].trigger){
 			causes[c].trigger = newname;
 		}
 	}
 	
 	for(var e=0; e < effects.length; e++){
-		if(name == effects[e].trigger){
+		if(name === effects[e].trigger){
 			effects[e].trigger = newname;
 		}
 	}
 	
 	for(var t=0; t < triggers.length; t++){
-		if(name == triggers[t]){
+		if(name === triggers[t]){
 			triggers[t] = newname;
 			current_trigger = triggers[t];
 			return;
@@ -210,9 +210,9 @@ function DKTrigger_DeleteEffect(num)
 function DKTrigger_ProcessGui(type, id)
 {
 	for(var c=0; c < causes.length; c++){
-		if(causes[c].command == "gui" &&
-			causes[c].var1 == id &&
-			causes[c].var2 == type
+		if(causes[c].command === "gui" &&
+			causes[c].var1 === id &&
+			causes[c].var2 === type
 		){
 			DKTrigger_FireTrigger(causes[c].trigger);
 		}
@@ -223,8 +223,8 @@ function DKTrigger_ProcessGui(type, id)
 function DKTrigger_ProcessKeyDown(num)
 {
 	for(var c=0; c < causes.length; c++){
-		if(causes[c].command == "keydown" &&
-			causes[c].var1 == num
+		if(causes[c].command === "keydown" &&
+			causes[c].var1 === num
 		){
 			DKTrigger_FireTrigger(causes[c].trigger);
 		}
@@ -235,8 +235,8 @@ function DKTrigger_ProcessKeyDown(num)
 function DKTrigger_ProcessKeyUp(num)
 {
 	for(var c=0; c < causes.length; c++){
-		if(causes[c].command == "keyup" &&
-			causes[c].var1 == num
+		if(causes[c].command === "keyup" &&
+			causes[c].var1 === num
 		){
 			DKTrigger_FireTrigger(causes[c].trigger);
 		}
@@ -247,7 +247,7 @@ function DKTrigger_ProcessKeyUp(num)
 function DKTrigger_ProcessWindowResize()
 {
 	for(var c=0; c < causes.length; c++){
-		if(causes[c].command == "window_resize"){
+		if(causes[c].command === "window_resize"){
 			DKTrigger_FireTrigger(causes[c].trigger);
 		}
 	}
@@ -257,10 +257,10 @@ function DKTrigger_ProcessWindowResize()
 function DKTrigger_ProcessMidi(channel, note, value)
 {
 	for(var c=0; c < causes.length; c++){
-		if(causes[c].command == "midi" &&
-			causes[c].var1 == channel &&
-			causes[c].var2 == note &&
-			causes[c].var3 == value){
+		if(causes[c].command === "midi" &&
+			causes[c].var1 === channel &&
+			causes[c].var2 === note &&
+			causes[c].var3 === value){
 			DKTrigger_FireTrigger(causes[c].trigger);
 		}
 	}
@@ -285,11 +285,11 @@ function DKTrigger_FireTrigger(trigger)
 		console.log("        Var3: "+var3+"\n");
 
 		////  Commands  ////
-		if(command == "DoubleClick"){
+		if(command === "DoubleClick"){
 			DK_DoubleClick();
 			continue;
 		}
-		if(command == "Hook"){
+		if(command === "Hook"){
 			//TODO
 			//SendHook(window,handle#,(command,value);
 			DKHook_SendHook(var1, var2, var3);
@@ -303,17 +303,17 @@ function DKTrigger_FireTrigger(trigger)
 			console.log(out+"\n");
 			continue;
 		}
-		if(command == "LeftClick"){
+		if(command === "LeftClick"){
 			DK_LeftClick();
 			continue;
 		}
-		if(command == "Message"){
+		if(command === "Message"){
 			DKCreate("DKMessage/DKMessage.js", function(){
 				DKMessageBox_Message(var1);
 			});
 			continue;
 		}
-		if(command == "Midi"){
+		if(command === "Midi"){
 			DKMidi_SendMidi(Number(var1), Number(var2), Number(var3));
 			var out = "MIDI OUT: ";
 			out += var1;
@@ -325,25 +325,25 @@ function DKTrigger_FireTrigger(trigger)
 			console.log(out+"\n");
 			continue;
 		}
-		if(command == "MouseTo"){
+		if(command === "MouseTo"){
 			console.log("DK_SetCursorPos("+Number(var1)+","+Number(var2)+")\n");
 			DK_SetCursorPos(Number(var1), Number(var2));
 			continue;
 		}
-		if(command == "MouseToImage"){
+		if(command === "MouseToImage"){
 			//console.log("MouseToImage\n");
 			DK_MouseToImage(var1);
 			continue;
 		}
-		if(command == "Open"){
+		if(command === "Open"){
 			DK_Run(var1);
 			continue;
 		}
-		if(command == "RightClick"){
+		if(command === "RightClick"){
 			DK_RightClick();
 			continue;
 		}
-		if(command == "Sleep"){
+		if(command === "Sleep"){
 			DK_Sleep(Number(var1));
 			continue;
 		}
@@ -436,7 +436,7 @@ function DKTrigger_AddEvents()
 {
 	console.log("Adding events to gui causes . . .\n");
 	for(var c = 0; c < causes.length; c++){
-		if(causes[c].command == "gui"){
+		if(causes[c].command === "gui"){
 			byId(causes[c].var1).addEventListener(causes[c].var2, DKTrigger_OnEvent);
 		}
 	}

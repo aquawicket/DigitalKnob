@@ -5,18 +5,18 @@ function DKGit_Init()
 {
 	//DKCreate("DKThreadPool");
 	//console.log(DK_GetOS()+"\n");
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Win64"){
+	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		GIT = "git";
 	}
-	if(DK_GetOS() == "Linux"){
+	if(DK_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
 	
@@ -44,7 +44,7 @@ function DKGit_ValidateGit()
 		DKGit_InstallGit();
 	}
 	console.log("Found GIT\n");
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		GIT = "git";
 	}
 }
@@ -56,20 +56,20 @@ function DKGit_InstallGit()
 	console.log("Installing Git...\n");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-32-bit.exe", assets);
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-32-bit.exe", assets);
 		DK_System(assets+"/Git-2.26.2-32-bit.exe");
 	}
-	else if(DK_GetOS() == "Win64"){
+	else if(DK_GetOS() === "Win64"){
 		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-64-bit.exe", assets);
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-64-bit.exe", assets);
 		DK_System(assets+"/Git-2.26.2-64-bit.exe");
 	}
-	else if(DK_GetOS() == "Mac"){
+	else if(DK_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "Linux"){
+	else if(DK_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install git");
 	}
 	else{

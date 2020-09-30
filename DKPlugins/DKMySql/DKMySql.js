@@ -50,7 +50,7 @@ function DKMySql_Prep(id)
 	
 	for(var i=0; i<nodes.length; i++){
 	
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			console.log(nodes[i].id+"\n");
 			console.log(nodes[i].getAttribute("sql")+"\n");
 			
@@ -109,7 +109,7 @@ function DKMySql_GetFirstRecordNum(id)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT ID FROM "+sql[0]+" ORDER BY ID ASC LIMIT 1";
@@ -130,7 +130,7 @@ function DKMySql_GetLastRecordNum(id)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT ID FROM "+sql[0]+" ORDER BY ID DESC LIMIT 1";
@@ -151,7 +151,7 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE ID = (SELECT min(ID) FROM "+sql[0]+" WHERE ID < "+recordNum+")";
@@ -174,7 +174,7 @@ function DKMySql_GetNextRecordNum(id, recordNum)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE ID = (SELECT min(ID) FROM "+sql[0]+" WHERE ID > "+recordNum+")";
@@ -201,7 +201,7 @@ function DKMySql_LoadRecord(id, recordNum)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			table = sql[0];
@@ -224,7 +224,7 @@ function DKMySql_LoadRecord(id, recordNum)
 		
 	var r = 1;
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 	
 			SetValue(nodes[i], records[r]);
 			++r;
@@ -239,7 +239,7 @@ function DKMySql_SaveRecord(id, recordNum)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT "+sql[1]+" FROM "+sql[0]+" WHERE ID="+recordNum;
@@ -267,7 +267,7 @@ function DKMySql_DeleteRecord(id, recordNum)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			var query = "DELETE FROM "+sql[0]+" WHERE ID="+recordNum;
 			var result = DKMySql_Query(query);
@@ -284,7 +284,7 @@ function DKMySql_Search(id, string)
 	//var nodes = document.getElementById(id).childNodes;
 	var nodes = document.getElementById(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
-		if( nodes[i].nodeType == 1 && nodes[i].hasAttribute("sql") ){
+		if( nodes[i].nodeType === 1 && nodes[i].hasAttribute("sql") ){
 			var sql = nodes[i].getAttribute("sql").split(",");
 			
 			var query = "SELECT ID FROM "+sql[0]+" WHERE "+sql[1]+" LIKE '"+string+"'";

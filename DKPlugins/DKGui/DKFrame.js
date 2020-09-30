@@ -15,11 +15,11 @@ function DKFrame_End()
 ///////////////////////////////
 function DKFrame_OnEvent(event)
 {
-	if(event.type == "mousedown"){
+	if(event.type === "mousedown"){
 		DKFrame_BringToFront();
 		//setTimeout( function(){ DKFrame_BringToFront(); }, 1000);
 	}
-	if(event.type == "dblclick"){
+	if(event.type === "dblclick"){
 		var id = event.currentTarget.id;
 		var titlebar = byId(id).parentNode;
 		DKFrame_MaximizeButton(titlebar.id);
@@ -38,7 +38,7 @@ function DKFrame_OnEvent(event)
 	}
 	
 	// FIXME - does not always fire
-	if(event.type == "DKFrame_resize"){
+	if(event.type === "DKFrame_resize"){
 		var frame = byId(event.currentTarget.id);
 		if(!frame){ 
 			//console.error("DKFrame_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+"): frame invalid\n");
@@ -136,8 +136,8 @@ function DKFrame_Iframe(title, url, width, height)
 //////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	if(width == "100%"){ width = window.innerWidth-100; }
-	if(height == "100%"){ height = window.innerHeight-21-100; }
+	if(width === "100%"){ width = window.innerWidth-100; }
+	if(height === "100%"){ height = window.innerHeight-21-100; }
 	if(!width){ width = window.innerWidth / 2; }
 	if(!height){ height = window.innerHeight / 2; }
 	var newheight = parseFloat(height)+21;
@@ -282,8 +282,8 @@ function DKFrame_MaximizeButton(id)
 	var bottom = byId(frame).style.bottom;
 	var left = byId(frame).style.left;
 	var right = byId(frame).style.right;
-	if(top == "0rem" && bottom == "0rem" && left == "0rem" && right == "0rem" ||
-		top == "0px" && bottom == "0px" && left == "0px" && right == "0px" ){
+	if(top === "0rem" && bottom === "0rem" && left === "0rem" && right === "0rem" ||
+		top === "0px" && bottom === "0px" && left === "0px" && right === "0px" ){
 		DKFrame_RestoreSize(frame);
 		
 		var elements = DKWidget_GetElements(frame);
@@ -339,7 +339,7 @@ function DKFrame_Close(id)
 			for(var b=0; b<DKCef_GetBrowsers(); b++){
 				//console.log("frameId = "+frameId+"\n");
 				//console.log("DKCef_GetBrowserId("+b+") = "+DKCef_GetBrowserId(b)+"\n");
-				if(frameId == DKCef_GetBrowserId(b)){
+				if(frameId === DKCef_GetBrowserId(b)){
 					//console.log("We Know Which One To Close:\n");
 					DKCef_CloseBrowser(b);
 				}
@@ -348,7 +348,7 @@ function DKFrame_Close(id)
 	}
 	
 	//console.log("DKFrame_Close("+id+"): frame="+frame+"\n");
-	if(frame == "body" || frame == document.body){
+	if(frame === "body" || frame === document.body){
 		return;
 	}
 	

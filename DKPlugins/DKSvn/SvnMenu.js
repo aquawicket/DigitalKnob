@@ -6,18 +6,18 @@ function SvnMenu_Init()
 	DKCreate("DKThreadPool");
 
 	//SVN(DK_GetOS()+"\n");
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		SVN = "C:/Program Files/Git/bin/git.exe";
 		SVN = DKFile_GetShortName(SVN);
 	}
-	if(DK_GetOS() == "Win64"){
+	if(DK_GetOS() === "Win64"){
 		SVN = "C:/Program Files/Git/bin/git.exe";
 		SVN = DKFile_GetShortName(SVN);
 	}
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		SVN = "git";
 	}
-	if(DK_GetOS() == "Linux"){
+	if(DK_GetOS() === "Linux"){
 		SVN = "/usr/bin/git";
 	}
 
@@ -40,14 +40,14 @@ function SvnMenu_End()
 ///////////////////////////////
 function SvnMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "Git Update"){
+	if(event.currentTarget.id === "Git Update"){
 		DKThread_DKQueue("GitUpdate","SvnMenu_GitUpdate();");
 	}
-	if(event.currentTarget.id == "Git Commit"){
+	if(event.currentTarget.id === "Git Commit"){
 		DKThread_DKQueue("GitCommit","SvnMenu_GitCommit();");
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKGit/SvnMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
@@ -66,7 +66,7 @@ function SvnMenu_ValidateGit()
 		SvnMenu_InstallGit();
 	}
 	SVN("Found SVN\n");
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		SVN = "git";
 	}
 }
@@ -78,18 +78,18 @@ function SvnMenu_InstallGit()
 	SVN("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
 		DK_System(assets+"/Git-2.11.0-32-bit.exe");
 	}
-	else if(DK_GetOS() == "Win64"){
+	else if(DK_GetOS() === "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
 		DK_System(assets+"/Git-2.11.0-64-bit.exe");
 	}
-	else if(DK_GetOS() == "Mac"){
+	else if(DK_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "Linux"){
+	else if(DK_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install git");
 	}
 	else{

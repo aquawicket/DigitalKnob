@@ -24,16 +24,16 @@ function DesktopMenu_End()
 ///////////////////////////////////
 function DesktopMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "OpenBackgtoundMenu"){
+	if(event.currentTarget.id === "OpenBackgtoundMenu"){
 		DKCreate("DKOS/BackgroundMenu.js", function(){
 			DKFrame_Widget("DKOS/BackgroundMenu.html");
 		});
 	}
-	if(event.currentTarget.id == "ToggleFullscreen"){
+	if(event.currentTarget.id === "ToggleFullscreen"){
 		Desktop_ToggleFullscreen();
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKOS/DesktopMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

@@ -28,28 +28,28 @@ function DKNotepadFile_End()
 function DKNotepadFile_OnEvent(event)
 {
 	//console.warn("DKNotepadFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
-	if(event.currentTarget.id == "DKNotepadFile_New"){
+	if(event.currentTarget.id === "DKNotepadFile_New"){
 		DKNotepadFile_New();
 	}
-	if(event.currentTarget.id == "DKNotepadFile_Open"){
+	if(event.currentTarget.id === "DKNotepadFile_Open"){
 		DKNotepadFile_Open();
 	}
-	if(event.currentTarget.id == "DKNotepadFile_Save"){
+	if(event.currentTarget.id === "DKNotepadFile_Save"){
 		DKNotepadFile_Save();
 	}
-	if(event.currentTarget.id == "DKNotepadFile_SaveAs"){
+	if(event.currentTarget.id === "DKNotepadFile_SaveAs"){
 		DKNotepadFile_SaveAs();
 	}
-	if(event.currentTarget.id == "DKNotepadFile_Print"){
+	if(event.currentTarget.id === "DKNotepadFile_Print"){
 		DKNotepadFile_Print();
 	}
-	if(event.currentTarget.id == "DKNotepadFile_Exit"){
+	if(event.currentTarget.id === "DKNotepadFile_Exit"){
 		DKClose("DKNotepad/DKNotepadFile.js");
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
 	//FIXME
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKNotepad/DKNotepadFile.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

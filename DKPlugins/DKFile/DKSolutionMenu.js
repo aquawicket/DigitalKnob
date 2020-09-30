@@ -43,45 +43,45 @@ function DKSolutionMenu_End()
 function DKSolutionMenu_OnEvent(event)
 {
 	console.debug("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
-	if(event.currentTarget.id == "DKSolutionMenu_Open"){
+	if(event.currentTarget.id === "DKSolutionMenu_Open"){
 		DKSolutionMenu_Open();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_OpenHere"){
+	if(event.currentTarget.id === "DKSolutionMenu_OpenHere"){
 		DKSolutionMenu_OpenHere();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_NewFile"){
+	if(event.currentTarget.id === "DKSolutionMenu_NewFile"){
 		DKSolutionMenu_NewFile();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_NewFolder"){
+	if(event.currentTarget.id === "DKSolutionMenu_NewFolder"){
 		DKSolutionMenu_NewFolder();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Rename"){
+	if(event.currentTarget.id === "DKSolutionMenu_Rename"){
 		DKSolutionMenu_Rename();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Delete"){
+	if(event.currentTarget.id === "DKSolutionMenu_Delete"){
 		DKSolutionMenu_Delete();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Copy"){
+	if(event.currentTarget.id === "DKSolutionMenu_Copy"){
 		DKSolutionMenu_Copy();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Cut"){
+	if(event.currentTarget.id === "DKSolutionMenu_Cut"){
 		DKSolutionMenu_Cut();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Paste"){
+	if(event.currentTarget.id === "DKSolutionMenu_Paste"){
 		DKSolutionMenu_Paste();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_Import"){
+	if(event.currentTarget.id === "DKSolutionMenu_Import"){
 		DKSolutionMenu_Import();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_GitAdd"){
+	if(event.currentTarget.id === "DKSolutionMenu_GitAdd"){
 		DKSolutionMenu_GitAdd();
 	}
-	if(event.currentTarget.id == "DKSolutionMenu_UpxCompress"){
+	if(event.currentTarget.id === "DKSolutionMenu_UpxCompress"){
 		DKSolutionMenu_UpxCompress();
 	}
 	
 	//FIXME
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKFile/DKSolutionMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
@@ -140,7 +140,7 @@ function DKSolutionMenu_NewFile()
 		//console.log("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
 		//console.log("arry["+i+"] ="+value+"\n");
-		if(value == DKSolutionMenu_file){
+		if(value === DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
 			//console.log("id = "+arry[i]+"\n");
 			break;
@@ -170,7 +170,7 @@ function DKSolutionMenu_NewFolder()
 		//console.log("arry["+i+"] ="+arry[i]+"\n");
 		var value = DKWidget_GetValue(arry[i]);
 		//console.log("arry["+i+"] ="+value+"\n");
-		if(value == DKSolutionMenu_file){
+		if(value === DKSolutionMenu_file){
 			DKSolutionMenu_SetId(arry[i]);
 			//console.log("id = "+arry[i]+"\n");
 			break;
@@ -204,7 +204,7 @@ function DKSolutionMenu_Delete()
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessage_Confirm("delete this file?", function(rval){
 			//console.log("DKMessage_Confirm(): rval = "+rval+"\n");
-			if(rval == true){
+			if(rval === true){
 				DKFile_Delete(DKSolutionMenu_file);
 				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 			}
@@ -248,7 +248,7 @@ function DKSolutionMenu_GitAdd()
 		var search = DKSolutionMenu_file;
 		while(!DKFile_Exists(search+"/.git")){
 			var n = search.lastIndexOf("/");
-			if(n == -1){
+			if(n === -1){
 				console.warn("could not locate a .git folder\n");
 				return false;
 			}

@@ -33,20 +33,20 @@ function DKColorPicker_OnEvent(event)
 {
 	//console.log("DKColorPicker_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(event.currentTarget.id == "GetColor"){
+	if(event.currentTarget.id === "GetColor"){
 		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		//console.lof("event_id:"+event_id+"\n");
 		//console.lof("event_type:"+event_type+"\n");
 	}
-	if(event.currentTarget.id == "DKColorPickerBar"){
+	if(event.currentTarget.id === "DKColorPickerBar"){
 		DKColorPicker_ColorBar(); //hover
 	}
-	if(event.currentTarget.id == "DKColorHover"){
+	if(event.currentTarget.id === "DKColorHover"){
 		DKColorPicker_ColorBox();
 	}
-	if(event.currentTarget.id == "DKColorPickerOK"){
+	if(event.currentTarget.id === "DKColorPickerOK"){
 		//console.lof("DKColorPickerOK\n");
 		//console.lof("event_id:"+event_id+"\n");
 		//console.lof("event_type:"+event_type+"\n");

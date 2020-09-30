@@ -25,16 +25,16 @@ function DKPaint_End()
 ///////////////////////////////
 function DKPaint_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKPaint_Save"){
+	if(event.currentTarget.id === "DKPaint_Save"){
 		//DKNotepad_Save();
 	}
-	if(event.type == "contextmenu"){
+	if(event.type === "contextmenu"){
 		DKCreate("DKPaint/DKPaintMenu.js", function(){});
 	}
-	if(event.currentTarget.id == "DKPaint_File"){
+	if(event.currentTarget.id === "DKPaint_File"){
 		DKCreate("DKPaint/DKPaintFile.js", function(){});
 	}
-	if(event.type == "OpenFile"){
+	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
 		//console.log(("OpenFile: "+file+"\n");
 		DKPaint_Open(file)

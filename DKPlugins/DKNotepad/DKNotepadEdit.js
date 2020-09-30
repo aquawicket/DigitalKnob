@@ -27,27 +27,27 @@ function DKNotepadEdit_End()
 /////////////////////////////////////
 function DKNotepadEdit_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKNotepadEdit_Undo"){
+	if(event.currentTarget.id === "DKNotepadEdit_Undo"){
 		console.log("DKNotepadEdit_Undo\n");
 	}
-	if(event.currentTarget.id == "DKNotepadEdit_Cut"){
+	if(event.currentTarget.id === "DKNotepadEdit_Cut"){
 		console.log("DKNotepadEdit_Cut\n");
 	}
-	if(event.currentTarget.id == "DKNotepadEdit_Copy"){
+	if(event.currentTarget.id === "DKNotepadEdit_Copy"){
 		console.log("DKNotepadEdit_Copy\n");
 	}
-	if(event.currentTarget.id == "DKNotepadEdit_Paste"){
+	if(event.currentTarget.id === "DKNotepadEdit_Paste"){
 		console.log("DKNotepadEdit_Paste\n");
 	}
-	if(event.currentTarget.id == "DKNotepadEdit_Delete"){
+	if(event.currentTarget.id === "DKNotepadEdit_Delete"){
 		console.log("DKNotepadEdit_Delete\n");
 	}
-	if(event.currentTarget.id == "DKNotepadEdit_Find"){
+	if(event.currentTarget.id === "DKNotepadEdit_Find"){
 		console.log("DKNotepadEdit_Find\n");
 	}
 	
 	// FIXME
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKNotepad/DKNotepadEdit.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

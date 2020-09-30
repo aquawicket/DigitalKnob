@@ -7,7 +7,7 @@ var EventFromCPP = function(pointer, event)
 {
 	//console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
-		if(pointer == stored_events[i].pointer){
+		if(pointer === stored_events[i].pointer){
 			stored_events[i].dispatchEvent(event);
 		}
 	}
@@ -54,7 +54,7 @@ var EventTarget = function(pointer)
 		for(var i = 0, l = stack.length; i < l; i++){
 			//console.warn("dispatchEvent(): pointer = "+this.pointer);
 			
-			if(this.pointer == "window"){
+			if(this.pointer === "window"){
 				event.currentTarget = window;
 			}
 			else{

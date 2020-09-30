@@ -52,18 +52,18 @@ function DKOpenFile_OnEvent(event)
 		DKOpenFile_OpenFile(DKWidget_GetValue(event));
 	}
 
-	if(event.currentTarget.id == "DKOpenFileUp"){
+	if(event.currentTarget.id === "DKOpenFileUp"){
 		var up = DKWidget_GetValue("DKOpenFilePath")+"/..";
 		//console.log(up);
 		DKOpenFile_OpenFolder(up);
 	}
 	
-	if(event.currentTarget.id == "DKOpenFileOK"){
-		if(rPath && event_data2 == "relative"){
+	if(event.currentTarget.id === "DKOpenFileOK"){
+		if(rPath && event_data2 === "relative"){
 			//console.log("DKSendEvent("+event_id+","+event_type+","+rPath+")");
 			DKSendEvent(event_id, event_type, rPath);
 		}
-		else if(aPath && event_data2 == "absolute"){
+		else if(aPath && event_data2 === "absolute"){
 			//console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
 			DKSendEvent(event_id, event_type, aPath);
 		}
@@ -75,12 +75,12 @@ function DKOpenFile_OnEvent(event)
 		return;
 	}
 	
-	if(event.currentTarget.id == "DKOpenFileCancel"){
+	if(event.currentTarget.id === "DKOpenFileCancel"){
 		DKFrame_Close("DKFile/DKOpenFile.html");
 		return;
 	}
 	
-	if(event.currentTarget.id == "GetFile"){
+	if(event.currentTarget.id === "GetFile"){
 		console.log("GetFile was called");
 		var params = event.value.split(",");
 		event_id = params[0];
@@ -95,7 +95,7 @@ function DKOpenFile_OnEvent(event)
 		DKOpenFile_UpdatePath(event_data1);
 	}
 	
-	if(event.currentTarget.id == "DKOpenFilePath"){
+	if(event.currentTarget.id === "DKOpenFilePath"){
 		console.log("DKOpenFilePath");
 		//var path = byId("DKOpenFilePath").value;
 		//DKOpenFile_UpdatePath(path);
@@ -122,7 +122,7 @@ function DKOpenFile_OpenFolder(path)
 //////////////////////////////////
 function DKOpenFile_OpenFile(path)
 {
-	if(DK_GetOS() == "Android"){
+	if(DK_GetOS() === "Android"){
 		aPath = path;
 	}
 	else{
@@ -141,7 +141,7 @@ function DKOpenFile_UpdatePath(path)
 {
 	//if(!path){ return false; }
 	//console.log("DKOpenFile_UpdatePath("+path+")");
-	if(DK_GetOS() == "Android"){
+	if(DK_GetOS() === "Android"){
 		aPath = path;
 	}
 	else{
@@ -185,28 +185,28 @@ function DKOpenFile_UpdatePath(path)
 			byId(element3).addEventListener("click", DKOpenFile_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
-			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
-				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
-				(extension == "gif") || (extension == "tga") || (extension == "ico")
+			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
+				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
+				(extension === "gif") || (extension === "tga") || (extension === "ico")
 				){
 				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 
-			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
-				(extension == "3dm") || (extension == "3ds") || (extension == "ac") ||
-				(extension == "ascii") || (extension == "blend")  || (extension == "bvh") ||
-				(extension == "c4d") || (extension == "dae") || (extension == "dds") ||
-				(extension == "dgn") || (extension == "dwg") || (extension == "dxf") ||
-				(extension == "fbx") || (extension == "lwo") || (extension == "lws") ||
-				(extension == "ma") || (extension == "max") || (extension == "mb") ||
-				(extension == "mesh") || (extension == "mtl") || (extension == "obj") ||
-				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
-				(extension == "ztl")
+			else if((extension === "osg") || (extension === "osgb") || (extension === "osgt") ||
+				(extension === "3dm") || (extension === "3ds") || (extension === "ac") ||
+				(extension === "ascii") || (extension === "blend")  || (extension === "bvh") ||
+				(extension === "c4d") || (extension === "dae") || (extension === "dds") ||
+				(extension === "dgn") || (extension === "dwg") || (extension === "dxf") ||
+				(extension === "fbx") || (extension === "lwo") || (extension === "lws") ||
+				(extension === "ma") || (extension === "max") || (extension === "mb") ||
+				(extension === "mesh") || (extension === "mtl") || (extension === "obj") ||
+				(extension === "pov") || (extension === "skp") || (extension === "stl") ||
+				(extension === "ztl")
 			){
 				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 
-			else if((extension == "html") || (extension == "htm")){
+			else if((extension === "html") || (extension === "htm")){
 				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 

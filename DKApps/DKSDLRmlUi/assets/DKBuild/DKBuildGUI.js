@@ -21,24 +21,24 @@ function DKBuildGUI_Init()
 		DKBuild_ValidateVC2019();
 
 		/*
-		if(DK_GetOS() == "Win32" ||  DK_GetOS() == "Win64"){
+		if(DK_GetOS() === "Win32" ||  DK_GetOS() === "Win64"){
 			DKWidget_SetValue("OSList", "win32");
 		}
-		if(DK_GetOS() == "Mac"){
+		if(DK_GetOS() === "Mac"){
 			DKWidget_SetValue("OSList", "mac64");
 		}	
-		if(DK_GetOS() == "Linux"){
+		if(DK_GetOS() === "Linux"){
 			DKWidget_SetValue("OSList", "linux64");
 		}	
 
-		if(DK_GetOS() == "Linux"){
+		if(DK_GetOS() === "Linux"){
 			DKWidget_SetValue("BuildType", "Release");
 		}
 		else{
 			DKWidget_SetValue("BuildType", "ALL");
 		}
 	
-		if(DK_GetOS() == "Android"){ return; } //FIXME - android not ready
+		if(DK_GetOS() === "Android"){ return; } //FIXME - android not ready
 		*/
 		
 		DKBuildGUI_UpdateApps();
@@ -65,38 +65,38 @@ function DKBuildGUI_OnEvent(event)
 {
 	//console.lof("DKBuildGUI_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
-	if(event.currentTarget.id == "AppList"){
+	if(event.currentTarget.id === "AppList"){
 		//if(DK_Type(event,"click")){
 		//	DKBuildGUI_UpdateApps();
 		//}
-		if(event.type == "change"){
+		if(event.type === "change"){
 			DKBuildGUI_AppSelect();
 		}
 	}
-	if(event.currentTarget.id == "OSList"){
+	if(event.currentTarget.id === "OSList"){
 		DKBuildGUI_OsSelect();
 	}
-	if(event.currentTarget.id == "BuildType"){
+	if(event.currentTarget.id === "BuildType"){
 		DKBuildGUI_BuildSelect();
 	}
-	if(event.currentTarget.id == "git"){
+	if(event.currentTarget.id === "git"){
 		DKCreate("DKBuild/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/GitMenu.html");
 		});
 	}
-	if(event.currentTarget.id == "libraries"){
+	if(event.currentTarget.id === "libraries"){
 		DKCreate("DKBuild/LibraryMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
 		});
 	}
-	if(event.currentTarget.id == "build"){
+	if(event.currentTarget.id === "build"){
 		DKCreate("DKBuild/RunMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/RunMenu.html");
 		});
 	}		
 	
 	/*
-	if(event.type == "NewApp"){
+	if(event.type === "NewApp"){
 		DKSendEvent("DKBuildGUI", "NewApp", DK_GetValue(event));
 		DKWidget_SetValue("AppList", DK_GetValue(event));
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
@@ -112,7 +112,7 @@ function DKBuildGUI_OnEvent(event)
 function DKBuildGUI_UpdateApps()
 {
 	////////  Update App List /////////////
-	byId("AppList").innerHTML == "";	
+	byId("AppList").innerHTML === "";	
 	DKBuild_GetAppList();
 	
 	for(var i=0; i<APP_LIST.length; ++i){
@@ -128,7 +128,7 @@ function DKBuildGUI_UpdateApps()
 function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
-	if(DKWidget_GetValue("AppList") == "NEW APP"){
+	if(DKWidget_GetValue("AppList") === "NEW APP"){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKSendEvent("DKMessage.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
 		});
@@ -172,13 +172,13 @@ function DKBuildGUI_UpdateLibs()
 	var libs = result.split(",");
 	
 	//Add Libraries
-	var id = DKWidget_CreateElement("LibList", "option", "BuildLibraries");
+	var id = DKWidget_CreateElement(byId("LibList"), "option", "BuildLibraries");
 	byId(id).value = "Build All Libraries";
 	byId(id).innerHTML = "Build All Libraries";
 	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
-		var id2 = DKWidget_CreateElement("LibList", "option", "LIBRARY");
+		var id2 = DKWidget_CreateElement(byId("LibList"), "option", "LIBRARY");
 		byId(id2).value = libs[i]);
 		byId(id2).innerHTML = libs[i];
 		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);

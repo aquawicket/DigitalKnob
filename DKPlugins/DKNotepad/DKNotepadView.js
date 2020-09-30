@@ -17,11 +17,11 @@ function DKNotepadView_End()
 /////////////////////////////////////
 function DKNotepadView_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKNotepadView_StatusBar"){
+	if(event.currentTarget.id === "DKNotepadView_StatusBar"){
 		console.log("DKNotepadView_StatusBar\n");
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKNotepad/DKNotepadView.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

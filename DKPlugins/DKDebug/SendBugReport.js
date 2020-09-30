@@ -18,7 +18,7 @@ function SendBugReport_End()
 function SendBugReport_OnEvent(event)
 {
 	console.log("SendBugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
-	if(event.currentTarget.id == "SendBugReport_Button"){
+	if(event.currentTarget.id === "SendBugReport_Button"){
 		SendBugReport_CreateReport();
 	}
 }

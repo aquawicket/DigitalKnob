@@ -5,7 +5,7 @@ function DKAdmin_Init()
 	byId("AdminBadge").addEventListener("click", DKAdmin_OnEvent);
 	
 	//console.log("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
-	if(DK_GetBrowser() == "RML"){
+	if(DK_GetBrowser() === "RML"){
 		byId("AdminBadge").src = "DKAdmin/adminRed.png";
 	}
 	else{

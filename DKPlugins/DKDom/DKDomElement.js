@@ -246,8 +246,8 @@ var Element = function(pointer)
 		},
 		get: function (target, key, recv){
 			//console.log("Element:get("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
-				//console.log("tyoeof target[key] == "+typeof target[key]);
+			if(typeof target[key] === "function" || key === "pointer" || key === "style" || key === "listeners" || key === "create"){ 
+				//console.log("tyoeof target[key] === "+typeof target[key]);
 				return target[key]; 
 			}
 			else{
@@ -257,8 +257,8 @@ var Element = function(pointer)
 		},
 		set: function (target, key, val, recv){
 			//console.log("Element:set("+key+")");
-			if(typeof target[key] === "function" || key == "pointer" || key == "style" || key == "listeners" || key == "create"){ 
-				//console.warn("tyoeof target[key] == "+typeof target[key]);
+			if(typeof target[key] === "function" || key === "pointer" || key === "style" || key === "listeners" || key === "create"){ 
+				//console.warn("tyoeof target[key] === "+typeof target[key]);
 				return true; 
 			}
 			else{

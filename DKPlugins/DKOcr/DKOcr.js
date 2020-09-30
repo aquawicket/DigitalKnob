@@ -20,7 +20,7 @@ function DKOcr_End()
 /////////////////////////////
 function DKOcr_OnEvent(event)
 {
-	if(event.type == "OpenFile"){
+	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
 		console.log("OpenFile: "+file+"\n");
 		

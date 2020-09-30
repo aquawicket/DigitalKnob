@@ -26,7 +26,7 @@ function IconMaker_Create(AppPath)
 	DK_Execute(IMAGEMAGICK+" "+AppPath+"/icons/icon.png -define icon:auto-resize=16 "+AppPath+"/assets/favicon.ico");
 	
 	//Create Mac Icons
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		DKFile_MkDir(AppPath+"/icons/mac");
 		DKFile_MkDir(AppPath+"/icons/mac/icons.iconset");
 		DK_Execute("sips -z 16 16 "+AppPath+"/icons/icon.png --out "+AppPath+"/icons/mac/icons.iconset/icon_16x16.png");

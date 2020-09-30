@@ -65,7 +65,7 @@ function DKVideo_Change(id, src)
 ///////////////////////////////////////////////
 function DKVideo_RegisterEndVideo(id, Function)
 {	
-	if(registered == 0){
+	if(registered === 0){
 		var myPlayer;
 		videojs(id).ready(function(){ myPlayer = this;});
 		myPlayer.on('ended', function(){

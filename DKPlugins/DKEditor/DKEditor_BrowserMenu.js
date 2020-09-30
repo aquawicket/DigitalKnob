@@ -18,25 +18,25 @@ function DKEditor_BrowserMenu_End()
 function DKEditor_BrowserMenu_OnEvent(event)
 {
 	console.log("DKEditor_BrowserMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
-	if(event.currentTarget.id == "DKEditor_BrowserMenu_Chrome"){
+	if(event.currentTarget.id === "DKEditor_BrowserMenu_Chrome"){
 		DK_Run("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe", "--allow-file-access-from-files "+DKApp_url);
 	}
-	if(event.currentTarget.id == "DKEditor_BrowserMenu_Firefox"){
+	if(event.currentTarget.id === "DKEditor_BrowserMenu_Firefox"){
 		DK_Run("C:/Program Files (x86)/Mozilla Firefox/firefox.exe", DKApp_url);
 	}
-	if(event.currentTarget.id == "DKEditor_BrowserMenu_IE"){
+	if(event.currentTarget.id === "DKEditor_BrowserMenu_IE"){
 		var url = DKApp_url.replace("file:///", "");
 		DK_Run("C:/Program Files (x86)/Internet Explorer/iexplore.exe", url);
 	}
-	if(event.currentTarget.id == "DKEditor_BrowserMenu_Opera"){
+	if(event.currentTarget.id === "DKEditor_BrowserMenu_Opera"){
 		DK_Run("C:/Program Files/Opera/launcher.exe", "--allow-file-access-from-files "+DKApp_url);
 	}
-	if(event.currentTarget.id == "DKEditor_BrowserMenu_Safari"){
+	if(event.currentTarget.id === "DKEditor_BrowserMenu_Safari"){
 		DK_Run("C:/Program Files (x86)/Safari/Safari.exe", DKApp_url);
 	}
 	
 	//////////////////////////////////
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKEditor/DKEditor_BrowserMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

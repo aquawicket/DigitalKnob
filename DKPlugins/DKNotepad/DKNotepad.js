@@ -35,38 +35,38 @@ function DKNotepad_End()
 /////////////////////////////////
 function DKNotepad_OnEvent(event)
 {	
-	if(event.type == "contextmenu"){
+	if(event.type === "contextmenu"){
 		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
 		});
 	}
-	if(event.type == "OpenFile"){
+	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
 		//console.log("OpenFile: "+file);
 		DKNotepad_Open(file)
 	}
-	if(event.type == "SaveFile"){
+	if(event.type === "SaveFile"){
 		var file = event.value;//DK_GetValue(event);
 		//console.log(("SaveFile: "+file+"\n");
 		DKNotepad_Save(file)
 	}
-	//if(event.type == "SetFile"){
+	//if(event.type === "SetFile"){
 	//	DKNotepad_Open(DK_GetValue(event));
 	//}
 	if(!event.currentTarget){ return; }
-	if(event.currentTarget.id == "DKNotepad_File"){
+	if(event.currentTarget.id === "DKNotepad_File"){
 		DKCreate("DKNotepad/DKNotepadFile.js", function(){});
 	}
-	if(event.currentTarget.id == "DKNotepad_Edit"){
+	if(event.currentTarget.id === "DKNotepad_Edit"){
 		DKCreate("DKNotepad/DKNotepadEdit.js", function(){});
 	}
-	if(event.currentTarget.id == "DKNotepad_Format"){
+	if(event.currentTarget.id === "DKNotepad_Format"){
 		DKCreate("DKNotepad/DKNotepadFormat.js", function(){});
 	}
-	if(event.currentTarget.id == "DKNotepad_View"){
+	if(event.currentTarget.id === "DKNotepad_View"){
 		DKCreate("DKNotepad/DKNotepadView.js", function(){});
 	}
-	if(event.currentTarget.id == "DKNotepad_Help"){
+	if(event.currentTarget.id === "DKNotepad_Help"){
 		DKCreate("DKNotepad/DKNotepadHelp.js", function(){});
 	}
 }

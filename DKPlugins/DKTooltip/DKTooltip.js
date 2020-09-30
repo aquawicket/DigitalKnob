@@ -14,7 +14,7 @@ function DKTooltip_End()
 /////////////////////////////////
 function DKTooltip_OnEvent(event)
 {
-	if(event.type == "mouseenter"){
+	if(event.type === "mouseenter"){
 		DKTooltip_Show(DK_GetId(event));
 		return;
 	}

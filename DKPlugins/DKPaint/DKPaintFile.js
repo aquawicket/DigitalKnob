@@ -23,21 +23,21 @@ function DKPaintFile_End()
 ///////////////////////////////////
 function DKPaintFile_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKPaintFile_Open"){
+	if(event.currentTarget.id === "DKPaintFile_Open"){
 		DKPaintFile_Open();
 	}
-	if(event.currentTarget.id == "DKPaintFile_Save"){
+	if(event.currentTarget.id === "DKPaintFile_Save"){
 		DKPaintFile_Save();
 	}
-	if(event.currentTarget.id == "DKPaintFile_SaveAs"){
+	if(event.currentTarget.id === "DKPaintFile_SaveAs"){
 		DKPaintFile_SaveAs();
 	}
-	if(event.currentTarget.id == "DKPaintFile_Exit"){
+	if(event.currentTarget.id === "DKPaintFile_Exit"){
 		DKClose("DKPaint/DKPaintFile.js");
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKPaint/DKPaintFile.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}

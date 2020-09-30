@@ -83,7 +83,7 @@ function AndroidImport_Import()
 	*/
 	
 	//Get app path
-	if(TYPE == "Debug"){
+	if(TYPE === "Debug"){
 		path =  appdir+"/android32/Debug";
 	}
 	else{
@@ -164,7 +164,7 @@ function AndroidImport_Import()
 	//copy shared libs
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs");
 	DKFile_MkDir(WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a");
-	if(TYPE == "Debug"){
+	if(TYPE === "Debug"){
 		DKFile_Copy(appdir+"/android32/Debug/libs/armeabi-v7a", WORKSPACE+"/"+APP+"_"+TYPE+"/app/src/main/jniLibs/armeabi-v7a", true);
 	}
 	else{

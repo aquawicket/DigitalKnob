@@ -17,7 +17,7 @@ function Desktop_End()
 function Desktop_OnEvent(event)
 {
 	//console.log("Desktop_OnEvent("+event+")");
-	if(event.currentTarget.id == "Background" && event.type == "contextmenu"){
+	if(event.currentTarget.id === "Background" && event.type === "contextmenu"){
 		DKCreate("DKOS/DesktopMenu.js", function(){});
 	}
 }

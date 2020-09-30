@@ -7,18 +7,18 @@ function GitMenu_Init()
 	DKCreate("DKThreadPool");
 
 	//console.log(DK_GetOS()+"\n");
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Win64"){
+	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		GIT = "git";
 	}
-	if(DK_GetOS() == "Linux"){
+	if(DK_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
 
@@ -41,14 +41,14 @@ function GitMenu_End()
 ///////////////////////////////
 function GitMenu_OnEvent(event)
 {
-	if(event.currentTarget.id == "Git Update"){
+	if(event.currentTarget.id === "Git Update"){
 		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
-	if(event.currentTarget.id == "Git Commit"){
+	if(event.currentTarget.id === "Git Commit"){
 		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKGit/GitMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
@@ -67,7 +67,7 @@ function GitMenu_ValidateGit()
 		GitMenu_InstallGit();
 	}
 	console.log("Found GIT\n");
-	if(DK_GetOS() == "Mac"){
+	if(DK_GetOS() === "Mac"){
 		GIT = "git";
 	}
 }
@@ -79,18 +79,18 @@ function GitMenu_InstallGit()
 	console.log("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() == "Win32"){
+	if(DK_GetOS() === "Win32"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-32-bit.exe", assets);
 		DK_System(assets+"/Git-2.11.0-32-bit.exe");
 	}
-	else if(DK_GetOS() == "Win64"){
+	else if(DK_GetOS() === "Win64"){
 		DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.11.0-64-bit.exe", assets);
 		DK_System(assets+"/Git-2.11.0-64-bit.exe");
 	}
-	else if(DK_GetOS() == "Mac"){
+	else if(DK_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() == "Linux"){
+	else if(DK_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install git");
 	}
 	else{

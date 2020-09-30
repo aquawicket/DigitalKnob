@@ -29,11 +29,11 @@ function DKSolution_OnEvent(event)
 	console.debug("DKSolution_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	DKSolution_Select(event.currentTarget.id);
 
-	if(event.currentTarget.id == "click"){
+	if(event.currentTarget.id === "click"){
 		DK_StopPropagation(event);
 	}
 	
-	if(event.type == "contextmenu"){
+	if(event.type === "contextmenu"){
 		//console.log("DKSolution_OnEvent() contextmenu\n");
 		//PreventDefault(event);
 		
@@ -53,13 +53,13 @@ function DKSolution_OnEvent(event)
 		return;
 	}
 		
-	if(event.currentTarget.id == "DKSolutionUp"){
+	if(event.currentTarget.id === "DKSolutionUp"){
 		var up = DKWidget_GetValue("DKSolutionPath")+"/../";
 		//console.log(up+"\n");
 		DKSolution_OpenFolder(up);
 	}
 	
-	if(event.type == "dblclick"){
+	if(event.type === "dblclick"){
 		//console.log(DK_GetId(event)+"\n");
 		//console.log(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(event.currentTarget.id.includes("DKSolutionFolder")){
@@ -73,8 +73,8 @@ function DKSolution_OnEvent(event)
 		return;
 	}
 	
-	if(event.currentTarget.id == "DKSolutionPath"){
-		if(DKWidget_GetValue(event) == 13){ //enter
+	if(event.currentTarget.id === "DKSolutionPath"){
+		if(DKWidget_GetValue(event) === 13){ //enter
 			DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
 		}
 	}
@@ -125,7 +125,7 @@ function DKSolution_OpenHere(path)
 	var aPath = path;
 	if(DK_GetOS() != "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
-		if(typeof(absolutepath) == 'string'){ aPath = aPath.replace(absolutepath, ""); }
+		if(typeof(absolutepath) === 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
 	//console.log("aPath:"+aPath+"\n");
 	if(DKFile_IsDirectory(aPath)){ //Folder
@@ -203,32 +203,32 @@ function DKSolution_UpdatePath(path)
 			byId(element3).addEventListener("contextmenu", DKSolution_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
-			if((extension == "png") || (extension == "jpeg") || (extension == "jpg") || 
-				(extension == "bmp") || (extension == "tiff") || (extension == "tif") || 
-				(extension == "gif") || (extension == "tga") || (extension == "ico")
+			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
+				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
+				(extension === "gif") || (extension === "tga") || (extension === "ico")
 				){
 				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
-			else if((extension == "osg") || (extension == "osgb") || (extension == "osgt") ||
-				(extension == "3dm") || (extension == "3ds") || (extension == "ac") ||
-				(extension == "ascii") || (extension == "blend")  || (extension == "bvh") ||
-				(extension == "c4d") || (extension == "dae") || (extension == "dds") ||
-				(extension == "dgn") || (extension == "dwg") || (extension == "dxf") ||
-				(extension == "fbx") || (extension == "lwo") || (extension == "lws") ||
-				(extension == "ma") || (extension == "max") || (extension == "mb") ||
-				(extension == "mesh") || (extension == "mtl") || (extension == "obj") ||
-				(extension == "pov") || (extension == "skp") || (extension == "stl") ||
-				(extension == "ztl")
+			else if((extension === "osg") || (extension === "osgb") || (extension === "osgt") ||
+				(extension === "3dm") || (extension === "3ds") || (extension === "ac") ||
+				(extension === "ascii") || (extension === "blend")  || (extension === "bvh") ||
+				(extension === "c4d") || (extension === "dae") || (extension === "dds") ||
+				(extension === "dgn") || (extension === "dwg") || (extension === "dxf") ||
+				(extension === "fbx") || (extension === "lwo") || (extension === "lws") ||
+				(extension === "ma") || (extension === "max") || (extension === "mb") ||
+				(extension === "mesh") || (extension === "mtl") || (extension === "obj") ||
+				(extension === "pov") || (extension === "skp") || (extension === "stl") ||
+				(extension === "ztl")
 			){
 				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
-			else if((extension == "js")){
+			else if((extension === "js")){
 				byId(element3).style.backgroundImage = "url(\"DKFile/js.png\")";
 			}
-			else if((extension == "sln")){
+			else if((extension === "sln")){
 				byId(element3).style.backgroundImage = "url(\"DKFile/sln.png\")";
 			}
-			else if((extension == "html") || (extension == "htm")){
+			else if((extension === "html") || (extension === "htm")){
 				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 			else{

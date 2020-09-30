@@ -23,12 +23,12 @@ function DKSolutionRename_End()
 function DKSolutionRename_OnEvent(event)
 {
 	console.debug("DKSolutionRename_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
-	if(event.type == "keydown"){
+	if(event.type === "keydown"){
 		if(DK_GetValue(event) != 13){
 			return;
 		}
 	}
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKFile/DKSolutionRename.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
@@ -62,7 +62,7 @@ function DKSolutionRename_Rename()
 	//console.log("newhtml = "+newhtml+"\n");
 	//console.log("newvalue = "+newvalue+"\n");
 	
-	if(DKFile_Rename(oldvalue, newvalue, true) == false){
+	if(DKFile_Rename(oldvalue, newvalue, true) === false){
 		return; 
 	}
 	byId(DKSolutionRename_id).value = newvalue;

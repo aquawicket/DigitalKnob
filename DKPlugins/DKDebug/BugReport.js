@@ -18,7 +18,7 @@ function BugReport_End()
 function BugReport_OnEvent(event)
 {
 	console.debug("BugReport_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
-	if(event.type == "click"){
+	if(event.type === "click"){
 		BugReport_SendBugReport();
 	}
 }

@@ -30,7 +30,7 @@ function RunMenu_End()
 function RunMenu_OnEvent(event)
 {
 	console.log("RunMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
-	if(event.currentTarget.id == "Build App"){
+	if(event.currentTarget.id === "Build App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -38,7 +38,7 @@ function RunMenu_OnEvent(event)
 		LEVEL = "Build";
 		DKThread_DKQueue("BuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(event.currentTarget.id == "Rebuild App"){
+	if(event.currentTarget.id === "Rebuild App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -46,7 +46,7 @@ function RunMenu_OnEvent(event)
 		LEVEL = "Rebuild";
 		DKThread_DKQueue("RebuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(event.currentTarget.id == "Rebuild All"){
+	if(event.currentTarget.id === "Rebuild All"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
 		TYPE = DKWidget_GetValue("BuildType");
@@ -54,14 +54,14 @@ function RunMenu_OnEvent(event)
 		LEVEL = "RebuildAll";
 		DKThread_DKQueue("BuildAll "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
-	if(event.currentTarget.id == "Copy Assets"){
+	if(event.currentTarget.id === "Copy Assets"){
 		console.warn("DKBuildGUI::Copy Assets: TODO\n");
 	}
-	if(event.currentTarget.id == "Run App"){
+	if(event.currentTarget.id === "Run App"){
 		OS = DKWidget_GetValue("OSList");
 		APP = DKWidget_GetValue("AppList");
-		if(DK_GetOS() == "Win32" || DK_GetOS() == "Win64"){
-			if(OS == "win32"){
+		if(DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
+			if(OS === "win32"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
 				var contents = DKFile_DirectoryContents(DKPATH);
 				var files = contents.split(",");
@@ -73,7 +73,7 @@ function RunMenu_OnEvent(event)
 					}
 				}
 			}
-			if(OS == "win64"){
+			if(OS === "win64"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 				DK_Run(DKPATH+"/USER/DKApps/"+APP+"/"+OS+"/Release/"+APP+"_64.exe");
 				
@@ -88,12 +88,12 @@ function RunMenu_OnEvent(event)
 					}
 				}
 			}
-			if(OS == "android"){
+			if(OS === "android"){
 				console.lof("TODO: Run android from Windows\n");
 			}
 		}
-		if(DK_GetOS() == "Mac"){
-			if(OS == "mac"){
+		if(DK_GetOS() === "Mac"){
+			if(OS === "mac"){
 				console.lof("TODO: Run mac apps from OSX\n");
 			}
 			if(OS = "ios"){
@@ -103,8 +103,8 @@ function RunMenu_OnEvent(event)
 				console.lof("TODO: Run iOS-simulator apps from OSX\n");
 			}
 		}
-		if(DK_GetOS() == "Linux"){
-			//if(OS == "linux64"){
+		if(DK_GetOS() === "Linux"){
+			//if(OS === "linux64"){
 				//console.lof("TODO: Run linux apps from Linux\n");
 				if(DKFile_Exists(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop")){
 					DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".desktop");
@@ -123,7 +123,7 @@ function RunMenu_OnEvent(event)
 	}
 	
 	//TODO
-	if(event.currentTarget.id == "Generate Docs"){
+	if(event.currentTarget.id === "Generate Docs"){
 		console.lof("Generate Docs: TODO\n");
 		var doxy_path = "C:/Program Files/doxygen/bin/doxygen.exe";
 		var doxy_file = DKPATH+"/DKDocs/Doxyfile";
@@ -132,14 +132,14 @@ function RunMenu_OnEvent(event)
 		DK_Execute(doxy_exe+" "+doxy_file);		
 	}
 	
-	if(event.currentTarget.id == "Export to Android Studio"){
+	if(event.currentTarget.id === "Export to Android Studio"){
 		console.lof("Export to Android Studio\n");
 		DKCreate("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});
 	}
 	
-	if(event.currentTarget == window){
+	if(event.currentTarget === window){
 		if(byId("DKBuild/RunMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

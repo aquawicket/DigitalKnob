@@ -43,11 +43,11 @@ function DKAutomate_End()
 //////////////////////////////////
 function DKAutomate_OnEvent(event)
 {
-	if(event.type == "keydown"){
+	if(event.type === "keydown"){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	
-	if(event.currentTarget.id == "DKA-NewButton"){
+	if(event.currentTarget.id === "DKA-NewButton"){
 		//console.log("DKA-NewButton\n");
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
@@ -59,12 +59,12 @@ function DKAutomate_OnEvent(event)
 		});
 	}
 	
-	if(event.currentTarget.id == "DKA-DeleteButton"){
+	if(event.currentTarget.id === "DKA-DeleteButton"){
 		DKCreate("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
-				if(rval == true){
+				if(rval === true){
 					if(!current_trigger){ return; }
 					DKTrigger_RemoveTrigger(current_trigger);
 					DKSendEvent("DKTriggers/DKAutomate.html", "UpdateValues", "");
@@ -74,29 +74,29 @@ function DKAutomate_OnEvent(event)
 		});		
 	}
 	
-	if(event.currentTarget.id == "Trigger"){
+	if(event.currentTarget.id === "Trigger"){
 		DKAutomate_SelectValue(DK_GetValue(event));
 		DKAutomate_UpdateSelection(DK_GetValue(event));
 	}
 	
-	if(event.currentTarget.id == "CancelButton"){
+	if(event.currentTarget.id === "CancelButton"){
 		DKAutomate_CancelSave();
 	}
 	
-	if(event.currentTarget.id == "SaveButton"){
+	if(event.currentTarget.id === "SaveButton"){
 		//var value = MessageBox(event, "Confirm", "Save Triggers?");
 		//if(!value){ return; }
 		//var assets = DKAssets_LocalAssets();
 		DKTrigger_SaveTriggers("USER/triggers.txt");
 	}
 	
-	if(event.currentTarget.id == "MidiDevices"){
+	if(event.currentTarget.id === "MidiDevices"){
 		DKCreate("DKMidi/DKMidiDialog.js", function(){
 			DKWidget_Show("DKMidi/DKMidiDialog.html");
 		});
 	}
 	
-	if(event.type == "UpdateValues"){
+	if(event.type === "UpdateValues"){
 		DKAutomate_UpdateValues();
 	}
 }
@@ -146,7 +146,7 @@ function DKAutomate_UpdateSelection(value)
 	var temp = DKWidget_GetElements("DKA-TriggerList");
 	var options = temp.split(",");
 	for(var i = 0; i < options.length; ++i){
-		if(value == DKWidget_GetValue(options[i])){
+		if(value === DKWidget_GetValue(options[i])){
 			byId(options[i]).style.backgroundColor = "rgb(60,60,60)";
 			byId(options[i]).style.color = "rgb(200,200,200)";
 		}

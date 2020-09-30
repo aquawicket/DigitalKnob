@@ -16,7 +16,7 @@ function DKScale_End()
 ///////////////////////////////
 function DKScale_OnEvent(event)
 {
-	if(event.type == "resize"){
+	if(event.type === "resize"){
 		DKScale_Resize();
 	}
 }
@@ -29,7 +29,7 @@ function DKScale_Resize()
 	//console.log(("DKWindow_GetWidth() = "+DKWindow_GetWidth()+"\n");
 	//console.log(("DKWindow_GetHeight() = "+DKWindow_GetHeight()+"\n");
 	
-	if(pixel_ratio == DKWindow_GetPixelRatio()){ return true; } //nothing to be done
+	if(pixel_ratio === DKWindow_GetPixelRatio()){ return true; } //nothing to be done
 	pixel_ratio = DKWindow_GetPixelRatio();
 
 	//Set the scale

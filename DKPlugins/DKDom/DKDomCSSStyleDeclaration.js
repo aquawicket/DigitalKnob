@@ -26,13 +26,13 @@ var CSSStyleDeclaration = function(pointer)
 		},
 		get: function(target, key, recv){
 			//console.log("Style:get("+target+","+key+")");
-			if(typeof target[key] === "function" || key == "pointer"){ return target[key]; }
+			if(typeof target[key] === "function" || key === "pointer"){ return target[key]; }
 			var realKey = key;
 			
 			//Replace characters ( C ) with ( -c )    EXAMPLE:  backgroundColor becomes background-color
 			for(var i=0; i < realKey.length; i++){
-				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
-					if(realKey.charAt(i) == "-"){ continue; }
+				if(realKey.charAt(i) === realKey.charAt(i).toUpperCase()){ //is uppercase?
+					if(realKey.charAt(i) === "-"){ continue; }
 					realKey = realKey.substr(0, i)+"-"+realKey.charAt(i).toLowerCase()+realKey.substr(i+1, realKey.length);
 				}
 			}
@@ -42,18 +42,18 @@ var CSSStyleDeclaration = function(pointer)
 		},
 		set: function(target, key, val, recv){
 			//console.log("Style:set("+target+","+key+","+val+")");
-			if(typeof target[key] === "function" || key == "pointer"){ return true; }
+			if(typeof target[key] === "function" || key === "pointer"){ return true; }
 			var realKey = key;
 			
 			//Replace characters ( C ) with ( -c )    EXAMPLE:  backgroundColor becomes background-color
 			for(var i=0; i < realKey.length; i++){
-				if(realKey.charAt(i) == realKey.charAt(i).toUpperCase()){ //is uppercase?
-					if(realKey.charAt(i) == "-"){ continue; }
+				if(realKey.charAt(i) === realKey.charAt(i).toUpperCase()){ //is uppercase?
+					if(realKey.charAt(i) === "-"){ continue; }
 					realKey = realKey.substr(0, i)+"-"+realKey.charAt(i).toLowerCase()+realKey.substr(i+1, realKey.length);
 				}
 			}
 			
-			if(realKey == "background-image"){
+			if(realKey === "background-image"){
 				realKey = "decorator";
 				var img = val.replace("url(\"","");
 				img = img.replace("\")","");

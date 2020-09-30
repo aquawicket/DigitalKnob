@@ -19,7 +19,7 @@ function DKFileAssociation_OnEvent(event)
 /////////////////////////////////////
 function DKFileAssociation_Open(file)
 {
-	if(file.indexOf(".") == -1 ){ return false; }
+	if(file.indexOf(".") === -1 ){ return false; }
 	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
 	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
 	if(file.indexOf(".css") != -1 ){ DKFileAssociation_OpenCss(file); return true; }
@@ -71,7 +71,7 @@ function DKFileAssociation_OpenHtml(path)
 	var temp = DKWidget_CreateElement(document.body, "temp", "temporary");
 	byId(temp).innerHTML = filedata;
 
-	//if(DKWidget_GetNumChildren(temp) == 0){
+	//if(DKWidget_GetNumChildren(temp) === 0){
 	//	console.error("Error loading path: "+id+": could not create node");
 	//	return false;
 	//}

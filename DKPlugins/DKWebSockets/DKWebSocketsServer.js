@@ -25,16 +25,16 @@ function DKWebSocketsServer_End()
 //////////////////////////////////////////
 function DKWebSocketsServer_OnEvent(event)
 {
-	if(event.currentTarget.id == "DKWebSocketsServer_CreateServer"){
+	if(event.currentTarget.id === "DKWebSocketsServer_CreateServer"){
 		DKWebSocketsServer_CreateServer();
 	}
-	if(event.currentTarget.id == "DKWebSocketsServer_CloseServer"){
+	if(event.currentTarget.id === "DKWebSocketsServer_CloseServer"){
 		DKWebSocketsServer_CloseServer();
 	}
-	if(event.currentTarget.id == "DKWebSocketsServer_MessageToClient"){
+	if(event.currentTarget.id === "DKWebSocketsServer_MessageToClient"){
 		DKWebSocketsServer_MessageToClient();
 	}
-	if(event.type == "DKWebSockets_OnMessageFromClient"){
+	if(event.type === "DKWebSockets_OnMessageFromClient"){
 		DKWebSocketsServer_OnMessageFromClient(DK_GetValue(event));
 	}
 }
