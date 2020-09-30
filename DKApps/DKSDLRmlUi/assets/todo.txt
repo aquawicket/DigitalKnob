@@ -13,6 +13,7 @@ DKWidget_SetInnerHtml
 DKWidget_GetProperty
 DKWidget_SetProperty
 DKWidget_GetValue
+DKWidget_Visible
 
 *** replace all == with ===
 *** replace all != with !==

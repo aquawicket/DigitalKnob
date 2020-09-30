@@ -21,7 +21,7 @@ function DKMessage_OnEvent(event)
 {	
 	if(event.currentTarget.id === "DKMessageOk"){
 		if(DKMessage_callback){
-			if(DKWidget_Visible("DKMessageInput")){
+			if(byId("DKMessageInput").style.visibilty){
 				DKMessage_callback(DKWidget_GetValue("DKMessageInput"));
 			}
 			else{
