@@ -41,7 +41,7 @@ function DKTooltip_Show(id)
 			return;
 		}
 		DKCreate("DKTooltip/DKTooltip.html");
-		DKWidget_SetInnerHtml("DKTooltip/DKTooltip.html", byId(id).tooltip);
+		byId("DKTooltip/DKTooltip.html").innerHTML = byId(id).tooltip;
 		DKWidget_SetProperty("DKTooltip/DKTooltip.html", "top", mouseX+"px");
 		DKWidget_SetProperty("DKTooltip/DKTooltip.html", "left", mouseY+"px");
 	}, 1000); 

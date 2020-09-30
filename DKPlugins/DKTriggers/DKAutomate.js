@@ -112,13 +112,13 @@ function DKAutomate_NewTrigger(name)
 //////////////////////////////////
 function DKAutomate_UpdateValues()
 {
-	DKWidget_SetInnerHtml("DKA-TriggerList", "");
+	byId("DKA-TriggerList").innerHTML = "";
 
 	if(!triggers){return;}
 	for(var i = 0; i < triggers.length; i++){
 		var option = DKWidget_CreateElement("DKA-TriggerList", "option", "Trigger");
 		byId(option).value = triggers[i];
-		DKWidget_SetInnerHtml(option, triggers[i]);
+		byId(option).innerHTML = triggers[i];
 		byId(option, "click", DKAutomate_OnEvent);
 	}
 }

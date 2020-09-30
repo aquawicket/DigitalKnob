@@ -44,7 +44,7 @@ function DKMessage_OnEvent(event)
 ///////////////////////////////////
 function DKMessage_Message(message)
 {
-	//DKWidget_SetInnerHtml("DKMessageText", message);
+	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Hide("DKMessageCancel");
@@ -55,7 +55,7 @@ function DKMessage_Message(message)
 /////////////////////////////////////////////
 function DKMessage_Confirm(message, callback)
 {
-	//DKWidget_SetInnerHtml("DKMessageText", message);
+	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
 	DKWidget_Hide("DKMessageInput");
 	DKWidget_Show("DKMessageText");
@@ -68,7 +68,7 @@ function DKMessage_Confirm(message, callback)
 //////////////////////////////////////////////
 function DKMessage_GetValue(message, callback)
 {
-	DKWidget_SetInnerHtml("DKMessageText", message);
+	byId("DKMessageText").innerHTML = message;
 	DKWidget_Show("DKMessageText");
 	DKWidget_Show("DKMessageInput");
 	DKWidget_Show("DKMessageCancel");

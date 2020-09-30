@@ -33,22 +33,22 @@ function DKMidiDialog_UpdatePorts()
 {
 	var inputs = DKMidi_GetMidiInputs();
 	var list = inputs.split(",");
-	DKWidget_SetInnerHtml("DKMidiDialogInputs","");
+	byId("DKMidiDialogInputs").innerHTML = "";
 	for(var i=0; i<list.length; i++){
 		var element = DKWidget_CreateElement(byId("DKMidiDialogInputs"), "option", "DKMidiDialogInput");
 		byId(element).value = list[i];
 		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
-		DKWidget_SetInnerHtml(element, list[i]);
+		byId(element).innerHTML = list[i];
 	}
 
 	var outputs = DKMidi_GetMidiOutputs();
 	var outlist = outputs.split(",");
-	DKWidget_SetInnerHtml("DKMidiDialogOutputs","");
+	byId("DKMidiDialogOutputs").innerHTML = "";
 	for(var i=0; i<outlist.length; i++){
 		var element = DKWidget_CreateElement(byId("DKMidiDialogOutputs"), "option", "DKMidiDialogOutput");
 		byId(element).value = outlist[i];
 		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
-		DKWidget_SetInnerHtml(element, outlist[i]);
+		byId(element).innerHTML = outlist[i];
 	}
 	return true;
 }

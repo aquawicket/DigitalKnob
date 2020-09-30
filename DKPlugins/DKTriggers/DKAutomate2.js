@@ -84,7 +84,7 @@ function DKAutomate2_OnEvent(event)
 function DKAutomate2_SelectTrigger()
 {
 	DKWidget_SetValue("TriggerName", current_trigger);
-	DKWidget_SetInnerHtml("Causes", "");
+	byId("Causes").innerHTML = "";
 	
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].trigger != current_trigger){ continue; }
@@ -137,7 +137,7 @@ function DKAutomate2_SelectTrigger()
 		DKWidget_SetProperty(button, "display", "inline-block");
 		DKWidget_SetProperty(button, "border-width", "1px");
 		byId(button).num = String(c);
-		DKWidget_SetInnerHtml(button, "Delete");
+		byId(button).innerHTML = "Delete";
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
@@ -145,11 +145,11 @@ function DKAutomate2_SelectTrigger()
 	DKWidget_SetProperty(button, "width", "50px");
 	DKWidget_SetProperty(button, "height", "18px");
 	DKWidget_SetProperty(button, "border-width", "1px");
-	DKWidget_SetInnerHtml(button, "New");
+	byId(button).innerHTML = "New";
 	byId(button).addEventListener("click", DKAutomate2_OnEvent);
 
 
-	DKWidget_SetInnerHtml("Effects", "");
+	byId("Effects").innerHTML = "";
 	for(var e = 0; e < effects.length; e++){
 		if(effects[e].trigger != current_trigger){ continue; }
 		
@@ -201,7 +201,7 @@ function DKAutomate2_SelectTrigger()
 		DKWidget_SetProperty(button, "display", "inline-block");
 		DKWidget_SetProperty(button, "border-width", "1px");
 		byId(button).num = String(e);
-		DKWidget_SetInnerHtml(button, "Delete");
+		byId(button).innerHTML = "Delete";
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
@@ -209,6 +209,6 @@ function DKAutomate2_SelectTrigger()
 	DKWidget_SetProperty(button2, "width", "50px");
 	DKWidget_SetProperty(button2, "height", "18px");
 	DKWidget_SetProperty(button2, "border-width", "1px");
-	DKWidget_SetInnerHtml(button2, "New");
+	byId(button2).innerHTML = "New";
 	byId(button2).addEventListener("click", DKAutomate2_OnEvent);
 }

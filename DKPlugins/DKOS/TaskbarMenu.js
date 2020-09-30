@@ -193,7 +193,7 @@ function TaskbarMenu_Add(title, code)
 {
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKOS/TaskbarMenu.html", "div", "TaskbarMenu_item");
-	DKWidget_SetInnerHtml(ele, title);
+	byId(ele).innerHTML = title;
 }
 
 /////////////////////////////////

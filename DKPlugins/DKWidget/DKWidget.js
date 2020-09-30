@@ -490,7 +490,7 @@ function DKWidget_SetValue(variable, value)
 			variable.value = value;
 			return true;
 		}
-		DKWidget_SetInnerHtml(variable, value);
+		byId(variable).innerHTML = value;
 		return true;
 	}
 	if(typeof variable == "string"){

@@ -27,7 +27,7 @@ function DKThreadPoolDlg_OnUpdate()
 {
 	if(!DKValid("DKWidgetJS,DKWidgetJS0")){ return; }
 	console.log("Update DKThreadPool\n");
-	DKWidget_SetInnerHtml("DKThreadPoolDlg.html", "");
+	byId("DKThreadPoolDlg.html").innerHTML = "";
 
 	var name = DKThread_GetThreadNames();
 	var names = name.split(",");
@@ -44,10 +44,10 @@ function DKThreadPoolDlg_OnUpdate()
 		DKWidget_SetProperty(div, "white-space", "nowrap");
 
 		if(i == 0){
-			DKWidget_SetInnerHtml(div, "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i]);
+			byId(div).innerHTML = "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i];
 		}
 		else{
-			DKWidget_SetInnerHtml(div, names[i]);
+			byId(div).innerHTML = names[i];
 		}
 	}
 }
