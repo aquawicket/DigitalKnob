@@ -19,12 +19,11 @@ DKWidget_GetValue
 
 *** Make "Ctrl+Shift+S" save the file in DKNotepad
 
- 
 *** Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
 
 *** Create FAR 
 
-* KEEP WORKING ON Event
+*** KEEP WORKING ON Event
 * add removeEventListener everywhere neccesary 
 * Make EVERY event go through DKDomEventTarget.js
 * keep track of events in DKDomEventTarget.js
