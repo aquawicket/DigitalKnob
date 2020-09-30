@@ -52,7 +52,7 @@ function DKSolutionRename_SetFile(file)
 //////////////////////////////////
 function DKSolutionRename_Rename()
 {
-	var oldhtml = DKWidget_GetInnerHtml(DKSolutionRename_id);
+	var oldhtml = byId(DKSolutionRename_id).innerHTML;
 	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
 	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
 	var newvalue = oldvalue;

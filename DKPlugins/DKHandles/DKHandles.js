@@ -38,11 +38,11 @@ function DKHandles_End()
 function DKHandles_OnEvent(event)
 {
 	if(event.currentTarget === window){
-		var handle = DKWidget_GetInnerHtml("window");
+		var handle = byId("window").innerHTML;
 		DKHandles_UpdateProperties(handle);
     }
 	if(event.currentTarget.id == "parent"){
-		var handle = DKWidget_GetInnerHtml("parent");
+		var handle = byId("parent").innerHTML;
 		DKHandles_UpdateProperties(handle);
     }
 	if(event.currentTarget.id == "refresh"){
