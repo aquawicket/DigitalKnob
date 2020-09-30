@@ -133,7 +133,7 @@ function DKAdminMenu_OnEvent(event)
 	if(event.currentTarget.id == "DKAdminMenu_Run"){
 		var key = DK_GetValue(event);
 		//console.lof("DKAdminMenu_Run: key="+key+"\n");
-		if(DK_GetBrowser() == "Rocket"){
+		if(DK_GetBrowser() == "RML"){
 			if(key != 72){ return; } //FIXME: why is this key code not 13?
 		}
 		else{
@@ -168,7 +168,7 @@ function DKAdminMenu_Run(command)
 		return;
 	}
 	
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "RML"){
 		DK_RunDuktape(command);
 	}
 	else{

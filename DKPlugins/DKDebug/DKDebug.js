@@ -133,10 +133,10 @@ function DKDebug_Reload()
 function DKDebug_Refresh()
 {
 	//TODO - make this work for all variations 
-	if(DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "RML"){
 		DK_Refresh(); //Call DK.js
 	}
-	if(DK_GetBrowser() == "Rocket" && !USE_CEF){
+	if(DK_GetBrowser() == "RML" && !USE_CEF){
 		DK_Reload(); //Call DKDuktape.cpp
 	}
 }
@@ -273,7 +273,7 @@ function DKDebug_GetSource()
 	var source = DKWidget_GetOuterHtml("html");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetBrowser() == "Rocket"){
+	if(DK_GetBrowser() == "RML"){
 		DKFile_StringToFile(source, assets+"Rocket_Source.html");
 	}
 	else{

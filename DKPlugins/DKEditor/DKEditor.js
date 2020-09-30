@@ -7,7 +7,7 @@ function DKEditor_Init()
 	byId("DKEditor_edit").addEventListener("contextmenu", DKEditor_OnEvent);
 	
 	/*
-	if(DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "RML"){
 		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
 	*/

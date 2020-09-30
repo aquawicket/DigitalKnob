@@ -58,7 +58,7 @@ function DKBuild_End()
 ////////////////////////////////
 function DKBuild_ValidateCmake()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Looking for CMake");
 	if(!DKFile_Exists(CMAKE)){
 		console.log("Please install CMake");
@@ -104,7 +104,7 @@ function DKBuild_InstallCmake()
 /////////////////////////////////
 function DKBuild_ValidateVC2019()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	if(DK_GetOS() != "Win32" && DK_GetOS() != "Win64"){
 		return;
 	}
@@ -130,7 +130,7 @@ function DKBuild_InstallVC2019()
 function DKBuild_ValidateGcc()
 {
 	if(DK_GetOS() != "Linux"){ return; }
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Looking for GCC");
 	if(!DKFile_Exists(GCC)){
 		console.log("Please install GCC");
@@ -150,7 +150,7 @@ function DKBuild_InstallGcc()
 function DKBuild_ValidateXcode()
 {
 	if(DK_GetOS() != "Mac"){ return; }
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Looking for Xcode");
 	if(!DKFile_Exists(XCODE)){
 		console.log("Please install Xcode");

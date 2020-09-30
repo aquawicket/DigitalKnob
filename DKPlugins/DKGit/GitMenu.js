@@ -59,7 +59,7 @@ function GitMenu_OnEvent(event)
 //////////////////////////////
 function GitMenu_ValidateGit()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
 	if(!DKFile_Exists(GIT)){
@@ -75,7 +75,7 @@ function GitMenu_ValidateGit()
 /////////////////////////////
 function GitMenu_InstallGit()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	

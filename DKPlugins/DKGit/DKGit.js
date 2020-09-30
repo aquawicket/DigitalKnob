@@ -38,7 +38,7 @@ function DKGit_OnEvent(event)
 ////////////////////////////
 function DKGit_ValidateGit()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Looking for GIT\n");
 	if(!DKFile_Exists(GIT)){
 		DKGit_InstallGit();
@@ -52,7 +52,7 @@ function DKGit_ValidateGit()
 ///////////////////////////
 function DKGit_InstallGit()
 {
-	if(DK_GetBrowser() != "Rocket"){ return; }
+	if(DK_GetBrowser() != "RML"){ return; }
 	console.log("Installing Git...\n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -80,7 +80,7 @@ function DKGit_InstallGit()
 //////////////////////////
 function DKGit_GitUpdate()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
 	
@@ -118,7 +118,7 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "Rocket"){
+	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
 		return;
 	}
 	
