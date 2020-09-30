@@ -11,6 +11,7 @@ All javascript functions in c++ will have a DKCPP_ header.
 DKCreate...    we must now choose betewwn DKCPP_DKCreate and DKCreate
 i'm ok with that
 It's Final..  All C++ javascript function will have a DKCPP_ header
+Look at DKDomConsole for clues on DKCPP_
 
 *** FUN ***
 Make the Atari tank game  :D
