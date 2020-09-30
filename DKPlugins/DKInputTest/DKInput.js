@@ -76,13 +76,13 @@ function DKInput_OnEvent(event)
 	}
 	if(event.type === "mousedown"){
 		DKInput_ProcessMouseDown(event.button);
-		if(event.currentTarget != window){
+		if(event.currentTarget !== window){
 			DKInput_Highlight(event.currentTarget.id);
 		}
 	}
 	if(event.type === "mouseup" || event.type === "click"){
 		DKInput_ProcessMouseUp(event.button);
-		if(event.currentTarget != window){
+		if(event.currentTarget !== window){
 			DKInput_UnHighlight(event.currentTarget.id);
 		}
 	}

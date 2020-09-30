@@ -111,7 +111,7 @@ function DKSolution_OpenFolder(path)
 function DKSolution_OpenFile(path)
 {
 	var aPath = path;
-	if(DK_GetOS() != "Android"){
+	if(DK_GetOS() !== "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	//console.log("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
@@ -123,7 +123,7 @@ function DKSolution_OpenFile(path)
 function DKSolution_OpenHere(path)
 {
 	var aPath = path;
-	if(DK_GetOS() != "Android"){
+	if(DK_GetOS() !== "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) === 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
@@ -155,7 +155,7 @@ function DKSolution_UpdatePath(path)
 	var aPath = path;
 	/*
 	var aPath;
-	if(DK_GetOS() != "Android"){
+	if(DK_GetOS() !== "Android"){
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	*/

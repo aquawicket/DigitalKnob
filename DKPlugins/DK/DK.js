@@ -39,7 +39,7 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
-if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
 	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
@@ -386,7 +386,7 @@ function LoadCss(url)
 		return false; 
 	}
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		console.warn("DK.js: LoadCss("+url+"): url already loaded\n");
 		return false;
 	}
@@ -416,7 +416,7 @@ function LoadJs(url, callback)
 		return false; 
 	}
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		console.warn("DK.js: LoadJs("+url+", callback): url already loaded\n");
 		callback && callback(false);
 		return false;
@@ -514,7 +514,7 @@ function LoadHtml(url, parent)
 	
 	if(url === ".html"){ url = "New.html"; }
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		console.warn("DK.js: LoadHtml("+url+", parent): url already loaded\n");
 		return false;
 	}
@@ -550,7 +550,7 @@ function LoadHtml(url, parent)
 		//return false;
 	}
 
-	if(nodes[0].id != url){
+	if(nodes[0].id !== url){
 		console.warn("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
 		nodes[0].id = url;
 		console.warn("DK.js: LoadHtml("+url+",parent): please fix the id\n");
@@ -988,7 +988,7 @@ function DK_GetOS()
         return "iOS";
     }
 	var os_value = navigator.platform;
-	if (navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1 ){
+	if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1 ){
 		os_value = os_value.replace("32", "64");
 	}
 	os_value = os_value.replace("Intel", ""); //Mac
@@ -999,25 +999,25 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	if(navigator.userAgent.indexOf("Rml") != -1){
+	if(navigator.userAgent.indexOf("Rml") !== -1){
         return "RML";
     }
-    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
+    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1 ){
         return "OPERA";
     }
-    else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") === -1){
+    else if(navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1){
 		return "CHROME";
     }
-	else if(navigator.userAgent.indexOf("Cef") != -1){
+	else if(navigator.userAgent.indexOf("Cef") !== -1){
         return "CEF";
     }
-    else if(navigator.userAgent.indexOf("Safari") != -1){
+    else if(navigator.userAgent.indexOf("Safari") !== -1){
         return "SAFARI";
     }
-    else if(navigator.userAgent.indexOf("Firefox") != -1){
+    else if(navigator.userAgent.indexOf("Firefox") !== -1){
         return "FIREFOX";
     }
-    else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode === true )){ //IF IE > 10
+    else if((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true )){ //IF IE > 10
 		return "IE";
     }
     else {
@@ -1050,13 +1050,13 @@ function DK_IE()
 	if(navigator.appName === 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) != null)
+		if(re.exec(ua) !== null)
 		rv = parseFloat( RegExp.$1 );
 	}
 	else if (navigator.appName === 'Netscape'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) != null)
+		if(re.exec(ua) !== null)
       rv = parseFloat( RegExp.$1 );
 	}
 	
@@ -1180,7 +1180,7 @@ function ajaxGetUrl(url)
 	//TODO - upgrade this to JSON date transfers
 	var place = 0;
 	var n = response.value.indexOf("{", place);
-	while(n != -1){
+	while(n !== -1){
 		place = response.value.indexOf("}");
 		var res = response.value.substring(n+1, place);
 		response.value = response.value.replace("{"+res+"}", "");

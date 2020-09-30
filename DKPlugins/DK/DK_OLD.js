@@ -39,7 +39,7 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
-if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	var DK_ClearEvents = function(){ DKWARN("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
 	var DKRocket_Reload = function(){ DKWARN("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
 	var DK_CallFunc = function(var1, var2, var3){ DKWARN("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
@@ -386,7 +386,7 @@ function LoadCss(url)
 		return false; 
 	}
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		DKWARN("DK.js: LoadCss("+url+"): url already loaded\n");
 		return false;
 	}
@@ -416,7 +416,7 @@ function LoadJs(url, callback)
 		return false; 
 	}
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		DKWARN("DK.js: LoadJs("+url+", callback): url already loaded\n");
 		callback && callback(false);
 		return false;
@@ -514,7 +514,7 @@ function LoadHtml(url, parent)
 	
 	if(url === ".html"){ url = "New.html"; }
 	
-	if(DK_GetObjects().indexOf(url) != -1){
+	if(DK_GetObjects().indexOf(url) !== -1){
 		DKWARN("DK.js: LoadHtml("+url+", parent): url already loaded\n");
 		return false;
 	}
@@ -550,7 +550,7 @@ function LoadHtml(url, parent)
 		//return false;
 	}
 
-	if(nodes[0].id != url){
+	if(nodes[0].id !== url){
 		DKWARN("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
 		nodes[0].id = url;
 		DKWARN("DK.js: LoadHtml("+url+",parent): please fix the id\n");
@@ -786,19 +786,19 @@ function Pos(position)
 		return position;	
 	}
 	if(typeof position === 'string'){
-		if(position.search('rem') != -1){
+		if(position.search('rem') !== -1){
 			if(DK_IE() && DK_IE() < 9){
 				position = position.replace("rem", "px");
 			}
 			return position;
 		}
-		if(position.search('px') != -1){
+		if(position.search('px') !== -1){
 			return position;
 		}
-		if(position.search('%') != -1){
+		if(position.search('%') !== -1){
 			return position;
 		}
-		if(position.search('auto') != -1){
+		if(position.search('auto') !== -1){
 			return position;
 		}
 		
@@ -1108,7 +1108,7 @@ function DK_GetOS()
         return "iOS";
     }
 	var os_value = navigator.platform;
-	if (navigator.userAgent.indexOf("WOW64") != -1 || navigator.userAgent.indexOf("Win64") != -1 ){
+	if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1 ){
 		os_value = os_value.replace("32", "64");
 	}
 	os_value = os_value.replace("Intel", ""); //Mac
@@ -1119,25 +1119,25 @@ function DK_GetOS()
 ////////////////////////
 function DK_GetBrowser()
 {
-	if(navigator.userAgent.indexOf("Rml") != -1){
+	if(navigator.userAgent.indexOf("Rml") !== -1){
         return "RML";
     }
-    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ){
+    else if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1 ){
         return "OPERA";
     }
-    else if(navigator.userAgent.indexOf("Chrome") != -1 && navigator.userAgent.indexOf("Cef") === -1){
+    else if(navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1){
 		return "CHROME";
     }
-	else if(navigator.userAgent.indexOf("Cef") != -1){
+	else if(navigator.userAgent.indexOf("Cef") !== -1){
         return "CEF";
     }
-    else if(navigator.userAgent.indexOf("Safari") != -1){
+    else if(navigator.userAgent.indexOf("Safari") !== -1){
         return "SAFARI";
     }
-    else if(navigator.userAgent.indexOf("Firefox") != -1){
+    else if(navigator.userAgent.indexOf("Firefox") !== -1){
         return "FIREFOX";
     }
-    else if((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode === true )){ //IF IE > 10
+    else if((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true )){ //IF IE > 10
 		return "IE";
     }
     else {
@@ -1170,13 +1170,13 @@ function DK_IE()
 	if(navigator.appName === 'Microsoft Internet Explorer'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) != null)
+		if(re.exec(ua) !== null)
 		rv = parseFloat( RegExp.$1 );
 	}
 	else if (navigator.appName === 'Netscape'){
 		var ua = navigator.userAgent;
 		var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
-		if(re.exec(ua) != null)
+		if(re.exec(ua) !== null)
       rv = parseFloat( RegExp.$1 );
 	}
 	
@@ -1284,8 +1284,8 @@ function DK_IdLike(event, id)
 	var element = DKWidget_GetElement(event);
 	if(!element){ return; }
 	if(!element.id){ return; }
-	if(element.id.indexOf(id) != -1){ return true; }
-	if(event[0] && event[0].indexOf(id) != -1){ return true; }
+	if(element.id.indexOf(id) !== -1){ return true; }
+	if(event[0] && event[0].indexOf(id) !== -1){ return true; }
 	return false;
 }
 */
@@ -1327,15 +1327,15 @@ function DKAddEvent(id, type, Function)
 ////  Old 
 function DKAddEvent(id, type, Function)
 {
-	if(typeof id != "string"){
+	if(typeof id !== "string"){
 		DKWARN("DKAddEvent(id, type, Function): id invalid\n");
 		return;
 	}
-	if(typeof type != "string"){
+	if(typeof type !== "string"){
 		DKWARN("DKAddEvent(id, type, Function): type invalid\n");
 		return;
 	}
-	if(typeof Function != "function"){
+	if(typeof Function !== "function"){
 		DKWARN("DKAddEvent(id, type, Function): Function invalid\n");
 		return;
 	}
@@ -1355,7 +1355,7 @@ function DKAddEvent(id, type, Function)
 		element.addEventListener(type, Function, false);
 	}
 	else if (element.attachEvent){ // IE 8> DOM
-		if(element === window && type != "resize"){
+		if(element === window && type !== "resize"){
 			element = document;
 		}
 		element.attachEvent("on"+type, function(a){
@@ -1392,7 +1392,7 @@ function removeEvent(element, type, Function)
 		element.removeEventListener(type, Function);
 	}
 	else if (element.detachEvent){ // IE 8> DOM
-		if(element === window && type != "resize"){
+		if(element === window && type !== "resize"){
 			element = document;
 		}
 		element.detachEvent("on"+type, function(a){
@@ -1410,15 +1410,15 @@ function removeEvent(element, type, Function)
 //////////////////////////////////////////
 function DKRemoveEvent(id, type, Function)
 {
-	if(typeof id != "string"){
+	if(typeof id !== "string"){
 		DKERROR("DKRemoveEvent(id, type, Function): id invalid\n");
 		return false;
 	}
-	if(typeof type != "string"){
+	if(typeof type !== "string"){
 		DKERROR("DKRemoveEvent(id, type, Function): type invalid\n");
 		return false;
 	}
-	if(typeof Function != "function"){
+	if(typeof Function !== "function"){
 		DKERROR("DKRemoveEvent(id, type, Function): Function invalid\n");
 		return false;
 	}
@@ -1455,7 +1455,7 @@ function DKRemoveEvent(id, type, Function)
 /////////////////////////////////
 function DKRemoveEvents(Function)
 {
-	if(typeof Function != "function"){
+	if(typeof Function !== "function"){
 		DKERROR("DKRemoveEvents(Function): Function invalid\n");
 		return false;
 	}
@@ -1492,15 +1492,15 @@ function DKRemoveEvents(Function)
 function DKSendEvent(id, type, message)
 {
 	console.log("DKSendEvent("+id+","+type+","+message+")");
-	if(typeof id != "string"){
+	if(typeof id !== "string"){
 		DKERROR("DKSendEvent(id, type, message): id invalid\n");
 		return false;
 	}
-	if(typeof type != "string"){
+	if(typeof type !== "string"){
 		DKERROR("DKSendEvent(id, type, message): type invalid\n");
 		return false;
 	}
-	//if(typeof message != "string"){
+	//if(typeof message !== "string"){
 	//	DKERROR("DKSendEvents(id, type, message): message invalid\n");
 	//	return;
 	//}
@@ -1545,7 +1545,7 @@ function GetMouseButton(event)
     return button;
 }
 
-if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	//////////////////////////////////////
 	var DK_SetClipboard = function(string)
 	{
@@ -1675,7 +1675,7 @@ function ajaxGetUrl(url)
 	//TODO - upgrade this to JSON date transfers
 	var place = 0;
 	var n = response.value.indexOf("{", place);
-	while(n != -1){
+	while(n !== -1){
 		place = response.value.indexOf("}");
 		var res = response.value.substring(n+1, place);
 		response.value = response.value.replace("{"+res+"}", "");

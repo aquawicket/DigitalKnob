@@ -52,7 +52,7 @@ function DKRocketVideo_playpause()
 	var src = byId("DKRocketVideo_playpause").src;
 	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
 	
-	if(src.indexOf("play.png") != -1){
+	if(src.indexOf("play.png") !== -1){
 		byId("DKRocketVideo_playpause").src = "DKRocketVideo/pause.png";
 	}
 	else{
@@ -79,7 +79,7 @@ function DKRocketVideo_speaker()
 	var src = byId("DKRocketVideo_speaker").src;
 	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
 	
-	if(src.indexOf("mute.png") != -1){
+	if(src.indexOf("mute.png") !== -1){
 		byId("DKRocketVideo_speaker").src = "DKRocketVideo/volume3.png";
 	}
 	else{

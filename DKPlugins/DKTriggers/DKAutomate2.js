@@ -87,7 +87,7 @@ function DKAutomate2_SelectTrigger()
 	byId("Causes").innerHTML = "";
 	
 	for(var c = 0; c < causes.length; c++){
-		if(causes[c].trigger != current_trigger){ continue; }
+		if(causes[c].trigger !== current_trigger){ continue; }
 		
 		var cause = DKWidget_CreateElement(byId("Causes"), "div", "CauseDiv");
 		
@@ -151,7 +151,7 @@ function DKAutomate2_SelectTrigger()
 
 	byId("Effects").innerHTML = "";
 	for(var e = 0; e < effects.length; e++){
-		if(effects[e].trigger != current_trigger){ continue; }
+		if(effects[e].trigger !== current_trigger){ continue; }
 		
 		var effect = DKWidget_CreateElement(byId("Effects"), "div", "EffectDiv");
 

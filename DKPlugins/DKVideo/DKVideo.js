@@ -18,13 +18,13 @@ function DKVideo_Queue(id, src)
 	videojs(id).ready(function(){ myPlayer = this;});
 	
 	var type;
-	if(src.indexOf(".flv") != -1){ 
+	if(src.indexOf(".flv") !== -1){ 
 		type = "video/flv"; 
 	}
-	if(src.indexOf(".mp4") != -1){ 
+	if(src.indexOf(".mp4") !== -1){ 
 		type = "video/mp4"; 
 	}
-	if(src.indexOf("youtu") != -1){ 
+	if(src.indexOf("youtu") !== -1){ 
 		type = "video/youtube"; 
 	}
 	
@@ -43,13 +43,13 @@ function DKVideo_Change(id, src)
 	videojs(id).ready(function(){ myPlayer = this;});
 	
 	var type;
-	if(src.indexOf(".flv") != -1){ 
+	if(src.indexOf(".flv") !== -1){ 
 		type = "video/flv"; 
 	}
-	if(src.indexOf(".mp4") != -1){ 
+	if(src.indexOf(".mp4") !== -1){ 
 		type = "video/mp4"; 
 	}
-	if(src.indexOf("youtu") != -1){ 
+	if(src.indexOf("youtu") !== -1){ 
 		type = "video/youtube"; 
 	}
 	

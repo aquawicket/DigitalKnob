@@ -24,7 +24,7 @@ function DKSolutionRename_OnEvent(event)
 {
 	console.debug("DKSolutionRename_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.type === "keydown"){
-		if(DK_GetValue(event) != 13){
+		if(DK_GetValue(event) !== 13){
 			return;
 		}
 	}

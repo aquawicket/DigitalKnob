@@ -59,7 +59,7 @@ function GitMenu_OnEvent(event)
 //////////////////////////////
 function GitMenu_ValidateGit()
 {
-	if(DK_GetBrowser() != "RML"){ return; }
+	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
 	if(!DKFile_Exists(GIT)){
@@ -75,7 +75,7 @@ function GitMenu_ValidateGit()
 /////////////////////////////
 function GitMenu_InstallGit()
 {
-	if(DK_GetBrowser() != "RML"){ return; }
+	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -101,7 +101,7 @@ function GitMenu_InstallGit()
 ////////////////////////////
 function GitMenu_GitUpdate()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return;
 	}
 	
@@ -138,7 +138,7 @@ function GitMenu_GitUpdate()
 ////////////////////////////
 function GitMenu_GitCommit()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return;
 	}
 	

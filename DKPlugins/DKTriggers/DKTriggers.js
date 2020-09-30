@@ -269,11 +269,11 @@ function DKTrigger_ProcessMidi(channel, note, value)
 ///////////////////////////////////////
 function DKTrigger_FireTrigger(trigger)
 {
-	if(trigger_events != true){ return; }
+	if(trigger_events !== true){ return; }
 	console.log("Fire Trigger: "+trigger+"\n");
 	
 	for(var i=0; i < effects.length; ++i){
-		if(effects[i].trigger != trigger){ continue; }
+		if(effects[i].trigger !== trigger){ continue; }
 		
 		var command = effects[i].command;
 		var var1 = effects[i].var1;

@@ -120,15 +120,15 @@ function DKWidget_AttachDrags(id)
 	for (var i=0; i<elements.length; i++) {	
 		var x = elements[i];
 		
-		if(!DK_IE() && DK_GetBrowser() != "RML"){
+		if(!DK_IE() && DK_GetBrowser() !== "RML"){
 			x.style.setProperty("pointer-events","all");
 		}
 		
-		if(x.getAttribute("drag") != null){ 	//Drag events
+		if(x.getAttribute("drag") !== null){ 	//Drag events
 			var mov_tar = x.getAttribute("drag");	
 			x.onmousedown = function(event){DragStart(event, mov_tar);}
 		}
-		if(x.getAttribute("resize") != null){ 	//Resize events
+		if(x.getAttribute("resize") !== null){ 	//Resize events
 			var res_tar = x.getAttribute("resize");	
 			x.onmousedown = function(event){ResizeStart(event, res_tar);}
 		}
@@ -139,7 +139,7 @@ function DKWidget_AttachDrags(id)
 function DKWidget_AddDragHandle(id, drag)
 {
 	var element = document.getElementById(id);
-	if(!DK_IE() && DK_GetBrowser() != "RML"){
+	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ DragStart(event, drag); }
@@ -151,7 +151,7 @@ function DKWidget_AddDragHandle(id, drag)
 function DKWidget_AddResizeHandle(id, resize)
 {
 	var element = document.getElementById(id);
-	if(!DK_IE() && DK_GetBrowser() != "RML"){
+	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
 	element.onmousedown = function(event){ ResizeStart(event, resize); }
@@ -747,7 +747,7 @@ function DKWidget_GetMouseElementX(id)
 	/*
 	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		left += ele.offsetLeft; 
 	}
 	*/
@@ -762,7 +762,7 @@ function DKWidget_GetMouseElementY(id)
 	/*
 	var ele = document.getElementById(element);
 	var top = ele.offsetTop;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		top += ele.offsetTop; 
 	}
 	*/
@@ -788,7 +788,7 @@ function DKWidget_GetOffsetTop(id)
 {
 	var ele = document.getElementById(id);
 	var top = ele.offsetTop;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		top += ele.offsetTop; 
 	}
 	//console.log("DKWidget_GetOffsetTop("+id+") = "+top+"\n");
@@ -800,7 +800,7 @@ function DKWidget_GetOffsetLeft(id)
 {
 	var ele = document.getElementById(id);
 	var left = ele.offsetLeft;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		left += ele.offsetLeft; 
 	}
 	return parseInt(left);
@@ -811,7 +811,7 @@ function DKWidget_GetOffsetRight(id)
 {
 	var ele = document.getElementById(id);
 	var right = ele.offsetRight;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		right += ele.offsetRight; 
 	}
 	//console.log("DKWidget_GetOffsetRight("+id+") = "+top+"\n");
@@ -823,7 +823,7 @@ function DKWidget_GetOffsetBottom(id)
 {
 	var ele = document.getElementById(id);
 	var bottom = ele.offsetRight;
-	while((ele=ele.offsetParent) != null){ 
+	while((ele=ele.offsetParent) !== null){ 
 		bottom += ele.offsetBottom; 
 	}
 	//console.log("DKWidget_GetOffsetBottom("+id+") = "+top+"\n");
@@ -888,7 +888,7 @@ function DKWidget_Visible(id)
 	var element = document.getElementById(id);
 	if(!element){ return false; }
 	if(element.style.display === "none"){ return false; }
-	if(element.style.visibility != "visible"){ return false; }
+	if(element.style.visibility !== "visible"){ return false; }
 	return true;
 }
 
@@ -982,7 +982,7 @@ function DKWidget_Cut(id)
     if(window.getSelection){
         text = window.getSelection().toString();
     } 
-	else if(document.selection && document.selection.type != "Control"){
+	else if(document.selection && document.selection.type !== "Control"){
         text = document.selection.createRange().text;
     }
 	//console.log("DKWidget_Cut("+id+"): text = "+text+"\n");
@@ -997,7 +997,7 @@ function DKWidget_Copy(id)
     if(window.getSelection){
         text = window.getSelection().toString();
     } 
-	else if(document.selection && document.selection.type != "Control"){
+	else if(document.selection && document.selection.type !== "Control"){
         text = document.selection.createRange().text;
     }
 	

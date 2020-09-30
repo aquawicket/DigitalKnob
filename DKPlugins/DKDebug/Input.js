@@ -19,7 +19,7 @@ function Input_OnEvent(event)
 	if(event.currentTarget.id === "Input_Text"){
 		var key = DK_GetValue(event);
 		//console.log("Input_Text: key="+key+"\n");
-		if(key != 13 /*&& key != 72*/){ return; }
+		if(key !== 13 /*&& key !== 72*/){ return; }
 		Input_Run(DKWidget_GetValue("Input_Text"))
 	}
 }

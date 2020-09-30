@@ -17,7 +17,7 @@ function DKMySql_Connect(host, name, pass, port)
 	console.log(response+"\n");
 	
 	//FIXME
-	//if(response.indexOf("console.error") != -1){
+	//if(response.indexOf("console.error") !== -1){
 	//	return false;
 	//}
 	
@@ -248,7 +248,7 @@ function DKMySql_SaveRecord(id, recordNum)
 			var records = result.split(',');
 			if(records.length > 1){
 				var value = GetValue(nodes[i]);
-				if(value != records[1] && sql[1] != "ID"){
+				if(value !== records[1] && sql[1] !== "ID"){
 					console.log("Update Record. value="+value+" record="+records[1]+"\n");
 					var query = "UPDATE "+sql[0]+" SET "+sql[1]+"='"+value+"' WHERE ID="+recordNum;
 					var result = DKMySql_Query(query);

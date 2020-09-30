@@ -20,23 +20,23 @@ function DKFileAssociation_OnEvent(event)
 function DKFileAssociation_Open(file)
 {
 	if(file.indexOf(".") === -1 ){ return false; }
-	if(file.indexOf(".js") != -1 ){ DKFileAssociation_OpenJS(file); return true; }
-	if(file.indexOf(".html") != -1 ){ DKFileAssociation_OpenHtml(file); return true; }
-	if(file.indexOf(".css") != -1 ){ DKFileAssociation_OpenCss(file); return true; }
-	if(file.indexOf(".png") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".bmp") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".gif") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".jpeg") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".jpg") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".tiff") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".tif") != -1 ){ DKFileAssociation_OpenImage(file); return true; }
-	if(file.indexOf(".osgt") != -1 ){ DKFileAssociation_OpenModel(file); return true; }
-	if(file.indexOf(".osg") != -1 ){ DKFileAssociation_OpenModel(file); return true; }
-	if(file.indexOf(".wav") != -1 ){ DKFileAssociation_OpenAudio(file); return true; }
-	if(file.indexOf(".mp3") != -1 ){ DKFileAssociation_OpenAudio(file); return true; }
-	if(file.indexOf(".avi") != -1 ){ DKFileAssociation_OpenVideo(file); return true; }
-	if(file.indexOf(".mkv") != -1 ){ DKFileAssociation_OpenVideo(file); return true; }
-	if(file.indexOf(".mp4") != -1 ){ DKFileAssociation_OpenVideo(file); return true; }
+	if(file.indexOf(".js") !== -1 ){ DKFileAssociation_OpenJS(file); return true; }
+	if(file.indexOf(".html") !== -1 ){ DKFileAssociation_OpenHtml(file); return true; }
+	if(file.indexOf(".css") !== -1 ){ DKFileAssociation_OpenCss(file); return true; }
+	if(file.indexOf(".png") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".bmp") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".gif") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".jpeg") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".jpg") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".tiff") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".tif") !== -1 ){ DKFileAssociation_OpenImage(file); return true; }
+	if(file.indexOf(".osgt") !== -1 ){ DKFileAssociation_OpenModel(file); return true; }
+	if(file.indexOf(".osg") !== -1 ){ DKFileAssociation_OpenModel(file); return true; }
+	if(file.indexOf(".wav") !== -1 ){ DKFileAssociation_OpenAudio(file); return true; }
+	if(file.indexOf(".mp3") !== -1 ){ DKFileAssociation_OpenAudio(file); return true; }
+	if(file.indexOf(".avi") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
+	if(file.indexOf(".mkv") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
+	if(file.indexOf(".mp4") !== -1 ){ DKFileAssociation_OpenVideo(file); return true; }
 	DKFileAssociation_OpenText(file); return true;
 }
 

@@ -153,7 +153,7 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(frame).style.height = newheight.toString()+"rem";
 	byId(frame).style.backgroundColor = "rgb(150,150,150)";
 	byId(frame).style.borderColor = "rgb(0,0,0)";
-	if(DK_GetBrowser() != "RML"){
+	if(DK_GetBrowser() !== "RML"){
 		byId(frame).style.borderStyle = "solid";
 	}
 	byId(frame).style.borderWidth = "1rem";
@@ -248,8 +248,8 @@ function DKFrame_BringToFront()
 	
 	if(byId("DKFrame_frame") && byId("DKFrame_frame").contains(ele)){
 		//document.body.id = "body"; //TEMPORARY FIX
-		//if(DKWidget_GetLastChild("body") != "DKFrame_frame"){
-		if(document.body.lastchild != byId("DKFrame_frame")){	
+		//if(DKWidget_GetLastChild("body") !== "DKFrame_frame"){
+		if(document.body.lastchild !== byId("DKFrame_frame")){	
 			DKWidget_AppendChild("body", "DKFrame_frame");
 			return;
 		}
@@ -258,8 +258,8 @@ function DKFrame_BringToFront()
 		var frame = "DKFrame_frame"+i.toString();
 		if(!byId(frame)){ continue; }
 		if(byId(frame).contains(ele)){
-		//if(DKWidget_GetLastChild("body") != frame){
-		if(document.body.lastChild != byId(frame)){
+		//if(DKWidget_GetLastChild("body") !== frame){
+		if(document.body.lastChild !== byId(frame)){
 				DKWidget_AppendChild("body", frame);
 				return;
 			}

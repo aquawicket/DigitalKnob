@@ -6,7 +6,7 @@ function DKOS_Init() {
 		document.body.style.margin = "0px";
 		document.body.style.overflow = "hidden";
 		var OS = DK_GetOS();
-		if(OS != "iOS" && OS != "Android"){
+		if(OS !== "iOS" && OS !== "Android"){
 			/*
 			var screenwidth = screen.width;
 			var screenheight = screen.height;

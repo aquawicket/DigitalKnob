@@ -58,7 +58,7 @@ function SvnMenu_OnEvent(event)
 //////////////////////////////
 function SvnMenu_ValidateGit()
 {
-	if(DK_GetBrowser() != "RML"){ return; }
+	if(DK_GetBrowser() !== "RML"){ return; }
 	SVN("Looking for SVN\n");
 	//SVN(SVN+"\n");
 	if(!DKFile_Exists(SVN)){
@@ -74,7 +74,7 @@ function SvnMenu_ValidateGit()
 /////////////////////////////
 function SvnMenu_InstallGit()
 {
-	if(DK_GetBrowser() != "RML"){ return; }
+	if(DK_GetBrowser() !== "RML"){ return; }
 	SVN("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
 	
@@ -100,7 +100,7 @@ function SvnMenu_InstallGit()
 ////////////////////////////
 function SvnMenu_GitUpdate()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return;
 	}
 	
@@ -137,7 +137,7 @@ function SvnMenu_GitUpdate()
 ////////////////////////////
 function SvnMenu_GitCommit()
 {
-	if(DK_GetBrowser() != "CEF" && DK_GetBrowser() != "RML"){
+	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return;
 	}
 	

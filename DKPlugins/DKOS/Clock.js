@@ -36,11 +36,11 @@ function Clock_Update()
 		document.getElementById("time").style.color = "rgb(220,220,220)";
 		second_flag = true;
 	}
-	if(DK_GetTime() != clock_time){
+	if(DK_GetTime() !== clock_time){
 		clock_time = DK_GetTime();
 		document.getElementById("time").innerHTML = clock_time;
 	}
-	if(DK_GetDate() != clock_date){
+	if(DK_GetDate() !== clock_date){
 		clock_date = DK_GetDate();
 		document.getElementById("date").innerHTML = clock_date;
 	}

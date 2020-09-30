@@ -36,7 +36,7 @@ function DKTooltip_Show(id)
 {
 	setTimeout(function(){
 		var hover = DKWidget_GetHoverElement();
-		if(hover != id){
+		if(hover !== id){
 			DKClose("DKTooltip/DKTooltip.html");
 			return;
 		}

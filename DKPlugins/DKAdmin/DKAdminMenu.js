@@ -134,10 +134,10 @@ function DKAdminMenu_OnEvent(event)
 		var key = DK_GetValue(event);
 		//console.lof("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() === "RML"){
-			if(key != 72){ return; } //FIXME: why is this key code not 13?
+			if(key !== 72){ return; } //FIXME: why is this key code not 13?
 		}
 		else{
-			if(key != 13){ return; }
+			if(key !== 13){ return; }
 		}
 		DKAdminMenu_Run(DKWidget_GetValue("DKAdminMenu_Run"));
 	}

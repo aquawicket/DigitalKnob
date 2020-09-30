@@ -96,7 +96,7 @@ function DKWindow_IsFullscreen()
 }
 
 /////////////////////////////
-if(DK_GetBrowser() != "CEF"){
+if(DK_GetBrowser() !== "CEF"){
 	function DKWindow_SetHeight(h)
 	{
 		//FIXME - does not work
@@ -106,7 +106,7 @@ if(DK_GetBrowser() != "CEF"){
 }
 
 /////////////////////////////
-if(DK_GetBrowser() != "CEF"){
+if(DK_GetBrowser() !== "CEF"){
 	function DKWindow_SetWidth(w)
 	{
 		//FIXME - does not work
@@ -116,7 +116,7 @@ if(DK_GetBrowser() != "CEF"){
 }
 
 /////////////////////////////
-if(DK_GetBrowser() != "CEF"){
+if(DK_GetBrowser() !== "CEF"){
 	function DKWindow_SetX(x)
 	{
 		//FIXME - does not work
@@ -126,7 +126,7 @@ if(DK_GetBrowser() != "CEF"){
 }
 
 /////////////////////////////
-if(DK_GetBrowser() != "CEF"){
+if(DK_GetBrowser() !== "CEF"){
 	function DKWindow_SetY(y)
 	{
 		//FIXME - does not work
