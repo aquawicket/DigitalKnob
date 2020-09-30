@@ -69,7 +69,7 @@ function DKFileAssociation_OpenHtml(path)
 
 	//Parse the sting into an element
 	var temp = DKWidget_CreateElement("body", "temp", "temporary");
-	DKWidget_SetInnerHtml(temp, filedata);
+	byId(temp).innerHTML = filedata;
 
 	//if(DKWidget_GetNumChildren(temp) == 0){
 	//	console.error("Error loading path: "+id+": could not create node");

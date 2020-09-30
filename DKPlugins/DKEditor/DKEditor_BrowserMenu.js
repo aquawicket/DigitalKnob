@@ -60,7 +60,7 @@ function DKEditor_BrowserMenu_AddChrome()
 {
 	DKWidget_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Chrome");
 	byId("DKEditor_BrowserMenu_Chrome").class = "option";
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Chrome", "Chrome");
+	byId("DKEditor_BrowserMenu_Chrome").innerHTML = "Chrome";
 	byId("DKEditor_BrowserMenu_Chrome").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
 }
 
@@ -70,7 +70,7 @@ function DKEditor_BrowserMenu_AddFirefox()
 {
 	DKWidget_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_Firefox");
 	byId("DKEditor_BrowserMenu_Firefox").class = "option";
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Firefox", "Firefox");
+	byId("DKEditor_BrowserMenu_Firefox").innerHTML = "Firefox";
 	byId("DKEditor_BrowserMenu_Firefox").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
 }
 
@@ -79,7 +79,7 @@ function DKEditor_BrowserMenu_AddIE()
 {
 	DKWidget_CreateElement(byId("DKEditor/DKEditor_BrowserMenu.html"), "div", "DKEditor_BrowserMenu_IE");
 	byId("DKEditor_BrowserMenu_IE").class = "option";
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_IE", "Internet Explorer");
+	byId("DKEditor_BrowserMenu_IE").innerHTML = "Internet Explorer";
 	byId("DKEditor_BrowserMenu_IE").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
 }
 
@@ -88,7 +88,7 @@ function DKEditor_BrowserMenu_AddOpera()
 {
 	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Opera");
 	byId("DKEditor_BrowserMenu_Opera").class = "option";
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Opera", "Opera");
+	byId("DKEditor_BrowserMenu_Opera").innerHTML = "Opera";
 	byId("DKEditor_BrowserMenu_Opera").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
 }
 
@@ -97,6 +97,6 @@ function DKEditor_BrowserMenu_AddSafari()
 {
 	DKWidget_CreateElement("DKEditor/DKEditor_BrowserMenu.html", "div", "DKEditor_BrowserMenu_Safari");
 	byId("DKEditor_BrowserMenu_Safari").class = "option";
-	DKWidget_SetInnerHtml("DKEditor_BrowserMenu_Safari", "Safari");
+	byId("DKEditor_BrowserMenu_Safari").innerHTML = "Safari";
 	byId("DKEditor_BrowserMenu_Safari").addEventListener("click", DKEditor_BrowserMenu_OnEvent);
 }

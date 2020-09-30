@@ -66,5 +66,5 @@ function DKSolutionRename_Rename()
 		return; 
 	}
 	byId(DKSolutionRename_id).value = newvalue;
-	DKWidget_SetInnerHtml(DKSolutionRename_id, newhtml);
+	byId(DKSolutionRename_id).innerHTML = newhtml;
 }

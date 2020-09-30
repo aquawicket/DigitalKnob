@@ -16,7 +16,7 @@ function DKAdminMenu_Init()
 		byId("OpenNotepad").addEventListener("click", DKAdminMenu_OnEvent);
 		byId("DKAdminMenu_Run").addEventListener("keydown", DKAdminMenu_OnEvent);
 		byId("Git").addEventListener("click", DKAdminMenu_OnEvent);
-		
+
 		DKWidget_SetFocus("DKAdminMenu_Run");
 	});
 	
@@ -155,7 +155,7 @@ function DKAdminMenu_Add(title, code)
 {
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DKWidget_CreateElement("DKAdmin/DKAdminMenu.html", "div", "DKAdminMenu_item");
-	DKWidget_SetInnerHtml(ele, title);
+	byId(ele).innerHTML = title;
 }
 
 /////////////////////////////////

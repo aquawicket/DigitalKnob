@@ -90,7 +90,7 @@ function DKHandles_OnEvent(event)
 /////////////////////////////////////
 function DKHandles_UpdateWindowList()
 {
-	DKWidget_SetInnerHtml("windows", "");
+	byId("windows").innerHTML = "";
 	var str = DKHandles_GetWindows();
 	if(!str){ return; }
 	//console.log("WINDOW LIST: "+str+"\n");
@@ -103,7 +103,7 @@ function DKHandles_UpdateWindowList()
 		byId(element).value = arry[i];
 		DKWidget_SetProperty(element, "white-space", "nowrap");
 		byId(element, "click", DKHandles_OnEvent);
-		DKWidget_SetInnerHtml(element,arry[i]);
+		byId(element).innerHTML = arry[i];
 	}
 }
 
@@ -130,11 +130,11 @@ function DKHandles_UpdateProperties(handle)
 	DKWidget_SetValue("windowindex", windowindex);
 	
 	var top = DKHandles_GetTop(handle);
-	DKWidget_SetInnerHtml("Handle_top", "Top: "+top);
+	byId("Handle_top").innerHTML = "Top: "+top;
 	var left = DKHandles_GetLeft(handle);
-	DKWidget_SetInnerHtml("Handle_left", "Left: "+left);
+	byId("Handle_left").innerHTML = "Left: "+left;
 	var right = DKHandles_GetRight(handle);
-	DKWidget_SetInnerHtml("Handle_right", "Right: "+right);
+	byId("Handle_right").innerHTML = "Right: "+right;
 	var bottom = DKHandles_GetBottom(handle);
-	DKWidget_SetInnerHtml("Handle_bottom", "Bottom: "+bottom);
+	byId("Handle_bottom").innerHTML = "Bottom: "+bottom;
 }

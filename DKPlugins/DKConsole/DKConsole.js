@@ -27,7 +27,7 @@ function DKConsole_OnEvent(event)
 {	
 	DKDEBUG("DKConsole_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id == "DKConsole_Clear"){
-		DKWidget_SetInnerHtml("DKConsole_Content","");
+		byId("DKConsole_Content").innerHTML = ""; //clear
 	}
 	if(event.currentTarget.id == "DKConsole_Close"){
 		DKClose("DKConsole/DKConsole.js");
@@ -49,6 +49,6 @@ function DKConsole_Notify(string)
 	var line = DKWidget_CreateElement("DKConsole_Content", "a", "DKConsole_line");
 	document.getElementById(line).style.display = "block";
 	document.getElementById(line).style.color = DKConsole_color;
-	DKWidget_SetInnerHtml(line, string);
+	byId(line).innerHTML = string;
 	DKWidget_ScrollToBottom(line);
 }

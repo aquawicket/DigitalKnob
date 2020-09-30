@@ -163,7 +163,7 @@ function DKBuildGUI_BuildSelect()
 function DKBuildGUI_UpdateLibs()
 {
 	///// Update Libraries
-	DKWidget_SetInnerHtml("LibList", ""); //clear
+	byId("LibList").innerHTML = ""; //clear
 
 	return;
 	var result = DK_CallFunc("DKBuildGUI::GetLibList", "");
@@ -174,13 +174,13 @@ function DKBuildGUI_UpdateLibs()
 	//Add Libraries
 	var id = DKWidget_CreateElement("LibList", "option", "BuildLibraries");
 	byId(id).value = "Build All Libraries";
-	DKWidget_SetInnerHtml(id, "Build All Libraries");
+	byId(id).innerHTML = "Build All Libraries";
 	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
 		var id2 = DKWidget_CreateElement("LibList", "option", "LIBRARY");
 		byId(id2).value = libs[i]);
-		DKWidget_SetInnerHtml(id2, libs[i]);
+		byId(id2).innerHTML = libs[i];
 		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);
 	}
 }
