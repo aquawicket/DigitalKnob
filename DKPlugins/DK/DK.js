@@ -40,25 +40,25 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 
 //https://stackoverflow.com/a/11035042/688352
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n"); }
-	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+DK_GetBrowser()+"\n"); }
-	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+DK_GetBrowser()+"\n"); }
-	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+DK_GetBrowser()+"\n"); return ""; }
-	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()+"\n"); return ""; }
+	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()); }
+	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+DK_GetBrowser()); }
+	var DK_CallFunc = function(var1, var2, var3){ console.warn("DK_CallFunc(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_Queue = function(var1, var2, var3){ console.warn("DK_Queue(): not available for "+DK_GetBrowser()); }
+	var DK_LeftClick = function(){ console.warn("DK_LeftClick(): not available for "+DK_GetBrowser()); }
+	var DK_RightClick = function(){ console.warn("DK_RightClick(): not available for "+DK_GetBrowser()); }
+	var DK_SetCursorPos = function(){ console.warn("DK_SetCursorPos(): not available for "+DK_GetBrowser()); }
+	var DKHook_GetWindows = function(){ console.warn("DKHook_GetWindows(): not available for "+DK_GetBrowser()); }
+	var DK_Crash = function(){ console.warn("DK_Crash(): not available for "+DK_GetBrowser()); }
+	var DK_LogGuiConsole = function(){ console.warn("DK_LogGuiConsole(): not available for "+DK_GetBrowser()); }
+	var DK_GetFunctions = function(){ console.warn("DK_GetFunctions(): not available for "+DK_GetBrowser()); }
+	var DK_PrintFunctions = function(){ console.warn("DK_PrintFunctions(): not available for "+DK_GetBrowser()); }
+	var DK_GetPixelUnderMouse = function(){ console.warn("DK_GetPixelUnderMouse(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_ShowConsole = function(){ console.warn("DK_ShowConsole(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_HideConsole = function(){ console.warn("DK_HideConsole(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_CpuUsed = function(){console.warn("DK_CpuUsed(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_CpuUsedByApp = function(){ console.warn("DK_CpuUsedByApp(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+DK_GetBrowser()); return ""; }
+	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()); return ""; }
 }
 
 /*
@@ -239,9 +239,9 @@ function Log(string, lvl)
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 
-console.log("*** DigitalKnob ***\n");
-console.log("Browser = "+DK_GetBrowser()+"\n");
-console.log("JSEngine = "+DK_GetJSEngine()+"\n\n");
+console.log("*** DigitalKnob ***");
+console.log("Browser = "+DK_GetBrowser());
+console.log("JSEngine = "+DK_GetJSEngine()+"\n");
 
 
 /////////////////////////////////
