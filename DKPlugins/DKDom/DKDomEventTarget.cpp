@@ -8,15 +8,15 @@
 bool DKDomEventTarget::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);
-	DKDuktape::AttachFunction("DKDomEventTarget_removeEventListener", DKDomEventTarget::removeEventListener);
-	DKDuktape::AttachFunction("DKDomEventTarget_dispatchEvent", DKDomEventTarget::dispatchEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_removeEventListener", DKDomEventTarget::removeEventListener);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_dispatchEvent", DKDomEventTarget::dispatchEvent);
 
 	// non-standard
-	DKDuktape::AttachFunction("DKDomEventTarget_id", DKDomEventTarget::id);
-	DKDuktape::AttachFunction("DKDomEventTarget_idLike", DKDomEventTarget::idLike);
-	DKDuktape::AttachFunction("DKDomEventTarget_type", DKDomEventTarget::type);
-	DKDuktape::AttachFunction("DKDomEventTarget_value", DKDomEventTarget::value);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_id", DKDomEventTarget::id);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_idLike", DKDomEventTarget::idLike);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_type", DKDomEventTarget::type);
+	DKDuktape::AttachFunction("DKCPP_DKDomEventTarget_value", DKDomEventTarget::value);
 	
 	DKClass::DKCreate("DKDom/DKDomEventTarget.js");
 	return true;

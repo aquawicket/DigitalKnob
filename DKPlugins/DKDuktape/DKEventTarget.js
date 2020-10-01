@@ -25,7 +25,7 @@ var EventTarget = function(pointer)
 		if(stored_events.indexOf(this) < 0){
 			stored_events.push(this);
 		}
-		DKEventTarget_addEventListener(this.pointer, type, callback);
+		DKCPP_DKDuktape_DKEventTarget_addEventListener(this.pointer, type, callback);
 		if(!(type in this.listeners)){
 			this.listeners[type] = [];
 		}
@@ -33,7 +33,7 @@ var EventTarget = function(pointer)
 	};
 	EventTarget.prototype.removeEventListener = function(type, callback, useCapture){
 		//console.warn("removeEventListener this.pointer = "+this.pointer);
-		DKEventTarget_removeEventListener(this.pointer, type, callback);
+		DKCPP_DKDuktape_DKEventTarget_removeEventListener(this.pointer, type, callback);
 		if(!(type in this.listeners)){
 			return;
 		}

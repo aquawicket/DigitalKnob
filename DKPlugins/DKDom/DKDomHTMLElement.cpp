@@ -8,12 +8,12 @@
 bool DKDomHTMLElement::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomHTMLElement_focus", DKDomHTMLElement::focus);
-	DKDuktape::AttachFunction("DKDomHTMLElement_offsetHeight", DKDomHTMLElement::offsetHeight);
-	DKDuktape::AttachFunction("DKDomHTMLElement_offsetLeft", DKDomHTMLElement::offsetLeft);
-	DKDuktape::AttachFunction("DKDomHTMLElement_offsetParent", DKDomHTMLElement::offsetParent);
-	DKDuktape::AttachFunction("DKDomHTMLElement_offsetTop", DKDomHTMLElement::offsetTop);
-	DKDuktape::AttachFunction("DKDomHTMLElement_offsetWidth", DKDomHTMLElement::offsetWidth);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_focus", DKDomHTMLElement::focus);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_offsetHeight", DKDomHTMLElement::offsetHeight);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_offsetLeft", DKDomHTMLElement::offsetLeft);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_offsetParent", DKDomHTMLElement::offsetParent);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_offsetTop", DKDomHTMLElement::offsetTop);
+	DKDuktape::AttachFunction("DKCPP_DKDomHTMLElement_offsetWidth", DKDomHTMLElement::offsetWidth);
 
 	DKClass::DKCreate("DKDom/DKDomHTMLElement.js");
 	return true;

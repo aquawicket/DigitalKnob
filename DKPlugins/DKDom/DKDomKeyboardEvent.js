@@ -6,97 +6,97 @@ var KeyboardEvent = function(pointer)
 	// Properties
 	Object.defineProperty(this, "altKey", {
 		get: function(){ 
-			return DKDomKeyboardEvent_altKey(pointer);
+			return DKCPP_DKDomKeyboardEvent_altKey(pointer);
 		}
 	});
 	Object.defineProperty(this, "code", {
 		get: function(){ 
-			return DKDomKeyboardEvent_code(pointer);
+			return DKCPP_DKDomKeyboardEvent_code(pointer);
 		}
 	});
 	Object.defineProperty(this, "ctrlKey", {
 		get: function(){ 
-			return DKDomKeyboardEvent_ctrlKey(pointer);
+			return DKCPP_DKDomKeyboardEvent_ctrlKey(pointer);
 		}
 	});
 	Object.defineProperty(this, "isComposing", {
 		get: function(){ 
-			return DKDomKeyboardEvent_isComposing(pointer);
+			return DKCPP_DKDomKeyboardEvent_isComposing(pointer);
 		}
 	});
 	Object.defineProperty(this, "key", {
 		get: function(){ 
-			return DKDomKeyboardEvent_key(pointer);
+			return DKCPP_DKDomKeyboardEvent_key(pointer);
 		}
 	});
 	Object.defineProperty(this, "locale", {
 		get: function(){ 
-			return DKDomKeyboardEvent_locale(pointer);
+			return DKCPP_DKDomKeyboardEvent_locale(pointer);
 		}
 	});
 	Object.defineProperty(this, "location", {
 		get: function(){ 
-			return DKDomKeyboardEvent_location(pointer);
+			return DKCPP_DKDomKeyboardEvent_location(pointer);
 		}
 	});
 	Object.defineProperty(this, "metaKey", {
 		get: function(){ 
-			return DKDomKeyboardEvent_metaKey(pointer);
+			return DKCPP_DKDomKeyboardEvent_metaKey(pointer);
 		}
 	});
 	Object.defineProperty(this, "repeat", {
 		get: function(){ 
-			return DKDomKeyboardEvent_repeat(pointer);
+			return DKCPP_DKDomKeyboardEvent_repeat(pointer);
 		}
 	});
 	Object.defineProperty(this, "shiftKey", {
 		get: function(){ 
-			return DKDomKeyboardEvent_shiftKey(pointer);
+			return DKCPP_DKDomKeyboardEvent_shiftKey(pointer);
 		}
 	});
 
 	// Methods
 	KeyboardEvent.prototype.getModifierState = function(){
-		DKDomKeyboardEvent_getModifierState(pointer);
+		DKCPP_DKDomKeyboardEvent_getModifierState(pointer);
 	};
 	
 	// Obsolete methods
 	KeyboardEvent.prototype.initKeyEvent = function(){
-		DKDomKeyboardEvent_initKeyEvent(pointer);
+		DKCPP_DKDomKeyboardEvent_initKeyEvent(pointer);
 	};
 	KeyboardEvent.prototype.initKeyboardEvent = function(){
-		DKDomKeyboardEvent_initKeyboardEvent(pointer);
+		DKCPP_DKDomKeyboardEvent_initKeyboardEvent(pointer);
 	};
 	
 	//Obsolete properties
 	Object.defineProperty(this, "char", {
 		get: function(){ 
-			return DKDomKeyboardEvent_char(pointer);
+			return DKCPP_DKDomKeyboardEvent_char(pointer);
 		}
 	});
 	Object.defineProperty(this, "charCode", {
 		get: function(){ 
-			return DKDomKeyboardEvent_charCode(pointer);
+			return DKCPP_DKDomKeyboardEvent_charCode(pointer);
 		}
 	});
 	Object.defineProperty(this, "keyCode", {
 		get: function(){ 
-			return DKDomKeyboardEvent_keyCode(pointer);
+			return DKCPP_DKDomKeyboardEvent_keyCode(pointer);
 		}
 	});
 	Object.defineProperty(this, "keyIdentifier", {
 		get: function(){ 
-			return DKDomKeyboardEvent_keyIdentifier(pointer);
+			return DKCPP_DKDomKeyboardEvent_keyIdentifier(pointer);
 		}
 	});
 	Object.defineProperty(this, "keyLocation", {
 		get: function(){ 
-			return DKDomKeyboardEvent_keyLocation(pointer);
+			return DKCPP_DKDomKeyboardEvent_keyLocation(pointer);
 		}
 	});
 	Object.defineProperty(this, "which", {
 		get: function(){ 
-			return DKDomKeyboardEvent_which(pointer);
+			return DKCPP_DKDomKeyboardEvent_which(pointer);
 		}
 	});
 	

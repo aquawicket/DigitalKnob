@@ -62,7 +62,7 @@ var Navigator = function(pointer)
 		value: "TODO",
 	});
 	Object.defineProperty(this, "platform",{ //Read only
-		get: function(){ return DKDomNavigator_platform(); } 
+		get: function(){ return DKCPP_DKDomNavigator_platform(); } 
 	});
 	Object.defineProperty(this, "plugins",{ //Read only
 		value: "TODO",

@@ -37,7 +37,7 @@ var EventTarget = function(pointer)
 			if(this.listeners[type].indexOf(callback) === -1){ //Do not allow duplicate entries
 				this.listeners[type].push(callback);
 			}
-			DKDomEventTarget_addEventListener(pointer, type, callback); //Add or overwrite the event in RmlUi
+			DKCPP_DKDomEventTarget_addEventListener(pointer, type, callback); //Add or overwrite the event in RmlUi
 		} 
 	});
 	Object.defineProperty(this, "removeEventListener", {
@@ -51,7 +51,7 @@ var EventTarget = function(pointer)
 					//console.log(stack[i]);
 					stack.splice(i, 1);
 					this.listeners[type].splice(i, 1);
-					DKDomEventTarget_removeEventListener(pointer, type, callback); //Remove the event in RmlUi
+					DKCPP_DKDomEventTarget_removeEventListener(pointer, type, callback); //Remove the event in RmlUi
 					return;
 				}
 			}

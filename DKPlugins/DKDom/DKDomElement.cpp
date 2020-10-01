@@ -9,18 +9,18 @@
 bool DKDomElement::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomElement_clientHeight", DKDomElement::clientHeight);
-	DKDuktape::AttachFunction("DKDomElement_clientLeft", DKDomElement::clientLeft);
-	DKDuktape::AttachFunction("DKDomElement_clientTop", DKDomElement::clientTop);
-	DKDuktape::AttachFunction("DKDomElement_clientWidth", DKDomElement::clientWidth);
-	DKDuktape::AttachFunction("DKDomElement_getAttribute", DKDomElement::getAttribute);
-	DKDuktape::AttachFunction("DKDomElement_getElementsByClassName", DKDomElement::getElementsByClassName);
-	DKDuktape::AttachFunction("DKDomElement_getElementsByTagName", DKDomElement::getElementsByTagName);
-	DKDuktape::AttachFunction("DKDomElement_hasAttribute", DKDomElement::hasAttribute);
-	DKDuktape::AttachFunction("DKDomElement_innerHTML", DKDomElement::innerHTML);
-	DKDuktape::AttachFunction("DKDomElement_outerHTML", DKDomElement::outerHTML);
-	DKDuktape::AttachFunction("DKDomElement_setAttribute", DKDomElement::setAttribute);
-	DKDuktape::AttachFunction("DKDomElement_tagName", DKDomElement::tagName);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_clientHeight", DKDomElement::clientHeight);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_clientLeft", DKDomElement::clientLeft);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_clientTop", DKDomElement::clientTop);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_clientWidth", DKDomElement::clientWidth);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_getAttribute", DKDomElement::getAttribute);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_getElementsByClassName", DKDomElement::getElementsByClassName);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_getElementsByTagName", DKDomElement::getElementsByTagName);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_hasAttribute", DKDomElement::hasAttribute);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_innerHTML", DKDomElement::innerHTML);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_outerHTML", DKDomElement::outerHTML);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_setAttribute", DKDomElement::setAttribute);
+	DKDuktape::AttachFunction("DKCPP_DKDomElement_tagName", DKDomElement::tagName);
 	
 	DKClass::DKCreate("DKDom/DKDomElement.js");
 	return true;

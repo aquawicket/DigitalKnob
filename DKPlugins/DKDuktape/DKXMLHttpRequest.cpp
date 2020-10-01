@@ -8,7 +8,7 @@
 bool DKXMLHttpRequest::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKXMLHttpRequest_send", DKXMLHttpRequest::send);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKXMLHttpRequest_send", DKXMLHttpRequest::send);
 	
 	DKClass::DKCreate("DKDuktape/DKXMLHttpRequest.js");
 	return true;

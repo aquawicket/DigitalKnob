@@ -9,12 +9,12 @@
 bool DKDomWindow::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomWindow_devicePixelRatio", DKDomWindow::devicePixelRatio);
-	DKDuktape::AttachFunction("DKDomWindow_innerHeight", DKDomWindow::innerHeight);
-	DKDuktape::AttachFunction("DKDomWindow_innerWidth", DKDomWindow::innerWidth);
-	DKDuktape::AttachFunction("DKDomWindow_name", DKDomWindow::name);
-	DKDuktape::AttachFunction("DKDomWindow_addEventListener", DKDomWindow::addEventListener);
-	DKDuktape::AttachFunction("DKDomWindow_removeEventListener", DKDomWindow::removeEventListener);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_devicePixelRatio", DKDomWindow::devicePixelRatio);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_innerHeight", DKDomWindow::innerHeight);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_innerWidth", DKDomWindow::innerWidth);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_name", DKDomWindow::name);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_addEventListener", DKDomWindow::addEventListener);
+	DKDuktape::AttachFunction("DKCPP_DKDomWindow_removeEventListener", DKDomWindow::removeEventListener);
 	
 	DKClass::DKCreate("DKDom/DKDomWindow.js");
 	

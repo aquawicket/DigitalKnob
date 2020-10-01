@@ -4,176 +4,176 @@
 var Window = function(pointer)
 {
 	Object.defineProperty(this, "closed", { 
-		get: function(){ /* return DKDomWindow_closed(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_closed(pointer); */ } 
 	});
 	Object.defineProperty(this, "console", {
 		get: function(){ return console; } 
 	});
 	Object.defineProperty(this, "controllers", {
-		get: function(){ /* return DKDomWindow_controllers(pointer); */ }
+		get: function(){ /* return DKCPP_DKDomWindow_controllers(pointer); */ }
 	});
 	Object.defineProperty(this, "customElements", {
-		get: function(){ /* return DKDomWindow_customElements(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_customElements(pointer); */ } 
 	});
 	Object.defineProperty(this, "crypto", {
-		get: function(){ /* return DKDomWindow_crypto(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_crypto(pointer); */ } 
 	});
 	Object.defineProperty(this, "devicePixelRatio", {
-		get: function()   {  return DKDomWindow_devicePixelRatio(pointer);      },
-		set: function(val){  return DKDomWindow_devicePixelRatio(pointer, val); }
+		get: function()   {  return DKCPP_DKDomWindow_devicePixelRatio(pointer);      },
+		set: function(val){  return DKCPP_DKDomWindow_devicePixelRatio(pointer, val); }
 	});
 	Object.defineProperty(this, "dialogArguments", {
-		get: function(){ /* return DKDomWindow_dialogArguments(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_dialogArguments(pointer); */ } 
 	});
 	Object.defineProperty(this, "document", {
 		get: function(){ return document; } 
 	});
 	Object.defineProperty(this, "event", {
-		get: function(){ /* return DKDomWindow_event(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_event(pointer); */ } 
 	});
 	Object.defineProperty(this, "frameElement", {
-		get: function(){ /* return DKDomWindow_frameElement(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_frameElement(pointer); */ } 
 	});
 	Object.defineProperty(this, "frames", {
-		get: function(){ /* return DKDomWindow_frames(pointer); */ }
+		get: function(){ /* return DKCPP_DKDomWindow_frames(pointer); */ }
 	});
 	Object.defineProperty(this, "fullScreen", {
-		get: function()   { /* return DKDomWindow_fullScreen(pointer); */      },
-		set: function(val){ /* return DKDomWindow_fullScreen(pointer, val); */ }
+		get: function()   { /* return DKCPP_DKDomWindow_fullScreen(pointer); */      },
+		set: function(val){ /* return DKCPP_DKDomWindow_fullScreen(pointer, val); */ }
 	});
 	Object.defineProperty(this, "history", {
-		get: function(){ /* return DKDomWindow_history(pointer); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_history(pointer); */ } 
 	});
 	Object.defineProperty(this, "innerHeight", {
-		get: function(){ return DKDomWindow_innerHeight(); } 
+		get: function(){ return DKCPP_DKDomWindow_innerHeight(); } 
 	});
 	Object.defineProperty(this, "innerWidth", {
-		get: function(){ return DKDomWindow_innerWidth(); } 
+		get: function(){ return DKCPP_DKDomWindow_innerWidth(); } 
 	});
 	Object.defineProperty(this, "isSecureContext", {
-		get: function(){ /* return DKDomWindow_isSecureContext(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_isSecureContext(); */ } 
 	});
 	Object.defineProperty(this, "length", {
-		get: function(){ /* return DKDomWindow_length(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_length(); */ } 
 	});
 	Object.defineProperty(this, "location", {
 		get: function(){ return location; } 
 	});
 	Object.defineProperty(this, "locationbar", {
-		get: function(){ /* return DKDomWindow_locationbar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_locationbar(); */ } 
 	});
 	Object.defineProperty(this, "localStorage", {
-		get: function(){ /* return DKDomWindow_localStorage(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_localStorage(); */ } 
 	});
 	Object.defineProperty(this, "menubar", {
-		get: function(){ /* return DKDomWindow_menubar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_menubar(); */ } 
 	});
 	Object.defineProperty(this, "messageManager", {
-		get: function(){ /* return DKDomWindow_messageManager(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_messageManager(); */ } 
 	});
 	Object.defineProperty(this, "mozAnimationStartTime", {
-		get: function(){ /* return DKDomWindow_mozAnimationStartTime(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_mozAnimationStartTime(); */ } 
 	});
 	Object.defineProperty(this, "mozInnerScreenX", {
-		get: function(){ /* return DKDomWindow_mozInnerScreenX(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_mozInnerScreenX(); */ } 
 	});
 	Object.defineProperty(this, "mozInnerScreenY", {
-		get: function(){ /* return DKDomWindow_mozInnerScreenX(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_mozInnerScreenX(); */ } 
 	});
 	Object.defineProperty(this, "mozPaintCount", {
-		get: function(){ /* return DKDomWindow_mozPaintCount(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_mozPaintCount(); */ } 
 	});
 	Object.defineProperty(this, "name", {
-		get: function()   { return DKDomWindow_name();    },
-		set: function(val){ return DKDomWindow_name(val); }  
+		get: function()   { return DKCPP_DKDomWindow_name();    },
+		set: function(val){ return DKCPP_DKDomWindow_name(val); }  
 	});
 	Object.defineProperty(this, "navigator", {
 		get: function(){ return navigator; } 
 	});
 	Object.defineProperty(this, "opener", {
-		get: function(){ /* return DKDomWindow_opener(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_opener(); */ } 
 	});
 	Object.defineProperty(this, "orientation", {
-		get: function(){ /* return DKDomWindow_orientation(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_orientation(); */ } 
 	});
 	Object.defineProperty(this, "outerHeight", {
-		get: function(){ /* return DKDomWindow_outerHeight(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_outerHeight(); */ } 
 	});
 	Object.defineProperty(this, "outerWidth", {
-		get: function(){ /* return DKDomWindow_outerWidth(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_outerWidth(); */ } 
 	});
 	Object.defineProperty(this, "pageXOffset", {
-		get: function(){ /* return DKDomWindow_pageXOffset(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_pageXOffset(); */ } 
 	});
 	Object.defineProperty(this, "pageYOffset", {
-		get: function(){ /* return DKDomWindow_pageYOffset(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_pageYOffset(); */ } 
 	});
 	Object.defineProperty(this, "parent", {
-		get: function(){ /* return DKDomWindow_parent(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_parent(); */ } 
 	});
 	Object.defineProperty(this, "performance", {
-		get: function(){ /* return DKDomWindow_performance(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_performance(); */ } 
 	});
 	Object.defineProperty(this, "personalbar", {
-		get: function(){ /* return DKDomWindow_personalbar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_personalbar(); */ } 
 	});
 	Object.defineProperty(this, "returnValue", {
-		get: function(){ /* return DKDomWindow_returnValue(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_returnValue(); */ } 
 	});
 	Object.defineProperty(this, "screen", {
 		get: function(){ return screen; } 
 	});
 	Object.defineProperty(this, "screenX", {
-		get: function(){ /* return DKDomWindow_screenX(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_screenX(); */ } 
 	});
 	Object.defineProperty(this, "screenY", {
-		get: function(){ /* return DKDomWindow_screenY(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_screenY(); */ } 
 	});
 	Object.defineProperty(this, "scrollbars", {
-		get: function(){ /* return DKDomWindow_scrollbars(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_scrollbars(); */ } 
 	});
 	Object.defineProperty(this, "scrollMaxX", {
-		get: function(){ /* return DKDomWindow_scrollMaxX(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_scrollMaxX(); */ } 
 	});
 	Object.defineProperty(this, "scrollMaxY", {
-		get: function(){ /* return DKDomWindow_scrollMaxY(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_scrollMaxY(); */ } 
 	});
 	Object.defineProperty(this, "scrollX", {
-		get: function(){ /* return DKDomWindow_scrollX(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_scrollX(); */ } 
 	});
 	Object.defineProperty(this, "scrollY", {
-		get: function(){ /* return DKDomWindow_scrollY(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_scrollY(); */ } 
 	});
 	Object.defineProperty(this, "self", {
-		get: function(){ /* return DKDomWindow_self(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_self(); */ } 
 	});
 	Object.defineProperty(this, "sessionStorage", {
-		get: function(){ /* return DKDomWindow_sessionStorage(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_sessionStorage(); */ } 
 	});
 	Object.defineProperty(this, "sidebar", {
-		get: function(){ /* return DKDomWindow_sidebar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_sidebar(); */ } 
 	});
 	Object.defineProperty(this, "speechSynthesis", {
-		get: function(){ /* return DKDomWindow_speechSynthesis(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_speechSynthesis(); */ } 
 	});
 	Object.defineProperty(this, "status", {
-		get: function()   { /* return DKDomWindow_status(); */   },
-		set: function(val){ /* return DKDomWindow_setStatus(); */ }
+		get: function()   { /* return DKCPP_DKDomWindow_status(); */   },
+		set: function(val){ /* return DKCPP_DKDomWindow_setStatus(); */ }
 	});
 	Object.defineProperty(this, "statusbar", {
-		get: function(){ /* return DKDomWindow_statusbar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_statusbar(); */ } 
 	});
 	Object.defineProperty(this, "toolbar", {
-		get: function(){ /* return DKDomWindow_toolbar(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_toolbar(); */ } 
 	});
 	Object.defineProperty(this, "top", {
 		get: function(){ return this; } 
 	});
 	Object.defineProperty(this, "visualViewport", {
-		get: function(){ /* return DKDomWindow_visualViewport(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_visualViewport(); */ } 
 	});
 	Object.defineProperty(this, "window", {
-		get: function(){ /* return DKDomWindow_window(); */ } 
+		get: function(){ /* return DKCPP_DKDomWindow_window(); */ } 
 	}); 
 	
 	Window.prototype.alert = function(msg){ console.warn("alert: "+msg); }

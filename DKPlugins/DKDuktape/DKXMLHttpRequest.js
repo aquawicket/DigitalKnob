@@ -14,7 +14,7 @@ var XMLHttpRequest = function(){
 		this.readyState = 4;
 		this.status = 200;
 		this.statusText = "TODO";
-		this.responseText = DKXMLHttpRequest_send(this.method, this.url, this.async);
+		this.responseText = DKCPP_DKDuktape_DKXMLHttpRequest_send(this.method, this.url, this.async);
 		this.onreadystatechange();
 	}
 }

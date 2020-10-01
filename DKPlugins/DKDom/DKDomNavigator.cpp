@@ -7,9 +7,9 @@
 bool DKDomNavigator::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomNavigator_onLine", DKDomNavigator::onLine);
-	DKDuktape::AttachFunction("DKDomNavigator_platform", DKDomNavigator::platform);
-	DKDuktape::AttachFunction("DKDomNavigator_productSub", DKDomNavigator::productSub);
+	DKDuktape::AttachFunction("DKCPP_DKDomNavigator_onLine", DKDomNavigator::onLine);
+	DKDuktape::AttachFunction("DKCPP_DKDomNavigator_platform", DKDomNavigator::platform);
+	DKDuktape::AttachFunction("DKCPP_DKDomNavigator_productSub", DKDomNavigator::productSub);
 	
 	DKClass::DKCreate("DKDom/DKDomNavigator.js");
 	return true;

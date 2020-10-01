@@ -6,18 +6,18 @@ var Document = function(pointer)
 	// Properties
 	Object.defineProperty(this, "body", {
 		get: function(){
-			var address = DKDomDocument_body();
+			var address = DKCPP_DKDomDocument_body();
 			if(!address){ return; }
 			return new HTMLElement(address);
 		},
 		set: function(){
 			if(!address){ return; }
-			return DKDomDocument_body(address); //TODO
+			return DKCPP_DKDomDocument_body(address); //TODO
 		} 
 	});
 	Object.defineProperty(this, "documentElement", {
 		get: function(){ 
-			var address = DKDomDocument_documentElement();
+			var address = DKCPP_DKDomDocument_documentElement();
 			if(!address){ return; }
 			return new HTMLElement(address);
 		} 
@@ -26,18 +26,18 @@ var Document = function(pointer)
 	
 	// Methods
 	Document.prototype.createElement = function(tag){
-		var address = DKDomDocument_createElement(tag);
+		var address = DKCPP_DKDomDocument_createElement(tag);
 		if(!address){ return; }
 		return new HTMLElement(address);
 	}
 	Document.prototype.getElementById = function(id){
-		var address = DKDomDocument_getElementById(id);
+		var address = DKCPP_DKDomDocument_getElementById(id);
 		if(!address){ return; }
 		return new HTMLElement(address);
 	}
 
 	Document.prototype.getElementsByTagName = function(tag){
-		var addresses = DKDomDocument_getElementsByTagName(tag);
+		var addresses = DKCPP_DKDomDocument_getElementsByTagName(tag);
 		if(!addresses){ return; }
 		return new HTMLCollection(addresses);
 	}

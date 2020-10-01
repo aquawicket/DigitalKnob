@@ -12,35 +12,35 @@ bool DKDomMouseEvent::Init()
 	DKDEBUGFUNC();
 
 	// Properties
-	DKDuktape::AttachFunction("DKDomMouseEvent_altKey", DKDomMouseEvent::altKey);
-	DKDuktape::AttachFunction("DKDomMouseEvent_button", DKDomMouseEvent::button);
-	DKDuktape::AttachFunction("DKDomMouseEvent_buttons", DKDomMouseEvent::buttons);
-	DKDuktape::AttachFunction("DKDomMouseEvent_clientX", DKDomMouseEvent::clientX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_clientY", DKDomMouseEvent::clientY);
-	DKDuktape::AttachFunction("DKDomMouseEvent_ctrlKey", DKDomMouseEvent::ctrlKey);
-	DKDuktape::AttachFunction("DKDomMouseEvent_metaKey", DKDomMouseEvent::metaKey);
-	DKDuktape::AttachFunction("DKDomMouseEvent_movementX", DKDomMouseEvent::movementX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_movementY", DKDomMouseEvent::movementY);
-	DKDuktape::AttachFunction("DKDomMouseEvent_offsetX", DKDomMouseEvent::offsetX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_offsetY", DKDomMouseEvent::offsetY);
-	DKDuktape::AttachFunction("DKDomMouseEvent_offsetX", DKDomMouseEvent::offsetX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_pageX", DKDomMouseEvent::pageX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_pageY", DKDomMouseEvent::pageY);
-	DKDuktape::AttachFunction("DKDomMouseEvent_region", DKDomMouseEvent::region);
-	DKDuktape::AttachFunction("DKDomMouseEvent_relatedTarget", DKDomMouseEvent::relatedTarget);
-	DKDuktape::AttachFunction("DKDomMouseEvent_screenX", DKDomMouseEvent::screenX);
-	DKDuktape::AttachFunction("DKDomMouseEvent_screenY", DKDomMouseEvent::screenY);
-	DKDuktape::AttachFunction("DKDomMouseEvent_shiftKey", DKDomMouseEvent::shiftKey);
-	DKDuktape::AttachFunction("DKDomMouseEvent_which", DKDomMouseEvent::which);
-	DKDuktape::AttachFunction("DKDomMouseEvent_mozPressure", DKDomMouseEvent::mozPressure);
-	DKDuktape::AttachFunction("DKDomMouseEvent_mozIputSource", DKDomMouseEvent::mozInputSource);
-	DKDuktape::AttachFunction("DKDomMouseEvent_webkitForce", DKDomMouseEvent::webkitForce);
-	DKDuktape::AttachFunction("DKDomMouseEvent_x", DKDomMouseEvent::x);
-	DKDuktape::AttachFunction("DKDomMouseEvent_y", DKDomMouseEvent::y);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_altKey", DKDomMouseEvent::altKey);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_button", DKDomMouseEvent::button);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_buttons", DKDomMouseEvent::buttons);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_clientX", DKDomMouseEvent::clientX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_clientY", DKDomMouseEvent::clientY);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_ctrlKey", DKDomMouseEvent::ctrlKey);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_metaKey", DKDomMouseEvent::metaKey);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_movementX", DKDomMouseEvent::movementX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_movementY", DKDomMouseEvent::movementY);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_offsetX", DKDomMouseEvent::offsetX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_offsetY", DKDomMouseEvent::offsetY);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_offsetX", DKDomMouseEvent::offsetX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_pageX", DKDomMouseEvent::pageX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_pageY", DKDomMouseEvent::pageY);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_region", DKDomMouseEvent::region);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_relatedTarget", DKDomMouseEvent::relatedTarget);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_screenX", DKDomMouseEvent::screenX);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_screenY", DKDomMouseEvent::screenY);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_shiftKey", DKDomMouseEvent::shiftKey);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_which", DKDomMouseEvent::which);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_mozPressure", DKDomMouseEvent::mozPressure);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_mozIputSource", DKDomMouseEvent::mozInputSource);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_webkitForce", DKDomMouseEvent::webkitForce);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_x", DKDomMouseEvent::x);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_y", DKDomMouseEvent::y);
 
 	// Methods
-	DKDuktape::AttachFunction("DKDomMouseEvent_getModifierState", DKDomMouseEvent::getModifierState);
-	DKDuktape::AttachFunction("DKDomMouseEvent_initMouseEvent", DKDomMouseEvent::initMouseEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_getModifierState", DKDomMouseEvent::getModifierState);
+	DKDuktape::AttachFunction("DKCPP_DKDomMouseEvent_initMouseEvent", DKDomMouseEvent::initMouseEvent);
 
 	DKClass::DKCreate("DKDom/DKDomMouseEvent.js");
 	return true;

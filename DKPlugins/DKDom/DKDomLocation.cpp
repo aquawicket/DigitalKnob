@@ -9,17 +9,17 @@
 bool DKDomLocation::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKDomLocation_hash", DKDomLocation::hash);
-	DKDuktape::AttachFunction("DKDomLocation_host", DKDomLocation::host);
-	DKDuktape::AttachFunction("DKDomLocation_hostname", DKDomLocation::hostname);
-	DKDuktape::AttachFunction("DKDomLocation_href", DKDomLocation::href);
-	DKDuktape::AttachFunction("DKDomLocation_origin", DKDomLocation::origin);
-	DKDuktape::AttachFunction("DKDomLocation_password", DKDomLocation::password);
-	DKDuktape::AttachFunction("DKDomLocation_pathname", DKDomLocation::pathname);
-	DKDuktape::AttachFunction("DKDomLocation_port", DKDomLocation::port);
-	DKDuktape::AttachFunction("DKDomLocation_protocol", DKDomLocation::protocol);
-	DKDuktape::AttachFunction("DKDomLocation_search", DKDomLocation::search);
-	DKDuktape::AttachFunction("DKDomLocation_username", DKDomLocation::username);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_hash", DKDomLocation::hash);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_host", DKDomLocation::host);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_hostname", DKDomLocation::hostname);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_href", DKDomLocation::href);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_origin", DKDomLocation::origin);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_password", DKDomLocation::password);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_pathname", DKDomLocation::pathname);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_port", DKDomLocation::port);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_protocol", DKDomLocation::protocol);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_search", DKDomLocation::search);
+	DKDuktape::AttachFunction("DKCPP_DKDomLocation_username", DKDomLocation::username);
 	
 	DKClass::DKCreate("DKDom/DKDomLocation.js");
 	return true;

@@ -7,11 +7,11 @@
 bool DKConsole::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKConsole_clear", DKConsole::clear);
-	DKDuktape::AttachFunction("DKConsole_debug", DKConsole::debug);
-	DKDuktape::AttachFunction("DKConsole_error", DKConsole::error);
-	DKDuktape::AttachFunction("DKConsole_info", DKConsole::info);
-	DKDuktape::AttachFunction("DKConsole_warn", DKConsole::warn);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKConsole_clear", DKConsole::clear);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKConsole_debug", DKConsole::debug);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKConsole_error", DKConsole::error);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKConsole_info", DKConsole::info);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKConsole_warn", DKConsole::warn);
 	
 	DKClass::DKCreate("DKDuktape/DKConsole.js");
 	return true;
