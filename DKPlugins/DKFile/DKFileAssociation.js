@@ -46,7 +46,7 @@ function DKFileAssociation_OpenHtml(path)
 {
 	//path = path.replace(absolutepath, "");
 	
-	var id = path.replace(DKAssets_LocalAssets(),"");
+	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
 	//var id = DKFile_GetFilename(path);
 	if(DKCreate(id)){
 		//DKFileAssociation_AddDragHandles(id);
@@ -100,7 +100,7 @@ function DKFileAssociation_OpenJS(path)
 {
 	//path = path.replace(absolutepath, "");
 		
-	var id = path.replace(DKAssets_LocalAssets(),"");
+	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
 		id = id.replace(".js",".html");
@@ -111,7 +111,7 @@ function DKFileAssociation_OpenJS(path)
 ////////////////////////////////////////
 function DKFileAssociation_OpenCss(path)
 {
-	var id = path.replace(DKAssets_LocalAssets(),"");
+	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
 	});
