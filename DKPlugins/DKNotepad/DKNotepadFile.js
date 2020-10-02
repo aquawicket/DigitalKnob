@@ -113,7 +113,7 @@ function DKNotepadFile_SaveAs()
 //////////////////////////////
 function DKNotepadFile_Print()
 {
-	DKCef_Print(0);
+	DKCPP_DKCef_Print(0);
 }
 
 /////////////////////////////////////

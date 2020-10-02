@@ -161,7 +161,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "Reload"){
 		DKFrame_CloseAll();
-		DK_Reload();
+		DKCPP_DKDuktape_Reload();
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
 		DKClose("TaskbarMenu.js")

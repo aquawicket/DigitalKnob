@@ -129,7 +129,7 @@ function DKOpenFile_OpenFile(path)
 		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
-	var assets = DKAssets_LocalAssets();
+	var assets = DKCPP_DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
 	rPath = DKCPP_DKFile_GetRelativePath(aPath, assets);
 	//console.log("rPath:"+rPath);
@@ -148,7 +148,7 @@ function DKOpenFile_UpdatePath(path)
 		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
-	//var assets = DKAssets_LocalAssets();
+	//var assets = DKCPP_DKAssetsLocalAssets();
 	//console.log("assets:"+assets);
 	rPath = DKCPP_DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath);
