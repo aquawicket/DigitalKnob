@@ -261,7 +261,7 @@ function DKCreate(data, callback)
 	else{
 		//console.log("DKCreate("+data+"): requesting c++ plugin\n");
 		if(DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML"){
-			DKDuktape_DKCreate_CPP(data);
+			DKCPP_DKDuktape_DKCreate(data);
 		}
 	}	
 	if(arry[0] === "DKJavascript"){

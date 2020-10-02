@@ -40,22 +40,22 @@ bool DKDuktapeJS::Init()
 	//duk_eval_string(DKDuktape::ctx, "var DK_INFO = 2;");
 	//duk_eval_string(DKDuktape::ctx, "var DK_DEBUG = 3;");
 
-	DKDuktape::AttachFunction("DKDuktape_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
-	DKDuktape::AttachFunction("DKDuktape_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
 	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
-	DKDuktape::AttachFunction("DKDuktape_DKAvailable", DKDuktapeJS::_DKAvailable);
-	DKDuktape::AttachFunction("DKDuktape_DKClose", DKDuktapeJS::_DKClose);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKAvailable", DKDuktapeJS::_DKAvailable);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKClose", DKDuktapeJS::_DKClose);
 	
 	//FIXME: we have three different js function pointing to _DKCreate
-	DKDuktape::AttachFunction("DKDuktape_DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
-	DKDuktape::AttachFunction("DKDuktape_DKCreate_CPP", DKDuktapeJS::_DKCreate);
-	DKDuktape::AttachFunction("DKDuktape_Create", DKDuktapeJS::_DKCreate);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKCreate_CPP", DKDuktapeJS::_DKCreate); //FIXM: I think this is the same function as above
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_Create", DKDuktapeJS::_DKCreate);
 	
-	DKDuktape::AttachFunction("DKDuktape_DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
-	DKDuktape::AttachFunction("DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
-	DKDuktape::AttachFunction("DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
-	DKDuktape::AttachFunction("DKDuktape_DK_Valid", DKDuktapeJS::_DKValid);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DK_Valid", DKDuktapeJS::_DKValid);
 
 	DKDuktape::AttachFunction("DK_Beep", DKDuktapeJS::Beep);
 	DKDuktape::AttachFunction("DK_CallLoops", DKDuktapeJS::CallLoops);
