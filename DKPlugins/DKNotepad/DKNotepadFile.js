@@ -15,7 +15,7 @@ function DKNotepadFile_Init()
 function DKNotepadFile_End()
 {
 	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
-	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent);
+	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent); //FIXME:   DKNotepadFile_New undefined
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Save").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_SaveAs").removeEventListener("click", DKNotepadFile_OnEvent);
