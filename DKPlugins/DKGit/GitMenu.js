@@ -9,11 +9,11 @@ function GitMenu_Init()
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Mac"){
 		GIT = "git";
@@ -42,10 +42,10 @@ function GitMenu_End()
 function GitMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "Git Update"){
-		DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
+		DKCPP_DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
 	if(event.currentTarget.id === "Git Commit"){
-		DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
+		DKCPP_DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
 	if(event.currentTarget === window){
@@ -62,7 +62,7 @@ function GitMenu_ValidateGit()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
-	if(!DKFile_Exists(GIT)){
+	if(!DKCPP_DKFile_Exists(GIT)){
 		console.log("Please install GIT\n");
 		GitMenu_InstallGit();
 	}
@@ -107,17 +107,17 @@ function GitMenu_GitUpdate()
 	
 	console.log("Git Update DigitalKnob...\n");
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
-	DKFile_ChDir(DKPATH+"/DK");
+	DKCPP_DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" checkout -- .");
 	DK_Execute(GIT +" pull origin master");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
-		if(DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		DKCPP_DKFile_ChDir(DKPATH);
+		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Update "+folder+"...\n");
@@ -143,7 +143,7 @@ function GitMenu_GitCommit()
 	}
 	
 	console.log("Git Commit DigitalKnob...\n");
-	DKFile_ChDir(DKPATH+"/DK");
+	DKCPP_DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
 	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
@@ -152,16 +152,16 @@ function GitMenu_GitCommit()
 	DK_Execute(GIT +" push");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
-		if(DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		DKCPP_DKFile_ChDir(DKPATH);
+		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Commit "+folder+"...\n");
-			DKFile_ChDir(DKPATH+"/"+folder);
+			DKCPP_DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");
 			DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
