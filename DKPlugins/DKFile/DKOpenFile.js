@@ -21,7 +21,7 @@ function DKOpenFile_Init()
 	rPath = "";
 	
 	//TODO
-	//var drives = DKFile_GetDrives();
+	//var drives = DKCPP_DKFile_GetDrives();
 	//console.log(drives);
 }
 
@@ -126,12 +126,12 @@ function DKOpenFile_OpenFile(path)
 		aPath = path;
 	}
 	else{
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
 	var assets = DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
-	rPath = DKFile_GetRelativePath(aPath, assets);
+	rPath = DKCPP_DKFile_GetRelativePath(aPath, assets);
 	//console.log("rPath:"+rPath);
 	DKWidget_SetValue("DKOpenFilePath",aPath);
 }
@@ -145,22 +145,22 @@ function DKOpenFile_UpdatePath(path)
 		aPath = path;
 	}
 	else{
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
 	//var assets = DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
-	rPath = DKFile_GetRelativePath(aPath, path);
+	rPath = DKCPP_DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath);
 	
-	var temp = DKFile_DirectoryContents(aPath);
+	var temp = DKCPP_DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
 	byId("DKOpenFileMenu").innerHTML = ""; //Clear it
 	byId("DKOpenFileMenu2").innerHTML = ""; //Clear it
 
 	for(var d=0; d<files.length; d++){
-		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
+		if(DKCPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
@@ -174,7 +174,7 @@ function DKOpenFile_UpdatePath(path)
 	}
 
 	for(var f=0; f<files.length; f++){
-		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
+		if(!DKCPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFile");
 			var value = aPath+"/"+files[f];
 			byId(element3).value = value;
@@ -184,7 +184,7 @@ function DKOpenFile_UpdatePath(path)
 			byId(element3).innerHTML = files[f];
 			byId(element3).addEventListener("click", DKOpenFile_OnEvent);
 
-			var extension = DKFile_GetExtention(files[f]);
+			var extension = DKCPP_DKFile_GetExtention(files[f]);
 			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
 				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
 				(extension === "gif") || (extension === "tga") || (extension === "ico")

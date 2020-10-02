@@ -22,7 +22,7 @@ function DKSaveFile_Init()
 	rPath = "";
 	
 	//TODO
-	var drives = DKFile_GetDrives();
+	var drives = DKCPP_DKFile_GetDrives();
 	console.log(drives);
 }
 
@@ -63,14 +63,14 @@ function DKSaveFile_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKSaveFileOK"){
 		if(rPath && event_data2 === "relative"){
-			if(DKFile_IsDirectory(rPath)){
+			if(DKCPP_DKFile_IsDirectory(rPath)){
 				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");
 			}
 			console.log("DKSendEvent("+event_id+","+event_type+","+rPath+")");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 === "absolute"){
-			if(DKFile_IsDirectory(aPath)){
+			if(DKCPP_DKFile_IsDirectory(aPath)){
 				aPath = aPath+"/"+DKWidget_GetValue("DKSaveFileName");
 			}
 			//console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
@@ -141,12 +141,12 @@ function DKSaveFile_OpenFile(path)
 		aPath = path;
 	}
 	else{
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	console.log("aPath:"+aPath);
 	var assets = DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
-	rPath = DKFile_GetRelativePath(aPath, assets);
+	rPath = DKCPP_DKFile_GetRelativePath(aPath, assets);
 	console.log("rPath:"+rPath);
 	DKWidget_SetValue("DKSaveFilePath",aPath);
 }
@@ -160,22 +160,22 @@ function DKSaveFile_UpdatePath(path)
 		aPath = path;
 	}
 	else{
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	console.log("aPath:"+aPath);
 	//var assets = DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
-	rPath = DKFile_GetRelativePath(aPath, path);
+	rPath = DKCPP_DKFile_GetRelativePath(aPath, path);
 	console.log("rPath:"+rPath);
 	
-	var temp = DKFile_DirectoryContents(aPath);
+	var temp = DKCPP_DKFile_DirectoryContents(aPath);
 	var files = temp.split(",");
 
 	byId("DKSaveFileMenu").innerHTML = "";
 	byId("DKSaveFileMenu2").innerHTML = "";
 
 	for(var d=0; d<files.length; d++){
-		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
+		if(DKCPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
@@ -189,7 +189,7 @@ function DKSaveFile_UpdatePath(path)
 	}
 
 	for(var f=0; f<files.length; f++){
-		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
+		if(!DKCPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFile");
 			var value = aPath+"/"+files[f];
 			byId(element3).value = value;
@@ -199,7 +199,7 @@ function DKSaveFile_UpdatePath(path)
 			byId(element3).innerHTML = files[f];
 			byId(element3).addEventListener("click", DKSaveFile_OnEvent);
 
-			var extension = DKFile_GetExtention(files[f]);
+			var extension = DKCPP_DKFile_GetExtention(files[f]);
 			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
 				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
 				(extension === "gif") || (extension === "tga") || (extension === "ico")
