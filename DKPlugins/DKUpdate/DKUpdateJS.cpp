@@ -6,14 +6,14 @@
 bool DKUpdateJS::Init()
 {
 	DKDEBUGFUNC();
-	//DKDuktape::AttachFunction("DKUpdate_TestInt", DKUpdateJS::TestInt);
-	//DKDuktape::AttachFunction("DKUpdate_TestString", DKUpdateJS::TestString);
-	//DKDuktape::AttachFunction("DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt);
-	//DKDuktape::AttachFunction("DKUpdate_TestReturnString", DKUpdateJS::TestReturnString);
+	//DKDuktape::AttachFunction("DKCPP_DKUpdate_TestInt", DKUpdateJS::TestInt);
+	//DKDuktape::AttachFunction("DKCPP_DKUpdate_TestString", DKUpdateJS::TestString);
+	//DKDuktape::AttachFunction("DKCPP_DKUpdate_TestReturnInt", DKUpdateJS::TestReturnInt);
+	//DKDuktape::AttachFunction("DKCPP_DKUpdate_TestReturnString", DKUpdateJS::TestReturnString);
 
-	DKDuktape::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateJS::CheckForUpdate);
-	DKDuktape::AttachFunction("DKUpdate_CreateUpdate", DKUpdateJS::CreateUpdate);
-	DKDuktape::AttachFunction("DKUpdate_DoUpdate", DKUpdateJS::DoUpdate);
+	DKDuktape::AttachFunction("DKCPP_DKUpdate_CheckForUpdate", DKUpdateJS::CheckForUpdate);
+	DKDuktape::AttachFunction("DKCPP_DKUpdate_CreateUpdate", DKUpdateJS::CreateUpdate);
+	DKDuktape::AttachFunction("DKCPP_DKUpdate_DoUpdate", DKUpdateJS::DoUpdate);
 	return true;
 }
 

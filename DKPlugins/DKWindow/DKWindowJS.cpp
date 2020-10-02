@@ -7,37 +7,37 @@
 bool DKWindowJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKWindow_TestInt", DKWindowJS::TestInt);
-	DKDuktape::AttachFunction("DKWindow_TestString", DKWindowJS::TestString);
-	DKDuktape::AttachFunction("DKWindow_TestReturnInt", DKWindowJS::TestReturnInt);
-	DKDuktape::AttachFunction("DKWindow_TestReturnString", DKWindowJS::TestReturnString);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_TestInt", DKWindowJS::TestInt);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_TestString", DKWindowJS::TestString);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_TestReturnInt", DKWindowJS::TestReturnInt);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_TestReturnString", DKWindowJS::TestReturnString);
 
-	DKDuktape::AttachFunction("DKWindow_Create", DKWindowJS::Create);
-	DKDuktape::AttachFunction("DKWindow_Fullscreen", DKWindowJS::Fullscreen);
-	DKDuktape::AttachFunction("DKWindow_GetHeight", DKWindowJS::GetHeight);
-	DKDuktape::AttachFunction("DKWindow_GetMouseX", DKWindowJS::GetMouseX);
-	DKDuktape::AttachFunction("DKWindow_GetMouseY", DKWindowJS::GetMouseY);
-	DKDuktape::AttachFunction("DKWindow_GetPixelRatio", DKWindowJS::GetPixelRatio);
-	DKDuktape::AttachFunction("DKWindow_GetWidth", DKWindowJS::GetWidth);
-	DKDuktape::AttachFunction("DKWindow_GetX", DKWindowJS::GetX);
-	DKDuktape::AttachFunction("DKWindow_GetY", DKWindowJS::GetY);
-	DKDuktape::AttachFunction("DKWindow_Hide", DKWindowJS::Hide);
-	DKDuktape::AttachFunction("DKWindow_IsFullscreen", DKWindowJS::IsFullscreen);
-	DKDuktape::AttachFunction("DKWindow_IsVisible", DKWindowJS::IsVisible);
-	DKDuktape::AttachFunction("DKWindow_Maximize", DKWindowJS::Maximize);
-	DKDuktape::AttachFunction("DKWindow_MessageBox", DKWindowJS::MessageBox);
-	DKDuktape::AttachFunction("DKWindow_Minimize", DKWindowJS::Minimize);
-	DKDuktape::AttachFunction("DKWindow_moveTo", DKWindowJS::moveTo);
-	DKDuktape::AttachFunction("DKWindow_resizeTo", DKWindowJS::resizeTo);
-	DKDuktape::AttachFunction("DKWindow_Restore", DKWindowJS::Restore);
-	DKDuktape::AttachFunction("DKWindow_SetHeight", DKWindowJS::SetHeight);
-	DKDuktape::AttachFunction("DKWindow_SetIcon", DKWindowJS::SetIcon);
-	DKDuktape::AttachFunction("DKWindow_SetTitle", DKWindowJS::SetTitle);
-	DKDuktape::AttachFunction("DKWindow_SetWidth", DKWindowJS::SetWidth);
-	DKDuktape::AttachFunction("DKWindow_SetX", DKWindowJS::SetX);
-	DKDuktape::AttachFunction("DKWindow_SetY", DKWindowJS::SetY);
-	DKDuktape::AttachFunction("DKWindow_Show", DKWindowJS::Show);
-	DKDuktape::AttachFunction("DKWindow_Windowed", DKWindowJS::Windowed);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Create", DKWindowJS::Create);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Fullscreen", DKWindowJS::Fullscreen);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetHeight", DKWindowJS::GetHeight);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetMouseX", DKWindowJS::GetMouseX);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetMouseY", DKWindowJS::GetMouseY);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetPixelRatio", DKWindowJS::GetPixelRatio);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetWidth", DKWindowJS::GetWidth);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetX", DKWindowJS::GetX);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_GetY", DKWindowJS::GetY);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Hide", DKWindowJS::Hide);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_IsFullscreen", DKWindowJS::IsFullscreen);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_IsVisible", DKWindowJS::IsVisible);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Maximize", DKWindowJS::Maximize);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_MessageBox", DKWindowJS::MessageBox);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Minimize", DKWindowJS::Minimize);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_moveTo", DKWindowJS::moveTo);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_resizeTo", DKWindowJS::resizeTo);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Restore", DKWindowJS::Restore);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetHeight", DKWindowJS::SetHeight);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetIcon", DKWindowJS::SetIcon);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetTitle", DKWindowJS::SetTitle);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetWidth", DKWindowJS::SetWidth);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetX", DKWindowJS::SetX);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_SetY", DKWindowJS::SetY);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Show", DKWindowJS::Show);
+	DKDuktape::AttachFunction("DKCPP_DKWindow_Windowed", DKWindowJS::Windowed);
 	return true;
 }
 

@@ -6,33 +6,33 @@
 ////////////////////
 bool DKCefJS::Init()
 {
-	DKDuktape::AttachFunction("DKCef_CloseBrowser", DKCefJS::CloseBrowser);
-	DKDuktape::AttachFunction("DKCef_CloseDevTools", DKCefJS::CloseDevTools);
-	DKDuktape::AttachFunction("DKCef_Copy", DKCefJS::Copy);
-	DKDuktape::AttachFunction("DKCef_CopyImage", DKCefJS::CopyImage);
-	DKDuktape::AttachFunction("DKCef_Cut", DKCefJS::Cut);
-	DKDuktape::AttachFunction("DKCef_DownloadUrl", DKCefJS::DownloadUrl);
-	DKDuktape::AttachFunction("DKCef_Find", DKCefJS::Find);
-	DKDuktape::AttachFunction("DKCef_GetBrowserId", DKCefJS::GetBrowserId);
-	DKDuktape::AttachFunction("DKCef_GetBrowsers", DKCefJS::GetBrowsers);
-	DKDuktape::AttachFunction("DKCef_GetCurrentBrowser", DKCefJS::GetCurrentBrowser);
-	DKDuktape::AttachFunction("DKCef_GetPageSource", DKCefJS::GetPageSource);
-	DKDuktape::AttachFunction("DKCef_GetUrl", DKCefJS::GetUrl);
-	DKDuktape::AttachFunction("DKCef_GoBack", DKCefJS::GoBack);
-	DKDuktape::AttachFunction("DKCef_GoForward", DKCefJS::GoForward);
-	DKDuktape::AttachFunction("DKCef_NewBrowser", DKCefJS::NewBrowser);
-	DKDuktape::AttachFunction("DKCef_Paste", DKCefJS::Paste);
-	DKDuktape::AttachFunction("DKCef_Popup", DKCefJS::Popup);
-	DKDuktape::AttachFunction("DKCef_Print", DKCefJS::Print);
-	DKDuktape::AttachFunction("DKCef_Reload", DKCefJS::Reload);
-	DKDuktape::AttachFunction("DKCef_RemoveFocus", DKCefJS::RemoveFocus);
-	DKDuktape::AttachFunction("DKCef_RunJavascript", DKCefJS::RunJavascript);
-	DKDuktape::AttachFunction("DKCef_SetFocus", DKCefJS::SetFocus);
-	DKDuktape::AttachFunction("DKCef_SetKeyboardFocus", DKCefJS::SetKeyboardFocus);
-	DKDuktape::AttachFunction("DKCef_SetUrl", DKCefJS::SetUrl);
-	DKDuktape::AttachFunction("DKCef_ShowDevTools", DKCefJS::ShowDevTools);
-	DKDuktape::AttachFunction("DKCef_Stop", DKCefJS::Stop);
-	DKDuktape::AttachFunction("DKCef_ViewPageSource", DKCefJS::ViewPageSource);
+	DKDuktape::AttachFunction("DKCPP_DKCef_CloseBrowser", DKCefJS::CloseBrowser);
+	DKDuktape::AttachFunction("DKCPP_DKCef_CloseDevTools", DKCPP_DKCefJS::CloseDevTools);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Copy", DKCPP_DKCefJS::Copy);
+	DKDuktape::AttachFunction("DKCPP_DKCef_CopyImage", DKCPP_DKCefJS::CopyImage);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Cut", DKCPP_DKCefJS::Cut);
+	DKDuktape::AttachFunction("DKCPP_DKCef_DownloadUrl", DKCPP_DKCefJS::DownloadUrl);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Find", DKCPP_DKCefJS::Find);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GetBrowserId", DKCPP_DKCefJS::GetBrowserId);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GetBrowsers", DKCPP_DKCefJS::GetBrowsers);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GetCurrentBrowser", DKCPP_DKCefJS::GetCurrentBrowser);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GetPageSource", DKCPP_DKCefJS::GetPageSource);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GetUrl", DKCPP_DKCefJS::GetUrl);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GoBack", DKCPP_DKCefJS::GoBack);
+	DKDuktape::AttachFunction("DKCPP_DKCef_GoForward", DKCPP_DKCefJS::GoForward);
+	DKDuktape::AttachFunction("DKCPP_DKCef_NewBrowser", DKCPP_DKCefJS::NewBrowser);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Paste", DKCPP_DKCefJS::Paste);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Popup", DKCPP_DKCefJS::Popup);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Print", DKCPP_DKCefJS::Print);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Reload", DKCPP_DKCefJS::Reload);
+	DKDuktape::AttachFunction("DKCPP_DKCef_RemoveFocus", DKCPP_DKCefJS::RemoveFocus);
+	DKDuktape::AttachFunction("DKCPP_DKCef_RunJavascript", DKCPP_DKCefJS::RunJavascript);
+	DKDuktape::AttachFunction("DKCPP_DKCef_SetFocus", DKCPP_DKCefJS::SetFocus);
+	DKDuktape::AttachFunction("DKCPP_DKCef_SetKeyboardFocus", DKCPP_DKCefJS::SetKeyboardFocus);
+	DKDuktape::AttachFunction("DKCPP_DKCef_SetUrl", DKCPP_DKCefJS::SetUrl);
+	DKDuktape::AttachFunction("DKCPP_DKCef_ShowDevTools", DKCPP_DKCefJS::ShowDevTools);
+	DKDuktape::AttachFunction("DKCPP_DKCef_Stop", DKCPP_DKCefJS::Stop);
+	DKDuktape::AttachFunction("DKCPP_DKCef_ViewPageSource", DKCefJS::ViewPageSource);
 	return true;
 }
 

@@ -7,12 +7,12 @@
 bool DKWebSocketsJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKWebSockets_CloseClient", DKWebSocketsJS::CloseClient);
-	DKDuktape::AttachFunction("DKWebSockets_CloseServer", DKWebSocketsJS::CloseServer);
-	DKDuktape::AttachFunction("DKWebSockets_CreateClient", DKWebSocketsJS::CreateClient);
-	DKDuktape::AttachFunction("DKWebSockets_CreateServer", DKWebSocketsJS::CreateServer);
-	DKDuktape::AttachFunction("DKWebSockets_MessageToClient", DKWebSocketsJS::MessageToClient);
-	DKDuktape::AttachFunction("DKWebSockets_MessageToServer", DKWebSocketsJS::MessageToServer);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_CloseClient", DKWebSocketsJS::CloseClient);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_CloseServer", DKWebSocketsJS::CloseServer);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_CreateClient", DKWebSocketsJS::CreateClient);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_CreateServer", DKWebSocketsJS::CreateServer);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_MessageToClient", DKWebSocketsJS::MessageToClient);
+	DKDuktape::AttachFunction("DKCPP_DKWebSockets_MessageToServer", DKWebSocketsJS::MessageToServer);
 	return true;
 }
 

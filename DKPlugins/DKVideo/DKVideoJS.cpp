@@ -7,7 +7,7 @@
 bool DKVideoJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKVideo_Play", DKVideoJS::Play);
+	DKDuktape::AttachFunction("DKCPP_DKVideo_Play", DKVideoJS::Play);
 	return true;
 }
 

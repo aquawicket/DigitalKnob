@@ -7,7 +7,7 @@
 bool DKXmlJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
+	DKDuktape::AttachFunction("DKCPP_DKXml_GetXmlNode", DKXmlJS::GetXmlNode);
 	return true;
 }
 

@@ -7,7 +7,7 @@
 bool DKOcrJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKOcr_ImageToText", DKOcrJS::ImageToText);
+	DKDuktape::AttachFunction("DKCPP_DKOcr_ImageToText", DKOcrJS::ImageToText);
 	return true;
 }
 

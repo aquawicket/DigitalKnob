@@ -5,8 +5,8 @@
 ////////////////////////
 bool DKArchiveJS::Init()
 {
-	DKDuktape::AttachFunction("DKArchive_Compress", DKArchiveJS::Compress);
-	DKDuktape::AttachFunction("DKArchive_Extract", DKArchiveJS::Extract);
+	DKDuktape::AttachFunction("DKCPP_DKArchive_Compress", DKArchiveJS::Compress);
+	DKDuktape::AttachFunction("DKCPP_DKArchive_Extract", DKArchiveJS::Extract);
 	//DKArchive::Instance("DKArchive0");
 	return true;
 }

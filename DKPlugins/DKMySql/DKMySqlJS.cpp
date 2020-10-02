@@ -7,9 +7,9 @@
 bool DKMySqlJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKMySql_Connect", DKMySqlJS::Connect);
-	DKDuktape::AttachFunction("DKMySql_Database", DKMySqlJS::Database);
-	DKDuktape::AttachFunction("DKMySql_Query", DKMySqlJS::Query);
+	DKDuktape::AttachFunction("DKCPP_DKMySql_Connect", DKMySqlJS::Connect);
+	DKDuktape::AttachFunction("DKCPP_DKMySql_Database", DKMySqlJS::Database);
+	DKDuktape::AttachFunction("DKCPP_DKMySql_Query", DKMySqlJS::Query);
 	return true;
 }
 

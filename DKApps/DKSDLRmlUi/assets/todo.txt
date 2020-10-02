@@ -1,7 +1,9 @@
 // TODO //
 
 *** DK Javascript ***
-ALL C++ Javascript functions should have a DKCPP_ prefix
+ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
+Proper naming would be DKCPP_DKPlugin_File_function
+Many CPP javascript function will fail, they simpily need a DKCPP_ prefix
 
 *** DKBuilder ***
 Make sure dkbuilder recognizes the new web standard key codes

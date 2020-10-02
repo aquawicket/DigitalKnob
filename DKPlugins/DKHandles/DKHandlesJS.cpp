@@ -8,31 +8,31 @@
 bool DKHandlesJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKHandles_Click", DKHandlesJS::Click);
-	DKDuktape::AttachFunction("DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
-	DKDuktape::AttachFunction("DKHandles_GetBottom", DKHandlesJS::GetBottom);
-	DKDuktape::AttachFunction("DKHandles_GetClass", DKHandlesJS::GetClass);
-	DKDuktape::AttachFunction("DKHandles_GetIndex", DKHandlesJS::GetIndex);
-	DKDuktape::AttachFunction("DKHandles_GetLeft", DKHandlesJS::GetLeft);
-	DKDuktape::AttachFunction("DKHandles_GetParent", DKHandlesJS::GetParent);
-	DKDuktape::AttachFunction("DKHandles_GetRight", DKHandlesJS::GetRight);
-	DKDuktape::AttachFunction("DKHandles_GetTop", DKHandlesJS::GetTop);
-	DKDuktape::AttachFunction("DKHandles_GetValue", DKHandlesJS::GetValue);
-	DKDuktape::AttachFunction("DKHandles_GetWindow", DKHandlesJS::GetWindow);
-	DKDuktape::AttachFunction("DKHandles_GetWindowIndex", DKHandlesJS::GetWindowIndex);
-	DKDuktape::AttachFunction("DKHandles_GetWindows", DKHandlesJS::GetWindows);
-	DKDuktape::AttachFunction("DKHandles_NextHandle", DKHandlesJS::NextHandle);
-	DKDuktape::AttachFunction("DKHandles_PrevHandle", DKHandlesJS::PrevHandle);
-	//DKDuktape::AttachFunction("DKHandles_SendHook", DKHandlesJS::SendHook);
-	DKDuktape::AttachFunction("DKHandles_SetHandle", DKHandlesJS::SetHandle);
-	DKDuktape::AttachFunction("DKHandles_SetValue", DKHandlesJS::SetValue);
-	DKDuktape::AttachFunction("DKHandles_SetWindowHandle", DKHandlesJS::SetWindowHandle);
-	DKDuktape::AttachFunction("DKHandles_ShowWindow", DKHandlesJS::ShowWindow);
-	DKDuktape::AttachFunction("DKHandles_StartSearch", DKHandlesJS::StartSearch);
-	DKDuktape::AttachFunction("DKHandles_ToggleHighlight", DKHandlesJS::ToggleHighlight);
-	DKDuktape::AttachFunction("DKHandles_WaitForHandle", DKHandlesJS::WaitForHandle);
-	DKDuktape::AttachFunction("DKHandles_WaitForWindow", DKHandlesJS::WaitForWindow);
-	DKDuktape::AttachFunction("DKHandles_WindowExists", DKHandlesJS::WindowExists);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_Click", DKHandlesJS::Click);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetBottom", DKHandlesJS::GetBottom);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetClass", DKHandlesJS::GetClass);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetIndex", DKHandlesJS::GetIndex);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetLeft", DKHandlesJS::GetLeft);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetParent", DKHandlesJS::GetParent);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetRight", DKHandlesJS::GetRight);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetTop", DKHandlesJS::GetTop);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetValue", DKHandlesJS::GetValue);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetWindow", DKHandlesJS::GetWindow);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetWindowIndex", DKHandlesJS::GetWindowIndex);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_GetWindows", DKHandlesJS::GetWindows);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_NextHandle", DKHandlesJS::NextHandle);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_PrevHandle", DKHandlesJS::PrevHandle);
+	//DKDuktape::AttachFunction("DKCPP_DKHandles_SendHook", DKHandlesJS::SendHook);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_SetHandle", DKHandlesJS::SetHandle);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_SetValue", DKHandlesJS::SetValue);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_SetWindowHandle", DKHandlesJS::SetWindowHandle);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_ShowWindow", DKHandlesJS::ShowWindow);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_StartSearch", DKHandlesJS::StartSearch);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_ToggleHighlight", DKHandlesJS::ToggleHighlight);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_WaitForHandle", DKHandlesJS::WaitForHandle);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_WaitForWindow", DKHandlesJS::WaitForWindow);
+	DKDuktape::AttachFunction("DKCPP_DKHandles_WindowExists", DKHandlesJS::WindowExists);
 	return true;
 }
 
