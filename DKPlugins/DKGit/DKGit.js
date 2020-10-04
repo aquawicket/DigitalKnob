@@ -7,11 +7,11 @@ function DKGit_Init()
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Mac"){
 		GIT = "git";
@@ -40,7 +40,7 @@ function DKGit_ValidateGit()
 {
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
-	if(!DKFile_Exists(GIT)){
+	if(!DKCPP_DKFile_Exists(GIT)){
 		DKGit_InstallGit();
 	}
 	console.log("Found GIT\n");
