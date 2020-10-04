@@ -4,6 +4,7 @@ function DKStats_Init()
 	DKCreate("DKStats/DKStats.html");
 	window.addEventListener("second", DKStats_OnEvent);
 	//byId("DKStats/DKStats.html").addEventListener("click", DKStats_OnEvent);
+	DKStats_Update();
 }
 
 //////////////////////
@@ -17,7 +18,7 @@ function DKStats_End()
 ///////////////////////////////
 function DKStats_OnEvent(event)
 {
-	if(event.type === "second")){
+	if(event.type === "second"){
 		DKStats_Update();
 	}
 }
@@ -38,46 +39,46 @@ function DKStats_Update()
 	byId("DKStats_time").innerHTML = "TIME: "+datetime;
 	
 	//Frames Per Second
-	var fps = DK_GetFps();
+	var fps = DKCPP_DKDuktape_GetFps();
 	byId("DKStats_fps").innerHTML = "FPS: "+fps;
 	
 	//CPU used by app
-	var cpu = DK_CpuUsedByApp();
+	var cpu = DKCPP_DKDuktape_CpuUsedByApp();
 	byId("DKStats_cpu").innerHTML = "CPU: "+cpu+"%";
 	
 	//RAM used by app
-	var ram = DK_PhysicalMemoryUsedByApp();
+	var ram = DKCPP_DKDuktape_PhysicalMemoryUsedByApp();
 	byId("DKStats_ram").innerHTML = "RAM: "+ram+"MB";
 	
 	//Virtual Memory used by app
-	var swap = DK_VirtualMemoryUsedByApp();
+	var swap = DKCPP_DKDuktape_VirtualMemoryUsedByApp();
 	byId("DKStats_swap").innerHTML = "SWAP: "+swap+"MB";
 	
 	//CPU used total
-	var cpu = DK_CpuUsed();
+	var cpu = DKCPP_DKDuktape_CpuUsed();
 	byId("DKStats_totalcpu").innerHTML = "TOTAL CPU: "+cpu+"%";
 	
 	//RAM used total
-	var ram = DK_PhysicalMemoryUsed();
+	var ram = DKCPP_DKDuktape_PhysicalMemoryUsed();
 	byId("DKStats_totalram").innerHTML = "TOTAL RAM: "+ram+"MB";
 	
 	//Virtual Memory used total
-	var swap = DK_VirtualMemoryUsed();
+	var swap = DKCPP_DKDuktape_VirtualMemoryUsed();
 	byId("DKStats_totalswap").innerHTML = "TOTAL SWAP: "+swap+"MB";
 	
 	//System RAM
-	var ram = DK_PhysicalMemory();
+	var ram = DKCPP_DKDuktape_PhysicalMemory();
 	byId("DKStats_systemram").innerHTML = "SYSTEM RAM: "+ram+"MB";
 	
 	//System Virtual Memory
-	var swap = DK_VirtualMemory();
+	var swap = DKCPP_DKDuktape_VirtualMemory();
 	byId("DKStats_systemswap").innerHTML = "SYSTEM SWAP: "+swap+"MB";
 	
 	//Ticks
-	var ticks = DK_GetTicks();
+	var ticks = DKCPP_DKDuktape_GetTicks();
 	byId("DKStats_ticks").innerHTML = "TICKS: "+ticks;
 	
 	//Frames
-	var frames = DK_GetFrames();
+	var frames = DKCPP_DKDuktape_GetFrames();
 	byId("DKStats_frames").innerHTML = "FRAMES: "+frames;
 }
