@@ -681,7 +681,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 	return element;
 }
 
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 DKString DKRml::elementToAddress(Rml::Element* element)
 {
 	if (!element) {
