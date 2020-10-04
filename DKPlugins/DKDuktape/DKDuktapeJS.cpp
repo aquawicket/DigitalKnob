@@ -96,7 +96,7 @@ bool DKDuktapeJS::Init()
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_GetTime", DKDuktapeJS::GetTime);
 	//DKDuktape::AttachFunction("DKCPP_DKDuktape_GetType", DKDuktapeJS::GetType);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_GetUsername", DKDuktapeJS::GetUsername);
-	DKDuktape::AttachFunction("DKDuktape_GetValue", DKDuktapeJS::GetValue);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_GetValue", DKDuktapeJS::GetValue);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_GetVolume", DKDuktapeJS::GetVolume);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_HideConsole", DKDuktapeJS::HideConsole);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_IE", DKDuktapeJS::IE);

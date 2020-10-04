@@ -112,10 +112,10 @@ function DKSolution_OpenFile(path)
 {
 	var aPath = path;
 	if(DK_GetOS() !== "Android"){
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
-	if(!DK_Run(aPath, "")){ return false; }
+	if(!DKCPP_DKDuktape_Run(aPath, "")){ return false; }
 	return true;
 }
 
