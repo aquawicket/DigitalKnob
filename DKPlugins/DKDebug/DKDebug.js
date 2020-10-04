@@ -36,7 +36,7 @@ function DKDebug_OnEvent(event)
 /////////////////////////////
 function DKDebug_LogKey(code)
 {
-	console.log("DKDebug_LogKey("+code+")");
+	//console.log("DKDebug_LogKey("+code+")");
 	//console.trace();
 	if(key_history.length > 20){ key_history.shift(); }
 	key_history[key_history.length] = code;
@@ -48,7 +48,7 @@ function DKDebug_CheckKeys()
 	//translate keys to string
 	var string;
 	for(var i=0; i<key_history.length; i++){
-		console.log(DKDebug_KeyToChar(key_history[i]));
+		//console.log(DKDebug_KeyToChar(key_history[i]));
 		string += DKDebug_KeyToChar(key_history[i]);
 	}
 	

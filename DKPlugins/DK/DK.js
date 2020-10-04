@@ -1,4 +1,4 @@
- var LOG_DEBUG = false;
+var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
 var LOG_ERRORS = true;
@@ -34,8 +34,8 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 //document.body.style.cursor = "default";
 
 // Dummy functions only implemented in c++
-//function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
-//function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()+"\n");*/ }
+//function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser());*/ }
+//function EventLoop(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser());*/ }
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
@@ -241,13 +241,13 @@ function Log(string, lvl)
 
 console.log("*** DigitalKnob ***");
 console.log("Browser = "+DK_GetBrowser());
-console.log("JSEngine = "+DK_GetJSEngine()+"\n");
+console.log("JSEngine = "+DK_GetJSEngine());
 
 
 /////////////////////////////////
 function DKCreate(data, callback)
 {
-	//console.log("DK.js:DKCreate("+data+")\n");	
+	//console.log("DK.js:DKCreate("+data+")");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
@@ -259,7 +259,7 @@ function DKCreate(data, callback)
 		arry.splice(0, 0, "DKCss");
 	}
 	else{
-		//console.log("DKCreate("+data+"): requesting c++ plugin\n");
+		//console.log("DKCreate("+data+"): requesting c++ plugin");
 		if(DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML"){
 			DKCPP_DKDuktape_DKCreate(data);
 		}
@@ -270,7 +270,7 @@ function DKCreate(data, callback)
 				callback(rval); 
 			}
 			else{
-				console.error("DKCreate("+data+"): does not have a callback\n");
+				console.error("DKCreate("+data+"): does not have a callback");
 			}
 		})
 		){
@@ -278,7 +278,7 @@ function DKCreate(data, callback)
 		}
 	}
 	if(arry[0] === "DKWidget"){
-		//console.log("DKCreate(data, callback)\n");
+		//console.log("DKCreate(data, callback)");
 			if(!DKWidget_NewWidget(arry[1], arry[2])){
 				return false;
 			}
@@ -286,7 +286,7 @@ function DKCreate(data, callback)
 				callback(); 
 			}
 			else{
-			//console.error("DKCreate("+data+"): does not have a callback\n");
+			//console.error("DKCreate("+data+"): does not have a callback");
 			}
 	}
 	if(arry[0] === "DKCss"){
@@ -297,7 +297,7 @@ function DKCreate(data, callback)
 			callback(); 
 		}
 		else{
-			//console.error("DKCreate("+data+"): does not have a callback\n");
+			//console.error("DKCreate("+data+"): does not have a callback");
 		}
 	}
 	return true;
@@ -306,9 +306,9 @@ function DKCreate(data, callback)
 //////////////////////
 function DKClose(data)
 {
-	console.log("DKClose("+data+")\n");
+	console.log("DKClose("+data+")");
 	if(!data){
-		console.error("DKClose("+data+"): data empty\n");
+		console.error("DKClose("+data+"): data empty");
 		return false;
 	}
 	
@@ -325,7 +325,7 @@ function DKClose(data)
 	
 	var file = DKFile_GetFilename(arry[1]);
 	if(!file){ 
-		console.error("DKClose("+data+"): file invalid\n");
+		console.error("DKClose("+data+"): file invalid");
 		return false; 
 	}
 	
@@ -343,35 +343,35 @@ function DKClose(data)
 			func(); // Call the jsclass_End() function
 		}
 		else{
-			console.warn("DKClose(data): "+func+" is not a function\n");
+			console.warn("DKClose(data): "+func+" is not a function");
 		}
 		*/
 		
 		var script = byId(arry[1]);
 		if(!script){
-			//console.warn("DKClose("+data+"): "+arry[1]+" does not exist\n");
+			//console.warn("DKClose("+data+"): "+arry[1]+" does not exist");
 			return false;
 		}
 		script.parentNode.removeChild(script);
-		//console.log("Closed "+arry[1]+"\n");
+		//console.log("Closed "+arry[1]);
 	}
 	if(arry[0] === "DKWidget"){
 		var element = byId(arry[1]);
 		if(!element){ 
-			//console.warn("DKClose("+data+"): "+file+" does not exist\n");
+			//console.warn("DKClose("+data+"): "+file+" does not exist");
 			return false; 
 		}
 		element.parentNode.removeChild(element);
-		//console.log("Closed "+arry[1]+"\n");
+		//console.log("Closed "+arry[1]);
 	}
 	if(arry[0] === "DKCss"){
 		var css = byId(arry[1]);
 		if(!css){ 
-			//console.error("DKClose("+data+"): "+arry[1]+" does not exist\n");
+			//console.error("DKClose("+data+"): "+arry[1]+" does not exist");
 			return false; 
 		}
 		css.parentNode.removeChild(css);
-		//console.log("Closed "+arry[1]+"\n");
+		//console.log("Closed "+arry[1]);
 	}
 	
 	return true;
@@ -382,12 +382,12 @@ function LoadCss(url)
 {
 	//console.log("DK.js:LoadCss("+url+")");
 	if(!url){ 
-		console.error("DK.js: LoadCss("+url+"): url invalid\n");
+		console.error("DK.js: LoadCss("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadCss("+url+"): url already loaded\n");
+		console.warn("DK.js: LoadCss("+url+"): url already loaded");
 		return false;
 	}
 	
@@ -412,12 +412,12 @@ function LoadCss(url)
 function LoadJs(url, callback)
 {
 	if(!url){ 
-		console.error("DK.js: LoadJs("+url+"): url invalid\n");
+		console.error("DK.js: LoadJs("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadJs("+url+", callback): url already loaded\n");
+		console.warn("DK.js: LoadJs("+url+", callback): url already loaded");
 		callback && callback(false);
 		return false;
 	}
@@ -431,7 +431,7 @@ function LoadJs(url, callback)
 	
 	// Call the js init function
 	if(!file){ 
-		console.error("DK.js: LoadJs("+url+"): file invalid\n");
+		console.error("DK.js: LoadJs("+url+"): file invalid");
 		return false; 
 	}
 	
@@ -448,7 +448,7 @@ function LoadJs(url, callback)
 	//console.log("script.type = "+script.type);
 	
 	//if(typeof script === "undefined"){ 
-	//	console.error("Cannot load "+url+"\n");
+	//	console.error("Cannot load "+url);
 	//	return false; 
 	//}
 	
@@ -461,14 +461,14 @@ function LoadJs(url, callback)
 	var done = false;
 	script.onload = script.onreadystatechange = function(){ //FIXME - DigitalKnob can't trigger onload yet.
 		if(!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")){
-			//console.log("Loaded: "+url+"\n");
+			//console.log("Loaded: "+url);
 			var func = window[init]; //Plugin_Init()    
 			if(typeof func === 'function'){ 
-				//console.log("Calling: "+init+"\n");
+				//console.log("Calling: "+init);
 				func(); //Init
 			}
 			else{
-				//console.warn(init+" is not defined\n");
+				//console.warn(init+" is not defined");
 			}
 			
 			done = true;
@@ -476,20 +476,20 @@ function LoadJs(url, callback)
 		}
 	};
 	script.onerror = function(){
-		console.error("DK.js: LoadJs("+url+"): Could not load file\n");
+		console.error("DK.js: LoadJs("+url+"): Could not load file");
 	}
 	////////////////////////
 	
 	//FIXME - DigitalKnob can't trigger onload yet, so we do this
 	if(DK_GetJSEngine() === "Duktape"){
-		//console.log("Loaded: "+url+"\n");
+		//console.log("Loaded: "+url);
 		var func = init; //Plugin_Init() 
 		if(eval("typeof "+func) === "function"){
-			//console.log("Calling: "+init+"\n");
+			//console.log("Calling: "+init);
 			eval(func)(); //Init
 		}
 		else{
-			console.warn(init+" is not defined\n");
+			console.warn(init+" is not defined");
 		}
 		callback && callback(true);
 	}
@@ -503,25 +503,25 @@ function LoadHtml(url, parent)
 	//console.warn("DK.js:LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		console.error("DK.js: LoadJs("+url+"): url invalid\n");
+		console.error("DK.js: LoadJs("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(url.indexOf(".html") === -1){ 
-		console.error("DK.js: LoadHtml("+url+", parent): url is not a valid .html file\n");
+		console.error("DK.js: LoadHtml("+url+", parent): url is not a valid .html file");
 		return false;
 	}
 	
 	if(url === ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadHtml("+url+", parent): url already loaded\n");
+		console.warn("DK.js: LoadHtml("+url+", parent): url already loaded");
 		return false;
 	}
 	
 	var string = DK_FileToString(url);
-	//console.warn("url = "+url+"\n");
-	//console.warn("string = "+string+"\n");
+	//console.warn("url = "+url);
+	//console.warn("string = "+string);
 	//Create an empty widget
 	if(!string || string === "ERROR"){ 
 		string  = "<div id=\""+url+"\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -534,26 +534,26 @@ function LoadHtml(url, parent)
 	//console.log("temp.id = "+temp.id);
 	var nodes = temp.childNodes;
 	if(!nodes){
-		console.error("DK.js: LoadHtml("+url+", "+parent+"): Could not get nodes from file url\n");
+		console.error("DK.js: LoadHtml("+url+", "+parent+"): Could not get nodes from file url");
 		return false;
 	}
 	if(nodes.length > 1){
 		for(var i=0; i < nodes.length; i++){
-			console.warn("node["+i+"]: "+nodes[i]+"\n");
+			console.warn("node["+i+"]: "+nodes[i]);
 		}
 		
-		console.warn("###############################################\n");
-		console.warn("DK.js: LoadHtml("+url+", "+parent+"): Too many nodes in file\n");
-		//console.log(temp.innerHTML+"\n");
-		console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file\n");
-		console.warn("###############################################\n");
+		console.warn("###############################################");
+		console.warn("DK.js: LoadHtml("+url+", "+parent+"): Too many nodes in file");
+		//console.log(temp.innerHTML);
+		console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
+		console.warn("###############################################");
 		//return false;
 	}
 
 	if(nodes[0].id !== url){
-		console.warn("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")\n");
+		console.warn("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")");
 		nodes[0].id = url;
-		console.warn("DK.js: LoadHtml("+url+",parent): please fix the id\n");
+		console.warn("DK.js: LoadHtml("+url+",parent): please fix the id");
 	}
 	if(parent){
 		//console.log("DK.js:LoadHtml(): appending to parent");
@@ -577,10 +577,10 @@ function LoadHtml(url, parent)
 function CheckFileSupport()
 {
 	if(window.File && window.FileReader && window.FileList && window.Blob){
-		console.log("DK.js: File support OK\n");
+		console.log("DK.js: File support OK");
 	}
 	else {
-		console.error("DK.js: The File APIs are not fully supported in this browser\n");
+		console.error("DK.js: The File APIs are not fully supported in this browser");
 	}
 }
 
@@ -919,7 +919,7 @@ function DKAvailable(name)
 		return true; 
 	}
 	if(name === "DKWidgetJS"){  //FIXME: is this needed?
-		console.log("DKAvailable("+name+"): name === DKWidgetJS!  check DK.js line 235\n");
+		console.log("DKAvailable("+name+"): name === DKWidgetJS!  check DK.js line 235");
 		return true; 
 	}
 	return false;
@@ -933,7 +933,7 @@ function DK_GetObjects()
 	var elements = document.getElementsByTagName("script");
 	for(var i=0; elements && i<elements.length; i++){
 		if(!elements[i].id){
-			//console.warn(elements[i].src+": script object has no id\n");
+			//console.warn(elements[i].src+": script object has no id");
 			continue; 
 		}
 		jsfiles += elements[i].id+",";
@@ -945,7 +945,7 @@ function DK_GetObjects()
 	if(elements){
 		for(var i=0; i<elements.length; i++){
 			if(!elements[i].id){
-				//console.warn(elements[i].href+": css object has no id\n");
+				//console.warn(elements[i].href+": css object has no id");
 				continue; 
 			}
 			cssfiles += elements[i].id+",";
@@ -959,7 +959,7 @@ function DK_GetObjects()
 		for(var i = divs.length; i;){
 			var div = divs[--i];
 			if(!div.id){
-				console.warn(div+": html object has no id\n");
+				console.warn(div+": html object has no id");
 				continue; 
 			}
 			if(div.id.indexOf(".html") > -1){
@@ -1137,7 +1137,7 @@ function AjaxGet(url, output)
     }catch(e){}
 
 	if(!request){
-		console.error("AJAX ERROR: Error creating request object\n");
+		console.error("AJAX ERROR: Error creating request object");
 		return false;
 	}
 
@@ -1145,12 +1145,12 @@ function AjaxGet(url, output)
 		if(request.readyState===4){
 			if(request.status===200 || request.status===0){
 				output.value = request.responseText;
-				//console.log("AJAX RETURN: "+output.value+"\n");
+				//console.log("AJAX RETURN: "+output.value);
 				return true;
 			}
 			else{
-				console.error("AJAX ERROR: "+url+" "+request.statusText+"\n"); //report error
-				console.warn("status: "+request.status+"\n");
+				console.error("AJAX ERROR: "+url+" "+request.statusText); //report error
+				console.warn("status: "+request.status);
 				return false;
 			}
 		}
@@ -1184,7 +1184,7 @@ function ajaxGetUrl(url)
 		place = response.value.indexOf("}");
 		var res = response.value.substring(n+1, place);
 		response.value = response.value.replace("{"+res+"}", "");
-		//console.log("PHPLog: "+res+"\n");
+		//console.log("PHPLog: "+res);
 		n = response.value.indexOf("{");
 	}
 
