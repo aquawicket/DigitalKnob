@@ -62,7 +62,7 @@ function DKColorPicker_OnEvent(event)
 /////////////////////////////////
 function DKColorPicker_ColorBar()
 {
-	var temp = DK_GetPixelUnderMouse();
+	var temp = DKCPP_DKDuktape_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
 	var rgb = "rgb(";
@@ -80,7 +80,7 @@ function DKColorPicker_ColorBar()
 /////////////////////////////////
 function DKColorPicker_ColorBox()
 {
-	var temp = DK_GetPixelUnderMouse();
+	var temp = DKCPP_DKDuktape_GetPixelUnderMouse();
 	var rgb_arry = temp.split(",");
 
 	var rgb = "rgb(";

@@ -124,11 +124,11 @@ function DKSolution_OpenHere(path)
 {
 	var aPath = path;
 	if(DK_GetOS() !== "Android"){
-		aPath = DKFile_GetAbsolutePath(path);
+		aPath = DKCPP_DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) === 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
 	//console.log("aPath:"+aPath+"\n");
-	if(DKFile_IsDirectory(aPath)){ //Folder
+	if(DKCPP_DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
 	}

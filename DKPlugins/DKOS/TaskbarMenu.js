@@ -165,7 +165,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
 		DKClose("TaskbarMenu.js")
-		DK_Exit();
+		DKCPP_DKDuktape_Exit();
 		return;
 	}
 	if(event.currentTarget.id === "TaskbarMenu_Run"){
