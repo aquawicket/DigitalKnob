@@ -29,9 +29,9 @@ function SendBugReport_CreateReport()
 	var str = DKWidget_GetValue("SendBugReport_Textarea");
 	console.log(str+"\n");
 	
-	var assets = DKAssets_LocalAssets();
-	var log = DKFile_FileToString(assets+"log.txt");
-	DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
+	var assets = DKCPP_DKAssets_LocalAssets();
+	var log = DKCPP_DKFile_FileToString(assets+"log.txt");
+	DKCPP_DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
 	SendBugReport_SendReport();
 	
 	DKWidget_Hide("DKDebug/SendBugReport.html");
@@ -48,8 +48,8 @@ function SendBugReport_SendReport()
 {
 	DKWidget_Show("SendBugReport_Image");
 	DKWidget_Show("SendBugReport_Sending");
-	DK_DoFrame();
+	DKCPP_DKDuktape_DoFrame();
 	
 	var num = Math.floor((Math.random() * 99999999) + 1);
-	DKDebug_SendBugReport(num.toString());
+	DKCPP_DKDebug_SendBugReport(num.toString());
 }
