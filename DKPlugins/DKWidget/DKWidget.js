@@ -157,6 +157,9 @@ function DKWidget_GetElements(id)
 {
 	var string = "";
 	//var nodes = byId(id).getElementsByTagName('*'); //all children recursively
+	if(!byId(id)){
+		console.error("DKWidget_GetElements("+id+"): byId("+id+") invalid");
+	}
 	var nodes = byId(id).childNodes;
 	for(var i=0; i<nodes.length; i++){
 		if(nodes[i].id){

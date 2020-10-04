@@ -161,17 +161,17 @@ function DKSolution_UpdatePath(path)
 	*/
 	
 	//console.log("aPath:"+aPath+"\n");
-	//var rPath = DKFile_GetRelativePath(aPath, path);
+	//var rPath = DKCPP_DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath+"\n");
 	
-	var temp = DKFile_DirectoryContents(aPath);
+	var temp = DKCPP_DKFile_DirectoryContents(aPath);
 	if(!temp){ return false; }
 	var files = temp.split(",");
 
 	byId("DKSolutionMenu").innerHTML = ""; //Clear it
 
 	for(var d=0; d<files.length; d++){
-		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
+		if(DKCPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
 			byId(element2).setAttribute("class", "option");
 			var value = aPath+"/"+files[d]+"/";
@@ -189,7 +189,7 @@ function DKSolution_UpdatePath(path)
 	}
 
 	for(var f=0; f<files.length; f++){
-		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
+		if(!DKCPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
 			byId(element3).setAttribute("class", "option");
 			var value = aPath+"/"+files[f];
