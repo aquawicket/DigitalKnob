@@ -6,7 +6,7 @@
 function TaskbarMenu_Init()
 {
 	DKCreate("DKOS/TaskbarMenu.html", function(){
-		window.addEventListener("mousedown", TaskbarMenu_OnEvent);
+		document.addEventListener("mousedown", TaskbarMenu_OnEvent);
 		byId("OpenSource").addEventListener("click", TaskbarMenu_OnEvent);
 		byId("OpenDebug").addEventListener("click", TaskbarMenu_OnEvent);
 		byId("PushDKFiles").addEventListener("click", TaskbarMenu_OnEvent);
@@ -30,7 +30,7 @@ function TaskbarMenu_Init()
 //////////////////////////
 function TaskbarMenu_End()
 {
-	window.removeEventListener("mousedown", TaskbarMenu_OnEvent);
+	document.removeEventListener("mousedown", TaskbarMenu_OnEvent);
 	byId("OpenSource").removeEventListener("click", TaskbarMenu_OnEvent);
 	byId("OpenDebug").removeEventListener("click", TaskbarMenu_OnEvent);
 	byId("PushDKFiles").removeEventListener("click", TaskbarMenu_OnEvent);
@@ -180,7 +180,7 @@ function TaskbarMenu_OnEvent(event)
 		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKOS/TaskbarMenu.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
