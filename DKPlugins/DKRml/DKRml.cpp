@@ -281,11 +281,6 @@ bool DKRml::LoadHtml(const DKString& html)
 	LoadFonts();
 #endif
 
-	//Test 
-	if(document == document->GetContext()->GetRootElement()){
-		DKWARN("document == document->GetContext()->GetRootElement()\n");
-	}
-
 	DKString code = document->GetContext()->GetRootElement()->GetInnerRML();
 
 #ifdef DEBUG_TEST
