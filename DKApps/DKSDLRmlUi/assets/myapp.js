@@ -22,6 +22,7 @@ DKCreate("DKDebug/DKDebug.js", function(){
 		DKFrame_Widget("DKInputTest/DKInput.html");
 	});
 	*/
+	//window.location.href = "DKWebtest/index.html";
 	
 });
 });
