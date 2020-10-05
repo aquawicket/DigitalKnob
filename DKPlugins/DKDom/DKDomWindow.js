@@ -218,9 +218,9 @@ var Window = function(pointer)
 	Window.prototype.stop = function(){}
 	Window.prototype.updateCommands = function(){}
 
-	GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
+	//GlobalEventHandlers.call(this, pointer); //FIXME: should be a mixin
 	return EventTarget.call(this, pointer);
 }
-
 Window.prototype = EventTarget.prototype;
+Object.assign(Window.prototype, GlobalEventHandlers); //mixin
 var window = new Window("window"); //Create the global window object
