@@ -577,6 +577,7 @@ function DKWidget_GetHoverElement()
 	return document.elementFromPoint(window.mouseX, window.mouseY);
 }
 
+/*
 ////////////////////////////
 function DKWidget_GetScale()
 {
@@ -588,12 +589,15 @@ function DKWidget_GetScale()
 	//console.log("DKWidget_GetScale() = "+scale+"\n");
 	return parseFloat(scale);
 }
+*/
 
+/*
 /////////////////////////////////
 function DKWidget_SetScale(scale)
 {
 	document.documentElement.style.fontSize = scale+"px";
 }
+*/
 
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)

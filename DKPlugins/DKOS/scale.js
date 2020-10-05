@@ -28,19 +28,19 @@ function scale_OnEvent(event)
 //////////////////////
 function scale_minus()
 {
-	var scale = DKWidget_GetScale();
+	var scale = getComputedStyle(document.documentElement).fontSize;
+	scale = parseFloat(scale.replace("px",""));
 	scale = scale - 0.1;
 	if(scale < 1.0){ scale = 1.0; }
-	//console.log("DKWidget_SetScale("+scale+")\n");
-	DKWidget_SetScale(scale);
+	document.documentElement.style.fontSize = scale+"px";
 }
 
 /////////////////////
 function scale_plus()
 {
-	var scale = DKWidget_GetScale();
-	scale = scale + 0.1;
+	var scale = getComputedStyle(document.documentElement).fontSize;
+	scale = parseFloat(scale.replace("px",""));
+	scale = scale + .1;
 	if(scale > 100.0){ scale = 100.0; }
-	//console.log("DKWidget_SetScale("+scale+")\n");
-	DKWidget_SetScale(scale);
+	document.documentElement.style.fontSize = scale+"px";
 }
