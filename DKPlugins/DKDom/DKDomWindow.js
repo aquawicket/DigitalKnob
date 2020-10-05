@@ -3,6 +3,7 @@
 //////////////////////////////
 var Window = function(pointer)
 {
+	// Properties
 	Object.defineProperty(this, "closed", { 
 		get: function(){ /* return DKCPP_DKDomWindow_closed(pointer); */ } 
 	});
@@ -176,6 +177,7 @@ var Window = function(pointer)
 		get: function(){ /* return DKCPP_DKDomWindow_window(); */ } 
 	}); 
 	
+	// Methods
 	Window.prototype.alert = function(msg){ console.warn("alert: "+msg); }
 	Window.prototype.blur = function(){}
 	Window.prototype.cancelAnimationFrame = function(){}
@@ -189,7 +191,9 @@ var Window = function(pointer)
 	Window.prototype.find = function(){}
 	Window.prototype.focus = function(){}
 	Window.prototype.getAttentionWithCycleCount = function(){}
-	Window.prototype.getComputedStyle = function(){}
+	Window.prototype.getComputedStyle = function(element){
+		var style = DKCPP_DKDomWindow_getComputedStyle(element.pointer); //TODO
+	}
 	Window.prototype.getDefaultComputedStyle = function(){}
 	Window.prototype.getSelection = function(){}
 	Window.prototype.matchMedia = function(){}

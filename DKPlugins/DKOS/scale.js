@@ -28,7 +28,7 @@ function scale_OnEvent(event)
 //////////////////////
 function scale_minus()
 {
-	var scale = getComputedStyle(document.documentElement).fontSize;
+	var scale = window.getComputedStyle(document.documentElement).fontSize;
 	scale = parseFloat(scale.replace("px",""));
 	scale = scale - 0.1;
 	if(scale < 1.0){ scale = 1.0; }
@@ -38,7 +38,7 @@ function scale_minus()
 /////////////////////
 function scale_plus()
 {
-	var scale = getComputedStyle(document.documentElement).fontSize;
+	var scale = window.getComputedStyle(document.documentElement).fontSize;
 	scale = parseFloat(scale.replace("px",""));
 	scale = scale + .1;
 	if(scale > 100.0){ scale = 100.0; }
