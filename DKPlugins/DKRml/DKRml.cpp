@@ -656,10 +656,12 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 	//DKDEBUGFUNC(address);
 
 	Rml::Element* element;
-	if(address == "window"/* || address == "document"*/){
+	/*
+	if(address == "window"){ // || address == "document"){
 		element = DKRml::Get()->document;
 	}
 	else {
+	*/
 		if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 			//DKERROR("NOTE: DKRml::addressToElement(): the address is not a valid hex notation");
 			return NULL;
@@ -674,7 +676,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address)
 			return NULL;
 		}
 		element = reinterpret_cast<Rml::Element*>(tmp);
-	}
+	//}
 	if (element->GetTagName().empty()) {
 		return NULL;
 	}
@@ -689,17 +691,19 @@ DKString DKRml::elementToAddress(Rml::Element* element)
 		return NULL;
 	}
 	std::stringstream ss;
+	/*
 	if (element == DKRml::Get()->document) {
 		ss << "window";
 		//ss << "document";
 	}
 	else {
+	*/
 		const void* address = static_cast<const void*>(element);
 #ifdef WIN32
 		ss << "0x" << address;
 #else 
 		ss << address;
 #endif
-	}
+	//}
 	return ss.str();
 }
