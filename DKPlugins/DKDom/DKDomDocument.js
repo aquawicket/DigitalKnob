@@ -3,7 +3,6 @@
 ////////////////////////////////
 var Document = function(pointer)
 {
-	console.log("Document("+pointer+")");
 	// Properties
 	Object.defineProperty(this, "body", {
 		get: function(){
@@ -20,7 +19,6 @@ var Document = function(pointer)
 		get: function(){ 
 			var address = DKCPP_DKDomDocument_documentElement();
 			if(!address){ return; }
-			console.log("Document.documentElement = "+address);
 			return new HTMLElement(address);
 		} 
 	});
