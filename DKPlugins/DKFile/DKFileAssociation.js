@@ -100,7 +100,7 @@ function DKFileAssociation_OpenJS(path)
 {
 	//path = path.replace(absolutepath, "");
 		
-	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
+	var id = path.replace(DKAssets_LocalAssets(),"");
 	DKCreate(id, function(rval){
 		if(!rval){ return; }
 		id = id.replace(".js",".html");
