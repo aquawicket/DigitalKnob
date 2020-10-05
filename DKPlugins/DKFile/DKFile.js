@@ -317,7 +317,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	////////////////////////////////////////////
 	var DKFile_DirectoryContents = function(url)
 	{
-		url = "."; //TEST
+		//TEST
+		url = url.replace("http://localhost/", "."); //FIXME
+		
 		console.log("DKFile_DirectoryContents("+url+")");
 		if(url.indexOf(":") > -1){
 			console.error("DKFile_DirectoryContents("+url+"): url has :");

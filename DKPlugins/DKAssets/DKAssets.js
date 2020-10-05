@@ -1,7 +1,6 @@
-if(DK_GetBrowser() !== "RML"){ //This is for browser only.
+//if(DK_GetBrowser() !== "RML"){ //This is for browser only.
 
-
-var href = document.location.href;
+var href = window.location.href;
 if(href.indexOf("?") > -1){
 	href = href.substr(0, href.lastIndexOf("?")+1);
 }
@@ -31,13 +30,13 @@ var log_lines;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_LINES]")
 //if(log_lines === "ON"){ LOG_LINES = true; }
 
 var hostname;// = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
-if(!hostname){ hostname = document.location.hostname; }
+if(!hostname){ hostname = window.location.hostname; }
 //if(!hostname){ hostname = "digitalknob.com"; }
 if(!hostname){ hostname = "127.0.0.1"; }
 
 var pathname;// = DKFile_GetSetting(local_assets+"settings.txt", "[PATHNAME]");
 
-if(!pathname){ pathname = document.location.pathname; }
+if(!pathname){ pathname = window.location.pathname; }
 if(pathname.lastIndexOf("DKApps") > 0){
 	pathname = pathname.substring(pathname.lastIndexOf("DKApps")+6, pathname.lastIndexOf("assets"));
 }
@@ -47,7 +46,7 @@ if(pathname.lastIndexOf(".com") > 0){
 pathname = pathname.replace("index.html", "");
 //if(pathname.indexOf("/index.html") > -1){ pathname = "/DKDatabase/"; }
 
-var protocol = document.location.protocol;
+var protocol = window.location.protocol;
 online_assets = protocol+"//"+hostname+pathname;
 if(protocol !== "file:"){
 	local_assets = protocol+"//"+hostname+pathname;
@@ -67,22 +66,22 @@ else{
 */
 //if(absolutepath){online_assets = absolutepath;}
 
-console.log("href: "+href+"\n");
-console.log("hostname: "+hostname+"\n");
-console.log("pathname: "+pathname+"\n");
-console.log("protocol: "+protocol+"\n");
-console.log("appfilename: "+appfilename+"\n");
-console.log("local_assets: "+local_assets+"\n");
-console.log("online_assets: "+online_assets+"\n");
-//console.log("absolutepath: "+absolutepath+"\n");
+console.log("href: "+href);
+console.log("hostname: "+hostname);
+console.log("pathname: "+pathname);
+console.log("protocol: "+protocol);
+console.log("appfilename: "+appfilename);
+console.log("local_assets: "+local_assets);
+console.log("online_assets: "+online_assets);
+//console.log("absolutepath: "+absolutepath);
 
-console.log("LOG_DEBUG: "+LOG_DEBUG+"\n");
-console.log("LOG_INFO: "+LOG_INFO+"\n");
-console.log("LOG_WARNINGS: "+LOG_WARNINGS+"\n");
-console.log("LOG_ERRORS: "+LOG_ERRORS+"\n");
-console.log("LOG_FILE: "+LOG_FILE+"\n");
-console.log("LOG_SHOW: "+LOG_SHOW+"\n");
-console.log("LOG_HIDE: "+LOG_HIDE+"\n");
+console.log("LOG_DEBUG: "+LOG_DEBUG);
+console.log("LOG_INFO: "+LOG_INFO);
+console.log("LOG_WARNINGS: "+LOG_WARNINGS);
+console.log("LOG_ERRORS: "+LOG_ERRORS);
+console.log("LOG_FILE: "+LOG_FILE);
+console.log("LOG_SHOW: "+LOG_SHOW);
+console.log("LOG_HIDE: "+LOG_HIDE);
 
 
 ////////////////////////
@@ -91,12 +90,10 @@ function DKAssets_Init()
 	
 }
 
-if(DK_GetBrowser() !== "CEF"){
-	/////////////////////////////////////
-	var DKAssets_LocalAssets = function()
-	{
-		return local_assets;
-	}
+/////////////////////////////////////
+var DKAssets_LocalAssets = function()
+{
+	return local_assets;
 }
 
 ////////////////////////////////
@@ -115,6 +112,4 @@ function DKAssets_Protocol()
 function DKAssets_AbsolutePath()
 {
 	return absolutepath;
-}
-
 }
