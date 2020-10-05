@@ -388,6 +388,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return true;
 	}
 }
+else{
+	var DKFile_IsDirectory = function(url){ return DKCPP_DKFile_IsDirectory(url); }
+}
 
 /////////////////////////////////
 function DKFile_GetExtention(url)

@@ -48,7 +48,7 @@ pathname = pathname.replace("index.html", "");
 var protocol = window.location.protocol;
 online_assets = protocol+"//"+hostname+pathname;
 if(protocol !== "file:"){
-	local_assets = protocol+"//"+hostname+pathname;
+	//local_assets = protocol+"//"+hostname+pathname;
 }
 
 appfilename = pathname.replace("/","");
