@@ -4,13 +4,13 @@ var key_history = [];
 function DKDebug_Init()
 {
 	console.log("DKDebug_Init()");
-	document.documentElement.addEventListener("keydown", DKDebug_OnEvent);
+	document.addEventListener("keydown", DKDebug_OnEvent);
 }
 
 //////////////////////
 function DKDebug_End()
 {
-	document.documentElement.removeEventListener("keydown", DKDebug_OnEvent);
+	document.removeEventListener("keydown", DKDebug_OnEvent);
 }
 
 ///////////////////////////////

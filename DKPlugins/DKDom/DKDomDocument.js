@@ -48,4 +48,4 @@ var Document = function(pointer)
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot); //mixin
 Object.assign(Document.prototype, GlobalEventHandlers); //mixin
-var document = new Document("document");
+//var document = new Document("0xaddress"); //Created in cpp from DKRml
