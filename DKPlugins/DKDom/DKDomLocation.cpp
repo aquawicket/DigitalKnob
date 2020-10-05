@@ -48,8 +48,17 @@ int DKDomLocation::host(duk_context* ctx)
 /////////////////////////////////////////////
 int DKDomLocation::hostname(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString hostname = DKRml::Get()->href;
+
+	//TODO
+	// 127.0.0.1 is the hostname of http://127.0.0.1/Test/file.html
+	int found = hostname.find("//");
+	if(found != std::string::npos){
+		hostname.erase(0, found);
+	}
+	hostname = "not implemented";
+
+	duk_push_string(ctx, hostname.c_str());
 	return true;
 }
 
@@ -67,55 +76,55 @@ int DKDomLocation::href(duk_context* ctx)
 ///////////////////////////////////////////
 int DKDomLocation::origin(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString origin = "TODO";
+	duk_push_string(ctx, origin.c_str());
 	return true;
 }
 
 /////////////////////////////////////////////
 int DKDomLocation::password(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString password = "TODO";
+	duk_push_string(ctx, password.c_str());
 	return true;
 }
 
 /////////////////////////////////////////////
 int DKDomLocation::pathname(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString pathname = "TODO";
+	duk_push_string(ctx, pathname.c_str());
 	return true;
 }
 
 /////////////////////////////////////////
 int DKDomLocation::port(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString port = "TODO";
+	duk_push_string(ctx, port.c_str());
 	return true;
 }
 
 /////////////////////////////////////////////
 int DKDomLocation::protocol(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString protocol = "TODO";
+	duk_push_string(ctx, protocol.c_str());
 	return true;
 }
 
 ///////////////////////////////////////////
 int DKDomLocation::search(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString search = "TODO";
+	duk_push_string(ctx, search.c_str());
 	return true;
 }
 
 /////////////////////////////////////////////
 int DKDomLocation::username(duk_context* ctx)
 {
-	DKString host = "TODO";
-	duk_push_string(ctx, host.c_str());
+	DKString username = "TODO";
+	duk_push_string(ctx, username.c_str());
 	return true;
 }
