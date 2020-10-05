@@ -1,5 +1,8 @@
 // TODO //
 
+*** DKDomLocation ***
+finish location so DKSolution can work again
+
 *** DK Javascript ***
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
 Proper naming would be DKCPP_DKPlugin_File_function

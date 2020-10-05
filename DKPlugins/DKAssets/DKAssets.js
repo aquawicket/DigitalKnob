@@ -1,5 +1,3 @@
-//if(DK_GetBrowser() !== "RML"){ //This is for browser only.
-
 var href = window.location.href;
 if(href.indexOf("?") > -1){
 	href = href.substr(0, href.lastIndexOf("?")+1);
@@ -28,6 +26,7 @@ LOG_HIDE;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_HIDE]");
 
 var log_lines;// = DKFile_GetSetting(local_assets+"settings.txt", "[LOG_LINES]");
 //if(log_lines === "ON"){ LOG_LINES = true; }
+
 
 var hostname;// = DKFile_GetSetting(local_assets+"settings.txt", "[HOSTNAME]");
 if(!hostname){ hostname = window.location.hostname; }
