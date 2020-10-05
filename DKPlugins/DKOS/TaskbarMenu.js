@@ -58,7 +58,7 @@ function TaskbarMenu_OnEvent(event)
 			if(!rval){ return; }
 			DKFrame_Widget("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
-			DKSolution_UpdatePath(DKCPP_DKAssets_LocalAssets());
+			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
 	}
 	if(event.currentTarget.id === "OpenBuilder"){

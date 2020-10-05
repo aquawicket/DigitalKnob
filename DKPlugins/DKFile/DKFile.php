@@ -114,6 +114,7 @@ if($_GET["IsDirectory"])
 ////////////////////////////////
 function DirectoryContents($dir)
 {
+	//echo "php: DirectoryContents";
 	$myDirectory = opendir($dir);
 	while($entryName = readdir($myDirectory)){
 		$dirArray[] = $entryName;
