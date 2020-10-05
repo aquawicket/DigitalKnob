@@ -273,27 +273,25 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}	
 }
 
-if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	///////////////////////////////////////
-	var DKFile_FileToString = function(url)
-	{
-		console.log("DKFile_FileToString("+url+")");
-		if(typeof absolutepath !== "undefined"){
-			url = url.replace(absolutepath, "");
-		}
-		
-		//var path = DKFile_VerifyPath(url);
-		if(!url){ return; }
-		//if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") === -1){
-		//	return ajaxGetUrl("http://cors.io/?u="+url);
-		//}
-		return ajaxGetUrl(url);
+///////////////////////////////////////
+var DKFile_FileToString = function(url)
+{
+	console.log("DKFile_FileToString("+url+")");
+	if(typeof absolutepath !== "undefined"){
+		url = url.replace(absolutepath, "");
 	}
+		
+	//var path = DKFile_VerifyPath(url);
+	if(!url){ return; }
+	//if(url.indexOf("http") > -1 && url.indexOf("digitalknob.com") === -1){
+	//	return ajaxGetUrl("http://cors.io/?u="+url);
+	//}
+	return ajaxGetUrl(url);
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	/////////////////////////////////////////////
-	var DKFile_StringToFile= function(data, path)
+	var DKFile_StringToFile = function(data, path)
 	{
 		if(typeof absolutepath !== "undefined"){
 		    if(!path.includes(absolutepath)){
@@ -310,6 +308,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		//console.log("StringToFile("+data+", "+path+")");
 		DKFile_SaveFile(path, data);
 	}
+}
+else{
+	var DKFile_StringToFile = function(data, path){ return DKCPP_DKFile_StringToFile(data, path) };
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
@@ -334,6 +335,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return result;
 	}
 }
+else{
+	var DKFile_DirectoryContents = function(url){ return DKCPP_DKFile_DirectoryContents(url) };
+}
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	//////////////////////////////////////////
@@ -354,6 +358,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		console.log("DKFile_GetAbsolutePath("+url+") -> "+result);
 		return result;
 	}
+}
+else{
+	var DKFile_GetAbsolutePath = function(url){ return DKCPP_DKFile_GetAbsolutePath(url) };
 }
 
 ////////////////////////////////////////////////

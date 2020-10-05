@@ -84,7 +84,7 @@ function DKNotepadFile_Save()
 	var text = DKWidget_GetValue("DKNotepad_Text");
 	//var assets = DKAssets_LocalAssets();
 	//console.log("DKNotepadFile_Save(): text = "+text);
-	DKCPP_DKFile_StringToFile(text, currentFile);
+	DKFile_StringToFile(text, currentFile);
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessage_Message("File Saved");

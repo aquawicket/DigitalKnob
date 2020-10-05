@@ -78,7 +78,7 @@ function DKNotepad_Open(file)
 	//TODO - only open files under 5mb
 	//TODO - set the frame title with the filename
 	currentFile = file;
-	var text = DKCPP_DKFile_FileToString(file);
+	var text = DKFile_FileToString(file);
 	//console.log("DKNotepad_Open(file): = "+text);
 	//byId("DKNotepad_Text").value = text;
 	byId("DKNotepad_Text").value = text;
@@ -89,5 +89,5 @@ function DKNotepad_Save(file)
 {
 	var text = byId("DKNotepad_Text").value;
 	//console.log(("DKNotepad_Save("+file+"): text = "+text+"\n");
-	DKCPP_DKFile_StringToFile(text, file);
+	DKFile_StringToFile(text, file);
 }

@@ -1,4 +1,4 @@
-// TODO
+// TODO //
 
 *** DK Javascript ***
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
@@ -10,9 +10,6 @@ Make sure dkbuilder recognizes the new web standard key codes
 
 *** FUN ***
 Make the Atari tank game  :D
-
-*** CONSOLE ***
-It seems like all [JS] "console" text has an extra newline character
 
 ** Lose DKWidget
 It's down to one file with a bunch of helper functions. not a class..  push it into main or something

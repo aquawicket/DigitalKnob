@@ -581,6 +581,7 @@ function DKWidget_GetHoverElement()
 function DKWidget_GetScale()
 {
 	//var scale = getComputedStyle(document.documentElement).fontSize;
+	//console.log(document.documentElement.style);
 	var scale = document.documentElement.style.fontSize;
 	console.log(scale);
 	scale = scale.replace("px","");

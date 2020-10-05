@@ -3,6 +3,7 @@
 ////////////////////////////////
 var Document = function(pointer)
 {
+	console.log("Document("+pointer+")");
 	// Properties
 	Object.defineProperty(this, "body", {
 		get: function(){
@@ -19,6 +20,7 @@ var Document = function(pointer)
 		get: function(){ 
 			var address = DKCPP_DKDomDocument_documentElement();
 			if(!address){ return; }
+			console.log("Document.documentElement = "+address);
 			return new HTMLElement(address);
 		} 
 	});
@@ -42,8 +44,8 @@ var Document = function(pointer)
 		return new HTMLCollection(addresses);
 	}
 	
-	return Node.call(this, pointer);
-	//return HTMLElement.call(this, pointer);
+	//return Node.call(this, pointer);
+	return HTMLElement.call(this, pointer); //we have to call HTMKElement instead of Node for .style to work
 }
 Document.prototype = Node.prototype;
 Object.assign(Document.prototype, DocumentOrShadowRoot); //mixin

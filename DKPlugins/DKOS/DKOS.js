@@ -2,7 +2,7 @@
 function DKOS_Init() {
 	console.log("DKOS_Init()");
 	DKCreate("DKOS/DKOS.html", function(){
-		//document.documentElement.style.backgroundColor = "black"; //FIXME
+		document.documentElement.style.backgroundColor = "black";
 		document.body.style.margin = "0px";
 		document.body.style.overflow = "hidden";
 		var OS = DK_GetOS();
