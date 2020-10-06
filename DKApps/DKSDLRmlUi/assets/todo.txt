@@ -4,7 +4,8 @@
 Get DKTestAll Working
 Compile Everything for win64
 Compile in Linux
-Hint: Their may be a SDL2Android thing in 3rdParty 
+Hint: Their may be a SDL2Android thing in 3rdParty
+Add DKBuilder to DKBinaries for win32 win 64 after tests
 
 *** Javascript ***
 EventTarget is lower than Window. Use that for javascript without a document context.
