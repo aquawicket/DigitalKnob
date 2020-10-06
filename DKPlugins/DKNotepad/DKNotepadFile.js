@@ -2,7 +2,7 @@
 function DKNotepadFile_Init()
 {
 	DKCreate("DKNotepad/DKNotepadFile.html,DKNotepad/DKNotepad.html");
-	window.addEventListener("mousedown", DKNotepadFile_OnEvent);
+	document.addEventListener("mousedown", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").addEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Open").addEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Save").addEventListener("click", DKNotepadFile_OnEvent);
@@ -14,7 +14,7 @@ function DKNotepadFile_Init()
 ////////////////////////////
 function DKNotepadFile_End()
 {
-	window.removeEventListener("mousedown", DKNotepadFile_OnEvent);
+	document.removeEventListener("mousedown", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_New").removeEventListener("click", DKNotepadFile_OnEvent); //FIXME:   DKNotepadFile_New undefined
 	byId("DKNotepadFile_Open").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Save").removeEventListener("click", DKNotepadFile_OnEvent);
@@ -49,7 +49,7 @@ function DKNotepadFile_OnEvent(event)
 	}
 	
 	//FIXME
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKNotepad/DKNotepadFile.html").contains(DKWidget_GetHoverElement())){
 			return;
 		}
