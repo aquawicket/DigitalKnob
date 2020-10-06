@@ -1,19 +1,14 @@
 ~! THE LIST !~
 
-Replace all coourances of DKCPP with CPP
-
 EventTarget is lower than Window. Use that for javascript without a document context.
 
 *** DK Javascript ***
-ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
-Proper naming would be DKCPP_DKPlugin_Function
+ALL C++ Javascript functions now REQUIRE a CPP_ prefix
+Proper naming would be CPP_DKPlugin_Function
 
 *** DK.js ***
 Make sure all function are prefixed with DK_
 i.e.  DK_Function(var)
-
-*** FUN ***
-Make the Atari tank game  :D
 
 ** Eliminate DKWidget
 Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
@@ -29,6 +24,6 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWi
 
 *** DKDomEvent ***
 * add removeEventListener everywhere neccesary 
-* Make EVERY event go through DKDomEventTarget.js
+* Make EVERY event go through DKDomEventTarget.js event without a DOM
 * keep track of events in DKDomEventTarget.js
 
