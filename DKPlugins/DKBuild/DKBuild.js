@@ -94,7 +94,7 @@ function DKBuild_InstallCmake()
 		//TODO
 	}
 	else if(DKCPP_DKDuktape_GetOS() === "Linux"){
-		DK_Execute("sudo apt-get install cmake");
+		DKCPP_DKDuktape_Execute("sudo apt-get install cmake");
 	}
 	else{
 		console.log("ERROR: unrecognied HOST OS: "+DKCPP_DKDuktape_GetOS());
@@ -143,7 +143,7 @@ function DKBuild_ValidateGcc()
 function DKBuild_InstallGcc()
 {
 	console.log("Installing Gcc");
-	DK_Execute("sudo apt-get update && sudo apt-get install build-essential");
+	DKCPP_DKDuktape_Execute("sudo apt-get update && sudo apt-get install build-essential");
 }
 
 ////////////////////////////////
@@ -405,7 +405,7 @@ function DKBuild_DoResults()
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win32");
 		
-		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A Win32 "+cmake_string+DKPATH+"/DK");
 		
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
@@ -413,13 +413,13 @@ function DKBuild_DoResults()
 			if(DKCPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe")){
 				DKCPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
 			}		
-			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
+			DKCPP_DKDuktape_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(DKCPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe")){
 				DKCPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+".exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_old.exe", true);
 			}
-			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
+			DKCPP_DKDuktape_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
 		//copy .pdb file to assets
@@ -429,7 +429,7 @@ function DKBuild_DoResults()
 		/*
 		if(DKCPP_DKFile_Exists(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait");
-			DK_Execute(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release/"+APP+".exe");
+			DKCPP_DKDuktape_Execute(DKPATH+"/DK/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win32/Release/"+APP+".exe");
 		}
 		else{
 			console.warn("DKBuild_DoResults(): UPX does not exists");
@@ -455,20 +455,20 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/win64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A x64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(DKCPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe")){
 				DKCPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Debug/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
-			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
+			DKCPP_DKDuktape_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Debug");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(DKCPP_DKFile_Exists(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe")){
 				DKCPP_DKFile_Rename(DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64.exe", DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/Release/"+APP+"_64_old.exe", true);
 			}
-			DK_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
+			DKCPP_DKDuktape_Execute(VC2019+" "+DKPATH+"/"+appdir+"/"+APP+"/"+OS+"/"+APP+".sln /p:Configuration=Release");
 		}
 		
 		//copy .pdb file to assets
@@ -478,7 +478,7 @@ function DKBuild_DoResults()
 		/*
 		if(DKCPP_DKFile_Exists(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe")){
 			console.warn("UPX compressing exe... please wait");
-			DK_Execute(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win64/Release/"+APP+".exe");
+			DKCPP_DKDuktape_Execute(DKPATH+"/3rdParty/upx-3.95-win64/upx.exe -9 -v "+DKPATH+"/"+appdir+"/"+APP+"/win64/Release/"+APP+".exe");
 		}
 		else{
 			console.warn("DKBuild_DoResults(): UPX does not exists");
@@ -493,11 +493,11 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac32");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=i386 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			
 			//update the info.plist in include the logo icon
 			var info_plist = DKCPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist");
@@ -505,7 +505,7 @@ function DKBuild_DoResults()
 			DKCPP_DKFile_StringToFile(info_plist, DKPATH+"/"+appdir+"/"+APP+"/mac32/Debug/"+APP+".app/Contents/info.plist")
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build");
 			
 			//update the info.plist in include the logo icon
 			var info_plist = DKCPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac32/Release/"+APP+".app/Contents/info.plist");
@@ -524,11 +524,11 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/mac64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build");
 			
 			//update the info.plist in include the logo icon
 			var info_plist = DKCPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/info.plist");
@@ -541,23 +541,23 @@ function DKBuild_DoResults()
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Debug/"+APP+".app/Contents/MacOS/"+APP+"\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 			}
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build");
 			
 			//update the info.plist in include the logo icon
 			var info_plist = DKCPP_DKFile_FileToString(DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/info.plist");
@@ -570,19 +570,19 @@ function DKBuild_DoResults()
 				
 				var command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../../../../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../../../../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+" Helper\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -change \"@executable_path/Chromium Embedded Framework\" \"@executable_path/../Frameworks/Chromium Embedded Framework.framework/Chromium Embedded Framework\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/Frameworks/"+APP+" Helper.app/Contents/MacOS/"+APP+"\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 				
 				command = "install_name_tool -add_rpath \"@executable_path/../\" \""+DKPATH+"/"+appdir+"/"+APP+"/mac64/Release/"+APP+".app/Contents/MacOS/"+APP+"\"";
 				console.log(command);
-				DK_Execute(command);
+				DKCPP_DKDuktape_Execute(command);
 			}
 		}
 	}
@@ -594,14 +594,14 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios32");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"");
 		}
 	}
 	
@@ -612,14 +612,14 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/ios64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=OS "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build -arch \"armv7 armv7s\"");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build -arch \"armv7 armv7s\"");
 		}
 	}
 	
@@ -630,14 +630,14 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim32");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
 		}
 	}
 	
@@ -648,14 +648,14 @@ function DKBuild_DoResults()
 		}
 		DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
 		DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/iossim64");
-		var rtvalue = DK_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"/DK");
+		var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Xcode\" "+cmake_string+"-DCMAKE_TOOLCHAIN_FILE="+DKPATH+"/DKCMake/iOS.cmake -DIOS_PLATFORM=SIMULATOR64 "+DKPATH+"/DK");
 		if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 		
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Debug build -sdk iphonesimulator11.2");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			DK_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
+			DKCPP_DKDuktape_Execute("xcodebuild -target "+APP+" -configuration Release build -sdk iphonesimulator11.2");
 		}
 	}
 	
@@ -668,10 +668,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute("make "+APP);
+			DKCPP_DKDuktape_Execute("make "+APP);
 			
 			//Create .desktop file
 			var string = "[Desktop Entry]\n";
@@ -690,10 +690,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux32/Release");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute("make "+APP);
+			DKCPP_DKDuktape_Execute("make "+APP);
 			
 			//Create .desktop file
 			var string = "[Desktop Entry]\n";
@@ -717,10 +717,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute("make "+APP);
+			DKCPP_DKDuktape_Execute("make "+APP);
 
 			//Create .desktop file
 			var string = "[Desktop Entry]\n";
@@ -739,10 +739,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/linux64/Release");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute("make "+APP);
+			DKCPP_DKDuktape_Execute("make "+APP);
 			
 			//Create .desktop file
 			var string = "[Desktop Entry]\n";
@@ -766,10 +766,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+			DKCPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -779,14 +779,14 @@ function DKBuild_DoResults()
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			var rtvalue;
 			if(DKCPP_DKDuktape_GetOS() === "Win32" || DKCPP_DKDuktape_GetOS() === "Win64"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(DKCPP_DKDuktape_GetOS() === "Linux" || DKCPP_DKDuktape_GetOS() === "Mac"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
+			DKCPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
 	
@@ -799,10 +799,10 @@ function DKBuild_DoResults()
 			}
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
-			var rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+			DKCPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -812,14 +812,14 @@ function DKBuild_DoResults()
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			var rtvalue;
 			if(DKCPP_DKDuktape_GetOS() === "Win64" || DKCPP_DKDuktape_GetOS() === "Win64"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(DKCPP_DKDuktape_GetOS() === "Linux" || DKCPP_DKDuktape_GetOS() === "Mac"){
-				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = DKCPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			DK_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
+			DKCPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
 	
