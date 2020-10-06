@@ -58,7 +58,7 @@ function DKBuild_End()
 ////////////////////////////////
 function DKBuild_ValidateCmake()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for CMake");
 	if(!DKCPP_DKFile_Exists(CMAKE)){
 		console.log("Please install CMake");
@@ -104,7 +104,7 @@ function DKBuild_InstallCmake()
 /////////////////////////////////
 function DKBuild_ValidateVC2019()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	if(DKCPP_DKDuktape_GetOS() !== "Win32" && DKCPP_DKDuktape_GetOS() !== "Win64"){
 		return;
 	}
@@ -130,7 +130,7 @@ function DKBuild_InstallVC2019()
 function DKBuild_ValidateGcc()
 {
 	if(DKCPP_DKDuktape_GetOS() !== "Linux"){ return; }
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GCC");
 	if(!DKCPP_DKFile_Exists(GCC)){
 		console.log("Please install GCC");
@@ -150,7 +150,7 @@ function DKBuild_InstallGcc()
 function DKBuild_ValidateXcode()
 {
 	if(DKCPP_DKDuktape_GetOS() !== "Mac"){ return; }
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for Xcode");
 	if(!DKCPP_DKFile_Exists(XCODE)){
 		console.log("Please install Xcode");
@@ -255,7 +255,7 @@ function DKBuild_ResetAppsPlugins()
 	console.log("Deleting Apps and Plugins... ");
 	
 	// Delete everything in DKApps except DKBuild
-	var apps = DKCPP_DKFile_DirectoryContents(DKPATH+"/DKApps");
+	var apps = DKCPP_DKCPP_DKFile_DirectoryContents(DKPATH+"/DKApps");
 	var list = apps.split(',');
 	for(var i=0; i<list.length; ++i){
 		if(list[i] === "DKBuilder"){ continue; }
@@ -264,7 +264,7 @@ function DKBuild_ResetAppsPlugins()
 	}
 	
 	//Multipe user folders
-	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]);
 		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
@@ -291,7 +291,7 @@ function DKBuild_Reset3rdParty()
 function DKBuild_GetAppList()
 {
 	//DKApps folder
-	var apps = DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
+	var apps = DKCPP_DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
 	for(var i=0; i<APP_LIST.length; i++){
@@ -312,7 +312,7 @@ function DKBuild_GetAppList()
 			//console.log("url = "+url);
 			var folder = files[i].replace(".txt",""); 
 			//console.log("folder = "+folder);
-			var apps2 = DKCPP_DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
+			var apps2 = DKCPP_DKCPP_DKFile_DirectoryContents(DKPATH+"/"+folder+"/DKApps");
 			if(apps2){
 				//console.log("apps2 = "+apps2);
 				var APP_LIST2 = apps2.split(",");
@@ -374,7 +374,7 @@ function DKBuild_DoResults()
 	
 	var appdir = "DKApps";
 	
-	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ 
 		if(DKCPP_DKFile_Exists(DKPATH+"/"+files[i]+"/DKApps/"+APP)){

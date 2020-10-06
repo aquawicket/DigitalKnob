@@ -3,7 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	DKCPP_DKDuktape_DKCreate("DKBuild/DKBuild.js", function(){
+	DKCPP_DKDuktape_DKCreate("DKBuild/DKBuild.js");//, function(){
 		DKBuild_ValidateCmake();
 		//DKBuild_ValidateVC2015();
 		DKBuild_ValidateVC2019();
@@ -13,7 +13,7 @@ function DKBuildConsole_Init()
 		while(working){
 			DKBuildConsole_Process();
 		}
-	});
+	//});
 }
 
 /////////////////////////////
@@ -37,13 +37,13 @@ function DKBuildConsole_ChooseUpdate()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = DK_GetKey();
+		key = DKCPP_DKDuktape_GetKey();
 	}
 	
 	//console.log("Key pressed: "+String(key)+"");
 	
 	if(key === 27){ //Esc key
-		DK_Exit();
+		DKCPP_DKDuktape_Exit();
 	}
 	if(key === 121){ //y key
 		DKCreate("DKGit/DKGit.js", function(){
@@ -88,11 +88,11 @@ function DKBuildConsole_SelectOs()
 
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = DK_GetKey();
+		key = DKCPP_DKDuktape_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		DK_Exit();
+		DKCPP_DKDuktape_Exit();
 	}
 	if(key === 49){
 		OS = "win32";
@@ -147,11 +147,11 @@ function DKBuildConsole_SelectApp()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = DK_GetKey();
+		key = DKCPP_DKDuktape_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		DK_Exit();
+		DKCPP_DKDuktape_Exit();
 	}
 	
 	DKBuildConsole_KeyToApp(key);
@@ -173,11 +173,11 @@ function DKBuildConsole_SelectType()
 	
 	var key = 10;
 	while(key === 10){ //unix fix
-		key = DK_GetKey();
+		key = DKCPP_DKDuktape_GetKey();
 	}
 	//console.log("Key pressed: "+String(key)+"");
 	if(key === 27){
-		DK_Exit();
+		DKCPP_DKDuktape_Exit();
 	}
 	if(key === 49){
 		TYPE = "Debug";
@@ -203,10 +203,10 @@ function DKBuildConsole_Process()
 	
 	DKBuildConsole_ChooseUpdate();
 	
-	if(!DKFile_Exists(DKPATH+"/DK/DKPlugins")){
+	if(!DKCPP_DKFile_Exists(DKPATH+"/DK/DKPlugins")){
 		console.error("ERROR: can't find "+DKPATH+" ");
-		DK_GetKey();
-		DK_Exit();
+		DKCPP_DKDuktape_GetKey();
+		DKCPP_DKDuktape_Exit();
 	}
 	
 	while(OS === ""){
@@ -232,7 +232,7 @@ function DKBuildConsole_Process()
 	console.log("###########################");
 
 	console.log("Press any key to Build");
-	DK_GetKey();
+	DKCPP_DKDuktape_GetKey();
 	
 	DKBuild_DoResults();
 }
