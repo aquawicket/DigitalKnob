@@ -1,14 +1,3 @@
-/*
-window.addEventListener('error', function(e){
-    var errorText = [
-        e.message + '\n',
-        'URL: ' + e.filename,
-        'Line: ' + e.lineno + ', Column: ' + e.colno,
-        'Stack: ' + (e.error && e.error.stack || '(no stack trace)')
-    ].join('\n');
-	console.error(errorText);
+DKCPP_DKDuktape_DKCreate("DKBuild/DKBuildConsole.js", function(){
+	//DKCPP_DKDuktape_DKCreate("DKUpdate");
 });
-*/
-
-DKCreate("DKBuild/DKBuildConsole.js", function(){});
-//DKCreate("DKUpdate");

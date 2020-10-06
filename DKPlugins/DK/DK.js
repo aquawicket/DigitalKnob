@@ -112,9 +112,7 @@ window.addEventListener('error', function(e){
 });
 
 
-// FIXME: not working
-/////////////////////////////////
-//window.onmousemove = function(e){
+///////////////////////////////////////////////////
 document.addEventListener("mousemove", function(e){	
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
 		window.mouseX = e.clientX + document.body.scrollLeft
@@ -134,7 +132,6 @@ document.addEventListener("mousemove", function(e){
 	if (window.mouseY < 0){window.mouseY = 0}  
 	return true;
 });
-//};
 
 
 

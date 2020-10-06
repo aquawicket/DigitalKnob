@@ -3,7 +3,7 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	DKCreate("DKBuild/DKBuild.js", function(){
+	DKCPP_DKDuktape_DKCreate("DKBuild/DKBuild.js", function(){
 		DKBuild_ValidateCmake();
 		//DKBuild_ValidateVC2015();
 		DKBuild_ValidateVC2019();
@@ -19,7 +19,7 @@ function DKBuildConsole_Init()
 /////////////////////////////
 function DKBuildConsole_End()
 {
-	DKClose("DKBuild/DKBuild.js");
+	DKCPP_DKDuktape_DKClose("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////////

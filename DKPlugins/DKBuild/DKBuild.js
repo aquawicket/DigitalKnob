@@ -12,7 +12,7 @@ var DKPATH = "";
 var CMAKE = "";
 var NDK = "";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
-VC2019 = DKFile_GetShortName(VC2019);
+VC2019 = DKCPP_DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
@@ -21,28 +21,28 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	DKCreate("DKCurl");
+	DKCPP_DKDuktape_DKCreate("DKCurl");
 
-	if(DK_GetOS() === "Win32"){
+	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = DKCPP_DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
 		NDK = DKCPP_DKFile_GetShortName(NDK);
 	}
-	if(DK_GetOS() === "Win64"){
+	if(DKCPP_DKDuktape_GetOS() === "Win64"){
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
-		CMAKE = DKFile_GetShortName(CMAKE);
+		CMAKE = DKCPP_DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
-		NDK = DKFile_GetShortName(NDK);
+		NDK = DKCPP_DKFile_GetShortName(NDK);
 	}
-	if(DK_GetOS() === "Mac"){
+	if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
-	if(DK_GetOS() === "Linux"){
+	if(DKCPP_DKDuktape_GetOS() === "Linux"){
 		DKPATH = "/home/aquawicket/digitalknob";
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
@@ -65,7 +65,7 @@ function DKBuild_ValidateCmake()
 		DKBuild_InstallCmake();
 	}
 	console.log("Found CMake");
-	if(DK_GetOS() === "Mac"){
+	if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		CMAKE = "cmake";
 	}
 }
@@ -76,28 +76,28 @@ function DKBuild_InstallCmake()
 	console.log("Installing CMake");
 	var datapath = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() === "Win32"){
+	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		if(!DKCPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
 			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
 			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
 		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
-	else if(DK_GetOS() === "Win64"){
+	else if(DKCPP_DKDuktape_GetOS() === "Win64"){
 		if(!DKCPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
 			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
 			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
 		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
-	else if(DK_GetOS() === "Mac"){
+	else if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() === "Linux"){
+	else if(DKCPP_DKDuktape_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install cmake");
 	}
 	else{
-		console.log("ERROR: unrecognied HOST OS: "+DK_GetOS());
+		console.log("ERROR: unrecognied HOST OS: "+DKCPP_DKDuktape_GetOS());
 	}
 }
 
@@ -105,7 +105,7 @@ function DKBuild_InstallCmake()
 function DKBuild_ValidateVC2019()
 {
 	if(DK_GetBrowser() !== "RML"){ return; }
-	if(DK_GetOS() !== "Win32" && DK_GetOS() !== "Win64"){
+	if(DKCPP_DKDuktape_GetOS() !== "Win32" && DKCPP_DKDuktape_GetOS() !== "Win64"){
 		return;
 	}
 	console.log("Looking for Visual Studio 2019");
@@ -129,7 +129,7 @@ function DKBuild_InstallVC2019()
 //////////////////////////////
 function DKBuild_ValidateGcc()
 {
-	if(DK_GetOS() !== "Linux"){ return; }
+	if(DKCPP_DKDuktape_GetOS() !== "Linux"){ return; }
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GCC");
 	if(!DKCPP_DKFile_Exists(GCC)){
@@ -149,7 +149,7 @@ function DKBuild_InstallGcc()
 ////////////////////////////////
 function DKBuild_ValidateXcode()
 {
-	if(DK_GetOS() !== "Mac"){ return; }
+	if(DKCPP_DKDuktape_GetOS() !== "Mac"){ return; }
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for Xcode");
 	if(!DKCPP_DKFile_Exists(XCODE)){
@@ -169,7 +169,7 @@ function DKBuild_InstallXcode()
 //////////////////////////
 function DKBuild_OsCheck()
 {
-	if(DK_GetOS() === "Win32"){
+	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		if(OS === "win64"){
 			console.error(OS+" can only be build from a WIN64 machine"); return false;
 		}
@@ -186,7 +186,7 @@ function DKBuild_OsCheck()
 			console.error(OS+" can only be build from a LINUX machine"); return false;
 		}
 	}
-	if(DK_GetOS() === "Win64"){
+	if(DKCPP_DKDuktape_GetOS() === "Win64"){
 		if(OS === "mac"){
 			console.error(OS+" can only be build from an OSX machine"); return false;
 		}
@@ -200,7 +200,7 @@ function DKBuild_OsCheck()
 			console.error(OS+" can only be build from a LINUX machine"); return false;
 		}
 	}
-	if(DK_GetOS() === "Mac"){
+	if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		if(OS === "win32"){
 			console.error(OS+" can only be build from a Windows machine"); return false;
 		}
@@ -220,7 +220,7 @@ function DKBuild_OsCheck()
 		//	console.error(OS+" can only be build from a Windows machine"); return false;
 		//}
 	}
-	if(DK_GetOS() === "Linux"){
+	if(DKCPP_DKDuktape_GetOS() === "Linux"){
 		if(OS === "win32"){
 			console.error(OS+" can only be build from a Windows machine"); return false;
 		}
@@ -240,10 +240,10 @@ function DKBuild_OsCheck()
 		//	console.error(OS+" can only be build from a Windows machine"); return false;
 		//}
 	}
-	if(DK_GetOS() === "Android"){
+	if(DKCPP_DKDuktape_GetOS() === "Android"){
 		console.error("Android is not capable of compiling DKApps..  please use a desktop system"); return false;
 	}
-	if(DK_GetOS() === "iOS"){
+	if(DKCPP_DKDuktape_GetOS() === "iOS"){
 		console.error("iOS is not capable of compiling DKApps..  please use a desktop system"); return false;
 	}
 	return true;
@@ -383,7 +383,7 @@ function DKBuild_DoResults()
 	}
 	
 	//// Create Icons
-	if(DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
+	if(DKCPP_DKDuktape_GetOS() === "Win32" || DKCPP_DKDuktape_GetOS() === "Win64"){
 		DKCreate("DKBuild/IconMaker.js", function(){
 			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 		});
@@ -779,10 +779,10 @@ function DKBuild_DoResults()
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			var rtvalue;
-			if(DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
+			if(DKCPP_DKDuktape_GetOS() === "Win32" || DKCPP_DKDuktape_GetOS() === "Win64"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
-			if(DK_GetOS() === "Linux" || DK_GetOS() === "Mac"){
+			if(DKCPP_DKDuktape_GetOS() === "Linux" || DKCPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
@@ -812,10 +812,10 @@ function DKBuild_DoResults()
 			DKCPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			DKCPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			var rtvalue;
-			if(DK_GetOS() === "Win64" || DK_GetOS() === "Win64"){
+			if(DKCPP_DKDuktape_GetOS() === "Win64" || DKCPP_DKDuktape_GetOS() === "Win64"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
 			}
-			if(DK_GetOS() === "Linux" || DK_GetOS() === "Mac"){
+			if(DKCPP_DKDuktape_GetOS() === "Linux" || DKCPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = DK_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
 			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
