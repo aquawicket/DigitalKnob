@@ -1,5 +1,7 @@
 ~! THE LIST !~
 
+If you get DKDom as a seperate RmlUi Library, poeple WILL chip in. ;)   DO IT! DO IT! :D
+
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
 Go pick up your I7 from storage
