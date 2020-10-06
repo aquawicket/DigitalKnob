@@ -80,8 +80,8 @@ function DKBuildGUI_OnEvent(event)
 		DKBuildGUI_BuildSelect();
 	}
 	if(event.currentTarget.id === "git"){
-		DKCreate("DKBuild/GitMenu.js", function(){
-			DKMenu_ValidatePosition("DKBuild/GitMenu.html");
+		DKCreate("DKGit/GitMenu.js", function(){
+			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "libraries"){

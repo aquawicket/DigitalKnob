@@ -7,11 +7,11 @@ function DKGit_Init()
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKCPP_DKFile_GetShortName(GIT);
+		GIT = DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKCPP_DKFile_GetShortName(GIT);
+		GIT = DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Mac"){
 		GIT = "git";

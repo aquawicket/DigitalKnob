@@ -291,7 +291,7 @@ function DKBuild_Reset3rdParty()
 function DKBuild_GetAppList()
 {
 	//DKApps folder
-	var apps = DKCPP_DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
+	var apps = DKFile_DirectoryContents(DKPATH+"/DK/DKApps");
 	if(!apps){ return; }
 	APP_LIST = apps.split(",");
 	for(var i=0; i<APP_LIST.length; i++){
