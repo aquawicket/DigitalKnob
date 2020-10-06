@@ -34,8 +34,8 @@ function DKOpenFile_End()
 	byId("DKOpenFileOK").removeEventListener("click", DKOpenFile_OnEvent);
 	byId("DKOpenFileUp").removeEventListener("click", DKOpenFile_OnEvent);
 	byId("DKOpenFilePath").removeEventListener("change", DKOpenFile_OnEvent);
-	DKClose("DKFile/DKOpenFile.html");
-	DKClose("DKFile/DKOpenFile.css");
+	DK_Close("DKFile/DKOpenFile.html");
+	DK_Close("DKFile/DKOpenFile.css");
 }
 
 //////////////////////////////////

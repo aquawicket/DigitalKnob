@@ -34,7 +34,7 @@ function SvnMenu_End()
 	window.removeEventListener("mousedown", SvnMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", SvnMenu_OnEvent);
 	byId("Git Commit").removeEventListener("click", SvnMenu_OnEvent);
-	DKClose("DKGit/SvnMenu.html");
+	DK_Close("DKGit/SvnMenu.html");
 }
 
 ///////////////////////////////
@@ -52,7 +52,7 @@ function SvnMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKGit/SvnMenu.js");
+	DK_Close("DKGit/SvnMenu.js");
 }
 
 //////////////////////////////

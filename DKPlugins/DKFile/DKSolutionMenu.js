@@ -37,7 +37,7 @@ function DKSolutionMenu_End()
 	byId("DKSolutionMenu_Import").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_GitAdd").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_UpxCompress").removeEventListener("click", DKSolutionMenu_OnEvent);
-	DKClose("DKFile/DKSolutionMenu.html");
+	DK_Close("DKFile/DKSolutionMenu.html");
 }
 
 //////////////////////////////////////
@@ -87,7 +87,7 @@ function DKSolutionMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKFile/DKSolutionMenu.js");
+	DK_Close("DKFile/DKSolutionMenu.js");
 }
 
 /////////////////////////////////

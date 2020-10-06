@@ -57,7 +57,7 @@ function DKEditor_Menu_End()
 	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Web").removeEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Command_Input").removeEventListener("change", DKEditor_Menu_OnEvent);
-	DKClose("DKEditor/DKEditor_Menu.html");
+	DK_Close("DKEditor/DKEditor_Menu.html");
 }
 
 /////////////////////////////////////
@@ -188,5 +188,5 @@ function DKEditor_Menu_OnEvent(event)
 		}
 	}
 	
-	DKClose("DKEditor/DKEditor_Menu.js");
+	DK_Close("DKEditor/DKEditor_Menu.js");
 }

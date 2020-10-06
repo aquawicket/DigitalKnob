@@ -13,7 +13,7 @@ function DKNotepadFormat_End()
 	window.removeEventListener("mousedown", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_WordWrap").removeEventListener("click", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_Font").removeEventListener("click", DKNotepadFormat_OnEvent);
-	DKClose("DKNotepad/DKNotepadFormat.html");
+	DK_Close("DKNotepad/DKNotepadFormat.html");
 }
 
 ///////////////////////////////////////
@@ -31,7 +31,7 @@ function DKNotepadFormat_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadFormat.js");
+	DK_Close("DKNotepad/DKNotepadFormat.js");
 }
 
 ///////////////////////////////////

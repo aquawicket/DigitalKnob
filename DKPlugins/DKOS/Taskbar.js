@@ -21,10 +21,10 @@ function Taskbar_End()
 {
 	byId("start").removeEventListener("click", Taskbar_OnEvent);
 	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
-	DKClose("DKOS/Taskbar.html");
-	DKClose("DKOS/scale.js");
-	DKClose("DKOS/Clock.js");
-	DKClose("DKDebug/BugReport.js");
+	DK_Close("DKOS/Taskbar.html");
+	DK_Close("DKOS/scale.js");
+	DK_Close("DKOS/Clock.js");
+	DK_Close("DKDebug/BugReport.js");
 }
 
 ///////////////////////////////

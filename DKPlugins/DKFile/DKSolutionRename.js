@@ -16,7 +16,7 @@ function DKSolutionRename_End()
 {
 	window.removeEventListener("mousedown", DKSolutionRename_OnEvent);
 	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_OnEvent);
-	DKClose("DKFile/DKSolutionRename.html");
+	DK_Close("DKFile/DKSolutionRename.html");
 }
 
 ////////////////////////////////////////
@@ -34,7 +34,7 @@ function DKSolutionRename_OnEvent(event)
 		}
 	}
 	DKSolutionRename_Rename();
-	DKClose("DKFile/DKSolutionRename.js");
+	DK_Close("DKFile/DKSolutionRename.js");
 }
 
 ///////////////////////////////////

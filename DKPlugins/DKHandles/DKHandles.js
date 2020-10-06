@@ -31,7 +31,7 @@ function DKHandles_End()
 	byId("Prev").removeEventListener("click", DKHandles_OnEvent);
 	byId("Next").removeEventListener("click", DKHandles_OnEvent);
 	byId("Highlight").removeEventListener("click", DKHandles_OnEvent);
-	DKClose("DKHandles/DKHandles.html");
+	DK_Close("DKHandles/DKHandles.html");
 }
 
 /////////////////////////////////

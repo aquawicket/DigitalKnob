@@ -24,8 +24,8 @@ function DKEditor_End()
 {
 	byId("DKEditor_edit").removeEventListener("click", DKEditor_OnEvent);
 	byId("DKEditor_edit").removeEventListener("contextmenu", DKEditor_OnEvent);
-	DKClose("DKEditor/DKEditor.html");
-	DKClose("DKEditor/DKEditor.css");
+	DK_Close("DKEditor/DKEditor.html");
+	DK_Close("DKEditor/DKEditor.css");
 }
 
 ////////////////////////////////

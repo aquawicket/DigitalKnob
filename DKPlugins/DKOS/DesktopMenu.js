@@ -18,7 +18,7 @@ function DesktopMenu_End()
 	window.removeEventListener("mousedown", DesktopMenu_OnEvent);
 	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_OnEvent);
 	byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_OnEvent);
-	DKClose("DKOS/DesktopMenu.html");
+	DK_Close("DKOS/DesktopMenu.html");
 }
 
 ///////////////////////////////////
@@ -38,7 +38,7 @@ function DesktopMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKOS/DesktopMenu.js");
+	DK_Close("DKOS/DesktopMenu.js");
 }
 
 ///////////////////////////////////

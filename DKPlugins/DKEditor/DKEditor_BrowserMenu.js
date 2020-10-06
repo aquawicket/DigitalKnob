@@ -11,7 +11,7 @@ function DKEditor_BrowserMenu_Init()
 function DKEditor_BrowserMenu_End()
 {
 	window.removeEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
-	DKClose("DKEditor/DKEditor_BrowserMenu.html");
+	DK_Close("DKEditor/DKEditor_BrowserMenu.html");
 }
 
 ////////////////////////////////////////////
@@ -42,7 +42,7 @@ function DKEditor_BrowserMenu_OnEvent(event)
 		}
 	}
 	
-	DKClose("DKEditor/DKEditor_BrowserMenu.js");
+	DK_Close("DKEditor/DKEditor_BrowserMenu.js");
 }
 
 ////////////////////////////////////////

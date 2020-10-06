@@ -18,8 +18,8 @@ function DKConsole_End()
 	window.removeEventListener("notify", DKConsole_OnEvent);
 	byId("DKConsole_Clear").removeEventListener("click", DKConsole_OnEvent);
 	byId("DKConsole_Close").removeEventListener("click", DKConsole_OnEvent);
-	DKClose("DKConsole/DKConsole.html");
-	DKClose("DKConsole/DKConsole.css");
+	DK_Close("DKConsole/DKConsole.html");
+	DK_Close("DKConsole/DKConsole.css");
 }
 
 /////////////////////////////////
@@ -30,7 +30,7 @@ function DKConsole_OnEvent(event)
 		byId("DKConsole_Content").innerHTML = ""; //clear
 	}
 	if(event.currentTarget.id === "DKConsole_Close"){
-		DKClose("DKConsole/DKConsole.js");
+		DK_Close("DKConsole/DKConsole.js");
 	}
 	
 	if(event.type === "color"){

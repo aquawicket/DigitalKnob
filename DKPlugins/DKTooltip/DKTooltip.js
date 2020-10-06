@@ -8,7 +8,7 @@ function DKTooltip_Init()
 function DKTooltip_End()
 {
 	D//KRemoveEvents(DKTooltip_OnEvent);
-	DKClose("DKTooltip/DKTooltip.html");
+	DK_Close("DKTooltip/DKTooltip.html");
 }
 
 /////////////////////////////////
@@ -19,7 +19,7 @@ function DKTooltip_OnEvent(event)
 		return;
 	}
 	
-	DKClose("DKTooltip/DKTooltip.html");
+	DK_Close("DKTooltip/DKTooltip.html");
 }
 
 //////////////////////////////////
@@ -37,7 +37,7 @@ function DKTooltip_Show(id)
 	setTimeout(function(){
 		var hover = DKWidget_GetHoverElement();
 		if(hover !== id){
-			DKClose("DKTooltip/DKTooltip.html");
+			DK_Close("DKTooltip/DKTooltip.html");
 			return;
 		}
 		DK_Create("DKTooltip/DKTooltip.html");

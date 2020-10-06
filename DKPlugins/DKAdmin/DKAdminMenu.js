@@ -42,7 +42,7 @@ function DKAdminMenu_End()
 	byId("OpenNotepad").removeEventListener("click", DKAdminMenu_OnEvent);
 	byId("DKAdminMenu_Run").removeEventListener("keydown", DKAdminMenu_OnEvent);
 	byId("Git").removeEventListener("click", DKAdminMenu_OnEvent);
-	DKClose("DKAdmin/DKAdminMenu.html");
+	DK_Close("DKAdmin/DKAdminMenu.html");
 }
 
 ///////////////////////////////////
@@ -126,7 +126,7 @@ function DKAdminMenu_OnEvent(event)
 		window.location.reload(true);
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
-		DKClose("DKAdminMenu.js")
+		DK_Close("DKAdminMenu.js")
 		DK_Exit();
 		return;
 	}
@@ -147,7 +147,7 @@ function DKAdminMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKAdmin/DKAdminMenu.js");
+	DK_Close("DKAdmin/DKAdminMenu.js");
 }
 
 /////////////////////////////////////

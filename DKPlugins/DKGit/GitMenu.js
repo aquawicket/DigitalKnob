@@ -35,7 +35,7 @@ function GitMenu_End()
 	window.removeEventListener("mousedown", GitMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
 	byId("Git Commit").removeEventListener("click", GitMenu_OnEvent);
-	DKClose("DKGit/GitMenu.html");
+	DK_Close("DKGit/GitMenu.html");
 }
 
 ///////////////////////////////
@@ -53,7 +53,7 @@ function GitMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKGit/GitMenu.js");
+	DK_Close("DKGit/GitMenu.js");
 }
 
 //////////////////////////////

@@ -18,7 +18,7 @@ function DKWebSocketsClient_End()
 	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
 	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_OnEvent);
 	byId("DKWebSocketsClient_MessageToServer").removeEventListener("click", DKWebSocketsClient_OnEvent);
-	DKClose("DKWebSockets/DKWebSocketsClient.html");
+	DK_Close("DKWebSockets/DKWebSocketsClient.html");
 }
 
 //////////////////////////////////////////

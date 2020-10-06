@@ -15,7 +15,7 @@ function DKPaintMenu_End()
 	byId("DKPaintMenu_Cut").removeEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Copy").removeEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Paste").removeEventListener("click", DKPaintMenu_OnEvent);
-	DKClose("DKPaint/DKPaintMenu.html");
+	DK_Close("DKPaint/DKPaintMenu.html");
 }
 
 ///////////////////////////////////
@@ -36,7 +36,7 @@ function DKPaintMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKPaintMenu.js");
+	DK_Close("DKPaintMenu.js");
 }
 
 //////////////////////////

@@ -10,8 +10,8 @@ function SendBugReport_Init()
 function SendBugReport_End()
 {
 	byId("SendBugReport_Button").removeEventListener("click", SendBugReport_OnEvent);
-	DKClose("DKDebug/SendBugReport.html");
-	DKClose("DKDebug/SendBugReport.css");
+	DK_Close("DKDebug/SendBugReport.html");
+	DK_Close("DKDebug/SendBugReport.css");
 }
 
 /////////////////////////////////////

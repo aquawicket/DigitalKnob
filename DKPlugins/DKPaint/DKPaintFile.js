@@ -17,7 +17,7 @@ function DKPaintFile_End()
 	byId("DKPaintFile_Save").removeEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save As").removeEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Exit").removeEventListener("click", DKPaintFile_OnEvent);
-	DKClose("DKPaint/DKPaintFile.html");
+	DK_Close("DKPaint/DKPaintFile.html");
 }
 
 ///////////////////////////////////
@@ -33,7 +33,7 @@ function DKPaintFile_OnEvent(event)
 		DKPaintFile_SaveAs();
 	}
 	if(event.currentTarget.id === "DKPaintFile_Exit"){
-		DKClose("DKPaint/DKPaintFile.js");
+		DK_Close("DKPaint/DKPaintFile.js");
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
@@ -42,7 +42,7 @@ function DKPaintFile_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKPaint/DKPaintFile.js");
+	DK_Close("DKPaint/DKPaintFile.js");
 }
 
 ///////////////////////////

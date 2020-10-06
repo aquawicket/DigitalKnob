@@ -50,7 +50,7 @@ function DKInput_End()
 	window.removeEventListener("drag", DKInput_OnEvent);
 	byId("Escape").removeEventListener("mousedown", DKInput_OnEvent);
 	byId("Escape").removeEventListener("mouseup", DKInput_OnEvent);
-	DKClose("DKInputTest/DKInput.html");
+	DK_Close("DKInputTest/DKInput.html");
 }
 
 ///////////////////////////////

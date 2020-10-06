@@ -23,7 +23,7 @@ function DKAudioPlayer_End()
 	byId("DKAudioPlayer_position").removeEventListener("input", DKAudioPlayer_OnEvent);
 	byId("DKAudioPlayer_speaker").removeEventListener("click", DKAudioPlayer_OnEvent);
 	byId("DKAudioPlayer_volume").removeEventListener("input", DKAudioPlayer_OnEvent);
-	DKClose("DKAudio/DKAudioPlayer.html");
+	DK_Close("DKAudio/DKAudioPlayer.html");
 }
 
 /////////////////////////////////////

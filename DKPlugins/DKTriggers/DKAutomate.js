@@ -35,9 +35,9 @@ function DKAutomate_End()
 	byId("MidiDevices").removeEventListener("click", DKAutomate_OnEvent);
 	byId("DKTriggers/DKAutomate.html").removeEventListener("UpdateValues", DKAutomate_OnEvent);
 
-	DKClose("DKTriggers/DKTriggers.js");
-	DKClose("DKTriggers/DKAutomate2.js");
-	DKClose("DKTriggers/DKAutomate.html");
+	DK_Close("DKTriggers/DKTriggers.js");
+	DK_Close("DKTriggers/DKAutomate2.js");
+	DK_Close("DKTriggers/DKAutomate.html");
 }
 
 //////////////////////////////////

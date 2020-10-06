@@ -15,7 +15,7 @@ function SvnMenu_End()
 	window.addEventListener("mousedown", SvnMenu_OnEvent);
 	byId("Svn Update").addEventListener("click", SvnMenu_OnEvent);
 	byId("Svn Commit").addEventListener("click", SvnMenu_OnEvent);
-	DKClose("DKBuild/SvnMenu.html");
+	DK_Close("DKBuild/SvnMenu.html");
 }
 
 ///////////////////////////////
@@ -34,5 +34,5 @@ function SvnMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/SvnMenu.js");
+	DK_Close("DKBuild/SvnMenu.js");
 }

@@ -28,8 +28,8 @@ function DKNotepad_End()
 	byId("DKNotepad_Format").removeEventListener("click", DKNotepad_OnEvent);
 	byId("DKNotepad_View").removeEventListener("click", DKNotepad_OnEvent);
 	byId("DKNotepad_Help").removeEventListener("click", DKNotepad_OnEvent);
-	//DKClose("DKNotepad/DKNotepad.html");
-	//DKClose("DKNotepad/DKNotepad.css");
+	//DK_Close("DKNotepad/DKNotepad.html");
+	//DK_Close("DKNotepad/DKNotepad.css");
 }
 
 /////////////////////////////////

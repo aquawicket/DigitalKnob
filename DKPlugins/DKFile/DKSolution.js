@@ -19,8 +19,8 @@ function DKSolution_End()
 	byId("DKSolutionMenu").removeEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").removeEventListener("contextmenu", DKSolution_OnEvent);
 	byId("DKSolutionPath").removeEventListener("keypress", DKSolution_OnEvent);
-	DKClose("DKFile/DKSolution.html");
-	DKClose("DKFile/DKSolution.css");
+	DK_Close("DKFile/DKSolution.html");
+	DK_Close("DKFile/DKSolution.css");
 }
 
 //////////////////////////////////

@@ -11,7 +11,7 @@ function LibraryMenu_End()
 {
 	document.removeEventListener("mousedown", LibraryMenu_OnEvent);
 	byId("Build Libraries").removeEventListener("click", LibraryMenu_OnEvent);
-	DKClose("DKBuild/LibraryMenu.html");
+	DK_Close("DKBuild/LibraryMenu.html");
 }
 
 ///////////////////////////////////
@@ -28,5 +28,5 @@ function LibraryMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/LibraryMenu.js");
+	DK_Close("DKBuild/LibraryMenu.js");
 }

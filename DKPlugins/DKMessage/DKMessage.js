@@ -13,7 +13,7 @@ function DKMessage_End()
 {
 	byId("DKMessageOk").removeEventListener("click", DKMessage_OnEvent);
 	byId("DKMessageCancel").removeEventListener("click", DKMessage_OnEvent);
-	DKClose("DKMessage/DKMessage.html");
+	DK_Close("DKMessage/DKMessage.html");
 }
 
 /////////////////////////////////

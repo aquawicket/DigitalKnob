@@ -11,7 +11,7 @@ function DKNotepadView_End()
 {
 	window.removeEventListener("mousedown", DKNotepadView_OnEvent);
 	byId("DKNotepadView_StatusBar").removeEventListener("click", DKNotepadView_OnEvent);
-	DKClose("DKNotepad/DKNotepadView.html");
+	DK_Close("DKNotepad/DKNotepadView.html");
 }
 
 /////////////////////////////////////
@@ -26,5 +26,5 @@ function DKNotepadView_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadView.js");
+	DK_Close("DKNotepad/DKNotepadView.js");
 }

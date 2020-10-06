@@ -12,7 +12,7 @@ function DKStats_End()
 {
 	window.removeEventListener("second", DKStats_OnEvent);
 	//byId("DKStats/DKStats.html").removeEventListener("click", DKStats_OnEvent);
-	DKClose("DKStats/DKStats.html");
+	DK_Close("DKStats/DKStats.html");
 }
 
 ///////////////////////////////

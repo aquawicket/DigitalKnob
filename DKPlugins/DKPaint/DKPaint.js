@@ -18,8 +18,8 @@ function DKPaint_End()
 	byId("DKPaint/DKPaint.html").removeEventListener("contextmenu", DKPaint_OnEvent);
 	byId("DKPaint_File").removeEventListener("click", DKPaint_OnEvent);
 	byId("DKPaint/DKPaint.html").removeEventListener("OpenFile", DKPaint_OnEvent);
-	DKClose("DKPaint/DKPaint.html");
-	DKClose("DKPaint/DKPaint.css");
+	DK_Close("DKPaint/DKPaint.html");
+	DK_Close("DKPaint/DKPaint.css");
 }
 
 ///////////////////////////////

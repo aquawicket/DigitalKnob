@@ -24,8 +24,8 @@ function DKColorPicker_End()
 	byId("DKColorPickerOK").removeEventListener("click", DKColorPicker_OnEvent);
 	
 	//FIXME - Crash
-	//DKClose("DKColorPicker/DKColorPicker.html");
-	//DKClose("DKColorPicker/DKColorPicker.css");
+	//DK_Close("DKColorPicker/DKColorPicker.html");
+	//DK_Close("DKColorPicker/DKColorPicker.css");
 }
 
 /////////////////////////////////////

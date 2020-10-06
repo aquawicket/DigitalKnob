@@ -11,7 +11,7 @@ function scale_End()
 {
 	byId("scale_minus").removeEventListener("mousedown", scale_OnEvent);
 	byId("scale_plus").removeEventListener("mousedown", scale_OnEvent);
-	DKClose("scale.html");
+	DK_Close("scale.html");
 }
 
 /////////////////////////////

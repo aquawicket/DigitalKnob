@@ -34,8 +34,8 @@ function DKSaveFile_End()
 	byId("DKSaveFileOK").removeEventListener("click", DKSaveFile_OnEvent);
 	byId("DKSaveFileUp").removeEventListener("click", DKSaveFile_OnEvent);
 	byId("DKSaveFilePath").removeEventListener("input", DKSaveFile_OnEvent);
-	DKClose("DKFile/DKSaveFile.html");
-	DKClose("DKFile/DKSaveFile.css");
+	DK_Close("DKFile/DKSaveFile.html");
+	DK_Close("DKFile/DKSaveFile.css");
 }
 
 //////////////////////////////////

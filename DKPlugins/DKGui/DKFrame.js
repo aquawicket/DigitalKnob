@@ -328,10 +328,10 @@ function DKFrame_Close(id)
 			var file = DKWidget_GetFile(arry[i]);
 			if(!file){ file = arry[i];}
 			var jsfile = file.replace(".html", ".js");
-			//console.log("DKClose("+jsfile+")\n");
-			DKClose(jsfile);
+			//console.log("DK_Close("+jsfile+")\n");
+			DK_Close(jsfile);
 			var htmlfile = file.replace(".js", ".html");
-			DKClose(htmlfile);
+			DK_Close(htmlfile);
 		}
 		if(arry[i].indexOf("iframe_") > -1){
 			console.log("DKFrame_Close("+id+"): we found a cef iframe ("+arry[i]+") to close\n");

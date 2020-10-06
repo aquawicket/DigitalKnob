@@ -19,7 +19,7 @@ function DKRocketVideo_End()
 	byId("DKRocketVideo_speaker").removeEventListener("click", DKRocketVideo_OnEvent);
 	byId("DKRocketVideo_volume").removeEventListener("click", DKRocketVideo_OnEvent);
 	byId("DKRocketVideo_volumetrack").removeEventListener("click", DKRocketVideo_OnEvent);
-	DKClose("DKRocketVideo/DKRocketVideo.html");
+	DK_Close("DKRocketVideo/DKRocketVideo.html");
 }
 
 /////////////////////////////////////

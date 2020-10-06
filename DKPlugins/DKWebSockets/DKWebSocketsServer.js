@@ -19,7 +19,7 @@ function DKWebSocketsServer_End()
 	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_OnEvent);
 	byId("DKWebSocketsServer_CreateServer").removeEventListener("click", DKWebSocketsServer_OnEvent);
 	byId("DKWebSocketsServer_MessageToClient").removeEventListener("click", DKWebSocketsServer_OnEvent);
-	DKClose("DKWebSocketsServer/DKWebSocketsServer.html");
+	DK_Close("DKWebSocketsServer/DKWebSocketsServer.html");
 }
 
 //////////////////////////////////////////

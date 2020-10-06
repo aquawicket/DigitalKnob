@@ -13,7 +13,7 @@ function DKNotepadHelp_End()
 	window.removeEventListener("mousedown", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_ViewHelp").removeEventListener("click", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_About").removeEventListener("click", DKNotepadHelp_OnEvent);
-	DKClose("DKNotepad/DKNotepadHelp.html");
+	DK_Close("DKNotepad/DKNotepadHelp.html");
 }
 
 /////////////////////////////////////
@@ -31,5 +31,5 @@ function DKNotepadHelp_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadHelp.js");
+	DK_Close("DKNotepad/DKNotepadHelp.js");
 }

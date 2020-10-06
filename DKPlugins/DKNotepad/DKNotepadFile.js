@@ -21,7 +21,7 @@ function DKNotepadFile_End()
 	byId("DKNotepadFile_SaveAs").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Print").removeEventListener("click", DKNotepadFile_OnEvent);
 	byId("DKNotepadFile_Exit").removeEventListener("click", DKNotepadFile_OnEvent);
-	DKClose("DKNotepad/DKNotepadFile.html");
+	DK_Close("DKNotepad/DKNotepadFile.html");
 }
 
 /////////////////////////////////////
@@ -44,7 +44,7 @@ function DKNotepadFile_OnEvent(event)
 		DKNotepadFile_Print();
 	}
 	if(event.currentTarget.id === "DKNotepadFile_Exit"){
-		DKClose("DKNotepad/DKNotepadFile.js");
+		DK_Close("DKNotepad/DKNotepadFile.js");
 		DKFrame_Close("DKNotepad/DKNotepad.html");
 	}
 	
@@ -54,7 +54,7 @@ function DKNotepadFile_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadFile.js");
+	DK_Close("DKNotepad/DKNotepadFile.js");
 }
 
 /////////////////////////////

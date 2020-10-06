@@ -11,7 +11,7 @@ function BugReport_End()
 {
 	byId("BugReport_Image").removeEventListener("click", BugReport_OnEvent);
 	byId("BugReport_Text").removeEventListener("click", BugReport_OnEvent);
-	DKClose("DKDebug/BugReport.html");
+	DK_Close("DKDebug/BugReport.html");
 }
 
 /////////////////////////////////

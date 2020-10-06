@@ -13,7 +13,7 @@ function DKWebviewTest_End()
 	window.addEventListener("mousedown", DKWebviewTest_OnEvent);
 	window.addEventListener("keydown", DKWebviewTest_OnEvent);
 	byId("DKWebviewTest.html").addEventListener("mousedown", DKWebviewTest_OnEvent);
-	DKClose("DKWebviewTest.html");
+	DK_Close("DKWebviewTest.html");
 }
 
 /////////////////////////////////////

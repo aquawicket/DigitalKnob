@@ -10,8 +10,8 @@ function DKMidiDialog_Init()
 function DKMidiDialog_End()
 {
 	//DKRemoveEvents(DKMidiDialog_OnEvent);
-	DKClose("DKMidi/DKMidiDialog.html");
-	DKClose("DKMidi/DKMidiDialog.css");
+	DK_Close("DKMidi/DKMidiDialog.html");
+	DK_Close("DKMidi/DKMidiDialog.css");
 }
 
 ////////////////////////////////////

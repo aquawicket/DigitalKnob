@@ -23,7 +23,7 @@ function RunMenu_End()
 	byId("Run App").removeEventListener("click", RunMenu_OnEvent);
 	byId("Generate Docs").removeEventListener("click", RunMenu_OnEvent);
 	byId("Export to Android Studio").removeEventListener("click", RunMenu_OnEvent);
-	DKClose("DKBuild/RunMenu.html");
+	DK_Close("DKBuild/RunMenu.html");
 }
 
 ///////////////////////////////
@@ -144,5 +144,5 @@ function RunMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKBuild/RunMenu.js");
+	DK_Close("DKBuild/RunMenu.js");
 }

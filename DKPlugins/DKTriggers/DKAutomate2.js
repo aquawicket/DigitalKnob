@@ -12,7 +12,7 @@ function DKAutomate2_End()
 {
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("SelectTrigger", DKAutomate2_OnEvent);
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("input", DKAutomate2_OnEvent);
-	DKClose("DKTriggers/DKAutomate2.html");
+	DK_Close("DKTriggers/DKAutomate2.html");
 }
 
 ///////////////////////////////////

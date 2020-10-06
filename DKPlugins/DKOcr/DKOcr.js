@@ -14,7 +14,7 @@ function DKOcr_Init()
 function DKOcr_End()
 {
 	byId("DKNotepad/DKNotepad.html").removeEventListener("OpenFile", DKOcr_OnEvent);
-	DKClose("DKNotepad/DKNotepad.js");
+	DK_Close("DKNotepad/DKNotepad.js");
 }
 
 /////////////////////////////

@@ -47,7 +47,7 @@ function TaskbarMenu_End()
 	byId("OpenGoogle").removeEventListener("click", TaskbarMenu_OnEvent);
 	byId("TaskbarMenu_Run").removeEventListener("keydown", TaskbarMenu_OnEvent);
 	byId("Git").removeEventListener("click", TaskbarMenu_OnEvent);
-	DKClose("DKOS/TaskbarMenu.html");
+	DK_Close("DKOS/TaskbarMenu.html");
 }
 
 ///////////////////////////////////
@@ -165,7 +165,7 @@ function TaskbarMenu_OnEvent(event)
 		location.reload();
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
-		DKClose("TaskbarMenu.js")
+		DK_Close("TaskbarMenu.js")
 		DKCPP_DKDuktape_Exit();
 		return;
 	}
@@ -186,7 +186,7 @@ function TaskbarMenu_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKOS/TaskbarMenu.js");
+	DK_Close("DKOS/TaskbarMenu.js");
 }
 
 /////////////////////////////////////

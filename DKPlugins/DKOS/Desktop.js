@@ -10,7 +10,7 @@ function Desktop_Init()
 function Desktop_End()
 {
 	byId("Background").removeEventListener("contextmenu", Desktop_OnEvent);
-	DKClose("DKOS/Desktop.html");
+	DK_Close("DKOS/Desktop.html");
 }
 
 ///////////////////////////////

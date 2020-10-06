@@ -14,7 +14,7 @@ function Clock_Init()
 function Clock_End()
 {
 	window.removeEventListener("second", Clock_OnEvent);
-	DKClose("DKOS/Clock.html");
+	DK_Close("DKOS/Clock.html");
 }
 
 /////////////////////////////

@@ -21,7 +21,7 @@ function DKNotepadEdit_End()
 	byId("DKNotepadEdit_Paste").removeEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Delete").removeEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Find").removeEventListener("click", DKNotepadEdit_OnEvent);
-	DKClose("DKNotepad/DKNotepadEdit.html");
+	DK_Close("DKNotepad/DKNotepadEdit.html");
 }
 
 /////////////////////////////////////
@@ -52,5 +52,5 @@ function DKNotepadEdit_OnEvent(event)
 			return;
 		}
 	}
-	DKClose("DKNotepad/DKNotepadEdit.js");
+	DK_Close("DKNotepad/DKNotepadEdit.js");
 }

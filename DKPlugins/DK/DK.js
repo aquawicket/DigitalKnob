@@ -305,11 +305,11 @@ function DK_Create(data, callback)
 }
 
 //////////////////////
-function DKClose(data)
+function DK_Close(data)
 {
-	console.log("DKClose("+data+")");
+	console.log("DK_Close("+data+")");
 	if(!data){
-		console.error("DKClose("+data+"): data empty");
+		console.error("DK_Close("+data+"): data empty");
 		return false;
 	}
 	
@@ -326,7 +326,7 @@ function DKClose(data)
 	
 	var file = DKFile_GetFilename(arry[1]);
 	if(!file){ 
-		console.error("DKClose("+data+"): file invalid");
+		console.error("DK_Close("+data+"): file invalid");
 		return false; 
 	}
 	
@@ -344,13 +344,13 @@ function DKClose(data)
 			func(); // Call the jsclass_End() function
 		}
 		else{
-			console.warn("DKClose(data): "+func+" is not a function");
+			console.warn("DK_Close(data): "+func+" is not a function");
 		}
 		*/
 		
 		var script = byId(arry[1]);
 		if(!script){
-			//console.warn("DKClose("+data+"): "+arry[1]+" does not exist");
+			//console.warn("DK_Close("+data+"): "+arry[1]+" does not exist");
 			return false;
 		}
 		script.parentNode.removeChild(script);
@@ -359,7 +359,7 @@ function DKClose(data)
 	if(arry[0] === "DKWidget"){
 		var element = byId(arry[1]);
 		if(!element){ 
-			//console.warn("DKClose("+data+"): "+file+" does not exist");
+			//console.warn("DK_Close("+data+"): "+file+" does not exist");
 			return false; 
 		}
 		element.parentNode.removeChild(element);
@@ -368,7 +368,7 @@ function DKClose(data)
 	if(arry[0] === "DKCss"){
 		var css = byId(arry[1]);
 		if(!css){ 
-			//console.error("DKClose("+data+"): "+arry[1]+" does not exist");
+			//console.error("DK_Close("+data+"): "+arry[1]+" does not exist");
 			return false; 
 		}
 		css.parentNode.removeChild(css);

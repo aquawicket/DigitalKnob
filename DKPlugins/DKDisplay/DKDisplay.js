@@ -13,7 +13,7 @@ function DKDisplay_End()
 	byId("DKDisplay_Button").removeEventListener("click", DKDisplay_OnEvent);
 	//window.removeEventListener("second", DKDisplay_OnEvent);
 	//byId("DKDisplay/DKDisplay.html").removeEventListener("click", DKDisplay_OnEvent);
-	DKClose("DKDisplay/DKDisplay.html");
+	DK_Close("DKDisplay/DKDisplay.html");
 }
 
 /////////////////////////////////

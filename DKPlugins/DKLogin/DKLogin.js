@@ -13,8 +13,8 @@ function DKLogin_Init()
 function DKLogin_End()
 {
 	byId("DKLoginFacebook").addEventListener("click", DKLogin_OnEvent);
-	DKClose("DKLogin/DKLogin.html");
-	DKClose("DKLogin/DKLogin.css");
+	DK_Close("DKLogin/DKLogin.html");
+	DK_Close("DKLogin/DKLogin.css");
 }
 
 ///////////////////////////////
