@@ -1,3 +1,7 @@
+console.log("*** DigitalKnob ***");
+console.log("Browser = "+DK_GetBrowser());
+console.log("JSEngine = "+DK_GetJSEngine());
+
 var LOG_DEBUG = false;
 var LOG_INFO = true;
 var LOG_WARNINGS = true;
@@ -134,14 +138,12 @@ document.addEventListener("mousemove", function(e){
 });
 
 
-
 /*
 function DKERROR(string){ Log(string, DK_ERROR); }
 function DKWARN(string){ Log(string, DK_WARN); }
 function DKINFO(string){ Log(string, DK_INFO); }
 function DKDEBUG(string){ Log(string, DK_DEBUG); }
 */
-
 /////////////////////////
 function Log(string, lvl)
 {
@@ -240,11 +242,6 @@ function Log(string, lvl)
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 
-console.log("*** DigitalKnob ***");
-console.log("Browser = "+DK_GetBrowser());
-console.log("JSEngine = "+DK_GetJSEngine());
-
-
 /////////////////////////////////
 function DK_Create(data, callback)
 {
@@ -266,7 +263,7 @@ function DK_Create(data, callback)
 		}
 	}	
 	if(arry[0] === "DKJavascript"){
-		if(!LoadJs(arry[1], function(rval){
+		if(!DK_LoadJs(arry[1], function(rval){
 			if(callback){ 
 				callback(rval); 
 			}
@@ -291,7 +288,7 @@ function DK_Create(data, callback)
 			}
 	}
 	if(arry[0] === "DKCss"){
-		if(!LoadCss(arry[1])){
+		if(!DK_LoadCss(arry[1])){
 			return false;
 		}
 		if(callback){ 
@@ -304,7 +301,7 @@ function DK_Create(data, callback)
 	return true;
 }
 
-//////////////////////
+///////////////////////
 function DK_Close(data)
 {
 	console.log("DK_Close("+data+")");
@@ -378,17 +375,17 @@ function DK_Close(data)
 	return true;
 }
 
-/////////////////////
-function LoadCss(url)
+////////////////////////
+function DK_LoadCss(url)
 {
-	//console.log("DK.js:LoadCss("+url+")");
+	//console.log("DK.js:DK_LoadCss("+url+")");
 	if(!url){ 
-		console.error("DK.js: LoadCss("+url+"): url invalid");
+		console.error("DK.js: DK_LoadCss("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadCss("+url+"): url already loaded");
+		console.warn("DK.js: DK_LoadCss("+url+"): url already loaded");
 		return false;
 	}
 	
@@ -400,26 +397,26 @@ function LoadCss(url)
 	link.setAttribute('type', 'text/css');
 	var elements = document.getElementsByTagName('head');
 	
-	//console.log("LoadCss("+url+"): link = "+link.POINTER);
-	//console.log("LoadCss("+url+"): link = "+link);
-	//console.log("LoadCss("+url+"): elements[0] = "+elements[0]);
-	//console.log("DK.js:LoadCss("+url+") appending link");
+	//console.log("DK_LoadCss("+url+"): link = "+link.POINTER);
+	//console.log("DK_LoadCss("+url+"): link = "+link);
+	//console.log("DK_LoadCss("+url+"): elements[0] = "+elements[0]);
+	//console.log("DK.js:DK_LoadCss("+url+") appending link");
 	elements[0].appendChild(link);
 	
 	return true;
 }
 
-//////////////////////////////
-function LoadJs(url, callback)
+/////////////////////////////////
+function DK_LoadJs(url, callback)
 {
-	//console.warn("LoadJs("+url+")");
+	//console.warn("DK_LoadJs("+url+")");
 	if(!url){ 
-		console.error("DK.js: LoadJs("+url+"): url invalid");
+		console.error("DK.js: DK_LoadJs("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadJs("+url+"): url already loaded");
+		console.warn("DK.js: DK_LoadJs("+url+"): url already loaded");
 		callback && callback(false);
 		return false;
 	}
@@ -433,7 +430,7 @@ function LoadJs(url, callback)
 	
 	// Call the js init function
 	if(!file){ 
-		console.error("DK.js: LoadJs("+url+"): file invalid");
+		console.error("DK.js: DK_LoadJs("+url+"): file invalid");
 		return false; 
 	}
 	
@@ -478,7 +475,7 @@ function LoadJs(url, callback)
 		}
 	};
 	script.onerror = function(){
-		console.error("DK.js: LoadJs("+url+"): Could not load file");
+		console.error("DK.js: DK_LoadJs("+url+"): Could not load file");
 	}
 	////////////////////////
 	
@@ -499,25 +496,25 @@ function LoadJs(url, callback)
 	return true;
 }
 
-//////////////////////////////
-function LoadHtml(url, parent)
+/////////////////////////////////
+function DK_LoadHtml(url, parent)
 {
-	//console.warn("DK.js:LoadHtml("+url+","+parent+")");
+	//console.warn("DK.js:DK_LoadHtml("+url+","+parent+")");
 	//TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
 	if(!url){ 
-		console.error("DK.js: LoadJs("+url+"): url invalid");
+		console.error("DK.js: DK_LoadJs("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(url.indexOf(".html") === -1){ 
-		console.error("DK.js: LoadHtml("+url+", parent): url is not a valid .html file");
+		console.error("DK.js: DK_LoadHtml("+url+", parent): url is not a valid .html file");
 		return false;
 	}
 	
 	if(url === ".html"){ url = "New.html"; }
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadHtml("+url+", parent): url already loaded");
+		console.warn("DK.js: DK_LoadHtml("+url+", parent): url already loaded");
 		return false;
 	}
 	
@@ -536,7 +533,7 @@ function LoadHtml(url, parent)
 	//console.log("temp.id = "+temp.id);
 	var nodes = temp.childNodes;
 	if(!nodes){
-		console.error("DK.js: LoadHtml("+url+", "+parent+"): Could not get nodes from file url");
+		console.error("DK.js: DK_LoadHtml("+url+", "+parent+"): Could not get nodes from file url");
 		return false;
 	}
 	if(nodes.length > 1){
@@ -545,7 +542,7 @@ function LoadHtml(url, parent)
 		}
 		
 		console.warn("###############################################");
-		console.warn("DK.js: LoadHtml("+url+", "+parent+"): Too many nodes in file");
+		console.warn("DK.js: DK_LoadHtml("+url+", "+parent+"): Too many nodes in file");
 		//console.log(temp.innerHTML);
 		console.warn("You either have too many root nodes in your html file or, you have extra whitespace at the begining or the end of the file");
 		console.warn("###############################################");
@@ -553,16 +550,16 @@ function LoadHtml(url, parent)
 	}
 
 	if(nodes[0].id !== url){
-		console.warn("DK.js: LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")");
+		console.warn("DK.js: DK_LoadHtml("+url+",parent): did not match the node id ("+nodes[0].id+")");
 		nodes[0].id = url;
-		console.warn("DK.js: LoadHtml("+url+",parent): please fix the id");
+		console.warn("DK.js: DK_LoadHtml("+url+",parent): please fix the id");
 	}
 	if(parent){
-		//console.log("DK.js:LoadHtml(): appending to parent");
+		//console.log("DK.js:DK_LoadHtml(): appending to parent");
 		parent.appendChild(nodes[0]);
 	}
 	else{
-		//console.log("DK.js:LoadHtml(): appending to body");
+		//console.log("DK.js:DK_LoadHtml(): appending to body");
 		document.body.appendChild(nodes[0]);
 	}
 	

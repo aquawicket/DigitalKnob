@@ -11,13 +11,13 @@ function DKWidget_NewWidget(url, parent)
 		//if(parent.indexOf(".html") === -1){ parent+=".html"; }
 		var element = byId(parent);
 		if(!element){ console.error("DKWidget(): could not get parent ("+parent+")\n"); return false; }
-		if(!LoadHtml(url, element)){ 
+		if(!DK_LoadHtml(url, element)){ 
 			return false;
 		}
 		//DKWidget_AttachDrags(filename); //Attach Drags
 	}
 	else{
-		if(!LoadHtml(url)){
+		if(!DK_LoadHtml(url)){
 			return false;
 		}
 		//DKWidget_AttachDrags(filename); //Attach Drags
