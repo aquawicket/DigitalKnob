@@ -4,26 +4,27 @@ DKSolutionMenu_file = "";
 //////////////////////////////
 function DKSolutionMenu_Init()
 {
-	DKCreate("DKFile/DKSolutionMenu.html");
-	window.addEventListener("mousedown", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_NewFile").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_NewFolder").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Rename").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Delete").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Copy").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Cut").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Paste").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_Import").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_GitAdd").addEventListener("click", DKSolutionMenu_OnEvent);
-	byId("DKSolutionMenu_UpxCompress").addEventListener("click", DKSolutionMenu_OnEvent);
+	DKCreate("DKFile/DKSolutionMenu.html", function(){
+    	document.addEventListener("mousedown", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_NewFile").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_NewFolder").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Rename").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Delete").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Copy").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Cut").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_Paste").addEventListener("click", DKSolutionMenu_OnEvent);
+	    byId("DKSolutionMenu_Import").addEventListener("click", DKSolutionMenu_OnEvent);
+    	byId("DKSolutionMenu_GitAdd").addEventListener("click", DKSolutionMenu_OnEvent);
+	    byId("DKSolutionMenu_UpxCompress").addEventListener("click", DKSolutionMenu_OnEvent);
+    });
 }
 
 /////////////////////////////
 function DKSolutionMenu_End()
 {
-	window.removeEventListener("mousedown", DKSolutionMenu_OnEvent);
+	document.removeEventListener("mousedown", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_Open").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_OpenHere").removeEventListener("click", DKSolutionMenu_OnEvent);
 	byId("DKSolutionMenu_NewFile").removeEventListener("click", DKSolutionMenu_OnEvent);

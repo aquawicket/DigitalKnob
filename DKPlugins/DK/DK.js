@@ -134,6 +134,7 @@ document.documentElement.addEventListener("mousemove", function(e){
 //};
 
 
+
 /*
 function DKERROR(string){ Log(string, DK_ERROR); }
 function DKWARN(string){ Log(string, DK_WARN); }
@@ -411,13 +412,14 @@ function LoadCss(url)
 //////////////////////////////
 function LoadJs(url, callback)
 {
+	//console.warn("LoadJs("+url+")");
 	if(!url){ 
 		console.error("DK.js: LoadJs("+url+"): url invalid");
 		return false; 
 	}
 	
 	if(DK_GetObjects().indexOf(url) !== -1){
-		console.warn("DK.js: LoadJs("+url+", callback): url already loaded");
+		console.warn("DK.js: LoadJs("+url+"): url already loaded");
 		callback && callback(false);
 		return false;
 	}

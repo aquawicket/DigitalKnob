@@ -39,7 +39,8 @@ function DKSolution_OnEvent(event)
 		
 		var id = event.currentTarget.id;
 		//console.log("id = "+id+"\n");
-		DKCPP_DKDuktape_StopPropagation(event);
+		event.stopPropagation();
+		event.preventDefault();
 		DKCreate("DKFile/DKSolutionMenu.js", function(){
 			DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
 			var file = DKWidget_GetValue(id);
