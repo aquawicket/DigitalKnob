@@ -107,10 +107,10 @@ function DKGit_GitUpdate()
 		}
 	}
 	
-	if(DKAvailable("DKAudio")){
+	if(DKCPP_DKDuktape_Available("DKAudio")){
 		DKCreate("DKAudio");
 	}
-	if(DKValid("DKAudioJS,DKAudioJS0")){
+	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }
@@ -155,10 +155,10 @@ function DKGit_GitCommit()
 	}
 	
 	/*
-	if(DKAvailable("DKAudio")){
+	if(DKCPP_DKDuktape_Available("DKAudio")){
 		DKCreate("DKAudio");
 	}
-	if(DKValid("DKAudioJS,DKAudioJS0")){
+	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 	*/
