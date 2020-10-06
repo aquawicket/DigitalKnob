@@ -92,7 +92,8 @@ function DKAutomate_OnEvent(event)
 	
 	if(event.currentTarget.id === "MidiDevices"){
 		DKCreate("DKMidi/DKMidiDialog.js", function(){
-			DKWidget_Show("DKMidi/DKMidiDialog.html");
+			byId("DKMidi/DKMidiDialog.html").style.display = "block";
+			byId("DKMidi/DKMidiDialog.html").style.visibility = "visible";
 		});
 	}
 	

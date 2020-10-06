@@ -34,7 +34,7 @@ function DKLogin_OnConnect(value)
 	if(value.status === 'connected'){
 		DKFacebook_Query('/me', "name", DKLogin_FBresponse);
 		DKFacebook_Query('/me', "id", DKLogin_FBresponse);
-		DKWidget_Hide("DKLoginFacebook");
+		byId("DKLoginFacebook").style.display = "none";
 	}
 }
 

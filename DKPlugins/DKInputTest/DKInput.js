@@ -6,25 +6,25 @@ else{ rgba = "0.5"; }
 function DKInput_Init()
 {
 	DKCreate("DKInputTest/DKInput.html", function(){
-	window.addEventListener("keypress", DKInput_OnEvent);
-	window.addEventListener("keydown", DKInput_OnEvent);
-	window.addEventListener("keyup", DKInput_OnEvent);
-	window.addEventListener("mousedown", DKInput_OnEvent);
-	window.addEventListener("mouseup", DKInput_OnEvent);
-	window.addEventListener("click", DKInput_OnEvent);
-	window.addEventListener("dblclick", DKInput_OnEvent);
-	window.addEventListener("mousemove", DKInput_OnEvent);
-	window.addEventListener("mouseover", DKInput_OnEvent);
-	window.addEventListener("mouseout", DKInput_OnEvent);
-	window.addEventListener("wheel", DKInput_OnEvent);
-	window.addEventListener("resize", DKInput_OnEvent);
-	window.addEventListener("input", DKInput_OnEvent);
-	window.addEventListener("change", DKInput_OnEvent);
-	window.addEventListener("contextmenu", DKInput_OnEvent);
-	window.addEventListener("scroll", DKInput_OnEvent);
-	window.addEventListener("drag", DKInput_OnEvent);
-	byId("Escape").addEventListener("mousedown", DKInput_OnEvent);
-	byId("Escape").addEventListener("mouseup", DKInput_OnEvent);
+		window.addEventListener("keypress", DKInput_OnEvent);
+		window.addEventListener("keydown", DKInput_OnEvent);
+		window.addEventListener("keyup", DKInput_OnEvent);
+		window.addEventListener("mousedown", DKInput_OnEvent);
+		window.addEventListener("mouseup", DKInput_OnEvent);
+		window.addEventListener("click", DKInput_OnEvent);
+		window.addEventListener("dblclick", DKInput_OnEvent);
+		window.addEventListener("mousemove", DKInput_OnEvent);
+		window.addEventListener("mouseover", DKInput_OnEvent);
+		window.addEventListener("mouseout", DKInput_OnEvent);
+		window.addEventListener("wheel", DKInput_OnEvent);
+		window.addEventListener("resize", DKInput_OnEvent);
+		window.addEventListener("input", DKInput_OnEvent);
+		window.addEventListener("change", DKInput_OnEvent);
+		window.addEventListener("contextmenu", DKInput_OnEvent);
+		window.addEventListener("scroll", DKInput_OnEvent);
+		window.addEventListener("drag", DKInput_OnEvent);
+		byId("Escape").addEventListener("mousedown", DKInput_OnEvent);
+		byId("Escape").addEventListener("mouseup", DKInput_OnEvent);
 	});
 }
 
@@ -105,13 +105,14 @@ function DKInput_OnEvent(event)
 /////////////////////////////////////////
 function DKInput_ProcessMouseDown(button)
 {
-	DKWidget_Show(button+"button");	
+	byId(button+"button").style.display = "block";
+	byId(button+"button").style.visibility = "visible";
 }
 
 ///////////////////////////////////////
 function DKInput_ProcessMouseUp(button)
 {
-	DKWidget_Hide(button+"button");	
+	byId(button+"button").style.display = "none";
 }
 		
 ////////////////////////////////////

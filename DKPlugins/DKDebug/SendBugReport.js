@@ -34,7 +34,7 @@ function SendBugReport_CreateReport()
 	DKCPP_DKFile_StringToFile(str+"\n\n"+log, assets+"log.txt");
 	SendBugReport_SendReport();
 	
-	DKWidget_Hide("DKDebug/SendBugReport.html");
+	byId("DKDebug/SendBugReport.html").style.display = "none";
 	//TODO: say thank you here
 	DKCreate("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
@@ -46,8 +46,10 @@ function SendBugReport_CreateReport()
 ///////////////////////////////////
 function SendBugReport_SendReport()
 {
-	DKWidget_Show("SendBugReport_Image");
-	DKWidget_Show("SendBugReport_Sending");
+	byId("SendBugReport_Image").style.display = "block";
+	byId("SendBugReport_Image").style.visibility = "visible";
+	byId("SendBugReport_Sending").style.display = "block";
+	byId("SendBugReport_Sending").style.visibility = "visible";
 	DKCPP_DKDuktape_DoFrame();
 	
 	var num = Math.floor((Math.random() * 99999999) + 1);

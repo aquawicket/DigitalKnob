@@ -55,6 +55,7 @@ function DKWidget_GetFile(id)
 	return id;
 }
 
+/*
 //////////////////////////
 function DKWidget_Hide(id)
 {
@@ -62,7 +63,9 @@ function DKWidget_Hide(id)
 	if(!element){ return false; }
 	element.style.display = "none";
 }
+*/
 
+/*
 //////////////////////////
 function DKWidget_Show(id)
 {
@@ -71,6 +74,7 @@ function DKWidget_Show(id)
 	element.style.display = "block";
 	element.style.visibility = "visible";
 }
+*/
 
 ////////////////////////////
 function DKWidget_Toggle(id)
@@ -81,7 +85,7 @@ function DKWidget_Toggle(id)
 		DKWidget_Show(id);
 	}
 	else{
-		DKWidget_Hide(id);
+		byId(id).style.display = "none";
 	}
 }
 

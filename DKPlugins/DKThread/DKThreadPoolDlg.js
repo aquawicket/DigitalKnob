@@ -32,10 +32,11 @@ function DKThreadPoolDlg_OnUpdate()
 	var name = DKThread_GetThreadNames();
 	var names = name.split(",");
 	if(names[0]){
-		DKWidget_Show("DKThreadPoolDlg.html");
+		byId("DKThreadPoolDlg.html").style.display = "block";
+		byId("DKThreadPoolDlg.html").style.visibility = "visible";
 	}
 	else{
-		DKWidget_Hide("DKThreadPoolDlg.html");
+		byId("DKThreadPoolDlg.html").style.display = "none";
 	}
 	for(var i=0; i<names.length; ++i){
 		var div = DKWidget_CreateElement(byId("DKThreadPoolDlg.html"), "div", "Thread");

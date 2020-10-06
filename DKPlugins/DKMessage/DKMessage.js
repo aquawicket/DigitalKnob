@@ -46,10 +46,12 @@ function DKMessage_Message(message)
 {
 	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
-	DKWidget_Hide("DKMessageInput");
-	DKWidget_Hide("DKMessageCancel");
-	DKWidget_Show("DKMessageText");
-	DKWidget_Show("DKMessage/DKMessage.html");
+	byId("DKMessageInput").style.display = "none";
+	byId("DKMessageCancel").style.display = "none";
+	byId("DKMessageText").style.display = "block";
+	byId("DKMessageText").style.visibility = "visible";
+	byId("DKMessage/DKMessage.html").style.display = "block";
+	byId("DKMessage/DKMessage.html").style.visibility = "visible";
 }
 
 /////////////////////////////////////////////
@@ -57,10 +59,13 @@ function DKMessage_Confirm(message, callback)
 {
 	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
-	DKWidget_Hide("DKMessageInput");
-	DKWidget_Show("DKMessageText");
-	DKWidget_Show("DKMessageCancel");
-	DKWidget_Show("DKMessage/DKMessage.html");
+	byId("DKMessageInput").style.display = "none";
+	byId("DKMessageText").style.display = "block";
+	byId("DKMessageText").style.visibility = "visible";
+	byId("DKMessageCancel").style.display = "block";
+	byId("DKMessageCancel").style.visibility = "visible";
+	byId("DKMessage/DKMessage.html").style.display = "block";
+	byId("DKMessage/DKMessage.html").style.visibility = "visible";
 	
 	DKMessage_callback = callback;
 }
@@ -69,9 +74,13 @@ function DKMessage_Confirm(message, callback)
 function DKMessage_GetValue(message, callback)
 {
 	byId("DKMessageText").innerHTML = message;
-	DKWidget_Show("DKMessageText");
-	DKWidget_Show("DKMessageInput");
-	DKWidget_Show("DKMessageCancel");
-	DKWidget_Show("DKMessage/DKMessage.html");
+	byId("DKMessageText").style.display = "block";
+	byId("DKMessageText").style.visibility = "visible";
+	byId("DKMessageInput").style.display = "block";
+	byId("DKMessageInput").style.visibility = "visible";
+	byId("DKMessageCancel").style.display = "block";
+	byId("DKMessageCancel").style.visibility = "visible";
+	byId("DKMessage/DKMessage.html").style.display = "block";
+	byId("DKMessage/DKMessage.html").style.visibility = "visible";
 	DKMessage_callback = callback;
 }
