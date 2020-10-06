@@ -20,7 +20,9 @@ function Desktop_OnEvent(event)
 	if(event.currentTarget.id === "Background" && event.type === "contextmenu"){
 		event.preventDefault();
 		DKCreate("DKOS/DesktopMenu.js", function(){
-			DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
+			DKCreate("DKGui/DKMenu.js", function(){
+			    DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
+			});
 		});
 	}
 }
