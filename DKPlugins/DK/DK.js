@@ -915,8 +915,9 @@ function DK_Refresh()
 
 
 //////////////////////////
-function DKAvailable(name)
+function DKAvailable(name) //FIXME: rename to DK_Available
 {
+	//FIXME: This function needs to be investigated
 	if(name === "DKWidget"){
 		return true; 
 	}

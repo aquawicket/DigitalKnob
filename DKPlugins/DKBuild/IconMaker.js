@@ -17,7 +17,7 @@ function IconMaker_End()
 //////////////////////////////////
 function IconMaker_Create(AppPath)
 {
-	DKCPP_DKDuktape_DKCreate("DKArchiveJS");
+	DKCPP_DKDuktape_Create("DKArchiveJS");
 	IconMaker_ValidateImageMagick();
 	
 	//Create Windows Icon

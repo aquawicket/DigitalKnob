@@ -42,20 +42,15 @@ bool DKDuktapeJS::Init()
 
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKDEBUGFUNC", DKDuktapeJS::_DKDEBUGFUNC);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKDEBUGVARS", DKDuktapeJS::_DKDEBUGVARS);
-	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_DKAddEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKAvailable", DKDuktapeJS::_DKAvailable);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKClose", DKDuktapeJS::_DKClose);
-	
-	//FIXME: we have three different js function pointing to _DKCreate
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKCreate", DKDuktapeJS::_DKCreate);  //FIXME: this will be overwritten by DK/DK.js
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKCreate_CPP", DKDuktapeJS::_DKCreate); //FIXM: I think this is the same function as above
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_Create", DKDuktapeJS::_DKCreate);
-	
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKLoadPlugin", DKDuktapeJS::_DKLoadPlugin);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvent", DKDuktapeJS::_DKRemoveEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvents", DKDuktapeJS::_DKRemoveEvents);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_SendEvent", DKDuktapeJS::_DKSendEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDuktape_DK_Valid", DKDuktapeJS::_DKValid);
+	//DKDuktape::AttachFunction("DKAddEvent", DKDuktapeJS::_AddEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_Available", DKDuktapeJS::_Available);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_Close", DKDuktapeJS::_Close);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_Create", DKDuktapeJS::_Create);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_DKLoadPlugin", DKDuktapeJS::_LoadPlugin);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvent", DKDuktapeJS::_RemoveEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_RemoveEvents", DKDuktapeJS::_RemoveEvents);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_SendEvent", DKDuktapeJS::_SendEvent);
+	DKDuktape::AttachFunction("DKCPP_DKDuktape_Valid", DKDuktapeJS::_Valid);
 
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_Beep", DKDuktapeJS::Beep);
 	DKDuktape::AttachFunction("DKCPP_DKDuktape_CallLoops", DKDuktapeJS::CallLoops);
@@ -140,9 +135,50 @@ bool DKDuktapeJS::Init()
 	return true;
 }
 
+///////////////////////////////////////////////
+int DKDuktapeJS::_DKDEBUGFUNC(duk_context* ctx)
+{
+	//TODO - we need to pull the function name
+	DKString str = "unknown_func(";
+	int i = 0;
+	while (duk_is_valid_index(ctx, i)) {
+		if (duk_is_boolean(ctx, i)) { str += toString(duk_get_boolean(ctx, i)); }
+		if (duk_is_number(ctx, i)) { str += toString(duk_get_number(ctx, i)); }
+		if (duk_is_string(ctx, i)) { str += duk_get_string(ctx, i); }
+		str += ","; //FIXME - no comma on the last argument
+		i++;
+	}
+	str += ")";
+	DKDEBUG(str + "\n");
+	return 1;
+}
 
-//////////////////////////////////////////////
-int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
+////////////////////////////////////////
+int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx)
+{
+	//TODO - we need to pull the function name and the variable names
+	DKString info = "unknown_file:unknown_line unknown_func()   ";
+	int i = 0;
+	while (duk_is_valid_index(ctx, i)) {
+		DKString var = "unknown_name: ";
+		if (duk_is_boolean(ctx, i)) { var += toString(duk_get_boolean(ctx, i)); }
+		if (duk_is_number(ctx, i)) { var += toString(duk_get_number(ctx, i)); }
+		if (duk_is_string(ctx, i)) { var += duk_get_string(ctx, i); }
+		if (!log_debug) {
+			log_debug = true;
+			DKDEBUG(info + var + "\n");
+			log_debug = false;
+		}
+		else {
+			DKDEBUG(info + var + "\n");
+		}
+		i++;
+	}
+	return 1;
+}
+
+////////////////////////////////////////////
+int DKDuktapeJS::_AddEvent(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -157,8 +193,8 @@ int DKDuktapeJS::_DKAddEvent(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////
-int DKDuktapeJS::_DKAvailable(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDuktapeJS::_Available(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	bool available = DKClass::DKAvailable(data);
@@ -168,16 +204,16 @@ int DKDuktapeJS::_DKAvailable(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
-int DKDuktapeJS::_DKClose(duk_context* ctx)
+/////////////////////////////////////////
+int DKDuktapeJS::_Close(duk_context* ctx)
 {
 	DKString value = duk_require_string(ctx, 0);
 	DKClass::DKClose(value);
 	return 1;
 }
 
-////////////////////////////////////////////
-int DKDuktapeJS::_DKCreate(duk_context* ctx)
+//////////////////////////////////////////
+int DKDuktapeJS::_Create(duk_context* ctx)
 {	
 	DKString data = duk_require_string(ctx, 0);
 	
@@ -248,58 +284,16 @@ int DKDuktapeJS::_DKCreate(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKDuktapeJS::_DKLoadPlugin(duk_context* ctx)
+//////////////////////////////////////////////
+int DKDuktapeJS::_LoadPlugin(duk_context* ctx)
 {
 	DKString file = duk_require_string(ctx, 0);
 	DKPlugins::LoadPlugin(file);
 	return 1;
 }
 
-////////////////////////////////////////
-int DKDuktapeJS::_DKDEBUGFUNC(duk_context* ctx)
-{
-	//TODO - we need to pull the function name
-	DKString str = "unknown_func(";
-	int i=0;
-	while(duk_is_valid_index(ctx, i)){
-		if(duk_is_boolean(ctx, i)){ str += toString(duk_get_boolean(ctx, i)); }
-		if(duk_is_number(ctx, i)){ str += toString(duk_get_number(ctx, i)); }
-		if(duk_is_string(ctx, i)){ str += duk_get_string(ctx, i); }
-		str += ","; //FIXME - no comma on the last argument
-		i++;
-	}
-	str += ")";
-	DKDEBUG(str+"\n");
-	return 1;
-}
-
-////////////////////////////////////////
-int DKDuktapeJS::_DKDEBUGVARS(duk_context* ctx)
-{
-	//TODO - we need to pull the function name and the variable names
-	DKString info = "unknown_file:unknown_line unknown_func()   ";
-	int i=0;
-	while(duk_is_valid_index(ctx, i)){
-		DKString var = "unknown_name: ";
-		if(duk_is_boolean(ctx, i)){ var += toString(duk_get_boolean(ctx, i)); }
-		if(duk_is_number(ctx, i)){ var += toString(duk_get_number(ctx, i)); }
-		if(duk_is_string(ctx, i)){ var += duk_get_string(ctx, i); }
-		if(!log_debug){
-			log_debug = true;
-			DKDEBUG(info+var+"\n");
-			log_debug = false;
-		}
-		else{
-			DKDEBUG(info+var+"\n");
-		}
-		i++;
-	}
-	return 1;
-}
-
-//////////////////////////////////////////
-int DKDuktapeJS::_DKRemoveEvent(duk_context* ctx)
+///////////////////////////////////////////////
+int DKDuktapeJS::_RemoveEvent(duk_context* ctx)
 {
 	DKString id = duk_require_string(ctx, 0);
 	DKString type = duk_require_string(ctx, 1);
@@ -313,8 +307,8 @@ int DKDuktapeJS::_DKRemoveEvent(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKDuktapeJS::_DKRemoveEvents(duk_context* ctx)
+////////////////////////////////////////////////
+int DKDuktapeJS::_RemoveEvents(duk_context* ctx)
 {
 	//variable can be id or jsreturn
 	DKString variable = duk_to_string(ctx, 0);
@@ -323,8 +317,8 @@ int DKDuktapeJS::_DKRemoveEvents(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////
-int DKDuktapeJS::_DKSendEvent(duk_context* ctx)
+/////////////////////////////////////////////
+int DKDuktapeJS::_SendEvent(duk_context* ctx)
 {
 	DKWARN("DKDuktapeJS::_DKSendEvent()\n");
 	DKString id = duk_require_string(ctx, 0);
@@ -348,8 +342,8 @@ int DKDuktapeJS::_DKSendEvent(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////
-int DKDuktapeJS::_DKValid(duk_context* ctx)
+/////////////////////////////////////////
+int DKDuktapeJS::_Valid(duk_context* ctx)
 {
 	DKString data = duk_require_string(ctx, 0);
 	bool valid = DKClass::DKValid(data);
@@ -359,7 +353,7 @@ int DKDuktapeJS::_DKValid(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////
+//////////////////////////////////////////
 int DKDuktapeJS::_SetLog(duk_context* ctx)
 {
 	//TODO

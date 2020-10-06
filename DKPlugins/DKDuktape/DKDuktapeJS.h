@@ -11,17 +11,18 @@ class DKDuktapeJS : public DKObjectT<DKDuktapeJS>
 public:
 	bool Init();
 	
-	static int _DKAddEvent(duk_context* ctx);
-	static int _DKAvailable(duk_context* ctx);
-	static int _DKClose(duk_context* ctx);
-	static int _DKCreate(duk_context* ctx);
-	static int _DKLoadPlugin(duk_context* ctx);
+	//FIXME: remove the DK prefix from these functions
 	static int _DKDEBUGFUNC(duk_context* ctx);
 	static int _DKDEBUGVARS(duk_context* ctx);
-	static int _DKRemoveEvent(duk_context* ctx);
-	static int _DKRemoveEvents(duk_context* ctx);
-	static int _DKSendEvent(duk_context* ctx);
-	static int _DKValid(duk_context* ctx);
+	static int _AddEvent(duk_context* ctx);
+	static int _Available(duk_context* ctx);
+	static int _Close(duk_context* ctx);
+	static int _Create(duk_context* ctx);
+	static int _LoadPlugin(duk_context* ctx);
+	static int _RemoveEvent(duk_context* ctx);
+	static int _RemoveEvents(duk_context* ctx);
+	static int _SendEvent(duk_context* ctx);
+	static int _Valid(duk_context* ctx);
 	static int _SetLog(duk_context* ctx);
 	
 	static int Beep(duk_context* ctx);

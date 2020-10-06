@@ -21,7 +21,7 @@ var APP_LIST = [];
 ///////////////////////
 function DKBuild_Init()
 {
-	DKCPP_DKDuktape_DKCreate("DKCurl");
+	DKCPP_DKDuktape_Create("DKCurl");
 
 	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		DKPATH = "C:/digitalknob";
@@ -384,7 +384,7 @@ function DKBuild_DoResults()
 	
 	//// Create Icons
 	if(DKCPP_DKDuktape_GetOS() === "Win32" || DKCPP_DKDuktape_GetOS() === "Win64"){
-		DKCPP_DKDuktape_DKCreate("DKBuild/IconMaker.js");
+		DKCPP_DKDuktape_Create("DKBuild/IconMaker.js");
 		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 	}
 	
@@ -832,10 +832,10 @@ function DKBuild_DoResults()
 	console.log("********************************************");
 	
 	/*
-	if(DKAvailable("DKAudio")){
-		DKCPP_DKDuktape_DKCreate("DKAudio");
+	if(DKCPP_DKDuktape_Available("DKAudio")){
+		DKCPP_DKDuktape_Create("DKAudio");
 	}
-	if(DKValid("DKAudioJS,DKAudioJS0")){
+	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 	*/
