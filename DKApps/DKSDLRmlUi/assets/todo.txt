@@ -1,12 +1,14 @@
 // TODO //
 
+Replace all coourances of DKCPP with CPP
+
 *** DK Javascript ***
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
 Proper naming would be DKCPP_DKPlugin_Function
 
 *** DK.js ***
 Make sure all function are prefixed with DK_
-i.e.  DK_Function(var){}
+i.e.  DK_Function(var)
 
 *** FUN ***
 Make the Atari tank game  :D
@@ -14,7 +16,7 @@ Make the Atari tank game  :D
 ** Eliminate DKWidget
 Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
 
-*** ALL .js files ***
+*** ALWAYS ***
  replace all == with ===
  replace all != with !==
 
