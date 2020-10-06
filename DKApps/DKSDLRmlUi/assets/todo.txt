@@ -1,7 +1,8 @@
 ~! THE LIST !~
 
 
-Model DK/Events after javascript EventTarget.
+Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
+
 
 
 Rename Github MyApps to DKMyApps
