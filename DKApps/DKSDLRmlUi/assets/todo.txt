@@ -1,7 +1,7 @@
 ~! THE LIST !~
 
-*** GENERAL ***
-Get DKTestAll Working
+Test adding repository files to DKBuilder
+Get DKTestAll Working on Linux
 Model DK/Events after javascript EventTarget.
 Compile Everything for win64
 Compile in Linux
