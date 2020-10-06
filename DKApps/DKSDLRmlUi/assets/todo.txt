@@ -2,32 +2,13 @@
 
 *** DK Javascript ***
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
-Proper naming would be DKCPP_DKPlugin_File_function
-Many CPP javascript function will fail, they simpily need a DKCPP_ prefix
-
-*** DKBuilder ***
-Make sure dkbuilder recognizes the new web standard key codes
+Proper naming would be DKCPP_DKPlugin_Function
 
 *** FUN ***
 Make the Atari tank game  :D
 
-** Lose DKWidget
-It's down to one file with a bunch of helper functions. not a class..  push it into main or something
-
-*** DKWidget ***
- Remove These terms from all ,js files
- DKDEBUGFUNC
- DKAddEvent
- DKRemoveEvent
- DKRemoveEvents
-DKWidget_GetAttribute
-DKWidget_SetAttribute
-DKWidget_GetInnerHtml
-DKWidget_SetInnerHtml
-DKWidget_GetProperty
-DKWidget_SetProperty
-DKWidget_GetValue
-DKWidget_Visible
+** Eliminate DKWidget
+Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
 
 *** ALL .js files ***
  replace all == with ===
@@ -36,13 +17,7 @@ DKWidget_Visible
 *** DKNotepad ***
  Make "Ctrl+Shift+S" save the file in DKNotepad
  Get Copy and Paste working
- Remove save comfrimation or make a sparkle or something
-
-*** DKDuktape ***
-Eliminate unneeded jacascript function in DKDuktape. I.E. DKGet_Id or DKGet_type
-
-*** DKFar ***
-create a replica of the win32 program FAR
+ Remove save comfrimation and make a sparkle, or something
 
 *** DKDomEvent ***
 * add removeEventListener everywhere neccesary 
