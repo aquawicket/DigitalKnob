@@ -134,7 +134,7 @@ function DKSolutionMenu_NewFile()
 	DKSolution_UpdatePath(value);
 	
 	//Find the id
-	var elements = DKWidget_GetElements("DKSolutionMenu");
+	var elements = DK_GetElements(byId("DKSolutionMenu"));
 	//console.log("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){
@@ -164,7 +164,7 @@ function DKSolutionMenu_NewFolder()
 	DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));
 	
 	//Find the id
-	var elements = DKWidget_GetElements("DKSolutionMenu");
+	var elements = DK_GetElements(byId("DKSolutionMenu"));
 	//console.log("elements = "+elements+"\n");
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length; i++){

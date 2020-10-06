@@ -1099,6 +1099,25 @@ function DK_ClearSelection()
 	}
 }
 
+////////////////////////////////
+function DK_GetElements(element)
+{
+	var string = "";
+	//var nodes = byId(id).getElementsByTagName('*'); //all children recursively
+	if(typeof(element) !== "object"){
+		console.error("DK_GetElements("+element.id+"): element not an object");
+	}
+	var nodes = element.childNodes;
+	for(var i=0; i<nodes.length; i++){
+		if(nodes[i].id){
+			string += nodes[i].id;
+			string += ",";
+		}
+	}
+	//console.log("GetElements("+id+"): -> "+string+"\n");
+	return string;
+}
+
 
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff

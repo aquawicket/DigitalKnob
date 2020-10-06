@@ -143,7 +143,7 @@ function DKAutomate_CancelSave()
 function DKAutomate_UpdateSelection(value)
 {
 	if(!value){ return; }
-	var temp = DKWidget_GetElements("DKA-TriggerList");
+	var temp = DK_GetElements(byId("DKA-TriggerList"));
 	var options = temp.split(",");
 	for(var i = 0; i < options.length; ++i){
 		if(value === DKWidget_GetValue(options[i])){
