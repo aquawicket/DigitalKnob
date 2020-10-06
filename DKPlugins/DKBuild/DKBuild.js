@@ -384,9 +384,8 @@ function DKBuild_DoResults()
 	
 	//// Create Icons
 	if(DKCPP_DKDuktape_GetOS() === "Win32" || DKCPP_DKDuktape_GetOS() === "Win64"){
-		DKCreate("DKBuild/IconMaker.js", function(){
-			IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
-		});
+		DKCPP_DKDuktape_DKCreate("DKBuild/IconMaker.js");
+		IconMaker_Create(DKPATH+"/"+appdir+"/"+APP);
 	}
 	
 	////// WIN32 /////
@@ -834,7 +833,7 @@ function DKBuild_DoResults()
 	
 	/*
 	if(DKAvailable("DKAudio")){
-		DKCreate("DKAudio");
+		DKCPP_DKDuktape_DKCreate("DKAudio");
 	}
 	if(DKValid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
