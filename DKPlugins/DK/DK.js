@@ -242,7 +242,7 @@ function Log(string, lvl)
 	//DKSendEvent("DKConsole.html", "DKNotify", string);
 }
 
-/////////////////////////////////
+//////////////////////////////////
 function DK_Create(data, callback)
 {
 	//console.log("DK.js:DK_Create("+data+")");	
@@ -572,8 +572,8 @@ function DK_LoadHtml(url, parent)
 	return true;
 }
 
-///////////////////////////
-function CheckFileSupport()
+//////////////////////////////
+function DK_CheckFileSupport()
 {
 	if(window.File && window.FileReader && window.FileList && window.Blob){
 		console.log("DK.js: File support OK");
@@ -583,6 +583,7 @@ function CheckFileSupport()
 	}
 }
 
+/*
 ///////////////////////////
 function GetLeftPx(element)
 {
@@ -626,6 +627,7 @@ function GetHeightPx(element)
 	}
 	return parseInt(element.style.height);
 }
+*/
 
 /*
 /////////////////////////////
@@ -777,6 +779,7 @@ function ResizeStop(id)
 }
 */
 
+/*
 //////////////////////////////
 function PreventDefault(event)
 {
@@ -796,6 +799,7 @@ function StopPropagation(event)
         event.cancelBubble = true;
     }
 }
+*/
 
 /////////////////////////////////////////
 function setCookie(cname, cvalue, exdays)
@@ -852,8 +856,8 @@ if(typeof String.prototype.trim !== 'function') {
   }
 }
 
-//////////////////
-function IsLocal()
+/////////////////////
+function DK_IsLocal()
 {
 	switch(window.location.protocol){
 		case 'http:':
@@ -901,7 +905,7 @@ function DK_GetDate()
 	return date;
 }
 
-
+/*
 /////////////////////
 function DK_Refresh()
 {	
@@ -909,10 +913,10 @@ function DK_Refresh()
 	window.location.hash = "";
 	window.location.reload(true);
 }
+*/
 
-
-//////////////////////////
-function DKAvailable(name) //FIXME: rename to DK_Available
+///////////////////////////
+function DK_Available(name) //FIXME: rename to DK_Available
 {
 	//FIXME: This function needs to be investigated
 	if(name === "DKWidget"){
