@@ -1,19 +1,17 @@
 ~! THE LIST !~
 
-Start using Windows DK x64 more often
 Rename Github MyApps to DKMyApps
-Test adding Repository.txt files to DKBuilde
 Get DKTestAll Working on Linux
 Model DK/Events after javascript EventTarget.
 Compile Everything for win64
-Compile in Linux
-Hint: Their may be a SDL2Android thing in 3rdParty
+Hint: Their may be a new SDL2Android thing in 3rdParty
 Add DKBuilder to DKBinaries for win32 win 64 after tests
 
 *** Javascript ***
 EventTarget is lower than Window. Use that for javascript without a document context.
-ALL C++ Javascript functions now REQUIRE a CPP_ prefix
+ALL C++ Javascript functions now require a CPP_ prefix
 Proper naming would be CPP_DKPlugin_Function
+DK Javascript functions are just DKPlugin_Function 
 
 *** DK.js ***
 Make sure all function are prefixed with DK_
