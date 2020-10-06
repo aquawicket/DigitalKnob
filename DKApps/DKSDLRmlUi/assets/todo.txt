@@ -3,7 +3,7 @@
 
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
-
+Go pick up your I7 from storage
 
 Rename Github MyApps to DKMyApps
 Get DKTestAll Working on Linux
