@@ -1,7 +1,7 @@
 /////////////////////////
 function DKDisplay_Init()
 {
-	DKCreate("DKDisplay/DKDisplay.html");
+	DK_Create("DKDisplay/DKDisplay.html");
 	byId("DKDisplay_Button").addEventListener("click", DKDisplay_OnEvent);
 	//window.addEventListener("second", DKDisplay_OnEvent);
 	//byId("DKDisplay/DKDisplay.html").addEventListener("click", DKDisplay_OnEvent);

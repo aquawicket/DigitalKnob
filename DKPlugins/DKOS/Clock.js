@@ -5,7 +5,7 @@ var second_flag = false;
 /////////////////////
 function Clock_Init()
 {
-	DKCreate("DKOS/Clock.html,DKOS/Taskbar.html");
+	DK_Create("DKOS/Clock.html,DKOS/Taskbar.html");
 	window.addEventListener("second", Clock_OnEvent);
 	Clock_Update();
 }

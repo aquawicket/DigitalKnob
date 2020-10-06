@@ -1,7 +1,7 @@
 //////////////////////
 function DKHook_Init()
 {
-	DKCreate("DKHook");
+	DK_Create("DKHook");
 	window.addEventListener("GLOBAL_mousemove", DKHook_OnEvent);
 	window.addEventListener("GLOBAL_mousedown", DKHook_OnEvent);
 	window.addEventListener("GLOBAL_mouseup", DKHook_OnEvent);

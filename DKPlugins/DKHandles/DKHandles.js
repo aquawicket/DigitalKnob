@@ -1,8 +1,8 @@
 /////////////////////////
 function DKHandles_Init()
 {
-	DKCreate("DKHandles");
-	DKCreate("DKHandles/DKHandles.html");
+	DK_Create("DKHandles");
+	DK_Create("DKHandles/DKHandles.html");
 	window.addEventListener("click", DKHandles_OnEvent);
 	window.addEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
 	byId("refresh").addEventListener("click", DKHandles_OnEvent);

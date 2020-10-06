@@ -3,7 +3,7 @@ var websocket;
 //////////////////////////////////
 function DKWebSocketsClient_Init()
 {
-	DKCreate("DKWebSockets/DKWebSocketsClient.html", function(){
+	DK_Create("DKWebSockets/DKWebSocketsClient.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_OnEvent);
 		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_OnEvent);
 		byId("DKWebSocketsClient_CloseClient").addEventListener("click", DKWebSocketsClient_OnEvent);

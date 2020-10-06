@@ -4,8 +4,8 @@ var currentFile;
 function DKNotepad_Init()
 {
 	//console.warn("DKNotepad_Init()");
-	DKCreate("DKNotepad/DKNotepad.css");
-	DKCreate("DKNotepad/DKNotepad.html");
+	DK_Create("DKNotepad/DKNotepad.css");
+	DK_Create("DKNotepad/DKNotepad.html");
 	//byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
 	byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
@@ -36,7 +36,7 @@ function DKNotepad_End()
 function DKNotepad_OnEvent(event)
 {	
 	if(event.type === "contextmenu"){
-		DKCreate("DKNotepad/DKNotepadMenu.js", function(){
+		DK_Create("DKNotepad/DKNotepadMenu.js", function(){
 			DKMenu_ValidatePosition("DKNotepad/DKNotepadMenu.html");
 		});
 	}
@@ -55,19 +55,19 @@ function DKNotepad_OnEvent(event)
 	//}
 	if(!event.currentTarget){ return; }
 	if(event.currentTarget.id === "DKNotepad_File"){
-		DKCreate("DKNotepad/DKNotepadFile.js", function(){});
+		DK_Create("DKNotepad/DKNotepadFile.js", function(){});
 	}
 	if(event.currentTarget.id === "DKNotepad_Edit"){
-		DKCreate("DKNotepad/DKNotepadEdit.js", function(){});
+		DK_Create("DKNotepad/DKNotepadEdit.js", function(){});
 	}
 	if(event.currentTarget.id === "DKNotepad_Format"){
-		DKCreate("DKNotepad/DKNotepadFormat.js", function(){});
+		DK_Create("DKNotepad/DKNotepadFormat.js", function(){});
 	}
 	if(event.currentTarget.id === "DKNotepad_View"){
-		DKCreate("DKNotepad/DKNotepadView.js", function(){});
+		DK_Create("DKNotepad/DKNotepadView.js", function(){});
 	}
 	if(event.currentTarget.id === "DKNotepad_Help"){
-		DKCreate("DKNotepad/DKNotepadHelp.js", function(){});
+		DK_Create("DKNotepad/DKNotepadHelp.js", function(){});
 	}
 }
 

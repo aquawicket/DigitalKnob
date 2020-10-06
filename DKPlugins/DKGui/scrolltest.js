@@ -1,16 +1,16 @@
 //////////////////////////
 function scrolltest_Init()
 {
-	DKCreate("DKGui/scrolltest.html", function(){
-	DKCreate("DKGui/scrolltest1.html", function(){
-	DKCreate("DKGui/scrolltest2.html", function(){
+	DK_Create("DKGui/scrolltest.html", function(){
+	DK_Create("DKGui/scrolltest1.html", function(){
+	DK_Create("DKGui/scrolltest2.html", function(){
 		DKWidget_AppendChild("DKGui/scrolltest.html", "DKGui/scrolltest1.html");
 		DKWidget_AppendChild("DKGui/scrolltest.html", "DKGui/scrolltest2.html");
 	});		
 	});
 	});
 
-	//DKCreate("DKMessage/DKMessage.js", function(){});
+	//DK_Create("DKMessage/DKMessage.js", function(){});
 	byId("bottomdiv").addEventListener("mousedown", scrolltest_OnEvent);
 }
 

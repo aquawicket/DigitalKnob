@@ -1,7 +1,7 @@
 ///////////////////////
 function DKStats_Init()
 {
-	DKCreate("DKStats/DKStats.html");
+	DK_Create("DKStats/DKStats.html");
 	window.addEventListener("second", DKStats_OnEvent);
 	//byId("DKStats/DKStats.html").addEventListener("click", DKStats_OnEvent);
 	DKStats_Update();

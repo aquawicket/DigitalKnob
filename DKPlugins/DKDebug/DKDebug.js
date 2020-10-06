@@ -263,7 +263,7 @@ function DKDebug_ShowConsole()
 ////////////////////////////
 function DKDebug_GetSource()
 {
-	DKCreate("DKWidgetJS");
+	DK_Create("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("html");
 	var assets = DKCPP_DKAssets_LocalAssets();
 	
@@ -284,7 +284,7 @@ function DKDebug_Crash()
 /////////////////////////
 function DKDebug_Editor()
 {
-	DKCreate("DKEditor/DKEditor.js", function(){});
+	DK_Create("DKEditor/DKEditor.js", function(){});
 }
 
 ///////////////////////////

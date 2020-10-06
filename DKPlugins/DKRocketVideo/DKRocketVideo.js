@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKRocketVideo_Init()
 {
-	DKCreate("DKRocketVideo/DKRocketVideo.html");
+	DK_Create("DKRocketVideo/DKRocketVideo.html");
 	byId("DKRocketVideo_playpause").addEventListener("click", DKRocketVideo_OnEvent);
 	byId("DKRocketVideo_position").addEventListener("click", DKRocketVideo_OnEvent);
 	byId("DKRocketVideo_positiontrack").addEventListener("click", DKRocketVideo_OnEvent);

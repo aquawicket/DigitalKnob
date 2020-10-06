@@ -10,8 +10,8 @@ var rPath;
 //////////////////////////
 function DKSaveFile_Init()
 {	
-	DKCreate("DKFile/DKSaveFile.css");
-	DKCreate("DKFile/DKSaveFile.html");
+	DK_Create("DKFile/DKSaveFile.css");
+	DK_Create("DKFile/DKSaveFile.html");
 	byId("DKFile/DKSaveFile.html").addEventListener("SetFile", DKSaveFile_OnEvent);
 	byId("DKSaveFileCancel").addEventListener("click", DKSaveFile_OnEvent);
 	byId("DKSaveFileOK").addEventListener("click", DKSaveFile_OnEvent);

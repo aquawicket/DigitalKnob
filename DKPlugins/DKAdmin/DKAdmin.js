@@ -1,7 +1,7 @@
 ///////////////////////
 function DKAdmin_Init()
 {
-	DKCreate("DKAdmin/DKAdmin.html");
+	DK_Create("DKAdmin/DKAdmin.html");
 	byId("AdminBadge").addEventListener("click", DKAdmin_OnEvent);
 	
 	//console.log("DK_GetBrowser() = "+DK_GetBrowser()+"\n");
@@ -27,6 +27,6 @@ function DKAdmin_OnEvent(event)
 	console.log("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "AdminBadge"){
-		DKCreate("DKAdmin/DKAdminMenu.js", function(){});
+		DK_Create("DKAdmin/DKAdminMenu.js", function(){});
 	}
 }

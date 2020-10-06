@@ -3,8 +3,8 @@ var currentFile;
 ///////////////////////
 function DKPaint_Init()
 {
-	DKCreate("DKPaint/DKPaint.css");
-	DKCreate("DKPaint/DKPaint.html");
+	DK_Create("DKPaint/DKPaint.css");
+	DK_Create("DKPaint/DKPaint.html");
 	//byId("DKPaint_Save").addEventListener("click", DKPaint_OnEvent);
 	byId("DKPaint/DKPaint.html").addEventListener("contextmenu", DKPaint_OnEvent);
 	byId("DKPaint_File").addEventListener("click", DKPaint_OnEvent);
@@ -29,10 +29,10 @@ function DKPaint_OnEvent(event)
 		//DKNotepad_Save();
 	}
 	if(event.type === "contextmenu"){
-		DKCreate("DKPaint/DKPaintMenu.js", function(){});
+		DK_Create("DKPaint/DKPaintMenu.js", function(){});
 	}
 	if(event.currentTarget.id === "DKPaint_File"){
-		DKCreate("DKPaint/DKPaintFile.js", function(){});
+		DK_Create("DKPaint/DKPaintFile.js", function(){});
 	}
 	if(event.type === "OpenFile"){
 		var file = DK_GetValue(event);
@@ -47,7 +47,7 @@ function DKPaint_Save()
 	var text = DKWidget_GetValue("DKPaint_Text");
 	
 	//TODO
-	//DKCreate("DKMessage/DKMessage.js");
+	//DK_Create("DKMessage/DKMessage.js");
 	//DKMessageBox_Message("File Saved");
 }
 
@@ -75,8 +75,8 @@ function DKPaint_Open(file)
 //////////////////////////////////
 function DKPaint_LoadTif(filename)
 {
-	DKCreate("http://code.jquery.com/jquery-1.10.1.min.js", function(){
-	DKCreate("DKPaint/tiff.min.js", function(){
+	DK_Create("http://code.jquery.com/jquery-1.10.1.min.js", function(){
+	DK_Create("DKPaint/tiff.min.js", function(){
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', filename);
 		xhr.responseType = 'arraybuffer';

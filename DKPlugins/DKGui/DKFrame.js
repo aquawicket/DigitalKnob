@@ -441,7 +441,7 @@ function DKFrame_Reload(id)
 	console.log("htmlfile = "+htmlfile+"\n");
 	
 	DKFrame_Close(id);
-	DKCreate(jsfile, function(){
+	DK_Create(jsfile, function(){
 		DKFrame_Widget(htmlfile);
 	});
 }

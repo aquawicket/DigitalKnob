@@ -4,7 +4,7 @@ DKSolutionRename_file = "";
 ////////////////////////////////
 function DKSolutionRename_Init()
 {
-	DKCreate("DKFile/DKSolutionRename.html,DKSolutionMenu");
+	DK_Create("DKFile/DKSolutionRename.html,DKSolutionMenu");
 	window.addEventListener("mousedown", DKSolutionRename_OnEvent);
 	byId("DKSolutionRename_box").addEventListener("keydown", DKSolutionRename_OnEvent);
 	

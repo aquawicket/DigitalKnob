@@ -3,7 +3,7 @@ var DKMessage_callback;
 /////////////////////////
 function DKMessage_Init()
 {	
-	DKCreate("DKMessage/DKMessage.html");
+	DK_Create("DKMessage/DKMessage.html");
 	byId("DKMessageOk").addEventListener("click", DKMessage_OnEvent);
 	byId("DKMessageCancel").addEventListener("click", DKMessage_OnEvent);
 }

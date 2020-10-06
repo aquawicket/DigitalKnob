@@ -1,8 +1,8 @@
 ////////////////////////////
 function SendBugReport_Init()
 {
-	DKCreate("DKDebug/SendBugReport.css");
-	DKCreate("DKDebug/SendBugReport.html");
+	DK_Create("DKDebug/SendBugReport.css");
+	DK_Create("DKDebug/SendBugReport.html");
 	byId("SendBugReport_Button").addEventListener("click", SendBugReport_OnEvent);
 }
 
@@ -36,7 +36,7 @@ function SendBugReport_CreateReport()
 	
 	byId("DKDebug/SendBugReport.html").style.display = "none";
 	//TODO: say thank you here
-	DKCreate("DKMessage/DKMessage.js", function(){
+	DK_Create("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessage_Message("Thank You :)");	
 		DKFrame_Close("DKDebug/SendBugReport.html");

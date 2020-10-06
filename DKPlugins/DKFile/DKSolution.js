@@ -1,9 +1,9 @@
 //////////////////////////
 function DKSolution_Init()
 {	
-	DKCreate("DKFile/DKSolution.css");
-	DKCreate("DKFile/DKSolution.html");
-	DKCreate("DKFile/DKFileAssociation.js", function(){});
+	DK_Create("DKFile/DKSolution.css");
+	DK_Create("DKFile/DKSolution.html");
+	DK_Create("DKFile/DKFileAssociation.js", function(){});
 	byId("DKSolutionUp").addEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").addEventListener("click", DKSolution_OnEvent);
 	byId("DKSolutionMenu").addEventListener("contextmenu", DKSolution_OnEvent);
@@ -41,7 +41,7 @@ function DKSolution_OnEvent(event)
 		//console.log("id = "+id+"\n");
 		event.stopPropagation();
 		event.preventDefault();
-		DKCreate("DKFile/DKSolutionMenu.js", function(){
+		DK_Create("DKFile/DKSolutionMenu.js", function(){
 			DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
 			var file = DKWidget_GetValue(id);
 			//console.log("file = "+file+"\n");

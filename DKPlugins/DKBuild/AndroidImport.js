@@ -5,7 +5,7 @@ TYPE = DKWidget_GetValue("BuildType");
 /////////////////////////////
 function AndroidImport_Init()
 {
-	DKCreate("DKHandles");
+	DK_Create("DKHandles");
 	ANDROIDSTUDIO = DKFile_GetShortName(ANDROIDSTUDIO);
 	console.log("ANDROIDSTUDIO="+ANDROIDSTUDIO+"\n");
 }
@@ -173,7 +173,7 @@ function AndroidImport_Import()
 	
 	console.log("Import finished\n");
 	
-	DKCreate("DKAudio");
+	DK_Create("DKAudio");
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}

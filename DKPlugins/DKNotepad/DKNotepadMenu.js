@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadMenu_Init()
 {
-	DKCreate("DKNotepad/DKNotepadMenu.html");
+	DK_Create("DKNotepad/DKNotepadMenu.html");
 	document.addEventListener("mousedown", DKNotepadMenu_OnEvent);
 	byId("DKNotepadMenu_Cut").addEventListener("mousedown", DKNotepadMenu_OnEvent);
 	byId("DKNotepadMenu_Copy").addEventListener("mousedown", DKNotepadMenu_OnEvent);

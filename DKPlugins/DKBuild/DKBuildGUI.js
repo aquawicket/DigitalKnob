@@ -1,10 +1,10 @@
 //////////////////////////
 function DKBuildGUI_Init()
 {
-	//DKCreate("DKBuild/DKBuild.js", function(){});
-	DKCreate("DKBuild/DKBuildGUI.html", function(){
-	DKCreate("DKFile/DKFile.js", function(){
-	DKCreate("DKBuild/DKBuild.js", function(rval){
+	//DK_Create("DKBuild/DKBuild.js", function(){});
+	DK_Create("DKBuild/DKBuildGUI.html", function(){
+	DK_Create("DKFile/DKFile.js", function(){
+	DK_Create("DKBuild/DKBuild.js", function(rval){
 		//byId("AppList").addEventListener("click", DKBuildGUI_OnEvent);
 		byId("AppList").addEventListener("change", DKBuildGUI_OnEvent);
 		byId("OSList").addEventListener("change", DKBuildGUI_OnEvent);
@@ -14,7 +14,7 @@ function DKBuildGUI_Init()
 		byId("build").addEventListener("click", DKBuildGUI_OnEvent);
 	
 		//DKBuild_ValidateSvn();
-		DKCreate("DKGit/DKGit.js", function(){
+		DK_Create("DKGit/DKGit.js", function(){
 			//DKGit_ValidateGit();
 		});
 		DKBuild_ValidateCmake();
@@ -80,17 +80,17 @@ function DKBuildGUI_OnEvent(event)
 		DKBuildGUI_BuildSelect();
 	}
 	if(event.currentTarget.id === "git"){
-		DKCreate("DKGit/GitMenu.js", function(){
+		DK_Create("DKGit/GitMenu.js", function(){
 			DKMenu_ValidatePosition("DKGit/GitMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "libraries"){
-		DKCreate("DKBuild/LibraryMenu.js", function(){
+		DK_Create("DKBuild/LibraryMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/LibraryMenu.html");
 		});
 	}
 	if(event.currentTarget.id === "build"){
-		DKCreate("DKBuild/RunMenu.js", function(){
+		DK_Create("DKBuild/RunMenu.js", function(){
 			DKMenu_ValidatePosition("DKBuild/RunMenu.html");
 		});
 	}		
@@ -102,7 +102,7 @@ function DKBuildGUI_OnEvent(event)
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
-		//DKCreate("AppExplorer.js");
+		//DK_Create("AppExplorer.js");
 		//DKSendEvent("AppExplorer.html", "UpdateAppExplorer", apppath);
 	}
 	*/
@@ -129,7 +129,7 @@ function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
 	if(DKWidget_GetValue("AppList") === "NEW APP"){
-		DKCreate("DKMessage/DKMessage.js", function(){
+		DK_Create("DKMessage/DKMessage.js", function(){
 			DKSendEvent("DKMessage.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
 		});
 		return;

@@ -1,7 +1,7 @@
 /////////////////////
 function Input_Init()
 {
-	DKCreate("DKDebug/Input.html");
+	DK_Create("DKDebug/Input.html");
 	byId("Input_Text").addEventListener("keydown", Input_OnEvent);
 }
 

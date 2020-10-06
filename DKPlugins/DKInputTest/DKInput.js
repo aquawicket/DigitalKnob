@@ -5,7 +5,7 @@ else{ rgba = "0.5"; }
 ///////////////////////
 function DKInput_Init()
 {
-	DKCreate("DKInputTest/DKInput.html", function(){
+	DK_Create("DKInputTest/DKInput.html", function(){
 		window.addEventListener("keypress", DKInput_OnEvent);
 		window.addEventListener("keydown", DKInput_OnEvent);
 		window.addEventListener("keyup", DKInput_OnEvent);

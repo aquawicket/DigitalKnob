@@ -3,7 +3,7 @@ var GIT = "";
 /////////////////////
 function DKGit_Init()
 {
-	//DKCreate("DKThreadPool");
+	//DK_Create("DKThreadPool");
 	//console.log(DKCPP_DKDuktape_GetOS()+"\n");
 	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
@@ -108,7 +108,7 @@ function DKGit_GitUpdate()
 	}
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -156,7 +156,7 @@ function DKGit_GitCommit()
 	
 	/*
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

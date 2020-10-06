@@ -48,7 +48,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
 	//var id = DKFile_GetFilename(path);
-	if(DKCreate(id)){
+	if(DK_Create(id)){
 		//DKFileAssociation_AddDragHandles(id);
 		DKFrame_Widget(id);
 		//DKFileAssociation_SelectElement(id);
@@ -101,7 +101,7 @@ function DKFileAssociation_OpenJS(path)
 	//path = path.replace(absolutepath, "");
 		
 	var id = path.replace(DKAssets_LocalAssets(),"");
-	DKCreate(id, function(rval){
+	DK_Create(id, function(rval){
 		if(!rval){ return; }
 		id = id.replace(".js",".html");
 		DKFrame_Widget(id);
@@ -112,7 +112,7 @@ function DKFileAssociation_OpenJS(path)
 function DKFileAssociation_OpenCss(path)
 {
 	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
-	DKCreate(id, function(rval){
+	DK_Create(id, function(rval){
 		if(!rval){ return; }
 	});
 }
@@ -121,7 +121,7 @@ function DKFileAssociation_OpenCss(path)
 function DKFileAssociation_OpenText(path)
 {
 	DKWidget_Toggle("DKNotepad.html");
-	DKCreate("DKNotepad/DKNotepad.js", function(){
+	DK_Create("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Widget("DKNotepad/DKNotepad.html");
 		DKNotepad_Open(path);
 	});
@@ -130,7 +130,7 @@ function DKFileAssociation_OpenText(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenImage(path)
 {
-	DKCreate("DKPaint/DKPaint.js", function(){
+	DK_Create("DKPaint/DKPaint.js", function(){
 		DKFrame_Widget("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
 	});
@@ -139,22 +139,22 @@ function DKFileAssociation_OpenImage(path)
 //////////////////////////////////////////
 function DKFileAssociation_OpenModel(path)
 {
-	DKCreate("DKOSGManipulator,,DKOSGWindow", function(){});
-	DKCreate("DKOSGModel,,DKWindow,"+path, function(){});
+	DK_Create("DKOSGManipulator,,DKOSGWindow", function(){});
+	DK_Create("DKOSGModel,,DKWindow,"+path, function(){});
 }
 
 //////////////////////////////////////////
 function DKFileAssociation_OpenAudio(path)
 {
 	//var file = DKFile_GetFilename(path);
-	DKCreate("DKAudio", function(){
+	DK_Create("DKAudio", function(){
 		DKAudio_PlaySound(path);
 	});
 	
-	//DKCreate("DKOSGAudio,"+file+",DKOSGWindow,"+path);
+	//DK_Create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
 	//DKOSGAudio_Play("DKOSGAudio,"+file);
 	
-	//DKCreate("DKSDLAudio,"+file+",DKSDLWindow,"+path);
+	//DK_Create("DKSDLAudio,"+file+",DKSDLWindow,"+path);
 	//DKSDLAudio_Play("DKSDLAudio,"+file);
 }
 

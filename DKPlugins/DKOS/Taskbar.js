@@ -3,12 +3,12 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	//DKCreate("DKOS/Taskbar.html,DKOS/DKOS.html");
-	DKCreate("DKOS/Taskbar.html", function(){});
-	DKCreate("DKOS/scale.js", function(){});
-	DKCreate("DKOS/Clock.js", function(){});
+	//DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html");
+	DK_Create("DKOS/Taskbar.html", function(){});
+	DK_Create("DKOS/scale.js", function(){});
+	DK_Create("DKOS/Clock.js", function(){});
 	if(DK_GetBrowser() === "RML"){
-		DKCreate("DKDebug/BugReport.js", function(){});
+		DK_Create("DKDebug/BugReport.js", function(){});
 			//DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
 			byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
 	}
@@ -31,7 +31,7 @@ function Taskbar_End()
 function Taskbar_OnEvent(event)
 {
 	if(event.currentTarget.id === "start"){
-		DKCreate("DKOS/TaskbarMenu.js", function(){});
+		DK_Create("DKOS/TaskbarMenu.js", function(){});
 	}
 	if(event.currentTarget.id === "test_animate"){
 		console.log("Taskbar_OnEvent(): animate");

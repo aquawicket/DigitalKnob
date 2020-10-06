@@ -1,7 +1,7 @@
 ///////////////////////
 function TestGui_Init()
 {
-	DKCreate("DKGui/TestGui.html");
+	DK_Create("DKGui/TestGui.html");
 }
 
 //////////////////////

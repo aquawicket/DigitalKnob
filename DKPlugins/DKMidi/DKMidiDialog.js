@@ -1,8 +1,8 @@
 ////////////////////////////
 function DKMidiDialog_Init()
 {
-	DKCreate("DKMidi/DKMidiDialog.css");
-	DKCreate("DKMidi/DKMidiDialog.html");
+	DK_Create("DKMidi/DKMidiDialog.css");
+	DK_Create("DKMidi/DKMidiDialog.html");
 	//DKMidiDialog_UpdatePorts();
 }
 

@@ -1,8 +1,8 @@
 ////////////////////////
 function DKEditor_Init()
 {
-	DKCreate("DKEditor/DKEditor.css");
-	DKCreate("DKEditor/DKEditor.html");
+	DK_Create("DKEditor/DKEditor.css");
+	DK_Create("DKEditor/DKEditor.html");
 	byId("DKEditor_edit").addEventListener("click", DKEditor_OnEvent);
 	byId("DKEditor_edit").addEventListener("contextmenu", DKEditor_OnEvent);
 	
@@ -13,7 +13,7 @@ function DKEditor_Init()
 	*/
 	
 	/*
-	DKCreate("DKTooltip/DKTooltip.js", function(){
+	DK_Create("DKTooltip/DKTooltip.js", function(){
 		DKTooltip_Add("DKEditor_edit", "Admin tools");
 	});
 	*/
@@ -33,7 +33,7 @@ function DKEditor_OnEvent(event)
 {
 	console.debug("DKEditor_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id === "DKEditor_edit"){
-		DKCreate("DKEditor/DKEditor_Menu.js", function(){
+		DK_Create("DKEditor/DKEditor_Menu.js", function(){
 			DKMenu_ValidatePosition("DKEditor/DKEditor_Menu.html");
 		});
 	}

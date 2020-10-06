@@ -1,7 +1,7 @@
 /////////////////////////
 function BugReport_Init()
 {
-	DKCreate("DKDebug/BugReport.html");
+	DK_Create("DKDebug/BugReport.html");
 	byId("BugReport_Image").addEventListener("click", BugReport_OnEvent);
 	byId("BugReport_Text").addEventListener("click", BugReport_OnEvent);
 }
@@ -26,7 +26,7 @@ function BugReport_OnEvent(event)
 //////////////////////////////////
 function BugReport_SendBugReport()
 {
-	DKCreate("DKDebug/SendBugReport.js", function(){
+	DK_Create("DKDebug/SendBugReport.js", function(){
 		DKFrame_Widget("DKDebug/SendBugReport.html");
 	});
 }

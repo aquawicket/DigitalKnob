@@ -40,7 +40,7 @@ function DKTooltip_Show(id)
 			DKClose("DKTooltip/DKTooltip.html");
 			return;
 		}
-		DKCreate("DKTooltip/DKTooltip.html");
+		DK_Create("DKTooltip/DKTooltip.html");
 		byId("DKTooltip/DKTooltip.html").innerHTML = byId(id).tooltip;
 		byId("DKTooltip/DKTooltip.html").style.top = mouseX+"px";
 		byId("DKTooltip/DKTooltip.html").style.left = mouseY+"px";

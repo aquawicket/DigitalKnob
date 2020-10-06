@@ -3,7 +3,7 @@ var SVN = "";
 /////////////////////
 function DKSvn_Init()
 {
-	DKCreate("DKThreadPool");
+	DK_Create("DKThreadPool");
 
 	//console.log((DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
@@ -91,7 +91,7 @@ function DKSvn_SvnUpdate()
 	//TODO: Multipe user folders
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -108,7 +108,7 @@ function DKSvn_SvnCommit()
 	//TODO: Multipe user folders
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

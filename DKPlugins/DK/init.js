@@ -30,11 +30,11 @@ function init_OnEvent(event)  //Duktape
 if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can support
 	if(USE_ROCKET && USE_CEF){
 		console.log("Creating SDL -> Rocket -> Cef -> GUI\n");
-		DKCreate("DKWindow");
+		DKCPP_DKDuktape_Create("DKWindow");
 		DKWindow_Create();
-		DKCreate("DKRocket");
+		DKCPP_DKDuktape_Create("DKRocket");
 		DKRocket_LoadUrl("DKRocket/blank.html");
-		DKCreate("DKWidget");
+		DKCPP_DKDuktape_Create("DKWidget");
 		var iframe = DKWidget_CreateElement(byId("body"), "iframe", "DKCef_frame");
 		byId(iframe).style.position = "absolute";
 		byId(iframe).style.top = "0rem";
@@ -48,18 +48,18 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 	}
 	else if(USE_ROCKET){
 		console.log("Creating SDL -> ROCKET -> GUI\n");
-		DKCreate("DKWindow");
+		DKCPP_DKDuktape_Create("DKWindow");
 		DKWindow_Create();
-		DKCreate("DKRocket");
+		DKCPP_DKDuktape_Create("DKRml");
 		DKRocket_LoadUrl("index.html");
 	}
 	else if(USE_SDL && USE_CEF){
 		console.log("Creating SDL -> CEF -> GUI\n");
-		DKCreate("DKWindow");
+		DKCPP_DKDuktape_Create("DKWindow");
 		DKWindow_Create();
 		var width = DKWindow_GetWidth();
 		var height = DKWindow_GetHeight();
-		DKCreate("DKCef");
+		DKCPP_DKDuktape_Create("DKCef");
 		DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(0);
 		window.addEventListener("resize", init_OnEvent);
@@ -70,10 +70,10 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		var assets = DKAssets_LocalAssets();
 		var width = Number(DKFile_GetSetting(assets+"settings.txt", "[WIDTH]"));
 		var height = Number(DKFile_GetSetting(assets+"settings.txt", "[HEIGHT]"));
-		DKCreate("DKCef");
+		DKCPP_DKDuktape_Create("DKCef");
 		DKCef_NewBrowser("CefWindow", 0, 0, width, height, DKApp_url);
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
-		DKCreate("DKWindow");
+		DKCPP_DKDuktape_Create("DKWindow");
 	}
 	else if(USE_WEBVIEW){ //TODO
 		console.log("Creating WEBVIEW -> GUI\n");

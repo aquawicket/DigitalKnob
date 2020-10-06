@@ -1,7 +1,7 @@
 ///////////////////////
 function RunMenu_Init()
 {
-	DKCreate("DKBuild/RunMenu.html");
+	DK_Create("DKBuild/RunMenu.html");
 	window.addEventListener("mousedown", RunMenu_OnEvent);
 	byId("Build App").addEventListener("click", RunMenu_OnEvent);
 	byId("Rebuild App").addEventListener("click", RunMenu_OnEvent);
@@ -134,7 +134,7 @@ function RunMenu_OnEvent(event)
 	
 	if(event.currentTarget.id === "Export to Android Studio"){
 		console.log("Export to Android Studio\n");
-		DKCreate("DKBuild/AndroidImport.js", function(){
+		DK_Create("DKBuild/AndroidImport.js", function(){
 			AndroidImport_Import();
 		});
 	}

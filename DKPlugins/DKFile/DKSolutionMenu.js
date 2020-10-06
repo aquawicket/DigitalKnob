@@ -4,7 +4,7 @@ DKSolutionMenu_file = "";
 //////////////////////////////
 function DKSolutionMenu_Init()
 {
-	DKCreate("DKFile/DKSolutionMenu.html", function(){
+	DK_Create("DKFile/DKSolutionMenu.html", function(){
     	document.addEventListener("mousedown", DKSolutionMenu_OnEvent);
     	byId("DKSolutionMenu_Open").addEventListener("click", DKSolutionMenu_OnEvent);
     	byId("DKSolutionMenu_OpenHere").addEventListener("click", DKSolutionMenu_OnEvent);
@@ -188,7 +188,7 @@ function DKSolutionMenu_Rename()
 	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
 	var top = top1 - top2 - 1;
 	
-	DKCreate("DKFile/DKSolutionRename.js", function(){
+	DK_Create("DKFile/DKSolutionRename.js", function(){
 		DKSolutionRename_SetId(DKSolutionMenu_id);
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
 		byId("DKFile/DKSolutionRename.html").style.top = top+"rem";
@@ -201,7 +201,7 @@ function DKSolutionMenu_Rename()
 function DKSolutionMenu_Delete()
 {
 	//TODO - confirm
-	DKCreate("DKMessage/DKMessage.js", function(){
+	DK_Create("DKMessage/DKMessage.js", function(){
 		DKFrame_Widget("DKMessage/DKMessage.html");
 		DKMessage_Confirm("delete this file?", function(rval){
 			//console.log("DKMessage_Confirm(): rval = "+rval+"\n");
@@ -240,7 +240,7 @@ function DKSolutionMenu_Import()
 ////////////////////////////////
 function DKSolutionMenu_GitAdd()
 {
-	DKCreate("DKBuild/DKBuild.js", function(){
+	DK_Create("DKBuild/DKBuild.js", function(){
 		var git = GIT;       //from DKBuild.js
 		var dkpath = DKPATH; //from DKBuild.js
 		//console.log("DKSolutionMenu_GitAdd(): git = "+git+"\n");
@@ -266,7 +266,7 @@ function DKSolutionMenu_GitAdd()
 /////////////////////////////////////
 function DKSolutionMenu_UpxCompress()
 {
-	DKCreate("DKBuild/DKBuild.js", function(){ //for DKPATH
+	DK_Create("DKBuild/DKBuild.js", function(){ //for DKPATH
 	
 		var dkpath = DKPATH; //from DKBuild.js
 		var upx = dkpath+"/DK/3rdParty/upx-3.95-win64/upx.exe";

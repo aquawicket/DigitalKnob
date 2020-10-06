@@ -7,7 +7,7 @@ function DKTray_Init()
 	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		return;
 	}
-	DKCreate("DKTray");
+	DK_Create("DKTray");
 	ById("DKTray").addEventListener("1000", DKTray_OnEvent);
 	byId("DKTray").addEventListener("1001", DKTray_OnEvent);
 	byId("DKTray").addEventListener("1002", DKTray_OnEvent);
@@ -42,13 +42,13 @@ function DKTray_OnEvent(event)
 	}
 	if(event.type === (event, "1000"){
 		DK_ShowConsole();
-		DKCreate("DKWindowJS");
+		DK_Create("DKWindowJS");
 		DKWindow_Show();
 		DKWindow_Restore();
 	}
 	if(event.type === "1001"){
 		DK_HideConsole();
-		DKCreate("DKWindowJS");
+		DK_Create("DKWindowJS");
 		DKWindow_Hide();
 	}
 	if(event.type === "1002"){
@@ -59,7 +59,7 @@ function DKTray_OnEvent(event)
 //////////////////////////////
 function DKTray_ToggleWindow()
 {
-	DKCreate("DKWindowJS");
+	DK_Create("DKWindowJS");
 	if(DKWindow_IsVisible()){
 		DKWindow_Hide();
 		DK_HideConsole();

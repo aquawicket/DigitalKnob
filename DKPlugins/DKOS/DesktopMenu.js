@@ -1,7 +1,7 @@
 ///////////////////////////
 function DesktopMenu_Init()
 {
-	DKCreate("DKOS/DesktopMenu.html");
+	DK_Create("DKOS/DesktopMenu.html");
 	//byId("DKOS/DesktopMenu.html").style.top = DKWindow_GetMouseY()+"px";
 	//byId("DKOS/DesktopMenu.html").style.left = DKWindow_GetMouseX()+"px";
 	byId("DKOS/DesktopMenu.html").style.top = "100px";
@@ -25,7 +25,7 @@ function DesktopMenu_End()
 function DesktopMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "OpenBackgtoundMenu"){
-		DKCreate("DKOS/BackgroundMenu.js", function(){
+		DK_Create("DKOS/BackgroundMenu.js", function(){
 			DKFrame_Widget("DKOS/BackgroundMenu.html");
 		});
 	}

@@ -7,8 +7,8 @@ var event_id;
 function DKColorPicker_Init()
 {
 	console.log("DKColorPicker_Init()");
-	DKCreate("DKColorPicker/DKColorPicker.css");
-	DKCreate("DKColorPicker/DKColorPicker.html");
+	DK_Create("DKColorPicker/DKColorPicker.css");
+	DK_Create("DKColorPicker/DKColorPicker.html");
 	byId("DKColorPicker/DKColorPicker.html").addEventListener("GetColor", DKColorPicker_OnEvent);
 	byId("DKColorPickerBar").addEventListener("mousedown", DKColorPicker_OnEvent);
 	byId("DKColorHover").addEventListener("mousedown", DKColorPicker_OnEvent);

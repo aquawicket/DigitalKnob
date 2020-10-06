@@ -3,7 +3,7 @@ var SVN = "";
 ///////////////////////
 function SvnMenu_Init()
 {
-	DKCreate("DKThreadPool");
+	DK_Create("DKThreadPool");
 
 	//SVN(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
@@ -21,7 +21,7 @@ function SvnMenu_Init()
 		SVN = "/usr/bin/git";
 	}
 
-	DKCreate("DKGit/SvnMenu.html", function(){
+	DK_Create("DKGit/SvnMenu.html", function(){
 		window.addEventListener("mousedown", SvnMenu_OnEvent);
 		byId("Git Update").addEventListener("click", SvnMenu_OnEvent);
 		byId("Git Commit").addEventListener("click", SvnMenu_OnEvent);
@@ -127,7 +127,7 @@ function SvnMenu_GitUpdate()
 	}
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -171,7 +171,7 @@ function SvnMenu_GitCommit()
 	}
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

@@ -1,7 +1,7 @@
 /////////////////////////
 function DKLoading_Init()
 {
-	DKCreate("DKLoading/DKLoading.html");
+	DK_Create("DKLoading/DKLoading.html");
 }
 
 ////////////////////////

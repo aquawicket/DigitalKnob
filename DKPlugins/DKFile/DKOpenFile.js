@@ -8,8 +8,8 @@ var rPath;
 //////////////////////////
 function DKOpenFile_Init()
 {	
-	DKCreate("DKFile/DKOpenFile.css");
-	DKCreate("DKFile/DKOpenFile.html");
+	DK_Create("DKFile/DKOpenFile.css");
+	DK_Create("DKFile/DKOpenFile.html");
 	byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
 	byId("DKFile/DKOpenFile.html").addEventListener("GetFile", DKOpenFile_OnEvent);
 	byId("DKOpenFileCancel").addEventListener("click", DKOpenFile_OnEvent);

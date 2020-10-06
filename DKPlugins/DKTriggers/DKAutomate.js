@@ -1,9 +1,9 @@
 //////////////////////////
 function DKAutomate_Init()
 {
-	DKCreate("DKAssets");
-	DKCreate("DKTriggers/DKAutomate.html");
-	DKCreate("DKTriggers/DKAutomate2.js", function(){
+	DK_Create("DKAssets");
+	DK_Create("DKTriggers/DKAutomate.html");
+	DK_Create("DKTriggers/DKAutomate2.js", function(){
 		byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_OnEvent);
 		//window.addEventListener("midi", DKAutomate_OnEvent);
 		//window.addEventListener("gui", DKAutomate_OnEvent); //all events
@@ -15,7 +15,7 @@ function DKAutomate_Init()
 		byId("MidiDevices").addEventListener("click", DKAutomate_OnEvent);
 		byId("DKTriggers/DKAutomate.html").addEventListener("UpdateValues", DKAutomate_OnEvent);
 
-		DKCreate("DKTriggers/DKTriggers.js", function(){
+		DK_Create("DKTriggers/DKTriggers.js", function(){
 			DKAutomate_UpdateValues();
 		});
 	});
@@ -49,7 +49,7 @@ function DKAutomate_OnEvent(event)
 	
 	if(event.currentTarget.id === "DKA-NewButton"){
 		//console.log("DKA-NewButton\n");
-		DKCreate("DKMessage/DKMessage.js", function(){
+		DK_Create("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
@@ -60,7 +60,7 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "DKA-DeleteButton"){
-		DKCreate("DKMessage/DKMessage.js", function(){
+		DK_Create("DKMessage/DKMessage.js", function(){
 			DKFrame_Widget("DKMessage/DKMessage.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
@@ -91,7 +91,7 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "MidiDevices"){
-		DKCreate("DKMidi/DKMidiDialog.js", function(){
+		DK_Create("DKMidi/DKMidiDialog.js", function(){
 			byId("DKMidi/DKMidiDialog.html").style.display = "block";
 			byId("DKMidi/DKMidiDialog.html").style.visibility = "visible";
 		});

@@ -1,7 +1,7 @@
 ///////////////////////////
 function DKPaintMenu_Init()
 {
-	DKCreate("DKPaint/DKPaintMenu.html");
+	DK_Create("DKPaint/DKPaintMenu.html");
 	window.addEventListener("mousedown", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Cut").addEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Copy").addEventListener("click", DKPaintMenu_OnEvent);

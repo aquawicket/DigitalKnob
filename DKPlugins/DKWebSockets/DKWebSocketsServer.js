@@ -1,8 +1,8 @@
 //////////////////////////////////
 function DKWebSocketsServer_Init()
 {
-	DKCreate("DKWebSockets");
-	DKCreate("DKWebSockets/DKWebSocketsServer.html", function(){
+	DK_Create("DKWebSockets");
+	DK_Create("DKWebSockets/DKWebSocketsServer.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_OnEvent);
 		byId("DKWebSocketsServer_CloseServer").addEventListener("click", DKWebSocketsServer_OnEvent);
 		byId("DKWebSocketsServer_CreateServer").addEventListener("click", DKWebSocketsServer_OnEvent);

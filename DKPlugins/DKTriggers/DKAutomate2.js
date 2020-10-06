@@ -1,7 +1,7 @@
 ///////////////////////////
 function DKAutomate2_Init()
 {
-	DKCreate("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
+	DK_Create("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
 		byId("DKTriggers/DKAutomate2.html").addEventListener("SelectTrigger", DKAutomate2_OnEvent);
 		byId("DKTriggers/DKAutomate2.html").addEventListener("input", DKAutomate2_OnEvent);
 	});

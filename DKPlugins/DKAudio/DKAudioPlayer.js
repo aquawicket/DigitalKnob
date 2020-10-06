@@ -3,8 +3,8 @@ var DKAudioPlayer_file = "";
 /////////////////////////////
 function DKAudioPlayer_Init()
 {
-	DKCreate("DKAudio");
-	DKCreate("DKAudio/DKAudioPlayer.html");
+	DK_Create("DKAudio");
+	DK_Create("DKAudio/DKAudioPlayer.html");
 	window.addEventListener("timeupdate", DKAudioPlayer_OnEvent);
 	window.addEventListener("ended", DKAudioPlayer_OnEvent);
 	byId("DKAudioPlayer_playpause").addEventListener("click", DKAudioPlayer_OnEvent);

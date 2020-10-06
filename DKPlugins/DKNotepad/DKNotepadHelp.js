@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKNotepadHelp_Init()
 {
-	DKCreate("DKNotepad/DKNotepadHelp.html,DKNotepad/DKNotepad.html");
+	DK_Create("DKNotepad/DKNotepadHelp.html,DKNotepad/DKNotepad.html");
 	window.addEventListener("mousedown", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_ViewHelp").addEventListener("click", DKNotepadHelp_OnEvent);
 	byId("DKNotepadHelp_About").addEventListener("click", DKNotepadHelp_OnEvent);

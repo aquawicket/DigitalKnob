@@ -1,8 +1,8 @@
 ///////////////////////
 function Desktop_Init()
 {
-	//DKCreate("DKOS/Desktop.html,DKOS/DKOS.html");
-	DKCreate("DKOS/Desktop.html");
+	//DK_Create("DKOS/Desktop.html,DKOS/DKOS.html");
+	DK_Create("DKOS/Desktop.html");
 	byId("Background").addEventListener("contextmenu", Desktop_OnEvent);
 }
 
@@ -19,8 +19,8 @@ function Desktop_OnEvent(event)
 	//console.log("Desktop_OnEvent("+event+")");
 	if(event.currentTarget.id === "Background" && event.type === "contextmenu"){
 		event.preventDefault();
-		DKCreate("DKOS/DesktopMenu.js", function(){
-			DKCreate("DKGui/DKMenu.js", function(){
+		DK_Create("DKOS/DesktopMenu.js", function(){
+			DK_Create("DKGui/DKMenu.js", function(){
 			    DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
 			});
 		});

@@ -246,9 +246,9 @@ console.log("JSEngine = "+DK_GetJSEngine());
 
 
 /////////////////////////////////
-function DKCreate(data, callback)
+function DK_Create(data, callback)
 {
-	//console.log("DK.js:DKCreate("+data+")");	
+	//console.log("DK.js:DK_Create("+data+")");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
 		arry.splice(0, 0, "DKWidget");
@@ -260,9 +260,9 @@ function DKCreate(data, callback)
 		arry.splice(0, 0, "DKCss");
 	}
 	else{
-		//console.log("DKCreate("+data+"): requesting c++ plugin");
+		//console.log("DK_Create("+data+"): requesting c++ plugin");
 		if(DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML"){
-			DKCPP_DKDuktape_DKCreate(data);
+			DKCPP_DKDuktape_Create(data);
 		}
 	}	
 	if(arry[0] === "DKJavascript"){
@@ -271,7 +271,7 @@ function DKCreate(data, callback)
 				callback(rval); 
 			}
 			else{
-				console.error("DKCreate("+data+"): does not have a callback");
+				console.error("DK_Create("+data+"): does not have a callback");
 			}
 		})
 		){
@@ -279,7 +279,7 @@ function DKCreate(data, callback)
 		}
 	}
 	if(arry[0] === "DKWidget"){
-		//console.log("DKCreate(data, callback)");
+		//console.log("DK_Create(data, callback)");
 			if(!DKWidget_NewWidget(arry[1], arry[2])){
 				return false;
 			}
@@ -287,7 +287,7 @@ function DKCreate(data, callback)
 				callback(); 
 			}
 			else{
-			//console.error("DKCreate("+data+"): does not have a callback");
+			//console.error("DK_Create("+data+"): does not have a callback");
 			}
 	}
 	if(arry[0] === "DKCss"){
@@ -298,7 +298,7 @@ function DKCreate(data, callback)
 			callback(); 
 		}
 		else{
-			//console.error("DKCreate("+data+"): does not have a callback");
+			//console.error("DK_Create("+data+"): does not have a callback");
 		}
 	}
 	return true;

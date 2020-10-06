@@ -3,8 +3,8 @@ var GIT = "";
 ///////////////////////
 function GitMenu_Init()
 {
-	DKCreate("DKBuild/DKBuild.js", function(){});
-	DKCreate("DKThreadPool");
+	DK_Create("DKBuild/DKBuild.js", function(){});
+	DK_Create("DKThreadPool");
 
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
@@ -22,7 +22,7 @@ function GitMenu_Init()
 		GIT = "/usr/bin/git";
 	}
 
-	DKCreate("DKGit/GitMenu.html", function(){
+	DK_Create("DKGit/GitMenu.html", function(){
 		window.addEventListener("mousedown", GitMenu_OnEvent);
 		byId("Git Update").addEventListener("click", GitMenu_OnEvent);
 		byId("Git Commit").addEventListener("click", GitMenu_OnEvent);
@@ -128,7 +128,7 @@ function GitMenu_GitUpdate()
 	}
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
@@ -172,7 +172,7 @@ function GitMenu_GitCommit()
 	}
 	
 	if(DKCPP_DKDuktape_Available("DKAudio")){
-		DKCreate("DKAudio");
+		DK_Create("DKAudio");
 	}
 	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");

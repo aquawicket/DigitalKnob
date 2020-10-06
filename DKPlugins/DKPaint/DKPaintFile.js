@@ -1,7 +1,7 @@
 /////////////////////////////
 function DKPaintFile_Init()
 {
-	DKCreate("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
+	DK_Create("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
 	window.addEventListener("mousedown", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Open").addEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save").addEventListener("click", DKPaintFile_OnEvent);
@@ -48,7 +48,7 @@ function DKPaintFile_OnEvent(event)
 ///////////////////////////
 function DKPaintFile_Open()
 {
-	DKCreate("DKFile/DKOpenFile.js", function(){
+	DK_Create("DKFile/DKOpenFile.js", function(){
 		DKFrame_Widget("DKFile/DKOpenFile.html");
 		DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKPaint/DKPaint.html,OpenFile,/,absolute"); // To -> DKOpenFile
 	});

@@ -1,7 +1,7 @@
 ///////////////////////
 function SvnMenu_Init()
 {
-	DKCreate("DKBuild/SvnMenu.html");
+	DK_Create("DKBuild/SvnMenu.html");
 	byId("SvnMenu.html").style.top = DKWindow_GetMouseY()+"px";
 	byId("SvnMenu.html").style.left = DKWindow_GetMouseX()+"px";
 	window.addEventListener("mousedown", SvnMenu_OnEvent);

@@ -1,7 +1,7 @@
 ///////////////////////////
 function LibraryMenu_Init()
 {
-	DKCreate("DKBuild/LibraryMenu.html");
+	DK_Create("DKBuild/LibraryMenu.html");
 	document.addEventListener("mousedown", LibraryMenu_OnEvent);
 	byId("Build Libraries").addEventListener("click", LibraryMenu_OnEvent);
 }

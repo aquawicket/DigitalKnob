@@ -4,6 +4,10 @@
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
 Proper naming would be DKCPP_DKPlugin_Function
 
+*** DK.js ***
+Make sure all function are prefixed with DK_
+i.e.  DK_Function(var){}
+
 *** FUN ***
 Make the Atari tank game  :D
 
