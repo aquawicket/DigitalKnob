@@ -1,8 +1,11 @@
 ~! THE LIST !~
 
+
+Model DK/Events after javascript EventTarget.
+
+
 Rename Github MyApps to DKMyApps
 Get DKTestAll Working on Linux
-Model DK/Events after javascript EventTarget.
 Compile Everything for win64
 Hint: Their may be a new SDL2Android thing in 3rdParty
 Add DKBuilder to DKBinaries for win32 win 64 after tests
@@ -25,7 +28,7 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWi
  replace all != with !==
 
 *** DKNotepad ***
- Make "Ctrl+Shift+S" save the file in DKNotepad
+ Make "Ctrl+S" save the file in DKNotepad
  Get Copy and Paste working
  Remove save comfrimation and make a sparkle, or something
 
