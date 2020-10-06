@@ -1,6 +1,5 @@
 ~! THE LIST !~
 
-
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
 Go pick up your I7 from storage
@@ -8,7 +7,7 @@ Go pick up your I7 from storage
 Rename Github MyApps to DKMyApps
 Get DKTestAll Working on Linux
 Compile Everything for win64
-Hint: Their may be a new SDL2Android thing in 3rdParty
+Hint: Their may be a new SDL2Android thing in 3rdParty.    !ANDROID!
 Add DKBuilder to DKBinaries for win32 win 64 after tests
 
 *** Javascript ***
