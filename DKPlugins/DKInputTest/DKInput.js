@@ -68,7 +68,6 @@ function DKInput_OnEvent(event)
 		//DKInput_ProcessKeyPress(DK_GetValue(event));
 	}
 	if(event.type === "keydown"){
-		console.log("keydown");
 		DKInput_ProcessKeyDown(event.code);
 	}
 	if(event.type === "keyup"){
