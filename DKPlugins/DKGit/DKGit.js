@@ -70,7 +70,7 @@ function DKGit_InstallGit()
 		//TODO
 	}
 	else if(DKCPP_DKDuktape_GetOS() === "Linux"){
-		DK_Execute("sudo apt-get install git");
+		DKCPP_DKDuktape_Execute("sudo apt-get install git");
 	}
 	else{
 		console.log("ERROR: unrecognied HOST OS: "+DKCPP_DKDuktape_GetOS()+"\n");
@@ -85,25 +85,25 @@ function DKGit_GitUpdate()
 	}
 	
 	console.log("Git Update DigitalKnob...\n");
-	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
-	DKFile_ChDir(DKPATH+"/DK");
-	DK_Execute(GIT +" checkout -- .");
-	DK_Execute(GIT +" pull origin master");
+	DKCPP_DKDuktape_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
+	DKCPP_DKFile_ChDir(DKPATH+"/DK");
+	DKCPP_DKDuktape_Execute(GIT +" checkout -- .");
+	DKCPP_DKDuktape_Execute(GIT +" pull origin master");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
-		if(DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		DKCPP_DKFile_ChDir(DKPATH);
+		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Update "+folder+"...\n");
-			DKFile_ChDir(DKPATH+"/"+folder);
-			DK_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
-			DK_Execute(GIT +" checkout -- .");
-			DK_Execute(GIT +" pull origin master");
+			DKCPP_DKFile_ChDir(DKPATH+"/"+folder);
+			DKCPP_DKDuktape_Execute(GIT +" clone "+url+" "+DKPATH+"/"+folder);
+			DKCPP_DKDuktape_Execute(GIT +" checkout -- .");
+			DKCPP_DKDuktape_Execute(GIT +" pull origin master");
 		}
 	}
 	
@@ -126,31 +126,31 @@ function DKGit_GitCommit()
 	}
 	
 	console.log("Git Commit DigitalKnob...\n");
-	DKFile_ChDir(DKPATH+"/DK");
-	DK_Execute(GIT +" init");
-	DK_Execute(GIT +" config user.name \"dkuser\"");
-	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
-	DK_Execute(GIT +" commit -a -m \"commit from git\"");
-	DK_Execute(GIT +" config credential.helper store"); //store credentials 
-	DK_Execute(GIT +" push");
+	DKCPP_DKFile_ChDir(DKPATH+"/DK");
+	DKCPP_DKDuktape_Execute(GIT +" init");
+	DKCPP_DKDuktape_Execute(GIT +" config user.name \"dkuser\"");
+	DKCPP_DKDuktape_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
+	DKCPP_DKDuktape_Execute(GIT +" commit -a -m \"commit from git\"");
+	DKCPP_DKDuktape_Execute(GIT +" config credential.helper store"); //store credentials 
+	DKCPP_DKDuktape_Execute(GIT +" push");
 	
 	//Multipe user folders
-	var contents = DKFile_DirectoryContents(DKPATH);
+	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKFile_ChDir(DKPATH);
-		if(DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKFile_GetSetting(files[i], "[MYGIT]");
+		DKCPP_DKFile_ChDir(DKPATH);
+		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Commit "+folder+"... \n");
-			DKFile_ChDir(DKPATH+"/"+folder);
-			DK_Execute(GIT +" init");
-			DK_Execute(GIT +" config user.name \"dkuser\"");
-			DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
-			DK_Execute(GIT +" commit -a -m \"commit from git\"");
-			DK_Execute(GIT +" config credential.helper store"); //store credentials 
-			DK_Execute(GIT +" push");
+			DKCPP_DKFile_ChDir(DKPATH+"/"+folder);
+			DKCPP_DKDuktape_Execute(GIT +" init");
+			DKCPP_DKDuktape_Execute(GIT +" config user.name \"dkuser\"");
+			DKCPP_DKDuktape_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
+			DKCPP_DKDuktape_Execute(GIT +" commit -a -m \"commit from git\"");
+			DKCPP_DKDuktape_Execute(GIT +" config credential.helper store"); //store credentials 
+			DKCPP_DKDuktape_Execute(GIT +" push");
 		}
 	}
 	
