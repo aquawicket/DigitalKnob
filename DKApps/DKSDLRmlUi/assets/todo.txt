@@ -2,6 +2,8 @@
 
 Replace all coourances of DKCPP with CPP
 
+EventTarget is lower than Window. Use that for javascript without a document context.
+
 *** DK Javascript ***
 ALL C++ Javascript functions now REQUIRE a DKCPP_ prefix
 Proper naming would be DKCPP_DKPlugin_Function
