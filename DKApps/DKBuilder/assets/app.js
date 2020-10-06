@@ -1,3 +1,2 @@
-DKCPP_DKDuktape_DKCreate("DKBuild/DKBuildConsole.js", function(){
-	//DKCPP_DKDuktape_DKCreate("DKUpdate");
-});
+DKCPP_DKDuktape_DKCreate("DKBuild/DKBuildConsole.js");
+//DKCPP_DKDuktape_DKCreate("DKUpdate");

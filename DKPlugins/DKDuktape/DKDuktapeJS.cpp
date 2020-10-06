@@ -500,10 +500,10 @@ int DKDuktapeJS::GetArgs(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
+/////////////////////////////////////////////
 int DKDuktapeJS::GetBrowser(duk_context* ctx)
 {
-	DKString browser = "Rocket";
+	DKString browser = "RML";
 	duk_push_string(ctx, browser.c_str());
 	return 1;
 }

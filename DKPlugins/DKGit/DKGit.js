@@ -4,19 +4,19 @@ var GIT = "";
 function DKGit_Init()
 {
 	//DKCreate("DKThreadPool");
-	//console.log(DK_GetOS()+"\n");
-	if(DK_GetOS() === "Win32"){
+	//console.log(DKCPP_DKDuktape_GetOS()+"\n");
+	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() === "Win64"){
+	if(DKCPP_DKDuktape_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKFile_GetShortName(GIT);
+		GIT = DKCPP_DKFile_GetShortName(GIT);
 	}
-	if(DK_GetOS() === "Mac"){
+	if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		GIT = "git";
 	}
-	if(DK_GetOS() === "Linux"){
+	if(DKCPP_DKDuktape_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
 	
@@ -38,13 +38,13 @@ function DKGit_OnEvent(event)
 ////////////////////////////
 function DKGit_ValidateGit()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	if(!DKCPP_DKFile_Exists(GIT)){
 		DKGit_InstallGit();
 	}
 	console.log("Found GIT\n");
-	if(DK_GetOS() === "Mac"){
+	if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		GIT = "git";
 	}
 }
@@ -52,35 +52,35 @@ function DKGit_ValidateGit()
 ///////////////////////////
 function DKGit_InstallGit()
 {
-	if(DK_GetBrowser() !== "RML"){ return; }
+	if(DKCPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Installing Git...\n");
 	var assets = DKAssets_LocalAssets();
 	
-	if(DK_GetOS() === "Win32"){
+	if(DKCPP_DKDuktape_GetOS() === "Win32"){
 		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-32-bit.exe", assets);
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-32-bit.exe", assets);
 		DK_System(assets+"/Git-2.26.2-32-bit.exe");
 	}
-	else if(DK_GetOS() === "Win64"){
+	else if(DKCPP_DKDuktape_GetOS() === "Win64"){
 		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-64-bit.exe", assets);
 		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-64-bit.exe", assets);
 		DK_System(assets+"/Git-2.26.2-64-bit.exe");
 	}
-	else if(DK_GetOS() === "Mac"){
+	else if(DKCPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
 	}
-	else if(DK_GetOS() === "Linux"){
+	else if(DKCPP_DKDuktape_GetOS() === "Linux"){
 		DK_Execute("sudo apt-get install git");
 	}
 	else{
-		console.log("ERROR: unrecognied HOST OS: "+DK_GetOS()+"\n");
+		console.log("ERROR: unrecognied HOST OS: "+DKCPP_DKDuktape_GetOS()+"\n");
 	}
 }
 
 //////////////////////////
 function DKGit_GitUpdate()
 {
-	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
+	if(DKCPP_DKDuktape_GetBrowser() !== "CEF" && DKCPP_DKDuktape_GetBrowser() !== "RML"){
 		return;
 	}
 	
@@ -118,7 +118,10 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
-	if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
+	//console.log("DKGit_GitCommit()");
+	//console.log(DKCPP_DKDuktape_GetBrowser());
+	if(DKCPP_DKDuktape_GetBrowser() !== "CEF" && DKCPP_DKDuktape_GetBrowser() !== "RML"){
+		console.error("DKGit_GitCommit() returning early");
 		return;
 	}
 	

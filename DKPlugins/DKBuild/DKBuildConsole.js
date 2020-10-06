@@ -3,17 +3,16 @@ var working = true;
 //////////////////////////////
 function DKBuildConsole_Init()
 {
-	DKCPP_DKDuktape_DKCreate("DKBuild/DKBuild.js");//, function(){
-		DKBuild_ValidateCmake();
-		//DKBuild_ValidateVC2015();
-		DKBuild_ValidateVC2019();
-		DKBuild_ValidateGcc();
-		DKBuild_ValidateXcode();
+	DKCPP_DKDuktape_DKCreate("DKBuild/DKBuild.js");
+	DKBuild_ValidateCmake();
+	//DKBuild_ValidateVC2015();
+	DKBuild_ValidateVC2019();
+	DKBuild_ValidateGcc();
+	DKBuild_ValidateXcode();
 	
-		while(working){
-			DKBuildConsole_Process();
-		}
-	//});
+	while(working){
+		DKBuildConsole_Process();
+	}
 }
 
 /////////////////////////////
@@ -46,14 +45,15 @@ function DKBuildConsole_ChooseUpdate()
 		DKCPP_DKDuktape_Exit();
 	}
 	if(key === 121){ //y key
-		DKCreate("DKGit/DKGit.js", function(){
+		DKCPP_DKDuktape_DKCreate("DKGit/DKGit.js");//, function(){
 			DKGit_GitUpdate();
-		});
+		//});
 	}
 	if(key === 99){ //c key
-		DKCreate("DKGit/DKGit.js", function(){
+		//console.log("c key");
+		DKCPP_DKDuktape_DKCreate("DKGit/DKGit.js");//, function(){
 			DKGit_GitCommit();
-		});
+		//});
 	}
 	if(key === 114){ //r key
 		DKBuild_ResetAppsPlugins();
