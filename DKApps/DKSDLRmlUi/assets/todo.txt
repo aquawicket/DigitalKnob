@@ -1,6 +1,6 @@
 ~! THE LIST !~
 
-Test adding repository files to DKBuilder
+Test adding Repository.txt files to DKBuilde
 Get DKTestAll Working on Linux
 Model DK/Events after javascript EventTarget.
 Compile Everything for win64
