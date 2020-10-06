@@ -84,7 +84,7 @@ function DKSolution_OnEvent(event)
 //////////////////////////////
 function DKSolution_Select(id)
 {
-	var elements = DKWidget_GetElements("DKSolutionMenu");
+	var elements = DKWidget_GetElements(byId("DKSolutionMenu"));
 	var arry = elements.split(",");
 	for(var i=0; i<arry.length-1; i++){
 		if(!arry[i]){

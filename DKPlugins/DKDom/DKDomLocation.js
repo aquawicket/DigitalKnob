@@ -3,6 +3,7 @@
 ////////////////////////////////
 var Location = function(pointer)
 {
+	// Properties
 	Object.defineProperty(this, "hash", { 
 		get: function(){ return DKCPP_DKDomLocation_hash(); } 
 	});
@@ -32,17 +33,20 @@ var Location = function(pointer)
 	Object.defineProperty(this, "protocol", {
 		get: function()   { return DKCPP_DKDomLocation_protocol();    },
 		set: function(val){ return DKCPP_DKDomLocation_protocol(val); }
-	});
+	});	
 	Object.defineProperty(this, "search", {
 		get: function()   { return DKCPP_DKDomLocation_search();    },
 		set: function(val){ return DKCPP_DKDomLocation_search(val); }
 	});
 	
+	
+	// Methods
 	Location.prototype.assign = function(url){
 		DKCPP_DKDomLocation_href(url); 
 	}
 	Location.prototype.reload = function(forcedReload){
-		DKCPP_DKDomLocation_reload(forcedReload); 
+		DKCPP_DKDuktape_Reload();
+		//DKCPP_DKDomLocation_reload(forcedReload); 
 	}
 	Location.prototype.replace = function(url){
 		DKCPP_DKDomLocation_href(url); //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace

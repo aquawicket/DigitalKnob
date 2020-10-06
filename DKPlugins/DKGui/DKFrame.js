@@ -320,7 +320,7 @@ function DKFrame_Close(id)
 	//var frame = DKWidget_GetParent(id);
 	var frame = byId(id).parentNode.id;
 	//console.log("DKFrame_Close("+id+"): frame = "+frame+"\n");
-	var children = DKWidget_GetElements(frame);
+	var children = DKWidget_GetElements(byId(frame));
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		//console.log("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
@@ -404,7 +404,7 @@ function DKFrame_RestoreSize(id)
 ///////////////////////////
 function DKFrame_CloseAll()
 {
-	var children = DKWidget_GetElements("body");
+	var children = DKWidget_GetElements(document.body);
 	var arry = children.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(arry[i].indexOf("DKFrame_frame") > -1){
