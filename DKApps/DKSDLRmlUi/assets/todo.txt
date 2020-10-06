@@ -29,6 +29,7 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWi
  replace all != with !==
 
 *** DKNotepad ***
+DKNotepadFile_Exit() breaks DK_Close()
  Make "Ctrl+S" save the file in DKNotepad
  Get Copy and Paste working
  Remove save comfrimation and make a sparkle, or something
