@@ -13,31 +13,31 @@ bool DKDomKeyboardEvent::Init()
 	DKDEBUGFUNC();
 
 	// Properties
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_altKey", DKDomKeyboardEvent::altKey);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_code", DKDomKeyboardEvent::code);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_ctrlKey", DKDomKeyboardEvent::ctrlKey);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_isComposing", DKDomKeyboardEvent::isComposing);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_key", DKDomKeyboardEvent::key);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_locale", DKDomKeyboardEvent::locale);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_location", DKDomKeyboardEvent::location);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_metaKey", DKDomKeyboardEvent::metaKey);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_repeat", DKDomKeyboardEvent::repeat);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_shiftKey", DKDomKeyboardEvent::shiftKey);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_altKey", DKDomKeyboardEvent::altKey);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_code", DKDomKeyboardEvent::code);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_ctrlKey", DKDomKeyboardEvent::ctrlKey);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_isComposing", DKDomKeyboardEvent::isComposing);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_key", DKDomKeyboardEvent::key);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_locale", DKDomKeyboardEvent::locale);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_location", DKDomKeyboardEvent::location);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_metaKey", DKDomKeyboardEvent::metaKey);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_repeat", DKDomKeyboardEvent::repeat);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_shiftKey", DKDomKeyboardEvent::shiftKey);
 
 	// Methods
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_getModifierState", DKDomKeyboardEvent::getModifierState);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_getModifierState", DKDomKeyboardEvent::getModifierState);
 
 	// Obsolete methods
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_initKeyEvent", DKDomKeyboardEvent::initKeyEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_initKeyboardEvent", DKDomKeyboardEvent::initKeyboardEvent);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_initKeyEvent", DKDomKeyboardEvent::initKeyEvent);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_initKeyboardEvent", DKDomKeyboardEvent::initKeyboardEvent);
 
 	//Obsolete properties
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_char", DKDomKeyboardEvent::char1);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_charCode", DKDomKeyboardEvent::charCode);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_keyCode", DKDomKeyboardEvent::keyCode);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_keyIdentifier", DKDomKeyboardEvent::keyIdentifier);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_keyLocation", DKDomKeyboardEvent::keyLocation);
-	DKDuktape::AttachFunction("DKCPP_DKDomKeyboardEvent_which", DKDomKeyboardEvent::which);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_char", DKDomKeyboardEvent::char1);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_charCode", DKDomKeyboardEvent::charCode);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_keyCode", DKDomKeyboardEvent::keyCode);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_keyIdentifier", DKDomKeyboardEvent::keyIdentifier);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_keyLocation", DKDomKeyboardEvent::keyLocation);
+	DKDuktape::AttachFunction("CPP_DKDomKeyboardEvent_which", DKDomKeyboardEvent::which);
 
 	DKClass::DKCreate("DKDom/DKDomKeyboardEvent.js");
 	return true;

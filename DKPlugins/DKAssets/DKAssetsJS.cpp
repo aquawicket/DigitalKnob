@@ -7,10 +7,10 @@
 bool DKAssetsJS::Init()
 {
 	DKDEBUGFUNC();
-	//DKDuktape::AttachFunction("DKCPP_DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath);
-	DKDuktape::AttachFunction("DKCPP_DKAssets_LocalAssets", DKAssetsJS::LocalAssets);
-	DKDuktape::AttachFunction("DKCPP_DKAssets_OnlineAssets", DKAssetsJS::OnlineAssets);
-	DKDuktape::AttachFunction("DKCPP_DKAssets_Protocol", DKAssetsJS::Protocol);
+	//DKDuktape::AttachFunction("CPP_DKAssets_AppendDataPath", DKAssetsJS::AppendDataPath);
+	DKDuktape::AttachFunction("CPP_DKAssets_LocalAssets", DKAssetsJS::LocalAssets);
+	DKDuktape::AttachFunction("CPP_DKAssets_OnlineAssets", DKAssetsJS::OnlineAssets);
+	DKDuktape::AttachFunction("CPP_DKAssets_Protocol", DKAssetsJS::Protocol);
 	return true;
 }
 

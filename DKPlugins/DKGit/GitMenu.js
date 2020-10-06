@@ -9,7 +9,7 @@ function GitMenu_Init()
 	//console.log(DK_GetOS()+"\n");
 	if(DK_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = DKCPP_DKFile_GetShortName(GIT);
+		GIT = CPP_DKFile_GetShortName(GIT);
 	}
 	if(DK_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
@@ -42,10 +42,10 @@ function GitMenu_End()
 function GitMenu_OnEvent(event)
 {
 	if(event.currentTarget.id === "Git Update"){
-		DKCPP_DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
+		CPP_DKThread_DKQueue("GitUpdate","GitMenu_GitUpdate();");
 	}
 	if(event.currentTarget.id === "Git Commit"){
-		DKCPP_DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
+		CPP_DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
 	if(event.currentTarget === window){
@@ -62,7 +62,7 @@ function GitMenu_ValidateGit()
 	if(DK_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	//console.log(GIT+"\n");
-	if(!DKCPP_DKFile_Exists(GIT)){
+	if(!CPP_DKFile_Exists(GIT)){
 		console.log("Please install GIT\n");
 		GitMenu_InstallGit();
 	}
@@ -107,17 +107,17 @@ function GitMenu_GitUpdate()
 	
 	console.log("Git Update DigitalKnob...\n");
 	DK_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
-	DKCPP_DKFile_ChDir(DKPATH+"/DK");
+	CPP_DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" checkout -- .");
 	DK_Execute(GIT +" pull origin master");
 	
 	//Multipe user folders
-	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
+	var contents = CPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKCPP_DKFile_ChDir(DKPATH);
-		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
+		CPP_DKFile_ChDir(DKPATH);
+		if(CPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Update "+folder+"...\n");
@@ -127,10 +127,10 @@ function GitMenu_GitUpdate()
 		}
 	}
 	
-	if(DKCPP_DKDuktape_Available("DKAudio")){
+	if(CPP_DKDuktape_Available("DKAudio")){
 		DK_Create("DKAudio");
 	}
-	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
+	if(CPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }
@@ -143,7 +143,7 @@ function GitMenu_GitCommit()
 	}
 	
 	console.log("Git Commit DigitalKnob...\n");
-	DKCPP_DKFile_ChDir(DKPATH+"/DK");
+	CPP_DKFile_ChDir(DKPATH+"/DK");
 	DK_Execute(GIT +" init");
 	DK_Execute(GIT +" config user.name \"dkuser\"");
 	DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
@@ -152,16 +152,16 @@ function GitMenu_GitCommit()
 	DK_Execute(GIT +" push");
 	
 	//Multipe user folders
-	var contents = DKCPP_DKFile_DirectoryContents(DKPATH);
+	var contents = CPP_DKFile_DirectoryContents(DKPATH);
 	var files = contents.split(",");
 	for(var i=0; i<files.length; i++){ //console.log("files["+i+"] = "+files[i]+"\n");
-		DKCPP_DKFile_ChDir(DKPATH);
-		if(DKCPP_DKFile_IsDirectory(files[i])){ continue; }
-		var url = DKCPP_DKFile_GetSetting(files[i], "[MYGIT]");
+		CPP_DKFile_ChDir(DKPATH);
+		if(CPP_DKFile_IsDirectory(files[i])){ continue; }
+		var url = CPP_DKFile_GetSetting(files[i], "[MYGIT]");
 		if(url){ //console.log("url = "+url+"\n");
 			var folder = files[i].replace(".txt",""); //console.log("folder = "+folder+"\n");
 			console.log("Git Commit "+folder+"...\n");
-			DKCPP_DKFile_ChDir(DKPATH+"/"+folder);
+			CPP_DKFile_ChDir(DKPATH+"/"+folder);
 			DK_Execute(GIT +" init");
 			DK_Execute(GIT +" config user.name \"dkuser\"");
 			DK_Execute(GIT +" config user.email \"dkuser@digitalknob.com\"");
@@ -171,10 +171,10 @@ function GitMenu_GitCommit()
 		}
 	}
 	
-	if(DKCPP_DKDuktape_Available("DKAudio")){
+	if(CPP_DKDuktape_Available("DKAudio")){
 		DK_Create("DKAudio");
 	}
-	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
+	if(CPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }

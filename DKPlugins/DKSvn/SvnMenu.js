@@ -126,10 +126,10 @@ function SvnMenu_GitUpdate()
 		}
 	}
 	
-	if(DKCPP_DKDuktape_Available("DKAudio")){
+	if(CPP_DKDuktape_Available("DKAudio")){
 		DK_Create("DKAudio");
 	}
-	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
+	if(CPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }
@@ -170,10 +170,10 @@ function SvnMenu_GitCommit()
 		}
 	}
 	
-	if(DKCPP_DKDuktape_Available("DKAudio")){
+	if(CPP_DKDuktape_Available("DKAudio")){
 		DK_Create("DKAudio");
 	}
-	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
+	if(CPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }

@@ -12,10 +12,10 @@ bool DKDomUIEvent::Init()
 	DKDEBUGFUNC();
 
 	// Properties
-	//DKDuktape::AttachFunction("DKCPP_DKDomUIEvent_cancelBubble", DKDomUIEvent::cancelBubble);
+	//DKDuktape::AttachFunction("CPP_DKDomUIEvent_cancelBubble", DKDomUIEvent::cancelBubble);
 
 	// Methods
-	DKDuktape::AttachFunction("DKCPP_DKDomUIEvent_initUIEvent", DKDomUIEvent::initUIEvent);
+	DKDuktape::AttachFunction("CPP_DKDomUIEvent_initUIEvent", DKDomUIEvent::initUIEvent);
 
 	DKClass::DKCreate("DKDom/DKDomUIEvent.js");
 	return true;

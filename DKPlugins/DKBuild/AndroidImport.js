@@ -174,7 +174,7 @@ function AndroidImport_Import()
 	console.log("Import finished\n");
 	
 	DK_Create("DKAudio");
-	if(DKCPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
+	if(CPP_DKDuktape_Valid("DKAudioJS,DKAudioJS0")){
 		DKAudio_PlaySound("DKBuild/ding.wav");
 	}
 }

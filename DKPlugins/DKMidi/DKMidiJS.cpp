@@ -7,11 +7,11 @@
 bool DKMidiJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKMidi_GetMidiInputs", DKMidiJS::GetMidiInputs);
-	DKDuktape::AttachFunction("DKCPP_DKMidi_GetMidiOutputs", DKMidiJS::GetMidiOutputs);
-	DKDuktape::AttachFunction("DKCPP_DKMidi_SendMidi", DKMidiJS::SendMidi);
-	DKDuktape::AttachFunction("DKCPP_DKMidi_ToggleMidiInput", DKMidiJS::ToggleMidiInput);
-	DKDuktape::AttachFunction("DKCPP_DKMidi_ToggleMidiOutput", DKMidiJS::ToggleMidiOutput);
+	DKDuktape::AttachFunction("CPP_DKMidi_GetMidiInputs", DKMidiJS::GetMidiInputs);
+	DKDuktape::AttachFunction("CPP_DKMidi_GetMidiOutputs", DKMidiJS::GetMidiOutputs);
+	DKDuktape::AttachFunction("CPP_DKMidi_SendMidi", DKMidiJS::SendMidi);
+	DKDuktape::AttachFunction("CPP_DKMidi_ToggleMidiInput", DKMidiJS::ToggleMidiInput);
+	DKDuktape::AttachFunction("CPP_DKMidi_ToggleMidiOutput", DKMidiJS::ToggleMidiOutput);
 	return true;
 }
 

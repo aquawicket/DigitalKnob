@@ -46,7 +46,7 @@ function DKFileAssociation_OpenHtml(path)
 {
 	//path = path.replace(absolutepath, "");
 	
-	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
+	var id = path.replace(CPP_DKAssets_LocalAssets(),"");
 	//var id = DKFile_GetFilename(path);
 	if(DK_Create(id)){
 		//DKFileAssociation_AddDragHandles(id);
@@ -111,7 +111,7 @@ function DKFileAssociation_OpenJS(path)
 ////////////////////////////////////////
 function DKFileAssociation_OpenCss(path)
 {
-	var id = path.replace(DKCPP_DKAssets_LocalAssets(),"");
+	var id = path.replace(CPP_DKAssets_LocalAssets(),"");
 	DK_Create(id, function(rval){
 		if(!rval){ return; }
 	});

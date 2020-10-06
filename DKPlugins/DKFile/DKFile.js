@@ -81,7 +81,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
     }
 }
 else{
-    var DKFile_GetShortName = function(path){ return DKCPP_DKFile_GetShortName(path); }
+    var DKFile_GetShortName = function(path){ return CPP_DKFile_GetShortName(path); }
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
@@ -318,7 +318,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}
 }
 else{
-	var DKFile_StringToFile = function(data, path){ return DKCPP_DKFile_StringToFile(data, path) };
+	var DKFile_StringToFile = function(data, path){ return CPP_DKFile_StringToFile(data, path) };
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
@@ -347,7 +347,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}
 }
 else{
-	var DKFile_DirectoryContents = function(url){ return DKCPP_DKFile_DirectoryContents(url) };
+	var DKFile_DirectoryContents = function(url){ return CPP_DKFile_DirectoryContents(url) };
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
@@ -371,7 +371,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}
 }
 else{
-	var DKFile_GetAbsolutePath = function(url){ return DKCPP_DKFile_GetAbsolutePath(url) };
+	var DKFile_GetAbsolutePath = function(url){ return CPP_DKFile_GetAbsolutePath(url) };
 }
 
 ////////////////////////////////////////////////
@@ -397,7 +397,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}
 }
 else{
-	var DKFile_IsDirectory = function(url){ return DKCPP_DKFile_IsDirectory(url); }
+	var DKFile_IsDirectory = function(url){ return CPP_DKFile_IsDirectory(url); }
 }
 
 /////////////////////////////////

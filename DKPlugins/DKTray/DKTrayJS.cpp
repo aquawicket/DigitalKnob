@@ -7,11 +7,11 @@
 bool DKTrayJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKTray_AddItem", DKTrayJS::AddItem);
-	DKDuktape::AttachFunction("DKCPP_DKTray_GetIcon", DKTrayJS::GetIcon);
-	DKDuktape::AttachFunction("DKCPP_DKTray_SetIcon", DKTrayJS::SetIcon);
-	DKDuktape::AttachFunction("DKCPP_DKTray_SetTooltip", DKTrayJS::SetTooltip);
-	DKDuktape::AttachFunction("DKCPP_DKTray_ShowBalloon", DKTrayJS::ShowBalloon);
+	DKDuktape::AttachFunction("CPP_DKTray_AddItem", DKTrayJS::AddItem);
+	DKDuktape::AttachFunction("CPP_DKTray_GetIcon", DKTrayJS::GetIcon);
+	DKDuktape::AttachFunction("CPP_DKTray_SetIcon", DKTrayJS::SetIcon);
+	DKDuktape::AttachFunction("CPP_DKTray_SetTooltip", DKTrayJS::SetTooltip);
+	DKDuktape::AttachFunction("CPP_DKTray_ShowBalloon", DKTrayJS::ShowBalloon);
 	return true;
 }
 

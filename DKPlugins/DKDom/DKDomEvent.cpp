@@ -11,41 +11,41 @@ bool DKDomEvent::Init()
 	DKDEBUGFUNC();
 
 	// Properties
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_bubbles", DKDomEvent::bubbles);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_cancelBubble", DKDomEvent::cancelBubble);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_cancelable", DKDomEvent::cancelable);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_composed", DKDomEvent::composed);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_currentTarget", DKDomEvent::currentTarget);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_deepPath", DKDomEvent::deepPath);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_defaultPrevented", DKDomEvent::defaultPrevented);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_eventPhase", DKDomEvent::eventPhase);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_explicitOriginalTarget", DKDomEvent::explicitOriginalTarget);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_originalTarget", DKDomEvent::originalTarget);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_returnValue", DKDomEvent::returnValue);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_srcElement", DKDomEvent::srcElement);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_target", DKDomEvent::target);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_timeStamp", DKDomEvent::timeStamp);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_type", DKDomEvent::type);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_isTrusted", DKDomEvent::isTrusted);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_bubbles", DKDomEvent::bubbles);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_cancelBubble", DKDomEvent::cancelBubble);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_cancelable", DKDomEvent::cancelable);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_composed", DKDomEvent::composed);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_currentTarget", DKDomEvent::currentTarget);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_deepPath", DKDomEvent::deepPath);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_defaultPrevented", DKDomEvent::defaultPrevented);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_eventPhase", DKDomEvent::eventPhase);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_explicitOriginalTarget", DKDomEvent::explicitOriginalTarget);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_originalTarget", DKDomEvent::originalTarget);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_returnValue", DKDomEvent::returnValue);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_srcElement", DKDomEvent::srcElement);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_target", DKDomEvent::target);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_timeStamp", DKDomEvent::timeStamp);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_type", DKDomEvent::type);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_isTrusted", DKDomEvent::isTrusted);
 
 	// Obsolete properties
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_scoped", DKDomEvent::scoped);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_scoped", DKDomEvent::scoped);
 
 	// Methods
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_createEvent", DKDomEvent::createEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_composedPath", DKDomEvent::composedPath);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_initEvent", DKDomEvent::initEvent);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_preventDefault", DKDomEvent::preventDefault);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_stopImmediatePropagation", DKDomEvent::stopImmediatePropagation);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_stopPropagation", DKDomEvent::stopPropagation);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_createEvent", DKDomEvent::createEvent);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_composedPath", DKDomEvent::composedPath);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_initEvent", DKDomEvent::initEvent);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_preventDefault", DKDomEvent::preventDefault);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_stopImmediatePropagation", DKDomEvent::stopImmediatePropagation);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_stopPropagation", DKDomEvent::stopPropagation);
 
 	// Obsolete methods
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_getPreventDefault", DKDomEvent::getPreventDefault);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_preventBubble", DKDomEvent::preventBubble);
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_preventCapture", DKDomEvent::preventCapture);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_getPreventDefault", DKDomEvent::getPreventDefault);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_preventBubble", DKDomEvent::preventBubble);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_preventCapture", DKDomEvent::preventCapture);
 
 	// Extra
-	DKDuktape::AttachFunction("DKCPP_DKDomEvent_getParameters", DKDomEvent::getParameters);
+	DKDuktape::AttachFunction("CPP_DKDomEvent_getParameters", DKDomEvent::getParameters);
 
 	DKClass::DKCreate("DKDom/DKDomEvent.js");
 	return true;

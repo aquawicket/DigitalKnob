@@ -9,8 +9,8 @@
 bool DKDomCSSStyleDeclaration::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKDomCSSStyleDeclaration_getPropertyValue", DKDomCSSStyleDeclaration::getPropertyValue);
-	DKDuktape::AttachFunction("DKCPP_DKDomCSSStyleDeclaration_setProperty", DKDomCSSStyleDeclaration::setProperty);
+	DKDuktape::AttachFunction("CPP_DKDomCSSStyleDeclaration_getPropertyValue", DKDomCSSStyleDeclaration::getPropertyValue);
+	DKDuktape::AttachFunction("CPP_DKDomCSSStyleDeclaration_setProperty", DKDomCSSStyleDeclaration::setProperty);
 
 	DKClass::DKCreate("DKDom/DKDomCSSStyleDeclaration.js");
 	return true;

@@ -21,7 +21,7 @@ function DKOpenFile_Init()
 	rPath = "";
 	
 	//TODO
-	//var drives = DKCPP_DKFile_GetDrives();
+	//var drives = CPP_DKFile_GetDrives();
 	//console.log(drives);
 }
 
@@ -126,12 +126,12 @@ function DKOpenFile_OpenFile(path)
 		aPath = path;
 	}
 	else{
-		aPath = DKCPP_DKFile_GetAbsolutePath(path);
+		aPath = CPP_DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
-	var assets = DKCPP_DKAssets_LocalAssets();
+	var assets = CPP_DKAssets_LocalAssets();
 	//console.log("assets:"+assets);
-	rPath = DKCPP_DKFile_GetRelativePath(aPath, assets);
+	rPath = CPP_DKFile_GetRelativePath(aPath, assets);
 	//console.log("rPath:"+rPath);
 	DKWidget_SetValue("DKOpenFilePath",aPath);
 }
@@ -148,7 +148,7 @@ function DKOpenFile_UpdatePath(path)
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	//console.log("aPath:"+aPath);
-	//var assets = DKCPP_DKAssetsLocalAssets();
+	//var assets = CPP_DKAssetsLocalAssets();
 	//console.log("assets:"+assets);
 	rPath = DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath);
@@ -160,7 +160,7 @@ function DKOpenFile_UpdatePath(path)
 	byId("DKOpenFileMenu2").innerHTML = ""; //Clear it
 
 	for(var d=0; d<files.length; d++){
-		if(DKCPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
+		if(CPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
@@ -174,7 +174,7 @@ function DKOpenFile_UpdatePath(path)
 	}
 
 	for(var f=0; f<files.length; f++){
-		if(!DKCPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
+		if(!CPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DKWidget_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFile");
 			var value = aPath+"/"+files[f];
 			byId(element3).value = value;
@@ -184,7 +184,7 @@ function DKOpenFile_UpdatePath(path)
 			byId(element3).innerHTML = files[f];
 			byId(element3).addEventListener("click", DKOpenFile_OnEvent);
 
-			var extension = DKCPP_DKFile_GetExtention(files[f]);
+			var extension = CPP_DKFile_GetExtention(files[f]);
 			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
 				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
 				(extension === "gif") || (extension === "tga") || (extension === "ico")

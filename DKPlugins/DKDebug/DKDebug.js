@@ -139,7 +139,7 @@ function DKDebug_Refresh()
 function DKDebug_PushDKFiles()
 {
 	//Here, we push any altered DKPlugin files to the appropriate DKPlugin folder.
-	var assets = DKCPP_DKAssets_LocalAssets();
+	var assets = CPP_DKAssets_LocalAssets();
 	if(!assets){
 		console.error("DKDebug_PushDKFiles() assets is invalid");
 		return false;
@@ -147,7 +147,7 @@ function DKDebug_PushDKFiles()
 	console.log("assets = "+assets);
 	
 	var search = assets;
-	while(!DKCPP_DKFile_Exists(search+"/DK/DKPlugins")){
+	while(!CPP_DKFile_Exists(search+"/DK/DKPlugins")){
 		var n = search.lastIndexOf("/");
 		if(n === -1){
 			console.warn("could not locate a DKPlugins folder");
@@ -159,13 +159,13 @@ function DKDebug_PushDKFiles()
 	
 	DKPATH = search;
 	
-	if(!DKCPP_DKFile_Exists(DKPATH)){
+	if(!CPP_DKFile_Exists(DKPATH)){
 		console.log("Could not find search");
 		return;
 	}
 	//console.log("search = "+search+"\n");
 	
-	var temp = DKCPP_DKFile_DirectoryContents(DKPATH);
+	var temp = CPP_DKFile_DirectoryContents(DKPATH);
 	if(!temp){
 		console.log("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
@@ -177,19 +177,19 @@ function DKDebug_PushDKFiles()
 	plugin_folders.push(DKPATH+"/DK/DKPlugins");
 	for(var i=0; i<folders.length; i++){
 		//console.log("checking "+search+"/"+folders[i]+"/DKPlugins");
-		if(DKCPP_DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
+		if(CPP_DKFile_Exists(DKPATH+"/"+folders[i]+"/DKPlugins")){
 			//console.log("adding "+DKPATH+"/"+folders[i]+"/DKPlugins");
 			plugin_folders.push(DKPATH+"/"+folders[i]+"/DKPlugins");
 		}
 	}
 	
 	for(var i=0; i<plugin_folders.length; i++){
-		plugin_folders[i] = DKCPP_DKFile_GetAbsolutePath(plugin_folders[i]);
+		plugin_folders[i] = CPP_DKFile_GetAbsolutePath(plugin_folders[i]);
 	}
 	//console.log("plugins_folders = "+plugin_folders);
 	
 	
-	var temp = DKCPP_DKFile_DirectoryContents(assets);
+	var temp = CPP_DKFile_DirectoryContents(assets);
 	if(!temp){
 		console.error("DKDebug_PushDKFiles() variable temp is invalid");
 		return false; 
@@ -198,8 +198,8 @@ function DKDebug_PushDKFiles()
 	for(i=0; i<folders.length; i++){
 		//console.log(folders[i]); 
 		for(var b=0; b<plugin_folders.length; b++){
-			if(DKCPP_DKFile_Exists(plugin_folders[b]+"/"+folders[i])){
-				DKCPP_DKFile_CopyFolder(assets+"/"+folders[i], plugin_folders[b]+"/"+folders[i], true, true);
+			if(CPP_DKFile_Exists(plugin_folders[b]+"/"+folders[i])){
+				CPP_DKFile_CopyFolder(assets+"/"+folders[i], plugin_folders[b]+"/"+folders[i], true, true);
 			}
 		}
 	}
@@ -265,20 +265,20 @@ function DKDebug_GetSource()
 {
 	DK_Create("DKWidgetJS");
 	var source = DKWidget_GetOuterHtml("html");
-	var assets = DKCPP_DKAssets_LocalAssets();
+	var assets = CPP_DKAssets_LocalAssets();
 	
 	if(DK_GetBrowser() === "RML"){
-		DKCPP_DKFile_StringToFile(source, assets+"Rocket_Source.html");
+		CPP_DKFile_StringToFile(source, assets+"Rocket_Source.html");
 	}
 	else{
-		DKCPP_DKFile_StringToFile(source, assets+"Browser_Source.html");
+		CPP_DKFile_StringToFile(source, assets+"Browser_Source.html");
 	}
 }
 
 ////////////////////////
 function DKDebug_Crash()
 {
-	DKCPP_DKDuktape_Crash();
+	CPP_DKDuktape_Crash();
 }
 
 /////////////////////////

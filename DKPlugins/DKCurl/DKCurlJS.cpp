@@ -7,13 +7,13 @@
 bool DKCurlJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKCurl_Download", DKCurlJS::Download);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_FileDate", DKCurlJS::FileDate);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_FtpConnect", DKCurlJS::FtpConnect);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_FtpUpload", DKCurlJS::FtpUpload);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_GetExternalIP", DKCurlJS::GetExternalIP);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_HttpFileExists", DKCurlJS::HttpFileExists);
-	DKDuktape::AttachFunction("DKCPP_DKCurl_HttpToString", DKCurlJS::HttpToString);
+	DKDuktape::AttachFunction("CPP_DKCurl_Download", DKCurlJS::Download);
+	DKDuktape::AttachFunction("CPP_DKCurl_FileDate", DKCurlJS::FileDate);
+	DKDuktape::AttachFunction("CPP_DKCurl_FtpConnect", DKCurlJS::FtpConnect);
+	DKDuktape::AttachFunction("CPP_DKCurl_FtpUpload", DKCurlJS::FtpUpload);
+	DKDuktape::AttachFunction("CPP_DKCurl_GetExternalIP", DKCurlJS::GetExternalIP);
+	DKDuktape::AttachFunction("CPP_DKCurl_HttpFileExists", DKCurlJS::HttpFileExists);
+	DKDuktape::AttachFunction("CPP_DKCurl_HttpToString", DKCurlJS::HttpToString);
 
 	DKCurl::Instance("DKCurl0"); //do we need this?
 	return true;

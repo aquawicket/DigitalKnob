@@ -7,8 +7,8 @@
 bool DKThreadJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKThread_DKQueue", &DKThreadJS::_DKQueue);
-	DKDuktape::AttachFunction("DKCPP_DKThread_GetThreadNames", &DKThreadJS::GetThreadNames);
+	DKDuktape::AttachFunction("CPP_DKThread_DKQueue", &DKThreadJS::_DKQueue);
+	DKDuktape::AttachFunction("CPP_DKThread_GetThreadNames", &DKThreadJS::GetThreadNames);
 	return true;
 }
 

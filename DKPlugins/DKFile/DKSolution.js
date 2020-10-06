@@ -116,7 +116,7 @@ function DKSolution_OpenFile(path)
 		aPath = DKFile_GetAbsolutePath(path);
 	}
 	//console.log("DKSolution_OpenFile("+path+"): aPath = "+aPath+"\n");
-	if(!DKCPP_DKDuktape_Run(aPath, "")){ return false; }
+	if(!CPP_DKDuktape_Run(aPath, "")){ return false; }
 	return true;
 }
 
@@ -125,11 +125,11 @@ function DKSolution_OpenHere(path)
 {
 	var aPath = path;
 	if(DK_GetOS() !== "Android"){
-		aPath = DKCPP_DKFile_GetAbsolutePath(path);
+		aPath = CPP_DKFile_GetAbsolutePath(path);
 		if(typeof(absolutepath) === 'string'){ aPath = aPath.replace(absolutepath, ""); }
 	}
 	//console.log("aPath:"+aPath+"\n");
-	if(DKCPP_DKFile_IsDirectory(aPath)){ //Folder
+	if(CPP_DKFile_IsDirectory(aPath)){ //Folder
 		if(!DKSolution_UpdatePath(aPath)){ return false; }
 		return true;
 	}
@@ -162,7 +162,7 @@ function DKSolution_UpdatePath(path)
 	*/
 	
 	//console.log("aPath:"+aPath+"\n");
-	//var rPath = DKCPP_DKFile_GetRelativePath(aPath, path);
+	//var rPath = CPP_DKFile_GetRelativePath(aPath, path);
 	//console.log("rPath:"+rPath+"\n");
 	
 	var temp = DKFile_DirectoryContents(aPath);

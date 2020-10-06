@@ -8,14 +8,14 @@ var CSSStyleDeclaration = function(pointer)
 	// Methods
 	Object.defineProperty(this, "getPropertyValue", {
 		value: function(propertyName){ 
-			this[propertyName] = DKCPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
+			this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 			return this[propertyName];
 		} 
 	});
 	Object.defineProperty(this, "setProperty", {
 		value: function(propertyName, propertyValue, priority){ 
 			//console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
-			DKCPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
+			CPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
 			this[propertyName] = propertyValue;
 		} 
 	});
@@ -37,7 +37,7 @@ var CSSStyleDeclaration = function(pointer)
 				}
 			}
 
-			target[key] = DKCPP_DKDomCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey);
+			target[key] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey);
 			return target[key];
 		},
 		set: function(target, key, val, recv){
@@ -60,7 +60,7 @@ var CSSStyleDeclaration = function(pointer)
 				val = "image("+img+" scale-none left top)";
 			}
 			
-			DKCPP_DKDomCSSStyleDeclaration_setProperty(target["pointer"], realKey, val);
+			CPP_DKDomCSSStyleDeclaration_setProperty(target["pointer"], realKey, val);
 			target[key] = val;
 			return true;
 		},

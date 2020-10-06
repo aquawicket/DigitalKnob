@@ -7,10 +7,10 @@
 bool DKVncClientJS::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKVncClient_TestInt", DKVncClientJS::TestInt);
-	DKDuktape::AttachFunction("DKCPP_DKVncClient_TestString", DKVncClientJS::TestString);
-	DKDuktape::AttachFunction("DKCPP_DKVncClient_TestReturnInt", DKVncClientJS::TestReturnInt);
-	DKDuktape::AttachFunction("DKCPP_DKVncClient_TestReturnString", DKVncClientJS::TestReturnString);
+	DKDuktape::AttachFunction("CPP_DKVncClient_TestInt", DKVncClientJS::TestInt);
+	DKDuktape::AttachFunction("CPP_DKVncClient_TestString", DKVncClientJS::TestString);
+	DKDuktape::AttachFunction("CPP_DKVncClient_TestReturnInt", DKVncClientJS::TestReturnInt);
+	DKDuktape::AttachFunction("CPP_DKVncClient_TestReturnString", DKVncClientJS::TestReturnString);
 	return true;
 }
 

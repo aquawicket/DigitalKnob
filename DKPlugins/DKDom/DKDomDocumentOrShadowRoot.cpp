@@ -11,17 +11,17 @@
 bool DKDomDocumentOrShadowRoot::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_activeElement", DKDomDocumentOrShadowRoot::activeElement);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_fullscreenElement", DKDomDocumentOrShadowRoot::fullscreenElement);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_pointerLockElement", DKDomDocumentOrShadowRoot::pointerLockElement);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_styleSheets", DKDomDocumentOrShadowRoot::styleSheets);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_activeElement", DKDomDocumentOrShadowRoot::activeElement);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_fullscreenElement", DKDomDocumentOrShadowRoot::fullscreenElement);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_pointerLockElement", DKDomDocumentOrShadowRoot::pointerLockElement);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_styleSheets", DKDomDocumentOrShadowRoot::styleSheets);
 	
-	DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_caretPositionFromPoint", DKDomDocumentOrShadowRoot::caretPositionFromPoint);
-	DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_elementFromPoint", DKDomDocumentOrShadowRoot::elementFromPoint);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_elementsFromPoint, DKDomDocumentOrShadowRoot::elementsFromPoint);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_getSelection, DKDomDocumentOrShadowRoot::getSelection);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_nodeFromPoint, DKDomDocumentOrShadowRoot::nodeFromPoint);
-	//DKDuktape::AttachFunction("DKCPP_DKDomDocumentOrShadowRoot_nodesFromPoint, DKDomDocumentOrShadowRoot::nodesFromPoint);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_caretPositionFromPoint", DKDomDocumentOrShadowRoot::caretPositionFromPoint);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_elementFromPoint", DKDomDocumentOrShadowRoot::elementFromPoint);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_elementsFromPoint, DKDomDocumentOrShadowRoot::elementsFromPoint);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_getSelection, DKDomDocumentOrShadowRoot::getSelection);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodeFromPoint, DKDomDocumentOrShadowRoot::nodeFromPoint);
+	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodesFromPoint, DKDomDocumentOrShadowRoot::nodesFromPoint);
 	
 	DKClass::DKCreate("DKDom/DKDomDocumentOrShadowRoot.js");
 	return true;

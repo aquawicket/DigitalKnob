@@ -5,78 +5,78 @@
 var Node = function(pointer)
 {
 	Object.defineProperty(this, "baseURI", {
-		get: function(){ return DKCPP_DKDomNode_baseURI(this.pointer); }
+		get: function(){ return CPP_DKDomNode_baseURI(this.pointer); }
 	});
 	Object.defineProperty(this, "baseURIObject", { 
-		get: function(){ return DKCPP_DKDomNode_baseURIObject(this.pointer); }
+		get: function(){ return CPP_DKDomNode_baseURIObject(this.pointer); }
 	});
 	Object.defineProperty(this, "childNodes", { 
 		get: function(){
-			var addressList = DKCPP_DKDomNode_childNodes(pointer);
+			var addressList = CPP_DKDomNode_childNodes(pointer);
 			return new HTMLCollection(addressList);   //TODO - switch htmlCollection over to NodeList	
 		} 
 	});
 	Object.defineProperty(this, "firstChild", {
 		get: function(){ 
-			var address = DKCPP_DKDomNode_firstChild(this.pointer);
+			var address = CPP_DKDomNode_firstChild(this.pointer);
 			if(!address){ return; }
 			return new HTMLElement(address);	
 		}
 	});
 	Object.defineProperty(this, "isConnected", {
-		get: function(){ return DKCPP_DKDomNode_isConnected(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_isConnected(this.pointer); } 
 	});
 	Object.defineProperty(this, "lastChild", {
 		get: function(){ 
-			var address = DKCPP_DKDomNode_lastChild(this.pointer);
+			var address = CPP_DKDomNode_lastChild(this.pointer);
 			if(!address){ return; }
 			return new HTMLElement(address);	
 		} 
 	});
 	Object.defineProperty(this, "nextSibling", {
-		get: function(){ return DKCPP_DKDomNode_nextSibling(this.pointer); }
+		get: function(){ return CPP_DKDomNode_nextSibling(this.pointer); }
 	});
 	Object.defineProperty(this, "nodeName", {
-		get: function(){ return DKCPP_DKDomNode_nodeName(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_nodeName(this.pointer); } 
 	});
 	Object.defineProperty(this, "nodePrincipal", {
-		get: function(){ return DKCPP_DKDomNode_nodePrincipal(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_nodePrincipal(this.pointer); } 
 	});
 	Object.defineProperty(this, "nodeType", {
-		get: function(){ return DKCPP_DKDomNode_nodeType(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_nodeType(this.pointer); } 
 	});
 	Object.defineProperty(this, "nodeValue", {
-		get: function(){ return DKCPP_DKDomNode_nodeValue(this.pointer); },
-		set: function(val){ return DKCPP_DKDomNode_nodeValue(this.pointer, val); }
+		get: function(){ return CPP_DKDomNode_nodeValue(this.pointer); },
+		set: function(val){ return CPP_DKDomNode_nodeValue(this.pointer, val); }
 	});
 	Object.defineProperty(this, "ownerDocument", {
-		get: function(){ return DKCPP_DKDomNode_ownerDocument(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_ownerDocument(this.pointer); } 
 	});
 	Object.defineProperty(this, "parentNode", {
 		get: function(){ 
-			var address = DKCPP_DKDomNode_parentNode(this.pointer); 
+			var address = CPP_DKDomNode_parentNode(this.pointer); 
 			if(!address){ return; }
 			return new HTMLElement(address);		
 		} 
 	});
 	Object.defineProperty(this, "parentElement", {
-		get: function(){ return DKCPP_DKDomNode_parentElement(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_parentElement(this.pointer); } 
 	});
 	Object.defineProperty(this, "previousSibling", {
-		get: function(){ return DKCPP_DKDomNode_previousSibling(this.pointer); } 
+		get: function(){ return CPP_DKDomNode_previousSibling(this.pointer); } 
 	});
 	Object.defineProperty(this, "textContent", {
-		get: function(){ return DKCPP_DKDomNode_textContent(this.pointer); },
-		set: function(val){ return DKCPP_DKDomNode_textContent(this.pointer, val); }
+		get: function(){ return CPP_DKDomNode_textContent(this.pointer); },
+		set: function(val){ return CPP_DKDomNode_textContent(this.pointer, val); }
 	});
 	Object.defineProperty(this, "rootNode", { //Deprecated
-		get: function(){ return DKCPP_DKDomNode_rootNode (this.pointer); } 
+		get: function(){ return CPP_DKDomNode_rootNode (this.pointer); } 
 	}); 
 	
 	
 	// Methods
 	Node.prototype.appendChild = function(child){
-		var address = DKCPP_DKDomNode_appendChild(this.pointer, child.pointer);
+		var address = CPP_DKDomNode_appendChild(this.pointer, child.pointer);
 		if(!address){ return; }
 		return new HTMLElement(address);
 	}
@@ -87,7 +87,7 @@ var Node = function(pointer)
 		//TODO
 	}
 	Node.prototype.contains = function(node){
-		var contains = DKCPP_DKDomNode_contains(this.pointer, node.pointer);
+		var contains = CPP_DKDomNode_contains(this.pointer, node.pointer);
 		return contains;
 	}
 	Node.prototype.getRootNode = function(){
@@ -118,7 +118,7 @@ var Node = function(pointer)
 		//TODO
 	}
 	Node.prototype.removeChild = function(child){
-		var address = DKCPP_DKDomNode_removeChild(this.pointer, child.pointer);
+		var address = CPP_DKDomNode_removeChild(this.pointer, child.pointer);
 		if(!address){ return null; }
 		//var node = Node(pointer);
 		//return node;

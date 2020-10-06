@@ -17,7 +17,7 @@ var DocumentOrShadowRoot = {
 	elementFromPoint(x, y){
 		//console.log("DocumentOrShadowRoot.elementFromPoint("+x+","+y+")");
 		//NOTE: Rml uses GetHoverElement and gets mouse x, y on it's own.
-		var elementAddress = DKCPP_DKDomDocumentOrShadowRoot_elementFromPoint();
+		var elementAddress = CPP_DKDomDocumentOrShadowRoot_elementFromPoint();
 		if(!elementAddress ){
 			console.error("DocumentOrShadowRoot.elementFromPoint("+x+","+y+"): elementAddress invalid");
 			return; 
@@ -27,18 +27,18 @@ var DocumentOrShadowRoot = {
 	
 	elementsFromPoint(){ 
 		//TODO
-		DKCPP_DKDomDocumentOrShadowRoot_elementsFromPoint();
+		CPP_DKDomDocumentOrShadowRoot_elementsFromPoint();
 	},
 	getSelection(){
 		//TODO
-		DKCPP_DKDomDocumentOrShadowRoot_getSelection();
+		CPP_DKDomDocumentOrShadowRoot_getSelection();
 	},
 	nodeFromPoint(){
 		//TODO
-		DKCPP_DKDomDocumentOrShadowRoot_nodeFromPoint();
+		CPP_DKDomDocumentOrShadowRoot_nodeFromPoint();
 	},
 	nodesFromPoint(){
 		//TODO
-		DKCPP_DKDomDocumentOrShadowRoot_nodesFromPoint();
+		CPP_DKDomDocumentOrShadowRoot_nodesFromPoint();
 	}
 };

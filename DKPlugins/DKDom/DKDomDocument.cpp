@@ -10,11 +10,11 @@
 bool DKDomDocument::Init()
 {
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("DKCPP_DKDomDocument_body", DKDomDocument::body);
-	DKDuktape::AttachFunction("DKCPP_DKDomDocument_createElement", DKDomDocument::createElement);
-	DKDuktape::AttachFunction("DKCPP_DKDomDocument_documentElement", DKDomDocument::documentElement);
-	DKDuktape::AttachFunction("DKCPP_DKDomDocument_getElementById", DKDomDocument::getElementById);
-	DKDuktape::AttachFunction("DKCPP_DKDomDocument_getElementsByTagName", DKDomDocument::getElementsByTagName);
+	DKDuktape::AttachFunction("CPP_DKDomDocument_body", DKDomDocument::body);
+	DKDuktape::AttachFunction("CPP_DKDomDocument_createElement", DKDomDocument::createElement);
+	DKDuktape::AttachFunction("CPP_DKDomDocument_documentElement", DKDomDocument::documentElement);
+	DKDuktape::AttachFunction("CPP_DKDomDocument_getElementById", DKDomDocument::getElementById);
+	DKDuktape::AttachFunction("CPP_DKDomDocument_getElementsByTagName", DKDomDocument::getElementsByTagName);
 	
 	DKClass::DKCreate("DKDom/DKDomDocument.js");
 	return true;
