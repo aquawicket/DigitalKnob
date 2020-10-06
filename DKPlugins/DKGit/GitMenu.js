@@ -23,7 +23,7 @@ function GitMenu_Init()
 	}
 
 	DK_Create("DKGit/GitMenu.html", function(){
-		window.addEventListener("mousedown", GitMenu_OnEvent);
+		document.addEventListener("mousedown", GitMenu_OnEvent);
 		byId("Git Update").addEventListener("click", GitMenu_OnEvent);
 		byId("Git Commit").addEventListener("click", GitMenu_OnEvent);
 	});
@@ -32,7 +32,7 @@ function GitMenu_Init()
 //////////////////////
 function GitMenu_End()
 {
-	window.removeEventListener("mousedown", GitMenu_OnEvent);
+	document.removeEventListener("mousedown", GitMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", GitMenu_OnEvent);
 	byId("Git Commit").removeEventListener("click", GitMenu_OnEvent);
 	DK_Close("DKGit/GitMenu.html");
@@ -48,7 +48,7 @@ function GitMenu_OnEvent(event)
 		CPP_DKThread_DKQueue("GitCommit","GitMenu_GitCommit();");
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKGit/GitMenu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}

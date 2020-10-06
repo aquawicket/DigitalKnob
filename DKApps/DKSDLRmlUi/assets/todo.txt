@@ -1,5 +1,10 @@
 ~! THE LIST !~
 
+*** GENERAL ***
+Get DKTestAll Working
+Compile Everything for win64
+Compile in Linux
+Hint: Their may be a SDL2Android thing in 3rdParty 
 
 *** Javascript ***
 EventTarget is lower than Window. Use that for javascript without a document context.
