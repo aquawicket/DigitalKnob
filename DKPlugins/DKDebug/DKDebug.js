@@ -53,7 +53,7 @@ function DKDebug_CheckKeys()
 	}
 	
 	//check for commands
-	if(string.indexOf("dkrefresh") !== -1){ 
+	if(string.indexOf("dkreload") !== -1){ 
 		console.log("*** DKDebug_Refresh() ***");
 		DKDebug_Refresh(); key_history = []; 
 	}
@@ -126,19 +126,13 @@ function DKDebug_KeyToChar(key)
 /////////////////////////
 function DKDebug_Reload()
 {
-	//TODO
+	window.location.reload(true);
 }
 
 //////////////////////////
 function DKDebug_Refresh()
 {
-	//TODO - make this work for all variations 
-	if(DK_GetBrowser() !== "RML"){
-		DK_Refresh(); //Call DK.js
-	}
-	if(DK_GetBrowser() === "RML" && !USE_CEF){
-		DK_Reload(); //Call DKDuktape.cpp
-	}
+	window.location.reload(true);
 }
 
 //////////////////////////////

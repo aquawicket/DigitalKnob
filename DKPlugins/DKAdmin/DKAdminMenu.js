@@ -123,7 +123,7 @@ function DKAdminMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "Refresh"){
 		DKFrame_CloseAll();
-		DK_Refresh();
+		window.location.reload(true);
 	}
 	if(event.currentTarget.id === "CloseDKGui"){
 		DKClose("DKAdminMenu.js")
