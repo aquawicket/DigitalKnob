@@ -1,3 +1,3 @@
-DKCPP_DKDuktape_DKCreate_CPP("DKWindow");
-DKCPP_DKDuktape_DKCreate_CPP("DKRml");
+DKCPP_DKDuktape_Create("DKWindow");
+DKCPP_DKDuktape_Create("DKRml");
 location.href = DKCPP_DKAssets_LocalAssets()+"index.html";
