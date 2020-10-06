@@ -56,8 +56,8 @@ function DKBuildGUI_End()
 	byId("git").removeEventListener("click", DKBuildGUI_OnEvent);
 	byId("libraries").removeEventListener("click", DKBuildGUI_OnEvent);
 	byId("build").removeEventListener("click", DKBuildGUI_OnEvent);
-	DKClose("DKBuild/DKBuildGUI.html");
-	DKClose("DKBuild/DKBuild.js");
+	DK_Close("DKBuild/DKBuildGUI.html");
+	DK_Close("DKBuild/DKBuild.js");
 }
 
 //////////////////////////////////
