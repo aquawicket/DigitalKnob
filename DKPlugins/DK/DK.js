@@ -39,6 +39,7 @@ var byId = function(id){ return document.getElementById(id); } //shortcut alias
 //EventLoop.run = function(){};
 
 //https://stackoverflow.com/a/11035042/688352
+/*
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	var DK_ClearEvents = function(){ console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser()); }
 	var DKRocket_Reload = function(){ console.warn("DKRocket_Reload(): not available for "+DK_GetBrowser()); }
@@ -60,6 +61,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	var DK_PhysicalMemory = function(){ console.warn("DK_PhysicalMemory(): not available for "+DK_GetBrowser()); return ""; }
 	var DK_PhysicalMemoryUsedByApp = function(){ console.warn("DK_PhysicalMemoryUsedByApp(): not available for "+DK_GetBrowser()); return ""; }
 }
+*/
 
 /*
 var myVar = setInterval(myTimer, 1000);
@@ -113,11 +115,12 @@ window.addEventListener('error', function(e){
 // FIXME: not working
 /////////////////////////////////
 //window.onmousemove = function(e){
-document.documentElement.addEventListener("mousemove", function(e){	
+document.addEventListener("mousemove", function(e){	
 	if(DK_IE()){ // grab the x-y pos.s if browser is IE
 		window.mouseX = e.clientX + document.body.scrollLeft
 		window.mouseY = e.clientY + document.body.scrollTop
 	}
+	//FIXME
 	if(DK_GetBrowser() === "RML"){
 		window.mouseX = e.clientX;
 		window.mouseY = e.clientY;
