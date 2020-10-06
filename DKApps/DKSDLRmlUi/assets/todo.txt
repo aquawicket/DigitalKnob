@@ -1,5 +1,6 @@
 ~! THE LIST !~
 
+Rename Github MyApps to DKMyApps
 Test adding Repository.txt files to DKBuilde
 Get DKTestAll Working on Linux
 Model DK/Events after javascript EventTarget.
