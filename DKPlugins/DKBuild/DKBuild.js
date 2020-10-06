@@ -12,7 +12,7 @@ var DKPATH = "";
 var CMAKE = "";
 var NDK = "";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
-VC2019 = DKCPP_DKFile_GetShortName(VC2019);
+VC2019 = DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
 var XCODE = "/Applications/Xcode.app";
 var APP_LIST = [];
@@ -33,9 +33,9 @@ function DKBuild_Init()
 	if(DK_GetOS() === "Win64"){
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
-		CMAKE = DKCPP_DKFile_GetShortName(CMAKE);
+		CMAKE = DKFile_GetShortName(CMAKE);
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
-		NDK = DKCPP_DKFile_GetShortName(NDK);
+		NDK = DKFile_GetShortName(NDK);
 	}
 	if(DK_GetOS() === "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";

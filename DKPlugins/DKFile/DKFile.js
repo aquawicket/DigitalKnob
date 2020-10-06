@@ -76,9 +76,17 @@ function UrlExists(url, fn)
 }
 
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
+    var DKFile_GetShortName = function(path){
+    	console.warn("DKFile_GetShortName(): not available for browser");
+    }
+}
+else{
+    var DKFile_GetShortName = function(path){ return DKCPP_DKFile_GetShortName(path); }
+}
+
+if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	//////////////////////////////////////
-	var DKFile_Exists = function(path, fn)
-	{
+	var DKFile_Exists = function(path, fn){
 		if(!path){ return false; }
 	
 		dir = DKFile_GetAbsolutePath(path);
