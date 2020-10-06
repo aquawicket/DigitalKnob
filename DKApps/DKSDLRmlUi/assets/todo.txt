@@ -1,8 +1,8 @@
 ~! THE LIST !~
 
-EventTarget is lower than Window. Use that for javascript without a document context.
 
-*** DK Javascript ***
+*** Javascript ***
+EventTarget is lower than Window. Use that for javascript without a document context.
 ALL C++ Javascript functions now REQUIRE a CPP_ prefix
 Proper naming would be CPP_DKPlugin_Function
 
