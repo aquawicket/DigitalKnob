@@ -2,6 +2,7 @@
 
 *** GENERAL ***
 Get DKTestAll Working
+Model DK/Events after javascript EventTarget.
 Compile Everything for win64
 Compile in Linux
 Hint: Their may be a SDL2Android thing in 3rdParty
