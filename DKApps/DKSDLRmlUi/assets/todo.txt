@@ -7,8 +7,6 @@ DK3:   DK C++ w/Javascript (DKDuktape)  =  OM  "Object Model"
 DK4:   DK C++ w/ javascript (DKDuktape) +  DKRml = DOM "Document Object Model"
 
 
-FIXME: DKRml Address to Element and vice versioa adds 00's on Win64
-
 If you get DKDom as a seperate RmlUi Library, poeple WILL chip in. ;)   DO IT! DO IT! :D
 
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
