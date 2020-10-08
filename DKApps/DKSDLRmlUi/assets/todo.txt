@@ -1,5 +1,8 @@
 ~! THE LIST !~
 
+make a "raw key" to "w3 standard key translation"..    int 43 = "KeyY"    ;)
+Translate all keycodes to internet w3 standards from raw code
+
 We want to code from inside DK..  DKNotepad and DKSolution should get us there.
 P.S. DKSolution needs to get renamesd to DKFileExplorer    
 
