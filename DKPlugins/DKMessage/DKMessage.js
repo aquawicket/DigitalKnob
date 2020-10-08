@@ -21,7 +21,7 @@ function DKMessage_OnEvent(event)
 {	
 	if(event.currentTarget.id === "DKMessageOk"){
 		if(DKMessage_callback){
-			if(byId("DKMessageInput").style.visibilty){
+			if(byId("DKMessageInput").style.visibilty){ //TODO: review this 
 				DKMessage_callback(DKWidget_GetValue("DKMessageInput"));
 			}
 			else{
@@ -44,7 +44,6 @@ function DKMessage_OnEvent(event)
 ///////////////////////////////////
 function DKMessage_Message(message)
 {
-	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
 	byId("DKMessageInput").style.display = "none";
 	byId("DKMessageCancel").style.display = "none";
@@ -57,7 +56,6 @@ function DKMessage_Message(message)
 /////////////////////////////////////////////
 function DKMessage_Confirm(message, callback)
 {
-	//byId("DKMessageText").innerHTML = message;
 	byId("DKMessageText").innerHTML = message;
 	byId("DKMessageInput").style.display = "none";
 	byId("DKMessageText").style.display = "block";
@@ -66,7 +64,6 @@ function DKMessage_Confirm(message, callback)
 	byId("DKMessageCancel").style.visibility = "visible";
 	byId("DKMessage/DKMessage.html").style.display = "block";
 	byId("DKMessage/DKMessage.html").style.visibility = "visible";
-	
 	DKMessage_callback = callback;
 }
 
