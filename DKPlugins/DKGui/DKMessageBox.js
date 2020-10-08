@@ -28,7 +28,7 @@ function DKMessageBox_OnEvent(event)
 				DKMessageBox_callback(true);
 			}
 		}
-		DKFrame_Close("DKMessageBox/DKMessageBox.html");
+		DKFrame_Close("DKGui/DKMessageBox.html");
 		return;
 	}
 	
@@ -36,7 +36,7 @@ function DKMessageBox_OnEvent(event)
 		if(DKMessageBox_callback){
 			DKMessageBox_callback(false);
 		}
-		DKFrame_Close("DKMessageBox/DKMessageBox.html");
+		DKFrame_Close("DKGui/DKMessageBox.html");
 		return;
 	}
 }

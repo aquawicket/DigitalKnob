@@ -318,6 +318,9 @@ function DKFrame_Close(id)
 {
 	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
 	//var frame = DKWidget_GetParent(id);
+	if(!byId(id)){
+		console.error("byId("+id+") is invalid");
+	}
 	var frame = byId(id).parentNode.id;
 	//console.log("DKFrame_Close("+id+"): frame = "+frame+"\n");
 	var children = DK_GetElements(byId(frame));

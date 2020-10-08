@@ -1,9 +1,5 @@
 ~! THE LIST !~
 
-DKCMake "done building" needs to show the system and architecture..
-I.E.    "Done Building DKSDLRmlUi - Linux 64
-
-
 convert DKSDLRocket in DKTestApps to DKSDLRml
 
 
