@@ -78,9 +78,9 @@ function TaskbarMenu_OnEvent(event)
 		});
 	}
 	if(event.currentTarget.id === "OpenMessage"){
-		DK_Create("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage/DKMessage.html");
-			//DKMessage("", "ShowMessage", "test message");
+		DK_Create("DKGui/DKMessageBox.js", function(){
+			DKFrame_Widget("DKGui/DKMessageBox.html");
+			DKMessageBox_Message("Test DKGui/DKMussageBox");
 		});
 	}
 	if(event.currentTarget.id === "OpenTetris"){

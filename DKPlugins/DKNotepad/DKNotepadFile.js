@@ -85,9 +85,9 @@ function DKNotepadFile_Save()
 	//var assets = DKAssets_LocalAssets();
 	//console.log("DKNotepadFile_Save(): text = "+text);
 	DKFile_StringToFile(text, currentFile);
-	DK_Create("DKMessage/DKMessage.js", function(){
-		DKFrame_Widget("DKMessage/DKMessage.html");
-		DKMessage_Message("File Saved");
+	DK_Create("DKGui/DKMessageBox.js", function(){
+		DKFrame_Widget("DKGui/DKMessageBox.html");
+		DKMessageBox_Message("File Saved");
 	});
 }
 

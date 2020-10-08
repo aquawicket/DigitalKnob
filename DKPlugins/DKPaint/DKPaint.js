@@ -45,10 +45,6 @@ function DKPaint_OnEvent(event)
 function DKPaint_Save()
 {
 	var text = DKWidget_GetValue("DKPaint_Text");
-	
-	//TODO
-	//DK_Create("DKMessage/DKMessage.js");
-	//DKMessageBox_Message("File Saved");
 }
 
 ///////////////////////////

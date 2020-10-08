@@ -201,10 +201,10 @@ function DKSolutionMenu_Rename()
 function DKSolutionMenu_Delete()
 {
 	//TODO - confirm
-	DK_Create("DKMessage/DKMessage.js", function(){
-		DKFrame_Widget("DKMessage/DKMessage.html");
-		DKMessage_Confirm("delete this file?", function(rval){
-			//console.log("DKMessage_Confirm(): rval = "+rval+"\n");
+	DK_Create("DKGui/DKMessageBox.js", function(){
+		DKFrame_Widget("DKGui/DKMessageBox.html");
+		DKMessageBox_Confirm("delete this file?", function(rval){
+			//console.log("DKMessageBox_Confirm(): rval = "+rval+"\n");
 			if(rval === true){
 				DKFile_Delete(DKSolutionMenu_file);
 				DKSolution_UpdatePath(DKWidget_GetValue("DKSolutionPath"));

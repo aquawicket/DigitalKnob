@@ -49,8 +49,8 @@ function DKAutomate_OnEvent(event)
 	
 	if(event.currentTarget.id === "DKA-NewButton"){
 		//console.log("DKA-NewButton\n");
-		DK_Create("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage/DKMessage.html");
+		DK_Create("DKGui/DKMessageBox.js", function(){
+			DKFrame_Widget("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter trigger name", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -60,8 +60,8 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "DKA-DeleteButton"){
-		DK_Create("DKMessage/DKMessage.js", function(){
-			DKFrame_Widget("DKMessage/DKMessage.html");
+		DK_Create("DKGui/DKMessageBox.js", function(){
+			DKFrame_Widget("DKGui/DKMessageBox.html");
 			DKMessageBox_Confirm("Delete Trigger?", function(rval){
 				console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(rval === true){

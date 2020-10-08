@@ -308,7 +308,7 @@ function DKTrigger_FireTrigger(trigger)
 			continue;
 		}
 		if(command === "Message"){
-			DK_Create("DKMessage/DKMessage.js", function(){
+			DK_Create("DKGui/DKMessageBox.js", function(){
 				DKMessageBox_Message(var1);
 			});
 			continue;

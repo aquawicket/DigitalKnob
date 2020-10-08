@@ -2,7 +2,7 @@
 function DKEditor_Menu_Init()
 {
 	DK_Create("DKEditor/DKEditor_Menu.html");
-	window.addEventListener("mousedown", DKEditor_Menu_OnEvent);
+	document.addEventListener("mousedown", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Refresh").addEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Reload").addEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Notes").addEventListener("click", DKEditor_Menu_OnEvent);
@@ -36,7 +36,7 @@ function DKEditor_Menu_Init()
 ////////////////////////////
 function DKEditor_Menu_End()
 {
-	window.removeEventListener("mousedown", DKEditor_Menu_OnEvent);
+	document.removeEventListener("mousedown", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Refresh").removeEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Reload").removeEventListener("click", DKEditor_Menu_OnEvent);
 	byId("DKEditor_Menu_Notes").removeEventListener("click", DKEditor_Menu_OnEvent);
@@ -119,9 +119,9 @@ function DKEditor_Menu_OnEvent(event)
 		DK_HideConsole();
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_NewFrame"){
-		DK_Create("DKMessage/DKMessage.js", function(rval){
+		DK_Create("DKGui/DKMessageBox.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKMessage/DKMessage.html");
+			DKFrame_Widget("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
 				//console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -182,7 +182,7 @@ function DKEditor_Menu_OnEvent(event)
 		DKFrame_Widget(div);
 	}
 
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKEditor/DKEditor_Menu.html").contains(DKWidget_GetHoverElement())){	
 			return;
 		}
