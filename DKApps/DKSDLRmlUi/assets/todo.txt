@@ -1,7 +1,17 @@
 ~! THE LIST !~
 
-convert DKSDLRocket in DKTestApps to DKSDLRml
+We want to code from inside DK..  DKNotepad and DKSolution should get us there.
+P.S. DKSolution needs to get renamesd to DKFileExplorer    
 
+*** DKNotepad ***
+DKNotepadFile_Exit() breaks DK_Close()
+Make "Ctrl+S" save the file in DKNotepad
+Get Copy and Paste working
+Remove save comfrimation and make a sparkle, or something
+ 
+ 
+
+convert DKSDLRocket in DKTestApps to DKSDLRml
 
 *** DKTUTORIAL ***
 DK1:   DKCmake build system
@@ -37,12 +47,6 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWi
 *** ALWAYS ***
  replace all == with ===
  replace all != with !==
-
-*** DKNotepad ***
-DKNotepadFile_Exit() breaks DK_Close()
- Make "Ctrl+S" save the file in DKNotepad
- Get Copy and Paste working
- Remove save comfrimation and make a sparkle, or something
 
 *** DKDomEvent ***
 * add removeEventListener everywhere neccesary 
