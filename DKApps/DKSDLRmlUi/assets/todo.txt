@@ -1,7 +1,5 @@
 ~! THE LIST !~
 
-Move DKMessage or anything DKGui dependent into DKGui
-
 *** DKTUTORIAL ***
 DK1:   DKCmake build system
 DK2:   DK C++ w/ nothing
