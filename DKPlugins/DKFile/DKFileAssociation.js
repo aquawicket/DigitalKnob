@@ -50,7 +50,7 @@ function DKFileAssociation_OpenHtml(path)
 	//var id = DKFile_GetFilename(path);
 	if(DK_Create(id)){
 		//DKFileAssociation_AddDragHandles(id);
-		DKFrame_Widget(id);
+		DKFrame_Html(id);
 		//DKFileAssociation_SelectElement(id);
 	};
 	
@@ -104,7 +104,7 @@ function DKFileAssociation_OpenJS(path)
 	DK_Create(id, function(rval){
 		if(!rval){ return; }
 		id = id.replace(".js",".html");
-		DKFrame_Widget(id);
+		DKFrame_Html(id);
 	});
 }
 
@@ -122,7 +122,7 @@ function DKFileAssociation_OpenText(path)
 {
 	DKWidget_Toggle("DKNotepad.html");
 	DK_Create("DKNotepad/DKNotepad.js", function(){
-		DKFrame_Widget("DKNotepad/DKNotepad.html");
+		DKFrame_Html("DKNotepad/DKNotepad.html");
 		DKNotepad_Open(path);
 	});
 }
@@ -131,7 +131,7 @@ function DKFileAssociation_OpenText(path)
 function DKFileAssociation_OpenImage(path)
 {
 	DK_Create("DKPaint/DKPaint.js", function(){
-		DKFrame_Widget("DKPaint/DKPaint.html");
+		DKFrame_Html("DKPaint/DKPaint.html");
 		DKPaint_Open(path);
 	});
 }

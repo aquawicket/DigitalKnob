@@ -202,7 +202,7 @@ function DKSolutionMenu_Delete()
 {
 	//TODO - confirm
 	DK_Create("DKGui/DKMessageBox.js", function(){
-		DKFrame_Widget("DKGui/DKMessageBox.html");
+		DKFrame_Html("DKGui/DKMessageBox.html");
 		DKMessageBox_Confirm("delete this file?", function(rval){
 			//console.log("DKMessageBox_Confirm(): rval = "+rval+"\n");
 			if(rval === true){

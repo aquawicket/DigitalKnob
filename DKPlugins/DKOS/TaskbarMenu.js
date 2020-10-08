@@ -56,7 +56,7 @@ function TaskbarMenu_OnEvent(event)
 	if(event.currentTarget.id === "FileExplorer"){
 		DK_Create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKFile/DKSolution.html");
+			DKFrame_Html("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
@@ -64,7 +64,7 @@ function TaskbarMenu_OnEvent(event)
 	if(event.currentTarget.id === "OpenBuilder"){
 		DK_Create("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKBuild/DKBuildGUI.html");
+			DKFrame_Html("DKBuild/DKBuildGUI.html");
 		});
 	}
 	if(event.currentTarget.id === "OpenNotepad"){
@@ -79,7 +79,7 @@ function TaskbarMenu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "OpenMessage"){
 		DK_Create("DKGui/DKMessageBox.js", function(){
-			DKFrame_Widget("DKGui/DKMessageBox.html");
+			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_Message("Test DKGui/DKMussageBox");
 		});
 	}
@@ -112,7 +112,7 @@ function TaskbarMenu_OnEvent(event)
 		var assets = DKAssets_LocalAssets();
 		DKFile_StringToFile(source, assets+"source.html");
 		DK_Create("DKNotepad/DKNotepad.js", function(){
-			DKFrame_Widget("DKNotepad/DKNotepad.html");
+			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(assets+"source.html");
 			//console.log(source+"\n");
 		});

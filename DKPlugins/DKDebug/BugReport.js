@@ -27,6 +27,6 @@ function BugReport_OnEvent(event)
 function BugReport_SendBugReport()
 {
 	DK_Create("DKDebug/SendBugReport.js", function(){
-		DKFrame_Widget("DKDebug/SendBugReport.html");
+		DKFrame_Html("DKDebug/SendBugReport.html");
 	});
 }

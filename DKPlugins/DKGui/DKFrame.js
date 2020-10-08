@@ -51,11 +51,11 @@ function DKFrame_OnEvent(event)
 }
 
 ///////////////////////////
-function DKFrame_Widget(id)
+function DKFrame_Html(id)
 {
-	//console.log("DKFrame_Widget("+id+")");
+	//console.log("DKFrame_Html("+id+")");
 	if(!byId(id)){
-		console.error("DKFrame_Widget("+id+"): element does not exist\n");
+		console.error("DKFrame_Html("+id+"): element does not exist\n");
 		return false;
 	}
 	
@@ -65,13 +65,13 @@ function DKFrame_Widget(id)
 	//stop if frame already exsists, multiple windows not ready yet.
 	//FIXME
 	//if(DKWidget_ElementExists(title+"_frame")){
-	//	console.warn("DKFrame_Widget("+id+"): frame already exists\n");
+	//	console.warn("DKFrame_Html("+id+"): frame already exists\n");
 	//	return;
 	//}
 	
 	var width = byId(id).style.width;
 	var height = byId(id).style.height;
-	//console.log("DKFrame_Widget("+id+"): width="+width+" , height="+height+"\n");
+	//console.log("DKFrame_Html("+id+"): width="+width+" , height="+height+"\n");
 
 	width = width.replace("px", "");
 	height = height.replace("px", "");
@@ -161,10 +161,10 @@ function DKFrame_CreateFrame(title, width, height)
 	byId(frame).style.minHeight = "30rem";
 	byId(frame).addEventListener("mousedown", DKFrame_OnEvent);
 	
-	//console.log("DKFrame_Widget("+id+"): frame top="+newtop.toString()+"\n");
-	//console.log("DKFrame_Widget("+id+"): frame left="+newleft.toString()+"\n");
-	//console.log("DKFrame_Widget("+id+"): frame width="+width+"\n");
-	//console.log("DKFrame_Widget("+id+"): frame height="+newheight.toString()+"\n");
+	//console.log("DKFrame_Html("+id+"): frame top="+newtop.toString()+"\n");
+	//console.log("DKFrame_Html("+id+"): frame left="+newleft.toString()+"\n");
+	//console.log("DKFrame_Html("+id+"): frame width="+width+"\n");
+	//console.log("DKFrame_Html("+id+"): frame height="+newheight.toString()+"\n");
 	
 	var titlebar = DKWidget_CreateElement(byId(frame), "div", "DKFrame_titlebar");
 	byId(titlebar).style.position = "absolute";
@@ -442,6 +442,6 @@ function DKFrame_Reload(id)
 	
 	DKFrame_Close(id);
 	DK_Create(jsfile, function(){
-		DKFrame_Widget(htmlfile);
+		DKFrame_Html(htmlfile);
 	});
 }

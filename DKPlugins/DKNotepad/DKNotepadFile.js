@@ -68,7 +68,7 @@ function DKNotepadFile_New()
 function DKNotepadFile_Open()
 {
 	DK_Create("DKFile/DKOpenFile.js", function(){
-		DKFrame_Widget("DKFile/DKOpenFile.html");
+		DKFrame_Html("DKFile/DKOpenFile.html");
 		DKOpenFile_UpdatePath("/");
 		//DKSendEvent("DKFile/DKOpenFile.html", "GetFile", "DKNotepad/DKNotepad.html,OpenFile,/,absolute"); // To -> DKOpenFile
 	});
@@ -86,7 +86,7 @@ function DKNotepadFile_Save()
 	//console.log("DKNotepadFile_Save(): text = "+text);
 	DKFile_StringToFile(text, currentFile);
 	DK_Create("DKGui/DKMessageBox.js", function(){
-		DKFrame_Widget("DKGui/DKMessageBox.html");
+		DKFrame_Html("DKGui/DKMessageBox.html");
 		DKMessageBox_Message("File Saved");
 	});
 }
@@ -95,7 +95,7 @@ function DKNotepadFile_Save()
 function DKNotepadFile_SaveAs()
 {
 	DK_Create("DKFile/DKSaveFile.js", function(){
-		DKFrame_Widget("DKFile/DKSaveFile.html");
+		DKFrame_Html("DKFile/DKSaveFile.html");
 		
 		var event = new Object("SetFile");
 		//var event = new Event("SetFile"); //FIXME

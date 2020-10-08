@@ -77,14 +77,14 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_Notes"){
 		DK_Create("DKNotepad/DKNotepad.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKNotepad/DKNotepad.html");
+			DKFrame_Html("DKNotepad/DKNotepad.html");
 			DKNotepad_Open(DKAssets_LocalAssets()+"/notes.txt");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Assets"){
 		DK_Create("DKFile/DKSolution.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKFile/DKSolution.html");
+			DKFrame_Html("DKFile/DKSolution.html");
 			DKFrame_SetTitle("DKFile/DKSolution.html", "File Explorer");
 			DKSolution_UpdatePath(DKAssets_LocalAssets());
 		});
@@ -121,7 +121,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_NewFrame"){
 		DK_Create("DKGui/DKMessageBox.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKGui/DKMessageBox.html");
+			DKFrame_Html("DKGui/DKMessageBox.html");
 			DKMessageBox_GetValue("Enter name", function(rval){
 				//console.log("DKMessageBox_GetValue() rval = "+rval+"\n");
 				if(!rval){ return; }
@@ -132,7 +132,7 @@ function DKEditor_Menu_OnEvent(event)
 	if(event.currentTarget.id === "DKEditor_Menu_Builder"){
 		DK_Create("DKBuild/DKBuildGUI.js", function(rval){
 			if(!rval){ return; }
-			DKFrame_Widget("DKBuild/DKBuildGUI.html");
+			DKFrame_Html("DKBuild/DKBuildGUI.html");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Info"){
@@ -161,7 +161,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Report"){
 		DK_Create("DKDebug/SendBugReport.js", function(){
-			DKFrame_Widget("DKDebug/SendBugReport.html");
+			DKFrame_Html("DKDebug/SendBugReport.html");
 		});
 	}
 	if(event.currentTarget.id === "DKEditor_Menu_Web"){
@@ -179,7 +179,7 @@ function DKEditor_Menu_OnEvent(event)
 		byId(iframe).style.borderWidth = "0px";
 		byId(iframe).style.overflow = "auto";
 		
-		DKFrame_Widget(div);
+		DKFrame_Html(div);
 	}
 
 	if(event.currentTarget === document){
