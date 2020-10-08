@@ -49,8 +49,8 @@ function DKMessageBox_Message(message)
 	byId("DKMessageBoxCancel").style.display = "none";
 	byId("DKMessageBoxText").style.display = "block";
 	byId("DKMessageBoxText").style.visibility = "visible";
-	byId("DKMessageBox/DKMessageBox.html").style.display = "block";
-	byId("DKMessageBox/DKMessageBox.html").style.visibility = "visible";
+	byId("DKGui/DKMessageBox.html").style.display = "block";
+	byId("DKGui/DKMessageBox.html").style.visibility = "visible";
 }
 
 ////////////////////////////////////////////////
@@ -62,8 +62,8 @@ function DKMessageBox_Confirm(message, callback)
 	byId("DKMessageBoxText").style.visibility = "visible";
 	byId("DKMessageBoxCancel").style.display = "block";
 	byId("DKMessageBoxCancel").style.visibility = "visible";
-	byId("DKMessageBox/DKMessageBox.html").style.display = "block";
-	byId("DKMessageBox/DKMessageBox.html").style.visibility = "visible";
+	byId("DKGui/DKMessageBox.html").style.display = "block";
+	byId("DKGui/DKMessageBox.html").style.visibility = "visible";
 	DKMessageBox_callback = callback;
 }
 
@@ -77,7 +77,7 @@ function DKMessageBox_GetValue(message, callback)
 	byId("DKMessageBoxInput").style.visibility = "visible";
 	byId("DKMessageBoxCancel").style.display = "block";
 	byId("DKMessageBoxCancel").style.visibility = "visible";
-	byId("DKMessageBox/DKMessageBox.html").style.display = "block";
-	byId("DKMessageBox/DKMessageBox.html").style.visibility = "visible";
+	byId("DKGui/DKMessageBox.html").style.display = "block";
+	byId("DKGui/DKMessageBox.html").style.visibility = "visible";
 	DKMessageBox_callback = callback;
 }
