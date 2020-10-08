@@ -827,7 +827,7 @@ function DKBuild_DoResults()
 	console.log("\n");
 	console.log("********************************************");
 	console.log("********************************************");
-	console.log("   DONE BUILDING "+APP+" -"+OS)
+	console.log("   DONE BUILDING "+APP+" "+OS)
 	console.log("********************************************");
 	console.log("********************************************");
 	
