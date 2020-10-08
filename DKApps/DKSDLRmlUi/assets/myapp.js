@@ -13,13 +13,13 @@ DK_Create("DKDebug/DKDebug.js", function(){
 	//DKRml_DebuggerOn();
 	
 	DK_Create("DKNotepad/DKNotepad.js", function(){
-		DKFrame_Widget("DKNotepad/DKNotepad.html");
+		DKFrame_Html("DKNotepad/DKNotepad.html");
 		DKNotepad_Open("todo.txt");
 	});
 	
 	/*
 	DK_Create("DKInputTest/DKInput.js", function(){
-		DKFrame_Widget("DKInputTest/DKInput.html");
+		DKFrame_Html("DKInputTest/DKInput.html");
 	});
 	*/
 	//window.location.href = "DKWebtest/index.html";

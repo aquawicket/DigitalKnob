@@ -3,9 +3,9 @@ DKCreate("DKFile/DKFile.js", function(){
 DKCreate("DKWidget/DKWidget.js", function(){
 DKCreate("DKGui/DKFrame.js", function(){
 DKCreate("DKColorPicker/DKColorPicker.js", function(){
-	DKFrame_Widget("DKColorPicker/DKColorPicker.html");
+	DKFrame_Html("DKColorPicker/DKColorPicker.html");
 DKCreate("DKNotepad/DKNotepad.js", function(){
-	DKFrame_Widget("DKNotepad/DKNotepad.html");
+	DKFrame_Html("DKNotepad/DKNotepad.html");
 });
 });
 });
