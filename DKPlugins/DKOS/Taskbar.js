@@ -4,16 +4,19 @@ var animation;
 function Taskbar_Init()
 {
 	//DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html");
-	DK_Create("DKOS/Taskbar.html", function(){});
-	DK_Create("DKOS/scale.js", function(){});
-	DK_Create("DKOS/Clock.js", function(){});
-	if(DK_GetBrowser() === "RML"){
-		DK_Create("DKDebug/BugReport.js", function(){});
-			//DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
-			byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
-	}
-	byId("start").addEventListener("click", Taskbar_OnEvent);
-	byId("test_animate").addEventListener("click", Taskbar_OnEvent);
+	DK_Create("DKOS/Taskbar.html", function(){
+	DK_Create("DKOS/scale.js", function(){
+	DK_Create("DKOS/Clock.js", function(){
+		if(DK_GetBrowser() === "RML"){
+			DK_Create("DKDebug/BugReport.js", function(){});
+				//DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
+				byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
+		}
+		byId("start").addEventListener("click", Taskbar_OnEvent);
+		byId("test_animate").addEventListener("click", Taskbar_OnEvent);
+	});
+	});
+	});
 }
 
 //////////////////////

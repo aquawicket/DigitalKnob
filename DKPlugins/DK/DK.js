@@ -1,4 +1,4 @@
-console.log("*** DigitalKnob ***");
+console.log("*** DigitalKnob ***"); 
 console.log("Browser = "+DK_GetBrowser());
 console.log("JSEngine = "+DK_GetJSEngine());
 
@@ -87,7 +87,7 @@ window.addEventListener('error', function(e){
 	
 	/*
     // Example: log errors as visual output into the host page.
-    // Note: you probably don’t want to show such errors to users, or
+    // Note: you probably donâ€™t want to show such errors to users, or
     //       have the errors get indexed by Googlebot; however, it may
     //       be a useful feature while actively debugging the page.
     var DOM_ID = 'rendering-debug-pre';
@@ -248,7 +248,7 @@ function DK_Create(data, callback)
 	//console.log("DK.js:DK_Create("+data+")");	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
+		arry.splice(0, 0, "DKHtml");
 	}
 	else if(arry[0].indexOf(".js") > -1){
 		arry.splice(0, 0, "DKJavascript");
@@ -275,7 +275,7 @@ function DK_Create(data, callback)
 			return false;
 		}
 	}
-	if(arry[0] === "DKWidget"){
+	if(arry[0] === "DKHtml"){
 		//console.log("DK_Create(data, callback)");
 			if(!DKWidget_NewWidget(arry[1], arry[2])){
 				return false;
@@ -312,7 +312,7 @@ function DK_Close(data)
 	
 	var arry = data.split(",");
 	if(arry[0].indexOf(".html") > -1){
-		arry.splice(0, 0, "DKWidget");
+		arry.splice(0, 0, "DKHtml");
 	}
 	else if(arry[0].indexOf(".js") > -1){
 		arry.splice(0, 0, "DKJavascript");
@@ -353,7 +353,7 @@ function DK_Close(data)
 		script.parentNode.removeChild(script);
 		//console.log("Closed "+arry[1]);
 	}
-	if(arry[0] === "DKWidget"){
+	if(arry[0] === "DKHtml"){
 		var element = byId(arry[1]);
 		if(!element){ 
 			//console.warn("DK_Close("+data+"): "+file+" does not exist");
