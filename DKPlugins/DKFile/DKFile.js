@@ -327,6 +327,7 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	{
 		//TEST
 		url = url.replace("http://localhost/", "."); //FIXME
+		url = url.replace("http://127.0.0.1/", "."); //FIXME
 		
 		console.log("DKFile_DirectoryContents("+url+")");
 		if(url.indexOf(":") > -1){
