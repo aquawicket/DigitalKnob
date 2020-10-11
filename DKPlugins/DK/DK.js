@@ -277,10 +277,11 @@ function DK_Create(data, callback)
 	}
 	if(arry[0] === "DKHtml"){
 		//console.log("DK_Create(data, callback)");
-			if(!DKWidget_NewWidget(arry[1], arry[2])){
+			//if(!DKWidget_NewWidget(arry[1], arry[2])){
+			if(!DK_LoadHtml(arry[1], arry[2])){
 				return false;
 			}
-			if(callback){ 
+			if(typeof callback === "function"){ 
 				callback(); 
 			}
 			else{
@@ -554,9 +555,9 @@ function DK_LoadHtml(url, parent)
 		nodes[0].id = url;
 		console.warn("DK.js: DK_LoadHtml("+url+",parent): please fix the id");
 	}
-	if(parent){
+	if(parent && byId(parent)){
 		//console.log("DK.js:DK_LoadHtml(): appending to parent");
-		parent.appendChild(nodes[0]);
+		byId(parent).appendChild(nodes[0]);
 	}
 	else{
 		//console.log("DK.js:DK_LoadHtml(): appending to body");

@@ -1,7 +1,7 @@
 function DKWidget_GetFocusElement(){ console.warn("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
 function DKWidget_ValidateColor(color){ console.warn("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
 
-
+/*
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
 {
@@ -25,6 +25,7 @@ function DKWidget_NewWidget(url, parent)
 	
 	return true;
 }
+*/
 
 ////////////////////////////////////
 function DKWidget_GetAvailableId(id)
