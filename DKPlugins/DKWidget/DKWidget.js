@@ -1,29 +1,3 @@
-/*
-////////////////////////////////////////
-function DKWidget_NewWidget(url, parent)
-{
-	//console.log("DKWidget_NewWidget("+url+","+parent+")");
-	var filename = url.replace(/^.*[\\\/]/, '');
-	if(parent){
-		//if(parent.indexOf(".html") === -1){ parent+=".html"; }
-		var element = byId(parent);
-		if(!element){ console.error("DKWidget(): could not get parent ("+parent+")\n"); return false; }
-		if(!DK_LoadHtml(url, element)){ 
-			return false;
-		}
-		//DKWidget_AttachDrags(filename); //Attach Drags
-	}
-	else{
-		if(!DK_LoadHtml(url)){
-			return false;
-		}
-		//DKWidget_AttachDrags(filename); //Attach Drags
-	}
-	
-	return true;
-}
-*/
-
 ////////////////////////////////////
 function DKWidget_GetAvailableId(id)
 {
@@ -46,50 +20,6 @@ function DKWidget_GetAvailableId(id)
 	return out;
 	//console.log("GetAvailableId("+id+")-> "+out+"\n");
 }
-
-/*
-/////////////////////////////
-function DKWidget_GetFile(id)
-{
-	return id;
-}
-*/
-
-/*
-//////////////////////////
-function DKWidget_Hide(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	element.style.display = "none";
-}
-*/
-
-/*
-//////////////////////////
-function DKWidget_Show(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	element.style.display = "block";
-	element.style.visibility = "visible";
-}
-*/
-
-/*
-////////////////////////////
-function DKWidget_Toggle(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	if(element.style.display === "none" || element.style.visibility === "hidden"){
-		DKWidget_Show(id);
-	}
-	else{
-		byId(id).style.display = "none";
-	}
-}
-*/
 
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
@@ -150,15 +80,6 @@ function DKWidget_RemoveDragHandle(id)
 	element.onmousedown = 0;
 	//element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
 }
-
-/*
-///////////////////////////////////
-function DKWidget_GetElement(event)
-{
-	if(!event){event = window.event;}
-	return (event.currentTarget) ? event.currentTarget : event.srcElement; //IE or other
-}
-*/
 
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
@@ -536,18 +457,6 @@ function DKWidget_ElementToString(id)
 	return element.outerHTML;
 }
 
-/*
-/////////////////////////////
-function DKWidget_Visible(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	if(element.style.display === "none"){ return false; }
-	if(element.style.visibility !== "visible"){ return false; }
-	return true;
-}
-*/
-
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
@@ -565,28 +474,6 @@ function DKWidget_GetHoverElement()
 	}
 	return document.elementFromPoint(window.mouseX, window.mouseY);
 }
-
-/*
-////////////////////////////
-function DKWidget_GetScale()
-{
-	//var scale = getComputedStyle(document.documentElement).fontSize;
-	//console.log(document.documentElement.style);
-	var scale = document.documentElement.style.fontSize;
-	console.log(scale);
-	scale = scale.replace("px","");
-	//console.log("DKWidget_GetScale() = "+scale+"\n");
-	return parseFloat(scale);
-}
-*/
-
-/*
-/////////////////////////////////
-function DKWidget_SetScale(scale)
-{
-	document.documentElement.style.fontSize = scale+"px";
-}
-*/
 
 ///////////////////////////////////////
 function DKWidget_OpenLink(url, target)
