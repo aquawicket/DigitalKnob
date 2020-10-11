@@ -1,26 +1,3 @@
-////////////////////////////////////
-function DKWidget_GetAvailableId(id)
-{
-	out = id;
-	var i = 0;
-	
-	//while(DKWidget_ElementExists(out)){
-	while( byId(out)){
-		//if there is a .  the number must come before
-		var n = id.lastIndexOf(".");
-		if(n > 0){
-			out = id.substring(0, n)+String(i)+id.substring(n);
-		}
-		else{
-			out = id+toString(i);
-			out = id+String(i);
-		}
-		i++;
-	}
-	return out;
-	//console.log("GetAvailableId("+id+")-> "+out+"\n");
-}
-
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
 {
@@ -292,7 +269,7 @@ function DKWidget_CreateElement(parent, tag, id)
 		return;
 	}
 	
-	id = DKWidget_GetAvailableId(id);
+	id = DK_GetAvailableId(id);
 		
 	var ele = document.createElement(tag);
 	if(!ele){ console.error("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
@@ -307,7 +284,7 @@ function DKWidget_CreateElement(parent, tag, id)
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
-	id = DKWidget_GetAvailableId(id);
+	id = DK_GetAvailableId(id);
 	var par = byId(parent);
 	var ele = document.createElement(tag);
 	ele.id = id;

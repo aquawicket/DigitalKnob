@@ -1118,6 +1118,28 @@ function DK_GetElements(element)
 	return string;
 }
 
+//////////////////////////////
+function DK_GetAvailableId(id)
+{
+	out = id;
+	var i = 0;
+	
+	while(byId(out)){
+		//if there is a .  the number must come before
+		var n = id.lastIndexOf(".");
+		if(n > 0){
+			out = id.substring(0, n)+String(i)+id.substring(n);
+		}
+		else{
+			out = id+toString(i);
+			out = id+String(i);
+		}
+		i++;
+	}
+	return out;
+	//console.log("GetAvailableId("+id+")-> "+out+"\n");
+}
+
 
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
