@@ -1,6 +1,3 @@
-function DKWidget_GetFocusElement(){ console.warn("DKWidget_GetFocusElement(): not available for "+DK_GetBrowser()+"\n"); }
-function DKWidget_ValidateColor(color){ console.warn("DKWidget_ValidateColor(): not available for "+DK_GetBrowser()+"\n"); return color; }
-
 /*
 ////////////////////////////////////////
 function DKWidget_NewWidget(url, parent)
@@ -50,11 +47,13 @@ function DKWidget_GetAvailableId(id)
 	//console.log("GetAvailableId("+id+")-> "+out+"\n");
 }
 
+/*
 /////////////////////////////
 function DKWidget_GetFile(id)
 {
 	return id;
 }
+*/
 
 /*
 //////////////////////////
@@ -77,6 +76,7 @@ function DKWidget_Show(id)
 }
 */
 
+/*
 ////////////////////////////
 function DKWidget_Toggle(id)
 {
@@ -89,6 +89,7 @@ function DKWidget_Toggle(id)
 		byId(id).style.display = "none";
 	}
 }
+*/
 
 /////////////////////////////////
 function DKWidget_AttachDrags(id)
@@ -150,12 +151,14 @@ function DKWidget_RemoveDragHandle(id)
 	//element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
 }
 
+/*
 ///////////////////////////////////
 function DKWidget_GetElement(event)
 {
 	if(!event){event = window.event;}
 	return (event.currentTarget) ? event.currentTarget : event.srcElement; //IE or other
 }
+*/
 
 ////////////////////////////////////
 function DKWidget_GetValue(variable)

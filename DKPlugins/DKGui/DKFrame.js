@@ -328,8 +328,9 @@ function DKFrame_Close(id)
 	for(var i=arry.length-1; i>0; i--){
 		//console.log("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
 		if(arry[i].indexOf(".html") > -1){
-			var file = DKWidget_GetFile(arry[i]);
-			if(!file){ file = arry[i];}
+			//var file = DKWidget_GetFile(arry[i]);
+			//if(!file){ file = arry[i];}
+		    var file = arry[i];
 			var jsfile = file.replace(".html", ".js");
 			//console.log("DK_Close("+jsfile+")\n");
 			DK_Close(jsfile);

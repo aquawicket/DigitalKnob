@@ -120,7 +120,7 @@ function DKFileAssociation_OpenCss(path)
 /////////////////////////////////////////
 function DKFileAssociation_OpenText(path)
 {
-	DKWidget_Toggle("DKNotepad.html");
+	//DKWidget_Toggle("DKNotepad.html");
 	DK_Create("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Html("DKNotepad/DKNotepad.html");
 		DKNotepad_Open(path);
