@@ -5,20 +5,22 @@ var CSSStyleDeclaration = function(pointer)
 {
 	this.pointer = pointer;
 	
+	// Attributes - TODO
+	//cssText
+	//length
+	//parentRule
+	 
+	// Properties
+	
 	// Methods
-	Object.defineProperty(this, "getPropertyValue", {
-		value: function(propertyName){ 
-			this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
-			return this[propertyName];
-		} 
-	});
-	Object.defineProperty(this, "setProperty", {
-		value: function(propertyName, propertyValue, priority){ 
-			//console.warn("CSSStyleDeclaration:setProperty("+this.pointer+","+propertyName+","+propertyValue+")");
-			CPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
-			this[propertyName] = propertyValue;
-		} 
-	});
+	CSSStyleDeclaration.prototype.getPropertyValue = function(propertyName){
+		this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
+		return this[propertyName];
+	}
+	CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
+		CPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
+		this[propertyName] = propertyValue;
+	}
 	
 	const proxy = new Proxy(this, {
 		has: function(target, key){

@@ -299,30 +299,6 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 	return id;
 }
 
-//////////////////////////////////////////////
-function DKWidget_AppendChild(parent, element)
-{
-	if(!parent){ console.log("DKWidget_AppendChild(): parent invalid"); return false; }
-	if(!element){ console.log("DKWidget_AppendChild(): element invalid"); return false; }
-	
-	var par;
-	if(typeof parent === "string"){
-		par = byId(parent);
-	}
-	else{
-		par = parent;
-	}
-	var ele;
-	if(typeof element === "string"){
-		ele = byId(element);
-	}
-	else{
-		ele = element;
-	}
-	if(!par){ console.log("DKWidget_AppendChild("+parent+","+element+"): par invalid"); return false; } 
-	par.appendChild(ele);
-}
-
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {

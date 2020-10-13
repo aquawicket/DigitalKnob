@@ -83,12 +83,13 @@ function DKFileAssociation_OpenHtml(path)
 	//}
 
 	console.log("temp: "+temp);
-	var element = DKWidget_GetFirstChild(temp);
-	console.log("element = "+element);
+	//var element = DKWidget_GetFirstChild(temp);
+	var element = byId(temp).firstChild;
+	//console.log("element = "+element);
 	//DKElement* element = temp->GetFirstChild();
 	//byId(element).id = id;
 	
-	DKWidget_AppendChild("body", element);
+	document.body.appendChild(element);
 	DKWidget_RemoveElement("temporary");
 	//Show(id);
 	//DKFileAssociation_AddDragHandles(id);

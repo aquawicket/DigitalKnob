@@ -9,7 +9,6 @@ function Taskbar_Init()
 	DK_Create("DKOS/Clock.js", function(){
 		if(DK_GetBrowser() === "RML"){
 			DK_Create("DKDebug/BugReport.js", function(){});
-				//DKWidget_AppendChild("DKOS/Taskbar.html","DKDebug/BugReport.html"); //reparent
 				byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
 		}
 		byId("start").addEventListener("click", Taskbar_OnEvent);

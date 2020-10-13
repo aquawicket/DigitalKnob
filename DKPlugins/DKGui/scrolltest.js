@@ -4,8 +4,8 @@ function scrolltest_Init()
 	DK_Create("DKGui/scrolltest.html", function(){
 	DK_Create("DKGui/scrolltest1.html", function(){
 	DK_Create("DKGui/scrolltest2.html", function(){
-		DKWidget_AppendChild("DKGui/scrolltest.html", "DKGui/scrolltest1.html");
-		DKWidget_AppendChild("DKGui/scrolltest.html", "DKGui/scrolltest2.html");
+		byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest1.html"));
+		byId("DKGui/scrolltest.html").appendChild(byId("DKGui/scrolltest2.html"));
 		byId("bottomdiv").addEventListener("mousedown", scrolltest_OnEvent);
 	});		
 	});

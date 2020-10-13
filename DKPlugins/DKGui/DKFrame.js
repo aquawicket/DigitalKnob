@@ -50,12 +50,11 @@ function DKFrame_OnEvent(event)
 	}
 }
 
-///////////////////////////
+/////////////////////////
 function DKFrame_Html(id)
 {
-	//console.log("DKFrame_Html("+id+")");
 	if(!byId(id)){
-		console.error("DKFrame_Html("+id+"): element does not exist\n");
+		console.error("DKFrame_Html("+id+"): element invalid\n");
 		return false;
 	}
 	
@@ -79,8 +78,7 @@ function DKFrame_Html(id)
 	height = height.replace("rem", "");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
-	DKWidget_AppendChild(frame, id);
-	//byId(frame).appendChild(byId(frame));
+	byId(frame).appendChild(byId(id));
 	byId(id).style.position = "absolute";
 	byId(id).style.top = "21rem";
 	byId(id).style.left = "0rem";
@@ -96,12 +94,8 @@ function DKFrame_Html(id)
 ////////////////////////////////////
 function DKFrame_SetTitle(id, title)
 {
-	//TODO - add protection	
-	//var frame = DKWidget_GetParent(id);
 	var frame = byId(id).parentNode.id
-	//var titlebar = DKWidget_GetFirstChild(frame);
 	var titlebar = byId(frame).firstChild.id;
-	//var titlebartext = DKWidget_GetFirstChild(titlebar);
 	var titlebartext = byId(titlebar).firstChild.id;
 	byId(titlebartext).innerHTML = title;
 }
@@ -243,14 +237,17 @@ function DKFrame_CreateResize(frame)
 ///////////////////////////////
 function DKFrame_BringToFront()
 {
-	var ele = DKWidget_GetHoverElement();
-	if(!ele){ return; }
+	//FIXME: breaks mouse events on some elements
+	return;
+	var ele = document.elementFromPoint(window.mouseX, window.mouseY);
+	if(!ele){ 
+		console.error("DKFrame_BringToFront(): element invalid");
+		return; 
+	}
 	
 	if(byId("DKFrame_frame") && byId("DKFrame_frame").contains(ele)){
-		//document.body.id = "body"; //TEMPORARY FIX
-		//if(DKWidget_GetLastChild("body") !== "DKFrame_frame"){
 		if(document.body.lastchild !== byId("DKFrame_frame")){	
-			DKWidget_AppendChild("body", "DKFrame_frame");
+			document.body.appendChild(byId("DKFrame_frame"));
 			return;
 		}
 	}
@@ -258,9 +255,8 @@ function DKFrame_BringToFront()
 		var frame = "DKFrame_frame"+i.toString();
 		if(!byId(frame)){ continue; }
 		if(byId(frame).contains(ele)){
-		//if(DKWidget_GetLastChild("body") !== frame){
-		if(document.body.lastChild !== byId(frame)){
-				DKWidget_AppendChild("body", frame);
+			if(document.body.lastChild !== byId(frame)){
+				document.body.appendChild(byId(frame));
 				return;
 			}
 		}
@@ -271,7 +267,6 @@ function DKFrame_BringToFront()
 function DKFrame_MinimizeButton(id)
 {
 	//TODO
-	//var frame = DKWidget_GetParent(id);
 }
 
 ///////////////////////////////////
@@ -317,7 +312,6 @@ function DKFrame_CloseButton(id)
 function DKFrame_Close(id)
 {
 	//TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
-	//var frame = DKWidget_GetParent(id);
 	if(!byId(id)){
 		console.error("byId("+id+") is invalid");
 	}
@@ -328,8 +322,6 @@ function DKFrame_Close(id)
 	for(var i=arry.length-1; i>0; i--){
 		//console.log("DKFrame_Close("+id+"): arry["+i+"] = "+arry[i]+"\n");
 		if(arry[i].indexOf(".html") > -1){
-			//var file = DKWidget_GetFile(arry[i]);
-			//if(!file){ file = arry[i];}
 		    var file = arry[i];
 			var jsfile = file.replace(".html", ".js");
 			//console.log("DK_Close("+jsfile+")\n");
@@ -344,7 +336,6 @@ function DKFrame_Close(id)
 				//console.log("frameId = "+frameId+"\n");
 				//console.log("DKCef_GetBrowserId("+b+") = "+DKCef_GetBrowserId(b)+"\n");
 				if(frameId === DKCef_GetBrowserId(b)){
-					//console.log("We Know Which One To Close:\n");
 					DKCef_CloseBrowser(b);
 				}
 			}
@@ -352,7 +343,7 @@ function DKFrame_Close(id)
 	}
 	
 	//console.log("DKFrame_Close("+id+"): frame="+frame+"\n");
-	if(frame === "body" || frame === document.body){
+	if(frame === document.body){
 		return;
 	}
 	
