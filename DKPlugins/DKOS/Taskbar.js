@@ -5,7 +5,7 @@ function Taskbar_Init()
 {
 	//DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html");
 	DK_Create("DKOS/Taskbar.html", function(){
-	DK_Create("DKOS/scale.js", function(){
+	DK_Create("DKOS/Scale.js", function(){
 	DK_Create("DKOS/Clock.js", function(){
 		if(DK_GetBrowser() === "RML"){
 			DK_Create("DKDebug/BugReport.js", function(){});
@@ -24,7 +24,7 @@ function Taskbar_End()
 	byId("start").removeEventListener("click", Taskbar_OnEvent);
 	byId("test_animate").removeEventListener("click", Taskbar_OnEvent);
 	DK_Close("DKOS/Taskbar.html");
-	DK_Close("DKOS/scale.js");
+	DK_Close("DKOS/Scale.js");
 	DK_Close("DKOS/Clock.js");
 	DK_Close("DKDebug/BugReport.js");
 }
