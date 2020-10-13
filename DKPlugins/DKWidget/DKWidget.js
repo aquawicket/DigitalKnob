@@ -458,16 +458,6 @@ function DKWidget_SetFile(id, file)
 	*/
 }
 
-//////////////////////////////
-function DKWidget_SetFocus(id)
-{
-	//console.log("DKWidget_SetFocus("+id+")");
-	var element = byId(id);
-	//console.log("DKWidget_SetFocus("+id+"): element = "+element);
-	element.focus();
-}
-
-
 /////////////////////////
 function DKWidget_Cut(id)
 {

@@ -23,7 +23,7 @@ function TaskbarMenu_Init()
 		byId("OpenGoogle").addEventListener("click", TaskbarMenu_OnEvent);
 		byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu_OnEvent);
 		byId("Git").addEventListener("click", TaskbarMenu_OnEvent);
-		DKWidget_SetFocus("TaskbarMenu_Run");
+		byId("TaskbarMenu_Run").focus();
 	});
 }
 

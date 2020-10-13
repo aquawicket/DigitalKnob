@@ -17,7 +17,7 @@ function DKAdminMenu_Init()
 		byId("DKAdminMenu_Run").addEventListener("keydown", DKAdminMenu_OnEvent);
 		byId("Git").addEventListener("click", DKAdminMenu_OnEvent);
 
-		DKWidget_SetFocus("DKAdminMenu_Run");
+		byId("DKAdminMenu_Run").focus();
 	});
 	
 	DK_Create("DKDebug/DKDebug.js", function(){});
