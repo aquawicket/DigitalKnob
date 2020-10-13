@@ -22,7 +22,7 @@ function DKMessageBox_OnEvent(event)
 	if(event.currentTarget.id === "DKMessageBoxOk"){
 		if(DKMessageBox_callback){
 			if(byId("DKMessageBoxInput").style.visibilty){ //TODO: review this 
-				DKMessageBox_callback(DKWidget_GetValue("DKMessageBoxInput"));
+				DKMessageBox_callback(byId("DKMessageBoxInput").value);
 			}
 			else{
 				DKMessageBox_callback(true);

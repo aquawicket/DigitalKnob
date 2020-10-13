@@ -177,7 +177,7 @@ function TaskbarMenu_OnEvent(event)
 		else{
 			if(key !== 13){ return; }
 		}
-		TaskbarMenu_Run(DKWidget_GetValue("TaskbarMenu_Run"));
+		TaskbarMenu_Run(byId("TaskbarMenu_Run").value);
 	}
 	
 	if(event.currentTarget === document){

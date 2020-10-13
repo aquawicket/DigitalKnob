@@ -44,7 +44,7 @@ function DKPaint_OnEvent(event)
 ///////////////////////
 function DKPaint_Save()
 {
-	var text = DKWidget_GetValue("DKPaint_Text");
+	var text = byId("DKPaint_Text").value;
 }
 
 ///////////////////////////

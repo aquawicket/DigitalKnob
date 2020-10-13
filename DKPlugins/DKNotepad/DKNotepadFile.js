@@ -81,7 +81,7 @@ function DKNotepadFile_Save()
 		DKNotepadFile_SaveAs();
 		return;
 	}
-	var text = DKWidget_GetValue("DKNotepad_Text");
+	var text = byId("DKNotepad_Text").value;
 	//var assets = DKAssets_LocalAssets();
 	//console.log("DKNotepadFile_Save(): text = "+text);
 	DKFile_StringToFile(text, currentFile);

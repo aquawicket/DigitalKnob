@@ -52,8 +52,8 @@ function DKSolutionRename_SetFile(file)
 function DKSolutionRename_Rename()
 {
 	var oldhtml = byId(DKSolutionRename_id).innerHTML;
-	var oldvalue = DKWidget_GetValue(DKSolutionRename_id);
-	var newhtml = DKWidget_GetValue("DKSolutionRename_box");
+	var oldvalue = byId(DKSolutionRename_id).value;
+	var newhtml = byId("DKSolutionRename_box").value;
 	var newvalue = oldvalue;
 	newvalue = newvalue.replace(oldhtml, newhtml);
 	//console.log("oldhtml = "+oldhtml+"\n");
