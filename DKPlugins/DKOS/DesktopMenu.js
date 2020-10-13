@@ -7,7 +7,7 @@ function DesktopMenu_Init()
 	byId("DKOS/DesktopMenu.html").style.top = "100px";
 	byId("DKOS/DesktopMenu.html").style.left = "100px";
 	
-	window.addEventListener("mousedown", DesktopMenu_OnEvent);
+	document.addEventListener("mousedown", DesktopMenu_OnEvent);
 	byId("OpenBackgtoundMenu").addEventListener("click", DesktopMenu_OnEvent);
 	byId("ToggleFullscreen").addEventListener("click", DesktopMenu_OnEvent);
 }
@@ -15,7 +15,7 @@ function DesktopMenu_Init()
 //////////////////////////
 function DesktopMenu_End()
 {
-	window.removeEventListener("mousedown", DesktopMenu_OnEvent);
+	document.removeEventListener("mousedown", DesktopMenu_OnEvent);
 	byId("OpenBackgtoundMenu").removeEventListener("click", DesktopMenu_OnEvent);
 	byId("ToggleFullscreen").removeEventListener("click", DesktopMenu_OnEvent);
 	DK_Close("DKOS/DesktopMenu.html");
@@ -33,7 +33,7 @@ function DesktopMenu_OnEvent(event)
 		Desktop_ToggleFullscreen();
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKOS/DesktopMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
