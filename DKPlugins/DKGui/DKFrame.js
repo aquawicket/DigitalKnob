@@ -424,8 +424,7 @@ function DKFrame_Reload(id)
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		if(arry[i].indexOf(".html") > -1){
-			var file = DKWidget_GetFile(arry[i]);
-			if(!file){ file = arry[i];}
+			var file = arry[i];
 			jsfile = file.replace(".html", ".js");
 			htmlfile = file.replace(".js", ".html");
 		}
