@@ -356,8 +356,7 @@ function DKFrame_Close(id)
 	byId("DKFrame_reload"+num).removeEventListener("click", DKFrame_OnEvent);
 	byId("DKFrame_titlebartext"+num).removeEventListener("dblclick", DKFrame_OnEvent);
 	byId("DKFrame_frame"+num).removeEventListener("resize", DKFrame_OnEvent);
-	
-	DKWidget_RemoveElement(frame);
+	byId(frame).parentNode.removeChild(byId(frame));
 }
 
 //////////////////////////////
@@ -403,7 +402,7 @@ function DKFrame_CloseAll()
 	var arry = children.split(",");
 	for(var i=0; i<arry.length; i++){
 		if(arry[i].indexOf("DKFrame_frame") > -1){
-			DKWidget_RemoveElement(arry[i]);
+			byId(arry[i]).parentNode.removeChild(byId(arry[i]));
 		}
 	}
 }

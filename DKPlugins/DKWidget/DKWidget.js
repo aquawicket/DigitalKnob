@@ -386,22 +386,6 @@ function DKWidget_GetMouseElementY(id)
 	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
 }
 
-///////////////////////////////////
-function DKWidget_RemoveElement(id)
-{
-	var ele = byId(id);
-	if(!ele){
-		console.warn("RemoveElement("+id+"): element does not exist\n");
-		return false;
-	}
-	var par = ele.parentNode;
-	if(ele && par){
-		par.removeChild(ele);
-		return true;
-	}
-	return false;
-}
-
 /////////////////////////////////////
 function DKWidget_ElementToString(id)
 {

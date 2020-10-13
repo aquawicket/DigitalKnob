@@ -90,7 +90,7 @@ function DKFileAssociation_OpenHtml(path)
 	//byId(element).id = id;
 	
 	document.body.appendChild(element);
-	DKWidget_RemoveElement("temporary");
+	byId("temporary").parentNode.removeChild(ById("temporary"));
 	//Show(id);
 	//DKFileAssociation_AddDragHandles(id);
 	//DKFileAssociation_SelectElement(id);
