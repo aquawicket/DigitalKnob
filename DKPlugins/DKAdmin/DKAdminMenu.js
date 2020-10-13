@@ -85,7 +85,7 @@ function DKAdminMenu_OnEvent(event)
 	if(event.currentTarget.id === "OpenSource"){
 		//console.log("OpenSource\n");
 		DK_Create("DKWidgetJS");
-		var source = DKWidget_GetOuterHtml("body");
+		var source = document.body.outerHTML;
 		var assets = DKAssets_LocalAssets();
 		DKFile_StringToFile(source, assets+"source.html");
 		DK_Create("DKNotepad/DKNotepad.js", function(){

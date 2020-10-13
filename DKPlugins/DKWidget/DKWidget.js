@@ -247,20 +247,6 @@ function DKWidget_SetInnerHtmlString(id, string)
 	}
 }
 
-////////////////////////////////////////
-function DKWidget_GetOuterHtml(variable)
-{
-	if(typeof variable === "object"){
-		return variable.outerHTML;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		return element.outerHTML;
-	}
-	console.error("ERROR: GetInnerHtml(): unknown type\n");
-	return false;
-}
-
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {

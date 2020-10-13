@@ -264,7 +264,7 @@ function DKDebug_ShowConsole()
 function DKDebug_GetSource()
 {
 	DK_Create("DKWidgetJS");
-	var source = DKWidget_GetOuterHtml("html");
+	var source = document.documentElement.outerHTML;
 	var assets = CPP_DKAssets_LocalAssets();
 	
 	if(DK_GetBrowser() === "RML"){
