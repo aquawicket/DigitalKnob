@@ -133,7 +133,7 @@ function DKOpenFile_OpenFile(path)
 	//console.log("assets:"+assets);
 	rPath = CPP_DKFile_GetRelativePath(aPath, assets);
 	//console.log("rPath:"+rPath);
-	DKWidget_SetValue("DKOpenFilePath",aPath);
+	byId("DKOpenFilePath").value = aPath;
 }
 
 ////////////////////////////////////
@@ -216,6 +216,6 @@ function DKOpenFile_UpdatePath(path)
 		}
 	}
 	
-	DKWidget_SetValue("DKOpenFilePath", aPath);
+	byId("DKOpenFilePath").value = aPath;
 	return true;
 }

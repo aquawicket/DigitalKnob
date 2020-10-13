@@ -148,7 +148,7 @@ function DKSaveFile_OpenFile(path)
 	//console.log("assets:"+assets);
 	rPath = CPP_DKFile_GetRelativePath(aPath, assets);
 	console.log("rPath:"+rPath);
-	DKWidget_SetValue("DKSaveFilePath",aPath);
+	byId("DKSaveFilePath").value = aPath;
 }
 
 //////////////////////////////////////

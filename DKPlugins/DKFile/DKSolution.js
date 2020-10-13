@@ -238,6 +238,6 @@ function DKSolution_UpdatePath(path)
 		}
 	}
 	
-	DKWidget_SetValue("DKSolutionPath", aPath);
+	byId("DKSolutionPath").value = aPath;
 	return true;
 }

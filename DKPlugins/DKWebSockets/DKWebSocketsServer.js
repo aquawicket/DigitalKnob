@@ -71,5 +71,4 @@ function DKWebSocketsServer_MessageToClient()
 function DKWebSocketsServer_OnMessageFromClient(message)
 {
 	byId("DKWebSocketsServer_receive").value = message;
-	//DKWidget_SetValue("DKWebSocketsServer_receive", message);
 }

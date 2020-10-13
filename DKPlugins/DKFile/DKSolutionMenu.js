@@ -193,7 +193,7 @@ function DKSolutionMenu_Rename()
 		DKSolutionRename_SetFile(DKSolutionMenu_file);
 		byId("DKFile/DKSolutionRename.html").style.top = top+"rem";
 		var value = byId(DKSolutionMenu_id).innerHTML;
-		DKWidget_SetValue("DKSolutionRename_box", value);
+		byId("DKSolutionRename_box").value = value;
 	});
 }
 

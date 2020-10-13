@@ -189,38 +189,6 @@ function DKWidget_RemoveProperty(id, parameter)
 	}
 }
 
-
-///////////////////////////////////////////
-function DKWidget_SetValue(variable, value)
-{
-	if(!variable){ return false; }
-	//if(!value){ value = ""; } //FIXME - sould be if(value === emptystring) so 0's can pass through
-	if(typeof variable === "object"){
-		if(variable.tagName === "INPUT"){
-			variable.value = value;
-			return true;
-		}
-		byId(variable).innerHTML = value;
-		return true;
-	}
-	if(typeof variable === "string"){
-		var element = byId(variable);
-		if(!element){ console.error("SetValue("+variable+"): Cannot find element\n"); return false; }
-		if(element.type && element.type === "checkbox"){
-			element.checked = value;
-			return true;
-		}
-		if(element.tagName === "INPUT"){
-			element.value = value;
-			return true;
-		}
-		byId(variable).innerHTML = value;
-		return true;
-	}
-	console.error("ERROR: SetValue(): unknown type\n");
-	return false;
-}
-
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {
@@ -342,44 +310,6 @@ function DKWidget_InsertBefore(parent, element)
 	node.insertBefore(ele, par);
 }
 
-//////////////////////////////////////
-function DKWidget_GetMouseElementX(id)
-{
-	if(!id){ id = "body"; }
-	/*
-	var ele = byId(id);
-	var left = ele.offsetLeft;
-	while((ele=ele.offsetParent) !== null){ 
-		left += ele.offsetLeft; 
-	}
-	*/
-	//console.log("DKWidget_GetMouseElementX("+element+"): left = "+left+"\n");
-	return mouseX - DKWidget_GetOffsetLeft(id);//parseInt(left);
-}
-
-///////////////////////////////////////////
-function DKWidget_GetMouseElementY(id)
-{
-	if(!id){ id = "body"; }
-	/*
-	var ele = byId(element);
-	var top = ele.offsetTop;
-	while((ele=ele.offsetParent) !== null){ 
-		top += ele.offsetTop; 
-	}
-	*/
-	//console.log("DKWidget_GetMouseElementX("+element+"): top = "+top+"\n");
-	return mouseY - DKWidget_GetOffsetTop(id);//parseInt(top);
-}
-
-/////////////////////////////////////
-function DKWidget_ElementToString(id)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	return element.outerHTML;
-}
-
 /////////////////////////////////////////////
 function DKWidget_RemoveAttribute(id, attrib)
 {
@@ -396,36 +326,6 @@ function DKWidget_GetHoverElement()
 		return false;
 	}
 	return document.elementFromPoint(window.mouseX, window.mouseY);
-}
-
-///////////////////////////////////////
-function DKWidget_OpenLink(url, target)
-{
-	//window.location = url;
-	window.open(url, target);
-}
-
-///////////////////////////////////
-function DKWidget_SetFile(id, file)
-{ 
-	console.warn("DKWidget_SetFile(): not available for "+DK_GetBrowser()+"\n"); 
-	return;
-	
-	//TODO
-	if(!id){ console.warn("DKWidget_SetFile(): id empty\n"); return; }
-	while(id.indexOf(".html") === -1 && id.indexOf("body") === -1){
-		id = DKWidget_GetParent(id);
-	}
-	
-	/*  C++
-	std::vector<DKWidget*> instances;
-	DKWidget::GetInstances(instances);
-	for(unsigned int i=0; i<instances.size(); ++i){
-		if(same(instances[i]->root->GetId().CString(), id)){
-			instances[i]->data[1] = file;
-		}
-	}
-	*/
 }
 
 /////////////////////////

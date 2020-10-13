@@ -70,9 +70,9 @@ function DKColorPicker_ColorBar()
 	rgb += String(rgb_arry[1]) + ",";
 	rgb += String(rgb_arry[2]) + ")";
 		
-	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
-	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
-	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
+	byId("DKColorR").value = String(rgb_arry[0]);
+	byId("DKColorG").value = String(rgb_arry[1]);
+	byId("DKColorB").value = String(rgb_arry[2]);
 	byId("DKColorHover").style.backgroundColor = rgb;
 	byId("DKColorSelected").style.backgroundColor = rgb;
 }
@@ -88,9 +88,9 @@ function DKColorPicker_ColorBox()
 	rgb += String(rgb_arry[1]) + ",";
 	rgb += String(rgb_arry[2]) + ")";
 		
-	DKWidget_SetValue("DKColorR", String(rgb_arry[0]));
-	DKWidget_SetValue("DKColorG", String(rgb_arry[1]));
-	DKWidget_SetValue("DKColorB", String(rgb_arry[2]));
+	byId("DKColorR").value = String(rgb_arry[0]);
+	byId("DKColorG").value = String(rgb_arry[1]);
+	byId("DKColorB").value = String(rgb_arry[2]);
 	byId("DKColorSelected").style.backgroundColor = rgb;
 	//event->Stop();
 }

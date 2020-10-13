@@ -11,7 +11,7 @@ function DKAudioPlayer_Init()
 	byId("DKAudioPlayer_position").addEventListener("input", DKAudioPlayer_OnEvent);
 	byId("DKAudioPlayer_speaker").addEventListener("click", DKAudioPlayer_OnEvent);
 	byId("DKAudioPlayer_volume").addEventListener("input", DKAudioPlayer_OnEvent);
-	DKWidget_SetValue("DKAudioPlayer_volume", "128");
+	byId("DKAudioPlayer_volume").value = "128";
 }
 
 ////////////////////////////
@@ -58,7 +58,7 @@ function DKAudioPlayer_Open(file)
 {
 	DKAudioPlayer_file = file;
 	DKAudio_OpenMusic(file);
-	DKWidget_SetValue("DKAudioPlayer_position", "0");
+	byId("DKAudioPlayer_position").value = "0";
 }
 
 //////////////////////////////////
@@ -87,12 +87,12 @@ function DKAudioPlayer_SetTime(value)
 function DKAudioPlayer_TimeUpdate()
 {
 	var time = DKAudio_GetTime() / DKAudio_GetDuration() * 1000;
-	DKWidget_SetValue("DKAudioPlayer_position", time);
+	byId("DKAudioPlayer_position").value = time;
 	
 	var minute = "0";
 	minute += ":";
 	var second = parseInt(DKAudio_GetTime());//("0" + DK_GetValue(event)).slice (-2);
-	DKWidget_SetValue("DKAudioPlayer_time", minute+second);
+	byId("DKAudioPlayer_time").innerHTML = minute+second;
 }
 
 ////////////////////////////////
@@ -109,7 +109,7 @@ function DKAudioPlayer_speaker()
 	}
 	
 	console.log("DKAudio_GetVolume() = "+DKAudio_GetVolume()+"\n");
-	DKWidget_SetValue("DKAudioPlayer_volume", DKAudio_GetVolume());
+	byId("DKAudioPlayer_volume").value = DKAudio_GetVolume();
 }
 
 ///////////////////////////////////////////

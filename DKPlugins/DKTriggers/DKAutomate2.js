@@ -83,7 +83,7 @@ function DKAutomate2_OnEvent(event)
 ////////////////////////////////////
 function DKAutomate2_SelectTrigger()
 {
-	DKWidget_SetValue("TriggerName", current_trigger);
+	byId("TriggerName").value = current_trigger;
 	byId("Causes").innerHTML = "";
 	
 	for(var c = 0; c < causes.length; c++){
@@ -98,7 +98,7 @@ function DKAutomate2_SelectTrigger()
 		byId(command).style.display = "inline-block";
 		byId(command).style.borderWidth = "1px";
 		byId(command).num = String(c);
-		DKWidget_SetValue(command, causes[c].command);
+		byId(command).value = causes[c].command;
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var1 = DKWidget_CreateElement(byId(cause), "input", "CauseVar1");
@@ -108,7 +108,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var1).style.display = "inline-block";
 		byId(var1).style.borderWidth = "1px";
 		byId(var1).num = String(c);
-		DKWidget_SetValue(var1, causes[c].var1);
+		byId(var1).value = causes[c].var1;
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var2 = DKWidget_CreateElement(byId(cause), "input", "CauseVar2");
@@ -118,7 +118,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var2).style.display = "inline-block";
 		byId(var2).style.borderWidth = "1px";
 		byId(var2).num = String(c);
-		DKWidget_SetValue(var2, causes[c].var2);
+		byId(var2).value = causes[c].var2;
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var3 = DKWidget_CreateElement(byId(cause), "input", "CauseVar3");
@@ -128,7 +128,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var3).style.display = "inline-block";
 		byId(var3).style.borderWidth = "1px";
 		byId(var3).num = String(c);
-		DKWidget_SetValue(var3, causes[c].var3);
+		byId(var3).value = causes[c].var3;
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
 		var button = DKWidget_CreateElement(byId(cause), "button", "DeleteCause");
@@ -162,7 +162,7 @@ function DKAutomate2_SelectTrigger()
 		byId(command, "display", "inline-block");
 		byId(command, "border-width", "1px");
 		byId(command).num = String(e);
-		DKWidget_SetValue(command, effects[e].command);
+		byId(command).value = effects[e].command;
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var1 = DKWidget_CreateElement(byId(effect), "input", "EffectVar1");
@@ -172,7 +172,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var1, "display", "inline-block");
 		byId(var1, "border-width", "1px");
 		byId(var1).num = String(e);
-		DKWidget_SetValue(var1, effects[e].var1);
+		byId(var1).value = effects[e].var1;
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var2 = DKWidget_CreateElement(byId(effect), "input", "EffectVar2");
@@ -182,7 +182,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var2).style  "display", "inline-block");
 		byId(var2).style  "border-width", "1px");
 		ById(var2).num = String(e);
-		DKWidget_SetValue(var2, effects[e].var2);
+		byId(var2).value = effects[e].var2;
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
 		var var3 = DKWidget_CreateElement(byId(effect), "input", "EffectVar3");
@@ -192,7 +192,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var3, "display", "inline-block");
 		byId(var3, "border-width", "1px");
 		byId(var3).num = String(e);
-		DKWidget_SetValue(var3, effects[e].var3);
+		byId(var3).value = effects[e].var3;
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
 		var button = DKWidget_CreateElement(byId(effect), "button", "DeleteEffect");

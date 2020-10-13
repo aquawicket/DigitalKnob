@@ -110,24 +110,24 @@ function DKHandles_UpdateWindowList()
 ///////////////////////////////////////////
 function DKHandles_UpdateProperties(handle)
 {
-	DKWidget_SetValue("currentHandle", "Handle: "+handle);
+	byId("currentHandle").innerHTML = "Handle: "+handle;
 	var win = DKHandles_GetWindow(handle);
-	DKWidget_SetValue("window", win);
+	byId("window").innerHTML = win;
 	var value = DKHandles_GetValue(handle);
-	DKWidget_SetValue("value", value);
+	byId("value").value = value;
 	var clas = DKHandles_GetClass(handle);
-	DKWidget_SetValue("class", clas);
+	byId("class").value = clas;
 	var par = DKHandles_GetParent(handle);
 	if(!par){
-		DKWidget_SetValue("parent", "");
+		byId("parent").innerHTML = "";
 	}
 	else{
-		DKWidget_SetValue("parent", par);
+		byId("parent").innerHTML = par;
 	}
 	var index = DKHandles_GetIndex(handle);
-	DKWidget_SetValue("index", index);
+	byId("index").value = index;
 	var windowindex = DKHandles_GetWindowIndex(handle);
-	DKWidget_SetValue("windowindex", windowindex);
+	byId("windowindex").value = windowindex;
 	
 	var top = DKHandles_GetTop(handle);
 	byId("Handle_top").innerHTML = "Top: "+top;
