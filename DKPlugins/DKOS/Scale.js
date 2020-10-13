@@ -1,7 +1,7 @@
 /////////////////////
 function Scale_Init()
 {
-	DK_Create("DKOS/Scale.html","DKOS/Taskbar.html", function(){
+	DK_Create("DKOS/Scale.html,DKOS/Taskbar.html", function(){
 	    byId("scale_minus").addEventListener("mousedown", Scale_OnEvent);
 	    byId("scale_plus").addEventListener("mousedown", Scale_OnEvent);
 	});

@@ -1,9 +1,9 @@
 ///////////////////////
 function Desktop_Init()
 {
-	//DK_Create("DKOS/Desktop.html,DKOS/DKOS.html");
-	DK_Create("DKOS/Desktop.html");
-	byId("Background").addEventListener("contextmenu", Desktop_OnEvent);
+	DK_Create("DKOS/Desktop.html,DKOS/DKOS.html", function(){
+		byId("Background").addEventListener("contextmenu", Desktop_OnEvent);
+	});
 }
 
 //////////////////////

@@ -3,10 +3,10 @@ var animation;
 ///////////////////////
 function Taskbar_Init()
 {
-	//DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html");
-	DK_Create("DKOS/Taskbar.html", function(){
-	DK_Create("DKOS/Scale.js", function(){
+	DK_Create("DKOS/Taskbar.html,DKOS/DKOS.html", function(){
+	//DK_Create("DKOS/Taskbar.html", function(){
 	DK_Create("DKOS/Clock.js", function(){
+	DK_Create("DKOS/Scale.js", function(){
 		if(DK_GetBrowser() === "RML"){
 			DK_Create("DKDebug/BugReport.js", function(){});
 				byId("DKOS/Taskbar.html").appendChild(byId("DKDebug/BugReport.html")); //reparent
