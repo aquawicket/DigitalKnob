@@ -101,7 +101,7 @@ function DKBuildGUI_OnEvent(event)
 		byId("AppList").value = DK_GetValue(event);
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
-		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
+		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", byId("AppList").value);
 		//DK_Create("AppExplorer.js");
 		//DKSendEvent("AppExplorer.html", "UpdateAppExplorer", apppath);
 	}
@@ -128,16 +128,16 @@ function DKBuildGUI_UpdateApps()
 function DKBuildGUI_AppSelect()
 {
 	// We can send events to classes that are not of DKWidget as well.
-	if(DKWidget_GetValue("AppList") === "NEW APP"){
+	if(byId("AppList").value === "NEW APP"){
 		DK_Create("DKGui/DKMessageBox.js", function(){
 			DKSendEvent("DKGui/DKMessageBox.html", "GetInput", "NewApp,DKBuildGUI.html"); // To -> DKMessageBox
 		});
 		return;
 	}
 	
-	APP = DKWidget_GetValue("AppList");
+	APP = byId("AppList").value;
 	//console.log("APP = "+APP+"\n");
-	//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
+	//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", byId("AppList").value);
 	
 	//DKSendEvent("DKMenuRight.html", "SetPanel", "App");
 	//DKSendEvent("DKMenuRightApp.html", "Update", "");
@@ -147,14 +147,14 @@ function DKBuildGUI_AppSelect()
 //////////////////////////////
 function DKBuildGUI_OsSelect()
 {
-	OS = DKWidget_GetValue("OSList");
+	OS = byId("OSList").value;
 	console.log("OS = "+OS+"\n");
 }
 
 /////////////////////////////////
 function DKBuildGUI_BuildSelect()
 {
-	TYPE = DKWidget_GetValue("BuildType");
+	TYPE = byId("BuildType").value;
 	console.log("TYPE = "+TYPE+"\n");
 }
 

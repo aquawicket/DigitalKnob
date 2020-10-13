@@ -9,7 +9,7 @@ function DKSolution_Init()
 	byId("DKSolutionMenu").addEventListener("contextmenu", DKSolution_OnEvent);
 	byId("DKSolutionPath").addEventListener("keypress", DKSolution_OnEvent);
 	
-	//DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
+	//DKSolution_OpenFolder(byId("DKSolutionPath").value);
 }
 
 /////////////////////////
@@ -43,10 +43,10 @@ function DKSolution_OnEvent(event)
 		event.preventDefault();
 		DK_Create("DKFile/DKSolutionMenu.js", function(){
 			DKMenu_ValidatePosition("DKFile/DKSolutionMenu.html");
-			var file = DKWidget_GetValue(id);
+			var file = byId(id).value;
 			//console.log("file = "+file+"\n");
 			if(!file){
-				file = DKWidget_GetValue("DKSolutionPath")+"/";
+				file = byId("DKSolutionPath").value+"/";
 			}
 			DKSolutionMenu_SetId(id);
 			DKSolutionMenu_SetFile(file);
@@ -55,7 +55,7 @@ function DKSolution_OnEvent(event)
 	}
 		
 	if(event.currentTarget.id === "DKSolutionUp"){
-		var up = DKWidget_GetValue("DKSolutionPath")+"/../";
+		var up = byId("DKSolutionPath").value+"/../";
 		//console.log(up+"\n");
 		DKSolution_OpenFolder(up);
 	}
@@ -65,18 +65,18 @@ function DKSolution_OnEvent(event)
 		//console.log(DKWidget_GetValue(DK_GetId(event))+"\n");
 		if(event.currentTarget.id.includes("DKSolutionFolder")){
 			//console.log("DKSolutionFolder\n");
-			DKSolution_OpenFolder(DKWidget_GetValue(event.currentTarget.id));
+			DKSolution_OpenFolder(byId(event.currentTarget.id).value);
 			return;
 		}
 	
-		DKSolution_OpenFile(DKWidget_GetValue(event.currentTarget.id));
+		DKSolution_OpenFile(byId(event.currentTarget.id).value);
 		//DK_ClearSelection();
 		return;
 	}
 	
 	if(event.currentTarget.id === "DKSolutionPath"){
 		if(DKWidget_GetValue(event) === 13){ //enter
-			DKSolution_OpenFolder(DKWidget_GetValue("DKSolutionPath"));
+			DKSolution_OpenFolder(byId("DKSolutionPath").value);
 		}
 	}
 }
