@@ -53,7 +53,7 @@ function DKOpenFile_OnEvent(event)
 	}
 
 	if(event.currentTarget.id === "DKOpenFileUp"){
-		var up = DKWidget_GetValue("DKOpenFilePath")+"/..";
+		var up = byId("DKOpenFilePath").value+"/..";
 		//console.log(up);
 		DKOpenFile_OpenFolder(up);
 	}

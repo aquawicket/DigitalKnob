@@ -139,7 +139,7 @@ function DKAdminMenu_OnEvent(event)
 		else{
 			if(key !== 13){ return; }
 		}
-		DKAdminMenu_Run(DKWidget_GetValue("DKAdminMenu_Run"));
+		DKAdminMenu_Run(byId("DKAdminMenu_Run").value);
 	}
 	
 	if(event.currentTarget === window){

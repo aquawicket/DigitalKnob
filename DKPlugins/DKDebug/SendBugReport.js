@@ -26,7 +26,7 @@ function SendBugReport_OnEvent(event)
 /////////////////////////////////////
 function SendBugReport_CreateReport()
 {
-	var str = DKWidget_GetValue("SendBugReport_Textarea");
+	var str = byId("SendBugReport_Textarea").value;
 	console.log(str+"\n");
 	
 	var assets = CPP_DKAssets_LocalAssets();

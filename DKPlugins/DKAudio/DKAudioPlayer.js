@@ -35,13 +35,13 @@ function DKAudioPlayer_OnEvent(event)
 		DKAudioPlayer_playpause();
 	}
 	if(event.currentTarget.id === "DKAudioPlayer_position"){
-		DKAudioPlayer_SetTime(DKWidget_GetValue("DKAudioPlayer_position"));
+		DKAudioPlayer_SetTime(byId("DKAudioPlayer_position").value);
 	}
 	if(event.currentTarget.id === "DKAudioPlayer_speaker"){
 		DKAudioPlayer_speaker();
 	}
 	if(event.currentTarget.id === "DKAudioPlayer_volume"){
-		var volume = DKWidget_GetValue("DKAudioPlayer_volume");
+		var volume = byId("DKAudioPlayer_volume").value;
 		DKAudio_SetVolume(parseInt(volume));
 		DKAudioPlayer_UpdateVolume(parseInt(volume));
 	}

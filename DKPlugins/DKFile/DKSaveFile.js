@@ -57,21 +57,21 @@ function DKSaveFile_OnEvent(event)
 	}
 
 	if(event.currentTarget.id === "DKSaveFileUp"){
-		var up = DKWidget_GetValue("DKSaveFilePath")+"/..";
+		var up = byId("DKSaveFilePath").value+"/..";
 		//console.log(up);
 		DKSaveFile_OpenFolder(up);
 	}
 	if(event.currentTarget.id === "DKSaveFileOK"){
 		if(rPath && event_data2 === "relative"){
 			if(CPP_DKFile_IsDirectory(rPath)){
-				rPath = rPath+"/"+DKWidget_GetValue("DKSaveFileName");
+				rPath = rPath+"/"+byId("DKSaveFileName").value;
 			}
 			console.log("DKSendEvent("+event_id+","+event_type+","+rPath+")");
 			DKSendEvent(event_id, event_type, rPath);
 		}
 		else if(aPath && event_data2 === "absolute"){
 			if(CPP_DKFile_IsDirectory(aPath)){
-				aPath = aPath+"/"+DKWidget_GetValue("DKSaveFileName");
+				aPath = aPath+"/"+byId("DKSaveFileName").value;
 			}
 			//console.log("DKSendEvent("+event_id+","+event_type+","+aPath+")");
 			var event = new Object();

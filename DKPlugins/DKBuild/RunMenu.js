@@ -31,26 +31,26 @@ function RunMenu_OnEvent(event)
 {
 	console.log("RunMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id === "Build App"){
-		OS = DKWidget_GetValue("OSList");
-		APP = DKWidget_GetValue("AppList");
-		TYPE = DKWidget_GetValue("BuildType");
-		LINK = DKWidget_GetValue("LinkType");
+		OS = byId("OSList").value;
+		APP = byId("AppList").value;
+		TYPE = byId("BuildType").value;
+		LINK = byId("LinkType").value;
 		LEVEL = "Build";
 		DKThread_DKQueue("BuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
 	if(event.currentTarget.id === "Rebuild App"){
-		OS = DKWidget_GetValue("OSList");
-		APP = DKWidget_GetValue("AppList");
-		TYPE = DKWidget_GetValue("BuildType");
-		LINK = DKWidget_GetValue("LinkType");
+		OS = byId("OSList").value;
+		APP = byId("AppList").value;
+		TYPE = byId("BuildType").value;
+		LINK = byId("LinkType").value;
 		LEVEL = "Rebuild";
 		DKThread_DKQueue("RebuildApp "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
 	if(event.currentTarget.id === "Rebuild All"){
-		OS = DKWidget_GetValue("OSList");
-		APP = DKWidget_GetValue("AppList");
-		TYPE = DKWidget_GetValue("BuildType");
-		LINK = DKWidget_GetValue("LinkType");
+		OS = byId("OSList").value;
+		APP = byId("AppList").value;
+		TYPE = byId("BuildType").value;
+		LINK = byId("LinkType").value;
 		LEVEL = "RebuildAll";
 		DKThread_DKQueue("BuildAll "+APP+":"+OS+":"+TYPE+":"+LINK+":"+LEVEL, "DKBuild_DoResults();");
 	}
@@ -58,8 +58,8 @@ function RunMenu_OnEvent(event)
 		console.warn("DKBuildGUI::Copy Assets: TODO\n");
 	}
 	if(event.currentTarget.id === "Run App"){
-		OS = DKWidget_GetValue("OSList");
-		APP = DKWidget_GetValue("AppList");
+		OS = byId("OSList").value;
+		APP = byId("AppList").value;
 		if(DK_GetOS() === "Win32" || DK_GetOS() === "Win64"){
 			if(OS === "win32"){
 				DK_Run(DKPATH+"/DKApps/"+APP+"/"+OS+"/Release/"+APP+".exe");
