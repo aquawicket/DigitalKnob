@@ -143,7 +143,7 @@ function DKAdminMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget === window){
-		if(byId("DKAdmin/DKAdminMenu.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKAdmin/DKAdminMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}

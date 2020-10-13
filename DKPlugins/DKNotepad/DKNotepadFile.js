@@ -50,7 +50,7 @@ function DKNotepadFile_OnEvent(event)
 	
 	//FIXME
 	if(event.currentTarget === document){
-		if(byId("DKNotepad/DKNotepadFile.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKNotepad/DKNotepadFile.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}

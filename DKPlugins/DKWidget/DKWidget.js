@@ -318,16 +318,6 @@ function DKWidget_RemoveAttribute(id, attrib)
 	element.removeAttribute(attrib);
 }
 
-///////////////////////////////////
-function DKWidget_GetHoverElement()
-{ 
-	if(!document.elementFromPoint(window.mouseX, window.mouseY)){ 
-		console.log("DKWidget_GetHoverElement(): document.elementFromPoint("+window.mouseX+","+window.mouseY+") invalid");
-		return false;
-	}
-	return document.elementFromPoint(window.mouseX, window.mouseY);
-}
-
 /////////////////////////
 function DKWidget_Cut(id)
 {

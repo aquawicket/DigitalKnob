@@ -38,7 +38,7 @@ function DKPaintFile_OnEvent(event)
 	}
 	
 	if(event.currentTarget === window){
-		if(byId("DKPaint/DKPaintFile.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKPaint/DKPaintFile.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}

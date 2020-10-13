@@ -48,7 +48,7 @@ function DKNotepadEdit_OnEvent(event)
 	
 	// FIXME
 	if(event.currentTarget === window){
-		if(byId("DKNotepad/DKNotepadEdit.html").contains(DKWidget_GetHoverElement())){	
+		if(byId("DKNotepad/DKNotepadEdit.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}
 	}

@@ -183,7 +183,7 @@ function DKEditor_Menu_OnEvent(event)
 	}
 
 	if(event.currentTarget === document){
-		if(byId("DKEditor/DKEditor_Menu.html").contains(DKWidget_GetHoverElement())){	
+		if(byId("DKEditor/DKEditor_Menu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}
 	}

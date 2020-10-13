@@ -35,7 +35,7 @@ function DKTooltip_Add(id, string)
 function DKTooltip_Show(id)
 {
 	setTimeout(function(){
-		var hover = DKWidget_GetHoverElement();
+		var hover = document.elementFromPoint(window.mouseX, window.mouseY);
 		if(hover !== id){
 			DK_Close("DKTooltip/DKTooltip.html");
 			return;

@@ -24,7 +24,7 @@ function LibraryMenu_OnEvent(event)
 	}
 	
 	if(event.currentTarget === document){
-		if(byId("DKBuild/LibraryMenu.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKBuild/LibraryMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}

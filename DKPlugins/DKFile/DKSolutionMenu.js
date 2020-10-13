@@ -83,7 +83,7 @@ function DKSolutionMenu_OnEvent(event)
 	
 	//FIXME
 	if(event.currentTarget === window){
-		if(byId("DKFile/DKSolutionMenu.html").contains(DKWidget_GetHoverElement())){
+		if(byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
 	}

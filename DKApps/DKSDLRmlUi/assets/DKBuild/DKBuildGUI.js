@@ -22,20 +22,20 @@ function DKBuildGUI_Init()
 
 		/*
 		if(DK_GetOS() === "Win32" ||  DK_GetOS() === "Win64"){
-			DKWidget_SetValue("OSList", "win32");
+			byId("OSList").value = "win32";
 		}
 		if(DK_GetOS() === "Mac"){
-			DKWidget_SetValue("OSList", "mac64");
+			byId("OSList").value = "mac64";
 		}	
 		if(DK_GetOS() === "Linux"){
-			DKWidget_SetValue("OSList", "linux64");
+			byId("OSList").value = "linux64";
 		}	
 
 		if(DK_GetOS() === "Linux"){
-			DKWidget_SetValue("BuildType", "Release");
+			byId("BuildType").value = "Release";
 		}
 		else{
-			DKWidget_SetValue("BuildType", "ALL");
+			byId("BuildType").value = "ALL";
 		}
 	
 		if(DK_GetOS() === "Android"){ return; } //FIXME - android not ready
@@ -98,7 +98,7 @@ function DKBuildGUI_OnEvent(event)
 	/*
 	if(event.type === "NewApp"){
 		DKSendEvent("DKBuildGUI", "NewApp", DK_GetValue(event));
-		DKWidget_SetValue("AppList", DK_GetValue(event));
+		byId("AppList").value = DK_GetValue(event);
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", DKWidget_GetValue("AppList"));
@@ -120,7 +120,7 @@ function DKBuildGUI_UpdateApps()
 		var ele = DKWidget_CreateElement(byId("AppList"), "option", "al");
 		byId(ele).innerHTML = APP_LIST[i];
 		byId(ele).value = APP_LIST[i];
-		//DKWidget_SetValue("AppList", "DKBuilder");
+		byId("AppList").value = "DKBuilder";
 	}
 }
 
