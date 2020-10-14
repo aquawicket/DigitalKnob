@@ -1,6 +1,6 @@
 ////////////////////
 function DKOS_Init() {
-	console.log("DKOS_Init()");
+	//console.debug("DKOS_Init()");
 	DK_Create("DKOS/DKOS.html", function(){
 		document.documentElement.style.backgroundColor = "black";
 		document.body.style.margin = "0px";

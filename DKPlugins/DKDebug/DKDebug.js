@@ -3,7 +3,7 @@ var key_history = [];
 ///////////////////////
 function DKDebug_Init()
 {
-	console.log("DKDebug_Init()");
+	//console.debug("DKDebug_Init()");
 	document.addEventListener("keydown", DKDebug_OnEvent);
 }
 

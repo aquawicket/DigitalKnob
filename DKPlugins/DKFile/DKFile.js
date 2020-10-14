@@ -328,8 +328,9 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 		//TEST
 		url = url.replace("http://localhost/", "."); //FIXME
 		url = url.replace("http://127.0.0.1/", "."); //FIXME
-		
-		console.log("DKFile_DirectoryContents("+url+")");
+
+
+		console.debug("DKFile_DirectoryContents("+url+")");
 		if(url.indexOf(":") > -1){
 			console.error("DKFile_DirectoryContents("+url+"): url has :");
 			return; 
@@ -355,19 +356,21 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	//////////////////////////////////////////
 	var DKFile_GetAbsolutePath = function(url)
 	{
-		console.log("DKFile_GetAbsolutePath("+url+")");
+		//console.debug("DKFile_GetAbsolutePath("+url+")");
 		if(!url){ url = "/"; }
 		if(url.indexOf("file:///") > -1){ url = pathname; }
 		
 		url = url.replace(protocol+"//"+hostname+"/","");
 		url = url.replace("//","/");
-		console.log("DKFile_GetAbsolutePath("+url+")");
+		//console.debug("DKFile_GetAbsolutePath("+url+")");
+		
 		send = online_assets+"DKFile/DKFile.php?GetAbsolutePath="+url;
 		var result = ajaxGetUrl(send);
+		
 		//result = result.replace(protocol+"//"+hostname+"/","");
 		//result = result.replace("//","/");
 	
-		console.log("DKFile_GetAbsolutePath("+url+") -> "+result);
+		console.debug("DKFile_GetAbsolutePath("+url+") -> "+result);
 		return result;
 	}
 }

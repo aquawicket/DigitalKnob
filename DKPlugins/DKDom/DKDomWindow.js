@@ -192,7 +192,8 @@ var Window = function(pointer)
 	Window.prototype.focus = function(){}
 	Window.prototype.getAttentionWithCycleCount = function(){}
 	Window.prototype.getComputedStyle = function(element){
-		var style = CPP_DKDomWindow_getComputedStyle(element.pointer); //TODO
+		return new CSSStyleDeclaration(element.pointer);
+		//var style = CPP_DKDomWindow_getComputedStyle(element.pointer); //TODO
 	}
 	Window.prototype.getDefaultComputedStyle = function(){}
 	Window.prototype.getSelection = function(){}

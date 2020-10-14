@@ -139,6 +139,7 @@ function DKOpenFile_OpenFile(path)
 ////////////////////////////////////
 function DKOpenFile_UpdatePath(path)
 {
+	console.debug("DKOpenFile_UpdatePath("+path+")");
 	//if(!path){ return false; }
 	//console.log("DKOpenFile_UpdatePath("+path+")");
 	if(DK_GetOS() === "Android"){

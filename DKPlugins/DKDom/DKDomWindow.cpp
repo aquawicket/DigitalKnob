@@ -672,6 +672,14 @@ int DKDomWindow::focus(duk_context* ctx)
 int DKDomWindow::getComputedStyle(duk_context* ctx)
 {
 	DKERROR("DKDomWindow::getComputedStyle not implemented");
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	Rml::ComputedValues values = element->GetComputedValues();
 	return false;
 }
 
