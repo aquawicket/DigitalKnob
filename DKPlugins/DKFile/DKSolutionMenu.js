@@ -43,7 +43,7 @@ function DKSolutionMenu_End()
 //////////////////////////////////////
 function DKSolutionMenu_OnEvent(event)
 {
-	console.debug("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
+	console.debug("DKSolutionMenu_OnEvent("+event.currentTarget.id+","+event.type+")\n");
 	if(event.currentTarget.id === "DKSolutionMenu_Open"){
 		DKSolutionMenu_Open();
 	}
@@ -82,7 +82,7 @@ function DKSolutionMenu_OnEvent(event)
 	}
 	
 	//FIXME
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKFile/DKSolutionMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
@@ -111,6 +111,7 @@ function DKSolutionMenu_Open()
 //////////////////////////////////
 function DKSolutionMenu_OpenHere()
 {
+	console.log("DKSolutionMenu_OpenHere()");
 	var path = DKSolutionMenu_file;
 	//console.log("DKSolutionMenu_file = "+DKSolutionMenu_file+"\n");
 	//console.log("absolutepath = "+absolutepath+"\n");
