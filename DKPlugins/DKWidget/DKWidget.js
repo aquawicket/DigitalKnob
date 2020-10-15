@@ -308,8 +308,8 @@ function DKWidget_Cut(id)
         text = document.selection.createRange().text;
     }
 	//console.log("DKWidget_Cut("+id+"): text = "+text+"\n");
-	copyToClipboard(text);
-	removeSelection(id);
+	DKWidget_copyToClipboard(text);
+	DKWidget_removeSelection(id);
 }
 
 //////////////////////////
@@ -324,22 +324,22 @@ function DKWidget_Copy(id)
     }
 	
 	//console.log("DKWidget_Cut("+id+"): text = "+text+"\n");
-	copyToClipboard(text);
+	DKWidget_copyToClipboard(text);
 }
 
 ///////////////////////////
 function DKWidget_Paste(id)
 {
 	//TODO
-	removeSelection(id);
+	DKWidget_removeSelection(id);
 	var ele = byId(id);
 	ele.focus();
 	ele.select();
 	document.execCommand('Paste');
 }
 
-//////////////////////////////
-function copyToClipboard(text) 
+//////////////////////////////////////
+function DKWidget_copyToClipboard(text) 
 {
     if(window.clipboardData && window.clipboardData.setData){
         // IE specific code path to prevent textarea being shown while dialog is visible.
@@ -363,8 +363,8 @@ function copyToClipboard(text)
     }
 }
 
-////////////////////////////
-function removeSelection(id)
+/////////////////////////////////////
+function DKWidget_removeSelection(id)
 {
 	var ele = byId(id);
     var text = ele.value;
