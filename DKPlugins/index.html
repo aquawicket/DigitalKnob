@@ -1,40 +1,12 @@
-<!-- DKPlugins html/css/javascript test file -->
-<!-- TODO: Allow DKPlugins/index?Plugin="Name" to load single plugin -->
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="referrer" content="no-referrer"></meta>
 		<meta http-equiv="cache-control" content="no-cache"></meta>
-		
-		<!-- 3rd Party Dev Tools -->
-	    <!-- <script src="https://cdn.jsdelivr.net/npm/eruda"></script> -->
-	    <!-- <script>eruda.init();</script> -->
+		<link rel="shortcut icon" id="favicon.ico" href="favicon.ico"></link>
 	</head>
 	<body>
 		<script type="text/javascript" id="DK/DK.js" src="DK/DK.js"></script>
-		<script>
-		    //var app = "DKEditor/DKEditor";
-		    //var app = "DKDisplay/DKDisplay";
-		    //var app = "DKConsole/DKConsole";
-		    //var app = "DKAdmin/DKAdmin";
-		    //var app = "DKBuild/DKBuildGUI";
-		    //var app = "DKNotepad/DKNotepad";
-		    //var app = "DKColorPicker/DKColorPicker";
-		    var app = "DKOS/DKOS";
-			DK_Create("DK/DK.css", function(){
-			DK_Create("DKFile/DKFile.js", function(){
-			DK_Create("DKAssets/DKAssets.js", function(){
-			DK_Create("DKWidget/DKWidget.js", function(){
-			DK_Create("DKGui/DKFrame.js", function(){
-			 DK_Create(app+".js", function(){
-			    //DKFrame_Widget(app+".html");
-			 });
-			});
-			});
-			});
-			});
-			});
-		</script>
+		<script type="text/javascript" id="myapp.js" src="myapp.js"></script>
 	</body>
 </html>
