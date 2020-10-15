@@ -15,10 +15,7 @@ function DKWidget_CreateElement(parent, tag, id)
 	parent.appendChild(element); //This is not working on IE
 	
 	element.id = DK_GetAvailableId(id);
-	return element.id;
-	
-	//FIXME: return the element object, not the id
-	//return element;
+	return element.id; //FIXME: return the element object, not the id
 }
 
 //////////////////////////////////////////////////////
@@ -31,18 +28,17 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 	
 	//TODO - test typeof tag to be 'string' or 'tag' worthy
 	
-	id = DK_GetAvailableId(id);
 	var element = document.createElement(tag);
-	element.id = id;
+	element.id = DK_GetAvailableId(id);
 	
 	var node = parent.parentNode;
 	if(!node){
 		console.error("InsertBefore(): could not get parentNode of parent\n");
 		return false;
 	}
-	
 	node.insertBefore(element, parent);
-	return id;
+	
+	return element.id; //FIXME: return the element object, not the id
 }
 
 ///////////////////////////////////////////////
@@ -105,6 +101,9 @@ function DKWidget_InsertBefore(parent, element)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
+	
+	console.error("DKWidget_GetValue(): this function is obsolete");
+	
 	//FIXME: limit what variable can be to phase this out
 	if(typeof variable === "string"){ //id
 		var ele = byId(variable);

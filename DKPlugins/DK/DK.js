@@ -1203,7 +1203,7 @@ function AjaxGet(url, output)
 	}
 	
 	//try{ 
-		request.open("GET", url, false); 
+		request.open("GET", url, false); //FIXME
 		request.send(); 
 	//}
 	//catch(err){

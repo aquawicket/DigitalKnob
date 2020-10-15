@@ -22,6 +22,7 @@ Drag a conduit line across the outside of the footing to the other "post"
 
 
 *** DIGITALKNOB ***
+move DKWidget_CreateElement() to DK_CreateElement()
 We got a bad thing going on with DKWidget_CreateElement() returning a name.
 That function will return the id of the created element..  
 And here's the snuiff..   if the name id already exists, it will spin a number system after.
