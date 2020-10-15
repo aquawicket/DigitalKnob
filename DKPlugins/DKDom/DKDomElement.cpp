@@ -17,6 +17,7 @@ bool DKDomElement::Init()
 	DKDuktape::AttachFunction("CPP_DKDomElement_getElementsByClassName", DKDomElement::getElementsByClassName);
 	DKDuktape::AttachFunction("CPP_DKDomElement_getElementsByTagName", DKDomElement::getElementsByTagName);
 	DKDuktape::AttachFunction("CPP_DKDomElement_hasAttribute", DKDomElement::hasAttribute);
+	DKDuktape::AttachFunction("CPP_DKDomElement_removeAttribute", DKDomElement::removeAttribute);
 	DKDuktape::AttachFunction("CPP_DKDomElement_innerHTML", DKDomElement::innerHTML);
 	DKDuktape::AttachFunction("CPP_DKDomElement_outerHTML", DKDomElement::outerHTML);
 	DKDuktape::AttachFunction("CPP_DKDomElement_setAttribute", DKDomElement::setAttribute);
@@ -229,6 +230,23 @@ int DKDomElement::hasAttribute(duk_context* ctx)
 		duk_push_boolean(ctx, false);
 		return true;
 	}
+	duk_push_boolean(ctx, true);
+	return true;
+}
+
+///////////////////////////////////////////////////
+int DKDomElement::removeAttribute(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	DKString attribute = duk_require_string(ctx, 1);
+	Rml::Element* element = DKRml::addressToElement(address);
+	if (!element) {
+		DKERROR("DKDomElement::removeAttribute(): element invalid\n");
+		duk_push_boolean(ctx, false);
+		return true;
+	}
+	element->RemoveAttribute(attribute);
 	duk_push_boolean(ctx, true);
 	return true;
 }
