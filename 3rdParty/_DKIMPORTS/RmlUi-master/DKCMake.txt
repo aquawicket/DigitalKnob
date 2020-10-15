@@ -9,7 +9,7 @@ DKDEPEND(freetype-2.5.5)
 ##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
 
 DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi-master)
-DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)
+DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)  ##FIXME: This doesn't work
 ##DKINSTALL(https://github.com/aquawicket/RmlUi/archive/documents_base_tag.zip RmlUi-master)
 ##DKRENAME(${DKDOWNLOAD}/documents_base_tag.zip ${DKDOWNLOAD}/RmlUi-master.zip)
 

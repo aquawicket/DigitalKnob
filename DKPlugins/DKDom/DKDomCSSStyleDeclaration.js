@@ -17,6 +17,10 @@ var CSSStyleDeclaration = function(pointer)
 		this[propertyName] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(this.pointer, propertyName);
 		return this[propertyName];
 	}
+	CSSStyleDeclaration.prototype.removeProperty = function(propertyName){
+		var oldValue = CPP_DKDomCSSStyleDeclaration_removeProperty(this.pointer, propertyName);
+		return oldValue;
+	}
 	CSSStyleDeclaration.prototype.setProperty = function(propertyName, propertyValue, priority){
 		CPP_DKDomCSSStyleDeclaration_setProperty(this.pointer, propertyName, propertyValue);
 		this[propertyName] = propertyValue;

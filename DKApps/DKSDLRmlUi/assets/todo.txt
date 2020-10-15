@@ -18,6 +18,11 @@ Drag a conduit line across the outside of the footing to the other "post"
 
 
 *** DIGITALKNOB ***
+I think we need to get rid of DKINSTALL in all the DKCMake stuff.
+I think it can add confussion and it only uses a few lines to download and install
+ 
+
+
 Move all DKWidget functions into DK.js
 Then move all gui related js up to DKRml.js
 DK.js will have access to a C++ EventTarget
