@@ -297,14 +297,6 @@ function DKWidget_InsertBefore(parent, element)
 	node.insertBefore(ele, par);
 }
 
-/////////////////////////////////////////////
-function DKWidget_RemoveAttribute(id, attrib)
-{
-	var element = byId(id);
-	if(!element){ return false; }
-	element.removeAttribute(attrib);
-}
-
 /////////////////////////
 function DKWidget_Cut(id)
 {
