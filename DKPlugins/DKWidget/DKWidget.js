@@ -105,8 +105,8 @@ function DKWidget_InsertBefore(parent, element)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
+	//FIXME: limit what variable can be to phase this out
 	if(typeof variable === "string"){ //id
-		//console.log("GetValue("+variable+") -> typeof variable === string\n");
 		var ele = byId(variable);
 		if(!ele){ console.log("DKWidget_GetValue("+variable+"): Cannot find element\n"); /*return false;*/ }
 		if(ele){
@@ -114,10 +114,8 @@ function DKWidget_GetValue(variable)
 				return ele.checked;
 			}
 			if(!ele.value){
-				//console.log("DKWidget_GetValue("+variable+"): Could not get ele.value\n");
 				return ele.innerHTML;
 			}
-			//console.log("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value; 
 		}
 		
@@ -126,22 +124,14 @@ function DKWidget_GetValue(variable)
 	}
 	
 	if(typeof variable === "object"){
-		//console.log("DKWidget_GetValue("+variable+") -> typeof variable === object\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.nodeType === "+variable.nodeType+"\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.tagName === "+variable.tagName+"\n");
-		//console.log("DKWidget_GetValue("+variable+") -> variable.type === "+variable.type+"\n");
 		if(variable.nodeType === 1){
-			//console.log("variable.tagName: "+variable.tagName+"\n");
 			if(variable.tagName === "INPUT"){
-				//console.log("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
 			return variable.innerHTML;
 		}
 		if(variable.type){ //event
 			var event = variable;
-			//console.log("GetValue("+variable+") -> variable.type === true\n");
-			//console.log("GetValue("+variable+") -> "+variable.type+"\n");
 			if(variable.type === "mousedown"){
 				return GetMouseButton(variable);
 			}
@@ -201,15 +191,12 @@ function DKWidget_GetValue(variable)
 				return width+","+height;
 			}
 			var ele = DKWidget_GetElement(event);
-			//console.log("DKWidget_GetValue("+variable+") -> "+ele.value+"\n");
 			return ele.value;
 		}
 		else{ //element or other object
 			if(variable.value){
-				//console.log("DKWidget_GetValue("+variable+") -> "+variable.value+"\n");
 				return variable.value;
 			}
-			//console.log("DKWidget_GetValue("+variable+") -> "+variable[2]+"\n");
 			return variable[2];
 		}
 	}
