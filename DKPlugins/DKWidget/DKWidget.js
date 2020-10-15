@@ -1,62 +1,106 @@
-/////////////////////////////////
-function DKWidget_AttachDrags(id)
+
+// *** ELEMENT CREATION *** //
+
+////////////////////////////////////////////////
+function DKWidget_CreateElement(parent, tag, id)
 {
-	var parent = byId(id);
-	if(!parent){ return false; }
-	var elements = parent.getElementsByTagName('*');
-	for (var i=0; i<elements.length; i++) {	
-		var x = elements[i];
-		
-		if(!DK_IE() && DK_GetBrowser() !== "RML"){
-			x.style.setProperty("pointer-events","all");
-		}
-		
-		if(x.getAttribute("drag") !== null){ 	//Drag events
-			var mov_tar = x.getAttribute("drag");	
-			x.onmousedown = function(event){DragStart(event, mov_tar);}
-		}
-		if(x.getAttribute("resize") !== null){ 	//Resize events
-			var res_tar = x.getAttribute("resize");	
-			x.onmousedown = function(event){ResizeStart(event, res_tar);}
-		}
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_CreateElement(): !(parent instanceof HTMLElement)");
+		return;
+	}
+	
+	//TODO - test typeof tag to be 'string' or 'tag' worthy
+			
+	var element = document.createElement(tag); //this could faild if 'tag' isn't a string
+	parent.appendChild(element); //This is not working on IE
+	
+	element.id = DK_GetAvailableId(id);
+	return element.id;
+	
+	//FIXME: return the element object, not the id
+	//return element;
+}
+
+//////////////////////////////////////////////////////
+function DKWidget_CreateElementBefore(parent, tag, id)
+{
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_CreateElementBefore("+parent+"): parent is not an instance of HTMLElement");
+		return;
+	}
+	
+	//TODO - test typeof tag to be 'string' or 'tag' worthy
+	
+	id = DK_GetAvailableId(id);
+	var element = document.createElement(tag);
+	element.id = id;
+	
+	var node = parent.parentNode;
+	if(!node){
+		console.error("InsertBefore(): could not get parentNode of parent\n");
+		return false;
+	}
+	
+	node.insertBefore(element, parent);
+	return id;
+}
+
+///////////////////////////////////////////////
+function DKWidget_PrependChild(parent, element)
+{
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_PrependChild(): parent is not an instance of HTMLElement");
+		return;
+	}
+	
+	if(!(element instanceof HTMLElement)){
+		console.error("DKWidget_PrependChild(): element is not an instance of HTMLElement");
+		return;
+	}
+	
+	var first_child = parent.firstChild;
+	if(first_child){
+		parent.insertBefore(element, first_child);
+	}
+	else{
+		parent.appendChild(element);
 	}
 }
 
-/////////////////////////////////////////
-function DKWidget_AddDragHandle(id, drag)
+///////////////////////////////////////////////
+function DKWidget_InsertBefore(parent, element)
 {
-	var element = byId(id);
-	if(!DK_IE() && DK_GetBrowser() !== "RML"){
-		element.style.setProperty("pointer-events","all");
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_InsertBefore(): parent is not an instance of HTMLElement");
+		return;
 	}
-	element.onmousedown = function(event){ DragStart(event, drag); }
-	element.addEventListener('touchstart', function(event){ DragStart(event, drag); }, false);
-	return true;
+	if(!(element instanceof HTMLElement)){
+		console.error("DKWidget_InsertBefore(): element is not an instance of HTMLElement");
+		return;
+	}
+
+	var node = parent.parentNode;
+	if(!node){
+		console.error("DKWidget_InsertBefore(): could not get parentNode of parent\n");
+		return false;
+	}
+	
+	node.insertBefore(element, parent);
 }
 
-/////////////////////////////////////////////
-function DKWidget_AddResizeHandle(id, resize)
-{
-	var element = byId(id);
-	if(!DK_IE() && DK_GetBrowser() !== "RML"){
-		element.style.setProperty("pointer-events","all");
-	}
-	element.onmousedown = function(event){ ResizeStart(event, resize); }
-	element.addEventListener('touchstart', function(event){ ResizeStart(event, resize); }, false);
-	return true;
-}
 
-//////////////////////////////////////
-function DKWidget_RemoveDragHandle(id)
-{
-	if(!id){ return; }
-	var element = byId(id);
-	if(!DK_IE()){
-		//element.style.setProperty("pointer-events","none");
-	}
-	element.onmousedown = 0;
-	//element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
-}
+
+
+
+
+
+
+
+
+
+
+
+// *** EVENTS & VALUES *** //
 
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
@@ -174,121 +218,88 @@ function DKWidget_GetValue(variable)
 	return false;
 }
 
-////////////////////////////////////////
-function DKWidget_GetInnerHtmlString(id)
+
+
+
+
+
+
+
+
+
+
+
+// *** DRAG & RESIZE *** //
+
+/////////////////////////////////
+function DKWidget_AttachDrags(id)
 {
-	if(!id){ console.warn("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
-	var element = byId(id);
-	for(var i = 0; i < element.childNodes.length; i++){
-		var curNode = element.childNodes[i];
-		if(curNode.nodeName === "#text"){
-			return curNode.nodeValue;
+	var parent = byId(id);
+	if(!parent){ return false; }
+	var elements = parent.getElementsByTagName('*');
+	for (var i=0; i<elements.length; i++) {	
+		var x = elements[i];
+		
+		if(!DK_IE() && DK_GetBrowser() !== "RML"){
+			x.style.setProperty("pointer-events","all");
+		}
+		
+		if(x.getAttribute("drag") !== null){ 	//Drag events
+			var mov_tar = x.getAttribute("drag");	
+			x.onmousedown = function(event){DragStart(event, mov_tar);}
+		}
+		if(x.getAttribute("resize") !== null){ 	//Resize events
+			var res_tar = x.getAttribute("resize");	
+			x.onmousedown = function(event){ResizeStart(event, res_tar);}
 		}
 	}
 }
 
-////////////////////////////////////////////////
-function DKWidget_SetInnerHtmlString(id, string)
+/////////////////////////////////////////
+function DKWidget_AddDragHandle(id, drag)
 {
 	var element = byId(id);
-	for(var i = 0; i < element.childNodes.length; i++){
-		var curNode = element.childNodes[i];
-		if(curNode.nodeName === "#text"){
-			curNode.nodeValue = string;
-			return;
-		}
+	if(!DK_IE() && DK_GetBrowser() !== "RML"){
+		element.style.setProperty("pointer-events","all");
 	}
+	element.onmousedown = function(event){ DragStart(event, drag); }
+	element.addEventListener('touchstart', function(event){ DragStart(event, drag); }, false);
+	return true;
 }
 
-////////////////////////////////////////////////
-function DKWidget_CreateElement(parent, tag, id)
+/////////////////////////////////////////////
+function DKWidget_AddResizeHandle(id, resize)
 {
-	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_CreateElement(): !(parent instanceof HTMLElement)");
-		return;
+	var element = byId(id);
+	if(!DK_IE() && DK_GetBrowser() !== "RML"){
+		element.style.setProperty("pointer-events","all");
 	}
-	
-	//TODO - test typeof tag to be 'string' or 'tag' worthy
-			
-	var element = document.createElement(tag); //this could faild if 'tag' isn't a string
-	parent.appendChild(element); //This is not working on IE
-	
-	element.id = DK_GetAvailableId(id);
-	return element.id;
-	
-	//FIXME: return the element object, not the id
-	//return element;
+	element.onmousedown = function(event){ ResizeStart(event, resize); }
+	element.addEventListener('touchstart', function(event){ ResizeStart(event, resize); }, false);
+	return true;
 }
 
-//////////////////////////////////////////////////////
-function DKWidget_CreateElementBefore(parent, tag, id)
+//////////////////////////////////////
+function DKWidget_RemoveDragHandle(id)
 {
-	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_CreateElementBefore("+parent+"): parent is not an instance of HTMLElement");
-		return;
+	if(!id){ return; }
+	var element = byId(id);
+	if(!DK_IE()){
+		//element.style.setProperty("pointer-events","none");
 	}
-	
-	id = DK_GetAvailableId(id);
-	var ele = document.createElement(tag);
-	ele.id = id;
-	
-	var node = parent.parentNode;
-	if(!node){
-		console.error("InsertBefore(): could not get parentNode of parent\n");
-		return false;
-	}
-	
-	node.insertBefore(ele, parent);
-	return id;
+	element.onmousedown = 0;
+	//element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
 }
 
-///////////////////////////////////////////////
-function DKWidget_PrependChild(parent, element)
-{
-	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_PrependChild(): parent is not an instance of HTMLElement");
-		return;
-	}
-	
-	if(!(element instanceof HTMLElement)){
-		console.error("DKWidget_PrependChild(): element is not an instance of HTMLElement");
-		return;
-	}
-	
-	var first_child = parent.firstChild;
-	if(first_child){
-		parent.insertBefore(element, first_child);
-	}
-	else{
-		parent.appendChild(element);
-	}
-}
 
-///////////////////////////////////////////////
-function DKWidget_InsertBefore(parent, element)
-{
-	var par;
-	if(typeof parent === "string"){
-		par = byId(parent);
-	}
-	else{
-		par = parent;
-	}
-	var ele;
-	if(typeof element === "string"){
-		ele = byId(element);
-	}
-	else{
-		ele = element;
-	}
-	var node = par.parentNode;
-	if(!node){
-		console.error("InsertBefore(): could not get parent of "+parent+"\n");
-		return false;
-	}
-	
-	node.insertBefore(ele, par);
-}
+
+
+
+
+
+
+
+// *** CLIPBOARD *** //
 
 /////////////////////////
 function DKWidget_Cut(id)
@@ -363,4 +374,39 @@ function DKWidget_removeSelection(id)
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;
+}
+
+
+
+
+
+
+
+
+// *** UNKNOWN *please test* *** //
+
+////////////////////////////////////////
+function DKWidget_GetInnerHtmlString(id)
+{
+	if(!id){ console.warn("DKWidget_GetInnerHtmlString(): empty id\n"); return "";}
+	var element = byId(id);
+	for(var i = 0; i < element.childNodes.length; i++){
+		var curNode = element.childNodes[i];
+		if(curNode.nodeName === "#text"){
+			return curNode.nodeValue;
+		}
+	}
+}
+
+////////////////////////////////////////////////
+function DKWidget_SetInnerHtmlString(id, string)
+{
+	var element = byId(id);
+	for(var i = 0; i < element.childNodes.length; i++){
+		var curNode = element.childNodes[i];
+		if(curNode.nodeName === "#text"){
+			curNode.nodeValue = string;
+			return;
+		}
+	}
 }
