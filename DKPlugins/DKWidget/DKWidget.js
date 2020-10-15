@@ -204,22 +204,20 @@ function DKWidget_SetInnerHtmlString(id, string)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_CreateElement("+parent+"): parent is not an instance of HTMLElement");
+		console.error("DKWidget_CreateElement(): !(parent instanceof HTMLElement)");
 		return;
 	}
 	
-	id = DK_GetAvailableId(id);
-		
-	var ele = document.createElement(tag);
-	if(!ele){ console.error("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
-	ele.id = id;
+	//TODO - test typeof tag to be 'string' or 'tag' worthy
+			
+	var element = document.createElement(tag); //this could faild if 'tag' isn't a string
+	parent.appendChild(element); //This is not working on IE
 	
-	parent.appendChild(ele); //This is not working on IE
+	element.id = DK_GetAvailableId(id);
+	return element.id;
 	
 	//FIXME: return the element object, not the id
-	//return ele;
-	
-	return id;
+	//return element;
 }
 
 //////////////////////////////////////////////////////
@@ -231,17 +229,16 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 	}
 	
 	id = DK_GetAvailableId(id);
-	var par = byId(parent);
 	var ele = document.createElement(tag);
 	ele.id = id;
 	
-	var node = par.parentNode;
+	var node = parent.parentNode;
 	if(!node){
-		console.error("InsertBefore(): could not get parent of "+parent+"\n");
+		console.error("InsertBefore(): could not get parentNode of parent\n");
 		return false;
 	}
 	
-	node.insertBefore(ele, par);
+	node.insertBefore(ele, parent);
 	return id;
 }
 
