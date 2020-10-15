@@ -13,6 +13,7 @@ public:
 	bool Init();
 	
 	static int getPropertyValue(duk_context* ctx);
+	static int removeProperty(duk_context* ctx);
 	static int setProperty(duk_context* ctx);
 };
 
