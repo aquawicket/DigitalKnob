@@ -1,3 +1,5 @@
+console.warn("DKNotepadShortcuts");
+
 //////////////////////////////////
 function DKNotepadShortcuts_Init()
 {
@@ -14,4 +16,5 @@ function DKNotepadShortcuts_End()
 function DKNotepadShortcuts_OnEvent(event)
 {
 	console.warn("DKNotepadShortcuts_OnEvent(): event.type:"+event.type);
+	console.warn("event.code = "+event.code);
 }
