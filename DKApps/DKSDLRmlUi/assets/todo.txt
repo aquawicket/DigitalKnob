@@ -1,5 +1,23 @@
 ~! THE LIST !~
 
+*** LOOK ***
+See if we have some 3/4" conduit + T's plus elbows.
+
+
+*** BUY ***
+2 = 4x4 x 6' Treated posts
+100ft Spool 14/2 romex/ if lights on outside posts.
+50ft Spool 14/2 romex/ if lights on the inside posts.
+
+
+*** DO ***
+Scrape the entry line on the inside of the gate and replant the curb wood.
+Drag a conduit line across the outside of the footing to the other "post"
+
+
+
+
+*** DIGITALKNOB ***
 Move all DKWidget functions into DK.js
 Then move all gui related js up to DKRml.js
 DK.js will have access to a C++ EventTarget
