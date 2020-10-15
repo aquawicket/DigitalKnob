@@ -2,7 +2,7 @@
 function DKNotepadFormat_Init()
 {
 	DK_Create("DKNotepad/DKNotepadFormat.html,DKNotepad/DKNotepad.html");
-	window.addEventListener("mousedown", DKNotepadFormat_OnEvent);
+	document.addEventListener("mousedown", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_WordWrap").addEventListener("click", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_Font").addEventListener("click", DKNotepadFormat_OnEvent);
 }
@@ -10,7 +10,7 @@ function DKNotepadFormat_Init()
 //////////////////////////////
 function DKNotepadFormat_End()
 {
-	window.removeEventListener("mousedown", DKNotepadFormat_OnEvent);
+	document.removeEventListener("mousedown", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_WordWrap").removeEventListener("click", DKNotepadFormat_OnEvent);
 	byId("DKNotepadFormat_Font").removeEventListener("click", DKNotepadFormat_OnEvent);
 	DK_Close("DKNotepad/DKNotepadFormat.html");
@@ -26,7 +26,7 @@ function DKNotepadFormat_OnEvent(event)
 		console.log("DKNotepadFormat_Fontn");
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKNotepad/DKNotepadFormat.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}

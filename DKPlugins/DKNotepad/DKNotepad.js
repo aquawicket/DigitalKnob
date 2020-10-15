@@ -42,19 +42,14 @@ function DKNotepad_OnEvent(event)
 		});
 	}
 	if(event.type === "OpenFile"){
-		var file = DK_GetValue(event);
-		//console.log("OpenFile: "+file);
-		DKNotepad_Open(file)
+		DKNotepad_Open(event.value);
 	}
 	if(event.type === "SaveFile"){
-		var file = event.value;//DK_GetValue(event);
-		//console.log(("SaveFile: "+file+"\n");
-		DKNotepad_Save(file)
+		DKNotepad_Save(event.value);
 	}
 	//if(event.type === "SetFile"){
-	//	DKNotepad_Open(DK_GetValue(event));
+	//	DKNotepad_Open(event.value);
 	//}
-	if(!event.currentTarget){ return; }
 	if(event.currentTarget.id === "DKNotepad_File"){
 		DK_Create("DKNotepad/DKNotepadFile.js", function(){});
 	}

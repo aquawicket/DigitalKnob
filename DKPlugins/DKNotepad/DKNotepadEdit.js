@@ -2,7 +2,7 @@
 function DKNotepadEdit_Init()
 {
 	DK_Create("DKNotepad/DKNotepadEdit.html,DKNotepad/DKNotepad.html");
-	window.addEventListener("mousedown", DKNotepadEdit_OnEvent);
+	document.addEventListener("mousedown", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Undo").addEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Cut").addEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Copy").addEventListener("click", DKNotepadEdit_OnEvent);
@@ -14,7 +14,7 @@ function DKNotepadEdit_Init()
 ////////////////////////////
 function DKNotepadEdit_End()
 {
-	window.removeEventListener("mousedown", DKNotepadEdit_OnEvent);
+	document.removeEventListener("mousedown", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Undo").removeEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Cut").removeEventListener("click", DKNotepadEdit_OnEvent);
 	byId("DKNotepadEdit_Copy").removeEventListener("click", DKNotepadEdit_OnEvent);
@@ -47,7 +47,7 @@ function DKNotepadEdit_OnEvent(event)
 	}
 	
 	// FIXME
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKNotepad/DKNotepadEdit.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}
