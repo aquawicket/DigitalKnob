@@ -213,9 +213,11 @@ function DKWidget_CreateElement(parent, tag, id)
 	var ele = document.createElement(tag);
 	if(!ele){ console.error("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
 	ele.id = id;
-	//ele.setAttribute("id", id);
 	
 	parent.appendChild(ele); //This is not working on IE
+	
+	//FIXME: return the element object, not the id
+	//return ele;
 	
 	return id;
 }

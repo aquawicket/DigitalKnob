@@ -18,6 +18,15 @@ Drag a conduit line across the outside of the footing to the other "post"
 
 
 *** DIGITALKNOB ***
+We got a bad thing going on with DKWidget_CreateElement() returning a name.
+That function will return the id of the created element..  
+And here's the snuiff..   if the name id already exists, it will spin a number system after.
+If we need an id name finding system, that should be a seperate function.
+We need to find remove DKWidget_CreateElement..  thanks
+
+Since it uses a counter to create new names..  it's a shortcut function that will cause some work.
+
+
 I think we need to get rid of DKINSTALL in all the DKCMake stuff.
 I think it can add confussion and it only uses a few lines to download and install
  
