@@ -116,6 +116,7 @@ var Element = function(pointer)
 	});
 	
 	
+	// Methods
 	Element.prototype.attachShadow = function(){
 		//TODO
 	}
@@ -203,7 +204,7 @@ var Element = function(pointer)
 		//TODO
 	}
 	Element.prototype.removeAttribute = function(){
-		//TODO
+		CPP_DKDomElement_removeAttribute(this.pointer, attribute); //returns undefined
 	}
 	Element.prototype.removeAttributeNS = function(){
 		//TODO
