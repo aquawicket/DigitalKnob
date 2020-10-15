@@ -1,4 +1,4 @@
-~! THE LIST !~    2.1
+~! THE LIST !~    10/15/20
 
 *** PRIORITY ***
 EVERY TIME you open Your Phone you see this.
@@ -17,8 +17,6 @@ See if we have some 3/4" conduit + T's plus elbows.
 *** DO ***
 Scrape the entry line on the inside of the gate and replant the curb wood.
 Drag a conduit line across the outside of the footing to the other "post"
-
-
 
 
 *** DIGITALKNOB ***
@@ -49,6 +47,7 @@ We want to code from inside DK..  DKNotepad and DKSolution should get us there.
 P.S. DKSolution needs to get renamesd to DKFileExplorer    
 
 *** DKNotepad ***
+textarea steals keyt events from documnet
 Get DKNotepad to listen for Ctrl + s
 DKNotepadFile_Exit() breaks DK_Close()
 Get Copy and Paste working
