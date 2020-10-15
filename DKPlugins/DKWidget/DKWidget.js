@@ -204,7 +204,7 @@ function DKWidget_SetInnerHtmlString(id, string)
 function DKWidget_CreateElement(parent, tag, id)
 {
 	if(!(parent instanceof HTMLElement)){
-		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
+		console.error("DKWidget_CreateElement("+parent+"): parent is not an instance of HTMLElement");
 		return;
 	}
 	
@@ -225,6 +225,11 @@ function DKWidget_CreateElement(parent, tag, id)
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_CreateElementBefore("+parent+"): parent is not an instance of HTMLElement");
+		return;
+	}
+	
 	id = DK_GetAvailableId(id);
 	var par = byId(parent);
 	var ele = document.createElement(tag);
@@ -243,31 +248,22 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 ///////////////////////////////////////////////
 function DKWidget_PrependChild(parent, element)
 {
-	var par;
-	if(typeof parent === "string"){
-		par = byId(parent);
-	}
-	else{
-		par = parent;
-	}
-	var ele;
-	if(typeof element === "string"){
-		ele = byId(element);
-	}
-	else{
-		ele = element;
+	if(!(parent instanceof HTMLElement)){
+		console.error("DKWidget_PrependChild(): parent is not an instance of HTMLElement");
+		return;
 	}
 	
-	if(!par){
-		console.error("PrependChild("+parent+", "+element+"): par invalid\n");
-		return false;
+	if(!(element instanceof HTMLElement)){
+		console.error("DKWidget_PrependChild(): element is not an instance of HTMLElement");
+		return;
 	}
-	var first_child = par.firstChild;
+	
+	var first_child = parent.firstChild;
 	if(first_child){
-		par.insertBefore(ele, first_child);
+		parent.insertBefore(element, first_child);
 	}
 	else{
-		par.appendChild(ele);
+		parent.appendChild(element);
 	}
 }
 

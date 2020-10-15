@@ -35,7 +35,7 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		CPP_DKDuktape_Create("DKRocket");
 		DKRocket_LoadUrl("DKRocket/blank.html");
 		CPP_DKDuktape_Create("DKWidget");
-		var iframe = DKWidget_CreateElement(byId("body"), "iframe", "DKCef_frame");
+		var iframe = DKWidget_CreateElement(byId("body"), "iframe", "DKCef_frame"); //FIXME: this function is deprecated
 		byId(iframe).style.position = "absolute";
 		byId(iframe).style.top = "0rem";
 		byId(iframe).style.left = "0rem";
