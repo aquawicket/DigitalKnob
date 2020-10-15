@@ -179,14 +179,7 @@ function DKWidget_GetValue(variable)
 ///////////////////////////////////////////////
 function DKWidget_RemoveProperty(id, parameter)
 {
-	var element = byId(id);
-	if(!element){ 
-		console.error("DKWidget_RemoveProperty(): element invalid\n");
-		return; 
-	}
-	if(element.style[parameter]){
-		element.style[parameter] = null;
-	}
+	var oldValue = byId(id).style.removeProperty(parameter);
 }
 
 ////////////////////////////////////////
