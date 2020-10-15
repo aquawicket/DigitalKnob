@@ -61,8 +61,6 @@ function DKWidget_RemoveDragHandle(id)
 ////////////////////////////////////
 function DKWidget_GetValue(variable)
 {
-	if(!variable){ console.log("variable empty\n"); return; }
-
 	if(typeof variable === "string"){ //id
 		//console.log("GetValue("+variable+") -> typeof variable === string\n");
 		var ele = byId(variable);
