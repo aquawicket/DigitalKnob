@@ -30,7 +30,7 @@ function DKMenu_ValidatePosition(id)
 	byId(id).style.top = window.mouseY+"rem";
 	byId(id).style.left = window.mouseX+"px";
 	byId(id).style.left = window.mouseX+"rem";
-	DKWidget_RemoveProperty(id, "right");
+	byId(id).style.removeProperty("right");
 	
 	//make sure menu is within window
 	var win_width = Number(document.body.clientWidth);

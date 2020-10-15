@@ -176,12 +176,6 @@ function DKWidget_GetValue(variable)
 	return false;
 }
 
-///////////////////////////////////////////////
-function DKWidget_RemoveProperty(id, parameter)
-{
-	var oldValue = byId(id).style.removeProperty(parameter);
-}
-
 ////////////////////////////////////////
 function DKWidget_GetInnerHtmlString(id)
 {

@@ -41,6 +41,6 @@ function DKNotepadFormat_WordWrap()
 		byId("DKNotepad_Text").style.whiteSpace = "nowrap";
 	}
 	else{
-		DKWidget_RemoveProperty("DKNotepad_Text","white-space");
+		byId("DKNotepad_Text").style.removeProperty("white-space");
 	}
 }

@@ -84,8 +84,8 @@ function DKFrame_Html(id)
 	byId(id).style.left = "0rem";
 	byId(id).style.width = "100%";
 	byId(id).style.bottom = "-1rem";
-	DKWidget_RemoveProperty(id, "right");
-	DKWidget_RemoveProperty(id, "height");
+	byId(id).style.removeProperty("right");
+	byId(id).style.removeProperty("height");
 	
 	DKFrame_CreateResize(frame);
 	return frame;
@@ -114,8 +114,8 @@ function DKFrame_Iframe(title, url, width, height)
 	byId(iframe).style.left = "0rem";
 	byId(iframe).style.width = "100%";
 	byId(iframe).style.bottom = "0rem";
-	DKWidget_RemoveProperty(iframe, "height");
-	DKWidget_RemoveProperty(iframe, "right");
+	byId(iframe).style.removeProperty("height");
+	byId(iframe).style.removeProperty("right");
 	byId(frame).addEventListener("mousedown", DKFrame_OnEvent);
 	
 	DKFrame_CreateResize(frame);
@@ -215,7 +215,7 @@ function DKFrame_CreateResize(frame)
 {
 	var resize = DKWidget_CreateElement(byId(frame), "div", "DKFrame_resize");
 	//byId(resize).style.backgroundImage = "url(\"DKGui/resize.png\")";
-	DKWidget_RemoveProperty(resize, "top");
+	byId(resize).style.removeProperty("top");
 	byId(resize).style.position = "absolute";
 	byId(resize).style.right = "0rem";
 	byId(resize).style.bottom = "0rem";
@@ -292,8 +292,8 @@ function DKFrame_MaximizeButton(id)
 		byId(frame).style.left = "0rem";
 		byId(frame).style.right = "0rem";
 		byId(frame).style.bottom = "0rem";
-		DKWidget_RemoveProperty(frame, "width");
-		DKWidget_RemoveProperty(frame, "height");
+		byId(frame).style.removeProperty("width");
+		byId(frame).style.removeProperty("height");
 		
 		var elements = DK_GetElements(byId(frame));
 		var arry = elements.split(",");
