@@ -14,7 +14,7 @@ DK_Create("DKDebug/DKDebug.js", function(){
 	
 	DK_Create("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Html("DKNotepad/DKNotepad.html");
-		DKNotepad_Open("todo.txt");
+		DKNotepad_Open("DK/todo.txt");
 	});
 	
 	/*
@@ -22,6 +22,7 @@ DK_Create("DKDebug/DKDebug.js", function(){
 		DKFrame_Html("DKInputTest/DKInput.html");
 	});
 	*/
+	
 	//window.location.href = "DKWebtest/index.html";
 	
 });
