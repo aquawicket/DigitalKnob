@@ -2,7 +2,7 @@
 function DKAdminMenu_Init()
 {
 	DK_Create("DKAdmin/DKAdminMenu.html", function(){
-		window.addEventListener("mousedown", DKAdminMenu_OnEvent);
+		document.addEventListener("mousedown", DKAdminMenu_OnEvent);
 		byId("OpenSource").addEventListener("click", DKAdminMenu_OnEvent);
 		byId("OpenDebug").addEventListener("click", DKAdminMenu_OnEvent);
 		byId("PushDKFiles").addEventListener("click", DKAdminMenu_OnEvent);
@@ -28,7 +28,7 @@ function DKAdminMenu_Init()
 //////////////////////////
 function DKAdminMenu_End()
 {
-	window.removeEventListener("mousedown", DKAdminMenu_OnEvent);
+	document.removeEventListener("mousedown", DKAdminMenu_OnEvent);
 	byId("OpenSource").removeEventListener("click", DKAdminMenu_OnEvent);
 	byId("OpenDebug").removeEventListener("click", DKAdminMenu_OnEvent);
 	byId("PushDKFiles").removeEventListener("click", DKAdminMenu_OnEvent);
@@ -142,7 +142,7 @@ function DKAdminMenu_OnEvent(event)
 		DKAdminMenu_Run(byId("DKAdminMenu_Run").value);
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKAdmin/DKAdminMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}

@@ -1,2 +1,0 @@
-##DKDEPEND(DKRocket)
-DKASSETS(DKScale)

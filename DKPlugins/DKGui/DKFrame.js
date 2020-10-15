@@ -130,9 +130,9 @@ function DKFrame_Iframe(title, url, width, height)
 //////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height)
 {
-	if(width === "100%"){ width = window.innerWidth-100; }
-	if(height === "100%"){ height = window.innerHeight-21-100; }
-	if(!width){ width = window.innerWidth / 2; }
+	if(width === "100%"){ width = window.innerWidth-100; } //TESTME
+	if(height === "100%"){ height = window.innerHeight-21-100; } //TESTME
+	if(!width){ width = window.innerWidth / 2; } 
 	if(!height){ height = window.innerHeight / 2; }
 	var newheight = parseFloat(height)+21;
 	var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
