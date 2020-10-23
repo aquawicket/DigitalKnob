@@ -4,3 +4,6 @@ https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/
 C2118 error with Windows Kits 10.0.18362.0 in winnt.h
 https://developercommunity.visualstudio.com/content/problem/739697/c2118-error-with-windows-kits-100183620-in-winnth.html
 
+3 Ways to Fix the CORS Error — and How the Access-Control-Allow-Origin Header Works
+https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
+
