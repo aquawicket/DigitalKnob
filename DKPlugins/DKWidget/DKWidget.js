@@ -41,51 +41,6 @@ function DKWidget_CreateElementBefore(parent, tag, id)
 	return element.id; //FIXME: return the element object, not the id
 }
 
-///////////////////////////////////////////////
-function DKWidget_PrependChild(parent, element)
-{
-	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_PrependChild(): parent is not an instance of HTMLElement");
-		return;
-	}
-	
-	if(!(element instanceof HTMLElement)){
-		console.error("DKWidget_PrependChild(): element is not an instance of HTMLElement");
-		return;
-	}
-	
-	var first_child = parent.firstChild;
-	if(first_child){
-		parent.insertBefore(element, first_child);
-	}
-	else{
-		parent.appendChild(element);
-	}
-}
-
-///////////////////////////////////////////////
-function DKWidget_InsertBefore(parent, element)
-{
-	if(!(parent instanceof HTMLElement)){
-		console.error("DKWidget_InsertBefore(): parent is not an instance of HTMLElement");
-		return;
-	}
-	if(!(element instanceof HTMLElement)){
-		console.error("DKWidget_InsertBefore(): element is not an instance of HTMLElement");
-		return;
-	}
-
-	var node = parent.parentNode;
-	if(!node){
-		console.error("DKWidget_InsertBefore(): could not get parentNode of parent\n");
-		return false;
-	}
-	
-	node.insertBefore(element, parent);
-}
-
-
-
 
 
 
