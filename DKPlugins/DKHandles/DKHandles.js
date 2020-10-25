@@ -99,7 +99,7 @@ function DKHandles_UpdateWindowList()
 	
 	//RemoveDuplicates(arry);
 	for(var i=0; i<arry.length; i++){
-		var element = DKWidget_CreateElement(byId("windows"), "option", "wintitle");
+		var element = DK_CreateElement(byId("windows"), "option", "wintitle");
 		byId(element).value = arry[i];
 		byId(element).style.whiteSpace = "nowrap";
 		byId(element, "click", DKHandles_OnEvent);

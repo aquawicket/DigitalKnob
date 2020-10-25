@@ -35,7 +35,7 @@ function DKMidiDialog_UpdatePorts()
 	var list = inputs.split(",");
 	byId("DKMidiDialogInputs").innerHTML = "";
 	for(var i=0; i<list.length; i++){
-		var element = DKWidget_CreateElement(byId("DKMidiDialogInputs"), "option", "DKMidiDialogInput");
+		var element = DK_CreateElement(byId("DKMidiDialogInputs"), "option", "DKMidiDialogInput");
 		byId(element).value = list[i];
 		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
 		byId(element).innerHTML = list[i];
@@ -45,7 +45,7 @@ function DKMidiDialog_UpdatePorts()
 	var outlist = outputs.split(",");
 	byId("DKMidiDialogOutputs").innerHTML = "";
 	for(var i=0; i<outlist.length; i++){
-		var element = DKWidget_CreateElement(byId("DKMidiDialogOutputs"), "option", "DKMidiDialogOutput");
+		var element = DK_CreateElement(byId("DKMidiDialogOutputs"), "option", "DKMidiDialogOutput");
 		byId(element).value = outlist[i];
 		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
 		byId(element).innerHTML = outlist[i];

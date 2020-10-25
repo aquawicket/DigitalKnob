@@ -38,8 +38,8 @@ function DKAudio_PlaySound(file)
 ////////////////////////////////
 function DKAudio_OpenMusic(file)
 { 
-	var audio = DKWidget_CreateElement(document.body, "audio", "audio");
-	var source = DKWidget_CreateElement(byId(audio), "source", "source");
+	var audio = DK_CreateElement(document.body, "audio", "audio");
+	var source = DK_CreateElement(byId(audio), "source", "source");
 	byId(source).type = "audio/ogg";
 	byId(source).src = file;
 	byId("audio").ontimeupdate = function(){ DKAudio_TimeUpdate() };

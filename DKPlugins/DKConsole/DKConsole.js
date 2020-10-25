@@ -46,7 +46,7 @@ function DKConsole_OnEvent(event)
 /////////////////////////////////
 function DKConsole_Notify(string)
 {
-	var line = DKWidget_CreateElement(byId("DKConsole_Content"), "a", "DKConsole_line");
+	var line = DK_CreateElement(byId("DKConsole_Content"), "a", "DKConsole_line");
 	byId(line).style.display = "block";
 	byId(line).style.color = DKConsole_color;
 	byId(line).innerHTML = string;

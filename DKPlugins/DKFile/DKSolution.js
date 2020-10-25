@@ -173,7 +173,7 @@ function DKSolution_UpdatePath(path)
 
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
+			var element2 = DK_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
 			byId(element2).setAttribute("class", "option");
 			var value = aPath+"/"+files[d]+"/";
 			byId(element2).setAttribute("value", value);
@@ -191,7 +191,7 @@ function DKSolution_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
+			var element3 = DK_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
 			byId(element3).setAttribute("class", "option");
 			var value = aPath+"/"+files[f];
 			byId(element3).setAttribute("value", value);

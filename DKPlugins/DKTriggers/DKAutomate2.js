@@ -89,9 +89,9 @@ function DKAutomate2_SelectTrigger()
 	for(var c = 0; c < causes.length; c++){
 		if(causes[c].trigger !== current_trigger){ continue; }
 		
-		var cause = DKWidget_CreateElement(byId("Causes"), "div", "CauseDiv");
+		var cause = DK_CreateElement(byId("Causes"), "div", "CauseDiv");
 		
-		var command = DKWidget_CreateElement(byId(cause), "input", "CauseCommand");
+		var command = DK_CreateElement(byId(cause), "input", "CauseCommand");
 		byId(command).type = "text";
 		byId(command).stylewidth = "100px";
 		byId(command).style.height = "18px";
@@ -101,7 +101,7 @@ function DKAutomate2_SelectTrigger()
 		byId(command).value = causes[c].command;
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var1 = DKWidget_CreateElement(byId(cause), "input", "CauseVar1");
+		var var1 = DK_CreateElement(byId(cause), "input", "CauseVar1");
 		byId(var1).type = "text";
 		byId(var1).style.width = "100px";
 		byId(var1).style.height = "18px";
@@ -111,7 +111,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var1).value = causes[c].var1;
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var2 = DKWidget_CreateElement(byId(cause), "input", "CauseVar2");
+		var var2 = DK_CreateElement(byId(cause), "input", "CauseVar2");
 		byId(var2).type = "text";
 		byId(var2).style.width = "100px;
 		byId(var2).style.height = "18px";
@@ -121,7 +121,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var2).value = causes[c].var2;
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var3 = DKWidget_CreateElement(byId(cause), "input", "CauseVar3");
+		var var3 = DK_CreateElement(byId(cause), "input", "CauseVar3");
 		byId(var3).type = "text";
 		byId(var3).style.width = "100px";
 		byId(var3).style.height = "18px";
@@ -131,7 +131,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var3).value = causes[c].var3;
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
-		var button = DKWidget_CreateElement(byId(cause), "button", "DeleteCause");
+		var button = DK_CreateElement(byId(cause), "button", "DeleteCause");
 		byId(button).style.width = "50px";
 		byId(button).style.height = "18px";
 		byId(button).style.display = "inline-block";
@@ -141,7 +141,7 @@ function DKAutomate2_SelectTrigger()
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
-	var button = DKWidget_CreateElement(byId("Causes"), "button", "NewCause");
+	var button = DK_CreateElement(byId("Causes"), "button", "NewCause");
 	byId(button, "width", "50px");
 	byId(button, "height", "18px");
 	byId(button, "border-width", "1px");
@@ -153,9 +153,9 @@ function DKAutomate2_SelectTrigger()
 	for(var e = 0; e < effects.length; e++){
 		if(effects[e].trigger !== current_trigger){ continue; }
 		
-		var effect = DKWidget_CreateElement(byId("Effects"), "div", "EffectDiv");
+		var effect = DK_CreateElement(byId("Effects"), "div", "EffectDiv");
 
-		var command = DKWidget_CreateElement(byId(effect), "input", "EffectCommand");
+		var command = DK_CreateElement(byId(effect), "input", "EffectCommand");
 		byId(command).type = "text";
 		byId(command, "width", "100px");
 		byId(command, "height", "18px");
@@ -165,7 +165,7 @@ function DKAutomate2_SelectTrigger()
 		byId(command).value = effects[e].command;
 		byId(command).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var1 = DKWidget_CreateElement(byId(effect), "input", "EffectVar1");
+		var var1 = DK_CreateElement(byId(effect), "input", "EffectVar1");
 		byId(var1).type = "text";
 		byId(var1, "width", "100px");
 		byId(var1, "height", "18px");
@@ -175,7 +175,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var1).value = effects[e].var1;
 		byId(var1).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var2 = DKWidget_CreateElement(byId(effect), "input", "EffectVar2");
+		var var2 = DK_CreateElement(byId(effect), "input", "EffectVar2");
 		byId(var2).type = "text";
 		byId(var2).style  "width", "100px");
 		byId(var2).style  "height", "18px");
@@ -185,7 +185,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var2).value = effects[e].var2;
 		byId(var2).addEventListener("change", DKAutomate2_OnEvent);
 
-		var var3 = DKWidget_CreateElement(byId(effect), "input", "EffectVar3");
+		var var3 = DK_CreateElement(byId(effect), "input", "EffectVar3");
 		byId(var3).type = "text";
 		byId(var3, "width", "100px");
 		byId(var3, "height", "18px");
@@ -195,7 +195,7 @@ function DKAutomate2_SelectTrigger()
 		byId(var3).value = effects[e].var3;
 		byId(var3).addEventListener("change", DKAutomate2_OnEvent);
 
-		var button = DKWidget_CreateElement(byId(effect), "button", "DeleteEffect");
+		var button = DK_CreateElement(byId(effect), "button", "DeleteEffect");
 		byId(button, "width", "50px");
 		byId(button, "height", "18px");
 		byId(button, "display", "inline-block");
@@ -205,7 +205,7 @@ function DKAutomate2_SelectTrigger()
 		byId(button).addEventListener("click", DKAutomate2_OnEvent);
 	}
 
-	var button2 = DKWidget_CreateElement(byId("Effects"), "button", "NewEffect");
+	var button2 = DK_CreateElement(byId("Effects"), "button", "NewEffect");
 	byId(button2, "width", "50px");
 	byId(button2, "height", "18px");
 	byId(button2, "border-width", "1px");

@@ -176,7 +176,7 @@ function DKSaveFile_UpdatePath(path)
 
 	for(var d=0; d<files.length; d++){
 		if(CPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
-			var element2 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFolder");
+			var element2 = DK_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFolder");
 			var value = aPath+"/"+files[d];
 			byId(element2).value = value;
 			byId(element2).style.whiteSpace = "nowrap";
@@ -190,7 +190,7 @@ function DKSaveFile_UpdatePath(path)
 
 	for(var f=0; f<files.length; f++){
 		if(!CPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
-			var element3 = DKWidget_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFile");
+			var element3 = DK_CreateElement(byId("DKSaveFileMenu2"), "option", "DKSaveFileFile");
 			var value = aPath+"/"+files[f];
 			byId(element3).value = value;
 			byId(element3).style.whiteSpace = "nowrap";

@@ -117,7 +117,7 @@ function DKAutomate_UpdateValues()
 
 	if(!triggers){return;}
 	for(var i = 0; i < triggers.length; i++){
-		var option = DKWidget_CreateElement(byId("DKA-TriggerList"), "option", "Trigger");
+		var option = DK_CreateElement(byId("DKA-TriggerList"), "option", "Trigger");
 		byId(option).value = triggers[i];
 		byId(option).innerHTML = triggers[i];
 		byId(option, "click", DKAutomate_OnEvent);

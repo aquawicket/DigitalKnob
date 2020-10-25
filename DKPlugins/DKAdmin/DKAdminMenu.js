@@ -154,7 +154,7 @@ function DKAdminMenu_OnEvent(event)
 function DKAdminMenu_Add(title, code)
 {
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
-	var ele = DKWidget_CreateElement(byId("DKAdmin/DKAdminMenu.html"), "div", "DKAdminMenu_item");
+	var ele = DK_CreateElement(byId("DKAdmin/DKAdminMenu.html"), "div", "DKAdminMenu_item");
 	byId(ele).innerHTML = title;
 }
 

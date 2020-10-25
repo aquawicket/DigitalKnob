@@ -44,14 +44,14 @@ function DKLogin_FBresponse(param, response)
 	if(param === "name"){
 		FACEBOOK_NAME = response;
 		
-		var id = DKWidget_CreateElement(byId("DKLogin/DKLogin.html"), "div", "fbname");
+		var id = DK_CreateElement(byId("DKLogin/DKLogin.html"), "div", "fbname");
 		byId(id).style.fontSize = "18rem";
 		byId(id).innerHTML = FACEBOOK_NAME;
 	}
 	if(param === "id"){
 		FACEBOOK_ID = response;
 		
-		var id = DKWidget_CreateElement(byId("DKLogin/DKLogin.html"), "img", "fbpic");
+		var id = DK_CreateElement(byId("DKLogin/DKLogin.html"), "img", "fbpic");
 		byId(id).src = "http://graph.facebook.com/"+FACEBOOK_ID+"/picture";
 	}
 }
