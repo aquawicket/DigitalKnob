@@ -4,7 +4,7 @@ var currentFile;
 function DKNotepad_Init()
 {
 	//console.warn("DKNotepad_Init()");
-	DK_Create("DKNotepad/DKNotepadShortcuts.js");
+	DK_Create("DKNotepad/DKNotepadShortcuts.js", function(){});
 	DK_Create("DKNotepad/DKNotepad.css");
 	DK_Create("DKNotepad/DKNotepad.html");
 	//byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);

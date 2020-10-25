@@ -1,5 +1,3 @@
-console.warn("DKNotepadShortcuts");
-
 //////////////////////////////////
 function DKNotepadShortcuts_Init()
 {
