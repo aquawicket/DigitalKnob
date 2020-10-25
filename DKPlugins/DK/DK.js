@@ -573,6 +573,25 @@ function DK_LoadHtml(url, parent)
 	return true;
 }
 
+
+//////////////////////////////////////////
+function DK_CreateElement(parent, tag, id)
+{
+	var ele = document.createElement(tag);
+	ele.id = DK_GetAvailableId(id);
+	parent.appendChild(ele); //This is not working on IE
+	return ele.id; //FIXME - return element object
+}
+
+////////////////////////////////////////////////
+function DK_CreateElementBefore(parent, tag, id)
+{
+	var ele = document.createElement(tag);
+	ele.id = DK_GetAvailableId(id);
+	parent.parentNode.insertBefore(ele, parent);
+	return ele.id; //FIXME - return element object
+}
+
 //////////////////////////////
 function DK_CheckFileSupport()
 {

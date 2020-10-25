@@ -592,39 +592,19 @@ function DKWidget_GetOuterHtml(variable)
 ////////////////////////////////////////////////
 function DKWidget_CreateElement(parent, tag, id)
 {
-	if(!(parent instanceof HTMLElement)){
-		console.error("CreateElement("+parent+"): parent is not an HTMLElement");
-		return;
-	}
-	
-	id = DKWidget_GetAvailableId(id);
-		
 	var ele = document.createElement(tag);
-	if(!ele){ console.error("DKWidget_CreateElement(): ele invalid ("+tag+")\n"); return false;}
-	ele.id = id;
-	//ele.setAttribute("id", id);
-	
+	ele.id = DK_GetAvailableId(id);
 	parent.appendChild(ele); //This is not working on IE
-	
-	return id;
+	return ele.id; //FIXME - return element object
 }
 
 //////////////////////////////////////////////////////
 function DKWidget_CreateElementBefore(parent, tag, id)
 {
-	id = DKWidget_GetAvailableId(id);
-	var par = byId(parent);
 	var ele = document.createElement(tag);
-	ele.id = id;
-	
-	var node = par.parentNode;
-	if(!node){
-		console.error("InsertBefore(): could not get parent of "+parent+"\n");
-		return false;
-	}
-	
-	node.insertBefore(ele, par);
-	return id;
+	ele.id = DK_GetAvailableId(id);
+	parent.parentNode.insertBefore(ele, parent);
+	return ele.id; //FIXME - return element object
 }
 
 //////////////////////////////////////////////
