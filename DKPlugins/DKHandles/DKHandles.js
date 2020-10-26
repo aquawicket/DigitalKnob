@@ -91,7 +91,7 @@ function DKHandles_OnEvent(event)
 function DKHandles_UpdateWindowList()
 {
 	byId("windows").innerHTML = "";
-	var str = DKHandles_GetWindows();
+	var str = CPP_DKHandles_GetWindows();
 	if(!str){ return; }
 	//console.log("WINDOW LIST: "+str+"\n");
 	var arry = str.split(",");
