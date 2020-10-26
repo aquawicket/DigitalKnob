@@ -2,23 +2,23 @@
 function DKHook_Init()
 {
 	DK_Create("DKHook");
-	window.addEventListener("GLOBAL_mousemove", DKHook_OnEvent);
-	window.addEventListener("GLOBAL_mousedown", DKHook_OnEvent);
-	window.addEventListener("GLOBAL_mouseup", DKHook_OnEvent);
-	window.addEventListener("GLOBAL_keypress", DKHook_OnEvent);
-	window.addEventListener("GLOBAL_keydown", DKHook_OnEvent);
-	window.addEventListener("GLOBAL_keyup", DKHook_OnEvent);
+	window.addEventListener("mousemove", DKHook_OnEvent);
+	window.addEventListener("mousedown", DKHook_OnEvent);
+	window.addEventListener("mouseup", DKHook_OnEvent);
+	window.addEventListener("keypress", DKHook_OnEvent);
+	window.addEventListener("keydown", DKHook_OnEvent);
+	window.addEventListener("keyup", DKHook_OnEvent);
 }
 
 /////////////////////
 function DKHook_End()
 {
-	window.removeEventListener("GLOBAL_mousemove", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_mousedown", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_mouseup", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_keypress", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_keydown", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_keyup", DKHook_OnEvent);
+	window.removeEventListener("mousemove", DKHook_OnEvent);
+	window.removeEventListener("mousedown", DKHook_OnEvent);
+	window.removeEventListener("mouseup", DKHook_OnEvent);
+	window.removeEventListener("keypress", DKHook_OnEvent);
+	window.removeEventListener("keydown", DKHook_OnEvent);
+	window.removeEventListener("keyup", DKHook_OnEvent);
 }
 
 //////////////////////////////
