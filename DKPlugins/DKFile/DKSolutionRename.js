@@ -5,7 +5,7 @@ DKSolutionRename_file = "";
 function DKSolutionRename_Init()
 {
 	DK_Create("DKFile/DKSolutionRename.html,DKSolutionMenu");
-	window.addEventListener("mousedown", DKSolutionRename_OnEvent);
+	document.addEventListener("mousedown", DKSolutionRename_OnEvent);
 	byId("DKSolutionRename_box").addEventListener("keydown", DKSolutionRename_OnEvent);
 	byId("DKSolutionRename_box").focus();
 }
@@ -13,7 +13,7 @@ function DKSolutionRename_Init()
 ///////////////////////////////
 function DKSolutionRename_End()
 {
-	window.removeEventListener("mousedown", DKSolutionRename_OnEvent);
+	document.removeEventListener("mousedown", DKSolutionRename_OnEvent);
 	byId("DKSolutionRename_box").removeEventListener("keydown", DKSolutionRename_OnEvent);
 	DK_Close("DKFile/DKSolutionRename.html");
 }
@@ -27,7 +27,7 @@ function DKSolutionRename_OnEvent(event)
 			return;
 		}
 	}
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKFile/DKSolutionRename.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}

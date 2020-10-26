@@ -3,8 +3,8 @@ function DKHandles_Init()
 {
 	DK_Create("DKHandles");
 	DK_Create("DKHandles/DKHandles.html");
-	window.addEventListener("click", DKHandles_OnEvent);
-	window.addEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
+	document.addEventListener("click", DKHandles_OnEvent);
+	document.addEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
 	byId("refresh").addEventListener("click", DKHandles_OnEvent);
 	byId("parent").addEventListener("click", DKHandles_OnEvent);
 	byId("search").addEventListener("mousedown", DKHandles_OnEvent);
@@ -21,8 +21,8 @@ function DKHandles_Init()
 ////////////////////////
 function DKHandles_End()
 {
-	window.removeEventListener("click", DKHandles_OnEvent);
-	window.removeEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
+	document.removeEventListener("click", DKHandles_OnEvent);
+	document.removeEventListener("DKHandles_WindowChanged", DKHandles_OnEvent);
 	byId("refresh").removeEventListener("click", DKHandles_OnEvent);
 	byId("parent").removeEventListener("click", DKHandles_OnEvent);
 	byId("search").removeEventListener("mousedown", DKHandles_OnEvent);
@@ -37,8 +37,8 @@ function DKHandles_End()
 /////////////////////////////////
 function DKHandles_OnEvent(event)
 {
-	if(event.currentTarget === window){
-		var handle = byId("window").innerHTML;
+	if(event.currentTarget === document){
+		var handle = document.documentElement.innerHTML;
 		DKHandles_UpdateProperties(handle);
     }
 	if(event.currentTarget.id === "parent"){

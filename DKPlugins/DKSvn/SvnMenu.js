@@ -22,7 +22,7 @@ function SvnMenu_Init()
 	}
 
 	DK_Create("DKGit/SvnMenu.html", function(){
-		window.addEventListener("mousedown", SvnMenu_OnEvent);
+		document.addEventListener("mousedown", SvnMenu_OnEvent);
 		byId("Git Update").addEventListener("click", SvnMenu_OnEvent);
 		byId("Git Commit").addEventListener("click", SvnMenu_OnEvent);
 	});
@@ -31,7 +31,7 @@ function SvnMenu_Init()
 //////////////////////
 function SvnMenu_End()
 {
-	window.removeEventListener("mousedown", SvnMenu_OnEvent);
+	document.removeEventListener("mousedown", SvnMenu_OnEvent);
 	byId("Git Update").removeEventListener("click", SvnMenu_OnEvent);
 	byId("Git Commit").removeEventListener("click", SvnMenu_OnEvent);
 	DK_Close("DKGit/SvnMenu.html");
@@ -47,7 +47,7 @@ function SvnMenu_OnEvent(event)
 		DKThread_DKQueue("GitCommit","SvnMenu_GitCommit();");
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKGit/SvnMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}

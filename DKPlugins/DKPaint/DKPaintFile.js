@@ -2,7 +2,7 @@
 function DKPaintFile_Init()
 {
 	DK_Create("DKPaint/DKPaintFile.html,DKPaint/DKPaint.html");
-	window.addEventListener("mousedown", DKPaintFile_OnEvent);
+	document.addEventListener("mousedown", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Open").addEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save").addEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save As").addEventListener("click", DKPaintFile_OnEvent);
@@ -12,7 +12,7 @@ function DKPaintFile_Init()
 //////////////////////////
 function DKPaintFile_End()
 {
-	window.removeEventListener("mousedown", DKPaintFile_OnEvent);
+	document.removeEventListener("mousedown", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Open").removeEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save").removeEventListener("click", DKPaintFile_OnEvent);
 	byId("DKPaintFile_Save As").removeEventListener("click", DKPaintFile_OnEvent);
@@ -37,7 +37,7 @@ function DKPaintFile_OnEvent(event)
 		DKFrame_Close("DKPaint/DKPaint.html");
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKPaint/DKPaintFile.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}

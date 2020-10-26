@@ -2,7 +2,7 @@
 function DKPaintMenu_Init()
 {
 	DK_Create("DKPaint/DKPaintMenu.html");
-	window.addEventListener("mousedown", DKPaintMenu_OnEvent);
+	document.addEventListener("mousedown", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Cut").addEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Copy").addEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Paste").addEventListener("click", DKPaintMenu_OnEvent);
@@ -11,7 +11,7 @@ function DKPaintMenu_Init()
 //////////////////////////
 function DKPaintMenu_End()
 {
-	window.removeEventListener("mousedown", DKPaintMenu_OnEvent);
+	document.removeEventListener("mousedown", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Cut").removeEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Copy").removeEventListener("click", DKPaintMenu_OnEvent);
 	byId("DKPaintMenu_Paste").removeEventListener("click", DKPaintMenu_OnEvent);
@@ -31,7 +31,7 @@ function DKPaintMenu_OnEvent(event)
 		DKPaintMenu_Paste();
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKPaint/DKPaintMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}

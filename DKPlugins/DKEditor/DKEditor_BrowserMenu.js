@@ -2,7 +2,7 @@
 function DKEditor_BrowserMenu_Init()
 {
 	DK_Create("DKEditor/DKEditor_BrowserMenu.html");
-	window.addEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
+	document.addEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
 	
 	DKEditor_BrowserMenu_Populate();
 }
@@ -10,7 +10,7 @@ function DKEditor_BrowserMenu_Init()
 ///////////////////////////////////
 function DKEditor_BrowserMenu_End()
 {
-	window.removeEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
+	document.removeEventListener("mousedown", DKEditor_BrowserMenu_OnEvent);
 	DK_Close("DKEditor/DKEditor_BrowserMenu.html");
 }
 
@@ -35,8 +35,8 @@ function DKEditor_BrowserMenu_OnEvent(event)
 		DK_Run("C:/Program Files (x86)/Safari/Safari.exe", DKApp_url);
 	}
 	
-	//////////////////////////////////
-	if(event.currentTarget === window){
+	/////////////////////////////////////
+	if(event.currentTarget === document){
 		if(byId("DKEditor/DKEditor_BrowserMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){
 			return;
 		}
