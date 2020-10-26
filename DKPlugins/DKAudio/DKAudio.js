@@ -39,11 +39,11 @@ function DKAudio_PlaySound(file)
 function DKAudio_OpenMusic(file)
 { 
 	var audio = DK_CreateElement(document.body, "audio", "audio");
-	var source = DK_CreateElement(byId(audio), "source", "source");
-	byId(source).type = "audio/ogg";
-	byId(source).src = file;
-	byId("audio").ontimeupdate = function(){ DKAudio_TimeUpdate() };
-	byId("audio").onended = function(){ DKAudio_Ended() };
+	var source = DK_CreateElement(audio, "source", "source");
+	source.type = "audio/ogg";
+	source.src = file;
+	audio.ontimeupdate = function(){ DKAudio_TimeUpdate() };
+	audio.onended = function(){ DKAudio_Ended() };
 }
 
 ///////////////////////////////

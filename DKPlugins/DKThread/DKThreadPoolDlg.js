@@ -40,15 +40,15 @@ function DKThreadPoolDlg_OnUpdate()
 	}
 	for(var i=0; i<names.length; ++i){
 		var div = DK_CreateElement(byId("DKThreadPoolDlg.html"), "div", "Thread");
-		byId(div).style.width = "100%";
-		byId(div).style.height = "20rem";
-		byId(div).style.whiteSpace = "nowrap";
+		div.style.width = "100%";
+		div.style.height = "20rem";
+		div.style.whiteSpace = "nowrap";
 
 		if(i === 0){
-			byId(div).innerHTML = "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i];
+			div.innerHTML = "<img id=\"DKThreadWorking\" style=\"display:inline;\" src=\"DKThread/working.gif\"></img>"+names[i];
 		}
 		else{
-			byId(div).innerHTML = names[i];
+			div.innerHTML = names[i];
 		}
 	}
 }

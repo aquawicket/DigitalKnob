@@ -164,13 +164,13 @@ function DKOpenFile_UpdatePath(path)
 		if(CPP_DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DK_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFolder");
 			var value = aPath+"/"+files[d];
-			byId(element2).value = value;
-			byId(element2).style.whiteSpace = "nowrap";
-			byId(element2).addEventListener("click", DKOpenFile_OnEvent);
-			byId(element2).style.paddingLeft = "17px";
-			byId(element2).innerHTML = files[d];
-			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
-			byId(element2).style.backgroundRepeat = "no-repeat";
+			element2.value = value;
+			element2.style.whiteSpace = "nowrap";
+			element2.addEventListener("click", DKOpenFile_OnEvent);
+			element2.style.paddingLeft = "17px";
+			element2.innerHTML = files[d];
+			element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
+			element2.style.backgroundRepeat = "no-repeat";
 		}
 	}
 
@@ -178,19 +178,19 @@ function DKOpenFile_UpdatePath(path)
 		if(!CPP_DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DK_CreateElement(byId("DKOpenFileMenu2"), "option", "DKOpenFileFile");
 			var value = aPath+"/"+files[f];
-			byId(element3).value = value;
-			byId(element3).style.whiteSpace = "nowrap";
-			byId(element3).style.paddingLeft = "17px";
-			byId(element3).style.backgroundRepeat = "no-repeat";
-			byId(element3).innerHTML = files[f];
-			byId(element3).addEventListener("click", DKOpenFile_OnEvent);
+			element3.value = value;
+			element3.style.whiteSpace = "nowrap";
+			element3.style.paddingLeft = "17px";
+			element3.style.backgroundRepeat = "no-repeat";
+			element3.innerHTML = files[f];
+			element3.addEventListener("click", DKOpenFile_OnEvent);
 
 			var extension = CPP_DKFile_GetExtention(files[f]);
 			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
 				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
 				(extension === "gif") || (extension === "tga") || (extension === "ico")
 				){
-				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 
 			else if((extension === "osg") || (extension === "osgb") || (extension === "osgt") ||
@@ -204,15 +204,15 @@ function DKOpenFile_UpdatePath(path)
 				(extension === "pov") || (extension === "skp") || (extension === "stl") ||
 				(extension === "ztl")
 			){
-				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 
 			else if((extension === "html") || (extension === "htm")){
-				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 
 			else{
-				byId(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}
 	}

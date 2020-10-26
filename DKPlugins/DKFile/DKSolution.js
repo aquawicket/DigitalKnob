@@ -174,41 +174,41 @@ function DKSolution_UpdatePath(path)
 	for(var d=0; d<files.length; d++){
 		if(DKFile_IsDirectory(aPath+"/"+files[d])){ //Folders
 			var element2 = DK_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFolder");
-			byId(element2).setAttribute("class", "option");
+			element2.setAttribute("class", "option");
 			var value = aPath+"/"+files[d]+"/";
-			byId(element2).setAttribute("value", value);
-			byId(element2).style.whiteSpace = "nowrap";
-			byId(element2).addEventListener("click", DKSolution_OnEvent);
-			byId(element2).style.paddingLeft = "17px";
-			byId(element2).innerHTML = files[d];
-			byId(element2).style.backgroundImage = "url(\"DKFile/folder.png\")";
-			byId(element2).style.backgroundRepeat = "no-repeat";
-			byId(element2).addEventListener("click", DKSolution_OnEvent);
-			byId(element2).addEventListener("dblclick", DKSolution_OnEvent);
-			byId(element2).addEventListener("contextmenu", DKSolution_OnEvent);
+			element2.setAttribute("value", value);
+			element2.style.whiteSpace = "nowrap";
+			element2.addEventListener("click", DKSolution_OnEvent);
+			element2.style.paddingLeft = "17px";
+			element2.innerHTML = files[d];
+			element2.style.backgroundImage = "url(\"DKFile/folder.png\")";
+			element2.style.backgroundRepeat = "no-repeat";
+			element2.addEventListener("click", DKSolution_OnEvent);
+			element2.addEventListener("dblclick", DKSolution_OnEvent);
+			element2.addEventListener("contextmenu", DKSolution_OnEvent);
 		}
 	}
 
 	for(var f=0; f<files.length; f++){
 		if(!DKFile_IsDirectory(aPath+"/"+files[f])){ //Files
 			var element3 = DK_CreateElement(byId("DKSolutionMenu"), "div", "DKSolutionFile");
-			byId(element3).setAttribute("class", "option");
+			element3.setAttribute("class", "option");
 			var value = aPath+"/"+files[f];
-			byId(element3).setAttribute("value", value);
-			byId(element3).style.whiteSpace = "nowrap";
-			byId(element3).style.paddingLeft = "17px";
-			byId(element3).style.backgroundRepeat = "no-repeat";
-			byId(element3).innerHTML = files[f];
-			byId(element3).addEventListener("click", DKSolution_OnEvent);
-			byId(element3).addEventListener("dblclick", DKSolution_OnEvent);
-			byId(element3).addEventListener("contextmenu", DKSolution_OnEvent);
+			element3.setAttribute("value", value);
+			element3.style.whiteSpace = "nowrap";
+			element3.style.paddingLeft = "17px";
+			element3.style.backgroundRepeat = "no-repeat";
+			element3.innerHTML = files[f];
+			element3.addEventListener("click", DKSolution_OnEvent);
+			element3.addEventListener("dblclick", DKSolution_OnEvent);
+			element3.addEventListener("contextmenu", DKSolution_OnEvent);
 
 			var extension = DKFile_GetExtention(files[f]);
 			if((extension === "png") || (extension === "jpeg") || (extension === "jpg") || 
 				(extension === "bmp") || (extension === "tiff") || (extension === "tif") || 
 				(extension === "gif") || (extension === "tga") || (extension === "ico")
 				){
-				byId(element3).style.backgroundImage = "url(\"DKFile/picture.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/picture.png\")";
 			}
 			else if((extension === "osg") || (extension === "osgb") || (extension === "osgt") ||
 				(extension === "3dm") || (extension === "3ds") || (extension === "ac") ||
@@ -221,19 +221,19 @@ function DKSolution_UpdatePath(path)
 				(extension === "pov") || (extension === "skp") || (extension === "stl") ||
 				(extension === "ztl")
 			){
-				byId(element3).style.backgroundImage = "url(\"DKFile/cube.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/cube.png\")";
 			}
 			else if((extension === "js")){
-				byId(element3).style.backgroundImage = "url(\"DKFile/js.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/js.png\")";
 			}
 			else if((extension === "sln")){
-				byId(element3).style.backgroundImage = "url(\"DKFile/sln.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/sln.png\")";
 			}
 			else if((extension === "html") || (extension === "htm")){
-				byId(element3).style.backgroundImage = "url(\"DKFile/html.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/html.png\")";
 			}
 			else{
-				byId(element3).style.backgroundImage = "url(\"DKFile/file.png\")";
+				element3.style.backgroundImage = "url(\"DKFile/file.png\")";
 			}
 		}
 	}

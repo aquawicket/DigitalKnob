@@ -100,10 +100,10 @@ function DKHandles_UpdateWindowList()
 	//RemoveDuplicates(arry);
 	for(var i=0; i<arry.length; i++){
 		var element = DK_CreateElement(byId("windows"), "option", "wintitle");
-		byId(element).value = arry[i];
-		byId(element).style.whiteSpace = "nowrap";
-		byId(element, "click", DKHandles_OnEvent);
-		byId(element).innerHTML = arry[i];
+		element.value = arry[i];
+		element.style.whiteSpace = "nowrap";
+		element.addEventListener("click", DKHandles_OnEvent);
+		element.innerHTML = arry[i];
 	}
 }
 

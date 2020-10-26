@@ -118,8 +118,8 @@ function DKBuildGUI_UpdateApps()
 	for(var i=0; i<APP_LIST.length; ++i){
 		//console.log(APP_LIST[i]+"\n");
 		var ele = DK_CreateElement(byId("AppList"), "option", "al");
-		byId(ele).innerHTML = APP_LIST[i];
-		byId(ele).value = APP_LIST[i];
+		ele.innerHTML = APP_LIST[i];
+		ele.value = APP_LIST[i];
 		byId("AppList").value = "DKBuilder";
 	}
 }
@@ -173,15 +173,15 @@ function DKBuildGUI_UpdateLibs()
 	
 	//Add Libraries
 	var id = DK_CreateElement(byId("LibList"), "option", "BuildLibraries");
-	byId(id).value = "Build All Libraries";
-	byId(id).innerHTML = "Build All Libraries";
-	byId(id).addEventListener("click", DKBuildGUI_OnEvent);
+	id.value = "Build All Libraries";
+	id.innerHTML = "Build All Libraries";
+	id.addEventListener("click", DKBuildGUI_OnEvent);
 
 	for(i=0; i<libs.length; ++i){
 		var id2 = DK_CreateElement(byId("LibList"), "option", "LIBRARY");
-		byId(id2).value = libs[i]);
-		byId(id2).innerHTML = libs[i];
-		byId(id2).addEventListener("click", DKBuildGUI_OnEvent);
+		id2.value = libs[i]);
+		id2.innerHTML = libs[i];
+		id2.addEventListener("click", DKBuildGUI_OnEvent);
 	}
 }
 */

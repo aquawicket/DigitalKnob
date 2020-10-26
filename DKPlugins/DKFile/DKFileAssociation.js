@@ -69,7 +69,7 @@ function DKFileAssociation_OpenHtml(path)
 
 	//Parse the sting into an element
 	var temp = DK_CreateElement(document.body, "temp", "temporary");
-	byId(temp).innerHTML = filedata;
+	temp.innerHTML = filedata;
 
 	//if(DKWidget_GetNumChildren(temp) === 0){
 	//	console.error("Error loading path: "+id+": could not create node");
@@ -82,15 +82,14 @@ function DKFileAssociation_OpenHtml(path)
 	//	return false;
 	//}
 
-	console.log("temp: "+temp);
-	//var element = DKWidget_GetFirstChild(temp);
-	var element = byId(temp).firstChild;
+	console.log("temp: "+temp.id);
+	var element = temp.firstChild;
 	//console.log("element = "+element);
 	//DKElement* element = temp->GetFirstChild();
 	//byId(element).id = id;
 	
 	document.body.appendChild(element);
-	byId("temporary").parentNode.removeChild(ById("temporary"));
+	temp.parentNode.removeChild(temp);
 	//Show(id);
 	//DKFileAssociation_AddDragHandles(id);
 	//DKFileAssociation_SelectElement(id);

@@ -36,9 +36,9 @@ function DKMidiDialog_UpdatePorts()
 	byId("DKMidiDialogInputs").innerHTML = "";
 	for(var i=0; i<list.length; i++){
 		var element = DK_CreateElement(byId("DKMidiDialogInputs"), "option", "DKMidiDialogInput");
-		byId(element).value = list[i];
-		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
-		byId(element).innerHTML = list[i];
+		element.value = list[i];
+		element.addEventListener("click", DKMidiDialog_OnEvent);
+		element.innerHTML = list[i];
 	}
 
 	var outputs = DKMidi_GetMidiOutputs();
@@ -46,9 +46,9 @@ function DKMidiDialog_UpdatePorts()
 	byId("DKMidiDialogOutputs").innerHTML = "";
 	for(var i=0; i<outlist.length; i++){
 		var element = DK_CreateElement(byId("DKMidiDialogOutputs"), "option", "DKMidiDialogOutput");
-		byId(element).value = outlist[i];
-		byId(element).addEventListener("click", DKMidiDialog_OnEvent);
-		byId(element).innerHTML = outlist[i];
+		element.value = outlist[i];
+		element.addEventListener("click", DKMidiDialog_OnEvent);
+		element.innerHTML = outlist[i];
 	}
 	return true;
 }

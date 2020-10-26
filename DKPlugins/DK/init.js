@@ -35,15 +35,15 @@ if(DK_GetJSEngine() === "Duktape"){ //C++: Create a window LoadPage() can suppor
 		CPP_DKDuktape_Create("DKRocket");
 		DKRocket_LoadUrl("DKRocket/blank.html");
 		CPP_DKDuktape_Create("DKWidget");
-		var iframe = DK_CreateElement(byId("body"), "iframe", "DKCef_frame"); //FIXME: this function is deprecated
-		byId(iframe).style.position = "absolute";
-		byId(iframe).style.top = "0rem";
-		byId(iframe).style.left = "0rem";
-		byId(iframe).style.width = "100%";
-		byId(iframe).style.height = "100%";
-		//byId(iframe).style.right = "0rem";
-		//byId(iframe).style.bottom = "0rem";
-		byId(iframe).src = DKApp_url;
+		var iframe = DK_CreateElement(byId("body"), "iframe", "DKCef_frame");
+		iframe.style.position = "absolute";
+		iframe.style.top = "0rem";
+		iframe.style.left = "0rem";
+		iframe.style.width = "100%";
+		iframe.style.height = "100%";
+		iframe.style.right = "0rem";
+		//iframe.style.bottom = "0rem";
+		iframe.src = DKApp_url;
 		DKCef_SetFocus(DKCef_GetCurrentBrowser());
 	}
 	else if(USE_ROCKET){
