@@ -75,6 +75,7 @@ function UrlExists(url, fn)
 	//return;// true;
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
     var DKFile_GetShortName = function(path){
     	console.warn("DKFile_GetShortName(): not available for browser");
@@ -84,8 +85,8 @@ else{
     var DKFile_GetShortName = function(path){ return CPP_DKFile_GetShortName(path); }
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	//////////////////////////////////////
 	var DKFile_Exists = function(path, fn){
 		if(!path){ return false; }
 	
@@ -172,8 +173,8 @@ function DKFile_SaveFile(path, data)
 	return true;
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	/////////////////////////////////////////////
 	var DKFile_GetSetting = function(file, param)
 	{
 		//file is ignored in browser. We use cookie instead.
@@ -220,8 +221,8 @@ if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	}
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	////////////////////////////////////////////////////
 	var DKFile_SetSetting = function(file, param, value)
 	{
 		//file is ignored in browser. We use cookie instead.
@@ -297,8 +298,8 @@ var DKFile_FileToString = function(url)
 	return ajaxGetUrl(url);
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	/////////////////////////////////////////////
 	var DKFile_StringToFile = function(data, path)
 	{
 		if(typeof absolutepath !== "undefined"){
@@ -321,8 +322,8 @@ else{
 	var DKFile_StringToFile = function(data, path){ return CPP_DKFile_StringToFile(data, path) };
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	////////////////////////////////////////////
 	var DKFile_DirectoryContents = function(url)
 	{
 		//TEST
@@ -352,8 +353,8 @@ else{
 	var DKFile_DirectoryContents = function(url){ return CPP_DKFile_DirectoryContents(url) };
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	//////////////////////////////////////////
 	var DKFile_GetAbsolutePath = function(url)
 	{
 		//console.debug("DKFile_GetAbsolutePath("+url+")");
@@ -389,8 +390,8 @@ function DKFile_GetRelativePath(apath, datapath)
 	return apath;
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	//////////////////////////////////////
 	var DKFile_IsDirectory = function(url)
 	{
 		send = online_assets+"/DKFile/DKFile.php?IsDirectory="+url;
@@ -412,13 +413,16 @@ function DKFile_GetExtention(url)
 	return out;
 }
 
+///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
-	/////////////////////////////
-var DKFile_Delete = function(url)
+	var DKFile_Delete = function(url)
 	{
 		console.log("Deleting: "+url);
 		send = online_assets+"/DKFile/DKFile.php?Delete="+url;
 		var result = ajaxGetUrl(send);
 		return result;
 	}
+}
+else{
+	var DKFile_Delete = function(url){ return CPP_DKFile_Delete(url); }
 }
