@@ -49,11 +49,11 @@ function DKNotepadMenu_Cut()
 /////////////////////////////
 function DKNotepadMenu_Copy()
 {
-	DKWidget_Copy("DKNotepad_Text");
+	DK_Copy("DKNotepad_Text");
 }
 
 //////////////////////////////
 function DKNotepadMenu_Paste()
 {
-	DKWidget_Paste("DKNotepad_Text");
+	DK_Paste("DKNotepad_Text");
 }
