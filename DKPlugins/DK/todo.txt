@@ -1,4 +1,4 @@
-~! THE LIST !~    10/15/20
+~! THE LIST !~    10/25/20
 
 *** PRIORITY ***
 Call attourney 
@@ -17,20 +17,9 @@ Drag a conduit line across the outside of the footing to the other "post"
 *******************
 *** DIGITALKNOB ***
 *******************
-Move DKWidget_CreateElement() to DK_CreateElement()
-We got a bad thing going on with DKWidget_CreateElement() returning a name.
-That function will return the id of the created element..  
-And here's the snuiff..   if the name id already exists, it will spin a number system after.
-If we need an id name finding system, that should be a seperate function.
-We need to find remove DKWidget_CreateElement..  thanks
-
-Since it uses a counter to create new names..  it's a shortcut function that will cause some work.
-
-
 I think we need to get rid of DKINSTALL in all the DKCMake stuff.
 I think it can add confussion and it only uses a few lines to download and install
  
-
 
 Move all DKWidget functions into DK.js
 Then move all gui related js up to DKRml.js
@@ -40,18 +29,16 @@ In fact, all C++ OOP structure will follow W3 javascript naming standards.
 make a "raw key" to "w3 standard key translation"..    int 43 = "KeyY"    ;)
 Translate all keycodes to internet w3 standards from raw code
 
-We want to code from inside DK..  DKNotepad and DKSolution should get us there.
-P.S. DKSolution needs to get renamesd to DKFileExplorer    
+DKSolution needs to get renamesd to DKFileExplorer    
 
 *** DKNotepad ***
-textarea steals keyt events from documnet
+textarea steals key events from documnet
 Get DKNotepad to listen for Ctrl + s
 DKNotepadFile_Exit() breaks DK_Close()
 Get Copy and Paste working
 Remove save comfrimation and make a sparkle, or something
  
  
-
 convert DKSDLRocket in DKTestApps to DKSDLRml
 
 *** DKTUTORIAL ***
@@ -62,7 +49,7 @@ DK4:   DK C++ w/ javascript (DKDuktape) +  DKRml = DOM "Document Object Model"
 * This is how DKTestApps should be named *
 
 
-If you get DKDom as a seperate RmlUi Library, poeple WILL chip in. ;)   DO IT! DO IT! :D
+If you get DKDom as a seperate RmlUi Library, poeple might chip in.
 
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
