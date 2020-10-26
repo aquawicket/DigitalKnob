@@ -85,6 +85,17 @@ else{
     var DKFile_GetShortName = function(path){ return CPP_DKFile_GetShortName(path); }
 }
 
+
+///////////////////////////////////////////////////////////
+if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
+    var DKFile_Rename = function(oldvalue, newvalue, overwrite){
+    	console.warn("DKFile_Rename(): not implemented for browser");
+    }
+}
+else{
+    var DKFile_Rename = function(oldvalue, newvalue, overwrite){ return CPP_DKFile_Rename(oldvalue, newvalue, overwrite); }
+}
+
 ///////////////////////////////////////////////////////////
 if(DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML"){
 	var DKFile_Exists = function(path, fn){

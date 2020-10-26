@@ -185,8 +185,8 @@ function DKSolutionMenu_NewFolder()
 ////////////////////////////////
 function DKSolutionMenu_Rename()
 {
-	var top1 = DKWidget_GetOffsetTop(DKSolutionMenu_id);
-	var top2 = DKWidget_GetOffsetTop("DKSolutionMenu");
+	var top1 = byId(DKSolutionMenu_id).offsetTop;
+	var top2 = byId("DKSolutionMenu").offsetTop;
 	var top = top1 - top2 - 1;
 	
 	DK_Create("DKFile/DKSolutionRename.js", function(){
