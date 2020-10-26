@@ -18,7 +18,7 @@ function DKHook_End()
 	window.removeEventListener("GLOBAL_mouseup", DKHook_OnEvent);
 	window.removeEventListener("GLOBAL_keypress", DKHook_OnEvent);
 	window.removeEventListener("GLOBAL_keydown", DKHook_OnEvent);
-	window.removeEventListener("GLOBAL_keyup", DKHook_OnEvent
+	window.removeEventListener("GLOBAL_keyup", DKHook_OnEvent);
 }
 
 //////////////////////////////
