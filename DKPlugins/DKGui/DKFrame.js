@@ -63,7 +63,7 @@ function DKFrame_Html(id)
 	
 	//stop if frame already exsists, multiple windows not ready yet.
 	//FIXME
-	//if(DKWidget_ElementExists(title+"_frame")){
+	//if(DK_ElementExists(title+"_frame")){
 	//	console.warn("DKFrame_Html("+id+"): frame already exists\n");
 	//	return;
 	//}
@@ -172,7 +172,7 @@ function DKFrame_CreateFrame(title, width, height)
 	titlebartext.style.height = "100%";
 	titlebartext.style.color = "rgb(25,25,25)";
 	titlebartext.innerHTML = title;
-	DKWidget_AddDragHandle(titlebartext, frame);
+	DK_AddDragHandle(titlebartext, frame);
 	titlebartext.addEventListener("dblclick", DKFrame_OnEvent);
 	
 	var reload = DK_CreateElement(frame, "img", "DKFrame_reload");
@@ -221,7 +221,7 @@ function DKFrame_CreateResize(frame)
 	resize.style.bottom = "0rem";
 	resize.style.width = "16rem";
 	resize.style.height = "16rem";
-	//DKWidget_AddResizeHandle(resize, frame);
+	//DK_AddResizeHandle(resize, frame);
 	//frame.addEventListener("resize", DKFrame_OnEvent);  //FIXME - does not fire.
 	
 	var resizeImage = DK_CreateElement(resize, "img", "DKFrame_resizeImage");
@@ -229,7 +229,7 @@ function DKFrame_CreateResize(frame)
 	resizeImage.style.position = "absolute";
 	resizeImage.style.top = "0rem";
 	resizeImage.style.right = "0rem";
-	DKWidget_AddResizeHandle(resizeImage, frame);
+	DK_AddResizeHandle(resizeImage, frame);
 	
 	return resize;
 }
@@ -418,9 +418,8 @@ function DKFrame_Reload(id)
 	var jsfile;
 	var htmlfile;
 	
-	//var frame = DKWidget_GetParent(id);
-	var frame = byId(id).parentNode.id;
-	var children = DK_GetElements(byId(frame));
+	var frame = byId(id).parentNode;
+	var children = DK_GetElements(frame);
 	var arry = children.split(",");
 	for(var i=arry.length-1; i>0; i--){
 		if(arry[i].indexOf(".html") > -1){
