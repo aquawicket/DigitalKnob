@@ -17,7 +17,9 @@ Drag a conduit line across the outside of the footing to the other "post"
 *******************
 *** DIGITALKNOB ***
 *******************
-Create a brance of RmlUi with a javascript folder
+Move all github wiki into DK.Readme.md and remove all wiki
+Remove github Wiki and create an example just like /DKPlugins/index.html
+Create a fork of RmlUi with a javascript folder for the document object, then dom
 
 Go over DKFile.js and alphabatize functions
 
