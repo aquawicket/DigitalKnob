@@ -2,7 +2,6 @@ DK_Create("DK/DK.css", function(){
 DK_Create("DKFile/DKFile.js", function(){
 DK_Create("DKAssets/DKAssets.js", function(){
 DK_Create("DKWindow/DKWindow.js", function(){
-DK_Create("DKWidget/DKWidget.js", function(){
 DK_Create("DKGui/DKFrame.js", function(){
 DK_Create("DKGui/DKMenu.js", function(){
 DK_Create("DKOS/DKOS.js", function(){
@@ -25,7 +24,6 @@ DK_Create("DKDebug/DKDebug.js", function(){
 	
 	//window.location.href = "DKWebtest/index.html";
 	
-});
 });
 });
 });
