@@ -354,7 +354,7 @@ function DKTrigger_FireTrigger(trigger)
 function DKTrigger_LoadTriggers(file)
 {
 	var assets = DKAssets_LocalAssets();
-	if(!DKFile_Exists(assets+file)){
+	if(!DKFile_Exists(assets+file)){ //FIXME: add to DKFile.js
 		console.log("DKTrigger_LoadTriggers("+assets+file+"): Cannot find file\n");
 		return;
 	}

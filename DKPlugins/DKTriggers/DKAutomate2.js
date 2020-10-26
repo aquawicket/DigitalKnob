@@ -208,7 +208,7 @@ function DKAutomate2_SelectTrigger()
 	var button2 = DK_CreateElement(byId("Effects"), "button", "NewEffect");
 	button2.style.width = "50px";
 	button2.style.height = "18px";
-	button2.style.borderWidth = "1px");
+	button2.style.borderWidth = "1px";
 	button2.innerHTML = "New";
 	button2.addEventListener("click", DKAutomate2_OnEvent);
 }
