@@ -186,7 +186,7 @@ function DKWidget_RemoveDragHandle(id)
 
 
 // *** CLIPBOARD *** //
-
+/*
 /////////////////////////
 function DKWidget_Cut(id)
 {
@@ -261,7 +261,7 @@ function DKWidget_removeSelection(id)
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;
 }
-
+*/
 
 
 
