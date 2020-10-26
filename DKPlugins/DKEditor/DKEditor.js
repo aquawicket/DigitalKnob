@@ -8,7 +8,7 @@ function DKEditor_Init()
 	
 	/*
 	if(DK_GetBrowser() !== "RML"){
-		DKWidget_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
+		DK_AddDragHandle("DKEditor/DKEditor.html", "DKEditor/DKEditor.html"); //FIXME - eats click events in Rocket
 	}
 	*/
 	

@@ -50,5 +50,5 @@ function DKConsole_Notify(string)
 	line.style.display = "block";
 	line.style.color = DKConsole_color;
 	line.innerHTML = string;
-	DKWidget_ScrollToBottom(line);
+	DK_ScrollToBottom(line);
 }

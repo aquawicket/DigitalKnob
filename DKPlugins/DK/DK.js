@@ -276,17 +276,15 @@ function DK_Create(data, callback)
 		}
 	}
 	if(arry[0] === "DKHtml"){
-		//console.log("DK_Create(data, callback)");
-			//if(!DKWidget_NewWidget(arry[1], arry[2])){
-			if(!DK_LoadHtml(arry[1], arry[2])){
-				return false;
-			}
-			if(typeof callback === "function"){ 
-				callback(); 
-			}
-			else{
-			//console.error("DK_Create("+data+"): does not have a callback");
-			}
+		if(!DK_LoadHtml(arry[1], arry[2])){
+			return false;
+		}
+		if(typeof callback === "function"){ 
+			callback(); 
+		}
+		else{
+		//console.error("DK_Create("+data+"): does not have a callback");
+		}
 	}
 	if(arry[0] === "DKCss"){
 		if(!DK_LoadCss(arry[1])){
@@ -1441,7 +1439,7 @@ function DK_GetValue(variable)
 				console.debug("DK_GetValue(): returning width+","+height\n");
 				return width+","+height;
 			}
-			var ele = DKWidget_GetElement(event);
+			var ele = DK_GetElement(event); //FIXME
 			console.debug("DK_GetValue(): returning ele.value\n");
 			return ele.value;
 		}

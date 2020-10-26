@@ -43,7 +43,7 @@ function DKNotepadMenu_OnEvent(event)
 ////////////////////////////
 function DKNotepadMenu_Cut()
 {
-	DKWidget_Cut("DKNotepad_Text");
+	DK_Cut("DKNotepad_Text");
 }
 
 /////////////////////////////

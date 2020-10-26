@@ -60,7 +60,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
 	//var the_path = path.replace(id, "");
-	//console.log("DKWidget_AppendDataPath("+the_path+")");
+	//console.log("DK_AppendDataPath("+the_path+")");
 	//AppendDataPath(the_path);
 
 	var filedata = DKFile_FileToString(path);
@@ -71,13 +71,13 @@ function DKFileAssociation_OpenHtml(path)
 	var temp = DK_CreateElement(document.body, "temp", "temporary");
 	temp.innerHTML = filedata;
 
-	//if(DKWidget_GetNumChildren(temp) === 0){
+	//if(DK_GetNumChildren(temp) === 0){
 	//	console.error("Error loading path: "+id+": could not create node");
 	//	return false;
 	//}
 
 	//Make sure there is only 1 child
-	//if(DKWidget_GetNumChildren(temp) > 1){
+	//if(DK_GetNumChildren(temp) > 1){
 	//	console.error("Error loading path: "+id+" has more than one root node");
 	//	return false;
 	//}
@@ -120,7 +120,7 @@ function DKFileAssociation_OpenCss(path)
 /////////////////////////////////////////
 function DKFileAssociation_OpenText(path)
 {
-	//DKWidget_Toggle("DKNotepad.html");
+	//DK_Toggle("DKNotepad.html");
 	DK_Create("DKNotepad/DKNotepad.js", function(){
 		DKFrame_Html("DKNotepad/DKNotepad.html");
 		DKNotepad_Open(path);

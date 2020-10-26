@@ -22,7 +22,7 @@ function DKOS_Init() {
 		DK_Create("DKOS/Desktop.js", function(){
 		DK_Create("DKOS/Taskbar.js", function(){
 			if(OS === "iOS" || OS === "Android"){
-				//DKWidget_SetScale(2);   FIXME
+				//DK_SetScale(2);   FIXME
 			}
 		});
 		});
