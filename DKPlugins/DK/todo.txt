@@ -21,8 +21,7 @@ I think we need to get rid of DKINSTALL in all the DKCMake stuff.
 I think it can add confussion and it only uses a few lines to download and install
  
 
-Move all DKWidget functions into DK.js
-Then move all gui related js up to DKRml.js
+Move all gui related js to DKGui.js
 DK.js will have access to a C++ EventTarget
 In fact, all C++ OOP structure will follow W3 javascript naming standards.
 
