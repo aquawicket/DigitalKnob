@@ -44,7 +44,7 @@ function DKAutomate_End()
 function DKAutomate_OnEvent(event)
 {
 	if(event.type === "keydown"){
-		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
+		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
 	
 	if(event.currentTarget.id === "DKA-NewButton"){
@@ -75,8 +75,8 @@ function DKAutomate_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "Trigger"){
-		DKAutomate_SelectValue(DKWidget_GetValue(event));
-		DKAutomate_UpdateSelection(DKWidget_GetValue(event));
+		DKAutomate_SelectValue(DK_GetValue(event));
+		DKAutomate_UpdateSelection(DK_GetValue(event));
 	}
 	
 	if(event.currentTarget.id === "CancelButton"){
@@ -147,7 +147,7 @@ function DKAutomate_UpdateSelection(value)
 	var temp = DK_GetElements(byId("DKA-TriggerList"));
 	var options = temp.split(",");
 	for(var i = 0; i < options.length; ++i){
-		if(value === DKWidget_GetValue(options[i])){
+		if(value === DK_GetValue(options[i])){
 			byId(options[i]).style.backgroundColor = "rgb(60,60,60)";
 			byId(options[i]).style.color = "rgb(200,200,200)";
 		}

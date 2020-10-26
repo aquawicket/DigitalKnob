@@ -62,7 +62,7 @@ function DKSolution_OnEvent(event)
 	
 	if(event.type === "dblclick"){
 		//console.log(DK_GetId(event)+"\n");
-		//console.log(DKWidget_GetValue(DK_GetId(event))+"\n");
+		//console.log(DK_GetValue(DK_GetId(event))+"\n");
 		if(event.currentTarget.id.includes("DKSolutionFolder")){
 			//console.log("DKSolutionFolder\n");
 			DKSolution_OpenFolder(byId(event.currentTarget.id).value);
@@ -75,7 +75,7 @@ function DKSolution_OnEvent(event)
 	}
 	
 	if(event.currentTarget.id === "DKSolutionPath"){
-		if(DKWidget_GetValue(event) === 13){ //enter
+		if(DK_GetValue(event) === 13){ //enter
 			DKSolution_OpenFolder(byId("DKSolutionPath").value);
 		}
 	}

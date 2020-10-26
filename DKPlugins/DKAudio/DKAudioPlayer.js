@@ -91,7 +91,7 @@ function DKAudioPlayer_TimeUpdate()
 	
 	var minute = "0";
 	minute += ":";
-	var second = parseInt(DKAudio_GetTime());//("0" + DKWidget_GetValue(event)).slice (-2);
+	var second = parseInt(DKAudio_GetTime());//("0" + DK_GetValue(event)).slice (-2);
 	byId("DKAudioPlayer_time").innerHTML = minute+second;
 }
 

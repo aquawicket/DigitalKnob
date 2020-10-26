@@ -35,23 +35,23 @@ function DKWebSocketsServer_OnEvent(event)
 		DKWebSocketsServer_MessageToClient();
 	}
 	if(event.type === "DKWebSockets_OnMessageFromClient"){
-		DKWebSocketsServer_OnMessageFromClient(DKWidget_GetValue(event));
+		DKWebSocketsServer_OnMessageFromClient(DK_GetValue(event));
 	}
 }
 
 //////////////////////////////////////////
 function DKWebSocketsServer_CreateServer()
 {
-	if(!DKWidget_GetValue("DKWebSocketsServer_IpAddress")){
+	if(!DK_GetValue("DKWebSocketsServer_IpAddress")){
 		console.warn("DKWebSocketsServer_CreateServer(): Please enter an ip address\n");
 		//return;
 	}
-	if(!DKWidget_GetValue("DKWebSocketsServer_Port")){
+	if(!DK_GetValue("DKWebSocketsServer_Port")){
 		console.warn("DKWebSocketsServer_CreateServer(): Please enter a port number\n");
 		return;
 	}
-	console.log("DKWebSocketsServer_CreateServer(): port = "+DKWidget_GetValue("DKWebSocketsServer_Port")+"\n");
-	DKWebSockets_CreateServer(DKWidget_GetValue("DKWebSocketsServer_IpAddress"), Number(DKWidget_GetValue("DKWebSocketsServer_Port")));
+	console.log("DKWebSocketsServer_CreateServer(): port = "+DK_GetValue("DKWebSocketsServer_Port")+"\n");
+	DKWebSockets_CreateServer(DK_GetValue("DKWebSocketsServer_IpAddress"), Number(DK_GetValue("DKWebSocketsServer_Port")));
 }
 
 /////////////////////////////////////////
@@ -63,7 +63,7 @@ function DKWebSocketsServer_CloseServer()
 /////////////////////////////////////////////
 function DKWebSocketsServer_MessageToClient()
 {
-	var message = DKWidget_GetValue("DKWebSocketsServer_send");
+	var message = DK_GetValue("DKWebSocketsServer_send");
 	DKWebSockets_MessageToClient(message);
 }
 

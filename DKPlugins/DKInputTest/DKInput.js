@@ -93,7 +93,7 @@ function DKInput_OnEvent(event)
 		byId("event.button").innerHTML = "event.button: "+event.button;
 	//}
 	if(event.type === "wheel"){
-		byId("wheeldelta").innerHTML = "Wheel Delta: "+DKWidget_GetValue(event);
+		byId("wheeldelta").innerHTML = "Wheel Delta: "+DK_GetValue(event);
 	}
 	
 	//element events

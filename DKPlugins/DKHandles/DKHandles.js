@@ -54,7 +54,7 @@ function DKHandles_OnEvent(event)
 		DKHandles_StartSearch();
     }
 	if(event.currentTarget.id === "setvalue"){
-		var value = DKWidget_GetValue("SetValueBox");
+		var value = DK_GetValue("SetValueBox");
 		var currentHandle = DKHandles_CurrentHandle();
 		DKHandles_SetValue(currentHandle, value);
     }
@@ -76,13 +76,13 @@ function DKHandles_OnEvent(event)
 		DKHandles_ToggleHighlight();
 	}
 	if(event.currentTarget.id === "wintitle"){
-		var handle = DKHandles_SetWindowHandle(DKWidget_GetValue(DK_GetId(event)));
+		var handle = DKHandles_SetWindowHandle(DK_GetValue(DK_GetId(event)));
 		DKHandles_UpdateProperties(handle);
 	}
 	if(event.type === "DKHandles_WindowChanged"){
 		//console.log("DKHandles_WindowChanged\n");
 		byId("search").src = "DKHandles/win1.bmp";
-		var handle = DKWidget_GetValue(event);
+		var handle = DK_GetValue(event);
 		DKHandles_UpdateProperties(handle);
 	}
 }

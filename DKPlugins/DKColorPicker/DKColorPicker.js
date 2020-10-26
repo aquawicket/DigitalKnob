@@ -34,7 +34,7 @@ function DKColorPicker_OnEvent(event)
 	//console.log("DKColorPicker_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "GetColor"){
-		var params = DKWidget_GetValue(event).split(",");
+		var params = DK_GetValue(event).split(",");
 		event_id = params[0];
 		event_type = params[1];
 		//console.log("event_id:"+event_id+"\n");

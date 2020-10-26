@@ -34,18 +34,18 @@ function DKWebSocketsClient_OnEvent(event)
 		DKWebSocketsClient_MessageToServer();
 	}
 	if(event.currentTarget.id === "DKWebSockets_OnMessageFromServer"){
-		DKWebSocketsClient_OnMessageFromServer(DKWidget_GetValue(event));
+		DKWebSocketsClient_OnMessageFromServer(DK_GetValue(event));
 	}
 }
 
 //////////////////////////////////////////
 function DKWebSocketsClient_CreateClient()
 {
-	if(!DKWidget_GetValue("DKWebSocketsClient_Address")){
+	if(!DK_GetValue("DKWebSocketsClient_Address")){
 		console.warn("DKWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
 	}
-	url = DKWidget_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
+	url = DK_GetValue("DKWebSocketsClient_Address");  //  ws://localhost:3000
 	
 	if(DK_GetBrowser() === "RML"){
 		console.log("Connecting to WebSocket via C++...\n");
@@ -86,7 +86,7 @@ function DKWebSocketsClient_CloseClient()
 /////////////////////////////////////////////
 function DKWebSocketsClient_MessageToServer()
 {
-	var message = DKWidget_GetValue("DKWebSocketsClient_send");
+	var message = DK_GetValue("DKWebSocketsClient_send");
 	if(DK_GetBrowser() === "RML"){
 		DKWebSockets_MessageToServer(message);
 		return;
