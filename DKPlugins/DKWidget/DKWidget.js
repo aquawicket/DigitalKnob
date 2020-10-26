@@ -143,10 +143,9 @@ function DKWidget_AttachDrags(id)
 	}
 }
 
-/////////////////////////////////////////
-function DKWidget_AddDragHandle(id, drag)
+//////////////////////////////////////////////
+function DKWidget_AddDragHandle(element, drag)
 {
-	var element = byId(id);
 	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}
@@ -155,10 +154,9 @@ function DKWidget_AddDragHandle(id, drag)
 	return true;
 }
 
-/////////////////////////////////////////////
-function DKWidget_AddResizeHandle(id, resize)
+//////////////////////////////////////////////////
+function DKWidget_AddResizeHandle(element, resize)
 {
-	var element = byId(id);
 	if(!DK_IE() && DK_GetBrowser() !== "RML"){
 		element.style.setProperty("pointer-events","all");
 	}

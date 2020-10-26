@@ -78,7 +78,7 @@ function DKFrame_Html(id)
 	height = height.replace("rem", "");
 	
 	var frame = DKFrame_CreateFrame(title, width, height);
-	byId(frame).appendChild(byId(id));
+	frame.appendChild(byId(id));
 	byId(id).style.position = "absolute";
 	byId(id).style.top = "21rem";
 	byId(id).style.left = "0rem";
