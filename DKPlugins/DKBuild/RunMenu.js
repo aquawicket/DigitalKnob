@@ -2,7 +2,7 @@
 function RunMenu_Init()
 {
 	DK_Create("DKBuild/RunMenu.html");
-	window.addEventListener("mousedown", RunMenu_OnEvent);
+	document.addEventListener("mousedown", RunMenu_OnEvent);
 	byId("Build App").addEventListener("click", RunMenu_OnEvent);
 	byId("Rebuild App").addEventListener("click", RunMenu_OnEvent);
 	byId("Rebuild All").addEventListener("click", RunMenu_OnEvent);
@@ -15,7 +15,7 @@ function RunMenu_Init()
 //////////////////////
 function RunMenu_End()
 {
-	window.removeEventListener("mousedown", RunMenu_OnEvent);
+	document.removeEventListener("mousedown", RunMenu_OnEvent);
 	byId("Build App").removeEventListener("click", RunMenu_OnEvent);
 	byId("Rebuild App").removeEventListener("click", RunMenu_OnEvent);
 	byId("Rebuild All").removeEventListener("click", RunMenu_OnEvent);
@@ -139,7 +139,7 @@ function RunMenu_OnEvent(event)
 		});
 	}
 	
-	if(event.currentTarget === window){
+	if(event.currentTarget === document){
 		if(byId("DKBuild/RunMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))){	
 			return;
 		}

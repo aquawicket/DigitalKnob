@@ -1124,7 +1124,7 @@ function DK_GetElements(element)
 	var string = "";
 	//var nodes = byId(id).getElementsByTagName('*'); //all children recursively
 	if(typeof(element) !== "object"){
-		console.error("DK_GetElements("+element.id+"): element not an object");
+		console.error("DK_GetElements(): element not an object");
 	}
 	var nodes = element.childNodes;
 	for(var i=0; i<nodes.length; i++){
