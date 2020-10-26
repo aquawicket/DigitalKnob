@@ -64,8 +64,8 @@ function DKInput_OnEvent(event)
 	byId("event.keyCode").innerHTML = "event.keyCode: "+event.keyCode;
 	byId("event.which").innerHTML = "event.which: "+event.which;
 
-	if(event.type === "keypress"){	
-		//DKInput_ProcessKeyPress(DKWidget_GetValue(event));
+	if(event.type === "keypress"){
+		//DKInput_ProcessKeyPress(event.code);
 	}
 	if(event.type === "keydown"){
 		DKInput_ProcessKeyDown(event.code);

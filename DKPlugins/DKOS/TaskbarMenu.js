@@ -169,14 +169,7 @@ function TaskbarMenu_OnEvent(event)
 		return;
 	}
 	if(event.currentTarget.id === "TaskbarMenu_Run"){
-		var key = DKWidget_GetValue(event);
-		//console.log("DKAdminMenu_Run: key="+key+"\n");
-		if(DK_GetBrowser() === "RML"){
-			if(key !== 72){ return; } //FIXME: why is this key code not 13?
-		}
-		else{
-			if(key !== 13){ return; }
-		}
+		if(event.code !== "Enter"){ return; }
 		TaskbarMenu_Run(byId("TaskbarMenu_Run").value);
 	}
 	
