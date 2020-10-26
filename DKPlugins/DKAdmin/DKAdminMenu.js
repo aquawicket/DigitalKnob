@@ -131,14 +131,7 @@ function DKAdminMenu_OnEvent(event)
 		return;
 	}
 	if(event.currentTarget.id === "DKAdminMenu_Run"){
-		var key = DK_GetValue(event);
-		//console.log("DKAdminMenu_Run: key="+key+"\n");
-		if(DK_GetBrowser() === "RML"){
-			if(key !== 72){ return; } //FIXME: why is this key code not 13?
-		}
-		else{
-			if(key !== 13){ return; }
-		}
+		if(event.code !== "Enter"){ return; }
 		DKAdminMenu_Run(byId("DKAdminMenu_Run").value);
 	}
 	

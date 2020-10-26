@@ -169,7 +169,7 @@ function TaskbarMenu_OnEvent(event)
 		return;
 	}
 	if(event.currentTarget.id === "TaskbarMenu_Run"){
-		var key = DK_GetValue(event);
+		var key = DKWidget_GetValue(event);
 		//console.log("DKAdminMenu_Run: key="+key+"\n");
 		if(DK_GetBrowser() === "RML"){
 			if(key !== 72){ return; } //FIXME: why is this key code not 13?

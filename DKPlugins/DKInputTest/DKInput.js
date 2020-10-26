@@ -65,7 +65,7 @@ function DKInput_OnEvent(event)
 	byId("event.which").innerHTML = "event.which: "+event.which;
 
 	if(event.type === "keypress"){	
-		//DKInput_ProcessKeyPress(DK_GetValue(event));
+		//DKInput_ProcessKeyPress(DKWidget_GetValue(event));
 	}
 	if(event.type === "keydown"){
 		DKInput_ProcessKeyDown(event.code);
@@ -93,7 +93,7 @@ function DKInput_OnEvent(event)
 		byId("event.button").innerHTML = "event.button: "+event.button;
 	//}
 	if(event.type === "wheel"){
-		byId("wheeldelta").innerHTML = "Wheel Delta: "+DK_GetValue(event);
+		byId("wheeldelta").innerHTML = "Wheel Delta: "+DKWidget_GetValue(event);
 	}
 	
 	//element events

@@ -35,7 +35,7 @@ function DKPaint_OnEvent(event)
 		DK_Create("DKPaint/DKPaintFile.js", function(){});
 	}
 	if(event.type === "OpenFile"){
-		var file = DK_GetValue(event);
+		var file = DKWidget_GetValue(event);
 		//console.log(("OpenFile: "+file+"\n");
 		DKPaint_Open(file)
 	}

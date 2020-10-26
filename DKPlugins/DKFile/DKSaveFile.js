@@ -46,14 +46,14 @@ function DKSaveFile_OnEvent(event)
 	if(!event.currentTarget){ return; }
 	console.log("DKSaveFile_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")");
 	if(event.currentTarget.id.includes("DKSaveFileDrive")){
-		DKSaveFile_OpenFolder(DK_GetValue(event));
+		DKSaveFile_OpenFolder(DKWidget_GetValue(event));
 	}
 	if(event.currentTarget.id.includes("DKSaveFileFolder")){
 		//console.log("DKSaveFileFolder");
-		DKSaveFile_OpenFolder(DK_GetValue(event));
+		DKSaveFile_OpenFolder(DKWidget_GetValue(event));
 	}
 	if(event.currentTarget.id.includes("DKSaveFileFile")){
-		DKSaveFile_OpenFile(DK_GetValue(event));
+		DKSaveFile_OpenFile(DKWidget_GetValue(event));
 	}
 
 	if(event.currentTarget.id === "DKSaveFileUp"){
@@ -97,7 +97,7 @@ function DKSaveFile_OnEvent(event)
 	if(event.type === "SetFile"){
 		//console.log("event.value = "+event.value);
 		
-		//var params = DK_GetValue(event).split(",");
+		//var params = DKWidget_GetValue(event).split(",");
 		var params = event.value.split(",");
 		event_id = params[0];
 		event_type = params[1];

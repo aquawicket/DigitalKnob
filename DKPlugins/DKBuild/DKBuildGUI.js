@@ -97,8 +97,8 @@ function DKBuildGUI_OnEvent(event)
 	
 	/*
 	if(event.type === "NewApp"){
-		DKSendEvent("DKBuildGUI", "NewApp", DK_GetValue(event));
-		byId("AppList").value = DK_GetValue(event);
+		DKSendEvent("DKBuildGUI", "NewApp", DKWidget_GetValue(event));
+		byId("AppList").value = DKWidget_GetValue(event);
 		//DKSendEvent("MenuRight.html", "SetPanel", "App");
 
 		//var apppath = DK_CallFunc("DKBuildGUI::GetAppPath", byId("AppList").value);

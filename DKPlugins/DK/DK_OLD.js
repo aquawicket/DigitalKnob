@@ -1230,14 +1230,6 @@ function DK_GetId(event)
 */
 
 /*
-///////////////////////////
-function DK_GetValue(event)
-{
-	return DKWidget_GetValue(event);
-}
-*/
-
-/*
 ////////////////////////////////
 function DK_Type(event, command)
 {

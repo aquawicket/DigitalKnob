@@ -21,7 +21,7 @@ function init_OnEvent(event)  //Duktape
 	if(event.type === "resize"){ //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
 		DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0,"+String(DKWindow_GetWidth())+","+String(DKWindow_GetHeight()));
 	}
-	if(event.type === "keydown") && DK_GetValue(event) === "4"){ //NOTE: this is the back button on Android
+	if(event.type === "keydown" && event.code === "Back"){ //NOTE: this is the back button on Android
 		DK_Exit();
 	}
 }

@@ -62,18 +62,18 @@ function DKTriggers_End()
 function DKTrigger_OnEvent(event)
 {
 	if(event.type === "gui"){ //C++
-		var arry = DK_GetValue(event).split(",");
+		var arry = DKWidget_GetValue(event).split(",");
 		DKTrigger_ProcessGui(arry[0], arry[1]);
 	}
 	if(event.type === "midi"){ //C++
-		var arry = DK_GetValue(event).split(",");
+		var arry = DKWidget_GetValue(event).split(",");
 		DKTrigger_ProcessMidi(arry[0], arry[1], arry[2]);
 	}
 	if(event.type === "keydown"){
-		DKTrigger_ProcessKeyDown(DK_GetValue(event));
+		DKTrigger_ProcessKeyDown(DKWidget_GetValue(event));
 	}
 	if(event.type === "keyup"){
-		DKTrigger_ProcessKeyUp(DK_GetValue(event)); //JS keydown
+		DKTrigger_ProcessKeyUp(DKWidget_GetValue(event)); //JS keydown
 	}
 	if(event.type === "resize"){
 		DKTrigger_ProcessWindowResize(); 

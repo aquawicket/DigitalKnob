@@ -17,7 +17,7 @@ function Input_OnEvent(event)
 {
 	DKDEBUG("Input_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	if(event.currentTarget.id === "Input_Text"){
-		var key = DK_GetValue(event);
+		var key = DKWidget_GetValue(event);
 		//console.log("Input_Text: key="+key+"\n");
 		if(key !== 13 /*&& key !== 72*/){ return; }
 		Input_Run(byId("Input_Text").value)

@@ -34,7 +34,7 @@ function DKWebSocketsClient_OnEvent(event)
 		DKWebSocketsClient_MessageToServer();
 	}
 	if(event.currentTarget.id === "DKWebSockets_OnMessageFromServer"){
-		DKWebSocketsClient_OnMessageFromServer(DK_GetValue(event));
+		DKWebSocketsClient_OnMessageFromServer(DKWidget_GetValue(event));
 	}
 }
 

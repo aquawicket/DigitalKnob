@@ -18,12 +18,12 @@ function DKMidiDialog_End()
 function DKMidiDialog_OnEvent(event)
 {
 	if(event.currentTarget.id.includes("DKMidiDialogInput")){
-		DKMidiDialog_ToggleInput(DK_GetValue(event));
+		DKMidiDialog_ToggleInput(DKWidget_GetValue(event));
 		return;
 	}
 
 	if(event.currentTarget.id.includes("DKMidiDialogOutput")){
-		DKMidiDialog_ToggleOutput(DK_GetValue(event));
+		DKMidiDialog_ToggleOutput(DKWidget_GetValue(event));
 		return;
 	}
 }

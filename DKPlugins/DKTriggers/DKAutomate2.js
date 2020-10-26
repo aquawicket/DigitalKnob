@@ -38,41 +38,41 @@ function DKAutomate2_OnEvent(event)
 	}
 	if(event.currentTarget.id === "TriggerName"){
 		if(!current_trigger){ return; }
-		DKTrigger_RenameTrigger(current_trigger, DK_GetValue(event))
-		current_trigger = DK_GetValue(event);
+		DKTrigger_RenameTrigger(current_trigger, DKWidget_GetValue(event))
+		current_trigger = DKWidget_GetValue(event);
 		DKSendEvent("DKAutomate.html", "UpdateValues", "");
 	}
 	if(DK_IdLike(event,"CauseCommand")){
 		var num = byId(event.currentTarget.id).num;
-		causes[Number(num)].command = DK_GetValue(event);
+		causes[Number(num)].command = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar1")){
 		var num = byId(event.currentTarget.id).num;
-		causes[Number(num)].var1 = DK_GetValue(event);
+		causes[Number(num)].var1 = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar2")){
 		var num = byId(event.currentTarget.id).num;
-		causes[Number(num)].var2 = DK_GetValue(event);
+		causes[Number(num)].var2 = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"CauseVar3")){
 		var num = byId(event.currentTarget.id).num;
-		causes[Number(num)].var3 = DK_GetValue(event);
+		causes[Number(num)].var3 = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectCommand")){
 		var num = byId(event.currentTarget.id).num;
-		effects[Number(num)].command = DK_GetValue(event);
+		effects[Number(num)].command = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar1")){
 		var num = byId(event.currentTarget.id).num;
-		effects[Number(num)].var1 = DK_GetValue(event);
+		effects[Number(num)].var1 = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar2")){
 		var num = byId(event.currentTarget.id).num;
-		effects[Number(num)].var2 = DK_GetValue(event);
+		effects[Number(num)].var2 = DKWidget_GetValue(event);
 	}
 	if(DK_IdLike(event,"EffectVar3")){
 		var num = byId(event.currentTarget.id).num;
-		effects[Number(num)].var3 = DK_GetValue(event);
+		effects[Number(num)].var3 = DKWidget_GetValue(event);
 	}
 	
 	if(event.type === "SelectTrigger"){

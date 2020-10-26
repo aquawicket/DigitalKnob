@@ -4,7 +4,7 @@
 function DKWidget_GetValue(variable)
 {
 	
-	console.error("DKWidget_GetValue(): this function is obsolete");
+	console.error("DKWidget_GetValue(): this function is deprecated and will be obsolete");
 	
 	//FIXME: limit what variable can be to phase this out
 	if(typeof variable === "string"){ //id
@@ -12,11 +12,14 @@ function DKWidget_GetValue(variable)
 		if(!ele){ console.log("DKWidget_GetValue("+variable+"): Cannot find element\n"); /*return false;*/ }
 		if(ele){
 			if(ele.type && ele.type === "checkbox"){
+				console.debug("DKWidget_GetValue(): returning ele.checked\n");
 				return ele.checked;
 			}
 			if(!ele.value){
+				console.debug("DKWidget_GetValue(): returning ele.innerHTML\n");
 				return ele.innerHTML;
 			}
+			console.debug("DKWidget_GetValue(): returning ele.value\n");
 			return ele.value; 
 		}
 		
@@ -27,41 +30,52 @@ function DKWidget_GetValue(variable)
 	if(typeof variable === "object"){
 		if(variable.nodeType === 1){
 			if(variable.tagName === "INPUT"){
+				console.debug("DKWidget_GetValue(): returning variable.value\n");
 				return variable.value;
 			}
+			console.debug("DKWidget_GetValue(): returning variable.innerHTML\n");
 			return variable.innerHTML;
 		}
 		if(variable.type){ //event
 			var event = variable;
 			if(variable.type === "mousedown"){
+				console.debug("DKWidget_GetValue(): returning GetMouseButton(variable)\n");
 				return GetMouseButton(variable);
 			}
 			if(variable.type === "mouseup"){
+				console.debug("DKWidget_GetValue(): returning GetMouseButton(variable)\n");
 				return GetMouseButton(variable);
 			}
 			if(variable.type === "click"){
 				if(variable.target && variable.target.value){
+					console.debug("DKWidget_GetValue(): returning variable.target.value\n");
 					return variable.target.value;
 				}
+				console.debug("DKWidget_GetValue(): returning GetMouseButton(variable)\n");
 				return GetMouseButton(variable);
 			}
 			if(variable.type === "dblclick"){
+				console.debug("DKWidget_GetValue(): returning GetMouseButton(variable)\n");
 				return GetMouseButton(variable);
 			}
 			if(variable.type === "contextmenu"){
+				console.debug("DKWidget_GetValue(): returning GetMouseButton(variable)\n");
 				return GetMouseButton(variable);
 			}
 			if(variable.type === "mousemove"){
+				console.debug("DKWidget_GetValue(): returning event.clientX+","+event.clientY+","+event.screenX+","+event.screenY\n");
 				return event.clientX+","+event.clientY+","+event.screenX+","+event.screenY;
 			}
 			if(variable.type === "mouseover"){
 				if(!event.target){ return window.event.srcElement.id; }
 				//if(!event.target){ return event.srcElement.id; }
+				console.debug("DKWidget_GetValue(): returning event.target.id\n");
 				return event.target.id;
 			}
 			if(variable.type === "mouseout"){
 				if(!event.target){ return window.event.srcElement.id; }
 				//if(!event.target){ return event.srcElement.id; }
+				console.debug("DKWidget_GetValue(): returning event.target.id\n");
 				return event.target.id;
 			}
 			if(variable.type === "wheel"){
@@ -75,29 +89,37 @@ function DKWidget_GetValue(variable)
 				d = d < 1 ? d < -1 ? (-Math.pow(d, 2) - n1) / n : d : (Math.pow(d, 2) + n1) / n;
 				// Delta *should* not be greater than 2...
 				event.delta = Math.min(Math.max(d / 2, -1), 1) * 2;
+				console.debug("DKWidget_GetValue(): returning event.delta\n");
 				return event.delta;
 			}
 			if(variable.type === "keypress"){
+				console.debug("DKWidget_GetValue(): returning GetCharCode(variable)\n");
 				return GetCharCode(variable);
 			}
 			if(variable.type === "keydown"){
+				console.debug("DKWidget_GetValue(): returning GetKeyCode(variable)\n");
 				return GetKeyCode(variable);
 			}
 			if(variable.type === "keyup"){
+				console.debug("DKWidget_GetValue(): returning GetCharCode(variable)\n");
 				return GetKeyCode(variable);
 			}
 			if(variable.type === "resize"){
 				var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 				var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				console.debug("DKWidget_GetValue(): returning width+","+height\n");
 				return width+","+height;
 			}
 			var ele = DKWidget_GetElement(event);
+			console.debug("DKWidget_GetValue(): returning ele.value\n");
 			return ele.value;
 		}
 		else{ //element or other object
 			if(variable.value){
+				console.debug("DKWidget_GetValue(): returning variable.value\n");
 				return variable.value;
 			}
+			console.debug("DKWidget_GetValue(): returning variable[2]\n");
 			return variable[2];
 		}
 	}

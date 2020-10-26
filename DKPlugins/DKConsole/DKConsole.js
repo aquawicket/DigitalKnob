@@ -34,11 +34,11 @@ function DKConsole_OnEvent(event)
 	}
 	
 	if(event.type === "color"){
-		DKConsole_color = DK_GetValue(event);
+		DKConsole_color = DKWidget_GetValue(event);
 	}
 	
 	if(event.type === "notify"){
-		DKConsole_Notify(DK_GetValue(event));
+		DKConsole_Notify(DKWidget_GetValue(event));
 	}
 }
 
