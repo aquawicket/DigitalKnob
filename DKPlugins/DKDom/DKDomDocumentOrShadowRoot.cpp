@@ -11,22 +11,28 @@
 bool DKDomDocumentOrShadowRoot::Init()
 {
 	DKDEBUGFUNC();
+
+	// Properties
 	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_activeElement", DKDomDocumentOrShadowRoot::activeElement);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_fullscreenElement", DKDomDocumentOrShadowRoot::fullscreenElement);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_pointerLockElement", DKDomDocumentOrShadowRoot::pointerLockElement);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_styleSheets", DKDomDocumentOrShadowRoot::styleSheets);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_fullscreenElement", DKDomDocumentOrShadowRoot::fullscreenElement);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_pictureInPictureElement", DKDomDocumentOrShadowRoot::pictureInPictureElement);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_pointerLockElement", DKDomDocumentOrShadowRoot::pointerLockElement);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_styleSheets", DKDomDocumentOrShadowRoot::styleSheets);
 	
+	// Methods
 	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_caretPositionFromPoint", DKDomDocumentOrShadowRoot::caretPositionFromPoint);
 	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_elementFromPoint", DKDomDocumentOrShadowRoot::elementFromPoint);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_elementsFromPoint, DKDomDocumentOrShadowRoot::elementsFromPoint);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_getSelection, DKDomDocumentOrShadowRoot::getSelection);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodeFromPoint, DKDomDocumentOrShadowRoot::nodeFromPoint);
-	//DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodesFromPoint, DKDomDocumentOrShadowRoot::nodesFromPoint);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_elementsFromPoint", DKDomDocumentOrShadowRoot::elementsFromPoint);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_getSelection", DKDomDocumentOrShadowRoot::getSelection);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodeFromPoint", DKDomDocumentOrShadowRoot::nodeFromPoint);
+	DKDuktape::AttachFunction("CPP_DKDomDocumentOrShadowRoot_nodesFromPoint", DKDomDocumentOrShadowRoot::nodesFromPoint);
 	
 	DKClass::DKCreate("DKDom/DKDomDocumentOrShadowRoot.js");
 	return true;
 }
 
+
+// Properties
 //////////////////////////////////////////////////////////////
 int DKDomDocumentOrShadowRoot::activeElement(duk_context* ctx)
 {
@@ -42,6 +48,40 @@ int DKDomDocumentOrShadowRoot::activeElement(duk_context* ctx)
 	return true;
 }
 
+//////////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::fullscreenElement(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::pictureInPictureElement(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::pointerLockElement(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::styleSheets(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+
+// Methods
 ///////////////////////////////////////////////////////////////////////
 int DKDomDocumentOrShadowRoot::caretPositionFromPoint(duk_context* ctx)
 {
@@ -60,4 +100,36 @@ int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx)
 	DKString elementAddress = DKRml::elementToAddress(hoverElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
+}
+
+//////////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::elementsFromPoint(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+/////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::getSelection(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+//////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::nodeFromPoint(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
+}
+
+///////////////////////////////////////////////////////////////
+int DKDomDocumentOrShadowRoot::nodesFromPoint(duk_context* ctx)
+{
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return false;
 }

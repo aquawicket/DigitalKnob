@@ -17,6 +17,8 @@ Drag a conduit line across the outside of the footing to the other "post"
 *******************
 *** DIGITALKNOB ***
 *******************
+Create a brance of RmlUi with a javascript folder
+
 Go over DKFile.js and alphabatize functions
 
 I think we need to get rid of DKINSTALL in all the DKCMake stuff.
