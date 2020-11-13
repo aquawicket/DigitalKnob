@@ -40,9 +40,11 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 			if (type == "text/rcss" ||
 				 type == "text/css")
 			{
-				// FIXMWE
+				// FIXME
 				//parser->GetDocumentHeader()->rcss_external.push_back(href);
-				parser->GetDocumentHeader()->rcss.push_back(href);
+				//parser->GetDocumentHeader()->rcss.push_back(href);
+				parser->GetDocumentHeader()->rcss[0].path = href;
+				// FIXME
 			}
 
 			// If its an template, add to the template fields
@@ -70,7 +72,9 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 		Rml::String src = Rml::Get<Rml::String>(attributes, "src", "");
 		if (src.size() > 0)
 		{
-			parser->GetDocumentHeader()->scripts_external.push_back(src);
+			// FIXME
+			//parser->GetDocumentHeader()->scripts_external.push_back(src);
+			parser->GetDocumentHeader()->scripts[0].path = src;
 		}
 	}
 
@@ -122,13 +126,17 @@ bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data,
 
 	// Store an inline script
 	if (tag == "script" && data.size() > 0)
-		parser->GetDocumentHeader()->scripts_inline.push_back(data);
+		//parser->GetDocumentHeader()->scripts_inline.push_back(data);
+		parser->GetDocumentHeader()->scripts[0].path = data;
 
 	// Store an inline style
 	if (tag == "style" && data.size() > 0)
 	{
-		parser->GetDocumentHeader()->rcss_inline.push_back(data);
-		parser->GetDocumentHeader()->rcss_inline_line_numbers.push_back(parser->GetLineNumberOpenTag());
+		// FIXME
+		//parser->GetDocumentHeader()->rcss_inline.push_back(data);
+		parser->GetDocumentHeader()->rcss[0].path = data;
+		//parser->GetDocumentHeader()->rcss_inline_line_numbers.push_back(parser->GetLineNumberOpenTag());
+		parser->GetDocumentHeader()->rcss[0].path = parser->GetLineNumberOpenTag();
 	}
 
 	return true;
