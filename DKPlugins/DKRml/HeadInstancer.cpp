@@ -40,7 +40,9 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 			if (type == "text/rcss" ||
 				 type == "text/css")
 			{
-				parser->GetDocumentHeader()->rcss_external.push_back(href);
+				// FIXMWE
+				//parser->GetDocumentHeader()->rcss_external.push_back(href);
+				parser->GetDocumentHeader()->rcss.push_back(href);
 			}
 
 			// If its an template, add to the template fields
