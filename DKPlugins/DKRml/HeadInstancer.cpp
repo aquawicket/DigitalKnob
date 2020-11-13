@@ -42,9 +42,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 			{
 				// FIXME
 				//parser->GetDocumentHeader()->rcss_external.push_back(href);
-				//parser->GetDocumentHeader()->rcss.push_back(href);
 				parser->GetDocumentHeader()->rcss[0].path = href;
-				// FIXME
 			}
 
 			// If its an template, add to the template fields
