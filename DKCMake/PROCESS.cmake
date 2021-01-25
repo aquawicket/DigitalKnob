@@ -687,6 +687,11 @@ IF(LINUX)
 	LIST(APPEND DEBUG_LIBS dl)
 	LIST(APPEND RELEASE_LIBS dl)
 	
+	## For Raspberry Pi
+	LINK_DIRECTORIES(/opt/vc/lib)
+	LIST(APPEND DEBUG_LIBS bcm_host)
+	LIST(APPEND RELEASE_LIBS bcm_host)
+	
 	SET(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
 	ADD_EXECUTABLE(${AppName} ${App_SRC})
 	
