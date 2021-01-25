@@ -10,7 +10,7 @@
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKRml/DKRmlFile.h"
-#include "DKRml/DKHtmlToRML.h"
+#include "DKRml/DKHtmlToRml.h"
 
 ////////////////////////////////////////////////////////////////
 class DKRml : public Rml::EventListener, public DKObjectT<DKRml>
