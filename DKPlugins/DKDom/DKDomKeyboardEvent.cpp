@@ -4,7 +4,7 @@
 #include "DKDom/DKDomEvent.h"
 #include "DKDom/DKDomKeyboardEvent.h"
 #include "DKRml/DKRml.h"
-#include "RmlUI/Core/Input.h"
+#include "RmlUi/Core/Input.h"
 
 
 ///////////////////////////////
