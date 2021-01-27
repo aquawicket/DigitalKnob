@@ -38,6 +38,10 @@ int DKDomNavigator::platform(duk_context* ctx)
 	duk_push_string(ctx, "MacIntel");
 	return true;
 #endif
+#ifdef LINUX //Raspberry Pi
+	duk_push_string(ctx, "Linux armv7l");
+	return true;
+#endif
 	DKERROR("DKDomNavigator::platform(): platform invalid\n");
 	return false;
 }
