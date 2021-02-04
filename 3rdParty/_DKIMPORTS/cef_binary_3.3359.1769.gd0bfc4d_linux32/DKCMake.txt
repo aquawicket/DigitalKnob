@@ -4,7 +4,7 @@ ENDIF()
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/cef_binary_3.3359.1769.gd0bfc4d_linux32.tar.bz2 cef_binary_3.3359.1769.gd0bfc4d_linux32) ## find an online link
+## DKINSTALL(https://cef-builds.spotifycdn.com/cef_binary_3.3359.1769.gd0bfc4d_linux32.tar.bz2 cef_binary_3.3359.1769.gd0bfc4d_linux32)
 ## DKINSTALL(${DKWEB}/Download/cef_binary_3.3359.1769.gd0bfc4d_linux32.tar.bz2 cef_binary_3.3359.1769.gd0bfc4d_linux32)
 DKSET(CEF ${3RDPARTY}/cef_binary_3.3359.1769.gd0bfc4d_linux32)
 
