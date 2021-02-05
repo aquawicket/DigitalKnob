@@ -1125,7 +1125,7 @@ FUNCTION(DKRELEASE_LIB arg)
 		##MESSAGE("DKRELEASE_LIB(${arg})")
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 		IF(NOT EXISTS ${arg})
-		f	MESSAGE("MISSING: ${arg}")
+			MESSAGE("MISSING: ${arg}")
 			DKSET(QUEUE_BUILD ON)
 		ENDIF()
 		IF(ANDROID)
