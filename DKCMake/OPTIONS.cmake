@@ -100,11 +100,11 @@ IF(${index} GREATER -1)
 ENDIF()
 IF(NOT OS)
 	MESSAGE("EXAMPLE: digitalknob/DKApps/MyApp/win32")
-	MESSAGE(FATAL_ERROR "The binary directory must contain, win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32 or android64")
+	MESSAGE(FATAL_ERROR "The binary directory must contain, win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32, android64, raspberry32 or raspberry64")
 	DKREMOVE(${CMAKE_BINARY_DIR})
 ENDIF()
 
-## we use /Debug and /Release folders for Linux and Android
+## we use /Debug and /Release folders for Linux, Android and Raspberry
 ## if they are present, remove them and let DEBUG and RELEASE flags deal with that later.
 STRING(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
 STRING(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
@@ -332,6 +332,44 @@ IF(ANDROID_64)
 	DKSET(CMAKE_SKIP_RPATH ON)
 ENDIF()
 
+IF(RASPBERRY_32)
+	MESSAGE("*** Creating RASPBERRY x32 Project Files ***")
+	DKSET(RASPBERRY ON)
+	DKSET(OS raspberry32)
+	IF(DEBUG)
+		DKSET(DEBUG Debug)
+	ENDIF()
+	IF(RELEASE)
+		DKSET(RELEASE Release)
+	ENDIF()
+	DKSET(CMAKE_C_FLAGS "-m32")
+	DKSET(CMAKE_CXX_FLAGS "-m32")
+	DKSET(CMAKE_SKIP_RPATH ON)
+ENDIF()
+
+IF(RASPBERRY_64)
+	MESSAGE("*** Creating Raspberry x64 Project Files ***")
+	DKSET(RASPBERRY ON)
+	DKSET(OS raspberry64)
+	IF(DEBUG)
+		DKSET(DEBUG Debug)
+	ENDIF()
+	IF(RELEASE)
+		DKSET(RELEASE Release)
+	ENDIF()
+	DKSET(CMAKE_C_FLAGS "-m64")
+	DKSET(CMAKE_CXX_FLAGS "-m64")
+	#DKSET(CMAKE_SKIP_RPATH ON)
+	
+	SET(CMAKE_SKIP_BUILD_RPATH  FALSE)
+	SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+	SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/")
+	SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+	LIST(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/" isSystemDir)
+	IF("${isSystemDir}" STREQUAL "-1")
+		SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/")
+	ENDIF("${isSystemDir}" STREQUAL "-1")
+ENDIF()
 
 ###########################################################################
 ## Set variables for Build Type
@@ -387,14 +425,6 @@ IF(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
 	DKSET(CMAKE_CXX_FLAGS "-std=c++0x")
 	DKSET(CMAKE_C_FLAGS -fPIC)
 ENDIF()
-
-
-
-
-
-
-
-
 
 
 
@@ -486,6 +516,24 @@ ENDIF()
 IF(LINUX_64)
 	ADD_DEFINITIONS(-DLINUX64)
 	ADD_DEFINITIONS(-DLINUX)
+	INCLUDE_DIRECTORIES(/usr/X11/include)
+	IF(DEBUG)
+		ADD_DEFINITIONS(-DDEBUG)
+	ENDIF()
+ENDIF()
+
+IF(RASPBERRY_32)
+	ADD_DEFINITIONS(-DRASPBERRY32)
+	ADD_DEFINITIONS(-DLINUX32)
+	INCLUDE_DIRECTORIES(/usr/X11/include)
+	IF(DEBUG)
+		ADD_DEFINITIONS(-DDEBUG)
+	ENDIF()
+ENDIF()
+
+IF(RASPBERRY_64)
+	ADD_DEFINITIONS(-DRASPBERRY64)
+	ADD_DEFINITIONS(-DRASPBERRY)
 	INCLUDE_DIRECTORIES(/usr/X11/include)
 	IF(DEBUG)
 		ADD_DEFINITIONS(-DDEBUG)

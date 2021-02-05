@@ -17,6 +17,8 @@
 		* /iossim64
 		* /android32
 		* /android64
+		* /raspberry32
+		* /raspberry64
 		
 * Note: DKCMake will fill in most variables by the path you have selected.		
 

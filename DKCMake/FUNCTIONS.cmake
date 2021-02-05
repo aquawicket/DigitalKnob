@@ -283,72 +283,6 @@ FUNCTION(WIN64_BASH arg)
 	ENDIF()
 ENDFUNCTION()
 
-#############################
-FUNCTION(ANDROID_COMMAND arg)
-	IF(ANDROID AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		MESSAGE("COMMAND-> ${arg2}")
-		EXECUTE_PROCESS(COMMAND cmd /c ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
-	ENDIF()
-ENDFUNCTION()
-
-###################################
-FUNCTION(ANDROID_DEBUG_COMMAND arg)
-	IF(ANDROID AND DEBUG AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_COMMAND(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
-#####################################
-FUNCTION(ANDROID_RELEASE_COMMAND arg)
-	IF(ANDROID AND RELEASE AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_COMMAND(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
-###############################
-FUNCTION(ANDROID32_COMMAND arg)
-	IF(ANDROID_32 AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_COMMAND(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
-###############################
-FUNCTION(ANDROID64_COMMAND arg)
-	IF(ANDROID_64 AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_COMMAND(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
-##########################
-FUNCTION(ANDROID_BASH arg)
-	IF(ANDROID AND QUEUE_BUILD)
-		MESSAGE("BASH-> ${arg}")
-		FILE(WRITE ${3RDPARTY}/mingw/msys/temp ${arg})
-		EXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash /${MSYS}/temp)
-	ENDIF()
-ENDFUNCTION()
-
-############################
-FUNCTION(ANDROID32_BASH arg)
-	IF(ANDROID_32 AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_BASH(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
-############################
-FUNCTION(ANDROID64_BASH arg)
-	IF(ANDROID_64 AND QUEUE_BUILD)
-		SET(arg2 ${arg} ${ARGN}) # Merge them together
-		ANDROID_BASH(${arg2})
-	ENDIF()
-ENDFUNCTION()
-
 #########################
 FUNCTION(MAC_COMMAND arg)
 	IF(MAC AND QUEUE_BUILD)
@@ -544,6 +478,151 @@ FUNCTION(LINUX64_RELEASE_COMMAND arg)
 		LINUX_COMMAND(${arg2})
 	ENDIF()
 ENDFUNCTION()
+
+
+#############################
+FUNCTION(ANDROID_COMMAND arg)
+	IF(ANDROID AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		MESSAGE("COMMAND-> ${arg2}")
+		EXECUTE_PROCESS(COMMAND cmd /c ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(ANDROID_DEBUG_COMMAND arg)
+	IF(ANDROID AND DEBUG AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+#####################################
+FUNCTION(ANDROID_RELEASE_COMMAND arg)
+	IF(ANDROID AND RELEASE AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+###############################
+FUNCTION(ANDROID32_COMMAND arg)
+	IF(ANDROID_32 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+###############################
+FUNCTION(ANDROID64_COMMAND arg)
+	IF(ANDROID_64 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+##########################
+FUNCTION(ANDROID_BASH arg)
+	IF(ANDROID AND QUEUE_BUILD)
+		MESSAGE("BASH-> ${arg}")
+		FILE(WRITE ${3RDPARTY}/mingw/msys/temp ${arg})
+		EXECUTE_PROCESS(COMMAND cmd /c ${3RDPARTY}/mingw/msys/bin/bash /${MSYS}/temp)
+	ENDIF()
+ENDFUNCTION()
+
+############################
+FUNCTION(ANDROID32_BASH arg)
+	IF(ANDROID_32 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_BASH(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+############################
+FUNCTION(ANDROID64_BASH arg)
+	IF(ANDROID_64 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		ANDROID_BASH(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+
+
+
+###########################
+FUNCTION(RASPBERRY_COMMAND arg)
+	IF(RASPBERRY AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		MESSAGE("COMMAND-> ${arg2}")
+		EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${CURRENT_DIR})
+	ENDIF()
+ENDFUNCTION()
+
+#################################
+FUNCTION(RASPBERRY_DEBUG_COMMAND arg)
+	IF(RASPBERRY AND DEBUG AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY_RELEASE_COMMAND arg)
+	IF(RASPBERRY AND RELEASE AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+#############################
+FUNCTION(RASPBERRY_COMMAND arg)
+	IF(RASPBERRY_32 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY32_DEBUG_COMMAND arg)
+	IF(RASPBERRY_32 AND DEBUG AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+#####################################
+FUNCTION(RASPBERRY32_RELEASE_COMMAND arg)
+	IF(RASPBERRY_32 AND RELEASE AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+#############################
+FUNCTION(RASPBERRY64_COMMAND arg)
+	IF(RASPBERRY_64 AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY_DEBUG_COMMAND arg)
+	IF(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+#####################################
+FUNCTION(RASPBERRY64_RELEASE_COMMAND arg)
+	IF(RASPBERRY_64 AND RELEASE AND QUEUE_BUILD)
+		SET(arg2 ${arg} ${ARGN}) # Merge them together
+		RASPBERRY_COMMAND(${arg2})
+	ENDIF()
+ENDFUNCTION()
+
+
 
 
 
@@ -1025,6 +1104,11 @@ FUNCTION(DKDEBUG_LIB arg)
 			STRING(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
 			IF(${_indexa} EQUAL -1)
 				DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to list
+			ENDIF()
+		ELSEIF(RASPBERRY)
+			STRING(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
+			IF(${_indexa} EQUAL -1)
+				DKSET(DEBUG_LIBS debug ${arg} ${DEBUG_LIBS})  #Add to list
 			ENDIF()	
 		ELSE()
 			STRING(FIND "${DEBUG_LIBS}" "${arg}" _indexa)
@@ -1041,7 +1125,7 @@ FUNCTION(DKRELEASE_LIB arg)
 		##MESSAGE("DKRELEASE_LIB(${arg})")
 		DKSET(LIBLIST ${LIBLIST} ${arg}) ## used for double checking
 		IF(NOT EXISTS ${arg})
-			MESSAGE("MISSING: ${arg}")
+		f	MESSAGE("MISSING: ${arg}")
 			DKSET(QUEUE_BUILD ON)
 		ENDIF()
 		IF(ANDROID)
@@ -1050,6 +1134,11 @@ FUNCTION(DKRELEASE_LIB arg)
 				DKSET(DKLIBRARIES "LOCAL_LDFLAGS += ${arg}\n" ${DKLIBRARIES})
 			ENDIF()
 		ELSEIF(LINUX)
+			STRING(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
+			IF(${_indexa} EQUAL -1)
+				DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to list
+			ENDIF()
+		ELSEIF(RASPBERRY)
 			STRING(FIND "${RELEASE_LIBS}" "${arg}" _indexa)
 			IF(${_indexa} EQUAL -1)
 				DKSET(RELEASE_LIBS optimized ${arg} ${RELEASE_LIBS})  #Add to list
@@ -1320,6 +1409,50 @@ FUNCTION(ANDROID64_RELEASE_LIB arg)
 ENDFUNCTION()
 
 
+#############################
+FUNCTION(RASPBERRY_DEBUG_LIB arg)
+	IF(RASPBERRY AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###############################
+FUNCTION(RASPBERRY_RELEASE_LIB arg)
+	IF(RASPBERRY AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###############################
+FUNCTION(RASPBERRY32_DEBUG_LIB arg)
+	IF(RASPBERRY32 AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#################################
+FUNCTION(RASPBERRY32_RELEASE_LIB arg)
+	IF(RASPBERRY32 AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###############################
+FUNCTION(RASPBERRY64_DEBUG_LIB arg)
+	IF(RASPBERRY64 AND DEBUG)
+		DKDEBUG_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#################################
+FUNCTION(RASPBERRY64_RELEASE_LIB arg)
+	IF(RASPBERRY64 AND RELEASE)
+		DKRELEASE_LIB(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+
+
 #########################
 FUNCTION(WIN_INCLUDE arg)
 	IF(WIN)
@@ -1524,6 +1657,69 @@ FUNCTION(ANDROID32_RELEASE_INCLUDE arg)
 ENDFUNCTION()
 
 
+
+###########################
+FUNCTION(RASPBERRY_INCLUDE arg)
+	IF(RASPBERRY)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#############################
+FUNCTION(RASPBERRY32_INCLUDE arg)
+	IF(RASPBERRY_32)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#############################
+FUNCTION(RASPBERRY64_INCLUDE arg)
+	IF(RASPBERRY_64)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#################################
+FUNCTION(RASPBERRY_DEBUG_INCLUDE arg)
+	IF(DEBUG)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY_RELEASE_INCLUDE arg)
+	IF(RELEASE)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY32_DEBUG_INCLUDE arg)
+	IF(RASPBERRY_32 AND DEBUG)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#####################################
+FUNCTION(RASPBERRY32_RELEASE_INCLUDE arg)
+	IF(RASPBERRY_32 AND RELEASE)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+###################################
+FUNCTION(RASPBERRY64_DEBUG_INCLUDE arg)
+	IF(RASPBERRY_64 AND DEBUG)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
+
+#####################################
+FUNCTION(RASPBERRY64_RELEASE_INCLUDE arg)
+	IF(RASPBERRY_64 AND RELEASE)
+		DKINCLUDE(${arg})
+	ENDIF()
+ENDFUNCTION()
 
 
 
@@ -1743,6 +1939,8 @@ SET(ASSETS
 	PATTERN linux64 EXCLUDE
 	PATTERN android32 EXCLUDE
 	PATTERN android64 EXCLUDE
+	PATTERN raspberry32 EXCLUDE
+	PATTERN raspberry64 EXCLUDE
 	PATTERN cefchild EXCLUDE
 	PATTERN dktest EXCLUDE)
 	##PATTERN README.txt EXCLUDE)
