@@ -575,7 +575,7 @@ FUNCTION(RASPBERRY_RELEASE_COMMAND arg)
 ENDFUNCTION()
 
 #############################
-FUNCTION(RASPBERRY_COMMAND arg)
+FUNCTION(RASPBERRY32_COMMAND arg)
 	IF(RASPBERRY_32 AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
 		RASPBERRY_COMMAND(${arg2})
@@ -607,7 +607,7 @@ FUNCTION(RASPBERRY64_COMMAND arg)
 ENDFUNCTION()
 
 ###################################
-FUNCTION(RASPBERRY_DEBUG_COMMAND arg)
+FUNCTION(RASPBERRY64_DEBUG_COMMAND arg)
 	IF(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
 		RASPBERRY_COMMAND(${arg2})
@@ -1409,42 +1409,42 @@ FUNCTION(ANDROID64_RELEASE_LIB arg)
 ENDFUNCTION()
 
 
-#############################
+#################################
 FUNCTION(RASPBERRY_DEBUG_LIB arg)
 	IF(RASPBERRY AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-###############################
+###################################
 FUNCTION(RASPBERRY_RELEASE_LIB arg)
 	IF(RASPBERRY AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-###############################
+###################################
 FUNCTION(RASPBERRY32_DEBUG_LIB arg)
 	IF(RASPBERRY32 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-#################################
+#####################################
 FUNCTION(RASPBERRY32_RELEASE_LIB arg)
 	IF(RASPBERRY32 AND RELEASE)
 		DKRELEASE_LIB(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-###############################
+###################################
 FUNCTION(RASPBERRY64_DEBUG_LIB arg)
 	IF(RASPBERRY64 AND DEBUG)
 		DKDEBUG_LIB(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-#################################
+#####################################
 FUNCTION(RASPBERRY64_RELEASE_LIB arg)
 	IF(RASPBERRY64 AND RELEASE)
 		DKRELEASE_LIB(${arg})
