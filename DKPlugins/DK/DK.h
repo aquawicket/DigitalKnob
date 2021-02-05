@@ -18,8 +18,10 @@
 #include "DK/DKAndroid.h"
 #elif defined(IOS)
 #include "DK/DKIos.h"
+#elif defined(RASPBERRY)
+#include "DK/DKLinux.h"
 #else
-#error NO KNOWN OS FLAG WAS STATED (WIN32,MAC,LINUX,ANDROID,IOS)
+#error NO KNOWN OS FLAG WAS STATED (WIN32,MAC,LINUX,ANDROID,IOS,RASPBERRY)
 #endif
 
 //* DK
