@@ -80,6 +80,8 @@ function DKBuildConsole_SelectOs()
 	console.log("a. iossim64");
 	console.log("b. android32");
 	console.log("c. android64");
+	console.log("d. raspberry32");
+	console.log("e. raspberry64");
 	console.log("ESC. exit");
 	console.log("\n");
 
@@ -126,6 +128,12 @@ function DKBuildConsole_SelectOs()
 	}
 	else if(key === 99){
 		OS = "android64";
+	}
+	else if(key === 100){ //FIXME: key not tested
+		OS = "raspberry32";
+	}
+	else if(key === 101){ //FIXME: key not tested
+		OS = "raspberry64";
 	}
 	else{
 		console.error("INVALID OPTION");

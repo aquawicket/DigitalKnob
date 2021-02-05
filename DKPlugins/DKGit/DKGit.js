@@ -19,6 +19,9 @@ function DKGit_Init()
 	if(CPP_DKDuktape_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
+	if(CPP_DKDuktape_GetOS() === "Raspberry"){
+		GIT = "/usr/bin/git";
+	}
 	
 	DKGit_ValidateGit();
 }
@@ -70,6 +73,9 @@ function DKGit_InstallGit()
 		//TODO
 	}
 	else if(CPP_DKDuktape_GetOS() === "Linux"){
+		CPP_DKDuktape_Execute("sudo apt-get install git");
+	}
+	else if(CPP_DKDuktape_GetOS() === "Raspberry"){
 		CPP_DKDuktape_Execute("sudo apt-get install git");
 	}
 	else{

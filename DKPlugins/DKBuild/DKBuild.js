@@ -3,7 +3,7 @@
 	Also, git credential memory should be added.
 */
 
-var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64
+var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspbery64 
 var APP = "";  //DKAppname
 var TYPE = "";  //Debug, Release, ALL
 var LINK = "";  //Static, Dynamic
@@ -43,11 +43,12 @@ function DKBuild_Init()
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
 	if(CPP_DKDuktape_GetOS() === "Linux"){
-		
-		//FIXME
-		//DKPATH = "/home/aquawicket/digitalknob";
-		DKPATH = "/home/pi/Desktop/digitalknob";
-		
+		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: temporary fix 
+		CMAKE = "/usr/bin/cmake";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
+	}
+	if(CPP_DKDuktape_GetOS() === "Raspberry"){
+		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME
 		CMAKE = "/usr/bin/cmake";
 		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
 	}
@@ -100,6 +101,9 @@ function DKBuild_InstallCmake()
 	else if(CPP_DKDuktape_GetOS() === "Linux"){
 		CPP_DKDuktape_Execute("sudo apt-get install cmake");
 	}
+	else if(CPP_DKDuktape_GetOS() === "Raspberry"){
+		CPP_DKDuktape_Execute("sudo apt-get install cmake");
+	}
 	else{
 		console.log("ERROR: unrecognied HOST OS: "+CPP_DKDuktape_GetOS());
 	}
@@ -133,7 +137,7 @@ function DKBuild_InstallVC2019()
 //////////////////////////////
 function DKBuild_ValidateGcc()
 {
-	if(CPP_DKDuktape_GetOS() !== "Linux"){ return; }
+	if(CPP_DKDuktape_GetOS() !== "Linux" && CPP_DKDuktape_GetOS() !== "Raspberry"){ return; }
 	if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GCC");
 	if(!CPP_DKFile_Exists(GCC)){
@@ -189,6 +193,9 @@ function DKBuild_OsCheck()
 		if(OS === "linux"){
 			console.error(OS+" can only be build from a LINUX machine"); return false;
 		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		}
 	}
 	if(CPP_DKDuktape_GetOS() === "Win64"){
 		if(OS === "mac"){
@@ -202,6 +209,9 @@ function DKBuild_OsCheck()
 		}
 		if(OS === "linux"){
 			console.error(OS+" can only be build from a LINUX machine"); return false;
+		}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); return false;
 		}
 	}
 	if(CPP_DKDuktape_GetOS() === "Mac"){
@@ -223,8 +233,34 @@ function DKBuild_OsCheck()
 		//if(OS === "andoroid"){
 		//	console.error(OS+" can only be build from a Windows machine"); return false;
 		//}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		}
 	}
 	if(CPP_DKDuktape_GetOS() === "Linux"){
+		if(OS === "win32"){
+			console.error(OS+" can only be build from a Windows machine"); return false;
+		}
+		if(OS === "win64"){
+			console.error(OS+" can only be build from an WIN64 machine"); return false;
+		}
+		if(OS === "mac"){
+			console.error(OS+" can only be build from an OSX machine"); return false;
+		}
+		if(OS === "ios"){
+			console.error(OS+" can only be build from an OSX machine"); return false;
+		}
+		if(OS === "ios-simulator"){
+			console.error(OS+" can only be build from an OSX machine"); return false;
+		}
+		//if(OS === "andoroid"){
+		//	console.error(OS+" can only be build from a Windows machine"); return false;
+		//}
+		if(OS === "raspberry"){
+			console.error(OS+" can only be build from a Raspberry machine"); return false;
+		}
+	}
+	if(CPP_DKDuktape_GetOS() === "Raspberry"){
 		if(OS === "win32"){
 			console.error(OS+" can only be build from a Windows machine"); return false;
 		}
@@ -826,6 +862,106 @@ function DKBuild_DoResults()
 			CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=0 NDKLOG=1")
 		}
 	}
+	
+	
+	//// RASPBERRY32 ///////
+	if(OS === "raspberry32"){
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32");
+		if(TYPE === "Debug" || TYPE === "ALL"){
+			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
+				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
+			}
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
+			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
+			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
+			CPP_DKDuktape_Execute("make "+APP);
+			
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/linux32/Debug/"+APP+".desktop");
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
+				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
+			}
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
+			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release");
+			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
+			CPP_DKDuktape_Execute("make "+APP);
+			
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Release/"+APP+".desktop");
+		}
+	}
+	
+	//// RASPBERRY64 ///////
+	if(OS === "linux64"){
+		CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64");
+		if(TYPE === "Debug" || TYPE === "ALL"){
+			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
+				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
+			}
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
+			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug");
+			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
+			CPP_DKDuktape_Execute("make "+APP);
+
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Debug/"+APP+".desktop");
+		}
+		if(TYPE === "Release" || TYPE === "ALL"){
+			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
+				CPP_DKFile_Delete(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
+			}
+			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
+			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release");
+			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
+			
+			CPP_DKDuktape_Execute("make "+APP);
+			
+			//Create .desktop file
+			var string = "[Desktop Entry]\n";
+			string += "Encoding=UTF-8\n";
+			string += "Version=1.0\n";
+			string += "Type=Application\n";
+			string += "Terminal=true\n";
+			string += "Name="+APP+"\n";
+			string += "Exec="+DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release/"+APP+"\n";
+			string += "Icon="+DKPATH+"/"+appdir+"/"+APP+"/icons/icon.png\n";
+			CPP_DKFile_StringToFile(string, DKPATH+"/"+appdir+"/"+APP+"/raspberry64/Release/"+APP+".desktop");
+		}
+	}
+	
 	
 	//* The build is done
 	console.log("\n");

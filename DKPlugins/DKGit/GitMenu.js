@@ -21,6 +21,9 @@ function GitMenu_Init()
 	if(DK_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
+	if(DK_GetOS() === "Raspberry"){
+		GIT = "/usr/bin/git";
+	}
 
 	DK_Create("DKGit/GitMenu.html", function(){
 		document.addEventListener("mousedown", GitMenu_OnEvent);
@@ -91,6 +94,9 @@ function GitMenu_InstallGit()
 		//TODO
 	}
 	else if(DK_GetOS() === "Linux"){
+		DK_Execute("sudo apt-get install git");
+	}
+	else if(DK_GetOS() === "Raspberry"){
 		DK_Execute("sudo apt-get install git");
 	}
 	else{

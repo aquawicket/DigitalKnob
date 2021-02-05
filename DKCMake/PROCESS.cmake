@@ -695,6 +695,7 @@ ENDIF()
 
 #########
 IF(LINUX)
+IF(NOT RASPBERRY)
 	### copy assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	IF(DEBUG)
@@ -736,6 +737,7 @@ IF(LINUX)
 	ELSE()
 		TARGET_LINK_LIBRARIES(${AppName} ${RELEASE_LIBS})
 	ENDIF()
+ENDIF()
 ENDIF()
 
 ###########
