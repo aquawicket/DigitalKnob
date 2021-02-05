@@ -549,7 +549,7 @@ ENDFUNCTION()
 
 
 
-###########################
+###############################
 FUNCTION(RASPBERRY_COMMAND arg)
 	IF(RASPBERRY AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -558,7 +558,7 @@ FUNCTION(RASPBERRY_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-#################################
+#####################################
 FUNCTION(RASPBERRY_DEBUG_COMMAND arg)
 	IF(RASPBERRY AND DEBUG AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -566,7 +566,7 @@ FUNCTION(RASPBERRY_DEBUG_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-###################################
+#######################################
 FUNCTION(RASPBERRY_RELEASE_COMMAND arg)
 	IF(RASPBERRY AND RELEASE AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -574,7 +574,7 @@ FUNCTION(RASPBERRY_RELEASE_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-#############################
+#################################
 FUNCTION(RASPBERRY32_COMMAND arg)
 	IF(RASPBERRY_32 AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -582,7 +582,7 @@ FUNCTION(RASPBERRY32_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-###################################
+#######################################
 FUNCTION(RASPBERRY32_DEBUG_COMMAND arg)
 	IF(RASPBERRY_32 AND DEBUG AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -590,7 +590,7 @@ FUNCTION(RASPBERRY32_DEBUG_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-#####################################
+#########################################
 FUNCTION(RASPBERRY32_RELEASE_COMMAND arg)
 	IF(RASPBERRY_32 AND RELEASE AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -598,7 +598,7 @@ FUNCTION(RASPBERRY32_RELEASE_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-#############################
+#################################
 FUNCTION(RASPBERRY64_COMMAND arg)
 	IF(RASPBERRY_64 AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -606,7 +606,7 @@ FUNCTION(RASPBERRY64_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-###################################
+#######################################
 FUNCTION(RASPBERRY64_DEBUG_COMMAND arg)
 	IF(RASPBERRY_64 AND DEBUG AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
@@ -614,7 +614,7 @@ FUNCTION(RASPBERRY64_DEBUG_COMMAND arg)
 	ENDIF()
 ENDFUNCTION()
 
-#####################################
+#########################################
 FUNCTION(RASPBERRY64_RELEASE_COMMAND arg)
 	IF(RASPBERRY_64 AND RELEASE AND QUEUE_BUILD)
 		SET(arg2 ${arg} ${ARGN}) # Merge them together
