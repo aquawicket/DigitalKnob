@@ -11,6 +11,5 @@
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
-SET_PROPERTY(GLOBAL PROPERTY ALLOW_DUPLICATE_CUSTOM_TARGETS 1)
 PROJECT(DigitalKnob)
 INCLUDE(DKCMake/PROCESS.cmake)

@@ -10,7 +10,7 @@
 
 ########### Initial setup ####################
 IF(COMMAND cmake_policy)
-	CMAKE_POLICY(SET CMP0003 NEW) ##what is this for?
+	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 ENDIF(COMMAND cmake_policy)
 ##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
 
@@ -101,12 +101,14 @@ ENDIF()
 STRING(FIND "${CMAKE_BINARY_DIR}" "/raspberry32" index)
 IF(${index} GREATER -1)
 	SET(RASPBERRY_32 ON)
+	SET(LINUX_32 ON) #FIXME: not all raspberry OS's are linux
 	SET(OS "raspberry32")
 	STRING(REPLACE "/raspberry32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 ENDIF()
 STRING(FIND "${CMAKE_BINARY_DIR}" "/raspberry64" index)
 IF(${index} GREATER -1)
 	SET(RASPBERRY_64 ON)
+	SET(LINUX_64 ON) #FIXME: not all raspberry OS's are linux
 	SET(OS "raspberry64")
 	STRING(REPLACE "/raspberry64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 ENDIF()
