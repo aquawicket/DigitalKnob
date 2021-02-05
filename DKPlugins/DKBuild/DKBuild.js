@@ -3,7 +3,7 @@
 	Also, git credential memory should be added.
 */
 
-var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspbery64 
+var OS = "";   //win32,win64,mac32,mac64,linux32,linux64,ios32,ios64,iossim32,iossim64,android32,android64,raspberry32,raspberry64 
 var APP = "";  //DKAppname
 var TYPE = "";  //Debug, Release, ALL
 var LINK = "";  //Static, Dynamic
