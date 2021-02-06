@@ -80,7 +80,8 @@ bool DKAssets::Init()
 		DKString app_name;
 		DKFile::GetExeName(app_name);
 		replace(app_name, ".exe", "");
-		DKFile::online_assets = "http://digitalknob.com/"+app_name;
+		//DKFile::online_assets = "http://digitalknob.com/"+app_name;
+		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
 	}
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
