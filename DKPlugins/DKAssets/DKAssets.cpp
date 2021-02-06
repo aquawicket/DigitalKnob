@@ -12,10 +12,20 @@ bool DKAssets::Init()
 {
 	DKDEBUGFUNC();
 	DKString datapath;
+
 	DKAssets::AquireDataPath(datapath);
 	if(DKAssets::CheckAssetsPath(datapath)){
 		DKFile::MakeDir(DKFile::local_assets+"USER");
 	}
+	else{
+		DKAssets::CopyAssets(NULL, NULL);
+	}
+
+#ifdef WIN32
+	//DKAssets::CopyAssets(NULL, NULL);
+#endif
+
+	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
 	DKString file;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_FILE]", file);
@@ -29,12 +39,6 @@ bool DKAssets::Init()
 	file_log.close();
 #endif		
 	}
-	
-	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
-
-#ifdef WIN32
-	DKAssets::CopyAssets(NULL, NULL);
-#endif
 
 #ifdef WIN32
 	DKString console;
@@ -143,7 +147,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
 ////////////////////////////////////////////////////
 bool DKAssets::CheckAssetsPath(const DKString& path)
 {
-	DKDEBUGFUNC(path);;
+	DKDEBUGFUNC(path);
 	DKFile::local_assets = path;
 
 	//if there is an assets directory under this, then we are in a development environment.
@@ -160,7 +164,7 @@ bool DKAssets::CheckAssetsPath(const DKString& path)
 		DKFile::GetAbsolutePath(DKFile::app_path + "..\\assets\\", DKFile::local_assets);
 		return true;
 	}
-	if (DKFile::PathExists(DKFile::app_path + "..\\..\\assets\\ASSETS")){ //Windows
+	if(DKFile::PathExists(DKFile::app_path + "..\\..\\assets\\ASSETS")){ //Windows
 		DKFile::GetAbsolutePath(DKFile::app_path + "..\\..\\assets\\", DKFile::local_assets);
 		return true;
 	}
