@@ -232,7 +232,7 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 	DKArchive::Compress(input, input+"/../assets.zip");
 #endif
 	DKUtil::Bin2C(input + "/../assets.zip", output);
-	DKFile::Delete(input + "/../assets.zip"); //delete lingering zip file;
+	//DKFile::Delete(input + "/../assets.zip"); //delete lingering zip file;
 
 	//alter assets.h file (the memory intensive way :P)
 	DKString assets_string;
