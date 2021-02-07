@@ -280,7 +280,7 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	
 	
 #if !defined(ANDROID) && !defined(WIN32)
-	#include "assets.h"
+	//#include "assets.h"
 	DKINFO("Extracting assets.zip form assets Header file\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, DKFile::local_assets+"assets.zip");
