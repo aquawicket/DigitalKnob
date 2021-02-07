@@ -389,7 +389,7 @@ MESSAGE("***************************************\n")
 #copy digitalknob/DKPlugins/_DKIMPORT/CMakeLists.txt to app path.
 MESSAGE("Copying DKPlugins/_DKIMPORT/ to App...")
 
-## copy recursivly without overwrite
+## copy app default files recursivly without overwrite
 DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE)
 
 ### Include all source files from the app folder
@@ -420,21 +420,21 @@ IF(WIN_32)
 	# copy the icon
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
-	# backup files not going in the package
+	# backup generated files and folders not going in the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove files before packaging
+	# remove generated files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
-	
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup, over
+	
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	LIST(APPEND WIN_LIBS 
@@ -696,6 +696,25 @@ ENDIF()
 #########
 IF(LINUX)
 IF(NOT RASPBERRY)
+	# backup files not going in the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# remove files before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	DKZIP(${DKPROJECT}/assets) #zip the assets
+	
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	DKREMOVE(${DKPROJECT}/Backup)
+	
 	### copy assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	IF(DEBUG)
@@ -855,6 +874,30 @@ ENDIF()
 
 #########
 IF(RASPBERRY)
+	# backup files not going in the package
+	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
+	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	
+	# remove files before packaging
+	DKREMOVE(${DKPROJECT}/assets/USER)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
+	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
+	DKREMOVE(${DKPROJECT}/assets/cef.log)
+	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	DKZIP(${DKPROJECT}/assets/) #zip the assets
+	
+	#load assets.zip into a header file (assets.h)
+	##bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	DKREMOVE(${DKPROJECT}/Backup)
+
+	
+
 	### copy assets
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	IF(DEBUG)

@@ -228,9 +228,9 @@ bool DKAssets::AppendDataPath(const DKString& datapath)
 bool DKAssets::PackageAssets(DKString& input, DKString& output)
 {
 	DKDEBUGFUNC(input, output);
-#if !defined(ANDROID)
+#if !defined(WIN32)
 	DKArchive::Compress(input, input+"/../assets.zip");
-#endif
+
 	DKUtil::Bin2C(input + "/../assets.zip", output);
 	//DKFile::Delete(input + "/../assets.zip"); //delete lingering zip file;
 
@@ -242,7 +242,8 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 	//replace(assets_string, " ", "");
 	//std::remove_if(assets_string.begin(), assets_string.end(), isspace);
 
-	assets_string = "#if defined(USE_DKAssets) && !defined(ANDROID)\n" + assets_string;
+	/*
+	assets_string += "#if defined(USE_DKAssets) && !defined(ANDROID)\n" + assets_string;
 	assets_string += "#endif\n\n";
 	assets_string += "void CopyAssets(){\n";
 	assets_string += "#if defined(USE_DKAssets) && !defined(ANDROID)\n";
@@ -250,9 +251,12 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 	assets_string += "DKAssets::CopyAssets(assets, assets_size);\n";
 	assets_string += "#endif\n";
 	assets_string += "}";
-
+	*/
 	DKFile::StringToFile(assets_string, output);
 	return true;
+	
+#endif
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -276,9 +280,10 @@ bool DKAssets::CopyAssets(const unsigned char* assets, const long int assets_siz
 	
 	
 #if !defined(ANDROID) && !defined(WIN32)
+	#include "assets.h"
 	DKINFO("Extracting assets.zip form assets Header file\n");	
 	DKFile::MakeDir(DKFile::local_assets);
-	DKUtil::C2Bin((unsigned char *)assets, assets_size, DKFile::local_assets+"assets.zip");
+	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, DKFile::local_assets+"assets.zip");
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 	return true;
