@@ -107,8 +107,8 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-bool DKUtil::C2Bin(const unsigned char* header, const long int size, const DKString& output)
+/////////////////////////////////////////////////////////////////////////////////////
+bool DKUtil::C2Bin(const unsigned char* header, const long int size, DKString& output)
 {
 	DKDEBUGFUNC(header, size, output);
 #ifndef MAC

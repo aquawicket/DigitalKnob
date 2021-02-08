@@ -28,8 +28,8 @@ MAC_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG}/libRmlDebugger.a)
 MAC_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE}/libRmlDebugger.a)
 IOSSIM_DEBUG_LIB(${RMLUI}/${OS}/${DEBUG}/libRmlDebugger_d.a)
 IOSSIM_RELEASE_LIB(${RMLUI}/${OS}/${RELEASE}/libRmlDebugger.a)
-##LINUX_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlDebugger.a)
-##LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlDebugger.a)
+##LINUX_DEBUG_LIB(${RMLUI}/${OS}/Debug/libRmlDebugger.a) ##FIXME
+##LINUX_RELEASE_LIB(${RMLUI}/${OS}/Release/libRmlDebugger.a) ##FIXME
 ANDROID_DEBUG_LIB(${RMLUI}/${OS}/Debug/obj/local/armeabi-v7a/libRmlDebugger.a)
 ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlDebugger.a)
 

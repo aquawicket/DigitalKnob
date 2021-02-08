@@ -121,6 +121,7 @@ ENDFUNCTION()
 
 ###########################
 FUNCTION(DKRENAME arg arg2)
+	MESSAGE("Renameing ${arg} to ${arg2}")
 	IF(EXISTS ${arg})
 		IF(EXISTS ${arg2})
 			RETURN()
