@@ -67,7 +67,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 
 	f_input = fopen(input.c_str(), "rb");
 	if (f_input == NULL) {
-		printf("can't open file for reading\n");
+		DKERROR("DKUtil::Bin2C(): can't open file for reading\n");
 		return false;
 	}
 
@@ -84,26 +84,27 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 	fclose(f_input);
 	f_output = fopen(output.c_str(), "w");
 	if (f_output == NULL){
-		printf("can't open file for writing\n");
+		DKERROR("DKUtil::Bin2C(): can't open file for writing\n");
 		return false;
 	}
 
 	//ident = "assets";
 	need_comma = 0;
-	fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size);
+	//fprintf (f_output, "const unsigned char %s[%i] = {", ident, file_size); //verbos
 
 	for (i = 0; i < file_size; ++i){
 		if (need_comma) fprintf(f_output, ", ");
 		else need_comma = 1;
 		if (( i % 11 ) == 0) fprintf(f_output, "\n\t");
-		fprintf(f_output, "0x%.2x", buf[i] & 0xff);
+		//fprintf(f_output, "0x%.2x", buf[i] & 0xff); //verbos
 	}
-	fprintf(f_output, "\n};\n\n");
-	fprintf(f_output, "const int %s_size = %i;\n", ident, file_size);
+	//fprintf(f_output, "\n};\n\n"); //verbos
+	//fprintf(f_output, "const int %s_size = %i;\n", ident, file_size); //verbos
 
 	fclose(f_output);
 	return true;
 #endif //!MAC
+	DKERROR("DKUtil::Bin2C() is not implemented on Mac OSX yet");
 	return false;
 }
 
@@ -111,8 +112,11 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 bool DKUtil::C2Bin(const unsigned char* header, const long int size, DKString& output)
 {
 	DKDEBUGFUNC(header, size, output);
-#ifndef MAC
-	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
+#ifndef MAC\
+	//FIXME:  https://stackoverflow.com/questions/27878495/ofstream-not-working-on-linux
+	//std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
+	//std::ofstream strm = std::ofstream("test.txt");
+	std::basic_ofstream<unsigned char> file = std::basic_ofstream<unsigned char>(output.c_str(), std::ios::binary);
 	file.write(header, size);
 	file.close();
 	return true;

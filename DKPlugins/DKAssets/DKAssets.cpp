@@ -266,8 +266,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	if(has(DKFile::local_assets, "/assets")){ return false; }
 	if(has(DKFile::local_assets, "\\assets")){ return false; }
 	if(DKFile::PathExists(DKFile::local_assets+"ASSETS")){ return false; }
-	DKINFO("Deploying app assets . . .\n");
-	/*
+	DKINFO("Deploying assets . . .\n");
 	
 	//Save User data
 	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
@@ -278,11 +277,11 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Backing up USER data . . .\n");
 	DKFile::local_assets = DKFile::local_assets.substr(0, DKFile::local_assets.size()-1); //remove / at the end 
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
-	DKFile::local_assets = DKFile::local_assets + "/"; //put it back :P
-	*/
+	DKFile::local_assets = DKFile::local_assets + "/"; //put the / back
 
-//#if !defined(ANDROID) && !defined(WIN32)
-	#include "assets.h" //FIXME: we manually move assets.h into DKPlugins/DKAssets/ to get this to work.
+
+#if !defined(ANDROID) && !defined(WIN32)
+	#include "assets.h" //FIXME: we must manually move assets.h into DKPlugins/DKAssets/ to get this to work.
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKString output = DKFile::local_assets+"assets.zip";
@@ -290,9 +289,9 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, output);
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
-//#endif
+#endif
 
-/*
+//Windows will use the resources interface
 #ifdef WIN32
 	DKINFO("Extracting assets from executable windows resources . . .\n");	
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
@@ -319,20 +318,18 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 		//DKFile::Delete(DKFile::local_assets+"assets");
 	//}
 #endif
-*/
+
 #ifdef ANDROID
 	DKWARN("TODO: DKAssets::CopyAssets() <-- link android CopyAssets to this\n");
+	DKERROR("DKAssets::DeployAssets() is not implemented on android yet");
 #endif
 
-	/*
 	//Restore User data
-	DKINFO("Restoring USER data . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets+"USER");
 	if (DKFile::PathExists(DKFile::local_assets + "../USER")){
-		DKINFO("Restoring  user data \n");
+		DKINFO("Restoring USER data . . .\n");	
 		DKFile::CopyFolder(DKFile::local_assets + "../USER", DKFile::local_assets + "USER", true, true);
 		DKFile::Delete(DKFile::local_assets + "../USER");
 	}
-	*/
 	return true;
 }
