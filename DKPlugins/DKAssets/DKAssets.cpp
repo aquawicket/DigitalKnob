@@ -284,6 +284,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKString output = DKFile::local_assets+"assets.zip";
+	DKINFO("Extracting assets to "+output+"\n");
 	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, output);
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
