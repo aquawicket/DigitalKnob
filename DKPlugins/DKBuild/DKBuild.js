@@ -874,6 +874,7 @@ function DKBuild_DoResults()
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/raspberry32/Debug");
 			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			if(rtvalue.indexOf("Error 1") > -1){ return; }
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; } //FIXME: this doesn't catch all build errors
 			
 			CPP_DKDuktape_Execute("make "+APP);

@@ -284,9 +284,9 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	#include "assets.h" //FIXME: we must manually move assets.h into DKPlugins/DKAssets/ to get this to work.
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
-	DKString output = DKFile::local_assets+"assets.zip";
-	DKINFO("Extracting assets to "+output+"\n");
-	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, output);
+	DKString fileOut = DKFile::local_assets+"assets.zip";
+	//DKINFO("Extracting assets to "+fileOut+"\n");
+	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut.c_str());
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 #endif
@@ -313,10 +313,10 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 
 	//if the data path contains an assets folder, move it's contents to the root.
-	//if(DKFile::PathExists(DKFile::local_assets+"assets")){
-		//DKFile::Copy(DKFile::local_assets+"assets/", DKFile::local_assets, true, true); //FIXME: This is not copying .dll files
-		//DKFile::Delete(DKFile::local_assets+"assets");
-	//}
+	if(DKFile::PathExists(DKFile::local_assets+"assets")){
+		DKFile::Copy(DKFile::local_assets+"assets/", DKFile::local_assets, true, true); //FIXME: This is not copying .dll files
+		DKFile::Delete(DKFile::local_assets+"assets");
+	}
 #endif
 
 #ifdef ANDROID

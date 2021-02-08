@@ -108,17 +108,65 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////
-bool DKUtil::C2Bin(const unsigned char* header, const long int size, DKString& output)
+/////////////////////////////////////////////////////////////////////////////////////////
+bool DKUtil::C2Bin(const unsigned char* header, std::streamsize size, const char* fileOut)
 {
-	DKDEBUGFUNC(header, size, output);
-#ifndef MAC\
+	//DKDEBUGFUNC(header, size, fileOut);
+#ifndef MAC
 	//FIXME:  https://stackoverflow.com/questions/27878495/ofstream-not-working-on-linux
-	//std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
+	          https://stackoverflow.com/questions/55444139/stdbasic-ofstreamstduint8-t-write-fails-at-check-facet
+	
+	std::basic_string<uint8_t> bytes;
+	DKString hex = toString((unsigned char*)header);
+	for(size_t i = 0; i < hex.length(); i += 2){
+		uint16_t byte;
+		// Get current pair and store in nextbyte
+		std::string nextbyte = hex.substr(i, 2); // Get current pair and store in nextbyte
+		// Put the pair into an istringstream and stream it through std::hex for
+    	// conversion into an integer value.
+    	// This will calculate the byte value of your string-represented hex value.
+    	std::istringstream(nextbyte) >> std::hex >> byte;
+		// As the stream above does not work with uint8 directly,
+    	// we have to cast it now.
+    	// As every pair can have a maximum value of "ff",
+    	// which is "11111111" (8 bits), we will not lose any information during this cast.
+    	// This line adds the current byte value to our final byte "array".
+    	bytes.push_back(static_cast<uint8_t>(byte));
+		// we are now generating a string obj from our bytes-"array"
+		// this string object contains the non-human-readable binary byte values
+		// therefore, simply reading it would yield a String like ".0n..:j..}p...?*8...3..x"
+		// however, this is very useful to output it directly into a binary file like shown below
+		std::string result(begin(bytes), end(bytes));
+		std::ofstream output_file(fileOut, std::ios::binary | std::ios::out);
+		if(output_file.is_open()){
+    		output_file << result;
+    		output_file.close();
+		}
+		else{
+    		DKERROR("DKUtil::C2Bin() Error: could not create file.");
+		}
+	}
+
+	/*
+	std::basic_ofstream<unsigned char> file(output.c_str(), std::ios::binary);
 	//std::ofstream strm = std::ofstream("test.txt");
-	std::basic_ofstream<unsigned char> file = std::basic_ofstream<unsigned char>(output.c_str(), std::ios::binary);
+	std::basic_ofstream<unsigned char> file = std::basic_ofstream<unsigned char>(fileOut, std::ios::binary);
 	file.write(header, size);
+	*/
+	
+	//std::basic_ofstream<unsigned char> ofs(fileOut, std::ios::binary | std::ios::out);
+	//if (!ofs.is_open()){ DKERROR("DKUtil::C2Bin(): ERROR: stream could not not open."); }
+	//ofs.write(reinterpret_cast<unsigned char*>(&header), size);
+	//ofs.write((unsigned char*)&header, sizeof(header));
+	//ofs.write(header, size);
+	//ofs.close();
+
+	/*
+	std::ofstream file{fileOut, std::ios::binary};
+	auto str = header;
+	file.write(reinterpret_cast<unsigned char*>(header), size);
 	file.close();
+	*/
 	return true;
 #endif //!MAC
 	DKERROR("DKUtil::C2Bin() is not implemented on Mac OSX yet");
