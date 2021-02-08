@@ -123,7 +123,7 @@ bool DKAssets::AquireDataPath(DKString& exepath)
     exepath.erase (exepath.begin()+found+1, exepath.end());
 	replace(exepath, "/MacOS", "/Resources");
 	return true;
-#elif defined(IOS) //FIXME - this will never happen, look at the #elif above.
+#elif defined(IOS) //FIXME - this will never word, look at the #elif above.
 	exepath = DKFile::exe_path;
     found = exepath.find_last_of("/");
     exepath.erase (exepath.begin()+found+1, exepath.end());
@@ -267,6 +267,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	if(has(DKFile::local_assets, "\\assets")){ return false; }
 	if(DKFile::PathExists(DKFile::local_assets+"ASSETS")){ return false; }
 	DKINFO("Deploying app assets . . .\n");
+	/*
 	
 	//Save User data
 	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
@@ -278,7 +279,8 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKFile::local_assets = DKFile::local_assets.substr(0, DKFile::local_assets.size()-1); //remove / at the end 
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
 	DKFile::local_assets = DKFile::local_assets + "/"; //put it back :P
-	
+	*/
+
 //#if !defined(ANDROID) && !defined(WIN32)
 	#include "assets.h" //FIXME: we manually move assets.h into DKPlugins/DKAssets/ to get this to work.
 	DKINFO("Extracting assets from binary executable . . .\n");	
@@ -322,6 +324,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKWARN("TODO: DKAssets::CopyAssets() <-- link android CopyAssets to this\n");
 #endif
 
+	/*
 	//Restore User data
 	DKINFO("Restoring USER data . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets+"USER");
@@ -330,5 +333,6 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 		DKFile::CopyFolder(DKFile::local_assets + "../USER", DKFile::local_assets + "USER", true, true);
 		DKFile::Delete(DKFile::local_assets + "../USER");
 	}
+	*/
 	return true;
 }
