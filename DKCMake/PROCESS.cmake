@@ -436,6 +436,7 @@ IF(WIN_32)
 	IF(NOT EXISTS ${DKPROJECT}/assets.h)
 		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	ENDIF()
 	
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup, over
@@ -898,6 +899,7 @@ IF(RASPBERRY)
 	IF(NOT EXISTS ${DKPROJECT}/assets.h)
 		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	ENDIF()
 
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
