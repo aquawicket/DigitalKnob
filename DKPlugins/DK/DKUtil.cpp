@@ -117,6 +117,7 @@ bool DKUtil::C2Bin(const unsigned char* header, const long int size, DKString& o
 	file.close();
 	return true;
 #endif //!MAC
+	DKERROR("DKUtil::C2Bin() is not implemented on Mac OSX yet");
 	return false;
 }
 

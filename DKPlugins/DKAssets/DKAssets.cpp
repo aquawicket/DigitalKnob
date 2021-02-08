@@ -269,7 +269,6 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Deploying app assets . . .\n");
 	
 	//Save User data
-	
 	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
 		DKINFO("Backing up user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
@@ -284,7 +283,8 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	#include "assets.h" //FIXME: we manually move assets.h into DKPlugins/DKAssets/ to get this to work.
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
-	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, DKFile::local_assets+"assets.zip");
+	DKString output = DKFile::local_assets+"assets.zip";
+	DKUtil::C2Bin((unsigned char *)ASSETS_H, ASSETS_H_SIZE, output);
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 //#endif

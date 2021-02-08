@@ -433,6 +433,9 @@ IF(WIN_32)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	
+	MESSAGE("Embedding assets.zip into executable . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup, over
 	
 	DKREMOVE(${DKPROJECT}/Backup)
@@ -891,6 +894,7 @@ IF(RASPBERRY)
 	DKZIP(${DKPROJECT}/assets/) #zip the assets
 	
 	#load assets.zip into a header file (assets.h)
+	MESSAGE("Embedding assets.zip into executable . . .")
 	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
