@@ -386,7 +386,7 @@ MESSAGE("***************************************\n")
 ###  TODO: Prep the app data files and assets 
 ############################################################
 
-#copy digitalknob/DKPlugins/_DKIMPORT/CMakeLists.txt to app path.
+#copy /DKPlugins/_DKIMPORT/CMakeLists.txt to app path.
 MESSAGE("Copying DKPlugins/_DKIMPORT/ to App...")
 
 ## copy app default files recursivly without overwrite
@@ -417,7 +417,7 @@ IF(WIN_32)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
-	# copy the icon
+	# copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
 	# backup generated files and folders not going in the package
@@ -433,10 +433,11 @@ IF(WIN_32)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	DKZIP(${DKPROJECT}/assets) #zip the assets
 	
+	# Generate assets.h from assets.zip
+	##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	IF(NOT EXISTS ${DKPROJECT}/assets.h)
 		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-		##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	ENDIF()
 	
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup, over
@@ -492,7 +493,7 @@ IF(WIN_64)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
-	# copy the icon
+	# copy the icon to ${DKPROJECT}/assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
 	# backup files not going in the package
@@ -878,50 +879,55 @@ IF(ANDROID)
 	ENDIF()
 ENDIF()
 
-#########
+#############
 IF(RASPBERRY)
-	# backup files not going in the package
+
+	# Copy the icon to ${DKPROJECT}/assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+
+	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux64Debug ${DKPROJECT}/Backup/DKCef/linux64Debug TRUE)
 	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
 	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove files before packaging
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux32Debug)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/linux64Debug)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	DKZIP(${DKPROJECT}/assets/) #zip the assets
+	DKZIP(${DKPROJECT}/assets/) #Create assets.zip
 	
+	##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	IF(NOT EXISTS ${DKPROJECT}/assets.h)
 		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-		##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	ENDIF()
 
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup
+	# Restore the backed up assets
+	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
 	DKREMOVE(${DKPROJECT}/Backup)
 
-	### copy assets
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	IF(DEBUG)
-		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
-		DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
-	ENDIF()
-	IF(RELEASE)
-		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
-		DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
-	ENDIF()
+	### copy ${DKPROJECT}/assets to ${AppName}-Data
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	#IF(DEBUG)
+	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
+	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
+	#ENDIF()
+	#IF(RELEASE)
+	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
+	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
+	#ENDIF()
 	
 	FIND_PACKAGE(OpenGL REQUIRED)
 	INCLUDE_DIRECTORIES(${OpenGL_INCLUDE_DIRS})
 	LINK_DIRECTORIES(${OpenGL_LIBRARY_DIRS})
 	ADD_DEFINITIONS(${OpenGL_DEFINITIONS})
 	IF(NOT OPENGL_FOUND)
-    	    MESSAGE(ERROR " OPENGL not found!")
+    	MESSAGE(ERROR " OPENGL not found!")
 	ENDIF()
 	
 	LIST(APPEND DEBUG_LIBS ${OPENGL_LIBRARIES})

@@ -269,16 +269,14 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Deploying assets . . .\n");
 	
 	//Save User data
+	DKINFO("Backing up USER data . . .\n");
 	if(DKFile::PathExists(DKFile::local_assets + "USER/USER")){
-		DKINFO("Backing up user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	}
-	
-	DKINFO("Backing up USER data . . .\n");
+
 	DKFile::local_assets = DKFile::local_assets.substr(0, DKFile::local_assets.size()-1); //remove / at the end 
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
 	DKFile::local_assets = DKFile::local_assets + "/"; //put the / back
-
 
 #if !defined(ANDROID) && !defined(WIN32)
 	#include "assets.h" //FIXME: we must manually move assets.h into DKPlugins/DKAssets/ to get this to work.

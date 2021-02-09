@@ -108,10 +108,10 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 	return false;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut)
 {
-	DKDEBUGFUNC(header, size, "fileOut");
+	//DKDEBUGFUNC(header, size, "fileOut");
 #ifndef MAC
 	//NOTES: 
 	//https://caiorss.github.io/C-Cpp-Notes/resources-executable.html
