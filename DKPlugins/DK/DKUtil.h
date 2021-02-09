@@ -18,7 +18,7 @@ class DKUtil
 public:
 	static bool Beep();
 	static bool Bin2C(const DKString& input, const DKString& output);
-	static bool C2Bin(const unsigned char* header, std::streamsize size, const char* fileOut);
+	static bool C2Bin(const DKString hex, std::streamsize size, const char* fileOut);
 	static bool CallExit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);

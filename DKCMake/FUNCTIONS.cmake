@@ -2262,7 +2262,7 @@ endfunction()
 
 
 
-
+## https://gist.github.com/sivachandran/3a0de157dccef822a230#file-bin2h-cmake
 # Function to embed contents of a file as byte array in C/C++ header file(.h). The header file
 # will contain a byte array and integer variable holding the size of the array.
 # Parameters
@@ -2292,20 +2292,20 @@ function(BIN2H)
     endif()
 
     # wraps the hex string into multiple lines at column 32(i.e. 16 bytes per line)
-    wrap_string(VARIABLE hexString AT_COLUMN 32)
+    ##wrap_string(VARIABLE hexString AT_COLUMN 32)
     math(EXPR arraySize "${hexStringLength} / 2")
 
     # adds '0x' prefix and comma suffix before and after every byte respectively
-    string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1, " arrayValues ${hexString})
+    string(REGEX REPLACE "([0-9a-f][0-9a-f])" "\\1" arrayValues ${hexString})
     # removes trailing comma
-    string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
+    ##string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
 
     # converts the variable name into proper C identifier
     string(MAKE_C_IDENTIFIER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
     string(TOUPPER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
 
     # declares byte array and the length variables
-    set(arrayDefinition "const unsigned char ${BIN2H_VARIABLE_NAME}[] = { ${arrayValues} };")
+    set(arrayDefinition "const std::string ${BIN2H_VARIABLE_NAME} = \"${arrayValues}\";")
     set(arraySizeDefinition "const size_t ${BIN2H_VARIABLE_NAME}_SIZE = ${arraySize};")
 
     set(declarations "${arrayDefinition}\n\n${arraySizeDefinition}\n\n")
