@@ -111,7 +111,7 @@ bool DKUtil::Bin2C(const DKString& input, const DKString& output)
 /////////////////////////////////////////////////////////////////////////////////////////
 bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut)
 {
-	//DKDEBUGFUNC(header, size, fileOut);
+	DKDEBUGFUNC(header, size, "fileOut");
 #ifndef MAC
 	//NOTES: 
 	//https://caiorss.github.io/C-Cpp-Notes/resources-executable.html
@@ -123,10 +123,10 @@ bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut
 	for(size_t i = 0; i < hex.length(); i += 2){
 		uint16_t byte;
 		// Get current pair and store in nextbyte
-		std::string nextbyte = hex.substr(i, 2); // Get current pair and store in nextbyte
+		std::string nextbyte = hex.substr(i, 2);
 		// Put the pair into an istringstream and stream it through std::hex for
     	// conversion into an integer value.
-    	// This will calculate the byte value of your string-represented hex value.
+    	// This will calculate the byte value of the string-represented hex value.
     	std::istringstream(nextbyte) >> std::hex >> byte;
 		// As the stream above does not work with uint8 directly,
     	// we have to cast it now.
@@ -137,7 +137,6 @@ bool DKUtil::C2Bin(const DKString hex, std::streamsize size, const char* fileOut
 	}
 	
 	// Generating a string obj from our bytes-"array"
-	// this string object contains the non-human-readable binary byte values
 	// Output it into a binary file
 	std::string result(begin(bytes), end(bytes));
 	std::ofstream output_file(fileOut, std::ios::binary | std::ios::out);
