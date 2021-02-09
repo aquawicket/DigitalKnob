@@ -269,7 +269,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Deploying assets . . .\n");
 	
 	//Save User data
-	if (DKFile::PathExists(DKFile::local_assets + "USER/USER")){
+	if(DKFile::PathExists(DKFile::local_assets + "USER/USER")){
 		DKINFO("Backing up user data \n");
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	}
@@ -288,7 +288,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	//DKINFO("Extracting assets to "+fileOut+"\n");
 	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut.c_str());
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
-	//DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
+	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 #endif
 
 //Windows will use the resources interface
