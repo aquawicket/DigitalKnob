@@ -79,7 +79,8 @@ function DKBuild_ValidateCmake()
 function DKBuild_InstallCmake()
 {
 	console.log("Installing CMake");
-	var datapath = DKAssets_LocalAssets();
+	//var datapath = DKAssets_LocalAssets(); //FIXME: why did this stop working?
+	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DKDuktape_GetOS() === "Win32"){
 		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){

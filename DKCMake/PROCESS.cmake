@@ -903,13 +903,12 @@ IF(RASPBERRY)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
 	
-	DKZIP(${DKPROJECT}/assets/) #Create assets.zip
+	MESSAGE("Creating assets.zip . . .")
+	DKZIP(${DKPROJECT}/assets/)
 	
-	##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
-	IF(NOT EXISTS ${DKPROJECT}/assets.h)
-		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	ENDIF()
+	##FIXME - assets.h needs to be built in DKPlugins/DKAssets for this to work
+	MESSAGE("Creating assets.h . . .")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 
 	# Restore the backed up assets
 	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
