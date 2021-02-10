@@ -19,7 +19,7 @@ DKDEPEND(DKAudio)
 DKDEPEND(DKBuild)
 DKDEPEND(DKCef)
 DKDEPEND(DKCefChild)
-## DKDEPEND(DKClient) ##Obsolete, DKWebSockets
+## DKDEPEND(DKClient) ##Obsolete, Use DKWebSockets
 DKDEPEND(DKColorPicker)
 DKDEPEND(DKConsole)
 DKDEPEND(DKCrypto)
@@ -58,7 +58,7 @@ DKDEPEND(DKScreenRecorder)
 DKDEPEND(DKSDLAudio)
 DKDEPEND(DKSDLCef)
 DKDEPEND(DKSDLRml)
-## DKDEPEND(DKSDLRocket) ##Deprecated, Obsolete
+## DKDEPEND(DKSDLRocket) ##Deprecated, Obsolete, use DKRml
 DKDEPEND(DKSDLText)
 ## DKDEPEND(DKSDLVideo) ##FIXME: 3rdParty libraries not compiling
 ## DKDEPEND(DKSDLWav) ##FIXME: 3rdParty libraries not compiling

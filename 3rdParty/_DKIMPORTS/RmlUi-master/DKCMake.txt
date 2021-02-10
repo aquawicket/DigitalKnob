@@ -1,20 +1,10 @@
 ### DEPENDS ###
 DKDEPEND(freetype-2.5.5)
 
+
 ### INSTALL ###
-##DKSET(GIT C:/Progra~1/Git/bin/git.exe)
-##SET(STRING "${GIT} clone https://github.com/aquawicket/RmlUi.git ${3RDPARTY}/RmlUi-master")
-##FILE(MAKE_DIRECTORY ${3RDPARTY}/RmlUi-master)
-##EXECUTE_PROCESS(COMMAND cmd /c ${STRING} WORKING_DIRECTORY ${CURRENT_DIR})
-##DKINSTALL(https://github.com/mikke89/RmlUi/archive/master.zip RmlUi-master)
-
 DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi-master)
-DKRENAME(${DKDOWNLOAD}/master.zip ${DKDOWNLOAD}/RmlUi-master.zip)  ##FIXME: This doesn't work
-##DKINSTALL(https://github.com/aquawicket/RmlUi/archive/documents_base_tag.zip RmlUi-master)
-##DKRENAME(${DKDOWNLOAD}/documents_base_tag.zip ${DKDOWNLOAD}/RmlUi-master.zip)
-
-
-## DKINSTALL(${DKWEB}/Download/RmlUi-master.zip RmlUi-master)
+DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/RmlUi-master.zip)  ##FIXME: This doesn't work
 DKSET(RMLUI ${3RDPARTY}/RmlUi-master)
 
 
@@ -51,6 +41,7 @@ WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_CXX_FLAGS=/DWIN
 WIN32_VS_DEBUG(RmlUi-master RmlUi.sln)
 WIN32_VS_RELEASE(RmlUi-master RmlUi.sln)
 
+## Test Building with Msys/Mingw
 ##WIN32_COMMAND(${CMAKE_COMMAND} -G "MSYS Makefiles" -DCMAKE_MAKE_PROGRAM=C:/msys/bin/make.exe -DENABLE_PRECOMPILED_HEADERS=OFF -DDISABLE_RTTI_AND_EXCEPTIONS=ON -DBUILD_SHARED_LIBS=OFF -DFREETYPE_INCLUDE_DIR_freetype2=C:/freetype-2.5.5/include -DFREETYPE_INCLUDE_DIR_ft2build=C:/freetype-2.5.5/include -DFREETYPE_LIBRARY_DEBUG=C:/freetype-2.5.5/win32/Debug/freetype.lib -DFREETYPE_LIBRARY_RELEASE=C:/freetype-2.5.5/win32/Release/freetype.lib ${RMLUI})
 ##WIN32_BASH("#!/bin/bash\;
 ##cd ${RMLUI}/win32\;
