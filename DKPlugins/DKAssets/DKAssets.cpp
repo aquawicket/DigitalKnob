@@ -6,7 +6,6 @@
 #include "DKAssets/DKAssets.h"
 #include <algorithm>
 
-
 /////////////////////
 bool DKAssets::Init()
 {
@@ -275,7 +274,7 @@ bool DKAssets::DeployAssets()
 	DKFile::local_assets = DKFile::local_assets + "/"; //put the / back
 
 #if !defined(ANDROID) && !defined(WIN32)
-	#include "assets.h" //FIXME: we must manually move assets.h into DKPlugins/DKAssets/ to get this to work.
+	//#include "assets.h" //FIXME: we must manually move assets.h into DKPlugins/DKAssets/ to get this to work.
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKString fileOut = DKFile::local_assets+"assets.zip";

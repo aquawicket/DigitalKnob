@@ -4,9 +4,5 @@ IF(USE_DKCef)
 	DKDEPEND(DKCef)
 ENDIF()
 
-IF(NOT EXISTS ${DKPLUGINS}/DKAssets/assets.h)
-	DKCOPY(${DKPLUGINS}/DKAssets/assets_h.txt ${DKPLUGINS}/DKAssets/assets.h TRUE)
-ENDIF()
-
 DKPLUGIN(DKAssets)
 DKASSETS(DKAssets)

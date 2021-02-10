@@ -4,6 +4,10 @@
 
 #include "DK/DK.h"
 
+//Used to load assets header from main app
+extern std::string ASSETS_H;
+extern size_t ASSETS_H_SIZE;
+
 ///////////////////////////////////////////
 class DKAssets : public DKObjectT<DKAssets>
 {

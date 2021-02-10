@@ -1,2 +1,0 @@
-const DKString ASSETS_H = "";
-const size_t ASSETS_H_SIZE = 0;
