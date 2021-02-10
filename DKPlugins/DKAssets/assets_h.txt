@@ -1,2 +1,2 @@
-const unsigned char ASSETS_H[] = { 0, 0 ,0 };
+const DKString ASSETS_H = "";
 const size_t ASSETS_H_SIZE = 0;

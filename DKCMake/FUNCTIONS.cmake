@@ -2296,7 +2296,7 @@ function(BIN2H)
     math(EXPR arraySize "${hexStringLength} / 2")
 
     # adds '0x' prefix and comma suffix before and after every byte respectively
-    string(REGEX REPLACE "([0-9a-f][0-9a-f])" "\\1" arrayValues ${hexString})
+    ##string(REGEX REPLACE "([0-9a-f][0-9a-f])" "\\1" arrayValues ${hexString})
     # removes trailing comma
     ##string(REGEX REPLACE ", $" "" arrayValues ${arrayValues})
 
@@ -2305,7 +2305,7 @@ function(BIN2H)
     string(TOUPPER "${BIN2H_VARIABLE_NAME}" BIN2H_VARIABLE_NAME)
 
     # declares byte array and the length variables
-    set(arrayDefinition "const std::string ${BIN2H_VARIABLE_NAME} = \"${arrayValues}\";")
+    set(arrayDefinition "const std::string ${BIN2H_VARIABLE_NAME} = \"${hexString}\";")
     set(arraySizeDefinition "const size_t ${BIN2H_VARIABLE_NAME}_SIZE = ${arraySize};")
 
     set(declarations "${arrayDefinition}\n\n${arraySizeDefinition}\n\n")

@@ -18,12 +18,8 @@ bool DKAssets::Init()
 		DKFile::MakeDir(DKFile::local_assets+"USER");
 	}
 	else{
-		DKAssets::DeployAssets(NULL, NULL);
+		DKAssets::DeployAssets();
 	}
-
-//#ifdef WIN32
-	//DKAssets::DeployAssets(NULL, NULL);
-//#endif
 
 	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
@@ -259,8 +255,8 @@ bool DKAssets::PackageAssets(DKString& input, DKString& output)
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_size)
+/////////////////////////////
+bool DKAssets::DeployAssets()
 {
 	DKDEBUGFUNC();
 	if(has(DKFile::local_assets, "/assets")){ return false; }
@@ -283,8 +279,7 @@ bool DKAssets::DeployAssets(const unsigned char* assets, const long int assets_s
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKString fileOut = DKFile::local_assets+"assets.zip";
-	//DKINFO("Extracting assets to "+fileOut+"\n");
-	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut.c_str());
+	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut); //variables pulled from /DKAssets/assets.h
 	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
 	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 #endif
