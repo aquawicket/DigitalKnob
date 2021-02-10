@@ -251,14 +251,15 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//Load user agent style sheet
 	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
-	Rml::SharedPtr<Rml::StyleSheet> sheet = document->GetOwnerDocument()->GetStyleSheet();
-	Rml::SharedPtr<Rml::StyleSheet> rcss = Rml::Factory::InstanceStyleSheetFile(rml_css.c_str());
+	Rml::SharedPtr<Rml::StyleSheetContainer> sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
+	Rml::SharedPtr<Rml::StyleSheetContainer> rcss = Rml::Factory::InstanceStyleSheetFile(rml_css.c_str());
 	if(sheet) {
-		Rml::SharedPtr<Rml::StyleSheet> new_style_sheet = rcss->CombineStyleSheet(*sheet);
-		document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet));
+		Rml::SharedPtr<Rml::StyleSheetContainer> new_style_sheet = rcss->CombineStyleSheetContainer(*sheet);
+		//document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet)); //Old
+		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_style_sheet));
 	}
 	else {
-		document->GetOwnerDocument()->SetStyleSheet(std::move(rcss));
+		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(rcss));
 	}
 
 	//Finish loading the document
