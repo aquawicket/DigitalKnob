@@ -11,5 +11,6 @@
 ### Rebeuild All - (erase all cmake files, and build the app and it's dependencies)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
+cmake_policy(SET CMP0054 NEW)
 PROJECT(DigitalKnob)
 INCLUDE(DKCMake/PROCESS.cmake)
