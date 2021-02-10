@@ -703,6 +703,10 @@ ENDIF()
 #########
 IF(LINUX)
 IF(NOT RASPBERRY)
+
+	# Copy the icon to ${DKPROJECT}/assets
+	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+
 	# backup files not going in the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/linux32Debug ${DKPROJECT}/Backup/DKCef/linux32Debug TRUE)
