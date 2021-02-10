@@ -28,10 +28,13 @@ bool DKCss::Init()
 	replace(data[1], DKFile::local_assets, "");
     DKString file = DKFile::local_assets+data[1];
 
-	Rml::SharedPtr<Rml::StyleSheet> current_sheet = dkRml->document->GetStyleSheet();
-	Rml::SharedPtr<Rml::StyleSheet> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	current_sheet = current_sheet->CombineStyleSheet(*new_sheet);
-	dkRml->document->SetStyleSheet(current_sheet);
+	//Rml::SharedPtr<Rml::StyleSheet> current_sheet = dkRml->document->GetStyleSheet(); //old
+	Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = dkRml->document->GetStyleSheetContainer();
+	//Rml::SharedPtr<Rml::StyleSheet> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str()); //old
+	Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
+	//current_sheet = current_sheet->CombineStyleSheet(*new_sheet); //old
+	current_sheet = current_sheet->CombineStyleSheetContainer(*new_sheet);
+	dkRml->document->SetStyleSheetContainer(current_sheet);
 	return true;
 }
 
