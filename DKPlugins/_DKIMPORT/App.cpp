@@ -1,5 +1,6 @@
 #ifdef USE_DK
 #include "DK/stdafx.h"
+#include "assets.h"
 #include "App.h"
 
 ////////////////
