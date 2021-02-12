@@ -28,13 +28,19 @@ bool DKCss::Init()
 	replace(data[1], DKFile::local_assets, "");
     DKString file = DKFile::local_assets+data[1];
 
-	//Rml::SharedPtr<Rml::StyleSheet> current_sheet = dkRml->document->GetStyleSheet(); //old
-	Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = dkRml->document->GetStyleSheetContainer();
-	//Rml::SharedPtr<Rml::StyleSheet> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str()); //old
+	//Old
+	//Rml::SharedPtr<Rml::StyleSheet> current_sheet = dkRml->document->GetStyleSheet();
+	//Rml::SharedPtr<Rml::StyleSheet> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
+	//current_sheet = current_sheet->CombineStyleSheet(*new_sheet);
+	
+	
+	//https://stackoverflow.com/a/3141107/688352
+	//New
+	const Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = dkRml->document->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	//current_sheet = current_sheet->CombineStyleSheet(*new_sheet); //old
-	current_sheet = current_sheet->CombineStyleSheetContainer(*new_sheet);
+	new_sheet = new_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)current_sheet);
 	dkRml->document->SetStyleSheetContainer(current_sheet);
+	
 	return true;
 }
 
