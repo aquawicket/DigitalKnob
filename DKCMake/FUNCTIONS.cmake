@@ -177,7 +177,6 @@ FUNCTION(DKDEFINE arg)
 		DKSET(DKDEFINES ${DKDEFINES} "LOCAL_CPPFLAGS += -D${arg}\n")
 	ELSE()
 		DKSET(DKDEFINES "${DKDEFINES}ADD_DEFINITIONS(-D${arg})\n")
-		#DKSET(DKDEFINES "${DKDEFINES}ADD_DEFINITIONS(-D${arg})")
 		ADD_DEFINITIONS(-D${arg})
 	ENDIF()
 ENDFUNCTION()
@@ -197,7 +196,6 @@ FUNCTION(DKINCLUDE arg)
 		DKSET(DKINCLUDES ${DKINCLUDES} "LOCAL_C_INCLUDES += ${arg}\n")
 	ELSE()
 		DKSET(DKINCLUDES "${DKINCLUDES}INCLUDE_DIRECTORIES(${arg})\n")
-		#DKSET(DKINCLUDES "${DKINCLUDES}INCLUDE_DIRECTORIES(${arg})")
 		INCLUDE_DIRECTORIES(${arg})
 	ENDIF()
 ENDFUNCTION()
@@ -213,7 +211,6 @@ FUNCTION(DKLINKDIR arg)
 		#DKSET(DKLINKDIRS ${DKLINKDIRS} "LOCAL_LINK_INCLUDES += ${arg}\n")
 	ELSE()
 		DKSET(DKLINKDIRS "${DKLINKDIRS}LINK_DIRECTORIES(${arg})\n")
-		#DKSET(DKLINKDIRS "${DKLINKDIRS}LINK_DIRECTORIES(${arg})")
 		LINK_DIRECTORIES(${arg})
 	ENDIF()
 ENDFUNCTION()
@@ -1650,37 +1647,37 @@ ENDFUNCTION()
 
 
 
-###########################
+###############################
 FUNCTION(RASPBERRY_INCLUDE arg)
 	IF(RASPBERRY)
 		DKINCLUDE(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-#############################
+#################################
 FUNCTION(RASPBERRY32_INCLUDE arg)
 	IF(RASPBERRY_32)
 		DKINCLUDE(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-#############################
+#################################
 FUNCTION(RASPBERRY64_INCLUDE arg)
 	IF(RASPBERRY_64)
 		DKINCLUDE(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-#################################
+#####################################
 FUNCTION(RASPBERRY_DEBUG_INCLUDE arg)
-	IF(DEBUG)
+	IF(RASPBERRY AND DEBUG)
 		DKINCLUDE(${arg})
 	ENDIF()
 ENDFUNCTION()
 
-###################################
+#######################################
 FUNCTION(RASPBERRY_RELEASE_INCLUDE arg)
-	IF(RELEASE)
+	IF(RASPBERRY AND RELEASE)
 		DKINCLUDE(${arg})
 	ENDIF()
 ENDFUNCTION()

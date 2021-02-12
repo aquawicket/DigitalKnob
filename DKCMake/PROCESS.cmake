@@ -755,15 +755,15 @@ IF(NOT RASPBERRY)
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	### copy assets
-	DKREMOVE(${DKPROJECT}/assets/USER)
-	IF(DEBUG)
-		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
-		DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
-	ENDIF()
-	IF(RELEASE)
-		FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
-		DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
-	ENDIF()
+	#DKREMOVE(${DKPROJECT}/assets/USER)
+	#IF(DEBUG)
+	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Debug/${AppName}-Data)
+	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/${AppName}-Data TRUE)
+	#ENDIF()
+	#IF(RELEASE)
+	#	FILE(MAKE_DIRECTORY ${DKPROJECT}/${OS}/Release/${AppName}-Data)
+	#	DKCOPY(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/${AppName}-Data TRUE)
+	#ENDIF()
 		
 
 	FIND_PACKAGE(OpenGL REQUIRED)
@@ -780,11 +780,6 @@ IF(NOT RASPBERRY)
 	LIST(APPEND RELEASE_LIBS pthread)
 	LIST(APPEND DEBUG_LIBS dl)
 	LIST(APPEND RELEASE_LIBS dl)
-	
-	## For Raspberry Pi
-	##LINK_DIRECTORIES(/opt/vc/lib)
-	##LIST(APPEND DEBUG_LIBS bcm_host)
-	##LIST(APPEND RELEASE_LIBS bcm_host)
 	
 	SET(CMAKE_CXX_FLAGS "-g -std=c++14 -no-pie")
 	ADD_EXECUTABLE(${AppName} ${App_SRC})
@@ -933,7 +928,6 @@ IF(RASPBERRY)
 	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets/)
 	
-	##FIXME - assets.h needs to be built in DKPlugins/DKAssets for this to work
 	MESSAGE("Creating assets.h . . .")
 	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 
