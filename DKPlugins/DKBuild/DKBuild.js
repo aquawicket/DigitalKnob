@@ -10,7 +10,7 @@ var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var CMAKE = "";
-var NDK = "";
+var NDK = "C:/digitalknob/DK/3rdParty/android-ndk-r20b";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
 VC2019 = CPP_DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
@@ -27,30 +27,30 @@ function DKBuild_Init()
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r20b";
 		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DKDuktape_GetOS() === "Win64"){
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10d";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r20b";
 		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DKDuktape_GetOS() === "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r20b";
 	}
 	if(CPP_DKDuktape_GetOS() === "Linux"){
 		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: temporary fix 
 		CMAKE = "/usr/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r20b";
 	}
 	if(CPP_DKDuktape_GetOS() === "Raspberry"){
 		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME
 		CMAKE = "/usr/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r10e";
+		NDK = DKPATH+"/DK/3rdParty/android-ndk-r20b";
 	}
 }
 
@@ -405,7 +405,7 @@ function DKBuild_DoResults()
 		cmake_string = cmake_string+"-DREBUILDALL=ON ";
 	}
 	if(LINK === "Dynamic"){
-		cmake_string = cmake_string+"-DDYNAMIC=ON ";
+		cmake_string = cmake_string+"-DSHARED=ON ";
 	}
 	else{
 		cmake_string = cmake_string+"-DSTATIC=ON ";
@@ -806,10 +806,15 @@ function DKBuild_DoResults()
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			//var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
-			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE=C:/Microsoft/AndroidNDK64/android-ndk-r16b/build/cmake/android.toolchain.cmake -DANDROID_NDK=C:/Microsoft/AndroidNDK64/android-ndk-r16b "+cmake_string+DKPATH+"/DK");
+			if(CPP_DKDuktape_GetOS() === "Win32" || CPP_DKDuktape_GetOS() === "Win64"){
+				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" "+cmake_string+DKPATH+"/DK");
+			}
+			if(CPP_DKDuktape_GetOS() === "Linux" || CPP_DKDuktape_GetOS() === "Mac"){
+				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			//CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+			CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){
@@ -819,7 +824,7 @@ function DKBuild_DoResults()
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			var rtvalue;
 			if(CPP_DKDuktape_GetOS() === "Win32" || CPP_DKDuktape_GetOS() === "Win64"){
-				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
+				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DKDuktape_GetOS() === "Linux" || CPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
