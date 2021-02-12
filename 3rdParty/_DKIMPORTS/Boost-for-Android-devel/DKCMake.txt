@@ -7,62 +7,61 @@ ENDIF()
 
 
 ### INSTALL ###
-## DKINSTALL(www.internet.com/Boost-for-Android-devel.zip Boost-for-Android-devel)
-## DKINSTALL(${DKWEB}/Download/Boost-for-Android-devel.zip Boost-for-Android-devel)
-DKSET(BOOST ${3RDPARTY}/Boost-for-Android-devel)
+DKINSTALL(https://codeload.github.com/moritz-wundke/Boost-for-Android/zip/devel Boost-for-Android-devel)
+DKSET(BOOST_DEV ${3RDPARTY}/Boost-for-Android-devel)
 
 ##FIXME: this get's overwritten
-IF(EXISTS ${BOOST}/boost_1_53_0)
+IF(EXISTS ${BOOST_DEV}/boost_1_74_0)
 	###
 ELSE()
-	DKSETPATH(${BOOST})
-	## DKDOWNLOAD(www.internet.com/boost_1_53_0.tar.bz2)
-	## DKDOWNLOAD(${DKWEB}/Download/boost_1_53_0.tar.bz2)
+	DKSETPATH(${BOOST_DEV})
+	## DKDOWNLOAD(www.internet.com/boost_1_74_0.tar.bz2)
+	## DKDOWNLOAD(${DKWEB}/Download/boost_1_74_0.tar.bz2)
 ENDIF()
 
 
 ### LINK ###
-ANDROID_INCLUDE(${BOOST}/build/include/boost-1_53)
+ANDROID_INCLUDE(${BOOST_DEV}/build/include/boost-1_74)
 
 IF(Boost_Chrono)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_53.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_chrono-gcc-mt-1_53.a)
+	ANDROID_DEBUG_LIB(${BOOST_DEV}/build/lib/libboost_chrono-gcc-mt-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST_DEV}/build/lib/libboost_chrono-gcc-mt-1_74.a)
 ENDIF()
 
 IF(Boost_DateTime)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_53.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_date_time-gcc-mt-1_53.a)
+	ANDROID_DEBUG_LIB(${BOOST_DEV}/build/lib/libboost_date_time-gcc-mt-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST_DEV}/build/lib/libboost_date_time-gcc-mt-1_74.a)
 ENDIF()
 
 IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_53.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_filesystem-gcc-mt-1_53.a)
+	ANDROID_DEBUG_LIB(${BOOST_DEV}/build/lib/libboost_filesystem-gcc-mt-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST_DEV}/build/lib/libboost_filesystem-gcc-mt-1_74.a)
 ENDIF()
 
 IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_53.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_system-gcc-mt-1_53.a)
+	ANDROID_DEBUG_LIB(${BOOST_DEV}/build/lib/libboost_system-gcc-mt-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST_DEV}/build/lib/libboost_system-gcc-mt-1_74.a)
 ENDIF()
 
 IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_53.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/lib/libboost_thread_pthread-gcc-mt-1_53.a)
+	ANDROID_DEBUG_LIB(${BOOST_DEV}/build/lib/libboost_thread_pthread-gcc-mt-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST_DEV}/build/lib/libboost_thread_pthread-gcc-mt-1_74.a)
 ENDIF()
 
 
 ### COMPILE ###
-IF(NOT CMAKE_HOST_UNIX)
+IF(CMAKE_HOST_WIN32)
 ANDROID_BASH("#!/bin/bash
-cd ${BOOST}
+cd ${BOOST_DEV}
 export PATH=/${MINGW32}/bin:$PATH\;
 export PATH=/${MSYS}/bin:$PATH\;
 ./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${ANDROID_NDK}")
 ENDIF()
 
 IF(CMAKE_HOST_UNIX)
-DKSETPATH(${BOOST})
+DKSETPATH(${BOOST_DEV})
 SET(arg ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together
 MESSAGE("COMMAND-> ${arg2}")
-EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
+EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST_DEV})
 ENDIF()

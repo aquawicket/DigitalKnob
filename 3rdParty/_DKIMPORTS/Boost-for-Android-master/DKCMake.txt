@@ -22,7 +22,7 @@ ENDIF()
 
 
 ### LINK ###
-IF(NOT CMAKE_HOST_UNIX)
+IF(CMAKE_HOST_WIN32)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
@@ -50,7 +50,6 @@ IF(Boost_Thread)
 ENDIF()
 ENDIF()
 
-IF(CMAKE_HOST_UNIX)
 IF(CMAKE_HOST_APPLE)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
@@ -78,10 +77,8 @@ IF(Boost_Thread)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_74.a)
 ENDIF()
 ENDIF()
-ENDIF()
 
-IF(CMAKE_HOST_UNIX)
-IF(NOT CMAKE_HOST_APPLE)
+IF(CMAKE_HOST_LINUX)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
@@ -108,11 +105,10 @@ IF(Boost_Thread)
 	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
 ENDIF()
 ENDIF()
-ENDIF()
 
 
 ### COMPILE ###
-IF(NOT CMAKE_HOST_UNIX)
+IF(CMAKE_HOST_WIN32)
 IF(ANDROID_32)
 ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
