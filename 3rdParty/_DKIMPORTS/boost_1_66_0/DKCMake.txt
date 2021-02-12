@@ -14,7 +14,7 @@ ENDIF()
 
 
 ### INSTALL ###
-IF(WIN32)
+IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/boost-build/bootstrap.log)
 		MESSAGE("Installing Boost-Build")
 		DKSETPATH(${DIGITALKNOB}/Download)

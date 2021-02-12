@@ -1,5 +1,5 @@
 ### INSTALL ###
-IF(WIN32)
+IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS ${3RDPARTY}/build-4.2.0/b2.exe)
 		DKINSTALL(https://github.com/boostorg/build/archive/4.2.0.zip build-4.2.0)
 		DKRENAME(${DKDOWNLOAD}/4.2.0.zip ${DKDOWNLOAD}/build-4.2.0.zip)

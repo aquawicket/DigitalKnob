@@ -1,18 +1,9 @@
-## TODO
-## NOTE: lets look at this
-## STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
-## IF(${index} GREATER -1)
-##	SET(WIN_32 ON)  ## THIS IS WRONG. This should set the working computer os
-##	SET(OS "win32") ## This is the target os
-##	STRING(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
-## ENDIF()
-
-
 ########### Initial setup ####################
 IF(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
 ENDIF(COMMAND cmake_policy)
 ##SET(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE) #TODO: is this needed?
+
 
 #########################################################################
 ## Set variables for paths
@@ -28,7 +19,7 @@ DKSET(DKWEB http://127.0.0.1)
 ########### Determine the OS we are building for ####################
 STRING(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 IF(${index} GREATER -1)
-	SET(WIN_32 ON) ##FIXME - this should be the OS we are building from. 
+	SET(WIN_32 ON)
 	SET(OS "win32")
 	STRING(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 ENDIF()

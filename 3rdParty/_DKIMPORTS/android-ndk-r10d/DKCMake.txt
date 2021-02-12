@@ -1,5 +1,5 @@
 ### INSTALL ###
-IF(WIN32)
+IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r10d/ndk-build.cmd")
 		DKSETPATH(${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/android-ndk-r10d-windows-x86.exe)
@@ -11,7 +11,7 @@ IF(WIN32)
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r10d" ABSOLUTE)  #Get the windows short filepath
 ENDIF()
 
-IF(MAC)
+IF(CMAKE_HOST_APPLE)
 	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r10d)
 		DKSETPATH(${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/android-ndk-r10d-darwin-x86_64.zip)
@@ -20,8 +20,8 @@ IF(MAC)
 	ENDIF()
 ENDIF()
 
-IF(UNIX)
-IF(NOT APPLE)
+IF(CMAKE_HOST_UNIX)
+IF(NOT CMAKE_HOST_APPLE)
 	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r10d)
 		DKSETPATH(${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/android-ndk-r10d-linux-x86_64.zip)

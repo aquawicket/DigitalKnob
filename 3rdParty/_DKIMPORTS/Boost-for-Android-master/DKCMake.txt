@@ -1,6 +1,6 @@
 ### DEPENDS ###
 DKDEPEND(android-ndk-r20)
-IF(NOT UNIX)
+IF(CMAKE_HOST_WIN32)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
 ENDIF()
@@ -22,7 +22,7 @@ ENDIF()
 
 
 ### LINK ###
-IF(NOT UNIX)
+IF(NOT CMAKE_HOST_UNIX)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
@@ -50,8 +50,8 @@ IF(Boost_Thread)
 ENDIF()
 ENDIF()
 
-IF(UNIX)
-IF(APPLE)
+IF(CMAKE_HOST_UNIX)
+IF(CMAKE_HOST_APPLE)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_74.a)
@@ -80,8 +80,8 @@ ENDIF()
 ENDIF()
 ENDIF()
 
-IF(UNIX)
-IF(NOT APPLE)
+IF(CMAKE_HOST_UNIX)
+IF(NOT CMAKE_HOST_APPLE)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
 IF(Boost_Chrono)
 	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
@@ -112,7 +112,7 @@ ENDIF()
 
 
 ### COMPILE ###
-IF(NOT UNIX)
+IF(NOT CMAKE_HOST_UNIX)
 IF(ANDROID_32)
 ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
@@ -129,7 +129,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ENDIF()
 ENDIF()
 
-IF(UNIX)
+IF(CMAKE_HOST_UNIX)
 DKSETPATH(${BOOST})
 SET(arg ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together

@@ -1,6 +1,6 @@
 ##https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 
-IF(WIN32)
+IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/emsdk-portable-64bit/emscripten")
 		DKSET(CURRENT_DIR ${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/emsdk-portable-64bit.zip) ## find an online link

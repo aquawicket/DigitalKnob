@@ -1,10 +1,5 @@
-IF(NOT ANDROID)
-	RETURN()
-ENDIF()
-
-
 ### INSTALL ###
-IF(NOT UNIX)
+IF(CMAKE_HOST_WIN32)
 IF(NOT EXISTS "C:/Program Files/Android/Android Studio/bin/studio.exe")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	## DKDOWNLOAD(www.internet.com/android-studio-ide-173.4670197-windows.exe)
@@ -16,8 +11,7 @@ ENDIF()
 ENDIF()
 
 
-IF(UNIX)
-IF(APPLE)
+IF(CMAKE_HOST_APPLE)
 IF(NOT EXISTS "/Applications/Android Studio.app")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	## DKDOWNLOAD(www.internet.com/android-studio-ide-173.4670197-mac.dmg)
@@ -27,11 +21,10 @@ IF(NOT EXISTS "/Applications/Android Studio.app")
 	## ANDROID_COMMAND(${DIGITALKNOB}/Download/android-studio-ide-173.4670197-mac.dmg)
 ENDIF()
 ENDIF()
-ENDIF()
 
 
-IF(UNIX)
-IF(NOT APPLE)
+IF(CMAKE_HOST_UNIX)
+IF(NOT CMAKE_HOST_APPLE)
 IF(NOT EXISTS "${DIGITALKNOB}/3rdParty/android-studio/bin/studio.sh")
 	DKSETPATH(${DIGITALKNOB}/Download)
 	## DKDOWNLOAD(www.internet.com/android-studio-ide-173.4670197-linux.zip)

@@ -1,7 +1,7 @@
 ### DEPENDS ###
 DKDEPEND(android-ndk-r10d)
 ## DKDEPEND(android-ndk-r10e)
-IF(NOT UNIX)
+IF(NOT CMAKE_HOST_UNIX)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
 ENDIF()
@@ -52,7 +52,7 @@ ENDIF()
 
 
 ### COMPILE ###
-IF(NOT UNIX)
+IF(NOT CMAKE_HOST_UNIX)
 ANDROID_BASH("#!/bin/bash
 cd ${BOOST}
 export PATH=/${MINGW32}/bin:$PATH\;
@@ -60,7 +60,7 @@ export PATH=/${MSYS}/bin:$PATH\;
 ./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${ANDROID_NDK}")
 ENDIF()
 
-IF(UNIX)
+IF(CMAKE_HOST_UNIX)
 DKSETPATH(${BOOST})
 SET(arg ./build-android.sh ${ANDROID_NDK})
 SET(arg2 ${arg} ${ARGN}) # Merge them together

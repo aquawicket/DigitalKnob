@@ -1,5 +1,5 @@
 ### INSTALL ###
-IF(WIN32)
+IF(CMAKE_HOST_WIN32)
 	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r18/ndk-build.cmd")
 		DKINSTALL(http://123.15.57.34/android/repository/android-ndk-r18-windows-x86_64.zip android-ndk-r18)
 		## DKINSTALL(${DKWEB}/Download/android-ndk-r18-windows-x86_64.zip android-ndk-r18)
@@ -7,7 +7,7 @@ IF(WIN32)
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r18" ABSOLUTE)  #Get the windows short filepath
 ENDIF()
 
-IF(APPLE)
+IF(CMAKE_HOST_APPLE)
 	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r18)
 		DKSETPATH(${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/android-ndk-r18-darwin-x86_64.zip)
@@ -17,8 +17,8 @@ IF(APPLE)
 	SET(ANDROID_NDK "${3RDPARTY}/android-ndk-r18")
 ENDIF()
 
-IF(UNIX)
-IF(NOT APPLE)
+IF(CMAKE_HOST_UNIX)
+IF(NOT CMAKE_HOST_APPLE)
 	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r18)
 		DKSETPATH(${DIGITALKNOB}/Download)
 		## DKDOWNLOAD(www.internet.com/android-ndk-r18-linux-x86_64.zip)
