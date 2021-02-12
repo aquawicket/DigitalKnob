@@ -83,18 +83,17 @@ function DKBuild_InstallCmake()
 	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DKDuktape_GetOS() === "Win32"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
-			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.5-win32-x86.msi")){
+			//DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
+			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.5-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
+		DK_System(datapath+"/cmake-3.17.5-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Win64"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
-			//DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.5-win32-x86.msi")){
+			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.5-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.2-win32-x86.msi");
+		DK_System(datapath+"/cmake-3.17.5-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
