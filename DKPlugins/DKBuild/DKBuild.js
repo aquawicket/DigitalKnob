@@ -83,17 +83,18 @@ function DKBuild_InstallCmake()
 	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DKDuktape_GetOS() === "Win32"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.5-win32-x86.msi")){
-			//DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.5-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
+			//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.5-win32-x86.msi");
+		CPP_DKDuktape_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Win64"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.5-win32-x86.msi")){
-			DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.5-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
+			//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
 		}
-		DK_System(datapath+"/cmake-3.17.5-win32-x86.msi");
+		CPP_DKDuktape_System(datapath+"/cmake-3.17.2-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
@@ -129,9 +130,9 @@ function DKBuild_InstallVC2019()
 	console.log("Installing Visual Studio 2019");
 	var datapath = DKAssets_LocalAssets();
 	
-	DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", datapath);
-	//DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
-	DK_System(datapath+"vs_Community.exe");
+	CPP_DKCurl_Download("https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe", datapath);
+	//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/vs_Community.exe", datapath);
+	CPP_DKDuktape_System(datapath+"vs_Community.exe");
 }
 
 //////////////////////////////
@@ -171,7 +172,7 @@ function DKBuild_InstallXcode()
 {
 	console.log("Installing Xcode");
 	var datapath = DKAssets_LocalAssets();
-	DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
+	CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/xcode4630916281a.dmg", datapath);
 }
 
 //////////////////////////
