@@ -1,5 +1,5 @@
 ### DEPENDS ###
-DKDEPEND(android-ndk-r20)
+DKDEPEND(android-ndk-r20b)
 IF(CMAKE_HOST_WIN32)
 	DKDEPEND(mingw32)
 	DKDEPEND(msys)
