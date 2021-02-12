@@ -83,18 +83,16 @@ function DKBuild_InstallCmake()
 	var datapath = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DKDuktape_GetOS() === "Win32"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
-			CPP_DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
-			//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
-		CPP_DKDuktape_System(datapath+"/cmake-3.17.2-win32-x86.msi");
+		CPP_DKDuktape_System(datapath+"/cmake-3.19.4-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Win64"){
-		if(!CPP_DKFile_Exists(datapath+"/cmake-3.17.2-win32-x86.msi")){
-			CPP_DKCurl_Download("https://cmake.org/files/v3.17/cmake-3.17.2-win32-x86.msi", datapath);
-			//CPP_DKCurl_Download("http://DigitalKnob.com/Download/Tools/cmake-3.17.2-win32-x86.msi", datapath);
+		if(!CPP_DKFile_Exists(datapath+"/cmake-3.19.4-win32-x86.msi")){
+			CPP_DKCurl_Download("https://cmake.org/files/v3.19/cmake-3.19.4-win32-x86.msi", datapath);
 		}
-		CPP_DKDuktape_System(datapath+"/cmake-3.17.2-win32-x86.msi");
+		CPP_DKDuktape_System(datapath+"/cmake-3.19.4-win32-x86.msi");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
@@ -807,10 +805,11 @@ function DKBuild_DoResults()
 			}
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
-			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			//var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE=C:/Microsoft/AndroidNDK64/android-ndk-r16b/build/cmake/android.toolchain.cmake -DANDROID_NDK=C:/Microsoft/AndroidNDK64/android-ndk-r16b "+cmake_string+DKPATH+"/DK");
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
-			CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
+			//CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			if(LEVEL === "Rebuild" || LEVEL === "RebuildAll"){

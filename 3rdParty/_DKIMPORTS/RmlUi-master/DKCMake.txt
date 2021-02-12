@@ -4,7 +4,7 @@ DKDEPEND(freetype-2.5.5)
 
 ### INSTALL ###
 DKINSTALL(https://codeload.github.com/mikke89/RmlUi/zip/master RmlUi-master)
-DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/RmlUi-master.zip)  ##FIXME: This doesn't work
+DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/RmlUi-master.zip)
 DKSET(RMLUI ${3RDPARTY}/RmlUi-master)
 
 

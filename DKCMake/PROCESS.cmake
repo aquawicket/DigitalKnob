@@ -292,6 +292,22 @@ FOREACH(plugin ${DKPLUGS})
 			ENDIF()
 		ENDIF()
 		
+		IF(ANDROID_32)
+			FILE(MAKE_DIRECTORY ${PATHTOPLUGIN}/${OS})
+			IF(DEBUG)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/Debug)
+				FILE(MAKE_DIRECTORY ${CURRENT_DIR})
+				ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DANDROID_32=ON -DREBUILD=ON -DDEBUG=ON -DCMAKE_TOOLCHAIN_FILE=C:\Microsoft\AndroidNDK64\android-ndk-r16b\build\cmake\android.toolchain.cmake -DANDROID_NDK=C:\Microsoft\AndroidNDK64\android-ndk-r16b ${PATHTOPLUGIN})
+				ANDROID32_COMMAND(make)
+			ENDIF()
+			IF(RELEASE)
+				DKSET(CURRENT_DIR ${PATHTOPLUGIN}/${OS}/Release)
+				FILE(MAKE_DIRECTORY ${CURRENT_DIR})
+				ANDROID32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A ARM -DANDROID_32=ON -DREBUILD=ON -DRELEASE=ON -DCMAKE_TOOLCHAIN_FILE=C:\Microsoft\AndroidNDK64\android-ndk-r16b\build\cmake\android.toolchain.cmake -DANDROID_NDK=C:\Microsoft\AndroidNDK64\android-ndk-r16b ${PATHTOPLUGIN})
+				ANDROID32_COMMAND(make)
+			ENDIF()
+		ENDIF()
+		
 		INCLUDE(${PATHTOPLUGIN}/DKCMake.txt) ##run it again to copy any .exe and .dll files. 
 	ENDIF()
 	
