@@ -5,7 +5,7 @@ DKPLUGIN(DKHook)
 DKASSETS(DKHook)
 
 ## hookdll windows
-IF(WIN32)
+IF(WIN)
 	DKAPPEND_CMAKE("\n\n")
 	DKAPPEND_CMAKE("FILE(GLOB hookdll_SRC \n")
 	DKAPPEND_CMAKE("	${DKPLUGINS}/DKHook/hookdll/*.cpp \n")

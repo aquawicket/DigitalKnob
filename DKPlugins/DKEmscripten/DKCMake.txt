@@ -1,4 +1,4 @@
-IF(WIN32)
+IF(WIN)
 	DKDEPEND(emsdk-portable-64bit)
 ENDIF()
 IF(MAC)

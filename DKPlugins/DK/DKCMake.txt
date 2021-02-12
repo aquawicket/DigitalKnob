@@ -32,7 +32,7 @@ ELSEIF(RASPBERRY)
 	#DKDEPEND(libasound2-dev) ##TODO: Move to DKAudio
 	#DKDEPEND(libxtst-dev)
 ELSEIF(ANDROID)
-	IF(WIN32)
+	IF(CMAKE_HOST_WIN32)
 		DKDEPEND(Boost-for-Android-devel Boost_System)
 		DKDEPEND(Boost-for-Android-devel Boost_Filesystem)
 	ELSE()
