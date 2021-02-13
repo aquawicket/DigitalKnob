@@ -1,8 +1,8 @@
 ### INSTALL ###
 IF(CMAKE_HOST_WIN32)
-	IF(NOT EXISTS "${3RDPARTY}/android-ndk-r20b/ndk-build.cmd")
+	#IF(NOT EXISTS "${3RDPARTY}/android-ndk-r20b/ndk-build.cmd")
 		DKINSTALL(https://dl.google.com/android/repository/android-ndk-r20b-windows-x86_64.zip android-ndk-r20b)
-	ENDIF()
+	#ENDIF()
 	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r20b" ABSOLUTE)  #Get the windows short filepath
 ENDIF()
 

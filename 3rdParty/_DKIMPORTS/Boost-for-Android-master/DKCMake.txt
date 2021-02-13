@@ -111,7 +111,7 @@ IF(CMAKE_HOST_WIN32)
 		cd ${BOOST}
 		export PATH=/${MINGW32}/bin:$PATH\;
 		export PATH=/${MSYS}/bin:$PATH\;
-		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a ${ANDROID_NDK}")
+		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a --toolchain=llvm ${ANDROID_NDK}")
 	ENDIF()
 	IF(ANDROID_64)
 		ANDROID_BASH("#!/bin/bash
