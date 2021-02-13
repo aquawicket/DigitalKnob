@@ -111,14 +111,14 @@ IF(CMAKE_HOST_WIN32)
 		cd ${BOOST}
 		export PATH=/${MINGW32}/bin:$PATH\;
 		export PATH=/${MSYS}/bin:$PATH\;
-		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a --toolchain=llvm ${ANDROID_NDK}")
+		./build-android.sh --boost=1.74.0 --arch=armeabi-v7a --toolchain=llvm --target-version=21 --with-libraries=chrono,date_time,filesystem,system,thread --prefix=${BOOST}/android32 ${ANDROID_NDK}")
 	ENDIF()
 	IF(ANDROID_64)
 		ANDROID_BASH("#!/bin/bash
 		cd ${BOOST}
 		export PATH=/${MINGW32}/bin:$PATH\;
 		export PATH=/${MSYS}/bin:$PATH\;
-		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --help ${ANDROID_NDK}")
+		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread ${ANDROID_NDK}")
 	ENDIF()
 ENDIF()
 
