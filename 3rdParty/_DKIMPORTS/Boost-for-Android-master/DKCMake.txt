@@ -12,12 +12,9 @@ DKRENAME(${DKDOWNLOAD}/master ${DKDOWNLOAD}/Boost-for-Android-master.zip)
 DKSET(BOOST ${3RDPARTY}/Boost-for-Android-master)
 
 ##FIXME: this get's overwritten
-IF(EXISTS ${BOOST}/boost_1_74_0)
-	###
-ELSE()
+IF(NOT EXISTS ${BOOST}/boost_1_74_0)
 	DKSETPATH(${BOOST})
-	## DKDOWNLOAD(www.internet.com/boost_1_74_0.tar.bz2)
-	## DKDOWNLOAD(${DKWEB}/Download/boost_1_74_0.tar.bz2)
+	DKDOWNLOAD(https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.tar.bz2)
 ENDIF()
 
 
@@ -34,101 +31,101 @@ IF(CMAKE_HOST_WIN32)
 		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_74.a)
 	ENDIF()
 
-IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Filesystem)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_System)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Thread)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
+	ENDIF()
 ENDIF()
 
 IF(CMAKE_HOST_APPLE)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
-IF(Boost_Chrono)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Chrono)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-darwin-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_DateTime)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_74.aa)
-ENDIF()
+	IF(Boost_DateTime)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-darwin-mt-a32-1_74.aa)
+	ENDIF()
 
-IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Filesystem)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-darwin-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_System)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-darwin-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Thread)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-darwin-mt-a32-1_74.a)
+	ENDIF()
 ENDIF()
 
 IF(CMAKE_HOST_LINUX)
 	ANDROID_INCLUDE(${BOOST}/build/out/armeabi-v7a/include/boost-1_74)
-IF(Boost_Chrono)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Chrono)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_chrono-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_DateTime)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_DateTime)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_date_time-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_Filesystem)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Filesystem)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_filesystem-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_System)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_System)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_system-clang-mt-a32-1_74.a)
+	ENDIF()
 
-IF(Boost_Thread)
-	ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
-ENDIF()
+	IF(Boost_Thread)
+		ANDROID_DEBUG_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
+		ANDROID_RELEASE_LIB(${BOOST}/build/out/armeabi-v7a/lib/libboost_thread-clang-mt-a32-1_74.a)
+	ENDIF()
 ENDIF()
 
 
 ### COMPILE ###
 IF(CMAKE_HOST_WIN32)
-IF(ANDROID_32)
-ANDROID_BASH("#!/bin/bash
-cd ${BOOST}
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a ${ANDROID_NDK}")
-ENDIF()
-IF(ANDROID_64)
-ANDROID_BASH("#!/bin/bash
-cd ${BOOST}
-export PATH=/${MINGW32}/bin:$PATH\;
-export PATH=/${MSYS}/bin:$PATH\;
-./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --help ${ANDROID_NDK}")
-ENDIF()
+	IF(ANDROID_32)
+		ANDROID_BASH("#!/bin/bash
+		cd ${BOOST}
+		export PATH=/${MINGW32}/bin:$PATH\;
+		export PATH=/${MSYS}/bin:$PATH\;
+		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --arch=armeabi-v7a ${ANDROID_NDK}")
+	ENDIF()
+	IF(ANDROID_64)
+		ANDROID_BASH("#!/bin/bash
+		cd ${BOOST}
+		export PATH=/${MINGW32}/bin:$PATH\;
+		export PATH=/${MSYS}/bin:$PATH\;
+		./build-android.sh --with-libraries=chrono,date_time,filesystem,system,thread --help ${ANDROID_NDK}")
+	ENDIF()
 ENDIF()
 
 IF(CMAKE_HOST_UNIX)
-DKSETPATH(${BOOST})
-SET(arg ./build-android.sh ${ANDROID_NDK})
-SET(arg2 ${arg} ${ARGN}) # Merge them together
-MESSAGE("COMMAND-> ${arg2}")
-EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
+	DKSETPATH(${BOOST})
+	SET(arg ./build-android.sh ${ANDROID_NDK})
+	SET(arg2 ${arg} ${ARGN}) # Merge them together
+	MESSAGE("COMMAND-> ${arg2}")
+	EXECUTE_PROCESS(COMMAND ${arg2} WORKING_DIRECTORY ${BOOST})
 ENDIF()
