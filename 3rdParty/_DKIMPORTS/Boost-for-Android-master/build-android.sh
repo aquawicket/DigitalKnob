@@ -570,9 +570,11 @@ echo "Building boost for android for $ARCH"
   export NO_BZIP2=1
   export PlatformOS=$PlatformOS
 
-  cflags="-std=c++14"
+  cflags=""
+  $CFLAGS="std=c++14"
   for flag in $CFLAGS; do cflags="$cflags cflags=$flag"; done
-  cxxflags="-std=c++14"
+  cxxflags=""
+  $CXXFLAGS="std=c++14"
   for flag in $CXXFLAGS; do cxxflags="$cxxflags cxxflags=$flag"; done
 
   LIBRARIES_BROKEN=""
@@ -613,8 +615,8 @@ echo "Building boost for android for $ARCH"
         -j$NCPU                      \
         target-os=${TARGET_OS}       \
         toolset=${TOOLSET_ARCH}      \
-        $cflags                      \
-        $cxxflags                    \
+        cflags="-std=c++14"                      \
+        cxxflags="-std=c++14"                  \
         link=static                  \
         threading=multi              \
         --layout=${LAYOUT}           \
