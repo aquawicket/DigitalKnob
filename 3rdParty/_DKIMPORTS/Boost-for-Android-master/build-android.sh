@@ -216,11 +216,11 @@ if [ $CLEAN = yes ] ; then
 	echo "Cleaning: $BUILD_DIR"
 	rm -f -r $PROGDIR/$BUILD_DIR
 
-	echo "Cleaning: $BOOST_DIR"
-	rm -f -r $PROGDIR/$BOOST_DIR
+	#echo "Cleaning: $BOOST_DIR"
+	#rm -f -r $PROGDIR/$BOOST_DIR
 
-	echo "Cleaning: $BOOST_TAR"
-	rm -f $PROGDIR/$BOOST_TAR
+	#echo "Cleaning: $BOOST_TAR"
+	#rm -f $PROGDIR/$BOOST_TAR
 
 	echo "Cleaning: logs"
 	rm -f -r logs
@@ -235,15 +235,15 @@ fi
 # a debug, in which case it's easy for a developer to comment out
 # this code.
 
-if [ -d "$PROGDIR/$BOOST_DIR" ]; then
-	echo "Cleaning: $BOOST_DIR"
-	rm -f -r $PROGDIR/$BOOST_DIR
-fi
-
-if [ -d "$PROGDIR/$BUILD_DIR" ]; then
-	echo "Cleaning: $BUILD_DIR"
-	rm -f -r $PROGDIR/$BUILD_DIR
-fi
+##if [ -d "$PROGDIR/$BOOST_DIR" ]; then
+##	echo "Cleaning: $BOOST_DIR"
+##	rm -f -r $PROGDIR/$BOOST_DIR
+##fi
+##
+##if [ -d "$PROGDIR/$BUILD_DIR" ]; then
+##	echo "Cleaning: $BUILD_DIR"
+##	rm -f -r $PROGDIR/$BUILD_DIR
+##fi
 
 
 AndroidNDKRoot=$PARAMETERS
@@ -571,10 +571,10 @@ echo "Building boost for android for $ARCH"
   export PlatformOS=$PlatformOS
 
   cflags=""
-  $CFLAGS="std=c++14"
+  #$CFLAGS="-std=c++14"
   for flag in $CFLAGS; do cflags="$cflags cflags=$flag"; done
   cxxflags=""
-  $CXXFLAGS="std=c++14"
+  #$CXXFLAGS="-std=c++14"
   for flag in $CXXFLAGS; do cxxflags="$cxxflags cxxflags=$flag"; done
 
   LIBRARIES_BROKEN=""
@@ -615,8 +615,8 @@ echo "Building boost for android for $ARCH"
         -j$NCPU                      \
         target-os=${TARGET_OS}       \
         toolset=${TOOLSET_ARCH}      \
-        cflags="-std=c++14"                      \
-        cxxflags="-std=c++14"                  \
+        $cflags                      \
+        cxxflags="-std=c++14"        \
         link=static                  \
         threading=multi              \
         --layout=${LAYOUT}           \
