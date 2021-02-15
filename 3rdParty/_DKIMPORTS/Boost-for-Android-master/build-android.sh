@@ -1,26 +1,4 @@
-#!/bin/sh
-# Copyright (C) 2010 Mystic Tree Games
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# Author: Moritz "Moss" Wundke (b.thax.dcg@gmail.com)
-#
-# <License>
-#
-# Build boost for android completly. It will download boost 1.45.0
-# prepare the build system and finally build it for android
-
-SCRIPTDIR="$(cd "$(dirname "$0")"; pwd)" # " # This extra quote fixes syntax highlighting in mcedit
+SCRIPTDIR="$(cd "$(dirname "$0")"; pwd)"
 
 # Add common build methods
 . "$SCRIPTDIR"/build-common.sh
@@ -42,58 +20,6 @@ boost_version()
   elif [ "$1" = "1.73.0" ]; then
     BOOST_VER1=1
     BOOST_VER2=73
-    BOOST_VER3=0
-  elif [ "$1" = "1.71.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=71
-    BOOST_VER3=0
-  elif [ "$1" = "1.70.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=70
-    BOOST_VER3=0
-  elif [ "$1" = "1.69.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=69
-    BOOST_VER3=0
-  elif [ "$1" = "1.68.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=68
-    BOOST_VER3=0
-  elif [ "$1" = "1.67.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=67
-    BOOST_VER3=0
-  elif [ "$1" = "1.66.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=66
-    BOOST_VER3=0
-  elif [ "$1" = "1.65.1" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=65
-    BOOST_VER3=1
-  elif [ "$1" = "1.55.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=55
-    BOOST_VER3=0
-  elif [ "$1" = "1.54.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=54
-    BOOST_VER3=0
-  elif [ "$1" = "1.53.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=53
-    BOOST_VER3=0
-  elif [ "$1" = "1.49.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=49
-    BOOST_VER3=0
-  elif [ "$1" = "1.48.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=48
-    BOOST_VER3=0
-  elif [ "$1" = "1.45.0" ]; then
-    BOOST_VER1=1
-    BOOST_VER2=45
     BOOST_VER3=0
   else
     echo "Unsupported boost version '$1'."
