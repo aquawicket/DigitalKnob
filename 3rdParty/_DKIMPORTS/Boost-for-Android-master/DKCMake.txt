@@ -107,11 +107,11 @@ ENDIF()
 ### COMPILE ###
 IF(CMAKE_HOST_WIN32)
 	IF(ANDROID_32)
-		ANDROID_BASH("#!/bin/bash
-		cd ${BOOST}
-		export PATH=/${MINGW32}/bin:$PATH\;
-		export PATH=/${MSYS}/bin:$PATH\;
-		./build-android.sh --boost=1.74.0 --arch=armeabi-v7a --toolchain=llvm --target-version=29 --verbose ${ANDROID_NDK}")
+		#ANDROID_BASH("#!/bin/bash
+		#cd ${BOOST}
+		#export PATH=/${MINGW32}/bin:$PATH\;
+		#export PATH=/${MSYS}/bin:$PATH\;
+		#./build-android.sh --boost=1.74.0 --arch=armeabi-v7a --toolchain=llvm --target-version=29 --verbose ${ANDROID_NDK}")
 	ENDIF()
 	IF(ANDROID_64)
 		ANDROID_BASH("#!/bin/bash
