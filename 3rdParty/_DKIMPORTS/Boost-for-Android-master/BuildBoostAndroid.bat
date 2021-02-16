@@ -1,5 +1,8 @@
 @Echo Off
 echo ((( DigitalKnob Android Boost Library Compiler )))
+echo Importing files from 3rdParty/_DKIMPORT . . .
+robocopy "C:\digitalknob\DK\3rdParty\_DKIMPORTS\Boost-for-Android-master" "C:\digitalknob\DK\3rdParty\Boost-for-Android-master" /IS /IT /IM /NDL /NJH /NJS /nc /ns
+
 echo Setting invironment variables . . .
 set ANDROIDNDKROOT=C:\digitalknob\DK\3rdParty\android-ndk-r20b
 set NDKVER=r20b
