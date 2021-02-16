@@ -8,15 +8,16 @@ set ANDROIDNDKROOT=C:\digitalknob\DK\3rdParty\android-ndk-r20b
 set NDKVER=r20b
 set CLANGPATH=%ANDROIDNDKROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin
 
-echo Patching boost_1_74_0 for android . . . 
+echo Patching boost_1_74_0 for android . . 
+Rem : TODO 
 
 echo Copying user-config.jam to boost_1_74_0/tools/build/src . . .
 robocopy "C:\digitalknob\DK\3rdParty\Boost-for-Android-master" "C:\digitalknob\DK\3rdParty\Boost-for-Android-master\boost_1_74_0\tools\build\src" user-config.jam /IS /IT /IM /NDL /NJH /NJS /nc /ns
 echo.
 echo.
-echo **** Running b2 b2 --without-graph --without-regex --without-container --without-chrono --without-type_erasure --without-program_options --without-serialization --without-stacktrace --without-test --without-timer --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
+echo **** Running b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
 echo.
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master\boost_1_74_0
 Rem : Adding a -q parameter to b2 will make it stop compiling on it's first error for easier debugging. 
-b2 architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
+b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../android32 stage
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master
