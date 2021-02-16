@@ -60,7 +60,7 @@ $(AndroidBinariesPath)/clang++
 <compileflags>$(AndroidNDKRoot)/sysroot
 <compileflags>-isystem
 <compileflags>$(AndroidNDKRoot)/sysroot/usr/include/arm-linux-androideabi
-<compileflags>-D__ANDROID_API__=18
+<compileflags>-D__ANDROID_API__=29
 <archiver>$(AndroidNDKRoot)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ar
 <ranlib>$(AndroidNDKRoot)/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/arm-linux-androideabi/bin/ranlib
 
