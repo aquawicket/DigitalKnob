@@ -17,9 +17,8 @@ echo.
 echo **** Copy and paste this command to this sh terminal to debug (auto)****
 echo.
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master\boost_1_74_0
-echo b2 -q --without-type_erasure --without-program_options --without-serialization --without-stacktrace --without-test --without-timer --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
-echo.
-b2 -q --without-container --without-chrono --without-type_erasure --without-program_options --without-serialization --without-stacktrace --without-test --without-timer --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
+Rem : Adding a b2 -q parameter will stop b2 on it's first error and allow you to see any errors quicker. 
+b2 --without-graph --without-regex --without-container --without-chrono --without-type_erasure --without-program_options --without-serialization --without-stacktrace --without-test --without-timer --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master
 
 
