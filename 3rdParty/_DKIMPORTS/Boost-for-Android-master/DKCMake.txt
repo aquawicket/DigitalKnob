@@ -111,7 +111,7 @@ IF(CMAKE_HOST_WIN32)
 		cd ${BOOST}
 		export PATH=/${MINGW32}/bin:$PATH\;
 		export PATH=/${MSYS}/bin:$PATH\;
-		./build-android.sh --boost=1.74.0 --arch=armeabi-v7a --toolchain=llvm --target-version=29 --verbose ${ANDROID_NDK}")
+		./build-android.sh")
 		## Run batch build after bootstrap
 		DKSETPATH(${BOOST})
 		ANDROID_COMMAND(BuildBoostAndroid.bat)

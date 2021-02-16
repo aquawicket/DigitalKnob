@@ -12,9 +12,9 @@ echo Copying user-config.jam to boost_1_74_0/tools/build/src . . .
 robocopy "C:\digitalknob\DK\3rdParty\Boost-for-Android-master" "C:\digitalknob\DK\3rdParty\Boost-for-Android-master\boost_1_74_0\tools\build\src" user-config.jam /IS /IT /IM /NDL /NJH /NJS /nc /ns
 echo.
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master\boost_1_74_0
-echo **** Running b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../stage_arm_r20b stage
+echo **** Running b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../android32 --stagedir=../android32 stage
 echo.
 
 Rem : Adding a -q parameter to b2 will make it stop compiling on it's first error for easier debugging. 
-b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/r20b --stagedir=../android32 stage
+b2 architecture=arm --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=../android32 --stagedir=../android32 stage
 cd C:\digitalknob\DK\3rdParty\Boost-for-Android-master
