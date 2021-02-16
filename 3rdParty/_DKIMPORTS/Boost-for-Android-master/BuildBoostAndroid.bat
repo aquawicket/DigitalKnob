@@ -14,7 +14,7 @@ echo.
 echo.
 echo **** Copy and paste this command to this sh terminal to debug ****
 echo.
-echo ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=build/arm/%NDKVER% --stagedir=stage_arm_%NDKVER% stage
+echo ./b2 -q --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/%NDKVER% --stagedir=../stage_arm_%NDKVER% stage
 echo.
 sh
 

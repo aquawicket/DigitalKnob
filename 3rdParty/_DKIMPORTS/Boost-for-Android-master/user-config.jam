@@ -8,9 +8,9 @@
 # set CLANGPATH=%ANDROIDNDKROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin
 # Copy this user-config.jam file to boost-folder/tools/build/src
 
-# For armeabiv7-a run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=build/arm/%NDKVER% --stagedir=stage_arm_%NDKVER% stage
+# For armeabiv7-a run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/%NDKVER% --stagedir=../stage_arm_%NDKVER% stage
 
-# For x86 run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=build/arm/%NDKVER% --stagedir=stage_arm_%NDKVER% stage
+# For x86 run: ./b2 -q --without-math --without-context --without-coroutine --without-fiber --without-python architecture=arm --ignore-site-config -j4 target-os=android  toolset=clang-armeabiv7a link=static threading=multi --layout=tagged --build-dir=../build/arm/%NDKVER% --stagedir=../stage_arm_%NDKVER% stage
 
 #Hopefully, the same steps can be followed to compile 1.69.0 and up (not tested)
 

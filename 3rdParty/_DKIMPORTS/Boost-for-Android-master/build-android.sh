@@ -534,29 +534,7 @@ echo "Building boost for android for $ARCH"
       unset WITHOUT_LIBRARIES
   fi
 
-  { 
-    ./b2 -q                          \
-        -d+2                         \
-        --ignore-site-config         \
-        -j$NCPU                      \
-        target-os=${TARGET_OS}       \
-        toolset=${TOOLSET_ARCH}      \
-        $cflags                      \
-        cxxflags="-std=c++14"        \
-        link=static                  \
-        threading=multi              \
-        --layout=${LAYOUT}           \
-        $WITHOUT_LIBRARIES           \
-        $PYTHON_BUILD                \
-        -sICONV_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
-        -sICU_PATH=`pwd`/../libiconv-libicu-android/$ARCH \
-        --build-dir="./../$BUILD_DIR/build/$ARCH" \
-        --prefix="./../$BUILD_DIR/out/$ARCH" \
-        $LIBRARIES                   \
-        $LIBRARIES_BROKEN            \
-        install 2>&1                 \
-        || { dump "ERROR: Failed to build boost for android for $ARCH!" ; exit 1 ; }
-  } | tee -a $PROGDIR/build.log
+
 
   # PIPESTATUS variable is defined only in Bash, and we are using /bin/sh, which is not Bash on newer Debian/Ubuntu
 )
