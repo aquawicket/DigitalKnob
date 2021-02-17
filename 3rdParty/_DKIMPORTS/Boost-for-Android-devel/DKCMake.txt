@@ -1,3 +1,5 @@
+#FIXME: Deprecated. Compile directly from boost library instead. 
+
 ### DEPENDS ###
 DKDEPEND(android-ndk-r20b)
 IF(CMAKE_HOST_WIN32)

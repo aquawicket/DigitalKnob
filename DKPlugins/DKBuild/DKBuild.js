@@ -10,7 +10,8 @@ var LINK = "";  //Static, Dynamic
 var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var CMAKE = "";
-var NDK = "C:/digitalknob/DK/3rdParty/android-ndk-r21e";
+var NDK = "";
+var NDK_NAME = "android-ndk-r21e";
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
 VC2019 = CPP_DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
@@ -27,30 +28,30 @@ function DKBuild_Init()
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r21e";
+		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DKDuktape_GetOS() === "Win64"){
 		DKPATH = "C:/digitalknob";
 		CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe";
 		CMAKE = CPP_DKFile_GetShortName(CMAKE);
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r21e";
+		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 		NDK = CPP_DKFile_GetShortName(NDK);
 	}
 	if(CPP_DKDuktape_GetOS() === "Mac"){
 		DKPATH = "/Users/aquawicket/Desktop/digitalknob";
 		CMAKE = "/Applications/CMake.app/Contents/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r21e";
+		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
 	if(CPP_DKDuktape_GetOS() === "Linux"){
-		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: temporary fix 
+		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: Need to dynamically get username (pi)
 		CMAKE = "/usr/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r21e";
+		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
 	if(CPP_DKDuktape_GetOS() === "Raspberry"){
-		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME
+		DKPATH = "/home/pi/Desktop/digitalknob"; //FIXME: Need to dynamically get username (pi)
 		CMAKE = "/usr/bin/cmake";
-		NDK = DKPATH+"/DK/3rdParty/android-ndk-r21e";
+		NDK = DKPATH+"/DK/3rdParty/"+NDK_NAME;
 	}
 }
 
