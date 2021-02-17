@@ -1,8 +1,3 @@
-IF(ANDROID OR IPHONE OR IPHONESIMULATOR)
-	RETURN()
-ENDIF()
-
-
 ### DEPENDS ###
 IF(WIN)
 	DKDEPEND(python)
@@ -16,6 +11,14 @@ ENDIF()
 ENDIF()
 IF(RASPBERRY)
 	DKDEPEND(libboost-tools-dev)
+ENDIF()
+IF(ANDROID)
+	IF(CMAKE_HOST_WIN32)
+		DKDEPEND(vc2019)
+		DKDEPEND(android-ndk-r20b)
+		DKDEPEND(mingw32)
+		DKDEPEND(msys)
+	ENDIF()
 ENDIF()
 
 
@@ -189,8 +192,16 @@ RASPBERRY_DEBUG_COMMAND(bjam toolset=gcc link=static variant=debug runtime-debug
 RASPBERRY_RELEASE_COMMAND(bjam toolset=gcc link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --with-random --with-atomic --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
-ANDROID_DEBUG_COMMAND(b2 architecture=arm variant=debug --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-ANDROID_RELEASE_COMMAND(b2 architecture=arm variant=release --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+IF(ANDROID_32)
+	ANDROID_BASH("#!/bin/bash
+		cd ${BOOST}
+		export PATH=/${MINGW32}/bin:$PATH\;
+		export PATH=/${MSYS}/bin:$PATH\;
+		./SetupAndroid.sh")
+	DKCOPY(${BOOST}/user-config.jam ${BOOST}/tools/build/src/user-config.jam TRUE)
+	ANDROID_DEBUG_COMMAND(set ANDROIDNDKROOT=C:/digitalknob/DK/3rdParty/android-ndk-r20b && set NDKVER=r20b && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 architecture=arm variant=debug --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+	ANDROID_RELEASE_COMMAND("set ANDROIDNDKROOT=C:/digitalknob/DK/3rdParty/android-ndk-r20b && set NDKVER=r20b && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 architecture=arm variant=release --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release")
+ENDIF()
 
 ENDIF(STATIC)
 
@@ -214,7 +225,6 @@ ENDIF()
 	DKSETPATH(${BOOST})
 	WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
 	WIN32_COMMAND(${BOOSTBUILD}/bin/bjam.exe toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --with-thread --with-chrono --with-date_time --with-regex --with-filesystem --with-system --stagedir=${BOOST}/${OS})
-	=-0poikj
 	DKRENAME(${BOOST}/${OS}/lib/boost_system-vc142-mt-gd-x32-1_74.lib ${BOOST}/${OS}/lib/libboost_system-vc142-mt-gd-x32-1_74.lib)
 	DKRENAME(${BOOST}/${OS}/lib/boost_filesystem-vc142-mt-gd-x32-1_74.lib ${BOOST}/${OS}/lib/libboost_filesystem-vc142-mt-gd-x32-1_74.lib)
 	DKRENAME(${BOOST}/${OS}/lib/boost_date_time-vc142-mt-gd-x32-1_74.lib ${BOOST}/${OS}/lib/libboost_date_time-vc142-mt-gd-x32-1_74.lib)
