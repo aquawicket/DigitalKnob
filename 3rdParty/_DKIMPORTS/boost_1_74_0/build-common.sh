@@ -23,10 +23,10 @@ case "$HOST_OS" in
         HOST_OS=darwin
         ;;
     Linux)
-        # note that building  32-bit binaries on x86_64 is handled later
+        # 32-bit binaries on x86_64 is handled later
         HOST_OS=linux
         ;;
-    FreeBsd)  # note: this is not tested
+    FreeBsd)  # not tested
         HOST_OS=freebsd
         ;;
     CYGWIN*|*_NT-*)
@@ -38,27 +38,15 @@ case "$HOST_OS" in
         ;;
 esac
 
-# at this point, the value of HOST_OS should be one of the following:
 #   linux
 #   darwin
-#    windows (MSys)
-#    cygwin
-#
-# Note that cygwin is treated as a special case because it behaves very differently
-# for a few things. Other values may be possible but have not been tested
-#
-
-# define HOST_TAG as a unique tag used to identify both the host OS and CPU
-# supported values are:
-#
+#   windows (MSys)
+#   cygwin
 #   linux-x86
 #   linux-x86_64
 #   darwin-x86
 #   darwin-ppc
 #   windows
-#
-# other values are possible but were not tested.
-#
 compute_host_tag ()
 {
     case "$HOST_OS" in
@@ -82,7 +70,7 @@ case "$HOST_OS" in
     windows|cygwin)
         HOST_NUM_CPUS=$NUMBER_OF_PROCESSORS
         ;;
-    *)  # let's play safe here
+    *)
         HOST_NUM_CPUS=1
 esac
 
@@ -92,9 +80,3 @@ esac
 if [ -z "$BUILD_NUM_CPUS" ] ; then
     BUILD_NUM_CPUS=`expr $HOST_NUM_CPUS \* 2`
 fi
-
-# Various probes are going to need to run a small C program
-TMPC=/tmp/myst-$$-test.c
-TMPO=/tmp/myst-$$-test.o
-TMPE=/tmp/myst-$$-test$EXE
-TMPL=/tmp/myst-$$-test.log
