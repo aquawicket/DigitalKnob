@@ -35,20 +35,20 @@ then
   # Patching should be done only if we had a successfull bootstrap!
   # -------------------------------------------------------------
 
-  # Apply patches to boost
+  # Apply android-patches to boost
   BOOST_VER=${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}
-  PATCH_BOOST_DIR="$BOOST/patches/boost-${BOOST_VER}"
+  PATCH_BOOST_DIR="$BOOST/android-patches/boost-${BOOST_VER}"
 
   for dir in $PATCH_BOOST_DIR; do
     if [ ! -d "$dir" ]; then
-      echo "Could not find directory '$dir' while looking for patches"
+      echo "Could not find directory '$dir' while looking for android-patches"
       exit 1
     fi
 
     PATCHES=`(cd $dir && ls *.patch | sort) 2> /dev/null`
 
     if [ -z "$PATCHES" ]; then
-      echo "No patches found in directory '$dir'"
+      echo "No android-patches found in directory '$dir'"
       exit 1
     fi
 
@@ -60,7 +60,7 @@ then
       echo "Applying $PATCHNAME into $SRC_DIR/$PATCHDIR"
       patch -p1 < $dir/$PATCH
       if [ $? != 0 ] ; then
-        echo "ERROR: Patch failure !! Please check your patches directory!"
+        echo "ERROR: Patch failure !! Please check your android-patches directory!"
         echo "       Try to perform a clean build using --clean ."
         echo "       Problem patch: $dir/$PATCHNAME"
         exit 1
