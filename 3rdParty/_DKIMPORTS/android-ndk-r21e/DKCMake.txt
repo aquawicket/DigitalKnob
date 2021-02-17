@@ -1,0 +1,23 @@
+### INSTALL ###
+IF(CMAKE_HOST_WIN32)
+	DKINSTALL(https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip android-ndk-r21e)
+	GET_FILENAME_COMPONENT(ANDROID_NDK "${3RDPARTY}/android-ndk-r21e" ABSOLUTE)  #Get the windows short filepath
+ENDIF()
+
+IF(CMAKE_HOST_APPLE)
+	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r21e)
+		DKSETPATH(${DIGITALKNOB}/Download)
+		## DKDOWNLOAD(www.internet.com/android-ndk-r21e-darwin-x86_64.zip)
+		DKEXTRACT(${DIGITALKNOB}/Download/android-ndk-r21e-darwin-x86_64.zip ${3RDPARTY})
+	ENDIF()
+	SET(ANDROID_NDK "${3RDPARTY}/android-ndk-r21e")
+ENDIF()
+
+IF(CMAKE_HOST_LINUX)
+	IF(NOT EXISTS ${3RDPARTY}/android-ndk-r21e)
+		DKSETPATH(${DIGITALKNOB}/Download)
+		## DKDOWNLOAD(www.internet.com/android-ndk-r21e-linux-x86_64.zip)
+		DKEXTRACT(${DIGITALKNOB}/Download/android-ndk-r21e-linux-x86_64.zip ${3RDPARTY})
+	ENDIF()
+	SET(ANDROID_NDK "${3RDPARTY}/android-ndk-r21e")
+ENDIF()
