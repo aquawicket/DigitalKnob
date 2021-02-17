@@ -27,7 +27,7 @@ then
     esac
 
   if [ $? != 0 ] ; then
-  	echo "ERROR: Could not perform boostrap! See $TMPLOG for more info."
+  	echo "ERROR: Could not perform boostrap! See log for more info."
   	exit 1
   fi
   
