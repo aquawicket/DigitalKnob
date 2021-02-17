@@ -1,13 +1,53 @@
 BOOST="$(cd "$(dirname "$0")"; pwd)"
-
-# This affects bootstrap to select MSVC vc142
-. "$BOOST"/build-common.sh
-
 BOOST_VER1=1
 BOOST_VER2=74
 BOOST_VER3=0
 BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 
+# ---------
+# HOST info
+# ---------
+HOST_ARCH=`uname -m`
+case "$HOST_ARCH" in
+    i?86) HOST_ARCH=x86
+    ;;
+    amd64) HOST_ARCH=x86_64
+    ;;
+    powerpc) HOST_ARCH=ppc
+    ;;
+esac
+
+HOST_EXE=""
+HOST_OS=`uname -s`
+case "$HOST_OS" in
+    Darwin)
+        HOST_OS=darwin
+        ;;
+    Linux)
+        HOST_OS=linux
+        ;;
+    FreeBsd)  # not tested
+        HOST_OS=freebsd
+        ;;
+    CYGWIN*|*_NT-*)
+        HOST_OS=windows
+        HOST_EXE=.exe
+        if [ "x$OSTYPE" = xcygwin ] ; then
+            HOST_OS=cygwin
+        fi
+        ;;
+esac
+
+compute_host_tag ()
+{
+    case "$HOST_OS" in
+        windows|cygwin)
+            HOST_TAG="windows"
+            ;;
+        *)  HOST_TAG="${HOST_OS}-${HOST_ARCH}"
+    esac
+}
+compute_host_tag
 
 
 # ---------
@@ -15,27 +55,23 @@ BOOST_DIR="boost_${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}"
 # ---------
 if [ ! -f ./b2 ]
 then
-  # Make the initial bootstrap
   echo "Performing boost bootstrap"
-
   case "$HOST_OS" in
     windows)
-        cmd //c "bootstrap.bat" 2>&1 | tee -a build.log
+        cmd //c "bootstrap.bat" 2>&1 | tee -a android-bootstrap.log
         ;;
     *)  # Linux and others
-        ./bootstrap.sh 2>&1 | tee -a build.log
+        ./bootstrap.sh 2>&1 | tee -a android-bootstrap.log
     esac
 
   if [ $? != 0 ] ; then
-  	echo "ERROR: Could not perform boostrap! See log for more info."
+  	echo "ERROR: Could not perform boostrap! See bootstrap.log for more info."
   	exit 1
   fi
   
-  # -------------------------------------------------------------
-  # Patching should be done only if we had a successfull bootstrap!
-  # -------------------------------------------------------------
-
-  # Apply android-patches to boost
+  # ---------
+  # Patching
+  # ---------
   BOOST_VER=${BOOST_VER1}_${BOOST_VER2}_${BOOST_VER3}
   PATCH_BOOST_DIR="$BOOST/android-patches/boost-${BOOST_VER}"
 
@@ -54,14 +90,12 @@ then
 
     for PATCH in $PATCHES; do
       PATCH=`echo $PATCH | sed -e s%^\./%%g`
-      SRC_DIR=$BOOST_DIR
       PATCHDIR=`dirname $PATCH`
       PATCHNAME=`basename $PATCH`
-      echo "Applying $PATCHNAME into $SRC_DIR/$PATCHDIR"
+      echo "Applying $PATCHNAME into $BOOST_DIR/$PATCHDIR"
       patch -p1 < $dir/$PATCH
       if [ $? != 0 ] ; then
         echo "ERROR: Patch failure !! Please check your android-patches directory!"
-        echo "       Try to perform a clean build using --clean ."
         echo "       Problem patch: $dir/$PATCHNAME"
         exit 1
       fi
