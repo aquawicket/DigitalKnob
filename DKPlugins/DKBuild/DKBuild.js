@@ -11,7 +11,12 @@ var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var CMAKE = "";
 var NDK = "";
+
+//ScratchPad.cmake: Need to find this variable through a search within the active setup.
+//Syntax:  var VALUE = GetDKCMakeVariable(VARNAME, OS, ARCH);
+//Example: var NDK = GetDKCMakeVariable("ANDROID_NDK", "WINDOWS", "x64");
 var NDK_NAME = "android-ndk-r21e";
+
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
 VC2019 = CPP_DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
