@@ -159,7 +159,7 @@ WIN32_COMMAND(bootstrap.bat)
 WIN32_COMMAND(b2 toolset=msvc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
 WIN32_COMMAND(b2 toolset=msvc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
-WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
+#WIN64_COMMAND(call C:/Windows/System32/cmd.exe /E:ON /V:ON /T:0E /K "${WINDOWS_SDK_EXE}")
 DKSETPATH(${BOOST})
 WIN64_COMMAND(bootstrap.bat)
 WIN64_COMMAND(b2 toolset=msvc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
