@@ -172,28 +172,29 @@ MAC32_COMMAND(sudo ./b2 toolset=darwin address-model=32 variant=release link=sta
 
 DKSETPATH(${BOOST})
 MAC64_COMMAND(sudo ./bootstrap.sh)
-MAC64_COMMAND(sudo ./b2 --toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-MAC64_COMMAND(sudo ./b2 --toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+MAC64_COMMAND(sudo ./b2 toolset=darwin address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+MAC64_COMMAND(sudo ./b2 toolset=darwin address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
-LINUX_COMMAND(sudo ./bootstrap.sh)
-LINUX_DEBUG_COMMAND(b2 toolset=gcc link=static variant=debug runtime-debugging=on runtime-link=static threading=multi --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-LINUX_RELEASE_COMMAND(b2 toolset=gcc link=static variant=release runtime-debugging=off runtime-link=static threading=multi --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+LINUX32_COMMAND(sudo ./bootstrap.sh)
+LINUX32_COMMAND(sudo ./b2 toolset=gcc address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+LINUX32_COMMAND(sudo ./b2 toolset=gcc address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
-RASPBERRY_DEBUG_COMMAND(b2 toolset=gcc link=static variant=debug runtime-debugging=on runtime-link=static --threading=multi --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-RASPBERRY_RELEASE_COMMAND(b2 toolset=gcc link=static variant=release runtime-debugging=off runtime-link=static --threading=multi --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+LINUX64_COMMAND(sudo ./bootstrap.sh)
+LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
 IF(ANDROID_32)
-	ANDROID_BASH("#!/bin/bash
+	ANDROID32_BASH("#!/bin/bash
 		cd ${BOOST}
 		export PATH=/${MINGW32}/bin:$PATH\;
 		export PATH=/${MSYS}/bin:$PATH\;
 		./SetupAndroid.sh")
-	DKCOPY(${BOOST}/user-config.jam ${BOOST}/tools/build/src/user-config.jam TRUE)
-	ANDROID_DEBUG_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 architecture=arm variant=debug --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-	ANDROID_RELEASE_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 architecture=arm variant=release --ignore-site-config -j4 target-os=android toolset=clang-armeabiv7a link=static threading=multi --layout=versioned --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
+	##DKCOPY(${BOOST}/user-config.jam ${BOOST}/tools/build/src/user-config.jam TRUE) #FIXME: this should not take over the user-config file. It should be injected with it's own name "android-config.jam"
+	ANDROID32_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=debug link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+	ANDROID32_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 ENDIF()
 ENDIF(STATIC)
 
