@@ -445,7 +445,7 @@ IF(WIN_32)
 	MESSAGE("${RELEASE_LIBS}")
 	MESSAGE("\n")
 	
-	# copy the icon to ${DKPROJECT}/assets
+	# copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
 	# backup generated files and folders not going in the package
@@ -459,16 +459,14 @@ IF(WIN_32)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
-	DKZIP(${DKPROJECT}/assets) #zip the assets
+	DKZIP(${DKPROJECT}/assets) #.zip the assets
 	
-	# Generate assets.h from assets.zip
-	##FIXME - assets.h need to be moved to DKPlugins/DKAssets for this to work
 	IF(NOT EXISTS ${DKPROJECT}/assets.h)
-		MESSAGE("Embedding assets.zip into executable . . . please wait a few minutes")
+		MESSAGE("Embedding assets.zip into executable, please wait...")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 	ENDIF()
 	
-	DKCOPY(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE) #put everything back from backup, over
+	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE) #put everything back from backup, over
 	
 	DKREMOVE(${DKPROJECT}/Backup)
 	
