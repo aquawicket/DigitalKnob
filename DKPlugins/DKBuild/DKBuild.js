@@ -11,12 +11,7 @@ var LEVEL = "";  //Build, Rebuild, RebuildAll
 var DKPATH = "";
 var CMAKE = "";
 var NDK = "";
-
-//ScratchPad.cmake: Need to find this variable through a search within the active setup.
-//Syntax:  var VALUE = GetDKCMakeVariable(VARNAME, OS, ARCH);
-//Example: var NDK = GetDKCMakeVariable("ANDROID_NDK", "WINDOWS", "x64");
 var NDK_NAME = "android-ndk-r21e";
-
 var VC2019 = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin/MSBuild.exe";
 VC2019 = CPP_DKFile_GetShortName(VC2019);
 var GCC = "/usr/bin/g++";
@@ -811,9 +806,9 @@ function DKBuild_DoResults()
 			}
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Debug");
-			//var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+
 			if(CPP_DKDuktape_GetOS() === "Win32 " || CPP_DKDuktape_GetOS() === "Win64"){
-				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_ARM_NEON=ON -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DKDuktape_GetOS() === "Linux" || CPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
@@ -828,9 +823,9 @@ function DKBuild_DoResults()
 			}
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android32/Release");
-			var rtvalue;
+
 			if(CPP_DKDuktape_GetOS() === "Win32" || CPP_DKDuktape_GetOS() === "Win64"){
-				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_ARM_NEON=ON -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DKDuktape_GetOS() === "Linux" || CPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
@@ -850,7 +845,10 @@ function DKBuild_DoResults()
 			}
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Debug");
-			var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
+			
+			if(CPP_DKDuktape_GetOS() === "Win32 " || CPP_DKDuktape_GetOS() === "Win64"){
+				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
+			}
 			if(rtvalue.indexOf("errors occurred!") > -1){ return; }
 			
 			CPP_DKDuktape_Execute(NDK+"/ndk-build.cmd NDK_DEBUG=1 NDKLOG=1");
@@ -861,9 +859,9 @@ function DKBuild_DoResults()
 			}
 			CPP_DKFile_MkDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
 			CPP_DKFile_ChDir(DKPATH+"/"+appdir+"/"+APP+"/android64/Release");
-			var rtvalue;
-			if(CPP_DKDuktape_GetOS() === "Win64" || CPP_DKDuktape_GetOS() === "Win64"){
-				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" "+cmake_string+DKPATH+"/DK");
+
+			if(CPP_DKDuktape_GetOS() === "Win32" || CPP_DKDuktape_GetOS() === "Win64"){
+				var rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Visual Studio 16 2019\" -A ARM64 -DCMAKE_TOOLCHAIN_FILE="+NDK+"/build/cmake/android.toolchain.cmake -DANDROID_NDK="+NDK+" -DANDROID_ABI=arm64-v8a -DANDROID_NATIVE_API_LEVEL=29 "+cmake_string+DKPATH+"/DK");
 			}
 			if(CPP_DKDuktape_GetOS() === "Linux" || CPP_DKDuktape_GetOS() === "Mac"){
 				rtvalue = CPP_DKDuktape_Execute(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+DKPATH+"/DK");
