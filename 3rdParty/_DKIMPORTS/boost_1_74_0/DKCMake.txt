@@ -1,3 +1,6 @@
+# Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
+# Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
+
 ### DEPENDS ###
 IF(WIN)
 	DKDEPEND(python)
@@ -59,7 +62,7 @@ IF(Boost_Atomic)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_atomic.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_atomic.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_atomic.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_atomic-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_atomic-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_atomic-clang-mt-a32-1_74.a)
 ENDIF()
 
@@ -75,7 +78,7 @@ IF(Boost_Chrono)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_chrono.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_chrono.a)
 	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_chrono-clang-mt-a32-1_74.a)
-	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_chrono-clang-mt-a32-1_74.a)
+	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_chrono-clang-mt-d-a32-1_74.a)
 ENDIF()
 
 IF(Boost_DateTime)
@@ -89,7 +92,7 @@ IF(Boost_DateTime)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_date_time.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_date_time.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_date_time.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_date_time-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_date_time-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_date_time-clang-mt-a32-1_74.a)
 ENDIF()
 
@@ -104,7 +107,7 @@ IF(Boost_Filesystem)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_filesystem.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_filesystem.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_filesystem.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_filesystem-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_filesystem-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_filesystem-clang-mt-a32-1_74.a)
 ENDIF()
 
@@ -119,7 +122,7 @@ IF(Boost_Random)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_random.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_random.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_random.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_random-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_random-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_random-clang-mt-a32-1_74.a)
 ENDIF()
 
@@ -134,7 +137,7 @@ IF(Boost_System)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_system.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_system.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_system.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_system-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_system-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_system-clang-mt-a32-1_74.a)
 ENDIF() 
 IF(Boost_Thread)
@@ -148,7 +151,7 @@ IF(Boost_Thread)
 	LINUX_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_thread.a)
 	RASPBERRY_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_thread.a)
 	RASPBERRY_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_thread.a)
-	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_thread-clang-mt-a32-1_74.a)
+	ANDROID_DEBUG_LIB(${BOOST}/${OS}/Debug/lib/libboost_thread-clang-mt-d-a32-1_74.a)
 	ANDROID_RELEASE_LIB(${BOOST}/${OS}/Release/lib/libboost_thread-clang-mt-a32-1_74.a)
 ENDIF()
 
@@ -186,16 +189,13 @@ LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=debug link=static
 LINUX64_COMMAND(sudo ./b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
 
 DKSETPATH(${BOOST})
-IF(ANDROID_32)
-	ANDROID32_BASH("#!/bin/bash
-		cd ${BOOST}
-		export PATH=/${MINGW32}/bin:$PATH\;
-		export PATH=/${MSYS}/bin:$PATH\;
-		./SetupAndroid.sh")
-	##DKCOPY(${BOOST}/user-config.jam ${BOOST}/tools/build/src/user-config.jam TRUE) #FIXME: this should not take over the user-config file. It should be injected with it's own name "android-config.jam"
-	ANDROID32_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=debug link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-	ANDROID32_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release)
-ENDIF()
+ANDROID_BASH("#!/bin/bash\;
+cd ${BOOST}\;
+export PATH=/${MINGW32}/bin:$PATH\;
+export PATH=/${MSYS}/bin:$PATH\;
+./SetupAndroid.sh\;")
+ANDROID_DEBUG_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=debug link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug --without-python abi=aapcs binary-format=elf)
+ANDROID_RELEASE_COMMAND(set ANDROIDNDKROOT=${ANDROID_NDK} && set NDKVER=r21e && set CLANGPATH=%ANDROIDNDKROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin && b2 toolset=clang-armeabiv7a architecture=arm variant=release link=static threading=multi target-os=android -j4 --layout=versioned --ignore-site-config --user-config=${BOOST}/android-config.jam --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release --without-python abi=aapcs binary-format=elf)
 ENDIF(STATIC)
 
 
@@ -210,11 +210,8 @@ IF(Boost_System)
 	WIN32_RELEASE_LIB(${BOOST}/${OS}/lib/boost_system-vc142-mt-x32-1_74.lib)
 ENDIF()
 
-##IF(WIN_32)
-##	DKSETPATH(${BOOSTBUILD})
-##ENDIF()
-	##WIN32_COMMAND(b2 install toolset=msvc-14.0 --prefix=${BOOSTBUILD})
-	##DKSETPATH(${BOOST})
-	WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
-	WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release/)
+##WIN32_COMMAND(b2 install toolset=msvc-14.0 --prefix=${BOOSTBUILD})
+##DKSETPATH(${BOOST})
+WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Debug --stagedir=${BOOST}/${OS}/Debug)
+WIN32_COMMAND(b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --build-dir=${BOOST}/${OS}/Release --stagedir=${BOOST}/${OS}/Release/)
 ENDIF(SHARED)

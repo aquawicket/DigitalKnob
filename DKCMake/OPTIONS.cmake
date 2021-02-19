@@ -1,3 +1,6 @@
+## FIXME: This file causes libraries to fail compiling for android.
+	
+
 ########### Initial setup ####################
 IF(COMMAND cmake_policy)
 	CMAKE_POLICY(SET CMP0003 NEW) ##https://cmake.org/cmake/help/latest/policy/CMP0003.html
@@ -141,14 +144,14 @@ ENDIF()
 
 
 ###########################################################################
-## Get variables for Library Build Type (STATIC or DYNAMIC)
+## Get variables for Library Build Type (STATIC or SHARED)
 ###########################################################################
 OPTION(STATIC "Build Static Libraries and Plugins" OFF)
-OPTION(DYNAMIC "Build Dynamic Libraries and Plugins" OFF)
+OPTION(SHARED "Build SHARED Libraries and Plugins" OFF)
 IF(NOT STATIC)
-IF(NOT DYNAMIC)
+IF(NOT SHARED)
 	DKSET(STATIC ON)
-	##MESSAGE(FATAL_ERROR "Please select STATIC or DYNAMIC build.")
+	##MESSAGE(FATAL_ERROR "Please select STATIC or SHARED build.")
 ENDIF()
 ENDIF()	
 
@@ -397,32 +400,43 @@ ENDIF(RELEASE)
 ## Set variables for Generator
 ###########################################################################
 
+
 ##### Microsoft Visual Studio 2019 #####
 IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019")
-	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
-	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
+	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
+	IF(WIN)
+		##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
+		DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_")
 	IF(STATIC)
 		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
 	ENDIF()
-	IF(DYNAMIC)
+	IF(SHARED)
 		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MDd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MD /O2 /Ob2 /DNDEBUG")
 	ENDIF()
-	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
-	DKSET(FLAGS 
-	"/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+		DKSET(FLAGS "/W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /D_USING_V110_SDK71_ /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+	ENDIF()
+	IF(ANDROID)
+		IF(STATIC)
+		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
+		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG -frtti -fexceptions")
+	ENDIF()
+	IF(SHARED)
+		DKSET(CMAKE_CXX_FLAGS_DEBUG "/MDd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
+		DKSET(CMAKE_CXX_FLAGS_RELEASE "/MD /O2 /Ob2 /DNDEBUG")
+	ENDIF()
+	ENDIF()
 ENDIF()
 
 ##### Microsoft Visual Studio 2019 Win64 #####
 IF(CMAKE_GENERATOR STREQUAL "Visual Studio 16 2019 Win64")
+	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
 	##DKSET(CMAKE_CXX_FLAGS "/DWIN32 /D_WINDOWS /W3 /nologo /GR /EHsc /Yustdafx.h /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS "/DWIN32 /DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /Zm500 /D_WIN32_WINNT=0x0600")
 	DKSET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 	DKSET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /DNDEBUG")
-	DKSET(CMAKE_COMMAND C:/Progra~2/CMake/bin/cmake.exe)
-	DKSET(FLAGS 
-	"/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
+	DKSET(FLAGS "/DWIN64 /W3 /nologo /Zm500 /EHsc /GR /D_WIN32_WINNT=0x0600 /Zc:__cplusplus $<$<CONFIG:Debug>:/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MT /O2 /Ob2 /DNDEBUG>")
 ENDIF()
 
 
