@@ -416,6 +416,7 @@ DKCOPY(${DKPLUGINS}/_DKIMPORT ${DKPROJECT} FALSE)
 FILE(GLOB App_SRC 
 	${DKPROJECT}/*.h
 	${DKPROJECT}/*.c
+	${DKPROJECT}/*.hpp
 	${DKPROJECT}/*.cpp
 	${DKPROJECT}/*.rc
 	${DKPROJECT}/icons/windows/*.rc)
@@ -871,7 +872,8 @@ IF(ANDROID_32)
 	
 	DKREMOVE(${DKPROJECT}/Backup)
 	
-	ADD_EXECUTABLE(${AppName} ARM ${App_SRC})
+	#https://stackoverflow.com/questions/44467516/cmake-does-not-build-an-executable-with-add-executable
+	ADD_EXECUTABLE(${AppName} ${App_SRC})
 	TARGET_LINK_LIBRARIES(${AppName} ${DEBUG_LIBS} ${RELEASE_LIBS})
 
 	LIST(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
