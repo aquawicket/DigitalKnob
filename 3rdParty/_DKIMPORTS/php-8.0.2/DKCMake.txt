@@ -1,0 +1,3 @@
+### INSTALL ###
+DKINSTALL(https://www.php.net/distributions/php-8.0.2.tar.gz php-8.0.2)
+DKSET(PHP ${3RDPARTY}/php-8.0.2)
