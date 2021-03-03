@@ -1,3 +1,6 @@
+#Until this works and tested, return
+RETURN()
+
 ### INSTALL ###
 DKINSTALL(https://www.libsdl.org/release/SDL2-2.0.14.zip SDL2-2.0.14)
 ## DKINSTALL(${DKWEB}/Download/SDL2-2.0.14.zip SDL2-2.0.14)
