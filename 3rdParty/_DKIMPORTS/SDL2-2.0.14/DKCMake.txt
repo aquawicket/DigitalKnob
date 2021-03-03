@@ -1,4 +1,5 @@
-#Until this works and tested, return
+#Until this works and is fully tested, use SDL2-2.0.5 and return
+DKDEPEND(SDL2-2.0.5)
 RETURN()
 
 ### INSTALL ###
