@@ -1,7 +1,3 @@
-#Until this works and is fully tested, use RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611 and return
-DKDEPEND(RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611)
-RETURN()
-
 ### DEPENDS ###
 DKDEPEND(freetype-2.5.5)
 
