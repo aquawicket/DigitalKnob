@@ -11,11 +11,6 @@
 #include "../../3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
 #include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerDefault.h"
 #include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerBody.h"
-/*
-#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/PluginRegistry.h"
-#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/XMLNodeHandlerDefault.h"
-#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/XMLNodeHandlerBody.h"
-*/
 
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
@@ -255,16 +250,15 @@ bool DKRml::LoadHtml(const DKString& html)
 	}
 
 	//Load user agent style sheet
-	DKString rml_css = DKFile::local_assets + "DKRml/DKRml.css";
-	Rml::SharedPtr<Rml::StyleSheetContainer> sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
-	Rml::SharedPtr<Rml::StyleSheetContainer> rcss = Rml::Factory::InstanceStyleSheetFile(rml_css.c_str());
-	if(sheet) {
-		Rml::SharedPtr<Rml::StyleSheetContainer> new_style_sheet = rcss->CombineStyleSheetContainer(*sheet);
-		//document->GetOwnerDocument()->SetStyleSheet(std::move(new_style_sheet)); //Old
-		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_style_sheet));
+	DKString file = DKFile::local_assets + "DKRml/DKRml.css";
+	Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
+	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
+	if(current_sheet) { //Combine the file_sheet to the current sheet
+		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = file_sheet->CombineStyleSheetContainer(*current_sheet);
+		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}
-	else {
-		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(rcss));
+	else { //no current sheet, just load the file sheet
+		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
 	}
 
 	//Finish loading the document
