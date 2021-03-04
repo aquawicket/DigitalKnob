@@ -3,7 +3,8 @@
 #include <RmlUi/Core/XMLParser.h>
 #include <RmlUi/Core/SystemInterface.h>
 
-#include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
+//#include "../../3rdParty/RmlUi-master/Source/Core/DocumentHeader.h"
+#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/DocumentHeader.h"
 //#include "TemplateCache.h"
 #include <RmlUi/Core/Core.h>
 #include <RmlUi/Core/Element.h>

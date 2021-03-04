@@ -8,9 +8,14 @@
 #include "DKRml/HeadInstancer.h"
 
 #include <RmlUi/Core/StreamMemory.h>
+/*
 #include "../../3rdParty/RmlUi-master/Source/Core/PluginRegistry.h"
 #include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerDefault.h"
 #include "../../3rdParty/RmlUi-master/Source/Core/XMLNodeHandlerBody.h"
+*/
+#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/PluginRegistry.h"
+#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/XMLNodeHandlerDefault.h"
+#include "../../3rdParty/RmlUi-f0a0480e9b7c8f19305220ab313a8121a43f6611/Source/Core/XMLNodeHandlerBody.h"
 
 #define DRAG_FIX 1
 DKRmlFile* DKRml::dkRmlFile = NULL;
