@@ -16,7 +16,7 @@ bool DKEventTarget::Init()
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKEventTarget_type", DKEventTarget::type);
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKEventTarget_value", DKEventTarget::value);
 	
-	DKClass::DKCreate("DKDuktape/DKEventTarget.js");
+	DKClass::DKCreate("/DKDuktape/DKEventTarget.js");
 	return true;
 }
 

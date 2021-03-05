@@ -10,7 +10,7 @@ bool DKNavigator::Init()
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKNavigator_platform", DKNavigator::platform);
 	DKDuktape::AttachFunction("CPP_DKDuktape_DKNavigator_productSub", DKNavigator::productSub);
 	
-	DKClass::DKCreate("DKDuktape/DKNavigator.js");
+	DKClass::DKCreate("/DKDuktape/DKNavigator.js");
 	return true;
 }
 

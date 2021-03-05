@@ -15,10 +15,10 @@ public:
 	bool Init();
 	
 	//static bool AppendDataPath(const DKString& datapath);
-	static bool AquireDataPath(DKString& exepath);
-	static bool CheckAssetsPath(const DKString& datapath);
 	static bool DeployAssets();
-	static bool PackageAssets(DKString& input, DKString& output);
+	static bool GetAssetsPath(DKString& path);
+	static bool GetDataPath(DKString& path);
+	static bool PackageAssets(DKString& dataFolder, DKString& headerFile);
 };
 
 REGISTER_OBJECT(DKAssets, true);

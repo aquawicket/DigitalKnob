@@ -7,7 +7,7 @@
 bool DKAssetsV8::Init()
 {
 	DKDEBUGFUNC();
-	DKV8::AttachFunction("DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
+	DKV8::AttachFunction("CPP_DKAssets_LocalAssets", DKAssetsV8::LocalAssets);
 	return true;
 }
 
