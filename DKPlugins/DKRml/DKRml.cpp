@@ -115,7 +115,7 @@ bool DKRml::Init()
 
 	DKString html;
 	DKString workingPath = DKFile::local_assets;
-	DKFile::FileToString(workingPath +"DKRml/blank.html", html);
+	DKFile::FileToString(workingPath +"/DKRml/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
 	
@@ -158,14 +158,14 @@ bool DKRml::LoadFonts()
 {
 	DKDEBUGFUNC();
 	DKStringArray dkfiles;
-	DKFile::GetDirectoryContents(DKFile::local_assets+"DKRml/", dkfiles);
+	DKFile::GetDirectoryContents(DKFile::local_assets+"/DKRml", dkfiles);
 	for(unsigned int i=0; i<dkfiles.size(); ++i){
 		DKString extension;
 		DKFile::GetExtention(dkfiles[i],extension);
 		if(same(extension,".otf") || same(extension,".ttf")){
 			DKString file;
 			DKFile::GetFileName(dkfiles[i],file);
-			LoadFont(DKFile::local_assets+"DKRml/"+file);
+			LoadFont(DKFile::local_assets+"/DKRml/"+file);
 		}
 	}
 
@@ -250,7 +250,7 @@ bool DKRml::LoadHtml(const DKString& html)
 	}
 
 	//Load user agent style sheet
-	DKString file = DKFile::local_assets + "DKRml/DKRml.css";
+	DKString file = DKFile::local_assets + "/DKRml/DKRml.css";
 	Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
 	if(current_sheet) { //Combine the file_sheet to the current sheet
