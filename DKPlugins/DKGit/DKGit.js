@@ -8,10 +8,12 @@ function DKGit_Init()
 	if(CPP_DKDuktape_GetOS() === "Win32"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = CPP_DKFile_GetShortName(GIT);
+		console.log("GIT: "+GIT);
 	}
 	if(CPP_DKDuktape_GetOS() === "Win64"){
 		GIT = "C:/Program Files/Git/bin/git.exe";
 		GIT = CPP_DKFile_GetShortName(GIT);
+		console.log("GIT: "+GIT);
 	}
 	if(CPP_DKDuktape_GetOS() === "Mac"){
 		GIT = "git";
@@ -79,6 +81,7 @@ function DKGit_InstallGit()
 function DKGit_GitUpdate()
 {
 	if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
+		console.error("DKGit_GitUpdate(): Incompatable browser");
 		return;
 	}
 	
@@ -116,10 +119,8 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
-	//console.log("DKGit_GitCommit()");
-	//console.log(CPP_DKDuktape_GetBrowser());
 	if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
-		console.error("DKGit_GitCommit() returning early");
+		console.error("DKGit_GitCommit(): Incompatable browser");
 		return;
 	}
 	
