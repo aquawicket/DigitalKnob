@@ -7,10 +7,18 @@
 #ifdef WIN32
 #include "windows.h"
 #include <sstream>
-typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
-typedef BOOL (WINAPI *PGPI)(DWORD, DWORD, DWORD, DWORD, PDWORD);
+
+typedef LONG NTSTATUS, * PNTSTATUS;
+#define STATUS_SUCCESS (0x00000000)
+//typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
+typedef BOOL(WINAPI* ProductInfoPtr)(DWORD, DWORD, DWORD, DWORD, PDWORD);
+typedef NTSTATUS(WINAPI* RtlGetVersionPtr)(PRTL_OSVERSIONINFOEXW);
+typedef NTSTATUS(WINAPI* SYSTEM_INFO_Ptr)(LPSYSTEM_INFO);
 #define PRODUCT_PROFESSIONAL	0x00000030
 #define VER_SUITE_WH_SERVER	0x00008000
+bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi);
+bool GetWinSystemInfo(SYSTEM_INFO& si);
+bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType);
 #endif //WIN32
 
 bool GetOSInfo(DKString& info);
@@ -21,6 +29,6 @@ bool GetOSVersion(DKString& osversion);
 bool GetOSServicePack(DKString& osservicepack);
 bool GetOSBuild(DKString& osbuild);
 bool GetOSArchitecture(DKString& osarchitecture);
-bool getComputerName(DKString& computername);
+bool GetComputerName(DKString& computername);
 
 #endif //DKOsInfo_H
