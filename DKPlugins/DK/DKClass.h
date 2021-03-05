@@ -6,7 +6,7 @@
 #ifndef DKClass_H
 #define DKClass_H
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
+#include <boost/bind/bind.hpp>
 #include "DKObject.h"
 
 class DKObject;
@@ -81,7 +81,7 @@ public:
 	static void RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this)
 	{
 		DKDEBUGFUNC(name, func, _this);
-		functions[name] = boost::bind(func, _this, _1, _2);
+		functions[name] = boost::bind(func, _this, boost::placeholders::_1, boost::placeholders::_2);
 		if(!functions[name]){
 			DKERROR("RegisterFunc(" + name + "): failed to register function \n");
 			return;

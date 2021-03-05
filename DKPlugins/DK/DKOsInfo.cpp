@@ -1,5 +1,6 @@
 #include "DK/stdafx.h"
 #include "DKOsInfo.h"
+#include <VersionHelpers.h>
 
 //////////////////////////////
 bool GetOSInfo(DKString& info)
@@ -82,16 +83,17 @@ bool GetOSCompany(DKString& oscompany)
 bool GetOSName(DKString& osname)
 {
 #ifdef WIN32
+	std::wstringstream os;
+	/*
+	//deprecated
 	OSVERSIONINFOEX osvi;
 	SYSTEM_INFO si;
-	BOOL bOsVersionInfoEx;
-
+	BOOL OsVersionInfoEx;
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
-
-	if(bOsVersionInfoEx == 0){
+	OsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
+	if(OsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
 	}
 	PGNSI pGNSI = (PGNSI) GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "GetNativeSystemInfo");
@@ -104,7 +106,6 @@ bool GetOSName(DKString& osname)
 	if(VER_PLATFORM_WIN32_NT != osvi.dwPlatformId || osvi.dwMajorVersion <= 4 ){
 		return false;
 	}
-	std::wstringstream os;
 	if ( osvi.dwMajorVersion == 6 ){
 		if(osvi.dwMinorVersion == 0){
 			if(osvi.wProductType == VER_NT_WORKSTATION){
@@ -146,12 +147,62 @@ bool GetOSName(DKString& osname)
 	if(osvi.dwMajorVersion == 5 && osvi.dwMinorVersion == 0){
 		os << "Windows 2000";  
 	}
-	
+	return true;
+	osname = toString(os.str());
+	*/
+	if (IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_NT4), LOBYTE(_WIN32_WINNT_NT4), 0) && 
+		!IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WIN2K), LOBYTE(_WIN32_WINNT_WIN2K), 0)){
+		os << "Windows NT";
+	}
+	if(IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WIN2K), LOBYTE(_WIN32_WINNT_WIN2K), 0) && !IsWindowsXPOrGreater()){
+		os << "Windows 2000";
+	}
+	if(IsWindowsXPOrGreater() && !IsWindowsXPSP1OrGreater()) {
+		os << "Windows XP";
+	}
+	if (IsWindowsXPSP1OrGreater() && !IsWindowsXPSP2OrGreater()){
+		os << "Windows XP SP1";
+	}
+	if (IsWindowsXPSP2OrGreater() && !IsWindowsXPSP3OrGreater()){
+		os << "Windows XP SP2";
+	}
+	if (IsWindowsXPSP3OrGreater() && !IsWindowsVistaOrGreater()){
+		os << "Windows XP SP3";
+	}
+	if (IsWindowsVistaOrGreater() && !IsWindowsVistaSP1OrGreater()){
+		os << "Windows Vista";
+	}
+	if (IsWindowsVistaSP1OrGreater() && !IsWindowsVistaSP2OrGreater()){
+		os << "Windows Vista SP1";
+	}
+	if (IsWindowsVistaSP2OrGreater() && !IsWindows7OrGreater()){
+		os << "Windows Vista SP2";
+	}
+	if (IsWindows7OrGreater() && !IsWindows7SP1OrGreater()){
+		os << "Windows 7";
+	}
+	if (IsWindows7SP1OrGreater() && !IsWindows8OrGreater()){
+		os << "Windows 7 SP1";
+	}
+	if (IsWindows8OrGreater() && !IsWindows8Point1OrGreater()){
+		os << "Windows 8";
+	}
+	if (IsWindows8Point1OrGreater() && !IsWindows10OrGreater()){
+		os << "Windows 8.1";
+	}
+	if (IsWindows10OrGreater()){
+		os << "Windows 10";
+	}
+	if (IsWindowsServer()){
+		os << "Server";
+	}
+	else{
+		//os << "Client";
+	}
 	osname = toString(os.str());
 	return true;
-
 #elif defined(MAC)
-	osname = "Mac OSX";
+	osname = "MacOSX";
 	return true;
 #elif defined(IOS)
 	osname = "iOS";
@@ -160,10 +211,10 @@ bool GetOSName(DKString& osname)
 	osname = "Android";
 	return true;
 #elif defined(LINUX)
-	osname = "Unknown";
+	osname = "";
 	return true;
 #endif
-	DKERROR("GetOSName() not inplemented on this OS \n");
+	DKERROR("GetOSName() not implemented on this OS \n");
 	return false;
 }
 
@@ -171,17 +222,17 @@ bool GetOSName(DKString& osname)
 bool GetOSVersion(DKString& osversion)
 {
 #ifdef WIN32
+	/*
+	//deprecated
 	OSVERSIONINFOEX osvi;
 	SYSTEM_INFO si;
-	BOOL bOsVersionInfoEx;
+	BOOL OsVersionInfoEx;
 	DWORD dwType;
-
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
-
-	if(bOsVersionInfoEx == 0){
+	OsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
+	if(OsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
 	}
 	PGNSI pGNSI = (PGNSI) GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "GetNativeSystemInfo");
@@ -214,7 +265,6 @@ bool GetOSVersion(DKString& osversion)
 		}  
 		PGPI pGPI = (PGPI) GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")), "GetProductInfo");
 		pGPI( osvi.dwMajorVersion, osvi.dwMinorVersion, 0, 0, &dwType);  
-		
 #if defined(_MSC_VER)
 		switch(dwType){
 			case PRODUCT_ULTIMATE:
@@ -271,7 +321,6 @@ bool GetOSVersion(DKString& osversion)
 			case PRODUCT_WEB_SERVER:
 				os << "Web Server Edition";
 				break;
-			
 		}
 #endif //(_MSC_VER)
 	}
@@ -356,14 +405,13 @@ bool GetOSVersion(DKString& osversion)
 			}
 		}
 	} 
-
 	osversion = toString(os.str());
 	return true;
+	*/
+	osversion = "";
+	return true;
 #elif defined(MAC)
-	//osversion = "Unknown";
-    
     SInt32 majorVersion,minorVersion,bugFixVersion;
-    
     Gestalt(gestaltSystemVersionMajor, &majorVersion);
     Gestalt(gestaltSystemVersionMinor, &minorVersion);
     Gestalt(gestaltSystemVersionBugFix, &bugFixVersion);
@@ -374,13 +422,13 @@ bool GetOSVersion(DKString& osversion)
     osversion += toString(bugFixVersion);
 	return true;
 #elif defined(IOS)
-	osversion = "Unknown";
+	osversion = "";
 	return true;
 #elif defined(ANDROID)
-	osversion = "Unknown";
+	osversion = "";
 	return true;
 #elif defined(LINUX)
-	osversion = "Unknown";
+	osversion = "";
 	return true;
 #endif
 	DKERROR("GetOSVersion() not inplemented on this OS \n");
@@ -391,15 +439,15 @@ bool GetOSVersion(DKString& osversion)
 bool GetOSServicePack(DKString& osservicepack)
 {
 #ifdef WIN32
+	/*
+	//deprecated
 	OSVERSIONINFOEX osvi;
 	SYSTEM_INFO si;
 	BOOL bOsVersionInfoEx;
-
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
-
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
 	}
@@ -414,7 +462,6 @@ bool GetOSServicePack(DKString& osservicepack)
 		return false;
 	}
 	std::wstringstream os;
-	
 	// Include service pack (if any). 
 	if(wcslen((const wchar_t*)osvi.szCSDVersion) > 0){
 		os << osvi.szCSDVersion;
@@ -422,10 +469,11 @@ bool GetOSServicePack(DKString& osservicepack)
 	else{
 		os << L"Service Pack: none";
 	}
-
 	osservicepack = toString(os.str());
 	return true;
-
+	*/
+	osservicepack = "";
+	return true;
 #elif defined(MAC)
 	osservicepack = "";
 	return true;
@@ -447,15 +495,15 @@ bool GetOSServicePack(DKString& osservicepack)
 bool GetOSBuild(DKString& osbuild)
 {
 #ifdef WIN32
+	/*
+	deprecated
 	OSVERSIONINFOEX osvi;
 	SYSTEM_INFO si;
 	BOOL bOsVersionInfoEx;
-
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
-
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
 	}
@@ -470,12 +518,12 @@ bool GetOSBuild(DKString& osbuild)
 		return false;
 	}
 	std::wstringstream os;
-	
 	os << L"build " << osvi.dwBuildNumber; //Get Build
-
 	osbuild = toString(os.str());
 	return true;
-
+	*/
+	osbuild = "";
+	return true;
 #elif defined(MAC)
 	osbuild = "";
 	return true;
@@ -497,15 +545,15 @@ bool GetOSBuild(DKString& osbuild)
 bool GetOSArchitecture(DKString& osarchitecture)
 {
 #ifdef WIN32
+	/*
+	deprecated
 	OSVERSIONINFOEX osvi;
 	SYSTEM_INFO si;
 	BOOL bOsVersionInfoEx;
-
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX)); 
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 	bOsVersionInfoEx = GetVersionEx((OSVERSIONINFO*) &osvi); //warning C4996: 'GetVersionExA': was declared deprecated
-
 	if(bOsVersionInfoEx == 0){
 		return false; // Call GetNativeSystemInfo if supported or GetSystemInfo otherwise.
 	}
@@ -520,7 +568,6 @@ bool GetOSArchitecture(DKString& osarchitecture)
 		return false;
 	}
 	std::wstringstream os;
-	
 	if(osvi.dwMajorVersion >= 6){
 		if(si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64){
 			os <<  "64-bit";
@@ -532,10 +579,11 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	else{
 		os << "32-bit";
 	}
-
 	osarchitecture = toString(os.str());
 	return true;
-
+	*/
+	osarchitecture = "";
+	return true;
 #elif defined(MAC)
 	osarchitecture = "";
 	return true;
