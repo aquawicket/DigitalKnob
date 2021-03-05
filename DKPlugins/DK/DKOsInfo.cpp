@@ -424,12 +424,28 @@ bool GetOSArchitecture(DKString& osarchitecture)
 	GetWinSystemInfo(si);
 	std::wstringstream os;
 
-	if(vi.dwMajorVersion >= 6){
-		if(si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_AMD64){
-			os <<  "64-bit";
+	if((vi.dwMajorVersion == 5 && vi.dwMinorVersion >= 2) || vi.dwMajorVersion >= 6) {
+		if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64) {
+			os << "64-bit";
 		}
-		else if(si.wProcessorArchitecture==PROCESSOR_ARCHITECTURE_INTEL){
-			os << "32-bit";
+		else {
+			BOOL bIsWow64 = FALSE;
+			LPFN_ISWOW64PROCESS fnIsWow64Process;
+			fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
+			if (NULL != fnIsWow64Process) {
+				if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64)) {
+					DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
+					os << "32-bit";
+					return false;
+				}
+				if (bIsWow64) {
+					os << "64-bit";
+				}
+				else {
+					os << "32-bit";
+				}
+			}
+			
 		}
 	}
 	else{
