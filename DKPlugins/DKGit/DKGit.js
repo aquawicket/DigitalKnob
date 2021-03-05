@@ -19,9 +19,6 @@ function DKGit_Init()
 	if(CPP_DKDuktape_GetOS() === "Linux"){
 		GIT = "/usr/bin/git";
 	}
-	if(CPP_DKDuktape_GetOS() === "Raspberry"){
-		GIT = "/usr/bin/git";
-	}
 	
 	DKGit_ValidateGit();
 }
@@ -57,25 +54,20 @@ function DKGit_InstallGit()
 {
 	if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Installing Git...\n");
-	var assets = DKAssets_LocalAssets();
+	var assets = CPP_DKAssets_LocalAssets();
 	
 	if(CPP_DKDuktape_GetOS() === "Win32"){
-		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-32-bit.exe", assets);
-		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-32-bit.exe", assets);
-		DK_System(assets+"/Git-2.26.2-32-bit.exe");
+		CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe", assets);
+		CPP_DKDuktape_System(assets+"/Git-2.30.1-32-bit.exe");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Win64"){
-		DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.26.2.windows.1/Git-2.26.2-64-bit.exe", assets);
-		//DKCurl_Download("http://DigitalKnob.com/Download/Tools/Git-2.26.2-64-bit.exe", assets);
-		DK_System(assets+"/Git-2.26.2-64-bit.exe");
+		CPP_DKCurl_Download("https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-64-bit.exe", assets);
+		CPP_DKDuktape_System(assets+"/Git-2.30.1-64-bit.exe");
 	}
 	else if(CPP_DKDuktape_GetOS() === "Mac"){
 		//TODO
 	}
 	else if(CPP_DKDuktape_GetOS() === "Linux"){
-		CPP_DKDuktape_Execute("sudo apt-get install git");
-	}
-	else if(CPP_DKDuktape_GetOS() === "Raspberry"){
 		CPP_DKDuktape_Execute("sudo apt-get install git");
 	}
 	else{

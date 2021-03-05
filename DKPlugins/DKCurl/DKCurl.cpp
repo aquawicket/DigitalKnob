@@ -390,6 +390,7 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest)
 	CurlInit();
 	curl_easy_setopt(curl, CURLOPT_VERBOSE, true);  //for debugging
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 	curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
@@ -493,7 +494,11 @@ bool DKCurl::HttpFileExists(const DKString& url)
 		DKERROR("DKCurl::HttpFileExists("+url+"): CURLE_ABORTED_BY_CALLBACK\n");
 		return false; 
 	}
-	if (http_code == 200 || http_code == 301){
+
+	//200 = OK
+	//301 = Moved Permanently
+	//302 = Found
+	if (http_code == 200 || http_code == 301 || http_code == 302){
         return true;
 	}
 
