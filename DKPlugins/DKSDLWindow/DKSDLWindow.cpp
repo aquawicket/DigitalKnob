@@ -43,7 +43,7 @@ bool DKSDLWindow::Init()
 
 	//Get values from settings.txt file
 	DKString sdl_renderer;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[SDL_RENDERER]", sdl_renderer);
+	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[SDL_RENDERER]", sdl_renderer);
 	DKINFO("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
 	
 	SDL_SetMainReady();
@@ -65,13 +65,13 @@ bool DKSDLWindow::Init()
 	last_mouseY = 0;
 
 	DKString textX;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINX]", textX);
+	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WINX]", textX);
 	DKString textY;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WINY]", textY);
+	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WINY]", textY);
 	DKString textWidth;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[WIDTH]", textWidth);
+	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[WIDTH]", textWidth);
 	DKString textHeight;
-	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[HEIGHT]", textHeight);
+	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[HEIGHT]", textHeight);
 	if(!textX.empty()){ winX = toInt(textX); }
 	if(!textY.empty()){ winY = toInt(textY); }
 	if(!textWidth.empty()){ width = toInt(textWidth); }
@@ -179,7 +179,7 @@ bool DKSDLWindow::Init()
 	DKFile::GetModifiedTime(file, mTime);
 	title2 += mTime;
 	
-	DKString icon = DKFile::local_assets+"icon.ico";
+	DKString icon = DKFile::local_assets+"/icon.ico";
 	SetIcon(&icon, NULL);
 
 	//DKINFO(title+"\n");
@@ -272,8 +272,8 @@ bool DKSDLWindow::Init()
 	DKINFO("Stencil Size = "+toString(stencil)+"\n");
 	
 	if(has(gl_vendor, "Microsoft")){
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are old and out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
-		DKApp::Exit();
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
+		//DKApp::Exit();
 	}
 #endif
 	return true;
