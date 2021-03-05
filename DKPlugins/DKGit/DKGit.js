@@ -2,26 +2,8 @@ var GIT = "";
 
 /////////////////////
 function DKGit_Init()
-{
-	//DK_Create("DKThreadPool");
-	//console.log(CPP_DKDuktape_GetOS()+"\n");
-	if(CPP_DKDuktape_GetOS() === "Win32"){
-		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = CPP_DKFile_GetShortName(GIT);
-		console.log("GIT: "+GIT);
-	}
-	if(CPP_DKDuktape_GetOS() === "Win64"){
-		GIT = "C:/Program Files/Git/bin/git.exe";
-		GIT = CPP_DKFile_GetShortName(GIT);
-		console.log("GIT: "+GIT);
-	}
-	if(CPP_DKDuktape_GetOS() === "Mac"){
-		GIT = "git";
-	}
-	if(CPP_DKDuktape_GetOS() === "Linux"){
-		GIT = "/usr/bin/git";
-	}
-	
+{	
+	DKGit_SetGitPath()
 	DKGit_ValidateGit();
 }
 
@@ -37,24 +19,37 @@ function DKGit_OnEvent(event)
 
 }
 
+///////////////////////////
+function DKGit_SetGitPath()
+{
+	if(CPP_DKDuktape_GetOS() === "Win32" || CPP_DKDuktape_GetOS() === "Win64"){
+		GIT = "C:/Program Files/Git/bin/git.exe";
+		GIT = CPP_DKFile_GetShortName(GIT);
+		console.log("GIT: "+GIT);
+	}
+	if(CPP_DKDuktape_GetOS() === "Mac"){
+		GIT = "git";
+	}
+	if(CPP_DKDuktape_GetOS() === "Linux"){
+		GIT = "/usr/bin/git";
+	}
+}
+
 ////////////////////////////
 function DKGit_ValidateGit()
 {
-	if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
+	//if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Looking for GIT\n");
 	if(!CPP_DKFile_Exists(GIT)){
 		DKGit_InstallGit();
-	}
-	console.log("Found GIT\n");
-	if(CPP_DKDuktape_GetOS() === "Mac"){
-		GIT = "git";
+		DKGit_SetGitPath();
 	}
 }
 
 ///////////////////////////
 function DKGit_InstallGit()
 {
-	if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
+	//if(CPP_DKDuktape_GetBrowser() !== "RML"){ return; }
 	console.log("Installing Git...\n");
 	var assets = CPP_DKAssets_LocalAssets();
 	
@@ -80,10 +75,10 @@ function DKGit_InstallGit()
 //////////////////////////
 function DKGit_GitUpdate()
 {
-	if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
-		console.error("DKGit_GitUpdate(): Incompatable browser");
-		return;
-	}
+	//if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
+	//	console.error("DKGit_GitUpdate(): Incompatable browser");
+	//	return;
+	//}
 	
 	console.log("Git Update DigitalKnob...\n");
 	CPP_DKDuktape_Execute(GIT +" clone https://github.com/aquawicket/DigitalKnob.git "+DKPATH+"/DK");
@@ -119,10 +114,10 @@ function DKGit_GitUpdate()
 //////////////////////////
 function DKGit_GitCommit()
 {
-	if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
-		console.error("DKGit_GitCommit(): Incompatable browser");
-		return;
-	}
+	//if(CPP_DKDuktape_GetBrowser() !== "CEF" && CPP_DKDuktape_GetBrowser() !== "RML"){
+	//	console.error("DKGit_GitCommit(): Incompatable browser");
+	//	return;
+	//}
 	
 	console.log("Git Commit DigitalKnob...\n");
 	CPP_DKFile_ChDir(DKPATH+"/DK");
@@ -167,6 +162,6 @@ function DKGit_GitCommit()
 function DKGit_GitCredentials()
 {
 	//TODO
-	//how do we let git remember out login for repositories
-	//we don't want to have to log in on every commit.
+	//how do we let git remember our login for repositories
+	//we don't want to have to log in every time we need to commit.
 }
