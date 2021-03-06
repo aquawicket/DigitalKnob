@@ -2023,6 +2023,7 @@ ENDFUNCTION()
 
 ## This function would like to remove everthing but,
 ## DKDEPEND() IF() ELSE() and ENDIF() commands from the DKCmake.txt file
+## This is to help in sorting the plugins by dependency
 ##########################
 FUNCTION(DKRUNDEPENDS arg)
 	DKSETPATHTOPLUGIN(${arg})
