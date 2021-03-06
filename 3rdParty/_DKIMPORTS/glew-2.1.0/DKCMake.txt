@@ -1,0 +1,3 @@
+### INSTALL ###
+DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.zip glew-2.1.0)
+DKSET(GLEW ${3RDPARTY}/glew-2.1.0)
