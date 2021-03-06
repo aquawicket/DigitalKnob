@@ -1,3 +1,16 @@
 ### INSTALL ###
 DKINSTALL(https://versaweb.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.zip glew-2.1.0)
 DKSET(GLEW ${3RDPARTY}/glew-2.1.0)
+
+
+### LINK ###
+DKINCLUDE(${GLEW}/include)	
+WIN_DEBUG_LIB(${GLEW}/${OS}/lib/Debug/glew32d.lib)
+WIN_RELEASE_LIB(${GLEW}/${OS}/lib/Release/glew32.lib)
+
+
+### COMPILE ###
+DKSETPATH(${GLEW}/${OS})
+WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${GLEW}/build/cmake)
+WIN32_VS_DEBUG(glew-2.1.0 glew.sln ALL_BUILD)
+WIN32_VS_RELEASE(glew-2.1.0 glew.sln ALL_BUILD)
