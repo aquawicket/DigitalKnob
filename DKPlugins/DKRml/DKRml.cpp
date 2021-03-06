@@ -251,10 +251,10 @@ bool DKRml::LoadHtml(const DKString& html)
 
 	//Load user agent style sheet
 	DKString file = DKFile::local_assets + "/DKRml/DKRml.css";
-	Rml::SharedPtr<Rml::StyleSheetContainer> current_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
+	const Rml::StyleSheet* current_sheet = document->GetOwnerDocument()->GetStyleSheet();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
 	if(current_sheet) { //Combine the file_sheet to the current sheet
-		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = file_sheet->CombineStyleSheetContainer(*current_sheet);
+		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = file_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)current_sheet);
 		document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}
 	else { //no current sheet, just load the file sheet
