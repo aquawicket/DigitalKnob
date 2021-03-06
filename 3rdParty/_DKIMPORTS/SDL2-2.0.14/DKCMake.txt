@@ -1,6 +1,6 @@
-#Until this works and is fully tested, use SDL2-2.0.5 and return
-DKDEPEND(SDL2-2.0.8)
-RETURN()
+##Until this works and is fully tested, use SDL2-2.0.5 and return
+##DKDEPEND(SDL2-2.0.10)
+##RETURN()
 
 ### INSTALL ###
 DKINSTALL(https://www.libsdl.org/release/SDL2-2.0.14.zip SDL2-2.0.14)

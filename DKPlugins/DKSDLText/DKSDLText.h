@@ -15,7 +15,7 @@ public:
 	bool End();
 	
 	bool SetText(const DKString& text);
-	void Draw();
+	void Render();
 
 	DKSDLWindow* dkSdlWindow;
 	TTF_Font* font;

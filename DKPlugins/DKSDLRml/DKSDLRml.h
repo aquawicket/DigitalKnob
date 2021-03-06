@@ -20,7 +20,8 @@ public:
 	bool End();
 
 	bool Handle(SDL_Event *event);
-	void Draw();
+	void Render();
+	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	
 	DKSDLWindow* dkSdlWindow;

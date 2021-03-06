@@ -12,14 +12,14 @@ bool DKSDLText::Init()
 	}
 
 	TTF_Init();
-	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
+	DKString file = DKFile::local_assets+"/DKSDLText/arial.ttf";
 	font = TTF_OpenFont(file.c_str(), 20);
     color.r = 100;
     color.g = 100;
     color.b = 255;
 	SetText(toString("Test String"));
 
-	DKSDLWindow::AddDrawFunc(&DKSDLText::Draw, this);
+	DKSDLWindow::AddRenderFunc(&DKSDLText::Render, this);
 	return true;
 }
 
@@ -41,8 +41,8 @@ bool DKSDLText::SetText(const DKString& text)
 	return true;
 }
 
-//////////////////////
-void DKSDLText::Draw()
+////////////////////////
+void DKSDLText::Render()
 {
 	//DEBUG CODE
 	SetText(" ");
@@ -55,7 +55,7 @@ void DKSDLText::Draw()
 	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &ddstrect);
 	SDL_DestroyTexture(texture);
 
-	return; //remove to turn fps counter on
+	//return; //remove to turn fps counter on
 
 	//Draw fps
 	unsigned int fps;

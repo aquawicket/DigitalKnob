@@ -37,16 +37,18 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
     std::vector<Rml::Vector2f> Positions(num_vertices);
     std::vector<Rml::Colourb> Colors(num_vertices);
     std::vector<Rml::Vector2f> TexCoords(num_vertices);
-    float texw, texh;
+    float texw = 0.0f;
+    float texh = 0.0f;
  
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);    
+    //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); 
 
     SDL_Texture* sdl_texture = NULL;
     if(texture){
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         sdl_texture = (SDL_Texture*)texture;
 
+        /*
 		//Cef
 		//The id is mapped to the texture in texture_name
 		//If the id contains iframe_ , it is a cef image
@@ -61,7 +63,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output)){ return; }
 			sdl_texture = output.texture;
 		}
-
+        */
 		if(!sdl_texture){ return; }
         if(SDL_GL_BindTexture(sdl_texture, &texw, &texh) == -1){
 			DKERROR("SDL_GL_BindTexture: "+DKString(SDL_GetError())+"\n");
@@ -100,9 +102,8 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 #else
     glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);
 #endif
-    //glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
     if(sdl_texture){
         SDL_GL_UnbindTexture(sdl_texture);
@@ -118,10 +119,8 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 	}
 #endif
 
-/*
-    glDisable(GL_BLEND);
-*/
 	// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
+    glDisable(GL_BLEND);
     SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_NONE);
     SDL_RenderDrawPoint(mRenderer, -1, -1);
 }
@@ -153,6 +152,8 @@ void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
 {
 	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
+
+    /*
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
 	//We will map that id to the texture handle for later use. 
@@ -161,6 +162,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 		texture_name[texture_handle] = source;//.CString();
 		return true;
 	}
+    */
 
 	Rml::FileInterface* file_interface = Rml::GetFileInterface();
     Rml::FileHandle file_handle = file_interface->Open(source);
@@ -196,6 +198,8 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 	}
 	else{
 #endif
+
+    /*
 		SDL_Texture *texture = IMG_LoadTexture_RW(mRenderer, SDL_RWFromMem(buffer, buffer_size), 1);
 	    if(texture){
 		    texture_handle = (Rml::TextureHandle) texture;
@@ -208,11 +212,32 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 		}
 		texture_name[texture_handle] = source;//.CString();
 		return true;
-
+    */
+    
+    size_t i;
+    for (i = source.length() - 1; i > 0; i--){
+    if (source[i] == '.')
+        break;
+    }
+    Rml::String extension = source.substr(i + 1, source.length() - i);
+    SDL_Surface* surface = IMG_LoadTyped_RW(SDL_RWFromMem(buffer, int(buffer_size)), 1, extension.c_str());
+    if (surface) {
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(mRenderer, surface);
+        if (texture) {
+            texture_handle = (Rml::TextureHandle)texture;
+            texture_dimensions = Rml::Vector2i(surface->w, surface->h);
+            SDL_FreeSurface(surface);
+        }
+        else{
+            return false;
+        }
+        return true;
+    }
 #ifdef USE_SDL2_gif
 	}
-    return false;
+    
 #endif
+    return false;
 }
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.

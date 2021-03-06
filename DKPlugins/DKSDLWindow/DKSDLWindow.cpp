@@ -26,7 +26,8 @@
 
 
 std::vector<boost::function<bool(SDL_Event *event)> > DKSDLWindow::event_funcs;
-std::vector<boost::function<void()> > DKSDLWindow::draw_funcs;
+std::vector<boost::function<void()> > DKSDLWindow::render_funcs;
+std::vector<boost::function<void()> > DKSDLWindow::update_funcs;
 std::map<int,int> DKSDLWindow::sdlKeyCode;
 std::map<int,int> DKSDLWindow::sdlCharCode;
 std::map<int,int> DKSDLWindow::sdlShiftCharCode;
@@ -612,31 +613,35 @@ void DKSDLWindow::Process()
 		DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here	
 	}
 	
-	if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
-		SDL_SetRenderTarget(renderer, NULL); 
+	//if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
+		//SDL_SetRenderTarget(renderer, NULL); 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //white
-		//SDL_SetRenderDrawColor(renderer, 178, 178, 220, 255); //light grey w/ blue tint
 		SDL_RenderClear(renderer);
-		//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //black
 		//SDL_RenderDrawLine(renderer, 0, height / 2, width, height / 2 );
-	}
-
-	SDL_Event e;
-	while(SDL_PollEvent(&e)){
-		for(unsigned int i = 0; i < event_funcs.size(); ++i){
-			if(event_funcs[i](&e)){ //Call event functions
-				i = event_funcs.size();	//eat the event
-			}; 
-		}
-	}
+	//}
 	
-	if(SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN){ 
-		for(unsigned int i = 0; i < draw_funcs.size(); ++i){
-			draw_funcs[i](); //Call event functions
+	//if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN) {
+		for (unsigned int i = 0; i < render_funcs.size(); ++i) {
+			render_funcs[i](); //Call render functions
 		}
+	//}
 
-		SDL_RenderPresent(renderer);
+	
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		for (unsigned int i = 0; i < event_funcs.size(); ++i) {
+			if (event_funcs[i](&e)) { //Call event functions
+				i = event_funcs.size();	//eat the event
+			};
+		}
 	}
+
+	//if (SDL_GetWindowFlags(window) & SDL_WINDOW_SHOWN) {
+		for (unsigned int i = 0; i < update_funcs.size(); ++i) {
+			update_funcs[i](); //Call update functions
+		}
+	//}
+		SDL_RenderPresent(renderer);
 }
 
 //////////////////////////////////////////////////////////////

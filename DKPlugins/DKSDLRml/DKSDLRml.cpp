@@ -31,7 +31,8 @@ bool DKSDLRml::Init()
     Rml::SetSystemInterface(SystemInterface);
 
 	DKSDLWindow::AddEventFunc(&DKSDLRml::Handle, this);
-	DKSDLWindow::AddDrawFunc(&DKSDLRml::Draw, this);
+	DKSDLWindow::AddRenderFunc(&DKSDLRml::Render, this);
+	DKSDLWindow::AddUpdateFunc(&DKSDLRml::Update, this);
 	return true;
 }
 
@@ -152,16 +153,23 @@ bool DKSDLRml::Handle(SDL_Event *event)
 	return false; //allow event to continue
 }
 
-////////////////////////
-void DKSDLRml::Draw()
+///////////////////////
+void DKSDLRml::Render()
 {
     //DKDEBUGFUNC();
+	
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
 		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
+	
 	dkRml->context->Render();
+}
+
+///////////////////////
+void DKSDLRml::Update()
+{
 	dkRml->context->Update();
 }
