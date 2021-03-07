@@ -11,7 +11,10 @@
 class DKFile
 {
 public:
+	static bool NormalizePath(DKString& path);
+#ifdef WIN32
 	static bool AppendSystemPath(const DKString& path);
+#endif
 	static bool ChDir(const DKString& dir);
 	static bool Copy(const DKString& src, const DKString& dst, const bool overwrite, const bool recursive);
 	static bool CopyDirectory(boost::filesystem::path const& source, boost::filesystem::path const& destination, const bool overwrite, const bool recursive);

@@ -14,7 +14,21 @@ DKString DKFile::app_name;
 DKString DKFile::local_assets;
 DKString DKFile::online_assets;
 
+//TODO: this function is not complete
+//////////////////////////////////////////
+bool DKFile::NormalizePath(DKString& path)
+{
+	DKDEBUGFUNC(path);
+	while(has(path, "\\")){
+		replace(path, "\\", "/"); //Turn all back slashes into forward slashes
+	}
+	while(has(path, "//")){
+		replace(path, "//", "/"); //Turn all double forward slashes into single 
+	}
+	return false;
+}
 
+#ifdef WIN32
 ///////////////////////////////////////////////////
 bool DKFile::AppendSystemPath(const DKString& path)
 {
@@ -24,6 +38,7 @@ bool DKFile::AppendSystemPath(const DKString& path)
 	DKString rtn;
 	return DKUtil::Execute(command, rtn);
 }
+#endif
 
 ///////////////////////////////////////
 bool DKFile::ChDir(const DKString& dir)
@@ -751,16 +766,18 @@ bool DKFile::IsDirectory(const DKString& file)
 bool DKFile::MakeDir(const DKString& dir)
 {
 	DKDEBUGFUNC(dir);
+	DKString path = dir;
+	DKFile::NormalizePath(path);
 	
 	//FIXME: sometimes we cannot create the directory if the parent directory does not exits.
 	//       EXAMPLE:  if /test does not exist, we cannot create /test/mything 
-	if(dir.empty()){ return false; }
-	if(PathExists(dir)){ return true; }
+	if(path.empty()){ return false; }
+	if(PathExists(path)){ return true; }
 
-	//Still can crash!  It crashes because the dir is empty.
+	//FIXME: Still can crash!  It crashes because the dir is empty.
 	//Maybe check if the folder is empty first?
-	if(!boost::filesystem::create_directory(dir)){
-		DKERROR("DKFile::MakeDir("+dir+") failed! \n");
+	if(!boost::filesystem::create_directory(path)){
+		DKERROR("DKFile::MakeDir("+ path +") failed! \n");
 		return false;
 	}
 	return true;
