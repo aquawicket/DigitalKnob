@@ -18,11 +18,15 @@ DKString DKFile::online_assets;
 bool DKFile::DebugPath(const DKString& path)
 {
 	if(has(path, "\\")){
-		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path.");
+		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find the out where is starts for this path.\n");
+		DKClass::DKCreate("DKDebug");
+		DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
 		return false;
 	}
 	if(has(path, "//")){
-		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path.");
+		DKWARN("DKFile::DebugPath("+path+"): Found obscurities in the path. Please debug to find out where it starts for this path.\n");
+		DKClass::DKCreate("DKDebug");
+		DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
 		return false;
 	}
 	return true;
