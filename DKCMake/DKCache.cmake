@@ -23,7 +23,3 @@ SET(SDL2_IMAGE_INCLUDE_DIR C:/digitalknob/DK/3rdParty/SDL2_image-2.0.1 CACHE PAT
 SET(SDL2_IMAGE_LIBRARY C:/digitalknob/DK/3rdParty/SDL2_image-2.0.1/win32/lib/Release/SDL_image.lib CACHE FILEPATH "")
 SET(GLEW_INCLUDE_DIRS C:/digitalknob/DK/3rdParty/glew-2.1.0/include CACHE PATH "")
 SET(GLEW_LIBRARIES C:/digitalknob/DK/3rdParty/glew-2.1.0/win32/lib/Release/glew32.lib CACHE FILEPATH "")
-
-##RmlUi hints
-EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
-

@@ -17,6 +17,15 @@ ENDIF()
 #		MESSAGE(FATAL_ERROR ${text})
 #	ENDIF()
 #ENDFUNCTION()
+
+######################
+FUNCTION(WaitForEnter)
+IF(CMAKE_HOST_WIN32)	
+	EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
+	RETURN()
+ENDIF()
+	MESSAGE("WaitForHost() Not implemented for this platform")
+ENDFUNCTION()
 	
 ########################
 FUNCTION(DKSET arg arg2)
