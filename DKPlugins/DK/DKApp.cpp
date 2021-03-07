@@ -27,7 +27,7 @@ else DKINFO("pre-standard C++ \n");
 
 #ifndef IOS
 	DKFile::exe_path = argv[0];
-
+	DKFile::NormalizePath(DKFile::exe_path);
 #ifdef WIN32
 	DKWindows::CreateConsoleHandler();
 	DKWindows::SetTitle();

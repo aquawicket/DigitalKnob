@@ -147,11 +147,7 @@ bool DKAssets::GetDataPath(DKString& path)
 	DKString appname;
 	DKFile::GetExeName(appname);
 	DKFile::RemoveExtention(appname);
-	unsigned n = path.find_last_of("\\");
-    path.erase(path.begin()+n+1, path.end());
-	path += appname;//+"\\";
-	replace(path, "\\\\", "\\");
-	path += "_Data";
+	path = appname + "_Data";
 	return true;
 #endif
 #ifdef ANDROID
