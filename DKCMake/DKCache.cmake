@@ -6,11 +6,9 @@ FUNCTION(DKTESTFUNC arg)
 ENDFUNCTION()
 DKTESTFUNC("TestArg")
 
+MESSAGE("Do we know about any DK variables?   ${DIGITALKNOB}  <--  It would be right there if we did")
 
-MESSAGE("We really need to be able to run DKDepends to get all of the library variables somehow")
-
-
-
+MESSAGE("We need to find a good way to pull in the variables for all the library paths")
 SET(FREETYPE C:/digitalknob/DK/3rdParty/freetype-2.5.5)
 IF(EXISTS ${FREETYPE}/win32/Release/freetype.lib)
 SET(FREETYPE_INCLUDE_DIR_freetype2 ${FREETYPE}/include CACHE PATH "")
@@ -27,3 +25,5 @@ SET(GLEW_INCLUDE_DIRS C:/digitalknob/DK/3rdParty/glew-2.1.0/include CACHE PATH "
 SET(GLEW_LIBRARIES C:/digitalknob/DK/3rdParty/glew-2.1.0/win32/lib/Release/glew32.lib CACHE FILEPATH "")
 
 ##RmlUi hints
+EXECUTE_PROCESS(COMMAND cmd /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
+
