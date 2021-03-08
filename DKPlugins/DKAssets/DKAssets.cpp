@@ -147,20 +147,19 @@ bool DKAssets::GetDataPath(DKString& path)
 	DKDEBUGFUNC();
 
 #ifdef WIN32
-	path = DKFile::exe_path;
-	if (path.empty()){
-		TCHAR exe_path[MAX_PATH];
-		GetModuleFileName(NULL, exe_path, MAX_PATH); //retrieves the path of the executable file of the current process.
-		path = exe_path;
-	}
+	DKString apppath;
+	DKFile::GetAppPath(apppath);
 	DKString appname;
-	DKFile::GetExeName(appname);
-	DKFile::RemoveExtention(appname);
-	path = appname + "_Data";
-	return true;
+	DKFile::GetAppName(appname);
+	path = apppath +"/"+appname+"_Data";
+	if (DKFile::PathExists(path)) {
+		return true;
+	}
+	DKFile::MakeDir(path);
+	return false;
 #endif
 #ifdef ANDROID
-	//TODO - folder should appname_Data
+	//TODO - folder should be named appname_Data
 	//CallJavaFunction("getApplicationName", "");
 	path = "/mnt/sdcard/"+DKFile::exe_path;
 	return true;
