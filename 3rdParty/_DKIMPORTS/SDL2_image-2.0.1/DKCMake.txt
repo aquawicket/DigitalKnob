@@ -22,7 +22,6 @@ ENDIF()
 
 ### INSTALL ###
 DKINSTALL(https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
-## DKINSTALL(${DKWEB}/Download/SDL2_image-2.0.1.zip SDL2_image-2.0.1)
 DKSET(SDLIMAGE ${3RDPARTY}/SDL2_image-2.0.1)
 
 
