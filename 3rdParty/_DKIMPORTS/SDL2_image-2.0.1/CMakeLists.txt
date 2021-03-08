@@ -9,10 +9,14 @@ include(CheckIncludeFile)
 
 find_package(SDL2 REQUIRED)
 
-set(SDL2_LIBRARIES "${SDL2_LIBRARY}")
+set(ZLIB_INCLUDE_DIRS "${ZLIB_INCLUDE_DIR}")
+set(ZLIB_LIBRARIES "${ZLIB_LIBRARY}")
+include_directories(${ZLIB_INCLUDE_DIRS})
 set(SDL2_INCLUDE_DIRS "${SDL2_INCLUDE_DIR}")
-
+set(SDL2_LIBRARIES "${SDL2_LIBRARY}")
 include_directories(${SDL2_INCLUDE_DIRS})
+
+
 
 set(SDLIMAGE_SUPPORT_BMP ON CACHE BOOL "Support for BMP file format")
 set(SDLIMAGE_SUPPORT_GIF OFF CACHE BOOL "Support for GIF file format")
@@ -58,6 +62,7 @@ set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 		set(SDLIMAGE_SUPPORT_TIFF ON)
 		add_definitions(-DLOAD_TIF)
 		include_directories(${TIFF_INCLUDE_DIR})
+		set(TIFF_LIBRARIES "${TIFF_LIBRARY}")
 	ENDIF()
 	IF(TIFF_INCLUDE_DIR2)
 		include_directories(${TIFF_INCLUDE_DIR2})
@@ -66,6 +71,7 @@ set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 		set(SDLIMAGE_SUPPORT_PNG ON)
 		add_definitions(-DLOAD_PNG)
 		include_directories(${PNG_INCLUDE_DIR})
+		set(PNG_LIBRARIES "${PNG_LIBRARY}")
 	ENDIF()
 	IF(PNG_INCLUDE_DIR2)
 		include_directories(${PNG_INCLUDE_DIR2})
@@ -74,6 +80,7 @@ set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 		set(SDLIMAGE_SUPPORT_JPEG ON)
 		add_definitions(-DLOAD_JPG)
 		include_directories(${JPEG_INCLUDE_DIR})
+		set(JPEG_LIBRARIES "${JPEG_LIBRARY}")
 	ENDIF()
 	IF(JPEG_INCLUDE_DIR2)
 		include_directories(${JPEG_INCLUDE_DIR2})
@@ -82,6 +89,7 @@ set(SDLIMAGE_SUPPORT_TIFF OFF CACHE BOOL "Support for TIFF file format")
 		set(SDLIMAGE_SUPPORT_GIF ON)
 		add_definitions(-DLOAD_GIF)
 		include_directories(${GIF_INCLUDE_DIR})
+		set(GIF_LIBRARIES "${GIF_LIBRARY}")
 	ENDIF()
 	IF(GIF_INCLUDE_DIR2)
 		include_directories(${GIF_INCLUDE_DIR2})
@@ -148,7 +156,12 @@ set_target_properties(SDLIMAGE
 )
 
 target_link_libraries (SDLIMAGE
+	${ZLIB_LIBRARIES}
 	${SDL2_LIBRARIES}
+	${PNG_LIBRARIES}
+	${TIFF_LIBRARIES}
+	${GIF_LIBRARIES}
+	${JPEG_LIBRARIES}
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
