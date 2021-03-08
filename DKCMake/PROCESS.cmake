@@ -444,26 +444,26 @@ IF(WIN_32)
 	# copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
 	
-	# backup generated files and folders not going in the package
+	# Backup files and folders excluded from the package
 	DKCOPY(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
 	DKCOPY(${DKPROJECT}/assets/DKCef/win32Debug ${DKPROJECT}/Backup/DKCef/win32Debug TRUE)
-	DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
-	DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
+	#DKCOPY(${DKPROJECT}/assets/cef.log ${DKPROJECT}/Backup/cef.log TRUE)
+	#DKCOPY(${DKPROJECT}/assets/log.txt ${DKPROJECT}/Backup/log.txt TRUE)
 	
-	# remove generated files and folders before packaging
+	# Remove excluded files and folders before packaging
 	DKREMOVE(${DKPROJECT}/assets/USER)
 	DKREMOVE(${DKPROJECT}/assets/DKCef/win32Debug)
 	DKREMOVE(${DKPROJECT}/assets/cef.log)
 	DKREMOVE(${DKPROJECT}/assets/log.txt)
+	
+	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets) #.zip the assets
 	
-	IF(NOT EXISTS ${DKPROJECT}/assets.h)
-		MESSAGE("Embedding assets.zip into executable, please wait...")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
-	ENDIF()
-	
+	MESSAGE("Embedding assets.zip into executable, please wait...")
+	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+
+	# Restore the backed up excluded assets
 	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE) #put everything back from backup, over
-	
 	DKREMOVE(${DKPROJECT}/Backup)
 	
 	LIST(APPEND WIN_LIBS 
@@ -779,7 +779,7 @@ ENDIF()
 
 #############
 IF(RASPBERRY)
-	# Copy the icon to ${DKPROJECT}/assets
+	# Copy the icon to assets
 	DKCOPY(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 
 	# Backup files and folders excluded from the package
