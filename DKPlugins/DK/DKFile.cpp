@@ -319,8 +319,10 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings)
 	if(!PathExists(path)){ return false; }
 	boost::filesystem::directory_iterator end_itr;
 	for (boost::filesystem::directory_iterator itr(path); itr != end_itr; ++itr){
+		DKString itrPath = itr->path().string();
+		DKFile::NormalizePath(itrPath);
 		DKString filename;
-		DKFile::GetFileName(itr->path().string(),filename);
+		DKFile::GetFileName(itrPath,filename);
 		strings.push_back(filename);
 	}
 
