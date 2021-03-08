@@ -9,8 +9,6 @@
 class DKMac
 {
 public:
-	//static bool SetMainThreadNow(unsigned long int& id);
-	//static bool GetThreadId(unsigned long int& id);
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);

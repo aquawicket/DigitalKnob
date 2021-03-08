@@ -453,14 +453,8 @@ bool DKUtil::GetScreenWidth(int& w)
 bool DKUtil::GetThreadId(unsigned long int& id)
 {
 	DKDEBUGFUNC(id);
-#ifdef WIN32
-	return DKWindows::GetThreadId(id);
-#endif
-#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
-	return DKUnix::GetThreadId(id);
-#endif
-	DKWARN("DKUtil::GetThreadId() not implemented on this OS \n");
-	return false;
+	id = DKUtil::mainThreadId;
+	return true;
 }
 
 ////////////////////////////////////
@@ -925,10 +919,16 @@ bool DKUtil::SetMainThreadNow()
 	DKDEBUGFUNC();
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
 #ifdef WIN32
-	return DKWindows::SetMainThreadNow(DKUtil::mainThreadId);
+	DKUtil::mainThreadId = GetCurrentThreadId();
+	return true;
 #endif
-#if defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
-	return DKUnix::SetMainThreadNow(DKUtil::mainThreadId);
+#if defined(MAC) || defined(IOS) || defined(LINUX)
+	DKUtil::mainThreadId = (unsigned long int)pthread_self();
+	return true;
+#endif
+#ifdef ANDROID
+	DKUtil::mainThreadId = (int)pthread_self();
+	return true;
 #endif
 	DKWARN("DKUtil::SetMainThreadNow() not implemented on this OS \n");
 	return false;

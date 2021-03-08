@@ -3,19 +3,6 @@
 #include "DKUnix.h"
 #include <unistd.h>
 
-////////////////////////////////////////////////////
-bool DKUnix::SetMainThreadNow(unsigned long int& id)
-{
-	id = (unsigned long int)pthread_self();
-	return true;
-}
-
-///////////////////////////////////////////////
-bool DKUnix::GetThreadId(unsigned long int& id)
-{
-	id = (unsigned long int)pthread_self();
-	return true;
-}
 
 /////////////////////////////
 bool DKUnix::GetKey(int& key)

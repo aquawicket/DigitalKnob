@@ -37,7 +37,6 @@ public:
 	static bool GetProcessList(DKString& list);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
-	static bool GetThreadId(unsigned long int& id);
 	static bool GetVolume(int& percent);
 	static bool KeyIsDown(const int& key);
 	static bool LeftClick();
@@ -60,7 +59,6 @@ public:
 	static bool SetClipboard(const DKString& text);
 	static bool SetClipboardFiles(const DKString& filelist);
 	static bool SetClipboardImage(const DKString& file);
-	static bool SetMainThreadNow(unsigned long int& id);
 	static bool SetMousePos(const int& x, const int& y);
 	static void SetTitle();
 	static bool SetVolume(int& percent);

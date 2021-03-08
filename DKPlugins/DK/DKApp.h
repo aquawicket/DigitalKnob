@@ -9,7 +9,7 @@
 class DKApp
 {
 public:
-	DKApp();
+	DKApp(int argc, char** argv);
 	static void Init();
 	static void Load(){};
 	static void Loop();
@@ -17,9 +17,9 @@ public:
 	static void CallLoops();
 	static void Exit();
 
-	static bool active;
-	static bool paused;
-	static int argc;
+	static bool   active;
+	static bool   paused;
+	static int    argc;
 	static char** argv;
 
 	template<class T>

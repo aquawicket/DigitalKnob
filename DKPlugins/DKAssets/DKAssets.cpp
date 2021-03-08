@@ -92,21 +92,27 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	//and we will point to that location for assets
 	
 #ifdef WIN32
-	if (DKFile::PathExists(DKFile::app_path + "..\\assets")) { //Windows
-		DKFile::GetAbsolutePath(DKFile::app_path + "..\\assets", path);
-		return true;
+	if (DKFile::PathExists(DKFile::app_path + "/../assets")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../assets", path)) {
+			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
+			return true;
+		}
 	}
-	if (DKFile::PathExists(DKFile::app_path + "..\\..\\assets")) { //Windows
-		DKFile::GetAbsolutePath(DKFile::app_path + "..\\..\\assets", path);
-		return true;
+	if (DKFile::PathExists(DKFile::app_path + "/../../assets")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../assets", path)) {
+			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
+			return true;
+		}
 	}
-	//SetDllDirectory(DKFile::app_path.c_str()); //FIXME: get rid of this?
+	return false;
 #endif
 #ifdef MAC
-	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets")) { //Mac
-		DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets", path);
-		return true;
+	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../../../../assets", path)) {
+			return true;
+		}
 	}
+	return false;
 #endif
 #ifdef IOS
 	// /Users/aquawicket/Library/Application Support/iPhone Simulator/6.1/Applications/D4BEB636-716E-445D-8CD9-8722785D7EB7/Appname.app/Appname
@@ -121,14 +127,17 @@ bool DKAssets::GetAssetsPath(DKString& path)
 		path = userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets";
 		return true;
 	}
+	return false;
 #endif
 #ifdef LINUX
-	if(DKFile::PathExists(DKFile::app_path + "../../assets")){
-		DKFile::GetAbsolutePath(DKFile::app_path + "../../assets", path);
-		return true;
+	if (DKFile::PathExists(DKFile::app_path + "../../assets")) {
+		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets", path)) {
+			return true;
+		}
 	}
+	return false;
 #endif
-	DKERROR("DKAssets::GetAssetsPath() not implemented on this OS \n");
+	DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
 	return false;
 }
 

@@ -245,7 +245,7 @@ bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& 
 bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 {
 	DKDEBUGFUNC(in, out);
-	DebugPath(in);
+	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in)){ 
 		DKERROR("DKFile::GetAbsolutePath("+in+",DKString&): Path does not exits\n");
 		return false; 
@@ -255,8 +255,7 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 	char resolved_path[256];
 	GetFullPathName(in.c_str(), 256, resolved_path, &fileExt);
 	out = resolved_path;
-	DebugPath(out);
-	replace(out, "\\", "/");
+	NormalizePath(out); //windows returns paths with a \\ seperator, so we normalize it here.
 #else
 	char *actualpath;
 	actualpath = realpath(in.c_str(), NULL);
@@ -270,6 +269,10 @@ bool DKFile::GetAbsolutePath(const DKString& in, DKString& out)
 bool DKFile::GetAppName(DKString& appname)
 {
 	DKDEBUGFUNC(appname);
+	if (!DKFile::PathExists(DKFile::exe_path)) {
+		DKFile::GetExePath(DKFile::exe_path);
+	}
+
 	DKFile::GetExeName(appname);
 	replace(appname, ".exe", "");
 	DebugPath(appname);
@@ -280,11 +283,15 @@ bool DKFile::GetAppName(DKString& appname)
 bool DKFile::GetAppPath(DKString& apppath)
 {
 	DKDEBUGFUNC(apppath);
+	if (!DKFile::PathExists(DKFile::exe_path)) {
+		DKFile::GetExePath(DKFile::exe_path);
+	}
+
 	unsigned found = 0;
 #ifdef WIN32
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
-	apppath.erase (apppath.begin()+found+1, apppath.end()); 
+	apppath.erase (apppath.begin()+found, apppath.end()); 
 	DebugPath(apppath);
 	return true;
 #elif defined(ANDROID)
@@ -360,29 +367,39 @@ bool DKFile::GetDrives(DKStringArray& strings)
 bool DKFile::GetExeName(DKString& exename)
 {
 	DKDEBUGFUNC(exename);
-#ifdef WIN32
-	if(!DKFile::PathExists(DKFile::exe_path)){
-		TCHAR appfilename[MAX_PATH];
-		GetModuleFileName(NULL, appfilename, MAX_PATH);
-		DebugPath(appfilename);
-		DKFile::exe_path = appfilename;
+	if(!DKFile::PathExists(DKFile::exe_path)) {
+		DKFile::GetExePath(DKFile::exe_path);
 	}
-#endif 
 
-	if (!DKFile::PathExists(DKFile::exe_path)){
-		DebugPath(DKFile::exe_path);
-		return false;
+	unsigned found = DKFile::exe_path.find_last_of("/");
+	if (found != std::string::npos && found < DKFile::exe_path.length()) {
+		exename = DKFile::exe_path.substr(found + 1);
+		DebugPath(exename);
+		return true;
 	}
-	exename = DKFile::exe_path;
-	DebugPath(exename);
-	return true;
+	return false;
 }
 
 //////////////////////////////////////////
 bool DKFile::GetExePath(DKString& exepath)
 {
-	DKDEBUGFUNC(exepath);
-	if(!DKFile::PathExists(DKFile::exe_path)){ return false; }
+	//DKFile::exe_path should hold the full file path of this executable from argv[0];
+	//If is doesn't, we should fill that now and figure out why it didn't get assigned.
+	if (!DKFile::PathExists(DKFile::exe_path)) {
+		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start\n");
+		DKClass::DKCreate("DKDebug");
+		DKClass::CallFunc("DKDebug::ShowStackTrace", 0, 0);
+#ifdef WIN32
+		TCHAR fullpath[MAX_PATH];
+		GetModuleFileName(NULL, fullpath, MAX_PATH);
+		DKFile::exe_path = fullpath;
+		NormalizePath(exe_path); //Windows returns paths with a \\ seperator.
+#else
+		//FIXME: We need this coded in for other platforms
+		DKWARN("DKFile::GetExePath(): is not implemented on this platform.");
+		return false;
+#endif
+	}
 	exepath = DKFile::exe_path;
 	DebugPath(exepath);
 	return true;

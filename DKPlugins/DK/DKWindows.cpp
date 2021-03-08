@@ -433,14 +433,6 @@ bool DKWindows::GetScreenHeight(int& h)
 	return true;
 }
 
-//////////////////////////////////////////////////
-bool DKWindows::GetThreadId(unsigned long int& id)
-{
-	//DKDEBUGFUNC(id); //causes infinite loop
-	id = GetCurrentThreadId();
-	return true;
-}
-
 ///////////////////////////////////////
 bool DKWindows::GetVolume(int& percent)
 {
@@ -832,14 +824,6 @@ bool DKWindows::SetClipboardImage(const DKString& file)
 	::SelectPalette(hDC, hOldPal, FALSE);
 	::ReleaseDC(NULL, hDC);
 	if(!hDIB){ return false; }
-	return true;
-}
-
-///////////////////////////////////////////////////////
-bool DKWindows::SetMainThreadNow(unsigned long int& id)
-{
-	DKDEBUGFUNC(id);
-	id = GetCurrentThreadId();
 	return true;
 }
 
