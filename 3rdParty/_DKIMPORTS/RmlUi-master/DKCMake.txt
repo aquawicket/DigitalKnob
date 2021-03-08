@@ -41,12 +41,12 @@ ANDROID_RELEASE_LIB(${RMLUI}/${OS}/Release/obj/local/armeabi-v7a/libRmlCore.a)
 
 ### The RmlUi SDL example needs these libraries
 #C:\digitalknob\DK\3rdParty\glew-2.1.0\win32\lib\Debug\glew32d.lib
-#winmm.lib
-#Setupapi.lib
 #C:\digitalknob\DK\3rdParty\libjpeg-turbo-1.5.3\win32\Debug\turbojpeg-static.lib
 #C:\digitalknob\DK\3rdParty\libpng-1.7.0beta34\win32\Debug\libpng17_staticd.lib
 #C:\digitalknob\DK\3rdParty\tiff-4.0.3\win32\Debug\tiff-static.lib
 #C:\digitalknob\DK\3rdParty\zlib-1.2.11\win32\Debug\zlibstaticd.lib
+#winmm.lib
+#Setupapi.lib
 #version.lib
 #imm32.lib
 
