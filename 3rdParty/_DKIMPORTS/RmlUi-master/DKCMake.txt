@@ -4,7 +4,7 @@ DKDEPEND(freetype-2.5.5)
 #IF(1)
 DKDEPEND(glew-2.1.0)
 DKDEPEND(SDL2-2.0.14)
-DKDEPEND(SDL2_image-2.0.1)
+DKDEPEND(SDL2_image-2.0.5)
 #ENDIF()
 
 
