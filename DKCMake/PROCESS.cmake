@@ -459,8 +459,10 @@ IF(WIN_32)
 	MESSAGE("Creating assets.zip . . .")
 	DKZIP(${DKPROJECT}/assets) #.zip the assets
 	
-	MESSAGE("Embedding assets.zip into executable, please wait...")
-	bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+	##error C2026: string too big, trailing characters truncated
+	##On windows, the assets.zip will be included with resource.h and resource.rc
+	##MESSAGE("Embedding assets.zip into executable, please wait...")
+	##bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 
 	# Restore the backed up excluded assets
 	DKCOPY(${DKPROJECT}/Backup ${DKPROJECT}/assets TRUE) #put everything back from backup, over
