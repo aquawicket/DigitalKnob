@@ -421,7 +421,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename)
 {
 	DKDEBUGFUNC(path, filename);
 	DebugPath(path);
-	unsigned found = path.find_last_of("/\\");
+	unsigned found = path.find_last_of("/");
 	if(found != std::string::npos && found < path.length()){
 		filename = path.substr(found+1);
 		return true;
@@ -436,12 +436,6 @@ bool DKFile::GetFilePath(const DKString& file, DKString& path)
 	DKDEBUGFUNC(file, path);
 	DebugPath(file);
 	unsigned int found = file.find_last_of("/");
-	if(found != std::string::npos && found < file.length()){
-		path = file.substr(0, found+1);
-		DebugPath(path);
-		return true;
-	}
-	found = file.find_last_of("\\");
 	if(found != std::string::npos && found < file.length()){
 		path = file.substr(0, found+1);
 		DebugPath(path);
