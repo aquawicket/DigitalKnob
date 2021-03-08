@@ -92,13 +92,15 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	//and we will point to that location for assets
 	
 #ifdef WIN32
-	if (DKFile::PathExists(DKFile::app_path + "/../assets")) {
+	if (DKFile::PathExists(DKFile::app_path + "/../assets") && 
+	    DKFile::PathExists(DKFile::app_path + "/../DKCMake.txt")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../assets", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
 		}
 	}
-	if (DKFile::PathExists(DKFile::app_path + "/../../assets")) {
+	if (DKFile::PathExists(DKFile::app_path + "/../../assets") &&
+		DKFile::PathExists(DKFile::app_path + "/../../DKCMake.txt")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../assets", path)) {
 			//SetDllDirectory(path.c_str()); //FIXME: get rid of this?
 			return true;
@@ -107,7 +109,8 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	return false;
 #endif
 #ifdef MAC
-	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets")) {
+	if (DKFile::PathExists(DKFile::app_path + "/../../../../../assets") && 
+		DKFile::PathExists(DKFile::app_path + "/../../../../../DKCMake.txt")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "/../../../../../assets", path)) {
 			return true;
 		}
@@ -119,18 +122,21 @@ bool DKAssets::GetAssetsPath(DKString& path)
 	// /Users/aquawicket/Desktop/digitalknob/USER/DKApps/GuiTest/iossim32/Release-iphonesimulator/Appname.app/Appname
 	std::size_t pos = DKFile::app_path.find("/Library");
 	DKString userpath = DKFile::app_path.substr(0, pos);
-	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets")){
+	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets") && 
+	   DKFile::PathExists(userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
 		path = userpath + "/Desktop/digitalknob/DKApps/" + DKFile::app_name + "/assets";
 		return true;
 	}
-	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets")){
+	if(DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets") && 
+	   DKFile::PathExists(userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/DKCMake.txt")){
 		path = userpath + "/Desktop/digitalknob/USER/DKApps/" + DKFile::app_name + "/assets";
 		return true;
 	}
 	return false;
 #endif
 #ifdef LINUX
-	if (DKFile::PathExists(DKFile::app_path + "../../assets")) {
+	if (DKFile::PathExists(DKFile::app_path + "../../assets") &&
+		DKFile::PathExists(DKFile::app_path + "../../DKCMake.txt")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets", path)) {
 			return true;
 		}
@@ -179,14 +185,16 @@ bool DKAssets::GetDataPath(DKString& path)
 	return true;
 #endif
 #ifdef LINUX
-	path = DKFile::exe_path;
+	DKString apppath;
+	DKFile::GetAppPath(apppath);
 	DKString appname;
-	DKFile::GetExeName(appname);
-	DKFile::RemoveExtention(appname);
-	unsigned n = path.find_last_of("/");
-	path.erase(path.begin()+n+1, path.end());
-	path += appname+"_Data";
-	return true;
+	DKFile::GetAppName(appname);
+	path = apppath + "/" + appname + "_Data";
+	if (DKFile::PathExists(path)) {
+		return true;
+	}
+	DKFile::MakeDir(path);
+	return false;
 #endif
 	
 	DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
