@@ -1,8 +1,11 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\Shell\A]          - visible
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\Shell\A\command]  - command
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\ShellEx\A\]       - handler
+; Here, we have assigned a letter to every known right click context menu mark in the win32 registry.
+; These are the results. Don't apply this reg, if you can help it. P.S. don't run this. 
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\Shell\A]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\Shell\A\command]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\DesktopBackground\ShellEx\A]
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Classes\LibraryFolder\background\shell\B]
 [HKEY_LOCAL_MACHINE\SOFTWARE\Classes\LibraryFolder\background\shell\B\command]
@@ -29,7 +32,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shellEx\G]
 
 [HKEY_CLASSES_ROOT\AllFileSystemObjects\Shell\H]
-[HKEY_CLASSES_ROOT\AllFileSystemObjects\Shell\Hcommand]
+[HKEY_CLASSES_ROOT\AllFileSystemObjects\Shell\H\command]
 [HKEY_CLASSES_ROOT\AllFileSystemObjects\ShellEx\H]
 
 [HKEY_CLASSES_ROOT\DesktopBackground\Shell\I]
@@ -59,3 +62,40 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\O]
 [HKEY_CLASSES_ROOT\*\shell\O\command]
 [HKEY_CLASSES_ROOT\*\shellEx\O]
+
+ 
+;
+; Desktop - right click
+; -------
+; Background                  = | A, I, C, K
+; Folder                      = F, N, H, D, L
+; File                        = G, O, H,
+; Shortcut                    = H,  G, O
+;
+;
+; Explorer window - right click 
+; ---------------
+; Right Pane: Background       = || C, K
+; Right Pane: Folder           = F, N, H, D, L
+; Right Pane: File             = G, O, H,
+; Right Pane: Shortcut         = H,  G, O
+;
+; Left Pane, Top: Quick Access = F, N
+; Left Pane, Top: Desktop      = C, K, A, I
+; Left Pane, Top: Drive        = F, N, E, M || C, K
+; Left Pane, Top: Folder       = F, N, D, L, H, || C, K
+;
+; Left Pane, Bottom: This PC   = F, N
+; Left Pane, Bottom: Drive     = F, N, || C, K
+; Left Pane, Bottom: Folder    = D, L, F, N, H, || C, K
+
+; What can we make of the selected registry keys for each context event.
+; Is there a pattern that makes sence? or is it complete nonsence. 
+; My last thought is it may have to do with language variations. In that case, genius. 
+                  
+               F, N = tPC, QA
+               C, K = desktop, background
+         F, N, K, C = drive
+      F, N, H, D, L = folder
+            G, O, H = file
+            H, G, O = shortcut
