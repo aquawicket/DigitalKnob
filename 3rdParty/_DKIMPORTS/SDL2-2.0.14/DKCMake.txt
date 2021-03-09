@@ -1,3 +1,10 @@
+#SDL stops working after 2.0.8 in digitalknob
+#This issue has not been pinpointed yet. This bypasses 2.0.14 until we can correct the issue.
+DKDEPEND(SDL2-2.0.8)
+RETURN()
+
+
+
 ### INSTALL ###
 DKINSTALL(https://www.libsdl.org/release/SDL2-2.0.14.zip SDL2-2.0.14)
 DKSET(SDL ${3RDPARTY}/SDL2-2.0.14)
