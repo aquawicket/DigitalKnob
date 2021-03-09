@@ -9,6 +9,10 @@ WIN_DEBUG_LIB(${GLEW}/${OS}/lib/Debug/glew32d.lib)
 WIN_RELEASE_LIB(${GLEW}/${OS}/lib/Release/glew32.lib)
 
 
+
+##You need to link to other Windows libraries if you use GLFW as static library - gdi32.lib and user32.lib. Either add them in project properties for linker “Additional Dependencies” setting. Or put #pragma comment (lib, "gdi32.lib") in your .c/.cpp source.
+
+
 ### COMPILE ###
 DKSETPATH(${GLEW}/${OS})
 WIN32_COMMAND(${CMAKE_COMMAND} -G ${GENERATOR} -A Win32 "-DCMAKE_C_FLAGS=/DWIN32 /D_WINDOWS /W3 /nologo" "-DCMAKE_C_FLAGS_DEBUG=/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG" "-DCMAKE_C_FLAGS_RELEASE=/MT /O2 /Ob2 /DNDEBUG" ${GLEW}/build/cmake)

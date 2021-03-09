@@ -47,7 +47,7 @@ bool DKSDLWindow::Init()
 	DKFile::GetSetting(DKFile::local_assets+"/settings.txt", "[SDL_RENDERER]", sdl_renderer);
 	DKINFO("settings.txt: [SDL_RENDERER] = "+sdl_renderer+"\n");
 	
-	SDL_SetMainReady();
+	SDL_SetMainReady(); //Bypass SDLmain  //https://wiki.libsdl.org/SDL_SetMainReady
 	if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER) < 0){
 		DKERROR("SDL_Init Error: "+DKString(SDL_GetError())+"\n");
 		return false;
