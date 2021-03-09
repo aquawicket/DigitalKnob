@@ -1,3 +1,3 @@
-@echo "Adding % to repository"
 git add %1
--p "press enter"
+@echo "Added %1 to repository"
+set /p DUMMY=Hit ENTER to continue...
