@@ -107,7 +107,7 @@ bool DKUpdate::CheckForUpdate()
 	DKFile::GetExePath(localfile);
 	
 #ifdef ANDROID
-	localfile = DKFile::local_assets+"ASSETS";
+	localfile = DKFile::local_assets+"/ASSETS";
 #endif
 
 	DKString lctime;
@@ -162,17 +162,17 @@ bool DKUpdate::DoUpdate()
 	if(has(url,".apk")){
 		DKERROR("android updates not setup yet\n");
 		DKFile::ChDir(DKFile::local_assets);
-		DKFile::Delete(DKFile::local_assets+filename+"_dl");
-		if(!DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+filename+"_dl")){
+		DKFile::Delete(DKFile::local_assets+"/"+filename+"_dl");
+		if(!DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+"/"+filename+"_dl")){
 			return false;
 		}
-		DKFile::Rename(DKFile::local_assets+filename+"_dl", filename, true);
-		DKFile::Delete(DKFile::local_assets+"ASSETS"); //reload assets
+		DKFile::Rename(DKFile::local_assets+"/"+filename+"_dl", filename, true);
+		DKFile::Delete(DKFile::local_assets+"/ASSETS"); //reload assets
 #ifdef ANDROID
 		//FIXME - does not seem to work. correct path?
 		//CallJavaFunction("InstallPackage", DKApp::datapath+filename);
 #endif
-		DKINFO("Downloaded apk file to: "+DKFile::local_assets+filename+"\n");
+		DKINFO("Downloaded apk file to: "+DKFile::local_assets+"/"+filename+"\n");
 		return false;
 	}
 
@@ -265,7 +265,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 	DKINFO("Plugin name is "+plugin+"\n");
 
 	//now get the assets path of this process
-	DKString plugin_path = DKFile::local_assets+plugin;
+	DKString plugin_path = DKFile::local_assets+"/"+plugin;
 	DKINFO("local plugin path = "+plugin_path+"\n");
 	DKFile::MakeDir(plugin_path);
 

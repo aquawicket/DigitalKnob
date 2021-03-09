@@ -14,7 +14,7 @@ bool DKOcr::Init()
 	DKClass::DKCreate("DKOcrV8");
 	
 	api = new tesseract::TessBaseAPI();
-	DKString datapath = DKFile::local_assets+"DKOcr";
+	DKString datapath = DKFile::local_assets+"/DKOcr";
 	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
 		DKERROR("Could not initialize tesseract\n");
 		return false;

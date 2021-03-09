@@ -1006,13 +1006,13 @@ bool DKFile::VerifyPath(DKString& path)
 {
 	DKDEBUGFUNC(path);	
 	DebugPath(path);
-	replace(path, "file:///", "");
+	replace(path, "file:///", ""); //Fixme: this will trigger DebugPath alarm
 
 	if(DKFile::PathExists(path)){
 		return true;
 	}
-	if(DKFile::PathExists(DKFile::local_assets+path)){ 
-		path = DKFile::local_assets+path;
+	if(DKFile::PathExists(DKFile::local_assets+"/"+path)){ 
+		path = DKFile::local_assets+"/"+path;
 		return true;
 	}
 

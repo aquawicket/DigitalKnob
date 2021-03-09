@@ -98,7 +98,7 @@ bool DKHtmlToRml::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 
 	//add DKRml.css to the head tag
-	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css";
+	DKString rml_css = DKFile::local_assets+"/DKRml/DKRml.css";
 	replace(rml, "<head />", "<head></head>");
 	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 

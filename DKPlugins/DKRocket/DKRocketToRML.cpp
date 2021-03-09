@@ -98,7 +98,7 @@ bool DKRocketToRML::IndexToRml(const DKString& html, DKString& rml)
 	replace(rml, "<!DOCTYPE html>", ""); //Rml doesn't like <!DOCTYPE html> tags
 
 	//add DKRocket.css to the head tag
-	DKString rml_css = DKFile::local_assets+"DKRocket/DKRocket.css";
+	DKString rml_css = DKFile::local_assets+"/DKRocket/DKRocket.css";
 	replace(rml, "<head />", "<head></head>");
 	replace(rml, "<head>", "<head><link id=\"DKRocket/DKRocket.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 

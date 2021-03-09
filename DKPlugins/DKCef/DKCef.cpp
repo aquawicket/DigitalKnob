@@ -296,7 +296,7 @@ bool DKCef::Init()
 		dkCefWindow->dkCef = this;
 		//NewBrowser("default", 10, 10, 800, 600, "http://www.google.com");
 		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
-		//DKString icon = DKFile::local_assets+"icon.ico";
+		//DKString icon = DKFile::local_assets+"/icon.ico";
 		//DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 	}
 	
@@ -616,7 +616,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		current_browser = _browser;
 
 		//Set Icon
-		DKString icon = DKFile::local_assets+"icon.ico";
+		DKString icon = DKFile::local_assets+"/icon.ico";
 		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
 		
 #ifdef LINUX
