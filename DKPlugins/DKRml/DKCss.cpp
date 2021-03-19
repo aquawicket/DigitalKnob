@@ -29,11 +29,24 @@ bool DKCss::Init()
     DKString file = DKFile::local_assets+"/"+data[1];
 
 	//https://stackoverflow.com/a/3141107/688352
-	//New
+	/*
 	const Rml::StyleSheet* current_sheet = dkRml->document->GetStyleSheet();
-	Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
-	new_sheet = new_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)current_sheet);
+	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
+	Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = file_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)current_sheet);
 	dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
+	*/
+
+	//Load user agent style sheet
+	const Rml::StyleSheet* current_sheet = dkRml->document->GetStyleSheet();
+	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
+	if (current_sheet) { //Combine the file_sheet to the current sheet
+		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = file_sheet->CombineStyleSheetContainer((const Rml::StyleSheetContainer&)current_sheet);
+		dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
+	}
+	else { //no current sheet, just load the file sheet
+		dkRml->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
+	}
+	
 	return true;
 }
 
