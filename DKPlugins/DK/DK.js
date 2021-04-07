@@ -601,7 +601,6 @@ function DK_CheckFileSupport()
 	}
 }
 
-/*
 ///////////////////////////
 function GetLeftPx(element)
 {
@@ -645,9 +644,7 @@ function GetHeightPx(element)
 	}
 	return parseInt(element.style.height);
 }
-*/
 
-/*
 /////////////////////////////
 function DragStart(event, id)
 {
@@ -733,9 +730,7 @@ function DragStop(event)
 	document.body.removeEventListener('touchmove', DragMove, false);
 	document.body.removeEventListener('touchend', DragStop, false);
 }
-*/
 
-/*
 ///////////////////////////////
 function ResizeStart(event, id)
 {
@@ -795,7 +790,6 @@ function ResizeStop(id)
 	document.body.removeEventListener('touchmove', ResizeMove, false);
 	document.body.removeEventListener('touchend', ResizeStop, false);
 }
-*/
 
 /*
 //////////////////////////////
