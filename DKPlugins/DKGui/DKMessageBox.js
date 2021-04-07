@@ -56,6 +56,7 @@ function DKMessageBox_Message(message)
 ////////////////////////////////////////////////
 function DKMessageBox_Confirm(message, callback)
 {
+	DKMessageBox_Init();
 	byId("DKMessageBoxText").innerHTML = message;
 	byId("DKMessageBoxInput").style.display = "none";
 	byId("DKMessageBoxText").style.display = "block";
