@@ -1,6 +1,5 @@
-// *** DRAG & RESIZE *** //
+"use strict";
 
-///////////////////////////
 function DK_AttachDrags(id) {
     var parent = byId(id);
     if (!parent) {
@@ -100,6 +99,8 @@ function DragMove(event, element) {
     if (!event) {
         event = window.event;
     }
+    let x;
+    let y;
     if (DK_IE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
@@ -180,6 +181,8 @@ function ResizeMove(event, element) {
     if (!event) {
         event = window.event;
     }
+    let x;
+    let y;
     if (DK_IE()) {
         x = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
         y = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
