@@ -1,6 +1,7 @@
-//BROWSER
+"use strict";
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
-DKAudio_lastVolume = 0.0;
+let DKAudio_lastVolume = 0.0;
 
 ///////////////////////
 function DKAudio_Init()
@@ -14,67 +15,88 @@ function DKAudio_End()
 	
 }
 
+function DKAudio_PreLoadAudio(src) {
+    const audio = new Audio();
+    audio.src = src;
+}
+
+function DKAudio_CreateSound(src) {
+    const audio = document.createElement("audio");
+    audio.id = src;
+    audio.src = src;
+    audio.setAttribute("preload", "auto");
+    audio.setAttribute("controls", "none");
+    audio.style.display = "none";
+    document.body.appendChild(audio);
+}
+
 /////////////////////////////
-function DKAudio_Resume(file)
+function DKAudio_Resume(src)
 { 
-	var x = byId("audio");
-    x.play(); 
+	const audio = byId(src);
+    audio.play(); 
 }
 
 ////////////////////////////
-function DKAudio_Pause(file)
+function DKAudio_Pause(src)
 { 
-	var x = byId("audio");
-	x.pause(); 
+	const audio = byId(src);
+	audio.pause(); 
 }
 
-////////////////////////////////
-function DKAudio_PlaySound(file)
-{ 
-	var x = byId("audio");
-    x.play(); 
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play
+async function DKAudio_Play(src) {
+    //try {
+    const audio = byId(src);
+    await audio.play();
+    //} catch(errMsg) {
+    //    dkconsole.error(errMsg);
+    //}
 }
 
-////////////////////////////////
-function DKAudio_OpenMusic(file)
+function DKAudio_Stop(src) {
+    const audio = byId(src);
+    audio.stop();
+}
+
+///////////////////////////////
+function DKAudio_OpenMusic(src)
 { 
-	var audio = DK_CreateElement(document.body, "audio", "audio");
-	var source = DK_CreateElement(audio, "source", "source");
+	const audio = DK_CreateElement(document.body, "audio", "audio");
+	const source = DK_CreateElement(audio, "source", "source");
 	source.type = "audio/ogg";
-	source.src = file;
+	source.src = src;
 	audio.ontimeupdate = function(){ DKAudio_TimeUpdate() };
 	audio.onended = function(){ DKAudio_Ended() };
 }
 
-///////////////////////////////
-function DKAudio_SetVolume(num)
-{
-	byId("audio").volume = parseFloat(num / 128);
+function DKAudio_GetVolume(src) {
+    const audio = byId(src);
+    return audio.volume;
 }
 
-////////////////////////////
-function DKAudio_GetVolume()
-{
-	return byId("audio").volume * 128;
+function DKAudio_SetVolume(src, volume) {
+    const audio = byId(src);
+    audio.volume = volume;
 }
 
 ///////////////////////
-function DKAudio_Mute()
+function DKAudio_Mute(src)
 {
-	DKAudio_lastVolume = DKAudio_GetVolume();
-	DKAudio_SetVolume(0);
+	DKAudio_lastVolume = DKAudio_GetVolume(src);
+	DKAudio_SetVolume(src, 0);
 }
 
 /////////////////////////
-function DKAudio_UnMute()
+function DKAudio_UnMute(src)
 {
-	DKAudio_SetVolume(DKAudio_lastVolume);
+	DKAudio_SetVolume(src, DKAudio_lastVolume);
 }
 
 /////////////////////////////////
-function DKAudio_SetTime(seconds)
+function DKAudio_SetTime(src, seconds)
 {
-	byId("audio").currentTime = seconds;
+	byId(src).currentTime = seconds;
 }
 
 /////////////////////////////
@@ -90,13 +112,13 @@ function DKAudio_Ended()
 }
 
 //////////////////////////
-function DKAudio_GetTime()
+function DKAudio_GetTime(src)
 {
-	return byId("audio").currentTime;
+	return byId(src).currentTime;
 }
 
 //////////////////////////////
-function DKAudio_GetDuration()
+function DKAudio_GetDuration(src)
 {
-	return byId("audio").duration;
+	return byId(src).duration;
 }
