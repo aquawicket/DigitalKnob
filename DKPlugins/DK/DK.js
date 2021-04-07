@@ -22,7 +22,6 @@ var mouseStartX;
 var mouseStartY;
 var objectX;
 var objectY;
-var drag_id;
 //var events = [];
 
 var byId = function(id){ return document.getElementById(id); } //shortcut alias
@@ -645,8 +644,8 @@ function GetHeightPx(element)
 	return parseInt(element.style.height);
 }
 
-/////////////////////////////
-function DragStart(event, id)
+//////////////////////////////////
+function DragStart(event, element)
 {
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -657,20 +656,16 @@ function DragStart(event, id)
 		mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
 		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-	drag_id = id;
-	element = byId(drag_id);
-	
 	objectX = GetLeftPx(element);
 	objectY = GetTopPx(element);
-
-	document.body.onmousemove = function(event){ DragMove(event); }
+	document.body.onmousemove = function(event){ DragMove(event, element); }
 	document.body.onmouseup = function(event){ DragStop(event); }
 	document.body.addEventListener('touchmove', DragMove, false);
 	document.body.addEventListener('touchend', DragStop, false);
 }
 
-////////////////////////
-function DragMove(event)
+/////////////////////////////////
+function DragMove(event, element)
 {
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -681,9 +676,6 @@ function DragMove(event)
 		x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
 		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-
-	element = byId(drag_id);
-
 	if(element.style.left){
 		element.style.left = Pos(objectX + x - mouseStartX);
 	}
@@ -731,8 +723,8 @@ function DragStop(event)
 	document.body.removeEventListener('touchend', DragStop, false);
 }
 
-///////////////////////////////
-function ResizeStart(event, id)
+////////////////////////////////////
+function ResizeStart(event, element)
 {
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -743,21 +735,16 @@ function ResizeStart(event, id)
 		mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
 		mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-	
-	drag_id = id;
-	element = byId(id);
-	
 	objectX = GetWidthPx(element);
 	objectY = GetHeightPx(element);
-	
-	document.body.onmousemove = function(event){ ResizeMove(event); }
+	document.body.onmousemove = function(event){ ResizeMove(event, element); }
 	document.body.onmouseup = function(event){ ResizeStop(event); }
 	document.body.addEventListener('touchmove', ResizeMove, false);
 	document.body.addEventListener('touchend', ResizeStop, false);
 }
 
-//////////////////////////
-function ResizeMove(event)
+///////////////////////////////////
+function ResizeMove(event, element)
 {	
 	if(!event){event = window.event;}
 	if(DK_IE()){
@@ -768,8 +755,6 @@ function ResizeMove(event)
 		x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
 		y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
 	}
-	
-	element = byId(drag_id);
 	if((objectX + x - mouseStartX) > 1){
   		element.style.width = Pos(objectX + x - mouseStartX);
 		
@@ -1451,7 +1436,47 @@ function DK_GetValue(variable)
 	return false;
 }
 
-
+//////////////////////
+function Pos(position)
+{
+	if(position === ''){
+		return position;	
+	}
+	if(typeof position === 'string'){
+		if(position.search('rem') !== -1){
+			if(DK_IE() && DK_IE() < 9){
+				position = position.replace("rem", "px");
+			}
+			return position;
+		}
+		if(position.search('px') !== -1){
+			return position;
+		}
+		if(position.search('%') !== -1){
+			return position;
+		}
+		if(position.search('auto') !== -1){
+			return position;
+		}
+		
+		if(DK_IE() && DK_IE() < 9){
+			return position+'px';
+		}
+		else{
+			return position+'rem';
+		}
+	}
+	if(typeof position === 'number'){
+		if(DK_IE() && DK_IE() < 9){
+			return position+'px';
+		}
+		else{
+			return position+'rem';
+		}	
+	}
+	
+	DKERROR("Pos() ERROR\n");
+}
 
 
 //////////////////////////////////////////////////////////////////
