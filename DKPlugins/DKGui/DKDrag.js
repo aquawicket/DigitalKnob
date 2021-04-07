@@ -1,101 +1,74 @@
 "use strict";
 
-function DK_AttachDrags(id) {
-    var parent = byId(id);
-    if (!parent) {
-        return false;
-    }
-    var elements = parent.getElementsByTagName('*');
-    for (var i = 0; i < elements.length; i++) {
-        var x = elements[i];
+const DKDrag = [];
 
+function DKDrag_AttachDrags(parent) {
+    const elements = parent.getElementsByTagName('*');
+    for (let n = 0; n < elements.length; n++) {
+        const element = elements[n];
         if (!DK_IE() && DK_GetBrowser() !== "RML") {
-            x.style.setProperty("pointer-events", "all");
+            element.style.setProperty("pointer-events", "all");
         }
 
-        if (x.getAttribute("drag") !== null) {
-            //Drag events
-            var mov_tar = x.getAttribute("drag");
-            x.onmousedown = function(event) {
-                DragStart(event, mov_tar);
+        if (element.getAttribute("drag") !== null) {
+            var drag_element = element.getAttribute("drag");
+            element.onmousedown = function(event) {
+                DKDrag_DragStart(event, drag_element);
             }
         }
-        if (x.getAttribute("resize") !== null) {
-            //Resize events
-            var res_tar = x.getAttribute("resize");
-            x.onmousedown = function(event) {
-                ResizeStart(event, res_tar);
+        if (element.getAttribute("resize") !== null) {
+            var resize_element = element.getAttribute("resize");
+            element.onmousedown = function(event) {
+                DKDrag_ResizeStart(event, resize_element);
             }
         }
     }
 }
 
-////////////////////////////////////////
-function DK_AddDragHandle(element, drag) {
+function DKDrag_AddDragHandle(element, drag_element) {
     if (!DK_IE() && DK_GetBrowser() !== "RML") {
         element.style.setProperty("pointer-events", "all");
     }
     element.onmousedown = function(event) {
-        DragStart(event, drag);
+        DKDrag_DragStart(event, drag_element);
     }
     element.addEventListener('touchstart', function(event) {
-        DragStart(event, drag);
+        DKDrag_DragStart(event, drag_element);
     }, false);
     return true;
 }
 
-////////////////////////////////////////////
-function DK_AddResizeHandle(element, resize) {
-    if (!DK_IE() && DK_GetBrowser() !== "RML") {
-        element.style.setProperty("pointer-events", "all");
-    }
-    element.onmousedown = function(event) {
-        ResizeStart(event, resize);
-    }
-    element.addEventListener('touchstart', function(event) {
-        ResizeStart(event, resize);
-    }, false);
-    return true;
-}
-
-////////////////////////////////
-function DK_RemoveDragHandle(id) {
-    if (!id) {
-        return;
-    }
-    var element = byId(id);
+function DKDrag_RemoveDragHandle(element) {
     if (!DK_IE()) {//element.style.setProperty("pointer-events","none");
     }
     element.onmousedown = 0;
     //element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
 }
 
-//////////////////////////////////
-function DragStart(event, element) {
+function DKDrag_DragStart(event, element) {
     if (!event) {
         event = window.event;
     }
     if (DK_IE()) {
-        mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
-        mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+        DKDrag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+        DKDrag.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
-        mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
+        DKDrag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+        DKDrag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    objectX = GetLeftPx(element);
-    objectY = GetTopPx(element);
+    DKDrag.objectX = GetLeftPx(element);
+    DKDrag.objectY = GetTopPx(element);
     document.body.onmousemove = function(event) {
-        DragMove(event, element);
+        DKDrag_DragMove(event, element);
     }
     document.body.onmouseup = function(event) {
-        DragStop(event);
+        DKDrag_DragStop(event);
     }
-    document.body.addEventListener('touchmove', DragMove, false);
-    document.body.addEventListener('touchend', DragStop, false);
+    document.body.addEventListener('touchmove', DKDrag_DragMove, false);
+    document.body.addEventListener('touchend', DKDrag_DragStop, false);
 }
 
-/////////////////////////////////
-function DragMove(event, element) {
+function DKDrag_DragMove(event, element) {
     if (!event) {
         event = window.event;
     }
@@ -109,14 +82,14 @@ function DragMove(event, element) {
         y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left) {
-        element.style.left = Pos(objectX + x - mouseStartX);
+        element.style.left = Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
     } else {
-        element.style.right = Pos(objectX + mouseStartX - x);
+        element.style.right = Pos(objectX + DKDrag.mouseStartX - x);
     }
     if (element.style.top) {
-        element.style.top = Pos(objectY + y - mouseStartY);
+        element.style.top = Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
     } else {
-        element.style.bottom = Pos(objectY + mouseStartY - y);
+        element.style.bottom = Pos(DKDrag.objectY + DKDrag.mouseStartY - y);
     }
 
     //WindowRestrictions(id);
@@ -142,42 +115,58 @@ function DragMove(event, element) {
     ////////////////////////////////////////////////////////////
 }
 
-////////////////////////
-function DragStop(event) {
+function DKDrag_DragStop(event) {
     document.body.onmousemove = function() {}
-    ;
     document.body.onmouseup = function() {}
-    ;
-    document.body.removeEventListener('touchmove', DragMove, false);
-    document.body.removeEventListener('touchend', DragStop, false);
+    document.body.removeEventListener('touchmove', DKDrag_DragMove, false);
+    document.body.removeEventListener('touchend', DKDrag_DragStop, false);
 }
 
-////////////////////////////////////
-function ResizeStart(event, element) {
+
+function DKDrag_AddResizeHandle(element, resize_element) {
+    if (!DK_IE() && DK_GetBrowser() !== "RML") {
+        element.style.setProperty("pointer-events", "all");
+    }
+    element.onmousedown = function(event) {
+        DKDrag_ResizeStart(event, resize_element);
+    }
+    element.addEventListener('touchstart', function(event) {
+        DKDrag_ResizeStart(event, resize_element);
+    }, false);
+    return true;
+}
+
+function DKDrag_RemoveResizeHandle(element) {
+    if (!DK_IE()) {//element.style.setProperty("pointer-events","none");
+    }
+    element.onmousedown = 0;
+    //element.removeEventListener('touchstart', function(event){ DragStart(event, drag);});
+}
+
+function DKDrag_ResizeStart(event, element) {
     if (!event) {
         event = window.event;
     }
     if (DK_IE()) {
-        mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
-        mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+        DKDrag.mouseStartX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+        DKDrag.mouseStartY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
     } else {
-        mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
-        mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
+        DKDrag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
+        DKDrag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    objectX = GetWidthPx(element);
-    objectY = GetHeightPx(element);
+    DKDrag.objectX = GetWidthPx(element);
+    DKDrag.objectY = GetHeightPx(element);
     document.body.onmousemove = function(event) {
-        ResizeMove(event, element);
+        DKDrag_ResizeMove(event, element);
     }
     document.body.onmouseup = function(event) {
-        ResizeStop(event);
+        DKDrag_ResizeStop(event);
     }
-    document.body.addEventListener('touchmove', ResizeMove, false);
-    document.body.addEventListener('touchend', ResizeStop, false);
+    document.body.addEventListener('touchmove', DKDrag_ResizeMove, false);
+    document.body.addEventListener('touchend', DKDrag_ResizeStop, false);
 }
 
-///////////////////////////////////
-function ResizeMove(event, element) {
+function DKDrag_ResizeMove(event, element) {
     if (!event) {
         event = window.event;
     }
@@ -190,24 +179,21 @@ function ResizeMove(event, element) {
         x = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
         y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    if ((objectX + x - mouseStartX) > 1) {
-        element.style.width = Pos(objectX + x - mouseStartX);
+    if ((DKDrag.objectX + x - DKDrag.mouseStartX) > 1) {
+        element.style.width = Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
 
     }
-    if ((objectY + y - mouseStartY) > 1) {
-        element.style.height = Pos(objectY + y - mouseStartY);
+    if ((DKDrag.objectY + y - DKDrag.mouseStartY) > 1) {
+        element.style.height = Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
     }
 
     //WindowRestrictions(id);
     //DKSendEvent(id, "resize");
 }
 
-///////////////////////
-function ResizeStop(id) {
+function DKDrag_ResizeStop(event) {
     document.body.onmousemove = function() {}
-    ;
     document.body.onmouseup = function() {}
-    ;
-    document.body.removeEventListener('touchmove', ResizeMove, false);
-    document.body.removeEventListener('touchend', ResizeStop, false);
+    document.body.removeEventListener('touchmove', DKDrag_ResizeMove, false);
+    document.body.removeEventListener('touchend', DKDrag_ResizeStop, false);
 }

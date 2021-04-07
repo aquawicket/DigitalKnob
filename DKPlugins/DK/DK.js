@@ -1,3 +1,5 @@
+"use strict";
+
 console.log("*** DigitalKnob ***");
 console.log("Browser = " + DK_GetBrowser());
 console.log("JSEngine = " + DK_GetJSEngine());
@@ -24,10 +26,10 @@ var DK_DEBUG = 4;
 var DK_SHOW = 5;
 var DK_HIDE = 6;
 
-var mouseStartX;
-var mouseStartY;
-var objectX;
-var objectY;
+//var mouseStartX;
+//var mouseStartY;
+//var objectX;
+//var objectY;
 //var events = [];
 
 var byId = function(id) {
@@ -979,7 +981,7 @@ function DK_GetElements(element) {
 
 //////////////////////////////
 function DK_GetAvailableId(id) {
-    out = id;
+    let out = id;
     var i = 0;
 
     while (byId(out)) {

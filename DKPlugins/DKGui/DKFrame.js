@@ -174,7 +174,7 @@ function DKFrame_CreateFrame(title, width, height) {
     titlebartext.style.height = "100%";
     titlebartext.style.color = "rgb(25,25,25)";
     titlebartext.innerHTML = title;
-    DK_AddDragHandle(titlebartext, frame);
+    DKDrag_AddDragHandle(titlebartext, frame);
     titlebartext.addEventListener("dblclick", DKFrame_OnEvent);
 
     var reload = DK_CreateElement(frame, "img", "DKFrame_reload");
@@ -222,7 +222,7 @@ function DKFrame_CreateResize(frame) {
     resize.style.bottom = "0rem";
     resize.style.width = "16rem";
     resize.style.height = "16rem";
-    //DK_AddResizeHandle(resize, frame);
+    //DKDrag_AddResizeHandle(resize, frame);
     //frame.addEventListener("resize", DKFrame_OnEvent);  //FIXME - does not fire.
 
     var resizeImage = DK_CreateElement(resize, "img", "DKFrame_resizeImage");
@@ -230,7 +230,7 @@ function DKFrame_CreateResize(frame) {
     resizeImage.style.position = "absolute";
     resizeImage.style.top = "0rem";
     resizeImage.style.right = "0rem";
-    DK_AddResizeHandle(resizeImage, frame);
+    DKDrag_AddResizeHandle(resizeImage, frame);
 
     return resize;
 }
