@@ -1,0 +1,18 @@
+div.DKConsole {
+    padding: 5px;
+    font-size: 10px;
+}
+
+a:link.DKConsole, a:visited.DKConsole, a:hover.DKConsole {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover.DKConsole {
+    color: #9bf59b;
+}
+
+a:active.DKConsole {
+    color: white;
+}
