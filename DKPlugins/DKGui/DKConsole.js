@@ -82,7 +82,7 @@ function DKConsole_SpanFilter(args) {
 }
 
 function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
-    DKLoadCSSFile("DKConsole.css");
+    DK_Create("DKConsole.css", function(){});
     const dkconsoleFrame = document.createElement("div");
     dkconsoleFrame.style.padding = "0px";
     dkconsoleFrame.style.margin = "0px";

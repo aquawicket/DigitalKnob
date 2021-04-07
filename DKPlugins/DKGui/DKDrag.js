@@ -56,8 +56,8 @@ function DKDrag_DragStart(event, element) {
         DKDrag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
         DKDrag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    DKDrag.objectX = GetLeftPx(element);
-    DKDrag.objectY = GetTopPx(element);
+    DKDrag.objectX = DKGui_GetLeftPx(element);
+    DKDrag.objectY = DKGui_GetTopPx(element);
     document.body.onmousemove = function(event) {
         DKDrag_DragMove(event, element);
     }
@@ -82,14 +82,14 @@ function DKDrag_DragMove(event, element) {
         y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
     if (element.style.left) {
-        element.style.left = Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
+        element.style.left = DKGui_Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
     } else {
-        element.style.right = Pos(objectX + DKDrag.mouseStartX - x);
+        element.style.right = DKGui_Pos(objectX + DKDrag.mouseStartX - x);
     }
     if (element.style.top) {
-        element.style.top = Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
+        element.style.top = DKGui_Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
     } else {
-        element.style.bottom = Pos(DKDrag.objectY + DKDrag.mouseStartY - y);
+        element.style.bottom = DKGui_Pos(DKDrag.objectY + DKDrag.mouseStartY - y);
     }
 
     //WindowRestrictions(id);
@@ -154,8 +154,8 @@ function DKDrag_ResizeStart(event, element) {
         DKDrag.mouseStartX = event.clientX + window.scrollX || parseInt(event.changedTouches[0].clientX);
         DKDrag.mouseStartY = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
-    DKDrag.objectX = GetWidthPx(element);
-    DKDrag.objectY = GetHeightPx(element);
+    DKDrag.objectX = DKGui_GetWidthPx(element);
+    DKDrag.objectY = DKGui_GetHeightPx(element);
     document.body.onmousemove = function(event) {
         DKDrag_ResizeMove(event, element);
     }
@@ -180,11 +180,11 @@ function DKDrag_ResizeMove(event, element) {
         y = event.clientY + window.scrollY || parseInt(event.changedTouches[0].clientY);
     }
     if ((DKDrag.objectX + x - DKDrag.mouseStartX) > 1) {
-        element.style.width = Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
+        element.style.width = DKGui_Pos(DKDrag.objectX + x - DKDrag.mouseStartX);
 
     }
     if ((DKDrag.objectY + y - DKDrag.mouseStartY) > 1) {
-        element.style.height = Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
+        element.style.height = DKGui_Pos(DKDrag.objectY + y - DKDrag.mouseStartY);
     }
 
     //WindowRestrictions(id);

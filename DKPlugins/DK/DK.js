@@ -26,10 +26,7 @@ var DK_DEBUG = 4;
 var DK_SHOW = 5;
 var DK_HIDE = 6;
 
-//var mouseStartX;
-//var mouseStartY;
-//var objectX;
-//var objectY;
+
 //var events = [];
 
 var byId = function(id) {
@@ -227,7 +224,7 @@ function Log(string, lvl) {
             fileline = fileline.substring(start + 1, end + 1);
             return fileline + "  ";
         }
-        ;
+
         if (DK_GetBrowser() === "CHROME" || DK_GetBrowser() === "CEF") {
             if (lvl === DK_ERROR) {
                 //alert("ERROR: "+string);
@@ -283,7 +280,7 @@ function DK_Create(data, callback) {
             if (callback) {
                 callback(rval);
             } else {
-                console.error("DK_Create(" + data + "): does not have a callback");
+                //console.error("DK_Create(" + data + "): does not have a callback");
             }
         })) {
             return false;
@@ -508,7 +505,7 @@ function DK_LoadHtml(url, parent) {
     //console.warn("DK.js:DK_LoadHtml("+url+","+parent+")");
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url) {
-        console.error("DK.js: DK_LoadJs(" + url + "): url invalid");
+        console.error("DK.js: DK_LoadHtml(" + url + "): url invalid");
         return false;
     }
 
@@ -579,88 +576,15 @@ function DK_LoadHtml(url, parent) {
     return true;
 }
 
-//////////////////////////////////////////
-function DK_CreateElement(parent, tag, id) {
-    var ele = document.createElement(tag);
-    ele.id = DK_GetAvailableId(id);
-    parent.appendChild(ele);
-    //This is not working on IE
-    return ele;
-}
-
-////////////////////////////////////////////////
-function DK_CreateElementBefore(parent, tag, id) {
-    var ele = document.createElement(tag);
-    ele.id = DK_GetAvailableId(id);
-    parent.parentNode.insertBefore(ele, parent);
-    return ele.id;
-    //FIXME - return element object
-}
-
 //////////////////////////////
 function DK_CheckFileSupport() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         console.log("DK.js: File support OK");
     } else {
-        console.error("DK.js: The File APIs are not fully supported in this browser");
+        console.warn("DK.js: The File APIs are not fully supported in this browser");
     }
 }
 
-///////////////////////////
-function GetLeftPx(element) {
-    if (!element) {
-        return 0;
-    }
-    if (!element.style.left) {
-        return 0;
-    }
-    if (element.style.left.indexOf("%") > -1) {
-        return parseInt(element.style.left) * WindowWidth() / 100;
-    }
-    return parseInt(element.style.left);
-}
-
-//////////////////////////
-function GetTopPx(element) {
-    if (!element) {
-        return 0;
-    }
-    if (!element.style.top) {
-        return 0;
-    }
-    if (element.style.top.indexOf("%") > -1) {
-        return parseInt(element.style.top) * WindowHeight() / 100;
-    }
-    return parseInt(element.style.top);
-}
-
-////////////////////////////
-function GetWidthPx(element) {
-    if (!element) {
-        return 0;
-    }
-    if (!element.style.width) {
-        return 0;
-    }
-    if (element.style.width.indexOf("%") > -1) {
-        return parseInt(element.style.width) * WindowWidth() / 100;
-    }
-    return parseInt(element.style.width);
-}
-
-/////////////////////////////
-function GetHeightPx(element) {
-    if (!element) {
-        return 0;
-    }
-    if (!element.style.height) {
-        return 0;
-    }
-    if (element.style.height.indexOf("%") > -1) {
-        return parseInt(element.style.height) * WindowHeight() / 100;
-    }
-    return parseInt(element.style.height);
-}
 
 /*
 //////////////////////////////
@@ -814,8 +738,11 @@ function DK_GetObjects() {
     var elements = document.getElementsByTagName("script");
     for (var i = 0; elements && i < elements.length; i++) {
         if (!elements[i].id) {
-            console.warn(elements[i].src+": script object has no id");
-            continue;
+        	if(elements[i].src){
+        		elements[i].id = elements[i].src;
+        	}
+            //console.warn(elements[i].src+": script object has no id");
+            //continue;
         }
         jsfiles += elements[i].id + ",";
     }
@@ -1172,44 +1099,51 @@ function DK_GetValue(variable) {
     return false;
 }
 
-//////////////////////
-function Pos(position) {
-    if (position === '') {
-        return position;
-    }
-    if (typeof position === 'string') {
-        if (position.search('rem') !== -1) {
-            if (DK_IE() && DK_IE() < 9) {
-                position = position.replace("rem", "px");
-            }
-            return position;
-        }
-        if (position.search('px') !== -1) {
-            return position;
-        }
-        if (position.search('%') !== -1) {
-            return position;
-        }
-        if (position.search('auto') !== -1) {
-            return position;
-        }
-
-        if (DK_IE() && DK_IE() < 9) {
-            return position + 'px';
-        } else {
-            return position + 'rem';
-        }
-    }
-    if (typeof position === 'number') {
-        if (DK_IE() && DK_IE() < 9) {
-            return position + 'px';
-        } else {
-            return position + 'rem';
-        }
-    }
-
-    DKERROR("Pos() ERROR\n");
+function DK_PreloadImage(url) {
+    var img = new Image();
+    img.src = url;
 }
+
+function DK_SaveToLocalStorage(name, string) {
+    if (!name) {
+        return;
+    }
+    localStorage.setItem(name, string);
+}
+
+function DK_LoadFromLocalStorage(name) {
+    if (!name) {
+        return;
+    }
+    return localStorage.getItem(name);
+}
+
+function DK_RemoveFromLocalStorage(name) {
+    localStorage.removeItem(name);
+}
+
+function DK_IsOnline() {
+    if (navigator.onLine)
+        return true;
+    else
+        return false;
+}
+
+/**
+ * Returns a number whose value is limited to the given range.
+ *
+ * Example: limit the output of this computation to between 0 and 255
+ * (x * 255).clamp(0, 255)
+ *
+ * @param {Number} min The lower boundary of the output range
+ * @param {Number} max The upper boundary of the output range
+ * @returns A number in the range [min, max]
+ * @type Number
+ */
+Number.prototype.clamp = function(min, max) {
+    return Math.min(Math.max(this, min), max);
+}
+
 
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
@@ -1306,4 +1240,83 @@ function ajaxGetUrl(url) {
     }
 
     return response.value;
+}
+
+
+function DK_SendRequest(url, callback) {
+    if (!url) {
+        console.error("url invalid");
+    }
+    if (callback.length < 3) {
+        console.error("callback requires 3 arguments");
+    }
+
+    let xhr = "";
+    try {
+        xhr = new XMLHttpRequest();
+    } catch (e) {}
+    try {
+        xhr = new ActiveXObject("Msxml3.XMLHTTP");
+    } catch (e) {}
+    try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0");
+    } catch (e) {}
+    try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0");
+    } catch (e) {}
+    try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {}
+    try {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    } catch (e) {}
+
+    if (!xhr) {
+        console.error("Error creating xhr object");
+        return false;
+    }
+
+    xhr.open("GET", url, true);
+    xhr.timeout = 20000;
+
+    //Possible error codes
+    //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
+    xhr.onabort = function(event) {
+        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
+        console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        callback(false, url, event.type);
+        return false;
+    }
+    xhr.onerror = function(event) {
+        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
+        callback(false, url, event.type);
+        return false;
+    }
+    xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
+    }
+    xhr.onloadend = function(event) {//console.log("XMLHttpRequest.onloadend(" + event + ")");
+    }
+    xhr.onloadstart = function(event) {//console.log("XMLHttpRequest.onloadstart(" + event + ")");
+    }
+    xhr.onprogress = function(event) {//console.log("XMLHttpRequest.onprogress(" + event + ")");
+    }
+    xhr.onreadystatechange = function(event) {
+        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
+        if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 400) {
+                callback(true, url, xhr.responseText);
+            } else {
+                //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
+                callback(false, url, event.type);
+                return false;
+            }
+        }
+    }
+    xhr.ontimeout = function(event) {
+        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
+        callback(false, url, event.type);
+        return false;
+    }
+
+    xhr.send();
 }

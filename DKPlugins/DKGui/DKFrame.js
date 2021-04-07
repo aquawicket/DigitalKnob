@@ -96,7 +96,7 @@ function DKFrame_SetTitle(id, title) {
 //////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height) {
     var frame = DKFrame_CreateFrame(byId(title), width, height);
-    var iframe = DK_CreateElement(frame, "iframe", title);
+    var iframe = DKGui_CreateElement(frame, "iframe", title);
     iframe.src = url;
     // This will call DKRocketToRML::PostProcess() again
     iframe.width = "100%";
@@ -140,7 +140,7 @@ function DKFrame_CreateFrame(title, width, height) {
     var newtop = parseFloat((window.innerHeight / 2) - (newheight / 2) - 1);
     var newleft = parseFloat((window.innerWidth / 2) - (width / 2) - 1);
 
-    var frame = DK_CreateElement(document.body, "div", "DKFrame_frame");
+    var frame = DKGui_CreateElement(document.body, "div", "DKFrame_frame");
     frame.style.position = "absolute";
     frame.style.overflow = "hidden";
     frame.style.top = newtop.toString() + "px";
@@ -162,13 +162,13 @@ function DKFrame_CreateFrame(title, width, height) {
     //console.log("DKFrame_Html("+id+"): frame width="+width+"\n");
     //console.log("DKFrame_Html("+id+"): frame height="+newheight.toString()+"\n");
 
-    var titlebar = DK_CreateElement(frame, "div", "DKFrame_titlebar");
+    var titlebar = DKGui_CreateElement(frame, "div", "DKFrame_titlebar");
     titlebar.style.position = "absolute";
     titlebar.style.width = "100%";
     titlebar.style.height = "21rem";
     titlebar.style.backgroundColor = "rgb(200,200,200)";
 
-    var titlebartext = DK_CreateElement(titlebar, "div", "DKFrame_titlebartext");
+    var titlebartext = DKGui_CreateElement(titlebar, "div", "DKFrame_titlebartext");
     titlebartext.style.position = "absolute";
     titlebartext.style.width = "100%";
     titlebartext.style.height = "100%";
@@ -177,7 +177,7 @@ function DKFrame_CreateFrame(title, width, height) {
     DKDrag_AddDragHandle(titlebartext, frame);
     titlebartext.addEventListener("dblclick", DKFrame_OnEvent);
 
-    var reload = DK_CreateElement(frame, "img", "DKFrame_reload");
+    var reload = DKGui_CreateElement(frame, "img", "DKFrame_reload");
     reload.setAttribute("src", "DKGui/reload.png");
     reload.style.position = "absolute";
     reload.style.top = "1rem";
@@ -185,7 +185,7 @@ function DKFrame_CreateFrame(title, width, height) {
     reload.style.height = "18rem";
     reload.addEventListener("click", DKFrame_OnEvent);
 
-    var minimize = DK_CreateElement(frame, "img", "DKFrame_minimize");
+    var minimize = DKGui_CreateElement(frame, "img", "DKFrame_minimize");
     minimize.setAttribute("src", "DKGui/minimize.png");
     minimize.style.position = "absolute";
     minimize.style.top = "0rem";
@@ -193,7 +193,7 @@ function DKFrame_CreateFrame(title, width, height) {
     minimize.style.height = "20rem;"
     minimize.addEventListener("click", DKFrame_OnEvent);
 
-    var maximize = DK_CreateElement(frame, "img", "DKFrame_maximize");
+    var maximize = DKGui_CreateElement(frame, "img", "DKFrame_maximize");
     maximize.setAttribute("src", "DKGui/maximize.png");
     maximize.style.position = "absolute";
     maximize.style.top = "0rem";
@@ -201,7 +201,7 @@ function DKFrame_CreateFrame(title, width, height) {
     maximize.style.height = "20rem";
     maximize.addEventListener("click", DKFrame_OnEvent);
 
-    var close = DK_CreateElement(frame, "img", "DKFrame_close");
+    var close = DKGui_CreateElement(frame, "img", "DKFrame_close");
     close.setAttribute("src", "DKGui/close.png");
     close.style.position = "absolute";
     close.style.top = "0rem";
@@ -214,7 +214,7 @@ function DKFrame_CreateFrame(title, width, height) {
 
 ////////////////////////////////////
 function DKFrame_CreateResize(frame) {
-    var resize = DK_CreateElement(frame, "div", "DKFrame_resize");
+    var resize = DKGui_CreateElement(frame, "div", "DKFrame_resize");
     //resize.style.backgroundImage = "url(\"DKGui/resize.png\")";
     resize.style.removeProperty("top");
     resize.style.position = "absolute";
@@ -225,7 +225,7 @@ function DKFrame_CreateResize(frame) {
     //DKDrag_AddResizeHandle(resize, frame);
     //frame.addEventListener("resize", DKFrame_OnEvent);  //FIXME - does not fire.
 
-    var resizeImage = DK_CreateElement(resize, "img", "DKFrame_resizeImage");
+    var resizeImage = DKGui_CreateElement(resize, "img", "DKFrame_resizeImage");
     resizeImage.setAttribute("src", "DKGui/resize.png");
     resizeImage.style.position = "absolute";
     resizeImage.style.top = "0rem";
