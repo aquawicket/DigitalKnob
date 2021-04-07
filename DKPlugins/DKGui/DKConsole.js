@@ -225,7 +225,7 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
             dkconsole.warn("WARNING: dkconsole.error requires a valid argument");
             return false;
         }
-        const errMsg = DKError_StackToConsoleString(arg, "dkconsole.error");
+        const errMsg = DKTrace_StackToConsoleString(arg, "dkconsole.error");
         dkconsole.message(errMsg, "red");
     }
 
