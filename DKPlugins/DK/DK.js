@@ -1,5 +1,6 @@
 "use strict";
 
+console.log("loading DK/DK.js");
 console.log("*** DigitalKnob ***");
 console.log("Browser = " + DK_GetBrowser());
 console.log("JSEngine = " + DK_GetJSEngine());
@@ -81,6 +82,7 @@ function myTimer() {
 }
 */
 
+/*
 //This function is used to debug googlebot crawling
 /////////////////////////////////////////////
 window.addEventListener('error', function(e) {
@@ -104,18 +106,18 @@ window.addEventListener('error', function(e) {
         byId(DOM_ID).textContent += '\n\n' + errorText;
     }
 	(/
-
-	/*
+	
     // Example: log the error to remote service.
     // Note: you can log errors to a remote service, to understand
     //       and monitor the types of errors encountered by regular users,
     //       Googlebot, and other crawlers.
-    var client = new XMLHttpRequest();
-    client.open('POST', 'https://example.com/logError');
-    client.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
-    client.send(errorText);
-	*/
+    //var client = new XMLHttpRequest();
+    //client.open('POST', 'https://example.com/logError');
+    //client.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
+    //client.send(errorText);
+
 });
+*/
 
 ///////////////////////////////////////////////////
 document.addEventListener("mousemove", function(e) {
@@ -149,6 +151,8 @@ function DKWARN(string){ Log(string, DK_WARN); }
 function DKINFO(string){ Log(string, DK_INFO); }
 function DKDEBUG(string){ Log(string, DK_DEBUG); }
 */
+
+/*
 /////////////////////////
 function Log(string, lvl) {
     if (!lvl) {
@@ -258,6 +262,7 @@ function Log(string, lvl) {
     }
     //DKSendEvent("DKConsole.html", "DKNotify", string);
 }
+*/
 
 //////////////////////////////////
 function DK_Create(data, callback) {
@@ -908,7 +913,7 @@ function DK_GetElements(element) {
 
 //////////////////////////////
 function DK_GetAvailableId(id) {
-    let out = id;
+    var out = id;
     var i = 0;
 
     while (byId(out)) {
@@ -1251,7 +1256,7 @@ function DK_SendRequest(url, callback) {
         console.error("callback requires 3 arguments");
     }
 
-    let xhr = "";
+    var xhr = "";
     try {
         xhr = new XMLHttpRequest();
     } catch (e) {}
