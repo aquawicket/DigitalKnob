@@ -73,7 +73,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 		{
 			// FIXME
 			//parser->GetDocumentHeader()->scripts_external.push_back(src);
-			parser->GetDocumentHeader()->scripts[0].path = src;
+			//parser->GetDocumentHeader()->scripts[0].path = src;
 		}
 	}
 
