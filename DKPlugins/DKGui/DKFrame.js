@@ -172,6 +172,10 @@ function DKFrame_CreateFrame(title, width, height) {
     titlebartext.style.position = "absolute";
     titlebartext.style.width = "100%";
     titlebartext.style.height = "100%";
+    titlebartext.style.paddingTop = "2rem";
+    titlebartext.style.paddingLeft = "4rem";
+    titlebartext.style.fontSize = "15rem";
+    titlebartext.style.fontWeight = "bold";
     titlebartext.style.color = "rgb(25,25,25)";
     titlebartext.innerHTML = title;
     DKDrag_AddDragHandle(titlebartext, frame);

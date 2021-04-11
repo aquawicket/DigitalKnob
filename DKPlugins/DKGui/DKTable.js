@@ -235,8 +235,20 @@ function DKTable_GetCellByName(table, rowName, columnName) {
     }
 }
 
-function DKTable_Sort(table_id, col, reverse) {
+function DKTable_Sort(table_id, columnName, reverse) {
     const table = byId(table_id);
+    let col = -1;
+    for(let n = 0; n < table.rows[0].cells.length; n++) {
+        if (table.rows[0].cells[n].getAttribute("name") == columnName) {
+            col = n;
+            break;
+        }
+    }
+    if(col < 0){
+        dkconsole.log("columnName invalid");
+        return;
+    }
+
     const tb = table.tBodies[0];
     // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
     let tr = Array.prototype.slice.call(tb.rows, 1);

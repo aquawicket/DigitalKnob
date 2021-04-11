@@ -54,7 +54,7 @@ if($_GET["x"]){
     */
 }
 
-//http://192.168.1.78:8000/DKFile.php?f=StringToFile
+//http://127.0.0.1:8000/DKFile.php?f=StringToFile
 function StringToFile($file, $data, $mode)
 {    
     if($mode == "FILE_APPEND"){
@@ -95,6 +95,117 @@ function GetRemoteAddress()
 function GetRemoteUser()
 {
 	echo $_SERVER["REMOTE_USER"];
+}
+
+function GetAssetsPath()
+{
+    $assetsPath = dirname(__DIR__);
+    if(basename($assetsPath) != "assets"){
+        echo "assetsPath does not contain an assets folder \n";
+        return false;
+    }
+    if(!is_dir($assetsPath)){
+    	echo "assetsPath is an invalid directory \n";
+    	return false;
+    }
+    echo "assetsPath = ".$assetsPath."\n";
+    return $assetsPath;
+}
+
+function GetDKPath()
+{
+    $dkPath = dirname(__DIR__);
+    $n = 1;
+    while(is_dir($dkPath) && $n < 10){
+        $dkPath = dirname(__DIR__, $n++);
+        if(basename($dkPath) == "digitalknob"){
+        	//echo "dkPath = ".$dkPath."\n";
+        	return $dkPath;
+        }
+    }
+    echo "could not find digitalknob path \n";
+    return false;
+}
+
+function GetDKPluginsPath()
+{
+    $dkPluginsPath = dirname(__DIR__);
+    $n = 1;
+    while(is_dir($dkPluginsPath) && $n < 10){
+        $dkPluginsPath = dirname(__DIR__, $n++);
+        if(is_dir($dkPluginsPath."\DKPlugins")){
+        	$dkPluginsPath = $dkPluginsPath."\DKPlugins";
+        	//echo "dkPluginsPath = ".$dkPluginsPath."\n";
+        	return $dkPluginsPath;
+        }
+    }
+    echo "cound not find DKPlugins path";
+    return false;
+}
+
+function PushDKAssets()
+{
+	//Fist get all fot he paths
+	echo "\n";
+	$assetsPath = GetAssetsPath();
+	if(!$assetsPath){
+		echo "assetsPath is invalid";
+		return false;
+	}
+	
+    $dkPath = GetDKPath();
+    if(!$dkPath){
+		echo "dkPath is invalid";
+		return false;
+    }
+    echo "dkPath = ".$dkPath."\n";
+    
+    $dkPluginsPath = $dkPath."\DK\DKPlugins";
+    if(!is_dir($dkPluginsPath)){
+    	echo "dkPluginsPath is invalid";
+    }
+    echo "dkPluginsPath = ".$dkPluginsPath."\n";
+
+    //we may or may not have a second plugins path
+    $dkPluginsPath2 = GetDKPluginsPath();
+    if($dkPluginsPath2 == $dkPluginsPath){
+		$dkPluginsPath2 = 0;
+	}
+	else{
+		echo "dkPluginsPath2 = ".$dkPluginsPath2."\n";
+	}
+
+    //Now copy matching matching folders to the DKPlugins path(s)
+	$assetsList = scandir($assetsPath);
+	for($n = 2; $n < count($assetsList); $n++){
+		if(!is_dir($assetsPath."\\".$assetsList[$n])){ continue; }
+		$assetFolder = $assetsPath."\\".$assetsList[$n];
+		$assetFiles = scandir($assetFolder);
+        for($nn = 2; $nn < count($assetFiles); $nn++){
+            if(is_dir($assetFolder."\\".$assetFiles[$nn])){ continue; }
+            $src = $assetFolder."\\".$assetFiles[$nn];
+            //echo $src."\n";
+            if(is_dir($dkPluginsPath."\\".$assetsList[$n])){
+            	$dest = $dkPluginsPath."\\".$assetsList[$n]."\\".$assetFiles[$nn];
+			    //echo $dest."\n";
+			    if (!copy($src, $dest)) {
+                    echo "failed to copy $src\n";
+                }else{
+                	echo "copied to $dest\n";
+                }
+		    }
+		    if($dkPluginsPath2 && is_dir($dkPluginsPath2."\\".$assetsList[$n])){
+			    $dest = $dkPluginsPath2."\\".$assetsList[$n]."\\".$assetFiles[$nn];
+			    //echo $dest."\n";
+			    if (!copy($src, $dest)) {
+                    echo "failed to copy $src\n";
+                }
+                else{
+                	echo "copied to $dest\n";
+                }
+		    }
+        }
+	}
 }
 
 ?>

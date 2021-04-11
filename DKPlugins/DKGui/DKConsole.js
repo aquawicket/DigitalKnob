@@ -84,8 +84,8 @@ function DKConsole_SpanFilter(args) {
 function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     DK_Create("DKGui/DKConsole.css", function(){});
     const dkconsoleFrame = document.createElement("div");
-    dkconsoleFrame.style.padding = "0px";
-    dkconsoleFrame.style.margin = "0px";
+    dkconsoleFrame.style.padding = "0rem";
+    dkconsoleFrame.style.margin = "0rem";
     dkconsoleFrame.id = id;
     dkconsoleFrame.style.position = "absolute";
     dkconsoleFrame.style.top = top;
@@ -96,22 +96,22 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     dkconsoleFrame.style.height = height;
     dkconsoleFrame.style.borderColor = "rgb(58,58,58)";
     dkconsoleFrame.style.borderStyle = "solid";
-    dkconsoleFrame.style.borderWidth = "1px";
+    dkconsoleFrame.style.borderWidth = "1rem";
     dkconsoleFrame.style.boxSizing = "border-box";
-    dkconsoleFrame.style.borderTopWidth = "5px";
+    dkconsoleFrame.style.borderTopWidth = "5rem";
     parent.appendChild(dkconsoleFrame);
 
     dkconsole = document.createElement("div");
     dkconsole.className = "dkconsole";
     dkconsole.style.position = "absolute";
-    dkconsole.style.padding = "0px";
+    dkconsole.style.padding = "0rem";
     dkconsole.style.backgroundColor = "rgb(36,36,36)";
     dkconsole.style.color = "white";
     dkconsole.style.fontColor = "white";
-    dkconsole.style.top = "0px";
-    dkconsole.style.bottom = "20px";
-    dkconsole.style.left = "0px";
-    dkconsole.style.right = "0px";
+    dkconsole.style.top = "0rem";
+    dkconsole.style.bottom = "20rem";
+    dkconsole.style.left = "0rem";
+    dkconsole.style.right = "0rem";
     //dkconsole.style.width = "";
     //dkconsole.style.height = "";
     dkconsole.style.visibility = "visible";
@@ -122,10 +122,10 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     const cmdbox = document.createElement("input");
     cmdbox.type = "text";
     cmdbox.style.position = "absolute";
-    cmdbox.style.left = "0px";
-    cmdbox.style.bottom = "0px";
-    cmdbox.style.right = "0px";
-    cmdbox.style.height = "20px";
+    cmdbox.style.left = "0rem";
+    cmdbox.style.bottom = "0rem";
+    cmdbox.style.right = "0rem";
+    cmdbox.style.height = "20rem";
     cmdbox.style.width = "100%";
     cmdbox.style.backgroundColor = "rgb(150,150,150)";
     dkconsoleFrame.style.borderColor = "rgb(40,40,40)";
@@ -154,17 +154,17 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     dkconsole.message = function(msg, style) {
         const msgDiv = document.createElement("div");
         msgDiv.style.width = "100%";
-        msgDiv.style.fontSize = "12px";
+        msgDiv.style.fontSize = "12rem";
         msgDiv.style.fontFamily = "Consolas, Lucinda, Console, Courier New, monospace";
         msgDiv.style.whiteSpace = "pre-wrap";
         msgDiv.style.boxSizing = "border-box";
-        msgDiv.style.padding = "2px";
-        msgDiv.style.paddingLeft = "20px";
+        msgDiv.style.padding = "2rem";
+        msgDiv.style.paddingLeft = "20rem";
         msgDiv.style.borderStyle = "solid";
-        msgDiv.style.borderWidth = "1px";
-        msgDiv.style.borderTopWidth = "0px";
-        msgDiv.style.borderLeftWidth = "0px";
-        msgDiv.style.borderRightWidth = "0px";
+        msgDiv.style.borderWidth = "1rem";
+        msgDiv.style.borderTopWidth = "0rem";
+        msgDiv.style.borderLeftWidth = "0rem";
+        msgDiv.style.borderRightWidth = "0rem";
 
         const msgText = document.createElement("span");
         msgText.className = "dkconsole";

@@ -16,6 +16,10 @@ function PHP_StringToFile(file, data, mode, callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 
+function PHP_PushDKAssets(callback) {
+    DKPhp_CallPhpFunc(arguments);
+}
+
 //function DKPhp_noCB(rVal) {}
 
 function DKPhp_CallPhpFunc(args) {
@@ -36,8 +40,12 @@ function DKPhp_CallPhpFunc(args) {
         jsonData.args.push(newArg);
     }
     //dkconsole.log(JSON.stringify(jsonData));
+    let path = "";
+    if(location.protocol == "file:"){
+        path = "http://127.0.0.1:8000/"
+    }
     const data = "x=" + encodeURIComponent(JSON.stringify(jsonData));
-    const url = "DK/DK.php?" + data;
+    const url = path + "DK/DK.php?" + data;
     DK_SendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
@@ -64,7 +72,7 @@ function DKPhp_CallPhpFunction(str, callback) {
         jsonData.args.push(newArg);
     }
     const data = "x=" + encodeURIComponent(JSON.stringify(jsonData));
-    const url = "http://192.168.1.78:8000/DK/DK.php?" + data;
+    const url = "DK/DK.php?" + data;
     DK_SendRequest(url, function(success, url, data) {
         callback(data);
     });
