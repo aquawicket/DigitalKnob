@@ -73,6 +73,9 @@ function DKAudio_GetVolume(src) {
 
 function DKAudio_SetVolume(src, volume) {
     const audio = byId(src);
+    if(!audio){
+    	dkconsole.error("audio invalid");
+    }
     audio.volume = volume;
 }
 

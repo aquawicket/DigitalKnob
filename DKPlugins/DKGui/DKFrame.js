@@ -45,7 +45,46 @@ function DKFrame_OnEvent(event) {
     }
 }
 
-/////////////////////////
+function DKFrame_Create(element){
+    if (!element){
+        console.error("DKFrame_Create(): element invalid\n");
+        return false;
+    }
+
+    var title = DKFile_GetFilename(element.id);
+    title = title.replace(".html", "");
+
+    //stop if frame already exsists, multiple windows not ready yet.
+    //FIXME
+    //if(DK_ElementExists(title+"_frame")){
+    //	console.warn("DKFrame_Create(): frame already exists\n");
+    //	return;
+    //}
+
+    var width = element.style.width;
+    var height = element.style.height;
+    //console.log("DKFrame_Create(): width="+width+" , height="+height+"\n");
+
+    width = width.replace("px", "");
+    height = height.replace("px", "");
+    width = width.replace("rem", "");
+    height = height.replace("rem", "");
+
+    var frame = DKFrame_CreateFrame(title, width, height);
+    frame.appendChild(element);
+    element.style.position = "absolute";
+    element.style.top = "21rem";
+    element.style.left = "0rem";
+    element.style.width = "100%";
+    element.style.bottom = "-1rem";
+    element.style.removeProperty("right");
+    element.style.removeProperty("height");
+
+    DKFrame_CreateResize(frame);
+    return frame;
+}
+
+/*
 function DKFrame_Html(id) {
     if (!byId(id)) {
         console.error("DKFrame_Html(" + id + "): element invalid\n");
@@ -84,6 +123,7 @@ function DKFrame_Html(id) {
     DKFrame_CreateResize(frame);
     return frame;
 }
+*/
 
 ////////////////////////////////////
 function DKFrame_SetTitle(id, title) {
