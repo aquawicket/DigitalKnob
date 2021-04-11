@@ -86,6 +86,7 @@ function DKFrame_Html(id) {
 */
 
 function DKFrame_SetTitle(id, title) {
+    console.warn("DKFrame_SetTitle() should use the element instead of id");
     var frame = byId(id).parentNode.id
     var titlebar = byId(frame).firstChild.id;
     var titlebartext = byId(titlebar).firstChild.id;
@@ -265,10 +266,12 @@ function DKFrame_BringToFront() {
 }
 
 function DKFrame_MinimizeButton(id) {
+    console.warn("DKFrame_MinimizeButton() should use the element instead of id");
     //TODO
 }
 
 function DKFrame_MaximizeButton(id) {
+    console.warn("DKFrame_MaximizeButton() should use the element instead of id");
     var frame = byId(id).parentNode.id;
     var top = byId(frame).style.top;
     var bottom = byId(frame).style.bottom;
@@ -298,10 +301,12 @@ function DKFrame_MaximizeButton(id) {
 }
 
 function DKFrame_CloseButton(id) {
+    console.warn("DKFrame_CloseButton() should use the element instead of id");
     DKFrame_Close(id);
 }
 
 function DKFrame_Close(id) {
+    console.warn("DKFrame_Close() should use the element instead of id");
     //TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
     if (!byId(id)) {
         console.error("byId(" + id + ") is invalid");
@@ -351,6 +356,7 @@ function DKFrame_Close(id) {
 }
 
 function DKFrame_StoreSize(id) {
+    console.warn("DKFrame_StoreSize() should use the element instead of id");
     var top = byId(id).style.top;
     var bottom = byId(id).style.bottom;
     var left = byId(id).style.left;
@@ -368,6 +374,7 @@ function DKFrame_StoreSize(id) {
 }
 
 function DKFrame_RestoreSize(id) {
+    console.warn("DKFrame_RestoreSize() should use the element instead of id");
     for (var i = 0; i < sizes.length; i++) {
         if (sizes[i].indexOf(id) > -1) {
             var arry = sizes[i].split(":");
@@ -393,6 +400,7 @@ function DKFrame_CloseAll() {
 }
 
 function DKFrame_Reload(id) {
+    console.warn("DKFrame_Reload() should use the element instead of id");
     console.log("TODO: refresh the frame data. html, javascript and css all reloaded\n");
 
     console.log("id = " + id + "\n");

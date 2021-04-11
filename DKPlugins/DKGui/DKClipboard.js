@@ -1,7 +1,7 @@
 "use strict";
 
-///////////////////
 function DK_Cut(id) {
+    console.warn("DKClipboard_Cut(id) should use the element instead of id");
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
@@ -13,8 +13,8 @@ function DK_Cut(id) {
     DKClipboard_RemoveSelection(id);
 }
 
-////////////////////
 function DK_Copy(id) {
+    console.warn("DKClipboard_Copy(id) should use the element instead of id");
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
@@ -27,6 +27,7 @@ function DK_Copy(id) {
 }
 
 function DKClipboard_Paste(id) {
+    console.warn("DKClipboard_Paste(id) should use the element instead of id");
     DKClipboard_RemoveSelection(id);
     var ele = byId(id);
     ele.focus();
@@ -59,6 +60,7 @@ function DKClipboard_CopyToClipboard(text) {
 }
 
 function DKClipboard_RemoveSelection(id) {
+    console.warn("DKClipboard_RemoveSelection(id) should use the element instead of id");
     var ele = byId(id);
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
