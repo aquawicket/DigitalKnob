@@ -1,14 +1,9 @@
 var sizes = [];
 
-///////////////////////
-function DKFrame_Init() {
-}
+function DKFrame_Init() {}
 
-//////////////////////
-function DKFrame_End() {
-}
+function DKFrame_End() {}
 
-///////////////////////////////
 function DKFrame_OnEvent(event) {
     if (event.type === "mousedown") {
         DKFrame_BringToFront();
@@ -45,8 +40,8 @@ function DKFrame_OnEvent(event) {
     }
 }
 
-function DKFrame_Create(element){
-    if (!element){
+function DKFrame_Create(element) {
+    if (!element) {
         console.error("DKFrame_Create(): element invalid\n");
         return false;
     }
@@ -86,46 +81,10 @@ function DKFrame_Create(element){
 
 /*
 function DKFrame_Html(id) {
-    if (!byId(id)) {
-        console.error("DKFrame_Html(" + id + "): element invalid\n");
-        return false;
-    }
-
-    var title = DKFile_GetFilename(id);
-    title = title.replace(".html", "");
-
-    //stop if frame already exsists, multiple windows not ready yet.
-    //FIXME
-    //if(DK_ElementExists(title+"_frame")){
-    //	console.warn("DKFrame_Html("+id+"): frame already exists\n");
-    //	return;
-    //}
-
-    var width = byId(id).style.width;
-    var height = byId(id).style.height;
-    //console.log("DKFrame_Html("+id+"): width="+width+" , height="+height+"\n");
-
-    width = width.replace("px", "");
-    height = height.replace("px", "");
-    width = width.replace("rem", "");
-    height = height.replace("rem", "");
-
-    var frame = DKFrame_CreateFrame(title, width, height);
-    frame.appendChild(byId(id));
-    byId(id).style.position = "absolute";
-    byId(id).style.top = "21rem";
-    byId(id).style.left = "0rem";
-    byId(id).style.width = "100%";
-    byId(id).style.bottom = "-1rem";
-    byId(id).style.removeProperty("right");
-    byId(id).style.removeProperty("height");
-
-    DKFrame_CreateResize(frame);
-    return frame;
+    DKFrame_Create(byId(id));
 }
 */
 
-////////////////////////////////////
 function DKFrame_SetTitle(id, title) {
     var frame = byId(id).parentNode.id
     var titlebar = byId(frame).firstChild.id;
@@ -133,7 +92,6 @@ function DKFrame_SetTitle(id, title) {
     byId(titlebartext).innerHTML = title;
 }
 
-//////////////////////////////////////////////////
 function DKFrame_Iframe(title, url, width, height) {
     var frame = DKFrame_CreateFrame(byId(title), width, height);
     var iframe = DKGui_CreateElement(frame, "iframe", title);
@@ -160,7 +118,6 @@ function DKFrame_Iframe(title, url, width, height) {
     return iframe;
 }
 
-//////////////////////////////////////////////////
 function DKFrame_CreateFrame(title, width, height) {
     if (width === "100%") {
         width = window.innerWidth - 100;
@@ -256,7 +213,6 @@ function DKFrame_CreateFrame(title, width, height) {
     return frame;
 }
 
-////////////////////////////////////
 function DKFrame_CreateResize(frame) {
     var resize = DKGui_CreateElement(frame, "div", "DKFrame_resize");
     //resize.style.backgroundImage = "url(\"DKGui/resize.png\")";
@@ -279,7 +235,6 @@ function DKFrame_CreateResize(frame) {
     return resize;
 }
 
-///////////////////////////////
 function DKFrame_BringToFront() {
     //FIXME: breaks mouse events on some elements
     return;
@@ -309,11 +264,10 @@ function DKFrame_BringToFront() {
     }
 }
 
-///////////////////////////////////
-function DKFrame_MinimizeButton(id) {//TODO
+function DKFrame_MinimizeButton(id) {
+    //TODO
 }
 
-///////////////////////////////////
 function DKFrame_MaximizeButton(id) {
     var frame = byId(id).parentNode.id;
     var top = byId(frame).style.top;
@@ -343,12 +297,10 @@ function DKFrame_MaximizeButton(id) {
     }
 }
 
-////////////////////////////////
 function DKFrame_CloseButton(id) {
     DKFrame_Close(id);
 }
 
-//////////////////////////
 function DKFrame_Close(id) {
     //TODO if the Frame contains an iFrame, we need to call DKCef_CloseBrowser(n) on the associated iFrame
     if (!byId(id)) {
@@ -398,7 +350,6 @@ function DKFrame_Close(id) {
     byId(frame).parentNode.removeChild(byId(frame));
 }
 
-//////////////////////////////
 function DKFrame_StoreSize(id) {
     var top = byId(id).style.top;
     var bottom = byId(id).style.bottom;
@@ -416,7 +367,6 @@ function DKFrame_StoreSize(id) {
     sizes.push(id + ":" + top + ":" + bottom + ":" + left + ":" + right + ":" + width + ":" + height);
 }
 
-////////////////////////////////
 function DKFrame_RestoreSize(id) {
     for (var i = 0; i < sizes.length; i++) {
         if (sizes[i].indexOf(id) > -1) {
@@ -432,7 +382,6 @@ function DKFrame_RestoreSize(id) {
     }
 }
 
-///////////////////////////
 function DKFrame_CloseAll() {
     var children = DK_GetElements(document.body);
     var arry = children.split(",");
@@ -443,7 +392,6 @@ function DKFrame_CloseAll() {
     }
 }
 
-///////////////////////////
 function DKFrame_Reload(id) {
     console.log("TODO: refresh the frame data. html, javascript and css all reloaded\n");
 
