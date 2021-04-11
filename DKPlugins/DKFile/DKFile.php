@@ -197,8 +197,6 @@ if($_GET["DirectoryContents"]){
 	
 	
 	
-	
-	
 //////////////////////////////////////
 if($printFiles = $_GET["PrintFiles"]){
 	if($_SERVER["SERVER_NAME"] == "127.0.0.1"){
@@ -263,6 +261,7 @@ if($readFile = $_GET["ReadFile"]){
 
 ////////////////////////////////
 function SaveFile($file, $data){
+	echo "SaveFile($file,$data)";
 	$data=stripslashes($data); //FIXME  don't do this if server is local
 	if(file_exists($file)){ //Update the file
 		//Make sure there are changes

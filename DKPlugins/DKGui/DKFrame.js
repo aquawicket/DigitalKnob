@@ -85,12 +85,11 @@ function DKFrame_Html(id) {
 }
 */
 
-function DKFrame_SetTitle(id, title) {
-    console.warn("DKFrame_SetTitle() should use the element instead of id");
-    var frame = byId(id).parentNode.id
-    var titlebar = byId(frame).firstChild.id;
-    var titlebartext = byId(titlebar).firstChild.id;
-    byId(titlebartext).innerHTML = title;
+function DKFrame_SetTitle(element, title) {
+    var frame = element.parentNode
+    var titlebar = frame.firstChild;
+    var titlebartext = titlebar.firstChild;
+    titlebartext.innerHTML = title;
 }
 
 function DKFrame_Iframe(title, url, width, height) {

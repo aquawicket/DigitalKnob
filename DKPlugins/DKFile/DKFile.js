@@ -31,6 +31,9 @@ if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
 
 //////////////////////
 function DKFile_Init() {
+    PHP_GetAssetsPath(function(rval){
+        online_assets = rval;
+    });
 }
 
 ///////////////////////////
@@ -186,19 +189,34 @@ function DKFile_SaveFile(path, data) {
     //path = realpath+path;
 
     //console.log("DKFile_SaveFile: "+path);
-    send = online_assets + "/DKFile/DKFile.php?SaveFile=";
+    /*
+    let send = online_assets + "\\DKFile\\DKFile.php?SaveFile=";
     send += path;
     send += "&data="
     send += data;
-    var response = ajaxGetUrl(send);
-    console.log(response);
+
+    PHP_StringToFile(path, data, "OVERWRITE", function(rVal) {
+        console.log("characters written: " + rVal);
+    });
+    */
+
+    /*
+    DK_SendRequest(send, function DK_SendRequestCallback(success, url, data){
+        console.log("DK_SendRequestCallback(): success = "+success);
+        //console.log("DK_SendRequestCallback(): url = "+url);
+        console.log("DK_SendRequestCallback(): data = "+data);
+    });
+    */
+
+    //var response = ajaxGetUrl(send);
+    //console.log(response);
 
     //FIXME
     //if(response.indexOf("console.error") !== -1){
     //	return false;
     //}
-    console.log("Saved file: " + path);
-    return true;
+    //console.log("Saved file: " + path);
+    //return true;
 }
 
 ///////////////////////////////////////////////////////////
@@ -345,13 +363,17 @@ if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
                 path = absolutepath + path;
             }
         }
-
+        
+        /*
         data = replace(data, ": ", ":");
         data = replace(data, "; ", ";");
         data = replace(data, ", ", ",");
         data = replace(data, " ", "%20");
         data = replace(data, "'", "%27");
         data = replace(data, "\n", "%0A");
+        */
+
+        data = encodeURIComponent(data).replace(";", "%3B");
         //console.log("StringToFile("+data+", "+path+")");
         DKFile_SaveFile(path, data);
     }

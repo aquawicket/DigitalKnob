@@ -13,7 +13,7 @@ window.onerror = function(msg, url, lineNo, columnNo, error) {
 //https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
 
 window.onunhandledrejection = function(event) {
-    dkconsole.error(event);
+    console.error(event);
     return false;
 }
 

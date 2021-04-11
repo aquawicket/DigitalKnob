@@ -60,7 +60,7 @@ function DKMessageBox_Confirm(message, callback)
 {
 	//DKMessageBox_Init();
 	DK_Create("DKGui/DKMessageBox.html");
-	DKFrame_Html("DKGui/DKMessageBox.html");
+	DKFrame_Create(byId("DKGui/DKMessageBox.html"));
 	byId("DKMessageBoxOk").addEventListener("click", DKMessageBox_OnEvent);
 	byId("DKMessageBoxCancel").addEventListener("click", DKMessageBox_OnEvent);
 

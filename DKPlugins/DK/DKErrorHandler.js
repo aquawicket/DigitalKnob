@@ -67,7 +67,6 @@ function DKErrorHandler_Create() {
             handleAsync(this);
             return sendx.apply(this, arguments);
         }
-        ;
     }
 
     /**

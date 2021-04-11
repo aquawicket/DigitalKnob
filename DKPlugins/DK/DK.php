@@ -5,8 +5,8 @@ header('Access-Control-Allow-Origin: *');
 function DKINFO($string){
 	echo $string;
 }
-if($_GET["x"]){
-	$json = urldecode($_GET["x"]);
+if($_REQUEST["x"]){
+	$json = urldecode($_REQUEST["x"]);
 	$obj = json_decode($json);
     $func = $obj->func;
     $args = $obj->args;
@@ -18,6 +18,8 @@ if($_GET["x"]){
         }
     }
     call_user_func_array($func,$values);
+
+    //echo "\n_GET[x] json = \n".$json."\n\n";
 
     /*
     //Show the function prototype
@@ -108,7 +110,7 @@ function GetAssetsPath()
     	echo "assetsPath is an invalid directory \n";
     	return false;
     }
-    echo "assetsPath = ".$assetsPath."\n";
+    echo $assetsPath;
     return $assetsPath;
 }
 

@@ -20,6 +20,9 @@ function PHP_PushDKAssets(callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 
+function PHP_GetAssetsPath(callback){
+    DKPhp_CallPhpFunc(arguments);
+}
 //function DKPhp_noCB(rVal) {}
 
 function DKPhp_CallPhpFunc(args) {
@@ -44,8 +47,13 @@ function DKPhp_CallPhpFunc(args) {
     if(location.protocol == "file:"){
         path = "http://127.0.0.1:8000/"
     }
-    const data = "x=" + encodeURIComponent(JSON.stringify(jsonData));
+
+    const str = JSON.stringify(jsonData);
+    //console.log("DKPhp_CallPhpFunc(): str = "+str);
+    const data = "x=" + encodeURIComponent(str);
+    //console.log("DKPhp_CallPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
+    //console.log("DKPhp_CallPhpFunc(): url = "+url);
     DK_SendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
