@@ -26,7 +26,7 @@ if($_REQUEST["x"]){
         }
     }
 
-    $result = call_user_func_array($func,$values);
+    echo call_user_func_array($func,$values);
     if(!empty($result)){
 
     	print $result;
