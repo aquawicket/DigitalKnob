@@ -91,7 +91,7 @@ window.addEventListener('error', function(e) {
 
     /*
     // Example: log errors as visual output into the host page.
-    // Note: you probably donâ€™t want to show such errors to users, or
+    // Note: you probably dont want to show such errors to users, or
     //       have the errors get indexed by Googlebot; however, it may
     //       be a useful feature while actively debugging the page.
     var DOM_ID = 'rendering-debug-pre';
@@ -1320,11 +1320,12 @@ function DK_SendRequest(url, callback, post) {
     xhr.onreadystatechange = function(event) {
         //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         if (xhr.readyState === 4) {
-            if (xhr.status >= 200 && xhr.status < 400) {
+            if (xhr.status >= 200 && xhr.status < 400 || !xhr.status) {
                 callback(true, url, xhr.responseText);
             } else {
                 //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
-                callback(false, url, event.type);
+                callback(false, url, xhr.responseText);
+                console.error(xhr.responseText);
                 return false;
             }
         }
@@ -1336,4 +1337,17 @@ function DK_SendRequest(url, callback, post) {
     }
 
     xhr.send();
+}
+
+function CheckForUNICODE(str) {
+    //PHP_FileToString(online_assets + "/DK/DK.js", function(str) {
+        for (var i = 0, n = str.length; i < n; i++) {
+            if (str.charCodeAt(i) > 255) {
+                console.warn("Found UNICODE character at " + i);
+                console.log(0, str.substring(i));
+                return true;
+            }
+        }
+        return false;
+    //});
 }

@@ -1,5 +1,9 @@
 "use strict";
 
+function PHP_Debug_Func(callback){
+    DKPhp_CallPhpFunc(arguments);
+}
+
 function PHP_GetRemoteAddress(callback) {
     DKPhp_CallPhpFunc(arguments);
 }

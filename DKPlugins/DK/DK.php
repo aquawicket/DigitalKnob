@@ -1,10 +1,18 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+header("Content-Type: application/json; charset=UTF-8");
+
+function ERROR($string){
+	header('HTTP/1.1 500 Internal Server Error');
+    header('Content-Type: application/json; charset=UTF-8');
+    die($string);
+}
 
 ////////////////////////
 function DKINFO($string){
 	return $string;
 }
+
 if($_REQUEST["x"]){
 	$json = urldecode($_REQUEST["x"]);
 	$obj = json_decode($json);
@@ -17,7 +25,13 @@ if($_REQUEST["x"]){
             $values[$i] = $value;
         }
     }
-    echo call_user_func_array($func,$values);
+
+    $result = call_user_func_array($func,$values);
+    if(!empty($result)){
+
+    	print $result;
+    	//print json_encode($result);
+    }
 
     //echo "\n_REQUEST[x] json = \n".$json."\n\n";
 
@@ -56,17 +70,28 @@ if($_REQUEST["x"]){
     */
 }
 
+function Debug_Func($var1, $var2, $var3)
+{
+	if(1){
+		ERROR("An Error occured in Debug_Func!");
+	    return false;
+	}
+	return $var1;
+}
+
 //https://www.php.net/manual/en/function.file-put-contents.php
 function StringToFile($file, $data, $mode)
-{    
+{   
     if($mode == "FILE_APPEND"){
-        if(file_put_contents($file, $data, FILE_APPEND)){
-        	return "file saved\n";
+        if(!file_put_contents($file, $data, FILE_APPEND)){
+        	ERROR("StringToFile(): failed\n");
+        	return false;
         }
     }
     else{
-    	if(file_put_contents($file, $data)){
-    		return "file saved\n";
+    	if(!file_put_contents($file, $data)){
+    		ERROR("StringToFile(): failed\n");
+    		return false;
     	}
     }
 }
@@ -75,6 +100,10 @@ function StringToFile($file, $data, $mode)
 function FileToString($file)
 {    
     $str = file_get_contents($file);
+    if(!$str){
+    	ERROR("FileToString() failed");
+    	return false;
+    }
     return $str;
 }
 
@@ -114,11 +143,11 @@ function GetAssetsPath()
 {
     $assetsPath = dirname(__DIR__);
     if(basename($assetsPath) != "assets"){
-        echo "assetsPath does not contain an assets folder \n";
+        ERROR("assetsPath does not contain an assets folder \n");
         return false;
     }
     if(!is_dir($assetsPath)){
-    	echo "assetsPath is an invalid directory \n";
+    	ERROR("assetsPath is an invalid directory \n");
     	return false;
     }
     return $assetsPath;
@@ -134,7 +163,7 @@ function GetDKPath()
         	return $dkPath;
         }
     }
-    echo "could not find digitalknob path \n";
+    ERROR("could not find digitalknob path \n");
     return false;
 }
 
@@ -149,7 +178,7 @@ function GetDKPluginsPath()
         	return $dkPluginsPath;
         }
     }
-    echo "cound not find DKPlugins path";
+    ERROR("cound not find DKPlugins path");
     return false;
 }
 
@@ -158,20 +187,20 @@ function PushDKAssets()
 	//Fist get all fot he paths
 	$assetsPath = GetAssetsPath();
 	if(!$assetsPath){
-		echo "assetsPath is invalid";
+		ERROR("assetsPath is invalid");
 		return false;
 	}
 	
     $dkPath = GetDKPath();
     if(!$dkPath){
-		echo "dkPath is invalid";
+		ERROR("dkPath is invalid");
 		return false;
     }
     echo "dkPath = ".$dkPath."\n";
     
     $dkPluginsPath = $dkPath."\DK\DKPlugins";
     if(!is_dir($dkPluginsPath)){
-    	echo "dkPluginsPath is invalid";
+    	ERROR("dkPluginsPath is invalid");
     }
     echo "dkPluginsPath = ".$dkPluginsPath."\n";
 
