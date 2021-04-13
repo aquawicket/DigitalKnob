@@ -16,6 +16,10 @@ function PHP_StringToFile(file, data, mode, callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 
+function PHP_FileToString(file, data, callback) {
+    DKPhp_CallPhpFunc(arguments);
+}
+
 function PHP_PushDKAssets(callback) {
     DKPhp_CallPhpFunc(arguments);
 }
@@ -42,24 +46,21 @@ function DKPhp_CallPhpFunc(args) {
         newArg[typeof (args[n])] = args[n];
         jsonData.args.push(newArg);
     }
-    //dkconsole.log(JSON.stringify(jsonData));
     let path = "";
     if(location.protocol == "file:"){
         path = "http://127.0.0.1:8000/"
     }
-
     const str = JSON.stringify(jsonData);
     //console.log("DKPhp_CallPhpFunc(): str = "+str);
     const data = "x=" + encodeURIComponent(str);
     //console.log("DKPhp_CallPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
-    //console.log("DKPhp_CallPhpFunc(): url = "+url);
     DK_SendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
         } else {//dkconsole.log(rVal);
         }
-    });
+    }, "POST");
 }
 
 /*

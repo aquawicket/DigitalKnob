@@ -1104,9 +1104,16 @@ function DK_GetValue(variable) {
     return false;
 }
 
+function DK_PreloadFile(url) {
+    var file = new Object();
+    file.src = url;
+    return file;
+}
+
 function DK_PreloadImage(url) {
     var img = new Image();
     img.src = url;
+    return img;
 }
 
 function DK_SaveToLocalStorage(name, string) {
@@ -1248,7 +1255,7 @@ function ajaxGetUrl(url) {
 }
 
 
-function DK_SendRequest(url, callback) {
+function DK_SendRequest(url, callback, post) {
     if (!url) {
         console.error("url invalid");
     }
@@ -1281,7 +1288,12 @@ function DK_SendRequest(url, callback) {
         return false;
     }
 
-    xhr.open("GET", url, true);
+	if(!post){
+		xhr.open("GET", url, true);
+	}else{
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	}
     xhr.timeout = 20000;
 
     //Possible error codes

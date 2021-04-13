@@ -99,6 +99,10 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     dkconsoleFrame.style.borderWidth = "1rem";
     dkconsoleFrame.style.boxSizing = "border-box";
     dkconsoleFrame.style.borderTopWidth = "5rem";
+    dkconsoleFrame.oncontextmenu = function dkconsoleFrame_oncontextmenu(event){
+        event.preventDefault();
+        DKMenu_CreateInstance();
+    };
     parent.appendChild(dkconsoleFrame);
 
     dkconsole = document.createElement("div");
