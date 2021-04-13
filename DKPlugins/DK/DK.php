@@ -26,10 +26,9 @@ if($_REQUEST["x"]){
         }
     }
 
-    echo call_user_func_array($func,$values);
+    $result = call_user_func_array($func,$values);
     if(!empty($result)){
-
-    	print $result;
+    	echo $result;
     	//print json_encode($result);
     }
 
@@ -72,11 +71,11 @@ if($_REQUEST["x"]){
 
 function Debug_Func($var1, $var2, $var3)
 {
-	if(1){
+	if(0){
 		ERROR("An Error occured in Debug_Func!");
 	    return false;
 	}
-	return $var1;
+	return $var2;
 }
 
 //https://www.php.net/manual/en/function.file-put-contents.php
