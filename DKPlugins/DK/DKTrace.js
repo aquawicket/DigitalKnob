@@ -13,10 +13,11 @@ window.onerror = function(msg, url, lineNo, columnNo, err) {
 window.onunhandledrejection = function(event) {
     return error(event);
 }
-
+	
 function DKTrace_EditFile(file){
-    DK_Create("DKNotepad/DKNotepad.js", function DKTrace_EditFileCallback(file){
+    DK_Create("DKNotepad/DKNotepad.js", function DKTrace_EditFileCallback(){
         DKFrame_Create("DKNotepad/DKNotepad.html");
+        DKNotepad_Open(file);
     });
 }
 

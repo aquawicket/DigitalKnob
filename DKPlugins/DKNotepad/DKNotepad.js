@@ -4,18 +4,20 @@ var currentFile;
 function DKNotepad_Init() {
     //console.warn("DKNotepad_Init()");
     DK_Create("DKNotepad/DKNotepad.html", function() {
-    DK_Create("DKNotepad/DKNotepadShortcuts.js");//, function() {
-    DK_Create("DKNotepad/DKNotepad.css");//, function() {
-                //byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
-                byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
-                byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
-                byId("DKNotepad_Text").addEventListener("contextmenu", DKNotepad_OnEvent);
-                byId("DKNotepad_File").addEventListener("click", DKNotepad_OnEvent);
-                byId("DKNotepad_Edit").addEventListener("click", DKNotepad_OnEvent);
-                byId("DKNotepad_Format").addEventListener("click", DKNotepad_OnEvent);
-                byId("DKNotepad_View").addEventListener("click", DKNotepad_OnEvent);
-                byId("DKNotepad_Help").addEventListener("click", DKNotepad_OnEvent);
-           // });
+        DK_Create("DKNotepad/DKNotepadShortcuts.js");
+        //, function() {
+        DK_Create("DKNotepad/DKNotepad.css");
+        //, function() {
+        //byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
+        byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
+        byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
+        byId("DKNotepad_Text").addEventListener("contextmenu", DKNotepad_OnEvent);
+        byId("DKNotepad_File").addEventListener("click", DKNotepad_OnEvent);
+        byId("DKNotepad_Edit").addEventListener("click", DKNotepad_OnEvent);
+        byId("DKNotepad_Format").addEventListener("click", DKNotepad_OnEvent);
+        byId("DKNotepad_View").addEventListener("click", DKNotepad_OnEvent);
+        byId("DKNotepad_Help").addEventListener("click", DKNotepad_OnEvent);
+        // });
         //});
     });
 }
@@ -69,12 +71,12 @@ function DKNotepad_OnEvent(event) {
 
 /////////////////////////////
 function DKNotepad_Open(file) {
-    //console.log("DKNotepad_Open("+file+")");
     //TODO - only open files under 5mb
     //TODO - set the frame title with the filename
     currentFile = file;
-    var text = DKFile_FileToString(file);
-    byId("DKNotepad_Text").value = text;
+    PHP_FileToString(currentFile, function(str) {
+        byId("DKNotepad_Text").value = str;
+    });
 }
 
 /////////////////////////////
