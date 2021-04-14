@@ -98,6 +98,7 @@ function DKJson_FindPartialMatch(obj, key, value) {
 */
 
 function DKJson_FindPartialMatch(obj, key, value) {
+    //console.log(obj.length);
     let foundObj;
     JSON.stringify(obj, (_,nestedValue)=>{
         if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {

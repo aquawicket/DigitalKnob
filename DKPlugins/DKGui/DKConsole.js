@@ -100,7 +100,13 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
     dkconsoleFrame.style.borderTopWidth = "5rem";
     dkconsoleFrame.oncontextmenu = function dkconsoleFrame_oncontextmenu(event){
         event.preventDefault();
-        DKMenu_CreateInstance();
+        const menu = DKMenu_CreateInstance();
+        DKMenu_AddItem(menu, "Clear", function DKMenu_Close(){
+            dkconsole.innerHTML = "";
+        });
+        DKMenu_AddItem(menu, "Cancel", function DKMenu_Cancel(){
+            console.log("cancel");
+        });
     };
     parent.appendChild(dkconsoleFrame);
 
