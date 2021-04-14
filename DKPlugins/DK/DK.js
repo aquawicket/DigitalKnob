@@ -1,6 +1,5 @@
 "use strict";
 
-console.log("loading DK/DK.js");
 console.log("*** DigitalKnob ***");
 console.log("Browser = " + DK_GetBrowser());
 console.log("JSEngine = " + DK_GetJSEngine());
@@ -15,18 +14,12 @@ var LOG_SHOW = "";
 var LOG_HIDE = "";
 //comma seperated
 var LOG_LINES = false;
-
 var DK_ERROR = 1;
-//Red
 var DK_WARN = 2;
-//Yellow
 var DK_INFO = 3;
-//White
 var DK_DEBUG = 4;
-//Blue
 var DK_SHOW = 5;
 var DK_HIDE = 6;
-
 //var events = [];
 
 function warn(str) {
@@ -42,17 +35,15 @@ function error(str) {
 var byId = function(id) {
     return document.getElementById(id);
 }
-//shortcut alias
 
+//These are use for rem units and zoom level. They are already in DK.css
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
-//document.body.style.fontSize = "1.0px";
 
-//document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
-//document.documentElement.id = "html";
-//document.getElementsByTagName('head')[0].id = "head";
-//document.body.id = "body";
-//document.body.style.cursor = "default";
+//prevent screen highlighting while dragging
+document.onselectstart = function() {
+    return false;
+}
 
 // Dummy functions only implemented in c++
 //function DK_DoFrame(){ /*console.warn("DK_ClearEvents(): not available for "+DK_GetBrowser());*/ }
@@ -91,43 +82,6 @@ function myTimer() {
 }
 */
 
-/*
-//This function is used to debug googlebot crawling
-/////////////////////////////////////////////
-window.addEventListener('error', function(e) {
-    var errorText = [e.message + '\n', 'URL: ' + e.filename, 'Line: ' + e.lineno + ', Column: ' + e.colno, 'Stack: ' + (e.error && e.error.stack || '(no stack trace)')].join('\n');
-    console.error(errorText);
-
-    /*
-    // Example: log errors as visual output into the host page.
-    // Note: you probably dont want to show such errors to users, or
-    //       have the errors get indexed by Googlebot; however, it may
-    //       be a useful feature while actively debugging the page.
-    var DOM_ID = 'rendering-debug-pre';
-    if(!byId(DOM_ID)){
-        var log = document.createElement('pre');
-        log.id = DOM_ID;
-        log.style.whiteSpace = 'pre-wrap';
-        log.textContent = errorText;
-        if (!document.body) document.body = document.createElement('body');
-        document.body.insertBefore(log, document.body.firstChild);
-    } else {
-        byId(DOM_ID).textContent += '\n\n' + errorText;
-    }
-	(/
-	
-    // Example: log the error to remote service.
-    // Note: you can log errors to a remote service, to understand
-    //       and monitor the types of errors encountered by regular users,
-    //       Googlebot, and other crawlers.
-    //var client = new XMLHttpRequest();
-    //client.open('POST', 'https://example.com/logError');
-    //client.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
-    //client.send(errorText);
-
-});
-*/
-
 ///////////////////////////////////////////////////
 document.addEventListener("mousemove", function(e) {
     if (DK_IE()) {
@@ -159,10 +113,7 @@ function DKERROR(string){ Log(string, DK_ERROR); }
 function DKWARN(string){ Log(string, DK_WARN); }
 function DKINFO(string){ Log(string, DK_INFO); }
 function DKDEBUG(string){ Log(string, DK_DEBUG); }
-*/
 
-/*
-/////////////////////////
 function Log(string, lvl) {
     if (!lvl) {
         lvl = DK_INFO;
@@ -275,7 +226,6 @@ function Log(string, lvl) {
 
 //////////////////////////////////
 function DK_Create(data, callback) {
-    //console.log("DK.js:DK_Create("+data+")");	
     var arry = data.split(",");
     if (arry[0].indexOf(".html") > -1) {
         arry.splice(0, 0, "DKHtml");
@@ -284,7 +234,6 @@ function DK_Create(data, callback) {
     } else if (arry[0].indexOf(".css") > -1) {
         arry.splice(0, 0, "DKCss");
     } else {
-        //console.log("DK_Create("+data+"): requesting c++ plugin");
         if (DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML") {
             CPP_DKDuktape_Create(data);
         }
@@ -391,58 +340,41 @@ function DK_Close(data) {
 
 ////////////////////////
 function DK_LoadCss(url) {
-    //console.log("DK.js:DK_LoadCss("+url+")");
-    if (!url) {
+    if (!url)
         return error("DK.js: DK_LoadCss(" + url + "): url invalid");
-    }
 
-    if (DK_GetObjects().indexOf(url) !== -1) {
-        console.warn("DK.js: DK_LoadCss(" + url + "): url already loaded");
-        return false;
-    }
+    if (DK_GetObjects().indexOf(url) !== -1)
+        return warn("DK.js: DK_LoadCss(" + url + "): url already loaded");
 
+    var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
-    //console.log("link = "+link.POINTER);
     link.setAttribute('href', url);
     link.id = url;
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('type', 'text/css');
-    var elements = document.getElementsByTagName('head');
-
-    //console.log("DK_LoadCss("+url+"): link = "+link.POINTER);
-    //console.log("DK_LoadCss("+url+"): link = "+link);
-    //console.log("DK_LoadCss("+url+"): elements[0] = "+elements[0]);
-    //console.log("DK.js:DK_LoadCss("+url+") appending link");
-    elements[0].appendChild(link);
-
+    head.appendChild(link);
     return true;
 }
 
 /////////////////////////////////
 function DK_LoadJs(url, callback) {
-    //console.warn("DK_LoadJs("+url+")");
-    if (!url) {
+    if (!url) 
         return error("DK.js: DK_LoadJs(" + url + "): url invalid");
-    }
 
     if (DK_GetObjects().indexOf(url) !== -1) {
-        console.warn("DK.js: DK_LoadJs(" + url + "): url already loaded");
-        callback && callback(false);
-        return false;
+    	callback && callback(false);
+        return warn(url+" already loaded");
     }
 
     //TEST: already loaded, remove it first
-    if (byId(url)) {
+    if (byId(url))
         byId(url).parentNode.removeChild(byId(url));
-    }
 
     var file = url.substring(url.lastIndexOf("/") + 1);
 
-    // Call the js init function
-    if (!file) {
-        return error("DK.js: DK_LoadJs(" + url + "): file invalid");
-    }
-
+    if (!file) 
+        return error("file invalid");
+    
     // Adding the script tag to the head as suggested before
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -453,15 +385,8 @@ function DK_LoadJs(url, callback) {
     script.setAttribute('async', true);
     script.setAttribute('src', url);
 
-    //console.log("script.type = "+script.type);
-
-    //if(typeof script === "undefined"){ 
-    //	return error("Cannot load "+url);
-    //}
-
     var init = file.replace(".js", "");
     init += "_Init";
-
     head.appendChild(script);
 
     ////////// CALLBACKS
@@ -469,82 +394,62 @@ function DK_LoadJs(url, callback) {
     script.onload = script.onreadystatechange = function() {
         //FIXME - DigitalKnob can't trigger onload yet.
         if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-            //console.log("Loaded: "+url);
             var func = window[init];
             //Plugin_Init()    
             if (typeof func === 'function') {
-                //console.log("Calling: "+init);
                 func();
-                //Init
             } else {//console.warn(init+" is not defined");
             }
-
             done = true;
             callback && callback(true);
         }
     }
     ;
-    script.onerror = function() {
-        return error("DK.js: DK_LoadJs(" + url + "): Could not load file");
+    script.onerror = function(){ 
+        return error("Could not load "+url);
     }
-    ////////////////////////
-
+ 
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
     if (DK_GetJSEngine() === "Duktape") {
-        //console.log("Loaded: "+url);
         var func = init;
         //Plugin_Init() 
         if (eval("typeof " + func) === "function") {
-            //console.log("Calling: "+init);
             eval(func)();
-            //Init
         } else {
             console.warn(init + " is not defined");
         }
         callback && callback(true);
     }
-
     return true;
 }
 
 /////////////////////////////////
 function DK_LoadHtml(url, parent) {
-    //console.warn("DK.js:DK_LoadHtml("+url+","+parent+")");
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
-    if (!url) {
-        return error("DK.js: DK_LoadHtml(" + url + "): url invalid");
-    }
+    if (!url)
+        return error("url is invalid");
 
-    if (url.indexOf(".html") === -1) {
-        return error("DK.js: DK_LoadHtml(" + url + ", parent): url is not a valid .html file");
-    }
+    if (url.indexOf(".html") === -1) 
+        return error("url is not a valid .html file");
 
-    if (url === ".html") {
+    if (url === ".html")
         url = "New.html";
-    }
 
-    if (DK_GetObjects().indexOf(url) !== -1) {
-        console.warn("DK.js: DK_LoadHtml(" + url + ", parent): url already loaded");
-        return false;
-    }
+    if (DK_GetObjects().indexOf(url) !== -1)
+        return warn("DK.js: DK_LoadHtml(" + url + ", parent): url already loaded");
 
     var string = DK_FileToString(url);
-    //console.warn("url = "+url);
-    //console.warn("string = "+string);
+
     //Create an empty widget
     if (!string || string === "ERROR") {
         string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
     }
 
     var temp = document.createElement("temp");
-    //console.log("temp.id = "+temp.id);
     temp.innerHTML = string;
-    //console.log("temp.innerHTML = "+temp.innerHTML);
-    //console.log("temp.id = "+temp.id);
     var nodes = temp.childNodes;
-    if (!nodes) {
+    if (!nodes) 
         return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
-    }
     if (nodes.length > 1) {
         for (var i = 0; i < nodes.length; i++) {
             console.warn("node[" + i + "]: " + nodes[i]);
@@ -583,9 +488,9 @@ function DK_LoadHtml(url, parent) {
 //////////////////////////////
 function DK_CheckFileSupport() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
-        console.log("DK.js: File support OK");
+        console.log("File support OK");
     } else {
-        console.warn("DK.js: The File APIs are not fully supported in this browser");
+        console.warn("The File APIs are not fully supported in this browser");
     }
 }
 
@@ -663,6 +568,8 @@ if (typeof String.prototype.trim !== 'function') {
     }
 }
 
+/*
+This is a misleading function.
 /////////////////////
 function DK_IsLocal() {
     switch (window.location.protocol) {
@@ -679,35 +586,19 @@ function DK_IsLocal() {
         //some other protocol
     }
 }
+*/
 
+/*
 /////////////////////
 function DK_GetTime() {
-    var d = new Date();
-    var hour = d.getHours();
-    var minute = d.getMinutes();
-    minute = minute > 9 ? minute : '0' + minute;
-    //pad 0
-    var time = hour;
-    time += ":";
-    time += minute;
-    if (hour > 11) {
-        time += " PM";
-    } else {
-        time += " AM";
-    }
-    return time;
+    DKClock_GetStandardTime()
 }
 
 /////////////////////
 function DK_GetDate() {
-    var d = new Date();
-    var date = d.getMonth() + 1;
-    date += "/";
-    date += d.getDate();
-    date += "/";
-    date += d.getFullYear();
-    return date;
+    DKClock_GetDate()
 }
+*/
 
 /*
 /////////////////////
@@ -769,7 +660,7 @@ function DK_GetObjects() {
         for (var i = divs.length; i; ) {
             var div = divs[--i];
             if (!div.id) {
-                console.warn(div + ": html object has no id");
+                //console.warn(div + ": html object has no id");
                 continue;
             }
             if (div.id.indexOf(".html") > -1) {
@@ -1200,7 +1091,7 @@ function AjaxGet(url, output) {
                 //console.log("AJAX RETURN: "+output.value);
                 return true;
             } else {
-            	console.warn("status: " + request.status);
+                console.warn("status: " + request.status);
                 return error("AJAX ERROR: " + url + " " + request.statusText);
             }
         }
@@ -1318,7 +1209,7 @@ function DK_SendRequest(url, callback, post) {
         }
     }
     xhr.ontimeout = function(event) {
-    	callback(false, url, event.type);
+        callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         //return error("timeout");
         return false;

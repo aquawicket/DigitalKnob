@@ -2,12 +2,9 @@ var currentFile;
 
 /////////////////////////
 function DKNotepad_Init() {
-    //console.warn("DKNotepad_Init()");
     DK_Create("DKNotepad/DKNotepad.html", function() {
         DK_Create("DKNotepad/DKNotepadShortcuts.js");
-        //, function() {
         DK_Create("DKNotepad/DKNotepad.css");
-        //, function() {
         //byId("DKNotepad.html").addEventListener("SetFile", DKNotepad_OnEvent);
         byId("DKNotepad/DKNotepad.html").addEventListener("OpenFile", DKNotepad_OnEvent);
         byId("DKNotepad/DKNotepad.html").addEventListener("SaveFile", DKNotepad_OnEvent);
@@ -17,8 +14,6 @@ function DKNotepad_Init() {
         byId("DKNotepad_Format").addEventListener("click", DKNotepad_OnEvent);
         byId("DKNotepad_View").addEventListener("click", DKNotepad_OnEvent);
         byId("DKNotepad_Help").addEventListener("click", DKNotepad_OnEvent);
-        // });
-        //});
     });
 }
 
