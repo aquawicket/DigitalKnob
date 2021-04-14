@@ -27,8 +27,17 @@ var DK_DEBUG = 4;
 var DK_SHOW = 5;
 var DK_HIDE = 6;
 
-
 //var events = [];
+
+function warn(str) {
+    console.warn(str);
+    return false;
+}
+
+function error(str) {
+    console.error(str);
+    return false;
+}
 
 var byId = function(id) {
     return document.getElementById(id);
@@ -284,16 +293,15 @@ function DK_Create(data, callback) {
         if (!DK_LoadJs(arry[1], function(rval) {
             if (callback) {
                 callback(rval);
-            } else {
-                //console.error("DK_Create(" + data + "): does not have a callback");
+            } else {//console.error("DK_Create(" + data + "): does not have a callback");
             }
         })) {
-            return false;
+            return error("DK_LoadJs failed");
         }
     }
     if (arry[0] === "DKHtml") {
         if (!DK_LoadHtml(arry[1], arry[2])) {
-            return false;
+            return error("DK_LoadHtml failed");
         }
         if (typeof callback === "function") {
             callback();
@@ -302,7 +310,7 @@ function DK_Create(data, callback) {
     }
     if (arry[0] === "DKCss") {
         if (!DK_LoadCss(arry[1])) {
-            return false;
+            return error("DK_LoadCss failed");
         }
         if (callback) {
             callback();
@@ -316,8 +324,7 @@ function DK_Create(data, callback) {
 function DK_Close(data) {
     console.log("DK_Close(" + data + ")");
     if (!data) {
-        console.error("DK_Close(" + data + "): data empty");
-        return false;
+        return error("DK_Close(" + data + "): data empty");
     }
 
     var arry = data.split(",");
@@ -331,8 +338,7 @@ function DK_Close(data) {
 
     var file = DKFile_GetFilename(arry[1]);
     if (!file) {
-        console.error("DK_Close(" + data + "): file invalid");
-        return false;
+        return error("DK_Close(" + data + "): file invalid");
     }
 
     if (arry[0] === "DKJavascript") {
@@ -356,7 +362,7 @@ function DK_Close(data) {
         var script = byId(arry[1]);
         if (!script) {
             //console.warn("DK_Close("+data+"): "+arry[1]+" does not exist");
-            return false;
+            return error("script invalid");
         }
         script.parentNode.removeChild(script);
         //console.log("Closed "+arry[1]);
@@ -365,7 +371,7 @@ function DK_Close(data) {
         var element = byId(arry[1]);
         if (!element) {
             //console.warn("DK_Close("+data+"): "+file+" does not exist");
-            return false;
+            return error("element invalid");
         }
         element.parentNode.removeChild(element);
         //console.log("Closed "+arry[1]);
@@ -374,7 +380,7 @@ function DK_Close(data) {
         var css = byId(arry[1]);
         if (!css) {
             //console.error("DK_Close("+data+"): "+arry[1]+" does not exist");
-            return false;
+            return error("css invalid");
         }
         css.parentNode.removeChild(css);
         //console.log("Closed "+arry[1]);
@@ -387,8 +393,7 @@ function DK_Close(data) {
 function DK_LoadCss(url) {
     //console.log("DK.js:DK_LoadCss("+url+")");
     if (!url) {
-        console.error("DK.js: DK_LoadCss(" + url + "): url invalid");
-        return false;
+        return error("DK.js: DK_LoadCss(" + url + "): url invalid");
     }
 
     if (DK_GetObjects().indexOf(url) !== -1) {
@@ -417,8 +422,7 @@ function DK_LoadCss(url) {
 function DK_LoadJs(url, callback) {
     //console.warn("DK_LoadJs("+url+")");
     if (!url) {
-        console.error("DK.js: DK_LoadJs(" + url + "): url invalid");
-        return false;
+        return error("DK.js: DK_LoadJs(" + url + "): url invalid");
     }
 
     if (DK_GetObjects().indexOf(url) !== -1) {
@@ -436,8 +440,7 @@ function DK_LoadJs(url, callback) {
 
     // Call the js init function
     if (!file) {
-        console.error("DK.js: DK_LoadJs(" + url + "): file invalid");
-        return false;
+        return error("DK.js: DK_LoadJs(" + url + "): file invalid");
     }
 
     // Adding the script tag to the head as suggested before
@@ -453,8 +456,7 @@ function DK_LoadJs(url, callback) {
     //console.log("script.type = "+script.type);
 
     //if(typeof script === "undefined"){ 
-    //	console.error("Cannot load "+url);
-    //	return false; 
+    //	return error("Cannot load "+url);
     //}
 
     var init = file.replace(".js", "");
@@ -483,7 +485,7 @@ function DK_LoadJs(url, callback) {
     }
     ;
     script.onerror = function() {
-        console.error("DK.js: DK_LoadJs(" + url + "): Could not load file");
+        return error("DK.js: DK_LoadJs(" + url + "): Could not load file");
     }
     ////////////////////////
 
@@ -510,13 +512,11 @@ function DK_LoadHtml(url, parent) {
     //console.warn("DK.js:DK_LoadHtml("+url+","+parent+")");
     //TODO: the id of the root element in the html file should be the file path..   I.E. MyPlugin/MyPlugin.html
     if (!url) {
-        console.error("DK.js: DK_LoadHtml(" + url + "): url invalid");
-        return false;
+        return error("DK.js: DK_LoadHtml(" + url + "): url invalid");
     }
 
     if (url.indexOf(".html") === -1) {
-        console.error("DK.js: DK_LoadHtml(" + url + ", parent): url is not a valid .html file");
-        return false;
+        return error("DK.js: DK_LoadHtml(" + url + ", parent): url is not a valid .html file");
     }
 
     if (url === ".html") {
@@ -543,8 +543,7 @@ function DK_LoadHtml(url, parent) {
     //console.log("temp.id = "+temp.id);
     var nodes = temp.childNodes;
     if (!nodes) {
-        console.error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
-        return false;
+        return error("DK.js: DK_LoadHtml(" + url + ", " + parent + "): Could not get nodes from file url");
     }
     if (nodes.length > 1) {
         for (var i = 0; i < nodes.length; i++) {
@@ -589,7 +588,6 @@ function DK_CheckFileSupport() {
         console.warn("DK.js: The File APIs are not fully supported in this browser");
     }
 }
-
 
 /*
 //////////////////////////////
@@ -722,8 +720,7 @@ function DK_Refresh()
 */
 
 ///////////////////////////
-function DK_Available(name)
-{
+function DK_Available(name) {
     //FIXME: This function needs to be investigated
     if (name === "DKWidget") {
         return true;
@@ -743,9 +740,9 @@ function DK_GetObjects() {
     var elements = document.getElementsByTagName("script");
     for (var i = 0; elements && i < elements.length; i++) {
         if (!elements[i].id) {
-        	if(elements[i].src){
-        		elements[i].id = elements[i].src;
-        	}
+            if (elements[i].src) {
+                elements[i].id = elements[i].src;
+            }
             //console.warn(elements[i].src+": script object has no id");
             //continue;
         }
@@ -931,9 +928,6 @@ function DK_GetAvailableId(id) {
     //console.log("GetAvailableId("+id+")-> "+out+"\n");
 }
 
-
-
-
 // *** UNKNOWN *please test* *** //
 
 //////////////////////////////////
@@ -990,8 +984,7 @@ function DK_GetValue(variable) {
             return ele.value;
         }
 
-        console.error("DK_GetValue(" + variable + "): Could not get value\n");
-        return false;
+        return error("DK_GetValue(" + variable + "): Could not get value\n");
     }
 
     if (typeof variable === "object") {
@@ -1100,8 +1093,7 @@ function DK_GetValue(variable) {
         }
     }
 
-    console.error("ERROR: DK_GetValue(): unknown type\n");
-    return false;
+    return error("ERROR: DK_GetValue(): unknown type\n");
 }
 
 function DK_PreloadFile(url) {
@@ -1117,16 +1109,17 @@ function DK_PreloadImage(url) {
 }
 
 function DK_SaveToLocalStorage(name, string) {
-    if (!name) {
-        return;
-    }
+    if (!name)
+        return error("name invalid");
+    if (!string)
+        return error("string invalid");
+
     localStorage.setItem(name, string);
 }
 
 function DK_LoadFromLocalStorage(name) {
-    if (!name) {
-        return;
-    }
+    if (!name)
+        return error("name invalid");
     return localStorage.getItem(name);
 }
 
@@ -1155,7 +1148,6 @@ function DK_IsOnline() {
 Number.prototype.clamp = function(min, max) {
     return Math.min(Math.max(this, min), max);
 }
-
 
 //////////////////////////////////////////////////////////////////
 //  We can take a ajaxGetUrl(url) call and give back php stuff
@@ -1198,8 +1190,7 @@ function AjaxGet(url, output) {
     } catch (e) {}
 
     if (!request) {
-        console.error("AJAX ERROR: Error creating request object");
-        return false;
+        return error("AJAX ERROR: Error creating request object");
     }
 
     request.onreadystatechange = function() {
@@ -1209,10 +1200,8 @@ function AjaxGet(url, output) {
                 //console.log("AJAX RETURN: "+output.value);
                 return true;
             } else {
-                console.error("AJAX ERROR: " + url + " " + request.statusText);
-                //report error
-                console.warn("status: " + request.status);
-                return false;
+            	console.warn("status: " + request.status);
+                return error("AJAX ERROR: " + url + " " + request.statusText);
             }
         }
     }
@@ -1254,7 +1243,6 @@ function ajaxGetUrl(url) {
     return response.value;
 }
 
-
 function DK_SendRequest(url, callback, post) {
     if (!url) {
         console.error("url invalid");
@@ -1284,30 +1272,29 @@ function DK_SendRequest(url, callback, post) {
     } catch (e) {}
 
     if (!xhr) {
-        console.error("Error creating xhr object");
-        return false;
+        return error("Error creating xhr object");
     }
 
-	if(!post){
-		xhr.open("GET", url, true);
-	}else{
-		xhr.open("POST", url, true);
-		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	}
+    if (!post) {
+        xhr.open("GET", url, true);
+    } else {
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
     xhr.timeout = 20000;
 
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
         //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
-        console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         callback(false, url, event.type);
-        return false;
+        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        return error("abort");
     }
     xhr.onerror = function(event) {
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         callback(false, url, event.type);
-        return false;
+        return error("error");
     }
     xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
     }
@@ -1331,8 +1318,9 @@ function DK_SendRequest(url, callback, post) {
         }
     }
     xhr.ontimeout = function(event) {
+    	callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        callback(false, url, event.type);
+        //return error("timeout");
         return false;
     }
 
@@ -1341,13 +1329,13 @@ function DK_SendRequest(url, callback, post) {
 
 function CheckForUNICODE(str) {
     //PHP_FileToString(online_assets + "/DK/DK.js", function(str) {
-        for (var i = 0, n = str.length; i < n; i++) {
-            if (str.charCodeAt(i) > 255) {
-                console.warn("Found UNICODE character at " + i);
-                console.log(0, str.substring(i));
-                return true;
-            }
+    for (var i = 0, n = str.length; i < n; i++) {
+        if (str.charCodeAt(i) > 255) {
+            console.warn("Found UNICODE character at " + i);
+            console.log(0, str.substring(i));
+            return true;
         }
-        return false;
+    }
+    return false;
     //});
 }

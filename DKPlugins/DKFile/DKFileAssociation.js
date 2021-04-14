@@ -56,7 +56,7 @@ function DKFileAssociation_OpenHtml(path)
 	
 	
 	//FIXME
-	return;
+	return error("FIXME");
 	
 	//TODO - to use files outside of the data directory, we need to append the datapath
 	//var the_path = path.replace(id, "");
@@ -72,14 +72,12 @@ function DKFileAssociation_OpenHtml(path)
 	temp.innerHTML = filedata;
 
 	//if(DK_GetNumChildren(temp) === 0){
-	//	console.error("Error loading path: "+id+": could not create node");
-	//	return false;
+	//	return error("Error loading path: "+id+": could not create node");
 	//}
 
 	//Make sure there is only 1 child
 	//if(DK_GetNumChildren(temp) > 1){
-	//	console.error("Error loading path: "+id+" has more than one root node");
-	//	return false;
+	//	return error("Error loading path: "+id+" has more than one root node");
 	//}
 
 	console.log("temp: "+temp.id);

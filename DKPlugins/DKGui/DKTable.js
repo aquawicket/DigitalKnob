@@ -46,9 +46,9 @@ function DKTable_Create(parent, id, top, bottom, left, right, width, height) {
 }
 
 function DKTable_InsertRow(table, name) {
-    if (!name) {
-        dkConsole.error("invalid name parameter");
-    }
+    if (!name)
+        return error("invalid name parameter");
+
     const row = table.insertRow(-1);
     row.id = "row" + table.rows.length;
     row.setAttribute("name", name);
@@ -56,9 +56,9 @@ function DKTable_InsertRow(table, name) {
 }
 
 function DKTable_InsertCell(table, row, name) {
-    if (!name) {
-        dkconsole.error("invalid name parameter");
-    }
+    if (!name)
+        return error("invalid name parameter");
+
     const cell = row.insertCell(-1);
     cell.id = String.fromCharCode(65 + (cell.cellIndex)) + (row.rowIndex + 1);
     cell.setAttribute("name", name);
@@ -70,22 +70,15 @@ function DKTable_AddRow(table, rowName, cellName) {
     row.id = "row" + table.rows.length;
     //dkconsole.debug("DKTableAddRow() -> row.id = "+row.id);
     const row_count = table.rows.length;
-
     let cell_count = table.rows[0].cells.length;
-    if (!cell_count) {
-        cell_count = 1;
-    }
+    !cell_count && (cell_count = 1);
+
     for (let n = 0; n < cell_count; n++) {
         //Grab the name of the cell from the root column cell if it exists
-        /*
-        if(!table.rows[0]){
-        	console.error("DKTableAddRow(): table.rows[0] is invalid");
-        	return;
-        }
-        */
-        if (!cellName) {
-            cellName = table.rows[0].cells[n].getAttribute("name");
-        }
+        
+        //if(!table.rows[0])
+        //	return error("DKTableAddRow(): table.rows[0] is invalid");
+        !cellName && (cellName = table.rows[0].cells[n].getAttribute("name"));
         const cell = DKTable_InsertCell(table, row, cellName);
         //FIXME: The function above is NOT setting the cellName properly.
         //This line is a temporary fix for now. 
@@ -134,9 +127,8 @@ function DKTable_DeleteRow(table, number) {
 function DKTable_DeleteColumn(table, number) {
     for (let n = 0; n < table.rows.length; n++) {
         const row = table.rows[n];
-        if (row.cells[number]) {
+        if (row.cells[number])
             row.deleteCell(number - 1);
-        }
     }
     DKTable_UpdateIds(table);
 }
@@ -210,26 +202,22 @@ function DKTable_GetCellByName(table, rowName, columnName) {
     // The columnName is set to address on the <td> element
 
     for (let n = 0; n < table.rows.length; n++) {
-        if (!table.rows[n].getAttribute("name")) {
-            dkConsole.warn("row" + n + " has no name attribute");
-            return;
-        }
+        if (!table.rows[n].getAttribute("name"))
+            return warn("row" + n + " has no name attribute");
+
         if (table.rows[n].getAttribute("name") == rowName) {
             let row = table.rows[n];
             //if the column name wasn't requested, return the row 
-            if (!columnName) {
+            if (!columnName)
                 return row;
-            }
 
             for (let nn = 0; nn < row.cells.length; nn++) {
-                if (!row.cells[nn].getAttribute("name")) {
-                    dkConsole.warn("row" + n + ", cell" + nn + " has no name attribute");
-                    return;
-                }
-                if (row.cells[nn].getAttribute("name") == columnName) {
+                if (!row.cells[nn].getAttribute("name"))
+                    return warn("row" + n + ", cell" + nn + " has no name attribute");
+
+                //we found the cell, return it's element
+                if (row.cells[nn].getAttribute("name") == columnName)
                     return row.cells[nn];
-                    //we found the cell, return it's element
-                }
             }
         }
     }
@@ -238,16 +226,14 @@ function DKTable_GetCellByName(table, rowName, columnName) {
 function DKTable_Sort(table_id, columnName, reverse) {
     const table = byId(table_id);
     let col = -1;
-    for(let n = 0; n < table.rows[0].cells.length; n++) {
+    for (let n = 0; n < table.rows[0].cells.length; n++) {
         if (table.rows[0].cells[n].getAttribute("name") == columnName) {
             col = n;
             break;
         }
     }
-    if(col < 0){
-        dkconsole.log("columnName invalid");
-        return;
-    }
+    if (col < 0)
+        return error("columnName invalid");
 
     const tb = table.tBodies[0];
     // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows

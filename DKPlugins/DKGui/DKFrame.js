@@ -30,10 +30,9 @@ function DKFrame_OnEvent(event) {
     // FIXME - does not always fire
     if (event.type === "DKFrame_resize") {
         var frame = byId(event.currentTarget.id);
-        if (!frame) {
-            //console.error("DKFrame_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+"): frame invalid\n");
-            return;
-        }
+        if (!frame)
+            return error("frame invalid");
+
         var child = frame.childNodes[4];
         byId(child.id).style.width = parseInt(byId(frame.id).style.width) + "rem";
         byId(child.id).style.height = parseInt(byId(frame.id).style.height) - 21 + "rem";
@@ -41,10 +40,8 @@ function DKFrame_OnEvent(event) {
 }
 
 function DKFrame_Create(element) {
-    if (!element) {
-        console.error("DKFrame_Create(): element invalid\n");
-        return false;
-    }
+    if (typeof element !== "object")
+        return error("element invalid\n");
 
     var title = DKFile_GetFilename(element.id);
     title = title.replace(".html", "");
@@ -52,8 +49,7 @@ function DKFrame_Create(element) {
     //stop if frame already exsists, multiple windows not ready yet.
     //FIXME
     //if(DK_ElementExists(title+"_frame")){
-    //	console.warn("DKFrame_Create(): frame already exists\n");
-    //	return;
+    //	return warn("DKFrame_Create(): frame already exists\n");
     //}
 
     var width = element.style.width;
@@ -86,6 +82,11 @@ function DKFrame_Html(id) {
 */
 
 function DKFrame_SetTitle(element, title) {
+    if (typeof element !== "object")
+        return error("element invalid\n");
+    if (typeof title !== "string")
+        return error("title invalid\n");
+
     var frame = element.parentNode
     var titlebar = frame.firstChild;
     var titlebartext = titlebar.firstChild;
@@ -237,12 +238,10 @@ function DKFrame_CreateResize(frame) {
 
 function DKFrame_BringToFront() {
     //FIXME: breaks mouse events on some elements
-    return;
+    return warn("FIXME");
     var ele = document.elementFromPoint(window.mouseX, window.mouseY);
-    if (!ele) {
-        console.error("DKFrame_BringToFront(): element invalid");
-        return;
-    }
+    if (!ele)
+        return error("DKFrame_BringToFront(): element invalid");
 
     if (byId("DKFrame_frame") && byId("DKFrame_frame").contains(ele)) {
         if (document.body.lastchild !== byId("DKFrame_frame")) {

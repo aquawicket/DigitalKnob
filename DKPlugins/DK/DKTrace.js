@@ -1,20 +1,17 @@
 "use strict";
 
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-    if (!error) {
-        dkconsole.error("window.onerror failed: error variable invalid");
-        return false;
+window.onerror = function(msg, url, lineNo, columnNo, err) {
+    if (!err) {
+        return error("window.onerror failed: err variable invalid");
     }
-    dkconsole.error(error);
-    return false;
+    return error(err);
 }
 
 //https://stackoverflow.com/a/49560222/688352
 //https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onunhandledrejection
 
 window.onunhandledrejection = function(event) {
-    console.error(event);
-    return false;
+    return error(event);
 }
 
 function DKTrace_StackToConsoleString(arg, deleteTo) {
@@ -26,16 +23,14 @@ function DKTrace_StackToConsoleString(arg, deleteTo) {
             const str = arg.name + " " + arg.message;
             jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(str));
         } else {
-            dkconsole.error("arg is an instance of Error, but it doesn't have a stack");
-            return false;
+            return error("arg is an instance of Error, but it doesn't have a stack");
         }
     } else if (arg instanceof PromiseRejectionEvent) {
         jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(arg.reason));
     } else if (typeof arg === 'string') {
         jsonStack = DKTrace_StackToJSON(DKTrace_GetStack(arg));
     } else {
-        dkconsole.error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
-        return false;
+        return error("StackToConsoleString(): typeof arg invalid: " + typeof arg);
     }
 
     //deleteTo = 0;
@@ -82,8 +77,7 @@ function DKTrace_GetStack(msg) {
 
 function DKTrace_StackToJSON(stack) {
     if (!stack || typeof stack !== 'string') {
-        dkconsole.error("StackToJSON(): invalid stack");
-        return false;
+        return error("StackToJSON(): invalid stack");
     }
 
     //split the call stack lines into an array

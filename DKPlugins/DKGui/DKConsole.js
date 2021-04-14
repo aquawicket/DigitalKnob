@@ -27,7 +27,6 @@ const console_trace = console.trace;
 const console_assert = console.assert;
 const console_group = console.group;
 (function() {
-
     console.log = function() {
         dkconsole.log.apply(this, Array.prototype.slice.call(arguments));
         console_log.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
@@ -82,7 +81,7 @@ function DKConsole_SpanFilter(args) {
 }
 
 function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
-    DK_Create("DKGui/DKConsole.css", function(){});
+    DK_Create("DKGui/DKConsole.css");
     const dkconsoleFrame = document.createElement("div");
     dkconsoleFrame.style.padding = "0rem";
     dkconsoleFrame.style.margin = "0rem";

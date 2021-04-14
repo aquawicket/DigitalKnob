@@ -1,6 +1,6 @@
 "use strict";
 
-function PHP_Debug_Func(callback){
+function PHP_Debug_Func(callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 
@@ -28,11 +28,10 @@ function PHP_PushDKAssets(callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 
-function PHP_GetAssetsPath(callback){
+function PHP_GetAssetsPath(callback) {
     DKPhp_CallPhpFunc(arguments);
 }
 //function DKPhp_noCB(rVal) {}
-
 
 function DKPhp_CallPhpFunc(args) {
     //const args = arguments;
@@ -44,7 +43,7 @@ function DKPhp_CallPhpFunc(args) {
         func: funcName,
         args: []
     };
-    for(let n = 0; args && n < args.length; n++) {
+    for (let n = 0; args && n < args.length; n++) {
         //console.log(typeof args[n]);
         if (typeof args[n] === "function") {
             continue;
@@ -54,7 +53,7 @@ function DKPhp_CallPhpFunc(args) {
         jsonData.args.push(newArg);
     }
     let path = "";
-    if(location.protocol == "file:"){
+    if (location.protocol == "file:") {
         path = "http://127.0.0.1:8000/"
     }
     const str = JSON.stringify(jsonData);
@@ -71,13 +70,15 @@ function DKPhp_CallPhpFunc(args) {
 }
 
 function DKPhp_Call() {
-    if(typeof arguments[0] !== "string"){ return false; }
+    if (typeof arguments[0] !== "string")
+        return error("arguments[0] invalid");
+
     const funcName = arguments[0];
     const jsonData = {
         func: funcName,
         args: []
     };
-    for(let n = 1; arguments && n < arguments.length; n++) {
+    for (let n = 1; arguments && n < arguments.length; n++) {
         if (typeof (arguments[n]) === "function") {
             continue;
         }
@@ -86,7 +87,7 @@ function DKPhp_Call() {
         jsonData.args.push(newArg);
     }
     let path = "";
-    if(location.protocol == "file:"){
+    if (location.protocol == "file:") {
         path = "http://127.0.0.1:8000/"
     }
     const str = JSON.stringify(jsonData);

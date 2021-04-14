@@ -118,7 +118,7 @@ if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
 if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
     var DKFile_Exists = function(path, fn) {
         if (!path) {
-            return false;
+            return error("path invalid");
         }
 
         dir = DKFile_GetAbsolutePath(path);
@@ -141,7 +141,7 @@ function DKFile_VerifyPath(path) {
     return true;
 
     if (!path) {
-        return false;
+        return error("path invalid");
     }
 
     console.log("DKFile_VerifyPath(" + path + "): checking " + path);
@@ -169,7 +169,7 @@ function DKFile_PrintFiles() {
 /////////////////////////////////
 function DKFile_GetFilename(path) {
     if (!path) {
-        return;
+        return error("path invalid");
     }
     var n = path.lastIndexOf("/");
     var out = path.substring(n + 1, path.length);
@@ -285,7 +285,7 @@ if (DK_GetBrowser() !== "CEF" && DK_GetBrowser() !== "RML") {
 
             var filestring = DKFile_FileToString(path);
             if (!filestring) {
-                return false;
+                return error("filestring invalid");
             }
 
             //If the variable looks like this: [VARIABLE]

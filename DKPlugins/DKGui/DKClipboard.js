@@ -1,20 +1,18 @@
 "use strict";
 
-function DK_Cut(id) {
-    console.warn("DKClipboard_Cut(id) should use the element instead of id");
+function DK_Cut(ele) {
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
     } else if (document.selection && document.selection.type !== "Control") {
         text = document.selection.createRange().text;
     }
-    //console.debug("DK_Cut("+id+"): text = "+text+"\n");
+    //console.debug("DK_Cut("+ele.id+"): text = "+text+"\n");
     DKClipboard_CopyToClipboard(text);
     DKClipboard_RemoveSelection(id);
 }
 
-function DK_Copy(id) {
-    console.warn("DKClipboard_Copy(id) should use the element instead of id");
+function DK_Copy(ele) {
     var text = "";
     if (window.getSelection) {
         text = window.getSelection().toString();
@@ -22,14 +20,12 @@ function DK_Copy(id) {
         text = document.selection.createRange().text;
     }
 
-    //console.debug("DK_Copy("+id+"): text = "+text+"\n");
+    //console.debug("DK_Copy("+ele.id+"): text = "+text+"\n");
     DKClipboard_CopyToClipboard(text);
 }
 
-function DKClipboard_Paste(id) {
-    console.warn("DKClipboard_Paste(id) should use the element instead of id");
-    DKClipboard_RemoveSelection(id);
-    var ele = byId(id);
+function DKClipboard_Paste(ele) {
+    DKClipboard_RemoveSelection(ele);
     ele.focus();
     ele.select();
     document.execCommand('Paste');
@@ -51,17 +47,14 @@ function DKClipboard_CopyToClipboard(text) {
             return document.execCommand("copy");
             // Security exception may be thrown by some browsers.
         } catch (ex) {
-            console.warn("Copy to clipboard failed.", ex);
-            return false;
+            return error("Copy to clipboard failed.", ex);
         } finally {
             document.body.removeChild(textarea);
         }
     }
 }
 
-function DKClipboard_RemoveSelection(id) {
-    console.warn("DKClipboard_RemoveSelection(id) should use the element instead of id");
-    var ele = byId(id);
+function DKClipboard_RemoveSelection(ele) {
     var text = ele.value;
     text = text.slice(0, ele.selectionStart) + text.slice(ele.selectionEnd);
     ele.value = text;
