@@ -14,6 +14,12 @@ window.onunhandledrejection = function(event) {
     return error(event);
 }
 
+function DKTrace_EditFile(file){
+    DK_Create("DKNotepad/DKNotepad.js", function DKTrace_EditFileCallback(file){
+        DKFrame_Create("DKNotepad/DKNotepad.html");
+    });
+}
+
 function DKTrace_StackToConsoleString(arg, deleteTo) {
     let jsonStack;
     if (arg instanceof Error) {
@@ -46,8 +52,9 @@ function DKTrace_StackToConsoleString(arg, deleteTo) {
     let str = jsonStack[0].msg + "<br>";
     for (let n = 1; n < jsonStack.length; n++) {
         str += "  at " + jsonStack[n].func + " ";
-        str += "(<a href='" + jsonStack[n].filePath + "' target='_blank' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
+        str += "(<a href='#' onClick='DKTrace_EditFile(\""+jsonStack[n].filePath+"\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
+
     return str;
 }
 
@@ -97,6 +104,7 @@ function DKTrace_StackToJSON(stack) {
         line = line.replace(")", "");
 
         const func = line.split(" ").shift();
+        line = line.replace(func+" ", "");
 
         // some stack lines don't have a valid function name
         /*

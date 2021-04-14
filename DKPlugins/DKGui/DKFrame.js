@@ -39,7 +39,8 @@ function DKFrame_OnEvent(event) {
     }
 }
 
-function DKFrame_Create(element) {
+function DKFrame_Create(id) {
+    const element = byId(id);
     if (typeof element !== "object")
         return error("element invalid\n");
 
