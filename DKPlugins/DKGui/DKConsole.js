@@ -42,11 +42,11 @@ console_group.on = true;
     }
     console.info = function() {
         dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_log.info && console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_info.on && console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.debug = function() {
         dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
-        console.on && console_log.debug && console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_debug.on && console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.warn = function() {
         dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));

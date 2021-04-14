@@ -185,7 +185,7 @@ function DKFrame_CreateFrame(title, width, height) {
     reload.style.top = "1rem";
     reload.style.right = "65rem";
     reload.style.height = "18rem";
-    reload.addEventListener("click", DKFrame_OnEvent);
+    reload.addEventListener("mousedown", DKFrame_OnEvent);
 
     var minimize = DKGui_CreateElement(frame, "img", "DKFrame_minimize");
     minimize.setAttribute("src", "DKGui/minimize.png");
@@ -193,7 +193,7 @@ function DKFrame_CreateFrame(title, width, height) {
     minimize.style.top = "0rem";
     minimize.style.right = "42rem";
     minimize.style.height = "20rem;"
-    minimize.addEventListener("click", DKFrame_OnEvent);
+    minimize.addEventListener("mousedown", DKFrame_OnEvent);
 
     var maximize = DKGui_CreateElement(frame, "img", "DKFrame_maximize");
     maximize.setAttribute("src", "DKGui/maximize.png");
@@ -201,7 +201,7 @@ function DKFrame_CreateFrame(title, width, height) {
     maximize.style.top = "0rem";
     maximize.style.right = "21rem";
     maximize.style.height = "20rem";
-    maximize.addEventListener("click", DKFrame_OnEvent);
+    maximize.addEventListener("mousedown", DKFrame_OnEvent);
 
     var close = DKGui_CreateElement(frame, "img", "DKFrame_close");
     close.setAttribute("src", "DKGui/close.png");
@@ -209,23 +209,20 @@ function DKFrame_CreateFrame(title, width, height) {
     close.style.top = "0rem";
     close.style.right = "0rem";
     close.style.height = "20rem";
-    close.addEventListener("click", DKFrame_OnEvent);
+    close.addEventListener("mousedown", DKFrame_OnEvent);
 
     return frame;
 }
 
 function DKFrame_CreateResize(frame) {
     var resize = DKGui_CreateElement(frame, "div", "DKFrame_resize");
-    //resize.style.backgroundImage = "url(\"DKGui/resize.png\")";
     resize.style.removeProperty("top");
     resize.style.position = "absolute";
     resize.style.right = "0rem";
     resize.style.bottom = "0rem";
     resize.style.width = "16rem";
     resize.style.height = "16rem";
-    //DKDrag_AddResizeHandle(resize, frame);
-    //frame.addEventListener("resize", DKFrame_OnEvent);  //FIXME - does not fire.
-
+    
     var resizeImage = DKGui_CreateElement(resize, "img", "DKFrame_resizeImage");
     resizeImage.setAttribute("src", "DKGui/resize.png");
     resizeImage.style.position = "absolute";
@@ -238,10 +235,10 @@ function DKFrame_CreateResize(frame) {
 
 function DKFrame_BringToFront() {
     //FIXME: breaks mouse events on some elements
-    return warn("FIXME");
+    //return warn("FIXME");
     var ele = document.elementFromPoint(window.mouseX, window.mouseY);
     if (!ele)
-        return error("DKFrame_BringToFront(): element invalid");
+        return error("element invalid");
 
     if (byId("DKFrame_frame") && byId("DKFrame_frame").contains(ele)) {
         if (document.body.lastchild !== byId("DKFrame_frame")) {

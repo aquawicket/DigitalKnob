@@ -162,8 +162,8 @@ function DKDrag_ResizeStart(event, element) {
     document.body.onmouseup = function(event) {
         DKDrag_ResizeStop(event);
     }
-    document.body.addEventListener('touchmove', DKDrag_ResizeMove, false);
-    document.body.addEventListener('touchend', DKDrag_ResizeStop, false);
+    //document.body.addEventListener('touchmove', DKDrag_ResizeMove, false);
+    //document.body.addEventListener('touchend', DKDrag_ResizeStop, false);
 }
 
 function DKDrag_ResizeMove(event, element) {

@@ -41,13 +41,13 @@ function error(str) {
 var byId = function(id) {
     return document.getElementById(id);
 }
-//shortcut alias
 
+//These are already in DK.css
 //document.getElementsByTagName("html")[0].style.fontSize = "1.0px";
 //document.body.style.fontSize = "13em";
-//document.body.style.fontSize = "1.0px";
+//document.body.style.margin = "0rem";
 
-//document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
+document.onselectstart = function() { return false; }; //prevent screen highlighting while dragging
 //document.documentElement.id = "html";
 //document.getElementsByTagName('head')[0].id = "head";
 //document.body.id = "body";
@@ -1246,14 +1246,13 @@ function DK_SendRequest(url, callback, post) {
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
     xhr.onabort = function(event) {
-        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         callback(false, url, event.type);
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        //return error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         return error("abort");
     }
     xhr.onerror = function(event) {
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
-        callback(false, url, event.type);
+    	callback(false, url, event.type);
+        //return error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         return error("error");
     }
     xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
@@ -1265,22 +1264,20 @@ function DK_SendRequest(url, callback, post) {
     xhr.onprogress = function(event) {//console.log("XMLHttpRequest.onprogress(" + event + ")");
     }
     xhr.onreadystatechange = function(event) {
-        //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         if (xhr.readyState === 4) {
             if (xhr.status >= 200 && xhr.status < 400 || !xhr.status) {
                 callback(true, url, xhr.responseText);
             } else {
-                //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
                 callback(false, url, xhr.responseText);
-                console.error(xhr.responseText);
-                return false;
+                //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
+                return error(xhr.responseText);
             }
         }
     }
     xhr.ontimeout = function(event) {
         callback(false, url, event.type);
-        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         //return error("timeout");
+        //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         return false;
     }
 
