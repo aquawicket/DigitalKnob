@@ -33,40 +33,45 @@ const console_group = console.group;
     }
     console.info = function() {
         dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
-        console_info.apply(this, Array.prototype.slice.call(arguments));
+        console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.debug = function() {
         dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
-        console_debug.apply(this, Array.prototype.slice.call(arguments));
+        console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.warn = function() {
         dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));
-        console_warn.apply(this, Array.prototype.slice.call(arguments));
+        console_warn.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.error = function() {
         dkconsole.error.apply(this, Array.prototype.slice.call(arguments));
-        console_error.apply(this, Array.prototype.slice.call(arguments));
+        console_error.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.trace = function() {
         dkconsole.trace.apply(this, Array.prototype.slice.call(arguments));
-        console_trace.apply(this, Array.prototype.slice.call(arguments));
+        console_trace.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.assert = function() {
         dkconsole.assert.apply(this, Array.prototype.slice.call(arguments));
-        console_assert.apply(this, Array.prototype.slice.call(arguments));
+        console_assert.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.group = function() {
         dkconsole.group.apply(this, Array.prototype.slice.call(arguments));
-        console_group.apply(this, Array.prototype.slice.call(arguments));
+        console_group.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+    }
+    console.message = function() {
+        dkconsole.message.apply(this, Array.prototype.slice.call(arguments));
+        console_log.apply(this, Array.prototype.slice.call(DKConsole_ColorChromeConsole(arguments)));
     }
 }());
-
+            
 function DKConsole_SpanFilter(args) {
     let argArray = [];
     if (args.length) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
         const endTagRe = /<\/span>/gi;
         let reResultArray;
+        if(typeof args[0].replace !== "function"){ return args; }
         argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
         while (reResultArray = startTagRe.exec(args[0])) {
             argArray.push(reResultArray[2]);
@@ -77,6 +82,26 @@ function DKConsole_SpanFilter(args) {
             argArray.push(args[n]);
         }
     }
+    return argArray;
+}
+
+function DKConsole_ColorChromeConsole(args) {
+
+    let argArray = [];
+        argArray.push("%c "+args[0]);
+    if(args[1] === "red"){
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));
+    }
+    if(args[1] === "yellow"){
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(51,43,0)", "color: rgb(255,221,158)"].join(";"));
+    }
+    if(args[1] === "blue"){
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(255,221,158)"].join(";"));
+    }
+    if(args[1] === "green"){
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
+    }
+
     return argArray;
 }
 
@@ -210,6 +235,8 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
         if (dkconsole.childElementCount > consoleLimit) {
             dkconsole.removeChild(dkconsole.firstChild);
         }
+
+        return msgDiv.innerHTML;
     }
 
     dkconsole.log = function(str) {
