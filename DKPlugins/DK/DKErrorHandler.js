@@ -257,9 +257,8 @@ function DKErrorHandler_Create() {
     }
 
     window.onanyerror = function(entity) {
-        console.log('DKErrorHandler:', entity);
+        //console.log('DKErrorHandler:', entity);
     }
-    ;
     LoadErrorHandlers();
 }
 //})();

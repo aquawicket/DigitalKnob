@@ -12,12 +12,12 @@ dkconsole.trace = console.trace;
 dkconsole.assert = console.assert;
 dkconsole.group = console.group;
 
+
 //intercept console with dkconsole
 //Example: If you use dkconsole.log, it will only log to the dk console.
 // If you use console.log, it will go to the dkconsole frame AND the browser console.
 // If you use console_log, it will only log the browser console.
 // Note: some messages cannot be withheld from the browser console.
-
 const console_log = console.log;
 const console_info = console.info;
 const console_debug = console.debug;
@@ -26,42 +26,51 @@ const console_error = console.error;
 const console_trace = console.trace;
 const console_assert = console.assert;
 const console_group = console.group;
+console.on = true;
+console_log.on = true;
+console_info.on = true;
+console_debug.on = true;
+console_warn.on = true;
+console_error.on = true;
+console_trace.on = true;
+console_assert.on = true;
+console_group.on = true;
 (function() {
-    console.log = function() {
+     console.log = function() {
         dkconsole.log.apply(this, Array.prototype.slice.call(arguments));
-        console_log.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_log.on && console_log.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.info = function() {
         dkconsole.info.apply(this, Array.prototype.slice.call(arguments));
-        console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_log.info && console_info.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.debug = function() {
         dkconsole.debug.apply(this, Array.prototype.slice.call(arguments));
-        console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_log.debug && console_debug.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.warn = function() {
         dkconsole.warn.apply(this, Array.prototype.slice.call(arguments));
-        console_warn.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_warn.on && console_warn.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.error = function() {
         dkconsole.error.apply(this, Array.prototype.slice.call(arguments));
-        console_error.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_error.on && console_error.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.trace = function() {
         dkconsole.trace.apply(this, Array.prototype.slice.call(arguments));
-        console_trace.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_trace.on && console_trace.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.assert = function() {
         dkconsole.assert.apply(this, Array.prototype.slice.call(arguments));
-        console_assert.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_assert.on && console_assert.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.group = function() {
         dkconsole.group.apply(this, Array.prototype.slice.call(arguments));
-        console_group.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
+        console.on && console_group.on && console_group.apply(this, Array.prototype.slice.call(DKConsole_SpanFilter(arguments)));
     }
     console.message = function() {
         dkconsole.message.apply(this, Array.prototype.slice.call(arguments));
-        console_log.apply(this, Array.prototype.slice.call(DKConsole_ColorChromeConsole(arguments)));
+        console.on && console_log.on && console_log.apply(this, Array.prototype.slice.call(DKConsole_ColorChromeConsole(arguments)));
     }
 }());
             
@@ -96,12 +105,11 @@ function DKConsole_ColorChromeConsole(args) {
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(51,43,0)", "color: rgb(255,221,158)"].join(";"));
     }
     if(args[1] === "blue"){
-        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(255,221,158)"].join(";"));
+        argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(36,36,36)", "color: rgb(77,136,255)"].join(";"));
     }
     if(args[1] === "green"){
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(0,41,0)", "color: rgb(128,255,128)"].join(";"));
     }
-
     return argArray;
 }
 
