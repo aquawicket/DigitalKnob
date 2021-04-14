@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header("Content-Type: application/json; charset=UTF-8");
 
-function ERROR($string){
+function error($string){
 	header('HTTP/1.1 500 Internal Server Error');
     header('Content-Type: application/json; charset=UTF-8');
     die($string);
@@ -71,9 +71,8 @@ if($_REQUEST["x"]){
 
 function Debug_Func($var1, $var2, $var3)
 {
-	if(0){
-		ERROR("An Error occured in Debug_Func!");
-	    return false;
+	if(1){
+		return error("An Error occured in Debug_Func!");
 	}
 	return $var2;
 }
@@ -83,16 +82,15 @@ function StringToFile($file, $data, $mode)
 {   
     if($mode == "FILE_APPEND"){
         if(!file_put_contents($file, $data, FILE_APPEND)){
-        	ERROR("StringToFile(): failed\n");
-        	return false;
-        }
+        	return error("StringToFile(): failed\n");
+        }       
     }
     else{
     	if(!file_put_contents($file, $data)){
-    		ERROR("StringToFile(): failed\n");
-    		return false;
+    		return error("StringToFile(): failed\n");
     	}
     }
+    return "File saved successfully";
 }
 
 //https://www.php.net/manual/en/function.file-get-contents.php
@@ -100,8 +98,7 @@ function FileToString($file)
 {    
     $str = file_get_contents($file);
     if(!$str){
-    	ERROR("FileToString() failed");
-    	return false;
+    	return error("FileToString() failed");
     }
     return $str;
 }
@@ -142,12 +139,10 @@ function GetAssetsPath()
 {
     $assetsPath = dirname(__DIR__);
     if(basename($assetsPath) != "assets"){
-        ERROR("assetsPath does not contain an assets folder \n");
-        return false;
+        return error("assetsPath does not contain an assets folder \n");
     }
     if(!is_dir($assetsPath)){
-    	ERROR("assetsPath is an invalid directory \n");
-    	return false;
+    	return error("assetsPath is an invalid directory \n");
     }
     return $assetsPath;
 }
@@ -162,8 +157,7 @@ function GetDKPath()
         	return $dkPath;
         }
     }
-    ERROR("could not find digitalknob path \n");
-    return false;
+    return error("could not find digitalknob path \n");
 }
 
 function GetDKPluginsPath()
@@ -177,8 +171,7 @@ function GetDKPluginsPath()
         	return $dkPluginsPath;
         }
     }
-    ERROR("cound not find DKPlugins path");
-    return false;
+    return error("cound not find DKPlugins path");
 }
 
 function PushDKAssets()
@@ -186,20 +179,18 @@ function PushDKAssets()
 	//Fist get all fot he paths
 	$assetsPath = GetAssetsPath();
 	if(!$assetsPath){
-		ERROR("assetsPath is invalid");
-		return false;
+		return error("assetsPath is invalid");
 	}
 	
     $dkPath = GetDKPath();
     if(!$dkPath){
-		ERROR("dkPath is invalid");
-		return false;
+		return error("dkPath is invalid");
     }
     echo "dkPath = ".$dkPath."\n";
     
     $dkPluginsPath = $dkPath."\DK\DKPlugins";
     if(!is_dir($dkPluginsPath)){
-    	ERROR("dkPluginsPath is invalid");
+    	return error("dkPluginsPath is invalid");
     }
     echo "dkPluginsPath = ".$dkPluginsPath."\n";
 

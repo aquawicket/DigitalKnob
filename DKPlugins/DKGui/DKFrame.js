@@ -39,12 +39,12 @@ function DKFrame_OnEvent(event) {
     }
 }
 
-function DKFrame_Create(id) {
-    const element = byId(id);
-    if (typeof element !== "object")
+function DKFrame_Create(ele) {
+    //const element = byId(id);
+    if (!ele)
         return error("element invalid\n");
 
-    var title = DKFile_GetFilename(element.id);
+    var title = DKFile_GetFilename(ele.id);
     title = title.replace(".html", "");
 
     //stop if frame already exsists, multiple windows not ready yet.
@@ -53,8 +53,8 @@ function DKFrame_Create(id) {
     //	return warn("DKFrame_Create(): frame already exists\n");
     //}
 
-    var width = element.style.width;
-    var height = element.style.height;
+    var width = ele.style.width;
+    var height = ele.style.height;
     //console.log("DKFrame_Create(): width="+width+" , height="+height+"\n");
 
     width = width.replace("px", "");
@@ -63,14 +63,14 @@ function DKFrame_Create(id) {
     height = height.replace("rem", "");
 
     var frame = DKFrame_CreateFrame(title, width, height);
-    frame.appendChild(element);
-    element.style.position = "absolute";
-    element.style.top = "21rem";
-    element.style.left = "0rem";
-    element.style.width = "100%";
-    element.style.bottom = "-1rem";
-    element.style.removeProperty("right");
-    element.style.removeProperty("height");
+    frame.appendChild(ele);
+    ele.style.position = "absolute";
+    ele.style.top = "21rem";
+    ele.style.left = "0rem";
+    ele.style.width = "100%";
+    ele.style.bottom = "-1rem";
+    ele.style.removeProperty("right");
+    ele.style.removeProperty("height");
 
     DKFrame_CreateResize(frame);
     return frame;
