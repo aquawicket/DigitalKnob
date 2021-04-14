@@ -11,7 +11,7 @@ const DKJson_PrettyJson = function(jsonStr) {
 const DKJson_HighlightJson = function(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid");
-        
+
     let hightlightedJson = jsonStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return hightlightedJson.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
         let cls = 'number';
@@ -100,7 +100,7 @@ function DKJson_FindPartialMatch(obj, key, value) {
 function DKJson_FindPartialMatch(obj, key, value) {
     let foundObj;
     JSON.stringify(obj, (_,nestedValue)=>{
-        if (nestedValue && value.includes(nestedValue[key])) {
+        if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value))) {
             foundObj = nestedValue;
         }
         return nestedValue;
