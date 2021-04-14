@@ -64,7 +64,7 @@ function DKPhp_CallPhpFunc(args) {
     DK_SendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
-        } else {//dkconsole.log(rVal);
+        } else {//console.log(rVal);
         }
     }, "POST");
 }
@@ -99,7 +99,7 @@ function DKPhp_Call() {
     DK_SendRequest(url, function(success, url, rVal) {
         if (args && typeof (args[args.length - 1]) === "function") {
             args[args.length - 1](rVal);
-        } else {//dkconsole.log(rVal);
+        } else {//console.log(rVal);
         }
     }, "POST");
 }

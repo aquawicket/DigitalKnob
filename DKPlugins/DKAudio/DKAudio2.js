@@ -27,7 +27,7 @@ async function DKAudio_PlaySound(src) {
     const ele = byId(src);
     await ele.play();
     //} catch(errMsg) {
-    //    dkconsole.error(errMsg);
+    //    console.error(errMsg);
     //}
 }
 

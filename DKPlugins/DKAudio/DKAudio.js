@@ -47,7 +47,7 @@ async function DKAudio_Play(src) {
     const audio = byId(src);
     await audio.play();
     //} catch(errMsg) {
-    //    dkconsole.error(errMsg);
+    //    console.error(errMsg);
     //}
 }
 
@@ -74,7 +74,7 @@ function DKAudio_GetVolume(src) {
 function DKAudio_SetVolume(src, volume) {
     const audio = byId(src);
     if(!audio){
-    	dkconsole.error("audio invalid");
+    	return error("audio invalid");
     }
     audio.volume = volume;
 }

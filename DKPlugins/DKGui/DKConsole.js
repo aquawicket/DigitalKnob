@@ -172,12 +172,12 @@ function DKConsole_Create(parent, id, top, bottom, left, right, width, height) {
                 cmdbox.value = "";
                 return;
             }
-            dkconsole.debug("RUN Javascript -> " + cmdbox.value);
+            console.debug("RUN Javascript -> " + cmdbox.value);
 
             try {
                 eval(cmdbox.value);
             } catch (x) {
-                dkconsole.error("eval failed", x.stack);
+                console.error("eval failed", x.stack);
             }
 
             cmdbox.value = "";

@@ -135,10 +135,8 @@ function DKTrace_LastStackCall() {
             break;
         }
     }
-    if (!nn) {
-        dkconsole.error("LastStackCall(): could not find 'LastStackCall' in the stack");
-        return;
-    }
+    if (!nn) 
+        return error("LastStackCall(): could not find 'LastStackCall' in the stack");
 
     let str = "LastStackCall: " + stack[nn].func;
     str += "(<a href='" + stack[nn].filePath + "' target='_blank' style='color:rgb(213,213,213)'>" + stack[nn].file + ":" + stack[nn].lineNum + "</a>)";
@@ -150,7 +148,7 @@ function DKTrace_GetArguments(func, getArgValues) {
     let count = 0;
     const fn = window[func];
     if (!fn) {
-        dkconsole.error(DKTrace_LastStackCall() + "<br>" + "  at if(!fn)");
+        console.error(DKTrace_LastStackCall() + "<br>" + "  at if(!fn)");
         return "";
     }
     argsString += new RegExp('(?:' + fn.name + '\\s*|^)\\s*\\((.*?)\\)').exec(fn.toString().replace(/\n/g, ''))[1].replace(/\/\*.*?\*\//g, '').replace(/ /g, '');

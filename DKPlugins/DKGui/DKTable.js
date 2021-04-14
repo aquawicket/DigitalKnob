@@ -68,7 +68,7 @@ function DKTable_InsertCell(table, row, name) {
 function DKTable_AddRow(table, rowName, cellName) {
     const row = DKTable_InsertRow(table, rowName);
     row.id = "row" + table.rows.length;
-    //dkconsole.debug("DKTableAddRow() -> row.id = "+row.id);
+    //console.debug("DKTableAddRow() -> row.id = "+row.id);
     const row_count = table.rows.length;
     let cell_count = table.rows[0].cells.length;
     !cell_count && (cell_count = 1);
@@ -152,7 +152,7 @@ function DKTable_GetCellByIndex(table, rowNum, columnNum) {
 }
 
 function DKTable_DeleteCell(table, rowNum, columnNum) {
-    dkConsole.log("DKTableDeleteCell(table," + rowNum + "," + columnNum + ")")
+    console.debug("DKTableDeleteCell(table," + rowNum + "," + columnNum + ")")
     //FIXME: This doesn't seem to be working properly.
     //I'm using Brave browser which is a fork of chromium.
     //Bug? or user error? 
@@ -170,7 +170,7 @@ function DKTable_GetRowByName(table, rowName) {
     /*
     for (let n = 0; n < table.rows.length; n++) {
         if (!table.rows[n].getAttribute("name")) {
-            dkConsole.warn("row" + n + " has no name attribute");
+            console.warn("row" + n + " has no name attribute");
             return;
         }
         if (table.rows[n].getAttribute("name") == rowName) {
