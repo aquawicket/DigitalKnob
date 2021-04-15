@@ -1,6 +1,10 @@
 "use strict";
 
+eval("var __temp = null");
+const use_strict = (typeof __temp === "undefined");
+
 console.log("*** DigitalKnob ***");
+console.log("use_strict is set to: " + use_strict);
 console.log("Browser = " + DK_GetBrowser());
 console.log("JSEngine = " + DK_GetJSEngine());
 
@@ -115,9 +119,8 @@ function DKINFO(string){ Log(string, DK_INFO); }
 function DKDEBUG(string){ Log(string, DK_DEBUG); }
 
 function Log(string, lvl) {
-    if (!lvl) {
+    if (!lvl)
         lvl = DK_INFO;
-    }
 
     //check for LOG_HIDE
     if (LOG_HIDE) {
@@ -227,13 +230,13 @@ function Log(string, lvl) {
 //////////////////////////////////
 function DK_Create(data, callback) {
     var arry = data.split(",");
-    if (arry[0].indexOf(".html") > -1) {
+    if (arry[0].indexOf(".html") > -1)
         arry.splice(0, 0, "DKHtml");
-    } else if (arry[0].indexOf(".js") > -1) {
+    else if (arry[0].indexOf(".js") > -1)
         arry.splice(0, 0, "DKJavascript");
-    } else if (arry[0].indexOf(".css") > -1) {
+    else if (arry[0].indexOf(".css") > -1)
         arry.splice(0, 0, "DKCss");
-    } else {
+    else {
         if (DK_GetBrowser() === "CEF" || DK_GetBrowser() === "RML") {
             CPP_DKDuktape_Create(data);
         }
@@ -1117,6 +1120,8 @@ function ajaxGetUrl(url) {
     if (!response.value) {
         return "ERROR";
     }
+
+    /*
     //php has a console.log() function that injects return messages with {"strings"}
     //The response may contain {"log data"}, let's extract and print it.
     //Also remove them and pass the remaining data on
@@ -1130,6 +1135,7 @@ function ajaxGetUrl(url) {
         //console.log("PHPLog: "+res);
         n = response.value.indexOf("{");
     }
+    */
 
     return response.value;
 }
@@ -1180,12 +1186,12 @@ function DK_SendRequest(url, callback, post) {
         //console.log("XMLHttpRequest.onreadystatechange(" + event + ")");
         callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
-        return error("abort");
+        return error("xhr.abort");
     }
     xhr.onerror = function(event) {
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         callback(false, url, event.type);
-        return error("error");
+        return error("xhr.error");
     }
     xhr.onload = function(event) {//console.log("XMLHttpRequest.onload(" + event + ")");
     }
@@ -1203,15 +1209,14 @@ function DK_SendRequest(url, callback, post) {
             } else {
                 //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onreadystatechange");
                 callback(false, url, xhr.responseText);
-                console.error(xhr.responseText);
-                return false;
+                return error(xhr.responseText);
             }
         }
     }
     xhr.ontimeout = function(event) {
         callback(false, url, event.type);
         //console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
-        //return error("timeout");
+        //console.error("timeout");
         return false;
     }
 
@@ -1219,7 +1224,6 @@ function DK_SendRequest(url, callback, post) {
 }
 
 function CheckForUNICODE(str) {
-    //PHP_FileToString(online_assets + "/DK/DK.js", function(str) {
     for (var i = 0, n = str.length; i < n; i++) {
         if (str.charCodeAt(i) > 255) {
             console.warn("Found UNICODE character at " + i);
@@ -1228,5 +1232,8 @@ function CheckForUNICODE(str) {
         }
     }
     return false;
-    //});
+}
+
+function ValidateStrict(str) {
+    return str;
 }
